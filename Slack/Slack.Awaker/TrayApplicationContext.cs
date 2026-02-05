@@ -54,12 +54,24 @@ namespace StayAwake
 
         private ContextMenuStrip CreateContextMenu()
         {
-            var menu = new ContextMenuStrip();
+            var menu = new ContextMenuStrip
+            {
+                Renderer = new DarkMenuRenderer(),
+                ShowImageMargin = true,
+                ShowCheckMargin = true,
+                BackColor = Color.FromArgb(32, 32, 32),
+                ForeColor = Color.FromArgb(240, 240, 240)
+            };
+
+            // 폰트 설정
+            var menuFont = new Font("Segoe UI", 9.5f, FontStyle.Regular);
+            menu.Font = menuFont;
 
             // 시작/정지
             _startStopItem = new ToolStripMenuItem("▶ 시작", null, (s, e) => ToggleRunning())
             {
-                Font = new Font(menu.Font, FontStyle.Bold)
+                Font = new Font(menuFont, FontStyle.Bold),
+                ForeColor = Color.FromArgb(76, 175, 80) // Green for start
             };
             menu.Items.Add(_startStopItem);
 
@@ -136,6 +148,7 @@ namespace StayAwake
                 _startTime = DateTime.Now;
                 _activityTimer.Start();
                 _startStopItem.Text = "⏹ 정지";
+                _startStopItem.ForeColor = Color.FromArgb(234, 67, 53); // Red for stop
                 _trayIcon.Icon = CreateIcon(true);
                 _trayIcon.Text = $"StayAwake - 실행 중 ({_intervalMinutes}분 간격)";
                 UpdateStatus();
@@ -148,6 +161,7 @@ namespace StayAwake
                 _activityTimer.Stop();
                 _simulator.AllowSleep(); // 절전 방지 해제
                 _startStopItem.Text = "▶ 시작";
+                _startStopItem.ForeColor = Color.FromArgb(76, 175, 80); // Green for start
                 _trayIcon.Icon = CreateIcon(false);
                 _trayIcon.Text = "StayAwake - 정지됨";
                 _statusItem.Text = "상태: 정지됨";

@@ -319,7 +319,8 @@
                     </Grid.RowDefinitions>
 
                     <!-- Album Art -->
-                    <Border Grid.Row="0" Background="#2D2D2D" CornerRadius="8" Margin="20,10,20,10">
+                    <Border Grid.Row="0" Background="#2D2D2D" CornerRadius="8" Margin="20,10,20,10"
+                            ClipToBounds="True">
                         <Grid>
                             <!-- Default Music Icon -->
                             <Viewbox x:Name="DefaultIcon" Width="80" Height="80">
@@ -328,7 +329,8 @@
                                 </Canvas>
                             </Viewbox>
                             <!-- Album Art Image -->
-                            <Image x:Name="AlbumArtImage" Stretch="UniformToFill" Visibility="Collapsed"/>
+                            <Image x:Name="AlbumArtImage" Stretch="Uniform" Visibility="Collapsed"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Grid>
                     </Border>
 

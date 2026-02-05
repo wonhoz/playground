@@ -286,12 +286,26 @@ namespace Music.Player
         private void ProgressSlider_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             _isDraggingSlider = true;
+
+            // 클릭한 위치로 바로 이동 (트랙 클릭 시)
+            if (sender is Slider slider && ProgressSlider.Maximum > 0)
+            {
+                Point clickPos = e.GetPosition(slider);
+                double ratio = clickPos.X / slider.ActualWidth;
+                double newValue = ratio * slider.Maximum;
+                newValue = Math.Max(0, Math.Min(slider.Maximum, newValue));
+                slider.Value = newValue;
+                CurrentTimeText.Text = TimeSpan.FromSeconds(newValue).ToString(@"m\:ss");
+            }
         }
 
         private void ProgressSlider_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            _isDraggingSlider = false;
-            _player.Seek(TimeSpan.FromSeconds(ProgressSlider.Value));
+            if (_isDraggingSlider)
+            {
+                _isDraggingSlider = false;
+                _player.Seek(TimeSpan.FromSeconds(ProgressSlider.Value));
+            }
         }
 
         private void ProgressSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
@@ -300,6 +314,12 @@ namespace Music.Player
             {
                 CurrentTimeText.Text = TimeSpan.FromSeconds(e.NewValue).ToString(@"m\:ss");
             }
+        }
+
+        private void ProgressSlider_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            // 더블클릭이 다른 동작을 트리거하지 않도록 방지
+            e.Handled = true;
         }
 
         #endregion

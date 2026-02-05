@@ -396,6 +396,50 @@ namespace Music.Player
             _playlist.Add(track);
         }
 
+        private void RemoveTrackButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is Button button && button.DataContext is TrackInfo track)
+            {
+                int index = _playlist.IndexOf(track);
+                if (index < 0) return;
+
+                // 현재 재생 중인 트랙을 삭제하는 경우
+                if (index == _currentIndex)
+                {
+                    _player.Stop();
+                    _currentIndex = -1;
+                    UpdatePlayPauseIcon(false);
+
+                    // 다음 트랙이 있으면 다음 트랙 재생
+                    if (_playlist.Count > 1)
+                    {
+                        _playlist.Remove(track);
+                        if (index >= _playlist.Count)
+                            index = _playlist.Count - 1;
+                        PlayTrack(index);
+                    }
+                    else
+                    {
+                        _playlist.Remove(track);
+                        TitleText.Text = "No track selected";
+                        ArtistText.Text = "";
+                        AlbumArtImage.Visibility = Visibility.Collapsed;
+                        DefaultIcon.Visibility = Visibility.Visible;
+                        CurrentTimeText.Text = "0:00";
+                        TotalTimeText.Text = "0:00";
+                        ProgressSlider.Value = 0;
+                    }
+                }
+                else
+                {
+                    _playlist.Remove(track);
+                    // 삭제된 항목이 현재 재생 중인 항목 앞에 있으면 인덱스 조정
+                    if (index < _currentIndex)
+                        _currentIndex--;
+                }
+            }
+        }
+
         #endregion
 
         #region Drag & Drop

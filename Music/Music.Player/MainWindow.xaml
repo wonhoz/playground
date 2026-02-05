@@ -469,9 +469,10 @@
                                  DragEnter="PlaylistBox_DragEnter">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
-                                    <Grid>
+                                    <Grid x:Name="ItemGrid">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
                                             <ColumnDefinition Width="Auto"/>
                                         </Grid.ColumnDefinitions>
                                         <StackPanel>
@@ -485,6 +486,55 @@
                                         <TextBlock Grid.Column="1" Text="{Binding DurationText}" FontSize="10"
                                                    Foreground="{StaticResource TextSecondaryBrush}"
                                                    VerticalAlignment="Center" Margin="8,0,0,0"/>
+                                        <Button x:Name="RemoveButton" Grid.Column="2" Content="−" Width="20" Height="20"
+                                                FontSize="14" FontWeight="Bold" Margin="4,0,0,0"
+                                                VerticalAlignment="Center" Cursor="Hand"
+                                                Click="RemoveTrackButton_Click"
+                                                ToolTip="Remove from playlist" Opacity="0">
+                                            <Button.Style>
+                                                <Style TargetType="Button">
+                                                    <Setter Property="Background" Value="Transparent"/>
+                                                    <Setter Property="Foreground" Value="#9E9E9E"/>
+                                                    <Setter Property="BorderThickness" Value="0"/>
+                                                    <Setter Property="Template">
+                                                        <Setter.Value>
+                                                            <ControlTemplate TargetType="Button">
+                                                                <Border x:Name="border" Background="{TemplateBinding Background}"
+                                                                        CornerRadius="10">
+                                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                                </Border>
+                                                                <ControlTemplate.Triggers>
+                                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                                        <Setter TargetName="border" Property="Background" Value="#E81123"/>
+                                                                        <Setter Property="Foreground" Value="White"/>
+                                                                    </Trigger>
+                                                                </ControlTemplate.Triggers>
+                                                            </ControlTemplate>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </Style>
+                                            </Button.Style>
+                                        </Button>
+                                        <Grid.Triggers>
+                                            <EventTrigger RoutedEvent="MouseEnter">
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <DoubleAnimation Storyboard.TargetName="RemoveButton"
+                                                                         Storyboard.TargetProperty="Opacity"
+                                                                         To="1" Duration="0:0:0.15"/>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </EventTrigger>
+                                            <EventTrigger RoutedEvent="MouseLeave">
+                                                <BeginStoryboard>
+                                                    <Storyboard>
+                                                        <DoubleAnimation Storyboard.TargetName="RemoveButton"
+                                                                         Storyboard.TargetProperty="Opacity"
+                                                                         To="0" Duration="0:0:0.15"/>
+                                                    </Storyboard>
+                                                </BeginStoryboard>
+                                            </EventTrigger>
+                                        </Grid.Triggers>
                                     </Grid>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>

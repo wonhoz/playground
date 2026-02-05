@@ -388,6 +388,16 @@ namespace Music.Player
             ProgressSlider.Value = 0;
         }
 
+        private void SavePlaylistButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Phase 5에서 구현
+        }
+
+        private void LoadPlaylistButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Phase 5에서 구현
+        }
+
         private void PlaylistBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (PlaylistBox.SelectedIndex >= 0)

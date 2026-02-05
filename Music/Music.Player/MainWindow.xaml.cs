@@ -38,6 +38,9 @@ namespace Music.Player
             AllowDrop = true;
             Drop += MainWindow_Drop;
             DragEnter += MainWindow_DragEnter;
+
+            // Restore saved playlist state after window is loaded
+            Loaded += (s, e) => RestorePlaylistState();
         }
 
         private void EnsureResourcesExist()
@@ -452,8 +455,78 @@ namespace Music.Player
 
         protected override void OnClosed(EventArgs e)
         {
+            SavePlaylistState();
             _player.Dispose();
             base.OnClosed(e);
         }
+
+        #region Playlist State Persistence
+
+        private void SavePlaylistState()
+        {
+            var state = new PlaylistState
+            {
+                FilePaths = _playlist.Select(t => t.FilePath).ToList(),
+                CurrentTrackIndex = _currentIndex,
+                CurrentPositionSeconds = _player.CurrentPosition.TotalSeconds,
+                IsShuffleEnabled = _isShuffleEnabled,
+                IsRepeatEnabled = _isRepeatEnabled
+            };
+
+            PlaylistService.SaveState(state);
+        }
+
+        private void RestorePlaylistState()
+        {
+            var state = PlaylistService.LoadState();
+            if (state == null || state.FilePaths.Count == 0)
+                return;
+
+            // Restore shuffle and repeat settings
+            _isShuffleEnabled = state.IsShuffleEnabled;
+            _isRepeatEnabled = state.IsRepeatEnabled;
+            ShuffleButton.IsChecked = _isShuffleEnabled;
+            RepeatButton.IsChecked = _isRepeatEnabled;
+
+            // Add tracks to playlist
+            foreach (var filePath in state.FilePaths)
+            {
+                var track = TrackInfo.FromFile(filePath);
+                _playlist.Add(track);
+            }
+
+            // Show playlist panel if there are tracks
+            if (_playlist.Count > 0)
+            {
+                PlaylistToggle.IsChecked = true;
+                TogglePlaylistPanel();
+            }
+
+            // Restore current track and position
+            if (state.CurrentTrackIndex >= 0 && state.CurrentTrackIndex < _playlist.Count)
+            {
+                _currentIndex = state.CurrentTrackIndex;
+                var track = _playlist[_currentIndex];
+
+                // Update display without auto-playing
+                UpdateTrackDisplay(track);
+                PlaylistBox.SelectedIndex = _currentIndex;
+                PlaylistBox.ScrollIntoView(PlaylistBox.SelectedItem);
+
+                ProgressSlider.Maximum = track.Duration.TotalSeconds;
+                TotalTimeText.Text = track.DurationText;
+
+                // Load track and seek to saved position (paused)
+                _player.Load(track.FilePath);
+                if (state.CurrentPositionSeconds > 0 && state.CurrentPositionSeconds < track.Duration.TotalSeconds)
+                {
+                    _player.Seek(TimeSpan.FromSeconds(state.CurrentPositionSeconds));
+                    ProgressSlider.Value = state.CurrentPositionSeconds;
+                    CurrentTimeText.Text = TimeSpan.FromSeconds(state.CurrentPositionSeconds).ToString(@"m\:ss");
+                }
+            }
+        }
+
+        #endregion
     }
 }

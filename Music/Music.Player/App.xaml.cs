@@ -9,6 +9,12 @@ namespace Music.Player
         private const string MutexName = "Global\\MusicPlayer_SingleInstance_7F3A2B1C";
         private const string PipeName = "MusicPlayer_Pipe_7F3A2B1C";
         private static Mutex? _mutex;
+        private static MainWindow? _mainWindow;
+
+        // 파일 버퍼링용
+        private static readonly List<string> _pendingFiles = new();
+        private static System.Threading.Timer? _processTimer;
+        private static readonly object _fileLock = new();
 
         [STAThread]
         public static void Main(string[] args)
@@ -23,7 +29,10 @@ namespace Music.Player
                 return;
             }
 
-            // 첫 번째 인스턴스 - 앱 시작
+            // 첫 번째 인스턴스 - 파이프 서버 먼저 시작
+            StartPipeServer();
+
+            // WPF 앱 시작
             var app = new App();
             app.InitializeComponent();
             app.Run();
@@ -33,94 +42,141 @@ namespace Music.Player
         {
             base.OnStartup(e);
 
-            // 파이프 서버 시작 (다른 인스턴스로부터 파일 경로 수신)
-            StartPipeServer();
+            // 기존 타이머 취소
+            _processTimer?.Dispose();
+            _processTimer = null;
 
             // MainWindow 생성 및 표시
-            var mainWindow = new MainWindow();
-            mainWindow.Show();
+            _mainWindow = new MainWindow();
+            _mainWindow.Show();
 
-            // 커맨드 라인 인수가 있으면 처리
-            var args = Environment.GetCommandLineArgs().Skip(1).ToArray();
-            if (args.Length > 0)
+            // 모든 pending files + 명령줄 인수를 한 번에 처리
+            var allFiles = new List<string>();
+            lock (_fileLock)
             {
-                mainWindow.LoadFilesFromArgs(args);
+                allFiles.AddRange(_pendingFiles);
+                _pendingFiles.Clear();
+            }
+
+            var args = Environment.GetCommandLineArgs().Skip(1).ToArray();
+            allFiles.AddRange(args);
+
+            if (allFiles.Count > 0)
+            {
+                // 중복 제거 후 정렬하여 처리
+                var uniqueFiles = allFiles.Distinct().OrderBy(f => f).ToArray();
+                _mainWindow.LoadFilesFromArgs(uniqueFiles);
             }
         }
 
         private static void SendArgsToRunningInstance(string[] args)
         {
-            try
+            // 여러 번 재시도
+            for (int retry = 0; retry < 20; retry++)
             {
-                using var client = new NamedPipeClientStream(".", PipeName, PipeDirection.Out);
-                client.Connect(5000); // 5초 대기
-
-                using var writer = new StreamWriter(client) { AutoFlush = true };
-
-                if (args.Length == 0)
+                try
                 {
-                    // 인수 없이 실행된 경우 - 기존 앱 활성화만
-                    writer.WriteLine("__ACTIVATE__");
-                }
-                else
-                {
-                    foreach (var arg in args)
+                    using var client = new NamedPipeClientStream(".", PipeName, PipeDirection.Out);
+                    client.Connect(2000);
+
+                    using var writer = new StreamWriter(client) { AutoFlush = true };
+
+                    if (args.Length == 0)
                     {
-                        writer.WriteLine(arg);
+                        // 인수 없이 실행된 경우 - 기존 앱 활성화만
+                        writer.WriteLine("__ACTIVATE__");
                     }
+                    else
+                    {
+                        foreach (var arg in args)
+                        {
+                            writer.WriteLine(arg);
+                        }
+                    }
+                    return; // 성공
                 }
-            }
-            catch
-            {
-                // 연결 실패 - 무시
+                catch
+                {
+                    Thread.Sleep(150); // 재시도 전 대기
+                }
             }
         }
 
-        private void StartPipeServer()
+        private static void StartPipeServer()
         {
-            Task.Run(async () =>
+            var thread = new Thread(() =>
             {
                 while (true)
                 {
                     try
                     {
                         using var server = new NamedPipeServerStream(PipeName, PipeDirection.In);
-                        await server.WaitForConnectionAsync();
+                        server.WaitForConnection();
 
                         using var reader = new StreamReader(server);
-                        var files = new List<string>();
-
                         string? line;
-                        while ((line = await reader.ReadLineAsync()) != null)
+                        while ((line = reader.ReadLine()) != null)
                         {
                             if (!string.IsNullOrWhiteSpace(line) && line != "__ACTIVATE__")
-                                files.Add(line);
+                            {
+                                lock (_fileLock)
+                                {
+                                    _pendingFiles.Add(line);
+                                }
+                            }
                         }
 
-                        await Dispatcher.InvokeAsync(() =>
-                        {
-                            if (MainWindow is MainWindow mainWindow)
-                            {
-                                if (files.Count > 0)
-                                {
-                                    mainWindow.LoadFilesFromArgs(files.ToArray());
-                                }
-
-                                // 창 활성화
-                                if (mainWindow.WindowState == WindowState.Minimized)
-                                    mainWindow.WindowState = WindowState.Normal;
-
-                                mainWindow.Activate();
-                                mainWindow.Topmost = true;
-                                mainWindow.Topmost = false;
-                                mainWindow.Focus();
-                            }
-                        });
+                        // 타이머 리셋 - 300ms 후에 모은 파일들 처리
+                        _processTimer?.Dispose();
+                        _processTimer = new System.Threading.Timer(_ => ProcessPendingFiles(), null, 300, Timeout.Infinite);
                     }
                     catch
                     {
-                        await Task.Delay(100);
+                        Thread.Sleep(50);
                     }
+                }
+            })
+            {
+                IsBackground = true,
+                Name = "PipeServer"
+            };
+            thread.Start();
+
+            // 파이프 서버가 시작될 때까지 잠시 대기
+            Thread.Sleep(100);
+        }
+
+        private static void ProcessPendingFiles()
+        {
+            string[] files;
+            lock (_fileLock)
+            {
+                if (_pendingFiles.Count == 0) return;
+                files = _pendingFiles.ToArray();
+                _pendingFiles.Clear();
+            }
+
+            // 파일명 순서로 정렬
+            files = files.OrderBy(f => f).ToArray();
+
+            // UI 스레드에서 처리
+            System.Windows.Application.Current?.Dispatcher.BeginInvoke(() =>
+            {
+                if (_mainWindow != null)
+                {
+                    if (files.Length > 0)
+                    {
+                        _mainWindow.LoadFilesFromArgs(files);
+                    }
+
+                    // 창 활성화
+                    if (_mainWindow.WindowState == WindowState.Minimized)
+                        _mainWindow.WindowState = WindowState.Normal;
+
+                    _mainWindow.Activate();
+                    _mainWindow.Topmost = true;
+                    _mainWindow.Topmost = false;
+                    _mainWindow.Focus();
                 }
             });
         }

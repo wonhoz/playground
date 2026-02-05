@@ -755,8 +755,12 @@ namespace Music.Player
             // 플레이리스트 표시
             if (_playlist.Count > 0)
             {
-                PlaylistToggle.IsChecked = true;
-                TogglePlaylistPanel();
+                // 이미 열려있지 않은 경우에만 열기 (너비 증가 방지)
+                if (PlaylistToggle.IsChecked != true)
+                {
+                    PlaylistToggle.IsChecked = true;
+                    TogglePlaylistPanel();
+                }
 
                 // 첫 번째 트랙 자동 재생
                 PlayTrack(0);

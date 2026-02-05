@@ -288,28 +288,10 @@ Slack 자리 비움 상태 방지 도구
 
         private static Icon CreateIcon(bool isRunning)
         {
-            // 간단한 아이콘 생성 (녹색: 실행 중, 회색: 정지)
-            var bitmap = new Bitmap(16, 16);
-            using (var g = Graphics.FromImage(bitmap))
-            {
-                g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-
-                var color = isRunning ? Color.FromArgb(76, 175, 80) : Color.FromArgb(158, 158, 158);
-                using var brush = new SolidBrush(color);
-                g.FillEllipse(brush, 1, 1, 14, 14);
-
-                // 테두리
-                using var pen = new Pen(Color.FromArgb(100, 0, 0, 0), 1);
-                g.DrawEllipse(pen, 1, 1, 14, 14);
-
-                // 실행 중일 때 체크 표시
-                if (isRunning)
-                {
-                    using var checkPen = new Pen(Color.White, 2);
-                    g.DrawLine(checkPen, 4, 8, 7, 11);
-                    g.DrawLine(checkPen, 7, 11, 12, 5);
-                }
-            }
+            // IconGenerator를 사용하여 Slack 테마 아이콘 생성
+            var bitmap = isRunning
+                ? IconGenerator.CreateRunningIcon(32)
+                : IconGenerator.CreateStoppedIcon(32);
 
             return Icon.FromHandle(bitmap.GetHicon());
         }

@@ -614,6 +614,116 @@ namespace Music.Player
 
         #endregion
 
+        #region Keyboard Shortcuts
+
+        private void Window_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.Key)
+            {
+                case Key.Space:
+                    PlayPauseButton_Click(this, new RoutedEventArgs());
+                    e.Handled = true;
+                    break;
+
+                case Key.Left:
+                    // 5초 뒤로
+                    if (_player.PlaybackState != PlaybackState.Stopped)
+                    {
+                        var newPos = _player.CurrentPosition - TimeSpan.FromSeconds(5);
+                        if (newPos < TimeSpan.Zero) newPos = TimeSpan.Zero;
+                        _player.Seek(newPos);
+                    }
+                    e.Handled = true;
+                    break;
+
+                case Key.Right:
+                    // 5초 앞으로
+                    if (_player.PlaybackState != PlaybackState.Stopped)
+                    {
+                        var newPos = _player.CurrentPosition + TimeSpan.FromSeconds(5);
+                        if (newPos > _player.TotalDuration) newPos = _player.TotalDuration;
+                        _player.Seek(newPos);
+                    }
+                    e.Handled = true;
+                    break;
+
+                case Key.Home:
+                    // 이전 곡
+                    PreviousButton_Click(this, new RoutedEventArgs());
+                    e.Handled = true;
+                    break;
+
+                case Key.End:
+                    // 다음 곡
+                    NextButton_Click(this, new RoutedEventArgs());
+                    e.Handled = true;
+                    break;
+
+                case Key.Delete:
+                    // 선택된 항목 삭제
+                    if (PlaylistBox.SelectedItem is TrackInfo selectedTrack)
+                    {
+                        int index = _playlist.IndexOf(selectedTrack);
+                        if (index >= 0)
+                        {
+                            // RemoveTrackButton_Click 로직 재사용
+                            var fakeButton = new Button { DataContext = selectedTrack };
+                            RemoveTrackButton_Click(fakeButton, new RoutedEventArgs());
+                        }
+                    }
+                    e.Handled = true;
+                    break;
+
+                case Key.Up:
+                    // 선택된 항목을 위로 이동
+                    if (PlaylistBox.SelectedItem is TrackInfo trackUp)
+                    {
+                        int index = _playlist.IndexOf(trackUp);
+                        if (index > 0)
+                        {
+                            MovePlaylistItem(index, index - 1);
+                        }
+                    }
+                    e.Handled = true;
+                    break;
+
+                case Key.Down:
+                    // 선택된 항목을 아래로 이동
+                    if (PlaylistBox.SelectedItem is TrackInfo trackDown)
+                    {
+                        int index = _playlist.IndexOf(trackDown);
+                        if (index >= 0 && index < _playlist.Count - 1)
+                        {
+                            MovePlaylistItem(index, index + 1);
+                        }
+                    }
+                    e.Handled = true;
+                    break;
+            }
+        }
+
+        private void MovePlaylistItem(int oldIndex, int newIndex)
+        {
+            // 현재 재생 중인 트랙 인덱스 조정
+            if (_currentIndex == oldIndex)
+            {
+                _currentIndex = newIndex;
+            }
+            else if (oldIndex < _currentIndex && newIndex >= _currentIndex)
+            {
+                _currentIndex--;
+            }
+            else if (oldIndex > _currentIndex && newIndex <= _currentIndex)
+            {
+                _currentIndex++;
+            }
+
+            _playlist.Move(oldIndex, newIndex);
+            PlaylistBox.SelectedIndex = newIndex;
+        }
+
+        #endregion
+
         protected override void OnClosed(EventArgs e)
         {
             SavePlaylistState();

@@ -461,9 +461,15 @@
 
                         <!-- Playlist Buttons -->
                         <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="8,0,8,8">
-                            <Button x:Name="AddFilesButton" Content="+" Width="32" Height="28"
+                            <Button x:Name="AddFilesButton" Width="32" Height="28"
                                     Style="{StaticResource ControlButtonStyle}" Click="AddFilesButton_Click"
-                                    ToolTip="Add files" FontSize="16" FontWeight="Bold" Padding="0,0,0,2"/>
+                                    ToolTip="Add files">
+                                <Viewbox Width="14" Height="14">
+                                    <Canvas Width="24" Height="24">
+                                        <Path Fill="{StaticResource TextPrimaryBrush}" Data="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+                                    </Canvas>
+                                </Viewbox>
+                            </Button>
                             <Button x:Name="ClearPlaylistButton" Content="Clear" Height="28" Padding="8,0"
                                     Style="{StaticResource ControlButtonStyle}" Click="ClearPlaylistButton_Click"
                                     ToolTip="Clear playlist" FontSize="11" Margin="4,0,0,0"/>

@@ -3,6 +3,22 @@ using System.IO;
 namespace Photo.Video.Organizer.Services
 {
     /// <summary>
+    /// 폴더 구조 옵션
+    /// </summary>
+    public enum FolderStructure
+    {
+        /// <summary>
+        /// yyyy/MM/파일명 (기본)
+        /// </summary>
+        YearMonth,
+
+        /// <summary>
+        /// yyyy/MM/yyyy-MM-dd/파일명
+        /// </summary>
+        YearMonthDay
+    }
+
+    /// <summary>
     /// 미디어 파일을 년/월 폴더 구조로 정리하는 서비스
     /// </summary>
     public class FileOrganizer
@@ -33,15 +49,17 @@ namespace Photo.Video.Organizer.Services
         }
 
         /// <summary>
-        /// 파일들을 지정된 경로에 yyyy/MM 폴더 구조로 정리
+        /// 파일들을 지정된 경로에 폴더 구조로 정리
         /// </summary>
         /// <param name="files">정리할 파일 경로 목록</param>
         /// <param name="destinationRoot">대상 루트 폴더</param>
+        /// <param name="folderStructure">폴더 구조 옵션</param>
         /// <param name="progress">진행 상황 콜백</param>
         /// <param name="cancellationToken">취소 토큰</param>
         public async Task<OrganizeSummary> OrganizeFilesAsync(
             IEnumerable<string> files,
             string destinationRoot,
+            FolderStructure folderStructure = FolderStructure.YearMonth,
             IProgress<(int current, int total, string fileName)>? progress = null,
             CancellationToken cancellationToken = default)
         {
@@ -57,7 +75,7 @@ namespace Photo.Video.Organizer.Services
 
                 progress?.Report((i + 1, fileList.Count, fileName));
 
-                var result = await Task.Run(() => OrganizeSingleFile(filePath, destinationRoot), cancellationToken);
+                var result = await Task.Run(() => OrganizeSingleFile(filePath, destinationRoot, folderStructure), cancellationToken);
                 summary.Results.Add(result);
 
                 if (result.Success)
@@ -74,7 +92,7 @@ namespace Photo.Video.Organizer.Services
         /// <summary>
         /// 단일 파일 정리
         /// </summary>
-        private OrganizeResult OrganizeSingleFile(string sourcePath, string destinationRoot)
+        private OrganizeResult OrganizeSingleFile(string sourcePath, string destinationRoot, FolderStructure folderStructure)
         {
             var result = new OrganizeResult { SourcePath = sourcePath };
 
@@ -92,10 +110,23 @@ namespace Photo.Video.Organizer.Services
                 result.MediaDate = mediaDate;
                 result.MediaType = MediaDateExtractor.GetMediaType(sourcePath);
 
-                // 대상 폴더 생성 (yyyy/MM)
+                // 대상 폴더 생성
+                string destinationFolder;
                 var yearFolder = mediaDate.Year.ToString("D4");
                 var monthFolder = mediaDate.Month.ToString("D2");
-                var destinationFolder = Path.Combine(destinationRoot, yearFolder, monthFolder);
+
+                if (folderStructure == FolderStructure.YearMonthDay)
+                {
+                    // yyyy/MM/yyyy-MM-dd/
+                    var dayFolder = $"{mediaDate:yyyy-MM-dd}";
+                    destinationFolder = Path.Combine(destinationRoot, yearFolder, monthFolder, dayFolder);
+                }
+                else
+                {
+                    // yyyy/MM/ (기본)
+                    destinationFolder = Path.Combine(destinationRoot, yearFolder, monthFolder);
+                }
+
                 Directory.CreateDirectory(destinationFolder);
 
                 // 새 파일명 생성 (yyyy-MM-dd HH.mm.ss.확장자)

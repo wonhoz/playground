@@ -5,31 +5,32 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Title="Photo &amp; Video Organizer"
-        Height="650" Width="900"
-        MinHeight="500" MinWidth="700"
+        Height="520" Width="780"
+        MinHeight="450" MinWidth="650"
         WindowStartupLocation="CenterScreen"
-        Background="#F5F7FA">
+        Background="#1E1E1E">
 
     <Window.Resources>
-        <!-- 컬러 -->
-        <SolidColorBrush x:Key="PrimaryBrush" Color="#4285F4"/>
-        <SolidColorBrush x:Key="PrimaryHoverBrush" Color="#3367D6"/>
-        <SolidColorBrush x:Key="SecondaryBrush" Color="#34A853"/>
-        <SolidColorBrush x:Key="AccentBrush" Color="#FBBC04"/>
-        <SolidColorBrush x:Key="ErrorBrush" Color="#EA4335"/>
-        <SolidColorBrush x:Key="TextPrimaryBrush" Color="#202124"/>
-        <SolidColorBrush x:Key="TextSecondaryBrush" Color="#5F6368"/>
-        <SolidColorBrush x:Key="BackgroundBrush" Color="#F5F7FA"/>
-        <SolidColorBrush x:Key="CardBrush" Color="#FFFFFF"/>
-        <SolidColorBrush x:Key="BorderBrush" Color="#E8EAED"/>
+        <!-- Dark Theme Colors -->
+        <SolidColorBrush x:Key="PrimaryBrush" Color="#4FC3F7"/>
+        <SolidColorBrush x:Key="PrimaryHoverBrush" Color="#29B6F6"/>
+        <SolidColorBrush x:Key="SecondaryBrush" Color="#66BB6A"/>
+        <SolidColorBrush x:Key="AccentBrush" Color="#FFB74D"/>
+        <SolidColorBrush x:Key="ErrorBrush" Color="#EF5350"/>
+        <SolidColorBrush x:Key="TextPrimaryBrush" Color="#EEEEEE"/>
+        <SolidColorBrush x:Key="TextSecondaryBrush" Color="#9E9E9E"/>
+        <SolidColorBrush x:Key="BackgroundBrush" Color="#1E1E1E"/>
+        <SolidColorBrush x:Key="CardBrush" Color="#2D2D2D"/>
+        <SolidColorBrush x:Key="CardLightBrush" Color="#383838"/>
+        <SolidColorBrush x:Key="BorderBrush" Color="#404040"/>
 
-        <!-- 버튼 스타일 -->
+        <!-- Primary Button Style -->
         <Style x:Key="PrimaryButtonStyle" TargetType="Button">
             <Setter Property="Background" Value="{StaticResource PrimaryBrush}"/>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Foreground" Value="#1E1E1E"/>
+            <Setter Property="FontSize" Value="13"/>
             <Setter Property="FontWeight" Value="SemiBold"/>
-            <Setter Property="Padding" Value="24,12"/>
+            <Setter Property="Padding" Value="20,10"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Template">
@@ -37,7 +38,7 @@
                     <ControlTemplate TargetType="Button">
                         <Border x:Name="border"
                                 Background="{TemplateBinding Background}"
-                                CornerRadius="8"
+                                CornerRadius="6"
                                 Padding="{TemplateBinding Padding}">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
@@ -46,7 +47,7 @@
                                 <Setter Property="Background" Value="{StaticResource PrimaryHoverBrush}"/>
                             </Trigger>
                             <Trigger Property="IsEnabled" Value="False">
-                                <Setter Property="Opacity" Value="0.5"/>
+                                <Setter Property="Opacity" Value="0.4"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -54,13 +55,14 @@
             </Setter>
         </Style>
 
+        <!-- Secondary Button Style -->
         <Style x:Key="SecondaryButtonStyle" TargetType="Button">
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="Foreground" Value="{StaticResource PrimaryBrush}"/>
-            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontSize" Value="12"/>
             <Setter Property="FontWeight" Value="SemiBold"/>
-            <Setter Property="Padding" Value="24,12"/>
-            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="Padding" Value="16,8"/>
+            <Setter Property="BorderThickness" Value="1.5"/>
             <Setter Property="BorderBrush" Value="{StaticResource PrimaryBrush}"/>
             <Setter Property="Cursor" Value="Hand"/>
             <Setter Property="Template">
@@ -70,57 +72,67 @@
                                 Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="8"
+                                CornerRadius="6"
                                 Padding="{TemplateBinding Padding}">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="#E8F0FE"/>
+                                <Setter Property="Background" Value="#1A4FC3F7"/>
                             </Trigger>
                             <Trigger Property="IsEnabled" Value="False">
-                                <Setter Property="Opacity" Value="0.5"/>
+                                <Setter Property="Opacity" Value="0.4"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <!-- ComboBox Style -->
+        <Style x:Key="DarkComboBoxStyle" TargetType="ComboBox">
+            <Setter Property="Background" Value="{StaticResource CardLightBrush}"/>
+            <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BorderBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="8,6"/>
+            <Setter Property="FontSize" Value="12"/>
+        </Style>
     </Window.Resources>
 
-    <Grid Margin="24">
+    <Grid Margin="16">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <!-- 헤더 -->
-        <StackPanel Grid.Row="0" Margin="0,0,0,20">
+        <!-- Header -->
+        <StackPanel Grid.Row="0" Margin="0,0,0,12">
             <TextBlock Text="Photo &amp; Video Organizer"
-                       FontSize="28" FontWeight="Bold"
+                       FontSize="22" FontWeight="Bold"
                        Foreground="{StaticResource TextPrimaryBrush}"/>
-            <TextBlock Text="사진과 동영상을 촬영 날짜별로 자동 정리합니다"
-                       FontSize="14"
+            <TextBlock Text="촬영 날짜 기준으로 사진/동영상 자동 정리"
+                       FontSize="12"
                        Foreground="{StaticResource TextSecondaryBrush}"
-                       Margin="0,4,0,0"/>
+                       Margin="0,2,0,0"/>
         </StackPanel>
 
-        <!-- 메인 컨텐츠 -->
+        <!-- Main Content -->
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="20"/>
-                <ColumnDefinition Width="300"/>
+                <ColumnDefinition Width="12"/>
+                <ColumnDefinition Width="260"/>
             </Grid.ColumnDefinitions>
 
-            <!-- 드래그 앤 드롭 영역 -->
+            <!-- Drop Zone -->
             <Border x:Name="DropZone"
                     Grid.Column="0"
                     Background="{StaticResource CardBrush}"
                     BorderBrush="{StaticResource BorderBrush}"
                     BorderThickness="2"
-                    CornerRadius="16"
+                    CornerRadius="12"
                     AllowDrop="True"
                     DragEnter="DropZone_DragEnter"
                     DragLeave="DropZone_DragLeave"
@@ -128,127 +140,127 @@
                     Drop="DropZone_Drop">
 
                 <Grid>
-                    <!-- 기본 상태 -->
+                    <!-- Default State -->
                     <StackPanel x:Name="DefaultState"
                                 VerticalAlignment="Center"
                                 HorizontalAlignment="Center">
-                        <!-- 아이콘 -->
-                        <Border Width="120" Height="120"
-                                Background="#E8F0FE"
-                                CornerRadius="60"
+                        <!-- Icon -->
+                        <Border Width="80" Height="80"
+                                Background="#383838"
+                                CornerRadius="40"
                                 HorizontalAlignment="Center"
-                                Margin="0,0,0,24">
-                            <Viewbox Width="60" Height="60">
+                                Margin="0,0,0,16">
+                            <Viewbox Width="40" Height="40">
                                 <Canvas Width="24" Height="24">
                                     <Path Fill="{StaticResource PrimaryBrush}"
                                           Data="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
-                                    <Path Fill="{StaticResource PrimaryBrush}" Opacity="0.6"
+                                    <Path Fill="{StaticResource PrimaryBrush}" Opacity="0.5"
                                           Data="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14z"/>
                                 </Canvas>
                             </Viewbox>
                         </Border>
 
-                        <TextBlock Text="파일을 여기에 드래그하세요"
-                                   FontSize="20" FontWeight="SemiBold"
+                        <TextBlock Text="파일을 드래그하세요"
+                                   FontSize="16" FontWeight="SemiBold"
                                    Foreground="{StaticResource TextPrimaryBrush}"
                                    HorizontalAlignment="Center"/>
                         <TextBlock Text="또는"
-                                   FontSize="14"
+                                   FontSize="12"
                                    Foreground="{StaticResource TextSecondaryBrush}"
                                    HorizontalAlignment="Center"
-                                   Margin="0,12"/>
+                                   Margin="0,8"/>
                         <Button Content="파일 선택"
                                 Style="{StaticResource SecondaryButtonStyle}"
                                 Click="SelectFiles_Click"
                                 HorizontalAlignment="Center"/>
-                        <TextBlock Text="지원 형식: JPG, HEIC, PNG, MP4, MOV 등"
-                                   FontSize="12"
+                        <TextBlock Text="JPG, HEIC, PNG, MP4, MOV 등 지원"
+                                   FontSize="11"
                                    Foreground="{StaticResource TextSecondaryBrush}"
                                    HorizontalAlignment="Center"
-                                   Margin="0,16,0,0"/>
+                                   Margin="0,12,0,0"/>
                     </StackPanel>
 
-                    <!-- 드래그 중 상태 -->
+                    <!-- Drag Over State -->
                     <Border x:Name="DragOverState"
                             Visibility="Collapsed"
-                            Background="#E8F0FE"
-                            CornerRadius="14"
+                            Background="#1A4FC3F7"
+                            CornerRadius="10"
                             Margin="4">
                         <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-                            <Viewbox Width="80" Height="80" Margin="0,0,0,16">
+                            <Viewbox Width="60" Height="60" Margin="0,0,0,12">
                                 <Canvas Width="24" Height="24">
                                     <Path Fill="{StaticResource PrimaryBrush}"
                                           Data="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM14 13v4h-4v-4H7l5-5 5 5h-3z"/>
                                 </Canvas>
                             </Viewbox>
                             <TextBlock Text="여기에 놓으세요!"
-                                       FontSize="24" FontWeight="Bold"
+                                       FontSize="18" FontWeight="Bold"
                                        Foreground="{StaticResource PrimaryBrush}"
                                        HorizontalAlignment="Center"/>
                         </StackPanel>
                     </Border>
 
-                    <!-- 진행 상태 -->
+                    <!-- Progress State -->
                     <StackPanel x:Name="ProgressState"
                                 Visibility="Collapsed"
                                 VerticalAlignment="Center"
                                 HorizontalAlignment="Center"
-                                Width="400">
+                                Width="320">
                         <TextBlock x:Name="ProgressText"
-                                   Text="파일 처리 중..."
-                                   FontSize="18" FontWeight="SemiBold"
+                                   Text="처리 중..."
+                                   FontSize="15" FontWeight="SemiBold"
                                    Foreground="{StaticResource TextPrimaryBrush}"
                                    HorizontalAlignment="Center"
-                                   Margin="0,0,0,8"/>
+                                   Margin="0,0,0,6"/>
                         <TextBlock x:Name="ProgressFileName"
                                    Text=""
-                                   FontSize="13"
+                                   FontSize="11"
                                    Foreground="{StaticResource TextSecondaryBrush}"
                                    HorizontalAlignment="Center"
                                    TextTrimming="CharacterEllipsis"
-                                   Margin="0,0,0,16"/>
+                                   Margin="0,0,0,12"/>
                         <ProgressBar x:Name="ProgressBar"
-                                     Height="8"
+                                     Height="6"
                                      Minimum="0" Maximum="100"
                                      Foreground="{StaticResource PrimaryBrush}"
-                                     Background="#E8EAED"/>
+                                     Background="#404040"/>
                         <TextBlock x:Name="ProgressPercent"
                                    Text="0%"
-                                   FontSize="14" FontWeight="SemiBold"
+                                   FontSize="12" FontWeight="SemiBold"
                                    Foreground="{StaticResource PrimaryBrush}"
                                    HorizontalAlignment="Center"
-                                   Margin="0,8,0,0"/>
+                                   Margin="0,6,0,0"/>
                         <Button x:Name="CancelButton"
                                 Content="취소"
                                 Style="{StaticResource SecondaryButtonStyle}"
                                 Click="Cancel_Click"
                                 HorizontalAlignment="Center"
-                                Margin="0,20,0,0"/>
+                                Margin="0,16,0,0"/>
                     </StackPanel>
                 </Grid>
             </Border>
 
-            <!-- 설정 및 결과 패널 -->
+            <!-- Settings Panel -->
             <Border Grid.Column="2"
                     Background="{StaticResource CardBrush}"
                     BorderBrush="{StaticResource BorderBrush}"
                     BorderThickness="1"
-                    CornerRadius="16"
-                    Padding="20">
+                    CornerRadius="12"
+                    Padding="14">
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
                     <StackPanel>
-                        <!-- 대상 폴더 -->
+                        <!-- Destination -->
                         <TextBlock Text="저장 위치"
-                                   FontSize="14" FontWeight="SemiBold"
+                                   FontSize="12" FontWeight="SemiBold"
                                    Foreground="{StaticResource TextPrimaryBrush}"
-                                   Margin="0,0,0,8"/>
-                        <Border Background="#F5F7FA"
-                                CornerRadius="8"
-                                Padding="12"
-                                Margin="0,0,0,8">
+                                   Margin="0,0,0,6"/>
+                        <Border Background="{StaticResource CardLightBrush}"
+                                CornerRadius="6"
+                                Padding="10"
+                                Margin="0,0,0,6">
                             <TextBlock x:Name="DestinationPathText"
                                        Text="폴더를 선택하세요"
-                                       FontSize="13"
+                                       FontSize="11"
                                        Foreground="{StaticResource TextSecondaryBrush}"
                                        TextWrapping="Wrap"/>
                         </Border>
@@ -256,82 +268,82 @@
                                 Style="{StaticResource SecondaryButtonStyle}"
                                 Click="SelectDestination_Click"
                                 HorizontalAlignment="Left"
-                                Padding="16,8"/>
+                                Padding="12,6"/>
 
-                        <!-- 구분선 -->
-                        <Border Height="1" Background="{StaticResource BorderBrush}" Margin="0,20"/>
+                        <!-- Separator -->
+                        <Border Height="1" Background="{StaticResource BorderBrush}" Margin="0,14"/>
 
-                        <!-- 파일 목록 -->
+                        <!-- Folder Structure Option -->
+                        <TextBlock Text="폴더 구조"
+                                   FontSize="12" FontWeight="SemiBold"
+                                   Foreground="{StaticResource TextPrimaryBrush}"
+                                   Margin="0,0,0,6"/>
+                        <ComboBox x:Name="FolderStructureCombo"
+                                  Style="{StaticResource DarkComboBoxStyle}"
+                                  SelectedIndex="0"
+                                  Margin="0,0,0,4">
+                            <ComboBoxItem Content="yyyy/MM/파일명" Tag="YearMonth"/>
+                            <ComboBoxItem Content="yyyy/MM/yyyy-MM-dd/파일명" Tag="YearMonthDay"/>
+                        </ComboBox>
+                        <TextBlock Text="파일명: yyyy-MM-dd HH.mm.ss"
+                                   FontSize="10"
+                                   Foreground="{StaticResource TextSecondaryBrush}"/>
+
+                        <!-- Separator -->
+                        <Border Height="1" Background="{StaticResource BorderBrush}" Margin="0,14"/>
+
+                        <!-- File List -->
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
                             <TextBlock Text="선택된 파일"
-                                       FontSize="14" FontWeight="SemiBold"
+                                       FontSize="12" FontWeight="SemiBold"
                                        Foreground="{StaticResource TextPrimaryBrush}"/>
                             <TextBlock x:Name="FileCountText"
                                        Grid.Column="1"
                                        Text="0개"
-                                       FontSize="14"
+                                       FontSize="12"
                                        Foreground="{StaticResource TextSecondaryBrush}"/>
                         </Grid>
                         <ListBox x:Name="FileListBox"
-                                 Height="180"
-                                 Margin="0,8,0,0"
-                                 Background="#F5F7FA"
+                                 Height="120"
+                                 Margin="0,6,0,0"
+                                 Background="{StaticResource CardLightBrush}"
+                                 Foreground="{StaticResource TextPrimaryBrush}"
                                  BorderThickness="0"
                                  ScrollViewer.HorizontalScrollBarVisibility="Disabled">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
-                                    <StackPanel Orientation="Horizontal" Margin="4">
-                                        <Ellipse Width="8" Height="8" Fill="{StaticResource SecondaryBrush}" Margin="0,0,8,0" VerticalAlignment="Center"/>
-                                        <TextBlock Text="{Binding}" FontSize="12" TextTrimming="CharacterEllipsis" MaxWidth="200"/>
+                                    <StackPanel Orientation="Horizontal" Margin="2">
+                                        <Ellipse Width="6" Height="6" Fill="{StaticResource SecondaryBrush}" Margin="0,0,6,0" VerticalAlignment="Center"/>
+                                        <TextBlock Text="{Binding}" FontSize="11" Foreground="#CCCCCC" TextTrimming="CharacterEllipsis" MaxWidth="180"/>
                                     </StackPanel>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
                         </ListBox>
                         <Button x:Name="ClearFilesButton"
-                                Content="목록 초기화"
+                                Content="초기화"
                                 Style="{StaticResource SecondaryButtonStyle}"
                                 Click="ClearFiles_Click"
                                 HorizontalAlignment="Left"
-                                Padding="16,8"
-                                Margin="0,8,0,0"
+                                Padding="12,6"
+                                Margin="0,6,0,0"
                                 Visibility="Collapsed"/>
 
-                        <!-- 구분선 -->
-                        <Border Height="1" Background="{StaticResource BorderBrush}" Margin="0,20"/>
-
-                        <!-- 정보 -->
-                        <TextBlock Text="폴더 구조"
-                                   FontSize="14" FontWeight="SemiBold"
-                                   Foreground="{StaticResource TextPrimaryBrush}"
-                                   Margin="0,0,0,8"/>
-                        <Border Background="#FFF8E1" CornerRadius="8" Padding="12">
-                            <StackPanel>
-                                <TextBlock FontSize="12" Foreground="#F57C00" TextWrapping="Wrap">
-                                    <Run FontWeight="SemiBold">yyyy/MM/</Run>
-                                    <Run>형식으로 정리</Run>
-                                </TextBlock>
-                                <TextBlock FontSize="12" Foreground="#F57C00" TextWrapping="Wrap" Margin="0,4,0,0">
-                                    <Run FontWeight="SemiBold">파일명:</Run>
-                                    <Run>yyyy-MM-dd HH.mm.ss</Run>
-                                </TextBlock>
-                            </StackPanel>
-                        </Border>
-
-                        <!-- 결과 -->
-                        <StackPanel x:Name="ResultPanel" Visibility="Collapsed" Margin="0,16,0,0">
+                        <!-- Result -->
+                        <StackPanel x:Name="ResultPanel" Visibility="Collapsed" Margin="0,12,0,0">
+                            <Border Height="1" Background="{StaticResource BorderBrush}" Margin="0,0,0,12"/>
                             <TextBlock Text="처리 결과"
-                                       FontSize="14" FontWeight="SemiBold"
+                                       FontSize="12" FontWeight="SemiBold"
                                        Foreground="{StaticResource TextPrimaryBrush}"
-                                       Margin="0,0,0,8"/>
-                            <Border Background="#E8F5E9" CornerRadius="8" Padding="12">
+                                       Margin="0,0,0,6"/>
+                            <Border Background="#1A66BB6A" CornerRadius="6" Padding="10">
                                 <StackPanel>
-                                    <TextBlock x:Name="ResultSuccessText" FontSize="13" Foreground="#2E7D32"/>
-                                    <TextBlock x:Name="ResultSkippedText" FontSize="13" Foreground="#F57C00" Margin="0,4,0,0"/>
-                                    <TextBlock x:Name="ResultErrorText" FontSize="13" Foreground="#C62828" Margin="0,4,0,0"/>
+                                    <TextBlock x:Name="ResultSuccessText" FontSize="11" Foreground="#81C784"/>
+                                    <TextBlock x:Name="ResultSkippedText" FontSize="11" Foreground="#FFB74D" Margin="0,2,0,0"/>
+                                    <TextBlock x:Name="ResultErrorText" FontSize="11" Foreground="#EF5350" Margin="0,2,0,0"/>
                                 </StackPanel>
                             </Border>
                         </StackPanel>
@@ -340,18 +352,18 @@
             </Border>
         </Grid>
 
-        <!-- 하단 버튼 -->
-        <Grid Grid.Row="2" Margin="0,20,0,0">
+        <!-- Footer -->
+        <Grid Grid.Row="2" Margin="0,12,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                <Ellipse Width="8" Height="8" Fill="{StaticResource SecondaryBrush}" Margin="0,0,8,0"/>
+                <Ellipse Width="6" Height="6" Fill="{StaticResource SecondaryBrush}" Margin="0,0,6,0"/>
                 <TextBlock x:Name="StatusText"
                            Text="준비됨"
-                           FontSize="13"
+                           FontSize="11"
                            Foreground="{StaticResource TextSecondaryBrush}"/>
             </StackPanel>
 
@@ -361,7 +373,7 @@
                     Style="{StaticResource PrimaryButtonStyle}"
                     Click="Start_Click"
                     IsEnabled="False"
-                    Padding="32,12"/>
+                    Padding="24,10"/>
         </Grid>
     </Grid>
 </Window>

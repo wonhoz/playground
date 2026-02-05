@@ -92,14 +92,16 @@ namespace Photo.Video.Organizer
 
             if (show)
             {
+                // Dark theme: Cyan accent border
                 DropZone.BorderBrush = new System.Windows.Media.SolidColorBrush(
-                    System.Windows.Media.Color.FromRgb(66, 133, 244));
+                    System.Windows.Media.Color.FromRgb(79, 195, 247));
                 DropZone.BorderThickness = new Thickness(3);
             }
             else
             {
+                // Dark theme: Dark gray border
                 DropZone.BorderBrush = new System.Windows.Media.SolidColorBrush(
-                    System.Windows.Media.Color.FromRgb(232, 234, 237));
+                    System.Windows.Media.Color.FromRgb(64, 64, 64));
                 DropZone.BorderThickness = new Thickness(2);
             }
         }
@@ -191,10 +193,27 @@ namespace Photo.Video.Organizer
             {
                 _destinationPath = dialog.SelectedPath;
                 DestinationPathText.Text = _destinationPath;
+                // Dark theme: Light text color
                 DestinationPathText.Foreground = new System.Windows.Media.SolidColorBrush(
-                    System.Windows.Media.Color.FromRgb(32, 33, 36));
+                    System.Windows.Media.Color.FromRgb(238, 238, 238));
                 UpdateStartButton();
             }
+        }
+
+        #endregion
+
+        #region Folder Structure
+
+        private FolderStructure GetSelectedFolderStructure()
+        {
+            var selectedItem = FolderStructureCombo.SelectedItem as System.Windows.Controls.ComboBoxItem;
+            var tag = selectedItem?.Tag?.ToString();
+
+            return tag switch
+            {
+                "YearMonthDay" => FolderStructure.YearMonthDay,
+                _ => FolderStructure.YearMonth
+            };
         }
 
         #endregion
@@ -229,9 +248,13 @@ namespace Photo.Video.Organizer
 
             try
             {
+                // 폴더 구조 옵션 가져오기
+                var folderStructure = GetSelectedFolderStructure();
+
                 var result = await _organizer.OrganizeFilesAsync(
                     _selectedFiles,
                     _destinationPath,
+                    folderStructure,
                     progress,
                     _cancellationTokenSource.Token);
 
@@ -283,16 +306,17 @@ namespace Photo.Video.Organizer
             UpdateFileList();
             UpdateStartButton();
 
-            // 성공 메시지
+            // 성공 메시지 - 커스텀 다이얼로그 사용
             if (result.SuccessCount > 0)
             {
-                var openFolder = System.Windows.MessageBox.Show(
-                    $"{result.SuccessCount}개 파일이 정리되었습니다.\n\n폴더를 열까요?",
-                    "완료",
-                    MessageBoxButton.YesNo,
-                    MessageBoxImage.Information);
+                var dialog = new CompletionDialog(result.SuccessCount)
+                {
+                    Owner = this
+                };
 
-                if (openFolder == MessageBoxResult.Yes && !string.IsNullOrEmpty(_destinationPath))
+                dialog.ShowDialog();
+
+                if (dialog.OpenFolder && !string.IsNullOrEmpty(_destinationPath))
                 {
                     System.Diagnostics.Process.Start("explorer.exe", _destinationPath);
                 }

@@ -22,6 +22,8 @@ namespace Music.Player
         private bool _isDraggingSlider;
         private bool _isShuffleEnabled;
         private bool _isRepeatEnabled;
+        private Point _dragStartPoint;
+        private bool _isDraggingPlaylistItem;
 
         private static readonly string[] SupportedExtensions = { ".mp3", ".wav", ".flac", ".m4a", ".wma", ".aac", ".ogg" };
 
@@ -492,6 +494,98 @@ namespace Music.Player
             {
                 var files = (string[])e.Data.GetData(DataFormats.FileDrop);
                 AddFiles(files);
+            }
+        }
+
+        #endregion
+
+        #region Playlist Item Drag Reorder
+
+        private void PlaylistItem_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            _dragStartPoint = e.GetPosition(null);
+            _isDraggingPlaylistItem = false;
+        }
+
+        private void PlaylistItem_PreviewMouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.LeftButton != MouseButtonState.Pressed || _isDraggingPlaylistItem)
+                return;
+
+            Point position = e.GetPosition(null);
+            Vector diff = _dragStartPoint - position;
+
+            // 충분히 드래그했는지 확인
+            if (Math.Abs(diff.X) > SystemParameters.MinimumHorizontalDragDistance ||
+                Math.Abs(diff.Y) > SystemParameters.MinimumVerticalDragDistance)
+            {
+                if (sender is ListBoxItem listBoxItem && listBoxItem.DataContext is TrackInfo track)
+                {
+                    _isDraggingPlaylistItem = true;
+                    DragDrop.DoDragDrop(listBoxItem, track, DragDropEffects.Move);
+                    _isDraggingPlaylistItem = false;
+                }
+            }
+        }
+
+        private void PlaylistItem_DragOver(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(typeof(TrackInfo)))
+            {
+                e.Effects = DragDropEffects.Move;
+            }
+            else if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                e.Effects = DragDropEffects.Copy;
+            }
+            else
+            {
+                e.Effects = DragDropEffects.None;
+            }
+            e.Handled = true;
+        }
+
+        private void PlaylistItem_Drop(object sender, DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(typeof(TrackInfo)) && sender is ListBoxItem targetItem)
+            {
+                var draggedTrack = (TrackInfo)e.Data.GetData(typeof(TrackInfo));
+                var targetTrack = targetItem.DataContext as TrackInfo;
+
+                if (draggedTrack == null || targetTrack == null || draggedTrack == targetTrack)
+                    return;
+
+                int oldIndex = _playlist.IndexOf(draggedTrack);
+                int newIndex = _playlist.IndexOf(targetTrack);
+
+                if (oldIndex < 0 || newIndex < 0)
+                    return;
+
+                // 현재 재생 중인 트랙 인덱스 조정
+                if (_currentIndex == oldIndex)
+                {
+                    _currentIndex = newIndex;
+                }
+                else if (oldIndex < _currentIndex && newIndex >= _currentIndex)
+                {
+                    _currentIndex--;
+                }
+                else if (oldIndex > _currentIndex && newIndex <= _currentIndex)
+                {
+                    _currentIndex++;
+                }
+
+                // 항목 이동
+                _playlist.Move(oldIndex, newIndex);
+                PlaylistBox.SelectedIndex = newIndex;
+
+                e.Handled = true;
+            }
+            else if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                var files = (string[])e.Data.GetData(DataFormats.FileDrop);
+                AddFiles(files);
+                e.Handled = true;
             }
         }
 

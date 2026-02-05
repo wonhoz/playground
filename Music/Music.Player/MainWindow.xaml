@@ -171,6 +171,11 @@
             <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}"/>
             <Setter Property="Padding" Value="10,8"/>
             <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="AllowDrop" Value="True"/>
+            <EventSetter Event="PreviewMouseLeftButtonDown" Handler="PlaylistItem_PreviewMouseLeftButtonDown"/>
+            <EventSetter Event="PreviewMouseMove" Handler="PlaylistItem_PreviewMouseMove"/>
+            <EventSetter Event="Drop" Handler="PlaylistItem_Drop"/>
+            <EventSetter Event="DragOver" Handler="PlaylistItem_DragOver"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ListBoxItem">

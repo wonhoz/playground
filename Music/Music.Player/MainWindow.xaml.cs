@@ -813,22 +813,26 @@ namespace Music.Player
                 _currentIndex = state.CurrentTrackIndex;
                 var track = _playlist[_currentIndex];
 
-                // Update display without auto-playing
-                UpdateTrackDisplay(track);
-                PlaylistBox.SelectedIndex = _currentIndex;
-                PlaylistBox.ScrollIntoView(PlaylistBox.SelectedItem);
-
-                ProgressSlider.Maximum = track.Duration.TotalSeconds;
-                TotalTimeText.Text = track.DurationText;
-
-                // Load track and seek to saved position (paused)
+                // Load track and seek to saved position, then auto-play
                 _player.Load(track.FilePath);
                 if (state.CurrentPositionSeconds > 0 && state.CurrentPositionSeconds < track.Duration.TotalSeconds)
                 {
                     _player.Seek(TimeSpan.FromSeconds(state.CurrentPositionSeconds));
-                    ProgressSlider.Value = state.CurrentPositionSeconds;
-                    CurrentTimeText.Text = TimeSpan.FromSeconds(state.CurrentPositionSeconds).ToString(@"m\:ss");
                 }
+
+                // Update display and start playback
+                UpdateTrackDisplay(track);
+                UpdatePlayPauseIcon(true);
+                PlaylistBox.SelectedIndex = _currentIndex;
+                PlaylistBox.ScrollIntoView(PlaylistBox.SelectedItem);
+
+                ProgressSlider.Maximum = track.Duration.TotalSeconds;
+                ProgressSlider.Value = state.CurrentPositionSeconds;
+                TotalTimeText.Text = track.DurationText;
+                CurrentTimeText.Text = TimeSpan.FromSeconds(state.CurrentPositionSeconds).ToString(@"m\:ss");
+
+                // 자동 재생
+                _player.Play();
             }
         }
 

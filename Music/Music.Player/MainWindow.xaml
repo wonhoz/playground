@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Title="Music Player"
+        Icon="Resources/app.ico"
         Height="420" Width="380"
         MinHeight="380" MinWidth="320"
         WindowStartupLocation="CenterScreen"
@@ -493,15 +494,15 @@
                                         <TextBlock Grid.Column="1" Text="{Binding DurationText}" FontSize="10"
                                                    Foreground="{StaticResource TextSecondaryBrush}"
                                                    VerticalAlignment="Center" Margin="8,0,0,0"/>
-                                        <Button x:Name="RemoveButton" Grid.Column="2" Content="−" Width="20" Height="20"
+                                        <Button x:Name="RemoveButton" Grid.Column="2" Content="×" Width="20" Height="20"
                                                 FontSize="14" FontWeight="Bold" Margin="4,0,0,0"
                                                 VerticalAlignment="Center" Cursor="Hand"
                                                 Click="RemoveTrackButton_Click"
-                                                ToolTip="Remove from playlist" Opacity="0">
+                                                ToolTip="Remove from playlist">
                                             <Button.Style>
                                                 <Style TargetType="Button">
                                                     <Setter Property="Background" Value="Transparent"/>
-                                                    <Setter Property="Foreground" Value="#9E9E9E"/>
+                                                    <Setter Property="Foreground" Value="#606060"/>
                                                     <Setter Property="BorderThickness" Value="0"/>
                                                     <Setter Property="Template">
                                                         <Setter.Value>
@@ -522,26 +523,6 @@
                                                 </Style>
                                             </Button.Style>
                                         </Button>
-                                        <Grid.Triggers>
-                                            <EventTrigger RoutedEvent="MouseEnter">
-                                                <BeginStoryboard>
-                                                    <Storyboard>
-                                                        <DoubleAnimation Storyboard.TargetName="RemoveButton"
-                                                                         Storyboard.TargetProperty="Opacity"
-                                                                         To="1" Duration="0:0:0.15"/>
-                                                    </Storyboard>
-                                                </BeginStoryboard>
-                                            </EventTrigger>
-                                            <EventTrigger RoutedEvent="MouseLeave">
-                                                <BeginStoryboard>
-                                                    <Storyboard>
-                                                        <DoubleAnimation Storyboard.TargetName="RemoveButton"
-                                                                         Storyboard.TargetProperty="Opacity"
-                                                                         To="0" Duration="0:0:0.15"/>
-                                                    </Storyboard>
-                                                </BeginStoryboard>
-                                            </EventTrigger>
-                                        </Grid.Triggers>
                                     </Grid>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>

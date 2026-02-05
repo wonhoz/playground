@@ -29,6 +29,13 @@ namespace Music.Player.Services
 
         public void Load(string filePath)
         {
+            // Unsubscribe from old PlaybackStopped event before stopping
+            // to prevent triggering end-of-track logic during track change
+            if (_wavePlayer != null)
+            {
+                _wavePlayer.PlaybackStopped -= OnPlaybackStopped;
+            }
+
             Stop();
             DisposeAudio();
 
@@ -38,6 +45,7 @@ namespace Music.Player.Services
             _wavePlayer.PlaybackStopped += OnPlaybackStopped;
 
             _positionTimer = new System.Timers.Timer(100);
+            _positionTimer.AutoReset = true;
             _positionTimer.Elapsed += (s, e) => PositionChanged?.Invoke(this, CurrentPosition);
         }
 

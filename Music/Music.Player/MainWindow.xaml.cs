@@ -80,6 +80,15 @@ namespace Music.Player
             }
         }
 
+        private void ContentArea_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            // 빈 공간 드래그로 창 이동
+            if (e.ChangedButton == MouseButton.Left)
+            {
+                DragMove();
+            }
+        }
+
         private void MinimizeButton_Click(object sender, RoutedEventArgs e)
         {
             WindowState = WindowState.Minimized;

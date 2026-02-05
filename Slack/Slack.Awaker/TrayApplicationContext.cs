@@ -14,6 +14,7 @@ namespace StayAwake
 
         private ToolStripMenuItem _startStopItem = null!;
         private ToolStripMenuItem _intervalItem = null!;
+        private ToolStripMenuItem _distanceItem = null!;
         private ToolStripMenuItem _statusItem = null!;
 
         private bool _isRunning = false;
@@ -83,11 +84,31 @@ namespace StayAwake
             }
             menu.Items.Add(_intervalItem);
 
+            // 이동 거리 설정
+            _distanceItem = new ToolStripMenuItem($"이동 거리: {_simulator.MoveDistance}px");
+            var distances = new[] { 10, 30, 50, 100, 200 };
+            foreach (var px in distances)
+            {
+                var item = new ToolStripMenuItem($"{px}px", null, (s, e) => SetDistance(px))
+                {
+                    Checked = (px == _simulator.MoveDistance)
+                };
+                _distanceItem.DropDownItems.Add(item);
+            }
+            menu.Items.Add(_distanceItem);
+
             // 활동 유형
             var activityTypeItem = new ToolStripMenuItem("활동 유형");
             activityTypeItem.DropDownItems.Add(new ToolStripMenuItem("마우스 이동", null, (s, e) => SetActivityType(ActivityType.MouseMove)) { Checked = true });
             activityTypeItem.DropDownItems.Add(new ToolStripMenuItem("마우스 + 키보드", null, (s, e) => SetActivityType(ActivityType.MouseAndKeyboard)));
             menu.Items.Add(activityTypeItem);
+
+            // 디스플레이 절전 방지
+            var preventSleepItem = new ToolStripMenuItem("디스플레이 절전 방지", null, (s, e) => TogglePreventSleep())
+            {
+                Checked = _simulator.PreventDisplaySleep
+            };
+            menu.Items.Add(preventSleepItem);
 
             menu.Items.Add(new ToolStripSeparator());
 
@@ -120,11 +141,12 @@ namespace StayAwake
                 UpdateStatus();
 
                 _trayIcon.ShowBalloonTip(1500, "StayAwake",
-                    $"활동 시뮬레이션 시작됨 ({_intervalMinutes}분 간격)", ToolTipIcon.Info);
+                    $"활동 시뮬레이션 시작됨 ({_intervalMinutes}분 간격, {_simulator.MoveDistance}px)", ToolTipIcon.Info);
             }
             else
             {
                 _activityTimer.Stop();
+                _simulator.AllowSleep(); // 절전 방지 해제
                 _startStopItem.Text = "▶ 시작";
                 _trayIcon.Icon = CreateIcon(false);
                 _trayIcon.Text = "StayAwake - 정지됨";
@@ -153,6 +175,18 @@ namespace StayAwake
             }
         }
 
+        private void SetDistance(int pixels)
+        {
+            _simulator.MoveDistance = pixels;
+            _distanceItem.Text = $"이동 거리: {pixels}px";
+
+            // 체크 상태 업데이트
+            foreach (ToolStripMenuItem item in _distanceItem.DropDownItems)
+            {
+                item.Checked = item.Text == $"{pixels}px";
+            }
+        }
+
         private void SetActivityType(ActivityType type)
         {
             _simulator.ActivityType = type;
@@ -167,6 +201,24 @@ namespace StayAwake
                     item.Checked = (item.Text == "마우스 이동" && type == ActivityType.MouseMove) ||
                                    (item.Text == "마우스 + 키보드" && type == ActivityType.MouseAndKeyboard);
                 }
+            }
+        }
+
+        private void TogglePreventSleep()
+        {
+            _simulator.PreventDisplaySleep = !_simulator.PreventDisplaySleep;
+
+            var preventSleepItem = _contextMenu.Items.OfType<ToolStripMenuItem>()
+                .FirstOrDefault(x => x.Text == "디스플레이 절전 방지");
+
+            if (preventSleepItem != null)
+            {
+                preventSleepItem.Checked = _simulator.PreventDisplaySleep;
+            }
+
+            if (!_simulator.PreventDisplaySleep)
+            {
+                _simulator.AllowSleep();
             }
         }
 
@@ -185,7 +237,8 @@ namespace StayAwake
                 _activityCount++;
                 UpdateStatus();
             }
-            _trayIcon.ShowBalloonTip(1000, "StayAwake", "활동 시뮬레이션 실행됨", ToolTipIcon.Info);
+            _trayIcon.ShowBalloonTip(1000, "StayAwake",
+                $"활동 시뮬레이션 실행됨 ({_simulator.MoveDistance}px 이동)", ToolTipIcon.Info);
         }
 
         private void UpdateStatus()
@@ -196,7 +249,7 @@ namespace StayAwake
 
         private void ShowAbout()
         {
-            var message = @"StayAwake v1.0
+            var message = $@"StayAwake v1.1
 
 Slack 자리 비움 상태 방지 도구
 
@@ -205,9 +258,15 @@ Slack 자리 비움 상태 방지 도구
 • Slack이 백그라운드에 있어도 시스템 활동 감지
 • API로도 강제 Active 불가, 자연스러운 활동만 인정
 
-[해결 방법]
-• 주기적으로 마우스를 1픽셀 이동
+[동작 방식]
+• 주기적으로 마우스를 이동 후 원위치
+• SetThreadExecutionState로 디스플레이 절전 방지
 • 10분 내에 활동이 있으면 Active 유지
+
+[현재 설정]
+• 간격: {_intervalMinutes}분
+• 이동 거리: {_simulator.MoveDistance}px
+• 디스플레이 절전 방지: {(_simulator.PreventDisplaySleep ? "켜짐" : "꺼짐")}
 
 [사용법]
 • 더블클릭: 시작/정지 토글
@@ -222,6 +281,7 @@ Slack 자리 비움 상태 방지 도구
         private void ExitApplication()
         {
             _activityTimer.Stop();
+            _simulator.AllowSleep(); // 절전 방지 해제
             _trayIcon.Visible = false;
             Application.Exit();
         }
@@ -258,6 +318,7 @@ Slack 자리 비움 상태 방지 도구
         {
             if (disposing)
             {
+                _simulator.AllowSleep(); // 절전 방지 해제
                 _activityTimer.Dispose();
                 _trayIcon.Dispose();
             }

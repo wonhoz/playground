@@ -33,6 +33,9 @@ namespace StayAwake
         [DllImport("user32.dll")]
         private static extern void keybd_event(byte bVk, byte bScan, uint dwFlags, int dwExtraInfo);
 
+        [DllImport("kernel32.dll")]
+        private static extern uint SetThreadExecutionState(uint esFlags);
+
         [StructLayout(LayoutKind.Sequential)]
         private struct POINT
         {
@@ -52,6 +55,11 @@ namespace StayAwake
         // Scroll Lock (눈에 보이지만 대부분 사용 안 함)
         private const byte VK_SCROLL = 0x91;
 
+        // SetThreadExecutionState 플래그
+        private const uint ES_CONTINUOUS = 0x80000000;
+        private const uint ES_SYSTEM_REQUIRED = 0x00000001;
+        private const uint ES_DISPLAY_REQUIRED = 0x00000002;
+
         #endregion
 
         /// <summary>
@@ -60,9 +68,14 @@ namespace StayAwake
         public ActivityType ActivityType { get; set; } = ActivityType.MouseMove;
 
         /// <summary>
-        /// 마우스 이동 거리 (픽셀)
+        /// 마우스 이동 거리 (픽셀) - 기본값 50픽셀
         /// </summary>
-        public int MoveDistance { get; set; } = 1;
+        public int MoveDistance { get; set; } = 50;
+
+        /// <summary>
+        /// 디스플레이 절전 방지 여부
+        /// </summary>
+        public bool PreventDisplaySleep { get; set; } = true;
 
         private bool _moveDirection = true;
 
@@ -73,6 +86,12 @@ namespace StayAwake
         {
             try
             {
+                // 디스플레이 & 시스템 절전 방지
+                if (PreventDisplaySleep)
+                {
+                    PreventSleep();
+                }
+
                 // 마우스 이동
                 MoveMouse();
 
@@ -89,29 +108,51 @@ namespace StayAwake
         }
 
         /// <summary>
-        /// 마우스를 1픽셀 이동 후 원위치
+        /// 디스플레이 및 시스템 절전 방지
+        /// </summary>
+        private void PreventSleep()
+        {
+            // ES_DISPLAY_REQUIRED: 디스플레이 꺼짐 방지
+            // ES_SYSTEM_REQUIRED: 시스템 절전 방지
+            // ES_CONTINUOUS 없이 호출하면 일회성으로 타이머 리셋
+            SetThreadExecutionState(ES_DISPLAY_REQUIRED | ES_SYSTEM_REQUIRED);
+        }
+
+        /// <summary>
+        /// 절전 방지 해제 (앱 종료 시 호출)
+        /// </summary>
+        public void AllowSleep()
+        {
+            SetThreadExecutionState(ES_CONTINUOUS);
+        }
+
+        /// <summary>
+        /// 마우스를 이동 후 원위치
         /// </summary>
         private void MoveMouse()
         {
             if (GetCursorPos(out POINT currentPos))
             {
-                // 방향 전환 (매번 반대 방향으로)
-                int offset = _moveDirection ? MoveDistance : -MoveDistance;
+                // 방향 전환 (매번 반대 방향으로 대각선 이동)
+                int offsetX = _moveDirection ? MoveDistance : -MoveDistance;
+                int offsetY = _moveDirection ? MoveDistance / 2 : -MoveDistance / 2;
                 _moveDirection = !_moveDirection;
 
-                // 이동
-                SetCursorPos(currentPos.X + offset, currentPos.Y);
+                // 이동 (대각선으로 움직여서 더 눈에 띄게)
+                SetCursorPos(currentPos.X + offsetX, currentPos.Y + offsetY);
 
-                // 아주 짧은 딜레이 후 원위치
-                Thread.Sleep(50);
+                // 잠시 대기 (움직임이 보이도록)
+                Thread.Sleep(100);
+
+                // 원위치 복귀
                 SetCursorPos(currentPos.X, currentPos.Y);
             }
             else
             {
                 // GetCursorPos 실패 시 mouse_event 사용
-                mouse_event(MOUSEEVENTF_MOVE, 1, 0, 0, 0);
-                Thread.Sleep(50);
-                mouse_event(MOUSEEVENTF_MOVE, -1, 0, 0, 0);
+                mouse_event(MOUSEEVENTF_MOVE, MoveDistance, MoveDistance / 2, 0, 0);
+                Thread.Sleep(100);
+                mouse_event(MOUSEEVENTF_MOVE, -MoveDistance, -MoveDistance / 2, 0, 0);
             }
         }
 

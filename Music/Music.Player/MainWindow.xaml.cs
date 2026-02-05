@@ -31,6 +31,7 @@ namespace Music.Player
         {
             InitializeComponent();
             EnsureResourcesExist();
+            SetWindowIcon();
 
             PlaylistBox.ItemsSource = _playlist;
             _player.PositionChanged += Player_PositionChanged;
@@ -43,6 +44,24 @@ namespace Music.Player
 
             // Restore saved playlist state after window is loaded
             Loaded += (s, e) => RestorePlaylistState();
+        }
+
+        private void SetWindowIcon()
+        {
+            try
+            {
+                // 실행 파일과 같은 폴더의 Resources/app.ico 사용
+                var exePath = AppContext.BaseDirectory;
+                var iconPath = System.IO.Path.Combine(exePath, "Resources", "app.ico");
+                if (File.Exists(iconPath))
+                {
+                    Icon = new BitmapImage(new Uri(iconPath, UriKind.Absolute));
+                }
+            }
+            catch
+            {
+                // 아이콘 로드 실패 시 무시
+            }
         }
 
         private void EnsureResourcesExist()

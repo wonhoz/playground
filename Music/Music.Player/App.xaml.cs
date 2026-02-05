@@ -6,133 +6,163 @@ namespace Music.Player
 {
     public partial class App : Application
     {
-        private const string MutexName = "Global\\MusicPlayer_SingleInstance_7F3A2B1C";
-        private const string PipeName = "MusicPlayer_Pipe_7F3A2B1C";
+        private const string MutexName = "MusicPlayer_SingleInstance_A1B2C3D4";
+        private const string PipeName = "MusicPlayer_Pipe_A1B2C3D4";
         private static Mutex? _mutex;
+        private static bool _ownsMutex;
 
         [STAThread]
         public static void Main(string[] args)
         {
-            // 앱 시작 전에 Mutex 체크 (가장 빠른 시점)
-            _mutex = new Mutex(true, MutexName, out bool isFirstInstance);
+            _mutex = new Mutex(false, MutexName);
 
-            if (!isFirstInstance)
+            try
+            {
+                // Mutex 획득 시도 (최대 100ms 대기)
+                _ownsMutex = _mutex.WaitOne(100, false);
+            }
+            catch (AbandonedMutexException)
+            {
+                // 이전 프로세스가 비정상 종료한 경우 - Mutex 소유권 획득됨
+                _ownsMutex = true;
+            }
+
+            if (!_ownsMutex)
             {
                 // 이미 실행 중 - 파일 경로를 기존 인스턴스에 전달하고 종료
                 SendArgsToRunningInstance(args);
+                _mutex.Dispose();
                 return;
             }
 
-            // 첫 번째 인스턴스 - 앱 시작
+            // 첫 번째 인스턴스 - 파이프 서버 먼저 시작
+            StartPipeServerStatic();
+
+            // WPF 앱 시작
             var app = new App();
             app.InitializeComponent();
             app.Run();
         }
 
+        private static MainWindow? _mainWindow;
+
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
 
-            // 파이프 서버 시작 (다른 인스턴스로부터 파일 경로 수신)
-            StartPipeServer();
-
             // MainWindow 생성 및 표시
-            var mainWindow = new MainWindow();
-            mainWindow.Show();
+            _mainWindow = new MainWindow();
+            _mainWindow.Show();
 
             // 커맨드 라인 인수가 있으면 처리
             var args = Environment.GetCommandLineArgs().Skip(1).ToArray();
             if (args.Length > 0)
             {
-                mainWindow.LoadFilesFromArgs(args);
+                _mainWindow.LoadFilesFromArgs(args);
             }
         }
 
         private static void SendArgsToRunningInstance(string[] args)
         {
-            try
+            // 여러 번 재시도
+            for (int retry = 0; retry < 10; retry++)
             {
-                using var client = new NamedPipeClientStream(".", PipeName, PipeDirection.Out);
-                client.Connect(5000); // 5초 대기
-
-                using var writer = new StreamWriter(client) { AutoFlush = true };
-
-                if (args.Length == 0)
+                try
                 {
-                    // 인수 없이 실행된 경우 - 기존 앱 활성화만
-                    writer.WriteLine("__ACTIVATE__");
-                }
-                else
-                {
-                    foreach (var arg in args)
+                    using var client = new NamedPipeClientStream(".", PipeName, PipeDirection.Out);
+                    client.Connect(1000);
+
+                    using var writer = new StreamWriter(client) { AutoFlush = true };
+
+                    if (args.Length == 0)
                     {
-                        writer.WriteLine(arg);
+                        writer.WriteLine("__ACTIVATE__");
                     }
+                    else
+                    {
+                        foreach (var arg in args)
+                        {
+                            writer.WriteLine(arg);
+                        }
+                    }
+                    return; // 성공
                 }
-            }
-            catch
-            {
-                // 연결 실패 - 무시
+                catch
+                {
+                    Thread.Sleep(100); // 재시도 전 대기
+                }
             }
         }
 
-        private void StartPipeServer()
+        private static void StartPipeServerStatic()
         {
-            Task.Run(async () =>
+            var thread = new Thread(() =>
             {
                 while (true)
                 {
                     try
                     {
                         using var server = new NamedPipeServerStream(PipeName, PipeDirection.In);
-                        await server.WaitForConnectionAsync();
+                        server.WaitForConnection();
 
                         using var reader = new StreamReader(server);
                         var files = new List<string>();
 
                         string? line;
-                        while ((line = await reader.ReadLineAsync()) != null)
+                        while ((line = reader.ReadLine()) != null)
                         {
                             if (!string.IsNullOrWhiteSpace(line) && line != "__ACTIVATE__")
                                 files.Add(line);
                         }
 
-                        await Dispatcher.InvokeAsync(() =>
+                        // UI 스레드에서 처리
+                        System.Windows.Application.Current?.Dispatcher.BeginInvoke(() =>
                         {
-                            if (MainWindow is MainWindow mainWindow)
+                            if (_mainWindow != null)
                             {
                                 if (files.Count > 0)
                                 {
-                                    mainWindow.LoadFilesFromArgs(files.ToArray());
+                                    _mainWindow.LoadFilesFromArgs(files.ToArray());
                                 }
 
                                 // 창 활성화
-                                if (mainWindow.WindowState == WindowState.Minimized)
-                                    mainWindow.WindowState = WindowState.Normal;
+                                if (_mainWindow.WindowState == WindowState.Minimized)
+                                    _mainWindow.WindowState = WindowState.Normal;
 
-                                mainWindow.Activate();
-                                mainWindow.Topmost = true;
-                                mainWindow.Topmost = false;
-                                mainWindow.Focus();
+                                _mainWindow.Activate();
+                                _mainWindow.Topmost = true;
+                                _mainWindow.Topmost = false;
+                                _mainWindow.Focus();
                             }
                         });
                     }
                     catch
                     {
-                        await Task.Delay(100);
+                        Thread.Sleep(50);
                     }
                 }
-            });
+            })
+            {
+                IsBackground = true,
+                Name = "PipeServer"
+            };
+            thread.Start();
+
+            // 파이프 서버가 시작될 때까지 잠시 대기
+            Thread.Sleep(50);
         }
 
         protected override void OnExit(ExitEventArgs e)
         {
-            try
+            if (_ownsMutex && _mutex != null)
             {
-                _mutex?.ReleaseMutex();
-                _mutex?.Dispose();
+                try
+                {
+                    _mutex.ReleaseMutex();
+                }
+                catch { }
             }
-            catch { }
+            _mutex?.Dispose();
 
             base.OnExit(e);
         }

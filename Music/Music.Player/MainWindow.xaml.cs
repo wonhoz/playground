@@ -390,12 +390,72 @@ namespace Music.Player
 
         private void SavePlaylistButton_Click(object sender, RoutedEventArgs e)
         {
-            // Phase 5에서 구현
+            if (_playlist.Count == 0)
+            {
+                MessageBox.Show("플레이리스트가 비어있습니다.", "Save Playlist", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
+            var dialog = new Microsoft.Win32.SaveFileDialog
+            {
+                Title = "Save Playlist",
+                Filter = "JSON Files|*.json|All Files|*.*",
+                DefaultExt = ".json",
+                FileName = "playlist"
+            };
+
+            if (dialog.ShowDialog() == true)
+            {
+                try
+                {
+                    var playlistData = new { files = _playlist.Select(t => t.FilePath).ToList() };
+                    var json = System.Text.Json.JsonSerializer.Serialize(playlistData, new System.Text.Json.JsonSerializerOptions { WriteIndented = true });
+                    File.WriteAllText(dialog.FileName, json);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"저장 실패: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
         }
 
         private void LoadPlaylistButton_Click(object sender, RoutedEventArgs e)
         {
-            // Phase 5에서 구현
+            var dialog = new Microsoft.Win32.OpenFileDialog
+            {
+                Title = "Load Playlist",
+                Filter = "JSON Files|*.json|All Files|*.*"
+            };
+
+            if (dialog.ShowDialog() == true)
+            {
+                try
+                {
+                    var json = File.ReadAllText(dialog.FileName);
+                    var playlistData = System.Text.Json.JsonSerializer.Deserialize<System.Text.Json.JsonElement>(json);
+
+                    if (playlistData.TryGetProperty("files", out var filesElement))
+                    {
+                        var files = filesElement.EnumerateArray()
+                            .Select(f => f.GetString())
+                            .Where(f => !string.IsNullOrEmpty(f) && File.Exists(f))
+                            .ToArray();
+
+                        if (files.Length > 0)
+                        {
+                            LoadFilesFromArgs(files!);
+                        }
+                        else
+                        {
+                            MessageBox.Show("유효한 파일이 없습니다.", "Load Playlist", MessageBoxButton.OK, MessageBoxImage.Warning);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"불러오기 실패: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
         }
 
         private void PlaylistBox_MouseDoubleClick(object sender, MouseButtonEventArgs e)

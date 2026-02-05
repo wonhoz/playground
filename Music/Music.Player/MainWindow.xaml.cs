@@ -791,40 +791,6 @@ namespace Music.Player
             }
         }
 
-        public void AppendFilesFromArgs(string[] args)
-        {
-            if (args.Length == 0) return;
-
-            bool wasEmpty = _playlist.Count == 0;
-
-            // 파일 추가 (클리어 없이)
-            foreach (var arg in args)
-            {
-                if (File.Exists(arg) && SupportedExtensions.Contains(System.IO.Path.GetExtension(arg).ToLower()))
-                {
-                    // 중복 체크
-                    if (!_playlist.Any(t => t.FilePath == arg))
-                    {
-                        var track = TrackInfo.FromFile(arg);
-                        _playlist.Add(track);
-                    }
-                }
-            }
-
-            // 플레이리스트 표시
-            if (_playlist.Count > 0 && PlaylistToggle.IsChecked != true)
-            {
-                PlaylistToggle.IsChecked = true;
-                TogglePlaylistPanel();
-            }
-
-            // 아무것도 재생 중이 아니면 첫 번째 트랙 재생
-            if (wasEmpty && _playlist.Count > 0)
-            {
-                PlayTrack(0);
-            }
-        }
-
         #endregion
 
         #region Playlist State Persistence

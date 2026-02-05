@@ -311,18 +311,21 @@ namespace Music.Player
             TogglePlaylistPanel();
         }
 
+        private const double PlaylistPanelWidth = 220;
+
         private void TogglePlaylistPanel()
         {
             if (PlaylistToggle.IsChecked == true)
             {
                 PlaylistPanel.Visibility = Visibility.Visible;
-                PlaylistColumn.Width = new GridLength(220);
-                Width = Math.Max(Width, 600);
+                PlaylistColumn.Width = new GridLength(PlaylistPanelWidth);
+                Width += PlaylistPanelWidth;
             }
             else
             {
                 PlaylistPanel.Visibility = Visibility.Collapsed;
                 PlaylistColumn.Width = new GridLength(0);
+                Width = Math.Max(MinWidth, Width - PlaylistPanelWidth);
             }
         }
 

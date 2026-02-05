@@ -460,6 +460,40 @@ namespace Music.Player
             base.OnClosed(e);
         }
 
+        #region Command Line Arguments
+
+        public void LoadFilesFromArgs(string[] args)
+        {
+            if (args.Length == 0) return;
+
+            // 기존 플레이리스트 클리어
+            _player.Stop();
+            _playlist.Clear();
+            _currentIndex = -1;
+
+            // 파일 추가
+            foreach (var arg in args)
+            {
+                if (File.Exists(arg) && SupportedExtensions.Contains(System.IO.Path.GetExtension(arg).ToLower()))
+                {
+                    var track = TrackInfo.FromFile(arg);
+                    _playlist.Add(track);
+                }
+            }
+
+            // 플레이리스트 표시
+            if (_playlist.Count > 0)
+            {
+                PlaylistToggle.IsChecked = true;
+                TogglePlaylistPanel();
+
+                // 첫 번째 트랙 자동 재생
+                PlayTrack(0);
+            }
+        }
+
+        #endregion
+
         #region Playlist State Persistence
 
         private void SavePlaylistState()

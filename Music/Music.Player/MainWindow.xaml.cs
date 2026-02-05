@@ -28,6 +28,7 @@ namespace Music.Player
         public MainWindow()
         {
             InitializeComponent();
+            EnsureResourcesExist();
 
             PlaylistBox.ItemsSource = _playlist;
             _player.PositionChanged += Player_PositionChanged;
@@ -37,6 +38,25 @@ namespace Music.Player
             AllowDrop = true;
             Drop += MainWindow_Drop;
             DragEnter += MainWindow_DragEnter;
+        }
+
+        private void EnsureResourcesExist()
+        {
+            try
+            {
+                var exePath = AppContext.BaseDirectory;
+                var resourcePath = System.IO.Path.Combine(exePath, "Resources");
+                var appIcoPath = System.IO.Path.Combine(resourcePath, "app.ico");
+
+                if (!File.Exists(appIcoPath))
+                {
+                    IconGenerator.GenerateAppIcon(resourcePath);
+                }
+            }
+            catch
+            {
+                // Icon generation failure should not prevent app from running
+            }
         }
 
         #region Title Bar

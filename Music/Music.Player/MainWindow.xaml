@@ -190,6 +190,88 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
+        <!-- Dark ScrollBar Thumb -->
+        <Style x:Key="ScrollBarThumbStyle" TargetType="Thumb">
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="IsTabStop" Value="False"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Thumb">
+                        <Border x:Name="ThumbBorder" Background="#505050" CornerRadius="4" Margin="2"/>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="ThumbBorder" Property="Background" Value="#606060"/>
+                            </Trigger>
+                            <Trigger Property="IsDragging" Value="True">
+                                <Setter TargetName="ThumbBorder" Property="Background" Value="{StaticResource AccentBrush}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Dark Vertical ScrollBar -->
+        <Style x:Key="DarkScrollBarStyle" TargetType="ScrollBar">
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="Width" Value="10"/>
+            <Setter Property="MinWidth" Value="10"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ScrollBar">
+                        <Grid Background="Transparent">
+                            <Border Background="#2A2A2A" CornerRadius="5" Margin="1"/>
+                            <Track x:Name="PART_Track" IsDirectionReversed="True">
+                                <Track.Thumb>
+                                    <Thumb Style="{StaticResource ScrollBarThumbStyle}"/>
+                                </Track.Thumb>
+                            </Track>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Dark ScrollViewer Style -->
+        <Style x:Key="DarkScrollViewerStyle" TargetType="ScrollViewer">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ScrollViewer">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <ScrollContentPresenter Grid.Column="0"/>
+                            <ScrollBar x:Name="PART_VerticalScrollBar" Grid.Column="1"
+                                       Style="{StaticResource DarkScrollBarStyle}"
+                                       Value="{TemplateBinding VerticalOffset}"
+                                       Maximum="{TemplateBinding ScrollableHeight}"
+                                       ViewportSize="{TemplateBinding ViewportHeight}"
+                                       Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- Dark ListBox Style -->
+        <Style x:Key="DarkListBoxStyle" TargetType="ListBox">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBox">
+                        <ScrollViewer Style="{StaticResource DarkScrollViewerStyle}"
+                                      HorizontalScrollBarVisibility="Disabled"
+                                      Padding="{TemplateBinding Padding}">
+                            <ItemsPresenter/>
+                        </ScrollViewer>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Window.Resources>
 
     <Border Background="#1E1E1E" CornerRadius="8" BorderBrush="#404040" BorderThickness="1">
@@ -377,12 +459,12 @@
                                     ToolTip="Clear playlist" FontSize="11" Margin="4,0,0,0"/>
                         </StackPanel>
 
-                        <ListBox x:Name="PlaylistBox" Grid.Row="2" Background="Transparent" BorderThickness="0"
+                        <ListBox x:Name="PlaylistBox" Grid.Row="2"
+                                 Style="{StaticResource DarkListBoxStyle}"
                                  ItemContainerStyle="{StaticResource PlaylistItemStyle}"
                                  MouseDoubleClick="PlaylistBox_MouseDoubleClick"
                                  AllowDrop="True" Drop="PlaylistBox_Drop"
-                                 DragEnter="PlaylistBox_DragEnter"
-                                 ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                                 DragEnter="PlaylistBox_DragEnter">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <Grid>

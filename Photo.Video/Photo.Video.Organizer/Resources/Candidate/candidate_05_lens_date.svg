@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="pbg5" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0c3483"/>
+      <stop offset="100%" style="stop-color:#a2b6df"/>
+    </linearGradient>
+    <radialGradient id="plens5" cx="40%" cy="40%">
+      <stop offset="0%" style="stop-color:#5c6bc0"/>
+      <stop offset="30%" style="stop-color:#3949ab"/>
+      <stop offset="60%" style="stop-color:#283593"/>
+      <stop offset="100%" style="stop-color:#1a237e"/>
+    </radialGradient>
+    <filter id="pglow5">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- Background -->
+  <circle cx="256" cy="256" r="250" fill="url(#pbg5)"/>
+  <!-- Outer lens ring -->
+  <circle cx="256" cy="256" r="200" fill="#37474f" stroke="#546e7a" stroke-width="4"/>
+  <circle cx="256" cy="256" r="185" fill="#263238" stroke="#455a64" stroke-width="2"/>
+  <!-- Aperture blades hint -->
+  <g opacity="0.15" fill="#546e7a">
+    <path d="M 256 80 L 300 150 L 212 150 Z"/>
+    <path d="M 256 432 L 212 362 L 300 362 Z"/>
+    <path d="M 80 256 L 150 212 L 150 300 Z"/>
+    <path d="M 432 256 L 362 300 L 362 212 Z"/>
+  </g>
+  <!-- Inner lens -->
+  <circle cx="256" cy="256" r="140" fill="url(#plens5)"/>
+  <!-- Lens reflection -->
+  <ellipse cx="210" cy="210" rx="50" ry="30" fill="rgba(255,255,255,0.08)" transform="rotate(-30, 210, 210)"/>
+  <!-- Date display in center -->
+  <g filter="url(#pglow5)">
+    <rect x="170" y="210" width="172" height="90" rx="12" fill="rgba(0,0,0,0.4)"/>
+    <!-- Date -->
+    <text x="256" y="250" text-anchor="middle" font-size="32" font-weight="bold" fill="#4fc3f7" font-family="Consolas, monospace">2024</text>
+    <text x="256" y="282" text-anchor="middle" font-size="22" fill="#81d4fa" font-family="Consolas, monospace">03 / 15</text>
+  </g>
+  <!-- Folder icon below lens -->
+  <g transform="translate(206, 330)" opacity="0.7">
+    <path d="M 0 8 L 0 2 Q 0 0, 2 0 L 25 0 L 32 8 L 95 8 Q 100 8, 100 13 L 100 13 L 0 13 Z" fill="#ffd54f"/>
+    <rect x="0" y="8" width="100" height="40" rx="3" fill="#ffca28"/>
+    <rect x="0" y="18" width="100" height="30" rx="3" fill="#ffd54f"/>
+  </g>
+  <!-- Decorative ring markers -->
+  <g fill="#90a4ae" opacity="0.5">
+    <circle cx="256" cy="62" r="4"/>
+    <circle cx="256" cy="450" r="4"/>
+    <circle cx="62" cy="256" r="4"/>
+    <circle cx="450" cy="256" r="4"/>
+  </g>
+</svg>

@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="pbg6" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#11998e"/>
+      <stop offset="100%" style="stop-color:#38ef7d"/>
+    </linearGradient>
+    <filter id="pshadow6">
+      <feDropShadow dx="1" dy="2" stdDeviation="3" flood-color="#000" flood-opacity="0.15"/>
+    </filter>
+  </defs>
+  <!-- Background -->
+  <rect width="512" height="512" rx="100" fill="url(#pbg6)"/>
+  <!-- Scattered photos (source - left side) -->
+  <g filter="url(#pshadow6)" opacity="0.9">
+    <rect x="30" y="80" width="70" height="55" rx="5" fill="#fff" transform="rotate(-20, 65, 107)"/>
+    <rect x="37" y="87" width="56" height="35" rx="2" fill="#ef9a9a" transform="rotate(-20, 65, 107)"/>
+    <rect x="60" y="130" width="70" height="55" rx="5" fill="#fff" transform="rotate(10, 95, 157)"/>
+    <rect x="67" y="137" width="56" height="35" rx="2" fill="#90caf9" transform="rotate(10, 95, 157)"/>
+    <rect x="20" y="180" width="70" height="55" rx="5" fill="#fff" transform="rotate(-5, 55, 207)"/>
+    <rect x="27" y="187" width="56" height="35" rx="2" fill="#a5d6a7" transform="rotate(-5, 55, 207)"/>
+    <rect x="50" y="250" width="70" height="55" rx="5" fill="#fff" transform="rotate(15, 85, 277)"/>
+    <rect x="57" y="257" width="56" height="35" rx="2" fill="#ffe082" transform="rotate(15, 85, 277)"/>
+    <rect x="25" y="320" width="70" height="55" rx="5" fill="#fff" transform="rotate(-8, 60, 347)"/>
+    <rect x="32" y="327" width="56" height="35" rx="2" fill="#ce93d8" transform="rotate(-8, 60, 347)"/>
+  </g>
+  <!-- Flowing arrows -->
+  <g stroke="#fff" stroke-width="3" fill="none" opacity="0.6" stroke-linecap="round">
+    <path d="M 120 110 C 160 110, 180 100, 240 80"/>
+    <path d="M 140 170 C 180 160, 200 140, 250 130"/>
+    <path d="M 110 220 C 160 220, 200 240, 250 240"/>
+    <path d="M 130 280 C 170 290, 200 320, 250 330"/>
+    <path d="M 110 350 C 150 360, 190 380, 240 400"/>
+  </g>
+  <!-- Organized folder tree (right side) -->
+  <g filter="url(#pshadow6)">
+    <!-- Root folder: 2024 -->
+    <g transform="translate(260, 55)">
+      <path d="M 0 8 L 0 2 Q 0 0, 2 0 L 30 0 L 38 8 L 100 8 Q 105 8, 105 13 L 105 13 L 0 13 Z" fill="#ffa726"/>
+      <rect x="0" y="8" width="105" height="35" rx="3" fill="#ffb74d"/>
+      <text x="52" y="32" text-anchor="middle" font-size="14" fill="#fff" font-weight="bold" font-family="Arial">2024</text>
+    </g>
+    <!-- Connector lines -->
+    <line x1="290" y1="100" x2="290" y2="420" stroke="#fff" stroke-width="2" opacity="0.3"/>
+    <!-- Sub folder: 01 -->
+    <g transform="translate(300, 105)">
+      <path d="M 0 6 L 0 2 Q 0 0, 2 0 L 22 0 L 28 6 L 85 6 Q 88 6, 88 9 L 88 9 L 0 9 Z" fill="#42a5f5"/>
+      <rect x="0" y="6" width="88" height="28" rx="3" fill="#64b5f6"/>
+      <text x="44" y="26" text-anchor="middle" font-size="12" fill="#fff" font-family="Arial">01 Jan</text>
+    </g>
+    <line x1="290" y1="125" x2="300" y2="125" stroke="#fff" stroke-width="2" opacity="0.3"/>
+    <!-- Sub folder: 03 -->
+    <g transform="translate(300, 165)">
+      <path d="M 0 6 L 0 2 Q 0 0, 2 0 L 22 0 L 28 6 L 85 6 Q 88 6, 88 9 L 88 9 L 0 9 Z" fill="#66bb6a"/>
+      <rect x="0" y="6" width="88" height="28" rx="3" fill="#81c784"/>
+      <text x="44" y="26" text-anchor="middle" font-size="12" fill="#fff" font-family="Arial">03 Mar</text>
+    </g>
+    <line x1="290" y1="185" x2="300" y2="185" stroke="#fff" stroke-width="2" opacity="0.3"/>
+    <!-- Sub folder: 06 -->
+    <g transform="translate(300, 225)">
+      <path d="M 0 6 L 0 2 Q 0 0, 2 0 L 22 0 L 28 6 L 85 6 Q 88 6, 88 9 L 88 9 L 0 9 Z" fill="#ffa726"/>
+      <rect x="0" y="6" width="88" height="28" rx="3" fill="#ffb74d"/>
+      <text x="44" y="26" text-anchor="middle" font-size="12" fill="#fff" font-family="Arial">06 Jun</text>
+    </g>
+    <line x1="290" y1="245" x2="300" y2="245" stroke="#fff" stroke-width="2" opacity="0.3"/>
+    <!-- Sub folder: 09 -->
+    <g transform="translate(300, 285)">
+      <path d="M 0 6 L 0 2 Q 0 0, 2 0 L 22 0 L 28 6 L 85 6 Q 88 6, 88 9 L 88 9 L 0 9 Z" fill="#ef5350"/>
+      <rect x="0" y="6" width="88" height="28" rx="3" fill="#ef7070"/>
+      <text x="44" y="26" text-anchor="middle" font-size="12" fill="#fff" font-family="Arial">09 Sep</text>
+    </g>
+    <line x1="290" y1="305" x2="300" y2="305" stroke="#fff" stroke-width="2" opacity="0.3"/>
+    <!-- Sub folder: 12 -->
+    <g transform="translate(300, 345)">
+      <path d="M 0 6 L 0 2 Q 0 0, 2 0 L 22 0 L 28 6 L 85 6 Q 88 6, 88 9 L 88 9 L 0 9 Z" fill="#ab47bc"/>
+      <rect x="0" y="6" width="88" height="28" rx="3" fill="#ba68c8"/>
+      <text x="44" y="26" text-anchor="middle" font-size="12" fill="#fff" font-family="Arial">12 Dec</text>
+    </g>
+    <line x1="290" y1="365" x2="300" y2="365" stroke="#fff" stroke-width="2" opacity="0.3"/>
+    <!-- Photo counts -->
+    <g font-size="10" fill="rgba(255,255,255,0.6)" font-family="Arial">
+      <text x="400" y="128">x3</text>
+      <text x="400" y="188">x5</text>
+      <text x="400" y="248">x2</text>
+      <text x="400" y="308">x4</text>
+      <text x="400" y="368">x1</text>
+    </g>
+  </g>
+  <!-- Checkmark -->
+  <g transform="translate(420, 410)" opacity="0.7">
+    <circle cx="25" cy="25" r="30" fill="rgba(255,255,255,0.2)"/>
+    <path d="M 10 25 L 22 37 L 42 12" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>

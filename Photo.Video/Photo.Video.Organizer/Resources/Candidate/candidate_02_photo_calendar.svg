@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="pbg2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#a8edea"/>
+      <stop offset="100%" style="stop-color:#fed6e3"/>
+    </linearGradient>
+    <filter id="pshadow2">
+      <feDropShadow dx="2" dy="3" stdDeviation="5" flood-color="#000" flood-opacity="0.15"/>
+    </filter>
+  </defs>
+  <!-- Background -->
+  <rect width="512" height="512" rx="100" fill="url(#pbg2)"/>
+  <!-- Calendar -->
+  <g filter="url(#pshadow2)">
+    <!-- Calendar body -->
+    <rect x="90" y="100" width="332" height="320" rx="20" fill="#fff"/>
+    <!-- Calendar header -->
+    <rect x="90" y="100" width="332" height="80" rx="20" fill="#ff6b6b"/>
+    <rect x="90" y="140" width="332" height="40" fill="#ff6b6b"/>
+    <!-- Calendar rings -->
+    <rect x="170" y="82" width="14" height="40" rx="7" fill="#ddd" stroke="#ccc" stroke-width="1"/>
+    <rect x="328" y="82" width="14" height="40" rx="7" fill="#ddd" stroke="#ccc" stroke-width="1"/>
+    <!-- Month text -->
+    <text x="256" y="148" text-anchor="middle" font-size="28" fill="#fff" font-weight="bold" font-family="Arial, sans-serif">2024</text>
+    <!-- Grid of photos as calendar entries -->
+    <!-- Row 1 -->
+    <rect x="115" y="200" width="60" height="45" rx="5" fill="#ffcccc"/>
+    <rect x="185" y="200" width="60" height="45" rx="5" fill="#cce5ff"/>
+    <rect x="255" y="200" width="60" height="45" rx="5" fill="#d4edda"/>
+    <rect x="325" y="200" width="60" height="45" rx="5" fill="#fff3cd"/>
+    <!-- Row 2 -->
+    <rect x="115" y="255" width="60" height="45" rx="5" fill="#e2d5f1"/>
+    <rect x="185" y="255" width="60" height="45" rx="5" fill="#ffd6e7"/>
+    <rect x="255" y="255" width="60" height="45" rx="5" fill="#d1ecf1"/>
+    <rect x="325" y="255" width="60" height="45" rx="5" fill="#ffcccc"/>
+    <!-- Row 3 -->
+    <rect x="115" y="310" width="60" height="45" rx="5" fill="#fff3cd"/>
+    <rect x="185" y="310" width="60" height="45" rx="5" fill="#d4edda"/>
+    <rect x="255" y="310" width="60" height="45" rx="5" fill="#e2d5f1"/>
+    <rect x="325" y="310" width="60" height="45" rx="5" fill="#cce5ff"/>
+    <!-- Small mountain/photo icons in cells -->
+    <g fill="#999" opacity="0.5">
+      <polygon points="130,235 145,215 160,235"/>
+      <polygon points="200,235 215,218 230,235"/>
+      <circle cx="270" cy="218" r="8"/>
+      <polygon points="340,235 355,218 370,235"/>
+    </g>
+    <!-- Dates on some cells -->
+    <text x="125" y="215" font-size="10" fill="#999" font-family="Arial">Jan</text>
+    <text x="195" y="215" font-size="10" fill="#999" font-family="Arial">Feb</text>
+    <text x="335" y="215" font-size="10" fill="#999" font-family="Arial">Apr</text>
+  </g>
+  <!-- Cute camera icon -->
+  <g transform="translate(380, 50) scale(0.5)" opacity="0.6">
+    <rect x="0" y="20" width="80" height="55" rx="10" fill="#fff"/>
+    <circle cx="40" cy="47" r="18" fill="#ff6b6b"/>
+    <circle cx="40" cy="47" r="12" fill="#fff"/>
+    <rect x="15" y="10" width="20" height="12" rx="4" fill="#fff"/>
+  </g>
+</svg>

@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="pbg1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4facfe"/>
+      <stop offset="100%" style="stop-color:#00f2fe"/>
+    </linearGradient>
+    <linearGradient id="pcam1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2d3436"/>
+      <stop offset="100%" style="stop-color:#636e72"/>
+    </linearGradient>
+    <filter id="pshadow1">
+      <feDropShadow dx="2" dy="4" stdDeviation="5" flood-color="#000" flood-opacity="0.2"/>
+    </filter>
+  </defs>
+  <!-- Background -->
+  <rect width="512" height="512" rx="100" fill="url(#pbg1)"/>
+  <!-- Decorative circles -->
+  <circle cx="400" cy="80" r="50" fill="rgba(255,255,255,0.08)"/>
+  <circle cx="80" cy="420" r="40" fill="rgba(255,255,255,0.06)"/>
+  <!-- Camera body -->
+  <g filter="url(#pshadow1)">
+    <!-- Flash bump -->
+    <rect x="130" y="120" width="60" height="25" rx="8" fill="#555"/>
+    <!-- Main body -->
+    <rect x="100" y="140" width="230" height="170" rx="20" fill="url(#pcam1)"/>
+    <!-- Lens ring -->
+    <circle cx="215" cy="225" r="60" fill="#555" stroke="#666" stroke-width="3"/>
+    <circle cx="215" cy="225" r="48" fill="#1a1a2e"/>
+    <circle cx="215" cy="225" r="35" fill="#2d3436" stroke="#4facfe" stroke-width="2"/>
+    <circle cx="215" cy="225" r="20" fill="#111"/>
+    <!-- Lens reflection -->
+    <ellipse cx="200" cy="212" rx="12" ry="8" fill="rgba(255,255,255,0.15)" transform="rotate(-20, 200, 212)"/>
+    <!-- Viewfinder -->
+    <rect x="280" y="155" width="30" height="20" rx="4" fill="#555"/>
+  </g>
+  <!-- Folder -->
+  <g filter="url(#pshadow1)" transform="translate(280, 260)">
+    <!-- Folder tab -->
+    <path d="M 0 15 L 0 5 Q 0 0, 5 0 L 50 0 L 65 15 L 160 15 Q 165 15, 165 20 L 165 20 L 0 20 Z" fill="#ffc107"/>
+    <!-- Folder body -->
+    <rect x="0" y="15" width="165" height="110" rx="5" fill="#ffca28"/>
+    <!-- Folder front -->
+    <rect x="0" y="35" width="165" height="90" rx="5" fill="#ffd54f"/>
+    <!-- Calendar/date icon on folder -->
+    <rect x="55" y="50" width="55" height="55" rx="6" fill="#fff" opacity="0.9"/>
+    <rect x="55" y="50" width="55" height="18" rx="6" fill="#f44336"/>
+    <text x="82" y="64" text-anchor="middle" font-size="11" fill="#fff" font-weight="bold" font-family="Arial">DATE</text>
+    <text x="82" y="92" text-anchor="middle" font-size="24" fill="#333" font-weight="bold" font-family="Arial">31</text>
+  </g>
+  <!-- Arrow from camera to folder -->
+  <g stroke="#fff" stroke-width="4" fill="#fff" opacity="0.7">
+    <path d="M 330 245 L 350 265" fill="none" stroke-linecap="round"/>
+    <polygon points="355,260 360,275 345,270"/>
+  </g>
+  <!-- Small photo icons floating -->
+  <g opacity="0.5">
+    <rect x="60" y="80" width="30" height="25" rx="3" fill="#fff" transform="rotate(-10, 75, 92)"/>
+    <rect x="410" y="160" width="25" height="20" rx="3" fill="#fff" transform="rotate(15, 422, 170)"/>
+  </g>
+</svg>

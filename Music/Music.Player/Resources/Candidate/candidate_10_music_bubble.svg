@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg10" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#43e97b"/>
+      <stop offset="100%" style="stop-color:#38f9d7"/>
+    </linearGradient>
+    <linearGradient id="bubble10" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff"/>
+      <stop offset="100%" style="stop-color:#f0f8ff"/>
+    </linearGradient>
+    <filter id="shadow10">
+      <feDropShadow dx="2" dy="4" stdDeviation="8" flood-color="#000" flood-opacity="0.15"/>
+    </filter>
+    <linearGradient id="note10" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#6c5ce7"/>
+      <stop offset="100%" style="stop-color:#a29bfe"/>
+    </linearGradient>
+  </defs>
+  <!-- Background -->
+  <rect width="512" height="512" rx="100" fill="url(#bg10)"/>
+  <!-- Decorative patterns -->
+  <g opacity="0.1" fill="#fff">
+    <circle cx="80" cy="80" r="30"/>
+    <circle cx="440" cy="100" r="20"/>
+    <circle cx="100" cy="440" r="25"/>
+    <circle cx="420" cy="420" r="35"/>
+  </g>
+  <!-- Speech bubble -->
+  <g filter="url(#shadow10)">
+    <path d="M 256 60
+             C 400 60, 450 140, 450 230
+             C 450 320, 400 380, 256 380
+             C 200 380, 140 360, 100 380
+             L 140 340
+             C 80 310, 62 260, 62 230
+             C 62 140, 112 60, 256 60 Z"
+          fill="url(#bubble10)" opacity="0.95"/>
+  </g>
+  <!-- Double eighth notes inside bubble -->
+  <g transform="translate(200, 150)" fill="url(#note10)">
+    <!-- Note head 1 -->
+    <ellipse cx="0" cy="95" rx="28" ry="20" transform="rotate(-15, 0, 95)"/>
+    <!-- Note head 2 -->
+    <ellipse cx="80" cy="75" rx="28" ry="20" transform="rotate(-15, 80, 75)"/>
+    <!-- Stem 1 -->
+    <rect x="24" y="-10" width="7" height="110" rx="3.5"/>
+    <!-- Stem 2 -->
+    <rect x="104" y="-30" width="7" height="110" rx="3.5"/>
+    <!-- Beam connecting -->
+    <path d="M 24 -10 L 104 -30 L 104 -15 L 24 5 Z"/>
+  </g>
+  <!-- Stars around notes -->
+  <g fill="#ffd700">
+    <polygon points="170,160 175,172 188,172 178,180 181,193 170,185 159,193 162,180 152,172 165,172" transform="scale(0.6) translate(100, 80)"/>
+    <polygon points="170,160 175,172 188,172 178,180 181,193 170,185 159,193 162,180 152,172 165,172" transform="scale(0.5) translate(530, 130)"/>
+    <polygon points="170,160 175,172 188,172 178,180 181,193 170,185 159,193 162,180 152,172 165,172" transform="scale(0.45) translate(650, 400)"/>
+  </g>
+  <!-- Cute sparkle dots -->
+  <circle cx="180" cy="300" r="5" fill="#6c5ce7" opacity="0.4"/>
+  <circle cx="350" cy="130" r="4" fill="#6c5ce7" opacity="0.3"/>
+  <circle cx="320" cy="320" r="3" fill="#a29bfe" opacity="0.4"/>
+  <!-- Text under bubble -->
+  <text x="256" y="450" text-anchor="middle" font-size="28" font-weight="bold" fill="#fff" font-family="Arial, sans-serif" opacity="0.8">♪ Play ♪</text>
+</svg>

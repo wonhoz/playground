@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="sbg10" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2193b0"/>
+      <stop offset="100%" style="stop-color:#6dd5ed"/>
+    </linearGradient>
+    <linearGradient id="smon10" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#37474f"/>
+      <stop offset="100%" style="stop-color:#263238"/>
+    </linearGradient>
+    <linearGradient id="sscreen10" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a237e"/>
+      <stop offset="100%" style="stop-color:#283593"/>
+    </linearGradient>
+    <filter id="sglow10">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- Background -->
+  <rect width="512" height="512" rx="100" fill="url(#sbg10)"/>
+  <!-- Clouds -->
+  <g opacity="0.1" fill="#fff">
+    <ellipse cx="100" cy="100" rx="50" ry="20"/>
+    <ellipse cx="400" cy="80" rx="40" ry="15"/>
+  </g>
+  <!-- Monitor -->
+  <g>
+    <!-- Monitor body -->
+    <rect x="80" y="80" width="352" height="260" rx="18" fill="url(#smon10)"/>
+    <!-- Screen bezel -->
+    <rect x="95" y="95" width="322" height="225" rx="8" fill="url(#sscreen10)"/>
+    <!-- Screen content - desktop with green status -->
+    <rect x="100" y="100" width="312" height="215" rx="5" fill="#1a237e"/>
+    <!-- Desktop wallpaper gradient -->
+    <rect x="100" y="100" width="312" height="215" rx="5" fill="url(#sscreen10)" opacity="0.8"/>
+    <!-- Monitor stand -->
+    <rect x="220" y="340" width="72" height="45" rx="3" fill="#455a64"/>
+    <!-- Monitor base -->
+    <rect x="180" y="380" width="152" height="12" rx="6" fill="#546e7a"/>
+  </g>
+  <!-- Screen content -->
+  <g>
+    <!-- Active mouse cursor -->
+    <g transform="translate(280, 200)" filter="url(#sglow10)">
+      <path d="M 0 0 L 0 28 L 8 20 L 16 32 L 20 30 L 12 18 L 22 16 Z" fill="#fff"/>
+    </g>
+    <!-- Movement trail -->
+    <g opacity="0.3" fill="none" stroke="#fff" stroke-width="1" stroke-dasharray="3 3">
+      <path d="M 200 250 Q 240 220 280 200"/>
+    </g>
+    <!-- Status indicators on screen -->
+    <!-- Green active dot -->
+    <g filter="url(#sglow10)">
+      <circle cx="150" cy="280" r="8" fill="#00e676"/>
+      <circle cx="150" cy="280" r="4" fill="#69f0ae"/>
+    </g>
+    <text x="165" y="285" font-size="12" fill="#69f0ae" font-family="Consolas, monospace">Active</text>
+    <!-- Clock on screen -->
+    <text x="340" y="135" text-anchor="end" font-size="14" fill="rgba(255,255,255,0.5)" font-family="Consolas, monospace">14:32</text>
+    <!-- Slack-like icon hint -->
+    <g transform="translate(120, 130)">
+      <rect x="0" y="0" width="8" height="22" rx="4" fill="#e91e63" opacity="0.6"/>
+      <rect x="12" y="5" width="8" height="17" rx="4" fill="#00bcd4" opacity="0.6"/>
+      <rect x="24" y="0" width="8" height="22" rx="4" fill="#4caf50" opacity="0.6"/>
+      <rect x="36" y="8" width="8" height="14" rx="4" fill="#ff9800" opacity="0.6"/>
+    </g>
+  </g>
+  <!-- Radiating "awake" waves from monitor -->
+  <g filter="url(#sglow10)" opacity="0.2">
+    <path d="M 80 210 Q 60 210 40 200" fill="none" stroke="#69f0ae" stroke-width="3" stroke-linecap="round"/>
+    <path d="M 80 210 Q 50 220 30 220" fill="none" stroke="#69f0ae" stroke-width="2" stroke-linecap="round"/>
+    <path d="M 432 210 Q 452 210 472 200" fill="none" stroke="#69f0ae" stroke-width="3" stroke-linecap="round"/>
+    <path d="M 432 210 Q 462 220 482 220" fill="none" stroke="#69f0ae" stroke-width="2" stroke-linecap="round"/>
+  </g>
+  <!-- Power indicator LED on monitor -->
+  <circle cx="256" cy="330" r="4" fill="#00e676" filter="url(#sglow10)"/>
+  <!-- Cute keyboard -->
+  <g transform="translate(140, 410)">
+    <rect x="0" y="0" width="232" height="50" rx="8" fill="#78909c" opacity="0.5"/>
+    <g fill="#90a4ae" opacity="0.6">
+      <rect x="10" y="8" width="20" height="12" rx="2"/>
+      <rect x="35" y="8" width="20" height="12" rx="2"/>
+      <rect x="60" y="8" width="20" height="12" rx="2"/>
+      <rect x="85" y="8" width="20" height="12" rx="2"/>
+      <rect x="110" y="8" width="20" height="12" rx="2"/>
+      <rect x="135" y="8" width="20" height="12" rx="2"/>
+      <rect x="160" y="8" width="20" height="12" rx="2"/>
+      <rect x="185" y="8" width="35" height="12" rx="2"/>
+      <rect x="25" y="26" width="80" height="12" rx="2"/>
+      <rect x="110" y="26" width="80" height="12" rx="2"/>
+    </g>
+  </g>
+</svg>

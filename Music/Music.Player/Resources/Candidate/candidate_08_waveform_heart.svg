@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg8" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ee9ca7"/>
+      <stop offset="100%" style="stop-color:#ffdde1"/>
+    </linearGradient>
+    <linearGradient id="heart8" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ff416c"/>
+      <stop offset="100%" style="stop-color:#ff4b2b"/>
+    </linearGradient>
+    <filter id="glow8">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <clipPath id="heartClip">
+      <path d="M 256 420
+               C 120 340, 40 240, 80 170
+               C 120 100, 200 100, 256 170
+               C 312 100, 392 100, 432 170
+               C 472 240, 392 340, 256 420 Z"/>
+    </clipPath>
+  </defs>
+  <!-- Background -->
+  <circle cx="256" cy="256" r="250" fill="url(#bg8)"/>
+  <!-- Heart outline glow -->
+  <g filter="url(#glow8)">
+    <path d="M 256 400
+             C 130 325, 60 235, 95 175
+             C 130 115, 200 115, 256 175
+             C 312 115, 382 115, 417 175
+             C 452 235, 382 325, 256 400 Z"
+          fill="url(#heart8)" opacity="0.15"/>
+    <!-- Heart outline -->
+    <path d="M 256 400
+             C 130 325, 60 235, 95 175
+             C 130 115, 200 115, 256 175
+             C 312 115, 382 115, 417 175
+             C 452 235, 382 325, 256 400 Z"
+          fill="none" stroke="url(#heart8)" stroke-width="5"/>
+  </g>
+  <!-- Audio waveform inside heart -->
+  <g clip-path="url(#heartClip)" filter="url(#glow8)">
+    <g stroke="url(#heart8)" stroke-width="4" stroke-linecap="round" fill="none">
+      <!-- Waveform line -->
+      <polyline points="70,270 100,270 120,240 135,290 150,220 170,310 185,200
+                         200,300 215,190 230,320 245,170 256,330 270,170
+                         285,310 300,200 315,290 330,215 345,280
+                         360,240 375,270 400,270 440,270"
+                opacity="0.8"/>
+    </g>
+  </g>
+  <!-- Small hearts floating -->
+  <g fill="#ff416c" opacity="0.4">
+    <path d="M 100 100 C 100 90, 115 85, 115 95 C 115 85, 130 90, 130 100 C 130 115, 115 125, 115 125 C 115 125, 100 115, 100 100 Z" transform="scale(0.6) translate(50, 50)"/>
+    <path d="M 100 100 C 100 90, 115 85, 115 95 C 115 85, 130 90, 130 100 C 130 115, 115 125, 115 125 C 115 125, 100 115, 100 100 Z" transform="scale(0.5) translate(720, 100)"/>
+    <path d="M 100 100 C 100 90, 115 85, 115 95 C 115 85, 130 90, 130 100 C 130 115, 115 125, 115 125 C 115 125, 100 115, 100 100 Z" transform="scale(0.4) translate(200, 900)"/>
+  </g>
+  <!-- Sparkles -->
+  <circle cx="140" cy="120" r="3" fill="#fff" opacity="0.8"/>
+  <circle cx="380" cy="100" r="2.5" fill="#fff" opacity="0.7"/>
+  <circle cx="420" cy="380" r="2" fill="#fff" opacity="0.5"/>
+</svg>

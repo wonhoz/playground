@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg4" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#0f2027"/>
+      <stop offset="50%" style="stop-color:#203a43"/>
+      <stop offset="100%" style="stop-color:#2c5364"/>
+    </linearGradient>
+    <linearGradient id="bar4a" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" style="stop-color:#00d2ff"/>
+      <stop offset="100%" style="stop-color:#3a7bd5"/>
+    </linearGradient>
+    <linearGradient id="bar4b" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" style="stop-color:#f857a6"/>
+      <stop offset="100%" style="stop-color:#ff5858"/>
+    </linearGradient>
+    <linearGradient id="bar4c" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" style="stop-color:#a8ff78"/>
+      <stop offset="100%" style="stop-color:#78ffd6"/>
+    </linearGradient>
+    <linearGradient id="bar4d" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" style="stop-color:#ffd200"/>
+      <stop offset="100%" style="stop-color:#f7971e"/>
+    </linearGradient>
+    <linearGradient id="bar4e" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" style="stop-color:#c471f5"/>
+      <stop offset="100%" style="stop-color:#fa71cd"/>
+    </linearGradient>
+    <filter id="glow4">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- Background -->
+  <circle cx="256" cy="256" r="250" fill="url(#bg4)"/>
+  <!-- Outer ring -->
+  <circle cx="256" cy="256" r="245" fill="none" stroke="#00d2ff" stroke-width="2" opacity="0.3"/>
+  <!-- Equalizer bars (centered, different heights) -->
+  <g filter="url(#glow4)" transform="translate(0, 20)">
+    <!-- Bar 1 -->
+    <rect x="108" y="280" width="28" height="80" rx="14" fill="url(#bar4a)" opacity="0.9"/>
+    <rect x="108" y="200" width="28" height="60" rx="14" fill="url(#bar4a)" opacity="0.5"/>
+    <!-- Bar 2 -->
+    <rect x="148" y="220" width="28" height="140" rx="14" fill="url(#bar4b)" opacity="0.9"/>
+    <rect x="148" y="170" width="28" height="30" rx="14" fill="url(#bar4b)" opacity="0.4"/>
+    <!-- Bar 3 -->
+    <rect x="188" y="160" width="28" height="200" rx="14" fill="url(#bar4c)" opacity="0.9"/>
+    <!-- Bar 4 (tallest - center) -->
+    <rect x="228" y="120" width="28" height="240" rx="14" fill="url(#bar4d)" opacity="0.9"/>
+    <!-- Bar 5 (tallest - center) -->
+    <rect x="268" y="140" width="28" height="220" rx="14" fill="url(#bar4e)" opacity="0.9"/>
+    <!-- Bar 6 -->
+    <rect x="308" y="180" width="28" height="180" rx="14" fill="url(#bar4a)" opacity="0.9"/>
+    <!-- Bar 7 -->
+    <rect x="348" y="230" width="28" height="130" rx="14" fill="url(#bar4b)" opacity="0.9"/>
+    <rect x="348" y="190" width="28" height="20" rx="10" fill="url(#bar4b)" opacity="0.4"/>
+    <!-- Bar 8 -->
+    <rect x="388" y="270" width="28" height="90" rx="14" fill="url(#bar4c)" opacity="0.9"/>
+  </g>
+  <!-- Reflection line at bottom -->
+  <line x1="108" y1="385" x2="416" y2="385" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+</svg>

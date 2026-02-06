@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg9" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2b5876"/>
+      <stop offset="100%" style="stop-color:#4e4376"/>
+    </linearGradient>
+    <linearGradient id="key9w" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff"/>
+      <stop offset="100%" style="stop-color:#e8e8e8"/>
+    </linearGradient>
+    <filter id="glow9">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- Background -->
+  <rect width="512" height="512" rx="90" fill="url(#bg9)"/>
+  <!-- Stars in background -->
+  <g opacity="0.3" fill="#fff">
+    <circle cx="80" cy="80" r="2"/>
+    <circle cx="200" cy="50" r="1.5"/>
+    <circle cx="350" cy="70" r="2"/>
+    <circle cx="450" cy="110" r="1.5"/>
+    <circle cx="60" cy="200" r="1"/>
+    <circle cx="460" cy="200" r="1.5"/>
+  </g>
+  <!-- Wavy piano keys - white keys -->
+  <g filter="url(#glow9)">
+    <g transform="translate(0, 30)">
+      <!-- White key 1 -->
+      <path d="M 56 200 Q 66 180, 76 200 L 76 370 Q 66 390, 56 370 Z" fill="url(#key9w)" stroke="#ccc" stroke-width="1" rx="4"/>
+      <!-- White key 2 -->
+      <path d="M 86 190 Q 96 170, 116 185 L 116 355 Q 96 370, 86 360 Z" fill="url(#key9w)" stroke="#ccc" stroke-width="1"/>
+      <!-- White key 3 -->
+      <path d="M 126 175 Q 141 155, 156 175 L 156 345 Q 141 365, 126 345 Z" fill="url(#key9w)" stroke="#ccc" stroke-width="1"/>
+      <!-- White key 4 -->
+      <path d="M 166 165 Q 181 148, 196 168 L 196 338 Q 181 355, 166 335 Z" fill="url(#key9w)" stroke="#ccc" stroke-width="1"/>
+      <!-- White key 5 -->
+      <path d="M 206 162 Q 221 148, 236 165 L 236 335 Q 221 350, 206 332 Z" fill="url(#key9w)" stroke="#ccc" stroke-width="1"/>
+      <!-- White key 6 -->
+      <path d="M 246 165 Q 261 152, 276 170 L 276 340 Q 261 355, 246 335 Z" fill="url(#key9w)" stroke="#ccc" stroke-width="1"/>
+      <!-- White key 7 -->
+      <path d="M 286 175 Q 301 160, 316 180 L 316 350 Q 301 365, 286 345 Z" fill="url(#key9w)" stroke="#ccc" stroke-width="1"/>
+      <!-- White key 8 -->
+      <path d="M 326 188 Q 341 172, 356 192 L 356 362 Q 341 378, 326 358 Z" fill="url(#key9w)" stroke="#ccc" stroke-width="1"/>
+      <!-- White key 9 -->
+      <path d="M 366 200 Q 381 185, 396 205 L 396 375 Q 381 390, 366 370 Z" fill="url(#key9w)" stroke="#ccc" stroke-width="1"/>
+      <!-- White key 10 -->
+      <path d="M 406 215 Q 421 198, 436 218 L 436 388 Q 421 405, 406 385 Z" fill="url(#key9w)" stroke="#ccc" stroke-width="1"/>
+      <!-- White key 11 -->
+      <path d="M 446 230 Q 456 215, 466 235 L 466 395 Q 456 410, 446 395 Z" fill="url(#key9w)" stroke="#ccc" stroke-width="1"/>
+
+      <!-- Black keys -->
+      <path d="M 73 195 Q 83 178, 93 195 L 93 300 Q 83 315, 73 300 Z" fill="#222" stroke="#111" stroke-width="1"/>
+      <path d="M 143 170 Q 153 153, 163 170 L 163 280 Q 153 295, 143 280 Z" fill="#222" stroke="#111" stroke-width="1"/>
+      <path d="M 223 158 Q 233 144, 243 162 L 243 268 Q 233 282, 223 268 Z" fill="#222" stroke="#111" stroke-width="1"/>
+      <path d="M 263 165 Q 273 150, 283 168 L 283 275 Q 273 290, 263 275 Z" fill="#222" stroke="#111" stroke-width="1"/>
+      <path d="M 343 185 Q 353 170, 363 188 L 363 295 Q 353 310, 343 295 Z" fill="#222" stroke="#111" stroke-width="1"/>
+      <path d="M 413 210 Q 423 195, 433 213 L 433 318 Q 423 333, 413 318 Z" fill="#222" stroke="#111" stroke-width="1"/>
+    </g>
+  </g>
+  <!-- Glowing notes above -->
+  <g filter="url(#glow9)" fill="#ffd700" opacity="0.7">
+    <text x="140" y="130" font-size="32" font-family="serif">♪</text>
+    <text x="280" y="110" font-size="40" font-family="serif">♫</text>
+    <text x="380" y="140" font-size="28" font-family="serif">♪</text>
+  </g>
+</svg>

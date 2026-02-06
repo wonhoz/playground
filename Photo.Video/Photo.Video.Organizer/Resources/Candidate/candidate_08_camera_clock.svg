@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="pbg8" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#6a11cb"/>
+      <stop offset="100%" style="stop-color:#2575fc"/>
+    </linearGradient>
+    <linearGradient id="pcam8" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#eceff1"/>
+      <stop offset="100%" style="stop-color:#cfd8dc"/>
+    </linearGradient>
+    <filter id="pshadow8">
+      <feDropShadow dx="2" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.2"/>
+    </filter>
+  </defs>
+  <!-- Background -->
+  <rect width="512" height="512" rx="100" fill="url(#pbg8)"/>
+  <!-- Background dots pattern -->
+  <g opacity="0.05" fill="#fff">
+    <circle cx="50" cy="50" r="8"/><circle cx="110" cy="50" r="8"/><circle cx="170" cy="50" r="8"/>
+    <circle cx="50" cy="110" r="8"/><circle cx="110" cy="110" r="8"/><circle cx="170" cy="110" r="8"/>
+    <circle cx="350" cy="400" r="8"/><circle cx="410" cy="400" r="8"/><circle cx="470" cy="400" r="8"/>
+    <circle cx="350" cy="460" r="8"/><circle cx="410" cy="460" r="8"/><circle cx="470" cy="460" r="8"/>
+  </g>
+  <!-- Camera -->
+  <g filter="url(#pshadow8)">
+    <!-- Camera flash -->
+    <rect x="115" y="108" width="55" height="22" rx="8" fill="#b0bec5"/>
+    <!-- Camera body -->
+    <rect x="80" y="125" width="260" height="190" rx="22" fill="url(#pcam8)"/>
+    <!-- Lens outer -->
+    <circle cx="210" cy="220" r="68" fill="#78909c" stroke="#90a4ae" stroke-width="3"/>
+    <circle cx="210" cy="220" r="56" fill="#455a64"/>
+    <circle cx="210" cy="220" r="42" fill="#263238" stroke="#37474f" stroke-width="2"/>
+    <!-- Lens inner reflection -->
+    <ellipse cx="195" cy="205" rx="18" ry="12" fill="rgba(255,255,255,0.1)" transform="rotate(-25, 195, 205)"/>
+    <!-- Lens center -->
+    <circle cx="210" cy="220" r="15" fill="#1a237e"/>
+    <circle cx="205" cy="215" r="5" fill="rgba(255,255,255,0.2)"/>
+    <!-- Viewfinder -->
+    <rect x="290" y="140" width="35" height="24" rx="5" fill="#90a4ae"/>
+    <!-- Shutter button -->
+    <circle cx="300" cy="115" r="14" fill="#ef5350" stroke="#c62828" stroke-width="2"/>
+  </g>
+  <!-- Clock overlay (bottom right of camera) -->
+  <g filter="url(#pshadow8)">
+    <circle cx="370" cy="350" r="65" fill="#fff"/>
+    <circle cx="370" cy="350" r="58" fill="#f5f5f5" stroke="#e0e0e0" stroke-width="2"/>
+    <!-- Clock marks -->
+    <g stroke="#bbb" stroke-width="2">
+      <line x1="370" y1="298" x2="370" y2="308"/>
+      <line x1="370" y1="392" x2="370" y2="402"/>
+      <line x1="318" y1="350" x2="328" y2="350"/>
+      <line x1="412" y1="350" x2="422" y2="350"/>
+    </g>
+    <!-- Clock hands -->
+    <line x1="370" y1="350" x2="370" y2="315" stroke="#333" stroke-width="3" stroke-linecap="round"/>
+    <line x1="370" y1="350" x2="395" y2="340" stroke="#6a11cb" stroke-width="2.5" stroke-linecap="round"/>
+    <!-- Center dot -->
+    <circle cx="370" cy="350" r="4" fill="#6a11cb"/>
+    <!-- Date display -->
+    <rect x="380" y="342" width="28" height="16" rx="3" fill="#e3f2fd" stroke="#90caf9" stroke-width="1"/>
+    <text x="394" y="354" text-anchor="middle" font-size="9" fill="#1565c0" font-weight="bold" font-family="Arial">15</text>
+  </g>
+  <!-- Arrow connecting camera to clock -->
+  <path d="M 310 290 Q 340 320 350 335" fill="none" stroke="#fff" stroke-width="2" opacity="0.5" stroke-linecap="round"/>
+</svg>

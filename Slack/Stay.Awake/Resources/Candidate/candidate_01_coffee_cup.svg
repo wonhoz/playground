@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="sbg1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2c3e50"/>
+      <stop offset="100%" style="stop-color:#3498db"/>
+    </linearGradient>
+    <linearGradient id="scup1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#fff"/>
+      <stop offset="100%" style="stop-color:#ecf0f1"/>
+    </linearGradient>
+    <linearGradient id="scoffee1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#8B4513"/>
+      <stop offset="100%" style="stop-color:#6B3410"/>
+    </linearGradient>
+    <filter id="sglow1">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- Background -->
+  <rect width="512" height="512" rx="100" fill="url(#sbg1)"/>
+  <!-- Stars in background -->
+  <g fill="#fff" opacity="0.2">
+    <circle cx="80" cy="80" r="2"/><circle cx="150" cy="60" r="1.5"/>
+    <circle cx="380" cy="70" r="2"/><circle cx="440" cy="120" r="1.5"/>
+    <circle cx="60" cy="160" r="1"/><circle cx="450" cy="180" r="1.5"/>
+    <circle cx="100" cy="430" r="1.5"/><circle cx="420" cy="440" r="2"/>
+  </g>
+  <!-- Coffee cup -->
+  <g filter="url(#sglow1)">
+    <!-- Saucer -->
+    <ellipse cx="240" cy="400" rx="130" ry="25" fill="#bdc3c7" opacity="0.5"/>
+    <!-- Cup body -->
+    <path d="M 140 200 L 155 380 Q 160 400, 240 400 Q 320 400, 325 380 L 340 200 Z" fill="url(#scup1)"/>
+    <!-- Coffee liquid -->
+    <ellipse cx="240" cy="230" rx="95" ry="18" fill="url(#scoffee1)"/>
+    <!-- Cup rim -->
+    <ellipse cx="240" cy="200" rx="100" ry="20" fill="url(#scup1)" stroke="#ddd" stroke-width="2"/>
+    <ellipse cx="240" cy="200" rx="95" ry="17" fill="url(#scoffee1)"/>
+    <!-- Coffee surface highlight -->
+    <ellipse cx="220" cy="225" rx="40" ry="8" fill="rgba(255,255,255,0.1)"/>
+    <!-- Handle -->
+    <path d="M 340 230 C 400 230, 400 320, 340 320" fill="none" stroke="url(#scup1)" stroke-width="18" stroke-linecap="round"/>
+    <path d="M 340 240 C 385 240, 385 310, 340 310" fill="none" stroke="url(#sbg1)" stroke-width="8" stroke-linecap="round"/>
+  </g>
+  <!-- Steam -->
+  <g filter="url(#sglow1)" opacity="0.6" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round">
+    <path d="M 200 180 C 195 150, 210 140, 205 110 C 200 80, 215 65, 210 40"/>
+    <path d="M 240 175 C 235 145, 250 130, 245 100 C 240 70, 255 55, 250 30"/>
+    <path d="M 280 180 C 275 150, 290 140, 285 110 C 280 80, 295 65, 290 40"/>
+  </g>
+  <!-- "Awake" indicator - small lightning bolt -->
+  <g transform="translate(370, 140)" filter="url(#sglow1)">
+    <polygon points="20,0 5,22 18,22 8,42 30,16 17,16 25,0" fill="#f1c40f"/>
+  </g>
+  <!-- Cute face on cup -->
+  <g opacity="0.4">
+    <circle cx="210" cy="290" r="5" fill="#555"/>
+    <circle cx="270" cy="290" r="5" fill="#555"/>
+    <path d="M 225 315 Q 240 330 255 315" fill="none" stroke="#555" stroke-width="3" stroke-linecap="round"/>
+  </g>
+</svg>

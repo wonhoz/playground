@@ -4,9 +4,13 @@
       <stop offset="0%" style="stop-color:#4facfe"/>
       <stop offset="100%" style="stop-color:#00f2fe"/>
     </linearGradient>
-    <linearGradient id="pcam1" x1="0%" y1="0%" x2="100%" y2="100%">
+    <linearGradient id="pframe1" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" style="stop-color:#2d3436"/>
       <stop offset="100%" style="stop-color:#636e72"/>
+    </linearGradient>
+    <linearGradient id="psky1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#74b9ff"/>
+      <stop offset="100%" style="stop-color:#a29bfe"/>
     </linearGradient>
     <filter id="pshadow1">
       <feDropShadow dx="2" dy="4" stdDeviation="5" flood-color="#000" flood-opacity="0.2"/>
@@ -17,21 +21,19 @@
   <!-- Decorative circles -->
   <circle cx="400" cy="80" r="50" fill="rgba(255,255,255,0.08)"/>
   <circle cx="80" cy="420" r="40" fill="rgba(255,255,255,0.06)"/>
-  <!-- Camera body -->
+  <!-- Photo frame -->
   <g filter="url(#pshadow1)">
-    <!-- Flash bump -->
-    <rect x="130" y="120" width="60" height="25" rx="8" fill="#555"/>
-    <!-- Main body -->
-    <rect x="100" y="140" width="230" height="170" rx="20" fill="url(#pcam1)"/>
-    <!-- Lens ring -->
-    <circle cx="215" cy="225" r="60" fill="#555" stroke="#666" stroke-width="3"/>
-    <circle cx="215" cy="225" r="48" fill="#1a1a2e"/>
-    <circle cx="215" cy="225" r="35" fill="#2d3436" stroke="#4facfe" stroke-width="2"/>
-    <circle cx="215" cy="225" r="20" fill="#111"/>
-    <!-- Lens reflection -->
-    <ellipse cx="200" cy="212" rx="12" ry="8" fill="rgba(255,255,255,0.15)" transform="rotate(-20, 200, 212)"/>
-    <!-- Viewfinder -->
-    <rect x="280" y="155" width="30" height="20" rx="4" fill="#555"/>
+    <!-- Frame border -->
+    <rect x="90" y="100" width="250" height="210" rx="12" fill="url(#pframe1)"/>
+    <!-- Photo inner area -->
+    <rect x="102" y="112" width="226" height="186" rx="6" fill="url(#psky1)"/>
+    <!-- Sun -->
+    <circle cx="160" cy="155" r="25" fill="#ffd93d"/>
+    <!-- Mountains -->
+    <polygon points="102,298 170,190 238,298" fill="#2d6a4f"/>
+    <polygon points="180,298 260,210 328,298" fill="#40916c"/>
+    <!-- Ground -->
+    <rect x="102" y="270" width="226" height="28" rx="0" fill="#52b788"/>
   </g>
   <!-- Folder -->
   <g filter="url(#pshadow1)" transform="translate(280, 260)">
@@ -47,7 +49,7 @@
     <text x="82" y="64" text-anchor="middle" font-size="11" fill="#fff" font-weight="bold" font-family="Arial">DATE</text>
     <text x="82" y="92" text-anchor="middle" font-size="24" fill="#333" font-weight="bold" font-family="Arial">31</text>
   </g>
-  <!-- Arrow from camera to folder -->
+  <!-- Arrow from photo to folder -->
   <g stroke="#fff" stroke-width="4" fill="#fff" opacity="0.7">
     <path d="M 330 245 L 350 265" fill="none" stroke-linecap="round"/>
     <polygon points="355,260 360,275 345,270"/>

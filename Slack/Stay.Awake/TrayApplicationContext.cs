@@ -302,12 +302,9 @@ Slack 자리 비움 상태 방지 도구
 
         private static Icon CreateIcon(bool isRunning)
         {
-            // IconGenerator를 사용하여 Slack 테마 아이콘 생성
-            var bitmap = isRunning
-                ? IconGenerator.CreateRunningIcon(32)
-                : IconGenerator.CreateStoppedIcon(32);
-
-            return Icon.FromHandle(bitmap.GetHicon());
+            return isRunning
+                ? IconGenerator.LoadRunningIcon()
+                : IconGenerator.LoadStoppedIcon();
         }
 
         protected override void Dispose(bool disposing)

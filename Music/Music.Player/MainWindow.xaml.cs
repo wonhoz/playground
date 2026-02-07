@@ -494,9 +494,10 @@ namespace Music.Player
 
         private void AddTrack(string filePath)
         {
-            if (_playlist.Any(t => t.FilePath == filePath)) return;
+            var fullPath = System.IO.Path.GetFullPath(filePath);
+            if (_playlist.Any(t => string.Equals(t.FilePath, fullPath, StringComparison.OrdinalIgnoreCase))) return;
 
-            var track = TrackInfo.FromFile(filePath);
+            var track = TrackInfo.FromFile(fullPath);
             _playlist.Add(track);
         }
 
@@ -565,7 +566,8 @@ namespace Music.Player
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
-                var files = (string[])e.Data.GetData(DataFormats.FileDrop);
+                var files = e.Data.GetData(DataFormats.FileDrop) as string[];
+                if (files == null) return;
                 AddFiles(files);
 
                 // Show playlist if hidden
@@ -594,9 +596,11 @@ namespace Music.Player
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
-                var files = (string[])e.Data.GetData(DataFormats.FileDrop);
+                var files = e.Data.GetData(DataFormats.FileDrop) as string[];
+                if (files == null) return;
                 AddFiles(files);
             }
+            e.Handled = true;
         }
 
         #endregion
@@ -685,8 +689,11 @@ namespace Music.Player
             }
             else if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
-                var files = (string[])e.Data.GetData(DataFormats.FileDrop);
-                AddFiles(files);
+                var files = e.Data.GetData(DataFormats.FileDrop) as string[];
+                if (files != null)
+                {
+                    AddFiles(files);
+                }
                 e.Handled = true;
             }
         }
@@ -826,8 +833,7 @@ namespace Music.Player
             {
                 if (File.Exists(arg) && SupportedExtensions.Contains(System.IO.Path.GetExtension(arg).ToLower()))
                 {
-                    var track = TrackInfo.FromFile(arg);
-                    _playlist.Add(track);
+                    AddTrack(arg);
                 }
             }
 

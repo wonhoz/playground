@@ -60,9 +60,8 @@ namespace StayAwake
 
             _trayIcon.DoubleClick += (s, e) => ToggleRunning();
 
-            // 시작 알림
-            _trayIcon.ShowBalloonTip(2000, "StayAwake",
-                "더블클릭하여 시작/정지\n우클릭하여 메뉴 열기", ToolTipIcon.Info);
+            // 앱 실행 시 자동 시작
+            ToggleRunning();
         }
 
         private ContextMenuStrip CreateContextMenu()

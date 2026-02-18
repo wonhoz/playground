@@ -16,6 +16,7 @@ namespace StayAwake
         private ToolStripMenuItem _intervalItem = null!;
         private ToolStripMenuItem _distanceItem = null!;
         private ToolStripMenuItem _statusItem = null!;
+        private ToolStripMenuItem _skipIfActiveItem = null!;
 
         private bool _isRunning = false;
         private int _intervalMinutes = 3; // 기본 3분 (Slack 10분 타임아웃의 1/3)
@@ -122,6 +123,13 @@ namespace StayAwake
             };
             menu.Items.Add(preventSleepItem);
 
+            // 사용 중 건너뛰기
+            _skipIfActiveItem = new ToolStripMenuItem("사용 중이면 건너뛰기", null, (s, e) => ToggleSkipIfActive())
+            {
+                Checked = _simulator.SkipIfUserActive
+            };
+            menu.Items.Add(_skipIfActiveItem);
+
             menu.Items.Add(new ToolStripSeparator());
 
             // 지금 실행
@@ -175,6 +183,7 @@ namespace StayAwake
         {
             _intervalMinutes = minutes;
             _activityTimer.Interval = minutes * 60 * 1000;
+            _simulator.IdleThresholdSeconds = minutes * 60; // 유휴 임계값을 타이머 간격과 동일하게
             _intervalItem.Text = $"간격: {minutes}분";
 
             // 체크 상태 업데이트
@@ -236,34 +245,46 @@ namespace StayAwake
             }
         }
 
+        private void ToggleSkipIfActive()
+        {
+            _simulator.SkipIfUserActive = !_simulator.SkipIfUserActive;
+            _skipIfActiveItem.Checked = _simulator.SkipIfUserActive;
+        }
+
         private void OnTimerTick(object? sender, EventArgs e)
         {
-            _simulator.SimulateActivity();
-            _activityCount++;
-            UpdateStatus();
+            bool simulated = _simulator.SimulateActivity();
+            if (simulated)
+            {
+                _activityCount++;
+            }
+            UpdateStatus(simulated);
         }
 
         private void SimulateNow()
         {
-            _simulator.SimulateActivity();
-            if (_isRunning)
+            bool simulated = _simulator.SimulateActivity();
+            if (_isRunning && simulated)
             {
                 _activityCount++;
-                UpdateStatus();
+                UpdateStatus(simulated);
             }
-            _trayIcon.ShowBalloonTip(1000, "StayAwake",
-                $"활동 시뮬레이션 실행됨 ({_simulator.MoveDistance}px 이동)", ToolTipIcon.Info);
+            var message = simulated
+                ? $"활동 시뮬레이션 실행됨 ({_simulator.MoveDistance}px 이동)"
+                : "사용자 활동 감지됨 - 시뮬레이션 건너뜀";
+            _trayIcon.ShowBalloonTip(1000, "StayAwake", message, ToolTipIcon.Info);
         }
 
-        private void UpdateStatus()
+        private void UpdateStatus(bool? lastSimulated = null)
         {
             var elapsed = DateTime.Now - _startTime;
-            _statusItem.Text = $"상태: 실행 중 ({_activityCount}회, {elapsed:hh\\:mm\\:ss})";
+            var skipInfo = lastSimulated == false ? " (건너뜀)" : "";
+            _statusItem.Text = $"상태: 실행 중 ({_activityCount}회{skipInfo}, {elapsed:hh\\:mm\\:ss})";
         }
 
         private void ShowAbout()
         {
-            var message = $@"StayAwake v1.1
+            var message = $@"StayAwake v1.2
 
 Slack 자리 비움 상태 방지 도구
 
@@ -275,12 +296,13 @@ Slack 자리 비움 상태 방지 도구
 [동작 방식]
 • 주기적으로 마우스를 이동 후 원위치
 • SetThreadExecutionState로 디스플레이 절전 방지
-• 10분 내에 활동이 있으면 Active 유지
+• 사용자가 직접 활동 중이면 마우스 이동 자동 건너뜀
 
 [현재 설정]
 • 간격: {_intervalMinutes}분
 • 이동 거리: {_simulator.MoveDistance}px
 • 디스플레이 절전 방지: {(_simulator.PreventDisplaySleep ? "켜짐" : "꺼짐")}
+• 사용 중 건너뛰기: {(_simulator.SkipIfUserActive ? "켜짐" : "꺼짐")}
 
 [사용법]
 • 더블클릭: 시작/정지 토글

@@ -36,11 +36,21 @@ namespace StayAwake
         [DllImport("kernel32.dll")]
         private static extern uint SetThreadExecutionState(uint esFlags);
 
+        [DllImport("user32.dll")]
+        private static extern bool GetLastInputInfo(ref LASTINPUTINFO plii);
+
         [StructLayout(LayoutKind.Sequential)]
         private struct POINT
         {
             public int X;
             public int Y;
+        }
+
+        [StructLayout(LayoutKind.Sequential)]
+        private struct LASTINPUTINFO
+        {
+            public uint cbSize;
+            public uint dwTime;
         }
 
         // 마우스 이벤트 플래그
@@ -77,19 +87,37 @@ namespace StayAwake
         /// </summary>
         public bool PreventDisplaySleep { get; set; } = true;
 
+        /// <summary>
+        /// 사용자가 최근에 활동 중이면 마우스/키보드 시뮬레이션 건너뛰기
+        /// </summary>
+        public bool SkipIfUserActive { get; set; } = true;
+
+        /// <summary>
+        /// 마우스/키보드 시뮬레이션을 건너뛰는 유휴 임계값 (초)
+        /// 마지막 입력이 이 시간 이내이면 사용자가 활동 중으로 판단
+        /// </summary>
+        public int IdleThresholdSeconds { get; set; } = 180;
+
         private bool _moveDirection = true;
 
         /// <summary>
         /// 활동 시뮬레이션 실행
         /// </summary>
-        public void SimulateActivity()
+        /// <returns>실제로 시뮬레이션이 실행되면 true, 사용자 활동으로 인해 건너뛰면 false</returns>
+        public bool SimulateActivity()
         {
             try
             {
-                // 디스플레이 & 시스템 절전 방지
+                // 디스플레이 & 시스템 절전 방지 (사용자 활동 여부와 무관하게 항상 실행)
                 if (PreventDisplaySleep)
                 {
                     PreventSleep();
+                }
+
+                // 사용자가 최근에 활동 중이면 마우스/키보드 시뮬레이션 건너뛰기
+                if (SkipIfUserActive && IsUserRecentlyActive())
+                {
+                    return false;
                 }
 
                 // 마우스 이동
@@ -100,11 +128,29 @@ namespace StayAwake
                 {
                     PressF15Key();
                 }
+
+                return true;
             }
             catch
             {
                 // 실패해도 무시 (다음 타이머에서 재시도)
+                return false;
             }
+        }
+
+        /// <summary>
+        /// 사용자가 최근에 입력 활동을 했는지 확인
+        /// </summary>
+        private bool IsUserRecentlyActive()
+        {
+            var lastInputInfo = new LASTINPUTINFO { cbSize = (uint)Marshal.SizeOf<LASTINPUTINFO>() };
+            if (GetLastInputInfo(ref lastInputInfo))
+            {
+                // uint 연산으로 TickCount overflow 안전하게 처리
+                uint idleMilliseconds = (uint)Environment.TickCount - lastInputInfo.dwTime;
+                return idleMilliseconds < (uint)(IdleThresholdSeconds * 1000);
+            }
+            return false;
         }
 
         /// <summary>

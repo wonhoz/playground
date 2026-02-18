@@ -504,23 +504,24 @@ Slack 자리 비움 상태 방지 도구
 
             var label = new Label
             {
-                Text = "Slack User OAuth Token (xoxp-... 또는 xoxb-...):",
+                Text = "Slack User OAuth Token:",
                 AutoSize = true,
                 Left = pad, Top = pad,
                 ForeColor = Color.FromArgb(180, 180, 180)
             };
             var hint = new Label
             {
-                Text = "※ api.slack.com/apps → 앱 선택 → OAuth & Permissions → User Token (users:write 스코프 필요)",
+                Text = "api.slack.com/apps → 앱 선택 → OAuth & Permissions → User OAuth Tokens (xoxp- 또는 xoxe.xoxp-)\r\n" +
+                       "⚠ 메인화면 'App Configuration Tokens'가 아닌, 앱 내부 'OAuth & Permissions' 페이지의 토큰",
                 AutoSize = false,
-                Width = w - pad * 2, Height = 28,
-                Left = pad, Top = pad + 18,
-                ForeColor = Color.FromArgb(120, 120, 120),
+                Width = w - pad * 2, Height = 34,
+                Left = pad, Top = pad + 20,
+                ForeColor = Color.FromArgb(130, 130, 130),
                 Font = new Font("Segoe UI", 7.5f)
             };
             var textBox = new TextBox
             {
-                Left = pad, Top = pad + 50,
+                Left = pad, Top = pad + 62,
                 Width = w - pad * 2,
                 BackColor = Color.FromArgb(50, 50, 50),
                 ForeColor = Color.FromArgb(240, 240, 240),

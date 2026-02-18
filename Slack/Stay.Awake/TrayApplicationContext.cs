@@ -486,8 +486,8 @@ Slack 자리 비움 상태 방지 도구
         private static string? PromptForSlackToken(string current)
         {
             const int pad = 12;
-            const int w = 440;
-            const int h = 155;
+            const int w = 580;
+            const int h = 160;
 
             using var form = new Form
             {

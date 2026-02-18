@@ -22,10 +22,22 @@ namespace StayAwake
         private int _intervalMinutes = 3; // 기본 3분 (Slack 10분 타임아웃의 1/3)
         private int _activityCount = 0;
         private DateTime _startTime;
+        private readonly AppSettings _settings;
 
         public TrayApplicationContext()
         {
-            _simulator = new ActivitySimulator();
+            // 저장된 설정 로드
+            _settings = AppSettings.Load();
+
+            _simulator = new ActivitySimulator
+            {
+                MoveDistance = _settings.MoveDistance,
+                ActivityType = Enum.TryParse<ActivityType>(_settings.ActivityType, out var at) ? at : ActivityType.MouseMove,
+                PreventDisplaySleep = _settings.PreventDisplaySleep,
+                SkipIfUserActive = _settings.SkipIfUserActive,
+                IdleThresholdSeconds = _settings.IntervalMinutes * 60
+            };
+            _intervalMinutes = _settings.IntervalMinutes;
 
             // 타이머 설정
             _activityTimer = new System.Windows.Forms.Timer
@@ -112,8 +124,8 @@ namespace StayAwake
 
             // 활동 유형
             var activityTypeItem = new ToolStripMenuItem("활동 유형");
-            activityTypeItem.DropDownItems.Add(new ToolStripMenuItem("마우스 이동", null, (s, e) => SetActivityType(ActivityType.MouseMove)) { Checked = true });
-            activityTypeItem.DropDownItems.Add(new ToolStripMenuItem("마우스 + 키보드", null, (s, e) => SetActivityType(ActivityType.MouseAndKeyboard)));
+            activityTypeItem.DropDownItems.Add(new ToolStripMenuItem("마우스 이동", null, (s, e) => SetActivityType(ActivityType.MouseMove)) { Checked = _simulator.ActivityType == ActivityType.MouseMove });
+            activityTypeItem.DropDownItems.Add(new ToolStripMenuItem("마우스 + 키보드", null, (s, e) => SetActivityType(ActivityType.MouseAndKeyboard)) { Checked = _simulator.ActivityType == ActivityType.MouseAndKeyboard });
             menu.Items.Add(activityTypeItem);
 
             // 디스플레이 절전 방지
@@ -196,6 +208,8 @@ namespace StayAwake
             {
                 _trayIcon.Text = $"StayAwake - 실행 중 ({_intervalMinutes}분 간격)";
             }
+
+            SaveSettings();
         }
 
         private void SetDistance(int pixels)
@@ -208,6 +222,8 @@ namespace StayAwake
             {
                 item.Checked = item.Text == $"{pixels}px";
             }
+
+            SaveSettings();
         }
 
         private void SetActivityType(ActivityType type)
@@ -225,6 +241,8 @@ namespace StayAwake
                                    (item.Text == "마우스 + 키보드" && type == ActivityType.MouseAndKeyboard);
                 }
             }
+
+            SaveSettings();
         }
 
         private void TogglePreventSleep()
@@ -243,12 +261,25 @@ namespace StayAwake
             {
                 _simulator.AllowSleep();
             }
+
+            SaveSettings();
         }
 
         private void ToggleSkipIfActive()
         {
             _simulator.SkipIfUserActive = !_simulator.SkipIfUserActive;
             _skipIfActiveItem.Checked = _simulator.SkipIfUserActive;
+            SaveSettings();
+        }
+
+        private void SaveSettings()
+        {
+            _settings.IntervalMinutes = _intervalMinutes;
+            _settings.MoveDistance = _simulator.MoveDistance;
+            _settings.ActivityType = _simulator.ActivityType.ToString();
+            _settings.PreventDisplaySleep = _simulator.PreventDisplaySleep;
+            _settings.SkipIfUserActive = _simulator.SkipIfUserActive;
+            _settings.Save();
         }
 
         private void OnTimerTick(object? sender, EventArgs e)

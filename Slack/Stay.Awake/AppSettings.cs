@@ -18,6 +18,7 @@ namespace StayAwake
         public bool SlackAutoStatusEnabled { get; set; } = false;
         public int WorkStartHour { get; set; } = 9;
         public int WorkEndHour { get; set; } = 19;
+        public DateTime? SlackTokenExpiresAt { get; set; }
 
         private static readonly string _settingsPath = Path.Combine(
             Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),

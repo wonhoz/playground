@@ -380,6 +380,9 @@ Slack 자리 비움 상태 방지 도구
 
         private async void OnScheduleTimerTick(object? sender, EventArgs e)
         {
+            // 토큰 만료 감지
+            CheckTokenExpiry();
+
             var result = await _slackScheduler.CheckAndSetPresenceAsync();
             if (result == null) return;
 
@@ -393,6 +396,38 @@ Slack 자리 비움 상태 방지 도구
             {
                 _trayIcon.ShowBalloonTip(2500, "StayAwake",
                     $"Slack 상태 변경 실패 ({label}). 토큰을 확인해주세요.", ToolTipIcon.Warning);
+            }
+        }
+
+        private bool _tokenExpiryNotified = false; // 만료 임박 알림 중복 방지
+
+        private void CheckTokenExpiry()
+        {
+            if (_settings.SlackTokenExpiresAt is not { } expiresAt) return;
+            if (!_slackScheduler.HasToken) return;
+
+            var remaining = expiresAt - DateTime.Now;
+
+            if (remaining <= TimeSpan.Zero)
+            {
+                // 만료됨 → 자동 변경 기능 비활성화
+                _slackScheduler.SetToken(null);
+                _settings.SlackToken = null;
+                _settings.SlackTokenExpiresAt = null;
+                _settings.Save();
+                _tokenExpiryNotified = false;
+
+                _trayIcon.ShowBalloonTip(4000, "StayAwake",
+                    "Slack 토큰이 만료됐습니다.\n토큰 설정 메뉴에서 새 토큰을 입력해주세요.",
+                    ToolTipIcon.Warning);
+            }
+            else if (remaining <= TimeSpan.FromHours(1) && !_tokenExpiryNotified)
+            {
+                // 만료 1시간 전 알림 (한 번만)
+                _tokenExpiryNotified = true;
+                _trayIcon.ShowBalloonTip(5000, "StayAwake",
+                    $"Slack 토큰이 {remaining.Minutes}분 후 만료됩니다.\n지금 새 토큰을 입력하세요.",
+                    ToolTipIcon.Warning);
             }
         }
 
@@ -432,25 +467,33 @@ Slack 자리 비움 상태 방지 도구
 
             _slackScheduler.SetToken(token);
             _settings.SlackToken = token;
+            // 토큰 입력 시점부터 12시간 만료 추적
+            _settings.SlackTokenExpiresAt = string.IsNullOrWhiteSpace(token)
+                ? null
+                : DateTime.Now.AddHours(12);
             _settings.Save();
 
             if (!string.IsNullOrWhiteSpace(token))
             {
-                _trayIcon.ShowBalloonTip(1500, "StayAwake", "Slack 토큰이 저장됐습니다.", ToolTipIcon.Info);
+                _trayIcon.ShowBalloonTip(2000, "StayAwake",
+                    $"Slack 토큰이 저장됐습니다.\n만료: {_settings.SlackTokenExpiresAt:HH:mm} (12시간 후)",
+                    ToolTipIcon.Info);
             }
         }
 
         private static string? PromptForSlackToken(string current)
         {
-            var form = new Form
+            const int pad = 12;
+
+            using var form = new Form
             {
                 Text = "Slack 토큰 설정",
-                Width = 440,
-                Height = 170,
+                ClientSize = new Size(430, 130),
                 FormBorderStyle = FormBorderStyle.FixedDialog,
                 StartPosition = FormStartPosition.CenterScreen,
                 MaximizeBox = false,
                 MinimizeBox = false,
+                AutoScaleMode = AutoScaleMode.Dpi,
                 BackColor = Color.FromArgb(32, 32, 32),
                 ForeColor = Color.FromArgb(240, 240, 240)
             };
@@ -458,22 +501,31 @@ Slack 자리 비움 상태 방지 도구
             var label = new Label
             {
                 Text = "Slack User OAuth Token (xoxp-... 또는 xoxb-...):",
-                Left = 12, Top = 12, Width = 400, ForeColor = Color.FromArgb(200, 200, 200)
+                AutoSize = true,
+                Left = pad, Top = pad,
+                ForeColor = Color.FromArgb(200, 200, 200)
             };
             var textBox = new TextBox
             {
-                Left = 12, Top = 35, Width = 400, Text = current,
-                BackColor = Color.FromArgb(50, 50, 50), ForeColor = Color.FromArgb(240, 240, 240)
-            };
-            var okBtn = new Button
-            {
-                Text = "확인", DialogResult = DialogResult.OK,
-                Left = 240, Top = 80, Width = 80
+                Left = pad, Top = pad + 24,
+                Width = form.ClientSize.Width - pad * 2,
+                BackColor = Color.FromArgb(50, 50, 50),
+                ForeColor = Color.FromArgb(240, 240, 240),
+                Text = current
             };
             var cancelBtn = new Button
             {
                 Text = "취소", DialogResult = DialogResult.Cancel,
-                Left = 332, Top = 80, Width = 80
+                Width = 76, Height = 28,
+                Left = form.ClientSize.Width - pad - 76,
+                Top = form.ClientSize.Height - pad - 28
+            };
+            var okBtn = new Button
+            {
+                Text = "확인", DialogResult = DialogResult.OK,
+                Width = 76, Height = 28,
+                Left = cancelBtn.Left - 8 - 76,
+                Top = cancelBtn.Top
             };
 
             form.Controls.AddRange([label, textBox, okBtn, cancelBtn]);

@@ -394,8 +394,8 @@ Slack 자리 비움 상태 방지 도구
             }
             else
             {
-                _trayIcon.ShowBalloonTip(2500, "StayAwake",
-                    $"Slack 상태 변경 실패 ({label}). 토큰을 확인해주세요.", ToolTipIcon.Warning);
+                _trayIcon.ShowBalloonTip(3000, "StayAwake",
+                    $"Slack 상태 변경 실패: {result.Error}", ToolTipIcon.Warning);
             }
         }
 
@@ -446,18 +446,20 @@ Slack 자리 비움 상태 방지 도구
 
         private async Task SetSlackActiveNowAsync()
         {
-            bool ok = await _slackScheduler.SetActiveAsync();
-            _trayIcon.ShowBalloonTip(1500, "StayAwake",
-                ok ? "Slack 상태를 '활성'으로 변경했습니다." : "Slack 상태 변경 실패. 토큰을 확인해주세요.",
-                ok ? ToolTipIcon.Info : ToolTipIcon.Warning);
+            var r = await _slackScheduler.SetActiveAsync();
+            if (r.Success)
+                _trayIcon.ShowBalloonTip(1500, "StayAwake", "Slack 상태를 '활성'으로 변경했습니다.", ToolTipIcon.Info);
+            else
+                MessageBox.Show(r.Error, "Slack 상태 변경 실패", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
         private async Task SetSlackAwayNowAsync()
         {
-            bool ok = await _slackScheduler.SetAwayAsync();
-            _trayIcon.ShowBalloonTip(1500, "StayAwake",
-                ok ? "Slack 상태를 '자리비움'으로 변경했습니다." : "Slack 상태 변경 실패. 토큰을 확인해주세요.",
-                ok ? ToolTipIcon.Info : ToolTipIcon.Warning);
+            var r = await _slackScheduler.SetAwayAsync();
+            if (r.Success)
+                _trayIcon.ShowBalloonTip(1500, "StayAwake", "Slack 상태를 '자리비움'으로 변경했습니다.", ToolTipIcon.Info);
+            else
+                MessageBox.Show(r.Error, "Slack 상태 변경 실패", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
         private void ConfigureSlackToken()
@@ -484,31 +486,42 @@ Slack 자리 비움 상태 방지 도구
         private static string? PromptForSlackToken(string current)
         {
             const int pad = 12;
+            const int w = 440;
+            const int h = 155;
 
             using var form = new Form
             {
                 Text = "Slack 토큰 설정",
-                ClientSize = new Size(430, 130),
                 FormBorderStyle = FormBorderStyle.FixedDialog,
                 StartPosition = FormStartPosition.CenterScreen,
                 MaximizeBox = false,
                 MinimizeBox = false,
-                AutoScaleMode = AutoScaleMode.Dpi,
+                AutoScaleMode = AutoScaleMode.None, // DPI 자동 스케일 비활성화 → 픽셀 정확도 유지
                 BackColor = Color.FromArgb(32, 32, 32),
                 ForeColor = Color.FromArgb(240, 240, 240)
             };
+            form.ClientSize = new Size(w, h); // AutoScaleMode.None 이후에 설정해야 스케일 영향 없음
 
             var label = new Label
             {
                 Text = "Slack User OAuth Token (xoxp-... 또는 xoxb-...):",
                 AutoSize = true,
                 Left = pad, Top = pad,
-                ForeColor = Color.FromArgb(200, 200, 200)
+                ForeColor = Color.FromArgb(180, 180, 180)
+            };
+            var hint = new Label
+            {
+                Text = "※ api.slack.com/apps → 앱 선택 → OAuth & Permissions → User Token (users:write 스코프 필요)",
+                AutoSize = false,
+                Width = w - pad * 2, Height = 28,
+                Left = pad, Top = pad + 18,
+                ForeColor = Color.FromArgb(120, 120, 120),
+                Font = new Font("Segoe UI", 7.5f)
             };
             var textBox = new TextBox
             {
-                Left = pad, Top = pad + 24,
-                Width = form.ClientSize.Width - pad * 2,
+                Left = pad, Top = pad + 50,
+                Width = w - pad * 2,
                 BackColor = Color.FromArgb(50, 50, 50),
                 ForeColor = Color.FromArgb(240, 240, 240),
                 Text = current
@@ -517,8 +530,8 @@ Slack 자리 비움 상태 방지 도구
             {
                 Text = "취소", DialogResult = DialogResult.Cancel,
                 Width = 76, Height = 28,
-                Left = form.ClientSize.Width - pad - 76,
-                Top = form.ClientSize.Height - pad - 28
+                Left = w - pad - 76,
+                Top = h - pad - 28
             };
             var okBtn = new Button
             {
@@ -528,7 +541,7 @@ Slack 자리 비움 상태 방지 도구
                 Top = cancelBtn.Top
             };
 
-            form.Controls.AddRange([label, textBox, okBtn, cancelBtn]);
+            form.Controls.AddRange([label, hint, textBox, okBtn, cancelBtn]);
             form.AcceptButton = okBtn;
             form.CancelButton = cancelBtn;
 

@@ -1,3 +1,5 @@
+using System.Text.Json;
+
 namespace StayAwake
 {
     /// <summary>
@@ -35,32 +37,33 @@ namespace StayAwake
             // 아침 WorkStartHour시 → 활성
             if (now.Hour == WorkStartHour && _lastActiveSet.Date != now.Date)
             {
-                bool ok = await SetPresenceAsync("auto");
-                if (ok) _lastActiveSet = now;
-                return new SlackPresenceResult("auto", ok);
+                var result = await SetPresenceAsync("auto");
+                if (result.Success) _lastActiveSet = now;
+                return result;
             }
 
             // 저녁 WorkEndHour시 → 자리 비움
             if (now.Hour == WorkEndHour && _lastAwaySet.Date != now.Date)
             {
-                bool ok = await SetPresenceAsync("away");
-                if (ok) _lastAwaySet = now;
-                return new SlackPresenceResult("away", ok);
+                var result = await SetPresenceAsync("away");
+                if (result.Success) _lastAwaySet = now;
+                return result;
             }
 
             return null;
         }
 
-        public async Task<bool> SetActiveAsync() => await SetPresenceAsync("auto");
-        public async Task<bool> SetAwayAsync() => await SetPresenceAsync("away");
+        public Task<SlackPresenceResult> SetActiveAsync() => SetPresenceAsync("auto");
+        public Task<SlackPresenceResult> SetAwayAsync() => SetPresenceAsync("away");
 
         /// <summary>
         /// Slack users.setPresence API 호출
         /// </summary>
         /// <param name="presence">"auto" (활성) 또는 "away" (자리 비움)</param>
-        public async Task<bool> SetPresenceAsync(string presence)
+        public async Task<SlackPresenceResult> SetPresenceAsync(string presence)
         {
-            if (!HasToken) return false;
+            if (!HasToken)
+                return new SlackPresenceResult(presence, false, "토큰이 설정되지 않았습니다.");
 
             try
             {
@@ -73,14 +76,34 @@ namespace StayAwake
                 var response = await _httpClient.PostAsync(
                     "https://slack.com/api/users.setPresence", content);
                 var body = await response.Content.ReadAsStringAsync();
-                return body.Contains("\"ok\":true");
+
+                using var doc = JsonDocument.Parse(body);
+                var root = doc.RootElement;
+
+                if (root.TryGetProperty("ok", out var ok) && ok.GetBoolean())
+                    return new SlackPresenceResult(presence, true, null);
+
+                // 에러 코드를 사람이 읽기 쉬운 메시지로 변환
+                var errorCode = root.TryGetProperty("error", out var err) ? err.GetString() : "unknown";
+                var errorMsg = errorCode switch
+                {
+                    "missing_scope"   => "토큰에 'users:write' 권한이 없습니다.\n앱 설정에서 User Token Scopes에 users:write를 추가하세요.",
+                    "invalid_auth"    => "토큰이 유효하지 않습니다. 새 토큰을 발급하세요.",
+                    "not_authed"      => "인증 정보가 없습니다. 토큰을 확인하세요.",
+                    "token_revoked"   => "토큰이 폐기됐습니다. 새 토큰을 발급하세요.",
+                    "account_inactive"=> "계정이 비활성 상태입니다.",
+                    "no_permission"   => "권한이 없습니다. 워크스페이스 관리자에게 문의하세요.",
+                    _                 => $"오류: {errorCode}"
+                };
+
+                return new SlackPresenceResult(presence, false, errorMsg);
             }
-            catch
+            catch (Exception ex)
             {
-                return false;
+                return new SlackPresenceResult(presence, false, $"네트워크 오류: {ex.Message}");
             }
         }
     }
 
-    public record SlackPresenceResult(string Presence, bool Success);
+    public record SlackPresenceResult(string Presence, bool Success, string? Error);
 }

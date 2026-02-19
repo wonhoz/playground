@@ -267,6 +267,13 @@ namespace Photo.Video.Organizer
                     progress,
                     _cancellationTokenSource.Token);
 
+                // 로그 저장 (옵션)
+                if (SaveLogCheckBox.IsChecked == true)
+                {
+                    var logPath = await OrganizeLogger.SaveLogAsync(result, _destinationPath);
+                    result.LogFilePath = logPath;
+                }
+
                 ShowResult(result);
             }
             catch (OperationCanceledException)
@@ -310,7 +317,9 @@ namespace Photo.Video.Organizer
             ResultErrorText.Text = $"오류: {result.ErrorCount}개";
             ResultErrorText.Visibility = result.ErrorCount > 0 ? Visibility.Visible : Visibility.Collapsed;
 
-            StatusText.Text = $"완료: {result.SuccessCount}개 파일 정리됨";
+            StatusText.Text = result.LogFilePath != null
+                ? $"완료: {result.SuccessCount}개 정리됨  |  로그: {Path.GetFileName(result.LogFilePath)}"
+                : $"완료: {result.SuccessCount}개 파일 정리됨";
 
             // 완료 후 파일 목록 초기화
             _selectedFiles.Clear();

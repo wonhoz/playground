@@ -54,6 +54,7 @@ namespace Photo.Video.Organizer.Services
             public int DuplicateCount { get; set; }
             public int ErrorCount { get; set; }
             public List<OrganizeResult> Results { get; set; } = new();
+            public string? LogFilePath { get; set; }
         }
 
         /// <summary>

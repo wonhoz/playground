@@ -107,10 +107,20 @@ Start-Sleep -Milliseconds 600
 
 Add-Type -AssemblyName System.Windows.Forms
 
-# ESC로 현재 열린 메뉴/팝업 닫기 후 슬래시 커맨드 입력
+# ESC로 현재 열린 메뉴/팝업 닫기
 [System.Windows.Forms.SendKeys]::SendWait('{{ESC}}')
 Start-Sleep -Milliseconds 200
-[System.Windows.Forms.SendKeys]::SendWait('{slashCommand}{{ENTER}}')
+
+# 클립보드로 붙여넣기 (SendKeys는 한글 IME 영향을 받으므로 클립보드 방식 사용)
+$prevClipboard = Get-Clipboard -Raw
+Set-Clipboard -Value '{slashCommand}'
+Start-Sleep -Milliseconds 100
+[System.Windows.Forms.SendKeys]::SendWait('^v')
+Start-Sleep -Milliseconds 200
+[System.Windows.Forms.SendKeys]::SendWait('{{ENTER}}')
+
+# 클립보드 원래 내용 복원
+if ($prevClipboard) {{ Set-Clipboard -Value $prevClipboard }} else {{ [System.Windows.Forms.Clipboard]::Clear() }}
 Start-Sleep -Milliseconds 400
 
 # 이전 창으로 포커스 복귀

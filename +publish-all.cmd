@@ -35,6 +35,9 @@ call :pub "Sound.Board"           "Sound\Sound.Board"                   "SoundBo
 call :pub "Quick.Launcher"        "Tools\Quick.Launcher"                "QuickLauncher.exe"
 call :pub "Workspace.Switcher"    "Tools\Workspace.Switcher"            "WorkspaceSwitcher.exe"
 
+:: Remove .pdb files
+echo !DG!Cleaning .pdb files...!RS!
+del /q "%BIN%\*.pdb" 2>nul
 echo !DG!--------------------------------------------------!RS!
 echo.
 if !FAIL! gtr 0 echo !BD!!RE!Result: !PASS!/!TOTAL! OK  ^|  Failed:!FAILED!!RS!
@@ -49,7 +52,7 @@ set /a TOTAL+=1
 set "NM=%~1"
 set "DIR=%ROOT%%~2"
 set "EX=%~3"
-echo !CY!  > %NM%!RS!
+echo !CY!  ^> %NM%!RS!
 dotnet publish "%DIR%" -c Release -o "%BIN%" > "%TEMP%\pub_%NM%.log" 2>&1
 set "RC=!errorlevel!"
 if !RC! equ 0 set /a PASS+=1

@@ -1,0 +1,165 @@
+<Window x:Class="WorkspaceSwitcher.Dialogs.EditWorkspaceDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="워크스페이스 편집" Height="580" Width="540"
+        Background="#1A1A2E" Foreground="#E0E0E0"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize">
+
+    <Window.Resources>
+        <Style x:Key="Label" TargetType="TextBlock">
+            <Setter Property="Foreground"  Value="#9999CC"/>
+            <Setter Property="FontSize"    Value="12"/>
+            <Setter Property="Margin"      Value="0,0,0,4"/>
+        </Style>
+        <Style x:Key="Input" TargetType="TextBox">
+            <Setter Property="Background"      Value="#26263E"/>
+            <Setter Property="Foreground"      Value="#E0E0E0"/>
+            <Setter Property="BorderBrush"     Value="#44446A"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding"         Value="8,5"/>
+            <Setter Property="FontSize"        Value="13"/>
+        </Style>
+        <Style x:Key="Btn" TargetType="Button">
+            <Setter Property="Background"      Value="#333355"/>
+            <Setter Property="Foreground"      Value="#E0E0E0"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding"         Value="12,6"/>
+            <Setter Property="FontSize"        Value="12"/>
+            <Setter Property="Cursor"          Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="5"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#4A4A7A"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="AccentBtn" TargetType="Button" BasedOn="{StaticResource Btn}">
+            <Setter Property="Background" Value="#5C5CFF"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#7070FF"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- 기본 정보 -->
+        <Grid Grid.Row="0" Margin="0,0,0,16">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- 이름 -->
+            <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"
+                       Style="{StaticResource Label}" Text="워크스페이스 이름"/>
+            <TextBox x:Name="NameBox" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+                     Style="{StaticResource Input}" Margin="0,0,8,0"/>
+
+            <!-- 이모지 -->
+            <TextBox x:Name="EmojiBox" Grid.Row="1" Grid.Column="2"
+                     Style="{StaticResource Input}" Width="52" TextAlignment="Center"
+                     FontSize="20"/>
+        </Grid>
+
+        <!-- 색상 팔레트 -->
+        <StackPanel Grid.Row="1" Margin="0,0,0,16">
+            <TextBlock Style="{StaticResource Label}" Text="색상"/>
+            <WrapPanel x:Name="ColorPanel"/>
+        </StackPanel>
+
+        <!-- 앱 목록 -->
+        <Grid Grid.Row="2" Margin="0,0,0,10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Style="{StaticResource Label}" Text="앱 목록"/>
+
+            <!-- 앱 추가 행 -->
+            <Grid Grid.Row="1" Margin="0,0,0,6">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBox x:Name="NewAppPathBox" Grid.Column="0" Style="{StaticResource Input}"
+                         Margin="0,0,6,0"/>
+                <Button Grid.Column="1" Content="찾기" Style="{StaticResource Btn}"
+                        Margin="0,0,6,0" Click="Browse_Click"/>
+                <Button Grid.Column="2" Content="+ 추가" Style="{StaticResource AccentBtn}"
+                        Click="AddApp_Click"/>
+            </Grid>
+
+            <!-- 앱 항목 리스트 -->
+            <Border Grid.Row="2" Background="#14142A" CornerRadius="8"
+                    BorderBrush="#333355" BorderThickness="1">
+                <ListBox x:Name="AppsList" Background="Transparent" BorderThickness="0"
+                         Foreground="#E0E0E0" FontSize="12" Margin="4">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Margin="4,3">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0">
+                                    <TextBlock Text="{Binding Name}"
+                                               FontWeight="SemiBold" TextTrimming="CharacterEllipsis"/>
+                                    <TextBlock Text="{Binding Path}" FontSize="10"
+                                               Foreground="#666688" TextTrimming="CharacterEllipsis"/>
+                                </StackPanel>
+                                <Button Grid.Column="1" Content="↑" FontSize="12" Width="26"
+                                        Background="Transparent" BorderThickness="0"
+                                        Cursor="Hand" ToolTip="위로" Margin="2,0"
+                                        Click="MoveUp_Click" Tag="{Binding}"/>
+                                <Button Grid.Column="2" Content="🗑" FontSize="14" Width="26"
+                                        Background="Transparent" BorderThickness="0"
+                                        Cursor="Hand" ToolTip="제거" Margin="2,0"
+                                        Click="RemoveApp_Click" Tag="{Binding}"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Border>
+        </Grid>
+
+        <!-- 미리보기 -->
+        <TextBlock Grid.Row="3" x:Name="PreviewText" FontSize="11"
+                   Foreground="#555577" Margin="0,0,0,12"/>
+
+        <!-- 저장 / 닫기 -->
+        <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Content="저장" Style="{StaticResource AccentBtn}" Margin="0,0,8,0" Click="Save_Click"/>
+            <Button Content="취소" Style="{StaticResource Btn}" Click="Cancel_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

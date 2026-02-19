@@ -7,3 +7,4 @@ global using MouseButtonEventArgs = System.Windows.Input.MouseButtonEventArgs;
 global using DragEventArgs        = System.Windows.DragEventArgs;
 global using Clipboard            = System.Windows.Clipboard;
 global using MessageBox           = System.Windows.MessageBox;
+global using Button               = System.Windows.Controls.Button;

@@ -496,7 +496,7 @@
                                 </Viewbox>
                             </ToggleButton>
                             <ToggleButton x:Name="LyricsToggle" Style="{StaticResource ToggleButtonStyle}"
-                                          ToolTip="가사" Margin="4,0,0,0" Click="LyricsToggle_Click">
+                                          ToolTip="Lyrics" Margin="4,0,0,0" Click="LyricsToggle_Click">
                                 <Viewbox Width="18" Height="18">
                                     <Canvas Width="24" Height="24">
                                         <Path Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=ToggleButton}}"
@@ -518,8 +518,35 @@
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
 
-                        <TextBlock Text="Playlist" FontSize="14" FontWeight="SemiBold"
-                                   Foreground="{StaticResource TextPrimaryBrush}" Margin="8,4,8,8"/>
+                        <!-- Playlist Header: title + History / Library icon buttons -->
+                        <Grid Margin="8,4,8,8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Playlist" FontSize="14" FontWeight="SemiBold"
+                                       Foreground="{StaticResource TextPrimaryBrush}" VerticalAlignment="Center"/>
+                            <StackPanel Grid.Column="1" Orientation="Horizontal">
+                                <Button x:Name="HistoryButton" Style="{StaticResource ControlButtonStyle}"
+                                        Click="HistoryButton_Click" ToolTip="History" Width="26" Height="26">
+                                    <Viewbox Width="14" Height="14">
+                                        <Canvas Width="24" Height="24">
+                                            <Path Fill="{StaticResource TextSecondaryBrush}"
+                                                  Data="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7z"/>
+                                        </Canvas>
+                                    </Viewbox>
+                                </Button>
+                                <Button x:Name="LibraryButton" Style="{StaticResource ControlButtonStyle}"
+                                        Click="LibraryButton_Click" ToolTip="Library" Width="26" Height="26" Margin="2,0,0,0">
+                                    <Viewbox Width="14" Height="14">
+                                        <Canvas Width="24" Height="24">
+                                            <Path Fill="{StaticResource TextSecondaryBrush}"
+                                                  Data="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-1 9H9V9h10v2zm-4 4H9v-2h6v2zm4-8H9V5h10v2z"/>
+                                        </Canvas>
+                                    </Viewbox>
+                                </Button>
+                            </StackPanel>
+                        </Grid>
 
                         <!-- Playlist Buttons -->
                         <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="8,0,8,8">
@@ -541,12 +568,6 @@
                             <Button x:Name="LoadPlaylistButton" Content="Load" Height="28" Padding="8,0"
                                     Style="{StaticResource ControlButtonStyle}" Click="LoadPlaylistButton_Click"
                                     ToolTip="Load playlist from file" FontSize="11" Margin="4,0,0,0"/>
-                            <Button x:Name="HistoryButton" Content="기록" Height="28" Padding="8,0"
-                                    Style="{StaticResource ControlButtonStyle}" Click="HistoryButton_Click"
-                                    ToolTip="재생 기록 &amp; 즐겨찾기" FontSize="11" Margin="4,0,0,0"/>
-                            <Button x:Name="LibraryButton" Content="라이브러리" Height="28" Padding="8,0"
-                                    Style="{StaticResource ControlButtonStyle}" Click="LibraryButton_Click"
-                                    ToolTip="음악 라이브러리 탐색" FontSize="11" Margin="4,0,0,0"/>
                         </StackPanel>
 
                         <ListBox x:Name="PlaylistBox" Grid.Row="2"

@@ -281,6 +281,12 @@ namespace Music.Player
         {
             Dispatcher.Invoke(() =>
             {
+                // Thumb 마우스 캡처 이슈 자가복구: 실제로 마우스 버튼이 떼어진 상태면 플래그 해제
+                if (_isDraggingSlider && Mouse.LeftButton != MouseButtonState.Pressed)
+                {
+                    _isDraggingSlider = false;
+                    _player.Seek(TimeSpan.FromSeconds(ProgressSlider.Value));
+                }
                 if (!_isDraggingSlider)
                 {
                     ProgressSlider.Value = position.TotalSeconds;

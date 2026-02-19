@@ -38,9 +38,10 @@ echo.
 if !FAILED! equ 0 (
     echo   All configurations built successfully!
     echo.
-    exit /b 0
 ) else (
     echo   Build failed. Check errors above.
     echo.
-    exit /b 1
 )
+
+pause
+exit /b !FAILED!

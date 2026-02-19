@@ -28,12 +28,17 @@ namespace Music.Player
 
         private static readonly string[] SupportedExtensions = { ".mp3", ".wav", ".flac", ".m4a", ".wma", ".aac", ".ogg" };
 
+        // 가사 관련
+        private readonly ObservableCollection<LrcLine> _lyricsLines = new();
+        private int _currentLyricsIndex = -1;
+
         public MainWindow()
         {
             InitializeComponent();
             EnsureResourcesExist();
 
             PlaylistBox.ItemsSource = _playlist;
+            LyricsBox.ItemsSource = _lyricsLines;
             _player.PositionChanged += Player_PositionChanged;
             _player.PlaybackStopped += Player_PlaybackStopped;
 
@@ -194,6 +199,7 @@ namespace Music.Player
             var track = _playlist[index];
 
             HistoryService.Instance.RecordPlay(track);
+            LoadLyrics(track.FilePath);
 
             _player.Load(track.FilePath);
             _player.Play();
@@ -280,6 +286,7 @@ namespace Music.Player
                     ProgressSlider.Value = position.TotalSeconds;
                     CurrentTimeText.Text = position.ToString(@"m\:ss");
                 }
+                UpdateLyricsDisplay(position);
             });
         }
 
@@ -381,6 +388,8 @@ namespace Music.Player
             _player.Stop();
             _playlist.Clear();
             _currentIndex = -1;
+            _lyricsLines.Clear();
+            _currentLyricsIndex = -1;
             UpdatePlayPauseIcon(false);
             TitleText.Text = "No track selected";
             ArtistText.Text = "";
@@ -530,6 +539,73 @@ namespace Music.Player
             };
             historyWindow.Show();
         }
+
+        #endregion
+
+        #region Lyrics
+
+        private void LyricsToggle_Click(object sender, RoutedEventArgs e)
+        {
+            LyricsPanel.Visibility = LyricsToggle.IsChecked == true
+                ? Visibility.Visible
+                : Visibility.Collapsed;
+        }
+
+        private void LoadLyrics(string audioFilePath)
+        {
+            _lyricsLines.Clear();
+            _currentLyricsIndex = -1;
+
+            var lrcPath = LrcParser.FindLrcFile(audioFilePath);
+            if (lrcPath == null)
+            {
+                LyricsNoFileText.Visibility = Visibility.Visible;
+                LyricsBox.Visibility = Visibility.Collapsed;
+                return;
+            }
+
+            var lines = LrcParser.ParseFile(lrcPath);
+            foreach (var line in lines)
+                _lyricsLines.Add(line);
+
+            LyricsNoFileText.Visibility = Visibility.Collapsed;
+            LyricsBox.Visibility = Visibility.Visible;
+        }
+
+        private void UpdateLyricsDisplay(TimeSpan position)
+        {
+            if (_lyricsLines.Count == 0 || LyricsPanel.Visibility != Visibility.Visible) return;
+
+            // 현재 위치에 해당하는 마지막 가사 줄 찾기
+            int newIndex = -1;
+            for (int i = _lyricsLines.Count - 1; i >= 0; i--)
+            {
+                if (_lyricsLines[i].Time <= position)
+                {
+                    newIndex = i;
+                    break;
+                }
+            }
+
+            if (newIndex == _currentLyricsIndex) return;
+
+            // 이전 활성 줄 비활성화
+            if (_currentLyricsIndex >= 0 && _currentLyricsIndex < _lyricsLines.Count)
+                _lyricsLines[_currentLyricsIndex].IsActive = false;
+
+            _currentLyricsIndex = newIndex;
+
+            // 새 활성 줄 설정 및 스크롤
+            if (_currentLyricsIndex >= 0 && _currentLyricsIndex < _lyricsLines.Count)
+            {
+                _lyricsLines[_currentLyricsIndex].IsActive = true;
+                LyricsBox.ScrollIntoView(_lyricsLines[_currentLyricsIndex]);
+            }
+        }
+
+        #endregion
+
+        #region Playlist (Remove)
 
         private void RemoveTrackButton_Click(object sender, RoutedEventArgs e)
         {

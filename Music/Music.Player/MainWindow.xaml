@@ -338,6 +338,59 @@
                             <!-- Album Art Image -->
                             <Image x:Name="AlbumArtImage" Stretch="Uniform" Visibility="Collapsed"
                                    HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <!-- Lyrics Overlay Panel -->
+                            <Border x:Name="LyricsPanel" Visibility="Collapsed" Background="#E81E1E1E">
+                                <Grid>
+                                    <TextBlock x:Name="LyricsNoFileText"
+                                               Text="가사 파일(.lrc)을 찾을 수 없습니다"
+                                               Foreground="#505050" FontSize="12"
+                                               HorizontalAlignment="Center" VerticalAlignment="Center"
+                                               Visibility="Collapsed"/>
+                                    <ListBox x:Name="LyricsBox"
+                                             Background="Transparent" BorderThickness="0"
+                                             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                             Focusable="False" Padding="0,8">
+                                        <ListBox.ItemContainerStyle>
+                                            <Style TargetType="ListBoxItem">
+                                                <Setter Property="Background" Value="Transparent"/>
+                                                <Setter Property="BorderThickness" Value="0"/>
+                                                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                                <Setter Property="Padding" Value="12,3"/>
+                                                <Setter Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate TargetType="ListBoxItem">
+                                                            <Border Background="{TemplateBinding Background}"
+                                                                    Padding="{TemplateBinding Padding}">
+                                                                <ContentPresenter HorizontalAlignment="Center"/>
+                                                            </Border>
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Style>
+                                        </ListBox.ItemContainerStyle>
+                                        <ListBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Text}" TextAlignment="Center"
+                                                           TextWrapping="Wrap" MaxWidth="260">
+                                                    <TextBlock.Style>
+                                                        <Style TargetType="TextBlock">
+                                                            <Setter Property="Foreground" Value="#555555"/>
+                                                            <Setter Property="FontSize" Value="12"/>
+                                                            <Style.Triggers>
+                                                                <DataTrigger Binding="{Binding IsActive}" Value="True">
+                                                                    <Setter Property="Foreground" Value="#FF6B35"/>
+                                                                    <Setter Property="FontWeight" Value="SemiBold"/>
+                                                                    <Setter Property="FontSize" Value="13"/>
+                                                                </DataTrigger>
+                                                            </Style.Triggers>
+                                                        </Style>
+                                                    </TextBlock.Style>
+                                                </TextBlock>
+                                            </DataTemplate>
+                                        </ListBox.ItemTemplate>
+                                    </ListBox>
+                                </Grid>
+                            </Border>
                         </Grid>
                     </Border>
 
@@ -422,8 +475,8 @@
                             </Button>
                         </StackPanel>
 
-                        <!-- Right Controls (Repeat, Playlist) -->
-                        <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Left" Margin="16,0,0,0">
+                        <!-- Right Controls (Repeat, Playlist, Lyrics) -->
+                        <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Left" Margin="8,0,0,0">
                             <ToggleButton x:Name="RepeatButton" Style="{StaticResource ToggleButtonStyle}"
                                           ToolTip="Repeat" Click="RepeatButton_Click">
                                 <Viewbox Width="18" Height="18">
@@ -439,6 +492,15 @@
                                     <Canvas Width="24" Height="24">
                                         <Path Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=ToggleButton}}"
                                               Data="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/>
+                                    </Canvas>
+                                </Viewbox>
+                            </ToggleButton>
+                            <ToggleButton x:Name="LyricsToggle" Style="{StaticResource ToggleButtonStyle}"
+                                          ToolTip="가사" Margin="4,0,0,0" Click="LyricsToggle_Click">
+                                <Viewbox Width="18" Height="18">
+                                    <Canvas Width="24" Height="24">
+                                        <Path Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType=ToggleButton}}"
+                                              Data="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/>
                                     </Canvas>
                                 </Viewbox>
                             </ToggleButton>

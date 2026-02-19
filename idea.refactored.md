@@ -116,30 +116,6 @@ WPF · SHA256 해시 + dHash 유사도 · 중복 파일 탐지 및 정리
 
 ---
 
-## 신규 프로젝트 아이디어
-
-### 🔥 강추 (재미 + 실용성 모두)
-
-| 프로젝트 | 설명 | 그룹 | 상태 |
-|---|---|---|---|
-| **Clipboard.Manager** | 클립보드 히스토리 + 즐겨찾기 + 텍스트 변환(대소문자, trim 등). Win+V보다 강력한 버전. 전역 단축키로 플로팅 팝업 | Tools | |
-| **Screen.OCR** | 단축키 → 영역 드래그 → 텍스트 자동 추출/복사. 이미지 속 텍스트, PDF 캡처 등. Windows.Media.Ocr API 사용 | Tools | |
-| **Batch.Rename** | 파일 대량 이름 변경. 정규식/패턴/번호 매기기/날짜 삽입 등. before/after 미리보기 | Files | |
-| **Quick.Launcher** | 키워드 → 앱/파일/URL/스니펫 즉시 실행. Spotlight/Alfred의 Windows 버전. 전역 단축키로 팝업 | Tools | ✅ 완료 |
-| **AI.Clip** | 클립보드 텍스트를 Anthropic API로 요약/번역/교정/코드변환. 트레이 우클릭 → AI 메뉴 | Tools | ✅ 완료 |
-
-### 💡 신박한 것들
-
-| 프로젝트 | 설명 | 상태 |
-|---|---|---|
-| **Focus.Guard** | 집중 모드: 특정 앱 차단 + 포모도로 타이머 + 업무/휴식 통계. Stay.Awake와 반대 개념 | |
-| **Workspace.Switcher** | 업무 컨텍스트 프리셋 저장 (앱 목록 + 창 배치). "출근 모드" 누르면 Slack·VS·브라우저 자동 오픈 | ✅ 완료 |
-| **Sound.Board** | 사운드 버튼 보드. 핫키로 효과음 즉시 재생. 회의 중 박수/웃음 버튼 같은 장난끼 있는 것도 ㅎ | ✅ 완료 |
-| **File.Duplicates** | 해시 기반 중복 파일 탐지 + 정리. 사진 중복 탐지는 유사도 기반으로 | ✅ 완료 |
-| **Subtitle.Sync** | SRT 자막 싱크 조정 + 번역 연동. 영화 볼 때 자막 타이밍 안 맞을 때 유용 | |
-
----
-
 ## 6. Sound.Board (Sound)
 
 WPF · NAudio 2.2.1 · PCM 사운드 합성 · 전역 단축키 · 사운드패드 앱
@@ -200,3 +176,27 @@ WPF · 워크스페이스 프리셋 카드 UI · 앱 순차 실행 · 실행 중
 - ✅ `WindowCapture`에서 `Process.GetProcessById()` → `using var` 패턴으로 핸들 누수 방지
 - ✅ `WorkspaceLauncher`에서 `Process.Start(...)?.Dispose()` — 프로세스 핸들 해제
 - ✅ `CreateCard()`에서 `DropShadowEffect`를 카드당 2개만 사전 생성 재사용 (MouseEnter/Leave마다 `new` 제거)
+
+---
+
+## 신규 프로젝트 아이디어
+
+### 🔥 강추 (재미 + 실용성 모두)
+
+| 프로젝트 | 설명 | 그룹 | 상태 |
+|---|---|---|---|
+| **Clipboard.Manager** | 클립보드 히스토리 + 즐겨찾기 + 텍스트 변환(대소문자, trim 등). Win+V보다 강력한 버전. 전역 단축키로 플로팅 팝업 | Tools | |
+| **Screen.OCR** | 단축키 → 영역 드래그 → 텍스트 자동 추출/복사. 이미지 속 텍스트, PDF 캡처 등. Windows.Media.Ocr API 사용 | Tools | |
+| **Batch.Rename** | 파일 대량 이름 변경. 정규식/패턴/번호 매기기/날짜 삽입 등. before/after 미리보기 | Files | |
+| **Quick.Launcher** | 키워드 → 앱/파일/URL/스니펫 즉시 실행. Spotlight/Alfred의 Windows 버전. 전역 단축키로 팝업 | Tools | ✅ 완료 |
+| **AI.Clip** | 클립보드 텍스트를 Anthropic API로 요약/번역/교정/코드변환. 트레이 우클릭 → AI 메뉴 | Tools | ✅ 완료 |
+
+### 💡 신박한 것들
+
+| 프로젝트 | 설명 | 상태 |
+|---|---|---|
+| **Focus.Guard** | 집중 모드: 특정 앱 차단 + 포모도로 타이머 + 업무/휴식 통계. Stay.Awake와 반대 개념 | |
+| **Workspace.Switcher** | 업무 컨텍스트 프리셋 저장 (앱 목록 + 창 배치). "출근 모드" 누르면 Slack·VS·브라우저 자동 오픈 | ✅ 완료 |
+| **Sound.Board** | 사운드 버튼 보드. 핫키로 효과음 즉시 재생. 회의 중 박수/웃음 버튼 같은 장난끼 있는 것도 ㅎ | ✅ 완료 |
+| **File.Duplicates** | 해시 기반 중복 파일 탐지 + 정리. 사진 중복 탐지는 유사도 기반으로 | ✅ 완료 |
+| **Subtitle.Sync** | SRT 자막 싱크 조정 + 번역 연동. 영화 볼 때 자막 타이밍 안 맞을 때 유용 | |

@@ -61,6 +61,28 @@ WPF · NAudio + TagLibSharp · 플레이리스트, 셔플, 반복, 키보드 단
 
 ---
 
+## 4. AI.Clip (AI)
+
+WinForms 트레이 앱 · Anthropic Claude API · 클립보드 텍스트 즉시 AI 처리
+
+| # | 구현 내용 | 상태 |
+|---|---|---|
+| 1 | 트레이 우클릭 메뉴 — 클립보드 미리보기 + 4가지 AI 작업 선택 | ✅ 완료 |
+| 2 | Summarize — 클립보드 텍스트 요약 (입력 언어 자동 인식) | ✅ 완료 |
+| 3 | Translate — 6개 언어 선택 서브메뉴 (Korean, English, Japanese, Chinese, Spanish, French) | ✅ 완료 |
+| 4 | Proofread — 문법/맞춤법 교정 후 변경 목록 함께 출력 | ✅ 완료 |
+| 5 | Convert Code — Python/JS/TS/C#/Java/Go 선택 서브메뉴 | ✅ 완료 |
+| 6 | ResultForm — 다크 테마 결과 창, 처리 중 로딩 표시, Copy 버튼 | ✅ 완료 |
+| 7 | SettingsForm — API 키 입력, 기본 번역/코드 변환 언어 설정 | ✅ 완료 |
+
+### 추가 구현된 것들
+- ✅ 창 닫기 시 진행 중인 API 요청 자동 취소 (CancellationToken 연동)
+- ✅ DarkMenuRenderer — 다크 테마 라운드 컨텍스트 메뉴
+- ✅ 오렌지 색상 'AI' 아이콘 GDI+ 런타임 생성 (이미지 파일 불필요)
+- ✅ AppData에 설정 영속 저장
+
+---
+
 ## 신규 프로젝트 아이디어
 
 ### 🔥 강추 (재미 + 실용성 모두)
@@ -71,7 +93,7 @@ WPF · NAudio + TagLibSharp · 플레이리스트, 셔플, 반복, 키보드 단
 | **Screen.OCR** | 단축키 → 영역 드래그 → 텍스트 자동 추출/복사. 이미지 속 텍스트, PDF 캡처 등. Windows.Media.Ocr API 사용 | Tools | |
 | **Batch.Rename** | 파일 대량 이름 변경. 정규식/패턴/번호 매기기/날짜 삽입 등. before/after 미리보기 | Files | |
 | **Quick.Launcher** | 키워드 → 앱/파일/URL/스니펫 즉시 실행. Spotlight/Alfred의 Windows 버전. 전역 단축키로 팝업 | Tools | |
-| **AI.Clip** | 클립보드 텍스트를 Anthropic API로 요약/번역/교정/코드변환. 트레이 우클릭 → AI 메뉴 | Tools | |
+| **AI.Clip** | 클립보드 텍스트를 Anthropic API로 요약/번역/교정/코드변환. 트레이 우클릭 → AI 메뉴 | Tools | ✅ 완료 |
 
 ### 💡 신박한 것들
 

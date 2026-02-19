@@ -2,6 +2,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -191,6 +192,8 @@ namespace Music.Player
 
             _currentIndex = index;
             var track = _playlist[index];
+
+            HistoryService.Instance.RecordPlay(track);
 
             _player.Load(track.FilePath);
             _player.Play();
@@ -498,7 +501,34 @@ namespace Music.Player
             if (_playlist.Any(t => string.Equals(t.FilePath, fullPath, StringComparison.OrdinalIgnoreCase))) return;
 
             var track = TrackInfo.FromFile(fullPath);
+            HistoryService.Instance.LoadFavoriteStatus(track);
             _playlist.Add(track);
+        }
+
+        private void FavoriteButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is ToggleButton button && button.DataContext is TrackInfo track)
+            {
+                HistoryService.Instance.ToggleFavorite(track);
+                button.IsChecked = track.IsFavorite;
+            }
+        }
+
+        private void HistoryButton_Click(object sender, RoutedEventArgs e)
+        {
+            var historyWindow = new HistoryWindow(paths =>
+            {
+                AddFiles(paths);
+                if (PlaylistToggle.IsChecked != true)
+                {
+                    PlaylistToggle.IsChecked = true;
+                    TogglePlaylistPanel();
+                }
+            })
+            {
+                Owner = this
+            };
+            historyWindow.Show();
         }
 
         private void RemoveTrackButton_Click(object sender, RoutedEventArgs e)

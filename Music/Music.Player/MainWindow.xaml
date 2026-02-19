@@ -479,6 +479,9 @@
                             <Button x:Name="LoadPlaylistButton" Content="Load" Height="28" Padding="8,0"
                                     Style="{StaticResource ControlButtonStyle}" Click="LoadPlaylistButton_Click"
                                     ToolTip="Load playlist from file" FontSize="11" Margin="4,0,0,0"/>
+                            <Button x:Name="HistoryButton" Content="기록" Height="28" Padding="8,0"
+                                    Style="{StaticResource ControlButtonStyle}" Click="HistoryButton_Click"
+                                    ToolTip="재생 기록 &amp; 즐겨찾기" FontSize="11" Margin="4,0,0,0"/>
                         </StackPanel>
 
                         <ListBox x:Name="PlaylistBox" Grid.Row="2"
@@ -494,6 +497,7 @@
                                             <ColumnDefinition Width="*"/>
                                             <ColumnDefinition Width="Auto"/>
                                             <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="Auto"/>
                                         </Grid.ColumnDefinitions>
                                         <StackPanel>
                                             <TextBlock Text="{Binding DisplayTitle}" FontSize="12"
@@ -506,7 +510,41 @@
                                         <TextBlock Grid.Column="1" Text="{Binding DurationText}" FontSize="10"
                                                    Foreground="{StaticResource TextSecondaryBrush}"
                                                    VerticalAlignment="Center" Margin="8,0,0,0"/>
-                                        <Button x:Name="RemoveButton" Grid.Column="2" Content="×" Width="22" Height="22"
+                                        <!-- 즐겨찾기 별 버튼 -->
+                                        <ToggleButton Grid.Column="2"
+                                                      IsChecked="{Binding IsFavorite, Mode=OneWay}"
+                                                      Click="FavoriteButton_Click"
+                                                      Width="22" Height="22" Margin="4,0,0,0"
+                                                      VerticalAlignment="Center" Cursor="Hand"
+                                                      ToolTip="즐겨찾기">
+                                            <ToggleButton.Style>
+                                                <Style TargetType="ToggleButton">
+                                                    <Setter Property="Background" Value="Transparent"/>
+                                                    <Setter Property="BorderThickness" Value="0"/>
+                                                    <Setter Property="Foreground" Value="#404040"/>
+                                                    <Setter Property="Content" Value="★"/>
+                                                    <Setter Property="FontSize" Value="14"/>
+                                                    <Setter Property="Template">
+                                                        <Setter.Value>
+                                                            <ControlTemplate TargetType="ToggleButton">
+                                                                <Border Background="Transparent">
+                                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                                </Border>
+                                                                <ControlTemplate.Triggers>
+                                                                    <Trigger Property="IsChecked" Value="True">
+                                                                        <Setter Property="Foreground" Value="#FF6B35"/>
+                                                                    </Trigger>
+                                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                                        <Setter Property="Foreground" Value="#FF8555"/>
+                                                                    </Trigger>
+                                                                </ControlTemplate.Triggers>
+                                                            </ControlTemplate>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </Style>
+                                            </ToggleButton.Style>
+                                        </ToggleButton>
+                                        <Button x:Name="RemoveButton" Grid.Column="3" Content="×" Width="22" Height="22"
                                                 FontSize="16" FontWeight="Bold" Margin="4,0,0,0"
                                                 VerticalAlignment="Center" Cursor="Hand"
                                                 Click="RemoveTrackButton_Click"

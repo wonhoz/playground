@@ -1,17 +1,35 @@
+using System.ComponentModel;
 using System.IO;
 using System.Windows.Media.Imaging;
 using TagLib;
 
 namespace Music.Player.Models
 {
-    public class TrackInfo
+    public class TrackInfo : INotifyPropertyChanged
     {
+        private bool _isFavorite;
+
         public string FilePath { get; set; } = "";
         public string Title { get; set; } = "";
         public string Artist { get; set; } = "";
         public string Album { get; set; } = "";
         public TimeSpan Duration { get; set; }
         public BitmapImage? AlbumArt { get; set; }
+
+        public bool IsFavorite
+        {
+            get => _isFavorite;
+            set
+            {
+                if (_isFavorite != value)
+                {
+                    _isFavorite = value;
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsFavorite)));
+                }
+            }
+        }
+
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         public string DisplayTitle => string.IsNullOrEmpty(Title) ? Path.GetFileNameWithoutExtension(FilePath) : Title;
         public string DisplayArtist => string.IsNullOrEmpty(Artist) ? "Unknown Artist" : Artist;

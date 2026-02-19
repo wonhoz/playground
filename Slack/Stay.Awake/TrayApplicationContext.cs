@@ -10,13 +10,16 @@ namespace StayAwake
         private readonly NotifyIcon _trayIcon;
         private readonly ContextMenuStrip _contextMenu;
         private readonly System.Windows.Forms.Timer _activityTimer;
+        private readonly System.Windows.Forms.Timer _scheduleTimer;
         private readonly ActivitySimulator _simulator;
+        private readonly SlackUiAutomation _slackAutomation;
 
         private ToolStripMenuItem _startStopItem = null!;
         private ToolStripMenuItem _intervalItem = null!;
         private ToolStripMenuItem _distanceItem = null!;
         private ToolStripMenuItem _statusItem = null!;
         private ToolStripMenuItem _skipIfActiveItem = null!;
+        private ToolStripMenuItem _slackAutoStatusItem = null!;
 
         private bool _isRunning = false;
         private int _intervalMinutes = 3; // 기본 3분 (Slack 10분 타임아웃의 1/3)
@@ -39,12 +42,27 @@ namespace StayAwake
             };
             _intervalMinutes = _settings.IntervalMinutes;
 
-            // 타이머 설정
+            // Slack UI 자동화 초기화
+            _slackAutomation = new SlackUiAutomation
+            {
+                IsEnabled = _settings.SlackAutoStatusEnabled,
+                WorkStartHour = _settings.WorkStartHour,
+                WorkStartMinute = _settings.WorkStartMinute,
+                WorkEndHour = _settings.WorkEndHour,
+                WorkEndMinute = _settings.WorkEndMinute
+            };
+
+            // 활동 타이머 설정
             _activityTimer = new System.Windows.Forms.Timer
             {
                 Interval = _intervalMinutes * 60 * 1000
             };
             _activityTimer.Tick += OnTimerTick;
+
+            // Slack 상태 스케줄 타이머 (1분마다 체크)
+            _scheduleTimer = new System.Windows.Forms.Timer { Interval = 60 * 1000 };
+            _scheduleTimer.Tick += OnScheduleTimerTick;
+            _scheduleTimer.Start();
 
             // 컨텍스트 메뉴 생성
             _contextMenu = CreateContextMenu();
@@ -145,6 +163,21 @@ namespace StayAwake
 
             // 지금 실행
             menu.Items.Add(new ToolStripMenuItem("지금 활동 실행", null, (s, e) => SimulateNow()));
+
+            menu.Items.Add(new ToolStripSeparator());
+
+            // Slack 자동 상태 변경
+            var slackItem = new ToolStripMenuItem("Slack 자동 상태 변경");
+
+            _slackAutoStatusItem = new ToolStripMenuItem("자동 변경 활성화", null, (s, e) => ToggleSlackAutoStatus())
+            {
+                Checked = _settings.SlackAutoStatusEnabled
+            };
+            slackItem.DropDownItems.Add(_slackAutoStatusItem);
+            slackItem.DropDownItems.Add(new ToolStripSeparator());
+            slackItem.DropDownItems.Add(new ToolStripMenuItem("지금 활성으로 변경", null, async (s, e) => await SetSlackActiveNowAsync()));
+            slackItem.DropDownItems.Add(new ToolStripMenuItem("지금 자리비움으로 변경", null, async (s, e) => await SetSlackAwayNowAsync()));
+            menu.Items.Add(slackItem);
 
             menu.Items.Add(new ToolStripSeparator());
 
@@ -278,6 +311,7 @@ namespace StayAwake
             _settings.ActivityType = _simulator.ActivityType.ToString();
             _settings.PreventDisplaySleep = _simulator.PreventDisplaySleep;
             _settings.SkipIfUserActive = _simulator.SkipIfUserActive;
+            _settings.SlackAutoStatusEnabled = _slackAutomation.IsEnabled;
             _settings.Save();
         }
 
@@ -344,8 +378,55 @@ Slack 자리 비움 상태 방지 도구
             MessageBox.Show(message, "StayAwake 정보", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
+        private async void OnScheduleTimerTick(object? sender, EventArgs e)
+        {
+            var result = await _slackAutomation.CheckAndSetPresenceAsync();
+            if (result == null) return;
+
+            if (result.Success)
+            {
+                var label = result.Status == "active" ? "활성" : "자리 비움";
+                _trayIcon.ShowBalloonTip(2000, "StayAwake",
+                    $"Slack 상태를 '{label}'으로 변경했습니다.", ToolTipIcon.Info);
+            }
+            else
+            {
+                _trayIcon.ShowBalloonTip(2500, "StayAwake",
+                    $"Slack 상태 변경 실패: {result.ErrorMessage}", ToolTipIcon.Warning);
+            }
+        }
+
+        private void ToggleSlackAutoStatus()
+        {
+            _slackAutomation.IsEnabled = !_slackAutomation.IsEnabled;
+            _slackAutoStatusItem.Checked = _slackAutomation.IsEnabled;
+            SaveSettings();
+
+            var msg = _slackAutomation.IsEnabled
+                ? $"Slack 자동 상태 변경 활성화\n({_slackAutomation.WorkStartHour:D2}:{_slackAutomation.WorkStartMinute:D2} 활성, {_slackAutomation.WorkEndHour:D2}:{_slackAutomation.WorkEndMinute:D2} 자리비움)\nSlack 앱이 실행 중이어야 합니다."
+                : "Slack 자동 상태 변경 비활성화";
+            _trayIcon.ShowBalloonTip(2000, "StayAwake", msg, ToolTipIcon.Info);
+        }
+
+        private async Task SetSlackActiveNowAsync()
+        {
+            var result = await _slackAutomation.SetActiveAsync();
+            _trayIcon.ShowBalloonTip(1500, "StayAwake",
+                result.Success ? "Slack 상태를 '활성'으로 변경했습니다." : $"실패: {result.ErrorMessage}",
+                result.Success ? ToolTipIcon.Info : ToolTipIcon.Warning);
+        }
+
+        private async Task SetSlackAwayNowAsync()
+        {
+            var result = await _slackAutomation.SetAwayAsync();
+            _trayIcon.ShowBalloonTip(1500, "StayAwake",
+                result.Success ? "Slack 상태를 '자리비움'으로 변경했습니다." : $"실패: {result.ErrorMessage}",
+                result.Success ? ToolTipIcon.Info : ToolTipIcon.Warning);
+        }
+
         private void ExitApplication()
         {
+            _scheduleTimer.Stop();
             _activityTimer.Stop();
             _simulator.AllowSleep(); // 절전 방지 해제
             _trayIcon.Visible = false;
@@ -364,6 +445,7 @@ Slack 자리 비움 상태 방지 도구
             if (disposing)
             {
                 _simulator.AllowSleep(); // 절전 방지 해제
+                _scheduleTimer.Dispose();
                 _activityTimer.Dispose();
                 _trayIcon.Dispose();
             }

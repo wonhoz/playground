@@ -13,6 +13,13 @@ namespace StayAwake
         public bool PreventDisplaySleep { get; set; } = true;
         public bool SkipIfUserActive { get; set; } = true;
 
+        // Slack 자동 상태 변경 (UI 자동화 방식 - 토큰 불필요)
+        public bool SlackAutoStatusEnabled { get; set; } = false;
+        public int WorkStartHour { get; set; } = 8;
+        public int WorkStartMinute { get; set; } = 55;
+        public int WorkEndHour { get; set; } = 18;
+        public int WorkEndMinute { get; set; } = 55;
+
         private static readonly string _settingsPath = Path.Combine(
             Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
             "StayAwake",

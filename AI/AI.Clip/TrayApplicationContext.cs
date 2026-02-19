@@ -1,14 +1,16 @@
 using AiClip.Forms;
 using AiClip.Models;
 using AiClip.Rendering;
+using AiClip.Services;
 
 namespace AiClip
 {
     public class TrayApplicationContext : ApplicationContext
     {
-        private readonly NotifyIcon _trayIcon;
+        private readonly NotifyIcon    _trayIcon;
         private readonly ContextMenuStrip _contextMenu;
-        private readonly AppSettings _settings;
+        private readonly AppSettings   _settings;
+        private readonly ClaudeService _claude;
 
         private ToolStripMenuItem _clipPreviewItem = null!;
         private ToolStripMenuItem _summarizeItem   = null!;
@@ -19,6 +21,7 @@ namespace AiClip
         public TrayApplicationContext()
         {
             _settings     = AppSettings.Load();
+            _claude       = new ClaudeService(_settings);
             _contextMenu  = BuildMenu();
 
             _trayIcon = new NotifyIcon
@@ -54,10 +57,11 @@ namespace AiClip
             menu.Items.Add(_clipPreviewItem);
             menu.Items.Add(new ToolStripSeparator());
 
-            // AI operations
-            _summarizeItem = new ToolStripMenuItem("Summarize  (요약)");
+            // Summarize
+            _summarizeItem       = new ToolStripMenuItem("Summarize  (요약)");
             _summarizeItem.Click += OnSummarize;
 
+            // Translate with submenu
             _translateItem = new ToolStripMenuItem("Translate  (번역)");
             foreach (var lang in new[] { "Korean", "English", "Japanese", "Chinese", "Spanish", "French" })
             {
@@ -66,9 +70,11 @@ namespace AiClip
                     new ToolStripMenuItem($"→  {l}", null, (s, e) => OnTranslate(l)));
             }
 
-            _proofreadItem = new ToolStripMenuItem("Proofread  (교정)");
+            // Proofread
+            _proofreadItem       = new ToolStripMenuItem("Proofread  (교정)");
             _proofreadItem.Click += OnProofread;
 
+            // Convert Code with submenu
             _convertItem = new ToolStripMenuItem("Convert Code  (코드 변환)");
             foreach (var lang in new[] { "Python", "JavaScript", "TypeScript", "C#", "Java", "Go" })
             {
@@ -90,11 +96,11 @@ namespace AiClip
             return menu;
         }
 
-        // ── Clipboard preview refresh ─────────────────────────────
+        // ── Clipboard preview ─────────────────────────────────────
 
         private void RefreshClipboardPreview()
         {
-            var text    = GetClipboardText();
+            var text     = GetClipboardText();
             bool hasText = !string.IsNullOrWhiteSpace(text);
 
             if (hasText)
@@ -133,39 +139,52 @@ namespace AiClip
             return false;
         }
 
-        // ── Operation handlers (Commit 2에서 실제 API 호출로 교체) ──
-
-        private void OnSummarize(object? s, EventArgs e)
+        /// <summary>
+        /// AI 작업 실행 공통 패턴:
+        /// ResultForm을 즉시 열어 로딩 상태로 보여주고, 비동기 API 완료 시 결과 표시
+        /// </summary>
+        private async void RunOperation(string opName, Func<CancellationToken, Task<string>> apiCall)
         {
             if (!EnsureApiKey()) return;
+
             var text = GetClipboardText();
             if (string.IsNullOrWhiteSpace(text)) return;
-            _trayIcon.ShowBalloonTip(2000, "AI.Clip", "Summarize 기능 준비 중...", ToolTipIcon.Info);
+
+            using var cts  = new CancellationTokenSource();
+            var resultForm = new ResultForm(opName);
+            resultForm.FormClosed += (s, e) => cts.Cancel(); // 창 닫으면 취소
+            resultForm.Show();
+
+            try
+            {
+                var result = await apiCall(cts.Token);
+                if (!resultForm.IsDisposed)
+                    resultForm.Invoke(() => resultForm.ShowResult(result));
+            }
+            catch (OperationCanceledException)
+            {
+                // 사용자가 창을 닫음 — 무시
+            }
+            catch (Exception ex)
+            {
+                if (!resultForm.IsDisposed)
+                    resultForm.Invoke(() => resultForm.ShowError(ex.Message));
+            }
         }
 
-        private void OnTranslate(string lang)
-        {
-            if (!EnsureApiKey()) return;
-            var text = GetClipboardText();
-            if (string.IsNullOrWhiteSpace(text)) return;
-            _trayIcon.ShowBalloonTip(2000, "AI.Clip", $"Translate → {lang} 기능 준비 중...", ToolTipIcon.Info);
-        }
+        // ── Operation handlers ────────────────────────────────────
 
-        private void OnProofread(object? s, EventArgs e)
-        {
-            if (!EnsureApiKey()) return;
-            var text = GetClipboardText();
-            if (string.IsNullOrWhiteSpace(text)) return;
-            _trayIcon.ShowBalloonTip(2000, "AI.Clip", "Proofread 기능 준비 중...", ToolTipIcon.Info);
-        }
+        private void OnSummarize(object? s, EventArgs e) =>
+            RunOperation("Summarize", ct => _claude.SummarizeAsync(GetClipboardText()!, ct));
 
-        private void OnConvertCode(string lang)
-        {
-            if (!EnsureApiKey()) return;
-            var text = GetClipboardText();
-            if (string.IsNullOrWhiteSpace(text)) return;
-            _trayIcon.ShowBalloonTip(2000, "AI.Clip", $"Convert Code → {lang} 기능 준비 중...", ToolTipIcon.Info);
-        }
+        private void OnTranslate(string lang) =>
+            RunOperation($"Translate → {lang}", ct => _claude.TranslateAsync(GetClipboardText()!, lang, ct));
+
+        private void OnProofread(object? s, EventArgs e) =>
+            RunOperation("Proofread", ct => _claude.ProofreadAsync(GetClipboardText()!, ct));
+
+        private void OnConvertCode(string lang) =>
+            RunOperation($"Convert Code → {lang}", ct => _claude.ConvertCodeAsync(GetClipboardText()!, lang, ct));
 
         private void OnSettings(object? s, EventArgs e)
         {

@@ -47,7 +47,9 @@ namespace StayAwake
             {
                 IsEnabled = _settings.SlackAutoStatusEnabled,
                 WorkStartHour = _settings.WorkStartHour,
-                WorkEndHour = _settings.WorkEndHour
+                WorkStartMinute = _settings.WorkStartMinute,
+                WorkEndHour = _settings.WorkEndHour,
+                WorkEndMinute = _settings.WorkEndMinute
             };
 
             // 활동 타이머 설정
@@ -401,7 +403,7 @@ Slack 자리 비움 상태 방지 도구
             SaveSettings();
 
             var msg = _slackAutomation.IsEnabled
-                ? $"Slack 자동 상태 변경 활성화\n({_slackAutomation.WorkStartHour}:00 활성, {_slackAutomation.WorkEndHour}:00 자리비움)\nSlack 앱이 실행 중이어야 합니다."
+                ? $"Slack 자동 상태 변경 활성화\n({_slackAutomation.WorkStartHour:D2}:{_slackAutomation.WorkStartMinute:D2} 활성, {_slackAutomation.WorkEndHour:D2}:{_slackAutomation.WorkEndMinute:D2} 자리비움)\nSlack 앱이 실행 중이어야 합니다."
                 : "Slack 자동 상태 변경 비활성화";
             _trayIcon.ShowBalloonTip(2000, "StayAwake", msg, ToolTipIcon.Info);
         }

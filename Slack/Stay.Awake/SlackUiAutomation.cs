@@ -14,8 +14,10 @@ namespace StayAwake
         private DateTime _lastAwaySet = DateTime.MinValue;
 
         public bool IsEnabled { get; set; }
-        public int WorkStartHour { get; set; } = 9;
-        public int WorkEndHour { get; set; } = 19;
+        public int WorkStartHour { get; set; } = 8;
+        public int WorkStartMinute { get; set; } = 55;
+        public int WorkEndHour { get; set; } = 18;
+        public int WorkEndMinute { get; set; } = 55;
 
         /// <summary>
         /// 매 분 호출: 출근/퇴근 시간이면 Slack 상태 자동 변경
@@ -26,16 +28,16 @@ namespace StayAwake
 
             var now = DateTime.Now;
 
-            // 아침 WorkStartHour시 → 활성
-            if (now.Hour == WorkStartHour && _lastActiveSet.Date != now.Date)
+            // 아침 WorkStartHour:WorkStartMinute → 활성
+            if (now.Hour == WorkStartHour && now.Minute == WorkStartMinute && _lastActiveSet.Date != now.Date)
             {
                 var result = await SetPresenceAsync("active");
                 if (result.Success) _lastActiveSet = now;
                 return result;
             }
 
-            // 저녁 WorkEndHour시 → 자리 비움
-            if (now.Hour == WorkEndHour && _lastAwaySet.Date != now.Date)
+            // 저녁 WorkEndHour:WorkEndMinute → 자리 비움
+            if (now.Hour == WorkEndHour && now.Minute == WorkEndMinute && _lastAwaySet.Date != now.Date)
             {
                 var result = await SetPresenceAsync("away");
                 if (result.Success) _lastAwaySet = now;

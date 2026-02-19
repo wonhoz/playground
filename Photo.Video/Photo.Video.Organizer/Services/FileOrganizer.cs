@@ -31,6 +31,7 @@ namespace Photo.Video.Organizer.Services
             public string SourcePath { get; set; } = "";
             public string? DestinationPath { get; set; }
             public bool Success { get; set; }
+            public bool IsSkippedAsDuplicate { get; set; }
             public string? ErrorMessage { get; set; }
             public DateTime? MediaDate { get; set; }
             public MediaType MediaType { get; set; }
@@ -44,6 +45,7 @@ namespace Photo.Video.Organizer.Services
             public int TotalFiles { get; set; }
             public int SuccessCount { get; set; }
             public int SkippedCount { get; set; }
+            public int DuplicateCount { get; set; }
             public int ErrorCount { get; set; }
             public List<OrganizeResult> Results { get; set; } = new();
         }
@@ -80,6 +82,8 @@ namespace Photo.Video.Organizer.Services
 
                 if (result.Success)
                     summary.SuccessCount++;
+                else if (result.IsSkippedAsDuplicate)
+                    summary.DuplicateCount++;
                 else if (result.ErrorMessage?.Contains("건너뜀") == true)
                     summary.SkippedCount++;
                 else
@@ -129,12 +133,27 @@ namespace Photo.Video.Organizer.Services
 
                 Directory.CreateDirectory(destinationFolder);
 
+                // SHA256 해시 기반 중복 파일 감지 (이미 동일 내용의 파일이 대상 폴더에 있으면 건너뜀)
+                if (Directory.Exists(destinationFolder))
+                {
+                    var sourceHash = ComputeFileHash(sourcePath);
+                    foreach (var existingFile in Directory.GetFiles(destinationFolder))
+                    {
+                        if (ComputeFileHash(existingFile) == sourceHash)
+                        {
+                            result.IsSkippedAsDuplicate = true;
+                            result.ErrorMessage = $"동일한 파일이 이미 존재합니다 (건너뜀): {Path.GetFileName(existingFile)}";
+                            return result;
+                        }
+                    }
+                }
+
                 // 새 파일명 생성 (yyyy-MM-dd HH.mm.ss.확장자)
                 var extension = Path.GetExtension(sourcePath);
                 var newFileName = $"{mediaDate:yyyy-MM-dd HH.mm.ss}{extension}";
                 var destinationPath = Path.Combine(destinationFolder, newFileName);
 
-                // 중복 파일 처리
+                // 중복 파일명 처리
                 destinationPath = GetUniqueFilePath(destinationPath);
 
                 // 파일 복사
@@ -149,6 +168,16 @@ namespace Photo.Video.Organizer.Services
             }
 
             return result;
+        }
+
+        /// <summary>
+        /// SHA256 해시값 계산
+        /// </summary>
+        private static string ComputeFileHash(string filePath)
+        {
+            using var sha256 = System.Security.Cryptography.SHA256.Create();
+            using var stream = File.OpenRead(filePath);
+            return Convert.ToHexString(sha256.ComputeHash(stream));
         }
 
         /// <summary>

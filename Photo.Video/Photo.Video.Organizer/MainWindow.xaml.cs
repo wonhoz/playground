@@ -294,6 +294,8 @@ namespace Photo.Video.Organizer
         {
             ResultPanel.Visibility = Visibility.Visible;
             ResultSuccessText.Text = $"성공: {result.SuccessCount}개";
+            ResultDuplicateText.Text = $"중복 건너뜀: {result.DuplicateCount}개";
+            ResultDuplicateText.Visibility = result.DuplicateCount > 0 ? Visibility.Visible : Visibility.Collapsed;
             ResultSkippedText.Text = $"건너뜀: {result.SkippedCount}개";
             ResultSkippedText.Visibility = result.SkippedCount > 0 ? Visibility.Visible : Visibility.Collapsed;
             ResultErrorText.Text = $"오류: {result.ErrorCount}개";

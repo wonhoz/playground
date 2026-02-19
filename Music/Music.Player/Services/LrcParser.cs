@@ -27,19 +27,19 @@ namespace Music.Player.Services
         public event PropertyChangedEventHandler? PropertyChanged;
     }
 
-    public static class LrcParser
+    public static partial class LrcParser
     {
-        private static readonly Regex TimeTagRegex =
-            new(@"\[(\d{1,2}):(\d{2})\.(\d{1,3})\]", RegexOptions.Compiled);
+        [GeneratedRegex(@"\[(\d{1,2}):(\d{2})\.(\d{1,3})\]")]
+        private static partial Regex TimeTagRegex();
 
         public static List<LrcLine> ParseFile(string lrcFilePath)
         {
-            var lines = new List<LrcLine>();
+            List<LrcLine> lines = [];
             try
             {
                 foreach (var rawLine in File.ReadAllLines(lrcFilePath))
                 {
-                    var match = TimeTagRegex.Match(rawLine);
+                    var match = TimeTagRegex().Match(rawLine);
                     if (!match.Success) continue;
 
                     int minutes = int.Parse(match.Groups[1].Value);

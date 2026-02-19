@@ -65,7 +65,8 @@ public static class ImageScanner
 
         // 3단계: 컴포넌트별로 그룹화
         var groups = entries
-            .Select((e, i) => (e, root: Find(i)))
+            .Index()
+            .Select(x => (e: x.Item, root: Find(x.Index)))
             .GroupBy(x => x.root)
             .Where(g => g.Count() > 1)
             .Select(g =>

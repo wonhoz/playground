@@ -12,9 +12,9 @@ namespace Music.Player
         private static MainWindow? _mainWindow;
 
         // 파일 버퍼링용
-        private static readonly List<string> _pendingFiles = new();
+        private static readonly List<string> _pendingFiles = [];
         private static System.Threading.Timer? _processTimer;
-        private static readonly object _fileLock = new();
+        private static readonly System.Threading.Lock _fileLock = new();
 
         [STAThread]
         public static void Main(string[] args)

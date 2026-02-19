@@ -7,7 +7,7 @@ namespace SoundBoard.Services;
 public class AudioService : IDisposable
 {
     private readonly List<WaveOutEvent> _pool = [];
-    private readonly object _lock = new();
+    private readonly System.Threading.Lock _lock = new();
     private float _volume = 0.8f;
 
     public float Volume

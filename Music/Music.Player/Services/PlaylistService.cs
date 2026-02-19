@@ -11,6 +11,7 @@ namespace Music.Player.Services
             "MusicPlayer");
 
         private static readonly string StateFilePath = Path.Combine(AppDataPath, "playlist.json");
+        private static readonly JsonSerializerOptions _jsonOptions = new() { WriteIndented = true };
 
         public static void SaveState(PlaylistState state)
         {
@@ -18,8 +19,7 @@ namespace Music.Player.Services
             {
                 Directory.CreateDirectory(AppDataPath);
 
-                var options = new JsonSerializerOptions { WriteIndented = true };
-                var json = JsonSerializer.Serialize(state, options);
+                var json = JsonSerializer.Serialize(state, _jsonOptions);
                 File.WriteAllText(StateFilePath, json);
             }
             catch

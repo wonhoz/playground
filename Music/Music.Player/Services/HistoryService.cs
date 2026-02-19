@@ -10,6 +10,7 @@ namespace Music.Player.Services
         public static HistoryService Instance => _instance.Value;
 
         private readonly string _historyFilePath;
+        private static readonly JsonSerializerOptions _jsonOptions = new() { WriteIndented = true };
         private Dictionary<string, PlayHistoryEntry> _entries = new(StringComparer.OrdinalIgnoreCase);
 
         private HistoryService()
@@ -100,7 +101,7 @@ namespace Music.Player.Services
             {
                 var json = JsonSerializer.Serialize(
                     _entries.Values.ToList(),
-                    new JsonSerializerOptions { WriteIndented = true });
+                    _jsonOptions);
                 File.WriteAllText(_historyFilePath, json);
             }
             catch { }

@@ -33,6 +33,18 @@ namespace AiClip
             };
 
             _contextMenu.Opening += (s, e) => RefreshClipboardPreview();
+
+            // 시작 풍선 알림 (트레이 아이콘 등록 후 600ms 딜레이)
+            var startTimer = new System.Windows.Forms.Timer { Interval = 600 };
+            startTimer.Tick += (s, e) =>
+            {
+                startTimer.Stop();
+                startTimer.Dispose();
+                _trayIcon.ShowBalloonTip(3000, "AI.Clip",
+                    "AI.Clip이 실행 중입니다!\n텍스트를 복사한 후 트레이 아이콘을 우클릭하세요.",
+                    ToolTipIcon.Info);
+            };
+            startTimer.Start();
         }
 
         // ── Menu builder ──────────────────────────────────────────

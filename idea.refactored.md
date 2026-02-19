@@ -117,6 +117,24 @@ WPF · SHA256 해시 + dHash 유사도 · 중복 파일 탐지 및 정리
 |---|---|---|
 | **Focus.Guard** | 집중 모드: 특정 앱 차단 + 포모도로 타이머 + 업무/휴식 통계. Stay.Awake와 반대 개념 | |
 | **Workspace.Switcher** | 업무 컨텍스트 프리셋 저장 (앱 목록 + 창 배치). "출근 모드" 누르면 Slack·VS·브라우저 자동 오픈 | |
-| **Sound.Board** | 사운드 버튼 보드. 핫키로 효과음 즉시 재생. 회의 중 박수/웃음 버튼 같은 장난끼 있는 것도 ㅎ | |
+| **Sound.Board** | 사운드 버튼 보드. 핫키로 효과음 즉시 재생. 회의 중 박수/웃음 버튼 같은 장난끼 있는 것도 ㅎ | ✅ 완료 |
 | **File.Duplicates** | 해시 기반 중복 파일 탐지 + 정리. 사진 중복 탐지는 유사도 기반으로 | ✅ 완료 |
 | **Subtitle.Sync** | SRT 자막 싱크 조정 + 번역 연동. 영화 볼 때 자막 타이밍 안 맞을 때 유용 | |
+
+---
+
+## 6. Sound.Board (Sound)
+
+WPF · NAudio 2.2.1 · PCM 사운드 합성 · 전역 단축키 · 사운드패드 앱
+
+| # | 구현 내용 | 상태 |
+|---|---|---|
+| 1 | 사운드 버튼 보드 — 130×110px 컬러 카드, WrapPanel 자동 줄바꿈 | ✅ 완료 |
+| 2 | 8종 내장 사운드 PCM 합성 — AirHorn·Applause·Rimshot·SadTrombone·Ding·Laser·Boom·Fanfare | ✅ 완료 |
+| 3 | 외부 오디오 파일 지원 — MP3/WAV/OGG 등 NAudio AudioFileReader | ✅ 완료 |
+| 4 | 드래그앤드롭 — 오디오 파일을 보드에 끌어다 놓으면 버튼 자동 생성 | ✅ 완료 |
+| 5 | 전역 단축키 — RegisterHotKey Win32 API, Ctrl/Alt/Shift 조합 지원 | ✅ 완료 |
+| 6 | 편집 모드 — 카드 위 오버레이 ✏ 편집 / 🗑 삭제, 오른쪽 빠른 추가 카드 | ✅ 완료 |
+| 7 | EditButtonDialog — 이름/이모지/소스선택/색상팔레트(15색)/단축키 캡처 | ✅ 완료 |
+| 8 | 겹쳐 재생 옵션, 볼륨 슬라이더, ■ 정지 버튼 | ✅ 완료 |
+| 9 | AppData JSON 영속 설정 저장 | ✅ 완료 |

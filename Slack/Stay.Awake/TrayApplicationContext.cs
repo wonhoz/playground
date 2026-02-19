@@ -27,6 +27,13 @@ namespace StayAwake
         private DateTime _startTime;
         private readonly AppSettings _settings;
 
+        // 일일 통계
+        private int _dailySimCount = 0;
+        private int _dailySkipCount = 0;
+        private DateTime _statsDate = DateTime.Today;
+        private TimeSpan _todayActiveTime = TimeSpan.Zero;
+        private DateTime _sessionRunStart;
+
         public TrayApplicationContext()
         {
             // 저장된 설정 로드
@@ -181,6 +188,9 @@ namespace StayAwake
 
             menu.Items.Add(new ToolStripSeparator());
 
+            // 오늘 통계
+            menu.Items.Add(new ToolStripMenuItem("오늘 통계", null, (s, e) => ShowStats()));
+
             // 정보
             menu.Items.Add(new ToolStripMenuItem("정보", null, (s, e) => ShowAbout()));
 
@@ -198,6 +208,7 @@ namespace StayAwake
             {
                 _activityCount = 0;
                 _startTime = DateTime.Now;
+                _sessionRunStart = DateTime.Now;
                 _activityTimer.Start();
                 _startStopItem.Text = "⏹ 정지";
                 _startStopItem.ForeColor = Color.FromArgb(234, 67, 53); // Red for stop
@@ -210,6 +221,7 @@ namespace StayAwake
             }
             else
             {
+                _todayActiveTime += DateTime.Now - _sessionRunStart;
                 _activityTimer.Stop();
                 _simulator.AllowSleep(); // 절전 방지 해제
                 _startStopItem.Text = "▶ 시작";
@@ -317,10 +329,24 @@ namespace StayAwake
 
         private void OnTimerTick(object? sender, EventArgs e)
         {
+            // 자정이 넘어가면 일일 통계 초기화
+            if (DateTime.Today != _statsDate)
+            {
+                _todayActiveTime = DateTime.Now - _sessionRunStart; // 오늘 치 시작 시간 기준 재산정
+                _dailySimCount = 0;
+                _dailySkipCount = 0;
+                _statsDate = DateTime.Today;
+            }
+
             bool simulated = _simulator.SimulateActivity();
             if (simulated)
             {
                 _activityCount++;
+                _dailySimCount++;
+            }
+            else
+            {
+                _dailySkipCount++;
             }
             UpdateStatus(simulated);
         }
@@ -344,6 +370,28 @@ namespace StayAwake
             var elapsed = DateTime.Now - _startTime;
             var skipInfo = lastSimulated == false ? " (건너뜀)" : "";
             _statusItem.Text = $"상태: 실행 중 ({_activityCount}회{skipInfo}, {elapsed:hh\\:mm\\:ss})";
+        }
+
+        private void ShowStats()
+        {
+            var activeTime = _isRunning
+                ? _todayActiveTime + (DateTime.Now - _sessionRunStart)
+                : _todayActiveTime;
+
+            var total = _dailySimCount + _dailySkipCount;
+            var skipRate = total > 0 ? (double)_dailySkipCount / total * 100 : 0;
+
+            var message = $@"StayAwake 오늘의 통계 ({_statsDate:yyyy-MM-dd})
+
+[활동 시뮬레이션]
+• 시뮬레이션 실행: {_dailySimCount}회
+• 사용자 활동으로 스킵: {_dailySkipCount}회
+• 스킵율: {skipRate:F1}% (직접 사용 중이던 비율)
+
+[활성 시간]
+• 오늘 누적 활성 시간: {activeTime:hh\:mm\:ss}";
+
+            MessageBox.Show(message, "오늘의 통계", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void ShowAbout()

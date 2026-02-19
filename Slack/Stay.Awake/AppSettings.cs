@@ -19,6 +19,7 @@ namespace StayAwake
         public int WorkStartMinute { get; set; } = 55;
         public int WorkEndHour { get; set; } = 18;
         public int WorkEndMinute { get; set; } = 55;
+        public bool SlackLockScreenEnabled { get; set; } = false;
 
         private static readonly string _settingsPath = Path.Combine(
             Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),

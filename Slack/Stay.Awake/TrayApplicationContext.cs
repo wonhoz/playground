@@ -1,4 +1,5 @@
 using System.ComponentModel;
+using Microsoft.Win32;
 
 namespace StayAwake
 {
@@ -20,6 +21,7 @@ namespace StayAwake
         private ToolStripMenuItem _statusItem = null!;
         private ToolStripMenuItem _skipIfActiveItem = null!;
         private ToolStripMenuItem _slackAutoStatusItem = null!;
+        private ToolStripMenuItem _lockScreenItem = null!;
 
         private bool _isRunning = false;
         private int _intervalMinutes = 3; // 기본 3분 (Slack 10분 타임아웃의 1/3)
@@ -84,6 +86,9 @@ namespace StayAwake
             };
 
             _trayIcon.DoubleClick += (s, e) => ToggleRunning();
+
+            // 잠금 화면 감지 이벤트 구독
+            SystemEvents.SessionSwitch += OnSessionSwitch;
 
             // 앱 실행 시 자동 시작
             ToggleRunning();
@@ -181,6 +186,13 @@ namespace StayAwake
                 Checked = _settings.SlackAutoStatusEnabled
             };
             slackItem.DropDownItems.Add(_slackAutoStatusItem);
+
+            _lockScreenItem = new ToolStripMenuItem("잠금 화면 시 자리비움 전환", null, (s, e) => ToggleLockScreenAway())
+            {
+                Checked = _settings.SlackLockScreenEnabled
+            };
+            slackItem.DropDownItems.Add(_lockScreenItem);
+
             slackItem.DropDownItems.Add(new ToolStripSeparator());
             slackItem.DropDownItems.Add(new ToolStripMenuItem("지금 활성으로 변경", null, async (s, e) => await SetSlackActiveNowAsync()));
             slackItem.DropDownItems.Add(new ToolStripMenuItem("지금 자리비움으로 변경", null, async (s, e) => await SetSlackAwayNowAsync()));
@@ -426,6 +438,7 @@ Slack 자리 비움 상태 방지 도구
 • 디스플레이 절전 방지: {(_simulator.PreventDisplaySleep ? "켜짐" : "꺼짐")}
 • 사용 중 건너뛰기: {(_simulator.SkipIfUserActive ? "켜짐" : "꺼짐")}
 • Slack 자동 상태 변경: {slackStatusLine}
+• 잠금 화면 시 자리비움 전환: {(_settings.SlackLockScreenEnabled ? "켜짐" : "꺼짐")}
 
 [사용법]
 • 더블클릭: 시작/정지 토글
@@ -467,6 +480,38 @@ Slack 자리 비움 상태 방지 도구
             _trayIcon.ShowBalloonTip(2000, "StayAwake", msg, ToolTipIcon.Info);
         }
 
+        private void ToggleLockScreenAway()
+        {
+            _settings.SlackLockScreenEnabled = !_settings.SlackLockScreenEnabled;
+            _lockScreenItem.Checked = _settings.SlackLockScreenEnabled;
+            SaveSettings();
+
+            var msg = _settings.SlackLockScreenEnabled
+                ? "화면 잠금 시 Slack 자리비움 자동 전환 활성화"
+                : "화면 잠금 시 Slack 자리비움 자동 전환 비활성화";
+            _trayIcon.ShowBalloonTip(1500, "StayAwake", msg, ToolTipIcon.Info);
+        }
+
+        private async void OnSessionSwitch(object sender, SessionSwitchEventArgs e)
+        {
+            if (!_settings.SlackLockScreenEnabled) return;
+
+            if (e.Reason == SessionSwitchReason.SessionLock)
+            {
+                var result = await _slackAutomation.SetAwayAsync();
+                _trayIcon.ShowBalloonTip(2000, "StayAwake",
+                    result.Success ? "화면 잠금 감지 → Slack 자리비움으로 전환됨" : $"Slack 상태 변경 실패: {result.ErrorMessage}",
+                    result.Success ? ToolTipIcon.Info : ToolTipIcon.Warning);
+            }
+            else if (e.Reason == SessionSwitchReason.SessionUnlock)
+            {
+                var result = await _slackAutomation.SetActiveAsync();
+                _trayIcon.ShowBalloonTip(2000, "StayAwake",
+                    result.Success ? "화면 잠금 해제 → Slack 활성으로 전환됨" : $"Slack 상태 변경 실패: {result.ErrorMessage}",
+                    result.Success ? ToolTipIcon.Info : ToolTipIcon.Warning);
+            }
+        }
+
         private async Task SetSlackActiveNowAsync()
         {
             var result = await _slackAutomation.SetActiveAsync();
@@ -503,6 +548,7 @@ Slack 자리 비움 상태 방지 도구
         {
             if (disposing)
             {
+                SystemEvents.SessionSwitch -= OnSessionSwitch;
                 _simulator.AllowSleep(); // 절전 방지 해제
                 _scheduleTimer.Dispose();
                 _activityTimer.Dispose();

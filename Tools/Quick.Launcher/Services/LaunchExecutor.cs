@@ -18,7 +18,7 @@ public static class LaunchExecutor
                     {
                         FileName        = item.Target,
                         UseShellExecute = true
-                    });
+                    })?.Dispose();
                     break;
 
                 case LaunchItemType.Snippet:

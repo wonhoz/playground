@@ -1,0 +1,138 @@
+<Window x:Class="QuickLauncher.LauncherWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Quick.Launcher"
+        Width="620" SizeToContent="Height"
+        WindowStyle="None" AllowsTransparency="True"
+        Background="Transparent" Topmost="True"
+        ShowInTaskbar="False"
+        ResizeMode="NoResize"
+        Deactivated="Window_Deactivated">
+
+    <Window.Resources>
+        <Style x:Key="ResultItem" TargetType="ListBoxItem">
+            <Setter Property="Padding"          Value="12,8"/>
+            <Setter Property="Background"       Value="Transparent"/>
+            <Setter Property="Foreground"       Value="#E0E0E0"/>
+            <Setter Property="BorderThickness"  Value="0"/>
+            <Setter Property="Cursor"           Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <Border x:Name="Bd" Background="{TemplateBinding Background}"
+                                Padding="{TemplateBinding Padding}" CornerRadius="6">
+                            <ContentPresenter/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Bd" Property="Background" Value="#333355"/>
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="Bd" Property="Background" Value="#3D3D70"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="ScrollBar">
+            <Setter Property="Width" Value="6"/>
+        </Style>
+    </Window.Resources>
+
+    <!-- 외부 그림자 패널 -->
+    <Border Margin="20" CornerRadius="12"
+            Background="#1E1E2E"
+            BorderBrush="#44445A" BorderThickness="1">
+        <Border.Effect>
+            <DropShadowEffect Color="Black" Opacity="0.7" BlurRadius="28" ShadowDepth="0"/>
+        </Border.Effect>
+
+        <StackPanel>
+            <!-- 검색 박스 -->
+            <Grid Margin="16,14,16,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="🔍" FontSize="18"
+                           VerticalAlignment="Center" Margin="0,0,10,0" Opacity="0.6"/>
+                <TextBox x:Name="SearchBox" Grid.Column="1"
+                         FontSize="18" Background="Transparent"
+                         Foreground="#E8E8F0" CaretBrush="#E8E8F0"
+                         BorderThickness="0" Padding="0,2"
+                         VerticalAlignment="Center"
+                         TextChanged="SearchBox_TextChanged"
+                         KeyDown="SearchBox_KeyDown">
+                    <TextBox.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="0"/>
+                        </Style>
+                    </TextBox.Resources>
+                </TextBox>
+                <TextBlock Grid.Column="1" x:Name="PlaceholderText"
+                           Text="앱, URL, 스니펫 검색..." FontSize="18"
+                           Foreground="#555570" VerticalAlignment="Center"
+                           IsHitTestVisible="False"/>
+            </Grid>
+
+            <!-- 구분선 -->
+            <Border Height="1" Background="#333355" Margin="0,12,0,0"
+                    Visibility="{Binding Visibility, ElementName=ResultsPanel}"/>
+
+            <!-- 결과 목록 -->
+            <ListBox x:Name="ResultsPanel" Background="Transparent" BorderThickness="0"
+                     Margin="6,4,6,6" MaxHeight="400"
+                     ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                     Visibility="Collapsed"
+                     MouseDoubleClick="Results_MouseDoubleClick"
+                     KeyDown="Results_KeyDown">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="36"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <!-- 아이콘 -->
+                            <TextBlock Grid.Column="0" Text="{Binding Icon}"
+                                       FontSize="20" VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"/>
+
+                            <!-- 이름 + 서브타이틀 -->
+                            <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="4,0,0,0">
+                                <TextBlock Text="{Binding Name}" FontSize="14"
+                                           FontWeight="SemiBold" Foreground="#E8E8F0"
+                                           TextTrimming="CharacterEllipsis"/>
+                                <TextBlock Text="{Binding Subtitle}" FontSize="11"
+                                           Foreground="#777799" TextTrimming="CharacterEllipsis"/>
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem" BasedOn="{StaticResource ResultItem}"/>
+                </ListBox.ItemContainerStyle>
+            </ListBox>
+
+            <!-- 힌트 (결과 없음) -->
+            <TextBlock x:Name="NoResultText"
+                       Text="일치하는 항목이 없습니다." FontSize="13"
+                       Foreground="#555570" HorizontalAlignment="Center"
+                       Margin="0,8,0,14" Visibility="Collapsed"/>
+
+            <!-- 하단 단축키 힌트 -->
+            <Border x:Name="HintBar" Background="#18181E" CornerRadius="0,0,12,12"
+                    Padding="14,6">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="↵ 실행" FontSize="11" Foreground="#555570" Margin="0,0,12,0"/>
+                    <TextBlock Text="↑↓ 이동" FontSize="11" Foreground="#555570" Margin="0,0,12,0"/>
+                    <TextBlock Text="Esc 닫기" FontSize="11" Foreground="#555570"/>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </Border>
+</Window>

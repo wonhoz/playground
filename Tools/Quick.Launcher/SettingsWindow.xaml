@@ -1,0 +1,143 @@
+<Window x:Class="QuickLauncher.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Quick.Launcher 설정" Height="540" Width="480"
+        Background="#1E1E2E" Foreground="#E0E0E0"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize">
+
+    <Window.Resources>
+        <Style x:Key="Label" TargetType="TextBlock">
+            <Setter Property="Foreground"  Value="#AAAACC"/>
+            <Setter Property="FontSize"    Value="12"/>
+            <Setter Property="Margin"      Value="0,0,0,4"/>
+        </Style>
+        <Style x:Key="Input" TargetType="TextBox">
+            <Setter Property="Background"       Value="#2A2A3E"/>
+            <Setter Property="Foreground"       Value="#E0E0E0"/>
+            <Setter Property="BorderBrush"      Value="#44445A"/>
+            <Setter Property="BorderThickness"  Value="1"/>
+            <Setter Property="Padding"          Value="8,5"/>
+            <Setter Property="FontSize"         Value="13"/>
+        </Style>
+        <Style x:Key="Btn" TargetType="Button">
+            <Setter Property="Background"       Value="#333355"/>
+            <Setter Property="Foreground"       Value="#E0E0E0"/>
+            <Setter Property="BorderThickness"  Value="0"/>
+            <Setter Property="Padding"          Value="12,6"/>
+            <Setter Property="FontSize"         Value="12"/>
+            <Setter Property="Cursor"           Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="5"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#4A4A7A"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="AccentBtn" TargetType="Button" BasedOn="{StaticResource Btn}">
+            <Setter Property="Background" Value="#5C5CFF"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#7070FF"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- 전역 단축키 -->
+        <StackPanel Grid.Row="0" Margin="0,0,0,20">
+            <TextBlock Text="전역 단축키" FontSize="15" FontWeight="Bold"
+                       Foreground="#8888FF" Margin="0,0,0,10"/>
+            <TextBlock Style="{StaticResource Label}" Text="단축키 (클릭 후 키 입력)"/>
+            <TextBox x:Name="HotkeyBox" Style="{StaticResource Input}"
+                     IsReadOnly="True" Text="Alt+Space"
+                     GotFocus="Hotkey_GotFocus" LostFocus="Hotkey_LostFocus"
+                     PreviewKeyDown="Hotkey_KeyDown"/>
+        </StackPanel>
+
+        <!-- 커스텀 항목 추가 -->
+        <StackPanel Grid.Row="1" Margin="0,0,0,10">
+            <TextBlock Text="커스텀 항목" FontSize="15" FontWeight="Bold"
+                       Foreground="#8888FF" Margin="0,0,0,10"/>
+            <Grid Margin="0,0,0,4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Style="{StaticResource Label}" Text="이름" Margin="0,0,6,2"/>
+                <TextBlock Grid.Column="1" Style="{StaticResource Label}" Text="URL 또는 텍스트"/>
+            </Grid>
+            <Grid Margin="0,0,0,6">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBox x:Name="NewNameBox" Grid.Column="0" Style="{StaticResource Input}"
+                         Margin="0,0,6,0"/>
+                <TextBox x:Name="NewTargetBox" Grid.Column="1" Style="{StaticResource Input}"
+                         Margin="0,0,6,0"/>
+                <CheckBox x:Name="IsSnippetCheck" Grid.Column="2"
+                          Content="스니펫" Foreground="#AAAACC" FontSize="12"
+                          VerticalAlignment="Center" Margin="0,0,8,0"/>
+                <Button Grid.Column="3" Content="+ 추가" Style="{StaticResource AccentBtn}"
+                        Click="AddItem_Click"/>
+            </Grid>
+        </StackPanel>
+
+        <!-- 항목 목록 -->
+        <Border Grid.Row="2" Background="#16162A" CornerRadius="8" BorderBrush="#333355" BorderThickness="1">
+            <ListBox x:Name="ItemsList" Background="Transparent" BorderThickness="0"
+                     Foreground="#E0E0E0" FontSize="13" Margin="4">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="4,2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="{Binding TypeIcon}"
+                                       FontSize="16" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Name}"
+                                       FontWeight="SemiBold" VerticalAlignment="Center"
+                                       TextTrimming="CharacterEllipsis"/>
+                            <TextBlock Grid.Column="2" Text="{Binding Target}"
+                                       Foreground="#777799" FontSize="11"
+                                       VerticalAlignment="Center" TextTrimming="CharacterEllipsis"/>
+                            <Button Grid.Column="3" Content="🗑" FontSize="14"
+                                    Background="Transparent" BorderThickness="0"
+                                    Cursor="Hand" Padding="6,2"
+                                    Click="DeleteItem_Click" Tag="{Binding}"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Border>
+
+        <!-- 저장 / 닫기 -->
+        <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,16,0,0">
+            <Button Content="저장" Style="{StaticResource AccentBtn}" Margin="0,0,8,0" Click="Save_Click"/>
+            <Button Content="닫기" Style="{StaticResource Btn}" Click="Cancel_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

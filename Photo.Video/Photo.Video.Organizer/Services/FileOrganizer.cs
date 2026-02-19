@@ -15,7 +15,13 @@ namespace Photo.Video.Organizer.Services
         /// <summary>
         /// yyyy/MM/yyyy-MM-dd/파일명
         /// </summary>
-        YearMonthDay
+        YearMonthDay,
+
+        /// <summary>
+        /// 사용자 정의 패턴 (/ 구분자로 폴더 계층 구조)
+        /// 예: "yyyy/MM/dd" → 2024/01/15/파일명
+        /// </summary>
+        Custom
     }
 
     /// <summary>
@@ -62,6 +68,7 @@ namespace Photo.Video.Organizer.Services
             IEnumerable<string> files,
             string destinationRoot,
             FolderStructure folderStructure = FolderStructure.YearMonth,
+            string? customPattern = null,
             IProgress<(int current, int total, string fileName)>? progress = null,
             CancellationToken cancellationToken = default)
         {
@@ -77,7 +84,7 @@ namespace Photo.Video.Organizer.Services
 
                 progress?.Report((i + 1, fileList.Count, fileName));
 
-                var result = await Task.Run(() => OrganizeSingleFile(filePath, destinationRoot, folderStructure), cancellationToken);
+                var result = await Task.Run(() => OrganizeSingleFile(filePath, destinationRoot, folderStructure, customPattern), cancellationToken);
                 summary.Results.Add(result);
 
                 if (result.Success)
@@ -96,7 +103,7 @@ namespace Photo.Video.Organizer.Services
         /// <summary>
         /// 단일 파일 정리
         /// </summary>
-        private OrganizeResult OrganizeSingleFile(string sourcePath, string destinationRoot, FolderStructure folderStructure)
+        private OrganizeResult OrganizeSingleFile(string sourcePath, string destinationRoot, FolderStructure folderStructure, string? customPattern = null)
         {
             var result = new OrganizeResult { SourcePath = sourcePath };
 
@@ -114,21 +121,30 @@ namespace Photo.Video.Organizer.Services
                 result.MediaDate = mediaDate;
                 result.MediaType = MediaDateExtractor.GetMediaType(sourcePath);
 
-                // 대상 폴더 생성
+                // 대상 폴더 결정
                 string destinationFolder;
-                var yearFolder = mediaDate.Year.ToString("D4");
-                var monthFolder = mediaDate.Month.ToString("D2");
 
-                if (folderStructure == FolderStructure.YearMonthDay)
+                if (folderStructure == FolderStructure.Custom && !string.IsNullOrWhiteSpace(customPattern))
+                {
+                    // 사용자 정의 패턴: "yyyy/MM/dd" → 각 부분을 날짜 포맷 적용 후 폴더 계층 생성
+                    var parts = customPattern.Split('/', StringSplitOptions.RemoveEmptyEntries);
+                    var folderParts = new[] { destinationRoot }.Concat(parts.Select(p => mediaDate.ToString(p))).ToArray();
+                    destinationFolder = Path.Combine(folderParts);
+                }
+                else if (folderStructure == FolderStructure.YearMonthDay)
                 {
                     // yyyy/MM/yyyy-MM-dd/
-                    var dayFolder = $"{mediaDate:yyyy-MM-dd}";
-                    destinationFolder = Path.Combine(destinationRoot, yearFolder, monthFolder, dayFolder);
+                    destinationFolder = Path.Combine(destinationRoot,
+                        mediaDate.Year.ToString("D4"),
+                        mediaDate.Month.ToString("D2"),
+                        $"{mediaDate:yyyy-MM-dd}");
                 }
                 else
                 {
                     // yyyy/MM/ (기본)
-                    destinationFolder = Path.Combine(destinationRoot, yearFolder, monthFolder);
+                    destinationFolder = Path.Combine(destinationRoot,
+                        mediaDate.Year.ToString("D4"),
+                        mediaDate.Month.ToString("D2"));
                 }
 
                 Directory.CreateDirectory(destinationFolder);

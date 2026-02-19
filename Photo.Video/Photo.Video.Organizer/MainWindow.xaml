@@ -588,13 +588,39 @@
                                 <ComboBox x:Name="FolderStructureCombo"
                                           Style="{StaticResource DarkComboBoxStyle}"
                                           SelectedIndex="0"
-                                          Margin="0,0,0,4">
+                                          Margin="0,0,0,4"
+                                          SelectionChanged="FolderStructureCombo_SelectionChanged">
                                     <ComboBoxItem Content="yyyy/MM/파일명" Tag="YearMonth"/>
                                     <ComboBoxItem Content="yyyy/MM/yyyy-MM-dd/파일명" Tag="YearMonthDay"/>
+                                    <ComboBoxItem Content="사용자 정의 패턴" Tag="Custom"/>
                                 </ComboBox>
+                                <StackPanel x:Name="CustomPatternPanel" Visibility="Collapsed" Margin="0,6,0,0">
+                                    <TextBlock Text="폴더 패턴 (/ 로 폴더 계층 구분)"
+                                               FontSize="10"
+                                               Foreground="{StaticResource TextSecondaryBrush}"
+                                               Margin="0,0,0,4"/>
+                                    <Border Background="{StaticResource CardLightBrush}"
+                                            BorderBrush="{StaticResource BorderBrush}"
+                                            BorderThickness="1"
+                                            CornerRadius="6">
+                                        <TextBox x:Name="CustomPatternBox"
+                                                 Text="yyyy/MM/dd"
+                                                 Background="Transparent"
+                                                 Foreground="{StaticResource TextPrimaryBrush}"
+                                                 BorderThickness="0"
+                                                 Padding="10,8"
+                                                 FontSize="12"
+                                                 CaretBrush="{StaticResource PrimaryBrush}"/>
+                                    </Border>
+                                    <TextBlock Text="예: yyyy/MM  ·  yyyy/MM/dd  ·  yyyy"
+                                               FontSize="10"
+                                               Foreground="{StaticResource TextSecondaryBrush}"
+                                               Margin="0,4,0,0"/>
+                                </StackPanel>
                                 <TextBlock Text="파일명: yyyy-MM-dd HH.mm.ss"
                                            FontSize="10"
-                                           Foreground="{StaticResource TextSecondaryBrush}"/>
+                                           Foreground="{StaticResource TextSecondaryBrush}"
+                                           Margin="0,4,0,0"/>
 
                                 <!-- Separator -->
                                 <Border Height="1" Background="{StaticResource BorderBrush}" Margin="0,14"/>

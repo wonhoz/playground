@@ -204,16 +204,25 @@ namespace Photo.Video.Organizer
 
         #region Folder Structure
 
-        private FolderStructure GetSelectedFolderStructure()
+        private (FolderStructure structure, string? customPattern) GetSelectedFolderOptions()
         {
             var selectedItem = FolderStructureCombo.SelectedItem as System.Windows.Controls.ComboBoxItem;
             var tag = selectedItem?.Tag?.ToString();
 
             return tag switch
             {
-                "YearMonthDay" => FolderStructure.YearMonthDay,
-                _ => FolderStructure.YearMonth
+                "YearMonthDay" => (FolderStructure.YearMonthDay, null),
+                "Custom" => (FolderStructure.Custom, CustomPatternBox.Text),
+                _ => (FolderStructure.YearMonth, null)
             };
+        }
+
+        private void FolderStructureCombo_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            var selectedItem = FolderStructureCombo.SelectedItem as System.Windows.Controls.ComboBoxItem;
+            var tag = selectedItem?.Tag?.ToString();
+            if (CustomPatternPanel != null)
+                CustomPatternPanel.Visibility = tag == "Custom" ? Visibility.Visible : Visibility.Collapsed;
         }
 
         #endregion
@@ -248,13 +257,13 @@ namespace Photo.Video.Organizer
 
             try
             {
-                // 폴더 구조 옵션 가져오기
-                var folderStructure = GetSelectedFolderStructure();
+                var (folderStructure, customPattern) = GetSelectedFolderOptions();
 
                 var result = await _organizer.OrganizeFilesAsync(
                     _selectedFiles,
                     _destinationPath,
                     folderStructure,
+                    customPattern,
                     progress,
                     _cancellationTokenSource.Token);
 

@@ -1,3 +1,4 @@
+using System.IO;
 using System.Runtime.InteropServices;
 
 namespace FileDuplicates.Services;
@@ -34,6 +35,8 @@ public static class RecycleBinHelper
             pFrom  = path + '\0' + '\0',
             fFlags = FOF_ALLOWUNDO | FOF_NOCONFIRMATION | FOF_SILENT
         };
-        SHFileOperation(ref op);
+        int result = SHFileOperation(ref op);
+        if (result != 0)
+            throw new IOException($"휴지통으로 이동 실패 (오류 코드: 0x{result:X})");
     }
 }

@@ -48,7 +48,6 @@ public static class ImageScanner
         // 2단계: Union-Find로 연결 컴포넌트 구성 (Hamming distance ≤ threshold)
         var n      = entries.Count;
         var parent = Enumerable.Range(0, n).ToArray();
-        var dist   = new int[n, n];  // 그룹 내 최대 거리 추적
 
         int Find(int x) => parent[x] == x ? x : parent[x] = Find(parent[x]);
         void Union(int a, int b) { parent[Find(a)] = Find(b); }
@@ -115,11 +114,6 @@ public static class ImageScanner
         return hash;
     }
 
-    private static int HammingDistance(ulong a, ulong b)
-    {
-        ulong diff = a ^ b;
-        int count = 0;
-        while (diff != 0) { count += (int)(diff & 1); diff >>= 1; }
-        return count;
-    }
+    private static int HammingDistance(ulong a, ulong b) =>
+        System.Numerics.BitOperations.PopCount(a ^ b);
 }

@@ -20,7 +20,11 @@ public static class FileScanner
 
         var allFiles = options.Folders
             .Where(Directory.Exists)
-            .SelectMany(f => Directory.EnumerateFiles(f, "*", searchOption))
+            .SelectMany(f =>
+            {
+                try   { return Directory.EnumerateFiles(f, "*", searchOption); }
+                catch { return []; }
+            })
             .Distinct()
             .ToList();
 

@@ -134,26 +134,23 @@ public partial class MainWindow : Window
         root.Children.Add(stack);
         root.Children.Add(editOverlay);
 
+        var normalShadow = new DropShadowEffect { Color = Colors.Black, Opacity = 0.4,  BlurRadius = 8,  ShadowDepth = 2 };
+        var hoverShadow  = new DropShadowEffect { Color = Colors.White, Opacity = 0.25, BlurRadius = 12, ShadowDepth = 0 };
+
         var card = new Border
         {
             Width = 130, Height = 110, Margin = new Thickness(6),
             CornerRadius = new CornerRadius(10), Background = bg,
             Cursor = _editMode ? Cursors.Arrow : Cursors.Hand,
-            Effect = new DropShadowEffect
-            {
-                Color = Colors.Black, Opacity = 0.4,
-                BlurRadius = 8, ShadowDepth = 2
-            },
+            Effect = normalShadow,
             Child = root
         };
 
         if (!_editMode)
         {
             card.MouseLeftButtonDown += (_, _) => _audio.Play(btn);
-            card.MouseEnter += (_, _) =>
-                card.Effect = new DropShadowEffect { Color = Colors.White, Opacity = 0.25, BlurRadius = 12, ShadowDepth = 0 };
-            card.MouseLeave += (_, _) =>
-                card.Effect = new DropShadowEffect { Color = Colors.Black, Opacity = 0.4, BlurRadius = 8, ShadowDepth = 2 };
+            card.MouseEnter += (_, _) => card.Effect = hoverShadow;
+            card.MouseLeave += (_, _) => card.Effect = normalShadow;
         }
 
         return card;

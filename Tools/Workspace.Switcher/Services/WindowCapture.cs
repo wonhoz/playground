@@ -37,7 +37,7 @@ public static class WindowCapture
             GetWindowThreadProcessId(hWnd, out uint pid);
             try
             {
-                var proc = Process.GetProcessById((int)pid);
+                using var proc = Process.GetProcessById((int)pid);
                 var exe  = proc.MainModule?.FileName;
                 if (string.IsNullOrEmpty(exe) || !seen.Add(exe)) return true;
 

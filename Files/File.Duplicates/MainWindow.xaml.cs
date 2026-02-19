@@ -89,6 +89,7 @@ public partial class MainWindow : Window
             SimilarityThreshold = (int)ThresholdSlider.Value
         };
 
+        _cts?.Dispose();
         _cts = new CancellationTokenSource();
 
         var progress = new Progress<ScanProgress>(p =>

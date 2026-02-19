@@ -142,7 +142,8 @@ namespace Photo.Video.Organizer.Services
                         int minute = match.Groups.Count > 5 && match.Groups[5].Success ? int.Parse(match.Groups[5].Value) : 0;
                         int second = match.Groups.Count > 6 && match.Groups[6].Success ? int.Parse(match.Groups[6].Value) : 0;
 
-                        if (year >= 1990 && year <= 2100 && month >= 1 && month <= 12 && day >= 1 && day <= 31)
+                        if (year >= 1990 && year <= 2100 && month >= 1 && month <= 12
+                            && day >= 1 && day <= DateTime.DaysInMonth(year, month))
                         {
                             return new DateTime(year, month, day, hour, minute, second);
                         }

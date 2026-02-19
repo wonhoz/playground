@@ -33,6 +33,7 @@ public class AudioService : IDisposable
         {
             IWaveProvider provider;
             IDisposable   cleanup;
+            IDisposable?  extraCleanup = null;
 
             if (!string.IsNullOrEmpty(btn.FilePath) && File.Exists(btn.FilePath))
             {
@@ -46,8 +47,9 @@ public class AudioService : IDisposable
                 var format = new WaveFormat(44100, 16, 1);
                 var ms     = new MemoryStream(pcm);
                 var raw    = new RawSourceWaveStream(ms, format);
-                provider   = raw;
-                cleanup    = raw;
+                provider     = raw;
+                cleanup      = raw;
+                extraCleanup = ms;  // RawSourceWaveStream이 ms를 소유하지 않으므로 별도 해제
             }
 
             var wo = new WaveOutEvent { Volume = _volume };
@@ -57,6 +59,7 @@ public class AudioService : IDisposable
                 lock (_lock) _pool.Remove(wo);
                 wo.Dispose();
                 cleanup.Dispose();
+                extraCleanup?.Dispose();
             };
             lock (_lock) _pool.Add(wo);
             wo.Play();
@@ -73,9 +76,16 @@ public class AudioService : IDisposable
 
     public void Dispose()
     {
-        StopAll();
+        WaveOutEvent[] snapshot;
         lock (_lock)
-            foreach (var wo in _pool)
-                wo.Dispose();
+        {
+            snapshot = _pool.ToArray();
+            _pool.Clear();  // 먼저 풀 비우기 → PlaybackStopped 핸들러의 Remove/Dispose 중복 방지
+        }
+        foreach (var wo in snapshot)
+        {
+            wo.Stop();
+            wo.Dispose();
+        }
     }
 }

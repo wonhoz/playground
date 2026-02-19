@@ -99,22 +99,20 @@ public partial class MainWindow : Window
         stack.Children.Add(launchBtn);
         stack.Children.Add(btnRow);
 
+        var normalShadow = new DropShadowEffect { Color = Colors.Black, Opacity = 0.45, BlurRadius = 10, ShadowDepth = 3 };
+        var hoverShadow  = new DropShadowEffect { Color = Colors.White, Opacity = 0.2,  BlurRadius = 14, ShadowDepth = 0 };
+
         var card = new Border
         {
             Width = 170, Margin = new Thickness(8),
             CornerRadius = new CornerRadius(12), Background = bg,
             Cursor = Cursors.Arrow,
-            Effect = new DropShadowEffect
-            {
-                Color = Colors.Black, Opacity = 0.45, BlurRadius = 10, ShadowDepth = 3
-            },
+            Effect = normalShadow,
             Child = stack
         };
 
-        card.MouseEnter += (_, _) =>
-            card.Effect = new DropShadowEffect { Color = Colors.White, Opacity = 0.2, BlurRadius = 14, ShadowDepth = 0 };
-        card.MouseLeave += (_, _) =>
-            card.Effect = new DropShadowEffect { Color = Colors.Black, Opacity = 0.45, BlurRadius = 10, ShadowDepth = 3 };
+        card.MouseEnter += (_, _) => card.Effect = hoverShadow;
+        card.MouseLeave += (_, _) => card.Effect = normalShadow;
 
         return card;
     }

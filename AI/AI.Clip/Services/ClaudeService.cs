@@ -95,11 +95,11 @@ namespace AiClip.Services
             }
 
             var json = await response.Content.ReadAsStringAsync(ct);
-            using var doc = JsonDocument.Parse(json);
-            return doc.RootElement
-                .GetProperty("content")[0]
-                .GetProperty("text")
-                .GetString() ?? "";
+            using var doc    = JsonDocument.Parse(json);
+            var content = doc.RootElement.GetProperty("content");
+            if (content.GetArrayLength() == 0)
+                throw new HttpRequestException("API 응답에 content가 없습니다.");
+            return content[0].GetProperty("text").GetString() ?? "";
         }
     }
 }

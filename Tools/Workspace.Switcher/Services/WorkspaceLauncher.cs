@@ -21,7 +21,7 @@ public static class WorkspaceLauncher
                     FileName        = app.Path,
                     Arguments       = app.Args,
                     UseShellExecute = true
-                });
+                })?.Dispose();
             }
             catch (Exception ex)
             {

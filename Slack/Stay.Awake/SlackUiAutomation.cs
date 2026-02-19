@@ -132,20 +132,27 @@ Write-Output 'SUCCESS'
             var tempFile = Path.Combine(Path.GetTempPath(), "StayAwake_slack.ps1");
             await File.WriteAllTextAsync(tempFile, script, System.Text.Encoding.UTF8);
 
-            var psi = new ProcessStartInfo
+            try
             {
-                FileName = "powershell.exe",
-                Arguments = $"-ExecutionPolicy Bypass -NonInteractive -WindowStyle Hidden -File \"{tempFile}\"",
-                UseShellExecute = false,
-                RedirectStandardOutput = true,
-                RedirectStandardError = true,
-                CreateNoWindow = true
-            };
+                var psi = new ProcessStartInfo
+                {
+                    FileName = "powershell.exe",
+                    Arguments = $"-ExecutionPolicy Bypass -NonInteractive -WindowStyle Hidden -File \"{tempFile}\"",
+                    UseShellExecute = false,
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true,
+                    CreateNoWindow = true
+                };
 
-            using var process = Process.Start(psi)!;
-            var output = await process.StandardOutput.ReadToEndAsync();
-            await process.WaitForExitAsync();
-            return output;
+                using var process = Process.Start(psi)!;
+                var output = await process.StandardOutput.ReadToEndAsync();
+                await process.WaitForExitAsync();
+                return output;
+            }
+            finally
+            {
+                try { File.Delete(tempFile); } catch { }
+            }
         }
     }
 

@@ -27,8 +27,8 @@ public partial class App : Application
         _builtinProvider.Reload(_settings.CustomItems);
         _engine = new SearchEngine(_appProvider, _builtinProvider);
 
-        // 앱 목록을 백그라운드에서 인덱싱
-        Task.Run(_appProvider.BuildIndex);
+        // 앱 목록을 백그라운드에서 인덱싱 (오류는 무시)
+        _ = Task.Run(_appProvider.BuildIndex);
 
         // LauncherWindow 생성 (표시하지 않음)
         _launcher = new LauncherWindow();
@@ -115,7 +115,7 @@ public partial class App : Application
         g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
         g.Clear(System.Drawing.Color.FromArgb(255, 255, 193, 7));  // amber
         using var font = new System.Drawing.Font("Segoe UI", 17, System.Drawing.FontStyle.Bold);
-        var sf = new System.Drawing.StringFormat
+        using var sf   = new System.Drawing.StringFormat
         {
             Alignment     = System.Drawing.StringAlignment.Center,
             LineAlignment = System.Drawing.StringAlignment.Center

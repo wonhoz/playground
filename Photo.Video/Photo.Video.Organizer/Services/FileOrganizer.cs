@@ -50,6 +50,8 @@ namespace Photo.Video.Organizer.Services
         {
             public int TotalFiles { get; set; }
             public int SuccessCount { get; set; }
+            public int ImageCount { get; set; }
+            public int VideoCount { get; set; }
             public int SkippedCount { get; set; }
             public int DuplicateCount { get; set; }
             public int ErrorCount { get; set; }
@@ -89,7 +91,13 @@ namespace Photo.Video.Organizer.Services
                 summary.Results.Add(result);
 
                 if (result.Success)
+                {
                     summary.SuccessCount++;
+                    if (result.MediaType == MediaType.Image)
+                        summary.ImageCount++;
+                    else if (result.MediaType == MediaType.Video)
+                        summary.VideoCount++;
+                }
                 else if (result.IsSkippedAsDuplicate)
                     summary.DuplicateCount++;
                 else if (result.ErrorMessage?.Contains("건너뜀") == true)

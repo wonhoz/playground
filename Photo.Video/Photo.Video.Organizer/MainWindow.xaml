@@ -683,17 +683,32 @@
 
                                 <!-- Result -->
                                 <StackPanel x:Name="ResultPanel" Visibility="Collapsed" Margin="0,12,0,0">
-                                    <Border Height="1" Background="{StaticResource BorderBrush}" Margin="0,0,0,12"/>
+                                    <Border Height="1" Background="{StaticResource BorderBrush}" Margin="0,0,0,10"/>
                                     <TextBlock Text="처리 결과"
                                                FontSize="12" FontWeight="SemiBold"
                                                Foreground="{StaticResource TextPrimaryBrush}"
                                                Margin="0,0,0,6"/>
-                                    <Border Background="#1A66BB6A" CornerRadius="6" Padding="10">
+
+                                    <!-- 요약 헤더 -->
+                                    <Border Background="#1A4FC3F7" CornerRadius="6" Padding="9,7" Margin="0,0,0,5">
+                                        <TextBlock x:Name="ResultSummaryText"
+                                                   FontSize="11" FontWeight="SemiBold"
+                                                   Foreground="#4FC3F7"
+                                                   TextWrapping="Wrap"/>
+                                    </Border>
+
+                                    <!-- 상세 항목 -->
+                                    <Border Background="#14FFFFFF" CornerRadius="6" Padding="9,8">
                                         <StackPanel>
-                                            <TextBlock x:Name="ResultSuccessText" FontSize="11" Foreground="#81C784"/>
-                                            <TextBlock x:Name="ResultDuplicateText" FontSize="11" Foreground="#64B5F6" Margin="0,2,0,0"/>
-                                            <TextBlock x:Name="ResultSkippedText" FontSize="11" Foreground="#FFB74D" Margin="0,2,0,0"/>
-                                            <TextBlock x:Name="ResultErrorText" FontSize="11" Foreground="#EF5350" Margin="0,2,0,0"/>
+                                            <!-- 성공: 이미지 / 동영상 분리 -->
+                                            <TextBlock x:Name="ResultImageText" FontSize="11" Foreground="#81C784"/>
+                                            <TextBlock x:Name="ResultVideoText" FontSize="11" Foreground="#A5D6A7" Margin="0,3,0,0"/>
+                                            <!-- 구분선 (성공↔건너뜀/오류) -->
+                                            <Border x:Name="ResultDivider" Height="1" Background="#303030" Margin="0,6"/>
+                                            <!-- 건너뜀 / 오류 -->
+                                            <TextBlock x:Name="ResultDuplicateText" FontSize="11" Foreground="#64B5F6"/>
+                                            <TextBlock x:Name="ResultSkippedText" FontSize="11" Foreground="#FFB74D" Margin="0,3,0,0"/>
+                                            <TextBlock x:Name="ResultErrorText" FontSize="11" Foreground="#EF5350" Margin="0,3,0,0"/>
                                         </StackPanel>
                                     </Border>
                                 </StackPanel>

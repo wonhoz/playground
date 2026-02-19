@@ -309,12 +309,30 @@ namespace Photo.Video.Organizer
         private void ShowResult(FileOrganizer.OrganizeSummary result)
         {
             ResultPanel.Visibility = Visibility.Visible;
-            ResultSuccessText.Text = $"성공: {result.SuccessCount}개";
-            ResultDuplicateText.Text = $"중복 건너뜀: {result.DuplicateCount}개";
+
+            // 요약 헤더
+            ResultSummaryText.Text = $"총 {result.TotalFiles}개 파일 중 {result.SuccessCount}개 정리 완료";
+
+            // 이미지 / 동영상 분리
+            ResultImageText.Text = $"▪ 이미지  {result.ImageCount}개 정리됨";
+            ResultImageText.Visibility = result.ImageCount > 0 ? Visibility.Visible : Visibility.Collapsed;
+            ResultVideoText.Text = $"▪ 동영상  {result.VideoCount}개 정리됨";
+            ResultVideoText.Visibility = result.VideoCount > 0 ? Visibility.Visible : Visibility.Collapsed;
+
+            // 구분선 (성공이 있고 건너뜀/오류도 있을 때만)
+            var hasSkippedOrError = result.DuplicateCount > 0 || result.SkippedCount > 0 || result.ErrorCount > 0;
+            ResultDivider.Visibility = result.SuccessCount > 0 && hasSkippedOrError ? Visibility.Visible : Visibility.Collapsed;
+
+            // 중복 건너뜀
+            ResultDuplicateText.Text = $"▸ 중복 건너뜀  {result.DuplicateCount}개";
             ResultDuplicateText.Visibility = result.DuplicateCount > 0 ? Visibility.Visible : Visibility.Collapsed;
-            ResultSkippedText.Text = $"건너뜀: {result.SkippedCount}개";
+
+            // 미지원 형식 건너뜀
+            ResultSkippedText.Text = $"▸ 미지원 형식  {result.SkippedCount}개";
             ResultSkippedText.Visibility = result.SkippedCount > 0 ? Visibility.Visible : Visibility.Collapsed;
-            ResultErrorText.Text = $"오류: {result.ErrorCount}개";
+
+            // 오류
+            ResultErrorText.Text = $"▸ 오류  {result.ErrorCount}개";
             ResultErrorText.Visibility = result.ErrorCount > 0 ? Visibility.Visible : Visibility.Collapsed;
 
             StatusText.Text = result.LogFilePath != null

@@ -540,6 +540,23 @@ namespace Music.Player
             historyWindow.Show();
         }
 
+        private void LibraryButton_Click(object sender, RoutedEventArgs e)
+        {
+            var libraryWindow = new LibraryWindow(paths =>
+            {
+                AddFiles(paths);
+                if (PlaylistToggle.IsChecked != true)
+                {
+                    PlaylistToggle.IsChecked = true;
+                    TogglePlaylistPanel();
+                }
+            })
+            {
+                Owner = this
+            };
+            libraryWindow.Show();
+        }
+
         #endregion
 
         #region Lyrics

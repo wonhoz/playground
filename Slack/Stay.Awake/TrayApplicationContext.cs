@@ -348,7 +348,15 @@ namespace StayAwake
 
         private void ShowAbout()
         {
-            var message = $@"StayAwake v1.2
+            var slackStatusLine = _slackAutomation.IsEnabled
+                ? $"켜짐 ({_slackAutomation.WorkStartHour:D2}:{_slackAutomation.WorkStartMinute:D2} 활성 / {_slackAutomation.WorkEndHour:D2}:{_slackAutomation.WorkEndMinute:D2} 자리비움)"
+                : "꺼짐";
+
+            var activityTypeLabel = _simulator.ActivityType == ActivityType.MouseAndKeyboard
+                ? "마우스 + 키보드"
+                : "마우스 이동";
+
+            var message = $@"StayAwake v1.3
 
 Slack 자리 비움 상태 방지 도구
 
@@ -361,12 +369,15 @@ Slack 자리 비움 상태 방지 도구
 • 주기적으로 마우스를 이동 후 원위치
 • SetThreadExecutionState로 디스플레이 절전 방지
 • 사용자가 직접 활동 중이면 마우스 이동 자동 건너뜀
+• Slack 상태 변경: 클립보드 방식으로 슬래시 커맨드 전송 (한글 IME 대응)
 
 [현재 설정]
 • 간격: {_intervalMinutes}분
 • 이동 거리: {_simulator.MoveDistance}px
+• 활동 유형: {activityTypeLabel}
 • 디스플레이 절전 방지: {(_simulator.PreventDisplaySleep ? "켜짐" : "꺼짐")}
 • 사용 중 건너뛰기: {(_simulator.SkipIfUserActive ? "켜짐" : "꺼짐")}
+• Slack 자동 상태 변경: {slackStatusLine}
 
 [사용법]
 • 더블클릭: 시작/정지 토글

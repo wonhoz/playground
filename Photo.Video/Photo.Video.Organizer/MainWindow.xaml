@@ -698,7 +698,7 @@
                                     </Border>
 
                                     <!-- 상세 항목 -->
-                                    <Border Background="#14FFFFFF" CornerRadius="6" Padding="9,8">
+                                    <Border Background="#14FFFFFF" CornerRadius="6" Padding="9,8" Margin="0,0,0,6">
                                         <StackPanel>
                                             <!-- 성공: 이미지 / 동영상 분리 -->
                                             <TextBlock x:Name="ResultImageText" FontSize="11" Foreground="#81C784"/>
@@ -711,6 +711,43 @@
                                             <TextBlock x:Name="ResultErrorText" FontSize="11" Foreground="#EF5350" Margin="0,3,0,0"/>
                                         </StackPanel>
                                     </Border>
+
+                                    <!-- 로그 보기 버튼 (로그 저장 시에만 표시) -->
+                                    <Button x:Name="OpenLogButton"
+                                            Visibility="Collapsed"
+                                            Click="OpenLog_Click"
+                                            HorizontalAlignment="Stretch"
+                                            Padding="0,7"
+                                            Cursor="Hand"
+                                            BorderThickness="1"
+                                            BorderBrush="#404040"
+                                            Background="#252525">
+                                        <Button.Template>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border x:Name="bd"
+                                                        Background="{TemplateBinding Background}"
+                                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                                        CornerRadius="6"
+                                                        Padding="{TemplateBinding Padding}">
+                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                </Border>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter TargetName="bd" Property="Background" Value="#333333"/>
+                                                        <Setter TargetName="bd" Property="BorderBrush" Value="#4FC3F7"/>
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Button.Template>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="📄" FontSize="11" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                                            <TextBlock x:Name="OpenLogButtonText"
+                                                       FontSize="11"
+                                                       Foreground="#9E9E9E"
+                                                       VerticalAlignment="Center"/>
+                                        </StackPanel>
+                                    </Button>
                                 </StackPanel>
                             </StackPanel>
                         </ScrollViewer>

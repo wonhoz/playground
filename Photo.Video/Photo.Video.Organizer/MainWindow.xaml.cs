@@ -11,6 +11,7 @@ namespace Photo.Video.Organizer
         private readonly List<string> _selectedFiles = new();
         private string? _destinationPath;
         private CancellationTokenSource? _cancellationTokenSource;
+        private string? _lastLogFilePath;
 
         public MainWindow()
         {
@@ -335,9 +336,19 @@ namespace Photo.Video.Organizer
             ResultErrorText.Text = $"▸ 오류  {result.ErrorCount}개";
             ResultErrorText.Visibility = result.ErrorCount > 0 ? Visibility.Visible : Visibility.Collapsed;
 
-            StatusText.Text = result.LogFilePath != null
-                ? $"완료: {result.SuccessCount}개 정리됨  |  로그: {Path.GetFileName(result.LogFilePath)}"
-                : $"완료: {result.SuccessCount}개 파일 정리됨";
+            // 로그 보기 버튼
+            _lastLogFilePath = result.LogFilePath;
+            if (result.LogFilePath != null)
+            {
+                OpenLogButtonText.Text = $"로그 보기  {Path.GetFileName(result.LogFilePath)}";
+                OpenLogButton.Visibility = Visibility.Visible;
+                StatusText.Text = $"완료: {result.SuccessCount}개 정리됨  |  로그: {Path.GetFileName(result.LogFilePath)}";
+            }
+            else
+            {
+                OpenLogButton.Visibility = Visibility.Collapsed;
+                StatusText.Text = $"완료: {result.SuccessCount}개 파일 정리됨";
+            }
 
             // 완료 후 파일 목록 초기화
             _selectedFiles.Clear();
@@ -358,6 +369,18 @@ namespace Photo.Video.Organizer
                 {
                     System.Diagnostics.Process.Start("explorer.exe", _destinationPath);
                 }
+            }
+        }
+
+        private void OpenLog_Click(object sender, RoutedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(_lastLogFilePath) && File.Exists(_lastLogFilePath))
+            {
+                System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+                {
+                    FileName = _lastLogFilePath,
+                    UseShellExecute = true
+                });
             }
         }
 

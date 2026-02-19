@@ -19,6 +19,10 @@ WinForms 트레이 앱 · 마우스/키보드 시뮬레이션 + Slack 상태 자
 - ✅ 명령 전송 후 원래 클립보드 내용 자동 복원
 - ✅ 정보 창 내용 업데이트 (활동 유형, Slack 자동 상태 설정 표시) + v1.3 버전 반영
 
+### 버그 수정 완료
+- ✅ `Mutex` 인스턴스를 지역 변수 → `static` 필드로 변경 (GC 조기 해제 방지)
+- ✅ PowerShell 임시 파일(`StayAwake_slack.ps1`) `finally`에서 항상 삭제 (호출마다 누적 방지)
+
 ---
 
 ## 2. Photo.Video.Organizer (Photo)
@@ -37,6 +41,9 @@ WPF · EXIF/QuickTime 메타데이터 기반 날짜별 자동 폴더 정리
 ### 추가 완료된 것들
 - ✅ 결과 패널 상세화 — 총 N개 중 M개 완료, 이미지/동영상 분리, 중복·미지원·오류 구분 표시
 - ✅ 로그 보기 버튼 — 로그 저장 시 결과 패널에 버튼 표시, 클릭 시 CSV 즉시 오픈
+
+### 버그 수정 완료
+- ✅ 날짜 유효성 검증을 `day <= 31` 고정에서 `DateTime.DaysInMonth(year, month)` 기반으로 개선 (2월 30일 등 오파싱 방지)
 
 ---
 
@@ -81,6 +88,9 @@ WinForms 트레이 앱 · Anthropic Claude API · 클립보드 텍스트 즉시 
 - ✅ 오렌지 색상 'AI' 아이콘 GDI+ 런타임 생성 (이미지 파일 불필요)
 - ✅ AppData에 설정 영속 저장
 
+### 버그 수정 완료
+- ✅ Anthropic API 응답 `content[0]` 접근 전 배열 길이 검증 추가 (빈 응답 시 IndexOutOfRange 방지)
+
 ---
 
 ## 5. File.Duplicates (Files)
@@ -96,6 +106,13 @@ WPF · SHA256 해시 + dHash 유사도 · 중복 파일 탐지 및 정리
 | 5 | 결과 카드 UI — SHA256(파란 배지) / 유사 이미지(보라 배지) 그룹 표시 | ✅ 완료 |
 | 6 | 중복 자동 선택 — 각 그룹에서 첫 번째만 유지, 나머지 자동 체크 | ✅ 완료 |
 | 7 | 휴지통으로 / 폴더 이동 — Shell32 SHFileOperation (복원 가능) | ✅ 완료 |
+
+### 버그 수정 완료
+- ✅ `ImageScanner`의 미사용 `int[n,n]` 배열 제거 (n² × 4B 메모리 낭비 방지)
+- ✅ `HammingDistance` 수동 비트 루프 → `BitOperations.PopCount(a ^ b)` 단일 명령으로 교체 (성능 향상)
+- ✅ `SHFileOperation` 반환값 확인 — 0 이외 값이면 `IOException` throw
+- ✅ `Directory.EnumerateFiles` 폴더별 try-catch 추가 (UnauthorizedAccessException 등 부분 실패 허용)
+- ✅ 재스캔 시 이전 `CancellationTokenSource` Dispose (메모리 누수 방지)
 
 ---
 
@@ -139,6 +156,11 @@ WPF · NAudio 2.2.1 · PCM 사운드 합성 · 전역 단축키 · 사운드패�
 | 8 | 겹쳐 재생 옵션, 볼륨 슬라이더, ■ 정지 버튼 | ✅ 완료 |
 | 9 | AppData JSON 영속 설정 저장 | ✅ 완료 |
 
+### 버그 수정 완료
+- ✅ `MemoryStream`을 `extraCleanup`으로 별도 추적하여 `PlaybackStopped` 핸들러에서 함께 Dispose (`RawSourceWaveStream`이 소유권 없음)
+- ✅ `Dispose()`에서 풀 스냅샷 후 `_pool.Clear()` 선행 — `PlaybackStopped` 핸들러와의 이중 Dispose 충돌 방지
+- ✅ `CreateCard()`에서 `DropShadowEffect`를 카드당 2개만 사전 생성 재사용 (MouseEnter/Leave마다 `new` 제거)
+
 ---
 
 ## 7. Quick.Launcher (Tools)
@@ -154,6 +176,11 @@ WPF · Alt+Space 전역 단축키 · 시작 메뉴 앱 인덱싱 · Fuzzy 검색
 | 5 | LauncherWindow — 다크 보더리스 팝업, 키보드 Up/Down/Enter/Esc 네비게이션 | ✅ 완료 |
 | 6 | SettingsWindow — 단축키 캡처, 커스텀 URL·스니펫 목록 관리 | ✅ 완료 |
 
+### 버그 수정 완료
+- ✅ `GDI+ StringFormat` → `using var` 명시적 Dispose (GDI+ 비관리 리소스 누수 방지)
+- ✅ `Task.Run` fire-and-forget을 `_ = Task.Run(...)` 패턴으로 변경 (컴파일러 경고 제거)
+- ✅ `LaunchExecutor`에서 `Process.Start(...)?.Dispose()` — `UseShellExecute=true` 시 반환되는 프로세스 핸들 해제
+
 ---
 
 ## 8. Workspace.Switcher (Tools)
@@ -168,3 +195,8 @@ WPF · 워크스페이스 프리셋 카드 UI · 앱 순차 실행 · 실행 중
 | 4 | EditWorkspaceDialog — 이름/이모지/색상팔레트(15색)/앱 목록 편집, exe찾기 + URL 지원 | ✅ 완료 |
 | 5 | 앱 순서 조정 — ↑ 버튼으로 목록 순서 변경, 실행 미리보기 | ✅ 완료 |
 | 6 | AppData JSON 영속 설정 저장 | ✅ 완료 |
+
+### 버그 수정 완료
+- ✅ `WindowCapture`에서 `Process.GetProcessById()` → `using var` 패턴으로 핸들 누수 방지
+- ✅ `WorkspaceLauncher`에서 `Process.Start(...)?.Dispose()` — 프로세스 핸들 해제
+- ✅ `CreateCard()`에서 `DropShadowEffect`를 카드당 2개만 사전 생성 재사용 (MouseEnter/Leave마다 `new` 제거)

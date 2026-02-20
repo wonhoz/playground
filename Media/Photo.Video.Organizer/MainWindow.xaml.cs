@@ -259,12 +259,14 @@ namespace Photo.Video.Organizer
             try
             {
                 var (folderStructure, customPattern) = GetSelectedFolderOptions();
+                var autoRotate = AutoRotateCheckBox.IsChecked == true;
 
                 var result = await _organizer.OrganizeFilesAsync(
                     _selectedFiles,
                     _destinationPath,
                     folderStructure,
                     customPattern,
+                    autoRotate,
                     progress,
                     _cancellationTokenSource.Token);
 
@@ -312,7 +314,8 @@ namespace Photo.Video.Organizer
             ResultPanel.Visibility = Visibility.Visible;
 
             // 요약 헤더
-            ResultSummaryText.Text = $"총 {result.TotalFiles}개 파일 중 {result.SuccessCount}개 정리 완료";
+            var rotatedNote = result.RotatedCount > 0 ? $"  (회전 적용 {result.RotatedCount}개)" : "";
+            ResultSummaryText.Text = $"총 {result.TotalFiles}개 파일 중 {result.SuccessCount}개 정리 완료{rotatedNote}";
 
             // 이미지 / 동영상 분리
             ResultImageText.Text = $"▪ 이미지  {result.ImageCount}개 정리됨";

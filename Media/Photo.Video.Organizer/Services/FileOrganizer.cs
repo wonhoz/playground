@@ -38,6 +38,7 @@ namespace Photo.Video.Organizer.Services
             public string? DestinationPath { get; set; }
             public bool Success { get; set; }
             public bool IsSkippedAsDuplicate { get; set; }
+            public bool AutoRotated { get; set; }
             public string? ErrorMessage { get; set; }
             public DateTime? MediaDate { get; set; }
             public MediaType MediaType { get; set; }
@@ -55,6 +56,7 @@ namespace Photo.Video.Organizer.Services
             public int SkippedCount { get; set; }
             public int DuplicateCount { get; set; }
             public int ErrorCount { get; set; }
+            public int RotatedCount { get; set; }
             public List<OrganizeResult> Results { get; set; } = new();
             public string? LogFilePath { get; set; }
         }
@@ -72,6 +74,7 @@ namespace Photo.Video.Organizer.Services
             string destinationRoot,
             FolderStructure folderStructure = FolderStructure.YearMonth,
             string? customPattern = null,
+            bool autoRotate = false,
             IProgress<(int current, int total, string fileName)>? progress = null,
             CancellationToken cancellationToken = default)
         {
@@ -87,7 +90,7 @@ namespace Photo.Video.Organizer.Services
 
                 progress?.Report((i + 1, fileList.Count, fileName));
 
-                var result = await Task.Run(() => OrganizeSingleFile(filePath, destinationRoot, folderStructure, customPattern), cancellationToken);
+                var result = await Task.Run(() => OrganizeSingleFile(filePath, destinationRoot, folderStructure, customPattern, autoRotate), cancellationToken);
                 summary.Results.Add(result);
 
                 if (result.Success)
@@ -97,6 +100,8 @@ namespace Photo.Video.Organizer.Services
                         summary.ImageCount++;
                     else if (result.MediaType == MediaType.Video)
                         summary.VideoCount++;
+                    if (result.AutoRotated)
+                        summary.RotatedCount++;
                 }
                 else if (result.IsSkippedAsDuplicate)
                     summary.DuplicateCount++;
@@ -112,7 +117,7 @@ namespace Photo.Video.Organizer.Services
         /// <summary>
         /// 단일 파일 정리
         /// </summary>
-        private OrganizeResult OrganizeSingleFile(string sourcePath, string destinationRoot, FolderStructure folderStructure, string? customPattern = null)
+        private OrganizeResult OrganizeSingleFile(string sourcePath, string destinationRoot, FolderStructure folderStructure, string? customPattern = null, bool autoRotate = false)
         {
             var result = new OrganizeResult { SourcePath = sourcePath };
 
@@ -181,8 +186,11 @@ namespace Photo.Video.Organizer.Services
                 // 중복 파일명 처리
                 destinationPath = GetUniqueFilePath(destinationPath);
 
-                // 파일 복사
-                File.Copy(sourcePath, destinationPath, overwrite: false);
+                // 파일 저장 (EXIF 회전 적용 or 단순 복사)
+                if (autoRotate && result.MediaType == MediaType.Image)
+                    result.AutoRotated = ExifRotationHelper.RotateAndSave(sourcePath, destinationPath);
+                else
+                    File.Copy(sourcePath, destinationPath, overwrite: false);
 
                 result.DestinationPath = destinationPath;
                 result.Success = true;

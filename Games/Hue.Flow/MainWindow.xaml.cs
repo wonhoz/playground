@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Interop;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using HueFlow.Game;
 
 namespace HueFlow;
@@ -43,10 +44,26 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
+        LoadWindowIcon();
         LoadBest();
         InitTiles();
         InitColorButtons();
         UpdateUI();
+    }
+
+    private void LoadWindowIcon()
+    {
+        try
+        {
+            var iconPath = Path.Combine(AppContext.BaseDirectory, "Resources", "app.ico");
+            if (File.Exists(iconPath))
+            {
+                using var stream = File.OpenRead(iconPath);
+                Icon = BitmapFrame.Create(stream,
+                    BitmapCreateOptions.None, BitmapCacheOption.OnLoad);
+            }
+        }
+        catch { }
     }
 
     protected override void OnSourceInitialized(EventArgs e)

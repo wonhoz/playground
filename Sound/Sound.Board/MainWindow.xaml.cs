@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -19,6 +20,9 @@ public partial class MainWindow : Window
 
     private bool _editMode;
 
+    [DllImport("dwmapi.dll", PreserveSig = true)]
+    private static extern int DwmSetWindowAttribute(nint hwnd, int attr, ref int value, int size);
+
     public MainWindow()
     {
         InitializeComponent();
@@ -37,6 +41,13 @@ public partial class MainWindow : Window
 
     private void OnLoaded(object sender, RoutedEventArgs e)
     {
+        // 다크 타이틀바 적용
+        if (PresentationSource.FromVisual(this) is HwndSource hwndSource)
+        {
+            int value = 1;
+            DwmSetWindowAttribute(hwndSource.Handle, 20, ref value, sizeof(int));
+        }
+
         // 전역 단축키 서비스 초기화 (메인 창 HWND 이용)
         var src = HwndSource.FromHwnd(new WindowInteropHelper(this).Handle);
         src?.AddHook(WndProc);

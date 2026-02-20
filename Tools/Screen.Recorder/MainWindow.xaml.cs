@@ -132,7 +132,7 @@ public partial class MainWindow : Window
         }
         catch (Exception ex)
         {
-            MessageBox.Show($"녹화 오류: {ex.Message}", "오류", MessageBoxButton.OK, MessageBoxImage.Error);
+            System.Windows.MessageBox.Show($"녹화 오류: {ex.Message}", "오류", MessageBoxButton.OK, MessageBoxImage.Error);
             SetState(RecordState.Idle);
         }
     }
@@ -156,14 +156,14 @@ public partial class MainWindow : Window
         if (_state is RecordState.Recording or RecordState.Paused)
         {
             StatusText.Text = "인코딩 중...";
-            StatusDot.Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#F39C12")!);
+            StatusDot.Fill = new SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#F39C12")!);
 
             try
             {
                 var outputPath = await _captureService!.StopAsync();
                 SetState(RecordState.Idle);
 
-                var result = MessageBox.Show(
+                var result = System.Windows.MessageBox.Show(
                     $"녹화 완료!\n{outputPath}\n\n파일을 열까요?",
                     "Screen.Recorder", MessageBoxButton.YesNo, MessageBoxImage.Information);
 
@@ -174,7 +174,7 @@ public partial class MainWindow : Window
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"인코딩 오류: {ex.Message}", "오류", MessageBoxButton.OK, MessageBoxImage.Error);
+                System.Windows.MessageBox.Show($"인코딩 오류: {ex.Message}", "오류", MessageBoxButton.OK, MessageBoxImage.Error);
                 SetState(RecordState.Idle);
             }
         }
@@ -196,7 +196,7 @@ public partial class MainWindow : Window
                 FormatCombo.IsEnabled = true;
                 FpsCombo.IsEnabled = true;
                 StatusText.Text = "대기 중";
-                StatusDot.Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#555555")!);
+                StatusDot.Fill = new SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#555555")!);
                 _stopwatch.Reset();
                 _timer.Stop();
                 TimerText.Text = "00:00";
@@ -211,7 +211,7 @@ public partial class MainWindow : Window
                 FormatCombo.IsEnabled = false;
                 FpsCombo.IsEnabled = false;
                 StatusText.Text = "녹화 중";
-                StatusDot.Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#E74C3C")!);
+                StatusDot.Fill = new SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#E74C3C")!);
                 _stopwatch.Start();
                 _timer.Start();
                 break;
@@ -219,7 +219,7 @@ public partial class MainWindow : Window
             case RecordState.Paused:
                 PauseBtn.Content = "▶";
                 StatusText.Text = "일시정지";
-                StatusDot.Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#F39C12")!);
+                StatusDot.Fill = new SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#F39C12")!);
                 _stopwatch.Stop();
                 break;
         }

@@ -6,7 +6,7 @@ namespace ScreenRecorder;
 
 public partial class RegionSelectWindow : Window
 {
-    private Point _startPoint;
+    private System.Windows.Point _startPoint;
     private bool _isDragging;
 
     /// <summary>사용자가 선택한 화면 영역 (스크린 좌표)</summary>
@@ -47,7 +47,7 @@ public partial class RegionSelectWindow : Window
         e.Handled = true;
     }
 
-    private void OnMouseMove(object sender, MouseEventArgs e)
+    private void OnMouseMove(object sender, System.Windows.Input.MouseEventArgs e)
     {
         if (!_isDragging) return;
 
@@ -104,7 +104,7 @@ public partial class RegionSelectWindow : Window
         Close();
     }
 
-    private void OnKeyDown(object sender, KeyEventArgs e)
+    private void OnKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
     {
         if (e.Key == Key.Escape)
         {

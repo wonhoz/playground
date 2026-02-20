@@ -37,6 +37,7 @@ call :pub "Workspace.Switcher"    "Tools\Workspace.Switcher"            "Workspa
 call :pub "Screen.Recorder"      "Tools\Screen.Recorder"               "ScreenRecorder.exe"
 call :pub "Text.Forge"           "Tools\Text.Forge"                    "TextForge.exe"
 call :pub "Hue.Flow"             "Games\Hue.Flow"                      "HueFlow.exe"
+call :pub "Star.Strike"          "Games\Star.Strike"                   "StarStrike.exe"
 call :pub "Ambient.Mixer"       "Audio\Ambient.Mixer"                  "AmbientMixer.exe"
 call :pub "Clipboard.Stacker"   "Tools\Clipboard.Stacker"              "ClipboardStacker.exe"
 call :pub "Batch.Rename"        "Files\Batch.Rename"                   "BatchRename.exe"

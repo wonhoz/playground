@@ -26,12 +26,12 @@ echo !DG!Output: %BIN%!RS!
 echo !DG!--------------------------------------------------!RS!
 echo.
 
-call :pub "Stay.Awake"            "Slack\Stay.Awake"                    "StayAwake.exe"
-call :pub "Photo.Video.Organizer" "Photo.Video\Photo.Video.Organizer"   "PhotoVideoOrganizer.exe"
-call :pub "Music.Player"          "Music\Music.Player"                  "MusicPlayer.exe"
 call :pub "AI.Clip"               "AI\AI.Clip"                          "AiClip.exe"
+call :pub "Music.Player"          "Audio\Music.Player"                  "MusicPlayer.exe"
+call :pub "Sound.Board"           "Audio\Sound.Board"                   "SoundBoard.exe"
+call :pub "Stay.Awake"            "Automation\Stay.Awake"               "StayAwake.exe"
 call :pub "File.Duplicates"       "Files\File.Duplicates"               "FileDuplicates.exe"
-call :pub "Sound.Board"           "Sound\Sound.Board"                   "SoundBoard.exe"
+call :pub "Photo.Video.Organizer" "Media\Photo.Video.Organizer"         "PhotoVideoOrganizer.exe"
 call :pub "Quick.Launcher"        "Tools\Quick.Launcher"                "QuickLauncher.exe"
 call :pub "Workspace.Switcher"    "Tools\Workspace.Switcher"            "WorkspaceSwitcher.exe"
 

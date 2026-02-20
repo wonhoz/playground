@@ -10,6 +10,7 @@ using System.Windows.Shapes;
 using Music.Player.Models;
 using Music.Player.Services;
 using NAudio.Wave;
+using Color = System.Windows.Media.Color;
 
 namespace Music.Player
 {
@@ -18,6 +19,7 @@ namespace Music.Player
         private readonly AudioPlayer _player = new();
         private readonly ObservableCollection<TrackInfo> _playlist = new();
         private readonly Random _random = new();
+        private readonly WindowSnapService _snap;
 
         private int _currentIndex = -1;
         private bool _isDraggingSlider;
@@ -36,6 +38,7 @@ namespace Music.Player
         {
             InitializeComponent();
             EnsureResourcesExist();
+            _snap = new WindowSnapService(this);
 
             PlaylistBox.ItemsSource = _playlist;
             LyricsBox.ItemsSource = _lyricsLines;
@@ -943,6 +946,7 @@ namespace Music.Player
         {
             SavePlaylistState();
             _player.Dispose();
+            _snap.Dispose();
             base.OnClosed(e);
         }
 

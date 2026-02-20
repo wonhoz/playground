@@ -1,7 +1,9 @@
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Forms;
+using System.Windows.Interop;
 using FileDuplicates.Models;
 using FileDuplicates.Services;
 
@@ -15,6 +17,9 @@ public partial class MainWindow : Window
     private CancellationTokenSource? _cts;
     private bool _isScanning;
 
+    [DllImport("dwmapi.dll", PreserveSig = true)]
+    private static extern int DwmSetWindowAttribute(nint hwnd, int attr, ref int value, int size);
+
     public MainWindow()
     {
         InitializeComponent();
@@ -24,6 +29,17 @@ public partial class MainWindow : Window
 
         ThresholdLabel.Text = $"{(int)ThresholdSlider.Value} bit";
         RemoveFolderBtn.IsEnabled = false;
+
+        Loaded += (_, _) => ApplyDarkTitleBar();
+    }
+
+    private void ApplyDarkTitleBar()
+    {
+        if (PresentationSource.FromVisual(this) is HwndSource source)
+        {
+            int value = 1;
+            DwmSetWindowAttribute(source.Handle, 20, ref value, sizeof(int));
+        }
     }
 
     // ── 폴더 관리 ─────────────────────────────────────────────────────────────

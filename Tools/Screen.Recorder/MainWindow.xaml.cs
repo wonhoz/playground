@@ -266,8 +266,9 @@ public partial class MainWindow : Window
 
         Directory.CreateDirectory(_settings.OutputFolder);
 
+        var captureMouse = CursorCheckBox.IsChecked == true;
         _captureService = new ScreenCaptureService(
-            _selectedRegion, fps, outputPath, isGif);
+            _selectedRegion, fps, outputPath, isGif, captureMouse);
 
         SetState(RecordState.Recording);
 

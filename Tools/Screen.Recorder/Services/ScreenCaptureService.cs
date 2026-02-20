@@ -18,24 +18,49 @@ public sealed class ScreenCaptureService : IDisposable
     [DllImport("gdi32.dll")]
     private static extern bool DeleteDC(nint hdc);
 
+    // ── 마우스 커서 캡처 Win32 ─────────────────────────────────────
+    [DllImport("user32.dll")]
+    private static extern bool GetCursorInfo(ref CURSORINFO pci);
+
+    [DllImport("user32.dll")]
+    private static extern bool DrawIconEx(IntPtr hdc, int xLeft, int yTop, IntPtr hIcon,
+        int cxWidth, int cyHeight, uint istepIfAniCur, IntPtr hbrFlickerFreeDraw, uint diFlags);
+
+    [StructLayout(LayoutKind.Sequential)]
+    private struct CURSORPOINT { public int X, Y; }
+
+    [StructLayout(LayoutKind.Sequential)]
+    private struct CURSORINFO
+    {
+        public int       cbSize;
+        public int       flags;
+        public IntPtr    hCursor;
+        public CURSORPOINT ptScreenPos;
+    }
+
+    private const int  CURSOR_SHOWING = 0x00000001;
+    private const uint DI_NORMAL      = 0x0003;
+
     private const int SRCCOPY = 0x00CC0020;
 
     private readonly Int32Rect _region;
     private readonly int _fps;
     private readonly string _outputPath;
     private readonly bool _isGif;
+    private readonly bool _captureMouse;
     private readonly List<string> _framePaths = [];
     private CancellationTokenSource? _cts;
     private Task? _captureTask;
     private bool _paused;
     private string? _tempDir;
 
-    public ScreenCaptureService(Int32Rect region, int fps, string outputPath, bool isGif)
+    public ScreenCaptureService(Int32Rect region, int fps, string outputPath, bool isGif, bool captureMouse = true)
     {
-        _region = region;
-        _fps = fps;
-        _outputPath = outputPath;
-        _isGif = isGif;
+        _region       = region;
+        _fps          = fps;
+        _outputPath   = outputPath;
+        _isGif        = isGif;
+        _captureMouse = captureMouse;
     }
 
     public Task StartAsync()
@@ -78,6 +103,26 @@ public sealed class ScreenCaptureService : IDisposable
         g.CopyFromScreen(_region.X, _region.Y, 0, 0,
             new System.Drawing.Size(_region.Width, _region.Height),
             CopyPixelOperation.SourceCopy);
+
+        // 마우스 커서 합성
+        if (_captureMouse)
+        {
+            var ci = new CURSORINFO { cbSize = Marshal.SizeOf<CURSORINFO>() };
+            if (GetCursorInfo(ref ci) && (ci.flags & CURSOR_SHOWING) != 0)
+            {
+                var curX = ci.ptScreenPos.X - _region.X;
+                var curY = ci.ptScreenPos.Y - _region.Y;
+                // 캡처 영역 안(±32px 여유)에 있을 때만 그리기
+                if (curX >= -32 && curX < _region.Width + 32 &&
+                    curY >= -32 && curY < _region.Height + 32)
+                {
+                    var hdc = g.GetHdc();
+                    DrawIconEx(hdc, curX, curY, ci.hCursor, 0, 0, 0, IntPtr.Zero, DI_NORMAL);
+                    g.ReleaseHdc(hdc);
+                }
+            }
+        }
+
         bmp.Save(savePath, ImageFormat.Png);
     }
 

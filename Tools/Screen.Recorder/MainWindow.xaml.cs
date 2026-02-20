@@ -85,27 +85,30 @@ public partial class MainWindow : Window
             FfmpegStatusText.Text = "FFmpeg 설치 중 (winget)...";
             FfmpegStatusText.Foreground = ColorBrush("#F39C12");
 
-            var wingetOk = await RunInstallerWithLogAsync(
+            await RunInstallerWithLogAsync(
                 "winget", "install --id Gyan.FFmpeg -e --accept-source-agreements --accept-package-agreements");
 
-            if (!wingetOk)
+            // 설치 완료 후 (또는 이미 설치) 다시 경로 탐색
+            var found = EncoderService.IsFfmpegAvailable();
+
+            if (!found)
             {
                 // choco 시도
-                UpdateFfmpegLog("winget 실패 → Chocolatey로 재시도 중...");
+                UpdateFfmpegLog("winget 후 ffmpeg.exe 미발견 → Chocolatey로 재시도 중...");
                 FfmpegStatusText.Text = "FFmpeg 설치 중 (Chocolatey)...";
 
-                wingetOk = await RunInstallerWithLogAsync("choco", "install ffmpeg -y");
+                await RunInstallerWithLogAsync("choco", "install ffmpeg -y");
+                found = EncoderService.IsFfmpegAvailable();
             }
 
-            if (wingetOk)
+            if (found)
             {
-                // 설치 후 PATH 갱신을 위해 다시 체크
                 _ffmpegAvailable = true;
                 FfmpegProgress.IsIndeterminate = false;
                 FfmpegProgress.Value = 100;
-                FfmpegStatusText.Text = "FFmpeg 설치 완료!";
+                FfmpegStatusText.Text = "FFmpeg 확인 완료!";
                 FfmpegStatusText.Foreground = ColorBrush("#27AE60");
-                UpdateFfmpegLog("설치 성공 — MP4 녹화가 가능합니다");
+                UpdateFfmpegLog("MP4 녹화가 가능합니다");
 
                 await Task.Delay(1500);
                 FfmpegPanel.Visibility = Visibility.Collapsed;
@@ -114,7 +117,7 @@ public partial class MainWindow : Window
             {
                 FfmpegProgress.IsIndeterminate = false;
                 FfmpegProgress.Value = 0;
-                FfmpegStatusText.Text = "자동 설치 실패";
+                FfmpegStatusText.Text = "FFmpeg 경로를 찾을 수 없습니다";
                 FfmpegStatusText.Foreground = ColorBrush("#E74C3C");
                 UpdateFfmpegLog("수동 설치: 터미널에서 winget install Gyan.FFmpeg 실행");
                 InstallFfmpegBtn.Content = "재시도";
@@ -148,7 +151,9 @@ public partial class MainWindow : Window
                 UseShellExecute = false,
                 CreateNoWindow = true,
                 RedirectStandardOutput = true,
-                RedirectStandardError = true
+                RedirectStandardError = true,
+                StandardOutputEncoding = System.Text.Encoding.UTF8,
+                StandardErrorEncoding = System.Text.Encoding.UTF8
             };
 
             using var process = Process.Start(psi);

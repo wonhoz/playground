@@ -288,12 +288,13 @@ public static class EncoderService
         var pathDirs = Environment.GetEnvironmentVariable("PATH")?.Split(';') ?? [];
         foreach (var dir in pathDirs)
         {
+            if (string.IsNullOrWhiteSpace(dir)) continue;
             var candidate = Path.Combine(dir.Trim(), "ffmpeg.exe");
             if (File.Exists(candidate)) return candidate;
         }
 
         // 2. 일반적인 설치 경로 확인
-        var commonPaths = new[]
+        var commonPaths = new List<string>
         {
             @"C:\ffmpeg\bin\ffmpeg.exe",
             @"C:\Program Files\ffmpeg\bin\ffmpeg.exe",
@@ -301,6 +302,34 @@ public static class EncoderService
             Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),
                 @"scoop\shims\ffmpeg.exe")
         };
+
+        // 3. winget 패키지 경로 검색 (Gyan.FFmpeg)
+        var wingetPkgs = Path.Combine(
+            Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+            @"Microsoft\WinGet\Packages");
+
+        if (Directory.Exists(wingetPkgs))
+        {
+            try
+            {
+                foreach (var dir in Directory.GetDirectories(wingetPkgs, "Gyan.FFmpeg*"))
+                {
+                    // ffmpeg-X.X.X-full_build/bin/ffmpeg.exe 패턴 탐색
+                    foreach (var binDir in Directory.GetDirectories(dir, "bin", SearchOption.AllDirectories))
+                    {
+                        var candidate = Path.Combine(binDir, "ffmpeg.exe");
+                        if (File.Exists(candidate)) return candidate;
+                    }
+                }
+            }
+            catch { /* 권한 문제 등 무시 */ }
+        }
+
+        // 4. winget Links 경로
+        var wingetLinks = Path.Combine(
+            Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+            @"Microsoft\WinGet\Links\ffmpeg.exe");
+        commonPaths.Add(wingetLinks);
 
         return commonPaths.FirstOrDefault(File.Exists);
     }

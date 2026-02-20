@@ -6,6 +6,7 @@ using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using HueFlow.Game;
+using HueFlow.Sound;
 
 namespace HueFlow;
 
@@ -55,7 +56,7 @@ public partial class MainWindow : Window
     {
         try
         {
-            var iconPath = Path.Combine(AppContext.BaseDirectory, "Resources", "app.ico");
+            var iconPath = Path.Combine(AppContext.BaseDirectory, "Resources", IconGenerator.IconFileName);
             if (File.Exists(iconPath))
             {
                 using var stream = File.OpenRead(iconPath);
@@ -185,6 +186,8 @@ public partial class MainWindow : Window
             OverlayTitle.Foreground = new SolidColorBrush(Color.FromRgb(0xFF, 0x6B, 0x6B));
         }
         Overlay.Visibility = Visibility.Visible;
+        if (won) SoundHelper.PlayWin();
+        else     SoundHelper.PlayLose();
     }
 
     // ── 이벤트 핸들러 ────────────────────────────────────────────────
@@ -192,6 +195,7 @@ public partial class MainWindow : Window
     {
         if (sender is Button btn && btn.Tag is int color)
         {
+            SoundHelper.PlayClick();
             _board.ChooseColor(color);
             UpdateUI();
         }

@@ -11,8 +11,8 @@ public partial class App : Application
         try
         {
             var dir = Path.Combine(AppContext.BaseDirectory, "Resources");
-            if (!File.Exists(Path.Combine(dir, "app.ico")))
-                IconGenerator.Generate(dir);
+            // 항상 재생성 — 공유 bin에서 다른 앱의 app.ico가 재사용되는 문제 방지
+            IconGenerator.Generate(dir);
         }
         catch { }
     }

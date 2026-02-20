@@ -36,6 +36,7 @@ call :pub "Quick.Launcher"        "Tools\Quick.Launcher"                "QuickLa
 call :pub "Workspace.Switcher"    "Tools\Workspace.Switcher"            "WorkspaceSwitcher.exe"
 call :pub "Screen.Recorder"      "Tools\Screen.Recorder"               "ScreenRecorder.exe"
 call :pub "Text.Forge"           "Tools\Text.Forge"                    "TextForge.exe"
+call :pub "Hue.Flow"             "Games\Hue.Flow"                      "HueFlow.exe"
 
 :: Remove .pdb files
 echo !DG!Cleaning .pdb files...!RS!

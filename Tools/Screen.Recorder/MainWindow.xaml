@@ -229,19 +229,29 @@
         <!-- ═══ FFmpeg 상태 ═══ -->
         <Border x:Name="FfmpegPanel" Grid.Row="3" Background="#2A1A1A"
                 BorderBrush="#553333" BorderThickness="1"
-                CornerRadius="6" Padding="12,8" Margin="0,0,0,12" Visibility="Collapsed">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock x:Name="FfmpegStatusText" Grid.Column="0"
-                           Text="FFmpeg가 설치되어 있지 않습니다 (MP4 녹화 불가)"
-                           FontSize="12" Foreground="#E74C3C" VerticalAlignment="Center"/>
-                <Button x:Name="InstallFfmpegBtn" Grid.Column="1" Content="설치"
-                        Style="{StaticResource AccentBtn}" Padding="12,4" FontSize="12"
-                        Click="InstallFfmpeg_Click"/>
-            </Grid>
+                CornerRadius="6" Padding="12,10" Margin="0,0,0,12" Visibility="Collapsed">
+            <StackPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock x:Name="FfmpegStatusText" Grid.Column="0"
+                               Text="FFmpeg 미설치 — MP4 녹화 불가 (GIF는 가능)"
+                               FontSize="12" Foreground="#E74C3C" VerticalAlignment="Center"
+                               TextWrapping="Wrap"/>
+                    <Button x:Name="InstallFfmpegBtn" Grid.Column="1" Content="설치"
+                            Style="{StaticResource AccentBtn}" Padding="12,4" FontSize="12"
+                            Margin="8,0,0,0" Click="InstallFfmpeg_Click"/>
+                </Grid>
+                <!-- 설치 진행률 -->
+                <ProgressBar x:Name="FfmpegProgress" Height="4" Margin="0,8,0,0"
+                             IsIndeterminate="False" Visibility="Collapsed"
+                             Background="#333333" Foreground="#E74C3C" BorderThickness="0"/>
+                <TextBlock x:Name="FfmpegLogText" FontSize="11" Foreground="#888888"
+                           Margin="0,4,0,0" TextTrimming="CharacterEllipsis"
+                           Visibility="Collapsed"/>
+            </StackPanel>
         </Border>
 
         <!-- ═══ 상태 바 ═══ -->

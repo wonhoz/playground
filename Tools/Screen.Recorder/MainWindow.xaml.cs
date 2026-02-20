@@ -74,46 +74,70 @@ public partial class MainWindow : Window
     {
         InstallFfmpegBtn.IsEnabled = false;
         InstallFfmpegBtn.Content = "설치 중...";
-        FfmpegStatusText.Text = "FFmpeg 설치 중... (잠시 기다려주세요)";
+        FfmpegProgress.Visibility = Visibility.Visible;
+        FfmpegProgress.IsIndeterminate = true;
+        FfmpegLogText.Visibility = Visibility.Visible;
 
         try
         {
-            var installed = await Task.Run(() =>
-            {
-                // winget 시도
-                if (TryRunInstaller("winget", "install --id Gyan.FFmpeg -e --accept-source-agreements --accept-package-agreements"))
-                    return true;
-                // choco 시도
-                if (TryRunInstaller("choco", "install ffmpeg -y"))
-                    return true;
-                return false;
-            });
+            // winget 시도
+            UpdateFfmpegLog("winget으로 FFmpeg 설치 시도 중...");
+            FfmpegStatusText.Text = "FFmpeg 설치 중 (winget)...";
+            FfmpegStatusText.Foreground = ColorBrush("#F39C12");
 
-            if (installed)
+            var wingetOk = await RunInstallerWithLogAsync(
+                "winget", "install --id Gyan.FFmpeg -e --accept-source-agreements --accept-package-agreements");
+
+            if (!wingetOk)
             {
+                // choco 시도
+                UpdateFfmpegLog("winget 실패 → Chocolatey로 재시도 중...");
+                FfmpegStatusText.Text = "FFmpeg 설치 중 (Chocolatey)...";
+
+                wingetOk = await RunInstallerWithLogAsync("choco", "install ffmpeg -y");
+            }
+
+            if (wingetOk)
+            {
+                // 설치 후 PATH 갱신을 위해 다시 체크
                 _ffmpegAvailable = true;
+                FfmpegProgress.IsIndeterminate = false;
+                FfmpegProgress.Value = 100;
+                FfmpegStatusText.Text = "FFmpeg 설치 완료!";
+                FfmpegStatusText.Foreground = ColorBrush("#27AE60");
+                UpdateFfmpegLog("설치 성공 — MP4 녹화가 가능합니다");
+
+                await Task.Delay(1500);
                 FfmpegPanel.Visibility = Visibility.Collapsed;
-                System.Windows.MessageBox.Show(
-                    "FFmpeg가 설치되었습니다!\nMP4 녹화가 가능합니다.",
-                    "Screen.Recorder", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             else
             {
-                FfmpegStatusText.Text = "자동 설치 실패 — 수동 설치: winget install Gyan.FFmpeg";
-                FfmpegStatusText.Foreground = ColorBrush("#F39C12");
+                FfmpegProgress.IsIndeterminate = false;
+                FfmpegProgress.Value = 0;
+                FfmpegStatusText.Text = "자동 설치 실패";
+                FfmpegStatusText.Foreground = ColorBrush("#E74C3C");
+                UpdateFfmpegLog("수동 설치: 터미널에서 winget install Gyan.FFmpeg 실행");
                 InstallFfmpegBtn.Content = "재시도";
                 InstallFfmpegBtn.IsEnabled = true;
             }
         }
-        catch
+        catch (Exception ex)
         {
-            FfmpegStatusText.Text = "설치 오류 발생 — 수동 설치: winget install Gyan.FFmpeg";
+            FfmpegProgress.IsIndeterminate = false;
+            FfmpegStatusText.Text = "설치 오류 발생";
+            FfmpegStatusText.Foreground = ColorBrush("#E74C3C");
+            UpdateFfmpegLog($"오류: {ex.Message}");
             InstallFfmpegBtn.Content = "재시도";
             InstallFfmpegBtn.IsEnabled = true;
         }
     }
 
-    private static bool TryRunInstaller(string command, string args)
+    private void UpdateFfmpegLog(string text)
+    {
+        FfmpegLogText.Text = text;
+    }
+
+    private async Task<bool> RunInstallerWithLogAsync(string command, string args)
     {
         try
         {
@@ -128,12 +152,32 @@ public partial class MainWindow : Window
             };
 
             using var process = Process.Start(psi);
-            if (process is null) return false;
-            process.WaitForExit(TimeSpan.FromMinutes(5));
+            if (process is null)
+            {
+                UpdateFfmpegLog($"{command}을(를) 찾을 수 없습니다");
+                return false;
+            }
+
+            // stdout 실시간 읽기
+            process.OutputDataReceived += (_, args) =>
+            {
+                if (!string.IsNullOrWhiteSpace(args.Data))
+                    Dispatcher.BeginInvoke(() => UpdateFfmpegLog(args.Data.Trim()));
+            };
+            process.ErrorDataReceived += (_, args) =>
+            {
+                if (!string.IsNullOrWhiteSpace(args.Data))
+                    Dispatcher.BeginInvoke(() => UpdateFfmpegLog(args.Data.Trim()));
+            };
+            process.BeginOutputReadLine();
+            process.BeginErrorReadLine();
+
+            await process.WaitForExitAsync();
             return process.ExitCode == 0;
         }
         catch
         {
+            UpdateFfmpegLog($"{command} 실행 실패");
             return false;
         }
     }

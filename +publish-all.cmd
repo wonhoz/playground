@@ -41,6 +41,7 @@ call :pub "Ambient.Mixer"       "Audio\Ambient.Mixer"                  "AmbientM
 call :pub "Clipboard.Stacker"   "Tools\Clipboard.Stacker"              "ClipboardStacker.exe"
 call :pub "Batch.Rename"        "Files\Batch.Rename"                   "BatchRename.exe"
 call :pub "Window.Pilot"        "Tools\Window.Pilot"                   "WindowPilot.exe"
+call :pub "Commute.Buddy"      "Automation\Commute.Buddy"             "CommuteBuddy.exe"
 
 :: Remove .pdb files
 echo !DG!Cleaning .pdb files...!RS!

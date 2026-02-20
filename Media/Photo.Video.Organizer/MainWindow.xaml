@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Title="Photo &amp; Video Organizer"
-        Height="550" Width="780"
-        MinHeight="480" MinWidth="650"
+        Height="500" Width="740"
+        MinHeight="440" MinWidth="600"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         AllowsTransparency="True"
@@ -431,7 +431,7 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="12"/>
-                        <ColumnDefinition Width="260"/>
+                        <ColumnDefinition Width="300"/>
                     </Grid.ColumnDefinitions>
 
                     <!-- Drop Zone -->
@@ -637,7 +637,7 @@
                                     <TextBlock Text="EXIF 방향 자동 회전 적용" Foreground="{StaticResource TextSecondaryBrush}" FontSize="11"/>
                                 </CheckBox>
                                 <TextBlock Text="사진의 회전 정보(Orientation)를 실제 화상에 반영, EXIF 전체 보존"
-                                           FontSize="10"
+                                           FontSize="10" TextWrapping="Wrap"
                                            Foreground="#666666"
                                            Margin="20,3,0,8"/>
 
@@ -648,7 +648,7 @@
                                     <TextBlock Text="처리 로그 저장 (CSV)" Foreground="{StaticResource TextSecondaryBrush}" FontSize="11"/>
                                 </CheckBox>
                                 <TextBlock Text="완료 후 대상 폴더에 organizer_log_*.csv 저장"
-                                           FontSize="10"
+                                           FontSize="10" TextWrapping="Wrap"
                                            Foreground="#666666"
                                            Margin="20,3,0,0"/>
 

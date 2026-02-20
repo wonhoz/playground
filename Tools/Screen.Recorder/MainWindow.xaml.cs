@@ -22,9 +22,13 @@ public partial class MainWindow : Window
     private readonly Stopwatch _stopwatch = new();
     private Int32Rect _selectedRegion;
     private bool _regionSelected;
+    private bool _ffmpegAvailable;
 
     private enum RecordState { Idle, Recording, Paused }
     private RecordState _state = RecordState.Idle;
+
+    private static SolidColorBrush ColorBrush(string hex) =>
+        new((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString(hex)!);
 
     public MainWindow()
     {
@@ -47,14 +51,97 @@ public partial class MainWindow : Window
             int value = 1;
             DwmSetWindowAttribute(source.Handle, 20, ref value, sizeof(int));
         }
+
+        CheckFfmpeg();
+    }
+
+    private void CheckFfmpeg()
+    {
+        _ffmpegAvailable = EncoderService.IsFfmpegAvailable();
+
+        if (_ffmpegAvailable)
+        {
+            FfmpegPanel.Visibility = Visibility.Collapsed;
+        }
+        else
+        {
+            FfmpegPanel.Visibility = Visibility.Visible;
+            FfmpegStatusText.Text = "FFmpeg 미설치 — MP4 녹화 불가 (GIF는 가능)";
+        }
+    }
+
+    private async void InstallFfmpeg_Click(object sender, RoutedEventArgs e)
+    {
+        InstallFfmpegBtn.IsEnabled = false;
+        InstallFfmpegBtn.Content = "설치 중...";
+        FfmpegStatusText.Text = "FFmpeg 설치 중... (잠시 기다려주세요)";
+
+        try
+        {
+            var installed = await Task.Run(() =>
+            {
+                // winget 시도
+                if (TryRunInstaller("winget", "install --id Gyan.FFmpeg -e --accept-source-agreements --accept-package-agreements"))
+                    return true;
+                // choco 시도
+                if (TryRunInstaller("choco", "install ffmpeg -y"))
+                    return true;
+                return false;
+            });
+
+            if (installed)
+            {
+                _ffmpegAvailable = true;
+                FfmpegPanel.Visibility = Visibility.Collapsed;
+                System.Windows.MessageBox.Show(
+                    "FFmpeg가 설치되었습니다!\nMP4 녹화가 가능합니다.",
+                    "Screen.Recorder", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else
+            {
+                FfmpegStatusText.Text = "자동 설치 실패 — 수동 설치: winget install Gyan.FFmpeg";
+                FfmpegStatusText.Foreground = ColorBrush("#F39C12");
+                InstallFfmpegBtn.Content = "재시도";
+                InstallFfmpegBtn.IsEnabled = true;
+            }
+        }
+        catch
+        {
+            FfmpegStatusText.Text = "설치 오류 발생 — 수동 설치: winget install Gyan.FFmpeg";
+            InstallFfmpegBtn.Content = "재시도";
+            InstallFfmpegBtn.IsEnabled = true;
+        }
+    }
+
+    private static bool TryRunInstaller(string command, string args)
+    {
+        try
+        {
+            var psi = new ProcessStartInfo
+            {
+                FileName = command,
+                Arguments = args,
+                UseShellExecute = false,
+                CreateNoWindow = true,
+                RedirectStandardOutput = true,
+                RedirectStandardError = true
+            };
+
+            using var process = Process.Start(psi);
+            if (process is null) return false;
+            process.WaitForExit(TimeSpan.FromMinutes(5));
+            return process.ExitCode == 0;
+        }
+        catch
+        {
+            return false;
+        }
     }
 
     private void SelectRegion_Click(object sender, RoutedEventArgs e)
     {
-        // 메인 윈도우를 잠시 숨기고 영역 선택
         Hide();
 
-        // 약간 지연 후 선택 윈도우 표시 (메인 윈도우 사라짐 대기)
         Dispatcher.BeginInvoke(DispatcherPriority.Background, () =>
         {
             var selector = new RegionSelectWindow();
@@ -105,6 +192,15 @@ public partial class MainWindow : Window
     {
         if (_state == RecordState.Idle)
         {
+            // MP4 선택인데 FFmpeg 없으면 경고
+            if (!IsGifFormat() && !_ffmpegAvailable)
+            {
+                System.Windows.MessageBox.Show(
+                    "MP4 녹화에는 FFmpeg가 필요합니다.\nGIF 형식으로 변경하거나 FFmpeg를 설치해주세요.",
+                    "Screen.Recorder", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
             await StartRecordingAsync();
         }
     }
@@ -156,7 +252,7 @@ public partial class MainWindow : Window
         if (_state is RecordState.Recording or RecordState.Paused)
         {
             StatusText.Text = "인코딩 중...";
-            StatusDot.Fill = new SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#F39C12")!);
+            StatusDot.Fill = ColorBrush("#F39C12");
 
             try
             {
@@ -196,7 +292,7 @@ public partial class MainWindow : Window
                 FormatCombo.IsEnabled = true;
                 FpsCombo.IsEnabled = true;
                 StatusText.Text = "대기 중";
-                StatusDot.Fill = new SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#555555")!);
+                StatusDot.Fill = ColorBrush("#555555");
                 _stopwatch.Reset();
                 _timer.Stop();
                 TimerText.Text = "00:00";
@@ -211,7 +307,7 @@ public partial class MainWindow : Window
                 FormatCombo.IsEnabled = false;
                 FpsCombo.IsEnabled = false;
                 StatusText.Text = "녹화 중";
-                StatusDot.Fill = new SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#E74C3C")!);
+                StatusDot.Fill = ColorBrush("#E74C3C");
                 _stopwatch.Start();
                 _timer.Start();
                 break;
@@ -219,7 +315,7 @@ public partial class MainWindow : Window
             case RecordState.Paused:
                 PauseBtn.Content = "▶";
                 StatusText.Text = "일시정지";
-                StatusDot.Fill = new SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#F39C12")!);
+                StatusDot.Fill = ColorBrush("#F39C12");
                 _stopwatch.Stop();
                 break;
         }

@@ -1,8 +1,8 @@
 ﻿<Window x:Class="ScreenRecorder.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Screen.Recorder" Height="380" Width="480"
-        MinHeight="380" MinWidth="480"
+        Title="Screen.Recorder" Width="480"
+        SizeToContent="Height" MinWidth="480"
         ResizeMode="CanMinimize"
         Background="#1A1A2E" Foreground="#E0E0E0"
         WindowStartupLocation="CenterScreen">
@@ -139,7 +139,7 @@
             <RowDefinition Height="Auto"/>  <!-- 타이틀 -->
             <RowDefinition Height="Auto"/>  <!-- 영역 정보 -->
             <RowDefinition Height="Auto"/>  <!-- 설정 -->
-            <RowDefinition Height="*"/>     <!-- 여백 -->
+            <RowDefinition Height="Auto"/>  <!-- FFmpeg 상태 -->
             <RowDefinition Height="Auto"/>  <!-- 상태 바 -->
             <RowDefinition Height="Auto"/>  <!-- 버튼 -->
         </Grid.RowDefinitions>
@@ -223,6 +223,24 @@
                     <Button Grid.Column="1" Content="..." Style="{StaticResource GrayBtn}"
                             Padding="8,4" Margin="8,0,0,0" Click="BrowseFolder_Click"/>
                 </Grid>
+            </Grid>
+        </Border>
+
+        <!-- ═══ FFmpeg 상태 ═══ -->
+        <Border x:Name="FfmpegPanel" Grid.Row="3" Background="#2A1A1A"
+                BorderBrush="#553333" BorderThickness="1"
+                CornerRadius="6" Padding="12,8" Margin="0,0,0,12" Visibility="Collapsed">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock x:Name="FfmpegStatusText" Grid.Column="0"
+                           Text="FFmpeg가 설치되어 있지 않습니다 (MP4 녹화 불가)"
+                           FontSize="12" Foreground="#E74C3C" VerticalAlignment="Center"/>
+                <Button x:Name="InstallFfmpegBtn" Grid.Column="1" Content="설치"
+                        Style="{StaticResource AccentBtn}" Padding="12,4" FontSize="12"
+                        Click="InstallFfmpeg_Click"/>
             </Grid>
         </Border>
 

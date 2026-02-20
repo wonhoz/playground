@@ -7,6 +7,9 @@ namespace ScreenRecorder.Services;
 
 public static class EncoderService
 {
+    /// <summary>FFmpeg가 설치되어 있는지 확인</summary>
+    public static bool IsFfmpegAvailable() => FindFfmpeg() is not null;
+
     /// <summary>프레임 시퀀스를 FFmpeg로 MP4 인코딩</summary>
     public static async Task EncodeToMp4Async(List<string> framePaths, int fps, string outputPath)
     {

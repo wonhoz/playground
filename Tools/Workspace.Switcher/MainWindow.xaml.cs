@@ -1,6 +1,8 @@
+using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Effects;
 using WorkspaceSwitcher.Dialogs;
@@ -13,11 +15,24 @@ public partial class MainWindow : Window
 {
     private SwitcherSettings _settings;
 
+    [DllImport("dwmapi.dll", PreserveSig = true)]
+    private static extern int DwmSetWindowAttribute(nint hwnd, int attr, ref int value, int size);
+
     public MainWindow()
     {
         InitializeComponent();
         _settings = SettingsService.Load();
-        Loaded += (_, _) => RebuildBoard();
+        Loaded += (_, _) =>
+        {
+            // 다크 타이틀바 적용
+            if (PresentationSource.FromVisual(this) is HwndSource source)
+            {
+                int value = 1;
+                DwmSetWindowAttribute(source.Handle, 20, ref value, sizeof(int));
+            }
+
+            RebuildBoard();
+        };
     }
 
     // ── 보드 렌더링 ───────────────────────────────────────────────────────────

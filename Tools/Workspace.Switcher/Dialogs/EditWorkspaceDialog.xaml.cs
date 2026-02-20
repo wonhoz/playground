@@ -1,7 +1,9 @@
 using System.Collections.ObjectModel;
+using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Interop;
 using System.Windows.Media;
 using Microsoft.Win32;
 using WorkspaceSwitcher.Models;
@@ -14,6 +16,9 @@ public partial class EditWorkspaceDialog : Window
 
     private string _selectedColor;
     private readonly ObservableCollection<WorkspaceApp> _apps;
+
+    [DllImport("dwmapi.dll", PreserveSig = true)]
+    private static extern int DwmSetWindowAttribute(nint hwnd, int attr, ref int value, int size);
 
     private static readonly string[] Palette =
     [
@@ -52,6 +57,15 @@ public partial class EditWorkspaceDialog : Window
 
         BuildColorPanel();
         UpdatePreview();
+
+        Loaded += (_, _) =>
+        {
+            if (PresentationSource.FromVisual(this) is HwndSource source)
+            {
+                int val = 1;
+                DwmSetWindowAttribute(source.Handle, 20, ref val, sizeof(int));
+            }
+        };
     }
 
     // ── 색상 팔레트 ───────────────────────────────────────────────────────────

@@ -34,6 +34,7 @@ call :pub "File.Duplicates"       "Files\File.Duplicates"               "FileDup
 call :pub "Photo.Video.Organizer" "Media\Photo.Video.Organizer"         "PhotoVideoOrganizer.exe"
 call :pub "Quick.Launcher"        "Tools\Quick.Launcher"                "QuickLauncher.exe"
 call :pub "Workspace.Switcher"    "Tools\Workspace.Switcher"            "WorkspaceSwitcher.exe"
+call :pub "Screen.Recorder"      "Tools\Screen.Recorder"               "ScreenRecorder.exe"
 
 :: Remove .pdb files
 echo !DG!Cleaning .pdb files...!RS!

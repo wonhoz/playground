@@ -43,6 +43,20 @@ echo.
 if !FAIL! gtr 0 echo !BD!!RE!Result: !PASS!/!TOTAL! OK  ^|  Failed:!FAILED!!RS!
 if !FAIL! equ 0 echo !BD!!GR!Result: !PASS!/!TOTAL! All succeeded!RS!
 echo.
+
+:: ── 알림 전송 ──────────────────────────────────────────────────────
+set "NOTIFY=%ROOT%.claude\Scripts\notify\notify.ps1"
+
+if !FAIL! equ 0 (
+    set "MSG=Publish-All 성공: !PASS!/!TOTAL! 프로젝트 배포 완료"
+    set "LV=Info"
+) else (
+    set "MSG=Publish-All 실패: !PASS!/!TOTAL! 성공, 실패:!FAILED!"
+    set "LV=Error"
+)
+
+powershell -ExecutionPolicy Bypass -File "%NOTIFY%" -Message "!MSG!" -Level !LV! -Title "Playground Publish"
+
 pause
 goto :eof
 

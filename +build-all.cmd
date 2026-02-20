@@ -43,5 +43,18 @@ if !FAILED! equ 0 (
     echo.
 )
 
+:: ── 알림 전송 ──────────────────────────────────────────────────────
+set "NOTIFY=%~dp0.claude\Scripts\notify\notify.ps1"
+
+if !FAILED! equ 0 (
+    set "MSG=Build-All 성공: Debug=%DEBUG_OK%, Release=%RELEASE_OK%"
+    set "LV=Info"
+) else (
+    set "MSG=Build-All 실패: Debug=%DEBUG_OK%, Release=%RELEASE_OK%"
+    set "LV=Error"
+)
+
+powershell -ExecutionPolicy Bypass -File "%NOTIFY%" -Message "!MSG!" -Level !LV! -Title "Playground Build"
+
 pause
 exit /b !FAILED!

@@ -1,0 +1,144 @@
+<Window x:Class="FistFury.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Fist.Fury" Width="800" Height="560"
+        ResizeMode="NoResize"
+        Background="#1A1A2E" Foreground="#E0E0E0"
+        WindowStartupLocation="CenterScreen"
+        KeyDown="Window_KeyDown" KeyUp="Window_KeyUp"
+        Focusable="True">
+    <Grid>
+        <!-- 게임 캔버스 -->
+        <Canvas x:Name="GameCanvas" Background="Transparent" ClipToBounds="True"/>
+
+        <!-- HUD 상단 -->
+        <Grid x:Name="HudPanel" VerticalAlignment="Top" Margin="16,8" Visibility="Collapsed">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- 플레이어 HP -->
+            <StackPanel Grid.Column="0">
+                <TextBlock Text="PLAYER" FontSize="12" FontWeight="Bold" Foreground="#3A86FF"
+                           FontFamily="Consolas"/>
+                <Border Background="#333350" CornerRadius="3" Height="14" Width="220"
+                        HorizontalAlignment="Left" Margin="0,2,0,0">
+                    <Border x:Name="PlayerHpBar" Background="#3A86FF" CornerRadius="3"
+                            HorizontalAlignment="Left" Width="220"/>
+                </Border>
+            </StackPanel>
+
+            <!-- 점수/웨이브 -->
+            <StackPanel Grid.Column="1" HorizontalAlignment="Center">
+                <TextBlock x:Name="ScoreText" Text="SCORE: 0" FontSize="14" FontWeight="Bold"
+                           Foreground="#FFD700" HorizontalAlignment="Center" FontFamily="Consolas"/>
+                <TextBlock x:Name="WaveText" Text="WAVE 1" FontSize="11" Foreground="#888888"
+                           HorizontalAlignment="Center" FontFamily="Consolas"/>
+            </StackPanel>
+
+            <!-- 콤보 -->
+            <StackPanel Grid.Column="2" HorizontalAlignment="Right">
+                <TextBlock x:Name="ComboText" Text="" FontSize="18" FontWeight="Bold"
+                           Foreground="#FF6600" HorizontalAlignment="Right" FontFamily="Consolas">
+                    <TextBlock.Effect>
+                        <DropShadowEffect Color="#FF4400" BlurRadius="12" ShadowDepth="0"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+            </StackPanel>
+        </Grid>
+
+        <!-- 적 HP (보스전) -->
+        <StackPanel x:Name="BossHpPanel" VerticalAlignment="Top" Margin="16,50"
+                    Visibility="Collapsed" HorizontalAlignment="Center">
+            <TextBlock x:Name="BossNameText" Text="BOSS" FontSize="12" FontWeight="Bold"
+                       Foreground="#E74C3C" HorizontalAlignment="Center" FontFamily="Consolas"/>
+            <Border Background="#333350" CornerRadius="3" Height="10" Width="300" Margin="0,2,0,0">
+                <Border x:Name="BossHpBar" Background="#E74C3C" CornerRadius="3"
+                        HorizontalAlignment="Left" Width="300"/>
+            </Border>
+        </StackPanel>
+
+        <!-- 타이틀 화면 -->
+        <StackPanel x:Name="TitlePanel" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <TextBlock Text="👊 FIST.FURY" FontSize="48" FontWeight="Bold"
+                       Foreground="#FF6600" HorizontalAlignment="Center" FontFamily="Consolas">
+                <TextBlock.Effect>
+                    <DropShadowEffect Color="#FF4400" BlurRadius="25" ShadowDepth="0"/>
+                </TextBlock.Effect>
+            </TextBlock>
+            <TextBlock Text="BEAT 'EM UP ACTION" FontSize="14" Foreground="#888888"
+                       HorizontalAlignment="Center" Margin="0,4,0,0" FontFamily="Consolas"/>
+            <TextBlock x:Name="HighScoreTitle" Text="" FontSize="14" Foreground="#FFD700"
+                       HorizontalAlignment="Center" Margin="0,20,0,0" FontFamily="Consolas"/>
+            <TextBlock Text="[ ENTER 키로 시작 ]" FontSize="16" Foreground="#00FFCC"
+                       HorizontalAlignment="Center" Margin="0,36,0,0" FontFamily="Consolas">
+                <TextBlock.Effect>
+                    <DropShadowEffect Color="#00FFCC" BlurRadius="10" ShadowDepth="0"/>
+                </TextBlock.Effect>
+            </TextBlock>
+            <TextBlock FontSize="12" Foreground="#666666" HorizontalAlignment="Center"
+                       Margin="0,20,0,0" FontFamily="Consolas" TextAlignment="Center">
+                <Run Text="←→  이동    ↑  점프"/>
+                <LineBreak/>
+                <Run Text="Z 펀치   X 킥   C 특수기"/>
+                <LineBreak/>
+                <Run Text="P 일시정지   ESC 종료"/>
+            </TextBlock>
+        </StackPanel>
+
+        <!-- 일시정지 -->
+        <Border x:Name="PauseOverlay" Background="#AA000000" Visibility="Collapsed">
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                <TextBlock Text="PAUSED" FontSize="36" FontWeight="Bold"
+                           Foreground="#FFD700" HorizontalAlignment="Center" FontFamily="Consolas"/>
+                <TextBlock Text="[ P 키로 계속 ]" FontSize="16" Foreground="#888888"
+                           HorizontalAlignment="Center" Margin="0,16,0,0" FontFamily="Consolas"/>
+            </StackPanel>
+        </Border>
+
+        <!-- 웨이브 클리어 표시 -->
+        <TextBlock x:Name="WaveClearText" Text="" FontSize="32" FontWeight="Bold"
+                   Foreground="#00FFCC" HorizontalAlignment="Center" VerticalAlignment="Center"
+                   FontFamily="Consolas" Visibility="Collapsed">
+            <TextBlock.Effect>
+                <DropShadowEffect Color="#00FFCC" BlurRadius="15" ShadowDepth="0"/>
+            </TextBlock.Effect>
+        </TextBlock>
+
+        <!-- 게임오버 -->
+        <Border x:Name="GameOverOverlay" Background="#CC000000" Visibility="Collapsed">
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                <TextBlock Text="K.O." FontSize="52" FontWeight="Bold"
+                           Foreground="#E74C3C" HorizontalAlignment="Center" FontFamily="Consolas">
+                    <TextBlock.Effect>
+                        <DropShadowEffect Color="#FF0000" BlurRadius="25" ShadowDepth="0"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <TextBlock x:Name="FinalScoreText" Text="SCORE: 0" FontSize="22" FontWeight="Bold"
+                           Foreground="#FFD700" HorizontalAlignment="Center" Margin="0,16,0,0" FontFamily="Consolas"/>
+                <TextBlock x:Name="NewHighScoreText" Text="" FontSize="16" FontWeight="Bold"
+                           Foreground="#FFD700" HorizontalAlignment="Center" Margin="0,8,0,0" FontFamily="Consolas"/>
+                <TextBlock Text="[ ENTER 키로 재도전 ]" FontSize="16" Foreground="#888888"
+                           HorizontalAlignment="Center" Margin="0,30,0,0" FontFamily="Consolas"/>
+            </StackPanel>
+        </Border>
+
+        <!-- 승리 -->
+        <Border x:Name="VictoryOverlay" Background="#CC000000" Visibility="Collapsed">
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                <TextBlock Text="★ VICTORY! ★" FontSize="44" FontWeight="Bold"
+                           Foreground="#FFD700" HorizontalAlignment="Center" FontFamily="Consolas">
+                    <TextBlock.Effect>
+                        <DropShadowEffect Color="#FFD700" BlurRadius="25" ShadowDepth="0"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <TextBlock x:Name="VictoryScoreText" Text="" FontSize="22" FontWeight="Bold"
+                           Foreground="#00FFCC" HorizontalAlignment="Center" Margin="0,16,0,0" FontFamily="Consolas"/>
+                <TextBlock Text="[ ENTER 키로 재시작 ]" FontSize="16" Foreground="#888888"
+                           HorizontalAlignment="Center" Margin="0,30,0,0" FontFamily="Consolas"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>

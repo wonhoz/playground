@@ -35,6 +35,7 @@ call :pub "Photo.Video.Organizer" "Media\Photo.Video.Organizer"         "PhotoVi
 call :pub "Quick.Launcher"        "Tools\Quick.Launcher"                "QuickLauncher.exe"
 call :pub "Workspace.Switcher"    "Tools\Workspace.Switcher"            "WorkspaceSwitcher.exe"
 call :pub "Screen.Recorder"      "Tools\Screen.Recorder"               "ScreenRecorder.exe"
+call :pub "Text.Forge"           "Tools\Text.Forge"                    "TextForge.exe"
 
 :: Remove .pdb files
 echo !DG!Cleaning .pdb files...!RS!

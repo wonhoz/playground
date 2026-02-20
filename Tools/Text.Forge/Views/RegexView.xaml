@@ -1,0 +1,132 @@
+<UserControl x:Class="TextForge.Views.RegexView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Background="#1A1A2E" Foreground="#E0E0E0">
+    <UserControl.Resources>
+        <ResourceDictionary Source="../Styles/CommonStyles.xaml"/>
+    </UserControl.Resources>
+
+    <Grid Margin="24,20,24,20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="150"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Margin="0,0,0,16">
+            <TextBlock Text="Regex Tester" FontSize="20" FontWeight="Bold" Foreground="#EF9A9A"/>
+            <TextBlock Text="정규식 패턴을 실시간으로 테스트합니다" FontSize="12"
+                       Foreground="#666688" Margin="0,4,0,0"/>
+        </StackPanel>
+
+        <!-- 패턴 입력 -->
+        <Grid Grid.Row="1" Margin="0,0,0,8">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Border Grid.Column="0" Background="#16162A" BorderBrush="#2E2E50"
+                    BorderThickness="1,1,0,1" CornerRadius="5,0,0,5"
+                    Padding="10,0">
+                <TextBlock Text="/" FontFamily="Consolas" FontSize="18"
+                           Foreground="#EF9A9A" VerticalAlignment="Center"/>
+            </Border>
+            <TextBox Grid.Column="1" x:Name="PatternBox"
+                     Background="#16162A" Foreground="#E0E0E0"
+                     BorderBrush="#2E2E50" BorderThickness="0,1,0,1"
+                     FontFamily="Consolas" FontSize="14" Padding="6,6"
+                     Height="36" VerticalContentAlignment="Center"
+                     CaretBrush="#FFA000"
+                     TextChanged="Pattern_TextChanged"/>
+            <Border Grid.Column="2" Background="#16162A" BorderBrush="#2E2E50"
+                    BorderThickness="0,1,1,1" CornerRadius="0,5,5,0"
+                    Padding="10,0">
+                <TextBlock Text="/" FontFamily="Consolas" FontSize="18"
+                           Foreground="#EF9A9A" VerticalAlignment="Center"/>
+            </Border>
+        </Grid>
+
+        <!-- 옵션 플래그 -->
+        <Border Grid.Row="2" Style="{StaticResource PanelBorder}" Margin="0,0,0,12">
+            <WrapPanel Orientation="Horizontal">
+                <TextBlock Text="플래그 :" FontSize="12" Foreground="#888888"
+                           VerticalAlignment="Center" Margin="0,0,12,0"/>
+                <CheckBox x:Name="FlagIgnoreCase" Content="무시 대소문자 (i)"
+                          Style="{StaticResource OptionCheck}"
+                          Checked="Flag_Changed" Unchecked="Flag_Changed"/>
+                <CheckBox x:Name="FlagMultiline" Content="멀티라인 (m)"
+                          Style="{StaticResource OptionCheck}"
+                          Checked="Flag_Changed" Unchecked="Flag_Changed"/>
+                <CheckBox x:Name="FlagSingleline" Content="단일행 (s)"
+                          Style="{StaticResource OptionCheck}"
+                          Checked="Flag_Changed" Unchecked="Flag_Changed"/>
+                <TextBlock x:Name="MatchCountText" VerticalAlignment="Center"
+                           FontSize="12" Foreground="#FFA000" Margin="12,0,0,0"/>
+                <TextBlock x:Name="StatusText" VerticalAlignment="Center"
+                           FontSize="11" Margin="12,0,0,0"/>
+            </WrapPanel>
+        </Border>
+
+        <!-- 테스트 입력 -->
+        <Grid Grid.Row="3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" Text="TEST INPUT" FontSize="10" FontWeight="Bold"
+                       Foreground="#444466" Margin="0,0,0,6"/>
+            <RichTextBox Grid.Row="1" x:Name="TestInput"
+                         Background="#16162A" Foreground="#E0E0E0"
+                         BorderBrush="#2E2E50" BorderThickness="1"
+                         FontFamily="Consolas" FontSize="13" Padding="10"
+                         AcceptsReturn="True"
+                         VerticalScrollBarVisibility="Auto"
+                         HorizontalScrollBarVisibility="Auto">
+                <RichTextBox.Resources>
+                    <Style TargetType="Paragraph">
+                        <Setter Property="Margin" Value="0"/>
+                    </Style>
+                </RichTextBox.Resources>
+            </RichTextBox>
+        </Grid>
+
+        <!-- 매치 결과 헤더 -->
+        <TextBlock Grid.Row="4" Text="MATCHES" FontSize="10" FontWeight="Bold"
+                   Foreground="#444466" Margin="0,12,0,6"/>
+
+        <!-- 매치 목록 -->
+        <ListBox Grid.Row="5" x:Name="MatchList"
+                 Background="#16162A" BorderBrush="#2E2E50" BorderThickness="1"
+                 Foreground="#E0E0E0" FontFamily="Consolas" FontSize="12"
+                 ScrollViewer.HorizontalScrollBarVisibility="Auto">
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="Padding" Value="8,4"/>
+                    <Setter Property="Foreground" Value="#E0E0E0"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="ListBoxItem">
+                                <Border x:Name="Bd" Background="Transparent"
+                                        Padding="{TemplateBinding Padding}">
+                                    <ContentPresenter/>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter TargetName="Bd" Property="Background" Value="#252540"/>
+                                    </Trigger>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter TargetName="Bd" Property="Background" Value="#2A2A55"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ListBox.ItemContainerStyle>
+        </ListBox>
+    </Grid>
+</UserControl>

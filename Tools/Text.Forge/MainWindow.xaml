@@ -1,0 +1,166 @@
+<Window x:Class="TextForge.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:views="clr-namespace:TextForge.Views"
+        Title="Text.Forge" Width="1000" Height="680"
+        MinWidth="800" MinHeight="500"
+        Background="#1A1A2E" Foreground="#E0E0E0"
+        WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <!-- 좌측 네비게이션 항목 스타일 -->
+        <Style x:Key="NavItem" TargetType="ListBoxItem">
+            <Setter Property="Foreground"      Value="#AAAAAA"/>
+            <Setter Property="FontSize"        Value="13"/>
+            <Setter Property="Padding"         Value="16,10"/>
+            <Setter Property="Cursor"          Value="Hand"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <Border x:Name="Bd" Background="Transparent"
+                                BorderBrush="Transparent" BorderThickness="0,0,0,0"
+                                Padding="{TemplateBinding Padding}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="4"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Border x:Name="Indicator" Grid.Column="0"
+                                        Background="Transparent" CornerRadius="2"
+                                        Margin="0,4,0,4"/>
+                                <ContentPresenter Grid.Column="1" Margin="10,0,0,0"
+                                                  VerticalAlignment="Center"/>
+                            </Grid>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Bd" Property="Background" Value="#252538"/>
+                                <Setter Property="Foreground" Value="#E0E0E0"/>
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="Bd" Property="Background" Value="#2A2A48"/>
+                                <Setter TargetName="Indicator" Property="Background" Value="#FFA000"/>
+                                <Setter Property="Foreground" Value="#FFFFFF"/>
+                                <Setter Property="FontWeight" Value="SemiBold"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- 네비게이션 ListBox 스타일 -->
+        <Style x:Key="NavList" TargetType="ListBox">
+            <Setter Property="Background"      Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="ItemContainerStyle" Value="{StaticResource NavItem}"/>
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="170"/>
+            <ColumnDefinition Width="1"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- ═══ 좌측 사이드바 ═══ -->
+        <Grid Grid.Column="0" Background="#131325">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- 앱 타이틀 -->
+            <StackPanel Grid.Row="0" Margin="16,20,16,16">
+                <TextBlock Text="Text" FontSize="18" FontWeight="Bold"
+                           Foreground="#FFA000"/>
+                <TextBlock Text=".Forge" FontSize="18" FontWeight="Bold"
+                           Foreground="#E0E0E0" Margin="0,-4,0,0"/>
+                <TextBlock Text="Developer Tools" FontSize="10"
+                           Foreground="#555566" Margin="0,4,0,0"/>
+            </StackPanel>
+
+            <!-- 구분선 -->
+            <Border Grid.Row="0" Height="1" Background="#222238"
+                    VerticalAlignment="Bottom" Margin="0,0,0,0"/>
+
+            <!-- 도구 목록 -->
+            <ListBox Grid.Row="1" x:Name="ToolNav"
+                     Style="{StaticResource NavList}"
+                     SelectionChanged="ToolNav_SelectionChanged"
+                     Margin="0,8,0,8">
+                <ListBoxItem>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{}{ }" FontFamily="Consolas" FontSize="14" FontWeight="Bold"
+                                   Foreground="#FFA000" Width="28" VerticalAlignment="Center"/>
+                        <TextBlock Text="JSON / XML" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </ListBoxItem>
+                <ListBoxItem>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="64" FontFamily="Consolas" FontSize="11" FontWeight="Bold"
+                                   Foreground="#4FC3F7" Width="28" VerticalAlignment="Center"/>
+                        <TextBlock Text="Base64" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </ListBoxItem>
+                <ListBoxItem>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="%" FontFamily="Consolas" FontSize="16" FontWeight="Bold"
+                                   Foreground="#81C784" Width="28" VerticalAlignment="Center"/>
+                        <TextBlock Text="URL Encode" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </ListBoxItem>
+                <ListBoxItem>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="#" FontFamily="Consolas" FontSize="16" FontWeight="Bold"
+                                   Foreground="#CE93D8" Width="28" VerticalAlignment="Center"/>
+                        <TextBlock Text="Hash" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </ListBoxItem>
+                <ListBoxItem>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="JWT" FontFamily="Consolas" FontSize="10" FontWeight="Bold"
+                                   Foreground="#FFB74D" Width="28" VerticalAlignment="Center"/>
+                        <TextBlock Text="JWT Decode" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </ListBoxItem>
+                <ListBoxItem>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text=".*" FontFamily="Consolas" FontSize="14" FontWeight="Bold"
+                                   Foreground="#EF9A9A" Width="28" VerticalAlignment="Center"/>
+                        <TextBlock Text="Regex" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </ListBoxItem>
+                <ListBoxItem>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="⏱" FontSize="13" Width="28" VerticalAlignment="Center"
+                                   TextAlignment="Center"/>
+                        <TextBlock Text="Timestamp" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </ListBoxItem>
+                <ListBoxItem>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Aa" FontFamily="Consolas" FontSize="13" FontWeight="Bold"
+                                   Foreground="#80DEEA" Width="28" VerticalAlignment="Center"/>
+                        <TextBlock Text="Case Convert" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </ListBoxItem>
+            </ListBox>
+
+            <!-- 하단 버전 -->
+            <TextBlock Grid.Row="2" Text="v1.0.0" FontSize="10"
+                       Foreground="#333355" Margin="16,8,16,12"
+                       HorizontalAlignment="Left"/>
+        </Grid>
+
+        <!-- 구분선 -->
+        <Border Grid.Column="1" Background="#222238"/>
+
+        <!-- ═══ 컨텐츠 영역 ═══ -->
+        <ContentControl Grid.Column="2" x:Name="ContentArea"/>
+    </Grid>
+</Window>

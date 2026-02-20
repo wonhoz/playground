@@ -1,0 +1,88 @@
+<UserControl x:Class="TextForge.Views.JsonXmlView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Background="#1A1A2E" Foreground="#E0E0E0">
+    <UserControl.Resources>
+        <ResourceDictionary Source="../Styles/CommonStyles.xaml"/>
+    </UserControl.Resources>
+
+    <Grid Margin="24,20,24,20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- 헤더 -->
+        <StackPanel Grid.Row="0" Margin="0,0,0,16">
+            <TextBlock Text="JSON / XML" FontSize="20" FontWeight="Bold" Foreground="#FFA000"/>
+            <TextBlock Text="포맷팅, 압축, 유효성 검사" FontSize="12" Foreground="#666688" Margin="0,4,0,0"/>
+        </StackPanel>
+
+        <!-- 액션 버튼 행 -->
+        <WrapPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,12">
+            <Button Content="✦ Pretty Print" Style="{StaticResource AccentBtn}"
+                    Click="PrettyPrint_Click" Margin="0,0,6,0"/>
+            <Button Content="⊟ Minify" Style="{StaticResource GrayBtn}"
+                    Click="Minify_Click" Margin="0,0,6,0"/>
+            <Button Content="✔ Validate" Style="{StaticResource GrayBtn}"
+                    Click="Validate_Click" Margin="0,0,12,0"/>
+            <Border Background="#333355" Width="1" Margin="0,4,12,4"/>
+            <Button Content="XML ▶ JSON" Style="{StaticResource GrayBtn}"
+                    Click="XmlToJson_Click" Margin="0,0,6,0"/>
+            <Button Content="JSON ▶ XML" Style="{StaticResource GrayBtn}"
+                    Click="JsonToXml_Click" Margin="0,0,12,0"/>
+            <Border Background="#333355" Width="1" Margin="0,4,12,4"/>
+            <Button Content="⇄ Swap" Style="{StaticResource SmallGrayBtn}"
+                    Click="Swap_Click" Margin="0,0,6,0"/>
+            <Button Content="⎘ Copy Output" Style="{StaticResource SmallGrayBtn}"
+                    Click="CopyOutput_Click" Margin="0,0,6,0"/>
+            <Button Content="✕ Clear" Style="{StaticResource SmallGrayBtn}"
+                    Click="Clear_Click"/>
+        </WrapPanel>
+
+        <!-- 상태 메시지 -->
+        <TextBlock x:Name="StatusText" Grid.Row="1"
+                   HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                   FontSize="11" Foreground="#666688" Margin="0,0,0,12"/>
+
+        <!-- 입출력 영역 -->
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="8"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- 입력 -->
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" Text="INPUT" FontSize="10" FontWeight="Bold"
+                           Foreground="#444466" Margin="0,0,0,6"/>
+                <TextBox Grid.Row="1" x:Name="InputBox"
+                         Style="{StaticResource CodeBox}"
+                         TextChanged="Input_TextChanged"
+                         AcceptsReturn="True" AcceptsTab="True"
+                         TextWrapping="NoWrap"/>
+            </Grid>
+
+            <!-- 출력 -->
+            <Grid Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" Text="OUTPUT" FontSize="10" FontWeight="Bold"
+                           Foreground="#444466" Margin="0,0,0,6"/>
+                <TextBox Grid.Row="1" x:Name="OutputBox"
+                         Style="{StaticResource CodeBox}"
+                         IsReadOnly="True"
+                         AcceptsReturn="True"
+                         TextWrapping="NoWrap"/>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

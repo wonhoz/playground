@@ -1,0 +1,79 @@
+<UserControl x:Class="TextForge.Views.CaseView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Background="#1A1A2E" Foreground="#E0E0E0">
+    <UserControl.Resources>
+        <ResourceDictionary Source="../Styles/CommonStyles.xaml"/>
+    </UserControl.Resources>
+
+    <Grid Margin="24,20,24,20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Margin="0,0,0,16">
+            <TextBlock Text="Case Convert" FontSize="20" FontWeight="Bold" Foreground="#80DEEA"/>
+            <TextBlock Text="텍스트 케이스를 변환합니다" FontSize="12"
+                       Foreground="#666688" Margin="0,4,0,0"/>
+        </StackPanel>
+
+        <!-- 변환 버튼 행 -->
+        <WrapPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,12">
+            <Button Content="UPPER CASE" Style="{StaticResource GrayBtn}"
+                    Click="Upper_Click" Margin="0,0,6,6"/>
+            <Button Content="lower case" Style="{StaticResource GrayBtn}"
+                    Click="Lower_Click" Margin="0,0,6,6"/>
+            <Button Content="Title Case" Style="{StaticResource GrayBtn}"
+                    Click="Title_Click" Margin="0,0,6,6"/>
+            <Button Content="camelCase" Style="{StaticResource AccentBtn}"
+                    Click="Camel_Click" Margin="0,0,6,6"/>
+            <Button Content="snake_case" Style="{StaticResource GrayBtn}"
+                    Click="Snake_Click" Margin="0,0,6,6"/>
+            <Button Content="PascalCase" Style="{StaticResource GrayBtn}"
+                    Click="Pascal_Click" Margin="0,0,6,6"/>
+            <Button Content="kebab-case" Style="{StaticResource GrayBtn}"
+                    Click="Kebab_Click" Margin="0,0,12,6"/>
+            <Button Content="⇄ Swap" Style="{StaticResource SmallGrayBtn}"
+                    Click="Swap_Click" Margin="0,0,6,6"/>
+            <Button Content="⎘ Copy" Style="{StaticResource SmallGrayBtn}"
+                    Click="Copy_Click" Margin="0,0,6,6"/>
+            <Button Content="✕ Clear" Style="{StaticResource SmallGrayBtn}"
+                    Click="Clear_Click" Margin="0,0,0,6"/>
+            <TextBlock x:Name="StatusText" VerticalAlignment="Center"
+                       FontSize="11" Margin="12,0,0,0"/>
+        </WrapPanel>
+
+        <!-- 입출력 -->
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="8"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" Text="INPUT" FontSize="10" FontWeight="Bold"
+                           Foreground="#444466" Margin="0,0,0,6"/>
+                <TextBox Grid.Row="1" x:Name="InputBox" Style="{StaticResource CodeBox}"
+                         AcceptsReturn="True" TextWrapping="Wrap"/>
+            </Grid>
+
+            <Grid Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" Text="OUTPUT" FontSize="10" FontWeight="Bold"
+                           Foreground="#444466" Margin="0,0,0,6"/>
+                <TextBox Grid.Row="1" x:Name="OutputBox" Style="{StaticResource CodeBox}"
+                         IsReadOnly="True" AcceptsReturn="True" TextWrapping="Wrap"/>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

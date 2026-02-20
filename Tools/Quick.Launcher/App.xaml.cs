@@ -16,6 +16,7 @@ public partial class App : Application
 
     // WinForms tray (fully-qualified to avoid WPF type conflicts)
     private System.Windows.Forms.NotifyIcon? _tray;
+    private SettingsWindow? _settingsWindow;
 
     public SearchEngine Engine => _engine!;
 
@@ -44,6 +45,11 @@ public partial class App : Application
         RegisterHotkey();
 
         InitTray();
+
+        // 실행 풍선 알림
+        _tray?.ShowBalloonTip(1500, "Quick.Launcher",
+            $"Quick.Launcher가 실행되었습니다. ({_settings.HotkeyText})",
+            System.Windows.Forms.ToolTipIcon.Info);
     }
 
     private void RegisterHotkey()
@@ -78,7 +84,10 @@ public partial class App : Application
             Icon    = CreateTrayIcon(),
         };
 
-        var menu = new System.Windows.Forms.ContextMenuStrip();
+        var menu = new System.Windows.Forms.ContextMenuStrip
+        {
+            Renderer = new DarkMenuRenderer()
+        };
         menu.Items.Add("Quick.Launcher 열기",  null, (_, _) => ToggleLauncher());
         menu.Items.Add("설정",                  null, (_, _) => OpenSettings());
         menu.Items.Add(new System.Windows.Forms.ToolStripSeparator());
@@ -92,8 +101,17 @@ public partial class App : Application
     {
         Dispatcher.Invoke(() =>
         {
-            var win = new SettingsWindow(_settings) { Owner = _launcher };
-            if (win.ShowDialog() != true) return;
+            // 설정 윈도우 중복 방지
+            if (_settingsWindow is not null)
+            {
+                _settingsWindow.Activate();
+                return;
+            }
+
+            _settingsWindow = new SettingsWindow(_settings) { Owner = _launcher };
+            _settingsWindow.Closed += (_, _) => _settingsWindow = null;
+
+            if (_settingsWindow.ShowDialog() != true) return;
 
             _settings = SettingsService.Load();
             _builtinProvider.Reload(_settings.CustomItems);

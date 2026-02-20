@@ -1,6 +1,8 @@
 using System.Collections.ObjectModel;
+using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Interop;
 using System.Windows.Media;
 using QuickLauncher.Models;
 using QuickLauncher.Services;
@@ -34,6 +36,9 @@ public partial class SettingsWindow : Window
     private static readonly int MOD_ALT   = GlobalHotkeyService.MOD_ALT;
     private static readonly int MOD_SHIFT = GlobalHotkeyService.MOD_SHIFT;
 
+    [DllImport("dwmapi.dll", PreserveSig = true)]
+    private static extern int DwmSetWindowAttribute(nint hwnd, int attr, ref int value, int size);
+
     public SettingsWindow(LauncherSettings settings)
     {
         InitializeComponent();
@@ -44,6 +49,15 @@ public partial class SettingsWindow : Window
         _items = new ObservableCollection<CustomItemViewModel>(
             settings.CustomItems.Select(i => new CustomItemViewModel(i)));
         ItemsList.ItemsSource = _items;
+
+        Loaded += (_, _) =>
+        {
+            if (PresentationSource.FromVisual(this) is HwndSource source)
+            {
+                int value = 1;
+                DwmSetWindowAttribute(source.Handle, 20, ref value, sizeof(int));
+            }
+        };
     }
 
     // ── 단축키 캡처 ───────────────────────────────────────────────────────────

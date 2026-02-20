@@ -39,6 +39,8 @@ call :pub "Text.Forge"           "Tools\Text.Forge"                    "TextForg
 call :pub "Hue.Flow"             "Games\Hue.Flow"                      "HueFlow.exe"
 call :pub "Ambient.Mixer"       "Audio\Ambient.Mixer"                  "AmbientMixer.exe"
 call :pub "Clipboard.Stacker"   "Tools\Clipboard.Stacker"              "ClipboardStacker.exe"
+call :pub "Batch.Rename"        "Files\Batch.Rename"                   "BatchRename.exe"
+call :pub "Window.Pilot"        "Tools\Window.Pilot"                   "WindowPilot.exe"
 
 :: Remove .pdb files
 echo !DG!Cleaning .pdb files...!RS!

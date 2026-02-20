@@ -37,10 +37,16 @@ public partial class TimestampView : UserControl
     }
 
     private void Unix_TextChanged(object sender, TextChangedEventArgs e)
-        => ConvertUnixToDate();
+    {
+        if (!IsLoaded) return;
+        ConvertUnixToDate();
+    }
 
     private void Unit_Changed(object sender, RoutedEventArgs e)
-        => ConvertUnixToDate();
+    {
+        if (!IsLoaded) return;
+        ConvertUnixToDate();
+    }
 
     private void ConvertUnixToDate()
     {

@@ -42,6 +42,7 @@ call :pub "Fist.Fury"           "Games\Fist.Fury"                     "FistFury.
 call :pub "Dungeon.Dash"        "Games\Dungeon.Dash"                  "DungeonDash.exe"
 call :pub "Track.Star"          "Games\Track.Star"                    "TrackStar.exe"
 call :pub "Nitro.Drift"         "Games\Nitro.Drift"                   "NitroDrift.exe"
+call :pub "Beat.Drop"           "Games\Beat.Drop"                     "BeatDrop.exe"
 call :pub "Ambient.Mixer"       "Audio\Ambient.Mixer"                  "AmbientMixer.exe"
 call :pub "Clipboard.Stacker"   "Tools\Clipboard.Stacker"              "ClipboardStacker.exe"
 call :pub "Batch.Rename"        "Files\Batch.Rename"                   "BatchRename.exe"

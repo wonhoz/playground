@@ -1,0 +1,149 @@
+<Window x:Class="DungeonDash.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Dungeon.Dash" Width="820" Height="640"
+        ResizeMode="NoResize"
+        Background="#0D0D1A" Foreground="#E0E0E0"
+        WindowStartupLocation="CenterScreen"
+        KeyDown="Window_KeyDown" KeyUp="Window_KeyUp"
+        Focusable="True">
+    <Grid>
+        <!-- 게임 캔버스 -->
+        <Canvas x:Name="GameCanvas" Background="#0D0D1A" ClipToBounds="True"/>
+
+        <!-- HUD 상단 -->
+        <Grid x:Name="HudPanel" VerticalAlignment="Top" Margin="12,6" Visibility="Collapsed">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- HP 바 -->
+            <StackPanel Grid.Column="0">
+                <TextBlock Text="HP" FontSize="11" FontWeight="Bold" Foreground="#E74C3C"
+                           FontFamily="Consolas"/>
+                <Border Background="#333340" CornerRadius="3" Height="12" Width="180"
+                        HorizontalAlignment="Left" Margin="0,1,0,0">
+                    <Border x:Name="PlayerHpBar" Background="#E74C3C" CornerRadius="3"
+                            HorizontalAlignment="Left" Width="180"/>
+                </Border>
+                <TextBlock x:Name="HpText" Text="100/100" FontSize="10" Foreground="#888888"
+                           FontFamily="Consolas" Margin="0,1,0,0"/>
+            </StackPanel>
+
+            <!-- 층/점수 -->
+            <StackPanel Grid.Column="1" HorizontalAlignment="Center">
+                <TextBlock x:Name="FloorText" Text="B1F" FontSize="16" FontWeight="Bold"
+                           Foreground="#FFD700" HorizontalAlignment="Center" FontFamily="Consolas"/>
+                <TextBlock x:Name="ScoreText" Text="SCORE: 0" FontSize="11" Foreground="#888888"
+                           HorizontalAlignment="Center" FontFamily="Consolas"/>
+            </StackPanel>
+
+            <!-- 스킬 쿨다운 / 스탯 -->
+            <StackPanel Grid.Column="2" HorizontalAlignment="Right">
+                <TextBlock x:Name="AtkText" Text="ATK: 15" FontSize="11" Foreground="#FF8844"
+                           FontFamily="Consolas" HorizontalAlignment="Right"/>
+                <TextBlock x:Name="SkillText" Text="[C] SKILL: READY" FontSize="11" FontWeight="Bold"
+                           Foreground="#00FFCC" FontFamily="Consolas" HorizontalAlignment="Right"/>
+            </StackPanel>
+        </Grid>
+
+        <!-- 보스 HP -->
+        <StackPanel x:Name="BossHpPanel" VerticalAlignment="Top" Margin="12,55"
+                    HorizontalAlignment="Center" Visibility="Collapsed">
+            <TextBlock x:Name="BossNameText" Text="" FontSize="12" FontWeight="Bold"
+                       Foreground="#FF6600" HorizontalAlignment="Center" FontFamily="Consolas"/>
+            <Border Background="#333340" CornerRadius="3" Height="8" Width="280" Margin="0,2,0,0">
+                <Border x:Name="BossHpBar" Background="#FF6600" CornerRadius="3"
+                        HorizontalAlignment="Left" Width="280"/>
+            </Border>
+        </StackPanel>
+
+        <!-- 미니맵 -->
+        <Canvas x:Name="MiniMapCanvas" Width="120" Height="90"
+                VerticalAlignment="Bottom" HorizontalAlignment="Right"
+                Margin="0,0,12,12" Visibility="Collapsed" Opacity="0.8"/>
+
+        <!-- 타이틀 -->
+        <StackPanel x:Name="TitlePanel" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <TextBlock Text="⚔ DUNGEON.DASH" FontSize="44" FontWeight="Bold"
+                       Foreground="#FFD700" HorizontalAlignment="Center" FontFamily="Consolas">
+                <TextBlock.Effect>
+                    <DropShadowEffect Color="#FF8800" BlurRadius="25" ShadowDepth="0"/>
+                </TextBlock.Effect>
+            </TextBlock>
+            <TextBlock Text="ROGUELIKE DUNGEON ADVENTURE" FontSize="13" Foreground="#888888"
+                       HorizontalAlignment="Center" Margin="0,4,0,0" FontFamily="Consolas"/>
+            <TextBlock x:Name="HighScoreTitle" Text="" FontSize="14" Foreground="#FFD700"
+                       HorizontalAlignment="Center" Margin="0,20,0,0" FontFamily="Consolas"/>
+            <TextBlock Text="[ ENTER 키로 모험 시작 ]" FontSize="16" Foreground="#00FFCC"
+                       HorizontalAlignment="Center" Margin="0,32,0,0" FontFamily="Consolas">
+                <TextBlock.Effect>
+                    <DropShadowEffect Color="#00FFCC" BlurRadius="10" ShadowDepth="0"/>
+                </TextBlock.Effect>
+            </TextBlock>
+            <TextBlock FontSize="12" Foreground="#666666" HorizontalAlignment="Center"
+                       Margin="0,20,0,0" FontFamily="Consolas" TextAlignment="Center">
+                <Run Text="↑↓←→  이동"/>
+                <LineBreak/>
+                <Run Text="Z 공격   X 대시   C 스킬"/>
+                <LineBreak/>
+                <Run Text="계단을 찾아 던전을 돌파하라!"/>
+                <LineBreak/>
+                <Run Text="P 일시정지   ESC 종료"/>
+            </TextBlock>
+        </StackPanel>
+
+        <!-- 일시정지 -->
+        <Border x:Name="PauseOverlay" Background="#AA000000" Visibility="Collapsed">
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                <TextBlock Text="PAUSED" FontSize="36" FontWeight="Bold"
+                           Foreground="#FFD700" HorizontalAlignment="Center" FontFamily="Consolas"/>
+                <TextBlock Text="[ P 키로 계속 ]" FontSize="16" Foreground="#888888"
+                           HorizontalAlignment="Center" Margin="0,16,0,0" FontFamily="Consolas"/>
+            </StackPanel>
+        </Border>
+
+        <!-- 층 전환 -->
+        <Border x:Name="FloorTransition" Background="#EE000000" Visibility="Collapsed">
+            <TextBlock x:Name="FloorTransitionText" Text="" FontSize="32" FontWeight="Bold"
+                       Foreground="#FFD700" HorizontalAlignment="Center" VerticalAlignment="Center"
+                       FontFamily="Consolas"/>
+        </Border>
+
+        <!-- 게임오버 -->
+        <Border x:Name="GameOverOverlay" Background="#CC000000" Visibility="Collapsed">
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                <TextBlock Text="YOU DIED" FontSize="48" FontWeight="Bold"
+                           Foreground="#E74C3C" HorizontalAlignment="Center" FontFamily="Consolas">
+                    <TextBlock.Effect>
+                        <DropShadowEffect Color="#FF0000" BlurRadius="25" ShadowDepth="0"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <TextBlock x:Name="DeathFloorText" Text="" FontSize="16" Foreground="#888888"
+                           HorizontalAlignment="Center" Margin="0,8,0,0" FontFamily="Consolas"/>
+                <TextBlock x:Name="FinalScoreText" Text="" FontSize="20" FontWeight="Bold"
+                           Foreground="#FFD700" HorizontalAlignment="Center" Margin="0,8,0,0" FontFamily="Consolas"/>
+                <TextBlock Text="[ ENTER 키로 재도전 ]" FontSize="16" Foreground="#888888"
+                           HorizontalAlignment="Center" Margin="0,30,0,0" FontFamily="Consolas"/>
+            </StackPanel>
+        </Border>
+
+        <!-- 클리어 -->
+        <Border x:Name="ClearOverlay" Background="#CC000000" Visibility="Collapsed">
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                <TextBlock Text="★ DUNGEON CLEAR! ★" FontSize="40" FontWeight="Bold"
+                           Foreground="#FFD700" HorizontalAlignment="Center" FontFamily="Consolas">
+                    <TextBlock.Effect>
+                        <DropShadowEffect Color="#FFD700" BlurRadius="25" ShadowDepth="0"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <TextBlock x:Name="ClearScoreText" Text="" FontSize="20" FontWeight="Bold"
+                           Foreground="#00FFCC" HorizontalAlignment="Center" Margin="0,16,0,0" FontFamily="Consolas"/>
+                <TextBlock Text="[ ENTER 키로 재시작 ]" FontSize="16" Foreground="#888888"
+                           HorizontalAlignment="Center" Margin="0,30,0,0" FontFamily="Consolas"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>

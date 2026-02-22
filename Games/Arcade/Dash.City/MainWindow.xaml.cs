@@ -59,6 +59,7 @@ public partial class MainWindow : Window
     // 스코어
     private int _score, _coins;
     private double _speed;
+    private double _baseSpeed = BaseSpeed;
 
     // 파워업
     private bool _hasShield;
@@ -119,7 +120,7 @@ public partial class MainWindow : Window
         _playerZ = 0; _playerX = 0; _playerY = 0;
         _playerVY = 0; _targetLane = 0;
         _isJumping = false; _isSliding = false; _isGrounded = true;
-        _score = 0; _coins = 0; _speed = BaseSpeed;
+        _score = 0; _coins = 0; _speed = BaseSpeed; _baseSpeed = BaseSpeed;
         _hasShield = false; _hasMagnet = false; _hasJetpack = false;
         _scoreMultiplier = 1;
         _shieldTimer = 0; _magnetTimer = 0; _multiplierTimer = 0; _jetpackTimer = 0;
@@ -155,7 +156,7 @@ public partial class MainWindow : Window
         if (_state != GameState.Playing) return;
 
         // 속도 증가
-        _speed = Math.Min(MaxSpeed, BaseSpeed + _playerZ * 0.015);
+        _speed = Math.Min(MaxSpeed, _baseSpeed + _playerZ * 0.015);
 
         // 전진
         _playerZ += _speed * dt;
@@ -228,7 +229,7 @@ public partial class MainWindow : Window
         ScoreText.Text = _score.ToString("N0");
         DistText.Text = $"{(int)_playerZ}m";
         CoinText.Text = _coins.ToString();
-        SpeedText.Text = $"{(int)(_speed * 3.6)} km/h";
+        SpeedText.Text = $"{(int)(_speed * 3.6)} km/h  [±: {(int)_baseSpeed}]";
         MultText.Text = _scoreMultiplier.ToString();
 
         string powerText = "";
@@ -594,10 +595,16 @@ public partial class MainWindow : Window
             switch (e.Key)
             {
                 case Key.Left or Key.A:
-                    if (_targetLane > -1) _targetLane--;
+                    if (_targetLane < 1) _targetLane++;
                     break;
                 case Key.Right or Key.D:
-                    if (_targetLane < 1) _targetLane++;
+                    if (_targetLane > -1) _targetLane--;
+                    break;
+                case Key.OemPlus or Key.Add:
+                    _baseSpeed = Math.Min(35.0, _baseSpeed + 2.5);
+                    break;
+                case Key.OemMinus or Key.Subtract:
+                    _baseSpeed = Math.Max(10.0, _baseSpeed - 2.5);
                     break;
                 case Key.Up or Key.Space or Key.W:
                     if (_isGrounded && !_hasJetpack)
@@ -650,12 +657,12 @@ public partial class MainWindow : Window
     {
         return obj.Kind switch
         {
-            ObjectKind.Barrier => MeshHelper.CreateBox(LaneWidth * 0.85, 1.0, 0.6, CNeonRed, 0.5),
+            ObjectKind.Barrier => MeshHelper.CreateBox(LaneWidth * 0.85, 1.3, 0.7, CNeonRed, 0.8),
             ObjectKind.Train => MeshHelper.CreateBox(LaneWidth * 0.9, 3.0, 4.0, CTrain, 0.15),
-            ObjectKind.Beam => MeshHelper.CreateBox(RoadWidth, 0.3, 0.4,
-                Color.FromRgb(0xFF, 0x88, 0x00), 0.6),
+            ObjectKind.Beam => MeshHelper.CreateBox(RoadWidth, 0.35, 0.4,
+                Color.FromRgb(0xFF, 0x88, 0x00), 0.8),
 
-            ObjectKind.Coin => MeshHelper.CreateCylinder(0.3, 0.1, 8, CNeonGold, 0.9),
+            ObjectKind.Coin => MeshHelper.CreateCylinder(0.4, 0.12, 8, CNeonGold, 1.0),
 
             ObjectKind.Magnet => MeshHelper.CreateBox(0.6, 0.6, 0.6, CNeonRed, 0.8),
             ObjectKind.Shield => MeshHelper.CreateBox(0.6, 0.6, 0.6, CNeonBlue, 0.8),

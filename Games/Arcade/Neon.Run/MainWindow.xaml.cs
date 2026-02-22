@@ -38,6 +38,8 @@ public partial class MainWindow : Window
     private int _targetLane;           // 목표 레인 (-1, 0, 1)
     private double _speed;             // 현재 속도 (units/s)
     private double _baseSpeed = 15.0;
+    private const double MinBaseSpeed = 8.0;
+    private const double MaxBaseSpeed = 35.0;
     private int _crystals;
     private int _score;
     private double _jumpTimer;         // 점프 진행 시간 (-1 = 안 점프)
@@ -336,7 +338,7 @@ public partial class MainWindow : Window
 
         // HUD
         DistText.Text = ((int)_playerZ).ToString();
-        SpeedText.Text = ((int)(cappedSpeed * 3.6)).ToString();
+        SpeedText.Text = $"{(int)(cappedSpeed * 3.6)}  [±: {(int)_baseSpeed}]";
         CrystalText.Text = _crystals.ToString();
 
         int multiplier = 1 + (int)(_playerZ / 100);
@@ -416,12 +418,20 @@ public partial class MainWindow : Window
         switch (e.Key)
         {
             case Key.Left or Key.A:
+                if (_state == GameState.Playing && _targetLane < 1)
+                    _targetLane++;
+                break;
+            case Key.Right or Key.D:
                 if (_state == GameState.Playing && _targetLane > -1)
                     _targetLane--;
                 break;
-            case Key.Right or Key.D:
-                if (_state == GameState.Playing && _targetLane < 1)
-                    _targetLane++;
+            case Key.OemPlus or Key.Add:
+                if (_state == GameState.Playing)
+                    _baseSpeed = Math.Min(MaxBaseSpeed, _baseSpeed + 2.5);
+                break;
+            case Key.OemMinus or Key.Subtract:
+                if (_state == GameState.Playing)
+                    _baseSpeed = Math.Max(MinBaseSpeed, _baseSpeed - 2.5);
                 break;
             case Key.Space:
                 if (_state == GameState.Playing && !_isJumping)
@@ -562,9 +572,9 @@ public partial class MainWindow : Window
     {
         return obs.Type switch
         {
-            ObstacleType.Wall => CreateBox(LaneWidth * 0.9, 2.4, 0.5, NeonRed, 0.6),
-            ObstacleType.LowBar => CreateBox(LaneWidth * 0.9, 0.4, 0.5, NeonPink, 0.5),
-            ObstacleType.Crystal => CreateBox(0.4, 0.4, 0.4, NeonGold, 1.0),
+            ObstacleType.Wall => CreateBox(LaneWidth * 0.9, 3.0, 0.6, NeonRed, 0.8),
+            ObstacleType.LowBar => CreateBox(LaneWidth * 0.9, 0.55, 0.5, Color.FromRgb(0xFF, 0xA0, 0x00), 0.7),
+            ObstacleType.Crystal => CreateBox(0.6, 0.6, 0.6, NeonGold, 1.0),
             _ => CreateBox(0.5, 0.5, 0.5, NeonCyan, 0.5)
         };
     }

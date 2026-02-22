@@ -210,7 +210,7 @@ public partial class MainWindow : Window
         SpeedText.Text = $"{speedKmh} km/h";
         LapText.Text = $"LAP {Math.Min(_player.Lap, _track.TotalLaps)}/{_track.TotalLaps}";
         TimeText.Text = FormatTime(_raceTime);
-        BoostBar.Width = _player.BoostFuel;
+        BoostBar.Width = Math.Max(0, _player.BoostFuel);
 
         // 포지션
         int pos = 1;

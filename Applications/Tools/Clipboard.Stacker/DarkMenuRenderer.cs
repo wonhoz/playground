@@ -11,8 +11,18 @@ public sealed class DarkMenuRenderer : ToolStripProfessionalRenderer
     private static readonly Color TextColor     = Color.FromArgb(224, 224, 224);
     private static readonly Color SeparatorColor = Color.FromArgb(55, 55, 70);
 
+    public DarkMenuRenderer() : base(new DarkColorTable()) { }
+
     protected override void OnRenderToolStripBackground(ToolStripRenderEventArgs e)
     {
+        if (e.AffectedBounds.Width <= 0 || e.AffectedBounds.Height <= 0) return;
+        using var brush = new SolidBrush(BgColor);
+        e.Graphics.FillRectangle(brush, e.AffectedBounds);
+    }
+
+    protected override void OnRenderImageMargin(ToolStripRenderEventArgs e)
+    {
+        if (e.AffectedBounds.Width <= 0 || e.AffectedBounds.Height <= 0) return;
         using var brush = new SolidBrush(BgColor);
         e.Graphics.FillRectangle(brush, e.AffectedBounds);
     }
@@ -51,4 +61,20 @@ public sealed class DarkMenuRenderer : ToolStripProfessionalRenderer
         path.CloseFigure();
         return path;
     }
+}
+
+internal sealed class DarkColorTable : ProfessionalColorTable
+{
+    public override Color ToolStripDropDownBackground   => Color.FromArgb(28, 28, 40);
+    public override Color ImageMarginGradientBegin      => Color.FromArgb(28, 28, 40);
+    public override Color ImageMarginGradientMiddle     => Color.FromArgb(28, 28, 40);
+    public override Color ImageMarginGradientEnd        => Color.FromArgb(28, 28, 40);
+    public override Color MenuBorder                    => Color.FromArgb(60, 60, 80);
+    public override Color MenuItemBorder                => Color.FromArgb(60, 60, 80);
+    public override Color SeparatorDark                 => Color.FromArgb(55, 55, 70);
+    public override Color SeparatorLight                => Color.FromArgb(55, 55, 70);
+    public override Color MenuStripGradientBegin        => Color.FromArgb(28, 28, 40);
+    public override Color MenuStripGradientEnd          => Color.FromArgb(28, 28, 40);
+    public override Color MenuItemSelectedGradientBegin => Color.FromArgb(55, 55, 80);
+    public override Color MenuItemSelectedGradientEnd   => Color.FromArgb(55, 55, 80);
 }

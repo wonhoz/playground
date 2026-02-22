@@ -107,6 +107,7 @@ public partial class MainWindow : Window
 
     private void TabPattern_Checked(object sender, RoutedEventArgs e)
     {
+        if (TabRegex is null || PatternPanel is null || RegexPanel is null) return;
         _isPatternMode  = true;
         TabRegex.IsChecked = false;
         PatternPanel.Visibility = Visibility.Visible;
@@ -116,6 +117,7 @@ public partial class MainWindow : Window
 
     private void TabRegex_Checked(object sender, RoutedEventArgs e)
     {
+        if (TabPattern is null || PatternPanel is null || RegexPanel is null) return;
         _isPatternMode  = false;
         TabPattern.IsChecked = false;
         PatternPanel.Visibility = Visibility.Collapsed;

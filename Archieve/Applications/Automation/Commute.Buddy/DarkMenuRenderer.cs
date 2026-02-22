@@ -10,7 +10,7 @@ internal class DarkMenuRenderer : ToolStripProfessionalRenderer
     protected override void OnRenderMenuItemBackground(ToolStripItemRenderEventArgs e)
     {
         var rc = new Rectangle(Point.Empty, e.Item.Size);
-        using var g = e.Graphics;
+        var g = e.Graphics;
 
         if (e.Item.Selected && e.Item.Enabled)
         {
@@ -28,6 +28,7 @@ internal class DarkMenuRenderer : ToolStripProfessionalRenderer
 
     protected override void OnRenderToolStripBackground(ToolStripRenderEventArgs e)
     {
+        if (e.AffectedBounds.Width <= 0 || e.AffectedBounds.Height <= 0) return;
         using var brush = new SolidBrush(Color.FromArgb(28, 28, 38));
         e.Graphics.FillRectangle(brush, e.AffectedBounds);
     }

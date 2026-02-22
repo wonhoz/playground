@@ -133,6 +133,8 @@ public partial class MainWindow : Window
 
     private void RefreshPreview()
     {
+        if (TxtInputStatus is null || BtnApply is null) return;
+
         if (_entries.Count == 0)
         {
             TxtInputStatus.Text = "";

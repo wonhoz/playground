@@ -39,7 +39,7 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
-        Loaded += (_, _) => ApplyDarkTitleBar();
+        Loaded += (_, _) => { ApplyDarkTitleBar(); IconGenerator.EnsureIcon(this); };
 
         InitStars();
         _engine.OnUpdate += OnUpdate;

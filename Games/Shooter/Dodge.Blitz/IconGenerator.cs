@@ -12,33 +12,33 @@ namespace DodgeBlitz;
 /// </summary>
 public static class IconGenerator
 {
-    public static void EnsureIcon()
+    public static void EnsureIcon(Window window)
     {
         string ico = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Resources", "app.ico");
         if (File.Exists(ico))
         {
-            try { ApplyWindowIcon(ico); } catch { }
+            try { ApplyWindowIcon(window, ico); } catch { }
             return;
         }
 
         Directory.CreateDirectory(Path.GetDirectoryName(ico)!);
         var data = GenerateIcoBytes();
         File.WriteAllBytes(ico, data);
-        try { ApplyWindowIcon(data); } catch { }
+        try { ApplyWindowIcon(window, data); } catch { }
     }
 
-    private static void ApplyWindowIcon(string path)
+    private static void ApplyWindowIcon(Window window, string path)
     {
         using var fs = File.OpenRead(path);
         var frame = BitmapFrame.Create(fs, BitmapCreateOptions.None, BitmapCacheOption.OnLoad);
-        Application.Current.MainWindow.Icon = frame;
+        window.Icon = frame;
     }
 
-    private static void ApplyWindowIcon(byte[] data)
+    private static void ApplyWindowIcon(Window window, byte[] data)
     {
         using var ms = new MemoryStream(data);
         var frame = BitmapFrame.Create(ms, BitmapCreateOptions.None, BitmapCacheOption.OnLoad);
-        Application.Current.MainWindow.Icon = frame;
+        window.Icon = frame;
     }
 
     private static byte[] GenerateIcoBytes()

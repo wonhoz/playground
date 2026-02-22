@@ -26,32 +26,36 @@ echo !DG!Output: %BIN%!RS!
 echo !DG!--------------------------------------------------!RS!
 echo.
 
-call :pub "AI.Clip"               "AI\AI.Clip"                          "AiClip.exe"
-call :pub "Music.Player"          "Audio\Music.Player"                  "MusicPlayer.exe"
-call :pub "Sound.Board"           "Audio\Sound.Board"                   "SoundBoard.exe"
-call :pub "Stay.Awake"            "Automation\Stay.Awake"               "StayAwake.exe"
-call :pub "File.Duplicates"       "Files\File.Duplicates"               "FileDuplicates.exe"
-call :pub "Photo.Video.Organizer" "Media\Photo.Video.Organizer"         "PhotoVideoOrganizer.exe"
-call :pub "Quick.Launcher"        "Tools\Quick.Launcher"                "QuickLauncher.exe"
-call :pub "Workspace.Switcher"    "Tools\Workspace.Switcher"            "WorkspaceSwitcher.exe"
-call :pub "Screen.Recorder"      "Tools\Screen.Recorder"               "ScreenRecorder.exe"
-call :pub "Text.Forge"           "Tools\Text.Forge"                    "TextForge.exe"
-call :pub "Hue.Flow"             "Games\Hue.Flow"                      "HueFlow.exe"
-call :pub "Star.Strike"          "Games\Star.Strike"                   "StarStrike.exe"
-call :pub "Fist.Fury"           "Games\Fist.Fury"                     "FistFury.exe"
-call :pub "Dungeon.Dash"        "Games\Dungeon.Dash"                  "DungeonDash.exe"
-call :pub "Track.Star"          "Games\Track.Star"                    "TrackStar.exe"
-call :pub "Nitro.Drift"         "Games\Nitro.Drift"                   "NitroDrift.exe"
-call :pub "Beat.Drop"           "Games\Beat.Drop"                     "BeatDrop.exe"
-call :pub "Clipboard.Stacker"   "Tools\Clipboard.Stacker"              "ClipboardStacker.exe"
-call :pub "Batch.Rename"        "Files\Batch.Rename"                   "BatchRename.exe"
-call :pub "Window.Pilot"        "Tools\Window.Pilot"                   "WindowPilot.exe"
-call :pub "Commute.Buddy"      "Automation\Commute.Buddy"             "CommuteBuddy.exe"
-call :pub "Brick.Blitz"        "Games\Brick.Blitz"                    "BrickBlitz.exe"
-call :pub "Tower.Guard"        "Games\Tower.Guard"                    "TowerGuard.exe"
-call :pub "Gravity.Flip"       "Games\Gravity.Flip"                   "GravityFlip.exe"
-call :pub "Neon.Run"           "Games\Neon.Run"                       "NeonRun.exe"
-call :pub "Dash.City"          "Games\Dash.City"                      "DashCity.exe"
+:: Applications
+call :pub "AI.Clip"               "Applications\AI\AI.Clip"                      "AiClip.exe"
+call :pub "Music.Player"          "Applications\Audio\Music.Player"              "MusicPlayer.exe"
+call :pub "Stay.Awake"            "Applications\Automation\Stay.Awake"           "StayAwake.exe"
+call :pub "File.Duplicates"       "Applications\Files\File.Duplicates"           "FileDuplicates.exe"
+call :pub "Batch.Rename"          "Applications\Files\Batch.Rename"              "BatchRename.exe"
+call :pub "Photo.Video.Organizer" "Applications\Media\Photo.Video.Organizer"     "PhotoVideoOrganizer.exe"
+call :pub "Clipboard.Stacker"     "Applications\Tools\Clipboard.Stacker"         "ClipboardStacker.exe"
+call :pub "Screen.Recorder"       "Applications\Tools\Screen.Recorder"           "ScreenRecorder.exe"
+call :pub "Text.Forge"            "Applications\Tools\Text.Forge"                "TextForge.exe"
+:: Games - Action
+call :pub "Fist.Fury"             "Games\Action\Fist.Fury"                       "FistFury.exe"
+call :pub "Dungeon.Dash"          "Games\Action\Dungeon.Dash"                    "DungeonDash.exe"
+:: Games - Arcade
+call :pub "Brick.Blitz"           "Games\Arcade\Brick.Blitz"                     "BrickBlitz.exe"
+call :pub "Neon.Run"              "Games\Arcade\Neon.Run"                        "NeonRun.exe"
+call :pub "Dash.City"             "Games\Arcade\Dash.City"                       "DashCity.exe"
+:: Games - Puzzle
+call :pub "Hue.Flow"              "Games\Puzzle\Hue.Flow"                        "HueFlow.exe"
+call :pub "Gravity.Flip"          "Games\Puzzle\Gravity.Flip"                    "GravityFlip.exe"
+:: Games - Racing
+call :pub "Nitro.Drift"           "Games\Racing\Nitro.Drift"                     "NitroDrift.exe"
+:: Games - Rhythm
+call :pub "Beat.Drop"             "Games\Rhythm\Beat.Drop"                       "BeatDrop.exe"
+:: Games - Shooter
+call :pub "Star.Strike"           "Games\Shooter\Star.Strike"                    "StarStrike.exe"
+:: Games - Sports
+call :pub "Track.Star"            "Games\Sports\Track.Star"                      "TrackStar.exe"
+:: Games - Strategy
+call :pub "Tower.Guard"           "Games\Strategy\Tower.Guard"                   "TowerGuard.exe"
 
 :: Remove .pdb files
 echo !DG!Cleaning .pdb files...!RS!

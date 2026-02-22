@@ -1,7 +1,7 @@
 @echo off
 setlocal enabledelayedexpansion
 
-set "SLN=%~dp0Playground.sln"
+set "SLN=%~dp0Playground.slnx"
 set "FAILED=0"
 set "DEBUG_OK=0"
 set "RELEASE_OK=0"

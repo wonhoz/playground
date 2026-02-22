@@ -52,6 +52,7 @@ call :pub "Brick.Blitz"        "Games\Brick.Blitz"                    "BrickBlit
 call :pub "Tower.Guard"        "Games\Tower.Guard"                    "TowerGuard.exe"
 call :pub "Gravity.Flip"       "Games\Gravity.Flip"                   "GravityFlip.exe"
 call :pub "Neon.Run"           "Games\Neon.Run"                       "NeonRun.exe"
+call :pub "Dash.City"          "Games\Dash.City"                      "DashCity.exe"
 
 :: Remove .pdb files
 echo !DG!Cleaning .pdb files...!RS!

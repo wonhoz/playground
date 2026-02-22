@@ -144,15 +144,21 @@ public partial class MainWindow : Window
         _trackVisuals.Add(centerLine);
         GameCanvas.Children.Add(centerLine);
 
-        // 시작/결승 라인
-        var startWp = _track.Waypoints[0];
+        // 시작/결승 라인 (트랙 방향에 수직)
+        var startWp  = _track.Waypoints[0];
+        var nextWp   = _track.Waypoints[1];
+        double trackDir = Math.Atan2(nextWp.Y - startWp.Y, nextWp.X - startWp.X);
+        double perpDeg  = trackDir * 180 / Math.PI + 90; // 트랙 방향의 수직
+
         var finishLine = new Rectangle
         {
-            Width = 6, Height = _track.TrackWidth,
-            Fill = new SolidColorBrush(Colors.White)
+            Width = _track.TrackWidth, Height = 6,
+            Fill = new SolidColorBrush(Colors.White),
+            RenderTransformOrigin = new System.Windows.Point(0.5, 0.5),
+            RenderTransform = new RotateTransform(perpDeg)
         };
-        Canvas.SetLeft(finishLine, startWp.X - 3);
-        Canvas.SetTop(finishLine, startWp.Y - _track.TrackWidth / 2);
+        Canvas.SetLeft(finishLine, startWp.X - _track.TrackWidth / 2);
+        Canvas.SetTop(finishLine, startWp.Y - 3);
         _trackVisuals.Add(finishLine);
         GameCanvas.Children.Add(finishLine);
     }

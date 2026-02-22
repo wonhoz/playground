@@ -71,8 +71,28 @@
                 </TextBlock.Effect>
             </TextBlock>
 
+            <!-- 속도 선택 -->
+            <StackPanel Margin="0,28,0,0" HorizontalAlignment="Center">
+                <TextBlock Text="SPEED" FontSize="11" Foreground="#666666"
+                           HorizontalAlignment="Center" FontFamily="Consolas" Margin="0,0,0,6"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Border x:Name="SpeedSlowBtn" Background="#1A1A2E" BorderBrush="#3A86FF" BorderThickness="1"
+                            CornerRadius="5" Padding="14,6" Margin="4,0" Cursor="Hand" MouseDown="SpeedSlow_Click">
+                        <TextBlock Text="SLOW" FontSize="12" Foreground="#3A86FF" FontFamily="Consolas"/>
+                    </Border>
+                    <Border x:Name="SpeedNormBtn" Background="#1A1A2E" BorderBrush="#00FFCC" BorderThickness="3"
+                            CornerRadius="5" Padding="14,6" Margin="4,0" Cursor="Hand" MouseDown="SpeedNorm_Click">
+                        <TextBlock Text="NORMAL" FontSize="12" Foreground="#00FFCC" FontWeight="Bold" FontFamily="Consolas"/>
+                    </Border>
+                    <Border x:Name="SpeedFastBtn" Background="#1A1A2E" BorderBrush="#FF66AA" BorderThickness="1"
+                            CornerRadius="5" Padding="14,6" Margin="4,0" Cursor="Hand" MouseDown="SpeedFast_Click">
+                        <TextBlock Text="FAST" FontSize="12" Foreground="#FF66AA" FontFamily="Consolas"/>
+                    </Border>
+                </StackPanel>
+            </StackPanel>
+
             <TextBlock Text="[ ENTER 키로 시작 ]" FontSize="18" Foreground="#FFD700"
-                       HorizontalAlignment="Center" Margin="0,40,0,0" FontFamily="Consolas">
+                       HorizontalAlignment="Center" Margin="0,24,0,0" FontFamily="Consolas">
                 <TextBlock.Effect>
                     <DropShadowEffect Color="#FFD700" BlurRadius="10" ShadowDepth="0"/>
                 </TextBlock.Effect>

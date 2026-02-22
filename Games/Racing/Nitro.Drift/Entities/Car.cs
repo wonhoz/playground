@@ -80,14 +80,26 @@ public class Car
         Speed = Math.Clamp(Speed, -50, currentMax);
         Speed *= Friction;
 
-        // 회전 (속도에 비례)
-        double turnFactor = Math.Min(1, Math.Abs(Speed) / 100);
+        // 회전 (속도에 비례, 최소 0.3 보장 — 정지 상태서도 방향 전환 가능)
+        double turnFactor = Math.Max(0.3, Math.Min(1, Math.Abs(Speed) / 100));
         if (turnLeft) Angle -= TurnSpeed * turnFactor * dt;
         if (turnRight) Angle += TurnSpeed * turnFactor * dt;
 
         // 이동
         X += Math.Cos(Angle) * Speed * dt;
         Y += Math.Sin(Angle) * Speed * dt;
+
+        // 트랙 이탈 방지
+        var (cx, cy, trackDist) = track.NearestTrackPoint(X, Y);
+        double boundary = track.TrackWidth / 2.0 - 4;
+        if (trackDist > boundary)
+        {
+            double excess = trackDist - boundary;
+            double pushAngle = Math.Atan2(cy - Y, cx - X);
+            X += Math.Cos(pushAngle) * excess;
+            Y += Math.Sin(pushAngle) * excess;
+            Speed *= 0.65; // 벽 충돌 시 감속
+        }
 
         // 웨이포인트 체크
         if (track.DistanceToWaypoint(X, Y, CurrentWaypoint) < 40)

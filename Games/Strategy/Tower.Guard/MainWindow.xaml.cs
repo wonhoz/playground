@@ -38,6 +38,7 @@ public partial class MainWindow : Window
 
     private TowerType? _selectedTowerType;
     private Tower? _contextTower;
+    private double _enemySpeedMult = 1.0; // 타이틀 속도 선택 배율
 
     // Range indicator
     private Ellipse? _rangeIndicator;
@@ -199,6 +200,7 @@ public partial class MainWindow : Window
     private void SpawnEnemy(EnemyType type)
     {
         var enemy = new Enemy(type, _map.PathTiles, _waveManager.HpMultiplier);
+        enemy.Speed *= _enemySpeedMult;
         _enemies.Add(enemy);
 
         var size = type == EnemyType.Boss ? 20.0 : type == EnemyType.Tank ? 16.0 : 12.0;
@@ -833,5 +835,22 @@ public partial class MainWindow : Window
         VictoryOverlay.Visibility = Visibility.Collapsed;
         TitlePanel.Visibility = Visibility.Visible;
         _loop.Start();
+    }
+
+    // ── 타이틀 속도 선택 ──────────────────────────
+    private void SpeedSlow_Click(object s, MouseButtonEventArgs e) { _enemySpeedMult = 0.65; UpdateSpeedButtons(); }
+    private void SpeedNorm_Click(object s, MouseButtonEventArgs e) { _enemySpeedMult = 1.0;  UpdateSpeedButtons(); }
+    private void SpeedFast_Click(object s, MouseButtonEventArgs e) { _enemySpeedMult = 1.5;  UpdateSpeedButtons(); }
+
+    private void UpdateSpeedButtons()
+    {
+        var active = new SolidColorBrush(Color.FromRgb(0xFF, 0xD7, 0x00));
+        var dim    = new SolidColorBrush(Color.FromRgb(0x44, 0x44, 0x66));
+        SpeedSlowBtn.BorderBrush = _enemySpeedMult < 0.9 ? new SolidColorBrush(Color.FromRgb(0x3A, 0x86, 0xFF)) : dim;
+        SpeedNormBtn.BorderBrush = _enemySpeedMult is >= 0.9 and <= 1.1 ? active : dim;
+        SpeedFastBtn.BorderBrush = _enemySpeedMult > 1.1 ? new SolidColorBrush(Color.FromRgb(0xE7, 0x4C, 0x3C)) : dim;
+        SpeedSlowBtn.BorderThickness = new Thickness(_enemySpeedMult < 0.9 ? 3 : 1);
+        SpeedNormBtn.BorderThickness = new Thickness(_enemySpeedMult is >= 0.9 and <= 1.1 ? 3 : 1);
+        SpeedFastBtn.BorderThickness = new Thickness(_enemySpeedMult > 1.1 ? 3 : 1);
     }
 }

@@ -461,6 +461,23 @@ public partial class MainWindow : Window
 
     private void Window_KeyUp(object sender, KeyEventArgs e) { }
 
+    // ── 타이틀 속도 선택 ──────────────────────────
+    private void SpeedSlow_Click(object s, System.Windows.Input.MouseButtonEventArgs e) { _baseSpeed = 10.0; UpdateSpeedButtons(); }
+    private void SpeedNorm_Click(object s, System.Windows.Input.MouseButtonEventArgs e) { _baseSpeed = 15.0; UpdateSpeedButtons(); }
+    private void SpeedFast_Click(object s, System.Windows.Input.MouseButtonEventArgs e) { _baseSpeed = 22.0; UpdateSpeedButtons(); }
+
+    private void UpdateSpeedButtons()
+    {
+        var active = new SolidColorBrush(Color.FromRgb(0x00, 0xFF, 0xCC));
+        var dim    = new SolidColorBrush(Color.FromRgb(0x44, 0x44, 0x66));
+        SpeedSlowBtn.BorderBrush = _baseSpeed < 12 ? new SolidColorBrush(Color.FromRgb(0x3A, 0x86, 0xFF)) : dim;
+        SpeedNormBtn.BorderBrush = _baseSpeed is >= 12 and <= 18 ? active : dim;
+        SpeedFastBtn.BorderBrush = _baseSpeed > 18 ? new SolidColorBrush(Color.FromRgb(0xFF, 0x66, 0xAA)) : dim;
+        SpeedSlowBtn.BorderThickness = new Thickness(_baseSpeed < 12 ? 3 : 1);
+        SpeedNormBtn.BorderThickness = new Thickness(_baseSpeed is >= 12 and <= 18 ? 3 : 1);
+        SpeedFastBtn.BorderThickness = new Thickness(_baseSpeed > 18 ? 3 : 1);
+    }
+
     // ── 3D 메시 헬퍼 ──────────────────────────────
 
     private static GeometryModel3D CreateBox(double w, double h, double d, Color color, double emissive = 0)

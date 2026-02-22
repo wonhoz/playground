@@ -15,10 +15,10 @@ public static class IconGenerator
     [
         System.Drawing.Color.FromArgb(231,  76,  60),  // 0 Red
         System.Drawing.Color.FromArgb( 52, 152, 219),  // 1 Blue
-        System.Drawing.Color.FromArgb( 46, 204, 113),  // 2 Green
+        System.Drawing.Color.FromArgb(170, 255,   0),  // 2 Lime
         System.Drawing.Color.FromArgb(243, 156,  18),  // 3 Orange
         System.Drawing.Color.FromArgb(155,  89, 182),  // 4 Purple
-        System.Drawing.Color.FromArgb( 26, 188, 156),  // 5 Teal
+        System.Drawing.Color.FromArgb(255,  64, 129),  // 5 Pink
         System.Drawing.Color.FromArgb( 79, 195, 247),  // 6 UI Accent (Cyan) — territory
     ];
 

@@ -52,4 +52,24 @@ public sealed class Track
         }
         return total;
     }
+
+    /// <summary>점 (x,y)에서 가장 가까운 트랙 중심선 위의 점과 거리를 반환합니다.</summary>
+    public (double CX, double CY, double Dist) NearestTrackPoint(double x, double y)
+    {
+        double bestDist = double.MaxValue;
+        double bestCX = Waypoints[0].X, bestCY = Waypoints[0].Y;
+
+        for (int i = 0; i < Waypoints.Length; i++)
+        {
+            var (x1, y1) = Waypoints[i];
+            var (x2, y2) = Waypoints[NextWaypoint(i)];
+            double dx = x2 - x1, dy = y2 - y1;
+            double lenSq = dx * dx + dy * dy;
+            double t = lenSq > 0 ? Math.Clamp(((x - x1) * dx + (y - y1) * dy) / lenSq, 0, 1) : 0;
+            double cx = x1 + t * dx, cy = y1 + t * dy;
+            double dist = Math.Sqrt((x - cx) * (x - cx) + (y - cy) * (y - cy));
+            if (dist < bestDist) { bestDist = dist; bestCX = cx; bestCY = cy; }
+        }
+        return (bestCX, bestCY, bestDist);
+    }
 }

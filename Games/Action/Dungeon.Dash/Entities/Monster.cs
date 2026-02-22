@@ -29,7 +29,6 @@ public sealed class Monster
     private readonly Random _rng;
 
     public Canvas Visual { get; }
-    private readonly Shape _bodyShape;
 
     public Monster(MonsterKind kind, double x, double y, Random rng, bool isBoss = false)
     {
@@ -62,59 +61,119 @@ public sealed class Monster
         Hp = MaxHp;
         Visual = new Canvas { Width = Size, Height = Size };
 
-        var color = kind switch
-        {
-            MonsterKind.Slime => Color.FromRgb(0x2E, 0xCC, 0x71),
-            MonsterKind.Skeleton => Color.FromRgb(0xBD, 0xC3, 0xC7),
-            MonsterKind.Ghost => Color.FromRgb(0x99, 0x77, 0xDD),
-            MonsterKind.Demon => Color.FromRgb(0xE7, 0x4C, 0x3C),
-            MonsterKind.Dragon => Color.FromRgb(0xFF, 0x66, 0x00),
-            _ => Colors.White
-        };
+        BuildVisual(kind, isBoss);
 
-        if (kind == MonsterKind.Slime)
-        {
-            _bodyShape = new Ellipse
-            {
-                Width = Size, Height = Size * 0.7,
-                Fill = new SolidColorBrush(color),
-                Stroke = new SolidColorBrush(Color.FromRgb((byte)(color.R + 40), color.G, color.B)),
-                StrokeThickness = 1
-            };
-            Canvas.SetTop(_bodyShape, Size * 0.3);
-        }
-        else
-        {
-            _bodyShape = new Rectangle
-            {
-                Width = Size, Height = Size,
-                Fill = new SolidColorBrush(color),
-                RadiusX = kind == MonsterKind.Ghost ? Size / 2 : 3,
-                RadiusY = kind == MonsterKind.Ghost ? Size / 2 : 3,
-                Stroke = new SolidColorBrush(Color.FromRgb(
-                    (byte)Math.Min(255, color.R + 50),
-                    (byte)Math.Min(255, color.G + 50),
-                    (byte)Math.Min(255, color.B + 50))),
-                StrokeThickness = isBoss ? 2 : 1
-            };
-        }
-        Visual.Children.Add(_bodyShape);
+        _moveTimer = _rng.NextDouble() * 0.5;
+    }
 
-        // 보스 표시
+    private static Rectangle R(double w, double h, Color c, double rad = 2) =>
+        new() { Width = w, Height = h, Fill = new SolidColorBrush(c), RadiusX = rad, RadiusY = rad };
+
+    private void BuildVisual(MonsterKind kind, bool isBoss)
+    {
+        double s = Size;
+        switch (kind)
+        {
+            case MonsterKind.Slime:
+            {
+                var body = new Ellipse
+                {
+                    Width = s, Height = s * 0.65,
+                    Fill = new SolidColorBrush(Color.FromRgb(0x2E, 0xCC, 0x71)),
+                    Stroke = new SolidColorBrush(Color.FromRgb(0x27, 0xAE, 0x60)),
+                    StrokeThickness = 1
+                };
+                Canvas.SetTop(body, s * 0.35);
+                // 눈
+                var eye = new Ellipse { Width = s * 0.3, Height = s * 0.22,
+                    Fill = new SolidColorBrush(Colors.White) };
+                Canvas.SetLeft(eye, s * 0.35); Canvas.SetTop(eye, s * 0.18);
+                Visual.Children.Add(body);
+                Visual.Children.Add(eye);
+                break;
+            }
+            case MonsterKind.Skeleton:
+            {
+                var armL = R(s * 0.14, s * 0.35, Color.FromRgb(0xCC, 0xCC, 0xBB), 1);
+                var armR = R(s * 0.14, s * 0.35, Color.FromRgb(0xCC, 0xCC, 0xBB), 1);
+                Canvas.SetLeft(armL, s * 0.1); Canvas.SetTop(armL, s * 0.35);
+                Canvas.SetLeft(armR, s * 0.76); Canvas.SetTop(armR, s * 0.35);
+                var body = R(s * 0.55, s * 0.45, Color.FromRgb(0xBD, 0xC3, 0xC7), 2);
+                Canvas.SetLeft(body, s * 0.22); Canvas.SetTop(body, s * 0.33);
+                var head = R(s * 0.44, s * 0.31, Color.FromRgb(0xD5, 0xDA, 0xDC), 3);
+                Canvas.SetLeft(head, s * 0.28); Canvas.SetTop(head, s * 0.0);
+                Visual.Children.Add(armL); Visual.Children.Add(armR);
+                Visual.Children.Add(body); Visual.Children.Add(head);
+                break;
+            }
+            case MonsterKind.Ghost:
+            {
+                var body = new Rectangle
+                {
+                    Width = s, Height = s,
+                    Fill = new SolidColorBrush(Color.FromArgb(210, 0x99, 0x77, 0xDD)),
+                    RadiusX = s / 2, RadiusY = s / 2
+                };
+                // 눈 두 개
+                var eyeL = new Ellipse { Width = s * 0.18, Height = s * 0.18,
+                    Fill = new SolidColorBrush(Color.FromRgb(0xFF, 0xFF, 0xFF)) };
+                var eyeR = new Ellipse { Width = s * 0.18, Height = s * 0.18,
+                    Fill = new SolidColorBrush(Color.FromRgb(0xFF, 0xFF, 0xFF)) };
+                Canvas.SetLeft(eyeL, s * 0.27); Canvas.SetTop(eyeL, s * 0.35);
+                Canvas.SetLeft(eyeR, s * 0.54); Canvas.SetTop(eyeR, s * 0.35);
+                Visual.Children.Add(body);
+                Visual.Children.Add(eyeL); Visual.Children.Add(eyeR);
+                break;
+            }
+            case MonsterKind.Demon:
+            {
+                var armL = R(s * 0.17, s * 0.38, Color.FromRgb(0xC0, 0x39, 0x2B), 1);
+                var armR = R(s * 0.17, s * 0.38, Color.FromRgb(0xC0, 0x39, 0x2B), 1);
+                Canvas.SetLeft(armL, 0); Canvas.SetTop(armL, s * 0.30);
+                Canvas.SetLeft(armR, s * 0.83); Canvas.SetTop(armR, s * 0.30);
+                var body = R(s * 0.66, s * 0.45, Color.FromRgb(0xE7, 0x4C, 0x3C), 2);
+                Canvas.SetLeft(body, s * 0.17); Canvas.SetTop(body, s * 0.30);
+                var head = R(s * 0.44, s * 0.28, Color.FromRgb(0xC0, 0x39, 0x2B), 2);
+                Canvas.SetLeft(head, s * 0.28); Canvas.SetTop(head, s * 0.0);
+                // 뿔 (작은 삼각형 모양 사각형)
+                var hornL = R(s * 0.11, s * 0.20, Color.FromRgb(0x96, 0x28, 0x1E), 1);
+                var hornR = R(s * 0.11, s * 0.20, Color.FromRgb(0x96, 0x28, 0x1E), 1);
+                Canvas.SetLeft(hornL, s * 0.22); Canvas.SetTop(hornL, -s * 0.10);
+                Canvas.SetLeft(hornR, s * 0.67); Canvas.SetTop(hornR, -s * 0.10);
+                Visual.Children.Add(armL); Visual.Children.Add(armR);
+                Visual.Children.Add(body); Visual.Children.Add(head);
+                Visual.Children.Add(hornL); Visual.Children.Add(hornR);
+                break;
+            }
+            case MonsterKind.Dragon:
+            {
+                // 날개 (넓은 옆 사각형)
+                var wingL = R(s * 0.35, s * 0.4, Color.FromRgb(0xCC, 0x55, 0x00), 1);
+                var wingR = R(s * 0.35, s * 0.4, Color.FromRgb(0xCC, 0x55, 0x00), 1);
+                Canvas.SetLeft(wingL, -s * 0.12); Canvas.SetTop(wingL, s * 0.3);
+                Canvas.SetLeft(wingR, s * 0.77); Canvas.SetTop(wingR, s * 0.3);
+                var body = R(s * 0.7, s * 0.5, Color.FromRgb(0xFF, 0x66, 0x00), 3);
+                Canvas.SetLeft(body, s * 0.15); Canvas.SetTop(body, s * 0.28);
+                var head = R(s * 0.5, s * 0.28, Color.FromRgb(0xFF, 0x88, 0x22), 3);
+                Canvas.SetLeft(head, s * 0.25); Canvas.SetTop(head, s * 0.0);
+                Visual.Children.Add(wingL); Visual.Children.Add(wingR);
+                Visual.Children.Add(body); Visual.Children.Add(head);
+                break;
+            }
+        }
+
+        // 보스 왕관
         if (isBoss)
         {
             var crown = new TextBlock
             {
-                Text = "♛",
-                FontSize = Size * 0.4,
+                Text = "♛", FontSize = s * 0.4,
                 Foreground = new SolidColorBrush(Color.FromRgb(0xFF, 0xD7, 0x00))
             };
-            Canvas.SetLeft(crown, Size / 2 - Size * 0.15);
-            Canvas.SetTop(crown, -Size * 0.3);
+            Canvas.SetLeft(crown, s / 2 - s * 0.15);
+            Canvas.SetTop(crown, -s * 0.35);
             Visual.Children.Add(crown);
         }
-
-        _moveTimer = _rng.NextDouble() * 0.5;
     }
 
     public void Update(double dt, Player player, Tile[,] map)
@@ -124,10 +183,9 @@ public sealed class Monster
         _attackCooldown -= dt;
         _hitFlashTimer -= dt;
 
-        if (_hitFlashTimer > 0)
-            _bodyShape.Opacity = 0.5 + 0.5 * Math.Sin(_hitFlashTimer * 30);
-        else
-            _bodyShape.Opacity = 1.0;
+        Visual.Opacity = _hitFlashTimer > 0
+            ? 0.5 + 0.5 * Math.Sin(_hitFlashTimer * 30)
+            : 1.0;
 
         // 간단 AI: 플레이어 방향으로 이동
         double distX = player.X - X;

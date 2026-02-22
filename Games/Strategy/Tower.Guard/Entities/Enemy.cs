@@ -16,7 +16,7 @@ public sealed class Enemy
     public EnemyType Type { get; }
     public double MaxHp { get; }
     public double Hp { get; set; }
-    public double Speed { get; }
+    public double Speed { get; set; }
     public int Reward { get; }
     public double X { get; set; }
     public double Y { get; set; }

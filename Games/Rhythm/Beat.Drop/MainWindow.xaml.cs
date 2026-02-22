@@ -56,6 +56,8 @@ public partial class MainWindow : Window
 
     // 스태틱 비주얼
     private readonly List<UIElement> _staticVisuals = [];
+    // 롱노트 홀딩 상태 (레인별)
+    private readonly Note?[] _holdingNote = new Note?[4];
 
     public MainWindow()
     {
@@ -67,6 +69,8 @@ public partial class MainWindow : Window
                 int value = 1;
                 DwmSetWindowAttribute(source.Handle, 20, ref value, sizeof(int));
             }
+            UpdateDiffButtons();
+            UpdateBpmButtons();
             _loop.OnUpdate += OnUpdate;
             _loop.OnRender += OnRender;
             _loop.Start();
@@ -84,6 +88,7 @@ public partial class MainWindow : Window
         _score.Reset();
         _songTime = 0;
         _judgeShowTimer = 0;
+        Array.Clear(_holdingNote, 0, _holdingNote.Length);
 
         _notes = PatternGenerator.Generate(_bpm, SongDuration, _difficulty, _rng);
         _score.TotalNotes = _notes.Count;
@@ -243,6 +248,7 @@ public partial class MainWindow : Window
         foreach (var note in _notes)
         {
             if (note.IsProcessed) continue;
+            if (note.IsHolding) continue; // 홀딩 중인 롱노트는 자동 미스 제외
             if (_songTime - note.HitTime > ScoreManager.MissWindow)
             {
                 note.IsMissed = true;
@@ -250,6 +256,24 @@ public partial class MainWindow : Window
                 _score.RegisterHit(HitGrade.Miss);
                 ShowJudge(HitGrade.Miss);
                 SoundGen.Sfx(Sounds.MissSfx);
+            }
+        }
+
+        // 롱노트 홀딩 중 — 키 뗌 없이 시간 초과 체크
+        for (int i = 0; i < 4; i++)
+        {
+            var hn = _holdingNote[i];
+            if (hn is null) continue;
+            // 롱노트 종료 시간 + MissWindow 이후까지 키를 놓지 않으면 Perfect 처리
+            double endTime = hn.HitTime + hn.Duration;
+            if (_songTime >= endTime + ScoreManager.MissWindow)
+            {
+                hn.IsHit = true;
+                hn.Grade = HitGrade.Perfect;
+                _score.RegisterHit(HitGrade.Perfect);
+                ShowJudge(HitGrade.Perfect);
+                SoundGen.Sfx(Sounds.PerfectSfx);
+                _holdingNote[i] = null;
             }
         }
 
@@ -272,13 +296,16 @@ public partial class MainWindow : Window
         {
             if (!_noteVisuals.TryGetValue(note, out var rect)) continue;
 
-            if (note.IsProcessed)
+            if (note.IsProcessed && !note.IsHolding)
             {
                 rect.Visibility = Visibility.Collapsed;
                 continue;
             }
 
-            double timeDiff = note.HitTime - _songTime;
+            // 홀딩 중인 롱노트는 남은 길이만큼 축소
+            double timeDiff = note.IsHolding
+                ? 0 // 머리가 판정선에 고정
+                : note.HitTime - _songTime;
             double y = HitLineY - timeDiff * NoteSpeed - NoteHeight;
             double x = FieldLeft + note.Lane * LaneWidth + 4;
 
@@ -317,7 +344,18 @@ public partial class MainWindow : Window
             ShowResult();
     }
 
-    private void Window_KeyUp(object sender, KeyEventArgs e) { }
+    private void Window_KeyUp(object sender, KeyEventArgs e)
+    {
+        if (_state != GameState.Playing) return;
+        for (int i = 0; i < 4; i++)
+        {
+            if (e.Key == LaneKeyBinds[i])
+            {
+                ProcessLaneRelease(i);
+                break;
+            }
+        }
+    }
 
     private void ProcessLaneInput(int lane)
     {
@@ -327,7 +365,7 @@ public partial class MainWindow : Window
 
         foreach (var note in _notes)
         {
-            if (note.IsProcessed || note.Lane != lane) continue;
+            if (note.IsProcessed || note.IsHolding || note.Lane != lane) continue;
             double diff = Math.Abs(_songTime - note.HitTime);
             if (diff < closestDiff && diff <= ScoreManager.MissWindow)
             {
@@ -338,17 +376,57 @@ public partial class MainWindow : Window
 
         if (closest is null) return;
 
-        var grade = _score.Judge(_songTime - closest.HitTime);
-        closest.IsHit = true;
-        closest.Grade = grade;
+        if (closest.IsLong)
+        {
+            // 롱노트: 머리 판정만 하고 홀딩 시작
+            var grade = _score.Judge(_songTime - closest.HitTime);
+            closest.IsHolding = true;
+            _holdingNote[lane] = closest;
+            ShowJudge(grade); // 머리 판정 표시만 (점수는 릴리즈 시 부여)
+            SoundGen.Sfx(Sounds.PerfectSfx); // 시작음
+        }
+        else
+        {
+            var grade = _score.Judge(_songTime - closest.HitTime);
+            closest.IsHit = true;
+            closest.Grade = grade;
+            _score.RegisterHit(grade);
+            ShowJudge(grade);
+
+            SoundGen.Sfx(grade switch
+            {
+                HitGrade.Perfect => Sounds.PerfectSfx,
+                HitGrade.Great   => Sounds.GreatSfx,
+                HitGrade.Good    => Sounds.GoodSfx,
+                _                => Sounds.MissSfx
+            });
+            if (_score.Combo > 0 && _score.Combo % 10 == 0)
+                SoundGen.Sfx(Sounds.ComboSfx);
+        }
+    }
+
+    private void ProcessLaneRelease(int lane)
+    {
+        var hn = _holdingNote[lane];
+        if (hn is null) return;
+
+        _holdingNote[lane] = null;
+        hn.IsHolding = false;
+        hn.IsHit = true;
+
+        // 릴리즈 타이밍 판정 (롱노트 종료 시간 기준)
+        double endTime = hn.HitTime + hn.Duration;
+        var grade = _score.Judge(_songTime - endTime);
+        hn.Grade = grade;
         _score.RegisterHit(grade);
         ShowJudge(grade);
 
         SoundGen.Sfx(grade switch
         {
             HitGrade.Perfect => Sounds.PerfectSfx,
-            HitGrade.Great => Sounds.GreatSfx,
-            _ => Sounds.GoodSfx
+            HitGrade.Great   => Sounds.GreatSfx,
+            HitGrade.Good    => Sounds.GoodSfx,
+            _                => Sounds.MissSfx
         });
         if (_score.Combo > 0 && _score.Combo % 10 == 0)
             SoundGen.Sfx(Sounds.ComboSfx);
@@ -424,15 +502,35 @@ public partial class MainWindow : Window
     private void Easy_Click(object s, System.Windows.Input.MouseButtonEventArgs e) { _difficulty = Difficulty.Easy; UpdateDiffButtons(); }
     private void Normal_Click(object s, System.Windows.Input.MouseButtonEventArgs e) { _difficulty = Difficulty.Normal; UpdateDiffButtons(); }
     private void Hard_Click(object s, System.Windows.Input.MouseButtonEventArgs e) { _difficulty = Difficulty.Hard; UpdateDiffButtons(); }
-    private void Bpm120_Click(object s, System.Windows.Input.MouseButtonEventArgs e) { _bpm = 120; }
-    private void Bpm140_Click(object s, System.Windows.Input.MouseButtonEventArgs e) { _bpm = 140; }
-    private void Bpm160_Click(object s, System.Windows.Input.MouseButtonEventArgs e) { _bpm = 160; }
-    private void Bpm180_Click(object s, System.Windows.Input.MouseButtonEventArgs e) { _bpm = 180; }
+    private void Bpm120_Click(object s, System.Windows.Input.MouseButtonEventArgs e) { _bpm = 120; UpdateBpmButtons(); }
+    private void Bpm140_Click(object s, System.Windows.Input.MouseButtonEventArgs e) { _bpm = 140; UpdateBpmButtons(); }
+    private void Bpm160_Click(object s, System.Windows.Input.MouseButtonEventArgs e) { _bpm = 160; UpdateBpmButtons(); }
+    private void Bpm180_Click(object s, System.Windows.Input.MouseButtonEventArgs e) { _bpm = 180; UpdateBpmButtons(); }
 
     private void UpdateDiffButtons()
     {
-        EasyBtn.BorderThickness = new Thickness(_difficulty == Difficulty.Easy ? 3 : 1);
+        EasyBtn.BorderThickness   = new Thickness(_difficulty == Difficulty.Easy   ? 3 : 1);
         NormalBtn.BorderThickness = new Thickness(_difficulty == Difficulty.Normal ? 3 : 1);
-        HardBtn.BorderThickness = new Thickness(_difficulty == Difficulty.Hard ? 3 : 1);
+        HardBtn.BorderThickness   = new Thickness(_difficulty == Difficulty.Hard   ? 3 : 1);
+
+        var accent = new SolidColorBrush(Color.FromRgb(0x00, 0xFF, 0xCC));
+        var dim    = new SolidColorBrush(Color.FromRgb(0x55, 0x55, 0x55));
+        EasyBtn.BorderBrush   = _difficulty == Difficulty.Easy   ? new SolidColorBrush(Color.FromRgb(0x2E, 0xCC, 0x71)) : dim;
+        NormalBtn.BorderBrush = _difficulty == Difficulty.Normal ? new SolidColorBrush(Color.FromRgb(0xFF, 0xD7, 0x00)) : dim;
+        HardBtn.BorderBrush   = _difficulty == Difficulty.Hard   ? new SolidColorBrush(Color.FromRgb(0xE7, 0x4C, 0x3C)) : dim;
+    }
+
+    private void UpdateBpmButtons()
+    {
+        var active = new SolidColorBrush(Color.FromRgb(0x00, 0xFF, 0xCC));
+        var dim    = new SolidColorBrush(Color.FromRgb(0x55, 0x55, 0x55));
+        Bpm120Btn.BorderBrush = _bpm == 120 ? active : dim;
+        Bpm140Btn.BorderBrush = _bpm == 140 ? active : dim;
+        Bpm160Btn.BorderBrush = _bpm == 160 ? active : dim;
+        Bpm180Btn.BorderBrush = _bpm == 180 ? active : dim;
+        Bpm120Btn.BorderThickness = new Thickness(_bpm == 120 ? 3 : 1);
+        Bpm140Btn.BorderThickness = new Thickness(_bpm == 140 ? 3 : 1);
+        Bpm160Btn.BorderThickness = new Thickness(_bpm == 160 ? 3 : 1);
+        Bpm180Btn.BorderThickness = new Thickness(_bpm == 180 ? 3 : 1);
     }
 }

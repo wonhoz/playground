@@ -51,7 +51,9 @@ public sealed class Player
     public Canvas Visual { get; }
 
     private readonly KeyInput _input;
+    private readonly Rectangle _head;
     private readonly Rectangle _body;
+    private readonly Rectangle _armL, _armR;
     private readonly Rectangle _weapon;
 
     public Player(KeyInput input, double startX, double startY)
@@ -62,26 +64,34 @@ public sealed class Player
 
         Visual = new Canvas { Width = Size, Height = Size };
 
-        _body = new Rectangle
-        {
-            Width = Size, Height = Size,
-            Fill = new SolidColorBrush(Color.FromRgb(0x3A, 0x86, 0xFF)),
-            RadiusX = 4, RadiusY = 4,
-            Stroke = new SolidColorBrush(Color.FromRgb(0x5A, 0xA0, 0xFF)),
-            StrokeThickness = 1.5
-        };
+        // 팔 (몸통 양 옆)
+        _armL = Rect(3, 7, Color.FromRgb(0x3A, 0x86, 0xFF), 1);
+        _armR = Rect(3, 7, Color.FromRgb(0x3A, 0x86, 0xFF), 1);
+        Canvas.SetLeft(_armL, 0);  Canvas.SetTop(_armL, 5);
+        Canvas.SetLeft(_armR, 15); Canvas.SetTop(_armR, 5);
 
+        // 몸통
+        _body = Rect(12, 8, Color.FromRgb(0x3A, 0x86, 0xFF), 2);
+        Canvas.SetLeft(_body, 3); Canvas.SetTop(_body, 5);
+
+        // 머리 (밝은 파란색)
+        _head = Rect(8, 5, Color.FromRgb(0x60, 0xA8, 0xFF), 2);
+        Canvas.SetLeft(_head, 5); Canvas.SetTop(_head, 0);
+
+        // 무기 (공격 시 회전 표시)
         _weapon = new Rectangle
         {
-            Width = 4, Height = 14,
-            Fill = new SolidColorBrush(Color.FromRgb(0xCC, 0xCC, 0xDD)),
+            Width = 3, Height = 11,
+            Fill = new SolidColorBrush(Color.FromRgb(0xCC, 0xCC, 0xEE)),
             RadiusX = 1, RadiusY = 1,
-            Visibility = Visibility.Collapsed
+            Visibility = Visibility.Collapsed,
+            RenderTransformOrigin = new System.Windows.Point(0.5, 0.5)
         };
-        Canvas.SetLeft(_weapon, Size);
-        Canvas.SetTop(_weapon, 2);
 
+        Visual.Children.Add(_armL);
+        Visual.Children.Add(_armR);
         Visual.Children.Add(_body);
+        Visual.Children.Add(_head);
         Visual.Children.Add(_weapon);
     }
 
@@ -163,9 +173,12 @@ public sealed class Player
             double hy = Y + Size / 2 + FacingY * 14;
             AttackHitbox = new Rect(hx - 12, hy - 12, 24, 24);
 
+            // 무기를 공격 방향으로 회전해서 표시
+            double wAngle = Math.Atan2(FacingY, FacingX) * 180 / Math.PI + 90;
+            _weapon.RenderTransform = new RotateTransform(wAngle);
+            Canvas.SetLeft(_weapon, Size / 2 - 1.5 + FacingX * 3);
+            Canvas.SetTop(_weapon, Size / 2 - 5.5 + FacingY * 3);
             _weapon.Visibility = Visibility.Visible;
-            Canvas.SetLeft(_weapon, Size / 2 + FacingX * 12 - 2);
-            Canvas.SetTop(_weapon, Size / 2 + FacingY * 12 - 7);
         }
 
         // 스킬 (범위 공격)
@@ -217,16 +230,35 @@ public sealed class Player
 
     public void Heal(int amount) => Hp = Math.Min(MaxHp, Hp + amount);
 
+    private static Rectangle Rect(double w, double h, Color fill, double r) =>
+        new() { Width = w, Height = h, Fill = new SolidColorBrush(fill), RadiusX = r, RadiusY = r };
+
     private void UpdateVisual()
     {
         Visual.Opacity = InvincibleTimer > 0 ? 0.5 + 0.5 * Math.Sin(InvincibleTimer * 20) : 1.0;
 
+        Color main, head;
         if (IsDashing)
-            _body.Fill = new SolidColorBrush(Color.FromRgb(0xAA, 0xDD, 0xFF));
+        {
+            main = Color.FromRgb(0xAA, 0xDD, 0xFF);
+            head = Color.FromRgb(0xCC, 0xEE, 0xFF);
+        }
         else if (IsSkilling)
-            _body.Fill = new SolidColorBrush(Color.FromRgb(0xFF, 0xD7, 0x00));
+        {
+            main = Color.FromRgb(0xFF, 0xD7, 0x00);
+            head = Color.FromRgb(0xFF, 0xE8, 0x55);
+        }
         else
-            _body.Fill = new SolidColorBrush(Color.FromRgb(0x3A, 0x86, 0xFF));
+        {
+            main = Color.FromRgb(0x3A, 0x86, 0xFF);
+            head = Color.FromRgb(0x60, 0xA8, 0xFF);
+        }
+
+        var mainBrush = new SolidColorBrush(main);
+        _body.Fill  = mainBrush;
+        _armL.Fill  = mainBrush;
+        _armR.Fill  = mainBrush;
+        _head.Fill  = new SolidColorBrush(head);
     }
 
     public void SyncPosition(double camX, double camY)

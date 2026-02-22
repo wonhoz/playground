@@ -651,6 +651,25 @@ public partial class MainWindow : Window
 
     private void Window_KeyUp(object sender, KeyEventArgs e) { }
 
+    // ── 타이틀 속도 선택 ──────────────────────────
+    private void SpeedSlow_Click(object s, System.Windows.Input.MouseButtonEventArgs e) { _baseSpeed = BaseSpeed * 0.65; UpdateSpeedButtons(); }
+    private void SpeedNorm_Click(object s, System.Windows.Input.MouseButtonEventArgs e) { _baseSpeed = BaseSpeed;        UpdateSpeedButtons(); }
+    private void SpeedFast_Click(object s, System.Windows.Input.MouseButtonEventArgs e) { _baseSpeed = BaseSpeed * 1.5;  UpdateSpeedButtons(); }
+
+    private void UpdateSpeedButtons()
+    {
+        var active = new System.Windows.Media.SolidColorBrush(Color.FromRgb(0x00, 0xFF, 0xCC));
+        var dim    = new System.Windows.Media.SolidColorBrush(Color.FromRgb(0x44, 0x44, 0x66));
+        bool isSlow = _baseSpeed < BaseSpeed * 0.9;
+        bool isFast = _baseSpeed > BaseSpeed * 1.1;
+        SpeedSlowBtn.BorderBrush = isSlow ? new System.Windows.Media.SolidColorBrush(Color.FromRgb(0x3A, 0x86, 0xFF)) : dim;
+        SpeedNormBtn.BorderBrush = (!isSlow && !isFast) ? active : dim;
+        SpeedFastBtn.BorderBrush = isFast ? new System.Windows.Media.SolidColorBrush(Color.FromRgb(0xFF, 0x66, 0xAA)) : dim;
+        SpeedSlowBtn.BorderThickness = new Thickness(isSlow ? 3 : 1);
+        SpeedNormBtn.BorderThickness = new Thickness((!isSlow && !isFast) ? 3 : 1);
+        SpeedFastBtn.BorderThickness = new Thickness(isFast ? 3 : 1);
+    }
+
     // ── 오브젝트 모델 ─────────────────────────────
 
     private GeometryModel3D CreateObjectModel(WorldObject obj)

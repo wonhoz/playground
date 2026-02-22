@@ -17,10 +17,10 @@ public partial class MainWindow : Window
     [
         "#E74C3C",   // 0 Red
         "#3498DB",   // 1 Blue
-        "#2ECC71",   // 2 Green
+        "#AAFF00",   // 2 Lime
         "#F39C12",   // 3 Orange
         "#9B59B6",   // 4 Purple
-        "#1ABC9C",   // 5 Teal
+        "#FF4081",   // 5 Pink
     ];
 
     private static readonly SolidColorBrush[] ColorBrushes =

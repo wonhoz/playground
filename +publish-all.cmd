@@ -51,6 +51,7 @@ call :pub "Nitro.Drift"           "Games\Racing\Nitro.Drift"                    
 :: Games - Rhythm
 call :pub "Beat.Drop"             "Games\Rhythm\Beat.Drop"                       "BeatDrop.exe"
 :: Games - Shooter
+call :pub "Dodge.Blitz"           "Games\Shooter\Dodge.Blitz"                    "DodgeBlitz.exe"
 call :pub "Star.Strike"           "Games\Shooter\Star.Strike"                    "StarStrike.exe"
 :: Games - Sports
 call :pub "Track.Star"            "Games\Sports\Track.Star"                      "TrackStar.exe"

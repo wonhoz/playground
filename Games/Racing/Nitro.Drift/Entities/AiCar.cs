@@ -34,18 +34,7 @@ public sealed class AiCar : Car
         bool brake = Math.Abs(angleDiff) > 1.5 && Speed > 100;
         bool boost = dist > 80 && Math.Abs(angleDiff) < 0.3 && _rng.NextDouble() < 0.02 * _skillLevel;
 
+        // Car.Update() 내부에서 웨이포인트·트랙경계 처리 완료
         Update(dt, track, accel, brake, turnL, turnR, boost);
-
-        // 웨이포인트 체크
-        if (track.DistanceToWaypoint(X, Y, CurrentWaypoint) < 40)
-        {
-            int next = track.NextWaypoint(CurrentWaypoint);
-            if (next == 0 && CurrentWaypoint == track.Waypoints.Length - 1)
-            {
-                Lap++;
-                if (Lap > track.TotalLaps) Finished = true;
-            }
-            CurrentWaypoint = next;
-        }
     }
 }

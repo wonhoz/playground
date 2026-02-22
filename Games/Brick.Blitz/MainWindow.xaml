@@ -1,0 +1,136 @@
+<Window x:Class="BrickBlitz.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Brick.Blitz" Width="500" Height="700"
+        ResizeMode="NoResize"
+        Background="#0A0A1E" Foreground="#E0E0E0"
+        WindowStartupLocation="CenterScreen"
+        KeyDown="Window_KeyDown" KeyUp="Window_KeyUp"
+        MouseMove="Window_MouseMove"
+        Focusable="True">
+    <Grid>
+        <!-- Game Canvas -->
+        <Canvas x:Name="GameCanvas" Background="#0A0A1E" ClipToBounds="True"/>
+
+        <!-- HUD Top Bar -->
+        <Grid x:Name="HudPanel" VerticalAlignment="Top" Margin="10,6" Visibility="Collapsed">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Score -->
+            <TextBlock x:Name="ScoreText" Grid.Column="0" Text="SCORE: 0"
+                       FontSize="14" FontWeight="Bold" Foreground="#00FFCC"
+                       FontFamily="Consolas" VerticalAlignment="Center"/>
+
+            <!-- Stage -->
+            <TextBlock x:Name="StageText" Grid.Column="1" Text="STAGE 1"
+                       FontSize="16" FontWeight="Bold" Foreground="#FFD700"
+                       HorizontalAlignment="Center" FontFamily="Consolas"
+                       VerticalAlignment="Center"/>
+
+            <!-- Lives -->
+            <TextBlock x:Name="LivesText" Grid.Column="2" Text="LIVES: 3"
+                       FontSize="14" FontWeight="Bold" Foreground="#FF66AA"
+                       HorizontalAlignment="Right" FontFamily="Consolas"
+                       VerticalAlignment="Center"/>
+        </Grid>
+
+        <!-- Combo indicator -->
+        <TextBlock x:Name="ComboText" Text="" FontSize="13" FontWeight="Bold"
+                   Foreground="#FFD700" FontFamily="Consolas"
+                   HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,28,0,0"
+                   Visibility="Collapsed"/>
+
+        <!-- PowerUp active indicator -->
+        <TextBlock x:Name="PowerUpText" Text="" FontSize="11" FontWeight="Bold"
+                   Foreground="#00FFCC" FontFamily="Consolas"
+                   HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,44,0,0"
+                   Visibility="Collapsed"/>
+
+        <!-- Title Screen -->
+        <StackPanel x:Name="TitlePanel" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <TextBlock Text="BRICK.BLITZ" FontSize="48" FontWeight="Bold"
+                       Foreground="#00FFCC" HorizontalAlignment="Center" FontFamily="Consolas">
+                <TextBlock.Effect>
+                    <DropShadowEffect Color="#00FFCC" BlurRadius="30" ShadowDepth="0"/>
+                </TextBlock.Effect>
+            </TextBlock>
+            <TextBlock Text="NEON BRICK BREAKER" FontSize="13" Foreground="#888888"
+                       HorizontalAlignment="Center" Margin="0,4,0,0" FontFamily="Consolas"/>
+            <TextBlock x:Name="HighScoreTitle" Text="" FontSize="14" Foreground="#FFD700"
+                       HorizontalAlignment="Center" Margin="0,20,0,0" FontFamily="Consolas"/>
+            <TextBlock Text="[ ENTER to START ]" FontSize="16" Foreground="#00FFCC"
+                       HorizontalAlignment="Center" Margin="0,32,0,0" FontFamily="Consolas">
+                <TextBlock.Effect>
+                    <DropShadowEffect Color="#00FFCC" BlurRadius="10" ShadowDepth="0"/>
+                </TextBlock.Effect>
+            </TextBlock>
+            <TextBlock FontSize="12" Foreground="#666666" HorizontalAlignment="Center"
+                       Margin="0,20,0,0" FontFamily="Consolas" TextAlignment="Center">
+                <Run Text="LEFT/RIGHT or A/D  Move Paddle"/>
+                <LineBreak/>
+                <Run Text="MOUSE  Move Paddle"/>
+                <LineBreak/>
+                <Run Text="SPACE  Launch Ball"/>
+                <LineBreak/>
+                <Run Text="ESC  Back to Title"/>
+            </TextBlock>
+        </StackPanel>
+
+        <!-- Stage Clear -->
+        <Border x:Name="StageClearOverlay" Background="#CC000000" Visibility="Collapsed">
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                <TextBlock Text="STAGE CLEAR!" FontSize="40" FontWeight="Bold"
+                           Foreground="#FFD700" HorizontalAlignment="Center" FontFamily="Consolas">
+                    <TextBlock.Effect>
+                        <DropShadowEffect Color="#FFD700" BlurRadius="25" ShadowDepth="0"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <TextBlock x:Name="StageClearScore" Text="" FontSize="18" FontWeight="Bold"
+                           Foreground="#00FFCC" HorizontalAlignment="Center" Margin="0,12,0,0"
+                           FontFamily="Consolas"/>
+                <TextBlock Text="[ ENTER for Next Stage ]" FontSize="16" Foreground="#888888"
+                           HorizontalAlignment="Center" Margin="0,24,0,0" FontFamily="Consolas"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Game Over -->
+        <Border x:Name="GameOverOverlay" Background="#CC000000" Visibility="Collapsed">
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                <TextBlock Text="GAME OVER" FontSize="44" FontWeight="Bold"
+                           Foreground="#E74C3C" HorizontalAlignment="Center" FontFamily="Consolas">
+                    <TextBlock.Effect>
+                        <DropShadowEffect Color="#FF0000" BlurRadius="25" ShadowDepth="0"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <TextBlock x:Name="FinalScoreText" Text="" FontSize="20" FontWeight="Bold"
+                           Foreground="#FFD700" HorizontalAlignment="Center" Margin="0,12,0,0"
+                           FontFamily="Consolas"/>
+                <TextBlock x:Name="FinalStageText" Text="" FontSize="14" Foreground="#888888"
+                           HorizontalAlignment="Center" Margin="0,4,0,0" FontFamily="Consolas"/>
+                <TextBlock Text="[ ENTER to Retry ]" FontSize="16" Foreground="#888888"
+                           HorizontalAlignment="Center" Margin="0,24,0,0" FontFamily="Consolas"/>
+            </StackPanel>
+        </Border>
+
+        <!-- All Clear -->
+        <Border x:Name="AllClearOverlay" Background="#CC000000" Visibility="Collapsed">
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                <TextBlock Text="ALL CLEAR!" FontSize="44" FontWeight="Bold"
+                           Foreground="#FFD700" HorizontalAlignment="Center" FontFamily="Consolas">
+                    <TextBlock.Effect>
+                        <DropShadowEffect Color="#FFD700" BlurRadius="30" ShadowDepth="0"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <TextBlock x:Name="AllClearScore" Text="" FontSize="20" FontWeight="Bold"
+                           Foreground="#00FFCC" HorizontalAlignment="Center" Margin="0,12,0,0"
+                           FontFamily="Consolas"/>
+                <TextBlock Text="[ ENTER to Play Again ]" FontSize="16" Foreground="#888888"
+                           HorizontalAlignment="Center" Margin="0,24,0,0" FontFamily="Consolas"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>

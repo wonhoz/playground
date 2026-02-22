@@ -48,6 +48,9 @@ call :pub "Clipboard.Stacker"   "Tools\Clipboard.Stacker"              "Clipboar
 call :pub "Batch.Rename"        "Files\Batch.Rename"                   "BatchRename.exe"
 call :pub "Window.Pilot"        "Tools\Window.Pilot"                   "WindowPilot.exe"
 call :pub "Commute.Buddy"      "Automation\Commute.Buddy"             "CommuteBuddy.exe"
+call :pub "Brick.Blitz"        "Games\Brick.Blitz"                    "BrickBlitz.exe"
+call :pub "Tower.Guard"        "Games\Tower.Guard"                    "TowerGuard.exe"
+call :pub "Gravity.Flip"       "Games\Gravity.Flip"                   "GravityFlip.exe"
 
 :: Remove .pdb files
 echo !DG!Cleaning .pdb files...!RS!

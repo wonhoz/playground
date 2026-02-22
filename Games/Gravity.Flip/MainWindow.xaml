@@ -1,0 +1,110 @@
+<Window x:Class="GravityFlip.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Gravity.Flip" Width="600" Height="500"
+        ResizeMode="NoResize"
+        Background="#0A0A1E" Foreground="#E0E0E0"
+        WindowStartupLocation="CenterScreen"
+        KeyDown="Window_KeyDown"
+        Focusable="True">
+    <Grid>
+        <!-- Game Canvas -->
+        <Canvas x:Name="GameCanvas" Background="#0A0A1E" ClipToBounds="True"/>
+
+        <!-- HUD -->
+        <Grid x:Name="HudPanel" VerticalAlignment="Top" Margin="12,6" Visibility="Collapsed">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock x:Name="LevelText" Grid.Column="0" Text="LEVEL 1" FontSize="14" FontWeight="Bold"
+                       Foreground="#00FFCC" FontFamily="Consolas" VerticalAlignment="Center"/>
+
+            <StackPanel Grid.Column="1" HorizontalAlignment="Center" Orientation="Horizontal">
+                <TextBlock Text="COINS: " FontSize="14" FontWeight="Bold"
+                           Foreground="#FFD700" FontFamily="Consolas" VerticalAlignment="Center"/>
+                <TextBlock x:Name="CoinText" Text="0" FontSize="14" FontWeight="Bold"
+                           Foreground="#FFD700" FontFamily="Consolas" VerticalAlignment="Center"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="2" HorizontalAlignment="Right" Orientation="Horizontal">
+                <TextBlock Text="DEATHS: " FontSize="14" FontWeight="Bold"
+                           Foreground="#E74C3C" FontFamily="Consolas" VerticalAlignment="Center"/>
+                <TextBlock x:Name="DeathText" Text="0" FontSize="14" FontWeight="Bold"
+                           Foreground="#E74C3C" FontFamily="Consolas" VerticalAlignment="Center"/>
+            </StackPanel>
+        </Grid>
+
+        <!-- Gravity indicator -->
+        <TextBlock x:Name="GravityIndicator" Text="GRAVITY: DOWN" FontSize="11"
+                   Foreground="#00FFCC" FontFamily="Consolas" Opacity="0.6"
+                   VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="12,0,0,8"
+                   Visibility="Collapsed"/>
+
+        <!-- Title Screen -->
+        <StackPanel x:Name="TitlePanel" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <TextBlock Text="GRAVITY.FLIP" FontSize="42" FontWeight="Bold"
+                       Foreground="#00FFCC" HorizontalAlignment="Center" FontFamily="Consolas">
+                <TextBlock.Effect>
+                    <DropShadowEffect Color="#00FFCC" BlurRadius="25" ShadowDepth="0"/>
+                </TextBlock.Effect>
+            </TextBlock>
+            <TextBlock Text="A GRAVITY-FLIPPING PLATFORMER" FontSize="12" Foreground="#888888"
+                       HorizontalAlignment="Center" Margin="0,4,0,0" FontFamily="Consolas"/>
+            <TextBlock x:Name="TitleStats" Text="" FontSize="13" Foreground="#FFD700"
+                       HorizontalAlignment="Center" Margin="0,20,0,0" FontFamily="Consolas"/>
+            <TextBlock Text="[ ENTER TO START ]" FontSize="16" Foreground="#FF66AA"
+                       HorizontalAlignment="Center" Margin="0,32,0,0" FontFamily="Consolas">
+                <TextBlock.Effect>
+                    <DropShadowEffect Color="#FF66AA" BlurRadius="10" ShadowDepth="0"/>
+                </TextBlock.Effect>
+            </TextBlock>
+            <TextBlock FontSize="12" Foreground="#666666" HorizontalAlignment="Center"
+                       Margin="0,20,0,0" FontFamily="Consolas" TextAlignment="Center">
+                <Run Text="SPACE  Flip Gravity"/>
+                <LineBreak/>
+                <Run Text="R  Restart Level"/>
+                <LineBreak/>
+                <Run Text="ESC  Back to Title"/>
+            </TextBlock>
+        </StackPanel>
+
+        <!-- Level Complete -->
+        <Border x:Name="LevelCompleteOverlay" Background="#CC000000" Visibility="Collapsed">
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                <TextBlock Text="LEVEL COMPLETE!" FontSize="36" FontWeight="Bold"
+                           Foreground="#FF66AA" HorizontalAlignment="Center" FontFamily="Consolas">
+                    <TextBlock.Effect>
+                        <DropShadowEffect Color="#FF66AA" BlurRadius="25" ShadowDepth="0"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <TextBlock x:Name="LevelCompleteCoins" Text="" FontSize="18" FontWeight="Bold"
+                           Foreground="#FFD700" HorizontalAlignment="Center" Margin="0,12,0,0" FontFamily="Consolas"/>
+                <TextBlock Text="[ ENTER FOR NEXT LEVEL ]" FontSize="16" Foreground="#888888"
+                           HorizontalAlignment="Center" Margin="0,24,0,0" FontFamily="Consolas"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Game Complete -->
+        <Border x:Name="GameCompleteOverlay" Background="#CC000000" Visibility="Collapsed">
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                <TextBlock Text="YOU BEAT GRAVITY!" FontSize="36" FontWeight="Bold"
+                           Foreground="#FFD700" HorizontalAlignment="Center" FontFamily="Consolas">
+                    <TextBlock.Effect>
+                        <DropShadowEffect Color="#FFD700" BlurRadius="25" ShadowDepth="0"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <TextBlock x:Name="GameCompleteStats" Text="" FontSize="16"
+                           Foreground="#00FFCC" HorizontalAlignment="Center" Margin="0,12,0,0"
+                           FontFamily="Consolas" TextAlignment="Center"/>
+                <TextBlock Text="[ ENTER TO PLAY AGAIN ]" FontSize="16" Foreground="#888888"
+                           HorizontalAlignment="Center" Margin="0,24,0,0" FontFamily="Consolas"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Death Flash -->
+        <Border x:Name="DeathFlash" Background="#88E74C3C" Visibility="Collapsed" IsHitTestVisible="False"/>
+    </Grid>
+</Window>

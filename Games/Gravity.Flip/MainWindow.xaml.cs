@@ -105,6 +105,7 @@ public partial class MainWindow : Window
         _totalCoins = 0;
         _totalDeaths = 0;
         LoadLevel(_currentLevel);
+        SoundGen.PlayBgm(Sounds.Bgm);
     }
 
     private void LoadLevel(int levelNum)
@@ -132,6 +133,7 @@ public partial class MainWindow : Window
         DeathFlash.Visibility = Visibility.Collapsed;
         HudPanel.Visibility = Visibility.Visible;
         GravityIndicator.Visibility = Visibility.Visible;
+        SoundGen.Sfx(Sounds.LevelStartSfx);
         UpdateHud();
     }
 
@@ -423,6 +425,7 @@ public partial class MainWindow : Window
             {
                 coin.Collected = true;
                 _totalCoins++;
+                SoundGen.Sfx(Sounds.CoinSfx);
                 if (i < _coinEllipses.Count)
                     _coinEllipses[i].Visibility = Visibility.Collapsed;
             }
@@ -439,6 +442,8 @@ public partial class MainWindow : Window
         if (px + pw > _level.PortalX && px < _level.PortalX + 24 &&
             py + ph > _level.PortalY && py < _level.PortalY + 40)
         {
+            SoundGen.Sfx(Sounds.PortalSfx);
+            SoundGen.StopBgm();
             if (_currentLevel >= MaxLevel)
             {
                 _state = GameState.GameComplete;
@@ -466,6 +471,7 @@ public partial class MainWindow : Window
         _state = GameState.Dead;
         _deathTimer = DeathDelay;
         DeathFlash.Visibility = Visibility.Visible;
+        SoundGen.Sfx(Sounds.DeathSfx);
 
         // Spawn death particles
         SpawnParticles(_player.X + Player.Size / 2, _player.Y + Player.Size / 2, 15,
@@ -639,6 +645,7 @@ public partial class MainWindow : Window
             case Key.Enter when _state == GameState.LevelComplete:
                 _currentLevel++;
                 LoadLevel(_currentLevel);
+                SoundGen.PlayBgm(Sounds.Bgm);
                 break;
 
             case Key.Enter when _state == GameState.GameComplete:
@@ -650,6 +657,7 @@ public partial class MainWindow : Window
             case Key.Space when _state == GameState.Playing:
                 _player.FlipGravity();
                 SpawnFlipParticles();
+                SoundGen.Sfx(Sounds.FlipSfx);
                 break;
 
             case Key.R when _state == GameState.Playing:
@@ -666,6 +674,7 @@ public partial class MainWindow : Window
     private void ShowTitle()
     {
         _state = GameState.Title;
+        SoundGen.StopBgm();
         ClearLevelVisuals();
         HudPanel.Visibility = Visibility.Collapsed;
         GravityIndicator.Visibility = Visibility.Collapsed;

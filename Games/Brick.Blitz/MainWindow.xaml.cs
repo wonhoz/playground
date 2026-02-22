@@ -104,6 +104,7 @@ public partial class MainWindow : Window
         ClearPowerUpEffects();
         LoadStage(_stage);
         ShowPlaying();
+        SoundGen.PlayBgm(Sounds.Bgm);
     }
 
     private void LoadStage(int stage)
@@ -159,6 +160,8 @@ public partial class MainWindow : Window
         if (_stage > MaxStages)
         {
             if (_score > _highScore) _highScore = _score;
+            SoundGen.StopBgm();
+            SoundGen.Sfx(Sounds.StageClearSfx);
             _state = GameState.AllClear;
             AllClearScore.Text = $"FINAL SCORE: {_score}";
             AllClearOverlay.Visibility = Visibility.Visible;
@@ -252,6 +255,7 @@ public partial class MainWindow : Window
             // Paddle collision
             if (ball.VY > 0 && BallHitsPaddle(ball))
             {
+                SoundGen.Sfx(Sounds.BallHitSfx);
                 ball.Y = _paddle.Y - ball.Radius - 1;
 
                 // Calculate bounce angle based on hit position
@@ -271,10 +275,12 @@ public partial class MainWindow : Window
             _lives--;
             _combo = 0;
             ComboText.Visibility = Visibility.Collapsed;
+            SoundGen.Sfx(Sounds.LifeLostSfx);
 
             if (_lives <= 0)
             {
                 if (_score > _highScore) _highScore = _score;
+                SoundGen.StopBgm();
                 _state = GameState.GameOver;
                 FinalScoreText.Text = $"SCORE: {_score}";
                 FinalStageText.Text = $"Reached Stage {_stage}";
@@ -298,6 +304,7 @@ public partial class MainWindow : Window
             if (pu.Active && pu.Y + pu.Height >= _paddle.Y && pu.Y <= _paddle.Y + _paddle.Height
                 && pu.X + pu.Width >= _paddle.X && pu.X <= _paddle.X + _paddle.Width)
             {
+                SoundGen.Sfx(Sounds.PowerUpSfx);
                 ApplyPowerUp(pu);
                 RemovePowerUpVisual(i);
                 continue;
@@ -390,6 +397,7 @@ public partial class MainWindow : Window
 
         if (allCleared)
         {
+            SoundGen.Sfx(Sounds.StageClearSfx);
             _state = GameState.StageClear;
             StageClearScore.Text = $"SCORE: {_score}";
             StageClearOverlay.Visibility = Visibility.Visible;
@@ -530,6 +538,8 @@ public partial class MainWindow : Window
 
     private void OnBrickDestroyed(Brick brick, int index)
     {
+        SoundGen.Sfx(Sounds.BrickBreakSfx);
+
         // Combo
         _combo++;
         _comboTimer = 2.0;
@@ -920,6 +930,7 @@ public partial class MainWindow : Window
                 ShowTitle();
                 break;
             case Key.Escape when _state == GameState.Playing:
+                SoundGen.StopBgm();
                 _loop.Stop();
                 ShowTitle();
                 _loop.Start();

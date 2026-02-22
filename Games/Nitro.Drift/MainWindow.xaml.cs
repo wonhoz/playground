@@ -24,6 +24,9 @@ public partial class MainWindow : Window
     private readonly List<UIElement> _trackVisuals = [];
 
     private bool _upDown, _downDown, _leftDown, _rightDown, _spaceDown;
+    private int _lastLap;
+    private int _lastCountdown = 4;
+    private bool _wasBoosting;
 
     private enum GameState { Title, Countdown, Racing, Paused, Finished }
     private GameState _state = GameState.Title;
@@ -79,8 +82,12 @@ public partial class MainWindow : Window
         }
 
         _raceTime = 0;
+        _lastLap = 1;
+        _lastCountdown = 4;
+        _wasBoosting = false;
         _state = GameState.Countdown;
         _countdownTimer = 3.0;
+        SoundGen.PlayBgm(Sounds.Bgm);
 
         TitlePanel.Visibility = Visibility.Collapsed;
         ResultOverlay.Visibility = Visibility.Collapsed;
@@ -158,6 +165,11 @@ public partial class MainWindow : Window
             int cd = (int)Math.Ceiling(_countdownTimer);
             CountdownText.Text = cd > 0 ? cd.ToString() : "GO!";
             CountdownText.Visibility = Visibility.Visible;
+            if (cd < _lastCountdown)
+            {
+                _lastCountdown = cd;
+                SoundGen.Sfx(cd > 0 ? Sounds.CountdownSfx : Sounds.GoSfx);
+            }
             if (_countdownTimer <= -0.5)
             {
                 CountdownText.Visibility = Visibility.Collapsed;
@@ -180,6 +192,18 @@ public partial class MainWindow : Window
         // 라이벌 업데이트
         foreach (var rival in _rivals)
             rival.UpdateAi(dt, _track);
+
+        // Lap SFX
+        if (_player.Lap > _lastLap)
+        {
+            _lastLap = _player.Lap;
+            SoundGen.Sfx(Sounds.LapSfx);
+        }
+
+        // Boost SFX
+        if (_player.IsBoosting && !_wasBoosting)
+            SoundGen.Sfx(Sounds.BoostSfx);
+        _wasBoosting = _player.IsBoosting;
 
         // HUD
         int speedKmh = (int)(Math.Abs(_player.Speed) * 3.6 / 3);
@@ -205,6 +229,8 @@ public partial class MainWindow : Window
         {
             _state = GameState.Finished;
             _player.RaceTime = _raceTime;
+            SoundGen.StopBgm();
+            SoundGen.Sfx(Sounds.FinishSfx);
 
             HudPanel.Visibility = Visibility.Collapsed;
 
@@ -310,6 +336,7 @@ public partial class MainWindow : Window
 
     private void ShowTitle()
     {
+        SoundGen.StopBgm();
         ClearAll();
         HudPanel.Visibility = Visibility.Collapsed;
         ResultOverlay.Visibility = Visibility.Collapsed;

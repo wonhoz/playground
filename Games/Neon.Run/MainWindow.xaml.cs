@@ -106,6 +106,7 @@ public partial class MainWindow : Window
     private void StartGame()
     {
         _state = GameState.Playing;
+        SoundGen.PlayBgm(Sounds.Bgm);
         _playerZ = 0;
         _playerX = 0;
         _targetLane = 0;
@@ -288,6 +289,7 @@ public partial class MainWindow : Window
                 {
                     obs.Collected = true;
                     _crystals++;
+                    SoundGen.Sfx(Sounds.CrystalSfx);
                     _score += 50;
                     if (_obstacleModels.TryGetValue(obs, out var cm))
                     {
@@ -395,6 +397,8 @@ public partial class MainWindow : Window
     private void GameOver()
     {
         _state = GameState.GameOver;
+        SoundGen.StopBgm();
+        SoundGen.Sfx(Sounds.CrashSfx);
         int multiplier = 1 + (int)(_playerZ / 100);
         int finalScore = _score * multiplier;
         FinalDistText.Text = $"DISTANCE: {(int)_playerZ}m";
@@ -424,6 +428,7 @@ public partial class MainWindow : Window
                 {
                     _isJumping = true;
                     _jumpTimer = 0;
+                    SoundGen.Sfx(Sounds.JumpSfx);
                 }
                 break;
             case Key.Return:

@@ -90,6 +90,8 @@ public partial class MainWindow : Window
         FloorTransition.Visibility = Visibility.Collapsed;
         HudPanel.Visibility = Visibility.Visible;
         MiniMapCanvas.Visibility = Visibility.Visible;
+
+        SoundGen.PlayBgm(Sounds.Bgm);
     }
 
     private void GenerateFloor(int floor)
@@ -256,6 +258,7 @@ public partial class MainWindow : Window
                 _pickups[i].Apply(_player);
                 GameCanvas.Children.Remove(_pickups[i].Visual);
                 _pickups.RemoveAt(i);
+                SoundGen.Sfx(Sounds.ItemPickupSfx);
             }
         }
 
@@ -284,6 +287,7 @@ public partial class MainWindow : Window
                     RadiusX = 40, RadiusY = 40
                 };
                 GameCanvas.Children.Add(_skillCircle);
+                SoundGen.Sfx(Sounds.AttackSfx);
 
                 // 범위 내 몬스터에 데미지
                 double cx = _player.X + Player.Size / 2;
@@ -346,6 +350,8 @@ public partial class MainWindow : Window
                     ClearScoreText.Text = $"SCORE: {_player.Score}";
                     if (_player.Score > _highScore) _highScore = _player.Score;
                     ClearOverlay.Visibility = Visibility.Visible;
+                    SoundGen.StopBgm();
+                    SoundGen.Sfx(Sounds.StairsSfx);
                 }
                 else
                 {
@@ -357,6 +363,7 @@ public partial class MainWindow : Window
                     FloorTransition.Visibility = Visibility.Visible;
                     _state = GameState.FloorTransition;
                     _transitionTimer = 1.2;
+                    SoundGen.Sfx(Sounds.StairsSfx);
                 }
             }
             // 상자 열기
@@ -364,6 +371,7 @@ public partial class MainWindow : Window
             {
                 _map[ptx, pty] = Tile.Floor;
                 _player.Score += 200;
+                SoundGen.Sfx(Sounds.DoorSfx);
 
                 var kind = _rng.NextDouble() < 0.5 ? PickupKind.Health
                     : _rng.NextDouble() < 0.5 ? PickupKind.AtkBoost : PickupKind.SpeedBoost;
@@ -384,6 +392,8 @@ public partial class MainWindow : Window
             FinalScoreText.Text = $"SCORE: {_player.Score}";
             if (_player.Score > _highScore) _highScore = _player.Score;
             GameOverOverlay.Visibility = Visibility.Visible;
+            SoundGen.StopBgm();
+            SoundGen.Sfx(Sounds.DeathSfx);
         }
 
         // HUD
@@ -406,6 +416,7 @@ public partial class MainWindow : Window
                 {
                     m.TakeDamage(_player.Atk);
                     SpawnDmgText(m.X, m.Y - 10, _player.Atk, false);
+                    SoundGen.Sfx(Sounds.AttackSfx);
                 }
             }
         }
@@ -418,6 +429,7 @@ public partial class MainWindow : Window
             {
                 _player.TakeDamage(m.Atk);
                 SpawnDmgText(_player.X, _player.Y - 10, m.Atk, true);
+                SoundGen.Sfx(Sounds.MonsterHitSfx);
             }
         }
     }
@@ -580,6 +592,7 @@ public partial class MainWindow : Window
             case Key.Escape when _state == GameState.Playing:
                 _loop.Stop();
                 _state = GameState.Title;
+                SoundGen.StopBgm();
                 ShowTitle();
                 break;
         }

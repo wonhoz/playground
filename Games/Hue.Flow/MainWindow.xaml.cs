@@ -50,6 +50,7 @@ public partial class MainWindow : Window
         InitTiles();
         InitColorButtons();
         UpdateUI();
+        SoundGen.PlayBgm(Sounds.Bgm);
     }
 
     private void LoadWindowIcon()
@@ -186,8 +187,9 @@ public partial class MainWindow : Window
             OverlayTitle.Foreground = new SolidColorBrush(Color.FromRgb(0xFF, 0x6B, 0x6B));
         }
         Overlay.Visibility = Visibility.Visible;
-        if (won) SoundHelper.PlayWin();
-        else     SoundHelper.PlayLose();
+        SoundGen.StopBgm();
+        if (won) SoundGen.Sfx(Sounds.WinSfx);
+        else     SoundGen.Sfx(Sounds.LoseSfx);
     }
 
     // ── 이벤트 핸들러 ────────────────────────────────────────────────
@@ -195,7 +197,7 @@ public partial class MainWindow : Window
     {
         if (sender is Button btn && btn.Tag is int color)
         {
-            SoundHelper.PlayClick();
+            SoundGen.Sfx(Sounds.ClickSfx);
             _board.ChooseColor(color);
             UpdateUI();
         }
@@ -210,6 +212,7 @@ public partial class MainWindow : Window
         ProgressFill.Width = 0;
 
         UpdateUI();
+        SoundGen.PlayBgm(Sounds.Bgm);
     }
 
     // ── 최고 기록 저장/불러오기 ─────────────────────────────────────

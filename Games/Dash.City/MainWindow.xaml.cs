@@ -115,6 +115,7 @@ public partial class MainWindow : Window
     private void StartGame()
     {
         _state = GameState.Playing;
+        SoundGen.PlayBgm(Sounds.Bgm);
         _playerZ = 0; _playerX = 0; _playerY = 0;
         _playerVY = 0; _targetLane = 0;
         _isJumping = false; _isSliding = false; _isGrounded = true;
@@ -281,6 +282,7 @@ public partial class MainWindow : Window
                     obj.Active = false;
                     _coins++;
                     _score += 10 * _scoreMultiplier;
+                    SoundGen.Sfx(Sounds.CoinSfx);
                     RemoveObjectVisual(obj);
                 }
             }
@@ -288,6 +290,7 @@ public partial class MainWindow : Window
             {
                 obj.Active = false;
                 ActivatePowerUp(obj.Kind);
+                SoundGen.Sfx(Sounds.PowerUpSfx);
                 RemoveObjectVisual(obj);
             }
             else if (obj.IsObstacle && !_hasJetpack)
@@ -307,6 +310,7 @@ public partial class MainWindow : Window
                         _hasShield = false;
                         _shieldTimer = 0;
                         obj.Active = false;
+                        SoundGen.Sfx(Sounds.ShieldHitSfx);
                         RemoveObjectVisual(obj);
                     }
                     else
@@ -383,6 +387,8 @@ public partial class MainWindow : Window
     private void Die()
     {
         _state = GameState.Over;
+        SoundGen.StopBgm();
+        SoundGen.Sfx(Sounds.CrashSfx);
         GOScoreText.Text = $"SCORE: {_score:N0}";
         GODistText.Text = $"DISTANCE: {(int)_playerZ}m";
         GOCoinText.Text = $"COINS: {_coins}";
@@ -600,6 +606,7 @@ public partial class MainWindow : Window
                         _isJumping = true;
                         _isGrounded = false;
                         _isSliding = false;
+                        SoundGen.Sfx(Sounds.JumpSfx);
                     }
                     break;
                 case Key.Down or Key.S:
@@ -607,6 +614,7 @@ public partial class MainWindow : Window
                     {
                         _isSliding = true;
                         _slideTimer = SlideTime;
+                        SoundGen.Sfx(Sounds.SlideSfx);
                         if (_isJumping)
                         {
                             _playerVY = -15;

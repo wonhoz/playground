@@ -110,6 +110,8 @@ public partial class MainWindow : Window
         ResultOverlay.Visibility = Visibility.Collapsed;
         HudPanel.Visibility = Visibility.Visible;
         JudgeText.Visibility = Visibility.Collapsed;
+
+        SoundGen.PlayBgm(Sounds.Bgm);
     }
 
     private void DrawField()
@@ -247,6 +249,7 @@ public partial class MainWindow : Window
                 note.Grade = HitGrade.Miss;
                 _score.RegisterHit(HitGrade.Miss);
                 ShowJudge(HitGrade.Miss);
+                SoundGen.Sfx(Sounds.MissSfx);
             }
         }
 
@@ -340,6 +343,15 @@ public partial class MainWindow : Window
         closest.Grade = grade;
         _score.RegisterHit(grade);
         ShowJudge(grade);
+
+        SoundGen.Sfx(grade switch
+        {
+            HitGrade.Perfect => Sounds.PerfectSfx,
+            HitGrade.Great => Sounds.GreatSfx,
+            _ => Sounds.GoodSfx
+        });
+        if (_score.Combo > 0 && _score.Combo % 10 == 0)
+            SoundGen.Sfx(Sounds.ComboSfx);
     }
 
     private void ShowJudge(HitGrade grade)
@@ -362,6 +374,7 @@ public partial class MainWindow : Window
 
     private void ShowResult()
     {
+        SoundGen.StopBgm();
         _state = GameState.Result;
         HudPanel.Visibility = Visibility.Collapsed;
         JudgeText.Visibility = Visibility.Collapsed;
@@ -389,6 +402,7 @@ public partial class MainWindow : Window
 
     private void ShowTitle()
     {
+        SoundGen.StopBgm();
         ClearField();
         _state = GameState.Title;
         HudPanel.Visibility = Visibility.Collapsed;

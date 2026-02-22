@@ -175,6 +175,7 @@ public partial class MainWindow : Window
         HudPanel.Visibility = Visibility.Visible;
         BossHpPanel.Visibility = Visibility.Collapsed;
 
+        SoundGen.PlayBgm(Sounds.Bgm);
         NextWave();
     }
 
@@ -190,6 +191,8 @@ public partial class MainWindow : Window
             VictoryScoreText.Text = $"FINAL SCORE: {_player.Score}";
             if (_player.Score > _highScore) _highScore = _player.Score;
             VictoryOverlay.Visibility = Visibility.Visible;
+            SoundGen.StopBgm();
+            SoundGen.Sfx(Sounds.WaveClearSfx);
             return;
         }
 
@@ -270,6 +273,7 @@ public partial class MainWindow : Window
                     _enemies[i].Y + _enemies[i].Height / 2, true);
                 GameCanvas.Children.Remove(_enemies[i].Visual);
                 _enemies.RemoveAt(i);
+                SoundGen.Sfx(Sounds.KOSfx);
             }
         }
 
@@ -283,6 +287,7 @@ public partial class MainWindow : Window
             _waveClearTimer = 1.5;
             WaveClearText.Text = _wave >= WaveDefs.Length ? "ALL CLEAR!" : $"WAVE {_wave} CLEAR!";
             WaveClearText.Visibility = Visibility.Visible;
+            SoundGen.Sfx(Sounds.WaveClearSfx);
         }
 
         // 게임오버 체크
@@ -302,6 +307,8 @@ public partial class MainWindow : Window
                 NewHighScoreText.Text = "";
             }
             GameOverOverlay.Visibility = Visibility.Visible;
+            SoundGen.StopBgm();
+            SoundGen.Sfx(Sounds.GameOverSfx);
         }
     }
 
@@ -316,6 +323,7 @@ public partial class MainWindow : Window
                     (enemy.X + _player.X + _player.Width) / 2,
                     enemy.Y + enemy.Height / 2,
                     _player.State == FighterState.Special);
+                SoundGen.Sfx(_player.State == FighterState.Kick ? Sounds.KickSfx : Sounds.PunchSfx);
             }
         }
 
@@ -328,6 +336,7 @@ public partial class MainWindow : Window
                     _player.X + _player.Width / 2,
                     _player.Y + _player.Height / 2,
                     false);
+                SoundGen.Sfx(Sounds.HitSfx);
             }
         }
     }
@@ -404,6 +413,7 @@ public partial class MainWindow : Window
             case Key.Escape when _state == GameState.Playing:
                 _loop.Stop();
                 _state = GameState.Title;
+                SoundGen.StopBgm();
                 ShowTitle();
                 break;
         }

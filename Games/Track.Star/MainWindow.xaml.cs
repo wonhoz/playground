@@ -33,6 +33,8 @@ public partial class MainWindow : Window
     private readonly List<UIElement> _trackVisuals = [];
     private readonly Rectangle[] _runners = new Rectangle[4]; // 0=player, 1~3=rivals
     private double _resultShowTimer;
+    private int _lastCountdown = -1;
+    private EventPhase _lastPhase = EventPhase.Ready;
 
     public MainWindow()
     {
@@ -69,6 +71,9 @@ public partial class MainWindow : Window
         SetupTrack();
         CurrentEvent.Reset();
         CurrentEvent.Phase = EventPhase.Ready;
+        _lastCountdown = -1;
+        _lastPhase = EventPhase.Ready;
+        SoundGen.PlayBgm(Sounds.Bgm);
     }
 
     private void SetupTrack()
@@ -152,6 +157,8 @@ public partial class MainWindow : Window
                 if (_currentEvent >= _events.Length)
                 {
                     // 대회 종료
+                    SoundGen.StopBgm();
+                    SoundGen.Sfx(Sounds.MedalSfx);
                     _state = GameState.Final;
                     HudPanel.Visibility = Visibility.Collapsed;
                     GaugePanel.Visibility = Visibility.Collapsed;
@@ -160,6 +167,8 @@ public partial class MainWindow : Window
                     return;
                 }
                 _state = GameState.Playing;
+                _lastCountdown = -1;
+                _lastPhase = EventPhase.Ready;
                 SetupTrack();
                 CurrentEvent.Reset();
                 CurrentEvent.Phase = EventPhase.Ready;
@@ -173,6 +182,35 @@ public partial class MainWindow : Window
         _spaceJust = false;
 
         CurrentEvent.Update(dt, _leftDown, _rightDown, sp);
+
+        // Audio: countdown ticks & go
+        if (CurrentEvent.Phase == EventPhase.Countdown)
+        {
+            int cd = (int)Math.Ceiling(CurrentEvent.Timer);
+            if (cd != _lastCountdown && cd >= 1 && cd <= 3)
+            {
+                SoundGen.Sfx(Sounds.CountdownSfx);
+                _lastCountdown = cd;
+            }
+        }
+        if (_lastPhase == EventPhase.Countdown && CurrentEvent.Phase == EventPhase.Active)
+        {
+            SoundGen.Sfx(Sounds.GoSfx);
+        }
+
+        // Audio: step sfx on alternating key presses during active phase
+        if (CurrentEvent.Phase == EventPhase.Active && (_leftDown || _rightDown))
+        {
+            SoundGen.Sfx(Sounds.StepSfx);
+        }
+
+        // Audio: jump sfx
+        if (CurrentEvent.Phase == EventPhase.Active && sp)
+        {
+            SoundGen.Sfx(Sounds.JumpSfx);
+        }
+
+        _lastPhase = CurrentEvent.Phase;
 
         // HUD
         EventNameText.Text = CurrentEvent.Name;
@@ -200,6 +238,7 @@ public partial class MainWindow : Window
         // 결과
         if (CurrentEvent.IsComplete)
         {
+            SoundGen.Sfx(Sounds.FinishSfx);
             _results.Add($"{CurrentEvent.Name}: {CurrentEvent.ResultText}");
             ResultTitle.Text = CurrentEvent.Name;
             ResultDetail.Text = CurrentEvent.ResultText;

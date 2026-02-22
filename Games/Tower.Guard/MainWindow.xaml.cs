@@ -92,6 +92,7 @@ public partial class MainWindow : Window
         UpdateSelectedTowerText();
 
         _waveManager.StartFirstWave();
+        SoundGen.PlayBgm(Sounds.Bgm);
     }
 
     private void ClearAll()
@@ -245,6 +246,7 @@ public partial class MainWindow : Window
         if (_towers.Any(t => t.GridX == gridX && t.GridY == gridY)) return;
 
         _gold -= cost;
+        SoundGen.Sfx(Sounds.TowerPlaceSfx);
         var tower = new Tower(towerType, gridX, gridY);
         _towers.Add(tower);
 
@@ -316,6 +318,7 @@ public partial class MainWindow : Window
             if (!enemy.IsAlive)
             {
                 _gold += enemy.Reward;
+                SoundGen.Sfx(Sounds.EnemyDeathSfx);
                 RemoveEnemy(enemy);
                 _enemies.RemoveAt(i);
             }
@@ -363,6 +366,7 @@ public partial class MainWindow : Window
             if (target is null) continue;
 
             tower.FireCooldown = tower.FireRate;
+            SoundGen.Sfx(Sounds.TowerShootSfx);
 
             if (tower.Type == TowerType.Lightning)
             {
@@ -570,7 +574,7 @@ public partial class MainWindow : Window
 
     private void OnWaveComplete()
     {
-        // Wave complete, waiting for next
+        SoundGen.Sfx(Sounds.WaveStartSfx);
     }
 
     private void OnAllWavesComplete()
@@ -581,6 +585,8 @@ public partial class MainWindow : Window
 
     private void ShowVictory()
     {
+        SoundGen.StopBgm();
+        SoundGen.Sfx(Sounds.VictorySfx);
         HudPanel.Visibility = Visibility.Collapsed;
         TowerPanel.Visibility = Visibility.Collapsed;
         TowerContextMenu.Visibility = Visibility.Collapsed;
@@ -590,6 +596,8 @@ public partial class MainWindow : Window
 
     private void ShowGameOver()
     {
+        SoundGen.StopBgm();
+        SoundGen.Sfx(Sounds.GameOverSfx);
         HudPanel.Visibility = Visibility.Collapsed;
         TowerPanel.Visibility = Visibility.Collapsed;
         TowerContextMenu.Visibility = Visibility.Collapsed;
@@ -607,6 +615,7 @@ public partial class MainWindow : Window
                 StartGame();
                 break;
             case Key.Escape when _state == GameState.Playing:
+                SoundGen.StopBgm();
                 _loop.Stop();
                 _state = GameState.Title;
                 ShowTitle();

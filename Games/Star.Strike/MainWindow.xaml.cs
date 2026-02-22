@@ -105,6 +105,7 @@ public partial class MainWindow : Window
         PauseOverlay.Visibility = Visibility.Collapsed;
         HudPanel.Visibility = Visibility.Visible;
 
+        SoundGen.PlayBgm(Sounds.Bgm);
         NextWave();
     }
 
@@ -138,6 +139,7 @@ public partial class MainWindow : Window
             var bullet = new Bullet(_player.X + _player.Width / 2, _player.Y, true);
             _bullets.Add(bullet);
             GameCanvas.Children.Add(bullet.Visual!);
+            SoundGen.Sfx(Sounds.ShootSfx);
         }
 
         // 적 스폰

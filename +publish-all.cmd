@@ -40,6 +40,7 @@ call :pub "Log.Lens"             "Applications\Tools\Log.Lens"                 "
 call :pub "Env.Guard"            "Applications\Tools\Env.Guard"                "EnvGuard.exe"
 call :pub "DNS.Flip"             "Applications\Tools\DNS.Flip"                 "DnsFlip.exe"
 call :pub "Toast.Cast"           "Applications\Health\Toast.Cast"               "ToastCast.exe"
+call :pub "Link.Vault"           "Applications\Tools\Link.Vault"                "LinkVault.exe"
 :: Games - Action
 call :pub "Fist.Fury"             "Games\Action\Fist.Fury"                       "FistFury.exe"
 call :pub "Dungeon.Dash"          "Games\Action\Dungeon.Dash"                    "DungeonDash.exe"

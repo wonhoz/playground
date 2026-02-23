@@ -38,6 +38,7 @@ call :pub "Screen.Recorder"       "Applications\Tools\Screen.Recorder"          
 call :pub "Text.Forge"            "Applications\Tools\Text.Forge"                "TextForge.exe"
 call :pub "Log.Lens"             "Applications\Tools\Log.Lens"                 "LogLens.exe"
 call :pub "Env.Guard"            "Applications\Tools\Env.Guard"                "EnvGuard.exe"
+call :pub "DNS.Flip"             "Applications\Tools\DNS.Flip"                 "DnsFlip.exe"
 :: Games - Action
 call :pub "Fist.Fury"             "Games\Action\Fist.Fury"                       "FistFury.exe"
 call :pub "Dungeon.Dash"          "Games\Action\Dungeon.Dash"                    "DungeonDash.exe"

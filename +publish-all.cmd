@@ -36,6 +36,7 @@ call :pub "Photo.Video.Organizer" "Applications\Media\Photo.Video.Organizer"    
 call :pub "Clipboard.Stacker"     "Applications\Tools\Clipboard.Stacker"         "ClipboardStacker.exe"
 call :pub "Screen.Recorder"       "Applications\Tools\Screen.Recorder"           "ScreenRecorder.exe"
 call :pub "Text.Forge"            "Applications\Tools\Text.Forge"                "TextForge.exe"
+call :pub "Log.Lens"             "Applications\Tools\Log.Lens"                 "LogLens.exe"
 :: Games - Action
 call :pub "Fist.Fury"             "Games\Action\Fist.Fury"                       "FistFury.exe"
 call :pub "Dungeon.Dash"          "Games\Action\Dungeon.Dash"                    "DungeonDash.exe"

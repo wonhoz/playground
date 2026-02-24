@@ -29,8 +29,8 @@ public sealed class SettingsWindow : Form
         _onSave = onSave;
 
         Text = "Toast.Cast — 루틴 설정";
-        Size = new Size(480, 560);
-        MinimumSize = new Size(480, 480);
+        Size = new Size(560, 640);
+        MinimumSize = new Size(560, 560);
         BackColor = Color.FromArgb(26, 26, 36);
         ForeColor = Color.FromArgb(230, 230, 235);
         Font = new Font("Segoe UI", 9.5f);
@@ -55,7 +55,7 @@ public sealed class SettingsWindow : Form
             FlowDirection = FlowDirection.TopDown,
             WrapContents = false,
             AutoScroll = true,
-            Bounds = new Rectangle(16, 56, 432, 400),
+            Bounds = new Rectangle(16, 56, 528, 450),
             BackColor = Color.FromArgb(26, 26, 36)
         };
 
@@ -65,7 +65,7 @@ public sealed class SettingsWindow : Form
             Text = "유휴 감지 기준 (분):",
             ForeColor = Color.FromArgb(160, 160, 180),
             AutoSize = true,
-            Location = new Point(20, 468)
+            Location = new Point(20, 518)
         };
         var idleSpinner = new NumericUpDown
         {
@@ -73,11 +73,11 @@ public sealed class SettingsWindow : Form
             BackColor = Color.FromArgb(38, 38, 52),
             ForeColor = Color.FromArgb(230, 230, 235),
             BorderStyle = BorderStyle.FixedSingle,
-            Bounds = new Rectangle(200, 464, 60, 24)
+            Bounds = new Rectangle(220, 514, 60, 24)
         };
 
         // 저장 버튼
-        var btnSave = CreateButton("💾  저장", new Rectangle(310, 494, 140, 32), Color.FromArgb(60, 150, 100));
+        var btnSave = CreateButton("💾  저장", new Rectangle(380, 550, 160, 36), Color.FromArgb(60, 150, 100));
         btnSave.Click += (_, _) =>
         {
             _config.IdleThresholdMinutes = (int)idleSpinner.Value;
@@ -101,7 +101,7 @@ public sealed class SettingsWindow : Form
     {
         var card = new Panel
         {
-            Size = new Size(420, 88),
+            Size = new Size(508, 92),
             BackColor = Color.FromArgb(34, 34, 48),
             Margin = new Padding(0, 0, 0, 8),
             Cursor = Cursors.Default
@@ -124,11 +124,11 @@ public sealed class SettingsWindow : Form
             Font = new Font("Segoe UI", 8.5f),
             ForeColor = Color.FromArgb(130, 130, 150),
             AutoSize = false,
-            Size = new Size(300, 32),
+            Size = new Size(370, 36),
             Location = new Point(12, 34)
         };
 
-        // 활성화 토글 — Appearance.Button으로 OS 체크박스 사각형 완전 제거
+        // 활성화 토글 — Appearance.Button + 명시적 Size (AutoSize는 Korean 텍스트 측정 오류 있음)
         var chkEnabled = new CheckBox
         {
             Text = "활성",
@@ -137,9 +137,8 @@ public sealed class SettingsWindow : Form
             FlatStyle = FlatStyle.Flat,
             ForeColor = Color.FromArgb(180, 180, 200),
             BackColor = Color.FromArgb(38, 38, 54),
-            AutoSize = true,
-            Padding = new Padding(6, 2, 6, 2),
-            Location = new Point(340, 10),
+            Size = new Size(68, 28),
+            Location = new Point(428, 8),
             Cursor = Cursors.Hand
         };
         chkEnabled.FlatAppearance.CheckedBackColor = Color.FromArgb(28, 90, 58);
@@ -162,11 +161,11 @@ public sealed class SettingsWindow : Form
             BackColor = Color.FromArgb(38, 38, 52),
             ForeColor = Color.FromArgb(230, 230, 235),
             BorderStyle = BorderStyle.FixedSingle,
-            Bounds = new Rectangle(80, 60, 64, 22)
+            Bounds = new Rectangle(88, 62, 72, 24)
         };
         spInterval.ValueChanged += (_, _) => { routine.IntervalMinutes = (int)spInterval.Value; };
 
-        // 카운트다운 토글 — Appearance.Button으로 OS 체크박스 사각형 완전 제거
+        // 카운트다운 토글 — Appearance.Button + 명시적 Size
         var chkCountdown = new CheckBox
         {
             Text = "카운트다운",
@@ -175,9 +174,8 @@ public sealed class SettingsWindow : Form
             FlatStyle = FlatStyle.Flat,
             ForeColor = Color.FromArgb(180, 180, 200),
             BackColor = Color.FromArgb(38, 38, 54),
-            AutoSize = true,
-            Padding = new Padding(6, 2, 6, 2),
-            Location = new Point(160, 64),
+            Size = new Size(100, 28),
+            Location = new Point(172, 62),
             Cursor = Cursors.Hand
         };
         chkCountdown.FlatAppearance.CheckedBackColor = Color.FromArgb(28, 90, 58);

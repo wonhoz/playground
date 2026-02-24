@@ -23,7 +23,7 @@ public sealed class StatsWindow : Form
     private StatsWindow(AppConfig config)
     {
         Text = "Toast.Cast — 주간 통계";
-        Size = new Size(420, 480);
+        Size = new Size(480, 480);
         BackColor = Color.FromArgb(26, 26, 36);
         ForeColor = Color.FromArgb(230, 230, 235);
         Font = new Font("Segoe UI", 9.5f);
@@ -66,7 +66,7 @@ public sealed class StatsWindow : Form
         var btnClose = new Button
         {
             Text = "닫기",
-            Bounds = new Rectangle(Width / 2 - 60, y + 12, 120, 32),
+            Bounds = new Rectangle(Width / 2 - 60, y + 20, 120, 34),
             BackColor = Color.FromArgb(45, 45, 62),
             ForeColor = Color.FromArgb(200, 200, 215),
             FlatStyle = FlatStyle.Flat,
@@ -77,14 +77,14 @@ public sealed class StatsWindow : Form
         btnClose.Click += (_, _) => Close();
         Controls.Add(btnClose);
 
-        Height = y + 80;
+        Height = y + 120;
     }
 
     private Panel CreateStatRow(WeeklyRoutineStat stat, int y)
     {
         var panel = new Panel
         {
-            Bounds = new Rectangle(16, y, Width - 44, 64),
+            Bounds = new Rectangle(16, y, Width - 48, 64),
             BackColor = Color.FromArgb(32, 32, 46)
         };
 
@@ -108,7 +108,7 @@ public sealed class StatsWindow : Form
             Font = new Font("Segoe UI", 9.5f, FontStyle.Bold),
             ForeColor = color,
             AutoSize = true,
-            Location = new Point(panel.Width - 130, 8)
+            Location = new Point(panel.Width - 140, 8)
         };
 
         // 진행 바 배경

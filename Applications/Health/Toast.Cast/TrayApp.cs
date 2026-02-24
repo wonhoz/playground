@@ -103,7 +103,7 @@ public sealed class TrayApp : ApplicationContext
 
     private void ShowCountdownOverlay(Routine routine)
     {
-        _currentOverlay = new CountdownOverlay(routine.Icon, routine.Name, routine.CountdownSeconds);
+        _currentOverlay = new CountdownOverlay(routine.Icon, routine.Name, routine.CountdownSeconds, routine.Id);
 
         _currentOverlay.Completed += (_, _) =>
         {

@@ -13,6 +13,7 @@ public sealed class CountdownOverlay : Form
     private int _remaining;
     private readonly string _icon;
     private readonly string _title;
+    private readonly string _routineId;
     private readonly Label _lblCountdown;
     private readonly Label _lblTitle;
     private readonly Label _lblHint;
@@ -21,10 +22,11 @@ public sealed class CountdownOverlay : Form
     public event EventHandler? Completed;
     public event EventHandler? Skipped;
 
-    public CountdownOverlay(string icon, string title, int seconds)
+    public CountdownOverlay(string icon, string title, int seconds, string routineId = "")
     {
         _icon = icon;
         _title = title;
+        _routineId = routineId;
         _remaining = seconds;
 
         // 창 기본 설정
@@ -105,6 +107,33 @@ public sealed class CountdownOverlay : Form
         var dark = 1;
         DwmSetWindowAttribute(Handle, 20, ref dark, sizeof(int));
         _timer.Start();
+        Task.Run(() => PlayRoutineSound(_routineId));
+    }
+
+    private static void PlayRoutineSound(string routineId)
+    {
+        switch (routineId)
+        {
+            case "eye-rest":
+                // 부드럽게 내려가는 2음 — 눈을 감고 멀리 보기
+                Console.Beep(880, 150); Thread.Sleep(60); Console.Beep(659, 280);
+                break;
+            case "water":
+                // 가볍게 올라가는 2음 — 물방울 느낌
+                Console.Beep(523, 100); Thread.Sleep(40); Console.Beep(784, 220);
+                break;
+            case "stretch":
+                // 경쾌하게 올라가는 3음 — 몸을 일으키는 느낌
+                Console.Beep(392, 90); Thread.Sleep(35); Console.Beep(523, 90); Thread.Sleep(35); Console.Beep(659, 220);
+                break;
+            case "posture":
+                // 빠른 2회 알림음 — 자세 주의 환기
+                Console.Beep(880, 80); Thread.Sleep(50); Console.Beep(880, 80);
+                break;
+            default:
+                Console.Beep(740, 200);
+                break;
+        }
     }
 
     private void OnTick(object? sender, EventArgs e)

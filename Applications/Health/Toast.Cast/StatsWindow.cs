@@ -37,7 +37,7 @@ public sealed class StatsWindow : Form
             Font = new Font("Segoe UI", 14f, FontStyle.Bold),
             ForeColor = Color.FromArgb(100, 220, 150),
             AutoSize = true,
-            Location = new Point(22, 20)
+            Location = new Point(20, 20)
         };
 
         var weekLabel = new Label
@@ -46,14 +46,14 @@ public sealed class StatsWindow : Form
             Font = new Font("Segoe UI", 9.5f),
             ForeColor = Color.FromArgb(120, 120, 140),
             AutoSize = true,
-            Location = new Point(22, 54)
+            Location = new Point(20, 62)  // 헤더 하단(~40) → 여백 22px 확보
         };
 
         Controls.Add(header);
         Controls.Add(weekLabel);
 
         var stats = StatsService.GetWeeklyStats(config.Routines);
-        var y = 90;
+        var y = 98;  // weekLabel 하단(~76) → 여백 22px
         foreach (var (routineId, stat) in stats)
         {
             var routine = config.Routines.FirstOrDefault(r => r.Id == routineId);
@@ -77,15 +77,16 @@ public sealed class StatsWindow : Form
         btnClose.Click += (_, _) => Close();
         Controls.Add(btnClose);
 
-        // 동적 높이: 마지막 행 y + 닫기 버튼(42) + 여백
-        Height = y + 120;
+        // 동적 높이: 닫기 버튼 하단 여백 충분히 확보
+        Height = y + 140;
     }
 
     private Panel CreateStatRow(WeeklyRoutineStat stat, int y)
     {
+        // 좌우 여백: x=20, width=518 → client(558)-20*2=518, 좌 20px = 우 20px
         var panel = new Panel
         {
-            Bounds = new Rectangle(16, y, Width - 48, 76),
+            Bounds = new Rectangle(20, y, 518, 76),
             BackColor = Color.FromArgb(32, 32, 46)
         };
 

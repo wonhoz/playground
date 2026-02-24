@@ -48,12 +48,13 @@ public sealed class SettingsWindow : Form
         };
 
         // 카드 4개 × (128 + 8) = 544px < 568px → 스크롤바 없음
+        // 좌우 여백: client(658) - x(18)*2 = 622 → 좌 18px = 우 18px
         _routinePanel = new FlowLayoutPanel
         {
             FlowDirection = FlowDirection.TopDown,
             WrapContents = false,
             AutoScroll = true,
-            Bounds = new Rectangle(18, 64, 624, 568),
+            Bounds = new Rectangle(18, 64, 622, 568),
             BackColor = Color.FromArgb(26, 26, 36)
         };
 
@@ -68,7 +69,8 @@ public sealed class SettingsWindow : Form
         var (idlePanel, getIdleValue) = CreateDarkSpinner(1, 30, _config.IdleThresholdMinutes, _ => { });
         idlePanel.Location = new Point(252, 638);  // 스피너 중심 = 638+18=656, 레이블 중심 = 648+8=656 ✓
 
-        var btnSave = CreateButton("\U0001F4BE  저장", new Rectangle(450, 680, 192, 52), Color.FromArgb(60, 150, 100));
+        // 저장 버튼 우측/하단 여백: right=22px, bottom=22px (client 658×748 기준)
+        var btnSave = CreateButton("\U0001F4BE  저장", new Rectangle(444, 674, 192, 52), Color.FromArgb(60, 150, 100));
         btnSave.Font = new Font("Segoe UI", 10.5f);
         btnSave.Click += (_, _) =>
         {
@@ -93,7 +95,7 @@ public sealed class SettingsWindow : Form
     {
         var card = new Panel
         {
-            Size = new Size(612, 128),
+            Size = new Size(614, 128),  // 614+4+4=622 = 패널 폭 (좌우 여백 동일)
             BackColor = Color.FromArgb(34, 34, 48),
             Margin = new Padding(4, 0, 4, 8),
             Cursor = Cursors.Default

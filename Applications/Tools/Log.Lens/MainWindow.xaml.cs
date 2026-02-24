@@ -178,6 +178,7 @@ public partial class MainWindow : Window
 
     private void ApplyFilter()
     {
+        if (!IsLoaded) return;
         if (TabLogs.SelectedItem is not TabItem tab || !_tabStates.TryGetValue(tab, out var state)) return;
         RenderEntries(state);
         UpdateStatusBar();

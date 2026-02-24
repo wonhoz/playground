@@ -24,7 +24,13 @@ public sealed class TrayApp : ApplicationContext
         _config = AppConfig.Load();
         ScheduleAll();
 
-        _menu = new ContextMenuStrip { Renderer = new DarkMenuRenderer() };
+        _menu = new ContextMenuStrip
+        {
+            Renderer = new DarkMenuRenderer(),
+            AutoSize = true,
+            ShowImageMargin = false,
+            Font = new Font("Segoe UI", 9.5f)
+        };
 
         _tray = new NotifyIcon
         {

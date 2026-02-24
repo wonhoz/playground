@@ -45,6 +45,7 @@ public partial class MainWindow : Window
 
     private void ApplyFilter()
     {
+        if (!IsLoaded) return;
         var search = TxtSearch.Text.Trim();
         var filtered = _allVars.AsEnumerable();
 

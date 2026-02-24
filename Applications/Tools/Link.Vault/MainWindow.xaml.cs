@@ -59,6 +59,7 @@ public partial class MainWindow : Window
 
     private void Refresh()
     {
+        if (!IsLoaded || _db == null) return;
         var query     = TxtSearch.Text.Trim();
         var unread    = ChkUnread.IsChecked == true;
         var minStars  = CmbStars.SelectedIndex > 0 ? (int?)CmbStars.SelectedIndex : null;

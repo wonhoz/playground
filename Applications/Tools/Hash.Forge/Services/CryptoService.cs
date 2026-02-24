@@ -62,12 +62,12 @@ public static class CryptoService
         for (int i = 9; i >= 0; i--)
         { sb.Insert(0, B32[(int)(t % 32)]); t /= 32; }
 
-        // 16자 무작위 (80비트)
+        // 16자 무작위 (80비트) — ulong으로 부호 오버플로 방지
         var rng = RandomNumberGenerator.GetBytes(10);
-        long rand = 0;
+        ulong rand = 0;
         for (int i = 0; i < 10; i++) rand = (rand << 8) | rng[i];
         for (int i = 0; i < 16; i++)
-        { sb.Append(B32[(int)(rand % 32)]); rand >>= 2; }
+        { sb.Append(B32[(int)(rand % 32)]); rand >>= 5; }
 
         return sb.ToString();
     }

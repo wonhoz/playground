@@ -72,17 +72,17 @@ public sealed class MainWindow : Form
         };
         _searchBox.TextChanged += (_, _) => ApplyFilter();
 
-        _btnRefresh = MakeButton("↺  새로고침", new Point(364, 12), 120);
+        _btnRefresh = MakeButton("↺  새로고침", new Point(364, 12), 130);
         _btnRefresh.Click += async (_, _) => await RefreshAsync();
 
-        _chkAuto = MakeToggle("⏱ 자동 갱신", new Point(500, 12), 118);
+        _chkAuto = MakeToggle("⏱ 자동 갱신", new Point(508, 12), 145);
         _chkAuto.CheckedChanged += (_, _) =>
         {
             _autoTimer.Enabled = _chkAuto.Checked;
             _chkAuto.Text = _chkAuto.Checked ? "⏱ 자동 갱신 ●" : "⏱ 자동 갱신";
         };
 
-        _chkFavOnly = MakeToggle("★ 즐겨찾기만", new Point(632, 12), 118);
+        _chkFavOnly = MakeToggle("★ 즐겨찾기만", new Point(667, 12), 145);
         _chkFavOnly.CheckedChanged += (_, _) => ApplyFilter();
 
         toolbar.Controls.AddRange([lblIcon, _searchBox, _btnRefresh, _chkAuto, _chkFavOnly]);
@@ -137,7 +137,8 @@ public sealed class MainWindow : Form
         AddCol("pid",     "PID",      65,  DataGridViewAutoSizeColumnMode.None,  DataGridViewContentAlignment.MiddleCenter);
         AddCol("state",   "상태",     120, DataGridViewAutoSizeColumnMode.None,  DataGridViewContentAlignment.MiddleLeft);
         AddCol("remote",  "원격 주소",155, DataGridViewAutoSizeColumnMode.None,  DataGridViewContentAlignment.MiddleLeft);
-        AddCol("path",    "경로",     340, DataGridViewAutoSizeColumnMode.None,  DataGridViewContentAlignment.MiddleLeft);
+        AddCol("path",    "경로",     200, DataGridViewAutoSizeColumnMode.Fill,  DataGridViewContentAlignment.MiddleLeft);
+        _grid.Columns["path"].MinimumWidth = 200;
 
         // 컨텍스트 메뉴
         var ctx = new ContextMenuStrip { Renderer = new DarkMenuRenderer(), ShowImageMargin = false, Font = new Font("Segoe UI", 9.5f) };
@@ -166,8 +167,9 @@ public sealed class MainWindow : Form
             Text = "로딩 중...",
             ForeColor = Color.FromArgb(110, 110, 140),
             Font = new Font("Segoe UI", 9f),
-            AutoSize = true,
-            Location = new Point(14, 7)
+            TextAlign = ContentAlignment.MiddleLeft,
+            Dock = DockStyle.Fill,
+            Padding = new Padding(14, 0, 0, 0)
         };
 
         var btnKill = new Button
@@ -177,14 +179,16 @@ public sealed class MainWindow : Form
             Font = new Font("Segoe UI", 9f),
             ForeColor = Color.FromArgb(220, 90, 80),
             BackColor = Color.FromArgb(20, 20, 34),
-            AutoSize = true,
-            Location = new Point(320, 4),
+            Dock = DockStyle.Right,
+            Width = 178,
             Cursor = Cursors.Hand
         };
         btnKill.FlatAppearance.BorderColor = Color.FromArgb(55, 55, 75);
         btnKill.FlatAppearance.MouseOverBackColor = Color.FromArgb(40, 40, 56);
         btnKill.Click += KillSelected;
 
+        // _statusLabel(index 0) → Fill, btnKill(index 1) → Right
+        // WinForms는 Controls 역순(index 1 먼저)으로 도킹 처리 → btnKill이 오른쪽 차지 후 _statusLabel이 나머지 채움
         statusBar.Controls.AddRange([_statusLabel, btnKill]);
 
         // ── 자동 갱신 타이머 ─────────────────────────────────────

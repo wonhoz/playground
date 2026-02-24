@@ -1,0 +1,375 @@
+<Window x:Class="HashForge.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Hash.Forge — 해시·인코딩 유틸리티"
+        Width="940" Height="660"
+        MinWidth="720" MinHeight="540"
+        Background="#0F0F1C"
+        Foreground="#DCDCEE"
+        FontFamily="Segoe UI"
+        FontSize="10"
+        WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <Style x:Key="SecLabel" TargetType="TextBlock">
+            <Setter Property="Foreground"  Value="#8080B0"/>
+            <Setter Property="FontSize"    Value="9.5"/>
+            <Setter Property="Margin"      Value="0,0,0,6"/>
+        </Style>
+        <Style x:Key="HashLabel" TargetType="TextBlock">
+            <Setter Property="Width"            Value="82"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Foreground"       Value="#7070A8"/>
+            <Setter Property="FontSize"         Value="9.5"/>
+        </Style>
+        <Style x:Key="MonoBox" TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
+            <Setter Property="FontFamily" Value="Consolas, Courier New"/>
+            <Setter Property="FontSize"   Value="10.5"/>
+            <Setter Property="IsReadOnly" Value="True"/>
+        </Style>
+        <Style x:Key="CopyBtn" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+            <Setter Property="Content"  Value="복사"/>
+            <Setter Property="Width"    Value="50"/>
+            <Setter Property="Padding"  Value="0,6"/>
+            <Setter Property="FontSize" Value="9"/>
+            <Setter Property="Margin"   Value="6,0,0,0"/>
+        </Style>
+        <Style x:Key="AccentBtn" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+            <Setter Property="Background" Value="#2A2060"/>
+            <Setter Property="Foreground" Value="#C0B0FF"/>
+            <Setter Property="Padding"    Value="20,8"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="48"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- ── 헤더 ──────────────────────────────────────────── -->
+        <Border Grid.Row="0" Background="#09091A">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="20,0">
+                <TextBlock Text="#" FontSize="20" FontWeight="Bold"
+                           Foreground="#7C69EF" Margin="0,0,8,0" VerticalAlignment="Center"/>
+                <TextBlock Text="Hash.Forge" FontSize="14" FontWeight="SemiBold"
+                           Foreground="#E2E2F0" VerticalAlignment="Center"/>
+                <TextBlock Text=" — 해시·인코딩 유틸리티" FontSize="11"
+                           Foreground="#505080" VerticalAlignment="Center" Margin="4,0,0,0"/>
+            </StackPanel>
+        </Border>
+
+        <!-- ── 탭 ────────────────────────────────────────────── -->
+        <TabControl Grid.Row="1">
+
+            <!-- ════ 해시 탭 ════════════════════════════════════ -->
+            <TabItem Header="  해시  ">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" Background="#0F0F1C">
+                    <Grid Margin="24,18,24,18">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="110"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="14"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="0" Text="입력 텍스트" Style="{StaticResource SecLabel}"/>
+                        <TextBox   Grid.Row="1" x:Name="TxtHashIn"
+                                   AcceptsReturn="True" TextWrapping="Wrap"
+                                   VerticalScrollBarVisibility="Auto"
+                                   TextChanged="Hash_Changed"/>
+
+                        <!-- HMAC 키 -->
+                        <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,10,0,0">
+                            <TextBlock Text="HMAC 키 (선택):" Style="{StaticResource HashLabel}" Width="Auto" Margin="0,0,10,0"/>
+                            <TextBox x:Name="TxtHmacKey" Width="240" TextChanged="Hash_Changed"/>
+                        </StackPanel>
+
+                        <TextBlock Grid.Row="4" Text="결과" Style="{StaticResource SecLabel}"/>
+
+                        <!-- MD5 -->
+                        <Grid Grid.Row="5" Margin="0,0,0,8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="82"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="MD5" Style="{StaticResource HashLabel}"/>
+                            <TextBox   Grid.Column="1" x:Name="TxtMd5" Style="{StaticResource MonoBox}"/>
+                            <Button    Grid.Column="2" Style="{StaticResource CopyBtn}" Click="CopyMd5"/>
+                        </Grid>
+
+                        <!-- SHA-1 -->
+                        <Grid Grid.Row="6" Margin="0,0,0,8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="82"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="SHA-1" Style="{StaticResource HashLabel}"/>
+                            <TextBox   Grid.Column="1" x:Name="TxtSha1" Style="{StaticResource MonoBox}"/>
+                            <Button    Grid.Column="2" Style="{StaticResource CopyBtn}" Click="CopySha1"/>
+                        </Grid>
+
+                        <!-- SHA-256 -->
+                        <Grid Grid.Row="7" Margin="0,0,0,8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="82"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="SHA-256" Style="{StaticResource HashLabel}"/>
+                            <TextBox   Grid.Column="1" x:Name="TxtSha256" Style="{StaticResource MonoBox}"/>
+                            <Button    Grid.Column="2" Style="{StaticResource CopyBtn}" Click="CopySha256"/>
+                        </Grid>
+
+                        <!-- SHA-512 -->
+                        <Grid Grid.Row="8" Margin="0,0,0,8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="82"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="SHA-512" Style="{StaticResource HashLabel}"/>
+                            <TextBox   Grid.Column="1" x:Name="TxtSha512" Style="{StaticResource MonoBox}"/>
+                            <Button    Grid.Column="2" Style="{StaticResource CopyBtn}" Click="CopySha512"/>
+                        </Grid>
+
+                        <!-- HMAC-SHA256 -->
+                        <Grid Grid.Row="9" Margin="0,0,0,8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="82"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="HMAC-256" Style="{StaticResource HashLabel}"/>
+                            <TextBox   Grid.Column="1" x:Name="TxtHmac" Style="{StaticResource MonoBox}"/>
+                            <Button    Grid.Column="2" Style="{StaticResource CopyBtn}" Click="CopyHmac"/>
+                        </Grid>
+                    </Grid>
+                </ScrollViewer>
+            </TabItem>
+
+            <!-- ════ 인코딩 탭 ══════════════════════════════════ -->
+            <TabItem Header="  인코딩  ">
+                <Grid Margin="24,18,24,18" Background="#0F0F1C">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="160"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- 방식 선택 -->
+                    <TextBlock Grid.Row="0" Text="방식" Style="{StaticResource SecLabel}"/>
+                    <ComboBox Grid.Row="1" x:Name="CmbEncMode"
+                              Width="200" HorizontalAlignment="Left"
+                              Margin="0,0,0,12"
+                              SelectionChanged="EncMode_Changed">
+                        <ComboBoxItem Content="Base64" IsSelected="True"/>
+                        <ComboBoxItem Content="URL 인코딩"/>
+                        <ComboBoxItem Content="Hex"/>
+                        <ComboBoxItem Content="HTML Entity"/>
+                    </ComboBox>
+
+                    <!-- 입력 -->
+                    <TextBox Grid.Row="2" x:Name="TxtEncIn"
+                             AcceptsReturn="True" TextWrapping="Wrap"
+                             VerticalScrollBarVisibility="Auto"/>
+
+                    <!-- 버튼 -->
+                    <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="0,10,0,10">
+                        <Button Content="인코딩  →" Style="{StaticResource AccentBtn}" Click="DoEncode" Margin="0,0,8,0"/>
+                        <Button Content="←  디코딩" Click="DoDecode"/>
+                    </StackPanel>
+
+                    <!-- 출력 레이블 -->
+                    <Grid Grid.Row="4" Margin="0,0,0,6">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="결과" Style="{StaticResource SecLabel}" Margin="0"/>
+                        <Button    Grid.Column="1" Style="{StaticResource CopyBtn}"
+                                   Content="📋 복사" Width="70" Click="CopyEncOut"/>
+                    </Grid>
+
+                    <!-- 출력 -->
+                    <TextBox Grid.Row="5" x:Name="TxtEncOut"
+                             AcceptsReturn="True" TextWrapping="Wrap"
+                             VerticalScrollBarVisibility="Auto"
+                             IsReadOnly="True"
+                             FontFamily="Consolas, Courier New"/>
+                </Grid>
+            </TabItem>
+
+            <!-- ════ JWT 탭 ═════════════════════════════════════ -->
+            <TabItem Header="  JWT  ">
+                <Grid Margin="24,18,24,18" Background="#0F0F1C">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="90"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Text="JWT 토큰 붙여넣기" Style="{StaticResource SecLabel}"/>
+                    <TextBox Grid.Row="1" x:Name="TxtJwtIn"
+                             AcceptsReturn="False" TextWrapping="Wrap"
+                             VerticalScrollBarVisibility="Auto"
+                             TextChanged="Jwt_Changed"/>
+
+                    <!-- 정보 배너 -->
+                    <Border Grid.Row="2" x:Name="JwtInfoBorder"
+                            Background="#12122A" CornerRadius="5"
+                            Margin="0,8,0,8" Padding="12,8"
+                            Visibility="Collapsed">
+                        <TextBlock x:Name="TxtJwtInfo"
+                                   Foreground="#A0A0D8" FontSize="10"
+                                   TextWrapping="Wrap"/>
+                    </Border>
+
+                    <TextBlock Grid.Row="3" Text="헤더" Style="{StaticResource SecLabel}"/>
+                    <TextBox Grid.Row="4" x:Name="TxtJwtHeader"
+                             Style="{StaticResource MonoBox}"
+                             AcceptsReturn="True" TextWrapping="Wrap"
+                             VerticalScrollBarVisibility="Auto"
+                             Margin="0,0,0,8"/>
+
+                    <TextBlock Grid.Row="5" Text="페이로드" Style="{StaticResource SecLabel}"
+                               Margin="0,8,0,6" VerticalAlignment="Bottom"/>
+
+                    <TextBox x:Name="TxtJwtPayload"
+                             Grid.Row="6"
+                             Style="{StaticResource MonoBox}"
+                             AcceptsReturn="True" TextWrapping="Wrap"
+                             VerticalScrollBarVisibility="Auto"
+                             MinHeight="80"/>
+
+                    <!-- 서명 -->
+                    <Grid Grid.Row="7" Margin="0,10,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="60"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="서명:" Style="{StaticResource HashLabel}"/>
+                        <TextBox   Grid.Column="1" x:Name="TxtJwtSig"
+                                   Style="{StaticResource MonoBox}"
+                                   FontSize="9.5"/>
+                    </Grid>
+                </Grid>
+            </TabItem>
+
+            <!-- ════ 생성기 탭 ══════════════════════════════════ -->
+            <TabItem Header="  생성기  ">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" Background="#0F0F1C">
+                    <StackPanel Margin="24,18,24,18">
+
+                        <!-- UUID -->
+                        <TextBlock Text="UUID v4" Style="{StaticResource SecLabel}"/>
+                        <Grid Margin="0,0,0,20">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox Grid.Column="0" x:Name="TxtUuid"
+                                     Style="{StaticResource MonoBox}" IsReadOnly="True"/>
+                            <Button  Grid.Column="1" Content="생성" Width="56" Margin="6,0,0,0" Click="GenUuid"/>
+                            <Button  Grid.Column="2" Style="{StaticResource CopyBtn}" Click="CopyUuid"/>
+                        </Grid>
+
+                        <!-- ULID -->
+                        <TextBlock Text="ULID" Style="{StaticResource SecLabel}"/>
+                        <Grid Margin="0,0,0,28">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox Grid.Column="0" x:Name="TxtUlid"
+                                     Style="{StaticResource MonoBox}" IsReadOnly="True"/>
+                            <Button  Grid.Column="1" Content="생성" Width="56" Margin="6,0,0,0" Click="GenUlid"/>
+                            <Button  Grid.Column="2" Style="{StaticResource CopyBtn}" Click="CopyUlid"/>
+                        </Grid>
+
+                        <!-- 비밀번호 구분선 -->
+                        <Border Height="1" Background="#252540" Margin="0,0,0,18"/>
+
+                        <!-- 비밀번호 생성기 -->
+                        <TextBlock Text="비밀번호 생성기" Style="{StaticResource SecLabel}"/>
+
+                        <!-- 길이 슬라이더 -->
+                        <Grid Margin="0,0,0,12">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="60"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="40"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="길이:" VerticalAlignment="Center"
+                                       Foreground="#8080B0"/>
+                            <Slider    Grid.Column="1" x:Name="SldPwLen"
+                                       Minimum="6" Maximum="64" Value="16"
+                                       VerticalAlignment="Center"
+                                       ValueChanged="PwOptions_Changed"/>
+                            <TextBlock Grid.Column="2" x:Name="TxtPwLen"
+                                       Text="16" VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"
+                                       Foreground="#B0A0FF"/>
+                        </Grid>
+
+                        <!-- 옵션 체크박스 -->
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,14">
+                            <CheckBox x:Name="ChkUpper"   Content="대문자 (A-Z)"   IsChecked="True" Margin="0,0,18,0" Checked="PwOptions_Changed" Unchecked="PwOptions_Changed"/>
+                            <CheckBox x:Name="ChkDigits"  Content="숫자 (0-9)"     IsChecked="True" Margin="0,0,18,0" Checked="PwOptions_Changed" Unchecked="PwOptions_Changed"/>
+                            <CheckBox x:Name="ChkSpecial" Content="특수문자 (!@#)" IsChecked="True" Checked="PwOptions_Changed" Unchecked="PwOptions_Changed"/>
+                        </StackPanel>
+
+                        <!-- 결과 + 복사 -->
+                        <Grid Margin="0,0,0,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox Grid.Column="0" x:Name="TxtPwResult"
+                                     Style="{StaticResource MonoBox}"
+                                     FontSize="12" IsReadOnly="True"/>
+                            <Button  Grid.Column="1" Content="생성" Width="56" Margin="6,0,0,0" Click="GenPw"/>
+                            <Button  Grid.Column="2" Style="{StaticResource CopyBtn}" Click="CopyPw"/>
+                        </Grid>
+
+                        <!-- 강도 바 -->
+                        <Grid Margin="0,0,0,4">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Border Grid.Column="0" x:Name="Str0" Height="5" CornerRadius="2" Background="#252540"/>
+                            <Border Grid.Column="1" x:Name="Str1" Height="5" CornerRadius="2" Background="#252540" Margin="3,0,0,0"/>
+                            <Border Grid.Column="2" x:Name="Str2" Height="5" CornerRadius="2" Background="#252540" Margin="3,0,0,0"/>
+                            <Border Grid.Column="3" x:Name="Str3" Height="5" CornerRadius="2" Background="#252540" Margin="3,0,0,0"/>
+                        </Grid>
+                        <TextBlock x:Name="TxtStrLabel" Text="" FontSize="9"
+                                   Foreground="#8080B0" Margin="0,4,0,0"/>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+
+        </TabControl>
+    </Grid>
+</Window>

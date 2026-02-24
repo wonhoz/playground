@@ -28,8 +28,8 @@ public sealed class SettingsWindow : Form
         _onSave = onSave;
 
         Text = "Toast.Cast \u2014 루틴 설정";
-        Size = new Size(700, 780);
-        MinimumSize = new Size(660, 700);
+        Size = new Size(700, 800);
+        MinimumSize = new Size(660, 720);
         BackColor = Color.FromArgb(26, 26, 36);
         ForeColor = Color.FromArgb(230, 230, 235);
         Font = new Font("Segoe UI", 9.5f);

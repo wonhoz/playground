@@ -22,8 +22,8 @@ public sealed class StatsWindow : Form
 
     private StatsWindow(AppConfig config)
     {
-        Text = "Toast.Cast — 주간 통계";
-        Size = new Size(480, 480);
+        Text = "Toast.Cast \u2014 주간 통계";
+        Size = new Size(560, 520);
         BackColor = Color.FromArgb(26, 26, 36);
         ForeColor = Color.FromArgb(230, 230, 235);
         Font = new Font("Segoe UI", 9.5f);
@@ -34,42 +34,42 @@ public sealed class StatsWindow : Form
         var header = new Label
         {
             Text = "📊 이번 주 건강 루틴 달성률",
-            Font = new Font("Segoe UI", 13f, FontStyle.Bold),
+            Font = new Font("Segoe UI", 14f, FontStyle.Bold),
             ForeColor = Color.FromArgb(100, 220, 150),
             AutoSize = true,
-            Location = new Point(20, 16)
+            Location = new Point(22, 20)
         };
 
         var weekLabel = new Label
         {
             Text = GetWeekRange(),
-            Font = new Font("Segoe UI", 9f),
+            Font = new Font("Segoe UI", 9.5f),
             ForeColor = Color.FromArgb(120, 120, 140),
             AutoSize = true,
-            Location = new Point(20, 44)
+            Location = new Point(22, 54)
         };
 
         Controls.Add(header);
         Controls.Add(weekLabel);
 
         var stats = StatsService.GetWeeklyStats(config.Routines);
-        var y = 76;
+        var y = 90;
         foreach (var (routineId, stat) in stats)
         {
             var routine = config.Routines.FirstOrDefault(r => r.Id == routineId);
             if (routine == null) continue;
             Controls.Add(CreateStatRow(stat, y));
-            y += 72;
+            y += 88;  // 패널 76px + 간격 12px
         }
 
-        // 닫기 버튼
         var btnClose = new Button
         {
             Text = "닫기",
-            Bounds = new Rectangle(Width / 2 - 60, y + 20, 120, 34),
+            Bounds = new Rectangle(Width / 2 - 70, y + 18, 140, 42),
             BackColor = Color.FromArgb(45, 45, 62),
             ForeColor = Color.FromArgb(200, 200, 215),
             FlatStyle = FlatStyle.Flat,
+            Font = new Font("Segoe UI", 9.5f),
             Cursor = Cursors.Hand
         };
         btnClose.FlatAppearance.BorderColor = Color.FromArgb(60, 60, 80);
@@ -77,6 +77,7 @@ public sealed class StatsWindow : Form
         btnClose.Click += (_, _) => Close();
         Controls.Add(btnClose);
 
+        // 동적 높이: 마지막 행 y + 닫기 버튼(42) + 여백
         Height = y + 120;
     }
 
@@ -84,7 +85,7 @@ public sealed class StatsWindow : Form
     {
         var panel = new Panel
         {
-            Bounds = new Rectangle(16, y, Width - 48, 64),
+            Bounds = new Rectangle(16, y, Width - 48, 76),
             BackColor = Color.FromArgb(32, 32, 46)
         };
 
@@ -99,7 +100,7 @@ public sealed class StatsWindow : Form
             Font = new Font("Segoe UI", 10.5f, FontStyle.Bold),
             ForeColor = Color.FromArgb(220, 220, 230),
             AutoSize = true,
-            Location = new Point(12, 8)
+            Location = new Point(14, 10)
         };
 
         var lblRate = new Label
@@ -108,20 +109,18 @@ public sealed class StatsWindow : Form
             Font = new Font("Segoe UI", 9.5f, FontStyle.Bold),
             ForeColor = color,
             AutoSize = true,
-            Location = new Point(panel.Width - 140, 8)
+            Location = new Point(panel.Width - 155, 10)
         };
 
-        // 진행 바 배경
         var barBg = new Panel
         {
-            Bounds = new Rectangle(12, 36, panel.Width - 24, 10),
+            Bounds = new Rectangle(14, 46, panel.Width - 28, 12),
             BackColor = Color.FromArgb(50, 50, 65)
         };
 
-        // 진행 바
         var barFill = new Panel
         {
-            Bounds = new Rectangle(0, 0, (int)((barBg.Width - 0) * Math.Min(stat.Rate, 1.0)), 10),
+            Bounds = new Rectangle(0, 0, (int)(barBg.Width * Math.Min(stat.Rate, 1.0)), 12),
             BackColor = color
         };
         barBg.Controls.Add(barFill);

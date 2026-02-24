@@ -47,6 +47,7 @@ public sealed class SettingsWindow : Form
             Location = new Point(22, 18)
         };
 
+        // 카드 4개 × (128 + 8) = 544px < 568px → 스크롤바 없음
         _routinePanel = new FlowLayoutPanel
         {
             FlowDirection = FlowDirection.TopDown,
@@ -65,9 +66,9 @@ public sealed class SettingsWindow : Form
             Location = new Point(22, 648)
         };
         var (idlePanel, getIdleValue) = CreateDarkSpinner(1, 30, _config.IdleThresholdMinutes, _ => { });
-        idlePanel.Location = new Point(254, 640);
+        idlePanel.Location = new Point(252, 638);  // 스피너 중심 = 638+18=656, 레이블 중심 = 648+8=656 ✓
 
-        var btnSave = CreateButton("\U0001F4BE  저장", new Rectangle(452, 688, 190, 52), Color.FromArgb(60, 150, 100));
+        var btnSave = CreateButton("\U0001F4BE  저장", new Rectangle(450, 680, 192, 52), Color.FromArgb(60, 150, 100));
         btnSave.Font = new Font("Segoe UI", 10.5f);
         btnSave.Click += (_, _) =>
         {
@@ -90,12 +91,11 @@ public sealed class SettingsWindow : Form
 
     private Panel CreateRoutineCard(Routine routine)
     {
-        // 카드: 패널 폭 624 - 좌우 margin 4*2 = 616
         var card = new Panel
         {
-            Size = new Size(612, 140),
+            Size = new Size(612, 128),
             BackColor = Color.FromArgb(34, 34, 48),
-            Margin = new Padding(4, 0, 4, 12),
+            Margin = new Padding(4, 0, 4, 8),
             Cursor = Cursors.Default
         };
 
@@ -105,7 +105,7 @@ public sealed class SettingsWindow : Form
             Font = new Font("Segoe UI", 12f, FontStyle.Bold),
             ForeColor = Color.FromArgb(230, 230, 235),
             AutoSize = true,
-            Location = new Point(16, 14)
+            Location = new Point(16, 12)
         };
 
         var lblDesc = new Label
@@ -114,11 +114,11 @@ public sealed class SettingsWindow : Form
             Font = new Font("Segoe UI", 9f),
             ForeColor = Color.FromArgb(130, 130, 150),
             AutoSize = false,
-            Size = new Size(430, 40),
-            Location = new Point(16, 52)
+            Size = new Size(420, 36),
+            Location = new Point(16, 46)
         };
 
-        // 활성 토글 — Appearance.Button + 명시적 Size/Font
+        // TextAlign = MiddleCenter: 텍스트 버튼 가로/세로 정중앙
         var chkEnabled = new CheckBox
         {
             Text = "활성",
@@ -126,9 +126,10 @@ public sealed class SettingsWindow : Form
             Appearance = Appearance.Button,
             FlatStyle = FlatStyle.Flat,
             Font = new Font("Segoe UI", 9.5f),
+            TextAlign = ContentAlignment.MiddleCenter,
             ForeColor = Color.FromArgb(180, 180, 200),
             BackColor = Color.FromArgb(38, 38, 54),
-            Size = new Size(90, 36),
+            Size = new Size(90, 34),
             Location = new Point(508, 10),
             Cursor = Cursors.Hand
         };
@@ -138,17 +139,16 @@ public sealed class SettingsWindow : Form
         chkEnabled.FlatAppearance.BorderSize = 1;
         chkEnabled.CheckedChanged += (_, _) => { routine.Enabled = chkEnabled.Checked; };
 
-        // 하단 행: 간격 스피너 + 카운트다운
         var lblInterval = new Label
         {
             Text = "간격(분):",
             Font = new Font("Segoe UI", 9f),
             ForeColor = Color.FromArgb(150, 150, 170),
             AutoSize = true,
-            Location = new Point(16, 102)
+            Location = new Point(16, 88)
         };
         var (spPanel, _) = CreateDarkSpinner(1, 480, routine.IntervalMinutes, v => { routine.IntervalMinutes = v; });
-        spPanel.Location = new Point(100, 96);
+        spPanel.Location = new Point(100, 82);
 
         var chkCountdown = new CheckBox
         {
@@ -157,10 +157,11 @@ public sealed class SettingsWindow : Form
             Appearance = Appearance.Button,
             FlatStyle = FlatStyle.Flat,
             Font = new Font("Segoe UI", 9.5f),
+            TextAlign = ContentAlignment.MiddleCenter,
             ForeColor = Color.FromArgb(180, 180, 200),
             BackColor = Color.FromArgb(38, 38, 54),
             Size = new Size(170, 36),
-            Location = new Point(230, 96),
+            Location = new Point(228, 82),
             Cursor = Cursors.Hand
         };
         chkCountdown.FlatAppearance.CheckedBackColor = Color.FromArgb(28, 90, 58);
@@ -183,30 +184,21 @@ public sealed class SettingsWindow : Form
 
     /// <summary>
     /// 다크 테마 커스텀 스피너 [ - | val | + ]
-    /// Label 기반: AutoSize=false 필수 (기본값 true이면 Bounds의 Size가 무시됨)
+    /// Panel+GDI+ DrawString: StringAlignment.Center + LineAlignment.Center → 픽셀 완벽 정중앙
     /// </summary>
     private static (Panel panel, Func<int> getValue) CreateDarkSpinner(int min, int max, int initial, Action<int> onChange)
     {
         var val = initial;
         var btnBg  = Color.FromArgb(40, 40, 60);
         var btnHov = Color.FromArgb(64, 64, 90);
-        var divCol = Color.FromArgb(58, 58, 80);   // 컨테이너 BackColor = 1px 갭 → 보더+구분선
+        var divCol = Color.FromArgb(58, 58, 80);  // 컨테이너 BackColor: 1px 갭 = 보더+구분선
 
+        // 컨테이너(114×36): BackColor가 1px 갭에 노출되어 보더+구분선 형성
+        // pMinus(37px) | gap(1px) | lblVal(36px) | gap(1px) | pPlus(37px) = 1+37+1+36+1+37+1=114
         var container = new Panel { Size = new Size(114, 36), BackColor = divCol };
 
-        // AutoSize = false 필수: 설정 안 하면 WinForms가 Bounds의 크기를 무시하고
-        // 텍스트 크기에 맞게 Label을 축소시켜 "-"/"+"가 1~2px 크기로 렌더링됨
-        var lblMinus = new Label
-        {
-            Text = "-",
-            Font = new Font("Segoe UI", 16f, FontStyle.Bold),
-            ForeColor = Color.FromArgb(215, 215, 245),
-            BackColor = btnBg,
-            TextAlign = ContentAlignment.MiddleCenter,
-            AutoSize = false,
-            Bounds = new Rectangle(1, 1, 38, 34),
-            Cursor = Cursors.Hand
-        };
+        var pMinus = CreateSpinButton("-", btnBg, btnHov, new Rectangle(1, 1, 37, 34));
+        var pPlus  = CreateSpinButton("+", btnBg, btnHov, new Rectangle(76, 1, 37, 34));
 
         var lblVal = new Label
         {
@@ -215,32 +207,37 @@ public sealed class SettingsWindow : Form
             ForeColor = Color.FromArgb(215, 215, 235),
             BackColor = Color.FromArgb(24, 24, 40),
             TextAlign = ContentAlignment.MiddleCenter,
-            AutoSize = false,
-            Bounds = new Rectangle(40, 1, 34, 34)
+            AutoSize = false,    // 필수: false 아니면 Bounds.Size 무시됨
+            Bounds = new Rectangle(39, 1, 36, 34)
         };
 
-        var lblPlus = new Label
-        {
-            Text = "+",
-            Font = new Font("Segoe UI", 16f, FontStyle.Bold),
-            ForeColor = Color.FromArgb(215, 215, 245),
-            BackColor = btnBg,
-            TextAlign = ContentAlignment.MiddleCenter,
-            AutoSize = false,
-            Bounds = new Rectangle(75, 1, 38, 34),
-            Cursor = Cursors.Hand
-        };
+        pMinus.Click += (_, _) => { if (val > min) { val--; lblVal.Text = val.ToString(); onChange(val); } };
+        pPlus.Click  += (_, _) => { if (val < max) { val++; lblVal.Text = val.ToString(); onChange(val); } };
 
-        lblMinus.Click += (_, _) => { if (val > min) { val--; lblVal.Text = val.ToString(); onChange(val); } };
-        lblPlus.Click  += (_, _) => { if (val < max) { val++; lblVal.Text = val.ToString(); onChange(val); } };
-
-        lblMinus.MouseEnter += (_, _) => lblMinus.BackColor = btnHov;
-        lblMinus.MouseLeave += (_, _) => lblMinus.BackColor = btnBg;
-        lblPlus.MouseEnter  += (_, _) => lblPlus.BackColor  = btnHov;
-        lblPlus.MouseLeave  += (_, _) => lblPlus.BackColor  = btnBg;
-
-        container.Controls.AddRange(new Control[] { lblMinus, lblVal, lblPlus });
+        container.Controls.AddRange(new Control[] { pMinus, lblVal, pPlus });
         return (container, () => val);
+    }
+
+    /// <summary>스피너 버튼 패널: GDI+ DrawString으로 텍스트 정중앙 보장</summary>
+    private static Panel CreateSpinButton(string text, Color bg, Color hov, Rectangle bounds)
+    {
+        var panel = new Panel { Bounds = bounds, BackColor = bg, Cursor = Cursors.Hand };
+        panel.Paint += (_, e) =>
+        {
+            e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+            e.Graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
+            using var font  = new Font("Segoe UI", 15f, FontStyle.Bold);
+            using var brush = new SolidBrush(Color.FromArgb(215, 215, 245));
+            using var sf    = new StringFormat
+            {
+                Alignment     = StringAlignment.Center,
+                LineAlignment = StringAlignment.Center   // 세로 정중앙 보장
+            };
+            e.Graphics.DrawString(text, font, brush, new RectangleF(0, 0, panel.Width, panel.Height), sf);
+        };
+        panel.MouseEnter += (_, _) => { panel.BackColor = hov; panel.Invalidate(); };
+        panel.MouseLeave += (_, _) => { panel.BackColor = bg;  panel.Invalidate(); };
+        return panel;
     }
 
     private static Button CreateButton(string text, Rectangle bounds, Color backColor)

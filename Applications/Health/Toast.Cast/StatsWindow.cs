@@ -52,13 +52,14 @@ public sealed class StatsWindow : Form
         Controls.Add(header);
         Controls.Add(weekLabel);
 
+        var panelW = ClientSize.Width - 40;  // 좌 20px = 우 20px 대칭
         var stats = StatsService.GetWeeklyStats(config.Routines);
         var y = 98;  // weekLabel 하단(~76) → 여백 22px
         foreach (var (routineId, stat) in stats)
         {
             var routine = config.Routines.FirstOrDefault(r => r.Id == routineId);
             if (routine == null) continue;
-            Controls.Add(CreateStatRow(stat, y));
+            Controls.Add(CreateStatRow(stat, y, panelW));
             y += 88;  // 패널 76px + 간격 12px
         }
 
@@ -81,12 +82,11 @@ public sealed class StatsWindow : Form
         Height = y + 140;
     }
 
-    private Panel CreateStatRow(WeeklyRoutineStat stat, int y)
+    private Panel CreateStatRow(WeeklyRoutineStat stat, int y, int panelW)
     {
-        // 좌우 여백: x=20, width=518 → client(558)-20*2=518, 좌 20px = 우 20px
         var panel = new Panel
         {
-            Bounds = new Rectangle(20, y, 518, 76),
+            Bounds = new Rectangle(20, y, panelW, 76),
             BackColor = Color.FromArgb(32, 32, 46)
         };
 

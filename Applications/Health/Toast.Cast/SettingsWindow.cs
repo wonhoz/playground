@@ -28,8 +28,8 @@ public sealed class SettingsWindow : Form
         _onSave = onSave;
 
         Text = "Toast.Cast \u2014 루틴 설정";
-        Size = new Size(660, 780);
-        MinimumSize = new Size(620, 700);
+        Size = new Size(700, 780);
+        MinimumSize = new Size(660, 700);
         BackColor = Color.FromArgb(26, 26, 36);
         ForeColor = Color.FromArgb(230, 230, 235);
         Font = new Font("Segoe UI", 9.5f);
@@ -38,23 +38,27 @@ public sealed class SettingsWindow : Form
         StartPosition = FormStartPosition.CenterScreen;
         ShowInTaskbar = true;
 
+        // OS/DPI마다 FixedSingle 창 테두리 폭이 다름 → ClientSize로 실제 클라이언트 폭 확인
+        var cw = ClientSize.Width;
+        var margin = 18;
+        var panelW = cw - margin * 2;  // 좌 18px = 우 18px 대칭
+
         var header = new Label
         {
             Text = "\U0001F49A 루틴 설정",
             Font = new Font("Segoe UI", 16f, FontStyle.Bold),
             ForeColor = Color.FromArgb(100, 220, 150),
             AutoSize = true,
-            Location = new Point(22, 18)
+            Location = new Point(margin + 4, 18)
         };
 
-        // 카드 4개 × (128 + 8) = 544px < 568px → 스크롤바 없음
-        // 좌우 여백: client(658) - x(18)*2 = 622 → 좌 18px = 우 18px
+        // AutoScroll = false: 스크롤바 트랙 공간 예약 없이 panelW 전체 사용 가능
         _routinePanel = new FlowLayoutPanel
         {
             FlowDirection = FlowDirection.TopDown,
             WrapContents = false,
-            AutoScroll = true,
-            Bounds = new Rectangle(18, 64, 622, 568),
+            AutoScroll = false,
+            Bounds = new Rectangle(margin, 72, panelW, 560),
             BackColor = Color.FromArgb(26, 26, 36)
         };
 
@@ -64,13 +68,14 @@ public sealed class SettingsWindow : Form
             Font = new Font("Segoe UI", 9.5f),
             ForeColor = Color.FromArgb(160, 160, 180),
             AutoSize = true,
-            Location = new Point(22, 648)
+            Location = new Point(margin + 4, 656)
         };
         var (idlePanel, getIdleValue) = CreateDarkSpinner(1, 30, _config.IdleThresholdMinutes, _ => { });
-        idlePanel.Location = new Point(252, 638);  // 스피너 중심 = 638+18=656, 레이블 중심 = 648+8=656 ✓
+        idlePanel.Location = new Point(252, 646);
 
-        // 저장 버튼 우측/하단 여백: right=22px, bottom=22px (client 658×748 기준)
-        var btnSave = CreateButton("\U0001F4BE  저장", new Rectangle(444, 674, 192, 52), Color.FromArgb(60, 150, 100));
+        // 저장 버튼: 우측 22px, 하단 22px 여백 (ClientSize 기준)
+        var btnSaveX = cw - 192 - 22;
+        var btnSave = CreateButton("\U0001F4BE  저장", new Rectangle(btnSaveX, 682, 192, 52), Color.FromArgb(60, 150, 100));
         btnSave.Font = new Font("Segoe UI", 10.5f);
         btnSave.Click += (_, _) =>
         {
@@ -93,9 +98,11 @@ public sealed class SettingsWindow : Form
 
     private Panel CreateRoutineCard(Routine routine)
     {
+        // cardW: 실제 패널 폭 기반 → DPI/OS 무관하게 좌우 여백 대칭
+        var cardW = _routinePanel.Width - 8;  // 4px 카드 마진 양쪽
         var card = new Panel
         {
-            Size = new Size(614, 128),  // 614+4+4=622 = 패널 폭 (좌우 여백 동일)
+            Size = new Size(cardW, 128),
             BackColor = Color.FromArgb(34, 34, 48),
             Margin = new Padding(4, 0, 4, 8),
             Cursor = Cursors.Default
@@ -116,11 +123,11 @@ public sealed class SettingsWindow : Form
             Font = new Font("Segoe UI", 9f),
             ForeColor = Color.FromArgb(130, 130, 150),
             AutoSize = false,
-            Size = new Size(420, 36),
+            Size = new Size(Math.Max(200, cardW - 130), 36),  // 우측 활성 버튼 영역 확보
             Location = new Point(16, 46)
         };
 
-        // TextAlign = MiddleCenter: 텍스트 버튼 가로/세로 정중앙
+        // 활성 버튼: 카드 우측 12px 여백 (고정 x 아닌 cardW 기준 우정렬)
         var chkEnabled = new CheckBox
         {
             Text = "활성",
@@ -132,7 +139,7 @@ public sealed class SettingsWindow : Form
             ForeColor = Color.FromArgb(180, 180, 200),
             BackColor = Color.FromArgb(38, 38, 54),
             Size = new Size(90, 34),
-            Location = new Point(508, 10),
+            Location = new Point(cardW - 102, 10),  // 우측 12px 여백
             Cursor = Cursors.Hand
         };
         chkEnabled.FlatAppearance.CheckedBackColor = Color.FromArgb(28, 90, 58);
@@ -184,19 +191,13 @@ public sealed class SettingsWindow : Form
         return card;
     }
 
-    /// <summary>
-    /// 다크 테마 커스텀 스피너 [ - | val | + ]
-    /// Panel+GDI+ DrawString: StringAlignment.Center + LineAlignment.Center → 픽셀 완벽 정중앙
-    /// </summary>
     private static (Panel panel, Func<int> getValue) CreateDarkSpinner(int min, int max, int initial, Action<int> onChange)
     {
         var val = initial;
         var btnBg  = Color.FromArgb(40, 40, 60);
         var btnHov = Color.FromArgb(64, 64, 90);
-        var divCol = Color.FromArgb(58, 58, 80);  // 컨테이너 BackColor: 1px 갭 = 보더+구분선
+        var divCol = Color.FromArgb(58, 58, 80);
 
-        // 컨테이너(114×36): BackColor가 1px 갭에 노출되어 보더+구분선 형성
-        // pMinus(37px) | gap(1px) | lblVal(36px) | gap(1px) | pPlus(37px) = 1+37+1+36+1+37+1=114
         var container = new Panel { Size = new Size(114, 36), BackColor = divCol };
 
         var pMinus = CreateSpinButton("-", btnBg, btnHov, new Rectangle(1, 1, 37, 34));
@@ -209,7 +210,7 @@ public sealed class SettingsWindow : Form
             ForeColor = Color.FromArgb(215, 215, 235),
             BackColor = Color.FromArgb(24, 24, 40),
             TextAlign = ContentAlignment.MiddleCenter,
-            AutoSize = false,    // 필수: false 아니면 Bounds.Size 무시됨
+            AutoSize = false,
             Bounds = new Rectangle(39, 1, 36, 34)
         };
 
@@ -220,7 +221,6 @@ public sealed class SettingsWindow : Form
         return (container, () => val);
     }
 
-    /// <summary>스피너 버튼 패널: GDI+ DrawString으로 텍스트 정중앙 보장</summary>
     private static Panel CreateSpinButton(string text, Color bg, Color hov, Rectangle bounds)
     {
         var panel = new Panel { Bounds = bounds, BackColor = bg, Cursor = Cursors.Hand };
@@ -233,7 +233,7 @@ public sealed class SettingsWindow : Form
             using var sf    = new StringFormat
             {
                 Alignment     = StringAlignment.Center,
-                LineAlignment = StringAlignment.Center   // 세로 정중앙 보장
+                LineAlignment = StringAlignment.Center
             };
             e.Graphics.DrawString(text, font, brush, new RectangleF(0, 0, panel.Width, panel.Height), sf);
         };

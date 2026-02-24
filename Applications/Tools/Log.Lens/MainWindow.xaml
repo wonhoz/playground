@@ -100,21 +100,8 @@
             </Setter>
         </Style>
 
-        <!-- 체크박스 스타일 -->
-        <Style x:Key="DarkCheckBox" TargetType="CheckBox">
-            <Setter Property="Foreground" Value="#A0A0B0"/>
-            <Setter Property="FontSize" Value="12"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-        </Style>
-
-        <!-- 콤보박스 스타일 -->
-        <Style x:Key="DarkComboBox" TargetType="ComboBox">
-            <Setter Property="Background" Value="#1A1A2E"/>
-            <Setter Property="Foreground" Value="#E0E0E0"/>
-            <Setter Property="BorderBrush" Value="#333350"/>
-            <Setter Property="FontSize" Value="12"/>
-            <Setter Property="Padding" Value="6,4"/>
-        </Style>
+        <!-- 체크박스/콤보박스: App.xaml 전역 스타일 사용 (ControlTemplate 포함)
+             x:Key 스타일로 덮어쓰면 App.xaml ControlTemplate이 무시됨 — 삭제 처리 -->
     </Window.Resources>
 
     <Grid>
@@ -139,9 +126,9 @@
                 </StackPanel>
                 <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" HorizontalAlignment="Right">
                     <CheckBox x:Name="ChkAutoScroll" Content="자동 스크롤" IsChecked="True"
-                              Style="{StaticResource DarkCheckBox}" Margin="0,0,12,0"/>
+                              Margin="0,0,12,0"/>
                     <CheckBox x:Name="ChkWordWrap" Content="줄 바꿈" IsChecked="False"
-                              Style="{StaticResource DarkCheckBox}" Unchecked="WordWrap_Changed" Checked="WordWrap_Changed"/>
+                              Unchecked="WordWrap_Changed" Checked="WordWrap_Changed"/>
                 </StackPanel>
             </DockPanel>
         </Border>
@@ -152,7 +139,7 @@
                 <StackPanel DockPanel.Dock="Right" Orientation="Horizontal" Margin="8,0,0,0">
                     <CheckBox x:Name="ChkRegex" Content="정규식" Style="{StaticResource DarkCheckBox}"
                               Margin="0,0,10,0"/>
-                    <ComboBox x:Name="CmbLevel" Style="{StaticResource DarkComboBox}" Width="100"
+                    <ComboBox x:Name="CmbLevel" Width="100"
                               SelectionChanged="LevelFilter_Changed">
                         <ComboBoxItem Content="모든 레벨" IsSelected="True"/>
                         <ComboBoxItem Content="TRACE+"/>

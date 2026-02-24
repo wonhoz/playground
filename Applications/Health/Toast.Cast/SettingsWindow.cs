@@ -134,9 +134,14 @@ public sealed class SettingsWindow : Form
             Text = "활성",
             Checked = routine.Enabled,
             ForeColor = Color.FromArgb(180, 180, 200),
+            BackColor = Color.FromArgb(34, 34, 48),
+            FlatStyle = FlatStyle.Flat,
             AutoSize = true,
             Location = new Point(340, 10)
         };
+        chkEnabled.FlatAppearance.CheckedBackColor = Color.FromArgb(60, 150, 100);
+        chkEnabled.FlatAppearance.BorderColor = Color.FromArgb(80, 80, 110);
+        chkEnabled.FlatAppearance.MouseOverBackColor = Color.FromArgb(50, 50, 70);
         chkEnabled.CheckedChanged += (_, _) => { routine.Enabled = chkEnabled.Checked; };
 
         // 간격 입력
@@ -163,9 +168,14 @@ public sealed class SettingsWindow : Form
             Text = "카운트다운",
             Checked = routine.ShowCountdown,
             ForeColor = Color.FromArgb(180, 180, 200),
+            BackColor = Color.FromArgb(34, 34, 48),
+            FlatStyle = FlatStyle.Flat,
             AutoSize = true,
             Location = new Point(160, 64)
         };
+        chkCountdown.FlatAppearance.CheckedBackColor = Color.FromArgb(60, 150, 100);
+        chkCountdown.FlatAppearance.BorderColor = Color.FromArgb(80, 80, 110);
+        chkCountdown.FlatAppearance.MouseOverBackColor = Color.FromArgb(50, 50, 70);
         chkCountdown.CheckedChanged += (_, _) => { routine.ShowCountdown = chkCountdown.Checked; };
 
         card.Controls.AddRange([lblName, lblDesc, chkEnabled, lblInterval, spInterval, chkCountdown]);

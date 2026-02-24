@@ -28,9 +28,9 @@ public sealed class SettingsWindow : Form
         _config = config;
         _onSave = onSave;
 
-        Text = "Toast.Cast — 루틴 설정";
-        Size = new Size(560, 640);
-        MinimumSize = new Size(560, 560);
+        Text = "Toast.Cast \u2014 루틴 설정";
+        Size = new Size(560, 660);
+        MinimumSize = new Size(560, 580);
         BackColor = Color.FromArgb(26, 26, 36);
         ForeColor = Color.FromArgb(230, 230, 235);
         Font = new Font("Segoe UI", 9.5f);
@@ -42,7 +42,7 @@ public sealed class SettingsWindow : Form
         // 헤더
         var header = new Label
         {
-            Text = "💚 루틴 설정",
+            Text = "\U0001F49A 루틴 설정",
             Font = new Font("Segoe UI", 14f, FontStyle.Bold),
             ForeColor = Color.FromArgb(100, 220, 150),
             AutoSize = true,
@@ -65,13 +65,13 @@ public sealed class SettingsWindow : Form
             Text = "유휴 감지 기준 (분):",
             ForeColor = Color.FromArgb(160, 160, 180),
             AutoSize = true,
-            Location = new Point(20, 530)
+            Location = new Point(20, 534)
         };
         var (idlePanel, getIdleValue) = CreateDarkSpinner(1, 30, _config.IdleThresholdMinutes, _ => { });
-        idlePanel.Location = new Point(210, 526);
+        idlePanel.Location = new Point(218, 530);
 
         // 저장 버튼
-        var btnSave = CreateButton("💾  저장", new Rectangle(380, 568, 160, 38), Color.FromArgb(60, 150, 100));
+        var btnSave = CreateButton("\U0001F4BE  저장", new Rectangle(376, 572, 164, 42), Color.FromArgb(60, 150, 100));
         btnSave.Click += (_, _) =>
         {
             _config.IdleThresholdMinutes = getIdleValue();
@@ -118,11 +118,11 @@ public sealed class SettingsWindow : Form
             Font = new Font("Segoe UI", 8.5f),
             ForeColor = Color.FromArgb(130, 130, 150),
             AutoSize = false,
-            Size = new Size(376, 34),
+            Size = new Size(370, 34),
             Location = new Point(12, 38)
         };
 
-        // 활성화 토글 — Appearance.Button + 명시적 Size (AutoSize는 Korean 텍스트 측정 오류 있음)
+        // 활성화 토글 — Appearance.Button + 명시적 Size/Font (AutoSize는 Korean 텍스트 측정 오류 있음)
         var chkEnabled = new CheckBox
         {
             Text = "활성",
@@ -151,10 +151,10 @@ public sealed class SettingsWindow : Form
             AutoSize = true,
             Location = new Point(12, 76)
         };
-        var (spPanel, getIntervalValue) = CreateDarkSpinner(1, 480, routine.IntervalMinutes, v => { routine.IntervalMinutes = v; });
+        var (spPanel, _) = CreateDarkSpinner(1, 480, routine.IntervalMinutes, v => { routine.IntervalMinutes = v; });
         spPanel.Location = new Point(90, 74);
 
-        // 카운트다운 토글 — Appearance.Button + 명시적 Size
+        // 카운트다운 토글 — Appearance.Button + 충분한 Size (Korean 텍스트 클리핑 방지)
         var chkCountdown = new CheckBox
         {
             Text = "카운트다운",
@@ -164,7 +164,7 @@ public sealed class SettingsWindow : Form
             Font = new Font("Segoe UI", 9f),
             ForeColor = Color.FromArgb(180, 180, 200),
             BackColor = Color.FromArgb(38, 38, 54),
-            Size = new Size(120, 28),
+            Size = new Size(150, 28),
             Location = new Point(196, 72),
             Cursor = Cursors.Hand
         };
@@ -187,30 +187,31 @@ public sealed class SettingsWindow : Form
         return card;
     }
 
-    /// <summary>다크 테마 커스텀 스피너 [ − | val | + ]</summary>
+    /// <summary>다크 테마 커스텀 스피너 [ - | val | + ]</summary>
     private static (Panel panel, Func<int> getValue) CreateDarkSpinner(int min, int max, int initial, Action<int> onChange)
     {
         var val = initial;
 
         var panel = new Panel
         {
-            Size = new Size(92, 26),
+            Size = new Size(100, 28),
             BackColor = Color.FromArgb(24, 24, 38)
         };
 
         var btnMinus = new Button
         {
-            Text = "−",
+            Text = "-",
             FlatStyle = FlatStyle.Flat,
             BackColor = Color.FromArgb(40, 40, 58),
-            ForeColor = Color.FromArgb(180, 180, 210),
-            Bounds = new Rectangle(1, 1, 26, 24),
-            Font = new Font("Segoe UI", 10f, FontStyle.Bold),
+            ForeColor = Color.FromArgb(200, 200, 230),
+            Bounds = new Rectangle(1, 1, 30, 26),
+            Font = new Font("Segoe UI", 11f),
+            TextAlign = ContentAlignment.MiddleCenter,
             Cursor = Cursors.Hand,
             TabStop = false
         };
         btnMinus.FlatAppearance.BorderSize = 0;
-        btnMinus.FlatAppearance.MouseOverBackColor = Color.FromArgb(58, 58, 82);
+        btnMinus.FlatAppearance.MouseOverBackColor = Color.FromArgb(60, 60, 85);
 
         var lblVal = new Label
         {
@@ -218,7 +219,7 @@ public sealed class SettingsWindow : Form
             ForeColor = Color.FromArgb(215, 215, 235),
             BackColor = Color.FromArgb(24, 24, 38),
             TextAlign = ContentAlignment.MiddleCenter,
-            Bounds = new Rectangle(27, 0, 38, 26),
+            Bounds = new Rectangle(31, 0, 38, 28),
             Font = new Font("Segoe UI", 9f)
         };
 
@@ -227,14 +228,15 @@ public sealed class SettingsWindow : Form
             Text = "+",
             FlatStyle = FlatStyle.Flat,
             BackColor = Color.FromArgb(40, 40, 58),
-            ForeColor = Color.FromArgb(180, 180, 210),
-            Bounds = new Rectangle(65, 1, 26, 24),
-            Font = new Font("Segoe UI", 10f, FontStyle.Bold),
+            ForeColor = Color.FromArgb(200, 200, 230),
+            Bounds = new Rectangle(69, 1, 30, 26),
+            Font = new Font("Segoe UI", 11f),
+            TextAlign = ContentAlignment.MiddleCenter,
             Cursor = Cursors.Hand,
             TabStop = false
         };
         btnPlus.FlatAppearance.BorderSize = 0;
-        btnPlus.FlatAppearance.MouseOverBackColor = Color.FromArgb(58, 58, 82);
+        btnPlus.FlatAppearance.MouseOverBackColor = Color.FromArgb(60, 60, 85);
 
         btnMinus.Click += (_, _) =>
         {
@@ -247,11 +249,11 @@ public sealed class SettingsWindow : Form
 
         panel.Paint += (_, e) =>
         {
-            using var border = new Pen(Color.FromArgb(58, 58, 84), 1f);
+            using var border = new Pen(Color.FromArgb(60, 60, 86), 1f);
             e.Graphics.DrawRectangle(border, 0, 0, panel.Width - 1, panel.Height - 1);
-            using var div = new Pen(Color.FromArgb(50, 50, 72), 1f);
-            e.Graphics.DrawLine(div, 27, 1, 27, panel.Height - 2);
-            e.Graphics.DrawLine(div, 65, 1, 65, panel.Height - 2);
+            using var div = new Pen(Color.FromArgb(52, 52, 74), 1f);
+            e.Graphics.DrawLine(div, 31, 1, 31, panel.Height - 2);
+            e.Graphics.DrawLine(div, 69, 1, 69, panel.Height - 2);
         };
 
         panel.Controls.AddRange(new Control[] { btnMinus, lblVal, btnPlus });

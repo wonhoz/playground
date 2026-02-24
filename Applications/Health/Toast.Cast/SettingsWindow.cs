@@ -149,10 +149,10 @@ public sealed class SettingsWindow : Form
             Font = new Font("Segoe UI", 9f),
             ForeColor = Color.FromArgb(150, 150, 170),
             AutoSize = true,
-            Location = new Point(12, 76)
+            Location = new Point(12, 78)
         };
         var (spPanel, _) = CreateDarkSpinner(1, 480, routine.IntervalMinutes, v => { routine.IntervalMinutes = v; });
-        spPanel.Location = new Point(90, 74);
+        spPanel.Location = new Point(90, 72);
 
         // 카운트다운 토글 — Appearance.Button + 충분한 Size (Korean 텍스트 클리핑 방지)
         var chkCountdown = new CheckBox
@@ -187,77 +187,59 @@ public sealed class SettingsWindow : Form
         return card;
     }
 
-    /// <summary>다크 테마 커스텀 스피너 [ - | val | + ]</summary>
+    /// <summary>다크 테마 커스텀 스피너 [ - | val | + ] — Label 기반 (Button 텍스트 클리핑 없음)</summary>
     private static (Panel panel, Func<int> getValue) CreateDarkSpinner(int min, int max, int initial, Action<int> onChange)
     {
         var val = initial;
+        var btnBg  = Color.FromArgb(40, 40, 58);
+        var btnHov = Color.FromArgb(62, 62, 88);
+        var divCol = Color.FromArgb(56, 56, 78);   // 컨테이너 BackColor → 1px 갭이 보더/구분선으로 보임
 
-        var panel = new Panel
-        {
-            Size = new Size(100, 28),
-            BackColor = Color.FromArgb(24, 24, 38)
-        };
+        // 컨테이너: BackColor가 1px 갭에 노출되어 보더+구분선 역할
+        var container = new Panel { Size = new Size(100, 28), BackColor = divCol };
 
-        var btnMinus = new Button
+        var lblMinus = new Label
         {
             Text = "-",
-            FlatStyle = FlatStyle.Flat,
-            BackColor = Color.FromArgb(40, 40, 58),
-            ForeColor = Color.FromArgb(200, 200, 230),
-            Bounds = new Rectangle(1, 1, 30, 26),
-            Font = new Font("Segoe UI", 11f),
+            Font = new Font("Segoe UI", 14f, FontStyle.Bold),
+            ForeColor = Color.FromArgb(210, 210, 240),
+            BackColor = btnBg,
             TextAlign = ContentAlignment.MiddleCenter,
-            Cursor = Cursors.Hand,
-            TabStop = false
+            Bounds = new Rectangle(1, 1, 30, 26),
+            Cursor = Cursors.Hand
         };
-        btnMinus.FlatAppearance.BorderSize = 0;
-        btnMinus.FlatAppearance.MouseOverBackColor = Color.FromArgb(60, 60, 85);
 
         var lblVal = new Label
         {
             Text = val.ToString(),
+            Font = new Font("Segoe UI", 9f),
             ForeColor = Color.FromArgb(215, 215, 235),
-            BackColor = Color.FromArgb(24, 24, 38),
+            BackColor = Color.FromArgb(24, 24, 40),
             TextAlign = ContentAlignment.MiddleCenter,
-            Bounds = new Rectangle(31, 0, 38, 28),
-            Font = new Font("Segoe UI", 9f)
+            Bounds = new Rectangle(32, 1, 36, 26)
         };
 
-        var btnPlus = new Button
+        var lblPlus = new Label
         {
             Text = "+",
-            FlatStyle = FlatStyle.Flat,
-            BackColor = Color.FromArgb(40, 40, 58),
-            ForeColor = Color.FromArgb(200, 200, 230),
-            Bounds = new Rectangle(69, 1, 30, 26),
-            Font = new Font("Segoe UI", 11f),
+            Font = new Font("Segoe UI", 14f, FontStyle.Bold),
+            ForeColor = Color.FromArgb(210, 210, 240),
+            BackColor = btnBg,
             TextAlign = ContentAlignment.MiddleCenter,
-            Cursor = Cursors.Hand,
-            TabStop = false
-        };
-        btnPlus.FlatAppearance.BorderSize = 0;
-        btnPlus.FlatAppearance.MouseOverBackColor = Color.FromArgb(60, 60, 85);
-
-        btnMinus.Click += (_, _) =>
-        {
-            if (val > min) { val--; lblVal.Text = val.ToString(); onChange(val); }
-        };
-        btnPlus.Click += (_, _) =>
-        {
-            if (val < max) { val++; lblVal.Text = val.ToString(); onChange(val); }
+            Bounds = new Rectangle(69, 1, 30, 26),
+            Cursor = Cursors.Hand
         };
 
-        panel.Paint += (_, e) =>
-        {
-            using var border = new Pen(Color.FromArgb(60, 60, 86), 1f);
-            e.Graphics.DrawRectangle(border, 0, 0, panel.Width - 1, panel.Height - 1);
-            using var div = new Pen(Color.FromArgb(52, 52, 74), 1f);
-            e.Graphics.DrawLine(div, 31, 1, 31, panel.Height - 2);
-            e.Graphics.DrawLine(div, 69, 1, 69, panel.Height - 2);
-        };
+        lblMinus.Click += (_, _) => { if (val > min) { val--; lblVal.Text = val.ToString(); onChange(val); } };
+        lblPlus.Click  += (_, _) => { if (val < max) { val++; lblVal.Text = val.ToString(); onChange(val); } };
 
-        panel.Controls.AddRange(new Control[] { btnMinus, lblVal, btnPlus });
-        return (panel, () => val);
+        lblMinus.MouseEnter += (_, _) => lblMinus.BackColor = btnHov;
+        lblMinus.MouseLeave += (_, _) => lblMinus.BackColor = btnBg;
+        lblPlus.MouseEnter  += (_, _) => lblPlus.BackColor  = btnHov;
+        lblPlus.MouseLeave  += (_, _) => lblPlus.BackColor  = btnBg;
+
+        container.Controls.AddRange(new Control[] { lblMinus, lblVal, lblPlus });
+        return (container, () => val);
     }
 
     private static Button CreateButton(string text, Rectangle bounds, Color backColor)

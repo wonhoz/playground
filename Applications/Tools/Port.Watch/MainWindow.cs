@@ -11,6 +11,9 @@ public sealed class MainWindow : Form
     [DllImport("dwmapi.dll")]
     private static extern int DwmSetWindowAttribute(IntPtr hwnd, int attr, ref int attrValue, int attrSize);
 
+    [DllImport("uxtheme.dll", SetLastError = true, ExactSpelling = true, CharSet = CharSet.Unicode)]
+    private static extern int SetWindowTheme(IntPtr hWnd, string? pszSubAppName, string? pszSubIdList);
+
     private readonly DataGridView _grid;
     private readonly TextBox      _searchBox;
     private readonly Label        _statusLabel;
@@ -91,6 +94,7 @@ public sealed class MainWindow : Form
             ReadOnly = true,
             AllowUserToAddRows = false,
             AllowUserToResizeRows = false,
+            AllowUserToResizeColumns = true,
             RowHeadersVisible = false,
             EnableHeadersVisualStyles = false,
             Font = new Font("Segoe UI", 9.5f),
@@ -127,7 +131,7 @@ public sealed class MainWindow : Form
         AddCol("pid",     "PID",      65,  DataGridViewAutoSizeColumnMode.None,  DataGridViewContentAlignment.MiddleCenter);
         AddCol("state",   "상태",     120, DataGridViewAutoSizeColumnMode.None,  DataGridViewContentAlignment.MiddleLeft);
         AddCol("remote",  "원격 주소",155, DataGridViewAutoSizeColumnMode.None,  DataGridViewContentAlignment.MiddleLeft);
-        AddCol("path",    "경로",     100, DataGridViewAutoSizeColumnMode.Fill,  DataGridViewContentAlignment.MiddleLeft);
+        AddCol("path",    "경로",     340, DataGridViewAutoSizeColumnMode.None,  DataGridViewContentAlignment.MiddleLeft);
 
         // 컨텍스트 메뉴
         var ctx = new ContextMenuStrip { Renderer = new DarkMenuRenderer(), ShowImageMargin = false, Font = new Font("Segoe UI", 9.5f) };
@@ -411,6 +415,8 @@ public sealed class MainWindow : Form
         base.OnShown(e);
         var dark = 1;
         DwmSetWindowAttribute(Handle, 20, ref dark, sizeof(int));
+        // DataGridView 스크롤바 다크 테마 적용
+        SetWindowTheme(_grid.Handle, "DarkMode_Explorer", null);
     }
 
     protected override void Dispose(bool disposing)

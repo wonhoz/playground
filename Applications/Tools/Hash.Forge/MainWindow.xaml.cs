@@ -53,7 +53,10 @@ public partial class MainWindow : Window
 
     // ── 인코딩 탭 ────────────────────────────────────────────────
     private void EncMode_Changed(object s, System.Windows.Controls.SelectionChangedEventArgs e)
-        => TxtEncOut.Text = "";
+    {
+        if (!IsLoaded) return;
+        TxtEncOut.Text = "";
+    }
 
     private void DoEncode(object s, RoutedEventArgs e)
     {

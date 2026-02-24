@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using System.Drawing;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using PortWatch.Models;
 using PortWatch.Services;
@@ -14,6 +15,10 @@ public sealed class MainWindow : Form
     [DllImport("uxtheme.dll", SetLastError = true, ExactSpelling = true, CharSet = CharSet.Unicode)]
     private static extern int SetWindowTheme(IntPtr hWnd, string? pszSubAppName, string? pszSubIdList);
 
+    [DllImport("user32.dll")]
+    private static extern bool EnumChildWindows(IntPtr hwnd, EnumChildProc lpEnumFunc, IntPtr lParam);
+    private delegate bool EnumChildProc(IntPtr hwnd, IntPtr lParam);
+
     private readonly DataGridView _grid;
     private readonly TextBox      _searchBox;
     private readonly Label        _statusLabel;
@@ -24,6 +29,7 @@ public sealed class MainWindow : Form
 
     private List<PortEntry> _allEntries   = [];
     private HashSet<int>    _prevOccupied = [];
+    private bool            _scrollbarsDarked;
 
     public MainWindow()
     {
@@ -308,6 +314,9 @@ public sealed class MainWindow : Form
         _grid.ResumeLayout();
         _statusLabel.Text =
             $"총 {list.Count}개 항목  |  즐겨찾기 {list.Count(e => e.IsFavorite)}개  |  마지막 갱신: {DateTime.Now:HH:mm:ss}";
+
+        // 데이터 로드 후 스크롤바 핸들이 생성되어 있으면 다크 테마 재적용
+        if (!_scrollbarsDarked) ApplyGridDarkScrollbars();
     }
 
     // ── 액션 ─────────────────────────────────────────────────────
@@ -415,8 +424,33 @@ public sealed class MainWindow : Form
         base.OnShown(e);
         var dark = 1;
         DwmSetWindowAttribute(Handle, 20, ref dark, sizeof(int));
-        // DataGridView 스크롤바 다크 테마 적용
-        SetWindowTheme(_grid.Handle, "DarkMode_Explorer", null);
+        ApplyGridDarkScrollbars();
+    }
+
+    // DataGridView 내부 스크롤바 자식 윈도우에 직접 다크 테마 적용
+    // (SetWindowTheme(_grid.Handle, ...) 은 DataGridView 자체에만 적용되고 자식 스크롤바 윈도우에는 미전달)
+    private void ApplyGridDarkScrollbars()
+    {
+        if (_scrollbarsDarked) return;
+
+        // 리플렉션으로 VScrollBar / HScrollBar 내부 필드 접근 (.NET 8: 언더스코어 없음)
+        const BindingFlags F = BindingFlags.NonPublic | BindingFlags.Instance;
+        var t  = typeof(DataGridView);
+        var vSb = (t.GetField("vertScrollBar",  F) ?? t.GetField("_vertScrollBar",  F))?.GetValue(_grid) as ScrollBar;
+        var hSb = (t.GetField("horizScrollBar", F) ?? t.GetField("_horizScrollBar", F))?.GetValue(_grid) as ScrollBar;
+
+        if (vSb?.IsHandleCreated == true && hSb?.IsHandleCreated == true)
+        {
+            SetWindowTheme(vSb.Handle, "DarkMode_Explorer", null);
+            SetWindowTheme(hSb.Handle, "DarkMode_Explorer", null);
+            _scrollbarsDarked = true;
+            return;
+        }
+
+        // 폴백: 자식 윈도우 전체 열거 (핸들이 아직 생성되지 않은 경우)
+        EnumChildProc cb = (hwnd, _) => { SetWindowTheme(hwnd, "DarkMode_Explorer", null); return true; };
+        EnumChildWindows(_grid.Handle, cb, IntPtr.Zero);
+        GC.KeepAlive(cb);
     }
 
     protected override void Dispose(bool disposing)

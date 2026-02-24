@@ -128,20 +128,24 @@ public sealed class SettingsWindow : Form
             Location = new Point(12, 34)
         };
 
-        // 활성화 토글
+        // 활성화 토글 — Appearance.Button으로 OS 체크박스 사각형 완전 제거
         var chkEnabled = new CheckBox
         {
             Text = "활성",
             Checked = routine.Enabled,
-            ForeColor = Color.FromArgb(180, 180, 200),
-            BackColor = Color.FromArgb(34, 34, 48),
+            Appearance = Appearance.Button,
             FlatStyle = FlatStyle.Flat,
+            ForeColor = Color.FromArgb(180, 180, 200),
+            BackColor = Color.FromArgb(38, 38, 54),
             AutoSize = true,
-            Location = new Point(340, 10)
+            Padding = new Padding(6, 2, 6, 2),
+            Location = new Point(340, 10),
+            Cursor = Cursors.Hand
         };
-        chkEnabled.FlatAppearance.CheckedBackColor = Color.FromArgb(60, 150, 100);
-        chkEnabled.FlatAppearance.BorderColor = Color.FromArgb(80, 80, 110);
-        chkEnabled.FlatAppearance.MouseOverBackColor = Color.FromArgb(50, 50, 70);
+        chkEnabled.FlatAppearance.CheckedBackColor = Color.FromArgb(28, 90, 58);
+        chkEnabled.FlatAppearance.BorderColor = Color.FromArgb(65, 65, 95);
+        chkEnabled.FlatAppearance.MouseOverBackColor = Color.FromArgb(50, 50, 72);
+        chkEnabled.FlatAppearance.BorderSize = 1;
         chkEnabled.CheckedChanged += (_, _) => { routine.Enabled = chkEnabled.Checked; };
 
         // 간격 입력
@@ -162,20 +166,24 @@ public sealed class SettingsWindow : Form
         };
         spInterval.ValueChanged += (_, _) => { routine.IntervalMinutes = (int)spInterval.Value; };
 
-        // 카운트다운 토글 (눈 휴식 등에 유용)
+        // 카운트다운 토글 — Appearance.Button으로 OS 체크박스 사각형 완전 제거
         var chkCountdown = new CheckBox
         {
             Text = "카운트다운",
             Checked = routine.ShowCountdown,
-            ForeColor = Color.FromArgb(180, 180, 200),
-            BackColor = Color.FromArgb(34, 34, 48),
+            Appearance = Appearance.Button,
             FlatStyle = FlatStyle.Flat,
+            ForeColor = Color.FromArgb(180, 180, 200),
+            BackColor = Color.FromArgb(38, 38, 54),
             AutoSize = true,
-            Location = new Point(160, 64)
+            Padding = new Padding(6, 2, 6, 2),
+            Location = new Point(160, 64),
+            Cursor = Cursors.Hand
         };
-        chkCountdown.FlatAppearance.CheckedBackColor = Color.FromArgb(60, 150, 100);
-        chkCountdown.FlatAppearance.BorderColor = Color.FromArgb(80, 80, 110);
-        chkCountdown.FlatAppearance.MouseOverBackColor = Color.FromArgb(50, 50, 70);
+        chkCountdown.FlatAppearance.CheckedBackColor = Color.FromArgb(28, 90, 58);
+        chkCountdown.FlatAppearance.BorderColor = Color.FromArgb(65, 65, 95);
+        chkCountdown.FlatAppearance.MouseOverBackColor = Color.FromArgb(50, 50, 72);
+        chkCountdown.FlatAppearance.BorderSize = 1;
         chkCountdown.CheckedChanged += (_, _) => { routine.ShowCountdown = chkCountdown.Checked; };
 
         card.Controls.AddRange([lblName, lblDesc, chkEnabled, lblInterval, spInterval, chkCountdown]);

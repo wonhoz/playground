@@ -33,7 +33,7 @@ public sealed class CountdownOverlay : Form
         TopMost = true;
         Opacity = 0.92;
         BackColor = Color.FromArgb(18, 18, 28);
-        Size = new Size(360, 260);
+        Size = new Size(360, 280);
         StartPosition = FormStartPosition.Manual;
 
         // 화면 우측 하단 배치
@@ -64,7 +64,7 @@ public sealed class CountdownOverlay : Form
             ForeColor = Color.FromArgb(100, 220, 150),
             AutoSize = false,
             TextAlign = ContentAlignment.MiddleCenter,
-            Bounds = new Rectangle(0, 54, Width, 100)
+            Bounds = new Rectangle(0, 54, Width, 120)
         };
 
         // 안내 문구
@@ -75,7 +75,7 @@ public sealed class CountdownOverlay : Form
             ForeColor = Color.FromArgb(130, 130, 150),
             AutoSize = false,
             TextAlign = ContentAlignment.MiddleCenter,
-            Bounds = new Rectangle(0, 160, Width, 26)
+            Bounds = new Rectangle(0, 180, Width, 26)
         };
 
         // 스킵 버튼
@@ -86,7 +86,7 @@ public sealed class CountdownOverlay : Form
             ForeColor = Color.FromArgb(150, 150, 170),
             BackColor = Color.FromArgb(38, 38, 52),
             FlatStyle = FlatStyle.Flat,
-            Bounds = new Rectangle(Width / 2 - 70, 194, 140, 34),
+            Bounds = new Rectangle(Width / 2 - 70, 214, 140, 34),
             Cursor = Cursors.Hand
         };
         _btnSkip.FlatAppearance.BorderColor = Color.FromArgb(60, 60, 80);

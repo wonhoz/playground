@@ -29,7 +29,6 @@ public sealed class MainWindow : Form
 
     private List<PortEntry> _allEntries   = [];
     private HashSet<int>    _prevOccupied = [];
-    private bool            _scrollbarsDarked;
 
     public MainWindow()
     {
@@ -56,36 +55,45 @@ public sealed class MainWindow : Form
             Text = "🔍",
             Font = new Font("Segoe UI", 12f),
             ForeColor = Color.FromArgb(120, 120, 150),
-            AutoSize = true,
-            Location = new Point(14, 14)
+            AutoSize = false,
+            Size = new Size(26, 26),
+            Location = new Point(14, 14),
+            TextAlign = ContentAlignment.MiddleCenter
         };
 
         _searchBox = new TextBox
         {
             PlaceholderText = "포트 번호 또는 프로세스 이름...",
-            Location = new Point(44, 12),
-            Size = new Size(300, 28),
+            Dock = DockStyle.Fill,
             BackColor = Color.FromArgb(30, 30, 46),
             ForeColor = Color.FromArgb(220, 220, 230),
-            BorderStyle = BorderStyle.FixedSingle,
+            BorderStyle = BorderStyle.None,
             Font = new Font("Segoe UI", 9.5f)
         };
         _searchBox.TextChanged += (_, _) => ApplyFilter();
+        var searchBorder = new Panel
+        {
+            Location = new Point(44, 12),
+            Size = new Size(302, 30),
+            BackColor = Color.FromArgb(54, 54, 76),
+            Padding = new Padding(1)
+        };
+        searchBorder.Controls.Add(_searchBox);
 
-        _btnRefresh = MakeButton("↺  새로고침", new Point(364, 12), 130);
+        _btnRefresh = MakeButton("↺  새로고침", new Point(364, 12), 108);
         _btnRefresh.Click += async (_, _) => await RefreshAsync();
 
-        _chkAuto = MakeToggle("⏱ 자동 갱신", new Point(508, 12), 145);
+        _chkAuto = MakeToggle("⏱ 자동 갱신", new Point(480, 12), 120);
         _chkAuto.CheckedChanged += (_, _) =>
         {
             _autoTimer.Enabled = _chkAuto.Checked;
             _chkAuto.Text = _chkAuto.Checked ? "⏱ 자동 갱신 ●" : "⏱ 자동 갱신";
         };
 
-        _chkFavOnly = MakeToggle("★ 즐겨찾기만", new Point(667, 12), 145);
+        _chkFavOnly = MakeToggle("★ 즐겨찾기만", new Point(608, 12), 118);
         _chkFavOnly.CheckedChanged += (_, _) => ApplyFilter();
 
-        toolbar.Controls.AddRange([lblIcon, _searchBox, _btnRefresh, _chkAuto, _chkFavOnly]);
+        toolbar.Controls.AddRange([lblIcon, searchBorder, _btnRefresh, _chkAuto, _chkFavOnly]);
 
         // ── DataGridView ─────────────────────────────────────────
         _grid = new DataGridView
@@ -195,7 +203,9 @@ public sealed class MainWindow : Form
         _autoTimer = new System.Windows.Forms.Timer { Interval = 5000 };
         _autoTimer.Tick += async (_, _) => await RefreshAsync();
 
-        Controls.AddRange([toolbar, _grid, statusBar]);
+        // WinForms docking: 역순(back→front)으로 처리 → Fill(_grid)이 index 0(front)이어야 나머지 후 채움
+        Resize += (_, _) => ApplyGridDarkScrollbars();
+        Controls.AddRange([_grid, statusBar, toolbar]);
         _ = RefreshAsync();
     }
 
@@ -319,8 +329,8 @@ public sealed class MainWindow : Form
         _statusLabel.Text =
             $"총 {list.Count}개 항목  |  즐겨찾기 {list.Count(e => e.IsFavorite)}개  |  마지막 갱신: {DateTime.Now:HH:mm:ss}";
 
-        // 데이터 로드 후 스크롤바 핸들이 생성되어 있으면 다크 테마 재적용
-        if (!_scrollbarsDarked) ApplyGridDarkScrollbars();
+        // 데이터 로드 후 스크롤바 다크 테마 재적용
+        ApplyGridDarkScrollbars();
     }
 
     // ── 액션 ─────────────────────────────────────────────────────
@@ -431,30 +441,17 @@ public sealed class MainWindow : Form
         ApplyGridDarkScrollbars();
     }
 
-    // DataGridView 내부 스크롤바 자식 윈도우에 직접 다크 테마 적용
-    // (SetWindowTheme(_grid.Handle, ...) 은 DataGridView 자체에만 적용되고 자식 스크롤바 윈도우에는 미전달)
+    // DataGridView 내부 스크롤바에 개별로 다크 테마 적용
+    // 창 크기 변경 시 hSb가 새로 생성될 수 있으므로 매번 재적용 (idempotent)
     private void ApplyGridDarkScrollbars()
     {
-        if (_scrollbarsDarked) return;
-
-        // 리플렉션으로 VScrollBar / HScrollBar 내부 필드 접근 (.NET 8: 언더스코어 없음)
         const BindingFlags F = BindingFlags.NonPublic | BindingFlags.Instance;
         var t  = typeof(DataGridView);
         var vSb = (t.GetField("vertScrollBar",  F) ?? t.GetField("_vertScrollBar",  F))?.GetValue(_grid) as ScrollBar;
         var hSb = (t.GetField("horizScrollBar", F) ?? t.GetField("_horizScrollBar", F))?.GetValue(_grid) as ScrollBar;
 
-        if (vSb?.IsHandleCreated == true && hSb?.IsHandleCreated == true)
-        {
-            SetWindowTheme(vSb.Handle, "DarkMode_Explorer", null);
-            SetWindowTheme(hSb.Handle, "DarkMode_Explorer", null);
-            _scrollbarsDarked = true;
-            return;
-        }
-
-        // 폴백: 자식 윈도우 전체 열거 (핸들이 아직 생성되지 않은 경우)
-        EnumChildProc cb = (hwnd, _) => { SetWindowTheme(hwnd, "DarkMode_Explorer", null); return true; };
-        EnumChildWindows(_grid.Handle, cb, IntPtr.Zero);
-        GC.KeepAlive(cb);
+        if (vSb?.IsHandleCreated == true) SetWindowTheme(vSb.Handle, "DarkMode_Explorer", null);
+        if (hSb?.IsHandleCreated == true) SetWindowTheme(hSb.Handle, "DarkMode_Explorer", null);
     }
 
     protected override void Dispose(bool disposing)

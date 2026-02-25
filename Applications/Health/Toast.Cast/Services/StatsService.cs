@@ -60,7 +60,7 @@ public static class StatsService
     public static Dictionary<string, WeeklyRoutineStat> GetWeeklyStats(List<Routine> routines)
     {
         var now = DateTime.Now;
-        var weekStart = now.Date.AddDays(-(int)now.DayOfWeek == 0 ? 6 : (int)now.DayOfWeek - 1);
+        var weekStart = now.Date.AddDays(-((int)now.DayOfWeek == 0 ? 6 : (int)now.DayOfWeek - 1));
         var weekEnd = weekStart.AddDays(7);
 
         var records = LoadAll()

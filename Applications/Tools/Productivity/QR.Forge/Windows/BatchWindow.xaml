@@ -1,0 +1,73 @@
+<Window x:Class="QrForge.Windows.BatchWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="QR.Forge — 배치 생성"
+        Width="520" Height="320"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterOwner"
+        Background="#0F0F18"
+        Foreground="#E0E0E0">
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- CSV 파일 선택 -->
+        <TextBlock Grid.Row="0" Text="CSV 파일" Foreground="#888898" FontSize="11" Margin="0,0,0,4"/>
+        <Grid Grid.Row="1" Margin="0,0,0,12">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Border Background="#1A1A2E" BorderBrush="#2A2A40" BorderThickness="1" CornerRadius="4"
+                    Grid.Column="0" Margin="0,0,8,0">
+                <TextBlock x:Name="TxtCsvPath" Text="파일을 선택하세요…" Foreground="#555570"
+                           Padding="8,6" VerticalAlignment="Center" TextTrimming="CharacterEllipsis"/>
+            </Border>
+            <Button Grid.Column="1" Content="CSV 선택…" Width="90" Click="BtnCsv_Click"/>
+        </Grid>
+
+        <!-- 출력 폴더 선택 -->
+        <TextBlock Grid.Row="2" Text="출력 폴더" Foreground="#888898" FontSize="11" Margin="0,0,0,4"/>
+        <Grid Grid.Row="3" Margin="0,0,0,16">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Border Background="#1A1A2E" BorderBrush="#2A2A40" BorderThickness="1" CornerRadius="4"
+                    Grid.Column="0" Margin="0,0,8,0">
+                <TextBlock x:Name="TxtOutDir" Text="폴더를 선택하세요…" Foreground="#555570"
+                           Padding="8,6" VerticalAlignment="Center" TextTrimming="CharacterEllipsis"/>
+            </Border>
+            <Button Grid.Column="1" Content="폴더 선택…" Width="90" Click="BtnDir_Click"/>
+        </Grid>
+
+        <!-- 진행률 -->
+        <StackPanel Grid.Row="4" VerticalAlignment="Center">
+            <Grid Margin="0,0,0,6">
+                <TextBlock x:Name="TxtStatus" Text="대기 중…" Foreground="#888898" FontSize="11" HorizontalAlignment="Left"/>
+                <TextBlock x:Name="TxtCount"  Text="" Foreground="#7C5FE8" FontSize="11" HorizontalAlignment="Right"/>
+            </Grid>
+            <ProgressBar x:Name="Pb" Height="6" Minimum="0" Maximum="100" Value="0"/>
+        </StackPanel>
+
+        <!-- 버튼 -->
+        <Grid Grid.Row="5" Margin="0,16,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="8"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="BtnStart" Grid.Column="1" Content="생성 시작" Width="100" Click="BtnStart_Click"/>
+            <Button x:Name="BtnClose" Grid.Column="3" Content="닫기" Width="80"
+                    Background="#2A2A40" Click="BtnClose_Click"/>
+        </Grid>
+    </Grid>
+</Window>

@@ -44,23 +44,24 @@ echo.
 echo !BD!!DG!  Tools / Productivity!RS!
 echo !CY!  14!RS! Clipboard.Stacker     !DG!Tools/Productivity!RS!
 echo !CY!  15!RS! Screen.Recorder       !DG!Tools/Productivity!RS!
-echo !CY!  16!RS! Text.Forge            !DG!Tools/Productivity!RS!
+echo !CY!  16!RS! QR.Forge              !DG!Tools/Productivity!RS!
+echo !CY!  17!RS! Text.Forge            !DG!Tools/Productivity!RS!
 echo.
 echo !BD!!DG!  Tools / System!RS!
-echo !CY!  17!RS! Env.Guard             !DG!Tools/System!RS!
+echo !CY!  18!RS! Env.Guard             !DG!Tools/System!RS!
 echo.
 echo !BD!!DG!  Games!RS!
-echo !CY!  18!RS! Dungeon.Dash          !DG!Games/Action!RS!
-echo !CY!  19!RS! Brick.Blitz           !DG!Games/Arcade!RS!
-echo !CY!  20!RS! Dash.City             !DG!Games/Arcade!RS!
-echo !CY!  21!RS! Neon.Run              !DG!Games/Arcade!RS!
-echo !CY!  22!RS! Gravity.Flip          !DG!Games/Puzzle!RS!
-echo !CY!  23!RS! Hue.Flow              !DG!Games/Puzzle!RS!
-echo !CY!  24!RS! Nitro.Drift           !DG!Games/Racing!RS!
-echo !CY!  25!RS! Beat.Drop             !DG!Games/Rhythm!RS!
-echo !CY!  26!RS! Dodge.Blitz           !DG!Games/Shooter!RS!
-echo !CY!  27!RS! Star.Strike           !DG!Games/Shooter!RS!
-echo !CY!  28!RS! Tower.Guard           !DG!Games/Strategy!RS!
+echo !CY!  19!RS! Dungeon.Dash          !DG!Games/Action!RS!
+echo !CY!  20!RS! Brick.Blitz           !DG!Games/Arcade!RS!
+echo !CY!  21!RS! Dash.City             !DG!Games/Arcade!RS!
+echo !CY!  22!RS! Neon.Run              !DG!Games/Arcade!RS!
+echo !CY!  23!RS! Gravity.Flip          !DG!Games/Puzzle!RS!
+echo !CY!  24!RS! Hue.Flow              !DG!Games/Puzzle!RS!
+echo !CY!  25!RS! Nitro.Drift           !DG!Games/Racing!RS!
+echo !CY!  26!RS! Beat.Drop             !DG!Games/Rhythm!RS!
+echo !CY!  27!RS! Dodge.Blitz           !DG!Games/Shooter!RS!
+echo !CY!  28!RS! Star.Strike           !DG!Games/Shooter!RS!
+echo !CY!  29!RS! Tower.Guard           !DG!Games/Strategy!RS!
 echo.
 echo !DG!--------------------------------------------------!RS!
 echo !DG!  번호 입력 (공백/쉼표로 구분)   예: 1 3 5  또는  1,3,5!RS!
@@ -104,19 +105,20 @@ for %%n in (!SEL!) do (
     if "%%n"=="13" call :pub "Port.Watch"             "Applications\Tools\Network\Port.Watch"             "PortWatch.exe"        "Applications\Tools\Network"
     if "%%n"=="14" call :pub "Clipboard.Stacker"      "Applications\Tools\Productivity\Clipboard.Stacker" "ClipboardStacker.exe" "Applications\Tools\Productivity"
     if "%%n"=="15" call :pub "Screen.Recorder"        "Applications\Tools\Productivity\Screen.Recorder"   "ScreenRecorder.exe"   "Applications\Tools\Productivity"
-    if "%%n"=="16" call :pub "Text.Forge"             "Applications\Tools\Productivity\Text.Forge"        "TextForge.exe"        "Applications\Tools\Productivity"
-    if "%%n"=="17" call :pub "Env.Guard"              "Applications\Tools\System\Env.Guard"               "EnvGuard.exe"         "Applications\Tools\System"
-    if "%%n"=="18" call :pub "Dungeon.Dash"           "Games\Action\Dungeon.Dash"                         "DungeonDash.exe"      "Games\Action"
-    if "%%n"=="19" call :pub "Brick.Blitz"            "Games\Arcade\Brick.Blitz"                          "BrickBlitz.exe"       "Games\Arcade"
-    if "%%n"=="20" call :pub "Dash.City"              "Games\Arcade\Dash.City"                            "DashCity.exe"         "Games\Arcade"
-    if "%%n"=="21" call :pub "Neon.Run"               "Games\Arcade\Neon.Run"                             "NeonRun.exe"          "Games\Arcade"
-    if "%%n"=="22" call :pub "Gravity.Flip"           "Games\Puzzle\Gravity.Flip"                         "GravityFlip.exe"      "Games\Puzzle"
-    if "%%n"=="23" call :pub "Hue.Flow"               "Games\Puzzle\Hue.Flow"                             "HueFlow.exe"          "Games\Puzzle"
-    if "%%n"=="24" call :pub "Nitro.Drift"            "Games\Racing\Nitro.Drift"                          "NitroDrift.exe"       "Games\Racing"
-    if "%%n"=="25" call :pub "Beat.Drop"              "Games\Rhythm\Beat.Drop"                            "BeatDrop.exe"         "Games\Rhythm"
-    if "%%n"=="26" call :pub "Dodge.Blitz"            "Games\Shooter\Dodge.Blitz"                         "DodgeBlitz.exe"       "Games\Shooter"
-    if "%%n"=="27" call :pub "Star.Strike"            "Games\Shooter\Star.Strike"                         "StarStrike.exe"       "Games\Shooter"
-    if "%%n"=="28" call :pub "Tower.Guard"            "Games\Strategy\Tower.Guard"                        "TowerGuard.exe"       "Games\Strategy"
+    if "%%n"=="16" call :pub "QR.Forge"              "Applications\Tools\Productivity\QR.Forge"          "QR.Forge.exe"         "Applications\Tools\Productivity"
+    if "%%n"=="17" call :pub "Text.Forge"            "Applications\Tools\Productivity\Text.Forge"        "TextForge.exe"        "Applications\Tools\Productivity"
+    if "%%n"=="18" call :pub "Env.Guard"             "Applications\Tools\System\Env.Guard"               "EnvGuard.exe"         "Applications\Tools\System"
+    if "%%n"=="19" call :pub "Dungeon.Dash"          "Games\Action\Dungeon.Dash"                         "DungeonDash.exe"      "Games\Action"
+    if "%%n"=="20" call :pub "Brick.Blitz"           "Games\Arcade\Brick.Blitz"                          "BrickBlitz.exe"       "Games\Arcade"
+    if "%%n"=="21" call :pub "Dash.City"             "Games\Arcade\Dash.City"                            "DashCity.exe"         "Games\Arcade"
+    if "%%n"=="22" call :pub "Neon.Run"              "Games\Arcade\Neon.Run"                             "NeonRun.exe"          "Games\Arcade"
+    if "%%n"=="23" call :pub "Gravity.Flip"          "Games\Puzzle\Gravity.Flip"                         "GravityFlip.exe"      "Games\Puzzle"
+    if "%%n"=="24" call :pub "Hue.Flow"              "Games\Puzzle\Hue.Flow"                             "HueFlow.exe"          "Games\Puzzle"
+    if "%%n"=="25" call :pub "Nitro.Drift"           "Games\Racing\Nitro.Drift"                          "NitroDrift.exe"       "Games\Racing"
+    if "%%n"=="26" call :pub "Beat.Drop"             "Games\Rhythm\Beat.Drop"                            "BeatDrop.exe"         "Games\Rhythm"
+    if "%%n"=="27" call :pub "Dodge.Blitz"           "Games\Shooter\Dodge.Blitz"                         "DodgeBlitz.exe"       "Games\Shooter"
+    if "%%n"=="28" call :pub "Star.Strike"           "Games\Shooter\Star.Strike"                         "StarStrike.exe"       "Games\Shooter"
+    if "%%n"=="29" call :pub "Tower.Guard"           "Games\Strategy\Tower.Guard"                        "TowerGuard.exe"       "Games\Strategy"
 )
 goto :DONE
 
@@ -148,6 +150,7 @@ call :pub "DNS.Flip"              "Applications\Tools\Network\DNS.Flip"         
 call :pub "Port.Watch"            "Applications\Tools\Network\Port.Watch"             "PortWatch.exe"        "Applications\Tools\Network"
 call :pub "Clipboard.Stacker"     "Applications\Tools\Productivity\Clipboard.Stacker" "ClipboardStacker.exe" "Applications\Tools\Productivity"
 call :pub "Screen.Recorder"       "Applications\Tools\Productivity\Screen.Recorder"   "ScreenRecorder.exe"   "Applications\Tools\Productivity"
+call :pub "QR.Forge"              "Applications\Tools\Productivity\QR.Forge"          "QR.Forge.exe"         "Applications\Tools\Productivity"
 call :pub "Text.Forge"            "Applications\Tools\Productivity\Text.Forge"        "TextForge.exe"        "Applications\Tools\Productivity"
 call :pub "Env.Guard"             "Applications\Tools\System\Env.Guard"               "EnvGuard.exe"         "Applications\Tools\System"
 call :pub "Dungeon.Dash"          "Games\Action\Dungeon.Dash"                         "DungeonDash.exe"      "Games\Action"

@@ -61,6 +61,7 @@ call :pub "Clipboard.Stacker"     "Applications\Tools\Productivity\Clipboard.Sta
 call :pub "QR.Forge"              "Applications\Tools\Productivity\QR.Forge"              "QR.Forge.exe"         "Applications\Tools\Productivity"
 call :pub "Screen.Recorder"       "Applications\Tools\Productivity\Screen.Recorder"      "ScreenRecorder.exe"   "Applications\Tools\Productivity"
 call :pub "Text.Forge"            "Applications\Tools\Productivity\Text.Forge"            "TextForge.exe"        "Applications\Tools\Productivity"
+call :pub "Code.Snap"             "Applications\Tools\Productivity\Code.Snap"             "Code.Snap.exe"        "Applications\Tools\Productivity"
 
 :: ── Applications / Tools / System ───────────────────────────────
 call :pub "Env.Guard"             "Applications\Tools\System\Env.Guard"                  "EnvGuard.exe"         "Applications\Tools\System"

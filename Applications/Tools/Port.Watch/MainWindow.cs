@@ -29,6 +29,8 @@ public sealed class MainWindow : Form
 
     private List<PortEntry> _allEntries   = [];
     private HashSet<int>    _prevOccupied = [];
+    private Panel?          _sbCorner;
+    private bool            _fixingCorner;
 
     public MainWindow()
     {
@@ -206,7 +208,8 @@ public sealed class MainWindow : Form
         _autoTimer.Tick += async (_, _) => await RefreshAsync();
 
         // WinForms docking: 역순(back→front)으로 처리 → Fill(_grid)이 index 0(front)이어야 나머지 후 채움
-        Resize += (_, _) => ApplyGridDarkScrollbars();
+        Resize += (_, _) => { ApplyGridDarkScrollbars(); FixScrollbarCorner(); };
+        _grid.Layout += (_, _) => FixScrollbarCorner();
         Controls.AddRange([_grid, statusBar, toolbar]);
         _ = RefreshAsync();
     }
@@ -333,6 +336,7 @@ public sealed class MainWindow : Form
 
         // 데이터 로드 후 스크롤바 다크 테마 재적용
         ApplyGridDarkScrollbars();
+        FixScrollbarCorner();
     }
 
     // ── 액션 ─────────────────────────────────────────────────────
@@ -441,6 +445,7 @@ public sealed class MainWindow : Form
         var dark = 1;
         DwmSetWindowAttribute(Handle, 20, ref dark, sizeof(int));
         ApplyGridDarkScrollbars();
+        FixScrollbarCorner();
     }
 
     // DataGridView 내부 스크롤바에 개별로 다크 테마 적용
@@ -454,6 +459,38 @@ public sealed class MainWindow : Form
 
         if (vSb?.IsHandleCreated == true) SetWindowTheme(vSb.Handle, "DarkMode_Explorer", null);
         if (hSb?.IsHandleCreated == true) SetWindowTheme(hSb.Handle, "DarkMode_Explorer", null);
+    }
+
+    // DataGridView가 vSb·hSb 코너 영역을 SystemColors.Control(밝은 색)으로 직접 페인트하므로
+    // 리플렉션으로 두 스크롤바 위치를 계산해 다크 Panel로 덮음
+    private void FixScrollbarCorner()
+    {
+        if (_fixingCorner) return;  // Controls.Add가 Layout 이벤트 재진입 방지
+        _fixingCorner = true;
+        try
+        {
+            const BindingFlags F = BindingFlags.NonPublic | BindingFlags.Instance;
+            var t   = typeof(DataGridView);
+            var vSb = (t.GetField("vertScrollBar",  F) ?? t.GetField("_vertScrollBar",  F))?.GetValue(_grid) as ScrollBar;
+            var hSb = (t.GetField("horizScrollBar", F) ?? t.GetField("_horizScrollBar", F))?.GetValue(_grid) as ScrollBar;
+
+            if (vSb is { Visible: true } && hSb is { Visible: true })
+            {
+                if (_sbCorner == null)
+                {
+                    _sbCorner = new Panel { BackColor = Color.FromArgb(20, 20, 32), BorderStyle = BorderStyle.None };
+                    _grid.Controls.Add(_sbCorner);
+                }
+                _sbCorner.Bounds  = new Rectangle(vSb.Left, hSb.Top, vSb.Width, hSb.Height);
+                _sbCorner.Visible = true;
+                _sbCorner.BringToFront();
+            }
+            else if (_sbCorner != null)
+            {
+                _sbCorner.Visible = false;
+            }
+        }
+        finally { _fixingCorner = false; }
     }
 
     protected override void Dispose(bool disposing)

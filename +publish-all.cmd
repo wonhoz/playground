@@ -39,10 +39,14 @@ call :pub "Text.Forge"            "Applications\Tools\Text.Forge"               
 call :pub "Log.Lens"             "Applications\Tools\Log.Lens"                 "LogLens.exe"
 call :pub "Env.Guard"            "Applications\Tools\Env.Guard"                "EnvGuard.exe"
 call :pub "DNS.Flip"             "Applications\Tools\DNS.Flip"                 "DnsFlip.exe"
+call :pub "Port.Watch"           "Applications\Tools\Port.Watch"                "PortWatch.exe"
+call :pub "Hash.Forge"           "Applications\Tools\Hash.Forge"                "HashForge.exe"
+call :pub "Api.Probe"            "Applications\Tools\Api.Probe"                 "Api.Probe.exe"
+call :pub "Mock.Desk"            "Applications\Tools\Mock.Desk"                 "Mock.Desk.exe"
 call :pub "Toast.Cast"           "Applications\Health\Toast.Cast"               "ToastCast.exe"
-call :pub "Link.Vault"           "Applications\Tools\Link.Vault"                "LinkVault.exe"
+call :pub "Link.Vault"           "Archieve\Applications\Tools\Link.Vault"       "LinkVault.exe"
 :: Games - Action
-call :pub "Fist.Fury"             "Games\Action\Fist.Fury"                       "FistFury.exe"
+call :pub "Fist.Fury"             "Archieve\Games\Action\Fist.Fury"              "FistFury.exe"
 call :pub "Dungeon.Dash"          "Games\Action\Dungeon.Dash"                    "DungeonDash.exe"
 :: Games - Arcade
 call :pub "Brick.Blitz"           "Games\Arcade\Brick.Blitz"                     "BrickBlitz.exe"
@@ -59,7 +63,7 @@ call :pub "Beat.Drop"             "Games\Rhythm\Beat.Drop"                      
 call :pub "Dodge.Blitz"           "Games\Shooter\Dodge.Blitz"                    "DodgeBlitz.exe"
 call :pub "Star.Strike"           "Games\Shooter\Star.Strike"                    "StarStrike.exe"
 :: Games - Sports
-call :pub "Track.Star"            "Games\Sports\Track.Star"                      "TrackStar.exe"
+call :pub "Track.Star"            "Archieve\Games\Sports\Track.Star"             "TrackStar.exe"
 :: Games - Strategy
 call :pub "Tower.Guard"           "Games\Strategy\Tower.Guard"                   "TowerGuard.exe"
 

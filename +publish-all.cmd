@@ -46,17 +46,23 @@ call :pub "Toast.Cast"            "Applications\Health\Toast.Cast"           "To
 :: ── Applications / Media ─────────────────────────────────────────
 call :pub "Photo.Video.Organizer" "Applications\Media\Photo.Video.Organizer" "PhotoVideoOrganizer.exe"  "Applications\Media"
 
-:: ── Applications / Tools ─────────────────────────────────────────
-call :pub "Clipboard.Stacker"     "Applications\Tools\Clipboard.Stacker"     "ClipboardStacker.exe"     "Applications\Tools"
-call :pub "Screen.Recorder"       "Applications\Tools\Screen.Recorder"       "ScreenRecorder.exe"       "Applications\Tools"
-call :pub "Text.Forge"            "Applications\Tools\Text.Forge"            "TextForge.exe"            "Applications\Tools"
-call :pub "Log.Lens"              "Applications\Tools\Log.Lens"              "LogLens.exe"              "Applications\Tools"
-call :pub "Env.Guard"             "Applications\Tools\Env.Guard"             "EnvGuard.exe"             "Applications\Tools"
-call :pub "DNS.Flip"              "Applications\Tools\DNS.Flip"              "DnsFlip.exe"              "Applications\Tools"
-call :pub "Port.Watch"            "Applications\Tools\Port.Watch"            "PortWatch.exe"            "Applications\Tools"
-call :pub "Hash.Forge"            "Applications\Tools\Hash.Forge"            "HashForge.exe"            "Applications\Tools"
-call :pub "Api.Probe"             "Applications\Tools\Api.Probe"             "Api.Probe.exe"            "Applications\Tools"
-call :pub "Mock.Desk"             "Applications\Tools\Mock.Desk"             "Mock.Desk.exe"            "Applications\Tools"
+:: ── Applications / Tools / Dev ───────────────────────────────────
+call :pub "Api.Probe"             "Applications\Tools\Api.Probe"             "Api.Probe.exe"            "Applications\Tools\Dev"
+call :pub "Hash.Forge"            "Applications\Tools\Hash.Forge"            "HashForge.exe"            "Applications\Tools\Dev"
+call :pub "Log.Lens"              "Applications\Tools\Log.Lens"              "LogLens.exe"              "Applications\Tools\Dev"
+call :pub "Mock.Desk"             "Applications\Tools\Mock.Desk"             "Mock.Desk.exe"            "Applications\Tools\Dev"
+
+:: ── Applications / Tools / Network ──────────────────────────────
+call :pub "DNS.Flip"              "Applications\Tools\DNS.Flip"              "DnsFlip.exe"              "Applications\Tools\Network"
+call :pub "Port.Watch"            "Applications\Tools\Port.Watch"            "PortWatch.exe"            "Applications\Tools\Network"
+
+:: ── Applications / Tools / Productivity ─────────────────────────
+call :pub "Clipboard.Stacker"     "Applications\Tools\Clipboard.Stacker"     "ClipboardStacker.exe"     "Applications\Tools\Productivity"
+call :pub "Screen.Recorder"       "Applications\Tools\Screen.Recorder"       "ScreenRecorder.exe"       "Applications\Tools\Productivity"
+call :pub "Text.Forge"            "Applications\Tools\Text.Forge"            "TextForge.exe"            "Applications\Tools\Productivity"
+
+:: ── Applications / Tools / System ───────────────────────────────
+call :pub "Env.Guard"             "Applications\Tools\Env.Guard"             "EnvGuard.exe"             "Applications\Tools\System"
 
 :: ── Games / Action ───────────────────────────────────────────────
 call :pub "Dungeon.Dash"          "Games\Action\Dungeon.Dash"                "DungeonDash.exe"          "Games\Action"

@@ -1,0 +1,213 @@
+<Window x:Class="WordCloud.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:skia="clr-namespace:SkiaSharp.Views.WPF;assembly=SkiaSharp.Views.WPF"
+        Title="Word.Cloud" Height="680" Width="960"
+        MinHeight="600" MinWidth="860"
+        Background="#0D0D16"
+        WindowStartupLocation="CenterScreen">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="320"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- ═══════════════ 왼쪽 패널 ═══════════════ -->
+        <Border Grid.Column="0" Background="#131320" BorderBrush="#2A2A3A" BorderThickness="0,0,1,0">
+            <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="12,12,8,12">
+                <StackPanel>
+
+                    <!-- 텍스트 입력 섹션 -->
+                    <TextBlock Text="텍스트 입력" Foreground="#06B6D4" FontSize="11"
+                               FontWeight="SemiBold" Margin="0,0,0,6"
+                               TextDecorations="None"/>
+
+                    <TextBox x:Name="TxtInput" Height="160"
+                             AcceptsReturn="True" TextWrapping="Wrap"
+                             VerticalScrollBarVisibility="Auto"
+                             VerticalContentAlignment="Top"
+                             FontFamily="맑은 고딕" FontSize="12"
+                             Margin="0,0,0,8"
+                             ToolTip="분석할 텍스트를 붙여넣으세요"/>
+
+                    <Grid Margin="0,0,0,12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="8"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Button x:Name="BtnLoadFile" Grid.Column="0" Content="📂 파일 불러오기"
+                                Click="BtnLoadFile_Click"/>
+                        <Button x:Name="BtnClear" Grid.Column="2" Content="🗑 지우기"
+                                Background="#2A2A3A" Foreground="#E0E0E0"
+                                Click="BtnClear_Click"/>
+                    </Grid>
+
+                    <!-- 분리선 -->
+                    <Separator/>
+
+                    <!-- 분석 설정 섹션 -->
+                    <TextBlock Text="불용어 설정" Foreground="#06B6D4" FontSize="11"
+                               FontWeight="SemiBold" Margin="0,4,0,6"/>
+
+                    <Grid Margin="0,0,0,6">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="6"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox x:Name="TxtStopWord" Grid.Column="0"
+                                 KeyDown="TxtStopWord_KeyDown"
+                                 ToolTip="추가할 불용어 입력 후 Enter 또는 추가 버튼"/>
+                        <Button x:Name="BtnAddStop" Grid.Column="2" Content="추가"
+                                Padding="10,5" Click="BtnAddStop_Click"/>
+                    </Grid>
+
+                    <Border Background="#1A1A28" BorderBrush="#2A2A3A" BorderThickness="1"
+                            CornerRadius="4" Height="80" Margin="0,0,0,12">
+                        <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="4">
+                            <WrapPanel x:Name="PanelStopWords" Orientation="Horizontal"/>
+                        </ScrollViewer>
+                    </Border>
+
+                    <!-- 분리선 -->
+                    <Separator/>
+
+                    <!-- 생성 버튼 + 프로그레스바 -->
+                    <Button x:Name="BtnGenerate" Content="워드클라우드 생성"
+                            Height="36" FontSize="14" Margin="0,8,0,6"
+                            Click="BtnGenerate_Click"/>
+
+                    <ProgressBar x:Name="PrgGenerate" Height="4" Margin="0,0,0,4"
+                                 IsIndeterminate="False" Value="0"/>
+
+                    <TextBlock x:Name="TxtStatus" Foreground="#888898" FontSize="11"
+                               HorizontalAlignment="Center" Margin="0,0,0,4"/>
+
+                </StackPanel>
+            </ScrollViewer>
+        </Border>
+
+        <!-- ═══════════════ 오른쪽 패널 ═══════════════ -->
+        <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto" Padding="12">
+            <StackPanel>
+
+                <!-- 옵션 섹션 -->
+                <TextBlock Text="옵션" Foreground="#06B6D4" FontSize="11"
+                           FontWeight="SemiBold" Margin="0,0,0,8"/>
+
+                <Grid Margin="0,0,0,8">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="12"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0">
+                        <TextBlock Text="모양" Foreground="#888898" FontSize="11" Margin="0,0,0,3"/>
+                        <ComboBox x:Name="CbShape" SelectionChanged="CbShape_SelectionChanged">
+                            <ComboBoxItem>원형</ComboBoxItem>
+                            <ComboBoxItem>직사각형</ComboBoxItem>
+                            <ComboBoxItem>하트</ComboBoxItem>
+                            <ComboBoxItem>별</ComboBoxItem>
+                            <ComboBoxItem>다이아몬드</ComboBoxItem>
+                            <ComboBoxItem>구름</ComboBoxItem>
+                            <ComboBoxItem>랜덤</ComboBoxItem>
+                        </ComboBox>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="2">
+                        <TextBlock Text="텍스트 방향" Foreground="#888898" FontSize="11" Margin="0,0,0,3"/>
+                        <ComboBox x:Name="CbOrientation" SelectionChanged="CbOrientation_SelectionChanged">
+                            <ComboBoxItem>가로</ComboBoxItem>
+                            <ComboBoxItem>세로</ComboBoxItem>
+                            <ComboBoxItem>혼합</ComboBoxItem>
+                            <ComboBoxItem>랜덤</ComboBoxItem>
+                        </ComboBox>
+                    </StackPanel>
+                </Grid>
+
+                <StackPanel Margin="0,0,0,8">
+                    <TextBlock Text="폰트" Foreground="#888898" FontSize="11" Margin="0,0,0,3"/>
+                    <ComboBox x:Name="CbFont" SelectionChanged="CbFont_SelectionChanged"/>
+                </StackPanel>
+
+                <!-- 슬라이더 -->
+                <Grid Margin="0,0,0,4">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="40"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="최대 단어" Foreground="#888898" FontSize="11" VerticalAlignment="Center"/>
+                    <Slider x:Name="SliderMaxWords" Grid.Column="1" Minimum="10" Maximum="500"
+                            Value="100" TickFrequency="10" Margin="8,0"
+                            ValueChanged="SliderMaxWords_ValueChanged"/>
+                    <TextBlock x:Name="TxtMaxWords" Grid.Column="2" Foreground="#E0E0E0"
+                               FontSize="11" VerticalAlignment="Center" Text="100"/>
+                </Grid>
+
+                <Grid Margin="0,0,0,12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="40"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="최소 빈도" Foreground="#888898" FontSize="11" VerticalAlignment="Center"/>
+                    <Slider x:Name="SliderMinFreq" Grid.Column="1" Minimum="1" Maximum="20"
+                            Value="2" TickFrequency="1" Margin="8,0"
+                            ValueChanged="SliderMinFreq_ValueChanged"/>
+                    <TextBlock x:Name="TxtMinFreq" Grid.Column="2" Foreground="#E0E0E0"
+                               FontSize="11" VerticalAlignment="Center" Text="2"/>
+                </Grid>
+
+                <!-- 색상 테마 섹션 -->
+                <Separator/>
+                <TextBlock Text="색상 테마" Foreground="#06B6D4" FontSize="11"
+                           FontWeight="SemiBold" Margin="0,8,0,8"/>
+
+                <WrapPanel x:Name="PanelThemes" Margin="0,0,0,12"/>
+
+                <!-- 배경색 섹션 -->
+                <Grid Margin="0,0,0,12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="12"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="배경색" Foreground="#888898" FontSize="11" VerticalAlignment="Center"/>
+                    <Border x:Name="BdBgColor" Grid.Column="2" Width="24" Height="24"
+                            Background="#0D0D16" BorderBrush="#2A2A3A" BorderThickness="1"
+                            CornerRadius="4" Cursor="Hand" MouseLeftButtonUp="BdBgColor_Click"/>
+                    <Button x:Name="BtnBgColor" Grid.Column="2" Content=""
+                            Background="Transparent" Width="24" Height="24"
+                            BorderThickness="0" Click="BtnBgColor_Click" Opacity="0"/>
+                </Grid>
+
+                <!-- 미리보기 섹션 -->
+                <Separator/>
+                <TextBlock Text="미리보기" Foreground="#06B6D4" FontSize="11"
+                           FontWeight="SemiBold" Margin="0,8,0,8"/>
+
+                <Border Background="#1A1A28" BorderBrush="#2A2A3A" BorderThickness="1"
+                        CornerRadius="4" Margin="0,0,0,12" MinHeight="300">
+                    <skia:SKElement x:Name="SkPreview" PaintSurface="SkPreview_PaintSurface"
+                                    Height="300"/>
+                </Border>
+
+                <!-- 내보내기 섹션 -->
+                <Separator/>
+                <TextBlock Text="내보내기" Foreground="#06B6D4" FontSize="11"
+                           FontWeight="SemiBold" Margin="0,8,0,8"/>
+
+                <UniformGrid Columns="3" Margin="0,0,0,12">
+                    <Button Content="PNG 저장" Margin="0,0,4,0" Click="BtnSavePng_Click"/>
+                    <Button Content="JPEG 저장" Margin="4,0" Click="BtnSaveJpeg_Click"/>
+                    <Button Content="클립보드" Margin="4,0,0,0" Click="BtnClipboard_Click"/>
+                </UniformGrid>
+
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Window>

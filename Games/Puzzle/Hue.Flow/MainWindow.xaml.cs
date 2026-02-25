@@ -13,19 +13,23 @@ namespace HueFlow;
 public partial class MainWindow : Window
 {
     // ── 색상 팔레트 (IconGenerator와 동일 순서) ──────────────────────
+    // Catppuccin Mocha 기반 파스텔 6색 — 다크 배경에서 시각적으로 명확히 구별
     private static readonly string[] ColorHex =
     [
-        "#E74C3C",   // 0 Red
-        "#3498DB",   // 1 Blue
-        "#AAFF00",   // 2 Lime
-        "#F39C12",   // 3 Orange
-        "#9B59B6",   // 4 Purple
-        "#FF4081",   // 5 Pink
+        "#F38BA8",   // 0 Red    (pastel coral-red)
+        "#89B4FA",   // 1 Blue   (pastel periwinkle)
+        "#A6E3A1",   // 2 Green  (pastel mint)
+        "#FAB387",   // 3 Peach  (pastel orange)
+        "#CBA6F7",   // 4 Mauve  (pastel purple)
+        "#89DCEB",   // 5 Sky    (pastel teal-blue)
     ];
 
     private static readonly SolidColorBrush[] ColorBrushes =
-        ColorHex.Select(h => new SolidColorBrush((Color)ColorConverter.ConvertFromString(h)!))
-                .ToArray();
+        ColorHex.Select(h => {
+            var b = new SolidColorBrush((Color)ColorConverter.ConvertFromString(h)!);
+            b.Freeze();
+            return b;
+        }).ToArray();
 
     // ── 최고 점수 저장 경로 ──────────────────────────────────────────
     private static readonly string BestFilePath =

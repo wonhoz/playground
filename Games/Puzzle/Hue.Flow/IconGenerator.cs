@@ -11,14 +11,15 @@ namespace HueFlow;
 /// </summary>
 public static class IconGenerator
 {
+    // Catppuccin Mocha 기반 파스텔 6색 — MainWindow.xaml.cs의 ColorHex와 동일
     private static readonly System.Drawing.Color[] Palette =
     [
-        System.Drawing.Color.FromArgb(231,  76,  60),  // 0 Red
-        System.Drawing.Color.FromArgb( 52, 152, 219),  // 1 Blue
-        System.Drawing.Color.FromArgb(170, 255,   0),  // 2 Lime
-        System.Drawing.Color.FromArgb(243, 156,  18),  // 3 Orange
-        System.Drawing.Color.FromArgb(155,  89, 182),  // 4 Purple
-        System.Drawing.Color.FromArgb(255,  64, 129),  // 5 Pink
+        System.Drawing.Color.FromArgb(243, 139, 168),  // 0 Red   #F38BA8
+        System.Drawing.Color.FromArgb(137, 180, 250),  // 1 Blue  #89B4FA
+        System.Drawing.Color.FromArgb(166, 227, 161),  // 2 Green #A6E3A1
+        System.Drawing.Color.FromArgb(250, 179, 135),  // 3 Peach #FAB387
+        System.Drawing.Color.FromArgb(203, 166, 247),  // 4 Mauve #CBA6F7
+        System.Drawing.Color.FromArgb(137, 220, 235),  // 5 Sky   #89DCEB
         System.Drawing.Color.FromArgb( 79, 195, 247),  // 6 UI Accent (Cyan) — territory
     ];
 

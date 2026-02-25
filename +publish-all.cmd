@@ -47,10 +47,10 @@ call :pub "Toast.Cast"            "Applications\Health\Toast.Cast"           "To
 call :pub "Photo.Video.Organizer" "Applications\Media\Photo.Video.Organizer" "PhotoVideoOrganizer.exe"  "Applications\Media"
 
 :: ── Applications / Tools / Dev ───────────────────────────────────
-call :pub "Api.Probe"             "Applications\Tools\Dev\Api.Probe"             "Api.Probe.exe"            "Applications\Tools\Dev"
+call :pub "Api.Probe"             "Applications\Tools\Dev\Api.Probe"             "Api.Probe.exe"            "Applications\Tools\Dev\Api.Probe"
 call :pub "Hash.Forge"            "Applications\Tools\Dev\Hash.Forge"            "HashForge.exe"            "Applications\Tools\Dev"
 call :pub "Log.Lens"              "Applications\Tools\Dev\Log.Lens"              "LogLens.exe"              "Applications\Tools\Dev"
-call :pub "Mock.Desk"             "Applications\Tools\Dev\Mock.Desk"             "Mock.Desk.exe"            "Applications\Tools\Dev"
+call :pub "Mock.Desk"             "Applications\Tools\Dev\Mock.Desk"             "Mock.Desk.exe"            "Applications\Tools\Dev\Mock.Desk"
 
 :: ── Applications / Tools / Network ──────────────────────────────
 call :pub "DNS.Flip"              "Applications\Tools\Network\DNS.Flip"          "DnsFlip.exe"              "Applications\Tools\Network"

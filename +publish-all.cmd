@@ -27,46 +27,65 @@ echo !DG!Output: %BIN%!RS!
 echo !DG!--------------------------------------------------!RS!
 echo.
 
-:: Applications
-call :pub "AI.Clip"               "Applications\AI\AI.Clip"                      "AiClip.exe"
-call :pub "Music.Player"          "Applications\Audio\Music.Player"              "MusicPlayer.exe"
-call :pub "Stay.Awake"            "Applications\Automation\Stay.Awake"           "StayAwake.exe"
-call :pub "File.Duplicates"       "Applications\Files\File.Duplicates"           "FileDuplicates.exe"
-call :pub "Batch.Rename"          "Applications\Files\Batch.Rename"              "BatchRename.exe"
-call :pub "Photo.Video.Organizer" "Applications\Media\Photo.Video.Organizer"     "PhotoVideoOrganizer.exe"
-call :pub "Clipboard.Stacker"     "Applications\Tools\Clipboard.Stacker"         "ClipboardStacker.exe"
-call :pub "Screen.Recorder"       "Applications\Tools\Screen.Recorder"           "ScreenRecorder.exe"
-call :pub "Text.Forge"            "Applications\Tools\Text.Forge"                "TextForge.exe"
-call :pub "Log.Lens"             "Applications\Tools\Log.Lens"                 "LogLens.exe"
-call :pub "Env.Guard"            "Applications\Tools\Env.Guard"                "EnvGuard.exe"
-call :pub "DNS.Flip"             "Applications\Tools\DNS.Flip"                 "DnsFlip.exe"
-call :pub "Port.Watch"           "Applications\Tools\Port.Watch"                "PortWatch.exe"
-call :pub "Hash.Forge"           "Applications\Tools\Hash.Forge"                "HashForge.exe"
-call :pub "Api.Probe"            "Applications\Tools\Api.Probe"                 "Api.Probe.exe"
-call :pub "Mock.Desk"            "Applications\Tools\Mock.Desk"                 "Mock.Desk.exe"
-call :pub "Toast.Cast"           "Applications\Health\Toast.Cast"               "ToastCast.exe"
-:: Games - Action
-call :pub "Dungeon.Dash"          "Games\Action\Dungeon.Dash"                    "DungeonDash.exe"
-:: Games - Arcade
-call :pub "Brick.Blitz"           "Games\Arcade\Brick.Blitz"                     "BrickBlitz.exe"
-call :pub "Neon.Run"              "Games\Arcade\Neon.Run"                        "NeonRun.exe"
-call :pub "Dash.City"             "Games\Arcade\Dash.City"                       "DashCity.exe"
-:: Games - Puzzle
-call :pub "Hue.Flow"              "Games\Puzzle\Hue.Flow"                        "HueFlow.exe"
-call :pub "Gravity.Flip"          "Games\Puzzle\Gravity.Flip"                    "GravityFlip.exe"
-:: Games - Racing
-call :pub "Nitro.Drift"           "Games\Racing\Nitro.Drift"                     "NitroDrift.exe"
-:: Games - Rhythm
-call :pub "Beat.Drop"             "Games\Rhythm\Beat.Drop"                       "BeatDrop.exe"
-:: Games - Shooter
-call :pub "Dodge.Blitz"           "Games\Shooter\Dodge.Blitz"                    "DodgeBlitz.exe"
-call :pub "Star.Strike"           "Games\Shooter\Star.Strike"                    "StarStrike.exe"
-:: Games - Strategy
-call :pub "Tower.Guard"           "Games\Strategy\Tower.Guard"                   "TowerGuard.exe"
+:: ── Applications / AI ────────────────────────────────────────────
+call :pub "AI.Clip"               "Applications\AI\AI.Clip"                  "AiClip.exe"               "Applications\AI"
 
-:: Remove .pdb files
+:: ── Applications / Audio ─────────────────────────────────────────
+call :pub "Music.Player"          "Applications\Audio\Music.Player"          "MusicPlayer.exe"          "Applications\Audio"
+
+:: ── Applications / Automation ────────────────────────────────────
+call :pub "Stay.Awake"            "Applications\Automation\Stay.Awake"       "StayAwake.exe"            "Applications\Automation"
+
+:: ── Applications / Files ─────────────────────────────────────────
+call :pub "File.Duplicates"       "Applications\Files\File.Duplicates"       "FileDuplicates.exe"       "Applications\Files"
+call :pub "Batch.Rename"          "Applications\Files\Batch.Rename"          "BatchRename.exe"          "Applications\Files"
+
+:: ── Applications / Health ────────────────────────────────────────
+call :pub "Toast.Cast"            "Applications\Health\Toast.Cast"           "ToastCast.exe"            "Applications\Health"
+
+:: ── Applications / Media ─────────────────────────────────────────
+call :pub "Photo.Video.Organizer" "Applications\Media\Photo.Video.Organizer" "PhotoVideoOrganizer.exe"  "Applications\Media"
+
+:: ── Applications / Tools ─────────────────────────────────────────
+call :pub "Clipboard.Stacker"     "Applications\Tools\Clipboard.Stacker"     "ClipboardStacker.exe"     "Applications\Tools"
+call :pub "Screen.Recorder"       "Applications\Tools\Screen.Recorder"       "ScreenRecorder.exe"       "Applications\Tools"
+call :pub "Text.Forge"            "Applications\Tools\Text.Forge"            "TextForge.exe"            "Applications\Tools"
+call :pub "Log.Lens"              "Applications\Tools\Log.Lens"              "LogLens.exe"              "Applications\Tools"
+call :pub "Env.Guard"             "Applications\Tools\Env.Guard"             "EnvGuard.exe"             "Applications\Tools"
+call :pub "DNS.Flip"              "Applications\Tools\DNS.Flip"              "DnsFlip.exe"              "Applications\Tools"
+call :pub "Port.Watch"            "Applications\Tools\Port.Watch"            "PortWatch.exe"            "Applications\Tools"
+call :pub "Hash.Forge"            "Applications\Tools\Hash.Forge"            "HashForge.exe"            "Applications\Tools"
+call :pub "Api.Probe"             "Applications\Tools\Api.Probe"             "Api.Probe.exe"            "Applications\Tools"
+call :pub "Mock.Desk"             "Applications\Tools\Mock.Desk"             "Mock.Desk.exe"            "Applications\Tools"
+
+:: ── Games / Action ───────────────────────────────────────────────
+call :pub "Dungeon.Dash"          "Games\Action\Dungeon.Dash"                "DungeonDash.exe"          "Games\Action"
+
+:: ── Games / Arcade ───────────────────────────────────────────────
+call :pub "Brick.Blitz"           "Games\Arcade\Brick.Blitz"                 "BrickBlitz.exe"           "Games\Arcade"
+call :pub "Neon.Run"              "Games\Arcade\Neon.Run"                    "NeonRun.exe"              "Games\Arcade"
+call :pub "Dash.City"             "Games\Arcade\Dash.City"                   "DashCity.exe"             "Games\Arcade"
+
+:: ── Games / Puzzle ───────────────────────────────────────────────
+call :pub "Hue.Flow"              "Games\Puzzle\Hue.Flow"                    "HueFlow.exe"              "Games\Puzzle"
+call :pub "Gravity.Flip"          "Games\Puzzle\Gravity.Flip"                "GravityFlip.exe"          "Games\Puzzle"
+
+:: ── Games / Racing ───────────────────────────────────────────────
+call :pub "Nitro.Drift"           "Games\Racing\Nitro.Drift"                 "NitroDrift.exe"           "Games\Racing"
+
+:: ── Games / Rhythm ───────────────────────────────────────────────
+call :pub "Beat.Drop"             "Games\Rhythm\Beat.Drop"                   "BeatDrop.exe"             "Games\Rhythm"
+
+:: ── Games / Shooter ──────────────────────────────────────────────
+call :pub "Dodge.Blitz"           "Games\Shooter\Dodge.Blitz"                "DodgeBlitz.exe"           "Games\Shooter"
+call :pub "Star.Strike"           "Games\Shooter\Star.Strike"                "StarStrike.exe"           "Games\Shooter"
+
+:: ── Games / Strategy ─────────────────────────────────────────────
+call :pub "Tower.Guard"           "Games\Strategy\Tower.Guard"               "TowerGuard.exe"           "Games\Strategy"
+
+:: Remove .pdb files (recursive)
 echo !DG!Cleaning .pdb files...!RS!
-del /q "%BIN%\*.pdb" 2>nul
+del /s /q "%BIN%\*.pdb" 2>nul
 echo !DG!--------------------------------------------------!RS!
 echo.
 if !FAIL! gtr 0 echo !BD!!RE!Result: !PASS!/!TOTAL! OK  ^|  Failed:!FAILED!!RS!
@@ -95,11 +114,14 @@ set /a TOTAL+=1
 set "NM=%~1"
 set "DIR=%ROOT%%~2"
 set "EX=%~3"
+set "OUT=%BIN%\%~4"
+if not exist "!OUT!" mkdir "!OUT!"
 echo !CY!  ^> %NM%!RS!
-dotnet publish "%DIR%" -c Release -o "%BIN%" > "%TEMP%\pub_%NM%.log" 2>&1
+echo !DG!    %~4\%EX%!RS!
+dotnet publish "%DIR%" -c Release -o "!OUT!" > "%TEMP%\pub_%NM%.log" 2>&1
 set "RC=!errorlevel!"
 if !RC! equ 0 set /a PASS+=1
-if !RC! equ 0 echo !GR!    [OK]  %EX%!RS!
+if !RC! equ 0 echo !GR!    [OK]!RS!
 if !RC! neq 0 set /a FAIL+=1
 if !RC! neq 0 set "FAILED=!FAILED! %NM%"
 if !RC! neq 0 echo !RE!    [!!]  Failed - log: %TEMP%\pub_%NM%.log!RS!

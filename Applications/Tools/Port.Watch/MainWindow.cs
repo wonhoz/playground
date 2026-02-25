@@ -71,10 +71,11 @@ public sealed class MainWindow : Form
             Font = new Font("Segoe UI", 9.5f)
         };
         _searchBox.TextChanged += (_, _) => ApplyFilter();
+        var txH = _searchBox.PreferredHeight;  // 폰트 기반 자연 높이
         var searchBorder = new Panel
         {
-            Location = new Point(44, 12),
-            Size = new Size(302, 30),
+            Location = new Point(44, (54 - txH - 2) / 2),  // 툴바 내 수직 중앙 정렬
+            Size = new Size(302, txH + 2),  // 정확한 높이: 내부 텍스트 + 위아래 1px 보더
             BackColor = Color.FromArgb(54, 54, 76),
             Padding = new Padding(1)
         };
@@ -113,7 +114,7 @@ public sealed class MainWindow : Form
             EnableHeadersVisualStyles = false,
             Font = new Font("Segoe UI", 9.5f),
             RowTemplate = { Height = 34 },
-            ColumnHeadersHeight = 38,
+            ColumnHeadersHeight = 30,
             ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing,
             ScrollBars = ScrollBars.Both
         };
@@ -137,6 +138,7 @@ public sealed class MainWindow : Form
         hdrStyle.Font = new Font("Segoe UI", 9f, FontStyle.Bold);
         hdrStyle.SelectionBackColor = Color.FromArgb(26, 26, 42);
         hdrStyle.Padding = new Padding(6, 0, 4, 0);
+        _grid.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
 
         AddCol("fav",     "",         28,  DataGridViewAutoSizeColumnMode.None,  DataGridViewContentAlignment.MiddleCenter);
         AddCol("proto",   "프로토콜", 70,  DataGridViewAutoSizeColumnMode.None,  DataGridViewContentAlignment.MiddleCenter);
@@ -188,7 +190,7 @@ public sealed class MainWindow : Form
             ForeColor = Color.FromArgb(220, 90, 80),
             BackColor = Color.FromArgb(20, 20, 34),
             Dock = DockStyle.Right,
-            Width = 178,
+            Width = 150,
             Cursor = Cursors.Hand
         };
         btnKill.FlatAppearance.BorderColor = Color.FromArgb(55, 55, 75);

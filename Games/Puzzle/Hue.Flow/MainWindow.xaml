@@ -68,16 +68,28 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border x:Name="bd" Background="{TemplateBinding Background}"
-                                CornerRadius="8">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </Border>
+                        <Grid>
+                            <Border x:Name="bd" Background="{TemplateBinding Background}"
+                                    CornerRadius="8"
+                                    BorderBrush="Transparent" BorderThickness="3"/>
+                            <!-- 현재 영역 색 표시: 흰 테두리 + 체크 아이콘 -->
+                            <Border x:Name="activeMark"
+                                    CornerRadius="8"
+                                    BorderBrush="White" BorderThickness="3"
+                                    Visibility="Collapsed"/>
+                            <TextBlock x:Name="checkMark" Text="✓"
+                                       Foreground="White" FontSize="18" FontWeight="Bold"
+                                       HorizontalAlignment="Center" VerticalAlignment="Center"
+                                       Visibility="Collapsed"
+                                       Effect="{x:Null}"/>
+                        </Grid>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter TargetName="bd" Property="Opacity" Value="0.80"/>
                             </Trigger>
                             <Trigger Property="IsEnabled" Value="False">
-                                <Setter TargetName="bd" Property="Opacity" Value="0.25"/>
+                                <Setter TargetName="activeMark" Property="Visibility" Value="Visible"/>
+                                <Setter TargetName="checkMark"  Property="Visibility" Value="Visible"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>

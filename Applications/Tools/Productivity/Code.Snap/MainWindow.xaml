@@ -1,0 +1,306 @@
+<Window x:Class="CodeSnap.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:avalon="http://icsharpcode.net/sharpdevelop/avalonedit"
+        Title="Code.Snap" Height="680" Width="1000"
+        MinHeight="500" MinWidth="800"
+        Background="{StaticResource BgBrush}"
+        Foreground="{StaticResource TextBrush}"
+        WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <Style x:Key="SectionLabel" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#888898"/>
+            <Setter Property="FontSize" Value="10"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Margin" Value="0,10,0,5"/>
+        </Style>
+        <Style x:Key="ThemeRadio" TargetType="RadioButton" BasedOn="{StaticResource {x:Type RadioButton}}">
+            <Setter Property="FontSize" Value="11"/>
+            <Setter Property="Padding" Value="6,4"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="260"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- ────────────── 좌측: 미리보기 + 편집기 ────────────── -->
+        <Grid Grid.Column="0" Background="{StaticResource BgBrush}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="4"/>
+                <RowDefinition Height="220"/>
+            </Grid.RowDefinitions>
+
+            <!-- 미리보기 캔버스 영역 -->
+            <Border Grid.Row="0" Background="#0A0A10" Padding="0">
+                <ScrollViewer HorizontalScrollBarVisibility="Auto"
+                              VerticalScrollBarVisibility="Auto">
+                    <!-- 이 Grid가 실제 export 대상 캔버스 -->
+                    <Grid x:Name="PreviewCanvas"
+                          HorizontalAlignment="Center" VerticalAlignment="Center"
+                          MinWidth="300" MinHeight="200">
+                        <!-- 배경 레이어 -->
+                        <Border x:Name="BgLayer" CornerRadius="0">
+                            <Border.Background>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                    <GradientStop x:Name="Gs1" Color="#a78bfa" Offset="0"/>
+                                    <GradientStop x:Name="Gs2" Color="#6366f1" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Border.Background>
+                        </Border>
+
+                        <!-- 코드 패널 (padding wrapper) -->
+                        <Border x:Name="PaddingBorder" Padding="40">
+                            <!-- 코드 카드 -->
+                            <Border x:Name="CodeCard"
+                                    CornerRadius="8"
+                                    Background="#282A36">
+                                <Border.Effect>
+                                    <DropShadowEffect x:Name="CardShadow"
+                                                      Color="#000000" Opacity="0.5"
+                                                      BlurRadius="24" ShadowDepth="8"/>
+                                </Border.Effect>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition x:Name="DecoRow" Height="36"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+
+                                    <!-- 창 장식 (● ● ●) -->
+                                    <Border x:Name="WindowDeco" Grid.Row="0"
+                                            Background="#00000020"
+                                            CornerRadius="8,8,0,0"
+                                            Padding="14,0,0,0">
+                                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                            <Ellipse Width="12" Height="12" Fill="#FF5F56" Margin="0,0,6,0"/>
+                                            <Ellipse Width="12" Height="12" Fill="#FFBD2E" Margin="0,0,6,0"/>
+                                            <Ellipse Width="12" Height="12" Fill="#27C93F" Margin="0,0,16,0"/>
+                                            <TextBlock x:Name="TbPreviewFile"
+                                                       Text="" FontSize="12"
+                                                       Foreground="#808898"
+                                                       VerticalAlignment="Center"/>
+                                        </StackPanel>
+                                    </Border>
+
+                                    <!-- 미리보기 코드 에디터 (읽기 전용) -->
+                                    <avalon:TextEditor x:Name="PreviewEditor"
+                                                       Grid.Row="1"
+                                                       IsReadOnly="True"
+                                                       FontFamily="Cascadia Code"
+                                                       FontSize="14"
+                                                       Background="#282A36"
+                                                       Foreground="#F8F8F2"
+                                                       Padding="16,12"
+                                                       HorizontalScrollBarVisibility="Hidden"
+                                                       VerticalScrollBarVisibility="Hidden"
+                                                       WordWrap="False"/>
+                                </Grid>
+                            </Border>
+                        </Border>
+                    </Grid>
+                </ScrollViewer>
+            </Border>
+
+            <!-- 분리선 (드래그 핸들) -->
+            <GridSplitter Grid.Row="1" Height="4" HorizontalAlignment="Stretch"
+                          Background="#1E1E2E" ResizeDirection="Rows"/>
+
+            <!-- 편집기 영역 -->
+            <Grid Grid.Row="2" Background="#0D0D18">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="28"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Border Grid.Row="0" Background="#13131E" Padding="12,0">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <TextBlock Text="편집기" Foreground="#505068" FontSize="11"/>
+                        <TextBlock x:Name="TxtLangStatus" Text="" Foreground="#F59E0B"
+                                   FontSize="11" Margin="8,0,0,0"/>
+                    </StackPanel>
+                </Border>
+
+                <avalon:TextEditor x:Name="CodeEditor"
+                                   Grid.Row="1"
+                                   FontFamily="Cascadia Code"
+                                   FontSize="13"
+                                   Background="#0D0D18"
+                                   Foreground="#D0D0D8"
+                                   Padding="12,8"
+                                   ShowLineNumbers="False"
+                                   HorizontalScrollBarVisibility="Auto"
+                                   VerticalScrollBarVisibility="Auto"
+                                   WordWrap="False"/>
+            </Grid>
+        </Grid>
+
+        <!-- ────────────── 우측: 옵션 패널 ────────────── -->
+        <Border Grid.Column="1" Background="#13131E"
+                BorderBrush="#2A2A3A" BorderThickness="1,0,0,0">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <StackPanel Margin="14,14,14,14">
+
+                    <!-- 앱 타이틀 -->
+                    <TextBlock Text="Code.Snap" FontSize="15" FontWeight="Bold"
+                               Foreground="#F59E0B" Margin="0,0,0,4"/>
+                    <TextBlock Text="코드 스크린샷 도구" FontSize="10"
+                               Foreground="#505068" Margin="0,0,0,10"/>
+                    <Separator/>
+
+                    <!-- ── 코드 ── -->
+                    <TextBlock Style="{StaticResource SectionLabel}" Text="━  코드"/>
+
+                    <TextBlock Text="언어" Foreground="#888898" FontSize="11" Margin="0,0,0,3"/>
+                    <ComboBox x:Name="CbLanguage" Margin="0,0,0,8"
+                              SelectionChanged="CbLanguage_SelectionChanged">
+                        <ComboBoxItem Content="자동 감지"/>
+                        <ComboBoxItem Content="Text"/>
+                        <ComboBoxItem Content="C#"/>
+                        <ComboBoxItem Content="Python"/>
+                        <ComboBoxItem Content="JavaScript"/>
+                        <ComboBoxItem Content="TypeScript"/>
+                        <ComboBoxItem Content="Java"/>
+                        <ComboBoxItem Content="HTML"/>
+                        <ComboBoxItem Content="CSS"/>
+                        <ComboBoxItem Content="SQL"/>
+                        <ComboBoxItem Content="XML"/>
+                        <ComboBoxItem Content="JSON"/>
+                        <ComboBoxItem Content="Markdown"/>
+                        <ComboBoxItem Content="PHP"/>
+                        <ComboBoxItem Content="Ruby"/>
+                        <ComboBoxItem Content="Go"/>
+                        <ComboBoxItem Content="Rust"/>
+                    </ComboBox>
+
+                    <TextBlock Text="폰트" Foreground="#888898" FontSize="11" Margin="0,0,0,3"/>
+                    <ComboBox x:Name="CbFont" Margin="0,0,0,8"
+                              SelectionChanged="CbFont_SelectionChanged">
+                        <ComboBoxItem Content="Cascadia Code" IsSelected="True"/>
+                        <ComboBoxItem Content="Consolas"/>
+                        <ComboBoxItem Content="JetBrains Mono"/>
+                        <ComboBoxItem Content="Fira Code"/>
+                        <ComboBoxItem Content="Source Code Pro"/>
+                        <ComboBoxItem Content="Courier New"/>
+                    </ComboBox>
+
+                    <TextBlock Text="크기" Foreground="#888898" FontSize="11" Margin="0,0,0,3"/>
+                    <ComboBox x:Name="CbFontSize" Margin="0,0,0,8"
+                              SelectionChanged="CbFontSize_SelectionChanged">
+                        <ComboBoxItem Content="11"/>
+                        <ComboBoxItem Content="12"/>
+                        <ComboBoxItem Content="13"/>
+                        <ComboBoxItem Content="14" IsSelected="True"/>
+                        <ComboBoxItem Content="15"/>
+                        <ComboBoxItem Content="16"/>
+                        <ComboBoxItem Content="18"/>
+                        <ComboBoxItem Content="20"/>
+                    </ComboBox>
+
+                    <TextBlock Text="파일명 (선택)" Foreground="#888898" FontSize="11" Margin="0,0,0,3"/>
+                    <TextBox x:Name="TxtFileName"
+                             Margin="0,0,0,8"
+                             TextChanged="TxtFileName_TextChanged"/>
+
+                    <Separator/>
+
+                    <!-- ── 테마 ── -->
+                    <TextBlock Style="{StaticResource SectionLabel}" Text="━  테마"/>
+                    <UniformGrid Columns="2" Margin="0,0,0,4">
+                        <RadioButton x:Name="RbDracula"   Content="Dracula"   GroupName="Theme" IsChecked="True"
+                                     Margin="0,0,3,3" Style="{StaticResource ThemeRadio}"
+                                     Checked="Theme_Checked"/>
+                        <RadioButton x:Name="RbDarkPlus"  Content="Dark+"     GroupName="Theme"
+                                     Margin="3,0,0,3" Style="{StaticResource ThemeRadio}"
+                                     Checked="Theme_Checked"/>
+                        <RadioButton x:Name="RbGitHub"    Content="GitHub"    GroupName="Theme"
+                                     Margin="0,0,3,3" Style="{StaticResource ThemeRadio}"
+                                     Checked="Theme_Checked"/>
+                        <RadioButton x:Name="RbNord"      Content="Nord"      GroupName="Theme"
+                                     Margin="3,0,0,3" Style="{StaticResource ThemeRadio}"
+                                     Checked="Theme_Checked"/>
+                        <RadioButton x:Name="RbMonokai"   Content="Monokai"   GroupName="Theme"
+                                     Margin="0,0,3,0" Style="{StaticResource ThemeRadio}"
+                                     Checked="Theme_Checked"/>
+                        <RadioButton x:Name="RbSolarized" Content="Solarized" GroupName="Theme"
+                                     Margin="3,0,0,0" Style="{StaticResource ThemeRadio}"
+                                     Checked="Theme_Checked"/>
+                    </UniformGrid>
+
+                    <Separator/>
+
+                    <!-- ── 배경 ── -->
+                    <TextBlock Style="{StaticResource SectionLabel}" Text="━  배경"/>
+                    <UniformGrid Columns="3" Margin="0,0,0,8">
+                        <RadioButton x:Name="RbBgGradient" Content="그라데이션" GroupName="Bg" IsChecked="True"
+                                     Margin="0,0,3,0" Style="{StaticResource ThemeRadio}"
+                                     Checked="Bg_Checked"/>
+                        <RadioButton x:Name="RbBgSolid"    Content="단색"       GroupName="Bg"
+                                     Margin="2,0" Style="{StaticResource ThemeRadio}"
+                                     Checked="Bg_Checked"/>
+                        <RadioButton x:Name="RbBgTransp"   Content="투명"       GroupName="Bg"
+                                     Margin="3,0,0,0" Style="{StaticResource ThemeRadio}"
+                                     Checked="Bg_Checked"/>
+                    </UniformGrid>
+
+                    <!-- 그라데이션 프리셋 선택 -->
+                    <ComboBox x:Name="CbGradient" Margin="0,0,0,8"
+                              SelectionChanged="CbGradient_SelectionChanged">
+                        <ComboBoxItem Content="Violet Twilight" IsSelected="True"/>
+                        <ComboBoxItem Content="Pink Sunset"/>
+                        <ComboBoxItem Content="Ocean"/>
+                        <ComboBoxItem Content="Forest"/>
+                        <ComboBoxItem Content="Night City"/>
+                        <ComboBoxItem Content="Amber Glow"/>
+                    </ComboBox>
+
+                    <!-- 단색 선택 버튼 -->
+                    <Button x:Name="BtnSolidColor" Content="색상 선택..."
+                            Visibility="Collapsed"
+                            Margin="0,0,0,8"
+                            Click="BtnSolidColor_Click"/>
+
+                    <TextBlock Text="패딩" Foreground="#888898" FontSize="11" Margin="0,0,0,3"/>
+                    <Slider x:Name="SliderPadding"
+                            Minimum="10" Maximum="100" Value="40"
+                            Margin="0,0,0,8"
+                            ValueChanged="SliderPadding_ValueChanged"/>
+
+                    <Separator/>
+
+                    <!-- ── 옵션 ── -->
+                    <TextBlock Style="{StaticResource SectionLabel}" Text="━  옵션"/>
+                    <CheckBox x:Name="ChkRoundCorners" Content="라운드 코너"  IsChecked="True"
+                              Margin="0,0,0,6" Checked="Option_Changed" Unchecked="Option_Changed"/>
+                    <CheckBox x:Name="ChkShadow"       Content="그림자"       IsChecked="True"
+                              Margin="0,0,0,6" Checked="Option_Changed" Unchecked="Option_Changed"/>
+                    <CheckBox x:Name="ChkWindowDeco"   Content="창 장식 (● ● ●)" IsChecked="True"
+                              Margin="0,0,0,6" Checked="Option_Changed" Unchecked="Option_Changed"/>
+                    <CheckBox x:Name="ChkLineNumbers"  Content="줄 번호"      IsChecked="False"
+                              Margin="0,0,0,6" Checked="Option_Changed" Unchecked="Option_Changed"/>
+
+                    <Separator/>
+
+                    <!-- ── 내보내기 ── -->
+                    <TextBlock Style="{StaticResource SectionLabel}" Text="━  내보내기"/>
+                    <Button Content="PNG 저장" Margin="0,0,0,6" Click="BtnSavePng_Click"/>
+                    <Button Content="클립보드 복사" Margin="0,0,0,6" Click="BtnCopy_Click"
+                            Background="#2A1A00" Foreground="#F59E0B"/>
+
+                    <Separator/>
+
+                    <!-- 단축키 안내 -->
+                    <TextBlock Text="Ctrl+Shift+C — 클립보드 코드 자동 스냅"
+                               Foreground="#505068" FontSize="10" TextWrapping="Wrap"
+                               Margin="0,4,0,0"/>
+                    <TextBlock Text="파일 드래그 앤 드롭 지원"
+                               Foreground="#505068" FontSize="10" Margin="0,2,0,0"/>
+
+                </StackPanel>
+            </ScrollViewer>
+        </Border>
+    </Grid>
+</Window>

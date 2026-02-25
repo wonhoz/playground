@@ -34,7 +34,7 @@ call :pub "AI.Clip"               "Applications\AI\AI.Clip"                  "Ai
 call :pub "Music.Player"          "Applications\Audio\Music.Player"          "MusicPlayer.exe"          "Applications\Audio"
 
 :: ── Applications / Automation ────────────────────────────────────
-call :pub "Stay.Awake"            "Applications\Automation\Stay.Awake"       "StayAwake.exe"            "Applications\Automation"
+call :pub "Stay.Awake"            "Applications\Automation\Stay.Awake"       "StayAwake.exe"            "Applications\Automation\StayAwake"
 
 :: ── Applications / Files ─────────────────────────────────────────
 call :pub "File.Duplicates"       "Applications\Files\File.Duplicates"       "FileDuplicates.exe"       "Applications\Files"
@@ -47,22 +47,22 @@ call :pub "Toast.Cast"            "Applications\Health\Toast.Cast"           "To
 call :pub "Photo.Video.Organizer" "Applications\Media\Photo.Video.Organizer" "PhotoVideoOrganizer.exe"  "Applications\Media"
 
 :: ── Applications / Tools / Dev ───────────────────────────────────
-call :pub "Api.Probe"             "Applications\Tools\Api.Probe"             "Api.Probe.exe"            "Applications\Tools\Dev"
-call :pub "Hash.Forge"            "Applications\Tools\Hash.Forge"            "HashForge.exe"            "Applications\Tools\Dev"
-call :pub "Log.Lens"              "Applications\Tools\Log.Lens"              "LogLens.exe"              "Applications\Tools\Dev"
-call :pub "Mock.Desk"             "Applications\Tools\Mock.Desk"             "Mock.Desk.exe"            "Applications\Tools\Dev"
+call :pub "Api.Probe"             "Applications\Tools\Dev\Api.Probe"             "Api.Probe.exe"            "Applications\Tools\Dev"
+call :pub "Hash.Forge"            "Applications\Tools\Dev\Hash.Forge"            "HashForge.exe"            "Applications\Tools\Dev"
+call :pub "Log.Lens"              "Applications\Tools\Dev\Log.Lens"              "LogLens.exe"              "Applications\Tools\Dev"
+call :pub "Mock.Desk"             "Applications\Tools\Dev\Mock.Desk"             "Mock.Desk.exe"            "Applications\Tools\Dev"
 
 :: ── Applications / Tools / Network ──────────────────────────────
-call :pub "DNS.Flip"              "Applications\Tools\DNS.Flip"              "DnsFlip.exe"              "Applications\Tools\Network"
-call :pub "Port.Watch"            "Applications\Tools\Port.Watch"            "PortWatch.exe"            "Applications\Tools\Network"
+call :pub "DNS.Flip"              "Applications\Tools\Network\DNS.Flip"          "DnsFlip.exe"              "Applications\Tools\Network"
+call :pub "Port.Watch"            "Applications\Tools\Network\Port.Watch"        "PortWatch.exe"            "Applications\Tools\Network"
 
 :: ── Applications / Tools / Productivity ─────────────────────────
-call :pub "Clipboard.Stacker"     "Applications\Tools\Clipboard.Stacker"     "ClipboardStacker.exe"     "Applications\Tools\Productivity"
-call :pub "Screen.Recorder"       "Applications\Tools\Screen.Recorder"       "ScreenRecorder.exe"       "Applications\Tools\Productivity"
-call :pub "Text.Forge"            "Applications\Tools\Text.Forge"            "TextForge.exe"            "Applications\Tools\Productivity"
+call :pub "Clipboard.Stacker"     "Applications\Tools\Productivity\Clipboard.Stacker"  "ClipboardStacker.exe"  "Applications\Tools\Productivity"
+call :pub "Screen.Recorder"       "Applications\Tools\Productivity\Screen.Recorder"    "ScreenRecorder.exe"    "Applications\Tools\Productivity"
+call :pub "Text.Forge"            "Applications\Tools\Productivity\Text.Forge"         "TextForge.exe"         "Applications\Tools\Productivity"
 
 :: ── Applications / Tools / System ───────────────────────────────
-call :pub "Env.Guard"             "Applications\Tools\Env.Guard"             "EnvGuard.exe"             "Applications\Tools\System"
+call :pub "Env.Guard"             "Applications\Tools\System\Env.Guard"          "EnvGuard.exe"             "Applications\Tools\System"
 
 :: ── Games / Action ───────────────────────────────────────────────
 call :pub "Dungeon.Dash"          "Games\Action\Dungeon.Dash"                "DungeonDash.exe"          "Games\Action"

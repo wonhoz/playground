@@ -125,6 +125,11 @@ foreach ($bytes in $pngBytes) {
 
 [System.IO.File]::WriteAllBytes($icoPath, $ms.ToArray())
 $writer.Dispose(); $ms.Dispose()
+
+# WPF 창 아이콘용 32px PNG (BitmapFrame이 PNG-ICO 디코딩 실패 우회)
+$png32Path = Join-Path $outputDir "icon32.png"
+$bitmaps[1].Save($png32Path, [System.Drawing.Imaging.ImageFormat]::Png)
+
 $bitmaps | ForEach-Object { $_.Dispose() }
 
-Write-Host "아이콘 생성 완료: $icoPath"
+Write-Host "아이콘 생성 완료: $icoPath / $png32Path"

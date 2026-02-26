@@ -11,11 +11,11 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
 
-        // 앱 아이콘
+        // 앱 아이콘 (PNG-embedded ICO는 WPF BitmapDecoder 미지원 → 32px PNG 사용)
         try
         {
-            Icon = BitmapFrame.Create(
-                new Uri("pack://application:,,,/Resources/app.ico", UriKind.Absolute));
+            Icon = new BitmapImage(
+                new Uri("pack://application:,,,/Resources/icon32.png", UriKind.Absolute));
         }
         catch { }
 

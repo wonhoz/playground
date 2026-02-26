@@ -22,13 +22,7 @@ public partial class MainWindow : Window
     private Guid?          _renamingRequestId;
     private bool           _loading;
 
-    private static readonly List<EnvPreset> _envPresets =
-    [
-        new() { Name = "없음", Variables = [] },
-        new() { Name = "Local",  Variables = new() { ["BASE_URL"] = "http://localhost:3000" } },
-        new() { Name = "Dev",    Variables = new() { ["BASE_URL"] = "https://dev.example.com" } },
-        new() { Name = "Prod",   Variables = new() { ["BASE_URL"] = "https://api.example.com" } },
-    ];
+    private List<EnvPreset> _envPresets = [];
 
     public MainWindow()
     {
@@ -42,8 +36,8 @@ public partial class MainWindow : Window
         var dark = 1;
         DwmSetWindowAttribute(helper.Handle, 20, ref dark, sizeof(int));
 
-        CmbEnv.ItemsSource   = _envPresets.Select(p => p.Name).ToList();
-        CmbEnv.SelectedIndex = 0;
+        _envPresets = EnvService.Load();
+        ReloadEnvCombo();
 
         _collections = CollectionService.Load();
         if (_collections.Count == 0)
@@ -455,7 +449,10 @@ public partial class MainWindow : Window
             Headers     = _activeRequest?.Headers ?? []
         };
 
-        var envVars = _envPresets[CmbEnv.SelectedIndex].Variables;
+        var envIdx  = CmbEnv.SelectedIndex;
+        var envVars = envIdx > 0 && envIdx - 1 < _envPresets.Count
+            ? _envPresets[envIdx - 1].Variables
+            : [];
 
         TxtRespBody.Text       = "요청 전송 중...";
         TxtRespHeaders.Text    = "";
@@ -522,6 +519,23 @@ public partial class MainWindow : Window
         _activeRequest.Name = TxtReqName.Text;
         CollectionService.Save(_collections);
         RefreshSidebar();
+    }
+
+    private void ReloadEnvCombo()
+    {
+        var prev = CmbEnv.SelectedIndex;
+        CmbEnv.ItemsSource = new[] { "없음" }
+            .Concat(_envPresets.Select(p => p.Name))
+            .ToList();
+        CmbEnv.SelectedIndex = Math.Clamp(prev, 0, CmbEnv.Items.Count - 1);
+    }
+
+    private void EditEnv(object s, RoutedEventArgs e)
+    {
+        var editor = new EnvEditorWindow(_envPresets) { Owner = this };
+        editor.ShowDialog();
+        _envPresets = EnvService.Load();
+        ReloadEnvCombo();
     }
 
     private void CmbEnv_Changed(object s, SelectionChangedEventArgs e) { }

@@ -22,25 +22,25 @@ public static class HttpService
 
     public static async Task<HttpResponse> SendAsync(ApiRequest req, Dictionary<string, string> envVars)
     {
-        var url = ApplyEnv(req.Url, envVars);
-        using var request = new HttpRequestMessage(new HttpMethod(req.Method), url);
-
-        foreach (var h in req.Headers)
-        {
-            if (h.Enabled && !string.IsNullOrWhiteSpace(h.Key))
-                request.Headers.TryAddWithoutValidation(h.Key, ApplyEnv(h.Value, envVars));
-        }
-
-        if (!string.IsNullOrWhiteSpace(req.Body) &&
-            req.Method is "POST" or "PUT" or "PATCH")
-        {
-            var body = ApplyEnv(req.Body, envVars);
-            request.Content = new StringContent(body, Encoding.UTF8, req.ContentType);
-        }
-
         var sw = Stopwatch.StartNew();
         try
         {
+            var url     = ApplyEnv(req.Url, envVars);
+            using var request = new HttpRequestMessage(new HttpMethod(req.Method), url);
+
+            foreach (var h in req.Headers)
+            {
+                if (h.Enabled && !string.IsNullOrWhiteSpace(h.Key))
+                    request.Headers.TryAddWithoutValidation(h.Key, ApplyEnv(h.Value, envVars));
+            }
+
+            if (!string.IsNullOrWhiteSpace(req.Body) &&
+                req.Method is "POST" or "PUT" or "PATCH")
+            {
+                var body = ApplyEnv(req.Body, envVars);
+                request.Content = new StringContent(body, Encoding.UTF8, req.ContentType);
+            }
+
             var resp = await _client.SendAsync(request);
             sw.Stop();
 
@@ -50,7 +50,7 @@ public static class HttpService
             foreach (var h in resp.Content.Headers)
                 headerSb.AppendLine($"{h.Key}: {string.Join(", ", h.Value)}");
 
-            var rawBody = await resp.Content.ReadAsStringAsync();
+            var rawBody    = await resp.Content.ReadAsStringAsync();
             var prettyBody = TryPrettyJson(rawBody);
 
             return new HttpResponse(
@@ -60,10 +60,25 @@ public static class HttpService
                 prettyBody,
                 sw.ElapsedMilliseconds);
         }
+        catch (UriFormatException ex)
+        {
+            sw.Stop();
+            return new HttpResponse(0, "잘못된 URL", "", $"URL 형식 오류: {ex.Message}", sw.ElapsedMilliseconds);
+        }
+        catch (TaskCanceledException)
+        {
+            sw.Stop();
+            return new HttpResponse(0, "시간 초과", "", "요청 시간이 초과되었습니다 (30초).", sw.ElapsedMilliseconds);
+        }
+        catch (HttpRequestException ex)
+        {
+            sw.Stop();
+            return new HttpResponse(0, "연결 실패", "", $"연결 오류: {ex.Message}", sw.ElapsedMilliseconds);
+        }
         catch (Exception ex)
         {
             sw.Stop();
-            return new HttpResponse(0, "Error", "", ex.Message, sw.ElapsedMilliseconds);
+            return new HttpResponse(0, "오류", "", ex.Message, sw.ElapsedMilliseconds);
         }
     }
 

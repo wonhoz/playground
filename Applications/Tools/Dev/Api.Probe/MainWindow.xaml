@@ -34,7 +34,16 @@
                 BorderBrush="{StaticResource BorderBrush2}">
           <StackPanel>
             <TextBlock Text="환경" FontSize="11" Foreground="{StaticResource FgDimBrush}" Margin="0,0,0,4"/>
-            <ComboBox x:Name="CmbEnv" SelectionChanged="CmbEnv_Changed"/>
+            <Grid>
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+              </Grid.ColumnDefinitions>
+              <ComboBox x:Name="CmbEnv" Grid.Column="0" Margin="0,0,6,0"
+                        SelectionChanged="CmbEnv_Changed"/>
+              <Button Grid.Column="1" Content="편집"
+                      Padding="8,5" FontSize="12" Click="EditEnv"/>
+            </Grid>
           </StackPanel>
         </Border>
 

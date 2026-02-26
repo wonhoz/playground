@@ -16,8 +16,10 @@ public partial class MainWindow : Window
 
     // ── 상태 ────────────────────────────────────────────────────
     private ObservableCollection<ApiCollection> _collections = [];
-    private ApiRequest?  _activeRequest;
-    private bool         _loading;
+    private ApiRequest?   _activeRequest;
+    private ApiCollection? _activeCollection;
+    private Guid?         _renamingCollectionId;
+    private bool          _loading;
 
     private static readonly List<EnvPreset> _envPresets =
     [
@@ -30,7 +32,6 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
-
         Loaded += OnLoaded;
     }
 
@@ -65,89 +66,198 @@ public partial class MainWindow : Window
     private void RefreshSidebar()
     {
         CollectionPanel.Children.Clear();
+
         foreach (var col in _collections)
         {
-            // 컬렉션 헤더
-            var colBtn = new Border
-            {
-                Background  = Brushes.Transparent,
-                Padding     = new Thickness(10, 6, 10, 6),
-                Cursor      = Cursors.Hand
-            };
-            var colLabel = new TextBlock
-            {
-                Text       = $"▸ {col.Name}",
-                Foreground = (SolidColorBrush)FindResource("AccentBrush"),
-                FontWeight = FontWeights.SemiBold,
-                FontSize   = 13
-            };
-            colBtn.Child = colLabel;
-            CollectionPanel.Children.Add(colBtn);
+            var colRef    = col;
+            bool renaming = _renamingCollectionId == col.Id;
 
-            // 요청 목록
-            var reqPanel = new StackPanel { Margin = new Thickness(8, 0, 0, 0) };
+            // ── 컬렉션 헤더 그리드 ──────────────────────────────
+            var hGrid = new Grid();
+            hGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+            hGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
+
+            // 이름 영역: 이름변경 중이면 TextBox, 아니면 TextBlock
+            if (renaming)
+            {
+                var tb = new TextBox
+                {
+                    Text              = col.Name,
+                    FontSize          = 13,
+                    FontWeight        = FontWeights.SemiBold,
+                    Background        = (SolidColorBrush)FindResource("Bg3Brush"),
+                    Foreground        = (SolidColorBrush)FindResource("AccentBrush"),
+                    BorderThickness   = new Thickness(0, 0, 0, 1),
+                    BorderBrush       = (SolidColorBrush)FindResource("AccentBrush"),
+                    Padding           = new Thickness(2),
+                    VerticalAlignment = VerticalAlignment.Center,
+                };
+                Grid.SetColumn(tb, 0);
+                hGrid.Children.Add(tb);
+
+                bool committed = false;
+                void Commit()
+                {
+                    if (committed) return;
+                    committed = true;
+                    _renamingCollectionId = null;
+                    var name = tb.Text.Trim();
+                    if (!string.IsNullOrEmpty(name)) colRef.Name = name;
+                    CollectionService.Save(_collections);
+                    RefreshSidebar();
+                }
+
+                tb.KeyDown  += (_, e) =>
+                {
+                    if (e.Key == Key.Enter)  { e.Handled = true; Commit(); }
+                    if (e.Key == Key.Escape) { _renamingCollectionId = null; RefreshSidebar(); }
+                };
+                tb.LostFocus += (_, _) => Commit();
+
+                // 레이아웃 완료 후 포커스
+                Dispatcher.BeginInvoke(() => { tb.Focus(); tb.SelectAll(); },
+                    System.Windows.Threading.DispatcherPriority.Input);
+            }
+            else
+            {
+                var label = new TextBlock
+                {
+                    Text              = $"▸ {col.Name}",
+                    Foreground        = (SolidColorBrush)FindResource("AccentBrush"),
+                    FontWeight        = FontWeights.SemiBold,
+                    FontSize          = 13,
+                    VerticalAlignment = VerticalAlignment.Center,
+                    ToolTip           = "더블클릭: 이름 변경",
+                };
+                Grid.SetColumn(label, 0);
+                hGrid.Children.Add(label);
+            }
+
+            // [+] 요청 추가 버튼
+            var addReqBtn = new Button
+            {
+                Content           = "+",
+                Width             = 22,
+                FontSize          = 15,
+                Padding           = new Thickness(0),
+                BorderThickness   = new Thickness(0),
+                Background        = Brushes.Transparent,
+                Foreground        = (SolidColorBrush)FindResource("FgDimBrush"),
+                Cursor            = Cursors.Hand,
+                ToolTip           = "이 컬렉션에 요청 추가",
+                VerticalAlignment = VerticalAlignment.Center,
+                Margin            = new Thickness(0, 0, 4, 0),
+            };
+            Grid.SetColumn(addReqBtn, 1);
+            addReqBtn.Click += (_, _) => AddRequestToCollection(colRef);
+            hGrid.Children.Add(addReqBtn);
+
+            // 헤더 컨테이너
+            var colBorder = new Border
+            {
+                Background = Brushes.Transparent,
+                Padding    = new Thickness(10, 6, 4, 6),
+                Cursor     = Cursors.Hand,
+                Child      = hGrid,
+            };
+
+            colBorder.MouseEnter += (_, _) =>
+                colBorder.Background = (SolidColorBrush)FindResource("HoverBrush");
+            colBorder.MouseLeave += (_, _) =>
+                colBorder.Background = Brushes.Transparent;
+
+            colBorder.MouseLeftButtonDown += (_, e) =>
+            {
+                if (e.ClickCount == 1)
+                {
+                    // 컬렉션 선택 (싱글 클릭)
+                    _activeCollection = colRef;
+                }
+                else if (e.ClickCount == 2 && !renaming)
+                {
+                    // 이름 변경 시작 (더블 클릭)
+                    _renamingCollectionId = colRef.Id;
+                    RefreshSidebar();
+                }
+            };
+
+            CollectionPanel.Children.Add(colBorder);
+
+            // ── 요청 목록 ────────────────────────────────────────
+            var reqPanel = new StackPanel { Margin = new Thickness(8, 0, 0, 4) };
             foreach (var req in col.Requests)
             {
-                var r = req; // capture
+                var r = req;
+                bool isActive = ReferenceEquals(_activeRequest, r);
+
                 var btn = new Border
                 {
-                    Background    = Brushes.Transparent,
-                    Padding       = new Thickness(8, 5, 8, 5),
-                    Cursor        = Cursors.Hand,
-                    CornerRadius  = new CornerRadius(4),
-                    Margin        = new Thickness(0, 1, 0, 1)
+                    Background   = isActive
+                        ? (SolidColorBrush)FindResource("Bg3Brush")
+                        : Brushes.Transparent,
+                    Padding      = new Thickness(8, 5, 8, 5),
+                    Cursor       = Cursors.Hand,
+                    CornerRadius = new CornerRadius(4),
+                    Margin       = new Thickness(0, 1, 0, 1),
                 };
+
                 var sp = new StackPanel { Orientation = Orientation.Horizontal };
                 sp.Children.Add(new TextBlock
                 {
-                    Text       = MethodColor(r.Method),
-                    Foreground = MethodBrush(r.Method),
-                    FontSize   = 11, FontWeight = FontWeights.Bold,
-                    Width      = 46, VerticalAlignment = VerticalAlignment.Center
+                    Text              = MethodLabel(r.Method),
+                    Foreground        = MethodBrush(r.Method),
+                    FontSize          = 11,
+                    FontWeight        = FontWeights.Bold,
+                    Width             = 46,
+                    VerticalAlignment = VerticalAlignment.Center,
                 });
                 sp.Children.Add(new TextBlock
                 {
-                    Text       = r.Name,
-                    Foreground = (SolidColorBrush)FindResource("FgBrush"),
-                    FontSize   = 12,
-                    VerticalAlignment = VerticalAlignment.Center
+                    Text              = r.Name,
+                    Foreground        = (SolidColorBrush)FindResource("FgBrush"),
+                    FontSize          = 12,
+                    VerticalAlignment = VerticalAlignment.Center,
                 });
                 btn.Child = sp;
 
                 btn.MouseEnter += (_, _) =>
                     btn.Background = (SolidColorBrush)FindResource("HoverBrush");
                 btn.MouseLeave += (_, _) =>
-                    btn.Background = Brushes.Transparent;
-                btn.MouseLeftButtonUp += (_, _) => LoadRequest(r);
+                    btn.Background = ReferenceEquals(_activeRequest, r)
+                        ? (SolidColorBrush)FindResource("Bg3Brush")
+                        : Brushes.Transparent;
+                btn.MouseLeftButtonUp += (_, _) =>
+                {
+                    _activeCollection = colRef;
+                    LoadRequest(r);
+                };
+
                 reqPanel.Children.Add(btn);
             }
             CollectionPanel.Children.Add(reqPanel);
         }
     }
 
-    private static string MethodColor(string m) => m switch
+    private static string MethodLabel(string m) => m switch
     {
-        "GET"    => "GET",
-        "POST"   => "POST",
-        "PUT"    => "PUT",
-        "PATCH"  => "PATCH",
-        "DELETE" => "DEL",
-        _        => m
+        "DELETE"  => "DEL",
+        "OPTIONS" => "OPT",
+        _         => m,
     };
 
     private SolidColorBrush MethodBrush(string m) => m switch
     {
-        "GET"    => new SolidColorBrush(Color.FromRgb(0x14, 0xB8, 0xA6)),
-        "POST"   => new SolidColorBrush(Color.FromRgb(0x22, 0xC5, 0x5E)),
-        "PUT"    => new SolidColorBrush(Color.FromRgb(0xF5, 0x9E, 0x0B)),
-        "PATCH"  => new SolidColorBrush(Color.FromRgb(0xA7, 0x8B, 0xFA)),
-        "DELETE" => new SolidColorBrush(Color.FromRgb(0xEF, 0x44, 0x44)),
-        _        => (SolidColorBrush)FindResource("FgDimBrush")
+        "GET"     => new SolidColorBrush(Color.FromRgb(0x14, 0xB8, 0xA6)),
+        "POST"    => new SolidColorBrush(Color.FromRgb(0x22, 0xC5, 0x5E)),
+        "PUT"     => new SolidColorBrush(Color.FromRgb(0xF5, 0x9E, 0x0B)),
+        "PATCH"   => new SolidColorBrush(Color.FromRgb(0xA7, 0x8B, 0xFA)),
+        "DELETE"  => new SolidColorBrush(Color.FromRgb(0xEF, 0x44, 0x44)),
+        _         => (SolidColorBrush)FindResource("FgDimBrush"),
     };
 
     private void LoadRequest(ApiRequest req)
     {
-        _loading = true;
+        _loading       = true;
         _activeRequest = req;
 
         CmbMethod.SelectedItem = CmbMethod.Items
@@ -166,6 +276,8 @@ public partial class MainWindow : Window
 
         HeaderGrid.DataContext = req;
         _loading = false;
+
+        RefreshSidebar(); // 활성 요청 하이라이트 갱신
     }
 
     // ── 사이드바 버튼 ─────────────────────────────────────────────
@@ -173,15 +285,27 @@ public partial class MainWindow : Window
     {
         var col = new ApiCollection { Name = "새 컬렉션" };
         _collections.Add(col);
+        _activeCollection = col;
         CollectionService.Save(_collections);
+
+        // 즉시 이름 변경 모드로 진입
+        _renamingCollectionId = col.Id;
         RefreshSidebar();
     }
 
     private void AddRequest(object s, RoutedEventArgs e)
     {
         if (_collections.Count == 0) AddCollection(s, e);
+
+        var target = _activeCollection ?? _collections[0];
+        AddRequestToCollection(target);
+    }
+
+    private void AddRequestToCollection(ApiCollection col)
+    {
         var req = new ApiRequest { Name = "새 요청" };
-        _collections[0].Requests.Add(req);
+        col.Requests.Add(req);
+        _activeCollection = col;
         CollectionService.Save(_collections);
         RefreshSidebar();
         LoadRequest(req);
@@ -206,8 +330,8 @@ public partial class MainWindow : Window
 
         var envVars = _envPresets[CmbEnv.SelectedIndex].Variables;
 
-        TxtRespBody.Text    = "요청 전송 중...";
-        TxtRespHeaders.Text = "";
+        TxtRespBody.Text       = "요청 전송 중...";
+        TxtRespHeaders.Text    = "";
         StatusBadge.Visibility = Visibility.Collapsed;
         TxtElapsed.Text        = "";
 
@@ -217,7 +341,6 @@ public partial class MainWindow : Window
         TxtRespHeaders.Text = result.Headers;
         TxtElapsed.Text     = $"{result.ElapsedMs} ms";
 
-        // 상태 배지
         StatusBadge.Visibility = Visibility.Visible;
         TxtStatus.Text = $"{result.StatusCode} {result.StatusText}";
         StatusBadge.Background = result.StatusCode switch
@@ -230,11 +353,11 @@ public partial class MainWindow : Window
         };
         TxtStatus.Foreground = Brushes.White;
 
-        // 자동 저장
         if (_activeRequest != null)
         {
-            _activeRequest.Url  = url;
-            _activeRequest.Body = TxtBody.Text;
+            _activeRequest.Url    = url;
+            _activeRequest.Body   = TxtBody.Text;
+            _activeRequest.Method = req.Method;
             CollectionService.Save(_collections);
         }
     }

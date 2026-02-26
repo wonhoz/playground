@@ -2,33 +2,39 @@ namespace WordCloud.Services;
 
 public static class CloudGeneratorService
 {
-    private static readonly Random _rng = new();
-
-    public static async Task<SKBitmap?> GenerateAsync(
-        Dictionary<string, int> frequencies,
-        CloudConfig config,
-        SKBitmap? mask = null)
+    // 생성 해상도: 모니터 물리 해상도 이상
+    public static (int w, int h) GetExportSize()
     {
-        if (frequencies.Count == 0) return null;
-
-        return await Task.Run(() => Generate(frequencies, config, mask));
+        var bounds = System.Windows.Forms.Screen.PrimaryScreen?.Bounds;
+        int w = Math.Max(bounds?.Width  ?? 1920, 2560);
+        int h = Math.Max(bounds?.Height ?? 1080, 1600);
+        return (w, h);
     }
 
-    private static SKBitmap Generate(
+    public static async Task<(SKBitmap? bitmap, Sdcb.WordClouds.WordCloud? wc)> GenerateAsync(
         Dictionary<string, int> frequencies,
         CloudConfig config,
-        SKBitmap? mask)
+        int exportW,
+        int exportH)
     {
-        int w = 800, h = 500;
-        if (mask != null) { w = mask.Width; h = mask.Height; }
+        if (frequencies.Count == 0) return (null, null);
 
+        return await Task.Run(() => Generate(frequencies, config, exportW, exportH));
+    }
+
+    private static (SKBitmap? bitmap, Sdcb.WordClouds.WordCloud? wc) Generate(
+        Dictionary<string, int> frequencies,
+        CloudConfig config,
+        int exportW,
+        int exportH)
+    {
         var wordScores = frequencies
             .Select(kv => new WordScore(kv.Key, kv.Value))
             .ToArray();
 
         int colorCount = 0;
-        int total = wordScores.Length;
-        var themeIndex = config.ThemeIndex;
+        int total      = wordScores.Length;
+        int themeIndex = config.ThemeIndex;
 
         var orientation = config.Orientation switch
         {
@@ -39,10 +45,10 @@ public static class CloudGeneratorService
             _                          => TextOrientations.PreferHorizontal,
         };
 
-        var options = new WordCloudOptions(w, h, wordScores)
+        var options = new WordCloudOptions(exportW, exportH, wordScores)
         {
-            FontManager      = new FontManager([config.FontName, "맑은 고딕", "Malgun Gothic", "Arial"]),
-            TextOrientation  = orientation,
+            FontManager       = new FontManager([config.FontName, "맑은 고딕", "Malgun Gothic", "Arial"]),
+            TextOrientation   = orientation,
             FontColorAccessor = ctx =>
             {
                 var idx = System.Threading.Interlocked.Increment(ref colorCount) - 1;
@@ -50,15 +56,21 @@ public static class CloudGeneratorService
             },
         };
 
-        if (mask != null)
+        // 마스크 생성 (Rectangle 제외)
+        if (config.Shape != CloudShape.Rectangle)
+        {
+            var mask = MaskService.Generate(config.Shape, exportW, exportH);
             options.Mask = MaskOptions.CreateWithBackgroundColor(mask, SKColors.White);
+        }
 
         var wordCloud = Sdcb.WordClouds.WordCloud.Create(options);
 
-        var bgBmp = new SKBitmap(w, h);
+        // 투명 배경으로 렌더링 (PNG/SVG/클립보드 모두 투명, JPEG는 내보내기 시 합성)
+        var bgBmp = new SKBitmap(new SKImageInfo(exportW, exportH, SKColorType.Bgra8888, SKAlphaType.Premul));
         using var bgCanvas = new SKCanvas(bgBmp);
-        bgCanvas.Clear(config.BgColor);
+        bgCanvas.Clear(SKColors.Transparent);
 
-        return wordCloud.ToSKBitmap(bgBmp);
+        var bitmap = wordCloud.ToSKBitmap(bgBmp);
+        return (bitmap, wordCloud);
     }
 }

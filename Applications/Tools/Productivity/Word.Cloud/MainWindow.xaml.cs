@@ -12,6 +12,7 @@ public partial class MainWindow : Window
     private readonly CloudConfig _config = new();
     private readonly HashSet<string> _userStopWords = [];
     private SKBitmap? _currentBitmap;
+    private Sdcb.WordClouds.WordCloud? _currentWordCloud;
 
     public MainWindow()
     {
@@ -260,30 +261,27 @@ public partial class MainWindow : Window
                 BgColor     = _config.BgColor,
             };
 
-            int previewW = Math.Max(400, (int)SkPreview.ActualWidth);
-            int previewH = Math.Max(300, (int)SkPreview.ActualHeight);
+            // 모니터 물리 해상도 이상으로 생성
+            var (exportW, exportH) = CloudGeneratorService.GetExportSize();
 
-            var bitmap = await Task.Run(() =>
+            var (bitmap, wc) = await Task.Run(() =>
             {
                 var freq = TextAnalysisService.Analyze(
                     text, cfg.MaxWords, cfg.MinFreq, _userStopWords);
+                if (freq.Count == 0) return ((SKBitmap?)null, (Sdcb.WordClouds.WordCloud?)null);
 
-                if (freq.Count == 0) return null;
-
-                SKBitmap? mask = cfg.Shape != CloudShape.Rectangle
-                    ? MaskService.Generate(cfg.Shape, previewW, previewH)
-                    : null;
-
-                return CloudGeneratorService.GenerateAsync(freq, cfg, mask).GetAwaiter().GetResult();
+                return CloudGeneratorService.GenerateAsync(freq, cfg, exportW, exportH)
+                    .GetAwaiter().GetResult();
             });
 
             _currentBitmap?.Dispose();
-            _currentBitmap = bitmap;
+            _currentBitmap    = bitmap;
+            _currentWordCloud = wc;
             SkPreview.InvalidateVisual();
 
             TxtStatus.Text = bitmap == null
                 ? "단어가 부족합니다. 최소 빈도를 낮춰보세요."
-                : "생성 완료";
+                : $"생성 완료 ({exportW}×{exportH})";
         }
         catch (Exception ex)
         {
@@ -291,19 +289,19 @@ public partial class MainWindow : Window
         }
         finally
         {
-            BtnGenerate.IsEnabled       = false;
             PrgGenerate.IsIndeterminate = false;
             BtnGenerate.IsEnabled       = true;
         }
     }
 
     // ─────────────────────────────────────────────────────────────
-    //  SKElement 렌더링
+    //  SKElement 렌더링 (미리보기: BgColor 배경 합성)
     // ─────────────────────────────────────────────────────────────
     private void SkPreview_PaintSurface(object sender, SKPaintSurfaceEventArgs e)
     {
         var canvas = e.Surface.Canvas;
-        canvas.Clear(new SKColor(0x1A, 0x1A, 0x28));
+        // 미리보기 배경: 사용자가 선택한 BgColor
+        canvas.Clear(_config.BgColor);
 
         if (_currentBitmap == null || _currentBitmap.IsNull) return;
 
@@ -331,7 +329,19 @@ public partial class MainWindow : Window
     private void BtnSaveJpeg_Click(object sender, RoutedEventArgs e)
     {
         if (!CheckBitmap()) return;
-        try { ExportService.SaveJpeg(_currentBitmap!); }
+        try { ExportService.SaveJpeg(_currentBitmap!, _config.BgColor); }
+        catch (Exception ex) { ShowError(ex); }
+    }
+
+    private void BtnSaveSvg_Click(object sender, RoutedEventArgs e)
+    {
+        if (_currentWordCloud == null)
+        {
+            System.Windows.MessageBox.Show("먼저 워드클라우드를 생성하세요.",
+                "알림", MessageBoxButton.OK, MessageBoxImage.Information);
+            return;
+        }
+        try { ExportService.SaveSvg(_currentWordCloud); }
         catch (Exception ex) { ShowError(ex); }
     }
 

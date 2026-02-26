@@ -18,8 +18,9 @@ public partial class MainWindow : Window
     private GameState _state = GameState.Title;
 
     // ── 엔진 ──────────────────────────────────────────────────────────────
-    private readonly GameEngine   _engine = new();
-    private readonly GameInput _input  = new();
+    private readonly GameEngine       _engine   = new();
+    private readonly GameInput        _input    = new();
+    private readonly JoystickManager  _joystick = new();
 
     // ── 엔티티 ────────────────────────────────────────────────────────────
     private Player             _player  = null!;
@@ -132,6 +133,18 @@ public partial class MainWindow : Window
     // ── 게임 루프 ─────────────────────────────────────────────────────────
     private void OnUpdate(double dt)
     {
+        // 조이스틱 폴링 — 방향 동기화 + 버튼 처리
+        _joystick.Poll();
+        _input.JoyLeft  = _joystick.Left;
+        _input.JoyRight = _joystick.Right;
+        _input.JoyUp    = _joystick.Up;
+        _input.JoyDown  = _joystick.Down;
+
+        if (_joystick.StartJustPressed && _state is GameState.Title or GameState.GameOver)
+            StartGame();
+        if (_joystick.BackJustPressed  && _state == GameState.Playing)
+            BackToTitle();
+
         foreach (var s in _stars) s.Update(dt);
 
         if (_state == GameState.Playing)

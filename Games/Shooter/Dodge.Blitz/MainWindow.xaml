@@ -64,8 +64,12 @@
                 </TextBlock.Effect>
             </TextBlock>
 
-            <TextBlock Text="[ ENTER to Start ]" FontSize="16" Foreground="#00FFCC"
-                       HorizontalAlignment="Center" Margin="0,20,0,0" FontFamily="Consolas">
+            <TextBlock FontSize="16" Foreground="#00FFCC"
+                       HorizontalAlignment="Center" Margin="0,20,0,0" FontFamily="Consolas"
+                       TextAlignment="Center">
+                <Run Text="[ ENTER to Start ]"/>
+                <LineBreak/>
+                <Run Text="[ 🎮 A / Start ]" Foreground="#A0A0CC" FontSize="13"/>
                 <TextBlock.Effect>
                     <DropShadowEffect Color="#00FFCC" BlurRadius="10" ShadowDepth="0"/>
                 </TextBlock.Effect>
@@ -73,11 +77,11 @@
 
             <TextBlock FontSize="12" Foreground="#555566" HorizontalAlignment="Center"
                        Margin="0,18,0,0" FontFamily="Consolas" TextAlignment="Center">
-                <Run Text="WASD / Arrow Keys  move"/>
+                <Run Text="WASD / Arrow Keys  ·  Left Stick / D-Pad  move"/>
                 <LineBreak/>
                 <Run Text="Dodge all bullets — survive as long as possible"/>
                 <LineBreak/>
-                <Run Text="ESC  back to title"/>
+                <Run Text="ESC / B / Back  back to title"/>
             </TextBlock>
         </StackPanel>
 

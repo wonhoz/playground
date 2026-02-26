@@ -1,0 +1,223 @@
+<Window x:Class="CharArt.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Char.Art" Height="620" Width="1000" MinHeight="500" MinWidth="780"
+        Background="{StaticResource BgBrush}"
+        Foreground="{StaticResource TextBrush}"
+        AllowDrop="True"
+        Drop="Window_Drop"
+        DragOver="Window_DragOver">
+
+    <Window.Resources>
+        <Style x:Key="LabelStyle" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{StaticResource SubTextBrush}"/>
+            <Setter Property="FontSize" Value="11"/>
+            <Setter Property="Margin" Value="0,0,0,4"/>
+        </Style>
+        <Style x:Key="OutlineButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="{StaticResource AccentBrush}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource AccentBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="10,6"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="Bd"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="4"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Bd" Property="Background" Value="#1A0E00"/>
+                                <Setter TargetName="Bd" Property="BorderBrush" Value="#FCD34D"/>
+                                <Setter Property="Foreground" Value="#FCD34D"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="Bd" Property="Background" Value="#2A1800"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Opacity" Value="0.4"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="28"/>
+        </Grid.RowDefinitions>
+
+        <!-- ── 헤더 ── -->
+        <Border Grid.Row="0" Background="{StaticResource PanelBrush}"
+                BorderBrush="{StaticResource BorderBrush}" BorderThickness="0,0,0,1">
+            <Grid Margin="16,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock Text="Char" Foreground="{StaticResource AccentBrush}"
+                               FontSize="18" FontWeight="Bold"/>
+                    <TextBlock Text="." Foreground="{StaticResource SubTextBrush}"
+                               FontSize="18" FontWeight="Bold"/>
+                    <TextBlock Text="Art" Foreground="{StaticResource TextBrush}"
+                               FontSize="18" FontWeight="Bold"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" Spacing="8">
+                    <Button x:Name="BtnOpen" Content="📂 열기"
+                            Style="{StaticResource OutlineButtonStyle}"
+                            Click="BtnOpen_Click"/>
+                    <Button x:Name="BtnSave" Content="💾 .txt 저장"
+                            Style="{StaticResource OutlineButtonStyle}"
+                            IsEnabled="False" Click="BtnSave_Click"/>
+                    <Button x:Name="BtnCopy" Content="📋 복사"
+                            Style="{StaticResource OutlineButtonStyle}"
+                            IsEnabled="False" Click="BtnCopy_Click"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- ── 본문 ── -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="280" MinWidth="220" MaxWidth="360"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- ── 왼쪽 패널 ── -->
+            <Border Grid.Column="0" Background="{StaticResource PanelBrush}"
+                    BorderBrush="{StaticResource BorderBrush}" BorderThickness="0,0,1,0">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                    <StackPanel Margin="14,14,14,14" Spacing="10">
+
+                        <!-- 이미지 미리보기 -->
+                        <Border Height="190" Background="{StaticResource InputBrush}"
+                                BorderBrush="{StaticResource BorderBrush}" BorderThickness="1"
+                                CornerRadius="6" ClipToBounds="True">
+                            <Grid>
+                                <TextBlock x:Name="TxtDropHint"
+                                           Text="이미지를 드래그하거나&#x0a;열기 버튼을 누르세요"
+                                           Foreground="{StaticResource SubTextBrush}"
+                                           FontSize="12" TextAlignment="Center"
+                                           HorizontalAlignment="Center" VerticalAlignment="Center"
+                                           TextWrapping="Wrap"/>
+                                <Image x:Name="ImgPreview" Stretch="Uniform"
+                                       HorizontalAlignment="Center" VerticalAlignment="Center"
+                                       Visibility="Collapsed"/>
+                            </Grid>
+                        </Border>
+
+                        <Separator/>
+
+                        <!-- 문자셋 -->
+                        <StackPanel>
+                            <TextBlock Text="문자셋" Style="{StaticResource LabelStyle}"/>
+                            <ComboBox x:Name="CbCharSet" SelectionChanged="Setting_Changed"/>
+                        </StackPanel>
+
+                        <!-- 커스텀 입력 -->
+                        <StackPanel x:Name="PanelCustom" Visibility="Collapsed">
+                            <TextBlock Text="커스텀 문자 입력" Style="{StaticResource LabelStyle}"/>
+                            <TextBox x:Name="TxtCustomChars" Height="32"
+                                     TextChanged="Setting_Changed_Text"/>
+                        </StackPanel>
+
+                        <!-- 출력 폰트 -->
+                        <StackPanel>
+                            <TextBlock Text="출력 폰트" Style="{StaticResource LabelStyle}"/>
+                            <ComboBox x:Name="CbFont" SelectionChanged="Setting_Changed"/>
+                        </StackPanel>
+
+                        <!-- 폰트 크기 -->
+                        <StackPanel>
+                            <TextBlock Text="폰트 크기" Style="{StaticResource LabelStyle}"/>
+                            <ComboBox x:Name="CbFontSize" SelectionChanged="Setting_Changed"/>
+                        </StackPanel>
+
+                        <!-- 열 수 슬라이더 -->
+                        <StackPanel>
+                            <Grid>
+                                <TextBlock Text="열 수" Style="{StaticResource LabelStyle}" VerticalAlignment="Center"/>
+                                <TextBlock x:Name="TxtColsValue" Text="80"
+                                           Foreground="{StaticResource AccentBrush}"
+                                           FontSize="12" HorizontalAlignment="Right"
+                                           VerticalAlignment="Center"/>
+                            </Grid>
+                            <Slider x:Name="SldCols" Minimum="20" Maximum="300" Value="80"
+                                    SmallChange="1" LargeChange="10"
+                                    IsSnapToTickEnabled="True" TickFrequency="1"
+                                    ValueChanged="SldCols_ValueChanged"/>
+                        </StackPanel>
+
+                        <!-- 반전 체크박스 -->
+                        <CheckBox x:Name="ChkInvert" Content="반전 (밝은 영역 → 밀한 문자)"
+                                  Checked="Setting_Changed_Check" Unchecked="Setting_Changed_Check"/>
+
+                        <Separator/>
+
+                        <!-- 생성 버튼 -->
+                        <Button x:Name="BtnGenerate" Content="▶ 생성"
+                                Height="36" Click="BtnGenerate_Click" IsEnabled="False"/>
+
+                    </StackPanel>
+                </ScrollViewer>
+            </Border>
+
+            <!-- 리사이저 -->
+            <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch"
+                          Background="{StaticResource BorderBrush}" Cursor="SizeWE"/>
+
+            <!-- ── 오른쪽 패널 (텍스트 아트 출력) ── -->
+            <Grid Grid.Column="2">
+                <ScrollViewer x:Name="SvArt"
+                              HorizontalScrollBarVisibility="Auto"
+                              VerticalScrollBarVisibility="Auto"
+                              Background="{StaticResource BgBrush}">
+                    <TextBox x:Name="TxtArt"
+                             IsReadOnly="True"
+                             TextWrapping="NoWrap"
+                             AcceptsReturn="True"
+                             FontFamily="Consolas"
+                             FontSize="8"
+                             Background="Transparent"
+                             Foreground="{StaticResource TextBrush}"
+                             BorderThickness="0"
+                             Padding="12"
+                             VerticalAlignment="Top"
+                             HorizontalAlignment="Left"/>
+                </ScrollViewer>
+
+                <!-- 안내 오버레이 -->
+                <TextBlock x:Name="TxtArtHint"
+                           Text="이미지를 열어 텍스트 아트를 생성하세요"
+                           Foreground="{StaticResource SubTextBrush}"
+                           FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Grid>
+        </Grid>
+
+        <!-- ── 상태바 ── -->
+        <Border Grid.Row="2" Background="{StaticResource PanelBrush}"
+                BorderBrush="{StaticResource BorderBrush}" BorderThickness="0,1,0,0">
+            <TextBlock x:Name="TxtStatus"
+                       Text="이미지를 열거나 드래그하세요"
+                       Foreground="{StaticResource SubTextBrush}"
+                       FontSize="11" VerticalAlignment="Center" Margin="12,0"/>
+        </Border>
+    </Grid>
+</Window>

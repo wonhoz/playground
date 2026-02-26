@@ -36,7 +36,7 @@ echo !CY!   8!RS! Api.Probe             !DG!Tools/Dev!RS!
 echo !CY!   9!RS! Hash.Forge            !DG!Tools/Dev!RS!
 echo !CY!  10!RS! Log.Lens              !DG!Tools/Dev!RS!
 echo !CY!  11!RS! Mock.Desk             !DG!Tools/Dev!RS!
-echo !CY!  12!RS! Log.Tail              !DG!Tools/Dev!RS!
+:: echo !CY!  12!RS! Log.Tail (Log.Lens에 통합됨)!RS!
 echo !CY!  13!RS! Mock.Server           !DG!Tools/Dev!RS!
 echo.
 echo !BD!!DG!  Tools / Network!RS!
@@ -106,7 +106,7 @@ for %%n in (!SEL!) do (
     if "%%n"=="9"  call :pub "Hash.Forge"             "Applications\Tools\Dev\Hash.Forge"                 "HashForge.exe"        "Applications\Tools\Dev"
     if "%%n"=="10" call :pub "Log.Lens"               "Applications\Tools\Dev\Log.Lens"                   "LogLens.exe"          "Applications\Tools\Dev"
     if "%%n"=="11" call :pub "Mock.Desk"              "Applications\Tools\Dev\Mock.Desk"                  "Mock.Desk.exe"        "Applications\Tools\Dev\Mock.Desk"
-    if "%%n"=="12" call :pub "Log.Tail"               "Applications\Tools\Dev\Log.Tail"                   "Log.Tail.exe"         "Applications\Tools\Dev"
+    :: 12: Log.Tail → Log.Lens에 통합됨
     if "%%n"=="13" call :pub "Mock.Server"            "Applications\Tools\Dev\Mock.Server"                "Mock.Server.exe"      "Applications\Tools\Dev"
     if "%%n"=="14" call :pub "DNS.Flip"               "Applications\Tools\Network\DNS.Flip"               "DnsFlip.exe"          "Applications\Tools\Network"
     if "%%n"=="15" call :pub "Port.Watch"             "Applications\Tools\Network\Port.Watch"             "PortWatch.exe"        "Applications\Tools\Network"
@@ -156,7 +156,6 @@ call :pub "Api.Probe"             "Applications\Tools\Dev\Api.Probe"            
 call :pub "Hash.Forge"            "Applications\Tools\Dev\Hash.Forge"                 "HashForge.exe"        "Applications\Tools\Dev"
 call :pub "Log.Lens"              "Applications\Tools\Dev\Log.Lens"                   "LogLens.exe"          "Applications\Tools\Dev"
 call :pub "Mock.Desk"             "Applications\Tools\Dev\Mock.Desk"                  "Mock.Desk.exe"        "Applications\Tools\Dev\Mock.Desk"
-call :pub "Log.Tail"              "Applications\Tools\Dev\Log.Tail"                   "Log.Tail.exe"         "Applications\Tools\Dev"
 call :pub "Mock.Server"           "Applications\Tools\Dev\Mock.Server"                "Mock.Server.exe"      "Applications\Tools\Dev"
 call :pub "DNS.Flip"              "Applications\Tools\Network\DNS.Flip"               "DnsFlip.exe"          "Applications\Tools\Network"
 call :pub "Port.Watch"            "Applications\Tools\Network\Port.Watch"             "PortWatch.exe"        "Applications\Tools\Network"

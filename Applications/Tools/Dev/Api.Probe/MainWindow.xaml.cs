@@ -16,10 +16,11 @@ public partial class MainWindow : Window
 
     // ── 상태 ────────────────────────────────────────────────────
     private ObservableCollection<ApiCollection> _collections = [];
-    private ApiRequest?   _activeRequest;
+    private ApiRequest?    _activeRequest;
     private ApiCollection? _activeCollection;
-    private Guid?         _renamingCollectionId;
-    private bool          _loading;
+    private Guid?          _renamingCollectionId;
+    private Guid?          _renamingRequestId;
+    private bool           _loading;
 
     private static readonly List<EnvPreset> _envPresets =
     [
@@ -37,16 +38,13 @@ public partial class MainWindow : Window
 
     private void OnLoaded(object sender, RoutedEventArgs e)
     {
-        // 다크 타이틀바
         var helper = new System.Windows.Interop.WindowInteropHelper(this);
         var dark = 1;
         DwmSetWindowAttribute(helper.Handle, 20, ref dark, sizeof(int));
 
-        // 환경변수 ComboBox
         CmbEnv.ItemsSource   = _envPresets.Select(p => p.Name).ToList();
         CmbEnv.SelectedIndex = 0;
 
-        // 컬렉션 로드
         _collections = CollectionService.Load();
         if (_collections.Count == 0)
         {
@@ -69,29 +67,17 @@ public partial class MainWindow : Window
 
         foreach (var col in _collections)
         {
-            var colRef    = col;
-            bool renaming = _renamingCollectionId == col.Id;
+            var colRef         = col;
+            bool colRenaming   = _renamingCollectionId == col.Id;
 
-            // ── 컬렉션 헤더 그리드 ──────────────────────────────
+            // ── 컬렉션 헤더 ──────────────────────────────────────
             var hGrid = new Grid();
             hGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
             hGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
 
-            // 이름 영역: 이름변경 중이면 TextBox, 아니면 TextBlock
-            if (renaming)
+            if (colRenaming)
             {
-                var tb = new TextBox
-                {
-                    Text              = col.Name,
-                    FontSize          = 13,
-                    FontWeight        = FontWeights.SemiBold,
-                    Background        = (SolidColorBrush)FindResource("Bg3Brush"),
-                    Foreground        = (SolidColorBrush)FindResource("AccentBrush"),
-                    BorderThickness   = new Thickness(0, 0, 0, 1),
-                    BorderBrush       = (SolidColorBrush)FindResource("AccentBrush"),
-                    Padding           = new Thickness(2),
-                    VerticalAlignment = VerticalAlignment.Center,
-                };
+                var tb = MakeRenameBox(col.Name, (SolidColorBrush)FindResource("AccentBrush"));
                 Grid.SetColumn(tb, 0);
                 hGrid.Children.Add(tb);
 
@@ -106,15 +92,12 @@ public partial class MainWindow : Window
                     CollectionService.Save(_collections);
                     RefreshSidebar();
                 }
-
                 tb.KeyDown  += (_, e) =>
                 {
                     if (e.Key == Key.Enter)  { e.Handled = true; Commit(); }
                     if (e.Key == Key.Escape) { _renamingCollectionId = null; RefreshSidebar(); }
                 };
                 tb.LostFocus += (_, _) => Commit();
-
-                // 레이아웃 완료 후 포커스
                 Dispatcher.BeginInvoke(() => { tb.Focus(); tb.SelectAll(); },
                     System.Windows.Threading.DispatcherPriority.Input);
             }
@@ -127,13 +110,11 @@ public partial class MainWindow : Window
                     FontWeight        = FontWeights.SemiBold,
                     FontSize          = 13,
                     VerticalAlignment = VerticalAlignment.Center,
-                    ToolTip           = "더블클릭: 이름 변경",
                 };
                 Grid.SetColumn(label, 0);
                 hGrid.Children.Add(label);
             }
 
-            // [+] 요청 추가 버튼
             var addReqBtn = new Button
             {
                 Content           = "+",
@@ -152,7 +133,6 @@ public partial class MainWindow : Window
             addReqBtn.Click += (_, _) => AddRequestToCollection(colRef);
             hGrid.Children.Add(addReqBtn);
 
-            // 헤더 컨테이너
             var colBorder = new Border
             {
                 Background = Brushes.Transparent,
@@ -168,27 +148,31 @@ public partial class MainWindow : Window
 
             colBorder.MouseLeftButtonDown += (_, e) =>
             {
-                if (e.ClickCount == 1)
+                if (e.ClickCount == 1)  _activeCollection = colRef;
+                if (e.ClickCount == 2 && !colRenaming)
                 {
-                    // 컬렉션 선택 (싱글 클릭)
-                    _activeCollection = colRef;
-                }
-                else if (e.ClickCount == 2 && !renaming)
-                {
-                    // 이름 변경 시작 (더블 클릭)
                     _renamingCollectionId = colRef.Id;
                     RefreshSidebar();
                 }
             };
 
+            // 우클릭 컨텍스트 메뉴
+            colBorder.ContextMenu = MakeContextMenu(
+                ("이름 변경", () => { _renamingCollectionId = colRef.Id; RefreshSidebar(); }),
+                (null, null), // 구분선
+                ("컬렉션 삭제", () => DeleteCollection(colRef))
+            );
+
             CollectionPanel.Children.Add(colBorder);
 
             // ── 요청 목록 ────────────────────────────────────────
             var reqPanel = new StackPanel { Margin = new Thickness(8, 0, 0, 4) };
+
             foreach (var req in col.Requests)
             {
-                var r = req;
-                bool isActive = ReferenceEquals(_activeRequest, r);
+                var r           = req;
+                bool reqRenaming = _renamingRequestId == r.Id;
+                bool isActive   = ReferenceEquals(_activeRequest, r);
 
                 var btn = new Border
                 {
@@ -201,24 +185,71 @@ public partial class MainWindow : Window
                     Margin       = new Thickness(0, 1, 0, 1),
                 };
 
-                var sp = new StackPanel { Orientation = Orientation.Horizontal };
-                sp.Children.Add(new TextBlock
+                // 요청 항목 내부: 메서드 라벨 + 이름
+                var itemGrid = new Grid();
+                itemGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(46) });
+                itemGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+
+                var methodLabel = new TextBlock
                 {
                     Text              = MethodLabel(r.Method),
                     Foreground        = MethodBrush(r.Method),
                     FontSize          = 11,
                     FontWeight        = FontWeights.Bold,
-                    Width             = 46,
                     VerticalAlignment = VerticalAlignment.Center,
-                });
-                sp.Children.Add(new TextBlock
+                };
+                Grid.SetColumn(methodLabel, 0);
+                itemGrid.Children.Add(methodLabel);
+
+                if (reqRenaming)
                 {
-                    Text              = r.Name,
-                    Foreground        = (SolidColorBrush)FindResource("FgBrush"),
-                    FontSize          = 12,
-                    VerticalAlignment = VerticalAlignment.Center,
-                });
-                btn.Child = sp;
+                    var tb = MakeRenameBox(r.Name, (SolidColorBrush)FindResource("FgBrush"));
+                    Grid.SetColumn(tb, 1);
+                    itemGrid.Children.Add(tb);
+
+                    bool committed = false;
+                    void Commit()
+                    {
+                        if (committed) return;
+                        committed = true;
+                        _renamingRequestId = null;
+                        var name = tb.Text.Trim();
+                        if (!string.IsNullOrEmpty(name))
+                        {
+                            r.Name = name;
+                            if (ReferenceEquals(_activeRequest, r))
+                            {
+                                _loading = true;
+                                TxtReqName.Text = name;
+                                _loading = false;
+                            }
+                        }
+                        CollectionService.Save(_collections);
+                        RefreshSidebar();
+                    }
+                    tb.KeyDown  += (_, e) =>
+                    {
+                        if (e.Key == Key.Enter)  { e.Handled = true; Commit(); }
+                        if (e.Key == Key.Escape) { _renamingRequestId = null; RefreshSidebar(); }
+                    };
+                    tb.LostFocus += (_, _) => Commit();
+                    Dispatcher.BeginInvoke(() => { tb.Focus(); tb.SelectAll(); },
+                        System.Windows.Threading.DispatcherPriority.Input);
+                }
+                else
+                {
+                    var nameLabel = new TextBlock
+                    {
+                        Text              = r.Name,
+                        Foreground        = (SolidColorBrush)FindResource("FgBrush"),
+                        FontSize          = 12,
+                        VerticalAlignment = VerticalAlignment.Center,
+                    };
+                    Grid.SetColumn(nameLabel, 1);
+                    itemGrid.Children.Add(nameLabel);
+                }
+
+                btn.Child = itemGrid;
 
                 btn.MouseEnter += (_, _) =>
                     btn.Background = (SolidColorBrush)FindResource("HoverBrush");
@@ -226,11 +257,31 @@ public partial class MainWindow : Window
                     btn.Background = ReferenceEquals(_activeRequest, r)
                         ? (SolidColorBrush)FindResource("Bg3Brush")
                         : Brushes.Transparent;
-                btn.MouseLeftButtonUp += (_, _) =>
+
+                btn.MouseLeftButtonDown += (_, e) =>
                 {
-                    _activeCollection = colRef;
-                    LoadRequest(r);
+                    if (e.ClickCount == 2 && !reqRenaming)
+                    {
+                        _renamingRequestId = r.Id;
+                        RefreshSidebar();
+                        e.Handled = true;
+                    }
                 };
+                btn.MouseLeftButtonUp += (_, e) =>
+                {
+                    if (!reqRenaming && e.ClickCount <= 1)
+                    {
+                        _activeCollection = colRef;
+                        LoadRequest(r);
+                    }
+                };
+
+                // 우클릭 컨텍스트 메뉴
+                btn.ContextMenu = MakeContextMenu(
+                    ("이름 변경", () => { _renamingRequestId = r.Id; RefreshSidebar(); }),
+                    (null, null),
+                    ("요청 삭제", () => DeleteRequest(colRef, r))
+                );
 
                 reqPanel.Children.Add(btn);
             }
@@ -238,6 +289,85 @@ public partial class MainWindow : Window
         }
     }
 
+    // ── 헬퍼: 인라인 이름 변경 TextBox ──────────────────────────
+    private TextBox MakeRenameBox(string text, SolidColorBrush fg) => new()
+    {
+        Text              = text,
+        FontSize          = 12,
+        FontWeight        = FontWeights.SemiBold,
+        Background        = (SolidColorBrush)FindResource("Bg3Brush"),
+        Foreground        = fg,
+        BorderThickness   = new Thickness(0, 0, 0, 1),
+        BorderBrush       = (SolidColorBrush)FindResource("AccentBrush"),
+        Padding           = new Thickness(2),
+        VerticalAlignment = VerticalAlignment.Center,
+    };
+
+    // ── 헬퍼: 다크 컨텍스트 메뉴 생성 ───────────────────────────
+    // null 항목은 구분선(Separator)으로 처리
+    private ContextMenu MakeContextMenu(params (string? Label, Action? Action)[] items)
+    {
+        var menu = new ContextMenu();
+        foreach (var (label, action) in items)
+        {
+            if (label is null)
+            {
+                menu.Items.Add(new Separator());
+            }
+            else
+            {
+                var item = new MenuItem { Header = label };
+                if (action is not null) item.Click += (_, _) => action();
+                menu.Items.Add(item);
+            }
+        }
+        return menu;
+    }
+
+    // ── 삭제 ─────────────────────────────────────────────────────
+    private void DeleteCollection(ApiCollection col)
+    {
+        var result = MessageBox.Show(
+            $"'{col.Name}' 컬렉션과 모든 요청({col.Requests.Count}개)을 삭제하시겠습니까?",
+            "컬렉션 삭제",
+            MessageBoxButton.OKCancel,
+            MessageBoxImage.Warning);
+        if (result != MessageBoxResult.OK) return;
+
+        if (ReferenceEquals(_activeCollection, col))
+        {
+            _activeCollection = null;
+            _activeRequest    = null;
+            ClearEditor();
+        }
+        _collections.Remove(col);
+        CollectionService.Save(_collections);
+        RefreshSidebar();
+    }
+
+    private void DeleteRequest(ApiCollection col, ApiRequest req)
+    {
+        if (ReferenceEquals(_activeRequest, req))
+        {
+            _activeRequest = null;
+            ClearEditor();
+        }
+        col.Requests.Remove(req);
+        CollectionService.Save(_collections);
+        RefreshSidebar();
+    }
+
+    private void ClearEditor()
+    {
+        _loading        = true;
+        TxtUrl.Text     = "";
+        TxtBody.Text    = "";
+        TxtReqName.Text = "";
+        HeaderGrid.DataContext = null;
+        _loading = false;
+    }
+
+    // ── 기타 ─────────────────────────────────────────────────────
     private static string MethodLabel(string m) => m switch
     {
         "DELETE"  => "DEL",
@@ -277,7 +407,7 @@ public partial class MainWindow : Window
         HeaderGrid.DataContext = req;
         _loading = false;
 
-        RefreshSidebar(); // 활성 요청 하이라이트 갱신
+        RefreshSidebar();
     }
 
     // ── 사이드바 버튼 ─────────────────────────────────────────────
@@ -285,18 +415,15 @@ public partial class MainWindow : Window
     {
         var col = new ApiCollection { Name = "새 컬렉션" };
         _collections.Add(col);
-        _activeCollection = col;
-        CollectionService.Save(_collections);
-
-        // 즉시 이름 변경 모드로 진입
+        _activeCollection     = col;
         _renamingCollectionId = col.Id;
+        CollectionService.Save(_collections);
         RefreshSidebar();
     }
 
     private void AddRequest(object s, RoutedEventArgs e)
     {
         if (_collections.Count == 0) AddCollection(s, e);
-
         var target = _activeCollection ?? _collections[0];
         AddRequestToCollection(target);
     }
@@ -367,7 +494,6 @@ public partial class MainWindow : Window
         if (e.Key == Key.Enter) SendRequest(s, new RoutedEventArgs());
     }
 
-    // ── cURL 복사 ─────────────────────────────────────────────────
     private void CopyCurl(object s, RoutedEventArgs e)
     {
         SyncActiveRequest();
@@ -379,8 +505,7 @@ public partial class MainWindow : Window
             ContentType = ((ComboBoxItem)CmbContentType.SelectedItem).Content.ToString()!,
             Headers     = _activeRequest?.Headers ?? []
         };
-        var curl = CurlConverter.Convert(req);
-        Clipboard.SetText(curl);
+        Clipboard.SetText(CurlConverter.Convert(req));
         MessageBox.Show("cURL 명령어가 클립보드에 복사되었습니다.", "복사 완료",
             MessageBoxButton.OK, MessageBoxImage.Information);
     }
@@ -391,7 +516,6 @@ public partial class MainWindow : Window
             Clipboard.SetText(TxtRespBody.Text);
     }
 
-    // ── 이벤트 ─────────────────────────────────────────────────────
     private void ReqName_Changed(object s, TextChangedEventArgs e)
     {
         if (_loading || _activeRequest is null) return;

@@ -51,6 +51,8 @@ call :pub "Api.Probe"             "Applications\Tools\Dev\Api.Probe"            
 call :pub "Hash.Forge"            "Applications\Tools\Dev\Hash.Forge"                    "HashForge.exe"        "Applications\Tools\Dev"
 call :pub "Log.Lens"              "Applications\Tools\Dev\Log.Lens"                      "LogLens.exe"          "Applications\Tools\Dev"
 call :pub "Mock.Desk"             "Applications\Tools\Dev\Mock.Desk"                     "Mock.Desk.exe"        "Applications\Tools\Dev\Mock.Desk"
+call :pub "Log.Tail"              "Applications\Tools\Dev\Log.Tail"                      "Log.Tail.exe"         "Applications\Tools\Dev"
+call :pub "Mock.Server"           "Applications\Tools\Dev\Mock.Server"                   "Mock.Server.exe"      "Applications\Tools\Dev"
 
 :: ── Applications / Tools / Network ──────────────────────────────
 call :pub "DNS.Flip"              "Applications\Tools\Network\DNS.Flip"                  "DnsFlip.exe"          "Applications\Tools\Network"

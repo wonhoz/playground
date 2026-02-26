@@ -16,6 +16,7 @@ public static class RouteLoader
             .WithNamingConvention(CamelCaseNamingConvention.Instance)
             .Build();
 
+    // ── 기존: RouteConfig 기반 ──────────────────────────────────
     public static RouteConfig LoadYaml(string yaml) =>
         _yamlDe.Deserialize<RouteConfig>(yaml) ?? new();
 
@@ -28,6 +29,41 @@ public static class RouteLoader
     public static string ToJson(RouteConfig cfg) =>
         JsonSerializer.Serialize(cfg, new JsonSerializerOptions { WriteIndented = true });
 
+    // ── 신규: MockRoute 기반 (GUI ↔ 에디터 변환) ───────────────
+    public static List<MockRoute> LoadRoutesYaml(string yaml)
+    {
+        try
+        {
+            var cfg = _yamlDe.Deserialize<RouteConfig>(yaml) ?? new();
+            return cfg.Routes.Select(MockRoute.FromEntry).ToList();
+        }
+        catch { return []; }
+    }
+
+    public static List<MockRoute> LoadRoutesJson(string json)
+    {
+        try
+        {
+            var cfg = JsonSerializer.Deserialize<RouteConfig>(json,
+                new JsonSerializerOptions { PropertyNameCaseInsensitive = true }) ?? new();
+            return cfg.Routes.Select(MockRoute.FromEntry).ToList();
+        }
+        catch { return []; }
+    }
+
+    public static string ToYaml(IEnumerable<MockRoute> routes)
+    {
+        var cfg = new RouteConfig { Routes = routes.Select(r => r.ToEntry()).ToList() };
+        return _yamlSer.Serialize(cfg);
+    }
+
+    public static string ToJson(IEnumerable<MockRoute> routes)
+    {
+        var cfg = new RouteConfig { Routes = routes.Select(r => r.ToEntry()).ToList() };
+        return JsonSerializer.Serialize(cfg, new JsonSerializerOptions { WriteIndented = true });
+    }
+
+    // ── 유효성 검사 ─────────────────────────────────────────────
     public static bool Validate(string text, bool isYaml, out string error)
     {
         try

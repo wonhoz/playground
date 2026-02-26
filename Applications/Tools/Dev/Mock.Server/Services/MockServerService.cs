@@ -8,16 +8,19 @@ namespace MockServer.Services;
 
 public class MockServerService
 {
-    private WebApplication? _app;
-    private volatile RouteConfig _routes = new();
-    private readonly Lock _lock = new();
+    private WebApplication?        _app;
+    private volatile List<MockRoute> _activeRoutes = [];
+    private readonly Lock          _lock = new();
 
     public Action<RequestLog>? OnRequest;
     public bool IsRunning => _app != null;
 
-    public void ApplyRoutes(RouteConfig cfg)
+    public void ApplyRoutes(IEnumerable<MockRoute> routes)
     {
-        lock (_lock) { _routes = cfg; }
+        lock (_lock)
+        {
+            _activeRoutes = routes.Where(r => r.Enabled).ToList();
+        }
     }
 
     public async Task StartAsync(int port)
@@ -26,7 +29,7 @@ public class MockServerService
 
         var builder = WebApplication.CreateBuilder();
         builder.WebHost.UseUrls($"http://localhost:{port}");
-        builder.Logging.ClearProviders();   // WPF 앱에서 ASP.NET Core 콘솔 로그 억제
+        builder.Logging.ClearProviders();
 
         _app = builder.Build();
 
@@ -48,26 +51,26 @@ public class MockServerService
                 return;
             }
 
-            RouteConfig snapshot;
-            lock (_lock) { snapshot = _routes; }
+            List<MockRoute> snapshot;
+            lock (_lock) { snapshot = _activeRoutes; }
 
-            var entry = snapshot.Routes.FirstOrDefault(r =>
+            var route = snapshot.FirstOrDefault(r =>
                 r.Method.Equals(method, StringComparison.OrdinalIgnoreCase) &&
                 MatchPath(r.Path, path));
 
             var sw = Stopwatch.StartNew();
-            if (entry != null)
+            if (route != null)
             {
-                if (entry.Delay > 0) await Task.Delay(entry.Delay);
-                context.Response.StatusCode  = entry.Status;
+                if (route.Delay > 0) await Task.Delay(route.Delay);
+                context.Response.StatusCode  = route.Status;
                 context.Response.ContentType = "application/json; charset=utf-8";
-                await context.Response.WriteAsync(entry.Response.Trim());
+                await context.Response.WriteAsync(route.Response.Trim());
                 sw.Stop();
                 OnRequest?.Invoke(new RequestLog
                 {
                     Method  = method,
                     Path    = path,
-                    Status  = entry.Status,
+                    Status  = route.Status,
                     Matched = true,
                     DelayMs = sw.ElapsedMilliseconds
                 });

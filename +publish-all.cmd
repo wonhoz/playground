@@ -50,7 +50,7 @@ call :pub "Photo.Video.Organizer" "Applications\Media\Photo.Video.Organizer"    
 call :pub "Api.Probe"             "Applications\Tools\Dev\Api.Probe"                     "Api.Probe.exe"        "Applications\Tools\Dev\Api.Probe"
 call :pub "Hash.Forge"            "Applications\Tools\Dev\Hash.Forge"                    "HashForge.exe"        "Applications\Tools\Dev"
 call :pub "Log.Lens"              "Applications\Tools\Dev\Log.Lens"                      "LogLens.exe"          "Applications\Tools\Dev"
-call :pub "Mock.Desk"             "Applications\Tools\Dev\Mock.Desk"                     "Mock.Desk.exe"        "Applications\Tools\Dev\Mock.Desk"
+:: Mock.Desk → Mock.Server로 통합됨
 call :pub "Mock.Server"           "Applications\Tools\Dev\Mock.Server"                   "Mock.Server.exe"      "Applications\Tools\Dev"
 
 :: ── Applications / Tools / Network ──────────────────────────────

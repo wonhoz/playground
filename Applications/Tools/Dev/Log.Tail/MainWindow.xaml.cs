@@ -11,6 +11,14 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
 
+        // 앱 아이콘
+        try
+        {
+            Icon = BitmapFrame.Create(
+                new Uri("pack://application:,,,/Resources/app.ico", UriKind.Absolute));
+        }
+        catch { }
+
         // 다크 타이틀바
         SourceInitialized += (_, _) =>
         {

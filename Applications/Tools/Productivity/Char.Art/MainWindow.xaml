@@ -78,12 +78,14 @@
                                FontSize="18" FontWeight="Bold"/>
                 </StackPanel>
 
-                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" Spacing="8">
+                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
                     <Button x:Name="BtnOpen" Content="📂 열기"
                             Style="{StaticResource OutlineButtonStyle}"
+                            Margin="0,0,8,0"
                             Click="BtnOpen_Click"/>
                     <Button x:Name="BtnSave" Content="💾 .txt 저장"
                             Style="{StaticResource OutlineButtonStyle}"
+                            Margin="0,0,8,0"
                             IsEnabled="False" Click="BtnSave_Click"/>
                     <Button x:Name="BtnCopy" Content="📋 복사"
                             Style="{StaticResource OutlineButtonStyle}"
@@ -104,12 +106,12 @@
             <Border Grid.Column="0" Background="{StaticResource PanelBrush}"
                     BorderBrush="{StaticResource BorderBrush}" BorderThickness="0,0,1,0">
                 <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
-                    <StackPanel Margin="14,14,14,14" Spacing="10">
+                    <StackPanel Margin="14,14,14,14">
 
                         <!-- 이미지 미리보기 -->
                         <Border Height="190" Background="{StaticResource InputBrush}"
                                 BorderBrush="{StaticResource BorderBrush}" BorderThickness="1"
-                                CornerRadius="6" ClipToBounds="True">
+                                CornerRadius="6" ClipToBounds="True" Margin="0,0,0,2">
                             <Grid>
                                 <TextBlock x:Name="TxtDropHint"
                                            Text="이미지를 드래그하거나&#x0a;열기 버튼을 누르세요"
@@ -126,32 +128,32 @@
                         <Separator/>
 
                         <!-- 문자셋 -->
-                        <StackPanel>
+                        <StackPanel Margin="0,0,0,10">
                             <TextBlock Text="문자셋" Style="{StaticResource LabelStyle}"/>
                             <ComboBox x:Name="CbCharSet" SelectionChanged="Setting_Changed"/>
                         </StackPanel>
 
                         <!-- 커스텀 입력 -->
-                        <StackPanel x:Name="PanelCustom" Visibility="Collapsed">
+                        <StackPanel x:Name="PanelCustom" Visibility="Collapsed" Margin="0,0,0,10">
                             <TextBlock Text="커스텀 문자 입력" Style="{StaticResource LabelStyle}"/>
                             <TextBox x:Name="TxtCustomChars" Height="32"
                                      TextChanged="Setting_Changed_Text"/>
                         </StackPanel>
 
                         <!-- 출력 폰트 -->
-                        <StackPanel>
+                        <StackPanel Margin="0,0,0,10">
                             <TextBlock Text="출력 폰트" Style="{StaticResource LabelStyle}"/>
                             <ComboBox x:Name="CbFont" SelectionChanged="Setting_Changed"/>
                         </StackPanel>
 
                         <!-- 폰트 크기 -->
-                        <StackPanel>
+                        <StackPanel Margin="0,0,0,10">
                             <TextBlock Text="폰트 크기" Style="{StaticResource LabelStyle}"/>
                             <ComboBox x:Name="CbFontSize" SelectionChanged="Setting_Changed"/>
                         </StackPanel>
 
                         <!-- 열 수 슬라이더 -->
-                        <StackPanel>
+                        <StackPanel Margin="0,0,0,10">
                             <Grid>
                                 <TextBlock Text="열 수" Style="{StaticResource LabelStyle}" VerticalAlignment="Center"/>
                                 <TextBlock x:Name="TxtColsValue" Text="80"
@@ -167,6 +169,7 @@
 
                         <!-- 반전 체크박스 -->
                         <CheckBox x:Name="ChkInvert" Content="반전 (밝은 영역 → 밀한 문자)"
+                                  Margin="0,0,0,4"
                                   Checked="Setting_Changed_Check" Unchecked="Setting_Changed_Check"/>
 
                         <Separator/>

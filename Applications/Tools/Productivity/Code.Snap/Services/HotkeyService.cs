@@ -20,8 +20,11 @@ public sealed class HotkeyService : IDisposable
         owner.SourceInitialized += (_, _) =>
         {
             _hwnd = HwndSource.FromHwnd(new WindowInteropHelper(owner).Handle);
-            _hwnd?.AddHook(WndProc);
-            RegisterHotKey(_hwnd!.Handle, HOTKEY_ID, MOD_CONTROL | MOD_SHIFT, VK_C);
+            if (_hwnd is not null)
+            {
+                _hwnd.AddHook(WndProc);
+                RegisterHotKey(_hwnd.Handle, HOTKEY_ID, MOD_CONTROL | MOD_SHIFT, VK_C);
+            }
         };
     }
 

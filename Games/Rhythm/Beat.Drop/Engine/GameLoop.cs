@@ -24,7 +24,7 @@ public sealed class GameLoop
         DeltaTime = (now - _lastFrame).TotalSeconds;
         _lastFrame = now;
         if (DeltaTime > 0.1) DeltaTime = 0.1;
-        OnUpdate?.Invoke(DeltaTime);
-        OnRender?.Invoke();
+        try { OnUpdate?.Invoke(DeltaTime); } catch { }
+        try { OnRender?.Invoke(); } catch { }
     }
 }

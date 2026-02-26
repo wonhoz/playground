@@ -7,8 +7,12 @@ namespace TextForge.Views;
 public partial class TimestampView : UserControl
 {
     private readonly DispatcherTimer _clockTimer;
-    private static readonly TimeZoneInfo KstZone =
-        TimeZoneInfo.FindSystemTimeZoneById("Korea Standard Time");
+    private static readonly TimeZoneInfo KstZone = GetKstZone();
+    private static TimeZoneInfo GetKstZone()
+    {
+        try { return TimeZoneInfo.FindSystemTimeZoneById("Korea Standard Time"); }
+        catch { return TimeZoneInfo.Utc; }
+    }
 
     public TimestampView()
     {

@@ -183,7 +183,7 @@ public partial class MainWindow : Window
     private void BtnCopy_Click(object sender, RoutedEventArgs e)
     {
         if (string.IsNullOrEmpty(_currentArt)) return;
-        Clipboard.SetText(_currentArt);
+        try { Clipboard.SetText(_currentArt); } catch { }
         SetStatus("클립보드에 복사했습니다.");
     }
 
@@ -205,7 +205,7 @@ public partial class MainWindow : Window
         Task.Delay(400, token).ContinueWith(_ =>
         {
             if (token.IsCancellationRequested) return;
-            Dispatcher.Invoke(GenerateNow);
+            try { Dispatcher.Invoke(GenerateNow); } catch { }
         }, TaskScheduler.Default);
     }
 

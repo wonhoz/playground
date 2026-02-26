@@ -25,9 +25,13 @@ public static class CollectionService
 
     public static void Save(IEnumerable<ApiCollection> collections)
     {
-        Directory.CreateDirectory(_dir);
-        var json = JsonSerializer.Serialize(collections,
-            new JsonSerializerOptions { WriteIndented = true });
-        File.WriteAllText(_file, json);
+        try
+        {
+            Directory.CreateDirectory(_dir);
+            var json = JsonSerializer.Serialize(collections,
+                new JsonSerializerOptions { WriteIndented = true });
+            File.WriteAllText(_file, json);
+        }
+        catch { }
     }
 }

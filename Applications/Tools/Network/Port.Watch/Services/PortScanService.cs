@@ -14,12 +14,10 @@ public static class PortScanService
             CreateNoWindow = true
         };
 
-        string output;
-        using (var proc = Process.Start(psi)!)
-        {
-            output = await proc.StandardOutput.ReadToEndAsync();
-            await proc.WaitForExitAsync();
-        }
+        using var proc = Process.Start(psi);
+        if (proc is null) return [];
+        string output = await proc.StandardOutput.ReadToEndAsync();
+        await proc.WaitForExitAsync();
 
         var entries = new List<PortEntry>();
         var procCache = new Dictionary<int, (string name, string path)>();

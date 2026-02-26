@@ -26,7 +26,7 @@ public partial class MainWindow : Window
 
     private static readonly SolidColorBrush[] ColorBrushes =
         ColorHex.Select(h => {
-            var b = new SolidColorBrush((Color)ColorConverter.ConvertFromString(h)!);
+            var b = new SolidColorBrush(ColorConverter.ConvertFromString(h) is Color c ? c : Colors.Transparent);
             b.Freeze();
             return b;
         }).ToArray();

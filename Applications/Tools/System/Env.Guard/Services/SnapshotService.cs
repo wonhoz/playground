@@ -18,7 +18,7 @@ public static class SnapshotService
 
     static SnapshotService()
     {
-        Directory.CreateDirectory(Dir);
+        try { Directory.CreateDirectory(Dir); } catch { }
     }
 
     public static Snapshot CreateSnapshot(string description, List<EnvVariable> variables)
@@ -36,7 +36,7 @@ public static class SnapshotService
         var filename = $"{snap.CreatedAt:yyyyMMdd_HHmmss}_{SanitizeFilename(description)}.json";
         var path = Path.Combine(Dir, filename);
         var json = JsonSerializer.Serialize(snap, JsonOpts);
-        File.WriteAllText(path, json);
+        try { File.WriteAllText(path, json); } catch { }
 
         return snap;
     }
@@ -98,8 +98,12 @@ public static class SnapshotService
 
     public static void DeleteSnapshot(string filePath)
     {
-        if (File.Exists(filePath))
-            File.Delete(filePath);
+        try
+        {
+            if (File.Exists(filePath))
+                File.Delete(filePath);
+        }
+        catch { }
     }
 
     private static string SanitizeFilename(string name)

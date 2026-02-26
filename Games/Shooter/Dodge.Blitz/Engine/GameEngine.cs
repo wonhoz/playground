@@ -48,7 +48,7 @@ public sealed class GameEngine
         // 프레임 스파이크 방지 (최대 100ms)
         if (DeltaTime > 0.1) DeltaTime = 0.1;
 
-        OnUpdate?.Invoke(DeltaTime);
-        OnRender?.Invoke();
+        try { OnUpdate?.Invoke(DeltaTime); } catch { }
+        try { OnRender?.Invoke(); } catch { }
     }
 }

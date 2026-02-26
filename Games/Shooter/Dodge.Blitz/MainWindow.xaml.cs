@@ -114,7 +114,7 @@ public partial class MainWindow : Window
 
         // 딜레이 후 게임오버 SFX
         System.Threading.Tasks.Task.Delay(200).ContinueWith(_ =>
-            Dispatcher.InvokeAsync(() => SoundGen.Sfx(Sounds.GameOverSfx)));
+            { try { Dispatcher.InvokeAsync(() => SoundGen.Sfx(Sounds.GameOverSfx)); } catch { } });
 
         // 파티클 폭발
         SpawnParticles(_player.X + _player.Width / 2, _player.Y + _player.Height / 2,

@@ -12,9 +12,13 @@ public static class ExportService
     // ── PNG ──────────────────────────────────────────────────────────────────
     public static void SavePng(SKBitmap bitmap, string path)
     {
-        using var data   = bitmap.Encode(SKEncodedImageFormat.Png, 100);
-        using var stream = File.OpenWrite(path);
-        data.SaveTo(stream);
+        try
+        {
+            using var data   = bitmap.Encode(SKEncodedImageFormat.Png, 100);
+            using var stream = File.OpenWrite(path);
+            data.SaveTo(stream);
+        }
+        catch { }
     }
 
     public static byte[] ToPngBytes(SKBitmap bitmap)
@@ -26,8 +30,12 @@ public static class ExportService
     // ── SVG ──────────────────────────────────────────────────────────────────
     public static void SaveSvg(string content, QrStyle style, string path)
     {
-        var svg = BuildSvg(content, style);
-        File.WriteAllText(path, svg, System.Text.Encoding.UTF8);
+        try
+        {
+            var svg = BuildSvg(content, style);
+            File.WriteAllText(path, svg, System.Text.Encoding.UTF8);
+        }
+        catch { }
     }
 
     private static string BuildSvg(string content, QrStyle style)
@@ -133,7 +141,7 @@ public static class ExportService
             if (col >= cols) { col = 0; row++; }
         }
 
-        doc.Save(path);
+        try { doc.Save(path); } catch { }
     }
 
     // 단일 QR PDF 저장

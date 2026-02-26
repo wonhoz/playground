@@ -54,17 +54,21 @@ public partial class LogTabView : UserControl, IDisposable
 
         _ = Task.Run(() =>
         {
-            var svc          = new LogWatcherService(filePath);
-            var initialLines = svc.ReadInitialAndStart(maxLines);
-            svc.LinesReceived += OnLinesReceived;
-
-            Dispatcher.Invoke(() =>
+            try
             {
-                _watcher = svc;
-                BulkAdd(initialLines);
-                UpdateLineCount();
-                AutoScrollIfEnabled();
-            });
+                var svc          = new LogWatcherService(filePath);
+                var initialLines = svc.ReadInitialAndStart(maxLines);
+                svc.LinesReceived += OnLinesReceived;
+
+                Dispatcher.Invoke(() =>
+                {
+                    _watcher = svc;
+                    BulkAdd(initialLines);
+                    UpdateLineCount();
+                    AutoScrollIfEnabled();
+                });
+            }
+            catch { }
         });
     }
 

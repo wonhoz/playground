@@ -15,11 +15,15 @@ public static class ExportService
         };
         if (dlg.ShowDialog() != true) return;
 
-        var rtb = RenderCanvas(canvas);
-        var encoder = new PngBitmapEncoder();
-        encoder.Frames.Add(BitmapFrame.Create(rtb));
-        using var fs = File.Open(dlg.FileName, FileMode.Create);
-        encoder.Save(fs);
+        try
+        {
+            var rtb = RenderCanvas(canvas);
+            var encoder = new PngBitmapEncoder();
+            encoder.Frames.Add(BitmapFrame.Create(rtb));
+            using var fs = File.Open(dlg.FileName, FileMode.Create);
+            encoder.Save(fs);
+        }
+        catch { }
     }
 
     /// <summary>
@@ -27,8 +31,12 @@ public static class ExportService
     /// </summary>
     public static void CopyToClipboard(FrameworkElement canvas)
     {
-        var rtb = RenderCanvas(canvas);
-        System.Windows.Clipboard.SetImage(rtb);
+        try
+        {
+            var rtb = RenderCanvas(canvas);
+            System.Windows.Clipboard.SetImage(rtb);
+        }
+        catch { }
     }
 
     private static RenderTargetBitmap RenderCanvas(FrameworkElement canvas)

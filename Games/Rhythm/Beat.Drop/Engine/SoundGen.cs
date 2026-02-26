@@ -87,7 +87,9 @@ public static class SoundGen
     public static byte[] Mix(params byte[][] wavs)
     {
         var tracks = wavs.Select(ExtractSamples).ToList();
+        if (tracks.Count == 0) return ToWav([]);
         int max = tracks.Max(t => t.Length);
+        if (max == 0) return ToWav([]);
         var m = new int[max];
         foreach (var tr in tracks)
             for (int i = 0; i < tr.Length; i++)
@@ -122,11 +124,13 @@ public static class SoundGen
     {
         StopBgm();
         _bgmFile = Path.Combine(Path.GetTempPath(), $"bgm_{Guid.NewGuid():N}.wav");
-        File.WriteAllBytes(_bgmFile, wav);
+        try { File.WriteAllBytes(_bgmFile, wav); }
+        catch { _bgmFile = null; return; }
         _bgm = new MediaPlayer();
         _bgm.Open(new Uri(_bgmFile));
         _bgm.Volume = volume;
-        _bgm.MediaEnded += (_, _) => { _bgm.Position = TimeSpan.Zero; _bgm.Play(); };
+        var player = _bgm;
+        _bgm.MediaEnded += (_, _) => { player.Position = TimeSpan.Zero; player.Play(); };
         _bgm.Play();
     }
 
@@ -169,6 +173,7 @@ public static class SoundGen
 
     private static short[] ExtractSamples(byte[] wav)
     {
+        if (wav.Length < 44) return [];
         int n = (wav.Length - 44) / 2;
         var s = new short[n];
         Buffer.BlockCopy(wav, 44, s, 0, n * 2);

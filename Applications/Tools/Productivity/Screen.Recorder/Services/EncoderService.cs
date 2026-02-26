@@ -53,7 +53,7 @@ public static class EncoderService
                 RedirectStandardError = true
             };
 
-            using var process = Process.Start(psi)!;
+            using var process = Process.Start(psi) ?? throw new InvalidOperationException("FFmpeg 프로세스를 시작할 수 없습니다.");
             var stderr = await process.StandardError.ReadToEndAsync();
             await process.WaitForExitAsync();
 
@@ -126,7 +126,7 @@ public static class EncoderService
             RedirectStandardError = true
         };
 
-        using var process = Process.Start(psi)!;
+        using var process = Process.Start(psi) ?? throw new InvalidOperationException("FFmpeg 프로세스를 시작할 수 없습니다.");
         await process.StandardError.ReadToEndAsync();
         await process.WaitForExitAsync();
 

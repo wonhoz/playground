@@ -443,7 +443,7 @@ public partial class MainWindow : Window
         };
         JudgeText.Text = text;
         JudgeText.Foreground = new SolidColorBrush(color);
-        ((DropShadowEffect)JudgeText.Effect).Color = color;
+        if (JudgeText.Effect is DropShadowEffect jShadow) jShadow.Color = color;
         JudgeText.Visibility = Visibility.Visible;
         _judgeShowTimer = 0.4;
     }
@@ -468,7 +468,7 @@ public partial class MainWindow : Window
 
         RankText.Text = _score.Rank;
         RankText.Foreground = new SolidColorBrush(rankColor);
-        ((DropShadowEffect)RankText.Effect).Color = rankColor;
+        if (RankText.Effect is DropShadowEffect rShadow) rShadow.Color = rankColor;
         FinalScoreText.Text = $"SCORE: {_score.Score:N0}";
         FinalAccText.Text = $"ACCURACY: {_score.Accuracy:F1}%";
         FinalDetailText.Text = $"PERFECT: {_score.PerfectCount}  GREAT: {_score.GreatCount}\n" +

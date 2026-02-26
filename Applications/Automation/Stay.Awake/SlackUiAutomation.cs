@@ -144,7 +144,7 @@ Write-Output 'SUCCESS'
                     CreateNoWindow = true
                 };
 
-                using var process = Process.Start(psi)!;
+                using var process = Process.Start(psi) ?? throw new InvalidOperationException("PowerShell 프로세스를 시작할 수 없습니다.");
                 var output = await process.StandardOutput.ReadToEndAsync();
                 await process.WaitForExitAsync();
                 return output;

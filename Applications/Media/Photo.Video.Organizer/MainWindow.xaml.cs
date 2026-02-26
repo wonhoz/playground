@@ -370,7 +370,7 @@ namespace Photo.Video.Organizer
 
                 if (dialog.OpenFolder && !string.IsNullOrEmpty(_destinationPath))
                 {
-                    System.Diagnostics.Process.Start("explorer.exe", _destinationPath);
+                    try { System.Diagnostics.Process.Start("explorer.exe", _destinationPath); } catch { }
                 }
             }
         }
@@ -379,11 +379,15 @@ namespace Photo.Video.Organizer
         {
             if (!string.IsNullOrEmpty(_lastLogFilePath) && File.Exists(_lastLogFilePath))
             {
-                System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+                try
                 {
-                    FileName = _lastLogFilePath,
-                    UseShellExecute = true
-                });
+                    System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+                    {
+                        FileName = _lastLogFilePath,
+                        UseShellExecute = true
+                    });
+                }
+                catch { }
             }
         }
 

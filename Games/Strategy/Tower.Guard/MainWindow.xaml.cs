@@ -807,9 +807,10 @@ public partial class MainWindow : Window
 
     private void TowerBtn_Click(object sender, MouseButtonEventArgs e)
     {
-        if (sender is Border border && border.Tag is string tag)
+        if (sender is Border border && border.Tag is string tag &&
+            Enum.TryParse<TowerType>(tag, out var parsedType))
         {
-            _selectedTowerType = Enum.Parse<TowerType>(tag);
+            _selectedTowerType = parsedType;
             UpdateSelectedTowerText();
         }
         e.Handled = true;

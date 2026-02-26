@@ -36,9 +36,13 @@ public sealed class AppConfig
 
     public void Save()
     {
-        var dir = Path.GetDirectoryName(ConfigPath);
-        if (dir != null) Directory.CreateDirectory(dir);
-        var json = JsonSerializer.Serialize(this, JsonOpts);
-        File.WriteAllText(ConfigPath, json);
+        try
+        {
+            var dir = Path.GetDirectoryName(ConfigPath);
+            if (dir != null) Directory.CreateDirectory(dir);
+            var json = JsonSerializer.Serialize(this, JsonOpts);
+            File.WriteAllText(ConfigPath, json);
+        }
+        catch { }
     }
 }

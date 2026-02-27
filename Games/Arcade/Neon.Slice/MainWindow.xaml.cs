@@ -146,12 +146,10 @@ public partial class MainWindow : Window
         PauseLayer.Visibility    = Visibility.Collapsed;
         GameLayer.Visibility     = Visibility.Visible;
 
-        // 레이아웃이 확정된 후 크기를 전달하고 게임 시작
-        Dispatcher.BeginInvoke(() =>
-        {
-            _engine.Resize(GameLayer.ActualWidth, GameLayer.ActualHeight);
-            _engine.StartGame(mode);
-        });
+        // UpdateLayout()으로 레이아웃 패스를 즉시 강제 실행 → ActualWidth/Height 확정
+        UpdateLayout();
+        _engine.Resize(GameLayer.ActualWidth, GameLayer.ActualHeight);
+        _engine.StartGame(mode);
     }
 
     private void UpdateLivesDisplay(GameMode mode)

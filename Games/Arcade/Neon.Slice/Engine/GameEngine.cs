@@ -218,12 +218,13 @@ public sealed class GameEngine
         foreach (var s in _shapes)
             s.Update(dt);
 
-        // 화면 밖 처리
+        // 화면 밖 처리 (CheckSlice에서 IsSliced 처리가 완료된 것은 여기서 제거)
         for (var i = _shapes.Count - 1; i >= 0; i--)
         {
             var s = _shapes[i];
-            if (!s.IsOffScreen(_height)) continue;
+            // CheckSlice 3단계에서 제거되지 않은 IsSliced 도형 정리
             if (s.IsSliced) { _shapes.RemoveAt(i); continue; }
+            if (!s.IsOffScreen(_height)) continue;
 
             // 특수 도형은 목숨 소모 없음
             if (s.Type != ShapeType.Bomb && s.Type != ShapeType.Lightning &&
@@ -294,17 +295,26 @@ public sealed class GameEngine
     // ── 슬라이스 판정 ─────────────────────────────────────────────────────
     private void CheckSlice(Point p1, Point p2)
     {
-        for (var i = _shapes.Count - 1; i >= 0; i--)
+        // 1단계: 교차 도형 목록 수집 (순회 중 컬렉션 변경 없음)
+        List<NeonShape>? hits = null;
+        foreach (var s in _shapes)
         {
-            var s = _shapes[i];
             if (s.IsSliced || s.IsAboveScreen()) continue;
-
             if (!LineCircleIntersect(p1, p2, new Point(s.X, s.Y), s.Radius)) continue;
+            (hits ??= []).Add(s);
+        }
+        if (hits is null) return;
 
+        // 2단계: 슬라이스 처리 (ProcessSlice가 _shapes 내부를 수정할 수 있으므로 분리)
+        foreach (var s in hits)
+        {
+            if (s.IsSliced) continue; // Lightning 처리 중 이미 제거된 경우 방지
             s.IsSliced = true;
             ProcessSlice(s);
-            _shapes.RemoveAt(i);
         }
+
+        // 3단계: IsSliced 도형 일괄 제거
+        _shapes.RemoveAll(s => s.IsSliced);
     }
 
     /// <summary>선분-원 교차 판정</summary>
@@ -342,14 +352,14 @@ public sealed class GameEngine
                 return;
 
             case ShapeType.Lightning:
-                // 번개: 화면 클리어 + 각 도형에 점수
+                // 번개: 화면 클리어 — IsSliced 플래그만 설정, 실제 제거는 CheckSlice 3단계에서
                 var cleared = 0;
-                foreach (var s in _shapes.ToList())
+                foreach (var s in _shapes)
                 {
-                    if (s.Type == ShapeType.Bomb) continue;
+                    if (s.IsSliced || s.Type == ShapeType.Bomb) continue;
+                    s.IsSliced = true;
                     SpawnHalves(s);
                     SpawnParticles(s.X, s.Y, s.NeonColor, 6);
-                    _shapes.Remove(s);
                     cleared++;
                 }
                 Score += cleared * 5;

@@ -41,7 +41,8 @@ public class SseFlowClient : IDisposable
                         {
                             var evt = JsonSerializer.Deserialize<ServerEvent>(json,
                                 new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
-                            if (evt != null) EventReceived?.Invoke(evt);
+                            // Type이 null인 경우 연결 확인용 메시지({connected:true}) 등 무시
+                            if (evt?.Type != null) EventReceived?.Invoke(evt);
                         }
                         catch { }
                     }

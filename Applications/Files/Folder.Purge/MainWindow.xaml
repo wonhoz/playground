@@ -126,18 +126,46 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="GridViewColumnHeader">
-                        <Border x:Name="Bd"
-                                Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                Padding="{TemplateBinding Padding}">
-                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                              VerticalAlignment="Center"/>
-                        </Border>
+                        <Grid>
+                            <Border x:Name="Bd"
+                                    Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    Padding="{TemplateBinding Padding}">
+                                <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                  VerticalAlignment="Center"/>
+                            </Border>
+                            <!-- 컬럼 폭 조절 Gripper — PART_HeaderGripper 이름 필수 -->
+                            <Thumb x:Name="PART_HeaderGripper"
+                                   HorizontalAlignment="Right" Width="6"
+                                   Cursor="SizeWE" Opacity="0">
+                                <Thumb.Template>
+                                    <ControlTemplate TargetType="Thumb">
+                                        <Border x:Name="GripBd" Background="Transparent" Width="6">
+                                            <!-- 마우스오버 시 표시되는 구분선 -->
+                                            <Rectangle x:Name="GripLine"
+                                                       Width="1" HorizontalAlignment="Center"
+                                                       Fill="#555566" Opacity="0"/>
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter TargetName="GripLine" Property="Opacity" Value="1"/>
+                                                <Setter TargetName="GripBd" Property="Background" Value="#33334A"/>
+                                            </Trigger>
+                                            <Trigger Property="IsDragging" Value="True">
+                                                <Setter TargetName="GripLine" Property="Fill" Value="{StaticResource AccentBrush}"/>
+                                                <Setter TargetName="GripLine" Property="Opacity" Value="1"/>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Thumb.Template>
+                            </Thumb>
+                        </Grid>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter TargetName="Bd" Property="Background" Value="#2A2A2A"/>
                                 <Setter Property="Foreground" Value="{StaticResource TextPrimary}"/>
+                                <Setter TargetName="PART_HeaderGripper" Property="Opacity" Value="1"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>

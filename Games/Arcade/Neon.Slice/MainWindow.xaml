@@ -5,17 +5,15 @@
         Width="900" Height="680"
         MinWidth="700" MinHeight="520"
         Background="#0A0A0F"
-        WindowStartupLocation="CenterScreen"
-        Cursor="None">
+        WindowStartupLocation="CenterScreen">
 
   <Grid x:Name="RootGrid">
 
     <!-- ══════════════════════════════════════════════════════════════ -->
     <!-- 게임 캔버스 레이어 (항상 바닥)                                  -->
     <!-- ══════════════════════════════════════════════════════════════ -->
-    <Grid x:Name="GameLayer" Visibility="Collapsed">
-      <!-- DrawingVisualHost 가 코드비하인드에서 추가됨 -->
-      <Canvas x:Name="GameCanvas"/>
+    <Grid x:Name="GameLayer" Visibility="Collapsed" Cursor="None">
+      <!-- DrawingVisualHost 코드비하인드에서 GameLayer에 직접 추가됨 -->
 
       <!-- ── HUD ──────────────────────────────────────────────────── -->
       <Grid VerticalAlignment="Top" Margin="0,0,0,0">

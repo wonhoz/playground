@@ -38,12 +38,11 @@ public partial class MainWindow : Window
         var dark = 1;
         DwmSetWindowAttribute(hwnd, 20, ref dark, sizeof(int));
 
-        // DrawingVisualHost를 GameCanvas에 추가
-        GameCanvas.Children.Add(_drawHost);
-        _drawHost.Width  = GameCanvas.ActualWidth;
-        _drawHost.Height = GameCanvas.ActualHeight;
+        // DrawingVisualHost를 GameLayer(Grid)에 직접 추가 — Canvas 크기 0 문제 방지
+        // GameLayer의 첫 번째 자식으로 삽입하여 HUD 아래 배경으로 렌더링
+        GameLayer.Children.Insert(0, _drawHost);
 
-        // 마우스 이벤트 (GameLayer에 등록)
+        // 마우스 이벤트 (슬라이스 중 여부와 무관하게 항상 위치 추적)
         GameLayer.MouseMove  += OnGameMouseMove;
         GameLayer.MouseDown  += OnGameMouseDown;
         GameLayer.MouseUp    += OnGameMouseUp;
@@ -54,9 +53,7 @@ public partial class MainWindow : Window
 
     private void OnSizeChanged(object sender, SizeChangedEventArgs e)
     {
-        _drawHost.Width  = GameCanvas.ActualWidth;
-        _drawHost.Height = GameCanvas.ActualHeight;
-        _engine?.Resize(GameCanvas.ActualWidth, GameCanvas.ActualHeight);
+        _engine?.Resize(GameLayer.ActualWidth, GameLayer.ActualHeight);
     }
 
     // ── 렌더링 루프 ────────────────────────────────────────────────────────────
@@ -86,17 +83,18 @@ public partial class MainWindow : Window
         }
     }
 
-    // ── 마우스 (게임 캔버스) ──────────────────────────────────────────────────
+    // ── 마우스 (게임 레이어) ─────────────────────────────────────────────────
     private void OnGameMouseMove(object sender, MouseEventArgs e)
     {
-        if (_engine is not { IsRunning: true } || _engine.IsPaused) return;
-        _engine.OnMouseMove(e.GetPosition(GameCanvas));
+        // 일시정지/게임오버 중에도 커서 위치는 항상 엔진에 전달 (커서 dot 렌더용)
+        var pos = e.GetPosition(_drawHost);
+        _engine?.OnMouseMove(pos);
     }
 
     private void OnGameMouseDown(object sender, MouseButtonEventArgs e)
     {
         if (_engine is not { IsRunning: true } || _engine.IsPaused) return;
-        _engine.OnMouseDown(e.GetPosition(GameCanvas));
+        _engine.OnMouseDown(e.GetPosition(_drawHost));
     }
 
     private void OnGameMouseUp(object sender, MouseButtonEventArgs e)
@@ -137,22 +135,26 @@ public partial class MainWindow : Window
     private void StartGame(GameMode mode)
     {
         _engine = new GameEngine(_drawHost);
-        _engine.Resize(GameCanvas.ActualWidth, GameCanvas.ActualHeight);
         _engine.StateChanged += UpdateHud;
         _engine.GameOver     += OnGameOver;
 
         UpdateBestForMode(mode);
-        UpdateLivesDisplay(mode, MaxLives: 3);
+        UpdateLivesDisplay(mode);
 
-        MenuLayer.Visibility    = Visibility.Collapsed;
+        MenuLayer.Visibility     = Visibility.Collapsed;
         GameOverLayer.Visibility = Visibility.Collapsed;
-        PauseLayer.Visibility   = Visibility.Collapsed;
-        GameLayer.Visibility    = Visibility.Visible;
+        PauseLayer.Visibility    = Visibility.Collapsed;
+        GameLayer.Visibility     = Visibility.Visible;
 
-        _engine.StartGame(mode);
+        // 레이아웃이 확정된 후 크기를 전달하고 게임 시작
+        Dispatcher.BeginInvoke(() =>
+        {
+            _engine.Resize(GameLayer.ActualWidth, GameLayer.ActualHeight);
+            _engine.StartGame(mode);
+        });
     }
 
-    private void UpdateLivesDisplay(GameMode mode, int MaxLives)
+    private void UpdateLivesDisplay(GameMode mode)
     {
         switch (mode)
         {

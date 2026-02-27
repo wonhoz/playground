@@ -165,14 +165,17 @@ public sealed class GameEngine
     // ── 마우스 입력 ───────────────────────────────────────────────────────
     public void OnMouseMove(Point pos)
     {
-        _trail.Enqueue(pos);
-        if (_trail.Count > TrailMaxLen) _trail.Dequeue();
-
-        if (_isSlicing && _trail.Count >= 2)
-        {
-            CheckSlice(_lastMousePos, pos);
-        }
+        // 슬라이싱 여부와 무관하게 커서 위치 항상 업데이트 (커서 dot 렌더용)
         _lastMousePos = pos;
+
+        if (_isSlicing)
+        {
+            _trail.Enqueue(pos);
+            if (_trail.Count > TrailMaxLen) _trail.Dequeue();
+
+            if (_trail.Count >= 2)
+                CheckSlice(_trail.ElementAt(_trail.Count - 2), pos);
+        }
     }
 
     public void OnMouseDown(Point pos)
@@ -498,6 +501,9 @@ public sealed class GameEngine
         // 슬로모션 오버레이
         if (_slowMoRemaining > 0)
             DrawSlowMoOverlay(dc);
+
+        // 커서 dot (항상 최상위)
+        DrawCursor(dc);
     }
 
     private void DrawGrid(DrawingContext dc)
@@ -686,5 +692,23 @@ public sealed class GameEngine
             ? Color.FromArgb(alpha, 255, 45, 120)
             : Color.FromArgb(alpha, 0,   200, 255);
         dc.DrawRectangle(new SolidColorBrush(col), null, new Rect(0, 0, _width, _height));
+    }
+
+    private void DrawCursor(DrawingContext dc)
+    {
+        var c = _lastMousePos;
+        // 외곽 글로우
+        var glowBrush = new RadialGradientBrush(
+            Color.FromArgb(60, 0, 255, 255),
+            Color.FromArgb(0,  0, 255, 255));
+        dc.DrawEllipse(glowBrush, null, c, 14, 14);
+
+        // 테두리 링
+        var ringPen = new Pen(new SolidColorBrush(Color.FromArgb(180, 0, 255, 255)), 1.5);
+        dc.DrawEllipse(null, ringPen, c, 9, 9);
+
+        // 중앙 dot
+        dc.DrawEllipse(new SolidColorBrush(Color.FromArgb(230, 200, 255, 255)),
+            null, c, 2.5, 2.5);
     }
 }

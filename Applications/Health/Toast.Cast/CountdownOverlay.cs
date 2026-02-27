@@ -5,8 +5,9 @@ namespace ToastCast;
 
 /// <summary>
 /// 루틴 알림 오버레이.
-/// ShowCountdown=true  → 카운트다운 모드 (자동 완료)
-/// ShowCountdown=false → 확인 모드     (사용자가 완료 버튼 클릭)
+/// 설명 + 카운트다운 + 완료 버튼 통합 모드.
+///   - 완료 버튼 클릭 → Completed (행동 함, 달성으로 카운트)
+///   - 건너뛰기 클릭 / 시간 만료 → Skipped (행동 안 함, 미달성으로 카운트)
 /// </summary>
 public sealed class CountdownOverlay : Form
 {
@@ -16,31 +17,29 @@ public sealed class CountdownOverlay : Form
     private readonly System.Windows.Forms.Timer _timer = new() { Interval = 1000 };
     private int _remaining;
     private readonly string _routineId;
-    private readonly bool _confirmMode;
 
     private readonly Label  _lblTitle;
-    private readonly Label? _lblCountdown;
-    private readonly Label? _lblHint;
-    private readonly Label? _lblDesc;
-    private readonly Button? _btnComplete;
-    private readonly Button  _btnSkip;
+    private readonly Label  _lblDesc;
+    private readonly Label  _lblCountdown;
+    private readonly Label  _lblHint;
+    private readonly Button _btnComplete;
+    private readonly Button _btnSkip;
 
     public event EventHandler? Completed;
     public event EventHandler? Skipped;
 
     public CountdownOverlay(string icon, string title, string description,
-                            int seconds, string routineId = "", bool confirmMode = false)
+                            int seconds, string routineId = "")
     {
-        _routineId   = routineId;
-        _remaining   = seconds;
-        _confirmMode = confirmMode;
+        _routineId = routineId;
+        _remaining = Math.Max(1, seconds);
 
         FormBorderStyle = FormBorderStyle.None;
         ShowInTaskbar   = false;
         TopMost         = true;
         Opacity         = 0.92;
         BackColor       = Color.FromArgb(18, 18, 28);
-        Size            = new Size(360, confirmMode ? 220 : 280);
+        Size            = new Size(360, 320);
         StartPosition   = FormStartPosition.Manual;
 
         var screen = Screen.PrimaryScreen?.WorkingArea ?? new Rectangle(0, 0, 1920, 1080);
@@ -50,7 +49,7 @@ public sealed class CountdownOverlay : Form
         path.AddRoundedRectangle(new Rectangle(0, 0, Width, Height), 12);
         Region = new Region(path);
 
-        // ── 공통: 제목 ─────────────────────────────────────────────────
+        // ── 제목 ──────────────────────────────────────────────────────────
         _lblTitle = new Label
         {
             Text      = $"{icon}  {title}",
@@ -58,59 +57,63 @@ public sealed class CountdownOverlay : Form
             ForeColor = Color.FromArgb(230, 230, 235),
             AutoSize  = false,
             TextAlign = ContentAlignment.MiddleCenter,
-            Bounds    = new Rectangle(0, 16, Width, 36)
+            Bounds    = new Rectangle(0, 14, Width, 34)
         };
 
-        if (!confirmMode)
+        // ── 설명 ──────────────────────────────────────────────────────────
+        _lblDesc = new Label
         {
-            // ── 카운트다운 모드 ────────────────────────────────────────
-            _lblCountdown = new Label
-            {
-                Text      = _remaining.ToString(),
-                Font      = new Font("Segoe UI", 52f, FontStyle.Bold),
-                ForeColor = Color.FromArgb(100, 220, 150),
-                AutoSize  = false,
-                TextAlign = ContentAlignment.MiddleCenter,
-                Bounds    = new Rectangle(0, 54, Width, 120)
-            };
-            _lblHint = new Label
-            {
-                Text      = "초 후 자동으로 닫힙니다",
-                Font      = new Font("Segoe UI", 9f),
-                ForeColor = Color.FromArgb(130, 130, 150),
-                AutoSize  = false,
-                TextAlign = ContentAlignment.MiddleCenter,
-                Bounds    = new Rectangle(0, 180, Width, 26)
-            };
-        }
-        else
-        {
-            // ── 확인 모드 ──────────────────────────────────────────────
-            _lblDesc = new Label
-            {
-                Text      = description,
-                Font      = new Font("Segoe UI", 10.5f),
-                ForeColor = Color.FromArgb(180, 180, 195),
-                AutoSize  = false,
-                TextAlign = ContentAlignment.MiddleCenter,
-                Bounds    = new Rectangle(16, 58, Width - 32, 52)
-            };
-            _btnComplete = new Button
-            {
-                Text      = "완료  ✓",
-                Font      = new Font("Segoe UI", 11f, FontStyle.Bold),
-                ForeColor = Color.FromArgb(18, 18, 28),
-                BackColor = Color.FromArgb(100, 220, 150),
-                FlatStyle = FlatStyle.Flat,
-                Bounds    = new Rectangle(Width / 2 - 80, 122, 160, 44),
-                Cursor    = Cursors.Hand
-            };
-            _btnComplete.FlatAppearance.BorderSize           = 0;
-            _btnComplete.FlatAppearance.MouseOverBackColor   = Color.FromArgb(130, 235, 175);
-            _btnComplete.Click += (_, _) => { Completed?.Invoke(this, EventArgs.Empty); Close(); };
-        }
+            Text      = description,
+            Font      = new Font("Segoe UI", 9.5f),
+            ForeColor = Color.FromArgb(160, 160, 180),
+            AutoSize  = false,
+            TextAlign = ContentAlignment.MiddleCenter,
+            Bounds    = new Rectangle(16, 52, Width - 32, 44)
+        };
 
-        // ── 공통: 건너뛰기 ────────────────────────────────────────────
+        // ── 카운트다운 숫자 ───────────────────────────────────────────────
+        _lblCountdown = new Label
+        {
+            Text      = _remaining.ToString(),
+            Font      = new Font("Segoe UI", 48f, FontStyle.Bold),
+            ForeColor = Color.FromArgb(100, 220, 150),
+            AutoSize  = false,
+            TextAlign = ContentAlignment.MiddleCenter,
+            Bounds    = new Rectangle(0, 98, Width, 96)
+        };
+
+        // ── 힌트 ──────────────────────────────────────────────────────────
+        _lblHint = new Label
+        {
+            Text      = "초 내에 완료를 누르세요",
+            Font      = new Font("Segoe UI", 9f),
+            ForeColor = Color.FromArgb(130, 130, 150),
+            AutoSize  = false,
+            TextAlign = ContentAlignment.MiddleCenter,
+            Bounds    = new Rectangle(0, 196, Width, 22)
+        };
+
+        // ── 완료 버튼 ─────────────────────────────────────────────────────
+        _btnComplete = new Button
+        {
+            Text      = "완료  ✓",
+            Font      = new Font("Segoe UI", 11f, FontStyle.Bold),
+            ForeColor = Color.FromArgb(18, 18, 28),
+            BackColor = Color.FromArgb(100, 220, 150),
+            FlatStyle = FlatStyle.Flat,
+            Bounds    = new Rectangle(Width / 2 - 80, 224, 160, 40),
+            Cursor    = Cursors.Hand
+        };
+        _btnComplete.FlatAppearance.BorderSize           = 0;
+        _btnComplete.FlatAppearance.MouseOverBackColor   = Color.FromArgb(130, 235, 175);
+        _btnComplete.Click += (_, _) =>
+        {
+            _timer.Stop();
+            Completed?.Invoke(this, EventArgs.Empty);
+            Close();
+        };
+
+        // ── 건너뛰기 버튼 ─────────────────────────────────────────────────
         _btnSkip = new Button
         {
             Text      = "건너뛰기",
@@ -118,18 +121,19 @@ public sealed class CountdownOverlay : Form
             ForeColor = Color.FromArgb(150, 150, 170),
             BackColor = Color.FromArgb(38, 38, 52),
             FlatStyle = FlatStyle.Flat,
-            Bounds    = new Rectangle(Width / 2 - 70, confirmMode ? 176 : 214, 140, 34),
+            Bounds    = new Rectangle(Width / 2 - 70, 272, 140, 32),
             Cursor    = Cursors.Hand
         };
         _btnSkip.FlatAppearance.BorderColor        = Color.FromArgb(60, 60, 80);
         _btnSkip.FlatAppearance.MouseOverBackColor = Color.FromArgb(55, 55, 72);
-        _btnSkip.Click += (_, _) => { _timer.Stop(); Skipped?.Invoke(this, EventArgs.Empty); Close(); };
+        _btnSkip.Click += (_, _) =>
+        {
+            _timer.Stop();
+            Skipped?.Invoke(this, EventArgs.Empty);
+            Close();
+        };
 
-        Controls.Add(_lblTitle);
-        Controls.Add(_btnSkip);
-        if (!confirmMode) { Controls.Add(_lblCountdown!); Controls.Add(_lblHint!); }
-        else              { Controls.Add(_lblDesc!);      Controls.Add(_btnComplete!); }
-
+        Controls.AddRange([_lblTitle, _lblDesc, _lblCountdown, _lblHint, _btnComplete, _btnSkip]);
         _timer.Tick += OnTick;
     }
 
@@ -138,7 +142,7 @@ public sealed class CountdownOverlay : Form
         base.OnShown(e);
         var dark = 1;
         DwmSetWindowAttribute(Handle, 20, ref dark, sizeof(int));
-        if (!_confirmMode) _timer.Start();
+        _timer.Start();
         Task.Run(() => PlayRoutineSound(_routineId));
     }
 
@@ -166,17 +170,15 @@ public sealed class CountdownOverlay : Form
         if (_remaining <= 0)
         {
             _timer.Stop();
-            Completed?.Invoke(this, EventArgs.Empty);
+            // 시간 만료 → 행동 안 함 (미달성)
+            Skipped?.Invoke(this, EventArgs.Empty);
             Close();
             return;
         }
-        if (_lblCountdown != null)
-        {
-            _lblCountdown.Text      = _remaining.ToString();
-            _lblCountdown.ForeColor = _remaining <= 5
-                ? Color.FromArgb(255, 120, 100)
-                : Color.FromArgb(100, 220, 150);
-        }
+        _lblCountdown.Text      = _remaining.ToString();
+        _lblCountdown.ForeColor = _remaining <= 5
+            ? Color.FromArgb(255, 120, 100)
+            : Color.FromArgb(100, 220, 150);
     }
 
     // 클릭으로 드래그 이동 지원

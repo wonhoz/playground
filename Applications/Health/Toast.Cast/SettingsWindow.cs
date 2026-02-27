@@ -159,27 +159,18 @@ public sealed class SettingsWindow : Form
         var (spPanel, _) = CreateDarkSpinner(1, 480, routine.IntervalMinutes, v => { routine.IntervalMinutes = v; });
         spPanel.Location = new Point(100, 82);
 
-        var chkCountdown = new CheckBox
+        var lblCountdownSec = new Label
         {
-            Text = "카운트다운",
-            Checked = routine.ShowCountdown,
-            Appearance = Appearance.Button,
-            FlatStyle = FlatStyle.Flat,
-            Font = new Font("Segoe UI", 9.5f),
-            TextAlign = ContentAlignment.MiddleCenter,
-            ForeColor = Color.FromArgb(180, 180, 200),
-            BackColor = Color.FromArgb(38, 38, 54),
-            Size = new Size(170, 36),
-            Location = new Point(228, 82),
-            Cursor = Cursors.Hand
+            Text = "확인(초):",
+            Font = new Font("Segoe UI", 9f),
+            ForeColor = Color.FromArgb(150, 150, 170),
+            AutoSize = true,
+            Location = new Point(232, 90)
         };
-        chkCountdown.FlatAppearance.CheckedBackColor = Color.FromArgb(28, 90, 58);
-        chkCountdown.FlatAppearance.BorderColor = Color.FromArgb(65, 65, 95);
-        chkCountdown.FlatAppearance.MouseOverBackColor = Color.FromArgb(50, 50, 72);
-        chkCountdown.FlatAppearance.BorderSize = 1;
-        chkCountdown.CheckedChanged += (_, _) => { routine.ShowCountdown = chkCountdown.Checked; };
+        var (spCountdown, _) = CreateDarkSpinner(5, 300, routine.CountdownSeconds, v => { routine.CountdownSeconds = v; });
+        spCountdown.Location = new Point(310, 82);
 
-        card.Controls.AddRange([lblName, lblDesc, chkEnabled, lblInterval, spPanel, chkCountdown]);
+        card.Controls.AddRange([lblName, lblDesc, chkEnabled, lblInterval, spPanel, lblCountdownSec, spCountdown]);
 
         card.Paint += (_, e) =>
         {

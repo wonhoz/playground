@@ -114,10 +114,9 @@ public sealed class TrayApp : ApplicationContext
 
     private void ShowRoutineOverlay(Routine routine)
     {
-        var confirmMode = true;  // 모든 루틴 사용자 확인 (완료 ✓ / 건너뛰기)
         _currentOverlay = new CountdownOverlay(
             routine.Icon, routine.Name, routine.Description,
-            routine.CountdownSeconds, routine.Id, confirmMode);
+            routine.CountdownSeconds, routine.Id);
 
         var recorded = false;
 
@@ -210,12 +209,11 @@ public sealed class TrayApp : ApplicationContext
         };
         _menu.Items.Add(pauseItem);
 
-        // 지금 당장 테스트 — 확인 모드(완료 버튼) 루틴 우선, 없으면 카운트다운 루틴
+        // 지금 당장 테스트
         var testItem = new ToolStripMenuItem("🔔 지금 테스트");
         testItem.Click += (_, _) =>
         {
-            var target = _config.Routines.FirstOrDefault(r => r.Enabled && !r.ShowCountdown)
-                      ?? _config.Routines.FirstOrDefault(r => r.Enabled);
+            var target = _config.Routines.FirstOrDefault(r => r.Enabled);
             if (target != null) FireRoutine(target);
         };
         _menu.Items.Add(testItem);

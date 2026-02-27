@@ -76,6 +76,7 @@ call :pub "Dungeon.Dash"          "Games\Action\Dungeon.Dash"                   
 call :pub "Brick.Blitz"           "Games\Arcade\Brick.Blitz"                             "BrickBlitz.exe"       "Games\Arcade"
 call :pub "Dash.City"             "Games\Arcade\Dash.City"                               "DashCity.exe"         "Games\Arcade"
 call :pub "Neon.Run"              "Games\Arcade\Neon.Run"                                "NeonRun.exe"          "Games\Arcade"
+call :pub "Neon.Slice"            "Games\Arcade\Neon.Slice"                              "Neon.Slice.exe"       "Games\Arcade"
 
 :: ── Games / Puzzle ───────────────────────────────────────────────
 call :pub "Gravity.Flip"          "Games\Puzzle\Gravity.Flip"                            "GravityFlip.exe"      "Games\Puzzle"

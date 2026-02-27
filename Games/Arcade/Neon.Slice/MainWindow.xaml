@@ -1,0 +1,259 @@
+<Window x:Class="NeonSlice.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Neon.Slice"
+        Width="900" Height="680"
+        MinWidth="700" MinHeight="520"
+        Background="#0A0A0F"
+        WindowStartupLocation="CenterScreen"
+        Cursor="None">
+
+  <Grid x:Name="RootGrid">
+
+    <!-- ══════════════════════════════════════════════════════════════ -->
+    <!-- 게임 캔버스 레이어 (항상 바닥)                                  -->
+    <!-- ══════════════════════════════════════════════════════════════ -->
+    <Grid x:Name="GameLayer" Visibility="Collapsed">
+      <!-- DrawingVisualHost 가 코드비하인드에서 추가됨 -->
+      <Canvas x:Name="GameCanvas"/>
+
+      <!-- ── HUD ──────────────────────────────────────────────────── -->
+      <Grid VerticalAlignment="Top" Margin="0,0,0,0">
+        <Grid.Background>
+          <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="#BB0A0A0F" Offset="0"/>
+            <GradientStop Color="#000A0A0F" Offset="1"/>
+          </LinearGradientBrush>
+        </Grid.Background>
+        <StackPanel Orientation="Horizontal" Margin="16,8">
+
+          <!-- 점수 -->
+          <StackPanel Margin="0,0,32,0">
+            <TextBlock Text="SCORE" Foreground="#6A7080" FontSize="10"
+                       FontFamily="Segoe UI"/>
+            <TextBlock x:Name="TxtScore" Text="0" Foreground="#00FFFF"
+                       FontSize="26" FontFamily="Consolas" FontWeight="Bold"/>
+          </StackPanel>
+
+          <!-- 콤보 -->
+          <StackPanel Margin="0,0,32,0">
+            <TextBlock Text="COMBO" Foreground="#6A7080" FontSize="10"
+                       FontFamily="Segoe UI"/>
+            <TextBlock x:Name="TxtCombo" Text="×0" Foreground="#FF2D78"
+                       FontSize="26" FontFamily="Consolas" FontWeight="Bold"/>
+          </StackPanel>
+
+          <!-- 슬라이스 수 -->
+          <StackPanel Margin="0,0,32,0">
+            <TextBlock Text="SLICED" Foreground="#6A7080" FontSize="10"
+                       FontFamily="Segoe UI"/>
+            <TextBlock x:Name="TxtSliced" Text="0" Foreground="#39FF14"
+                       FontSize="26" FontFamily="Consolas" FontWeight="Bold"/>
+          </StackPanel>
+
+          <!-- 목숨 (Classic) / 타이머 (TimeAttack) / 남은슬라이스 (Zen) -->
+          <StackPanel x:Name="PanelLives" Margin="0,0,32,0">
+            <TextBlock x:Name="TxtLivesLabel" Text="LIVES" Foreground="#6A7080" FontSize="10"
+                       FontFamily="Segoe UI"/>
+            <TextBlock x:Name="TxtLives" Text="♥♥♥" Foreground="#FF2D78"
+                       FontSize="22" FontFamily="Segoe UI"/>
+          </StackPanel>
+
+          <!-- 최고 점수 -->
+          <StackPanel Margin="0,0,0,0" HorizontalAlignment="Right">
+            <TextBlock Text="BEST" Foreground="#6A7080" FontSize="10"
+                       FontFamily="Segoe UI"/>
+            <TextBlock x:Name="TxtBest" Text="0" Foreground="#BF5FFF"
+                       FontSize="26" FontFamily="Consolas" FontWeight="Bold"/>
+          </StackPanel>
+        </StackPanel>
+      </Grid>
+
+      <!-- ESC 힌트 -->
+      <TextBlock Text="ESC  일시정지" Foreground="#2A3A4A" FontSize="11"
+                 FontFamily="Segoe UI" VerticalAlignment="Bottom"
+                 HorizontalAlignment="Right" Margin="0,0,12,8"/>
+    </Grid>
+
+    <!-- ══════════════════════════════════════════════════════════════ -->
+    <!-- 메뉴 화면                                                       -->
+    <!-- ══════════════════════════════════════════════════════════════ -->
+    <Grid x:Name="MenuLayer">
+      <Grid.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+          <GradientStop Color="#0A0A0F" Offset="0"/>
+          <GradientStop Color="#0D0A1A" Offset="1"/>
+        </LinearGradientBrush>
+      </Grid.Background>
+
+      <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+
+        <!-- 타이틀 -->
+        <TextBlock Text="NEON" Foreground="#00FFFF" FontSize="64"
+                   FontFamily="Consolas" FontWeight="Bold"
+                   HorizontalAlignment="Center">
+          <TextBlock.Effect>
+            <DropShadowEffect Color="#00FFFF" ShadowDepth="0" BlurRadius="24" Opacity="0.9"/>
+          </TextBlock.Effect>
+        </TextBlock>
+        <TextBlock Text="SLICE" Foreground="#FF2D78" FontSize="64"
+                   FontFamily="Consolas" FontWeight="Bold"
+                   HorizontalAlignment="Center" Margin="0,-18,0,0">
+          <TextBlock.Effect>
+            <DropShadowEffect Color="#FF2D78" ShadowDepth="0" BlurRadius="24" Opacity="0.9"/>
+          </TextBlock.Effect>
+        </TextBlock>
+        <TextBlock Text="마우스로 도형을 잘라라" Foreground="#6A7080"
+                   FontSize="14" FontFamily="Segoe UI"
+                   HorizontalAlignment="Center" Margin="0,4,0,32"/>
+
+        <!-- 모드 선택 -->
+        <TextBlock Text="GAME MODE" Foreground="#4A5A6A" FontSize="11"
+                   FontFamily="Segoe UI" HorizontalAlignment="Center" Margin="0,0,0,10"/>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,8">
+          <Button x:Name="BtnClassic" Content="CLASSIC" Width="140" Height="46"
+                  Style="{StaticResource ModeBtn}" Margin="0,0,8,0"
+                  Click="BtnMode_Click" Tag="Classic"/>
+          <Button x:Name="BtnTimeAttack" Content="TIME ATTACK" Width="140" Height="46"
+                  Style="{StaticResource ModeBtn}" Margin="0,0,8,0"
+                  Click="BtnMode_Click" Tag="TimeAttack"/>
+          <Button x:Name="BtnZen" Content="ZEN" Width="140" Height="46"
+                  Style="{StaticResource ModeBtn}"
+                  Click="BtnMode_Click" Tag="Zen"/>
+        </StackPanel>
+
+        <!-- 모드 설명 -->
+        <TextBlock x:Name="TxtModeDesc"
+                   Text="목숨 3개 — 도형을 놓칠 때마다 감소"
+                   Foreground="#4A5A6A" FontSize="12" FontFamily="Segoe UI"
+                   HorizontalAlignment="Center" Margin="0,4,0,24"/>
+
+        <!-- 시작 버튼 -->
+        <Button x:Name="BtnStart" Content="▶  START" Width="200" Height="52"
+                Style="{StaticResource MenuBtn}" Padding="0,0,0,0"
+                Click="BtnStart_Click" Margin="0,0,0,24"/>
+
+        <!-- 최고 점수 -->
+        <Border Background="#0D0D1A" CornerRadius="8" Padding="20,12" Margin="0,0,0,0">
+          <Grid>
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="*"/>
+              <ColumnDefinition Width="*"/>
+              <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0" HorizontalAlignment="Center">
+              <TextBlock Text="CLASSIC" Foreground="#4A5A6A" FontSize="10" FontFamily="Segoe UI" HorizontalAlignment="Center"/>
+              <TextBlock x:Name="TxtBestClassic" Text="0" Foreground="#BF5FFF"
+                         FontSize="22" FontFamily="Consolas" FontWeight="Bold" HorizontalAlignment="Center"/>
+            </StackPanel>
+            <StackPanel Grid.Column="1" HorizontalAlignment="Center">
+              <TextBlock Text="TIME ATTACK" Foreground="#4A5A6A" FontSize="10" FontFamily="Segoe UI" HorizontalAlignment="Center"/>
+              <TextBlock x:Name="TxtBestTime" Text="0" Foreground="#BF5FFF"
+                         FontSize="22" FontFamily="Consolas" FontWeight="Bold" HorizontalAlignment="Center"/>
+            </StackPanel>
+            <StackPanel Grid.Column="2" HorizontalAlignment="Center">
+              <TextBlock Text="ZEN" Foreground="#4A5A6A" FontSize="10" FontFamily="Segoe UI" HorizontalAlignment="Center"/>
+              <TextBlock x:Name="TxtBestZen" Text="0" Foreground="#BF5FFF"
+                         FontSize="22" FontFamily="Consolas" FontWeight="Bold" HorizontalAlignment="Center"/>
+            </StackPanel>
+          </Grid>
+        </Border>
+      </StackPanel>
+    </Grid>
+
+    <!-- ══════════════════════════════════════════════════════════════ -->
+    <!-- 일시정지 오버레이                                               -->
+    <!-- ══════════════════════════════════════════════════════════════ -->
+    <Grid x:Name="PauseLayer" Visibility="Collapsed">
+      <Grid.Background>
+        <SolidColorBrush Color="#BB000000"/>
+      </Grid.Background>
+      <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+        <TextBlock Text="PAUSED" Foreground="#00FFFF" FontSize="52"
+                   FontFamily="Consolas" FontWeight="Bold"
+                   HorizontalAlignment="Center">
+          <TextBlock.Effect>
+            <DropShadowEffect Color="#00FFFF" ShadowDepth="0" BlurRadius="20" Opacity="0.8"/>
+          </TextBlock.Effect>
+        </TextBlock>
+        <Button Content="▶  RESUME" Width="200" Height="48"
+                Style="{StaticResource MenuBtn}" Margin="0,24,0,12"
+                Click="BtnResume_Click"/>
+        <Button Content="MENU" Width="200" Height="48"
+                Style="{StaticResource ModeBtn}"
+                Click="BtnMenu_Click"/>
+      </StackPanel>
+    </Grid>
+
+    <!-- ══════════════════════════════════════════════════════════════ -->
+    <!-- 게임오버 화면                                                   -->
+    <!-- ══════════════════════════════════════════════════════════════ -->
+    <Grid x:Name="GameOverLayer" Visibility="Collapsed">
+      <Grid.Background>
+        <SolidColorBrush Color="#DD000000"/>
+      </Grid.Background>
+      <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="320">
+        <TextBlock x:Name="TxtGameOverTitle" Text="GAME OVER" Foreground="#FF2D78"
+                   FontSize="52" FontFamily="Consolas" FontWeight="Bold"
+                   HorizontalAlignment="Center">
+          <TextBlock.Effect>
+            <DropShadowEffect Color="#FF2D78" ShadowDepth="0" BlurRadius="22" Opacity="0.9"/>
+          </TextBlock.Effect>
+        </TextBlock>
+
+        <Border Background="#111122" CornerRadius="10" Padding="28,18" Margin="0,20,0,0">
+          <Grid>
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="*"/>
+              <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+              <RowDefinition/>
+              <RowDefinition/>
+              <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0" Grid.Column="0" Margin="0,0,20,12">
+              <TextBlock Text="SCORE" Foreground="#4A5A6A" FontSize="11" FontFamily="Segoe UI"/>
+              <TextBlock x:Name="TxtGoScore" Text="0" Foreground="#00FFFF"
+                         FontSize="32" FontFamily="Consolas" FontWeight="Bold"/>
+            </StackPanel>
+            <StackPanel Grid.Row="0" Grid.Column="1" Margin="0,0,0,12">
+              <TextBlock Text="MAX COMBO" Foreground="#4A5A6A" FontSize="11" FontFamily="Segoe UI"/>
+              <TextBlock x:Name="TxtGoCombo" Text="×0" Foreground="#FF2D78"
+                         FontSize="32" FontFamily="Consolas" FontWeight="Bold"/>
+            </StackPanel>
+            <StackPanel Grid.Row="1" Grid.Column="0" Margin="0,0,20,12">
+              <TextBlock Text="SLICED" Foreground="#4A5A6A" FontSize="11" FontFamily="Segoe UI"/>
+              <TextBlock x:Name="TxtGoSliced" Text="0" Foreground="#39FF14"
+                         FontSize="32" FontFamily="Consolas" FontWeight="Bold"/>
+            </StackPanel>
+            <StackPanel Grid.Row="1" Grid.Column="1" Margin="0,0,0,12">
+              <TextBlock Text="MISSED" Foreground="#4A5A6A" FontSize="11" FontFamily="Segoe UI"/>
+              <TextBlock x:Name="TxtGoMissed" Text="0" Foreground="#BF5FFF"
+                         FontSize="32" FontFamily="Consolas" FontWeight="Bold"/>
+            </StackPanel>
+            <StackPanel Grid.Row="2" Grid.ColumnSpan="2">
+              <TextBlock x:Name="TxtGoNewBest" Text="🏆 NEW BEST!" Foreground="#FFE600"
+                         FontSize="16" FontFamily="Segoe UI" FontWeight="Bold"
+                         HorizontalAlignment="Center" Visibility="Collapsed">
+                <TextBlock.Effect>
+                  <DropShadowEffect Color="#FFE600" ShadowDepth="0" BlurRadius="12" Opacity="0.8"/>
+                </TextBlock.Effect>
+              </TextBlock>
+            </StackPanel>
+          </Grid>
+        </Border>
+
+        <Button Content="▶  PLAY AGAIN" Width="220" Height="50"
+                Style="{StaticResource MenuBtn}" Margin="0,20,0,10"
+                Click="BtnPlayAgain_Click"/>
+        <Button Content="MENU" Width="220" Height="46"
+                Style="{StaticResource ModeBtn}"
+                Click="BtnMenu_Click"/>
+      </StackPanel>
+    </Grid>
+
+  </Grid>
+</Window>

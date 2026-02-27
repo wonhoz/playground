@@ -2,7 +2,7 @@
 
 > 이 파일은 브레인스토밍 시 **이미 제안되거나 구현된 아이디어를 다시 꺼내지 않도록** 하는 필터다.
 > 새 아이디어를 제안하기 전 반드시 이 목록을 확인할 것.
-> 마지막 갱신: 2026-02-26
+> 마지막 갱신: 2026-02-27
 
 ---
 
@@ -18,10 +18,10 @@
 | `File.Duplicates` | Files | SHA-256 + dHash 중복 파일 탐지기 |
 | `Photo.Video.Organizer` | Media | EXIF 날짜 기반 미디어 정리기 |
 | `Api.Probe` | Dev/Tools | 미니멀 오프라인 API 테스터 (Postman 대체) |
-| `Hash.Forge` | Dev/Tools | 해시·인코딩 올인원 (MD5/SHA/Base64/JWT/UUID) |
+| `Hash.Forge` → `Text.Forge`로 통합 | Dev/Tools | 해시·인코딩 올인원 (MD5/SHA/Base64/JWT/UUID) |
 | `Log.Lens` | Dev/Tools | 로그 파일 분석 뷰어 |
-| `Mock.Desk` | Dev/Tools | 로컬 Mock HTTP 서버 (GUI 라우트 정의) |
-| `Log.Tail` | Dev/Tools | 실시간 로그 뷰어 (tail -f, 멀티탭, 색상 규칙) |
+| `Mock.Desk` → `Mock.Server`로 통합 | Dev/Tools | 로컬 Mock HTTP 서버 (GUI 라우트 정의) |
+| `Log.Tail` → `Log.Lens`로 통합 | Dev/Tools | 실시간 로그 뷰어 (tail -f, 멀티탭, 색상 규칙) |
 | `DNS.Flip` | Network | DNS 프리셋 원클릭 전환 트레이 앱 |
 | `Port.Watch` | Network | 포트 점유 프로세스 모니터 + 원클릭 종료 |
 | `Clipboard.Stacker` | Productivity | 클립보드 스택 관리 |
@@ -70,7 +70,36 @@
 
 ## 4. 제안된 미구현 아이디어
 
-### Dev / Tools (개발자 도구)
+### Productivity / Creative
+
+| 이름 | 핵심 기능 | 출처 |
+|------|----------|------|
+| `Clip.Annotate` | 클립보드 이미지 즉석 주석 (화살표·텍스트·블러·크롭) → 재복사 | idea_20260227 |
+| `Thumb.Forge` | 유튜브 썸네일·소셜 OG 이미지 오프라인 빠른 제작 (템플릿, 그라디언트, 텍스트 쉐도우) | idea_20260227 |
+| `Mood.Board` | 로컬 무드보드 (이미지 자유 배치·크기·회전, 텍스트 레이어, PNG/PDF 내보내기) | idea_20260227 |
+| `Auto.Type` | 텍스트 자동 확장 스니펫 (::addr → 주소, ::date → 오늘 날짜) | idea_20260227 |
+| `Macro.Pad` | 화면 소프트웨어 매크로 패드 (버튼 배치, 앱 실행·단축키·스크립트) | idea_20260227 |
+| `Type.Rocket` | 실시간 WPM 타이핑 속도 트래커 + 코드·마크다운 연습 + 일별 통계 | idea_20260227 |
+
+### Tray / Automation / System
+
+| 이름 | 핵심 기능 | 출처 |
+|------|----------|------|
+| `Sound.Cast` | 오디오 출력 장치 원클릭 전환 트레이 (스피커↔헤드폰, 장치 프리셋) | idea_20260227 |
+| `Net.Speed` | 실시간 네트워크 다운/업 속도 트레이 오버레이 + 사용량 로그 | idea_20260227 |
+| `Thermal.View` | CPU/GPU 온도·팬 속도 실시간 트레이 + 임계치 Toast 알림 | idea_20260227 |
+| `Hot.Corner` | Windows 핫 코너 구현 (화면 4모서리 마우스 → 커스텀 동작) | idea_20260227 |
+| `Wake.Cast` | WOL(Wake-on-LAN) 원클릭 PC 기동 트레이 + 핑 상태 모니터 | idea_20260227 |
+
+### Dev / Tools (개발자 도구) — 신규 제안
+
+| 이름 | 핵심 기능 | 출처 |
+|------|----------|------|
+| `Glyph.Map` | 유니코드 12만+ 문자 오프라인 탐색·복사·즐겨찾기 (이모지·특수문자·HTML 엔티티 동시 복사) | idea_20260227 |
+
+---
+
+### Dev / Tools (개발자 도구) — 기존 제안
 
 | 이름 | 핵심 기능 | 출처 |
 |------|----------|------|
@@ -162,6 +191,23 @@
 
 ---
 
+### 게임 — 제안된 미구현 아이디어 (idea_20260227)
+
+| 이름 | 장르 | 핵심 메커닉 |
+|------|------|------------|
+| `Glyph.Rush` | Typing Shooter | 화면에 쏟아지는 문자/단어를 타이핑해서 격추, WPM = 전투력 |
+| `Mirror.Run` | Arcade (Unique) | 화면 좌우 대칭 두 캐릭터를 단일 입력으로 동시 조작, 비대칭 장애물 |
+| `Shadow.Run` | Arcade (Self-Race) | 자신의 이전 런 고스트와 경쟁하는 무한 달리기 |
+| `Chain.Blast` | Puzzle | 색상 구슬 발사 → 같은 색 3개+ 연쇄 폭발 (Puzzle Bobble 변형) |
+| `Color.Blitz` | Brain / Speed | 스트룹 효과 기반 색상 초고속 매칭 (글자 의미 vs 실제 색) |
+| `Flip.Grid` | Puzzle | N×N 격자 타일 뒤집기 (클릭 시 인접 타일 연동), 전체 같은 색 목표 |
+| `Stack.Pop` | Casual / Hyper | 컬러 블록 타워 → 같은 색 3레이어 연쇄 폭발 제거 |
+| `Neon.Slice` | Arcade / Reflex | 마우스 드래그 슬라이싱 아케이드, 네온 사이버펑크 비주얼 |
+| `Worm.Rush` | Arcade (Classic+) | Snake 진화판 — 아이템마다 뱀이 변형 (속도, 역방향, 벽통과 등) |
+| `Pixel.Drop` | Puzzle / Tetris | 목표 픽셀 아트 패턴을 완성하는 테트리스 변형 |
+
+---
+
 ## 5. 유사 개념 그룹 (중복 주의)
 
 브레인스토밍 시 아래 그룹 내 변형 아이디어는 **이미 제안된 것으로 간주**한다.
@@ -181,3 +227,25 @@
 | **SSL 인증서 감시** | Cert.Watch (두 파일에서 중복 제안됨) |
 | **폰트 도구** | Font.Scout · Font.Probe |
 | **호흡 / 웰니스** | Toast.Cast ✅ · Breath.Box |
+| **오디오 출력 전환** | Sound.Cast |
+| **네트워크 속도 모니터** | Net.Speed |
+| **온도 모니터** | Thermal.View |
+| **핫 코너 / 모서리 제스처** | Hot.Corner |
+| **텍스트 스니펫 자동확장** | Auto.Type (≠ Smart.Paste) |
+| **매크로 패드 / 런처 버튼** | Macro.Pad (≠ Run.Deck, Key.Tape) |
+| **무드보드 / 이미지 콜라주** | Mood.Board |
+| **이미지 주석 / 스크린샷 편집** | Clip.Annotate |
+| **썸네일 / 소셜 이미지 제작** | Thumb.Forge |
+| **유니코드 / 특수문자 탐색** | Glyph.Map |
+| **타이핑 속도 / WPM 연습** | Type.Rocket |
+| **WOL / 원격 PC 기동** | Wake.Cast |
+| **타이핑 Shooter 게임** | Glyph.Rush |
+| **좌우 대칭 조작 게임** | Mirror.Run |
+| **고스트 레이스 달리기** | Shadow.Run |
+| **색상 구슬 연쇄 폭발** | Chain.Blast |
+| **스트룹 색상 퍼즐** | Color.Blitz |
+| **타일 뒤집기 퍼즐** | Flip.Grid |
+| **컬러 타워 폭발** | Stack.Pop |
+| **슬라이싱 아케이드** | Neon.Slice |
+| **Snake 진화판** | Worm.Rush |
+| **픽셀아트 테트리스** | Pixel.Drop |

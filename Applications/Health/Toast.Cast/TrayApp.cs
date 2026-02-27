@@ -210,12 +210,13 @@ public sealed class TrayApp : ApplicationContext
         };
         _menu.Items.Add(pauseItem);
 
-        // 지금 당장 테스트
+        // 지금 당장 테스트 — 확인 모드(완료 버튼) 루틴 우선, 없으면 카운트다운 루틴
         var testItem = new ToolStripMenuItem("🔔 지금 테스트");
         testItem.Click += (_, _) =>
         {
-            var first = _config.Routines.FirstOrDefault(r => r.Enabled);
-            if (first != null) FireRoutine(first);
+            var target = _config.Routines.FirstOrDefault(r => r.Enabled && !r.ShowCountdown)
+                      ?? _config.Routines.FirstOrDefault(r => r.Enabled);
+            if (target != null) FireRoutine(target);
         };
         _menu.Items.Add(testItem);
 

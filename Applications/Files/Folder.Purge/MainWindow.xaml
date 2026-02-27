@@ -113,11 +113,43 @@
             </Setter>
         </Style>
 
-        <!-- 결과 항목 -->
+        <!-- GridViewColumnHeader 다크 스타일 -->
+        <Style TargetType="GridViewColumnHeader">
+            <Setter Property="Background"      Value="#222222"/>
+            <Setter Property="Foreground"      Value="{StaticResource TextSecondary}"/>
+            <Setter Property="BorderBrush"     Value="#333333"/>
+            <Setter Property="BorderThickness" Value="0,0,1,1"/>
+            <Setter Property="Padding"         Value="8,5"/>
+            <Setter Property="FontSize"        Value="11"/>
+            <Setter Property="FontWeight"      Value="SemiBold"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="GridViewColumnHeader">
+                        <Border x:Name="Bd"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Bd" Property="Background" Value="#2A2A2A"/>
+                                <Setter Property="Foreground" Value="{StaticResource TextPrimary}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- 결과 항목 — GridView와 함께 쓸 때 GridViewRowPresenter 필수 -->
         <Style TargetType="ListViewItem">
             <Setter Property="Foreground" Value="{StaticResource TextPrimary}"/>
-            <Setter Property="Padding" Value="4,3"/>
-            <Setter Property="FontSize" Value="11"/>
+            <Setter Property="Padding"    Value="4,3"/>
+            <Setter Property="FontSize"   Value="11"/>
             <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
             <Setter Property="Template">
                 <Setter.Value>
@@ -125,7 +157,10 @@
                         <Border x:Name="Bd" Background="Transparent"
                                 BorderThickness="0,0,0,1" BorderBrush="#2A2A2A"
                                 Padding="{TemplateBinding Padding}">
-                            <ContentPresenter/>
+                            <GridViewRowPresenter
+                                Columns="{Binding Path=View.Columns,
+                                    RelativeSource={RelativeSource AncestorType=ListView}}"
+                                Content="{TemplateBinding Content}"/>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsSelected" Value="True">

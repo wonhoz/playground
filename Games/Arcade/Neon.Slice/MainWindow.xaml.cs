@@ -53,7 +53,7 @@ public partial class MainWindow : Window
 
     private void OnSizeChanged(object sender, SizeChangedEventArgs e)
     {
-        _engine?.Resize(GameLayer.ActualWidth, GameLayer.ActualHeight);
+        // 엔진이 매 프레임 _host.ActualWidth/Height를 직접 읽으므로 별도 Resize 불필요
     }
 
     // ── 렌더링 루프 ────────────────────────────────────────────────────────────
@@ -146,9 +146,7 @@ public partial class MainWindow : Window
         PauseLayer.Visibility    = Visibility.Collapsed;
         GameLayer.Visibility     = Visibility.Visible;
 
-        // UpdateLayout()으로 레이아웃 패스를 즉시 강제 실행 → ActualWidth/Height 확정
-        UpdateLayout();
-        _engine.Resize(GameLayer.ActualWidth, GameLayer.ActualHeight);
+        // 크기 동기화는 OnRender에서 매 프레임 처리하므로 UpdateLayout/Resize 불필요
         _engine.StartGame(mode);
     }
 

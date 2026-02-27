@@ -141,12 +141,20 @@ public sealed class GameEngine
     {
         if (!IsRunning || _gameOver) return;
 
+        // 매 프레임 렌더 영역 크기를 _host에서 직접 읽음
+        // UpdateLayout() 타이밍에 의존하지 않아 크기=0 문제 완전 방지
+        _width  = _host.ActualWidth;
+        _height = _host.ActualHeight;
+
         var now = DateTime.Now;
         var realDt = (now - _lastFrame).TotalSeconds;
         _lastFrame = now;
         realDt = Math.Min(realDt, 0.05); // 프레임 드랍 방지
 
         if (IsPaused) { DrawFrame(0); return; }
+
+        // 크기 미확정 시 게임 로직 건너뜀 — 도형 즉시 missed(IsOffScreen) 방지
+        if (_width <= 0 || _height <= 0) return;
 
         // 슬로모션 배율
         var slowFactor = _slowMoRemaining > 0 ? 0.25 : 1.0;

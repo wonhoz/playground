@@ -104,7 +104,7 @@ for %%n in (!SEL!) do (
     if "%%n"=="6"  call :pub "Toast.Cast"             "Applications\Health\Toast.Cast"                    "ToastCast.exe"           "Applications\Health"
     if "%%n"=="7"  call :pub "Photo.Video.Organizer"  "Applications\Media\Photo.Video.Organizer"          "PhotoVideoOrganizer.exe" "Applications\Media"
     if "%%n"=="8"  call :pub "Api.Probe"              "Applications\Tools\Dev\Api.Probe"                  "Api.Probe.exe"           "Applications\Tools\Dev\Api.Probe"
-    if "%%n"=="9"  call :pub "Glyph.Map"              "Applications\Tools\Dev\Glyph.Map"                  "Glyph.Map.exe"           "Applications\Tools\Dev"
+    if "%%n"=="9"  call :pub "Glyph.Map"              "Applications\Tools\Dev\Glyph.Map"                  "Glyph.Map.exe"           "Applications\Tools\Dev\Glyph.Map"
     if "%%n"=="10" call :pub "Log.Lens"               "Applications\Tools\Dev\Log.Lens"                   "LogLens.exe"             "Applications\Tools\Dev"
     :: 11: Mock.Desk → Mock.Server로 통합됨
     :: 12: Log.Tail → Log.Lens에 통합됨
@@ -123,7 +123,7 @@ for %%n in (!SEL!) do (
     if "%%n"=="25" call :pub "Brick.Blitz"            "Games\Arcade\Brick.Blitz"                          "BrickBlitz.exe"          "Games\Arcade"
     if "%%n"=="26" call :pub "Dash.City"              "Games\Arcade\Dash.City"                            "DashCity.exe"            "Games\Arcade"
     if "%%n"=="27" call :pub "Neon.Run"               "Games\Arcade\Neon.Run"                             "NeonRun.exe"             "Games\Arcade"
-    if "%%n"=="28" call :pub "Neon.Slice"             "Games\Arcade\Neon.Slice"                           "Neon.Slice.exe"          "Games\Arcade"
+    if "%%n"=="28" call :pub "Neon.Slice"             "Games\Arcade\Neon.Slice"                           "Neon.Slice.exe"          "Games\Arcade\Neon.Slice"
     if "%%n"=="29" call :pub "Gravity.Flip"           "Games\Puzzle\Gravity.Flip"                         "GravityFlip.exe"         "Games\Puzzle"
     if "%%n"=="30" call :pub "Hue.Flow"               "Games\Puzzle\Hue.Flow"                             "HueFlow.exe"             "Games\Puzzle"
     if "%%n"=="31" call :pub "Nitro.Drift"            "Games\Racing\Nitro.Drift"                          "NitroDrift.exe"          "Games\Racing"

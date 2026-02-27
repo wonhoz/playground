@@ -48,7 +48,7 @@ call :pub "Photo.Video.Organizer" "Applications\Media\Photo.Video.Organizer"    
 
 :: ── Applications / Tools / Dev ───────────────────────────────────
 call :pub "Api.Probe"             "Applications\Tools\Dev\Api.Probe"                     "Api.Probe.exe"        "Applications\Tools\Dev\Api.Probe"
-call :pub "Glyph.Map"             "Applications\Tools\Dev\Glyph.Map"                     "Glyph.Map.exe"        "Applications\Tools\Dev"
+call :pub "Glyph.Map"             "Applications\Tools\Dev\Glyph.Map"                     "Glyph.Map.exe"        "Applications\Tools\Dev\Glyph.Map"
 call :pub "Log.Lens"              "Applications\Tools\Dev\Log.Lens"                      "LogLens.exe"          "Applications\Tools\Dev"
 :: Mock.Desk → Mock.Server로 통합됨
 call :pub "Mock.Server"           "Applications\Tools\Dev\Mock.Server"                   "Mock.Server.exe"      "Applications\Tools\Dev"
@@ -76,7 +76,7 @@ call :pub "Dungeon.Dash"          "Games\Action\Dungeon.Dash"                   
 call :pub "Brick.Blitz"           "Games\Arcade\Brick.Blitz"                             "BrickBlitz.exe"       "Games\Arcade"
 call :pub "Dash.City"             "Games\Arcade\Dash.City"                               "DashCity.exe"         "Games\Arcade"
 call :pub "Neon.Run"              "Games\Arcade\Neon.Run"                                "NeonRun.exe"          "Games\Arcade"
-call :pub "Neon.Slice"            "Games\Arcade\Neon.Slice"                              "Neon.Slice.exe"       "Games\Arcade"
+call :pub "Neon.Slice"            "Games\Arcade\Neon.Slice"                              "Neon.Slice.exe"       "Games\Arcade\Neon.Slice"
 
 :: ── Games / Puzzle ───────────────────────────────────────────────
 call :pub "Gravity.Flip"          "Games\Puzzle\Gravity.Flip"                            "GravityFlip.exe"      "Games\Puzzle"

@@ -53,6 +53,8 @@ public sealed class NeonShape
         Rotation += AngularVelocity * dt;
     }
 
-    public bool IsOffScreen(double height) => Y - Radius > height;
+    // Vy > 0 조건: 위로 솟아오르는 중(Vy < 0)에는 절대 missed 처리하지 않음
+    // → 스폰 직후 화면 하단 바로 아래에 있어도 즉시 제거되지 않음
+    public bool IsOffScreen(double height) => Vy > 0 && Y - Radius > height;
     public bool IsAboveScreen() => Y + Radius < 0;
 }

@@ -114,7 +114,7 @@ public sealed class TrayApp : ApplicationContext
 
     private void ShowRoutineOverlay(Routine routine)
     {
-        var confirmMode = !routine.ShowCountdown;
+        var confirmMode = true;  // 모든 루틴 사용자 확인 (완료 ✓ / 건너뛰기)
         _currentOverlay = new CountdownOverlay(
             routine.Icon, routine.Name, routine.Description,
             routine.CountdownSeconds, routine.Id, confirmMode);

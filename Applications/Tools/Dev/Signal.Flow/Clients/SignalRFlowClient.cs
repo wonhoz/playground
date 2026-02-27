@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.SignalR.Client;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace SignalFlow.Clients;
 
@@ -18,6 +19,11 @@ public class SignalRFlowClient : IAsyncDisposable
         _connection = new HubConnectionBuilder()
             .WithUrl(url)
             .WithAutomaticReconnect()
+            .AddJsonProtocol(options =>
+            {
+                // SignalR 서버는 camelCase로 직렬화하므로 대소문자 무시 설정 필수
+                options.PayloadSerializerOptions.PropertyNameCaseInsensitive = true;
+            })
             .Build();
 
         _connection.On<ServerEvent>("Event", e => EventReceived?.Invoke(e));

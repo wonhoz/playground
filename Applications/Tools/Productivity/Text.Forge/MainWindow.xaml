@@ -93,6 +93,7 @@
                      Style="{StaticResource NavList}"
                      SelectionChanged="ToolNav_SelectionChanged"
                      Margin="0,8,0,8">
+                <!-- 0: JSON / XML -->
                 <ListBoxItem>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="{}{ }" FontFamily="Consolas" FontSize="14" FontWeight="Bold"
@@ -100,20 +101,15 @@
                         <TextBlock Text="JSON / XML" VerticalAlignment="Center"/>
                     </StackPanel>
                 </ListBoxItem>
+                <!-- 1: Encoding -->
                 <ListBoxItem>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="64" FontFamily="Consolas" FontSize="11" FontWeight="Bold"
+                        <TextBlock Text="enc" FontFamily="Consolas" FontSize="10" FontWeight="Bold"
                                    Foreground="#4FC3F7" Width="28" VerticalAlignment="Center"/>
-                        <TextBlock Text="Base64" VerticalAlignment="Center"/>
+                        <TextBlock Text="Encoding" VerticalAlignment="Center"/>
                     </StackPanel>
                 </ListBoxItem>
-                <ListBoxItem>
-                    <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="%" FontFamily="Consolas" FontSize="16" FontWeight="Bold"
-                                   Foreground="#81C784" Width="28" VerticalAlignment="Center"/>
-                        <TextBlock Text="URL Encode" VerticalAlignment="Center"/>
-                    </StackPanel>
-                </ListBoxItem>
+                <!-- 2: Hash -->
                 <ListBoxItem>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="#" FontFamily="Consolas" FontSize="16" FontWeight="Bold"
@@ -121,6 +117,7 @@
                         <TextBlock Text="Hash" VerticalAlignment="Center"/>
                     </StackPanel>
                 </ListBoxItem>
+                <!-- 3: JWT -->
                 <ListBoxItem>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="JWT" FontFamily="Consolas" FontSize="10" FontWeight="Bold"
@@ -128,6 +125,7 @@
                         <TextBlock Text="JWT Decode" VerticalAlignment="Center"/>
                     </StackPanel>
                 </ListBoxItem>
+                <!-- 4: Regex -->
                 <ListBoxItem>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text=".*" FontFamily="Consolas" FontSize="14" FontWeight="Bold"
@@ -135,6 +133,7 @@
                         <TextBlock Text="Regex" VerticalAlignment="Center"/>
                     </StackPanel>
                 </ListBoxItem>
+                <!-- 5: Timestamp -->
                 <ListBoxItem>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="⏱" FontSize="13" Width="28" VerticalAlignment="Center"
@@ -142,6 +141,7 @@
                         <TextBlock Text="Timestamp" VerticalAlignment="Center"/>
                     </StackPanel>
                 </ListBoxItem>
+                <!-- 6: Case Convert -->
                 <ListBoxItem>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="Aa" FontFamily="Consolas" FontSize="13" FontWeight="Bold"
@@ -149,10 +149,18 @@
                         <TextBlock Text="Case Convert" VerticalAlignment="Center"/>
                     </StackPanel>
                 </ListBoxItem>
+                <!-- 7: Generator -->
+                <ListBoxItem>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="⚡" FontSize="13" Width="28" VerticalAlignment="Center"
+                                   TextAlignment="Center"/>
+                        <TextBlock Text="Generator" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </ListBoxItem>
             </ListBox>
 
             <!-- 하단 버전 -->
-            <TextBlock Grid.Row="2" Text="v1.0.0" FontSize="10"
+            <TextBlock Grid.Row="2" Text="v2.0.0" FontSize="10"
                        Foreground="#333355" Margin="16,8,16,12"
                        HorizontalAlignment="Left"/>
         </Grid>

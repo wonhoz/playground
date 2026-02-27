@@ -1,0 +1,132 @@
+<UserControl x:Class="TextForge.Views.GeneratorView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Background="#1A1A2E" Foreground="#E0E0E0">
+    <UserControl.Resources>
+        <ResourceDictionary Source="../Styles/CommonStyles.xaml"/>
+    </UserControl.Resources>
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="24,20,24,20">
+
+            <!-- 헤더 -->
+            <StackPanel Margin="0,0,0,20">
+                <TextBlock Text="Generator" FontSize="20" FontWeight="Bold" Foreground="#A5D6A7"/>
+                <TextBlock Text="UUID · ULID · 비밀번호 생성기" FontSize="12"
+                           Foreground="#666688" Margin="0,4,0,0"/>
+            </StackPanel>
+
+            <!-- UUID -->
+            <TextBlock Text="UUID v4" FontSize="12" Foreground="#888888" Margin="0,0,0,6"/>
+            <Border Style="{StaticResource PanelBorder}" Margin="0,0,0,20">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox Grid.Column="0" x:Name="UuidBox" Style="{StaticResource CodeBox}"
+                             IsReadOnly="True" Background="Transparent" BorderThickness="0"
+                             FontSize="13" Padding="4,6"/>
+                    <Button Grid.Column="1" Content="⟳ 생성" Style="{StaticResource GrayBtn}"
+                            Padding="12,6" Margin="8,0,4,0" Click="GenUuid_Click"/>
+                    <Button Grid.Column="2" Content="⎘ 복사" Style="{StaticResource SmallGrayBtn}"
+                            Click="CopyUuid_Click"/>
+                </Grid>
+            </Border>
+
+            <!-- ULID -->
+            <TextBlock Text="ULID" FontSize="12" Foreground="#888888" Margin="0,0,0,6"/>
+            <Border Style="{StaticResource PanelBorder}" Margin="0,0,0,24">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox Grid.Column="0" x:Name="UlidBox" Style="{StaticResource CodeBox}"
+                             IsReadOnly="True" Background="Transparent" BorderThickness="0"
+                             FontSize="13" Padding="4,6"/>
+                    <Button Grid.Column="1" Content="⟳ 생성" Style="{StaticResource GrayBtn}"
+                            Padding="12,6" Margin="8,0,4,0" Click="GenUlid_Click"/>
+                    <Button Grid.Column="2" Content="⎘ 복사" Style="{StaticResource SmallGrayBtn}"
+                            Click="CopyUlid_Click"/>
+                </Grid>
+            </Border>
+
+            <!-- 구분선 -->
+            <Border Height="1" Background="#252540" Margin="0,0,0,20"/>
+
+            <!-- 비밀번호 생성기 -->
+            <TextBlock Text="비밀번호 생성기" FontSize="12" Foreground="#888888" Margin="0,0,0,12"/>
+
+            <!-- 길이 슬라이더 -->
+            <Border Style="{StaticResource PanelBorder}" Margin="0,0,0,12">
+                <StackPanel>
+                    <Grid Margin="0,0,0,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="60"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="36"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="길이:" VerticalAlignment="Center"
+                                   FontSize="12" Foreground="#888888"/>
+                        <Slider Grid.Column="1" x:Name="LengthSlider"
+                                Minimum="6" Maximum="64" Value="16"
+                                VerticalAlignment="Center"
+                                ValueChanged="PwOptions_Changed"/>
+                        <TextBlock Grid.Column="2" x:Name="LengthLabel"
+                                   Text="16" VerticalAlignment="Center"
+                                   HorizontalAlignment="Center"
+                                   Foreground="#A5D6A7" FontSize="13" FontWeight="SemiBold"/>
+                    </Grid>
+
+                    <!-- 옵션 체크박스 -->
+                    <WrapPanel>
+                        <CheckBox x:Name="ChkUpper"   Content="대문자 (A-Z)"   IsChecked="True"
+                                  Style="{StaticResource OptionCheck}" Margin="0,0,20,0"
+                                  Checked="PwOptions_Changed" Unchecked="PwOptions_Changed"/>
+                        <CheckBox x:Name="ChkDigits"  Content="숫자 (0-9)"     IsChecked="True"
+                                  Style="{StaticResource OptionCheck}" Margin="0,0,20,0"
+                                  Checked="PwOptions_Changed" Unchecked="PwOptions_Changed"/>
+                        <CheckBox x:Name="ChkSpecial" Content="특수문자 (!@#)" IsChecked="True"
+                                  Style="{StaticResource OptionCheck}"
+                                  Checked="PwOptions_Changed" Unchecked="PwOptions_Changed"/>
+                    </WrapPanel>
+                </StackPanel>
+            </Border>
+
+            <!-- 결과 + 복사 -->
+            <Grid Margin="0,0,0,10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBox Grid.Column="0" x:Name="PwResultBox" Style="{StaticResource CodeBox}"
+                         IsReadOnly="True" FontSize="14" Padding="10,8"/>
+                <Button Grid.Column="1" Content="⟳ 생성" Style="{StaticResource GrayBtn}"
+                        Padding="12,6" Margin="8,0,4,0" Click="GenPw_Click"/>
+                <Button Grid.Column="2" Content="⎘ 복사" Style="{StaticResource SmallGrayBtn}"
+                        Click="CopyPw_Click"/>
+            </Grid>
+
+            <!-- 강도 바 -->
+            <Grid Margin="0,0,0,4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Border Grid.Column="0" x:Name="Str0" Height="6" CornerRadius="3" Background="#252540"/>
+                <Border Grid.Column="1" x:Name="Str1" Height="6" CornerRadius="3" Background="#252540" Margin="3,0,0,0"/>
+                <Border Grid.Column="2" x:Name="Str2" Height="6" CornerRadius="3" Background="#252540" Margin="3,0,0,0"/>
+                <Border Grid.Column="3" x:Name="Str3" Height="6" CornerRadius="3" Background="#252540" Margin="3,0,0,0"/>
+            </Grid>
+            <TextBlock x:Name="StrLabel" Text="" FontSize="10"
+                       Foreground="#666688" Margin="0,4,0,0"/>
+
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

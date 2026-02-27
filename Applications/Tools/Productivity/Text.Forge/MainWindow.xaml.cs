@@ -11,14 +11,14 @@ public partial class MainWindow : Window
     [DllImport("dwmapi.dll", PreserveSig = true)]
     private static extern int DwmSetWindowAttribute(nint hwnd, int attr, ref int value, int size);
 
-    private readonly JsonXmlView    _jsonXml    = new();
-    private readonly Base64View     _base64     = new();
-    private readonly UrlEncoderView _urlEncoder = new();
-    private readonly HashView       _hash       = new();
-    private readonly JwtView        _jwt        = new();
-    private readonly RegexView      _regex      = new();
-    private readonly TimestampView  _timestamp  = new();
-    private readonly CaseView       _caseConv   = new();
+    private readonly JsonXmlView    _jsonXml   = new();
+    private readonly EncodingView   _encoding  = new();
+    private readonly HashView       _hash      = new();
+    private readonly JwtView        _jwt       = new();
+    private readonly RegexView      _regex     = new();
+    private readonly TimestampView  _timestamp = new();
+    private readonly CaseView       _caseConv  = new();
+    private readonly GeneratorView  _generator = new();
 
     public MainWindow()
     {
@@ -44,13 +44,13 @@ public partial class MainWindow : Window
         ContentArea.Content = ToolNav.SelectedIndex switch
         {
             0 => _jsonXml,
-            1 => _base64,
-            2 => _urlEncoder,
-            3 => _hash,
-            4 => _jwt,
-            5 => _regex,
-            6 => _timestamp,
-            7 => _caseConv,
+            1 => _encoding,
+            2 => _hash,
+            3 => _jwt,
+            4 => _regex,
+            5 => _timestamp,
+            6 => _caseConv,
+            7 => _generator,
             _ => _jsonXml
         };
     }

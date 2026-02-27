@@ -33,7 +33,7 @@ echo !CY!   7!RS! Photo.Video.Organizer !DG!Applications/Media!RS!
 echo.
 echo !BD!!DG!  Tools / Dev!RS!
 echo !CY!   8!RS! Api.Probe             !DG!Tools/Dev!RS!
-echo !CY!   9!RS! Hash.Forge            !DG!Tools/Dev!RS!
+:: Hash.Forge → Text.Forge로 통합됨
 echo !CY!  10!RS! Log.Lens              !DG!Tools/Dev!RS!
 :: echo !CY!  11!RS! Mock.Desk (Mock.Server로 통합됨)!RS!
 :: echo !CY!  12!RS! Log.Tail (Log.Lens에 통합됨)!RS!
@@ -103,7 +103,7 @@ for %%n in (!SEL!) do (
     if "%%n"=="6"  call :pub "Toast.Cast"             "Applications\Health\Toast.Cast"                    "ToastCast.exe"        "Applications\Health"
     if "%%n"=="7"  call :pub "Photo.Video.Organizer"  "Applications\Media\Photo.Video.Organizer"          "PhotoVideoOrganizer.exe" "Applications\Media"
     if "%%n"=="8"  call :pub "Api.Probe"              "Applications\Tools\Dev\Api.Probe"                  "Api.Probe.exe"        "Applications\Tools\Dev\Api.Probe"
-    if "%%n"=="9"  call :pub "Hash.Forge"             "Applications\Tools\Dev\Hash.Forge"                 "HashForge.exe"        "Applications\Tools\Dev"
+    :: 9: Hash.Forge → Text.Forge로 통합됨
     if "%%n"=="10" call :pub "Log.Lens"               "Applications\Tools\Dev\Log.Lens"                   "LogLens.exe"          "Applications\Tools\Dev"
     :: 11: Mock.Desk → Mock.Server로 통합됨
     :: 12: Log.Tail → Log.Lens에 통합됨
@@ -153,7 +153,7 @@ call :pub "File.Duplicates"       "Applications\Files\File.Duplicates"          
 call :pub "Toast.Cast"            "Applications\Health\Toast.Cast"                    "ToastCast.exe"        "Applications\Health"
 call :pub "Photo.Video.Organizer" "Applications\Media\Photo.Video.Organizer"          "PhotoVideoOrganizer.exe" "Applications\Media"
 call :pub "Api.Probe"             "Applications\Tools\Dev\Api.Probe"                  "Api.Probe.exe"        "Applications\Tools\Dev\Api.Probe"
-call :pub "Hash.Forge"            "Applications\Tools\Dev\Hash.Forge"                 "HashForge.exe"        "Applications\Tools\Dev"
+:: Hash.Forge → Text.Forge로 통합됨
 call :pub "Log.Lens"              "Applications\Tools\Dev\Log.Lens"                   "LogLens.exe"          "Applications\Tools\Dev"
 :: Mock.Desk → Mock.Server로 통합됨
 call :pub "Mock.Server"           "Applications\Tools\Dev\Mock.Server"                "Mock.Server.exe"      "Applications\Tools\Dev"

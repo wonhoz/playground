@@ -2,7 +2,7 @@ using System.Net;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace HashForge.Services;
+namespace TextForge.Services;
 
 public static class CryptoService
 {
@@ -54,15 +54,13 @@ public static class CryptoService
     public static string GenerateUlid()
     {
         const string B32 = "0123456789ABCDEFGHJKMNPQRSTVWXYZ";
-        var ms  = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
-        var sb  = new StringBuilder(26);
+        var ms = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
+        var sb = new StringBuilder(26);
 
-        // 10자 타임스탬프 (48비트)
         var t = ms;
         for (int i = 9; i >= 0; i--)
         { sb.Insert(0, B32[(int)(t % 32)]); t /= 32; }
 
-        // 16자 무작위 (80비트) — ulong으로 부호 오버플로 방지
         var rng = RandomNumberGenerator.GetBytes(10);
         ulong rand = 0;
         for (int i = 0; i < 10; i++) rand = (rand << 8) | rng[i];
@@ -101,7 +99,6 @@ public static class CryptoService
         };
     }
 
-    // ── 내부 유틸 ────────────────────────────────────────────────
     private static byte[] U8(string s) => Encoding.UTF8.GetBytes(s);
     private static string Hex(byte[] b) => Convert.ToHexString(b).ToLower();
 }

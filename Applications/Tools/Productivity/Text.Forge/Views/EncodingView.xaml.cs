@@ -1,34 +1,45 @@
 using System.Windows;
 using System.Windows.Controls;
+using TextForge.Services;
 
 namespace TextForge.Views;
 
-public partial class UrlEncoderView : UserControl
+public partial class EncodingView : UserControl
 {
-    public UrlEncoderView() => InitializeComponent();
+    public EncodingView() => InitializeComponent();
 
     private void Encode_Click(object sender, RoutedEventArgs e)
     {
         var input = InputBox.Text;
-        if (string.IsNullOrEmpty(input)) return;
-        OutputBox.Text = Uri.EscapeDataString(input);
-        ShowStatus("✓ URL 인코딩 완료", "#81C784");
+        OutputBox.Text = GetMode() switch
+        {
+            0 => CryptoService.Base64Encode(input),
+            1 => CryptoService.UrlEncode(input),
+            2 => CryptoService.HexEncode(input),
+            3 => CryptoService.HtmlEncode(input),
+            _ => input
+        };
+        ShowStatus("✓ 인코딩 완료", "#81C784");
     }
 
     private void Decode_Click(object sender, RoutedEventArgs e)
     {
         var input = InputBox.Text;
-        if (string.IsNullOrEmpty(input)) return;
-        try
+        OutputBox.Text = GetMode() switch
         {
-            OutputBox.Text = Uri.UnescapeDataString(input);
-            ShowStatus("✓ URL 디코딩 완료", "#81C784");
-        }
-        catch { ShowStatus("✕ 유효하지 않은 URL 인코딩입니다", "#EF9A9A"); }
+            0 => CryptoService.Base64Decode(input),
+            1 => CryptoService.UrlDecode(input),
+            2 => CryptoService.HexDecode(input),
+            3 => CryptoService.HtmlDecode(input),
+            _ => input
+        };
+        ShowStatus("✓ 디코딩 완료", "#81C784");
     }
 
     private void Swap_Click(object sender, RoutedEventArgs e)
-        => (InputBox.Text, OutputBox.Text) = (OutputBox.Text, InputBox.Text);
+    {
+        (InputBox.Text, OutputBox.Text) = (OutputBox.Text, InputBox.Text);
+    }
 
     private void Copy_Click(object sender, RoutedEventArgs e)
     {
@@ -44,6 +55,14 @@ public partial class UrlEncoderView : UserControl
         InputBox.Text   = string.Empty;
         OutputBox.Text  = string.Empty;
         StatusText.Text = string.Empty;
+    }
+
+    private int GetMode()
+    {
+        if (UrlRadio.IsChecked  == true) return 1;
+        if (HexRadio.IsChecked  == true) return 2;
+        if (HtmlRadio.IsChecked == true) return 3;
+        return 0; // Base64 기본
     }
 
     private void ShowStatus(string msg, string colorHex)

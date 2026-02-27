@@ -14,37 +14,38 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
+        <!-- 헤더 -->
         <StackPanel Grid.Row="0" Margin="0,0,0,16">
             <TextBlock Text="Hash Generator" FontSize="20" FontWeight="Bold" Foreground="#CE93D8"/>
-            <TextBlock Text="텍스트의 해시값을 생성합니다" FontSize="12"
+            <TextBlock Text="MD5 · SHA-1 · SHA-256 · SHA-512 · HMAC-SHA256" FontSize="12"
                        Foreground="#666688" Margin="0,4,0,0"/>
         </StackPanel>
 
-        <!-- 알고리즘 선택 -->
+        <!-- HMAC 키 입력 -->
         <Border Grid.Row="1" Style="{StaticResource PanelBorder}" Margin="0,0,0,12">
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="알고리즘 :" FontSize="12" Foreground="#888888"
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="HMAC 키 (선택):" FontSize="12" Foreground="#888888"
                            VerticalAlignment="Center" Margin="0,0,12,0"/>
-                <RadioButton x:Name="Md5Radio"    Content="MD5"    Style="{StaticResource OptionRadio}" IsChecked="True"/>
-                <RadioButton x:Name="Sha1Radio"   Content="SHA-1"  Style="{StaticResource OptionRadio}"/>
-                <RadioButton x:Name="Sha256Radio" Content="SHA-256" Style="{StaticResource OptionRadio}"/>
-                <RadioButton x:Name="Sha512Radio" Content="SHA-512" Style="{StaticResource OptionRadio}"/>
-            </StackPanel>
+                <TextBox Grid.Column="1" x:Name="HmacKeyBox" Style="{StaticResource InputBox}"
+                         TextChanged="HmacKey_TextChanged"/>
+            </Grid>
         </Border>
 
         <!-- 버튼 행 -->
         <WrapPanel Grid.Row="2" Orientation="Horizontal" Margin="0,0,0,12">
-            <Button Content="# Generate Hash" Style="{StaticResource AccentBtn}"
-                    Click="Generate_Click" Margin="0,0,6,0"/>
-            <Button Content="⎘ Copy" Style="{StaticResource SmallGrayBtn}"
-                    Click="Copy_Click" Margin="0,0,6,0"/>
+            <Button Content="⎘ Copy All" Style="{StaticResource SmallGrayBtn}"
+                    Click="CopyAll_Click" Margin="0,0,6,0"/>
             <Button Content="✕ Clear" Style="{StaticResource SmallGrayBtn}"
                     Click="Clear_Click"/>
             <TextBlock x:Name="StatusText" VerticalAlignment="Center"
                        FontSize="11" Margin="16,0,0,0"/>
         </WrapPanel>
 
-        <!-- 입출력 -->
+        <!-- 입력 + 해시 결과 -->
         <Grid Grid.Row="3">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -52,6 +53,7 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
+            <!-- 입력 -->
             <Grid Grid.Column="0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -64,39 +66,102 @@
                          TextChanged="Input_TextChanged"/>
             </Grid>
 
-            <Grid Grid.Column="2">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0" Text="HASH RESULT" FontSize="10" FontWeight="Bold"
+            <!-- 해시 결과 목록 -->
+            <StackPanel Grid.Column="2" x:Name="ResultStack">
+                <TextBlock Text="HASH RESULTS" FontSize="10" FontWeight="Bold"
                            Foreground="#444466" Margin="0,0,0,6"/>
 
-                <!-- 결과 표시 패널 -->
-                <StackPanel Grid.Row="1" x:Name="ResultPanel">
-                    <Border Style="{StaticResource PanelBorder}" Margin="0,0,0,8">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="80"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" x:Name="AlgoLabel" Text="MD5"
-                                       FontSize="11" Foreground="#CE93D8"
-                                       FontWeight="Bold" VerticalAlignment="Center"/>
-                            <TextBox Grid.Column="1" x:Name="HashOutput"
-                                     Style="{StaticResource CodeBox}"
-                                     IsReadOnly="True" TextWrapping="Wrap"
-                                     FontSize="12" Padding="8,6"
-                                     Background="Transparent" BorderThickness="0"/>
-                        </Grid>
-                    </Border>
-                </StackPanel>
+                <!-- MD5 -->
+                <Border Style="{StaticResource PanelBorder}" Margin="0,0,0,8">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="90"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="MD5" FontSize="11" FontWeight="Bold"
+                                   Foreground="#CE93D8" VerticalAlignment="Center"/>
+                        <TextBox Grid.Column="1" x:Name="Md5Box" Style="{StaticResource CodeBox}"
+                                 IsReadOnly="True" TextWrapping="Wrap" FontSize="11"
+                                 Padding="6,4" Background="Transparent" BorderThickness="0"/>
+                        <Button Grid.Column="2" Content="⎘" Style="{StaticResource SmallGrayBtn}"
+                                Padding="8,4" Click="CopyMd5_Click"/>
+                    </Grid>
+                </Border>
 
-                <!-- 모든 알고리즘 동시 보기 -->
-                <StackPanel Grid.Row="2" x:Name="AllHashPanel" Visibility="Collapsed">
-                </StackPanel>
-            </Grid>
+                <!-- SHA-1 -->
+                <Border Style="{StaticResource PanelBorder}" Margin="0,0,0,8">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="90"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="SHA-1" FontSize="11" FontWeight="Bold"
+                                   Foreground="#CE93D8" VerticalAlignment="Center"/>
+                        <TextBox Grid.Column="1" x:Name="Sha1Box" Style="{StaticResource CodeBox}"
+                                 IsReadOnly="True" TextWrapping="Wrap" FontSize="11"
+                                 Padding="6,4" Background="Transparent" BorderThickness="0"/>
+                        <Button Grid.Column="2" Content="⎘" Style="{StaticResource SmallGrayBtn}"
+                                Padding="8,4" Click="CopySha1_Click"/>
+                    </Grid>
+                </Border>
+
+                <!-- SHA-256 -->
+                <Border Style="{StaticResource PanelBorder}" Margin="0,0,0,8">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="90"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="SHA-256" FontSize="11" FontWeight="Bold"
+                                   Foreground="#CE93D8" VerticalAlignment="Center"/>
+                        <TextBox Grid.Column="1" x:Name="Sha256Box" Style="{StaticResource CodeBox}"
+                                 IsReadOnly="True" TextWrapping="Wrap" FontSize="11"
+                                 Padding="6,4" Background="Transparent" BorderThickness="0"/>
+                        <Button Grid.Column="2" Content="⎘" Style="{StaticResource SmallGrayBtn}"
+                                Padding="8,4" Click="CopySha256_Click"/>
+                    </Grid>
+                </Border>
+
+                <!-- SHA-512 -->
+                <Border Style="{StaticResource PanelBorder}" Margin="0,0,0,8">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="90"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="SHA-512" FontSize="11" FontWeight="Bold"
+                                   Foreground="#CE93D8" VerticalAlignment="Center"/>
+                        <TextBox Grid.Column="1" x:Name="Sha512Box" Style="{StaticResource CodeBox}"
+                                 IsReadOnly="True" TextWrapping="Wrap" FontSize="11"
+                                 Padding="6,4" Background="Transparent" BorderThickness="0"/>
+                        <Button Grid.Column="2" Content="⎘" Style="{StaticResource SmallGrayBtn}"
+                                Padding="8,4" Click="CopySha512_Click"/>
+                    </Grid>
+                </Border>
+
+                <!-- HMAC-SHA256 -->
+                <Border Style="{StaticResource PanelBorder}" Margin="0,0,0,0"
+                        x:Name="HmacBorder" Opacity="0.4">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="90"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="HMAC-256" FontSize="11" FontWeight="Bold"
+                                   Foreground="#FFB74D" VerticalAlignment="Center"/>
+                        <TextBox Grid.Column="1" x:Name="HmacBox" Style="{StaticResource CodeBox}"
+                                 IsReadOnly="True" TextWrapping="Wrap" FontSize="11"
+                                 Padding="6,4" Background="Transparent" BorderThickness="0"/>
+                        <Button Grid.Column="2" Content="⎘" Style="{StaticResource SmallGrayBtn}"
+                                Padding="8,4" Click="CopyHmac_Click"/>
+                    </Grid>
+                </Border>
+            </StackPanel>
         </Grid>
     </Grid>
 </UserControl>

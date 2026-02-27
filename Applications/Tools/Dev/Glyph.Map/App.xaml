@@ -147,6 +147,45 @@
       </Setter>
     </Style>
 
+    <!-- ── RadioButton 다크 ─────────────────────────────────────────────── -->
+    <Style TargetType="RadioButton">
+      <Setter Property="Foreground" Value="{StaticResource TextMain}"/>
+      <Setter Property="FontFamily" Value="Segoe UI"/>
+      <Setter Property="FontSize" Value="12"/>
+      <Setter Property="VerticalContentAlignment" Value="Center"/>
+      <Setter Property="Cursor" Value="Hand"/>
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="RadioButton">
+            <StackPanel Orientation="Horizontal">
+              <!-- 라디오 원 -->
+              <Grid Width="16" Height="16">
+                <Ellipse x:Name="OuterRing"
+                         Width="16" Height="16"
+                         Stroke="#3A4A5A" StrokeThickness="1.5"
+                         Fill="{StaticResource BgInput}"/>
+                <Ellipse x:Name="InnerDot"
+                         Width="7" Height="7"
+                         Fill="{StaticResource AccentGreen}"
+                         HorizontalAlignment="Center" VerticalAlignment="Center"
+                         Visibility="Collapsed"/>
+              </Grid>
+              <ContentPresenter Margin="7,0,0,0" VerticalAlignment="Center"/>
+            </StackPanel>
+            <ControlTemplate.Triggers>
+              <Trigger Property="IsChecked" Value="True">
+                <Setter TargetName="InnerDot" Property="Visibility" Value="Visible"/>
+                <Setter TargetName="OuterRing" Property="Stroke" Value="{StaticResource AccentGreen}"/>
+              </Trigger>
+              <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="OuterRing" Property="Stroke" Value="{StaticResource AccentBlue}"/>
+              </Trigger>
+            </ControlTemplate.Triggers>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+
     <!-- ── 공통 버튼 ─────────────────────────────────────────────────── -->
     <Style x:Key="DarkBtn" TargetType="Button">
       <Setter Property="Background" Value="{StaticResource BgSurface}"/>

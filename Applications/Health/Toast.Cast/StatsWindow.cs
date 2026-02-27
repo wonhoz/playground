@@ -60,7 +60,7 @@ public sealed class StatsWindow : Form
             var routine = config.Routines.FirstOrDefault(r => r.Id == routineId);
             if (routine == null) continue;
             Controls.Add(CreateStatRow(stat, y, panelW));
-            y += 88;  // 패널 76px + 간격 12px
+            y += 102;  // 패널 90px + 간격 12px
         }
 
         var btnClose = new Button
@@ -86,47 +86,56 @@ public sealed class StatsWindow : Form
     {
         var panel = new Panel
         {
-            Bounds = new Rectangle(20, y, panelW, 76),
+            Bounds    = new Rectangle(20, y, panelW, 90),
             BackColor = Color.FromArgb(32, 32, 46)
         };
 
-        var pct = (int)(stat.Rate * 100);
+        var pct   = (int)(stat.Rate * 100);
         var color = pct >= 80 ? Color.FromArgb(100, 220, 150)
                   : pct >= 50 ? Color.FromArgb(240, 200, 80)
                   : Color.FromArgb(220, 100, 90);
 
         var lblName = new Label
         {
-            Text = $"{stat.Icon}  {stat.RoutineName}",
-            Font = new Font("Segoe UI", 10.5f, FontStyle.Bold),
+            Text      = $"{stat.Icon}  {stat.RoutineName}",
+            Font      = new Font("Segoe UI", 10.5f, FontStyle.Bold),
             ForeColor = Color.FromArgb(220, 220, 230),
-            AutoSize = true,
-            Location = new Point(14, 10)
+            AutoSize  = true,
+            Location  = new Point(14, 10)
         };
 
         var lblRate = new Label
         {
-            Text = $"{pct}%  ({stat.Achieved}/{stat.Expected})",
-            Font = new Font("Segoe UI", 9.5f, FontStyle.Bold),
+            Text      = $"{pct}%",
+            Font      = new Font("Segoe UI", 10.5f, FontStyle.Bold),
             ForeColor = color,
-            AutoSize = true,
-            Location = new Point(panel.Width - 155, 10)
+            AutoSize  = true,
+            Location  = new Point(panel.Width - 58, 10)
+        };
+
+        var lblDetail = new Label
+        {
+            Text      = $"완료 {stat.Achieved}회  /  놓침 {stat.Missed}회",
+            Font      = new Font("Segoe UI", 8.5f),
+            ForeColor = Color.FromArgb(120, 120, 140),
+            AutoSize  = true,
+            Location  = new Point(14, 36)
         };
 
         var barBg = new Panel
         {
-            Bounds = new Rectangle(14, 46, panel.Width - 28, 12),
+            Bounds    = new Rectangle(14, 62, panel.Width - 28, 12),
             BackColor = Color.FromArgb(50, 50, 65)
         };
 
         var barFill = new Panel
         {
-            Bounds = new Rectangle(0, 0, (int)(barBg.Width * Math.Min(stat.Rate, 1.0)), 12),
+            Bounds    = new Rectangle(0, 0, (int)(barBg.Width * Math.Min(stat.Rate, 1.0)), 12),
             BackColor = color
         };
         barBg.Controls.Add(barFill);
 
-        panel.Controls.AddRange([lblName, lblRate, barBg]);
+        panel.Controls.AddRange([lblName, lblRate, lblDetail, barBg]);
 
         panel.Paint += (_, e) =>
         {

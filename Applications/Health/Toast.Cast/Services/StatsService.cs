@@ -74,15 +74,17 @@ public static class StatsService
             var daysElapsed = Math.Max(1, (int)(now.Date - weekStart).TotalDays + 1);
             var expectedPerDay = 24 * 60 / routine.IntervalMinutes;
             var expected = daysElapsed * expectedPerDay;
-            var achieved = routineRecords.Count(r => r.Dismissed);
+            var achieved = routineRecords.Count(r =>  r.Dismissed);
+            var missed   = routineRecords.Count(r => !r.Dismissed);
 
             result[routine.Id] = new WeeklyRoutineStat
             {
                 RoutineName = routine.Name,
-                Icon = routine.Icon,
-                Achieved = achieved,
-                Expected = expected,
-                Rate = expected > 0 ? (double)achieved / expected : 0
+                Icon        = routine.Icon,
+                Achieved    = achieved,
+                Missed      = missed,
+                Expected    = expected,
+                Rate        = expected > 0 ? (double)achieved / expected : 0
             };
         }
         return result;
@@ -94,8 +96,9 @@ public static class StatsService
 public class WeeklyRoutineStat
 {
     public string RoutineName { get; set; } = "";
-    public string Icon { get; set; } = "";
-    public int Achieved { get; set; }
-    public int Expected { get; set; }
-    public double Rate { get; set; }
+    public string Icon        { get; set; } = "";
+    public int    Achieved    { get; set; }
+    public int    Missed      { get; set; }
+    public int    Expected    { get; set; }
+    public double Rate        { get; set; }
 }

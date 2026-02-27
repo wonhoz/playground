@@ -15,8 +15,10 @@ public sealed class TrayApp : ApplicationContext
     private AppConfig _config;
     private readonly System.Windows.Forms.Timer _checkTimer;
 
-    // 현재 표시 중인 카운트다운 오버레이
+    // 현재 표시 중인 오버레이
     private CountdownOverlay? _currentOverlay;
+    private DateTime _lastNotifiedAt = DateTime.MinValue;
+    private const int MinNotifyIntervalMinutes = 5;
 
     public TrayApp()
     {
@@ -57,7 +59,9 @@ public sealed class TrayApp : ApplicationContext
         if (!_config.AutoStart) return;
 
         var now = DateTime.Now;
-        foreach (var routine in _config.Routines.Where(r => r.Enabled))
+
+        // 발동 시각 기준으로 정렬 — 가장 오래 기다린 루틴을 먼저 처리
+        foreach (var routine in _config.Routines.Where(r => r.Enabled).OrderBy(r => r.NextFireAt))
         {
             if (routine.NextFireAt > now) continue;
 
@@ -69,14 +73,23 @@ public sealed class TrayApp : ApplicationContext
             {
                 StatsService.AddRecord(new RoutineRecord
                 {
-                    RoutineId = routine.Id,
+                    RoutineId   = routine.Id,
                     RoutineName = routine.Name,
-                    Skipped = true
+                    Skipped     = true
                 });
                 continue;
             }
 
+            // 최소 알림 간격 체크 — 직전 알림으로부터 5분 미경과 시 연기
+            var elapsed = (now - _lastNotifiedAt).TotalMinutes;
+            if (elapsed < MinNotifyIntervalMinutes)
+            {
+                routine.NextFireAt = _lastNotifiedAt.AddMinutes(MinNotifyIntervalMinutes);
+                continue;
+            }
+
             FireRoutine(routine);
+            _lastNotifiedAt = now;
         }
 
         BuildMenu();
@@ -84,51 +97,69 @@ public sealed class TrayApp : ApplicationContext
 
     private void FireRoutine(Routine routine)
     {
-        if (routine.ShowCountdown && _currentOverlay == null)
+        if (_currentOverlay != null)
         {
-            ShowCountdownOverlay(routine);
-        }
-        else
-        {
-            // 카운트다운 없이 Toast 알림만
-            _tray.ShowBalloonTip(5000, $"{routine.Icon} {routine.Name}", routine.Description, ToolTipIcon.Info);
+            // 다른 오버레이 표시 중이면 놓친 것으로 기록
             StatsService.AddRecord(new RoutineRecord
             {
-                RoutineId = routine.Id,
+                RoutineId   = routine.Id,
                 RoutineName = routine.Name,
-                Dismissed = true
+                Skipped     = false,
+                Dismissed   = false
             });
+            return;
         }
+        ShowRoutineOverlay(routine);
     }
 
-    private void ShowCountdownOverlay(Routine routine)
+    private void ShowRoutineOverlay(Routine routine)
     {
-        _currentOverlay = new CountdownOverlay(routine.Icon, routine.Name, routine.CountdownSeconds, routine.Id);
+        var confirmMode = !routine.ShowCountdown;
+        _currentOverlay = new CountdownOverlay(
+            routine.Icon, routine.Name, routine.Description,
+            routine.CountdownSeconds, routine.Id, confirmMode);
+
+        var recorded = false;
 
         _currentOverlay.Completed += (_, _) =>
         {
+            recorded = true;
             StatsService.AddRecord(new RoutineRecord
             {
-                RoutineId = routine.Id,
+                RoutineId   = routine.Id,
                 RoutineName = routine.Name,
-                Dismissed = true
+                Dismissed   = true
             });
             _currentOverlay = null;
         };
 
         _currentOverlay.Skipped += (_, _) =>
         {
+            recorded = true;
             StatsService.AddRecord(new RoutineRecord
             {
-                RoutineId = routine.Id,
+                RoutineId   = routine.Id,
                 RoutineName = routine.Name,
-                Skipped = false,
-                Dismissed = false
+                Skipped     = false,
+                Dismissed   = false
             });
             _currentOverlay = null;
         };
 
-        _currentOverlay.FormClosed += (_, _) => _currentOverlay = null;
+        _currentOverlay.FormClosed += (_, _) =>
+        {
+            // 완료/건너뛰기 없이 닫힌 경우 (예: Alt+F4) → 놓침 처리
+            if (!recorded)
+                StatsService.AddRecord(new RoutineRecord
+                {
+                    RoutineId   = routine.Id,
+                    RoutineName = routine.Name,
+                    Skipped     = false,
+                    Dismissed   = false
+                });
+            _currentOverlay = null;
+        };
+
         _currentOverlay.Show();
     }
 

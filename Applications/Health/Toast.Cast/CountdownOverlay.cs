@@ -3,7 +3,11 @@ using System.Runtime.InteropServices;
 
 namespace ToastCast;
 
-/// <summary>화면 중앙에 반투명 카운트다운 오버레이를 표시합니다.</summary>
+/// <summary>
+/// 루틴 알림 오버레이.
+/// ShowCountdown=true  → 카운트다운 모드 (자동 완료)
+/// ShowCountdown=false → 확인 모드     (사용자가 완료 버튼 클릭)
+/// </summary>
 public sealed class CountdownOverlay : Form
 {
     [DllImport("dwmapi.dll")]
@@ -11,91 +15,120 @@ public sealed class CountdownOverlay : Form
 
     private readonly System.Windows.Forms.Timer _timer = new() { Interval = 1000 };
     private int _remaining;
-    private readonly string _icon;
-    private readonly string _title;
     private readonly string _routineId;
-    private readonly Label _lblCountdown;
-    private readonly Label _lblTitle;
-    private readonly Label _lblHint;
-    private readonly Button _btnSkip;
+    private readonly bool _confirmMode;
+
+    private readonly Label  _lblTitle;
+    private readonly Label? _lblCountdown;
+    private readonly Label? _lblHint;
+    private readonly Label? _lblDesc;
+    private readonly Button? _btnComplete;
+    private readonly Button  _btnSkip;
 
     public event EventHandler? Completed;
     public event EventHandler? Skipped;
 
-    public CountdownOverlay(string icon, string title, int seconds, string routineId = "")
+    public CountdownOverlay(string icon, string title, string description,
+                            int seconds, string routineId = "", bool confirmMode = false)
     {
-        _icon = icon;
-        _title = title;
-        _routineId = routineId;
-        _remaining = seconds;
+        _routineId   = routineId;
+        _remaining   = seconds;
+        _confirmMode = confirmMode;
 
-        // 창 기본 설정
         FormBorderStyle = FormBorderStyle.None;
-        ShowInTaskbar = false;
-        TopMost = true;
-        Opacity = 0.92;
-        BackColor = Color.FromArgb(18, 18, 28);
-        Size = new Size(360, 280);
-        StartPosition = FormStartPosition.Manual;
+        ShowInTaskbar   = false;
+        TopMost         = true;
+        Opacity         = 0.92;
+        BackColor       = Color.FromArgb(18, 18, 28);
+        Size            = new Size(360, confirmMode ? 220 : 280);
+        StartPosition   = FormStartPosition.Manual;
 
-        // 화면 우측 하단 배치
         var screen = Screen.PrimaryScreen?.WorkingArea ?? new Rectangle(0, 0, 1920, 1080);
         Location = new Point(screen.Right - Width - 20, screen.Bottom - Height - 20);
 
-        // 라운드 코너
         var path = new System.Drawing.Drawing2D.GraphicsPath();
         path.AddRoundedRectangle(new Rectangle(0, 0, Width, Height), 12);
         Region = new Region(path);
 
-        // 아이콘 + 제목
+        // ── 공통: 제목 ─────────────────────────────────────────────────
         _lblTitle = new Label
         {
-            Text = $"{_icon}  {_title}",
-            Font = new Font("Segoe UI", 13f, FontStyle.Bold),
+            Text      = $"{icon}  {title}",
+            Font      = new Font("Segoe UI", 13f, FontStyle.Bold),
             ForeColor = Color.FromArgb(230, 230, 235),
-            AutoSize = false,
+            AutoSize  = false,
             TextAlign = ContentAlignment.MiddleCenter,
-            Bounds = new Rectangle(0, 16, Width, 36)
+            Bounds    = new Rectangle(0, 16, Width, 36)
         };
 
-        // 카운트다운 숫자
-        _lblCountdown = new Label
+        if (!confirmMode)
         {
-            Text = _remaining.ToString(),
-            Font = new Font("Segoe UI", 52f, FontStyle.Bold),
-            ForeColor = Color.FromArgb(100, 220, 150),
-            AutoSize = false,
-            TextAlign = ContentAlignment.MiddleCenter,
-            Bounds = new Rectangle(0, 54, Width, 120)
-        };
-
-        // 안내 문구
-        _lblHint = new Label
+            // ── 카운트다운 모드 ────────────────────────────────────────
+            _lblCountdown = new Label
+            {
+                Text      = _remaining.ToString(),
+                Font      = new Font("Segoe UI", 52f, FontStyle.Bold),
+                ForeColor = Color.FromArgb(100, 220, 150),
+                AutoSize  = false,
+                TextAlign = ContentAlignment.MiddleCenter,
+                Bounds    = new Rectangle(0, 54, Width, 120)
+            };
+            _lblHint = new Label
+            {
+                Text      = "초 후 자동으로 닫힙니다",
+                Font      = new Font("Segoe UI", 9f),
+                ForeColor = Color.FromArgb(130, 130, 150),
+                AutoSize  = false,
+                TextAlign = ContentAlignment.MiddleCenter,
+                Bounds    = new Rectangle(0, 180, Width, 26)
+            };
+        }
+        else
         {
-            Text = "초 후 자동으로 닫힙니다",
-            Font = new Font("Segoe UI", 9f),
-            ForeColor = Color.FromArgb(130, 130, 150),
-            AutoSize = false,
-            TextAlign = ContentAlignment.MiddleCenter,
-            Bounds = new Rectangle(0, 180, Width, 26)
-        };
+            // ── 확인 모드 ──────────────────────────────────────────────
+            _lblDesc = new Label
+            {
+                Text      = description,
+                Font      = new Font("Segoe UI", 10.5f),
+                ForeColor = Color.FromArgb(180, 180, 195),
+                AutoSize  = false,
+                TextAlign = ContentAlignment.MiddleCenter,
+                Bounds    = new Rectangle(16, 58, Width - 32, 52)
+            };
+            _btnComplete = new Button
+            {
+                Text      = "완료  ✓",
+                Font      = new Font("Segoe UI", 11f, FontStyle.Bold),
+                ForeColor = Color.FromArgb(18, 18, 28),
+                BackColor = Color.FromArgb(100, 220, 150),
+                FlatStyle = FlatStyle.Flat,
+                Bounds    = new Rectangle(Width / 2 - 80, 122, 160, 44),
+                Cursor    = Cursors.Hand
+            };
+            _btnComplete.FlatAppearance.BorderSize           = 0;
+            _btnComplete.FlatAppearance.MouseOverBackColor   = Color.FromArgb(130, 235, 175);
+            _btnComplete.Click += (_, _) => { Completed?.Invoke(this, EventArgs.Empty); Close(); };
+        }
 
-        // 스킵 버튼
+        // ── 공통: 건너뛰기 ────────────────────────────────────────────
         _btnSkip = new Button
         {
-            Text = "건너뛰기",
-            Font = new Font("Segoe UI", 9f),
+            Text      = "건너뛰기",
+            Font      = new Font("Segoe UI", 9f),
             ForeColor = Color.FromArgb(150, 150, 170),
             BackColor = Color.FromArgb(38, 38, 52),
             FlatStyle = FlatStyle.Flat,
-            Bounds = new Rectangle(Width / 2 - 70, 214, 140, 34),
-            Cursor = Cursors.Hand
+            Bounds    = new Rectangle(Width / 2 - 70, confirmMode ? 176 : 214, 140, 34),
+            Cursor    = Cursors.Hand
         };
-        _btnSkip.FlatAppearance.BorderColor = Color.FromArgb(60, 60, 80);
+        _btnSkip.FlatAppearance.BorderColor        = Color.FromArgb(60, 60, 80);
         _btnSkip.FlatAppearance.MouseOverBackColor = Color.FromArgb(55, 55, 72);
         _btnSkip.Click += (_, _) => { _timer.Stop(); Skipped?.Invoke(this, EventArgs.Empty); Close(); };
 
-        Controls.AddRange([_lblTitle, _lblCountdown, _lblHint, _btnSkip]);
+        Controls.Add(_lblTitle);
+        Controls.Add(_btnSkip);
+        if (!confirmMode) { Controls.Add(_lblCountdown!); Controls.Add(_lblHint!); }
+        else              { Controls.Add(_lblDesc!);      Controls.Add(_btnComplete!); }
 
         _timer.Tick += OnTick;
     }
@@ -103,10 +136,9 @@ public sealed class CountdownOverlay : Form
     protected override void OnShown(EventArgs e)
     {
         base.OnShown(e);
-        // 다크 타이틀바
         var dark = 1;
         DwmSetWindowAttribute(Handle, 20, ref dark, sizeof(int));
-        _timer.Start();
+        if (!_confirmMode) _timer.Start();
         Task.Run(() => PlayRoutineSound(_routineId));
     }
 
@@ -115,24 +147,16 @@ public sealed class CountdownOverlay : Form
         switch (routineId)
         {
             case "eye-rest":
-                // 부드럽게 내려가는 2음 — 눈을 감고 멀리 보기
-                Console.Beep(880, 150); Thread.Sleep(60); Console.Beep(659, 280);
-                break;
+                Console.Beep(880, 150); Thread.Sleep(60);  Console.Beep(659, 280); break;
             case "water":
-                // 가볍게 올라가는 2음 — 물방울 느낌
-                Console.Beep(523, 100); Thread.Sleep(40); Console.Beep(784, 220);
-                break;
+                Console.Beep(523, 100); Thread.Sleep(40);  Console.Beep(784, 220); break;
             case "stretch":
-                // 경쾌하게 올라가는 3음 — 몸을 일으키는 느낌
-                Console.Beep(392, 90); Thread.Sleep(35); Console.Beep(523, 90); Thread.Sleep(35); Console.Beep(659, 220);
-                break;
+                Console.Beep(392, 90);  Thread.Sleep(35);  Console.Beep(523, 90);
+                Thread.Sleep(35);       Console.Beep(659, 220); break;
             case "posture":
-                // 빠른 2회 알림음 — 자세 주의 환기
-                Console.Beep(880, 80); Thread.Sleep(50); Console.Beep(880, 80);
-                break;
+                Console.Beep(880, 80);  Thread.Sleep(50);  Console.Beep(880, 80);  break;
             default:
-                Console.Beep(740, 200);
-                break;
+                Console.Beep(740, 200); break;
         }
     }
 
@@ -146,10 +170,13 @@ public sealed class CountdownOverlay : Form
             Close();
             return;
         }
-        _lblCountdown.Text = _remaining.ToString();
-        _lblCountdown.ForeColor = _remaining <= 5
-            ? Color.FromArgb(255, 120, 100)
-            : Color.FromArgb(100, 220, 150);
+        if (_lblCountdown != null)
+        {
+            _lblCountdown.Text      = _remaining.ToString();
+            _lblCountdown.ForeColor = _remaining <= 5
+                ? Color.FromArgb(255, 120, 100)
+                : Color.FromArgb(100, 220, 150);
+        }
     }
 
     // 클릭으로 드래그 이동 지원
@@ -179,10 +206,10 @@ internal static class GraphicsPathExtensions
     public static void AddRoundedRectangle(this System.Drawing.Drawing2D.GraphicsPath path, Rectangle rect, int radius)
     {
         var d = radius * 2;
-        path.AddArc(rect.X, rect.Y, d, d, 180, 90);
-        path.AddArc(rect.Right - d, rect.Y, d, d, 270, 90);
-        path.AddArc(rect.Right - d, rect.Bottom - d, d, d, 0, 90);
-        path.AddArc(rect.X, rect.Bottom - d, d, d, 90, 90);
+        path.AddArc(rect.X,         rect.Y,          d, d, 180, 90);
+        path.AddArc(rect.Right - d, rect.Y,          d, d, 270, 90);
+        path.AddArc(rect.Right - d, rect.Bottom - d, d, d,   0, 90);
+        path.AddArc(rect.X,         rect.Bottom - d, d, d,  90, 90);
         path.CloseFigure();
     }
 }

@@ -1,6 +1,7 @@
 <Window x:Class="NeonSlice.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:engine="clr-namespace:NeonSlice.Engine"
         Title="Neon.Slice"
         Width="900" Height="680"
         MinWidth="700" MinHeight="520"
@@ -13,7 +14,8 @@
     <!-- 게임 캔버스 레이어 (항상 바닥)                                  -->
     <!-- ══════════════════════════════════════════════════════════════ -->
     <Grid x:Name="GameLayer" Visibility="Collapsed" Cursor="None">
-      <!-- DrawingVisualHost 코드비하인드에서 GameLayer에 직접 추가됨 -->
+      <!-- 게임 렌더링 캔버스 (XAML 직접 선언 — 비주얼 트리 보장) -->
+      <engine:DrawingVisualHost x:Name="GameCanvas"/>
 
       <!-- ── HUD ──────────────────────────────────────────────────── -->
       <Grid VerticalAlignment="Top" Margin="0,0,0,0">

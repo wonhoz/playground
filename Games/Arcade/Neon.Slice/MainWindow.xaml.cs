@@ -15,7 +15,6 @@ public partial class MainWindow : Window
     private static extern int DwmSetWindowAttribute(IntPtr hwnd, int attr, ref int attrValue, int attrSize);
 
     // ── 게임 관련 ─────────────────────────────────────────────────────────────
-    private readonly DrawingVisualHost _drawHost = new();
     private GameEngine? _engine;
     private readonly HighScoreService _scores = new();
     private GameMode _selectedMode = GameMode.Classic;
@@ -37,10 +36,6 @@ public partial class MainWindow : Window
         var hwnd = new System.Windows.Interop.WindowInteropHelper(this).Handle;
         var dark = 1;
         DwmSetWindowAttribute(hwnd, 20, ref dark, sizeof(int));
-
-        // DrawingVisualHost를 GameLayer(Grid)에 직접 추가 — Canvas 크기 0 문제 방지
-        // GameLayer의 첫 번째 자식으로 삽입하여 HUD 아래 배경으로 렌더링
-        GameLayer.Children.Insert(0, _drawHost);
 
         // 마우스 이벤트 (슬라이스 중 여부와 무관하게 항상 위치 추적)
         GameLayer.MouseMove  += OnGameMouseMove;
@@ -87,14 +82,14 @@ public partial class MainWindow : Window
     private void OnGameMouseMove(object sender, MouseEventArgs e)
     {
         // 일시정지/게임오버 중에도 커서 위치는 항상 엔진에 전달 (커서 dot 렌더용)
-        var pos = e.GetPosition(_drawHost);
+        var pos = e.GetPosition(GameCanvas);
         _engine?.OnMouseMove(pos);
     }
 
     private void OnGameMouseDown(object sender, MouseButtonEventArgs e)
     {
         if (_engine is not { IsRunning: true } || _engine.IsPaused) return;
-        _engine.OnMouseDown(e.GetPosition(_drawHost));
+        _engine.OnMouseDown(e.GetPosition(GameCanvas));
     }
 
     private void OnGameMouseUp(object sender, MouseButtonEventArgs e)
@@ -134,7 +129,7 @@ public partial class MainWindow : Window
 
     private void StartGame(GameMode mode)
     {
-        _engine = new GameEngine(_drawHost);
+        _engine = new GameEngine(GameCanvas);
         _engine.StateChanged += UpdateHud;
         _engine.GameOver     += OnGameOver;
 

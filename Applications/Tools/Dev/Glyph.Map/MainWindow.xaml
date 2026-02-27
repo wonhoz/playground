@@ -1,0 +1,276 @@
+<Window x:Class="GlyphMap.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Glyph.Map"
+        Width="1060" Height="720"
+        MinWidth="900" MinHeight="580"
+        WindowStyle="SingleBorderWindow"
+        ResizeMode="CanResizeWithGrip"
+        Background="{StaticResource BgBase}">
+
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="52"/>   <!-- 상단 툴바 -->
+      <RowDefinition Height="*"/>    <!-- 본문 -->
+      <RowDefinition Height="Auto"/> <!-- 로딩 오버레이 영역 -->
+    </Grid.RowDefinitions>
+
+    <!-- ── 상단 툴바 ───────────────────────────────────────────────── -->
+    <Border Grid.Row="0" Background="{StaticResource BgPanel}"
+            BorderBrush="{StaticResource Border}" BorderThickness="0,0,0,1">
+      <Grid Margin="16,0">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="Auto"/>
+          <ColumnDefinition Width="*"/>
+          <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- 로고 -->
+        <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+          <TextBlock Text="🔤" FontSize="22" VerticalAlignment="Center"/>
+          <TextBlock Text=" Glyph.Map"
+                     FontFamily="Segoe UI" FontSize="15" FontWeight="SemiBold"
+                     Foreground="{StaticResource AccentGreen}"
+                     VerticalAlignment="Center" Margin="4,0,0,0"/>
+        </StackPanel>
+
+        <!-- 검색 -->
+        <Grid Grid.Column="1" Margin="24,0">
+          <TextBox x:Name="TxtSearch"
+                   FontSize="13" Height="34" VerticalContentAlignment="Center"
+                   ToolTip="문자 이름, 키워드(heart, 화살, bullet), U+코드포인트(U+1F600)으로 검색"
+                   TextChanged="TxtSearch_TextChanged"/>
+          <TextBlock x:Name="SearchPlaceholder"
+                     Text="🔍  이름·키워드·U+코드포인트 검색..."
+                     FontFamily="Segoe UI" FontSize="12"
+                     Foreground="{StaticResource TextSub}"
+                     VerticalAlignment="Center" Margin="12,0"
+                     IsHitTestVisible="False"/>
+        </Grid>
+
+        <!-- 오른쪽 버튼들 -->
+        <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
+          <Button x:Name="BtnFavorites" Content="★ 즐겨찾기"
+                  Style="{StaticResource DarkBtn}" Padding="10,6"
+                  FontFamily="Segoe UI" FontSize="12"
+                  Click="BtnFavorites_Click"
+                  ToolTip="즐겨찾기 목록 보기"/>
+          <Button x:Name="BtnRecent" Content="🕐 최근"
+                  Style="{StaticResource DarkBtn}" Padding="10,6" Margin="8,0,0,0"
+                  FontFamily="Segoe UI" FontSize="12"
+                  Click="BtnRecent_Click"
+                  ToolTip="최근 사용 문자 보기"/>
+        </StackPanel>
+      </Grid>
+    </Border>
+
+    <!-- ── 본문 ───────────────────────────────────────────────────── -->
+    <Grid Grid.Row="1">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="220" MinWidth="160"/>
+        <ColumnDefinition Width="Auto"/>  <!-- Splitter -->
+        <ColumnDefinition Width="*"/>
+        <ColumnDefinition Width="Auto"/>  <!-- Splitter -->
+        <ColumnDefinition Width="280" MinWidth="220"/>
+      </Grid.ColumnDefinitions>
+
+      <!-- ── 좌측: 카테고리 트리 ─────────────────────────────────── -->
+      <Border Grid.Column="0" Background="{StaticResource BgPanel}"
+              BorderBrush="{StaticResource Border}" BorderThickness="0,0,1,0">
+        <DockPanel>
+          <TextBlock DockPanel.Dock="Top"
+                     Text="카테고리" FontFamily="Segoe UI" FontSize="11"
+                     FontWeight="SemiBold" Foreground="{StaticResource TextSub}"
+                     Margin="12,10,12,6"/>
+          <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+            <TreeView x:Name="CategoryTree" Margin="4,0,4,8"
+                      SelectedItemChanged="CategoryTree_SelectedItemChanged"/>
+          </ScrollViewer>
+        </DockPanel>
+      </Border>
+
+      <GridSplitter Grid.Column="1" Width="4"
+                    Background="{StaticResource Border}"
+                    HorizontalAlignment="Center" VerticalAlignment="Stretch"/>
+
+      <!-- ── 중앙: 문자 격자 ─────────────────────────────────────── -->
+      <Border Grid.Column="2" Background="{StaticResource BgBase}">
+        <DockPanel>
+          <!-- 현재 블록 이름 + 개수 -->
+          <Border DockPanel.Dock="Top" Background="{StaticResource BgPanel}"
+                  BorderBrush="{StaticResource Border}" BorderThickness="0,0,0,1"
+                  Padding="12,6">
+            <StackPanel Orientation="Horizontal">
+              <TextBlock x:Name="TxtCurrentBlock"
+                         Text="블록 선택 중..."
+                         FontFamily="Segoe UI" FontSize="12" FontWeight="SemiBold"
+                         Foreground="{StaticResource TextMain}"/>
+              <TextBlock x:Name="TxtGlyphCount"
+                         FontFamily="Segoe UI" FontSize="11"
+                         Foreground="{StaticResource TextSub}"
+                         Margin="8,0,0,0" VerticalAlignment="Bottom"/>
+            </StackPanel>
+          </Border>
+
+          <!-- 문자 격자 (가상화) -->
+          <ScrollViewer VerticalScrollBarVisibility="Auto"
+                        HorizontalScrollBarVisibility="Disabled"
+                        PreviewMouseWheel="GridScroll_MouseWheel">
+            <ListBox x:Name="GlyphGrid"
+                     Background="Transparent" BorderThickness="0"
+                     SelectionChanged="GlyphGrid_SelectionChanged"
+                     ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                     VirtualizingStackPanel.IsVirtualizing="True"
+                     VirtualizingStackPanel.VirtualizationMode="Recycling">
+              <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                  <Setter Property="Padding" Value="0"/>
+                  <Setter Property="Margin" Value="0"/>
+                  <Setter Property="Background" Value="Transparent"/>
+                  <Setter Property="BorderThickness" Value="0"/>
+                  <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                  <Setter Property="Template">
+                    <Setter.Value>
+                      <ControlTemplate TargetType="ListBoxItem">
+                        <ContentPresenter/>
+                      </ControlTemplate>
+                    </Setter.Value>
+                  </Setter>
+                </Style>
+              </ListBox.ItemContainerStyle>
+            </ListBox>
+          </ScrollViewer>
+        </DockPanel>
+      </Border>
+
+      <GridSplitter Grid.Column="3" Width="4"
+                    Background="{StaticResource Border}"
+                    HorizontalAlignment="Center" VerticalAlignment="Stretch"/>
+
+      <!-- ── 우측: 상세 패널 ────────────────────────────────────── -->
+      <Border Grid.Column="4" Background="{StaticResource BgPanel}"
+              BorderBrush="{StaticResource Border}" BorderThickness="1,0,0,0">
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+          <StackPanel x:Name="DetailPanel" Margin="16,16,16,16">
+
+            <!-- 문자 대형 표시 -->
+            <Border Background="{StaticResource BgBase}" CornerRadius="12"
+                    Height="110" Margin="0,0,0,14">
+              <TextBlock x:Name="TxtBigChar"
+                         Text="—" FontSize="64"
+                         FontFamily="Segoe UI Emoji, Segoe UI Symbol, Segoe UI"
+                         Foreground="{StaticResource TextMain}"
+                         HorizontalAlignment="Center" VerticalAlignment="Center"
+                         ToolTip="클릭하여 문자 복사"/>
+            </Border>
+
+            <!-- 코드포인트 + 이름 -->
+            <TextBlock x:Name="TxtCodePoint"
+                       FontFamily="Segoe UI Mono, Consolas" FontSize="13"
+                       Foreground="{StaticResource AccentGreen}"
+                       Margin="0,0,0,4"/>
+            <TextBlock x:Name="TxtGlyphName"
+                       FontFamily="Segoe UI" FontSize="12" FontWeight="SemiBold"
+                       Foreground="{StaticResource TextMain}"
+                       TextWrapping="Wrap" Margin="0,0,0,2"/>
+            <TextBlock x:Name="TxtGlyphBlock"
+                       FontFamily="Segoe UI" FontSize="11"
+                       Foreground="{StaticResource TextSub}"
+                       TextWrapping="Wrap" Margin="0,0,0,12"/>
+
+            <!-- 구분선 -->
+            <Border Height="1" Background="{StaticResource Border}" Margin="0,0,0,12"/>
+
+            <!-- 복사 형식 선택 -->
+            <TextBlock Text="복사 형식" FontFamily="Segoe UI" FontSize="11"
+                       FontWeight="SemiBold" Foreground="{StaticResource TextSub}"
+                       Margin="0,0,0,8"/>
+            <StackPanel x:Name="CopyFormatPanel" Margin="0,0,0,12">
+              <RadioButton x:Name="RbChar"     Content="문자 그대로"         IsChecked="True" Margin="0,2"/>
+              <RadioButton x:Name="RbHex"      Content="U+HHHH (유니코드)"  Margin="0,2"/>
+              <RadioButton x:Name="RbHtml"     Content="&#x26;#xHHHH; (HTML)" Margin="0,2"/>
+              <RadioButton x:Name="RbCs"       Content="\uHHHH (C#/Java)"   Margin="0,2"/>
+              <RadioButton x:Name="RbCss"      Content="\HHHH (CSS content)" Margin="0,2"/>
+              <RadioButton x:Name="RbUrl"      Content="%uHHHH (URL)"        Margin="0,2"/>
+            </StackPanel>
+
+            <!-- 복사 미리보기 -->
+            <Border Background="{StaticResource BgBase}" CornerRadius="6"
+                    Padding="10,8" Margin="0,0,0,10">
+              <TextBlock x:Name="TxtCopyPreview"
+                         FontFamily="Segoe UI Mono, Consolas" FontSize="12"
+                         Foreground="{StaticResource AccentBlue}"
+                         TextWrapping="Wrap"/>
+            </Border>
+
+            <!-- 복사 + 즐겨찾기 버튼 -->
+            <Grid Margin="0,0,0,14">
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="8"/>
+                <ColumnDefinition Width="48"/>
+              </Grid.ColumnDefinitions>
+              <Button x:Name="BtnCopy" Grid.Column="0"
+                      Content="📋  복사" Style="{StaticResource AccentBtn}"
+                      FontFamily="Segoe UI" FontSize="13" FontWeight="SemiBold"
+                      Height="40" Click="BtnCopy_Click"/>
+              <Button x:Name="BtnFav" Grid.Column="2"
+                      Content="☆" Style="{StaticResource DarkBtn}"
+                      FontFamily="Segoe UI Symbol" FontSize="18"
+                      Height="40" Click="BtnFav_Click"
+                      ToolTip="즐겨찾기에 추가/제거"/>
+            </Grid>
+
+            <!-- 구분선 -->
+            <Border Height="1" Background="{StaticResource Border}" Margin="0,0,0,12"/>
+
+            <!-- 모든 형식 표 -->
+            <TextBlock Text="전체 형식" FontFamily="Segoe UI" FontSize="11"
+                       FontWeight="SemiBold" Foreground="{StaticResource TextSub}"
+                       Margin="0,0,0,8"/>
+            <ItemsControl x:Name="FormatTable">
+              <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                  <Grid Margin="0,2">
+                    <Grid.ColumnDefinitions>
+                      <ColumnDefinition Width="80"/>
+                      <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="{Binding Label}"
+                               FontFamily="Segoe UI" FontSize="11"
+                               Foreground="{StaticResource TextSub}"/>
+                    <TextBlock Grid.Column="1" Text="{Binding Value}"
+                               FontFamily="Segoe UI Mono, Consolas" FontSize="11"
+                               Foreground="{StaticResource TextMain}"
+                               TextWrapping="Wrap"
+                               MouseLeftButtonDown="FormatValue_Click"
+                               Cursor="Hand" ToolTip="클릭하여 복사"/>
+                  </Grid>
+                </DataTemplate>
+              </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+          </StackPanel>
+        </ScrollViewer>
+      </Border>
+    </Grid>
+
+    <!-- ── 로딩 오버레이 ──────────────────────────────────────────── -->
+    <Grid Grid.Row="0" Grid.RowSpan="3" x:Name="LoadingOverlay"
+          Background="#CC1A1A2E">
+      <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+        <TextBlock Text="🔤" FontSize="48" HorizontalAlignment="Center" Margin="0,0,0,16"/>
+        <TextBlock Text="유니코드 데이터 로딩 중..."
+                   FontFamily="Segoe UI" FontSize="16" FontWeight="SemiBold"
+                   Foreground="{StaticResource TextMain}"
+                   HorizontalAlignment="Center" Margin="0,0,0,8"/>
+        <TextBlock x:Name="TxtLoadProgress"
+                   Text="잠시만 기다려 주세요..."
+                   FontFamily="Segoe UI" FontSize="12"
+                   Foreground="{StaticResource TextSub}"
+                   HorizontalAlignment="Center"/>
+      </StackPanel>
+    </Grid>
+
+  </Grid>
+</Window>

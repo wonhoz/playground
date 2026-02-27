@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <ApplicationIcon>Resources\app.ico</ApplicationIcon>
+    <AssemblyName>Glyph.Map</AssemblyName>
+    <RootNamespace>GlyphMap</RootNamespace>
+    <Platforms>x64</Platforms>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- 유니코드 데이터 임베디드 리소스 -->
+    <EmbeddedResource Include="Resources\UnicodeData.txt" />
+    <EmbeddedResource Include="Resources\Blocks.txt" />
+    <!-- 아이콘 -->
+    <Resource Include="Resources\app.ico" />
+  </ItemGroup>
+</Project>

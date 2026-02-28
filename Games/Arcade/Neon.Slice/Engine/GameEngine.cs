@@ -352,11 +352,13 @@ public sealed class GameEngine
         switch (shape.Type)
         {
             case ShapeType.Bomb:
-                // 폭탄: 감점 + 콤보 리셋
+                // 폭탄: 감점 + 콤보 리셋 + Classic 모드 목숨 감소
                 Score = Math.Max(0, Score - 15);
-                Combo  = 0;
+                Combo = 0;
+                if (Mode == GameMode.Classic) Lives--;
                 SpawnParticles(shape.X, shape.Y, Color.FromRgb(255, 80, 0), 12);
                 StateChanged?.Invoke();
+                if (Mode == GameMode.Classic && Lives <= 0) { EndGame(); return; }
                 return;
 
             case ShapeType.Lightning:

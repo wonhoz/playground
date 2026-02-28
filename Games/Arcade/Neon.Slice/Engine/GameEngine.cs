@@ -690,18 +690,37 @@ public sealed class GameEngine
         dc.PushTransform(new RotateTransform(h.Rotation, h.X, h.Y));
         dc.PushOpacity(h.Alpha);
 
-        var col = Color.FromArgb(alpha, h.NeonColor.R, h.NeonColor.G, h.NeonColor.B);
-        var brush = new SolidColorBrush(col);
-        var pen = new Pen(brush, 1.5);
+        var col      = Color.FromArgb(alpha, h.NeonColor.R, h.NeonColor.G, h.NeonColor.B);
+        var pen      = new Pen(new SolidColorBrush(col), 1.5);
+        var fill     = new SolidColorBrush(Color.FromArgb((byte)(alpha * 0.6), h.NeonColor.R, h.NeonColor.G, h.NeonColor.B));
+        var center   = new Point(h.X, h.Y);
 
-        // 반원 (클리핑으로 반쪽 표현)
+        // 클리핑: Half==0 → 우측 반, Half==1 → 좌측 반 (회전 좌표계 기준)
         var clipRect = h.Half == 0
-            ? new Rect(h.X, h.Y - h.Radius - 5, h.Radius + 5, h.Radius * 2 + 10)
+            ? new Rect(h.X,              h.Y - h.Radius - 5, h.Radius + 5, h.Radius * 2 + 10)
             : new Rect(h.X - h.Radius - 5, h.Y - h.Radius - 5, h.Radius + 5, h.Radius * 2 + 10);
-
         dc.PushClip(new RectangleGeometry(clipRect));
-        dc.DrawEllipse(new SolidColorBrush(Color.FromArgb((byte)(alpha * 0.6), h.NeonColor.R, h.NeonColor.G, h.NeonColor.B)),
-            pen, new Point(h.X, h.Y), h.Radius, h.Radius);
+
+        switch (h.Type)
+        {
+            case ShapeType.Circle:
+            case ShapeType.Ice:
+            case ShapeType.Star:
+                dc.DrawEllipse(fill, pen, center, h.Radius, h.Radius);
+                break;
+
+            default: // Triangle, Square, Pentagon
+                var sides = h.Type switch
+                {
+                    ShapeType.Triangle => 3,
+                    ShapeType.Square   => 4,
+                    ShapeType.Pentagon => 5,
+                    _                  => 6,
+                };
+                dc.DrawGeometry(fill, pen, BuildPolygon(center, h.Radius, sides));
+                break;
+        }
+
         dc.Pop(); // clip
         dc.Pop(); // opacity
         dc.Pop(); // rotate

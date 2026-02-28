@@ -18,8 +18,9 @@ public partial class MainWindow : Window
     [DllImport("dwmapi.dll")]
     private static extern int DwmSetWindowAttribute(IntPtr hwnd, int attr, ref int val, int size);
 
-    private SKBitmap? _qrBitmap;
-    private readonly QrStyle _style = new();
+    private SKBitmap?                _qrBitmap;
+    private readonly QrStyle         _style      = new();
+    private CancellationTokenSource? _generateCts;
 
     public MainWindow()
     {
@@ -97,9 +98,19 @@ public partial class MainWindow : Window
     }
 
     // ── QR 생성 ──────────────────────────────────────────────────────────────
-    private void GenerateQr()
+    // UI 차단 방지: QrService.Render()는 CPU-bound (ZXing + SkiaSharp 512×512 픽셀 루프) → Task.Run
+    // 디바운스: 키입력마다 재렌더링 방지 (150ms 대기 후 마지막 요청만 실행)
+    private async void GenerateQr()
     {
         if (!IsLoaded) return;
+
+        // 이전 요청 취소 후 150ms 디바운스 대기
+        _generateCts?.Cancel();
+        _generateCts = new CancellationTokenSource();
+        var cts = _generateCts;
+
+        try { await Task.Delay(150, cts.Token); }
+        catch (OperationCanceledException) { return; }
 
         var content = BuildContent();
         if (string.IsNullOrWhiteSpace(content))
@@ -110,12 +121,28 @@ public partial class MainWindow : Window
             return;
         }
 
-        // 로고가 있으면 에러보정 H 강제
-        var style = _style;
-        if (!string.IsNullOrEmpty(style.LogoPath))
-            style.EcLevel = ErrorCorrectionLevel.H;
+        // 스타일 스냅샷: 배경 스레드와 UI 스레드 동시 접근 방지
+        var styleCopy = new QrStyle
+        {
+            ForeColor = _style.ForeColor,
+            BackColor = _style.BackColor,
+            Marker    = _style.Marker,
+            EcLevel   = _style.EcLevel,
+            LogoPath  = _style.LogoPath
+        };
+        if (!string.IsNullOrEmpty(styleCopy.LogoPath))
+            styleCopy.EcLevel = ErrorCorrectionLevel.H;
 
-        var bmp = QrService.Render(content, style);
+        SKBitmap? bmp;
+        try
+        {
+            bmp = await Task.Run(() => QrService.Render(content, styleCopy), cts.Token);
+        }
+        catch (OperationCanceledException) { return; }
+        catch { return; }
+
+        if (cts.IsCancellationRequested) { bmp?.Dispose(); return; }
+
         _qrBitmap?.Dispose();
         _qrBitmap = bmp;
         SkiaView.InvalidateVisual();

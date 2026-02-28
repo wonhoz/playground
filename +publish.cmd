@@ -34,9 +34,11 @@ echo.
 echo !BD!!DG!  Tools / Dev!RS!
 echo !CY!   8!RS! Api.Probe             !DG!Tools/Dev!RS!
 echo !CY!   9!RS! Glyph.Map             !DG!Tools/Dev!RS!
-echo !CY!  10!RS! Log.Lens              !DG!Tools/Dev!RS!
+echo !CY!  10!RS! Hex.Peek              !DG!Tools/Dev!RS!
+echo !CY!  11!RS! Log.Lens              !DG!Tools/Dev!RS!
 :: echo !CY!  11!RS! Mock.Desk (Mock.Server로 통합됨)!RS!
 :: echo !CY!  12!RS! Log.Tail (Log.Lens에 통합됨)!RS!
+echo !CY!  12!RS! Signal.Flow            !DG!Tools/Dev!RS!
 echo !CY!  13!RS! Mock.Server           !DG!Tools/Dev!RS!
 echo.
 echo !BD!!DG!  Tools / Network!RS!
@@ -105,9 +107,9 @@ for %%n in (!SEL!) do (
     if "%%n"=="7"  call :pub "Photo.Video.Organizer"  "Applications\Media\Photo.Video.Organizer"          "PhotoVideoOrganizer.exe" "Applications\Media"
     if "%%n"=="8"  call :pub "Api.Probe"              "Applications\Tools\Dev\Api.Probe"                  "Api.Probe.exe"           "Applications\Tools\Dev\Api.Probe"
     if "%%n"=="9"  call :pub "Glyph.Map"              "Applications\Tools\Dev\Glyph.Map"                  "Glyph.Map.exe"           "Applications\Tools\Dev\Glyph.Map"
-    if "%%n"=="10" call :pub "Log.Lens"               "Applications\Tools\Dev\Log.Lens"                   "LogLens.exe"             "Applications\Tools\Dev"
-    :: 11: Mock.Desk → Mock.Server로 통합됨
-    :: 12: Log.Tail → Log.Lens에 통합됨
+    if "%%n"=="10" call :pub "Hex.Peek"               "Applications\Tools\Dev\Hex.Peek"                   "HexPeek.exe"             "Applications\Tools\Dev\Hex.Peek"
+    if "%%n"=="11" call :pub "Log.Lens"               "Applications\Tools\Dev\Log.Lens"                   "LogLens.exe"             "Applications\Tools\Dev"
+    if "%%n"=="12" call :pub "Signal.Flow"            "Applications\Tools\Dev\Signal.Flow"                "Signal.Flow.exe"         "Applications\Tools\Dev\Signal.Flow"
     if "%%n"=="13" call :pub "Mock.Server"            "Applications\Tools\Dev\Mock.Server"                "Mock.Server.exe"         "Applications\Tools\Dev"
     if "%%n"=="14" call :pub "DNS.Flip"               "Applications\Tools\Network\DNS.Flip"               "DnsFlip.exe"             "Applications\Tools\Network"
     if "%%n"=="15" call :pub "Port.Watch"             "Applications\Tools\Network\Port.Watch"             "PortWatch.exe"           "Applications\Tools\Network"
@@ -156,7 +158,9 @@ call :pub "Toast.Cast"            "Applications\Health\Toast.Cast"              
 call :pub "Photo.Video.Organizer" "Applications\Media\Photo.Video.Organizer"          "PhotoVideoOrganizer.exe" "Applications\Media"
 call :pub "Api.Probe"             "Applications\Tools\Dev\Api.Probe"                  "Api.Probe.exe"           "Applications\Tools\Dev\Api.Probe"
 call :pub "Glyph.Map"             "Applications\Tools\Dev\Glyph.Map"                  "Glyph.Map.exe"           "Applications\Tools\Dev"
+call :pub "Hex.Peek"              "Applications\Tools\Dev\Hex.Peek"                   "HexPeek.exe"             "Applications\Tools\Dev\Hex.Peek"
 call :pub "Log.Lens"              "Applications\Tools\Dev\Log.Lens"                   "LogLens.exe"             "Applications\Tools\Dev"
+call :pub "Signal.Flow"           "Applications\Tools\Dev\Signal.Flow"                "Signal.Flow.exe"         "Applications\Tools\Dev\Signal.Flow"
 :: Mock.Desk → Mock.Server로 통합됨
 call :pub "Mock.Server"           "Applications\Tools\Dev\Mock.Server"                "Mock.Server.exe"         "Applications\Tools\Dev"
 call :pub "DNS.Flip"              "Applications\Tools\Network\DNS.Flip"               "DnsFlip.exe"             "Applications\Tools\Network"

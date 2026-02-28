@@ -75,14 +75,14 @@ namespace Photo.Video.Organizer
             e.Handled = true;
         }
 
-        private void DropZone_Drop(object sender, System.Windows.DragEventArgs e)
+        private async void DropZone_Drop(object sender, System.Windows.DragEventArgs e)
         {
             ShowDragOverState(false);
 
             if (e.Data.GetDataPresent(System.Windows.DataFormats.FileDrop))
             {
                 var items = (string[])e.Data.GetData(System.Windows.DataFormats.FileDrop);
-                AddFiles(items);
+                await AddFilesAsync(items);
             }
         }
 
@@ -111,7 +111,7 @@ namespace Photo.Video.Organizer
 
         #region File Selection
 
-        private void SelectFiles_Click(object sender, RoutedEventArgs e)
+        private async void SelectFiles_Click(object sender, RoutedEventArgs e)
         {
             var dialog = new Microsoft.Win32.OpenFileDialog
             {
@@ -125,29 +125,47 @@ namespace Photo.Video.Organizer
 
             if (dialog.ShowDialog() == true)
             {
-                AddFiles(dialog.FileNames);
+                await AddFilesAsync(dialog.FileNames);
             }
         }
 
-        private void AddFiles(IEnumerable<string> items)
+        private async Task AddFilesAsync(IEnumerable<string> items)
         {
-            foreach (var item in items)
+            // ── UI 차단 방지: 파일 열거를 배경 스레드에서 수행 ──
+            StatusText.Text = "파일 탐색 중...";
+
+            var newFiles = new List<string>();
+            var existing = new HashSet<string>(_selectedFiles, StringComparer.OrdinalIgnoreCase);
+
+            await Task.Run(() =>
             {
-                if (Directory.Exists(item))
+                foreach (var item in items)
                 {
-                    // 폴더인 경우 하위 파일 모두 추가
-                    var files = Directory.GetFiles(item, "*.*", SearchOption.AllDirectories)
-                        .Where(f => MediaDateExtractor.IsSupportedMediaFile(f));
-                    foreach (var file in files)
+                    if (Directory.Exists(item))
                     {
-                        AddFileIfNotExists(file);
+                        var files = Directory.GetFiles(item, "*.*", SearchOption.AllDirectories)
+                            .Where(f => MediaDateExtractor.IsSupportedMediaFile(f));
+                        foreach (var file in files)
+                        {
+                            if (existing.Add(file))
+                            {
+                                newFiles.Add(file);
+                                Dispatcher.InvokeAsync(
+                                    () => StatusText.Text = $"파일 탐색 중... {newFiles.Count}개",
+                                    System.Windows.Threading.DispatcherPriority.Background);
+                            }
+                        }
+                    }
+                    else if (File.Exists(item) && MediaDateExtractor.IsSupportedMediaFile(item))
+                    {
+                        if (existing.Add(item))
+                            newFiles.Add(item);
                     }
                 }
-                else if (File.Exists(item) && MediaDateExtractor.IsSupportedMediaFile(item))
-                {
-                    AddFileIfNotExists(item);
-                }
-            }
+            });
+
+            foreach (var file in newFiles)
+                _selectedFiles.Add(file);
 
             UpdateFileList();
             UpdateStartButton();

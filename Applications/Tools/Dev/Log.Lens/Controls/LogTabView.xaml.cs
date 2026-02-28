@@ -50,7 +50,8 @@ public partial class LogTabView : UserControl, IDisposable
     {
         _filePath = filePath;
         _maxLines = maxLines;
-        TxtFilePath.Text = filePath;
+        TxtFilePath.Text  = filePath;
+        TxtLineCount.Text = "로딩 중...";
 
         _ = Task.Run(() =>
         {
@@ -58,12 +59,32 @@ public partial class LogTabView : UserControl, IDisposable
             {
                 var svc          = new LogWatcherService(filePath);
                 var initialLines = svc.ReadInitialAndStart(maxLines);
+
+                // ── UI 차단 방지: 로그 파싱을 배경 스레드에서 수행 ──
+                var localCounter = 0;
+                var parsed = new List<LogLine>(initialLines.Count);
+                foreach (var raw in initialLines)
+                {
+                    if (!string.IsNullOrEmpty(raw))
+                        parsed.Add(LogParserService.Parse(++localCounter, raw));
+                }
+
                 svc.LinesReceived += OnLinesReceived;
 
                 Dispatcher.Invoke(() =>
                 {
-                    _watcher = svc;
-                    BulkAdd(initialLines);
+                    _watcher      = svc;
+                    _lineCounter  = localCounter;
+
+                    // ItemsSource 일시 분리: 대량 Add 시 개별 렌더링 이벤트 억제
+                    LstLog.ItemsSource = null;
+                    foreach (var line in parsed)
+                    {
+                        _all.Add(line);
+                        if (MatchesFilter(line)) _visible.Add(line);
+                    }
+                    LstLog.ItemsSource = _visible;
+
                     UpdateLineCount();
                     AutoScrollIfEnabled();
                 });
@@ -93,6 +114,12 @@ public partial class LogTabView : UserControl, IDisposable
     // ── 줄 추가 ──────────────────────────────────────────────────
     private void BulkAdd(IReadOnlyList<string> rawLines)
     {
+        if (rawLines.Count == 0) return;
+
+        // 대량 라인 추가 시 ItemsSource 분리로 개별 렌더링 이벤트 억제
+        var detach = rawLines.Count > 200;
+        if (detach) LstLog.ItemsSource = null;
+
         foreach (var raw in rawLines)
         {
             if (string.IsNullOrEmpty(raw)) continue;
@@ -110,6 +137,8 @@ public partial class LogTabView : UserControl, IDisposable
             if (MatchesFilter(line))
                 _visible.Add(line);
         }
+
+        if (detach) LstLog.ItemsSource = _visible;
     }
 
     // ── 필터 매칭 ────────────────────────────────────────────────

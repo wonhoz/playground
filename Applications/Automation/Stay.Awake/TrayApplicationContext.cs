@@ -327,7 +327,7 @@ namespace StayAwake
             _settings.Save();
         }
 
-        private void OnTimerTick(object? sender, EventArgs e)
+        private async void OnTimerTick(object? sender, EventArgs e)
         {
             // 자정이 넘어가면 일일 통계 초기화
             if (DateTime.Today != _statsDate)
@@ -338,7 +338,8 @@ namespace StayAwake
                 _statsDate = DateTime.Today;
             }
 
-            bool simulated = _simulator.SimulateActivity();
+            // UI 차단 방지: SimulateActivity()는 Thread.Sleep(110ms) 포함 → 배경 스레드에서 실행
+            bool simulated = await Task.Run(() => _simulator.SimulateActivity());
             if (simulated)
             {
                 _activityCount++;
@@ -351,9 +352,10 @@ namespace StayAwake
             UpdateStatus(simulated);
         }
 
-        private void SimulateNow()
+        private async void SimulateNow()
         {
-            bool simulated = _simulator.SimulateActivity();
+            // UI 차단 방지: SimulateActivity()는 Thread.Sleep(110ms) 포함 → 배경 스레드에서 실행
+            bool simulated = await Task.Run(() => _simulator.SimulateActivity());
             if (_isRunning && simulated)
             {
                 _activityCount++;

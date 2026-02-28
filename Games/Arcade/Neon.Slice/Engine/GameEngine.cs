@@ -1,6 +1,7 @@
 using System.Windows;
 using System.Windows.Media;
 using NeonSlice.Models;
+using NeonSlice.Services;
 
 namespace NeonSlice.Engine;
 
@@ -79,6 +80,7 @@ public sealed class GameEngine
     // ── 이벤트 ─────────────────────────────────────────────────────────────
     public event Action<GameResult>? GameOver;
     public event Action? StateChanged; // HUD 갱신
+    public Action<SoundCue>? PlaySound; // 사운드 콜백 (MainWindow에서 SoundService.Play 할당)
 
     // ── 색상 팔레트 ────────────────────────────────────────────────────────
     private static readonly Color[] NeonPalette =
@@ -240,6 +242,7 @@ public sealed class GameEngine
             {
                 Missed++;
                 Combo = 0; // 콤보 리셋
+                PlaySound?.Invoke(SoundCue.Miss);
                 if (Mode == GameMode.Classic)
                 {
                     Lives--;
@@ -356,6 +359,7 @@ public sealed class GameEngine
                 Score = Math.Max(0, Score - 15);
                 Combo = 0;
                 if (Mode == GameMode.Classic) Lives--;
+                PlaySound?.Invoke(SoundCue.Bomb);
                 SpawnParticles(shape.X, shape.Y, Color.FromRgb(255, 80, 0), 12);
                 StateChanged?.Invoke();
                 if (Mode == GameMode.Classic && Lives <= 0) { EndGame(); return; }
@@ -377,12 +381,14 @@ public sealed class GameEngine
                 SpawnParticles(shape.X, shape.Y, Color.FromRgb(255, 230, 0), 16);
                 if (Combo > MaxCombo) MaxCombo = Combo;
                 Sliced++;
+                PlaySound?.Invoke(SoundCue.Lightning);
                 StateChanged?.Invoke();
                 return;
 
             case ShapeType.Ice:
                 // 얼음: 슬로모션 3초
                 _slowMoRemaining = IceDuration;
+                PlaySound?.Invoke(SoundCue.Ice);
                 SpawnParticles(shape.X, shape.Y, Color.FromRgb(120, 220, 255), 10);
                 Sliced++;
                 StateChanged?.Invoke();
@@ -393,8 +399,9 @@ public sealed class GameEngine
                 Score += 10;
                 Sliced++;
                 Combo++;
-                SpawnParticles(shape.X, shape.Y, Color.FromRgb(255, 230, 0), 14);
                 if (Combo > MaxCombo) MaxCombo = Combo;
+                PlaySound?.Invoke(SoundCue.Star);
+                SpawnParticles(shape.X, shape.Y, Color.FromRgb(255, 230, 0), 14);
                 CheckFever();
                 StateChanged?.Invoke();
                 return;
@@ -408,6 +415,7 @@ public sealed class GameEngine
                 if (Combo > MaxCombo) MaxCombo = Combo;
                 SpawnHalves(shape);
                 SpawnParticles(shape.X, shape.Y, shape.NeonColor, 10);
+                PlaySound?.Invoke(_inFever ? SoundCue.SliceFever : SoundCue.Slice);
                 CheckFever();
 
                 if (Mode == GameMode.Zen)
@@ -426,6 +434,7 @@ public sealed class GameEngine
         {
             _inFever = true;
             _slowMoRemaining = FeverDuration;
+            PlaySound?.Invoke(SoundCue.Fever);
         }
         else if (Combo < 5)
         {
@@ -480,6 +489,7 @@ public sealed class GameEngine
     {
         IsRunning = false;
         _gameOver  = true;
+        PlaySound?.Invoke(SoundCue.GameOver);
         DrawFrame(0);
         GameOver?.Invoke(new GameResult
         {

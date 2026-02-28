@@ -17,6 +17,7 @@ public partial class MainWindow : Window
     // ── 게임 관련 ─────────────────────────────────────────────────────────────
     private GameEngine? _engine;
     private readonly HighScoreService _scores = new();
+    private readonly SoundService     _sound  = new();
     private GameMode _selectedMode = GameMode.Classic;
 
     public MainWindow()
@@ -28,6 +29,7 @@ public partial class MainWindow : Window
         KeyDown += OnKeyDown;
         SizeChanged += OnSizeChanged;
         CompositionTarget.Rendering += OnRendering;
+        Closed += (_, _) => _sound.Dispose();
     }
 
     private void OnLoaded(object sender, RoutedEventArgs e)
@@ -132,6 +134,7 @@ public partial class MainWindow : Window
         _engine = new GameEngine(GameCanvas);
         _engine.StateChanged += UpdateHud;
         _engine.GameOver     += OnGameOver;
+        _engine.PlaySound     = _sound.Play;
 
         UpdateBestForMode(mode);
         UpdateLivesDisplay(mode);
@@ -142,6 +145,7 @@ public partial class MainWindow : Window
         GameLayer.Visibility     = Visibility.Visible;
 
         // 크기 동기화는 OnRender에서 매 프레임 처리하므로 UpdateLayout/Resize 불필요
+        _sound.StartBgm();
         _engine.StartGame(mode);
     }
 
@@ -237,6 +241,7 @@ public partial class MainWindow : Window
     private void BtnMenu_Click(object sender, RoutedEventArgs e)
     {
         _engine?.Pause();
+        _sound.StopBgm();
         PauseLayer.Visibility    = Visibility.Collapsed;
         GameOverLayer.Visibility = Visibility.Collapsed;
         GameLayer.Visibility     = Visibility.Collapsed;

@@ -52,7 +52,7 @@ public partial class MainWindow : Window
     {
         if (!e.Data.GetDataPresent(DataFormats.FileDrop)) return;
         var files = (string[])e.Data.GetData(DataFormats.FileDrop)!;
-        if (files.Length > 0) OpenFile(files[0]);
+        if (files.Length > 0) _ = OpenFileAsync(files[0]);
     }
 
     // ── 키보드 ───────────────────────────────────────────────────────────
@@ -74,26 +74,39 @@ public partial class MainWindow : Window
     private void BtnOpen_Click(object sender, RoutedEventArgs e)
     {
         var dlg = new Microsoft.Win32.OpenFileDialog { Title = "파일 열기", Filter = "모든 파일 (*.*)|*.*" };
-        if (dlg.ShowDialog() == true) OpenFile(dlg.FileName);
+        if (dlg.ShowDialog() == true) _ = OpenFileAsync(dlg.FileName);
     }
 
-    private void OpenFile(string path)
+    // UI 차단 방지: HexDocument.Load(최대 50MB ReadAllBytes) + StructureParser를 배경 스레드에서 수행
+    private async Task OpenFileAsync(string path)
     {
+        BtnOpen.IsEnabled    = false;
+        BtnCompare.IsEnabled = false;
+        TxtStatus.Text       = "파일 로딩 중...";
+
         try
         {
+            var (doc, format, fields) = await Task.Run(() =>
+            {
+                var d   = HexDocument.Load(path);
+                var fmt = StructureParser.DetectFormat(d);
+                var fls = fmt != "Unknown" ? StructureParser.Parse(d) : null;
+                return (d, fmt, fls);
+            });
+
             _doc?.Dispose();
-            _doc         = HexDocument.Load(path);
-            _rows        = new HexRowList(_doc);
+            _doc          = doc;
+            _rows         = new HexRowList(_doc);
             _searchOffset = 0;
 
             HexList.ItemsSource = _rows;
             HexList.ScrollIntoView(HexList.Items[0]);
 
-            var fi       = new FileInfo(path);
+            var fi        = new FileInfo(path);
             bool readOnly = _doc.Length > 50 * 1024 * 1024;
-            Title        = $"Hex.Peek — {fi.Name}{(readOnly ? " [읽기 전용]" : "")}";
-            TxtFileInfo.Text = $"{_doc.Length:N0} bytes  |  {FormatSize(_doc.Length)}  |  {_doc.RowCount:N0} rows";
-            TxtStatus.Text   = path;
+            Title             = $"Hex.Peek — {fi.Name}{(readOnly ? " [읽기 전용]" : "")}";
+            TxtFileInfo.Text  = $"{_doc.Length:N0} bytes  |  {FormatSize(_doc.Length)}  |  {_doc.RowCount:N0} rows";
+            TxtStatus.Text    = path;
 
             BtnSave.IsEnabled     = !readOnly;
             BtnTemplate.IsEnabled = true;
@@ -101,15 +114,25 @@ public partial class MainWindow : Window
             DecodePanel.Visibility = Visibility.Visible;
             ResetDecodePanel();
 
-            // 구조체 자동 분석
-            var format = StructureParser.DetectFormat(_doc);
-            if (format != "Unknown") ShowStructureFields(format);
+            // 구조체 자동 분석 (배경 스레드에서 이미 파싱 완료)
+            if (fields is { Count: > 0 })
+            {
+                TxtFormatName.Text   = format;
+                LvFields.ItemsSource = fields.Select(f => new FieldViewModel(f.Offset, f.Length, f.Name, f.Description)).ToList();
+                ColStruct.Width      = new GridLength(380);
+                _structVisible       = true;
+            }
             else HideStructPanel();
         }
         catch (Exception ex)
         {
             MessageBox.Show($"파일을 열 수 없습니다:\n{ex.Message}", "Hex.Peek",
                 MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+        finally
+        {
+            BtnOpen.IsEnabled    = true;
+            BtnCompare.IsEnabled = _doc != null;
         }
     }
 
@@ -132,22 +155,30 @@ public partial class MainWindow : Window
     }
 
     // ── 비교 모드 ────────────────────────────────────────────────────────
-    private void BtnCompare_Click(object sender, RoutedEventArgs e)
+    private async void BtnCompare_Click(object sender, RoutedEventArgs e)
     {
         var dlg = new Microsoft.Win32.OpenFileDialog { Title = "비교할 파일 열기", Filter = "모든 파일 (*.*)|*.*" };
         if (dlg.ShowDialog() != true) return;
 
+        TxtStatus.Text       = "비교 파일 로딩 중...";
+        BtnCompare.IsEnabled = false;
         try
         {
-            var other = HexDocument.Load(dlg.FileName);
+            // UI 차단 방지: 비교 파일 로딩을 배경 스레드에서 수행
+            var other = await Task.Run(() => HexDocument.Load(dlg.FileName));
             var win   = new CompareWindow(_doc!, other);
             win.Owner = this;
             win.Show();
+            TxtStatus.Text = $"비교: {Path.GetFileName(dlg.FileName)}";
         }
         catch (Exception ex)
         {
             MessageBox.Show($"비교 파일을 열 수 없습니다:\n{ex.Message}", "Hex.Peek",
                 MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+        finally
+        {
+            BtnCompare.IsEnabled = _doc != null;
         }
     }
 

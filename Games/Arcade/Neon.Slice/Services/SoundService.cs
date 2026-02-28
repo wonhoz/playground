@@ -1,90 +1,131 @@
 using System.IO;
-using System.Media;
+using System.Windows.Media;
+using System.Windows.Media.Animation;
 
 namespace NeonSlice.Services;
 
 public enum SoundCue { Slice, SliceFever, Bomb, Lightning, Ice, Star, Miss, Fever, GameOver }
 
-/// <summary>PCM WAV 코드 합성 기반 사운드 서비스 (외부 파일 불필요)</summary>
+/// <summary>
+/// PCM WAV 코드 합성 기반 사운드 서비스.
+/// System.Windows.Media.MediaPlayer를 사용해 BGM과 SFX가 동시에 재생됩니다.
+/// (System.Media.SoundPlayer는 PlaySound API 단일 채널 한계로 BGM 중단 문제 발생)
+/// </summary>
 public sealed class SoundService : IDisposable
 {
     private const int SR = 44100;
     private static readonly Random Rng = new();
 
-    private readonly SoundPlayer   _bgm;
-    private readonly SoundPlayer[] _slicePool = new SoundPlayer[3];
-    private readonly SoundPlayer[] _feverPool = new SoundPlayer[3];
-    private int  _sliceIdx;
-    private int  _feverIdx;
-    private readonly SoundPlayer _bomb;
-    private readonly SoundPlayer _lightning;
-    private readonly SoundPlayer _ice;
-    private readonly SoundPlayer _star;
-    private readonly SoundPlayer _miss;
-    private readonly SoundPlayer _fever;
-    private readonly SoundPlayer _gameOver;
-    private bool _bgmPlaying;
+    // 임시 WAV 파일 목록 (Dispose 시 삭제)
+    private readonly List<string> _tempFiles = [];
+
+    // BGM: MediaTimeline + RepeatBehavior.Forever → 끊김 없는 루프
+    private readonly MediaPlayer _bgm = new();
+    private MediaClock? _bgmClock;
+    private string _bgmPath = "";
+
+    // SFX 풀 (동시 슬라이스 대응)
+    private readonly MediaPlayer[] _slicePool = [new(), new(), new()];
+    private readonly MediaPlayer[] _feverPool = [new(), new(), new()];
+    private int _sliceIdx;
+    private int _feverIdx;
+
+    private readonly MediaPlayer _bomb;
+    private readonly MediaPlayer _lightning;
+    private readonly MediaPlayer _ice;
+    private readonly MediaPlayer _star;
+    private readonly MediaPlayer _miss;
+    private readonly MediaPlayer _fever;
+    private readonly MediaPlayer _gameOver;
 
     public SoundService()
     {
-        _bgm = Make(GenerateBgm());
-        for (var i = 0; i < 3; i++)
-        {
-            _slicePool[i] = Make(GenerateSlice(false));
-            _feverPool[i] = Make(GenerateSlice(true));
-        }
-        _bomb      = Make(GenerateBomb());
-        _lightning = Make(GenerateLightning());
-        _ice       = Make(GenerateIce());
-        _star      = Make(GenerateStar());
-        _miss      = Make(GenerateMiss());
-        _fever     = Make(GenerateFever());
-        _gameOver  = Make(GenerateGameOver());
+        _bomb      = new(); _lightning = new(); _ice     = new();
+        _star      = new(); _miss      = new(); _fever   = new();
+        _gameOver  = new();
+
+        // 임시 파일에 WAV 쓰기 후 MediaPlayer에 로드
+        _bgmPath = TempWav(GenerateBgm());
+
+        foreach (var p in _slicePool) p.Open(new Uri(TempWav(GenerateSlice(false))));
+        foreach (var p in _feverPool) p.Open(new Uri(TempWav(GenerateSlice(true))));
+        _bomb.Open     (new Uri(TempWav(GenerateBomb())));
+        _lightning.Open(new Uri(TempWav(GenerateLightning())));
+        _ice.Open      (new Uri(TempWav(GenerateIce())));
+        _star.Open     (new Uri(TempWav(GenerateStar())));
+        _miss.Open     (new Uri(TempWav(GenerateMiss())));
+        _fever.Open    (new Uri(TempWav(GenerateFever())));
+        _gameOver.Open (new Uri(TempWav(GenerateGameOver())));
     }
 
-    private static SoundPlayer Make(byte[] wav)
+    // WAV 바이트를 임시 파일로 저장하고 경로 반환
+    private string TempWav(byte[] wav)
     {
-        var p = new SoundPlayer(new MemoryStream(wav));
-        p.Load();
-        return p;
+        var path = Path.ChangeExtension(Path.GetTempFileName(), ".wav");
+        File.WriteAllBytes(path, wav);
+        _tempFiles.Add(path);
+        return path;
     }
+
+    // ── 공개 API ─────────────────────────────────────────────────────────────
 
     public void StartBgm()
     {
-        if (_bgmPlaying) return;
-        _bgm.PlayLooping();
-        _bgmPlaying = true;
+        if (_bgmClock != null) return; // 이미 재생 중
+        var tl = new MediaTimeline(new Uri(_bgmPath)) { RepeatBehavior = RepeatBehavior.Forever };
+        _bgmClock = tl.CreateClock();
+        _bgm.Clock = _bgmClock;
+        _bgmClock.Controller.Begin();
     }
 
     public void StopBgm()
     {
-        _bgm.Stop();
-        _bgmPlaying = false;
+        if (_bgmClock == null) return;
+        _bgmClock.Controller.Stop();
+        _bgm.Clock = null;
+        _bgmClock = null;
     }
 
     public void Play(SoundCue cue)
     {
         switch (cue)
         {
-            case SoundCue.Slice:      _slicePool[_sliceIdx++ % 3].Play(); break;
-            case SoundCue.SliceFever: _feverPool[_feverIdx++ % 3].Play(); break;
-            case SoundCue.Bomb:       _bomb.Play();      break;
-            case SoundCue.Lightning:  _lightning.Play(); break;
-            case SoundCue.Ice:        _ice.Play();       break;
-            case SoundCue.Star:       _star.Play();      break;
-            case SoundCue.Miss:       _miss.Play();      break;
-            case SoundCue.Fever:      _fever.Play();     break;
-            case SoundCue.GameOver:   StopBgm(); _gameOver.Play(); break;
+            case SoundCue.Slice:      PlayPool(_slicePool, ref _sliceIdx); break;
+            case SoundCue.SliceFever: PlayPool(_feverPool, ref _feverIdx); break;
+            case SoundCue.Bomb:       PlaySfx(_bomb);      break;
+            case SoundCue.Lightning:  PlaySfx(_lightning); break;
+            case SoundCue.Ice:        PlaySfx(_ice);       break;
+            case SoundCue.Star:       PlaySfx(_star);      break;
+            case SoundCue.Miss:       PlaySfx(_miss);      break;
+            case SoundCue.Fever:      PlaySfx(_fever);     break;
+            case SoundCue.GameOver:   StopBgm(); PlaySfx(_gameOver); break;
         }
     }
 
     public void Dispose()
     {
-        _bgm.Dispose();
-        foreach (var p in _slicePool) p.Dispose();
-        foreach (var p in _feverPool) p.Dispose();
-        _bomb.Dispose(); _lightning.Dispose(); _ice.Dispose();
-        _star.Dispose(); _miss.Dispose(); _fever.Dispose(); _gameOver.Dispose();
+        StopBgm();
+        _bgm.Close();
+        foreach (var p in _slicePool) { p.Stop(); p.Close(); }
+        foreach (var p in _feverPool) { p.Stop(); p.Close(); }
+        _bomb.Close(); _lightning.Close(); _ice.Close();
+        _star.Close(); _miss.Close(); _fever.Close(); _gameOver.Close();
+        foreach (var f in _tempFiles) try { File.Delete(f); } catch { }
+    }
+
+    private static void PlayPool(MediaPlayer[] pool, ref int idx)
+    {
+        var p = pool[idx++ % pool.Length];
+        p.Stop();
+        p.Position = TimeSpan.Zero;
+        p.Play();
+    }
+
+    private static void PlaySfx(MediaPlayer p)
+    {
+        p.Stop();
+        p.Position = TimeSpan.Zero;
+        p.Play();
     }
 
     // ── WAV 빌더 ─────────────────────────────────────────────────────────────
@@ -94,7 +135,6 @@ public sealed class SoundService : IDisposable
         var dataSize = samples.Length * 2;
         using var ms = new MemoryStream(44 + dataSize);
         using var bw = new BinaryWriter(ms, System.Text.Encoding.Default, leaveOpen: true);
-
         bw.Write(new byte[] { (byte)'R', (byte)'I', (byte)'F', (byte)'F' });
         bw.Write(36 + dataSize);
         bw.Write(new byte[] { (byte)'W', (byte)'A', (byte)'V', (byte)'E' });
@@ -123,7 +163,6 @@ public sealed class SoundService : IDisposable
 
     // ── 효과음 생성 ──────────────────────────────────────────────────────────
 
-    /// <summary>슬라이스 — 고주파→저주파 스윕 (피버 시 더 높고 빠름)</summary>
     private static byte[] GenerateSlice(bool fever)
     {
         const double dur = 0.18;
@@ -132,7 +171,6 @@ public sealed class SoundService : IDisposable
         var phase = 0.0;
         var startF = fever ? 1400.0 : 900.0;
         var endF   = fever ? 800.0  : 300.0;
-
         for (var i = 0; i < n; i++)
         {
             var t     = (double)i / SR;
@@ -144,14 +182,12 @@ public sealed class SoundService : IDisposable
         return BuildWav(Norm(buf));
     }
 
-    /// <summary>폭탄 — 저음 킥 + 노이즈 버스트</summary>
     private static byte[] GenerateBomb()
     {
         const double dur = 0.55;
         var n = (int)(dur * SR);
         var buf = new double[n];
         var phase = 0.0;
-
         for (var i = 0; i < n; i++)
         {
             var t  = (double)i / SR;
@@ -162,14 +198,12 @@ public sealed class SoundService : IDisposable
         return BuildWav(Norm(buf, 30000));
     }
 
-    /// <summary>번개 — 전기 버즈 (톱니파 + 트레몰로 + 노이즈)</summary>
     private static byte[] GenerateLightning()
     {
         const double dur = 0.35;
         var n = (int)(dur * SR);
         var buf = new double[n];
         var phase = 0.0;
-
         for (var i = 0; i < n; i++)
         {
             var t       = (double)i / SR;
@@ -183,14 +217,12 @@ public sealed class SoundService : IDisposable
         return BuildWav(Norm(buf));
     }
 
-    /// <summary>얼음 — 크리스탈 벨 (배음 사인파 합성, 지수 감쇠)</summary>
     private static byte[] GenerateIce()
     {
         const double dur = 0.65;
         var n = (int)(dur * SR);
         var buf = new double[n];
         double p1 = 0, p2 = 0, p3 = 0;
-
         for (var i = 0; i < n; i++)
         {
             var t  = (double)i / SR;
@@ -203,14 +235,12 @@ public sealed class SoundService : IDisposable
         return BuildWav(Norm(buf, 26000));
     }
 
-    /// <summary>별 — 상승 주파수 스파클</summary>
     private static byte[] GenerateStar()
     {
         const double dur = 0.22;
         var n = (int)(dur * SR);
         var buf = new double[n];
         var phase = 0.0;
-
         for (var i = 0; i < n; i++)
         {
             var tNorm = (double)i / n;
@@ -220,33 +250,29 @@ public sealed class SoundService : IDisposable
         return BuildWav(Norm(buf, 24000));
     }
 
-    /// <summary>놓침 — 하강 둔탁한 타격</summary>
     private static byte[] GenerateMiss()
     {
         const double dur = 0.38;
         var n = (int)(dur * SR);
         var buf = new double[n];
         var phase = 0.0;
-
         for (var i = 0; i < n; i++)
         {
             var t  = (double)i / SR;
             phase += 2 * Math.PI * (220 * Math.Exp(-t * 6)) / SR;
-            var env = Math.Exp(-t * 6);
-            buf[i]  = (Math.Sin(phase) * 0.8
-                      + (Rng.NextDouble() * 2 - 1) * Math.Exp(-t * 12) * 0.35) * env;
+            buf[i] = (Math.Sin(phase) * 0.80
+                    + (Rng.NextDouble() * 2 - 1) * Math.Exp(-t * 12) * 0.35)
+                   * Math.Exp(-t * 6);
         }
         return BuildWav(Norm(buf, 24000));
     }
 
-    /// <summary>피버 — C5→E5→G5→C6 상승 아르페지오</summary>
     private static byte[] GenerateFever()
     {
         double[] notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
         const double noteDur = 0.12, gap = 0.025;
         var n = (int)(notes.Length * (noteDur + gap) * SR);
         var buf = new double[n];
-
         for (var ni = 0; ni < notes.Length; ni++)
         {
             var off = (int)(ni * (noteDur + gap) * SR);
@@ -263,14 +289,12 @@ public sealed class SoundService : IDisposable
         return BuildWav(Norm(buf, 26000));
     }
 
-    /// <summary>게임오버 — A4→F#4→D4→A3 하강 멜로디 (삼각파)</summary>
     private static byte[] GenerateGameOver()
     {
         double[] notes = [440.0, 369.99, 293.66, 220.0]; // A4, F#4, D4, A3
         const double noteDur = 0.42;
         var n = (int)((notes.Length * noteDur + 0.3) * SR);
         var buf = new double[n];
-
         for (var ni = 0; ni < notes.Length; ni++)
         {
             var off = (int)(ni * noteDur * SR);
@@ -288,44 +312,41 @@ public sealed class SoundService : IDisposable
         return BuildWav(Norm(buf, 26000));
     }
 
-    // ── BGM 생성 (Synthwave 4초 루프, 120 BPM) ───────────────────────────────
-
+    // ── BGM (Synthwave 루프, 120 BPM) ────────────────────────────────────────
+    // MediaTimeline + RepeatBehavior.Forever로 끊김 없이 루프하므로
+    // 패드에 페이드 인/아웃 없이 일정 볼륨 유지 (loop point 자연스러움)
     private static byte[] GenerateBgm()
     {
         const double bpm  = 120.0;
-        const double beat = 60.0 / bpm;       // 0.5s / beat
-        var n = (int)(8 * beat * SR);          // 8 beats = 4 seconds
+        const double beat = 60.0 / bpm;      // 0.5s
+        var n = (int)(8 * beat * SR);         // 8 beats = 4s
+
         var buf = new double[n];
 
-        // Kick: 0, 2, 4, 6 박 + 5박 소프트 킥 (신코페이션)
+        // 킥: 4-on-the-floor (0, 2, 4, 6박)
         foreach (var b in new[] { 0, 2, 4, 6 }) AddKick(buf, (int)(b * beat * SR));
-        AddKick(buf, (int)(5 * beat * SR), 0.6);
 
-        // Snare: 1, 3, 5, 7 박 (백비트)
+        // 스네어: 백비트 (1, 3, 5, 7박)
         foreach (var b in new[] { 1, 3, 5, 7 }) AddSnare(buf, (int)(b * beat * SR));
 
-        // Hi-hat: 16분음표 (beat × 0.5 간격)
+        // 하이햇: 8분음표 (0.5박 간격), 볼륨 낮춤
         for (var i = 0; i < 16; i++)
-            AddHihat(buf, (int)(i * beat * 0.5 * SR), i % 2 == 0 ? 0.48 : 0.30);
+            AddHihat(buf, (int)(i * beat * 0.5 * SR), i % 2 == 0 ? 0.28 : 0.16);
 
-        // Bass 사각파: A2-A2-E2-E2-A2-A2-D2-D2
-        double[] bassF = [110.0, 110.0, 82.41, 82.41, 110.0, 110.0, 73.42, 73.42];
+        // 베이스 사각파: A2-A2-A2-A2-E2-E2-E2-E2
+        double[] bassF = [110.0, 110.0, 110.0, 110.0, 82.41, 82.41, 82.41, 82.41];
         for (var b = 0; b < 8; b++)
             AddBass(buf, (int)(b * beat * SR), bassF[b], (int)(beat * SR));
 
-        // 리드 아르페지오 (8분음표): A 펜타토닉 멜로디
-        double[] leadF =
-        [
-            440.0, 523.25, 659.25, 783.99, 880.0, 783.99, 659.25, 523.25,
-            440.0, 523.25, 659.25, 783.99, 523.25, 659.25, 880.0, 659.25,
-        ];
-        for (var i = 0; i < 16; i++)
-            AddLead(buf, (int)(i * beat * 0.5 * SR), leadF[i], (int)(beat * 0.45 * SR));
+        // 리드 멜로디: 4분음표 (1박 간격) — 8분음표 아르페지오보다 여유 있음
+        double[] leadF = [440.0, 523.25, 659.25, 523.25, 659.25, 783.99, 659.25, 523.25];
+        for (var i = 0; i < 8; i++)
+            AddLead(buf, (int)(i * beat * SR), leadF[i], (int)(beat * 0.80 * SR));
 
-        // 패드 코드: A 단조 (A2, C3, E3) — 낮은 볼륨 배경
+        // 패드 코드: A 단조 (A2, C3, E3) — 페이드 없이 일정 볼륨
         AddPad(buf, 0, n, [110.0, 130.81, 164.81]);
 
-        return BuildWav(Norm(buf, 24000));
+        return BuildWav(Norm(buf, 22000));
     }
 
     private static void AddKick(double[] buf, int off, double amp = 1.0)
@@ -372,8 +393,8 @@ public sealed class SoundService : IDisposable
             var tNorm = (double)i / len;
             ph += 2 * Math.PI * freq / SR;
             var saw = 2 * ((ph % (2 * Math.PI)) / (2 * Math.PI)) - 1;
-            var env = tNorm < 0.02 ? tNorm / 0.02 : tNorm > 0.85 ? (1 - tNorm) / 0.15 : 1.0;
-            buf[off + i] += saw * env * 0.32;
+            var env = tNorm < 0.02 ? tNorm / 0.02 : tNorm > 0.88 ? (1 - tNorm) / 0.12 : 1.0;
+            buf[off + i] += saw * env * 0.30;
         }
     }
 
@@ -386,25 +407,24 @@ public sealed class SoundService : IDisposable
             var tNorm = (double)i / len;
             ph += 2 * Math.PI * freq / SR;
             var env = tNorm < 0.05 ? tNorm / 0.05 : tNorm > 0.75 ? (1 - tNorm) / 0.25 : 1.0;
-            buf[off + i] += Math.Sin(ph) * env * 0.22;
+            buf[off + i] += Math.Sin(ph) * env * 0.20;
         }
     }
 
+    // 패드: 페이드 없이 일정 볼륨 (MediaTimeline 루프 시 loop point 자연스러움)
     private static void AddPad(double[] buf, int start, int len, double[] freqs)
     {
         len = Math.Min(len, buf.Length - start);
         var phases = new double[freqs.Length];
         for (var i = 0; i < len; i++)
         {
-            var tNorm = (double)i / len;
-            var fenv  = tNorm < 0.08 ? tNorm / 0.08 : tNorm > 0.92 ? (1 - tNorm) / 0.08 : 1.0;
-            double s  = 0;
+            double s = 0;
             for (var f = 0; f < freqs.Length; f++)
             {
                 phases[f] += 2 * Math.PI * freqs[f] / SR;
                 s += Math.Sin(phases[f]);
             }
-            buf[start + i] += s / freqs.Length * fenv * 0.12;
+            buf[start + i] += s / freqs.Length * 0.12;
         }
     }
 }

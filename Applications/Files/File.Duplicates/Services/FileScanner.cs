@@ -13,20 +13,23 @@ public static class FileScanner
         IProgress<ScanProgress>?  progress,
         CancellationToken         ct)
     {
-        // 1단계: 파일 수집
+        // 1단계: 파일 수집 (UI 차단 방지: Task.Run으로 배경 스레드에서 수행)
         var searchOption = options.IncludeSubfolders
             ? SearchOption.AllDirectories
             : SearchOption.TopDirectoryOnly;
 
-        var allFiles = options.Folders
-            .Where(Directory.Exists)
-            .SelectMany(f =>
-            {
-                try   { return Directory.EnumerateFiles(f, "*", searchOption); }
-                catch { return []; }
-            })
-            .Distinct()
-            .ToList();
+        progress?.Report(new ScanProgress(0, 0, "파일 목록 수집 중..."));
+
+        var allFiles = await Task.Run(() =>
+            options.Folders
+                .Where(Directory.Exists)
+                .SelectMany(f =>
+                {
+                    try   { return Directory.EnumerateFiles(f, "*", searchOption); }
+                    catch { return []; }
+                })
+                .Distinct()
+                .ToList(), ct);
 
         var total = allFiles.Count;
         var done  = 0;

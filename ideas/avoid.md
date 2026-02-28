@@ -2,7 +2,7 @@
 
 > 이 파일은 브레인스토밍 시 **이미 제안되거나 구현된 아이디어를 다시 꺼내지 않도록** 하는 필터다.
 > 새 아이디어를 제안하기 전 반드시 이 목록을 확인할 것.
-> 마지막 갱신: 2026-02-27
+> 마지막 갱신: 2026-02-28
 
 ---
 
@@ -43,6 +43,7 @@
 | `Brick.Blitz` | Arcade |
 | `Dash.City` | Arcade |
 | `Neon.Run` | Arcade |
+| `Neon.Slice` | Arcade |
 | `Gravity.Flip` | Puzzle |
 | `Hue.Flow` | Puzzle |
 | `Nitro.Drift` | Racing |
@@ -80,6 +81,9 @@
 | `Auto.Type` | 텍스트 자동 확장 스니펫 (::addr → 주소, ::date → 오늘 날짜) | idea_20260227 |
 | `Macro.Pad` | 화면 소프트웨어 매크로 패드 (버튼 배치, 앱 실행·단축키·스크립트) | idea_20260227 |
 | `Type.Rocket` | 실시간 WPM 타이핑 속도 트래커 + 코드·마크다운 연습 + 일별 통계 | idea_20260227 |
+| `Mind.Map` | 로컬 오프라인 마인드맵 에디터 (자유 캔버스, 노드 드래그, 방사형/트리 레이아웃, PNG/SVG/Markdown 내보내기) | idea_20260228 |
+| `Chart.Forge` | CSV 붙여넣기로 빠른 차트 생성기 (막대·선·원형·도넛·산점도 등, SVG/PNG/클립보드 내보내기) | idea_20260228 |
+| `Pixel.Forge` | 픽셀아트 에디터·애니메이터 (8×8~128×128, 레이어, 프레임 애니메이션, GIF/ICO 내보내기) | idea_20260228 |
 
 ### Tray / Automation / System
 
@@ -90,12 +94,17 @@
 | `Thermal.View` | CPU/GPU 온도·팬 속도 실시간 트레이 + 임계치 Toast 알림 | idea_20260227 |
 | `Hot.Corner` | Windows 핫 코너 구현 (화면 4모서리 마우스 → 커스텀 동작) | idea_20260227 |
 | `Wake.Cast` | WOL(Wake-on-LAN) 원클릭 PC 기동 트레이 + 핑 상태 모니터 | idea_20260227 |
+| `Night.Cast` | 야간 청색광 차단 트레이 (위경도 기반 일출/일몰 자동 계산, 색온도 슬라이더, 앱별 예외) | idea_20260228 |
+| `Power.Plan` | 전원 계획 자동 전환 트레이 (AC/배터리 감지, 지정 앱 실행 시 고성능 자동 전환) | idea_20260228 |
 
 ### Dev / Tools (개발자 도구) — 신규 제안
 
 | 이름 | 핵심 기능 | 출처 |
 |------|----------|------|
 | `Glyph.Map` | 유니코드 12만+ 문자 오프라인 탐색·복사·즐겨찾기 (이모지·특수문자·HTML 엔티티 동시 복사) | idea_20260227 |
+| `Hex.Peek` | 파일 16진수 뷰어·에디터 (패턴 검색, 구조체 파싱 템플릿, 선택 영역 디코딩, 파일 diff 비교) | idea_20260228 |
+| `Cron.Cast` | Cron 표현식 실시간 시각화 검증기 (다음 실행 목록, 타임라인 뷰, Unix↔Windows 변환) | idea_20260228 |
+| `GIF.Cast` | 화면 영역 GIF 녹화·변환기 (FPS/품질 설정, 마우스 하이라이트, 팔레트 최적화, 트림·속도 조절) | idea_20260228 |
 
 ---
 
@@ -159,6 +168,7 @@
 | `Pixel.Tape` | 화면 픽셀 줄자 | idea_20260220b |
 | `Res.Swap` | 해상도·주사율 빠른 전환 트레이 (게임 ↔ 작업) | idea_20260224 |
 | `Stamp.It` | 사진 도장/워터마크 삽입 (날짜, 로고) | idea_20260220b |
+| `Screen.Split` | 화면 구역 시각적 정의 → 창 드래그 스냅, 레이아웃 저장/전환, 창 배치 스냅샷 복원 | idea_20260228 |
 
 ### Audio / Sound
 
@@ -181,6 +191,7 @@
 | 이름 | 핵심 기능 | 출처 |
 |------|----------|------|
 | `Spy.Guard` | 앱의 클립보드·마이크·카메라 무단 접근 감지 + 차단 | idea_20260225 |
+| `App.Cage` | 앱별 네트워크 접근 허용/차단 GUI (Windows Firewall 래퍼, 임시 허용 타이머, 프로필 저장) | idea_20260228 |
 
 ### Text / Data Tools
 
@@ -202,9 +213,23 @@
 | `Color.Blitz` | Brain / Speed | 스트룹 효과 기반 색상 초고속 매칭 (글자 의미 vs 실제 색) |
 | `Flip.Grid` | Puzzle | N×N 격자 타일 뒤집기 (클릭 시 인접 타일 연동), 전체 같은 색 목표 |
 | `Stack.Pop` | Casual / Hyper | 컬러 블록 타워 → 같은 색 3레이어 연쇄 폭발 제거 |
-| `Neon.Slice` | Arcade / Reflex | 마우스 드래그 슬라이싱 아케이드, 네온 사이버펑크 비주얼 |
 | `Worm.Rush` | Arcade (Classic+) | Snake 진화판 — 아이템마다 뱀이 변형 (속도, 역방향, 벽통과 등) |
 | `Pixel.Drop` | Puzzle / Tetris | 목표 픽셀 아트 패턴을 완성하는 테트리스 변형 |
+
+---
+
+### 게임 — 제안된 미구현 아이디어 (idea_20260228)
+
+| 이름 | 장르 | 핵심 메커닉 |
+|------|------|------------|
+| `Laser.Net` | Puzzle | 격자 내 거울·프리즘 배치로 레이저 빔을 모든 타겟에 도달 — 반사 경로 네온 시각화 |
+| `Echo.Grid` | Puzzle / Physics | 각도 조준 공 발사 → 벽 반사 이동 → 지나간 타일 페인팅 → 전체 타일 채우기 |
+| `Orb.Wave` | Shooter / Arcade | 코어 주위 궤도 회전 포탑, 마우스로 이동·클릭으로 발사, 360도 방향 웨이브 적 방어 |
+| `Signal.Rush` | Rhythm + Shooter | BGM 박자 파동에 맞춰 발사 → Perfect 타이밍 = 대미지 2배, 적이 박자에 맞춰 이동 |
+| `Flow.Pipe` | Puzzle / Casual | N×N 격자 같은 색 점을 파이프로 연결 + 빈 칸 없이 전체 셀 가득 채우기 |
+| `Arc.Blast` | Physics / Arcade | 포물선 탄도 조준·발사 → 구조물·적 파괴 (나무/돌/얼음/폭발물, 기본/분열/관통 탄종) |
+| `Hexa.Drop` | Puzzle / Casual | 육각형 격자에 헥사 조각 드래그 배치 → 완전한 줄/링 형성 시 소거 + 연쇄 콤보 |
+| `Fuse.Ball` | Puzzle / Action | 단일 입력으로 두 공을 반대 방향 동시 조종 → 각자 목표 지점에 동시 도달 |
 
 ---
 
@@ -246,6 +271,24 @@
 | **스트룹 색상 퍼즐** | Color.Blitz |
 | **타일 뒤집기 퍼즐** | Flip.Grid |
 | **컬러 타워 폭발** | Stack.Pop |
-| **슬라이싱 아케이드** | Neon.Slice |
+| **슬라이싱 아케이드** | Neon.Slice ✅ |
 | **Snake 진화판** | Worm.Rush |
 | **픽셀아트 테트리스** | Pixel.Drop |
+| **레이저 반사 퍼즐** | Laser.Net |
+| **반사 공 타일 페인팅** | Echo.Grid |
+| **궤도 회전 포탑 슈터** | Orb.Wave |
+| **리듬+슈터 혼합** | Signal.Rush |
+| **파이프 연결 퍼즐** | Flow.Pipe |
+| **포물선 탄도 파괴 슈터** | Arc.Blast |
+| **헥사고날 블록 퍼즐** | Hexa.Drop |
+| **듀얼 볼 반대 방향 조종** | Fuse.Ball |
+| **GIF 화면 녹화** | GIF.Cast (≠ Screen.Recorder) |
+| **야간 청색광 차단** | Night.Cast |
+| **오프라인 마인드맵** | Mind.Map |
+| **픽셀아트 에디터·애니메이터** | Pixel.Forge |
+| **빠른 차트 생성기** | Chart.Forge |
+| **헥스 뷰어·에디터** | Hex.Peek |
+| **Cron 표현식 검증기** | Cron.Cast |
+| **전원 계획 자동 전환** | Power.Plan |
+| **앱별 네트워크 차단** | App.Cage |
+| **창 분할 레이아웃 매니저** | Screen.Split (≠ Workspace.Switcher) |

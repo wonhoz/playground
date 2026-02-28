@@ -103,7 +103,7 @@ public sealed class TrayApp : ApplicationContext
             return;
         }
 
-        var (success, error) = DnsService.ApplyPreset(adapter, preset);
+        var (success, error) = await DnsService.ApplyPresetAsync(adapter, preset);
 
         LogService.AddEntry(new DnsLogEntry
         {

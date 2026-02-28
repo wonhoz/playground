@@ -32,24 +32,24 @@ public static class DnsService
         return dns.Count > 0 ? string.Join(", ", dns) : "DHCP";
     }
 
-    public static (bool Success, string? Error) ApplyPreset(string adapterName, DnsPreset preset)
+    public static async Task<(bool Success, string? Error)> ApplyPresetAsync(string adapterName, DnsPreset preset)
     {
         try
         {
             if (string.IsNullOrEmpty(preset.Primary))
             {
                 // DHCP mode
-                RunNetsh($"interface ip set dns name=\"{adapterName}\" source=dhcp");
+                await RunNetshAsync($"interface ip set dns name=\"{adapterName}\" source=dhcp");
             }
             else
             {
-                RunNetsh($"interface ip set dns name=\"{adapterName}\" static {preset.Primary}");
+                await RunNetshAsync($"interface ip set dns name=\"{adapterName}\" static {preset.Primary}");
                 if (!string.IsNullOrEmpty(preset.Secondary))
-                    RunNetsh($"interface ip add dns name=\"{adapterName}\" {preset.Secondary} index=2");
+                    await RunNetshAsync($"interface ip add dns name=\"{adapterName}\" {preset.Secondary} index=2");
             }
 
             // Flush DNS cache
-            RunNetsh("interface ip delete dnscache");
+            await RunNetshAsync("interface ip delete dnscache");
 
             return (true, null);
         }
@@ -84,7 +84,8 @@ public static class DnsService
         return principal.IsInRole(System.Security.Principal.WindowsBuiltInRole.Administrator);
     }
 
-    private static void RunNetsh(string args)
+    // UI 차단 방지: WaitForExitAsync()로 비동기 대기 (기존 동기 WaitForExit 최대 10s 블로킹 제거)
+    private static async Task RunNetshAsync(string args)
     {
         var psi = new ProcessStartInfo("netsh", args)
         {
@@ -94,10 +95,10 @@ public static class DnsService
             RedirectStandardError = true
         };
         using var proc = Process.Start(psi) ?? throw new Exception("netsh 실행 실패");
-        proc.WaitForExit(10000);
+        await proc.WaitForExitAsync();
         if (proc.ExitCode != 0)
         {
-            var err = proc.StandardError.ReadToEnd();
+            var err = await proc.StandardError.ReadToEndAsync();
             throw new Exception($"netsh 오류 (코드 {proc.ExitCode}): {err}");
         }
     }

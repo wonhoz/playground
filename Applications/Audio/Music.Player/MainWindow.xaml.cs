@@ -51,7 +51,7 @@ namespace Music.Player
             DragEnter += MainWindow_DragEnter;
 
             // Restore saved playlist state after window is loaded
-            Loaded += (s, e) => RestorePlaylistState();
+            Loaded += async (s, e) => await RestorePlaylistStateAsync();
         }
 
         private void EnsureResourcesExist()
@@ -377,7 +377,7 @@ namespace Music.Player
             }
         }
 
-        private void AddFilesButton_Click(object sender, RoutedEventArgs e)
+        private async void AddFilesButton_Click(object sender, RoutedEventArgs e)
         {
             var dialog = new Microsoft.Win32.OpenFileDialog
             {
@@ -388,7 +388,7 @@ namespace Music.Player
 
             if (dialog.ShowDialog() == true)
             {
-                AddFiles(dialog.FileNames);
+                await AddFilesAsync(dialog.FileNames);
             }
         }
 
@@ -487,30 +487,75 @@ namespace Music.Player
             }
         }
 
-        private void AddFiles(IEnumerable<string> paths)
+        private async Task AddFilesAsync(IEnumerable<string> paths)
         {
-            foreach (var path in paths)
+            // ── UI 차단 방지: 파일 열거·메타데이터 읽기를 배경 스레드에서 수행 ──
+            var prevTitle  = TitleText.Text;
+            var prevArtist = ArtistText.Text;
+            TitleText.Text  = "파일 추가 중...";
+            ArtistText.Text = "";
+
+            // 이미 추가된 경로를 미리 수집 (UI 스레드)
+            var existingPaths = _playlist
+                .Select(t => t.FilePath)
+                .ToHashSet(StringComparer.OrdinalIgnoreCase);
+
+            var newTracks = new List<TrackInfo>();
+
+            await Task.Run(() =>
             {
-                if (Directory.Exists(path))
+                var allPaths = new List<string>();
+                foreach (var path in paths)
                 {
-                    var files = Directory.GetFiles(path, "*.*", SearchOption.AllDirectories)
-                        .Where(f => SupportedExtensions.Contains(System.IO.Path.GetExtension(f).ToLower()));
-                    foreach (var file in files)
+                    if (Directory.Exists(path))
                     {
-                        AddTrack(file);
+                        var files = Directory.GetFiles(path, "*.*", SearchOption.AllDirectories)
+                            .Where(f => SupportedExtensions.Contains(
+                                System.IO.Path.GetExtension(f).ToLower()));
+                        allPaths.AddRange(files);
+                    }
+                    else if (File.Exists(path) &&
+                             SupportedExtensions.Contains(
+                                 System.IO.Path.GetExtension(path).ToLower()))
+                    {
+                        allPaths.Add(path);
                     }
                 }
-                else if (File.Exists(path) && SupportedExtensions.Contains(System.IO.Path.GetExtension(path).ToLower()))
+
+                foreach (var file in allPaths)
                 {
-                    AddTrack(path);
+                    var fullPath = System.IO.Path.GetFullPath(file);
+                    if (existingPaths.Contains(fullPath)) continue;
+
+                    // 진행 파일명 표시 (백그라운드 우선순위)
+                    Dispatcher.InvokeAsync(
+                        () => ArtistText.Text = System.IO.Path.GetFileName(fullPath),
+                        System.Windows.Threading.DispatcherPriority.Background);
+
+                    newTracks.Add(TrackInfo.FromFile(fullPath));
+                    existingPaths.Add(fullPath); // 같은 경로 중복 방지
                 }
+            });
+
+            // UI 스레드: ObservableCollection 갱신
+            foreach (var track in newTracks)
+            {
+                HistoryService.Instance.LoadFavoriteStatus(track);
+                _playlist.Add(track);
             }
 
-            // Auto-play first track if nothing is playing
-            if (_currentIndex < 0 && _playlist.Count > 0)
+            // 표시 복원
+            if (_currentIndex >= 0 && _currentIndex < _playlist.Count)
+                UpdateTrackDisplay(_playlist[_currentIndex]);
+            else
             {
-                PlayTrack(0);
+                TitleText.Text  = prevTitle;
+                ArtistText.Text = prevArtist;
             }
+
+            // 첫 트랙 자동 재생
+            if (_currentIndex < 0 && _playlist.Count > 0)
+                PlayTrack(0);
         }
 
         private void AddTrack(string filePath)
@@ -534,9 +579,9 @@ namespace Music.Player
 
         private void HistoryButton_Click(object sender, RoutedEventArgs e)
         {
-            var historyWindow = new HistoryWindow(paths =>
+            var historyWindow = new HistoryWindow(async paths =>
             {
-                AddFiles(paths);
+                await AddFilesAsync(paths);
                 if (PlaylistToggle.IsChecked != true)
                 {
                     PlaylistToggle.IsChecked = true;
@@ -551,9 +596,9 @@ namespace Music.Player
 
         private void LibraryButton_Click(object sender, RoutedEventArgs e)
         {
-            var libraryWindow = new LibraryWindow(paths =>
+            var libraryWindow = new LibraryWindow(async paths =>
             {
-                AddFiles(paths);
+                await AddFilesAsync(paths);
                 if (PlaylistToggle.IsChecked != true)
                 {
                     PlaylistToggle.IsChecked = true;
@@ -694,13 +739,13 @@ namespace Music.Player
             e.Handled = true;
         }
 
-        private void MainWindow_Drop(object sender, DragEventArgs e)
+        private async void MainWindow_Drop(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
                 var files = e.Data.GetData(DataFormats.FileDrop) as string[];
                 if (files == null) return;
-                AddFiles(files);
+                await AddFilesAsync(files);
 
                 // Show playlist if hidden
                 if (PlaylistToggle.IsChecked != true)
@@ -724,13 +769,13 @@ namespace Music.Player
             e.Handled = true;
         }
 
-        private void PlaylistBox_Drop(object sender, DragEventArgs e)
+        private async void PlaylistBox_Drop(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(DataFormats.FileDrop))
             {
                 var files = e.Data.GetData(DataFormats.FileDrop) as string[];
                 if (files == null) return;
-                AddFiles(files);
+                await AddFilesAsync(files);
             }
             e.Handled = true;
         }
@@ -783,7 +828,7 @@ namespace Music.Player
             e.Handled = true;
         }
 
-        private void PlaylistItem_Drop(object sender, DragEventArgs e)
+        private async void PlaylistItem_Drop(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(typeof(TrackInfo)) && sender is ListBoxItem targetItem)
             {
@@ -824,7 +869,7 @@ namespace Music.Player
                 var files = e.Data.GetData(DataFormats.FileDrop) as string[];
                 if (files != null)
                 {
-                    AddFiles(files);
+                    await AddFilesAsync(files);
                 }
                 e.Handled = true;
             }
@@ -1003,24 +1048,40 @@ namespace Music.Player
             PlaylistService.SaveState(state);
         }
 
-        private void RestorePlaylistState()
+        private async Task RestorePlaylistStateAsync()
         {
             var state = PlaylistService.LoadState();
             if (state == null || state.FilePaths.Count == 0)
                 return;
 
-            // Restore shuffle and repeat settings
+            // Restore shuffle and repeat settings (UI thread)
             _isShuffleEnabled = state.IsShuffleEnabled;
-            _isRepeatEnabled = state.IsRepeatEnabled;
+            _isRepeatEnabled  = state.IsRepeatEnabled;
             ShuffleButton.IsChecked = _isShuffleEnabled;
-            RepeatButton.IsChecked = _isRepeatEnabled;
+            RepeatButton.IsChecked  = _isRepeatEnabled;
 
-            // Add tracks to playlist
-            foreach (var filePath in state.FilePaths)
+            // ── UI 차단 방지: TrackInfo.FromFile()을 배경 스레드에서 수행 ──
+            TitleText.Text  = "재생목록 복원 중...";
+            ArtistText.Text = "";
+
+            var tracks = new List<TrackInfo>();
+            await Task.Run(() =>
             {
-                var track = TrackInfo.FromFile(filePath);
+                foreach (var filePath in state.FilePaths)
+                {
+                    if (!File.Exists(filePath)) continue;
+
+                    Dispatcher.InvokeAsync(
+                        () => ArtistText.Text = System.IO.Path.GetFileName(filePath),
+                        System.Windows.Threading.DispatcherPriority.Background);
+
+                    tracks.Add(TrackInfo.FromFile(filePath));
+                }
+            });
+
+            // UI 스레드: ObservableCollection 갱신
+            foreach (var track in tracks)
                 _playlist.Add(track);
-            }
 
             // Show playlist panel if there are tracks
             if (_playlist.Count > 0)
@@ -1049,12 +1110,17 @@ namespace Music.Player
                 PlaylistBox.ScrollIntoView(PlaylistBox.SelectedItem);
 
                 ProgressSlider.Maximum = track.Duration.TotalSeconds;
-                ProgressSlider.Value = state.CurrentPositionSeconds;
-                TotalTimeText.Text = track.DurationText;
-                CurrentTimeText.Text = TimeSpan.FromSeconds(state.CurrentPositionSeconds).ToString(@"m\:ss");
+                ProgressSlider.Value   = state.CurrentPositionSeconds;
+                TotalTimeText.Text     = track.DurationText;
+                CurrentTimeText.Text   = TimeSpan.FromSeconds(state.CurrentPositionSeconds).ToString(@"m\:ss");
 
                 // 자동 재생
                 _player.Play();
+            }
+            else
+            {
+                TitleText.Text  = "No track selected";
+                ArtistText.Text = "";
             }
         }
 

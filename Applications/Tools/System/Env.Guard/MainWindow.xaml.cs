@@ -21,7 +21,7 @@ public partial class MainWindow : Window
         Loaded += OnLoaded;
     }
 
-    private void OnLoaded(object sender, RoutedEventArgs e)
+    private async void OnLoaded(object sender, RoutedEventArgs e)
     {
         var hwnd = new System.Windows.Interop.WindowInteropHelper(this).Handle;
         var dark = 1;
@@ -31,7 +31,7 @@ public partial class MainWindow : Window
             TxtAdmin.Visibility = Visibility.Visible;
 
         LoadVariables();
-        LoadPathEntries();
+        await LoadPathEntriesAsync();
     }
 
     // ── 변수 로딩 ──────────────────────────────────
@@ -64,10 +64,10 @@ public partial class MainWindow : Window
         TxtCount.Text = $"{list.Count}/{_allVars.Count}";
     }
 
-    private void Refresh_Click(object sender, RoutedEventArgs e)
+    private async void Refresh_Click(object sender, RoutedEventArgs e)
     {
         LoadVariables();
-        LoadPathEntries();
+        await LoadPathEntriesAsync();
     }
 
     private void Search_TextChanged(object sender, TextChangedEventArgs e) => ApplyFilter();
@@ -152,27 +152,33 @@ public partial class MainWindow : Window
 
     // ── PATH 편집기 ──────────────────────────────────
 
-    private void LoadPathEntries()
+    private async Task LoadPathEntriesAsync()
     {
-        LoadPathList(LbUserPath, EnvScope.User);
-        LoadPathList(LbSysPath, EnvScope.System);
+        await LoadPathListAsync(LbUserPath, EnvScope.User);
+        await LoadPathListAsync(LbSysPath, EnvScope.System);
     }
 
-    private void LoadPathList(ListBox lb, EnvScope scope)
+    // UI 차단 방지: Directory.Exists()를 배경 스레드에서 일괄 수행 (네트워크 드라이브 hang 방지)
+    private async Task LoadPathListAsync(ListBox lb, EnvScope scope)
     {
         lb.Items.Clear();
         var entries = EnvService.GetPathEntries(scope);
-        foreach (var entry in entries)
+
+        TxtStatus.Text = "PATH 경로 확인 중...";
+        var results = await Task.Run(() =>
+            entries.Select(e => (entry: e, exists: Directory.Exists(e))).ToList());
+
+        foreach (var (entry, exists) in results)
         {
             var item = new ListBoxItem
             {
-                Content = entry,
-                Foreground = Directory.Exists(entry)
+                Content    = entry,
+                Foreground = exists
                     ? new SolidColorBrush(Color.FromRgb(80, 220, 120))
                     : new SolidColorBrush(Color.FromRgb(255, 90, 90)),
-                ToolTip = Directory.Exists(entry) ? "✅ 경로 존재" : "❌ 경로 없음",
+                ToolTip    = exists ? "✅ 경로 존재" : "❌ 경로 없음",
                 FontFamily = new FontFamily("Cascadia Mono, Consolas"),
-                Padding = new Thickness(6, 3, 6, 3)
+                Padding    = new Thickness(6, 3, 6, 3)
             };
             lb.Items.Add(item);
         }
@@ -180,7 +186,7 @@ public partial class MainWindow : Window
 
     private void PathList_SelectionChanged(object sender, SelectionChangedEventArgs e) { }
 
-    private void MoveUp_Click(object sender, RoutedEventArgs e)
+    private async void MoveUp_Click(object sender, RoutedEventArgs e)
     {
         var (lb, scope) = GetPathListFromTag(sender);
         if (lb.SelectedIndex <= 0) return;
@@ -191,12 +197,12 @@ public partial class MainWindow : Window
         var idx = lb.SelectedIndex;
         (entries[idx - 1], entries[idx]) = (entries[idx], entries[idx - 1]);
         EnvService.SetPathEntries(entries, scope);
-        LoadPathList(lb, scope);
+        await LoadPathListAsync(lb, scope);
         lb.SelectedIndex = idx - 1;
         LoadVariables();
     }
 
-    private void MoveDown_Click(object sender, RoutedEventArgs e)
+    private async void MoveDown_Click(object sender, RoutedEventArgs e)
     {
         var (lb, scope) = GetPathListFromTag(sender);
         if (lb.SelectedIndex < 0 || lb.SelectedIndex >= lb.Items.Count - 1) return;
@@ -207,12 +213,12 @@ public partial class MainWindow : Window
         var idx = lb.SelectedIndex;
         (entries[idx + 1], entries[idx]) = (entries[idx], entries[idx + 1]);
         EnvService.SetPathEntries(entries, scope);
-        LoadPathList(lb, scope);
+        await LoadPathListAsync(lb, scope);
         lb.SelectedIndex = idx + 1;
         LoadVariables();
     }
 
-    private void AddPath_Click(object sender, RoutedEventArgs e)
+    private async void AddPath_Click(object sender, RoutedEventArgs e)
     {
         var (lb, scope) = GetPathListFromTag(sender);
 
@@ -232,7 +238,7 @@ public partial class MainWindow : Window
         {
             entries.Add(dlg.SelectedPath);
             EnvService.SetPathEntries(entries, scope);
-            LoadPathList(lb, scope);
+            await LoadPathListAsync(lb, scope);
             LoadVariables();
             ShowMessage($"PATH에 '{dlg.SelectedPath}' 추가됨");
         }
@@ -242,7 +248,7 @@ public partial class MainWindow : Window
         }
     }
 
-    private void RemovePath_Click(object sender, RoutedEventArgs e)
+    private async void RemovePath_Click(object sender, RoutedEventArgs e)
     {
         var (lb, scope) = GetPathListFromTag(sender);
         if (lb.SelectedIndex < 0) return;
@@ -264,7 +270,7 @@ public partial class MainWindow : Window
 
         entries.RemoveAt(lb.SelectedIndex);
         EnvService.SetPathEntries(entries, scope);
-        LoadPathList(lb, scope);
+        await LoadPathListAsync(lb, scope);
         LoadVariables();
         ShowMessage($"PATH에서 '{removed}' 제거됨");
     }
@@ -293,13 +299,13 @@ public partial class MainWindow : Window
         ShowMessage("스냅샷 저장 완료");
     }
 
-    private void ListSnapshots_Click(object sender, RoutedEventArgs e)
+    private async void ListSnapshots_Click(object sender, RoutedEventArgs e)
     {
         var dlg = new SnapshotDialog(_allVars) { Owner = this };
         if (dlg.ShowDialog() == true)
         {
             LoadVariables();
-            LoadPathEntries();
+            await LoadPathEntriesAsync();
             ShowMessage("스냅샷 복원 완료");
         }
     }

@@ -54,7 +54,13 @@
 
                 <!-- 드라이브/경로 선택 -->
                 <ComboBox x:Name="CboDrives" Grid.Column="1" VerticalAlignment="Center"
-                          SelectionChanged="CboDrives_SelectionChanged"/>
+                          SelectionChanged="CboDrives_SelectionChanged">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Display}" TextTrimming="CharacterEllipsis"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
 
                 <!-- 폴더 선택 버튼 -->
                 <Button Grid.Column="3" Style="{StaticResource IconBtn}"

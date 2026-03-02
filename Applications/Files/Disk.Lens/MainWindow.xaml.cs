@@ -52,8 +52,7 @@ public partial class MainWindow : Window
             items.Add(new DriveItem { Path = d.RootDirectory.FullName, Display = label });
         }
 
-        CboDrives.DisplayMemberPath = "Display";
-        CboDrives.ItemsSource       = items;
+        CboDrives.ItemsSource = items;
         if (items.Count > 0) CboDrives.SelectedIndex = 0;
     }
 

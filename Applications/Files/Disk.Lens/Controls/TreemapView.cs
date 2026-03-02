@@ -1,5 +1,3 @@
-using System.Windows.Media.Effects;
-
 namespace DiskLens.Controls;
 
 /// <summary>Squarified 트리맵 렌더링 커스텀 컨트롤</summary>
@@ -10,47 +8,35 @@ public sealed class TreemapView : FrameworkElement
         DependencyProperty.Register(nameof(RootNode), typeof(FileNode), typeof(TreemapView),
             new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsRender, OnDataChanged));
 
-    public static readonly DependencyProperty MaxDepthProperty =
-        DependencyProperty.Register(nameof(MaxDepth), typeof(int), typeof(TreemapView),
-            new FrameworkPropertyMetadata(2, FrameworkPropertyMetadataOptions.AffectsRender, OnDataChanged));
-
     public FileNode? RootNode
     {
         get => (FileNode?)GetValue(RootNodeProperty);
         set => SetValue(RootNodeProperty, value);
     }
 
-    public int MaxDepth
-    {
-        get => (int)GetValue(MaxDepthProperty);
-        set => SetValue(MaxDepthProperty, value);
-    }
-
     // ── 이벤트 ───────────────────────────────────────────────────────────────
-    public event Action<FileNode>? NodeClicked;   // 드릴다운
+    public event Action<FileNode>? NodeClicked;
     public event Action<FileNode>? NodeRightClicked;
 
     // ── 내부 상태 ─────────────────────────────────────────────────────────────
     private List<TreemapBlock> _blocks = [];
     private TreemapBlock? _hovered;
-    private TreemapBlock? _highlighted; // TOP20 하이라이트용
+    private TreemapBlock? _highlighted;
 
     private static readonly Typeface _typeface = new("Segoe UI");
-    private static readonly Pen _borderPen     = new(new SolidColorBrush(Color.FromArgb(60, 255, 255, 255)), 0.5);
-    private static readonly Pen _hoverPen      = new(new SolidColorBrush(Colors.White), 1.5);
-    private static readonly Pen _highlightPen  = new(new SolidColorBrush(Color.FromRgb(0xFF, 0xD7, 0x00)), 2.0);
+    private static readonly Typeface _typefaceBold = new(
+        new FontFamily("Segoe UI"), FontStyles.Normal, FontWeights.SemiBold, FontStretches.Normal);
 
-    static TreemapView()
-    {
-        _borderPen.Freeze();
-        _hoverPen.Freeze();
-        _highlightPen.Freeze();
-    }
+    private static readonly Pen _borderPen     = Freeze(new Pen(new SolidColorBrush(Color.FromArgb(50, 255, 255, 255)), 0.5));
+    private static readonly Pen _hoverPen      = Freeze(new Pen(new SolidColorBrush(Colors.White), 2.0));
+    private static readonly Pen _highlightPen  = Freeze(new Pen(new SolidColorBrush(Color.FromRgb(0xFF, 0xD7, 0x00)), 2.5));
+    private static readonly Pen _folderBorderPen = Freeze(new Pen(new SolidColorBrush(Color.FromArgb(80, 255, 255, 255)), 1.0));
+
+    private static T Freeze<T>(T obj) where T : Freezable { obj.Freeze(); return obj; }
 
     public TreemapView()
     {
         ClipToBounds = true;
-        RenderOptions.SetBitmapScalingMode(this, BitmapScalingMode.HighQuality);
     }
 
     // ── 레이아웃 ─────────────────────────────────────────────────────────────
@@ -69,14 +55,14 @@ public sealed class TreemapView : FrameworkElement
     {
         _blocks = RootNode is null
             ? []
-            : TreemapLayout.Build(RootNode, new Rect(0, 0, ActualWidth, ActualHeight), MaxDepth);
+            : TreemapLayout.Build(RootNode, new Rect(0, 0, ActualWidth, ActualHeight));
         InvalidateVisual();
     }
 
     // ── 렌더링 ───────────────────────────────────────────────────────────────
     protected override void OnRender(DrawingContext dc)
     {
-        dc.DrawRectangle(new SolidColorBrush(Color.FromRgb(0x1A, 0x1A, 0x1A)), null, new Rect(RenderSize));
+        dc.DrawRectangle(new SolidColorBrush(Color.FromRgb(0x12, 0x12, 0x12)), null, new Rect(RenderSize));
 
         double ppd = VisualTreeHelper.GetDpi(this).PixelsPerDip;
 
@@ -84,72 +70,107 @@ public sealed class TreemapView : FrameworkElement
         {
             if (block.Bounds.Width < 1 || block.Bounds.Height < 1) continue;
 
-            var fill = new SolidColorBrush(block.FillColor);
-            if (block == _hovered)
+            bool isHovered     = block == _hovered;
+            bool isHighlighted = block == _highlighted;
+            bool isDir         = block.Node.IsDirectory;
+            bool hasHdr        = isDir && block.Node.Children.Count > 0 && block.Bounds.Height > 20;
+
+            // ── 셀 배경 ──
+            var fillColor = block.FillColor;
+            if (isHovered)
+                fillColor = Brighten(fillColor, 30);
+
+            dc.DrawRectangle(new SolidColorBrush(fillColor), null, block.Bounds);
+
+            // ── 폴더 헤더 바 ──
+            if (hasHdr)
             {
-                var hc = block.FillColor;
-                fill = new SolidColorBrush(Color.FromRgb(
-                    (byte)Math.Min(255, hc.R + 40),
-                    (byte)Math.Min(255, hc.G + 40),
-                    (byte)Math.Min(255, hc.B + 40)));
+                var hdrRect  = new Rect(block.Bounds.X, block.Bounds.Y, block.Bounds.Width, 16);
+                var hdrColor = Brighten(fillColor, 20);
+                dc.DrawRectangle(new SolidColorBrush(hdrColor), null, hdrRect);
+
+                // 헤더 하단 선
+                dc.DrawLine(_folderBorderPen,
+                    new Point(block.Bounds.X, block.Bounds.Y + 16),
+                    new Point(block.Bounds.Right, block.Bounds.Y + 16));
+
+                // 폴더 레이블 (헤더 안)
+                if (block.Bounds.Width > 24)
+                    DrawFolderLabel(dc, block, ppd);
             }
 
-            dc.DrawRectangle(fill, null, block.Bounds);
+            // ── 파일 레이블 (헤더 없는 큰 셀) ──
+            if (!hasHdr && block.Bounds.Width > 50 && block.Bounds.Height > 20)
+                DrawFileLabel(dc, block, ppd);
 
-            var pen = block == _highlighted ? _highlightPen
-                    : block == _hovered     ? _hoverPen
+            // ── 테두리 ──
+            var pen = isHighlighted ? _highlightPen
+                    : isHovered     ? _hoverPen
                     : _borderPen;
             dc.DrawRectangle(null, pen, block.Bounds);
-
-            if (block.Bounds.Width > 50 && block.Bounds.Height > 18)
-                DrawLabel(dc, block, ppd);
         }
     }
 
-    private static void DrawLabel(DrawingContext dc, TreemapBlock block, double ppd)
-    {
-        double fontSize = block.Bounds.Height > 40 ? 11 : 9;
-        string label    = block.Node.Name;
-        if (block.Bounds.Width < 80  && label.Length > 10) label = label[..8]  + "…";
-        else if (block.Bounds.Width < 140 && label.Length > 20) label = label[..18] + "…";
+    private static Color Brighten(Color c, int amount) => Color.FromRgb(
+        (byte)Math.Min(255, c.R + amount),
+        (byte)Math.Min(255, c.G + amount),
+        (byte)Math.Min(255, c.B + amount));
 
-        var ft = new FormattedText(label,
-            System.Globalization.CultureInfo.CurrentCulture,
-            FlowDirection.LeftToRight, _typeface, fontSize, Brushes.White, ppd)
+    private static void DrawFolderLabel(DrawingContext dc, TreemapBlock block, double ppd)
+    {
+        double maxW = block.Bounds.Width - 20;
+        var ft = MakeText(block.Node.Name, _typefaceBold, 10, Colors.White, ppd, maxW);
+        dc.DrawText(ft, new Point(block.Bounds.X + 4, block.Bounds.Y + 2));
+
+        // 크기 텍스트 (이름 오른쪽 또는 아래)
+        if (block.Bounds.Width > 80)
         {
-            MaxTextWidth = block.Bounds.Width - 4,
+            var st = MakeText(block.Node.SizeText, _typeface, 9,
+                Color.FromArgb(180, 220, 220, 220), ppd, 60);
+            double sx = block.Bounds.Right - st.Width - 4;
+            if (sx > block.Bounds.X + ft.Width + 6)
+                dc.DrawText(st, new Point(sx, block.Bounds.Y + 3));
+        }
+    }
+
+    private static void DrawFileLabel(DrawingContext dc, TreemapBlock block, double ppd)
+    {
+        double maxW = block.Bounds.Width - 6;
+        var ft = MakeText(block.Node.Name, _typeface, 10, Colors.White, ppd, maxW);
+        dc.DrawText(ft, new Point(block.Bounds.X + 3, block.Bounds.Y + 3));
+
+        if (block.Bounds.Height > 30)
+        {
+            var st = MakeText(block.Node.SizeText, _typeface, 9,
+                Color.FromArgb(170, 220, 220, 220), ppd, maxW);
+            dc.DrawText(st, new Point(block.Bounds.X + 3, block.Bounds.Y + 15));
+        }
+    }
+
+    private static FormattedText MakeText(string text, Typeface face, double size, Color color, double ppd, double maxWidth)
+    {
+        var ft = new FormattedText(text,
+            System.Globalization.CultureInfo.CurrentCulture,
+            FlowDirection.LeftToRight, face, size,
+            new SolidColorBrush(color), ppd)
+        {
+            MaxTextWidth = Math.Max(1, maxWidth),
             MaxLineCount = 1,
             Trimming     = TextTrimming.CharacterEllipsis,
         };
-        dc.DrawText(ft, new Point(block.Bounds.X + 3, block.Bounds.Y + 3));
-
-        if (block.Bounds.Height > 32)
-        {
-            var st = new FormattedText(block.Node.SizeText,
-                System.Globalization.CultureInfo.CurrentCulture,
-                FlowDirection.LeftToRight, _typeface, 9,
-                new SolidColorBrush(Color.FromArgb(180, 220, 220, 220)), ppd)
-            {
-                MaxTextWidth = block.Bounds.Width - 4,
-                MaxLineCount = 1,
-                Trimming     = TextTrimming.CharacterEllipsis,
-            };
-            dc.DrawText(st, new Point(block.Bounds.X + 3, block.Bounds.Y + 3 + fontSize + 1));
-        }
+        return ft;
     }
 
     // ── 마우스 이벤트 ─────────────────────────────────────────────────────────
     protected override void OnMouseMove(MouseEventArgs e)
     {
         base.OnMouseMove(e);
-        var pos   = e.GetPosition(this);
-        var block = HitTest(pos);
+        var block = HitTest(e.GetPosition(this));
         if (block == _hovered) return;
         _hovered = block;
         InvalidateVisual();
-
         ToolTip = block is null ? null
-            : $"{block.Node.Name}\n{block.Node.SizeText}\n{block.Node.FullPath}";
+            : $"{block.Node.Name}  ({block.Node.SizeText})\n{block.Node.FullPath}";
     }
 
     protected override void OnMouseLeave(MouseEventArgs e)
@@ -176,28 +197,18 @@ public sealed class TreemapView : FrameworkElement
     }
 
     // ── 공개 메서드 ───────────────────────────────────────────────────────────
-    /// <summary>특정 파일 하이라이트 (TOP20 목록 선택 시)</summary>
     public void Highlight(string? fullPath)
     {
         _highlighted = fullPath is null ? null
             : _blocks.FirstOrDefault(b => b.Node.FullPath == fullPath);
         InvalidateVisual();
-        if (_highlighted != null)
-            ScrollIntoView(_highlighted.Bounds);
     }
 
-    private void ScrollIntoView(Rect bounds)
-    {
-        // TreemapView는 자체 스크롤 없음. 시각적 표시만으로 충분.
-    }
-
+    // 가장 작은(깊은) 블록 우선 — 역순 탐색
     private TreemapBlock? HitTest(Point p)
     {
-        // 가장 작은(깊은) 블록 우선 — 역순 탐색
         for (int i = _blocks.Count - 1; i >= 0; i--)
-        {
             if (_blocks[i].Bounds.Contains(p)) return _blocks[i];
-        }
         return null;
     }
 }

@@ -107,17 +107,21 @@ public static class RestartManagerService
                 }
                 catch { }
 
-                // 아이콘 추출 (실행 파일 경로가 있을 때만)
+                // 아이콘 추출 — 백그라운드 스레드이므로 반드시 Freeze 후 반환
                 ImageSource? icon = null;
                 if (!string.IsNullOrEmpty(execPath))
                 {
                     try
                     {
-                        var sysIcon = System.Drawing.Icon.ExtractAssociatedIcon(execPath);
+                        using var sysIcon = System.Drawing.Icon.ExtractAssociatedIcon(execPath);
                         if (sysIcon != null)
-                            icon = System.Windows.Interop.Imaging.CreateBitmapSourceFromHIcon(
+                        {
+                            var bmp = System.Windows.Interop.Imaging.CreateBitmapSourceFromHIcon(
                                 sysIcon.Handle, Int32Rect.Empty,
                                 BitmapSizeOptions.FromEmptyOptions());
+                            bmp.Freeze(); // UI 스레드에서 안전하게 사용하려면 필수
+                            icon = bmp;
+                        }
                     }
                     catch { }
                 }

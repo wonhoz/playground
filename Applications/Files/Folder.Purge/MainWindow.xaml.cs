@@ -148,6 +148,8 @@ public partial class MainWindow : Window
 
     private void ShowResults(List<FolderEntry> results)
     {
+        // 같은 List 인스턴스 재할당 시 WPF가 변경 없음으로 판단해 UI 미갱신하는 문제 방지
+        ResultListView.ItemsSource = null;
         ResultListView.ItemsSource = results;
 
         bool hasItems = results.Count > 0;

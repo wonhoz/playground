@@ -1,0 +1,317 @@
+<Window x:Class="DiskLens.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ctrl="clr-namespace:DiskLens.Controls"
+        Title="Disk Lens" Height="700" Width="1180" MinWidth="800" MinHeight="500"
+        Background="{StaticResource BgBrush0}"
+        Foreground="{StaticResource TextPrimaryBrush}"
+        FontFamily="Segoe UI" FontSize="13"
+        WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <Style x:Key="HeaderText" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{StaticResource TextSecondaryBrush}"/>
+            <Setter Property="FontSize" Value="11"/>
+            <Setter Property="Margin" Value="0,0,0,4"/>
+        </Style>
+        <Style x:Key="IconBtn" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+            <Setter Property="Width" Value="28"/>
+            <Setter Property="Height" Value="28"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="FontFamily" Value="Segoe MDL2 Assets"/>
+            <Setter Property="FontSize" Value="12"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="48"/>    <!-- 툴바 -->
+            <RowDefinition Height="34"/>    <!-- 브레드크럼 -->
+            <RowDefinition Height="*"/>     <!-- 메인 콘텐츠 -->
+            <RowDefinition Height="24"/>    <!-- 상태바 -->
+        </Grid.RowDefinitions>
+
+        <!-- ════ 툴바 ════ -->
+        <Border Grid.Row="0" Background="{StaticResource BgBrush1}"
+                BorderBrush="{StaticResource BorderBrush}" BorderThickness="0,0,0,1">
+            <Grid Margin="12,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="220"/>
+                    <ColumnDefinition Width="8"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- 앱 타이틀 -->
+                <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,16,0">
+                    <TextBlock Text="&#xE8B7;" FontFamily="Segoe MDL2 Assets" FontSize="20"
+                               Foreground="{StaticResource AccentBrush}" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                    <TextBlock Text="Disk Lens" FontSize="15" FontWeight="SemiBold"
+                               Foreground="{StaticResource TextPrimaryBrush}" VerticalAlignment="Center"/>
+                </StackPanel>
+
+                <!-- 드라이브/경로 선택 -->
+                <ComboBox x:Name="CboDrives" Grid.Column="1" VerticalAlignment="Center"
+                          SelectionChanged="CboDrives_SelectionChanged"/>
+
+                <!-- 폴더 선택 버튼 -->
+                <Button Grid.Column="3" Style="{StaticResource IconBtn}"
+                        ToolTip="폴더 선택" Click="BtnBrowse_Click"
+                        Margin="0,0,8,0">
+                    <TextBlock Text="&#xED25;" FontFamily="Segoe MDL2 Assets" FontSize="14"/>
+                </Button>
+
+                <!-- 진행 상태 -->
+                <StackPanel Grid.Column="4" Orientation="Horizontal" VerticalAlignment="Center"
+                            x:Name="PnlProgress" Visibility="Collapsed">
+                    <TextBlock x:Name="TxtProgress" Text="스캔 중..." Foreground="{StaticResource TextSecondaryBrush}"
+                               VerticalAlignment="Center" Margin="0,0,8,0" FontSize="12"/>
+                </StackPanel>
+
+                <!-- 스캔/취소 버튼 -->
+                <StackPanel Grid.Column="5" Orientation="Horizontal" VerticalAlignment="Center">
+                    <Button x:Name="BtnScan" Content="스캔" Width="64" Height="30" Click="BtnScan_Click"
+                            Background="#1E3060" BorderBrush="{StaticResource AccentBrush}"
+                            Foreground="{StaticResource AccentBrush}"/>
+                    <Button x:Name="BtnCancel" Content="취소" Width="64" Height="30" Margin="6,0,0,0"
+                            Click="BtnCancel_Click" Visibility="Collapsed"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- ════ 브레드크럼 ════ -->
+        <Border Grid.Row="1" Background="{StaticResource BgBrush1}"
+                BorderBrush="{StaticResource BorderBrush}" BorderThickness="0,0,0,1">
+            <Grid Margin="12,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- 위로 버튼 -->
+                <Button Grid.Column="0" Style="{StaticResource IconBtn}"
+                        ToolTip="상위 폴더로" Click="BtnUp_Click"
+                        Margin="0,0,8,0" x:Name="BtnUp" IsEnabled="False">
+                    <TextBlock Text="&#xE74A;" FontFamily="Segoe MDL2 Assets" FontSize="11"/>
+                </Button>
+
+                <!-- 브레드크럼 경로 -->
+                <ScrollViewer Grid.Column="1" HorizontalScrollBarVisibility="Auto"
+                              VerticalScrollBarVisibility="Disabled" VerticalAlignment="Center">
+                    <ItemsControl x:Name="Breadcrumb">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                    <Button Content="{Binding Name}" Tag="{Binding}"
+                                            Click="BreadcrumbItem_Click"
+                                            Background="Transparent" BorderThickness="0"
+                                            Foreground="{StaticResource AccentBrush}"
+                                            Padding="2,0" Cursor="Hand" FontSize="12"/>
+                                    <TextBlock Text=" › " Foreground="{StaticResource TextSecondaryBrush}"
+                                               VerticalAlignment="Center" FontSize="12"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+
+                <!-- 총 크기 표시 -->
+                <TextBlock Grid.Column="2" x:Name="TxtTotalSize" Text=""
+                           Foreground="{StaticResource TextSecondaryBrush}" FontSize="11"
+                           VerticalAlignment="Center" Margin="8,0,0,0"/>
+            </Grid>
+        </Border>
+
+        <!-- ════ 메인 콘텐츠 ════ -->
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>           <!-- 트리맵 -->
+                <ColumnDefinition Width="5"/>           <!-- 스플리터 -->
+                <ColumnDefinition Width="240" MinWidth="180" MaxWidth="400"/> <!-- 사이드 패널 -->
+            </Grid.ColumnDefinitions>
+
+            <!-- 트리맵 뷰 -->
+            <Border Grid.Column="0" Background="{StaticResource BgBrush0}">
+                <Grid>
+                    <!-- 스캔 전 안내 -->
+                    <StackPanel x:Name="PnlEmpty" VerticalAlignment="Center" HorizontalAlignment="Center"
+                                Visibility="Visible">
+                        <TextBlock Text="&#xE8B7;" FontFamily="Segoe MDL2 Assets" FontSize="64"
+                                   Foreground="#333345" HorizontalAlignment="Center" Margin="0,0,0,16"/>
+                        <TextBlock Text="드라이브 또는 폴더를 선택한 후 스캔하세요"
+                                   Foreground="{StaticResource TextSecondaryBrush}" FontSize="14"
+                                   HorizontalAlignment="Center"/>
+                    </StackPanel>
+
+                    <!-- 트리맵 -->
+                    <ctrl:TreemapView x:Name="Treemap" Visibility="Collapsed"
+                                      NodeClicked="Treemap_NodeClicked"
+                                      NodeRightClicked="Treemap_NodeRightClicked"/>
+
+                    <!-- 스캔 중 오버레이 -->
+                    <Border x:Name="PnlScanning" Visibility="Collapsed"
+                            Background="#AA1A1A1A">
+                        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <TextBlock Text="스캔 중..." FontSize="18"
+                                       Foreground="{StaticResource AccentBrush}"
+                                       HorizontalAlignment="Center" Margin="0,0,0,8"/>
+                            <TextBlock x:Name="TxtScanDetail" Text="" FontSize="11"
+                                       Foreground="{StaticResource TextSecondaryBrush}"
+                                       HorizontalAlignment="Center" MaxWidth="400"
+                                       TextTrimming="CharacterEllipsis"/>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+            </Border>
+
+            <!-- 그리드 스플리터 -->
+            <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch"
+                          Background="{StaticResource BorderBrush}"
+                          ResizeBehavior="PreviousAndNext"/>
+
+            <!-- ── 사이드 패널 ── -->
+            <Border Grid.Column="2" Background="{StaticResource BgBrush1}"
+                    BorderBrush="{StaticResource BorderBrush}" BorderThickness="1,0,0,0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>  <!-- TOP 20 헤더 -->
+                        <RowDefinition Height="*"/>     <!-- TOP 20 목록 -->
+                        <RowDefinition Height="1"/>     <!-- 구분선 -->
+                        <RowDefinition Height="Auto"/>  <!-- 범례 헤더 -->
+                        <RowDefinition Height="Auto"/>  <!-- 범례 -->
+                    </Grid.RowDefinitions>
+
+                    <!-- TOP 20 헤더 -->
+                    <Border Grid.Row="0" Padding="10,8" BorderBrush="{StaticResource BorderBrush}" BorderThickness="0,0,0,1">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="&#xE8D4;" FontFamily="Segoe MDL2 Assets" FontSize="13"
+                                       Foreground="{StaticResource AccentBrush}" Margin="0,0,6,0" VerticalAlignment="Center"/>
+                            <TextBlock Text="TOP 20 큰 파일" FontWeight="SemiBold" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- TOP 20 목록 -->
+                    <ListBox Grid.Row="1" x:Name="LstTop20"
+                             ItemContainerStyle="{StaticResource TopItemStyle}"
+                             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                             SelectionChanged="LstTop20_SelectionChanged"
+                             Margin="4,4,4,0">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="20"/>
+                                        <ColumnDefinition Width="8"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+
+                                    <!-- 순위 -->
+                                    <TextBlock Grid.Column="0" Grid.RowSpan="2"
+                                               Text="{Binding Rank}" FontSize="10"
+                                               Foreground="{StaticResource TextSecondaryBrush}"
+                                               VerticalAlignment="Center" HorizontalAlignment="Right"/>
+
+                                    <!-- 확장자 색상 점 -->
+                                    <Border Grid.Column="1" Grid.RowSpan="2" Width="6" Height="6"
+                                            CornerRadius="3" VerticalAlignment="Center" Margin="4,0">
+                                        <Border.Background>
+                                            <SolidColorBrush Color="{Binding ExtColor}"/>
+                                        </Border.Background>
+                                    </Border>
+
+                                    <!-- 파일명 -->
+                                    <TextBlock Grid.Column="2" Grid.Row="0"
+                                               Text="{Binding Name}" FontSize="12"
+                                               TextTrimming="CharacterEllipsis"/>
+
+                                    <!-- 크기 -->
+                                    <TextBlock Grid.Column="2" Grid.Row="1"
+                                               Text="{Binding SizeText}" FontSize="10"
+                                               Foreground="{StaticResource TextSecondaryBrush}"/>
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+
+                    <!-- 구분선 -->
+                    <Border Grid.Row="2" Background="{StaticResource BorderBrush}"/>
+
+                    <!-- 범례 헤더 -->
+                    <Border Grid.Row="3" Padding="10,6" BorderBrush="{StaticResource BorderBrush}" BorderThickness="0,1,0,1">
+                        <TextBlock Text="파일 형식" FontSize="11" Foreground="{StaticResource TextSecondaryBrush}"/>
+                    </Border>
+
+                    <!-- 범례 -->
+                    <ItemsControl Grid.Row="4" x:Name="Legend" Margin="10,6,10,10">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" Margin="0,2,8,2">
+                                    <Border Width="10" Height="10" CornerRadius="2" Margin="0,0,4,0" VerticalAlignment="Center">
+                                        <Border.Background>
+                                            <SolidColorBrush Color="{Binding Color}"/>
+                                        </Border.Background>
+                                    </Border>
+                                    <TextBlock Text="{Binding Label}" FontSize="10"
+                                               Foreground="{StaticResource TextSecondaryBrush}"
+                                               VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </Grid>
+            </Border>
+        </Grid>
+
+        <!-- ════ 상태바 ════ -->
+        <Border Grid.Row="3" Background="{StaticResource BgBrush1}"
+                BorderBrush="{StaticResource BorderBrush}" BorderThickness="0,1,0,0">
+            <Grid Margin="12,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock x:Name="TxtStatus" Grid.Column="0"
+                           Foreground="{StaticResource TextSecondaryBrush}" FontSize="11"
+                           VerticalAlignment="Center" TextTrimming="CharacterEllipsis"/>
+                <TextBlock x:Name="TxtFileCount" Grid.Column="1"
+                           Foreground="{StaticResource TextSecondaryBrush}" FontSize="11"
+                           VerticalAlignment="Center" Margin="0,0,16,0"/>
+                <TextBlock x:Name="TxtDirCount" Grid.Column="2"
+                           Foreground="{StaticResource TextSecondaryBrush}" FontSize="11"
+                           VerticalAlignment="Center"/>
+            </Grid>
+        </Border>
+    </Grid>
+
+    <!-- 우클릭 컨텍스트 메뉴 -->
+    <Window.ContextMenu>
+        <ContextMenu x:Name="NodeMenu" Background="{StaticResource BgBrush2}"
+                     BorderBrush="{StaticResource BorderBrush}" BorderThickness="1">
+            <MenuItem x:Name="MenuOpenExplorer" Header="탐색기에서 열기" Click="MenuOpenExplorer_Click"
+                      Foreground="{StaticResource TextPrimaryBrush}" Background="Transparent"/>
+            <MenuItem x:Name="MenuCopyPath" Header="경로 복사" Click="MenuCopyPath_Click"
+                      Foreground="{StaticResource TextPrimaryBrush}" Background="Transparent"/>
+            <Separator/>
+            <MenuItem x:Name="MenuDelete" Header="삭제" Click="MenuDelete_Click"
+                      Foreground="#FF6B6B" Background="Transparent"/>
+        </ContextMenu>
+    </Window.ContextMenu>
+</Window>

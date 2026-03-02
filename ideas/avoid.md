@@ -2,7 +2,7 @@
 
 > 이 파일은 브레인스토밍 시 **이미 제안되거나 구현된 아이디어를 다시 꺼내지 않도록** 하는 필터다.
 > 새 아이디어를 제안하기 전 반드시 이 목록을 확인할 것.
-> 마지막 갱신: 2026-02-28
+> 마지막 갱신: 2026-03-02
 
 ---
 
@@ -200,6 +200,43 @@
 | `Type.Wand` | 텍스트 즉석 변환 (대소문자, 케이스, 인코딩 등) — Text.Forge와 유사 | idea_20260220b |
 | `Subtitle.Sync` | SRT 자막 싱크 오프셋 조정기 | idea.md |
 
+### System / Files / Media
+
+| 이름 | 핵심 기능 | 출처 |
+|------|----------|------|
+| `Disk.Lens` | 트리맵(Squarified) 디스크 사용량 시각화 (WinDirStat 대체, 드릴다운, 확장자 색상 필터) | idea_20260302 |
+| `Img.Forge` | 이미지 일괄 처리기 (리사이즈·변환·필터·워터마크, 폴더 감시 자동 처리) | idea_20260302 |
+
+### Security
+
+| 이름 | 핵심 기능 | 출처 |
+|------|----------|------|
+| `Pass.Vault` | 완전 로컬 비밀번호 관리자 (AES-256-GCM + Argon2id, Windows Hello, 감사 리포트) | idea_20260302 |
+
+### Tray / Network
+
+| 이름 | 핵심 기능 | 출처 |
+|------|----------|------|
+| `Zone.Watch` | 다중 시간대 세계시계 트레이 (팀원 매핑, 미팅 타임파인더, 세계지도 야간 경계선) | idea_20260302 |
+| `Drop.Bridge` | LAN mDNS 파일 전송기 (드래그&드롭, 재개 지원, AirDrop Windows 대체) | idea_20260302 |
+| `Serve.Cast` | 폴더 즉시 HTTP 서버 GUI (CORS 설정, HTTPS 자가 서명, SPA 모드, QR 접속) | idea_20260302 |
+
+### Productivity / Notes / Finance
+
+| 이름 | 핵심 기능 | 출처 |
+|------|----------|------|
+| `Ink.Cast` | 경량 로컬 마크다운 노트 (양방향 링크, 그래프 뷰, 태그, FTS, Obsidian lite) | idea_20260302 |
+| `Form.Blast` | 문서 템플릿 변수 치환 자동 채우기 (CSV 일괄, DOCX/PDF 출력, 조건부 블록) | idea_20260302 |
+| `Focus.Log` | 활성 창 자동 감지 앱 사용시간 추적 (생산성 점수, 히트맵, 제한 알림) | idea_20260302 |
+| `Budget.Cast` | 개인 예산 추적기 (카테고리 자동 분류, 월별 예산 한도, 차트, 은행 CSV 가져오기) | idea_20260302 |
+
+### Dev / Tools / Data
+
+| 이름 | 핵심 기능 | 출처 |
+|------|----------|------|
+| `Access.Check` | 색상 WCAG 대비율 검사 + 색맹 시뮬레이션 (팔레트 매트릭스, 개선 제안) | idea_20260302 |
+| `Table.Craft` | CSV/TSV 경량 GUI 분석기 (100만 행 가상 스크롤, 필터·집계·Pivot, 계산 컬럼) | idea_20260302 |
+
 ---
 
 ### 게임 — 제안된 미구현 아이디어 (idea_20260227)
@@ -215,6 +252,26 @@
 | `Stack.Pop` | Casual / Hyper | 컬러 블록 타워 → 같은 색 3레이어 연쇄 폭발 제거 |
 | `Worm.Rush` | Arcade (Classic+) | Snake 진화판 — 아이템마다 뱀이 변형 (속도, 역방향, 벽통과 등) |
 | `Pixel.Drop` | Puzzle / Tetris | 목표 픽셀 아트 패턴을 완성하는 테트리스 변형 |
+
+---
+
+### 게임 — 제안된 미구현 아이디어 (idea_20260302)
+
+| 이름 | 장르 | 핵심 메커닉 |
+|------|------|------------|
+| `Rope.Swing` | Arcade / Physics | 로프 세그먼트 스윙, Verlet Integration, 앵커 해제·재결합 |
+| `Bounce.House` | Arcade / Physics Shooter | 탄성 반사각, 재질별 반발 계수, 적 격파 |
+| `Stack.Crash` | Puzzle / Destruction | 강체 물리(Box2D), 재질별 블록 탑 무너뜨리기 |
+| `Sand.Fall` | Sandbox / Simulation | 셀룰러 오토마타, 물질 반응 (모래·물·불·기름·씨앗) |
+| `Domino.Chain` | Puzzle / Physics | 도미노 충격량 전달, 연쇄 쓰러짐 퍼즐 |
+| `Magnet.Maze` | Puzzle / Physics | 자기력 벡터 필드, 인력·척력 배치, 공 유도 |
+| `Cloth.Cut` | Puzzle / Physics | 스프링-질량 천 시뮬레이션, 절단 처리 |
+| `Gear.Works` | Puzzle / Engineering | 회전 관절, 기어비, 토크 전달, 벨트·체인 |
+| `Vortex.Pull` | Puzzle / Physics | 소용돌이 벡터 필드, RK4 궤도 예측 |
+| `Orbit.Craft` | Puzzle / Space Sim | N-체 중력, 궤도 역학, 케플러 법칙 |
+| `Rogue.Tile` | Roguelike / Strategy | 절차 생성 던전, 영구 사망, 턴제 전투, 아이템 시너지 |
+| `Word.Bomb` | Word / Speed | 음절 포함 단어 입력, 폭탄 타이머, 콤보 |
+| `Ink.Spread` | Puzzle / Strategy | 잉크 BFS 전파, 차단벽 설치 최적화, 영역 분리 |
 
 ---
 
@@ -292,3 +349,28 @@
 | **전원 계획 자동 전환** | Power.Plan |
 | **앱별 네트워크 차단** | App.Cage |
 | **창 분할 레이아웃 매니저** | Screen.Split (≠ Workspace.Switcher) |
+| **트리맵 디스크 시각화** | Disk.Lens (≠ Photo.Video.Organizer) |
+| **이미지 일괄 처리** | Img.Forge (≠ Photo.Video.Organizer: 날짜 정리기) |
+| **로컬 비밀번호 관리자** | Pass.Vault (≠ Secret.Box: .env 파일 특화) |
+| **다중 시간대 세계시계** | Zone.Watch |
+| **LAN 파일 전송** | Drop.Bridge (≠ Whisper.Ping: 메신저) |
+| **경량 마크다운 노트** | Ink.Cast (≠ Quick.Memo: 단순 플로팅 메모) |
+| **문서 템플릿 변수 치환** | Form.Blast (≠ Auto.Type: 키 스니펫 확장) |
+| **앱 사용시간 자동 추적** | Focus.Log (≠ Time.Track: 프리랜서 청구서) |
+| **색상 접근성 WCAG 검사** | Access.Check |
+| **폴더 즉시 HTTP 서버** | Serve.Cast |
+| **CSV GUI 분석기** | Table.Craft |
+| **개인 예산 추적** | Budget.Cast |
+| **로프 스윙 물리 아케이드** | Rope.Swing |
+| **탄성 반사 슈터** | Bounce.House (≠ Echo.Grid: 타일 페인팅) |
+| **물리 탑 파괴** | Stack.Crash |
+| **Falling Sand 시뮬레이터** | Sand.Fall |
+| **도미노 연쇄 물리** | Domino.Chain |
+| **자기력 유도 퍼즐** | Magnet.Maze |
+| **천 물리 절단** | Cloth.Cut |
+| **기어 기계 물리 퍼즐** | Gear.Works |
+| **소용돌이 중력 유도** | Vortex.Pull (≠ Orbit.Craft) |
+| **N-체 궤도 시뮬레이션** | Orbit.Craft (≠ Vortex.Pull) |
+| **절차 생성 턴제 로그라이크** | Rogue.Tile (≠ Dungeon.Dash: 실시간 액션) |
+| **음절 단어 폭탄 게임** | Word.Bomb (≠ Glyph.Rush: 타이핑 슈터) |
+| **잉크 전파 차단 퍼즐** | Ink.Spread |

@@ -287,32 +287,21 @@
                                                        FontSize="9" Foreground="#555565"
                                                        Margin="0,1,0,0"/>
                                         </StackPanel>
-                                        <Border Grid.Column="1" CornerRadius="3" Padding="5,2" Margin="4,0,0,0"
-                                                VerticalAlignment="Center">
-                                            <Border.Style>
-                                                <Style TargetType="Border">
-                                                    <Setter Property="Background" Value="#1A3A1A"/>
-                                                    <Style.Triggers>
-                                                        <DataTrigger Binding="{Binding IsLocked}" Value="True">
-                                                            <Setter Property="Background" Value="#3A1A1A"/>
-                                                        </DataTrigger>
-                                                    </Style.Triggers>
-                                                </Style>
-                                            </Border.Style>
-                                            <TextBlock Text="{Binding LockCountText}" FontSize="9" FontWeight="SemiBold">
-                                                <TextBlock.Style>
-                                                    <Style TargetType="TextBlock">
-                                                        <Setter Property="Foreground" Value="#4CAF50"/>
-                                                        <Style.Triggers>
-                                                            <DataTrigger Binding="{Binding IsLocked}" Value="True">
-                                                                <Setter Property="Foreground" Value="#FF6B6B"/>
-                                                            </DataTrigger>
-                                                        </Style.Triggers>
-                                                    </Style>
-                                                </TextBlock.Style>
-                                            </TextBlock>
+                                        <Border x:Name="LockBadge" Grid.Column="1"
+                                                CornerRadius="3" Padding="5,2" Margin="4,0,0,0"
+                                                VerticalAlignment="Center" Background="#1A3A1A">
+                                            <TextBlock x:Name="LockText"
+                                                       Text="{Binding LockCountText}"
+                                                       FontSize="9" FontWeight="SemiBold"
+                                                       Foreground="#4CAF50"/>
                                         </Border>
                                     </Grid>
+                                    <DataTemplate.Triggers>
+                                        <DataTrigger Binding="{Binding IsLocked}" Value="True">
+                                            <Setter TargetName="LockBadge" Property="Background" Value="#3A1A1A"/>
+                                            <Setter TargetName="LockText"  Property="Foreground" Value="#FF6B6B"/>
+                                        </DataTrigger>
+                                    </DataTemplate.Triggers>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
                         </ListBox>
@@ -488,27 +477,22 @@
                             <GridViewColumn Header="유형" Width="64">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Border CornerRadius="3" Padding="5,2">
-                                            <Border.Style>
-                                                <Style TargetType="Border">
-                                                    <Setter Property="Background" Value="#2A2A3A"/>
-                                                    <Style.Triggers>
-                                                        <DataTrigger Binding="{Binding AppType}" Value="서비스">
-                                                            <Setter Property="Background" Value="#1A2A3A"/>
-                                                        </DataTrigger>
-                                                        <DataTrigger Binding="{Binding AppType}" Value="탐색기">
-                                                            <Setter Property="Background" Value="#1A3A2A"/>
-                                                        </DataTrigger>
-                                                        <DataTrigger Binding="{Binding AppType}" Value="시스템">
-                                                            <Setter Property="Background" Value="#3A1A1A"/>
-                                                        </DataTrigger>
-                                                    </Style.Triggers>
-                                                </Style>
-                                            </Border.Style>
+                                        <Border x:Name="TypeBadge" CornerRadius="3" Padding="5,2" Background="#2A2A3A">
                                             <TextBlock Text="{Binding AppType}"
                                                        FontSize="10" FontWeight="SemiBold"
                                                        Foreground="#AAAACC"/>
                                         </Border>
+                                        <DataTemplate.Triggers>
+                                            <DataTrigger Binding="{Binding AppType}" Value="서비스">
+                                                <Setter TargetName="TypeBadge" Property="Background" Value="#1A2A3A"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding AppType}" Value="탐색기">
+                                                <Setter TargetName="TypeBadge" Property="Background" Value="#1A3A2A"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding AppType}" Value="시스템">
+                                                <Setter TargetName="TypeBadge" Property="Background" Value="#3A1A1A"/>
+                                            </DataTrigger>
+                                        </DataTemplate.Triggers>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
@@ -516,20 +500,15 @@
                             <GridViewColumn Header="재시작" Width="56">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock VerticalAlignment="Center" FontSize="12">
-                                            <TextBlock.Style>
-                                                <Style TargetType="TextBlock">
-                                                    <Setter Property="Text" Value="&#10007;"/>
-                                                    <Setter Property="Foreground" Value="#555555"/>
-                                                    <Style.Triggers>
-                                                        <DataTrigger Binding="{Binding IsRestartable}" Value="True">
-                                                            <Setter Property="Text" Value="&#10003;"/>
-                                                            <Setter Property="Foreground" Value="#4CAF50"/>
-                                                        </DataTrigger>
-                                                    </Style.Triggers>
-                                                </Style>
-                                            </TextBlock.Style>
-                                        </TextBlock>
+                                        <TextBlock x:Name="RestartMark"
+                                                   Text="✗" Foreground="#555555"
+                                                   VerticalAlignment="Center" FontSize="12"/>
+                                        <DataTemplate.Triggers>
+                                            <DataTrigger Binding="{Binding IsRestartable}" Value="True">
+                                                <Setter TargetName="RestartMark" Property="Text"       Value="✓"/>
+                                                <Setter TargetName="RestartMark" Property="Foreground" Value="#4CAF50"/>
+                                            </DataTrigger>
+                                        </DataTemplate.Triggers>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>

@@ -14,7 +14,7 @@ public static class ExtensionColors
         { ".flv",  Color.FromRgb(0x42, 0x8B, 0xCA) },
         { ".webm", Color.FromRgb(0x42, 0x8B, 0xCA) },
         { ".m4v",  Color.FromRgb(0x42, 0x8B, 0xCA) },
-        { ".ts",   Color.FromRgb(0x42, 0x8B, 0xCA) },
+        { ".mts",  Color.FromRgb(0x42, 0x8B, 0xCA) },
 
         // 오디오 — 보라
         { ".mp3",  Color.FromRgb(0x9B, 0x59, 0xB6) },

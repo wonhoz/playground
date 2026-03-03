@@ -1,0 +1,12 @@
+global using System;
+global using System.Collections.Generic;
+global using System.Linq;
+global using System.Windows;
+global using System.Windows.Controls;
+global using System.Windows.Input;
+global using System.Windows.Media;
+global using System.Windows.Shapes;
+global using System.Windows.Threading;
+global using nkast.Aether.Physics2D.Dynamics;
+global using nkast.Aether.Physics2D.Common;
+global using AetherVector2 = nkast.Aether.Physics2D.Common.Vector2;

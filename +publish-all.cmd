@@ -89,6 +89,7 @@ call :pub "Neon.Slice"            "Games\Arcade\Neon.Slice"                     
 :: ── Games / Puzzle ───────────────────────────────────────────────
 call :pub "Gravity.Flip"          "Games\Puzzle\Gravity.Flip"                            "Gravity.Flip.exe"      "Games\Puzzle"
 call :pub "Hue.Flow"              "Games\Puzzle\Hue.Flow"                                "Hue.Flow.exe"          "Games\Puzzle"
+call :pub "Stack.Crash"           "Games\Puzzle\Stack.Crash"                             "StackCrash.exe"        "Games\Puzzle"
 
 :: ── Games / Racing ───────────────────────────────────────────────
 call :pub "Nitro.Drift"           "Games\Racing\Nitro.Drift"                             "Nitro.Drift.exe"       "Games\Racing"

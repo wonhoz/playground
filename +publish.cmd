@@ -70,6 +70,7 @@ echo !CY!  30!RS! Neon.Run              !DG!Games/Arcade!RS!
 echo !CY!  31!RS! Neon.Slice            !DG!Games/Arcade!RS!
 echo !CY!  32!RS! Gravity.Flip          !DG!Games/Puzzle!RS!
 echo !CY!  33!RS! Hue.Flow              !DG!Games/Puzzle!RS!
+echo !CY!  42!RS! Stack.Crash           !DG!Games/Puzzle!RS!
 echo !CY!  34!RS! Nitro.Drift           !DG!Games/Racing!RS!
 echo !CY!  35!RS! Beat.Drop             !DG!Games/Rhythm!RS!
 echo !CY!  36!RS! Dodge.Blitz           !DG!Games/Shooter!RS!
@@ -139,6 +140,7 @@ for %%n in (!SEL!) do (
     if "%%n"=="31" call :pub "Neon.Slice"             "Games\Arcade\Neon.Slice"                           "Neon.Slice.exe"           "Games\Arcade\Neon.Slice"
     if "%%n"=="32" call :pub "Gravity.Flip"           "Games\Puzzle\Gravity.Flip"                         "Gravity.Flip.exe"         "Games\Puzzle"
     if "%%n"=="33" call :pub "Hue.Flow"               "Games\Puzzle\Hue.Flow"                             "Hue.Flow.exe"             "Games\Puzzle"
+    if "%%n"=="42" call :pub "Stack.Crash"            "Games\Puzzle\Stack.Crash"                          "StackCrash.exe"           "Games\Puzzle"
     if "%%n"=="34" call :pub "Nitro.Drift"            "Games\Racing\Nitro.Drift"                          "Nitro.Drift.exe"          "Games\Racing"
     if "%%n"=="35" call :pub "Beat.Drop"              "Games\Rhythm\Beat.Drop"                            "Beat.Drop.exe"            "Games\Rhythm"
     if "%%n"=="36" call :pub "Dodge.Blitz"            "Games\Shooter\Dodge.Blitz"                         "Dodge.Blitz.exe"          "Games\Shooter"
@@ -197,6 +199,7 @@ call :pub "Neon.Run"              "Games\Arcade\Neon.Run"                       
 call :pub "Neon.Slice"            "Games\Arcade\Neon.Slice"                           "Neon.Slice.exe"           "Games\Arcade\Neon.Slice"
 call :pub "Gravity.Flip"          "Games\Puzzle\Gravity.Flip"                         "Gravity.Flip.exe"         "Games\Puzzle"
 call :pub "Hue.Flow"              "Games\Puzzle\Hue.Flow"                             "Hue.Flow.exe"             "Games\Puzzle"
+call :pub "Stack.Crash"           "Games\Puzzle\Stack.Crash"                          "StackCrash.exe"           "Games\Puzzle"
 call :pub "Nitro.Drift"           "Games\Racing\Nitro.Drift"                          "Nitro.Drift.exe"          "Games\Racing"
 call :pub "Beat.Drop"             "Games\Rhythm\Beat.Drop"                            "Beat.Drop.exe"            "Games\Rhythm"
 call :pub "Dodge.Blitz"           "Games\Shooter\Dodge.Blitz"                         "Dodge.Blitz.exe"          "Games\Shooter"

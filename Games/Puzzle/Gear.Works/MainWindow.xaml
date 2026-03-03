@@ -1,0 +1,91 @@
+<Window x:Class="GearWorks.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Gear.Works" Width="860" Height="560"
+        ResizeMode="NoResize"
+        Background="#1A1A2E" Foreground="#E0E0E0"
+        WindowStartupLocation="CenterScreen"
+        KeyDown="Window_KeyDown"
+        MouseLeftButtonDown="Window_MouseDown"
+        Focusable="True">
+    <Grid>
+        <!-- 게임 Canvas -->
+        <Canvas x:Name="GameCanvas" Background="#1A1A2E" ClipToBounds="True"/>
+
+        <!-- ── 상단 HUD ─────────────────────────────── -->
+        <Grid x:Name="HudPanel" VerticalAlignment="Top" Margin="14,7" Visibility="Collapsed">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                <TextBlock Text="LEVEL " FontSize="13" FontWeight="Bold"
+                           Foreground="#888888" FontFamily="Consolas" VerticalAlignment="Center"/>
+                <TextBlock x:Name="LevelNumText" Text="1" FontSize="13" FontWeight="Bold"
+                           Foreground="#B8A060" FontFamily="Consolas" VerticalAlignment="Center"/>
+                <TextBlock x:Name="LevelNameText" Text="" FontSize="11"
+                           Foreground="#555566" FontFamily="Consolas"
+                           VerticalAlignment="Center" Margin="8,0,0,0"/>
+            </StackPanel>
+
+            <Border Grid.Column="1" Background="#222238" CornerRadius="4"
+                    Padding="14,4" HorizontalAlignment="Center">
+                <TextBlock x:Name="ModeText" Text="[ EDIT ]" FontSize="13" FontWeight="Bold"
+                           Foreground="#B8A060" FontFamily="Consolas" HorizontalAlignment="Center"/>
+            </Border>
+
+            <TextBlock x:Name="TargetText" Grid.Column="2" FontSize="11"
+                       Foreground="#888888" FontFamily="Consolas"
+                       HorizontalAlignment="Right" VerticalAlignment="Center"/>
+        </Grid>
+
+        <!-- ── 하단 힌트 ───────────────────────────── -->
+        <TextBlock x:Name="HintBar" VerticalAlignment="Bottom" HorizontalAlignment="Center"
+                   Margin="0,0,0,8" FontSize="11" FontFamily="Consolas"
+                   Foreground="#333355" Visibility="Collapsed"/>
+
+        <!-- ── 타이틀 ──────────────────────────────── -->
+        <StackPanel x:Name="TitlePanel" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <TextBlock Text="GEAR.WORKS" FontSize="50" FontWeight="Bold"
+                       Foreground="#B8A060" HorizontalAlignment="Center" FontFamily="Consolas">
+                <TextBlock.Effect>
+                    <DropShadowEffect Color="#B8A060" BlurRadius="30" ShadowDepth="0"/>
+                </TextBlock.Effect>
+            </TextBlock>
+            <TextBlock Text="기어 기계 물리 퍼즐" FontSize="13" Foreground="#333355"
+                       HorizontalAlignment="Center" Margin="0,6,0,0" FontFamily="Consolas"/>
+
+            <TextBlock Text="[ ENTER TO START ]" FontSize="16" Foreground="#7A9ACA"
+                       HorizontalAlignment="Center" Margin="0,36,0,0" FontFamily="Consolas">
+                <TextBlock.Effect>
+                    <DropShadowEffect Color="#7A9ACA" BlurRadius="12" ShadowDepth="0"/>
+                </TextBlock.Effect>
+            </TextBlock>
+            <TextBlock FontSize="11" Foreground="#333355" HorizontalAlignment="Center"
+                       Margin="0,24,0,0" FontFamily="Consolas" TextAlignment="Center">
+                <Run Text="클릭  —  슬롯 기어 크기 순환 (없음→소→중→대)"/>
+                <LineBreak/>
+                <Run Text="SPACE  —  실행/리셋    ESC  —  타이틀"/>
+            </TextBlock>
+        </StackPanel>
+
+        <!-- ── 결과 오버레이 ───────────────────────── -->
+        <Border x:Name="ResultOverlay" Background="#CC00000A" Visibility="Collapsed">
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                <TextBlock x:Name="ResultTitle" Text="" FontSize="40" FontWeight="Bold"
+                           HorizontalAlignment="Center" FontFamily="Consolas">
+                    <TextBlock.Effect>
+                        <DropShadowEffect x:Name="ResultGlow" Color="#B8A060" BlurRadius="26" ShadowDepth="0"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <TextBlock x:Name="ResultSub" Text="" FontSize="14"
+                           Foreground="#B8A060" HorizontalAlignment="Center"
+                           Margin="0,12,0,0" FontFamily="Consolas" TextAlignment="Center"/>
+                <TextBlock x:Name="ResultAction" Text="" FontSize="13" Foreground="#555566"
+                           HorizontalAlignment="Center" Margin="0,28,0,0" FontFamily="Consolas"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>

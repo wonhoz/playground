@@ -43,6 +43,7 @@ echo !CY!  14!RS! Log.Lens              !DG!Tools/Dev!RS!
 echo !CY!  15!RS! Signal.Flow           !DG!Tools/Dev!RS!
 echo !CY!  16!RS! Mock.Server           !DG!Tools/Dev!RS!
 echo !CY!  40!RS! Serve.Cast            !DG!Tools/Dev!RS!
+echo !CY!  41!RS! Table.Craft           !DG!Tools/Dev!RS!
 echo.
 echo !BD!!DG!  Tools / Network!RS!
 echo !CY!  17!RS! DNS.Flip              !DG!Tools/Network!RS!
@@ -119,6 +120,7 @@ for %%n in (!SEL!) do (
     if "%%n"=="15" call :pub "Signal.Flow"            "Applications\Tools\Dev\Signal.Flow"                "Signal.Flow.exe"          "Applications\Tools\Dev"
     if "%%n"=="16" call :pub "Mock.Server"            "Applications\Tools\Dev\Mock.Server"                "Mock.Server.exe"          "Applications\Tools\Dev"
     if "%%n"=="40" call :pub "Serve.Cast"             "Applications\Tools\Dev\Serve.Cast"                 "ServeCast.exe"            "Applications\Tools\Dev"
+    if "%%n"=="41" call :pub "Table.Craft"            "Applications\Tools\Dev\Table.Craft"                "TableCraft.exe"           "Applications\Tools\Dev"
     if "%%n"=="17" call :pub "DNS.Flip"               "Applications\Tools\Network\DNS.Flip"               "Dns.Flip.exe"             "Applications\Tools\Network"
     if "%%n"=="18" call :pub "Port.Watch"             "Applications\Tools\Network\Port.Watch"             "Port.Watch.exe"           "Applications\Tools\Network"
     if "%%n"=="19" call :pub "Clipboard.Stacker"      "Applications\Tools\Productivity\Clipboard.Stacker" "Clipboard.Stacker.exe"    "Applications\Tools\Productivity"
@@ -176,6 +178,7 @@ call :pub "Signal.Flow"           "Applications\Tools\Dev\Signal.Flow"          
 :: Mock.Desk → Mock.Server로 통합됨
 call :pub "Mock.Server"           "Applications\Tools\Dev\Mock.Server"                "Mock.Server.exe"          "Applications\Tools\Dev"
 call :pub "Serve.Cast"            "Applications\Tools\Dev\Serve.Cast"                 "ServeCast.exe"            "Applications\Tools\Dev"
+call :pub "Table.Craft"           "Applications\Tools\Dev\Table.Craft"                "TableCraft.exe"           "Applications\Tools\Dev"
 call :pub "DNS.Flip"              "Applications\Tools\Network\DNS.Flip"               "Dns.Flip.exe"             "Applications\Tools\Network"
 call :pub "Port.Watch"            "Applications\Tools\Network\Port.Watch"             "Port.Watch.exe"           "Applications\Tools\Network"
 call :pub "Clipboard.Stacker"     "Applications\Tools\Productivity\Clipboard.Stacker" "Clipboard.Stacker.exe"    "Applications\Tools\Productivity"

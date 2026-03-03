@@ -1,0 +1,302 @@
+<Window x:Class="TableCraft.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Table.Craft"
+        Width="1200" Height="700"
+        MinWidth="800" MinHeight="400"
+        Background="#1E1E2E"
+        Foreground="#CDD6F4"
+        AllowDrop="True"
+        Loaded="Window_Loaded">
+
+    <Window.Resources>
+        <!-- 헤더 정렬 버튼 (투명 플랫) -->
+        <Style x:Key="FlatHeaderBtn" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="bd"
+                                Background="{TemplateBinding Background}"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="bd" Property="Background" Value="#252535"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="bd" Property="Background" Value="#313244"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- 컬럼 헤더 DataTemplate: 정렬 버튼 + 빠른 필터 TextBox -->
+        <DataTemplate x:Key="ColHdrTemplate">
+            <StackPanel MinWidth="60" Background="Transparent">
+                <!-- 정렬 클릭 영역 -->
+                <Button Style="{StaticResource FlatHeaderBtn}"
+                        Tag="{Binding}"
+                        Click="SortBtn_Click">
+                    <StackPanel Orientation="Horizontal" Margin="6,4,4,2">
+                        <TextBlock Text="{Binding TypeLabel}"
+                                   Foreground="#6C7086"
+                                   FontSize="10"
+                                   FontFamily="Consolas"
+                                   Margin="0,0,5,0"
+                                   VerticalAlignment="Center"/>
+                        <TextBlock Text="{Binding Name}"
+                                   Foreground="#CDD6F4"
+                                   FontWeight="SemiBold"
+                                   FontSize="12"
+                                   VerticalAlignment="Center"
+                                   TextTrimming="CharacterEllipsis"/>
+                        <TextBlock Text="{Binding SortIcon}"
+                                   Foreground="#A6E3A1"
+                                   FontWeight="Bold"
+                                   FontSize="12"
+                                   Margin="3,0,0,0"
+                                   VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+                <!-- 빠른 필터 -->
+                <TextBox Text="{Binding FilterText, UpdateSourceTrigger=PropertyChanged}"
+                         Margin="4,1,4,4"
+                         Height="22"
+                         FontSize="11"
+                         FontFamily="Consolas"
+                         Background="#13131F"
+                         BorderBrush="#313244"
+                         Padding="4,1"
+                         PreviewMouseDown="FilterBox_PreviewMouseDown"
+                         ToolTip="빠른 필터 (포함 검색)"/>
+            </StackPanel>
+        </DataTemplate>
+
+        <!-- 구분선 -->
+        <Style x:Key="ToolSeparator" TargetType="Rectangle">
+            <Setter Property="Width" Value="1"/>
+            <Setter Property="Fill" Value="#45475A"/>
+            <Setter Property="Margin" Value="5,4"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>  <!-- 툴바 -->
+            <RowDefinition Height="*"/>     <!-- 본문 -->
+            <RowDefinition Height="Auto"/>  <!-- 상태바 -->
+        </Grid.RowDefinitions>
+
+        <!-- ── 툴바 ──────────────────────────────────────────────────── -->
+        <Border Grid.Row="0"
+                Background="#181825"
+                BorderBrush="#313244"
+                BorderThickness="0,0,0,1">
+            <StackPanel Orientation="Horizontal" Margin="6,4" Height="30">
+                <Button x:Name="BtnOpen" Content="열기" Width="56"
+                        Click="BtnOpen_Click" Margin="2,0" ToolTip="CSV/TSV 파일 열기 (Ctrl+O)"/>
+                <Button x:Name="BtnRecent" Content="최근 ▾" Width="62"
+                        Click="BtnRecent_Click" Margin="2,0" ToolTip="최근 파일 목록"/>
+                <Rectangle Style="{StaticResource ToolSeparator}"/>
+                <Button x:Name="BtnFilter" Content="필터 설정" Width="72"
+                        Click="BtnFilter_Click" Margin="2,0" ToolTip="고급 필터 조건 설정"/>
+                <Button x:Name="BtnClearFilter" Content="필터 초기화" Width="80"
+                        Click="BtnClearFilter_Click" Margin="2,0"/>
+                <Button x:Name="BtnClearSort" Content="정렬 초기화" Width="80"
+                        Click="BtnClearSort_Click" Margin="2,0"/>
+                <Rectangle Style="{StaticResource ToolSeparator}"/>
+                <Button x:Name="BtnCalcCol" Content="계산 컬럼" Width="72"
+                        Click="BtnCalcCol_Click" Margin="2,0" ToolTip="수식 계산 컬럼 추가"/>
+                <Button x:Name="BtnPivot" Content="피벗" Width="50"
+                        Click="BtnPivot_Click" Margin="2,0" ToolTip="피벗 테이블 분석"/>
+                <Rectangle Style="{StaticResource ToolSeparator}"/>
+                <Button x:Name="BtnExport" Content="내보내기" Width="72"
+                        Click="BtnExport_Click" Margin="2,0" ToolTip="필터된 결과를 CSV/TSV로 저장"/>
+            </StackPanel>
+        </Border>
+
+        <!-- ── 본문: DataGrid + 집계 패널 ──────────────────────────── -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="4"/>
+                <ColumnDefinition Width="200" MinWidth="150"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- DataGrid -->
+            <DataGrid x:Name="Dg"
+                      Grid.Column="0"
+                      SelectedCellsChanged="Dg_SelectedCellsChanged"
+                      Drop="Window_Drop"
+                      AllowDrop="True"/>
+
+            <!-- 패널 구분선 -->
+            <GridSplitter Grid.Column="1"
+                          Background="#45475A"
+                          VerticalAlignment="Stretch"
+                          HorizontalAlignment="Stretch"
+                          ShowsPreview="True"/>
+
+            <!-- 집계 패널 -->
+            <Border Grid.Column="2"
+                    Background="#181825"
+                    BorderBrush="#313244"
+                    BorderThickness="1,0,0,0">
+                <DockPanel>
+                    <!-- 패널 헤더 -->
+                    <Border DockPanel.Dock="Top"
+                            Background="#181825"
+                            BorderBrush="#313244"
+                            BorderThickness="0,0,0,1"
+                            Padding="8,7">
+                        <StackPanel>
+                            <TextBlock Text="집계 패널"
+                                       Foreground="#A6E3A1"
+                                       FontSize="12"
+                                       FontWeight="SemiBold"/>
+                            <ComboBox x:Name="CmbAggCol"
+                                      Margin="0,5,0,0"
+                                      Height="26"
+                                      DisplayMemberPath="Name"
+                                      SelectionChanged="CmbAggCol_SelectionChanged"
+                                      ToolTip="집계할 컬럼 선택"/>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- 집계 결과 -->
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                        <StackPanel x:Name="AggContent"
+                                    Margin="10,10,10,0"
+                                    Visibility="Collapsed">
+                            <!-- 기본 통계 -->
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="24"/>
+                                    <RowDefinition Height="24"/>
+                                    <RowDefinition Height="24"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Row="0" Grid.Column="0" Text="COUNT"
+                                           Foreground="#6C7086" FontSize="11" VerticalAlignment="Center"/>
+                                <TextBlock Grid.Row="0" Grid.Column="1" x:Name="TxtCount"
+                                           Foreground="#CDD6F4" FontSize="12" FontFamily="Consolas"
+                                           HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                                <TextBlock Grid.Row="1" Grid.Column="0" Text="DISTINCT"
+                                           Foreground="#6C7086" FontSize="11" VerticalAlignment="Center"/>
+                                <TextBlock Grid.Row="1" Grid.Column="1" x:Name="TxtDistinct"
+                                           Foreground="#CDD6F4" FontSize="12" FontFamily="Consolas"
+                                           HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                                <TextBlock Grid.Row="2" Grid.Column="0" Text="EMPTY"
+                                           Foreground="#6C7086" FontSize="11" VerticalAlignment="Center"/>
+                                <TextBlock Grid.Row="2" Grid.Column="1" x:Name="TxtEmpty"
+                                           Foreground="#F38BA8" FontSize="12" FontFamily="Consolas"
+                                           HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                            </Grid>
+
+                            <Rectangle Height="1" Fill="#313244" Margin="0,8"/>
+
+                            <!-- MIN / MAX -->
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="24"/>
+                                    <RowDefinition Height="24"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Row="0" Grid.Column="0" Text="MIN"
+                                           Foreground="#6C7086" FontSize="11" VerticalAlignment="Center"/>
+                                <TextBlock Grid.Row="0" Grid.Column="1" x:Name="TxtMin"
+                                           Foreground="#CDD6F4" FontSize="11" FontFamily="Consolas"
+                                           HorizontalAlignment="Right" VerticalAlignment="Center"
+                                           TextTrimming="CharacterEllipsis"/>
+                                <TextBlock Grid.Row="1" Grid.Column="0" Text="MAX"
+                                           Foreground="#6C7086" FontSize="11" VerticalAlignment="Center"/>
+                                <TextBlock Grid.Row="1" Grid.Column="1" x:Name="TxtMax"
+                                           Foreground="#CDD6F4" FontSize="11" FontFamily="Consolas"
+                                           HorizontalAlignment="Right" VerticalAlignment="Center"
+                                           TextTrimming="CharacterEllipsis"/>
+                            </Grid>
+
+                            <!-- 수치 통계 (SUM, AVG) -->
+                            <StackPanel x:Name="NumericPanel" Visibility="Collapsed">
+                                <Rectangle Height="1" Fill="#313244" Margin="0,8"/>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="24"/>
+                                        <RowDefinition Height="24"/>
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Grid.Row="0" Grid.Column="0" Text="SUM"
+                                               Foreground="#6C7086" FontSize="11" VerticalAlignment="Center"/>
+                                    <TextBlock Grid.Row="0" Grid.Column="1" x:Name="TxtSum"
+                                               Foreground="#89B4FA" FontSize="12" FontFamily="Consolas"
+                                               HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                                    <TextBlock Grid.Row="1" Grid.Column="0" Text="AVG"
+                                               Foreground="#6C7086" FontSize="11" VerticalAlignment="Center"/>
+                                    <TextBlock Grid.Row="1" Grid.Column="1" x:Name="TxtAvg"
+                                               Foreground="#89B4FA" FontSize="12" FontFamily="Consolas"
+                                               HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                                </Grid>
+                            </StackPanel>
+                        </StackPanel>
+                    </ScrollViewer>
+
+                    <!-- 빈 상태 안내 -->
+                    <TextBlock x:Name="TxtAggEmpty"
+                               Text="셀을 선택하거나&#10;컬럼을 지정하세요"
+                               Foreground="#45475A"
+                               FontSize="11"
+                               TextAlignment="Center"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Margin="0,20,0,0"/>
+                </DockPanel>
+            </Border>
+        </Grid>
+
+        <!-- ── 상태바 ───────────────────────────────────────────────── -->
+        <Border Grid.Row="2"
+                Background="#181825"
+                BorderBrush="#313244"
+                BorderThickness="0,1,0,0">
+            <Grid Margin="8,3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock x:Name="TxtStatus"
+                           Grid.Column="0"
+                           Text="파일을 열거나 드래그 앤 드롭하세요"
+                           Foreground="#6C7086"
+                           FontSize="11"
+                           VerticalAlignment="Center"
+                           TextTrimming="CharacterEllipsis"/>
+                <TextBlock x:Name="TxtRowInfo"
+                           Grid.Column="1"
+                           Foreground="#A6ADC8"
+                           FontSize="11"
+                           FontFamily="Consolas"
+                           VerticalAlignment="Center"/>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

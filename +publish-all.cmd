@@ -64,6 +64,7 @@ call :pub "Port.Watch"            "Applications\Tools\Network\Port.Watch"       
 
 :: ── Applications / Tools / Productivity ─────────────────────────
 call :pub "Char.Art"              "Applications\Tools\Productivity\Char.Art"             "Char.Art.exe"          "Applications\Tools\Productivity"
+call :pub "Ink.Cast"              "Applications\Tools\Productivity\Ink.Cast"             "InkCast.exe"           "Applications\Tools\Productivity"
 call :pub "Clipboard.Stacker"     "Applications\Tools\Productivity\Clipboard.Stacker"    "Clipboard.Stacker.exe" "Applications\Tools\Productivity"
 call :pub "Code.Snap"             "Applications\Tools\Productivity\Code.Snap"            "Code.Snap.exe"         "Applications\Tools\Productivity"
 call :pub "QR.Forge"              "Applications\Tools\Productivity\QR.Forge"             "QR.Forge.exe"          "Applications\Tools\Productivity"

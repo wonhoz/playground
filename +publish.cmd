@@ -55,6 +55,7 @@ echo !CY!  22!RS! Text.Forge            !DG!Tools/Productivity!RS!
 echo !CY!  23!RS! Code.Snap             !DG!Tools/Productivity!RS!
 echo !CY!  24!RS! Word.Cloud            !DG!Tools/Productivity!RS!
 echo !CY!  25!RS! Char.Art              !DG!Tools/Productivity!RS!
+echo !CY!  39!RS! Ink.Cast              !DG!Tools/Productivity!RS!
 echo.
 echo !BD!!DG!  Tools / System!RS!
 echo !CY!  26!RS! Env.Guard             !DG!Tools/System!RS!
@@ -126,6 +127,7 @@ for %%n in (!SEL!) do (
     if "%%n"=="24" call :pub "Word.Cloud"             "Applications\Tools\Productivity\Word.Cloud"        "Word.Cloud.exe"           "Applications\Tools\Productivity"
     if "%%n"=="25" call :pub "Char.Art"               "Applications\Tools\Productivity\Char.Art"          "Char.Art.exe"             "Applications\Tools\Productivity"
     if "%%n"=="26" call :pub "Env.Guard"              "Applications\Tools\System\Env.Guard"               "Env.Guard.exe"            "Applications\Tools\System"
+    if "%%n"=="39" call :pub "Ink.Cast"               "Applications\Tools\Productivity\Ink.Cast"           "InkCast.exe"              "Applications\Tools\Productivity"
     if "%%n"=="27" call :pub "Dungeon.Dash"           "Games\Action\Dungeon.Dash"                         "Dungeon.Dash.exe"         "Games\Action"
     if "%%n"=="28" call :pub "Brick.Blitz"            "Games\Arcade\Brick.Blitz"                          "Brick.Blitz.exe"          "Games\Arcade"
     if "%%n"=="29" call :pub "Dash.City"              "Games\Arcade\Dash.City"                            "Dash.City.exe"            "Games\Arcade"
@@ -181,6 +183,7 @@ call :pub "Code.Snap"             "Applications\Tools\Productivity\Code.Snap"   
 call :pub "Word.Cloud"            "Applications\Tools\Productivity\Word.Cloud"        "Word.Cloud.exe"           "Applications\Tools\Productivity"
 call :pub "Char.Art"              "Applications\Tools\Productivity\Char.Art"          "Char.Art.exe"             "Applications\Tools\Productivity"
 call :pub "Env.Guard"             "Applications\Tools\System\Env.Guard"               "Env.Guard.exe"            "Applications\Tools\System"
+call :pub "Ink.Cast"              "Applications\Tools\Productivity\Ink.Cast"           "InkCast.exe"              "Applications\Tools\Productivity"
 call :pub "Dungeon.Dash"          "Games\Action\Dungeon.Dash"                         "Dungeon.Dash.exe"         "Games\Action"
 call :pub "Brick.Blitz"           "Games\Arcade\Brick.Blitz"                          "Brick.Blitz.exe"          "Games\Arcade"
 call :pub "Dash.City"             "Games\Arcade\Dash.City"                            "Dash.City.exe"            "Games\Arcade"

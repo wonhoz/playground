@@ -1,0 +1,103 @@
+<Window x:Class="ClothCut.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Cloth.Cut" Width="860" Height="560"
+        ResizeMode="NoResize"
+        Background="#1A1A2E" Foreground="#E0E0E0"
+        WindowStartupLocation="CenterScreen"
+        KeyDown="Window_KeyDown"
+        MouseLeftButtonDown="Canvas_MouseDown"
+        MouseMove="Canvas_MouseMove"
+        MouseLeftButtonUp="Canvas_MouseUp"
+        Focusable="True">
+    <Grid>
+        <!-- 게임 Canvas -->
+        <Canvas x:Name="GameCanvas" Background="#1A1A2E" ClipToBounds="True"/>
+
+        <!-- ── 상단 HUD ─────────────────────────────── -->
+        <Grid x:Name="HudPanel" VerticalAlignment="Top" Margin="14,7" Visibility="Collapsed">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- 레벨 + 재질 -->
+            <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                <TextBlock Text="LEVEL " FontSize="13" FontWeight="Bold"
+                           Foreground="#888888" FontFamily="Consolas" VerticalAlignment="Center"/>
+                <TextBlock x:Name="LevelNumText" Text="1" FontSize="13" FontWeight="Bold"
+                           Foreground="#D4A574" FontFamily="Consolas" VerticalAlignment="Center"/>
+                <TextBlock x:Name="MaterialText" Text="" FontSize="11"
+                           Foreground="#666666" FontFamily="Consolas"
+                           VerticalAlignment="Center" Margin="8,0,0,0"/>
+            </StackPanel>
+
+            <!-- 레벨 제목 (중앙) -->
+            <Border Grid.Column="1" Background="#222238" CornerRadius="4"
+                    Padding="14,4" HorizontalAlignment="Center">
+                <TextBlock x:Name="LevelTitleText" Text="" FontSize="13" FontWeight="Bold"
+                           Foreground="#D4A574" FontFamily="Consolas" HorizontalAlignment="Center"/>
+            </Border>
+
+            <!-- 상태 표시 -->
+            <TextBlock x:Name="StateText" Grid.Column="2" FontSize="12"
+                       Foreground="#888888" FontFamily="Consolas"
+                       HorizontalAlignment="Right" VerticalAlignment="Center"/>
+        </Grid>
+
+        <!-- ── 하단 힌트 바 ────────────────────────── -->
+        <TextBlock x:Name="HintBar" VerticalAlignment="Bottom" HorizontalAlignment="Center"
+                   Margin="0,0,0,8" FontSize="11" FontFamily="Consolas"
+                   Foreground="#444466" Visibility="Collapsed"/>
+
+        <!-- ── 타이틀 화면 ─────────────────────────── -->
+        <StackPanel x:Name="TitlePanel" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <TextBlock Text="CLOTH.CUT" FontSize="52" FontWeight="Bold"
+                       Foreground="#D4A574" HorizontalAlignment="Center" FontFamily="Consolas">
+                <TextBlock.Effect>
+                    <DropShadowEffect Color="#D4A574" BlurRadius="32" ShadowDepth="0"/>
+                </TextBlock.Effect>
+            </TextBlock>
+            <TextBlock Text="천 물리 절단 퍼즐" FontSize="13" Foreground="#44445A"
+                       HorizontalAlignment="Center" Margin="0,6,0,0" FontFamily="Consolas"/>
+
+            <TextBlock Text="[ ENTER TO START ]" FontSize="16" Foreground="#FF6B6B"
+                       HorizontalAlignment="Center" Margin="0,36,0,0" FontFamily="Consolas">
+                <TextBlock.Effect>
+                    <DropShadowEffect Color="#FF6B6B" BlurRadius="12" ShadowDepth="0"/>
+                </TextBlock.Effect>
+            </TextBlock>
+
+            <TextBlock FontSize="11" Foreground="#333355" HorizontalAlignment="Center"
+                       Margin="0,24,0,0" FontFamily="Consolas" TextAlignment="Center">
+                <Run Text="마우스 드래그  —  천 절단"/>
+                <LineBreak/>
+                <Run Text="R  —  리셋    ESC  —  타이틀"/>
+            </TextBlock>
+        </StackPanel>
+
+        <!-- ── 판정 결과 오버레이 ─────────────────── -->
+        <Border x:Name="ResultOverlay" Background="#CC00000A" Visibility="Collapsed">
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                <TextBlock x:Name="ResultTitle" Text="" FontSize="38" FontWeight="Bold"
+                           HorizontalAlignment="Center" FontFamily="Consolas">
+                    <TextBlock.Effect>
+                        <DropShadowEffect x:Name="ResultGlow" Color="#FFD700" BlurRadius="26" ShadowDepth="0"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <TextBlock x:Name="ResultSub" Text="" FontSize="14"
+                           Foreground="#D4A574" HorizontalAlignment="Center"
+                           Margin="0,12,0,0" FontFamily="Consolas" TextAlignment="Center"/>
+                <TextBlock x:Name="ResultAction" Text="" FontSize="13" Foreground="#555577"
+                           HorizontalAlignment="Center" Margin="0,26,0,0" FontFamily="Consolas"/>
+            </StackPanel>
+        </Border>
+
+        <!-- 안정화 중 표시 -->
+        <TextBlock x:Name="SettlingText" Text="천이 안정화되는 중..." FontSize="13"
+                   FontFamily="Consolas" Foreground="#444466"
+                   VerticalAlignment="Top" HorizontalAlignment="Center"
+                   Margin="0,36,0,0" Visibility="Collapsed"/>
+    </Grid>
+</Window>

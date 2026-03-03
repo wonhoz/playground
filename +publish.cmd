@@ -68,6 +68,7 @@ echo !CY!  28!RS! Brick.Blitz           !DG!Games/Arcade!RS!
 echo !CY!  29!RS! Dash.City             !DG!Games/Arcade!RS!
 echo !CY!  30!RS! Neon.Run              !DG!Games/Arcade!RS!
 echo !CY!  31!RS! Neon.Slice            !DG!Games/Arcade!RS!
+echo !CY!  43!RS! Sand.Fall             !DG!Games/Sandbox!RS!
 echo !CY!  32!RS! Gravity.Flip          !DG!Games/Puzzle!RS!
 echo !CY!  33!RS! Hue.Flow              !DG!Games/Puzzle!RS!
 echo !CY!  42!RS! Stack.Crash           !DG!Games/Puzzle!RS!
@@ -138,6 +139,7 @@ for %%n in (!SEL!) do (
     if "%%n"=="29" call :pub "Dash.City"              "Games\Arcade\Dash.City"                            "Dash.City.exe"            "Games\Arcade"
     if "%%n"=="30" call :pub "Neon.Run"               "Games\Arcade\Neon.Run"                             "Neon.Run.exe"             "Games\Arcade"
     if "%%n"=="31" call :pub "Neon.Slice"             "Games\Arcade\Neon.Slice"                           "Neon.Slice.exe"           "Games\Arcade\Neon.Slice"
+    if "%%n"=="43" call :pub "Sand.Fall"             "Games\Sandbox\Sand.Fall"                          "SandFall.exe"             "Games\Sandbox"
     if "%%n"=="32" call :pub "Gravity.Flip"           "Games\Puzzle\Gravity.Flip"                         "Gravity.Flip.exe"         "Games\Puzzle"
     if "%%n"=="33" call :pub "Hue.Flow"               "Games\Puzzle\Hue.Flow"                             "Hue.Flow.exe"             "Games\Puzzle"
     if "%%n"=="42" call :pub "Stack.Crash"            "Games\Puzzle\Stack.Crash"                          "StackCrash.exe"           "Games\Puzzle"
@@ -192,6 +194,7 @@ call :pub "Word.Cloud"            "Applications\Tools\Productivity\Word.Cloud"  
 call :pub "Char.Art"              "Applications\Tools\Productivity\Char.Art"          "Char.Art.exe"             "Applications\Tools\Productivity"
 call :pub "Env.Guard"             "Applications\Tools\System\Env.Guard"               "Env.Guard.exe"            "Applications\Tools\System"
 call :pub "Ink.Cast"              "Applications\Tools\Productivity\Ink.Cast"           "InkCast.exe"              "Applications\Tools\Productivity"
+call :pub "Sand.Fall"             "Games\Sandbox\Sand.Fall"                          "SandFall.exe"             "Games\Sandbox"
 call :pub "Dungeon.Dash"          "Games\Action\Dungeon.Dash"                         "Dungeon.Dash.exe"         "Games\Action"
 call :pub "Brick.Blitz"           "Games\Arcade\Brick.Blitz"                          "Brick.Blitz.exe"          "Games\Arcade"
 call :pub "Dash.City"             "Games\Arcade\Dash.City"                            "Dash.City.exe"            "Games\Arcade"

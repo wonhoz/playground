@@ -261,8 +261,8 @@
 |------|------|------------|
 | `Rope.Swing` | Arcade / Physics | 로프 세그먼트 스윙, Verlet Integration, 앵커 해제·재결합 |
 | `Bounce.House` | Arcade / Physics Shooter | 탄성 반사각, 재질별 반발 계수, 적 격파 |
-| `Stack.Crash` | Puzzle / Destruction | 강체 물리(Box2D), 재질별 블록 탑 무너뜨리기 |
-| `Sand.Fall` | Sandbox / Simulation | 셀룰러 오토마타, 물질 반응 (모래·물·불·기름·씨앗) |
+| `Stack.Crash` ✅ | Puzzle / Destruction | 강체 물리(Box2D), 재질별 블록 탑 무너뜨리기 |
+| `Sand.Fall` ✅ | Sandbox / Simulation | 셀룰러 오토마타, 물질 반응 (모래·물·불·기름·씨앗) |
 | `Domino.Chain` | Puzzle / Physics | 도미노 충격량 전달, 연쇄 쓰러짐 퍼즐 |
 | `Magnet.Maze` | Puzzle / Physics | 자기력 벡터 필드, 인력·척력 배치, 공 유도 |
 | `Cloth.Cut` | Puzzle / Physics | 스프링-질량 천 시뮬레이션, 절단 처리 |

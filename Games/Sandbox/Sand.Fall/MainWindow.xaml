@@ -1,0 +1,96 @@
+<Window x:Class="SandFall.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Sand.Fall" Width="1060" Height="700"
+        MinWidth="800" MinHeight="520"
+        Background="{StaticResource BgBrush}"
+        WindowStartupLocation="CenterScreen">
+
+  <Grid>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition Width="*"/>
+      <ColumnDefinition Width="200"/>
+    </Grid.ColumnDefinitions>
+
+    <!-- ══ 시뮬레이션 캔버스 ════════════════════════════════════════════ -->
+    <Border Grid.Column="0" Background="#0D1117" ClipToBounds="True">
+      <Image x:Name="SimImage"
+             Stretch="Uniform"
+             RenderOptions.BitmapScalingMode="NearestNeighbor"
+             HorizontalAlignment="Stretch"
+             VerticalAlignment="Stretch"
+             MouseMove="SimImage_MouseMove"
+             MouseLeftButtonDown="SimImage_MouseDown"
+             MouseLeftButtonUp="SimImage_MouseUp"
+             MouseRightButtonDown="SimImage_RightMouseDown"
+             Cursor="Crosshair"
+             IsHitTestVisible="True"/>
+    </Border>
+
+    <!-- ══ 우측 제어 패널 ════════════════════════════════════════════════ -->
+    <Border Grid.Column="1" Background="{StaticResource PanelBrush}"
+            BorderBrush="{StaticResource BorderBrush}" BorderThickness="1,0,0,0">
+      <StackPanel Margin="10,12,10,10">
+
+        <!-- 타이틀 -->
+        <TextBlock Text="Sand.Fall" Foreground="{StaticResource AccentBrush}"
+                   FontSize="18" FontWeight="Bold" Margin="0,0,0,4"/>
+        <TextBlock Foreground="{StaticResource DimBrush}" FontSize="10" TextWrapping="Wrap"
+                   Text="LClick: 뿌리기  RClick: 지우기" Margin="0,0,0,10"/>
+        <Separator Background="{StaticResource BorderBrush}" Margin="0,0,0,10"/>
+
+        <!-- 물질 선택 -->
+        <TextBlock Text="물질 선택" Foreground="{StaticResource DimBrush}" FontSize="11" Margin="0,0,0,6"/>
+        <WrapPanel x:Name="MatPanel" Margin="0,0,0,12"/>
+
+        <Separator Background="{StaticResource BorderBrush}" Margin="0,0,0,10"/>
+
+        <!-- 브러시 크기 -->
+        <TextBlock Text="브러시 크기" Foreground="{StaticResource DimBrush}" FontSize="11" Margin="0,0,0,4"/>
+        <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+          <Slider x:Name="SldBrush" Minimum="1" Maximum="20" Value="3"
+                  Width="120" VerticalAlignment="Center" SmallChange="1"/>
+          <TextBlock x:Name="TxtBrush" Text="3" Foreground="{StaticResource TextBrush}"
+                     FontSize="13" Margin="8,0,0,0" VerticalAlignment="Center"/>
+        </StackPanel>
+
+        <Separator Background="{StaticResource BorderBrush}" Margin="0,0,0,10"/>
+
+        <!-- 시뮬레이션 속도 -->
+        <TextBlock Text="시뮬레이션 속도" Foreground="{StaticResource DimBrush}" FontSize="11" Margin="0,0,0,4"/>
+        <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+          <Slider x:Name="SldSpeed" Minimum="1" Maximum="4" Value="1"
+                  Width="120" VerticalAlignment="Center" SmallChange="1" IsSnapToTickEnabled="True" TickFrequency="1"/>
+          <TextBlock x:Name="TxtSpeed" Text="×1" Foreground="{StaticResource TextBrush}"
+                     FontSize="13" Margin="8,0,0,0" VerticalAlignment="Center"/>
+        </StackPanel>
+
+        <Separator Background="{StaticResource BorderBrush}" Margin="0,0,0,10"/>
+
+        <!-- 제어 버튼 -->
+        <Button x:Name="BtnPause" Content="⏸ 일시정지" Click="BtnPause_Click" Margin="0,0,0,6"/>
+        <Button Content="🗑 전체 지우기" Click="BtnClear_Click" Margin="0,0,0,6"/>
+        <Button Content="🌧 모래 비" Click="BtnRainSand_Click" Margin="0,0,0,6"/>
+        <Button Content="💧 물 채우기" Click="BtnFillWater_Click" Margin="0,0,0,6"/>
+
+        <Separator Background="{StaticResource BorderBrush}" Margin="0,10,0,10"/>
+
+        <!-- 물질 반응 힌트 -->
+        <TextBlock Text="반응 관계" Foreground="{StaticResource DimBrush}" FontSize="11" Margin="0,0,0,6"/>
+        <TextBlock Foreground="{StaticResource DimBrush}" FontSize="10" TextWrapping="Wrap" LineHeight="16">
+          <Run>🔥 불 + 나무 → 불</Run><LineBreak/>
+          <Run>🔥 불 + 기름 → 불</Run><LineBreak/>
+          <Run>🔥 불 + 물  → 증기</Run><LineBreak/>
+          <Run>🔥 불 + 얼음 → 물</Run><LineBreak/>
+          <Run>🌱 씨앗 + 물 → 식물</Run><LineBreak/>
+          <Run>🧪 산 + 돌   → 용해</Run><LineBreak/>
+          <Run>❄️ 얼음 → 물 동결</Run>
+        </TextBlock>
+
+        <!-- 상태바 -->
+        <TextBlock x:Name="TxtFps" Foreground="{StaticResource DimBrush}"
+                   FontSize="10" Margin="0,12,0,0"/>
+      </StackPanel>
+    </Border>
+  </Grid>
+</Window>

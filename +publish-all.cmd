@@ -78,6 +78,7 @@ call :pub "Word.Cloud"            "Applications\Tools\Productivity\Word.Cloud"  
 call :pub "Env.Guard"             "Applications\Tools\System\Env.Guard"                  "Env.Guard.exe"         "Applications\Tools\System"
 
 :: ── Games / Action ───────────────────────────────────────────────
+call :pub "Sand.Fall"             "Games\Sandbox\Sand.Fall"                              "SandFall.exe"          "Games\Sandbox"
 call :pub "Dungeon.Dash"          "Games\Action\Dungeon.Dash"                            "Dungeon.Dash.exe"      "Games\Action"
 
 :: ── Games / Arcade ───────────────────────────────────────────────

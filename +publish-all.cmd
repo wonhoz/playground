@@ -57,6 +57,7 @@ call :pub "Log.Lens"              "Applications\Tools\Dev\Log.Lens"             
 :: Mock.Desk → Mock.Server로 통합됨
 call :pub "Mock.Server"           "Applications\Tools\Dev\Mock.Server"                   "Mock.Server.exe"       "Applications\Tools\Dev"
 call :pub "Signal.Flow"           "Applications\Tools\Dev\Signal.Flow"                   "Signal.Flow.exe"       "Applications\Tools\Dev"
+call :pub "Serve.Cast"            "Applications\Tools\Dev\Serve.Cast"                    "ServeCast.exe"         "Applications\Tools\Dev"
 
 :: ── Applications / Tools / Network ──────────────────────────────
 call :pub "DNS.Flip"              "Applications\Tools\Network\DNS.Flip"                  "Dns.Flip.exe"          "Applications\Tools\Network"

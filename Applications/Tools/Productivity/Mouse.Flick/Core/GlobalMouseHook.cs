@@ -16,11 +16,13 @@ internal sealed class GlobalMouseHook : IDisposable
     private const int  WM_RBUTTONUP   = 0x0205;
     private const int  WM_MOUSEMOVE   = 0x0200;
 
-    // SendInput으로 주입된 이벤트임을 나타내는 플래그 (재진입 방지)
-    private const uint LLMHF_INJECTED     = 0x00000001;
-    private const uint INPUT_MOUSE        = 0;
+    private const uint INPUT_MOUSE           = 0;
     private const uint MOUSEEVENTF_RIGHTDOWN = 0x0008;
     private const uint MOUSEEVENTF_RIGHTUP   = 0x0010;
+
+    // ReplayRightClick이 주입한 이벤트임을 식별하는 고유 값 (재진입 방지)
+    // LLMHF_INJECTED 전체 차단 금지 — 터치패드/마우스 드라이버도 SendInput을 사용하므로
+    private static readonly IntPtr OurExtraInfo = new IntPtr(unchecked((int)0x4D465447));  // "MFTG"
 
     [StructLayout(LayoutKind.Sequential)]
     private struct MSLLHOOKSTRUCT
@@ -113,8 +115,10 @@ internal sealed class GlobalMouseHook : IDisposable
         var pt  = new Point(hs.pt.X, hs.pt.Y);
         int msg = (int)wParam;
 
-        // SendInput으로 주입된 합성 이벤트는 그대로 통과 (재진입 방지)
-        if ((hs.flags & LLMHF_INJECTED) != 0)
+        // 우리가 ReplayRightClick으로 주입한 이벤트만 통과 (재진입 방지)
+        // LLMHF_INJECTED 전체 차단 금지: 터치패드·마우스 드라이버도 SendInput을 사용하여
+        // LLMHF_INJECTED가 설정될 수 있으므로 전체 차단 시 제스처가 인식되지 않음
+        if (hs.dwExtraInfo == OurExtraInfo)
             return CallNextHookEx(_hookId, nCode, wParam, lParam);
 
         switch (msg)
@@ -182,10 +186,12 @@ internal sealed class GlobalMouseHook : IDisposable
     private static void ReplayRightClick()
     {
         var inputs = new MOUSE_INPUT[2];
-        inputs[0].type    = INPUT_MOUSE;
-        inputs[0].dwFlags = MOUSEEVENTF_RIGHTDOWN;
-        inputs[1].type    = INPUT_MOUSE;
-        inputs[1].dwFlags = MOUSEEVENTF_RIGHTUP;
+        inputs[0].type        = INPUT_MOUSE;
+        inputs[0].dwFlags     = MOUSEEVENTF_RIGHTDOWN;
+        inputs[0].dwExtraInfo = OurExtraInfo;   // 우리가 주입한 이벤트임을 표시
+        inputs[1].type        = INPUT_MOUSE;
+        inputs[1].dwFlags     = MOUSEEVENTF_RIGHTUP;
+        inputs[1].dwExtraInfo = OurExtraInfo;
         SendInput(2, inputs, Marshal.SizeOf<MOUSE_INPUT>());
     }
 

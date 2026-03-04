@@ -77,11 +77,7 @@ internal sealed class TrayApplicationContext : ApplicationContext
             Font            = new Font("Segoe UI", 9.5f),
         };
 
-        miEnabled = new ToolStripMenuItem("🖱 제스처 활성화", null, OnToggleEnabled)
-        {
-            Checked      = _settings.Enabled,
-            CheckOnClick = true,
-        };
+        miEnabled = new ToolStripMenuItem(EnabledText(_settings.Enabled), null, OnToggleEnabled);
 
         menu.Items.Add(miEnabled);
         menu.Items.Add(new ToolStripSeparator());
@@ -94,11 +90,15 @@ internal sealed class TrayApplicationContext : ApplicationContext
 
     private void OnToggleEnabled(object? sender, EventArgs e)
     {
-        _settings.Enabled = _miEnabled.Checked;
+        _settings.Enabled  = !_settings.Enabled;
+        _miEnabled.Text    = EnabledText(_settings.Enabled);
         _settings.Save();
         if (_settings.Enabled) _hook.Install();
         else                    _hook.Uninstall();
     }
+
+    private static string EnabledText(bool enabled) =>
+        enabled ? "🖱 제스처 활성화  ✓" : "🖱 제스처 활성화  ✗";
 
     private void OnSettings(object? sender, EventArgs e)
     {

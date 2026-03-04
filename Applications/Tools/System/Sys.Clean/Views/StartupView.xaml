@@ -49,10 +49,14 @@
         <!-- 목록 -->
         <ListView x:Name="StartupList" Grid.Row="2" Margin="16,8,16,0"
                   Background="#1E1E1E" BorderThickness="1" BorderBrush="#333"
-                  MouseDoubleClick="StartupList_MouseDoubleClick">
+                  MouseDoubleClick="StartupList_MouseDoubleClick"
+                  GridViewColumnHeader.Click="OnColumnHeaderClick">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="프로그램 이름" Width="220">
+                    <GridViewColumn Width="220">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Content="프로그램 이름" Tag="Name"/>
+                        </GridViewColumn.Header>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Name}" TextTrimming="CharacterEllipsis"
@@ -60,7 +64,10 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="상태" Width="90">
+                    <GridViewColumn Width="90">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Content="상태" Tag="IsEnabled"/>
+                        </GridViewColumn.Header>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <Border x:Name="StatusBorder" CornerRadius="3" Padding="6,2" Margin="2">
@@ -90,7 +97,10 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="위치" Width="150">
+                    <GridViewColumn Width="150">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Content="위치" Tag="LocationText"/>
+                        </GridViewColumn.Header>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding LocationText}" Foreground="#888"
@@ -98,7 +108,10 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="명령" Width="420">
+                    <GridViewColumn Width="420">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Content="명령" Tag="Command"/>
+                        </GridViewColumn.Header>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Command}" Foreground="#666"

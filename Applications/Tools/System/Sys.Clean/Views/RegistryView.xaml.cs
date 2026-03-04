@@ -11,6 +11,10 @@ public partial class RegistryView : UserControl
     private List<RegistryIssue> _issues = [];
     private CancellationTokenSource? _cts;
 
+    private GridViewColumnHeader? _sortHeader;
+    private string? _sortColumn;
+    private bool _sortAscending = true;
+
     public RegistryView()
     {
         InitializeComponent();
@@ -38,6 +42,7 @@ public partial class RegistryView : UserControl
         {
             _issues = await _service.ScanAsync(_cts.Token);
             IssueList.ItemsSource = _issues;
+            ApplySort();
             TbStatus.Text = $"스캔 완료";
             TbCount.Text = _issues.Count > 0
                 ? $"— {_issues.Count}개 문제 발견"
@@ -55,6 +60,31 @@ public partial class RegistryView : UserControl
             BtnScan.Content = "🔍  레지스트리 스캔";
             PbProgress.Visibility = Visibility.Collapsed;
         }
+    }
+
+    private void OnColumnHeaderClick(object sender, RoutedEventArgs e)
+    {
+        if (e.OriginalSource is not GridViewColumnHeader header || header.Tag is not string column)
+            return;
+
+        if (_sortHeader != null && _sortHeader != header)
+            _sortHeader.Content = ((string)_sortHeader.Content).TrimEnd(' ', '▲', '▼');
+
+        if (_sortColumn == column) _sortAscending = !_sortAscending;
+        else { _sortColumn = column; _sortAscending = true; }
+
+        header.Content = ((string)header.Content).TrimEnd(' ', '▲', '▼') + (_sortAscending ? " ▲" : " ▼");
+        _sortHeader = header;
+        ApplySort();
+    }
+
+    private void ApplySort()
+    {
+        if (_sortColumn == null || IssueList.ItemsSource == null) return;
+        var view = CollectionViewSource.GetDefaultView(IssueList.ItemsSource);
+        view.SortDescriptions.Clear();
+        view.SortDescriptions.Add(new SortDescription(_sortColumn,
+            _sortAscending ? ListSortDirection.Ascending : ListSortDirection.Descending));
     }
 
     private async void BtnFix_Click(object sender, RoutedEventArgs e)
@@ -86,6 +116,7 @@ public partial class RegistryView : UserControl
             _issues.RemoveAll(i => i.IsFixed);
             IssueList.ItemsSource = null;
             IssueList.ItemsSource = _issues;
+            ApplySort();
             TbStatus.Text = "수정 완료";
             TbCount.Text = _issues.Count > 0 ? $"— 잔여 {_issues.Count}개" : "— 모두 수정됨";
 

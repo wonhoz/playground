@@ -24,32 +24,22 @@
             </StackPanel>
         </Border>
 
-        <!-- 검색 + 정렬 -->
-        <Grid Grid.Row="1" Margin="16,10,16,0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-            <TextBox Grid.Column="0" x:Name="TxtSearch" Padding="8,6"
+        <!-- 검색 -->
+        <Border Grid.Row="1" Padding="16,10,16,0">
+            <TextBox x:Name="TxtSearch" Padding="8,6"
                      TextChanged="TxtSearch_TextChanged"/>
-            <TextBlock Grid.Column="1" Text="정렬:" VerticalAlignment="Center" Foreground="#888"
-                       Margin="10,0,6,0" FontSize="12"/>
-            <ComboBox Grid.Column="2" x:Name="CbSort" Width="120"
-                      SelectionChanged="CbSort_SelectionChanged">
-                <ComboBoxItem Content="이름" IsSelected="True"/>
-                <ComboBoxItem Content="크기"/>
-                <ComboBoxItem Content="설치일"/>
-                <ComboBoxItem Content="제조사"/>
-            </ComboBox>
-        </Grid>
+        </Border>
 
         <!-- 프로그램 목록 -->
         <ListView x:Name="ProgramList" Grid.Row="2" Margin="16,8,16,0"
-                  Background="#1E1E1E" BorderThickness="1" BorderBrush="#333">
+                  Background="#1E1E1E" BorderThickness="1" BorderBrush="#333"
+                  GridViewColumnHeader.Click="OnColumnHeaderClick">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="프로그램 이름" Width="250">
+                    <GridViewColumn Width="250">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Content="프로그램 이름" Tag="Name"/>
+                        </GridViewColumn.Header>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Name}" TextTrimming="CharacterEllipsis"
@@ -58,7 +48,10 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="제조사" Width="170">
+                    <GridViewColumn Width="170">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Content="제조사" Tag="Publisher"/>
+                        </GridViewColumn.Header>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Publisher}" Foreground="#888"
@@ -67,7 +60,10 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="버전" Width="100">
+                    <GridViewColumn Width="100">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Content="버전" Tag="Version"/>
+                        </GridViewColumn.Header>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Version}" Foreground="#888"
@@ -75,7 +71,10 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="크기" Width="90">
+                    <GridViewColumn Width="90">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Content="크기" Tag="SizeBytes"/>
+                        </GridViewColumn.Header>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding SizeText}" Foreground="#4FC3F7"
@@ -83,7 +82,10 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="설치일" Width="100">
+                    <GridViewColumn Width="100">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Content="설치일" Tag="InstallDate"/>
+                        </GridViewColumn.Header>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding InstallDate}" Foreground="#888"

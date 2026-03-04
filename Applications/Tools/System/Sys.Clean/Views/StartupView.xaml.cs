@@ -10,6 +10,10 @@ public partial class StartupView : UserControl
     private readonly StartupService _service = new();
     private List<StartupEntry> _allEntries = [];
 
+    private GridViewColumnHeader? _sortHeader;
+    private string? _sortColumn;
+    private bool _sortAscending = true;
+
     public StartupView()
     {
         InitializeComponent();
@@ -31,6 +35,32 @@ public partial class StartupView : UserControl
             ? _allEntries
             : _allEntries.Where(e => e.Name.ToLower().Contains(search) ||
                                      e.Command.ToLower().Contains(search)).ToList();
+        ApplySort();
+    }
+
+    private void OnColumnHeaderClick(object sender, RoutedEventArgs e)
+    {
+        if (e.OriginalSource is not GridViewColumnHeader header || header.Tag is not string column)
+            return;
+
+        if (_sortHeader != null && _sortHeader != header)
+            _sortHeader.Content = ((string)_sortHeader.Content).TrimEnd(' ', '▲', '▼');
+
+        if (_sortColumn == column) _sortAscending = !_sortAscending;
+        else { _sortColumn = column; _sortAscending = true; }
+
+        header.Content = ((string)header.Content).TrimEnd(' ', '▲', '▼') + (_sortAscending ? " ▲" : " ▼");
+        _sortHeader = header;
+        ApplySort();
+    }
+
+    private void ApplySort()
+    {
+        if (_sortColumn == null || StartupList.ItemsSource == null) return;
+        var view = CollectionViewSource.GetDefaultView(StartupList.ItemsSource);
+        view.SortDescriptions.Clear();
+        view.SortDescriptions.Add(new SortDescription(_sortColumn,
+            _sortAscending ? ListSortDirection.Ascending : ListSortDirection.Descending));
     }
 
     private void TxtSearch_TextChanged(object sender, TextChangedEventArgs e) => ApplyFilter();

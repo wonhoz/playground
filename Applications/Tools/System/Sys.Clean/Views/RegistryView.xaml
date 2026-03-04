@@ -24,10 +24,14 @@
         <!-- 결과 목록 -->
         <ListView x:Name="IssueList" Grid.Row="1" Margin="16,12,16,0"
                   Background="#1E1E1E" BorderThickness="1" BorderBrush="#333"
-                  SelectionMode="Multiple">
+                  SelectionMode="Multiple"
+                  GridViewColumnHeader.Click="OnColumnHeaderClick">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="카테고리" Width="110">
+                    <GridViewColumn Width="110">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Content="카테고리" Tag="Category"/>
+                        </GridViewColumn.Header>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <Border Background="#252525" CornerRadius="3" Padding="5,2" Margin="2,2">
@@ -36,7 +40,10 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="설명" Width="440">
+                    <GridViewColumn Width="440">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Content="설명" Tag="Description"/>
+                        </GridViewColumn.Header>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Description}" TextTrimming="CharacterEllipsis"
@@ -44,7 +51,10 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
-                    <GridViewColumn Header="레지스트리 키" Width="350">
+                    <GridViewColumn Width="350">
+                        <GridViewColumn.Header>
+                            <GridViewColumnHeader Content="레지스트리 키" Tag="KeyPath"/>
+                        </GridViewColumn.Header>
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding KeyPath}" Foreground="#888"

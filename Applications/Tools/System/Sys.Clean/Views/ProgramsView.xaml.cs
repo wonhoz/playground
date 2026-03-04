@@ -10,6 +10,10 @@ public partial class ProgramsView : UserControl
     private readonly ProgramService _service = new();
     private List<InstalledProgram> _allPrograms = [];
 
+    private GridViewColumnHeader? _sortHeader;
+    private string? _sortColumn;
+    private bool _sortAscending = true;
+
     public ProgramsView()
     {
         InitializeComponent();
@@ -36,26 +40,42 @@ public partial class ProgramsView : UserControl
 
         var search = TxtSearch?.Text.Trim().ToLower() ?? "";
         var filtered = string.IsNullOrEmpty(search)
-            ? _allPrograms.AsEnumerable()
+            ? _allPrograms
             : _allPrograms.Where(p =>
                 p.Name.ToLower().Contains(search) ||
-                p.Publisher.ToLower().Contains(search));
+                p.Publisher.ToLower().Contains(search)).ToList();
 
-        var sortIdx = CbSort?.SelectedIndex ?? 0;
-        var sorted = sortIdx switch
-        {
-            1 => filtered.OrderByDescending(p => p.SizeBytes),
-            2 => filtered.OrderByDescending(p => p.InstallDate),
-            3 => filtered.OrderBy(p => p.Publisher).ThenBy(p => p.Name),
-            _ => filtered.OrderBy(p => p.Name),
-        };
-
-        ProgramList.ItemsSource = sorted.ToList();
+        ProgramList.ItemsSource = filtered;
+        ApplySort();
         TbStatus.Text = $"{ProgramList.Items.Count}개 표시 중";
     }
 
+    private void OnColumnHeaderClick(object sender, RoutedEventArgs e)
+    {
+        if (e.OriginalSource is not GridViewColumnHeader header || header.Tag is not string column)
+            return;
+
+        if (_sortHeader != null && _sortHeader != header)
+            _sortHeader.Content = ((string)_sortHeader.Content).TrimEnd(' ', '▲', '▼');
+
+        if (_sortColumn == column) _sortAscending = !_sortAscending;
+        else { _sortColumn = column; _sortAscending = true; }
+
+        header.Content = ((string)header.Content).TrimEnd(' ', '▲', '▼') + (_sortAscending ? " ▲" : " ▼");
+        _sortHeader = header;
+        ApplySort();
+    }
+
+    private void ApplySort()
+    {
+        if (_sortColumn == null || ProgramList.ItemsSource == null) return;
+        var view = CollectionViewSource.GetDefaultView(ProgramList.ItemsSource);
+        view.SortDescriptions.Clear();
+        view.SortDescriptions.Add(new SortDescription(_sortColumn,
+            _sortAscending ? ListSortDirection.Ascending : ListSortDirection.Descending));
+    }
+
     private void TxtSearch_TextChanged(object sender, TextChangedEventArgs e) => ApplyFilter();
-    private void CbSort_SelectionChanged(object sender, SelectionChangedEventArgs e) => ApplyFilter();
     private void BtnRefresh_Click(object sender, RoutedEventArgs e) => Refresh();
 
     private void BtnUninstall_Click(object sender, RoutedEventArgs e)

@@ -72,6 +72,12 @@
                 <Button Content="💾 왼쪽 저장"  Click="BtnSaveLeft_Click"  ToolTip="왼쪽 파일 저장 (Ctrl+S)"/>
                 <Button Content="💾 오른쪽 저장" Click="BtnSaveRight_Click" ToolTip="오른쪽 파일 저장"/>
                 <Separator Width="1" Height="20" Background="#2E2E55" Margin="4,0"/>
+                <ToggleButton x:Name="BtnEditMode" Content="✏ 편집 모드"
+                              Checked="BtnEditMode_Changed" Unchecked="BtnEditMode_Changed"
+                              ToolTip="편집 모드 토글 — 양쪽 텍스트를 직접 편집하고 실시간 diff 확인"
+                              Padding="8,4" Margin="0,0,4,0"
+                              Background="#1E2820" BorderBrush="#3FC878" Foreground="#3FC878"/>
+                <Separator Width="1" Height="20" Background="#2E2E55" Margin="4,0"/>
                 <CheckBox x:Name="ChkIgnoreWS" Content="공백 무시" VerticalAlignment="Center"
                           Checked="ChkOption_Changed" Unchecked="ChkOption_Changed"/>
                 <CheckBox x:Name="ChkIgnoreCase" Content="대소문자 무시" VerticalAlignment="Center"
@@ -90,8 +96,52 @@
             </WrapPanel>
         </Border>
 
+        <!-- 편집 모드 패널 (두 TextBox) -->
+        <Grid Grid.Row="2" x:Name="EditPanel" Visibility="Collapsed">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="4"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Border Grid.Row="0" Background="#0A0A1A" BorderBrush="#2E2E55" BorderThickness="0,0,0,1" Padding="8,4">
+                    <TextBlock Text="왼쪽 편집" Foreground="#3FC878" FontSize="11" FontFamily="Consolas"/>
+                </Border>
+                <TextBox x:Name="LeftEditor" Grid.Row="1"
+                         AcceptsReturn="True" AcceptsTab="True"
+                         HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"
+                         Background="#0F0F1E" Foreground="#E8E8F0"
+                         FontFamily="Consolas" FontSize="11"
+                         BorderThickness="0" Padding="6,4"
+                         TextWrapping="NoWrap"
+                         TextChanged="Editor_TextChanged"/>
+            </Grid>
+            <GridSplitter Grid.Column="1" Width="4" HorizontalAlignment="Stretch"/>
+            <Grid Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Border Grid.Row="0" Background="#0A0A1A" BorderBrush="#2E2E55" BorderThickness="0,0,0,1" Padding="8,4">
+                    <TextBlock Text="오른쪽 편집" Foreground="#3FC878" FontSize="11" FontFamily="Consolas"/>
+                </Border>
+                <TextBox x:Name="RightEditor" Grid.Row="1"
+                         AcceptsReturn="True" AcceptsTab="True"
+                         HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"
+                         Background="#0F0F1E" Foreground="#E8E8F0"
+                         FontFamily="Consolas" FontSize="11"
+                         BorderThickness="0" Padding="6,4"
+                         TextWrapping="NoWrap"
+                         TextChanged="Editor_TextChanged"/>
+            </Grid>
+        </Grid>
+
         <!-- Diff 뷰어 (두 패널) -->
-        <Grid Grid.Row="2">
+        <Grid Grid.Row="2" x:Name="DiffPanel">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="4"/>
@@ -190,6 +240,7 @@
                 </ScrollViewer>
             </Grid>
         </Grid>
+        <!-- /DiffPanel -->
 
         <!-- 상태바 -->
         <Border Grid.Row="3" Background="#0A0A1A" BorderBrush="#2E2E55" BorderThickness="0,1,0,0" Padding="12,6">

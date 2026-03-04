@@ -114,20 +114,25 @@
         </Grid>
 
         <!-- 상태바 -->
-        <Border Grid.Row="3" Background="#0A0A1A" BorderBrush="#2E2E55" BorderThickness="0,1,0,0" Padding="12,6">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock x:Name="TbStatus" Foreground="#8888AA" FontSize="12"
-                           Text="파일을 선택하고 비교를 시작하세요."/>
-                <StackPanel Grid.Column="1" Orientation="Horizontal">
-                    <TextBlock x:Name="TbLeftSize"  Foreground="#5B8FFF" FontSize="11"/>
-                    <TextBlock x:Name="TbRightSize" Foreground="#3FC878" FontSize="11"/>
-                    <TextBlock x:Name="TbDiffRows"  Foreground="#F0B030" FontSize="11"/>
-                </StackPanel>
-            </Grid>
+        <Border Grid.Row="3" Background="#0A0A1A" BorderBrush="#2E2E55" BorderThickness="0,1,0,0">
+            <StackPanel>
+                <ProgressBar x:Name="LoadingBar" Height="3" IsIndeterminate="True"
+                             Visibility="Collapsed" Background="Transparent"
+                             Foreground="#5B8FFF" BorderThickness="0"/>
+                <Grid Margin="12,5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock x:Name="TbStatus" Foreground="#8888AA" FontSize="12"
+                               Text="파일을 선택하고 비교를 시작하세요."/>
+                    <StackPanel Grid.Column="1" Orientation="Horizontal">
+                        <TextBlock x:Name="TbLeftSize"  Foreground="#5B8FFF" FontSize="11"/>
+                        <TextBlock x:Name="TbRightSize" Foreground="#3FC878" FontSize="11" Margin="8,0,0,0"/>
+                        <TextBlock x:Name="TbDiffRows"  Foreground="#F0B030" FontSize="11" Margin="8,0,0,0"/>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
         </Border>
     </Grid>
 </UserControl>

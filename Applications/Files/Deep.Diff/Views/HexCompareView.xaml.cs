@@ -8,25 +8,15 @@ public class HexRowVm
     private static readonly SolidColorBrush DiffBg     = new(Color.FromRgb(0x2A, 0x18, 0x18));
     private static readonly SolidColorBrush FgNormal   = new(Color.FromRgb(0xE8, 0xE8, 0xF0));
     private static readonly SolidColorBrush FgDiff     = new(Color.FromRgb(0xF0, 0xB0, 0x30));
-    private static readonly SolidColorBrush FgAddress  = new(Color.FromRgb(0x55, 0x55, 0x6A));
 
     public required HexDiffRow Data { get; init; }
 
-    private bool AnyDiff => Data.BytesDiffer.Any(d => d);
+    public SolidColorBrush RowBg   => Data.HasDiff ? DiffBg : TransBrush;
+    public SolidColorBrush LeftFg  => Data.HasDiff ? FgDiff : FgNormal;
+    public SolidColorBrush RightFg => Data.HasDiff ? FgDiff : FgNormal;
 
-    public SolidColorBrush RowBg  => AnyDiff ? DiffBg : TransBrush;
-    public SolidColorBrush LeftFg  => AnyDiff ? FgDiff : FgNormal;
-    public SolidColorBrush RightFg => AnyDiff ? FgDiff : FgNormal;
-
-    public string LeftDisplay  => FormatRow(Data.LeftBytes,  Data.Address);
-    public string RightDisplay => FormatRow(Data.RightBytes, Data.Address);
-
-    private string FormatRow(byte[] bytes, long addr)
-    {
-        string hex   = HexDiffService.FormatHex(bytes, long.MaxValue, 0);
-        string ascii = HexDiffService.FormatAscii(bytes, long.MaxValue, 0);
-        return $"  {addr:X8}  {hex}   {ascii}  ";
-    }
+    public string LeftDisplay  => Data.LeftDisplay;
+    public string RightDisplay => Data.RightDisplay;
 }
 
 public partial class HexCompareView : UserControl
@@ -54,11 +44,17 @@ public partial class HexCompareView : UserControl
     {
         string left  = TxtLeftPath.Text.Trim();
         string right = TxtRightPath.Text.Trim();
+        if (!File.Exists(left) && !File.Exists(right)) return;
+
         TbStatus.Text = "로드 중...";
+        LoadingBar.Visibility = Visibility.Visible;
+        LeftHex.ItemsSource  = null;
+        RightHex.ItemsSource = null;
 
         var result = await Task.Run(() => _svc.Compare(left, right));
-
         var vms = result.Rows.Select(r => new HexRowVm { Data = r }).ToList();
+
+        LoadingBar.Visibility = Visibility.Collapsed;
         LeftHex.ItemsSource  = vms;
         RightHex.ItemsSource = vms;
 

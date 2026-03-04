@@ -144,7 +144,6 @@ public partial class FolderCompareView : UserControl
 
         if (item.IsDirectory)
         {
-            // 하위 폴더로 진입
             if (item.LeftFullPath != null && item.RightFullPath != null)
             {
                 TxtLeftPath.Text  = item.LeftFullPath;
@@ -154,9 +153,44 @@ public partial class FolderCompareView : UserControl
         }
         else
         {
-            // 텍스트 비교 열기
-            _main.OpenCompare(CompareMode.Text, item.LeftFullPath, item.RightFullPath);
+            // 파일 확장자로 비교 모드 자동 감지
+            var refPath = item.LeftFullPath ?? item.RightFullPath;
+            var mode = DetectCompareMode(refPath);
+            _main.OpenCompare(mode, item.LeftFullPath, item.RightFullPath);
         }
+    }
+
+    private static readonly HashSet<string> _imageExts = new(StringComparer.OrdinalIgnoreCase)
+        { ".png", ".jpg", ".jpeg", ".bmp", ".gif", ".tiff", ".tif", ".webp", ".ico" };
+
+    private static readonly HashSet<string> _textExts = new(StringComparer.OrdinalIgnoreCase)
+        { ".txt", ".cs", ".vb", ".fs", ".js", ".ts", ".jsx", ".tsx", ".py", ".rb", ".go",
+          ".java", ".c", ".cpp", ".h", ".hpp", ".rs", ".swift", ".kt", ".md", ".json",
+          ".xml", ".xaml", ".html", ".htm", ".css", ".scss", ".less", ".yaml", ".yml",
+          ".toml", ".ini", ".cfg", ".conf", ".sh", ".bat", ".cmd", ".ps1", ".sql",
+          ".csv", ".log", ".gitignore", ".editorconfig" };
+
+    private static CompareMode DetectCompareMode(string? path)
+    {
+        if (path == null) return CompareMode.Text;
+        var ext = Path.GetExtension(path);
+        if (_imageExts.Contains(ext)) return CompareMode.Image;
+        if (_textExts.Contains(ext))  return CompareMode.Text;
+        // 확장자로 판단 불가 시 파일 앞 8KB 읽어서 바이너리 여부 확인
+        if (IsBinaryFile(path)) return CompareMode.Hex;
+        return CompareMode.Text;
+    }
+
+    private static bool IsBinaryFile(string path)
+    {
+        try
+        {
+            using var fs = File.OpenRead(path);
+            var buf = new byte[Math.Min(8192, (int)fs.Length)];
+            int read = fs.Read(buf, 0, buf.Length);
+            return buf.Take(read).Any(b => b == 0);
+        }
+        catch { return false; }
     }
 
     // ─── 필터 버튼 ─────────────────────────────────────────────
@@ -291,6 +325,32 @@ public partial class FolderCompareView : UserControl
             { if (item.IsDirectory) _fops.DeleteFolder(item.RightFullPath); else _fops.DeleteFile(item.RightFullPath); }
         }
         RunCompare();
+    }
+
+    private void BtnCompareSelected_Click(object s, RoutedEventArgs e)
+    {
+        var files = FileList.SelectedItems.Cast<FolderDiffItem>()
+                            .Where(i => !i.IsDirectory).ToList();
+        if (files.Count == 2)
+        {
+            // 두 파일을 직접 비교
+            string left  = files[0].LeftFullPath ?? files[0].RightFullPath ?? "";
+            string right = files[1].LeftFullPath ?? files[1].RightFullPath ?? "";
+            var mode = DetectCompareMode(left);
+            _main.OpenCompare(mode, left, right);
+        }
+        else if (files.Count == 1)
+        {
+            // 하나만 선택 시 기존 방식
+            var item = files[0];
+            var mode = DetectCompareMode(item.LeftFullPath ?? item.RightFullPath);
+            _main.OpenCompare(mode, item.LeftFullPath, item.RightFullPath);
+        }
+        else
+        {
+            MessageBox.Show("파일을 1~2개 선택하세요.\nCtrl+클릭으로 다른 두 파일을 선택할 수 있습니다.",
+                "선택 비교", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
     }
 
     private void BtnOpenExplorer_Click(object s, RoutedEventArgs e)

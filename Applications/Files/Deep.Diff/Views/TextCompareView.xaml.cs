@@ -1,5 +1,6 @@
 using Microsoft.Win32;
 using System.Windows.Controls.Primitives;
+using System.Windows.Threading;
 
 namespace DeepDiff.Views;
 
@@ -74,7 +75,7 @@ public class DiffLineVm
     };
 }
 
-public partial class TextCompareView : UserControl
+public partial class TextCompareView : UserControl, MainWindow.ICloseable
 {
     private readonly MainWindow _main;
     private readonly TextDiffService _svc = new();
@@ -87,6 +88,13 @@ public partial class TextCompareView : UserControl
     private bool _syncScrolling;
     private double _fontSize = 11;
     private TextWrapping _wrapMode = TextWrapping.NoWrap;
+
+    // 편집 모드
+    private bool _editMode;
+    private bool _leftModified;
+    private bool _rightModified;
+    private DispatcherTimer? _debounce;
+    private bool _editorUpdating; // 에디터 텍스트 설정 시 이벤트 억제
 
     public TextCompareView(MainWindow main, string? leftPath = null, string? rightPath = null)
     {
@@ -101,6 +109,32 @@ public partial class TextCompareView : UserControl
             if (!string.IsNullOrEmpty(TxtLeftPath.Text) && !string.IsNullOrEmpty(TxtRightPath.Text))
                 RunCompare();
         };
+    }
+
+    // ─── ICloseable ────────────────────────────────────────────
+
+    public bool CanClose()
+    {
+        if (!_editMode || (!_leftModified && !_rightModified)) return true;
+
+        var ans = MessageBox.Show(
+            "편집 내용이 저장되지 않았습니다.\n저장하고 닫으시겠습니까?",
+            "저장 확인", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
+
+        if (ans == MessageBoxResult.Cancel) return false;
+        if (ans == MessageBoxResult.Yes)
+        {
+            if (_leftModified)  SaveEditorContent(TxtLeftPath.Text, true);
+            if (_rightModified) SaveEditorContent(TxtRightPath.Text, false);
+        }
+        return true;
+    }
+
+    private void SaveEditorContent(string path, bool isLeft)
+    {
+        if (string.IsNullOrEmpty(path)) return;
+        var text = isLeft ? LeftEditor.Text : RightEditor.Text;
+        _fops.SaveText(path, text);
     }
 
     // ─── 비교 실행 ─────────────────────────────────────────────
@@ -252,8 +286,16 @@ public partial class TextCompareView : UserControl
         else MessageBox.Show(r.Error, "복사 오류", MessageBoxButton.OK, MessageBoxImage.Error);
     }
 
-    private void BtnSaveLeft_Click(object s, RoutedEventArgs e)  => SaveEdited(TxtLeftPath.Text, true);
-    private void BtnSaveRight_Click(object s, RoutedEventArgs e) => SaveEdited(TxtRightPath.Text, false);
+    private void BtnSaveLeft_Click(object s, RoutedEventArgs e)
+    {
+        if (_editMode) { SaveEditorContent(TxtLeftPath.Text, true); _leftModified = false; TbStatus.Text = $"저장 완료: {Path.GetFileName(TxtLeftPath.Text)}"; }
+        else SaveEdited(TxtLeftPath.Text, true);
+    }
+    private void BtnSaveRight_Click(object s, RoutedEventArgs e)
+    {
+        if (_editMode) { SaveEditorContent(TxtRightPath.Text, false); _rightModified = false; TbStatus.Text = $"저장 완료: {Path.GetFileName(TxtRightPath.Text)}"; }
+        else SaveEdited(TxtRightPath.Text, false);
+    }
 
     private void SaveEdited(string path, bool isLeft)
     {
@@ -265,6 +307,86 @@ public partial class TextCompareView : UserControl
         var r = _fops.SaveText(path, string.Join(Environment.NewLine, lines));
         if (r.Success) { RunCompare(); TbStatus.Text = $"저장 완료: {Path.GetFileName(path)}"; }
         else MessageBox.Show(r.Error, "저장 오류", MessageBoxButton.OK, MessageBoxImage.Error);
+    }
+
+    // ─── 편집 모드 ────────────────────────────────────────────
+
+    private void BtnEditMode_Changed(object s, RoutedEventArgs e)
+    {
+        if (!IsLoaded) return;
+        _editMode = BtnEditMode.IsChecked == true;
+
+        if (_editMode)
+        {
+            // diff → edit: 에디터에 현재 파일 내용 로드
+            EditPanel.Visibility = Visibility.Visible;
+            DiffPanel.Visibility = Visibility.Collapsed;
+            LoadEditors();
+        }
+        else
+        {
+            // edit → diff: 에디터 내용으로 diff 업데이트
+            EditPanel.Visibility = Visibility.Collapsed;
+            DiffPanel.Visibility = Visibility.Visible;
+            RunCompareFromEditors();
+        }
+    }
+
+    private void LoadEditors()
+    {
+        _editorUpdating = true;
+        try
+        {
+            LeftEditor.Text  = File.Exists(TxtLeftPath.Text.Trim())
+                ? File.ReadAllText(TxtLeftPath.Text.Trim()) : "";
+            RightEditor.Text = File.Exists(TxtRightPath.Text.Trim())
+                ? File.ReadAllText(TxtRightPath.Text.Trim()) : "";
+        }
+        finally { _editorUpdating = false; }
+        _leftModified = false;
+        _rightModified = false;
+    }
+
+    private void Editor_TextChanged(object s, TextChangedEventArgs e)
+    {
+        if (_editorUpdating) return;
+        if (s == LeftEditor)  _leftModified  = true;
+        if (s == RightEditor) _rightModified = true;
+
+        // 300ms 디바운스
+        if (_debounce == null)
+        {
+            _debounce = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(300) };
+            _debounce.Tick += (_, _) => { _debounce.Stop(); RunCompareFromEditors(); };
+        }
+        _debounce.Stop();
+        _debounce.Start();
+    }
+
+    private void RunCompareFromEditors()
+    {
+        bool ignoreWS   = ChkIgnoreWS.IsChecked   == true;
+        var (lines, diffCount) = _svc.CompareText(LeftEditor.Text, RightEditor.Text, ignoreWS);
+        _diffLines = lines;
+        _diffPositions = lines.Select((l, i) => (l, i))
+                              .Where(x => x.l.Status != LineStatus.Same)
+                              .Select(x => x.i).ToList();
+        _diffNavIndex = _diffPositions.Count > 0 ? 0 : -1;
+        _vmLines = lines.Select(l => new DiffLineVm
+        {
+            LeftLineNumText  = l.LeftLineNumText,
+            RightLineNumText = l.RightLineNumText,
+            LeftSegments     = l.LeftSegments,
+            RightSegments    = l.RightSegments,
+            Status           = l.Status,
+            FontSz           = _fontSize,
+            WrapMode         = _wrapMode
+        }).ToList();
+        LeftList.ItemsSource  = _vmLines;
+        RightList.ItemsSource = _vmLines;
+        int total = lines.Count;
+        TbStatus.Text = $"총 {total}줄 · 차이 {diffCount}개 구간  [편집 모드]";
+        TbDiffNav.Text = _diffPositions.Count > 0 ? $"[1/{_diffPositions.Count}]" : "[차이 없음]";
     }
 
     // ─── 옵션 ─────────────────────────────────────────────────

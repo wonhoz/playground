@@ -94,9 +94,10 @@ public partial class MainWindow : Window
             t.Button?.SetActive(t == tab);
     }
 
-    private void CloseTab(TabEntry tab)
+    public void CloseTab(TabEntry tab)
     {
         if (tab.IsHome) return;
+        if (tab.View is ICloseable closeable && !closeable.CanClose()) return;
         int idx = _tabs.IndexOf(tab);
         _tabs.Remove(tab);
         TabStrip.Children.Remove(tab.Button);
@@ -115,7 +116,30 @@ public partial class MainWindow : Window
         if (home != null) ActivateTab(home);
     }
 
+    private void MainWindow_KeyDown(object sender, KeyEventArgs e)
+    {
+        if (e.Key == Key.Escape && _activeTab != null && !_activeTab.IsHome)
+        {
+            CloseTab(_activeTab);
+            e.Handled = true;
+        }
+    }
+
+    public bool TryCloseTab(TabEntry tab)
+    {
+        if (tab.IsHome) return false;
+        if (tab.View is ICloseable closeable && !closeable.CanClose()) return false;
+        CloseTab(tab);
+        return true;
+    }
+
     // ─── 내부 클래스 ─────────────────────────────────────────
+
+    public interface ICloseable
+    {
+        /// <summary>탭 닫기 전 확인. false 반환 시 닫기 취소.</summary>
+        bool CanClose();
+    }
 
     public class TabEntry(string title, UserControl view, bool isHome = false)
     {
@@ -171,9 +195,10 @@ public class TabButton : Border
 
         Child = sp;
 
-        MouseEnter       += (_, _) => { if (!_active) Background = new SolidColorBrush(Color.FromRgb(0x22, 0x22, 0x3A)); };
-        MouseLeave       += (_, _) => { if (!_active) Background = Brushes.Transparent; };
+        MouseEnter  += (_, _) => { if (!_active) Background = new SolidColorBrush(Color.FromRgb(0x22, 0x22, 0x3A)); };
+        MouseLeave  += (_, _) => { if (!_active) Background = Brushes.Transparent; };
         MouseLeftButtonDown += (_, _) => Clicked?.Invoke();
+        MouseDown   += (_, e) => { if (e.ChangedButton == MouseButton.Middle) { e.Handled = true; Closed?.Invoke(); } };
     }
 
     public void SetActive(bool active)

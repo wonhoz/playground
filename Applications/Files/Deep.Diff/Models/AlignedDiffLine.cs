@@ -29,4 +29,7 @@ public record HexDiffRow(
     long Address,
     byte[] LeftBytes,
     byte[] RightBytes,
-    bool[] BytesDiffer);
+    bool[] BytesDiffer,
+    string LeftDisplay,
+    string RightDisplay,
+    bool HasDiff);

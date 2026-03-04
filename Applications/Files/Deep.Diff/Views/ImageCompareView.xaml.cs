@@ -34,6 +34,9 @@ public partial class ImageCompareView : UserControl
 
         _result = await Task.Run(() => _svc.Compare(left, right));
         UpdateView();
+        // 레이아웃 완료 후 맞춤 적용
+        await Dispatcher.InvokeAsync(() => BtnZoomFit_Click(this, new RoutedEventArgs()),
+            System.Windows.Threading.DispatcherPriority.Loaded);
 
         if (_result.LeftImage != null)
             TbLeftSize.Text = $"왼쪽: {_result.LeftWidth}×{_result.LeftHeight}";

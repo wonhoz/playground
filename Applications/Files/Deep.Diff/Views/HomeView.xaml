@@ -23,17 +23,17 @@
         </Style>
     </UserControl.Resources>
 
-    <ScrollViewer VerticalScrollBarVisibility="Auto">
-        <StackPanel Margin="40,32">
+    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Margin="40,32" HorizontalAlignment="Center">
 
             <!-- 환영 헤더 -->
             <TextBlock Text="무엇을 비교하시겠습니까?" FontSize="26" FontWeight="Light"
-                       Foreground="#E8E8F0" Margin="0,0,0,8"/>
+                       Foreground="#E8E8F0" Margin="0,0,0,8" HorizontalAlignment="Center"/>
             <TextBlock Text="비교할 유형을 선택하세요. 폴더, 텍스트, 이미지, HEX, 클립보드를 지원합니다."
-                       FontSize="13" Foreground="#8888AA" Margin="0,0,0,36"/>
+                       FontSize="13" Foreground="#8888AA" Margin="0,0,0,36" HorizontalAlignment="Center"/>
 
             <!-- 비교 유형 카드 -->
-            <WrapPanel Orientation="Horizontal">
+            <WrapPanel Orientation="Horizontal" HorizontalAlignment="Center">
 
                 <!-- 폴더 비교 -->
                 <Border x:Name="CardFolder" Style="{StaticResource CompareCard}"

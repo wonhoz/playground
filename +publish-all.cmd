@@ -56,8 +56,8 @@ call :pub "Hex.Peek"              "Applications\Tools\Dev\Hex.Peek"             
 call :pub "Log.Lens"              "Applications\Tools\Dev\Log.Lens"                      "Log.Lens.exe"              "Applications\Tools\Dev"
 call :pub "Mock.Server"           "Applications\Tools\Dev\Mock.Server"                   "Mock.Server.exe"           "Applications\Tools\Dev"
 call :pub "Signal.Flow"           "Applications\Tools\Dev\Signal.Flow"                   "Signal.Flow.exe"           "Applications\Tools\Dev"
-call :pub "Serve.Cast"            "Applications\Tools\Dev\Serve.Cast"                    "ServeCast.exe"             "Applications\Tools\Dev"
-call :pub "Table.Craft"           "Applications\Tools\Dev\Table.Craft"                   "TableCraft.exe"            "Applications\Tools\Dev"
+call :pub "Serve.Cast"            "Applications\Tools\Dev\Serve.Cast"                    "Serve.Cast.exe"            "Applications\Tools\Dev"
+call :pub "Table.Craft"           "Applications\Tools\Dev\Table.Craft"                   "Table.Craft.exe"           "Applications\Tools\Dev"
 
 :: ── Applications / Tools / Network ──────────────────────────────
 call :pub "DNS.Flip"              "Applications\Tools\Network\DNS.Flip"                  "Dns.Flip.exe"              "Applications\Tools\Network"
@@ -76,7 +76,7 @@ call :pub "Mark.View"             "Applications\Tools\Productivity\Mark.View"   
 
 :: ── Applications / Tools / System ───────────────────────────────
 call :pub "Env.Guard"             "Applications\Tools\System\Env.Guard"                  "Env.Guard.exe"             "Applications\Tools\System"
-call :pub "Sys.Clean"             "Applications\Tools\System\Sys.Clean"                  "SysClean.exe"              "Applications\Tools\System"
+call :pub "Sys.Clean"             "Applications\Tools\System\Sys.Clean"                  "Sys.Clean.exe"             "Applications\Tools\System\Sys.Clean"
 
 :: ── Games / Action ───────────────────────────────────────────────
 call :pub "Dungeon.Dash"          "Games\Action\Dungeon.Dash"                            "Dungeon.Dash.exe"          "Games\Action"
@@ -90,7 +90,7 @@ call :pub "Neon.Slice"            "Games\Arcade\Neon.Slice"                     
 :: ── Games / Puzzle ───────────────────────────────────────────────
 call :pub "Gravity.Flip"          "Games\Puzzle\Gravity.Flip"                            "Gravity.Flip.exe"          "Games\Puzzle"
 call :pub "Hue.Flow"              "Games\Puzzle\Hue.Flow"                                "Hue.Flow.exe"              "Games\Puzzle"
-call :pub "Orbit.Craft"           "Games\Puzzle\Orbit.Craft"                             "OrbitCraft.exe"            "Games\Puzzle"
+call :pub "Orbit.Craft"           "Games\Puzzle\Orbit.Craft"                             "Orbit.Craft.exe"           "Games\Puzzle\Orbit.Craft"
 
 :: ── Games / Racing ───────────────────────────────────────────────
 call :pub "Nitro.Drift"           "Games\Racing\Nitro.Drift"                             "Nitro.Drift.exe"           "Games\Racing"
@@ -99,7 +99,7 @@ call :pub "Nitro.Drift"           "Games\Racing\Nitro.Drift"                    
 call :pub "Beat.Drop"             "Games\Rhythm\Beat.Drop"                               "Beat.Drop.exe"             "Games\Rhythm"
 
 :: ── Games / Sandbox ──────────────────────────────────────────────
-call :pub "Sand.Fall"             "Games\Sandbox\Sand.Fall"                              "SandFall.exe"              "Games\Sandbox"
+call :pub "Sand.Fall"             "Games\Sandbox\Sand.Fall"                              "Sand.Fall.exe"             "Games\Sandbox"
 
 :: ── Games / Shooter ──────────────────────────────────────────────
 call :pub "Dodge.Blitz"           "Games\Shooter\Dodge.Blitz"                            "Dodge.Blitz.exe"           "Games\Shooter"

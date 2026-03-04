@@ -266,16 +266,15 @@
                     </Grid>
                 </Border>
 
-                <!-- 트리 본문 -->
-                <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Auto"
-                              VerticalScrollBarVisibility="Auto"
-                              Background="#1A1A1A">
-                    <TreeView x:Name="MainTree"
-                              Background="Transparent" BorderThickness="0"
-                              ItemTemplate="{StaticResource TreeItemTemplate}"
-                              MouseDoubleClick="Tree_MouseDoubleClick"
-                              VirtualizingPanel.IsVirtualizing="True"
-                              VirtualizingPanel.VirtualizationMode="Recycling">
+                <!-- 트리 본문 (TreeView 내장 ScrollViewer 사용 → 마우스 휠 정상 동작) -->
+                <TreeView x:Name="MainTree" Grid.Row="1"
+                          Background="#1A1A1A" BorderThickness="0"
+                          ItemTemplate="{StaticResource TreeItemTemplate}"
+                          MouseDoubleClick="Tree_MouseDoubleClick"
+                          ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                          ScrollViewer.VerticalScrollBarVisibility="Auto"
+                          VirtualizingPanel.IsVirtualizing="True"
+                          VirtualizingPanel.VirtualizationMode="Recycling">
                         <TreeView.ContextMenu>
                             <ContextMenu>
                                 <MenuItem x:Name="MnuOpen"       Header="📂  탐색기에서 열기" Click="MnuOpen_Click"/>
@@ -287,8 +286,7 @@
                                 <MenuItem x:Name="MnuDelete"     Header="🗑  삭제..."          Click="MnuDelete_Click" Foreground="#EF5350"/>
                             </ContextMenu>
                         </TreeView.ContextMenu>
-                    </TreeView>
-                </ScrollViewer>
+                </TreeView>
             </Grid>
 
             <!-- ── 트리맵 뷰 ───────────────────────────────────────── -->

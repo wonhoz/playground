@@ -220,7 +220,9 @@
                     <ControlTemplate TargetType="ListViewItem">
                         <Border x:Name="Bd" Background="{TemplateBinding Background}"
                                 BorderThickness="0" Padding="0">
-                            <ContentPresenter HorizontalAlignment="Stretch"/>
+                            <GridViewRowPresenter Content="{TemplateBinding Content}"
+                                                  Columns="{Binding RelativeSource={RelativeSource TemplatedParent},
+                                                            Path=(GridView.ColumnCollection)}"/>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsSelected" Value="True">

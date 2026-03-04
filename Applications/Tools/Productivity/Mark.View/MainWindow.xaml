@@ -276,6 +276,36 @@
       </Grid>
     </Grid>
 
+    <!-- ══ 로딩 오버레이 ════════════════════════════════════ -->
+    <Grid x:Name="LoadingOverlay" Grid.Row="1" Panel.ZIndex="20"
+          Visibility="Collapsed">
+      <Border Background="#CC1E1E2E"/>
+      <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="260">
+        <TextBlock x:Name="LoadingText"
+                   Text="로딩 중..."
+                   Foreground="#888AA8" FontSize="13"
+                   HorizontalAlignment="Center"
+                   Margin="0,0,0,16"/>
+        <!-- 슬라이딩 인디케이터 바 -->
+        <Border Height="4" CornerRadius="2" Background="#2A2A3D" ClipToBounds="True">
+          <Border x:Name="LoadingBarIndicator" Width="130" Height="4"
+                  HorizontalAlignment="Left" CornerRadius="2">
+            <Border.Background>
+              <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                <GradientStop Color="Transparent" Offset="0"/>
+                <GradientStop Color="#89B4FA"     Offset="0.3"/>
+                <GradientStop Color="#CBA6F7"     Offset="0.7"/>
+                <GradientStop Color="Transparent" Offset="1"/>
+              </LinearGradientBrush>
+            </Border.Background>
+            <Border.RenderTransform>
+              <TranslateTransform x:Name="LoadingBarTranslate" X="-130"/>
+            </Border.RenderTransform>
+          </Border>
+        </Border>
+      </StackPanel>
+    </Grid>
+
     <!-- ══ 상태바 ═════════════════════════════════════════ -->
     <Border Grid.Row="2"
             Background="{StaticResource SurfaceBrush}"

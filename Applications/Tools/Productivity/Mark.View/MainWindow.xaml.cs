@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Threading;
 using MarkView.Models;
 using MarkView.Services;
@@ -44,20 +45,45 @@ public partial class MainWindow : Window
         if (item != null) CmbTheme.SelectedItem = item;
     }
 
+    // ── 로딩 UI ─────────────────────────────────────────────────────────
+
+    private DoubleAnimation? _loadingAnim;
+
+    private void ShowLoading(string message = "로딩 중...")
+    {
+        LoadingText.Text = message;
+        LoadingOverlay.Visibility = Visibility.Visible;
+        _loadingAnim = new DoubleAnimation(-130, 260,
+            new Duration(TimeSpan.FromSeconds(1.1)))
+        {
+            RepeatBehavior = RepeatBehavior.Forever,
+            EasingFunction = new SineEase { EasingMode = EasingMode.EaseInOut }
+        };
+        LoadingBarTranslate.BeginAnimation(TranslateTransform.XProperty, _loadingAnim);
+    }
+
+    private void HideLoading()
+    {
+        LoadingBarTranslate.BeginAnimation(TranslateTransform.XProperty, null);
+        LoadingOverlay.Visibility = Visibility.Collapsed;
+    }
+
     // ── WebView2 초기화 ──────────────────────────────────────────────────
 
     private async void InitWebView()
     {
+        ShowLoading("WebView2 초기화 중...");
         var env = await CoreWebView2Environment.CreateAsync();
         await Viewer.EnsureCoreWebView2Async(env);
         Viewer.CoreWebView2.Settings.IsStatusBarEnabled = false;
         Viewer.CoreWebView2.Settings.AreDefaultContextMenusEnabled = false;
         Viewer.CoreWebView2.NavigationCompleted += OnNavigationCompleted;
+        HideLoading();
     }
 
     private void OnNavigationCompleted(object? sender, CoreWebView2NavigationCompletedEventArgs e)
     {
-        // 목차 추출
+        HideLoading();
         _ = ExtractTocAsync();
     }
 
@@ -301,12 +327,18 @@ public partial class MainWindow : Window
 
     // ── 렌더링 ──────────────────────────────────────────────────────────
 
-    private void RenderPreview()
+    private async void RenderPreview()
     {
         if (_activeIndex < 0 || _activeIndex >= _docs.Count) return;
         var doc = _docs[_activeIndex];
-        var html = _renderer.RenderToHtml(doc.Content, doc.FilePath, _currentTheme);
+        var content = doc.Content;
+        var filePath = doc.IsNew ? null : doc.FilePath;
+        var theme = _currentTheme;
+
+        ShowLoading("렌더링 중...");
+        var html = await Task.Run(() => _renderer.RenderToHtml(content, filePath, theme));
         Viewer.NavigateToString(html);
+        // HideLoading은 OnNavigationCompleted에서 호출됨
     }
 
     // ── 편집 모드 ────────────────────────────────────────────────────────
@@ -592,18 +624,21 @@ public partial class MainWindow : Window
             if (File.Exists(f)) OpenFile(f);
     }
 
-    private void OpenFile(string path)
+    private async void OpenFile(string path)
     {
+        ShowLoading("파일 열기 중...");
         try
         {
-            var content = File.ReadAllText(path);
+            var content = await Task.Run(() => File.ReadAllText(path));
             OpenDocument(new MarkDocument { FilePath = path, Content = content });
         }
         catch (Exception ex)
         {
+            HideLoading();
             MessageBox.Show($"파일 열기 실패:\n{ex.Message}", "오류",
                 MessageBoxButton.OK, MessageBoxImage.Error);
         }
+        // 정상 경로는 RenderPreview → NavigationCompleted 에서 HideLoading 호출
     }
 
     // ── 종료 ────────────────────────────────────────────────────────────

@@ -42,19 +42,28 @@
         </Grid.RowDefinitions>
 
         <!-- 로딩 바 (Grid Row 1 — WebView2 바깥이라 airspace 문제 없음) -->
-        <Border Grid.Row="1" Background="#2A2A3D" ClipToBounds="True">
-          <Border x:Name="LoadingBarIndicator" Width="200" Height="3"
-                  HorizontalAlignment="Left" Visibility="Collapsed">
+        <!-- 외부: 항상 보이는 solid 그라디언트 바 -->
+        <Border x:Name="LoadingBarTrack" Grid.Row="1" ClipToBounds="True" Visibility="Collapsed">
+          <Border.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+              <GradientStop Color="#2089B4FA" Offset="0"/>
+              <GradientStop Color="#89B4FA"   Offset="0.4"/>
+              <GradientStop Color="#CBA6F7"   Offset="0.6"/>
+              <GradientStop Color="#20CBA6F7" Offset="1"/>
+            </LinearGradientBrush>
+          </Border.Background>
+          <!-- 내부: 반짝이는 흰색 하이라이트 오버레이 -->
+          <Border x:Name="LoadingBarIndicator" Width="120" Height="3"
+                  HorizontalAlignment="Left">
             <Border.Background>
               <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
                 <GradientStop Color="Transparent" Offset="0"/>
-                <GradientStop Color="#89B4FA"     Offset="0.3"/>
-                <GradientStop Color="#CBA6F7"     Offset="0.7"/>
+                <GradientStop Color="#80FFFFFF"   Offset="0.5"/>
                 <GradientStop Color="Transparent" Offset="1"/>
               </LinearGradientBrush>
             </Border.Background>
             <Border.RenderTransform>
-              <TranslateTransform x:Name="LoadingBarTranslate" X="-200"/>
+              <TranslateTransform x:Name="LoadingBarTranslate" X="-120"/>
             </Border.RenderTransform>
           </Border>
         </Border>

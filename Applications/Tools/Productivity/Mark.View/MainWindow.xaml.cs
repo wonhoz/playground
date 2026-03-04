@@ -48,13 +48,15 @@ public partial class MainWindow : Window
     // ── 로딩 UI ─────────────────────────────────────────────────────────
 
     private DoubleAnimation? _loadingAnim;
+    private long _loadingStartTick;
 
     private void ShowLoading(string message = "로딩 중...")
     {
+        _loadingStartTick = Environment.TickCount64;
         StatusPath.Text = message;
-        LoadingBarIndicator.Visibility = Visibility.Visible;
-        _loadingAnim = new DoubleAnimation(-200, 1300,
-            new Duration(TimeSpan.FromSeconds(1.1)))
+        LoadingBarTrack.Visibility = Visibility.Visible;   // solid 바 즉시 표시
+        _loadingAnim = new DoubleAnimation(-120, 1500,
+            new Duration(TimeSpan.FromSeconds(1.2)))
         {
             RepeatBehavior = RepeatBehavior.Forever,
             EasingFunction = new SineEase { EasingMode = EasingMode.EaseInOut }
@@ -62,15 +64,30 @@ public partial class MainWindow : Window
         LoadingBarTranslate.BeginAnimation(TranslateTransform.XProperty, _loadingAnim);
     }
 
+    // WPF가 최소 1프레임 렌더링 후 무거운 작업 시작
+    private async Task ShowLoadingAsync(string message = "로딩 중...")
+    {
+        ShowLoading(message);
+        await Task.Delay(16);
+    }
+
     private void HideLoading()
     {
         LoadingBarTranslate.BeginAnimation(TranslateTransform.XProperty, null);
-        LoadingBarIndicator.Visibility = Visibility.Collapsed;
+        LoadingBarTrack.Visibility = Visibility.Collapsed;
         // 상태바 경로 텍스트 복원
         if (_activeIndex >= 0 && _activeIndex < _docs.Count)
             StatusPath.Text = _docs[_activeIndex].IsNew ? "새 문서 (저장되지 않음)" : _docs[_activeIndex].FilePath;
         else
             StatusPath.Text = "파일을 열어주세요";
+    }
+
+    // 최소 표시 시간 보장 (기본 300ms)
+    private async Task HideLoadingAsync(int minMs = 300)
+    {
+        var elapsed = (int)(Environment.TickCount64 - _loadingStartTick);
+        if (elapsed < minMs) await Task.Delay(minMs - elapsed);
+        HideLoading();
     }
 
     // ── WebView2 초기화 ──────────────────────────────────────────────────
@@ -88,7 +105,7 @@ public partial class MainWindow : Window
 
     private void OnNavigationCompleted(object? sender, CoreWebView2NavigationCompletedEventArgs e)
     {
-        HideLoading();
+        _ = HideLoadingAsync(300);
         _ = ExtractTocAsync();
     }
 
@@ -340,7 +357,7 @@ public partial class MainWindow : Window
         var filePath = doc.IsNew ? null : doc.FilePath;
         var theme = _currentTheme;
 
-        ShowLoading("렌더링 중...");
+        await ShowLoadingAsync("렌더링 중...");
         var html = await Task.Run(() => _renderer.RenderToHtml(content, filePath, theme));
         Viewer.NavigateToString(html);
         // HideLoading은 OnNavigationCompleted에서 호출됨
@@ -631,7 +648,7 @@ public partial class MainWindow : Window
 
     private async void OpenFile(string path)
     {
-        ShowLoading("파일 열기 중...");
+        await ShowLoadingAsync("파일 열기 중...");
         try
         {
             var content = await Task.Run(() => File.ReadAllText(path));

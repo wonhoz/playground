@@ -105,23 +105,11 @@ internal sealed class SettingsForm : Form
         bottomBar.Controls.AddRange([lblThreshold, _trackThreshold, _lblThresholdVal,
             _chkOverlay, btnSave, btnClose]);
 
-        // ── 분할 컨테이너 ─────────────────────────────────────────────────────
-        var splitter = new SplitContainer
-        {
-            Dock          = DockStyle.Fill,
-            BackColor     = _bg,
-            Panel1MinSize = 150,
-            Panel2MinSize = 280,
-            BorderStyle   = BorderStyle.None,
-        };
-        // SplitterDistance는 레이아웃 완료 후(Shown 이벤트에서) 설정해야 함
-        // — 생성자에서 설정하면 Width=0 상태에서 검증 실패 (InvalidOperationException)
-        Shown += (_, _) =>
-        {
-            try { splitter.SplitterDistance = 210; } catch { }
-        };
+        // ── 왼쪽 패널 (고정폭 210px) ──────────────────────────────────────────
+        // SplitContainer 대신 DockStyle.Left + DockStyle.Fill 사용
+        // — SplitContainer.SplitterDistance는 생성자에서 Width=0일 때 설정 불가 (InvalidOperationException)
+        var leftPanel = new Panel { Dock = DockStyle.Left, Width = 210, BackColor = _bg };
 
-        // ── 왼쪽 패널: 프로필 목록 ──────────────────────────────────────────
         var leftBtnPanel = new Panel
         {
             Dock = DockStyle.Bottom, Height = 38,
@@ -133,7 +121,6 @@ internal sealed class SettingsForm : Form
         var btnDelProfile = MakeSmallButton("− 삭제", new Point(70, 4));
         btnDelProfile.ForeColor = Color.FromArgb(220, 80, 80);
         btnDelProfile.Click += OnDelProfile;
-
         leftBtnPanel.Controls.AddRange([btnAddProfile, btnDelProfile]);
 
         var leftHdr = new Label
@@ -153,13 +140,18 @@ internal sealed class SettingsForm : Form
             DrawMode    = DrawMode.OwnerDrawFixed,
             ItemHeight  = 28,
         };
-        _lstProfiles.DrawItem              += LstProfiles_DrawItem;
-        _lstProfiles.SelectedIndexChanged  += (_, _) => RefreshGestureList();
+        _lstProfiles.DrawItem             += LstProfiles_DrawItem;
+        _lstProfiles.SelectedIndexChanged += (_, _) => RefreshGestureList();
 
-        // 역순 추가: Fill(_lstProfiles) 먼저, Bottom(leftBtnPanel) 다음, Top(leftHdr) 마지막
-        splitter.Panel1.Controls.AddRange([_lstProfiles, leftBtnPanel, leftHdr]);
+        // 역순: Fill 먼저, Bottom, Top 마지막
+        leftPanel.Controls.AddRange([_lstProfiles, leftBtnPanel, leftHdr]);
 
-        // ── 오른쪽 패널: 제스처 목록 ────────────────────────────────────────
+        // 구분선
+        var sepPanel = new Panel { Dock = DockStyle.Left, Width = 1, BackColor = Color.FromArgb(48, 48, 68) };
+
+        // ── 오른쪽 패널 (나머지 영역) ─────────────────────────────────────────
+        var rightPanel = new Panel { Dock = DockStyle.Fill, BackColor = _bg };
+
         var rightBtnPanel = new Panel
         {
             Dock = DockStyle.Bottom, Height = 38,
@@ -176,7 +168,6 @@ internal sealed class SettingsForm : Form
         btnDelGesture.Click  += OnDelGesture;
         btnDelGesture.ForeColor = Color.FromArgb(220, 80, 80);
 
-        // 프리셋 메뉴
         var presetMenu = new ContextMenuStrip
         {
             Renderer = new DarkMenuRenderer(),
@@ -218,10 +209,11 @@ internal sealed class SettingsForm : Form
         _lstGestures.DrawSubItem      += LstGestures_DrawSubItem;
         _lstGestures.DoubleClick      += OnEditGesture;
 
-        splitter.Panel2.Controls.AddRange([_lstGestures, rightBtnPanel, rightHdr]);
+        // 역순: Fill 먼저, Bottom, Top 마지막
+        rightPanel.Controls.AddRange([_lstGestures, rightBtnPanel, rightHdr]);
 
-        // Fill 먼저, Bottom 나중 (WinForms 역순 도킹 규칙)
-        Controls.AddRange([splitter, bottomBar]);
+        // WinForms 도킹 역순 처리: Fill(rightPanel)=index0, Left(sep)=1, Left(leftPanel)=2, Bottom(bottomBar)=3
+        Controls.AddRange([rightPanel, sepPanel, leftPanel, bottomBar]);
 
         // 프로필 로드
         RefreshProfileList();

@@ -62,6 +62,7 @@ echo !CY!  28!RS! Mark.View             !DG!Tools/Productivity!RS!
 echo.
 echo !BD!!DG!  Tools / System!RS!
 echo !CY!  29!RS! Env.Guard             !DG!Tools/System!RS!
+echo !CY!  45!RS! Sys.Clean             !DG!Tools/System!RS!
 echo.
 echo !BD!!DG!  Games!RS!
 echo !CY!  30!RS! Dungeon.Dash          !DG!Games/Action!RS!
@@ -136,6 +137,7 @@ for %%n in (!SEL!) do (
     if "%%n"=="27" call :pub "Char.Art"               "Applications\Tools\Productivity\Char.Art"          "Char.Art.exe"              "Applications\Tools\Productivity"
     if "%%n"=="28" call :pub "Mark.View"              "Applications\Tools\Productivity\Mark.View"         "Mark.View.exe"             "Applications\Tools\Productivity\Mark.View"
     if "%%n"=="29" call :pub "Env.Guard"              "Applications\Tools\System\Env.Guard"               "Env.Guard.exe"             "Applications\Tools\System"
+    if "%%n"=="45" call :pub "Sys.Clean"              "Applications\Tools\System\Sys.Clean"               "SysClean.exe"              "Applications\Tools\System"
     if "%%n"=="30" call :pub "Dungeon.Dash"           "Games\Action\Dungeon.Dash"                         "Dungeon.Dash.exe"          "Games\Action"
     if "%%n"=="31" call :pub "Brick.Blitz"            "Games\Arcade\Brick.Blitz"                          "Brick.Blitz.exe"           "Games\Arcade"
     if "%%n"=="32" call :pub "Dash.City"              "Games\Arcade\Dash.City"                            "Dash.City.exe"             "Games\Arcade"
@@ -196,6 +198,7 @@ call :pub "Word.Cloud"            "Applications\Tools\Productivity\Word.Cloud"  
 call :pub "Char.Art"              "Applications\Tools\Productivity\Char.Art"          "Char.Art.exe"              "Applications\Tools\Productivity"
 call :pub "Mark.View"             "Applications\Tools\Productivity\Mark.View"         "Mark.View.exe"             "Applications\Tools\Productivity\Mark.View"
 call :pub "Env.Guard"             "Applications\Tools\System\Env.Guard"               "Env.Guard.exe"             "Applications\Tools\System"
+call :pub "Sys.Clean"             "Applications\Tools\System\Sys.Clean"               "SysClean.exe"              "Applications\Tools\System"
 call :pub "Dungeon.Dash"          "Games\Action\Dungeon.Dash"                         "Dungeon.Dash.exe"          "Games\Action"
 call :pub "Brick.Blitz"           "Games\Arcade\Brick.Blitz"                          "Brick.Blitz.exe"           "Games\Arcade"
 call :pub "Dash.City"             "Games\Arcade\Dash.City"                            "Dash.City.exe"             "Games\Arcade"

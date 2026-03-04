@@ -76,6 +76,7 @@ call :pub "Mark.View"             "Applications\Tools\Productivity\Mark.View"   
 
 :: ── Applications / Tools / System ───────────────────────────────
 call :pub "Env.Guard"             "Applications\Tools\System\Env.Guard"                  "Env.Guard.exe"             "Applications\Tools\System"
+call :pub "Sys.Clean"             "Applications\Tools\System\Sys.Clean"                  "SysClean.exe"              "Applications\Tools\System"
 
 :: ── Games / Action ───────────────────────────────────────────────
 call :pub "Dungeon.Dash"          "Games\Action\Dungeon.Dash"                            "Dungeon.Dash.exe"          "Games\Action"

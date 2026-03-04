@@ -31,6 +31,7 @@
 | `Text.Forge` | Productivity | 텍스트·데이터 변환 도구 |
 | `Word.Cloud` | Productivity | 오프라인 워드클라우드 생성기 |
 | `Env.Guard` | System | Windows 환경변수 GUI 관리자 + 스냅샷/롤백 |
+| `Sys.Clean` | System | CCleaner 유사 - 시스템 청소, 레지스트리, 시작프로그램, 설치프로그램 관리 |
 | `Link.Vault` | Tools | 완전 오프라인 북마크 관리자 (페이지 스냅샷) |
 | `Mark.View` | Productivity | Markdown 뷰어 + 실시간 에디터 (멀티탭, TOC, WebView2) |
 | `Mouse.Flick` | Productivity | 전역 마우스 제스처 → 키보드 단축키 매핑 트레이 앱 |
@@ -353,6 +354,7 @@
 | **앱별 네트워크 차단** | App.Cage |
 | **창 분할 레이아웃 매니저** | Screen.Split (≠ Workspace.Switcher) |
 | **트리맵 디스크 시각화** | Disk.Lens (≠ Photo.Video.Organizer) |
+| **CCleaner 유사 PC 청소기** | Sys.Clean (시스템 청소 + 레지스트리 + 시작프로그램 + 설치프로그램) |
 | **이미지 일괄 처리** | Img.Forge (≠ Photo.Video.Organizer: 날짜 정리기) |
 | **로컬 비밀번호 관리자** | Pass.Vault (≠ Secret.Box: .env 파일 특화) |
 | **다중 시간대 세계시계** | Zone.Watch |

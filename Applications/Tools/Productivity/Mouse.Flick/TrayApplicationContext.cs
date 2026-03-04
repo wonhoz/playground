@@ -37,6 +37,7 @@ internal sealed class TrayApplicationContext : ApplicationContext
         }
 
         _overlay = new GestureOverlay();
+        _ = _overlay.Handle;  // 핸들 미리 생성 — 첫 제스처에서도 즉시 렌더링 가능
         _menu    = BuildMenu(out _miEnabled);
         _hook    = new GlobalMouseHook { Threshold = _settings.GestureThreshold };
 

@@ -124,45 +124,77 @@
       <Setter Property="BorderBrush"     Value="{StaticResource BorderBrush}"/>
       <Setter Property="BorderThickness" Value="1"/>
       <Setter Property="Padding"         Value="8,4"/>
+      <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
       <Setter Property="Template">
         <Setter.Value>
           <ControlTemplate TargetType="ComboBox">
             <Grid>
-              <Border x:Name="bd"
-                      Background="{TemplateBinding Background}"
-                      BorderBrush="{TemplateBinding BorderBrush}"
-                      BorderThickness="{TemplateBinding BorderThickness}"
-                      CornerRadius="5">
-                <Grid Margin="{TemplateBinding Padding}">
-                  <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition Width="20"/>
-                  </Grid.ColumnDefinitions>
-                  <ContentPresenter x:Name="ContentSite"
-                                    Content="{TemplateBinding SelectionBoxItem}"
-                                    ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
-                                    VerticalAlignment="Center"/>
-                  <TextBlock Grid.Column="1" Text="&#x25BC;" FontSize="9"
-                             Foreground="{StaticResource TextDimBrush}"
-                             VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                </Grid>
-              </Border>
-              <Popup x:Name="PART_Popup" IsOpen="{TemplateBinding IsDropDownOpen}"
-                     AllowsTransparency="True" Focusable="False" PopupAnimation="Slide">
+              <!-- PART_ToggleButton: 클릭 → IsDropDownOpen 토글 -->
+              <ToggleButton x:Name="PART_ToggleButton"
+                            IsChecked="{Binding IsDropDownOpen, Mode=TwoWay,
+                                        RelativeSource={RelativeSource TemplatedParent}}"
+                            Focusable="False"
+                            ClickMode="Press">
+                <ToggleButton.Template>
+                  <ControlTemplate TargetType="ToggleButton">
+                    <Border x:Name="bd"
+                            Background="{Binding Background,
+                                         RelativeSource={RelativeSource AncestorType=ComboBox}}"
+                            BorderBrush="{Binding BorderBrush,
+                                          RelativeSource={RelativeSource AncestorType=ComboBox}}"
+                            BorderThickness="{Binding BorderThickness,
+                                              RelativeSource={RelativeSource AncestorType=ComboBox}}"
+                            CornerRadius="5">
+                      <Grid Margin="{Binding Padding,
+                                     RelativeSource={RelativeSource AncestorType=ComboBox}}">
+                        <Grid.ColumnDefinitions>
+                          <ColumnDefinition/>
+                          <ColumnDefinition Width="20"/>
+                        </Grid.ColumnDefinitions>
+                        <ContentPresenter x:Name="ContentSite"
+                                          Content="{Binding SelectionBoxItem,
+                                                    RelativeSource={RelativeSource AncestorType=ComboBox}}"
+                                          ContentTemplate="{Binding SelectionBoxItemTemplate,
+                                                            RelativeSource={RelativeSource AncestorType=ComboBox}}"
+                                          VerticalAlignment="Center"
+                                          HorizontalAlignment="Left"/>
+                        <TextBlock Grid.Column="1" x:Name="Arrow"
+                                   Text="&#x25BC;" FontSize="9"
+                                   Foreground="{StaticResource TextDimBrush}"
+                                   VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                      </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                      <Trigger Property="IsMouseOver" Value="True">
+                        <Setter TargetName="bd" Property="Background"
+                                Value="{StaticResource HoverBrush}"/>
+                      </Trigger>
+                      <Trigger Property="IsChecked" Value="True">
+                        <Setter TargetName="Arrow" Property="Text" Value="&#x25B2;"/>
+                      </Trigger>
+                    </ControlTemplate.Triggers>
+                  </ControlTemplate>
+                </ToggleButton.Template>
+              </ToggleButton>
+
+              <Popup x:Name="PART_Popup"
+                     IsOpen="{Binding IsDropDownOpen, Mode=TwoWay,
+                              RelativeSource={RelativeSource TemplatedParent}}"
+                     AllowsTransparency="True" Focusable="False"
+                     PopupAnimation="Slide"
+                     Placement="Bottom"
+                     PlacementTarget="{Binding RelativeSource={RelativeSource TemplatedParent}}">
                 <Border Background="{StaticResource SurfaceBrush}"
                         BorderBrush="{StaticResource BorderBrush}"
-                        BorderThickness="1" CornerRadius="5" Margin="0,2,0,0">
+                        BorderThickness="1" CornerRadius="5" Margin="0,2,0,0"
+                        MinWidth="{Binding ActualWidth,
+                                  RelativeSource={RelativeSource AncestorType=ComboBox}}">
                   <ScrollViewer MaxHeight="200">
                     <ItemsPresenter/>
                   </ScrollViewer>
                 </Border>
               </Popup>
             </Grid>
-            <ControlTemplate.Triggers>
-              <Trigger Property="IsMouseOver" Value="True">
-                <Setter TargetName="bd" Property="Background" Value="{StaticResource HoverBrush}"/>
-              </Trigger>
-            </ControlTemplate.Triggers>
           </ControlTemplate>
         </Setter.Value>
       </Setter>

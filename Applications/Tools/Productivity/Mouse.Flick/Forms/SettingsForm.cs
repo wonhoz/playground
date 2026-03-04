@@ -108,12 +108,17 @@ internal sealed class SettingsForm : Form
         // ── 분할 컨테이너 ─────────────────────────────────────────────────────
         var splitter = new SplitContainer
         {
-            Dock             = DockStyle.Fill,
-            BackColor        = _bg,
-            SplitterDistance = 210,
-            Panel1MinSize    = 150,
-            Panel2MinSize    = 280,
-            BorderStyle      = BorderStyle.None,
+            Dock          = DockStyle.Fill,
+            BackColor     = _bg,
+            Panel1MinSize = 150,
+            Panel2MinSize = 280,
+            BorderStyle   = BorderStyle.None,
+        };
+        // SplitterDistance는 레이아웃 완료 후(Shown 이벤트에서) 설정해야 함
+        // — 생성자에서 설정하면 Width=0 상태에서 검증 실패 (InvalidOperationException)
+        Shown += (_, _) =>
+        {
+            try { splitter.SplitterDistance = 210; } catch { }
         };
 
         // ── 왼쪽 패널: 프로필 목록 ──────────────────────────────────────────

@@ -32,6 +32,7 @@
 | `Word.Cloud` | Productivity | 오프라인 워드클라우드 생성기 |
 | `Env.Guard` | System | Windows 환경변수 GUI 관리자 + 스냅샷/롤백 |
 | `Link.Vault` | Tools | 완전 오프라인 북마크 관리자 (페이지 스냅샷) |
+| `Mark.View` | Productivity | Markdown 뷰어 + 실시간 에디터 (멀티탭, TOC, WebView2) |
 
 ---
 

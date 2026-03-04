@@ -28,82 +28,82 @@ echo !DG!--------------------------------------------------!RS!
 echo.
 
 :: ── Applications / AI ────────────────────────────────────────────
-call :pub "AI.Clip"               "Applications\AI\AI.Clip"                              "Ai.Clip.exe"           "Applications\AI"
+call :pub "AI.Clip"               "Applications\AI\AI.Clip"                              "Ai.Clip.exe"               "Applications\AI"
 
 :: ── Applications / Audio ─────────────────────────────────────────
-call :pub "Music.Player"          "Applications\Audio\Music.Player"                      "Music.Player.exe"      "Applications\Audio"
+call :pub "Music.Player"          "Applications\Audio\Music.Player"                      "Music.Player.exe"          "Applications\Audio"
 
 :: ── Applications / Automation ────────────────────────────────────
-call :pub "Stay.Awake"            "Applications\Automation\Stay.Awake"                   "Stay.Awake.exe"        "Applications\Automation\Stay.Awake"
+call :pub "Stay.Awake"            "Applications\Automation\Stay.Awake"                   "Stay.Awake.exe"            "Applications\Automation\Stay.Awake"
 
 :: ── Applications / Files ─────────────────────────────────────────
-call :pub "Batch.Rename"          "Applications\Files\Batch.Rename"                      "Batch.Rename.exe"      "Applications\Files"
-call :pub "Disk.Lens"             "Applications\Files\Disk.Lens"                         "Disk.Lens.exe"         "Applications\Files"
-call :pub "File.Duplicates"       "Applications\Files\File.Duplicates"                   "File.Duplicates.exe"   "Applications\Files"
-call :pub "File.Unlocker"         "Applications\Files\File.Unlocker"                     "File.Unlocker.exe"     "Applications\Files"
-call :pub "Folder.Purge"          "Applications\Files\Folder.Purge"                      "Folder.Purge.exe"      "Applications\Files"
+call :pub "Batch.Rename"          "Applications\Files\Batch.Rename"                      "Batch.Rename.exe"          "Applications\Files"
+call :pub "Disk.Lens"             "Applications\Files\Disk.Lens"                         "DiskLens.exe"              "Applications\Files"
+call :pub "File.Duplicates"       "Applications\Files\File.Duplicates"                   "File.Duplicates.exe"       "Applications\Files"
+call :pub "File.Unlocker"         "Applications\Files\File.Unlocker"                     "File.Unlocker.exe"         "Applications\Files"
+call :pub "Folder.Purge"          "Applications\Files\Folder.Purge"                      "Folder.Purge.exe"          "Applications\Files"
 
 :: ── Applications / Health ────────────────────────────────────────
-call :pub "Toast.Cast"            "Applications\Health\Toast.Cast"                       "Toast.Cast.exe"        "Applications\Health"
+call :pub "Toast.Cast"            "Applications\Health\Toast.Cast"                       "Toast.Cast.exe"            "Applications\Health"
 
 :: ── Applications / Media ─────────────────────────────────────────
 call :pub "Photo.Video.Organizer" "Applications\Media\Photo.Video.Organizer"             "Photo.Video.Organizer.exe" "Applications\Media"
 
 :: ── Applications / Tools / Dev ───────────────────────────────────
-call :pub "Api.Probe"             "Applications\Tools\Dev\Api.Probe"                     "Api.Probe.exe"         "Applications\Tools\Dev\Api.Probe"
-call :pub "Glyph.Map"             "Applications\Tools\Dev\Glyph.Map"                     "Glyph.Map.exe"         "Applications\Tools\Dev\Glyph.Map"
-call :pub "Hex.Peek"              "Applications\Tools\Dev\Hex.Peek"                      "Hex.Peek.exe"          "Applications\Tools\Dev"
-call :pub "Log.Lens"              "Applications\Tools\Dev\Log.Lens"                      "Log.Lens.exe"          "Applications\Tools\Dev"
-:: Mock.Desk → Mock.Server로 통합됨
-call :pub "Mock.Server"           "Applications\Tools\Dev\Mock.Server"                   "Mock.Server.exe"       "Applications\Tools\Dev"
-call :pub "Signal.Flow"           "Applications\Tools\Dev\Signal.Flow"                   "Signal.Flow.exe"       "Applications\Tools\Dev"
-call :pub "Serve.Cast"            "Applications\Tools\Dev\Serve.Cast"                    "ServeCast.exe"         "Applications\Tools\Dev"
-call :pub "Table.Craft"           "Applications\Tools\Dev\Table.Craft"                   "TableCraft.exe"        "Applications\Tools\Dev"
+call :pub "Api.Probe"             "Applications\Tools\Dev\Api.Probe"                     "Api.Probe.exe"             "Applications\Tools\Dev\Api.Probe"
+call :pub "Glyph.Map"             "Applications\Tools\Dev\Glyph.Map"                     "Glyph.Map.exe"             "Applications\Tools\Dev\Glyph.Map"
+call :pub "Hex.Peek"              "Applications\Tools\Dev\Hex.Peek"                      "Hex.Peek.exe"              "Applications\Tools\Dev"
+call :pub "Log.Lens"              "Applications\Tools\Dev\Log.Lens"                      "Log.Lens.exe"              "Applications\Tools\Dev"
+call :pub "Mock.Server"           "Applications\Tools\Dev\Mock.Server"                   "Mock.Server.exe"           "Applications\Tools\Dev"
+call :pub "Signal.Flow"           "Applications\Tools\Dev\Signal.Flow"                   "Signal.Flow.exe"           "Applications\Tools\Dev"
+call :pub "Serve.Cast"            "Applications\Tools\Dev\Serve.Cast"                    "ServeCast.exe"             "Applications\Tools\Dev"
+call :pub "Table.Craft"           "Applications\Tools\Dev\Table.Craft"                   "TableCraft.exe"            "Applications\Tools\Dev"
 
 :: ── Applications / Tools / Network ──────────────────────────────
-call :pub "DNS.Flip"              "Applications\Tools\Network\DNS.Flip"                  "Dns.Flip.exe"          "Applications\Tools\Network"
-call :pub "Port.Watch"            "Applications\Tools\Network\Port.Watch"                "Port.Watch.exe"        "Applications\Tools\Network"
+call :pub "DNS.Flip"              "Applications\Tools\Network\DNS.Flip"                  "Dns.Flip.exe"              "Applications\Tools\Network"
+call :pub "Port.Watch"            "Applications\Tools\Network\Port.Watch"                "Port.Watch.exe"            "Applications\Tools\Network"
 
 :: ── Applications / Tools / Productivity ─────────────────────────
-call :pub "Char.Art"              "Applications\Tools\Productivity\Char.Art"             "Char.Art.exe"          "Applications\Tools\Productivity"
-call :pub "Ink.Cast"              "Applications\Tools\Productivity\Ink.Cast"             "InkCast.exe"           "Applications\Tools\Productivity"
-call :pub "Clipboard.Stacker"     "Applications\Tools\Productivity\Clipboard.Stacker"    "Clipboard.Stacker.exe" "Applications\Tools\Productivity"
-call :pub "Code.Snap"             "Applications\Tools\Productivity\Code.Snap"            "Code.Snap.exe"         "Applications\Tools\Productivity"
-call :pub "QR.Forge"              "Applications\Tools\Productivity\QR.Forge"             "QR.Forge.exe"          "Applications\Tools\Productivity"
-call :pub "Screen.Recorder"       "Applications\Tools\Productivity\Screen.Recorder"      "Screen.Recorder.exe"   "Applications\Tools\Productivity"
-call :pub "Text.Forge"            "Applications\Tools\Productivity\Text.Forge"           "Text.Forge.exe"        "Applications\Tools\Productivity"
-call :pub "Word.Cloud"            "Applications\Tools\Productivity\Word.Cloud"           "Word.Cloud.exe"        "Applications\Tools\Productivity"
+call :pub "Clipboard.Stacker"     "Applications\Tools\Productivity\Clipboard.Stacker"    "Clipboard.Stacker.exe"     "Applications\Tools\Productivity"
+call :pub "Code.Snap"             "Applications\Tools\Productivity\Code.Snap"            "Code.Snap.exe"             "Applications\Tools\Productivity"
+call :pub "QR.Forge"              "Applications\Tools\Productivity\QR.Forge"             "QR.Forge.exe"              "Applications\Tools\Productivity"
+call :pub "Screen.Recorder"       "Applications\Tools\Productivity\Screen.Recorder"      "Screen.Recorder.exe"       "Applications\Tools\Productivity"
+call :pub "Text.Forge"            "Applications\Tools\Productivity\Text.Forge"           "Text.Forge.exe"            "Applications\Tools\Productivity"
+call :pub "Word.Cloud"            "Applications\Tools\Productivity\Word.Cloud"           "Word.Cloud.exe"            "Applications\Tools\Productivity"
+call :pub "Char.Art"              "Applications\Tools\Productivity\Char.Art"             "Char.Art.exe"              "Applications\Tools\Productivity"
 
 :: ── Applications / Tools / System ───────────────────────────────
-call :pub "Env.Guard"             "Applications\Tools\System\Env.Guard"                  "Env.Guard.exe"         "Applications\Tools\System"
+call :pub "Env.Guard"             "Applications\Tools\System\Env.Guard"                  "Env.Guard.exe"             "Applications\Tools\System"
 
 :: ── Games / Action ───────────────────────────────────────────────
-call :pub "Sand.Fall"             "Games\Sandbox\Sand.Fall"                              "SandFall.exe"          "Games\Sandbox"
-call :pub "Dungeon.Dash"          "Games\Action\Dungeon.Dash"                            "Dungeon.Dash.exe"      "Games\Action"
+call :pub "Dungeon.Dash"          "Games\Action\Dungeon.Dash"                            "Dungeon.Dash.exe"          "Games\Action"
 
 :: ── Games / Arcade ───────────────────────────────────────────────
-call :pub "Brick.Blitz"           "Games\Arcade\Brick.Blitz"                             "Brick.Blitz.exe"       "Games\Arcade"
-call :pub "Dash.City"             "Games\Arcade\Dash.City"                               "Dash.City.exe"         "Games\Arcade"
-call :pub "Neon.Run"              "Games\Arcade\Neon.Run"                                "Neon.Run.exe"          "Games\Arcade"
-call :pub "Neon.Slice"            "Games\Arcade\Neon.Slice"                              "Neon.Slice.exe"        "Games\Arcade\Neon.Slice"
+call :pub "Brick.Blitz"           "Games\Arcade\Brick.Blitz"                             "Brick.Blitz.exe"           "Games\Arcade"
+call :pub "Dash.City"             "Games\Arcade\Dash.City"                               "Dash.City.exe"             "Games\Arcade"
+call :pub "Neon.Run"              "Games\Arcade\Neon.Run"                                "Neon.Run.exe"              "Games\Arcade"
+call :pub "Neon.Slice"            "Games\Arcade\Neon.Slice"                              "Neon.Slice.exe"            "Games\Arcade\Neon.Slice"
 
 :: ── Games / Puzzle ───────────────────────────────────────────────
-call :pub "Gravity.Flip"          "Games\Puzzle\Gravity.Flip"                            "Gravity.Flip.exe"      "Games\Puzzle"
-call :pub "Hue.Flow"              "Games\Puzzle\Hue.Flow"                                "Hue.Flow.exe"          "Games\Puzzle"
-call :pub "Stack.Crash"           "Games\Puzzle\Stack.Crash"                             "StackCrash.exe"        "Games\Puzzle"
+call :pub "Gravity.Flip"          "Games\Puzzle\Gravity.Flip"                            "Gravity.Flip.exe"          "Games\Puzzle"
+call :pub "Hue.Flow"              "Games\Puzzle\Hue.Flow"                                "Hue.Flow.exe"              "Games\Puzzle"
+call :pub "Orbit.Craft"           "Games\Puzzle\Orbit.Craft"                             "OrbitCraft.exe"            "Games\Puzzle"
 
 :: ── Games / Racing ───────────────────────────────────────────────
-call :pub "Nitro.Drift"           "Games\Racing\Nitro.Drift"                             "Nitro.Drift.exe"       "Games\Racing"
+call :pub "Nitro.Drift"           "Games\Racing\Nitro.Drift"                             "Nitro.Drift.exe"           "Games\Racing"
 
 :: ── Games / Rhythm ───────────────────────────────────────────────
-call :pub "Beat.Drop"             "Games\Rhythm\Beat.Drop"                               "Beat.Drop.exe"         "Games\Rhythm"
+call :pub "Beat.Drop"             "Games\Rhythm\Beat.Drop"                               "Beat.Drop.exe"             "Games\Rhythm"
+
+:: ── Games / Sandbox ──────────────────────────────────────────────
+call :pub "Sand.Fall"             "Games\Sandbox\Sand.Fall"                              "SandFall.exe"              "Games\Sandbox"
 
 :: ── Games / Shooter ──────────────────────────────────────────────
-call :pub "Dodge.Blitz"           "Games\Shooter\Dodge.Blitz"                            "Dodge.Blitz.exe"       "Games\Shooter"
-call :pub "Star.Strike"           "Games\Shooter\Star.Strike"                            "Star.Strike.exe"       "Games\Shooter"
+call :pub "Dodge.Blitz"           "Games\Shooter\Dodge.Blitz"                            "Dodge.Blitz.exe"           "Games\Shooter"
+call :pub "Star.Strike"           "Games\Shooter\Star.Strike"                            "Star.Strike.exe"           "Games\Shooter"
 
 :: ── Games / Strategy ─────────────────────────────────────────────
-call :pub "Tower.Guard"           "Games\Strategy\Tower.Guard"                           "Tower.Guard.exe"       "Games\Strategy"
+call :pub "Tower.Guard"           "Games\Strategy\Tower.Guard"                           "Tower.Guard.exe"           "Games\Strategy"
 
 :: Remove .pdb files (recursive)
 echo !DG!Cleaning .pdb files...!RS!

@@ -79,6 +79,7 @@ echo !CY!  42!RS! Sand.Fall             !DG!Games/Sandbox!RS!
 echo !CY!  43!RS! Dodge.Blitz           !DG!Games/Shooter!RS!
 echo !CY!  44!RS! Star.Strike           !DG!Games/Shooter!RS!
 echo !CY!  45!RS! Tower.Guard           !DG!Games/Strategy!RS!
+echo !CY!  46!RS! Deep.Diff             !DG!Applications/Files!RS!
 echo.
 echo !DG!--------------------------------------------------!RS!
 echo !DG!  번호 입력 (공백/쉼표로 구분)   예: 1 3 5  또는  1,3,5!RS!
@@ -152,6 +153,7 @@ for %%n in (!SEL!) do (
     if "%%n"=="43" call :pub "Dodge.Blitz"            "Games\Shooter\Dodge.Blitz"                         "Dodge.Blitz.exe"           "Games\Shooter"
     if "%%n"=="44" call :pub "Star.Strike"            "Games\Shooter\Star.Strike"                         "Star.Strike.exe"           "Games\Shooter"
     if "%%n"=="45" call :pub "Tower.Guard"            "Games\Strategy\Tower.Guard"                        "Tower.Guard.exe"           "Games\Strategy"
+    if "%%n"=="46" call :pub "Deep.Diff"              "Applications\Files\Deep.Diff"                      "DeepDiff.exe"              "Applications\Files\Deep.Diff"
 )
 goto :DONE
 
@@ -213,6 +215,7 @@ call :pub "Sand.Fall"             "Games\Sandbox\Sand.Fall"                     
 call :pub "Dodge.Blitz"           "Games\Shooter\Dodge.Blitz"                         "Dodge.Blitz.exe"           "Games\Shooter"
 call :pub "Star.Strike"           "Games\Shooter\Star.Strike"                         "Star.Strike.exe"           "Games\Shooter"
 call :pub "Tower.Guard"           "Games\Strategy\Tower.Guard"                        "Tower.Guard.exe"           "Games\Strategy"
+call :pub "Deep.Diff"             "Applications\Files\Deep.Diff"                      "DeepDiff.exe"              "Applications\Files\Deep.Diff"
 
 :: ── 완료 ──────────────────────────────────────────────────────────
 :DONE

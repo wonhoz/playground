@@ -38,6 +38,7 @@ call :pub "Stay.Awake"            "Applications\Automation\Stay.Awake"          
 
 :: ── Applications / Files ─────────────────────────────────────────
 call :pub "Batch.Rename"          "Applications\Files\Batch.Rename"                      "Batch.Rename.exe"          "Applications\Files"
+call :pub "Deep.Diff"             "Applications\Files\Deep.Diff"                         "DeepDiff.exe"              "Applications\Files\Deep.Diff"
 call :pub "Disk.Lens"             "Applications\Files\Disk.Lens"                         "Disk.Lens.exe"             "Applications\Files\Disk.Lens"
 call :pub "File.Duplicates"       "Applications\Files\File.Duplicates"                   "File.Duplicates.exe"       "Applications\Files"
 call :pub "File.Unlocker"         "Applications\Files\File.Unlocker"                     "File.Unlocker.exe"         "Applications\Files"

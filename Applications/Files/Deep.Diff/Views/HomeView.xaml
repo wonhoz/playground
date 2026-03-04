@@ -3,6 +3,26 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              Background="#0F0F1E">
 
+    <UserControl.Resources>
+        <Style x:Key="CompareCard" TargetType="Border">
+            <Setter Property="Width"        Value="200"/>
+            <Setter Property="Height"       Value="180"/>
+            <Setter Property="Background"   Value="#14142A"/>
+            <Setter Property="BorderBrush"  Value="#2E2E55"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius" Value="10"/>
+            <Setter Property="Margin"       Value="0,0,16,16"/>
+            <Setter Property="Padding"      Value="20,24"/>
+            <Setter Property="Cursor"       Value="Hand"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background"   Value="#1E1E40"/>
+                    <Setter Property="BorderBrush"  Value="#5B8FFF"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+
     <ScrollViewer VerticalScrollBarVisibility="Auto">
         <StackPanel Margin="40,32">
 
@@ -126,23 +146,4 @@
         </StackPanel>
     </ScrollViewer>
 
-    <UserControl.Resources>
-        <Style x:Key="CompareCard" TargetType="Border">
-            <Setter Property="Width"        Value="200"/>
-            <Setter Property="Height"       Value="180"/>
-            <Setter Property="Background"   Value="#14142A"/>
-            <Setter Property="BorderBrush"  Value="#2E2E55"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="CornerRadius" Value="10"/>
-            <Setter Property="Margin"       Value="0,0,16,16"/>
-            <Setter Property="Padding"      Value="20,24"/>
-            <Setter Property="Cursor"       Value="Hand"/>
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background"   Value="#1E1E40"/>
-                    <Setter Property="BorderBrush"  Value="#5B8FFF"/>
-                </Trigger>
-            </Style.Triggers>
-        </Style>
-    </UserControl.Resources>
 </UserControl>

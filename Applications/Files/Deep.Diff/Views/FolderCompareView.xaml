@@ -4,6 +4,11 @@
              xmlns:local="clr-namespace:DeepDiff.Views"
              Background="#0F0F1E">
 
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+        <local:NullToVisibilityConverter x:Key="NullToVisibility"/>
+    </UserControl.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>   <!-- 경로 선택 -->
@@ -292,9 +297,5 @@
         </Border>
     </Grid>
 
-    <UserControl.Resources>
-        <BooleanToVisibilityConverter x:Key="BoolToVis"/>
-        <local:NullToVisibilityConverter x:Key="NullToVisibility"/>
-    </UserControl.Resources>
 
 </UserControl>

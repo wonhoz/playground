@@ -61,7 +61,7 @@ public static class DiffAlgorithm
         var ops = new List<EditOp>();
         int x = left.Count, y = right.Count;
 
-        for (int d = trace.Count - 1; d > 0 && (x > 0 || y > 0); d--)
+        for (int d = trace.Count - 1; d > 1 && (x > 0 || y > 0); d--)
         {
             var v = trace[d - 1];
             int k = x - y;

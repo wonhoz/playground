@@ -1,0 +1,23 @@
+using System.IO;
+
+namespace MarkView.Models;
+
+public class MarkDocument
+{
+    public string FilePath { get; set; } = string.Empty;
+    public string Content { get; set; } = string.Empty;
+    public bool IsModified { get; set; }
+    public bool IsNew => string.IsNullOrEmpty(FilePath);
+
+    public string TabTitle
+    {
+        get
+        {
+            var name = IsNew ? "새 문서" : Path.GetFileName(FilePath);
+            return IsModified ? name + " •" : name;
+        }
+    }
+
+    public string FileName => IsNew ? "새 문서" : Path.GetFileName(FilePath);
+    public string? Directory => IsNew ? null : Path.GetDirectoryName(FilePath);
+}

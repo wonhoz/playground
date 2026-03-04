@@ -23,6 +23,7 @@ public partial class MainWindow : Window
     private bool _isTocVisible;
     private bool _suppressEditorChange;
     private DispatcherTimer? _previewTimer;
+    private string _currentTheme = "dark";
 
     public MainWindow()
     {
@@ -292,7 +293,7 @@ public partial class MainWindow : Window
     {
         if (_activeIndex < 0 || _activeIndex >= _docs.Count) return;
         var doc = _docs[_activeIndex];
-        var html = _renderer.RenderToHtml(doc.Content, doc.FilePath);
+        var html = _renderer.RenderToHtml(doc.Content, doc.FilePath, _currentTheme);
         Viewer.NavigateToString(html);
     }
 
@@ -420,6 +421,16 @@ public partial class MainWindow : Window
     private void BtnToc_Click(object sender, RoutedEventArgs e)
     {
         SetTocVisible(!_isTocVisible);
+    }
+
+    private void CmbTheme_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (!IsLoaded) return;
+        if (CmbTheme.SelectedItem is ComboBoxItem item && item.Tag is string tag)
+        {
+            _currentTheme = tag;
+            RenderPreview();
+        }
     }
 
     private void BtnReload_Click(object sender, RoutedEventArgs e)

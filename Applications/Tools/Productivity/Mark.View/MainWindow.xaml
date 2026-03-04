@@ -38,13 +38,14 @@
             Padding="8,6">
       <Grid>
         <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="Auto"/>
           <ColumnDefinition Width="*"/>
           <ColumnDefinition Width="Auto"/>
+          <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
         <!-- 왼쪽: 파일 버튼 -->
-        <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+        <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center"
+                    HorizontalAlignment="Left">
           <Button Style="{StaticResource IconButton}" Click="BtnNew_Click"
                   ToolTip="새 파일 (Ctrl+N)" Margin="0,0,2,0" Padding="8,5">
             <TextBlock Text="+" FontSize="16" FontWeight="Bold"
@@ -84,15 +85,28 @@
           </Button>
         </StackPanel>
 
-        <!-- 가운데: 앱 제목 -->
+        <!-- 가운데: 앱 제목 (진짜 중앙) -->
         <TextBlock Grid.Column="1"
                    Text="Mark.View"
                    FontSize="13" FontWeight="SemiBold"
                    Foreground="{StaticResource AccentBrush}"
-                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                   VerticalAlignment="Center"/>
 
-        <!-- 오른쪽: 찾기 -->
-        <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
+        <!-- 오른쪽: 테마 + 찾기 -->
+        <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center"
+                    HorizontalAlignment="Right">
+          <!-- 테마 선택 -->
+          <ComboBox x:Name="CmbTheme" Width="110" Height="28"
+                    ToolTip="색상 테마 선택"
+                    SelectionChanged="CmbTheme_SelectionChanged"
+                    Margin="0,0,6,0">
+            <ComboBoxItem Content="다크 (기본)" Tag="dark" IsSelected="True"/>
+            <ComboBoxItem Content="GitHub Dark" Tag="github-dark"/>
+            <ComboBoxItem Content="Nord" Tag="nord"/>
+            <ComboBoxItem Content="Dracula" Tag="dracula"/>
+            <ComboBoxItem Content="Sepia" Tag="sepia"/>
+            <ComboBoxItem Content="라이트" Tag="light"/>
+          </ComboBox>
           <TextBox x:Name="TxtFind" Width="180" Height="28"
                    ToolTip="찾기 (Ctrl+F)"
                    TextChanged="TxtFind_TextChanged"
@@ -123,7 +137,7 @@
     <!-- ══ 메인 콘텐츠 ═══════════════════════════════════ -->
     <Grid Grid.Row="1">
       <Grid.ColumnDefinitions>
-        <ColumnDefinition x:Name="TocColumn" Width="220" MinWidth="0"/>
+        <ColumnDefinition x:Name="TocColumn" Width="0" MinWidth="0"/>
         <ColumnDefinition Width="Auto"/>
         <ColumnDefinition Width="*"/>
       </Grid.ColumnDefinitions>

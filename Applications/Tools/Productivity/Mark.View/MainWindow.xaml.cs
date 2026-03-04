@@ -51,9 +51,9 @@ public partial class MainWindow : Window
 
     private void ShowLoading(string message = "로딩 중...")
     {
-        LoadingText.Text = message;
-        LoadingOverlay.Visibility = Visibility.Visible;
-        _loadingAnim = new DoubleAnimation(-130, 260,
+        StatusPath.Text = message;
+        LoadingBarIndicator.Visibility = Visibility.Visible;
+        _loadingAnim = new DoubleAnimation(-200, 1300,
             new Duration(TimeSpan.FromSeconds(1.1)))
         {
             RepeatBehavior = RepeatBehavior.Forever,
@@ -65,7 +65,12 @@ public partial class MainWindow : Window
     private void HideLoading()
     {
         LoadingBarTranslate.BeginAnimation(TranslateTransform.XProperty, null);
-        LoadingOverlay.Visibility = Visibility.Collapsed;
+        LoadingBarIndicator.Visibility = Visibility.Collapsed;
+        // 상태바 경로 텍스트 복원
+        if (_activeIndex >= 0 && _activeIndex < _docs.Count)
+            StatusPath.Text = _docs[_activeIndex].IsNew ? "새 문서 (저장되지 않음)" : _docs[_activeIndex].FilePath;
+        else
+            StatusPath.Text = "파일을 열어주세요";
     }
 
     // ── WebView2 초기화 ──────────────────────────────────────────────────

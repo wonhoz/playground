@@ -65,6 +65,7 @@ call :pub "Port.Watch"            "Applications\Tools\Network\Port.Watch"       
 
 :: ── Applications / Tools / Productivity ─────────────────────────
 call :pub "Clipboard.Stacker"     "Applications\Tools\Productivity\Clipboard.Stacker"    "Clipboard.Stacker.exe"     "Applications\Tools\Productivity"
+call :pub "Mouse.Flick"           "Applications\Tools\Productivity\Mouse.Flick"          "Mouse.Flick.exe"           "Applications\Tools\Productivity"
 call :pub "Code.Snap"             "Applications\Tools\Productivity\Code.Snap"            "Code.Snap.exe"             "Applications\Tools\Productivity"
 call :pub "QR.Forge"              "Applications\Tools\Productivity\QR.Forge"             "QR.Forge.exe"              "Applications\Tools\Productivity"
 call :pub "Screen.Recorder"       "Applications\Tools\Productivity\Screen.Recorder"      "Screen.Recorder.exe"       "Applications\Tools\Productivity"

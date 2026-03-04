@@ -33,6 +33,7 @@
 | `Env.Guard` | System | Windows 환경변수 GUI 관리자 + 스냅샷/롤백 |
 | `Link.Vault` | Tools | 완전 오프라인 북마크 관리자 (페이지 스냅샷) |
 | `Mark.View` | Productivity | Markdown 뷰어 + 실시간 에디터 (멀티탭, TOC, WebView2) |
+| `Mouse.Flick` | Productivity | 전역 마우스 제스처 → 키보드 단축키 매핑 트레이 앱 |
 
 ---
 
@@ -314,6 +315,7 @@
 | **네트워크 속도 모니터** | Net.Speed |
 | **온도 모니터** | Thermal.View |
 | **핫 코너 / 모서리 제스처** | Hot.Corner |
+| **마우스 제스처 → 단축키** | Mouse.Flick |
 | **텍스트 스니펫 자동확장** | Auto.Type (≠ Smart.Paste) |
 | **매크로 패드 / 런처 버튼** | Macro.Pad (≠ Run.Deck, Key.Tape) |
 | **무드보드 / 이미지 콜라주** | Mood.Board |

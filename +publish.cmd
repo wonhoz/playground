@@ -51,6 +51,7 @@ echo !CY!  20!RS! Port.Watch            !DG!Tools/Network!RS!
 echo.
 echo !BD!!DG!  Tools / Productivity!RS!
 echo !CY!  21!RS! Clipboard.Stacker     !DG!Tools/Productivity!RS!
+echo !CY!  44!RS! Mouse.Flick           !DG!Tools/Productivity!RS!
 echo !CY!  22!RS! Code.Snap             !DG!Tools/Productivity!RS!
 echo !CY!  23!RS! QR.Forge              !DG!Tools/Productivity!RS!
 echo !CY!  24!RS! Screen.Recorder       !DG!Tools/Productivity!RS!
@@ -126,6 +127,7 @@ for %%n in (!SEL!) do (
     if "%%n"=="19" call :pub "DNS.Flip"               "Applications\Tools\Network\DNS.Flip"               "Dns.Flip.exe"              "Applications\Tools\Network"
     if "%%n"=="20" call :pub "Port.Watch"             "Applications\Tools\Network\Port.Watch"             "Port.Watch.exe"            "Applications\Tools\Network"
     if "%%n"=="21" call :pub "Clipboard.Stacker"      "Applications\Tools\Productivity\Clipboard.Stacker" "Clipboard.Stacker.exe"     "Applications\Tools\Productivity"
+    if "%%n"=="44" call :pub "Mouse.Flick"            "Applications\Tools\Productivity\Mouse.Flick"       "Mouse.Flick.exe"           "Applications\Tools\Productivity"
     if "%%n"=="22" call :pub "Code.Snap"              "Applications\Tools\Productivity\Code.Snap"         "Code.Snap.exe"             "Applications\Tools\Productivity"
     if "%%n"=="23" call :pub "QR.Forge"               "Applications\Tools\Productivity\QR.Forge"          "QR.Forge.exe"              "Applications\Tools\Productivity"
     if "%%n"=="24" call :pub "Screen.Recorder"        "Applications\Tools\Productivity\Screen.Recorder"   "Screen.Recorder.exe"       "Applications\Tools\Productivity"
@@ -185,6 +187,7 @@ call :pub "Table.Craft"           "Applications\Tools\Dev\Table.Craft"          
 call :pub "DNS.Flip"              "Applications\Tools\Network\DNS.Flip"               "Dns.Flip.exe"              "Applications\Tools\Network"
 call :pub "Port.Watch"            "Applications\Tools\Network\Port.Watch"             "Port.Watch.exe"            "Applications\Tools\Network"
 call :pub "Clipboard.Stacker"     "Applications\Tools\Productivity\Clipboard.Stacker" "Clipboard.Stacker.exe"     "Applications\Tools\Productivity"
+call :pub "Mouse.Flick"           "Applications\Tools\Productivity\Mouse.Flick"       "Mouse.Flick.exe"           "Applications\Tools\Productivity"
 call :pub "Code.Snap"             "Applications\Tools\Productivity\Code.Snap"         "Code.Snap.exe"             "Applications\Tools\Productivity"
 call :pub "QR.Forge"              "Applications\Tools\Productivity\QR.Forge"          "QR.Forge.exe"              "Applications\Tools\Productivity"
 call :pub "Screen.Recorder"       "Applications\Tools\Productivity\Screen.Recorder"   "Screen.Recorder.exe"       "Applications\Tools\Productivity"

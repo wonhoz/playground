@@ -8,6 +8,7 @@ using System.Windows.Media;
 using System.Windows.Threading;
 using MarkView.Models;
 using MarkView.Services;
+using System.Linq;
 using Microsoft.Win32;
 using Microsoft.Web.WebView2.Core;
 
@@ -18,6 +19,7 @@ public partial class MainWindow : Window
     private readonly MarkdownRenderer _renderer = new();
     private readonly List<MarkDocument> _docs = [];
     private readonly List<Border> _tabs = [];
+    private readonly AppSettings _settings;
     private int _activeIndex = -1;
     private bool _isEditMode;
     private bool _isTocVisible;
@@ -27,9 +29,19 @@ public partial class MainWindow : Window
 
     public MainWindow()
     {
+        _settings = AppSettings.Load();
+        _currentTheme = _settings.Theme;
         InitializeComponent();
+        ApplySavedTheme();
         InitWebView();
         SetupPreviewTimer();
+    }
+
+    private void ApplySavedTheme()
+    {
+        var item = CmbTheme.Items.OfType<ComboBoxItem>()
+            .FirstOrDefault(i => i.Tag as string == _currentTheme);
+        if (item != null) CmbTheme.SelectedItem = item;
     }
 
     // ── WebView2 초기화 ──────────────────────────────────────────────────
@@ -429,6 +441,8 @@ public partial class MainWindow : Window
         if (CmbTheme.SelectedItem is ComboBoxItem item && item.Tag is string tag)
         {
             _currentTheme = tag;
+            _settings.Theme = tag;
+            _settings.Save();
             RenderPreview();
         }
     }

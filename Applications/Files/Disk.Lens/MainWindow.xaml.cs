@@ -601,15 +601,18 @@ public partial class MainWindow : Window
         }
     }
 
+    private void MainTree_PreviewMouseRightButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+    {
+        var source = e.OriginalSource as DependencyObject;
+        while (source != null && source is not TreeViewItem)
+            source = VisualTreeHelper.GetParent(source);
+        if (source is TreeViewItem tvi)
+            tvi.IsSelected = true;
+    }
+
     private void RemoveFromParent(DiskItem item)
     {
-        // 현재 표시된 트리에서 제거
-        foreach (DiskItem displayed in MainTree.Items.OfType<DiskItem>().ToList())
-        {
-            if (displayed == item) { MainTree.Items.Remove(item); return; }
-        }
-        // 재귀 탐색
-        if (_currentRoot != null) RemoveChildRecursive(_currentRoot, item);
+        MainTree.Items.Remove(item);
         if (_root != null) RemoveChildRecursive(_root, item);
     }
 

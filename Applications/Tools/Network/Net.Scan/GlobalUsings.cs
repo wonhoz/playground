@@ -1,0 +1,16 @@
+global using System.Collections.Concurrent;
+global using System.Collections.ObjectModel;
+global using System.ComponentModel;
+global using System.Diagnostics;
+global using System.IO;
+global using System.Net;
+global using System.Net.NetworkInformation;
+global using System.Net.Sockets;
+global using System.Runtime.CompilerServices;
+global using System.Windows;
+global using System.Windows.Controls;
+global using System.Windows.Media;
+global using System.Windows.Shapes;
+global using System.Windows.Threading;
+global using NetScan.Models;
+global using NetScan.Services;

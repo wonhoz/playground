@@ -18,6 +18,7 @@
 | `File.Duplicates` | Files | SHA-256 + dHash 중복 파일 탐지기 |
 | `Hash.Check` | Files | MD5/SHA-1/SHA-256/SHA-512 해시 계산·비교·일괄 검증·변경 감시 |
 | `Echo.Text` | Tools/Productivity | 오프라인 TTS, SAPI 음성 선택, 속도/볼륨/음높이, WAV/MP3 내보내기, 챕터 일괄 출력 |
+| `Net.Scan` | Tools/Network | LAN ARP 스캐너, 기기 탐지·제조사(OUI) 조회·포트 스캔·핑 모니터·핑 히스토리 그래프 |
 | `Photo.Video.Organizer` | Media | EXIF 날짜 기반 미디어 정리기 |
 | `Api.Probe` | Dev/Tools | 미니멀 오프라인 API 테스터 (Postman 대체) |
 | `Hash.Forge` → `Text.Forge`로 통합 | Dev/Tools | 해시·인코딩 올인원 (MD5/SHA/Base64/JWT/UUID) |

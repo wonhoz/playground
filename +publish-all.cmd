@@ -65,6 +65,7 @@ call :pub "Table.Craft"           "Applications\Tools\Dev\Table.Craft"          
 
 :: ── Applications / Tools / Network ──────────────────────────────
 call :pub "DNS.Flip"              "Applications\Tools\Network\DNS.Flip"                  "Dns.Flip.exe"              "Applications\Tools\Network"
+call :pub "Net.Scan"              "Applications\Tools\Network\Net.Scan"                  "NetScan.exe"               "Applications\Tools\Network"
 call :pub "Port.Watch"            "Applications\Tools\Network\Port.Watch"                "Port.Watch.exe"            "Applications\Tools\Network"
 
 :: ── Applications / Tools / Productivity ─────────────────────────

@@ -84,6 +84,7 @@ echo !CY!  47!RS! PDF.Forge             !DG!Applications/Files!RS!
 echo !CY!  48!RS! Zip.Peek              !DG!Applications/Files!RS!
 echo !CY!  49!RS! Hash.Check            !DG!Applications/Files!RS!
 echo !CY!  50!RS! Echo.Text             !DG!Tools/Productivity!RS!
+echo !CY!  51!RS! Net.Scan              !DG!Tools/Network!RS!
 echo.
 echo !DG!--------------------------------------------------!RS!
 echo !DG!  번호 입력 (공백/쉼표로 구분)   예: 1 3 5  또는  1,3,5!RS!
@@ -162,6 +163,7 @@ for %%n in (!SEL!) do (
     if "%%n"=="48" call :pub "Zip.Peek"               "Applications\Files\Zip.Peek"                       "ZipPeek.exe"               "Applications\Files"
     if "%%n"=="49" call :pub "Hash.Check"             "Applications\Files\Hash.Check"                     "HashCheck.exe"             "Applications\Files"
     if "%%n"=="50" call :pub "Echo.Text"              "Applications\Tools\Productivity\Echo.Text"          "EchoText.exe"              "Applications\Tools\Productivity"
+    if "%%n"=="51" call :pub "Net.Scan"               "Applications\Tools\Network\Net.Scan"                "NetScan.exe"               "Applications\Tools\Network"
 )
 goto :DONE
 
@@ -200,6 +202,7 @@ call :pub "Signal.Flow"           "Applications\Tools\Dev\Signal.Flow"          
 call :pub "Serve.Cast"            "Applications\Tools\Dev\Serve.Cast"                 "Serve.Cast.exe"            "Applications\Tools\Dev"
 call :pub "Table.Craft"           "Applications\Tools\Dev\Table.Craft"                "Table.Craft.exe"           "Applications\Tools\Dev"
 call :pub "DNS.Flip"              "Applications\Tools\Network\DNS.Flip"               "Dns.Flip.exe"              "Applications\Tools\Network"
+call :pub "Net.Scan"              "Applications\Tools\Network\Net.Scan"               "NetScan.exe"               "Applications\Tools\Network"
 call :pub "Port.Watch"            "Applications\Tools\Network\Port.Watch"             "Port.Watch.exe"            "Applications\Tools\Network"
 call :pub "Clipboard.Stacker"     "Applications\Tools\Productivity\Clipboard.Stacker" "Clipboard.Stacker.exe"     "Applications\Tools\Productivity"
 call :pub "Mouse.Flick"           "Applications\Tools\Productivity\Mouse.Flick"       "Mouse.Flick.exe"           "Applications\Tools\Productivity"

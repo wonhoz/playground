@@ -213,6 +213,23 @@ public partial class FolderCompareView : UserControl
     private void TxtSearch_TextChanged(object s, TextChangedEventArgs e) => ApplyFilterAndSearch();
     private void BtnRefresh_Click(object s, RoutedEventArgs e) => RunCompare();
 
+    // ─── 컬럼 너비 자동 조정 ─────────────────────────────────
+    // 고정 컬럼: LeftSize(70) + LeftMod(110) + Status(50) + RightSize(70) + RightMod(110) = 410
+    private const double FixedColumnsWidth = 70 + 110 + 50 + 70 + 110;
+
+    private void FileList_SizeChanged(object sender, SizeChangedEventArgs e)
+    {
+        if (FileList.View is not GridView gv || gv.Columns.Count < 7) return;
+        double nameWidth = Math.Max(80, (FileList.ActualWidth - FixedColumnsWidth - SystemParameters.VerticalScrollBarWidth) / 2);
+        gv.Columns[0].Width = nameWidth;  // 왼쪽 이름
+        gv.Columns[1].Width = 70;         // 왼쪽 크기
+        gv.Columns[2].Width = 110;        // 왼쪽 수정일
+        gv.Columns[3].Width = 50;         // 상태
+        gv.Columns[4].Width = nameWidth;  // 오른쪽 이름
+        gv.Columns[5].Width = 70;         // 오른쪽 크기
+        gv.Columns[6].Width = 110;        // 오른쪽 수정일
+    }
+
     // ─── 정렬 ─────────────────────────────────────────────────
 
     private void OnColumnHeaderClick(object s, RoutedEventArgs e)

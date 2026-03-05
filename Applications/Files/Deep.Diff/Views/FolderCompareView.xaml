@@ -76,41 +76,41 @@
         </Border>
 
         <!-- 툴바 -->
-        <Border Grid.Row="1" Background="#0F0F1E" BorderBrush="#2E2E55" BorderThickness="0,0,0,1" Padding="10,6">
-            <WrapPanel Orientation="Horizontal">
-                <Button x:Name="BtnAll"     Content="모두"  Width="60" Click="BtnFilter_Click" Tag="All"/>
-                <Button x:Name="BtnDiffs"   Content="차이"  Width="60" Click="BtnFilter_Click" Tag="Diffs"/>
-                <Button x:Name="BtnSame"    Content="동일"  Width="60" Click="BtnFilter_Click" Tag="Same"/>
-                <Button x:Name="BtnLeftOnly" Content="← 좌만" Width="70" Click="BtnFilter_Click" Tag="LeftOnly"/>
-                <Button x:Name="BtnRightOnly" Content="우만 →" Width="70" Click="BtnFilter_Click" Tag="RightOnly"/>
-
-                <Separator Width="1" Height="20" Background="#2E2E55" Margin="4,0"/>
-
-                <Button Content="← 복사" Width="70" Click="BtnCopyLR_Click" ToolTip="선택 항목을 오른쪽으로 복사"/>
-                <Button Content="복사 →" Width="70" Click="BtnCopyRL_Click" ToolTip="선택 항목을 왼쪽으로 복사"/>
-                <Button Content="← 이동" Width="70" Click="BtnMoveLR_Click" ToolTip="선택 항목을 오른쪽으로 이동"/>
-                <Button Content="이동 →" Width="70" Click="BtnMoveRL_Click" ToolTip="선택 항목을 왼쪽으로 이동"/>
-
-                <Separator Width="1" Height="20" Background="#2E2E55" Margin="4,0"/>
-
-                <Button Content="🗑 삭제"  Width="70" Click="BtnDelete_Click"/>
-                <Button Content="📂 탐색기" Width="75" Click="BtnOpenExplorer_Click"/>
-                <Button Content="📄 텍스트 비교" Width="90" Click="BtnOpenTextDiff_Click"/>
-                <Button Content="🖼 이미지 비교" Width="90" Click="BtnOpenImageDiff_Click"/>
-                <Button Content="🔢 HEX 비교"   Width="80" Click="BtnOpenHexDiff_Click"/>
-                <Button Content="🔄 선택 비교"   Width="80" Click="BtnCompareSelected_Click"
-                        ToolTip="Ctrl로 선택한 2개 파일을 비교 (좌→우)"/>
-
-                <Separator Width="1" Height="20" Background="#2E2E55" Margin="4,0"/>
-
-                <CheckBox x:Name="ChkRecurse" Content="하위폴더" VerticalAlignment="Center"
-                          Checked="ChkRecurse_Changed" Unchecked="ChkRecurse_Changed"/>
-                <CheckBox x:Name="ChkContent" Content="내용 비교" VerticalAlignment="Center"
-                          Checked="ChkContent_Changed" Unchecked="ChkContent_Changed"
-                          ToolTip="파일 내용(해시)으로 비교 (느림)"/>
-
-                <Button Content="🔄 새로고침" Width="85" Click="BtnRefresh_Click" Margin="4,0,0,0"/>
-            </WrapPanel>
+        <Border Grid.Row="1" Background="#0F0F1E" BorderBrush="#2E2E55" BorderThickness="0,0,0,1" Padding="10,5">
+            <StackPanel Orientation="Vertical">
+                <!-- 1행: 필터 + 복사/이동/삭제/탐색기 -->
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,4">
+                    <Button x:Name="BtnAll"       Content="모두"   Click="BtnFilter_Click" Tag="All"/>
+                    <Button x:Name="BtnDiffs"     Content="차이"   Click="BtnFilter_Click" Tag="Diffs"/>
+                    <Button x:Name="BtnSame"      Content="동일"   Click="BtnFilter_Click" Tag="Same"/>
+                    <Button x:Name="BtnLeftOnly"  Content="← 좌만" Click="BtnFilter_Click" Tag="LeftOnly"/>
+                    <Button x:Name="BtnRightOnly" Content="우만 →" Click="BtnFilter_Click" Tag="RightOnly"/>
+                    <Separator Width="1" Height="18" Background="#2E2E55" Margin="6,0"/>
+                    <Button Content="← 복사" Click="BtnCopyLR_Click" ToolTip="선택 항목을 오른쪽으로 복사"/>
+                    <Button Content="복사 →" Click="BtnCopyRL_Click" ToolTip="선택 항목을 왼쪽으로 복사"/>
+                    <Button Content="← 이동" Click="BtnMoveLR_Click" ToolTip="선택 항목을 오른쪽으로 이동"/>
+                    <Button Content="이동 →" Click="BtnMoveRL_Click" ToolTip="선택 항목을 왼쪽으로 이동"/>
+                    <Separator Width="1" Height="18" Background="#2E2E55" Margin="6,0"/>
+                    <Button Content="🗑 삭제"   Click="BtnDelete_Click"/>
+                    <Button Content="📂 탐색기" Click="BtnOpenExplorer_Click"/>
+                </StackPanel>
+                <!-- 2행: 비교 열기 + 옵션 + 새로고침 -->
+                <StackPanel Orientation="Horizontal">
+                    <Button Content="📄 텍스트 비교" Click="BtnOpenTextDiff_Click"/>
+                    <Button Content="🖼 이미지 비교" Click="BtnOpenImageDiff_Click"/>
+                    <Button Content="🔢 HEX 비교"   Click="BtnOpenHexDiff_Click"/>
+                    <Button Content="🔄 선택 비교"   Click="BtnCompareSelected_Click"
+                            ToolTip="Ctrl로 선택한 2개 파일을 비교 (좌→우)"/>
+                    <Separator Width="1" Height="18" Background="#2E2E55" Margin="6,0"/>
+                    <CheckBox x:Name="ChkRecurse" Content="하위폴더" VerticalAlignment="Center" Margin="0,0,8,0"
+                              Checked="ChkRecurse_Changed" Unchecked="ChkRecurse_Changed"/>
+                    <CheckBox x:Name="ChkContent" Content="내용 비교" VerticalAlignment="Center"
+                              Checked="ChkContent_Changed" Unchecked="ChkContent_Changed"
+                              ToolTip="파일 내용(해시)으로 비교 (느림)"/>
+                    <Separator Width="1" Height="18" Background="#2E2E55" Margin="6,0"/>
+                    <Button Content="🔄 새로고침" Click="BtnRefresh_Click"/>
+                </StackPanel>
+            </StackPanel>
         </Border>
 
         <!-- 필터/검색 -->
@@ -160,7 +160,8 @@
                   VirtualizingPanel.IsVirtualizing="True"
                   VirtualizingPanel.VirtualizationMode="Recycling"
                   MouseDoubleClick="FileList_DoubleClick"
-                  GridViewColumnHeader.Click="OnColumnHeaderClick">
+                  GridViewColumnHeader.Click="OnColumnHeaderClick"
+                  SizeChanged="FileList_SizeChanged">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Width="260">

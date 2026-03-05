@@ -276,7 +276,7 @@
 | 이름 | 핵심 기능 | 출처 |
 |------|----------|------|
 | `PDF.Forge` | 오프라인 PDF 올인원 (병합·분리·페이지 조작·압축·워터마크, PdfSharpCore) | **implemented** |
-| `Zip.Peek` | ZIP/7z/RAR/TAR.GZ 추출 없이 트리 탐색·내부 미리보기·선택 추출·내부 텍스트 검색 | idea_20260305 |
+| `Zip.Peek` | ZIP/7z/RAR/TAR.GZ 추출 없이 트리 탐색·내부 미리보기·선택 추출·내부 텍스트 검색 | **implemented** |
 | `Photo.Squash` | PNG/JPG/WebP/AVIF 오프라인 일괄 압축 (Lossy/Lossless 슬라이더, Before/After 비교, 폴더 감시) | idea_20260305 |
 | `Video.Trim` | MP4/MKV/MOV 무손실 컷 + FFmpeg 정밀 재인코딩 트리머 (다중 구간, GIF 변환) | idea_20260305 |
 | `Screen.Stitch` | 연속 스크린샷 자동 이어붙이기 (SIFT 특징점 매칭, 자동 스크롤 캡처 모드, PDF 출력) | idea_20260305 |

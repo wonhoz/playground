@@ -44,6 +44,7 @@ call :pub "File.Duplicates"       "Applications\Files\File.Duplicates"          
 call :pub "File.Unlocker"         "Applications\Files\File.Unlocker"                     "File.Unlocker.exe"         "Applications\Files"
 call :pub "Folder.Purge"          "Applications\Files\Folder.Purge"                      "Folder.Purge.exe"          "Applications\Files"
 call :pub "PDF.Forge"             "Applications\Files\PDF.Forge"                         "PdfForge.exe"              "Applications\Files"
+call :pub "Zip.Peek"              "Applications\Files\Zip.Peek"                          "ZipPeek.exe"               "Applications\Files"
 
 :: ── Applications / Health ────────────────────────────────────────
 call :pub "Toast.Cast"            "Applications\Health\Toast.Cast"                       "Toast.Cast.exe"            "Applications\Health"

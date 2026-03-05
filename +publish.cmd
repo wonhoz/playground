@@ -81,6 +81,7 @@ echo !CY!  44!RS! Star.Strike           !DG!Games/Shooter!RS!
 echo !CY!  45!RS! Tower.Guard           !DG!Games/Strategy!RS!
 echo !CY!  46!RS! Deep.Diff             !DG!Applications/Files!RS!
 echo !CY!  47!RS! PDF.Forge             !DG!Applications/Files!RS!
+echo !CY!  48!RS! Zip.Peek              !DG!Applications/Files!RS!
 echo.
 echo !DG!--------------------------------------------------!RS!
 echo !DG!  번호 입력 (공백/쉼표로 구분)   예: 1 3 5  또는  1,3,5!RS!
@@ -156,6 +157,7 @@ for %%n in (!SEL!) do (
     if "%%n"=="45" call :pub "Tower.Guard"            "Games\Strategy\Tower.Guard"                        "Tower.Guard.exe"           "Games\Strategy"
     if "%%n"=="46" call :pub "Deep.Diff"              "Applications\Files\Deep.Diff"                      "DeepDiff.exe"              "Applications\Files\Deep.Diff"
     if "%%n"=="47" call :pub "PDF.Forge"              "Applications\Files\PDF.Forge"                      "PdfForge.exe"              "Applications\Files"
+    if "%%n"=="48" call :pub "Zip.Peek"               "Applications\Files\Zip.Peek"                       "ZipPeek.exe"               "Applications\Files"
 )
 goto :DONE
 
@@ -181,6 +183,7 @@ call :pub "File.Duplicates"       "Applications\Files\File.Duplicates"          
 call :pub "File.Unlocker"         "Applications\Files\File.Unlocker"                  "File.Unlocker.exe"         "Applications\Files"
 call :pub "Folder.Purge"          "Applications\Files\Folder.Purge"                   "Folder.Purge.exe"          "Applications\Files"
 call :pub "PDF.Forge"             "Applications\Files\PDF.Forge"                      "PdfForge.exe"              "Applications\Files"
+call :pub "Zip.Peek"              "Applications\Files\Zip.Peek"                       "ZipPeek.exe"               "Applications\Files"
 call :pub "Toast.Cast"            "Applications\Health\Toast.Cast"                    "Toast.Cast.exe"            "Applications\Health"
 call :pub "Photo.Video.Organizer" "Applications\Media\Photo.Video.Organizer"          "Photo.Video.Organizer.exe" "Applications\Media"
 call :pub "Api.Probe"             "Applications\Tools\Dev\Api.Probe"                  "Api.Probe.exe"             "Applications\Tools\Dev\Api.Probe"

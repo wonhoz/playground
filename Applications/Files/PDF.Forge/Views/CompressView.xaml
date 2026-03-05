@@ -1,0 +1,60 @@
+<UserControl x:Class="PdfForge.Views.CompressView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Background="#111118">
+    <Grid Margin="24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- 헤더 -->
+        <StackPanel Grid.Row="0" Margin="0,0,0,16">
+            <TextBlock Text="PDF 압축" FontSize="20" FontWeight="SemiBold"
+                       Foreground="#E8E8F0" Margin="0,0,0,4"/>
+            <TextBlock Text="콘텐츠 스트림 재압축으로 파일 크기를 줄입니다."
+                       FontSize="12" Foreground="#888899"/>
+        </StackPanel>
+
+        <!-- 파일 선택 -->
+        <Grid Grid.Row="1" Margin="0,0,0,20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBox x:Name="TxtInput" IsReadOnly="True" Margin="0,0,8,0"
+                     Text="파일을 선택하세요..." Foreground="#888899" Height="32"/>
+            <Button Grid.Column="1" Content="파일 선택" Width="90" Height="32"
+                    Click="SelectFile_Click"/>
+        </Grid>
+
+        <!-- 원본 크기 정보 -->
+        <StackPanel Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <TextBlock x:Name="TxtOrigSize" Text="—" FontSize="36" FontWeight="Light"
+                       Foreground="#E8E8F0" HorizontalAlignment="Center"/>
+            <TextBlock Text="원본 파일 크기" FontSize="12" Foreground="#888899"
+                       HorizontalAlignment="Center" Margin="0,4,0,24"/>
+
+            <TextBlock x:Name="TxtResultSize" Text="" FontSize="24" FontWeight="Light"
+                       Foreground="#5B8FFF" HorizontalAlignment="Center" Visibility="Collapsed"/>
+            <TextBlock x:Name="TxtRatio" Text="" FontSize="12" Foreground="#888899"
+                       HorizontalAlignment="Center" Margin="0,4,0,0" Visibility="Collapsed"/>
+        </StackPanel>
+
+        <!-- 압축 실행 -->
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <ProgressBar x:Name="PbCompress" Height="6" Margin="0,0,12,0"
+                         VerticalAlignment="Center" Visibility="Collapsed" IsIndeterminate="True"/>
+            <Button Grid.Column="1" x:Name="BtnCompress" Content="압축 실행" Width="120" Height="36"
+                    Click="BtnCompress_Click"
+                    Background="#5B8FFF" Foreground="White" FontWeight="SemiBold"
+                    BorderBrush="#4070DD"/>
+        </Grid>
+    </Grid>
+</UserControl>

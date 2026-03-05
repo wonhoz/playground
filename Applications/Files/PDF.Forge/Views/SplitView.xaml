@@ -1,0 +1,102 @@
+<UserControl x:Class="PdfForge.Views.SplitView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Background="#111118">
+    <Grid Margin="24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- 헤더 -->
+        <StackPanel Grid.Row="0" Margin="0,0,0,16">
+            <TextBlock Text="PDF 분리" FontSize="20" FontWeight="SemiBold"
+                       Foreground="#E8E8F0" Margin="0,0,0,4"/>
+            <TextBlock Text="PDF를 범위별로 분리하거나 페이지 단위로 저장합니다."
+                       FontSize="12" Foreground="#888899"/>
+        </StackPanel>
+
+        <!-- 파일 선택 + 분리 모드 -->
+        <Grid Grid.Row="1" Margin="0,0,0,16">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- 입력 파일 -->
+            <Grid Grid.Row="0" Margin="0,0,0,10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBox x:Name="TxtInput" IsReadOnly="True" Margin="0,0,8,0"
+                         Text="파일을 선택하세요..." Foreground="#888899" Height="32"/>
+                <Button Grid.Column="1" Content="파일 선택" Width="90" Height="32"
+                        Click="SelectFile_Click"/>
+            </Grid>
+
+            <!-- 분리 모드 -->
+            <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,10">
+                <RadioButton x:Name="RbEachPage" Content="페이지별 분리" IsChecked="True"
+                             Foreground="#E8E8F0" Margin="0,0,16,0"
+                             Checked="Mode_Changed"/>
+                <RadioButton x:Name="RbRanges" Content="범위 지정" Foreground="#E8E8F0"
+                             Checked="Mode_Changed"/>
+                <TextBlock x:Name="TxtPageCount" Foreground="#888899" FontSize="11"
+                           VerticalAlignment="Center" Margin="16,0,0,0"/>
+            </StackPanel>
+
+            <!-- 범위 입력 (범위 모드일 때만) -->
+            <Grid Grid.Row="2" x:Name="RangePanel" Visibility="Collapsed">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBox x:Name="TxtRanges" Height="32" Margin="0,0,8,0"
+                         ToolTip="예: 1-3, 5-7, 9" Text="예: 1-3, 5-7, 9"
+                         Foreground="#888899"/>
+                <Button Grid.Column="1" Content="범위 추가" Width="90" Height="32"
+                        Click="AddRange_Click"/>
+            </Grid>
+        </Grid>
+
+        <!-- 범위 목록 (범위 모드) -->
+        <Border Grid.Row="2" Background="#16161F" BorderBrush="#2A2A3E"
+                BorderThickness="1" CornerRadius="6" Margin="0,0,0,16">
+            <ListBox x:Name="RangeListBox" Background="Transparent" BorderThickness="0"
+                     Margin="8" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="2,3">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="{Binding Label}" Foreground="#E8E8F0"
+                                       FontSize="13" VerticalAlignment="Center"/>
+                            <Button Grid.Column="1" Content="✕" Width="24" Height="24"
+                                    Tag="{Binding}" Click="RemoveRange_Click"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Border>
+
+        <!-- 실행 -->
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <ProgressBar x:Name="PbSplit" Height="6" Margin="0,0,12,0"
+                         VerticalAlignment="Center" Visibility="Collapsed"/>
+            <Button Grid.Column="1" x:Name="BtnSplit" Content="분리 실행" Width="120" Height="36"
+                    Click="BtnSplit_Click"
+                    Background="#5B8FFF" Foreground="White" FontWeight="SemiBold"
+                    BorderBrush="#4070DD"/>
+        </Grid>
+    </Grid>
+</UserControl>

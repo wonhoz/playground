@@ -1,0 +1,142 @@
+<UserControl x:Class="PdfForge.Views.WatermarkView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Background="#111118">
+    <Grid Margin="24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- 헤더 -->
+        <StackPanel Grid.Row="0" Margin="0,0,0,16">
+            <TextBlock Text="워터마크" FontSize="20" FontWeight="SemiBold"
+                       Foreground="#E8E8F0" Margin="0,0,0,4"/>
+            <TextBlock Text="텍스트 또는 이미지 워터마크를 모든 페이지에 삽입합니다."
+                       FontSize="12" Foreground="#888899"/>
+        </StackPanel>
+
+        <!-- 파일 선택 -->
+        <Grid Grid.Row="1" Margin="0,0,0,16">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBox x:Name="TxtInput" IsReadOnly="True" Margin="0,0,8,0"
+                     Text="파일을 선택하세요..." Foreground="#888899" Height="32"/>
+            <Button Grid.Column="1" Content="파일 선택" Width="90" Height="32"
+                    Click="SelectFile_Click"/>
+        </Grid>
+
+        <!-- 설정 패널 -->
+        <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto">
+            <StackPanel>
+                <!-- 워터마크 타입 -->
+                <TextBlock Text="워터마크 타입" FontSize="12" Foreground="#888899" Margin="0,0,0,6"/>
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,16">
+                    <RadioButton x:Name="RbText" Content="텍스트" IsChecked="True"
+                                 Foreground="#E8E8F0" Margin="0,0,16,0"
+                                 Checked="Type_Changed"/>
+                    <RadioButton x:Name="RbImage" Content="이미지 파일" Foreground="#E8E8F0"
+                                 Checked="Type_Changed"/>
+                </StackPanel>
+
+                <!-- 텍스트 설정 -->
+                <StackPanel x:Name="TextPanel">
+                    <TextBlock Text="텍스트" FontSize="12" Foreground="#888899" Margin="0,0,0,6"/>
+                    <TextBox x:Name="TxtWatermark" Height="32" Margin="0,0,0,12" Text="CONFIDENTIAL"/>
+
+                    <Grid Margin="0,0,0,12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="16"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0">
+                            <TextBlock Text="글자 크기 (pt)" FontSize="12" Foreground="#888899" Margin="0,0,0,6"/>
+                            <TextBox x:Name="TxtFontSize" Height="32" Text="64"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="2">
+                            <TextBlock Text="회전 각도 (°)" FontSize="12" Foreground="#888899" Margin="0,0,0,6"/>
+                            <TextBox x:Name="TxtRotation" Height="32" Text="-45"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <TextBlock Text="투명도" FontSize="12" Foreground="#888899" Margin="0,0,0,6"/>
+                    <Grid Margin="0,0,0,12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="48"/>
+                        </Grid.ColumnDefinitions>
+                        <Slider x:Name="SliderOpacity" Minimum="0.05" Maximum="1.0" Value="0.25"
+                                TickFrequency="0.05" IsSnapToTickEnabled="True"
+                                ValueChanged="Opacity_Changed"/>
+                        <TextBlock x:Name="TxtOpacityVal" Grid.Column="1" Text="25%"
+                                   Foreground="#E8E8F0" FontSize="12"
+                                   VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Grid>
+
+                    <TextBlock Text="색상 (R / G / B)" FontSize="12" Foreground="#888899" Margin="0,0,0,6"/>
+                    <Grid Margin="0,0,0,4">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="8"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="8"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox x:Name="TxtR" Grid.Column="0" Height="32" Text="128"/>
+                        <TextBox x:Name="TxtG" Grid.Column="2" Height="32" Text="128"/>
+                        <TextBox x:Name="TxtB" Grid.Column="4" Height="32" Text="128"/>
+                    </Grid>
+                </StackPanel>
+
+                <!-- 이미지 설정 -->
+                <StackPanel x:Name="ImagePanel" Visibility="Collapsed" Margin="0,0,0,12">
+                    <TextBlock Text="이미지 파일" FontSize="12" Foreground="#888899" Margin="0,0,0,6"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox x:Name="TxtImagePath" IsReadOnly="True" Height="32" Margin="0,0,8,0"
+                                 Text="이미지 파일을 선택하세요..." Foreground="#888899"/>
+                        <Button Grid.Column="1" Content="선택" Width="70" Height="32"
+                                Click="SelectImage_Click"/>
+                    </Grid>
+
+                    <TextBlock Text="크기 비율 (페이지 너비 대비)" FontSize="12" Foreground="#888899"
+                               Margin="0,12,0,6"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="48"/>
+                        </Grid.ColumnDefinitions>
+                        <Slider x:Name="SliderScale" Minimum="0.1" Maximum="1.0" Value="0.4"
+                                TickFrequency="0.05" IsSnapToTickEnabled="True"
+                                ValueChanged="Scale_Changed"/>
+                        <TextBlock x:Name="TxtScaleVal" Grid.Column="1" Text="40%"
+                                   Foreground="#E8E8F0" FontSize="12"
+                                   VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Grid>
+                </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
+
+        <!-- 실행 -->
+        <Grid Grid.Row="3" Margin="0,12,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <ProgressBar x:Name="PbWatermark" Height="6" Margin="0,0,12,0"
+                         VerticalAlignment="Center" Visibility="Collapsed" IsIndeterminate="True"/>
+            <Button Grid.Column="1" x:Name="BtnApply" Content="워터마크 적용" Width="130" Height="36"
+                    Click="BtnApply_Click"
+                    Background="#5B8FFF" Foreground="White" FontWeight="SemiBold"
+                    BorderBrush="#4070DD"/>
+        </Grid>
+    </Grid>
+</UserControl>

@@ -9,7 +9,7 @@ public partial class ImageCompareView : UserControl
 
     private double _zoom = 1.0;
     private ImageDiffService.ImageDiffResult? _result;
-    private string _viewMode = "SideBySide";
+    private string _viewMode = "PixelDiff"; // XAML RbPixelDiff IsChecked="True"와 일치
 
     public ImageCompareView(MainWindow main, string? leftPath = null, string? rightPath = null)
     {

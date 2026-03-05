@@ -51,22 +51,22 @@
         <!-- 툴바 -->
         <Border Grid.Row="1" Background="#0F0F1E" BorderBrush="#2E2E55" BorderThickness="0,0,0,1" Padding="10,6">
             <WrapPanel Orientation="Horizontal">
-                <TextBlock Text="뷰 모드:" Foreground="#8888AA" FontSize="12" VerticalAlignment="Center"/>
-                <RadioButton x:Name="RbSideBySide" Content="나란히" GroupName="ViewMode"
+                <TextBlock Text="뷰 모드:" Foreground="#8888AA" FontSize="12" VerticalAlignment="Center" Margin="0,0,6,0"/>
+                <RadioButton x:Name="RbSideBySide" Content="나란히"   GroupName="ViewMode" Margin="0,0,8,0"
                              VerticalAlignment="Center" Checked="ViewMode_Changed"/>
-                <RadioButton x:Name="RbOverlay"    Content="오버레이" GroupName="ViewMode"
+                <RadioButton x:Name="RbOverlay"    Content="오버레이" GroupName="ViewMode" Margin="0,0,8,0"
                              VerticalAlignment="Center" Checked="ViewMode_Changed"/>
                 <RadioButton x:Name="RbPixelDiff"  Content="픽셀 Diff" GroupName="ViewMode" IsChecked="True"
                              VerticalAlignment="Center" Checked="ViewMode_Changed"/>
-                <Separator Width="1" Height="20" Background="#2E2E55" Margin="4,0"/>
-                <TextBlock Text="줌:" Foreground="#8888AA" FontSize="12" VerticalAlignment="Center"/>
-                <Button Content="−" Width="28" Click="BtnZoomOut_Click" ToolTip="-"/>
+                <Separator Width="1" Height="20" Background="#2E2E55" Margin="10,0"/>
+                <TextBlock Text="줌:" Foreground="#8888AA" FontSize="12" VerticalAlignment="Center" Margin="0,0,6,0"/>
+                <Button Content="−" Width="28" Margin="0,0,2,0" Click="BtnZoomOut_Click" ToolTip="-"/>
                 <TextBlock x:Name="TbZoom" Text="100%" Foreground="#E8E8F0" FontSize="12"
-                           VerticalAlignment="Center" Width="45" TextAlignment="Center"/>
-                <Button Content="+" Width="28" Click="BtnZoomIn_Click" ToolTip="+"/>
-                <Button Content="맞춤" Width="45" Click="BtnZoomFit_Click" ToolTip="F"/>
+                           VerticalAlignment="Center" Width="45" TextAlignment="Center" Margin="0,0,2,0"/>
+                <Button Content="+" Width="28" Margin="0,0,4,0" Click="BtnZoomIn_Click" ToolTip="+"/>
+                <Button Content="맞춤" Width="45" Margin="0,0,2,0" Click="BtnZoomFit_Click" ToolTip="F"/>
                 <Button Content="1:1"  Width="45" Click="BtnZoom100_Click"/>
-                <Separator Width="1" Height="20" Background="#2E2E55" Margin="4,0"/>
+                <Separator Width="1" Height="20" Background="#2E2E55" Margin="10,0"/>
                 <TextBlock x:Name="TbDiffStats" Foreground="#F0B030" FontSize="12" VerticalAlignment="Center"/>
             </WrapPanel>
         </Border>

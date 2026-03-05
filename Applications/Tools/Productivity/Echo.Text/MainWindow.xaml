@@ -1,0 +1,51 @@
+<Window x:Class="EchoText.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:views="clr-namespace:EchoText.Views"
+        Title="Echo.Text" Height="680" Width="940" MinHeight="500" MinWidth="760"
+        Background="#111118" Foreground="#E8E8F0"
+        WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- 헤더 -->
+        <Border Grid.Row="0" Background="#0D0D16" BorderBrush="#2A2A3E" BorderThickness="0,0,0,1" Padding="20,12">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <TextBlock FontSize="20" FontWeight="Bold" VerticalAlignment="Center">
+                    <Run Text="Echo" Foreground="#A855F7"/>
+                    <Run Text=".Text" Foreground="#E8E8F0"/>
+                </TextBlock>
+                <TextBlock Text="오프라인 TTS 도구" FontSize="12" Foreground="#555566"
+                           VerticalAlignment="Center" Margin="12,0,0,0"/>
+            </StackPanel>
+        </Border>
+
+        <!-- 탭 -->
+        <TabControl Grid.Row="1" x:Name="Tabs" SelectionChanged="Tabs_SelectionChanged">
+            <TabItem Header="편집기">
+                <views:EditorView x:Name="EditorView"/>
+            </TabItem>
+            <TabItem Header="일괄 출력">
+                <views:BatchView x:Name="BatchView"/>
+            </TabItem>
+        </TabControl>
+
+        <!-- 상태바 -->
+        <Border Grid.Row="2" Background="#0D0D16" BorderBrush="#2A2A3E" BorderThickness="0,1,0,0" Padding="16,5">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock x:Name="TxtStatus" Text="준비"
+                           Foreground="#888899" FontSize="11" VerticalAlignment="Center"/>
+                <ProgressBar x:Name="PbMain" Grid.Column="1" Width="160" Height="4"
+                             Visibility="Collapsed" VerticalAlignment="Center"/>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

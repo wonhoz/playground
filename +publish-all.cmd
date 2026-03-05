@@ -77,6 +77,7 @@ call :pub "Text.Forge"            "Applications\Tools\Productivity\Text.Forge"  
 call :pub "Word.Cloud"            "Applications\Tools\Productivity\Word.Cloud"           "Word.Cloud.exe"            "Applications\Tools\Productivity"
 call :pub "Char.Art"              "Applications\Tools\Productivity\Char.Art"             "Char.Art.exe"              "Applications\Tools\Productivity"
 call :pub "Mark.View"             "Applications\Tools\Productivity\Mark.View"            "Mark.View.exe"             "Applications\Tools\Productivity\Mark.View"
+call :pub "Echo.Text"            "Applications\Tools\Productivity\Echo.Text"            "EchoText.exe"              "Applications\Tools\Productivity"
 
 :: ── Applications / Tools / System ───────────────────────────────
 call :pub "Env.Guard"             "Applications\Tools\System\Env.Guard"                  "Env.Guard.exe"             "Applications\Tools\System"

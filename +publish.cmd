@@ -83,6 +83,7 @@ echo !CY!  46!RS! Deep.Diff             !DG!Applications/Files!RS!
 echo !CY!  47!RS! PDF.Forge             !DG!Applications/Files!RS!
 echo !CY!  48!RS! Zip.Peek              !DG!Applications/Files!RS!
 echo !CY!  49!RS! Hash.Check            !DG!Applications/Files!RS!
+echo !CY!  50!RS! Echo.Text             !DG!Tools/Productivity!RS!
 echo.
 echo !DG!--------------------------------------------------!RS!
 echo !DG!  번호 입력 (공백/쉼표로 구분)   예: 1 3 5  또는  1,3,5!RS!
@@ -160,6 +161,7 @@ for %%n in (!SEL!) do (
     if "%%n"=="47" call :pub "PDF.Forge"              "Applications\Files\PDF.Forge"                      "PdfForge.exe"              "Applications\Files"
     if "%%n"=="48" call :pub "Zip.Peek"               "Applications\Files\Zip.Peek"                       "ZipPeek.exe"               "Applications\Files"
     if "%%n"=="49" call :pub "Hash.Check"             "Applications\Files\Hash.Check"                     "HashCheck.exe"             "Applications\Files"
+    if "%%n"=="50" call :pub "Echo.Text"              "Applications\Tools\Productivity\Echo.Text"          "EchoText.exe"              "Applications\Tools\Productivity"
 )
 goto :DONE
 
@@ -208,6 +210,7 @@ call :pub "Text.Forge"            "Applications\Tools\Productivity\Text.Forge"  
 call :pub "Word.Cloud"            "Applications\Tools\Productivity\Word.Cloud"        "Word.Cloud.exe"            "Applications\Tools\Productivity"
 call :pub "Char.Art"              "Applications\Tools\Productivity\Char.Art"          "Char.Art.exe"              "Applications\Tools\Productivity"
 call :pub "Mark.View"             "Applications\Tools\Productivity\Mark.View"         "Mark.View.exe"             "Applications\Tools\Productivity\Mark.View"
+call :pub "Echo.Text"            "Applications\Tools\Productivity\Echo.Text"         "EchoText.exe"              "Applications\Tools\Productivity"
 call :pub "Env.Guard"             "Applications\Tools\System\Env.Guard"               "Env.Guard.exe"             "Applications\Tools\System"
 call :pub "Sys.Clean"             "Applications\Tools\System\Sys.Clean"               "Sys.Clean.exe"             "Applications\Tools\System\Sys.Clean"
 call :pub "Dungeon.Dash"          "Games\Action\Dungeon.Dash"                         "Dungeon.Dash.exe"          "Games\Action"

@@ -1,0 +1,150 @@
+<UserControl x:Class="EchoText.Views.BatchView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Background="#111118">
+    <Grid Margin="24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- ── 텍스트 파일 로드 ──────────────────────────────────── -->
+        <Border Grid.Row="0" Background="#16161F" BorderBrush="#2A2A3E"
+                BorderThickness="1" CornerRadius="6" Padding="14,10" Margin="0,0,0,12">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBox x:Name="TxtFilePath" Grid.Column="0" Height="32" IsReadOnly="True"
+                         Text="텍스트 파일을 불러오거나 직접 입력하세요..." Foreground="#888899"
+                         VerticalContentAlignment="Center" Margin="0,0,8,0"/>
+                <Button Grid.Column="1" Content="📂 파일 열기" Width="100" Height="32"
+                        Click="BtnLoad_Click" Margin="0,0,8,0"/>
+                <Button Grid.Column="2" Content="미리보기 분할" Width="110" Height="32"
+                        Click="BtnPreview_Click" x:Name="BtnPreview" IsEnabled="False"/>
+            </Grid>
+        </Border>
+
+        <!-- ── 설정 바 ────────────────────────────────────────────── -->
+        <Border Grid.Row="1" Background="#16161F" BorderBrush="#2A2A3E"
+                BorderThickness="1" CornerRadius="6" Padding="14,10" Margin="0,0,0,12">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="구분자:" Foreground="#888899" FontSize="12"
+                           VerticalAlignment="Center" Margin="0,0,10,0"/>
+                <TextBox x:Name="TxtDelimiter" Width="160" Height="28" Text="---"
+                         VerticalContentAlignment="Center" Margin="0,0,20,0"
+                         ToolTip="챕터 구분 문자열. \n은 줄바꿈으로 인식됩니다."/>
+                <TextBlock Text="음성:" Foreground="#888899" FontSize="12"
+                           VerticalAlignment="Center" Margin="0,0,10,0"/>
+                <ComboBox x:Name="CbVoice" Width="160" Height="28" Margin="0,0,20,0"
+                          SelectionChanged="CbVoice_SelectionChanged"/>
+                <TextBlock Text="속도:" Foreground="#888899" FontSize="12"
+                           VerticalAlignment="Center" Margin="0,0,10,0"/>
+                <Slider x:Name="SlRate" Width="100" Minimum="-10" Maximum="10" Value="0"
+                        TickFrequency="1" IsSnapToTickEnabled="True"
+                        ValueChanged="SlRate_ValueChanged" VerticalAlignment="Center" Margin="0,0,6,0"/>
+                <TextBlock x:Name="TxtRate" Text="0" Foreground="#A855F7" FontSize="12"
+                           FontWeight="Bold" Width="24" VerticalAlignment="Center" Margin="0,0,20,0"/>
+                <TextBlock Text="볼륨:" Foreground="#888899" FontSize="12"
+                           VerticalAlignment="Center" Margin="0,0,10,0"/>
+                <Slider x:Name="SlVolume" Width="80" Minimum="0" Maximum="100" Value="100"
+                        TickFrequency="10" IsSnapToTickEnabled="True"
+                        ValueChanged="SlVolume_ValueChanged" VerticalAlignment="Center" Margin="0,0,6,0"/>
+                <TextBlock x:Name="TxtVolume" Text="100" Foreground="#A855F7" FontSize="12"
+                           FontWeight="Bold" VerticalAlignment="Center"/>
+            </StackPanel>
+        </Border>
+
+        <!-- ── 챕터 목록 ──────────────────────────────────────────── -->
+        <Border Grid.Row="2" Background="#16161F" BorderBrush="#2A2A3E"
+                BorderThickness="1" CornerRadius="6" Margin="0,0,0,12">
+            <Grid>
+                <ListView x:Name="LvChapters" Background="Transparent" BorderThickness="0">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="#" Width="40">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Index}" Foreground="#888899"
+                                                   HorizontalAlignment="Center"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="챕터 제목" Width="300">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Title}" TextTrimming="CharacterEllipsis"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="글자 수" Width="80">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding CharCount}" Foreground="#888899"
+                                                   HorizontalAlignment="Right"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="상태" Width="120">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Status}" Foreground="{Binding StatusColor}"
+                                                   FontWeight="SemiBold"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="파일명" Width="220">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding OutputFile}" Foreground="#555566"
+                                                   FontSize="11" TextTrimming="CharacterEllipsis"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+                <TextBlock x:Name="TxtEmptyHint" Text="텍스트 파일을 불러오고 '미리보기 분할'을 클릭하세요."
+                           Foreground="#444455" FontSize="13"
+                           HorizontalAlignment="Center" VerticalAlignment="Center"
+                           Visibility="Visible"/>
+            </Grid>
+        </Border>
+
+        <!-- ── 출력 폴더 ──────────────────────────────────────────── -->
+        <Border Grid.Row="3" Background="#16161F" BorderBrush="#2A2A3E"
+                BorderThickness="1" CornerRadius="6" Padding="14,10" Margin="0,0,0,12">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="출력 폴더:" Foreground="#888899" FontSize="12"
+                           VerticalAlignment="Center" Margin="0,0,10,0"/>
+                <TextBox x:Name="TxtOutFolder" Grid.Column="1" Height="32" IsReadOnly="True"
+                         Text="폴더를 선택하세요..." Foreground="#888899"
+                         VerticalContentAlignment="Center" Margin="0,0,8,0"/>
+                <Button Grid.Column="2" Content="📁 폴더 선택" Width="100" Height="32"
+                        Click="BtnPickFolder_Click" Margin="0,0,8,0"/>
+                <Button Grid.Column="3" Content="💾 WAV 일괄 저장" Width="120" Height="32"
+                        Click="BtnBatchWav_Click" x:Name="BtnBatchWav"
+                        IsEnabled="False" Margin="0,0,8,0"/>
+                <Button Grid.Column="4" Content="🎵 MP3 일괄 저장" Width="120" Height="32"
+                        Click="BtnBatchMp3_Click" x:Name="BtnBatchMp3"
+                        IsEnabled="False"
+                        Style="{StaticResource AccentButton}"/>
+            </Grid>
+        </Border>
+
+        <!-- 진행 바 -->
+        <ProgressBar Grid.Row="4" x:Name="PbBatch" Height="4" Visibility="Collapsed"/>
+    </Grid>
+</UserControl>

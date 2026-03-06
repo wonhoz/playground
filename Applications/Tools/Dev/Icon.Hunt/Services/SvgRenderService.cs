@@ -23,7 +23,9 @@ public static class SvgRenderService
             var reader = new FileSvgReader(_settings);
             var drawing = reader.Read(filePath);
             if (drawing == null) return null;
-            return new DrawingImage(drawing);
+            var img = new DrawingImage(drawing);
+            img.Freeze(); // 백그라운드 스레드에서 생성 후 UI 스레드 전달을 위해 필수
+            return img;
         }
         catch { return null; }
     }

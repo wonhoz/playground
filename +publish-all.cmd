@@ -97,6 +97,7 @@ call :pub "Neon.Run"              "Games\Arcade\Neon.Run"                       
 call :pub "Neon.Slice"            "Games\Arcade\Neon.Slice"                              "Neon.Slice.exe"            "Games\Arcade\Neon.Slice"
 
 :: ── Games / Puzzle ───────────────────────────────────────────────
+call :pub "Auto.Build"            "Games\Puzzle\Auto.Build"                            "AutoBuild.exe"             "Games\Puzzle"
 call :pub "Gravity.Flip"          "Games\Puzzle\Gravity.Flip"                            "Gravity.Flip.exe"          "Games\Puzzle"
 call :pub "Hue.Flow"              "Games\Puzzle\Hue.Flow"                                "Hue.Flow.exe"              "Games\Puzzle"
 call :pub "Orbit.Craft"           "Games\Puzzle\Orbit.Craft"                             "Orbit.Craft.exe"           "Games\Puzzle\Orbit.Craft"

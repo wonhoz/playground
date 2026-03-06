@@ -337,7 +337,7 @@
 | 이름 | 장르 | 핵심 메커닉 |
 |------|------|------------|
 | `Pulse.Run` | Arcade / Rhythm Runner | 음악 파일 BPM 실시간 분석, 비트에 맞춰 장애물 등장, 커스텀 음악 지원 |
-| `Auto.Build` | Puzzle / Automation / Sandbox | 컨베이어·기계·분류기 배치 자동화 파이프라인, 목표 처리량 달성, 샌드박스 모드 |
+| `Auto.Build` | Puzzle / Automation / Sandbox | 컨베이어·기계·분류기 배치 자동화 파이프라인, 목표 처리량 달성, 샌드박스 모드 — **구현 완료 2026-03-06** |
 | `Neon.Card` | Roguelike / Deckbuilding | 공격·방어·버프 카드 덱빌딩, 매 층 카드 추가·제거·강화, 캐릭터별 고유 덱 |
 | `Shadow.Trap` | Puzzle / Stealth | 실시간 그림자 레이캐스팅, 빛 회피 스텔스 이동, 장애물 회전으로 그림자 경로 생성 |
 | `Neon.Push` | Puzzle / Casual | 소코반+색상 매칭+레이저 연동, 얼음·철 특수 상자, 레벨 에디터 |

@@ -231,14 +231,14 @@ public class MainViewModel : INotifyPropertyChanged, IDisposable
         catch (OperationCanceledException) { throw; }
         catch (Exception ex)
         {
-            StatusText = $"{col.Name} 다운로드 실패";
+            StatusText = $"{col.Name} 다운로드 실패: {ex.Message}";
             return $"{col.Name}: {ex.Message}";
         }
 
         if (icons.Count == 0)
         {
-            StatusText = $"{col.Name} 다운로드 실패 (응답 없음 또는 네트워크 오류)";
-            return $"{col.Name}: 아이콘 데이터를 가져오지 못했습니다";
+            StatusText = $"{col.Name} 다운로드 실패 (아이콘 없음)";
+            return $"{col.Name}: 아이콘을 가져오지 못했습니다";
         }
 
         try

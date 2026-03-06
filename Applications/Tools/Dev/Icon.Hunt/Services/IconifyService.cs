@@ -68,89 +68,112 @@ public class IconifyService : IDisposable
         return svg != null ? cachePath : null;
     }
 
-    // ── 아이콘 목록 인덱싱 (Iconify JSON 형식 다운로드) ───────
+    // ── 아이콘 목록 인덱싱 (Iconify /collection API 사용) ─────
     public async Task<List<IconEntry>> FetchCollectionIconsAsync(
         string prefix, IProgress<(int done, int total)>? progress = null,
         CancellationToken ct = default)
     {
         var icons = new List<IconEntry>();
 
-        // Iconify collection metadata API
-        var url = $"{BaseApi}/{prefix}.json?info=true";
-        try
+        // Iconify API v3: /collection?prefix=xxx
+        var url = $"{BaseApi}/collection?prefix={Uri.EscapeDataString(prefix)}";
+        var json = await _http.GetStringAsync(url, ct);
+        var doc = JsonDocument.Parse(json);
+        var root = doc.RootElement;
+
+        // 카테고리별 태그 매핑 구성
+        // categories: { "Category": ["icon1", "icon2", ...], ... }
+        // uncategorized: ["icon3", "icon4", ...]
+        var catMap = new Dictionary<string, string>(StringComparer.Ordinal);
+
+        if (root.TryGetProperty("categories", out var cats))
         {
-            var json = await _http.GetStringAsync(url, ct);
-            var doc = JsonDocument.Parse(json);
-            var root = doc.RootElement;
-
-            // icon 목록
-            if (!root.TryGetProperty("icons", out var iconsEl)) return icons;
-
-            // aliases 포함
-            var aliasesEl = root.TryGetProperty("aliases", out var ae) ? ae : (JsonElement?)null;
-
-            var entries = iconsEl.EnumerateObject().ToList();
-            int total = entries.Count;
-            int done = 0;
-
-            // 카테고리 정보 (있으면)
-            Dictionary<string, string> catMap = new();
-            if (root.TryGetProperty("categories", out var cats))
+            foreach (var cat in cats.EnumerateObject())
             {
-                foreach (var cat in cats.EnumerateObject())
-                {
-                    if (cat.Value.ValueKind == JsonValueKind.Array)
-                        foreach (var n in cat.Value.EnumerateArray())
-                            catMap[n.GetString() ?? ""] = cat.Name;
-                }
+                if (cat.Value.ValueKind == JsonValueKind.Array)
+                    foreach (var n in cat.Value.EnumerateArray())
+                        catMap[n.GetString() ?? ""] = cat.Name;
             }
+        }
 
-            foreach (var entry in entries)
+        // 전체 아이콘 이름 수집: uncategorized + categories 값
+        var allNames = new List<string>();
+
+        if (root.TryGetProperty("uncategorized", out var unc) &&
+            unc.ValueKind == JsonValueKind.Array)
+        {
+            foreach (var n in unc.EnumerateArray())
             {
-                ct.ThrowIfCancellationRequested();
-                var iconName = entry.Name;
-                var tags = catMap.TryGetValue(iconName, out var cat) ? cat : "";
+                var s = n.GetString();
+                if (s != null) allNames.Add(s);
+            }
+        }
 
-                // tags 속성에서 추가 태그
-                if (entry.Value.TryGetProperty("tags", out var tagsEl))
-                    tags += "," + string.Join(",", tagsEl.EnumerateArray().Select(t => t.GetString() ?? ""));
+        if (root.TryGetProperty("categories", out var cats2))
+        {
+            foreach (var cat in cats2.EnumerateObject())
+            {
+                if (cat.Value.ValueKind == JsonValueKind.Array)
+                    foreach (var n in cat.Value.EnumerateArray())
+                    {
+                        var s = n.GetString();
+                        if (s != null && !allNames.Contains(s)) allNames.Add(s);
+                    }
+            }
+        }
 
+        // hidden 아이콘은 제외
+        var hiddenSet = new HashSet<string>(StringComparer.Ordinal);
+        if (root.TryGetProperty("hidden", out var hidden) &&
+            hidden.ValueKind == JsonValueKind.Array)
+        {
+            foreach (var n in hidden.EnumerateArray())
+            {
+                var s = n.GetString();
+                if (s != null) hiddenSet.Add(s);
+            }
+        }
+
+        int total = allNames.Count;
+        int done = 0;
+
+        foreach (var iconName in allNames)
+        {
+            ct.ThrowIfCancellationRequested();
+            if (hiddenSet.Contains(iconName)) { done++; continue; }
+
+            var tags = catMap.TryGetValue(iconName, out var cat) ? cat : "";
+
+            icons.Add(new IconEntry
+            {
+                Id = $"{prefix}:{iconName}",
+                Prefix = prefix,
+                Name = iconName,
+                Tags = tags
+            });
+
+            done++;
+            if (done % 200 == 0)
+                progress?.Report((done, total));
+        }
+
+        // aliases도 추가
+        if (root.TryGetProperty("aliases", out var aliasesEl) &&
+            aliasesEl.ValueKind == JsonValueKind.Object)
+        {
+            foreach (var alias in aliasesEl.EnumerateObject())
+            {
                 icons.Add(new IconEntry
                 {
-                    Id = $"{prefix}:{iconName}",
+                    Id = $"{prefix}:{alias.Name}",
                     Prefix = prefix,
-                    Name = iconName,
-                    Tags = tags.Trim(',')
+                    Name = alias.Name,
+                    Tags = ""
                 });
-
-                done++;
-                if (done % 100 == 0)
-                    progress?.Report((done, total));
             }
-
-            // aliases도 추가
-            if (aliasesEl.HasValue)
-            {
-                foreach (var alias in aliasesEl.Value.EnumerateObject())
-                {
-                    icons.Add(new IconEntry
-                    {
-                        Id = $"{prefix}:{alias.Name}",
-                        Prefix = prefix,
-                        Name = alias.Name,
-                        Tags = ""
-                    });
-                }
-            }
-
-            progress?.Report((total, total));
-        }
-        catch (Exception ex) when (ex is not OperationCanceledException)
-        {
-            // 네트워크 오류 시 빈 목록 반환 (호출자에서 에러 처리)
-            _ = ex; // suppress unused warning
         }
 
+        progress?.Report((icons.Count, icons.Count));
         return icons;
     }
 

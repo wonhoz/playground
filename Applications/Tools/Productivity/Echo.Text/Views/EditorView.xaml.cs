@@ -203,6 +203,7 @@ public partial class EditorView : UserControl
 
     private void ChkWordWrap_Changed(object sender, RoutedEventArgs e)
     {
+        if (!IsLoaded) return;
         TxtEditor.TextWrapping = ChkWordWrap.IsChecked == true
             ? TextWrapping.Wrap : TextWrapping.NoWrap;
     }

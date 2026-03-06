@@ -264,6 +264,10 @@ public class MainViewModel : INotifyPropertyChanged, IDisposable
         return null;
     }
 
+    // 썸네일용: SVG 파일 경로 반환 (캐시 우선, 없으면 다운로드)
+    public Task<string?> GetSvgPathAsync(IconEntry icon, CancellationToken ct = default)
+        => _iconify.GetSvgPathAsync(icon.Prefix, icon.Name, ct);
+
     // ── SVG 로드 ─────────────────────────────────────────────
     private async Task LoadSelectedSvgAsync(IconEntry icon)
     {

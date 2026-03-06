@@ -1,3 +1,4 @@
+using System.IO;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Controls;
@@ -14,6 +15,7 @@ public partial class MainWindow : Window
 {
     private readonly MainViewModel _vm;
     private CancellationTokenSource? _indexCts;
+    private CancellationTokenSource? _thumbCts;
 
     [DllImport("dwmapi.dll")]
     private static extern int DwmSetWindowAttribute(IntPtr hwnd, int attr, ref int attrValue, int attrSize);
@@ -29,6 +31,9 @@ public partial class MainWindow : Window
 
         // 아이콘 카드 클릭 이벤트 연결
         IconGrid.PreviewMouseLeftButtonUp += IconGrid_ItemClick;
+
+        // 검색 결과 변경 시 썸네일 로딩
+        _vm.Icons.CollectionChanged += (_, _) => _ = LoadThumbnailsAsync();
     }
 
     private void OnLoaded(object sender, RoutedEventArgs e)
@@ -58,7 +63,7 @@ public partial class MainWindow : Window
         }
     }
 
-    // ── SVG 상세 로드 ────────────────────────────────────────────
+    // ── SVG 상세 로드 (색상 적용) ────────────────────────────────
     private async Task LoadDetailSvgAsync(IconEntry icon)
     {
         DetailSvgImage.Source = null;
@@ -66,29 +71,58 @@ public partial class MainWindow : Window
 
         try
         {
-            if (_vm.SelectedSvgPath != null)
-            {
-                var img = await Task.Run(() => SvgRenderService.RenderFile(_vm.SelectedSvgPath));
-                if (img != null)
-                {
-                    DetailSvgImage.Source = img;
-                    return;
-                }
-            }
+            // ViewModel의 LoadSelectedSvgAsync 완료 대기 (최대 2초)
+            for (int i = 0; i < 20 && _vm.SelectedSvgContent == null; i++)
+                await Task.Delay(100);
 
-            // SVG 로딩 대기 (ViewModel에서 비동기 로드 중)
-            await Task.Delay(300);
-            if (_vm.SelectedSvgPath != null)
-            {
-                var img = await Task.Run(() => SvgRenderService.RenderFile(_vm.SelectedSvgPath));
-                if (img != null)
-                    DetailSvgImage.Source = img;
-            }
+            await RenderDetailWithColorAsync();
         }
         finally
         {
             TblDetailLoading.Visibility = Visibility.Collapsed;
         }
+    }
+
+    // 현재 미리보기 색상으로 상세 SVG 재렌더링
+    private async Task RenderDetailWithColorAsync()
+    {
+        var content = _vm.SelectedSvgContent;
+        if (content == null) return;
+        var fg = _vm.PreviewFg;
+        var colored = IconifyService.ApplyColor(content, fg);
+        var img = await Task.Run(() => SvgRenderService.RenderString(colored));
+        if (img != null) DetailSvgImage.Source = img;
+    }
+
+    // ── 그리드 썸네일 백그라운드 로더 ────────────────────────────
+    private async Task LoadThumbnailsAsync()
+    {
+        _thumbCts?.Cancel();
+        _thumbCts = new CancellationTokenSource();
+        var ct = _thumbCts.Token;
+
+        var icons = _vm.Icons.ToList();
+        using var sem = new System.Threading.SemaphoreSlim(4, 4);
+
+        await Task.WhenAll(icons.Select(async icon =>
+        {
+            await sem.WaitAsync(ct);
+            try
+            {
+                if (ct.IsCancellationRequested) return;
+                var path = await _vm.GetSvgPathAsync(icon, ct);
+                if (path == null || ct.IsCancellationRequested) return;
+                var content = await File.ReadAllTextAsync(path, ct);
+                // 썸네일 색상: 테마에 맞는 밝은 회색
+                var colored = IconifyService.ApplyColor(content, "#C8C8DC");
+                var img = await Task.Run(() => SvgRenderService.RenderString(colored), ct);
+                if (img != null && !ct.IsCancellationRequested)
+                    Dispatcher.Invoke(() => icon.Thumbnail = img);
+            }
+            catch (OperationCanceledException) { }
+            catch { }
+            finally { sem.Release(); }
+        }));
     }
 
     // ── 라이브러리 인덱싱 ────────────────────────────────────────
@@ -174,6 +208,8 @@ public partial class MainWindow : Window
     private void BtnTogglePreview_Click(object sender, RoutedEventArgs e)
     {
         _vm.IsDarkPreview = !_vm.IsDarkPreview;
+        // 배경 전환 후 SVG 색상 재렌더링
+        _ = RenderDetailWithColorAsync();
     }
 
     // ── 즐겨찾기 ─────────────────────────────────────────────────

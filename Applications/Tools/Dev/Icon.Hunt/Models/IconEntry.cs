@@ -1,4 +1,5 @@
 using System.ComponentModel;
+using System.Windows.Media;
 
 namespace IconHunt.Models;
 
@@ -23,6 +24,13 @@ public class IconEntry : INotifyPropertyChanged
     {
         get => _localSvgPath;
         set { _localSvgPath = value; OnPropertyChanged(nameof(LocalSvgPath)); }
+    }
+
+    private ImageSource? _thumbnail;
+    public ImageSource? Thumbnail
+    {
+        get => _thumbnail;
+        set { _thumbnail = value; OnPropertyChanged(nameof(Thumbnail)); }
     }
 
     // 표시용

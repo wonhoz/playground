@@ -52,6 +52,7 @@ call :pub "Zip.Peek"              "Applications\Files\Inspector\Zip.Peek"       
 call :pub "Toast.Cast"            "Applications\Health\Toast.Cast"                               "Toast.Cast.exe"            "Applications\Health"
 
 :: ── Applications / Media ─────────────────────────────────────────
+call :pub "Mosaic.Forge"          "Applications\Media\Mosaic.Forge"                              "Mosaic.Forge.exe"          "Applications\Media"
 call :pub "Photo.Video.Organizer" "Applications\Media\Photo.Video.Organizer"                     "Photo.Video.Organizer.exe" "Applications\Media"
 
 :: ── Tools / Dev / Network ────────────────────────────────────────

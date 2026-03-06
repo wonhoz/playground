@@ -22,6 +22,12 @@ public class IconDatabase : IDisposable
     private void InitSchema()
     {
         using var cmd = _conn.CreateCommand();
+
+        // 스키마 버전 확인
+        cmd.CommandText = "PRAGMA user_version";
+        var version = (long)cmd.ExecuteScalar()!;
+
+        // 기본 테이블 생성
         cmd.CommandText = @"
             PRAGMA journal_mode=WAL;
             CREATE TABLE IF NOT EXISTS collections (
@@ -35,14 +41,11 @@ public class IconDatabase : IDisposable
                 indexed_at TEXT
             );
             CREATE TABLE IF NOT EXISTS icons (
-                id         TEXT PRIMARY KEY,  -- 'prefix:name'
+                id         TEXT PRIMARY KEY,
                 prefix     TEXT NOT NULL,
                 name       TEXT NOT NULL,
                 tags       TEXT,
                 svg_cached INTEGER DEFAULT 0
-            );
-            CREATE VIRTUAL TABLE IF NOT EXISTS icons_fts USING fts5(
-                id, name, tags, content='icons', content_rowid='rowid'
             );
             CREATE TABLE IF NOT EXISTS favorites (
                 id         TEXT PRIMARY KEY,
@@ -55,6 +58,23 @@ public class IconDatabase : IDisposable
             CREATE INDEX IF NOT EXISTS idx_icons_prefix ON icons(prefix);
         ";
         cmd.ExecuteNonQuery();
+
+        // FTS5 스키마 마이그레이션: content 모드 → standalone 모드
+        if (version < 2)
+        {
+            cmd.CommandText = "DROP TABLE IF EXISTS icons_fts";
+            cmd.ExecuteNonQuery();
+        }
+
+        // standalone FTS5: id는 저장만(인덱스 제외), name/tags 전문 검색
+        cmd.CommandText = "CREATE VIRTUAL TABLE IF NOT EXISTS icons_fts USING fts5(id UNINDEXED, name, tags)";
+        cmd.ExecuteNonQuery();
+
+        if (version < 2)
+        {
+            cmd.CommandText = "PRAGMA user_version = 2";
+            cmd.ExecuteNonQuery();
+        }
     }
 
     // ── 컬렉션 ──────────────────────────────────────────────
@@ -111,32 +131,40 @@ public class IconDatabase : IDisposable
     public void BulkInsertIcons(IEnumerable<IconEntry> icons)
     {
         using var tx = _conn.BeginTransaction();
-        using var cmdIcon = _conn.CreateCommand();
-        cmdIcon.Transaction = tx;
-        cmdIcon.CommandText = @"
-            INSERT OR IGNORE INTO icons (id, prefix, name, tags)
-            VALUES ($id, $p, $n, $t)";
-        var pId = cmdIcon.Parameters.Add("$id", SqliteType.Text);
-        var pP = cmdIcon.Parameters.Add("$p", SqliteType.Text);
-        var pN = cmdIcon.Parameters.Add("$n", SqliteType.Text);
-        var pT = cmdIcon.Parameters.Add("$t", SqliteType.Text);
-
-        using var cmdFts = _conn.CreateCommand();
-        cmdFts.Transaction = tx;
-        cmdFts.CommandText = "INSERT OR IGNORE INTO icons_fts(id,name,tags) VALUES($id,$n,$t)";
-        var fId = cmdFts.Parameters.Add("$id", SqliteType.Text);
-        var fN = cmdFts.Parameters.Add("$n", SqliteType.Text);
-        var fT = cmdFts.Parameters.Add("$t", SqliteType.Text);
-
-        foreach (var icon in icons)
+        try
         {
-            pId.Value = icon.Id; pP.Value = icon.Prefix;
-            pN.Value = icon.Name; pT.Value = icon.Tags;
-            cmdIcon.ExecuteNonQuery();
-            fId.Value = icon.Id; fN.Value = icon.Name; fT.Value = icon.Tags;
-            cmdFts.ExecuteNonQuery();
+            using var cmdIcon = _conn.CreateCommand();
+            cmdIcon.Transaction = tx;
+            cmdIcon.CommandText = @"
+                INSERT OR IGNORE INTO icons (id, prefix, name, tags)
+                VALUES ($id, $p, $n, $t)";
+            var pId = cmdIcon.Parameters.Add("$id", SqliteType.Text);
+            var pP = cmdIcon.Parameters.Add("$p", SqliteType.Text);
+            var pN = cmdIcon.Parameters.Add("$n", SqliteType.Text);
+            var pT = cmdIcon.Parameters.Add("$t", SqliteType.Text);
+
+            using var cmdFts = _conn.CreateCommand();
+            cmdFts.Transaction = tx;
+            cmdFts.CommandText = "INSERT OR IGNORE INTO icons_fts(id,name,tags) VALUES($id,$n,$t)";
+            var fId = cmdFts.Parameters.Add("$id", SqliteType.Text);
+            var fN = cmdFts.Parameters.Add("$n", SqliteType.Text);
+            var fT = cmdFts.Parameters.Add("$t", SqliteType.Text);
+
+            foreach (var icon in icons)
+            {
+                pId.Value = icon.Id; pP.Value = icon.Prefix;
+                pN.Value = icon.Name; pT.Value = icon.Tags;
+                cmdIcon.ExecuteNonQuery();
+                fId.Value = icon.Id; fN.Value = icon.Name; fT.Value = icon.Tags;
+                cmdFts.ExecuteNonQuery();
+            }
+            tx.Commit();
         }
-        tx.Commit();
+        catch
+        {
+            tx.Rollback();
+            throw;
+        }
     }
 
     // ── 검색 ────────────────────────────────────────────────

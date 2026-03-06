@@ -112,6 +112,8 @@ public partial class MainWindow : Window
         IndexProgressPanel.Visibility = Visibility.Visible;
         _vm.IsLoading = true;
 
+        var errors = new List<string>();
+
         try
         {
             var colList = collections.ToList();
@@ -133,7 +135,8 @@ public partial class MainWindow : Window
                     });
                 });
 
-                await _vm.IndexCollectionAsync(col, progress, ct);
+                var err = await _vm.IndexCollectionAsync(col, progress, ct);
+                if (err != null) errors.Add(err);
             }
         }
         catch (OperationCanceledException)
@@ -145,6 +148,20 @@ public partial class MainWindow : Window
             _vm.IsLoading = false;
             IndexProgressPanel.Visibility = Visibility.Collapsed;
             _indexCts = null;
+        }
+
+        // 인덱싱 실패 시 사용자에게 알림
+        if (!ct.IsCancellationRequested && errors.Count > 0 && _vm.TotalCount == 0)
+        {
+            var msg = string.Join("\n", errors.Take(5));
+            if (errors.Count > 5) msg += $"\n... 외 {errors.Count - 5}개";
+            System.Windows.MessageBox.Show(
+                $"인덱싱 중 오류가 발생했습니다.\n네트워크 연결을 확인하고 다시 시도하세요.\n\n{msg}",
+                "인덱싱 실패", MessageBoxButton.OK, MessageBoxImage.Warning);
+        }
+        else if (!ct.IsCancellationRequested && errors.Count > 0)
+        {
+            _vm.StatusText = $"일부 실패 ({errors.Count}개): {errors[0]}";
         }
     }
 

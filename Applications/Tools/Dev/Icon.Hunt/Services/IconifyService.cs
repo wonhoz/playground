@@ -147,7 +147,8 @@ public class IconifyService : IDisposable
         }
         catch (Exception ex) when (ex is not OperationCanceledException)
         {
-            // 네트워크 오류 시 빈 목록 반환
+            // 네트워크 오류 시 빈 목록 반환 (호출자에서 에러 처리)
+            _ = ex; // suppress unused warning
         }
 
         return icons;
@@ -185,5 +186,5 @@ public class IconifyService : IDisposable
             Directory.Delete(_cacheRoot, true);
     }
 
-    public void Dispose() => _http.Dispose();
+    public void Dispose() { } // _http는 static이므로 해제하지 않음
 }

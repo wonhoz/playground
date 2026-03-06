@@ -213,24 +213,45 @@ public class MainViewModel : INotifyPropertyChanged, IDisposable
     }
 
     // ── 아이콘 라이브러리 인덱싱 ────────────────────────────
-    public async Task IndexCollectionAsync(IconCollection col,
+    // 반환값: null = 성공, 에러 메시지 문자열 = 실패
+    public async Task<string?> IndexCollectionAsync(IconCollection col,
         IProgress<(int done, int total, string status)>? progress = null,
         CancellationToken ct = default)
     {
         progress?.Report((0, 1, $"{col.Name} 다운로드 중..."));
         StatusText = $"{col.Name} 인덱싱 중...";
 
-        var icons = await _iconify.FetchCollectionIconsAsync(col.Prefix,
-            new Progress<(int, int)>(p => progress?.Report((p.Item1, p.Item2, $"{p.Item1}/{p.Item2}"))),
-            ct);
+        List<IconEntry> icons;
+        try
+        {
+            icons = await _iconify.FetchCollectionIconsAsync(col.Prefix,
+                new Progress<(int, int)>(p => progress?.Report((p.Item1, p.Item2, $"{p.Item1}/{p.Item2}"))),
+                ct);
+        }
+        catch (OperationCanceledException) { throw; }
+        catch (Exception ex)
+        {
+            StatusText = $"{col.Name} 다운로드 실패";
+            return $"{col.Name}: {ex.Message}";
+        }
 
         if (icons.Count == 0)
         {
-            StatusText = $"{col.Name} 인덱싱 실패 (네트워크 오류)";
-            return;
+            StatusText = $"{col.Name} 다운로드 실패 (응답 없음 또는 네트워크 오류)";
+            return $"{col.Name}: 아이콘 데이터를 가져오지 못했습니다";
         }
 
-        await Task.Run(() => _db.BulkInsertIcons(icons), ct);
+        try
+        {
+            await Task.Run(() => _db.BulkInsertIcons(icons), ct);
+        }
+        catch (OperationCanceledException) { throw; }
+        catch (Exception ex)
+        {
+            StatusText = $"{col.Name} DB 저장 실패";
+            return $"{col.Name} DB 저장 오류: {ex.Message}";
+        }
+
         _db.MarkCollectionIndexed(col.Prefix, icons.Count);
         col.IsIndexed = true;
         col.Total = icons.Count;
@@ -240,6 +261,7 @@ public class MainViewModel : INotifyPropertyChanged, IDisposable
         progress?.Report((icons.Count, icons.Count, "완료"));
         StatusText = $"{col.Name} 인덱싱 완료 ({icons.Count:N0}개)";
         await SearchAsync();
+        return null;
     }
 
     // ── SVG 로드 ─────────────────────────────────────────────

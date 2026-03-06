@@ -94,7 +94,11 @@ public partial class MainWindow : Window
         if (img != null) DetailSvgImage.Source = img;
     }
 
-    // ── 그리드 썸네일 로더 (캐시 전용, UI Background 우선순위) ──
+    // ── 그리드 썸네일 로더 ────────────────────────────────────
+    // 검색 결과를 순차적으로 하나씩 다운로드 + 렌더링
+    // - 다운로드: await (비동기, UI 스레드 해방)
+    // - 렌더링: Dispatcher Background 우선순위 (입력 이벤트보다 낮음)
+    // - Task.Run 사용 금지 (SharpVectors가 MTA 스레드에서 크래시)
     private async Task LoadThumbnailsAsync()
     {
         _thumbCts?.Cancel();
@@ -106,18 +110,18 @@ public partial class MainWindow : Window
         foreach (var icon in icons)
         {
             if (ct.IsCancellationRequested) return;
-
-            // 캐시된 SVG만 사용 — 네트워크 요청 없음
-            var cachePath = IconifyService.GetCachePath(icon.Prefix, icon.Name);
-            if (!File.Exists(cachePath)) continue;
+            if (icon.Thumbnail != null) continue; // 이미 로딩된 항목 스킵
 
             try
             {
-                var content = await File.ReadAllTextAsync(cachePath, ct);
+                // 1단계: SVG 다운로드/캐시 (네트워크 I/O — UI 스레드 해방)
+                var path = await _vm.GetSvgPathAsync(icon, ct);
+                if (path == null || ct.IsCancellationRequested) continue;
+
+                var content = await File.ReadAllTextAsync(path, ct);
                 var colored = IconifyService.ApplyColor(content, "#C8C8DC");
 
-                // UI 스레드에서 Background 우선순위로 렌더링
-                // (마우스·키보드 입력보다 낮아 앱이 멈추지 않음)
+                // 2단계: 렌더링 (UI 스레드, Background 우선순위)
                 await Dispatcher.InvokeAsync(() =>
                 {
                     if (ct.IsCancellationRequested) return;

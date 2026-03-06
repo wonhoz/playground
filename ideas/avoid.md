@@ -2,7 +2,7 @@
 
 > 이 파일은 브레인스토밍 시 **이미 제안되거나 구현된 아이디어를 다시 꺼내지 않도록** 하는 필터다.
 > 새 아이디어를 제안하기 전 반드시 이 목록을 확인할 것.
-> 마지막 갱신: 2026-03-05 (3차)
+> 마지막 갱신: 2026-03-06 (4차)
 
 ---
 
@@ -294,6 +294,21 @@
 | `Cert.Forge` | 로컬 CA 생성·서버 인증서 발급·Windows 신뢰 저장소 설치·PFX/PEM 변환 (mkcert GUI 대체) | idea_20260305 |
 | `Proxy.Cast` | 로컬 HTTP 프록시 트래픽 인스펙터 (요청·응답 실시간 캡처, Replay, HAR 내보내기, Fiddler 대체) | idea_20260305 |
 
+### AI / Media / Tray / Productivity / Dev (신규 — idea_20260306_4차)
+
+| 이름 | 핵심 기능 | 출처 |
+|------|----------|------|
+| `Context.Cast` | 코드베이스 파일 트리+내용을 AI 입력용 단일 컨텍스트 블록으로 패킹 (토큰 카운터, .gitignore 인식, 프로파일 저장) | idea_20260306_4차 |
+| `Mosaic.Forge` | 수백~수천 소스 사진을 타일로 목표 이미지 재현하는 포토모자이크 생성기 (k-d Tree 색상 매칭, 최대 1억 픽셀 출력) | idea_20260306_4차 |
+| `Volume.Cast` | 앱별 볼륨 독립 제어 트레이 (볼륨 프로파일 전환, 전역 단축키, Windows Core Audio API) | idea_20260306_4차 |
+| `Prompt.Forge` | AI 프롬프트 라이브러리 관리자 (변수 플레이스홀더, 버전 관리, 태그 검색, 전역 단축키 팝업) | idea_20260306_4차 |
+| `Timeline.Craft` | 드래그앤드롭 시각적 타임라인 편집기 (다중 레인, 연결 화살표, SVG/PDF 내보내기, 프레젠테이션 모드) | idea_20260306_4차 |
+| `Render.View` | Mermaid/PlantUML/Graphviz DOT/D2 다이어그램 오프라인 실시간 렌더러 (좌우 분할, PNG/SVG 내보내기) | idea_20260306_4차 |
+| `Noti.Hub` | Windows 알림 히스토리 허브 트레이 앱 (모든 앱 Toast 가로채기, 앱별 필터, 재발송, 무음 앱 지정) | idea_20260306_4차 |
+| `Tray.Stats` | CPU/RAM/GPU/디스크/네트워크 통합 성능 트레이 모니터 (실시간 미니 그래프, 임계치 Toast, 상위 프로세스 표시) | idea_20260306_4차 |
+| `Key.Map` | 앱별 단축키 키보드 다이어그램 시각화 + PDF 치트시트 출력 (내장 프리셋, 전역 단축키 실시간 인식) | idea_20260306_4차 |
+| `Spell.Cast` | 오프라인 한국어·영어 맞춤법·문법 검사기 (LanguageTool 내장, 유의어 사전, 문체 제안, 전역 단축키 팝업) | idea_20260306_4차 |
+
 ---
 
 ### 게임 — 제안된 미구현 아이디어 (idea_20260227)
@@ -395,6 +410,17 @@
 | `Arc.Blast` | Physics / Arcade | 포물선 탄도 조준·발사 → 구조물·적 파괴 (나무/돌/얼음/폭발물, 기본/분열/관통 탄종) |
 | `Hexa.Drop` | Puzzle / Casual | 육각형 격자에 헥사 조각 드래그 배치 → 완전한 줄/링 형성 시 소거 + 연쇄 콤보 |
 | `Fuse.Ball` | Puzzle / Action | 단일 입력으로 두 공을 반대 방향 동시 조종 → 각자 목표 지점에 동시 도달 |
+
+### 게임 — 제안된 미구현 아이디어 (idea_20260306_4차)
+
+| 이름 | 장르 | 핵심 메커닉 |
+|------|------|------------|
+| `Beat.Rogue` | Roguelite / Rhythm / Dungeon Crawler | 비트 타이밍에만 이동·공격 가능, 완벽 박자 콤보=치명타 배율, 절차 생성 10층 던전, 커스텀 BGM BPM 분석 지원 |
+| `Pixel.Cross` | Puzzle / Logic (노노그램) | 행·열 숫자 힌트로 격자 채우기, 완성 시 픽셀 아트 출현, 절차적 유일해 생성, 일일 챌린지 |
+| `Forge.Idle` | Idle / Incremental / Casual | 광물 채굴→제련→판매 방치형 체인, 오프라인 생산, 프레스티지, 시장 이벤트 |
+| `Tilt.Ball` | Arcade / Physics Puzzle | WASD로 판 기울여 공 유도, 특수 타일(얼음·자석·바람·스프링), 50개 레벨+레벨 에디터 |
+| `Room.Code` | Puzzle / Point & Click Adventure | 한 화면짜리 오브젝트 클릭&조합 방탈출 20개 컬렉션, 힌트 별 소비, 히든 엔딩 |
+| `Pool.Break` | Sports / Physics / Casual | 정밀 2D 당구 물리 (회전·마찰·쿠션), 8볼·9볼·스트레이트 포켓, AI 상대, 로컬 2P |
 
 ---
 
@@ -545,3 +571,19 @@
 | **중력 전환 매치3** | Match.Drop (≠ Gravity.Flip: 플랫포머, ≠ Hue.Flow: 경로 연결) |
 | **Conway's Life 퍼즐** | Life.Sim (≠ Sand.Fall: 물리 낙하 시뮬) |
 | **행/열 선택 슬라이드 숫자** | Number.Storm (≠ Gravity.Flip: 플랫포머) |
+| **AI 컨텍스트 파일 패커** | Context.Cast (≠ AI.Clip: Claude API 처리기, ≠ Batch.Flow: 일반 파일 파이프라인) |
+| **포토모자이크 생성기** | Mosaic.Forge (≠ Img.Forge: 일괄 변환, ≠ Word.Cloud: 워드클라우드, ≠ Char.Art: 문자 아트) |
+| **앱별 볼륨 독립 제어** | Volume.Cast (≠ Sound.Cast: 출력 장치 전환, ≠ Mute.Master: 전체 뮤트 토글) |
+| **AI 프롬프트 라이브러리** | Prompt.Forge (≠ AI.Clip: Claude API 자동 처리, ≠ Quick.Memo: 단순 메모, ≠ Context.Cast: 코드 패킹) |
+| **시각적 타임라인 편집기** | Timeline.Craft (≠ Chart.Forge: 일반 차트, ≠ Table.Craft: CSV 분석) |
+| **다이어그램 마크업 렌더러** | Render.View (≠ Schema.View: JSON Schema/OpenAPI 특화, ≠ Mark.View: 마크다운 뷰어) |
+| **Windows 알림 히스토리** | Noti.Hub (≠ Toast.Cast: 직접 알림 발송, ≠ Stay.Awake: 화면 꺼짐 방지) |
+| **통합 시스템 성능 트레이** | Tray.Stats (≠ Thermal.View: 온도만, ≠ Net.Speed: 네트워크만, ≠ Proc.Timeline: 프로세스 타임라인 레코더) |
+| **단축키 키보드 시각화** | Key.Map (≠ Glyph.Map: 유니코드 문자, ≠ Alias.Forge: PowerShell 별칭 관리) |
+| **오프라인 맞춤법·문법 검사** | Spell.Cast (≠ Text.Forge: 형식·인코딩 변환, ≠ Echo.Text: TTS, ≠ Type.Wand: 텍스트 변환) |
+| **리듬 동기화 던전 크롤러** | Beat.Rogue (≠ Beat.Drop: 리듬 게임, ≠ Neon.Card: 덱빌딩, ≠ Pulse.Run: 리듬 러너, ≠ Dungeon.Dash: 실시간 액션) |
+| **노노그램 / 피크로스** | Pixel.Cross (≠ Hue.Flow: 경로 연결, ≠ Gravity.Flip: 플랫포머, ≠ Pixel.Drop: 픽셀아트 테트리스) |
+| **방치형 공장 빌더** | Forge.Idle (≠ Auto.Build: 실시간 자동화 퍼즐, ≠ Sand.Fall: 시뮬레이션, ≠ Gear.Works: 기어 기계) |
+| **기울기 미로 볼 굴리기** | Tilt.Ball (≠ Marble.Run: 경로 빌더, ≠ Orbit.Craft: N-체 중력, ≠ Magnet.Maze: 자기력 유도) |
+| **방탈출 어드벤처 컬렉션** | Room.Code (≠ 기존 모든 게임: 포인트앤클릭 어드벤처 첫 도입) |
+| **물리 당구 게임** | Pool.Break (≠ Pinball.Forge: 핀볼 빌더, ≠ Bounce.House: 탄성 슈터, ≠ Arc.Blast: 포물선 파괴) |

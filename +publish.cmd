@@ -87,6 +87,7 @@ echo !CY!  50!RS! Zip.Peek              !DG!Applications/Files!RS!
 echo !CY!  51!RS! Hash.Check            !DG!Applications/Files!RS!
 echo !CY!  52!RS! Echo.Text             !DG!Tools/Productivity!RS!
 echo !CY!  53!RS! Net.Scan              !DG!Tools/Network!RS!
+echo !CY!  54!RS! Boot.Map             !DG!Tools/Dev!RS!
 echo.
 echo !DG!--------------------------------------------------!RS!
 echo !DG!  번호 입력 (공백/쉼표로 구분)   예: 1 3 5  또는  1,3,5!RS!
@@ -168,6 +169,7 @@ for %%n in (!SEL!) do (
     if "%%n"=="51" call :pub "Hash.Check"             "Applications\Files\Hash.Check"                     "HashCheck.exe"             "Applications\Files"
     if "%%n"=="52" call :pub "Echo.Text"              "Applications\Tools\Productivity\Echo.Text"          "EchoText.exe"              "Applications\Tools\Productivity"
     if "%%n"=="53" call :pub "Net.Scan"               "Applications\Tools\Network\Net.Scan"                "NetScan.exe"               "Applications\Tools\Network"
+    if "%%n"=="54" call :pub "Boot.Map"              "Applications\Tools\Dev\Boot.Map"                    "BootMap.exe"               "Applications\Tools\Dev"
 )
 goto :DONE
 
@@ -207,6 +209,7 @@ call :pub "Serve.Cast"            "Applications\Tools\Dev\Serve.Cast"           
 call :pub "Table.Craft"           "Applications\Tools\Dev\Table.Craft"                "Table.Craft.exe"           "Applications\Tools\Dev"
 call :pub "Locale.Forge"          "Applications\Tools\Dev\Locale.Forge"               "LocaleForge.exe"           "Applications\Tools\Dev"
 call :pub "Icon.Hunt"             "Applications\Tools\Dev\Icon.Hunt"                  "IconHunt.exe"              "Applications\Tools\Dev"
+call :pub "Boot.Map"             "Applications\Tools\Dev\Boot.Map"                    "BootMap.exe"               "Applications\Tools\Dev"
 call :pub "DNS.Flip"              "Applications\Tools\Network\DNS.Flip"               "Dns.Flip.exe"              "Applications\Tools\Network"
 call :pub "Net.Scan"              "Applications\Tools\Network\Net.Scan"               "NetScan.exe"               "Applications\Tools\Network"
 call :pub "Port.Watch"            "Applications\Tools\Network\Port.Watch"             "Port.Watch.exe"            "Applications\Tools\Network"

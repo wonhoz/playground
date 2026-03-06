@@ -254,7 +254,7 @@
 | `Locale.Forge` | JSON/YAML/RESX i18n 파일 시각적 관리 (언어별 나란히 편집, 누락 키 감지, 미사용 키 탐지) | idea_20260305c |
 | `Icon.Hunt` | 30만+ 오픈소스 아이콘 라이브러리 탐색기 (Fluent·Material·Phosphor 등, SVG/PNG 다운로드) | idea_20260305c |
 | `Schema.View` | JSON Schema / OpenAPI 3.x 시각적 다이어그램 + 스키마 검증 도구 | idea_20260305c |
-| `Boot.Map` | Windows 부팅 ETW 타임라인 시각화 (드라이버·서비스별 지연 분석, 병목 식별) | idea_20260305c |
+| `Boot.Map` | Windows 부팅 ETW 타임라인 시각화 (드라이버·서비스별 지연 분석, 병목 식별) — **구현 완료 2026-03-06** | idea_20260305c |
 | `Clip.Cast` | LAN mDNS 클립보드 브로드캐스터 (텍스트·이미지 기기 간 즉시 공유, AES-256 암호화) | idea_20260305c |
 | `Pitch.Find` | 오디오 파일 BPM + 음악 키 분석기 (NAudio, 일괄 분석, ID3 태그 자동 기록) | idea_20260305c |
 | `Term.Pad` | 전역 단축키 플로팅 터미널 패드 (멀티탭, 투명도, 스니펫 사이드바, 세션 복원) | idea_20260305c |

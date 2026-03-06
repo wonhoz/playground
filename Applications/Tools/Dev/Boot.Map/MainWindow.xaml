@@ -1,0 +1,290 @@
+<Window x:Class="BootMap.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Boot.Map — 부팅 타임라인 분석기"
+        Width="1100" Height="700"
+        MinWidth="800" MinHeight="500"
+        Background="{StaticResource BgBrush}"
+        Foreground="{StaticResource FgBrush}"
+        FontFamily="Segoe UI" FontSize="13"
+        WindowStartupLocation="CenterScreen">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="52"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="28"/>
+        </Grid.RowDefinitions>
+
+        <!-- ── 툴바 ─────────────────────────────────────── -->
+        <Border Grid.Row="0"
+                Background="{StaticResource Bg2Brush}"
+                BorderBrush="{StaticResource BorderBrush}"
+                BorderThickness="0,0,0,1">
+            <Grid Margin="12,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- 타이틀 -->
+                <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock Text="⏱" FontSize="20" Margin="0,0,8,0" VerticalAlignment="Center"/>
+                    <TextBlock Text="Boot.Map" FontSize="16" FontWeight="Bold"
+                               Foreground="{StaticResource AccentBrush}" VerticalAlignment="Center"/>
+                    <TextBlock Text="  부팅 타임라인 분석기" FontSize="12"
+                               Foreground="{StaticResource Fg3Brush}" VerticalAlignment="Center"/>
+                </StackPanel>
+
+                <!-- 버튼 -->
+                <StackPanel Grid.Column="2" Orientation="Horizontal"
+                            VerticalAlignment="Center" Margin="0,0,4,0">
+                    <Button x:Name="BtnRefresh" Content="↻  새로고침"
+                            Padding="12,6" Margin="4,0"
+                            Click="BtnRefresh_Click"
+                            ToolTip="ETW 로그에서 부팅 기록 다시 읽기"/>
+                    <Button x:Name="BtnHelp" Content="?"
+                            Width="32" Padding="0"
+                            Click="BtnHelp_Click"
+                            ToolTip="도움말"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- ── 메인 영역 ──────────────────────────────────── -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="280" MinWidth="180"/>
+                <ColumnDefinition Width="4"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- 왼쪽: 부팅 목록 -->
+            <Border Grid.Column="0"
+                    Background="{StaticResource PanelBrush}"
+                    BorderBrush="{StaticResource BorderBrush}"
+                    BorderThickness="0,0,1,0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Border Grid.Row="0" Padding="12,8"
+                            BorderBrush="{StaticResource BorderBrush}"
+                            BorderThickness="0,0,0,1">
+                        <TextBlock Text="부팅 기록" FontWeight="SemiBold"
+                                   Foreground="{StaticResource Fg2Brush}"/>
+                    </Border>
+
+                    <ListBox x:Name="LbSessions"
+                             Grid.Row="1"
+                             SelectionChanged="LbSessions_SelectionChanged"
+                             Margin="0,4,0,0">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Border Padding="10,7" CornerRadius="4" Margin="4,1">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="4"/>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="5"/>
+                                            <RowDefinition Height="4"/>
+                                        </Grid.RowDefinitions>
+
+                                        <!-- 날짜/시간 -->
+                                        <TextBlock Grid.Row="0"
+                                                   Text="{Binding StartTimeStr}"
+                                                   FontSize="12"
+                                                   Foreground="{StaticResource FgBrush}"/>
+
+                                        <!-- 총 시간 -->
+                                        <TextBlock Grid.Row="2"
+                                                   Text="{Binding TotalStr}"
+                                                   FontSize="11"
+                                                   Foreground="{StaticResource Fg3Brush}"/>
+
+                                        <!-- 미니 컬러바 -->
+                                        <Image Grid.Row="4"
+                                               x:Name="MiniBar"
+                                               Height="4"
+                                               HorizontalAlignment="Stretch"
+                                               Source="{Binding MiniBarImage}"
+                                               Stretch="Fill"/>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Grid>
+            </Border>
+
+            <!-- GridSplitter -->
+            <GridSplitter Grid.Column="1"
+                          Width="4"
+                          HorizontalAlignment="Stretch"
+                          Background="{StaticResource BorderBrush}"
+                          ResizeDirection="Columns"/>
+
+            <!-- 오른쪽: 상세 -->
+            <Grid Grid.Column="2" Margin="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="180"/>
+                </Grid.RowDefinitions>
+
+                <!-- 비교 섹션 -->
+                <Border Grid.Row="0"
+                        Background="{StaticResource CardBrush}"
+                        BorderBrush="{StaticResource BorderBrush}"
+                        BorderThickness="0,0,0,1"
+                        Padding="16,10">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="220"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Column="0" Text="비교 대상:"
+                                   VerticalAlignment="Center"
+                                   Foreground="{StaticResource Fg2Brush}"
+                                   Margin="0,0,10,0"/>
+                        <ComboBox Grid.Column="1"
+                                  x:Name="CbCompare"
+                                  SelectionChanged="CbCompare_SelectionChanged"/>
+                        <TextBlock Grid.Column="2"
+                                   x:Name="TbDelta"
+                                   VerticalAlignment="Center"
+                                   Margin="16,0,0,0"
+                                   FontSize="13"
+                                   Foreground="{StaticResource Fg2Brush}"/>
+                    </Grid>
+                </Border>
+
+                <!-- 타임라인 -->
+                <Border Grid.Row="1"
+                        Background="{StaticResource Bg2Brush}"
+                        BorderBrush="{StaticResource BorderBrush}"
+                        BorderThickness="0,0,0,1">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <Border Grid.Row="0" Padding="16,8"
+                                BorderBrush="{StaticResource BorderBrush}"
+                                BorderThickness="0,0,0,1"
+                                Background="{StaticResource PanelBrush}">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="부팅 타임라인"
+                                           FontWeight="SemiBold"
+                                           Foreground="{StaticResource Fg2Brush}"/>
+                                <TextBlock x:Name="TbTotalTime"
+                                           Margin="16,0,0,0"
+                                           Foreground="{StaticResource AccentBrush}"
+                                           FontWeight="Bold"/>
+                            </StackPanel>
+                        </Border>
+
+                        <ScrollViewer Grid.Row="1"
+                                      VerticalScrollBarVisibility="Auto"
+                                      HorizontalScrollBarVisibility="Disabled"
+                                      Padding="16,8">
+                            <ItemsControl x:Name="IcTimeline"
+                                          SizeChanged="IcTimeline_SizeChanged">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid Margin="0,4">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="140"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="80"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <!-- 레이블 -->
+                                            <TextBlock Grid.Column="0"
+                                                       Text="{Binding Label}"
+                                                       VerticalAlignment="Center"
+                                                       Foreground="{StaticResource Fg2Brush}"
+                                                       FontSize="12"/>
+
+                                            <!-- 컬러바 -->
+                                            <Border Grid.Column="1"
+                                                    x:Name="BarBorder"
+                                                    Height="22"
+                                                    HorizontalAlignment="Left"
+                                                    Width="{Binding BarWidth}"
+                                                    CornerRadius="3"
+                                                    ToolTip="{Binding TooltipText}">
+                                                <Border.Background>
+                                                    <SolidColorBrush Color="{Binding BarColor}"/>
+                                                </Border.Background>
+                                            </Border>
+
+                                            <!-- ms 수치 -->
+                                            <TextBlock Grid.Column="2"
+                                                       Text="{Binding DurationStr}"
+                                                       VerticalAlignment="Center"
+                                                       HorizontalAlignment="Right"
+                                                       Foreground="{StaticResource Fg3Brush}"
+                                                       FontSize="12"/>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </ScrollViewer>
+                    </Grid>
+                </Border>
+
+                <!-- 병목 서비스 -->
+                <Grid Grid.Row="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Border Grid.Row="0" Padding="16,6"
+                            Background="{StaticResource PanelBrush}"
+                            BorderBrush="{StaticResource BorderBrush}"
+                            BorderThickness="0,0,0,1">
+                        <TextBlock Text="병목 서비스 (ID 101)"
+                                   FontWeight="SemiBold"
+                                   Foreground="{StaticResource Fg2Brush}"/>
+                    </Border>
+
+                    <ListView x:Name="LvServices"
+                              Grid.Row="1">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="서비스명" Width="200"
+                                                DisplayMemberBinding="{Binding ServiceName}"/>
+                                <GridViewColumn Header="표시 이름" Width="250"
+                                                DisplayMemberBinding="{Binding DisplayName}"/>
+                                <GridViewColumn Header="지연 시간" Width="120"
+                                                DisplayMemberBinding="{Binding DurationStr}"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </Grid>
+            </Grid>
+        </Grid>
+
+        <!-- ── 상태바 ──────────────────────────────────────── -->
+        <Border Grid.Row="2"
+                Background="{StaticResource Bg2Brush}"
+                BorderBrush="{StaticResource BorderBrush}"
+                BorderThickness="0,1,0,0">
+            <TextBlock x:Name="TbStatus"
+                       VerticalAlignment="Center"
+                       Margin="12,0"
+                       Foreground="{StaticResource Fg3Brush}"
+                       FontSize="11"
+                       Text="준비"/>
+        </Border>
+    </Grid>
+</Window>

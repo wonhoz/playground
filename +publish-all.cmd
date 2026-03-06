@@ -64,6 +64,7 @@ call :pub "Serve.Cast"            "Applications\Tools\Dev\Serve.Cast"           
 call :pub "Table.Craft"           "Applications\Tools\Dev\Table.Craft"                   "Table.Craft.exe"           "Applications\Tools\Dev"
 call :pub "Locale.Forge"          "Applications\Tools\Dev\Locale.Forge"                  "LocaleForge.exe"           "Applications\Tools\Dev"
 call :pub "Icon.Hunt"             "Applications\Tools\Dev\Icon.Hunt"                     "IconHunt.exe"              "Applications\Tools\Dev"
+call :pub "Boot.Map"             "Applications\Tools\Dev\Boot.Map"                      "BootMap.exe"               "Applications\Tools\Dev"
 
 :: ── Applications / Tools / Network ──────────────────────────────
 call :pub "DNS.Flip"              "Applications\Tools\Network\DNS.Flip"                  "Dns.Flip.exe"              "Applications\Tools\Network"

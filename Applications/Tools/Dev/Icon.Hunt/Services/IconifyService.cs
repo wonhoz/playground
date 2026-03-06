@@ -195,6 +195,10 @@ public class IconifyService : IDisposable
         return result;
     }
 
+    // 캐시 파일 경로 반환 (다운로드 없음)
+    public static string GetCachePath(string prefix, string name)
+        => Path.Combine(_cacheRoot, prefix, $"{name}.svg");
+
     // ── 캐시 통계 ────────────────────────────────────────────
     public static long GetCacheSizeBytes()
     {

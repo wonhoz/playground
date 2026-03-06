@@ -94,7 +94,7 @@ public partial class MainWindow : Window
         if (img != null) DetailSvgImage.Source = img;
     }
 
-    // ── 그리드 썸네일 백그라운드 로더 ────────────────────────────
+    // ── 그리드 썸네일 로더 (캐시 전용, UI Background 우선순위) ──
     private async Task LoadThumbnailsAsync()
     {
         _thumbCts?.Cancel();
@@ -102,27 +102,36 @@ public partial class MainWindow : Window
         var ct = _thumbCts.Token;
 
         var icons = _vm.Icons.ToList();
-        using var sem = new System.Threading.SemaphoreSlim(4, 4);
 
-        await Task.WhenAll(icons.Select(async icon =>
+        foreach (var icon in icons)
         {
-            await sem.WaitAsync(ct);
+            if (ct.IsCancellationRequested) return;
+
+            // 캐시된 SVG만 사용 — 네트워크 요청 없음
+            var cachePath = IconifyService.GetCachePath(icon.Prefix, icon.Name);
+            if (!File.Exists(cachePath)) continue;
+
             try
             {
-                if (ct.IsCancellationRequested) return;
-                var path = await _vm.GetSvgPathAsync(icon, ct);
-                if (path == null || ct.IsCancellationRequested) return;
-                var content = await File.ReadAllTextAsync(path, ct);
-                // 썸네일 색상: 테마에 맞는 밝은 회색
+                var content = await File.ReadAllTextAsync(cachePath, ct);
                 var colored = IconifyService.ApplyColor(content, "#C8C8DC");
-                var img = await Task.Run(() => SvgRenderService.RenderString(colored), ct);
-                if (img != null && !ct.IsCancellationRequested)
-                    Dispatcher.Invoke(() => icon.Thumbnail = img);
+
+                // UI 스레드에서 Background 우선순위로 렌더링
+                // (마우스·키보드 입력보다 낮아 앱이 멈추지 않음)
+                await Dispatcher.InvokeAsync(() =>
+                {
+                    if (ct.IsCancellationRequested) return;
+                    try
+                    {
+                        var img = SvgRenderService.RenderString(colored);
+                        if (img != null) icon.Thumbnail = img;
+                    }
+                    catch { }
+                }, System.Windows.Threading.DispatcherPriority.Background);
             }
-            catch (OperationCanceledException) { }
+            catch (OperationCanceledException) { return; }
             catch { }
-            finally { sem.Release(); }
-        }));
+        }
     }
 
     // ── 라이브러리 인덱싱 ────────────────────────────────────────

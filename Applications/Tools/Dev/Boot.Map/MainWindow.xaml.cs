@@ -120,7 +120,7 @@ public partial class MainWindow : Window
     private readonly ObservableCollection<ServiceVm> _services = [];
 
     private List<BootSession> _rawSessions = [];
-    private List<DelayedService> _currentServices = [];
+    private Dictionary<DateTime, List<DelayedService>> _svcMap = [];
 
     private double _timelineWidth = 400;
 
@@ -145,6 +145,7 @@ public partial class MainWindow : Window
         {
             var (sessions, svcMap) = await Task.Run(ParseEventLog);
             _rawSessions = sessions;
+            _svcMap = svcMap;
 
             _sessions.Clear();
             foreach (var s in sessions)
@@ -422,11 +423,7 @@ public partial class MainWindow : Window
 
     private List<DelayedService> GetServicesForSession(BootSession s)
     {
-        // svcMap은 ParseEventLog에서 반환되지만 현재 필드로 보관하지 않음
-        // 서비스 정보는 로드 시 _currentServices에 저장
-        return _currentServices
-            .Where(x => true) // 이미 세션에 매핑된 목록
-            .ToList();
+        return _svcMap.TryGetValue(s.StartTime, out var list) ? list : [];
     }
 
     // ── 미니 컬러바 렌더링 ─────────────────────────────────────────────

@@ -62,6 +62,7 @@ call :pub "Mock.Server"           "Applications\Tools\Dev\Mock.Server"          
 call :pub "Signal.Flow"           "Applications\Tools\Dev\Signal.Flow"                   "Signal.Flow.exe"           "Applications\Tools\Dev"
 call :pub "Serve.Cast"            "Applications\Tools\Dev\Serve.Cast"                    "Serve.Cast.exe"            "Applications\Tools\Dev"
 call :pub "Table.Craft"           "Applications\Tools\Dev\Table.Craft"                   "Table.Craft.exe"           "Applications\Tools\Dev"
+call :pub "Locale.Forge"          "Applications\Tools\Dev\Locale.Forge"                  "LocaleForge.exe"           "Applications\Tools\Dev"
 
 :: ── Applications / Tools / Network ──────────────────────────────
 call :pub "DNS.Flip"              "Applications\Tools\Network\DNS.Flip"                  "Dns.Flip.exe"              "Applications\Tools\Network"

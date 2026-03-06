@@ -95,6 +95,7 @@ call :pub "Word.Cloud"            "Applications\Tools\Productivity\Visual\Word.C
 :: ── Tools / Productivity / Utility ───────────────────────────────
 call :pub "Clipboard.Stacker"     "Applications\Tools\Productivity\Utility\Clipboard.Stacker"    "Clipboard.Stacker.exe"     "Applications\Tools\Productivity\Utility"
 call :pub "Mouse.Flick"           "Applications\Tools\Productivity\Utility\Mouse.Flick"          "Mouse.Flick.exe"           "Applications\Tools\Productivity\Utility"
+call :pub "Prompt.Forge"          "Applications\Tools\Productivity\Utility\Prompt.Forge"         "Prompt.Forge.exe"          "Applications\Tools\Productivity\Utility"
 call :pub "QR.Forge"              "Applications\Tools\Productivity\Utility\QR.Forge"             "QR.Forge.exe"              "Applications\Tools\Productivity\Utility"
 
 :: ── Tools / System ───────────────────────────────────────────────

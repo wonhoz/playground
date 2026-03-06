@@ -1,0 +1,16 @@
+global using System;
+global using System.Collections.Generic;
+global using System.Collections.ObjectModel;
+global using System.ComponentModel;
+global using System.IO;
+global using System.Linq;
+global using System.Runtime.CompilerServices;
+global using System.Text.RegularExpressions;
+global using System.Threading;
+global using System.Threading.Tasks;
+global using System.Windows;
+global using System.Windows.Input;
+global using Microsoft.Data.Sqlite;
+global using Prompt.Forge.Models;
+global using Prompt.Forge.Services;
+global using Prompt.Forge.ViewModels;

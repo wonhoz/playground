@@ -1,4 +1,4 @@
-﻿@echo off
+@echo off
 chcp 65001 >nul
 setlocal enabledelayedexpansion
 
@@ -52,54 +52,56 @@ echo !CY!  19!RS! Signal.Flow           !DG!Tools/Dev/Debug!RS!
 echo !DG!      Dev / Assets!RS!
 echo !CY!  20!RS! Glyph.Map             !DG!Tools/Dev/Assets!RS!
 echo !CY!  21!RS! Icon.Hunt             !DG!Tools/Dev/Assets!RS!
-echo !CY!  22!RS! Locale.Forge          !DG!Tools/Dev/Assets!RS!
+echo !CY!  22!RS! Key.Map               !DG!Tools/Dev/Assets!RS!
+echo !CY!  23!RS! Locale.Forge          !DG!Tools/Dev/Assets!RS!
 echo !DG!      Dev / Data!RS!
-echo !CY!  23!RS! Boot.Map              !DG!Tools/Dev/Data!RS!
-echo !CY!  24!RS! Table.Craft           !DG!Tools/Dev/Data!RS!
+echo !CY!  24!RS! Boot.Map              !DG!Tools/Dev/Data!RS!
+echo !CY!  25!RS! Table.Craft           !DG!Tools/Dev/Data!RS!
 echo.
 echo !BD!!DG!  Tools / Network!RS!
-echo !CY!  25!RS! DNS.Flip              !DG!Tools/Network!RS!
-echo !CY!  26!RS! Net.Scan              !DG!Tools/Network!RS!
-echo !CY!  27!RS! Port.Watch            !DG!Tools/Network!RS!
+echo !CY!  26!RS! DNS.Flip              !DG!Tools/Network!RS!
+echo !CY!  27!RS! Net.Scan              !DG!Tools/Network!RS!
+echo !CY!  28!RS! Port.Watch            !DG!Tools/Network!RS!
 echo.
 echo !BD!!DG!  Tools / Productivity!RS!
 echo !DG!      Productivity / Capture!RS!
-echo !CY!  28!RS! Code.Snap             !DG!Tools/Productivity/Capture!RS!
-echo !CY!  29!RS! Screen.Recorder       !DG!Tools/Productivity/Capture!RS!
+echo !CY!  29!RS! Code.Snap             !DG!Tools/Productivity/Capture!RS!
+echo !CY!  30!RS! Screen.Recorder       !DG!Tools/Productivity/Capture!RS!
 echo !DG!      Productivity / Text!RS!
-echo !CY!  30!RS! Echo.Text             !DG!Tools/Productivity/Text!RS!
-echo !CY!  31!RS! Mark.View             !DG!Tools/Productivity/Text!RS!
-echo !CY!  32!RS! Text.Forge            !DG!Tools/Productivity/Text!RS!
+echo !CY!  31!RS! Echo.Text             !DG!Tools/Productivity/Text!RS!
+echo !CY!  32!RS! Mark.View             !DG!Tools/Productivity/Text!RS!
+echo !CY!  33!RS! Text.Forge            !DG!Tools/Productivity/Text!RS!
 echo !DG!      Productivity / Visual!RS!
-echo !CY!  33!RS! Char.Art              !DG!Tools/Productivity/Visual!RS!
-echo !CY!  34!RS! Word.Cloud            !DG!Tools/Productivity/Visual!RS!
+echo !CY!  34!RS! Char.Art              !DG!Tools/Productivity/Visual!RS!
+echo !CY!  35!RS! Timeline.Craft        !DG!Tools/Productivity/Visual!RS!
+echo !CY!  36!RS! Word.Cloud            !DG!Tools/Productivity/Visual!RS!
 echo !DG!      Productivity / Utility!RS!
-echo !CY!  35!RS! Clipboard.Stacker     !DG!Tools/Productivity/Utility!RS!
-echo !CY!  36!RS! Mouse.Flick           !DG!Tools/Productivity/Utility!RS!
-echo !CY!  37!RS! Prompt.Forge          !DG!Tools/Productivity/Utility!RS!
-echo !CY!  38!RS! QR.Forge              !DG!Tools/Productivity/Utility!RS!
+echo !CY!  37!RS! Clipboard.Stacker     !DG!Tools/Productivity/Utility!RS!
+echo !CY!  38!RS! Mouse.Flick           !DG!Tools/Productivity/Utility!RS!
+echo !CY!  39!RS! Prompt.Forge          !DG!Tools/Productivity/Utility!RS!
+echo !CY!  40!RS! QR.Forge              !DG!Tools/Productivity/Utility!RS!
 echo.
 echo !BD!!DG!  Tools / System!RS!
-echo !CY!  39!RS! Env.Guard             !DG!Tools/System!RS!
-echo !CY!  40!RS! Sys.Clean             !DG!Tools/System!RS!
-echo !CY!  41!RS! Tray.Stats            !DG!Tools/System!RS!
+echo !CY!  41!RS! Env.Guard             !DG!Tools/System!RS!
+echo !CY!  42!RS! Sys.Clean             !DG!Tools/System!RS!
+echo !CY!  43!RS! Tray.Stats            !DG!Tools/System!RS!
 echo.
 echo !BD!!DG!  Games!RS!
-echo !CY!  42!RS! Mosaic.Forge          !DG!Applications/Media!RS!
-echo !CY!  43!RS! Dungeon.Dash          !DG!Games/Action!RS!
-echo !CY!  44!RS! Brick.Blitz           !DG!Games/Arcade!RS!
-echo !CY!  45!RS! Dash.City             !DG!Games/Arcade!RS!
-echo !CY!  46!RS! Neon.Run              !DG!Games/Arcade!RS!
-echo !CY!  47!RS! Neon.Slice            !DG!Games/Arcade!RS!
-echo !CY!  48!RS! Gravity.Flip          !DG!Games/Puzzle!RS!
-echo !CY!  49!RS! Hue.Flow              !DG!Games/Puzzle!RS!
-echo !CY!  50!RS! Orbit.Craft           !DG!Games/Puzzle!RS!
-echo !CY!  51!RS! Nitro.Drift           !DG!Games/Racing!RS!
-echo !CY!  52!RS! Beat.Drop             !DG!Games/Rhythm!RS!
-echo !CY!  53!RS! Sand.Fall             !DG!Games/Sandbox!RS!
-echo !CY!  54!RS! Dodge.Blitz           !DG!Games/Shooter!RS!
-echo !CY!  55!RS! Star.Strike           !DG!Games/Shooter!RS!
-echo !CY!  56!RS! Tower.Guard           !DG!Games/Strategy!RS!
+echo !CY!  44!RS! Mosaic.Forge          !DG!Applications/Media!RS!
+echo !CY!  45!RS! Dungeon.Dash          !DG!Games/Action!RS!
+echo !CY!  46!RS! Brick.Blitz           !DG!Games/Arcade!RS!
+echo !CY!  47!RS! Dash.City             !DG!Games/Arcade!RS!
+echo !CY!  48!RS! Neon.Run              !DG!Games/Arcade!RS!
+echo !CY!  49!RS! Neon.Slice            !DG!Games/Arcade!RS!
+echo !CY!  50!RS! Gravity.Flip          !DG!Games/Puzzle!RS!
+echo !CY!  51!RS! Hue.Flow              !DG!Games/Puzzle!RS!
+echo !CY!  52!RS! Orbit.Craft           !DG!Games/Puzzle!RS!
+echo !CY!  53!RS! Nitro.Drift           !DG!Games/Racing!RS!
+echo !CY!  54!RS! Beat.Drop             !DG!Games/Rhythm!RS!
+echo !CY!  55!RS! Sand.Fall             !DG!Games/Sandbox!RS!
+echo !CY!  56!RS! Dodge.Blitz           !DG!Games/Shooter!RS!
+echo !CY!  57!RS! Star.Strike           !DG!Games/Shooter!RS!
+echo !CY!  58!RS! Tower.Guard           !DG!Games/Strategy!RS!
 echo.
 echo !DG!--------------------------------------------------!RS!
 echo !DG!  번호 입력 (공백/쉼표로 구분)   예: 1 3 5  또는  1,3,5!RS!
@@ -149,41 +151,43 @@ for %%n in (!SEL!) do (
     if "%%n"=="19" call :pub "Signal.Flow"            "Applications\Tools\Dev\Debug\Signal.Flow"                  "Signal.Flow.exe"           "Applications\Tools\Dev\Debug"
     if "%%n"=="20" call :pub "Glyph.Map"              "Applications\Tools\Dev\Assets\Glyph.Map"                   "Glyph.Map.exe"             "Applications\Tools\Dev\Assets\Glyph.Map"
     if "%%n"=="21" call :pub "Icon.Hunt"              "Applications\Tools\Dev\Assets\Icon.Hunt"                   "IconHunt.exe"              "Applications\Tools\Dev\Assets"
-    if "%%n"=="22" call :pub "Locale.Forge"           "Applications\Tools\Dev\Assets\Locale.Forge"                "LocaleForge.exe"           "Applications\Tools\Dev\Assets"
-    if "%%n"=="23" call :pub "Boot.Map"               "Applications\Tools\Dev\Data\Boot.Map"                      "BootMap.exe"               "Applications\Tools\Dev\Data"
-    if "%%n"=="24" call :pub "Table.Craft"            "Applications\Tools\Dev\Data\Table.Craft"                   "Table.Craft.exe"           "Applications\Tools\Dev\Data"
-    if "%%n"=="25" call :pub "DNS.Flip"               "Applications\Tools\Network\DNS.Flip"                       "Dns.Flip.exe"              "Applications\Tools\Network"
-    if "%%n"=="26" call :pub "Net.Scan"               "Applications\Tools\Network\Net.Scan"                       "NetScan.exe"               "Applications\Tools\Network"
-    if "%%n"=="27" call :pub "Port.Watch"             "Applications\Tools\Network\Port.Watch"                     "Port.Watch.exe"            "Applications\Tools\Network"
-    if "%%n"=="28" call :pub "Code.Snap"              "Applications\Tools\Productivity\Capture\Code.Snap"         "Code.Snap.exe"             "Applications\Tools\Productivity\Capture"
-    if "%%n"=="29" call :pub "Screen.Recorder"        "Applications\Tools\Productivity\Capture\Screen.Recorder"   "Screen.Recorder.exe"       "Applications\Tools\Productivity\Capture"
-    if "%%n"=="30" call :pub "Echo.Text"              "Applications\Tools\Productivity\Text\Echo.Text"            "EchoText.exe"              "Applications\Tools\Productivity\Text"
-    if "%%n"=="31" call :pub "Mark.View"              "Applications\Tools\Productivity\Text\Mark.View"            "Mark.View.exe"             "Applications\Tools\Productivity\Text\Mark.View"
-    if "%%n"=="32" call :pub "Text.Forge"             "Applications\Tools\Productivity\Text\Text.Forge"           "Text.Forge.exe"            "Applications\Tools\Productivity\Text"
-    if "%%n"=="33" call :pub "Char.Art"               "Applications\Tools\Productivity\Visual\Char.Art"           "Char.Art.exe"              "Applications\Tools\Productivity\Visual"
-    if "%%n"=="34" call :pub "Word.Cloud"             "Applications\Tools\Productivity\Visual\Word.Cloud"         "Word.Cloud.exe"            "Applications\Tools\Productivity\Visual"
-    if "%%n"=="35" call :pub "Clipboard.Stacker"      "Applications\Tools\Productivity\Utility\Clipboard.Stacker" "Clipboard.Stacker.exe"     "Applications\Tools\Productivity\Utility"
-    if "%%n"=="36" call :pub "Mouse.Flick"            "Applications\Tools\Productivity\Utility\Mouse.Flick"       "Mouse.Flick.exe"           "Applications\Tools\Productivity\Utility"
-    if "%%n"=="37" call :pub "Prompt.Forge"           "Applications\Tools\Productivity\Utility\Prompt.Forge"      "Prompt.Forge.exe"          "Applications\Tools\Productivity\Utility"
-    if "%%n"=="38" call :pub "QR.Forge"               "Applications\Tools\Productivity\Utility\QR.Forge"          "QR.Forge.exe"              "Applications\Tools\Productivity\Utility"
-    if "%%n"=="39" call :pub "Env.Guard"              "Applications\Tools\System\Env.Guard"                       "Env.Guard.exe"             "Applications\Tools\System"
-    if "%%n"=="40" call :pub "Sys.Clean"              "Applications\Tools\System\Sys.Clean"                       "Sys.Clean.exe"             "Applications\Tools\System\Sys.Clean"
-    if "%%n"=="41" call :pub "Tray.Stats"             "Applications\Tools\System\Tray.Stats"                      "Tray.Stats.exe"            "Applications\Tools\System"
-    if "%%n"=="42" call :pub "Mosaic.Forge"           "Applications\Media\Mosaic.Forge"                           "Mosaic.Forge.exe"          "Applications\Media"
-    if "%%n"=="43" call :pub "Dungeon.Dash"           "Games\Action\Dungeon.Dash"                                 "Dungeon.Dash.exe"          "Games\Action"
-    if "%%n"=="44" call :pub "Brick.Blitz"            "Games\Arcade\Brick.Blitz"                                  "Brick.Blitz.exe"           "Games\Arcade"
-    if "%%n"=="45" call :pub "Dash.City"              "Games\Arcade\Dash.City"                                    "Dash.City.exe"             "Games\Arcade"
-    if "%%n"=="46" call :pub "Neon.Run"               "Games\Arcade\Neon.Run"                                     "Neon.Run.exe"              "Games\Arcade"
-    if "%%n"=="47" call :pub "Neon.Slice"             "Games\Arcade\Neon.Slice"                                   "Neon.Slice.exe"            "Games\Arcade\Neon.Slice"
-    if "%%n"=="48" call :pub "Gravity.Flip"           "Games\Puzzle\Gravity.Flip"                                 "Gravity.Flip.exe"          "Games\Puzzle"
-    if "%%n"=="49" call :pub "Hue.Flow"               "Games\Puzzle\Hue.Flow"                                     "Hue.Flow.exe"              "Games\Puzzle"
-    if "%%n"=="50" call :pub "Orbit.Craft"            "Games\Puzzle\Orbit.Craft"                                  "Orbit.Craft.exe"           "Games\Puzzle\Orbit.Craft"
-    if "%%n"=="51" call :pub "Nitro.Drift"            "Games\Racing\Nitro.Drift"                                  "Nitro.Drift.exe"           "Games\Racing"
-    if "%%n"=="52" call :pub "Beat.Drop"              "Games\Rhythm\Beat.Drop"                                    "Beat.Drop.exe"             "Games\Rhythm"
-    if "%%n"=="53" call :pub "Sand.Fall"              "Games\Sandbox\Sand.Fall"                                   "Sand.Fall.exe"             "Games\Sandbox"
-    if "%%n"=="54" call :pub "Dodge.Blitz"            "Games\Shooter\Dodge.Blitz"                                 "Dodge.Blitz.exe"           "Games\Shooter"
-    if "%%n"=="55" call :pub "Star.Strike"            "Games\Shooter\Star.Strike"                                 "Star.Strike.exe"           "Games\Shooter"
-    if "%%n"=="56" call :pub "Tower.Guard"            "Games\Strategy\Tower.Guard"                                "Tower.Guard.exe"           "Games\Strategy"
+    if "%%n"=="22" call :pub "Key.Map"                "Applications\Tools\Dev\Assets\Key.Map"                     "Key.Map.exe"               "Applications\Tools\Dev\Assets"
+    if "%%n"=="23" call :pub "Locale.Forge"           "Applications\Tools\Dev\Assets\Locale.Forge"                "LocaleForge.exe"           "Applications\Tools\Dev\Assets"
+    if "%%n"=="24" call :pub "Boot.Map"               "Applications\Tools\Dev\Data\Boot.Map"                      "BootMap.exe"               "Applications\Tools\Dev\Data"
+    if "%%n"=="25" call :pub "Table.Craft"            "Applications\Tools\Dev\Data\Table.Craft"                   "Table.Craft.exe"           "Applications\Tools\Dev\Data"
+    if "%%n"=="26" call :pub "DNS.Flip"               "Applications\Tools\Network\DNS.Flip"                       "Dns.Flip.exe"              "Applications\Tools\Network"
+    if "%%n"=="27" call :pub "Net.Scan"               "Applications\Tools\Network\Net.Scan"                       "NetScan.exe"               "Applications\Tools\Network"
+    if "%%n"=="28" call :pub "Port.Watch"             "Applications\Tools\Network\Port.Watch"                     "Port.Watch.exe"            "Applications\Tools\Network"
+    if "%%n"=="29" call :pub "Code.Snap"              "Applications\Tools\Productivity\Capture\Code.Snap"         "Code.Snap.exe"             "Applications\Tools\Productivity\Capture"
+    if "%%n"=="30" call :pub "Screen.Recorder"        "Applications\Tools\Productivity\Capture\Screen.Recorder"   "Screen.Recorder.exe"       "Applications\Tools\Productivity\Capture"
+    if "%%n"=="31" call :pub "Echo.Text"              "Applications\Tools\Productivity\Text\Echo.Text"            "EchoText.exe"              "Applications\Tools\Productivity\Text"
+    if "%%n"=="32" call :pub "Mark.View"              "Applications\Tools\Productivity\Text\Mark.View"            "Mark.View.exe"             "Applications\Tools\Productivity\Text\Mark.View"
+    if "%%n"=="33" call :pub "Text.Forge"             "Applications\Tools\Productivity\Text\Text.Forge"           "Text.Forge.exe"            "Applications\Tools\Productivity\Text"
+    if "%%n"=="34" call :pub "Char.Art"               "Applications\Tools\Productivity\Visual\Char.Art"           "Char.Art.exe"              "Applications\Tools\Productivity\Visual"
+    if "%%n"=="35" call :pub "Timeline.Craft"         "Applications\Tools\Productivity\Visual\Timeline.Craft"     "Timeline.Craft.exe"        "Applications\Tools\Productivity\Visual"
+    if "%%n"=="36" call :pub "Word.Cloud"             "Applications\Tools\Productivity\Visual\Word.Cloud"         "Word.Cloud.exe"            "Applications\Tools\Productivity\Visual"
+    if "%%n"=="37" call :pub "Clipboard.Stacker"      "Applications\Tools\Productivity\Utility\Clipboard.Stacker" "Clipboard.Stacker.exe"     "Applications\Tools\Productivity\Utility"
+    if "%%n"=="38" call :pub "Mouse.Flick"            "Applications\Tools\Productivity\Utility\Mouse.Flick"       "Mouse.Flick.exe"           "Applications\Tools\Productivity\Utility"
+    if "%%n"=="39" call :pub "Prompt.Forge"           "Applications\Tools\Productivity\Utility\Prompt.Forge"      "Prompt.Forge.exe"          "Applications\Tools\Productivity\Utility"
+    if "%%n"=="40" call :pub "QR.Forge"               "Applications\Tools\Productivity\Utility\QR.Forge"          "QR.Forge.exe"              "Applications\Tools\Productivity\Utility"
+    if "%%n"=="41" call :pub "Env.Guard"              "Applications\Tools\System\Env.Guard"                       "Env.Guard.exe"             "Applications\Tools\System"
+    if "%%n"=="42" call :pub "Sys.Clean"              "Applications\Tools\System\Sys.Clean"                       "Sys.Clean.exe"             "Applications\Tools\System\Sys.Clean"
+    if "%%n"=="43" call :pub "Tray.Stats"             "Applications\Tools\System\Tray.Stats"                      "Tray.Stats.exe"            "Applications\Tools\System"
+    if "%%n"=="44" call :pub "Mosaic.Forge"           "Applications\Media\Mosaic.Forge"                           "Mosaic.Forge.exe"          "Applications\Media"
+    if "%%n"=="45" call :pub "Dungeon.Dash"           "Games\Action\Dungeon.Dash"                                 "Dungeon.Dash.exe"          "Games\Action"
+    if "%%n"=="46" call :pub "Brick.Blitz"            "Games\Arcade\Brick.Blitz"                                  "Brick.Blitz.exe"           "Games\Arcade"
+    if "%%n"=="47" call :pub "Dash.City"              "Games\Arcade\Dash.City"                                    "Dash.City.exe"             "Games\Arcade"
+    if "%%n"=="48" call :pub "Neon.Run"               "Games\Arcade\Neon.Run"                                     "Neon.Run.exe"              "Games\Arcade"
+    if "%%n"=="49" call :pub "Neon.Slice"             "Games\Arcade\Neon.Slice"                                   "Neon.Slice.exe"            "Games\Arcade\Neon.Slice"
+    if "%%n"=="50" call :pub "Gravity.Flip"           "Games\Puzzle\Gravity.Flip"                                 "Gravity.Flip.exe"          "Games\Puzzle"
+    if "%%n"=="51" call :pub "Hue.Flow"               "Games\Puzzle\Hue.Flow"                                     "Hue.Flow.exe"              "Games\Puzzle"
+    if "%%n"=="52" call :pub "Orbit.Craft"            "Games\Puzzle\Orbit.Craft"                                  "Orbit.Craft.exe"           "Games\Puzzle\Orbit.Craft"
+    if "%%n"=="53" call :pub "Nitro.Drift"            "Games\Racing\Nitro.Drift"                                  "Nitro.Drift.exe"           "Games\Racing"
+    if "%%n"=="54" call :pub "Beat.Drop"              "Games\Rhythm\Beat.Drop"                                    "Beat.Drop.exe"             "Games\Rhythm"
+    if "%%n"=="55" call :pub "Sand.Fall"              "Games\Sandbox\Sand.Fall"                                   "Sand.Fall.exe"             "Games\Sandbox"
+    if "%%n"=="56" call :pub "Dodge.Blitz"            "Games\Shooter\Dodge.Blitz"                                 "Dodge.Blitz.exe"           "Games\Shooter"
+    if "%%n"=="57" call :pub "Star.Strike"            "Games\Shooter\Star.Strike"                                 "Star.Strike.exe"           "Games\Shooter"
+    if "%%n"=="58" call :pub "Tower.Guard"            "Games\Strategy\Tower.Guard"                                "Tower.Guard.exe"           "Games\Strategy"
 )
 goto :DONE
 
@@ -222,6 +226,7 @@ call :pub "Log.Lens"              "Applications\Tools\Dev\Debug\Log.Lens"       
 call :pub "Signal.Flow"           "Applications\Tools\Dev\Debug\Signal.Flow"                  "Signal.Flow.exe"           "Applications\Tools\Dev\Debug"
 call :pub "Glyph.Map"             "Applications\Tools\Dev\Assets\Glyph.Map"                   "Glyph.Map.exe"             "Applications\Tools\Dev\Assets\Glyph.Map"
 call :pub "Icon.Hunt"             "Applications\Tools\Dev\Assets\Icon.Hunt"                   "IconHunt.exe"              "Applications\Tools\Dev\Assets"
+call :pub "Key.Map"               "Applications\Tools\Dev\Assets\Key.Map"                     "Key.Map.exe"               "Applications\Tools\Dev\Assets"
 call :pub "Locale.Forge"          "Applications\Tools\Dev\Assets\Locale.Forge"                "LocaleForge.exe"           "Applications\Tools\Dev\Assets"
 call :pub "Boot.Map"              "Applications\Tools\Dev\Data\Boot.Map"                      "BootMap.exe"               "Applications\Tools\Dev\Data"
 call :pub "Table.Craft"           "Applications\Tools\Dev\Data\Table.Craft"                   "Table.Craft.exe"           "Applications\Tools\Dev\Data"
@@ -234,6 +239,7 @@ call :pub "Echo.Text"             "Applications\Tools\Productivity\Text\Echo.Tex
 call :pub "Mark.View"             "Applications\Tools\Productivity\Text\Mark.View"            "Mark.View.exe"             "Applications\Tools\Productivity\Text\Mark.View"
 call :pub "Text.Forge"            "Applications\Tools\Productivity\Text\Text.Forge"           "Text.Forge.exe"            "Applications\Tools\Productivity\Text"
 call :pub "Char.Art"              "Applications\Tools\Productivity\Visual\Char.Art"           "Char.Art.exe"              "Applications\Tools\Productivity\Visual"
+call :pub "Timeline.Craft"        "Applications\Tools\Productivity\Visual\Timeline.Craft"     "Timeline.Craft.exe"        "Applications\Tools\Productivity\Visual"
 call :pub "Word.Cloud"            "Applications\Tools\Productivity\Visual\Word.Cloud"         "Word.Cloud.exe"            "Applications\Tools\Productivity\Visual"
 call :pub "Clipboard.Stacker"     "Applications\Tools\Productivity\Utility\Clipboard.Stacker" "Clipboard.Stacker.exe"     "Applications\Tools\Productivity\Utility"
 call :pub "Mouse.Flick"           "Applications\Tools\Productivity\Utility\Mouse.Flick"       "Mouse.Flick.exe"           "Applications\Tools\Productivity\Utility"

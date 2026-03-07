@@ -68,6 +68,7 @@ call :pub "Signal.Flow"           "Applications\Tools\Dev\Debug\Signal.Flow"    
 :: ── Tools / Dev / Assets ─────────────────────────────────────────
 call :pub "Glyph.Map"             "Applications\Tools\Dev\Assets\Glyph.Map"                      "Glyph.Map.exe"             "Applications\Tools\Dev\Assets\Glyph.Map"
 call :pub "Icon.Hunt"             "Applications\Tools\Dev\Assets\Icon.Hunt"                      "IconHunt.exe"              "Applications\Tools\Dev\Assets"
+call :pub "Key.Map"               "Applications\Tools\Dev\Assets\Key.Map"                        "Key.Map.exe"               "Applications\Tools\Dev\Assets"
 call :pub "Locale.Forge"          "Applications\Tools\Dev\Assets\Locale.Forge"                   "LocaleForge.exe"           "Applications\Tools\Dev\Assets"
 
 :: ── Tools / Dev / Data ───────────────────────────────────────────
@@ -90,6 +91,7 @@ call :pub "Text.Forge"            "Applications\Tools\Productivity\Text\Text.For
 
 :: ── Tools / Productivity / Visual ────────────────────────────────
 call :pub "Char.Art"              "Applications\Tools\Productivity\Visual\Char.Art"              "Char.Art.exe"              "Applications\Tools\Productivity\Visual"
+call :pub "Timeline.Craft"        "Applications\Tools\Productivity\Visual\Timeline.Craft"        "Timeline.Craft.exe"        "Applications\Tools\Productivity\Visual"
 call :pub "Word.Cloud"            "Applications\Tools\Productivity\Visual\Word.Cloud"            "Word.Cloud.exe"            "Applications\Tools\Productivity\Visual"
 
 :: ── Tools / Productivity / Utility ───────────────────────────────

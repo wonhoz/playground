@@ -1,0 +1,405 @@
+<Window x:Class="Key.Map.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Key.Map" Width="1020" Height="660"
+        MinWidth="860" MinHeight="520"
+        Background="#13131F" Foreground="#E0E0E0"
+        FontFamily="Segoe UI" FontSize="13">
+
+    <Window.Resources>
+        <!-- 텍스트박스 -->
+        <Style TargetType="TextBox">
+            <Setter Property="Background" Value="#1E1E2E"/>
+            <Setter Property="Foreground" Value="#E0E0E0"/>
+            <Setter Property="BorderBrush" Value="#2A2A3E"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="7,4"/>
+            <Setter Property="CaretBrush" Value="#06B6D4"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="4">
+                            <ScrollViewer x:Name="PART_ContentHost" Margin="{TemplateBinding Padding}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsFocused" Value="True">
+                                <Setter Property="BorderBrush" Value="#06B6D4"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- 기본 버튼 -->
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="#252535"/>
+            <Setter Property="Foreground" Value="#C0C0D0"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="12,5"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="5"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#303048"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Opacity" Value="0.4"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- 액센트 버튼 (시안) -->
+        <Style x:Key="AccentBtn" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+            <Setter Property="Background" Value="#0E7490"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="5"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#0891B2"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Opacity" Value="0.4"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- 위험 버튼 -->
+        <Style x:Key="DangerBtn" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+            <Setter Property="Background" Value="#3A1A1A"/>
+            <Setter Property="Foreground" Value="#F87171"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="5"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#4A2020"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- 목록 아이템 -->
+        <Style TargetType="ListBoxItem">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="#C0C0D0"/>
+            <Setter Property="Padding" Value="8,6"/>
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderThickness="0,0,0,1" BorderBrush="#1A1A2A"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#1E1E2E"/>
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="#0C3A4A"/>
+                                <Setter Property="Foreground" Value="#E0E0E0"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- 스크롤바 -->
+        <Style TargetType="ScrollBar">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Width" Value="6"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ScrollBar">
+                        <Grid>
+                            <Track x:Name="PART_Track" IsDirectionReversed="True">
+                                <Track.Thumb>
+                                    <Thumb>
+                                        <Thumb.Template>
+                                            <ControlTemplate TargetType="Thumb">
+                                                <Border Background="#3A3A55" CornerRadius="3"/>
+                                            </ControlTemplate>
+                                        </Thumb.Template>
+                                    </Thumb>
+                                </Track.Thumb>
+                            </Track>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- ComboBox -->
+        <Style TargetType="ComboBox">
+            <Setter Property="Background" Value="#1E1E2E"/>
+            <Setter Property="Foreground" Value="#C0C0D0"/>
+            <Setter Property="BorderBrush" Value="#2A2A3E"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="7,4"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ComboBox">
+                        <Grid>
+                            <Border Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    CornerRadius="4">
+                                <Grid>
+                                    <ContentPresenter Content="{TemplateBinding SelectionBoxItem}"
+                                        Margin="{TemplateBinding Padding}"
+                                        HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                                    <TextBlock Text="▾" Foreground="#888899" FontSize="10"
+                                               HorizontalAlignment="Right" VerticalAlignment="Center"
+                                               Margin="0,0,8,0"/>
+                                </Grid>
+                            </Border>
+                            <Popup x:Name="PART_Popup" AllowsTransparency="True"
+                                   IsOpen="{TemplateBinding IsDropDownOpen}" Placement="Bottom">
+                                <Border Background="#1E1E2E" BorderBrush="#3A3A55"
+                                        BorderThickness="1" CornerRadius="4" MaxHeight="240">
+                                    <ScrollViewer><ItemsPresenter/></ScrollViewer>
+                                </Border>
+                            </Popup>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="BorderBrush" Value="#06B6D4"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Resources>
+                <Style TargetType="ComboBoxItem">
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="Foreground" Value="#C0C0D0"/>
+                    <Setter Property="Padding" Value="10,6"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="ComboBoxItem">
+                                <Border Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}">
+                                    <ContentPresenter/>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsHighlighted" Value="True">
+                                        <Setter Property="Background" Value="#0C2A38"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Style.Resources>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- ── 상단 헤더 ──────────────────────────────────────── -->
+        <Border Grid.Row="0" Background="#0A0A14" Padding="14,8">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0" Orientation="Horizontal">
+                    <TextBlock Text="Key.Map" FontSize="16" FontWeight="Bold"
+                               Foreground="#06B6D4" VerticalAlignment="Center"/>
+                    <TextBlock Text="  ·  프리셋:" Foreground="#555566"
+                               VerticalAlignment="Center" Margin="12,0,8,0"/>
+                    <ComboBox x:Name="CbPreset" Width="200"
+                              ItemsSource="{Binding AllPresets}"
+                              DisplayMemberPath="Name"
+                              SelectedItem="{Binding ActivePreset, Mode=TwoWay}"/>
+                </StackPanel>
+                <StackPanel Grid.Column="2" Orientation="Horizontal">
+                    <Button Content="🖨  인쇄 / PDF" Click="Print_Click" Margin="0,0,8,0"/>
+                    <Button Content="📷  PNG 저장" Style="{StaticResource AccentBtn}" Click="ExportPng_Click"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- ── 본문 ──────────────────────────────────────────── -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="270" MinWidth="220"/>
+                <ColumnDefinition Width="5"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- 왼쪽: 단축키 목록 + 추가 -->
+            <Grid Grid.Column="0" Background="#0A0A14">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <ListBox Grid.Row="0" x:Name="LstShortcuts"
+                         Background="Transparent" BorderThickness="0"
+                         ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                         ItemsSource="{Binding Shortcuts}"
+                         SelectedItem="{Binding Selected, Mode=TwoWay}"
+                         SelectionChanged="Shortcut_SelectionChanged">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Border Grid.Column="0" x:Name="CatDot"
+                                        Width="4" CornerRadius="2"
+                                        Margin="0,0,8,0" VerticalAlignment="Stretch"/>
+                                <StackPanel Grid.Column="1">
+                                    <TextBlock Text="{Binding Keys}" FontWeight="SemiBold"
+                                               FontFamily="Consolas" FontSize="12"
+                                               Foreground="#06B6D4"/>
+                                    <TextBlock Text="{Binding Description}" FontSize="11"
+                                               Foreground="#888899" TextTrimming="CharacterEllipsis"/>
+                                </StackPanel>
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+
+                <!-- 단축키 추가 패널 -->
+                <Border Grid.Row="1" Background="#0F0F1A" Padding="10,8">
+                    <StackPanel>
+                        <TextBlock Text="단축키 추가" Foreground="#555566" FontSize="11" Margin="0,0,0,6"/>
+                        <TextBox x:Name="TxtNewKeys"    Margin="0,0,0,5"
+                                 Text="{Binding NewKeys, UpdateSourceTrigger=PropertyChanged}"
+                                 Height="28" VerticalContentAlignment="Center">
+                            <TextBox.Style>
+                                <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
+                                    <Style.Triggers>
+                                        <Trigger Property="Text" Value="">
+                                            <Setter Property="Background">
+                                                <Setter.Value>
+                                                    <VisualBrush Stretch="None" AlignmentX="Left">
+                                                        <VisualBrush.Visual>
+                                                            <TextBlock Text="예: Ctrl+Shift+P"
+                                                                       Foreground="#444455" Margin="8,0"/>
+                                                        </VisualBrush.Visual>
+                                                    </VisualBrush>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBox.Style>
+                        </TextBox>
+                        <TextBox x:Name="TxtNewDesc" Margin="0,0,0,5"
+                                 Text="{Binding NewDesc, UpdateSourceTrigger=PropertyChanged}"
+                                 Height="28" VerticalContentAlignment="Center">
+                            <TextBox.Style>
+                                <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
+                                    <Style.Triggers>
+                                        <Trigger Property="Text" Value="">
+                                            <Setter Property="Background">
+                                                <Setter.Value>
+                                                    <VisualBrush Stretch="None" AlignmentX="Left">
+                                                        <VisualBrush.Visual>
+                                                            <TextBlock Text="설명"
+                                                                       Foreground="#444455" Margin="8,0"/>
+                                                        </VisualBrush.Visual>
+                                                    </VisualBrush>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBox.Style>
+                        </TextBox>
+                        <ComboBox x:Name="CbNewCat" Margin="0,0,0,8" Height="28"
+                                  ItemsSource="{Binding Categories}"
+                                  SelectedItem="{Binding NewCat, Mode=TwoWay}"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="8"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Button Grid.Column="0" Content="+ 추가" Style="{StaticResource AccentBtn}"
+                                    Click="Add_Click"/>
+                            <Button Grid.Column="2" Content="삭제" Style="{StaticResource DangerBtn}"
+                                    IsEnabled="{Binding HasSelection}" Click="Delete_Click"/>
+                        </Grid>
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+            <!-- 스플리터 -->
+            <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch"
+                          Background="#0A0A14"/>
+
+            <!-- 오른쪽: 키보드 + 범례 -->
+            <Grid Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- 키보드 캔버스 영역 -->
+                <ScrollViewer Grid.Row="0" HorizontalScrollBarVisibility="Auto"
+                              VerticalScrollBarVisibility="Auto"
+                              Background="#13131F">
+                    <Border Padding="20">
+                        <Canvas x:Name="KbCanvas" Background="Transparent"/>
+                    </Border>
+                </ScrollViewer>
+
+                <!-- 범례 + 상태 -->
+                <Border Grid.Row="1" Background="#0A0A14" Padding="14,6">
+                    <Grid>
+                        <StackPanel x:Name="LegendPanel" Orientation="Horizontal"/>
+                        <TextBlock Text="{Binding StatusText}" Foreground="#555566"
+                                   FontSize="11" HorizontalAlignment="Right"
+                                   VerticalAlignment="Center"/>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Grid>
+
+        <!-- ── 상태 바 ────────────────────────────────────────── -->
+        <Border Grid.Row="2" Background="#080812" Padding="14,3">
+            <TextBlock Foreground="#444455" FontSize="11"
+                       Text="단축키 클릭 → 키 하이라이트  |  Shift+클릭 → 여러 단축키 동시 표시  |  PNG 저장 → 치트시트 출력"/>
+        </Border>
+    </Grid>
+</Window>

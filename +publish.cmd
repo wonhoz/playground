@@ -110,6 +110,7 @@ echo !CY!  59!RS! Hue.Flow              !DG!Games/Puzzle!RS!
 echo !CY!  60!RS! Orbit.Craft           !DG!Games/Puzzle!RS!
 echo !CY!  61!RS! Nitro.Drift           !DG!Games/Racing!RS!
 echo !CY!  62!RS! Beat.Drop             !DG!Games/Rhythm!RS!
+echo !CY!  68!RS! Chord.Strike          !DG!Games/Rhythm!RS!
 echo !CY!  63!RS! Sand.Fall             !DG!Games/Sandbox!RS!
 echo !CY!  64!RS! Dodge.Blitz           !DG!Games/Shooter!RS!
 echo !CY!  65!RS! Star.Strike           !DG!Games/Shooter!RS!
@@ -210,6 +211,7 @@ for %%n in (!SEL!) do (
     if "%%n"=="65" call :pub "Star.Strike"            "Games\Shooter\Star.Strike"                                 "Star.Strike.exe"           "Games\Shooter"
     if "%%n"=="66" call :pub "Tower.Guard"            "Games\Strategy\Tower.Guard"                                "Tower.Guard.exe"           "Games\Strategy"
     if "%%n"=="67" call :pub "Hook.Cast"              "Games\Casual\Hook.Cast"                                    "HookCast.exe"              "Games\Casual\Hook.Cast"
+    if "%%n"=="68" call :pub "Chord.Strike"           "Games\Rhythm\Chord.Strike"                                 "ChordStrike.exe"           "Games\Rhythm"
 )
 goto :DONE
 
@@ -293,6 +295,7 @@ call :pub "Dodge.Blitz"           "Games\Shooter\Dodge.Blitz"                   
 call :pub "Star.Strike"           "Games\Shooter\Star.Strike"                                 "Star.Strike.exe"           "Games\Shooter"
 call :pub "Tower.Guard"           "Games\Strategy\Tower.Guard"                                "Tower.Guard.exe"           "Games\Strategy"
 call :pub "Hook.Cast"             "Games\Casual\Hook.Cast"                                    "HookCast.exe"              "Games\Casual\Hook.Cast"
+call :pub "Chord.Strike"          "Games\Rhythm\Chord.Strike"                                 "ChordStrike.exe"           "Games\Rhythm"
 
 :: ── 완료 ──────────────────────────────────────────────────────────
 :DONE

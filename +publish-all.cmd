@@ -138,6 +138,7 @@ call :pub "Nitro.Drift"           "Games\Racing\Nitro.Drift"                    
 
 :: ── Games / Rhythm ───────────────────────────────────────────────
 call :pub "Beat.Drop"             "Games\Rhythm\Beat.Drop"                                       "Beat.Drop.exe"             "Games\Rhythm"
+call :pub "Chord.Strike"          "Games\Rhythm\Chord.Strike"                                    "ChordStrike.exe"           "Games\Rhythm"
 
 :: ── Games / Sandbox ──────────────────────────────────────────────
 call :pub "Sand.Fall"             "Games\Sandbox\Sand.Fall"                                      "Sand.Fall.exe"             "Games\Sandbox"

@@ -23,10 +23,9 @@
                         <Border Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
-                                Padding="{TemplateBinding Padding}"
                                 CornerRadius="4">
                             <ScrollViewer x:Name="PART_ContentHost"
-                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                          Margin="{TemplateBinding Padding}"/>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsFocused" Value="True">
@@ -431,8 +430,7 @@
                         <ColumnDefinition Width="16"/>
                         <ColumnDefinition Width="180"/>
                     </Grid.ColumnDefinitions>
-                    <TextBox Grid.Column="0" x:Name="TxtTags" Height="28"
-                             VerticalContentAlignment="Center">
+                    <TextBox Grid.Column="0" x:Name="TxtTags" Height="30">
                         <TextBox.Style>
                             <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
                                 <Style.Triggers>
@@ -453,8 +451,7 @@
                             </Style>
                         </TextBox.Style>
                     </TextBox>
-                    <TextBox Grid.Column="2" x:Name="TxtService" Height="28"
-                             VerticalContentAlignment="Center">
+                    <TextBox Grid.Column="2" x:Name="TxtService" Height="30">
                         <TextBox.Style>
                             <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
                                 <Style.Triggers>

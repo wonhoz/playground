@@ -119,6 +119,9 @@ call :pub "Tray.Stats"            "Applications\Tools\System\Tray.Stats"        
 :: ── Games / Action ───────────────────────────────────────────────
 call :pub "Dungeon.Dash"          "Games\Action\Dungeon.Dash"                                    "Dungeon.Dash.exe"          "Games\Action"
 
+:: ── Games / Casual ───────────────────────────────────────────────
+call :pub "Hook.Cast"             "Games\Casual\Hook.Cast"                                       "HookCast.exe"              "Games\Casual\Hook.Cast"
+
 :: ── Games / Arcade ───────────────────────────────────────────────
 call :pub "Brick.Blitz"           "Games\Arcade\Brick.Blitz"                                     "Brick.Blitz.exe"           "Games\Arcade"
 call :pub "Dash.City"             "Games\Arcade\Dash.City"                                       "Dash.City.exe"             "Games\Arcade"

@@ -224,7 +224,7 @@
                     </Grid>
                 </Border>
 
-                <!-- ③ 비트 레이아웃 (64비트 토글 버튼) ──── -->
+                <!-- ③ 비트 레이아웃 (64비트 토글 버튼, 32+32 두 줄) ── -->
                 <Border Background="{StaticResource PanelBrush}"
                         BorderBrush="{StaticResource BorderBrush}" BorderThickness="1"
                         CornerRadius="8" Padding="12,8" Margin="0,0,0,8">
@@ -233,13 +233,18 @@
                                    FontSize="10" Margin="0,0,0,6"/>
 
                         <!-- 상위 32비트 (bit63~32) -->
-                        <StackPanel Orientation="Horizontal" Margin="0,0,0,4">
-                            <TextBlock Text="63" Foreground="{StaticResource Fg3Brush}"
-                                       FontSize="9" Width="18" VerticalAlignment="Center"/>
-                            <ItemsControl ItemsSource="{Binding Bits}">
+                        <Grid Margin="0,0,0,3">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="24"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="24"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="63" Foreground="{StaticResource Fg3Brush}"
+                                       FontSize="9" VerticalAlignment="Center"/>
+                            <ItemsControl Grid.Column="1" ItemsSource="{Binding BitsHigh}">
                                 <ItemsControl.ItemsPanel>
                                     <ItemsPanelTemplate>
-                                        <StackPanel Orientation="Horizontal"/>
+                                        <UniformGrid Rows="1"/>
                                     </ItemsPanelTemplate>
                                 </ItemsControl.ItemsPanel>
                                 <ItemsControl.ItemTemplate>
@@ -254,10 +259,40 @@
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
-                            <TextBlock Text="0" Foreground="{StaticResource Fg3Brush}"
-                                       FontSize="9" Width="14" VerticalAlignment="Center"
-                                       HorizontalAlignment="Right"/>
-                        </StackPanel>
+                            <TextBlock Grid.Column="2" Text="32" Foreground="{StaticResource Fg3Brush}"
+                                       FontSize="9" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                        </Grid>
+
+                        <!-- 하위 32비트 (bit31~0) -->
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="24"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="24"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="31" Foreground="{StaticResource Fg3Brush}"
+                                       FontSize="9" VerticalAlignment="Center"/>
+                            <ItemsControl Grid.Column="1" ItemsSource="{Binding BitsLow}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <UniformGrid Rows="1"/>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <ToggleButton Style="{StaticResource BitBtnStyle}"
+                                                      IsChecked="{Binding IsOn, Mode=TwoWay}"
+                                                      Command="{Binding ToggleCommand}"
+                                                      ToolTip="{Binding Index}">
+                                            <TextBlock Text="{Binding Index}" FontSize="7"
+                                                       Foreground="{StaticResource Fg3Brush}"/>
+                                        </ToggleButton>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                            <TextBlock Grid.Column="2" Text="0" Foreground="{StaticResource Fg3Brush}"
+                                       FontSize="9" VerticalAlignment="Center" HorizontalAlignment="Right"/>
+                        </Grid>
                     </StackPanel>
                 </Border>
 

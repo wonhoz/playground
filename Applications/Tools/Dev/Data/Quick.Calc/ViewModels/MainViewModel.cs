@@ -9,6 +9,9 @@ public class MainViewModel : INotifyPropertyChanged
 
     // ── 비트 레이아웃 ──────────────────────────────────────────
     public ObservableCollection<BitItem> Bits { get; } = [];
+    // 상위 32비트 (bit63~32), 하위 32비트 (bit31~0) — 두 줄 표시용
+    public IEnumerable<BitItem> BitsHigh => Bits.Take(32);
+    public IEnumerable<BitItem> BitsLow  => Bits.Skip(32);
 
     // ── IEEE 754 ──────────────────────────────────────────────
     // Float32 패널용 BitItem 32개 (bit31=MSB)

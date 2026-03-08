@@ -26,11 +26,12 @@
             <Setter Property="CaretBrush"         Value="{StaticResource AccentBrush}"/>
             <Setter Property="BorderBrush"        Value="{StaticResource BorderBrush}"/>
             <Setter Property="BorderThickness"    Value="1"/>
-            <Setter Property="Padding"            Value="8,6"/>
+            <Setter Property="Padding"            Value="6,5"/>
             <Setter Property="FontFamily"         Value="Consolas"/>
             <Setter Property="FontSize"           Value="14"/>
             <Setter Property="VerticalContentAlignment" Value="Center"/>
             <Setter Property="SelectionBrush"     Value="{StaticResource AccentBrush}"/>
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Hidden"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="TextBox">
@@ -39,9 +40,12 @@
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 CornerRadius="5"
+                                ClipToBounds="True"
                                 Padding="{TemplateBinding Padding}">
                             <ScrollViewer x:Name="PART_ContentHost"
-                                          VerticalAlignment="Center"/>
+                                          VerticalAlignment="Center"
+                                          HorizontalScrollBarVisibility="Hidden"
+                                          VerticalScrollBarVisibility="Disabled"/>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsFocused" Value="True">

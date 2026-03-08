@@ -5,6 +5,7 @@ using Microsoft.Data.Sqlite;
 public class AppDatabase : IDisposable
 {
     readonly SqliteConnection _conn;
+    readonly object _lock = new();
 
     public AppDatabase(string dbPath)
     {
@@ -27,6 +28,10 @@ public class AppDatabase : IDisposable
                 id       INTEGER PRIMARY KEY AUTOINCREMENT,
                 word     TEXT NOT NULL UNIQUE,
                 added_at TEXT NOT NULL DEFAULT (datetime('now'))
+            );
+            CREATE TABLE IF NOT EXISTS translations (
+                key      TEXT PRIMARY KEY,
+                ko       TEXT NOT NULL
             );
             CREATE INDEX IF NOT EXISTS idx_history_word ON history(word);
         ";
@@ -96,6 +101,31 @@ public class AppDatabase : IDisposable
     {
         var words = GetWordlist();
         File.WriteAllLines(path, words.Select(w => $"{w}\t{w}"));
+    }
+
+    // ── 번역 캐시 ─────────────────────────────────────────────────────────
+
+    public string? GetCachedTranslation(string key)
+    {
+        lock (_lock)
+        {
+            using var cmd = _conn.CreateCommand();
+            cmd.CommandText = "SELECT ko FROM translations WHERE key=@k";
+            cmd.Parameters.AddWithValue("@k", key);
+            return cmd.ExecuteScalar() as string;
+        }
+    }
+
+    public void CacheTranslation(string key, string ko)
+    {
+        lock (_lock)
+        {
+            using var cmd = _conn.CreateCommand();
+            cmd.CommandText = "INSERT OR REPLACE INTO translations(key,ko) VALUES(@k,@v)";
+            cmd.Parameters.AddWithValue("@k", key);
+            cmd.Parameters.AddWithValue("@v", ko);
+            cmd.ExecuteNonQuery();
+        }
     }
 
     public void Dispose() => _conn.Dispose();

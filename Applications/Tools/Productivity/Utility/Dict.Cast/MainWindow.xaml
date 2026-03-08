@@ -394,6 +394,22 @@
                                                        VerticalAlignment="Center"/>
                                         </StackPanel>
 
+                                        <!-- 한국어 번역 -->
+                                        <TextBlock Text="{Binding KoreanDefinition}"
+                                                   Foreground="#7EC8A0" FontSize="12"
+                                                   TextWrapping="Wrap" Margin="0,3,0,0">
+                                            <TextBlock.Style>
+                                                <Style TargetType="TextBlock">
+                                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding HasKorean}" Value="True">
+                                                            <Setter Property="Visibility" Value="Visible"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </TextBlock.Style>
+                                        </TextBlock>
+
                                         <!-- 예문 -->
                                         <TextBlock Text="{Binding ExamplesText}"
                                                    Foreground="#6B7280" FontStyle="Italic"

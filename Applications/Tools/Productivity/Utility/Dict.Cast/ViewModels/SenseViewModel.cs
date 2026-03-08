@@ -5,16 +5,24 @@ using Dict.Cast.Models;
 /// <summary>
 /// WordSense 표시용 뷰모델 — XAML 바인딩에서 문자열 가공 처리
 /// </summary>
-public class SenseViewModel
+public class SenseViewModel : INotifyPropertyChanged
 {
     readonly WordSense _sense;
     readonly int       _index;
 
-    public SenseViewModel(WordSense sense, int index)
+    string? _koreanDefinition;
+
+    public event PropertyChangedEventHandler? PropertyChanged;
+
+    public SenseViewModel(WordSense sense, int index, string cacheKey)
     {
-        _sense = sense;
-        _index = index;
+        _sense   = sense;
+        _index   = index;
+        CacheKey = cacheKey;
     }
+
+    /// <summary>번역 캐시 키 (word:flatIndex 형식)</summary>
+    public string CacheKey { get; }
 
     public string Pos => _sense.PartOfSpeech;
 
@@ -52,4 +60,19 @@ public class SenseViewModel
 
     public string ExamplesText
         => string.Join("   ", _sense.Examples.Take(2).Select(e => $"\"{e}\""));
+
+    // ── 한국어 번역 ──────────────────────────────────────────────────────
+
+    public string? KoreanDefinition
+    {
+        get => _koreanDefinition;
+        set
+        {
+            _koreanDefinition = value;
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(KoreanDefinition)));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(HasKorean)));
+        }
+    }
+
+    public bool HasKorean => !string.IsNullOrEmpty(_koreanDefinition);
 }

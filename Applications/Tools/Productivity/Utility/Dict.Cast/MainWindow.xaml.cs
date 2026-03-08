@@ -23,20 +23,23 @@ public partial class MainWindow : Window
         Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
         "Dict.Cast");
 
-    readonly MainViewModel _vm;
-    readonly AppDatabase   _db;
-    readonly TtsService    _tts;
+    readonly MainViewModel     _vm;
+    readonly AppDatabase       _db;
+    readonly TtsService        _tts;
     readonly DictionaryService _dict;
+    readonly TranslationService _translation;
 
     CancellationTokenSource? _searchCts;
     CancellationTokenSource? _buildCts;
+    CancellationTokenSource? _translateCts;
 
     public MainWindow()
     {
-        _db   = new AppDatabase(Path.Combine(AppDataDir, "user.db"));
-        _dict = new DictionaryService(Path.Combine(AppDataDir, "dict.db"));
-        _tts  = new TtsService();
-        _vm   = new MainViewModel(_dict, _db);
+        _db          = new AppDatabase(Path.Combine(AppDataDir, "user.db"));
+        _dict        = new DictionaryService(Path.Combine(AppDataDir, "dict.db"));
+        _tts         = new TtsService();
+        _translation = new TranslationService();
+        _vm          = new MainViewModel(_dict, _db, _translation);
         DataContext = _vm;
         InitializeComponent();
 
@@ -140,9 +143,11 @@ public partial class MainWindow : Window
     void OnClosing(object? s, System.ComponentModel.CancelEventArgs e)
     {
         _buildCts?.Cancel();
+        _translateCts?.Cancel();
         var handle = new WindowInteropHelper(this).Handle;
         UnregisterHotKey(handle, HotkeyId);
         _tts.Dispose();
+        _translation.Dispose();
         _db.Dispose();
     }
 
@@ -209,6 +214,11 @@ public partial class MainWindow : Window
         word = word.Trim();
         TxtSearch.Text = word;
         _vm.Search(word);
+
+        // 이전 번역 취소 후 새 번역 시작
+        _translateCts?.Cancel();
+        _translateCts = new CancellationTokenSource();
+        _ = _vm.TranslateCurrentSensesAsync(_translateCts.Token);
     }
 
     // ── 제안 드롭다운 ─────────────────────────────────────────────────────

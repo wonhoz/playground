@@ -5,8 +5,9 @@ using Dict.Cast.Services;
 
 public class MainViewModel : INotifyPropertyChanged
 {
-    readonly DictionaryService _dict;
-    readonly AppDatabase       _db;
+    readonly DictionaryService  _dict;
+    readonly AppDatabase        _db;
+    readonly TranslationService _translation;
 
     string _searchText   = "";
     string _currentWord  = "";
@@ -18,10 +19,11 @@ public class MainViewModel : INotifyPropertyChanged
 
     public event PropertyChangedEventHandler? PropertyChanged;
 
-    public MainViewModel(DictionaryService dict, AppDatabase db)
+    public MainViewModel(DictionaryService dict, AppDatabase db, TranslationService translation)
     {
-        _dict = dict;
-        _db   = db;
+        _dict        = dict;
+        _db          = db;
+        _translation = translation;
     }
 
     // ── 검색 ─────────────────────────────────────────────────────────────────
@@ -111,17 +113,56 @@ public class MainViewModel : INotifyPropertyChanged
 
         // POS별로 번호 매기기
         var posIndex = new Dictionary<string, int>();
+        int flatIdx  = 0;
         foreach (var s in senses)
         {
             posIndex.TryGetValue(s.PartOfSpeech, out int n);
             posIndex[s.PartOfSpeech] = n + 1;
-            Senses.Add(new SenseViewModel(s, n + 1));
+            Senses.Add(new SenseViewModel(s, n + 1, $"{word}:{flatIdx++}"));
         }
 
         _db.AddHistory(word);
         IsInWordlist = _db.IsInWordlist(word);
         RefreshHistory();
         OnChanged(nameof(ShowHint));
+    }
+
+    /// <summary>
+    /// 현재 Senses의 정의를 한국어로 번역 (캐시 우선, 없으면 API 호출).
+    /// UI 스레드에서 호출하되 await는 불필요 — 결과는 SenseViewModel.KoreanDefinition에 비동기 업데이트됨.
+    /// </summary>
+    public async Task TranslateCurrentSensesAsync(CancellationToken ct)
+    {
+        var senses = Senses.ToList();
+        if (senses.Count == 0) return;
+
+        // 캐시 먼저 적용 (동기)
+        foreach (var vm in senses)
+        {
+            var cached = _db.GetCachedTranslation(vm.CacheKey);
+            if (cached != null) vm.KoreanDefinition = cached;
+        }
+
+        // 캐시 미스 항목만 API 호출 (최대 3 동시)
+        var missing = senses.Where(v => !v.HasKorean).ToList();
+        if (missing.Count == 0) return;
+
+        var sem = new SemaphoreSlim(3);
+        var tasks = missing.Select(async vm =>
+        {
+            await sem.WaitAsync(ct);
+            try
+            {
+                var ko = await _translation.TranslateAsync(vm.Definition, ct);
+                if (ko != null)
+                {
+                    vm.KoreanDefinition = ko;
+                    _db.CacheTranslation(vm.CacheKey, ko);
+                }
+            }
+            finally { sem.Release(); }
+        });
+        await Task.WhenAll(tasks);
     }
 
     public void UpdateSuggestions(string prefix)

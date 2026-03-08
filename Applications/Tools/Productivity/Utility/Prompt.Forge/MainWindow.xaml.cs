@@ -23,6 +23,7 @@ public partial class MainWindow : Window
 
     readonly MainViewModel _vm;
     readonly Database      _db;
+    bool _refreshing;
 
     public MainWindow()
     {
@@ -81,30 +82,37 @@ public partial class MainWindow : Window
     void RefreshFilterCombos()
     {
         if (!IsLoaded) return;
-
-        var selTag = CbTag.SelectedIndex > 0 ? CbTag.SelectedItem as string : null;
-        var selSvc = CbService.SelectedIndex > 0 ? CbService.SelectedItem as string : null;
-
-        CbTag.ItemsSource = _vm.Tags;
-        CbTag.SelectedIndex = 0;
-        CbService.ItemsSource = _vm.Services;
-        CbService.SelectedIndex = 0;
-
-        if (selTag != null)
+        _refreshing = true;
+        try
         {
-            int i = _vm.Tags.IndexOf(selTag);
-            if (i >= 0) CbTag.SelectedIndex = i;
+            var selTag = CbTag.SelectedIndex > 0 ? CbTag.SelectedItem as string : null;
+            var selSvc = CbService.SelectedIndex > 0 ? CbService.SelectedItem as string : null;
+
+            CbTag.ItemsSource = _vm.Tags;
+            CbTag.SelectedIndex = 0;
+            CbService.ItemsSource = _vm.Services;
+            CbService.SelectedIndex = 0;
+
+            if (selTag != null)
+            {
+                int i = _vm.Tags.IndexOf(selTag);
+                if (i >= 0) CbTag.SelectedIndex = i;
+            }
+            if (selSvc != null)
+            {
+                int i = _vm.Services.IndexOf(selSvc);
+                if (i >= 0) CbService.SelectedIndex = i;
+            }
         }
-        if (selSvc != null)
+        finally
         {
-            int i = _vm.Services.IndexOf(selSvc);
-            if (i >= 0) CbService.SelectedIndex = i;
+            _refreshing = false;
         }
     }
 
     void Filter_Changed(object sender, RoutedEventArgs e)
     {
-        if (!IsLoaded) return;
+        if (!IsLoaded || _refreshing) return;
         _vm.FilterTag     = CbTag.SelectedIndex <= 0     ? null : CbTag.SelectedItem as string;
         _vm.FilterService = CbService.SelectedIndex <= 0 ? null : CbService.SelectedItem as string;
         _vm.FavOnly       = ChkFav.IsChecked == true;

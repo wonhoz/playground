@@ -198,7 +198,9 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="ComboBox">
                         <Grid>
-                            <Border Background="{TemplateBinding Background}"
+                            <!-- 비주얼 배경 -->
+                            <Border x:Name="Border"
+                                    Background="{TemplateBinding Background}"
                                     BorderBrush="{TemplateBinding BorderBrush}"
                                     BorderThickness="{TemplateBinding BorderThickness}"
                                     CornerRadius="4">
@@ -206,12 +208,23 @@
                                     <ContentPresenter x:Name="contentSite"
                                         Content="{TemplateBinding SelectionBoxItem}"
                                         Margin="{TemplateBinding Padding}"
-                                        HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                                        HorizontalAlignment="Left" VerticalAlignment="Center"
+                                        IsHitTestVisible="False"/>
                                     <TextBlock Text="▾" Foreground="#888899" FontSize="10"
                                                HorizontalAlignment="Right" VerticalAlignment="Center"
-                                               Margin="0,0,8,0"/>
+                                               Margin="0,0,8,0" IsHitTestVisible="False"/>
                                 </Grid>
                             </Border>
+                            <!-- 클릭 처리 토글버튼 (투명, 전면 배치) -->
+                            <ToggleButton x:Name="PART_ToggleButton"
+                                          IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                          ClickMode="Press" Focusable="False">
+                                <ToggleButton.Template>
+                                    <ControlTemplate TargetType="ToggleButton">
+                                        <Border Background="Transparent"/>
+                                    </ControlTemplate>
+                                </ToggleButton.Template>
+                            </ToggleButton>
                             <Popup x:Name="PART_Popup" AllowsTransparency="True"
                                    IsOpen="{TemplateBinding IsDropDownOpen}"
                                    Placement="Bottom">
@@ -226,7 +239,7 @@
                         </Grid>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="BorderBrush" Value="#7C3AED"/>
+                                <Setter TargetName="Border" Property="BorderBrush" Value="#7C3AED"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>

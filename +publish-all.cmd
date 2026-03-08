@@ -60,6 +60,7 @@ call :pub "Locale.Forge"          "Applications\Tools\Dev\Assets\Locale.Forge"  
 
 :: ── Tools / Dev / Data ───────────────────────────────────────────
 call :pub "Boot.Map"              "Applications\Tools\Dev\Data\Boot.Map"                         "Boot.Map.exe"              "Applications\Tools\Dev\Data"
+call :pub "Quick.Calc"            "Applications\Tools\Dev\Data\Quick.Calc"                       "Quick.Calc.exe"            "Applications\Tools\Dev\Data"
 call :pub "Table.Craft"           "Applications\Tools\Dev\Data\Table.Craft"                      "Table.Craft.exe"           "Applications\Tools\Dev\Data"
 
 :: ── Tools / Dev / Debug ──────────────────────────────────────────

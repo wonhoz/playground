@@ -36,31 +36,21 @@ call :pub "Music.Player"          "Applications\Audio\Music.Player"             
 :: ── Applications / Automation ────────────────────────────────────
 call :pub "Stay.Awake"            "Applications\Automation\Stay.Awake"                           "Stay.Awake.exe"            "Applications\Automation\Stay.Awake"
 
-:: ── Applications / Files / Manager ───────────────────────────────
-call :pub "Batch.Rename"          "Applications\Files\Manager\Batch.Rename"                      "Batch.Rename.exe"          "Applications\Files\Manager"
-call :pub "File.Duplicates"       "Applications\Files\Manager\File.Duplicates"                   "File.Duplicates.exe"       "Applications\Files\Manager"
-call :pub "File.Unlocker"         "Applications\Files\Manager\File.Unlocker"                     "File.Unlocker.exe"         "Applications\Files\Manager"
-call :pub "Folder.Purge"          "Applications\Files\Manager\Folder.Purge"                      "Folder.Purge.exe"          "Applications\Files\Manager"
-
 :: ── Applications / Files / Inspector ─────────────────────────────
 call :pub "Disk.Lens"             "Applications\Files\Inspector\Disk.Lens"                       "Disk.Lens.exe"             "Applications\Files\Inspector\Disk.Lens"
 call :pub "Hash.Check"            "Applications\Files\Inspector\Hash.Check"                      "Hash.Check.exe"            "Applications\Files\Inspector\Hash.Check"
 call :pub "PDF.Forge"             "Applications\Files\Inspector\PDF.Forge"                       "Pdf.Forge.exe"             "Applications\Files\Inspector\Pdf.Forge"
 call :pub "Zip.Peek"              "Applications\Files\Inspector\Zip.Peek"                        "Zip.Peek.exe"              "Applications\Files\Inspector\Zip.Peek"
 
+:: ── Applications / Files / Manager ───────────────────────────────
+call :pub "Batch.Rename"          "Applications\Files\Manager\Batch.Rename"                      "Batch.Rename.exe"          "Applications\Files\Manager"
+call :pub "File.Duplicates"       "Applications\Files\Manager\File.Duplicates"                   "File.Duplicates.exe"       "Applications\Files\Manager"
+call :pub "File.Unlocker"         "Applications\Files\Manager\File.Unlocker"                     "File.Unlocker.exe"         "Applications\Files\Manager"
+call :pub "Folder.Purge"          "Applications\Files\Manager\Folder.Purge"                      "Folder.Purge.exe"          "Applications\Files\Manager"
+
 :: ── Applications / Media ─────────────────────────────────────────
 call :pub "Mosaic.Forge"          "Applications\Media\Mosaic.Forge"                              "Mosaic.Forge.exe"          "Applications\Media\Mosaic.Forge"
 call :pub "Photo.Video.Organizer" "Applications\Media\Photo.Video.Organizer"                     "Photo.Video.Organizer.exe" "Applications\Media"
-
-:: ── Tools / Dev / Network ────────────────────────────────────────
-call :pub "Api.Probe"             "Applications\Tools\Dev\Network\Api.Probe"                     "Api.Probe.exe"             "Applications\Tools\Dev\Network\Api.Probe"
-call :pub "Mock.Server"           "Applications\Tools\Dev\Network\Mock.Server"                   "Mock.Server.exe"           "Applications\Tools\Dev\Network"
-call :pub "Serve.Cast"            "Applications\Tools\Dev\Network\Serve.Cast"                    "Serve.Cast.exe"            "Applications\Tools\Dev\Network"
-
-:: ── Tools / Dev / Debug ──────────────────────────────────────────
-call :pub "Hex.Peek"              "Applications\Tools\Dev\Debug\Hex.Peek"                        "Hex.Peek.exe"              "Applications\Tools\Dev\Debug"
-call :pub "Log.Lens"              "Applications\Tools\Dev\Debug\Log.Lens"                        "Log.Lens.exe"              "Applications\Tools\Dev\Debug"
-call :pub "Signal.Flow"           "Applications\Tools\Dev\Debug\Signal.Flow"                     "Signal.Flow.exe"           "Applications\Tools\Dev\Debug"
 
 :: ── Tools / Dev / Assets ─────────────────────────────────────────
 call :pub "Glyph.Map"             "Applications\Tools\Dev\Assets\Glyph.Map"                      "Glyph.Map.exe"             "Applications\Tools\Dev\Assets\Glyph.Map"
@@ -72,9 +62,19 @@ call :pub "Locale.Forge"          "Applications\Tools\Dev\Assets\Locale.Forge"  
 call :pub "Boot.Map"              "Applications\Tools\Dev\Data\Boot.Map"                         "Boot.Map.exe"              "Applications\Tools\Dev\Data"
 call :pub "Table.Craft"           "Applications\Tools\Dev\Data\Table.Craft"                      "Table.Craft.exe"           "Applications\Tools\Dev\Data"
 
-:: ── Tools / Dev / System ────────────────────────────────────────
-call :pub "Layout.Forge"          "Applications\Tools\Dev\System\Layout.Forge"                   "Layout.Forge.exe"          "Applications\Tools\Dev\System"
-call :pub "Sched.Cast"            "Applications\Tools\Dev\System\Sched.Cast"                     "Sched.Cast.exe"            "Applications\Tools\Dev\System"
+:: ── Tools / Dev / Debug ──────────────────────────────────────────
+call :pub "Hex.Peek"              "Applications\Tools\Dev\Debug\Hex.Peek"                        "Hex.Peek.exe"              "Applications\Tools\Dev\Debug"
+call :pub "Log.Lens"              "Applications\Tools\Dev\Debug\Log.Lens"                        "Log.Lens.exe"              "Applications\Tools\Dev\Debug"
+call :pub "Signal.Flow"           "Applications\Tools\Dev\Debug\Signal.Flow"                     "Signal.Flow.exe"           "Applications\Tools\Dev\Debug"
+
+:: ── Tools / Dev / Network ────────────────────────────────────────
+call :pub "Api.Probe"             "Applications\Tools\Dev\Network\Api.Probe"                     "Api.Probe.exe"             "Applications\Tools\Dev\Network\Api.Probe"
+call :pub "Mock.Server"           "Applications\Tools\Dev\Network\Mock.Server"                   "Mock.Server.exe"           "Applications\Tools\Dev\Network"
+call :pub "Serve.Cast"            "Applications\Tools\Dev\Network\Serve.Cast"                    "Serve.Cast.exe"            "Applications\Tools\Dev\Network"
+
+:: ── Tools / Dev / System ─────────────────────────────────────────
+call :pub "Layout.Forge"          "Applications\Tools\Dev\System\Layout.Forge"                   "Layout.Forge.exe"          "Applications\Tools\Dev\System\Layout.Forge"
+call :pub "Sched.Cast"            "Applications\Tools\Dev\System\Sched.Cast"                     "Sched.Cast.exe"            "Applications\Tools\Dev\System\Sched.Cast"
 
 :: ── Tools / Network ──────────────────────────────────────────────
 call :pub "DNS.Flip"              "Applications\Tools\Network\DNS.Flip"                          "Dns.Flip.exe"              "Applications\Tools\Network"
@@ -85,28 +85,28 @@ call :pub "Port.Watch"            "Applications\Tools\Network\Port.Watch"       
 call :pub "Code.Snap"             "Applications\Tools\Productivity\Capture\Code.Snap"            "Code.Snap.exe"             "Applications\Tools\Productivity\Capture"
 call :pub "Screen.Recorder"       "Applications\Tools\Productivity\Capture\Screen.Recorder"      "Screen.Recorder.exe"       "Applications\Tools\Productivity\Capture"
 
+:: ── Tools / Productivity / Creative ─────────────────────────────
+call :pub "Color.Grade"           "Applications\Tools\Productivity\Creative\Color.Grade"         "Color.Grade.exe"           "Applications\Tools\Productivity\Creative\Color.Grade"
+
+:: ── Tools / Productivity / Media ────────────────────────────────
+call :pub "Tag.Forge"             "Applications\Tools\Productivity\Media\Tag.Forge"              "Tag.Forge.exe"             "Applications\Tools\Productivity\Media\Tag.Forge"
+
 :: ── Tools / Productivity / Text ──────────────────────────────────
 call :pub "Echo.Text"             "Applications\Tools\Productivity\Text\Echo.Text"               "Echo.Text.exe"             "Applications\Tools\Productivity\Text\Echo.Text"
 call :pub "Mark.View"             "Applications\Tools\Productivity\Text\Mark.View"               "Mark.View.exe"             "Applications\Tools\Productivity\Text\Mark.View"
 call :pub "Text.Forge"            "Applications\Tools\Productivity\Text\Text.Forge"              "Text.Forge.exe"            "Applications\Tools\Productivity\Text"
 
+:: ── Tools / Productivity / Utility ───────────────────────────────
+call :pub "Clipboard.Stacker"     "Applications\Tools\Productivity\Utility\Clipboard.Stacker"    "Clipboard.Stacker.exe"     "Applications\Tools\Productivity\Utility"
+call :pub "Dict.Cast"             "Applications\Tools\Productivity\Utility\Dict.Cast"            "Dict.Cast.exe"             "Applications\Tools\Productivity\Utility\Dict.Cast"
+call :pub "Mouse.Flick"           "Applications\Tools\Productivity\Utility\Mouse.Flick"          "Mouse.Flick.exe"           "Applications\Tools\Productivity\Utility"
+call :pub "Prompt.Forge"          "Applications\Tools\Productivity\Utility\Prompt.Forge"         "Prompt.Forge.exe"          "Applications\Tools\Productivity\Utility\Prompt.Forge"
+call :pub "QR.Forge"              "Applications\Tools\Productivity\Utility\QR.Forge"             "QR.Forge.exe"              "Applications\Tools\Productivity\Utility"
+
 :: ── Tools / Productivity / Visual ────────────────────────────────
 call :pub "Char.Art"              "Applications\Tools\Productivity\Visual\Char.Art"              "Char.Art.exe"              "Applications\Tools\Productivity\Visual"
 call :pub "Timeline.Craft"        "Applications\Tools\Productivity\Visual\Timeline.Craft"        "Timeline.Craft.exe"        "Applications\Tools\Productivity\Visual\Timeline.Craft"
 call :pub "Word.Cloud"            "Applications\Tools\Productivity\Visual\Word.Cloud"            "Word.Cloud.exe"            "Applications\Tools\Productivity\Visual"
-
-:: ── Tools / Productivity / Utility ───────────────────────────────
-call :pub "Clipboard.Stacker"     "Applications\Tools\Productivity\Utility\Clipboard.Stacker"    "Clipboard.Stacker.exe"     "Applications\Tools\Productivity\Utility"
-call :pub "Mouse.Flick"           "Applications\Tools\Productivity\Utility\Mouse.Flick"          "Mouse.Flick.exe"           "Applications\Tools\Productivity\Utility"
-call :pub "Prompt.Forge"          "Applications\Tools\Productivity\Utility\Prompt.Forge"         "Prompt.Forge.exe"          "Applications\Tools\Productivity\Utility\Prompt.Forge"
-call :pub "QR.Forge"              "Applications\Tools\Productivity\Utility\QR.Forge"             "QR.Forge.exe"              "Applications\Tools\Productivity\Utility"
-call :pub "Dict.Cast"             "Applications\Tools\Productivity\Utility\Dict.Cast"            "Dict.Cast.exe"             "Applications\Tools\Productivity\Utility"
-
-:: ── Tools / Productivity / Media ────────────────────────────────
-call :pub "Tag.Forge"             "Applications\Tools\Productivity\Media\Tag.Forge"              "Tag.Forge.exe"             "Applications\Tools\Productivity\Media"
-
-:: ── Tools / Productivity / Creative ────────────────────────────
-call :pub "Color.Grade"           "Applications\Tools\Productivity\Creative\Color.Grade"         "Color.Grade.exe"           "Applications\Tools\Productivity\Creative"
 
 :: ── Tools / System ───────────────────────────────────────────────
 call :pub "Env.Guard"             "Applications\Tools\System\Env.Guard"                          "Env.Guard.exe"             "Applications\Tools\System"

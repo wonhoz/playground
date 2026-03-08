@@ -1,0 +1,382 @@
+<Window x:Class="Color.Grade.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Color.Grade — 이미지 색보정"
+        Width="1160" Height="680"
+        MinWidth="900" MinHeight="520"
+        Background="#13131F" Foreground="#E0E0E0"
+        FontFamily="Segoe UI" FontSize="12"
+        AllowDrop="True">
+
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolVis"/>
+
+        <!-- 버튼 -->
+        <Style x:Key="TbBtn" TargetType="Button">
+            <Setter Property="Background"      Value="#1E1E2E"/>
+            <Setter Property="Foreground"      Value="#9CA3AF"/>
+            <Setter Property="BorderBrush"     Value="#2A2A3E"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding"         Value="11,5"/>
+            <Setter Property="Cursor"          Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="5" Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#252535"/>
+                                <Setter Property="Foreground" Value="#E0E0E0"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Opacity" Value="0.35"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="AccentBtn" TargetType="Button" BasedOn="{StaticResource TbBtn}">
+            <Setter Property="Background"  Value="#1E3A5E"/>
+            <Setter Property="Foreground"  Value="#60A5FA"/>
+            <Setter Property="BorderBrush" Value="#2563EB"/>
+        </Style>
+        <Style x:Key="GreenBtn" TargetType="Button" BasedOn="{StaticResource TbBtn}">
+            <Setter Property="Background"  Value="#14432A"/>
+            <Setter Property="Foreground"  Value="#4ADE80"/>
+            <Setter Property="BorderBrush" Value="#166534"/>
+        </Style>
+
+        <!-- 슬라이더 -->
+        <Style TargetType="Slider">
+            <Setter Property="Minimum" Value="-100"/>
+            <Setter Property="Maximum" Value="100"/>
+            <Setter Property="Value"   Value="0"/>
+            <Setter Property="TickFrequency" Value="10"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Slider">
+                        <Grid>
+                            <Track x:Name="PART_Track">
+                                <Track.DecreaseRepeatButton>
+                                    <RepeatButton>
+                                        <RepeatButton.Template>
+                                            <ControlTemplate TargetType="RepeatButton">
+                                                <Border Height="4" Background="#60A5FA" CornerRadius="2"/>
+                                            </ControlTemplate>
+                                        </RepeatButton.Template>
+                                    </RepeatButton>
+                                </Track.DecreaseRepeatButton>
+                                <Track.IncreaseRepeatButton>
+                                    <RepeatButton>
+                                        <RepeatButton.Template>
+                                            <ControlTemplate TargetType="RepeatButton">
+                                                <Border Height="4" Background="#2A2A3E" CornerRadius="2"/>
+                                            </ControlTemplate>
+                                        </RepeatButton.Template>
+                                    </RepeatButton>
+                                </Track.IncreaseRepeatButton>
+                                <Track.Thumb>
+                                    <Thumb Width="14" Height="14">
+                                        <Thumb.Template>
+                                            <ControlTemplate TargetType="Thumb">
+                                                <Border Background="#60A5FA" CornerRadius="7"/>
+                                            </ControlTemplate>
+                                        </Thumb.Template>
+                                    </Thumb>
+                                </Track.Thumb>
+                            </Track>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- 스크롤바 -->
+        <Style TargetType="ScrollBar">
+            <Setter Property="Background" Value="#1A1A2A"/>
+            <Setter Property="Width"      Value="6"/>
+            <Setter Property="MinWidth"   Value="6"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ScrollBar">
+                        <Grid Background="{TemplateBinding Background}">
+                            <Track x:Name="PART_Track" IsDirectionReversed="True">
+                                <Track.DecreaseRepeatButton>
+                                    <RepeatButton Command="ScrollBar.PageUpCommand" Opacity="0"/>
+                                </Track.DecreaseRepeatButton>
+                                <Track.IncreaseRepeatButton>
+                                    <RepeatButton Command="ScrollBar.PageDownCommand" Opacity="0"/>
+                                </Track.IncreaseRepeatButton>
+                                <Track.Thumb>
+                                    <Thumb>
+                                        <Thumb.Template>
+                                            <ControlTemplate TargetType="Thumb">
+                                                <Border x:Name="Bd" Background="#3A3A55" CornerRadius="3" Margin="1"/>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter TargetName="Bd" Property="Background" Value="#5A5A7A"/>
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Thumb.Template>
+                                    </Thumb>
+                                </Track.Thumb>
+                            </Track>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- ListBox 다크 -->
+        <Style TargetType="ListBox">
+            <Setter Property="Background"     Value="Transparent"/>
+            <Setter Property="Foreground"     Value="#D0D0D0"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
+        </Style>
+        <Style TargetType="ListBoxItem">
+            <Setter Property="Padding"    Value="8,6"/>
+            <Setter Property="Cursor"     Value="Hand"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <Border x:Name="Bd" Background="{TemplateBinding Background}"
+                                Padding="{TemplateBinding Padding}" CornerRadius="4">
+                            <ContentPresenter/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="Bd" Property="Background" Value="#1A2A4A"/>
+                                <Setter Property="Foreground" Value="#60A5FA"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Bd" Property="Background" Value="#1C1C2C"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="48"/>  <!-- 툴바 -->
+            <RowDefinition Height="*"/>   <!-- 메인 -->
+            <RowDefinition Height="34"/>  <!-- 상태바 -->
+        </Grid.RowDefinitions>
+
+        <!-- ── 툴바 ──────────────────────────────────────────────────── -->
+        <Border Grid.Row="0" Background="#16162A" BorderBrush="#1E1E2E" BorderThickness="0,0,0,1" Padding="10,0">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <Button x:Name="BtnOpen"   Style="{StaticResource AccentBtn}" Content="📂 이미지 열기"  Click="BtnOpen_Click"/>
+                <Button x:Name="BtnExport" Style="{StaticResource GreenBtn}"  Content="💾 내보내기"      Margin="6,0,0,0"
+                        IsEnabled="{Binding HasImage}" Click="BtnExport_Click"/>
+                <Button x:Name="BtnBatch"  Style="{StaticResource TbBtn}"     Content="📦 배치 처리"     Margin="4,0,0,0"
+                        Click="BtnBatch_Click"/>
+                <Separator Background="#2A2A3E" Width="1" Height="20" Margin="8,0"/>
+                <Button x:Name="BtnReset"  Style="{StaticResource TbBtn}"     Content="↺ 초기화"         Click="BtnReset_Click"/>
+                <Button x:Name="BtnLoadLut" Style="{StaticResource TbBtn}"    Content="🎨 .cube LUT 열기" Margin="4,0,0,0"
+                        Click="BtnLoadLut_Click"/>
+            </StackPanel>
+        </Border>
+
+        <!-- ── 메인 레이아웃 ─────────────────────────────────────────── -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>    <!-- 좌: 프리셋 -->
+                <ColumnDefinition Width="*"/>      <!-- 중: 비포/애프터 -->
+                <ColumnDefinition Width="200"/>    <!-- 우: 슬라이더 -->
+            </Grid.ColumnDefinitions>
+
+            <!-- 좌측: LUT 프리셋 목록 -->
+            <Border Grid.Column="0" Background="#0E0E1C" BorderBrush="#1E1E2E" BorderThickness="0,0,1,0" Padding="8">
+                <DockPanel>
+                    <TextBlock DockPanel.Dock="Top" Text="LUT 프리셋" Foreground="#666677" FontSize="10"
+                               Margin="4,4,4,8"/>
+                    <ScrollViewer>
+                        <ListBox x:Name="LutList"
+                                 ItemsSource="{Binding Presets}"
+                                 SelectedItem="{Binding SelectedLut, Mode=TwoWay}"
+                                 SelectionChanged="LutList_SelectionChanged">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Name}" TextTrimming="CharacterEllipsis"/>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </ScrollViewer>
+                </DockPanel>
+            </Border>
+
+            <!-- 중앙: 비포/애프터 이미지 뷰 -->
+            <Grid Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="1"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- 비포 -->
+                <Border Grid.Column="0" Background="#0A0A16">
+                    <Grid>
+                        <Image x:Name="ImgBefore" Source="{Binding Before}"
+                               Stretch="Uniform" RenderOptions.BitmapScalingMode="HighQuality"/>
+                        <TextBlock Text="BEFORE" Foreground="#333344" FontSize="10"
+                                   HorizontalAlignment="Left" VerticalAlignment="Top" Margin="8"/>
+                        <!-- 드롭 힌트 -->
+                        <TextBlock x:Name="TxtDropHint" Text="이미지를 끌어다 놓으세요" Foreground="#222233" FontSize="18"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Grid>
+                </Border>
+
+                <Border Grid.Column="1" Background="#1E1E2E"/>
+
+                <!-- 애프터 -->
+                <Border Grid.Column="2" Background="#0A0A16">
+                    <Grid>
+                        <Image x:Name="ImgAfter" Source="{Binding After}"
+                               Stretch="Uniform" RenderOptions.BitmapScalingMode="HighQuality"/>
+                        <TextBlock Text="AFTER" Foreground="#333344" FontSize="10"
+                                   HorizontalAlignment="Left" VerticalAlignment="Top" Margin="8"/>
+                    </Grid>
+                </Border>
+            </Grid>
+
+            <!-- 우측: 보정 슬라이더 -->
+            <Border Grid.Column="2" Background="#0E0E1C" BorderBrush="#1E1E2E" BorderThickness="1,0,0,0" Padding="12">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel>
+                        <TextBlock Text="보정 설정" Foreground="#666677" FontSize="10" Margin="0,4,0,12"/>
+
+                        <!-- 노출 -->
+                        <TextBlock Text="노출 (Exposure)" Foreground="#9CA3AF" FontSize="11"/>
+                        <Grid Margin="0,4,0,12">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="36"/>
+                            </Grid.ColumnDefinitions>
+                            <Slider x:Name="SlExposure" Grid.Column="0" Minimum="-200" Maximum="200"
+                                    Value="{Binding Exposure, Mode=TwoWay}"
+                                    VerticalAlignment="Center"/>
+                            <TextBlock Grid.Column="1" Foreground="#60A5FA" FontSize="10"
+                                       VerticalAlignment="Center" Margin="4,0,0,0"
+                                       Text="{Binding Exposure, StringFormat={}{0:F1}}"/>
+                        </Grid>
+
+                        <!-- 대비 -->
+                        <TextBlock Text="대비 (Contrast)" Foreground="#9CA3AF" FontSize="11"/>
+                        <Grid Margin="0,4,0,12">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="36"/>
+                            </Grid.ColumnDefinitions>
+                            <Slider x:Name="SlContrast" Grid.Column="0"
+                                    Value="{Binding Contrast, Mode=TwoWay}"
+                                    VerticalAlignment="Center"/>
+                            <TextBlock Grid.Column="1" Foreground="#60A5FA" FontSize="10"
+                                       VerticalAlignment="Center" Margin="4,0,0,0"
+                                       Text="{Binding Contrast, StringFormat={}{0:F2}}"/>
+                        </Grid>
+
+                        <!-- 채도 -->
+                        <TextBlock Text="채도 (Saturation)" Foreground="#9CA3AF" FontSize="11"/>
+                        <Grid Margin="0,4,0,12">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="36"/>
+                            </Grid.ColumnDefinitions>
+                            <Slider x:Name="SlSaturation" Grid.Column="0"
+                                    Value="{Binding Saturation, Mode=TwoWay}"
+                                    VerticalAlignment="Center"/>
+                            <TextBlock Grid.Column="1" Foreground="#60A5FA" FontSize="10"
+                                       VerticalAlignment="Center" Margin="4,0,0,0"
+                                       Text="{Binding Saturation, StringFormat={}{0:F2}}"/>
+                        </Grid>
+
+                        <!-- 색온도 -->
+                        <TextBlock Text="색온도 (Temperature)" Foreground="#9CA3AF" FontSize="11"/>
+                        <Grid Margin="0,4,0,12">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="36"/>
+                            </Grid.ColumnDefinitions>
+                            <Slider x:Name="SlTemperature" Grid.Column="0"
+                                    Value="{Binding Temperature, Mode=TwoWay}"
+                                    VerticalAlignment="Center"/>
+                            <TextBlock Grid.Column="1" Foreground="#60A5FA" FontSize="10"
+                                       VerticalAlignment="Center" Margin="4,0,0,0"
+                                       Text="{Binding Temperature, StringFormat={}{0:F2}}"/>
+                        </Grid>
+
+                        <!-- 하이라이트 -->
+                        <TextBlock Text="하이라이트 (Highlights)" Foreground="#9CA3AF" FontSize="11"/>
+                        <Grid Margin="0,4,0,12">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="36"/>
+                            </Grid.ColumnDefinitions>
+                            <Slider x:Name="SlHighlights" Grid.Column="0"
+                                    Value="{Binding Highlights, Mode=TwoWay}"
+                                    VerticalAlignment="Center"/>
+                            <TextBlock Grid.Column="1" Foreground="#60A5FA" FontSize="10"
+                                       VerticalAlignment="Center" Margin="4,0,0,0"
+                                       Text="{Binding Highlights, StringFormat={}{0:F2}}"/>
+                        </Grid>
+
+                        <!-- 쉐도우 -->
+                        <TextBlock Text="쉐도우 (Shadows)" Foreground="#9CA3AF" FontSize="11"/>
+                        <Grid Margin="0,4,0,12">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="36"/>
+                            </Grid.ColumnDefinitions>
+                            <Slider x:Name="SlShadows" Grid.Column="0"
+                                    Value="{Binding Shadows, Mode=TwoWay}"
+                                    VerticalAlignment="Center"/>
+                            <TextBlock Grid.Column="1" Foreground="#60A5FA" FontSize="10"
+                                       VerticalAlignment="Center" Margin="4,0,0,0"
+                                       Text="{Binding Shadows, StringFormat={}{0:F2}}"/>
+                        </Grid>
+
+                        <Separator Background="#1E1E2E" Margin="0,4,0,12"/>
+
+                        <!-- 내보내기 품질 -->
+                        <TextBlock Text="JPEG 품질" Foreground="#9CA3AF" FontSize="11"/>
+                        <Grid Margin="0,4,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="36"/>
+                            </Grid.ColumnDefinitions>
+                            <Slider x:Name="SlQuality" Grid.Column="0"
+                                    Minimum="50" Maximum="100" Value="90"
+                                    VerticalAlignment="Center"/>
+                            <TextBlock Grid.Column="1" Foreground="#60A5FA" FontSize="10"
+                                       VerticalAlignment="Center" Margin="4,0,0,0"
+                                       Text="{Binding Value, ElementName=SlQuality, StringFormat={}{0:F0}}"/>
+                        </Grid>
+                    </StackPanel>
+                </ScrollViewer>
+            </Border>
+        </Grid>
+
+        <!-- ── 상태바 ─────────────────────────────────────────────────── -->
+        <Border Grid.Row="2" Background="#16162A" BorderBrush="#1E1E2E" BorderThickness="0,1,0,0" Padding="12,0">
+            <DockPanel>
+                <TextBlock DockPanel.Dock="Right" Foreground="#555566" FontSize="10" VerticalAlignment="Center"
+                           Visibility="{Binding IsBusy, Converter={StaticResource BoolVis}}"
+                           Text="처리 중..." Margin="0,0,8,0"/>
+                <TextBlock Text="{Binding Status}" Foreground="#555566" VerticalAlignment="Center" FontSize="11"/>
+            </DockPanel>
+        </Border>
+    </Grid>
+</Window>

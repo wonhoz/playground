@@ -1,0 +1,169 @@
+<Window x:Class="BurnRate.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Burn.Rate — 배터리 분석"
+        Width="620" Height="680"
+        MinWidth="520" MinHeight="560"
+        Background="{StaticResource BgBrush}"
+        Foreground="{StaticResource FgBrush}"
+        FontFamily="Segoe UI"
+        WindowStartupLocation="CenterScreen">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- 타이틀바 -->
+        <Border Grid.Row="0" Background="{StaticResource Bg2Brush}"
+                BorderBrush="{StaticResource BorderBrush}" BorderThickness="0,0,0,1"
+                MouseLeftButtonDown="TitleBar_MouseDown">
+            <Grid Height="38">
+                <StackPanel Orientation="Horizontal" Margin="12,0" VerticalAlignment="Center">
+                    <TextBlock Text="🔋" FontSize="15" Margin="0,0,8,0"/>
+                    <TextBlock Text="Burn.Rate" FontSize="13" FontWeight="SemiBold"/>
+                    <TextBlock Text=" — 배터리 건강도 · 방전 분석기"
+                               Foreground="{StaticResource Fg3Brush}" FontSize="11" VerticalAlignment="Center"/>
+                </StackPanel>
+                <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                    <Button Content="─" Width="40" Height="38" BorderThickness="0"
+                            Background="Transparent" Click="MinBtn_Click"/>
+                    <Button Content="✕" Width="40" Height="38" BorderThickness="0"
+                            Background="Transparent" Click="CloseBtn_Click"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <StackPanel Margin="14,10,14,14">
+
+                <!-- ① 현재 상태 헤더 -->
+                <Border Background="{StaticResource PanelBrush}"
+                        BorderBrush="{StaticResource BorderBrush}" BorderThickness="1"
+                        CornerRadius="10" Padding="16,12" Margin="0,0,0,10">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <!-- 충전 % 대형 표시 -->
+                        <StackPanel Grid.Column="0">
+                            <TextBlock x:Name="TxtPercent" Text="—%" FontSize="52"
+                                       FontWeight="Bold" Foreground="{StaticResource GreenBrush}"/>
+                            <TextBlock x:Name="TxtStatus" Text="상태 로딩 중..."
+                                       Foreground="{StaticResource Fg2Brush}" FontSize="13" Margin="2,0,0,0"/>
+                            <TextBlock x:Name="TxtRunTime" Text=""
+                                       Foreground="{StaticResource Fg3Brush}" FontSize="11" Margin="2,4,0,0"/>
+                        </StackPanel>
+
+                        <!-- 건강도 게이지 -->
+                        <StackPanel Grid.Column="1" Width="120" VerticalAlignment="Center">
+                            <TextBlock Text="배터리 건강도" Foreground="{StaticResource Fg3Brush}"
+                                       FontSize="10" HorizontalAlignment="Center" Margin="0,0,0,4"/>
+                            <TextBlock x:Name="TxtHealth" Text="─"
+                                       FontSize="28" FontWeight="Bold" HorizontalAlignment="Center"
+                                       Foreground="{StaticResource GreenBrush}"/>
+                            <Border Height="8" CornerRadius="4" Background="#1E1E30"
+                                    BorderBrush="{StaticResource BorderBrush}" BorderThickness="1" Margin="0,4">
+                                <Border x:Name="HealthBar" HorizontalAlignment="Left" Height="8"
+                                        CornerRadius="4" Background="{StaticResource GreenBrush}" Width="60"/>
+                            </Border>
+                            <TextBlock x:Name="TxtHealthNote" Text=""
+                                       Foreground="{StaticResource Fg3Brush}" FontSize="9"
+                                       HorizontalAlignment="Center"/>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+
+                <!-- ② 상세 스탯 카드 -->
+                <Border Background="{StaticResource PanelBrush}"
+                        BorderBrush="{StaticResource BorderBrush}" BorderThickness="1"
+                        CornerRadius="10" Padding="16,10" Margin="0,0,0,10">
+                    <UniformGrid Rows="2" Columns="3">
+                        <StackPanel Margin="0,4">
+                            <TextBlock Text="설계 용량" Foreground="{StaticResource Fg3Brush}" FontSize="10"/>
+                            <TextBlock x:Name="TxtDesignCap" Text="─" FontSize="16" FontWeight="SemiBold"
+                                       Foreground="{StaticResource FgBrush}"/>
+                        </StackPanel>
+                        <StackPanel Margin="0,4">
+                            <TextBlock Text="현재 용량" Foreground="{StaticResource Fg3Brush}" FontSize="10"/>
+                            <TextBlock x:Name="TxtFullCap" Text="─" FontSize="16" FontWeight="SemiBold"
+                                       Foreground="{StaticResource AccentBrush}"/>
+                        </StackPanel>
+                        <StackPanel Margin="0,4">
+                            <TextBlock Text="충전 사이클" Foreground="{StaticResource Fg3Brush}" FontSize="10"/>
+                            <TextBlock x:Name="TxtCycles" Text="─" FontSize="16" FontWeight="SemiBold"
+                                       Foreground="{StaticResource FgBrush}"/>
+                        </StackPanel>
+                        <StackPanel Margin="0,4">
+                            <TextBlock Text="예상 잔여 시간" Foreground="{StaticResource Fg3Brush}" FontSize="10"/>
+                            <TextBlock x:Name="TxtRemain" Text="─" FontSize="16" FontWeight="SemiBold"
+                                       Foreground="{StaticResource OrangeBrush}"/>
+                        </StackPanel>
+                        <StackPanel Margin="0,4">
+                            <TextBlock Text="마지막 업데이트" Foreground="{StaticResource Fg3Brush}" FontSize="10"/>
+                            <TextBlock x:Name="TxtLastUpdate" Text="─" FontSize="12"
+                                       Foreground="{StaticResource Fg2Brush}"/>
+                        </StackPanel>
+                        <StackPanel Margin="0,4">
+                            <TextBlock Text="충전 팁" Foreground="{StaticResource Fg3Brush}" FontSize="10"/>
+                            <TextBlock x:Name="TxtTip" Text="─" FontSize="11"
+                                       Foreground="{StaticResource GreenBrush}" TextWrapping="Wrap"/>
+                        </StackPanel>
+                    </UniformGrid>
+                </Border>
+
+                <!-- ③ 방전 곡선 그래프 -->
+                <Border Background="{StaticResource PanelBrush}"
+                        BorderBrush="{StaticResource BorderBrush}" BorderThickness="1"
+                        CornerRadius="10" Padding="14,10" Margin="0,0,0,10">
+                    <StackPanel>
+                        <TextBlock Text="방전 곡선 (최근 기록)" Foreground="{StaticResource Fg3Brush}"
+                                   FontSize="10" Margin="0,0,0,6"/>
+                        <Canvas x:Name="GraphCanvas" Height="130"
+                                Background="{StaticResource CardBrush}"
+                                ClipToBounds="True"/>
+                        <StackPanel Orientation="Horizontal" Margin="0,6,0,0">
+                            <Ellipse Width="8" Height="8" Fill="{StaticResource AccentBrush}" Margin="0,0,4,0" VerticalAlignment="Center"/>
+                            <TextBlock Text="방전" Foreground="{StaticResource Fg3Brush}" FontSize="10" Margin="0,0,14,0"/>
+                            <Ellipse Width="8" Height="8" Fill="{StaticResource GreenBrush}" Margin="0,0,4,0" VerticalAlignment="Center"/>
+                            <TextBlock Text="충전" Foreground="{StaticResource Fg3Brush}" FontSize="10"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+
+                <!-- ④ 세션 히스토리 -->
+                <Border Background="{StaticResource PanelBrush}"
+                        BorderBrush="{StaticResource BorderBrush}" BorderThickness="1"
+                        CornerRadius="10" Padding="14,10" MaxHeight="200">
+                    <StackPanel>
+                        <TextBlock Text="세션 로그" Foreground="{StaticResource Fg3Brush}"
+                                   FontSize="10" Margin="0,0,0,6"/>
+                        <ListBox x:Name="SessionList" MaxHeight="150"
+                                 ScrollViewer.VerticalScrollBarVisibility="Auto">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="130"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0"
+                                                   Text="{Binding StartTime, StringFormat='MM/dd HH:mm'}"
+                                                   Foreground="{StaticResource Fg3Brush}" FontSize="11"/>
+                                        <TextBlock Grid.Column="1"
+                                                   Text="{Binding Summary}"
+                                                   Foreground="{StaticResource Fg2Brush}" FontSize="11"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </StackPanel>
+                </Border>
+
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Window>

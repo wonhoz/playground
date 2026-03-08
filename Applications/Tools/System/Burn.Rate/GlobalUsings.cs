@@ -1,0 +1,10 @@
+global using System.Collections.ObjectModel;
+global using System.ComponentModel;
+global using System.IO;
+global using System.Management;
+global using System.Runtime.CompilerServices;
+global using System.Windows;
+global using System.Windows.Input;
+global using System.Windows.Threading;
+global using BurnRate.Models;
+global using BurnRate.Services;

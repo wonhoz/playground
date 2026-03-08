@@ -77,31 +77,32 @@ echo !CY!  35!RS! Timeline.Craft        !DG!Tools/Productivity/Visual!RS!
 echo !CY!  36!RS! Word.Cloud            !DG!Tools/Productivity/Visual!RS!
 echo !DG!      Productivity / Utility!RS!
 echo !CY!  37!RS! Clipboard.Stacker     !DG!Tools/Productivity/Utility!RS!
-echo !CY!  38!RS! Mouse.Flick           !DG!Tools/Productivity/Utility!RS!
-echo !CY!  39!RS! Prompt.Forge          !DG!Tools/Productivity/Utility!RS!
-echo !CY!  40!RS! QR.Forge              !DG!Tools/Productivity/Utility!RS!
+echo !CY!  38!RS! Dict.Cast             !DG!Tools/Productivity/Utility!RS!
+echo !CY!  39!RS! Mouse.Flick           !DG!Tools/Productivity/Utility!RS!
+echo !CY!  40!RS! Prompt.Forge          !DG!Tools/Productivity/Utility!RS!
+echo !CY!  41!RS! QR.Forge              !DG!Tools/Productivity/Utility!RS!
 echo.
 echo !BD!!DG!  Tools / System!RS!
-echo !CY!  41!RS! Env.Guard             !DG!Tools/System!RS!
-echo !CY!  42!RS! Sys.Clean             !DG!Tools/System!RS!
-echo !CY!  43!RS! Tray.Stats            !DG!Tools/System!RS!
+echo !CY!  42!RS! Env.Guard             !DG!Tools/System!RS!
+echo !CY!  43!RS! Sys.Clean             !DG!Tools/System!RS!
+echo !CY!  44!RS! Tray.Stats            !DG!Tools/System!RS!
 echo.
 echo !BD!!DG!  Games!RS!
-echo !CY!  44!RS! Mosaic.Forge          !DG!Applications/Media!RS!
-echo !CY!  45!RS! Dungeon.Dash          !DG!Games/Action!RS!
-echo !CY!  46!RS! Brick.Blitz           !DG!Games/Arcade!RS!
-echo !CY!  47!RS! Dash.City             !DG!Games/Arcade!RS!
-echo !CY!  48!RS! Neon.Run              !DG!Games/Arcade!RS!
-echo !CY!  49!RS! Neon.Slice            !DG!Games/Arcade!RS!
-echo !CY!  50!RS! Gravity.Flip          !DG!Games/Puzzle!RS!
-echo !CY!  51!RS! Hue.Flow              !DG!Games/Puzzle!RS!
-echo !CY!  52!RS! Orbit.Craft           !DG!Games/Puzzle!RS!
-echo !CY!  53!RS! Nitro.Drift           !DG!Games/Racing!RS!
-echo !CY!  54!RS! Beat.Drop             !DG!Games/Rhythm!RS!
-echo !CY!  55!RS! Sand.Fall             !DG!Games/Sandbox!RS!
-echo !CY!  56!RS! Dodge.Blitz           !DG!Games/Shooter!RS!
-echo !CY!  57!RS! Star.Strike           !DG!Games/Shooter!RS!
-echo !CY!  58!RS! Tower.Guard           !DG!Games/Strategy!RS!
+echo !CY!  45!RS! Mosaic.Forge          !DG!Applications/Media!RS!
+echo !CY!  46!RS! Dungeon.Dash          !DG!Games/Action!RS!
+echo !CY!  47!RS! Brick.Blitz           !DG!Games/Arcade!RS!
+echo !CY!  48!RS! Dash.City             !DG!Games/Arcade!RS!
+echo !CY!  49!RS! Neon.Run              !DG!Games/Arcade!RS!
+echo !CY!  50!RS! Neon.Slice            !DG!Games/Arcade!RS!
+echo !CY!  51!RS! Gravity.Flip          !DG!Games/Puzzle!RS!
+echo !CY!  52!RS! Hue.Flow              !DG!Games/Puzzle!RS!
+echo !CY!  53!RS! Orbit.Craft           !DG!Games/Puzzle!RS!
+echo !CY!  54!RS! Nitro.Drift           !DG!Games/Racing!RS!
+echo !CY!  55!RS! Beat.Drop             !DG!Games/Rhythm!RS!
+echo !CY!  56!RS! Sand.Fall             !DG!Games/Sandbox!RS!
+echo !CY!  57!RS! Dodge.Blitz           !DG!Games/Shooter!RS!
+echo !CY!  58!RS! Star.Strike           !DG!Games/Shooter!RS!
+echo !CY!  59!RS! Tower.Guard           !DG!Games/Strategy!RS!
 echo.
 echo !DG!--------------------------------------------------!RS!
 echo !DG!  번호 입력 (공백/쉼표로 구분)   예: 1 3 5  또는  1,3,5!RS!
@@ -167,27 +168,28 @@ for %%n in (!SEL!) do (
     if "%%n"=="35" call :pub "Timeline.Craft"         "Applications\Tools\Productivity\Visual\Timeline.Craft"     "Timeline.Craft.exe"        "Applications\Tools\Productivity\Visual"
     if "%%n"=="36" call :pub "Word.Cloud"             "Applications\Tools\Productivity\Visual\Word.Cloud"         "Word.Cloud.exe"            "Applications\Tools\Productivity\Visual"
     if "%%n"=="37" call :pub "Clipboard.Stacker"      "Applications\Tools\Productivity\Utility\Clipboard.Stacker" "Clipboard.Stacker.exe"     "Applications\Tools\Productivity\Utility"
-    if "%%n"=="38" call :pub "Mouse.Flick"            "Applications\Tools\Productivity\Utility\Mouse.Flick"       "Mouse.Flick.exe"           "Applications\Tools\Productivity\Utility"
-    if "%%n"=="39" call :pub "Prompt.Forge"           "Applications\Tools\Productivity\Utility\Prompt.Forge"      "Prompt.Forge.exe"          "Applications\Tools\Productivity\Utility"
-    if "%%n"=="40" call :pub "QR.Forge"               "Applications\Tools\Productivity\Utility\QR.Forge"          "QR.Forge.exe"              "Applications\Tools\Productivity\Utility"
-    if "%%n"=="41" call :pub "Env.Guard"              "Applications\Tools\System\Env.Guard"                       "Env.Guard.exe"             "Applications\Tools\System"
-    if "%%n"=="42" call :pub "Sys.Clean"              "Applications\Tools\System\Sys.Clean"                       "Sys.Clean.exe"             "Applications\Tools\System\Sys.Clean"
-    if "%%n"=="43" call :pub "Tray.Stats"             "Applications\Tools\System\Tray.Stats"                      "Tray.Stats.exe"            "Applications\Tools\System"
-    if "%%n"=="44" call :pub "Mosaic.Forge"           "Applications\Media\Mosaic.Forge"                           "Mosaic.Forge.exe"          "Applications\Media"
-    if "%%n"=="45" call :pub "Dungeon.Dash"           "Games\Action\Dungeon.Dash"                                 "Dungeon.Dash.exe"          "Games\Action"
-    if "%%n"=="46" call :pub "Brick.Blitz"            "Games\Arcade\Brick.Blitz"                                  "Brick.Blitz.exe"           "Games\Arcade"
-    if "%%n"=="47" call :pub "Dash.City"              "Games\Arcade\Dash.City"                                    "Dash.City.exe"             "Games\Arcade"
-    if "%%n"=="48" call :pub "Neon.Run"               "Games\Arcade\Neon.Run"                                     "Neon.Run.exe"              "Games\Arcade"
-    if "%%n"=="49" call :pub "Neon.Slice"             "Games\Arcade\Neon.Slice"                                   "Neon.Slice.exe"            "Games\Arcade\Neon.Slice"
-    if "%%n"=="50" call :pub "Gravity.Flip"           "Games\Puzzle\Gravity.Flip"                                 "Gravity.Flip.exe"          "Games\Puzzle"
-    if "%%n"=="51" call :pub "Hue.Flow"               "Games\Puzzle\Hue.Flow"                                     "Hue.Flow.exe"              "Games\Puzzle"
-    if "%%n"=="52" call :pub "Orbit.Craft"            "Games\Puzzle\Orbit.Craft"                                  "Orbit.Craft.exe"           "Games\Puzzle\Orbit.Craft"
-    if "%%n"=="53" call :pub "Nitro.Drift"            "Games\Racing\Nitro.Drift"                                  "Nitro.Drift.exe"           "Games\Racing"
-    if "%%n"=="54" call :pub "Beat.Drop"              "Games\Rhythm\Beat.Drop"                                    "Beat.Drop.exe"             "Games\Rhythm"
-    if "%%n"=="55" call :pub "Sand.Fall"              "Games\Sandbox\Sand.Fall"                                   "Sand.Fall.exe"             "Games\Sandbox"
-    if "%%n"=="56" call :pub "Dodge.Blitz"            "Games\Shooter\Dodge.Blitz"                                 "Dodge.Blitz.exe"           "Games\Shooter"
-    if "%%n"=="57" call :pub "Star.Strike"            "Games\Shooter\Star.Strike"                                 "Star.Strike.exe"           "Games\Shooter"
-    if "%%n"=="58" call :pub "Tower.Guard"            "Games\Strategy\Tower.Guard"                                "Tower.Guard.exe"           "Games\Strategy"
+    if "%%n"=="38" call :pub "Dict.Cast"              "Applications\Tools\Productivity\Utility\Dict.Cast"         "Dict.Cast.exe"             "Applications\Tools\Productivity\Utility"
+    if "%%n"=="39" call :pub "Mouse.Flick"            "Applications\Tools\Productivity\Utility\Mouse.Flick"       "Mouse.Flick.exe"           "Applications\Tools\Productivity\Utility"
+    if "%%n"=="40" call :pub "Prompt.Forge"           "Applications\Tools\Productivity\Utility\Prompt.Forge"      "Prompt.Forge.exe"          "Applications\Tools\Productivity\Utility"
+    if "%%n"=="41" call :pub "QR.Forge"               "Applications\Tools\Productivity\Utility\QR.Forge"          "QR.Forge.exe"              "Applications\Tools\Productivity\Utility"
+    if "%%n"=="42" call :pub "Env.Guard"              "Applications\Tools\System\Env.Guard"                       "Env.Guard.exe"             "Applications\Tools\System"
+    if "%%n"=="43" call :pub "Sys.Clean"              "Applications\Tools\System\Sys.Clean"                       "Sys.Clean.exe"             "Applications\Tools\System\Sys.Clean"
+    if "%%n"=="44" call :pub "Tray.Stats"             "Applications\Tools\System\Tray.Stats"                      "Tray.Stats.exe"            "Applications\Tools\System"
+    if "%%n"=="45" call :pub "Mosaic.Forge"           "Applications\Media\Mosaic.Forge"                           "Mosaic.Forge.exe"          "Applications\Media"
+    if "%%n"=="46" call :pub "Dungeon.Dash"           "Games\Action\Dungeon.Dash"                                 "Dungeon.Dash.exe"          "Games\Action"
+    if "%%n"=="47" call :pub "Brick.Blitz"            "Games\Arcade\Brick.Blitz"                                  "Brick.Blitz.exe"           "Games\Arcade"
+    if "%%n"=="48" call :pub "Dash.City"              "Games\Arcade\Dash.City"                                    "Dash.City.exe"             "Games\Arcade"
+    if "%%n"=="49" call :pub "Neon.Run"               "Games\Arcade\Neon.Run"                                     "Neon.Run.exe"              "Games\Arcade"
+    if "%%n"=="50" call :pub "Neon.Slice"             "Games\Arcade\Neon.Slice"                                   "Neon.Slice.exe"            "Games\Arcade\Neon.Slice"
+    if "%%n"=="51" call :pub "Gravity.Flip"           "Games\Puzzle\Gravity.Flip"                                 "Gravity.Flip.exe"          "Games\Puzzle"
+    if "%%n"=="52" call :pub "Hue.Flow"               "Games\Puzzle\Hue.Flow"                                     "Hue.Flow.exe"              "Games\Puzzle"
+    if "%%n"=="53" call :pub "Orbit.Craft"            "Games\Puzzle\Orbit.Craft"                                  "Orbit.Craft.exe"           "Games\Puzzle\Orbit.Craft"
+    if "%%n"=="54" call :pub "Nitro.Drift"            "Games\Racing\Nitro.Drift"                                  "Nitro.Drift.exe"           "Games\Racing"
+    if "%%n"=="55" call :pub "Beat.Drop"              "Games\Rhythm\Beat.Drop"                                    "Beat.Drop.exe"             "Games\Rhythm"
+    if "%%n"=="56" call :pub "Sand.Fall"              "Games\Sandbox\Sand.Fall"                                   "Sand.Fall.exe"             "Games\Sandbox"
+    if "%%n"=="57" call :pub "Dodge.Blitz"            "Games\Shooter\Dodge.Blitz"                                 "Dodge.Blitz.exe"           "Games\Shooter"
+    if "%%n"=="58" call :pub "Star.Strike"            "Games\Shooter\Star.Strike"                                 "Star.Strike.exe"           "Games\Shooter"
+    if "%%n"=="59" call :pub "Tower.Guard"            "Games\Strategy\Tower.Guard"                                "Tower.Guard.exe"           "Games\Strategy"
 )
 goto :DONE
 
@@ -242,6 +244,7 @@ call :pub "Char.Art"              "Applications\Tools\Productivity\Visual\Char.A
 call :pub "Timeline.Craft"        "Applications\Tools\Productivity\Visual\Timeline.Craft"     "Timeline.Craft.exe"        "Applications\Tools\Productivity\Visual"
 call :pub "Word.Cloud"            "Applications\Tools\Productivity\Visual\Word.Cloud"         "Word.Cloud.exe"            "Applications\Tools\Productivity\Visual"
 call :pub "Clipboard.Stacker"     "Applications\Tools\Productivity\Utility\Clipboard.Stacker" "Clipboard.Stacker.exe"     "Applications\Tools\Productivity\Utility"
+call :pub "Dict.Cast"             "Applications\Tools\Productivity\Utility\Dict.Cast"         "Dict.Cast.exe"             "Applications\Tools\Productivity\Utility"
 call :pub "Mouse.Flick"           "Applications\Tools\Productivity\Utility\Mouse.Flick"       "Mouse.Flick.exe"           "Applications\Tools\Productivity\Utility"
 call :pub "Prompt.Forge"          "Applications\Tools\Productivity\Utility\Prompt.Forge"      "Prompt.Forge.exe"          "Applications\Tools\Productivity\Utility"
 call :pub "QR.Forge"              "Applications\Tools\Productivity\Utility\QR.Forge"          "QR.Forge.exe"              "Applications\Tools\Productivity\Utility"

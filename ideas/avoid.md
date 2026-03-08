@@ -299,11 +299,11 @@
 | 이름 | 핵심 기능 | 출처 |
 |------|----------|------|
 | `Dict.Cast` | 완전 오프라인 영어·한국어 사전 + 유의어 사전 (전역 단축키 팝업, IPA 발음, SAPI 재생, 단어장 Anki 내보내기) | idea_20260308_5차 |
-| `Tag.Forge` | MP3/FLAC/OGG ID3·Vorbis 태그 일괄 편집기 (파일명↔태그 규칙 동기화, MusicBrainz 자동 조회, 앨범아트 임베드, 트랙 순번 자동화) | idea_20260308_5차 |
+| `Tag.Forge` | MP3/FLAC/OGG ID3·Vorbis 태그 일괄 편집기 (파일명↔태그 규칙 동기화, MusicBrainz 자동 조회, 앨범아트 임베드, 트랙 순번 자동화) | **구현 완료** 20260308 |
 | `Folder.Sync` | 로컬 폴더 단방향/양방향 동기화 GUI (미리보기 diff, 충돌 해결 정책, 필터, Task Scheduler 연동) | idea_20260308_5차 |
 | `Layout.Forge` | 키보드 키 재배치 프로파일 에디터 (Caps→Ctrl 등, Scancode Map 레지스트리 자동 생성, 프로파일 저장/전환) | **구현 완료** 20260308 |
 | `Sched.Cast` | Windows Task Scheduler GUI 대체 (cron 표현식, 스크립트 예약 실행, 성공/실패 Toast·이메일 알림, 실행 이력 차트) | **구현 완료** 20260308 |
-| `Color.Grade` | 이미지 LUT 색보정 도구 (오픈 LUT 20+ 내장, 커스텀 .cube/.3dl 불러오기, Before/After 비교, 배치 처리, AVIF 출력) | idea_20260308_5차 |
+| `Color.Grade` | 이미지 LUT 색보정 도구 (오픈 LUT 20+ 내장, 커스텀 .cube/.3dl 불러오기, Before/After 비교, 배치 처리, AVIF 출력) | **구현 완료** 20260308 |
 | `Proc.Map` | 프로세스-네트워크 연결 실시간 방향 그래프 (IP 지오로케이션, 부모-자식 계층 트리, 의심 IP 플래그, Firewall 차단 규칙 생성) | idea_20260308_5차 |
 | `Font.Sub` | 웹폰트 서브셋 + WOFF2 변환기 (KS X 1001 2350자 프리셋, HTML 파일 사용 문자 추출, CSS @font-face 코드 자동 생성) | idea_20260308_5차 |
 

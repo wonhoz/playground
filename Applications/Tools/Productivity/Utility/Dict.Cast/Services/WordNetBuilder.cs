@@ -8,7 +8,8 @@ using Microsoft.Data.Sqlite;
 /// </summary>
 public class WordNetBuilder
 {
-    const string DownloadUrl = "https://wordnetcode.princeton.edu/3.1/WNdb-3.1.zip";
+    // NLTK GitHub 미러 — Princeton 공식 URL은 404 반환, NLTK 배포본(~10.7MB)이 안정적
+    const string DownloadUrl = "https://github.com/nltk/nltk_data/raw/gh-pages/packages/corpora/wordnet.zip";
 
     readonly string _dbPath;
     readonly string _tempDir;
@@ -36,7 +37,7 @@ public class WordNetBuilder
 
             progress.Report(("압축 해제 중...", 40));
             var dictDir = Path.Combine(_tempDir, "dict");
-            if (!Directory.Exists(dictDir))
+            if (!File.Exists(Path.Combine(dictDir, "data.noun")))
                 await Task.Run(() => ExtractDict(zipPath, dictDir), ct);
 
             progress.Report(("사전 데이터베이스 빌드 중...", 50));
@@ -85,13 +86,14 @@ public class WordNetBuilder
 
     static void ExtractDict(string zipPath, string dictDir)
     {
+        Directory.CreateDirectory(dictDir);
+        var wanted = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+            { "data.noun", "data.verb", "data.adj", "data.adv" };
         using var zip = ZipFile.OpenRead(zipPath);
         foreach (var entry in zip.Entries)
         {
-            // WordNet zip contains "dict/" folder at root
-            if (!entry.FullName.StartsWith("dict/", StringComparison.OrdinalIgnoreCase)) continue;
-            var dest = Path.Combine(dictDir, Path.GetFileName(entry.FullName));
-            if (string.IsNullOrEmpty(entry.Name)) continue;
+            if (!wanted.Contains(entry.Name)) continue;
+            var dest = Path.Combine(dictDir, entry.Name);
             entry.ExtractToFile(dest, overwrite: true);
         }
     }

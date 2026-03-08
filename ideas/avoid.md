@@ -2,7 +2,7 @@
 
 > 이 파일은 브레인스토밍 시 **이미 제안되거나 구현된 아이디어를 다시 꺼내지 않도록** 하는 필터다.
 > 새 아이디어를 제안하기 전 반드시 이 목록을 확인할 것.
-> 마지막 갱신: 2026-03-06 (4차)
+> 마지막 갱신: 2026-03-08 (5차)
 
 ---
 
@@ -294,6 +294,21 @@
 | `Cert.Forge` | 로컬 CA 생성·서버 인증서 발급·Windows 신뢰 저장소 설치·PFX/PEM 변환 (mkcert GUI 대체) | idea_20260305 |
 | `Proxy.Cast` | 로컬 HTTP 프록시 트래픽 인스펙터 (요청·응답 실시간 캡처, Replay, HAR 내보내기, Fiddler 대체) | idea_20260305 |
 
+### Productivity / Dev / System / Media (신규 — idea_20260308_5차)
+
+| 이름 | 핵심 기능 | 출처 |
+|------|----------|------|
+| `Dict.Cast` | 완전 오프라인 영어·한국어 사전 + 유의어 사전 (전역 단축키 팝업, IPA 발음, SAPI 재생, 단어장 Anki 내보내기) | idea_20260308_5차 |
+| `Tag.Forge` | MP3/FLAC/OGG ID3·Vorbis 태그 일괄 편집기 (파일명↔태그 규칙 동기화, MusicBrainz 자동 조회, 앨범아트 임베드, 트랙 순번 자동화) | idea_20260308_5차 |
+| `Folder.Sync` | 로컬 폴더 단방향/양방향 동기화 GUI (미리보기 diff, 충돌 해결 정책, 필터, Task Scheduler 연동) | idea_20260308_5차 |
+| `Layout.Forge` | 키보드 키 재배치 프로파일 에디터 (Caps→Ctrl 등, Scancode Map 레지스트리 자동 생성, 프로파일 저장/전환) | idea_20260308_5차 |
+| `Sched.Cast` | Windows Task Scheduler GUI 대체 (cron 표현식, 스크립트 예약 실행, 성공/실패 Toast·이메일 알림, 실행 이력 차트) | idea_20260308_5차 |
+| `Color.Grade` | 이미지 LUT 색보정 도구 (오픈 LUT 20+ 내장, 커스텀 .cube/.3dl 불러오기, Before/After 비교, 배치 처리, AVIF 출력) | idea_20260308_5차 |
+| `Proc.Map` | 프로세스-네트워크 연결 실시간 방향 그래프 (IP 지오로케이션, 부모-자식 계층 트리, 의심 IP 플래그, Firewall 차단 규칙 생성) | idea_20260308_5차 |
+| `Font.Sub` | 웹폰트 서브셋 + WOFF2 변환기 (KS X 1001 2350자 프리셋, HTML 파일 사용 문자 추출, CSS @font-face 코드 자동 생성) | idea_20260308_5차 |
+
+---
+
 ### AI / Media / Tray / Productivity / Dev (신규 — idea_20260306_4차)
 
 | 이름 | 핵심 기능 | 출처 |
@@ -410,6 +425,20 @@
 | `Arc.Blast` | Physics / Arcade | 포물선 탄도 조준·발사 → 구조물·적 파괴 (나무/돌/얼음/폭발물, 기본/분열/관통 탄종) |
 | `Hexa.Drop` | Puzzle / Casual | 육각형 격자에 헥사 조각 드래그 배치 → 완전한 줄/링 형성 시 소거 + 연쇄 콤보 |
 | `Fuse.Ball` | Puzzle / Action | 단일 입력으로 두 공을 반대 방향 동시 조종 → 각자 목표 지점에 동시 도달 |
+
+### 게임 — 제안된 미구현 아이디어 (idea_20260308_5차)
+
+| 이름 | 장르 | 핵심 메커닉 |
+|------|------|------------|
+| `Warp.Drift` | Arcade / Physics Shooter | RK4 중력 렌즈 탄환 궤도, 블랙홀 활용 커브 샷, 탄환 예측선 시각화 |
+| `Rift.Jump` | Puzzle / Platformer | 마우스 2점 균열 생성, 모멘텀 보존 순간이동, 레벨 에디터+UGC |
+| `Prism.Break` | Puzzle / Optics | 백색광 프리즘 R·G·B 분리, 색 가산 혼합(R+G=Yellow), 거울·필터 배치 |
+| `Atom.Craft` | Puzzle / Educational | 원자가 규칙 기반 분자 합성, H₂O~C₆H₁₂O₆, 자유 모드 샌드박스, 교육 B2B |
+| `Maze.Dread` | Arcade / Survival | Wilson's 절차 생성 미로, 원형 시야 제한, Dijkstra 추격자 AI, 데일리 챌린지 |
+| `Colony.Sim` | Simulation / Sandbox | 영양소 확산 + 페로몬 신호 군집 AI, 다종 경쟁, 사용자 인터랙션, 도전 모드 |
+| `Hex.Storm` | Strategy / Micro RTS | 7~19 헥사 격자, 자원-유닛-전투 30~90초 사이클, 지형 어드밴티지, 스피드런 |
+
+---
 
 ### 게임 — 제안된 미구현 아이디어 (idea_20260306_4차)
 
@@ -587,3 +616,18 @@
 | **기울기 미로 볼 굴리기** | Tilt.Ball (≠ Marble.Run: 경로 빌더, ≠ Orbit.Craft: N-체 중력, ≠ Magnet.Maze: 자기력 유도) |
 | **방탈출 어드벤처 컬렉션** | Room.Code (≠ 기존 모든 게임: 포인트앤클릭 어드벤처 첫 도입) |
 | **물리 당구 게임** | Pool.Break (≠ Pinball.Forge: 핀볼 빌더, ≠ Bounce.House: 탄성 슈터, ≠ Arc.Blast: 포물선 파괴) |
+| **오프라인 사전 팝업** | Dict.Cast (≠ Spell.Cast: 맞춤법 교정, ≠ Echo.Text: TTS, ≠ Quick.Memo: 메모장) |
+| **MP3/FLAC 태그 일괄 편집** | Tag.Forge (≠ Music.Player: 재생기, ≠ Pitch.Find: BPM 분석, ≠ Batch.Rename: 파일명만) |
+| **로컬 폴더 동기화 GUI** | Folder.Sync (≠ Drop.Bridge: LAN 전송, ≠ File.Guard: 감사 로거, ≠ Batch.Flow: 파일 파이프라인) |
+| **키보드 키 재배치 에디터** | Layout.Forge (≠ Mouse.Flick: 마우스 제스처, ≠ Key.Map: 시각화, ≠ Key.Tape: 매크로 녹화) |
+| **Task Scheduler GUI 대체** | Sched.Cast (≠ Cron.Cast: 검증기, ≠ Batch.Flow: 파일 파이프라인, ≠ Watch.Dog: 크래시 재시작) |
+| **LUT 기반 이미지 색보정** | Color.Grade (≠ Img.Forge: 리사이즈·필터, ≠ Photo.Squash: 압축만, ≠ Photo.Video.Organizer: 날짜 정리) |
+| **프로세스-네트워크 연결 그래프** | Proc.Map (≠ Port.Watch: 로컬 포트, ≠ Net.Scan: LAN 탐지, ≠ App.Cage: 방화벽 래퍼) |
+| **웹폰트 서브셋 + WOFF2 변환** | Font.Sub (≠ Font.Scout: 미리보기·비교, ≠ Font.Probe: 화면 추출, ≠ Icon.Forge: ICO 변환) |
+| **중력 렌즈 탄환 궤도 슈터** | Warp.Drift (≠ Orbit.Craft: N-체 퍼즐, ≠ Vortex.Pull: 소용돌이 유도, ≠ Dodge.Blitz: 탄막 회피) |
+| **2점 포털 순간이동 플랫포머** | Rift.Jump (≠ Phase.Gate: 두 차원 전환, ≠ Chrono.Drop: 시간 역행 협동) |
+| **백색광 RGB 분리 퍼즐** | Prism.Break (≠ Laser.Net: 단일 레이저 반사, ≠ Hue.Flow: 경로 연결) |
+| **원자가 분자 합성 퍼즐** | Atom.Craft (≠ Life.Sim: 셀룰러 오토마타, ≠ Sand.Fall: 물리 낙하 시뮬) |
+| **절차 생성 미로 탈출 + 추격** | Maze.Dread (≠ Dungeon.Dash: 실시간 액션 RPG, ≠ Rogue.Tile: 턴제 로그라이크) |
+| **군집 생명체 진화 시뮬 샌드박스** | Colony.Sim (≠ Life.Sim: Conway 규칙, ≠ Sand.Fall: 물리 입자, ≠ Auto.Build: 공장 자동화) |
+| **헥사 격자 마이크로 RTS** | Hex.Storm (≠ Cell.War: 원형 세포 분열, ≠ Ink.Spread: BFS 차단, ≠ Tower.Guard: 타워 디펜스) |

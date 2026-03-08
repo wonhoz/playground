@@ -1,0 +1,10 @@
+global using System.Collections.ObjectModel;
+global using System.Diagnostics;
+global using System.IO;
+global using System.Runtime.InteropServices;
+global using System.Text;
+global using System.Windows;
+global using System.Windows.Input;
+global using Microsoft.Win32;
+global using AppTemp.Models;
+global using AppTemp.Services;

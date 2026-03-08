@@ -117,21 +117,22 @@
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
             <StackPanel Margin="12,8,12,12">
 
-                <!-- ① 진법 입력 섹션 ──────────────────────── -->
+                <!-- ① 진법 입력 섹션 (4행 수직 레이아웃) ─── -->
                 <Border Background="{StaticResource PanelBrush}"
                         BorderBrush="{StaticResource BorderBrush}" BorderThickness="1"
                         CornerRadius="8" Padding="12,10" Margin="0,0,0,8">
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="36"/>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="16"/>
-                            <ColumnDefinition Width="36"/>
+                            <ColumnDefinition Width="38"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="6"/>
+                            <RowDefinition Height="5"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="5"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="5"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
 
@@ -141,34 +142,34 @@
                                    VerticalAlignment="Center" FontWeight="Bold"/>
                         <TextBox Grid.Row="0" Grid.Column="1"
                                  Text="{Binding DecText, UpdateSourceTrigger=PropertyChanged}"
-                                 x:Name="TxtDec" Height="34" FontSize="15"
+                                 x:Name="TxtDec" Height="32" FontSize="14"
                                  ToolTip="10진수 (부호 있는 정수)"/>
 
                         <!-- HEX -->
-                        <TextBlock Grid.Row="0" Grid.Column="3" Text="HEX"
+                        <TextBlock Grid.Row="2" Grid.Column="0" Text="HEX"
                                    Foreground="{StaticResource AccentBrush}" FontSize="11"
                                    VerticalAlignment="Center" FontWeight="Bold"/>
-                        <TextBox Grid.Row="0" Grid.Column="4"
+                        <TextBox Grid.Row="2" Grid.Column="1"
                                  Text="{Binding HexText, UpdateSourceTrigger=PropertyChanged}"
-                                 x:Name="TxtHex" Height="34" FontSize="15"
+                                 x:Name="TxtHex" Height="32" FontSize="14"
                                  ToolTip="16진수 (0x 접두사 생략 가능)"/>
 
                         <!-- OCT -->
-                        <TextBlock Grid.Row="2" Grid.Column="0" Text="OCT"
+                        <TextBlock Grid.Row="4" Grid.Column="0" Text="OCT"
                                    Foreground="{StaticResource OrangeBrush}" FontSize="11"
                                    VerticalAlignment="Center" FontWeight="Bold"/>
-                        <TextBox Grid.Row="2" Grid.Column="1"
+                        <TextBox Grid.Row="4" Grid.Column="1"
                                  Text="{Binding OctText, UpdateSourceTrigger=PropertyChanged}"
-                                 x:Name="TxtOct" Height="34" FontSize="15"
+                                 x:Name="TxtOct" Height="32" FontSize="14"
                                  ToolTip="8진수"/>
 
                         <!-- BIN -->
-                        <TextBlock Grid.Row="2" Grid.Column="3" Text="BIN"
+                        <TextBlock Grid.Row="6" Grid.Column="0" Text="BIN"
                                    Foreground="{StaticResource Fg2Brush}" FontSize="11"
                                    VerticalAlignment="Center" FontWeight="Bold"/>
-                        <TextBox Grid.Row="2" Grid.Column="4"
+                        <TextBox Grid.Row="6" Grid.Column="1"
                                  Text="{Binding BinText, UpdateSourceTrigger=PropertyChanged}"
-                                 x:Name="TxtBin" Height="34" FontSize="13"
+                                 x:Name="TxtBin" Height="32" FontSize="14"
                                  ToolTip="2진수 (0b 접두사 생략, _ 구분자 허용)"/>
                     </Grid>
                 </Border>

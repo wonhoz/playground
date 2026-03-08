@@ -82,6 +82,7 @@ public partial class MainWindow : Window
     void RefreshFilterCombos()
     {
         if (!IsLoaded) return;
+        bool prev = _refreshing;
         _refreshing = true;
         try
         {
@@ -106,17 +107,25 @@ public partial class MainWindow : Window
         }
         finally
         {
-            _refreshing = false;
+            _refreshing = prev;  // 호출 전 상태로 복원 (중첩 호출 시 올바른 동작 보장)
         }
     }
 
     void Filter_Changed(object sender, RoutedEventArgs e)
     {
         if (!IsLoaded || _refreshing) return;
-        _vm.FilterTag     = CbTag.SelectedIndex <= 0     ? null : CbTag.SelectedItem as string;
-        _vm.FilterService = CbService.SelectedIndex <= 0 ? null : CbService.SelectedItem as string;
-        _vm.FavOnly       = ChkFav.IsChecked == true;
-        RefreshFilterCombos();
+        _refreshing = true;  // VM setter 호출 전에 설정 — Tags.Clear() → SelectionChanged 재진입 차단
+        try
+        {
+            _vm.FilterTag     = CbTag.SelectedIndex <= 0     ? null : CbTag.SelectedItem as string;
+            _vm.FilterService = CbService.SelectedIndex <= 0 ? null : CbService.SelectedItem as string;
+            _vm.FavOnly       = ChkFav.IsChecked == true;
+            RefreshFilterCombos();
+        }
+        finally
+        {
+            _refreshing = false;
+        }
     }
 
     // ── 목록 선택 ─────────────────────────────────────────────────────────────

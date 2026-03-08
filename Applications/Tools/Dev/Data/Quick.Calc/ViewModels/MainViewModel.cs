@@ -208,10 +208,7 @@ public class MainViewModel : INotifyPropertyChanged
     {
         if (v == 0) return "0";
         var bits = Convert.ToString((long)v, 2);
-        // 워드 사이즈에 맞게 패딩
-        int pad = _wordSize;
-        if (bits.Length < pad) bits = bits.PadLeft(pad, '0');
-        // 4자리마다 _ 구분
+        // leading zero 없이 최소 비트만 표시 (4자리마다 _ 구분)
         var sb = new System.Text.StringBuilder();
         for (int i = 0; i < bits.Length; i++)
         {

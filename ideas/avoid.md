@@ -681,3 +681,18 @@
 | **캠프파이어 생존 관리** | Last.Spark (≠ 기존 모든 게임: 불꽃 보호 서바이벌 분위기 게임 첫 도입) |
 | **2D 물리 블록 제거 (Jenga)** | Jenga.Pull (≠ Stack.Crash: 탑 파괴, ≠ Stack.Race: 탑 쌓기 대전, ≠ Stack.Pop: 폭발 제거) |
 | **L-시스템 식물 성장 샌드박스** | Leaf.Grow (≠ Colony.Sim: 동물 군집 AI, ≠ Life.Sim: Conway 셀룰러, ≠ Sand.Fall: 물리 입자) |
+| **목업 데이터 일괄 생성기** | Mock.Data (≠ Table.Craft: CSV 분석, ≠ Data.Cast: 노코드 DB — Faker·SQL INSERT 배치 특화) |
+| **시스템 사양 HTML/PDF 리포트** | Spec.Report (≠ Tray.Stats: 실시간 트레이, ≠ Proc.Timeline: 프로세스 타임라인 — 정적 문서화 특화) |
+| **로컬 노코드 데이터베이스** | Data.Cast (≠ Table.Craft: CSV만, ≠ DB.Peek: 읽기 전용 — 칸반·갤러리·수식·관계형 포함) |
+| **X.509 인증서 체인 분석기** | Cert.View (≠ Cert.Forge: 인증서 생성 — 체인 시각화·유효기간 타임라인·OCSP 검증 특화) |
+| **전역 핫키 자동 스크롤 트레이** | Scroll.Cast (≠ Screen.Recorder: 녹화, ≠ Win.Cast: 가상 카메라 — 문서·텔레프롬프터 자동 스크롤) |
+| **AES-256 암호화 로컬 일기장** | Daily.Log (≠ Quick.Memo: 단순 메모, ≠ Stand.Up: 스탠드업 기록 — 마크다운·무드·연간 히트맵) |
+| **패키지 CVE·라이선스 감사기** | Pack.View (≠ Api.Probe: HTTP, ≠ Schema.View: JSON Schema — NuGet/npm/pip SBOM·CVE 감사) |
+| **소나 음파 항법 미로 탈출** | Echo.Maze (≠ Dungeon.Dash: 액션 RPG, ≠ Maze.Dread: 추격 미로 — 칠흑+소나 링 시각화 독자 메커닉) |
+| **정밀 저격 물리 퍼즐** | Crack.Shot (≠ Dodge.Blitz: 탄막 회피, ≠ Star.Strike: 실시간 슈터 — 턴 기반 탄도 보정 퍼즐) |
+| **3D 와이어프레임 실루엣 매칭** | Wire.Mesh (≠ Orbit.Craft: N-체 궤도, ≠ Prism.Break: RGB 분리 — 3D→2D 투영 각도 퍼즐) |
+| **진화형 두더지 잡기** | Mole.Strike (≠ Hook.Cast: 낚시 캐주얼, ≠ Dish.Rush: 쿠킹 관리 — 반응속도 분석·폭탄/황금 두더지) |
+| **픽셀아트 15퍼즐 (A* 시각화)** | Slide.Rush (≠ Ice.Slide: 얼음 물리, ≠ Neon.Push: 소코반+레이저 — A* 솔버 가르치는 모드 포함) |
+| **주사위 빌딩 로그라이크** | Dungeon.Dice (≠ Neon.Card: 카드 덱빌딩, ≠ Beat.Rogue: 리듬 크롤러 — 6면 주사위 면 조각 시너지) |
+| **픽셀 1:1 영역 전쟁 전략** | Pixel.War (≠ Cell.War: 세포 분열, ≠ Ink.Spread: BFS 차단, ≠ Hex.Storm: 헥사 RTS — 1픽셀씩 교대) |
+| **FFT 파도 물리 서핑 게임** | Wave.Surf (≠ Hook.Cast: 낚시, ≠ Nitro.Drift: 레이싱 — 무게중심 균형·묘기·GIF 자동 저장) |

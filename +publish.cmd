@@ -98,6 +98,7 @@ echo !CY!  49!RS! Sys.Clean             !DG!Tools/System!RS!
 echo !CY!  50!RS! Tray.Stats            !DG!Tools/System!RS!
 echo !CY!  51!RS! App.Temp              !DG!Tools/System!RS!
 echo !CY!  52!RS! Burn.Rate             !DG!Tools/System!RS!
+echo !CY!  70!RS! Spec.Report           !DG!Tools/System!RS!
 echo.
 echo !BD!!DG!  Games!RS!
 echo !CY!  53!RS! Dungeon.Dash          !DG!Games/Action!RS!
@@ -197,6 +198,7 @@ for %%n in (!SEL!) do (
     if "%%n"=="50" call :pub "Tray.Stats"             "Applications\Tools\System\Tray.Stats"                      "Tray.Stats.exe"            "Applications\Tools\System\Tray.Stats"
     if "%%n"=="51" call :pub "App.Temp"               "Applications\Tools\System\App.Temp"                        "AppTemp.exe"               "Applications\Tools\System\App.Temp"
     if "%%n"=="52" call :pub "Burn.Rate"              "Applications\Tools\System\Burn.Rate"                       "BurnRate.exe"              "Applications\Tools\System\Burn.Rate"
+    if "%%n"=="70" call :pub "Spec.Report"            "Applications\Tools\System\Spec.Report"                     "SpecReport.exe"            "Applications\Tools\System\Spec.Report"
     if "%%n"=="53" call :pub "Dungeon.Dash"           "Games\Action\Dungeon.Dash"                                 "Dungeon.Dash.exe"          "Games\Action"
     if "%%n"=="54" call :pub "Brick.Blitz"            "Games\Arcade\Brick.Blitz"                                  "Brick.Blitz.exe"           "Games\Arcade"
     if "%%n"=="55" call :pub "Dash.City"              "Games\Arcade\Dash.City"                                    "Dash.City.exe"             "Games\Arcade"
@@ -282,6 +284,7 @@ call :pub "Env.Guard"             "Applications\Tools\System\Env.Guard"         
 call :pub "Sys.Clean"             "Applications\Tools\System\Sys.Clean"                       "Sys.Clean.exe"             "Applications\Tools\System\Sys.Clean"
 call :pub "Tray.Stats"            "Applications\Tools\System\Tray.Stats"                      "Tray.Stats.exe"            "Applications\Tools\System\Tray.Stats"
 call :pub "Burn.Rate"             "Applications\Tools\System\Burn.Rate"                       "BurnRate.exe"              "Applications\Tools\System\Burn.Rate"
+call :pub "Spec.Report"           "Applications\Tools\System\Spec.Report"                     "SpecReport.exe"            "Applications\Tools\System\Spec.Report"
 call :pub "Dungeon.Dash"          "Games\Action\Dungeon.Dash"                                 "Dungeon.Dash.exe"          "Games\Action"
 call :pub "Brick.Blitz"           "Games\Arcade\Brick.Blitz"                                  "Brick.Blitz.exe"           "Games\Arcade"
 call :pub "Dash.City"             "Games\Arcade\Dash.City"                                    "Dash.City.exe"             "Games\Arcade"

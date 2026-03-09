@@ -113,6 +113,7 @@ call :pub "Word.Cloud"            "Applications\Tools\Productivity\Visual\Word.C
 call :pub "App.Temp"              "Applications\Tools\System\App.Temp"                           "AppTemp.exe"               "Applications\Tools\System\App.Temp"
 call :pub "Burn.Rate"             "Applications\Tools\System\Burn.Rate"                          "BurnRate.exe"              "Applications\Tools\System\Burn.Rate"
 call :pub "Env.Guard"             "Applications\Tools\System\Env.Guard"                          "Env.Guard.exe"             "Applications\Tools\System"
+call :pub "Spec.Report"           "Applications\Tools\System\Spec.Report"                        "SpecReport.exe"            "Applications\Tools\System\Spec.Report"
 call :pub "Sys.Clean"             "Applications\Tools\System\Sys.Clean"                          "Sys.Clean.exe"             "Applications\Tools\System\Sys.Clean"
 call :pub "Tray.Stats"            "Applications\Tools\System\Tray.Stats"                         "Tray.Stats.exe"            "Applications\Tools\System\Tray.Stats"
 

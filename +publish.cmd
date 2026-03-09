@@ -90,8 +90,9 @@ echo !CY!  64!RS! Text.Forge            !DG!Tools/Productivity/Text!RS!
 echo !CY!  65!RS! Timeline.Craft        !DG!Tools/Productivity/Visual!RS!
 echo !CY!  66!RS! Tower.Guard           !DG!Games/Strategy!RS!
 echo !CY!  67!RS! Tray.Stats            !DG!Tools/System!RS!
-echo !CY!  68!RS! Word.Cloud            !DG!Tools/Productivity/Visual!RS!
-echo !CY!  69!RS! Zip.Peek              !DG!Files/Inspector!RS!
+echo !CY!  68!RS! Wave.Surf             !DG!Games/Casual!RS!
+echo !CY!  69!RS! Word.Cloud            !DG!Tools/Productivity/Visual!RS!
+echo !CY!  70!RS! Zip.Peek              !DG!Files/Inspector!RS!
 echo.
 echo !DG!--------------------------------------------------!RS!
 echo !DG!  번호 입력 (공백/쉼표로 구분)   예: 1 3 5  또는  1,3,5!RS!
@@ -187,8 +188,9 @@ for %%n in (!SEL!) do (
     if "%%n"=="65" call :pub "Timeline.Craft"         "Applications\Tools\Productivity\Visual\Timeline.Craft"     "Timeline.Craft.exe"        "Applications\Tools\Productivity\Visual\Timeline.Craft"
     if "%%n"=="66" call :pub "Tower.Guard"            "Games\Strategy\Tower.Guard"                                "Tower.Guard.exe"           "Games\Strategy"
     if "%%n"=="67" call :pub "Tray.Stats"             "Applications\Tools\System\Tray.Stats"                      "Tray.Stats.exe"            "Applications\Tools\System\Tray.Stats"
-    if "%%n"=="68" call :pub "Word.Cloud"             "Applications\Tools\Productivity\Visual\Word.Cloud"         "Word.Cloud.exe"            "Applications\Tools\Productivity\Visual"
-    if "%%n"=="69" call :pub "Zip.Peek"               "Applications\Files\Inspector\Zip.Peek"                     "Zip.Peek.exe"              "Applications\Files\Inspector\Zip.Peek"
+    if "%%n"=="68" call :pub "Wave.Surf"              "Games\Casual\Wave.Surf"                                    "Wave.Surf.exe"             "Games\Casual"
+    if "%%n"=="69" call :pub "Word.Cloud"             "Applications\Tools\Productivity\Visual\Word.Cloud"         "Word.Cloud.exe"            "Applications\Tools\Productivity\Visual"
+    if "%%n"=="70" call :pub "Zip.Peek"               "Applications\Files\Inspector\Zip.Peek"                     "Zip.Peek.exe"              "Applications\Files\Inspector\Zip.Peek"
 )
 goto :DONE
 
@@ -272,6 +274,7 @@ call :pub "Text.Forge"            "Applications\Tools\Productivity\Text\Text.For
 call :pub "Timeline.Craft"        "Applications\Tools\Productivity\Visual\Timeline.Craft"     "Timeline.Craft.exe"        "Applications\Tools\Productivity\Visual\Timeline.Craft"
 call :pub "Tower.Guard"           "Games\Strategy\Tower.Guard"                                "Tower.Guard.exe"           "Games\Strategy"
 call :pub "Tray.Stats"            "Applications\Tools\System\Tray.Stats"                      "Tray.Stats.exe"            "Applications\Tools\System\Tray.Stats"
+call :pub "Wave.Surf"             "Games\Casual\Wave.Surf"                                    "Wave.Surf.exe"             "Games\Casual"
 call :pub "Word.Cloud"            "Applications\Tools\Productivity\Visual\Word.Cloud"         "Word.Cloud.exe"            "Applications\Tools\Productivity\Visual"
 call :pub "Zip.Peek"              "Applications\Files\Inspector\Zip.Peek"                     "Zip.Peek.exe"              "Applications\Files\Inspector\Zip.Peek"
 

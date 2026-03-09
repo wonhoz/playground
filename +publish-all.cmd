@@ -122,6 +122,7 @@ call :pub "Dungeon.Dash"          "Games\Action\Dungeon.Dash"                   
 
 :: ── Games / Casual ───────────────────────────────────────────────
 call :pub "Hook.Cast"             "Games\Casual\Hook.Cast"                                       "Hook.Cast.exe"             "Games\Casual"
+call :pub "Wave.Surf"             "Games\Casual\Wave.Surf"                                       "Wave.Surf.exe"             "Games\Casual"
 
 :: ── Games / Arcade ───────────────────────────────────────────────
 call :pub "Brick.Blitz"           "Games\Arcade\Brick.Blitz"                                     "Brick.Blitz.exe"           "Games\Arcade"

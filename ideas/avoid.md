@@ -2,7 +2,7 @@
 
 > 이 파일은 브레인스토밍 시 **이미 제안되거나 구현된 아이디어를 다시 꺼내지 않도록** 하는 필터다.
 > 새 아이디어를 제안하기 전 반드시 이 목록을 확인할 것.
-> 마지막 갱신: 2026-03-08 (5차)
+> 마지막 갱신: 2026-03-08 (6차)
 
 ---
 
@@ -440,6 +440,36 @@
 
 ---
 
+### Apps / Games (신규 — idea_20260308_6차)
+
+| 이름 | 카테고리 | 핵심 기능 | 출처 |
+|------|----------|----------|------|
+| `AI.Recap` | AI / Productivity | 회의 트랜스크립트 → Executive Summary + Action Items + Key Decisions (Claude API, Markdown/Slack 출력) | idea_20260308_6차 |
+| `Live.Widget` | Productivity / System | 데스크탑 앰비언트 위젯 레이어 (날씨·캘린더·RSS·시스템 미니 그래프, click-through, 플러그인 아키텍처) | idea_20260308_6차 |
+| `Quick.Calc` | Dev / Tools | 개발자 프로그래머 계산기 (hex/dec/oct/bin 실시간 동기화, 비트연산, IEEE 754 float 구조 시각화·편집, 전역 팝업) | idea_20260308_6차 |
+| `Color.Blind` | Dev / Accessibility | 실시간 화면 색맹 시뮬레이션 오버레이 (Protanopia·Deuteranopia·Tritanopia·Achromatopsia, 분할 뷰, DXGI 캡처) | idea_20260308_6차 |
+| `Palette.Gen` | Dev / Creative | 이미지 → 지배 색상 팔레트 추출기 (k-Means, Lab 색공간, CSS/Tailwind/SCSS/Swift/Android XML 동시 출력) | idea_20260308_6차 |
+| `Cursor.Lens` | Productivity / Capture | 프레젠테이션·스크린캐스트 커서 스포트라이트+줌 오버레이 (클릭 파문, 키스트로크 HUD, 드래그 잔상) | idea_20260308_6차 |
+| `Burn.Rate` | System / Tray | 노트북 배터리 건강도 분석기 (충전 사이클, 실제 용량 vs 설계 용량, 방전 곡선, 교체 권장 알림) | idea_20260308_6차 |
+| `App.Temp` | System / Security | 임시 실행 샌드박스 (파일시스템+레지스트리 변경 추적, 종료 시 롤백, 변경 리포트 HTML 내보내기) | idea_20260308_6차 |
+| `Snap.Cast` | Productivity / AI | 화면 캡처 영역 → OCR + 레이아웃 분석 → 구조화된 마크다운 즉시 변환 (표/코드블록/헤딩/리스트 자동 감지) | idea_20260308_6차 |
+| `Path.Link` | Files / Dev | Windows 심볼릭 링크·정션·하드링크 GUI 관리자 (드래그&드롭 생성, 깨진 링크 감지·수정, 전체 시스템 스캔) | idea_20260308_6차 |
+
+### 게임 — 제안된 미구현 아이디어 (idea_20260308_6차)
+
+| 이름 | 장르 | 핵심 메커닉 |
+|------|------|------------|
+| `Dish.Rush` | Casual / Action / Time Management | 탑다운 주방 쿠킹 러시 — 주문 큐, 재료 수집→썰기→볶기→플레이팅→서빙 체인, 러시타임 이벤트, 네온 사이버펑크 주방 |
+| `Hook.Cast` | Casual / Skill / Simulation | 플라이 피싱 — Verlet 낚싯줄 캐스팅 물리, 물고기 AI 탐색·접근·입질·챔질, 날씨 시스템, 물고기 도감 |
+| `Rush.Cross` | Puzzle / Casual / Strategy | 교차로 교통 신호 타이밍 퍼즐 — 클릭으로 신호 전환, 구급차 최우선, 멀티 교차로, 데일리 챌린지, 레벨 에디터 |
+| `Type.Race` | Arcade / Racing / Skill | 타이핑 레이싱 — 문단 타이핑 = 레이서 전진, 오타 패널티, 고스트 레이서, WPM 히트맵, 커스텀 텍스트 임포트 |
+| `Ice.Slide` | Puzzle / Logic | 얼음 블록 슬라이딩 퍼즐 — 방향키 = 막힐 때까지 미끄러짐, 다중 블록 상호작용, 돌·폭탄·잠금·전송기 타일, 레벨 에디터 |
+| `Rise.Match` | Puzzle / Casual | 상승 격자 보석 교환 퍼즐 (Panel de Pon) — 좌우 교환으로 3매칭, 하단부터 새 줄 상승, 체인 보너스, 로컬 2P VS |
+| `Chord.Strike` | Rhythm / Music | 멀티키 동시 누르기 리듬 게임 — 단음→화음→아르페지오 레인, 커스텀 MIDI 채보, 악보 에디터, 구간 연습 모드 |
+| `Last.Spark` | Survival / Casual / Atmospheric | 캠프파이어 생존 — 모닥불 꺼짐 방지, 자원 수집, 비바람·야생동물 방해, 밤낮 사이클, 픽셀아트 힐링 분위기 |
+| `Jenga.Pull` | Arcade / Physics / Casual | 2D 물리 블록 제거 — 드래그로 블록 빼내기, 무게중심 물리, 금속·유리·폭발물 블록 종류, 로컬 2P 교대 |
+| `Leaf.Grow` | Simulation / Puzzle / Creative | L-시스템 식물 성장 샌드박스 — 햇빛 방향·수분·N/P/K 조절로 가지·잎 프랙탈 성장, 퍼즐 목표 모드, 타임랩스 GIF |
+
 ### 게임 — 제안된 미구현 아이디어 (idea_20260306_4차)
 
 | 이름 | 장르 | 핵심 메커닉 |
@@ -631,3 +661,23 @@
 | **절차 생성 미로 탈출 + 추격** | Maze.Dread (≠ Dungeon.Dash: 실시간 액션 RPG, ≠ Rogue.Tile: 턴제 로그라이크) |
 | **군집 생명체 진화 시뮬 샌드박스** | Colony.Sim (≠ Life.Sim: Conway 규칙, ≠ Sand.Fall: 물리 입자, ≠ Auto.Build: 공장 자동화) |
 | **헥사 격자 마이크로 RTS** | Hex.Storm (≠ Cell.War: 원형 세포 분열, ≠ Ink.Spread: BFS 차단, ≠ Tower.Guard: 타워 디펜스) |
+| **회의 트랜스크립트 AI 요약** | AI.Recap (≠ AI.Clip: 클립보드 처리, ≠ Stand.Up: 스탠드업 기록, ≠ Msg.Forge: 메시지 포매터) |
+| **데스크탑 앰비언트 위젯 레이어** | Live.Widget (≠ Daily.Dash: 열어야 하는 풀 창, ≠ Tray.Stats: 트레이만, ≠ Quick.Memo: 단순 메모) |
+| **개발자 프로그래머 계산기** | Quick.Calc (≠ Calc.Pop: 일반 팝업 계산기 — IEEE 754·bitwise·hex 특화) |
+| **실시간 화면 색맹 시뮬레이션** | Color.Blind (≠ Access.Check: 색상 대비율 수치 계산, ≠ Color.Grade: 이미지 LUT 보정) |
+| **이미지 → 색상 팔레트 추출** | Palette.Gen (≠ Palette.Cast: 색상 수집·관리, ≠ Color.Grade: LUT 보정, ≠ Access.Check: WCAG 비율) |
+| **커서 스포트라이트+줌 오버레이** | Cursor.Lens (≠ Screen.Recorder: 녹화기, ≠ Code.Snap: 정적 스크린샷, ≠ Key.Map: 단축키 PDF) |
+| **배터리 건강도·방전 분석** | Burn.Rate (≠ Tray.Stats: CPU/RAM/GPU 통합 성능, ≠ Thermal.View: 온도 모니터) |
+| **임시 실행 샌드박스·롤백** | App.Temp (≠ App.Cage: 네트워크 방화벽, ≠ Spy.Guard: 클립보드 감시, ≠ File.Guard: 감사 로거) |
+| **스크린샷 → 구조화 마크다운** | Snap.Cast (≠ Screen.OCR·Screen.Pickup: 단순 텍스트 추출, ≠ Clip.Annotate: 이미지 주석) |
+| **심볼릭 링크·정션 GUI 관리** | Path.Link (≠ Batch.Rename: 이름 변경, ≠ Disk.Lens: 크기 시각화, ≠ File.Guard: 변경 감사) |
+| **탑다운 쿠킹 러시 게임** | Dish.Rush (≠ 기존 모든 게임: Time Management 장르 첫 도입) |
+| **플라이 피싱 물리 시뮬** | Hook.Cast (≠ 기존 모든 게임: Fishing/Casual 힐링 장르 첫 도입, Verlet 낚싯줄 물리) |
+| **교차로 신호 타이밍 퍼즐** | Rush.Cross (≠ 기존 모든 게임: Traffic Management 장르 첫 도입) |
+| **문단 타이핑 레이싱** | Type.Race (≠ Glyph.Rush: 문자 격추 슈터, ≠ Type.Rocket: WPM 트래커 앱) |
+| **얼음 블록 슬라이딩 퍼즐** | Ice.Slide (≠ Tilt.Ball: 판 기울이기, ≠ Marble.Run: 구슬 경로 빌더, ≠ Neon.Push: 소코반+색상) |
+| **상승 격자 보석 교환 (Panel de Pon)** | Rise.Match (≠ Match.Drop: 중력 방향 전환 매치3, ≠ Hue.Flow: 경로 연결, ≠ Hexa.Drop: 헥사 배치) |
+| **멀티키 동시 누르기 리듬** | Chord.Strike (≠ Beat.Drop: 단일 입력 박자, ≠ Signal.Rush: 리듬+슈터, ≠ Sound.Grid: 격자 시퀀서) |
+| **캠프파이어 생존 관리** | Last.Spark (≠ 기존 모든 게임: 불꽃 보호 서바이벌 분위기 게임 첫 도입) |
+| **2D 물리 블록 제거 (Jenga)** | Jenga.Pull (≠ Stack.Crash: 탑 파괴, ≠ Stack.Race: 탑 쌓기 대전, ≠ Stack.Pop: 폭발 제거) |
+| **L-시스템 식물 성장 샌드박스** | Leaf.Grow (≠ Colony.Sim: 동물 군집 AI, ≠ Life.Sim: Conway 셀룰러, ≠ Sand.Fall: 물리 입자) |

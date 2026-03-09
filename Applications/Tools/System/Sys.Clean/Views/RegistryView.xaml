@@ -18,6 +18,8 @@
                 <TextBlock Text="레지스트리 최적화" FontSize="14" FontWeight="SemiBold" Foreground="#66BB6A"/>
                 <TextBlock Text="잘못된 레지스트리 항목을 검색합니다. 앱 경로, 공유 DLL, 제거 항목 등 유효하지 않은 참조를 찾아 삭제합니다."
                            FontSize="12" Foreground="#888" Margin="0,4,0,0" TextWrapping="Wrap"/>
+                <TextBlock Text="⚠️ 수정 전 자동으로 .reg 백업 파일이 생성됩니다. 복원하려면 백업 파일을 더블클릭하세요."
+                           FontSize="11" Foreground="#A5834E" Margin="0,4,0,0" TextWrapping="Wrap"/>
             </StackPanel>
         </Border>
 
@@ -81,6 +83,7 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
                 <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
@@ -90,12 +93,17 @@
                                FontSize="12" FontWeight="SemiBold" Margin="10,0,0,0"/>
                 </StackPanel>
 
-                <Button Grid.Column="1" x:Name="BtnScan" Content="🔍  레지스트리 스캔"
+                <Button Grid.Column="1" x:Name="BtnBackupFolder" Content="📂  백업 폴더"
+                        Click="BtnBackupFolder_Click" Margin="0,0,6,0"
+                        Padding="14,7" FontSize="13"
+                        Background="#252525" Foreground="#888" BorderBrush="#3A3A3A"/>
+
+                <Button Grid.Column="2" x:Name="BtnScan" Content="🔍  레지스트리 스캔"
                         Click="BtnScan_Click" Margin="0,0,6,0"
                         Padding="14,7" FontSize="13"
                         Background="#1E4A6A" Foreground="#4FC3F7" BorderBrush="#2979FF"/>
 
-                <Button Grid.Column="2" x:Name="BtnFix" Content="🔧  선택 항목 수정"
+                <Button Grid.Column="3" x:Name="BtnFix" Content="🔧  선택 항목 수정"
                         Click="BtnFix_Click" IsEnabled="False"
                         Padding="14,7" FontSize="13"
                         Background="#1B3A1F" Foreground="#66BB6A" BorderBrush="#388E3C"/>

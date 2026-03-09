@@ -95,8 +95,23 @@ public partial class RegistryView : UserControl
 
         if (toFix.Count == 0) return;
 
+        // 백업 먼저 생성
+        string backupPath;
+        try
+        {
+            backupPath = BackupService.BackupRegistryIssues(toFix);
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"백업 생성 실패: {ex.Message}\n\n안전을 위해 수정을 중단합니다.",
+                "백업 오류", MessageBoxButton.OK, MessageBoxImage.Error);
+            return;
+        }
+
         var result = MessageBox.Show(
-            $"{toFix.Count}개의 레지스트리 항목을 삭제하시겠습니까?\n\n이 작업은 되돌릴 수 없습니다.",
+            $"{toFix.Count}개의 레지스트리 항목을 수정하시겠습니까?\n\n" +
+            $"백업 파일이 생성되었습니다:\n{backupPath}\n\n" +
+            "복원하려면 위 파일을 더블클릭하세요.",
             "레지스트리 수정",
             MessageBoxButton.OKCancel,
             MessageBoxImage.Warning);
@@ -120,7 +135,12 @@ public partial class RegistryView : UserControl
             TbStatus.Text = "수정 완료";
             TbCount.Text = _issues.Count > 0 ? $"— 잔여 {_issues.Count}개" : "— 모두 수정됨";
 
-            MessageBox.Show($"레지스트리 수정 완료!\n\n수정된 항목: {toFix.Count(i => i.IsFixed)}개",
+            MessageBox.Show(
+                $"레지스트리 수정 완료!\n\n" +
+                $"수정된 항목: {toFix.Count(i => i.IsFixed)}개\n\n" +
+                $"백업 파일: {Path.GetFileName(backupPath)}\n" +
+                $"위치: {BackupService.BackupFolder}\n\n" +
+                "문제가 발생하면 백업 파일을 더블클릭하여 복원하세요.",
                 "완료", MessageBoxButton.OK, MessageBoxImage.Information);
         }
         catch (Exception ex)
@@ -135,5 +155,10 @@ public partial class RegistryView : UserControl
             BtnFix.IsEnabled = _issues.Count > 0;
             PbProgress.Visibility = Visibility.Collapsed;
         }
+    }
+
+    private void BtnBackupFolder_Click(object sender, RoutedEventArgs e)
+    {
+        BackupService.OpenBackupFolder();
     }
 }

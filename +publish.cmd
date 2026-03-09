@@ -91,8 +91,9 @@ echo !CY!  65!RS! Timeline.Craft        !DG!Tools/Productivity/Visual!RS!
 echo !CY!  66!RS! Tower.Guard           !DG!Games/Strategy!RS!
 echo !CY!  67!RS! Tray.Stats            !DG!Tools/System!RS!
 echo !CY!  68!RS! Wave.Surf             !DG!Games/Casual!RS!
-echo !CY!  69!RS! Word.Cloud            !DG!Tools/Productivity/Visual!RS!
-echo !CY!  70!RS! Zip.Peek              !DG!Files/Inspector!RS!
+echo !CY!  69!RS! Web.Shot              !DG!Tools/Dev/Network!RS!
+echo !CY!  70!RS! Word.Cloud            !DG!Tools/Productivity/Visual!RS!
+echo !CY!  71!RS! Zip.Peek              !DG!Files/Inspector!RS!
 echo.
 echo !DG!--------------------------------------------------!RS!
 echo !DG!  번호 입력 (공백/쉼표로 구분)   예: 1 3 5  또는  1,3,5!RS!
@@ -189,8 +190,9 @@ for %%n in (!SEL!) do (
     if "%%n"=="66" call :pub "Tower.Guard"            "Games\Strategy\Tower.Guard"                                "Tower.Guard.exe"           "Games\Strategy"
     if "%%n"=="67" call :pub "Tray.Stats"             "Applications\Tools\System\Tray.Stats"                      "Tray.Stats.exe"            "Applications\Tools\System\Tray.Stats"
     if "%%n"=="68" call :pub "Wave.Surf"              "Games\Casual\Wave.Surf"                                    "Wave.Surf.exe"             "Games\Casual"
-    if "%%n"=="69" call :pub "Word.Cloud"             "Applications\Tools\Productivity\Visual\Word.Cloud"         "Word.Cloud.exe"            "Applications\Tools\Productivity\Visual"
-    if "%%n"=="70" call :pub "Zip.Peek"               "Applications\Files\Inspector\Zip.Peek"                     "Zip.Peek.exe"              "Applications\Files\Inspector\Zip.Peek"
+    if "%%n"=="69" call :pub "Web.Shot"               "Applications\Tools\Dev\Network\Web.Shot"                   "Web.Shot.exe"              "Applications\Tools\Dev\Network"
+    if "%%n"=="70" call :pub "Word.Cloud"             "Applications\Tools\Productivity\Visual\Word.Cloud"         "Word.Cloud.exe"            "Applications\Tools\Productivity\Visual"
+    if "%%n"=="71" call :pub "Zip.Peek"               "Applications\Files\Inspector\Zip.Peek"                     "Zip.Peek.exe"              "Applications\Files\Inspector\Zip.Peek"
 )
 goto :DONE
 
@@ -263,6 +265,7 @@ call :pub "Sand.Fall"             "Games\Sandbox\Sand.Fall"                     
 call :pub "Sched.Cast"            "Applications\Tools\Dev\System\Sched.Cast"                  "Sched.Cast.exe"            "Applications\Tools\Dev\System\Sched.Cast"
 call :pub "Screen.Recorder"       "Applications\Tools\Productivity\Capture\Screen.Recorder"   "Screen.Recorder.exe"       "Applications\Tools\Productivity\Capture"
 call :pub "Serve.Cast"            "Applications\Tools\Dev\Network\Serve.Cast"                 "Serve.Cast.exe"            "Applications\Tools\Dev\Network"
+call :pub "Web.Shot"              "Applications\Tools\Dev\Network\Web.Shot"                   "Web.Shot.exe"              "Applications\Tools\Dev\Network"
 call :pub "Signal.Flow"           "Applications\Tools\Dev\Debug\Signal.Flow"                  "Signal.Flow.exe"           "Applications\Tools\Dev\Debug"
 call :pub "Spec.Report"           "Applications\Tools\System\Spec.Report"                     "Spec.Report.exe"           "Applications\Tools\System"
 call :pub "Star.Strike"           "Games\Shooter\Star.Strike"                                 "Star.Strike.exe"           "Games\Shooter"

@@ -72,6 +72,7 @@ call :pub "Signal.Flow"           "Applications\Tools\Dev\Debug\Signal.Flow"    
 call :pub "Api.Probe"             "Applications\Tools\Dev\Network\Api.Probe"                     "Api.Probe.exe"             "Applications\Tools\Dev\Network\Api.Probe"
 call :pub "Mock.Server"           "Applications\Tools\Dev\Network\Mock.Server"                   "Mock.Server.exe"           "Applications\Tools\Dev\Network"
 call :pub "Serve.Cast"            "Applications\Tools\Dev\Network\Serve.Cast"                    "Serve.Cast.exe"            "Applications\Tools\Dev\Network"
+call :pub "Web.Shot"              "Applications\Tools\Dev\Network\Web.Shot"                      "Web.Shot.exe"              "Applications\Tools\Dev\Network"
 
 :: ── Tools / Dev / System ─────────────────────────────────────────
 call :pub "Layout.Forge"          "Applications\Tools\Dev\System\Layout.Forge"                   "Layout.Forge.exe"          "Applications\Tools\Dev\System\Layout.Forge"

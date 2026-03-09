@@ -101,14 +101,16 @@
             <Setter Property="Foreground"     Value="{StaticResource FgBrush}"/>
         </Style>
         <Style TargetType="ListBoxItem">
-            <Setter Property="Padding"     Value="8,4"/>
+            <Setter Property="Padding"     Value="7,3"/>
             <Setter Property="Foreground"  Value="{StaticResource FgBrush}"/>
             <Setter Property="Background"  Value="Transparent"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ListBoxItem">
+                        <!-- BorderThickness="1" 항상 확보 → 선택 시 레이아웃 변동 없음 -->
                         <Border x:Name="bd" Background="{TemplateBinding Background}"
-                                CornerRadius="4" Padding="{TemplateBinding Padding}">
+                                CornerRadius="4" Padding="{TemplateBinding Padding}"
+                                BorderThickness="1" BorderBrush="Transparent">
                             <ContentPresenter/>
                         </Border>
                         <ControlTemplate.Triggers>
@@ -118,9 +120,42 @@
                             <Trigger Property="IsSelected" Value="True">
                                 <Setter TargetName="bd" Property="Background" Value="#1A3020"/>
                                 <Setter TargetName="bd" Property="BorderBrush" Value="{StaticResource AccentBrush}"/>
-                                <Setter TargetName="bd" Property="BorderThickness" Value="1"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!-- ScrollBar 다크 테마 -->
+        <Style TargetType="ScrollBar">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Width"      Value="8"/>
+            <Setter Property="MinWidth"   Value="8"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ScrollBar">
+                        <Border Background="Transparent">
+                            <Track x:Name="PART_Track" IsDirectionReversed="True">
+                                <Track.DecreaseRepeatButton>
+                                    <RepeatButton Command="ScrollBar.LineUpCommand"
+                                                  Opacity="0" Focusable="False"/>
+                                </Track.DecreaseRepeatButton>
+                                <Track.IncreaseRepeatButton>
+                                    <RepeatButton Command="ScrollBar.LineDownCommand"
+                                                  Opacity="0" Focusable="False"/>
+                                </Track.IncreaseRepeatButton>
+                                <Track.Thumb>
+                                    <Thumb>
+                                        <Thumb.Template>
+                                            <ControlTemplate TargetType="Thumb">
+                                                <Border Background="#2A4A2A" CornerRadius="3" Margin="2"/>
+                                            </ControlTemplate>
+                                        </Thumb.Template>
+                                    </Thumb>
+                                </Track.Thumb>
+                            </Track>
+                        </Border>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>

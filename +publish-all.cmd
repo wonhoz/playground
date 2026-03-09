@@ -110,10 +110,10 @@ call :pub "Timeline.Craft"        "Applications\Tools\Productivity\Visual\Timeli
 call :pub "Word.Cloud"            "Applications\Tools\Productivity\Visual\Word.Cloud"            "Word.Cloud.exe"            "Applications\Tools\Productivity\Visual"
 
 :: ── Tools / System ───────────────────────────────────────────────
-call :pub "App.Temp"              "Applications\Tools\System\App.Temp"                           "AppTemp.exe"               "Applications\Tools\System\App.Temp"
-call :pub "Burn.Rate"             "Applications\Tools\System\Burn.Rate"                          "BurnRate.exe"              "Applications\Tools\System\Burn.Rate"
+call :pub "App.Temp"              "Applications\Tools\System\App.Temp"                           "App.Temp.exe"              "Applications\Tools\System"
+call :pub "Burn.Rate"             "Applications\Tools\System\Burn.Rate"                          "Burn.Rate.exe"             "Applications\Tools\System"
 call :pub "Env.Guard"             "Applications\Tools\System\Env.Guard"                          "Env.Guard.exe"             "Applications\Tools\System"
-call :pub "Spec.Report"           "Applications\Tools\System\Spec.Report"                        "SpecReport.exe"            "Applications\Tools\System\Spec.Report"
+call :pub "Spec.Report"           "Applications\Tools\System\Spec.Report"                        "Spec.Report.exe"           "Applications\Tools\System"
 call :pub "Sys.Clean"             "Applications\Tools\System\Sys.Clean"                          "Sys.Clean.exe"             "Applications\Tools\System\Sys.Clean"
 call :pub "Tray.Stats"            "Applications\Tools\System\Tray.Stats"                         "Tray.Stats.exe"            "Applications\Tools\System\Tray.Stats"
 
@@ -121,7 +121,7 @@ call :pub "Tray.Stats"            "Applications\Tools\System\Tray.Stats"        
 call :pub "Dungeon.Dash"          "Games\Action\Dungeon.Dash"                                    "Dungeon.Dash.exe"          "Games\Action"
 
 :: ── Games / Casual ───────────────────────────────────────────────
-call :pub "Hook.Cast"             "Games\Casual\Hook.Cast"                                       "HookCast.exe"              "Games\Casual\Hook.Cast"
+call :pub "Hook.Cast"             "Games\Casual\Hook.Cast"                                       "Hook.Cast.exe"             "Games\Casual"
 
 :: ── Games / Arcade ───────────────────────────────────────────────
 call :pub "Brick.Blitz"           "Games\Arcade\Brick.Blitz"                                     "Brick.Blitz.exe"           "Games\Arcade"
@@ -142,7 +142,7 @@ call :pub "Beat.Drop"             "Games\Rhythm\Beat.Drop"                      
 call :pub "Chord.Strike"          "Games\Rhythm\Chord.Strike"                                    "ChordStrike.exe"           "Games\Rhythm"
 
 :: ── Games / Simulation ────────────────────────────────────────────
-call :pub "Leaf.Grow"             "Games\Simulation\Leaf.Grow"                                   "LeafGrow.exe"              "Games\Simulation"
+call :pub "Leaf.Grow"             "Games\Simulation\Leaf.Grow"                                   "Leaf.Grow.exe"             "Games\Simulation"
 
 :: ── Games / Sandbox ──────────────────────────────────────────────
 call :pub "Sand.Fall"             "Games\Sandbox\Sand.Fall"                                      "Sand.Fall.exe"             "Games\Sandbox"

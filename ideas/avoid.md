@@ -2,7 +2,7 @@
 
 > 이 파일은 브레인스토밍 시 **이미 제안되거나 구현된 아이디어를 다시 꺼내지 않도록** 하는 필터다.
 > 새 아이디어를 제안하기 전 반드시 이 목록을 확인할 것.
-> 마지막 갱신: 2026-03-08 (6차)
+> 마지막 갱신: 2026-03-09 (8차)
 
 ---
 
@@ -483,6 +483,44 @@
 
 ---
 
+### 게임 — 제안된 미구현 아이디어 (idea_20260309_7차, 누락 항목)
+
+| 이름 | 장르 | 핵심 메커닉 |
+|------|------|------------|
+| `Wave.Surf` | Casual / Simulation | 사인파+FFT 노이즈 파도 생성, COM 균형 서핑, 공중 묘기 콤보 멀티플라이어, GIF 자동 저장 |
+
+---
+
+### Apps (신규 — idea_20260309_8차)
+
+| 이름 | 핵심 기능 | 출처 |
+|------|----------|------|
+| `Task.Cast` | 완전 로컬 Kanban 보드 (드래그&드롭, 마감 알림, JSON 단일 파일 저장, Trello 오프라인 대체) | idea_20260309_8차 |
+| `Bin.View` | Windows PE(EXE/DLL) 리소스 브라우저 (아이콘·버전정보·매니페스트·문자열 테이블, ICO 내보내기) | idea_20260309_8차 |
+| `Fade.Out` | 시스템 볼륨 점진 페이드 수면 타이머 트레이 앱 (선형/지수 곡선, 재생 정지, 모니터 끄기) | idea_20260309_8차 |
+| `Web.Shot` | WebView2 전체 페이지 웹스크린샷 (다중 뷰포트, PDF 출력, 배치 URL 목록 캡처) | idea_20260309_8차 |
+| `Perm.Audit` | Windows 앱 권한 감사·관리 (카메라·마이크·위치·백그라운드, 원클릭 허용/거부, 스냅샷 비교) | idea_20260309_8차 |
+| `Img.Meta` | 이미지 EXIF/IPTC/XMP 뷰어·편집기 (GPS 지도, 프라이버시 제거, 일괄 처리, ExifTool GUI 대체) | idea_20260309_8차 |
+| `Crypt.Drop` | 드래그&드롭 AES-256-GCM 파일 암호화 금고 (Argon2id, 키 파일, 마스크 미리보기, 보안 삭제) | idea_20260309_8차 |
+| `Geo.Tag` | 사진 GPS 태거 (지도 클릭 수동·GPX 트랙 자동 매칭, 역지오코딩, EXIF GPS 삽입) | idea_20260309_8차 |
+
+---
+
+### 게임 — 제안된 미구현 아이디어 (idea_20260309_8차)
+
+| 이름 | 장르 | 핵심 메커닉 |
+|------|------|------------|
+| `Knot.Craft` | Puzzle (위상) | 매듭진 실 교차점 드래그 분리 → 단순 루프 완성, 물리 없음 순수 위상 퍼즐, 레벨 에디터+일일 챌린지 |
+| `Fluid.Paint` | Sandbox / Creative | Jos Stam 유체 시뮬 색상 혼합 페인팅 (물감 혼합 모델), 라이브 배경화면 모드, GIF 저장 |
+| `Reflex.Tap` | Casual / Skill | 반응속도 ms 정밀 측정 4종 테스트 (시각·색상·청각·혼합), 피로도 회귀 그래프, SNS 결과 카드 |
+| `Neon.Wall` | Arcade / VS | Pong 기반 + 공 궤적이 영구 벽으로 남아 경기장 좁아짐 (Tron 혼합), 싱글+로컬 2P |
+| `Spark.Chain` | Strategy / Casual | 제한된 폭죽 배치 → "FIRE!" 연쇄 터뜨려 모든 타겟 격파, 타겟 종류 다양, 레벨 에디터+UGC |
+| `Sym.Draw` | Puzzle / Creative | 4배 거울 대칭 실시간 드로잉 만다라, 목표 실루엣 완성 목표 모드, 대칭 축 설정, 애니메이션 내보내기 |
+| `Tower.Fall` | Strategy / Action | 역 타워디펜스 — 침략자 시점, 유닛 코스트 배치로 자동 방어선 돌파, 연막·해커 특수 유닛 |
+| `Loop.Race` | Racing / Arcade | 프로시저럴 자기교차 트랙 + 이전 랩 궤적이 다음 랩 물리 장애물로 누적, 일일 시드 랭킹 |
+
+---
+
 ## 5. 유사 개념 그룹 (중복 주의)
 
 브레인스토밍 시 아래 그룹 내 변형 아이디어는 **이미 제안된 것으로 간주**한다.
@@ -694,5 +732,22 @@
 | **진화형 두더지 잡기** | Mole.Strike (≠ Hook.Cast: 낚시 캐주얼, ≠ Dish.Rush: 쿠킹 관리 — 반응속도 분석·폭탄/황금 두더지) |
 | **픽셀아트 15퍼즐 (A* 시각화)** | Slide.Rush (≠ Ice.Slide: 얼음 물리, ≠ Neon.Push: 소코반+레이저 — A* 솔버 가르치는 모드 포함) |
 | **주사위 빌딩 로그라이크** | Dungeon.Dice (≠ Neon.Card: 카드 덱빌딩, ≠ Beat.Rogue: 리듬 크롤러 — 6면 주사위 면 조각 시너지) |
+| **FFT 파도 균형 서핑 게임** | Wave.Surf (≠ Hook.Cast: 낚시 캐주얼, ≠ Nitro.Drift: 레이싱 — COM 균형+묘기 콤보 독자 메커닉) |
+| **로컬 칸반 작업 관리** | Task.Cast (≠ Ink.Cast: 마크다운 노트, ≠ Data.Cast: 관계형 DB, ≠ Quick.Memo: 단순 메모) |
+| **PE 바이너리 리소스 탐색기** | Bin.View (≠ Zip.Peek: 아카이브, ≠ Hex.Peek: 헥스 뷰어 — PE 내부 아이콘·매니페스트·문자열 특화) |
+| **볼륨 페이드 수면 타이머** | Fade.Out (≠ Toast.Cast: 건강 루틴 알림, ≠ Sound.Cast: 출력 전환, ≠ Volume.Cast: 앱별 볼륨) |
+| **전체 페이지 웹 스크린샷** | Web.Shot (≠ Screen.Recorder: 비디오, ≠ Screen.Stitch: SIFT 이어붙이기, ≠ Code.Snap: 코드 이미지) |
+| **앱 OS 권한 감사·관리** | Perm.Audit (≠ Spy.Guard: 실시간 무단 접근 감지, ≠ App.Cage: 네트워크 방화벽 — 권한 DB 뷰 특화) |
+| **이미지 EXIF 메타데이터 편집** | Img.Meta (≠ Photo.Video.Organizer: 날짜 정리, ≠ Img.Forge: 픽셀 처리, ≠ Geo.Tag: GPS 태깅 특화) |
+| **드래그&드롭 파일 암호화 금고** | Crypt.Drop (≠ Pass.Vault: 비밀번호 관리, ≠ Secret.Box: .env 파일, ≠ Daily.Log: 일기장) |
+| **GPX 매칭 EXIF GPS 태거** | Geo.Tag (≠ Photo.Video.Organizer: 날짜 정리, ≠ Img.Meta: 다목적 메타 편집 — GPX 자동 매칭 특화) |
+| **위상 매듭 풀기 퍼즐** | Knot.Craft (≠ Rope.Swing: 로프 물리 아케이드, ≠ Cloth.Cut: 천 물리 절단, ≠ Spring.Web: 거미줄) |
+| **유체역학 색상 혼합 페인팅** | Fluid.Paint (≠ Sand.Fall: 셀룰러 오토마타, ≠ Fluid.Rush: 파이프·밸브 퍼즐 — 연속체 유체+예술 창작) |
+| **반응속도 과학 측정 게임** | Reflex.Tap (≠ Mole.Strike: 스코어 기반 두더지, ≠ Color.Blitz: 스트룹 인지 — 순수 ms 측정 도구) |
+| **Pong+궤적 영구 벽 대전** | Neon.Wall (≠ Brick.Blitz: 벽돌 깨기, ≠ Bounce.House: 탄성 슈터, ≠ Echo.Grid: 타일 페인팅) |
+| **폭죽 연쇄 전략 배치 게임** | Spark.Chain (≠ Domino.Chain: 물리 충격량, ≠ Chain.Blast: 색상 구슬, ≠ Volt.Chain: 전류 회로) |
+| **4배 대칭 드로잉 만다라** | Sym.Draw (≠ Pixel.Cross: 노노그램, ≠ Pixel.Forge: 레이어 픽셀아트, ≠ Fluid.Paint: 자유 유체 페인팅) |
+| **역 타워디펜스 침략자 시점** | Tower.Fall (≠ Tower.Guard: 방어 배치 전략, ≠ Dungeon.Dash: 실시간 액션, ≠ Hex.Storm: 헥사 RTS) |
+| **자기교차 트랙 궤적 장애물 레이싱** | Loop.Race (≠ Nitro.Drift: 드리프트, ≠ Shadow.Run: 고스트 레이스 — 궤적이 능동적 장애물) |
 | **픽셀 1:1 영역 전쟁 전략** | Pixel.War (≠ Cell.War: 세포 분열, ≠ Ink.Spread: BFS 차단, ≠ Hex.Storm: 헥사 RTS — 1픽셀씩 교대) |
 | **FFT 파도 물리 서핑 게임** | Wave.Surf (≠ Hook.Cast: 낚시, ≠ Nitro.Drift: 레이싱 — 무게중심 균형·묘기·GIF 자동 저장) |

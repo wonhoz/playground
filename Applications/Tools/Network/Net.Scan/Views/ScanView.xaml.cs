@@ -15,7 +15,19 @@ public partial class ScanView : UserControl
         LvDevices.ItemsSource = _devices;
         LoadAdapters();
         WireEvents();
-        Loaded += (_, _) => _monitor = new PingMonitor(_devices);
+        Loaded += (_, _) =>
+        {
+            _monitor = new PingMonitor(_devices);
+            // IsLoaded 가드로 건너뛴 초기 어댑터 선택 상태 적용
+            if (CbAdapter.SelectedItem is NetworkService.AdapterInfo info)
+            {
+                TxtSubnet.Text       = info.Subnet;
+                TxtRange.Text        = info.Subnet;
+                TxtSubnet.Visibility = Visibility.Visible;
+                TxtRange.Visibility  = Visibility.Collapsed;
+                UpdateSummary();
+            }
+        };
     }
 
     private void LoadAdapters()

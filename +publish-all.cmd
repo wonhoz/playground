@@ -29,11 +29,11 @@ echo.
 
 :: ── Applications / AI ─────────────────────────────────────────────
 call :pub "AI.Clip"               "Applications\AI\AI.Clip"                                "Ai.Clip.exe"               "Applications\AI"
-call :pub "Prompt.Forge"          "Applications\AI\Prompt.Forge"                           "Prompt.Forge.exe"          "Applications\AI"
+call :pub "Prompt.Forge"          "Applications\AI\Prompt.Forge"                           "Prompt.Forge.exe"          "Applications\AI\Prompt.Forge"
 
 :: ── Applications / Audio ──────────────────────────────────────────
 call :pub "Music.Player"          "Applications\Audio\Music.Player"                        "Music.Player.exe"          "Applications\Audio"
-call :pub "Tag.Forge"             "Applications\Audio\Tag.Forge"                           "Tag.Forge.exe"             "Applications\Audio"
+call :pub "Tag.Forge"             "Applications\Audio\Tag.Forge"                           "Tag.Forge.exe"             "Applications\Audio\Tag.Forge"
 
 :: ── Applications / Automation ─────────────────────────────────────
 call :pub "Stay.Awake"            "Applications\Automation\Stay.Awake"                     "Stay.Awake.exe"            "Applications\Automation\Stay.Awake"
@@ -77,7 +77,7 @@ call :pub "Serve.Cast"            "Applications\Network\Serve.Cast"             
 call :pub "Color.Grade"           "Applications\Photo.Picture\Color.Grade"                 "Color.Grade.exe"           "Applications\Photo.Picture\Color.Grade"
 call :pub "Mosaic.Forge"          "Applications\Photo.Picture\Mosaic.Forge"                "Mosaic.Forge.exe"          "Applications\Photo.Picture\Mosaic.Forge"
 call :pub "Photo.Video.Organizer" "Applications\Photo.Picture\Photo.Video.Organizer"       "Photo.Video.Organizer.exe" "Applications\Photo.Picture"
-call :pub "Web.Shot"              "Applications\Photo.Picture\Web.Shot"                    "Web.Shot.exe"              "Applications\Photo.Picture"
+call :pub "Web.Shot"              "Applications\Photo.Picture\Web.Shot"                    "Web.Shot.exe"              "Applications\Photo.Picture\Web.Shot"
 
 :: ── Applications / System ─────────────────────────────────────────
 call :pub "Boot.Map"              "Applications\System\Boot.Map"                           "Boot.Map.exe"              "Applications\System"

@@ -11,6 +11,8 @@ public class DriveItem
     public string TotalText   => FormatSize(TotalBytes);
     public string DisplayName => $"{Letter}  {Label}  [{MediaType}  {TotalText}]";
 
+    public override string ToString() => DisplayName;
+
     private static string FormatSize(long b) => b switch
     {
         >= 1099511627776L => $"{b / 1099511627776.0:F1} TB",

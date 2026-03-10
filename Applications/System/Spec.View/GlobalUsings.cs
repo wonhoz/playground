@@ -1,0 +1,11 @@
+global using System.Collections.ObjectModel;
+global using System.IO;
+global using System.Management;
+global using System.Runtime.InteropServices;
+global using System.Text;
+global using System.Text.Json;
+global using System.Text.Json.Serialization;
+global using System.Windows;
+global using System.Windows.Threading;
+global using SpecView.Models;
+global using SpecView.Services;

@@ -1,0 +1,224 @@
+<Window x:Class="WinEvent.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Win.Event"
+        Width="1200" Height="780"
+        MinWidth="800" MinHeight="500"
+        Background="#0D0D16"
+        Foreground="#D0D0E0"
+        FontFamily="Segoe UI"
+        FontSize="12"
+        Loaded="Window_Loaded">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>   <!-- 툴바 1: 소스·버튼 -->
+            <RowDefinition Height="Auto"/>   <!-- 툴바 2: 검색·필터 -->
+            <RowDefinition Height="*"/>      <!-- 이벤트 목록 -->
+            <RowDefinition Height="4"/>      <!-- GridSplitter -->
+            <RowDefinition Height="180" MinHeight="80"/>   <!-- 상세 패널 -->
+            <RowDefinition Height="24"/>     <!-- 상태바 -->
+        </Grid.RowDefinitions>
+
+        <!-- ══ 툴바 1: 소스 선택 · 동작 버튼 ════════════════════════════════ -->
+        <Border Grid.Row="0" Background="#131320"
+                BorderBrush="#2A2A3A" BorderThickness="0,0,0,1"
+                Padding="8,6">
+            <DockPanel>
+                <!-- 왼쪽: 소스 선택 영역 -->
+                <StackPanel DockPanel.Dock="Left" Orientation="Horizontal">
+                    <TextBlock Text="로그 소스:" VerticalAlignment="Center"
+                               Foreground="#888898" Margin="0,0,6,0"/>
+                    <ComboBox x:Name="CmbSource" Width="160" Margin="0,0,6,0"
+                              SelectionChanged="CmbSource_SelectionChanged">
+                        <ComboBoxItem Content="Application" IsSelected="True"/>
+                        <ComboBoxItem Content="System"/>
+                        <ComboBoxItem Content="Security"/>
+                        <ComboBoxItem Content="Setup"/>
+                        <ComboBoxItem Content="─ 파일 열기 ─" IsEnabled="False"/>
+                    </ComboBox>
+                    <Button x:Name="BtnOpenFile" Content="📂 EVTX 파일"
+                            Style="{StaticResource SecondaryBtn}"
+                            Click="BtnOpenFile_Click" Margin="0,0,6,0"/>
+                    <Button x:Name="BtnRefresh" Content="↻ 새로고침"
+                            Style="{StaticResource SecondaryBtn}"
+                            Click="BtnRefresh_Click" Margin="0,0,6,0"/>
+                    <Button x:Name="BtnLive" Content="● 실시간"
+                            Style="{StaticResource SecondaryBtn}"
+                            Click="BtnLive_Click" Margin="0,0,12,0"/>
+                </StackPanel>
+
+                <!-- 오른쪽: 내보내기·알림 규칙 -->
+                <StackPanel DockPanel.Dock="Right" Orientation="Horizontal"
+                            HorizontalAlignment="Right">
+                    <Button x:Name="BtnExport" Content="↓ 내보내기"
+                            Style="{StaticResource SecondaryBtn}"
+                            Click="BtnExport_Click" Margin="0,0,6,0"/>
+                    <Button x:Name="BtnAlertRules" Content="🔔 알림 규칙"
+                            Style="{StaticResource SecondaryBtn}"
+                            Click="BtnAlertRules_Click"/>
+                </StackPanel>
+
+                <!-- 중앙: 최대 로드 수 -->
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock Text="최대:" VerticalAlignment="Center"
+                               Foreground="#888898" Margin="0,0,4,0"/>
+                    <ComboBox x:Name="CmbMaxCount" Width="80"
+                              SelectionChanged="CmbMaxCount_SelectionChanged">
+                        <ComboBoxItem Content="500"/>
+                        <ComboBoxItem Content="1,000" IsSelected="True"/>
+                        <ComboBoxItem Content="2,000"/>
+                        <ComboBoxItem Content="5,000"/>
+                    </ComboBox>
+                </StackPanel>
+            </DockPanel>
+        </Border>
+
+        <!-- ══ 툴바 2: 검색·레벨 필터 ══════════════════════════════════════ -->
+        <Border Grid.Row="1" Background="#0F0F1C"
+                BorderBrush="#2A2A3A" BorderThickness="0,0,0,1"
+                Padding="8,5">
+            <DockPanel>
+                <!-- 검색 -->
+                <StackPanel DockPanel.Dock="Left" Orientation="Horizontal">
+                    <TextBlock Text="🔍" VerticalAlignment="Center" Margin="0,0,4,0" FontSize="13"/>
+                    <TextBox x:Name="TxtSearch" Width="280"
+                             TextChanged="TxtSearch_TextChanged"
+                             VerticalAlignment="Center"/>
+                    <TextBlock Text="EventID:" VerticalAlignment="Center"
+                               Foreground="#888898" Margin="10,0,4,0"/>
+                    <TextBox x:Name="TxtEventId" Width="70"
+                             TextChanged="TxtSearch_TextChanged"
+                             VerticalAlignment="Center"/>
+                    <TextBlock Text="소스:" VerticalAlignment="Center"
+                               Foreground="#888898" Margin="10,0,4,0"/>
+                    <TextBox x:Name="TxtSource" Width="140"
+                             TextChanged="TxtSearch_TextChanged"
+                             VerticalAlignment="Center"/>
+                </StackPanel>
+
+                <!-- 레벨 필터 체크박스 -->
+                <StackPanel DockPanel.Dock="Right" Orientation="Horizontal"
+                            HorizontalAlignment="Right" VerticalAlignment="Center">
+                    <TextBlock Text="레벨:" VerticalAlignment="Center"
+                               Foreground="#888898" Margin="0,0,8,0"/>
+                    <CheckBox x:Name="ChkCritical" Content="위험" IsChecked="True"
+                              Foreground="#FF3232" Margin="0,0,8,0"
+                              Checked="Filter_Changed" Unchecked="Filter_Changed"/>
+                    <CheckBox x:Name="ChkError" Content="오류" IsChecked="True"
+                              Foreground="#FF6040" Margin="0,0,8,0"
+                              Checked="Filter_Changed" Unchecked="Filter_Changed"/>
+                    <CheckBox x:Name="ChkWarning" Content="경고" IsChecked="True"
+                              Foreground="#FFB800" Margin="0,0,8,0"
+                              Checked="Filter_Changed" Unchecked="Filter_Changed"/>
+                    <CheckBox x:Name="ChkInfo" Content="정보" IsChecked="True"
+                              Foreground="#80C0FF" Margin="0,0,8,0"
+                              Checked="Filter_Changed" Unchecked="Filter_Changed"/>
+                    <CheckBox x:Name="ChkVerbose" Content="Verbose" IsChecked="False"
+                              Foreground="#707090"
+                              Checked="Filter_Changed" Unchecked="Filter_Changed"/>
+                </StackPanel>
+            </DockPanel>
+        </Border>
+
+        <!-- ══ 이벤트 목록 ════════════════════════════════════════════════ -->
+        <ListView x:Name="LvEvents" Grid.Row="2"
+                  VirtualizingPanel.IsVirtualizing="True"
+                  VirtualizingPanel.VirtualizationMode="Recycling"
+                  ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                  SelectionChanged="LvEvents_SelectionChanged"
+                  MouseDoubleClick="LvEvents_MouseDoubleClick">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="시간" Width="150"
+                                    DisplayMemberBinding="{Binding TimeDisplay}"/>
+                    <GridViewColumn Header="레벨" Width="62">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding LevelTag}"
+                                           Foreground="{Binding LevelColor}"
+                                           FontWeight="SemiBold"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="EventID" Width="72"
+                                    DisplayMemberBinding="{Binding EventId}"/>
+                    <GridViewColumn Header="소스" Width="200"
+                                    DisplayMemberBinding="{Binding ProviderName}"/>
+                    <GridViewColumn Header="메시지" Width="600"
+                                    DisplayMemberBinding="{Binding MessageShort}"/>
+                </GridView>
+            </ListView.View>
+            <ListView.ContextMenu>
+                <ContextMenu Background="#1A1A28" BorderBrush="#2A2A3A">
+                    <MenuItem Header="메시지 전체 복사" Click="MenuCopyMessage_Click"
+                              Foreground="#D0D0E0" Background="#1A1A28"/>
+                    <MenuItem Header="행 전체 복사 (탭 구분)" Click="MenuCopyRow_Click"
+                              Foreground="#D0D0E0" Background="#1A1A28"/>
+                    <Separator Background="#2A2A3A"/>
+                    <MenuItem Header="이 EventID로 필터" Click="MenuFilterById_Click"
+                              Foreground="#D0D0E0" Background="#1A1A28"/>
+                    <MenuItem Header="이 소스로 필터" Click="MenuFilterBySource_Click"
+                              Foreground="#D0D0E0" Background="#1A1A28"/>
+                </ContextMenu>
+            </ListView.ContextMenu>
+        </ListView>
+
+        <!-- ══ GridSplitter ════════════════════════════════════════════════ -->
+        <GridSplitter Grid.Row="3"
+                      Height="4" HorizontalAlignment="Stretch"
+                      Background="#2A2A3A" Cursor="SizeNS"/>
+
+        <!-- ══ 상세 패널 ════════════════════════════════════════════════════ -->
+        <Grid Grid.Row="4" Background="#0B0B14">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBox x:Name="TxtDetail"
+                     Grid.Column="0"
+                     IsReadOnly="True"
+                     TextWrapping="Wrap"
+                     Background="#0B0B14"
+                     Foreground="#C8C8DC"
+                     FontFamily="Consolas"
+                     FontSize="12"
+                     BorderThickness="0"
+                     Padding="10,8"
+                     VerticalScrollBarVisibility="Auto"
+                     HorizontalScrollBarVisibility="Disabled"
+                     AcceptsReturn="True"/>
+
+            <StackPanel Grid.Column="1"
+                        Orientation="Vertical"
+                        Margin="6,8,8,8" Width="110">
+                <Button Content="📋 복사"
+                        Style="{StaticResource SecondaryBtn}"
+                        Click="BtnCopyDetail_Click"
+                        Margin="0,0,0,6"/>
+                <Button Content="📤 CSV"
+                        Style="{StaticResource SecondaryBtn}"
+                        Click="BtnExportCsv_Click"
+                        Margin="0,0,0,6"/>
+                <Button Content="📤 JSON"
+                        Style="{StaticResource SecondaryBtn}"
+                        Click="BtnExportJson_Click"/>
+            </StackPanel>
+        </Grid>
+
+        <!-- ══ 상태바 ══════════════════════════════════════════════════════ -->
+        <Border Grid.Row="5" Background="#0A0A12"
+                BorderBrush="#2A2A3A" BorderThickness="0,1,0,0"
+                Padding="10,3">
+            <DockPanel>
+                <TextBlock x:Name="TxtStatus" DockPanel.Dock="Left"
+                           VerticalAlignment="Center"
+                           Foreground="#606878" FontSize="11"/>
+                <TextBlock x:Name="TxtLiveStatus" DockPanel.Dock="Right"
+                           HorizontalAlignment="Right" VerticalAlignment="Center"
+                           Foreground="#606878" FontSize="11"/>
+            </DockPanel>
+        </Border>
+    </Grid>
+</Window>

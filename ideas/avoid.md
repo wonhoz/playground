@@ -2,7 +2,7 @@
 
 > 이 파일은 브레인스토밍 시 **이미 제안되거나 구현된 아이디어를 다시 꺼내지 않도록** 하는 필터다.
 > 새 아이디어를 제안하기 전 반드시 이 목록을 확인할 것.
-> 마지막 갱신: 2026-03-10 (9차)
+> 마지막 갱신: 2026-03-10 (10차)
 
 ---
 
@@ -521,7 +521,41 @@
 
 ---
 
-### Apps (신규 — idea_20260310_9차)
+### Apps / Games (신규 — idea_20260310_10차)
+
+| 이름 | 핵심 기능 | 출처 |
+|------|----------|------|
+| `Find.Fast` | NTFS MFT 즉시 파일명 검색 + 멀티스레드 내용 grep 통합 GUI (Everything+ripgrep 대체, 미리보기 패널, 전역 팝업) | idea_20260310_10차 |
+| `Unit.Forge` | 완전 오프라인 단위 변환기 (길이/무게/온도/데이터/압력/요리 등 12카테고리, 공식 표시, 선택적 환율 API, 전역 팝업) | idea_20260310_10차 |
+| `Win.Event` | Windows EVT/EVTX 이벤트 로그 경량 뷰어 (실시간 스트리밍, 정규식 필터, Toast 알림 규칙, CSV/JSON 내보내기) | idea_20260310_10차 |
+| `Spec.View` | PC 하드웨어 스펙 스캐너·내보내기 (CPU/RAM/GPU/스토리지/네트워크, S.M.A.R.T, Markdown/HTML/PDF 리포트) | idea_20260310_10차 |
+| `Drive.Bench` | 디스크 벤치마크 (순차/랜덤 R/W, IOPS, 히스토리 차트, 드라이브 간 비교, S.M.A.R.T 탭 내장) | idea_20260310_10차 |
+| `Snip.Vault` | 코드 스니펫 관리자 (구문 강조, 변수 플레이스홀더, 태그 검색, 전역 팝업 삽입, JSON 단일 파일 저장) | idea_20260310_10차 |
+| `Ext.Boss` | 파일 형식 연결 관리자 (전체 확장자→기본앱 시각화, 프로파일 저장/복원, 깨진 연결 감지) | idea_20260310_10차 |
+| `Sleep.Cast` | 스마트 절전/종료 스케줄러 트레이 (시각/유휴/앱 종료/배터리 조건 AND 조합, 카운트다운 취소 알림) | idea_20260310_10차 |
+| `Doc.Weave` | 혼합 포맷 문서 섹션 결합기 (DOCX/PDF/Markdown 섹션 드래그 재조합, TOC 생성, DOCX/PDF 내보내기) | idea_20260310_10차 |
+| `Net.Ghost` | MAC 주소 스푸퍼·관리자 트레이 (OUI 기반 랜덤화, 제조사 위장, SSID별 프로파일 자동 전환, 원본 복원) | idea_20260310_10차 |
+
+---
+
+### 게임 — 제안된 미구현 아이디어 (idea_20260310_10차)
+
+| 이름 | 장르 | 핵심 메커닉 |
+|------|------|------------|
+| `Gravity.Well` | Puzzle / Simulation / Zen | 클릭으로 중력 우물·척력 노드 배치 → 파티클 스트림 휘어 타겟 수집, 다중 우물 상호작용, 샌드박스 파티클 아트 모드 |
+| `Spin.Gate` | Puzzle / Casual / Meditative | 낙하 공 → 클릭 시 90° 회전 게이트가 방향 전환, 연동 게이트, 다색 공 분류, 횟수 제한 효율 퍼즐 |
+| `Echo.Hunt` | Puzzle / Memory / Atmospheric | 완전 암흑, 소나 핑(클릭) → 1.5초 지형 실루엣 출현, 핑 횟수 제한, 기억에 의존 이동, 적 AI 소음 반응 |
+| `Burst.Canvas` | Arcade / Survival / Creative | 적 처치 → 색상 잉크 바닥 번짐, 목표 팔레트 비율 달성+생존 동시 조건, 완성 캔버스 PNG 자동 저장 |
+| `Flux.Drift` | Racing / Arcade / Physics | 차량 N/S 극성 보유, 트랙 극성 구역 인력·척력 활용 레이싱, 극성 즉시 반전(쿨타임), 자기 폭풍 아이템 |
+| `Fold.Grid` | Puzzle / Logic / Spatial | N×M 격자 오리가미 접기 퍼즐, 접기 순서에 따라 색상 겹침 패턴 변화, 목표 도안 일치, 자유 창작 모드 |
+| `Trap.Rush` | Strategy / Action / Reverse TD | 역방어 함정 배치 — 고정 경로 적에게 지뢰·끈끈이·낙하 함정 실시간 배치, 연쇄 폭발 콤보, 코스트 경제 |
+| `Warp.Ball` | Puzzle / Physics / Arcade | 화면 경계=토러스 위상 공간(반대편 재출현), 포탈 쌍 배치로 구슬 타겟 유도, 방향·속도 보존 포탈 물리 |
+| `Signal.Cast` | Memory / Puzzle / Brain | 시각+청각 신호 시퀀스 재생 후 키보드 재현, 4종 신호(단/장/강/약), 노이즈 간섭, 멀티채널 동시 신호 |
+| `Pulse.Grid` | Puzzle / Music / Logic | N×M 격자 에미터 배치 → 박자 기반 펄스 전파·충돌로 노트 발음, 목표 멜로디 완성 퍼즐, 자유 창작 모드 |
+
+---
+
+### Apps (신규 — idea_20260309_8차)
 
 | 이름 | 핵심 기능 | 출처 |
 |------|----------|------|
@@ -596,6 +630,26 @@
 | **썸네일 / 소셜 이미지 제작** | Thumb.Forge |
 | **유니코드 / 특수문자 탐색** | Glyph.Map |
 | **타이핑 속도 / WPM 연습** | Type.Rocket |
+| **파일 내용 검색 GUI** | Find.Fast (파일명+내용 통합) |
+| **단위 변환기** | Unit.Forge |
+| **Windows 이벤트 로그 뷰어** | Win.Event (EVT/EVTX 전용, Log.Lens는 텍스트 파일) |
+| **하드웨어 스펙 조회** | Spec.View |
+| **디스크 벤치마크** | Drive.Bench |
+| **코드 스니펫 관리** | Snip.Vault (≠ Alias.Forge 쉘 별칭, ≠ Prompt.Forge AI 프롬프트) |
+| **파일 형식 연결 관리** | Ext.Boss |
+| **절전/종료 스케줄러** | Sleep.Cast (Stay.Awake와 반대 개념) |
+| **문서 섹션 결합** | Doc.Weave (≠ PDF.Forge 단순 PDF 병합, ≠ Form.Blast 템플릿 변수 채우기) |
+| **MAC 주소 스푸퍼** | Net.Ghost (≠ WiFi.Vault 비밀번호 조회) |
+| **중력 우물 파티클 퍼즐** | Gravity.Well (≠ Orbit.Craft 궤도 역학, ≠ Vortex.Pull 단일 소용돌이) |
+| **회전 게이트 낙하 퍼즐** | Spin.Gate |
+| **소나 어둠 탐색** | Echo.Hunt (≠ Maze.Dread 시야 반경 제한) |
+| **액션 페인팅 생존** | Burst.Canvas |
+| **자기 극성 레이싱** | Flux.Drift (≠ Nitro.Drift 일반 레이싱) |
+| **오리가미 폴딩 퍼즐** | Fold.Grid |
+| **함정 배치 역방어** | Trap.Rush (≠ Tower.Guard 타워 방어, ≠ Tower.Fall 침략자 시점) |
+| **토러스 포탈 구슬 퍼즐** | Warp.Ball (≠ Echo.Grid 반사 채우기, ≠ Orbit.Craft) |
+| **신호 패턴 해독 재현** | Signal.Cast (≠ Rune.Match 시각 심볼 기억) |
+| **펄스 충돌 음악 퍼즐** | Pulse.Grid (≠ Sound.Grid 자유 시퀀서 창작) |
 | **WOL / 원격 PC 기동** | Wake.Cast |
 | **타이핑 Shooter 게임** | Glyph.Rush |
 | **좌우 대칭 조작 게임** | Mirror.Run |

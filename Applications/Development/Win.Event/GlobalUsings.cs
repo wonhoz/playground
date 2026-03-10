@@ -1,0 +1,13 @@
+global using System.Collections.ObjectModel;
+global using System.Diagnostics.Eventing.Reader;
+global using System.IO;
+global using System.Runtime.InteropServices;
+global using System.Text.Json;
+global using System.Text.RegularExpressions;
+global using System.Windows;
+global using System.Windows.Controls;
+global using System.Windows.Input;
+global using System.Windows.Interop;
+global using System.Windows.Media;
+global using WinEvent.Models;
+global using WinEvent.Services;

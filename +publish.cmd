@@ -92,6 +92,7 @@ echo !CY!  66!RS! Wave.Surf             !DG!Games/Casual!RS!
 echo !CY!  67!RS! Web.Shot              !DG!Applications/Photo.Picture!RS!
 echo !CY!  68!RS! Word.Cloud            !DG!Applications/Text!RS!
 echo !CY!  69!RS! Zip.Peek              !DG!Files/Inspector!RS!
+echo !CY!  70!RS! Win.Event             !DG!Applications/Development!RS!
 echo.
 echo !DG!--------------------------------------------------!RS!
 echo !DG!  번호 입력 (공백/쉼표로 구분)   예: 1 3 5  또는  1,3,5!RS!
@@ -189,6 +190,7 @@ for %%n in (!SEL!) do (
     if "%%n"=="67" call :pub "Web.Shot"               "Applications\Photo.Picture\Web.Shot"                    "Web.Shot.exe"              "Applications\Photo.Picture\Web.Shot"
     if "%%n"=="68" call :pub "Word.Cloud"             "Applications\Text\Word.Cloud"                           "Word.Cloud.exe"            "Applications\Text"
     if "%%n"=="69" call :pub "Zip.Peek"               "Applications\Files\Inspector\Zip.Peek"                  "Zip.Peek.exe"              "Applications\Files\Inspector\Zip.Peek"
+    if "%%n"=="70" call :pub "Win.Event"              "Applications\Development\Win.Event"                     "WinEvent.exe"              "Applications\Development"
 )
 goto :DONE
 
@@ -274,6 +276,7 @@ call :pub "Wave.Surf"             "Games\Casual\Wave.Surf"                      
 call :pub "Web.Shot"              "Applications\Photo.Picture\Web.Shot"                    "Web.Shot.exe"              "Applications\Photo.Picture\Web.Shot"
 call :pub "Word.Cloud"            "Applications\Text\Word.Cloud"                           "Word.Cloud.exe"            "Applications\Text"
 call :pub "Zip.Peek"              "Applications\Files\Inspector\Zip.Peek"                  "Zip.Peek.exe"              "Applications\Files\Inspector\Zip.Peek"
+call :pub "Win.Event"             "Applications\Development\Win.Event"                     "WinEvent.exe"              "Applications\Development"
 
 :: ── 완료 ──────────────────────────────────────────────────────────
 :DONE

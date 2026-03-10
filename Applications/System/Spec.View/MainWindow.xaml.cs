@@ -309,6 +309,7 @@ public partial class MainWindow : Window
 
         for (int i = 0; i < items.Count; i++)
         {
+            int dataRow = i * 2;  // 데이터 행: 0, 2, 4, ...
             grid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
 
             var (label, value) = items[i];
@@ -321,7 +322,7 @@ public partial class MainWindow : Window
                 Padding    = new Thickness(0, 6, 8, 6),
                 VerticalAlignment = VerticalAlignment.Top
             };
-            Grid.SetRow(labelTb, i); Grid.SetColumn(labelTb, 0);
+            Grid.SetRow(labelTb, dataRow); Grid.SetColumn(labelTb, 0);
 
             var valueTb = new TextBlock
             {
@@ -331,7 +332,7 @@ public partial class MainWindow : Window
                 Padding     = new Thickness(0, 6, 0, 6),
                 TextWrapping = TextWrapping.Wrap
             };
-            Grid.SetRow(valueTb, i); Grid.SetColumn(valueTb, 1);
+            Grid.SetRow(valueTb, dataRow); Grid.SetColumn(valueTb, 1);
 
             grid.Children.Add(labelTb);
             grid.Children.Add(valueTb);
@@ -344,8 +345,10 @@ public partial class MainWindow : Window
                     Background = new SolidColorBrush(Color.FromRgb(0x1A, 0x20, 0x35)),
                     Height     = 1
                 };
-                Grid.SetRow(sep, i * 2 + 1 - (items.Count - 1 - i)); // 단순 인덱스 계산 생략, 아래 방식 사용
-                // 실제로는 row i * 2 + 1에 넣어야 함 - 간단히 재구성
+                Grid.SetRow(sep, dataRow + 1);  // 구분선 행: 1, 3, 5, ...
+                Grid.SetColumn(sep, 0);
+                Grid.SetColumnSpan(sep, 2);
+                grid.Children.Add(sep);
             }
         }
     }

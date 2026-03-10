@@ -6,6 +6,7 @@
         Background="#0B0F1A" Foreground="#E2E8F0"
         FontFamily="Segoe UI" FontSize="13"
         WindowStyle="None" AllowsTransparency="True"
+        Icon="pack://application:,,,/Resources/app.ico"
         WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <!-- 섹션 카드 스타일 -->
@@ -70,10 +71,12 @@
                                 VerticalAlignment="Center">
                         <Button x:Name="MinBtn" Content="─" Width="32" Height="28"
                                 Click="MinBtn_Click" FontSize="11" Margin="0,0,4,0"
-                                Background="Transparent" BorderThickness="0" Foreground="#64748B"/>
+                                Background="Transparent" BorderThickness="0" Foreground="#64748B"
+                                Padding="0"/>
                         <Button x:Name="CloseBtn" Content="✕" Width="32" Height="28"
                                 Click="CloseBtn_Click" FontSize="11"
-                                Background="Transparent" BorderThickness="0" Foreground="#64748B"/>
+                                Background="Transparent" BorderThickness="0" Foreground="#64748B"
+                                Padding="0"/>
                     </StackPanel>
                 </Grid>
             </Border>
@@ -92,7 +95,7 @@
                                 Click="ExportMarkdown_Click"/>
                         <Button Content="🌐 HTML" Width="90" Height="32" Margin="0,0,6,0"
                                 Click="ExportHtml_Click"/>
-                        <Button Content="📄 텍스트 복사" Width="105" Height="32" Margin="0,0,6,0"
+                        <Button Content="📄 텍스트 복사" Width="120" Height="32" Margin="0,0,6,0"
                                 Click="CopyText_Click"/>
                         <Button Content="🖨 인쇄/PDF" Width="100" Height="32"
                                 Click="Print_Click"/>

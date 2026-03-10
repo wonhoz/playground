@@ -3,7 +3,7 @@ using System.Windows.Interop;
 
 namespace QuickCalc;
 
-public partial class App : Application
+public partial class App : System.Windows.Application
 {
     [DllImport("dwmapi.dll")]
     private static extern int DwmSetWindowAttribute(IntPtr hwnd, int attr, ref int attrValue, int attrSize);
@@ -17,7 +17,8 @@ public partial class App : Application
 
         DispatcherUnhandledException += (_, ex) =>
         {
-            MessageBox.Show(ex.Exception.Message, "오류", MessageBoxButton.OK, MessageBoxImage.Error);
+            System.Windows.MessageBox.Show(ex.Exception.Message, "오류",
+                System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
             ex.Handled = true;
         };
     }

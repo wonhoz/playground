@@ -1,13 +1,17 @@
-<Window x:Class="Layout.Forge.MainWindow"
+﻿<Window x:Class="Layout.Forge.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Layout.Forge — 키보드 리매핑"
         Width="1000" Height="540"
         MinWidth="860" MinHeight="480"
         Background="#13131F" Foreground="#E0E0E0"
-        FontFamily="Segoe UI" FontSize="12">
+        FontFamily="Segoe UI" FontSize="12"
+        WindowStartupLocation="CenterScreen"
+>
 
-    <Window.Resources>
+    <Window.Resources
+        WindowStartupLocation="CenterScreen"
+>
         <BooleanToVisibilityConverter x:Key="BoolVis"/>
 
         <Style x:Key="TbBtn" TargetType="Button">

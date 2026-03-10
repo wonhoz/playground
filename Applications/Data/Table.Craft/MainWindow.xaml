@@ -1,4 +1,4 @@
-<Window x:Class="TableCraft.MainWindow"
+﻿<Window x:Class="TableCraft.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Table.Craft"
@@ -7,9 +7,13 @@
         Background="#1E1E2E"
         Foreground="#CDD6F4"
         AllowDrop="True"
-        Loaded="Window_Loaded">
+        Loaded="Window_Loaded"
+        WindowStartupLocation="CenterScreen"
+>
 
-    <Window.Resources>
+    <Window.Resources
+        WindowStartupLocation="CenterScreen"
+>
         <!-- 헤더 정렬 버튼 (투명 플랫) -->
         <Style x:Key="FlatHeaderBtn" TargetType="Button">
             <Setter Property="Background" Value="Transparent"/>

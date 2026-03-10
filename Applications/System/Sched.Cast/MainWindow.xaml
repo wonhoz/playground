@@ -1,4 +1,4 @@
-<Window x:Class="Sched.Cast.MainWindow"
+﻿<Window x:Class="Sched.Cast.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="clr-namespace:Sched.Cast.ViewModels"
@@ -6,9 +6,13 @@
         Width="900" Height="560"
         MinWidth="700" MinHeight="420"
         Background="#13131F" Foreground="#E0E0E0"
-        FontFamily="Segoe UI" FontSize="12">
+        FontFamily="Segoe UI" FontSize="12"
+        WindowStartupLocation="CenterScreen"
+>
 
-    <Window.Resources>
+    <Window.Resources
+        WindowStartupLocation="CenterScreen"
+>
         <BooleanToVisibilityConverter x:Key="BoolVis"/>
 
         <Style x:Key="TbBtn" TargetType="Button">

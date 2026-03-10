@@ -1,4 +1,4 @@
-<Window x:Class="CharArt.MainWindow"
+﻿<Window x:Class="CharArt.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Char.Art" Height="620" Width="1000" MinHeight="500" MinWidth="780"
@@ -6,9 +6,13 @@
         Foreground="{StaticResource TextBrush}"
         AllowDrop="True"
         Drop="Window_Drop"
-        DragOver="Window_DragOver">
+        DragOver="Window_DragOver"
+        WindowStartupLocation="CenterScreen"
+>
 
-    <Window.Resources>
+    <Window.Resources
+        WindowStartupLocation="CenterScreen"
+>
         <Style x:Key="LabelStyle" TargetType="TextBlock">
             <Setter Property="Foreground" Value="{StaticResource SubTextBrush}"/>
             <Setter Property="FontSize" Value="11"/>

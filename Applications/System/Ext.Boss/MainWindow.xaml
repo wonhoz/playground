@@ -1,0 +1,310 @@
+<Window x:Class="ExtBoss.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Ext.Boss"
+        Width="1150" Height="720"
+        MinWidth="900" MinHeight="500"
+        Background="{StaticResource BgBrush}"
+        FontFamily="Segoe UI"
+        WindowStartupLocation="CenterScreen">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="52"/>   <!-- 헤더 -->
+            <RowDefinition Height="Auto"/> <!-- 툴바 -->
+            <RowDefinition Height="*"/>    <!-- DataGrid -->
+            <RowDefinition Height="32"/>   <!-- 상태바 -->
+        </Grid.RowDefinitions>
+
+        <!-- ── 헤더 ──────────────────────────────────── -->
+        <Border Grid.Row="0" Background="#0E1525"
+                BorderBrush="#2A3050" BorderThickness="0,0,0,1">
+            <Grid Margin="16,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- 타이틀 -->
+                <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock Text="🔗" FontSize="20" Margin="0,0,10,0" VerticalAlignment="Center"/>
+                    <TextBlock Text="Ext.Boss" FontSize="18" FontWeight="Bold"
+                               Foreground="#D0DCFF" VerticalAlignment="Center"/>
+                    <TextBlock Text="파일 형식 연결 관리자"
+                               FontSize="12" Foreground="#5060A0"
+                               Margin="12,0,0,0" VerticalAlignment="Center"/>
+                </StackPanel>
+
+                <!-- 검색 -->
+                <Grid Grid.Column="1" Margin="32,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="140"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBox x:Name="TxtSearch" Grid.Column="0"
+                             Height="32" Margin="0,0,8,0"
+                             VerticalContentAlignment="Center"
+                             Text="" TextChanged="TxtSearch_TextChanged">
+                        <TextBox.Style>
+                            <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
+                                <Style.Triggers>
+                                    <Trigger Property="Text" Value="">
+                                        <Setter Property="Background">
+                                            <Setter.Value>
+                                                <VisualBrush Stretch="None" AlignmentX="Left">
+                                                    <VisualBrush.Visual>
+                                                        <TextBlock Text="🔍  확장자 또는 앱 이름 검색..."
+                                                                   Foreground="#3A4A70"
+                                                                   FontSize="12"
+                                                                   Margin="8,0,0,0"
+                                                                   VerticalAlignment="Center"/>
+                                                    </VisualBrush.Visual>
+                                                </VisualBrush>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBox.Style>
+                    </TextBox>
+
+                    <ComboBox x:Name="CmbStatus" Grid.Column="1"
+                              Height="32" Margin="0,0,8,0"
+                              SelectionChanged="CmbStatus_SelectionChanged">
+                        <ComboBoxItem Content="모든 상태" Tag="All" IsSelected="True"/>
+                        <ComboBoxItem Content="✅  연결됨 (OK)"      Tag="OK"/>
+                        <ComboBoxItem Content="❌  깨짐 (Broken)"   Tag="Broken"/>
+                        <ComboBoxItem Content="➖  미설정 (Not Set)" Tag="NotSet"/>
+                    </ComboBox>
+
+                    <CheckBox x:Name="ChkBroken" Grid.Column="2"
+                              Content="깨진 것만"
+                              VerticalAlignment="Center"
+                              Margin="0,0,8,0"
+                              Checked="ChkBroken_Changed"
+                              Unchecked="ChkBroken_Changed"/>
+                </Grid>
+
+                <!-- 우측 버튼 -->
+                <StackPanel Grid.Column="2" Orientation="Horizontal"
+                            VerticalAlignment="Center">
+                    <Button x:Name="BtnRefresh" Content="↺  새로고침"
+                            Width="100" Height="32" Margin="0,0,8,0"
+                            Click="BtnRefresh_Click"/>
+                    <Border x:Name="AdminBadge"
+                            Background="#2A1A1A" BorderBrush="#FF5555"
+                            BorderThickness="1" CornerRadius="4"
+                            Padding="8,4" Visibility="Collapsed"
+                            VerticalAlignment="Center">
+                        <TextBlock Text="⚠ 관리자 권한 없음"
+                                   FontSize="11" Foreground="#FF8080"/>
+                    </Border>
+                    <Border x:Name="AdminOkBadge"
+                            Background="#1A2A1A" BorderBrush="#50E080"
+                            BorderThickness="1" CornerRadius="4"
+                            Padding="8,4" Visibility="Collapsed"
+                            VerticalAlignment="Center">
+                        <TextBlock Text="🛡 관리자"
+                                   FontSize="11" Foreground="#50E080"/>
+                    </Border>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- ── 툴바 ──────────────────────────────────── -->
+        <Border Grid.Row="1" Background="#161B2C"
+                BorderBrush="#2A3050" BorderThickness="0,0,0,1">
+            <StackPanel Orientation="Horizontal" Margin="16,8">
+                <Button x:Name="BtnChangeApp" Content="🔄  앱 변경"
+                        Height="30" Padding="10,5" Margin="0,0,6,0"
+                        Click="BtnChangeApp_Click"
+                        ToolTip="선택한 확장자의 기본 앱 변경 (OpenWith 다이얼로그)"/>
+                <Button x:Name="BtnOpenSettings" Content="⚙  Windows 기본 앱 설정"
+                        Height="30" Padding="10,5" Margin="0,0,6,0"
+                        Click="BtnOpenSettings_Click"
+                        ToolTip="Windows 설정 &gt; 기본 앱 열기"/>
+                <Border Width="1" Background="#2A3050" Margin="4,4"/>
+                <Button x:Name="BtnExport" Content="📤  프로파일 내보내기"
+                        Height="30" Padding="10,5" Margin="6,0,6,0"
+                        Click="BtnExport_Click"
+                        ToolTip="현재 연결 상태를 JSON 파일로 저장"/>
+                <Button x:Name="BtnImport" Content="📥  프로파일 가져오기"
+                        Height="30" Padding="10,5" Margin="0,0,6,0"
+                        Click="BtnImport_Click"
+                        ToolTip="JSON 프로파일에서 연결 복원"/>
+                <Border Width="1" Background="#2A3050" Margin="4,4"/>
+                <Button x:Name="BtnCopyPath" Content="📋  경로 복사"
+                        Height="30" Padding="10,5" Margin="6,0,6,0"
+                        Click="BtnCopyPath_Click"
+                        ToolTip="선택한 앱의 실행 경로 클립보드 복사"/>
+                <Button x:Name="BtnOpenFolder" Content="📂  폴더 열기"
+                        Height="30" Padding="10,5"
+                        Click="BtnOpenFolder_Click"
+                        ToolTip="선택한 앱 위치 탐색기에서 열기"/>
+            </StackPanel>
+        </Border>
+
+        <!-- ── DataGrid ───────────────────────────────── -->
+        <Grid Grid.Row="2">
+            <!-- 로딩 오버레이 -->
+            <Border x:Name="LoadingOverlay"
+                    Background="#CC12131C"
+                    Visibility="Visible"
+                    Panel.ZIndex="10">
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock x:Name="TxtLoading"
+                               Text="⏳  레지스트리 읽는 중..."
+                               FontSize="16" Foreground="#7080C0"
+                               HorizontalAlignment="Center"/>
+                    <TextBlock x:Name="TxtLoadCount"
+                               FontSize="12" Foreground="#4A5A80"
+                               HorizontalAlignment="Center"
+                               Margin="0,8,0,0"/>
+                </StackPanel>
+            </Border>
+
+            <DataGrid x:Name="Grid"
+                      Margin="0"
+                      VirtualizingPanel.IsVirtualizing="True"
+                      VirtualizingPanel.VirtualizationMode="Recycling"
+                      EnableRowVirtualization="True"
+                      MouseDoubleClick="Grid_MouseDoubleClick">
+                <DataGrid.Columns>
+
+                    <!-- 확장자 -->
+                    <DataGridTextColumn Header="확장자"
+                                        Binding="{Binding Extension}"
+                                        Width="85"
+                                        FontWeight="SemiBold">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Foreground" Value="#80CCFF"/>
+                                <Setter Property="FontFamily" Value="Consolas"/>
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+
+                    <!-- ProgID -->
+                    <DataGridTextColumn Header="ProgID"
+                                        Binding="{Binding ProgId}"
+                                        Width="160">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Foreground" Value="#8090B0"/>
+                                <Setter Property="FontFamily" Value="Consolas"/>
+                                <Setter Property="FontSize"   Value="11"/>
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+
+                    <!-- 앱 이름 -->
+                    <DataGridTextColumn Header="기본 앱"
+                                        Binding="{Binding AppName}"
+                                        Width="180"/>
+
+                    <!-- 앱 경로 -->
+                    <DataGridTextColumn Header="앱 경로"
+                                        Binding="{Binding AppPath}"
+                                        Width="*">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Foreground" Value="#8090A0"/>
+                                <Setter Property="FontFamily" Value="Consolas"/>
+                                <Setter Property="FontSize"   Value="10"/>
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                                <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+
+                    <!-- 소스 -->
+                    <DataGridTemplateColumn Header="소스" Width="100">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Border CornerRadius="3" Padding="6,2"
+                                        HorizontalAlignment="Center"
+                                        Background="{Binding SourceBg}"
+                                        Margin="4,4">
+                                    <TextBlock Text="{Binding Source}"
+                                               FontSize="10" FontWeight="SemiBold"
+                                               Foreground="{Binding SourceFg}"
+                                               HorizontalAlignment="Center"/>
+                                </Border>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <!-- 상태 -->
+                    <DataGridTemplateColumn Header="상태" Width="90">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                    <Ellipse Width="8" Height="8"
+                                             Fill="{Binding StatusColor}"
+                                             VerticalAlignment="Center"
+                                             Margin="0,0,6,0"/>
+                                    <TextBlock Text="{Binding StatusText}"
+                                               FontSize="11"
+                                               Foreground="{Binding StatusColor}"
+                                               VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                </DataGrid.Columns>
+
+                <DataGrid.ContextMenu>
+                    <ContextMenu Background="#1A1E2E" BorderBrush="#2A3050">
+                        <MenuItem Header="🔄  앱 변경 (OpenWith)"  Click="BtnChangeApp_Click"
+                                  Foreground="#D0DCFF" Background="#1A1E2E"/>
+                        <MenuItem Header="📋  경로 복사"           Click="BtnCopyPath_Click"
+                                  Foreground="#D0DCFF" Background="#1A1E2E"/>
+                        <MenuItem Header="📂  폴더 열기"           Click="BtnOpenFolder_Click"
+                                  Foreground="#D0DCFF" Background="#1A1E2E"/>
+                        <Separator Background="#2A3050"/>
+                        <MenuItem Header="⚙  Windows 기본 앱 설정" Click="BtnOpenSettings_Click"
+                                  Foreground="#D0DCFF" Background="#1A1E2E"/>
+                    </ContextMenu>
+                </DataGrid.ContextMenu>
+            </DataGrid>
+        </Grid>
+
+        <!-- ── 상태바 ─────────────────────────────────── -->
+        <Border Grid.Row="3" Background="#0A0C14"
+                BorderBrush="#2A3050" BorderThickness="0,1,0,0">
+            <Grid Margin="16,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock x:Name="TxtTotal"    Grid.Column="0"
+                           FontSize="11" Foreground="#5060A0"
+                           VerticalAlignment="Center" Margin="0,0,16,0"/>
+                <TextBlock x:Name="TxtOkCount"  Grid.Column="1"
+                           FontSize="11" Foreground="#50E080"
+                           VerticalAlignment="Center" Margin="0,0,16,0"/>
+                <TextBlock x:Name="TxtBroken"   Grid.Column="2"
+                           FontSize="11" Foreground="#FF5555"
+                           VerticalAlignment="Center" Margin="0,0,16,0"/>
+                <TextBlock x:Name="TxtNotSet"   Grid.Column="3"
+                           FontSize="11" Foreground="#808080"
+                           VerticalAlignment="Center"/>
+
+                <TextBlock x:Name="TxtFiltered" Grid.Column="5"
+                           FontSize="11" Foreground="#4A9EFF"
+                           VerticalAlignment="Center"/>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

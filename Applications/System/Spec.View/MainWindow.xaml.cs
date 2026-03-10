@@ -30,28 +30,23 @@ public partial class MainWindow : Window
 
     // ── 초기화 ───────────────────────────────────────────────────────
 
-    [DllImport("user32.dll", CharSet = CharSet.Unicode)]
-    private static extern IntPtr LoadImage(IntPtr hinst, string name, uint type, int cx, int cy, uint flags);
-    [DllImport("user32.dll")]
-    private static extern IntPtr SendMessage(IntPtr hWnd, uint msg, IntPtr wParam, IntPtr lParam);
-    [DllImport("kernel32.dll")]
-    private static extern IntPtr GetModuleHandle(string? name);
+    [DllImport("dwmapi.dll")]
+    private static extern int DwmSetWindowAttribute(IntPtr hwnd, int attr, ref int attrValue, int attrSize);
 
-    // WindowStyle=None + AllowsTransparency=True 환경에서 WPF Icon이 HWND에 반영 안 됨
-    // → WM_SETICON으로 직접 설정
-    private void SetTaskbarIcon()
+    // AllowsTransparency=True 제거 → WindowChrome 방식으로 전환
+    // DWM: 다크 타이틀바(attr=20) + 모서리 둥글기(attr=33, DWMWCP_ROUND=2)
+    private void ApplyDwmStyles()
     {
         var hwnd = new WindowInteropHelper(this).Handle;
-        var hMod = GetModuleHandle(null);
-        var big   = LoadImage(hMod, "#1", 1 /*IMAGE_ICON*/, 32, 32, 0);
-        var small = LoadImage(hMod, "#1", 1,                 16, 16, 0);
-        if (big   != IntPtr.Zero) SendMessage(hwnd, 0x0080 /*WM_SETICON*/, (IntPtr)1, big);
-        if (small != IntPtr.Zero) SendMessage(hwnd, 0x0080,                (IntPtr)0, small);
+        int dark = 1;
+        DwmSetWindowAttribute(hwnd, 20, ref dark, sizeof(int));  // DWMWA_USE_IMMERSIVE_DARK_MODE
+        int round = 2;
+        DwmSetWindowAttribute(hwnd, 33, ref round, sizeof(int)); // DWMWA_WINDOW_CORNER_PREFERENCE = DWMWCP_ROUND
     }
 
     private void OnLoaded(object sender, RoutedEventArgs e)
     {
-        SetTaskbarIcon();
+        ApplyDwmStyles();
         _monSvc.Initialize();
         UpdateStatus("스캔 버튼을 눌러 하드웨어 정보를 수집합니다.");
 

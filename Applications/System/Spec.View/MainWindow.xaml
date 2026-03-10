@@ -5,9 +5,12 @@
         MinWidth="900" MinHeight="600"
         Background="#0B0F1A" Foreground="#E2E8F0"
         FontFamily="Segoe UI" FontSize="13"
-        WindowStyle="None" AllowsTransparency="True"
+        WindowStyle="None"
         Icon="pack://application:,,,/Resources/app.ico"
         WindowStartupLocation="CenterScreen">
+    <WindowChrome.WindowChrome>
+        <WindowChrome GlassFrameThickness="-1" CornerRadius="0" CaptionHeight="0" ResizeBorderThickness="5"/>
+    </WindowChrome.WindowChrome>
     <Window.Resources>
         <!-- 섹션 카드 스타일 -->
         <Style x:Key="Card" TargetType="Border">
@@ -72,11 +75,11 @@
                         <Button x:Name="MinBtn" Content="─" Width="32" Height="28"
                                 Click="MinBtn_Click" FontSize="11" Margin="0,0,4,0"
                                 Background="Transparent" BorderThickness="0" Foreground="#64748B"
-                                Padding="0"/>
+                                Padding="0" WindowChrome.IsHitTestVisibleInChrome="True"/>
                         <Button x:Name="CloseBtn" Content="✕" Width="32" Height="28"
                                 Click="CloseBtn_Click" FontSize="11"
                                 Background="Transparent" BorderThickness="0" Foreground="#64748B"
-                                Padding="0"/>
+                                Padding="0" WindowChrome.IsHitTestVisibleInChrome="True"/>
                     </StackPanel>
                 </Grid>
             </Border>

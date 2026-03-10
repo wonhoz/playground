@@ -40,10 +40,10 @@ public partial class MainWindow : Window
 
     private void InitTray()
     {
-        var icoPath = System.IO.Path.Combine(
-            AppContext.BaseDirectory, "Resources", "app.ico");
-        Icon trayIcon = File.Exists(icoPath)
-            ? new Icon(icoPath)
+        // 실행 파일 자체에서 아이콘 추출 (ApplicationIcon으로 임베드된 아이콘)
+        var exePath = System.Diagnostics.Process.GetCurrentProcess().MainModule?.FileName;
+        System.Drawing.Icon trayIcon = (exePath is not null && File.Exists(exePath))
+            ? System.Drawing.Icon.ExtractAssociatedIcon(exePath) ?? SystemIcons.Application
             : SystemIcons.Application;
 
         var menu = new ContextMenuStrip

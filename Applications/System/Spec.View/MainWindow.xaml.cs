@@ -1,6 +1,8 @@
+using System.Runtime.InteropServices;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Interop;
 using System.Windows.Media;
 
 namespace SpecView;
@@ -28,8 +30,28 @@ public partial class MainWindow : Window
 
     // ── 초기화 ───────────────────────────────────────────────────────
 
+    [DllImport("user32.dll", CharSet = CharSet.Unicode)]
+    private static extern IntPtr LoadImage(IntPtr hinst, string name, uint type, int cx, int cy, uint flags);
+    [DllImport("user32.dll")]
+    private static extern IntPtr SendMessage(IntPtr hWnd, uint msg, IntPtr wParam, IntPtr lParam);
+    [DllImport("kernel32.dll")]
+    private static extern IntPtr GetModuleHandle(string? name);
+
+    // WindowStyle=None + AllowsTransparency=True 환경에서 WPF Icon이 HWND에 반영 안 됨
+    // → WM_SETICON으로 직접 설정
+    private void SetTaskbarIcon()
+    {
+        var hwnd = new WindowInteropHelper(this).Handle;
+        var hMod = GetModuleHandle(null);
+        var big   = LoadImage(hMod, "#1", 1 /*IMAGE_ICON*/, 32, 32, 0);
+        var small = LoadImage(hMod, "#1", 1,                 16, 16, 0);
+        if (big   != IntPtr.Zero) SendMessage(hwnd, 0x0080 /*WM_SETICON*/, (IntPtr)1, big);
+        if (small != IntPtr.Zero) SendMessage(hwnd, 0x0080,                (IntPtr)0, small);
+    }
+
     private void OnLoaded(object sender, RoutedEventArgs e)
     {
+        SetTaskbarIcon();
         _monSvc.Initialize();
         UpdateStatus("스캔 버튼을 눌러 하드웨어 정보를 수집합니다.");
 

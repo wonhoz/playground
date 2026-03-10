@@ -2,7 +2,7 @@
 
 > 이 파일은 브레인스토밍 시 **이미 제안되거나 구현된 아이디어를 다시 꺼내지 않도록** 하는 필터다.
 > 새 아이디어를 제안하기 전 반드시 이 목록을 확인할 것.
-> 마지막 갱신: 2026-03-09 (8차)
+> 마지막 갱신: 2026-03-10 (9차)
 
 ---
 
@@ -521,6 +521,34 @@
 
 ---
 
+### Apps (신규 — idea_20260310_9차)
+
+| 이름 | 핵심 기능 | 출처 |
+|------|----------|------|
+| `Perf.Lens` | 게임/앱 DirectX 성능 오버레이 (FPS·프레임 타임·GPU/VRAM·CPU 온도, DXGI 훅, 세션 로그, MSI Afterburner 경량 대체) | idea_20260310_9차 |
+| `Pack.Cast` | WinGet/Scoop/Chocolatey 통합 패키지 관리 GUI (통합 검색·일괄 설치·업데이트, 환경 프로파일 JSON 내보내기, 신규 PC 원클릭 셋업) | idea_20260310_9차 |
+| `Clip.Smart` | AI 스마트 클립보드 처리기 (콘텐츠 자동 감지·번역·요약·코드 설명·포맷 변환, 역할 프리셋, Claude API, AI.Clip 진화형) | idea_20260310_9차 |
+| `Key.Stash` | 개발자 API 키·토큰 로컬 암호화 저장소 (.env 자동 스캔, 앱 실행 시 env 자동 주입, 만료 알림, 팀 공유 암호화 내보내기) | idea_20260310_9차 |
+| `Voice.Cast` | 오프라인 커스텀 음성 Wake Word 트리거 트레이 (Vosk 소형 모델, 키워드→앱 실행/키 전송/스크립트, 감도 조절) | idea_20260310_9차 |
+| `Dupe.Guard` | 실시간 중복 파일 감시 트레이 (FSW 실시간, 새 파일 즉시 SHA+pHash 중복 체크, Toast 원클릭 삭제, 감시 프로파일) | idea_20260310_9차 |
+| `Live.Doc` | 코드 주석 → 실시간 문서 렌더러 (XML doc/JSDoc/docstring 파싱, 로컬 웹서버, live-reload, 관계 다이어그램 자동 생성) | idea_20260310_9차 |
+| `Seq.Shot` | 번호 레이블 자동 추가 튜토리얼 스크린샷 도구 (순번 자동 부여, 화살표 오버레이, DOCX/HTML/PDF 자동 조합 내보내기) | idea_20260310_9차 |
+
+### 게임 — 제안된 미구현 아이디어 (idea_20260310_9차, 물리 엔진 특화)
+
+| 이름 | 장르 | 핵심 메커닉 |
+|------|------|------------|
+| `Pendulum.Blitz` | Arcade / Action / Physics | Verlet 다관절 진자 스윙 전투, 앵커 전환, 운동에너지 비례 공격력, 네온 궤적 잔상 |
+| `Bubble.Pop` | Casual / Arcade / Physics | 표면장력 최소 에너지 거품 합치기·분리·파열, 바람·가시·자석 방해, 연쇄 파열 콤보 |
+| `Crumble.Run` | Arcade / Runner / Physics | Voronoi 파단 지형 붕괴 러너, 발 디디면 균열→파단, RigidBody 파편 장애물, 절차 생성 |
+| `Wobble.Stack` | Casual / Arcade / Physics | Shape Matching 소프트 바디 젤리 타워 쌓기, PBD 탄성 블록, 균형 판정, 네온 젤리 비주얼 |
+| `Slice.Chain` | Puzzle / Casual / Physics | Verlet 제약 체인 절단 퍼즐, 특수 링크(자석·폭발·탄성·철), 마우스 드래그 절단 경로 |
+| `Throw.Stars` | Arcade / Action / Physics | 무기별 완전 다른 비행 물리 (표창·부메랑·창·원반), 벽 반사·관통 콤보, Magnus/양력 효과 |
+| `Crush.Box` | Sandbox / Casual / Physics | 유압 압착 물리 샌드박스, 물질별 파단 패턴(강체+연성체), 유압 프레스·롤러·분쇄기, 목표 파괴율 퍼즐 |
+| `Shock.Wave` | Puzzle / Strategy / Physics | 충격파 확산 연쇄 파괴 퍼즐, 제한 폭약 배치·순서 폭발, 블록별 반응(반사·흡수·굴절·연쇄), 슬로우모 리플레이 |
+
+---
+
 ## 5. 유사 개념 그룹 (중복 주의)
 
 브레인스토밍 시 아래 그룹 내 변형 아이디어는 **이미 제안된 것으로 간주**한다.
@@ -547,6 +575,22 @@
 | **마우스 제스처 → 단축키** | Mouse.Flick |
 | **텍스트 스니펫 자동확장** | Auto.Type (≠ Smart.Paste) |
 | **매크로 패드 / 런처 버튼** | Macro.Pad (≠ Run.Deck, Key.Tape) |
+| **AI 클립보드 처리** | AI.Clip ✅ · Clip.Smart (AI.Clip은 단순 처리, Clip.Smart는 콘텐츠 타입 자동 감지+멀티 기능) |
+| **비밀키 / .env 보관** | Secret.Box · Key.Stash (Key.Stash는 자동 스캔+환경변수 주입+만료 알림 특화) |
+| **음성 입력 / Wake Word** | Speak.Type (STT 받아쓰기) · Voice.Cast (Wake Word 트리거, ≠ 받아쓰기) |
+| **성능 모니터 오버레이** | Perf.Lens (DirectX 게임 오버레이), Tray.Stats ✅ (트레이 CPU/RAM 모니터) |
+| **패키지 관리 GUI** | Pack.Cast |
+| **중복 파일** | File.Duplicates ✅ (온디맨드 스캔) · Dupe.Guard (실시간 FSW 감시) |
+| **코드 문서화** | Live.Doc |
+| **튜토리얼 스크린샷** | Seq.Shot · Screen.Stitch (이어붙이기 별도) |
+| **진자/스윙 물리 게임** | Pendulum.Blitz · Rope.Swing (Rope.Swing은 플랫포머, Pendulum.Blitz는 전투 아케이드) |
+| **거품/유체 물리 게임** | Bubble.Pop (표면장력 거품) · Fluid.Rush (SPH 색상 혼합) · Tidal.Wave (파동 방정식) |
+| **지형 파괴 게임** | Crumble.Run (Voronoi 붕괴 러너) · Fracture.Fall (목표 파괴 퍼즐) · Stack.Crash (탑 무너뜨리기) |
+| **소프트바디 게임** | Wobble.Stack (젤리 쌓기) · Jelly.Jump (소프트바디 플랫포머) |
+| **체인/로프 절단 게임** | Slice.Chain (Verlet 체인) · Spring.Web (거미줄 인장) · Rope.Swing (스윙) |
+| **투척 물리 게임** | Throw.Stars (무기별 비행 물리) · Arc.Blast (포물선 탄도 구조물 파괴, 유사 주의) |
+| **파괴 샌드박스** | Crush.Box (압착 파괴) · Fracture.Fall (Voronoi 파단 퍼즐) · Jenga.Pull (블록 제거) |
+| **충격파 / 폭발 게임** | Shock.Wave (충격파 연쇄) · Domino.Chain (도미노 충격량) · Spark.Chain (폭죽 연쇄) |
 | **무드보드 / 이미지 콜라주** | Mood.Board |
 | **이미지 주석 / 스크린샷 편집** | Clip.Annotate |
 | **썸네일 / 소셜 이미지 제작** | Thumb.Forge |

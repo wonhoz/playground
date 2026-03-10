@@ -1,0 +1,405 @@
+<Window x:Class="DriveBench.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Drive.Bench" Width="860" Height="680"
+        MinWidth="760" MinHeight="580"
+        Background="#0B0F1A" Foreground="#E2E8F0"
+        FontFamily="Segoe UI" FontSize="13"
+        WindowStyle="None"
+        Icon="pack://application:,,,/Resources/app.ico"
+        WindowStartupLocation="CenterScreen">
+    <WindowChrome.WindowChrome>
+        <WindowChrome GlassFrameThickness="-1" CornerRadius="0" CaptionHeight="0" ResizeBorderThickness="5"/>
+    </WindowChrome.WindowChrome>
+    <Window.Resources>
+        <Style x:Key="Card" TargetType="Border">
+            <Setter Property="Background"      Value="#111827"/>
+            <Setter Property="BorderBrush"     Value="#1E293B"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="CornerRadius"    Value="8"/>
+            <Setter Property="Padding"         Value="14"/>
+            <Setter Property="Margin"          Value="0,0,0,10"/>
+        </Style>
+        <Style x:Key="SectionLabel" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#22C55E"/>
+            <Setter Property="FontSize"   Value="10"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Margin"     Value="0,0,0,8"/>
+        </Style>
+        <Style x:Key="MetaLabel" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#64748B"/>
+            <Setter Property="FontSize"   Value="11"/>
+        </Style>
+    </Window.Resources>
+
+    <Border BorderBrush="#1E293B" BorderThickness="1">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="44"/>  <!-- 타이틀바 -->
+                <RowDefinition Height="52"/>  <!-- 툴바 -->
+                <RowDefinition Height="*"/>   <!-- 탭 콘텐츠 -->
+                <RowDefinition Height="28"/>  <!-- 상태바 -->
+            </Grid.RowDefinitions>
+
+            <!-- ── 타이틀바 ────────────────────────────────────────── -->
+            <Border Grid.Row="0" Background="#0D1524"
+                    MouseLeftButtonDown="TitleBar_MouseDown">
+                <Grid Margin="14,0">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <TextBlock Text="⬡" Foreground="#22C55E" FontSize="16"
+                                   VerticalAlignment="Center" Margin="0,0,10,0"/>
+                        <TextBlock Text="Drive.Bench" Foreground="#E2E8F0"
+                                   FontSize="13" FontWeight="SemiBold"
+                                   VerticalAlignment="Center" Margin="0,0,10,0"/>
+                        <TextBlock Text="디스크 벤치마크"
+                                   Foreground="#334155" FontSize="11" VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right"
+                                VerticalAlignment="Center">
+                        <Button x:Name="MinBtn" Content="─" Width="32" Height="28"
+                                Click="MinBtn_Click" FontSize="11" Margin="0,0,4,0"
+                                Background="Transparent" BorderThickness="0"
+                                Foreground="#64748B" Padding="0"
+                                WindowChrome.IsHitTestVisibleInChrome="True"/>
+                        <Button x:Name="CloseBtn" Content="✕" Width="32" Height="28"
+                                Click="CloseBtn_Click" FontSize="11"
+                                Background="Transparent" BorderThickness="0"
+                                Foreground="#64748B" Padding="0"
+                                WindowChrome.IsHitTestVisibleInChrome="True"/>
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <!-- ── 툴바: 드라이브/크기 선택 ───────────────────────── -->
+            <Border Grid.Row="1" Background="#0D1524"
+                    BorderBrush="#1E293B" BorderThickness="0,0,0,1"
+                    Padding="14,0">
+                <Grid>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <TextBlock Text="드라이브" Foreground="#64748B" FontSize="11"
+                                   VerticalAlignment="Center" Margin="0,0,8,0"/>
+                        <ComboBox x:Name="CboDrive" Width="260" Height="32"
+                                  SelectionChanged="CboDrive_SelectionChanged"
+                                  Margin="0,0,12,0"/>
+                        <TextBlock Text="크기" Foreground="#64748B" FontSize="11"
+                                   VerticalAlignment="Center" Margin="0,0,8,0"/>
+                        <ComboBox x:Name="CboSize" Width="90" Height="32" Margin="0,0,14,0">
+                            <ComboBoxItem Content="256 MB" Tag="268435456"/>
+                            <ComboBoxItem Content="512 MB" Tag="536870912" IsSelected="True"/>
+                            <ComboBoxItem Content="1 GB"   Tag="1073741824"/>
+                            <ComboBoxItem Content="4 GB"   Tag="4294967296"/>
+                        </ComboBox>
+                        <Button x:Name="BtnRun" Content="▶  벤치마크 시작"
+                                Width="130" Height="32"
+                                Style="{StaticResource AccentBtn}" Margin="0,0,8,0"
+                                Click="BtnRun_Click"/>
+                        <Button x:Name="BtnCancel" Content="■  중단"
+                                Width="80" Height="32"
+                                Style="{StaticResource DangerBtn}"
+                                IsEnabled="False"
+                                Click="BtnCancel_Click"/>
+                    </StackPanel>
+                    <TextBlock x:Name="TxtDriveInfo" HorizontalAlignment="Right"
+                               VerticalAlignment="Center" Foreground="#334155" FontSize="11"/>
+                </Grid>
+            </Border>
+
+            <!-- ── 탭 콘텐츠 ────────────────────────────────────────── -->
+            <TabControl x:Name="Tabs" Grid.Row="2" Background="#0D1524"
+                        SelectionChanged="Tabs_SelectionChanged">
+
+                <!-- ── 벤치마크 탭 ──────────────────────────────────── -->
+                <TabItem Header="📊 벤치마크">
+                    <Grid Margin="16">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <!-- 테스트 항목 선택 -->
+                        <Border Grid.Row="0" Style="{StaticResource Card}">
+                            <StackPanel>
+                                <TextBlock Text="테스트 항목" Style="{StaticResource SectionLabel}"/>
+                                <StackPanel Orientation="Horizontal">
+                                    <CheckBox x:Name="ChkSeq1M"   Content="SEQ 1M"     IsChecked="True" Margin="0,0,18,0"/>
+                                    <CheckBox x:Name="ChkSeq128K" Content="SEQ 128K"   IsChecked="True" Margin="0,0,18,0"/>
+                                    <CheckBox x:Name="ChkRnd4KQ1" Content="RND 4K Q1T1" IsChecked="True" Margin="0,0,18,0"/>
+                                    <CheckBox x:Name="ChkRnd4KQ8" Content="RND 4K Q8T8" IsChecked="True"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- 진행 상태 -->
+                        <Border Grid.Row="1" x:Name="PanelProgress"
+                                Style="{StaticResource Card}" Visibility="Collapsed">
+                            <StackPanel>
+                                <Grid Margin="0,0,0,6">
+                                    <TextBlock x:Name="TxtPhase" Text="대기 중..."
+                                               Foreground="#E2E8F0" FontSize="12"/>
+                                    <TextBlock x:Name="TxtSpeed" HorizontalAlignment="Right"
+                                               Foreground="#22C55E" FontSize="13" FontWeight="SemiBold"/>
+                                </Grid>
+                                <ProgressBar x:Name="PbProgress" Height="8" Value="0" Maximum="100"/>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- 결과 헤더 -->
+                        <Grid Grid.Row="2" Margin="0,4,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="120"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="테스트" Style="{StaticResource MetaLabel}" Margin="8,0,0,0"/>
+                            <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="0,0,0,4">
+                                <Border Width="10" Height="10" Background="#22C55E" CornerRadius="2" Margin="8,0,4,0"/>
+                                <TextBlock Text="READ  (MB/s)" Style="{StaticResource MetaLabel}"/>
+                            </StackPanel>
+                            <StackPanel Grid.Column="2" Orientation="Horizontal" Margin="0,0,0,4">
+                                <Border Width="10" Height="10" Background="#60A5FA" CornerRadius="2" Margin="8,0,4,0"/>
+                                <TextBlock Text="WRITE  (MB/s)" Style="{StaticResource MetaLabel}"/>
+                            </StackPanel>
+                        </Grid>
+
+                        <!-- 결과 목록 -->
+                        <ItemsControl x:Name="ResultList" Grid.Row="3"
+                                      ItemsSource="{Binding}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Background="#111827" BorderBrush="#1E293B"
+                                            BorderThickness="1" CornerRadius="6" Margin="0,0,0,6"
+                                            Padding="0,10">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="120"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <!-- 테스트명 -->
+                                            <StackPanel Grid.Column="0" Margin="12,0,8,0" VerticalAlignment="Center">
+                                                <TextBlock Text="{Binding TestName}"
+                                                           Foreground="#E2E8F0" FontSize="13" FontWeight="SemiBold"/>
+                                            </StackPanel>
+
+                                            <!-- READ 바 -->
+                                            <Grid Grid.Column="1" Margin="8,0">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition/>
+                                                    <RowDefinition/>
+                                                </Grid.RowDefinitions>
+                                                <Border Grid.Row="0" x:Name="ReadTrack"
+                                                        Background="#1E293B" Height="20" CornerRadius="3" Margin="0,0,0,4">
+                                                    <Border x:Name="ReadFill" HorizontalAlignment="Left"
+                                                            Background="#22C55E" CornerRadius="3"
+                                                            Tag="{Binding ReadMBps}"/>
+                                                </Border>
+                                                <TextBlock Grid.Row="1"
+                                                           Text="{Binding ReadMBpsText}"
+                                                           Foreground="#22C55E" FontSize="12" FontWeight="SemiBold"/>
+                                            </Grid>
+
+                                            <!-- WRITE 바 -->
+                                            <Grid Grid.Column="2" Margin="8,0">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition/>
+                                                    <RowDefinition/>
+                                                </Grid.RowDefinitions>
+                                                <Border Grid.Row="0" x:Name="WriteTrack"
+                                                        Background="#1E293B" Height="20" CornerRadius="3" Margin="0,0,0,4">
+                                                    <Border x:Name="WriteFill" HorizontalAlignment="Left"
+                                                            Background="#60A5FA" CornerRadius="3"
+                                                            Tag="{Binding WriteMBps}"/>
+                                                </Border>
+                                                <TextBlock Grid.Row="1"
+                                                           Text="{Binding WriteMBpsText}"
+                                                           Foreground="#60A5FA" FontSize="12" FontWeight="SemiBold"/>
+                                            </Grid>
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </Grid>
+                </TabItem>
+
+                <!-- ── 히스토리 탭 ───────────────────────────────────── -->
+                <TabItem Header="📈 히스토리">
+                    <Grid Margin="16">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,12">
+                            <TextBlock Text="드라이브" Foreground="#64748B" FontSize="11"
+                                       VerticalAlignment="Center" Margin="0,0,8,0"/>
+                            <ComboBox x:Name="CboHistDrive" Width="200" Height="32" Margin="0,0,12,0"
+                                      SelectionChanged="CboHistDrive_SelectionChanged"/>
+                            <TextBlock Text="테스트" Foreground="#64748B" FontSize="11"
+                                       VerticalAlignment="Center" Margin="0,0,8,0"/>
+                            <ComboBox x:Name="CboHistTest" Width="140" Height="32"
+                                      SelectionChanged="CboHistTest_SelectionChanged">
+                                <ComboBoxItem Content="SEQ 1M 읽기"    Tag="seq1m_r"     IsSelected="True"/>
+                                <ComboBoxItem Content="SEQ 1M 쓰기"    Tag="seq1m_w"/>
+                                <ComboBoxItem Content="SEQ 128K 읽기"  Tag="seq128k_r"/>
+                                <ComboBoxItem Content="SEQ 128K 쓰기"  Tag="seq128k_w"/>
+                                <ComboBoxItem Content="RND 4K Q1T1 읽기" Tag="rnd4k_q1t1_r"/>
+                                <ComboBoxItem Content="RND 4K Q8T8 읽기" Tag="rnd4k_q8t8_r"/>
+                            </ComboBox>
+                        </StackPanel>
+
+                        <Border Grid.Row="1" Background="#111827" BorderBrush="#1E293B"
+                                BorderThickness="1" CornerRadius="8" Padding="16">
+                            <Grid>
+                                <Canvas x:Name="HistChart" ClipToBounds="True"
+                                        SizeChanged="HistChart_SizeChanged"/>
+                                <TextBlock x:Name="TxtHistEmpty"
+                                           Text="히스토리 데이터가 없습니다.&#x0a;벤치마크를 실행하면 자동 저장됩니다."
+                                           Foreground="#334155" FontSize="13" TextAlignment="Center"
+                                           HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </TabItem>
+
+                <!-- ── 비교 탭 ────────────────────────────────────────── -->
+                <TabItem Header="⚡ 비교">
+                    <Grid Margin="16">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,12">
+                            <TextBlock Text="비교할 드라이브를 선택하세요 (히스토리 필요):"
+                                       Foreground="#64748B" FontSize="11" VerticalAlignment="Center" Margin="0,0,12,0"/>
+                            <Button Content="새로고침" Width="80" Height="30"
+                                    Click="BtnRefreshCompare_Click"/>
+                        </StackPanel>
+
+                        <ScrollViewer Grid.Row="1">
+                            <StackPanel x:Name="ComparePanel"/>
+                        </ScrollViewer>
+                    </Grid>
+                </TabItem>
+
+                <!-- ── S.M.A.R.T 탭 ────────────────────────────────── -->
+                <TabItem Header="🔬 S.M.A.R.T">
+                    <Grid Margin="16">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <!-- 드라이브 요약 -->
+                        <Border Grid.Row="0" Style="{StaticResource Card}">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <StackPanel Grid.Column="0">
+                                    <TextBlock Text="모델" Style="{StaticResource MetaLabel}"/>
+                                    <TextBlock x:Name="TxtSmartModel"
+                                               Foreground="#E2E8F0" FontSize="12" Margin="0,2,0,0"/>
+                                </StackPanel>
+                                <StackPanel Grid.Column="1">
+                                    <TextBlock Text="시리얼" Style="{StaticResource MetaLabel}"/>
+                                    <TextBlock x:Name="TxtSmartSerial"
+                                               Foreground="#E2E8F0" FontSize="12" Margin="0,2,0,0"/>
+                                </StackPanel>
+                                <StackPanel Grid.Column="2">
+                                    <TextBlock Text="드라이브 상태" Style="{StaticResource MetaLabel}"/>
+                                    <TextBlock x:Name="TxtSmartStatus"
+                                               Text="—" FontSize="13" FontWeight="SemiBold" Margin="0,2,0,0"/>
+                                </StackPanel>
+                                <Button Grid.Column="3" Content="S.M.A.R.T 새로고침"
+                                        Width="130" Height="32" Click="BtnSmartRefresh_Click"
+                                        VerticalAlignment="Center"/>
+                            </Grid>
+                        </Border>
+
+                        <!-- 컬럼 헤더 -->
+                        <Grid Grid.Row="1" Margin="0,0,0,4">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="40"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="60"/>
+                                <ColumnDefinition Width="60"/>
+                                <ColumnDefinition Width="80"/>
+                                <ColumnDefinition Width="80"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="ID"       Style="{StaticResource MetaLabel}" Margin="4,0"/>
+                            <TextBlock Grid.Column="1" Text="속성"     Style="{StaticResource MetaLabel}" Margin="4,0"/>
+                            <TextBlock Grid.Column="2" Text="현재"     Style="{StaticResource MetaLabel}" HorizontalAlignment="Center"/>
+                            <TextBlock Grid.Column="3" Text="최악"     Style="{StaticResource MetaLabel}" HorizontalAlignment="Center"/>
+                            <TextBlock Grid.Column="4" Text="Raw 값"   Style="{StaticResource MetaLabel}" HorizontalAlignment="Right" Margin="0,0,8,0"/>
+                            <TextBlock Grid.Column="5" Text="상태"     Style="{StaticResource MetaLabel}" HorizontalAlignment="Center"/>
+                        </Grid>
+
+                        <!-- S.M.A.R.T 목록 -->
+                        <ScrollViewer Grid.Row="2">
+                            <ItemsControl x:Name="SmartList">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border BorderBrush="#1A2035" BorderThickness="0,0,0,1" Padding="0,7">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="40"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="60"/>
+                                                    <ColumnDefinition Width="60"/>
+                                                    <ColumnDefinition Width="80"/>
+                                                    <ColumnDefinition Width="80"/>
+                                                </Grid.ColumnDefinitions>
+                                                <TextBlock Grid.Column="0" FontSize="11"
+                                                           Text="{Binding Id, StringFormat={}{0:X2}h}"
+                                                           Foreground="#64748B" Margin="4,0"/>
+                                                <TextBlock Grid.Column="1" FontSize="12"
+                                                           Text="{Binding Name}" Foreground="#E2E8F0" Margin="4,0"/>
+                                                <TextBlock Grid.Column="2" FontSize="12"
+                                                           Text="{Binding Current}"
+                                                           Foreground="#94A3B8" HorizontalAlignment="Center"/>
+                                                <TextBlock Grid.Column="3" FontSize="12"
+                                                           Text="{Binding Worst}"
+                                                           Foreground="#94A3B8" HorizontalAlignment="Center"/>
+                                                <TextBlock Grid.Column="4" FontSize="11"
+                                                           Text="{Binding Raw}"
+                                                           Foreground="#64748B" HorizontalAlignment="Right" Margin="0,0,8,0"/>
+                                                <TextBlock Grid.Column="5" FontSize="11" FontWeight="SemiBold"
+                                                           Text="{Binding StatusText}"
+                                                           Foreground="{Binding StatusColor}"
+                                                           HorizontalAlignment="Center"/>
+                                            </Grid>
+                                        </Border>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </ScrollViewer>
+                    </Grid>
+                </TabItem>
+
+            </TabControl>
+
+            <!-- ── 상태바 ────────────────────────────────────────────── -->
+            <Border Grid.Row="3" Background="#0D1524"
+                    BorderBrush="#1E293B" BorderThickness="0,1,0,0"
+                    Padding="14,0">
+                <Grid>
+                    <TextBlock x:Name="TxtStatus" Foreground="#334155" FontSize="11"
+                               VerticalAlignment="Center"/>
+                    <TextBlock x:Name="TxtVersion" Text="Drive.Bench v1.0"
+                               Foreground="#1E293B" FontSize="10"
+                               HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                </Grid>
+            </Border>
+
+        </Grid>
+    </Border>
+</Window>

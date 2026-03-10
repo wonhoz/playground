@@ -119,6 +119,7 @@ call :pub "Hook.Cast"             "Games\Casual\Hook.Cast"                      
 call :pub "Wave.Surf"             "Games\Casual\Wave.Surf"                                 "Wave.Surf.exe"             "Games\Casual"
 
 :: ── Games / Puzzle ───────────────────────────────────────────────
+call :pub "Auto.Build"            "Games\Puzzle\Auto.Build"                                "AutoBuild.exe"             "Games\Puzzle"
 call :pub "Gravity.Flip"          "Games\Puzzle\Gravity.Flip"                              "Gravity.Flip.exe"          "Games\Puzzle"
 call :pub "Hue.Flow"              "Games\Puzzle\Hue.Flow"                                  "Hue.Flow.exe"              "Games\Puzzle"
 call :pub "Orbit.Craft"           "Games\Puzzle\Orbit.Craft"                               "Orbit.Craft.exe"           "Games\Puzzle\Orbit.Craft"

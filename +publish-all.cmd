@@ -50,6 +50,7 @@ call :pub "Log.Lens"              "Applications\Development\Log.Lens"           
 call :pub "Log.Merge"             "Applications\Development\Log.Merge"                     "Log.Merge.exe"             "Applications\Development"
 call :pub "Quick.Calc"            "Applications\Development\Quick.Calc"                    "Quick.Calc.exe"            "Applications\Development"
 call :pub "Signal.Flow"           "Applications\Development\Signal.Flow"                   "Signal.Flow.exe"           "Applications\Development"
+call :pub "Shortcut.Forge"        "Applications\Files\Manager\Shortcut.Forge"              "ShortcutForge.exe"         "Applications\Files\Manager"
 call :pub "Sky.Drift"              "Games\Arcade\Sky.Drift"                                 "SkyDrift.exe"              "Games\Arcade"
 call :pub "Win.Event"             "Applications\Development\Win.Event"                     "WinEvent.exe"              "Applications\Development"
 
@@ -92,6 +93,7 @@ call :pub "Burn.Rate"             "Applications\System\Burn.Rate"               
 call :pub "Env.Guard"             "Applications\System\Env.Guard"                          "Env.Guard.exe"             "Applications\System"
 call :pub "Ext.Boss"              "Applications\System\Ext.Boss"                           "Ext.Boss.exe"              "Applications\System\Ext.Boss"
 call :pub "Key.Map"               "Applications\System\Key.Map"                            "Key.Map.exe"               "Applications\System\Key.Map"
+call :pub "Key.Test"              "Applications\System\Key.Test"                           "KeyTest.exe"               "Applications\System"
 call :pub "Sched.Cast"            "Applications\System\Sched.Cast"                         "Sched.Cast.exe"            "Applications\System\Sched.Cast"
 call :pub "Spec.Report"           "Applications\System\Spec.Report"                        "Spec.Report.exe"           "Applications\System"
 call :pub "Spec.View"             "Applications\System\Spec.View"                          "Spec.View.exe"             "Applications\System\Spec.View"
@@ -149,6 +151,7 @@ call :pub "Sand.Fall"             "Games\Sandbox\Sand.Fall"                     
 
 :: ── Games / Shooter ──────────────────────────────────────────────
 call :pub "Dodge.Blitz"           "Games\Shooter\Dodge.Blitz"                              "Dodge.Blitz.exe"           "Games\Shooter"
+call :pub "Dodge.Craft"           "Games\Shooter\Dodge.Craft"                              "DodgeCraft.exe"            "Games\Shooter"
 call :pub "Star.Strike"           "Games\Shooter\Star.Strike"                              "Star.Strike.exe"           "Games\Shooter"
 
 :: ── Games / Simulation ────────────────────────────────────────────

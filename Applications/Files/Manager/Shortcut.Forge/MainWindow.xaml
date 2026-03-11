@@ -1,0 +1,251 @@
+<Window x:Class="ShortcutForge.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Shortcut.Forge — 바로가기 일괄 관리"
+        Width="1060" Height="680" MinWidth="840" MinHeight="520"
+        Background="#141414">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>  <!-- 툴바 -->
+            <RowDefinition Height="*"/>     <!-- 본문 -->
+            <RowDefinition Height="Auto"/>  <!-- 상태 바 -->
+        </Grid.RowDefinitions>
+
+        <!-- ══ 툴바 ══ -->
+        <Border Grid.Row="0" Background="#0E0E0E" BorderBrush="#252525" BorderThickness="0,0,0,1">
+            <WrapPanel Orientation="Horizontal" Margin="8,6">
+                <Button x:Name="BtnScanFolder" Content="📂 폴더 스캔" Padding="10,5"
+                        Click="BtnScanFolder_Click"/>
+                <Button x:Name="BtnScanDesktop" Content="🖥 바탕화면" Padding="10,5" Margin="4,0,0,0"
+                        Click="BtnScanDesktop_Click"/>
+                <Button x:Name="BtnScanStartMenu" Content="🚀 시작 메뉴" Padding="10,5" Margin="4,0,0,0"
+                        Click="BtnScanStartMenu_Click"/>
+                <Separator Width="1" Background="#333333" Margin="8,2"/>
+                <Button x:Name="BtnNew" Content="➕ 새 바로가기" Padding="10,5" Margin="0,0,4,0"
+                        Click="BtnNew_Click"/>
+                <Button x:Name="BtnBatchCreate" Content="⚡ 일괄 생성" Padding="10,5" Margin="0,0,4,0"
+                        Click="BtnBatchCreate_Click"/>
+                <Separator Width="1" Background="#333333" Margin="8,2"/>
+                <Button x:Name="BtnDelete" Content="🗑 삭제" Padding="10,5" Margin="0,0,4,0"
+                        IsEnabled="False" Click="BtnDelete_Click"/>
+                <Button x:Name="BtnFixBroken" Content="🔧 깨진 링크 정리" Padding="10,5"
+                        Click="BtnFixBroken_Click"/>
+                <Separator Width="1" Background="#333333" Margin="8,2"/>
+                <TextBox x:Name="TxtSearch" Width="180" Padding="6,4"
+                         Background="#1A1A1A" Foreground="#C0C0C0" BorderBrush="#333333"
+                         TextChanged="TxtSearch_TextChanged">
+                    <TextBox.Style>
+                        <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
+                            <Style.Triggers>
+                                <Trigger Property="Text" Value="">
+                                    <Setter Property="Background">
+                                        <Setter.Value>
+                                            <VisualBrush Stretch="None" AlignmentX="Left">
+                                                <VisualBrush.Visual>
+                                                    <TextBlock Text="🔍 이름/대상 검색..." Foreground="#444444"
+                                                               FontSize="11" Margin="8,0"/>
+                                                </VisualBrush.Visual>
+                                            </VisualBrush>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBox.Style>
+                </TextBox>
+            </WrapPanel>
+        </Border>
+
+        <!-- ══ 본문 ══ -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="4"/>
+                <ColumnDefinition Width="360"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- 바로가기 목록 (좌) -->
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <!-- 필터 바 -->
+                <Border Grid.Row="0" Background="#111111" BorderBrush="#252525" BorderThickness="0,0,0,1"
+                        Padding="10,6">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="필터:" Foreground="#555555" FontSize="11" VerticalAlignment="Center" Margin="0,0,6,0"/>
+                        <CheckBox x:Name="ChkAll"     Content="전체"    Margin="0,0,10,0" IsChecked="True"  Checked="ChkFilter_Changed" Unchecked="ChkFilter_Changed"/>
+                        <CheckBox x:Name="ChkOk"      Content="✅ 정상"  Margin="0,0,10,0" IsChecked="True"  Checked="ChkFilter_Changed" Unchecked="ChkFilter_Changed"/>
+                        <CheckBox x:Name="ChkBroken"  Content="❌ 깨짐"  Margin="0,0,10,0" IsChecked="True"  Checked="ChkFilter_Changed" Unchecked="ChkFilter_Changed"/>
+                        <Separator Width="1" Background="#333333" Margin="4,2"/>
+                        <TextBlock x:Name="TxtCount" Foreground="#555555" FontSize="11"
+                                   VerticalAlignment="Center" Margin="8,0,0,0"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- 목록 -->
+                <ListBox x:Name="LstShortcuts" Grid.Row="1"
+                         Background="#141414" BorderThickness="0"
+                         VirtualizingPanel.IsVirtualizing="True"
+                         SelectionChanged="LstShortcuts_SelectionChanged"
+                         MouseDoubleClick="LstShortcuts_DoubleClick">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Border Padding="8,6" BorderBrush="#1E1E1E" BorderThickness="0,0,0,1">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="28"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="70"/>
+                                    </Grid.ColumnDefinitions>
+                                    <!-- 아이콘 -->
+                                    <Image Grid.Column="0" Source="{Binding IconImage}" Width="20" Height="20"
+                                           VerticalAlignment="Center" Margin="0,0,4,0"/>
+                                    <!-- 이름 + 경로 -->
+                                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                        <TextBlock Text="{Binding Name}" Foreground="#E0E0E0"
+                                                   FontSize="12" FontWeight="SemiBold"
+                                                   TextTrimming="CharacterEllipsis"/>
+                                        <TextBlock Text="{Binding TargetPath}" Foreground="#555555"
+                                                   FontSize="10" TextTrimming="CharacterEllipsis"/>
+                                    </StackPanel>
+                                    <!-- 상태 -->
+                                    <Border Grid.Column="2" CornerRadius="3" Padding="4,2"
+                                            Background="#1A1A1A" VerticalAlignment="Center"
+                                            HorizontalAlignment="Right">
+                                        <TextBlock Text="{Binding StatusText}" Foreground="{Binding StatusBrush}"
+                                                   FontSize="10"/>
+                                    </Border>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </Grid>
+
+            <GridSplitter Grid.Column="1" Width="4" HorizontalAlignment="Stretch"
+                          Background="#252525" ResizeDirection="Columns"/>
+
+            <!-- 상세 / 편집 패널 (우) -->
+            <Grid Grid.Column="2" Background="#0E0E0E">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- 헤더 -->
+                <Border Grid.Row="0" Background="#111111" BorderBrush="#252525" BorderThickness="0,0,0,1"
+                        Padding="12,8">
+                    <StackPanel Orientation="Horizontal">
+                        <Image x:Name="ImgDetailIcon" Width="24" Height="24" Margin="0,0,8,0"/>
+                        <StackPanel VerticalAlignment="Center">
+                            <TextBlock Text="바로가기 편집" Foreground="#FF6B35" FontSize="12" FontWeight="Bold"/>
+                            <TextBlock x:Name="TxtDetailName" Foreground="#888888" FontSize="11"
+                                       TextTrimming="CharacterEllipsis" MaxWidth="280"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+
+                <!-- 편집 폼 -->
+                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Padding="12">
+                    <StackPanel x:Name="PanelEdit">
+
+                        <TextBlock Text="이름 (.lnk 파일명)" Foreground="#555555" FontSize="10" Margin="0,0,0,3"/>
+                        <TextBox x:Name="TxtName" Margin="0,0,0,10"/>
+
+                        <TextBlock Text="저장 위치" Foreground="#555555" FontSize="10" Margin="0,0,0,3"/>
+                        <Grid Margin="0,0,0,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox x:Name="TxtSavePath"/>
+                            <Button Grid.Column="1" Content="…" Padding="8,4" Margin="4,0,0,0"
+                                    Click="BtnBrowseSavePath_Click"/>
+                        </Grid>
+
+                        <TextBlock Text="대상 경로" Foreground="#555555" FontSize="10" Margin="0,0,0,3"/>
+                        <Grid Margin="0,0,0,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox x:Name="TxtTarget"/>
+                            <Button Grid.Column="1" Content="…" Padding="8,4" Margin="4,0,0,0"
+                                    Click="BtnBrowseTarget_Click"/>
+                        </Grid>
+
+                        <TextBlock Text="인수 (Arguments)" Foreground="#555555" FontSize="10" Margin="0,0,0,3"/>
+                        <TextBox x:Name="TxtArguments" Margin="0,0,0,10"/>
+
+                        <TextBlock Text="시작 위치 (Working Directory)" Foreground="#555555" FontSize="10" Margin="0,0,0,3"/>
+                        <Grid Margin="0,0,0,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox x:Name="TxtWorkingDir"/>
+                            <Button Grid.Column="1" Content="…" Padding="8,4" Margin="4,0,0,0"
+                                    Click="BtnBrowseWorkDir_Click"/>
+                        </Grid>
+
+                        <TextBlock Text="설명" Foreground="#555555" FontSize="10" Margin="0,0,0,3"/>
+                        <TextBox x:Name="TxtDescription" Margin="0,0,0,10"/>
+
+                        <TextBlock Text="아이콘 파일" Foreground="#555555" FontSize="10" Margin="0,0,0,3"/>
+                        <Grid Margin="0,0,0,4">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox x:Name="TxtIconPath"/>
+                            <TextBox x:Name="TxtIconIndex" Grid.Column="1" Width="40" Margin="4,0" Text="0"/>
+                            <Button Grid.Column="2" Content="…" Padding="8,4"
+                                    Click="BtnBrowseIcon_Click"/>
+                        </Grid>
+                        <TextBlock Text="인덱스 번호 (EXE/DLL 내 아이콘 번호, 기본 0)"
+                                   Foreground="#333333" FontSize="10" Margin="0,0,0,10"/>
+
+                        <!-- 저장 위치 빠른 선택 -->
+                        <TextBlock Text="빠른 위치 선택" Foreground="#555555" FontSize="10" Margin="0,0,0,3"/>
+                        <ComboBox x:Name="CmbQuickLocation" Margin="0,0,0,10"
+                                  SelectionChanged="CmbQuickLocation_SelectionChanged"/>
+
+                    </StackPanel>
+                </ScrollViewer>
+
+                <!-- 저장 버튼 -->
+                <Border Grid.Row="2" Background="#111111" BorderBrush="#252525" BorderThickness="0,1,0,0"
+                        Padding="12,8">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Button x:Name="BtnReset" Content="↺ 초기화" Padding="10,5" Margin="0,0,6,0"
+                                Click="BtnReset_Click"/>
+                        <Button x:Name="BtnSave" Content="💾 저장" Padding="14,5"
+                                Background="#2A1A0A" Click="BtnSave_Click"/>
+                    </StackPanel>
+                </Border>
+
+            </Grid>
+        </Grid>
+
+        <!-- ══ 상태 바 ══ -->
+        <Border Grid.Row="2" Background="#0A0A0A" BorderBrush="#252525" BorderThickness="0,1,0,0">
+            <Grid Margin="8,4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock x:Name="TxtStatus" Grid.Column="0" Foreground="#444444"
+                           FontSize="11" VerticalAlignment="Center"/>
+                <TextBlock x:Name="TxtScanDir" Grid.Column="1" Foreground="#333333"
+                           FontSize="11" VerticalAlignment="Center"
+                           TextTrimming="CharacterEllipsis" MaxWidth="400"/>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

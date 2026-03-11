@@ -1,0 +1,9 @@
+global using System.Runtime.InteropServices;
+global using System.Windows;
+global using System.Windows.Controls;
+global using System.Windows.Input;
+global using System.Windows.Interop;
+global using System.Windows.Media;
+global using System.Windows.Shapes;
+global using DodgeCraft.Engine;
+global using DodgeCraft.Entities;

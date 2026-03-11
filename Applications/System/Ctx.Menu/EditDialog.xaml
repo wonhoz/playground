@@ -1,0 +1,135 @@
+<Window x:Class="CtxMenu.EditDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="항목 편집"
+        Width="540" Height="400"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize"
+        Background="{StaticResource BgBrush}"
+        Foreground="{StaticResource TextBrush}"
+        FontFamily="Segoe UI">
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>  <!-- 제목 -->
+            <RowDefinition Height="*"/>     <!-- 폼 -->
+            <RowDefinition Height="Auto"/>  <!-- 버튼 -->
+        </Grid.RowDefinitions>
+
+        <!-- 제목 -->
+        <TextBlock Grid.Row="0" x:Name="TxtTitle"
+                   Text="새 항목 추가"
+                   FontSize="14" FontWeight="SemiBold"
+                   Foreground="#D0DCFF" Margin="0,0,0,16"/>
+
+        <!-- 폼 -->
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="110"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- 표시 이름 -->
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="표시 이름"
+                       VerticalAlignment="Center" Foreground="#8898C0" FontSize="12"/>
+            <TextBox Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"
+                     x:Name="TxtDisplayName" VerticalAlignment="Center"
+                     TextChanged="TxtDisplayName_TextChanged"/>
+
+            <!-- 키 이름 -->
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="키 이름"
+                       VerticalAlignment="Center" Foreground="#8898C0" FontSize="12"/>
+            <TextBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2"
+                     x:Name="TxtKeyName" VerticalAlignment="Center"
+                     FontFamily="Consolas"/>
+
+            <!-- 명령어 -->
+            <TextBlock Grid.Row="4" Grid.Column="0" Text="명령어"
+                       VerticalAlignment="Center" Foreground="#8898C0" FontSize="12"/>
+            <TextBox Grid.Row="4" Grid.Column="1"
+                     x:Name="TxtCommand" VerticalAlignment="Center"
+                     FontFamily="Consolas" FontSize="11"
+                     ToolTip="%1 = 파일 경로, %V = 폴더 경로, %W = 작업 디렉터리"/>
+            <Button Grid.Row="4" Grid.Column="2"
+                    Content="찾기" Padding="8,5" Margin="6,0,0,0"
+                    Click="BtnBrowseCommand_Click"/>
+
+            <!-- 아이콘 경로 -->
+            <TextBlock Grid.Row="6" Grid.Column="0" Text="아이콘 경로"
+                       VerticalAlignment="Center" Foreground="#8898C0" FontSize="12"/>
+            <TextBox Grid.Row="6" Grid.Column="1"
+                     x:Name="TxtIconPath" VerticalAlignment="Center"
+                     FontFamily="Consolas" FontSize="11"
+                     ToolTip="예: C:\path\to\app.exe,0"/>
+            <Button Grid.Row="6" Grid.Column="2"
+                    Content="찾기" Padding="8,5" Margin="6,0,0,0"
+                    Click="BtnBrowseIcon_Click"/>
+
+            <!-- 대상 타입 -->
+            <TextBlock Grid.Row="8" Grid.Column="0" Text="대상"
+                       VerticalAlignment="Center" Foreground="#8898C0" FontSize="12"/>
+            <Grid Grid.Row="8" Grid.Column="1" Grid.ColumnSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="10"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <ComboBox Grid.Column="0" x:Name="CmbTarget"
+                          SelectionChanged="CmbTarget_SelectionChanged">
+                    <ComboBoxItem Content="모든 파일 (*)" Tag="AllFiles"/>
+                    <ComboBoxItem Content="폴더" Tag="Folder"/>
+                    <ComboBoxItem Content="배경 (폴더 빈 곳)" Tag="Background"/>
+                    <ComboBoxItem Content="드라이브" Tag="Drive"/>
+                    <ComboBoxItem Content="확장자별" Tag="Extension"/>
+                </ComboBox>
+                <TextBlock Grid.Column="2" Text="확장자:"
+                           VerticalAlignment="Center" Margin="10,0,6,0"
+                           Foreground="#6070A0" FontSize="12"
+                           x:Name="LblExt" Visibility="Collapsed"/>
+                <TextBox Grid.Column="3" x:Name="TxtExt"
+                         Width="60" VerticalAlignment="Center"
+                         Visibility="Collapsed"
+                         ToolTip="예: .py  .md  .txt"/>
+            </Grid>
+
+            <!-- 범위 -->
+            <TextBlock Grid.Row="10" Grid.Column="0" Text="범위"
+                       VerticalAlignment="Center" Foreground="#8898C0" FontSize="12"/>
+            <StackPanel Grid.Row="10" Grid.Column="1" Grid.ColumnSpan="2"
+                        Orientation="Horizontal" VerticalAlignment="Center">
+                <RadioButton x:Name="RadSystem" Content="시스템 (HKLM)"
+                             IsChecked="True" Margin="0,0,20,0"
+                             Foreground="#C0D0FF"/>
+                <RadioButton x:Name="RadUser" Content="사용자 (HKCU)"
+                             Foreground="#C0D0FF"/>
+            </StackPanel>
+        </Grid>
+
+        <!-- 버튼 -->
+        <StackPanel Grid.Row="2" Orientation="Horizontal"
+                    HorizontalAlignment="Right" Margin="0,16,0,0">
+            <TextBlock x:Name="TxtError" Foreground="#FF7070" FontSize="11"
+                       VerticalAlignment="Center" Margin="0,0,12,0"/>
+            <Button Content="취소" Padding="16,7" Margin="0,0,8,0"
+                    Click="BtnCancel_Click"/>
+            <Button x:Name="BtnOk" Content="확인" Padding="16,7"
+                    Background="#1A2A1A" BorderBrush="#2A5A2A" Foreground="#50E080"
+                    Click="BtnOk_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

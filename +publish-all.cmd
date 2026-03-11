@@ -82,6 +82,7 @@ call :pub "Web.Shot"              "Applications\Photo.Picture\Web.Shot"         
 
 :: ── Applications / System ─────────────────────────────────────────
 call :pub "Boot.Map"              "Applications\System\Boot.Map"                           "Boot.Map.exe"              "Applications\System"
+call :pub "Ctx.Menu"              "Applications\System\Ctx.Menu"                           "Ctx.Menu.exe"              "Applications\System\Ctx.Menu"
 call :pub "Drive.Bench"           "Applications\System\Drive.Bench"                        "Drive.Bench.exe"           "Applications\System"
 call :pub "Burn.Rate"             "Applications\System\Burn.Rate"                          "Burn.Rate.exe"             "Applications\System"
 call :pub "Env.Guard"             "Applications\System\Env.Guard"                          "Env.Guard.exe"             "Applications\System"

@@ -1,0 +1,9 @@
+global using System.IO;
+global using System.Collections.ObjectModel;
+global using System.ComponentModel;
+global using System.Runtime.InteropServices;
+global using System.Text.Json;
+global using System.Windows;
+global using Microsoft.Win32;
+global using CtxMenu.Models;
+global using CtxMenu.Services;

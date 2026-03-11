@@ -1,0 +1,287 @@
+<Window x:Class="CtxMenu.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:CtxMenu"
+        Title="Ctx.Menu"
+        Width="1050" Height="680"
+        MinWidth="800" MinHeight="500"
+        WindowStartupLocation="CenterScreen"
+        Background="{StaticResource BgBrush}"
+        Foreground="{StaticResource TextBrush}"
+        FontFamily="Segoe UI">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>   <!-- 툴바 -->
+            <RowDefinition Height="*"/>    <!-- 메인 영역 -->
+            <RowDefinition Height="40"/>   <!-- 액션 바 -->
+            <RowDefinition Height="28"/>   <!-- 상태 바 -->
+        </Grid.RowDefinitions>
+
+        <!-- ── 툴바 ──────────────────────────────────────────────── -->
+        <Border Grid.Row="0"
+                Background="{StaticResource HeaderBrush}"
+                BorderBrush="{StaticResource BorderBrush}"
+                BorderThickness="0,0,0,1">
+            <Grid Margin="12,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- 앱 제목 -->
+                <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock Text="&#x25A6;" FontSize="18" Foreground="#4A9EFF" Margin="0,0,8,0" VerticalAlignment="Center"/>
+                    <TextBlock Text="Ctx.Menu" FontSize="14" FontWeight="SemiBold"
+                               Foreground="#D0DCFF" VerticalAlignment="Center"/>
+                    <Border x:Name="AdminBadge" Margin="8,0,0,0"
+                            Background="#3A1A1A" BorderBrush="#FF5555"
+                            BorderThickness="1" CornerRadius="3" Padding="5,2"
+                            VerticalAlignment="Center" Visibility="Collapsed">
+                        <TextBlock Text="관리자 권한 필요" FontSize="10" Foreground="#FF5555"/>
+                    </Border>
+                </StackPanel>
+
+                <!-- 검색창 -->
+                <Border Grid.Column="1" Margin="16,0" VerticalAlignment="Center"
+                        Background="#1A1E2E" BorderBrush="#2A3050"
+                        BorderThickness="1" CornerRadius="4">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0" Text="&#x1F50D;" FontSize="12"
+                                   Foreground="#4A5878" Margin="8,0,4,0" VerticalAlignment="Center"/>
+                        <TextBox x:Name="TxtSearch"
+                                 Grid.Column="1"
+                                 BorderThickness="0"
+                                 Background="Transparent"
+                                 VerticalAlignment="Center"
+                                 TextChanged="TxtSearch_TextChanged"
+                                 ToolTip="항목 이름, 키, 명령어 검색"/>
+                        <TextBlock x:Name="PlaceholderSearch" Grid.Column="1"
+                                   Text="검색..." FontSize="12"
+                                   Foreground="#3A4868" Margin="0,0,0,0"
+                                   VerticalAlignment="Center" IsHitTestVisible="False"/>
+                        <Button Grid.Column="2" x:Name="BtnClearSearch"
+                                Content="✕" Padding="6,4"
+                                Background="Transparent" BorderThickness="0"
+                                Foreground="#4A5878" FontSize="10"
+                                Visibility="Collapsed"
+                                Click="BtnClearSearch_Click"/>
+                    </Grid>
+                </Border>
+
+                <!-- 범위 필터 -->
+                <ComboBox Grid.Column="2" x:Name="CmbScope"
+                          Width="110" Margin="0,0,8,0"
+                          VerticalAlignment="Center"
+                          SelectionChanged="CmbScope_SelectionChanged">
+                    <ComboBoxItem Content="전체 범위" IsSelected="True"/>
+                    <ComboBoxItem Content="시스템"/>
+                    <ComboBoxItem Content="사용자"/>
+                </ComboBox>
+
+                <!-- 새로고침 -->
+                <Button Grid.Column="3" x:Name="BtnRefresh"
+                        Content="↻  새로고침" Padding="10,6"
+                        Margin="0,0,8,0" VerticalAlignment="Center"
+                        Click="BtnRefresh_Click"/>
+
+                <!-- 상태 표시 -->
+                <TextBlock Grid.Column="4" x:Name="TxtCount"
+                           FontSize="11" Foreground="#4A5878"
+                           VerticalAlignment="Center"/>
+            </Grid>
+        </Border>
+
+        <!-- ── 메인 영역 ──────────────────────────────────────────── -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="180" MinWidth="140" MaxWidth="260"/>
+                <ColumnDefinition Width="4"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- 사이드바 -->
+            <Border Grid.Column="0" Background="#141720"
+                    BorderBrush="{StaticResource BorderBrush}"
+                    BorderThickness="0,0,1,0">
+                <ListBox x:Name="SideList"
+                         Style="{StaticResource SidebarListBox}"
+                         ItemContainerStyle="{StaticResource SidebarItem}"
+                         SelectionChanged="SideList_SelectionChanged"/>
+            </Border>
+
+            <!-- 구분선 -->
+            <GridSplitter Grid.Column="1" Width="4"
+                          Background="#1A1E2E"
+                          HorizontalAlignment="Stretch"
+                          ResizeBehavior="PreviousAndNext"/>
+
+            <!-- DataGrid 영역 -->
+            <Grid Grid.Column="2">
+                <DataGrid x:Name="Grid"
+                          SelectionChanged="Grid_SelectionChanged">
+                    <DataGrid.Columns>
+                        <!-- 활성화 -->
+                        <DataGridTemplateColumn Header="활성" Width="50" CanUserSort="False">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsChecked="{Binding IsEnabled, Mode=OneWay}"
+                                              HorizontalAlignment="Center"
+                                              Click="ChkEnabled_Click"
+                                              Tag="{Binding}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <!-- 표시 이름 -->
+                        <DataGridTextColumn Header="표시 이름"
+                                            Binding="{Binding DisplayOrKey}"
+                                            Width="180"/>
+
+                        <!-- 키 이름 -->
+                        <DataGridTextColumn Header="키 이름"
+                                            Binding="{Binding KeyName}"
+                                            Width="130">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Foreground" Value="#7080A0"/>
+                                    <Setter Property="FontFamily" Value="Consolas"/>
+                                    <Setter Property="FontSize"   Value="11"/>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+
+                        <!-- 명령어 -->
+                        <DataGridTextColumn Header="명령어"
+                                            Binding="{Binding Command}"
+                                            Width="*">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Foreground"    Value="#8898C0"/>
+                                    <Setter Property="FontFamily"    Value="Consolas"/>
+                                    <Setter Property="FontSize"      Value="11"/>
+                                    <Setter Property="TextTrimming"  Value="CharacterEllipsis"/>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+
+                        <!-- 대상 -->
+                        <DataGridTemplateColumn Header="대상" Width="80">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Border CornerRadius="3" Padding="5,2"
+                                            HorizontalAlignment="Center"
+                                            Background="{Binding TargetBg}">
+                                        <TextBlock Text="{Binding TargetDisplay}"
+                                                   FontSize="10"
+                                                   Foreground="{Binding TargetFg}"/>
+                                    </Border>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <!-- 범위 -->
+                        <DataGridTemplateColumn Header="범위" Width="65">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding ScopeDisplay}"
+                                               FontSize="10"
+                                               HorizontalAlignment="Center"
+                                               Foreground="{Binding ScopeFg}"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+                <!-- 로딩 오버레이 -->
+                <Border x:Name="LoadingOverlay"
+                        Background="#CC12131C"
+                        Visibility="Collapsed">
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <TextBlock Text="레지스트리 로딩 중..." FontSize="14"
+                                   Foreground="#D0DCFF" HorizontalAlignment="Center"/>
+                        <TextBlock x:Name="TxtLoadCount" FontSize="11"
+                                   Foreground="#6070A0" HorizontalAlignment="Center"
+                                   Margin="0,6,0,0"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- 빈 목록 안내 -->
+                <Border x:Name="EmptyOverlay" Visibility="Collapsed"
+                        Background="Transparent">
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                        <TextBlock Text="&#x1F50D;" FontSize="32" HorizontalAlignment="Center"
+                                   Margin="0,0,0,8"/>
+                        <TextBlock Text="검색 결과가 없습니다" FontSize="13"
+                                   Foreground="#4A5878" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </Grid>
+
+        <!-- ── 액션 바 ─────────────────────────────────────────────── -->
+        <Border Grid.Row="2"
+                Background="{StaticResource HeaderBrush}"
+                BorderBrush="{StaticResource BorderBrush}"
+                BorderThickness="0,1,0,0">
+            <StackPanel Orientation="Horizontal" Margin="12,0" VerticalAlignment="Center">
+                <Button x:Name="BtnAdd"    Content="+ 추가"   Padding="12,5" Margin="0,0,6,0"
+                        Background="#1A2A1A" BorderBrush="#2A5A2A" Foreground="#50E080"
+                        Click="BtnAdd_Click"/>
+                <Button x:Name="BtnEdit"   Content="✎ 편집"   Padding="12,5" Margin="0,0,6,0"
+                        IsEnabled="False" Click="BtnEdit_Click"/>
+                <Button x:Name="BtnDelete" Content="✕ 삭제"   Padding="12,5"
+                        IsEnabled="False"
+                        Background="#2A1A1A" BorderBrush="#5A2A2A" Foreground="#FF7070"
+                        Click="BtnDelete_Click"/>
+
+                <Separator Width="1" Height="20" Background="{StaticResource BorderBrush}"
+                           Margin="10,0"/>
+
+                <Button x:Name="BtnBackup"  Content="↑ 백업"   Padding="12,5" Margin="0,0,6,0"
+                        Click="BtnBackup_Click"/>
+                <Button x:Name="BtnRestore" Content="↓ 복원"   Padding="12,5"
+                        Click="BtnRestore_Click"/>
+
+                <Separator Width="1" Height="20" Background="{StaticResource BorderBrush}"
+                           Margin="10,0"/>
+
+                <!-- 비활성 항목 토글 -->
+                <CheckBox x:Name="ChkShowDisabled" Content="비활성 표시"
+                          IsChecked="True" VerticalAlignment="Center"
+                          Checked="ChkShowDisabled_Changed"
+                          Unchecked="ChkShowDisabled_Changed"/>
+            </StackPanel>
+        </Border>
+
+        <!-- ── 상태 바 ─────────────────────────────────────────────── -->
+        <Border Grid.Row="3"
+                Background="#0C0D14"
+                BorderBrush="{StaticResource BorderBrush}"
+                BorderThickness="0,1,0,0">
+            <Grid Margin="12,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock x:Name="TxtStatus"
+                           Grid.Column="0"
+                           FontSize="11" Foreground="#4A5878"
+                           VerticalAlignment="Center"/>
+                <TextBlock x:Name="TxtSelected"
+                           Grid.Column="1"
+                           FontSize="11" Foreground="#3A4868"
+                           VerticalAlignment="Center"/>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

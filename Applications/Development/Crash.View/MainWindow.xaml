@@ -1,0 +1,256 @@
+<Window x:Class="CrashView.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Crash.View — 덤프 파일 분석기"
+        Width="1100" Height="720" MinWidth="820" MinHeight="520"
+        Background="#141414"
+        AllowDrop="True">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>  <!-- 툴바 -->
+            <RowDefinition Height="*"/>     <!-- 본문 -->
+            <RowDefinition Height="Auto"/>  <!-- 상태 바 -->
+        </Grid.RowDefinitions>
+
+        <!-- ══ 툴바 ══ -->
+        <Border Grid.Row="0" Background="#0E0E0E" BorderBrush="#252525" BorderThickness="0,0,0,1">
+            <StackPanel Orientation="Horizontal" Margin="8,6">
+                <Button x:Name="BtnOpen"   Content="📂 덤프 열기"  Padding="10,5" Click="BtnOpen_Click"/>
+                <Button x:Name="BtnExport" Content="📄 리포트 저장" Padding="10,5" Margin="6,0,0,0"
+                        IsEnabled="False" Click="BtnExport_Click"/>
+                <Separator Width="1" Background="#333333" Margin="8,2"/>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock Text="심볼 서버:" Foreground="#555555" FontSize="11" VerticalAlignment="Center" Margin="0,0,6,0"/>
+                    <Border Background="#1A1A1A" BorderBrush="#333333" BorderThickness="1"
+                            CornerRadius="4" Padding="6,3">
+                        <TextBlock x:Name="TxtSymbolStatus" Text="로컬만" Foreground="#888888" FontSize="11"/>
+                    </Border>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+
+        <!-- ══ 본문 ══ -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="260"/>
+                <ColumnDefinition Width="4"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- 좌: 파일 목록 + 예외 요약 -->
+            <Grid Grid.Column="0" Background="#0E0E0E">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="180"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <!-- 드롭 영역 힌트 -->
+                <Border Grid.Row="0" x:Name="BdrDrop"
+                        Background="#0A1008" BorderBrush="#1A3A1A" BorderThickness="1"
+                        CornerRadius="4" Margin="8" Padding="12,10"
+                        AllowDrop="True">
+                    <StackPanel HorizontalAlignment="Center">
+                        <TextBlock Text="💥" FontSize="28" HorizontalAlignment="Center"/>
+                        <TextBlock Text=".dmp / .mdmp 파일을" Foreground="#444444" FontSize="11" HorizontalAlignment="Center"/>
+                        <TextBlock Text="여기에 드래그하세요" Foreground="#444444" FontSize="11" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- 예외 요약 -->
+                <Border Grid.Row="1" Background="#111111" BorderBrush="#252525" BorderThickness="0,0,0,1"
+                        Padding="12,10" Margin="0,4,0,0">
+                    <StackPanel>
+                        <TextBlock Text="예외 정보" Foreground="#FF6B35" FontSize="11" FontWeight="Bold" Margin="0,0,0,6"/>
+                        <TextBlock x:Name="TxtExType" Text="——" Foreground="#FF6B35"
+                                   FontSize="13" FontWeight="Bold" FontFamily="Consolas"
+                                   TextWrapping="Wrap" Margin="0,0,0,3"/>
+                        <TextBlock x:Name="TxtExCode" Text="" Foreground="#888888"
+                                   FontSize="10" FontFamily="Consolas" Margin="0,0,0,3"/>
+                        <TextBlock x:Name="TxtExMsg" Text="——" Foreground="#C0C0C0"
+                                   FontSize="11" TextWrapping="Wrap" Margin="0,0,0,6"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <StackPanel Grid.Column="0">
+                                <TextBlock Text="아키텍처" Foreground="#444444" FontSize="10"/>
+                                <TextBlock x:Name="TxtArch" Text="——" Foreground="#C0C0C0" FontSize="11"/>
+                            </StackPanel>
+                            <StackPanel Grid.Column="1">
+                                <TextBlock Text="관리 코드" Foreground="#444444" FontSize="10"/>
+                                <TextBlock x:Name="TxtManaged" Text="——" Foreground="#C0C0C0" FontSize="11"/>
+                            </StackPanel>
+                        </Grid>
+                    </StackPanel>
+                </Border>
+
+                <!-- GC 힙 섹션 -->
+                <Border Grid.Row="2" Background="#111111" BorderBrush="#252525" BorderThickness="0,0,0,1"
+                        Padding="12,8">
+                    <StackPanel x:Name="PanelHeap">
+                        <TextBlock Text="GC 힙" Foreground="#FF6B35" FontSize="10" FontWeight="Bold" Margin="0,0,0,4"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="40"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="50"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0" Grid.Column="0" Text="Gen0" Foreground="#555555" FontSize="10"/>
+                            <ProgressBar x:Name="PbGen0" Grid.Row="0" Grid.Column="1" Height="8" Margin="4,2" Background="#1A1A1A" Foreground="#6EFF6E"/>
+                            <TextBlock x:Name="TxtGen0" Grid.Row="0" Grid.Column="2" Foreground="#888888" FontSize="10" HorizontalAlignment="Right"/>
+                            <TextBlock Grid.Row="1" Grid.Column="0" Text="Gen1" Foreground="#555555" FontSize="10"/>
+                            <ProgressBar x:Name="PbGen1" Grid.Row="1" Grid.Column="1" Height="8" Margin="4,2" Background="#1A1A1A" Foreground="#FFD700"/>
+                            <TextBlock x:Name="TxtGen1" Grid.Row="1" Grid.Column="2" Foreground="#888888" FontSize="10" HorizontalAlignment="Right"/>
+                            <TextBlock Grid.Row="2" Grid.Column="0" Text="Gen2" Foreground="#555555" FontSize="10"/>
+                            <ProgressBar x:Name="PbGen2" Grid.Row="2" Grid.Column="1" Height="8" Margin="4,2" Background="#1A1A1A" Foreground="#FF9A3C"/>
+                            <TextBlock x:Name="TxtGen2" Grid.Row="2" Grid.Column="2" Foreground="#888888" FontSize="10" HorizontalAlignment="Right"/>
+                            <TextBlock Grid.Row="3" Grid.Column="0" Text="LOH"  Foreground="#555555" FontSize="10"/>
+                            <ProgressBar x:Name="PbLoh"  Grid.Row="3" Grid.Column="1" Height="8" Margin="4,2" Background="#1A1A1A" Foreground="#FF5555"/>
+                            <TextBlock x:Name="TxtLoh"  Grid.Row="3" Grid.Column="2" Foreground="#888888" FontSize="10" HorizontalAlignment="Right"/>
+                        </Grid>
+                    </StackPanel>
+                </Border>
+
+                <!-- 스레드 목록 -->
+                <Grid Grid.Row="3">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Border Grid.Row="0" Padding="12,4,12,4" Background="#0E0E0E">
+                        <TextBlock Text="스레드" Foreground="#444444" FontSize="10"/>
+                    </Border>
+                    <ListBox x:Name="LstThreads" Grid.Row="1"
+                             Background="#0A0A0A" BorderThickness="0"
+                             SelectionChanged="LstThreads_SelectionChanged">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Border Padding="10,6" BorderBrush="#1A1A1A" BorderThickness="0,0,0,1">
+                                    <StackPanel>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="TID " Foreground="#555555" FontSize="10"/>
+                                            <TextBlock Text="{Binding ThreadId}" Foreground="#C0C0C0"
+                                                       FontSize="11" FontFamily="Consolas"/>
+                                        </StackPanel>
+                                        <TextBlock Text="{Binding State}" Foreground="{Binding StateBrush}" FontSize="10"/>
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </Grid>
+            </Grid>
+
+            <GridSplitter Grid.Column="1" Width="4" HorizontalAlignment="Stretch"
+                          Background="#252525" ResizeDirection="Columns"/>
+
+            <!-- 우: 탭 패널 -->
+            <TabControl Grid.Column="2" Background="#0E0E0E">
+
+                <!-- 콜스택 탭 -->
+                <TabItem Header="💣 콜스택">
+                    <Grid Background="#0E0E0E">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Border Grid.Row="0" Background="#111111" BorderBrush="#252525" BorderThickness="0,0,0,1"
+                                Padding="12,6">
+                            <TextBlock x:Name="TxtStackHeader" Text="크래시 스레드 콜스택"
+                                       Foreground="#FF6B35" FontSize="11" FontWeight="Bold"/>
+                        </Border>
+                        <ListBox x:Name="LstStack" Grid.Row="1" Background="#0A0A0A" BorderThickness="0">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Padding="10,4" BorderBrush="#111111" BorderThickness="0,0,0,1">
+                                        <TextBlock Text="{Binding Display}"
+                                                   Foreground="{Binding FrameBrush}"
+                                                   FontSize="11" FontFamily="Consolas"
+                                                   TextWrapping="Wrap"/>
+                                    </Border>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </Grid>
+                </TabItem>
+
+                <!-- 모듈 탭 -->
+                <TabItem Header="📦 모듈">
+                    <Grid Background="#0E0E0E">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Border Grid.Row="0" Background="#111111" BorderBrush="#252525" BorderThickness="0,0,0,1"
+                                Padding="12,6">
+                            <TextBlock x:Name="TxtModuleHeader" Text="로드된 모듈"
+                                       Foreground="#FF6B35" FontSize="11" FontWeight="Bold"/>
+                        </Border>
+                        <ListBox x:Name="LstModules" Grid.Row="1" Background="#0A0A0A" BorderThickness="0">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Padding="10,5" BorderBrush="#111111" BorderThickness="0,0,0,1">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="200"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="70"/>
+                                                <ColumnDefinition Width="40"/>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Grid.Column="0" Text="{Binding Name}"
+                                                       Foreground="#E0E0E0" FontSize="11" FontFamily="Consolas"
+                                                       TextTrimming="CharacterEllipsis"/>
+                                            <TextBlock Grid.Column="1" Text="{Binding FilePath}"
+                                                       Foreground="#444444" FontSize="10"
+                                                       TextTrimming="CharacterEllipsis"/>
+                                            <TextBlock Grid.Column="2" Text="{Binding Version}"
+                                                       Foreground="#666666" FontSize="10" HorizontalAlignment="Right"/>
+                                            <TextBlock Grid.Column="3" Text="관리" Foreground="{Binding ManagedBrush}"
+                                                       FontSize="10" HorizontalAlignment="Center"/>
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </Grid>
+                </TabItem>
+
+                <!-- 분석 로그 탭 -->
+                <TabItem Header="📋 분석 로그">
+                    <TextBox x:Name="TxtAnalysisLog"
+                             Background="#0A0A0A" Foreground="#888888"
+                             FontFamily="Consolas" FontSize="11"
+                             IsReadOnly="True" TextWrapping="Wrap"
+                             VerticalScrollBarVisibility="Auto"
+                             BorderThickness="0" Padding="12"/>
+                </TabItem>
+
+            </TabControl>
+        </Grid>
+
+        <!-- ══ 상태 바 ══ -->
+        <Border Grid.Row="2" Background="#0A0A0A" BorderBrush="#252525" BorderThickness="0,1,0,0">
+            <Grid Margin="8,3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock x:Name="TxtStatus" Grid.Column="0" Foreground="#444444"
+                           FontSize="11" VerticalAlignment="Center"/>
+                <ProgressBar x:Name="PbProgress" Grid.Column="1" Width="120" Height="8"
+                             Background="#1A1A1A" Foreground="#FF6B35"
+                             IsIndeterminate="False" Visibility="Collapsed"/>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

@@ -2,7 +2,7 @@
 
 > 이 파일은 브레인스토밍 시 **이미 제안되거나 구현된 아이디어를 다시 꺼내지 않도록** 하는 필터다.
 > 새 아이디어를 제안하기 전 반드시 이 목록을 확인할 것.
-> 마지막 갱신: 2026-03-10 (10차)
+> 마지막 갱신: 2026-03-11 (14차)
 
 ---
 
@@ -583,6 +583,38 @@
 
 ---
 
+### Apps (신규 — idea_20260311_11차)
+
+| 이름 | 핵심 기능 | 출처 |
+|------|----------|------|
+| `BT.Cast` | Bluetooth 기기 원클릭 전환 트레이 (헤드폰·스피커·게임패드 페어링 목록 팝업, 연결/해제 토글, 프리셋 그룹, 배터리 Toast 알림) | idea_20260311_11차 |
+| `Ctx.Menu` | Windows 우클릭 컨텍스트 메뉴 GUI 편집기 (HKCR Shell 항목 추가·삭제·숨김 토글, 확장자별 규칙, SHChangeNotify 즉시 반영, 레지스트리 직접 편집 불필요) | idea_20260311_11차 |
+| `Clip.Find` | 검색형 클립보드 히스토리 관리자 (FTS5 전문 검색, 핀 고정, 카테고리 태그, 민감정보 자동 마스킹, 자동 만료 — Clipboard.Stacker 스택 방식과 차별화) | idea_20260311_11차 |
+| `Svc.Guard` | Windows 서비스 GUI 관리자 (시작·중지·재시작 원클릭, 의존성 방향 그래프, 복구 설정, 안전/불필요 서비스 분류 라벨, services.msc 대체) | idea_20260311_11차 |
+| `RSS.Cast` | 완전 오프라인 RSS/Atom/JSON Feed 리더 (SQLite 로컬 캐싱, FTS5 아티클 검색, 키워드 Toast 알림, OPML 내보내기/가져오기, 팟캐스트 오디오 지원) | idea_20260311_11차 |
+| `Theme.Forge` | 색상 테마 팔레트 디자이너 (HSL 색상환 인터랙티브, 보색·삼색·테트라딕 조화 규칙, 명도 토큰 자동 파생, WCAG 접근성 검사, CSS/Tailwind/Material 내보내기) | idea_20260311_11차 |
+| `Sprite.Forge` | 스프라이트 시트 패커 & 애니메이터 (MaxRects 최적 패킹, Trim 투명 영역, 멀티 아틀라스, 프레임 애니메이션 편집, JSON/XML 메타데이터 내보내기, 게임 개발 필수) | idea_20260311_11차 |
+| `Git.Stats` | Git 저장소 통계 분석기 (커밋 히트맵, 핫파일·코드 이탈 분석, 기여자 활동, 언어 분포, 시간대 패턴, Markdown 리포트 내보내기 — Git.Reel과 차별화) | idea_20260311_11차 |
+| `Win.Tamer` | 프로세스 CPU 친화도·우선순위 GUI 관리자 (코어 체크박스 할당, WMI 프로세스 감시로 실행 시 자동 적용, 게이밍·개발 프리셋) | idea_20260311_11차 |
+| `Font.Draw` | 비트맵·픽셀 폰트 그리드 에디터 (8×8~32×32 글리프 편집, BDF/PNG 글리프시트 내보내기, 미리보기 렌더, ASCII~유니코드 범위 지원) | idea_20260311_11차 |
+
+### 게임 — 제안된 미구현 아이디어 (idea_20260311_11차)
+
+| 이름 | 장르 | 핵심 메커닉 |
+|------|------|------------|
+| `Word.Weave` | Word / Puzzle / Casual | N×N 격자 글자 타일 인접 8방향 체인으로 단어 완성 (Boggle 변형), 희귀 단어 배수 점수, 낙하 타일, 와일드카드·폭탄 특수 타일, 일일 챌린지 시드 |
+| `Code.Idle` | Idle / Incremental / Casual | 코드 라인 생산→기능 완성→앱 출시→팀 고용→AI 자동화 체인, 기술 부채·버그 이벤트, Product Hunt·NPM 취약점 등 메타 유머 이벤트, 프레스티지 시스템 |
+| `Magnet.Jump` | Puzzle / Platformer | 캐릭터 N/S 극성 전환, 자기 발판 흡착·반발 도약, 회전 자기장 구역, 전자기 차폐, 50레벨 + 레벨 에디터 |
+| `Root.Spread` | Strategy / Simulation | 지하 타일맵 단면뷰, 뿌리 성장 방향 지정, 질소·인·칼륨 영양소 수집, 암석·산성 토양·경쟁 식물 장애물, 지상 식물 성장 목표 연동 |
+| `Zipline.Rush` | Puzzle / Physics | Verlet 케이블 집라인 네트워크 빌더, 앵커 배치 → 화물 중력+마찰 물리 이동, 최소 앵커 수 도전, 도르래·탄성 앵커·바람 특수 요소 |
+| `Spore.Net` | Simulation / Strategy | Physarum polycephalum 슬라임 몰드 알고리즘, 균류 실 탐색·강화·퇴화, 영양원 최적 네트워크 연결, 종 간 경쟁, 최소 스패닝 트리 도전 |
+| `Echo.Drum` | Rhythm / Memory | 드럼 패턴 재생→정확 재현 (킥/스네어/하이햇/심벌), 8→16박자→폴리리듬 난이도, 블라인드 재현·노이즈 혼입 도전, 자유 창작+공유 코드 |
+| `Block.Shift` | Puzzle / Casual | 색상(3종)+기호(4종) 타일 4×4 격자, 행/열 루프 슬라이드로 목표 패턴 달성, 고정·와일드·회전 특수 타일, 역방향 생성으로 유일해 보장 |
+| `Light.Cast` | Puzzle / Optics | 볼록·오목렌즈·반사경 배치 빛 세기 집중 퍼즐, 스넬 굴절 2D 근사, 다중 목표 광도 동시 달성, 보호 대상 과열 방지 조건 |
+| `Sky.Drift` | Arcade / Physics / Casual | Verlet 날개 양력+중력, 열상승기류 탐색·하강기류 회피, 새떼·폭풍 장애물, 수직 무한 스크롤 절차 생성, 일일 최고 고도 랭킹 |
+
+---
+
 ## 5. 유사 개념 그룹 (중복 주의)
 
 브레인스토밍 시 아래 그룹 내 변형 아이디어는 **이미 제안된 것으로 간주**한다.
@@ -849,3 +881,187 @@
 | **자기교차 트랙 궤적 장애물 레이싱** | Loop.Race (≠ Nitro.Drift: 드리프트, ≠ Shadow.Run: 고스트 레이스 — 궤적이 능동적 장애물) |
 | **픽셀 1:1 영역 전쟁 전략** | Pixel.War (≠ Cell.War: 세포 분열, ≠ Ink.Spread: BFS 차단, ≠ Hex.Storm: 헥사 RTS — 1픽셀씩 교대) |
 | **FFT 파도 물리 서핑 게임** | Wave.Surf (≠ Hook.Cast: 낚시, ≠ Nitro.Drift: 레이싱 — 무게중심 균형·묘기·GIF 자동 저장) |
+| **Bluetooth 기기 트레이 전환** | BT.Cast (≠ DNS.Flip: DNS 서버, ≠ Sound.Cast: 오디오 출력 장치, ≠ Volume.Cast: 앱별 볼륨 — Bluetooth 페어링·연결 전환 특화) |
+| **우클릭 컨텍스트 메뉴 편집** | Ctx.Menu (≠ Sys.Clean: 시작프로그램·레지스트리 청소, ≠ Env.Guard: 환경변수 — HKCR Shell 항목 추가/숨김 특화) |
+| **검색형 클립보드 히스토리** | Clip.Find (≠ Clipboard.Stacker: 스택 순환 방식, ≠ Clip.Cast: LAN 브로드캐스트 — FTS5 전문 검색+민감정보 마스킹) |
+| **Windows 서비스 GUI 관리** | Svc.Guard (≠ Port.Watch: 포트 점유 프로세스, ≠ Watch.Dog: 크래시 재시작, ≠ Proc.Pilot: 프로세스 탐색기 — 서비스 의존성 그래프+복구 설정) |
+| **오프라인 RSS 피드 리더** | RSS.Cast (≠ Daily.Dash: 날씨+일정+RSS 대시보드, ≠ Ink.Cast: 노트 앱 — 피드 구독+로컬 캐싱+전문 검색 전문 리더) |
+| **색상 조화 규칙 테마 디자이너** | Theme.Forge (≠ Palette.Gen: 이미지에서 추출, ≠ Palette.Cast: 팔레트 컬렉션 관리, ≠ Access.Check: WCAG 검사만 — 처음부터 설계+디자인 토큰) |
+| **스프라이트 시트 패커** | Sprite.Forge (≠ Img.Forge: 일반 이미지 처리, ≠ Pixel.Forge: 픽셀아트 에디터 — MaxRects 패킹+애니메이션 프레임+JSON 메타) |
+| **Git 저장소 통계 분석기** | Git.Stats (≠ Git.Reel: 커밋 그래프 탐색기 — 히트맵·핫파일·기여자·언어 분포 분석) |
+| **프로세스 CPU 친화도 관리** | Win.Tamer (≠ Tray.Stats: 성능 모니터링, ≠ Perf.Lens: DirectX 게임 오버레이 — SetProcessAffinityMask+자동 적용 프로파일) |
+| **픽셀 폰트 그리드 에디터** | Font.Draw (≠ Font.Scout: 폰트 미리보기, ≠ Font.Probe: 화면 추출, ≠ Pixel.Forge: 픽셀아트 — BDF 글리프 창작) |
+| **격자 인접 글자 체인 단어 찾기** | Word.Weave (≠ Word.Bomb: 음절 타이핑, ≠ Glyph.Rush: 타이핑 슈터 — Boggle 변형 공간 단어 탐색) |
+| **개발자 스타트업 방치형 게임** | Code.Idle (≠ Forge.Idle: 광물 채굴·제련, ≠ Auto.Build: 실시간 공장 퍼즐 — 코드 라인+기술 부채+개발자 유머 이벤트) |
+| **자기 극성 전환 플랫포머** | Magnet.Jump (≠ Magnet.Maze: 자기력으로 볼 유도, ≠ Tilt.Ball: 판 기울이기 — 캐릭터 N/S 극성 전환 실시간 플랫포머) |
+| **지하 뿌리 성장 자원 전략** | Root.Spread (≠ Leaf.Grow: L-시스템 지상 성장, ≠ Colony.Sim: 곤충 군집 — 지하 타일맵 영양소 쟁탈 전략) |
+| **집라인 케이블 화물 배송 퍼즐** | Zipline.Rush (≠ Bridge.Craft: 정적 교량 응력, ≠ Drone.Haul: 드론 운반 — Verlet 집라인 동적 이동 물리) |
+| **균류 슬라임 몰드 네트워크 성장** | Spore.Net (≠ Colony.Sim: 곤충 페로몬 군집, ≠ Leaf.Grow: 식물 L-시스템 — Physarum 알고리즘 최적 네트워크) |
+| **드럼 패턴 청각 기억 재현** | Echo.Drum (≠ Beat.Drop: 박자 레인 리듬, ≠ Chord.Strike: 동시 누르기, ≠ Sound.Grid: 격자 시퀀서 창작 — 청각 기억+재현) |
+| **색상+기호 타일 슬라이딩 퍼즐** | Block.Shift (≠ Ice.Slide: 단방향 미끄러짐, ≠ Neon.Push: 소코반+레이저, ≠ Rise.Match: 매치3 — 행/열 루프 슬라이드 큐브 퍼즐) |
+| **볼록·오목렌즈 빛 세기 집중 퍼즐** | Light.Cast (≠ Laser.Net: 단일 레이저 경로, ≠ Prism.Break: 색 RGB 분리 — 굴절+열 집중 세기 게이지 퍼즐) |
+| **상승기류 글라이더 수직 아케이드** | Sky.Drift (≠ Neon.Run: 수평 장애물 러너, ≠ Pulse.Run: 리듬 러너 — Verlet 양력+열상승기류 수직 무한 스크롤) |
+---
+
+### Apps (신규 — idea_20260311_12차)
+
+| 이름 | 핵심 기능 | 출처 |
+|------|----------|------|
+| `Note.File` | 파일·폴더 스티커 메모 첨부 (IShellIconOverlayIdentifier 아이콘 배지, SQLite 저장, 탐색기 툴팁 미리보기, 태그+검색, Markdown 리포트) | idea_20260311_12차 |
+| `Dir.Cast` | 폴더 구조 트리 시각화·내보내기 (ASCII Tree/Markdown/JSON/SVG 다이어그램, .gitignore 필터, 변경 스냅샷 비교, 클립보드 즉시 복사) | idea_20260311_12차 |
+| `Screen.Annotate` | 화면 오버레이 실시간 주석 레이어 (투명 Topmost 창, 펜·화살표·도형·형광 도구, WS_EX_TRANSPARENT 마우스 통과, OBS/Zoom 화면공유 포함) | idea_20260311_12차 |
+| `Print.Cast` | 인쇄 큐 시각적 관리자 (순서 드래그, PDF 미리보기·병합, 페이지별 재인쇄, 히스토리 로그, 잉크 비용 계산) | idea_20260311_12차 |
+| `Path.Guard` | PATH 환경변수 전용 관리자 (드래그 순서 재배치, 깨진·중복·비활성 경로 색상 진단, 실행파일 위치 검색, 버전 충돌 감지, 즉시 적용) | idea_20260311_12차 |
+| `ISO.Mount` | ISO·VHD·VHDX 가상 디스크 마운트 GUI (드래그&드롭 마운트, 드라이브 문자 고정, 자동 마운트 목록, VHD 생성 마법사, 즐겨찾기) | idea_20260311_12차 |
+| `Crash.View` | Windows 미니덤프(.dmp) GUI 분석기 (콜스택·로드 모듈·스레드 목록, ClrMD .NET 관리 힙, PDB 심볼 자동 다운로드, HTML 리포트) | idea_20260311_12차 |
+| `Log.Merge` | 다중 소스 로그 통합 타임라인 뷰어 (50+ 타임스탬프 포맷 자동 파싱, 코릴레이션 ID 추적 하이라이트, 오류 빈도 히트맵, 가상 스크롤) | idea_20260311_12차 |
+| `Shortcut.Forge` | Windows .lnk 바로가기 일괄 생성·관리 (CSV/JSON 배치 생성, 아이콘 브라우저, 깨진 경로 감지·재연결, ZIP 내보내기) | idea_20260311_12차 |
+| `Mem.Lens` | 프로세스 메모리 심층 분석기 (Working Set·Private·Shared·Heap 분류, 가상 주소 맵, .NET Gen0/Gen1/Gen2/LOH, 누수 추세 감지) | idea_20260311_12차 |
+
+### 게임 — 제안된 미구현 아이디어 (idea_20260311_12차)
+
+| 이름 | 장르 | 핵심 메커닉 |
+|------|------|------------|
+| `Drift.Paint` | Arcade / Racing / Creative | 탑다운 드리프트 차량 타이어 자국이 컬러 잉크 → 캔버스 채움% 목표, 색상 혼합, 드리프트 콤보 배율, 레벨 에디터 |
+| `Morph.Rush` | Arcade / Platformer / Speed | 원(구르기/곡면)/삼각(관통)/사각(충격파) 폼 실시간 전환, 폼별 고유 장벽, 연속 전환 콤보, 절차 생성 무한 레벨 |
+| `Flock.Guide` | Puzzle / Strategy / Simulation | Boids 새떼 + 유인·반발 비콘 배치로 게이트 통과 유도, 포식자 AI·강풍 방해, 최소 비콘 수 도전, 샌드박스 |
+| `Carbon.Chain` | Puzzle / Casual / Educational | 원자(H·C·O·N) 블록 낙하 → 원자가 규칙 자동 결합 → 안정 분자(H₂O/CH₄/CO₂) 완성 소거, 고분자 체인 고점수 |
+| `Weight.Cross` | Puzzle / Physics | 지렛대 위 무게 블록 드래그 배치 → 토크 균형 달성 → 2단계 다리 건너기 (바람·충격 방해), 60레벨 + 에디터 |
+| `Strobe.Blitz` | Shooter / Rhythm / Arcade | BGM BPM 위상 사이클로 적 실체화·투명 전환, 밝음에서 격파·어두움에서 포지셔닝, 역위상 적·공명 적, 커스텀 음악 |
+| `Laser.Blitz` | Shooter / Action / Puzzle | 적 레이저 실시간 거울 배치 역반사, 제한 거울 수량, 프리즘·충전 레이저 특수 요소, 연속 반사 콤보, 무한 서바이벌 |
+| `Totem.Fall` | Arcade / Physics / Casual | 동물별 고유 물리(뱀=감김·개구리=탄성·코끼리=무게·독수리=바람저항·고슴도치=최대마찰) 토템 쌓기, 이벤트 생존 |
+| `Sand.Castle` | Sandbox / Building / Survival | 모래 안식각·수분 점착력 시뮬, 조수 사이클, 파도 침식 물리, 지지대·해자 업그레이드, 창작 자유 모드 |
+| `Ghost.Type` | Skill / Casual / Typing | 입력 글자 완전 마스킹, 오타 시 화면 빨간 플래시만 피드백, 무음·타임어택·코드 스니펫 챌린지, 손가락별 오타 히트맵 |
+
+---
+
+| **파일·폴더 인라인 스티커 메모** | Note.File (≠ Ink.Cast: 마크다운 노트 앱, ≠ Quick.Memo: 플로팅 메모, ≠ Stand.Up: 스탠드업 기록 — 탐색기 아이콘 배지+쉘 익스텐션) |
+| **폴더 구조 트리 시각화 내보내기** | Dir.Cast (≠ Disk.Lens: 용량 시각화, ≠ Find.Fast: 파일 검색 — ASCII·SVG·Markdown 구조 다이어그램 + 변경 비교) |
+| **화면 오버레이 실시간 주석 레이어** | Screen.Annotate (≠ Cursor.Lens: 스포트라이트+줌, ≠ Clip.Annotate: 스크린샷 후 편집 — 투명 레이어 위 직접 그리기) |
+| **인쇄 큐 시각적 관리자** | Print.Cast (≠ Sys.Clean: PC 청소 — 인쇄 순서 조정+PDF 병합+히스토리+비용 계산 특화) |
+| **PATH 환경변수 전용 진단 관리** | Path.Guard (≠ Env.Guard: 모든 환경변수 관리 — PATH 드래그 순서+중복·깨진 경로+버전 충돌 감지 특화) |
+| **ISO·VHD 가상 디스크 마운트 GUI** | ISO.Mount (≠ Disk.Lens: 용량 시각화, ≠ Drive.Bench: 벤치마크 — 가상 디스크 마운트/해제+자동 마운트+VHD 생성) |
+| **Windows 미니덤프 분석 뷰어** | Crash.View (≠ Log.Lens: 텍스트 로그 뷰어, ≠ Proc.Timeline: 리소스 타임라인 — .dmp 콜스택·모듈·예외 GUI 분석) |
+| **다중 로그 소스 통합 타임라인** | Log.Merge (≠ Log.Lens: 단일 파일 뷰어, ≠ Win.Event: EVT/EVTX 뷰어 — 다중 소스 시간순 머지+코릴레이션 ID 추적) |
+| **Windows .lnk 바로가기 일괄 관리** | Shortcut.Forge (≠ Batch.Rename: 파일명 변경, ≠ Run.Deck: 프로젝트 런처 — .lnk 배치 생성·깨진 경로 재연결·아이콘 피커) |
+| **프로세스 메모리 구조 심층 분석** | Mem.Lens (≠ Tray.Stats: 트레이 실시간 모니터, ≠ Proc.Timeline: 시계열 레코더 — Working Set·Private·Heap 분류+누수 감지) |
+| **드리프트 타이어 자국 캔버스 채우기** | Drift.Paint (≠ Nitro.Drift: 레이싱 완주, ≠ Burst.Canvas: 슈터+페인팅, ≠ Fluid.Paint: 유체 페인팅 — 탑다운 드리프트 물리+채움% 목표) |
+| **원·삼각·사각 폼 전환 러너** | Morph.Rush (≠ Neon.Run: 고정 캐릭터 러너, ≠ Jelly.Jump: 소프트바디 플랫포머 — 폼별 다른 물리 특성 활용 실시간 전환) |
+| **Boids 새떼 유인·반발 비콘 퍼즐** | Flock.Guide (≠ Colony.Sim: 군집 생존 시뮬, ≠ Swarm.Rush: Boids 적 AI 슈터 — 플레이어가 비콘으로 새떼 조종하는 퍼즐) |
+| **낙하 원자 원자가 결합 테트리스** | Carbon.Chain (≠ Atom.Craft: 정적 배치 분자 합성, ≠ Sand.Fall: 물리 입자 — 낙하 블록+원자가 규칙 자동 결합+분자 소거) |
+| **지렛대 균형추 배치 물리 퍼즐** | Weight.Cross (≠ Tilt.Ball: 판 기울이기, ≠ Drone.Haul: 드론 케이블 — 토크·모멘트 균형 달성 후 2단계 건너기) |
+| **BGM 위상 동기화 생존 슈터** | Strobe.Blitz (≠ Signal.Rush: 리듬+슈터(박자 대미지), ≠ Beat.Rogue: 비트 타이밍 이동 — BGM 밝음/어두움 위상이 적 실체화 조건) |
+| **실시간 거울 배치 레이저 역반사 슈터** | Laser.Blitz (≠ Laser.Net: 정적 배치 경로 퍼즐, ≠ Echo.Shot: 음파 반사 — 실시간 액션에서 즉흥 거울 배치로 역공격) |
+| **동물 고유 물리 토템 균형 쌓기** | Totem.Fall (≠ Wobble.Stack: 소프트바디 젤리, ≠ Stack.Race: 랜덤 블록 쌓기 대전 — 동물별 고유 마찰·탄성·질량 전략 선택) |
+| **모래 퇴적·침식 물리 성 건축 생존** | Sand.Castle (≠ Sand.Fall: 물질 반응 관찰 샌드박스, ≠ Last.Spark: 캠프파이어 생존 — 안식각+수분 물리 건축+파도 방어) |
+| **입력 안 보이는 블라인드 타이핑** | Ghost.Type (≠ Type.Rocket: WPM 트래커 앱, ≠ Type.Race: 레이싱 게임, ≠ Glyph.Rush: 슈터 — 완전 마스킹+오타 플래시만 피드백) |
+
+---
+
+### Apps (신규 — idea_20260311_13차)
+
+| 이름 | 카테고리 | 핵심 기능 |
+|------|----------|----------|
+| `Win.Rules` | Productivity / Automation | 창 자동화 규칙 엔진 — 프로세스+타이틀 조건 → 크기·위치·모니터·투명도 자동 적용, 규칙 충돌 감지, 프리셋 공유 |
+| `Desk.Grid` | Productivity / Desktop | 바탕화면 아이콘 가상 그리드 레이아웃 저장·복원 — 이름/정렬 기준 슬롯 고정, 해상도 변경 후 복원, 여러 프리셋 |
+| `Key.Test` | Dev Tools / Diagnostics | 키보드 진단 도구 — 키 반응 속도·멀티키 동시 입력 시각화, N-Key Rollover 테스트, 사각 지대(ghosting) 탐지 |
+| `Win.Pop` | Dev Tools / Productivity | WPF DWM 썸네일 Picture-in-Picture — 임의 앱 창을 최소화 없이 반투명 미니 오버레이로 상시 표시, 클릭 투과 |
+| `Hotkey.Cast` | Productivity / Automation | 전역 단축키 통합 관리자 — 앱별 핫키 등록·충돌 감지·비활성 앱 명령 전송, 조건부(활성 창별) 컨텍스트 단축키 |
+| `Ink.Board` | Productivity / Collaboration | LAN 협업 화이트보드 — mDNS 자동 디스커버리, 레이어·벡터 객체·스티커, PDF/SVG 내보내기, 오프라인 우선 |
+| `Ping.Grid` | Dev Tools / Network | 멀티 호스트 핑 그리드 — 최대 64 호스트 동시 모니터, RTT 히트맵·손실률 차트, 임계값 알림, CSV 내보내기 |
+| `Sound.Vis` | Multimedia / Dev Tools | FFT 오디오 시각화 — WASAPI 루프백 캡처, 주파수 스펙트럼·웨이브폼·스펙트로그램, 커스텀 팔레트, PNG 스냅샷 |
+| `Win.Title` | Dev Tools / Productivity | 타이틀바 커스텀 액션 버튼 — DWM HWND 후킹으로 최소화 버튼 옆 커스텀 버튼(항상 위·투명도·다크모드) 주입 |
+| `App.Hours` | Productivity / Monitoring | 앱 사용시간 스케줄 제한 — 일별 앱 사용 시간 쿼터, 예약 차단 시간대, 집중 모드, 주간 리포트 CSV |
+
+### 게임 — 제안된 미구현 아이디어 (idea_20260311_13차)
+
+| 이름 | 장르 | 핵심 메커닉 |
+|------|------|------------|
+| `Blade.Storm` | Arcade / Physics / Slicer | 재질별 다른 절단 물리(나무=섬유 분리·금속=파편·젤리=변형) + 연쇄 슬라이스 콤보, 거스름 각도 판정, 무기 내구 |
+| `Dodge.Craft` | Arcade / Action / Strategy | 격자 위 회피 이동 + 제한 시간 내 장벽·함정 배치로 다음 웨이브 패턴 유도, 방어물 업그레이드 트리 |
+| `Plasma.Cut` | Puzzle / Physics / Precision | 열선 절단 궤적 드래그로 물체를 정확한 모양으로 분할 — 열 전도 시뮬, 목표 실루엣 매칭%, 연쇄 절단 콤보 |
+| `Vox.Drop` | Puzzle / Rhythm / Arcade | BGM 주파수 분석 → 고음·저음·중음 대역 블록 낙하 색상 지정, 동일 주파수 블록 수직 4개 소거, 반박자 예측 |
+| `Rope.Bridge` | Puzzle / Physics / Adventure | 밧줄 앵커 배치로 흔들리는 다리 건설 → 캐릭터 하중·바람·적 충격 생존 횡단, 재료 수량 제한, 공동 건설 Co-op |
+| `Mirror.Blitz` | Arcade / Action / Puzzle | 과거 자기 플레이 고스트 다중 복사 → 고스트들과 협력해 빛 반사 퍼즐 동시 해결, 루프 기록 전략 |
+| `Pixel.Farm` | Simulation / Idle / Creative | 16×16 픽셀 격자 농장 경영 — 픽셀 단위 토양 수분·영양 시뮬, 작물 교배 색상 유전, 마을 납품 주문, 계절 이벤트 |
+| `Bubble.Burst` | Arcade / Rhythm / Casual | 거품 팽창 속도 예측 → 정점 직전 타이밍 터치 파열, 연쇄 파열 콤보, 점성·압력 변수, BGM BPM 동기화 |
+| `Chain.Hook` | Puzzle / Physics / Platformer | 체인+갈고리를 앵커에 걸어 스윙·당기기 — 텐션·진자 물리, 체인 길이 제한, 연결 구조물 무게 균형, 물리 샌드박스 |
+| `Veil.Break` | Shooter / Mystery / Exploration | 오버레이 베일이 반쯤 가린 공간을 탐색 슈터로 점진 해제, 적 위치 소음 단서+베일 찢기 패턴, 레이어드 맵 |
+
+---
+
+| **창 크기·위치 자동화 규칙 엔진** | Win.Rules (≠ Desk.Grid: 아이콘 레이아웃 저장, ≠ Win.Pop: DWM 오버레이, ≠ Win.Title: 타이틀바 버튼 — 프로세스 조건 기반 창 배치 규칙) |
+| **바탕화면 아이콘 그리드 레이아웃 저장** | Desk.Grid (≠ Win.Rules: 창 배치 자동화, ≠ Folder.Purge: 폴더 정리 — 아이콘 슬롯 고정+해상도 변경 후 복원) |
+| **키보드 키 반응·멀티키 시각화 진단** | Key.Test (≠ Hotkey.Cast: 단축키 관리자, ≠ Key.Trace: 입력 기록 리플레이 — ghosting/N-KRO 하드웨어 한계 진단) |
+| **DWM 썸네일 앱 창 PiP 오버레이** | Win.Pop (≠ Win.Rules: 규칙 배치, ≠ Win.Title: 타이틀바 버튼, ≠ Screen.Annotate: 주석 오버레이 — DWM API 썸네일 미니 오버레이) |
+| **전역 단축키 통합 관리·충돌 감지** | Hotkey.Cast (≠ Key.Test: 키보드 하드웨어 진단, ≠ Key.Trace: 입력 리플레이, ≠ Macro.Deck: 매크로 실행 — 앱별 핫키 등록+충돌 감지) |
+| **LAN mDNS 협업 화이트보드** | Ink.Board (≠ Screen.Annotate: 개인 오버레이, ≠ Quick.Memo: 플로팅 메모 — mDNS 자동 발견+다중 사용자 실시간 공동 편집) |
+| **64 호스트 동시 핑 RTT 히트맵** | Ping.Grid (≠ Port.Watch: 포트 상태 감시, ≠ Api.Probe: HTTP API 테스트 — 대규모 ICMP 동시 핑+RTT 히트맵+손실률 차트) |
+| **WASAPI 루프백 FFT 오디오 시각화** | Sound.Vis (≠ Serve.Cast: 미디어 스트리밍, ≠ Music.Player: 플레이어 — 시스템 오디오 스펙트럼+웨이브폼+스펙트로그램 실시간 렌더링) |
+| **DWM 후킹 타이틀바 커스텀 버튼 주입** | Win.Title (≠ Win.Rules: 창 위치 규칙, ≠ Win.Pop: PiP 썸네일 — HWND 후킹으로 타이틀바에 커스텀 액션 버튼 추가) |
+| **앱별 일일 사용 쿼터·집중 모드** | App.Hours (≠ Stay.Awake: 절전 방지, ≠ Win.Rules: 창 규칙 — 앱별 시간 쿼터 제한+예약 차단+주간 리포트) |
+| **재질별 절단 물리 슬라이서** | Blade.Storm (≠ Neon.Slice: 단일 물리 슬라이싱, ≠ Plasma.Cut: 열선 분할 — 재질(나무/금속/젤리)별 다른 절단 물리+파편 시뮬) |
+| **회피+장벽 배치 하이브리드 아케이드** | Dodge.Craft (≠ Dodge.Blitz: 순수 회피 아케이드, ≠ Laser.Blitz: 거울 배치 슈터 — 회피 이동+제한 자원 장벽 배치 전략) |
+| **열선 궤적 드래그 정밀 절단 퍼즐** | Plasma.Cut (≠ Blade.Storm: 재질별 슬라이서, ≠ Neon.Slice: 타이밍 슬라이서 — 열 전도 시뮬+목표 실루엣 매칭% 정밀 분할) |
+| **주파수 대역별 낙하 블록 리듬 퍼즐** | Vox.Drop (≠ Strobe.Blitz: BGM 위상 슈터, ≠ Signal.Rush: 리듬 슈터 — FFT 주파수 분석 낙하 블록+반박자 예측) |
+| **밧줄 앵커 물리 다리 건설 퍼즐** | Rope.Bridge (≠ Weight.Cross: 지렛대 균형추, ≠ Chain.Hook: 갈고리 스윙 — 밧줄 하중·진동·바람 물리+횡단 생존) |
+| **과거 고스트 다중 복사 협력 슈터** | Mirror.Blitz (≠ Echo.Shot: 음파 반사 슈터, ≠ Laser.Blitz: 거울 배치 역반사 — 루프 기록 고스트 협력 동시 퍼즐 해결) |
+| **픽셀 격자 토양·작물 유전 농장 경영** | Pixel.Farm (≠ Sand.Fall: 입자 시뮬, ≠ Root.Spread: 뿌리 성장 — 픽셀 단위 수분·영양 + 작물 교배 색상 유전) |
+| **팽창 정점 타이밍 거품 파열 리듬** | Bubble.Burst (≠ Strobe.Blitz: 위상 동기화 슈터, ≠ Vox.Drop: 블록 낙하 — 거품 팽창 물리 정점 예측+연쇄 파열 콤보) |
+| **갈고리 체인 텐션 스윙 물리 퍼즐** | Chain.Hook (≠ Rope.Bridge: 밧줄 다리 건설, ≠ Zipline.Rush: 집라인 활주 — 갈고리 앵커+텐션 진자 물리+구조물 무게 균형) |
+| **베일 점진 해제 탐색 슈터** | Veil.Break (≠ Dodge.Blitz: 순수 회피, ≠ Dodge.Craft: 장벽 배치 — 불투명 오버레이 레이어드 맵+소음 단서+찢기 패턴 탐색) |
+
+---
+
+### Apps (신규 — idea_20260311_14차)
+
+| 이름 | 핵심 기능 | 출처 |
+|------|----------|------|
+| `Conf.Guard` | 앱 설정 파일 자동 버전 백업 트레이 — AppData/LocalAppData/.config 감시 FSW, .json/.xml/.ini/.toml/.yaml 변경 시 n세대 스냅샷 자동 저장, DiffPlex diff 뷰어, 원클릭 롤백 | idea_20260311_14차 |
+| `Pcap.View` | 네트워크 패킷 캡처 경량 뷰어 — Npcap/SharpPcap 기반 실시간 캡처, HTTP/DNS 평문 디코딩, TCP 스트림 대화 재조립, BPF 필터, .pcap/.pcapng 저장·열기, Wireshark 경량 대체 | idea_20260311_14차 |
+| `Regex.Sweep` | 정규식 다중 파일 일괄 Find-Replace GUI — 폴더 재귀, 미리보기 diff(행 단위), 드라이런(변경 없이 결과 확인), 파일 타입 필터, 변경 이력 로그, sed/awk GUI 대체 | idea_20260311_14차 |
+| `Wi.Probe` | WiFi 채널 간섭 분석기 트레이 — NativeWifi API로 주변 AP SSID/BSSID/RSSI/채널 스캔, 2.4/5/6GHz 채널 히트맵, 겹침 간섭 분석, 최적 채널 추천, 시계열 신호 그래프 | idea_20260311_14차 |
+| `Tab.Vault` | 브라우저 탭 세션 독립 저장 트레이 — Chrome/Edge/Firefox remote-debugging-port API로 열린 탭 URL 스냅샷, 탭 그룹 보존, 중복 탭 감지, 날짜별 타임라인, 세션 검색·복원 | idea_20260311_14차 |
+| `Code.Format` | 범용 코드 클립보드 포매터 팝업 — 전역 단축키 팝업, 자동 언어 감지, C#(Roslyn)/JS·TS(Prettier)/Python(Black)/JSON/YAML/SQL 포매터 내장, 결과 즉시 재복사 | idea_20260311_14차 |
+| `Clip.Clean` | 클립보드 HTML/RTF 서식 자동 정제 트레이 — Word/웹 복사 시 서식 자동 제거→순수 텍스트, URL utm 파라미터 정규화, 줄바꿈 정규화, 단축키 토글, 예외 앱 화이트리스트 | idea_20260311_14차 |
+| `Temp.Drop` | 일회성 파일 공유 드롭존 — 드래그&드롭→Kestrel HTTP 즉시 시작+QR 생성, 자동 만료(X분/Y회 다운로드), AES-256 패스워드 옵션, mDNS 디스커버리, 다운로드 로그 | idea_20260311_14차 |
+| `Proc.Env` | 실행 중 프로세스 환경변수 실시간 조회 — ReadProcessMemory+PEB 파싱(32/64bit/WOW64), 필터 검색, 스냅샷 diff 비교, 변수 변경 추적, JSON/CSV 내보내기 | idea_20260311_14차 |
+| `Mirror.Dev` | LAN Git-Aware 코드 미러링 트레이 — LibGit2Sharp diff 기반 증분 동기화(변경분만 전송), .gitignore 인식, 브랜치별 프로파일, mDNS 피어 자동 발견, AES 암호화 전송 | idea_20260311_14차 |
+
+### 게임 — 제안된 미구현 아이디어 (idea_20260311_14차)
+
+| 이름 | 장르 | 핵심 메커닉 |
+|------|------|------------|
+| `Nano.Forge` | Puzzle / Programming / Strategy | 시각 블록 코딩(IF/WHILE/REPEAT)으로 나노봇 행동 지시 → 시뮬레이션 실행 → 목표 도형 조립, 명령 수 제한 최적화, 순차·병렬 실행, 레벨 에디터+솔루션 공유 코드 |
+| `Drop.Zone` | Puzzle / Physics / Casual | 삼각 페그 배치·제거로 공 낙하 경로 조정 → 목표 슬롯 착지 (Plinko 변형), 탄성·자석·이동 특수 페그, 다중 공 동시, 최소 페그 수 별점, 일일 챌린지 |
+| `Burst.Climb` | Arcade / Roguelite / Physics | 방향 조준 폭발 반동으로 캐릭터 수직 상승 — 폭발물 종류별 다른 반동 물리, 연쇄 에어콤보, 절차 생성 장애물, 영구 업그레이드 트리, 수직 무한 스크롤, 일일 시드 랭킹 |
+| `Steam.Valve` | Puzzle / Physics / Engineering | 밸브 개폐·파이프 연결 배치로 증기 압력 분산 — 과부하 폭발 방지, 터빈·피스톤·냉각기 부품, 다중 목표 압력 동시 달성, T/Y 분기 파이프, 60레벨+에디터 |
+| `Paint.Clash` | Arcade / Strategy / Casual | 탑다운 이동으로 바닥 영역 페인팅 점령 (Splatoon 2D) — AI 대전, 색상 혼합 중립 구역, 특수 능력(포탈·잉크 폭탄·실드), 로컬 2P, 맵 에디터 |
+| `Warp.Gate` | Puzzle / Logic / Physics | N개 포탈 게이트 쌍 배치 → 발사 구슬이 포탈 통과해 모든 골인 슬롯 동시 도달, 방향·크기 조절, 체인 포탈, 속도 보존 물리, 레벨 에디터+UGC |
+| `Heat.Spread` | Puzzle / Simulation / Logic | 열원·냉각원 배치 → 열 확산 시뮬 → 타겟 셀 정확한 온도 범위 달성, 전도율 다른 타일(금속·돌·진공·얼음), 위상 변화 타일, 다중 타겟 동시, 50레벨 |
+| `Knit.Path` | Puzzle / Creative / Geometric | 원형 보드 핀들을 순서 클릭 → 실 감기 → 완성 패턴이 목표 실루엣 일치, 교차점 색상 혼합, 최소 선분 수 도전, 다색 실 교대, 자유 창작+PNG 저장 |
+| `Grid.Lock` | Puzzle / Logic / Casual | N×N 격자 행·열·2×2 블록 단위 회전으로 목표 색상+기호 패턴 달성, 최소 회전 수 별점, 잠금·연동 타일, 역방향 생성 유일해 보장, 무한 절차 생성 |
+| `Pixel.Quest` | RPG / Narrative / Casual | 16×16 픽셀 세계, 전투 없는 대화·선택지·미니 퍼즐 힐링 RPG, 챕터 10개 단편 스토리, 분기 3엔딩, 픽셀 히트맵 수집, 칩튠 BGM |
+
+---
+
+| **설정 파일 자동 버전 백업 트레이** | Conf.Guard (≠ File.Guard: 어느 프로세스가 건드렸나 감사, ≠ Folder.Sync: 폴더 동기화 — .json/.xml/.ini 전용+n세대 스냅샷+diff 롤백) |
+| **네트워크 패킷 캡처 경량 뷰어** | Pcap.View (≠ Proxy.Cast: HTTP 능동 인터셉트, ≠ Net.Scan: ARP LAN 기기 탐지 — NIC 레벨 패시브 캡처+TCP 스트림 재조립) |
+| **정규식 다중 파일 일괄 Find-Replace** | Regex.Sweep (≠ Regex.Lab: 단일 문자열 정규식 테스터 — 실제 파일 시스템 대상 일괄 치환+미리보기 diff+드라이런) |
+| **WiFi 채널 간섭 분석기** | Wi.Probe (≠ Net.Scan: ARP LAN 기기, ≠ Ping.Grid: ICMP 핑 — 802.11 채널 히트맵+간섭 분석+최적 채널 추천) |
+| **브라우저 탭 세션 독립 저장 트레이** | Tab.Vault (≠ Link.Vault: 의도적 북마크+스냅샷 — 자동 주기적 탭 URL 백업+브라우저 크래시 복원+탭 그룹 보존) |
+| **범용 코드 클립보드 포매터 팝업** | Code.Format (≠ Text.Forge: 텍스트 인코딩·해시 변환 — 소스 코드 구문 인식 다중 언어 포매팅 전역 팝업) |
+| **클립보드 HTML/RTF 서식 자동 정제** | Clip.Clean (≠ Smart.Paste: SendInput 우회, ≠ Clip.Find: FTS 히스토리 검색 — 백그라운드 서식 자동 제거→순수 텍스트 교체) |
+| **일회성 만료 파일 공유 드롭존** | Temp.Drop (≠ Serve.Cast: 폴더 범용 HTTP 서버, ≠ Drop.Bridge: P2P LAN 전송 — 만료 조건+횟수 제한+비밀번호+QR 일회성 특화) |
+| **실행 중 프로세스 환경변수 조회** | Proc.Env (≠ Env.Guard: 시스템/사용자 레지스트리 — ReadProcessMemory+PEB 파싱 실행 중 프로세스 환경 블록 특화) |
+| **LAN Git-Aware 코드 미러링 트레이** | Mirror.Dev (≠ Folder.Sync: 일반 파일 동기화, ≠ Drop.Bridge: 수동 전송 — LibGit2Sharp diff 증분+.gitignore+브랜치 프로파일) |
+| **나노봇 명령어 프로그래밍 조립 퍼즐** | Nano.Forge (≠ Auto.Build: 컨베이어 공장 배치, ≠ Volt.Chain: 전류 회로 — 시각 블록 코딩 IF/WHILE 나노봇 순차·병렬 제어) |
+| **Plinko 페그 배치 낙하 경로 퍼즐** | Drop.Zone (≠ Spin.Gate: 회전 게이트 방향 전환, ≠ Gravity.Well: 중력 우물 파티클 — 삼각 페그 전략 배치+확률 물리 낙하) |
+| **폭발 반동 수직 상승 로그라이크** | Burst.Climb (≠ Sky.Drift: 글라이더 양력, ≠ Neon.Run: 수평 러너 — 폭발 방향·타이밍 물리 반동+연쇄 에어콤보+로그라이크) |
+| **증기 압력 배관 밸브 물리 퍼즐** | Steam.Valve (≠ Flow.Pipe: 색상 경로 연결 — 압력 수치 시뮬+분기 배관+과부하 방지 엔지니어링 퍼즐) |
+| **탑다운 영역 페인팅 전략 아케이드** | Paint.Clash (≠ Burst.Canvas: 슈터+팔레트 비율 생존, ≠ Drift.Paint: 드리프트 자국 채우기 — PVP 영역 점령+색상 혼합 중립 구역) |
+| **포탈 네트워크 구슬 동시 착점 퍼즐** | Warp.Gate (≠ Rift.Jump: 플레이어 포탈 플랫포머, ≠ Spin.Gate: 단일 방향 전환 — 복수 구슬 N개 포탈 동시 골인 네트워크) |
+| **열 확산 목표 온도 달성 퍼즐** | Heat.Spread (≠ Tidal.Wave: 2D 파동 방정식, ≠ Steam.Valve: 배관 압력 — 열역학 확산 방정식 타겟 온도 범위 달성) |
+| **핀 실 감기 기하학 패턴 퍼즐** | Knit.Path (≠ Knot.Craft: 위상 매듭 풀기, ≠ Spring.Web: 거미줄 물리 — 기하학적 직선 실 감기+실루엣 매칭+아트 창작) |
+| **행·열·블록 회전 목표 패턴 퍼즐** | Grid.Lock (≠ Block.Shift: 행/열 루프 선형 슬라이드, ≠ Ice.Slide: 단방향 미끄러짐 — 회전(Rotation) 기반 큐브 퍼즐) |
+| **전투 없는 힐링 픽셀아트 내러티브 RPG** | Pixel.Quest (≠ Room.Code: 방탈출 포인트앤클릭, ≠ Rogue.Tile: 영구사망 로그라이크 — 감성 스토리+분기 선택+수집 요소 첫 도입) |

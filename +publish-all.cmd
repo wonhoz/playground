@@ -44,6 +44,7 @@ call :pub "Timeline.Craft"        "Applications\Data\Timeline.Craft"            
 
 :: ── Applications / Development ────────────────────────────────────
 call :pub "App.Temp"              "Applications\Development\App.Temp"                      "App.Temp.exe"              "Applications\Development"
+call :pub "Git.Stats"             "Applications\Development\Git.Stats"                     "Git.Stats.exe"             "Applications\Development"
 call :pub "Hex.Peek"              "Applications\Development\Hex.Peek"                      "Hex.Peek.exe"              "Applications\Development"
 call :pub "Log.Lens"              "Applications\Development\Log.Lens"                      "Log.Lens.exe"              "Applications\Development"
 call :pub "Quick.Calc"            "Applications\Development\Quick.Calc"                    "Quick.Calc.exe"            "Applications\Development"
@@ -91,6 +92,7 @@ call :pub "Key.Map"               "Applications\System\Key.Map"                 
 call :pub "Sched.Cast"            "Applications\System\Sched.Cast"                         "Sched.Cast.exe"            "Applications\System\Sched.Cast"
 call :pub "Spec.Report"           "Applications\System\Spec.Report"                        "Spec.Report.exe"           "Applications\System"
 call :pub "Spec.View"             "Applications\System\Spec.View"                          "Spec.View.exe"             "Applications\System\Spec.View"
+call :pub "Svc.Guard"             "Applications\System\Svc.Guard"                          "Svc.Guard.exe"             "Applications\System\Svc.Guard"
 call :pub "Sys.Clean"             "Applications\System\Sys.Clean"                          "Sys.Clean.exe"             "Applications\System\Sys.Clean"
 call :pub "Tray.Stats"            "Applications\System\Tray.Stats"                         "Tray.Stats.exe"            "Applications\System\Tray.Stats"
 
@@ -112,6 +114,9 @@ call :pub "Screen.Recorder"       "Applications\Video\Screen.Recorder"          
 
 :: ── Games / Action ───────────────────────────────────────────────
 call :pub "Dungeon.Dash"          "Games\Action\Dungeon.Dash"                              "Dungeon.Dash.exe"          "Games\Action"
+
+:: ── Games / Idle ────────────────────────────────────────────────
+call :pub "Code.Idle"             "Games\Idle\Code.Idle"                                   "Code.Idle.exe"             "Games\Idle"
 
 :: ── Games / Arcade ───────────────────────────────────────────────
 call :pub "Brick.Blitz"           "Games\Arcade\Brick.Blitz"                               "Brick.Blitz.exe"           "Games\Arcade"

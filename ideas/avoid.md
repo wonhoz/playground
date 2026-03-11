@@ -2,7 +2,7 @@
 
 > 이 파일은 브레인스토밍 시 **이미 제안되거나 구현된 아이디어를 다시 꺼내지 않도록** 하는 필터다.
 > 새 아이디어를 제안하기 전 반드시 이 목록을 확인할 것.
-> 마지막 갱신: 2026-03-11 (14차)
+> 마지막 갱신: 2026-03-12 (15차)
 
 ---
 
@@ -583,7 +583,17 @@
 
 ---
 
-### Apps (신규 — idea_20260311_11차)
+### Apps / System / Network / Files / Dev (신규 — idea_20260312_15차)
+
+| 이름 | 핵심 기능 | 출처 |
+|------|----------|------|
+| `Audio.Scope` | 시스템 오디오 실시간 스펙트럼 분석기·오실로스코프 (WASAPI loopback, FFT 스펙트럼, 스펙트로그램, 레벨 미터, PNG/SVG 내보내기) | idea_20260312_15차 |
+| `VPN.Cast` | WireGuard/OpenVPN GUI 설정 관리자 (피어 추가·삭제·QR 가져오기, 킬 스위치, 트레이 프로파일 전환, 연결 이력) | idea_20260312_15차 |
+| `Reg.Vault` | Windows 레지스트리 고급 브라우저·비교기 (정규식 검색, 북마크, 스냅샷 diff, JSON/REG 내보내기, HKLM 쓰기 자동 백업) | idea_20260312_15차 |
+| `Run.Book` | 인터랙티브 YAML Runbook/체크리스트 실행기 (스텝+조건 분기, 쉘 명령 실행+로그 스트리밍, 배포·인시던트 대응 프로시저 실행) | idea_20260312_15차 |
+| `Archive.Forge` | ZIP/7z/TAR.GZ 아카이브 생성·관리자 (드래그&드롭, AES-256 암호화, 분할 볼륨, 제외 패턴 glob 규칙) | idea_20260312_15차 |
+
+### 앱 (신규 — idea_20260311_11차)
 
 | 이름 | 핵심 기능 | 출처 |
 |------|----------|------|
@@ -597,6 +607,16 @@
 | `Git.Stats` | Git 저장소 통계 분석기 (커밋 히트맵, 핫파일·코드 이탈 분석, 기여자 활동, 언어 분포, 시간대 패턴, Markdown 리포트 내보내기 — Git.Reel과 차별화) | idea_20260311_11차 |
 | `Win.Tamer` | 프로세스 CPU 친화도·우선순위 GUI 관리자 (코어 체크박스 할당, WMI 프로세스 감시로 실행 시 자동 적용, 게이밍·개발 프리셋) | idea_20260311_11차 |
 | `Font.Draw` | 비트맵·픽셀 폰트 그리드 에디터 (8×8~32×32 글리프 편집, BDF/PNG 글리프시트 내보내기, 미리보기 렌더, ASCII~유니코드 범위 지원) | idea_20260311_11차 |
+
+### 게임 — 제안된 미구현 아이디어 (idea_20260312_15차)
+
+| 이름 | 장르 | 핵심 메커닉 |
+|------|------|------------|
+| `Dice.Shift` | Puzzle / Logic | 격자 위 주사위 굴리기 소코반 — 굴릴 때마다 바닥 면 값 변경, 목표 칸마다 요구 숫자 조건, 방향 잠금·숫자 변환 특수 타일, 레벨 에디터 |
+| `Maze.Craft` | Puzzle / Strategy | 역발상 미로 — 플레이어가 벽 배치로 미로 설계, BFS/A* AI 탈출자가 해법 탐색, 탈출 막으면 승리, 최소 벽 수 도전, 솔버 시각화 |
+| `Lock.Pick` | Casual / Skill / Puzzle | 자물쇠 해제 미니게임 컬렉션 — 핀텀블러(청각 타이밍)·다이얼 조합(진동)·슬라이딩·원판·체인 5종, 물리+오디오 피드백, heist 스토리 캠페인 |
+| `Frame.Jump` | Platformer / Puzzle / Meta | 만화 패널 메타 플랫포머 — 패널 경계 순간이동, 패널마다 독립 물리, 크기가 공간 변형, 패널 이동 순서 퍼즐 |
+| `Chip.Logic` | Puzzle / Educational | 논리 게이트 회로 빌더 퍼즐 — AND/OR/NOT/NAND/XOR 배치로 목표 진리표 달성, 반가산기→ALU 단계 진행, 빛 흐름 시각화, 최소 게이트 수 도전, 샌드박스 |
 
 ### 게임 — 제안된 미구현 아이디어 (idea_20260311_11차)
 
@@ -894,6 +914,16 @@
 | **격자 인접 글자 체인 단어 찾기** | Word.Weave (≠ Word.Bomb: 음절 타이핑, ≠ Glyph.Rush: 타이핑 슈터 — Boggle 변형 공간 단어 탐색) |
 | **개발자 스타트업 방치형 게임** | Code.Idle (≠ Forge.Idle: 광물 채굴·제련, ≠ Auto.Build: 실시간 공장 퍼즐 — 코드 라인+기술 부채+개발자 유머 이벤트) |
 | **자기 극성 전환 플랫포머** | Magnet.Jump (≠ Magnet.Maze: 자기력으로 볼 유도, ≠ Tilt.Ball: 판 기울이기 — 캐릭터 N/S 극성 전환 실시간 플랫포머) |
+| **오디오 스펙트럼 시각화** | Audio.Scope (≠ Pitch.Find: BPM·키 분석, ≠ Noise.Guard: 마이크 노이즈 필터 — 실시간 오실로스코프+FFT 시각화 도구) |
+| **VPN 설정 GUI 관리** | VPN.Cast (≠ SSH.Vault: SSH config, ≠ DNS.Flip: DNS 서버 전환, ≠ Net.Ghost: MAC 스푸퍼 — WireGuard/OpenVPN 피어 관리) |
+| **레지스트리 브라우저·비교기** | Reg.Vault (≠ Sys.Clean: 레지스트리 청소만, ≠ App.Temp: 앱 세션 롤백 — 정규식 검색+스냅샷 diff+JSON 내보내기) |
+| **인터랙티브 Runbook 실행기** | Run.Book (≠ Task.Cast: Kanban 보드, ≠ Batch.Flow: 파일 파이프라인, ≠ Sched.Cast: 예약 실행기 — YAML 스텝+쉘 명령 실행) |
+| **ZIP/7z 아카이브 생성기** | Archive.Forge (≠ Zip.Peek: 읽기 전용 탐색, ≠ Crypt.Drop: 파일 암호화 금고 — 아카이브 생성+분할+제외 패턴) |
+| **주사위 면 값 소코반 퍼즐** | Dice.Shift (≠ Dungeon.Dice: 덱빌딩 로그라이크, ≠ Ice.Slide: 얼음 슬라이딩, ≠ Neon.Push: 소코반+색상+레이저) |
+| **미로 설계자 vs AI 탈출 대결** | Maze.Craft (≠ Maze.Dread: 탈출자 시점, ≠ Tower.Fall: 역 타워디펜스 — 벽 배치+BFS AI 탈출자 방해) |
+| **자물쇠 해제 미니게임** | Lock.Pick (≠ Room.Code: 오브젝트 클릭&조합 방탈출 — 핀텀블러·다이얼·슬라이딩 등 자물쇠 메커닉 특화) |
+| **만화 패널 메타 플랫포머** | Frame.Jump (≠ Rift.Jump: 2점 포털, ≠ Phase.Gate: 두 차원 전환 — 만화 패널 경계 순간이동+독립 물리) |
+| **논리 게이트 회로 빌더 퍼즐** | Chip.Logic (≠ Volt.Chain: 타이밍 전류 스위치 순서, ≠ Laser.Net: 레이저 반사 — AND/OR/NOT 게이트 배치+진리표 달성) |
 | **지하 뿌리 성장 자원 전략** | Root.Spread (≠ Leaf.Grow: L-시스템 지상 성장, ≠ Colony.Sim: 곤충 군집 — 지하 타일맵 영양소 쟁탈 전략) |
 | **집라인 케이블 화물 배송 퍼즐** | Zipline.Rush (≠ Bridge.Craft: 정적 교량 응력, ≠ Drone.Haul: 드론 운반 — Verlet 집라인 동적 이동 물리) |
 | **균류 슬라임 몰드 네트워크 성장** | Spore.Net (≠ Colony.Sim: 곤충 페로몬 군집, ≠ Leaf.Grow: 식물 L-시스템 — Physarum 알고리즘 최적 네트워크) |

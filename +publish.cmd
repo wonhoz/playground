@@ -108,6 +108,8 @@ echo !CY!  82!RS! Web.Shot              !DG!Applications/Photo.Picture!RS!
 echo !CY!  83!RS! Win.Event             !DG!Applications/Development!RS!
 echo !CY!  84!RS! Word.Cloud            !DG!Applications/Text!RS!
 echo !CY!  85!RS! Zip.Peek              !DG!Files/Inspector!RS!
+echo !CY!  86!RS! Reg.Vault             !DG!Applications/System!RS!
+echo !CY!  87!RS! VPN.Cast              !DG!Applications/Network!RS!
 echo.
 echo !DG!--------------------------------------------------!RS!
 echo !DG!  번호 입력 (공백/쉼표로 구분)   예: 1 3 5  또는  1,3,5!RS!
@@ -221,6 +223,8 @@ for %%n in (!SEL!) do (
     if "%%n"=="83" call :pub "Win.Event"              "Applications\Development\Win.Event"                     "WinEvent.exe"              "Applications\Development"
     if "%%n"=="84" call :pub "Word.Cloud"             "Applications\Text\Word.Cloud"                           "Word.Cloud.exe"            "Applications\Text"
     if "%%n"=="85" call :pub "Zip.Peek"               "Applications\Files\Inspector\Zip.Peek"                  "Zip.Peek.exe"              "Applications\Files\Inspector\Zip.Peek"
+    if "%%n"=="86" call :pub "Reg.Vault"              "Applications\System\Reg.Vault"                          "RegVault.exe"              "Applications\System"
+    if "%%n"=="87" call :pub "VPN.Cast"               "Applications\Network\VPN.Cast"                          "VpnCast.exe"               "Applications\Network"
 )
 goto :DONE
 
@@ -322,6 +326,8 @@ call :pub "Web.Shot"              "Applications\Photo.Picture\Web.Shot"         
 call :pub "Win.Event"             "Applications\Development\Win.Event"                     "WinEvent.exe"              "Applications\Development"
 call :pub "Word.Cloud"            "Applications\Text\Word.Cloud"                           "Word.Cloud.exe"            "Applications\Text"
 call :pub "Zip.Peek"              "Applications\Files\Inspector\Zip.Peek"                  "Zip.Peek.exe"              "Applications\Files\Inspector\Zip.Peek"
+call :pub "Reg.Vault"             "Applications\System\Reg.Vault"                          "RegVault.exe"              "Applications\System"
+call :pub "VPN.Cast"              "Applications\Network\VPN.Cast"                          "VpnCast.exe"               "Applications\Network"
 
 :: ── 완료 ──────────────────────────────────────────────────────────
 :DONE

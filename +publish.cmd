@@ -1,4 +1,4 @@
-﻿@echo off
+@echo off
 chcp 65001 >nul
 setlocal enabledelayedexpansion
 
@@ -39,9 +39,9 @@ echo !CY!  13!RS! Color.Grade           !DG!Applications/Photo.Picture!RS!
 echo !CY!  14!RS! Dash.City             !DG!Games/Arcade!RS!
 echo !CY!  15!RS! Dict.Cast             !DG!Applications/Tools.Utility!RS!
 echo !CY!  16!RS! Disk.Lens             !DG!Files/Inspector!RS!
-echo !CY!  17!RS! Drive.Bench           !DG!Applications/System!RS!
-echo !CY!  18!RS! DNS.Flip              !DG!Applications/Network!RS!
-echo !CY!  19!RS! Dodge.Blitz           !DG!Games/Shooter!RS!
+echo !CY!  17!RS! DNS.Flip              !DG!Applications/Network!RS!
+echo !CY!  18!RS! Dodge.Blitz           !DG!Games/Shooter!RS!
+echo !CY!  19!RS! Drive.Bench           !DG!Applications/System!RS!
 echo !CY!  20!RS! Dungeon.Dash          !DG!Games/Action!RS!
 echo !CY!  21!RS! Echo.Text             !DG!Applications/Text!RS!
 echo !CY!  22!RS! Env.Guard             !DG!Applications/System!RS!
@@ -93,9 +93,9 @@ echo !CY!  67!RS! Tower.Guard           !DG!Games/Strategy!RS!
 echo !CY!  68!RS! Tray.Stats            !DG!Applications/System!RS!
 echo !CY!  69!RS! Wave.Surf             !DG!Games/Casual!RS!
 echo !CY!  70!RS! Web.Shot              !DG!Applications/Photo.Picture!RS!
-echo !CY!  71!RS! Word.Cloud            !DG!Applications/Text!RS!
-echo !CY!  72!RS! Zip.Peek              !DG!Files/Inspector!RS!
-echo !CY!  73!RS! Win.Event             !DG!Applications/Development!RS!
+echo !CY!  71!RS! Win.Event             !DG!Applications/Development!RS!
+echo !CY!  72!RS! Word.Cloud            !DG!Applications/Text!RS!
+echo !CY!  73!RS! Zip.Peek              !DG!Files/Inspector!RS!
 echo.
 echo !DG!--------------------------------------------------!RS!
 echo !DG!  번호 입력 (공백/쉼표로 구분)   예: 1 3 5  또는  1,3,5!RS!
@@ -140,13 +140,13 @@ for %%n in (!SEL!) do (
     if "%%n"=="14" call :pub "Dash.City"              "Games\Arcade\Dash.City"                                 "Dash.City.exe"             "Games\Arcade"
     if "%%n"=="15" call :pub "Dict.Cast"              "Applications\Tools.Utility\Dict.Cast"                   "Dict.Cast.exe"             "Applications\Tools.Utility\Dict.Cast"
     if "%%n"=="16" call :pub "Disk.Lens"              "Applications\Files\Inspector\Disk.Lens"                 "Disk.Lens.exe"             "Applications\Files\Inspector\Disk.Lens"
-        if "%%n"=="17" call :pub "Drive.Bench"           "Applications\System\Drive.Bench"                       "DriveBench.exe"           "Applications\System"
-    if "%%n"=="18" call :pub "DNS.Flip"               "Applications\Network\DNS.Flip"                          "Dns.Flip.exe"              "Applications\Network"
-    if "%%n"=="19" call :pub "Dodge.Blitz"            "Games\Shooter\Dodge.Blitz"                              "Dodge.Blitz.exe"           "Games\Shooter"
+    if "%%n"=="17" call :pub "DNS.Flip"               "Applications\Network\DNS.Flip"                          "Dns.Flip.exe"              "Applications\Network"
+    if "%%n"=="18" call :pub "Dodge.Blitz"            "Games\Shooter\Dodge.Blitz"                              "Dodge.Blitz.exe"           "Games\Shooter"
+    if "%%n"=="19" call :pub "Drive.Bench"            "Applications\System\Drive.Bench"                        "Drive.Bench.exe"           "Applications\System"
     if "%%n"=="20" call :pub "Dungeon.Dash"           "Games\Action\Dungeon.Dash"                              "Dungeon.Dash.exe"          "Games\Action"
     if "%%n"=="21" call :pub "Echo.Text"              "Applications\Text\Echo.Text"                            "Echo.Text.exe"             "Applications\Text\Echo.Text"
     if "%%n"=="22" call :pub "Env.Guard"              "Applications\System\Env.Guard"                          "Env.Guard.exe"             "Applications\System"
-    if "%%n"=="23" call :pub "Ext.Boss"               "Applications\System\Ext.Boss"                           "Ext.Boss.exe"              "Applications\System"
+    if "%%n"=="23" call :pub "Ext.Boss"               "Applications\System\Ext.Boss"                           "Ext.Boss.exe"              "Applications\System\Ext.Boss"
     if "%%n"=="24" call :pub "File.Duplicates"        "Applications\Files\Manager\File.Duplicates"             "File.Duplicates.exe"       "Applications\Files\Manager"
     if "%%n"=="25" call :pub "File.Unlocker"          "Applications\Files\Manager\File.Unlocker"               "File.Unlocker.exe"         "Applications\Files\Manager"
     if "%%n"=="26" call :pub "Folder.Purge"           "Applications\Files\Manager\Folder.Purge"                "Folder.Purge.exe"          "Applications\Files\Manager"
@@ -182,7 +182,7 @@ for %%n in (!SEL!) do (
     if "%%n"=="56" call :pub "Serve.Cast"             "Applications\Network\Serve.Cast"                        "Serve.Cast.exe"            "Applications\Network"
     if "%%n"=="57" call :pub "Signal.Flow"            "Applications\Development\Signal.Flow"                   "Signal.Flow.exe"           "Applications\Development"
     if "%%n"=="58" call :pub "Spec.Report"            "Applications\System\Spec.Report"                        "Spec.Report.exe"           "Applications\System"
-    if "%%n"=="59" call :pub "Spec.View"              "Applications\System\Spec.View"                          "Spec.View.exe"             "Applications\System"
+    if "%%n"=="59" call :pub "Spec.View"              "Applications\System\Spec.View"                          "Spec.View.exe"             "Applications\System\Spec.View"
     if "%%n"=="60" call :pub "Star.Strike"            "Games\Shooter\Star.Strike"                              "Star.Strike.exe"           "Games\Shooter"
     if "%%n"=="61" call :pub "Stay.Awake"             "Applications\Automation\Stay.Awake"                     "Stay.Awake.exe"            "Applications\Automation\Stay.Awake"
     if "%%n"=="62" call :pub "Sys.Clean"              "Applications\System\Sys.Clean"                          "Sys.Clean.exe"             "Applications\System\Sys.Clean"
@@ -194,9 +194,9 @@ for %%n in (!SEL!) do (
     if "%%n"=="68" call :pub "Tray.Stats"             "Applications\System\Tray.Stats"                         "Tray.Stats.exe"            "Applications\System\Tray.Stats"
     if "%%n"=="69" call :pub "Wave.Surf"              "Games\Casual\Wave.Surf"                                 "Wave.Surf.exe"             "Games\Casual"
     if "%%n"=="70" call :pub "Web.Shot"               "Applications\Photo.Picture\Web.Shot"                    "Web.Shot.exe"              "Applications\Photo.Picture\Web.Shot"
-    if "%%n"=="71" call :pub "Word.Cloud"             "Applications\Text\Word.Cloud"                           "Word.Cloud.exe"            "Applications\Text"
-    if "%%n"=="72" call :pub "Zip.Peek"               "Applications\Files\Inspector\Zip.Peek"                  "Zip.Peek.exe"              "Applications\Files\Inspector\Zip.Peek"
-    if "%%n"=="73" call :pub "Win.Event"              "Applications\Development\Win.Event"                     "WinEvent.exe"              "Applications\Development"
+    if "%%n"=="71" call :pub "Win.Event"              "Applications\Development\Win.Event"                     "WinEvent.exe"              "Applications\Development"
+    if "%%n"=="72" call :pub "Word.Cloud"             "Applications\Text\Word.Cloud"                           "Word.Cloud.exe"            "Applications\Text"
+    if "%%n"=="73" call :pub "Zip.Peek"               "Applications\Files\Inspector\Zip.Peek"                  "Zip.Peek.exe"              "Applications\Files\Inspector\Zip.Peek"
 )
 goto :DONE
 
@@ -229,13 +229,13 @@ call :pub "Color.Grade"           "Applications\Photo.Picture\Color.Grade"      
 call :pub "Dash.City"             "Games\Arcade\Dash.City"                                 "Dash.City.exe"             "Games\Arcade"
 call :pub "Dict.Cast"             "Applications\Tools.Utility\Dict.Cast"                   "Dict.Cast.exe"             "Applications\Tools.Utility\Dict.Cast"
 call :pub "Disk.Lens"             "Applications\Files\Inspector\Disk.Lens"                 "Disk.Lens.exe"             "Applications\Files\Inspector\Disk.Lens"
-call :pub "Drive.Bench"          "Applications\System\Drive.Bench"                        "DriveBench.exe"            "Applications\System"
 call :pub "DNS.Flip"              "Applications\Network\DNS.Flip"                          "Dns.Flip.exe"              "Applications\Network"
 call :pub "Dodge.Blitz"           "Games\Shooter\Dodge.Blitz"                              "Dodge.Blitz.exe"           "Games\Shooter"
+call :pub "Drive.Bench"           "Applications\System\Drive.Bench"                        "Drive.Bench.exe"           "Applications\System"
 call :pub "Dungeon.Dash"          "Games\Action\Dungeon.Dash"                              "Dungeon.Dash.exe"          "Games\Action"
 call :pub "Echo.Text"             "Applications\Text\Echo.Text"                            "Echo.Text.exe"             "Applications\Text\Echo.Text"
 call :pub "Env.Guard"             "Applications\System\Env.Guard"                          "Env.Guard.exe"             "Applications\System"
-call :pub "Ext.Boss"              "Applications\System\Ext.Boss"                           "Ext.Boss.exe"              "Applications\System"
+call :pub "Ext.Boss"              "Applications\System\Ext.Boss"                           "Ext.Boss.exe"              "Applications\System\Ext.Boss"
 call :pub "File.Duplicates"       "Applications\Files\Manager\File.Duplicates"             "File.Duplicates.exe"       "Applications\Files\Manager"
 call :pub "File.Unlocker"         "Applications\Files\Manager\File.Unlocker"               "File.Unlocker.exe"         "Applications\Files\Manager"
 call :pub "Folder.Purge"          "Applications\Files\Manager\Folder.Purge"                "Folder.Purge.exe"          "Applications\Files\Manager"
@@ -271,7 +271,7 @@ call :pub "Screen.Recorder"       "Applications\Video\Screen.Recorder"          
 call :pub "Serve.Cast"            "Applications\Network\Serve.Cast"                        "Serve.Cast.exe"            "Applications\Network"
 call :pub "Signal.Flow"           "Applications\Development\Signal.Flow"                   "Signal.Flow.exe"           "Applications\Development"
 call :pub "Spec.Report"           "Applications\System\Spec.Report"                        "Spec.Report.exe"           "Applications\System"
-call :pub "Spec.View"             "Applications\System\Spec.View"                          "Spec.View.exe"             "Applications\System"
+call :pub "Spec.View"             "Applications\System\Spec.View"                          "Spec.View.exe"             "Applications\System\Spec.View"
 call :pub "Star.Strike"           "Games\Shooter\Star.Strike"                              "Star.Strike.exe"           "Games\Shooter"
 call :pub "Stay.Awake"            "Applications\Automation\Stay.Awake"                     "Stay.Awake.exe"            "Applications\Automation\Stay.Awake"
 call :pub "Sys.Clean"             "Applications\System\Sys.Clean"                          "Sys.Clean.exe"             "Applications\System\Sys.Clean"
@@ -283,9 +283,9 @@ call :pub "Tower.Guard"           "Games\Strategy\Tower.Guard"                  
 call :pub "Tray.Stats"            "Applications\System\Tray.Stats"                         "Tray.Stats.exe"            "Applications\System\Tray.Stats"
 call :pub "Wave.Surf"             "Games\Casual\Wave.Surf"                                 "Wave.Surf.exe"             "Games\Casual"
 call :pub "Web.Shot"              "Applications\Photo.Picture\Web.Shot"                    "Web.Shot.exe"              "Applications\Photo.Picture\Web.Shot"
+call :pub "Win.Event"             "Applications\Development\Win.Event"                     "WinEvent.exe"              "Applications\Development"
 call :pub "Word.Cloud"            "Applications\Text\Word.Cloud"                           "Word.Cloud.exe"            "Applications\Text"
 call :pub "Zip.Peek"              "Applications\Files\Inspector\Zip.Peek"                  "Zip.Peek.exe"              "Applications\Files\Inspector\Zip.Peek"
-call :pub "Win.Event"             "Applications\Development\Win.Event"                     "WinEvent.exe"              "Applications\Development"
 
 :: ── 완료 ──────────────────────────────────────────────────────────
 :DONE

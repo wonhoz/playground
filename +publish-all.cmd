@@ -82,14 +82,14 @@ call :pub "Web.Shot"              "Applications\Photo.Picture\Web.Shot"         
 
 :: ── Applications / System ─────────────────────────────────────────
 call :pub "Boot.Map"              "Applications\System\Boot.Map"                           "Boot.Map.exe"              "Applications\System"
-call :pub "Drive.Bench"          "Applications\System\Drive.Bench"                        "DriveBench.exe"            "Applications\System"
+call :pub "Drive.Bench"           "Applications\System\Drive.Bench"                        "Drive.Bench.exe"           "Applications\System"
 call :pub "Burn.Rate"             "Applications\System\Burn.Rate"                          "Burn.Rate.exe"             "Applications\System"
 call :pub "Env.Guard"             "Applications\System\Env.Guard"                          "Env.Guard.exe"             "Applications\System"
-call :pub "Ext.Boss"              "Applications\System\Ext.Boss"                           "Ext.Boss.exe"              "Applications\System"
+call :pub "Ext.Boss"              "Applications\System\Ext.Boss"                           "Ext.Boss.exe"              "Applications\System\Ext.Boss"
 call :pub "Key.Map"               "Applications\System\Key.Map"                            "Key.Map.exe"               "Applications\System\Key.Map"
 call :pub "Sched.Cast"            "Applications\System\Sched.Cast"                         "Sched.Cast.exe"            "Applications\System\Sched.Cast"
 call :pub "Spec.Report"           "Applications\System\Spec.Report"                        "Spec.Report.exe"           "Applications\System"
-call :pub "Spec.View"             "Applications\System\Spec.View"                          "Spec.View.exe"             "Applications\System"
+call :pub "Spec.View"             "Applications\System\Spec.View"                          "Spec.View.exe"             "Applications\System\Spec.View"
 call :pub "Sys.Clean"             "Applications\System\Sys.Clean"                          "Sys.Clean.exe"             "Applications\System\Sys.Clean"
 call :pub "Tray.Stats"            "Applications\System\Tray.Stats"                         "Tray.Stats.exe"            "Applications\System\Tray.Stats"
 

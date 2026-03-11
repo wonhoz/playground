@@ -1,4 +1,4 @@
-@echo off
+﻿@echo off
 chcp 65001 >nul
 setlocal enabledelayedexpansion
 
@@ -62,44 +62,47 @@ echo !CY!  36!RS! Icon.Hunt             !DG!Applications/Emoji.Icon!RS!
 echo !CY!  37!RS! Key.Map               !DG!Applications/System!RS!
 echo !CY!  38!RS! Leaf.Grow             !DG!Games/Simulation!RS!
 echo !CY!  39!RS! Log.Lens              !DG!Applications/Development!RS!
-echo !CY!  40!RS! Mark.View             !DG!Applications/Text!RS!
-echo !CY!  41!RS! Mock.Server           !DG!Applications/Network!RS!
-echo !CY!  42!RS! Mosaic.Forge          !DG!Applications/Photo.Picture!RS!
-echo !CY!  43!RS! Mouse.Flick           !DG!Applications/Tools.Utility!RS!
-echo !CY!  44!RS! Music.Player          !DG!Applications/Audio!RS!
-echo !CY!  45!RS! Neon.Run              !DG!Games/Arcade!RS!
-echo !CY!  46!RS! Neon.Slice            !DG!Games/Arcade!RS!
-echo !CY!  47!RS! Net.Scan              !DG!Applications/Network!RS!
-echo !CY!  48!RS! Nitro.Drift           !DG!Games/Racing!RS!
-echo !CY!  49!RS! Orbit.Craft           !DG!Games/Puzzle!RS!
-echo !CY!  50!RS! PDF.Forge             !DG!Files/Inspector!RS!
-echo !CY!  51!RS! Photo.Video.Organizer !DG!Applications/Photo.Picture!RS!
-echo !CY!  52!RS! Port.Watch            !DG!Applications/Network!RS!
-echo !CY!  53!RS! Prompt.Forge          !DG!Applications/AI!RS!
-echo !CY!  54!RS! QR.Forge              !DG!Applications/Tools.Utility!RS!
-echo !CY!  55!RS! Quick.Calc            !DG!Applications/Development!RS!
-echo !CY!  56!RS! Sand.Fall             !DG!Games/Sandbox!RS!
-echo !CY!  57!RS! Sched.Cast            !DG!Applications/System!RS!
-echo !CY!  58!RS! Screen.Recorder       !DG!Applications/Video!RS!
-echo !CY!  59!RS! Serve.Cast            !DG!Applications/Network!RS!
-echo !CY!  60!RS! Signal.Flow           !DG!Applications/Development!RS!
-echo !CY!  61!RS! Spec.Report           !DG!Applications/System!RS!
-echo !CY!  62!RS! Spec.View             !DG!Applications/System!RS!
-echo !CY!  63!RS! Star.Strike           !DG!Games/Shooter!RS!
-echo !CY!  64!RS! Stay.Awake            !DG!Applications/Automation!RS!
-echo !CY!  65!RS! Svc.Guard             !DG!Applications/System!RS!
-echo !CY!  66!RS! Sys.Clean             !DG!Applications/System!RS!
-echo !CY!  67!RS! Table.Craft           !DG!Applications/Data!RS!
-echo !CY!  68!RS! Tag.Forge             !DG!Applications/Audio!RS!
-echo !CY!  69!RS! Text.Forge            !DG!Applications/Text!RS!
-echo !CY!  70!RS! Timeline.Craft        !DG!Applications/Data!RS!
-echo !CY!  71!RS! Tower.Guard           !DG!Games/Strategy!RS!
-echo !CY!  72!RS! Tray.Stats            !DG!Applications/System!RS!
-echo !CY!  73!RS! Wave.Surf             !DG!Games/Casual!RS!
-echo !CY!  74!RS! Web.Shot              !DG!Applications/Photo.Picture!RS!
-echo !CY!  75!RS! Win.Event             !DG!Applications/Development!RS!
-echo !CY!  76!RS! Word.Cloud            !DG!Applications/Text!RS!
-echo !CY!  77!RS! Zip.Peek              !DG!Files/Inspector!RS!
+echo !CY!  40!RS! Log.Merge             !DG!Applications/Development!RS!
+echo !CY!  41!RS! Mark.View             !DG!Applications/Text!RS!
+echo !CY!  42!RS! Mem.Lens              !DG!Applications/System!RS!
+echo !CY!  43!RS! Mock.Server           !DG!Applications/Network!RS!
+echo !CY!  44!RS! Mosaic.Forge          !DG!Applications/Photo.Picture!RS!
+echo !CY!  45!RS! Mouse.Flick           !DG!Applications/Tools.Utility!RS!
+echo !CY!  46!RS! Music.Player          !DG!Applications/Audio!RS!
+echo !CY!  47!RS! Neon.Run              !DG!Games/Arcade!RS!
+echo !CY!  48!RS! Neon.Slice            !DG!Games/Arcade!RS!
+echo !CY!  49!RS! Net.Scan              !DG!Applications/Network!RS!
+echo !CY!  50!RS! Nitro.Drift           !DG!Games/Racing!RS!
+echo !CY!  51!RS! Orbit.Craft           !DG!Games/Puzzle!RS!
+echo !CY!  52!RS! PDF.Forge             !DG!Files/Inspector!RS!
+echo !CY!  53!RS! Photo.Video.Organizer !DG!Applications/Photo.Picture!RS!
+echo !CY!  54!RS! Port.Watch            !DG!Applications/Network!RS!
+echo !CY!  55!RS! Prompt.Forge          !DG!Applications/AI!RS!
+echo !CY!  56!RS! QR.Forge              !DG!Applications/Tools.Utility!RS!
+echo !CY!  57!RS! Quick.Calc            !DG!Applications/Development!RS!
+echo !CY!  58!RS! Sand.Fall             !DG!Games/Sandbox!RS!
+echo !CY!  59!RS! Sched.Cast            !DG!Applications/System!RS!
+echo !CY!  60!RS! Screen.Recorder       !DG!Applications/Video!RS!
+echo !CY!  61!RS! Serve.Cast            !DG!Applications/Network!RS!
+echo !CY!  62!RS! Signal.Flow           !DG!Applications/Development!RS!
+echo !CY!  63!RS! Sky.Drift             !DG!Games/Arcade!RS!
+echo !CY!  64!RS! Spec.Report           !DG!Applications/System!RS!
+echo !CY!  65!RS! Spec.View             !DG!Applications/System!RS!
+echo !CY!  66!RS! Star.Strike           !DG!Games/Shooter!RS!
+echo !CY!  67!RS! Stay.Awake            !DG!Applications/Automation!RS!
+echo !CY!  68!RS! Svc.Guard             !DG!Applications/System!RS!
+echo !CY!  69!RS! Sys.Clean             !DG!Applications/System!RS!
+echo !CY!  70!RS! Table.Craft           !DG!Applications/Data!RS!
+echo !CY!  71!RS! Tag.Forge             !DG!Applications/Audio!RS!
+echo !CY!  72!RS! Text.Forge            !DG!Applications/Text!RS!
+echo !CY!  73!RS! Timeline.Craft        !DG!Applications/Data!RS!
+echo !CY!  74!RS! Tower.Guard           !DG!Games/Strategy!RS!
+echo !CY!  75!RS! Tray.Stats            !DG!Applications/System!RS!
+echo !CY!  76!RS! Wave.Surf             !DG!Games/Casual!RS!
+echo !CY!  77!RS! Web.Shot              !DG!Applications/Photo.Picture!RS!
+echo !CY!  78!RS! Win.Event             !DG!Applications/Development!RS!
+echo !CY!  79!RS! Word.Cloud            !DG!Applications/Text!RS!
+echo !CY!  80!RS! Zip.Peek              !DG!Files/Inspector!RS!
 echo.
 echo !DG!--------------------------------------------------!RS!
 echo !DG!  번호 입력 (공백/쉼표로 구분)   예: 1 3 5  또는  1,3,5!RS!
@@ -167,44 +170,47 @@ for %%n in (!SEL!) do (
     if "%%n"=="37" call :pub "Key.Map"                "Applications\System\Key.Map"                            "Key.Map.exe"               "Applications\System\Key.Map"
     if "%%n"=="38" call :pub "Leaf.Grow"              "Games\Simulation\Leaf.Grow"                             "Leaf.Grow.exe"             "Games\Simulation"
     if "%%n"=="39" call :pub "Log.Lens"               "Applications\Development\Log.Lens"                      "Log.Lens.exe"              "Applications\Development"
-    if "%%n"=="40" call :pub "Mark.View"              "Applications\Text\Mark.View"                            "Mark.View.exe"             "Applications\Text\Mark.View"
-    if "%%n"=="41" call :pub "Mock.Server"            "Applications\Network\Mock.Server"                       "Mock.Server.exe"           "Applications\Network"
-    if "%%n"=="42" call :pub "Mosaic.Forge"           "Applications\Photo.Picture\Mosaic.Forge"                "Mosaic.Forge.exe"          "Applications\Photo.Picture\Mosaic.Forge"
-    if "%%n"=="43" call :pub "Mouse.Flick"            "Applications\Tools.Utility\Mouse.Flick"                 "Mouse.Flick.exe"           "Applications\Tools.Utility"
-    if "%%n"=="44" call :pub "Music.Player"           "Applications\Audio\Music.Player"                        "Music.Player.exe"          "Applications\Audio"
-    if "%%n"=="45" call :pub "Neon.Run"               "Games\Arcade\Neon.Run"                                  "Neon.Run.exe"              "Games\Arcade"
-    if "%%n"=="46" call :pub "Neon.Slice"             "Games\Arcade\Neon.Slice"                                "Neon.Slice.exe"            "Games\Arcade\Neon.Slice"
-    if "%%n"=="47" call :pub "Net.Scan"               "Applications\Network\Net.Scan"                          "Net.Scan.exe"              "Applications\Network\Net.Scan"
-    if "%%n"=="48" call :pub "Nitro.Drift"            "Games\Racing\Nitro.Drift"                               "Nitro.Drift.exe"           "Games\Racing"
-    if "%%n"=="49" call :pub "Orbit.Craft"            "Games\Puzzle\Orbit.Craft"                               "Orbit.Craft.exe"           "Games\Puzzle\Orbit.Craft"
-    if "%%n"=="50" call :pub "PDF.Forge"              "Applications\Files\Inspector\PDF.Forge"                 "Pdf.Forge.exe"             "Applications\Files\Inspector\Pdf.Forge"
-    if "%%n"=="51" call :pub "Photo.Video.Organizer"  "Applications\Photo.Picture\Photo.Video.Organizer"       "Photo.Video.Organizer.exe" "Applications\Photo.Picture"
-    if "%%n"=="52" call :pub "Port.Watch"             "Applications\Network\Port.Watch"                        "Port.Watch.exe"            "Applications\Network"
-    if "%%n"=="53" call :pub "Prompt.Forge"           "Applications\AI\Prompt.Forge"                           "Prompt.Forge.exe"          "Applications\AI\Prompt.Forge"
-    if "%%n"=="54" call :pub "QR.Forge"               "Applications\Tools.Utility\QR.Forge"                    "QR.Forge.exe"              "Applications\Tools.Utility"
-    if "%%n"=="55" call :pub "Quick.Calc"             "Applications\Development\Quick.Calc"                    "Quick.Calc.exe"            "Applications\Development"
-    if "%%n"=="56" call :pub "Sand.Fall"              "Games\Sandbox\Sand.Fall"                                "Sand.Fall.exe"             "Games\Sandbox"
-    if "%%n"=="57" call :pub "Sched.Cast"             "Applications\System\Sched.Cast"                         "Sched.Cast.exe"            "Applications\System\Sched.Cast"
-    if "%%n"=="58" call :pub "Screen.Recorder"        "Applications\Video\Screen.Recorder"                     "Screen.Recorder.exe"       "Applications\Video"
-    if "%%n"=="59" call :pub "Serve.Cast"             "Applications\Network\Serve.Cast"                        "Serve.Cast.exe"            "Applications\Network"
-    if "%%n"=="60" call :pub "Signal.Flow"            "Applications\Development\Signal.Flow"                   "Signal.Flow.exe"           "Applications\Development"
-    if "%%n"=="61" call :pub "Spec.Report"            "Applications\System\Spec.Report"                        "Spec.Report.exe"           "Applications\System"
-    if "%%n"=="62" call :pub "Spec.View"              "Applications\System\Spec.View"                          "Spec.View.exe"             "Applications\System\Spec.View"
-    if "%%n"=="63" call :pub "Star.Strike"            "Games\Shooter\Star.Strike"                              "Star.Strike.exe"           "Games\Shooter"
-    if "%%n"=="64" call :pub "Stay.Awake"             "Applications\Automation\Stay.Awake"                     "Stay.Awake.exe"            "Applications\Automation\Stay.Awake"
-    if "%%n"=="65" call :pub "Svc.Guard"              "Applications\System\Svc.Guard"                          "Svc.Guard.exe"             "Applications\System\Svc.Guard"
-    if "%%n"=="66" call :pub "Sys.Clean"              "Applications\System\Sys.Clean"                          "Sys.Clean.exe"             "Applications\System\Sys.Clean"
-    if "%%n"=="67" call :pub "Table.Craft"            "Applications\Data\Table.Craft"                          "Table.Craft.exe"           "Applications\Data"
-    if "%%n"=="68" call :pub "Tag.Forge"              "Applications\Audio\Tag.Forge"                           "Tag.Forge.exe"             "Applications\Audio\Tag.Forge"
-    if "%%n"=="69" call :pub "Text.Forge"             "Applications\Text\Text.Forge"                           "Text.Forge.exe"            "Applications\Text"
-    if "%%n"=="70" call :pub "Timeline.Craft"         "Applications\Data\Timeline.Craft"                       "Timeline.Craft.exe"        "Applications\Data\Timeline.Craft"
-    if "%%n"=="71" call :pub "Tower.Guard"            "Games\Strategy\Tower.Guard"                             "Tower.Guard.exe"           "Games\Strategy"
-    if "%%n"=="72" call :pub "Tray.Stats"             "Applications\System\Tray.Stats"                         "Tray.Stats.exe"            "Applications\System\Tray.Stats"
-    if "%%n"=="73" call :pub "Wave.Surf"              "Games\Casual\Wave.Surf"                                 "Wave.Surf.exe"             "Games\Casual"
-    if "%%n"=="74" call :pub "Web.Shot"               "Applications\Photo.Picture\Web.Shot"                    "Web.Shot.exe"              "Applications\Photo.Picture\Web.Shot"
-    if "%%n"=="75" call :pub "Win.Event"              "Applications\Development\Win.Event"                     "WinEvent.exe"              "Applications\Development"
-    if "%%n"=="76" call :pub "Word.Cloud"             "Applications\Text\Word.Cloud"                           "Word.Cloud.exe"            "Applications\Text"
-    if "%%n"=="77" call :pub "Zip.Peek"               "Applications\Files\Inspector\Zip.Peek"                  "Zip.Peek.exe"              "Applications\Files\Inspector\Zip.Peek"
+    if "%%n"=="40" call :pub "Log.Merge"              "Applications\Development\Log.Merge"                     "Log.Merge.exe"             "Applications\Development"
+    if "%%n"=="41" call :pub "Mark.View"              "Applications\Text\Mark.View"                            "Mark.View.exe"             "Applications\Text\Mark.View"
+    if "%%n"=="42" call :pub "Mem.Lens"               "Applications\System\Mem.Lens"                           "MemLens.exe"               "Applications\System"
+    if "%%n"=="43" call :pub "Mock.Server"            "Applications\Network\Mock.Server"                       "Mock.Server.exe"           "Applications\Network"
+    if "%%n"=="44" call :pub "Mosaic.Forge"           "Applications\Photo.Picture\Mosaic.Forge"                "Mosaic.Forge.exe"          "Applications\Photo.Picture\Mosaic.Forge"
+    if "%%n"=="45" call :pub "Mouse.Flick"            "Applications\Tools.Utility\Mouse.Flick"                 "Mouse.Flick.exe"           "Applications\Tools.Utility"
+    if "%%n"=="46" call :pub "Music.Player"           "Applications\Audio\Music.Player"                        "Music.Player.exe"          "Applications\Audio"
+    if "%%n"=="47" call :pub "Neon.Run"               "Games\Arcade\Neon.Run"                                  "Neon.Run.exe"              "Games\Arcade"
+    if "%%n"=="48" call :pub "Neon.Slice"             "Games\Arcade\Neon.Slice"                                "Neon.Slice.exe"            "Games\Arcade\Neon.Slice"
+    if "%%n"=="49" call :pub "Net.Scan"               "Applications\Network\Net.Scan"                          "Net.Scan.exe"              "Applications\Network\Net.Scan"
+    if "%%n"=="50" call :pub "Nitro.Drift"            "Games\Racing\Nitro.Drift"                               "Nitro.Drift.exe"           "Games\Racing"
+    if "%%n"=="51" call :pub "Orbit.Craft"            "Games\Puzzle\Orbit.Craft"                               "Orbit.Craft.exe"           "Games\Puzzle\Orbit.Craft"
+    if "%%n"=="52" call :pub "PDF.Forge"              "Applications\Files\Inspector\PDF.Forge"                 "Pdf.Forge.exe"             "Applications\Files\Inspector\Pdf.Forge"
+    if "%%n"=="53" call :pub "Photo.Video.Organizer"  "Applications\Photo.Picture\Photo.Video.Organizer"       "Photo.Video.Organizer.exe" "Applications\Photo.Picture"
+    if "%%n"=="54" call :pub "Port.Watch"             "Applications\Network\Port.Watch"                        "Port.Watch.exe"            "Applications\Network"
+    if "%%n"=="55" call :pub "Prompt.Forge"           "Applications\AI\Prompt.Forge"                           "Prompt.Forge.exe"          "Applications\AI\Prompt.Forge"
+    if "%%n"=="56" call :pub "QR.Forge"               "Applications\Tools.Utility\QR.Forge"                    "QR.Forge.exe"              "Applications\Tools.Utility"
+    if "%%n"=="57" call :pub "Quick.Calc"             "Applications\Development\Quick.Calc"                    "Quick.Calc.exe"            "Applications\Development"
+    if "%%n"=="58" call :pub "Sand.Fall"              "Games\Sandbox\Sand.Fall"                                "Sand.Fall.exe"             "Games\Sandbox"
+    if "%%n"=="59" call :pub "Sched.Cast"             "Applications\System\Sched.Cast"                         "Sched.Cast.exe"            "Applications\System\Sched.Cast"
+    if "%%n"=="60" call :pub "Screen.Recorder"        "Applications\Video\Screen.Recorder"                     "Screen.Recorder.exe"       "Applications\Video"
+    if "%%n"=="61" call :pub "Serve.Cast"             "Applications\Network\Serve.Cast"                        "Serve.Cast.exe"            "Applications\Network"
+    if "%%n"=="62" call :pub "Signal.Flow"            "Applications\Development\Signal.Flow"                   "Signal.Flow.exe"           "Applications\Development"
+    if "%%n"=="63" call :pub "Sky.Drift"              "Games\Arcade\Sky.Drift"                                 "SkyDrift.exe"              "Games\Arcade"
+    if "%%n"=="64" call :pub "Spec.Report"            "Applications\System\Spec.Report"                        "Spec.Report.exe"           "Applications\System"
+    if "%%n"=="65" call :pub "Spec.View"              "Applications\System\Spec.View"                          "Spec.View.exe"             "Applications\System\Spec.View"
+    if "%%n"=="66" call :pub "Star.Strike"            "Games\Shooter\Star.Strike"                              "Star.Strike.exe"           "Games\Shooter"
+    if "%%n"=="67" call :pub "Stay.Awake"             "Applications\Automation\Stay.Awake"                     "Stay.Awake.exe"            "Applications\Automation\Stay.Awake"
+    if "%%n"=="68" call :pub "Svc.Guard"              "Applications\System\Svc.Guard"                          "Svc.Guard.exe"             "Applications\System\Svc.Guard"
+    if "%%n"=="69" call :pub "Sys.Clean"              "Applications\System\Sys.Clean"                          "Sys.Clean.exe"             "Applications\System\Sys.Clean"
+    if "%%n"=="70" call :pub "Table.Craft"            "Applications\Data\Table.Craft"                          "Table.Craft.exe"           "Applications\Data"
+    if "%%n"=="71" call :pub "Tag.Forge"              "Applications\Audio\Tag.Forge"                           "Tag.Forge.exe"             "Applications\Audio\Tag.Forge"
+    if "%%n"=="72" call :pub "Text.Forge"             "Applications\Text\Text.Forge"                           "Text.Forge.exe"            "Applications\Text"
+    if "%%n"=="73" call :pub "Timeline.Craft"         "Applications\Data\Timeline.Craft"                       "Timeline.Craft.exe"        "Applications\Data\Timeline.Craft"
+    if "%%n"=="74" call :pub "Tower.Guard"            "Games\Strategy\Tower.Guard"                             "Tower.Guard.exe"           "Games\Strategy"
+    if "%%n"=="75" call :pub "Tray.Stats"             "Applications\System\Tray.Stats"                         "Tray.Stats.exe"            "Applications\System\Tray.Stats"
+    if "%%n"=="76" call :pub "Wave.Surf"              "Games\Casual\Wave.Surf"                                 "Wave.Surf.exe"             "Games\Casual"
+    if "%%n"=="77" call :pub "Web.Shot"               "Applications\Photo.Picture\Web.Shot"                    "Web.Shot.exe"              "Applications\Photo.Picture\Web.Shot"
+    if "%%n"=="78" call :pub "Win.Event"              "Applications\Development\Win.Event"                     "WinEvent.exe"              "Applications\Development"
+    if "%%n"=="79" call :pub "Word.Cloud"             "Applications\Text\Word.Cloud"                           "Word.Cloud.exe"            "Applications\Text"
+    if "%%n"=="80" call :pub "Zip.Peek"               "Applications\Files\Inspector\Zip.Peek"                  "Zip.Peek.exe"              "Applications\Files\Inspector\Zip.Peek"
 )
 goto :DONE
 
@@ -260,7 +266,9 @@ call :pub "Icon.Hunt"             "Applications\Emoji.Icon\Icon.Hunt"           
 call :pub "Key.Map"               "Applications\System\Key.Map"                            "Key.Map.exe"               "Applications\System\Key.Map"
 call :pub "Leaf.Grow"             "Games\Simulation\Leaf.Grow"                             "Leaf.Grow.exe"             "Games\Simulation"
 call :pub "Log.Lens"              "Applications\Development\Log.Lens"                      "Log.Lens.exe"              "Applications\Development"
+call :pub "Log.Merge"             "Applications\Development\Log.Merge"                     "Log.Merge.exe"             "Applications\Development"
 call :pub "Mark.View"             "Applications\Text\Mark.View"                            "Mark.View.exe"             "Applications\Text\Mark.View"
+call :pub "Mem.Lens"              "Applications\System\Mem.Lens"                           "MemLens.exe"               "Applications\System"
 call :pub "Mock.Server"           "Applications\Network\Mock.Server"                       "Mock.Server.exe"           "Applications\Network"
 call :pub "Mosaic.Forge"          "Applications\Photo.Picture\Mosaic.Forge"                "Mosaic.Forge.exe"          "Applications\Photo.Picture\Mosaic.Forge"
 call :pub "Mouse.Flick"           "Applications\Tools.Utility\Mouse.Flick"                 "Mouse.Flick.exe"           "Applications\Tools.Utility"
@@ -281,6 +289,7 @@ call :pub "Sched.Cast"            "Applications\System\Sched.Cast"              
 call :pub "Screen.Recorder"       "Applications\Video\Screen.Recorder"                     "Screen.Recorder.exe"       "Applications\Video"
 call :pub "Serve.Cast"            "Applications\Network\Serve.Cast"                        "Serve.Cast.exe"            "Applications\Network"
 call :pub "Signal.Flow"           "Applications\Development\Signal.Flow"                   "Signal.Flow.exe"           "Applications\Development"
+call :pub "Sky.Drift"              "Games\Arcade\Sky.Drift"                                 "SkyDrift.exe"              "Games\Arcade"
 call :pub "Spec.Report"           "Applications\System\Spec.Report"                        "Spec.Report.exe"           "Applications\System"
 call :pub "Spec.View"             "Applications\System\Spec.View"                          "Spec.View.exe"             "Applications\System\Spec.View"
 call :pub "Star.Strike"           "Games\Shooter\Star.Strike"                              "Star.Strike.exe"           "Games\Shooter"

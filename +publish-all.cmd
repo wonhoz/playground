@@ -1,4 +1,4 @@
-@echo off
+﻿@echo off
 chcp 65001 >nul
 setlocal enabledelayedexpansion
 
@@ -47,8 +47,10 @@ call :pub "App.Temp"              "Applications\Development\App.Temp"           
 call :pub "Git.Stats"             "Applications\Development\Git.Stats"                     "Git.Stats.exe"             "Applications\Development"
 call :pub "Hex.Peek"              "Applications\Development\Hex.Peek"                      "Hex.Peek.exe"              "Applications\Development"
 call :pub "Log.Lens"              "Applications\Development\Log.Lens"                      "Log.Lens.exe"              "Applications\Development"
+call :pub "Log.Merge"             "Applications\Development\Log.Merge"                     "Log.Merge.exe"             "Applications\Development"
 call :pub "Quick.Calc"            "Applications\Development\Quick.Calc"                    "Quick.Calc.exe"            "Applications\Development"
 call :pub "Signal.Flow"           "Applications\Development\Signal.Flow"                   "Signal.Flow.exe"           "Applications\Development"
+call :pub "Sky.Drift"              "Games\Arcade\Sky.Drift"                                 "SkyDrift.exe"              "Games\Arcade"
 call :pub "Win.Event"             "Applications\Development\Win.Event"                     "WinEvent.exe"              "Applications\Development"
 
 :: ── Applications / Emoji.Icon ─────────────────────────────────────
@@ -70,6 +72,7 @@ call :pub "Folder.Purge"          "Applications\Files\Manager\Folder.Purge"     
 :: ── Applications / Network ────────────────────────────────────────
 call :pub "Api.Probe"             "Applications\Network\Api.Probe"                         "Api.Probe.exe"             "Applications\Network\Api.Probe"
 call :pub "DNS.Flip"              "Applications\Network\DNS.Flip"                          "Dns.Flip.exe"              "Applications\Network"
+call :pub "Mem.Lens"              "Applications\System\Mem.Lens"                           "MemLens.exe"               "Applications\System"
 call :pub "Mock.Server"           "Applications\Network\Mock.Server"                       "Mock.Server.exe"           "Applications\Network"
 call :pub "Net.Scan"              "Applications\Network\Net.Scan"                          "Net.Scan.exe"              "Applications\Network\Net.Scan"
 call :pub "Port.Watch"            "Applications\Network\Port.Watch"                        "Port.Watch.exe"            "Applications\Network"

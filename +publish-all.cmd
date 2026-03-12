@@ -42,18 +42,18 @@ call :pub "Stay.Awake"            "Applications\Automation\Stay.Awake"          
 call :pub "Table.Craft"           "Applications\Data\Table.Craft"                          "Table.Craft.exe"           "Applications\Data"
 call :pub "Timeline.Craft"        "Applications\Data\Timeline.Craft"                       "Timeline.Craft.exe"        "Applications\Data\Timeline.Craft"
 
-:: ── Applications / Development ────────────────────────────────────
-call :pub "App.Temp"              "Applications\Development\App.Temp"                      "App.Temp.exe"              "Applications\Development"
-call :pub "Crash.View"            "Applications\Development\Crash.View"                    "CrashView.exe"             "Applications\Development"
-call :pub "Git.Stats"             "Applications\Development\Git.Stats"                     "Git.Stats.exe"             "Applications\Development"
-call :pub "Hex.Peek"              "Applications\Development\Hex.Peek"                      "Hex.Peek.exe"              "Applications\Development"
-call :pub "Log.Lens"              "Applications\Development\Log.Lens"                      "Log.Lens.exe"              "Applications\Development"
-call :pub "Log.Merge"             "Applications\Development\Log.Merge"                     "Log.Merge.exe"             "Applications\Development"
-call :pub "Quick.Calc"            "Applications\Development\Quick.Calc"                    "Quick.Calc.exe"            "Applications\Development"
-call :pub "Signal.Flow"           "Applications\Development\Signal.Flow"                   "Signal.Flow.exe"           "Applications\Development"
-call :pub "Shortcut.Forge"        "Applications\Files\Manager\Shortcut.Forge"              "ShortcutForge.exe"         "Applications\Files\Manager"
-call :pub "Sky.Drift"              "Games\Arcade\Sky.Drift"                                 "SkyDrift.exe"              "Games\Arcade"
-call :pub "Win.Event"             "Applications\Development\Win.Event"                     "WinEvent.exe"              "Applications\Development"
+:: ── Applications / Development / Analyzer ──────────────────────────
+call :pub "Crash.View"            "Applications\Development\Analyzer\Crash.View"           "CrashView.exe"             "Applications\Development\Analyzer"
+call :pub "Git.Stats"             "Applications\Development\Analyzer\Git.Stats"            "Git.Stats.exe"             "Applications\Development\Analyzer"
+call :pub "Log.Lens"              "Applications\Development\Analyzer\Log.Lens"             "Log.Lens.exe"              "Applications\Development\Analyzer"
+call :pub "Log.Merge"             "Applications\Development\Analyzer\Log.Merge"            "Log.Merge.exe"             "Applications\Development\Analyzer"
+call :pub "Win.Event"             "Applications\Development\Analyzer\Win.Event"            "WinEvent.exe"              "Applications\Development\Analyzer"
+
+:: ── Applications / Development / Inspector ──────────────────────────
+call :pub "App.Temp"              "Applications\Development\Inspector\App.Temp"            "App.Temp.exe"              "Applications\Development\Inspector"
+call :pub "Hex.Peek"              "Applications\Development\Inspector\Hex.Peek"            "Hex.Peek.exe"              "Applications\Development\Inspector"
+call :pub "Quick.Calc"            "Applications\Development\Inspector\Quick.Calc"          "Quick.Calc.exe"            "Applications\Development\Inspector"
+call :pub "Signal.Flow"           "Applications\Development\Inspector\Signal.Flow"         "Signal.Flow.exe"           "Applications\Development\Inspector"
 
 :: ── Applications / Emoji.Icon ─────────────────────────────────────
 call :pub "Glyph.Map"             "Applications\Emoji.Icon\Glyph.Map"                      "Glyph.Map.exe"             "Applications\Emoji.Icon\Glyph.Map"
@@ -70,16 +70,18 @@ call :pub "Batch.Rename"          "Applications\Files\Manager\Batch.Rename"     
 call :pub "File.Duplicates"       "Applications\Files\Manager\File.Duplicates"             "File.Duplicates.exe"       "Applications\Files\Manager"
 call :pub "File.Unlocker"         "Applications\Files\Manager\File.Unlocker"               "File.Unlocker.exe"         "Applications\Files\Manager"
 call :pub "Folder.Purge"          "Applications\Files\Manager\Folder.Purge"                "Folder.Purge.exe"          "Applications\Files\Manager"
+call :pub "Shortcut.Forge"        "Applications\Files\Manager\Shortcut.Forge"              "ShortcutForge.exe"         "Applications\Files\Manager"
 
-:: ── Applications / Network ────────────────────────────────────────
-call :pub "Api.Probe"             "Applications\Network\Api.Probe"                         "Api.Probe.exe"             "Applications\Network\Api.Probe"
-call :pub "DNS.Flip"              "Applications\Network\DNS.Flip"                          "Dns.Flip.exe"              "Applications\Network"
-call :pub "Mem.Lens"              "Applications\System\Mem.Lens"                           "MemLens.exe"               "Applications\System"
-call :pub "Mock.Server"           "Applications\Network\Mock.Server"                       "Mock.Server.exe"           "Applications\Network"
-call :pub "Net.Scan"              "Applications\Network\Net.Scan"                          "Net.Scan.exe"              "Applications\Network\Net.Scan"
-call :pub "Port.Watch"            "Applications\Network\Port.Watch"                        "Port.Watch.exe"            "Applications\Network"
-call :pub "Serve.Cast"            "Applications\Network\Serve.Cast"                        "Serve.Cast.exe"            "Applications\Network"
-call :pub "VPN.Cast"              "Applications\Network\VPN.Cast"                          "VpnCast.exe"               "Applications\Network"
+:: ── Applications / Network / Monitor ──────────────────────────────
+call :pub "DNS.Flip"              "Applications\Network\Monitor\DNS.Flip"                  "Dns.Flip.exe"              "Applications\Network\Monitor"
+call :pub "Net.Scan"              "Applications\Network\Monitor\Net.Scan"                  "Net.Scan.exe"              "Applications\Network\Monitor\Net.Scan"
+call :pub "Port.Watch"            "Applications\Network\Monitor\Port.Watch"                "Port.Watch.exe"            "Applications\Network\Monitor"
+call :pub "VPN.Cast"              "Applications\Network\Monitor\VPN.Cast"                  "VpnCast.exe"               "Applications\Network\Monitor"
+
+:: ── Applications / Network / Server ───────────────────────────────
+call :pub "Api.Probe"             "Applications\Network\Server\Api.Probe"                  "Api.Probe.exe"             "Applications\Network\Server\Api.Probe"
+call :pub "Mock.Server"           "Applications\Network\Server\Mock.Server"                "Mock.Server.exe"           "Applications\Network\Server"
+call :pub "Serve.Cast"            "Applications\Network\Server\Serve.Cast"                 "Serve.Cast.exe"            "Applications\Network\Server"
 
 :: ── Applications / Photo.Picture ─────────────────────────────────
 call :pub "Color.Grade"           "Applications\Photo.Picture\Color.Grade"                 "Color.Grade.exe"           "Applications\Photo.Picture\Color.Grade"
@@ -87,23 +89,26 @@ call :pub "Mosaic.Forge"          "Applications\Photo.Picture\Mosaic.Forge"     
 call :pub "Photo.Video.Organizer" "Applications\Photo.Picture\Photo.Video.Organizer"       "Photo.Video.Organizer.exe" "Applications\Photo.Picture"
 call :pub "Web.Shot"              "Applications\Photo.Picture\Web.Shot"                    "Web.Shot.exe"              "Applications\Photo.Picture\Web.Shot"
 
-:: ── Applications / System ─────────────────────────────────────────
-call :pub "Boot.Map"              "Applications\System\Boot.Map"                           "Boot.Map.exe"              "Applications\System"
-call :pub "Ctx.Menu"              "Applications\System\Ctx.Menu"                           "Ctx.Menu.exe"              "Applications\System\Ctx.Menu"
-call :pub "Drive.Bench"           "Applications\System\Drive.Bench"                        "Drive.Bench.exe"           "Applications\System"
-call :pub "Burn.Rate"             "Applications\System\Burn.Rate"                          "Burn.Rate.exe"             "Applications\System"
-call :pub "Env.Guard"             "Applications\System\Env.Guard"                          "Env.Guard.exe"             "Applications\System"
-call :pub "Path.Guard"            "Applications\System\Path.Guard"                         "PathGuard.exe"             "Applications\System"
-call :pub "Ext.Boss"              "Applications\System\Ext.Boss"                           "Ext.Boss.exe"              "Applications\System\Ext.Boss"
-call :pub "Key.Map"               "Applications\System\Key.Map"                            "Key.Map.exe"               "Applications\System\Key.Map"
-call :pub "Key.Test"              "Applications\System\Key.Test"                           "KeyTest.exe"               "Applications\System"
-call :pub "Sched.Cast"            "Applications\System\Sched.Cast"                         "Sched.Cast.exe"            "Applications\System\Sched.Cast"
-call :pub "Spec.Report"           "Applications\System\Spec.Report"                        "Spec.Report.exe"           "Applications\System"
-call :pub "Reg.Vault"             "Applications\System\Reg.Vault"                          "RegVault.exe"              "Applications\System"
-call :pub "Spec.View"             "Applications\System\Spec.View"                          "Spec.View.exe"             "Applications\System\Spec.View"
-call :pub "Svc.Guard"             "Applications\System\Svc.Guard"                          "Svc.Guard.exe"             "Applications\System\Svc.Guard"
-call :pub "Sys.Clean"             "Applications\System\Sys.Clean"                          "Sys.Clean.exe"             "Applications\System\Sys.Clean"
-call :pub "Tray.Stats"            "Applications\System\Tray.Stats"                         "Tray.Stats.exe"            "Applications\System\Tray.Stats"
+:: ── Applications / System / Manager ───────────────────────────────
+call :pub "Ctx.Menu"              "Applications\System\Manager\Ctx.Menu"                   "Ctx.Menu.exe"              "Applications\System\Manager\Ctx.Menu"
+call :pub "Env.Guard"             "Applications\System\Manager\Env.Guard"                  "Env.Guard.exe"             "Applications\System\Manager"
+call :pub "Ext.Boss"              "Applications\System\Manager\Ext.Boss"                   "Ext.Boss.exe"              "Applications\System\Manager\Ext.Boss"
+call :pub "Key.Map"               "Applications\System\Manager\Key.Map"                    "Key.Map.exe"               "Applications\System\Manager\Key.Map"
+call :pub "Key.Test"              "Applications\System\Manager\Key.Test"                   "KeyTest.exe"               "Applications\System\Manager"
+call :pub "Path.Guard"            "Applications\System\Manager\Path.Guard"                 "PathGuard.exe"             "Applications\System\Manager"
+call :pub "Reg.Vault"             "Applications\System\Manager\Reg.Vault"                  "RegVault.exe"              "Applications\System\Manager"
+call :pub "Sched.Cast"            "Applications\System\Manager\Sched.Cast"                 "Sched.Cast.exe"            "Applications\System\Manager\Sched.Cast"
+call :pub "Svc.Guard"             "Applications\System\Manager\Svc.Guard"                  "Svc.Guard.exe"             "Applications\System\Manager\Svc.Guard"
+call :pub "Sys.Clean"             "Applications\System\Manager\Sys.Clean"                  "Sys.Clean.exe"             "Applications\System\Manager\Sys.Clean"
+
+:: ── Applications / System / Monitor ───────────────────────────────
+call :pub "Boot.Map"              "Applications\System\Monitor\Boot.Map"                   "Boot.Map.exe"              "Applications\System\Monitor"
+call :pub "Burn.Rate"             "Applications\System\Monitor\Burn.Rate"                  "Burn.Rate.exe"             "Applications\System\Monitor"
+call :pub "Drive.Bench"           "Applications\System\Monitor\Drive.Bench"                "Drive.Bench.exe"           "Applications\System\Monitor"
+call :pub "Mem.Lens"              "Applications\System\Monitor\Mem.Lens"                   "MemLens.exe"               "Applications\System\Monitor"
+call :pub "Spec.Report"           "Applications\System\Monitor\Spec.Report"                "Spec.Report.exe"           "Applications\System\Monitor"
+call :pub "Spec.View"             "Applications\System\Monitor\Spec.View"                  "Spec.View.exe"             "Applications\System\Monitor\Spec.View"
+call :pub "Tray.Stats"            "Applications\System\Monitor\Tray.Stats"                 "Tray.Stats.exe"            "Applications\System\Monitor\Tray.Stats"
 
 :: ── Applications / Text ───────────────────────────────────────────
 call :pub "Char.Art"              "Applications\Text\Char.Art"                             "Char.Art.exe"              "Applications\Text"
@@ -132,6 +137,7 @@ call :pub "Brick.Blitz"           "Games\Arcade\Brick.Blitz"                    
 call :pub "Dash.City"             "Games\Arcade\Dash.City"                                 "Dash.City.exe"             "Games\Arcade"
 call :pub "Neon.Run"              "Games\Arcade\Neon.Run"                                  "Neon.Run.exe"              "Games\Arcade"
 call :pub "Neon.Slice"            "Games\Arcade\Neon.Slice"                                "Neon.Slice.exe"            "Games\Arcade\Neon.Slice"
+call :pub "Sky.Drift"             "Games\Arcade\Sky.Drift"                                 "SkyDrift.exe"              "Games\Arcade"
 
 :: ── Games / Casual ───────────────────────────────────────────────
 call :pub "Hook.Cast"             "Games\Casual\Hook.Cast"                                 "Hook.Cast.exe"             "Games\Casual"

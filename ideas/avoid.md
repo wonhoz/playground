@@ -2,7 +2,7 @@
 
 > 이 파일은 브레인스토밍 시 **이미 제안되거나 구현된 아이디어를 다시 꺼내지 않도록** 하는 필터다.
 > 새 아이디어를 제안하기 전 반드시 이 목록을 확인할 것.
-> 마지막 갱신: 2026-03-12 (16차)
+> 마지막 갱신: 2026-03-12 (17차)
 
 ---
 
@@ -583,6 +583,38 @@
 
 ---
 
+### Apps (신규 — idea_20260312_17차)
+
+| 이름 | 핵심 기능 | 출처 |
+|------|----------|------|
+| `Flash.Card` | SM-2 간격반복 플래시카드 앱 (Anki .apkg 가져오기, 이미지 카드, 복습 통계 대시보드, SAPI 발음, 전역 팝업 추가) | idea_20260312_17차 |
+| `Epub.Cast` | EPUB 2/3·MOBI 오프라인 리더 (WebView2 렌더, 라이브러리 관리, 하이라이트·메모, TTS, FTS5 전문 검색) | idea_20260312_17차 |
+| `SVG.Forge` | 오프라인 SVG 벡터 에디터 (Bezier 패스, Boolean 연산, CSS 애니메이션 키프레임, SVG/PNG/PDF 내보내기) | idea_20260312_17차 |
+| `Health.Log` | 개인 건강 수동 기록기 (체중·혈압·혈당·수면·기분 시계열 차트, 정상 범위 알림, 복약 리마인더, CSV 내보내기) | idea_20260312_17차 |
+| `Net.Trace` | 시각적 Traceroute + 세계지도 지오로케이션 핀 (GeoLite2 오프라인, 홉별 RTT 히스토리, 복수 목적지 탭) | idea_20260312_17차 |
+| `Audio.Cut` | 오디오 파형 트리머·편집기 (MP3/WAV/FLAC, 페이드·정규화·무음 제거·속도변경, NAudio+SoundTouch) | idea_20260312_17차 |
+| `OCR.Forge` | Tesseract 5 오프라인 문서 일괄 OCR (스캔 PDF/이미지→검색가능 PDF/DOCX, 기울기 보정, 폴더 감시) | idea_20260312_17차 |
+| `IP.Forge` | IPv4/IPv6 서브넷·CIDR·VLSM 계산기 (비트 블록 다이어그램, 수퍼넷, IP 범위↔CIDR 변환) | idea_20260312_17차 |
+| `Score.Cast` | MusicXML/ABC 악보 오프라인 뷰어 + SF2 MIDI 재생 (조옮김, 파트 선택, 구간 반복, PNG/PDF 인쇄) | idea_20260312_17차 |
+| `Key.Heat` | 패시브 키스트로크 히트맵 분석 트레이 (키 빈도·WPM·손가락 비율·앱별 타이핑, 내용 무저장, SkiaSharp) | idea_20260312_17차 |
+
+### 게임 — 제안된 미구현 아이디어 (idea_20260312_17차)
+
+| 이름 | 장르 | 핵심 메커닉 |
+|------|------|------------|
+| `Sudoku.Cast` | Puzzle / Logic | Backtracking+DLX 유일해 생성, 4×4~16×16 변형, 기법 설명 힌트 팝업, 일일 챌린지 시드 |
+| `Card.Solo` | Casual / Card | 솔리테어 5종 컬렉션 (Klondike·Spider·FreeCell·Pyramid·Golf), 카드 물리 애니메이션, 승률 통계 |
+| `Astro.Mine` | Arcade / Shooter / Roguelite | 소행성 3단계 분열+중력 물리, 광물 채굴 자원 경제, 웨이브 상점 선택형 업그레이드 루프 |
+| `Cave.Run` | Roguelike / Adventure | 절차 생성 수직 동굴, 산소 게이지+지진 붕괴, 영구 사망+이전 런 스케치 잔상 가이드 |
+| `Logic.Zebra` | Puzzle / Logic | 아인슈타인 격자 소거 퍼즐(3×3~7×7), 유일해 역산 생성, 클루별 단계 설명 힌트 |
+| `Peg.Solo` | Puzzle / Casual | 말뚝 솔리테어 5형판(십자·삼각·육각·별형·영국형), DFS 솔버 힌트, 일일 챌린지 |
+| `Geo.Quiz` | Casual / Educational | 실루엣·국기·수도·지도 클릭·혼합 5모드, SM-2 오답 재출제, 세계지도 국가 채우기 |
+| `Pipe.Lay` | Puzzle / Casual | 타이머 카운트다운+파이프 회전(L·T·크로스·단방향 밸브·포탈), BFS 흐름 시뮬, 절차 생성 |
+| `Trail.Blaze` | Arcade / Platformer | 파쿠르 벽달리기·레지 그랩·슬라이드 콤보, 모멘텀 비례 가속, 절차 생성 도시, 데일리 랭킹 |
+| `Swarm.Ant` | Simulation / Strategy | ACO 페로몬(α·β·ρ 파라미터) 개미 군집 시각화, 멀티 군집 경쟁, 샌드박스+퍼즐 챌린지 15+ |
+
+---
+
 ### Apps (신규 — idea_20260312_16차)
 
 | 이름 | 핵심 기능 | 출처 |
@@ -963,6 +995,26 @@
 | **색상+기호 타일 슬라이딩 퍼즐** | Block.Shift (≠ Ice.Slide: 단방향 미끄러짐, ≠ Neon.Push: 소코반+레이저, ≠ Rise.Match: 매치3 — 행/열 루프 슬라이드 큐브 퍼즐) |
 | **볼록·오목렌즈 빛 세기 집중 퍼즐** | Light.Cast (≠ Laser.Net: 단일 레이저 경로, ≠ Prism.Break: 색 RGB 분리 — 굴절+열 집중 세기 게이지 퍼즐) |
 | **상승기류 글라이더 수직 아케이드** | Sky.Drift (≠ Neon.Run: 수평 장애물 러너, ≠ Pulse.Run: 리듬 러너 — Verlet 양력+열상승기류 수직 무한 스크롤) |
+| **간격반복 플래시카드 앱** | Flash.Card (≠ Type.Rocket: 타이핑 WPM 연습, ≠ Dict.Cast: 사전 조회 — SM-2 알고리즘 장기 기억 내재화, Anki 대체) |
+| **전자책 EPUB 리더** | Epub.Cast (≠ PDF.Forge: PDF 편집, ≠ Mark.View: 마크다운 뷰어, ≠ Ink.Cast: 노트 앱 — EPUB/MOBI 전자책 전용) |
+| **SVG 벡터 에디터** | SVG.Forge (≠ Pixel.Forge: 래스터 픽셀아트, ≠ Draw.Board: 자유형 화이트보드, ≠ Icon.Forge: ICO 변환 — Bezier 패스·Boolean 연산 SVG 에디터) |
+| **개인 건강 수치 기록·차트** | Health.Log (≠ Habit.Chain: GitHub 잔디 습관 체크, ≠ Budget.Cast: 금융, ≠ Toast.Cast: 리마인더 — 체중·혈압·혈당 시계열 수치 로깅) |
+| **시각적 Traceroute 세계지도** | Net.Trace (≠ Net.Scan: LAN ARP 탐지, ≠ Uptime.Eye: HTTP 폴링 — 인터넷 경로 홉 지리적 지도 시각화) |
+| **오디오 파형 트리머·편집기** | Audio.Cut (≠ Music.Player: 재생기, ≠ Video.Trim: 영상 트리머, ≠ Pitch.Find: 분석 전용 — 오디오 전용 파형 비파괴 편집) |
+| **오프라인 문서 일괄 OCR** | OCR.Forge (≠ Screen.OCR·Screen.Pickup: 화면 영역 실시간, ≠ Snap.Cast: 레이아웃 분석 — Tesseract 문서 파일 배치 디지털화) |
+| **IP 서브넷·CIDR 계산기** | IP.Forge (≠ Quick.Calc: 16진수·IEEE 754 비트 연산 — IP 서브넷·VLSM·수퍼넷 네트워크 설계 특화) |
+| **악보 뷰어 + MIDI 재생** | Score.Cast (≠ Music.Player: MP3/FLAC 오디오, ≠ Pitch.Find: BPM 분석 — MusicXML/ABC 오선보 렌더 + SF2 합성 + 파트 연습) |
+| **패시브 키스트로크 히트맵 트레이** | Key.Heat (≠ Type.Rocket: 능동적 WPM 훈련 — 백그라운드 키 빈도 히트맵·WPM 분석, 내용 절대 무저장) |
+| **스도쿠 퍼즐** | Sudoku.Cast (≠ Pixel.Cross: 노노그램, ≠ Logic.Zebra: 격자 소거 논리, ≠ Number.Storm: 2048 변형 — 9×9 표준+변형 스도쿠) |
+| **솔리테어 카드 게임** | Card.Solo (≠ Neon.Card: 로그라이크 덱빌딩 — 클래식 패시엔스 솔리테어 5종 컬렉션) |
+| **소행성 채굴 로그라이트 슈터** | Astro.Mine (≠ Star.Strike: 고정 스크롤 슈터, ≠ Dodge.Blitz: 탄막 회피 — 자유 탐색+채굴+웨이브 상점 성장) |
+| **산소 관리 채굴 로그라이크** | Cave.Run (≠ Rogue.Tile: RPG 전투, ≠ Dungeon.Dice: 주사위 덱빌딩 — 수직 동굴·산소·지진 붕괴 생존) |
+| **아인슈타인 격자 논리 퍼즐** | Logic.Zebra (≠ Chip.Logic: 회로 게이트, ≠ Sudoku.Cast: 숫자 배치 — 범주 교차 소거 논리) |
+| **말뚝 솔리테어** | Peg.Solo (≠ Ice.Slide: 얼음 물리, ≠ Neon.Push: 소코반+레이저, ≠ Slide.Rush: 15퍼즐 — 말뚝 건너뛰기 제거 퍼즐) |
+| **오프라인 세계지리 퀴즈** | Geo.Quiz (≠ Color.Blitz: 스트룹 인지, ≠ Word.Bomb: 단어 폭탄 — 지리 지식 5모드 + SM-2 재출제) |
+| **타이머 파이프 회전 퍼즐** | Pipe.Lay (≠ Flow.Pipe: 색상 점 연결 채우기, ≠ Volt.Chain: 전류 타이밍 — 타이머+파이프 타일 회전+BFS 흐름) |
+| **파쿠르 콤보 모멘텀 러너** | Trail.Blaze (≠ Neon.Run·Dash.City: 단순 점프 러너, ≠ Crumble.Run: Voronoi 파괴 러너 — 벽달리기·레지 그랩 콤보 체인) |
+| **ACO 개미 군집 시뮬 샌드박스** | Swarm.Ant (≠ Colony.Sim: 범용 에이전트, ≠ Spore.Net: 균류 네트워크 — ACO 페로몬 경로 시각화·개미 특화) |
 ---
 
 ### Apps (신규 — idea_20260311_12차)

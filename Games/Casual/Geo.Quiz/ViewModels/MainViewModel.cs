@@ -120,7 +120,7 @@ public class MainViewModel : BaseViewModel
         switch (Mode)
         {
             case QuizMode.Capital:
-                question    = $"다음 나라의 수도는?  {subject.FlagEmoji} {subject.KorName}";
+                question    = $"다음 나라의 수도는?  {subject.KorName}";
                 correct     = subject.KorCapital;
                 distractors = pool.Where(c => c != subject)
                                   .OrderBy(_ => _rng.Next())
@@ -138,7 +138,7 @@ public class MainViewModel : BaseViewModel
                                   .ToList();
                 break;
             default: // Continent
-                question    = $"{subject.FlagEmoji} {subject.KorName}은(는) 어느 대륙?";
+                question    = $"{subject.KorName}은(는) 어느 대륙?";
                 correct     = subject.Continent;
                 var continents = new[] { "Asia","Europe","Africa","Americas","Oceania" };
                 distractors = continents.Where(c => c != correct)

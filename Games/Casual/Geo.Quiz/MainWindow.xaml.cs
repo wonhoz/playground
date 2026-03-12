@@ -1,5 +1,6 @@
 using System.Runtime.InteropServices;
 using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 using Geo.Quiz.ViewModels;
 
 namespace Geo.Quiz;
@@ -35,6 +36,7 @@ public partial class MainWindow : Window
                 nameof(_vm.Answered))
             {
                 UpdateChoiceColors();
+                LoadFlagImage();
                 if (_vm.Screen == QuizScreen.Result) ShowResult();
             }
         };
@@ -57,6 +59,23 @@ public partial class MainWindow : Window
         _vm.Mode = RbCapital.IsChecked == true   ? QuizMode.Capital
                  : RbFlag.IsChecked    == true   ? QuizMode.Flag
                  :                                 QuizMode.Continent;
+    }
+
+    void LoadFlagImage()
+    {
+        var q = _vm.CurrentQuestion;
+        if (q == null || string.IsNullOrEmpty(q.FlagIsoCode))
+        {
+            FlagImage.Visibility = Visibility.Collapsed;
+            FlagImage.Source     = null;
+            return;
+        }
+
+        var uri = new Uri($"https://flagcdn.com/w160/{q.FlagIsoCode.ToLower()}.png");
+        var bmp = new BitmapImage(uri);
+        bmp.DownloadFailed += (_, _) => { FlagImage.Visibility = Visibility.Collapsed; };
+        FlagImage.Source     = bmp;
+        FlagImage.Visibility = Visibility.Visible;
     }
 
     void Choice_Click(object sender, RoutedEventArgs e)

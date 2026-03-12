@@ -220,12 +220,13 @@
             <Border Grid.Row="1" Background="#0C0C22" BorderBrush="#1A1A40"
                     BorderThickness="1" CornerRadius="12" Padding="30,28">
                 <StackPanel>
-                    <!-- 국기 이모지 (Flag 모드 전용) — Segoe UI Emoji 폰트로 크게 표시 -->
-                    <TextBlock x:Name="TbFlagEmoji"
-                               Text="{Binding CurrentQuestion.FlagDisplay}"
-                               FontFamily="Segoe UI Emoji" FontSize="80"
-                               HorizontalAlignment="Center" TextAlignment="Center"
-                               Margin="0,0,0,12"/>
+                    <!-- 국기 이미지 (Flag 모드 전용) — flagcdn.com PNG 로드 -->
+                    <Image x:Name="FlagImage"
+                           MaxWidth="240" MaxHeight="160"
+                           HorizontalAlignment="Center"
+                           Stretch="Uniform"
+                           Visibility="Collapsed"
+                           Margin="0,0,0,16"/>
 
                     <!-- 질문 텍스트 -->
                     <TextBlock Text="{Binding CurrentQuestion.QuestionText}"

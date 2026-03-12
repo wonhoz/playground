@@ -153,11 +153,18 @@ public class MainViewModel : BaseViewModel
         {
             Subject      = subject,
             QuestionText = question,
-            FlagDisplay  = Mode == QuizMode.Flag ? subject.FlagEmoji : "",
+            FlagIsoCode  = Mode == QuizMode.Flag ? GetIsoCode(subject.FlagEmoji) : "",
             CorrectAnswer= correct,
             Choices      = choices,
         };
     }
+
+    // 국기 이모지(U+1F1E6~U+1F1FF 지역 표시 문자 쌍) → 2자리 ISO 코드
+    static string GetIsoCode(string flagEmoji) =>
+        string.Concat(
+            flagEmoji.EnumerateRunes()
+                     .Where(r => r.Value is >= 0x1F1E6 and <= 0x1F1FF)
+                     .Select(r => (char)('A' + r.Value - 0x1F1E6)));
 
     void SelectAnswer(int idx)
     {

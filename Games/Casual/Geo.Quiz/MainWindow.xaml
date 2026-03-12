@@ -53,8 +53,8 @@
 
         <!-- 선택지 버튼 -->
         <Style x:Key="ChoiceBtn" TargetType="Button" BasedOn="{StaticResource Btn}">
-            <Setter Property="HorizontalContentAlignment" Value="Left"/>
-            <Setter Property="Padding" Value="18,14"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="18,11"/>
             <Setter Property="FontSize" Value="14"/>
         </Style>
 
@@ -218,21 +218,22 @@
 
             <!-- 질문 영역 -->
             <Border Grid.Row="1" Background="#0C0C22" BorderBrush="#1A1A40"
-                    BorderThickness="1" CornerRadius="12" Padding="30,28">
+                    BorderThickness="1" CornerRadius="12" Padding="30,20">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
                 <StackPanel>
                     <!-- 국기 이미지 (Flag 모드 전용) — flagcdn.com PNG 로드 -->
                     <Image x:Name="FlagImage"
-                           MaxWidth="240" MaxHeight="160"
+                           MaxWidth="220" MaxHeight="130"
                            HorizontalAlignment="Center"
                            Stretch="Uniform"
                            Visibility="Collapsed"
-                           Margin="0,0,0,16"/>
+                           Margin="0,0,0,12"/>
 
                     <!-- 질문 텍스트 -->
                     <TextBlock Text="{Binding CurrentQuestion.QuestionText}"
                                FontSize="22" FontWeight="SemiBold" TextWrapping="Wrap"
                                Foreground="#E0E0F0" HorizontalAlignment="Center"
-                               TextAlignment="Center" Margin="0,0,0,32"/>
+                               TextAlignment="Center" Margin="0,0,0,20"/>
 
                     <!-- 선택지 4개 -->
                     <Button x:Name="BtnChoice0" Style="{StaticResource ChoiceBtn}"
@@ -252,6 +253,7 @@
                             Command="{Binding Choice3Cmd}"
                             Tag="3" Click="Choice_Click"/>
                 </StackPanel>
+                </ScrollViewer>
             </Border>
 
             <!-- 다음 버튼 -->

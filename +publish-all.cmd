@@ -75,6 +75,7 @@ call :pub "Shortcut.Forge"        "Applications\Files\Manager\Shortcut.Forge"   
 :: ── Applications / Network / Monitor ──────────────────────────────
 call :pub "DNS.Flip"              "Applications\Network\Monitor\DNS.Flip"                  "Dns.Flip.exe"              "Applications\Network\Monitor"
 call :pub "Net.Scan"              "Applications\Network\Monitor\Net.Scan"                  "Net.Scan.exe"              "Applications\Network\Monitor\Net.Scan"
+call :pub "Net.Trace"             "Applications\Network\Monitor\Net.Trace"                 "Net.Trace.exe"             "Applications\Network\Monitor"
 call :pub "Port.Watch"            "Applications\Network\Monitor\Port.Watch"                "Port.Watch.exe"            "Applications\Network\Monitor"
 call :pub "VPN.Cast"              "Applications\Network\Monitor\VPN.Cast"                  "VpnCast.exe"               "Applications\Network\Monitor"
 
@@ -141,6 +142,7 @@ call :pub "Neon.Slice"            "Games\Arcade\Neon.Slice"                     
 call :pub "Sky.Drift"             "Games\Arcade\Sky.Drift"                                 "SkyDrift.exe"              "Games\Arcade"
 
 :: ── Games / Casual ───────────────────────────────────────────────
+call :pub "Geo.Quiz"              "Games\Casual\Geo.Quiz"                                  "Geo.Quiz.exe"              "Games\Casual"
 call :pub "Hook.Cast"             "Games\Casual\Hook.Cast"                                 "Hook.Cast.exe"             "Games\Casual"
 call :pub "Wave.Surf"             "Games\Casual\Wave.Surf"                                 "Wave.Surf.exe"             "Games\Casual"
 

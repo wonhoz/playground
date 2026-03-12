@@ -2,7 +2,7 @@
 
 > 이 파일은 브레인스토밍 시 **이미 제안되거나 구현된 아이디어를 다시 꺼내지 않도록** 하는 필터다.
 > 새 아이디어를 제안하기 전 반드시 이 목록을 확인할 것.
-> 마지막 갱신: 2026-03-12 (17차)
+> 마지막 갱신: 2026-03-13 (18차)
 
 ---
 
@@ -583,6 +583,38 @@
 
 ---
 
+### Apps (신규 — idea_20260313_18차)
+
+| 이름 | 핵심 기능 | 출처 |
+|------|----------|------|
+| `MIDI.Forge` | 오프라인 MIDI 시퀀서·피아노롤 에디터 (DryWetMidi, SF2 소프트 신스, 다중 트랙, MIDI/MusicXML 내보내기) | idea_20260313_18차 |
+| `PDF.Sign` | 오프라인 PDF 주석·전자서명 도구 (텍스트박스·하이라이트·스탬프, 서명 드로잉 패드, 폼 필드 — PDF.Forge와 달리 내용 레이어 편집) | idea_20260313_18차 |
+| `Boot.Forge` | USB 부팅 디스크 제작 GUI (ISO 드래그→USB 굽기, Ventoy 멀티 ISO 관리, MBR/GPT, Rufus 오프라인 대체) | idea_20260313_18차 |
+| `Cam.Cast` | 웹캠 파라미터 제어 트레이 (DirectShow IAMVideoProcAmp, 노출·화이트밸런스·채도 슬라이더, 프리셋 프로파일 자동 전환) | idea_20260313_18차 |
+| `LLM.Bench` | 로컬 GGUF LLM 실행·채팅 GUI (LlamaSharp, 멀티 모델 비교, Temperature·Top-P 슬라이더, 토큰/초 측정 — 완전 오프라인) | idea_20260313_18차 |
+| `Proto.Forge` | Protocol Buffers·gRPC 오프라인 테스터 (.proto 에디터, JSON↔Protobuf 변환, gRPC Unary/Streaming 호출 — Api.Probe REST와 차별화) | idea_20260313_18차 |
+| `Shader.Cast` | 실시간 HLSL/GLSL 쉐이더 에디터 (Silk.NET 뷰어, Uniform 슬라이더, 오류 하이라이트, GIF/PNG 캡처 — 오프라인 ShaderToy 대체) | idea_20260313_18차 |
+| `Topo.Cast` | LAN 네트워크 토폴로지 D3 Force 그래프 자동 생성 (ARP+LLDP, 기기 아이콘 자동 분류, SVG/PNG 내보내기 — Net.Scan 목록과 달리 관계 시각화) | idea_20260313_18차 |
+| `Vhd.Cast` | VHD/VHDX/ISO 가상 디스크 마운트·관리 트레이 (VirtDisk.dll, 원클릭 마운트·해제, 새 VHD 생성, 최근 목록 핀 고정) | idea_20260313_18차 |
+| `Ping.Map` | 전세계 CDN·클라우드 엔드포인트 지연시간 세계지도 히트맵 (100+ AWS/Azure/GCP/Cloudflare, SkiaSharp, 최적 리전 추천 — Net.Trace 홉 경로와 차별화) | idea_20260313_18차 |
+
+### 게임 — 제안된 미구현 아이디어 (idea_20260313_18차)
+
+| 이름 | 장르 | 핵심 메커닉 |
+|------|------|------------|
+| `Word.Crack` | Word / Puzzle / Casual | 한국어 자모(초성·중성·종성) 분리 피드백 Wordle, 4단어 동시 Quordle 변형, 번개 모드, 일일 챌린지 |
+| `Auto.Battle` | Strategy / Idle / Auto-battler | 6×3 헥스 보드 유닛 배치 오토배틀러, 클래스·종족 시너지, 상점 경제, 유닛 3합성 별★ 업그레이드 |
+| `Mines.X` | Puzzle / Logic / Casual | 마인스위퍼 넥스트 — 헥사고날·토러스 보드, 확률 % 실시간 오버레이, 논리 힌트 자동 단서, 데일리 시드 |
+| `Tactics.Rush` | Strategy / Tactics / Roguelite | 6인 분대 턴제 전술 (엄폐·플랭킹·고지대 보너스), 영구 사망 캠페인, 절차 생성 그리드 맵 |
+| `City.Click` | Idle / Casual / City Builder | 건물 클릭→인구→세금 체인 클리커, 픽셀아트 도시 공간 성장, 인프라 연결 퍼즐, 재난 이벤트, 프레스티지 |
+| `Plasma.Drift` | Arcade / Shooter / Physics | 자기장 구역 진입 시 이동·탄도 방향 굴절, RK4 궤적 예측선, 자기장 활용 코너 샷, 웨이브 생존 |
+| `Spell.Forge` | Arcade / Action / Roguelite | 4원소 2~3개 조합→16+ 마법 합성, 마우스 드로잉 제스처 캐스팅, 몬스터 속성 약점, 10층 로그라이트 |
+| `Rumble.Box` | Arcade / Physics / Casual | 2D 수축 발판 박스 Sumo 밀치기, 파워 차지 대시, 아이템 쟁탈, 로컬 2P 대전 |
+| `Slide.Path` | Puzzle / Logic / Casual | 15-퍼즐 슬라이딩 × 미로 통로 타일 조합, 구슬 경로 시뮬레이션, 다색 구슬 동시 완성, 레벨 에디터 |
+| `Virus.Spread` | Strategy / Puzzle / Simulation | 플레이어=바이러스, 도시 네트워크 그래프 최소 턴 전파, 변이 능력 선택, MCTS AI 방역 대응 |
+
+---
+
 ### Apps (신규 — idea_20260312_17차)
 
 | 이름 | 핵심 기능 | 출처 |
@@ -995,6 +1027,26 @@
 | **색상+기호 타일 슬라이딩 퍼즐** | Block.Shift (≠ Ice.Slide: 단방향 미끄러짐, ≠ Neon.Push: 소코반+레이저, ≠ Rise.Match: 매치3 — 행/열 루프 슬라이드 큐브 퍼즐) |
 | **볼록·오목렌즈 빛 세기 집중 퍼즐** | Light.Cast (≠ Laser.Net: 단일 레이저 경로, ≠ Prism.Break: 색 RGB 분리 — 굴절+열 집중 세기 게이지 퍼즐) |
 | **상승기류 글라이더 수직 아케이드** | Sky.Drift (≠ Neon.Run: 수평 장애물 러너, ≠ Pulse.Run: 리듬 러너 — Verlet 양력+열상승기류 수직 무한 스크롤) |
+| **MIDI 피아노롤 시퀀서** | MIDI.Forge (≠ Score.Cast: MusicXML 뷰어+재생, ≠ Tag.Forge: ID3 태그 편집, ≠ Audio.Cut: 파형 트리머 — 직접 작곡·편집) |
+| **PDF 주석·전자서명** | PDF.Sign (≠ PDF.Forge: 병합·분리·페이지 조작 — 내용 레이어 주석·서명 드로잉 특화) |
+| **USB 부팅 디스크 제작** | Boot.Forge (≠ Vhd.Cast: 가상 디스크 마운트 — ISO→USB 굽기·Ventoy 멀티 ISO GUI 특화) |
+| **웹캠 하드웨어 파라미터 제어** | Cam.Cast (≠ Win.Cast: 앱→가상카메라 스트리밍, ≠ Noise.Guard: 마이크 노이즈 — DirectShow IAMVideoProcAmp 제어) |
+| **로컬 LLM 실행 GUI** | LLM.Bench (≠ AI.Clip·Clip.Smart: 클라우드 API 의존, ≠ Prompt.Forge: 프롬프트 관리 — 완전 오프라인 GGUF 추론) |
+| **Protobuf·gRPC 테스터** | Proto.Forge (≠ Api.Probe: REST/HTTP 전용, ≠ Schema.View: JSON Schema — .proto 편집+gRPC 프로토콜) |
+| **실시간 쉐이더 에디터** | Shader.Cast (≠ SVG.Forge: 벡터 에디터, ≠ Pixel.Forge: 픽셀아트, ≠ Color.Grade: LUT 보정 — GPU HLSL/GLSL 쉐이더 창작) |
+| **LAN 토폴로지 그래프** | Topo.Cast (≠ Net.Scan: 기기 목록+포트, ≠ Proc.Map: 프로세스-네트워크 연결 — D3 Force 레이아웃 LAN 관계도) |
+| **VHD/VHDX/ISO 마운트 트레이** | Vhd.Cast (≠ Boot.Forge: ISO→USB 굽기, ≠ Archive.Forge: ZIP 아카이브 — VirtDisk.dll 가상 디스크 드라이브) |
+| **CDN·클라우드 핑 히트맵** | Ping.Map (≠ Net.Trace: 단일 목적지 traceroute, ≠ Net.Scan: LAN ARP — 전세계 100+ 엔드포인트 동시 히트맵) |
+| **한국어 자모 분리 Wordle** | Word.Crack (≠ Word.Bomb: 음절+폭탄 타이머, ≠ Word.Weave: Boggle 인접 체인 — 추론형 자모 피드백+Quordle 변형) |
+| **오토배틀러 전략** | Auto.Battle (≠ Cell.War: 세포 분열, ≠ Hex.Storm: 헥사 RTS, ≠ Tower.Guard: 타워 디펜스 — 유닛 배치+시너지+경제) |
+| **마인스위퍼 변형** | Mines.X (≠ Logic.Zebra: 격자 소거, ≠ Sudoku.Cast: 스도쿠 — 헥사고날 보드+확률 % 오버레이 마인스위퍼) |
+| **소규모 턴제 전술 RPG** | Tactics.Rush (≠ Rogue.Tile: 단독 캐릭터 로그라이크, ≠ Hex.Storm: RTS, ≠ Dungeon.Dash: 실시간 액션 — 분대 엄폐·플랭킹) |
+| **클리커 픽셀 도시 성장** | City.Click (≠ Forge.Idle·Code.Idle: 단순 수치 증가, ≠ Colony.Sim: 군집 AI 샌드박스 — 공간 배치 최적화+픽셀아트 성장) |
+| **자기장 굴절 비행 슈터** | Plasma.Drift (≠ Flux.Drift: 자기 극성 레이싱, ≠ Star.Strike·Dodge.Blitz: 일반 슈터 — 벡터 필드 방향 굴절+코너 샷) |
+| **원소 조합 마법 아케이드** | Spell.Forge (≠ Neon.Card: 카드 덱빌딩, ≠ Beat.Rogue: 리듬 — 4원소 2~3개 조합+제스처 캐스팅 실시간 로그라이트) |
+| **박스 밀치기 Sumo 격투** | Rumble.Box (≠ Stack.Race: 타워 쌓기 대전, ≠ Neon.Wall: Pong 기반 — 수축 발판+파워 차지 대시 밀치기) |
+| **15-퍼즐×미로 통로** | Slide.Path (≠ Ice.Slide: 얼음 미끄러짐, ≠ Flow.Pipe: 파이프 연결, ≠ Pipe.Lay: 회전+BFS — 슬라이딩으로 통로 조각 맞추기) |
+| **바이러스 진영 확산 전략** | Virus.Spread (≠ Ink.Spread: BFS 잉크 차단, ≠ Colony.Sim: 군집 AI — 도시 그래프+변이 선택+AI 방역 대응)
 | **간격반복 플래시카드 앱** | Flash.Card (≠ Type.Rocket: 타이핑 WPM 연습, ≠ Dict.Cast: 사전 조회 — SM-2 알고리즘 장기 기억 내재화, Anki 대체) |
 | **전자책 EPUB 리더** | Epub.Cast (≠ PDF.Forge: PDF 편집, ≠ Mark.View: 마크다운 뷰어, ≠ Ink.Cast: 노트 앱 — EPUB/MOBI 전자책 전용) |
 | **SVG 벡터 에디터** | SVG.Forge (≠ Pixel.Forge: 래스터 픽셀아트, ≠ Draw.Board: 자유형 화이트보드, ≠ Icon.Forge: ICO 변환 — Bezier 패스·Boolean 연산 SVG 에디터) |

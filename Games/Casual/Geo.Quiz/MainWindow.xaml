@@ -145,6 +145,14 @@
     </Window.Resources>
 
     <Grid>
+        <!-- ══ 뮤트 버튼 (모든 화면 공통, 우상단 고정) ══════════════════════════ -->
+        <Button x:Name="BtnMute" Content="🔊" FontFamily="Segoe UI Emoji"
+                Style="{StaticResource Btn}" FontSize="16"
+                Width="38" Height="38" Padding="0"
+                HorizontalAlignment="Right" VerticalAlignment="Top"
+                Margin="0,14,14,0" Panel.ZIndex="10"
+                Click="BtnMute_Click" ToolTip="배경음악 음소거"/>
+
         <!-- ══ 시작 화면 ══════════════════════════════════════════════════════ -->
         <ScrollViewer x:Name="StartPanel" VerticalScrollBarVisibility="Auto"
                       Visibility="{Binding IsStartScreen, Converter={StaticResource BoolVis}}">

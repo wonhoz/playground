@@ -1,6 +1,7 @@
 using System.Runtime.InteropServices;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
+using Geo.Quiz.Services;
 using Geo.Quiz.ViewModels;
 
 namespace Geo.Quiz;
@@ -11,6 +12,7 @@ public partial class MainWindow : Window
     static extern int DwmSetWindowAttribute(IntPtr hwnd, int attr, ref int val, int size);
 
     readonly MainViewModel _vm;
+    readonly AudioService  _audio = new();
 
     static readonly (string emoji, string fore, string grade)[] GradeInfo =
     [
@@ -27,7 +29,7 @@ public partial class MainWindow : Window
         _vm = new MainViewModel();
         DataContext = _vm;
 
-        Loaded += (_, _) => ApplyDarkTitleBar();
+        Loaded += (_, _) => { ApplyDarkTitleBar(); _audio.PlayBg(); };
 
         _vm.PropertyChanged += (_, e) =>
         {
@@ -37,6 +39,15 @@ public partial class MainWindow : Window
             {
                 UpdateChoiceColors();
                 LoadFlagImage();
+
+                // 정답/오답 효과음
+                if (e.PropertyName == nameof(_vm.Answered) && _vm.Answered && _vm.CurrentQuestion != null)
+                {
+                    bool isCorrect = _vm.SelectedAnswer == _vm.CurrentQuestion.CorrectAnswer;
+                    if (isCorrect) _audio.PlayCorrect();
+                    else           _audio.PlayWrong();
+                }
+
                 if (_vm.Screen == QuizScreen.Result) ShowResult();
             }
         };
@@ -52,6 +63,14 @@ public partial class MainWindow : Window
     // ── 화면 전환용 Binding 보조 속성 ──────────────────────────────────────
     // XAML BoolVis 사용을 위해 VM에 별도 bool 프로퍼티 추가 대신 code-behind에서 패널 직접 제어
     // → VM PropertyChanged 구독으로 Visibility 갱신
+
+    void BtnMute_Click(object sender, RoutedEventArgs e)
+    {
+        _audio.Muted   = !_audio.Muted;
+        BtnMute.Content = _audio.Muted ? "🔇" : "🔊";
+        if (!_audio.Muted) _audio.PlayBg();
+        else               _audio.PauseBg();
+    }
 
     void Mode_Checked(object sender, RoutedEventArgs e)
     {
@@ -114,5 +133,11 @@ public partial class MainWindow : Window
         TbScore.Text        = $"{r.Correct}문제 정답 / {r.Total}문제 (등급: {r.Grade})";
         TbCorrect.Text      = r.Correct.ToString();
         TbWrong.Text        = r.Wrong.ToString();
+    }
+
+    protected override void OnClosed(EventArgs e)
+    {
+        _audio.Dispose();
+        base.OnClosed(e);
     }
 }

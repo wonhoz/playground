@@ -97,19 +97,20 @@ echo !CY!  71!RS! Spec.View             !DG!Applications/System/Monitor!RS!
 echo !CY!  72!RS! Star.Strike           !DG!Games/Shooter!RS!
 echo !CY!  73!RS! Stay.Awake            !DG!Applications/Automation!RS!
 echo !CY!  74!RS! Svc.Guard             !DG!Applications/System/Manager!RS!
-echo !CY!  75!RS! Sys.Clean             !DG!Applications/System/Manager!RS!
-echo !CY!  76!RS! Table.Craft           !DG!Applications/Data!RS!
-echo !CY!  77!RS! Tag.Forge             !DG!Applications/Audio!RS!
-echo !CY!  78!RS! Text.Forge            !DG!Applications/Text!RS!
-echo !CY!  79!RS! Timeline.Craft        !DG!Applications/Data!RS!
-echo !CY!  80!RS! Tower.Guard           !DG!Games/Strategy!RS!
-echo !CY!  81!RS! Tray.Stats            !DG!Applications/System/Monitor!RS!
-echo !CY!  82!RS! VPN.Cast              !DG!Applications/Network/Monitor!RS!
-echo !CY!  83!RS! Wave.Surf             !DG!Games/Casual!RS!
-echo !CY!  84!RS! Web.Shot              !DG!Applications/Photo.Picture!RS!
-echo !CY!  85!RS! Win.Event             !DG!Applications/Development/Analyzer!RS!
-echo !CY!  86!RS! Word.Cloud            !DG!Applications/Text!RS!
-echo !CY!  87!RS! Zip.Peek              !DG!Applications/Files/Inspector!RS!
+echo !CY!  75!RS! SVG.Forge             !DG!Applications/Photo.Picture!RS!
+echo !CY!  76!RS! Sys.Clean             !DG!Applications/System/Manager!RS!
+echo !CY!  77!RS! Table.Craft           !DG!Applications/Data!RS!
+echo !CY!  78!RS! Tag.Forge             !DG!Applications/Audio!RS!
+echo !CY!  79!RS! Text.Forge            !DG!Applications/Text!RS!
+echo !CY!  80!RS! Timeline.Craft        !DG!Applications/Data!RS!
+echo !CY!  81!RS! Tower.Guard           !DG!Games/Strategy!RS!
+echo !CY!  82!RS! Tray.Stats            !DG!Applications/System/Monitor!RS!
+echo !CY!  83!RS! VPN.Cast              !DG!Applications/Network/Monitor!RS!
+echo !CY!  84!RS! Wave.Surf             !DG!Games/Casual!RS!
+echo !CY!  85!RS! Web.Shot              !DG!Applications/Photo.Picture!RS!
+echo !CY!  86!RS! Win.Event             !DG!Applications/Development/Analyzer!RS!
+echo !CY!  87!RS! Word.Cloud            !DG!Applications/Text!RS!
+echo !CY!  88!RS! Zip.Peek              !DG!Applications/Files/Inspector!RS!
 echo.
 echo !DG!--------------------------------------------------!RS!
 echo !DG!  번호 입력 (공백/쉼표로 구분)   예: 1 3 5  또는  1,3,5!RS!
@@ -212,19 +213,20 @@ for %%n in (!SEL!) do (
     if "%%n"=="72" call :pub "Star.Strike"            "Games\Shooter\Star.Strike"                                  "Star.Strike.exe"           "Games\Shooter"
     if "%%n"=="73" call :pub "Stay.Awake"             "Applications\Automation\Stay.Awake"                         "Stay.Awake.exe"            "Applications\Automation\Stay.Awake"
     if "%%n"=="74" call :pub "Svc.Guard"              "Applications\System\Manager\Svc.Guard"                      "Svc.Guard.exe"             "Applications\System\Manager\Svc.Guard"
-    if "%%n"=="75" call :pub "Sys.Clean"              "Applications\System\Manager\Sys.Clean"                      "Sys.Clean.exe"             "Applications\System\Manager\Sys.Clean"
-    if "%%n"=="76" call :pub "Table.Craft"            "Applications\Data\Table.Craft"                              "Table.Craft.exe"           "Applications\Data"
-    if "%%n"=="77" call :pub "Tag.Forge"              "Applications\Audio\Tag.Forge"                               "Tag.Forge.exe"             "Applications\Audio\Tag.Forge"
-    if "%%n"=="78" call :pub "Text.Forge"             "Applications\Text\Text.Forge"                               "Text.Forge.exe"            "Applications\Text"
-    if "%%n"=="79" call :pub "Timeline.Craft"         "Applications\Data\Timeline.Craft"                           "Timeline.Craft.exe"        "Applications\Data\Timeline.Craft"
-    if "%%n"=="80" call :pub "Tower.Guard"            "Games\Strategy\Tower.Guard"                                 "Tower.Guard.exe"           "Games\Strategy"
-    if "%%n"=="81" call :pub "Tray.Stats"             "Applications\System\Monitor\Tray.Stats"                     "Tray.Stats.exe"            "Applications\System\Monitor\Tray.Stats"
-    if "%%n"=="82" call :pub "VPN.Cast"               "Applications\Network\Monitor\VPN.Cast"                      "VpnCast.exe"               "Applications\Network\Monitor"
-    if "%%n"=="83" call :pub "Wave.Surf"              "Games\Casual\Wave.Surf"                                     "Wave.Surf.exe"             "Games\Casual"
-    if "%%n"=="84" call :pub "Web.Shot"               "Applications\Photo.Picture\Web.Shot"                        "Web.Shot.exe"              "Applications\Photo.Picture\Web.Shot"
-    if "%%n"=="85" call :pub "Win.Event"              "Applications\Development\Analyzer\Win.Event"                "WinEvent.exe"              "Applications\Development\Analyzer"
-    if "%%n"=="86" call :pub "Word.Cloud"             "Applications\Text\Word.Cloud"                               "Word.Cloud.exe"            "Applications\Text"
-    if "%%n"=="87" call :pub "Zip.Peek"               "Applications\Files\Inspector\Zip.Peek"                      "Zip.Peek.exe"              "Applications\Files\Inspector\Zip.Peek"
+    if "%%n"=="75" call :pub "SVG.Forge"              "Applications\Photo.Picture\SVG.Forge"                       "SVG.Forge.exe"             "Applications\Photo.Picture\SVG.Forge"
+    if "%%n"=="76" call :pub "Sys.Clean"              "Applications\System\Manager\Sys.Clean"                      "Sys.Clean.exe"             "Applications\System\Manager\Sys.Clean"
+    if "%%n"=="77" call :pub "Table.Craft"            "Applications\Data\Table.Craft"                              "Table.Craft.exe"           "Applications\Data"
+    if "%%n"=="78" call :pub "Tag.Forge"              "Applications\Audio\Tag.Forge"                               "Tag.Forge.exe"             "Applications\Audio\Tag.Forge"
+    if "%%n"=="79" call :pub "Text.Forge"             "Applications\Text\Text.Forge"                               "Text.Forge.exe"            "Applications\Text"
+    if "%%n"=="80" call :pub "Timeline.Craft"         "Applications\Data\Timeline.Craft"                           "Timeline.Craft.exe"        "Applications\Data\Timeline.Craft"
+    if "%%n"=="81" call :pub "Tower.Guard"            "Games\Strategy\Tower.Guard"                                 "Tower.Guard.exe"           "Games\Strategy"
+    if "%%n"=="82" call :pub "Tray.Stats"             "Applications\System\Monitor\Tray.Stats"                     "Tray.Stats.exe"            "Applications\System\Monitor\Tray.Stats"
+    if "%%n"=="83" call :pub "VPN.Cast"               "Applications\Network\Monitor\VPN.Cast"                      "VpnCast.exe"               "Applications\Network\Monitor"
+    if "%%n"=="84" call :pub "Wave.Surf"              "Games\Casual\Wave.Surf"                                     "Wave.Surf.exe"             "Games\Casual"
+    if "%%n"=="85" call :pub "Web.Shot"               "Applications\Photo.Picture\Web.Shot"                        "Web.Shot.exe"              "Applications\Photo.Picture\Web.Shot"
+    if "%%n"=="86" call :pub "Win.Event"              "Applications\Development\Analyzer\Win.Event"                "WinEvent.exe"              "Applications\Development\Analyzer"
+    if "%%n"=="87" call :pub "Word.Cloud"             "Applications\Text\Word.Cloud"                               "Word.Cloud.exe"            "Applications\Text"
+    if "%%n"=="88" call :pub "Zip.Peek"               "Applications\Files\Inspector\Zip.Peek"                      "Zip.Peek.exe"              "Applications\Files\Inspector\Zip.Peek"
 )
 goto :DONE
 
@@ -278,6 +280,7 @@ call :pub "VPN.Cast"              "Applications\Network\Monitor\VPN.Cast"       
 call :pub "Color.Grade"           "Applications\Photo.Picture\Color.Grade"                     "Color.Grade.exe"           "Applications\Photo.Picture\Color.Grade"
 call :pub "Mosaic.Forge"          "Applications\Photo.Picture\Mosaic.Forge"                    "Mosaic.Forge.exe"          "Applications\Photo.Picture\Mosaic.Forge"
 call :pub "Photo.Video.Organizer" "Applications\Photo.Picture\Photo.Video.Organizer"           "Photo.Video.Organizer.exe" "Applications\Photo.Picture"
+call :pub "SVG.Forge"             "Applications\Photo.Picture\SVG.Forge"                       "SVG.Forge.exe"             "Applications\Photo.Picture\SVG.Forge"
 call :pub "Web.Shot"              "Applications\Photo.Picture\Web.Shot"                        "Web.Shot.exe"              "Applications\Photo.Picture\Web.Shot"
 call :pub "Boot.Map"              "Applications\System\Monitor\Boot.Map"                       "Boot.Map.exe"              "Applications\System\Monitor"
 call :pub "Burn.Rate"             "Applications\System\Monitor\Burn.Rate"                      "Burn.Rate.exe"             "Applications\System\Monitor"

@@ -87,6 +87,7 @@ call :pub "Serve.Cast"            "Applications\Network\Server\Serve.Cast"      
 call :pub "Color.Grade"           "Applications\Photo.Picture\Color.Grade"                 "Color.Grade.exe"           "Applications\Photo.Picture\Color.Grade"
 call :pub "Mosaic.Forge"          "Applications\Photo.Picture\Mosaic.Forge"                "Mosaic.Forge.exe"          "Applications\Photo.Picture\Mosaic.Forge"
 call :pub "Photo.Video.Organizer" "Applications\Photo.Picture\Photo.Video.Organizer"       "Photo.Video.Organizer.exe" "Applications\Photo.Picture"
+call :pub "SVG.Forge"             "Applications\Photo.Picture\SVG.Forge"                   "SVG.Forge.exe"             "Applications\Photo.Picture\SVG.Forge"
 call :pub "Web.Shot"              "Applications\Photo.Picture\Web.Shot"                    "Web.Shot.exe"              "Applications\Photo.Picture\Web.Shot"
 
 :: ── Applications / System / Manager ───────────────────────────────

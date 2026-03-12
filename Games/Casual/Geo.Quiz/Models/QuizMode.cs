@@ -13,6 +13,7 @@ public class QuizQuestion
 {
     public Country Subject { get; init; } = null!;
     public string QuestionText { get; init; } = "";
+    public string FlagDisplay  { get; init; } = "";   // Flag 모드: 크게 표시할 국기 이모지
     public string CorrectAnswer { get; init; } = "";
     public List<string> Choices { get; init; } = [];
 }

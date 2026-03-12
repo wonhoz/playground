@@ -129,7 +129,7 @@ public class MainViewModel : BaseViewModel
                                   .ToList();
                 break;
             case QuizMode.Flag:
-                question    = $"이 국기는 어느 나라?  {subject.FlagEmoji}";
+                question    = "이 국기는 어느 나라?";
                 correct     = subject.KorName;
                 distractors = pool.Where(c => c != subject)
                                   .OrderBy(_ => _rng.Next())
@@ -153,6 +153,7 @@ public class MainViewModel : BaseViewModel
         {
             Subject      = subject,
             QuestionText = question,
+            FlagDisplay  = Mode == QuizMode.Flag ? subject.FlagEmoji : "",
             CorrectAnswer= correct,
             Choices      = choices,
         };

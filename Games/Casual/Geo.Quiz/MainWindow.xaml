@@ -196,15 +196,22 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
-            <!-- 진행 표시 -->
+            <!-- 진행 표시 + 메뉴 버튼 -->
             <Grid Grid.Row="0" Margin="0,0,0,20">
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-                <ProgressBar Value="{Binding ProgressPct, Mode=OneWay}" Minimum="0" Maximum="100"
-                             Height="6" Background="#1A1A30" Foreground="#3B82F6"/>
-                <TextBlock Grid.Column="1" Text="{Binding ProgressText}"
+                <Button Grid.Column="0" Content="← 메뉴" Style="{StaticResource Btn}"
+                        Command="{Binding RestartCmd}"
+                        FontSize="11" Padding="10,4" Margin="0,0,12,0"
+                        VerticalAlignment="Center"/>
+                <ProgressBar Grid.Column="1" Value="{Binding ProgressPct, Mode=OneWay}" Minimum="0" Maximum="100"
+                             Height="6" Background="#1A1A30" Foreground="#3B82F6"
+                             VerticalAlignment="Center"/>
+                <TextBlock Grid.Column="2" Text="{Binding ProgressText}"
                            Foreground="#6A6A9A" FontSize="11" Margin="12,0,0,0"
                            VerticalAlignment="Center"/>
             </Grid>
@@ -213,6 +220,13 @@
             <Border Grid.Row="1" Background="#0C0C22" BorderBrush="#1A1A40"
                     BorderThickness="1" CornerRadius="12" Padding="30,28">
                 <StackPanel>
+                    <!-- 국기 이모지 (Flag 모드 전용) — Segoe UI Emoji 폰트로 크게 표시 -->
+                    <TextBlock x:Name="TbFlagEmoji"
+                               Text="{Binding CurrentQuestion.FlagDisplay}"
+                               FontFamily="Segoe UI Emoji" FontSize="80"
+                               HorizontalAlignment="Center" TextAlignment="Center"
+                               Margin="0,0,0,12"/>
+
                     <!-- 질문 텍스트 -->
                     <TextBlock Text="{Binding CurrentQuestion.QuestionText}"
                                FontSize="22" FontWeight="SemiBold" TextWrapping="Wrap"

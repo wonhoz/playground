@@ -2,7 +2,7 @@
 
 > 이 파일은 브레인스토밍 시 **이미 제안되거나 구현된 아이디어를 다시 꺼내지 않도록** 하는 필터다.
 > 새 아이디어를 제안하기 전 반드시 이 목록을 확인할 것.
-> 마지막 갱신: 2026-03-13 (18차)
+> 마지막 갱신: 2026-03-13 (19차)
 
 ---
 
@@ -1231,3 +1231,58 @@
 | **핀 실 감기 기하학 패턴 퍼즐** | Knit.Path (≠ Knot.Craft: 위상 매듭 풀기, ≠ Spring.Web: 거미줄 물리 — 기하학적 직선 실 감기+실루엣 매칭+아트 창작) |
 | **행·열·블록 회전 목표 패턴 퍼즐** | Grid.Lock (≠ Block.Shift: 행/열 루프 선형 슬라이드, ≠ Ice.Slide: 단방향 미끄러짐 — 회전(Rotation) 기반 큐브 퍼즐) |
 | **전투 없는 힐링 픽셀아트 내러티브 RPG** | Pixel.Quest (≠ Room.Code: 방탈출 포인트앤클릭, ≠ Rogue.Tile: 영구사망 로그라이크 — 감성 스토리+분기 선택+수집 요소 첫 도입) |
+
+---
+
+### Apps (신규 — idea_20260313_19차)
+
+| 이름 | 핵심 기능 | 출처 |
+|------|----------|------|
+| `Contact.Vault` | 완전 오프라인 개인 CRM (vCard/CSV, 생일·기념일 Toast 알림, 관계 맵, AES-256 암호화) | idea_20260313_19차 |
+| `Gamepad.Cast` | 게임패드 키 매핑 GUI (XInput/DirectInput/DS4/Switch Pro, 앱별 프로파일 자동 전환, 데드존·진동 테스트) | idea_20260313_19차 |
+| `Deploy.Diff` | 배포 환경 설정 파일 5열 병렬 diff (dev/staging/prod, 누락 키 감지, 민감값 자동 마스킹, Markdown 리포트) | idea_20260313_19차 |
+| `Comic.Cast` | CBZ/CBR/CB7/CBT 만화 이미지 뷰어 (양면 보기, ComicInfo.xml, 라이브러리 관리, 스캔 보정) | idea_20260313_19차 |
+| `UML.Forge` | 클릭·드래그 WYSIWYG UML 에디터 (클래스/시퀀스/유스케이스/액티비티, PlantUML 양방향 변환) | idea_20260313_19차 |
+| `Loan.Calc` | 대출 상환표·복리 저축·투자 수익률 금융 시뮬레이터 (원금균등/원리금균등, 중도상환, 금리 민감도) | idea_20260313_19차 |
+| `Subtitle.Edit` | SRT/VTT/ASS 자막 완전 편집기 (비디오 동기화, CPS 체크, 형식 변환, 번역 사이드바) | idea_20260313_19차 |
+| `Diff.Merge` | 3-way 파일 병합 도구 (베이스/로컬/원격 3열, cherry-pick, git mergetool 통합) | idea_20260313_19차 |
+| `Video.Cast` | 로컬 비디오 라이브러리 & 플레이어 (LibVLC, 이어보기, 포스터 메타, 자막 연동) | idea_20260313_19차 |
+| `Hotspot.Cast` | Windows 핫스팟 고급 관리 트레이 (기기 차단·속도 제한, 스케줄, QR 접속) | idea_20260313_19차 |
+
+### 게임 — 제안된 미구현 아이디어 (idea_20260313_19차)
+
+| 이름 | 장르 | 핵심 메커닉 |
+|------|------|------------|
+| `Klotski.Rush` | Puzzle / Logic | 크기 다른 블록 밀어 목표 블록 출구 탈출 (Rush Hour 변형), A* 솔버 힌트, BFS 유일해 역산 |
+| `Golf.Cast` | Sports / Physics | 탑다운 2D 미니골프, Box2D 반사·마찰·경사, 회전 편류, 코스 에디터, 로컬 2P |
+| `Jigsaw.Cast` | Puzzle / Casual | 임의 이미지 Voronoi 조각 분할·스냅 완성, 16~1000 조각, 힌트·이어하기, 힐링 릴렉스 |
+| `Crossword.Cast` | Word / Puzzle | 영한 크로스워드, 백트래킹 유일해 생성, 데일리 챌린지, 자유 제작 모드 |
+| `Vial.Sort` | Puzzle / Casual | 색상 액체 시험관 정렬 (Water Sort), BFS 최솟값 역산 유일해, 300+ 레벨 |
+| `Tangram.Cast` | Puzzle / Spatial | 7조각 탱그램 200+ 실루엣 (드래그·회전·뒤집기), SAT 충돌 검증, 자유 창작 |
+| `Raft.Build` | Puzzle / Physics | 뗏목 부력·무게중심 설계 + 수류 항해 생존, Archimedes 부력, 파도·소용돌이 |
+| `Archery.Cast` | Sports / Skill | 궁술 정밀 조준 (낙차·풍향·숨참기), 특수 화살, Verlet 탄도, 과녁 점수 |
+| `Hex.Board` | Strategy / Classic | 오셀로·Hex·오목·Connect6 추상 보드 게임 컬렉션, MCTS AI, 기보 저장·재생 |
+| `Maze.Iso` | Puzzle / 3D / Spatial | 아이소메트릭 3D 큐브 90° 회전으로 중력 전환, DFS 3D 미로 생성, X-Ray 모드 |
+
+---
+
+| **오프라인 개인 CRM·연락처 관리** | Contact.Vault (≠ Family.Pin: LAN 공유 메모보드, ≠ Habit.Chain: 습관 추적 — vCard/CSV, 관계 맵, 생일 알림 특화) |
+| **게임패드 HID 키 매핑 GUI** | Gamepad.Cast (≠ Layout.Forge: 키보드 Scancode Map, ≠ Key.Tape: 매크로 녹화 — XInput/DS4/Switch Pro 컨트롤러 리매핑+앱별 프로파일) |
+| **배포 환경 설정 파일 병렬 diff** | Deploy.Diff (≠ Deep.Diff: 일반 2-way 파일 비교, ≠ Json.Craft: 포맷팅 — dev/staging/prod 5열 병렬+누락 키 감지+민감값 마스킹) |
+| **CBZ/CBR 만화 이미지 뷰어** | Comic.Cast (≠ Epub.Cast: EPUB/MOBI 전자책, ≠ Zip.Peek: 아카이브 탐색기 — 만화 전용 양면 보기+ComicInfo.xml+시리즈 관리) |
+| **클릭 기반 UML 다이어그램 에디터** | UML.Forge (≠ Render.View: 마크업 입력→렌더링, ≠ Schema.View: JSON Schema 전용 — 드래그 WYSIWYG UML 편집+PlantUML 변환) |
+| **대출·저축·투자 금융 시뮬레이터** | Loan.Calc (≠ Quick.Calc: 16진수·IEEE 754 비트 연산, ≠ Budget.Cast: 지출 추적, ≠ Stock.Watch: 포트폴리오 — 금융 시나리오 시뮬 특화) |
+| **SRT/VTT/ASS 자막 완전 편집기** | Subtitle.Edit (≠ Subtitle.Sync: 오프셋 이동만, ≠ Audio.Cut: 오디오 파형 — 자막 텍스트·타임코드 전체 편집+비디오 동기화) |
+| **3-way 파일 병합 도구** | Diff.Merge (≠ Deep.Diff: 2-way 비교기 — 베이스/로컬/원격 3열+cherry-pick+git mergetool 통합) |
+| **로컬 비디오 라이브러리 & 플레이어** | Video.Cast (≠ Music.Player: 오디오 전용, ≠ Video.Trim: 편집기 — 비디오 라이브러리+이어보기+자막+포스터 플레이어) |
+| **Windows 핫스팟 고급 관리 트레이** | Hotspot.Cast (≠ BT.Cast: Bluetooth 전환, ≠ DNS.Flip: DNS 서버 — ICS 핫스팟 ON/OFF+기기 차단·속도 제한+스케줄 특화) |
+| **슬라이딩 블록 출구 탈출 퍼즐** | Klotski.Rush (≠ Ice.Slide: 얼음 단방향 미끄러짐, ≠ Neon.Push: 소코반+색상+레이저, ≠ Slide.Path: 통로 슬라이딩 — 크기 다른 블록 맞물림 탈출) |
+| **탑다운 2D 미니골프** | Golf.Cast (≠ Pool.Break: 당구 스포츠, ≠ Arc.Blast: 포물선 구조물 파괴, ≠ Bounce.House: 탄성 슈터 — 경사+마찰+회전+특수 장애물 미니골프) |
+| **임의 이미지 지그소 퍼즐** | Jigsaw.Cast (≠ Pixel.Cross: 노노그램, ≠ Fold.Grid: 오리가미, ≠ Tangram.Cast: 7조각 — 이미지 분할+스냅 힐링 퍼즐) |
+| **영한 크로스워드 퍼즐** | Crossword.Cast (≠ Word.Bomb: 폭탄 타이머, ≠ Word.Weave: Boggle 체인, ≠ Word.Crack: 자모 Wordle — 가로·세로 힌트 단어 채우기 크로스워드) |
+| **색상 액체 시험관 정렬 퍼즐** | Vial.Sort (≠ Match.Drop: 중력 방향 전환 매치3, ≠ Flow.Pipe: 경로 연결 채우기, ≠ Fluid.Rush: SPH 유체 파이프 — 분리·정렬 순서 계획 Water Sort) |
+| **탱그램 7조각 실루엣 맞추기** | Tangram.Cast (≠ Fold.Grid: 격자 오리가미, ≠ Jigsaw.Cast: 이미지 분할, ≠ Knot.Craft: 위상 매듭 — 고정 7조각 공간 배치·회전·뒤집기) |
+| **뗏목 부력 설계 + 수류 항해 생존** | Raft.Build (≠ Bridge.Craft: 정적 교량 응력, ≠ Marble.Run: 구슬 경로 빌더, ≠ Drone.Haul: 드론 케이블 — 부력+무게중심+수류 항해 물리) |
+| **궁술 정밀 조준 + 물리 게임** | Archery.Cast (≠ Arc.Blast: 포물선 구조물 파괴, ≠ Throw.Stars: 무기 비행 물리, ≠ Crack.Shot: 턴 기반 저격 — 낙차+풍향+숨참기 과녁 스포츠) |
+| **추상 보드 게임 컬렉션 (오셀로·Hex·오목)** | Hex.Board (≠ Card.Solo: 솔리테어 패시엔스, ≠ Neon.Card: 로그라이크 덱빌딩, ≠ Hex.Storm: 마이크로 RTS — 수학적 추상 전략, 운 요소 0%) |
+| **아이소메트릭 3D 큐브 회전 미로** | Maze.Iso (≠ Maze.Dread: 2D 추격 미로, ≠ Echo.Maze: 소나 항법, ≠ Frame.Jump: 만화 패널 — 큐브 회전으로 중력 방향 바뀌는 3D 공간 퍼즐) |

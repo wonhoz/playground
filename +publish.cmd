@@ -116,6 +116,7 @@ echo !CY!  90!RS! Zip.Peek              !DG!Applications/Files/Inspector!RS!
 echo !CY!  91!RS! Pad.Forge             !DG!Applications/System/Manager!RS!
 echo !CY!  92!RS! Comic.Cast            !DG!Applications/Photo.Picture!RS!
 echo !CY!  93!RS! Golf.Cast             !DG!Games/Sports!RS!
+echo !CY!  94!RS! Persp.Shift           !DG!Games/Puzzle!RS!
 echo.
 echo !DG!--------------------------------------------------!RS!
 echo !DG!  번호 입력 (공백/쉼표로 구분)   예: 1 3 5  또는  1,3,5!RS!
@@ -237,6 +238,7 @@ for %%n in (!SEL!) do (
     if "%%n"=="91" call :pub "Pad.Forge"              "Applications\System\Manager\Pad.Forge"                      "Pad.Forge.exe"             "Applications\System\Manager\Pad.Forge"
     if "%%n"=="92" call :pub "Comic.Cast"             "Applications\Photo.Picture\Comic.Cast"                      "Comic.Cast.exe"            "Applications\Photo.Picture\Comic.Cast"
     if "%%n"=="93" call :pub "Golf.Cast"              "Games\Sports\Golf.Cast"                                     "Golf.Cast.exe"             "Games\Sports"
+    if "%%n"=="94" call :pub "Persp.Shift"            "Games\Puzzle\Persp.Shift"                                   "Persp.Shift.exe"           "Games\Puzzle"
 )
 goto :DONE
 
@@ -346,6 +348,7 @@ call :pub "Tower.Guard"           "Games\Strategy\Tower.Guard"                  
 call :pub "Pad.Forge"             "Applications\System\Manager\Pad.Forge"                      "Pad.Forge.exe"             "Applications\System\Manager\Pad.Forge"
 call :pub "Comic.Cast"            "Applications\Photo.Picture\Comic.Cast"                      "Comic.Cast.exe"            "Applications\Photo.Picture\Comic.Cast"
 call :pub "Golf.Cast"             "Games\Sports\Golf.Cast"                                     "Golf.Cast.exe"             "Games\Sports"
+call :pub "Persp.Shift"           "Games\Puzzle\Persp.Shift"                                   "Persp.Shift.exe"           "Games\Puzzle"
 
 :: ── 완료 ──────────────────────────────────────────────────────────
 :DONE

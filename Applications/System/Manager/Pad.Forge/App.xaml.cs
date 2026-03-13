@@ -7,7 +7,6 @@ namespace PadForge;
 public partial class App : System.Windows.Application
 {
     private MainWindow? _mainWindow;
-    private NotifyIcon? _trayIcon;
     private TrayService? _trayService;
     private ControllerService? _controllerService;
     private ProfileService? _profileService;

@@ -2,7 +2,7 @@
 
 > 이 파일은 브레인스토밍 시 **이미 제안되거나 구현된 아이디어를 다시 꺼내지 않도록** 하는 필터다.
 > 새 아이디어를 제안하기 전 반드시 이 목록을 확인할 것.
-> 마지막 갱신: 2026-03-13 (22차)
+> 마지막 갱신: 2026-03-14 (23차)
 >
 > **구조**: 구현완료 앱 → 구현완료 게임 → 아카이브 → 제안된 미구현 아이디어(앱/게임) → 유사 개념 그룹
 
@@ -117,6 +117,8 @@
 | `Draw.Board` | 오프라인 인피니트 캔버스 화이트보드 |
 | `Cal.Block` | 로컬 시간 블로킹 플래너 (계획 vs 실적 비교, iCal 내보내기) |
 | `Num.Board` | 범용 자유 수치 지표 시계열 추적 대시보드 ★22차 |
+| `Slide.Cast` | Markdown → 오프라인 발표자 뷰 지원 프레젠테이션 슬라이드 ★23차 |
+| `Mouse.Map` | 마우스 이동 궤적·클릭 히트맵 패시브 분석기 ★23차 |
 
 ### Apps — Tray / Automation / System
 
@@ -227,6 +229,9 @@
 | `Bit.Cast` | 비트필드·레지스터 시각 에디터 + C 매크로 자동 생성 ★22차 |
 | `Merge.Cast` | 시각적 3-way 코드 병합 도구 (Git 충돌 해결) ★22차 |
 | `Font.Ramp` | 타이포그래피 스케일 미리보기 + 디자인 토큰 내보내기 ★22차 |
+| `Cov.Map` | LCOV/Cobertura 코드 커버리지 트리맵 + 소스 강조 뷰어 ★23차 |
+| `Diff.Prompt` | AI 프롬프트 A/B 비교 실험실 (출력 diff + 비용 비교) ★23차 |
+| `Cert.View` | X.509 인증서 심층 파서 + 체인 트리 시각화 ★23차 |
 
 ### Apps — Network / Security / Privacy
 
@@ -252,6 +257,7 @@
 | `Net.Ghost` | MAC 주소 스푸퍼·관리자 트레이 |
 | `Perm.Audit` | Windows 앱 권한 감사·관리 (카메라·마이크·위치) |
 | `Token.Watch` | API 키·서비스 토큰·라이선스 만료일 통합 로컬 대시보드 |
+| `WHOIS.Cast` | WHOIS·DNS 레코드·IP 지오로케이션 통합 도메인 조회 GUI ★23차 |
 
 ### Apps — Screen / UI / Media / Files
 
@@ -286,6 +292,9 @@
 | `Sticker.Forge` | Telegram/WhatsApp/Line 커스텀 스티커 팩 제작 ★22차 |
 | `Dither.Art` | 이미지 디더링 레트로 픽셀 필터 효과기 ★22차 |
 | `Print.Forge` | 프린터 진단·대기열·이력·토너 잔량 통합 관리 GUI ★22차 |
+| `OCR.Live` | 화면 영역 실시간 스트리밍 OCR + 번역 파이프라인 ★23차 |
+| `Tape.Delay` | 화면 타임시프트 뷰어 (지정 초 딜레이 2번 모니터 표시) ★23차 |
+| `Kiosk.Mode` | 이미지·동영상·웹 무한 루프 키오스크 디스플레이 관리자 ★23차 |
 
 ### Apps — Productivity / Personal Finance / Health
 
@@ -516,6 +525,16 @@
 | `Mural.Rush` | Arcade/VS | 128px 캔버스 2P 픽셀 영역 전쟁 ★22차 |
 | `Bridge.Run` | Arcade/Action | 달리는 캐릭터 앞에 실시간 다리 배치 러너 ★22차 |
 | `Ink.Trail` | Puzzle/Casual | 잉크 경로 설계 + 색 혼합 물리 퍼즐 ★22차 |
+| `Ear.Train` | Educational/Music | 음정·화음 청음 인식 ELO 기반 훈련 게임 ★23차 |
+| `Trade.Star` | Strategy/Space | 가격 변동 성간 무역 경로 최적화 전략 ★23차 |
+| `Dots.Cast` | Strategy/Board | Dots and Boxes 격자 선 긋기 박스 완성 전략 ★23차 |
+| `Anagram.Dash` | Word/Casual | 타이머 아나그램 — 타일 재조합 단어 발굴 ★23차 |
+| `Circuit.Break` | Puzzle/Educational | 버그 있는 전기 회로도 디버깅 퍼즐 ★23차 |
+| `Relic.Run` | Puzzle/Adventure | 절차 생성 발굴지 유물 발굴 어드벤처 ★23차 |
+| `Frost.Line` | Arcade/Survival | 위에서 내려오는 결빙선 피해 생존 ★23차 |
+| `Bloom.Craft` | Strategy/Simulation | 암세포 BFS 확산 vs 면역세포 AI 격자 전략 ★23차 |
+| `Pivot.Chase` | Puzzle/Arcade | 45° 각도 제약 이동으로 추격·회피 ★23차 |
+| `Snap.Duel` | Casual/2P Local | 반응속도 로컬 2P+ 대전 파티 게임 ★23차 |
 
 ---
 
@@ -579,3 +598,22 @@
 | **스티커 제작** | Sticker.Forge |
 | **이미지 디더링/픽셀 필터** | Dither.Art (≠ Img.Forge 일괄 처리, ≠ Pixel.Forge 그리기 도구) |
 | **프린터 관리** | Print.Forge |
+| **화면 OCR 실시간** | OCR.Live (스트리밍) ≠ Snap.Cast (1회 스냅샷) ≠ OCR.Forge (문서 배치) |
+| **마크다운 프레젠테이션** | Slide.Cast (발표자 뷰+PDF) ≠ Mark.View (단순 뷰어) ≠ Render.View (다이어그램) |
+| **화면 딜레이/타임시프트** | Tape.Delay (실시간 딜레이 표시) ≠ Screen.Recorder (파일 저장) ≠ Time.Lapse (타임랩스) |
+| **마우스 히트맵** | Mouse.Map (이동+클릭) ≠ Key.Heat (키보드 전용) |
+| **코드 커버리지 시각화** | Cov.Map |
+| **도메인 WHOIS/DNS 조회** | WHOIS.Cast |
+| **키오스크 디스플레이** | Kiosk.Mode |
+| **프롬프트 A/B 비교** | Diff.Prompt ≠ Prompt.Forge (라이브러리 저장) |
+| **인증서 파싱/분석** | Cert.View (분석) ≠ Cert.Watch (만료 모니터) ≠ Cert.Forge (생성) |
+| **음감 훈련 게임** | Ear.Train ≠ Beat.Drop/Chord.Strike (리듬 퍼포먼스) ≠ Echo.Drum (패턴 재현) |
+| **무역/교역 전략** | Trade.Star (성간) |
+| **선긋기 박스 완성** | Dots.Cast ≠ Net.Weave (그래프 평면화) |
+| **아나그램 퍼즐** | Anagram.Dash ≠ Word.Bomb ≠ Word.Crack ≠ Glyph.Rush |
+| **회로 디버깅** | Circuit.Break ≠ Volt.Chain (설계) ≠ Chip.Logic (게이트) |
+| **발굴/고고학 게임** | Relic.Run |
+| **결빙선 생존** | Frost.Line ≠ Last.Spark (모닥불 생존) |
+| **세포 확산 전략** | Bloom.Craft ≠ Virus.Spread (도시 그래프) ≠ Colony.Sim (개미) |
+| **각도 제약 이동** | Pivot.Chase |
+| **반응속도 2P 대전** | Snap.Duel ≠ Reflex.Tap (솔로 훈련) |

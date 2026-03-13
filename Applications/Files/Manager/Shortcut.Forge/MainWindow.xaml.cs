@@ -9,7 +9,6 @@ public partial class MainWindow : Window
     private readonly ObservableCollection<ShortcutEntry> _all      = [];
     private readonly ObservableCollection<ShortcutEntry> _filtered = [];
     private ShortcutEntry? _editing;
-    private bool _isDirty;
     private string _currentScanDir = "";
 
     // ── 다크 타이틀바 P/Invoke ──────────────────────────────────────────
@@ -128,7 +127,6 @@ public partial class MainWindow : Window
     private void LoadToForm(ShortcutEntry entry)
     {
         _editing = entry;
-        _isDirty = false;
         TxtDetailName.Text = entry.Name;
         ImgDetailIcon.Source = entry.IconImage;
         TxtName.Text        = entry.Name;

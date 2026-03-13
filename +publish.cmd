@@ -114,6 +114,7 @@ echo !CY!  88!RS! Win.Event             !DG!Applications/Development/Analyzer!RS
 echo !CY!  89!RS! Word.Cloud            !DG!Applications/Text!RS!
 echo !CY!  90!RS! Zip.Peek              !DG!Applications/Files/Inspector!RS!
 echo !CY!  91!RS! Pad.Forge             !DG!Applications/System/Manager!RS!
+echo !CY!  92!RS! Comic.Cast            !DG!Applications/Photo.Picture!RS!
 echo.
 echo !DG!--------------------------------------------------!RS!
 echo !DG!  번호 입력 (공백/쉼표로 구분)   예: 1 3 5  또는  1,3,5!RS!
@@ -233,6 +234,7 @@ for %%n in (!SEL!) do (
     if "%%n"=="89" call :pub "Word.Cloud"             "Applications\Text\Word.Cloud"                               "Word.Cloud.exe"            "Applications\Text"
     if "%%n"=="90" call :pub "Zip.Peek"               "Applications\Files\Inspector\Zip.Peek"                      "Zip.Peek.exe"              "Applications\Files\Inspector\Zip.Peek"
     if "%%n"=="91" call :pub "Pad.Forge"              "Applications\System\Manager\Pad.Forge"                      "Pad.Forge.exe"             "Applications\System\Manager\Pad.Forge"
+    if "%%n"=="92" call :pub "Comic.Cast"             "Applications\Photo.Picture\Comic.Cast"                      "Comic.Cast.exe"            "Applications\Photo.Picture\Comic.Cast"
 )
 goto :DONE
 
@@ -340,6 +342,7 @@ call :pub "Star.Strike"           "Games\Shooter\Star.Strike"                   
 call :pub "Leaf.Grow"             "Games\Simulation\Leaf.Grow"                                 "Leaf.Grow.exe"             "Games\Simulation"
 call :pub "Tower.Guard"           "Games\Strategy\Tower.Guard"                                 "Tower.Guard.exe"           "Games\Strategy"
 call :pub "Pad.Forge"             "Applications\System\Manager\Pad.Forge"                      "Pad.Forge.exe"             "Applications\System\Manager\Pad.Forge"
+call :pub "Comic.Cast"            "Applications\Photo.Picture\Comic.Cast"                      "Comic.Cast.exe"            "Applications\Photo.Picture\Comic.Cast"
 
 :: ── 완료 ──────────────────────────────────────────────────────────
 :DONE

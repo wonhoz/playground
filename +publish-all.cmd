@@ -90,6 +90,7 @@ call :pub "Mosaic.Forge"          "Applications\Photo.Picture\Mosaic.Forge"     
 call :pub "Photo.Video.Organizer" "Applications\Photo.Picture\Photo.Video.Organizer"       "Photo.Video.Organizer.exe" "Applications\Photo.Picture"
 call :pub "SVG.Forge"             "Applications\Photo.Picture\SVG.Forge"                   "SVG.Forge.exe"             "Applications\Photo.Picture\SVG.Forge"
 call :pub "Web.Shot"              "Applications\Photo.Picture\Web.Shot"                    "Web.Shot.exe"              "Applications\Photo.Picture\Web.Shot"
+call :pub "Comic.Cast"            "Applications\Photo.Picture\Comic.Cast"                  "Comic.Cast.exe"            "Applications\Photo.Picture\Comic.Cast"
 
 :: ── Applications / System / Manager ───────────────────────────────
 call :pub "Ctx.Menu"              "Applications\System\Manager\Ctx.Menu"                   "Ctx.Menu.exe"              "Applications\System\Manager\Ctx.Menu"

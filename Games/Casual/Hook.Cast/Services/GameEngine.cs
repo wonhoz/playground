@@ -159,6 +159,7 @@ public class GameEngine
     public void Reset()
     {
         Phase       = GamePhase.Aiming;
+        if (_hookedFish is not null) FishEscaped?.Invoke();
         _hookedFish = null;
         _reelProgress = 0;
         _biteTick     = 0;

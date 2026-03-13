@@ -89,7 +89,7 @@ public sealed class MainWindow : Form
         _chkAuto = MakeToggle("⏱ 자동 갱신", new Point(480, 12), 120);
         _chkAuto.CheckedChanged += (_, _) =>
         {
-            _autoTimer.Enabled = _chkAuto.Checked;
+            _autoTimer!.Enabled = _chkAuto.Checked;
             _chkAuto.Text = _chkAuto.Checked ? "⏱ 자동 갱신 ●" : "⏱ 자동 갱신";
         };
 

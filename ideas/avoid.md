@@ -2,7 +2,7 @@
 
 > 이 파일은 브레인스토밍 시 **이미 제안되거나 구현된 아이디어를 다시 꺼내지 않도록** 하는 필터다.
 > 새 아이디어를 제안하기 전 반드시 이 목록을 확인할 것.
-> 마지막 갱신: 2026-03-13 (19차)
+> 마지막 갱신: 2026-03-13 (21차)
 
 ---
 
@@ -583,6 +583,38 @@
 
 ---
 
+### Apps / Games (신규 — idea_20260313_20차)
+
+| 이름 | 핵심 기능 | 출처 |
+|------|----------|------|
+| `Tile.Cast` | 키보드 중심 Windows 타일링 WM (실시간 창 분할·이동·크기, FancyZones 대체) | idea_20260313_20차 |
+| `Token.Watch` | API 키·서비스 토큰·라이선스 만료일 통합 로컬 대시보드 (Cert.Watch SSL 전용과 달리 범용) | idea_20260313_20차 |
+| `Pad.Forge` | 게임패드 XInput/DInput 버튼 매핑 GUI (키보드·마우스 가상화, ViGEmBus, 앱별 프로파일) | idea_20260313_20차 |
+| `Desk.Pet` | 인터랙티브 투명 데스크탑 펫 (시스템 상태 기반 감정, 타이핑 통계, 커스텀 스킨) | idea_20260313_20차 |
+| `Karaoke.Cast` | 로컬 가라오케 플레이어 (LRC 동기화, Demucs 보컬 분리, 마이크 믹서, 음정 조절) | idea_20260313_20차 |
+| `Flow.Beat` | 바이노럴 비트·집중 음악 로컬 생성기 (Alpha/Beta/Theta 파형, 포모도로 연동, WAV 내보내기) | idea_20260313_20차 |
+| `Book.Log` | 독서 기록·목표 트래커 (진행률, 히트맵, 인용 메모, JSON 로컬 저장, Goodreads 오프라인 대체) | idea_20260313_20차 |
+| `Img.Prompt` | 이미지 AI 프롬프트 빌더 (Danbooru 태그 자동완성, 가중치 슬라이더, Negative, LoRA 라이브러리) | idea_20260313_20차 |
+| `Mirror.Cast` | Android USB/WiFi 미러링 scrcpy GUI 래퍼 (멀티 기기 탭, 화면 녹화, ADB 단축 명령) | idea_20260313_20차 |
+| `Map.Forge` | 오프라인 타일맵 레벨 에디터 (충돌 레이어, TMX/JSON 내보내기, BSP 절차 생성, 게임 개발 전용) | idea_20260313_20차 |
+
+### 게임 — 제안된 미구현 아이디어 (idea_20260313_20차)
+
+| 이름 | 장르 | 핵심 메커닉 |
+|------|------|------------|
+| `Case.File` | Puzzle / Detective | 증거 코르크보드 실 연결 + 타임라인 재구성 + NPC 거짓말 판별 추리 퍼즐 |
+| `Cipher.Quest` | Puzzle / Educational | 카이사르·비제네르·에니그마 역사 암호 해독, 빈도 분석 도구, 스파이 캠페인 |
+| `Eco.Chain` | Simulation / Sandbox | Lotka-Volterra 포식자-피식자 먹이사슬 생태계 샌드박스, 멸종 방지 퍼즐 |
+| `Persp.Shift` | Puzzle / Spatial | 정면·측면·위 시점 전환 → 이어지는 발판 변화, 에셔 착시 레벨 |
+| `Shutter.Run` | Puzzle / Creative | 이동 궤적=장노출 빛 드로잉, 목표 실루엣 완성, RGB 필터 구역, PNG 저장 |
+| `Asm.Quest` | Puzzle / Educational | 제한 어셈블리 명령어(MOV·ADD·JMP 등)로 레지스터 목표값 달성, 가상 CPU |
+| `Deck.Crawl` | Roguelite / Tactical | 이동·공격·방어 각각 카드 소비 그리드 던전, 핸드 고갈=행동 불가, 5직업 |
+| `Bid.Rush` | Strategy / Bluffing | 제한 코인 실시간 경매 입찰, AI 블러핑·패스·과잉 입찰, 시장 가격 변동 |
+| `Puck.Rush` | Sports / Physics | 마찰=0 완전 탄성 충돌 2D 아이스 하키, 예측선, 특수 타일, 로컬 2P |
+| `Tune.Cast` | Puzzle / Mystery | 라디오 주파수 다이얼 탐색, 노이즈 속 신호 수집, 냉전 스파이 암호 내러티브 |
+
+---
+
 ### Apps (신규 — idea_20260313_18차)
 
 | 이름 | 핵심 기능 | 출처 |
@@ -814,6 +846,26 @@
 | **빠른 차트 생성기** | Chart.Forge |
 | **헥스 뷰어·에디터** | Hex.Peek |
 | **Cron 표현식 검증기** | Cron.Cast |
+| **타일링 WM** | Tile.Cast (≠ Screen.Split 드래그 존, ≠ Workspace.Switcher 프리셋) |
+| **토큰/자격증명 만료 대시보드** | Token.Watch (≠ Cert.Watch SSL 전용, ≠ Key.Stash env 주입 특화) |
+| **게임패드 리매퍼** | Pad.Forge (≠ Layout.Forge 키보드 Scancode Map) |
+| **데스크탑 펫** | Desk.Pet |
+| **가라오케 플레이어** | Karaoke.Cast (≠ Music.Player 재생, ≠ Pitch.Find BPM 분석) |
+| **바이노럴 비트 생성기** | Flow.Beat (≠ Ambient.Mixer 환경음 믹스, ≠ Sound.Jar 앰비언트 UI) |
+| **독서 기록 트래커** | Book.Log (≠ Epub.Cast 전자책 리더) |
+| **이미지 AI 프롬프트 빌더** | Img.Prompt (≠ Prompt.Forge 범용 AI 프롬프트) |
+| **스마트폰 미러링** | Mirror.Cast (≠ Win.Cast 앱 창→가상 카메라) |
+| **타일맵 레벨 에디터** | Map.Forge (≠ Draw.Board 자유형 화이트보드) |
+| **증거 코르크보드 추리 게임** | Case.File (≠ Room.Code 방탈출, ≠ Logic.Zebra 격자 소거) |
+| **역사 암호 해독 게임** | Cipher.Quest (≠ Chip.Logic 논리 게이트, ≠ Asm.Quest 어셈블리) |
+| **생태계 먹이사슬 시뮬** | Eco.Chain (≠ Colony.Sim 슬라임 몰드, ≠ Swarm.Ant 페로몬) |
+| **시점 전환 착시 퍼즐** | Persp.Shift (≠ Phase.Gate 두 차원 동시 물리, ≠ Frame.Jump 만화 패널) |
+| **빛 궤적 드로잉 퍼즐** | Shutter.Run (≠ Burst.Canvas 잉크 생존, ≠ Sym.Draw 대칭 드로잉) |
+| **어셈블리 프로그래밍 퍼즐** | Asm.Quest (≠ Chip.Logic 병렬 게이트 회로) |
+| **핸드 관리 그리드 던전** | Deck.Crawl (≠ Neon.Card 층별 덱빌딩) |
+| **경매 입찰 전략 게임** | Bid.Rush |
+| **완전 탄성 2D 하키** | Puck.Rush (≠ Pool.Break 당구 마찰·회전) |
+| **라디오 주파수 탐색 추리** | Tune.Cast (≠ Signal.Cast 신호 시퀀스 기억, ≠ Echo.Hunt 소나 어둠 탐색) |
 | **전원 계획 자동 전환** | Power.Plan |
 | **앱별 네트워크 차단** | App.Cage |
 | **창 분할 레이아웃 매니저** | Screen.Split (≠ Workspace.Switcher) |
@@ -1286,3 +1338,58 @@
 | **궁술 정밀 조준 + 물리 게임** | Archery.Cast (≠ Arc.Blast: 포물선 구조물 파괴, ≠ Throw.Stars: 무기 비행 물리, ≠ Crack.Shot: 턴 기반 저격 — 낙차+풍향+숨참기 과녁 스포츠) |
 | **추상 보드 게임 컬렉션 (오셀로·Hex·오목)** | Hex.Board (≠ Card.Solo: 솔리테어 패시엔스, ≠ Neon.Card: 로그라이크 덱빌딩, ≠ Hex.Storm: 마이크로 RTS — 수학적 추상 전략, 운 요소 0%) |
 | **아이소메트릭 3D 큐브 회전 미로** | Maze.Iso (≠ Maze.Dread: 2D 추격 미로, ≠ Echo.Maze: 소나 항법, ≠ Frame.Jump: 만화 패널 — 큐브 회전으로 중력 방향 바뀌는 3D 공간 퍼즐) |
+
+---
+
+### Apps (신규 — idea_20260313_21차)
+
+| 이름 | 핵심 기능 | 출처 |
+|------|----------|------|
+| `Gym.Log` | 근력 운동 세트·중량 로컬 트래커 (루틴 빌더, 1RM 계산, 근육 그룹 히트맵, PR 알림) | idea_20260313_21차 |
+| `Bill.Cast` | 구독·정기결제 만료일 관리 트레이 (갱신 N일 전 알림, 무료체험 추적, 연간 비용 합산) | idea_20260313_21차 |
+| `Slide.Forge` | Markdown → Reveal.js 슬라이드 덱 변환기 (테마 10종, PDF/HTML 내보내기, 발표자 노트) | idea_20260313_21차 |
+| `Cast.Studio` | 팟캐스트 다중 트랙 녹음·편집 + RSS 2.0 피드 생성 (NAudio, 무음 제거, ID3 자동) | idea_20260313_21차 |
+| `Cel.Forge` | 2D 셀 애니메이션 프레임 에디터 (Onion Skin, 타임라인, GIF/MP4 내보내기) | idea_20260313_21차 |
+| `WiFi.Cast` | Wi-Fi 채널 분석·간섭 히트맵 + 최적 채널 추천 (NativeWifi, 2.4/5GHz 시각화) | idea_20260313_21차 |
+| `Back.Cast` | 폴더 증분 백업·버전 관리 + 복원 브라우저 (VSS, SQLite 인덱스, 스냅샷 롤백) | idea_20260313_21차 |
+| `Recipe.Box` | 로컬 레시피 관리자 (분량 스케일링, USDA 영양소 계산, 주간 식단 플래너, 쇼핑 목록) | idea_20260313_21차 |
+| `Daily.Journal` | 날짜 구동 일기장 (감정 태그, 기분 히트맵, AES-256 암호화, 연간 리포트) | idea_20260313_21차 |
+| `Wall.Cast` | 시간대·날씨·계절 연동 배경화면 자동 전환 (다중 모니터, OpenWeatherMap, Unsplash) | idea_20260313_21차 |
+
+### 게임 — 제안된 미구현 아이디어 (idea_20260313_21차)
+
+| 이름 | 장르 | 핵심 메커닉 |
+|------|------|------------|
+| `Quilt.Craft` | Puzzle / Pattern | 기하 타일 회전·배치로 퀼트 패턴 완성, 창작 모드, 일일 도전 |
+| `Deep.Swim` | Physics / Exploration | 부력·해류 물리 수중 탐험, 산소 게이지 관리, 절차 생성 해저 |
+| `Geo.Build` | Puzzle / Education | 컴퍼스+자만으로 최소 작도 횟수 유클리드 기하 구성 |
+| `Text.Venture` | Text Adventure / Roguelike | 절차 생성 세계관 텍스트 어드벤처 + 세계관 에디터+공유 |
+| `Mini.Golf` | Sports / Puzzle | 2D 탑다운 미니 골프 + 코스 에디터·공유 (Box2D) |
+| `Dig.Rush` | Puzzle / Simulation | 픽셀 발굴 + 유물 파손 방지 압력 시스템 + 소나 탐지 |
+| `Code.Path` | Puzzle / Education | 로봇 이동·물체 조작 블록 코딩 프로그래밍 퍼즐 + 레벨 에디터 |
+| `Net.Route` | Puzzle / Education | IP 라우터 배치 + 다익스트라 실시간 경로 최적화 시각화 |
+| `Harvest.Rush` | Strategy / Simulation | 4계절 턴제 경작, 날씨 불확실성, 시장 가격 연동 타이밍 게임 |
+| `Loot.Sort` | Puzzle / Strategy | RPG 인벤토리 폴리오미노 배치 + 세트 시너지 공간 최적화 |
+
+---
+
+| **근력 운동 세트·중량·1RM 로컬 트래커** | Gym.Log (≠ Health.Log: 체중·혈압 수치 기록, ≠ Toast.Cast: 루틴 알림 — 세트/반복/중량 입력+근육 히트맵+1RM 계산 특화) |
+| **구독·정기결제 만료일 관리 트레이** | Bill.Cast (≠ Budget.Cast: 일반 지출 예산 관리 — 구독 갱신 알림+무료체험 추적+연간 비용 집계 특화) |
+| **Markdown→슬라이드 덱 변환기** | Slide.Forge (≠ Mark.View: 범용 Markdown 뷰어, ≠ Render.View: 다이어그램 렌더링 — Reveal.js 슬라이드 덱 출력+테마+발표자 노트+PDF/HTML 특화) |
+| **팟캐스트 다중 트랙 녹음·편집 + RSS 생성** | Cast.Studio (≠ Audio.Cut: 범용 파형 트리머, ≠ Sound.Vis: FFT 시각화 도구 — 팟캐스트 워크플로우 다중 마이크+RSS 2.0 피드 생성 특화) |
+| **2D 셀 애니메이션 프레임 에디터** | Cel.Forge (≠ Pixel.Forge: 정적 픽셀아트 레이어 에디터, ≠ SVG.Forge: 벡터 에디터 — Onion Skin+타임라인+GIF/MP4 내보내기 특화) |
+| **Wi-Fi 채널 간섭 히트맵 + 최적 채널 추천** | WiFi.Cast (≠ Net.Scan: LAN ARP 기기 탐색, ≠ Wi.Probe: (14차에서 제안된 유사 아이디어 — 동일 개념, 중복 주의)) |
+| **폴더 증분 백업·버전 히스토리 + 복원 브라우저** | Back.Cast (≠ Folder.Sync: 단방향 최신 상태 동기화, ≠ File.Guard: 변경 감사 로거 — 버전 스냅샷 보존+복원 브라우저 특화) |
+| **로컬 레시피 관리 + 분량 스케일링 + 영양 계산** | Recipe.Box (≠ Data.Cast: 범용 노코드 DB, ≠ Health.Log: 건강 수치 — 요리 레시피 특화+USDA 영양소+식단 플래너 완전 신규) |
+| **날짜 구동 일기 + 감정 히트맵 + AES 암호화** | Daily.Journal (≠ Daily.Log: 마크다운 일기(AES-256 암호화 트레이 앱), ≠ Ink.Cast: Zettelkasten 지식 관리 — 감정 태그+기분 점수+캘린더 히트맵+연간 리포트 특화) |
+| **시간대·날씨·계절 연동 배경화면 자동 전환** | Wall.Cast (≠ Desk.Grid: 바탕화면 아이콘 레이아웃 저장 — 다중 모니터 독립 컬렉션+날씨/계절/시간대 멀티트리거 완전 신규) |
+| **기하 타일 회전·배치 퀼트 패턴 완성 퍼즐** | Quilt.Craft (≠ Knit.Path: 핀 실 감기 기하학, ≠ Tangram.Cast: 고정 7조각 — 그리드 타일 회전+배치+창작 모드) |
+| **부력·해류 물리 수중 탐험 + 산소 관리** | Deep.Swim (≠ Cave.Run: 수직 동굴 산소 채굴 로그라이크, ≠ Raft.Build: 수면 부력 — 수중 연속체 유체+해류+절차 생성 해저 탐험) |
+| **컴퍼스+자 최소 작도 횟수 유클리드 퍼즐** | Geo.Build (≠ Chip.Logic: 논리 게이트 회로, ≠ Geo.Quiz: 지리 퀴즈 — 유클리드 기하 작도 퍼즐 완전 신규) |
+| **절차 생성 텍스트 어드벤처 + 세계관 에디터** | Text.Venture (≠ Pixel.Quest: 전투 없는 픽셀 내러티브 RPG, ≠ Room.Code: 포인트앤클릭 방탈출 — IF 파서 엔진+절차 생성 세계+에디터 신규) |
+| **2D 탑다운 미니 골프 + 코스 에디터·공유** | Mini.Golf (≠ Pool.Break: 당구 스포츠, ≠ Golf.Cast: (19차에서 제안된 동일 개념 — 중복 주의)) |
+| **픽셀 발굴 + 유물 파손 압력 시스템 + 소나** | Dig.Rush (≠ Cave.Run: 수직 채굴 생존, ≠ Astro.Mine: 우주 채굴 슈터 — 그리드 픽셀 정밀 발굴+파손도 계산+소나 탐지 신규) |
+| **로봇 블록 코딩 이동·물체 조작 프로그래밍 퍼즐** | Code.Path (≠ Asm.Quest: 어셈블리어 레지스터 조작, ≠ Nano.Forge: 나노봇 도형 조립 — 공간 탐색+물체 조작+MOVE/PICK/DROP/IF/LOOP 블록 코딩) |
+| **IP 라우터 배치 + 다익스트라 경로 최적화 퍼즐** | Net.Route (≠ Chip.Logic: 논리 게이트 회로, ≠ Volt.Chain: 전류 타이밍 — 네트워크 토폴로지+다익스트라 시각화 신규) |
+| **4계절 턴제 경작 + 날씨 불확실성 + 시장 가격** | Harvest.Rush (≠ Pixel.Farm: 픽셀 격자 작물 유전 경영, ≠ Sand.Castle: 모래 건축 생존 — 날씨 예보 불완전 정보+시장 가격 변동 타이밍 신규) |
+| **RPG 인벤토리 폴리오미노 배치 + 세트 시너지** | Loot.Sort (≠ Dungeon.Dice: 덱빌딩 로그라이크, ≠ Neon.Push: 소코반+색상+레이저 — 격자 인벤토리+불규칙 폴리오미노+세트 시너지 신규)

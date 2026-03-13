@@ -15,7 +15,7 @@ public class PdfPreviewService
         return await Task.Run(() =>
         {
             using var stream = File.OpenRead(pdfPath);
-            using var skBitmap = Conversion.ToImage(stream, page: pageIndex,
+            using var skBitmap = Conversion.ToImage(stream, page: (Index)pageIndex,
                 options: new PdfRenderOptions(Dpi: dpi));
             return SkBitmapToBitmapSource(skBitmap);
         });

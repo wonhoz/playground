@@ -119,6 +119,7 @@ echo !CY!  93!RS! Golf.Cast             !DG!Games/Sports!RS!
 echo !CY!  94!RS! Persp.Shift           !DG!Games/Puzzle!RS!
 echo !CY!  95!RS! Crossword.Cast        !DG!Games/Puzzle!RS!
 echo !CY!  96!RS! Cipher.Quest          !DG!Games/Puzzle!RS!
+echo !CY!  97!RS! WiFi.Cast             !DG!Applications/Network!RS!
 echo.
 echo !DG!--------------------------------------------------!RS!
 echo !DG!  번호 입력 (공백/쉼표로 구분)   예: 1 3 5  또는  1,3,5!RS!
@@ -243,6 +244,7 @@ for %%n in (!SEL!) do (
     if "%%n"=="94" call :pub "Persp.Shift"            "Games\Puzzle\Persp.Shift"                                   "Persp.Shift.exe"           "Games\Puzzle"
     if "%%n"=="95" call :pub "Crossword.Cast"         "Games\Puzzle\Crossword.Cast"                                "Crossword.Cast.exe"        "Games\Puzzle"
     if "%%n"=="96" call :pub "Cipher.Quest"           "Games\Puzzle\Cipher.Quest"                                  "Cipher.Quest.exe"          "Games\Puzzle"
+    if "%%n"=="97" call :pub "WiFi.Cast"              "Applications\Network\WiFi.Cast"                             "WiFiCast.exe"              "Applications\Network"
 )
 goto :DONE
 
@@ -355,6 +357,7 @@ call :pub "Golf.Cast"             "Games\Sports\Golf.Cast"                      
 call :pub "Persp.Shift"           "Games\Puzzle\Persp.Shift"                                   "Persp.Shift.exe"           "Games\Puzzle"
 call :pub "Crossword.Cast"        "Games\Puzzle\Crossword.Cast"                                "Crossword.Cast.exe"        "Games\Puzzle"
 call :pub "Cipher.Quest"          "Games\Puzzle\Cipher.Quest"                                  "Cipher.Quest.exe"          "Games\Puzzle"
+call :pub "WiFi.Cast"             "Applications\Network\WiFi.Cast"                             "WiFiCast.exe"              "Applications\Network"
 
 :: ── 완료 ──────────────────────────────────────────────────────────
 :DONE

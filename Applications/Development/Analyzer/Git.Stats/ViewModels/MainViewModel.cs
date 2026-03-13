@@ -17,7 +17,6 @@ public class MainViewModel : INotifyPropertyChanged
     private int _totalCommits;
     private int _totalAuthors;
     private int _totalFiles;
-    private string _repoName = "";
 
     public string RepoPath
     {

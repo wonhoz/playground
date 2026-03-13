@@ -589,7 +589,7 @@
 |------|----------|------|
 | `Tile.Cast` | 키보드 중심 Windows 타일링 WM (실시간 창 분할·이동·크기, FancyZones 대체) | idea_20260313_20차 |
 | `Token.Watch` | API 키·서비스 토큰·라이선스 만료일 통합 로컬 대시보드 (Cert.Watch SSL 전용과 달리 범용) | idea_20260313_20차 |
-| `Pad.Forge` | 게임패드 XInput/DInput 버튼 매핑 GUI (키보드·마우스 가상화, ViGEmBus, 앱별 프로파일) | idea_20260313_20차 |
+| `Pad.Forge` | 게임패드 XInput/DInput 버튼 매핑 GUI (키보드·마우스 가상화, ViGEmBus, 앱별 프로파일) — **구현 완료 2026-03-13** (Gamepad.Cast 통합) | idea_20260313_20차 |
 | `Desk.Pet` | 인터랙티브 투명 데스크탑 펫 (시스템 상태 기반 감정, 타이핑 통계, 커스텀 스킨) | idea_20260313_20차 |
 | `Karaoke.Cast` | 로컬 가라오케 플레이어 (LRC 동기화, Demucs 보컬 분리, 마이크 믹서, 음정 조절) | idea_20260313_20차 |
 | `Flow.Beat` | 바이노럴 비트·집중 음악 로컬 생성기 (Alpha/Beta/Theta 파형, 포모도로 연동, WAV 내보내기) | idea_20260313_20차 |
@@ -1291,7 +1291,7 @@
 | 이름 | 핵심 기능 | 출처 |
 |------|----------|------|
 | `Contact.Vault` | 완전 오프라인 개인 CRM (vCard/CSV, 생일·기념일 Toast 알림, 관계 맵, AES-256 암호화) | idea_20260313_19차 |
-| `Gamepad.Cast` | 게임패드 키 매핑 GUI (XInput/DirectInput/DS4/Switch Pro, 앱별 프로파일 자동 전환, 데드존·진동 테스트) | idea_20260313_19차 |
+| `Gamepad.Cast` | 게임패드 키 매핑 GUI (XInput/DirectInput/DS4/Switch Pro, 앱별 프로파일 자동 전환, 데드존·진동 테스트) — **Pad.Forge로 통합 구현 완료 2026-03-13** | idea_20260313_19차 |
 | `Deploy.Diff` | 배포 환경 설정 파일 5열 병렬 diff (dev/staging/prod, 누락 키 감지, 민감값 자동 마스킹, Markdown 리포트) | idea_20260313_19차 |
 | `Comic.Cast` | CBZ/CBR/CB7/CBT 만화 이미지 뷰어 (양면 보기, ComicInfo.xml, 라이브러리 관리, 스캔 보정) | idea_20260313_19차 |
 | `UML.Forge` | 클릭·드래그 WYSIWYG UML 에디터 (클래스/시퀀스/유스케이스/액티비티, PlantUML 양방향 변환) | idea_20260313_19차 |

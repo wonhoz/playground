@@ -1,0 +1,133 @@
+<UserControl x:Class="PadForge.Views.MappingEditorView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="clr-namespace:PadForge.ViewModels"
+             xmlns:views="clr-namespace:PadForge.Views">
+    <UserControl.Resources>
+        <views:BoolToVisConverter x:Key="BoolToVis" />
+    </UserControl.Resources>
+
+    <Grid Margin="12,0,0,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- 프로파일 이름 -->
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,12">
+            <TextBlock Text="이름: " VerticalAlignment="Center" Margin="0,0,6,0" />
+            <TextBox Text="{Binding ProfileName, UpdateSourceTrigger=PropertyChanged}"
+                     Width="200" />
+        </StackPanel>
+
+        <!-- 데드존 슬라이더 -->
+        <Border Grid.Row="1" Background="{StaticResource BrBgCard}"
+                BorderBrush="{StaticResource BrBorder}" BorderThickness="1"
+                CornerRadius="6" Padding="12,8" Margin="0,0,0,12">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition /><ColumnDefinition /><ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0" Margin="0,0,8,0">
+                    <TextBlock Text="왼쪽 스틱 데드존" FontSize="11"
+                               Foreground="{StaticResource BrTextSecondary}" />
+                    <Slider Minimum="0" Maximum="50" Value="{Binding LeftDeadzone}" />
+                    <TextBlock FontSize="10" Foreground="{StaticResource BrTextSecondary}">
+                        <Run Text="{Binding LeftDeadzone, StringFormat={}{0:F0}}" /><Run Text="%" />
+                    </TextBlock>
+                </StackPanel>
+                <StackPanel Grid.Column="1" Margin="0,0,8,0">
+                    <TextBlock Text="오른쪽 스틱 데드존" FontSize="11"
+                               Foreground="{StaticResource BrTextSecondary}" />
+                    <Slider Minimum="0" Maximum="50" Value="{Binding RightDeadzone}" />
+                    <TextBlock FontSize="10" Foreground="{StaticResource BrTextSecondary}">
+                        <Run Text="{Binding RightDeadzone, StringFormat={}{0:F0}}" /><Run Text="%" />
+                    </TextBlock>
+                </StackPanel>
+                <StackPanel Grid.Column="2">
+                    <TextBlock Text="트리거 데드존" FontSize="11"
+                               Foreground="{StaticResource BrTextSecondary}" />
+                    <Slider Minimum="0" Maximum="30" Value="{Binding TriggerDeadzone}" />
+                    <TextBlock FontSize="10" Foreground="{StaticResource BrTextSecondary}">
+                        <Run Text="{Binding TriggerDeadzone, StringFormat={}{0:F0}}" /><Run Text="%" />
+                    </TextBlock>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- 매핑 테이블 -->
+        <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto">
+            <ItemsControl ItemsSource="{Binding Rows}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate DataType="{x:Type vm:MappingRowViewModel}">
+                        <Border Background="{StaticResource BrBgCard}"
+                                BorderBrush="{StaticResource BrBorder}"
+                                BorderThickness="0,0,0,1"
+                                Padding="10,8">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="160" />
+                                    <ColumnDefinition Width="140" />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="60" />
+                                </Grid.ColumnDefinitions>
+
+                                <!-- 입력 이름 -->
+                                <TextBlock Grid.Column="0" Text="{Binding InputName}"
+                                           VerticalAlignment="Center" FontSize="12" />
+
+                                <!-- 동작 타입 -->
+                                <ComboBox Grid.Column="1"
+                                          ItemsSource="{Binding ActionTypes}"
+                                          SelectedItem="{Binding SelectedActionType}"
+                                          Margin="0,0,8,0" />
+
+                                <!-- 동작 파라미터 -->
+                                <Grid Grid.Column="2">
+                                    <!-- 키 코드 -->
+                                    <TextBox Text="{Binding KeyCode, UpdateSourceTrigger=PropertyChanged}"
+                                             Visibility="{Binding IsKeyAction, Converter={StaticResource BoolToVis}}"
+                                             ToolTip="VK_RETURN, Ctrl+C, A, F5 등" />
+                                    <!-- 텍스트 -->
+                                    <TextBox Text="{Binding TextValue, UpdateSourceTrigger=PropertyChanged}"
+                                             Visibility="{Binding IsTextAction, Converter={StaticResource BoolToVis}}"
+                                             ToolTip="입력할 텍스트" />
+                                    <!-- 동작 표시 -->
+                                    <TextBlock Text="{Binding ActionName}"
+                                               Foreground="{StaticResource BrTextSecondary}"
+                                               VerticalAlignment="Center" FontSize="11">
+                                        <TextBlock.Visibility>
+                                            <MultiBinding>
+                                                <MultiBinding.Converter>
+                                                    <views:NorVisConverter />
+                                                </MultiBinding.Converter>
+                                                <Binding Path="IsKeyAction" />
+                                                <Binding Path="IsTextAction" />
+                                            </MultiBinding>
+                                        </TextBlock.Visibility>
+                                    </TextBlock>
+                                </Grid>
+
+                                <!-- 지우기 버튼 -->
+                                <Button Grid.Column="3" Content="지우기"
+                                        Margin="8,0,0,0" FontSize="10"
+                                        Foreground="{StaticResource BrDanger}"
+                                        Visibility="{Binding HasMapping, Converter={StaticResource BoolToVis}}"
+                                        Command="{Binding DataContext.ClearCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                        CommandParameter="{Binding}" />
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+
+        <!-- 저장 버튼 -->
+        <Button Grid.Row="3" Content="프로파일 저장"
+                Command="{Binding SaveCommand}"
+                Style="{StaticResource AccentButton}"
+                HorizontalAlignment="Right" Margin="0,8,0,0" />
+    </Grid>
+</UserControl>

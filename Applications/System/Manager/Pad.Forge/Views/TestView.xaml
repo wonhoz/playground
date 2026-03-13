@@ -1,0 +1,140 @@
+<UserControl x:Class="PadForge.Views.TestView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:views="clr-namespace:PadForge.Views">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- ── 스틱 시각화 ── -->
+        <Border Grid.Row="0" Background="{StaticResource BrBgCard}"
+                BorderBrush="{StaticResource BrBorder}" BorderThickness="1"
+                CornerRadius="8" Padding="16" Margin="0,0,0,16">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition /><ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <!-- 왼쪽 스틱 -->
+                <StackPanel Grid.Column="0" HorizontalAlignment="Center">
+                    <TextBlock Text="왼쪽 스틱" FontSize="12"
+                               Foreground="{StaticResource BrTextSecondary}"
+                               HorizontalAlignment="Center" Margin="0,0,0,8" />
+                    <Canvas Width="100" Height="100">
+                        <!-- 외곽 원 -->
+                        <Ellipse Canvas.Left="0" Canvas.Top="0"
+                                 Width="100" Height="100"
+                                 Stroke="{StaticResource BrBorder}" StrokeThickness="1"
+                                 Fill="{StaticResource BrBgDeep}" />
+                        <!-- 중앙 십자 -->
+                        <Line X1="50" Y1="0" X2="50" Y2="100"
+                              Stroke="{StaticResource BrBorder}" StrokeThickness="0.5" />
+                        <Line X1="0" Y1="50" X2="100" Y2="50"
+                              Stroke="{StaticResource BrBorder}" StrokeThickness="0.5" />
+                        <!-- 스틱 점 -->
+                        <Ellipse Width="10" Height="10"
+                                 Fill="{StaticResource BrAccent}">
+                            <Canvas.Left>
+                                <Binding Path="LeftStickX" Converter="{x:Static views:StickPosConverter.Instance}" />
+                            </Canvas.Left>
+                            <Canvas.Top>
+                                <Binding Path="LeftStickY" Converter="{x:Static views:StickPosConverter.Instance}" />
+                            </Canvas.Top>
+                        </Ellipse>
+                    </Canvas>
+                </StackPanel>
+
+                <!-- 오른쪽 스틱 -->
+                <StackPanel Grid.Column="1" HorizontalAlignment="Center">
+                    <TextBlock Text="오른쪽 스틱" FontSize="12"
+                               Foreground="{StaticResource BrTextSecondary}"
+                               HorizontalAlignment="Center" Margin="0,0,0,8" />
+                    <Canvas Width="100" Height="100">
+                        <Ellipse Canvas.Left="0" Canvas.Top="0"
+                                 Width="100" Height="100"
+                                 Stroke="{StaticResource BrBorder}" StrokeThickness="1"
+                                 Fill="{StaticResource BrBgDeep}" />
+                        <Line X1="50" Y1="0" X2="50" Y2="100"
+                              Stroke="{StaticResource BrBorder}" StrokeThickness="0.5" />
+                        <Line X1="0" Y1="50" X2="100" Y2="50"
+                              Stroke="{StaticResource BrBorder}" StrokeThickness="0.5" />
+                        <Ellipse Width="10" Height="10"
+                                 Fill="{StaticResource BrAccent}">
+                            <Canvas.Left>
+                                <Binding Path="RightStickX" Converter="{x:Static views:StickPosConverter.Instance}" />
+                            </Canvas.Left>
+                            <Canvas.Top>
+                                <Binding Path="RightStickY" Converter="{x:Static views:StickPosConverter.Instance}" />
+                            </Canvas.Top>
+                        </Ellipse>
+                    </Canvas>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- ── 트리거 바 ── -->
+        <Border Grid.Row="1" Background="{StaticResource BrBgCard}"
+                BorderBrush="{StaticResource BrBorder}" BorderThickness="1"
+                CornerRadius="8" Padding="16" Margin="0,0,0,16">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition /><ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0" Margin="0,0,16,0">
+                    <TextBlock Text="LT" Foreground="{StaticResource BrTextSecondary}" FontSize="12" />
+                    <ProgressBar Value="{Binding LT}" Maximum="100" Height="12"
+                                 Foreground="{StaticResource BrAccent}"
+                                 Background="{StaticResource BrBgDeep}" />
+                    <TextBlock FontSize="10" Foreground="{StaticResource BrTextSecondary}">
+                        <Run Text="{Binding LT, StringFormat={}{0:F0}}" /><Run Text="%" />
+                    </TextBlock>
+                </StackPanel>
+                <StackPanel Grid.Column="1">
+                    <TextBlock Text="RT" Foreground="{StaticResource BrTextSecondary}" FontSize="12" />
+                    <ProgressBar Value="{Binding RT}" Maximum="100" Height="12"
+                                 Foreground="{StaticResource BrAccent}"
+                                 Background="{StaticResource BrBgDeep}" />
+                    <TextBlock FontSize="10" Foreground="{StaticResource BrTextSecondary}">
+                        <Run Text="{Binding RT, StringFormat={}{0:F0}}" /><Run Text="%" />
+                    </TextBlock>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- ── 진동 테스트 ── -->
+        <Border Grid.Row="2" Background="{StaticResource BrBgCard}"
+                BorderBrush="{StaticResource BrBorder}" BorderThickness="1"
+                CornerRadius="8" Padding="16">
+            <StackPanel>
+                <TextBlock Text="진동 테스트" FontWeight="SemiBold" Margin="0,0,0,12" />
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition /><ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0" Margin="0,0,16,0">
+                        <TextBlock Text="왼쪽 모터" FontSize="12"
+                                   Foreground="{StaticResource BrTextSecondary}" />
+                        <Slider Minimum="0" Maximum="1" Value="{Binding LeftVibration}" />
+                        <TextBlock FontSize="10" Foreground="{StaticResource BrTextSecondary}">
+                            <Run Text="{Binding LeftVibration, StringFormat={}{0:P0}}" />
+                        </TextBlock>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1">
+                        <TextBlock Text="오른쪽 모터" FontSize="12"
+                                   Foreground="{StaticResource BrTextSecondary}" />
+                        <Slider Minimum="0" Maximum="1" Value="{Binding RightVibration}" />
+                        <TextBlock FontSize="10" Foreground="{StaticResource BrTextSecondary}">
+                            <Run Text="{Binding RightVibration, StringFormat={}{0:P0}}" />
+                        </TextBlock>
+                    </StackPanel>
+                </Grid>
+                <Button Content="진동 정지" Command="{Binding StopVibrationCommand}"
+                        Foreground="{StaticResource BrDanger}"
+                        HorizontalAlignment="Left" Margin="0,8,0,0" />
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>

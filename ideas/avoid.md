@@ -2,7 +2,7 @@
 
 > 이 파일은 브레인스토밍 시 **이미 제안되거나 구현된 아이디어를 다시 꺼내지 않도록** 하는 필터다.
 > 새 아이디어를 제안하기 전 반드시 이 목록을 확인할 것.
-> 마지막 갱신: 2026-03-14 (27차 — 브레인스토밍 20개 추가)
+> 마지막 갱신: 2026-03-14 (27차 — 구현완료 갱신: Str.Forge, Win.Scope, Orbit.Raid)
 >
 > **구조**: 구현완료 앱 → 구현완료 게임 → 아카이브 → 제안된 미구현 아이디어(앱/게임) → 유사 개념 그룹
 
@@ -66,6 +66,8 @@
 | `Icon.Maker` | Tools.Utility | SVG/PNG→ICO 멀티사이즈 변환 + WriteableBitmap 픽셀 그리드 에디터 ★25차 |
 | `JSON.Tree` | Dev/Inspector | JSON/YAML/TOML 트리 탐색기 + 검색 필터 + Side-by-Side Diff + 형식 변환 ★25차 |
 | `JSON.Fmt` | Tools.Utility | JSON 붙여넣기 즉시 beautify + 구문 강조 + 오류 줄/열 진단 + Lenient 파싱(주석·trailing comma·따옴표) ★26차 |
+| `Str.Forge` | Development/Analyzer | 멀티파일 Find & Replace 엔진 ★27차 |
+| `Win.Scope` | System/Manager | 실행 창 Z-order·투명도·클릭통과 실시간 조작 인스펙터 ★27차 |
 
 ---
 
@@ -106,6 +108,7 @@
 | `Snap.Duel` | Casual/2P ★23차 |
 | `Escape.Key` | Puzzle/Educational ★24차 |
 | `Bug.Hunt` | Puzzle/Casual ★24차 |
+| `Orbit.Raid` | Puzzle/Physics ★27차 |
 
 ---
 
@@ -268,11 +271,9 @@
 | `Bench.Run` | C#/.NET 코드 스니펫 BenchmarkDotNet 실행기 + 결과 차트 비교 ★25차 |
 | `Schema.Diff` | 두 SQLite/JSON Schema/OpenAPI 명세 구조 차이 시각화 + Breaking Change 감지 ★25차 |
 | `Clip.Snap` | 전역 단축키 영역 선택 화면 캡처 → 클립보드 즉시 복사 + 최근 히스토리 트레이 앱 ★25차 |
-| `Str.Forge` | 정규식 멀티파일 Find&Replace + 패치 미리보기 + 프리셋 ★27차 |
 | `Csv.Diff` | CSV 두 버전 키 컬럼 기반 셀 단위 Diff + Excel 내보내기 ★27차 |
 | `Link.Check` | HTML/MD/소스코드 깨진 링크 일괄 감사 + HTTP 상태 보고서 ★27차 |
 | `Git.Guard` | Git 훅 GUI 설정기 (pre-commit·commit-msg·pre-push 조건 편집 + 스크립트 자동 생성) ★27차 |
-| `Win.Scope` | 실행 창 Z-order·투명도·클릭통과 실시간 조작 인스펙터 ★27차 |
 | `Diff.Snap` | 폴더 스냅샷 타임머신 — 시점 간 파일 추가/삭제/변경 타임라인 ★27차 |
 | `Img.Slice` | UI 목업·스프라이트시트 자동 슬라이서 (격자·여백감지·9-patch) ★27차 |
 | `Path.Audit` | ETW 기반 드라이버 없는 프로세스 파일시스템 접근 감사기 ★27차 |
@@ -593,7 +594,6 @@
 | `Glass.Drop` | Puzzle/Physics | 유리 낙하 각도로 균열 패턴 제어, 갇힌 물체 해방 ★27차 |
 | `Thermal.Run` | Puzzle/Simulation | 열전도 방정식 기반 열원·단열재 배치 온도 분포 제어 퍼즐 ★27차 |
 | `Stitch.Grid` | Puzzle/Casual | X자 2색 자수 조각 대각선 매칭 폭발 퍼즐 ★27차 |
-| `Orbit.Raid` | Puzzle/Physics | 연료 없이 중력 어시스트만으로 적 위성 궤도 침투 ★27차 |
 | `Sand.Storm` | Puzzle/Strategy | 바람 예보 기반 방벽 건설, 모래폭풍 생존 탈출 퍼즐 ★27차 |
 | `Ink.Drop` | Puzzle/Physics | 기울기 제어 + 물방울 합류 + RGB 색 혼합 목표 달성 ★27차 |
 | `Volt.Race` | Racing/Puzzle | 전기 회로 소자(저항·콘덴서·인덕터)가 트랙 기믹인 레이싱 ★27차 |

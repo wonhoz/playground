@@ -2,7 +2,7 @@
 
 > 이 파일은 브레인스토밍 시 **이미 제안되거나 구현된 아이디어를 다시 꺼내지 않도록** 하는 필터다.
 > 새 아이디어를 제안하기 전 반드시 이 목록을 확인할 것.
-> 마지막 갱신: 2026-03-14 (23차)
+> 마지막 갱신: 2026-03-14 (24차)
 >
 > **구조**: 구현완료 앱 → 구현완료 게임 → 아카이브 → 제안된 미구현 아이디어(앱/게임) → 유사 개념 그룹
 
@@ -258,6 +258,11 @@
 | `Perm.Audit` | Windows 앱 권한 감사·관리 (카메라·마이크·위치) |
 | `Token.Watch` | API 키·서비스 토큰·라이선스 만료일 통합 로컬 대시보드 |
 | `WHOIS.Cast` | WHOIS·DNS 레코드·IP 지오로케이션 통합 도메인 조회 GUI ★23차 |
+| `SQL.Lens` | SQLite 쿼리 실행 계획 시각화 + 미인덱스 탐지 + 최적화 힌트 ★24차 |
+| `Hotkey.Map` | 전역 단축키 충돌 감지 + 미사용 단축키 발굴기 ★24차 |
+| `Badge.Forge` | 완전 오프라인 shields.io 스타일 SVG/PNG 배지 생성기 ★24차 |
+| `ANSI.Forge` | ANSI 아트 에디터 + 터미널 이스케이프 코드 뷰어 ★24차 |
+| `Locale.View` | 200+ 로케일 날짜·숫자·통화·달력 형식 오프라인 브라우저 ★24차 |
 
 ### Apps — Screen / UI / Media / Files
 
@@ -295,6 +300,8 @@
 | `OCR.Live` | 화면 영역 실시간 스트리밍 OCR + 번역 파이프라인 ★23차 |
 | `Tape.Delay` | 화면 타임시프트 뷰어 (지정 초 딜레이 2번 모니터 표시) ★23차 |
 | `Kiosk.Mode` | 이미지·동영상·웹 무한 루프 키오스크 디스플레이 관리자 ★23차 |
+| `Manga.View` | CBZ/CBR/7Z 만화·망가 오프라인 리더 (RTL/이중 페이지) ★24차 |
+| `Img.Compare` | 픽셀 diff + SSIM/PSNR 이미지 품질 비교기 ★24차 |
 
 ### Apps — Productivity / Personal Finance / Health
 
@@ -328,6 +335,7 @@
 | `Path.Link` | Windows 심볼릭 링크·정션·하드링크 GUI 관리자 |
 | `RSS.Cast` | 완전 오프라인 RSS/Atom 리더 (SQLite, 팟캐스트 오디오) |
 | `Theme.Forge` | 색상 테마 팔레트 디자이너 (HSL 색상환, WCAG 검사) |
+| `Timer.Chain` | 운동·요리 프로토콜 순차 자동 실행 타이머 체인 ★24차 |
 
 ### Apps — Audio / Sound
 
@@ -341,6 +349,8 @@
 | `Audio.Cut` | 오디오 파형 트리머·편집기 (페이드·정규화·무음 제거) |
 | `Karaoke.Cast` | 로컬 가라오케 플레이어 (LRC 동기화, Demucs 보컬 분리) |
 | `Flow.Beat` | 바이노럴 비트·집중 음악 로컬 생성기 |
+| `Wave.Gen` | 사인파·구형파·핑크노이즈·스위프 정밀 오디오 테스트 신호 생성기 ★24차 |
+| `Sample.Forge` | WAV/AIFF 샘플 파형 미리보기·BPM 감지·멀티태그 라이브러리 ★24차 |
 
 ### Apps — AI / Family / Social
 
@@ -535,6 +545,16 @@
 | `Bloom.Craft` | Strategy/Simulation | 암세포 BFS 확산 vs 면역세포 AI 격자 전략 ★23차 |
 | `Pivot.Chase` | Puzzle/Arcade | 45° 각도 제약 이동으로 추격·회피 ★23차 |
 | `Snap.Duel` | Casual/2P Local | 반응속도 로컬 2P+ 대전 파티 게임 ★23차 |
+| `Cargo.Pack` | Puzzle/Logic | 3D 아이소메트릭 박스 최적 패킹 퍼즐 ★24차 |
+| `Rhythm.Type` | Rhythm/Educational | 가사를 박자 타이밍에 맞춰 입력하는 리듬 타이핑 ★24차 |
+| `Bubble.Tube` | Puzzle/Casual | 컬러 볼 파이프 소팅 — 같은 색을 같은 튜브로 ★24차 |
+| `Escape.Key` | Puzzle/Educational | 현대 암호학(RSA·AES·해시) 기반 방탈출 ★24차 |
+| `Rain.Maker` | Strategy/Simulation | 구름·바람 조절 날씨 신으로 농작물 성장 최적화 ★24차 |
+| `Color.Map` | Puzzle/Educational | 수학 4색 정리 체험 지도 채색 퍼즐 ★24차 |
+| `Phantom.Step` | Arcade/Runner | 내 발자국이 N초 후 함정이 되는 자기 회피 러너 ★24차 |
+| `Bug.Hunt` | Puzzle/Casual | 코드 스니펫 버그 줄 클릭 찾기 파티 퀴즈 ★24차 |
+| `Chord.Build` | Puzzle/Music | 분위기 목표에 맞는 코드 진행 선택 화성학 퍼즐 ★24차 |
+| `Path.Grid` | Strategy/Educational | 격자 최단경로 설계 vs AI 장애물 방해 대결 ★24차 |
 
 ---
 
@@ -617,3 +637,23 @@
 | **세포 확산 전략** | Bloom.Craft ≠ Virus.Spread (도시 그래프) ≠ Colony.Sim (개미) |
 | **각도 제약 이동** | Pivot.Chase |
 | **반응속도 2P 대전** | Snap.Duel ≠ Reflex.Tap (솔로 훈련) |
+| **만화 리더** | Manga.View (CBZ/CBR/PDF 양면+세로) ≠ Mark.View (Markdown) ≠ PDF.Forge (편집) |
+| **오디오 테스트 신호 생성** | Wave.Gen (사인/구형/삼각파 출력) ≠ Sample.Forge (드럼 샘플 시퀀서) ≠ Ear.Train (청음 훈련) |
+| **순차/체인 타이머** | Timer.Chain (직렬 순서 실행) ≠ Split.Ring (병렬 인터벌) ≠ Sched.Cast (작업 스케줄러) |
+| **배지/레이블 이미지 생성** | Badge.Forge (SVG shields.io 스타일) ≠ QR.Forge (QR코드) ≠ Icon.Hunt (아이콘 검색) |
+| **ANSI/터미널 아트** | ANSI.Forge (256색 ANSI 에디터) ≠ Char.Art (ASCII 변환) ≠ Word.Cloud (단어 시각화) |
+| **SQL 쿼리 계획 시각화** | SQL.Lens (EXPLAIN ANALYZE 트리 뷰어) ≠ DB.Peek (스키마 탐색) ≠ Table.Craft (CSV 편집) |
+| **이미지 품질 비교** | Img.Compare (SSIM/PSNR/픽셀 diff) ≠ Deep.Diff (텍스트 diff) ≠ Diff.Prompt (AI 출력 diff) |
+| **단축키 충돌 감지** | Hotkey.Map (전역 단축키 시각화+충돌) ≠ Key.Map (리맵핑 설정) ≠ Key.Test (키보드 테스트) |
+| **드럼 샘플 시퀀서** | Sample.Forge (WAV 라이브러리+그리드 패턴) ≠ Beat.Drop (리듬 퍼포먼스) ≠ Wave.Gen (신호 생성) |
+| **로케일/i18n 브라우저** | Locale.View (날짜·숫자·통화 렌더링 비교) ≠ Dict.Cast (사전) ≠ Text.Forge (텍스트 변환) |
+| **3D 아이소메트릭 패킹 퍼즐** | Cargo.Pack ≠ Auto.Build (테트로미노 2D) ≠ Orbit.Craft (궤도 설계) |
+| **리듬 타이핑** | Rhythm.Type (비트에 맞춰 타이핑) ≠ Type.Race (속도 경쟁) ≠ Glyph.Rush (글리프 스피드) ≠ Beat.Drop (악기 퍼포먼스) |
+| **튜브 색상 소팅** | Bubble.Tube ≠ Hue.Flow (파이프 색 연결) ≠ Color.Map (4색 정리) |
+| **암호학 방탈출** | Escape.Key (암호 해독 체인 탈출) ≠ Cipher.Quest (역사적 암호 해독) ≠ Room.Code (일반 퍼즐 방탈출) |
+| **날씨 시뮬레이션 퍼즐** | Rain.Maker (구름 배치→강수량 목표) ≠ Sand.Fall (모래 낙하 샌드박스) ≠ Leaf.Grow (L-시스템 성장) |
+| **4색 정리 퍼즐** | Color.Map ≠ Bubble.Tube (수직 소팅) ≠ Hue.Flow (파이프 연결) |
+| **발자국 함정 러너** | Phantom.Step (발자국 잔상→함정) ≠ Loop.Race (궤도 추월) ≠ Shadow.Run (그림자 2중 이동) |
+| **코드 버그 찾기** | Bug.Hunt (소스코드 차이→버그 탐색) ≠ Circuit.Break (전기 회로 디버깅) |
+| **화성학 코드 진행 게임** | Chord.Build (코드 연결 설계) ≠ Ear.Train (청음 훈련) ≠ Sound.Grid (사운드 합성) ≠ Chord.Strike (리듬 퍼포먼스) |
+| **경로 최적화 대결** | Path.Grid (격자 최단경로 vs AI 장애물) ≠ Trace.Run (실시간 경로 레이싱) |

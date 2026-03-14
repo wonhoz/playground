@@ -1,0 +1,186 @@
+<Window x:Class="CircuitBreak.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Circuit.Break — 전기 회로 디버깅 퍼즐"
+        Width="1100" Height="780"
+        MinWidth="900" MinHeight="600"
+        Background="{StaticResource BgBrush}"
+        WindowStartupLocation="CenterScreen"
+        Loaded="Window_Loaded">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="52"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="220"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+
+        <!-- 헤더 -->
+        <Border Grid.Row="0" Background="{StaticResource Bg2Brush}"
+                BorderBrush="{StaticResource BorderBrush2}" BorderThickness="0,0,0,1">
+            <Grid Margin="20,0">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock Text="⚡ Circuit.Break" FontSize="20" FontWeight="Bold"
+                               Foreground="{StaticResource AccentBrush}"/>
+                    <TextBlock x:Name="LevelTitle" Text="" FontSize="16"
+                               Foreground="{StaticResource MutedBrush}"
+                               VerticalAlignment="Center" Margin="16,0,0,0"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                    <Button Content="◀ 이전" Click="BtnPrev_Click" Margin="0,0,8,0"/>
+                    <Button Content="다음 ▶" Click="BtnNext_Click" Margin="0,0,8,0"/>
+                    <Button Content="↺ 리셋" Click="BtnReset_Click" Margin="0,0,8,0"/>
+                    <Button x:Name="BtnSimulate" Content="▶ 시뮬레이션" Click="BtnSimulate_Click"
+                            Background="{StaticResource AccentBrush}" Foreground="White" FontWeight="Bold"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- 회로 Canvas -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="220"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- 회로도 -->
+            <Border Grid.Column="0" Background="{StaticResource Bg2Brush}"
+                    BorderBrush="{StaticResource BorderBrush2}" BorderThickness="0,0,1,0"
+                    Margin="8">
+                <Grid>
+                    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                        <Canvas x:Name="CircuitCanvas" Width="750" Height="500"
+                                MouseDown="Canvas_MouseDown"/>
+                    </ScrollViewer>
+                    <!-- 설명 오버레이 -->
+                    <TextBlock x:Name="DescText" Text="" Foreground="{StaticResource MutedBrush}"
+                               FontSize="12" TextWrapping="Wrap"
+                               VerticalAlignment="Bottom" HorizontalAlignment="Left"
+                               Margin="12,0,0,12" MaxWidth="400"/>
+                </Grid>
+            </Border>
+
+            <!-- 오른쪽 패널: 도구 + 속성 -->
+            <StackPanel Grid.Column="1" Margin="8,8,8,0">
+                <!-- 도구 선택 -->
+                <Border Background="{StaticResource Bg2Brush}"
+                        BorderBrush="{StaticResource BorderBrush2}" BorderThickness="1"
+                        CornerRadius="8" Padding="12" Margin="0,0,0,8">
+                    <StackPanel>
+                        <TextBlock Text="측정 도구" FontSize="12" FontWeight="Bold"
+                                   Foreground="{StaticResource TextBrush}" Margin="0,0,0,8"/>
+                        <Button x:Name="BtnVoltmeter" Content="🔋 전압계" Click="BtnVoltmeter_Click"
+                                Margin="0,0,0,4" HorizontalAlignment="Stretch"/>
+                        <Button x:Name="BtnOhmmeter" Content="🔌 저항계" Click="BtnOhmmeter_Click"
+                                Margin="0,0,0,4" HorizontalAlignment="Stretch"/>
+                        <Button x:Name="BtnAmmeter" Content="⚡ 전류계" Click="BtnAmmeter_Click"
+                                HorizontalAlignment="Stretch"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- 측정 결과 -->
+                <Border Background="{StaticResource Bg2Brush}"
+                        BorderBrush="{StaticResource BorderBrush2}" BorderThickness="1"
+                        CornerRadius="8" Padding="12" Margin="0,0,0,8">
+                    <StackPanel>
+                        <TextBlock Text="측정값" FontSize="12" FontWeight="Bold"
+                                   Foreground="{StaticResource TextBrush}" Margin="0,0,0,8"/>
+                        <TextBlock x:Name="MeterDisplay" Text="—"
+                                   FontSize="28" FontWeight="Bold"
+                                   Foreground="{StaticResource VoltBrush}"
+                                   HorizontalAlignment="Center" Margin="0,4,0,4"/>
+                        <TextBlock x:Name="MeterUnit" Text=""
+                                   FontSize="12" Foreground="{StaticResource MutedBrush}"
+                                   HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- 선택된 소자 수정 -->
+                <Border x:Name="FixPanel" Background="{StaticResource Bg2Brush}"
+                        BorderBrush="{StaticResource BorderBrush2}" BorderThickness="1"
+                        CornerRadius="8" Padding="12" Visibility="Collapsed">
+                    <StackPanel>
+                        <TextBlock x:Name="FixTitle" Text="소자 수정" FontSize="12" FontWeight="Bold"
+                                   Foreground="{StaticResource BugBrush}" Margin="0,0,0,8"/>
+                        <TextBlock x:Name="FixDesc" Text="" FontSize="11"
+                                   Foreground="{StaticResource MutedBrush}"
+                                   TextWrapping="Wrap" Margin="0,0,0,8"/>
+                        <Button x:Name="BtnFix" Content="🔧 수정 (버그 제거)" Click="BtnFix_Click"
+                                Background="{StaticResource FixedBrush}" Foreground="White"
+                                FontWeight="Bold" HorizontalAlignment="Stretch"/>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </Grid>
+
+        <!-- 하단 시뮬레이션 결과 -->
+        <Border Grid.Row="2" Background="{StaticResource Bg2Brush}"
+                BorderBrush="{StaticResource BorderBrush2}" BorderThickness="0,1,0,0"
+                Padding="12">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <ScrollViewer Grid.Column="0" VerticalScrollBarVisibility="Auto">
+                    <StackPanel>
+                        <TextBlock Text="시뮬레이션 결과" FontSize="12" FontWeight="Bold"
+                                   Foreground="{StaticResource TextBrush}" Margin="0,0,0,8"/>
+                        <ItemsControl x:Name="ResultList">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Background="{StaticResource Bg3Brush}"
+                                            BorderBrush="{StaticResource BorderBrush2}"
+                                            BorderThickness="1" CornerRadius="4"
+                                            Padding="8,4" Margin="0,0,4,4">
+                                        <TextBlock Text="{Binding}" FontSize="11"
+                                                   Foreground="{StaticResource TextBrush}"
+                                                   FontFamily="Consolas"/>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
+                </ScrollViewer>
+
+                <!-- 목표 전압 표시 -->
+                <StackPanel Grid.Column="1" Margin="12,0,0,0">
+                    <TextBlock Text="목표" FontSize="12" FontWeight="Bold"
+                               Foreground="{StaticResource AccentBrush}" Margin="0,0,0,8"/>
+                    <ItemsControl x:Name="TargetList">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding}" FontSize="11"
+                                           Foreground="{StaticResource VoltBrush}"
+                                           FontFamily="Consolas" Margin="0,0,0,2"/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                    <TextBlock x:Name="SolveStatus" Text="" FontSize="14" FontWeight="Bold"
+                               Foreground="{StaticResource FixedBrush}" Margin="0,8,0,0"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- 상태바 -->
+        <Border Grid.Row="3" Background="{StaticResource Bg2Brush}"
+                BorderBrush="{StaticResource BorderBrush2}" BorderThickness="0,1,0,0"
+                Padding="16,0">
+            <Grid>
+                <TextBlock x:Name="StatusBar"
+                           Text="소자를 클릭해 검사하거나 수정하세요. 시뮬레이션으로 결과를 확인하세요."
+                           Foreground="{StaticResource MutedBrush}" FontSize="11"
+                           VerticalAlignment="Center"/>
+                <TextBlock x:Name="BugCount" Text=""
+                           Foreground="{StaticResource BugBrush}" FontSize="11"
+                           HorizontalAlignment="Right" VerticalAlignment="Center"/>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

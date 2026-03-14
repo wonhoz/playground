@@ -2,7 +2,7 @@
 
 > 이 파일은 브레인스토밍 시 **이미 제안되거나 구현된 아이디어를 다시 꺼내지 않도록** 하는 필터다.
 > 새 아이디어를 제안하기 전 반드시 이 목록을 확인할 것.
-> 마지막 갱신: 2026-03-14 (26차 — JSON.Fmt 앱 구현 반영)
+> 마지막 갱신: 2026-03-14 (27차 — 브레인스토밍 20개 추가)
 >
 > **구조**: 구현완료 앱 → 구현완료 게임 → 아카이브 → 제안된 미구현 아이디어(앱/게임) → 유사 개념 그룹
 
@@ -177,6 +177,7 @@
 | `Volume.Cast` | 앱별 볼륨 독립 제어 트레이 |
 | `Fade.Out` | 시스템 볼륨 점진 페이드 수면 타이머 트레이 |
 | `Noti.Hub` | Windows 알림 히스토리 허브 트레이 (모든 Toast 가로채기) |
+| `Hotspot.Cast` | Windows 모바일 핫스팟 원클릭 트레이 (SSID/PW 설정·QR 공유·접속 기기 모니터) ★27차 |
 | `Desk.Paint` | 시간·날씨·계절 기반 월페이퍼 자동 전환 스케줄러 ★22차 |
 | `Time.Lapse` | 화면 타임랩스 레코더 (스크린샷 → MP4/GIF) ★22차 |
 
@@ -238,6 +239,14 @@
 | `Clip.Find` | 검색형 클립보드 히스토리 관리자 |
 | `Svc.Guard` | Windows 서비스 GUI 관리자 |
 | `Run.Book` | 인터랙티브 YAML Runbook/체크리스트 실행기 |
+| `Str.Forge` | 정규식 멀티파일 Find&Replace + 패치 미리보기 + 프리셋 ★27차 |
+| `Csv.Diff` | CSV 두 버전 키 컬럼 기반 셀 단위 Diff + Excel 내보내기 ★27차 |
+| `Link.Check` | HTML/MD/소스코드 깨진 링크 일괄 감사 + HTTP 상태 보고서 ★27차 |
+| `Git.Guard` | Git 훅 GUI 설정기 (pre-commit·commit-msg·pre-push 조건 편집 + 스크립트 자동 생성) ★27차 |
+| `Win.Scope` | 실행 창 Z-order·투명도·클릭통과 실시간 조작 인스펙터 ★27차 |
+| `Diff.Snap` | 폴더 스냅샷 타임머신 — 시점 간 파일 추가/삭제/변경 타임라인 ★27차 |
+| `Img.Slice` | UI 목업·스프라이트시트 자동 슬라이서 (격자·여백감지·9-patch) ★27차 |
+| `Path.Audit` | ETW 기반 드라이버 없는 프로세스 파일시스템 접근 감사기 ★27차 |
 | `Archive.Forge` | ZIP/7z/TAR.GZ 아카이브 생성·관리자 |
 | `DNS.Watch` | DNS 쿼리 실시간 모니터·차단 트레이 |
 | `Reg.Vault` | Windows 레지스트리 고급 브라우저·비교기 |
@@ -365,6 +374,7 @@
 | `RSS.Cast` | 완전 오프라인 RSS/Atom 리더 (SQLite, 팟캐스트 오디오) |
 | `Theme.Forge` | 색상 테마 팔레트 디자이너 (HSL 색상환, WCAG 검사) |
 | `Timer.Chain` | 운동·요리 프로토콜 순차 자동 실행 타이머 체인 ★24차 |
+| `Cue.Cast` | WPM 속도 조절 텔레프롬프터 (미러 반전·2번 모니터·원고 마크다운 강조) ★27차 |
 
 ### Apps — Audio / Sound
 
@@ -581,6 +591,16 @@
 | `Pulse.Run` | Rhythm/Runner | BPM 박자 온비트 점프 → 콤보 보너스 무한 러너 ★25차 |
 | `Magma.Flow` | Puzzle/Physics | 용암 점성 유체 흐름 제어, 경사·냉각석 배치 목표 유도 퍼즐 ★25차 |
 | `Grid.Hack` | Puzzle/Educational | 제한 명령어 슬롯으로 격자 로봇 프로그래밍 퍼즐 ★25차 |
+| `Knit.Cast` | Puzzle/Logic | 격자 실 교차 Over/Under 순서 지정으로 목표 매듭 패턴 완성 ★27차 |
+| `Fog.Build` | Strategy/Memory | 이동 시만 시야 노출, 기억력 기반 안개 전쟁 턴제 전략 ★27차 |
+| `Glass.Drop` | Puzzle/Physics | 유리 낙하 각도로 균열 패턴 제어, 갇힌 물체 해방 ★27차 |
+| `Thermal.Run` | Puzzle/Simulation | 열전도 방정식 기반 열원·단열재 배치 온도 분포 제어 퍼즐 ★27차 |
+| `Stitch.Grid` | Puzzle/Casual | X자 2색 자수 조각 대각선 매칭 폭발 퍼즐 ★27차 |
+| `Orbit.Raid` | Puzzle/Physics | 연료 없이 중력 어시스트만으로 적 위성 궤도 침투 ★27차 |
+| `Sand.Storm` | Puzzle/Strategy | 바람 예보 기반 방벽 건설, 모래폭풍 생존 탈출 퍼즐 ★27차 |
+| `Ink.Drop` | Puzzle/Physics | 기울기 제어 + 물방울 합류 + RGB 색 혼합 목표 달성 ★27차 |
+| `Volt.Race` | Racing/Puzzle | 전기 회로 소자(저항·콘덴서·인덕터)가 트랙 기믹인 레이싱 ★27차 |
+| `Root.War` | Strategy/2P | 지하 격자 뿌리 성장 영토 대전, 영양분 비교 충돌 흡수 ★27차 |
 
 ---
 
@@ -701,3 +721,23 @@
 | **격자 로봇 프로그래밍** | Grid.Hack (Logo 터틀 스타일 제한 명령어) ≠ Asm.Quest (어셈블리 레지스터 목표값) ≠ Path.Grid (경로 최적화 vs AI) |
 | **ICO 변환 / 아이콘 편집** | Icon.Maker ✅ (ICO 변환+픽셀 그리드 에디터) ≠ Icon.Forge (ICO/ICNS/Android/iOS 멀티플랫폼 일괄 변환) ≠ Icon.Hunt ✅ (아이콘 검색) |
 | **JSON/구조화 데이터 탐색** | JSON.Tree ✅ (트리 탐색+검색+Diff+포맷 변환) ≠ JSON.Fmt ✅ (beautify+Lenient파싱+오류 진단) ≠ Json.Craft (포맷터+YAML/TOML 변환기) ≠ DB.Peek (SQLite 스키마 탐색) ≠ SQL.Lens ✅ (쿼리 계획 시각화) |
+| **파일 내용 Find&Replace** | Str.Forge (멀티파일 정규식 치환+패치 미리보기) ≠ Find.Fast (파일명 검색+grep 뷰어) ≠ Text.Forge ✅ (해시·인코딩 변환) |
+| **CSV/표 데이터 비교** | Csv.Diff (두 CSV 키 매칭 셀 diff) ≠ Deep.Diff ✅ (텍스트/이미지/HEX 범용 비교) ≠ Schema.Diff (스키마 구조 diff) ≠ Table.Craft (단일 파일 분석) |
+| **링크 유효성 검사** | Link.Check (HTML/MD/코드 깨진 링크 HTTP 감사) ≠ Api.Probe ✅ (수동 API 테스터) ≠ Uptime.Eye (지속 폴링 모니터) |
+| **모바일 핫스팟 관리** | Hotspot.Cast (Windows 핫스팟 ON/OFF+기기 모니터+QR) ≠ WiFi.Cast ✅ (채널·신호 분석) ≠ VPN.Cast (WireGuard GUI) ≠ DNS.Flip ✅ (DNS 전환) |
+| **텔레프롬프터** | Cue.Cast (WPM 자동 스크롤+미러+2번 모니터) ≠ Slide.Cast (슬라이드 프레젠테이션) ≠ Slide.Timer (발표 타이머) ≠ Mark.View ✅ (마크다운 뷰어) |
+| **Git 훅 관리** | Git.Guard (훅 GUI 설정+스크립트 생성) ≠ Git.Stats ✅ (통계 분석) ≠ Git.Reel (커밋 그래프) ≠ Git.Blame (blame 히트맵) |
+| **창 시각 속성 제어** | Win.Scope (Z-order·투명도·클릭통과 조작) ≠ Win.Spy (UIAutomation 계층 탐색) ≠ Win.Tamer (CPU 친화도·우선순위) |
+| **폴더 변경 이력 추적** | Diff.Snap (스냅샷 아카이빙→시점 간 비교 타임라인) ≠ Folder.Sync (동기화) ≠ Deep.Diff ✅ (즉시 2-way 비교) ≠ Dupe.Guard (실시간 중복 감시) |
+| **스프라이트시트 슬라이싱** | Img.Slice (큰 이미지→개별 에셋 분해, 격자/여백감지/9-patch) ≠ Sprite.Forge (개별→시트 패킹, 반대 방향) ≠ Img.Forge (일괄 처리) |
+| **파일시스템 접근 감사** | Path.Audit (ETW 실시간 프로세스 파일 I/O 추적) ≠ App.Temp (샌드박스 변경 롤백) ≠ Spy.Guard (클립보드·마이크 무단 접근) ≠ Proc.Tree (프로세스 트리+DLL) |
+| **실 교차/매듭 퍼즐** | Knit.Cast (격자 실 Over/Under 배치→목표 패턴 완성) ≠ Knot.Craft (기존 매듭 드래그 풀기) ≠ Net.Weave (그래프 평면화) ≠ Slice.Chain (체인 절단) |
+| **안개 전쟁/기억력 전략** | Fog.Build (이동 시만 시야, 기억 의존 턴제) ≠ Hex.Storm (완전 공개 마이크로 RTS) ≠ Tactics.Rush (전술 전투) ≠ Echo.Hunt (소나 핑 기반 탐색) |
+| **유리/취성 파괴 퍼즐** | Glass.Drop (낙하 각도로 균열 방향 제어) ≠ Fracture.Fall (Voronoi 지형 러너) ≠ Jenga.Pull (블록 제거) ≠ Crush.Box (압착 샌드박스) |
+| **열전도/온도 시뮬 퍼즐** | Thermal.Run (유한차분 열방정식 온도 분포 제어) ≠ Magma.Flow (용암 점성 유체) ≠ Crystal.Grow (결정화 셀룰러 오토마타) |
+| **자수/격자 텍스타일 퍼즐** | Stitch.Grid (X자 2색 자수 대각선 매칭 폭발) ≠ Hue.Flow ✅ (파이프 색 연결) ≠ Flip.Grid (타일 뒤집기) ≠ Chain.Blast (색 구슬 발사) |
+| **중력 궤도 게임** | Orbit.Raid (발사체 자신이 중력 어시스트로 침투) ≠ Orbit.Craft ✅ (궤도 설계 퍼즐) ≠ Zero.G (각운동량·스러스터) ≠ Warp.Drift (중력 렌즈 탄환) |
+| **모래/폭풍 생존 퍼즐** | Sand.Storm (바람 예보+방벽 건설 탈출) ≠ Sand.Fall ✅ (낙하 샌드박스) ≠ Seed.Fall (씨앗 분산 물리) ≠ Magma.Flow (용암) |
+| **물방울/기울기 물리 퍼즐** | Ink.Drop (기울기 제어+방울 합류+색 혼합) ≠ Ink.Spread (BFS 전파 전략) ≠ Fluid.Paint (자유 유체 페인팅) ≠ Hue.Flow ✅ (파이프 연결) |
+| **회로 기반 레이싱** | Volt.Race (전기 소자=트랙 기믹 레이싱) ≠ Volt.Chain (회로 설계 퍼즐) ≠ Circuit.Break ✅ (회로 디버깅) ≠ Chip.Logic (논리 게이트 빌더) |
+| **뿌리/균류 성장 대전** | Root.War (지하 격자 뿌리 2P 영토 대전) ≠ Root.Spread (솔로 뿌리 방향 지정) ≠ Spore.Net (슬라임 몰드 단일) ≠ Bloom.Craft (세포 확산 vs AI) |

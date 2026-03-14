@@ -2,7 +2,7 @@
 
 > 이 파일은 브레인스토밍 시 **이미 제안되거나 구현된 아이디어를 다시 꺼내지 않도록** 하는 필터다.
 > 새 아이디어를 제안하기 전 반드시 이 목록을 확인할 것.
-> 마지막 갱신: 2026-03-14 (25차 — 브레인스토밍 20개 추가 + 2개 앱 구현 반영)
+> 마지막 갱신: 2026-03-14 (26차 — JSON.Fmt 앱 구현 반영)
 >
 > **구조**: 구현완료 앱 → 구현완료 게임 → 아카이브 → 제안된 미구현 아이디어(앱/게임) → 유사 개념 그룹
 
@@ -65,6 +65,7 @@
 | `SQL.Lens` | Dev/Tools | SQLite EXPLAIN QUERY PLAN 시각화 + 최적화 힌트 ★24차 |
 | `Icon.Maker` | Tools.Utility | SVG/PNG→ICO 멀티사이즈 변환 + WriteableBitmap 픽셀 그리드 에디터 ★25차 |
 | `JSON.Tree` | Dev/Inspector | JSON/YAML/TOML 트리 탐색기 + 검색 필터 + Side-by-Side Diff + 형식 변환 ★25차 |
+| `JSON.Fmt` | Tools.Utility | JSON 붙여넣기 즉시 beautify + 구문 강조 + 오류 줄/열 진단 + Lenient 파싱(주석·trailing comma·따옴표) ★26차 |
 
 ---
 
@@ -699,4 +700,4 @@
 | **용암/유체 제어 퍼즐** | Magma.Flow (용암 점성 흐름 목표 유도) ≠ Fluid.Rush (유체 물리 게임) ≠ Sand.Fall (낙하 샌드박스) |
 | **격자 로봇 프로그래밍** | Grid.Hack (Logo 터틀 스타일 제한 명령어) ≠ Asm.Quest (어셈블리 레지스터 목표값) ≠ Path.Grid (경로 최적화 vs AI) |
 | **ICO 변환 / 아이콘 편집** | Icon.Maker ✅ (ICO 변환+픽셀 그리드 에디터) ≠ Icon.Forge (ICO/ICNS/Android/iOS 멀티플랫폼 일괄 변환) ≠ Icon.Hunt ✅ (아이콘 검색) |
-| **JSON/구조화 데이터 탐색** | JSON.Tree ✅ (트리 탐색+검색+Diff+포맷 변환) ≠ Json.Craft (포맷터+변환기) ≠ DB.Peek (SQLite 스키마 탐색) ≠ SQL.Lens ✅ (쿼리 계획 시각화) |
+| **JSON/구조화 데이터 탐색** | JSON.Tree ✅ (트리 탐색+검색+Diff+포맷 변환) ≠ JSON.Fmt ✅ (beautify+Lenient파싱+오류 진단) ≠ Json.Craft (포맷터+YAML/TOML 변환기) ≠ DB.Peek (SQLite 스키마 탐색) ≠ SQL.Lens ✅ (쿼리 계획 시각화) |

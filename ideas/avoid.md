@@ -2,7 +2,7 @@
 
 > 이 파일은 브레인스토밍 시 **이미 제안되거나 구현된 아이디어를 다시 꺼내지 않도록** 하는 필터다.
 > 새 아이디어를 제안하기 전 반드시 이 목록을 확인할 것.
-> 마지막 갱신: 2026-03-14 (24차)
+> 마지막 갱신: 2026-03-14 (24차 — 2차 구현 반영)
 >
 > **구조**: 구현완료 앱 → 구현완료 게임 → 아카이브 → 제안된 미구현 아이디어(앱/게임) → 유사 개념 그룹
 
@@ -61,6 +61,8 @@
 | `Manga.View` | Files | CBZ/CBR/7Z 만화·망가 오프라인 리더 (RTL/이중 페이지) ★24차 |
 | `ANSI.Forge` | Text | ANSI 아트 에디터 + 터미널 이스케이프 코드 뷰어 ★24차 |
 | `Img.Compare` | Media | 픽셀 diff + SSIM/PSNR 이미지 품질 비교기 ★24차 |
+| `Badge.Forge` | Dev/Tools | 오프라인 shields.io 스타일 SVG/PNG 배지 생성기 ★24차 |
+| `SQL.Lens` | Dev/Tools | SQLite EXPLAIN QUERY PLAN 시각화 + 최적화 힌트 ★24차 |
 
 ---
 
@@ -99,6 +101,8 @@
 | `Hook.Cast` | Casual/Skill |
 | `Wave.Surf` | Casual/Simulation |
 | `Snap.Duel` | Casual/2P ★23차 |
+| `Escape.Key` | Puzzle/Educational ★24차 |
+| `Bug.Hunt` | Puzzle/Casual ★24차 |
 
 ---
 
@@ -281,8 +285,6 @@
 | `Perm.Audit` | Windows 앱 권한 감사·관리 (카메라·마이크·위치) |
 | `Token.Watch` | API 키·서비스 토큰·라이선스 만료일 통합 로컬 대시보드 |
 | `WHOIS.Cast` | WHOIS·DNS 레코드·IP 지오로케이션 통합 도메인 조회 GUI ★23차 |
-| `SQL.Lens` | SQLite 쿼리 실행 계획 시각화 + 미인덱스 탐지 + 최적화 힌트 ★24차 |
-| `Badge.Forge` | 완전 오프라인 shields.io 스타일 SVG/PNG 배지 생성기 ★24차 |
 
 ### Apps — Screen / UI / Media / Files
 
@@ -554,11 +556,9 @@
 | `Cargo.Pack` | Puzzle/Logic | 3D 아이소메트릭 박스 최적 패킹 퍼즐 ★24차 |
 | `Rhythm.Type` | Rhythm/Educational | 가사를 박자 타이밍에 맞춰 입력하는 리듬 타이핑 ★24차 |
 | `Bubble.Tube` | Puzzle/Casual | 컬러 볼 파이프 소팅 — 같은 색을 같은 튜브로 ★24차 |
-| `Escape.Key` | Puzzle/Educational | 현대 암호학(RSA·AES·해시) 기반 방탈출 ★24차 |
 | `Rain.Maker` | Strategy/Simulation | 구름·바람 조절 날씨 신으로 농작물 성장 최적화 ★24차 |
 | `Color.Map` | Puzzle/Educational | 수학 4색 정리 체험 지도 채색 퍼즐 ★24차 |
 | `Phantom.Step` | Arcade/Runner | 내 발자국이 N초 후 함정이 되는 자기 회피 러너 ★24차 |
-| `Bug.Hunt` | Puzzle/Casual | 코드 스니펫 버그 줄 클릭 찾기 파티 퀴즈 ★24차 |
 | `Chord.Build` | Puzzle/Music | 분위기 목표에 맞는 코드 진행 선택 화성학 퍼즐 ★24차 |
 | `Path.Grid` | Strategy/Educational | 격자 최단경로 설계 vs AI 장애물 방해 대결 ★24차 |
 

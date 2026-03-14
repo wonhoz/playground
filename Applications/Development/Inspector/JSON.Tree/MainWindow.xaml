@@ -1,0 +1,190 @@
+<Window x:Class="JsonTree.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="JSON.Tree" Height="700" Width="1140"
+        Background="#0F0F1E" Foreground="#E0E0E0"
+        AllowDrop="True" Drop="Window_Drop" DragEnter="Window_DragEnter"
+        Loaded="Window_Loaded">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="#252538"/>
+            <Setter Property="Foreground" Value="#E0E0E0"/>
+            <Setter Property="BorderBrush" Value="#444466"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="10,4"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="4" Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#353555"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="Background" Value="#1E1E30"/>
+            <Setter Property="Foreground" Value="#E0E0E0"/>
+            <Setter Property="BorderBrush" Value="#444466"/>
+            <Setter Property="CaretBrush" Value="#E0E0E0"/>
+            <Setter Property="Padding" Value="6,3"/>
+        </Style>
+        <Style TargetType="TabControl">
+            <Setter Property="Background" Value="#0F0F1E"/>
+            <Setter Property="BorderBrush" Value="#333355"/>
+        </Style>
+        <Style TargetType="TabItem">
+            <Setter Property="Background" Value="#1A1A2E"/>
+            <Setter Property="Foreground" Value="#AAAACC"/>
+            <Setter Property="BorderBrush" Value="#333355"/>
+            <Setter Property="Padding" Value="12,4"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TabItem">
+                        <Border x:Name="bd" Background="#1A1A2E" BorderBrush="#333355"
+                                BorderThickness="1,1,1,0" CornerRadius="4,4,0,0" Padding="12,5" Margin="2,0,0,0">
+                            <ContentPresenter/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="bd" Property="Background" Value="#252540"/>
+                                <Setter TargetName="bd" Property="BorderBrush" Value="#5A5A9A"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="TreeView">
+            <Setter Property="Background" Value="#13132A"/>
+            <Setter Property="BorderBrush" Value="#333355"/>
+            <Setter Property="Foreground" Value="#E0E0E0"/>
+        </Style>
+        <Style TargetType="TreeViewItem">
+            <Setter Property="Foreground" Value="#E0E0E0"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Padding" Value="2,1"/>
+        </Style>
+        <Style TargetType="ComboBox">
+            <Setter Property="Background" Value="#252538"/>
+            <Setter Property="Foreground" Value="#E0E0E0"/>
+            <Setter Property="BorderBrush" Value="#444466"/>
+            <Setter Property="Height" Value="28"/>
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#E0E0E0"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="44"/>
+            <RowDefinition Height="38"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="26"/>
+        </Grid.RowDefinitions>
+
+        <!-- ─── 툴바 ─── -->
+        <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Center"
+                    Background="#14142A" Margin="-10,-10,-10,0">
+            <Button x:Name="BtnOpenA" Click="BtnOpenA_Click" Margin="10,0,6,0">📂 파일 열기</Button>
+            <Button x:Name="BtnOpenB" Click="BtnOpenB_Click" Margin="0,0,6,0">📂 비교 파일</Button>
+            <Button x:Name="BtnClipboard" Click="BtnClipboard_Click" Margin="0,0,6,0">📋 클립보드</Button>
+            <Button x:Name="BtnClearB" Click="BtnClearB_Click" Margin="0,0,16,0" IsEnabled="False">✖ 비교 닫기</Button>
+            <TextBlock Text="변환:" VerticalAlignment="Center" Margin="0,0,6,0" Foreground="#8888AA" FontSize="11"/>
+            <ComboBox x:Name="ExportFmt" Width="90" SelectedIndex="0" Margin="0,0,6,0">
+                <ComboBoxItem Content="JSON"/>
+                <ComboBoxItem Content="YAML"/>
+                <ComboBoxItem Content="TOML"/>
+            </ComboBox>
+            <Button x:Name="BtnExport" Click="BtnExport_Click" IsEnabled="False">💾 내보내기</Button>
+        </StackPanel>
+
+        <!-- ─── 검색바 ─── -->
+        <Grid Grid.Row="1" Margin="0,4,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="120"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBox x:Name="SearchBox" Grid.Column="0" Height="28"
+                     TextChanged="SearchBox_TextChanged"
+                     VerticalContentAlignment="Center"
+                     Tag="키·값 검색 (JSONPath: $ .key [0] [*] ..)"/>
+            <TextBlock x:Name="SearchHint" Text="키·값 검색 (JSONPath: $ .key [0] [*] ..)"
+                       Foreground="#555577" IsHitTestVisible="False" VerticalAlignment="Center"
+                       Margin="8,0" FontSize="11"/>
+            <TextBlock x:Name="SearchCount" Grid.Column="1" VerticalAlignment="Center"
+                       Margin="8,0" FontSize="11" Foreground="#8888BB"/>
+            <Button x:Name="BtnExpandAll" Grid.Column="2" Click="BtnExpandAll_Click" Margin="6,0,0,0">모두 펼치기</Button>
+        </Grid>
+
+        <!-- ─── 메인 영역 (탭 또는 분할) ─── -->
+        <Grid Grid.Row="2" Margin="0,6,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition x:Name="ColA" Width="*"/>
+                <ColumnDefinition x:Name="ColSep" Width="0"/>
+                <ColumnDefinition x:Name="ColB" Width="0"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- ── 파일 A 트리 ── -->
+            <Border Grid.Column="0" Background="#13132A" BorderBrush="#333355" BorderThickness="1" CornerRadius="6">
+                <DockPanel>
+                    <StackPanel DockPanel.Dock="Top" Orientation="Horizontal"
+                                Background="#1A1A30" Margin="0,0,0,0">
+                        <TextBlock x:Name="LabelA" Text="— 파일 없음 —"
+                                   FontFamily="Consolas" FontSize="11" Foreground="#7777AA"
+                                   VerticalAlignment="Center" Margin="10,6"/>
+                        <TextBlock x:Name="StatsA" Text=""
+                                   FontFamily="Consolas" FontSize="11" Foreground="#555577"
+                                   VerticalAlignment="Center" Margin="0,6"/>
+                    </StackPanel>
+                    <TreeView x:Name="TreeA" VirtualizingPanel.IsVirtualizing="True"
+                              VirtualizingPanel.VirtualizationMode="Recycling"
+                              BorderThickness="0"
+                              SelectedItemChanged="TreeA_SelectedItemChanged"/>
+                </DockPanel>
+            </Border>
+
+            <!-- 분리선 -->
+            <GridSplitter Grid.Column="1" Width="6" Background="#333355" HorizontalAlignment="Stretch"/>
+
+            <!-- ── 파일 B 트리 (Diff 모드) ── -->
+            <Border Grid.Column="2" Background="#13132A" BorderBrush="#333355" BorderThickness="1" CornerRadius="6">
+                <DockPanel>
+                    <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Background="#1A1A30">
+                        <TextBlock x:Name="LabelB" Text="비교 파일"
+                                   FontFamily="Consolas" FontSize="11" Foreground="#7777AA"
+                                   VerticalAlignment="Center" Margin="10,6"/>
+                        <TextBlock x:Name="StatsB" Text=""
+                                   FontFamily="Consolas" FontSize="11" Foreground="#555577"
+                                   VerticalAlignment="Center" Margin="0,6"/>
+                    </StackPanel>
+                    <TreeView x:Name="TreeB" VirtualizingPanel.IsVirtualizing="True"
+                              VirtualizingPanel.VirtualizationMode="Recycling"
+                              BorderThickness="0"/>
+                </DockPanel>
+            </Border>
+        </Grid>
+
+        <!-- ─── 상태바 ─── -->
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock x:Name="StatusBar" VerticalAlignment="Center" FontSize="11" Foreground="#666688"/>
+            <TextBlock x:Name="PathBar" Grid.Column="1" VerticalAlignment="Center"
+                       FontFamily="Consolas" FontSize="10" Foreground="#555577"/>
+        </Grid>
+    </Grid>
+</Window>

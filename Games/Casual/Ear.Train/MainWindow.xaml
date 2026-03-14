@@ -1,0 +1,218 @@
+<Window x:Class="EarTrain.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Ear.Train — 청음 훈련"
+        Width="920" Height="720"
+        MinWidth="800" MinHeight="600"
+        Background="{StaticResource BgBrush}"
+        WindowStartupLocation="CenterScreen"
+        Loaded="Window_Loaded"
+        Closed="Window_Closed">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="52"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+
+        <!-- 헤더 -->
+        <Border Grid.Row="0" Background="{StaticResource Bg2Brush}"
+                BorderBrush="{StaticResource BorderBrush2}" BorderThickness="0,0,0,1">
+            <Grid Margin="20,0">
+                <TextBlock Text="🎵 Ear.Train" FontSize="20" FontWeight="Bold"
+                           Foreground="{StaticResource AccentBrush}" VerticalAlignment="Center"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                    <TextBlock x:Name="SessionStats" Text="정답률: —"
+                               Foreground="{StaticResource MutedBrush}" FontSize="12"
+                               VerticalAlignment="Center" Margin="0,0,16,0"/>
+                    <Button Content="📊 통계" Click="BtnStats_Click" Margin="0,0,8,0"/>
+                    <Button Content="↺ 세션 리셋" Click="BtnReset_Click"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- 본문 -->
+        <TabControl Grid.Row="1" x:Name="MainTab" Margin="0" Padding="0"
+                    SelectionChanged="MainTab_SelectionChanged">
+
+            <!-- 탭 1: 단음 맞추기 -->
+            <TabItem Header="🎼 단음">
+                <Grid Margin="20">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,12">
+                        <Button x:Name="BtnPlayNote" Content="▶ 재생" Click="BtnPlayNote_Click"
+                                Background="{StaticResource AccentBrush}" Foreground="White"
+                                FontWeight="Bold" Margin="0,0,8,0"/>
+                        <Button x:Name="BtnHintNote" Content="힌트" Click="BtnHint_Click"
+                                Margin="0,0,8,0"/>
+                        <TextBlock x:Name="NoteHint" Text="" FontSize="13"
+                                   Foreground="{StaticResource MutedBrush}"
+                                   VerticalAlignment="Center"/>
+                    </StackPanel>
+
+                    <!-- 피아노 건반 UI -->
+                    <Border Grid.Row="1" Background="{StaticResource Bg2Brush}"
+                            BorderBrush="{StaticResource BorderBrush2}" BorderThickness="1"
+                            CornerRadius="8" Padding="12">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0" Text="건반을 클릭해 정답을 선택하세요"
+                                       Foreground="{StaticResource MutedBrush}" FontSize="12"
+                                       HorizontalAlignment="Center" Margin="0,0,0,8"/>
+                            <!-- 피아노: 코드로 생성 -->
+                            <Canvas Grid.Row="1" x:Name="PianoCanvas" Height="160"/>
+                        </Grid>
+                    </Border>
+
+                    <!-- 결과 표시 -->
+                    <Border Grid.Row="2" x:Name="NoteResultBorder" Background="#1E2A1E"
+                            CornerRadius="8" Padding="16,10" Margin="0,12,0,0"
+                            Visibility="Collapsed">
+                        <TextBlock x:Name="NoteResultText" Text="" FontSize="16" FontWeight="Bold"
+                                   Foreground="{StaticResource CorrectBrush}" HorizontalAlignment="Center"/>
+                    </Border>
+
+                    <!-- 다음 -->
+                    <Button Grid.Row="3" x:Name="BtnNextNote" Content="다음 문제 →"
+                            Click="BtnNextNote_Click" Margin="0,8,0,0"
+                            Visibility="Collapsed" HorizontalAlignment="Right"/>
+                </Grid>
+            </TabItem>
+
+            <!-- 탭 2: 인터벌 -->
+            <TabItem Header="🎻 인터벌">
+                <Grid Margin="20">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,12">
+                        <Button x:Name="BtnPlayInterval" Content="▶ 재생" Click="BtnPlayInterval_Click"
+                                Background="{StaticResource AccentBrush}" Foreground="White"
+                                FontWeight="Bold" Margin="0,0,8,0"/>
+                        <Button Content="화성적" Click="BtnIntervalHarmonic_Click" Margin="0,0,4,0"/>
+                        <Button Content="선율적" Click="BtnIntervalMelodic_Click"/>
+                    </StackPanel>
+
+                    <!-- 인터벌 보기 그리드 -->
+                    <Border Grid.Row="1" Background="{StaticResource Bg2Brush}"
+                            BorderBrush="{StaticResource BorderBrush2}" BorderThickness="1"
+                            CornerRadius="8" Padding="12">
+                        <WrapPanel x:Name="IntervalPanel" HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"/>
+                    </Border>
+
+                    <Border Grid.Row="2" x:Name="IntervalResultBorder" Background="#1E2A1E"
+                            CornerRadius="8" Padding="16,10" Margin="0,12,0,0"
+                            Visibility="Collapsed">
+                        <TextBlock x:Name="IntervalResultText" Text="" FontSize="16" FontWeight="Bold"
+                                   Foreground="{StaticResource CorrectBrush}" HorizontalAlignment="Center"/>
+                    </Border>
+                    <Button Grid.Row="3" x:Name="BtnNextInterval" Content="다음 문제 →"
+                            Click="BtnNextInterval_Click" Margin="0,8,0,0"
+                            Visibility="Collapsed" HorizontalAlignment="Right"/>
+                </Grid>
+            </TabItem>
+
+            <!-- 탭 3: 화음 -->
+            <TabItem Header="🎹 화음">
+                <Grid Margin="20">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,12">
+                        <Button x:Name="BtnPlayChord" Content="▶ 재생" Click="BtnPlayChord_Click"
+                                Background="{StaticResource AccentBrush}" Foreground="White"
+                                FontWeight="Bold" Margin="0,0,8,0"/>
+                    </StackPanel>
+
+                    <Border Grid.Row="1" Background="{StaticResource Bg2Brush}"
+                            BorderBrush="{StaticResource BorderBrush2}" BorderThickness="1"
+                            CornerRadius="8" Padding="12">
+                        <WrapPanel x:Name="ChordPanel" HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"/>
+                    </Border>
+
+                    <Border Grid.Row="2" x:Name="ChordResultBorder" Background="#1E2A1E"
+                            CornerRadius="8" Padding="16,10" Margin="0,12,0,0"
+                            Visibility="Collapsed">
+                        <TextBlock x:Name="ChordResultText" Text="" FontSize="16" FontWeight="Bold"
+                                   Foreground="{StaticResource CorrectBrush}" HorizontalAlignment="Center"/>
+                    </Border>
+                    <Button Grid.Row="3" x:Name="BtnNextChord" Content="다음 문제 →"
+                            Click="BtnNextChord_Click" Margin="0,8,0,0"
+                            Visibility="Collapsed" HorizontalAlignment="Right"/>
+                </Grid>
+            </TabItem>
+
+            <!-- 탭 4: 통계 -->
+            <TabItem Header="📊 통계" x:Name="TabStats">
+                <Grid Margin="20">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Text="ELO 순위 (낮을수록 어려움)"
+                               FontSize="14" FontWeight="Bold"
+                               Foreground="{StaticResource TextBrush}" Margin="0,0,0,12"/>
+                    <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                        <ItemsControl x:Name="EloList">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Background="{StaticResource Bg2Brush}"
+                                            BorderBrush="{StaticResource BorderBrush2}"
+                                            BorderThickness="1" CornerRadius="6"
+                                            Padding="12,8" Margin="0,0,0,4">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="80"/>
+                                                <ColumnDefinition Width="80"/>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock Grid.Column="0" Text="{Binding Key}"
+                                                       FontSize="14" Foreground="{StaticResource TextBrush}"/>
+                                            <TextBlock Grid.Column="1" Text="{Binding Elo, StringFormat='ELO: {0:F0}'}"
+                                                       FontSize="13" Foreground="{StaticResource AccentBrush}"
+                                                       Margin="0,0,16,0"/>
+                                            <TextBlock Grid.Column="2" Text="{Binding Accuracy, StringFormat='{}{0:F1}%'}"
+                                                       FontSize="13" Foreground="{StaticResource MutedBrush}"/>
+                                            <TextBlock Grid.Column="3" Text="{Binding Total, StringFormat='{}({0}회)'}"
+                                                       FontSize="13" Foreground="{StaticResource MutedBrush}"/>
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
+                </Grid>
+            </TabItem>
+        </TabControl>
+
+        <!-- 하단 상태바 -->
+        <Border Grid.Row="2" Background="{StaticResource Bg2Brush}"
+                BorderBrush="{StaticResource BorderBrush2}" BorderThickness="0,1,0,0"
+                Padding="16,0">
+            <TextBlock x:Name="StatusBar"
+                       Text="건반을 클릭하거나 ▶ 재생으로 음을 들어보세요"
+                       Foreground="{StaticResource MutedBrush}" FontSize="11"
+                       VerticalAlignment="Center"/>
+        </Border>
+    </Grid>
+</Window>

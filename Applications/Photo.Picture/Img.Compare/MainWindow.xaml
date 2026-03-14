@@ -1,0 +1,162 @@
+<Window x:Class="ImgCompare.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Img.Compare" Height="720" Width="1280"
+        Background="#1A1A1A" Foreground="#E0E0E0"
+        WindowStartupLocation="CenterScreen"
+        Loaded="Window_Loaded"
+        AllowDrop="True" Drop="Window_Drop" DragEnter="Window_DragEnter">
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="48"/>
+      <RowDefinition Height="*"/>
+      <RowDefinition Height="120"/>
+      <RowDefinition Height="24"/>
+    </Grid.RowDefinitions>
+
+    <!-- 툴바 -->
+    <Border Grid.Row="0" Background="#1E1E2E" BorderBrush="#333" BorderThickness="0,0,0,1">
+      <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="12,0">
+        <TextBlock Text="🔬 Img.Compare" FontSize="15" FontWeight="Bold"
+                   Foreground="#5B8AF0" VerticalAlignment="Center" Margin="0,0,20,0"/>
+        <Button Content="📂 이미지 A" Margin="0,0,4,0" Click="BtnOpenA_Click"
+                Background="#3D5A80" Foreground="White"/>
+        <Button Content="📂 이미지 B" Margin="0,0,16,0" Click="BtnOpenB_Click"
+                Background="#3A5A3A" Foreground="White"/>
+        <Button Content="🔍 비교" Margin="0,0,4,0" Click="BtnCompare_Click"
+                Background="#5B8AF0" Foreground="White"/>
+        <Button Content="🌡️ 히트맵" Margin="0,0,16,0" Click="BtnHeatmap_Click"/>
+        <TextBlock Text="증폭:" Foreground="#888" VerticalAlignment="Center" Margin="0,0,4,0"/>
+        <Slider x:Name="AmplifySlider" Width="100" Minimum="1" Maximum="20" Value="5"
+                VerticalAlignment="Center" Margin="0,0,10,0"/>
+        <TextBlock x:Name="AmplifyText" VerticalAlignment="Center" Foreground="#888" FontSize="12"/>
+        <Separator Width="1" Margin="8,4" Background="#333"/>
+        <Button Content="🔍+" Margin="0,0,2,0" Width="34" Click="BtnZoomIn_Click"/>
+        <Button Content="🔍-" Margin="0,0,2,0" Width="34" Click="BtnZoomOut_Click"/>
+        <Button Content="⟳ 1:1" Margin="0,0,2,0" Click="BtnZoomReset_Click"/>
+        <Button Content="↔ 맞춤" Margin="0,0,0,0" Click="BtnFit_Click"/>
+      </StackPanel>
+    </Border>
+
+    <!-- 이미지 비교 영역 -->
+    <TabControl Grid.Row="1" Background="Transparent" BorderThickness="0">
+      <TabItem Header="분할 뷰">
+        <Grid>
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="4"/>
+            <ColumnDefinition Width="*"/>
+          </Grid.ColumnDefinitions>
+
+          <!-- 이미지 A -->
+          <Border Grid.Column="0" Background="#0D0D0D" BorderBrush="#333" BorderThickness="0,0,1,0">
+            <Grid>
+              <Grid.RowDefinitions>
+                <RowDefinition Height="24"/>
+                <RowDefinition Height="*"/>
+              </Grid.RowDefinitions>
+              <Border Grid.Row="0" Background="#1A2A1A" Padding="8,2">
+                <TextBlock x:Name="LabelA" Text="이미지 A" FontSize="11" Foreground="#66BB6A"/>
+              </Border>
+              <ScrollViewer Grid.Row="1" x:Name="ScrollA" HorizontalScrollBarVisibility="Auto"
+                            VerticalScrollBarVisibility="Auto" Background="#0D0D0D"
+                            ScrollChanged="ScrollA_ScrollChanged">
+                <Image x:Name="ImgA" Stretch="None" RenderOptions.BitmapScalingMode="HighQuality"
+                       MouseDown="Img_MouseDown" MouseMove="Img_MouseMove"/>
+              </ScrollViewer>
+            </Grid>
+          </Border>
+
+          <!-- 스플리터 -->
+          <GridSplitter Grid.Column="1" Width="4" Background="#333" HorizontalAlignment="Stretch"/>
+
+          <!-- 이미지 B -->
+          <Border Grid.Column="2" Background="#0D0D0D">
+            <Grid>
+              <Grid.RowDefinitions>
+                <RowDefinition Height="24"/>
+                <RowDefinition Height="*"/>
+              </Grid.RowDefinitions>
+              <Border Grid.Row="0" Background="#1A1A2A" Padding="8,2">
+                <TextBlock x:Name="LabelB" Text="이미지 B" FontSize="11" Foreground="#5B8AF0"/>
+              </Border>
+              <ScrollViewer Grid.Row="1" x:Name="ScrollB" HorizontalScrollBarVisibility="Auto"
+                            VerticalScrollBarVisibility="Auto" Background="#0D0D0D"
+                            ScrollChanged="ScrollB_ScrollChanged">
+                <Image x:Name="ImgB" Stretch="None" RenderOptions.BitmapScalingMode="HighQuality"
+                       MouseDown="Img_MouseDown" MouseMove="Img_MouseMove"/>
+              </ScrollViewer>
+            </Grid>
+          </Border>
+        </Grid>
+      </TabItem>
+
+      <TabItem Header="와이프 뷰">
+        <Grid>
+          <Image x:Name="ImgWipeA" Stretch="Uniform" RenderOptions.BitmapScalingMode="HighQuality"/>
+          <Image x:Name="ImgWipeB" Stretch="Uniform" RenderOptions.BitmapScalingMode="HighQuality"/>
+          <Canvas x:Name="WipeCanvas" Background="Transparent"
+                  MouseMove="WipeCanvas_MouseMove">
+            <Rectangle x:Name="WipeLine" Width="2" Fill="#FF5555" IsHitTestVisible="False"/>
+          </Canvas>
+        </Grid>
+      </TabItem>
+
+      <TabItem Header="히트맵">
+        <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Background="#0D0D0D">
+          <Image x:Name="ImgHeatmap" Stretch="None" RenderOptions.BitmapScalingMode="HighQuality"/>
+        </ScrollViewer>
+      </TabItem>
+    </TabControl>
+
+    <!-- 지표 패널 -->
+    <Border Grid.Row="2" Background="#111" BorderBrush="#333" BorderThickness="0,1,0,0" Padding="16,10">
+      <Grid>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="*"/>
+          <ColumnDefinition Width="*"/>
+          <ColumnDefinition Width="*"/>
+          <ColumnDefinition Width="*"/>
+          <ColumnDefinition Width="*"/>
+          <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Column="0" Margin="0,0,16,0">
+          <TextBlock Text="MSE" Foreground="#888" FontSize="11"/>
+          <TextBlock x:Name="MseText" FontSize="24" FontWeight="Bold" Foreground="#EF5350"/>
+          <TextBlock Text="평균 제곱 오차 (낮을수록 좋음)" Foreground="#555" FontSize="10" TextWrapping="Wrap"/>
+        </StackPanel>
+        <StackPanel Grid.Column="1" Margin="0,0,16,0">
+          <TextBlock Text="PSNR (dB)" Foreground="#888" FontSize="11"/>
+          <TextBlock x:Name="PsnrText" FontSize="24" FontWeight="Bold" Foreground="#66BB6A"/>
+          <TextBlock Text="신호 대 잡음비 (높을수록 좋음)" Foreground="#555" FontSize="10" TextWrapping="Wrap"/>
+        </StackPanel>
+        <StackPanel Grid.Column="2" Margin="0,0,16,0">
+          <TextBlock Text="SSIM" Foreground="#888" FontSize="11"/>
+          <TextBlock x:Name="SsimText" FontSize="24" FontWeight="Bold" Foreground="#5B8AF0"/>
+          <TextBlock Text="구조적 유사도 (1.0 = 동일)" Foreground="#555" FontSize="10" TextWrapping="Wrap"/>
+        </StackPanel>
+        <StackPanel Grid.Column="3" Margin="0,0,16,0">
+          <TextBlock Text="MAE" Foreground="#888" FontSize="11"/>
+          <TextBlock x:Name="MaeText" FontSize="24" FontWeight="Bold" Foreground="#FFD54F"/>
+          <TextBlock Text="평균 절대 오차" Foreground="#555" FontSize="10"/>
+        </StackPanel>
+        <StackPanel Grid.Column="4" Margin="0,0,16,0">
+          <TextBlock Text="다른 픽셀" Foreground="#888" FontSize="11"/>
+          <TextBlock x:Name="DiffPctText" FontSize="24" FontWeight="Bold" Foreground="#FF7043"/>
+          <TextBlock Text="임계값 5 이상 픽셀 비율" Foreground="#555" FontSize="10" TextWrapping="Wrap"/>
+        </StackPanel>
+        <StackPanel Grid.Column="5">
+          <TextBlock Text="해상도" Foreground="#888" FontSize="11"/>
+          <TextBlock x:Name="ResolutionText" FontSize="13" Foreground="#CCC" Margin="0,4,0,0"/>
+          <TextBlock x:Name="FileSizeText" FontSize="11" Foreground="#888" Margin="0,4,0,0"/>
+        </StackPanel>
+      </Grid>
+    </Border>
+
+    <!-- 상태바 -->
+    <Border Grid.Row="3" Background="#111" Padding="12,0">
+      <TextBlock x:Name="StatusBar" Foreground="#555" FontSize="11" VerticalAlignment="Center"/>
+    </Border>
+  </Grid>
+</Window>

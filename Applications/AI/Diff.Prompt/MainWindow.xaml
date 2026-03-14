@@ -1,0 +1,211 @@
+<Window x:Class="DiffPrompt.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Diff.Prompt — AI 프롬프트 A/B 비교"
+        Width="1280" Height="800"
+        MinWidth="1000" MinHeight="600"
+        Background="{StaticResource BgBrush}"
+        WindowStartupLocation="CenterScreen"
+        Loaded="Window_Loaded"
+        Closed="Window_Closed">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="52"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+
+        <!-- 헤더 -->
+        <Border Grid.Row="0" Background="{StaticResource Bg2Brush}"
+                BorderBrush="{StaticResource BorderBrush2}" BorderThickness="0,0,0,1">
+            <Grid Margin="20,0">
+                <TextBlock Text="🔬 Diff.Prompt" FontSize="20" FontWeight="Bold"
+                           Foreground="{StaticResource AccentBrush}" VerticalAlignment="Center"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                    <Button Content="📜 이력" Click="BtnHistory_Click" Margin="0,0,8,0"/>
+                    <Button Content="📋 내보내기" Click="BtnExport_Click" Margin="0,0,8,0"/>
+                    <Button Content="⚙️ API 키" Click="BtnApiKey_Click"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- 입력 영역 -->
+        <Border Grid.Row="1" Background="{StaticResource Bg2Brush}"
+                BorderBrush="{StaticResource BorderBrush2}" BorderThickness="0,0,0,1"
+                Padding="16,12">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="16"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="80"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- 프롬프트 A 헤더 -->
+                <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,4">
+                    <TextBlock Text="🔵 Prompt A" FontSize="13" FontWeight="Bold"
+                               Foreground="{StaticResource ABrush}" VerticalAlignment="Center"/>
+                    <ComboBox x:Name="ModelA" Margin="8,0,0,0" Width="200"
+                              SelectionChanged="ModelA_SelectionChanged"/>
+                </StackPanel>
+
+                <!-- 프롬프트 B 헤더 -->
+                <StackPanel Grid.Column="2" Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,4">
+                    <TextBlock Text="🟠 Prompt B" FontSize="13" FontWeight="Bold"
+                               Foreground="{StaticResource BBrush}" VerticalAlignment="Center"/>
+                    <ComboBox x:Name="ModelB" Margin="8,0,0,0" Width="200"
+                              SelectionChanged="ModelB_SelectionChanged"/>
+                </StackPanel>
+
+                <!-- System Prompt A -->
+                <TextBox Grid.Column="0" Grid.Row="1" x:Name="PromptABox"
+                         AcceptsReturn="True" TextWrapping="Wrap"
+                         VerticalScrollBarVisibility="Auto"
+                         Text="You are a helpful assistant."
+                         ToolTip="System Prompt A"/>
+
+                <!-- System Prompt B -->
+                <TextBox Grid.Column="2" Grid.Row="1" x:Name="PromptBBox"
+                         AcceptsReturn="True" TextWrapping="Wrap"
+                         VerticalScrollBarVisibility="Auto"
+                         Text="You are a helpful assistant. Be concise."
+                         ToolTip="System Prompt B"/>
+
+                <!-- User Message (공통) -->
+                <StackPanel Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="3" Margin="0,8,0,4">
+                    <TextBlock Text="User Message (공통)" FontSize="11"
+                               Foreground="{StaticResource MutedBrush}" Margin="0,0,0,4"/>
+                    <TextBox x:Name="UserMessageBox" AcceptsReturn="True" TextWrapping="Wrap"
+                             Height="60" VerticalScrollBarVisibility="Auto"
+                             Text="Tell me about yourself."/>
+                </StackPanel>
+
+                <!-- 실행 버튼 -->
+                <StackPanel Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="3"
+                            Orientation="Horizontal" Margin="0,8,0,0">
+                    <Button x:Name="BtnRun" Content="▶▶ 두 프롬프트 동시 실행" Click="BtnRun_Click"
+                            Background="{StaticResource AccentBrush}" Foreground="White"
+                            FontWeight="Bold" Margin="0,0,8,0"/>
+                    <Button x:Name="BtnRunA" Content="▶ A만 실행" Click="BtnRunA_Click"
+                            Margin="0,0,8,0"/>
+                    <Button x:Name="BtnRunB" Content="▶ B만 실행" Click="BtnRunB_Click"
+                            Margin="0,0,8,0"/>
+                    <Button x:Name="BtnStop" Content="■ 중단" Click="BtnStop_Click"
+                            IsEnabled="False" Margin="0,0,8,0"/>
+                    <Button x:Name="BtnDiff" Content="📊 Diff 보기" Click="BtnDiff_Click"
+                            IsEnabled="False"/>
+                    <TextBlock x:Name="ExpName" Text="" Foreground="{StaticResource MutedBrush}"
+                               FontSize="11" VerticalAlignment="Center" Margin="16,0,0,0"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- 출력 분할 패널 -->
+        <Grid Grid.Row="2" Margin="16">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="12"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- 출력 A -->
+            <Border Grid.Column="0" Background="{StaticResource Bg2Brush}"
+                    BorderBrush="{StaticResource ABrush}" BorderThickness="1"
+                    CornerRadius="8">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Border Grid.Row="0" Background="#0D1A2A" CornerRadius="8,8,0,0" Padding="12,8">
+                        <Grid>
+                            <TextBlock Text="Output A" FontSize="12" FontWeight="Bold"
+                                       Foreground="{StaticResource ABrush}"/>
+                            <TextBlock x:Name="StatsA" Text=""
+                                       Foreground="{StaticResource MutedBrush}" FontSize="11"
+                                       HorizontalAlignment="Right"/>
+                        </Grid>
+                    </Border>
+                    <ScrollViewer Grid.Row="1" x:Name="ScrollA" VerticalScrollBarVisibility="Auto">
+                        <TextBox x:Name="OutputA" Background="Transparent" BorderThickness="0"
+                                 Foreground="{StaticResource TextBrush}" FontSize="13"
+                                 IsReadOnly="True" TextWrapping="Wrap" Padding="12"
+                                 AcceptsReturn="True" FontFamily="Consolas"/>
+                    </ScrollViewer>
+                </Grid>
+            </Border>
+
+            <!-- 출력 B -->
+            <Border Grid.Column="2" Background="{StaticResource Bg2Brush}"
+                    BorderBrush="{StaticResource BBrush}" BorderThickness="1"
+                    CornerRadius="8">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Border Grid.Row="0" Background="#2A1A0D" CornerRadius="8,8,0,0" Padding="12,8">
+                        <Grid>
+                            <TextBlock Text="Output B" FontSize="12" FontWeight="Bold"
+                                       Foreground="{StaticResource BBrush}"/>
+                            <TextBlock x:Name="StatsB" Text=""
+                                       Foreground="{StaticResource MutedBrush}" FontSize="11"
+                                       HorizontalAlignment="Right"/>
+                        </Grid>
+                    </Border>
+                    <ScrollViewer Grid.Row="1" x:Name="ScrollB" VerticalScrollBarVisibility="Auto">
+                        <TextBox x:Name="OutputB" Background="Transparent" BorderThickness="0"
+                                 Foreground="{StaticResource TextBrush}" FontSize="13"
+                                 IsReadOnly="True" TextWrapping="Wrap" Padding="12"
+                                 AcceptsReturn="True" FontFamily="Consolas"/>
+                    </ScrollViewer>
+                </Grid>
+            </Border>
+        </Grid>
+
+        <!-- 투표 영역 -->
+        <Border Grid.Row="3" Background="{StaticResource Bg2Brush}"
+                BorderBrush="{StaticResource BorderBrush2}" BorderThickness="0,1,0,0"
+                Padding="16,10">
+            <Grid>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock Text="결과 평가:" Foreground="{StaticResource MutedBrush}"
+                               FontSize="12" VerticalAlignment="Center" Margin="0,0,12,0"/>
+                    <Button x:Name="BtnVoteA" Content="👍 A 승" Click="BtnVoteA_Click"
+                            Margin="0,0,8,0" Foreground="{StaticResource ABrush}"/>
+                    <Button x:Name="BtnVoteTie" Content="🤝 무승부" Click="BtnVoteTie_Click"
+                            Margin="0,0,8,0"/>
+                    <Button x:Name="BtnVoteB" Content="👍 B 승" Click="BtnVoteB_Click"
+                            Foreground="{StaticResource BBrush}"/>
+                    <TextBlock x:Name="VoteResult" Text="" FontSize="13" FontWeight="Bold"
+                               Foreground="{StaticResource GreenBrush}"
+                               VerticalAlignment="Center" Margin="16,0,0,0"/>
+                </StackPanel>
+                <TextBlock x:Name="NotesHint" Text="" Foreground="{StaticResource MutedBrush}"
+                           FontSize="11" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+            </Grid>
+        </Border>
+
+        <!-- 상태바 -->
+        <Border Grid.Row="4" Background="{StaticResource Bg2Brush}"
+                BorderBrush="{StaticResource BorderBrush2}" BorderThickness="0,1,0,0"
+                Padding="16,0">
+            <Grid>
+                <TextBlock x:Name="StatusBar" Text="API 키를 설정하고 프롬프트를 입력하세요."
+                           Foreground="{StaticResource MutedBrush}" FontSize="11"
+                           VerticalAlignment="Center"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                    <TextBlock x:Name="TotalCost" Text="" Foreground="{StaticResource MutedBrush}"
+                               FontSize="11"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>

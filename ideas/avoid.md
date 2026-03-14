@@ -46,9 +46,21 @@
 | `Layout.Forge` | System | 키보드 키 재배치 프로파일 에디터 |
 | `Sched.Cast` | System | Windows Task Scheduler GUI 대체 |
 | `Color.Grade` | Media | 이미지 LUT 색보정 도구 |
-| `Auto.Build` | Game (구현완료) | 컨베이어·기계·분류기 자동화 파이프라인 게임 |
 | `Pad.Forge` | System | 게임패드 XInput/DInput 버튼 매핑 GUI |
 | `Tray.Stats` | System | CPU/RAM/GPU/디스크/네트워크 통합 성능 트레이 모니터 |
+| `Key.Map` | System | 앱별 단축키 키보드 다이어그램 시각화 + PDF 치트시트 |
+| `Key.Test` | System | 하드웨어 키보드 키 입력 테스트 도구 |
+| `WiFi.Cast` | Network | Wi-Fi 채널 분석기 + 신호 강도 트레이 모니터 |
+| `Glyph.Map` | Dev/Tools | 유니코드 12만+ 문자 오프라인 탐색·복사·즐겨찾기 |
+| `Icon.Hunt` | Dev/Tools | 30만+ 오픈소스 아이콘 라이브러리 탐색기 |
+| `Disk.Lens` | Files | 트리맵 디스크 사용량 시각화 (WinDirStat 대체) |
+| `Char.Art` | Text | 이미지→ASCII/Unicode 아트 변환기 |
+| `Diff.Prompt` | AI | AI 프롬프트 A/B 비교 실험실 (출력 diff + 비용) ★23차 |
+| `Hotkey.Map` | System | 전역 단축키 충돌 감지 + AHK 내보내기 ★24차 |
+| `Locale.View` | Dev/Tools | 200+ 로케일 날짜·숫자·통화·달력 형식 브라우저 ★24차 |
+| `Manga.View` | Files | CBZ/CBR/7Z 만화·망가 오프라인 리더 (RTL/이중 페이지) ★24차 |
+| `ANSI.Forge` | Text | ANSI 아트 에디터 + 터미널 이스케이프 코드 뷰어 ★24차 |
+| `Img.Compare` | Media | 픽셀 diff + SSIM/PSNR 이미지 품질 비교기 ★24차 |
 
 ---
 
@@ -56,22 +68,37 @@
 
 | 게임 | 장르 |
 |------|------|
+| `Auto.Build` | Puzzle/Automation |
 | `Dungeon.Dash` | Action |
 | `Brick.Blitz` | Arcade |
 | `Dash.City` | Arcade |
 | `Neon.Run` | Arcade |
 | `Neon.Slice` | Arcade |
+| `Sky.Drift` | Arcade/Physics |
 | `Gravity.Flip` | Puzzle |
 | `Hue.Flow` | Puzzle |
-| `Nitro.Drift` | Racing |
-| `Beat.Drop` | Rhythm |
-| `Dodge.Blitz` | Shooter |
-| `Star.Strike` | Shooter |
-| `Tower.Guard` | Strategy |
-| `Sand.Fall` | Sandbox/Simulation |
-| `Stack.Crash` | Puzzle/Destruction |
+| `Orbit.Craft` | Puzzle/Space |
+| `Crossword.Cast` | Puzzle/Educational |
 | `Cipher.Quest` | Puzzle/Educational |
 | `Persp.Shift` | Puzzle/Spatial |
+| `Circuit.Break` | Puzzle/Educational ★23차 |
+| `Nitro.Drift` | Racing |
+| `Beat.Drop` | Rhythm |
+| `Chord.Strike` | Rhythm |
+| `Dodge.Blitz` | Shooter |
+| `Dodge.Craft` | Shooter |
+| `Star.Strike` | Shooter |
+| `Golf.Cast` | Sports |
+| `Tower.Guard` | Strategy |
+| `Sand.Fall` | Sandbox/Simulation |
+| `Leaf.Grow` | Simulation |
+| `Stack.Crash` | Puzzle/Destruction |
+| `Code.Idle` | Idle |
+| `Ear.Train` | Casual/Educational ★23차 |
+| `Geo.Quiz` | Casual/Educational |
+| `Hook.Cast` | Casual/Skill |
+| `Wave.Surf` | Casual/Simulation |
+| `Snap.Duel` | Casual/2P ★23차 |
 
 ---
 
@@ -161,7 +188,6 @@
 | `Win.Spy` | 모던 창 계층 인스펙터 (Spy++ 대체, UIAutomation) |
 | `Stand.Up` | 개발팀 일일 스탠드업 기록 + Slack/Teams 포맷 복사 |
 | `Deploy.Watch` | CI/CD 빌드 상태 트레이 모니터 (GitHub Actions/GitLab) |
-| `Glyph.Map` | 유니코드 12만+ 문자 오프라인 탐색·복사·즐겨찾기 |
 | `Hex.Peek` | 파일 16진수 뷰어·에디터 (패턴 검색, 구조체 파싱) |
 | `Cron.Cast` | Cron 표현식 실시간 시각화 검증기 |
 | `GIF.Cast` | 화면 영역 GIF 녹화·변환기 |
@@ -172,11 +198,9 @@
 | `Msg.Forge` | 원문→Slack/Discord/Teams/Twitter 포맷 동시 변환 |
 | `Win.Cast` | 특정 앱 창→가상 카메라 스트리밍 |
 | `Locale.Forge` | JSON/YAML/RESX i18n 파일 시각적 관리 |
-| `Icon.Hunt` | 30만+ 오픈소스 아이콘 라이브러리 탐색기 |
 | `Schema.View` | JSON Schema / OpenAPI 3.x 시각적 다이어그램 |
 | `Context.Cast` | 코드베이스 파일 트리+내용을 AI 입력용 컨텍스트 블록으로 패킹 |
 | `Prompt.Forge` | AI 프롬프트 라이브러리 관리자 |
-| `Key.Map` | 앱별 단축키 키보드 다이어그램 시각화 + PDF 치트시트 |
 | `Quick.Calc` | 개발자 프로그래머 계산기 (Hex/Bin, IEEE 754 시각화) |
 | `Color.Blind` | 실시간 화면 색맹 시뮬레이션 오버레이 |
 | `Palette.Gen` | 이미지 → 지배 색상 팔레트 추출기 (k-Means) |
@@ -230,7 +254,6 @@
 | `Merge.Cast` | 시각적 3-way 코드 병합 도구 (Git 충돌 해결) ★22차 |
 | `Font.Ramp` | 타이포그래피 스케일 미리보기 + 디자인 토큰 내보내기 ★22차 |
 | `Cov.Map` | LCOV/Cobertura 코드 커버리지 트리맵 + 소스 강조 뷰어 ★23차 |
-| `Diff.Prompt` | AI 프롬프트 A/B 비교 실험실 (출력 diff + 비용 비교) ★23차 |
 | `Cert.View` | X.509 인증서 심층 파서 + 체인 트리 시각화 ★23차 |
 
 ### Apps — Network / Security / Privacy
@@ -259,10 +282,7 @@
 | `Token.Watch` | API 키·서비스 토큰·라이선스 만료일 통합 로컬 대시보드 |
 | `WHOIS.Cast` | WHOIS·DNS 레코드·IP 지오로케이션 통합 도메인 조회 GUI ★23차 |
 | `SQL.Lens` | SQLite 쿼리 실행 계획 시각화 + 미인덱스 탐지 + 최적화 힌트 ★24차 |
-| `Hotkey.Map` | 전역 단축키 충돌 감지 + 미사용 단축키 발굴기 ★24차 |
 | `Badge.Forge` | 완전 오프라인 shields.io 스타일 SVG/PNG 배지 생성기 ★24차 |
-| `ANSI.Forge` | ANSI 아트 에디터 + 터미널 이스케이프 코드 뷰어 ★24차 |
-| `Locale.View` | 200+ 로케일 날짜·숫자·통화·달력 형식 오프라인 브라우저 ★24차 |
 
 ### Apps — Screen / UI / Media / Files
 
@@ -289,7 +309,6 @@
 | `Icon.Forge` | PNG/SVG → ICO/ICNS/Android/iOS 멀티사이즈 일괄 생성 |
 | `Img.Forge` | 이미지 일괄 처리기 (리사이즈·변환·필터·워터마크) |
 | `Color.Blind` | 실시간 화면 색맹 시뮬레이션 오버레이 |
-| `Disk.Lens` | 트리맵 디스크 사용량 시각화 (WinDirStat 대체) |
 | `Img.Meta` | 이미지 EXIF/IPTC/XMP 뷰어·편집기 |
 | `Geo.Tag` | 사진 GPS 태거 (지도 클릭 수동·GPX 트랙 자동 매칭) |
 | `Frame.Pick` | 비디오 최적 프레임 자동 추출기 |
@@ -300,8 +319,6 @@
 | `OCR.Live` | 화면 영역 실시간 스트리밍 OCR + 번역 파이프라인 ★23차 |
 | `Tape.Delay` | 화면 타임시프트 뷰어 (지정 초 딜레이 2번 모니터 표시) ★23차 |
 | `Kiosk.Mode` | 이미지·동영상·웹 무한 루프 키오스크 디스플레이 관리자 ★23차 |
-| `Manga.View` | CBZ/CBR/7Z 만화·망가 오프라인 리더 (RTL/이중 페이지) ★24차 |
-| `Img.Compare` | 픽셀 diff + SSIM/PSNR 이미지 품질 비교기 ★24차 |
 
 ### Apps — Productivity / Personal Finance / Health
 
@@ -388,7 +405,6 @@
 | `Cloth.Cut` | Puzzle/Physics | 스프링-질량 천 시뮬레이션, 절단 처리 |
 | `Gear.Works` | Puzzle/Engineering | 회전 관절, 기어비, 토크 전달, 벨트·체인 |
 | `Vortex.Pull` | Puzzle/Physics | 소용돌이 벡터 필드, RK4 궤도 예측 |
-| `Orbit.Craft` | Puzzle/Space Sim | N-체 중력, 궤도 역학, 케플러 법칙 |
 | `Rogue.Tile` | Roguelike/Strategy | 절차 생성 던전, 영구 사망, 턴제 전투 |
 | `Word.Bomb` | Word/Speed | 음절 포함 단어 입력, 폭탄 타이머 |
 | `Ink.Spread` | Puzzle/Strategy | 잉크 BFS 전파, 차단벽 설치 최적화 |
@@ -437,22 +453,18 @@
 | `Colony.Sim` | Simulation/Sandbox | 영양소 확산 + 페로몬 신호 군집 AI |
 | `Hex.Storm` | Strategy/Micro RTS | 7~19 헥사 격자, 자원-유닛-전투 30~90초 사이클 |
 | `Dish.Rush` | Casual/Action/Time Mgmt | 탑다운 주방 쿠킹 러시 — 주문 큐, 재료 수집→서빙 |
-| `Hook.Cast` | Casual/Skill/Simulation | 플라이 피싱 — Verlet 낚싯줄, 물고기 AI, 날씨 |
 | `Rush.Cross` | Puzzle/Casual/Strategy | 교차로 교통 신호 타이밍 퍼즐 |
 | `Type.Race` | Arcade/Racing/Skill | 타이핑 레이싱 — 문단 타이핑 = 레이서 전진 |
 | `Ice.Slide` | Puzzle/Logic | 얼음 블록 슬라이딩 — 막힐 때까지 미끄러짐 |
 | `Rise.Match` | Puzzle/Casual | 상승 격자 보석 교환 퍼즐 (Panel de Pon) |
-| `Chord.Strike` | Rhythm/Music | 멀티키 동시 누르기 리듬 게임 (화음·아르페지오 레인) |
 | `Last.Spark` | Survival/Casual | 캠프파이어 생존 — 모닥불 꺼짐 방지, 자원 수집 |
 | `Jenga.Pull` | Arcade/Physics/Casual | 2D 물리 블록 제거 — 드래그로 블록 빼내기 |
-| `Leaf.Grow` | Simulation/Puzzle/Creative | L-시스템 식물 성장 샌드박스 |
 | `Beat.Rogue` | Roguelite/Rhythm | 비트 타이밍에만 이동·공격 가능, 절차 생성 10층 |
 | `Pixel.Cross` | Puzzle/Logic (노노그램) | 행·열 숫자 힌트로 격자 채우기, 픽셀 아트 출현 |
 | `Forge.Idle` | Idle/Incremental | 광물 채굴→제련→판매 방치형, 프레스티지 |
 | `Tilt.Ball` | Arcade/Physics Puzzle | WASD로 판 기울여 공 유도, 특수 타일 |
 | `Room.Code` | Puzzle/Point&Click | 한 화면짜리 오브젝트 클릭&조합 방탈출 20개 컬렉션 |
 | `Pool.Break` | Sports/Physics | 정밀 2D 당구 물리 (회전·마찰·쿠션), 8볼·9볼 |
-| `Wave.Surf` | Casual/Simulation | 사인파+FFT 노이즈 파도, COM 균형 서핑, 공중 묘기 |
 | `Knot.Craft` | Puzzle (위상) | 매듭진 실 교차점 드래그 분리 → 단순 루프 완성 |
 | `Fluid.Paint` | Sandbox/Creative | Jos Stam 유체 시뮬 색상 혼합 페인팅 |
 | `Reflex.Tap` | Casual/Skill | 반응속도 ms 정밀 측정 4종 테스트 |
@@ -485,7 +497,6 @@
 | `Cave.Run` | Roguelike/Adventure | 절차 생성 수직 동굴, 산소 게이지+지진 붕괴 |
 | `Logic.Zebra` | Puzzle/Logic | 아인슈타인 격자 소거 퍼즐 |
 | `Peg.Solo` | Puzzle/Casual | 말뚝 솔리테어 5형판, DFS 솔버 힌트 |
-| `Geo.Quiz` | Casual/Educational | 실루엣·국기·수도·지도 클릭 5모드 |
 | `Pipe.Lay` | Puzzle/Casual | 타이머+파이프 회전, BFS 흐름 시뮬 |
 | `Trail.Blaze` | Arcade/Platformer | 파쿠르 벽달리기·레지 그랩·슬라이드 콤보 |
 | `Swarm.Ant` | Simulation/Strategy | ACO 페로몬 개미 군집 시각화, 멀티 군집 경쟁 |
@@ -498,7 +509,6 @@
 | `Frame.Jump` | Platformer/Puzzle/Meta | 만화 패널 메타 플랫포머, 패널 경계 순간이동 |
 | `Chip.Logic` | Puzzle/Educational | 논리 게이트 회로 빌더 (AND/OR/NOT/NAND/XOR) |
 | `Word.Weave` | Word/Puzzle/Casual | N×N 격자 글자 타일 인접 8방향 체인으로 단어 완성 |
-| `Code.Idle` | Idle/Incremental | 코드 라인 생산→앱 출시→팀 고용→AI 자동화 체인 |
 | `Magnet.Jump` | Puzzle/Platformer | 캐릭터 N/S 극성 전환, 자기 발판 흡착·반발 도약 |
 | `Root.Spread` | Strategy/Simulation | 지하 타일맵 단면뷰, 뿌리 성장 방향 지정 |
 | `Zipline.Rush` | Puzzle/Physics | Verlet 케이블 집라인, 화물 중력+마찰 물리 이동 |
@@ -506,7 +516,6 @@
 | `Echo.Drum` | Rhythm/Memory | 드럼 패턴 재생→정확 재현 (킥/스네어/하이햇) |
 | `Block.Shift` | Puzzle/Casual | 색상+기호 타일 4×4 격자, 행/열 루프 슬라이드 |
 | `Light.Cast` | Puzzle/Optics | 볼록·오목렌즈·반사경 배치 빛 세기 집중 퍼즐 |
-| `Sky.Drift` | Arcade/Physics | Verlet 날개 양력+중력, 열상승기류 탐색 |
 | `Case.File` | Puzzle/Detective | 증거 코르크보드 실 연결 + 타임라인 재구성 |
 | `Eco.Chain` | Simulation/Sandbox | Lotka-Volterra 포식자-피식자 먹이사슬 생태계 |
 | `Shutter.Run` | Puzzle/Creative | 이동 궤적=장노출 빛 드로잉, 목표 실루엣 완성 |
@@ -535,16 +544,13 @@
 | `Mural.Rush` | Arcade/VS | 128px 캔버스 2P 픽셀 영역 전쟁 ★22차 |
 | `Bridge.Run` | Arcade/Action | 달리는 캐릭터 앞에 실시간 다리 배치 러너 ★22차 |
 | `Ink.Trail` | Puzzle/Casual | 잉크 경로 설계 + 색 혼합 물리 퍼즐 ★22차 |
-| `Ear.Train` | Educational/Music | 음정·화음 청음 인식 ELO 기반 훈련 게임 ★23차 |
 | `Trade.Star` | Strategy/Space | 가격 변동 성간 무역 경로 최적화 전략 ★23차 |
 | `Dots.Cast` | Strategy/Board | Dots and Boxes 격자 선 긋기 박스 완성 전략 ★23차 |
 | `Anagram.Dash` | Word/Casual | 타이머 아나그램 — 타일 재조합 단어 발굴 ★23차 |
-| `Circuit.Break` | Puzzle/Educational | 버그 있는 전기 회로도 디버깅 퍼즐 ★23차 |
 | `Relic.Run` | Puzzle/Adventure | 절차 생성 발굴지 유물 발굴 어드벤처 ★23차 |
 | `Frost.Line` | Arcade/Survival | 위에서 내려오는 결빙선 피해 생존 ★23차 |
 | `Bloom.Craft` | Strategy/Simulation | 암세포 BFS 확산 vs 면역세포 AI 격자 전략 ★23차 |
 | `Pivot.Chase` | Puzzle/Arcade | 45° 각도 제약 이동으로 추격·회피 ★23차 |
-| `Snap.Duel` | Casual/2P Local | 반응속도 로컬 2P+ 대전 파티 게임 ★23차 |
 | `Cargo.Pack` | Puzzle/Logic | 3D 아이소메트릭 박스 최적 패킹 퍼즐 ★24차 |
 | `Rhythm.Type` | Rhythm/Educational | 가사를 박자 타이밍에 맞춰 입력하는 리듬 타이핑 ★24차 |
 | `Bubble.Tube` | Puzzle/Casual | 컬러 볼 파이프 소팅 — 같은 색을 같은 튜브로 ★24차 |

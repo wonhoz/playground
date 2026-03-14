@@ -177,9 +177,9 @@
 | `Volume.Cast` | 앱별 볼륨 독립 제어 트레이 |
 | `Fade.Out` | 시스템 볼륨 점진 페이드 수면 타이머 트레이 |
 | `Noti.Hub` | Windows 알림 히스토리 허브 트레이 (모든 Toast 가로채기) |
-| `Hotspot.Cast` | Windows 모바일 핫스팟 원클릭 트레이 (SSID/PW 설정·QR 공유·접속 기기 모니터) ★27차 |
 | `Desk.Paint` | 시간·날씨·계절 기반 월페이퍼 자동 전환 스케줄러 ★22차 |
 | `Time.Lapse` | 화면 타임랩스 레코더 (스크린샷 → MP4/GIF) ★22차 |
+| `Hotspot.Cast` | Windows 모바일 핫스팟 원클릭 트레이 (SSID/PW 설정·QR 공유·접속 기기 모니터) ★27차 |
 
 ### Apps — Dev / Tools
 
@@ -210,7 +210,6 @@
 | `Context.Cast` | 코드베이스 파일 트리+내용을 AI 입력용 컨텍스트 블록으로 패킹 |
 | `Prompt.Forge` | AI 프롬프트 라이브러리 관리자 |
 | `Quick.Calc` | 개발자 프로그래머 계산기 (Hex/Bin, IEEE 754 시각화) |
-| `Color.Blind` | 실시간 화면 색맹 시뮬레이션 오버레이 |
 | `Palette.Gen` | 이미지 → 지배 색상 팔레트 추출기 (k-Means) |
 | `Access.Check` | 색상 WCAG 대비율 검사 + 색맹 시뮬레이션 |
 | `Table.Craft` | CSV/TSV 경량 GUI 분석기 (100만 행, 필터·집계·Pivot) |
@@ -227,7 +226,6 @@
 | `Git.Stats` | Git 저장소 통계 분석기 (커밋 히트맵, 핫파일) |
 | `Win.Tamer` | 프로세스 CPU 친화도·우선순위 GUI 관리자 |
 | `Font.Draw` | 비트맵·픽셀 폰트 그리드 에디터 |
-| `Dice.Shift` (game) | 격자 주사위 굴리기 소코반 퍼즐 |
 | `Proto.Forge` | Protocol Buffers·gRPC 오프라인 테스터 |
 | `Shader.Cast` | 실시간 HLSL/GLSL 쉐이더 에디터 |
 | `Map.Forge` | 오프라인 타일맵 레벨 에디터 (TMX/JSON 내보내기) |
@@ -239,14 +237,6 @@
 | `Clip.Find` | 검색형 클립보드 히스토리 관리자 |
 | `Svc.Guard` | Windows 서비스 GUI 관리자 |
 | `Run.Book` | 인터랙티브 YAML Runbook/체크리스트 실행기 |
-| `Str.Forge` | 정규식 멀티파일 Find&Replace + 패치 미리보기 + 프리셋 ★27차 |
-| `Csv.Diff` | CSV 두 버전 키 컬럼 기반 셀 단위 Diff + Excel 내보내기 ★27차 |
-| `Link.Check` | HTML/MD/소스코드 깨진 링크 일괄 감사 + HTTP 상태 보고서 ★27차 |
-| `Git.Guard` | Git 훅 GUI 설정기 (pre-commit·commit-msg·pre-push 조건 편집 + 스크립트 자동 생성) ★27차 |
-| `Win.Scope` | 실행 창 Z-order·투명도·클릭통과 실시간 조작 인스펙터 ★27차 |
-| `Diff.Snap` | 폴더 스냅샷 타임머신 — 시점 간 파일 추가/삭제/변경 타임라인 ★27차 |
-| `Img.Slice` | UI 목업·스프라이트시트 자동 슬라이서 (격자·여백감지·9-patch) ★27차 |
-| `Path.Audit` | ETW 기반 드라이버 없는 프로세스 파일시스템 접근 감사기 ★27차 |
 | `Archive.Forge` | ZIP/7z/TAR.GZ 아카이브 생성·관리자 |
 | `DNS.Watch` | DNS 쿼리 실시간 모니터·차단 트레이 |
 | `Reg.Vault` | Windows 레지스트리 고급 브라우저·비교기 |
@@ -278,6 +268,14 @@
 | `Bench.Run` | C#/.NET 코드 스니펫 BenchmarkDotNet 실행기 + 결과 차트 비교 ★25차 |
 | `Schema.Diff` | 두 SQLite/JSON Schema/OpenAPI 명세 구조 차이 시각화 + Breaking Change 감지 ★25차 |
 | `Clip.Snap` | 전역 단축키 영역 선택 화면 캡처 → 클립보드 즉시 복사 + 최근 히스토리 트레이 앱 ★25차 |
+| `Str.Forge` | 정규식 멀티파일 Find&Replace + 패치 미리보기 + 프리셋 ★27차 |
+| `Csv.Diff` | CSV 두 버전 키 컬럼 기반 셀 단위 Diff + Excel 내보내기 ★27차 |
+| `Link.Check` | HTML/MD/소스코드 깨진 링크 일괄 감사 + HTTP 상태 보고서 ★27차 |
+| `Git.Guard` | Git 훅 GUI 설정기 (pre-commit·commit-msg·pre-push 조건 편집 + 스크립트 자동 생성) ★27차 |
+| `Win.Scope` | 실행 창 Z-order·투명도·클릭통과 실시간 조작 인스펙터 ★27차 |
+| `Diff.Snap` | 폴더 스냅샷 타임머신 — 시점 간 파일 추가/삭제/변경 타임라인 ★27차 |
+| `Img.Slice` | UI 목업·스프라이트시트 자동 슬라이서 (격자·여백감지·9-patch) ★27차 |
+| `Path.Audit` | ETW 기반 드라이버 없는 프로세스 파일시스템 접근 감사기 ★27차 |
 
 ### Apps — Network / Security / Privacy
 
@@ -320,7 +318,6 @@
 | `Res.Swap` | 해상도·주사율 빠른 전환 트레이 |
 | `Stamp.It` | 사진 도장/워터마크 삽입 |
 | `Screen.Split` | 화면 구역 시각적 정의 → 창 드래그 스냅 |
-| `Clip.Annotate` | 클립보드 이미지 즉석 주석 |
 | `Cursor.Lens` | 프레젠테이션·스크린캐스트 커서 스포트라이트+줌 오버레이 |
 | `Snap.Cast` | 화면 캡처 영역 → OCR + 마크다운 즉시 변환 |
 | `Mosaic.Forge` | 수백~수천 소스 사진을 타일로 포토모자이크 생성 |

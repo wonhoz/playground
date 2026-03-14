@@ -2,7 +2,7 @@
 
 > 이 파일은 브레인스토밍 시 **이미 제안되거나 구현된 아이디어를 다시 꺼내지 않도록** 하는 필터다.
 > 새 아이디어를 제안하기 전 반드시 이 목록을 확인할 것.
-> 마지막 갱신: 2026-03-14 (24차 — 2차 구현 반영)
+> 마지막 갱신: 2026-03-14 (25차 — 브레인스토밍 20개 추가 + 2개 앱 구현 반영)
 >
 > **구조**: 구현완료 앱 → 구현완료 게임 → 아카이브 → 제안된 미구현 아이디어(앱/게임) → 유사 개념 그룹
 
@@ -63,6 +63,8 @@
 | `Img.Compare` | Media | 픽셀 diff + SSIM/PSNR 이미지 품질 비교기 ★24차 |
 | `Badge.Forge` | Dev/Tools | 오프라인 shields.io 스타일 SVG/PNG 배지 생성기 ★24차 |
 | `SQL.Lens` | Dev/Tools | SQLite EXPLAIN QUERY PLAN 시각화 + 최적화 힌트 ★24차 |
+| `Icon.Maker` | Tools.Utility | SVG/PNG→ICO 멀티사이즈 변환 + WriteableBitmap 픽셀 그리드 에디터 ★25차 |
+| `JSON.Tree` | Dev/Inspector | JSON/YAML/TOML 트리 탐색기 + 검색 필터 + Side-by-Side Diff + 형식 변환 ★25차 |
 
 ---
 
@@ -259,6 +261,13 @@
 | `Font.Ramp` | 타이포그래피 스케일 미리보기 + 디자인 토큰 내보내기 ★22차 |
 | `Cov.Map` | LCOV/Cobertura 코드 커버리지 트리맵 + 소스 강조 뷰어 ★23차 |
 | `Cert.View` | X.509 인증서 심층 파서 + 체인 트리 시각화 ★23차 |
+| `Color.Token` | 디자인 시스템 CSS/SCSS/JSON 색상 토큰 에디터 + WCAG 2.1 대비 감사 ★25차 |
+| `Git.Blame` | Git blame 줄별 날짜 열 히트맵 + 기여자별 담당 코드 드릴다운 ★25차 |
+| `MIME.Peek` | 드래그&드롭 파일 MIME 타입 & 매직 바이트 검사기 + 확장자 불일치 경고 ★25차 |
+| `Proc.Tree` | 실행 중 프로세스 부모-자식 트리 + 로드된 DLL 의존성 뷰 ★25차 |
+| `Bench.Run` | C#/.NET 코드 스니펫 BenchmarkDotNet 실행기 + 결과 차트 비교 ★25차 |
+| `Schema.Diff` | 두 SQLite/JSON Schema/OpenAPI 명세 구조 차이 시각화 + Breaking Change 감지 ★25차 |
+| `Clip.Snap` | 전역 단축키 영역 선택 화면 캡처 → 클립보드 즉시 복사 + 최근 히스토리 트레이 앱 ★25차 |
 
 ### Apps — Network / Security / Privacy
 
@@ -561,6 +570,16 @@
 | `Phantom.Step` | Arcade/Runner | 내 발자국이 N초 후 함정이 되는 자기 회피 러너 ★24차 |
 | `Chord.Build` | Puzzle/Music | 분위기 목표에 맞는 코드 진행 선택 화성학 퍼즐 ★24차 |
 | `Path.Grid` | Strategy/Educational | 격자 최단경로 설계 vs AI 장애물 방해 대결 ★24차 |
+| `Prism.Split` | Puzzle/Optics | 흰 빔→RGB 프리즘 분산, 거울·필터 배치 색 수용체 목표 퍼즐 ★25차 |
+| `Echo.Self` | Puzzle/Platformer | 과거 행동 N개 분신 동시 재생, 타이밍 협력 플랫포머 ★25차 |
+| `Sonar.Run` | Puzzle/Adventure | 완전 암흑, 음파 펄스 반향으로만 지형 파악 스텔스 어드벤처 ★25차 |
+| `Cryo.Jump` | Platformer/Puzzle | 점프 중 시간 동결, 공중에서 다음 행동 계획하는 플랫포머 ★25차 |
+| `Layer.Stack` | Puzzle/Creative | 반투명 레이어 N장 순서·위치 조합 → 목표 이미지 완성 ★25차 |
+| `Seed.Fall` | Simulation/Puzzle | 씨앗 분산 물리, 바람·물 배치해 목표 착지점 유도 ★25차 |
+| `Sym.Build` | Puzzle/Creative | 회전/반사 대칭 제약 안에서 목표 패턴 드로잉 퍼즐 ★25차 |
+| `Pulse.Run` | Rhythm/Runner | BPM 박자 온비트 점프 → 콤보 보너스 무한 러너 ★25차 |
+| `Magma.Flow` | Puzzle/Physics | 용암 점성 유체 흐름 제어, 경사·냉각석 배치 목표 유도 퍼즐 ★25차 |
+| `Grid.Hack` | Puzzle/Educational | 제한 명령어 슬롯으로 격자 로봇 프로그래밍 퍼즐 ★25차 |
 
 ---
 
@@ -663,3 +682,21 @@
 | **코드 버그 찾기** | Bug.Hunt (소스코드 차이→버그 탐색) ≠ Circuit.Break (전기 회로 디버깅) |
 | **화성학 코드 진행 게임** | Chord.Build (코드 연결 설계) ≠ Ear.Train (청음 훈련) ≠ Sound.Grid (사운드 합성) ≠ Chord.Strike (리듬 퍼포먼스) |
 | **경로 최적화 대결** | Path.Grid (격자 최단경로 vs AI 장애물) ≠ Trace.Run (실시간 경로 레이싱) |
+| **색상 토큰 / 접근성 감사** | Color.Token (CSS 파일 편집+WCAG 대비 감사) ≠ Access.Check (독립 WCAG 검사기) ≠ Color.Drop (화면 색상 피커) |
+| **Git blame 시각화** | Git.Blame (줄별 날짜 히트맵+기여자) ≠ Git.Stats (커밋 통계 히트맵) ≠ Git.Reel (커밋 그래프) |
+| **파일 타입 판별** | MIME.Peek (매직 바이트 검사기) ≠ Hex.Peek (헥스 에디터) ≠ Hash.Check (해시 검증) |
+| **프로세스 시각화** | Proc.Tree (부모-자식 트리+DLL) ≠ Proc.Pilot (프로세스/포트 관리) ≠ Proc.Map (프로세스-네트워크 그래프) |
+| **코드 성능 벤치마크** | Bench.Run (.NET 스니펫 BenchmarkDotNet) ≠ Drive.Bench (디스크 벤치마크) |
+| **스키마/명세 비교** | Schema.Diff (두 버전 구조 Diff) ≠ Schema.View (단일 스키마 다이어그램) ≠ Merge.Cast (코드 3-way 병합) |
+| **화면 영역 캡처** | Clip.Snap (캡처→클립보드, 트레이) ≠ Screen.Recorder (전체 녹화) ≠ Snap.Cast (OCR 스냅샷) ≠ GIF.Cast (GIF 녹화) |
+| **광학 색 분산 퍼즐** | Prism.Split (색 분산·혼합 목표) ≠ Light.Cast (단색 빔 집중) |
+| **분신/복제 타임 퍼즐** | Echo.Self (행동 녹화 분신 N개) ≠ Phantom.Step (발자국 함정) ≠ Cryo.Jump (시간 동결) |
+| **음파/청각 기반 게임** | Sonar.Run (반향 탐지 어드벤처) ≠ Echo.Drum (드럼 패턴 재현) ≠ Ear.Train (청음 훈련) |
+| **레이어 합성 퍼즐** | Layer.Stack (N레이어 순서·위치 조합) ≠ Shutter.Run (이동 궤적 장노출) |
+| **씨앗/성장 시뮬레이션** | Seed.Fall (씨앗 분산 물리 목표 착지) ≠ Leaf.Grow (L-시스템 성장) ≠ Root.Spread (지하 뿌리 성장) |
+| **대칭 드로잉** | Sym.Build (회전/반사 제약 퍼즐) ≠ Shutter.Run (이동 드로잉) ≠ Sym.Build ≠ Mural.Rush (픽셀 영역 전쟁) |
+| **리듬 러너** | Pulse.Run (BPM 온비트 러너) ≠ Beat.Drop (악기 퍼포먼스) ≠ Rhythm.Type (리듬 타이핑) |
+| **용암/유체 제어 퍼즐** | Magma.Flow (용암 점성 흐름 목표 유도) ≠ Fluid.Rush (유체 물리 게임) ≠ Sand.Fall (낙하 샌드박스) |
+| **격자 로봇 프로그래밍** | Grid.Hack (Logo 터틀 스타일 제한 명령어) ≠ Asm.Quest (어셈블리 레지스터 목표값) ≠ Path.Grid (경로 최적화 vs AI) |
+| **ICO 변환 / 아이콘 편집** | Icon.Maker ✅ (ICO 변환+픽셀 그리드 에디터) ≠ Icon.Forge (ICO/ICNS/Android/iOS 멀티플랫폼 일괄 변환) ≠ Icon.Hunt ✅ (아이콘 검색) |
+| **JSON/구조화 데이터 탐색** | JSON.Tree ✅ (트리 탐색+검색+Diff+포맷 변환) ≠ Json.Craft (포맷터+변환기) ≠ DB.Peek (SQLite 스키마 탐색) ≠ SQL.Lens ✅ (쿼리 계획 시각화) |

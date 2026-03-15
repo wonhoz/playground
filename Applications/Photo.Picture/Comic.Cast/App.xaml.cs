@@ -25,15 +25,15 @@ public partial class App : WpfApplication
 
         libraryVm.Initialize();
 
-        // 드래그앤드롭으로 직접 파일 열기 지원
+        var mainWindow = new MainWindow { DataContext = mainVm };
+        MainWindow = mainWindow;
+        mainWindow.Show();
+
+        // 드래그앤드롭으로 직접 파일 열기 지원 — 창이 완전히 표시된 후 실행
         if (e.Args.Length > 0 && File.Exists(e.Args[0]))
         {
             _ = OpenFileArg(e.Args[0], readerVm, mainVm, archive, _library);
         }
-
-        var mainWindow = new MainWindow { DataContext = mainVm };
-        MainWindow = mainWindow;
-        mainWindow.Show();
     }
 
     private static async Task OpenFileArg(string path, ReaderViewModel reader,

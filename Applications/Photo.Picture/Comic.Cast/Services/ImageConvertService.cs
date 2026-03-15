@@ -59,33 +59,38 @@ public class ImageConvertService
     {
         try
         {
-            var pages = _archive.GetPages(book.FilePath);
-            if (pages.Count == 0) return null;
-
-            using var stream = _archive.OpenPage(book.FilePath, pages[0]);
-            using var img    = await ISImage.LoadAsync(stream, ct);
-
-            // 비율 유지 리사이즈
-            img.Mutate(x => x.Resize(new ResizeOptions
+            // ImageSharp 내부에서 ConfigureAwait(false)를 사용하므로 Task.Run으로 격리
+            // → await 완료 후 Dispatcher(UI 스레드)로 복귀 보장
+            var ms = await Task.Run(async () =>
             {
-                Size = new ISSize(maxWidth, 0),
-                Mode = ISResizeMode.Max,
-            }));
+                var pages = _archive.GetPages(book.FilePath);
+                if (pages.Count == 0) return null;
 
-            var ms = new MemoryStream();
-            await img.SaveAsJpegAsync(ms, ct);
-            ms.Seek(0, SeekOrigin.Begin);
+                using var stream = _archive.OpenPage(book.FilePath, pages[0]);
+                using var img    = await ISImage.LoadAsync(stream, ct).ConfigureAwait(false);
 
-            return await WpfApplication.Current.Dispatcher.InvokeAsync(() =>
-            {
-                var bmp = new BitmapImage();
-                bmp.BeginInit();
-                bmp.CacheOption  = BitmapCacheOption.OnLoad;
-                bmp.StreamSource = ms;
-                bmp.EndInit();
-                bmp.Freeze();
-                return bmp;
-            });
+                img.Mutate(x => x.Resize(new ResizeOptions
+                {
+                    Size = new ISSize(maxWidth, 0),
+                    Mode = ISResizeMode.Max,
+                }));
+
+                var mem = new MemoryStream();
+                await img.SaveAsJpegAsync(mem, ct).ConfigureAwait(false);
+                mem.Position = 0;
+                return mem;
+            }, ct);
+
+            if (ms is null) return null;
+
+            // Task.Run 완료 후 Dispatcher에서 BitmapImage 생성
+            var bmp = new BitmapImage();
+            bmp.BeginInit();
+            bmp.CacheOption  = BitmapCacheOption.OnLoad;
+            bmp.StreamSource = ms;
+            bmp.EndInit();
+            bmp.Freeze();
+            return bmp;
         }
         catch { return null; }
     }

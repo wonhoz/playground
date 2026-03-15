@@ -71,21 +71,24 @@ public class ArchiveService
     public async Task<BitmapImage> LoadBitmapAsync(string archivePath, ComicPage page,
         CancellationToken ct = default)
     {
-        using var stream = OpenPage(archivePath, page);
-        var ms = new MemoryStream();
-        await stream.CopyToAsync(ms, ct);
-        ms.Seek(0, SeekOrigin.Begin);
-
-        return await WpfApplication.Current.Dispatcher.InvokeAsync(() =>
+        // Task.Run으로 IO를 스레드 풀에서 실행하고, await 완료 후 캡처된 동기화 컨텍스트(Dispatcher)로 복귀
+        // stream.CopyToAsync 내부의 ConfigureAwait(false)가 동기화 컨텍스트를 파괴하는 문제 방지
+        var ms = await Task.Run(() =>
         {
-            var bmp = new BitmapImage();
-            bmp.BeginInit();
-            bmp.CacheOption  = BitmapCacheOption.OnLoad;
-            bmp.StreamSource = ms;
-            bmp.EndInit();
-            bmp.Freeze();
-            return bmp;
-        });
+            using var stream = OpenPage(archivePath, page);
+            var mem = new MemoryStream();
+            stream.CopyTo(mem);
+            mem.Position = 0;
+            return mem;
+        }, ct);
+
+        var bmp = new BitmapImage();
+        bmp.BeginInit();
+        bmp.CacheOption  = BitmapCacheOption.OnLoad;
+        bmp.StreamSource = ms;
+        bmp.EndInit();
+        bmp.Freeze();
+        return bmp;
     }
 
     // ── private helpers ──────────────────────────────────────────────────────

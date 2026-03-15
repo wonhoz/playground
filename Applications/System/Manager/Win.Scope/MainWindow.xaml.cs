@@ -46,11 +46,16 @@ public partial class MainWindow : Window
         int val = 1;
         DwmSetWindowAttribute(hwnd, 20, ref val, sizeof(int));
 
-        // 아이콘: XAML TypeConverter 오류 방지를 위해 코드에서 로드
+        // 아이콘: GetResourceStream → Stream 직접 로드 (pack URI 비동기 실패 우회)
         try
         {
-            Icon = System.Windows.Media.Imaging.BitmapFrame.Create(
-                new Uri("pack://application:,,,/Resources/app.ico"));
+            var sri = Application.GetResourceStream(
+                new Uri("Resources/app.ico", UriKind.Relative));
+            if (sri?.Stream != null)
+                Icon = System.Windows.Media.Imaging.BitmapFrame.Create(
+                    sri.Stream,
+                    System.Windows.Media.Imaging.BitmapCreateOptions.None,
+                    System.Windows.Media.Imaging.BitmapCacheOption.OnLoad);
         }
         catch { }
 

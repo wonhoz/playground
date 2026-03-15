@@ -45,5 +45,74 @@
       <Setter Property="FontSize" Value="13"/>
       <Setter Property="CaretBrush" Value="#00FF88"/>
     </Style>
+    <!-- ── TabItem ── -->
+    <Style TargetType="TabItem">
+      <Setter Property="Foreground" Value="#AAAACC"/>
+      <Setter Property="FontFamily" Value="Consolas"/>
+      <Setter Property="Padding" Value="12,5"/>
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="TabItem">
+            <Border x:Name="Bd"
+                    Background="#0D0D1A"
+                    BorderBrush="Transparent"
+                    BorderThickness="1,1,1,0"
+                    CornerRadius="4,4,0,0"
+                    Padding="{TemplateBinding Padding}"
+                    Margin="0,0,2,0">
+              <ContentPresenter x:Name="Content"
+                                ContentSource="Header"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                TextElement.Foreground="{TemplateBinding Foreground}"/>
+            </Border>
+            <ControlTemplate.Triggers>
+              <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="Bd" Property="Background" Value="#1A1A3A"/>
+                <Setter TargetName="Content" Property="TextElement.Foreground" Value="#E0E0E0"/>
+              </Trigger>
+              <Trigger Property="IsSelected" Value="True">
+                <Setter TargetName="Bd" Property="Background" Value="#2A2A4A"/>
+                <Setter TargetName="Bd" Property="BorderBrush" Value="#5B6FD6"/>
+                <Setter TargetName="Content" Property="TextElement.Foreground" Value="#00FF88"/>
+              </Trigger>
+            </ControlTemplate.Triggers>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+    <!-- ── TabControl ── -->
+    <Style TargetType="TabControl">
+      <Setter Property="Background" Value="#0D0D1A"/>
+      <Setter Property="BorderBrush" Value="#2A2A4A"/>
+      <Setter Property="BorderThickness" Value="1"/>
+      <Setter Property="Padding" Value="4"/>
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="TabControl">
+            <Grid>
+              <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+              </Grid.RowDefinitions>
+              <!-- 탭 헤더 -->
+              <Border Grid.Row="0" Background="#080818"
+                      BorderBrush="#2A2A4A" BorderThickness="0,0,0,1">
+                <TabPanel IsItemsHost="True" Background="Transparent" Margin="4,4,4,0"/>
+              </Border>
+              <!-- 탭 콘텐츠 -->
+              <Border Grid.Row="1"
+                      Background="{TemplateBinding Background}"
+                      BorderBrush="{TemplateBinding BorderBrush}"
+                      BorderThickness="1,0,1,1">
+                <ContentPresenter x:Name="PART_SelectedContentHost"
+                                  ContentSource="SelectedContent"
+                                  Margin="{TemplateBinding Padding}"/>
+              </Border>
+            </Grid>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
   </Application.Resources>
 </Application>

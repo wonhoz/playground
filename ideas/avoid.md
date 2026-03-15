@@ -2,7 +2,7 @@
 
 > 이 파일은 브레인스토밍 시 **이미 제안되거나 구현된 아이디어를 다시 꺼내지 않도록** 하는 필터다.
 > 새 아이디어를 제안하기 전 반드시 이 목록을 확인할 것.
-> 마지막 갱신: 2026-03-14 (27차 — 구현완료 갱신: Str.Forge, Win.Scope, Orbit.Raid)
+> 마지막 갱신: 2026-03-14 (28차 — 브레인스토밍 20개 추가)
 >
 > **구조**: 구현완료 앱 → 구현완료 게임 → 아카이브 → 제안된 미구현 아이디어(앱/게임) → 유사 개념 그룹
 
@@ -277,6 +277,16 @@
 | `Diff.Snap` | 폴더 스냅샷 타임머신 — 시점 간 파일 추가/삭제/변경 타임라인 ★27차 |
 | `Img.Slice` | UI 목업·스프라이트시트 자동 슬라이서 (격자·여백감지·9-patch) ★27차 |
 | `Path.Audit` | ETW 기반 드라이버 없는 프로세스 파일시스템 접근 감사기 ★27차 |
+| `Key.Stream` | 강의·스크린캐스트용 키입력 실시간 화면 오버레이 (KeystrokeVisualizer) ★28차 |
+| `OAuth.Peek` | JWT/OIDC/OAuth2 토큰 로컬 디코더 + 클레임 시각화 + OAuth2 플로 다이어그램 ★28차 |
+| `Plan.Board` | 로컬 스프린트 Kanban + 번다운 차트 + 스토리 포인트 애자일 플래너 ★28차 |
+| `Prompt.Lab` | LLM 프롬프트 체인 노드 에디터 (출력→다음 노드 자동 입력) ★28차 |
+| `Env.Diff` | .env/.config 두 파일 구조 비교 + 누락 키 감지 + 시크릿 마스킹 내보내기 ★28차 |
+| `Shell.Book` | PowerShell/Bash 명령어 히스토리 북마크·태그·검색 팝업 GUI ★28차 |
+| `Dock.Cast` | Windows 작업 표시줄 앱 그룹·프리셋 런처 관리자 (상황별 즉시 전환) ★28차 |
+| `Tab.Host` | 임의 앱 창을 탭 컨테이너에 임베드하는 멀티탭 그룹 관리자 ★28차 |
+| `Typo.Guard` | 코드베이스·기술 문서 오타 감지기 (typos/codespell 통합, 커스텀 사전) ★28차 |
+| `Color.Walk` | Windows 11 시스템 색상 토큰 라이브 추출 + Mica/Acrylic 시뮬레이터 ★28차 |
 
 ### Apps — Network / Security / Privacy
 
@@ -428,7 +438,6 @@
 | `Rogue.Tile` | Roguelike/Strategy | 절차 생성 던전, 영구 사망, 턴제 전투 |
 | `Word.Bomb` | Word/Speed | 음절 포함 단어 입력, 폭탄 타이머 |
 | `Ink.Spread` | Puzzle/Strategy | 잉크 BFS 전파, 차단벽 설치 최적화 |
-| `Pulse.Run` | Arcade/Rhythm Runner | 음악 파일 BPM 실시간 분석, 비트에 맞춰 장애물 |
 | `Neon.Card` | Roguelike/Deckbuilding | 공격·방어·버프 카드 덱빌딩, 매 층 카드 추가·강화 |
 | `Shadow.Trap` | Puzzle/Stealth | 실시간 그림자 레이캐스팅, 빛 회피 스텔스 |
 | `Neon.Push` | Puzzle/Casual | 소코반+색상 매칭+레이저 연동, 레벨 에디터 |
@@ -598,6 +607,16 @@
 | `Ink.Drop` | Puzzle/Physics | 기울기 제어 + 물방울 합류 + RGB 색 혼합 목표 달성 ★27차 |
 | `Volt.Race` | Racing/Puzzle | 전기 회로 소자(저항·콘덴서·인덕터)가 트랙 기믹인 레이싱 ★27차 |
 | `Root.War` | Strategy/2P | 지하 격자 뿌리 성장 영토 대전, 영양분 비교 충돌 흡수 ★27차 |
+| `Drone.Race` | Arcade/Physics/Racing | 4로터 PWM 물리 드론 FPV 레이싱 (관성·바람·추력 시뮬) ★28차 |
+| `Spiral.Rush` | Arcade/Physics/Runner | 수축하는 나선 트랙 원심력·구심력 생존 러너 ★28차 |
+| `Shadow.Forge` | Puzzle/Spatial | 3직교 그림자 단면에서 3D 형태 역추론 복셀 퍼즐 ★28차 |
+| `Fault.Line` | Puzzle/Simulation/Educational | 지각판 격자 이동·충돌·화산 배치 지질학 퍼즐 ★28차 |
+| `Chain.Code` | Puzzle/Educational/Programming | 함수형·명령형·OOP 코드 블록 파이프라인 연결 목표 출력 퍼즐 ★28차 |
+| `Myth.Weave` | Puzzle/Narrative/Memory | 신·영웅·몬스터 카드 시간순 배치 신화 이야기 재구성 퍼즐 ★28차 |
+| `Bounce.Chef` | Arcade/Physics/Casual | 튕기기 물리로 재료를 냄비에 정확히 넣는 요리 아케이드 ★28차 |
+| `Tide.Hunt` | Puzzle/Adventure/Timing | 조수 간만 사이클 타이밍 기반 숨겨진 경로 탐험 퍼즐 어드벤처 ★28차 |
+| `Cell.Grow` | Puzzle/Simulation/Educational | 세포 분열 규칙 편집 → 목표 세포 패턴 달성 진화 퍼즐 ★28차 |
+| `Rune.Web` | Puzzle/Logic/Fantasy | 거미줄 절점 룬 심볼 배치 에너지 흐름 완성 퍼즐 ★28차 |
 
 ---
 
@@ -712,7 +731,7 @@
 | **음파/청각 기반 게임** | Sonar.Run (반향 탐지 어드벤처) ≠ Echo.Drum (드럼 패턴 재현) ≠ Ear.Train (청음 훈련) |
 | **레이어 합성 퍼즐** | Layer.Stack (N레이어 순서·위치 조합) ≠ Shutter.Run (이동 궤적 장노출) |
 | **씨앗/성장 시뮬레이션** | Seed.Fall (씨앗 분산 물리 목표 착지) ≠ Leaf.Grow (L-시스템 성장) ≠ Root.Spread (지하 뿌리 성장) |
-| **대칭 드로잉** | Sym.Build (회전/반사 제약 퍼즐) ≠ Shutter.Run (이동 드로잉) ≠ Sym.Build ≠ Mural.Rush (픽셀 영역 전쟁) |
+| **대칭 드로잉** | Sym.Build (회전/반사 제약 퍼즐) ≠ Shutter.Run (이동 드로잉) ≠ Mural.Rush (픽셀 영역 전쟁) |
 | **리듬 러너** | Pulse.Run (BPM 온비트 러너) ≠ Beat.Drop (악기 퍼포먼스) ≠ Rhythm.Type (리듬 타이핑) |
 | **용암/유체 제어 퍼즐** | Magma.Flow (용암 점성 흐름 목표 유도) ≠ Fluid.Rush (유체 물리 게임) ≠ Sand.Fall (낙하 샌드박스) |
 | **격자 로봇 프로그래밍** | Grid.Hack (Logo 터틀 스타일 제한 명령어) ≠ Asm.Quest (어셈블리 레지스터 목표값) ≠ Path.Grid (경로 최적화 vs AI) |
@@ -738,3 +757,23 @@
 | **물방울/기울기 물리 퍼즐** | Ink.Drop (기울기 제어+방울 합류+색 혼합) ≠ Ink.Spread (BFS 전파 전략) ≠ Fluid.Paint (자유 유체 페인팅) ≠ Hue.Flow ✅ (파이프 연결) |
 | **회로 기반 레이싱** | Volt.Race (전기 소자=트랙 기믹 레이싱) ≠ Volt.Chain (회로 설계 퍼즐) ≠ Circuit.Break ✅ (회로 디버깅) ≠ Chip.Logic (논리 게이트 빌더) |
 | **뿌리/균류 성장 대전** | Root.War (지하 격자 뿌리 2P 영토 대전) ≠ Root.Spread (솔로 뿌리 방향 지정) ≠ Spore.Net (슬라임 몰드 단일) ≠ Bloom.Craft (세포 확산 vs AI) |
+| **키입력 시각화/분석** | Key.Stream (강의용 실시간 화면 오버레이) ≠ Key.Heat (히트맵 분석) ≠ Key.Test (하드웨어 키 테스트) ≠ Mouse.Map (마우스 이동+클릭) |
+| **OAuth/토큰 도구** | OAuth.Peek (JWT+OIDC+OAuth2 플로 전체) ≠ Text.Forge ✅ (JWT 디코딩 1기능) ≠ Cert.View (X.509 인증서 분석) ≠ Pass.Vault (비밀번호 관리) |
+| **애자일/스프린트 도구** | Plan.Board (스프린트+번다운+스토리포인트) ≠ Task.Cast (Kanban 보드) ≠ Cal.Block (시간 블로킹) ≠ Timeline.Craft (타임라인 편집기) |
+| **LLM 프롬프트 도구** | Prompt.Lab (체인 노드 에디터) ≠ Diff.Prompt ✅ (A/B 비교) ≠ Prompt.Forge (라이브러리 저장) ≠ AI.Recap (회의 요약) |
+| **환경 설정 파일 비교** | Env.Diff (.env/config 두 파일 키 diff) ≠ Env.Guard ✅ (시스템 환경변수 GUI) ≠ Schema.Diff (SQLite/OpenAPI 스키마 diff) ≠ Deep.Diff ✅ (텍스트 범용 diff) |
+| **명령어 히스토리 관리** | Shell.Book (히스토리 북마크+태그+팝업 검색) ≠ Alias.Forge (별칭 전용) ≠ Run.Book (YAML Runbook 체크리스트) |
+| **작업 표시줄/런처** | Dock.Cast (작업 표시줄 핀 프리셋+앱 자동 시작) ≠ Run.Deck (프로젝트 런처) ≠ Tile.Cast (타일링 WM) ≠ Macro.Pad (소프트 매크로 패드) |
+| **앱 창 탭 관리** | Tab.Host (임의 앱 창 탭 임베드) ≠ Win.Scope ✅ (Z-order·투명도) ≠ Screen.Split (화면 구역 스냅) |
+| **코드 오타/철자 감지** | Typo.Guard (기술 오타 전용, typos 사전 기반) ≠ Spell.Cast (일반 맞춤법) ≠ Str.Forge ✅ (Find&Replace) ≠ Find.Fast (파일명+grep) |
+| **Windows 테마/색상 추출** | Color.Walk (Windows 11 시스템 색상 토큰+Mica 시뮬) ≠ Color.Token (CSS 파일 편집) ≠ Theme.Forge (HSL 팔레트 디자이너) ≠ Color.Drop (단일 피커) |
+| **드론 물리 게임** | Drone.Race (4로터 PWM FPV 레이싱) ≠ Drone.Haul (케이블 화물 퍼즐) |
+| **나선/곡선 트랙 레이싱** | Spiral.Rush (수축 나선 원심력 러너) ≠ Loop.Race (자기교차 트랙) ≠ Nitro.Drift (도로 레이싱) ≠ Flux.Drift (자기장 레이싱) |
+| **3D 공간 추론 퍼즐** | Shadow.Forge (그림자→3D 역추론) ≠ Cargo.Pack (3D 아이소메트릭 패킹) ≠ Fold.Grid (오리가미 접기) |
+| **지질학/지각 시뮬** | Fault.Line (판구조론 격자 퍼즐) ≠ Crystal.Grow (결정화) ≠ Sand.Fall (낙하 샌드박스) ≠ Thermal.Run (열전도) |
+| **코딩 교육 퍼즐** | Chain.Code (코드 블록 파이프라인) ≠ Grid.Hack (Logo 터틀 로봇) ≠ Asm.Quest (어셈블리) ≠ Chip.Logic (논리 게이트) ≠ Volt.Chain (회로 설계) |
+| **신화/내러티브 퍼즐** | Myth.Weave (신화 카드 시간순 재구성) ≠ Haiku.Run (하이쿠 텍스트 어드벤처) ≠ Case.File (형사 증거 보드) ≠ Relic.Run (발굴 어드벤처) |
+| **요리 테마 게임** | Bounce.Chef (튕기기 물리+요리 정확도) ≠ Dish.Rush (탑다운 쿠킹 러시) |
+| **수위/조수 타이밍 퍼즐** | Tide.Hunt (조수 간만 사이클 탐험) ≠ Sand.Storm (모래폭풍 생존) ≠ Magma.Flow (용암 유체) ≠ Fluid.Rush (유체 시뮬) |
+| **세포/생물 진화 퍼즐** | Cell.Grow (분열 규칙 편집→패턴 달성) ≠ Colony.Sim (개미 페로몬) ≠ Bloom.Craft (세포 BFS vs AI) ≠ Cell.War (세포 흡수 경쟁) |
+| **거미줄/방사형 회로 퍼즐** | Rune.Web (방사형 에너지 흐름 분배) ≠ Volt.Chain (전류 AND/NOT 게이트) ≠ Spring.Web (Verlet 거미줄 물리) ≠ Net.Weave (그래프 평면화) |

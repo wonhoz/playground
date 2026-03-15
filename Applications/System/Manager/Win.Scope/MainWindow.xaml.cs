@@ -15,6 +15,8 @@ public partial class MainWindow : Window
     [DllImport("user32.dll")] private static extern bool ShowWindow(nint hWnd, int nCmdShow);
     [DllImport("user32.dll")] private static extern bool SetForegroundWindow(nint hWnd);
     [DllImport("user32.dll")] private static extern bool IsWindow(nint hWnd);
+    [DllImport("user32.dll")] private static extern nint LoadImage(nint hInst, nint name, uint type, int cx, int cy, uint fuLoad);
+    [DllImport("user32.dll")] private static extern bool DestroyIcon(nint hIcon);
 
     private static readonly nint HWND_TOP = nint.Zero;
     private static readonly nint HWND_BOTTOM = new(1);
@@ -46,16 +48,19 @@ public partial class MainWindow : Window
         int val = 1;
         DwmSetWindowAttribute(hwnd, 20, ref val, sizeof(int));
 
-        // 아이콘: GetResourceStream → Stream 직접 로드 (pack URI 비동기 실패 우회)
+        // 아이콘: Win32 LoadImage로 exe 내장 리소스에서 직접 로드
+        // (ICO 파일 포맷 이상 시 WPF BitmapFrame 디코딩 실패를 완전히 우회)
         try
         {
-            var sri = Application.GetResourceStream(
-                new Uri("Resources/app.ico", UriKind.Relative));
-            if (sri?.Stream != null)
-                Icon = System.Windows.Media.Imaging.BitmapFrame.Create(
-                    sri.Stream,
-                    System.Windows.Media.Imaging.BitmapCreateOptions.None,
-                    System.Windows.Media.Imaging.BitmapCacheOption.OnLoad);
+            var hInst = System.Runtime.InteropServices.Marshal.GetHINSTANCE(typeof(MainWindow).Module);
+            var hIcon = LoadImage(hInst, new nint(1), 1 /*IMAGE_ICON*/, 0, 0, 0x40 /*LR_DEFAULTSIZE*/);
+            if (hIcon != nint.Zero)
+            {
+                Icon = System.Windows.Interop.Imaging.CreateBitmapSourceFromHIcon(
+                    hIcon, System.Windows.Int32Rect.Empty,
+                    System.Windows.Media.Imaging.BitmapSizeOptions.FromEmptyOptions());
+                DestroyIcon(hIcon);
+            }
         }
         catch { }
 

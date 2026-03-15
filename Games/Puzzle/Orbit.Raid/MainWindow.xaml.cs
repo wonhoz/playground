@@ -43,6 +43,18 @@ public partial class MainWindow : Window
         var hwnd = new System.Windows.Interop.WindowInteropHelper(this).Handle;
         int val = 1;
         DwmSetWindowAttribute(hwnd, 20, ref val, sizeof(int));
+
+        try
+        {
+            var sri = Application.GetResourceStream(new Uri("Resources/app.ico", UriKind.Relative));
+            if (sri?.Stream != null)
+                Icon = System.Windows.Media.Imaging.BitmapFrame.Create(
+                    sri.Stream,
+                    System.Windows.Media.Imaging.BitmapCreateOptions.None,
+                    System.Windows.Media.Imaging.BitmapCacheOption.OnLoad);
+        }
+        catch { }
+
         LoadLevel(_currentLevel);
     }
 

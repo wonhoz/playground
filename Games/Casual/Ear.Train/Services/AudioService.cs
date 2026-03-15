@@ -28,7 +28,7 @@ public class AudioService : IDisposable
             Frequency = frequency,
             Gain = amplitude
         };
-        var env = new EnvelopeSampleProvider(sig.ToMono(), durationSec, 0.05, 0.1, 0.7f, 0.15);
+        var env = new EnvelopeSampleProvider(sig, durationSec, 0.05, 0.1, 0.7f, 0.15);
         _mixer.AddMixerInput(env);
     }
 

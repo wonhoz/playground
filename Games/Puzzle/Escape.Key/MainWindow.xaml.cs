@@ -120,10 +120,9 @@ public partial class MainWindow : Window
     {
         using var con = new SqliteConnection($"Data Source={_dbPath}");
         con.Open();
-        con.CreateCommand().CommandText = """
-            CREATE TABLE IF NOT EXISTS progress(room INTEGER PRIMARY KEY, cleared INTEGER);
-            """;
-        con.CreateCommand().ExecuteNonQuery();
+        var cmd = con.CreateCommand();
+        cmd.CommandText = "CREATE TABLE IF NOT EXISTS progress(room INTEGER PRIMARY KEY, cleared INTEGER);";
+        cmd.ExecuteNonQuery();
     }
 
     void LoadProgress()

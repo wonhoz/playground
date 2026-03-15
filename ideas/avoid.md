@@ -68,6 +68,7 @@
 | `JSON.Fmt` | Tools.Utility | JSON 붙여넣기 즉시 beautify + 구문 강조 + 오류 줄/열 진단 + Lenient 파싱(주석·trailing comma·따옴표) ★26차 |
 | `Str.Forge` | Development/Analyzer | 멀티파일 Find & Replace 엔진 ★27차 |
 | `Win.Scope` | System/Manager | 실행 창 Z-order·투명도·클릭통과 실시간 조작 인스펙터 ★27차 |
+| `OAuth.Peek` | Dev/Inspector | JWT 디코더 + JWK 서명 검증 + OIDC Discovery + OAuth2 플로 다이어그램 + Auth 헤더 생성기 ★28차 |
 
 ---
 
@@ -278,7 +279,6 @@
 | `Img.Slice` | UI 목업·스프라이트시트 자동 슬라이서 (격자·여백감지·9-patch) ★27차 |
 | `Path.Audit` | ETW 기반 드라이버 없는 프로세스 파일시스템 접근 감사기 ★27차 |
 | `Key.Stream` | 강의·스크린캐스트용 키입력 실시간 화면 오버레이 (KeystrokeVisualizer) ★28차 |
-| `OAuth.Peek` | JWT/OIDC/OAuth2 토큰 로컬 디코더 + 클레임 시각화 + OAuth2 플로 다이어그램 ★28차 |
 | `Plan.Board` | 로컬 스프린트 Kanban + 번다운 차트 + 스토리 포인트 애자일 플래너 ★28차 |
 | `Prompt.Lab` | LLM 프롬프트 체인 노드 에디터 (출력→다음 노드 자동 입력) ★28차 |
 | `Env.Diff` | .env/.config 두 파일 구조 비교 + 누락 키 감지 + 시크릿 마스킹 내보내기 ★28차 |

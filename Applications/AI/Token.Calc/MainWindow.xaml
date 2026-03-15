@@ -1,0 +1,352 @@
+<Window x:Class="TokenCalc.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Token.Calc" Height="720" Width="1140"
+        Background="#0F0F1E" Foreground="#E0E0E0"
+        Loaded="Window_Loaded">
+    <Window.Resources>
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#E0E0E0"/>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="#252538"/>
+            <Setter Property="Foreground" Value="#E0E0E0"/>
+            <Setter Property="BorderBrush" Value="#444466"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="12,5"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="5" Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#353555"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Opacity" Value="0.4"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="Background" Value="#1A1A30"/>
+            <Setter Property="Foreground" Value="#E0E0E0"/>
+            <Setter Property="BorderBrush" Value="#333355"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="6,4"/>
+            <Setter Property="CaretBrush" Value="#E0E0E0"/>
+            <Setter Property="FontFamily" Value="Consolas"/>
+        </Style>
+        <Style TargetType="DataGrid">
+            <Setter Property="Background" Value="#0F0F1E"/>
+            <Setter Property="Foreground" Value="#E0E0E0"/>
+            <Setter Property="BorderBrush" Value="#333355"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="RowBackground" Value="#131328"/>
+            <Setter Property="AlternatingRowBackground" Value="#0F0F22"/>
+            <Setter Property="HorizontalGridLinesBrush" Value="#1E1E38"/>
+            <Setter Property="VerticalGridLinesBrush" Value="#1E1E38"/>
+            <Setter Property="ColumnHeaderHeight" Value="28"/>
+            <Setter Property="RowHeight" Value="26"/>
+        </Style>
+        <Style TargetType="DataGridColumnHeader">
+            <Setter Property="Background" Value="#1A1A30"/>
+            <Setter Property="Foreground" Value="#AAAACC"/>
+            <Setter Property="BorderBrush" Value="#333355"/>
+            <Setter Property="BorderThickness" Value="0,0,1,1"/>
+            <Setter Property="Padding" Value="8,0"/>
+            <Setter Property="FontSize" Value="11"/>
+        </Style>
+        <Style TargetType="DataGridCell">
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="6,2"/>
+            <Setter Property="Foreground" Value="#E0E0E0"/>
+            <Style.Triggers>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="Background" Value="#252545"/>
+                    <Setter Property="Foreground" Value="#FFFFFF"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="48"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="36"/>
+            <RowDefinition Height="24"/>
+        </Grid.RowDefinitions>
+
+        <!-- 헤더 -->
+        <Border Grid.Row="0" Background="#14142A" BorderBrush="#1E1E35" BorderThickness="0,0,0,1">
+            <Grid Margin="16,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock Text="⚡ Token.Calc" FontSize="16" FontWeight="Bold" Foreground="#50C8DC" Margin="0,0,16,0"/>
+                    <TextBlock Text="LLM 토큰 수 / 비용 멀티모델 계산기" FontSize="11" Foreground="#666688" VerticalAlignment="Center"/>
+                </StackPanel>
+                <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock x:Name="TxtTotalInputTokens" Text="총 입력 0 토큰" FontSize="11" Foreground="#888888" Margin="0,0,14,0" VerticalAlignment="Center"/>
+                    <Button x:Name="BtnExportCsv" Click="BtnExportCsv_Click" Margin="0,0,6,0">📋 CSV</Button>
+                    <Button x:Name="BtnExportJson" Click="BtnExportJson_Click">{ } JSON</Button>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- 메인 영역 -->
+        <Grid Grid.Row="1" Margin="12">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="340"/>
+                <ColumnDefinition Width="8"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- 왼쪽: 텍스트 입력 패널 -->
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="8"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="8"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="54"/>
+                </Grid.RowDefinitions>
+
+                <!-- System Prompt -->
+                <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,4">
+                    <TextBlock Text="시스템 프롬프트" FontSize="11" FontWeight="Bold" Foreground="#AAAACC" VerticalAlignment="Center"/>
+                    <TextBlock x:Name="TxtSystemTokens" Text="0 토큰" FontSize="10" Foreground="#555577" VerticalAlignment="Center" Margin="8,0,0,0"/>
+                </StackPanel>
+                <TextBox Grid.Row="1" x:Name="TxtSystem" AcceptsReturn="True" AcceptsTab="True"
+                         TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"
+                         TextChanged="TextInput_Changed"
+                         ToolTip="시스템 프롬프트 입력"/>
+
+                <!-- User Message -->
+                <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="0,0,0,4">
+                    <TextBlock Text="사용자 메시지" FontSize="11" FontWeight="Bold" Foreground="#AAAACC" VerticalAlignment="Center"/>
+                    <TextBlock x:Name="TxtUserTokens" Text="0 토큰" FontSize="10" Foreground="#555577" VerticalAlignment="Center" Margin="8,0,0,0"/>
+                </StackPanel>
+                <TextBox Grid.Row="4" x:Name="TxtUser" AcceptsReturn="True" AcceptsTab="True"
+                         TextWrapping="Wrap" VerticalScrollBarVisibility="Auto"
+                         TextChanged="TextInput_Changed"
+                         ToolTip="사용자 메시지 입력"/>
+
+                <!-- 예상 출력 토큰 수 -->
+                <StackPanel Grid.Row="6" Orientation="Horizontal" Margin="0,0,0,4">
+                    <TextBlock Text="예상 출력 토큰 수" FontSize="11" FontWeight="Bold" Foreground="#AAAACC" VerticalAlignment="Center"/>
+                    <TextBlock x:Name="TxtOutputTokens" Text="500 토큰" FontSize="10" Foreground="#555577" VerticalAlignment="Center" Margin="8,0,0,0"/>
+                </StackPanel>
+                <Grid Grid.Row="7">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <TextBox x:Name="TxtOutputCount" Text="500" TextAlignment="Right"
+                             FontSize="16" FontWeight="Bold" VerticalContentAlignment="Center"
+                             TextChanged="TxtOutputCount_TextChanged"/>
+                    <!-- 빠른 선택 버튼 -->
+                    <WrapPanel Grid.Row="1" Margin="0,4,0,0">
+                        <Button Tag="100"  Click="QuickOutput_Click" Padding="7,3" Margin="0,0,4,0" FontSize="10">100</Button>
+                        <Button Tag="500"  Click="QuickOutput_Click" Padding="7,3" Margin="0,0,4,0" FontSize="10">500</Button>
+                        <Button Tag="1000" Click="QuickOutput_Click" Padding="7,3" Margin="0,0,4,0" FontSize="10">1K</Button>
+                        <Button Tag="2000" Click="QuickOutput_Click" Padding="7,3" Margin="0,0,4,0" FontSize="10">2K</Button>
+                        <Button Tag="4000" Click="QuickOutput_Click" Padding="7,3" Margin="0,0,4,0" FontSize="10">4K</Button>
+                        <Button Tag="8000" Click="QuickOutput_Click" Padding="7,3" FontSize="10">8K</Button>
+                    </WrapPanel>
+                </Grid>
+            </Grid>
+
+            <!-- 구분선 -->
+            <Rectangle Grid.Column="1" Fill="#1E1E38"/>
+
+            <!-- 오른쪽: 모델 비교 DataGrid -->
+            <Grid Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,6">
+                    <TextBlock Text="모델 비교" FontSize="11" FontWeight="Bold" Foreground="#AAAACC" VerticalAlignment="Center"/>
+                    <TextBlock Text="  (단가 직접 편집 가능)" FontSize="10" Foreground="#555577" VerticalAlignment="Center"/>
+                    <Button x:Name="BtnResetPrices" Click="BtnResetPrices_Click"
+                            Padding="8,3" Margin="12,0,0,0" FontSize="10">↺ 단가 초기화</Button>
+                    <Button x:Name="BtnSortCost" Click="BtnSortCost_Click"
+                            Padding="8,3" Margin="6,0,0,0" FontSize="10">💰 비용순 정렬</Button>
+                </StackPanel>
+
+                <DataGrid Grid.Row="1" x:Name="ModelGrid"
+                          AutoGenerateColumns="False"
+                          CanUserAddRows="False" CanUserDeleteRows="False"
+                          SelectionMode="Single" SelectionUnit="FullRow">
+                    <DataGrid.Columns>
+                        <!-- Provider -->
+                        <DataGridTextColumn Header="제공사" Binding="{Binding Provider}" Width="80" IsReadOnly="True">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Foreground" Value="#7777AA"/>
+                                    <Setter Property="FontSize" Value="11"/>
+                                    <Setter Property="Padding" Value="6,0"/>
+                                    <Setter Property="VerticalAlignment" Value="Center"/>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                        <!-- Model Name -->
+                        <DataGridTextColumn Header="모델" Binding="{Binding Name}" Width="160" IsReadOnly="True">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Foreground" Value="#E0E0E0"/>
+                                    <Setter Property="FontWeight" Value="SemiBold"/>
+                                    <Setter Property="Padding" Value="6,0"/>
+                                    <Setter Property="VerticalAlignment" Value="Center"/>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                        <!-- Input Tokens -->
+                        <DataGridTextColumn Header="입력 토큰" Binding="{Binding InputTokensDisplay}" Width="80" IsReadOnly="True">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Foreground" Value="#A0D8A0"/>
+                                    <Setter Property="TextAlignment" Value="Right"/>
+                                    <Setter Property="Padding" Value="6,0"/>
+                                    <Setter Property="VerticalAlignment" Value="Center"/>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                        <!-- Output Tokens -->
+                        <DataGridTextColumn Header="출력 토큰" Binding="{Binding OutputTokensDisplay}" Width="80" IsReadOnly="True">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Foreground" Value="#A0D8A0"/>
+                                    <Setter Property="TextAlignment" Value="Right"/>
+                                    <Setter Property="Padding" Value="6,0"/>
+                                    <Setter Property="VerticalAlignment" Value="Center"/>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                        <!-- Input $/1M (editable) -->
+                        <DataGridTextColumn Header="입력 $/1M" Binding="{Binding InputCostPerM, StringFormat={}{0:F3}}" Width="82">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Foreground" Value="#FFDD88"/>
+                                    <Setter Property="TextAlignment" Value="Right"/>
+                                    <Setter Property="Padding" Value="6,0"/>
+                                    <Setter Property="VerticalAlignment" Value="Center"/>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                            <DataGridTextColumn.EditingElementStyle>
+                                <Style TargetType="TextBox">
+                                    <Setter Property="Background" Value="#252540"/>
+                                    <Setter Property="Foreground" Value="#FFDD88"/>
+                                    <Setter Property="TextAlignment" Value="Right"/>
+                                </Style>
+                            </DataGridTextColumn.EditingElementStyle>
+                        </DataGridTextColumn>
+                        <!-- Output $/1M (editable) -->
+                        <DataGridTextColumn Header="출력 $/1M" Binding="{Binding OutputCostPerM, StringFormat={}{0:F3}}" Width="82">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Foreground" Value="#FFDD88"/>
+                                    <Setter Property="TextAlignment" Value="Right"/>
+                                    <Setter Property="Padding" Value="6,0"/>
+                                    <Setter Property="VerticalAlignment" Value="Center"/>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                            <DataGridTextColumn.EditingElementStyle>
+                                <Style TargetType="TextBox">
+                                    <Setter Property="Background" Value="#252540"/>
+                                    <Setter Property="Foreground" Value="#FFDD88"/>
+                                    <Setter Property="TextAlignment" Value="Right"/>
+                                </Style>
+                            </DataGridTextColumn.EditingElementStyle>
+                        </DataGridTextColumn>
+                        <!-- Input Cost -->
+                        <DataGridTextColumn Header="입력 비용" Binding="{Binding InputCostDisplay}" Width="90" IsReadOnly="True">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Foreground" Value="#88CCFF"/>
+                                    <Setter Property="TextAlignment" Value="Right"/>
+                                    <Setter Property="Padding" Value="6,0"/>
+                                    <Setter Property="VerticalAlignment" Value="Center"/>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                        <!-- Output Cost -->
+                        <DataGridTextColumn Header="출력 비용" Binding="{Binding OutputCostDisplay}" Width="90" IsReadOnly="True">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Foreground" Value="#88CCFF"/>
+                                    <Setter Property="TextAlignment" Value="Right"/>
+                                    <Setter Property="Padding" Value="6,0"/>
+                                    <Setter Property="VerticalAlignment" Value="Center"/>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                        <!-- Total Cost -->
+                        <DataGridTextColumn Header="합계 비용" Binding="{Binding TotalCostDisplay}" Width="*" IsReadOnly="True">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Foreground" Value="#50C8DC"/>
+                                    <Setter Property="FontWeight" Value="Bold"/>
+                                    <Setter Property="TextAlignment" Value="Right"/>
+                                    <Setter Property="Padding" Value="6,0"/>
+                                    <Setter Property="VerticalAlignment" Value="Center"/>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+                <!-- 인코딩 범례 -->
+                <Border Grid.Row="2" Background="#13132A" BorderBrush="#1E1E38" BorderThickness="1"
+                        CornerRadius="4" Padding="10,5" Margin="0,6,0,0">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="인코딩:" FontSize="10" Foreground="#555577" Margin="0,0,8,0" VerticalAlignment="Center"/>
+                        <TextBlock Text="o200k_base" FontSize="10" Foreground="#A0D8A0" Margin="0,0,4,0" VerticalAlignment="Center"/>
+                        <TextBlock Text="= GPT-4o/o1/o3 계열" FontSize="10" Foreground="#555577" Margin="0,0,16,0" VerticalAlignment="Center"/>
+                        <TextBlock Text="cl100k_base" FontSize="10" Foreground="#A0D8A0" Margin="0,0,4,0" VerticalAlignment="Center"/>
+                        <TextBlock Text="= GPT-4/3.5, Llama, Mistral" FontSize="10" Foreground="#555577" Margin="0,0,16,0" VerticalAlignment="Center"/>
+                        <TextBlock Text="추정값" FontSize="10" Foreground="#FFDD88" Margin="0,0,4,0" VerticalAlignment="Center"/>
+                        <TextBlock Text="= Claude, Gemini (문자수÷3.5)" FontSize="10" Foreground="#555577" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </Grid>
+
+        <!-- 내보내기 버튼 영역 -->
+        <Border Grid.Row="2" Background="#13132A" BorderBrush="#1E1E38" BorderThickness="0,1,0,0"
+                Padding="12,0">
+            <Grid>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock Text="단가 편집:" FontSize="11" Foreground="#666688" Margin="0,0,8,0" VerticalAlignment="Center"/>
+                    <TextBlock Text="셀을 더블클릭하면 입력 $/1M, 출력 $/1M 단가를 직접 편집할 수 있습니다." FontSize="11" Foreground="#555577" VerticalAlignment="Center"/>
+                </StackPanel>
+                <TextBlock x:Name="TxtCheapestModel" Text="" FontSize="11" Foreground="#50C8DC"
+                           HorizontalAlignment="Right" VerticalAlignment="Center"/>
+            </Grid>
+        </Border>
+
+        <!-- 상태바 -->
+        <Border Grid.Row="3" Background="#0A0A1A" BorderBrush="#1A1A30" BorderThickness="0,1,0,0">
+            <TextBlock x:Name="StatusBar" Margin="10,0" VerticalAlignment="Center"
+                       FontSize="10" Foreground="#666688"/>
+        </Border>
+    </Grid>
+</Window>

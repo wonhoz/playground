@@ -5,8 +5,10 @@ using System.Text.Json;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using BadgeForge.Services;
 using SkiaSharp;
+using Svg.Skia;
 using SysIO = System.IO;
 
 namespace BadgeForge;
@@ -80,15 +82,9 @@ public partial class MainWindow : Window
             UpdateSwatch(LabelColorSwatch, LabelColorBox.Text.Trim());
             UpdateSwatch(ValueColorSwatch, ValueColorBox.Text.Trim());
 
-            // WebBrowser로 SVG 렌더링 (DOCTYPE 필수 — 없으면 IE quirks 모드로 SVG 미지원, 텍스트만 이어붙여 표시됨)
-            string html = $"""
-                <!DOCTYPE html>
-                <html><body style="margin:0;padding:0;background:transparent">
-                {_currentSvg}
-                </body></html>
-                """;
-            PreviewBrowser.NavigateToString(html);
-            PreviewBrowserDark.NavigateToString(html);
+            // Svg.Skia로 SVG → BitmapSource 렌더링 (WPF WebBrowser IE 엔진 SVG 미지원 문제 우회)
+            PreviewImage.Source     = RenderSvg(_currentSvg, background: false);
+            PreviewImageDark.Source = RenderSvg(_currentSvg, background: false);
 
             StatusBar.Text = $"배지 생성됨 | SVG 크기: {_currentSvg.Length}자";
         }
@@ -96,6 +92,39 @@ public partial class MainWindow : Window
         {
             StatusBar.Text = $"오류: {ex.Message}";
         }
+    }
+
+    static BitmapSource? RenderSvg(string svgContent, bool background)
+    {
+        try
+        {
+            using var skSvg = new SKSvg();
+            using var stream = new MemoryStream(Encoding.UTF8.GetBytes(svgContent));
+            skSvg.Load(stream);
+            if (skSvg.Picture == null) return null;
+
+            var bounds = skSvg.Picture.CullRect;
+            int w = Math.Max(1, (int)Math.Ceiling(bounds.Width));
+            int h = Math.Max(1, (int)Math.Ceiling(bounds.Height));
+
+            using var bitmap = new SKBitmap(w * 2, h * 2);  // 2× 해상도
+            using var canvas = new SKCanvas(bitmap);
+            canvas.Clear(SKColors.Transparent);
+            canvas.Scale(2, 2);
+            canvas.DrawPicture(skSvg.Picture);
+
+            using var image = SKImage.FromBitmap(bitmap);
+            using var data = image.Encode(SKEncodedImageFormat.Png, 100);
+            using var ms = new MemoryStream(data.ToArray());
+            var bmp = new BitmapImage();
+            bmp.BeginInit();
+            bmp.CacheOption = BitmapCacheOption.OnLoad;
+            bmp.StreamSource = ms;
+            bmp.EndInit();
+            bmp.Freeze();
+            return bmp;
+        }
+        catch { return null; }
     }
 
     void UpdateSwatch(Border swatch, string hex)

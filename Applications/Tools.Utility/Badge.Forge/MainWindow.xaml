@@ -109,16 +109,16 @@
             <TextBlock Text="미리보기" Foreground="#888" FontFamily="Consolas"
                        FontSize="11" Margin="0,0,0,10"/>
 
-            <!-- 배지 미리보기 (WebBrowser) -->
+            <!-- 배지 미리보기 (Image) -->
             <Border Background="#FFFFFF" CornerRadius="4" Padding="20,16" HorizontalAlignment="Left">
-              <WebBrowser x:Name="PreviewBrowser" Width="400" Height="60"/>
+              <Image x:Name="PreviewImage" Stretch="None" RenderOptions.BitmapScalingMode="NearestNeighbor"/>
             </Border>
 
             <!-- 어두운 배경 미리보기 -->
             <TextBlock Text="어두운 배경" Foreground="#888" FontFamily="Consolas"
                        FontSize="11" Margin="0,12,0,6"/>
             <Border Background="#1A1A2E" CornerRadius="4" Padding="20,16" HorizontalAlignment="Left">
-              <WebBrowser x:Name="PreviewBrowserDark" Width="400" Height="60"/>
+              <Image x:Name="PreviewImageDark" Stretch="None" RenderOptions.BitmapScalingMode="NearestNeighbor"/>
             </Border>
 
             <!-- SVG 코드 -->

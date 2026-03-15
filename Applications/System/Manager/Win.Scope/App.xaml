@@ -40,13 +40,13 @@
             <Border Background="#0A0A18" CornerRadius="3">
                 <Track x:Name="PART_Track" IsDirectionReversed="True">
                     <Track.DecreaseRepeatButton>
-                        <RepeatButton Style="{StaticResource SbPageStyle}" Command="ScrollBar.PageUpCommand"/>
+                        <RepeatButton Style="{DynamicResource SbPageStyle}" Command="ScrollBar.PageUpCommand"/>
                     </Track.DecreaseRepeatButton>
                     <Track.Thumb>
-                        <Thumb Style="{StaticResource SbThumbStyle}" Margin="1,2"/>
+                        <Thumb Style="{DynamicResource SbThumbStyle}" Margin="1,2"/>
                     </Track.Thumb>
                     <Track.IncreaseRepeatButton>
-                        <RepeatButton Style="{StaticResource SbPageStyle}" Command="ScrollBar.PageDownCommand"/>
+                        <RepeatButton Style="{DynamicResource SbPageStyle}" Command="ScrollBar.PageDownCommand"/>
                     </Track.IncreaseRepeatButton>
                 </Track>
             </Border>
@@ -56,13 +56,13 @@
             <Border Background="#0A0A18" CornerRadius="3">
                 <Track x:Name="PART_Track">
                     <Track.DecreaseRepeatButton>
-                        <RepeatButton Style="{StaticResource SbPageStyle}" Command="ScrollBar.PageLeftCommand"/>
+                        <RepeatButton Style="{DynamicResource SbPageStyle}" Command="ScrollBar.PageLeftCommand"/>
                     </Track.DecreaseRepeatButton>
                     <Track.Thumb>
-                        <Thumb Style="{StaticResource SbThumbStyle}" Margin="2,1"/>
+                        <Thumb Style="{DynamicResource SbThumbStyle}" Margin="2,1"/>
                     </Track.Thumb>
                     <Track.IncreaseRepeatButton>
-                        <RepeatButton Style="{StaticResource SbPageStyle}" Command="ScrollBar.PageRightCommand"/>
+                        <RepeatButton Style="{DynamicResource SbPageStyle}" Command="ScrollBar.PageRightCommand"/>
                     </Track.IncreaseRepeatButton>
                 </Track>
             </Border>
@@ -75,12 +75,12 @@
                 <Trigger Property="Orientation" Value="Vertical">
                     <Setter Property="Width" Value="6"/>
                     <Setter Property="MinWidth" Value="6"/>
-                    <Setter Property="Template" Value="{StaticResource SbVerticalTemplate}"/>
+                    <Setter Property="Template" Value="{DynamicResource SbVerticalTemplate}"/>
                 </Trigger>
                 <Trigger Property="Orientation" Value="Horizontal">
                     <Setter Property="Height" Value="6"/>
                     <Setter Property="MinHeight" Value="6"/>
-                    <Setter Property="Template" Value="{StaticResource SbHorizontalTemplate}"/>
+                    <Setter Property="Template" Value="{DynamicResource SbHorizontalTemplate}"/>
                 </Trigger>
             </Style.Triggers>
         </Style>

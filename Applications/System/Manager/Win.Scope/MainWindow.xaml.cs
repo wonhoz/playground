@@ -45,6 +45,15 @@ public partial class MainWindow : Window
         var hwnd = new System.Windows.Interop.WindowInteropHelper(this).Handle;
         int val = 1;
         DwmSetWindowAttribute(hwnd, 20, ref val, sizeof(int));
+
+        // 아이콘: XAML TypeConverter 오류 방지를 위해 코드에서 로드
+        try
+        {
+            Icon = System.Windows.Media.Imaging.BitmapFrame.Create(
+                new Uri("pack://application:,,,/Resources/app.ico"));
+        }
+        catch { }
+
         RefreshList();
     }
 

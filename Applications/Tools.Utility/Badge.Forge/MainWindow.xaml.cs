@@ -80,8 +80,9 @@ public partial class MainWindow : Window
             UpdateSwatch(LabelColorSwatch, LabelColorBox.Text.Trim());
             UpdateSwatch(ValueColorSwatch, ValueColorBox.Text.Trim());
 
-            // WebBrowser로 SVG 렌더링
+            // WebBrowser로 SVG 렌더링 (DOCTYPE 필수 — 없으면 IE quirks 모드로 SVG 미지원, 텍스트만 이어붙여 표시됨)
             string html = $"""
+                <!DOCTYPE html>
                 <html><body style="margin:0;padding:0;background:transparent">
                 {_currentSvg}
                 </body></html>

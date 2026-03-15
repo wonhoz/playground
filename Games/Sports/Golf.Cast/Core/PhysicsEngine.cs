@@ -30,30 +30,33 @@ public class PhysicsEngine
         // 2. 위치 업데이트
         ball.Pos += ball.Vel * dt;
 
-        // 3. 장애물 업데이트 & 충돌
-        foreach (var obs in hole.Obstacles)
-        {
-            obs.Update(dt);
-            CollideWithObstacle(ball, obs);
-        }
-
-        // 4. 벽 충돌
-        foreach (var wall in hole.Walls)
-            CollideWithWall(ball, wall);
-
-        // 5. 홀 흡입
+        // 3. 홀 흡입 (벽 충돌보다 먼저 체크해야 벽에 붙은 홀도 진입 가능)
         var toHole = hole.HolePos - ball.Pos;
         if (toHole.Length < hole.HoleRadius * HoleSuckRadius)
         {
-            // 홀 안으로 빠져들기
-            ball.Vel += toHole.Normalized * 200 * dt;
-            if (toHole.Length < hole.HoleRadius * 0.7)
+            ball.Vel += toHole.Normalized * 300 * dt;
+            if (toHole.Length < hole.HoleRadius)  // 전체 홀 반경 내에 들어오면 진입
             {
                 ball.InHole = true;
                 ball.Vel    = Vec2.Zero;
                 ball.Pos    = hole.HolePos;
                 return;
             }
+        }
+
+        // 4. 장애물 업데이트 & 충돌 (홀 흡입 반경 밖에서만)
+        foreach (var obs in hole.Obstacles)
+        {
+            obs.Update(dt);
+            CollideWithObstacle(ball, obs);
+        }
+
+        // 5. 벽 충돌 (홀 흡입 반경 내에서는 벽 충돌 스킵 — 홀이 벽에 붙어있는 경우 대응)
+        bool inSuckZone = toHole.Length < hole.HoleRadius * HoleSuckRadius;
+        if (!inSuckZone)
+        {
+            foreach (var wall in hole.Walls)
+                CollideWithWall(ball, wall);
         }
 
         // 6. 물 빠짐

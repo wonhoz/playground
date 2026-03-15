@@ -23,6 +23,8 @@ public partial class MainWindow : Window
     private const uint SWP_NOSIZE = 0x0001;
     private const uint SWP_NOMOVE = 0x0002;
     private const uint SWP_NOACTIVATE = 0x0010;
+    private const uint SWP_NOZORDER = 0x0004;
+    private const uint SWP_FRAMECHANGED = 0x0020;
     private const int GWL_EXSTYLE = -20;
     private const long WS_EX_LAYERED = 0x80000;
     private const uint LWA_ALPHA = 0x2;
@@ -136,7 +138,11 @@ public partial class MainWindow : Window
         if (!IsWindow(hWnd)) return;
         var exStyle = (long)GetWindowLongPtr(hWnd, GWL_EXSTYLE);
         if ((exStyle & WS_EX_LAYERED) == 0)
+        {
             SetWindowLongPtr(hWnd, GWL_EXSTYLE, new nint(exStyle | WS_EX_LAYERED));
+            // WS_EX_LAYERED 추가 후 스타일 변경을 즉시 적용
+            SetWindowPos(hWnd, nint.Zero, 0, 0, 0, 0, SWP_NOSIZE | SWP_NOMOVE | SWP_NOZORDER | SWP_NOACTIVATE | SWP_FRAMECHANGED);
+        }
         SetLayeredWindowAttributes(hWnd, 0, alpha, LWA_ALPHA);
     }
 
@@ -162,15 +168,28 @@ public partial class MainWindow : Window
     private void BtnZTop_Click(object sender, RoutedEventArgs e)
     {
         if (_selected == null) return;
-        SetWindowPos(_selected.Handle, HWND_TOP, 0, 0, 0, 0, SWP_NOSIZE | SWP_NOMOVE | SWP_NOACTIVATE);
+        var handle = _selected.Handle;
         StatusBar.Text = $"맨 위로 이동: {_selected.DisplayTitle}";
+        // 버튼 클릭으로 Win.Scope가 활성화된 후 처리해야 Z-order가 덮이지 않음
+        // TOPMOST 설정 후 NOTOPMOST로 해제하면 비-topmost 창 중 최상위에 위치
+        Dispatcher.InvokeAsync(() =>
+        {
+            if (!IsWindow(handle)) return;
+            SetWindowPos(handle, HWND_TOPMOST,  0, 0, 0, 0, SWP_NOSIZE | SWP_NOMOVE | SWP_NOACTIVATE);
+            SetWindowPos(handle, HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOSIZE | SWP_NOMOVE | SWP_NOACTIVATE);
+        }, System.Windows.Threading.DispatcherPriority.Background);
     }
 
     private void BtnZBottom_Click(object sender, RoutedEventArgs e)
     {
         if (_selected == null) return;
-        SetWindowPos(_selected.Handle, HWND_BOTTOM, 0, 0, 0, 0, SWP_NOSIZE | SWP_NOMOVE | SWP_NOACTIVATE);
+        var handle = _selected.Handle;
         StatusBar.Text = $"맨 아래로 이동: {_selected.DisplayTitle}";
+        Dispatcher.InvokeAsync(() =>
+        {
+            if (!IsWindow(handle)) return;
+            SetWindowPos(handle, HWND_BOTTOM, 0, 0, 0, 0, SWP_NOSIZE | SWP_NOMOVE | SWP_NOACTIVATE);
+        }, System.Windows.Threading.DispatcherPriority.Background);
     }
 
     private void BtnZUp_Click(object sender, RoutedEventArgs e)

@@ -2,7 +2,7 @@
 
 > 이 파일은 브레인스토밍 시 **이미 제안되거나 구현된 아이디어를 다시 꺼내지 않도록** 하는 필터다.
 > 새 아이디어를 제안하기 전 반드시 이 목록을 확인할 것.
-> 마지막 갱신: 2026-03-14 (28차 — 브레인스토밍 20개 추가)
+> 마지막 갱신: 2026-03-15 (29차 — 브레인스토밍 20개 추가)
 >
 > **구조**: 구현완료 앱 → 구현완료 게임 → 아카이브 → 제안된 미구현 아이디어(앱/게임) → 유사 개념 그룹
 
@@ -279,6 +279,16 @@
 | `Img.Slice` | UI 목업·스프라이트시트 자동 슬라이서 (격자·여백감지·9-patch) ★27차 |
 | `Path.Audit` | ETW 기반 드라이버 없는 프로세스 파일시스템 접근 감사기 ★27차 |
 | `Key.Stream` | 강의·스크린캐스트용 키입력 실시간 화면 오버레이 (KeystrokeVisualizer) ★28차 |
+| `Schema.Mock` | JSON Schema/OpenAPI 3.x → Bogus Faker 가짜 데이터 즉시 생성 + JSON/CSV 내보내기 ★29차 |
+| `Hook.Lab` | Webhook 수신 로컬 터널 (cloudflared) + 페이로드 파싱·재전송·HMAC 검증 인스펙터 ★29차 |
+| `Dep.Graph` | NuGet/npm/pip 전이 의존성 D3 방향 그래프 + 버전 충돌·취약 패키지 감지 ★29차 |
+| `VM.Cast` | Hyper-V/WSL2/VirtualBox 인스턴스 원클릭 시작·중지·스냅샷 트레이 관리자 ★29차 |
+| `Data.Map` | GeoJSON/TopoJSON/CSV 위경도 PMTiles 오프라인 인터랙티브 지도 시각화·레이어 편집 ★29차 |
+| `Ping.Cast` | 다중 호스트 ICMP 핑 연속 모니터 + 응답시간 히스토리 스파크라인 트레이 앱 ★29차 |
+| `Stub.Forge` | OpenAPI 3.x → C#/TypeScript/Python 강타입 클라이언트 스텁 코드 자동 생성기 ★29차 |
+| `Metric.Cast` | Prometheus /metrics 엔드포인트 스크래퍼 + 실시간 시계열 차트 대시보드 ★29차 |
+| `Proc.Bench` | CPU 단일·멀티스레드 / 메모리 대역폭·레이턴시 / 스토리지 IOPS 종합 벤치마크 스위트 ★29차 |
+| `Log.Struct` | JSON 구조화 로그 tail -f 라이브 스트리머 (JQ 필터·레벨 색상·컬럼 뷰) ★29차 |
 | `Plan.Board` | 로컬 스프린트 Kanban + 번다운 차트 + 스토리 포인트 애자일 플래너 ★28차 |
 | `Prompt.Lab` | LLM 프롬프트 체인 노드 에디터 (출력→다음 노드 자동 입력) ★28차 |
 | `Env.Diff` | .env/.config 두 파일 구조 비교 + 누락 키 감지 + 시크릿 마스킹 내보내기 ★28차 |
@@ -617,6 +627,16 @@
 | `Tide.Hunt` | Puzzle/Adventure/Timing | 조수 간만 사이클 타이밍 기반 숨겨진 경로 탐험 퍼즐 어드벤처 ★28차 |
 | `Cell.Grow` | Puzzle/Simulation/Educational | 세포 분열 규칙 편집 → 목표 세포 패턴 달성 진화 퍼즐 ★28차 |
 | `Rune.Web` | Puzzle/Logic/Fantasy | 거미줄 절점 룬 심볼 배치 에너지 흐름 완성 퍼즐 ★28차 |
+| `Flock.Rush` | Casual/Strategy/Physics | Boids 군집 다중 종 동물을 바람 소용돌이·울타리로 종별 우리에 몰아넣는 셰퍼드 퍼즐 ★29차 |
+| `Terra.Form` | Puzzle/Simulation/Science | 육각 격자 행성 지질·생태 카드 배치+셀룰러 오토마타 연쇄로 목표 바이옴 비율 달성 ★29차 |
+| `Card.Weave` | Puzzle/Narrative/Symbolic | 타로 카드 상징적 관계 규칙으로 테이블 배열해 열린 결말 이야기 완성 ★29차 |
+| `Nano.Race` | Arcade/Science/Racing | 브라운 운동+온도 구역 물리가 적용되는 분자 스케일 혈관 나노봇 레이싱 ★29차 |
+| `Route.Fox` | Puzzle/Casual/Logistics | 컨베이어 벨트 네트워크 스위치 실시간 클릭으로 소포 목적지별 분류 타이밍 퍼즐 ★29차 |
+| `Sand.Craft` | Sandbox/Builder/Survival | 입자 침식 물리 파도 vs 마우스 스컬팅 모래성 자유 건축 방어 게임 ★29차 |
+| `Dream.Shift` | Platformer/Puzzle/Surreal | 점프 방향=중력 방향 8방향 회전 전환 꿈속 초현실 플랫포머 ★29차 |
+| `Morse.Run` | Rhythm/Educational/Runner | 모스 부호 청각 해독 입력 + 사이드스크롤 러너 조종 동시 이중 조작 ★29차 |
+| `Quill.Quest` | Skill/Educational/Artistic | 역사 문자(한글·한자·아랍·갑골문) 획 순서 DTW 정밀 채점 캘리그래피 기술 게임 ★29차 |
+| `Bloom.Maze` | Arcade/Survival/Bio | L-시스템 덩굴이 실시간 자라며 막히는 동적 미로 생존 아케이드 ★29차 |
 
 ---
 
@@ -777,3 +797,23 @@
 | **수위/조수 타이밍 퍼즐** | Tide.Hunt (조수 간만 사이클 탐험) ≠ Sand.Storm (모래폭풍 생존) ≠ Magma.Flow (용암 유체) ≠ Fluid.Rush (유체 시뮬) |
 | **세포/생물 진화 퍼즐** | Cell.Grow (분열 규칙 편집→패턴 달성) ≠ Colony.Sim (개미 페로몬) ≠ Bloom.Craft (세포 BFS vs AI) ≠ Cell.War (세포 흡수 경쟁) |
 | **거미줄/방사형 회로 퍼즐** | Rune.Web (방사형 에너지 흐름 분배) ≠ Volt.Chain (전류 AND/NOT 게이트) ≠ Spring.Web (Verlet 거미줄 물리) ≠ Net.Weave (그래프 평면화) |
+| **Fake/목업 데이터 생성** | Schema.Mock (Schema/OpenAPI → Bogus Faker JSON/CSV) ≠ Mock.Server ✅ (HTTP 응답 목업) ≠ Api.Probe ✅ (수동 요청 테스터) |
+| **Webhook 수신/테스트** | Hook.Lab (로컬 터널+수신+재전송+HMAC) ≠ Mock.Server ✅ (응답 정의 서버) ≠ Api.Probe ✅ (송신 테스터) |
+| **패키지 의존성 그래프** | Dep.Graph (NuGet/npm/pip 전이 의존성 버전 충돌 시각화) ≠ Git.Stats ✅ (커밋 통계) ≠ Schema.Diff (스키마 버전 비교) ≠ Pack.Cast (패키지 관리 GUI) |
+| **가상머신 관리** | VM.Cast (Hyper-V/WSL2/VirtualBox 라이프사이클 트레이) ≠ Vhd.Cast (VHD/VHDX 파일 마운트) ≠ App.Temp (샌드박스 변경 롤백) |
+| **공간 데이터 지도 시각화** | Data.Map (GeoJSON/TopoJSON/CSV 오프라인 인터랙티브 지도) ≠ Net.Trace (traceroute 지오로케이션) ≠ Ping.Map (CDN 지연시간 세계지도) ≠ Topo.Cast (LAN 토폴로지 그래프) |
+| **다중 호스트 핑 모니터** | Ping.Cast (사용자 정의 호스트 연속 ICMP+히스토리 그래프) ≠ Ping.Map (CDN 세계지도 일회성) ≠ Uptime.Eye (HTTP 200 폴링) ≠ Net.Scan (LAN ARP 스캔) |
+| **OpenAPI 클라이언트 생성** | Stub.Forge (OpenAPI→강타입 클라이언트 코드) ≠ Proto.Forge (gRPC/Protobuf 테스터) ≠ Schema.View (다이어그램) ≠ Api.Probe ✅ (수동 테스터) |
+| **Prometheus/지표 모니터** | Metric.Cast (Prometheus /metrics 스크래퍼+시계열 차트) ≠ Tray.Stats ✅ (로컬 시스템 CPU/RAM) ≠ Deploy.Watch (CI/CD 빌드 상태) ≠ Uptime.Eye (HTTP 가동여부) |
+| **종합 하드웨어 벤치마크** | Proc.Bench (CPU+메모리+스토리지 종합 일회성 점수) ≠ Drive.Bench (디스크 전용) ≠ Bench.Run (.NET 코드 스니펫 BenchmarkDotNet) ≠ Tray.Stats ✅ (실시간 모니터) |
+| **구조화 로그 스트리밍** | Log.Struct (JSON 구조화 tail -f + JQ 필터 라이브) ≠ Log.Lens ✅ (정적 파일 분석) ≠ Log.Merge (다중 로그 병합 타임라인) ≠ Win.Event (Windows EVTX 뷰어) |
+| **Boids 군집 셰퍼드** | Flock.Rush (다중 종 몰이 퍼즐) ≠ Swarm.Rush (Boids 적 슈터·생존) ≠ Colony.Sim (개미 페로몬 단일 군집) ≠ Cell.War (세포 흡수 경쟁) |
+| **행성/세계 생성 퍼즐** | Terra.Form (지질+생태 카드 배치 바이옴 목표) ≠ Rain.Maker (날씨 신 구름 배치) ≠ Fault.Line (지각판 이동 퍼즐) ≠ Crystal.Grow (결정화 셀룰러 오토마타) |
+| **타로/카드 내러티브 퍼즐** | Card.Weave (타로 상징 관계 규칙 열린 배열) ≠ Myth.Weave (신화 카드 시간순 고정 정답) ≠ Deck.Crawl (전투 카드 로그라이트) ≠ Case.File (형사 증거 보드) |
+| **미시 스케일 물리 레이싱** | Nano.Race (브라운 운동+온도 분자 스케일) ≠ Drone.Race (4로터 PWM FPV) ≠ Flux.Drift (자기장 거시 레이싱) ≠ Spiral.Rush (나선 트랙 원심력) |
+| **물류/패킷 라우팅 퍼즐** | Route.Fox (컨베이어 스위치 실시간 소포 분류) ≠ Rush.Cross (교차로 신호 타이밍) ≠ Flow.Pipe (파이프 연결 퍼즐) ≠ Volt.Chain (전류 AND/NOT 게이트) |
+| **침식/퇴적 물리 건축** | Sand.Craft (파도 침식 vs 모래성 스컬팅 방어) ≠ Tide.Hunt (조수 타이밍 탐험) ≠ Sand.Storm (모래폭풍 방벽 생존) ≠ Wobble.Stack (소프트바디 쌓기) |
+| **다방향 중력 전환** | Dream.Shift (점프=중력 8방향 회전) ≠ Gravity.Flip ✅ (이진 상하 반전) ≠ Magnet.Jump (N/S 극성 반발 발판) ≠ Rift.Jump (공간 균열 순간이동) |
+| **이중 조작 / 멀티태스킹 게임** | Morse.Run (모스 해독+러너 동시) ≠ Rhythm.Type (가사 박자 타이핑) ≠ Signal.Cast (시각+청각 시퀀스 재현) ≠ Fuse.Ball (단일 입력 두 공 조종) |
+| **획 순서 / 필기 기술** | Quill.Quest (역사 문자 DTW 획 순서 정밀 채점) ≠ Sym.Draw (대칭 만다라 드로잉) ≠ Shutter.Run (궤적 장노출 드로잉) ≠ Trace.Run (한붓 그리기 해밀턴) |
+| **동적 성장 미로** | Bloom.Maze (L-시스템 덩굴 실시간 성장·경로 소멸) ≠ Maze.Dread (정적 미로+시야 제한) ≠ Maze.Craft (역발상 미로 설계 vs AI) ≠ Leaf.Grow ✅ (L-시스템 성장 시뮬) |

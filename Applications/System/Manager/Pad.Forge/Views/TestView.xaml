@@ -89,7 +89,7 @@
                                  Foreground="{StaticResource BrAccent}"
                                  Background="{StaticResource BrBgDeep}" />
                     <TextBlock FontSize="10" Foreground="{StaticResource BrTextSecondary}">
-                        <Run Text="{Binding LT, StringFormat={}{0:F0}}" /><Run Text="%" />
+                        <Run Text="{Binding LT, Mode=OneWay, StringFormat={}{0:F0}}" /><Run Text="%" />
                     </TextBlock>
                 </StackPanel>
                 <StackPanel Grid.Column="1">
@@ -98,7 +98,7 @@
                                  Foreground="{StaticResource BrAccent}"
                                  Background="{StaticResource BrBgDeep}" />
                     <TextBlock FontSize="10" Foreground="{StaticResource BrTextSecondary}">
-                        <Run Text="{Binding RT, StringFormat={}{0:F0}}" /><Run Text="%" />
+                        <Run Text="{Binding RT, Mode=OneWay, StringFormat={}{0:F0}}" /><Run Text="%" />
                     </TextBlock>
                 </StackPanel>
             </Grid>

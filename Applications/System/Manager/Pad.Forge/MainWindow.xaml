@@ -209,7 +209,7 @@
                 <TextBlock VerticalAlignment="Center" FontSize="11"
                            Foreground="{StaticResource BrTextSecondary}">
                     <Run Text="연결된 컨트롤러: " />
-                    <Run Text="{Binding Controllers.Count}" />
+                    <Run Text="{Binding Controllers.Count, Mode=OneWay}" />
                 </TextBlock>
                 <TextBlock Grid.Column="1" VerticalAlignment="Center" FontSize="11"
                            Foreground="{StaticResource BrTextSecondary}"

@@ -2,9 +2,22 @@
 
 > 이 파일은 브레인스토밍 시 **이미 제안되거나 구현된 아이디어를 다시 꺼내지 않도록** 하는 필터다.
 > 새 아이디어를 제안하기 전 반드시 이 목록을 확인할 것.
-> 마지막 갱신: 2026-03-15 (29차 — 브레인스토밍 20개 추가)
->
-> **구조**: 구현완료 앱 → 구현완료 게임 → 아카이브 → 제안된 미구현 아이디어(앱/게임) → 유사 개념 그룹
+> 마지막 갱신: 2026-03-15 (30차 — 브레인스토밍 20개 추가)
+
+---
+
+## 목차
+
+| 섹션 | 내용 |
+|------|------|
+| [1. 구현 완료 앱](#1-구현-완료-앱-applications) | 구현 및 릴리즈된 Applications |
+| [2. 구현 완료 게임](#2-구현-완료-게임-games) | 구현 및 릴리즈된 Games |
+| [3. 아카이브](#3-아카이브-구현-후-보관) | 보관 처리된 앱/게임 |
+| [4. 제안된 미구현 아이디어](#4-제안된-미구현-아이디어) | 브레인스토밍 완료, 미구현 앱/게임 목록 |
+| [5. 제안된 미구현 게임](#5-제안된-미구현-게임) | 미구현 게임 상세 목록 |
+| [6. 유사 개념 그룹](#6-유사-개념-그룹-중복-주의) | 중복 방지 카테고리 그룹 |
+
+> ★N차 = 해당 차수 브레인스토밍에서 처음 제안됨 / ✅ = 구현 완료
 
 ---
 
@@ -297,6 +310,16 @@
 | `Tab.Host` | 임의 앱 창을 탭 컨테이너에 임베드하는 멀티탭 그룹 관리자 ★28차 |
 | `Typo.Guard` | 코드베이스·기술 문서 오타 감지기 (typos/codespell 통합, 커스텀 사전) ★28차 |
 | `Color.Walk` | Windows 11 시스템 색상 토큰 라이브 추출 + Mica/Acrylic 시뮬레이터 ★28차 |
+| `SQL.Forge` | SQLite 스키마 GUI 디자이너 + ERD 시각화 (FK 드래그 연결, DDL 생성·실행) ★30차 |
+| `Token.Calc` | LLM 멀티모델 토큰 수·비용 실시간 계산기 (GPT/Claude/Gemini 20+종 단가 내장) ★30차 |
+| `Regex.Visual` | 정규식 NFA 상태 기계 다이어그램 시각화 + 문자별 전이 애니메이션 교육 도구 ★30차 |
+| `Pane.Cast` | Windows Terminal 멀티패인 세션 레이아웃 저장·복원기 (프리셋 라이브러리·트레이) ★30차 |
+| `File.Tag` | NTFS ADS 기반 파일 사용자 정의 컬러 태그·라벨 관리자 (외부 DB 없이 파일 자체 저장) ★30차 |
+| `Diff.Watch` | URL/파일 주기적 폴링 → 내용 변화 텍스트 diff 감지 + 토스트·이메일·Webhook 알림 ★30차 |
+| `Perf.Flame` | .NET 프로세스 CPU 샘플링 프로파일러 + d3-flame-graph 플레임 그래프 시각화 ★30차 |
+| `Color.Space` | sRGB/CIELAB/OKLab/OKLCh/XYZ 색공간 변환·보간·ΔE 계산 실험실 ★30차 |
+| `Map.Config` | TOML/INI/YAML/JSON/XML/.env 멀티포맷 설정 파일 통합 트리 편집기 + 포맷 변환 ★30차 |
+| `Cron.Eye` | Task Scheduler + 서비스 실행 이력 일별·주별·월별 캘린더 타임라인 히트맵 분석기 ★30차 |
 
 ### Apps — Network / Security / Privacy
 
@@ -637,6 +660,16 @@
 | `Morse.Run` | Rhythm/Educational/Runner | 모스 부호 청각 해독 입력 + 사이드스크롤 러너 조종 동시 이중 조작 ★29차 |
 | `Quill.Quest` | Skill/Educational/Artistic | 역사 문자(한글·한자·아랍·갑골문) 획 순서 DTW 정밀 채점 캘리그래피 기술 게임 ★29차 |
 | `Bloom.Maze` | Arcade/Survival/Bio | L-시스템 덩굴이 실시간 자라며 막히는 동적 미로 생존 아케이드 ★29차 |
+| `Smoke.Trail` | Puzzle/Physics | 열원·팬·장애물 배치로 연기(기체 유체) 흐름을 목표 구멍으로 유도하는 물리 퍼즐 ★30차 |
+| `Echo.Fish` | Casual/Timing | 소나 핑으로 어두운 수심 물고기 위치 탐지 + 이동 패턴 예측 후 타이밍 낚시 ★30차 |
+| `Peg.Web` | Puzzle/Art | 원형 배치 핀을 번호순 클릭해 실을 감아 String Art 기하 패턴 완성 + 자유 창작 ★30차 |
+| `Storm.Clash` | Strategy/Card | 날씨 마법 카드(폭풍·번개·눈보라)로 상대 도시 건물을 공격하는 턴제 PvP 전략 ★30차 |
+| `Bolt.Hop` | Action/Platformer | 전도성 발판 간 아크 방전 순간이동 + 절연체·물·고무 전기 물리 퍼즐 플랫포머 ★30차 |
+| `Grid.Flood` | Puzzle/Optimization | 플러드필 색상 확산으로 최소 이동 수 내 격자 전체 단색화 최적화 퍼즐 ★30차 |
+| `Melt.Slide` | Puzzle/Physics | 얼음(열 적용)→물(흘러 이동)→얼음(냉각 고정) 상변화 물리로 컨테이너 채우기 ★30차 |
+| `Choir.Run` | Rhythm/Runner | 3레인 독립 캐릭터 달리기 + 동시 입력 화음 형성 시 특수 능력 발동 리듬 러너 ★30차 |
+| `Fog.Sculpt` | Puzzle/Exploration | 방향·강도 바람 카드 배치로 안개를 밀어내 숨겨진 지형·보물 노출 탐험 퍼즐 ★30차 |
+| `Retro.Cast` | Puzzle/Art | CRT 신호 왜곡(노이즈·스캔라인·고스팅) 슬라이더 조절로 픽셀 아트 원본 복원 퍼즐 ★30차 |
 
 ---
 
@@ -817,3 +850,23 @@
 | **이중 조작 / 멀티태스킹 게임** | Morse.Run (모스 해독+러너 동시) ≠ Rhythm.Type (가사 박자 타이핑) ≠ Signal.Cast (시각+청각 시퀀스 재현) ≠ Fuse.Ball (단일 입력 두 공 조종) |
 | **획 순서 / 필기 기술** | Quill.Quest (역사 문자 DTW 획 순서 정밀 채점) ≠ Sym.Draw (대칭 만다라 드로잉) ≠ Shutter.Run (궤적 장노출 드로잉) ≠ Trace.Run (한붓 그리기 해밀턴) |
 | **동적 성장 미로** | Bloom.Maze (L-시스템 덩굴 실시간 성장·경로 소멸) ≠ Maze.Dread (정적 미로+시야 제한) ≠ Maze.Craft (역발상 미로 설계 vs AI) ≠ Leaf.Grow ✅ (L-시스템 성장 시뮬) |
+| **ERD / 스키마 디자인** | SQL.Forge (GUI 스키마 편집+ERD 시각화+DDL 생성) ≠ SQL.Lens ✅ (쿼리 계획 EXPLAIN 시각화) ≠ DB.Peek (SQLite 드래그&드롭 뷰어+SQL) ≠ Schema.Diff (두 스키마 버전 구조 Diff) ≠ Schema.Mock ✅ (스키마→가짜 데이터 생성) |
+| **LLM 토큰 / 비용 계산** | Token.Calc (토큰 수+비용 멀티모델 계산기) ≠ Diff.Prompt ✅ (프롬프트 A/B 비교+비용) ≠ Prompt.Lab (체인 노드 에디터) ≠ LLM.Bench (로컬 GGUF 실행·채팅) |
+| **정규식 교육 / 시각화** | Regex.Visual (NFA 상태 기계 다이어그램+전이 애니메이션) ≠ Regex.Lab (정규식 실시간 테스터+패턴 라이브러리) ≠ Str.Forge ✅ (멀티파일 Find&Replace) |
+| **터미널 세션 관리** | Pane.Cast (Terminal 패인 레이아웃 저장·복원+프리셋) ≠ Shell.Book (명령어 히스토리 북마크+팝업) ≠ Run.Deck (프로젝트 원클릭 런처) ≠ Alias.Forge (PowerShell/CMD 별칭 GUI) |
+| **파일 태그 / 사용자 메타데이터** | File.Tag (NTFS ADS 컬러 태그·라벨, 외부 DB 없음) ≠ File.Duplicates ✅ (중복 파일 탐지) ≠ Img.Meta (EXIF/IPTC/XMP 편집) ≠ Geo.Tag (사진 GPS 태거) ≠ Batch.Rename ✅ (파일명 변경) |
+| **URL / 콘텐츠 변경 감시** | Diff.Watch (URL/파일 내용 텍스트 diff 감지+알림) ≠ Uptime.Eye (HTTP 200 가동여부 폴링) ≠ Cert.Watch (SSL 만료 모니터) ≠ Link.Check (깨진 링크 감사) ≠ Deploy.Watch (CI/CD 빌드 상태) |
+| **.NET 런타임 프로파일링** | Perf.Flame (CPU 샘플링+플레임 그래프 런타임 Attach) ≠ Bench.Run (.NET 코드 스니펫 BenchmarkDotNet) ≠ Proc.Bench ✅ (CPU/메모리/스토리지 종합 벤치마크) ≠ Perf.Lens (DirectX 게임 오버레이) |
+| **색공간 변환 실험실** | Color.Space (sRGB/OKLab 색공간 변환·보간·ΔE 교육) ≠ Color.Grade ✅ (이미지 LUT 색보정) ≠ Color.Token (CSS 색상 토큰 편집+WCAG 감사) ≠ Color.Walk (Windows 11 시스템 색상 추출) ≠ Access.Check (WCAG 대비율 검사기) |
+| **멀티포맷 설정 파일 편집** | Map.Config (TOML/INI/YAML/JSON/XML/.env 통합 트리 편집+포맷 변환) ≠ JSON.Tree ✅ (JSON/YAML/TOML 트리 탐색+Diff) ≠ JSON.Fmt ✅ (JSON beautify+Lenient파싱) ≠ Json.Craft (포맷터+변환기) ≠ Env.Diff (.env 두 파일 키 비교) |
+| **Task Scheduler 이력 분석** | Cron.Eye (실행 이력 캘린더·타임라인 히트맵 분석) ≠ Sched.Cast ✅ (Task Scheduler CRUD GUI) ≠ Cron.Cast (Cron 표현식 시각화 검증기) ≠ Win.Event ✅ (이벤트 로그 EVTX 뷰어) |
+| **연기 / 기체 유체 퍼즐** | Smoke.Trail (열원+팬 배치 연기 유도 LBM 기반) ≠ Fluid.Rush (SPH 유체 파이프·밸브 퍼즐) ≠ Magma.Flow (용암 점성 유체 제어) ≠ Sand.Fall ✅ (낙하 입자 샌드박스) |
+| **소나 / 낚시 캐주얼** | Echo.Fish (소나 탐지+이동 예측+타이밍 낚시) ≠ Echo.Hunt (완전 암흑 소나 지형 파악 기억력) ≠ Sonar.Run (반향 탐지 스텔스 어드벤처) |
+| **String Art / 실 감기** | Peg.Web (핀 번호순 실 감기 String Art+수학 패턴) ≠ Knit.Cast (격자 실 Over/Under 배치→매듭 패턴) ≠ Knot.Craft (기존 매듭 드래그 분리 풀기) |
+| **날씨 마법 전략** | Storm.Clash (날씨 카드 PvP 도시 공격) ≠ Rain.Maker (날씨 신 농작물 강수량 최적화) ≠ Sand.Storm (모래폭풍 방벽 건설 생존 퍼즐) |
+| **전기 / 방전 플랫포머** | Bolt.Hop (아크 방전 순간이동 전도체 그래프 BFS) ≠ Volt.Chain (전류 경로 AND/NOT 게이트 설계) ≠ Volt.Race (전기 소자 트랙 기믹 레이싱) ≠ Magnet.Jump (N/S 극성 자기 발판 플랫포머) |
+| **플러드필 색상 확산** | Grid.Flood (플러드필 최소 이동 격자 단색화 최적화) ≠ Hue.Flow ✅ (같은 색 파이프 연결 채우기) ≠ Ink.Spread (잉크 BFS 전파 차단 전략) ≠ Color.Map (4색 정리 지도 채색 퍼즐) |
+| **상변화 (고체↔액체) 퍼즐** | Melt.Slide (얼음 녹아 흐르다 재결빙 컨테이너 채우기) ≠ Thermal.Run (유한차분 열전도 온도 분포 제어) ≠ Crystal.Grow (결정화 셀룰러 오토마타 성장) ≠ Magma.Flow (용암 점성 유체 경사 제어) |
+| **멀티레인 협력 리듬** | Choir.Run (3레인 독립 캐릭터 화음 형성 러너) ≠ Beat.Drop ✅ (단일 리듬 퍼포먼스) ≠ Chord.Strike ✅ (단일 리듬 퍼포먼스) ≠ Pulse.Run (BPM 온비트 무한 러너) ≠ Morse.Run ✅ (모스 해독+러너 이중 조작) |
+| **안개 / 가시성 탐험 퍼즐** | Fog.Sculpt (바람 카드로 안개 밀어내 보물 노출) ≠ Fog.Build (이동 시만 시야 기억력 안개 전쟁) ≠ Echo.Hunt (소나 핑 지형 실루엣 파악) ≠ Sonar.Run (반향 탐지 스텔스 어드벤처) |
+| **레트로 / CRT 복원 퍼즐** | Retro.Cast (CRT 신호 왜곡 슬라이더 조절 픽셀 아트 원본 복원) ≠ Cipher.Quest ✅ (역사적 암호 해독 텍스트) ≠ Pixel.Cross (노노그램 격자 픽셀 아트 완성) |

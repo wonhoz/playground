@@ -128,6 +128,7 @@ public partial class RegistryView : UserControl
         try
         {
             await _service.FixIssuesAsync(toFix, _cts.Token);
+            int fixedCount = toFix.Count(i => i.IsFixed); // RemoveAll 전에 먼저 집계
             _issues.RemoveAll(i => i.IsFixed);
             IssueList.ItemsSource = null;
             IssueList.ItemsSource = _issues;
@@ -137,7 +138,7 @@ public partial class RegistryView : UserControl
 
             MessageBox.Show(
                 $"레지스트리 수정 완료!\n\n" +
-                $"수정된 항목: {toFix.Count(i => i.IsFixed)}개\n\n" +
+                $"수정된 항목: {fixedCount}개\n\n" +
                 $"백업 파일: {Path.GetFileName(backupPath)}\n" +
                 $"위치: {BackupService.BackupFolder}\n\n" +
                 "문제가 발생하면 백업 파일을 더블클릭하여 복원하세요.",

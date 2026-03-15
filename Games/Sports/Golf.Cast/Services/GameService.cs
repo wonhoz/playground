@@ -67,11 +67,15 @@ public class GameService
 
         if (CurrentHole is null) return;
 
-        if (!AimMode && Ball.InMotion)
+        // 홀 흡입 반경 내에서는 속도가 0이어도 물리 계속 실행
+        bool nearHole = (Ball.Pos - CurrentHole.HolePos).Length
+                        < CurrentHole.HoleRadius * PhysicsEngine.HoleSuckRadius;
+
+        if (!AimMode && (Ball.InMotion || nearHole))
             _physics.Step(Ball, CurrentHole, dt);
 
-        // 정지 감지
-        if (!AimMode && !Ball.InMotion && !Ball.InHole && !Ball.InWater)
+        // 정지 감지 (홀 근처 제외)
+        if (!AimMode && !Ball.InMotion && !Ball.InHole && !Ball.InWater && !nearHole)
             AimMode = true;
 
         // 물 빠짐 알림

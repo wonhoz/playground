@@ -99,7 +99,7 @@
                                             <StackPanel Grid.Column="0" Margin="0,0,4,0">
                                                 <TextBlock Text="LT" FontSize="10"
                                                            Foreground="{StaticResource BrTextSecondary}" />
-                                                <ProgressBar Value="{Binding LeftTrigger}"
+                                                <ProgressBar Value="{Binding LeftTrigger, Mode=OneWay}"
                                                              Maximum="1" Height="4"
                                                              Foreground="{StaticResource BrAccent}"
                                                              Background="{StaticResource BrBgDeep}" />
@@ -107,7 +107,7 @@
                                             <StackPanel Grid.Column="1" Margin="4,0,0,0">
                                                 <TextBlock Text="RT" FontSize="10"
                                                            Foreground="{StaticResource BrTextSecondary}" />
-                                                <ProgressBar Value="{Binding RightTrigger}"
+                                                <ProgressBar Value="{Binding RightTrigger, Mode=OneWay}"
                                                              Maximum="1" Height="4"
                                                              Foreground="{StaticResource BrAccent}"
                                                              Background="{StaticResource BrBgDeep}" />

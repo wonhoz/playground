@@ -85,7 +85,7 @@
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Column="0" Margin="0,0,16,0">
                     <TextBlock Text="LT" Foreground="{StaticResource BrTextSecondary}" FontSize="12" />
-                    <ProgressBar Value="{Binding LT}" Maximum="100" Height="12"
+                    <ProgressBar Value="{Binding LT, Mode=OneWay}" Maximum="100" Height="12"
                                  Foreground="{StaticResource BrAccent}"
                                  Background="{StaticResource BrBgDeep}" />
                     <TextBlock FontSize="10" Foreground="{StaticResource BrTextSecondary}">
@@ -94,7 +94,7 @@
                 </StackPanel>
                 <StackPanel Grid.Column="1">
                     <TextBlock Text="RT" Foreground="{StaticResource BrTextSecondary}" FontSize="12" />
-                    <ProgressBar Value="{Binding RT}" Maximum="100" Height="12"
+                    <ProgressBar Value="{Binding RT, Mode=OneWay}" Maximum="100" Height="12"
                                  Foreground="{StaticResource BrAccent}"
                                  Background="{StaticResource BrBgDeep}" />
                     <TextBlock FontSize="10" Foreground="{StaticResource BrTextSecondary}">

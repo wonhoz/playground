@@ -375,7 +375,7 @@ public partial class MainWindow : Window
             {
                 ObstacleType.Crystal => 1.0 + Math.Sin(_playerZ * 2 + obs.Z) * 0.3,
                 ObstacleType.LowBar => 0.4,
-                _ => 1.2
+                _ => 0.75
             };
             var t = new Transform3DGroup();
             if (obs.Type == ObstacleType.Crystal)
@@ -589,7 +589,7 @@ public partial class MainWindow : Window
     {
         return obs.Type switch
         {
-            ObstacleType.Wall => CreateBox(LaneWidth * 0.9, 3.0, 0.6, NeonRed, 0.8),
+            ObstacleType.Wall => CreateBox(LaneWidth * 0.9, 1.5, 0.6, NeonRed, 0.8),
             ObstacleType.LowBar => CreateBox(LaneWidth * 0.9, 0.55, 0.5, Color.FromRgb(0xFF, 0xA0, 0x00), 0.7),
             ObstacleType.Crystal => CreateBox(0.6, 0.6, 0.6, NeonGold, 1.0),
             _ => CreateBox(0.5, 0.5, 0.5, NeonCyan, 0.5)

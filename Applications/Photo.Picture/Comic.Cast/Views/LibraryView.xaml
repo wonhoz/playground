@@ -160,7 +160,8 @@
                         <Run Text="p 변환 중"/>
                     </TextBlock>
                     <ProgressBar Width="120" Height="6"
-                                 Value="{Binding ConvertProgress}" Maximum="{Binding ConvertTotal}"/>
+                                 Value="{Binding ConvertProgress, Mode=OneWay}"
+                                 Maximum="{Binding ConvertTotal, Mode=OneWay}"/>
                 </StackPanel>
             </Grid>
         </Border>

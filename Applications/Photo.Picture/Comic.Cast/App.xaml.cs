@@ -12,7 +12,7 @@ public partial class App : WpfApplication
     {
         base.OnStartup(e);
 
-        // 서비스 초기화
+// 서비스 초기화
         var archive   = new ArchiveService();
         _library      = new LibraryService(archive);
         var converter = new ImageConvertService(archive);

@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#134e5e"/>
+      <stop offset="100%" style="stop-color:#71b280"/>
+    </linearGradient>
+    <linearGradient id="node" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fff"/>
+      <stop offset="100%" style="stop-color:#e0f7fa"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Tree structure -->
+  <!-- Root node -->
+  <rect x="180" y="60" width="152" height="48" rx="10" fill="url(#node)"/>
+  <text x="256" y="90" font-family="monospace" font-size="18" text-anchor="middle" fill="#134e5e" font-weight="bold">SYSTEM</text>
+  <!-- Connecting lines -->
+  <line x1="186" y1="108" x2="140" y2="180" stroke="white" stroke-width="4" opacity="0.7"/>
+  <line x1="326" y1="108" x2="372" y2="180" stroke="white" stroke-width="4" opacity="0.7"/>
+  <line x1="256" y1="108" x2="256" y2="180" stroke="white" stroke-width="4" opacity="0.7"/>
+  <!-- Child nodes -->
+  <rect x="68" y="180" width="140" height="44" rx="8" fill="url(#node)" opacity="0.9"/>
+  <text x="138" y="207" font-family="monospace" font-size="14" text-anchor="middle" fill="#134e5e">PATH</text>
+  <rect x="180" y="180" width="152" height="44" rx="8" fill="url(#node)" opacity="0.9"/>
+  <text x="256" y="207" font-family="monospace" font-size="14" text-anchor="middle" fill="#134e5e">JAVA_HOME</text>
+  <rect x="304" y="180" width="140" height="44" rx="8" fill="url(#node)" opacity="0.9"/>
+  <text x="374" y="207" font-family="monospace" font-size="14" text-anchor="middle" fill="#134e5e">USER</text>
+  <!-- Grandchild nodes -->
+  <line x1="138" y1="224" x2="100" y2="290" stroke="white" stroke-width="3" opacity="0.6"/>
+  <line x1="138" y1="224" x2="180" y2="290" stroke="white" stroke-width="3" opacity="0.6"/>
+  <rect x="52" y="290" width="120" height="38" rx="8" fill="url(#node)" opacity="0.7"/>
+  <text x="112" y="314" font-family="monospace" font-size="12" text-anchor="middle" fill="#134e5e">/usr/local</text>
+  <rect x="182" y="290" width="120" height="38" rx="8" fill="url(#node)" opacity="0.7"/>
+  <text x="242" y="314" font-family="monospace" font-size="12" text-anchor="middle" fill="#134e5e">/opt/java</text>
+  <!-- Shield overlay -->
+  <path d="M256 360 L320 384 L320 430 C320 456 290 472 256 482 C222 472 192 456 192 430 L192 384 Z" fill="url(#node)" opacity="0.3"/>
+  <path d="M256 360 L320 384 L320 430 C320 456 290 472 256 482 C222 472 192 456 192 430 L192 384 Z" stroke="white" stroke-width="5" fill="none"/>
+  <path d="M228 420 L248 442 L284 402" stroke="white" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

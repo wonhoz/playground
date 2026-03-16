@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0A0A18"/>
+      <stop offset="100%" stop-color="#141422"/>
+    </linearGradient>
+    <linearGradient id="pulse" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0044FF" stop-opacity="0"/>
+      <stop offset="40%" stop-color="#0088FF"/>
+      <stop offset="70%" stop-color="#00FFCC"/>
+      <stop offset="100%" stop-color="#00FFCC" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Drive silhouette top -->
+  <rect x="156" y="60" width="200" height="130" rx="14" fill="#141422" stroke="#2A2A40" stroke-width="2"/>
+  <rect x="172" y="75" width="168" height="100" rx="8" fill="#0D0D1C"/>
+  <circle cx="256" cy="125" r="36" fill="none" stroke="#1E1E35" stroke-width="2"/>
+  <circle cx="256" cy="125" r="20" fill="none" stroke="#18182E" stroke-width="1.5"/>
+  <circle cx="256" cy="125" r="7" fill="#252540"/>
+  <!-- Read head arm -->
+  <line x1="256" y1="125" x2="308" y2="80" stroke="#00FFCC" stroke-width="2.5" stroke-linecap="round" filter="url(#glow)"/>
+  <circle cx="308" cy="80" r="5" fill="#00FFCC" filter="url(#glow)"/>
+  <!-- Pulse waveform -->
+  <polyline points="40,280 80,280 80,220 120,220 120,280 160,280 160,200 200,200 200,280 240,280 240,240 256,240 256,170 272,170 272,240 296,240 296,280 336,280 336,210 372,210 372,280 412,280 412,230 440,230 440,280 472,280" fill="none" stroke="url(#pulse)" stroke-width="3" filter="url(#glow)"/>
+  <!-- Grid -->
+  <line x1="40" y1="340" x2="472" y2="340" stroke="#1E1E35" stroke-width="1"/>
+  <line x1="40" y1="300" x2="472" y2="300" stroke="#1A1A30" stroke-width="1" stroke-dasharray="4,4"/>
+  <line x1="40" y1="260" x2="472" y2="260" stroke="#1A1A30" stroke-width="1" stroke-dasharray="4,4"/>
+  <line x1="40" y1="220" x2="472" y2="220" stroke="#1A1A30" stroke-width="1" stroke-dasharray="4,4"/>
+  <!-- Labels -->
+  <text x="50" y="355" font-family="Arial" font-size="11" fill="#4466AA">0</text>
+  <text x="50" y="295" font-family="Arial" font-size="11" fill="#4466AA">50</text>
+  <text x="50" y="255" font-family="Arial" font-size="11" fill="#4466AA">75</text>
+  <text x="50" y="215" font-family="Arial" font-size="11" fill="#4466AA">100%</text>
+  <text x="256" y="395" font-family="Arial" font-size="14" fill="#00FFCC" text-anchor="middle">Sequential Read Throughput</text>
+  <text x="256" y="455" font-family="Arial" font-size="24" font-weight="bold" fill="#00FFCC" text-anchor="middle" filter="url(#glow)">DRIVE·BENCH</text>
+</svg>

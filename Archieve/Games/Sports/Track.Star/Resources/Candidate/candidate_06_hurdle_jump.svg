@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a1520"/>
+      <stop offset="100%" stop-color="#101e30"/>
+    </linearGradient>
+    <linearGradient id="track" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#cc3300"/>
+      <stop offset="100%" stop-color="#ee4410"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Track ground -->
+  <rect x="60" y="380" width="392" height="60" rx="8" fill="url(#track)"/>
+  <!-- Lane lines on track -->
+  <line x1="60" y1="400" x2="452" y2="400" stroke="#ffffff" stroke-width="2" opacity="0.3"/>
+  <line x1="60" y1="420" x2="452" y2="420" stroke="#ffffff" stroke-width="2" opacity="0.3"/>
+  <!-- Hurdles -->
+  <!-- Hurdle 1 (cleared) -->
+  <rect x="140" y="350" width="12" height="30" rx="3" fill="#d0d0d0"/>
+  <rect x="108" y="346" width="76" height="10" rx="5" fill="#ffcc00"/>
+  <rect x="102" y="356" width="6" height="20" rx="3" fill="#888"/>
+  <rect x="184" y="356" width="6" height="20" rx="3" fill="#888"/>
+  <!-- Hurdle 2 (in approach) -->
+  <rect x="290" y="350" width="12" height="30" rx="3" fill="#d0d0d0"/>
+  <rect x="258" y="346" width="76" height="10" rx="5" fill="#ffcc00"/>
+  <rect x="252" y="356" width="6" height="20" rx="3" fill="#888"/>
+  <rect x="334" y="356" width="6" height="20" rx="3" fill="#888"/>
+  <!-- Hurdle 3 (ahead) -->
+  <rect x="400" y="350" width="12" height="30" rx="3" fill="#d0d0d0"/>
+  <rect x="368" y="346" width="76" height="10" rx="5" fill="#ffcc00"/>
+  <!-- Runner jumping over hurdle 2 -->
+  <circle cx="220" cy="280" r="20" fill="#f0c080"/>
+  <!-- Torso -->
+  <path d="M220 300 L208 350 L218 352 L222 318 L234 348 L244 344 L230 298Z" fill="#2233cc"/>
+  <!-- Front arm reaching forward -->
+  <path d="M218 310 L195 295 L198 285 L222 302Z" fill="#2233cc"/>
+  <!-- Back arm behind -->
+  <path d="M224 310 L248 318 L246 326 L220 318Z" fill="#2233cc"/>
+  <!-- Front leg over hurdle -->
+  <path d="M218 350 L200 340 L196 328 L214 342Z" fill="#f0c080"/>
+  <!-- Back leg trailing -->
+  <path d="M234 346 L252 362 L246 368 L232 354Z" fill="#f0c080"/>
+  <!-- Motion blur effect -->
+  <ellipse cx="180" cy="295" rx="28" ry="8" fill="#2233cc" opacity="0.3" transform="rotate(-15 180 295)"/>
+  <!-- Speed trails -->
+  <path d="M100 320 Q150 315 180 300" fill="none" stroke="#ffcc00" stroke-width="3" stroke-linecap="round" opacity="0.4"/>
+  <path d="M90 340 Q140 334 170 318" fill="none" stroke="#ffcc00" stroke-width="2" stroke-linecap="round" opacity="0.3"/>
+</svg>

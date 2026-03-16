@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#060F00"/>
+      <stop offset="100%" stop-color="#0D1A00"/>
+    </linearGradient>
+    <linearGradient id="lime" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#CCFF00"/>
+      <stop offset="100%" stop-color="#76FF03"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="40%">
+      <stop offset="0%" stop-color="#AAFF00" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#AAFF00" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <circle cx="256" cy="256" r="220" fill="url(#glow)"/>
+  <!-- Wireframe sphere perspective shifted -->
+  <!-- Equator ellipse -->
+  <ellipse cx="256" cy="256" rx="180" ry="50" fill="none" stroke="#76FF03" stroke-width="2"/>
+  <!-- Tilted ellipse 1 -->
+  <ellipse cx="256" cy="256" rx="180" ry="90" fill="none" stroke="#AAFF00" stroke-width="1.5" transform="rotate(-30 256 256)"/>
+  <!-- Tilted ellipse 2 -->
+  <ellipse cx="256" cy="256" rx="180" ry="90" fill="none" stroke="#AAFF00" stroke-width="1.5" transform="rotate(30 256 256)"/>
+  <!-- Vertical circles -->
+  <ellipse cx="256" cy="256" rx="30" ry="180" fill="none" stroke="#76FF03" stroke-width="1.5"/>
+  <ellipse cx="256" cy="256" rx="90" ry="180" fill="none" stroke="#CCFF00" stroke-width="1"/>
+  <ellipse cx="256" cy="256" rx="150" ry="180" fill="none" stroke="#76FF03" stroke-width="1.5"/>
+  <!-- Outer circle -->
+  <circle cx="256" cy="256" r="180" fill="none" stroke="#CCFF00" stroke-width="2.5"/>
+  <!-- Grid vertex dots -->
+  <circle cx="256" cy="76" r="5" fill="#CCFF00"/>
+  <circle cx="256" cy="436" r="5" fill="#CCFF00"/>
+  <circle cx="76" cy="256" r="5" fill="#CCFF00"/>
+  <circle cx="436" cy="256" r="5" fill="#CCFF00"/>
+  <!-- Perspective shift arrow (tilting the sphere) -->
+  <path d="M410 140 A60 60 0 0 1 440 200" fill="none" stroke="#CCFF00" stroke-width="3" stroke-linecap="round"/>
+  <polygon points="440,200 458,184 422,180" fill="#CCFF00"/>
+  <!-- Small shifted copy (bottom right) -->
+  <ellipse cx="400" cy="400" rx="60" ry="17" fill="none" stroke="#76FF03" stroke-width="1.5" opacity="0.5"/>
+  <circle cx="400" cy="400" r="60" fill="none" stroke="#AAFF00" stroke-width="1" opacity="0.5"/>
+  <ellipse cx="400" cy="400" rx="10" ry="60" fill="none" stroke="#76FF03" stroke-width="1" opacity="0.5"/>
+</svg>

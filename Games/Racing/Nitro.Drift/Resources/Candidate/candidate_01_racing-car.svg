@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a0000"/>
+      <stop offset="100%" stop-color="#2d0a00"/>
+    </linearGradient>
+    <linearGradient id="car" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ff4400"/>
+      <stop offset="100%" stop-color="#cc2200"/>
+    </linearGradient>
+    <filter id="speed">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Speed lines -->
+  <line x1="30" y1="220" x2="200" y2="220" stroke="#ff4400" stroke-width="3" opacity="0.4"/>
+  <line x1="30" y1="240" x2="180" y2="240" stroke="#ff6600" stroke-width="2" opacity="0.3"/>
+  <line x1="30" y1="260" x2="190" y2="260" stroke="#ff4400" stroke-width="2" opacity="0.35"/>
+  <line x1="30" y1="280" x2="160" y2="280" stroke="#ff6600" stroke-width="3" opacity="0.3"/>
+  <line x1="30" y1="300" x2="200" y2="300" stroke="#ff4400" stroke-width="2" opacity="0.25"/>
+  <!-- Car body -->
+  <path d="M180,290 L180,240 Q200,200 256,196 Q312,200 330,240 L330,290 Z" fill="url(#car)"/>
+  <!-- Windshield -->
+  <path d="M205,242 Q256,222 307,242 L300,272 L212,272 Z" fill="#001a33" opacity="0.8"/>
+  <!-- Wheels -->
+  <circle cx="210" cy="300" r="28" fill="#222" stroke="#444" stroke-width="3"/>
+  <circle cx="210" cy="300" r="14" fill="#555"/>
+  <circle cx="302" cy="300" r="28" fill="#222" stroke="#444" stroke-width="3"/>
+  <circle cx="302" cy="300" r="14" fill="#555"/>
+  <!-- Exhaust flames -->
+  <path d="M180,265 Q140,255 120,240 Q150,260 130,280 Q155,265 180,275 Z" fill="#ff6600" opacity="0.8" filter="url(#speed)"/>
+  <path d="M180,270 Q130,260 100,255 Q140,268 125,285 Q155,272 180,278 Z" fill="#ffaa00" opacity="0.6" filter="url(#speed)"/>
+  <!-- Nitro glow -->
+  <ellipse cx="256" cy="310" rx="100" ry="12" fill="#ff4400" opacity="0.3" filter="url(#speed)"/>
+  <text x="256" y="420" text-anchor="middle" font-family="Arial Black" font-size="34" font-weight="900" fill="#ff4400">NITRO.DRIFT</text>
+</svg>

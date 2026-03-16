@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A0000"/>
+      <stop offset="100%" stop-color="#2D0000"/>
+    </linearGradient>
+    <radialGradient id="crossGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#EF4444" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#EF4444" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="ammoGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FCD34D"/>
+      <stop offset="100%" stop-color="#D97706"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <circle cx="256" cy="256" r="180" fill="url(#crossGlow)"/>
+  <!-- Crosshair circles -->
+  <circle cx="256" cy="256" r="140" fill="none" stroke="#EF4444" stroke-width="3"/>
+  <circle cx="256" cy="256" r="100" fill="none" stroke="#EF4444" stroke-width="2" stroke-dasharray="10,5"/>
+  <circle cx="256" cy="256" r="60" fill="none" stroke="#F87171" stroke-width="2"/>
+  <circle cx="256" cy="256" r="20" fill="#EF4444" opacity="0.5"/>
+  <circle cx="256" cy="256" r="6" fill="#FCA5A5"/>
+  <!-- Crosshair lines -->
+  <line x1="116" y1="256" x2="196" y2="256" stroke="#EF4444" stroke-width="3"/>
+  <line x1="316" y1="256" x2="396" y2="256" stroke="#EF4444" stroke-width="3"/>
+  <line x1="256" y1="116" x2="256" y2="196" stroke="#EF4444" stroke-width="3"/>
+  <line x1="256" y1="316" x2="256" y2="396" stroke="#EF4444" stroke-width="3"/>
+  <!-- Diagonal indicators -->
+  <line x1="166" y1="166" x2="190" y2="190" stroke="#F87171" stroke-width="2" opacity="0.7"/>
+  <line x1="346" y1="166" x2="322" y2="190" stroke="#F87171" stroke-width="2" opacity="0.7"/>
+  <line x1="166" y1="346" x2="190" y2="322" stroke="#F87171" stroke-width="2" opacity="0.7"/>
+  <line x1="346" y1="346" x2="322" y2="322" stroke="#F87171" stroke-width="2" opacity="0.7"/>
+  <!-- Bullet projectiles -->
+  <ellipse cx="130" cy="200" rx="18" ry="7" fill="url(#ammoGrad)" transform="rotate(-30,130,200)"/>
+  <ellipse cx="380" cy="180" rx="18" ry="7" fill="url(#ammoGrad)" transform="rotate(150,380,180)"/>
+  <ellipse cx="100" cy="320" rx="18" ry="7" fill="url(#ammoGrad)" transform="rotate(20,100,320)"/>
+  <ellipse cx="400" cy="330" rx="18" ry="7" fill="url(#ammoGrad)" transform="rotate(-150,400,330)"/>
+  <!-- Explosion sparks at corners -->
+  <circle cx="150" cy="170" r="12" fill="#FDE68A" opacity="0.6"/>
+  <circle cx="362" cy="170" r="10" fill="#FDE68A" opacity="0.5"/>
+  <circle cx="150" cy="342" r="10" fill="#FDE68A" opacity="0.5"/>
+  <circle cx="362" cy="342" r="12" fill="#FDE68A" opacity="0.6"/>
+</svg>

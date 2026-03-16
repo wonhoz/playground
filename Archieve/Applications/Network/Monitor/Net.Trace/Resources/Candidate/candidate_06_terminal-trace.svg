@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0c0c0c"/>
+      <stop offset="100%" stop-color="#1a2a0a"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Terminal window -->
+  <rect x="60" y="80" width="392" height="320" rx="10" fill="#111111" stroke="#333333" stroke-width="2"/>
+  <!-- Title bar -->
+  <rect x="60" y="80" width="392" height="36" rx="10" fill="#222222"/>
+  <rect x="60" y="96" width="392" height="20" fill="#222222"/>
+  <circle cx="92" cy="98" r="7" fill="#ff5f56"/>
+  <circle cx="116" cy="98" r="7" fill="#ffbd2e"/>
+  <circle cx="140" cy="98" r="7" fill="#27c93f"/>
+  <!-- Terminal text -->
+  <text x="82" y="148" font-family="monospace" font-size="13" fill="#27c93f">$ traceroute 8.8.8.8</text>
+  <text x="82" y="170" font-family="monospace" font-size="12" fill="#888888"> 1  192.168.1.1    1ms</text>
+  <text x="82" y="190" font-family="monospace" font-size="12" fill="#888888"> 2  10.0.0.1       5ms</text>
+  <text x="82" y="210" font-family="monospace" font-size="12" fill="#aaaaaa"> 3  172.16.0.1     12ms</text>
+  <text x="82" y="230" font-family="monospace" font-size="12" fill="#aaaaaa"> 4  203.0.113.1    28ms</text>
+  <text x="82" y="250" font-family="monospace" font-size="12" fill="#00ff88"> 5  8.8.8.8        35ms ✓</text>
+  <!-- Cursor -->
+  <text x="82" y="280" font-family="monospace" font-size="13" fill="#27c93f">$ <rect x="100" y="268" width="9" height="16" fill="#27c93f"/></text>
+  <rect x="100" y="268" width="9" height="16" fill="#27c93f"/>
+  <text x="256" y="450" text-anchor="middle" font-family="monospace" font-size="30" font-weight="bold" fill="#27c93f">NET.TRACE</text>
+</svg>

@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f0020"/>
+      <stop offset="100%" stop-color="#1e0038"/>
+    </linearGradient>
+    <linearGradient id="labelGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#c4b5fd"/>
+      <stop offset="100%" stop-color="#7c3aed"/>
+    </linearGradient>
+    <linearGradient id="waveGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#a855f7"/>
+      <stop offset="50%" stop-color="#ec4899"/>
+      <stop offset="100%" stop-color="#a855f7"/>
+    </linearGradient>
+    <filter id="labelGlow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Large label / sticker shape -->
+  <ellipse cx="256" cy="256" rx="185" ry="185" fill="#0f0020" stroke="url(#labelGrad)" stroke-width="3" filter="url(#labelGlow)"/>
+  <ellipse cx="256" cy="256" rx="170" ry="170" fill="none" stroke="#7c3aed" stroke-width="1" opacity="0.4"/>
+  <!-- Waveform inside label -->
+  <g filter="url(#labelGlow)">
+    <rect x="105" y="244" width="12" height="24" rx="6" fill="url(#waveGrad)"/>
+    <rect x="123" y="232" width="12" height="48" rx="6" fill="url(#waveGrad)"/>
+    <rect x="141" y="218" width="12" height="76" rx="6" fill="url(#waveGrad)"/>
+    <rect x="159" y="204" width="12" height="104" rx="6" fill="url(#waveGrad)"/>
+    <rect x="177" y="192" width="12" height="128" rx="6" fill="url(#waveGrad)"/>
+    <rect x="195" y="178" width="12" height="156" rx="6" fill="url(#waveGrad)"/>
+    <rect x="213" y="168" width="12" height="176" rx="6" fill="url(#waveGrad)"/>
+    <rect x="231" y="162" width="12" height="188" rx="6" fill="url(#waveGrad)"/>
+    <rect x="249" y="168" width="12" height="176" rx="6" fill="url(#waveGrad)"/>
+    <rect x="267" y="180" width="12" height="152" rx="6" fill="url(#waveGrad)"/>
+    <rect x="285" y="192" width="12" height="128" rx="6" fill="url(#waveGrad)"/>
+    <rect x="303" y="205" width="12" height="102" rx="6" fill="url(#waveGrad)"/>
+    <rect x="321" y="218" width="12" height="76" rx="6" fill="url(#waveGrad)"/>
+    <rect x="339" y="232" width="12" height="48" rx="6" fill="url(#waveGrad)"/>
+    <rect x="357" y="244" width="12" height="24" rx="6" fill="url(#waveGrad)"/>
+  </g>
+  <!-- Center line -->
+  <line x1="90" y1="256" x2="382" y2="256" stroke="#7c3aed" stroke-width="1" opacity="0.4"/>
+  <!-- Tag string attachment at top -->
+  <line x1="256" y1="71" x2="256" y2="110" stroke="url(#labelGrad)" stroke-width="3" stroke-linecap="round" filter="url(#labelGlow)"/>
+  <circle cx="256" cy="68" r="8" fill="none" stroke="url(#labelGrad)" stroke-width="3" filter="url(#labelGlow)"/>
+  <!-- Metadata caption band -->
+  <rect x="168" y="370" width="176" height="35" rx="8" fill="#7c3aed" fill-opacity="0.3" stroke="url(#labelGrad)" stroke-width="1.5"/>
+  <line x1="185" y1="382" x2="328" y2="382" stroke="#c4b5fd" stroke-width="1.5" opacity="0.7"/>
+  <line x1="195" y1="396" x2="318" y2="396" stroke="#a855f7" stroke-width="1.5" opacity="0.5"/>
+</svg>

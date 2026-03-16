@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A0D00"/>
+      <stop offset="100%" stop-color="#2D1800"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF8C00"/>
+      <stop offset="100%" stop-color="#FF5500"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Monitor frame -->
+  <rect x="80" y="80" width="352" height="280" rx="12" fill="none" stroke="#FF8C00" stroke-width="2.5" filter="url(#glow)"/>
+  <rect x="88" y="88" width="336" height="264" rx="6" fill="#0D0800"/>
+  <!-- Wireframe layout inside monitor -->
+  <!-- Header wireframe -->
+  <rect x="100" y="100" width="312" height="50" rx="3" fill="none" stroke="#FF8C00" stroke-width="1.5" opacity="0.8"/>
+  <line x1="100" y1="125" x2="412" y2="125" stroke="#FF8C00" stroke-width="1" opacity="0.4"/>
+  <!-- Sidebar wireframe -->
+  <rect x="100" y="162" width="80" height="178" rx="3" fill="none" stroke="#FF8C00" stroke-width="1.5" opacity="0.7"/>
+  <line x1="110" y1="175" x2="170" y2="175" stroke="#FF8C00" stroke-width="1" opacity="0.4"/>
+  <line x1="110" y1="188" x2="160" y2="188" stroke="#FF8C00" stroke-width="1" opacity="0.4"/>
+  <line x1="110" y1="201" x2="165" y2="201" stroke="#FF8C00" stroke-width="1" opacity="0.4"/>
+  <line x1="110" y1="214" x2="155" y2="214" stroke="#FF8C00" stroke-width="1" opacity="0.4"/>
+  <!-- Content area wireframe -->
+  <rect x="192" y="162" width="220" height="80" rx="3" fill="none" stroke="#FF8C00" stroke-width="1.5" opacity="0.7"/>
+  <rect x="192" y="254" width="100" height="86" rx="3" fill="none" stroke="#FF8C00" stroke-width="1.5" opacity="0.7"/>
+  <rect x="304" y="254" width="108" height="86" rx="3" fill="none" stroke="#FF8C00" stroke-width="1.5" opacity="0.7"/>
+  <!-- Image placeholder X marks -->
+  <line x1="192" y1="254" x2="292" y2="340" stroke="#FF8C00" stroke-width="1" opacity="0.3"/>
+  <line x1="292" y1="254" x2="192" y2="340" stroke="#FF8C00" stroke-width="1" opacity="0.3"/>
+  <!-- Stand -->
+  <rect x="228" y="360" width="56" height="16" rx="4" fill="#FF8C00" opacity="0.4"/>
+  <rect x="196" y="374" width="120" height="10" rx="5" fill="#FF8C00" opacity="0.3"/>
+  <!-- Forge hammer icon -->
+  <rect x="216" y="408" width="80" height="20" rx="4" fill="url(#accent)" filter="url(#glow)" opacity="0.8"/>
+  <rect x="248" y="390" width="16" height="24" rx="2" fill="url(#accent)" filter="url(#glow)" opacity="0.8"/>
+  <text x="256" y="422" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="white" font-weight="bold">FORGE</text>
+  <!-- Corner snap indicators -->
+  <circle cx="100" cy="100" r="5" fill="#FF8C00" filter="url(#glow)"/>
+  <circle cx="412" cy="100" r="5" fill="#FF8C00" filter="url(#glow)"/>
+  <circle cx="100" cy="340" r="5" fill="#FF8C00" filter="url(#glow)"/>
+  <circle cx="412" cy="340" r="5" fill="#FF8C00" filter="url(#glow)"/>
+</svg>

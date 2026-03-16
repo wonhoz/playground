@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0A0000"/>
+      <stop offset="100%" stop-color="#B71C1C"/>
+    </linearGradient>
+    <linearGradient id="gauge" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#4CAF50"/>
+      <stop offset="50%" stop-color="#FFC107"/>
+      <stop offset="100%" stop-color="#F44336"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Speedometer / budget gauge -->
+  <path d="M 80,340 A 176,176 0 0,1 432,340" fill="none" stroke="#333" stroke-width="40" stroke-linecap="round"/>
+  <path d="M 80,340 A 176,176 0 0,1 432,340" fill="none" stroke="url(#gauge)" stroke-width="32" stroke-linecap="round" opacity="0.9"/>
+  <!-- Tick marks on gauge -->
+  <line x1="80" y1="340" x2="100" y2="330" stroke="#EF9A9A" stroke-width="4" opacity="0.7"/>
+  <line x1="120" y1="216" x2="136" y2="230" stroke="#EF9A9A" stroke-width="4" opacity="0.7"/>
+  <line x1="256" y1="164" x2="256" y2="184" stroke="#EF9A9A" stroke-width="4" opacity="0.7"/>
+  <line x1="392" y1="216" x2="376" y2="230" stroke="#EF9A9A" stroke-width="4" opacity="0.7"/>
+  <line x1="432" y1="340" x2="412" y2="330" stroke="#EF9A9A" stroke-width="4" opacity="0.7"/>
+  <!-- Needle (pointing to ~70%) -->
+  <line x1="256" y1="340" x2="380" y2="212" stroke="#FFCDD2" stroke-width="8" stroke-linecap="round" opacity="0.9"/>
+  <circle cx="256" cy="340" r="20" fill="#C62828" stroke="#FFCDD2" stroke-width="6"/>
+  <!-- Center display -->
+  <rect x="172" y="356" width="168" height="56" rx="12" fill="#B71C1C" stroke="#EF9A9A" stroke-width="4"/>
+  <text x="256" y="378" text-anchor="middle" font-size="18" fill="#FFCDD2" font-family="monospace" opacity="0.8">BUDGET</text>
+  <text x="256" y="400" text-anchor="middle" font-size="18" font-weight="bold" fill="#FF5252" font-family="monospace">$4.20</text>
+  <!-- Token count top -->
+  <rect x="152" y="80" width="208" height="64" rx="16" fill="#7F0000" stroke="#EF5350" stroke-width="5"/>
+  <text x="256" y="104" text-anchor="middle" font-size="14" fill="#FFCDD2" font-family="monospace" opacity="0.8">TOKENS USED</text>
+  <text x="256" y="130" text-anchor="middle" font-size="24" font-weight="bold" fill="#FF5252" font-family="monospace">84,320</text>
+  <!-- Model labels -->
+  <rect x="72" y="440" width="104" height="28" rx="8" fill="#7F0000" stroke="#EF5350" stroke-width="3"/>
+  <rect x="78" y="450" width="92" height="8" rx="4" fill="#EF9A9A" opacity="0.8"/>
+  <rect x="188" y="440" width="104" height="28" rx="8" fill="#7F0000" stroke="#EF5350" stroke-width="3"/>
+  <rect x="194" y="450" width="92" height="8" rx="4" fill="#EF9A9A" opacity="0.7"/>
+  <rect x="304" y="440" width="136" height="28" rx="8" fill="#7F0000" stroke="#EF5350" stroke-width="3"/>
+  <rect x="310" y="450" width="124" height="8" rx="4" fill="#EF9A9A" opacity="0.6"/>
+</svg>

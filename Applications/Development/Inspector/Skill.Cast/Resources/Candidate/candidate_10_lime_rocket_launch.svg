@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0a1a00"/>
+      <stop offset="100%" stop-color="#102800"/>
+    </linearGradient>
+    <linearGradient id="rocket" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f0f4c3"/>
+      <stop offset="100%" stop-color="#9e9d24"/>
+    </linearGradient>
+    <radialGradient id="exhaust" cx="50%" cy="0%" r="100%">
+      <stop offset="0%" stop-color="#aeea00"/>
+      <stop offset="100%" stop-color="#aeea00" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Grid dots (skill map) -->
+  <circle cx="120" cy="370" r="4" fill="#558b2f" opacity="0.6"/>
+  <circle cx="160" cy="340" r="5" fill="#7cb342" opacity="0.7"/>
+  <circle cx="200" cy="300" r="5" fill="#8bc34a" opacity="0.75"/>
+  <circle cx="150" cy="260" r="4" fill="#558b2f" opacity="0.6"/>
+  <circle cx="310" cy="380" r="4" fill="#558b2f" opacity="0.6"/>
+  <circle cx="360" cy="340" r="5" fill="#7cb342" opacity="0.65"/>
+  <circle cx="400" cy="280" r="4" fill="#558b2f" opacity="0.6"/>
+  <!-- Connecting lines -->
+  <line x1="120" y1="370" x2="160" y2="340" stroke="#558b2f" stroke-width="1" opacity="0.4"/>
+  <line x1="160" y1="340" x2="200" y2="300" stroke="#558b2f" stroke-width="1" opacity="0.4"/>
+  <line x1="310" y1="380" x2="360" y2="340" stroke="#558b2f" stroke-width="1" opacity="0.4"/>
+  <line x1="360" y1="340" x2="400" y2="280" stroke="#558b2f" stroke-width="1" opacity="0.4"/>
+  <!-- Rocket body -->
+  <path d="M256 80 Q278 105 282 180 L282 300 Q282 312 268 316 L244 316 Q230 312 230 300 L230 180 Q234 105 256 80 Z" fill="url(#rocket)"/>
+  <!-- Rocket fins -->
+  <path d="M230 270 L200 320 L230 305 Z" fill="#9e9d24"/>
+  <path d="M282 270 L312 320 L282 305 Z" fill="#9e9d24"/>
+  <!-- Rocket window -->
+  <circle cx="256" cy="200" r="22" fill="#0a1a00" stroke="#ccff90" stroke-width="2"/>
+  <circle cx="256" cy="200" r="14" fill="#102800"/>
+  <circle cx="250" cy="194" r="5" fill="#aeea00" opacity="0.7"/>
+  <!-- Exhaust -->
+  <ellipse cx="256" cy="350" rx="32" ry="48" fill="url(#exhaust)"/>
+  <ellipse cx="256" cy="340" rx="18" ry="30" fill="#aeea00" opacity="0.6"/>
+  <ellipse cx="256" cy="332" rx="10" ry="20" fill="#f0f4c3" opacity="0.8"/>
+  <!-- Skill tags alongside rocket -->
+  <rect x="76" y="128" width="80" height="22" rx="6" fill="#1b3a00" stroke="#aeea00" stroke-width="1.5"/>
+  <text x="116" y="143" font-family="monospace" font-size="11" fill="#aeea00" text-anchor="middle">C# / .NET</text>
+  <rect x="356" y="128" width="80" height="22" rx="6" fill="#1b3a00" stroke="#aeea00" stroke-width="1.5"/>
+  <text x="396" y="143" font-family="monospace" font-size="11" fill="#aeea00" text-anchor="middle">WPF / XAML</text>
+  <rect x="76" y="200" width="80" height="22" rx="6" fill="#1b3a00" stroke="#8bc34a" stroke-width="1.5" opacity="0.9"/>
+  <text x="116" y="215" font-family="monospace" font-size="11" fill="#8bc34a" text-anchor="middle">TypeScript</text>
+  <rect x="356" y="200" width="80" height="22" rx="6" fill="#1b3a00" stroke="#8bc34a" stroke-width="1.5" opacity="0.9"/>
+  <text x="396" y="215" font-family="monospace" font-size="11" fill="#8bc34a" text-anchor="middle">SQL / DB</text>
+  <!-- Label -->
+  <text x="256" y="460" font-family="monospace" font-size="17" fill="#aeea00" text-anchor="middle" letter-spacing="2" opacity="0.9">SKILL.CAST</text>
+</svg>

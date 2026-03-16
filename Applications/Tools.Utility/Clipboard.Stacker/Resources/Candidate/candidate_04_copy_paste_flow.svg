@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a1520"/>
+      <stop offset="100%" stop-color="#152030"/>
+    </linearGradient>
+    <linearGradient id="doc" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e3a5f"/>
+      <stop offset="100%" stop-color="#152d4a"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Source document -->
+  <rect x="60" y="140" width="150" height="180" rx="10" fill="url(#doc)" stroke="#3366aa" stroke-width="2"/>
+  <rect x="60" y="140" width="150" height="28" rx="10" fill="#3366aa" opacity="0.5"/>
+  <text x="135" y="159" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#88aaee">Source</text>
+  <!-- Content in source -->
+  <rect x="78" y="185" width="100" height="8" rx="3" fill="#5588cc" opacity="0.7"/>
+  <rect x="78" y="202" width="80" height="8" rx="3" fill="#4477bb" opacity="0.6"/>
+  <rect x="78" y="219" width="110" height="8" rx="3" fill="#5588cc" opacity="0.7"/>
+  <!-- Highlighted selection in source -->
+  <rect x="78" y="240" width="90" height="20" rx="3" fill="#2255ff" opacity="0.5"/>
+  <rect x="78" y="244" width="90" height="8" rx="3" fill="#88aaff"/>
+  <!-- Stack in middle -->
+  <rect x="220" y="120" width="72" height="272" rx="12" fill="#0a1a2a" stroke="#336699" stroke-width="2"/>
+  <!-- Stack items -->
+  <rect x="228" y="130" width="56" height="36" rx="6" fill="#1a3a5a" stroke="#3366aa" stroke-width="1.5"/>
+  <rect x="228" y="172" width="56" height="36" rx="6" fill="#1a2a4a" stroke="#225599" stroke-width="1.5"/>
+  <rect x="228" y="214" width="56" height="36" rx="6" fill="#1a3a5a" stroke="#3366aa" stroke-width="1.5"/>
+  <rect x="228" y="256" width="56" height="36" rx="6" fill="#1a2a4a" stroke="#225599" stroke-width="1.5"/>
+  <rect x="228" y="298" width="56" height="36" rx="6" fill="#1a3a5a" stroke="#3366aa" stroke-width="1.5"/>
+  <text x="256" y="352" text-anchor="middle" font-family="monospace" font-size="11" fill="#6688bb">STACK</text>
+  <!-- Arrow: source to stack -->
+  <line x1="210" y1="250" x2="225" y2="250" stroke="#00aaff" stroke-width="3" filter="url(#glow)"/>
+  <polygon points="225,244 237,250 225,256" fill="#00aaff" filter="url(#glow)"/>
+  <!-- Arrow: stack to dest -->
+  <line x1="292" y1="250" x2="307" y2="250" stroke="#00ff88" stroke-width="3" filter="url(#glow)"/>
+  <polygon points="307,244 319,250 307,256" fill="#00ff88" filter="url(#glow)"/>
+  <!-- Destination document -->
+  <rect x="302" y="140" width="150" height="180" rx="10" fill="url(#doc)" stroke="#33aa66" stroke-width="2"/>
+  <rect x="302" y="140" width="150" height="28" rx="10" fill="#33aa66" opacity="0.5"/>
+  <text x="377" y="159" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#88eebb">Target</text>
+  <!-- Pasted content in dest -->
+  <rect x="320" y="185" width="100" height="8" rx="3" fill="#33aa66" opacity="0.6"/>
+  <rect x="320" y="202" width="80" height="8" rx="3" fill="#44bb77" opacity="0.7"/>
+  <rect x="320" y="219" width="110" height="8" rx="3" fill="#33aa66" opacity="0.6"/>
+  <!-- Active paste highlight -->
+  <rect x="320" y="240" width="90" height="20" rx="3" fill="#00ff88" opacity="0.3"/>
+  <rect x="320" y="244" width="90" height="8" rx="3" fill="#00ff88" opacity="0.7"/>
+  <!-- Ctrl+C / Ctrl+V labels -->
+  <rect x="78" y="340" width="72" height="24" rx="6" fill="#224488"/>
+  <text x="114" y="357" text-anchor="middle" font-family="monospace" font-size="13" fill="#88aaff">Ctrl+C</text>
+  <rect x="362" y="340" width="72" height="24" rx="6" fill="#224422"/>
+  <text x="398" y="357" text-anchor="middle" font-family="monospace" font-size="13" fill="#88ffaa">Ctrl+V</text>
+</svg>

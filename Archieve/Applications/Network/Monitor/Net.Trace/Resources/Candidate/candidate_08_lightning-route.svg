@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0a1e"/>
+      <stop offset="100%" stop-color="#1e0a30"/>
+    </linearGradient>
+    <linearGradient id="bolt" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#44aaff"/>
+      <stop offset="50%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#aa44ff"/>
+    </linearGradient>
+    <filter id="glow2">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Background bolts (faint) -->
+  <polyline points="200,80 160,200 210,200 150,380" fill="none" stroke="#44aaff" stroke-width="1.5" opacity="0.2"/>
+  <polyline points="312,80 360,200 300,200 370,380" fill="none" stroke="#aa44ff" stroke-width="1.5" opacity="0.2"/>
+  <!-- Main lightning bolt route -->
+  <polyline points="256,70 200,180 270,180 180,340 260,280 230,430" fill="none" stroke="url(#bolt)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow2)"/>
+  <!-- Route markers -->
+  <circle cx="256" cy="70" r="10" fill="#44aaff" filter="url(#glow2)"/>
+  <circle cx="270" cy="180" r="8" fill="#ffffff" filter="url(#glow2)"/>
+  <circle cx="260" cy="280" r="8" fill="#aa44ff" filter="url(#glow2)"/>
+  <circle cx="230" cy="430" r="10" fill="#aa44ff" filter="url(#glow2)"/>
+  <!-- Hop labels -->
+  <text x="280" y="75" font-family="monospace" font-size="14" fill="#44aaff">HOP 1</text>
+  <text x="284" y="185" font-family="monospace" font-size="14" fill="#aaaaff">HOP 2</text>
+  <text x="274" y="285" font-family="monospace" font-size="14" fill="#cc88ff">HOP 3</text>
+  <text x="244" y="480" font-family="monospace" font-size="14" fill="#aa44ff">HOP 4</text>
+  <text x="256" y="490" text-anchor="middle" font-family="monospace" font-size="0" fill="transparent">.</text>
+  <text x="60" y="490" font-family="monospace" font-size="26" font-weight="bold" fill="#6688ff">NET.TRACE</text>
+</svg>

@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F0018"/>
+      <stop offset="100%" stop-color="#1A0030"/>
+    </linearGradient>
+    <linearGradient id="thermo" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#F50057"/>
+      <stop offset="40%" stop-color="#FF4081"/>
+      <stop offset="80%" stop-color="#FF80AB"/>
+      <stop offset="100%" stop-color="#FCE4EC"/>
+    </linearGradient>
+    <linearGradient id="magenta" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF4081"/>
+      <stop offset="100%" stop-color="#F50057"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Thermometer -->
+  <!-- Tube -->
+  <rect x="236" y="80" width="40" height="280" rx="20" fill="#1A0028" stroke="#FF4081" stroke-width="2.5"/>
+  <!-- Mercury/level fill (90% - high temp) -->
+  <rect x="244" y="108" width="24" height="236" rx="12" fill="url(#thermo)"/>
+  <!-- Bulb -->
+  <circle cx="256" cy="384" r="40" fill="url(#thermo)" stroke="#FF4081" stroke-width="2.5"/>
+  <!-- Tick marks -->
+  <line x1="276" y1="120" x2="296" y2="120" stroke="#FF4081" stroke-width="2"/>
+  <line x1="276" y1="148" x2="296" y2="148" stroke="#FF4081" stroke-width="2"/>
+  <line x1="276" y1="176" x2="296" y2="176" stroke="#FF4081" stroke-width="2"/>
+  <line x1="276" y1="204" x2="296" y2="204" stroke="#FF4081" stroke-width="2"/>
+  <line x1="276" y1="232" x2="296" y2="232" stroke="#FF4081" stroke-width="2"/>
+  <line x1="276" y1="260" x2="296" y2="260" stroke="#FF4081" stroke-width="2"/>
+  <line x1="276" y1="288" x2="296" y2="288" stroke="#FF4081" stroke-width="2"/>
+  <line x1="276" y1="316" x2="296" y2="316" stroke="#FF4081" stroke-width="2"/>
+  <!-- Temperature labels -->
+  <text x="300" y="124" font-family="Consolas" font-size="11" fill="#FF80AB">100°C</text>
+  <text x="300" y="152" font-family="Consolas" font-size="11" fill="#FF4081">90°C</text>
+  <text x="300" y="236" font-family="Consolas" font-size="11" fill="#FF4081">70°C</text>
+  <text x="300" y="320" font-family="Consolas" font-size="11" fill="#FF4081">50°C</text>
+  <!-- Danger zone indicator -->
+  <rect x="140" y="100" width="88" height="76" rx="6" fill="#1A0028" stroke="#FF4081" stroke-width="1.5"/>
+  <text x="184" y="122" text-anchor="middle" font-family="Consolas" font-size="11" fill="#FF80AB">TEMP</text>
+  <text x="184" y="148" text-anchor="middle" font-family="Consolas" font-size="20" fill="#F50057" font-weight="bold">94°</text>
+  <text x="184" y="168" text-anchor="middle" font-family="Consolas" font-size="10" fill="#FF4081">CRITICAL</text>
+  <!-- Process info -->
+  <rect x="60" y="440" width="392" height="36" rx="8" fill="#1A0028" stroke="#FF4081" stroke-width="1.5"/>
+  <text x="80" y="462" font-family="Consolas" font-size="11" fill="#FF80AB">bench.exe — CPU: 97% — TEMP: 94°C</text>
+</svg>

@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a0a00"/>
+      <stop offset="100%" stop-color="#2d1500"/>
+    </linearGradient>
+    <linearGradient id="hammerMetal" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#b0b0b0"/>
+      <stop offset="50%" stop-color="#e0e0e0"/>
+      <stop offset="100%" stop-color="#888"/>
+    </linearGradient>
+    <linearGradient id="badgeGreen" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#555"/>
+      <stop offset="45%" stop-color="#555"/>
+      <stop offset="45%" stop-color="#4caf50"/>
+      <stop offset="100%" stop-color="#4caf50"/>
+    </linearGradient>
+    <linearGradient id="handle" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#c8873a"/>
+      <stop offset="100%" stop-color="#8b5e2a"/>
+    </linearGradient>
+    <filter id="spark">
+      <feGaussianBlur stdDeviation="3" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Badge on anvil base -->
+  <rect x="126" y="350" width="260" height="40" rx="8" fill="#2a1800"/>
+  <rect x="146" y="326" width="220" height="32" rx="6" fill="#3a2200"/>
+  <!-- Badge pill being forged -->
+  <rect x="152" y="280" width="208" height="46" rx="23" fill="url(#badgeGreen)" opacity="0.95"/>
+  <!-- Text lines on badge -->
+  <rect x="170" y="296" width="72" height="10" rx="4" fill="white" opacity="0.6"/>
+  <rect x="252" y="296" width="72" height="10" rx="4" fill="white" opacity="0.9"/>
+  <path d="M252" y="289" L261,305 L279,285" stroke="white" stroke-width="5" stroke-linecap="round" fill="none"/>
+  <!-- Hammer -->
+  <g transform="rotate(-40, 256, 200)">
+    <rect x="216" y="120" width="80" height="56" rx="12" fill="url(#hammerMetal)"/>
+    <rect x="242" y="176" width="28" height="90" rx="8" fill="url(#handle)"/>
+  </g>
+  <!-- Sparks -->
+  <circle cx="300" cy="258" r="5" fill="#ffd93d" filter="url(#spark)"/>
+  <circle cx="320" cy="242" r="4" fill="#ffaa00" filter="url(#spark)"/>
+  <circle cx="280" cy="246" r="3" fill="#ff6b00" filter="url(#spark)"/>
+  <line x1="305" y1="255" x2="325" y2="235" stroke="#ffd93d" stroke-width="2" opacity="0.7"/>
+</svg>

@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#100000"/>
+      <stop offset="100%" stop-color="#200808"/>
+    </linearGradient>
+    <linearGradient id="ship1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFDDDD"/>
+      <stop offset="100%" stop-color="#AA4444"/>
+    </linearGradient>
+    <linearGradient id="ship2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFB8B8"/>
+      <stop offset="100%" stop-color="#883333"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Stars red tint -->
+  <circle cx="80" cy="70" r="1.5" fill="#FFAAAA" opacity="0.7"/>
+  <circle cx="380" cy="50" r="2" fill="white" opacity="0.5"/>
+  <circle cx="460" cy="180" r="1" fill="white" opacity="0.6"/>
+  <circle cx="50" cy="300" r="1.5" fill="#FFAAAA" opacity="0.5"/>
+  <circle cx="440" cy="380" r="1" fill="white" opacity="0.6"/>
+  <!-- Formation: 3 ships -->
+  <!-- Lead ship (center, front) -->
+  <g transform="translate(256, 300)">
+    <polygon points="0,-80 -32,28 0,-12 32,28" fill="url(#ship1)"/>
+    <polygon points="-32,28 -96,60 -58,34 0,-8" fill="#CC5555"/>
+    <polygon points="32,28 96,60 58,34 0,-8" fill="#CC5555"/>
+    <ellipse cx="0" cy="-48" rx="14" ry="22" fill="#FF3333" opacity="0.9" filter="url(#glow)"/>
+    <ellipse cx="-18" cy="32" rx="10" ry="15" fill="#FF5500" filter="url(#glow)" opacity="0.85"/>
+    <ellipse cx="18" cy="32" rx="10" ry="15" fill="#FF5500" filter="url(#glow)" opacity="0.85"/>
+  </g>
+  <!-- Left wingman -->
+  <g transform="translate(140, 360)">
+    <polygon points="0,-52 -20,18 0,-8 20,18" fill="url(#ship2)"/>
+    <polygon points="-20,18 -60,38 -36,22 0,-4" fill="#BB4444"/>
+    <polygon points="20,18 60,38 36,22 0,-4" fill="#BB4444"/>
+    <ellipse cx="-10" cy="20" rx="7" ry="10" fill="#FF4400" filter="url(#glow)" opacity="0.8"/>
+    <ellipse cx="10" cy="20" rx="7" ry="10" fill="#FF4400" filter="url(#glow)" opacity="0.8"/>
+  </g>
+  <!-- Right wingman -->
+  <g transform="translate(372, 360)">
+    <polygon points="0,-52 -20,18 0,-8 20,18" fill="url(#ship2)"/>
+    <polygon points="-20,18 -60,38 -36,22 0,-4" fill="#BB4444"/>
+    <polygon points="20,18 60,38 36,22 0,-4" fill="#BB4444"/>
+    <ellipse cx="-10" cy="20" rx="7" ry="10" fill="#FF4400" filter="url(#glow)" opacity="0.8"/>
+    <ellipse cx="10" cy="20" rx="7" ry="10" fill="#FF4400" filter="url(#glow)" opacity="0.8"/>
+  </g>
+  <!-- Laser salvo -->
+  <rect x="252" y="100" width="8" height="140" rx="4" fill="#FF3333" filter="url(#glow)" opacity="0.9"/>
+  <rect x="136" y="180" width="6" height="100" rx="3" fill="#FF6644" filter="url(#glow)" opacity="0.8"/>
+  <rect x="370" y="180" width="6" height="100" rx="3" fill="#FF6644" filter="url(#glow)" opacity="0.8"/>
+  <!-- Enemy star (large, being hit) -->
+  <circle cx="256" cy="80" r="36" fill="#CC0000" opacity="0.3" filter="url(#glow)"/>
+  <polygon points="256,48 264,66 284,66 268,78 274,98 256,86 238,98 244,78 228,66 248,66" fill="#FF4444" filter="url(#glow)"/>
+  <!-- Explosion sparks -->
+  <circle cx="256" cy="80" r="6" fill="white" opacity="0.9" filter="url(#glow)"/>
+  <line x1="256" y1="68" x2="256" y2="56" stroke="#FFDD00" stroke-width="2" opacity="0.8" filter="url(#glow)"/>
+  <line x1="268" y1="72" x2="276" y2="64" stroke="#FF8800" stroke-width="2" opacity="0.7" filter="url(#glow)"/>
+  <line x1="244" y1="72" x2="236" y2="64" stroke="#FF8800" stroke-width="2" opacity="0.7" filter="url(#glow)"/>
+</svg>

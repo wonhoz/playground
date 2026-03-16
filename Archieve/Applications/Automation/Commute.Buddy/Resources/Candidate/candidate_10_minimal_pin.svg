@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#212121"/>
+      <stop offset="100%" stop-color="#424242"/>
+    </linearGradient>
+    <linearGradient id="pin" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#40C4FF"/>
+      <stop offset="100%" stop-color="#0091EA"/>
+    </linearGradient>
+    <radialGradient id="shadow" cx="50%" cy="100%" r="50%">
+      <stop offset="0%" stop-color="#40C4FF" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#40C4FF" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Minimal dotted route -->
+  <path d="M130,390 Q180,330 256,280 Q332,230 380,120" stroke="#40C4FF" stroke-width="4" fill="none" stroke-dasharray="8,8" opacity="0.5"/>
+  <!-- Start circle -->
+  <circle cx="130" cy="390" r="22" fill="#40C4FF" opacity="0.2" stroke="#40C4FF" stroke-width="3"/>
+  <circle cx="130" cy="390" r="10" fill="#40C4FF"/>
+  <!-- Destination pin -->
+  <path d="M380,60 C342,60 314,88 314,126 C314,176 380,240 380,240 C380,240 446,176 446,126 C446,88 418,60 380,60 Z" fill="url(#pin)" stroke="white" stroke-width="4"/>
+  <circle cx="380" cy="122" r="24" fill="white" opacity="0.3"/>
+  <circle cx="380" cy="122" r="14" fill="white"/>
+  <!-- Shadow under pin -->
+  <ellipse cx="380" cy="245" rx="40" ry="12" fill="url(#shadow)"/>
+  <!-- Waypoint 1 -->
+  <circle cx="256" cy="280" r="14" fill="none" stroke="#40C4FF" stroke-width="3"/>
+  <circle cx="256" cy="280" r="6" fill="#40C4FF"/>
+  <!-- Clock badge -->
+  <circle cx="130" cy="130" r="60" fill="#1A1A1A" stroke="#40C4FF" stroke-width="4"/>
+  <circle cx="130" cy="130" r="50" fill="#212121"/>
+  <line x1="130" y1="95" x2="130" y2="130" stroke="#40C4FF" stroke-width="5" stroke-linecap="round"/>
+  <line x1="130" y1="130" x2="155" y2="148" stroke="white" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="130" cy="130" r="6" fill="#40C4FF"/>
+  <!-- Tick marks -->
+  <line x1="130" y1="82" x2="130" y2="92" stroke="#555" stroke-width="3"/>
+  <line x1="130" y1="168" x2="130" y2="178" stroke="#555" stroke-width="3"/>
+  <line x1="82" y1="130" x2="92" y2="130" stroke="#555" stroke-width="3"/>
+  <line x1="168" y1="130" x2="178" y2="130" stroke="#555" stroke-width="3"/>
+</svg>

@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="70%" r="80%">
+      <stop offset="0%" style="stop-color:#1a0a00"/>
+      <stop offset="100%" style="stop-color:#050200"/>
+    </radialGradient>
+    <radialGradient id="flame" cx="50%" cy="90%" r="80%">
+      <stop offset="0%" style="stop-color:#ffffff"/>
+      <stop offset="10%" style="stop-color:#fffde7"/>
+      <stop offset="30%" style="stop-color:#ff8f00"/>
+      <stop offset="60%" style="stop-color:#e53935"/>
+      <stop offset="100%" style="stop-color:#b71c1c;stop-opacity:0"/>
+    </radialGradient>
+    <linearGradient id="gauge-bg" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#1b5e20"/>
+      <stop offset="50%" style="stop-color:#f57f17"/>
+      <stop offset="100%" style="stop-color:#b71c1c"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Gauge track -->
+  <path d="M80 350 A200 200 0 0 1 432 350" fill="none" stroke="#1a0a00" stroke-width="30" stroke-linecap="round"/>
+  <path d="M80 350 A200 200 0 0 1 432 350" fill="none" stroke="url(#gauge-bg)" stroke-width="20" stroke-linecap="round" opacity="0.8"/>
+  <!-- Current burn level indicator arc -->
+  <path d="M80 350 A200 200 0 0 1 390 220" fill="none" stroke="#ff3d00" stroke-width="20" stroke-linecap="round" filter="url(#glow)" opacity="0.9"/>
+  <!-- Gauge needle -->
+  <line x1="256" y1="310" x2="370" y2="180" stroke="#ff6e40" stroke-width="5" stroke-linecap="round" filter="url(#glow)"/>
+  <circle cx="256" cy="310" r="18" fill="#1a0a00" stroke="#ff3d00" stroke-width="3" filter="url(#glow)"/>
+  <circle cx="256" cy="310" r="8" fill="#ff3d00"/>
+  <!-- Flame above gauge -->
+  <path d="M256 310 Q220 260 222 210 Q224 160 256 130 Q288 160 290 210 Q292 260 256 310 Z" fill="url(#flame)" filter="url(#glow)"/>
+  <!-- Hot zone indicator marks -->
+  <line x1="80" y1="350" x2="90" y2="338" stroke="#00c853" stroke-width="3"/>
+  <line x1="256" y1="150" x2="256" y2="164" stroke="#ffd600" stroke-width="3"/>
+  <line x1="432" y1="350" x2="422" y2="338" stroke="#ff1744" stroke-width="3"/>
+  <!-- Temperature readout -->
+  <rect x="176" y="360" width="160" height="50" rx="12" fill="#1a0a00" stroke="#ff3d00" stroke-width="1.5"/>
+  <rect x="186" y="370" width="80" height="30" rx="8" fill="#ff3d00" opacity="0.3"/>
+  <!-- Ember particles -->
+  <circle cx="150" cy="230" r="4" fill="#ff9800" filter="url(#glow)" opacity="0.8"/>
+  <circle cx="140" cy="200" r="3" fill="#ffc107" opacity="0.7"/>
+  <circle cx="170" cy="180" r="3" fill="#ff9800" opacity="0.6"/>
+  <circle cx="380" cy="200" r="4" fill="#ff9800" filter="url(#glow)" opacity="0.8"/>
+  <circle cx="370" cy="170" r="3" fill="#ffd740" opacity="0.7"/>
+</svg>

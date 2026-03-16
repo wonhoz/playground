@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0d0d0d"/>
+      <stop offset="100%" stop-color="#1a1a2e"/>
+    </linearGradient>
+    <radialGradient id="burst" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#fff9c4" stop-opacity="1"/>
+      <stop offset="40%" stop-color="#ffcc02" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#ff6d00" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="file" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f8f8f8"/>
+      <stop offset="100%" stop-color="#bdbdbd"/>
+    </linearGradient>
+    <filter id="glow"><feGaussianBlur stdDeviation="14"/></filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- burst rays -->
+  <circle cx="256" cy="256" r="180" fill="url(#burst)" filter="url(#glow)" opacity="0.5"/>
+  <!-- sun rays -->
+  <g stroke="#ffe082" stroke-width="6" opacity="0.4">
+    <line x1="256" y1="100" x2="256" y2="60"/>
+    <line x1="362" y1="150" x2="390" y2="122"/>
+    <line x1="412" y1="256" x2="452" y2="256"/>
+    <line x1="362" y1="362" x2="390" y2="390"/>
+    <line x1="256" y1="412" x2="256" y2="452"/>
+    <line x1="150" y1="362" x2="122" y2="390"/>
+    <line x1="100" y1="256" x2="60" y2="256"/>
+    <line x1="150" y1="150" x2="122" y2="122"/>
+  </g>
+  <!-- freed file levitating -->
+  <path d="M196 196 L316 196 L356 236 L356 360 L196 360 Z" fill="url(#file)"/>
+  <path d="M316 196 L316 236 L356 236" fill="none" stroke="#9e9e9e" stroke-width="3"/>
+  <rect x="218" y="268" width="110" height="10" rx="5" fill="#616161" opacity="0.5"/>
+  <rect x="218" y="290" width="85" height="10" rx="5" fill="#616161" opacity="0.35"/>
+  <!-- lock broken pieces -->
+  <path d="M220 185 L208 165 L200 172" stroke="#ff9800" stroke-width="8" fill="none" stroke-linecap="round"/>
+  <path d="M292 185 L304 165 L312 172" stroke="#ff9800" stroke-width="8" fill="none" stroke-linecap="round"/>
+  <!-- shine on file -->
+  <ellipse cx="220" cy="212" rx="20" ry="7" fill="white" opacity="0.3" transform="rotate(-15 220 212)"/>
+</svg>

@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1e1e2e"/>
+      <stop offset="100%" stop-color="#11111b"/>
+    </linearGradient>
+    <linearGradient id="split" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#cba6f7"/>
+      <stop offset="100%" stop-color="#89b4fa"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Split icon top half (before) -->
+  <rect x="72" y="80" width="368" height="160" rx="12" fill="#181825" stroke="#313244" stroke-width="2"/>
+  <rect x="72" y="80" width="368" height="28" rx="12" fill="#1e1e2e"/>
+  <rect x="72" y="100" width="368" height="8" fill="#1e1e2e"/>
+  <circle cx="96" cy="94" r="7" fill="#f38ba8"/>
+  <circle cx="116" cy="94" r="7" fill="#fab387"/>
+  <circle cx="136" cy="94" r="7" fill="#a6e3a1"/>
+  <text x="256" y="98" font-family="Courier New, monospace" font-size="11" fill="#6c7086" text-anchor="middle">before_changes.py</text>
+  <text x="88" y="128" font-family="Courier New, monospace" font-size="10" fill="#6c7086">1</text>
+  <text x="104" y="128" font-family="Courier New, monospace" font-size="10" fill="#cdd6f4">def process_data(input):</text>
+  <text x="88" y="144" font-family="Courier New, monospace" font-size="10" fill="#6c7086">2</text>
+  <rect x="100" y="134" width="200" height="13" rx="2" fill="#f38ba8" opacity="0.25"/>
+  <text x="104" y="144" font-family="Courier New, monospace" font-size="10" fill="#f38ba8">    return input.split(",")</text>
+  <text x="88" y="160" font-family="Courier New, monospace" font-size="10" fill="#6c7086">3</text>
+  <text x="104" y="160" font-family="Courier New, monospace" font-size="10" fill="#cdd6f4">    # process items</text>
+  <text x="88" y="176" font-family="Courier New, monospace" font-size="10" fill="#6c7086">4</text>
+  <rect x="100" y="166" width="160" height="13" rx="2" fill="#f38ba8" opacity="0.25"/>
+  <text x="104" y="176" font-family="Courier New, monospace" font-size="10" fill="#f38ba8">    result = []</text>
+  <text x="88" y="192" font-family="Courier New, monospace" font-size="10" fill="#6c7086">5</text>
+  <text x="104" y="192" font-family="Courier New, monospace" font-size="10" fill="#cdd6f4">    return result</text>
+  <text x="88" y="208" font-family="Courier New, monospace" font-size="10" fill="#6c7086">6</text>
+  <text x="104" y="208" font-family="Courier New, monospace" font-size="10" fill="#cdd6f4">    # end</text>
+  <!-- Divider bar with DIFF label -->
+  <rect x="72" y="248" width="368" height="16" rx="0" fill="#313244"/>
+  <text x="256" y="260" font-family="Arial Black, sans-serif" font-size="10" fill="url(#split)" text-anchor="middle" letter-spacing="4">DEEP DIFF</text>
+  <!-- Bottom half (after) -->
+  <rect x="72" y="264" width="368" height="160" rx="12" fill="#181825" stroke="#313244" stroke-width="2"/>
+  <rect x="72" y="264" width="368" height="28" rx="12" fill="#1e1e2e"/>
+  <rect x="72" y="284" width="368" height="8" fill="#1e1e2e"/>
+  <circle cx="96" cy="278" r="7" fill="#f38ba8"/>
+  <circle cx="116" cy="278" r="7" fill="#fab387"/>
+  <circle cx="136" cy="278" r="7" fill="#a6e3a1"/>
+  <text x="256" y="282" font-family="Courier New, monospace" font-size="11" fill="#6c7086" text-anchor="middle">after_changes.py</text>
+  <text x="88" y="312" font-family="Courier New, monospace" font-size="10" fill="#6c7086">1</text>
+  <text x="104" y="312" font-family="Courier New, monospace" font-size="10" fill="#cdd6f4">def process_data(input):</text>
+  <text x="88" y="328" font-family="Courier New, monospace" font-size="10" fill="#6c7086">2</text>
+  <rect x="100" y="318" width="280" height="13" rx="2" fill="#a6e3a1" opacity="0.25"/>
+  <text x="104" y="328" font-family="Courier New, monospace" font-size="10" fill="#a6e3a1">    return input.split(",").strip()</text>
+  <text x="88" y="344" font-family="Courier New, monospace" font-size="10" fill="#6c7086">3</text>
+  <text x="104" y="344" font-family="Courier New, monospace" font-size="10" fill="#cdd6f4">    # process items</text>
+  <text x="88" y="360" font-family="Courier New, monospace" font-size="10" fill="#6c7086">4</text>
+  <rect x="100" y="350" width="220" height="13" rx="2" fill="#a6e3a1" opacity="0.25"/>
+  <text x="104" y="360" font-family="Courier New, monospace" font-size="10" fill="#a6e3a1">    result = list()</text>
+  <text x="88" y="376" font-family="Courier New, monospace" font-size="10" fill="#6c7086">5</text>
+  <text x="104" y="376" font-family="Courier New, monospace" font-size="10" fill="#cdd6f4">    return result</text>
+  <text x="88" y="392" font-family="Courier New, monospace" font-size="10" fill="#6c7086">6</text>
+  <text x="104" y="392" font-family="Courier New, monospace" font-size="10" fill="#cdd6f4">    # end</text>
+  <!-- Title -->
+  <text x="256" y="456" font-family="Arial Black, sans-serif" font-size="38" font-weight="900" fill="url(#split)" text-anchor="middle" letter-spacing="3">DEEP DIFF</text>
+  <text x="256" y="484" font-family="Arial, sans-serif" font-size="13" fill="#6c7086" text-anchor="middle">Catppuccin Theme</text>
+</svg>

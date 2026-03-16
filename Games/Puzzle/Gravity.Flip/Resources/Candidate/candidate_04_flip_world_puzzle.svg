@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d1117"/>
+      <stop offset="100%" style="stop-color:#161b22"/>
+    </linearGradient>
+    <linearGradient id="blockTop" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00b4db"/>
+      <stop offset="100%" style="stop-color:#0083b0"/>
+    </linearGradient>
+    <linearGradient id="blockBot" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f7971e"/>
+      <stop offset="100%" style="stop-color:#ffd200"/>
+    </linearGradient>
+    <linearGradient id="player" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#56ccf2"/>
+      <stop offset="100%" style="stop-color:#2f80ed"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Platform top -->
+  <rect x="60" y="100" width="392" height="28" rx="8" fill="url(#blockTop)" filter="url(#glow)"/>
+  <!-- Blocks top level -->
+  <rect x="80" y="128" width="60" height="60" rx="6" fill="url(#blockTop)" opacity="0.8"/>
+  <rect x="160" y="128" width="60" height="60" rx="6" fill="url(#blockTop)" opacity="0.6"/>
+  <rect x="300" y="128" width="60" height="60" rx="6" fill="url(#blockTop)" opacity="0.8"/>
+  <rect x="380" y="128" width="60" height="60" rx="6" fill="url(#blockTop)" opacity="0.6"/>
+  <!-- Player on top (walking on ceiling) -->
+  <rect x="238" y="130" width="36" height="50" rx="8" fill="url(#player)" filter="url(#glow)"/>
+  <circle cx="256" cy="120" r="14" fill="url(#player)" filter="url(#glow)"/>
+  <!-- Flip line -->
+  <line x1="60" y1="256" x2="452" y2="256" stroke="#ffffff" stroke-width="3"/>
+  <text x="256" y="250" text-anchor="middle" fill="#ffffff" font-size="20" font-family="Arial" opacity="0.6">↕</text>
+  <!-- Platform bottom (flipped world) -->
+  <rect x="60" y="384" width="392" height="28" rx="8" fill="url(#blockBot)" filter="url(#glow)"/>
+  <!-- Blocks bottom level (flipped) -->
+  <rect x="80" y="324" width="60" height="60" rx="6" fill="url(#blockBot)" opacity="0.8"/>
+  <rect x="160" y="324" width="60" height="60" rx="6" fill="url(#blockBot)" opacity="0.6"/>
+  <rect x="300" y="324" width="60" height="60" rx="6" fill="url(#blockBot)" opacity="0.8"/>
+  <rect x="380" y="324" width="60" height="60" rx="6" fill="url(#blockBot)" opacity="0.6"/>
+  <!-- Player on bottom -->
+  <rect x="238" y="332" width="36" height="50" rx="8" fill="#f7971e" opacity="0.8" filter="url(#glow)"/>
+  <circle cx="256" cy="392" r="14" fill="#f7971e" opacity="0.8" filter="url(#glow)"/>
+  <!-- Grid overlay -->
+  <line x1="60" y1="180" x2="452" y2="180" stroke="#ffffff10" stroke-width="1"/>
+  <line x1="60" y1="330" x2="452" y2="330" stroke="#ffffff10" stroke-width="1"/>
+</svg>

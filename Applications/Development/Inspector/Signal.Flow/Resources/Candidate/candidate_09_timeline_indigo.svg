@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A237E"/>
+      <stop offset="100%" stop-color="#283593"/>
+    </linearGradient>
+    <linearGradient id="track" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#3949AB"/>
+      <stop offset="100%" stop-color="#7986CB"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Timeline tracks -->
+  <text x="70" y="170" font-family="monospace" font-size="13" fill="#9FA8DA">SIGNAL A</text>
+  <rect x="155" y="158" width="290" height="18" rx="4" fill="#1A237E" stroke="#3F51B5" stroke-width="1"/>
+  <rect x="155" y="158" width="80" height="18" rx="4" fill="url(#track)"/>
+  <rect x="250" y="158" width="110" height="18" rx="4" fill="url(#track)"/>
+  <rect x="380" y="158" width="60" height="18" rx="4" fill="url(#track)"/>
+
+  <text x="70" y="220" font-family="monospace" font-size="13" fill="#9FA8DA">SIGNAL B</text>
+  <rect x="155" y="208" width="290" height="18" rx="4" fill="#1A237E" stroke="#3F51B5" stroke-width="1"/>
+  <rect x="180" y="208" width="60" height="18" rx="4" fill="#5C6BC0"/>
+  <rect x="290" y="208" width="90" height="18" rx="4" fill="#5C6BC0"/>
+
+  <text x="70" y="270" font-family="monospace" font-size="13" fill="#9FA8DA">EVENT C</text>
+  <rect x="155" y="258" width="290" height="18" rx="4" fill="#1A237E" stroke="#3F51B5" stroke-width="1"/>
+  <rect x="210" y="258" width="30" height="18" rx="4" fill="#FF5252"/>
+  <rect x="310" y="258" width="30" height="18" rx="4" fill="#FF5252"/>
+  <rect x="410" y="258" width="30" height="18" rx="4" fill="#FF5252"/>
+
+  <text x="70" y="320" font-family="monospace" font-size="13" fill="#9FA8DA">FLOW  D</text>
+  <rect x="155" y="308" width="290" height="18" rx="4" fill="#1A237E" stroke="#3F51B5" stroke-width="1"/>
+  <rect x="155" y="308" width="290" height="18" rx="4" fill="#303F9F" opacity="0.5"/>
+  <rect x="155" y="308" width="140" height="18" rx="4" fill="#3F51B5" opacity="0.8"/>
+
+  <!-- Time axis -->
+  <line x1="155" y1="350" x2="445" y2="350" stroke="#7986CB" stroke-width="2"/>
+  <polygon points="448,350 438,345 438,355" fill="#7986CB"/>
+  <line x1="155" y1="345" x2="155" y2="355" stroke="#7986CB" stroke-width="2"/>
+  <line x1="228" y1="345" x2="228" y2="355" stroke="#7986CB" stroke-width="1.5"/>
+  <line x1="300" y1="345" x2="300" y2="355" stroke="#7986CB" stroke-width="1.5"/>
+  <line x1="372" y1="345" x2="372" y2="355" stroke="#7986CB" stroke-width="1.5"/>
+  <text x="150" y="370" font-family="monospace" font-size="11" fill="#7986CB">0</text>
+  <text x="220" y="370" font-family="monospace" font-size="11" fill="#7986CB">100ms</text>
+  <text x="292" y="370" font-family="monospace" font-size="11" fill="#7986CB">200ms</text>
+  <text x="364" y="370" font-family="monospace" font-size="11" fill="#7986CB">300ms</text>
+  <!-- Title -->
+  <text x="145" y="430" font-family="monospace" font-size="19" fill="#C5CAE9" letter-spacing="1">SIGNAL TIMELINE</text>
+</svg>

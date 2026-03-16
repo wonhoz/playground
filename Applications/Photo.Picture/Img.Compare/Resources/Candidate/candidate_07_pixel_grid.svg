@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1a0a2e"/>
+      <stop offset="100%" stop-color="#2e1a0a"/>
+    </linearGradient>
+    <linearGradient id="pixA" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#e040fb"/>
+      <stop offset="100%" stop-color="#7b1fa2"/>
+    </linearGradient>
+    <linearGradient id="pixB" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#40c4ff"/>
+      <stop offset="100%" stop-color="#0288d1"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Pixel grid comparison -->
+  <!-- Grid left (before) -->
+  <rect x="56" y="80" width="175" height="175" rx="10" fill="#1a0a3e" opacity="0.8"/>
+  <!-- Colored pixels -->
+  <rect x="66" y="90" width="38" height="38" rx="3" fill="#e040fb" opacity="0.9"/>
+  <rect x="110" y="90" width="38" height="38" rx="3" fill="#7b1fa2" opacity="0.9"/>
+  <rect x="154" y="90" width="38" height="38" rx="3" fill="#e040fb" opacity="0.7"/>
+  <rect x="66" y="134" width="38" height="38" rx="3" fill="#9c27b0" opacity="0.9"/>
+  <rect x="110" y="134" width="38" height="38" rx="3" fill="#e040fb" opacity="0.8"/>
+  <rect x="154" y="134" width="38" height="38" rx="3" fill="#7b1fa2" opacity="0.9"/>
+  <rect x="66" y="178" width="38" height="38" rx="3" fill="#e040fb" opacity="0.6"/>
+  <rect x="110" y="178" width="38" height="38" rx="3" fill="#7b1fa2" opacity="0.7"/>
+  <rect x="154" y="178" width="38" height="38" rx="3" fill="#9c27b0" opacity="0.8"/>
+  <!-- Grid right (after) -->
+  <rect x="281" y="80" width="175" height="175" rx="10" fill="#0a1a3e" opacity="0.8"/>
+  <rect x="291" y="90" width="38" height="38" rx="3" fill="#40c4ff" opacity="0.9"/>
+  <rect x="335" y="90" width="38" height="38" rx="3" fill="#0288d1" opacity="0.9"/>
+  <rect x="379" y="90" width="38" height="38" rx="3" fill="#40c4ff" opacity="0.7"/>
+  <rect x="291" y="134" width="38" height="38" rx="3" fill="#29b6f6" opacity="0.9"/>
+  <rect x="335" y="134" width="38" height="38" rx="3" fill="#40c4ff" opacity="0.8"/>
+  <rect x="379" y="134" width="38" height="38" rx="3" fill="#0288d1" opacity="0.9"/>
+  <rect x="291" y="178" width="38" height="38" rx="3" fill="#40c4ff" opacity="0.6"/>
+  <rect x="335" y="178" width="38" height="38" rx="3" fill="#0288d1" opacity="0.7"/>
+  <rect x="379" y="178" width="38" height="38" rx="3" fill="#29b6f6" opacity="0.8"/>
+  <!-- Arrow between -->
+  <line x1="240" y1="168" x2="272" y2="168" stroke="white" stroke-width="4" stroke-linecap="round"/>
+  <polygon points="275,163 285,168 275,173" fill="white"/>
+  <!-- Zoom magnifier left -->
+  <rect x="56" y="290" width="175" height="150" rx="10" fill="#1a0a3e" opacity="0.6"/>
+  <text x="143" y="360" text-anchor="middle" font-family="monospace" font-size="13" fill="#e040fb">R:224 G:64 B:251</text>
+  <text x="143" y="385" text-anchor="middle" font-family="monospace" font-size="13" fill="#bb86fc">#E040FB</text>
+  <!-- Zoom magnifier right -->
+  <rect x="281" y="290" width="175" height="150" rx="10" fill="#0a1a3e" opacity="0.6"/>
+  <text x="368" y="360" text-anchor="middle" font-family="monospace" font-size="13" fill="#40c4ff">R:64 G:196 B:255</text>
+  <text x="368" y="385" text-anchor="middle" font-family="monospace" font-size="13" fill="#80d8ff">#40C4FF</text>
+  <!-- Title -->
+  <text x="256" y="470" text-anchor="middle" font-family="Arial" font-size="20" font-weight="bold" fill="white" opacity="0.7">PIXEL COMPARE</text>
+</svg>

@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E8F4FD"/>
+      <stop offset="100%" stop-color="#BEE3F8"/>
+    </linearGradient>
+    <linearGradient id="wind" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#2B6CB0" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#2B6CB0"/>
+      <stop offset="100%" stop-color="#2B6CB0" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Wind swirl lines -->
+  <path d="M80,180 Q200,120 280,180 Q360,240 420,180" fill="none" stroke="#63B3ED" stroke-width="8" stroke-linecap="round" opacity="0.7"/>
+  <path d="M60,230 Q180,170 260,230 Q340,290 460,230" fill="none" stroke="#4299E1" stroke-width="7" stroke-linecap="round" opacity="0.8"/>
+  <path d="M80,280 Q200,220 300,280 Q380,330 452,280" fill="none" stroke="#3182CE" stroke-width="6" stroke-linecap="round" opacity="0.7"/>
+  <path d="M60,330 Q160,280 240,330 Q320,380 440,330" fill="none" stroke="#63B3ED" stroke-width="5" stroke-linecap="round" opacity="0.6"/>
+  <!-- Leaves in wind -->
+  <ellipse cx="300" cy="175" rx="12" ry="7" fill="#48BB78" transform="rotate(-40 300 175)"/>
+  <ellipse cx="380" cy="215" rx="10" ry="6" fill="#68D391" transform="rotate(-20 380 215)"/>
+  <ellipse cx="140" cy="270" rx="11" ry="6" fill="#48BB78" transform="rotate(30 140 270)"/>
+  <ellipse cx="420" cy="310" rx="9" ry="5" fill="#9AE6B4" transform="rotate(-35 420 310)"/>
+  <!-- Sound note -->
+  <text x="120" y="160" font-family="serif" font-size="40" fill="#2B6CB0" opacity="0.5">♪</text>
+  <text x="350" y="350" font-family="serif" font-size="34" fill="#2B6CB0" opacity="0.4">♫</text>
+  <!-- Center circle with speaker -->
+  <circle cx="256" cy="256" r="50" fill="white" opacity="0.7" stroke="#63B3ED" stroke-width="2"/>
+  <circle cx="256" cy="256" r="18" fill="#3182CE" opacity="0.8"/>
+  <circle cx="256" cy="256" r="8" fill="white" opacity="0.9"/>
+</svg>

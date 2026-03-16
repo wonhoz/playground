@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#263238"/>
+      <stop offset="100%" style="stop-color:#102030"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Isometric stacked windows -->
+  <!-- Z=4 (bottom) -->
+  <parallelogram/>
+  <path d="M120 380 L392 380 L450 330 L178 330 Z" fill="#1a3a5c" stroke="#37474f" stroke-width="2" opacity="0.7"/>
+  <path d="M120 380 L120 355 L178 305 L178 330 Z" fill="#0d2a4a" stroke="#37474f" stroke-width="1.5" opacity="0.7"/>
+  <!-- Z=3 -->
+  <path d="M130 340 L390 340 L445 292 L185 292 Z" fill="#1e4976" stroke="#455a64" stroke-width="2" opacity="0.8"/>
+  <path d="M130 340 L130 316 L185 268 L185 292 Z" fill="#12334e" stroke="#455a64" stroke-width="1.5" opacity="0.8"/>
+  <!-- Z=2 -->
+  <path d="M140 300 L388 300 L440 254 L192 254 Z" fill="#1976d2" stroke="#546e7a" stroke-width="2" opacity="0.85"/>
+  <path d="M140 300 L140 276 L192 230 L192 254 Z" fill="#1153a0" stroke="#546e7a" stroke-width="1.5" opacity="0.85"/>
+  <!-- Z=1 (top, highlighted) -->
+  <path d="M150 260 L386 260 L435 216 L199 216 Z" fill="#42a5f5" stroke="#64b5f6" stroke-width="2.5" filter="url(#glow)"/>
+  <path d="M150 260 L150 236 L199 192 L199 216 Z" fill="#1565c0" stroke="#42a5f5" stroke-width="2" filter="url(#glow)"/>
+  <!-- Title bar on top window -->
+  <path d="M150 236 L386 236 L435 192 L199 192 Z" fill="#2196f3" filter="url(#glow)" opacity="0.8"/>
+  <!-- Window controls -->
+  <circle cx="210" cy="214" r="7" fill="#ef5350"/>
+  <circle cx="228" cy="214" r="7" fill="#ffa726"/>
+  <circle cx="246" cy="214" r="7" fill="#66bb6a"/>
+  <!-- Z-order arrow indicator -->
+  <path d="M460 200 L480 256 L460 312" stroke="#00e5ff" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.8" filter="url(#glow)"/>
+  <circle cx="460" cy="200" r="6" fill="#00e5ff" filter="url(#glow)"/>
+  <!-- "Z" label indicator -->
+  <path d="M452 200 L472 200 L452 220 L472 220" stroke="#00e5ff" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.6"/>
+</svg>

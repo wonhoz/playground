@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a1628"/>
+      <stop offset="100%" style="stop-color:#0d2137"/>
+    </linearGradient>
+    <radialGradient id="radar" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#00E5FF;stop-opacity:0.3"/>
+      <stop offset="100%" style="stop-color:#00E5FF;stop-opacity:0"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Radar circles -->
+  <circle cx="256" cy="256" r="180" fill="none" stroke="#00E5FF" stroke-width="1.5" opacity="0.3"/>
+  <circle cx="256" cy="256" r="130" fill="none" stroke="#00E5FF" stroke-width="1.5" opacity="0.4"/>
+  <circle cx="256" cy="256" r="80" fill="none" stroke="#00E5FF" stroke-width="1.5" opacity="0.5"/>
+  <circle cx="256" cy="256" r="30" fill="none" stroke="#00E5FF" stroke-width="1.5" opacity="0.7"/>
+  <!-- Cross hairs -->
+  <line x1="256" y1="76" x2="256" y2="436" stroke="#00E5FF" stroke-width="1" opacity="0.3"/>
+  <line x1="76" y1="256" x2="436" y2="256" stroke="#00E5FF" stroke-width="1" opacity="0.3"/>
+  <!-- Radar sweep -->
+  <path d="M256 256 L420 200" stroke="#00E5FF" stroke-width="3" opacity="0.8" stroke-linecap="round"/>
+  <path d="M256 256 L256 76 A180 180 0 0 1 420 200 Z" fill="url(#radar)"/>
+  <!-- Blips -->
+  <circle cx="340" cy="190" r="6" fill="#00E5FF" opacity="0.9"/>
+  <circle cx="180" cy="310" r="5" fill="#00E5FF" opacity="0.7"/>
+  <circle cx="310" cy="350" r="4" fill="#00E5FF" opacity="0.6"/>
+  <!-- Center dot -->
+  <circle cx="256" cy="256" r="5" fill="#00E5FF"/>
+</svg>

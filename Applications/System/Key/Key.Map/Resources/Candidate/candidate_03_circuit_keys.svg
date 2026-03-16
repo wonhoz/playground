@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0a1a0a"/>
+      <stop offset="100%" stop-color="#000a00"/>
+    </linearGradient>
+    <linearGradient id="key" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1a3a1a"/>
+      <stop offset="100%" stop-color="#0a2a0a"/>
+    </linearGradient>
+    <linearGradient id="keyGlow" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#22c55e"/>
+      <stop offset="100%" stop-color="#16a34a"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Circuit board traces (PCB style) -->
+  <polyline points="130,140 130,180 200,180" fill="none" stroke="#00ff41" stroke-width="2" opacity="0.5"/>
+  <polyline points="382,140 382,180 312,180" fill="none" stroke="#00ff41" stroke-width="2" opacity="0.5"/>
+  <polyline points="130,372 130,332 200,332" fill="none" stroke="#00ff41" stroke-width="2" opacity="0.5"/>
+  <polyline points="382,372 382,332 312,332" fill="none" stroke="#00ff41" stroke-width="2" opacity="0.5"/>
+  <line x1="200" y1="180" x2="312" y2="180" stroke="#00ff41" stroke-width="2" opacity="0.4"/>
+  <line x1="200" y1="332" x2="312" y2="332" stroke="#00ff41" stroke-width="2" opacity="0.4"/>
+  <line x1="256" y1="180" x2="256" y2="332" stroke="#00ff41" stroke-width="2" opacity="0.4"/>
+  <!-- Solder pads -->
+  <circle cx="130" cy="180" r="5" fill="#00ff41" opacity="0.7"/>
+  <circle cx="382" cy="180" r="5" fill="#00ff41" opacity="0.7"/>
+  <circle cx="130" cy="332" r="5" fill="#00ff41" opacity="0.7"/>
+  <circle cx="382" cy="332" r="5" fill="#00ff41" opacity="0.7"/>
+  <circle cx="256" cy="180" r="5" fill="#00ff41" opacity="0.7"/>
+  <circle cx="256" cy="332" r="5" fill="#00ff41" opacity="0.7"/>
+  <!-- Key caps -->
+  <rect x="86" y="86" width="88" height="88" rx="14" fill="url(#key)"/>
+  <rect x="86" y="86" width="88" height="88" rx="14" fill="none" stroke="#00ff41" stroke-width="2" opacity="0.7"/>
+  <text x="130" y="137" text-anchor="middle" font-family="monospace" font-size="28" font-weight="bold" fill="#00ff41">A</text>
+  <rect x="338" y="86" width="88" height="88" rx="14" fill="url(#keyGlow)" opacity="0.8"/>
+  <rect x="338" y="86" width="88" height="88" rx="14" fill="none" stroke="#22c55e" stroke-width="2"/>
+  <text x="382" y="137" text-anchor="middle" font-family="monospace" font-size="28" font-weight="bold" fill="white">F1</text>
+  <rect x="86" y="338" width="88" height="88" rx="14" fill="url(#key)"/>
+  <rect x="86" y="338" width="88" height="88" rx="14" fill="none" stroke="#00ff41" stroke-width="2" opacity="0.7"/>
+  <text x="130" y="389" text-anchor="middle" font-family="monospace" font-size="28" font-weight="bold" fill="#00ff41">B</text>
+  <rect x="338" y="338" width="88" height="88" rx="14" fill="url(#keyGlow)" opacity="0.8"/>
+  <rect x="338" y="338" width="88" height="88" rx="14" fill="none" stroke="#22c55e" stroke-width="2"/>
+  <text x="382" y="389" text-anchor="middle" font-family="monospace" font-size="28" font-weight="bold" fill="white">F2</text>
+  <!-- Center switch chip -->
+  <rect x="208" y="208" width="96" height="96" rx="10" fill="#001a00"/>
+  <rect x="208" y="208" width="96" height="96" rx="10" fill="none" stroke="#00ff41" stroke-width="2.5"/>
+  <text x="256" y="252" text-anchor="middle" font-family="monospace" font-size="11" fill="#00ff41">KEY</text>
+  <text x="256" y="272" text-anchor="middle" font-family="monospace" font-size="11" fill="#00ff41">MAP</text>
+  <!-- Directional arrows indicating remapping -->
+  <polygon points="205,254 192,248 192,260" fill="#00ff41" opacity="0.8"/>
+  <polygon points="307,254 320,248 320,260" fill="#00ff41" opacity="0.8"/>
+</svg>

@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1565C0"/>
+      <stop offset="100%" stop-color="#0D47A1"/>
+    </linearGradient>
+    <linearGradient id="page1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#E3F2FD"/>
+      <stop offset="100%" stop-color="#BBDEFB"/>
+    </linearGradient>
+    <linearGradient id="page2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#90CAF9"/>
+      <stop offset="100%" stop-color="#64B5F6"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Stacked pages shadow -->
+  <rect x="110" y="130" width="230" height="310" rx="10" fill="#0D47A1" opacity="0.5" transform="rotate(12 225 285)"/>
+  <rect x="110" y="125" width="230" height="310" rx="10" fill="#1565C0" opacity="0.6" transform="rotate(7 225 280)"/>
+  <!-- Main page -->
+  <rect x="100" y="100" width="240" height="320" rx="10" fill="url(#page1)" stroke="#90CAF9" stroke-width="2"/>
+  <!-- Content on main page - comic panels -->
+  <rect x="118" y="118" width="100" height="80" rx="4" fill="#1976D2" opacity="0.3"/>
+  <rect x="226" y="118" width="96" height="80" rx="4" fill="#1976D2" opacity="0.3"/>
+  <rect x="118" y="208" width="204" height="60" rx="4" fill="#1976D2" opacity="0.3"/>
+  <rect x="118" y="278" width="90" height="70" rx="4" fill="#1976D2" opacity="0.3"/>
+  <rect x="218" y="278" width="102" height="70" rx="4" fill="#1976D2" opacity="0.3"/>
+  <!-- Magnifier -->
+  <circle cx="370" cy="300" r="80" fill="none" stroke="#E3F2FD" stroke-width="8"/>
+  <circle cx="370" cy="300" r="74" fill="url(#page2)" opacity="0.3"/>
+  <!-- Magnified content preview -->
+  <rect x="330" y="262" width="80" height="76" rx="4" fill="#1976D2" opacity="0.5"/>
+  <line x1="340" y1="280" x2="400" y2="280" stroke="white" stroke-width="2" opacity="0.7"/>
+  <line x1="340" y1="295" x2="400" y2="295" stroke="white" stroke-width="2" opacity="0.7"/>
+  <line x1="340" y1="310" x2="380" y2="310" stroke="white" stroke-width="2" opacity="0.7"/>
+  <!-- Handle -->
+  <line x1="432" y1="362" x2="460" y2="390" stroke="#E3F2FD" stroke-width="10" stroke-linecap="round"/>
+  <!-- Page number indicator -->
+  <rect x="100" y="430" width="60" height="30" rx="8" fill="white" opacity="0.2"/>
+  <text x="130" y="450" font-family="Arial" font-size="14" fill="white" text-anchor="middle">5 / 42</text>
+</svg>

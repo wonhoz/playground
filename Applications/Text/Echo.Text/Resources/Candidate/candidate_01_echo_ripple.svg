@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a2e"/>
+      <stop offset="100%" style="stop-color:#16213e"/>
+    </linearGradient>
+    <linearGradient id="text_grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#00d2ff"/>
+      <stop offset="100%" style="stop-color:#7b2ff7"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Speech bubble main -->
+  <path d="M80 120 C80 96 100 80 124 80 L388 80 C412 80 432 96 432 120 L432 280 C432 304 412 320 388 320 L200 320 L140 400 L160 320 L124 320 C100 320 80 304 80 280 Z" fill="url(#text_grad)" opacity="0.2"/>
+  <path d="M80 120 C80 96 100 80 124 80 L388 80 C412 80 432 96 432 120 L432 280 C432 304 412 320 388 320 L200 320 L140 400 L160 320 L124 320 C100 320 80 304 80 280 Z" stroke="url(#text_grad)" stroke-width="5" fill="none"/>
+  <!-- Text lines inside bubble -->
+  <rect x="120" y="140" width="200" height="16" rx="8" fill="url(#text_grad)" opacity="0.9"/>
+  <rect x="120" y="175" width="260" height="16" rx="8" fill="url(#text_grad)" opacity="0.7"/>
+  <rect x="120" y="210" width="180" height="16" rx="8" fill="url(#text_grad)" opacity="0.5"/>
+  <rect x="120" y="245" width="220" height="16" rx="8" fill="url(#text_grad)" opacity="0.35"/>
+  <!-- Echo ripple bubbles (smaller, fading) -->
+  <path d="M110 430 C110 420 118 414 126 414 L280 414 C288 414 296 420 296 430 L296 470 C296 480 288 486 280 486 L190 486 L172 505 L178 486 L126 486 C118 486 110 480 110 470 Z" stroke="url(#text_grad)" stroke-width="3" fill="none" opacity="0.4"/>
+  <path d="M130 438 L250 438" stroke="url(#text_grad)" stroke-width="8" stroke-linecap="round" opacity="0.4"/>
+  <path d="M130 458 L220 458" stroke="url(#text_grad)" stroke-width="8" stroke-linecap="round" opacity="0.3"/>
+</svg>

@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#050010"/>
+      <stop offset="100%" stop-color="#0f0025"/>
+    </linearGradient>
+    <linearGradient id="whiteKeyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e8e0ff"/>
+      <stop offset="100%" stop-color="#b8a8f0"/>
+    </linearGradient>
+    <linearGradient id="blackKeyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2a1a40"/>
+      <stop offset="100%" stop-color="#1a0a2a"/>
+    </linearGradient>
+    <filter id="pianoGlow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <linearGradient id="glowKey1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#a855f7"/>
+      <stop offset="100%" stop-color="#7c3aed"/>
+    </linearGradient>
+    <linearGradient id="glowKey2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3b82f6"/>
+      <stop offset="100%" stop-color="#2563eb"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Diagonal piano keyboard -->
+  <g transform="rotate(-25 256 256)">
+    <!-- White keys -->
+    <rect x="90" y="180" width="42" height="165" rx="6" fill="url(#whiteKeyGrad)"/>
+    <rect x="138" y="180" width="42" height="165" rx="6" fill="url(#whiteKeyGrad)"/>
+    <rect x="186" y="180" width="42" height="165" rx="6" fill="url(#whiteKeyGrad)"/>
+    <rect x="234" y="180" width="42" height="165" rx="6" fill="url(#whiteKeyGrad)"/>
+    <rect x="282" y="180" width="42" height="165" rx="6" fill="url(#whiteKeyGrad)"/>
+    <rect x="330" y="180" width="42" height="165" rx="6" fill="url(#whiteKeyGrad)"/>
+    <rect x="378" y="180" width="42" height="165" rx="6" fill="url(#whiteKeyGrad)"/>
+    <!-- Glowing special keys -->
+    <rect x="138" y="180" width="42" height="165" rx="6" fill="url(#glowKey1)" fill-opacity="0.6" filter="url(#pianoGlow)"/>
+    <rect x="282" y="180" width="42" height="165" rx="6" fill="url(#glowKey2)" fill-opacity="0.6" filter="url(#pianoGlow)"/>
+    <!-- Black keys -->
+    <rect x="115" y="180" width="30" height="105" rx="5" fill="url(#blackKeyGrad)"/>
+    <rect x="163" y="180" width="30" height="105" rx="5" fill="url(#blackKeyGrad)"/>
+    <rect x="258" y="180" width="30" height="105" rx="5" fill="url(#blackKeyGrad)"/>
+    <rect x="306" y="180" width="30" height="105" rx="5" fill="url(#blackKeyGrad)"/>
+    <rect x="354" y="180" width="30" height="105" rx="5" fill="url(#blackKeyGrad)"/>
+    <!-- Glowing black key -->
+    <rect x="163" y="180" width="30" height="105" rx="5" fill="#a855f7" fill-opacity="0.4" filter="url(#pianoGlow)"/>
+  </g>
+  <!-- Music note floating top left -->
+  <g transform="translate(100,100)" filter="url(#pianoGlow)">
+    <ellipse cx="0" cy="0" rx="12" ry="9" fill="#a855f7" transform="rotate(-20)"/>
+    <line x1="12" y1="-2" x2="12" y2="-50" stroke="#a855f7" stroke-width="3"/>
+    <line x1="12" y1="-50" x2="35" y2="-42" stroke="#a855f7" stroke-width="2.5"/>
+  </g>
+  <!-- Music note floating bottom right -->
+  <g transform="translate(400,410)" filter="url(#pianoGlow)">
+    <ellipse cx="0" cy="0" rx="12" ry="9" fill="#3b82f6" transform="rotate(-20)"/>
+    <ellipse cx="30" cy="-10" rx="12" ry="9" fill="#3b82f6" transform="rotate(-20)"/>
+    <line x1="12" y1="-2" x2="12" y2="-50" stroke="#3b82f6" stroke-width="3"/>
+    <line x1="42" y1="-12" x2="42" y2="-60" stroke="#3b82f6" stroke-width="3"/>
+    <line x1="12" y1="-50" x2="42" y2="-60" stroke="#3b82f6" stroke-width="2.5"/>
+  </g>
+  <!-- Sparkles -->
+  <circle cx="145" cy="420" r="4" fill="#a855f7" filter="url(#pianoGlow)" opacity="0.8"/>
+  <circle cx="380" cy="100" r="4" fill="#3b82f6" filter="url(#pianoGlow)" opacity="0.8"/>
+  <circle cx="430" cy="220" r="3" fill="#a855f7" opacity="0.6"/>
+  <circle cx="85" cy="310" r="3" fill="#3b82f6" opacity="0.6"/>
+</svg>

@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F0F8FF"/>
+      <stop offset="100%" stop-color="#E0F0FF"/>
+    </linearGradient>
+    <linearGradient id="crystal" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#AADDFF"/>
+      <stop offset="100%" stop-color="#6699FF"/>
+    </linearGradient>
+    <linearGradient id="shine" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#AADDFF" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="progress" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#4488FF"/>
+      <stop offset="100%" stop-color="#44DDFF"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Main crystal drop shape -->
+  <path d="M 256,80 Q 340,160 340,260 Q 340,340 256,380 Q 172,340 172,260 Q 172,160 256,80 Z" fill="url(#crystal)" opacity="0.85"/>
+  <path d="M 256,80 Q 340,160 340,260 Q 340,340 256,380 Q 172,340 172,260 Q 172,160 256,80 Z" fill="url(#shine)" opacity="0.4"/>
+  <!-- Internal shine facets -->
+  <path d="M 256,80 Q 280,120 290,180 L 256,200 Z" fill="white" opacity="0.3"/>
+  <path d="M 256,80 Q 232,120 222,180 L 256,200 Z" fill="white" opacity="0.15"/>
+  <!-- Checkmark inside -->
+  <polyline points="224,260 248,284 290,230" stroke="white" stroke-width="10" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- GB freed stat -->
+  <rect x="156" y="400" width="200" height="52" rx="10" fill="white" opacity="0.8"/>
+  <text x="256" y="420" font-family="'Segoe UI', sans-serif" font-size="11" fill="#5588AA" text-anchor="middle">Space Freed</text>
+  <text x="256" y="442" font-family="'Segoe UI', sans-serif" font-size="18" fill="#3366FF" text-anchor="middle" font-weight="bold">5.2 GB</text>
+  <!-- Sparkle dots -->
+  <circle cx="148" cy="180" r="6" fill="#4488FF" opacity="0.6"/>
+  <circle cx="140" cy="160" r="4" fill="#44AAFF" opacity="0.5"/>
+  <circle cx="160" cy="152" r="3" fill="#88CCFF" opacity="0.5"/>
+  <circle cx="364" cy="180" r="6" fill="#4488FF" opacity="0.6"/>
+  <circle cx="372" cy="160" r="4" fill="#44AAFF" opacity="0.5"/>
+  <circle cx="352" cy="152" r="3" fill="#88CCFF" opacity="0.5"/>
+  <!-- Progress bar -->
+  <rect x="80" y="474" width="352" height="10" rx="5" fill="#CCDDEE"/>
+  <rect x="80" y="474" width="296" height="10" rx="5" fill="url(#progress)"/>
+</svg>

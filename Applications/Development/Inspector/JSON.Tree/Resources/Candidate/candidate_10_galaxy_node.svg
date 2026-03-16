@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#080820"/>
+      <stop offset="100%" stop-color="#000000"/>
+    </radialGradient>
+    <radialGradient id="root" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="40%" stop-color="#c0b0ff"/>
+      <stop offset="100%" stop-color="#6030a0"/>
+    </radialGradient>
+    <radialGradient id="mid1" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#80d4ff"/>
+      <stop offset="100%" stop-color="#2060a0"/>
+    </radialGradient>
+    <radialGradient id="mid2" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#80ffb0"/>
+      <stop offset="100%" stop-color="#208040"/>
+    </radialGradient>
+    <radialGradient id="leaf1" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffd080"/>
+      <stop offset="100%" stop-color="#a06000"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Star field -->
+  <circle cx="80" cy="80" r="1.5" fill="white" opacity="0.4"/>
+  <circle cx="420" cy="60" r="1" fill="white" opacity="0.3"/>
+  <circle cx="60" cy="350" r="1.5" fill="white" opacity="0.5"/>
+  <circle cx="460" cy="400" r="1" fill="white" opacity="0.4"/>
+  <circle cx="350" cy="460" r="1.5" fill="white" opacity="0.3"/>
+  <circle cx="100" cy="460" r="1" fill="white" opacity="0.4"/>
+  <!-- Orbital rings (JSON depth circles) -->
+  <circle cx="256" cy="256" r="60" fill="none" stroke="#c0b0ff20" stroke-width="1.5" stroke-dasharray="6,4"/>
+  <circle cx="256" cy="256" r="120" fill="none" stroke="#80d4ff18" stroke-width="1.5" stroke-dasharray="8,6"/>
+  <circle cx="256" cy="256" r="175" fill="none" stroke="#80ffb015" stroke-width="1" stroke-dasharray="10,8"/>
+  <!-- Branch connectors -->
+  <line x1="256" y1="256" x2="180" y2="196" stroke="#c0b0ff" stroke-width="2" opacity="0.5"/>
+  <line x1="256" y1="256" x2="332" y2="196" stroke="#c0b0ff" stroke-width="2" opacity="0.5"/>
+  <line x1="256" y1="256" x2="190" y2="316" stroke="#80d4ff" stroke-width="2" opacity="0.5"/>
+  <line x1="256" y1="256" x2="322" y2="316" stroke="#80d4ff" stroke-width="2" opacity="0.5"/>
+  <!-- Level 2 connections -->
+  <line x1="180" y1="196" x2="120" y2="136" stroke="#80d4ff" stroke-width="1.5" opacity="0.4"/>
+  <line x1="180" y1="196" x2="140" y2="256" stroke="#80d4ff" stroke-width="1.5" opacity="0.4"/>
+  <line x1="332" y1="196" x2="392" y2="136" stroke="#80ffb0" stroke-width="1.5" opacity="0.4"/>
+  <line x1="332" y1="196" x2="372" y2="256" stroke="#80ffb0" stroke-width="1.5" opacity="0.4"/>
+  <line x1="190" y1="316" x2="130" y2="376" stroke="#ffd080" stroke-width="1.5" opacity="0.4"/>
+  <line x1="322" y1="316" x2="392" y2="376" stroke="#ffd080" stroke-width="1.5" opacity="0.4"/>
+  <!-- Root node (center) -->
+  <circle cx="256" cy="256" r="28" fill="url(#root)"/>
+  <text x="256" y="252" text-anchor="middle" font-family="monospace" font-size="11" fill="#0a0020" font-weight="bold">JSON</text>
+  <text x="256" y="266" text-anchor="middle" font-family="monospace" font-size="9" fill="#0a0020">root</text>
+  <!-- Level 2 nodes -->
+  <circle cx="180" cy="196" r="20" fill="url(#mid1)"/>
+  <text x="180" y="200" text-anchor="middle" font-family="monospace" font-size="9" fill="#001a30">"user"</text>
+  <circle cx="332" cy="196" r="20" fill="url(#mid2)"/>
+  <text x="332" y="200" text-anchor="middle" font-family="monospace" font-size="9" fill="#001a10">"data"</text>
+  <circle cx="190" cy="316" r="18" fill="url(#mid1)"/>
+  <text x="190" y="320" text-anchor="middle" font-family="monospace" font-size="9" fill="#001a30">"cfg"</text>
+  <circle cx="322" cy="316" r="18" fill="url(#mid2)"/>
+  <text x="322" y="320" text-anchor="middle" font-family="monospace" font-size="9" fill="#001a10">"tags"</text>
+  <!-- Level 3 nodes (small) -->
+  <circle cx="120" cy="136" r="12" fill="url(#leaf1)"/>
+  <circle cx="140" cy="256" r="12" fill="url(#leaf1)"/>
+  <circle cx="392" cy="136" r="12" fill="url(#leaf1)"/>
+  <circle cx="372" cy="256" r="12" fill="url(#leaf1)"/>
+  <circle cx="130" cy="376" r="12" fill="url(#leaf1)"/>
+  <circle cx="392" cy="376" r="12" fill="url(#leaf1)"/>
+  <!-- Glow halos for key nodes -->
+  <circle cx="256" cy="256" r="40" fill="#c0b0ff" opacity="0.08"/>
+  <circle cx="180" cy="196" r="28" fill="#80d4ff" opacity="0.07"/>
+  <circle cx="332" cy="196" r="28" fill="#80ffb0" opacity="0.07"/>
+</svg>

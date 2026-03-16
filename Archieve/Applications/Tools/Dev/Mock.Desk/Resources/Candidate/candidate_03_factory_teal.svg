@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0C3547"/>
+      <stop offset="100%" stop-color="#0F4C5C"/>
+    </linearGradient>
+    <linearGradient id="conveyor" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0E7490"/>
+      <stop offset="100%" stop-color="#06B6D4"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Factory building outline -->
+  <rect x="60" y="200" width="392" height="240" rx="4" fill="#0a2a38" stroke="#0E7490" stroke-width="2"/>
+  <!-- Roof shapes -->
+  <polygon points="60,200 160,120 260,200" fill="#0a2a38" stroke="#0E7490" stroke-width="2"/>
+  <polygon points="160,200 260,120 360,200" fill="#0a2a38" stroke="#0E7490" stroke-width="2"/>
+  <polygon points="260,200 360,120 452,200" fill="#0a2a38" stroke="#0E7490" stroke-width="2"/>
+  <!-- Skylight windows -->
+  <rect x="175" y="145" width="50" height="30" rx="4" fill="#06B6D4" opacity="0.5"/>
+  <rect x="275" y="145" width="50" height="30" rx="4" fill="#06B6D4" opacity="0.5"/>
+  <!-- Smokestack -->
+  <rect x="380" y="80" width="30" height="120" rx="6" fill="#1E3A4C"/>
+  <ellipse cx="395" cy="80" rx="20" ry="8" fill="#06B6D4" opacity="0.4"/>
+  <!-- Smoke puffs -->
+  <circle cx="395" cy="60" r="14" fill="#1E3A4C" opacity="0.6"/>
+  <circle cx="408" cy="42" r="11" fill="#1E3A4C" opacity="0.4"/>
+  <circle cx="388" cy="28" r="9" fill="#1E3A4C" opacity="0.3"/>
+  <!-- Conveyor belt inside -->
+  <rect x="80" y="310" width="352" height="22" rx="6" fill="url(#conveyor)" opacity="0.6"/>
+  <!-- Items on conveyor (JSON data boxes) -->
+  <rect x="90" y="298" width="36" height="24" rx="4" fill="#0E7490" stroke="#22D3EE" stroke-width="1.5"/>
+  <text x="108" y="315" font-family="Courier New" font-size="9" fill="white" text-anchor="middle">&#123;&#125;</text>
+  <rect x="160" y="298" width="36" height="24" rx="4" fill="#0E7490" stroke="#22D3EE" stroke-width="1.5"/>
+  <text x="178" y="315" font-family="Courier New" font-size="9" fill="white" text-anchor="middle">&#123;&#125;</text>
+  <rect x="230" y="298" width="36" height="24" rx="4" fill="#0E7490" stroke="#22D3EE" stroke-width="1.5"/>
+  <text x="248" y="315" font-family="Courier New" font-size="9" fill="white" text-anchor="middle">&#123;&#125;</text>
+  <rect x="300" y="298" width="36" height="24" rx="4" fill="#0E7490" stroke="#22D3EE" stroke-width="1.5"/>
+  <text x="318" y="315" font-family="Courier New" font-size="9" fill="white" text-anchor="middle">&#123;&#125;</text>
+  <rect x="370" y="298" width="36" height="24" rx="4" fill="#06B6D4" stroke="#22D3EE" stroke-width="1.5"/>
+  <text x="388" y="315" font-family="Courier New" font-size="9" fill="white" text-anchor="middle">&#123;&#125;</text>
+  <!-- Belt wheels -->
+  <circle cx="80" cy="321" r="14" fill="#0a2a38" stroke="#0E7490" stroke-width="2"/>
+  <circle cx="432" cy="321" r="14" fill="#0a2a38" stroke="#0E7490" stroke-width="2"/>
+  <!-- Windows factory -->
+  <rect x="90" y="220" width="60" height="50" rx="4" fill="#06B6D4" opacity="0.2" stroke="#0E7490" stroke-width="1"/>
+  <rect x="180" y="220" width="60" height="50" rx="4" fill="#06B6D4" opacity="0.2" stroke="#0E7490" stroke-width="1"/>
+  <!-- Door -->
+  <rect x="232" y="370" width="48" height="70" rx="4" fill="#0E7490" opacity="0.5"/>
+  <!-- Label -->
+  <text x="256" y="462" font-family="Arial" font-size="14" fill="#22D3EE" text-anchor="middle" font-weight="bold">Mock Data Factory</text>
+</svg>

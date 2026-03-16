@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E0B3B"/>
+      <stop offset="100%" stop-color="#2D1B69"/>
+    </linearGradient>
+    <linearGradient id="wave" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#7C3AED"/>
+      <stop offset="50%" stop-color="#A855F7"/>
+      <stop offset="100%" stop-color="#C084FC"/>
+    </linearGradient>
+    <linearGradient id="fill" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#7C3AED" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#7C3AED" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Grid -->
+  <line x1="60" y1="80" x2="60" y2="380" stroke="#3B2A6B" stroke-width="1"/>
+  <line x1="60" y1="380" x2="460" y2="380" stroke="#3B2A6B" stroke-width="1"/>
+  <line x1="60" y1="200" x2="460" y2="200" stroke="#3B2A6B" stroke-width="1" opacity="0.5"/>
+  <line x1="60" y1="290" x2="460" y2="290" stroke="#3B2A6B" stroke-width="1" opacity="0.5"/>
+  <line x1="60" y1="110" x2="460" y2="110" stroke="#3B2A6B" stroke-width="1" opacity="0.5"/>
+  <!-- Y axis labels -->
+  <text x="50" y="384" font-family="Arial" font-size="11" fill="#6B5B9B" text-anchor="end">0%</text>
+  <text x="50" y="294" font-family="Arial" font-size="11" fill="#6B5B9B" text-anchor="end">25%</text>
+  <text x="50" y="204" font-family="Arial" font-size="11" fill="#6B5B9B" text-anchor="end">50%</text>
+  <text x="50" y="114" font-family="Arial" font-size="11" fill="#6B5B9B" text-anchor="end">75%</text>
+  <!-- Memory usage wave path (filled) -->
+  <path d="M60 310 C80 290 100 260 130 250 C160 240 175 230 200 220 C225 210 240 200 260 195 C280 190 290 185 310 180 C330 175 345 170 365 165 C385 160 410 155 460 150 L460 380 L60 380 Z" fill="url(#fill)"/>
+  <!-- Wave line -->
+  <path d="M60 310 C80 290 100 260 130 250 C160 240 175 230 200 220 C225 210 240 200 260 195 C280 190 290 185 310 180 C330 175 345 170 365 165 C385 160 410 155 460 150" fill="none" stroke="url(#wave)" stroke-width="3.5" stroke-linecap="round"/>
+  <!-- Data points -->
+  <circle cx="130" cy="250" r="5" fill="#A855F7"/>
+  <circle cx="200" cy="220" r="5" fill="#A855F7"/>
+  <circle cx="260" cy="195" r="5" fill="#A855F7"/>
+  <circle cx="310" cy="180" r="5" fill="#C084FC"/>
+  <circle cx="365" cy="165" r="5" fill="#C084FC"/>
+  <circle cx="460" cy="150" r="5" fill="#DDD6FE"/>
+  <!-- Current value callout -->
+  <rect x="370" y="120" width="80" height="35" rx="6" fill="#7C3AED"/>
+  <text x="410" y="133" font-family="Arial" font-size="11" fill="white" text-anchor="middle">Current</text>
+  <text x="410" y="148" font-family="Arial" font-size="14" fill="white" text-anchor="middle" font-weight="bold">71%</text>
+  <line x1="460" y1="150" x2="450" y2="138" stroke="#C084FC" stroke-width="1.5"/>
+  <!-- X axis time labels -->
+  <text x="70" y="396" font-family="Arial" font-size="10" fill="#6B5B9B">-5m</text>
+  <text x="200" y="396" font-family="Arial" font-size="10" fill="#6B5B9B">-3m</text>
+  <text x="335" y="396" font-family="Arial" font-size="10" fill="#6B5B9B">-1m</text>
+  <text x="440" y="396" font-family="Arial" font-size="10" fill="#6B5B9B">now</text>
+  <!-- Title and stats -->
+  <text x="256" y="58" font-family="Arial" font-size="16" fill="#DDD6FE" text-anchor="middle" font-weight="bold">Memory Trend</text>
+  <!-- Stats pills -->
+  <rect x="66" y="420" width="100" height="32" rx="8" fill="#3B2A6B"/>
+  <text x="116" y="431" font-family="Arial" font-size="10" fill="#A855F7" text-anchor="middle">Peak</text>
+  <text x="116" y="445" font-family="Arial" font-size="13" fill="white" text-anchor="middle" font-weight="bold">76%</text>
+  <rect x="182" y="420" width="100" height="32" rx="8" fill="#3B2A6B"/>
+  <text x="232" y="431" font-family="Arial" font-size="10" fill="#A855F7" text-anchor="middle">Average</text>
+  <text x="232" y="445" font-family="Arial" font-size="13" fill="white" text-anchor="middle" font-weight="bold">62%</text>
+  <rect x="298" y="420" width="100" height="32" rx="8" fill="#3B2A6B"/>
+  <text x="348" y="431" font-family="Arial" font-size="10" fill="#A855F7" text-anchor="middle">Min</text>
+  <text x="348" y="445" font-family="Arial" font-size="13" fill="white" text-anchor="middle" font-weight="bold">48%</text>
+</svg>

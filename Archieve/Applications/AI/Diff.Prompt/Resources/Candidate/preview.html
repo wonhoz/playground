@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diff.Prompt — Icon Candidates</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #1a1a1a;
+      color: #e0e0e0;
+      font-family: 'Segoe UI', sans-serif;
+      padding: 32px;
+    }
+    h1 {
+      font-size: 22px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #c7d2fe;
+    }
+    p.subtitle {
+      font-size: 13px;
+      color: #666;
+      margin-bottom: 28px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 20px;
+    }
+    .card {
+      background: #242424;
+      border: 1px solid #333;
+      border-radius: 12px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      transition: border-color 0.2s, transform 0.2s;
+      cursor: pointer;
+    }
+    .card:hover {
+      border-color: #6366f1;
+      transform: translateY(-3px);
+    }
+    .card img {
+      width: 128px;
+      height: 128px;
+      border-radius: 20px;
+    }
+    .card .label {
+      font-size: 11px;
+      color: #888;
+      text-align: center;
+      word-break: break-all;
+    }
+    .card .num {
+      font-size: 18px;
+      font-weight: 700;
+      color: #818cf8;
+    }
+  </style>
+</head>
+<body>
+  <h1>Diff.Prompt — Icon Candidates</h1>
+  <p class="subtitle">AI 프롬프트 비교·차이 분석 도구 | 10 candidates</p>
+  <div class="grid">
+    <div class="card">
+      <span class="num">01</span>
+      <img src="candidate_01_split_compare.svg" alt="split compare">
+      <span class="label">split_compare</span>
+    </div>
+    <div class="card">
+      <span class="num">02</span>
+      <img src="candidate_02_brain_diff.svg" alt="brain diff">
+      <span class="label">brain_diff</span>
+    </div>
+    <div class="card">
+      <span class="num">03</span>
+      <img src="candidate_03_magnifier_text.svg" alt="magnifier text">
+      <span class="label">magnifier_text</span>
+    </div>
+    <div class="card">
+      <span class="num">04</span>
+      <img src="candidate_04_token_flow.svg" alt="token flow">
+      <span class="label">token_flow</span>
+    </div>
+    <div class="card">
+      <span class="num">05</span>
+      <img src="candidate_05_delta_symbol.svg" alt="delta symbol">
+      <span class="label">delta_symbol</span>
+    </div>
+    <div class="card">
+      <span class="num">06</span>
+      <img src="candidate_06_dual_bubble.svg" alt="dual bubble">
+      <span class="label">dual_bubble</span>
+    </div>
+    <div class="card">
+      <span class="num">07</span>
+      <img src="candidate_07_redline_edit.svg" alt="redline edit">
+      <span class="label">redline_edit</span>
+    </div>
+    <div class="card">
+      <span class="num">08</span>
+      <img src="candidate_08_heatmap_compare.svg" alt="heatmap compare">
+      <span class="label">heatmap_compare</span>
+    </div>
+    <div class="card">
+      <span class="num">09</span>
+      <img src="candidate_09_venn_overlap.svg" alt="venn overlap">
+      <span class="label">venn_overlap</span>
+    </div>
+    <div class="card">
+      <span class="num">10</span>
+      <img src="candidate_10_timeline_version.svg" alt="timeline version">
+      <span class="label">timeline_version</span>
+    </div>
+  </div>
+</body>
+</html>

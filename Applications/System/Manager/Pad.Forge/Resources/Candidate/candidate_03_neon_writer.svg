@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#0A0020"/>
+      <stop offset="100%" stop-color="#040010"/>
+    </radialGradient>
+    <linearGradient id="penNeon" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00FFFF"/>
+      <stop offset="100%" stop-color="#0088FF"/>
+    </linearGradient>
+    <filter id="neonWrite">
+      <feGaussianBlur stdDeviation="5" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Notepad outline neon -->
+  <rect x="100" y="80" width="260" height="320" rx="12" fill="none" stroke="#00FFFF" stroke-width="4" filter="url(#neonWrite)"/>
+  <rect x="100" y="80" width="260" height="320" rx="12" fill="#00FFFF" opacity="0.04"/>
+  <!-- Neon ruled lines -->
+  <line x1="118" y1="130" x2="342" y2="130" stroke="#0088FF" stroke-width="1.5" opacity="0.6"/>
+  <line x1="118" y1="155" x2="342" y2="155" stroke="#0088FF" stroke-width="1.5" opacity="0.5"/>
+  <line x1="118" y1="180" x2="342" y2="180" stroke="#0088FF" stroke-width="1.5" opacity="0.4"/>
+  <line x1="118" y1="205" x2="342" y2="205" stroke="#0088FF" stroke-width="1.5" opacity="0.4"/>
+  <line x1="118" y1="230" x2="342" y2="230" stroke="#0088FF" stroke-width="1.5" opacity="0.4"/>
+  <line x1="118" y1="255" x2="342" y2="255" stroke="#0088FF" stroke-width="1.5" opacity="0.3"/>
+  <line x1="118" y1="280" x2="342" y2="280" stroke="#0088FF" stroke-width="1.5" opacity="0.3"/>
+  <line x1="118" y1="305" x2="342" y2="305" stroke="#0088FF" stroke-width="1.5" opacity="0.3"/>
+  <line x1="118" y1="330" x2="342" y2="330" stroke="#0088FF" stroke-width="1.5" opacity="0.2"/>
+  <line x1="118" y1="355" x2="342" y2="355" stroke="#0088FF" stroke-width="1.5" opacity="0.2"/>
+  <!-- Neon text written (glow) -->
+  <text x="230" y="120" font-family="monospace" font-size="16" fill="#00FFFF" text-anchor="middle" filter="url(#neonWrite)">Pad.Forge</text>
+  <rect x="118" y="143" width="130" height="7" rx="3.5" fill="#00FFFF" opacity="0.7" filter="url(#neonWrite)"/>
+  <rect x="118" y="168" width="100" height="5" rx="2.5" fill="#00FFFF" opacity="0.5"/>
+  <rect x="118" y="193" width="140" height="5" rx="2.5" fill="#0088FF" opacity="0.6"/>
+  <!-- Cursor position -->
+  <rect x="118" y="218" width="4" height="18" rx="2" fill="#00FFFF" filter="url(#neonWrite)"/>
+  <!-- Large neon pen drawing outside the pad -->
+  <rect x="340" y="120" width="20" height="160" rx="6" fill="url(#penNeon)" filter="url(#neonWrite)" transform="rotate(30, 350, 200)"/>
+  <polygon points="340,290 360,295 346,315" fill="#00FFFF" filter="url(#neonWrite)" transform="rotate(30, 350, 302)"/>
+  <!-- Pen cap -->
+  <rect x="338" y="116" width="24" height="20" rx="6" fill="#0088FF" filter="url(#neonWrite)" transform="rotate(30, 350, 126)"/>
+  <!-- Background stars/sparks -->
+  <circle cx="80" cy="150" r="3" fill="#00FFFF" opacity="0.5"/>
+  <circle cx="430" cy="200" r="2" fill="#0088FF" opacity="0.4"/>
+  <circle cx="70" cy="320" r="2" fill="#00FFFF" opacity="0.3"/>
+  <circle cx="440" cy="380" r="3" fill="#0088FF" opacity="0.4"/>
+</svg>

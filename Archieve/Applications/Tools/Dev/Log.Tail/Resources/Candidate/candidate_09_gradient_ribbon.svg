@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0D0022"/>
+      <stop offset="100%" stop-color="#220033"/>
+    </linearGradient>
+    <linearGradient id="r1" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FF4444" stop-opacity="0.1"/>
+      <stop offset="70%" stop-color="#FF4444" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#FF4444"/>
+    </linearGradient>
+    <linearGradient id="r2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FF8C00" stop-opacity="0.1"/>
+      <stop offset="70%" stop-color="#FF8C00" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#FF8C00"/>
+    </linearGradient>
+    <linearGradient id="r3" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#3FB950" stop-opacity="0.1"/>
+      <stop offset="70%" stop-color="#3FB950" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#3FB950"/>
+    </linearGradient>
+    <linearGradient id="r4" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#58A6FF" stop-opacity="0.1"/>
+      <stop offset="70%" stop-color="#58A6FF" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#58A6FF"/>
+    </linearGradient>
+    <linearGradient id="r5" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#D2A8FF" stop-opacity="0.1"/>
+      <stop offset="70%" stop-color="#D2A8FF" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#D2A8FF"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Ribbon log lines flowing right (tail view) -->
+  <rect x="60" y="108" width="392" height="28" rx="4" fill="url(#r1)"/>
+  <rect x="60" y="148" width="392" height="22" rx="4" fill="url(#r2)"/>
+  <rect x="60" y="182" width="392" height="26" rx="4" fill="url(#r3)"/>
+  <rect x="60" y="220" width="392" height="20" rx="4" fill="url(#r4)"/>
+  <rect x="60" y="252" width="392" height="24" rx="4" fill="url(#r5)"/>
+  <rect x="60" y="288" width="392" height="18" rx="4" fill="url(#r3)" opacity="0.7"/>
+  <rect x="60" y="318" width="392" height="22" rx="4" fill="url(#r4)" opacity="0.8"/>
+  <rect x="60" y="352" width="392" height="28" rx="4" fill="url(#r1)" opacity="0.5"/>
+  <!-- Tail indicator (right edge glow) -->
+  <rect x="448" y="100" width="8" height="320" rx="4" fill="#FFFFFF" opacity="0.15" filter="url(#glow)"/>
+  <!-- Text labels on ribbons -->
+  <text x="76" y="127" font-family="'Courier New', monospace" font-size="11" fill="white" opacity="0.8">[ERROR] critical failure</text>
+  <text x="76" y="163" font-family="'Courier New', monospace" font-size="11" fill="white" opacity="0.7">[WARN]  memory threshold</text>
+  <text x="76" y="198" font-family="'Courier New', monospace" font-size="11" fill="white" opacity="0.7">[INFO]  request processed</text>
+  <text x="76" y="233" font-family="'Courier New', monospace" font-size="11" fill="white" opacity="0.7">[DEBUG] cache hit</text>
+  <text x="76" y="267" font-family="'Courier New', monospace" font-size="11" fill="white" opacity="0.7">[INFO]  session started</text>
+  <!-- Timestamp on right -->
+  <text x="396" y="127" font-family="'Courier New', monospace" font-size="10" fill="#FF4444" text-anchor="end" opacity="0.9">12:00:31</text>
+  <text x="396" y="163" font-family="'Courier New', monospace" font-size="10" fill="#FF8C00" text-anchor="end" opacity="0.8">12:00:30</text>
+  <text x="396" y="198" font-family="'Courier New', monospace" font-size="10" fill="#3FB950" text-anchor="end" opacity="0.8">12:00:28</text>
+  <text x="396" y="233" font-family="'Courier New', monospace" font-size="10" fill="#58A6FF" text-anchor="end" opacity="0.8">12:00:25</text>
+  <!-- Arrow flowing right (tail direction) -->
+  <path d="M60 430 L420 430 L420 416 L452 440 L420 464 L420 450 L60 450 Z" fill="#D2A8FF" opacity="0.2" filter="url(#glow)"/>
+  <text x="240" y="445" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="#D2A8FF" opacity="0.7">TAIL DIRECTION</text>
+</svg>

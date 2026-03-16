@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#001400"/>
+      <stop offset="100%" stop-color="#002800"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- PCB traces -->
+  <line x1="80" y1="256" x2="200" y2="256" stroke="#00ff44" stroke-width="6" filter="url(#glow)"/>
+  <line x1="200" y1="256" x2="200" y2="150" stroke="#00ff44" stroke-width="6" filter="url(#glow)"/>
+  <line x1="200" y1="150" x2="312" y2="150" stroke="#00ff44" stroke-width="6" filter="url(#glow)"/>
+  <line x1="312" y1="150" x2="312" y2="256" stroke="#00ff44" stroke-width="6" filter="url(#glow)"/>
+  <line x1="312" y1="256" x2="432" y2="256" stroke="#00ff44" stroke-width="6" filter="url(#glow)"/>
+  <!-- Branch traces -->
+  <line x1="200" y1="256" x2="200" y2="360" stroke="#00aa33" stroke-width="4"/>
+  <line x1="200" y1="360" x2="312" y2="360" stroke="#00aa33" stroke-width="4"/>
+  <line x1="312" y1="360" x2="312" y2="256" stroke="#00aa33" stroke-width="4"/>
+  <!-- Resistor at top -->
+  <rect x="225" y="136" width="62" height="28" rx="6" fill="#003300" stroke="#00ff44" stroke-width="3" filter="url(#glow)"/>
+  <line x1="235" y1="150" x2="245" y2="143" stroke="#ffcc00" stroke-width="2"/>
+  <line x1="245" y1="143" x2="255" y2="157" stroke="#ffcc00" stroke-width="2"/>
+  <line x1="255" y1="157" x2="265" y2="143" stroke="#ffcc00" stroke-width="2"/>
+  <line x1="265" y1="143" x2="277" y2="150" stroke="#ffcc00" stroke-width="2"/>
+  <!-- Capacitor at bottom -->
+  <line x1="245" y1="360" x2="267" y2="360" stroke="#00aa33" stroke-width="4"/>
+  <line x1="245" y1="348" x2="245" y2="372" stroke="#00ff44" stroke-width="6" filter="url(#glow)"/>
+  <line x1="267" y1="348" x2="267" y2="372" stroke="#00ff44" stroke-width="6" filter="url(#glow)"/>
+  <line x1="267" y1="360" x2="312" y2="360" stroke="#00aa33" stroke-width="4"/>
+  <!-- LED indicator -->
+  <circle cx="370" cy="256" r="22" fill="#004400" stroke="#00ff44" stroke-width="3" filter="url(#glow)"/>
+  <circle cx="370" cy="256" r="12" fill="#00ff44" opacity="0.9" filter="url(#glow)"/>
+  <!-- Nodes -->
+  <circle cx="200" cy="256" r="10" fill="#00ff44" filter="url(#glow)"/>
+  <circle cx="312" cy="256" r="10" fill="#00ff44" filter="url(#glow)"/>
+  <circle cx="200" cy="150" r="8" fill="#00aa33"/>
+  <circle cx="312" cy="150" r="8" fill="#00aa33"/>
+  <circle cx="200" cy="360" r="8" fill="#00aa33"/>
+  <circle cx="312" cy="360" r="8" fill="#00aa33"/>
+  <!-- Battery -->
+  <rect x="55" y="240" width="25" height="32" rx="4" fill="#003300" stroke="#00ff44" stroke-width="2"/>
+  <rect x="64" y="234" width="8" height="8" rx="2" fill="#00ff44"/>
+  <text x="67" y="261" text-anchor="middle" font-family="monospace" font-size="12" fill="#00ff44">+</text>
+  <!-- Broken connection indicator -->
+  <circle cx="256" cy="256" r="18" fill="none" stroke="#ff4400" stroke-width="4" stroke-dasharray="8 4" filter="url(#glow)"/>
+  <line x1="242" y1="242" x2="270" y2="270" stroke="#ff4400" stroke-width="4" filter="url(#glow)"/>
+</svg>

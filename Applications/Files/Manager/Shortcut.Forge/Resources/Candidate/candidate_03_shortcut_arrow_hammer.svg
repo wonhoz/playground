@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a1000"/>
+      <stop offset="100%" stop-color="#3e2700"/>
+    </linearGradient>
+    <linearGradient id="arrow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffe082"/>
+      <stop offset="100%" stop-color="#ff8f00"/>
+    </linearGradient>
+    <linearGradient id="hammer" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#bdbdbd"/>
+      <stop offset="100%" stop-color="#eeeeee"/>
+    </linearGradient>
+    <linearGradient id="handle" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#a1887f"/>
+      <stop offset="100%" stop-color="#4e342e"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- shortcut arrow -->
+  <path d="M100 290 L270 290 L270 240 L380 320 L270 400 L270 350 L100 350 Z" fill="url(#arrow)"/>
+  <ellipse cx="185" cy="295" rx="50" ry="8" fill="white" opacity="0.2" transform="rotate(-3 185 295)"/>
+  <!-- small arrow corner badge -->
+  <rect x="130" y="340" width="50" height="50" rx="8" fill="#e65100"/>
+  <path d="M140 380 L168 368 L168 358 L180 368 L168 378 L168 388 Z" fill="white" opacity="0.9"/>
+  <!-- hammer -->
+  <rect x="330" y="100" width="80" height="50" rx="10" fill="url(#hammer)" transform="rotate(-45 370 125)"/>
+  <rect x="385" y="140" width="16" height="120" rx="6" fill="url(#handle)" transform="rotate(-45 393 200)"/>
+  <!-- sparks -->
+  <circle cx="280" cy="310" r="7" fill="#ffe082"/>
+  <line x1="270" y1="302" x2="260" y2="290" stroke="#ffe082" stroke-width="2"/>
+  <line x1="282" y1="300" x2="292" y2="288" stroke="#ff9800" stroke-width="2"/>
+  <line x1="278" y1="305" x2="288" y2="298" stroke="#fff9c4" stroke-width="2"/>
+</svg>

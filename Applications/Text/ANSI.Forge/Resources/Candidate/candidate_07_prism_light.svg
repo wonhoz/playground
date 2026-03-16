@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0A0010"/>
+      <stop offset="100%" stop-color="#100020"/>
+    </linearGradient>
+    <linearGradient id="prism" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8888FF"/>
+      <stop offset="50%" stop-color="#AAAAFF"/>
+      <stop offset="100%" stop-color="#6666CC"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- White beam entering -->
+  <rect x="60" y="248" width="130" height="14" rx="7" fill="white" opacity="0.9"/>
+  <!-- Prism triangle -->
+  <polygon points="200,160 340,256 200,352" fill="url(#prism)" opacity="0.85"/>
+  <polygon points="200,160 340,256 200,352" fill="none" stroke="#AAAAFF" stroke-width="2"/>
+  <!-- Dispersed rainbow rays -->
+  <line x1="340" y1="256" x2="460" y2="180" stroke="#FF0000" stroke-width="6" opacity="0.8"/>
+  <line x1="340" y1="256" x2="460" y2="205" stroke="#FF8800" stroke-width="6" opacity="0.8"/>
+  <line x1="340" y1="256" x2="460" y2="230" stroke="#FFFF00" stroke-width="6" opacity="0.8"/>
+  <line x1="340" y1="256" x2="460" y2="256" stroke="#00FF00" stroke-width="6" opacity="0.8"/>
+  <line x1="340" y1="256" x2="460" y2="282" stroke="#0088FF" stroke-width="6" opacity="0.8"/>
+  <line x1="340" y1="256" x2="460" y2="307" stroke="#4400FF" stroke-width="6" opacity="0.8"/>
+  <line x1="340" y1="256" x2="460" y2="332" stroke="#FF00FF" stroke-width="6" opacity="0.8"/>
+  <!-- Label -->
+  <text x="256" y="430" font-family="monospace" font-weight="bold" font-size="24" fill="#8888FF" text-anchor="middle">ANSI · FORGE</text>
+</svg>

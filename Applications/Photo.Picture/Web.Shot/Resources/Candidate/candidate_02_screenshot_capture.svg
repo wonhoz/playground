@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f2027"/>
+      <stop offset="50%" stop-color="#203a43"/>
+      <stop offset="100%" stop-color="#2c5364"/>
+    </linearGradient>
+    <linearGradient id="frame" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#43e97b"/>
+      <stop offset="100%" stop-color="#38f9d7"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Screen content -->
+  <rect x="80" y="100" width="352" height="220" rx="10" fill="#1a2a3a" opacity="0.8"/>
+  <!-- Content mock -->
+  <rect x="100" y="120" width="312" height="16" rx="4" fill="#2c3e50" opacity="0.8"/>
+  <rect x="100" y="148" width="250" height="10" rx="3" fill="#2c3e50" opacity="0.6"/>
+  <rect x="100" y="168" width="290" height="10" rx="3" fill="#2c3e50" opacity="0.6"/>
+  <rect x="100" y="196" width="312" height="70" rx="6" fill="#2c3e50" opacity="0.5"/>
+  <!-- Capture frame corners -->
+  <path d="M100 120 L100 100 L120 100" stroke="url(#frame)" stroke-width="6" fill="none" stroke-linecap="round" filter="url(#glow)"/>
+  <path d="M392 100 L412 100 L412 120" stroke="url(#frame)" stroke-width="6" fill="none" stroke-linecap="round" filter="url(#glow)"/>
+  <path d="M100 300 L100 320 L120 320" stroke="url(#frame)" stroke-width="6" fill="none" stroke-linecap="round" filter="url(#glow)"/>
+  <path d="M392 320 L412 320 L412 300" stroke="url(#frame)" stroke-width="6" fill="none" stroke-linecap="round" filter="url(#glow)"/>
+  <!-- Crosshair center -->
+  <line x1="256" y1="195" x2="256" y2="225" stroke="url(#frame)" stroke-width="2" opacity="0.6"/>
+  <line x1="241" y1="210" x2="271" y2="210" stroke="url(#frame)" stroke-width="2" opacity="0.6"/>
+  <circle cx="256" cy="210" r="4" fill="url(#frame)" filter="url(#glow)"/>
+  <!-- Capture arrow down -->
+  <path d="M256 360 L256 420" stroke="url(#frame)" stroke-width="5" stroke-linecap="round" filter="url(#glow)"/>
+  <polygon points="236,408 256,436 276,408" fill="url(#frame)" filter="url(#glow)"/>
+  <!-- Output thumbnail -->
+  <rect x="150" y="420" width="212" height="60" rx="8" fill="#1a2a3a" stroke="url(#frame)" stroke-width="2" opacity="0.8"/>
+</svg>

@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#030712"/>
+      <stop offset="100%" stop-color="#111827"/>
+    </linearGradient>
+    <linearGradient id="layer1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7c3aed"/>
+      <stop offset="100%" stop-color="#5b21b6"/>
+    </linearGradient>
+    <linearGradient id="layer2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1d4ed8"/>
+      <stop offset="100%" stop-color="#1e40af"/>
+    </linearGradient>
+    <linearGradient id="layer3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0e7490"/>
+      <stop offset="100%" stop-color="#164e63"/>
+    </linearGradient>
+    <linearGradient id="layer4" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#166534"/>
+      <stop offset="100%" stop-color="#14532d"/>
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#000" flood-opacity="0.5"/>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- 레이어 4 (맨 아래) -->
+  <rect x="96" y="340" width="320" height="68" rx="12" fill="url(#layer4)" stroke="#4ade80" stroke-width="1.5" opacity="0.7" filter="url(#shadow)"/>
+  <text x="256" y="380" font-family="Arial" font-size="14" fill="#bbf7d0" text-anchor="middle">Desktop 4 — Dev</text>
+  <!-- 레이어 3 -->
+  <rect x="86" y="270" width="320" height="68" rx="12" fill="url(#layer3)" stroke="#22d3ee" stroke-width="1.5" opacity="0.8" filter="url(#shadow)"/>
+  <text x="246" y="310" font-family="Arial" font-size="14" fill="#a5f3fc" text-anchor="middle">Desktop 3 — Media</text>
+  <!-- 레이어 2 -->
+  <rect x="76" y="200" width="320" height="68" rx="12" fill="url(#layer2)" stroke="#60a5fa" stroke-width="1.5" opacity="0.9" filter="url(#shadow)"/>
+  <text x="236" y="240" font-family="Arial" font-size="14" fill="#bfdbfe" text-anchor="middle">Desktop 2 — Browser</text>
+  <!-- 레이어 1 (맨 위, 활성) -->
+  <rect x="66" y="120" width="320" height="78" rx="14" fill="url(#layer1)" stroke="#a78bfa" stroke-width="3" filter="url(#shadow)"/>
+  <rect x="66" y="120" width="320" height="22" rx="14" fill="#4c1d95"/>
+  <rect x="66" y="131" width="320" height="11" rx="0" fill="#4c1d95"/>
+  <circle cx="86" cy="131" r="5" fill="#ef4444"/>
+  <circle cx="104" cy="131" r="5" fill="#fbbf24"/>
+  <circle cx="122" cy="131" r="5" fill="#22c55e"/>
+  <text x="226" y="175" font-family="Arial" font-weight="bold" font-size="15" fill="#ede9fe" text-anchor="middle">Desktop 1 — Work (Active)</text>
+  <!-- 화살표 (올리기/내리기) -->
+  <polygon points="430,256 414,226 414,246 402,246 402,266 414,266 414,286" fill="#a78bfa" opacity="0.7"/>
+</svg>

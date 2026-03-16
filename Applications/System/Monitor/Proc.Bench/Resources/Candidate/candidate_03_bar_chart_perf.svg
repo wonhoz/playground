@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e1e2e"/>
+      <stop offset="100%" stop-color="#2a2a3e"/>
+    </linearGradient>
+    <linearGradient id="bar1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#a78bfa"/>
+      <stop offset="100%" stop-color="#7c3aed"/>
+    </linearGradient>
+    <linearGradient id="bar2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#34d399"/>
+      <stop offset="100%" stop-color="#059669"/>
+    </linearGradient>
+    <linearGradient id="bar3" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#fb923c"/>
+      <stop offset="100%" stop-color="#ea580c"/>
+    </linearGradient>
+    <linearGradient id="bar4" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#f472b6"/>
+      <stop offset="100%" stop-color="#db2777"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Title -->
+  <text x="256" y="80" text-anchor="middle" font-family="monospace" font-size="18" fill="#e0e0e0" font-weight="bold">PROCESS BENCHMARK</text>
+  <!-- Grid lines -->
+  <line x1="90" y1="130" x2="90" y2="380" stroke="#444" stroke-width="2"/>
+  <line x1="90" y1="380" x2="450" y2="380" stroke="#444" stroke-width="2"/>
+  <line x1="90" y1="305" x2="450" y2="305" stroke="#333" stroke-width="1" stroke-dasharray="4 4"/>
+  <line x1="90" y1="230" x2="450" y2="230" stroke="#333" stroke-width="1" stroke-dasharray="4 4"/>
+  <line x1="90" y1="155" x2="450" y2="155" stroke="#333" stroke-width="1" stroke-dasharray="4 4"/>
+  <!-- Bars -->
+  <rect x="120" y="185" width="60" height="195" rx="6" fill="url(#bar1)"/>
+  <rect x="210" y="225" width="60" height="155" rx="6" fill="url(#bar2)"/>
+  <rect x="300" y="148" width="60" height="232" rx="6" fill="url(#bar3)"/>
+  <rect x="390" y="270" width="60" height="110" rx="6" fill="url(#bar4)"/>
+  <!-- Value labels on bars -->
+  <text x="150" y="178" text-anchor="middle" font-family="monospace" font-size="13" fill="#a78bfa" font-weight="bold">75%</text>
+  <text x="240" y="218" text-anchor="middle" font-family="monospace" font-size="13" fill="#34d399" font-weight="bold">60%</text>
+  <text x="330" y="141" text-anchor="middle" font-family="monospace" font-size="13" fill="#fb923c" font-weight="bold">89%</text>
+  <text x="420" y="263" text-anchor="middle" font-family="monospace" font-size="13" fill="#f472b6" font-weight="bold">42%</text>
+  <!-- X-axis labels -->
+  <text x="150" y="400" text-anchor="middle" font-family="monospace" font-size="11" fill="#888">CPU</text>
+  <text x="240" y="400" text-anchor="middle" font-family="monospace" font-size="11" fill="#888">MEM</text>
+  <text x="330" y="400" text-anchor="middle" font-family="monospace" font-size="11" fill="#888">DISK</text>
+  <text x="420" y="400" text-anchor="middle" font-family="monospace" font-size="11" fill="#888">NET</text>
+  <!-- Y-axis labels -->
+  <text x="82" y="383" text-anchor="end" font-family="monospace" font-size="10" fill="#888">0</text>
+  <text x="82" y="308" text-anchor="end" font-family="monospace" font-size="10" fill="#888">25</text>
+  <text x="82" y="233" text-anchor="end" font-family="monospace" font-size="10" fill="#888">50</text>
+  <text x="82" y="158" text-anchor="end" font-family="monospace" font-size="10" fill="#888">75</text>
+  <!-- Lightning bolt (performance) -->
+  <path d="M256 430 L244 460 L256 455 L244 490 L270 455 L258 462 L270 430 Z" fill="#ffd700" opacity="0.7"/>
+</svg>

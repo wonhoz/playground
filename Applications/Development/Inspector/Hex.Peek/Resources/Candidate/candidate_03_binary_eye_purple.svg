@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a0a2e"/>
+      <stop offset="100%" style="stop-color:#2d1b4e"/>
+    </linearGradient>
+    <radialGradient id="eyeglow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#cc44ff;stop-opacity:0.3"/>
+      <stop offset="100%" style="stop-color:#cc44ff;stop-opacity:0"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Eye shape -->
+  <ellipse cx="256" cy="230" rx="180" ry="100" fill="none" stroke="#9933cc" stroke-width="6"/>
+  <path d="M 76 230 Q 256 80 436 230 Q 256 380 76 230 Z" fill="#1a0a2e"/>
+  <ellipse cx="256" cy="230" rx="180" ry="100" fill="url(#eyeglow)"/>
+  <!-- Iris -->
+  <circle cx="256" cy="230" r="72" fill="#220044" stroke="#cc44ff" stroke-width="4"/>
+  <!-- Pupil with hex code -->
+  <circle cx="256" cy="230" r="40" fill="#110022"/>
+  <text x="232" y="237" font-family="monospace" font-size="18" fill="#cc44ff" font-weight="bold">HEX</text>
+  <!-- Eye shine -->
+  <ellipse cx="290" cy="205" rx="20" ry="10" fill="white" fill-opacity="0.2" transform="rotate(-30 290 205)"/>
+  <!-- Hex stream below -->
+  <rect x="64" y="360" width="384" height="36" rx="6" fill="#220044" fill-opacity="0.6"/>
+  <text x="72" y="384" font-family="monospace" font-size="18" fill="#cc44ff">7F 45 4C 46 02 01 01 00 00 00</text>
+  <!-- Scan lines -->
+  <line x1="76" y1="210" x2="436" y2="210" stroke="#9933cc" stroke-width="1" stroke-opacity="0.4"/>
+  <line x1="76" y1="230" x2="436" y2="230" stroke="#cc44ff" stroke-width="1" stroke-opacity="0.6"/>
+  <line x1="76" y1="250" x2="436" y2="250" stroke="#9933cc" stroke-width="1" stroke-opacity="0.4"/>
+</svg>

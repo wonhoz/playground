@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#1a2a4a"/>
+      <stop offset="100%" stop-color="#0a0f1e"/>
+    </radialGradient>
+    <radialGradient id="drop" cx="40%" cy="30%" r="60%">
+      <stop offset="0%" stop-color="#7986cb"/>
+      <stop offset="60%" stop-color="#3949ab"/>
+      <stop offset="100%" stop-color="#1a237e"/>
+    </radialGradient>
+    <radialGradient id="ring1" cx="50%" cy="50%" r="50%">
+      <stop offset="70%" stop-color="#3949ab00"/>
+      <stop offset="85%" stop-color="#7986cb80"/>
+      <stop offset="100%" stop-color="#7986cb00"/>
+    </radialGradient>
+    <radialGradient id="ring2" cx="50%" cy="50%" r="50%">
+      <stop offset="70%" stop-color="#3949ab00"/>
+      <stop offset="85%" stop-color="#5c6bc060"/>
+      <stop offset="100%" stop-color="#5c6bc000"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Ripple rings -->
+  <ellipse cx="256" cy="340" rx="160" ry="30" fill="url(#ring1)"/>
+  <ellipse cx="256" cy="340" rx="120" ry="22" fill="url(#ring2)"/>
+  <ellipse cx="256" cy="340" rx="75" ry="14" fill="#5c6bc040"/>
+  <!-- Ink drop shape -->
+  <path d="M256,100 Q290,160 300,220 Q310,280 256,310 Q202,280 212,220 Q222,160 256,100 Z" fill="url(#drop)"/>
+  <!-- Drop highlight -->
+  <ellipse cx="238" cy="180" rx="14" ry="22" fill="white" opacity="0.25" transform="rotate(-20,238,180)"/>
+  <!-- Ink splash at bottom -->
+  <ellipse cx="256" cy="325" rx="40" ry="12" fill="#3949ab" opacity="0.7"/>
+  <!-- Tiny splash droplets -->
+  <ellipse cx="200" cy="330" rx="7" ry="4" fill="#7986cb" opacity="0.6"/>
+  <ellipse cx="312" cy="332" rx="6" ry="3" fill="#7986cb" opacity="0.6"/>
+  <ellipse cx="180" cy="320" rx="4" ry="3" fill="#5c6bc0" opacity="0.5"/>
+  <ellipse cx="330" cy="318" rx="5" ry="3" fill="#5c6bc0" opacity="0.5"/>
+  <!-- Ink pen at top -->
+  <g transform="translate(380,80) rotate(30)">
+    <rect x="-6" y="-60" width="12" height="40" rx="5" fill="#7986cb" opacity="0.8"/>
+    <polygon points="-6,-20 6,-20 2,10 -2,10" fill="#5c6bc0" opacity="0.9"/>
+    <line x1="0" y1="10" x2="0" y2="25" stroke="#7986cb" stroke-width="3" stroke-linecap="round"/>
+    <!-- Ink drop falling from pen -->
+    <ellipse cx="0" cy="32" rx="4" ry="6" fill="#7986cb" opacity="0.7"/>
+  </g>
+  <!-- Broadcast arc (cast) -->
+  <path d="M226,430 Q256,415 286,430" fill="none" stroke="#7986cb" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
+  <path d="M206,448 Q256,428 306,448" fill="none" stroke="#5c6bc0" stroke-width="2.5" stroke-linecap="round" opacity="0.5"/>
+  <circle cx="256" cy="413" r="5" fill="#7986cb" opacity="0.8"/>
+</svg>

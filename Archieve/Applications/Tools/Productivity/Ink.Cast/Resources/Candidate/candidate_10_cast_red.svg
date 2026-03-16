@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#B71C1C"/>
+      <stop offset="100%" stop-color="#C62828"/>
+    </linearGradient>
+    <linearGradient id="cast" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#EF9A9A"/>
+      <stop offset="100%" stop-color="#E57373"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- 방송/캐스팅 전파 원 -->
+  <circle cx="256" cy="256" r="160" fill="none" stroke="#EF9A9A" stroke-width="3" opacity="0.3"/>
+  <circle cx="256" cy="256" r="120" fill="none" stroke="#EF9A9A" stroke-width="4" opacity="0.5"/>
+  <circle cx="256" cy="256" r="80" fill="none" stroke="#E57373" stroke-width="5" opacity="0.7"/>
+  <!-- 잉크 드롭 + 방송 아이콘 결합 -->
+  <ellipse cx="256" cy="220" rx="50" ry="70" fill="url(#cast)"/>
+  <ellipse cx="256" cy="290" rx="50" ry="20" fill="url(#cast)"/>
+  <path d="M 206 275 Q 206 310 256 310 Q 306 310 306 275" fill="url(#cast)"/>
+  <!-- 마이크 스탠드 -->
+  <rect x="248" y="310" width="16" height="80" rx="4" fill="#FFCDD2"/>
+  <rect x="210" y="385" width="92" height="12" rx="6" fill="#FFCDD2"/>
+  <!-- 전파 -->
+  <path d="M 160 170 Q 130 220 160 270" fill="none" stroke="#FFCDD2" stroke-width="6" stroke-linecap="round" opacity="0.7"/>
+  <path d="M 352 170 Q 382 220 352 270" fill="none" stroke="#FFCDD2" stroke-width="6" stroke-linecap="round" opacity="0.7"/>
+  <path d="M 120 140 Q 76 220 120 300" fill="none" stroke="#FFCDD2" stroke-width="4" stroke-linecap="round" opacity="0.4"/>
+  <path d="M 392 140 Q 436 220 392 300" fill="none" stroke="#FFCDD2" stroke-width="4" stroke-linecap="round" opacity="0.4"/>
+</svg>

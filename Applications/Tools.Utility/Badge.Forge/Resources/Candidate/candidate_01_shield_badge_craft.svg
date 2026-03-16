@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a1a2e"/>
+      <stop offset="100%" stop-color="#0f0f1e"/>
+    </linearGradient>
+    <linearGradient id="shieldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2ecc71"/>
+      <stop offset="100%" stop-color="#27ae60"/>
+    </linearGradient>
+    <linearGradient id="labelGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#555"/>
+      <stop offset="100%" stop-color="#333"/>
+    </linearGradient>
+    <filter id="shieldShadow">
+      <feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="#2ecc71" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Shield shape -->
+  <path d="M256 100 L380 150 L380 280 Q380 370 256 420 Q132 370 132 280 L132 150 Z" fill="url(#shieldGrad)" filter="url(#shieldShadow)"/>
+  <!-- Inner shield highlight -->
+  <path d="M256 128 L358 170 L358 280 Q358 352 256 394 Q154 352 154 280 L154 170 Z" fill="none" stroke="white" stroke-width="3" opacity="0.25"/>
+  <!-- Badge ribbon/label inside -->
+  <rect x="172" y="240" width="168" height="38" rx="6" fill="url(#labelGrad)" opacity="0.9"/>
+  <rect x="255" y="240" width="85" height="38" rx="6" fill="url(#shieldGrad)" opacity="0.95"/>
+  <!-- Checkmark -->
+  <path d="M230 260 L248 278 L286 242" stroke="white" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</svg>

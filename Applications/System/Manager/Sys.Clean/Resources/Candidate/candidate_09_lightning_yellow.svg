@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A1500"/>
+      <stop offset="100%" stop-color="#3D3000"/>
+    </linearGradient>
+    <linearGradient id="bolt" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFEE58"/>
+      <stop offset="100%" stop-color="#F57F17"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Glow circle -->
+  <circle cx="256" cy="256" r="140" fill="#F57F17" opacity="0.08"/>
+  <!-- Lightning bolt -->
+  <polygon points="285,88 210,270 255,270 225,420 340,220 290,220 345,88" fill="url(#bolt)" filter="url(#glow)"/>
+  <!-- Dust/debris particles swept away -->
+  <g opacity="0.6">
+    <circle cx="130" cy="320" r="8" fill="#FFEE58"/>
+    <circle cx="115" cy="345" r="5" fill="#FFF176"/>
+    <circle cx="145" cy="358" r="6" fill="#FFEE58"/>
+    <circle cx="105" cy="370" r="4" fill="#FFF9C4"/>
+    <circle cx="160" cy="375" r="7" fill="#FFEE58"/>
+    <circle cx="390" cy="315" r="7" fill="#FFEE58"/>
+    <circle cx="405" cy="340" r="5" fill="#FFF176"/>
+    <circle cx="378" cy="355" r="6" fill="#FFEE58"/>
+    <circle cx="415" cy="365" r="4" fill="#FFF9C4"/>
+    <circle cx="365" cy="372" r="8" fill="#FFEE58"/>
+  </g>
+  <!-- Speed streaks -->
+  <g stroke="#FFEE58" stroke-width="3" opacity="0.3" stroke-linecap="round">
+    <line x1="100" y1="290" x2="145" y2="290"/>
+    <line x1="95" y1="305" x2="140" y2="305"/>
+    <line x1="370" y1="290" x2="415" y2="290"/>
+    <line x1="372" y1="305" x2="417" y2="305"/>
+  </g>
+  <!-- "FAST" label -->
+  <text x="256" y="460" text-anchor="middle" font-family="Arial" font-size="22" fill="#FFEE58" font-weight="bold" letter-spacing="6" opacity="0.8">OPTIMIZE</text>
+</svg>

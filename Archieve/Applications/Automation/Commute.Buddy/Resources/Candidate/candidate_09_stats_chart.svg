@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#880E4F"/>
+      <stop offset="100%" stop-color="#C2185B"/>
+    </linearGradient>
+    <linearGradient id="bar1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FF80AB"/>
+      <stop offset="100%" stop-color="#F06292"/>
+    </linearGradient>
+    <linearGradient id="bar2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FF4081"/>
+      <stop offset="100%" stop-color="#E91E63"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Chart background -->
+  <rect x="70" y="80" width="372" height="310" rx="14" fill="#6D0730" opacity="0.5"/>
+  <!-- Grid lines -->
+  <line x1="90" y1="350" x2="422" y2="350" stroke="#F48FB1" stroke-width="1" opacity="0.4"/>
+  <line x1="90" y1="300" x2="422" y2="300" stroke="#F48FB1" stroke-width="1" opacity="0.4"/>
+  <line x1="90" y1="250" x2="422" y2="250" stroke="#F48FB1" stroke-width="1" opacity="0.4"/>
+  <line x1="90" y1="200" x2="422" y2="200" stroke="#F48FB1" stroke-width="1" opacity="0.4"/>
+  <line x1="90" y1="150" x2="422" y2="150" stroke="#F48FB1" stroke-width="1" opacity="0.4"/>
+  <line x1="90" y1="100" x2="422" y2="100" stroke="#F48FB1" stroke-width="1" opacity="0.4"/>
+  <!-- Bars - daily commute times (Mon-Fri) -->
+  <rect x="105" y="230" width="44" height="120" rx="6" fill="url(#bar1)"/>
+  <rect x="171" y="180" width="44" height="170" rx="6" fill="url(#bar2)"/>
+  <rect x="237" y="150" width="44" height="200" rx="6" fill="url(#bar2)"/>
+  <rect x="303" y="200" width="44" height="150" rx="6" fill="url(#bar1)"/>
+  <rect x="369" y="120" width="44" height="230" rx="6" fill="url(#bar2)"/>
+  <!-- Value labels -->
+  <text x="127" y="222" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="13" fill="white">28m</text>
+  <text x="193" y="172" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="13" fill="white">38m</text>
+  <text x="259" y="142" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="13" fill="white">45m</text>
+  <text x="325" y="192" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="13" fill="white">33m</text>
+  <text x="391" y="112" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="13" fill="white">52m</text>
+  <!-- Day labels -->
+  <text x="127" y="372" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="14" fill="#F48FB1">MON</text>
+  <text x="193" y="372" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="14" fill="#F48FB1">TUE</text>
+  <text x="259" y="372" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="14" fill="#F48FB1">WED</text>
+  <text x="325" y="372" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="14" fill="#F48FB1">THU</text>
+  <text x="391" y="372" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="14" fill="#F48FB1">FRI</text>
+  <!-- Title -->
+  <text x="256" y="432" text-anchor="middle" font-family="'Segoe UI Bold', sans-serif" font-size="19" font-weight="bold" fill="white">Weekly Commute Stats</text>
+  <!-- Trend line -->
+  <polyline points="127,230 193,180 259,150 325,200 391,120" stroke="#FFD740" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="8,4"/>
+</svg>

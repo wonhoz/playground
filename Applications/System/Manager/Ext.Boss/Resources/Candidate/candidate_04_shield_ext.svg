@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1b5e20"/>
+      <stop offset="100%" stop-color="#2e7d32"/>
+    </linearGradient>
+    <linearGradient id="shieldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#69f0ae"/>
+      <stop offset="100%" stop-color="#00c853"/>
+    </linearGradient>
+    <linearGradient id="fileGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#a5d6a7"/>
+      <stop offset="100%" stop-color="#66bb6a"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Shield background -->
+  <path d="M256 60 L420 130 L420 280 Q420 380 256 460 Q92 380 92 280 L92 130 Z" fill="#1b5e20" stroke="url(#shieldGrad)" stroke-width="4"/>
+  <!-- Shield inner -->
+  <path d="M256 95 L390 155 L390 275 Q390 360 256 425 Q122 360 122 275 L122 155 Z" fill="#2e7d32"/>
+  <!-- File in shield -->
+  <rect x="176" y="160" width="130" height="165" rx="10" fill="url(#fileGrad)"/>
+  <polygon points="268,160 306,198 268,198" fill="#388e3c"/>
+  <polygon points="268,160 306,160 306,198" fill="#a5d6a7"/>
+  <!-- Ext text -->
+  <text x="241" y="275" font-family="Arial" font-size="22" font-weight="bold" fill="#1b5e20" text-anchor="middle">.EXT</text>
+  <!-- File lines -->
+  <rect x="192" y="300" width="98" height="8" rx="4" fill="#1b5e20" opacity="0.5"/>
+  <rect x="192" y="315" width="78" height="8" rx="4" fill="#1b5e20" opacity="0.4"/>
+  <!-- Checkmark -->
+  <polyline points="200,240 225,265 292,198" fill="none" stroke="url(#shieldGrad)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

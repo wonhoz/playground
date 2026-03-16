@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1a1a0a"/>
+      <stop offset="100%" stop-color="#2a1a0a"/>
+    </linearGradient>
+    <linearGradient id="keyA" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#dc2626"/>
+      <stop offset="100%" stop-color="#991b1b"/>
+    </linearGradient>
+    <linearGradient id="keyB" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2563eb"/>
+      <stop offset="100%" stop-color="#1d4ed8"/>
+    </linearGradient>
+    <linearGradient id="swapArrow" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#fbbf24"/>
+      <stop offset="100%" stop-color="#f59e0b"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Key A (left) -->
+  <rect x="60" y="140" width="160" height="160" rx="20" fill="url(#keyA)"/>
+  <rect x="72" y="152" width="136" height="136" rx="14" fill="#dc2626" opacity="0.5"/>
+  <text x="140" y="232" text-anchor="middle" font-family="monospace" font-size="64" font-weight="bold" fill="white">A</text>
+  <!-- Key B (right) -->
+  <rect x="292" y="140" width="160" height="160" rx="20" fill="url(#keyB)"/>
+  <rect x="304" y="152" width="136" height="136" rx="14" fill="#2563eb" opacity="0.5"/>
+  <text x="372" y="232" text-anchor="middle" font-family="monospace" font-size="64" font-weight="bold" fill="white">B</text>
+  <!-- Swap arrows (double-headed curved) -->
+  <path d="M228,185 Q256,155 284,185" fill="none" stroke="url(#swapArrow)" stroke-width="6" stroke-linecap="round"/>
+  <polygon points="228,182 218,192 234,196" fill="#fbbf24"/>
+  <polygon points="284,182 294,192 278,196" fill="#fbbf24"/>
+  <path d="M228,295 Q256,325 284,295" fill="none" stroke="url(#swapArrow)" stroke-width="6" stroke-linecap="round"/>
+  <polygon points="228,298 218,288 234,284" fill="#fbbf24"/>
+  <polygon points="284,298 294,288 278,284" fill="#fbbf24"/>
+  <!-- Swap label center -->
+  <rect x="204" y="226" width="104" height="32" rx="10" fill="#1a1a0a"/>
+  <text x="256" y="248" text-anchor="middle" font-family="Arial" font-size="16" font-weight="bold" fill="#fbbf24">SWAP</text>
+  <!-- Result indicators -->
+  <text x="140" y="350" text-anchor="middle" font-family="monospace" font-size="16" fill="#fbbf24">now: B</text>
+  <text x="372" y="350" text-anchor="middle" font-family="monospace" font-size="16" fill="#fbbf24">now: A</text>
+  <!-- Description -->
+  <rect x="80" y="390" width="352" height="44" rx="10" fill="#2a1a0a"/>
+  <text x="256" y="408" text-anchor="middle" font-family="Arial" font-size="12" fill="#888">Key A is now mapped to B</text>
+  <text x="256" y="426" text-anchor="middle" font-family="Arial" font-size="12" fill="#888">Key B is now mapped to A</text>
+</svg>

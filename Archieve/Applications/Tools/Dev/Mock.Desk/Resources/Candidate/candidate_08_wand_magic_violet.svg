@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#1E0B3B"/>
+      <stop offset="100%" stop-color="#0D0015"/>
+    </radialGradient>
+    <linearGradient id="wand" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F5D0FE"/>
+      <stop offset="100%" stop-color="#A855F7"/>
+    </linearGradient>
+    <radialGradient id="sparkle" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FDE68A"/>
+      <stop offset="100%" stop-color="#F59E0B" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Magic wand diagonal -->
+  <rect x="60" y="420" width="280" height="16" rx="8" fill="url(#wand)" transform="rotate(-45 200 428)"/>
+  <!-- Star tip -->
+  <polygon points="170,90 178,112 202,112 183,126 190,148 170,134 150,148 157,126 138,112 162,112" fill="#FDE68A" filter="url(#glow)"/>
+  <!-- Glow around star -->
+  <circle cx="170" cy="120" r="50" fill="url(#sparkle)" opacity="0.6"/>
+  <!-- Sparks / data particles -->
+  <circle cx="240" cy="160" r="8" fill="#F5D0FE" opacity="0.9" filter="url(#glow)"/>
+  <circle cx="290" cy="120" r="6" fill="#E879F9" opacity="0.8" filter="url(#glow)"/>
+  <circle cx="320" cy="200" r="5" fill="#FDE68A" opacity="0.9"/>
+  <circle cx="360" cy="150" r="7" fill="#C084FC" opacity="0.7"/>
+  <circle cx="380" cy="230" r="4" fill="#F5D0FE" opacity="0.8"/>
+  <circle cx="210" cy="220" r="5" fill="#E879F9" opacity="0.6"/>
+  <!-- Data cards appearing from wand -->
+  <rect x="270" y="250" width="150" height="100" rx="10" fill="#1E0B3B" stroke="#A855F7" stroke-width="2" filter="url(#glow)" opacity="0.95"/>
+  <rect x="285" y="265" width="80" height="10" rx="4" fill="#C084FC" opacity="0.8"/>
+  <rect x="285" y="283" width="110" height="8" rx="3" fill="#7E22CE" opacity="0.7"/>
+  <rect x="285" y="299" width="90" height="8" rx="3" fill="#7E22CE" opacity="0.6"/>
+  <rect x="285" y="315" width="100" height="8" rx="3" fill="#7E22CE" opacity="0.5"/>
+  <rect x="285" y="331" width="70" height="8" rx="3" fill="#7E22CE" opacity="0.4"/>
+  <!-- Second card behind -->
+  <rect x="290" y="260" width="150" height="100" rx="10" fill="#1E0B3B" stroke="#7C3AED" stroke-width="1.5" opacity="0.6"/>
+  <!-- Count floating label -->
+  <rect x="80" y="380" width="120" height="48" rx="10" fill="#3B0764" stroke="#A855F7" stroke-width="1.5"/>
+  <text x="140" y="399" font-family="Arial" font-size="11" fill="#C084FC" text-anchor="middle">Generated</text>
+  <text x="140" y="418" font-family="Arial" font-size="20" fill="white" text-anchor="middle" font-weight="bold">500×</text>
+  <!-- Trail sparkles along wand -->
+  <line x1="175" y1="148" x2="340" y2="380" stroke="#A855F7" stroke-width="3" stroke-dasharray="8,5" opacity="0.5"/>
+</svg>

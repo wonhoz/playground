@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#111827"/>
+      <stop offset="100%" stop-color="#1f2937"/>
+    </linearGradient>
+    <linearGradient id="panelGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+    <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0891b2"/>
+      <stop offset="100%" stop-color="#164e63"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- 앱 창 프레임 -->
+  <rect x="60" y="80" width="392" height="352" rx="12" fill="url(#panelGrad)" stroke="#374151" stroke-width="2"/>
+  <!-- 타이틀바 -->
+  <rect x="60" y="80" width="392" height="36" rx="12" fill="url(#headerGrad)"/>
+  <rect x="60" y="98" width="392" height="18" rx="0" fill="url(#headerGrad)"/>
+  <circle cx="84" cy="98" r="7" fill="#ef4444"/>
+  <circle cx="106" cy="98" r="7" fill="#fbbf24"/>
+  <circle cx="128" cy="98" r="7" fill="#22c55e"/>
+  <text x="280" y="103" font-family="Arial" font-size="13" fill="white" text-anchor="middle">Zip.Peek — archive.zip</text>
+  <!-- 사이드바 (파일 목록) -->
+  <rect x="60" y="116" width="150" height="316" rx="0" fill="#111827" stroke="#1f2937" stroke-width="1"/>
+  <rect x="60" y="436" width="150" height="0" rx="0" fill="transparent"/>
+  <!-- 파일 목록 아이템 -->
+  <rect x="68" y="126" width="134" height="24" rx="4" fill="#0891b2" opacity="0.3"/>
+  <text x="82" y="143" font-family="Arial" font-size="11" fill="#67e8f9">readme.txt</text>
+  <text x="68" y="167" font-family="Arial" font-size="11" fill="#64748b">data.csv</text>
+  <text x="68" y="188" font-family="Arial" font-size="11" fill="#64748b">assets/</text>
+  <text x="80" y="208" font-family="Arial" font-size="11" fill="#475569">  icon.png</text>
+  <text x="80" y="228" font-family="Arial" font-size="11" fill="#475569">  logo.svg</text>
+  <text x="68" y="248" font-family="Arial" font-size="11" fill="#64748b">config.json</text>
+  <text x="68" y="268" font-family="Arial" font-size="11" fill="#64748b">main.py</text>
+  <!-- 미리보기 영역 -->
+  <rect x="210" y="116" width="242" height="316" rx="0" fill="#0f172a"/>
+  <!-- 미리보기 내용 (readme.txt 선택됨) -->
+  <text x="222" y="140" font-family="'Courier New',monospace" font-size="11" fill="#67e8f9"># README</text>
+  <text x="222" y="158" font-family="'Courier New',monospace" font-size="11" fill="#94a3b8">This archive contains</text>
+  <text x="222" y="176" font-family="'Courier New',monospace" font-size="11" fill="#94a3b8">project files.</text>
+  <text x="222" y="202" font-family="'Courier New',monospace" font-size="11" fill="#64748b">## Files</text>
+  <text x="222" y="220" font-family="'Courier New',monospace" font-size="11" fill="#475569">- data.csv</text>
+  <text x="222" y="238" font-family="'Courier New',monospace" font-size="11" fill="#475569">- assets/</text>
+  <text x="222" y="256" font-family="'Courier New',monospace" font-size="11" fill="#475569">- config.json</text>
+  <!-- 하단 상태바 -->
+  <rect x="60" y="432" width="392" height="28" rx="0" fill="#0f172a" stroke="#1e293b" stroke-width="1"/>
+  <rect x="60" y="444" width="392" height="16" rx="0" fill="#0f172a"/>
+  <text x="80" y="449" font-family="Arial" font-size="10" fill="#475569">5 files · 3 folders · 18.4 MB total</text>
+</svg>

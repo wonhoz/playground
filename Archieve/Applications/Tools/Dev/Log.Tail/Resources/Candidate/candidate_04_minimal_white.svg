@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F8F9FA"/>
+      <stop offset="100%" stop-color="#E9ECEF"/>
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#495057"/>
+      <stop offset="100%" stop-color="#212529"/>
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#00000018"/>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Paper document card -->
+  <rect x="80" y="80" width="352" height="320" rx="12" fill="white" filter="url(#shadow)"/>
+  <!-- Document header bar -->
+  <rect x="80" y="80" width="352" height="44" rx="12" fill="#212529"/>
+  <rect x="80" y="106" width="352" height="18" fill="#212529"/>
+  <text x="256" y="107" font-family="'Courier New', monospace" font-size="14" text-anchor="middle" fill="white">app.log — tail</text>
+  <!-- Log lines getting clearer toward bottom -->
+  <rect x="96" y="142" width="260" height="7" rx="3" fill="#CED4DA"/>
+  <rect x="96" y="158" width="210" height="7" rx="3" fill="#BFC8D0"/>
+  <rect x="96" y="174" width="240" height="7" rx="3" fill="#AEB8C1"/>
+  <rect x="96" y="190" width="200" height="7" rx="3" fill="#9DA8B2"/>
+  <rect x="96" y="206" width="250" height="7" rx="3" fill="#8D98A3"/>
+  <rect x="96" y="222" width="220" height="7" rx="3" fill="#7C8894"/>
+  <rect x="96" y="238" width="260" height="7" rx="3" fill="#6C7885"/>
+  <rect x="96" y="254" width="230" height="7" rx="3" fill="#5C6876"/>
+  <rect x="96" y="270" width="240" height="7" rx="3" fill="#4C5867"/>
+  <!-- Warn line -->
+  <rect x="92" y="286" width="348" height="14" rx="4" fill="#FFF3CD"/>
+  <rect x="96" y="289" width="60" height="8" rx="4" fill="#FF9800"/>
+  <rect x="164" y="289" width="200" height="8" rx="4" fill="#6C5800"/>
+  <!-- Error line -->
+  <rect x="92" y="308" width="348" height="14" rx="4" fill="#FFE8E8"/>
+  <rect x="96" y="311" width="52" height="8" rx="4" fill="#DC3545"/>
+  <rect x="156" y="311" width="240" height="8" rx="4" fill="#8B1A1A"/>
+  <!-- Newest line (bottom, brightest) -->
+  <rect x="92" y="330" width="348" height="18" rx="4" fill="#E8F4FF"/>
+  <rect x="96" y="334" width="280" height="10" rx="5" fill="#0D6EFD"/>
+  <!-- Blinking cursor -->
+  <rect x="384" y="334" width="10" height="10" fill="#212529"/>
+  <!-- Tail down arrow -->
+  <rect x="240" y="420" width="32" height="48" rx="6" fill="#495057"/>
+  <path d="M208 452 L256 490 L304 452" fill="#495057"/>
+  <!-- Label -->
+  <text x="256" y="490" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="white">TAIL</text>
+</svg>

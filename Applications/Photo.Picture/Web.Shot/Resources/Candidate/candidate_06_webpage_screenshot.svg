@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f0c29"/>
+      <stop offset="100%" stop-color="#24243e"/>
+    </linearGradient>
+    <linearGradient id="page" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#434343"/>
+      <stop offset="100%" stop-color="#000000"/>
+    </linearGradient>
+    <linearGradient id="highlight" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#7f00ff"/>
+      <stop offset="100%" stop-color="#e100ff"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Long webpage scroll -->
+  <rect x="120" y="60" width="272" height="400" rx="8" fill="#1a1a2e" stroke="url(#highlight)" stroke-width="2"/>
+  <!-- Header bar -->
+  <rect x="120" y="60" width="272" height="36" rx="8" fill="url(#highlight)" opacity="0.8"/>
+  <rect x="120" y="84" width="272" height="12" fill="url(#highlight)" opacity="0.8"/>
+  <!-- Page content rows -->
+  <rect x="136" y="108" width="240" height="12" rx="3" fill="#333" opacity="0.8"/>
+  <rect x="136" y="128" width="200" height="10" rx="3" fill="#333" opacity="0.6"/>
+  <rect x="136" y="148" width="220" height="10" rx="3" fill="#333" opacity="0.6"/>
+  <rect x="136" y="172" width="240" height="56" rx="5" fill="#333" opacity="0.4"/>
+  <rect x="136" y="240" width="240" height="10" rx="3" fill="#333" opacity="0.6"/>
+  <rect x="136" y="260" width="180" height="10" rx="3" fill="#333" opacity="0.5"/>
+  <rect x="136" y="280" width="200" height="10" rx="3" fill="#333" opacity="0.5"/>
+  <rect x="136" y="308" width="240" height="56" rx="5" fill="#333" opacity="0.4"/>
+  <rect x="136" y="376" width="140" height="10" rx="3" fill="#333" opacity="0.5"/>
+  <rect x="136" y="396" width="240" height="10" rx="3" fill="#333" opacity="0.4"/>
+  <rect x="136" y="416" width="160" height="10" rx="3" fill="#333" opacity="0.4"/>
+  <!-- Camera icon bottom right -->
+  <circle cx="404" cy="404" r="52" fill="#0f0c29" stroke="url(#highlight)" stroke-width="3" filter="url(#glow)"/>
+  <rect x="378" y="386" width="52" height="40" rx="7" fill="url(#highlight)" opacity="0.8"/>
+  <rect x="390" y="380" width="24" height="12" rx="5" fill="url(#highlight)"/>
+  <circle cx="404" cy="406" r="13" fill="#0f0c29"/>
+  <circle cx="404" cy="406" r="8" fill="url(#highlight)" opacity="0.9"/>
+</svg>

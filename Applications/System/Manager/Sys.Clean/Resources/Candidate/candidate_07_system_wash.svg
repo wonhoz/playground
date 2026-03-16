@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#006064"/>
+      <stop offset="100%" style="stop-color:#00363a"/>
+    </linearGradient>
+    <linearGradient id="machine" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4dd0e1"/>
+      <stop offset="100%" style="stop-color:#00838f"/>
+    </linearGradient>
+    <radialGradient id="drum" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#80deea"/>
+      <stop offset="70%" style="stop-color:#006064"/>
+      <stop offset="100%" style="stop-color:#004d40"/>
+    </radialGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Washing machine body -->
+  <rect x="100" y="140" width="312" height="310" rx="20" fill="url(#machine)" filter="url(#glow)" opacity="0.9"/>
+  <!-- Door frame -->
+  <circle cx="256" cy="310" r="110" fill="#006064"/>
+  <circle cx="256" cy="310" r="105" fill="url(#drum)"/>
+  <!-- Drum interior -->
+  <circle cx="256" cy="310" r="80" fill="#004d40" opacity="0.8"/>
+  <!-- Water wave in drum -->
+  <path d="M176 320 Q196 305 216 320 Q236 335 256 320 Q276 305 296 320 Q316 335 336 320 L336 360 Q316 375 296 360 Q276 345 256 360 Q236 375 216 360 Q196 345 176 360 Z" fill="#00bcd4" opacity="0.7"/>
+  <!-- Clothes/data swirling -->
+  <path d="M220 295 Q240 275 260 295 Q280 315 256 325" stroke="#e0f7fa" stroke-width="8" fill="none" stroke-linecap="round" opacity="0.8"/>
+  <path d="M275 280 Q295 298 285 318" stroke="#b2ebf2" stroke-width="6" fill="none" stroke-linecap="round" opacity="0.7"/>
+  <!-- Bubbles -->
+  <circle cx="210" cy="288" r="8" fill="#80deea" opacity="0.6" filter="url(#glow)"/>
+  <circle cx="300" cy="285" r="6" fill="#80deea" opacity="0.5" filter="url(#glow)"/>
+  <circle cx="255" cy="265" r="5" fill="#b2ebf2" opacity="0.6"/>
+  <!-- Control panel top -->
+  <rect x="120" y="155" width="272" height="55" rx="10" fill="#00838f" opacity="0.8"/>
+  <!-- Knob -->
+  <circle cx="180" cy="182" r="18" fill="#00bcd4" filter="url(#glow)"/>
+  <circle cx="180" cy="182" r="10" fill="#006064"/>
+  <line x1="180" y1="172" x2="180" y2="180" stroke="#80deea" stroke-width="3"/>
+  <!-- LED indicators -->
+  <circle cx="290" cy="182" r="8" fill="#69f0ae" filter="url(#glow)"/>
+  <circle cx="320" cy="182" r="8" fill="#00e5ff" filter="url(#glow)"/>
+  <circle cx="350" cy="182" r="8" fill="#40c4ff" opacity="0.5"/>
+</svg>

@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1A1A2E"/>
+      <stop offset="100%" stop-color="#16213E"/>
+    </linearGradient>
+    <linearGradient id="monitor" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0F3460"/>
+      <stop offset="100%" stop-color="#0A2440"/>
+    </linearGradient>
+    <linearGradient id="hl" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#E94560"/>
+      <stop offset="100%" stop-color="#F5A623"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Desktop monitor -->
+  <rect x="56" y="72" width="400" height="280" rx="14" fill="url(#monitor)" stroke="#0F3460" stroke-width="3"/>
+  <!-- Desktop wallpaper area -->
+  <rect x="70" y="86" width="372" height="246" rx="6" fill="#0A1628"/>
+  <!-- Multiple windows on desktop -->
+  <rect x="90" y="96" width="160" height="110" rx="6" fill="#1A2744" stroke="#E94560" stroke-width="1.5"/>
+  <rect x="90" y="96" width="160" height="20" rx="6" fill="#E94560" opacity="0.6"/>
+  <text x="100" y="110" font-family="Segoe UI" font-size="11" fill="#FFF">explorer.exe</text>
+  <rect x="260" y="106" width="160" height="110" rx="6" fill="#1A2744" stroke="#F5A623" stroke-width="1.5"/>
+  <rect x="260" y="106" width="160" height="20" rx="6" fill="#F5A623" opacity="0.6"/>
+  <text x="270" y="120" font-family="Segoe UI" font-size="11" fill="#FFF">chrome.exe</text>
+  <rect x="140" y="196" width="160" height="110" rx="6" fill="#1A2744" stroke="#3498DB" stroke-width="1.5"/>
+  <rect x="140" y="196" width="160" height="20" rx="6" fill="#3498DB" opacity="0.6"/>
+  <text x="150" y="210" font-family="Segoe UI" font-size="11" fill="#FFF">notepad.exe</text>
+  <!-- Taskbar -->
+  <rect x="70" y="308" width="372" height="24" rx="3" fill="#1A2744"/>
+  <!-- Highlight/selection indicator -->
+  <rect x="140" y="196" width="160" height="110" rx="6" fill="none" stroke="url(#hl)" stroke-width="3" stroke-dasharray="6 3"/>
+  <!-- Stand + base -->
+  <rect x="216" y="352" width="80" height="18" rx="4" fill="#0F3460"/>
+  <rect x="180" y="366" width="152" height="12" rx="5" fill="#0A1628" stroke="#0F3460" stroke-width="2"/>
+  <!-- Info panel -->
+  <rect x="56" y="400" width="400" height="72" rx="10" fill="#0F1A30" stroke="#0F3460" stroke-width="1.5"/>
+  <text x="76" y="425" font-family="Segoe UI" font-size="14" fill="#E94560" font-weight="600">notepad.exe</text>
+  <text x="220" y="425" font-family="Segoe UI" font-size="13" fill="#888">HWND: 0x1E04</text>
+  <text x="76" y="450" font-family="Segoe UI" font-size="13" fill="#888">Pos: 140,196  Size: 160x110  PID: 9284</text>
+</svg>

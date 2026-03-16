@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#000d00"/>
+      <stop offset="100%" stop-color="#001a00"/>
+    </linearGradient>
+    <linearGradient id="bar" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0%" stop-color="#00FF44"/>
+      <stop offset="100%" stop-color="#44FF88"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#00FF44" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#00FF44" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <circle cx="256" cy="256" r="200" fill="url(#glow)"/>
+  <!-- Matrix-style falling segments -->
+  <rect x="84" y="260" width="24" height="140" rx="4" fill="url(#bar)" opacity="0.8"/>
+  <rect x="84" y="120" width="24" height="80" rx="4" fill="url(#bar)" opacity="0.4"/>
+  <rect x="124" y="200" width="24" height="200" rx="4" fill="url(#bar)" opacity="0.85"/>
+  <rect x="124" y="80" width="24" height="60" rx="4" fill="url(#bar)" opacity="0.35"/>
+  <rect x="164" y="140" width="24" height="260" rx="4" fill="url(#bar)" opacity="0.9"/>
+  <rect x="204" y="100" width="24" height="300" rx="4" fill="url(#bar)"/>
+  <rect x="244" y="120" width="24" height="280" rx="4" fill="url(#bar)" opacity="0.95"/>
+  <rect x="284" y="105" width="24" height="295" rx="4" fill="url(#bar)"/>
+  <rect x="324" y="145" width="24" height="255" rx="4" fill="url(#bar)" opacity="0.9"/>
+  <rect x="364" y="195" width="24" height="205" rx="4" fill="url(#bar)" opacity="0.85"/>
+  <rect x="404" y="250" width="24" height="150" rx="4" fill="url(#bar)" opacity="0.8"/>
+  <!-- Drop indicator -->
+  <polygon points="256,56 274,90 238,90" fill="#00FF44"/>
+  <line x1="256" y1="90" x2="256" y2="100" stroke="#00FF44" stroke-width="4"/>
+</svg>

@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#080808"/>
+      <stop offset="100%" stop-color="#0A1008"/>
+    </linearGradient>
+    <linearGradient id="highlight" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00FF44"/>
+      <stop offset="100%" stop-color="#00AA44"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Hex grid background (decorative) -->
+  <!-- Row 1 of hex chars -->
+  <text x="68" y="108" font-family="monospace" font-size="13" fill="#003300" opacity="0.8">68 65 6C 6C 6F 20 77 6F 72 6C 64</text>
+  <text x="68" y="128" font-family="monospace" font-size="13" fill="#003300" opacity="0.6">48 45 4C 4C 4F 20 57 4F 52 4C 44</text>
+  <text x="68" y="148" font-family="monospace" font-size="13" fill="#003300" opacity="0.4">61 47 56 73 62 47 38 67 64 32 39</text>
+  <!-- Main hex viewer (highlight active region) -->
+  <rect x="58" y="160" width="396" height="210" rx="8" fill="#070F07"/>
+  <!-- Header row -->
+  <rect x="58" y="160" width="396" height="26" rx="0" fill="#0A180A"/>
+  <text x="76" y="177" font-family="monospace" font-size="12" fill="#338833">Offset</text>
+  <text x="148" y="177" font-family="monospace" font-size="12" fill="#338833">00 01 02 03 04 05 06 07</text>
+  <text x="356" y="177" font-family="monospace" font-size="12" fill="#338833">ASCII</text>
+  <!-- Data rows -->
+  <text x="76" y="202" font-family="monospace" font-size="12" fill="#335533">000000</text>
+  <text x="148" y="202" font-family="monospace" font-size="12" fill="#44AA44">68 65 6C 6C 6F 20 77 6F</text>
+  <text x="360" y="202" font-family="monospace" font-size="12" fill="#44AA44">hello wo</text>
+  <!-- Highlighted row -->
+  <rect x="66" y="208" width="382" height="20" rx="2" fill="#003A00" opacity="0.7"/>
+  <text x="76" y="222" font-family="monospace" font-size="12" fill="#335533">000008</text>
+  <text x="148" y="222" font-family="monospace" font-size="12" fill="#88FF44" filter="url(#glow)">72 6C 64 20 53 54 52 21</text>
+  <text x="360" y="222" font-family="monospace" font-size="12" fill="#88FF44" filter="url(#glow)">rld STR!</text>
+  <text x="76" y="242" font-family="monospace" font-size="12" fill="#335533">000010</text>
+  <text x="148" y="242" font-family="monospace" font-size="12" fill="#44AA44">46 6F 72 67 65 20 76 31</text>
+  <text x="360" y="242" font-family="monospace" font-size="12" fill="#44AA44">Forge v1</text>
+  <text x="76" y="262" font-family="monospace" font-size="12" fill="#335533">000018</text>
+  <text x="148" y="262" font-family="monospace" font-size="12" fill="#44AA44">2E 30 00 00 00 00 00 00</text>
+  <text x="360" y="262" font-family="monospace" font-size="12" fill="#44AA44">.0......</text>
+  <text x="76" y="282" font-family="monospace" font-size="12" fill="#335533">000020</text>
+  <text x="148" y="282" font-family="monospace" font-size="12" fill="#44AA44">00 00 00 00 00 00 00 00</text>
+  <text x="360" y="282" font-family="monospace" font-size="12" fill="#335533">........</text>
+  <text x="76" y="302" font-family="monospace" font-size="12" fill="#335533">000028</text>
+  <text x="148" y="302" font-family="monospace" font-size="12" fill="#44AA44">52 45 47 45 58 20 4F 4B</text>
+  <text x="360" y="302" font-family="monospace" font-size="12" fill="#44AA44">REGEX OK</text>
+  <text x="76" y="322" font-family="monospace" font-size="12" fill="#335533">000030</text>
+  <text x="148" y="322" font-family="monospace" font-size="12" fill="#44AA44">42 41 53 45 36 34 3D 3D</text>
+  <text x="360" y="322" font-family="monospace" font-size="12" fill="#44AA44">BASE64==</text>
+  <!-- Cursor selection -->
+  <rect x="246" y="210" width="22" height="16" rx="2" fill="url(#highlight)" opacity="0.3"/>
+  <!-- Status bar -->
+  <rect x="58" y="370" width="396" height="24" rx="0" fill="#060E06"/>
+  <rect x="58" y="392" width="396" height="2" rx="1" fill="#336633" opacity="0.5"/>
+  <text x="76" y="385" font-family="monospace" font-size="11" fill="#44AA44">Sel: 0x0009 | Len: 8 | Mode: HEX</text>
+  <text x="360" y="385" font-family="monospace" font-size="11" fill="#226622">UTF-8</text>
+</svg>

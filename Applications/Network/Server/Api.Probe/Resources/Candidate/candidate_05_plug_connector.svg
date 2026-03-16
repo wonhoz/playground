@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F2027"/>
+      <stop offset="50%" stop-color="#203A43"/>
+      <stop offset="100%" stop-color="#2C5364"/>
+    </linearGradient>
+    <linearGradient id="plug" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#43E97B"/>
+      <stop offset="100%" stop-color="#38F9D7"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Left side: Client -->
+  <rect x="60" y="210" width="130" height="92" rx="10" fill="#1A3A4A" stroke="#43E97B" stroke-width="2"/>
+  <text x="125" y="250" font-family="monospace" font-size="13" fill="#43E97B" text-anchor="middle">CLIENT</text>
+  <text x="125" y="272" font-family="monospace" font-size="11" fill="#888" text-anchor="middle">App</text>
+  <!-- Right side: Server -->
+  <rect x="322" y="210" width="130" height="92" rx="10" fill="#1A3A4A" stroke="#38F9D7" stroke-width="2"/>
+  <text x="387" y="250" font-family="monospace" font-size="13" fill="#38F9D7" text-anchor="middle">SERVER</text>
+  <text x="387" y="272" font-family="monospace" font-size="11" fill="#888" text-anchor="middle">REST API</text>
+  <!-- Connector/plug in middle -->
+  <rect x="196" y="236" width="40" height="40" rx="6" fill="url(#plug)"/>
+  <rect x="236" y="244" width="40" height="24" rx="4" fill="#43E97B" opacity="0.8"/>
+  <!-- Arrows -->
+  <path d="M190,246 L100,232" fill="none" stroke="#43E97B" stroke-width="2" marker-end="url(#arr)"/>
+  <path d="M280,266 L320,256" fill="none" stroke="#38F9D7" stroke-width="2"/>
+  <!-- Request/Response labels -->
+  <text x="200" y="195" font-family="monospace" font-size="12" fill="#43E97B" text-anchor="middle">Request →</text>
+  <text x="310" y="330" font-family="monospace" font-size="12" fill="#38F9D7" text-anchor="middle">← Response</text>
+  <!-- Status badge -->
+  <rect x="208" y="340" width="96" height="30" rx="15" fill="#059669"/>
+  <text x="256" y="360" font-family="monospace" font-size="14" fill="white" text-anchor="middle">200 OK</text>
+</svg>

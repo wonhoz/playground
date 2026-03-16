@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2a1a0a"/>
+      <stop offset="100%" stop-color="#1a0f05"/>
+    </linearGradient>
+    <linearGradient id="brick" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#a06040"/>
+      <stop offset="100%" stop-color="#703020"/>
+    </linearGradient>
+    <linearGradient id="cannon" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#888898"/>
+      <stop offset="100%" stop-color="#404050"/>
+    </linearGradient>
+    <radialGradient id="blast" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="30%" stop-color="#ffcc00"/>
+      <stop offset="70%" stop-color="#ff6600"/>
+      <stop offset="100%" stop-color="#ff6600" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Tower body with brick pattern -->
+  <rect x="186" y="200" width="140" height="250" rx="6" fill="url(#brick)"/>
+  <!-- Brick lines horizontal -->
+  <line x1="186" y1="230" x2="326" y2="230" stroke="#5a2010" stroke-width="2" opacity="0.5"/>
+  <line x1="186" y1="260" x2="326" y2="260" stroke="#5a2010" stroke-width="2" opacity="0.5"/>
+  <line x1="186" y1="290" x2="326" y2="290" stroke="#5a2010" stroke-width="2" opacity="0.5"/>
+  <line x1="186" y1="320" x2="326" y2="320" stroke="#5a2010" stroke-width="2" opacity="0.5"/>
+  <line x1="186" y1="350" x2="326" y2="350" stroke="#5a2010" stroke-width="2" opacity="0.5"/>
+  <line x1="186" y1="380" x2="326" y2="380" stroke="#5a2010" stroke-width="2" opacity="0.5"/>
+  <line x1="186" y1="410" x2="326" y2="410" stroke="#5a2010" stroke-width="2" opacity="0.5"/>
+  <!-- Battlements top -->
+  <rect x="176" y="160" width="28" height="48" rx="4" fill="url(#brick)"/>
+  <rect x="218" y="160" width="28" height="48" rx="4" fill="url(#brick)"/>
+  <rect x="260" y="160" width="28" height="48" rx="4" fill="url(#brick)"/>
+  <rect x="302" y="160" width="28" height="48" rx="4" fill="url(#brick)"/>
+  <!-- Platform rim -->
+  <rect x="166" y="196" width="180" height="12" rx="4" fill="#6a3020"/>
+  <!-- Cannon barrel -->
+  <rect x="130" y="240" width="120" height="36" rx="18" fill="url(#cannon)"/>
+  <ellipse cx="250" cy="258" rx="18" ry="18" fill="#555565"/>
+  <ellipse cx="135" cy="258" rx="14" ry="14" fill="#303040"/>
+  <!-- Cannon wheels -->
+  <circle cx="195" cy="296" r="24" fill="none" stroke="#6a4020" stroke-width="10"/>
+  <circle cx="195" cy="296" r="6" fill="#5a3010"/>
+  <!-- Cannonball blast -->
+  <circle cx="100" cy="230" r="24" fill="url(#blast)" opacity="0.8"/>
+  <!-- Cannonball in flight -->
+  <circle cx="100" cy="230" r="12" fill="#303040"/>
+  <!-- Cannonball trail -->
+  <ellipse cx="125" cy="240" rx="14" ry="7" fill="#ff8020" opacity="0.5" transform="rotate(-20 125 240)"/>
+  <!-- Enemy silhouettes being hit -->
+  <ellipse cx="400" cy="280" rx="18" ry="22" fill="#cc2020" opacity="0.7"/>
+  <rect x="388" y="300" width="24" height="40" rx="4" fill="#cc2020" opacity="0.7"/>
+  <ellipse cx="440" cy="300" rx="14" ry="18" fill="#cc2020" opacity="0.5"/>
+  <rect x="430" y="316" width="20" height="36" rx="4" fill="#cc2020" opacity="0.5"/>
+  <!-- Ground -->
+  <rect x="90" y="448" width="332" height="18" rx="9" fill="#4a2810" opacity="0.8"/>
+</svg>

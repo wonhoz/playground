@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0d1f0d"/>
+      <stop offset="100%" stop-color="#1a3a1a"/>
+    </linearGradient>
+    <linearGradient id="path" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#8a6a40"/>
+      <stop offset="100%" stop-color="#a07840"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Grass tiles -->
+  <rect x="80" y="80" width="352" height="352" rx="4" fill="#1a3a1a" opacity="0.5"/>
+  <!-- Winding path -->
+  <path d="M80 256 L200 256 L200 150 L350 150 L350 300 L430 300 L430 400 L256 400"
+        fill="none" stroke="url(#path)" stroke-width="44" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M80 256 L200 256 L200 150 L350 150 L350 300 L430 300 L430 400 L256 400"
+        fill="none" stroke="#c09060" stroke-width="36" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+  <!-- Path edges -->
+  <path d="M80 256 L200 256 L200 150 L350 150 L350 300 L430 300 L430 400 L256 400"
+        fill="none" stroke="#6a4a20" stroke-width="44" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="1 44" opacity="0.3"/>
+  <!-- Tower 1 -->
+  <rect x="215" y="95" width="50" height="50" rx="8" fill="#607080"/>
+  <rect x="220" y="86" width="16" height="18" rx="4" fill="#607080"/>
+  <rect x="248" y="86" width="16" height="18" rx="4" fill="#607080"/>
+  <circle cx="240" cy="120" r="10" fill="#40e040"/>
+  <!-- Tower 2 -->
+  <rect x="360" y="200" width="50" height="50" rx="8" fill="#806070"/>
+  <rect x="365" y="191" width="16" height="18" rx="4" fill="#806070"/>
+  <rect x="393" y="191" width="16" height="18" rx="4" fill="#806070"/>
+  <circle cx="385" cy="225" r="10" fill="#e040e0"/>
+  <!-- Tower 3 -->
+  <rect x="135" y="300" width="50" height="50" rx="8" fill="#708060"/>
+  <rect x="140" y="291" width="16" height="18" rx="4" fill="#708060"/>
+  <rect x="168" y="291" width="16" height="18" rx="4" fill="#708060"/>
+  <circle cx="160" cy="325" r="10" fill="#e0e040"/>
+  <!-- Enemies on path -->
+  <circle cx="170" cy="256" r="14" fill="#cc2020"/>
+  <circle cx="200" cy="200" r="12" fill="#cc2020" opacity="0.8"/>
+  <circle cx="270" cy="150" r="10" fill="#cc2020" opacity="0.6"/>
+  <!-- Start marker -->
+  <circle cx="80" cy="256" r="20" fill="#40cc40" stroke="#ffffff" stroke-width="3"/>
+  <text x="70" y="262" font-size="18" fill="#ffffff" font-weight="bold">S</text>
+  <!-- End marker -->
+  <circle cx="256" cy="400" r="20" fill="#cc4040" stroke="#ffffff" stroke-width="3"/>
+  <text x="246" y="406" font-size="18" fill="#ffffff" font-weight="bold">E</text>
+  <!-- Attack lines -->
+  <line x1="240" y1="120" x2="200" y2="200" stroke="#40e040" stroke-width="2" stroke-dasharray="4 4" opacity="0.7"/>
+  <line x1="385" y1="225" x2="270" y2="150" stroke="#e040e0" stroke-width="2" stroke-dasharray="4 4" opacity="0.7"/>
+</svg>

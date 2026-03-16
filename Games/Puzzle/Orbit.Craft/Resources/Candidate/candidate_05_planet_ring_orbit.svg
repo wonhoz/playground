@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg" cx="30%" cy="30%" r="80%">
+      <stop offset="0%" style="stop-color:#0f0a2a"/>
+      <stop offset="100%" style="stop-color:#020108"/>
+    </radialGradient>
+    <radialGradient id="saturn" cx="35%" cy="35%" r="65%">
+      <stop offset="0%" style="stop-color:#fde68a"/>
+      <stop offset="50%" style="stop-color:#d97706"/>
+      <stop offset="100%" style="stop-color:#92400e"/>
+    </radialGradient>
+    <linearGradient id="ring1" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#fde68a80"/>
+      <stop offset="50%" style="stop-color:#fde68a40"/>
+      <stop offset="100%" style="stop-color:#fde68a80"/>
+    </linearGradient>
+    <linearGradient id="ring2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#a8a29e80"/>
+      <stop offset="50%" style="stop-color:#a8a29e30"/>
+      <stop offset="100%" style="stop-color:#a8a29e80"/>
+    </linearGradient>
+    <filter id="glow"><feGaussianBlur stdDeviation="10" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Stars -->
+  <circle cx="80" cy="80" r="2" fill="#fff" opacity="0.8"/>
+  <circle cx="160" cy="50" r="1" fill="#fff" opacity="0.5"/>
+  <circle cx="400" cy="70" r="1.5" fill="#fff" opacity="0.7"/>
+  <circle cx="460" cy="180" r="1" fill="#fff" opacity="0.6"/>
+  <circle cx="70" cy="420" r="1.5" fill="#fff" opacity="0.7"/>
+  <circle cx="450" cy="400" r="1" fill="#fff" opacity="0.5"/>
+  <circle cx="350" cy="450" r="1.5" fill="#fff" opacity="0.6"/>
+  <!-- Ring shadows below planet -->
+  <ellipse cx="256" cy="256" rx="160" ry="32" fill="none" stroke="url(#ring2)" stroke-width="10"/>
+  <ellipse cx="256" cy="256" rx="140" ry="28" fill="none" stroke="url(#ring1)" stroke-width="14"/>
+  <ellipse cx="256" cy="256" rx="118" ry="24" fill="none" stroke="url(#ring2)" stroke-width="8"/>
+  <!-- Planet body (covers part of rings) -->
+  <circle cx="256" cy="256" r="72" fill="url(#saturn)" filter="url(#glow)"/>
+  <!-- Ring front parts (drawn after planet to appear in front) -->
+  <path d="M256,256 m-160,0 a160,32 0 0,0 320,0" fill="none" stroke="url(#ring2)" stroke-width="10" opacity="0.7"/>
+  <path d="M256,256 m-140,0 a140,28 0 0,0 280,0" fill="none" stroke="url(#ring1)" stroke-width="14" opacity="0.8"/>
+  <!-- Orbiting craft -->
+  <g transform="translate(256 100)">
+    <polygon points="0,-12 -6,6 0,3 6,6" fill="#e2e8f0" filter="url(#glow)"/>
+    <rect x="-10" y="3" width="20" height="5" rx="2" fill="#94a3b8"/>
+  </g>
+  <!-- Craft orbit path -->
+  <ellipse cx="256" cy="256" rx="156" ry="80" fill="none" stroke="#ffffff15" stroke-width="1.5" stroke-dasharray="6,5"/>
+</svg>

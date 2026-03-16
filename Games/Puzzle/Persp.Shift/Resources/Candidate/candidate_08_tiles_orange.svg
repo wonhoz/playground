@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A0800"/>
+      <stop offset="100%" stop-color="#2D1200"/>
+    </linearGradient>
+    <linearGradient id="tile1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF6D00"/>
+      <stop offset="100%" stop-color="#E65100"/>
+    </linearGradient>
+    <linearGradient id="tile2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFAB40"/>
+      <stop offset="100%" stop-color="#FF6D00"/>
+    </linearGradient>
+    <linearGradient id="tile3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#BF360C"/>
+      <stop offset="100%" stop-color="#7F2700"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Isometric tile puzzle floor -->
+  <!-- Row 1 -->
+  <polygon points="256,80 320,116 256,152 192,116" fill="url(#tile1)"/>
+  <polygon points="320,116 384,152 320,188 256,152" fill="url(#tile1)"/>
+  <polygon points="192,116 256,152 256,188 192,152" fill="url(#tile2)"/>
+  <polygon points="256,152 320,188 320,224 256,188" fill="url(#tile2)"/>
+  <polygon points="320,188 384,152 384,188 320,224" fill="url(#tile3)"/>
+  <polygon points="192,152 256,188 256,224 192,188" fill="url(#tile3)"/>
+  <!-- Row 2 -->
+  <polygon points="128,152 192,116 192,152 128,188" fill="url(#tile3)"/>
+  <polygon points="384,152 448,116 448,152 384,188" fill="url(#tile3)"/>
+  <polygon points="128,188 192,152 256,188 192,224" fill="url(#tile1)"/>
+  <polygon points="256,188 320,224 256,260 192,224" fill="url(#tile1)"/>
+  <polygon points="320,224 384,188 384,224 320,260" fill="url(#tile2)"/>
+  <polygon points="192,224 256,260 256,296 192,260" fill="url(#tile2)"/>
+  <!-- Highlighted/shifted tile -->
+  <polygon points="256,260 320,224 320,260 256,296" fill="#FFAB40" stroke="#FFD180" stroke-width="3"/>
+  <!-- Floating above other tiles (shifted perspective) -->
+  <polygon points="256,240 320,204 320,240 256,276" fill="#FFD180" opacity="0.6"/>
+  <!-- Arrow showing shift -->
+  <path d="M256 316 L256 344 M242 330 L256 344 L270 330" stroke="#FFAB40" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <!-- Ground tiles row 3 -->
+  <polygon points="128,260 192,224 256,260 192,296" fill="url(#tile1)" opacity="0.7"/>
+  <polygon points="256,296 320,260 384,296 320,332" fill="url(#tile1)" opacity="0.7"/>
+  <polygon points="320,332 384,296 384,332 320,368" fill="url(#tile3)" opacity="0.7"/>
+  <polygon points="192,296 256,260 256,296 192,332" fill="url(#tile3)" opacity="0.7"/>
+</svg>

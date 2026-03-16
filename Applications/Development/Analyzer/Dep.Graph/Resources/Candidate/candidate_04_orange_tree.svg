@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1c0900"/>
+      <stop offset="100%" stop-color="#c2410c"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- tree edges -->
+  <g stroke="#fb923c" stroke-width="4" opacity="0.7">
+    <line x1="256" y1="100" x2="140" y2="210"/>
+    <line x1="256" y1="100" x2="372" y2="210"/>
+    <line x1="140" y1="240" x2="90" y2="340"/>
+    <line x1="140" y1="240" x2="190" y2="340"/>
+    <line x1="372" y1="240" x2="322" y2="340"/>
+    <line x1="372" y1="240" x2="422" y2="340"/>
+    <line x1="90" y1="370" x2="70" y2="440"/>
+    <line x1="90" y1="370" x2="110" y2="440"/>
+    <line x1="322" y1="370" x2="302" y2="440"/>
+    <line x1="322" y1="370" x2="342" y2="440"/>
+  </g>
+  <!-- level 1 -->
+  <circle cx="256" cy="100" r="30" fill="#9a3412" stroke="#f97316" stroke-width="4"/>
+  <text x="256" y="100" font-family="monospace" font-size="20" fill="#ffedd5" text-anchor="middle" dominant-baseline="central">pkg</text>
+  <!-- level 2 -->
+  <circle cx="140" cy="225" r="22" fill="#7c2d12" stroke="#fb923c" stroke-width="3"/>
+  <circle cx="372" cy="225" r="22" fill="#7c2d12" stroke="#fb923c" stroke-width="3"/>
+  <text x="140" y="225" font-family="monospace" font-size="14" fill="#fed7aa" text-anchor="middle" dominant-baseline="central">A</text>
+  <text x="372" y="225" font-family="monospace" font-size="14" fill="#fed7aa" text-anchor="middle" dominant-baseline="central">B</text>
+  <!-- level 3 -->
+  <circle cx="90" cy="355" r="16" fill="#431407" stroke="#ea580c" stroke-width="2"/>
+  <circle cx="190" cy="355" r="16" fill="#431407" stroke="#ea580c" stroke-width="2"/>
+  <circle cx="322" cy="355" r="16" fill="#431407" stroke="#ea580c" stroke-width="2"/>
+  <circle cx="422" cy="355" r="16" fill="#431407" stroke="#ea580c" stroke-width="2"/>
+  <!-- level 4 leaves -->
+  <circle cx="70" cy="442" r="10" fill="#fb923c" opacity="0.7"/>
+  <circle cx="110" cy="442" r="10" fill="#fb923c" opacity="0.7"/>
+  <circle cx="302" cy="442" r="10" fill="#fb923c" opacity="0.7"/>
+  <circle cx="342" cy="442" r="10" fill="#fb923c" opacity="0.7"/>
+</svg>

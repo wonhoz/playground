@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f0c29"/>
+      <stop offset="100%" stop-color="#1a1635"/>
+    </linearGradient>
+    <linearGradient id="waveGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#a78bfa"/>
+      <stop offset="50%" stop-color="#6d28d9"/>
+      <stop offset="100%" stop-color="#4c1d95"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- 원본 파일 블록들 (큼) -->
+  <rect x="60" y="100" width="60" height="80" rx="6" fill="#2e1065" stroke="#7c3aed" stroke-width="1.5" opacity="0.8"/>
+  <rect x="60" y="190" width="60" height="80" rx="6" fill="#2e1065" stroke="#7c3aed" stroke-width="1.5" opacity="0.8"/>
+  <rect x="60" y="280" width="60" height="80" rx="6" fill="#2e1065" stroke="#7c3aed" stroke-width="1.5" opacity="0.8"/>
+  <rect x="60" y="370" width="60" height="80" rx="6" fill="#2e1065" stroke="#7c3aed" stroke-width="1.5" opacity="0.8"/>
+  <text x="90" y="90" font-family="Arial" font-size="11" fill="#a78bfa" text-anchor="middle">Original</text>
+  <!-- 압축 화살표 / 물결 -->
+  <path d="M130,255 C180,160 200,350 250,255 C300,160 320,350 370,255" fill="none" stroke="url(#waveGrad)" stroke-width="4" filter="url(#glow)" stroke-linecap="round"/>
+  <!-- 화살표 방향 -->
+  <polygon points="370,255 350,240 350,270" fill="#a78bfa" filter="url(#glow)"/>
+  <!-- 압축된 파일 블록들 (작음) -->
+  <rect x="380" y="170" width="46" height="56" rx="6" fill="#4c1d95" stroke="#c4b5fd" stroke-width="2" filter="url(#glow)"/>
+  <rect x="380" y="236" width="46" height="56" rx="6" fill="#4c1d95" stroke="#c4b5fd" stroke-width="2" filter="url(#glow)"/>
+  <rect x="380" y="302" width="46" height="56" rx="6" fill="#4c1d95" stroke="#c4b5fd" stroke-width="2" filter="url(#glow)"/>
+  <text x="403" y="160" font-family="Arial" font-size="11" fill="#c4b5fd" text-anchor="middle">ZIP</text>
+  <!-- 압축률 -->
+  <rect x="160" y="420" width="190" height="42" rx="10" fill="#1e1b4b" stroke="#6d28d9" stroke-width="1.5"/>
+  <text x="255" y="438" font-family="Arial" font-size="12" fill="#a78bfa" text-anchor="middle">Compression</text>
+  <text x="255" y="454" font-family="'Courier New',monospace" font-weight="bold" font-size="14" fill="#c4b5fd" text-anchor="middle">68.4% saved</text>
+</svg>

@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#263238"/>
+      <stop offset="100%" stop-color="#37474f"/>
+    </linearGradient>
+    <linearGradient id="tube" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#90a4ae"/>
+      <stop offset="100%" stop-color="#546e7a"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Telescope tube (angled) -->
+  <rect x="100" y="230" width="312" height="60" rx="16" fill="url(#tube)" transform="rotate(-20, 256, 260)"/>
+  <rect x="100" y="232" width="72" height="56" rx="10" fill="#455a64" transform="rotate(-20, 256, 260)"/>
+  <circle cx="406" cy="198" r="44" fill="#546e7a" stroke="#90a4ae" stroke-width="5"/>
+  <circle cx="406" cy="198" r="30" fill="#263238" stroke="#78909c" stroke-width="3"/>
+  <!-- Star/data points being viewed -->
+  <circle cx="406" cy="198" r="5" fill="#29b6f6"/>
+  <!-- Stand -->
+  <line x1="280" y1="292" x2="256" y2="430" stroke="#78909c" stroke-width="10" stroke-linecap="round"/>
+  <line x1="256" y1="430" x2="180" y2="460" stroke="#78909c" stroke-width="8" stroke-linecap="round"/>
+  <line x1="256" y1="430" x2="332" y2="460" stroke="#78909c" stroke-width="8" stroke-linecap="round"/>
+  <!-- Data lines (log) in view area -->
+  <rect x="92" y="110" width="180" height="11" rx="5" fill="#4caf50" opacity="0.8"/>
+  <rect x="92" y="134" width="160" height="11" rx="5" fill="#ef5350" opacity="0.9"/>
+  <rect x="92" y="158" width="170" height="11" rx="5" fill="#ffd740" opacity="0.8"/>
+  <!-- Highlight ring on object end -->
+  <circle cx="136" cy="238" r="18" fill="none" stroke="#29b6f6" stroke-width="4" opacity="0.7"/>
+</svg>

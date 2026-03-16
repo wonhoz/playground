@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#000e1a"/>
+      <stop offset="100%" stop-color="#00162b"/>
+    </linearGradient>
+    <radialGradient id="target" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#0288d1" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#0288d1" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <circle cx="256" cy="256" r="190" fill="url(#target)"/>
+  <!-- Target rings -->
+  <circle cx="256" cy="256" r="150" fill="none" stroke="#0288d1" stroke-width="2" opacity="0.5"/>
+  <circle cx="256" cy="256" r="100" fill="none" stroke="#0288d1" stroke-width="2.5" opacity="0.6"/>
+  <circle cx="256" cy="256" r="55" fill="none" stroke="#29b6f6" stroke-width="3" opacity="0.8"/>
+  <!-- Crosshair lines -->
+  <line x1="80" y1="256" x2="196" y2="256" stroke="#29b6f6" stroke-width="3" filter="url(#glow)"/>
+  <line x1="316" y1="256" x2="432" y2="256" stroke="#29b6f6" stroke-width="3" filter="url(#glow)"/>
+  <line x1="256" y1="80" x2="256" y2="196" stroke="#29b6f6" stroke-width="3" filter="url(#glow)"/>
+  <line x1="256" y1="316" x2="256" y2="432" stroke="#29b6f6" stroke-width="3" filter="url(#glow)"/>
+  <!-- Center dot -->
+  <circle cx="256" cy="256" r="10" fill="#ff1744" filter="url(#glow)"/>
+  <circle cx="256" cy="256" r="4" fill="#ff8a80"/>
+  <!-- Corner brackets -->
+  <path d="M196 196 L196 226 M196 196 L226 196" stroke="#29b6f6" stroke-width="3" fill="none" stroke-linecap="round" filter="url(#glow)"/>
+  <path d="M316 196 L316 226 M316 196 L286 196" stroke="#29b6f6" stroke-width="3" fill="none" stroke-linecap="round" filter="url(#glow)"/>
+  <path d="M196 316 L196 286 M196 316 L226 316" stroke="#29b6f6" stroke-width="3" fill="none" stroke-linecap="round" filter="url(#glow)"/>
+  <path d="M316 316 L316 286 M316 316 L286 316" stroke="#29b6f6" stroke-width="3" fill="none" stroke-linecap="round" filter="url(#glow)"/>
+  <!-- SNAP text -->
+  <rect x="176" y="88" width="160" height="38" rx="10" fill="#000e1a" stroke="#29b6f6" stroke-width="1.5"/>
+  <text x="256" y="113" font-family="monospace" font-size="18" fill="#29b6f6" text-anchor="middle" font-weight="bold" filter="url(#glow)">TAP TO SNAP</text>
+  <!-- Reaction time -->
+  <rect x="186" y="390" width="140" height="34" rx="10" fill="#000e1a" stroke="#0288d1" stroke-width="1.5"/>
+  <text x="256" y="413" font-family="monospace" font-size="16" fill="#29b6f6" text-anchor="middle">0.142 s</text>
+</svg>

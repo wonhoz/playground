@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0E1A0E"/>
+      <stop offset="100%" stop-color="#182818"/>
+    </linearGradient>
+    <linearGradient id="hdd_body" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2A3A2A"/>
+      <stop offset="100%" stop-color="#1A2A1A"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- HDD body -->
+  <rect x="100" y="120" width="312" height="200" rx="14" fill="url(#hdd_body)" stroke="#3A5A3A" stroke-width="2.5"/>
+  <!-- Platter rings -->
+  <circle cx="256" cy="220" r="88" fill="#1A2A1A" stroke="#2E4E2E" stroke-width="2"/>
+  <circle cx="256" cy="220" r="66" fill="#152515" stroke="#2A442A" stroke-width="1.5"/>
+  <circle cx="256" cy="220" r="44" fill="#102010" stroke="#253525" stroke-width="1"/>
+  <circle cx="256" cy="220" r="20" fill="#1A2A1A" stroke="#2A3A2A" stroke-width="1"/>
+  <circle cx="256" cy="220" r="8" fill="#334433"/>
+  <!-- Read arm -->
+  <line x1="256" y1="220" x2="342" y2="142" stroke="#44FF44" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="342" cy="142" r="7" fill="#44FF44" opacity="0.9"/>
+  <!-- Screw holes -->
+  <circle cx="120" cy="140" r="6" fill="#253525" stroke="#1A2A1A" stroke-width="1.5"/>
+  <circle cx="392" cy="140" r="6" fill="#253525" stroke="#1A2A1A" stroke-width="1.5"/>
+  <circle cx="120" cy="300" r="6" fill="#253525" stroke="#1A2A1A" stroke-width="1.5"/>
+  <circle cx="392" cy="300" r="6" fill="#253525" stroke="#1A2A1A" stroke-width="1.5"/>
+  <!-- SATA connector -->
+  <rect x="120" y="312" width="120" height="22" rx="4" fill="#1A2A1A" stroke="#3A5A3A" stroke-width="1.5"/>
+  <rect x="130" y="316" width="8" height="14" rx="1" fill="#44AA44" opacity="0.6"/>
+  <rect x="144" y="316" width="8" height="14" rx="1" fill="#44AA44" opacity="0.6"/>
+  <rect x="158" y="316" width="8" height="14" rx="1" fill="#44AA44" opacity="0.6"/>
+  <!-- RPM indicator -->
+  <text x="330" y="360" font-family="'Courier New'" font-size="14" fill="#44FF44" text-anchor="middle">7200 RPM</text>
+  <text x="256" y="415" font-family="'Courier New'" font-size="16" fill="#44AA44" text-anchor="middle">READ: 220 MB/s</text>
+  <text x="256" y="460" font-family="'Courier New'" font-size="24" fill="#44FF44" text-anchor="middle">DRIVE·BENCH</text>
+</svg>

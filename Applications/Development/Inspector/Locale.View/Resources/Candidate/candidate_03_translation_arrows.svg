@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0d0d1a"/>
+      <stop offset="100%" stop-color="#1a0533"/>
+    </linearGradient>
+    <linearGradient id="card1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4776E6"/>
+      <stop offset="100%" stop-color="#8E54E9"/>
+    </linearGradient>
+    <linearGradient id="card2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f7971e"/>
+      <stop offset="100%" stop-color="#ffd200"/>
+    </linearGradient>
+    <linearGradient id="arrow" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ee0979"/>
+      <stop offset="100%" stop-color="#ff6a00"/>
+    </linearGradient>
+    <linearGradient id="arrow2" x1="100%" y1="0%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#56CCF2"/>
+      <stop offset="100%" stop-color="#2F80ED"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Left card - source language -->
+  <rect x="50" y="150" width="155" height="200" rx="20" fill="url(#card1)" filter="url(#glow)"/>
+  <rect x="50" y="150" width="155" height="200" rx="20" fill="none" stroke="#ffffff" stroke-width="1.5" opacity="0.3"/>
+  <!-- Text lines on left card -->
+  <rect x="72" y="185" width="110" height="10" rx="5" fill="#fff" opacity="0.9"/>
+  <rect x="72" y="205" width="90" height="8" rx="4" fill="#fff" opacity="0.7"/>
+  <rect x="72" y="223" width="100" height="8" rx="4" fill="#fff" opacity="0.7"/>
+  <rect x="72" y="241" width="75" height="8" rx="4" fill="#fff" opacity="0.5"/>
+  <rect x="72" y="268" width="110" height="10" rx="5" fill="#fff" opacity="0.9"/>
+  <rect x="72" y="288" width="85" height="8" rx="4" fill="#fff" opacity="0.7"/>
+  <rect x="72" y="306" width="95" height="8" rx="4" fill="#fff" opacity="0.7"/>
+  <!-- Language label -->
+  <rect x="72" y="320" width="50" height="16" rx="8" fill="#ffffff" opacity="0.25"/>
+
+  <!-- Right card - translated -->
+  <rect x="305" y="150" width="155" height="200" rx="20" fill="url(#card2)" filter="url(#glow)"/>
+  <rect x="305" y="150" width="155" height="200" rx="20" fill="none" stroke="#ffffff" stroke-width="1.5" opacity="0.3"/>
+  <!-- Text lines on right card - different pattern to show translation -->
+  <rect x="327" y="185" width="88" height="10" rx="5" fill="#fff" opacity="0.9"/>
+  <rect x="327" y="205" width="108" height="8" rx="4" fill="#fff" opacity="0.7"/>
+  <rect x="327" y="223" width="70" height="8" rx="4" fill="#fff" opacity="0.7"/>
+  <rect x="327" y="241" width="98" height="8" rx="4" fill="#fff" opacity="0.5"/>
+  <rect x="327" y="268" width="95" height="10" rx="5" fill="#fff" opacity="0.9"/>
+  <rect x="327" y="288" width="78" height="8" rx="4" fill="#fff" opacity="0.7"/>
+  <rect x="327" y="306" width="110" height="8" rx="4" fill="#fff" opacity="0.7"/>
+  <rect x="327" y="320" width="50" height="16" rx="8" fill="#ffffff" opacity="0.25"/>
+
+  <!-- Arrow forward -->
+  <path d="M220,225 L290,225" stroke="url(#arrow)" stroke-width="8" stroke-linecap="round" filter="url(#glow)"/>
+  <polygon points="290,210 315,225 290,240" fill="url(#arrow)" filter="url(#glow)"/>
+  <!-- Arrow back -->
+  <path d="M290,285 L220,285" stroke="url(#arrow2)" stroke-width="8" stroke-linecap="round" filter="url(#glow)"/>
+  <polygon points="220,270 195,285 220,300" fill="url(#arrow2)" filter="url(#glow)"/>
+
+  <!-- Decorative particles -->
+  <circle cx="255" cy="190" r="5" fill="#ee0979" opacity="0.8"/>
+  <circle cx="255" cy="200" r="3" fill="#ff6a00" opacity="0.6"/>
+  <circle cx="255" cy="315" r="5" fill="#56CCF2" opacity="0.8"/>
+  <circle cx="255" cy="305" r="3" fill="#2F80ED" opacity="0.6"/>
+
+  <!-- Bottom ornament -->
+  <ellipse cx="256" cy="415" rx="120" ry="8" fill="#8E54E9" opacity="0.25"/>
+  <ellipse cx="256" cy="415" rx="80" ry="5" fill="#ffd200" opacity="0.2"/>
+</svg>

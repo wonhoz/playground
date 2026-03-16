@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a1628"/>
+      <stop offset="100%" stop-color="#1a2a4a"/>
+    </linearGradient>
+    <linearGradient id="node" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00b4d8"/>
+      <stop offset="100%" stop-color="#90e0ef"/>
+    </linearGradient>
+    <linearGradient id="center" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff6b6b"/>
+      <stop offset="100%" stop-color="#ffd93d"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- 소스 노드들 -->
+  <circle cx="100" cy="130" r="36" fill="url(#node)" opacity="0.8"/>
+  <circle cx="100" cy="256" r="36" fill="url(#node)" opacity="0.8"/>
+  <circle cx="100" cy="382" r="36" fill="url(#node)" opacity="0.8"/>
+  <circle cx="256" cy="100" r="36" fill="url(#node)" opacity="0.7"/>
+  <circle cx="256" cy="412" r="36" fill="url(#node)" opacity="0.7"/>
+  <circle cx="412" cy="160" r="30" fill="url(#node)" opacity="0.6"/>
+  <circle cx="412" cy="352" r="30" fill="url(#node)" opacity="0.6"/>
+  <!-- 연결선 -->
+  <line x1="136" y1="130" x2="220" y2="230" stroke="url(#node)" stroke-width="4" opacity="0.5"/>
+  <line x1="136" y1="256" x2="220" y2="256" stroke="url(#node)" stroke-width="4" opacity="0.5"/>
+  <line x1="136" y1="382" x2="220" y2="282" stroke="url(#node)" stroke-width="4" opacity="0.5"/>
+  <line x1="256" y1="136" x2="256" y2="220" stroke="url(#node)" stroke-width="4" opacity="0.5"/>
+  <line x1="256" y1="376" x2="256" y2="292" stroke="url(#node)" stroke-width="4" opacity="0.5"/>
+  <line x1="382" y1="160" x2="292" y2="238" stroke="url(#node)" stroke-width="4" opacity="0.5"/>
+  <line x1="382" y1="352" x2="292" y2="274" stroke="url(#node)" stroke-width="4" opacity="0.5"/>
+  <!-- 중앙 병합 노드 -->
+  <circle cx="256" cy="256" r="52" fill="url(#center)" opacity="0.95"/>
+  <circle cx="256" cy="256" r="36" fill="#0a1628" opacity="0.8"/>
+  <!-- 병합 아이콘 (화살표 여러개 수렴) -->
+  <text x="256" y="268" font-size="32" text-anchor="middle" fill="url(#center)">+</text>
+</svg>

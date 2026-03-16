@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#100E00"/>
+      <stop offset="100%" stop-color="#1E1A00"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFD700"/>
+      <stop offset="50%" stop-color="#FFA000"/>
+      <stop offset="100%" stop-color="#FF6F00"/>
+    </linearGradient>
+    <linearGradient id="shine" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF8E1"/>
+      <stop offset="100%" stop-color="#FFD700"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Trophy cup body -->
+  <path d="M176 100 L336 100 L330 240 Q326 300 256 320 Q186 300 182 240 Z" fill="url(#gold)"/>
+  <!-- Trophy handles -->
+  <path d="M176 130 Q120 130 120 180 Q120 230 176 230" fill="none" stroke="url(#gold)" stroke-width="18" stroke-linecap="round"/>
+  <path d="M336 130 Q392 130 392 180 Q392 230 336 230" fill="none" stroke="url(#gold)" stroke-width="18" stroke-linecap="round"/>
+  <!-- Trophy stem -->
+  <rect x="234" y="318" width="44" height="60" rx="6" fill="url(#gold)"/>
+  <!-- Trophy base -->
+  <rect x="164" y="374" width="184" height="32" rx="8" fill="url(#gold)"/>
+  <rect x="148" y="398" width="216" height="20" rx="8" fill="url(#shine)" opacity="0.8"/>
+  <!-- Cup shine -->
+  <ellipse cx="220" cy="170" rx="20" ry="40" fill="white" opacity="0.15" transform="rotate(-20 220 170)"/>
+  <!-- Star in cup -->
+  <path d="M256 140 L266 168 L296 168 L273 186 L282 214 L256 196 L230 214 L239 186 L216 168 L246 168 Z" fill="#FFF8E1" opacity="0.8"/>
+  <!-- Score on base -->
+  <text x="256" y="415" text-anchor="middle" font-family="Consolas" font-size="14" fill="#1E1A00" font-weight="bold">BENCHMARK</text>
+  <!-- Rank indicators below -->
+  <rect x="72" y="440" width="368" height="36" rx="8" fill="#1E1A00" stroke="#FFD700" stroke-width="2"/>
+  <text x="100" y="462" font-family="Consolas" font-size="12" fill="#FFD700">Score: 12,847 pts</text>
+  <text x="300" y="462" font-family="Consolas" font-size="12" fill="#FFA000">Rank: S+</text>
+</svg>

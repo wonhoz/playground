@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#111100"/>
+      <stop offset="100%" stop-color="#1A1A00"/>
+    </linearGradient>
+    <linearGradient id="bolt" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFEA00"/>
+      <stop offset="100%" stop-color="#FF6D00"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFEA00" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#FFEA00" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <circle cx="256" cy="256" r="220" fill="url(#glow)"/>
+  <!-- CPU performance bolt -->
+  <path d="M280 60 L170 270 L240 270 L220 450 L360 220 L290 220 L340 60 Z" fill="url(#bolt)"/>
+  <!-- Shine highlights -->
+  <path d="M290 60 L285 90 L335 60 Z" fill="#FFFF80" opacity="0.6"/>
+  <path d="M220 270 L235 260 L240 270 Z" fill="#FFFF80" opacity="0.5"/>
+  <!-- Benchmark circles in background -->
+  <circle cx="120" cy="160" r="32" fill="none" stroke="#FFEA00" stroke-width="2" opacity="0.3"/>
+  <circle cx="120" cy="160" r="20" fill="none" stroke="#FF6D00" stroke-width="2" opacity="0.3"/>
+  <text x="120" y="165" text-anchor="middle" font-family="Consolas" font-size="11" fill="#FFEA00" opacity="0.5">CPU</text>
+  <circle cx="390" cy="160" r="32" fill="none" stroke="#FFEA00" stroke-width="2" opacity="0.3"/>
+  <text x="390" y="165" text-anchor="middle" font-family="Consolas" font-size="11" fill="#FFEA00" opacity="0.5">RAM</text>
+  <circle cx="110" cy="370" r="32" fill="none" stroke="#FF6D00" stroke-width="2" opacity="0.3"/>
+  <text x="110" y="375" text-anchor="middle" font-family="Consolas" font-size="10" fill="#FF6D00" opacity="0.5">DISK</text>
+  <circle cx="400" cy="370" r="32" fill="none" stroke="#FF6D00" stroke-width="2" opacity="0.3"/>
+  <text x="400" y="375" text-anchor="middle" font-family="Consolas" font-size="11" fill="#FF6D00" opacity="0.5">GPU</text>
+  <!-- Score badge -->
+  <rect x="180" y="360" width="152" height="56" rx="10" fill="#1A1A00" stroke="#FFEA00" stroke-width="2"/>
+  <text x="256" y="382" text-anchor="middle" font-family="Consolas" font-size="12" fill="#FFEA00">SCORE</text>
+  <text x="256" y="406" text-anchor="middle" font-family="Consolas" font-size="24" fill="#FF6D00" font-weight="bold">9999</text>
+</svg>

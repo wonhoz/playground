@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0a1a"/>
+      <stop offset="100%" style="stop-color:#1a1a3e"/>
+    </linearGradient>
+    <linearGradient id="crystal1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#e3f2fd"/>
+      <stop offset="50%" style="stop-color:#64b5f6"/>
+      <stop offset="100%" style="stop-color:#1565c0"/>
+    </linearGradient>
+    <linearGradient id="crystal2" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#e8eaf6"/>
+      <stop offset="50%" style="stop-color:#9fa8da"/>
+      <stop offset="100%" style="stop-color:#283593"/>
+    </linearGradient>
+    <linearGradient id="crystal3" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#fce4ec"/>
+      <stop offset="50%" style="stop-color:#f48fb1"/>
+      <stop offset="100%" style="stop-color:#880e4f"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Main crystal -->
+  <path d="M256 100 L310 180 L310 340 L256 400 L202 340 L202 180 Z" fill="url(#crystal1)" opacity="0.85" filter="url(#glow)"/>
+  <!-- Crystal facets -->
+  <path d="M256 100 L310 180 L256 200 Z" fill="#bbdefb" opacity="0.7"/>
+  <path d="M256 100 L202 180 L256 200 Z" fill="#e3f2fd" opacity="0.5"/>
+  <path d="M202 180 L256 200 L256 340 L202 340 Z" fill="#1565c0" opacity="0.4"/>
+  <path d="M310 180 L256 200 L256 340 L310 340 Z" fill="#0d47a1" opacity="0.3"/>
+  <!-- Left crystal -->
+  <path d="M160 180 L200 230 L200 340 L160 370 L120 340 L120 230 Z" fill="url(#crystal2)" opacity="0.75" filter="url(#glow)"/>
+  <!-- Right crystal -->
+  <path d="M352 190 L390 238 L390 340 L352 368 L314 340 L314 238 Z" fill="url(#crystal3)" opacity="0.75" filter="url(#glow)"/>
+  <!-- Inner light reflections -->
+  <path d="M240 160 L260 220 L250 220 Z" fill="white" opacity="0.4"/>
+  <path d="M128 230 L148 270 L140 270 Z" fill="white" opacity="0.35"/>
+  <path d="M323 240 L342 275 L333 275 Z" fill="white" opacity="0.35"/>
+  <!-- Sparkle at crystal top -->
+  <circle cx="256" cy="100" r="10" fill="white" filter="url(#glow)" opacity="0.9"/>
+  <line x1="256" y1="82" x2="256" y2="98" stroke="white" stroke-width="3" opacity="0.8"/>
+  <line x1="238" y1="100" x2="254" y2="100" stroke="white" stroke-width="3" opacity="0.8"/>
+  <line x1="244" y1="88" x2="255" y2="99" stroke="white" stroke-width="2" opacity="0.7"/>
+  <line x1="268" y1="88" x2="257" y2="99" stroke="white" stroke-width="2" opacity="0.7"/>
+  <!-- Clean particles -->
+  <circle cx="160" cy="120" r="5" fill="#80deea" filter="url(#glow)" opacity="0.8"/>
+  <circle cx="380" cy="130" r="4" fill="#b39ddb" filter="url(#glow)" opacity="0.8"/>
+  <circle cx="420" cy="260" r="5" fill="#64b5f6" filter="url(#glow)" opacity="0.7"/>
+  <circle cx="90" cy="300" r="4" fill="#f48fb1" filter="url(#glow)" opacity="0.7"/>
+</svg>

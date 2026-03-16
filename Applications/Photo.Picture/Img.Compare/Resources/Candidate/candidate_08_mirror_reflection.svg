@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0d2137"/>
+      <stop offset="100%" stop-color="#0a1628"/>
+    </linearGradient>
+    <linearGradient id="orig" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#4facfe"/>
+      <stop offset="100%" stop-color="#00f2fe"/>
+    </linearGradient>
+    <linearGradient id="mirror" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f77062"/>
+      <stop offset="100%" stop-color="#fe5196"/>
+    </linearGradient>
+    <linearGradient id="reflGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffffff20"/>
+      <stop offset="100%" stop-color="#ffffff00"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Top image (original) -->
+  <rect x="80" y="60" width="352" height="175" rx="14" fill="#1a3050"/>
+  <!-- Sun -->
+  <circle cx="256" cy="140" r="40" fill="url(#orig)" opacity="0.9"/>
+  <!-- Clouds -->
+  <ellipse cx="150" cy="110" rx="40" ry="22" fill="#4facfe" opacity="0.4"/>
+  <ellipse cx="380" cy="120" rx="35" ry="18" fill="#00f2fe" opacity="0.4"/>
+  <!-- Horizon line -->
+  <rect x="80" y="220" width="352" height="4" rx="2" fill="#4facfe" opacity="0.6"/>
+  <!-- Bottom image (after - reflected) -->
+  <rect x="80" y="230" width="352" height="175" rx="14" fill="#2a1530"/>
+  <!-- Reflected sun (upside down, different color) -->
+  <circle cx="256" cy="335" r="40" fill="url(#mirror)" opacity="0.9"/>
+  <!-- Reflected clouds -->
+  <ellipse cx="150" cy="365" rx="40" ry="22" fill="#f77062" opacity="0.4"/>
+  <ellipse cx="380" cy="355" rx="35" ry="18" fill="#fe5196" opacity="0.4"/>
+  <!-- Reflection overlay -->
+  <rect x="80" y="230" width="352" height="175" rx="14" fill="url(#reflGrad)"/>
+  <!-- Mirror line with handle -->
+  <rect x="60" y="218" width="392" height="8" rx="4" fill="white" opacity="0.8"/>
+  <rect x="216" y="202" width="80" height="24" rx="8" fill="white" opacity="0.9"/>
+  <text x="256" y="219" text-anchor="middle" font-family="Arial" font-size="13" font-weight="bold" fill="#333">MIRROR</text>
+  <!-- Arrows -->
+  <path d="M50,150 L50,130 L66,130" fill="none" stroke="#4facfe" stroke-width="3" stroke-linecap="round"/>
+  <path d="M50,330 L50,350 L66,350" fill="none" stroke="#fe5196" stroke-width="3" stroke-linecap="round"/>
+  <!-- Frame border -->
+  <rect x="80" y="60" width="352" height="345" rx="14" fill="none" stroke="#ffffff20" stroke-width="2"/>
+  <text x="256" y="440" text-anchor="middle" font-family="Arial" font-size="18" fill="white" opacity="0.6">BEFORE ↔ AFTER</text>
+</svg>

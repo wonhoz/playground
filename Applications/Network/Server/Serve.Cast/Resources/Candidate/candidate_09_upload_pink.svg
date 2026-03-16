@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#880E4F"/>
+      <stop offset="100%" stop-color="#AD1457"/>
+    </linearGradient>
+    <linearGradient id="cloud" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F48FB1"/>
+      <stop offset="100%" stop-color="#EC407A"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Cloud shape (serving = cloud delivery) -->
+  <path d="M340 300 Q390 300 390 255 Q390 220 355 215 Q350 170 310 165 Q295 130 256 130 Q210 130 195 168 Q155 168 145 205 Q110 210 110 250 Q110 300 165 300 Z" fill="url(#cloud)"/>
+  <!-- Download arrows from cloud -->
+  <line x1="200" y1="310" x2="200" y2="380" stroke="#F8BBD0" stroke-width="5" stroke-linecap="round"/>
+  <polygon points="200,395 185,370 215,370" fill="#F8BBD0"/>
+  <line x1="256" y1="310" x2="256" y2="380" stroke="#F8BBD0" stroke-width="5" stroke-linecap="round"/>
+  <polygon points="256,395 241,370 271,370" fill="#F8BBD0"/>
+  <line x1="312" y1="310" x2="312" y2="380" stroke="#F8BBD0" stroke-width="5" stroke-linecap="round"/>
+  <polygon points="312,395 297,370 327,370" fill="#F8BBD0"/>
+  <!-- URL bar -->
+  <rect x="100" y="415" width="312" height="40" rx="8" fill="#6D1B3E"/>
+  <text x="116" y="441" font-family="monospace" font-size="16" fill="#F48FB1">http://192.168.1.1:8080</text>
+</svg>

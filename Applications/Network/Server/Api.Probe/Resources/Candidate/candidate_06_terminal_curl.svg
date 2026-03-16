@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1A1A1A"/>
+      <stop offset="100%" stop-color="#0A0A0A"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Terminal window -->
+  <rect x="50" y="90" width="412" height="332" rx="10" fill="#1E1E1E" stroke="#333" stroke-width="2"/>
+  <rect x="50" y="90" width="412" height="34" rx="10" fill="#2D2D2D"/>
+  <rect x="50" y="107" width="412" height="17" fill="#2D2D2D"/>
+  <circle cx="78" cy="107" r="7" fill="#FF5F56"/>
+  <circle cx="102" cy="107" r="7" fill="#FFBD2E"/>
+  <circle cx="126" cy="107" r="7" fill="#27C93F"/>
+  <!-- Command -->
+  <text x="78" y="155" font-family="monospace" font-size="14" fill="#27C93F">$</text>
+  <text x="95" y="155" font-family="monospace" font-size="14" fill="#E0E0E0">curl -X GET \</text>
+  <text x="95" y="175" font-family="monospace" font-size="14" fill="#E0E0E0">  -H "Auth: Bearer ..." \</text>
+  <text x="95" y="195" font-family="monospace" font-size="14" fill="#60A5FA">  https://api.example.com/v1</text>
+  <!-- Response -->
+  <text x="78" y="225" font-family="monospace" font-size="13" fill="#888">HTTP/1.1</text>
+  <text x="165" y="225" font-family="monospace" font-size="13" fill="#10B981">200 OK</text>
+  <text x="78" y="248" font-family="monospace" font-size="12" fill="#888">Content-Type: application/json</text>
+  <text x="78" y="272" font-family="monospace" font-size="13" fill="#F59E0B">{</text>
+  <text x="96" y="292" font-family="monospace" font-size="13" fill="#818CF8">"status":</text>
+  <text x="200" y="292" font-family="monospace" font-size="13" fill="#34D399">"success"</text>
+  <text x="78" y="312" font-family="monospace" font-size="13" fill="#F59E0B">}</text>
+  <!-- Cursor -->
+  <rect x="78" y="352" width="10" height="18" rx="1" fill="#27C93F" opacity="0.9"/>
+</svg>

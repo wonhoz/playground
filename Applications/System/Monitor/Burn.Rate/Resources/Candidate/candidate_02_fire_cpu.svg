@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a0a00"/>
+      <stop offset="100%" style="stop-color:#2d0000"/>
+    </linearGradient>
+    <linearGradient id="chip" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#37474f"/>
+      <stop offset="100%" style="stop-color:#212121"/>
+    </linearGradient>
+    <radialGradient id="hot" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#ff3d00;stop-opacity:0.6"/>
+      <stop offset="100%" style="stop-color:#ff3d00;stop-opacity:0"/>
+    </radialGradient>
+    <radialGradient id="flame-core" cx="50%" cy="80%" r="70%">
+      <stop offset="0%" style="stop-color:#ffffff"/>
+      <stop offset="20%" style="stop-color:#fff3e0"/>
+      <stop offset="50%" style="stop-color:#ff9800"/>
+      <stop offset="80%" style="stop-color:#f44336"/>
+      <stop offset="100%" style="stop-color:#b71c1c;stop-opacity:0"/>
+    </radialGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- CPU chip -->
+  <rect x="156" y="256" width="200" height="200" rx="14" fill="url(#chip)"/>
+  <rect x="168" y="268" width="176" height="176" rx="8" fill="#263238"/>
+  <!-- CPU pins left -->
+  <line x1="125" y1="286" x2="156" y2="286" stroke="#546e7a" stroke-width="6" stroke-linecap="round"/>
+  <line x1="125" y1="306" x2="156" y2="306" stroke="#546e7a" stroke-width="6" stroke-linecap="round"/>
+  <line x1="125" y1="326" x2="156" y2="326" stroke="#546e7a" stroke-width="6" stroke-linecap="round"/>
+  <line x1="125" y1="346" x2="156" y2="346" stroke="#546e7a" stroke-width="6" stroke-linecap="round"/>
+  <line x1="125" y1="366" x2="156" y2="366" stroke="#546e7a" stroke-width="6" stroke-linecap="round"/>
+  <line x1="125" y1="386" x2="156" y2="386" stroke="#546e7a" stroke-width="6" stroke-linecap="round"/>
+  <line x1="125" y1="406" x2="156" y2="406" stroke="#546e7a" stroke-width="6" stroke-linecap="round"/>
+  <!-- CPU pins right -->
+  <line x1="356" y1="286" x2="387" y2="286" stroke="#546e7a" stroke-width="6" stroke-linecap="round"/>
+  <line x1="356" y1="306" x2="387" y2="306" stroke="#546e7a" stroke-width="6" stroke-linecap="round"/>
+  <line x1="356" y1="326" x2="387" y2="326" stroke="#546e7a" stroke-width="6" stroke-linecap="round"/>
+  <line x1="356" y1="346" x2="387" y2="346" stroke="#546e7a" stroke-width="6" stroke-linecap="round"/>
+  <line x1="356" y1="366" x2="387" y2="366" stroke="#546e7a" stroke-width="6" stroke-linecap="round"/>
+  <line x1="356" y1="386" x2="387" y2="386" stroke="#546e7a" stroke-width="6" stroke-linecap="round"/>
+  <line x1="356" y1="406" x2="387" y2="406" stroke="#546e7a" stroke-width="6" stroke-linecap="round"/>
+  <!-- CPU pins top -->
+  <line x1="196" y1="225" x2="196" y2="256" stroke="#546e7a" stroke-width="6" stroke-linecap="round"/>
+  <line x1="216" y1="225" x2="216" y2="256" stroke="#546e7a" stroke-width="6" stroke-linecap="round"/>
+  <line x1="236" y1="225" x2="236" y2="256" stroke="#546e7a" stroke-width="6" stroke-linecap="round"/>
+  <line x1="256" y1="225" x2="256" y2="256" stroke="#546e7a" stroke-width="6" stroke-linecap="round"/>
+  <line x1="276" y1="225" x2="276" y2="256" stroke="#546e7a" stroke-width="6" stroke-linecap="round"/>
+  <line x1="296" y1="225" x2="296" y2="256" stroke="#546e7a" stroke-width="6" stroke-linecap="round"/>
+  <line x1="316" y1="225" x2="316" y2="256" stroke="#546e7a" stroke-width="6" stroke-linecap="round"/>
+  <!-- Hot glow on chip -->
+  <rect x="156" y="256" width="200" height="200" rx="14" fill="url(#hot)" filter="url(#glow)"/>
+  <!-- Flame erupting from chip -->
+  <path d="M256 256 Q225 210 228 170 Q231 130 256 110 Q281 130 284 170 Q287 210 256 256 Z" fill="url(#flame-core)" filter="url(#glow)"/>
+  <path d="M220 256 Q195 225 200 195 Q205 165 220 150 Q235 180 230 200 Q240 220 220 256 Z" fill="#ff9800" opacity="0.6" filter="url(#glow)"/>
+  <path d="M292 256 Q317 225 312 195 Q307 165 292 150 Q277 180 282 200 Q272 220 292 256 Z" fill="#ff9800" opacity="0.6" filter="url(#glow)"/>
+</svg>

@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a237e"/>
+      <stop offset="100%" stop-color="#283593"/>
+    </linearGradient>
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#f5f5f5"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Large flag card center -->
+  <rect x="96" y="120" width="320" height="200" rx="16" fill="url(#cardGrad)" stroke="#3949ab" stroke-width="2"/>
+  <!-- Flag inside card (generic tricolor) -->
+  <rect x="110" y="134" width="292" height="58" rx="8" fill="#002395"/>
+  <rect x="110" y="192" width="292" height="58" fill="white"/>
+  <rect x="110" y="250" width="292" height="56" rx="0 0 8 8" fill="#ED2939"/>
+  <!-- Question overlay on flag -->
+  <rect x="215" y="145" width="82" height="100" rx="6" fill="#1a237e" opacity="0.85"/>
+  <text x="256" y="205" font-family="Arial" font-size="52" font-weight="900" fill="white" text-anchor="middle">?</text>
+  <!-- Which country text -->
+  <text x="256" y="108" font-family="Arial" font-size="18" font-weight="bold" fill="#e8eaf6" text-anchor="middle">Which country is this flag?</text>
+  <!-- Answer options -->
+  <rect x="70" y="345" width="170" height="42" rx="10" fill="#c62828"/>
+  <text x="155" y="372" font-family="Arial" font-size="16" font-weight="bold" fill="white" text-anchor="middle">A. France</text>
+  <rect x="272" y="345" width="170" height="42" rx="10" fill="#1565c0"/>
+  <text x="357" y="372" font-family="Arial" font-size="16" font-weight="bold" fill="white" text-anchor="middle">B. Netherlands</text>
+  <rect x="70" y="400" width="170" height="42" rx="10" fill="#2e7d32"/>
+  <text x="155" y="427" font-family="Arial" font-size="16" font-weight="bold" fill="white" text-anchor="middle">C. Russia</text>
+  <rect x="272" y="400" width="170" height="42" rx="10" fill="#6a1b9a"/>
+  <text x="357" y="427" font-family="Arial" font-size="16" font-weight="bold" fill="white" text-anchor="middle">D. Luxembourg</text>
+  <!-- Score -->
+  <text x="430" y="95" font-family="Arial" font-size="14" fill="#9fa8da" text-anchor="middle">Score</text>
+  <text x="430" y="115" font-family="Arial" font-size="24" font-weight="bold" fill="#ffee58" text-anchor="middle">840</text>
+  <!-- Timer -->
+  <circle cx="90" cy="100" r="24" fill="none" stroke="#ff5252" stroke-width="3"/>
+  <text x="90" y="107" font-family="Arial" font-size="16" font-weight="bold" fill="#ff5252" text-anchor="middle">12</text>
+  <!-- GEO QUIZ title -->
+  <text x="256" y="490" font-family="Arial" font-size="28" font-weight="900" fill="#ffee58" text-anchor="middle" letter-spacing="3">GEO.QUIZ</text>
+</svg>

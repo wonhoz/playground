@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#7F0000"/>
+      <stop offset="100%" stop-color="#B71C1C"/>
+    </linearGradient>
+    <linearGradient id="loop" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FF8A80"/>
+      <stop offset="100%" stop-color="#FF1744"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Infinity loop for idle -->
+  <path d="M128 256 C128 200 176 160 232 160 C260 160 282 174 300 192 C318 174 340 160 368 160 C424 160 472 200 472 256 C472 312 424 352 368 352 C340 352 318 338 300 320 C282 338 260 352 232 352 C176 352 128 312 128 256Z" fill="none" stroke="url(#loop)" stroke-width="28"/>
+  <!-- Code brackets inside loops -->
+  <text x="210" y="268" text-anchor="middle" font-size="36" fill="#FF8A80" font-family="Courier New" font-weight="bold">&lt;</text>
+  <text x="390" y="268" text-anchor="middle" font-size="36" fill="#FF8A80" font-family="Courier New" font-weight="bold">/&gt;</text>
+  <!-- Auto / Idle text -->
+  <rect x="256" y="228" width="88" height="56" rx="8" fill="#7F0000"/>
+  <text x="300" y="253" text-anchor="middle" font-size="13" fill="#FF8A80" font-family="Arial">AUTO</text>
+  <text x="300" y="273" text-anchor="middle" font-size="13" fill="#FFCDD2" font-family="Arial" font-weight="bold">IDLE</text>
+  <!-- Sparks -->
+  <circle cx="300" cy="160" r="8" fill="#FF8A80" opacity="0.9"/>
+  <circle cx="300" cy="352" r="8" fill="#FF8A80" opacity="0.9"/>
+  <circle cx="128" cy="256" r="8" fill="#FF1744" opacity="0.8"/>
+  <circle cx="472" cy="256" r="8" fill="#FF1744" opacity="0.8"/>
+</svg>

@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#263238"/>
+      <stop offset="100%" stop-color="#37474f"/>
+    </linearGradient>
+    <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#a5d6a7"/>
+      <stop offset="100%" stop-color="#c8e6c9"/>
+    </linearGradient>
+    <linearGradient id="g2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#66bb6a"/>
+      <stop offset="100%" stop-color="#81c784"/>
+    </linearGradient>
+    <linearGradient id="g3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2e7d32"/>
+      <stop offset="100%" stop-color="#43a047"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- 땅 라인 -->
+  <line x1="60" y1="420" x2="452" y2="420" stroke="#5d4037" stroke-width="12" stroke-linecap="round"/>
+  <!-- 성장 단계 1 (새싹) -->
+  <line x1="110" y1="420" x2="110" y2="380" stroke="url(#g1)" stroke-width="8"/>
+  <path d="M110 380 Q90 360 95 340 Q115 355 110 380" fill="url(#g1)"/>
+  <!-- 성장 단계 2 -->
+  <line x1="210" y1="420" x2="210" y2="330" stroke="url(#g2)" stroke-width="10"/>
+  <path d="M210 370 Q180 340 185 310 Q215 330 210 370" fill="url(#g2)"/>
+  <path d="M210 350 Q240 320 235 290 Q205 310 210 350" fill="url(#g2)" opacity="0.8"/>
+  <!-- 성장 단계 3 -->
+  <line x1="310" y1="420" x2="310" y2="260" stroke="url(#g3)" stroke-width="12"/>
+  <path d="M310 360 Q260 310 265 260 Q310 290 310 360" fill="url(#g3)"/>
+  <path d="M310 320 Q360 270 355 220 Q305 250 310 320" fill="url(#g3)" opacity="0.8"/>
+  <path d="M310 280 Q280 230 285 190 Q320 215 310 280" fill="url(#g3)" opacity="0.9"/>
+  <!-- 성장 단계 4 (완성) -->
+  <line x1="420" y1="420" x2="420" y2="200" stroke="#1b5e20" stroke-width="14"/>
+  <path d="M420 380 Q355 320 360 265 Q415 295 420 380" fill="#2e7d32"/>
+  <path d="M420 320 Q480 260 475 205 Q415 235 420 320" fill="#388e3c"/>
+  <path d="M420 265 Q365 205 370 155 Q420 185 420 265" fill="#43a047"/>
+  <path d="M420 230 Q470 185 465 145 Q415 168 420 230" fill="#4caf50" opacity="0.9"/>
+  <circle cx="420" cy="165" r="28" fill="#66bb6a"/>
+</svg>

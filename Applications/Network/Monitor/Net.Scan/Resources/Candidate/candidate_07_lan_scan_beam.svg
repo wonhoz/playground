@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#050510"/>
+      <stop offset="100%" stop-color="#0a0a20"/>
+    </linearGradient>
+    <linearGradient id="beam" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#7c4dff" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#7c4dff" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="device" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#b39ddb"/>
+      <stop offset="100%" stop-color="#512da8"/>
+    </linearGradient>
+    <filter id="glow"><feGaussianBlur stdDeviation="8"/></filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- scan beam sweeping right -->
+  <path d="M90 256 L300 150 L300 362 Z" fill="url(#beam)" opacity="0.5"/>
+  <line x1="90" y1="256" x2="420" y2="256" stroke="#7c4dff" stroke-width="4" filter="url(#glow)"/>
+  <!-- source emitter -->
+  <circle cx="90" cy="256" r="22" fill="url(#device)" filter="url(#glow)"/>
+  <circle cx="90" cy="256" r="12" fill="#b39ddb"/>
+  <!-- devices on the right being scanned -->
+  <!-- desktop -->
+  <rect x="330" y="165" width="60" height="44" rx="6" fill="url(#device)"/>
+  <rect x="348" y="209" width="24" height="8" rx="3" fill="#512da8"/>
+  <rect x="332" y="217" width="56" height="8" rx="3" fill="#4527a0"/>
+  <!-- laptop -->
+  <rect x="330" y="265" width="60" height="38" rx="5" fill="url(#device)"/>
+  <rect x="322" y="303" width="76" height="10" rx="4" fill="#4527a0"/>
+  <!-- phone -->
+  <rect x="352" y="335" width="22" height="36" rx="6" fill="url(#device)"/>
+  <circle cx="363" cy="365" r="4" fill="#b39ddb"/>
+  <!-- connection lines from scanner -->
+  <line x1="112" y1="256" x2="330" y2="187" stroke="#7c4dff" stroke-width="2" opacity="0.4" stroke-dasharray="10,8"/>
+  <line x1="112" y1="256" x2="330" y2="284" stroke="#7c4dff" stroke-width="2" opacity="0.4" stroke-dasharray="10,8"/>
+</svg>

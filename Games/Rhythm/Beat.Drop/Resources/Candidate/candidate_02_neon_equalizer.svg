@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#050510"/>
+      <stop offset="100%" stop-color="#0a0a20"/>
+    </linearGradient>
+    <linearGradient id="bar1" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0%" stop-color="#00FFFF"/>
+      <stop offset="100%" stop-color="#0044FF"/>
+    </linearGradient>
+    <linearGradient id="bar2" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0%" stop-color="#FF00FF"/>
+      <stop offset="100%" stop-color="#8800FF"/>
+    </linearGradient>
+    <linearGradient id="bar3" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0%" stop-color="#00FF88"/>
+      <stop offset="100%" stop-color="#0088FF"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Floor line -->
+  <line x1="64" y1="400" x2="448" y2="400" stroke="#333" stroke-width="2"/>
+  <!-- EQ bars with glow -->
+  <rect x="72" y="280" width="36" height="120" rx="6" fill="url(#bar1)" opacity="0.85"/>
+  <rect x="72" y="280" width="36" height="120" rx="6" fill="none" stroke="#00FFFF" stroke-width="2" opacity="0.4"/>
+
+  <rect x="124" y="200" width="36" height="200" rx="6" fill="url(#bar2)" opacity="0.85"/>
+  <rect x="124" y="200" width="36" height="200" rx="6" fill="none" stroke="#FF00FF" stroke-width="2" opacity="0.4"/>
+
+  <rect x="176" y="140" width="36" height="260" rx="6" fill="url(#bar3)" opacity="0.85"/>
+  <rect x="176" y="140" width="36" height="260" rx="6" fill="none" stroke="#00FF88" stroke-width="2" opacity="0.4"/>
+
+  <rect x="228" y="100" width="36" height="300" rx="6" fill="url(#bar1)" opacity="0.9"/>
+  <rect x="228" y="100" width="36" height="300" rx="6" fill="none" stroke="#00FFFF" stroke-width="2" opacity="0.4"/>
+
+  <rect x="280" y="120" width="36" height="280" rx="6" fill="url(#bar2)" opacity="0.85"/>
+  <rect x="332" y="160" width="36" height="240" rx="6" fill="url(#bar3)" opacity="0.8"/>
+  <rect x="384" y="220" width="36" height="180" rx="6" fill="url(#bar1)" opacity="0.75"/>
+
+  <!-- Beat drop arrow from top -->
+  <polygon points="256,50 280,95 232,95" fill="#FF00FF" opacity="0.9"/>
+  <line x1="256" y1="95" x2="256" y2="100" stroke="#FF00FF" stroke-width="4" opacity="0.7"/>
+</svg>

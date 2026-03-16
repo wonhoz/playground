@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="40%" r="70%">
+      <stop offset="0%" stop-color="#1A0A00"/>
+      <stop offset="100%" stop-color="#0D0500"/>
+    </radialGradient>
+    <linearGradient id="shield" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#F7971E"/>
+      <stop offset="100%" stop-color="#FFD200"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="5" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Shield shape -->
+  <path d="M256 80 L400 140 L400 270 Q400 380 256 440 Q112 380 112 270 L112 140 Z" fill="#1A0A00" stroke="url(#shield)" stroke-width="6" filter="url(#glow)"/>
+  <!-- Inner shield fill -->
+  <path d="M256 100 L385 154 L385 268 Q385 368 256 422 Q127 368 127 268 L127 154 Z" fill="#2A1500" opacity="0.8"/>
+  <!-- Warning exclamation -->
+  <text x="256" y="310" text-anchor="middle" font-family="Segoe UI" font-size="160" font-weight="900" fill="url(#shield)" filter="url(#glow)">!</text>
+  <!-- Event badges -->
+  <circle cx="156" cy="460" r="22" fill="#E74C3C"/>
+  <text x="156" y="467" text-anchor="middle" font-family="Segoe UI" font-size="18" font-weight="700" fill="#FFF">ERR</text>
+  <circle cx="256" cy="468" r="22" fill="#F7971E"/>
+  <text x="256" y="475" text-anchor="middle" font-family="Segoe UI" font-size="18" font-weight="700" fill="#FFF">WRN</text>
+  <circle cx="356" cy="460" r="22" fill="#3498DB"/>
+  <text x="356" y="467" text-anchor="middle" font-family="Segoe UI" font-size="18" font-weight="700" fill="#FFF">INF</text>
+</svg>

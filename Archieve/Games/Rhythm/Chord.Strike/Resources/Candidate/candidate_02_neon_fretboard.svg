@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#000814"/>
+      <stop offset="100%" stop-color="#001233"/>
+    </linearGradient>
+    <linearGradient id="neck" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#2d1b00"/>
+      <stop offset="100%" stop-color="#4a2e00"/>
+    </linearGradient>
+    <filter id="neon">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Fretboard perspective -->
+  <polygon points="180,60 332,60 420,450 92,450" fill="url(#neck)"/>
+  <!-- Fret lines -->
+  <line x1="170" y1="120" x2="342" y2="120" stroke="#00ffff" stroke-width="3" opacity="0.8" filter="url(#neon)"/>
+  <line x1="162" y1="185" x2="350" y2="185" stroke="#00ffff" stroke-width="3" opacity="0.8" filter="url(#neon)"/>
+  <line x1="153" y1="255" x2="359" y2="255" stroke="#00ffff" stroke-width="3" opacity="0.7" filter="url(#neon)"/>
+  <line x1="143" y1="330" x2="369" y2="330" stroke="#00ffff" stroke-width="3" opacity="0.6" filter="url(#neon)"/>
+  <line x1="132" y1="410" x2="380" y2="410" stroke="#00ffff" stroke-width="3" opacity="0.5" filter="url(#neon)"/>
+  <!-- Strings -->
+  <line x1="195" y1="60" x2="118" y2="450" stroke="#ff00ff" stroke-width="2.5" filter="url(#neon)"/>
+  <line x1="218" y1="60" x2="163" y2="450" stroke="#ff00aa" stroke-width="2.5" filter="url(#neon)"/>
+  <line x1="241" y1="60" x2="209" y2="450" stroke="#ff0066" stroke-width="2" filter="url(#neon)"/>
+  <line x1="264" y1="60" x2="255" y2="450" stroke="#ff4400" stroke-width="2" filter="url(#neon)"/>
+  <line x1="287" y1="60" x2="301" y2="450" stroke="#ffaa00" stroke-width="2" filter="url(#neon)"/>
+  <line x1="310" y1="60" x2="348" y2="450" stroke="#ffff00" stroke-width="2" filter="url(#neon)"/>
+  <!-- Chord dots -->
+  <circle cx="207" cy="152" r="16" fill="#ff00ff" filter="url(#neon)"/>
+  <circle cx="255" cy="152" r="16" fill="#ff00ff" filter="url(#neon)"/>
+  <circle cx="279" cy="220" r="16" fill="#00ffff" filter="url(#neon)"/>
+  <circle cx="231" cy="220" r="16" fill="#00ffff" filter="url(#neon)"/>
+  <!-- Title text -->
+  <text x="256" y="490" text-anchor="middle" font-family="Arial Black" font-size="24" fill="#00ffff" opacity="0.9" filter="url(#neon)">CHORD STRIKE</text>
+</svg>

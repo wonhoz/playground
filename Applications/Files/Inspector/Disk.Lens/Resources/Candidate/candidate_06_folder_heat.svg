@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A0A00"/>
+      <stop offset="100%" stop-color="#2D1600"/>
+    </linearGradient>
+    <linearGradient id="folderHot" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#EF4444"/>
+      <stop offset="100%" stop-color="#B91C1C"/>
+    </linearGradient>
+    <linearGradient id="folderWarm" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#F97316"/>
+      <stop offset="100%" stop-color="#C2410C"/>
+    </linearGradient>
+    <linearGradient id="folderCool" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#22C55E"/>
+      <stop offset="100%" stop-color="#15803D"/>
+    </linearGradient>
+    <linearGradient id="folderCold" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#3B82F6"/>
+      <stop offset="100%" stop-color="#1D4ED8"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Large hot folder (top-left) -->
+  <path d="M60,130 Q60,110 80,110 L180,110 Q195,110 200,125 L220,125 Q240,125 240,145 L240,270 Q240,290 220,290 L80,290 Q60,290 60,270 Z" fill="url(#folderHot)"/>
+  <text x="150" y="205" font-family="sans-serif" font-size="12" fill="white" text-anchor="middle">System</text>
+  <text x="150" y="222" font-family="sans-serif" font-size="11" fill="#FCA5A5" text-anchor="middle">186 GB</text>
+  <!-- Medium warm folder (top-right) -->
+  <path d="M260,155 Q260,140 275,140 L350,140 Q360,140 365,152 L380,152 Q395,152 395,165 L395,270 Q395,285 380,285 L275,285 Q260,285 260,270 Z" fill="url(#folderWarm)"/>
+  <text x="327" y="218" font-family="sans-serif" font-size="11" fill="white" text-anchor="middle">Games</text>
+  <text x="327" y="234" font-family="sans-serif" font-size="10" fill="#FED7AA" text-anchor="middle">55 GB</text>
+  <!-- Small cool folder -->
+  <path d="M415,175 Q415,163 425,163 L470,163 Q478,163 480,172 L488,172 Q496,172 496,180 L496,270 Q496,282 488,282 L425,282 Q415,282 415,270 Z" fill="url(#folderCool)"/>
+  <text x="455" y="228" font-family="sans-serif" font-size="10" fill="white" text-anchor="middle">Docs</text>
+  <text x="455" y="243" font-family="sans-serif" font-size="9" fill="#BBF7D0" text-anchor="middle">12 GB</text>
+  <!-- Medium cool folder (bottom-left) -->
+  <path d="M60,310 Q60,295 75,295 L175,295 Q185,295 190,306 L205,306 Q220,306 220,318 L220,420 Q220,435 205,435 L75,435 Q60,435 60,420 Z" fill="url(#folderCold)"/>
+  <text x="140" y="370" font-family="sans-serif" font-size="11" fill="white" text-anchor="middle">Programs</text>
+  <text x="140" y="386" font-family="sans-serif" font-size="10" fill="#BFDBFE" text-anchor="middle">78 GB</text>
+  <!-- Small folder bottom-right -->
+  <path d="M240,340 Q240,325 252,325 L310,325 Q320,325 322,335 L336,335 Q348,335 348,345 L348,420 Q348,432 336,432 L252,432 Q240,432 240,420 Z" fill="url(#folderWarm)" opacity="0.7"/>
+  <text x="294" y="382" font-family="sans-serif" font-size="10" fill="white" text-anchor="middle">Media</text>
+  <text x="294" y="397" font-family="sans-serif" font-size="9" fill="#FED7AA" text-anchor="middle">32 GB</text>
+  <!-- Heat legend bar -->
+  <defs>
+    <linearGradient id="heatLegend" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#3B82F6"/>
+      <stop offset="50%" stop-color="#22C55E"/>
+      <stop offset="75%" stop-color="#F97316"/>
+      <stop offset="100%" stop-color="#EF4444"/>
+    </linearGradient>
+  </defs>
+  <rect x="370" y="340" width="100" height="14" rx="7" fill="url(#heatLegend)"/>
+  <text x="370" y="372" font-family="sans-serif" font-size="10" fill="#9CA3AF">Small</text>
+  <text x="440" y="372" font-family="sans-serif" font-size="10" fill="#9CA3AF">Large</text>
+</svg>

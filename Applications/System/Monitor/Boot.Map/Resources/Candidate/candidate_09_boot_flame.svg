@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="70%" r="70%">
+      <stop offset="0%" style="stop-color:#1a0a00"/>
+      <stop offset="100%" style="stop-color:#0a0500"/>
+    </radialGradient>
+    <radialGradient id="flame1" cx="50%" cy="80%" r="70%">
+      <stop offset="0%" style="stop-color:#ffffff"/>
+      <stop offset="15%" style="stop-color:#fff3e0"/>
+      <stop offset="40%" style="stop-color:#ff9800"/>
+      <stop offset="70%" style="stop-color:#e53935"/>
+      <stop offset="100%" style="stop-color:#b71c1c;stop-opacity:0"/>
+    </radialGradient>
+    <radialGradient id="flame2" cx="50%" cy="80%" r="70%">
+      <stop offset="0%" style="stop-color:#ffffff"/>
+      <stop offset="20%" style="stop-color:#fff8e1"/>
+      <stop offset="50%" style="stop-color:#ffc107"/>
+      <stop offset="100%" style="stop-color:#ff6d00;stop-opacity:0"/>
+    </radialGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Outer flame -->
+  <path d="M256 420 Q180 380 165 320 Q150 260 190 210 Q210 180 220 150 Q230 120 256 100 Q282 120 292 150 Q302 180 322 210 Q362 260 347 320 Q332 380 256 420 Z" fill="url(#flame1)" filter="url(#glow)"/>
+  <!-- Inner flame -->
+  <path d="M256 410 Q200 375 192 320 Q184 265 214 220 Q232 195 238 170 Q244 145 256 130 Q268 145 274 170 Q280 195 298 220 Q328 265 320 320 Q312 375 256 410 Z" fill="url(#flame2)" filter="url(#glow)"/>
+  <!-- Core flame (white-hot) -->
+  <path d="M256 400 Q228 370 224 328 Q220 286 244 256 Q250 244 256 235 Q262 244 268 256 Q292 286 288 328 Q284 370 256 400 Z" fill="#ffffff" opacity="0.9" filter="url(#glow)"/>
+  <!-- Boot data flowing up through flame -->
+  <line x1="256" y1="430" x2="244" y2="200" stroke="#0091ea" stroke-width="2.5" opacity="0.6" stroke-dasharray="10,8" filter="url(#glow)"/>
+  <line x1="270" y1="440" x2="268" y2="210" stroke="#00e5ff" stroke-width="2" opacity="0.5" stroke-dasharray="8,10"/>
+  <!-- Boot speed annotation -->
+  <circle cx="360" cy="300" r="30" fill="#1a0a00" stroke="#ff9800" stroke-width="2" filter="url(#glow)"/>
+  <path d="M346 300 L374 300 M360 286 L360 300" stroke="#ffc107" stroke-width="3" stroke-linecap="round"/>
+  <!-- Speed trails -->
+  <path d="M385 290 L430 250 L420 270 L445 260" stroke="#ff9800" stroke-width="2" fill="none" opacity="0.7" stroke-linecap="round"/>
+  <!-- Ember particles -->
+  <circle cx="160" cy="200" r="4" fill="#ff9800" filter="url(#glow)" opacity="0.8"/>
+  <circle cx="140" cy="240" r="3" fill="#ffc107" filter="url(#glow)" opacity="0.7"/>
+  <circle cx="175" cy="280" r="3" fill="#ff9800" opacity="0.6"/>
+  <circle cx="360" cy="180" r="4" fill="#ff6d00" filter="url(#glow)" opacity="0.8"/>
+  <circle cx="390" cy="220" r="3" fill="#ff9800" opacity="0.7"/>
+</svg>

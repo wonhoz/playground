@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0a20"/>
+      <stop offset="100%" stop-color="#141440"/>
+    </linearGradient>
+    <linearGradient id="body" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#546e7a"/>
+      <stop offset="100%" stop-color="#263238"/>
+    </linearGradient>
+    <linearGradient id="lens" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#80deea"/>
+      <stop offset="100%" stop-color="#006064"/>
+    </linearGradient>
+    <filter id="glow"><feGaussianBlur stdDeviation="10"/></filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- binocular left barrel -->
+  <rect x="100" y="190" width="110" height="160" rx="20" fill="url(#body)"/>
+  <!-- binocular right barrel -->
+  <rect x="302" y="190" width="110" height="160" rx="20" fill="url(#body)"/>
+  <!-- bridge connecting them -->
+  <rect x="208" y="235" width="96" height="60" rx="10" fill="#37474f"/>
+  <!-- left lens glow -->
+  <circle cx="155" cy="260" r="45" fill="url(#lens)" filter="url(#glow)"/>
+  <circle cx="155" cy="260" r="32" fill="#006064"/>
+  <circle cx="155" cy="260" r="22" fill="#00acc1"/>
+  <ellipse cx="142" cy="248" rx="10" ry="6" fill="white" opacity="0.25" transform="rotate(-20 142 248)"/>
+  <!-- right lens glow -->
+  <circle cx="357" cy="260" r="45" fill="url(#lens)" filter="url(#glow)"/>
+  <circle cx="357" cy="260" r="32" fill="#006064"/>
+  <circle cx="357" cy="260" r="22" fill="#00acc1"/>
+  <ellipse cx="344" cy="248" rx="10" ry="6" fill="white" opacity="0.25" transform="rotate(-20 344 248)"/>
+  <!-- network port icon below -->
+  <rect x="180" y="380" width="152" height="60" rx="10" fill="#263238"/>
+  <rect x="200" y="395" width="22" height="30" rx="4" fill="#00acc1"/>
+  <rect x="234" y="395" width="22" height="30" rx="4" fill="#00acc1"/>
+  <rect x="268" y="395" width="22" height="30" rx="4" fill="#00acc1"/>
+</svg>

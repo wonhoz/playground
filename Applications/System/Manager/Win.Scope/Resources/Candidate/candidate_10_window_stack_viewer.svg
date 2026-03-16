@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#F0F4F8"/>
+      <stop offset="100%" stop-color="#D9E2EC"/>
+    </linearGradient>
+    <linearGradient id="header" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#3A86FF"/>
+      <stop offset="100%" stop-color="#8338EC"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- App window frame -->
+  <rect x="48" y="60" width="416" height="392" rx="14" fill="#FFFFFF" stroke="#CBD5E0" stroke-width="2"/>
+  <!-- Titlebar -->
+  <rect x="48" y="60" width="416" height="44" rx="14" fill="url(#header)"/>
+  <circle cx="76" cy="82" r="9" fill="#FF5F57"/>
+  <circle cx="102" cy="82" r="9" fill="#FEBC2E"/>
+  <circle cx="128" cy="82" r="9" fill="#28C840"/>
+  <text x="256" y="88" text-anchor="middle" font-family="Segoe UI" font-size="16" font-weight="700" fill="#FFF">Win.Scope — Window Explorer</text>
+  <!-- Column headers -->
+  <rect x="48" y="104" width="416" height="30" fill="#EDF2F7"/>
+  <text x="68" y="123" font-family="Segoe UI" font-size="13" font-weight="600" fill="#4A5568">Process</text>
+  <text x="210" y="123" font-family="Segoe UI" font-size="13" font-weight="600" fill="#4A5568">HWND</text>
+  <text x="310" y="123" font-family="Segoe UI" font-size="13" font-weight="600" fill="#4A5568">Size</text>
+  <text x="400" y="123" font-family="Segoe UI" font-size="13" font-weight="600" fill="#4A5568">Z</text>
+  <!-- Rows -->
+  <rect x="48" y="134" width="416" height="30" fill="#F7FAFC"/>
+  <rect x="62" y="141" width="10" height="16" rx="2" fill="#3A86FF"/>
+  <text x="80" y="154" font-family="Segoe UI" font-size="13" fill="#2D3748">chrome.exe</text>
+  <text x="210" y="154" font-family="Segoe UI" font-size="13" fill="#4A5568">0x20034</text>
+  <text x="310" y="154" font-family="Segoe UI" font-size="13" fill="#4A5568">1920x1080</text>
+  <text x="406" y="154" font-family="Segoe UI" font-size="13" font-weight="700" fill="#3A86FF">1</text>
+  <rect x="48" y="164" width="416" height="30" fill="#FFF"/>
+  <rect x="62" y="171" width="10" height="16" rx="2" fill="#8338EC"/>
+  <text x="80" y="184" font-family="Segoe UI" font-size="13" fill="#2D3748">code.exe</text>
+  <text x="210" y="184" font-family="Segoe UI" font-size="13" fill="#4A5568">0x50028</text>
+  <text x="310" y="184" font-family="Segoe UI" font-size="13" fill="#4A5568">1280x720</text>
+  <text x="406" y="184" font-family="Segoe UI" font-size="13" fill="#718096">2</text>
+  <rect x="48" y="194" width="416" height="30" fill="#F7FAFC"/>
+  <rect x="62" y="201" width="10" height="16" rx="2" fill="#38B2AC"/>
+  <text x="80" y="214" font-family="Segoe UI" font-size="13" fill="#2D3748">notepad.exe</text>
+  <text x="210" y="214" font-family="Segoe UI" font-size="13" fill="#4A5568">0x1E04</text>
+  <text x="310" y="214" font-family="Segoe UI" font-size="13" fill="#4A5568">800x600</text>
+  <text x="406" y="214" font-family="Segoe UI" font-size="13" fill="#718096">3</text>
+  <rect x="48" y="224" width="416" height="30" fill="#FFF"/>
+  <rect x="62" y="231" width="10" height="16" rx="2" fill="#E53E3E"/>
+  <text x="80" y="244" font-family="Segoe UI" font-size="13" fill="#2D3748">explorer.exe</text>
+  <text x="210" y="244" font-family="Segoe UI" font-size="13" fill="#4A5568">0xA012</text>
+  <text x="310" y="244" font-family="Segoe UI" font-size="13" fill="#4A5568">1920x40</text>
+  <text x="406" y="244" font-family="Segoe UI" font-size="13" fill="#718096">4</text>
+  <rect x="48" y="254" width="416" height="30" fill="#F7FAFC"/>
+  <rect x="62" y="261" width="10" height="16" rx="2" fill="#DD6B20"/>
+  <text x="80" y="274" font-family="Segoe UI" font-size="13" fill="#2D3748">slack.exe</text>
+  <text x="210" y="274" font-family="Segoe UI" font-size="13" fill="#4A5568">0x30044</text>
+  <text x="310" y="274" font-family="Segoe UI" font-size="13" fill="#4A5568">960x720</text>
+  <text x="406" y="274" font-family="Segoe UI" font-size="13" fill="#718096">5</text>
+  <!-- Detail panel -->
+  <rect x="48" y="300" width="416" height="152" rx="0" fill="#EBF4FF" stroke="#BEE3F8" stroke-width="1"/>
+  <text x="68" y="324" font-family="Segoe UI" font-size="14" font-weight="700" fill="#2B6CB0">Details: chrome.exe</text>
+  <text x="68" y="348" font-family="Segoe UI" font-size="13" fill="#4A5568">Window Title: New Tab - Google Chrome</text>
+  <text x="68" y="370" font-family="Segoe UI" font-size="13" fill="#4A5568">Class Name: Chrome_WidgetWin_1</text>
+  <text x="68" y="392" font-family="Segoe UI" font-size="13" fill="#4A5568">Extended Style: WS_EX_APPWINDOW | WS_EX_LAYERED</text>
+  <text x="68" y="414" font-family="Segoe UI" font-size="13" fill="#4A5568">Thread ID: 12840  PID: 7291  Monitor: 1</text>
+  <!-- Footer -->
+  <text x="256" y="474" text-anchor="middle" font-family="Segoe UI" font-size="22" font-weight="700" fill="#3A86FF">WIN.SCOPE</text>
+</svg>

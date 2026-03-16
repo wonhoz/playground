@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#001133"/>
+      <stop offset="100%" stop-color="#000820"/>
+    </linearGradient>
+    <radialGradient id="radarGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#004488" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#001133" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Radar circles -->
+  <circle cx="256" cy="256" r="180" fill="none" stroke="#0066CC" stroke-width="1" opacity="0.3"/>
+  <circle cx="256" cy="256" r="135" fill="none" stroke="#0066CC" stroke-width="1" opacity="0.4"/>
+  <circle cx="256" cy="256" r="90" fill="none" stroke="#0066CC" stroke-width="1" opacity="0.5"/>
+  <circle cx="256" cy="256" r="45" fill="none" stroke="#0066CC" stroke-width="1.5" opacity="0.6"/>
+  <!-- Radar crosshairs -->
+  <line x1="76" y1="256" x2="436" y2="256" stroke="#0066CC" stroke-width="1" opacity="0.3"/>
+  <line x1="256" y1="76" x2="256" y2="436" stroke="#0066CC" stroke-width="1" opacity="0.3"/>
+  <!-- Radar sweep wedge -->
+  <path d="M256 256 L436 256 A180 180 0 0 0 350 100 Z" fill="#0066CC" opacity="0.08" filter="url(#glow)"/>
+  <line x1="256" y1="256" x2="436" y2="256" stroke="#00AAFF" stroke-width="2" filter="url(#glow)" opacity="0.7"/>
+  <!-- Blips (log events) -->
+  <circle cx="340" cy="175" r="6" fill="#00AAFF" filter="url(#glow)"/>
+  <circle cx="380" cy="220" r="4" fill="#44CCFF" filter="url(#glow)" opacity="0.8"/>
+  <circle cx="310" cy="260" r="5" fill="#00AAFF" filter="url(#glow)" opacity="0.7"/>
+  <!-- Error blip (red) -->
+  <circle cx="360" cy="140" r="7" fill="#FF4444" filter="url(#glow)"/>
+  <circle cx="360" cy="140" r="12" fill="none" stroke="#FF4444" stroke-width="1.5" filter="url(#glow)" opacity="0.5"/>
+  <!-- Center dot -->
+  <circle cx="256" cy="256" r="6" fill="#00AAFF" filter="url(#glow)"/>
+  <!-- Log lines at bottom -->
+  <rect x="72" y="420" width="368" height="7" rx="3" fill="#0066CC" opacity="0.4"/>
+  <rect x="72" y="436" width="320" height="7" rx="3" fill="#0066CC" opacity="0.3"/>
+  <rect x="72" y="452" width="350" height="7" rx="3" fill="#0066CC" opacity="0.25"/>
+  <!-- TAIL label -->
+  <text x="256" y="490" font-family="'Courier New', monospace" font-size="14" text-anchor="middle" fill="#0088CC" filter="url(#glow)">LOG.TAIL MONITOR</text>
+</svg>

@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0A1628"/>
+      <stop offset="100%" stop-color="#0D2137"/>
+    </linearGradient>
+    <linearGradient id="wave" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1565C0"/>
+      <stop offset="50%" stop-color="#42A5F5"/>
+      <stop offset="100%" stop-color="#1565C0"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Signal waveform -->
+  <polyline points="60,256 100,256 110,180 120,330 130,180 140,330 150,256 200,256 210,150 220,360 230,150 240,360 250,256 300,256 310,200 320,310 330,200 340,310 350,256 400,256 412,210 424,300 436,256 460,256" stroke="url(#wave)" stroke-width="5" fill="none" stroke-linejoin="round"/>
+  <!-- Baseline -->
+  <line x1="60" y1="256" x2="460" y2="256" stroke="#1565C0" stroke-width="1" stroke-dasharray="5,5" opacity="0.4"/>
+  <!-- Flow arrows -->
+  <polygon points="460,256 440,243 440,269" fill="#42A5F5"/>
+  <!-- Label -->
+  <text x="148" y="430" font-family="monospace" font-size="22" fill="#42A5F5" letter-spacing="3">SIGNAL.FLOW</text>
+  <!-- Grid lines -->
+  <line x1="60" y1="180" x2="460" y2="180" stroke="#1565C0" stroke-width="0.5" opacity="0.2"/>
+  <line x1="60" y1="330" x2="460" y2="330" stroke="#1565C0" stroke-width="0.5" opacity="0.2"/>
+</svg>

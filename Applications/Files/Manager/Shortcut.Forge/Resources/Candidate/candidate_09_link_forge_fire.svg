@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1c0a00"/>
+      <stop offset="100%" stop-color="#2d0f00"/>
+    </linearGradient>
+    <linearGradient id="link" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffcc80"/>
+      <stop offset="100%" stop-color="#e65100"/>
+    </linearGradient>
+    <linearGradient id="fire" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#e64a19"/>
+      <stop offset="60%" stop-color="#ffca28"/>
+      <stop offset="100%" stop-color="#fff9c4" stop-opacity="0.7"/>
+    </linearGradient>
+    <filter id="glow"><feGaussianBlur stdDeviation="10"/></filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- fire background -->
+  <path d="M145 430 Q135 370 162 330 Q155 365 180 345 Q170 318 195 290 Q192 328 218 308 Q210 278 235 255 Q240 288 268 268 Q260 238 285 218 Q288 255 315 235 Q308 268 335 250 Q328 285 358 265 Q350 302 370 285 Q362 335 358 430 Z" fill="url(#fire)" opacity="0.7" filter="url(#glow)"/>
+  <!-- link chain being forged -->
+  <path d="M130 240 Q130 185 185 185 L240 185 Q295 185 295 240 Q295 295 240 295 L185 295 Q130 295 130 240 Z" fill="none" stroke="url(#link)" stroke-width="35"/>
+  <path d="M240 240 Q240 185 295 185 L350 185 Q405 185 405 240 Q405 295 350 295 L295 295 Q240 295 240 240 Z" fill="none" stroke="#ff6d00" stroke-width="35"/>
+  <!-- heat shimmer at base -->
+  <ellipse cx="256" cy="300" r="120" fill="#ff5722" opacity="0.15" filter="url(#glow)"/>
+  <!-- sparks floating up -->
+  <circle cx="205" cy="230" r="4" fill="#ffe082"/>
+  <circle cx="260" cy="210" r="3" fill="#fff9c4"/>
+  <circle cx="320" cy="225" r="4" fill="#ffe082"/>
+  <circle cx="240" cy="190" r="2" fill="white" opacity="0.8"/>
+  <circle cx="290" cy="185" r="2" fill="#ffe082" opacity="0.7"/>
+</svg>

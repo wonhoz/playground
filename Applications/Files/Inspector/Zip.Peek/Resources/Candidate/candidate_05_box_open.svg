@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0d1117"/>
+      <stop offset="100%" stop-color="#161b22"/>
+    </linearGradient>
+    <linearGradient id="boxFront" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e40af"/>
+      <stop offset="100%" stop-color="#1d4ed8"/>
+    </linearGradient>
+    <linearGradient id="boxSide" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e3a8a"/>
+      <stop offset="100%" stop-color="#172554"/>
+    </linearGradient>
+    <linearGradient id="boxTop" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3b82f6"/>
+      <stop offset="100%" stop-color="#2563eb"/>
+    </linearGradient>
+    <linearGradient id="lidGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#60a5fa"/>
+      <stop offset="100%" stop-color="#3b82f6"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- 박스 본체 -->
+  <!-- 옆면 -->
+  <polygon points="380,220 460,180 460,360 380,400" fill="url(#boxSide)" stroke="#1d4ed8" stroke-width="1.5"/>
+  <!-- 앞면 -->
+  <polygon points="140,220 380,220 380,400 140,400" fill="url(#boxFront)" stroke="#3b82f6" stroke-width="1.5"/>
+  <!-- 윗면 -->
+  <polygon points="140,220 380,220 460,180 220,180" fill="url(#boxTop)" stroke="#60a5fa" stroke-width="1.5"/>
+  <!-- 박스 안 내용물 (파일들) -->
+  <rect x="180" y="250" width="50" height="60" rx="5" fill="#fbbf24" opacity="0.9"/>
+  <text x="205" y="285" font-family="Arial" font-weight="bold" font-size="11" fill="#1c1400" text-anchor="middle">ZIP</text>
+  <rect x="240" y="255" width="44" height="56" rx="5" fill="#4ade80" opacity="0.9"/>
+  <text x="262" y="289" font-family="Arial" font-size="10" fill="#14532d" text-anchor="middle">.txt</text>
+  <rect x="294" y="260" width="44" height="52" rx="5" fill="#f472b6" opacity="0.9"/>
+  <text x="316" y="292" font-family="Arial" font-size="10" fill="#831843" text-anchor="middle">.png</text>
+  <!-- 뚜껑 (열려있음, 뒤로 젖혀진 상태) -->
+  <polygon points="140,220 380,220 460,180 220,180" fill="url(#lidGrad)" stroke="#93c5fd" stroke-width="2" opacity="0.85" transform="rotate(-45, 140, 220)"/>
+  <!-- 뚜껑 테이프 선 -->
+  <line x1="260" y1="220" x2="260" y2="400" stroke="#1e3a8a" stroke-width="3" opacity="0.5"/>
+  <!-- 발광 효과 (열린 상단) -->
+  <ellipse cx="280" cy="225" rx="100" ry="20" fill="#3b82f6" opacity="0.15" filter="url(#glow)"/>
+</svg>

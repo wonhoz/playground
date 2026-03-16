@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A1008"/>
+      <stop offset="100%" stop-color="#2A1A0A"/>
+    </linearGradient>
+    <linearGradient id="hammer" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#CCBBAA"/>
+      <stop offset="100%" stop-color="#887766"/>
+    </linearGradient>
+    <linearGradient id="handle" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#CC8844"/>
+      <stop offset="100%" stop-color="#885522"/>
+    </linearGradient>
+    <linearGradient id="text_metal" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFDD88"/>
+      <stop offset="100%" stop-color="#CC8800"/>
+    </linearGradient>
+    <filter id="spark">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Anvil base -->
+  <rect x="130" y="360" width="252" height="36" rx="8" fill="#555"/>
+  <rect x="148" y="336" width="216" height="32" rx="6" fill="#666"/>
+  <rect x="166" y="310" width="180" height="32" rx="4" fill="#777"/>
+  <!-- Hammer (tilted, striking down-right) -->
+  <g transform="translate(280, 230) rotate(40)">
+    <!-- Head -->
+    <rect x="-40" y="-28" width="80" height="56" rx="8" fill="url(#hammer)"/>
+    <!-- Face shine -->
+    <rect x="-38" y="-26" width="76" height="12" rx="4" fill="white" opacity="0.2"/>
+    <!-- Handle -->
+    <rect x="-8" y="28" width="16" height="120" rx="6" fill="url(#handle)"/>
+    <rect x="-8" y="28" width="6" height="120" rx="3" fill="white" opacity="0.15"/>
+  </g>
+  <!-- Impact sparks -->
+  <circle cx="295" cy="318" r="12" fill="#FFDD00" filter="url(#spark)" opacity="0.9"/>
+  <line x1="295" y1="318" x2="330" y2="285" stroke="#FFAA00" stroke-width="3" opacity="0.8" filter="url(#spark)"/>
+  <line x1="295" y1="318" x2="340" y2="310" stroke="#FFDD00" stroke-width="2" opacity="0.7" filter="url(#spark)"/>
+  <line x1="295" y1="318" x2="320" y2="270" stroke="#FF6600" stroke-width="2" opacity="0.7" filter="url(#spark)"/>
+  <line x1="295" y1="318" x2="350" y2="300" stroke="#FF8800" stroke-width="2" opacity="0.6" filter="url(#spark)"/>
+  <circle cx="332" cy="282" r="5" fill="#FFDD00" opacity="0.8" filter="url(#spark)"/>
+  <circle cx="342" cy="308" r="4" fill="#FF8800" opacity="0.7" filter="url(#spark)"/>
+  <!-- Text/string being forged on anvil -->
+  <text x="256" y="348" font-family="monospace" font-size="22" fill="url(#text_metal)" text-anchor="middle" font-weight="bold" filter="url(#spark)">"STR"</text>
+  <!-- Code brackets decorative -->
+  <text x="88" y="200" font-family="monospace" font-size="64" fill="#CC8800" opacity="0.2" font-weight="bold">{</text>
+  <text x="380" y="200" font-family="monospace" font-size="64" fill="#CC8800" opacity="0.2" font-weight="bold">}</text>
+  <!-- Small text particles -->
+  <text x="130" y="140" font-family="monospace" font-size="12" fill="#FFAA44" opacity="0.5" transform="rotate(-15, 130, 140)">regex</text>
+  <text x="340" y="120" font-family="monospace" font-size="12" fill="#FFAA44" opacity="0.5" transform="rotate(10, 340, 120)">encode</text>
+  <text x="100" y="270" font-family="monospace" font-size="11" fill="#FFAA44" opacity="0.4" transform="rotate(-5, 100, 270)">replace</text>
+  <text x="360" y="260" font-family="monospace" font-size="11" fill="#FFAA44" opacity="0.4" transform="rotate(8, 360, 260)">parse</text>
+</svg>

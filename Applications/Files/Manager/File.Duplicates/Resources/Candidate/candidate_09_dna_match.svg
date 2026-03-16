@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a237e"/>
+      <stop offset="100%" stop-color="#0d47a1"/>
+    </linearGradient>
+    <linearGradient id="strand1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#29b6f6"/>
+      <stop offset="100%" stop-color="#0288d1"/>
+    </linearGradient>
+    <linearGradient id="strand2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ef5350"/>
+      <stop offset="100%" stop-color="#c62828"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- DNA strand left -->
+  <path d="M120,60 C80,120 160,180 120,240 C80,300 160,360 120,420 C80,480 160,510 120,512" fill="none" stroke="url(#strand1)" stroke-width="10" stroke-linecap="round"/>
+  <path d="M200,60 C240,120 160,180 200,240 C240,300 160,360 200,420 C240,480 160,510 200,512" fill="none" stroke="url(#strand1)" stroke-width="10" stroke-linecap="round"/>
+  <!-- Rungs (horizontal bars) left DNA -->
+  <line x1="131" y1="118" x2="189" y2="118" stroke="#b2ebf2" stroke-width="6" stroke-linecap="round" opacity="0.8"/>
+  <line x1="122" y1="178" x2="198" y2="178" stroke="#b2ebf2" stroke-width="6" stroke-linecap="round" opacity="0.8"/>
+  <line x1="131" y1="238" x2="189" y2="238" stroke="#b2ebf2" stroke-width="6" stroke-linecap="round" opacity="0.8"/>
+  <line x1="122" y1="298" x2="198" y2="298" stroke="#b2ebf2" stroke-width="6" stroke-linecap="round" opacity="0.8"/>
+  <line x1="131" y1="358" x2="189" y2="358" stroke="#b2ebf2" stroke-width="6" stroke-linecap="round" opacity="0.8"/>
+  <!-- DNA strand right -->
+  <path d="M312,60 C272,120 352,180 312,240 C272,300 352,360 312,420 C272,480 352,510 312,512" fill="none" stroke="url(#strand2)" stroke-width="10" stroke-linecap="round"/>
+  <path d="M392,60 C432,120 352,180 392,240 C432,300 352,360 392,420 C432,480 352,510 392,512" fill="none" stroke="url(#strand2)" stroke-width="10" stroke-linecap="round"/>
+  <!-- Rungs right DNA -->
+  <line x1="323" y1="118" x2="381" y2="118" stroke="#ffcdd2" stroke-width="6" stroke-linecap="round" opacity="0.8"/>
+  <line x1="314" y1="178" x2="390" y2="178" stroke="#ffcdd2" stroke-width="6" stroke-linecap="round" opacity="0.8"/>
+  <line x1="323" y1="238" x2="381" y2="238" stroke="#ffcdd2" stroke-width="6" stroke-linecap="round" opacity="0.8"/>
+  <line x1="314" y1="298" x2="390" y2="298" stroke="#ffcdd2" stroke-width="6" stroke-linecap="round" opacity="0.8"/>
+  <line x1="323" y1="358" x2="381" y2="358" stroke="#ffcdd2" stroke-width="6" stroke-linecap="round" opacity="0.8"/>
+  <!-- Center connection = MATCH -->
+  <rect x="215" y="235" width="82" height="42" rx="10" fill="#0d47a1" stroke="#f6c90e" stroke-width="3"/>
+  <text x="256" y="262" font-family="Arial" font-size="16" font-weight="bold" fill="#f6c90e" text-anchor="middle">100%</text>
+  <!-- Connecting lines -->
+  <line x1="200" y1="256" x2="215" y2="256" stroke="#f6c90e" stroke-width="3"/>
+  <line x1="297" y1="256" x2="312" y2="256" stroke="#f6c90e" stroke-width="3"/>
+</svg>

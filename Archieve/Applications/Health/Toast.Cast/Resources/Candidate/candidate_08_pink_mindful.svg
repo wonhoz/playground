@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A0010"/>
+      <stop offset="100%" stop-color="#880E4F"/>
+    </linearGradient>
+    <radialGradient id="aura" cx="50%" cy="40%" r="55%">
+      <stop offset="0%" stop-color="#F48FB1" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#F48FB1" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="lotus" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#F06292"/>
+      <stop offset="100%" stop-color="#FCE4EC"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <circle cx="256" cy="200" r="160" fill="url(#aura)"/>
+  <!-- Lotus / meditation figure -->
+  <!-- Base petals -->
+  <ellipse cx="256" cy="288" rx="80" ry="32" fill="#F06292" opacity="0.8"/>
+  <ellipse cx="200" cy="272" rx="56" ry="24" fill="#EC407A" opacity="0.7" transform="rotate(-30 200 272)"/>
+  <ellipse cx="312" cy="272" rx="56" ry="24" fill="#EC407A" opacity="0.7" transform="rotate(30 312 272)"/>
+  <!-- Seated figure -->
+  <ellipse cx="256" cy="268" rx="52" ry="28" fill="#F48FB1" opacity="0.9"/>
+  <!-- Head -->
+  <circle cx="256" cy="224" r="32" fill="url(#lotus)"/>
+  <!-- Arms in meditation -->
+  <path d="M 204,268 Q 180,260 172,272 Q 180,284 204,276 Z" fill="#F06292" opacity="0.9"/>
+  <path d="M 308,268 Q 332,260 340,272 Q 332,284 308,276 Z" fill="#F06292" opacity="0.9"/>
+  <!-- Halo ring -->
+  <circle cx="256" cy="200" r="56" fill="none" stroke="#FCE4EC" stroke-width="5" opacity="0.5"/>
+  <circle cx="256" cy="200" r="72" fill="none" stroke="#F48FB1" stroke-width="3" opacity="0.3"/>
+  <!-- Notification pop-up -->
+  <rect x="72" y="336" width="368" height="100" rx="16" fill="#4A0030" stroke="#F48FB1" stroke-width="5"/>
+  <!-- Leaf/health icon -->
+  <path d="M 116,376 C 116,376 108,356 128,348 C 148,356 140,376 116,376 Z" fill="#A5D6A7" opacity="0.9"/>
+  <line x1="116" y1="376" x2="116" y2="400" stroke="#A5D6A7" stroke-width="5" stroke-linecap="round"/>
+  <rect x="152" y="352" width="200" height="10" rx="5" fill="#FCE4EC" opacity="0.9"/>
+  <rect x="152" y="368" width="160" height="8" rx="4" fill="#F48FB1" opacity="0.7"/>
+  <rect x="152" y="384" width="180" height="8" rx="4" fill="#F48FB1" opacity="0.6"/>
+  <rect x="152" y="404" width="100" height="20" rx="8" fill="#880E4F" stroke="#F48FB1" stroke-width="3"/>
+  <rect x="160" y="410" width="84" height="7" rx="3" fill="#FCE4EC" opacity="0.9"/>
+</svg>

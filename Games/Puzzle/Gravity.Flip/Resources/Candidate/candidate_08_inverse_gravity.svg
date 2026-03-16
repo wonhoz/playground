@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f2027"/>
+      <stop offset="50%" style="stop-color:#203a43"/>
+      <stop offset="100%" style="stop-color:#2c5364"/>
+    </linearGradient>
+    <radialGradient id="orb1" cx="40%" cy="40%" r="60%">
+      <stop offset="0%" style="stop-color:#43e97b"/>
+      <stop offset="100%" style="stop-color:#38f9d7"/>
+    </radialGradient>
+    <radialGradient id="orb2" cx="40%" cy="40%" r="60%">
+      <stop offset="0%" style="stop-color:#f7971e"/>
+      <stop offset="100%" style="stop-color:#ffd200"/>
+    </radialGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Inverse gravity field visualizer: expanding rings from center -->
+  <circle cx="256" cy="256" r="60" fill="none" stroke="#43e97b30" stroke-width="2"/>
+  <circle cx="256" cy="256" r="100" fill="none" stroke="#43e97b25" stroke-width="1.5"/>
+  <circle cx="256" cy="256" r="145" fill="none" stroke="#43e97b18" stroke-width="1"/>
+  <circle cx="256" cy="256" r="190" fill="none" stroke="#43e97b12" stroke-width="1"/>
+  <!-- Normal gravity pull lines (downward) - shown being reversed -->
+  <line x1="256" y1="90" x2="256" y2="170" stroke="#f7971e60" stroke-width="2.5" stroke-dasharray="6,4"/>
+  <polygon points="256,170 245,148 267,148" fill="#f7971e80"/>
+  <!-- Object 1: being pulled DOWN (normal) -->
+  <circle cx="160" cy="340" r="22" fill="url(#orb2)" filter="url(#glow)"/>
+  <line x1="160" y1="362" x2="160" y2="400" stroke="#f7971e80" stroke-width="2.5" stroke-dasharray="5,3"/>
+  <polygon points="160,400 150,382 170,382" fill="#f7971e90"/>
+  <!-- Object 2: being pulled UP (inverse) -->
+  <circle cx="352" cy="200" r="22" fill="url(#orb1)" filter="url(#glow)"/>
+  <line x1="352" y1="178" x2="352" y2="140" stroke="#43e97b80" stroke-width="2.5" stroke-dasharray="5,3"/>
+  <polygon points="352,140 342,158 362,158" fill="#43e97b90"/>
+  <!-- Central gravity control orb -->
+  <circle cx="256" cy="256" r="38" fill="url(#orb1)" filter="url(#glow)"/>
+  <circle cx="248" cy="248" r="12" fill="#ffffff50"/>
+  <!-- G symbol (gravity) -->
+  <path d="M238,256 L256,256 L256,270 L246,270" stroke="#ffffff" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <circle cx="256" cy="256" r="15" fill="none" stroke="#ffffff" stroke-width="3"/>
+</svg>

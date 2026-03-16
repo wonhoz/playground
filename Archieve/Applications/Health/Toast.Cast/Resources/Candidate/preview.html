@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Toast.Cast - Icon Candidates</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #1a1a1a; font-family: 'Segoe UI', sans-serif; padding: 32px; }
+    h1 { color: #e0e0e0; font-size: 22px; margin-bottom: 8px; letter-spacing: 0.5px; }
+    p  { color: #888; font-size: 13px; margin-bottom: 28px; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 20px;
+    }
+    .card {
+      background: #242424;
+      border: 1px solid #333;
+      border-radius: 12px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .card:hover { border-color: #555; transform: translateY(-3px); }
+    .card img { width: 120px; height: 120px; border-radius: 20px; }
+    .card span {
+      color: #aaa;
+      font-size: 11px;
+      text-align: center;
+      word-break: break-all;
+      line-height: 1.4;
+    }
+  </style>
+</head>
+<body>
+  <h1>Toast.Cast — Icon Candidates</h1>
+  <p>건강 알림·스트레칭 토스트 앱 | 총 10개 후보 아이콘</p>
+  <div class="grid">
+    <div class="card"><img src="candidate_01_orange_toast.svg"/><span>01 · Orange Toast</span></div>
+    <div class="card"><img src="candidate_02_green_health.svg"/><span>02 · Green Health</span></div>
+    <div class="card"><img src="candidate_03_blue_bell.svg"/><span>03 · Blue Bell</span></div>
+    <div class="card"><img src="candidate_04_purple_stretch.svg"/><span>04 · Purple Stretch</span></div>
+    <div class="card"><img src="candidate_05_red_timer.svg"/><span>05 · Red Timer</span></div>
+    <div class="card"><img src="candidate_06_teal_reminder.svg"/><span>06 · Teal Reminder</span></div>
+    <div class="card"><img src="candidate_07_yellow_sunshine.svg"/><span>07 · Yellow Sunshine</span></div>
+    <div class="card"><img src="candidate_08_pink_mindful.svg"/><span>08 · Pink Mindful</span></div>
+    <div class="card"><img src="candidate_09_cyan_water.svg"/><span>09 · Cyan Water</span></div>
+    <div class="card"><img src="candidate_10_dark_popup.svg"/><span>10 · Dark Popup</span></div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a1f0a"/>
+      <stop offset="100%" style="stop-color:#1a3a1a"/>
+    </linearGradient>
+    <linearGradient id="glow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00ff88"/>
+      <stop offset="100%" style="stop-color:#00cc44"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Binary/hex stream background -->
+  <text x="40" y="80" font-family="monospace" font-size="14" fill="#0a3a0a">A3 FF 12 45 89 BC DE F0 11 22 33 44</text>
+  <text x="40" y="110" font-family="monospace" font-size="14" fill="#0a3a0a">55 66 77 88 99 AA BB CC DD EE FF 00</text>
+  <text x="40" y="140" font-family="monospace" font-size="14" fill="#0a3a0a">01 23 45 67 89 AB CD EF 01 23 45 67</text>
+  <text x="40" y="170" font-family="monospace" font-size="14" fill="#0a3a0a">89 AB CD EF 00 11 22 33 44 55 66 77</text>
+  <text x="40" y="430" font-family="monospace" font-size="14" fill="#0a3a0a">48 65 6C 6C 6F 20 57 6F 72 6C 64 21</text>
+  <text x="40" y="460" font-family="monospace" font-size="14" fill="#0a3a0a">7F 45 4C 46 02 01 01 00 00 00 00 00</text>
+  <!-- Large magnifier -->
+  <circle cx="240" cy="230" r="150" fill="none" stroke="url(#glow)" stroke-width="8"/>
+  <circle cx="240" cy="230" r="145" fill="#0d2a0d" fill-opacity="0.9"/>
+  <!-- Hex content inside magnifier -->
+  <text x="120" y="185" font-family="monospace" font-size="26" fill="#00ff88">48 65 6C</text>
+  <text x="120" y="220" font-family="monospace" font-size="26" fill="#00ff88">6C 6F 20</text>
+  <text x="120" y="255" font-family="monospace" font-size="26" fill="#00cc44">57 6F 72</text>
+  <text x="120" y="290" font-family="monospace" font-size="26" fill="#00cc44">6C 64 21</text>
+  <!-- ASCII translation -->
+  <text x="155" y="325" font-family="monospace" font-size="20" fill="#88ff88">Hello World!</text>
+  <!-- Handle -->
+  <line x1="358" y1="348" x2="430" y2="420" stroke="url(#glow)" stroke-width="14" stroke-linecap="round"/>
+  <line x1="360" y1="346" x2="432" y2="418" stroke="#006622" stroke-width="6" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#080818"/>
+      <stop offset="100%" stop-color="#180808"/>
+    </linearGradient>
+    <linearGradient id="inputWave" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#56CCF2"/>
+      <stop offset="100%" stop-color="#2F80ED"/>
+    </linearGradient>
+    <linearGradient id="outputWave" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ee0979"/>
+      <stop offset="100%" stop-color="#ffd200"/>
+    </linearGradient>
+    <linearGradient id="boxGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2a1a3a"/>
+      <stop offset="100%" stop-color="#1a0a28"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+
+  <!-- Input signal (left side) - square wave -->
+  <path d="M60,200 L100,200 L100,150 L150,150 L150,200 L200,200 L200,150 L240,150 L240,200" fill="none" stroke="url(#inputWave)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)"/>
+
+  <!-- Input label line -->
+  <line x1="60" y1="200" x2="60" y2="320" stroke="#56CCF2" stroke-width="1" stroke-dasharray="4,4" opacity="0.3"/>
+  <line x1="240" y1="200" x2="240" y2="320" stroke="#56CCF2" stroke-width="1" stroke-dasharray="4,4" opacity="0.3"/>
+
+  <!-- Connector arrows -->
+  <path d="M240,200 L248,200" stroke="#56CCF2" stroke-width="4" stroke-linecap="round" filter="url(#glow)"/>
+
+  <!-- Transformer box -->
+  <rect x="250" y="145" width="110" height="222" rx="16" fill="url(#boxGrad)" stroke="#8E54E9" stroke-width="3" filter="url(#glow)"/>
+  <!-- Transformer coils representation -->
+  <path d="M270,195 Q276,183 282,195 Q288,207 294,195 Q300,183 306,195 Q312,207 318,195 Q324,183 330,195 Q336,207 342,195" fill="none" stroke="#56CCF2" stroke-width="2.5" stroke-linecap="round" opacity="0.8"/>
+  <!-- Core bar -->
+  <rect x="268" y="218" width="74" height="8" rx="4" fill="#8E54E9" opacity="0.6"/>
+  <rect x="268" y="230" width="74" height="8" rx="4" fill="#8E54E9" opacity="0.6"/>
+  <!-- Secondary coils -->
+  <path d="M270,255 Q276,243 282,255 Q288,267 294,255 Q300,243 306,255 Q312,267 318,255 Q324,243 330,255 Q336,267 342,255" fill="none" stroke="#ee0979" stroke-width="2.5" stroke-linecap="round" opacity="0.8"/>
+  <!-- Power LED indicator -->
+  <circle cx="305" cy="335" r="10" fill="#ffd200" opacity="0.9" filter="url(#glow)"/>
+  <circle cx="305" cy="335" r="6" fill="#fff" opacity="0.7"/>
+  <!-- Lightning bolt symbol -->
+  <polygon points="299,326 304,336 300,336 306,346 300,336 304,336" fill="#ffd200" opacity="0.5"/>
+
+  <!-- Output connector -->
+  <path d="M362,200 L370,200" stroke="#ee0979" stroke-width="4" stroke-linecap="round" filter="url(#glow)"/>
+
+  <!-- Output signal (right side) - sine wave transformed -->
+  <path d="M368,200 C388,200 398,150 418,150 C438,150 448,250 468,250 C488,250 498,200 512,200" fill="none" stroke="url(#outputWave)" stroke-width="5" stroke-linecap="round" filter="url(#glow)"/>
+  <!-- Clip at border -->
+  <rect x="452" y="80" width="80" height="352" fill="url(#bg)"/>
+
+  <!-- Actual visible output -->
+  <path d="M368,260 C388,260 398,200 420,200 C445,200 455,320 452,320" fill="none" stroke="url(#outputWave)" stroke-width="5" stroke-linecap="round" filter="url(#glow)"/>
+
+  <!-- Input/Output label dots -->
+  <circle cx="150" cy="175" r="6" fill="#56CCF2" filter="url(#glow)"/>
+  <circle cx="420" cy="260" r="6" fill="#ee0979" filter="url(#glow)"/>
+
+  <!-- Frequency change visualization -->
+  <text x="265" y="140" font-family="monospace" font-size="11" fill="#8E54E9" opacity="0.7">TRANSFORM</text>
+
+  <!-- Ground symbols -->
+  <line x1="150" y1="200" x2="150" y2="380" stroke="#56CCF2" stroke-width="1.5" opacity="0.3" stroke-dasharray="3,3"/>
+  <line x1="140" y1="380" x2="160" y2="380" stroke="#56CCF2" stroke-width="1.5" opacity="0.3"/>
+  <line x1="144" y1="388" x2="156" y2="388" stroke="#56CCF2" stroke-width="1.5" opacity="0.2"/>
+  <line x1="148" y1="396" x2="152" y2="396" stroke="#56CCF2" stroke-width="1.5" opacity="0.15"/>
+
+  <line x1="420" y1="260" x2="420" y2="380" stroke="#ee0979" stroke-width="1.5" opacity="0.3" stroke-dasharray="3,3"/>
+  <line x1="410" y1="380" x2="430" y2="380" stroke="#ee0979" stroke-width="1.5" opacity="0.3"/>
+  <line x1="414" y1="388" x2="426" y2="388" stroke="#ee0979" stroke-width="1.5" opacity="0.2"/>
+  <line x1="418" y1="396" x2="422" y2="396" stroke="#ee0979" stroke-width="1.5" opacity="0.15"/>
+</svg>

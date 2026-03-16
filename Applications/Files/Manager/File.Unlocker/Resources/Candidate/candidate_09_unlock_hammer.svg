@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a0a00"/>
+      <stop offset="100%" stop-color="#2c1810"/>
+    </linearGradient>
+    <linearGradient id="hammer" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#e0e0e0"/>
+      <stop offset="100%" stop-color="#9e9e9e"/>
+    </linearGradient>
+    <linearGradient id="handle" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8d6e63"/>
+      <stop offset="100%" stop-color="#4e342e"/>
+    </linearGradient>
+    <linearGradient id="lock" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ef9a9a"/>
+      <stop offset="100%" stop-color="#c62828"/>
+    </linearGradient>
+    <filter id="impact"><feGaussianBlur stdDeviation="6"/></filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- impact glow -->
+  <circle cx="290" cy="310" r="80" fill="#ff5722" opacity="0.2" filter="url(#impact)"/>
+  <!-- shattered lock -->
+  <path d="M240 290 L340 290 L340 380 L240 380 Z" fill="url(#lock)" opacity="0.6"/>
+  <path d="M240 290 L260 260 L320 265 L340 290" fill="url(#lock)" opacity="0.7"/>
+  <!-- crack lines -->
+  <line x1="290" y1="290" x2="275" y2="380" stroke="#ffeb3b" stroke-width="4"/>
+  <line x1="290" y1="290" x2="310" y2="360" stroke="#ff9800" stroke-width="3" opacity="0.7"/>
+  <!-- impact sparks -->
+  <circle cx="290" cy="290" r="10" fill="#ffeb3b"/>
+  <line x1="290" y1="278" x2="285" y2="260" stroke="#ffe082" stroke-width="3"/>
+  <line x1="302" y1="282" x2="316" y2="268" stroke="#ffeb3b" stroke-width="3"/>
+  <line x1="278" y1="282" x2="264" y2="268" stroke="#ff9800" stroke-width="3"/>
+  <line x1="302" y1="296" x2="320" y2="298" stroke="#ffe082" stroke-width="2"/>
+  <!-- hammer -->
+  <rect x="180" y="140" width="120" height="70" rx="12" fill="url(#hammer)" transform="rotate(-40 240 175)"/>
+  <rect x="240" y="175" width="22" height="160" rx="8" fill="url(#handle)" transform="rotate(-40 251 255)"/>
+  <!-- shine on hammer head -->
+  <ellipse cx="195" cy="150" rx="20" ry="7" fill="white" opacity="0.3" transform="rotate(-40 195 150)"/>
+</svg>

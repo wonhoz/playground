@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#111111"/>
+      <stop offset="100%" style="stop-color:#1e1e1e"/>
+    </linearGradient>
+    <linearGradient id="header" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#2a2a2a"/>
+      <stop offset="100%" style="stop-color:#333333"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Terminal window -->
+  <rect x="48" y="80" width="416" height="352" rx="14" fill="#0c0c0c" stroke="#333" stroke-width="2"/>
+  <!-- Title bar -->
+  <rect x="48" y="80" width="416" height="38" rx="14" fill="url(#header)"/>
+  <rect x="48" y="104" width="416" height="14" fill="url(#header)"/>
+  <!-- Traffic lights -->
+  <circle cx="82" cy="99" r="7" fill="#ff5f57"/>
+  <circle cx="106" cy="99" r="7" fill="#febc2e"/>
+  <circle cx="130" cy="99" r="7" fill="#28c840"/>
+  <!-- Title -->
+  <text x="196" y="104" font-family="monospace" font-size="14" fill="#888888">hex.peek</text>
+  <!-- Terminal content -->
+  <text x="68" y="148" font-family="monospace" font-size="13" fill="#888">$</text>
+  <text x="82" y="148" font-family="monospace" font-size="13" fill="#e0e0e0">hexpeek file.bin</text>
+  <text x="68" y="172" font-family="monospace" font-size="13" fill="#555">00000000</text>
+  <text x="136" y="172" font-family="monospace" font-size="13" fill="#4fc3f7">4d 5a 90 00</text>
+  <text x="240" y="172" font-family="monospace" font-size="13" fill="#aaa">03 00 00 00</text>
+  <text x="344" y="172" font-family="monospace" font-size="13" fill="#e0e0e0">MZ..</text>
+  <text x="68" y="196" font-family="monospace" font-size="13" fill="#555">00000008</text>
+  <text x="136" y="196" font-family="monospace" font-size="13" fill="#aaa">04 00 00 00</text>
+  <text x="240" y="196" font-family="monospace" font-size="13" fill="#ef5350">ff ff 00 00</text>
+  <text x="344" y="196" font-family="monospace" font-size="13" fill="#e0e0e0">....</text>
+  <!-- Highlighted row -->
+  <rect x="62" y="204" width="388" height="20" rx="3" fill="#1a2a1a"/>
+  <text x="68" y="218" font-family="monospace" font-size="13" fill="#555">00000010</text>
+  <text x="136" y="218" font-family="monospace" font-size="13" fill="#69f0ae">b8 00 00 00</text>
+  <text x="240" y="218" font-family="monospace" font-size="13" fill="#69f0ae">00 00 00 00</text>
+  <text x="344" y="218" font-family="monospace" font-size="13" fill="#e0e0e0">....</text>
+  <text x="68" y="242" font-family="monospace" font-size="13" fill="#555">00000018</text>
+  <text x="136" y="242" font-family="monospace" font-size="13" fill="#aaa">40 00 00 00</text>
+  <text x="240" y="242" font-family="monospace" font-size="13" fill="#aaa">00 00 00 00</text>
+  <text x="344" y="242" font-family="monospace" font-size="13" fill="#e0e0e0">@...</text>
+  <!-- Cursor -->
+  <rect x="68" y="276" width="8" height="16" rx="1" fill="#69f0ae">
+    <animate attributeName="opacity" values="1;0;1" dur="1s" repeatCount="indefinite"/>
+  </rect>
+  <!-- Status bar -->
+  <rect x="48" y="394" width="416" height="38" rx="14" fill="#1a1a1a"/>
+  <rect x="48" y="394" width="416" height="14" fill="#1a1a1a"/>
+  <text x="68" y="418" font-family="monospace" font-size="12" fill="#555">INS  |  Offset: 0x10  |  0x20 bytes selected  |  UTF-8</text>
+</svg>

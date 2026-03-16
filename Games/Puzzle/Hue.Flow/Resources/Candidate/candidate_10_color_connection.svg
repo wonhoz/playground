@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" style="stop-color:#0c0a1e"/>
+      <stop offset="100%" style="stop-color:#05030f"/>
+    </radialGradient>
+    <radialGradient id="hub" cx="40%" cy="40%" r="60%">
+      <stop offset="0%" style="stop-color:#ffffff30"/>
+      <stop offset="100%" style="stop-color:#ffffff05"/>
+    </radialGradient>
+    <filter id="glow"><feGaussianBlur stdDeviation="10" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <filter id="sm"><feGaussianBlur stdDeviation="4" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Six colored nodes around center -->
+  <circle cx="256" cy="100" r="28" fill="#ff6b6b" filter="url(#glow)"/>
+  <circle cx="388" cy="178" r="28" fill="#feca57" filter="url(#glow)"/>
+  <circle cx="388" cy="334" r="28" fill="#48dbfb" filter="url(#glow)"/>
+  <circle cx="256" cy="412" r="28" fill="#1dd1a1" filter="url(#glow)"/>
+  <circle cx="124" cy="334" r="28" fill="#ff9ff3" filter="url(#glow)"/>
+  <circle cx="124" cy="178" r="28" fill="#a29bfe" filter="url(#glow)"/>
+  <!-- Connection lines from center to each node -->
+  <line x1="256" y1="256" x2="256" y2="128" stroke="#ff6b6b" stroke-width="8" stroke-linecap="round" filter="url(#sm)" opacity="0.8"/>
+  <line x1="256" y1="256" x2="362" y2="196" stroke="#feca57" stroke-width="8" stroke-linecap="round" filter="url(#sm)" opacity="0.8"/>
+  <line x1="256" y1="256" x2="362" y2="316" stroke="#48dbfb" stroke-width="8" stroke-linecap="round" filter="url(#sm)" opacity="0.8"/>
+  <line x1="256" y1="256" x2="256" y2="384" stroke="#1dd1a1" stroke-width="8" stroke-linecap="round" filter="url(#sm)" opacity="0.8"/>
+  <line x1="256" y1="256" x2="150" y2="316" stroke="#ff9ff3" stroke-width="8" stroke-linecap="round" filter="url(#sm)" opacity="0.8"/>
+  <line x1="256" y1="256" x2="150" y2="196" stroke="#a29bfe" stroke-width="8" stroke-linecap="round" filter="url(#sm)" opacity="0.8"/>
+  <!-- Center hub -->
+  <circle cx="256" cy="256" r="38" fill="url(#hub)" stroke="#ffffff30" stroke-width="2"/>
+  <circle cx="256" cy="256" r="16" fill="#ffffff40" filter="url(#glow)"/>
+  <!-- Connecting arcs between adjacent nodes -->
+  <path d="M256,128 Q322,153 362,196" stroke="#ffaa00" stroke-width="3" fill="none" stroke-dasharray="6,4" opacity="0.4"/>
+  <path d="M362,196 Q388,256 362,316" stroke="#80ffde" stroke-width="3" fill="none" stroke-dasharray="6,4" opacity="0.4"/>
+  <path d="M256,384 Q190,359 150,316" stroke="#ff80ab" stroke-width="3" fill="none" stroke-dasharray="6,4" opacity="0.4"/>
+</svg>

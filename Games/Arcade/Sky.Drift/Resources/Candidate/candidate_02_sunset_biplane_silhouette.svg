@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1a0a00"/>
+      <stop offset="30%" stop-color="#8b2500"/>
+      <stop offset="60%" stop-color="#e65100"/>
+      <stop offset="80%" stop-color="#ff8f00"/>
+      <stop offset="100%" stop-color="#ffca28"/>
+    </linearGradient>
+    <radialGradient id="sunburst" cx="50%" cy="75%" r="60%">
+      <stop offset="0%" stop-color="#ffd600" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#ffd600" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <rect width="512" height="512" rx="80" fill="url(#sunburst)"/>
+  <!-- Sun -->
+  <circle cx="256" cy="380" r="80" fill="#ffd600" opacity="0.7"/>
+  <!-- Horizon -->
+  <rect x="0" y="380" width="512" height="132" rx="0" fill="#1a0a00" opacity="0.85"/>
+  <rect x="0" y="460" width="512" height="52" rx="80" fill="#1a0a00"/>
+  <!-- Biplane silhouette (black) -->
+  <!-- Upper wing -->
+  <rect x="156" y="208" width="200" height="14" rx="4" fill="#0d0000"/>
+  <!-- Fuselage -->
+  <path d="M200 222 Q260 214 340 228 L350 245 L180 245 Z" fill="#0d0000"/>
+  <!-- Lower wing -->
+  <rect x="172" y="242" width="180" height="12" rx="4" fill="#0d0000"/>
+  <!-- Tail -->
+  <path d="M180 222 L165 205 L185 222 Z" fill="#0d0000"/>
+  <path d="M183 242 L170 258 L195 244 Z" fill="#0d0000"/>
+  <!-- Nose -->
+  <ellipse cx="348" cy="236" rx="18" ry="10" fill="#0d0000"/>
+  <!-- Propeller -->
+  <line x1="366" y1="220" x2="366" y2="252" stroke="#0d0000" stroke-width="6" stroke-linecap="round"/>
+  <!-- Wing struts -->
+  <line x1="230" y1="222" x2="230" y2="242" stroke="#0d0000" stroke-width="3"/>
+  <line x1="280" y1="222" x2="280" y2="242" stroke="#0d0000" stroke-width="3"/>
+  <!-- Drift trail -->
+  <path d="M156 215 Q100 208 60 218" stroke="#ff8f00" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.6"/>
+  <path d="M156 230 Q95 228 50 238" stroke="#ff8f00" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.4"/>
+  <!-- Stars -->
+  <circle cx="100" cy="100" r="2" fill="white" opacity="0.6"/>
+  <circle cx="180" cy="80" r="1.5" fill="white" opacity="0.5"/>
+  <circle cx="380" cy="90" r="2" fill="white" opacity="0.6"/>
+  <circle cx="430" cy="140" r="1.5" fill="white" opacity="0.5"/>
+</svg>

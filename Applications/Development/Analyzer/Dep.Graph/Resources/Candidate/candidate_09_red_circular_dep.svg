@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2D0000"/>
+      <stop offset="100%" stop-color="#5C0000"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Circular dependency warning ring -->
+  <circle cx="256" cy="256" r="170" fill="none" stroke="#FF5252" stroke-width="5" stroke-dasharray="14,7"/>
+  <circle cx="256" cy="256" r="130" fill="none" stroke="#FF1744" stroke-width="2" opacity="0.4"/>
+  <!-- 5 nodes in a circle (circular dependency) -->
+  <!-- Node positions: top, top-right, bottom-right, bottom-left, top-left -->
+  <!-- A(256,86) B(418,196) C(356,393) D(156,393) E(94,196) -->
+  <!-- Arrows forming cycle -->
+  <defs>
+    <marker id="arrRed" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 Z" fill="#FF5252"/>
+    </marker>
+  </defs>
+  <line x1="256" y1="86" x2="406" y2="188" stroke="#FF5252" stroke-width="4" marker-end="url(#arrRed)"/>
+  <line x1="418" y1="196" x2="365" y2="381" stroke="#FF5252" stroke-width="4" marker-end="url(#arrRed)"/>
+  <line x1="356" y1="393" x2="168" y2="393" stroke="#FF5252" stroke-width="4" marker-end="url(#arrRed)"/>
+  <line x1="156" y1="393" x2="103" y2="208" stroke="#FF5252" stroke-width="4" marker-end="url(#arrRed)"/>
+  <line x1="94" y1="196" x2="244" y2="98" stroke="#FF5252" stroke-width="4" marker-end="url(#arrRed)"/>
+  <!-- Nodes -->
+  <circle cx="256" cy="86" r="28" fill="#5C0000" stroke="#FF5252" stroke-width="4"/>
+  <circle cx="418" cy="196" r="28" fill="#5C0000" stroke="#FF5252" stroke-width="4"/>
+  <circle cx="356" cy="393" r="28" fill="#5C0000" stroke="#FF5252" stroke-width="4"/>
+  <circle cx="156" cy="393" r="28" fill="#5C0000" stroke="#FF5252" stroke-width="4"/>
+  <circle cx="94" cy="196" r="28" fill="#5C0000" stroke="#FF5252" stroke-width="4"/>
+  <text x="256" y="91" text-anchor="middle" font-family="monospace" font-size="12" fill="#FF5252">A</text>
+  <text x="418" y="201" text-anchor="middle" font-family="monospace" font-size="12" fill="#FF5252">B</text>
+  <text x="356" y="398" text-anchor="middle" font-family="monospace" font-size="12" fill="#FF5252">C</text>
+  <text x="156" y="398" text-anchor="middle" font-family="monospace" font-size="12" fill="#FF5252">D</text>
+  <text x="94" y="201" text-anchor="middle" font-family="monospace" font-size="12" fill="#FF5252">E</text>
+  <!-- Center warning -->
+  <circle cx="256" cy="256" r="48" fill="#3D0000" stroke="#FF1744" stroke-width="3"/>
+  <text x="256" y="248" text-anchor="middle" font-family="Arial Black" font-size="30" fill="#FF5252">!</text>
+  <text x="256" y="272" text-anchor="middle" font-family="monospace" font-size="10" fill="#FF5252">CYCLE</text>
+</svg>

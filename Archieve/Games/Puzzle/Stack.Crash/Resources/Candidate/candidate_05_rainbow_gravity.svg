@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A1A2E"/>
+      <stop offset="100%" stop-color="#16213E"/>
+    </linearGradient>
+    <linearGradient id="r1" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FF0080"/>
+      <stop offset="100%" stop-color="#FF4040"/>
+    </linearGradient>
+    <linearGradient id="r2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FF8000"/>
+      <stop offset="100%" stop-color="#FFD000"/>
+    </linearGradient>
+    <linearGradient id="r3" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00E676"/>
+      <stop offset="100%" stop-color="#00BFA5"/>
+    </linearGradient>
+    <linearGradient id="r4" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#2979FF"/>
+      <stop offset="100%" stop-color="#00B0FF"/>
+    </linearGradient>
+    <linearGradient id="r5" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#AA00FF"/>
+      <stop offset="100%" stop-color="#FF4081"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Floor -->
+  <rect x="60" y="424" width="392" height="12" rx="6" fill="#2A2A4A"/>
+  <!-- Rainbow stack -->
+  <rect x="96" y="358" width="320" height="54" rx="10" fill="url(#r1)" opacity="0.92"/>
+  <rect x="120" y="300" width="272" height="54" rx="10" fill="url(#r2)" opacity="0.92"/>
+  <rect x="152" y="242" width="208" height="54" rx="10" fill="url(#r3)" opacity="0.92"/>
+  <rect x="176" y="184" width="160" height="54" rx="10" fill="url(#r4)" opacity="0.92"/>
+  <!-- Falling/crashing top block -->
+  <g transform="translate(256, 148) rotate(28)">
+    <rect x="-80" y="-26" width="160" height="50" rx="10" fill="url(#r5)" opacity="0.9"/>
+  </g>
+  <!-- Colorful star bursts -->
+  <circle cx="370" cy="125" r="10" fill="#FF4081" opacity="0.8"/>
+  <circle cx="395" cy="148" r="7" fill="#FFD000" opacity="0.7"/>
+  <circle cx="350" cy="102" r="8" fill="#00E676" opacity="0.7"/>
+  <circle cx="418" cy="120" r="5" fill="#00B0FF" opacity="0.7"/>
+  <circle cx="330" cy="128" r="6" fill="#AA00FF" opacity="0.7"/>
+  <!-- Star shapes -->
+  <polygon points="380,90 384,102 396,102 386,110 390,122 380,114 370,122 374,110 364,102 376,102" fill="#FFD000" opacity="0.6"/>
+  <!-- Gravity effect arcs -->
+  <path d="M 176 184 Q 130 220 110 300" stroke="#2979FF" stroke-width="1.5" fill="none" opacity="0.3" stroke-dasharray="6,4"/>
+  <path d="M 336 184 Q 380 220 400 300" stroke="#FF0080" stroke-width="1.5" fill="none" opacity="0.3" stroke-dasharray="6,4"/>
+</svg>

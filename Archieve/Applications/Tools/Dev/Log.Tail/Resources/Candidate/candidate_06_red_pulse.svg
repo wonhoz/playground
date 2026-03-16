@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0D0000"/>
+      <stop offset="100%" stop-color="#1A0000"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Heartbeat / pulse line (log activity) -->
+  <polyline points="60,280 100,280 120,280 140,200 160,360 180,280 200,280 220,240 240,320 256,280 272,260 288,300 304,280 320,280 340,160 360,400 380,280 420,280 452,280" stroke="#FF4444" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)"/>
+  <!-- Pulse dot at current position (tail position) -->
+  <circle cx="452" cy="280" r="10" fill="#FF4444" filter="url(#glow)"/>
+  <circle cx="452" cy="280" r="20" fill="none" stroke="#FF4444" stroke-width="2" filter="url(#glow)" opacity="0.5"/>
+  <circle cx="452" cy="280" r="32" fill="none" stroke="#FF4444" stroke-width="1" filter="url(#glow)" opacity="0.25"/>
+  <!-- Horizontal axis line -->
+  <line x1="60" y1="280" x2="452" y2="280" stroke="#330000" stroke-width="1" opacity="0.5"/>
+  <!-- Log lines above pulse -->
+  <text x="76" y="110" font-family="'Courier New', monospace" font-size="11" fill="#FF6666" opacity="0.5">12:00:01 [INFO] service started</text>
+  <text x="76" y="128" font-family="'Courier New', monospace" font-size="11" fill="#FF6666" opacity="0.4">12:00:05 [INFO] connected</text>
+  <text x="76" y="146" font-family="'Courier New', monospace" font-size="11" fill="#FF4444" opacity="0.6">12:00:12 [WARN] timeout</text>
+  <!-- Stats -->
+  <rect x="76" y="380" width="160" height="80" rx="8" fill="#1A0000" stroke="#FF4444" stroke-width="1" opacity="0.8"/>
+  <text x="92" y="406" font-family="'Courier New', monospace" font-size="12" fill="#FF8888">RATE: 12/sec</text>
+  <text x="92" y="426" font-family="'Courier New', monospace" font-size="12" fill="#FF6666">ERR:  2/min</text>
+  <text x="92" y="446" font-family="'Courier New', monospace" font-size="12" fill="#FF4444">TAIL: LIVE</text>
+  <!-- LIVE indicator -->
+  <circle cx="340" cy="410" r="16" fill="#FF4444" filter="url(#glow)"/>
+  <circle cx="340" cy="410" r="24" fill="none" stroke="#FF4444" stroke-width="2" filter="url(#glow)" opacity="0.5"/>
+  <text x="366" y="406" font-family="Arial, sans-serif" font-size="14" fill="#FF4444" font-weight="bold" filter="url(#glow)">LIVE</text>
+  <text x="366" y="422" font-family="Arial, sans-serif" font-size="11" fill="#AA0000">monitoring</text>
+</svg>

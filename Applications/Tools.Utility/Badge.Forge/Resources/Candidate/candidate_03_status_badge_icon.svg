@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a1628"/>
+      <stop offset="100%" stop-color="#122040"/>
+    </linearGradient>
+    <linearGradient id="greenBadge" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00e676"/>
+      <stop offset="100%" stop-color="#00c853"/>
+    </linearGradient>
+    <linearGradient id="yellowBadge" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffea00"/>
+      <stop offset="100%" stop-color="#ffd600"/>
+    </linearGradient>
+    <linearGradient id="blueBadge" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#40c4ff"/>
+      <stop offset="100%" stop-color="#0091ea"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="5" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Central status display with orbiting badges -->
+  <!-- Center shield -->
+  <path d="M256 130 L340 168 L340 268 Q340 330 256 365 Q172 330 172 268 L172 168 Z" fill="#1a2a4a" stroke="#334466" stroke-width="2"/>
+  <!-- Status dot inside shield -->
+  <circle cx="256" cy="255" r="35" fill="url(#greenBadge)" filter="url(#glow)"/>
+  <path d="M238 255 L252 269 L278 243" stroke="white" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <!-- Orbiting badge pills -->
+  <rect x="352" y="148" width="100" height="28" rx="14" fill="url(#greenBadge)" opacity="0.9" filter="url(#glow)"/>
+  <rect x="360" y="156" width="55" height="12" rx="5" fill="rgba(0,0,0,0.3)"/>
+  <rect x="58" y="148" width="100" height="28" rx="14" fill="url(#yellowBadge)" opacity="0.85"/>
+  <rect x="66" y="156" width="55" height="12" rx="5" fill="rgba(0,0,0,0.3)"/>
+  <rect x="352" y="316" width="100" height="28" rx="14" fill="url(#blueBadge)" opacity="0.85"/>
+  <rect x="360" y="324" width="55" height="12" rx="5" fill="rgba(0,0,0,0.3)"/>
+  <rect x="58" y="316" width="100" height="28" rx="14" fill="#ff5252" opacity="0.85"/>
+  <rect x="66" y="324" width="55" height="12" rx="5" fill="rgba(0,0,0,0.3)"/>
+  <!-- Connection lines -->
+  <line x1="340" y1="165" x2="352" y2="162" stroke="#334466" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <line x1="172" y1="165" x2="158" y2="162" stroke="#334466" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <line x1="340" y1="320" x2="352" y2="330" stroke="#334466" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <line x1="172" y1="320" x2="158" y2="330" stroke="#334466" stroke-width="1.5" stroke-dasharray="6,3"/>
+</svg>

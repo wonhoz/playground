@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#0A0015"/>
+      <stop offset="100%" stop-color="#000008"/>
+    </radialGradient>
+    <filter id="neonPDF">
+      <feGaussianBlur stdDeviation="8" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Neon document outline -->
+  <rect x="130" y="90" width="230" height="300" rx="14" fill="none" stroke="#FF0080" stroke-width="5" filter="url(#neonPDF)"/>
+  <!-- Inner glow fill -->
+  <rect x="130" y="90" width="230" height="300" rx="14" fill="#FF0080" opacity="0.04"/>
+  <!-- Corner fold neon -->
+  <polyline points="295,90 360,90 360,155" fill="none" stroke="#FF0080" stroke-width="4" filter="url(#neonPDF)"/>
+  <line x1="295" y1="90" x2="360" y2="155" stroke="#FF0080" stroke-width="3" filter="url(#neonPDF)" opacity="0.7"/>
+  <!-- Neon text lines -->
+  <rect x="152" y="165" width="100" height="7" rx="3.5" fill="#FF0080" opacity="0.7"/>
+  <rect x="152" y="181" width="130" height="5" rx="2.5" fill="#FF44AA" opacity="0.5"/>
+  <rect x="152" y="194" width="110" height="5" rx="2.5" fill="#FF44AA" opacity="0.4"/>
+  <!-- Big neon PDF -->
+  <text x="230" y="300" font-family="sans-serif" font-size="72" fill="none" stroke="#00FFFF" stroke-width="3" text-anchor="middle" font-weight="bold" filter="url(#neonPDF)">PDF</text>
+  <!-- Neon lines bottom -->
+  <rect x="152" y="330" width="130" height="5" rx="2.5" fill="#00FFFF" opacity="0.4"/>
+  <rect x="152" y="344" width="100" height="5" rx="2.5" fill="#00FFFF" opacity="0.3"/>
+  <rect x="152" y="358" width="120" height="5" rx="2.5" fill="#00FFFF" opacity="0.2"/>
+  <!-- Glowing dots decorations -->
+  <circle cx="390" cy="200" r="20" fill="none" stroke="#FFFF00" stroke-width="3" filter="url(#neonPDF)"/>
+  <circle cx="390" cy="200" r="8" fill="#FFFF00" opacity="0.6"/>
+  <circle cx="100" cy="350" r="14" fill="none" stroke="#00FF80" stroke-width="3" filter="url(#neonPDF)"/>
+  <circle cx="100" cy="350" r="5" fill="#00FF80" opacity="0.7"/>
+  <!-- Neon border outer -->
+  <rect x="50" y="50" width="412" height="412" rx="72" fill="none" stroke="#FF0080" stroke-width="2" opacity="0.2"/>
+</svg>

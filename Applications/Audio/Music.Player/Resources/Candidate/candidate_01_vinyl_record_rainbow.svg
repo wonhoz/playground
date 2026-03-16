@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0010"/>
+      <stop offset="100%" stop-color="#100020"/>
+    </linearGradient>
+    <radialGradient id="vinylGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#1a1a2e"/>
+      <stop offset="30%" stop-color="#0f0f1a"/>
+      <stop offset="60%" stop-color="#1a1a2e"/>
+      <stop offset="85%" stop-color="#0d0d18"/>
+      <stop offset="100%" stop-color="#1a1a2e"/>
+    </radialGradient>
+    <radialGradient id="labelGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ff006e"/>
+      <stop offset="40%" stop-color="#8338ec"/>
+      <stop offset="70%" stop-color="#3a86ff"/>
+      <stop offset="100%" stop-color="#06d6a0"/>
+    </radialGradient>
+    <filter id="vinylGlow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Vinyl record -->
+  <circle cx="256" cy="256" r="195" fill="url(#vinylGrad)"/>
+  <!-- Groove rings -->
+  <circle cx="256" cy="256" r="185" fill="none" stroke="#ffffff" stroke-width="0.5" opacity="0.15"/>
+  <circle cx="256" cy="256" r="170" fill="none" stroke="#ffffff" stroke-width="0.5" opacity="0.12"/>
+  <circle cx="256" cy="256" r="155" fill="none" stroke="#ffffff" stroke-width="0.5" opacity="0.12"/>
+  <circle cx="256" cy="256" r="140" fill="none" stroke="#ffffff" stroke-width="0.5" opacity="0.1"/>
+  <circle cx="256" cy="256" r="125" fill="none" stroke="#ffffff" stroke-width="0.5" opacity="0.1"/>
+  <circle cx="256" cy="256" r="110" fill="none" stroke="#ffffff" stroke-width="0.5" opacity="0.08"/>
+  <circle cx="256" cy="256" r="95" fill="none" stroke="#ffffff" stroke-width="0.5" opacity="0.08"/>
+  <circle cx="256" cy="256" r="80" fill="none" stroke="#ffffff" stroke-width="0.5" opacity="0.06"/>
+  <!-- Rainbow sheen lines on vinyl -->
+  <path d="M256 61 A195 195 0 0 1 451 256" fill="none" stroke="#ff006e" stroke-width="3" opacity="0.3"/>
+  <path d="M451 256 A195 195 0 0 1 256 451" fill="none" stroke="#8338ec" stroke-width="3" opacity="0.3"/>
+  <path d="M256 451 A195 195 0 0 1 61 256" fill="none" stroke="#3a86ff" stroke-width="3" opacity="0.3"/>
+  <path d="M61 256 A195 195 0 0 1 256 61" fill="none" stroke="#06d6a0" stroke-width="3" opacity="0.3"/>
+  <!-- Center label -->
+  <circle cx="256" cy="256" r="68" fill="url(#labelGrad)" filter="url(#vinylGlow)"/>
+  <circle cx="256" cy="256" r="55" fill="none" stroke="#ffffff" stroke-width="1.5" opacity="0.4"/>
+  <!-- Center hole -->
+  <circle cx="256" cy="256" r="12" fill="#0a0010"/>
+  <circle cx="256" cy="256" r="8" fill="#1a1a2e"/>
+  <!-- Tonearm -->
+  <circle cx="420" cy="95" r="20" fill="#2a2a3a" stroke="#888" stroke-width="2"/>
+  <circle cx="420" cy="95" r="10" fill="#888"/>
+  <path d="M420 115 L310 310" fill="none" stroke="#aaa" stroke-width="5" stroke-linecap="round"/>
+  <!-- Cartridge at end of tonearm -->
+  <rect x="298" y="302" width="22" height="16" rx="4" fill="#666"/>
+  <circle cx="309" cy="322" r="5" fill="#00e5ff" filter="url(#vinylGlow)"/>
+</svg>

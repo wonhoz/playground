@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1a0030"/>
+      <stop offset="40%" stop-color="#6a0572"/>
+      <stop offset="70%" stop-color="#ff6e40"/>
+      <stop offset="100%" stop-color="#1a1a2e"/>
+    </linearGradient>
+    <linearGradient id="sunGrad" cx="50%" cy="50%" r="50%" gradientUnits="objectBoundingBox">
+      <stop offset="0%" stop-color="#ffee58"/>
+      <stop offset="100%" stop-color="#ff6e40"/>
+    </linearGradient>
+    <linearGradient id="silGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1a0030"/>
+      <stop offset="100%" stop-color="#0d0010"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Sun -->
+  <circle cx="256" cy="280" r="90" fill="#ff9800" opacity="0.6"/>
+  <circle cx="256" cy="280" r="65" fill="#ffee58" opacity="0.5"/>
+  <!-- Horizon line -->
+  <rect x="0" y="340" width="512" height="172" fill="#1a1a2e"/>
+  <rect x="0" y="340" width="512" height="8" fill="#ff6e40" opacity="0.5"/>
+  <!-- Fighter 1 silhouette (left) - kicking pose -->
+  <circle cx="155" cy="230" r="22" fill="url(#silGrad)"/>
+  <rect x="138" y="252" width="34" height="55" rx="6" fill="url(#silGrad)"/>
+  <rect x="118" y="258" width="55" height="18" rx="8" fill="url(#silGrad)"/>
+  <rect x="138" y="307" width="16" height="48" rx="6" fill="url(#silGrad)" transform="rotate(-12, 146, 330)"/>
+  <rect x="158" y="307" width="16" height="28" rx="6" fill="url(#silGrad)" transform="rotate(40, 166, 320)"/>
+  <!-- Fighter 2 silhouette (right) - blocking -->
+  <circle cx="357" cy="230" r="22" fill="url(#silGrad)"/>
+  <rect x="340" y="252" width="34" height="55" rx="6" fill="url(#silGrad)"/>
+  <rect x="340" y="258" width="55" height="18" rx="8" fill="url(#silGrad)"/>
+  <rect x="340" y="307" width="16" height="48" rx="6" fill="url(#silGrad)" transform="rotate(12, 348, 330)"/>
+  <rect x="358" y="307" width="16" height="48" rx="6" fill="url(#silGrad)" transform="rotate(-8, 366, 330)"/>
+  <!-- Stage floor lines (perspective) -->
+  <line x1="0" y1="340" x2="256" y2="300" stroke="#ff6e40" stroke-width="0.8" opacity="0.3"/>
+  <line x1="512" y1="340" x2="256" y2="300" stroke="#ff6e40" stroke-width="0.8" opacity="0.3"/>
+  <!-- Title overlay -->
+  <text x="256" y="120" font-family="Arial" font-size="48" font-weight="900" fill="white" text-anchor="middle" opacity="0.9" letter-spacing="4">FIST</text>
+  <text x="256" y="170" font-family="Arial" font-size="48" font-weight="900" fill="#ff6e40" text-anchor="middle" letter-spacing="6">FURY</text>
+  <!-- Health bars at bottom -->
+  <rect x="40" y="410" width="180" height="16" rx="8" fill="#1a0030"/>
+  <rect x="40" y="410" width="150" height="16" rx="8" fill="#4caf50"/>
+  <rect x="292" y="410" width="180" height="16" rx="8" fill="#1a0030"/>
+  <rect x="312" y="410" width="100" height="16" rx="8" fill="#f44336"/>
+</svg>

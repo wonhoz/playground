@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A0A00"/>
+      <stop offset="100%" stop-color="#2D1000"/>
+    </linearGradient>
+    <linearGradient id="flame" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#FF4500"/>
+      <stop offset="40%" stop-color="#FF8C00"/>
+      <stop offset="80%" stop-color="#FFC300"/>
+      <stop offset="100%" stop-color="#FFEC8B"/>
+    </linearGradient>
+    <linearGradient id="inner" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#CC3700"/>
+      <stop offset="60%" stop-color="#FF6500"/>
+      <stop offset="100%" stop-color="#FFD700"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Outer flame -->
+  <path d="M256 385 C178 342 138 278 158 198 C170 158 200 138 222 118 C212 160 232 180 256 162 C280 180 300 160 290 118 C312 138 342 158 354 198 C374 278 334 342 256 385 Z" fill="url(#flame)"/>
+  <!-- Inner flame -->
+  <path d="M256 362 C210 330 190 280 206 220 C215 195 232 182 256 202 C280 182 297 195 306 220 C322 280 302 330 256 362 Z" fill="url(#inner)"/>
+  <!-- Core -->
+  <path d="M256 340 C235 314 228 284 240 254 C248 238 256 245 256 245 C256 245 264 238 272 254 C284 284 277 314 256 340 Z" fill="#FFFACD"/>
+  <!-- Label -->
+  <text x="256" y="432" font-family="Arial" font-size="26" font-weight="bold" fill="#FF8C00" text-anchor="middle">Fast Boot</text>
+  <text x="256" y="466" font-family="Arial" font-size="24" font-weight="bold" fill="#FF4500" text-anchor="middle">Boot.Map</text>
+</svg>

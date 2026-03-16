@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#2d2d2d"/>
+      <stop offset="100%" stop-color="#1a1a1a"/>
+    </linearGradient>
+    <linearGradient id="sketchLine" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ff9f43"/>
+      <stop offset="100%" stop-color="#ee5a24"/>
+    </linearGradient>
+    <linearGradient id="stream" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#00d2d3"/>
+      <stop offset="100%" stop-color="#54a0ff"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Sketch paper (slightly lighter rectangle) -->
+  <rect x="60" y="60" width="240" height="300" rx="8" fill="#2a2a2a"/>
+  <!-- Sketch lines on paper -->
+  <path d="M80,120 Q130,100 180,115 Q210,123 220,145" fill="none" stroke="url(#sketchLine)" stroke-width="3" stroke-linecap="round"/>
+  <path d="M80,160 Q150,145 220,165 Q240,172 260,160" fill="none" stroke="#ff9f43" stroke-width="2.5" stroke-linecap="round" opacity="0.8"/>
+  <path d="M80,200 Q140,190 200,205 Q235,213 275,200" fill="none" stroke="#ff9f43" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
+  <!-- Sketch shape (rough hand drawing) -->
+  <path d="M100,250 Q120,230 160,235 Q190,238 195,260 Q198,278 175,285 Q148,290 125,278 Q100,265 100,250 Z" fill="none" stroke="url(#sketchLine)" stroke-width="3" stroke-linecap="round"/>
+  <!-- Hatching lines inside shape -->
+  <line x1="115" y1="270" x2="130" y2="250" stroke="#ff9f43" stroke-width="1.5" opacity="0.5"/>
+  <line x1="130" y1="278" x2="148" y2="254" stroke="#ff9f43" stroke-width="1.5" opacity="0.5"/>
+  <line x1="148" y1="283" x2="165" y2="260" stroke="#ff9f43" stroke-width="1.5" opacity="0.5"/>
+  <!-- Pencil / stylus on paper -->
+  <g transform="translate(230,280) rotate(-55)">
+    <rect x="-5" y="-70" width="10" height="50" rx="3" fill="#c0a060"/>
+    <rect x="-5" y="-80" width="10" height="14" rx="2" fill="#d4b896"/>
+    <rect x="-4" y="-20" width="8" height="12" rx="1" fill="#e0e0e0"/>
+    <polygon points="-5,0 5,0 2,18 -2,18" fill="#deb887"/>
+    <polygon points="-2,18 2,18 0,28 0,28" fill="#333"/>
+  </g>
+  <!-- Streaming arrow and target screen -->
+  <path d="M310,180 L340,180" stroke="url(#stream)" stroke-width="6" stroke-linecap="round"/>
+  <polygon points="344,174 358,180 344,186" fill="#00d2d3"/>
+  <!-- Target screens (cast targets) -->
+  <rect x="368" y="100" width="104" height="80" rx="8" fill="#333"/>
+  <rect x="376" y="108" width="88" height="60" rx="4" fill="#1a1a1a"/>
+  <path d="M384,148 Q420,135 456,148" fill="none" stroke="#ff9f43" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
+  <rect x="396" y="180" width="40" height="6" rx="3" fill="#444"/>
+  <rect x="368" y="210" width="104" height="80" rx="8" fill="#333"/>
+  <rect x="376" y="218" width="88" height="60" rx="4" fill="#1a1a1a"/>
+  <path d="M384,258 Q420,245 456,258" fill="none" stroke="#54a0ff" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
+  <rect x="396" y="290" width="40" height="6" rx="3" fill="#444"/>
+  <!-- Stream dots animation hint -->
+  <circle cx="326" cy="200" r="5" fill="#00d2d3" opacity="0.8"/>
+  <circle cx="344" cy="200" r="4" fill="#54a0ff" opacity="0.6"/>
+  <circle cx="358" cy="200" r="3" fill="#00d2d3" opacity="0.4"/>
+  <!-- Label -->
+  <text x="256" y="460" text-anchor="middle" font-family="Arial" font-size="16" letter-spacing="3" fill="#ff9f43" opacity="0.6">SKETCH STREAM</text>
+</svg>

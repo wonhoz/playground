@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a1a1a"/>
+      <stop offset="100%" stop-color="#2d1b69"/>
+    </linearGradient>
+    <linearGradient id="ctrl" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#667eea"/>
+      <stop offset="100%" stop-color="#764ba2"/>
+    </linearGradient>
+    <linearGradient id="alt" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f6d365"/>
+      <stop offset="100%" stop-color="#fda085"/>
+    </linearGradient>
+    <linearGradient id="key" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#43e97b"/>
+      <stop offset="100%" stop-color="#38f9d7"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Three keys in combination -->
+  <rect x="70" y="200" width="100" height="100" rx="14" fill="url(#ctrl)" filter="url(#glow)"/>
+  <rect x="70" y="200" width="100" height="100" rx="14" fill="none" stroke="white" stroke-width="2" opacity="0.3"/>
+  <!-- Inner bevel -->
+  <rect x="78" y="208" width="84" height="84" rx="10" fill="none" stroke="white" stroke-width="1" opacity="0.2"/>
+  <rect x="200" y="200" width="100" height="100" rx="14" fill="url(#alt)" filter="url(#glow)"/>
+  <rect x="200" y="200" width="100" height="100" rx="14" fill="none" stroke="white" stroke-width="2" opacity="0.3"/>
+  <rect x="208" y="208" width="84" height="84" rx="10" fill="none" stroke="white" stroke-width="1" opacity="0.2"/>
+  <rect x="340" y="200" width="100" height="100" rx="14" fill="url(#key)" filter="url(#glow)"/>
+  <rect x="340" y="200" width="100" height="100" rx="14" fill="none" stroke="white" stroke-width="2" opacity="0.3"/>
+  <rect x="348" y="208" width="84" height="84" rx="10" fill="none" stroke="white" stroke-width="1" opacity="0.2"/>
+  <!-- Plus signs between keys -->
+  <circle cx="185" cy="250" r="14" fill="white" opacity="0.9" filter="url(#glow)"/>
+  <line x1="178" y1="250" x2="192" y2="250" stroke="#1a1a1a" stroke-width="3"/>
+  <line x1="185" y1="243" x2="185" y2="257" stroke="#1a1a1a" stroke-width="3"/>
+  <circle cx="315" cy="250" r="14" fill="white" opacity="0.9" filter="url(#glow)"/>
+  <line x1="308" y1="250" x2="322" y2="250" stroke="#1a1a1a" stroke-width="3"/>
+  <line x1="315" y1="243" x2="315" y2="257" stroke="#1a1a1a" stroke-width="3"/>
+  <!-- Action result arrow -->
+  <path d="M256 340 L256 390" stroke="white" stroke-width="4" stroke-linecap="round" opacity="0.7"/>
+  <polygon points="240,382 256,410 272,382" fill="white" opacity="0.7"/>
+  <!-- Result icon circle -->
+  <circle cx="256" cy="440" r="28" fill="url(#key)" filter="url(#glow)"/>
+  <polygon points="246,430 270,440 246,450" fill="white" opacity="0.8"/>
+</svg>

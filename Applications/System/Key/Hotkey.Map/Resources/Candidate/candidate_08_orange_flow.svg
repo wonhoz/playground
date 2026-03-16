@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="65%">
+      <stop offset="0%" stop-color="#2d1500"/>
+      <stop offset="100%" stop-color="#1a0900"/>
+    </radialGradient>
+    <linearGradient id="orange" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fb923c"/>
+      <stop offset="100%" stop-color="#ea580c"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Flow diagram: key combinations flowing to action -->
+  <!-- Source key nodes -->
+  <rect x="48" y="80" width="72" height="44" rx="10" fill="#2d1500" stroke="#fb923c" stroke-width="2.5"/>
+  <text x="60" y="107" font-family="monospace" font-size="16" fill="#fb923c" font-weight="bold">Ctrl</text>
+  <rect x="48" y="144" width="72" height="44" rx="10" fill="#2d1500" stroke="#fb923c" stroke-width="2.5"/>
+  <text x="62" y="171" font-family="monospace" font-size="16" fill="#fb923c" font-weight="bold">Alt</text>
+  <rect x="48" y="208" width="72" height="44" rx="10" fill="#2d1500" stroke="#ea580c" stroke-width="2"/>
+  <text x="56" y="235" font-family="monospace" font-size="15" fill="#ea580c">Shift</text>
+  <rect x="48" y="272" width="72" height="44" rx="10" fill="#2d1500" stroke="#ea580c" stroke-width="2"/>
+  <text x="62" y="299" font-family="monospace" font-size="16" fill="#ea580c">Win</text>
+  <rect x="48" y="336" width="72" height="44" rx="10" fill="#2d1500" stroke="#c2410c" stroke-width="1.5"/>
+  <text x="64" y="363" font-family="monospace" font-size="16" fill="#c2410c">Tab</text>
+  <rect x="48" y="400" width="72" height="44" rx="10" fill="#2d1500" stroke="#c2410c" stroke-width="1.5"/>
+  <text x="64" y="427" font-family="monospace" font-size="16" fill="#c2410c">Esc</text>
+  <!-- Flow lines converging to center node -->
+  <line x1="120" y1="102" x2="192" y2="256" stroke="#fb923c" stroke-width="2" opacity="0.7"/>
+  <line x1="120" y1="166" x2="192" y2="256" stroke="#fb923c" stroke-width="2" opacity="0.7"/>
+  <line x1="120" y1="230" x2="192" y2="256" stroke="#ea580c" stroke-width="1.5" opacity="0.6"/>
+  <line x1="120" y1="294" x2="192" y2="256" stroke="#ea580c" stroke-width="1.5" opacity="0.6"/>
+  <line x1="120" y1="358" x2="192" y2="256" stroke="#c2410c" stroke-width="1.5" opacity="0.5"/>
+  <line x1="120" y1="422" x2="192" y2="256" stroke="#c2410c" stroke-width="1.5" opacity="0.5"/>
+  <!-- Central mixer node -->
+  <circle cx="224" cy="256" r="36" fill="#2d1500" stroke="url(#orange)" stroke-width="3"/>
+  <text x="202" y="250" font-family="monospace" font-size="12" fill="#fb923c">HOT</text>
+  <text x="204" y="268" font-family="monospace" font-size="12" fill="#fb923c">KEY</text>
+  <!-- Flow out to action nodes -->
+  <line x1="260" y1="256" x2="324" y2="176" stroke="#fb923c" stroke-width="2.5" opacity="0.9"/>
+  <line x1="260" y1="256" x2="324" y2="256" stroke="#fb923c" stroke-width="3" opacity="1"/>
+  <line x1="260" y1="256" x2="324" y2="336" stroke="#ea580c" stroke-width="2" opacity="0.7"/>
+  <!-- Action nodes -->
+  <rect x="324" y="152" width="144" height="48" rx="10" fill="#2d1500" stroke="#fb923c" stroke-width="2"/>
+  <text x="336" y="175" font-family="monospace" font-size="13" fill="#fdba74">Open File Manager</text>
+  <text x="336" y="193" font-family="monospace" font-size="11" fill="#c2410c">Win + E</text>
+  <rect x="324" y="232" width="144" height="48" rx="10" fill="#fb923c" opacity="0.9"/>
+  <text x="336" y="255" font-family="monospace" font-size="13" fill="white" font-weight="bold">Screenshot</text>
+  <text x="336" y="273" font-family="monospace" font-size="11" fill="#fff7ed" font-weight="bold">Alt + PrtSc</text>
+  <rect x="324" y="312" width="144" height="48" rx="10" fill="#2d1500" stroke="#ea580c" stroke-width="2"/>
+  <text x="336" y="335" font-family="monospace" font-size="13" fill="#fdba74">Close Window</text>
+  <text x="336" y="353" font-family="monospace" font-size="11" fill="#c2410c">Alt + F4</text>
+  <!-- Plus icons on flow lines -->
+  <circle cx="160" cy="256" r="12" fill="#2d1500" stroke="#fb923c" stroke-width="2"/>
+  <text x="155" y="261" font-family="monospace" font-size="14" fill="#fb923c">+</text>
+</svg>

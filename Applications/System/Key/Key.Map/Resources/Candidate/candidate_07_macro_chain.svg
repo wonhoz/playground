@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0a0a1e"/>
+      <stop offset="100%" stop-color="#1e0a1e"/>
+    </linearGradient>
+    <linearGradient id="keyMacro" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#8b5cf6"/>
+      <stop offset="100%" stop-color="#6d28d9"/>
+    </linearGradient>
+    <linearGradient id="action" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#06b6d4"/>
+      <stop offset="100%" stop-color="#0891b2"/>
+    </linearGradient>
+    <linearGradient id="chain" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#8b5cf6"/>
+      <stop offset="100%" stop-color="#06b6d4"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Single trigger key (left) -->
+  <rect x="50" y="180" width="90" height="90" rx="14" fill="url(#keyMacro)"/>
+  <text x="95" y="235" text-anchor="middle" font-family="monospace" font-size="32" font-weight="bold" fill="white">F5</text>
+  <!-- Chain arrow -->
+  <line x1="145" y1="225" x2="175" y2="225" stroke="url(#chain)" stroke-width="5" stroke-linecap="round"/>
+  <polygon points="175,218 190,225 175,232" fill="#8b5cf6"/>
+  <!-- Action 1 -->
+  <rect x="192" y="152" width="106" height="40" rx="8" fill="url(#action)"/>
+  <text x="245" y="177" text-anchor="middle" font-family="Arial" font-size="13" fill="white">Ctrl+C</text>
+  <!-- Chain down -->
+  <line x1="245" y1="195" x2="245" y2="213" stroke="#06b6d4" stroke-width="3" stroke-linecap="round"/>
+  <polygon points="238,213 245,226 252,213" fill="#06b6d4"/>
+  <!-- Action 2 -->
+  <rect x="192" y="228" width="106" height="40" rx="8" fill="url(#action)"/>
+  <text x="245" y="253" text-anchor="middle" font-family="Arial" font-size="13" fill="white">Alt+Tab</text>
+  <!-- Chain down -->
+  <line x1="245" y1="270" x2="245" y2="288" stroke="#06b6d4" stroke-width="3" stroke-linecap="round"/>
+  <polygon points="238,288 245,300 252,288" fill="#06b6d4"/>
+  <!-- Action 3 -->
+  <rect x="192" y="302" width="106" height="40" rx="8" fill="url(#action)"/>
+  <text x="245" y="327" text-anchor="middle" font-family="Arial" font-size="13" fill="white">Ctrl+V</text>
+  <!-- End arrow to result -->
+  <line x1="298" y1="225" x2="328" y2="225" stroke="url(#chain)" stroke-width="4" stroke-linecap="round"/>
+  <polygon points="328,218 342,225 328,232" fill="#06b6d4"/>
+  <!-- Result box -->
+  <rect x="344" y="192" width="116" height="66" rx="10" fill="#1a2a3a"/>
+  <rect x="344" y="192" width="116" height="66" rx="10" fill="none" stroke="#06b6d4" stroke-width="2"/>
+  <text x="402" y="218" text-anchor="middle" font-family="Arial" font-size="11" fill="#888">MACRO RUN</text>
+  <text x="402" y="238" text-anchor="middle" font-family="Arial" font-size="13" fill="#06b6d4">3 actions</text>
+  <text x="402" y="254" text-anchor="middle" font-family="Arial" font-size="11" fill="#888">on F5 press</text>
+  <!-- Label -->
+  <text x="256" y="420" text-anchor="middle" font-family="Arial" font-size="16" letter-spacing="2" fill="#8b5cf6" opacity="0.7">MACRO CHAIN</text>
+  <text x="256" y="445" text-anchor="middle" font-family="Arial" font-size="12" fill="#888" opacity="0.5">Key → Multi-Action Sequence</text>
+</svg>

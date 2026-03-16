@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f2027"/>
+      <stop offset="50%" stop-color="#203a43"/>
+      <stop offset="100%" stop-color="#2c5364"/>
+    </linearGradient>
+    <linearGradient id="bridgeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#4776E6"/>
+      <stop offset="50%" stop-color="#8E54E9"/>
+      <stop offset="100%" stop-color="#ee0979"/>
+    </linearGradient>
+    <linearGradient id="leftPlatform" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4776E6"/>
+      <stop offset="100%" stop-color="#2F80ED"/>
+    </linearGradient>
+    <linearGradient id="rightPlatform" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ee0979"/>
+      <stop offset="100%" stop-color="#ff6a00"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+
+  <!-- Water/river below bridge -->
+  <ellipse cx="256" cy="380" rx="200" ry="30" fill="#1a3a5c" opacity="0.7"/>
+  <ellipse cx="230" cy="385" rx="150" ry="15" fill="#2F80ED" opacity="0.2"/>
+  <!-- Water ripples -->
+  <ellipse cx="256" cy="375" rx="120" ry="6" fill="none" stroke="#56CCF2" stroke-width="1.5" opacity="0.3"/>
+  <ellipse cx="256" cy="385" rx="160" ry="8" fill="none" stroke="#56CCF2" stroke-width="1" opacity="0.2"/>
+
+  <!-- Left platform (source language) -->
+  <rect x="55" y="240" width="130" height="120" rx="12" fill="url(#leftPlatform)" opacity="0.9"/>
+  <rect x="55" y="240" width="130" height="25" rx="12" fill="#fff" opacity="0.12"/>
+  <!-- Text lines on left -->
+  <rect x="72" y="278" width="95" height="9" rx="4" fill="#fff" opacity="0.85"/>
+  <rect x="72" y="297" width="70" height="8" rx="4" fill="#fff" opacity="0.65"/>
+  <rect x="72" y="314" width="88" height="8" rx="4" fill="#fff" opacity="0.65"/>
+  <rect x="72" y="333" width="55" height="8" rx="4" fill="#fff" opacity="0.5"/>
+
+  <!-- Right platform (target language) -->
+  <rect x="325" y="240" width="130" height="120" rx="12" fill="url(#rightPlatform)" opacity="0.9"/>
+  <rect x="325" y="240" width="130" height="25" rx="12" fill="#fff" opacity="0.12"/>
+  <!-- Text lines on right (different pattern) -->
+  <rect x="342" y="278" width="75" height="9" rx="4" fill="#fff" opacity="0.85"/>
+  <rect x="342" y="297" width="98" height="8" rx="4" fill="#fff" opacity="0.65"/>
+  <rect x="342" y="314" width="62" height="8" rx="4" fill="#fff" opacity="0.65"/>
+  <rect x="342" y="333" width="90" height="8" rx="4" fill="#fff" opacity="0.5"/>
+
+  <!-- Bridge cables/pillars -->
+  <rect x="168" y="200" width="12" height="160" rx="6" fill="#ffd200" opacity="0.9" filter="url(#glow)"/>
+  <rect x="330" y="200" width="12" height="160" rx="6" fill="#ffd200" opacity="0.9" filter="url(#glow)"/>
+
+  <!-- Bridge deck -->
+  <rect x="115" y="280" width="280" height="22" rx="11" fill="url(#bridgeGrad)" filter="url(#glow)"/>
+
+  <!-- Suspension cables -->
+  <path d="M174,200 Q220,270 255,282" stroke="#ffd200" stroke-width="2.5" fill="none" opacity="0.7"/>
+  <path d="M336,200 Q292,270 257,282" stroke="#ffd200" stroke-width="2.5" fill="none" opacity="0.7"/>
+  <!-- Secondary cables -->
+  <path d="M174,200 Q200,255 220,283" stroke="#ffd200" stroke-width="1.5" fill="none" opacity="0.45"/>
+  <path d="M336,200 Q312,255 294,283" stroke="#ffd200" stroke-width="1.5" fill="none" opacity="0.45"/>
+  <path d="M174,210 Q190,260 210,283" stroke="#ffd200" stroke-width="1" fill="none" opacity="0.3"/>
+  <path d="M336,210 Q320,260 304,283" stroke="#ffd200" stroke-width="1" fill="none" opacity="0.3"/>
+
+  <!-- Vertical cable hangers -->
+  <line x1="200" y1="237" x2="200" y2="280" stroke="#ffd200" stroke-width="1.5" opacity="0.5"/>
+  <line x1="222" y1="262" x2="222" y2="280" stroke="#ffd200" stroke-width="1.5" opacity="0.5"/>
+  <line x1="244" y1="273" x2="244" y2="280" stroke="#ffd200" stroke-width="1.5" opacity="0.5"/>
+  <line x1="268" y1="273" x2="268" y2="280" stroke="#ffd200" stroke-width="1.5" opacity="0.5"/>
+  <line x1="290" y1="262" x2="290" y2="280" stroke="#ffd200" stroke-width="1.5" opacity="0.5"/>
+  <line x1="312" y1="237" x2="312" y2="280" stroke="#ffd200" stroke-width="1.5" opacity="0.5"/>
+
+  <!-- Walking figure on bridge -->
+  <circle cx="256" cy="265" r="9" fill="#ffd200" opacity="0.9"/>
+  <line x1="256" y1="274" x2="256" y2="290" stroke="#ffd200" stroke-width="2.5" opacity="0.9"/>
+  <line x1="248" y1="280" x2="264" y2="280" stroke="#ffd200" stroke-width="2.5" opacity="0.9"/>
+  <line x1="256" y1="290" x2="248" y2="302" stroke="#ffd200" stroke-width="2" opacity="0.9"/>
+  <line x1="256" y1="290" x2="264" y2="302" stroke="#ffd200" stroke-width="2" opacity="0.9"/>
+
+  <!-- Tower tops -->
+  <polygon points="174,200 168,175 180,175" fill="#ffd200" filter="url(#glow)"/>
+  <polygon points="336,200 330,175 342,175" fill="#ffd200" filter="url(#glow)"/>
+</svg>

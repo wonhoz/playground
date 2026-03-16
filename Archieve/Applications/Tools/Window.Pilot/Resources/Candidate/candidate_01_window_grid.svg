@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a1628"/>
+      <stop offset="100%" stop-color="#1a2a48"/>
+    </linearGradient>
+    <linearGradient id="winBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e40af"/>
+      <stop offset="100%" stop-color="#1d4ed8"/>
+    </linearGradient>
+    <linearGradient id="winActive" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2563eb"/>
+      <stop offset="100%" stop-color="#3b82f6"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- 4분할 창 레이아웃 -->
+  <!-- 좌상단 창 -->
+  <rect x="72" y="80" width="160" height="130" rx="8" fill="url(#winBlue)" stroke="#3b82f6" stroke-width="1.5"/>
+  <rect x="72" y="80" width="160" height="24" rx="8" fill="#1e3a8a"/>
+  <rect x="72" y="92" width="160" height="12" rx="0" fill="#1e3a8a"/>
+  <circle cx="90" cy="92" r="5" fill="#ef4444"/>
+  <circle cx="106" cy="92" r="5" fill="#f59e0b"/>
+  <circle cx="122" cy="92" r="5" fill="#22c55e"/>
+  <!-- 우상단 창 -->
+  <rect x="246" y="80" width="194" height="130" rx="8" fill="url(#winActive)" stroke="#60a5fa" stroke-width="2" filter="url(#glow)"/>
+  <rect x="246" y="80" width="194" height="24" rx="8" fill="#1d4ed8"/>
+  <rect x="246" y="92" width="194" height="12" rx="0" fill="#1d4ed8"/>
+  <circle cx="264" cy="92" r="5" fill="#ef4444"/>
+  <circle cx="280" cy="92" r="5" fill="#f59e0b"/>
+  <circle cx="296" cy="92" r="5" fill="#22c55e"/>
+  <!-- 좌하단 창 -->
+  <rect x="72" y="228" width="160" height="204" rx="8" fill="url(#winBlue)" stroke="#3b82f6" stroke-width="1.5"/>
+  <rect x="72" y="228" width="160" height="24" rx="8" fill="#1e3a8a"/>
+  <rect x="72" y="240" width="160" height="12" rx="0" fill="#1e3a8a"/>
+  <circle cx="90" cy="240" r="5" fill="#ef4444"/>
+  <circle cx="106" cy="240" r="5" fill="#f59e0b"/>
+  <circle cx="122" cy="240" r="5" fill="#22c55e"/>
+  <!-- 우하단 창 -->
+  <rect x="246" y="228" width="194" height="204" rx="8" fill="url(#winBlue)" stroke="#3b82f6" stroke-width="1.5"/>
+  <rect x="246" y="228" width="194" height="24" rx="8" fill="#1e3a8a"/>
+  <rect x="246" y="240" width="194" height="12" rx="0" fill="#1e3a8a"/>
+  <circle cx="264" cy="240" r="5" fill="#ef4444"/>
+  <circle cx="280" cy="240" r="5" fill="#f59e0b"/>
+  <circle cx="296" cy="240" r="5" fill="#22c55e"/>
+  <!-- 파일럿 조이스틱 아이콘 (중앙 교차점) -->
+  <circle cx="220" cy="216" r="20" fill="#1e40af" stroke="#60a5fa" stroke-width="2"/>
+  <circle cx="220" cy="216" r="8" fill="#60a5fa"/>
+</svg>

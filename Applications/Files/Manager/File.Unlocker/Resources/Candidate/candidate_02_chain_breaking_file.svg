@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0d0d1a"/>
+      <stop offset="100%" stop-color="#1a0a2e"/>
+    </linearGradient>
+    <linearGradient id="file" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4fc3f7"/>
+      <stop offset="100%" stop-color="#0288d1"/>
+    </linearGradient>
+    <linearGradient id="chain" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#90a4ae"/>
+      <stop offset="100%" stop-color="#546e7a"/>
+    </linearGradient>
+    <filter id="spark">
+      <feGaussianBlur stdDeviation="4"/>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- file -->
+  <path d="M180 140 L300 140 L340 180 L340 370 L180 370 Z" fill="url(#file)"/>
+  <path d="M300 140 L300 180 L340 180" fill="none" stroke="#0277bd" stroke-width="3"/>
+  <rect x="210" y="220" width="100" height="10" rx="5" fill="#b3e5fc" opacity="0.6"/>
+  <rect x="210" y="245" width="80" height="10" rx="5" fill="#b3e5fc" opacity="0.4"/>
+  <!-- chain links left -->
+  <ellipse cx="130" cy="280" rx="22" ry="14" fill="none" stroke="url(#chain)" stroke-width="10"/>
+  <ellipse cx="80" cy="280" rx="22" ry="14" fill="none" stroke="url(#chain)" stroke-width="10"/>
+  <!-- chain break sparks -->
+  <circle cx="160" cy="280" r="5" fill="#ffeb3b" filter="url(#spark)" opacity="0.9"/>
+  <line x1="155" y1="270" x2="148" y2="262" stroke="#ffeb3b" stroke-width="3"/>
+  <line x1="165" y1="272" x2="170" y2="264" stroke="#ff9800" stroke-width="3"/>
+  <line x1="150" y1="285" x2="142" y2="292" stroke="#ffeb3b" stroke-width="2"/>
+  <!-- broken chain right side -->
+  <ellipse cx="390" cy="280" rx="22" ry="14" fill="none" stroke="url(#chain)" stroke-width="10"/>
+  <ellipse cx="440" cy="280" rx="22" ry="14" fill="none" stroke="url(#chain)" stroke-width="10"/>
+</svg>

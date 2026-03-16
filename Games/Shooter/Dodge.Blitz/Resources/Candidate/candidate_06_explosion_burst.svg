@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0A0000"/>
+      <stop offset="100%" stop-color="#1A0500"/>
+    </linearGradient>
+    <radialGradient id="explosionCore" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFFBEB"/>
+      <stop offset="20%" stop-color="#FDE68A"/>
+      <stop offset="50%" stop-color="#F97316"/>
+      <stop offset="80%" stop-color="#EF4444"/>
+      <stop offset="100%" stop-color="#7F1D1D" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Outer explosion ring -->
+  <circle cx="256" cy="256" r="200" fill="#7F1D1D" opacity="0.15"/>
+  <circle cx="256" cy="256" r="160" fill="#92400E" opacity="0.2"/>
+  <!-- Explosion spikes -->
+  <polygon points="256,60 242,200 256,150 270,200" fill="#F97316" opacity="0.85"/>
+  <polygon points="452,60 330,185 370,170 310,220" fill="#F97316" opacity="0.75"/>
+  <polygon points="452,256 312,242 360,256 312,270" fill="#F97316" opacity="0.85"/>
+  <polygon points="452,452 312,312 350,345 310,290" fill="#F97316" opacity="0.75"/>
+  <polygon points="256,452 242,312 256,360 270,312" fill="#F97316" opacity="0.85"/>
+  <polygon points="60,452 200,312 165,348 210,295" fill="#F97316" opacity="0.75"/>
+  <polygon points="60,256 200,242 152,256 200,270" fill="#F97316" opacity="0.85"/>
+  <polygon points="60,60 195,190 165,165 210,210" fill="#F97316" opacity="0.75"/>
+  <!-- Inner explosion -->
+  <circle cx="256" cy="256" r="120" fill="url(#explosionCore)" opacity="0.9"/>
+  <!-- Center bright core -->
+  <circle cx="256" cy="256" r="40" fill="white" opacity="0.9"/>
+  <!-- Flying debris -->
+  <rect x="150" y="140" width="16" height="8" rx="3" fill="#F97316" transform="rotate(-45,150,140)"/>
+  <rect x="360" y="130" width="14" height="7" rx="3" fill="#EF4444" transform="rotate(30,360,130)"/>
+  <rect x="380" y="360" width="18" height="8" rx="3" fill="#F97316" transform="rotate(60,380,360)"/>
+  <rect x="130" y="370" width="14" height="7" rx="3" fill="#EF4444" transform="rotate(-60,130,370)"/>
+  <!-- Score flash -->
+  <text x="256" y="265" font-family="monospace" font-size="22" fill="#1A0500" text-anchor="middle" font-weight="bold">BLITZ!</text>
+</svg>

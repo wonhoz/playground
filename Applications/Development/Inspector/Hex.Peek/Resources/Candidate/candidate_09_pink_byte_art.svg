@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#180018"/>
+      <stop offset="100%" stop-color="#080008"/>
+    </radialGradient>
+    <linearGradient id="pink_grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF0088"/>
+      <stop offset="100%" stop-color="#FF44CC"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Pixel art "HEX" made of colored byte blocks -->
+  <!-- H -->
+  <rect x="72" y="100" width="20" height="20" rx="2" fill="#FF0088"/>
+  <rect x="72" y="124" width="20" height="20" rx="2" fill="#FF0088"/>
+  <rect x="72" y="148" width="20" height="20" rx="2" fill="#FF0088"/>
+  <rect x="96" y="148" width="20" height="20" rx="2" fill="#FF44CC"/>
+  <rect x="120" y="100" width="20" height="20" rx="2" fill="#FF0088"/>
+  <rect x="120" y="124" width="20" height="20" rx="2" fill="#FF0088"/>
+  <rect x="120" y="148" width="20" height="20" rx="2" fill="#FF0088"/>
+  <!-- E -->
+  <rect x="156" y="100" width="20" height="20" rx="2" fill="#CC00FF"/>
+  <rect x="180" y="100" width="20" height="20" rx="2" fill="#CC00FF"/>
+  <rect x="156" y="124" width="20" height="20" rx="2" fill="#CC00FF"/>
+  <rect x="180" y="124" width="20" height="20" rx="2" fill="#AA00DD"/>
+  <rect x="156" y="148" width="20" height="20" rx="2" fill="#CC00FF"/>
+  <rect x="180" y="148" width="20" height="20" rx="2" fill="#CC00FF"/>
+  <!-- X -->
+  <rect x="216" y="100" width="20" height="20" rx="2" fill="#FF0088"/>
+  <rect x="256" y="100" width="20" height="20" rx="2" fill="#FF0088"/>
+  <rect x="236" y="124" width="20" height="20" rx="2" fill="#FF44CC"/>
+  <rect x="216" y="148" width="20" height="20" rx="2" fill="#FF0088"/>
+  <rect x="256" y="148" width="20" height="20" rx="2" fill="#FF0088"/>
+  <!-- Byte grid below -->
+  <text x="72" y="220" fill="#660044" font-size="12" font-family="monospace">48 45 58 00 50 65 65 6B</text>
+  <text x="72" y="242" fill="#440033" font-size="12" font-family="monospace">00 00 00 00 00 00 00 00</text>
+  <text x="72" y="264" fill="#660044" font-size="12" font-family="monospace">FF FE 00 00 DE AD BE EF</text>
+  <!-- "Hex" decoded text -->
+  <rect x="72" y="290" width="368" height="50" rx="8" fill="#180018" stroke="#FF0088" stroke-width="2"/>
+  <text x="92" y="312" fill="#880044" font-size="12" font-family="monospace">Decoded:</text>
+  <text x="92" y="330" fill="#FF44CC" font-size="16" font-family="monospace">"HEX" + NUL + "PeeK"</text>
+  <!-- Small byte squares decorative -->
+  <rect x="310" y="100" width="16" height="16" rx="2" fill="#FF0088" opacity="0.5"/>
+  <rect x="332" y="100" width="16" height="16" rx="2" fill="#CC00FF" opacity="0.4"/>
+  <rect x="354" y="100" width="16" height="16" rx="2" fill="#FF44CC" opacity="0.6"/>
+  <rect x="376" y="100" width="16" height="16" rx="2" fill="#FF0088" opacity="0.3"/>
+  <rect x="398" y="100" width="16" height="16" rx="2" fill="#CC00FF" opacity="0.5"/>
+  <rect x="420" y="100" width="16" height="16" rx="2" fill="#FF44CC" opacity="0.4"/>
+  <rect x="310" y="122" width="16" height="16" rx="2" fill="#CC00FF" opacity="0.3"/>
+  <rect x="332" y="122" width="16" height="16" rx="2" fill="#FF44CC" opacity="0.6"/>
+  <rect x="354" y="122" width="16" height="16" rx="2" fill="#FF0088" opacity="0.5"/>
+  <rect x="376" y="122" width="16" height="16" rx="2" fill="#CC00FF" opacity="0.4"/>
+  <rect x="398" y="122" width="16" height="16" rx="2" fill="#FF44CC" opacity="0.3"/>
+  <rect x="420" y="122" width="16" height="16" rx="2" fill="#FF0088" opacity="0.6"/>
+  <!-- Title bottom -->
+  <text x="256" y="400" text-anchor="middle" fill="#FF0088" font-size="22" font-family="monospace" font-weight="bold">Hex.Peek</text>
+  <text x="256" y="430" text-anchor="middle" fill="#660033" font-size="14" font-family="monospace">16-bit · 32-bit · 64-bit</text>
+  <!-- Footer hex values -->
+  <text x="256" y="475" text-anchor="middle" fill="#330022" font-size="12" font-family="monospace">48 65 78 2E 50 65 65 6B</text>
+</svg>

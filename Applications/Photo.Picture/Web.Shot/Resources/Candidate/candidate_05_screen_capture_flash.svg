@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1c1c2e"/>
+      <stop offset="100%" stop-color="#2e2e4e"/>
+    </linearGradient>
+    <linearGradient id="screen" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2c3e50"/>
+      <stop offset="100%" stop-color="#3d5a70"/>
+    </linearGradient>
+    <linearGradient id="flash" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fff"/>
+      <stop offset="100%" stop-color="#ffe066"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glow2">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Monitor/screen -->
+  <rect x="70" y="100" width="372" height="240" rx="14" fill="url(#screen)"/>
+  <rect x="86" y="116" width="340" height="208" rx="6" fill="#1c1c2e" opacity="0.9"/>
+  <!-- Screen stand -->
+  <rect x="220" y="340" width="72" height="30" rx="0" fill="url(#screen)"/>
+  <rect x="170" y="368" width="172" height="14" rx="7" fill="url(#screen)"/>
+  <!-- Web content on screen -->
+  <rect x="100" y="130" width="312" height="12" rx="3" fill="#3d5a70" opacity="0.6"/>
+  <rect x="100" y="154" width="240" height="8" rx="3" fill="#3d5a70" opacity="0.4"/>
+  <rect x="100" y="172" width="280" height="8" rx="3" fill="#3d5a70" opacity="0.4"/>
+  <!-- Flash effect -->
+  <polygon points="256,150 230,240 252,240 228,320 290,210 268,210 294,150" fill="url(#flash)" filter="url(#glow)"/>
+  <!-- Corner capture marks -->
+  <path d="M86 116 L86 136 L106 136" stroke="url(#flash)" stroke-width="4" fill="none" stroke-linecap="round" filter="url(#glow2)"/>
+  <path d="M426 116 L426 136 L406 136" stroke="url(#flash)" stroke-width="4" fill="none" stroke-linecap="round" filter="url(#glow2)"/>
+  <path d="M86 324 L86 304 L106 304" stroke="url(#flash)" stroke-width="4" fill="none" stroke-linecap="round" filter="url(#glow2)"/>
+  <path d="M426 324 L426 304 L406 304" stroke="url(#flash)" stroke-width="4" fill="none" stroke-linecap="round" filter="url(#glow2)"/>
+</svg>

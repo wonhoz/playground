@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10001A"/>
+      <stop offset="100%" stop-color="#180028"/>
+    </linearGradient>
+    <linearGradient id="t1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FF4466"/>
+      <stop offset="100%" stop-color="#CC1133"/>
+    </linearGradient>
+    <linearGradient id="t2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FF8800"/>
+      <stop offset="100%" stop-color="#CC5500"/>
+    </linearGradient>
+    <linearGradient id="t3" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFDD00"/>
+      <stop offset="100%" stop-color="#CC9900"/>
+    </linearGradient>
+    <linearGradient id="t4" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#44FF88"/>
+      <stop offset="100%" stop-color="#00AA44"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Rainbow burst lines from center -->
+  <line x1="256" y1="280" x2="80" y2="100" stroke="#FF4466" stroke-width="1.5" opacity="0.2"/>
+  <line x1="256" y1="280" x2="256" y2="60" stroke="#FF8800" stroke-width="1.5" opacity="0.2"/>
+  <line x1="256" y1="280" x2="432" y2="100" stroke="#FFDD00" stroke-width="1.5" opacity="0.2"/>
+  <line x1="256" y1="280" x2="472" y2="280" stroke="#44FF88" stroke-width="1.5" opacity="0.2"/>
+  <!-- Colorful dominos in arc -->
+  <rect x="68" y="186" width="46" height="92" rx="7" fill="url(#t1)" stroke="#FF8899" stroke-width="2"/>
+  <line x1="68" y1="232" x2="114" y2="232" stroke="#FFBBCC" stroke-width="1.5" opacity="0.6"/>
+  <circle cx="84" cy="208" r="4.5" fill="white" opacity="0.9"/>
+  <circle cx="98" cy="208" r="4.5" fill="white" opacity="0.9"/>
+  <circle cx="91" cy="255" r="4.5" fill="white" opacity="0.9"/>
+  <!-- Tilting 2 -->
+  <g transform="rotate(-22 193 268)">
+    <rect x="170" y="186" width="46" height="92" rx="7" fill="url(#t2)" stroke="#FFAA44" stroke-width="2"/>
+    <line x1="170" y1="232" x2="216" y2="232" stroke="#FFDDAA" stroke-width="1.5" opacity="0.6"/>
+    <circle cx="186" cy="208" r="4.5" fill="white" opacity="0.9"/>
+    <circle cx="200" cy="255" r="4.5" fill="white" opacity="0.9"/>
+    <circle cx="186" cy="255" r="4.5" fill="white" opacity="0.9"/>
+  </g>
+  <!-- Tilting 3 -->
+  <g transform="rotate(-48 273 275)">
+    <rect x="250" y="186" width="46" height="92" rx="7" fill="url(#t3)" stroke="#FFEE66" stroke-width="2"/>
+    <line x1="250" y1="232" x2="296" y2="232" stroke="#FFFFAA" stroke-width="1.5" opacity="0.6"/>
+    <circle cx="266" cy="208" r="4.5" fill="#664400" opacity="0.8"/>
+    <circle cx="280" cy="208" r="4.5" fill="#664400" opacity="0.8"/>
+    <circle cx="273" cy="232" r="4.5" fill="#664400" opacity="0.8"/>
+    <circle cx="266" cy="255" r="4.5" fill="#664400" opacity="0.8"/>
+    <circle cx="280" cy="255" r="4.5" fill="#664400" opacity="0.8"/>
+  </g>
+  <!-- Fallen -->
+  <g transform="rotate(-90 367 276)">
+    <rect x="344" y="186" width="46" height="92" rx="7" fill="url(#t4)" stroke="#88FF99" stroke-width="2" opacity="0.9"/>
+    <line x1="344" y1="232" x2="390" y2="232" stroke="#CCFFDD" stroke-width="1.5" opacity="0.6"/>
+    <circle cx="360" cy="208" r="4.5" fill="#003311" opacity="0.8"/>
+    <circle cx="374" cy="255" r="4.5" fill="#003311" opacity="0.8"/>
+  </g>
+  <!-- Burst explosion rainbow -->
+  <circle cx="430" cy="275" r="48" fill="none" stroke="#FF4466" stroke-width="2" opacity="0.3"/>
+  <circle cx="430" cy="275" r="34" fill="none" stroke="#FF8800" stroke-width="2" opacity="0.35"/>
+  <circle cx="430" cy="275" r="20" fill="none" stroke="#FFDD00" stroke-width="2" opacity="0.4"/>
+  <circle cx="430" cy="275" r="8" fill="#FFFFFF" opacity="0.5"/>
+  <text x="256" y="450" font-family="Arial Black" font-size="24" fill="url(#t2)" text-anchor="middle">DOMINO·CHAIN</text>
+</svg>

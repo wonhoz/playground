@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4a148c"/>
+      <stop offset="100%" stop-color="#6a1b9a"/>
+    </linearGradient>
+    <linearGradient id="folderGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ce93d8"/>
+      <stop offset="100%" stop-color="#ab47bc"/>
+    </linearGradient>
+    <linearGradient id="appGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f3e5f5"/>
+      <stop offset="100%" stop-color="#e1bee7"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Left file/folder -->
+  <rect x="60" y="180" width="155" height="200" rx="12" fill="url(#folderGrad)"/>
+  <rect x="60" y="155" width="90" height="30" rx="8 8 0 0" fill="#ce93d8"/>
+  <!-- File lines left -->
+  <rect x="80" y="225" width="115" height="10" rx="5" fill="#4a148c" opacity="0.4"/>
+  <rect x="80" y="245" width="95" height="10" rx="5" fill="#4a148c" opacity="0.4"/>
+  <rect x="80" y="265" width="105" height="10" rx="5" fill="#4a148c" opacity="0.4"/>
+  <!-- Extension badge left -->
+  <rect x="80" y="295" width="70" height="25" rx="6" fill="#4a148c"/>
+  <text x="115" y="312" font-family="Arial" font-size="13" font-weight="bold" fill="#ce93d8" text-anchor="middle">.PDF</text>
+  <!-- Arrow / Link -->
+  <path d="M230 280 Q256 256 282 280" fill="none" stroke="#f3e5f5" stroke-width="6" stroke-dasharray="8,4" marker-end="url(#arrow)"/>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 Z" fill="#f3e5f5"/>
+    </marker>
+  </defs>
+  <!-- Link icon center -->
+  <circle cx="256" cy="280" r="22" fill="#6a1b9a" stroke="#f3e5f5" stroke-width="2"/>
+  <path d="M244,280 Q256,265 268,280 Q256,295 244,280 Z" fill="#f3e5f5"/>
+  <!-- Right app block -->
+  <rect x="297" y="180" width="155" height="200" rx="12" fill="url(#appGrad)"/>
+  <!-- App icon grid -->
+  <rect x="317" y="210" width="50" height="50" rx="8" fill="#ab47bc"/>
+  <rect x="382" y="210" width="50" height="50" rx="8" fill="#7b1fa2"/>
+  <rect x="317" y="275" width="50" height="50" rx="8" fill="#9c27b0"/>
+  <rect x="382" y="275" width="50" height="50" rx="8" fill="#ce93d8"/>
+  <!-- Small icons inside -->
+  <text x="342" y="242" font-family="Arial" font-size="22" text-anchor="middle" fill="white">A</text>
+  <text x="407" y="242" font-family="Arial" font-size="22" text-anchor="middle" fill="white">B</text>
+  <text x="342" y="308" font-family="Arial" font-size="22" text-anchor="middle" fill="white">C</text>
+  <text x="407" y="308" font-family="Arial" font-size="22" text-anchor="middle" fill="#4a148c">D</text>
+</svg>

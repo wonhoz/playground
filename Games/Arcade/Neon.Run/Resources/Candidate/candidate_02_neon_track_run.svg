@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#050510"/>
+      <stop offset="100%" style="stop-color:#0a0520"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <linearGradient id="trackGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#8800ff"/>
+      <stop offset="100%" style="stop-color:#ff0088"/>
+    </linearGradient>
+    <linearGradient id="laneGrad" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" style="stop-color:#ff00aa;stop-opacity:0.8"/>
+      <stop offset="100%" style="stop-color:#ff00aa;stop-opacity:0"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Track lanes perspective -->
+  <path d="M180 450 L256 180 L332 450 Z" fill="url(#laneGrad)" opacity="0.15"/>
+  <line x1="180" y1="450" x2="256" y2="180" stroke="#ff00aa" stroke-width="2" filter="url(#glow)" opacity="0.7"/>
+  <line x1="332" y1="450" x2="256" y2="180" stroke="#ff00aa" stroke-width="2" filter="url(#glow)" opacity="0.7"/>
+  <!-- Lane dividers -->
+  <line x1="218" y1="450" x2="256" y2="180" stroke="#8800ff" stroke-width="1" opacity="0.5" filter="url(#glow)"/>
+  <line x1="294" y1="450" x2="256" y2="180" stroke="#8800ff" stroke-width="1" opacity="0.5" filter="url(#glow)"/>
+  <!-- Horizontal lane markers -->
+  <path d="M188 400 Q256 395 324 400" stroke="#ff00aa" stroke-width="1.5" fill="none" opacity="0.5"/>
+  <path d="M196 350 Q256 345 316 350" stroke="#8800ff" stroke-width="1.5" fill="none" opacity="0.5"/>
+  <path d="M208 300 Q256 296 304 300" stroke="#ff00aa" stroke-width="1" fill="none" opacity="0.4"/>
+  <path d="M222 265 Q256 262 290 265" stroke="#8800ff" stroke-width="1" fill="none" opacity="0.3"/>
+  <!-- Runner on track -->
+  <g filter="url(#glow)" transform="translate(256, 360)">
+    <circle cx="0" cy="-45" r="14" fill="none" stroke="#00ffcc" stroke-width="2"/>
+    <line x1="0" y1="-30" x2="0" y2="5" stroke="#00ffcc" stroke-width="2.5"/>
+    <line x1="0" y1="-18" x2="-18" y2="0" stroke="#00ffcc" stroke-width="2"/>
+    <line x1="0" y1="-18" x2="18" y2="-30" stroke="#00ffcc" stroke-width="2"/>
+    <line x1="0" y1="5" x2="-15" y2="28" stroke="#00ffcc" stroke-width="2"/>
+    <line x1="-15" y1="28" x2="-6" y2="42" stroke="#00ffcc" stroke-width="1.5"/>
+    <line x1="0" y1="5" x2="16" y2="22" stroke="#00ffcc" stroke-width="2"/>
+    <line x1="16" y1="22" x2="22" y2="10" stroke="#00ffcc" stroke-width="1.5"/>
+  </g>
+  <!-- Speed particles -->
+  <circle cx="180" cy="360" r="3" fill="#ff00aa" filter="url(#glow)"/>
+  <circle cx="155" cy="350" r="2" fill="#8800ff" filter="url(#glow)" opacity="0.8"/>
+  <circle cx="140" cy="365" r="1.5" fill="#ff00aa" filter="url(#glow)" opacity="0.6"/>
+  <!-- Vanishing point light -->
+  <circle cx="256" cy="180" r="6" fill="#ffffff" filter="url(#glow)" opacity="0.9"/>
+  <circle cx="256" cy="180" r="18" fill="none" stroke="#8800ff" stroke-width="1" filter="url(#glow)" opacity="0.5"/>
+</svg>

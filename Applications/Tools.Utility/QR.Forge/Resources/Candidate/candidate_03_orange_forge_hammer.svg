@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1A0A00"/>
+      <stop offset="100%" stop-color="#BF360C"/>
+    </linearGradient>
+    <linearGradient id="fire" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0%" stop-color="#FF6D00"/>
+      <stop offset="50%" stop-color="#FFAB40"/>
+      <stop offset="100%" stop-color="#FFD54F"/>
+    </linearGradient>
+    <linearGradient id="metal" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#B0BEC5"/>
+      <stop offset="100%" stop-color="#607D8B"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- QR code mini in background -->
+  <g opacity="0.25">
+    <rect x="80" y="80" width="80" height="80" rx="8" fill="none" stroke="#FF6D00" stroke-width="10"/>
+    <rect x="95" y="95" width="50" height="50" rx="3" fill="#FF6D00"/>
+    <rect x="352" y="80" width="80" height="80" rx="8" fill="none" stroke="#FF6D00" stroke-width="10"/>
+    <rect x="367" y="95" width="50" height="50" rx="3" fill="#FF6D00"/>
+    <rect x="80" y="352" width="80" height="80" rx="8" fill="none" stroke="#FF6D00" stroke-width="10"/>
+    <rect x="95" y="367" width="50" height="50" rx="3" fill="#FF6D00"/>
+  </g>
+  <!-- Hammer -->
+  <rect x="220" y="160" width="100" height="70" rx="12" fill="url(#metal)"/>
+  <rect x="240" y="140" width="60" height="30" rx="6" fill="url(#metal)" opacity="0.8"/>
+  <rect x="246" y="230" width="20" height="140" rx="8" fill="url(#metal)" opacity="0.9"/>
+  <!-- Fire sparks -->
+  <ellipse cx="256" cy="390" rx="40" ry="18" fill="url(#fire)" opacity="0.7"/>
+  <ellipse cx="230" cy="375" rx="12" ry="22" fill="url(#fire)" opacity="0.6"/>
+  <ellipse cx="282" cy="370" rx="10" ry="20" fill="url(#fire)" opacity="0.5"/>
+  <ellipse cx="256" cy="360" rx="8" ry="16" fill="#FFD54F" opacity="0.8"/>
+</svg>

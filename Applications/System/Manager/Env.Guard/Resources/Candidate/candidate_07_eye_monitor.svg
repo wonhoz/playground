@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2d3436"/>
+      <stop offset="100%" style="stop-color:#636e72"/>
+    </linearGradient>
+    <linearGradient id="eye_g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00cec9"/>
+      <stop offset="100%" style="stop-color:#81ecec"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Eye shape -->
+  <path d="M60 220 C130 120 382 120 452 220 C452 220 382 320 256 320 C130 320 60 220 60 220 Z" fill="url(#eye_g)" opacity="0.2"/>
+  <path d="M60 220 C130 120 382 120 452 220 C452 220 382 320 256 320 C130 320 60 220 60 220 Z" stroke="url(#eye_g)" stroke-width="8" fill="none"/>
+  <!-- Pupil -->
+  <circle cx="256" cy="220" r="60" fill="url(#eye_g)" opacity="0.5"/>
+  <circle cx="256" cy="220" r="35" fill="#2d3436"/>
+  <circle cx="256" cy="220" r="20" fill="url(#eye_g)"/>
+  <circle cx="266" cy="210" r="7" fill="white" opacity="0.7"/>
+  <!-- ENV text below -->
+  <rect x="80" y="360" width="352" height="26" rx="6" fill="url(#eye_g)" opacity="0.1" stroke="url(#eye_g)" stroke-width="2"/>
+  <text x="256" y="379" font-family="monospace" font-size="16" text-anchor="middle" fill="url(#eye_g)">PATH=/usr/local/bin:/opt/java</text>
+  <rect x="80" y="396" width="352" height="26" rx="6" fill="url(#eye_g)" opacity="0.1" stroke="url(#eye_g)" stroke-width="2" opacity="0.6"/>
+  <text x="256" y="414" font-family="monospace" font-size="16" text-anchor="middle" fill="url(#eye_g)" opacity="0.6">SECRET=••••••••••••</text>
+  <!-- Lock icon on secret -->
+  <circle cx="420" cy="409" r="12" fill="url(#eye_g)" opacity="0.8"/>
+  <rect x="414" y="412" width="12" height="10" rx="2" fill="#2d3436"/>
+</svg>

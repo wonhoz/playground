@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1A0800"/>
+      <stop offset="100%" stop-color="#2E0A00"/>
+    </linearGradient>
+    <linearGradient id="lava1" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#FF2200"/>
+      <stop offset="50%" stop-color="#FF6600"/>
+      <stop offset="100%" stop-color="#FFAA00"/>
+    </linearGradient>
+    <linearGradient id="lava2" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#CC1100"/>
+      <stop offset="100%" stop-color="#FF4400"/>
+    </linearGradient>
+    <linearGradient id="lava3" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#AA0000"/>
+      <stop offset="100%" stop-color="#DD2200"/>
+    </linearGradient>
+    <radialGradient id="molten" cx="50%" cy="80%" r="60%">
+      <stop offset="0%" stop-color="#FF6600" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#FF0000" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="fire">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Lava pool at bottom -->
+  <ellipse cx="256" cy="450" rx="220" ry="40" fill="#FF3300" opacity="0.3"/>
+  <rect x="60" y="430" width="392" height="50" rx="10" fill="#CC2200" opacity="0.6"/>
+  <ellipse cx="256" cy="430" rx="200" ry="20" fill="url(#molten)" opacity="0.8"/>
+  <!-- Stone blocks with lava cracks -->
+  <rect x="100" y="320" width="312" height="60" rx="6" fill="url(#lava3)"/>
+  <rect x="100" y="320" width="312" height="60" rx="6" fill="none" stroke="#FF4400" stroke-width="2" opacity="0.5"/>
+  <line x1="180" y1="320" x2="160" y2="380" stroke="#FF6600" stroke-width="2" opacity="0.7"/>
+  <line x1="280" y1="320" x2="300" y2="380" stroke="#FF4400" stroke-width="2" opacity="0.6"/>
+  <rect x="132" y="256" width="248" height="60" rx="6" fill="url(#lava2)"/>
+  <line x1="210" y1="256" x2="200" y2="316" stroke="#FF8800" stroke-width="2" opacity="0.7"/>
+  <line x1="310" y1="256" x2="320" y2="316" stroke="#FF6600" stroke-width="2" opacity="0.6"/>
+  <rect x="168" y="192" width="176" height="60" rx="6" fill="url(#lava1)"/>
+  <line x1="220" y1="192" x2="215" y2="252" stroke="#FFAA00" stroke-width="2" opacity="0.8"/>
+  <!-- Exploding top block -->
+  <g transform="translate(256, 155) rotate(-20)" filter="url(#fire)">
+    <rect x="-88" y="-28" width="176" height="52" rx="6" fill="#FF5500"/>
+    <rect x="-88" y="-28" width="176" height="52" rx="6" fill="none" stroke="#FFAA00" stroke-width="3" opacity="0.8"/>
+  </g>
+  <!-- Fire sparks -->
+  <circle cx="355" cy="105" r="8" fill="#FFAA00" filter="url(#fire)" opacity="0.9"/>
+  <circle cx="380" cy="125" r="5" fill="#FF6600" filter="url(#fire)" opacity="0.8"/>
+  <circle cx="340" cy="88" r="6" fill="#FF3300" filter="url(#fire)" opacity="0.8"/>
+  <circle cx="400" cy="140" r="4" fill="#FFDD00" filter="url(#fire)" opacity="0.7"/>
+  <circle cx="318" cy="100" r="5" fill="#FF8800" filter="url(#fire)" opacity="0.7"/>
+  <!-- Ember trails -->
+  <line x1="340" y1="130" x2="355" y2="105" stroke="#FF6600" stroke-width="2" opacity="0.5"/>
+  <line x1="360" y1="140" x2="380" y2="125" stroke="#FFAA00" stroke-width="2" opacity="0.5"/>
+</svg>

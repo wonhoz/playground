@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A1A2E"/>
+      <stop offset="100%" stop-color="#16213E"/>
+    </linearGradient>
+    <linearGradient id="layer1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E040FB"/>
+      <stop offset="100%" stop-color="#AA00FF"/>
+    </linearGradient>
+    <linearGradient id="layer2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00E5FF"/>
+      <stop offset="100%" stop-color="#00B8D4"/>
+    </linearGradient>
+    <linearGradient id="layer3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#69F0AE"/>
+      <stop offset="100%" stop-color="#00C853"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- 레이어 스택 (다이아몬드 모양) -->
+  <polygon points="256,320 400,260 256,200 112,260" fill="url(#layer3)" opacity="0.7"/>
+  <polygon points="256,270 400,210 256,150 112,210" fill="url(#layer2)" opacity="0.8"/>
+  <polygon points="256,220 400,160 256,100 112,160" fill="url(#layer1)" opacity="0.9"/>
+  <!-- 우측 출력 -->
+  <rect x="340" y="320" width="130" height="130" rx="20" fill="#16213E" stroke="#E040FB" stroke-width="2"/>
+  <text x="405" y="396" font-size="18" text-anchor="middle" fill="#E040FB" font-family="Segoe UI" font-weight="bold">.ICO</text>
+  <rect x="355" y="340" width="30" height="30" rx="4" fill="url(#layer1)"/>
+  <rect x="395" y="340" width="20" height="20" rx="3" fill="url(#layer2)"/>
+  <rect x="425" y="348" width="14" height="14" rx="2" fill="url(#layer3)"/>
+  <!-- 화살표 -->
+  <path d="M 310 385 L 340 385" stroke="#00E5FF" stroke-width="6" stroke-linecap="round"/>
+  <polygon points="336,377 350,385 336,393" fill="#00E5FF"/>
+  <!-- 레이블 -->
+  <text x="256" y="420" font-size="20" text-anchor="middle" fill="#90CAF9" font-family="Segoe UI">Multi-size ICO Export</text>
+  <text x="256" y="450" font-size="15" text-anchor="middle" fill="#546E7A" font-family="Segoe UI">16 · 32 · 48 · 256</text>
+</svg>

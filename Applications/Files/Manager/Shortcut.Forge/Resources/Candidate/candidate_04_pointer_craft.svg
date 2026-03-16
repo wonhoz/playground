@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a001a"/>
+      <stop offset="100%" stop-color="#2e0040"/>
+    </linearGradient>
+    <linearGradient id="pointer" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f8f8ff"/>
+      <stop offset="100%" stop-color="#b0bec5"/>
+    </linearGradient>
+    <linearGradient id="gem" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ce93d8"/>
+      <stop offset="100%" stop-color="#7b1fa2"/>
+    </linearGradient>
+    <filter id="glow"><feGaussianBlur stdDeviation="8"/></filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- pointer cursor -->
+  <path d="M150 130 L150 340 L210 280 L260 380 L295 365 L245 265 L320 265 Z" fill="url(#pointer)"/>
+  <path d="M150 130 L150 340 L210 280 L260 380 L295 365 L245 265 L320 265 Z" fill="none" stroke="#7b1fa2" stroke-width="6"/>
+  <!-- gem/crystal on pointer tip -->
+  <circle cx="220" cy="345" r="35" fill="url(#gem)" filter="url(#glow)"/>
+  <path d="M205 330 L220 315 L235 330 L228 355 L212 355 Z" fill="#f3e5f5" opacity="0.7"/>
+  <!-- sparkle around gem -->
+  <path d="M195 310 L198 320 L208 323 L198 326 L195 336 L192 326 L182 323 L192 320 Z" fill="#e1bee7" opacity="0.7" filter="url(#glow)"/>
+  <path d="M240 305 L242 313 L250 315 L242 317 L240 325 L238 317 L230 315 L238 313 Z" fill="#fff9c4" opacity="0.6" filter="url(#glow)"/>
+  <!-- wrench/craft tool -->
+  <path d="M320 130 Q370 120 380 170 Q360 165 345 175 L380 280 Q375 295 360 295 L325 175 Q305 185 300 165 Q310 115 320 130 Z" fill="#90a4ae"/>
+  <ellipse cx="348" cy="155" rx="18" ry="10" fill="white" opacity="0.2" transform="rotate(-20 348 155)"/>
+</svg>

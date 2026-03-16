@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1A237E"/>
+      <stop offset="100%" stop-color="#3F51B5"/>
+    </linearGradient>
+    <linearGradient id="fab" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#C5CAE9"/>
+      <stop offset="100%" stop-color="#9FA8DA"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Star-shaped cloth target -->
+  <polygon points="256,120 278,200 362,178 308,242 362,306 278,284 256,364 234,284 150,306 204,242 150,178 234,200" fill="url(#fab)" opacity="0.9"/>
+  <!-- Fabric lines on star -->
+  <polygon points="256,120 278,200 362,178 308,242 362,306 278,284 256,364 234,284 150,306 204,242 150,178 234,200" fill="none" stroke="#3949AB" stroke-width="2" stroke-dasharray="6,4"/>
+  <!-- Scissors -->
+  <circle cx="350" cy="400" r="16" fill="none" stroke="white" stroke-width="5"/>
+  <circle cx="378" cy="400" r="16" fill="none" stroke="white" stroke-width="5"/>
+  <line x1="364" y1="386" x2="440" y2="330" stroke="white" stroke-width="5" stroke-linecap="round"/>
+  <line x1="364" y1="414" x2="440" y2="470" stroke="white" stroke-width="5" stroke-linecap="round"/>
+  <!-- Cut line through star -->
+  <line x1="120" y1="242" x2="392" y2="242" stroke="white" stroke-width="2.5" stroke-dasharray="10,7" opacity="0.7"/>
+</svg>

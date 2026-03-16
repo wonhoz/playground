@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a237e"/>
+      <stop offset="100%" stop-color="#0d47a1"/>
+    </linearGradient>
+    <linearGradient id="scope" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7986cb"/>
+      <stop offset="100%" stop-color="#3f51b5"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Microscope base -->
+  <rect x="160" y="420" width="192" height="28" rx="14" fill="url(#scope)"/>
+  <rect x="228" y="340" width="56" height="84" rx="8" fill="url(#scope)"/>
+  <!-- Microscope arm -->
+  <path d="M256 340 L256 160 Q256 120 290 110 L330 100" fill="none" stroke="#7986cb" stroke-width="20" stroke-linecap="round"/>
+  <!-- Eyepiece -->
+  <rect x="310" y="84" width="60" height="36" rx="10" fill="url(#scope)" stroke="#9fa8da" stroke-width="3"/>
+  <!-- Objective lens -->
+  <circle cx="256" cy="320" r="30" fill="#1a237e" stroke="#7986cb" stroke-width="5"/>
+  <!-- Data slide -->
+  <rect x="110" y="350" width="180" height="40" rx="8" fill="#283593" stroke="#5c6bc0" stroke-width="3"/>
+  <!-- Tiny log lines on slide -->
+  <rect x="120" y="360" width="70" height="5" rx="2" fill="#ef5350" opacity="0.9"/>
+  <rect x="120" y="370" width="80" height="5" rx="2" fill="#4caf50" opacity="0.9"/>
+  <rect x="120" y="380" width="60" height="5" rx="2" fill="#ffd740" opacity="0.9"/>
+  <!-- Light beam from objective -->
+  <path d="M256 350 L200 430 L312 430 Z" fill="#e3f2fd" opacity="0.08"/>
+  <!-- Glow on data -->
+  <ellipse cx="256" cy="400" rx="70" ry="20" fill="#3f51b5" opacity="0.3"/>
+</svg>

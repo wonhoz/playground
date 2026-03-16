@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0a1a"/>
+      <stop offset="100%" stop-color="#0d1b2a"/>
+    </linearGradient>
+    <radialGradient id="iris" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#00e5ff"/>
+      <stop offset="60%" stop-color="#0288d1"/>
+      <stop offset="100%" stop-color="#01579b"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Terminal/screen background -->
+  <rect x="60" y="80" width="392" height="280" rx="16" fill="#0d1b2a" stroke="#1565c0" stroke-width="3"/>
+  <!-- Terminal content lines -->
+  <text x="80" y="130" font-family="monospace" font-size="16" fill="#4caf50">[INFO] 2026-03-16 Starting...</text>
+  <text x="80" y="158" font-family="monospace" font-size="16" fill="#ef5350">[ERROR] Connection timeout</text>
+  <text x="80" y="186" font-family="monospace" font-size="16" fill="#ffd740">[WARN] Memory 90%</text>
+  <text x="80" y="214" font-family="monospace" font-size="16" fill="#4caf50">[INFO] Process OK</text>
+  <!-- Cursor blink -->
+  <rect x="80" y="232" width="10" height="22" rx="2" fill="#00e5ff"/>
+  <!-- Big eye overlaid on lower terminal -->
+  <ellipse cx="256" cy="390" rx="180" ry="80" fill="#0d2137" stroke="#1565c0" stroke-width="3"/>
+  <circle cx="256" cy="390" r="60" fill="url(#iris)"/>
+  <circle cx="256" cy="390" r="28" fill="#000"/>
+  <circle cx="275" cy="374" r="10" fill="white" opacity="0.4"/>
+  <!-- Eyelashes -->
+  <line x1="100" y1="390" x2="76" y2="375" stroke="#1565c0" stroke-width="3"/>
+  <line x1="130" y1="340" x2="120" y2="316" stroke="#1565c0" stroke-width="3"/>
+  <line x1="410" y1="390" x2="434" y2="375" stroke="#1565c0" stroke-width="3"/>
+  <line x1="382" y1="340" x2="392" y2="316" stroke="#1565c0" stroke-width="3"/>
+</svg>

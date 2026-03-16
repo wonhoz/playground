@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0d0d1a"/>
+      <stop offset="100%" stop-color="#0a0a14"/>
+    </linearGradient>
+    <radialGradient id="centerGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#f59e0b" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- 중심 (현재 워크스페이스) -->
+  <circle cx="256" cy="256" r="60" fill="url(#centerGlow)"/>
+  <circle cx="256" cy="256" r="44" fill="#1c1400" stroke="#f59e0b" stroke-width="3" filter="url(#glow)"/>
+  <text x="256" y="248" font-family="Arial" font-weight="bold" font-size="16" fill="#fbbf24" text-anchor="middle">ACTIVE</text>
+  <text x="256" y="268" font-family="Arial" font-size="12" fill="#f59e0b" text-anchor="middle">Desk 1</text>
+  <!-- 궤도 링 -->
+  <ellipse cx="256" cy="256" rx="150" ry="150" fill="none" stroke="#334155" stroke-width="1.5" stroke-dasharray="8,5"/>
+  <!-- 궤도 위 워크스페이스들 -->
+  <!-- 위 (Desk 2) -->
+  <circle cx="256" cy="106" r="34" fill="#1e1b4b" stroke="#818cf8" stroke-width="2"/>
+  <text x="256" y="100" font-family="Arial" font-size="11" fill="#a5b4fc" text-anchor="middle">Desk</text>
+  <text x="256" y="116" font-family="Arial" font-weight="bold" font-size="14" fill="#818cf8" text-anchor="middle">2</text>
+  <!-- 오른쪽 (Desk 3) -->
+  <circle cx="406" cy="256" r="34" fill="#14532d" stroke="#4ade80" stroke-width="2"/>
+  <text x="406" y="250" font-family="Arial" font-size="11" fill="#86efac" text-anchor="middle">Desk</text>
+  <text x="406" y="266" font-family="Arial" font-weight="bold" font-size="14" fill="#4ade80" text-anchor="middle">3</text>
+  <!-- 아래 (Desk 4) -->
+  <circle cx="256" cy="406" r="34" fill="#172554" stroke="#60a5fa" stroke-width="2"/>
+  <text x="256" y="400" font-family="Arial" font-size="11" fill="#93c5fd" text-anchor="middle">Desk</text>
+  <text x="256" y="416" font-family="Arial" font-weight="bold" font-size="14" fill="#60a5fa" text-anchor="middle">4</text>
+  <!-- 왼쪽 (Desk 5) -->
+  <circle cx="106" cy="256" r="34" fill="#4c1d95" stroke="#c4b5fd" stroke-width="2"/>
+  <text x="106" y="250" font-family="Arial" font-size="11" fill="#ddd6fe" text-anchor="middle">Desk</text>
+  <text x="106" y="266" font-family="Arial" font-weight="bold" font-size="14" fill="#c4b5fd" text-anchor="middle">5</text>
+  <!-- 연결선 -->
+  <line x1="256" y1="212" x2="256" y2="140" stroke="#64748b" stroke-width="1.5" opacity="0.5"/>
+  <line x1="300" y1="256" x2="372" y2="256" stroke="#64748b" stroke-width="1.5" opacity="0.5"/>
+  <line x1="256" y1="300" x2="256" y2="372" stroke="#64748b" stroke-width="1.5" opacity="0.5"/>
+  <line x1="212" y1="256" x2="140" y2="256" stroke="#64748b" stroke-width="1.5" opacity="0.5"/>
+</svg>

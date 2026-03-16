@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A1400"/>
+      <stop offset="100%" stop-color="#2D2200"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFE566"/>
+      <stop offset="50%" stop-color="#FFB300"/>
+      <stop offset="100%" stop-color="#CC8800"/>
+    </linearGradient>
+    <linearGradient id="bar1" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#FFB300"/>
+      <stop offset="100%" stop-color="#FFE566"/>
+    </linearGradient>
+    <linearGradient id="bar2" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#888888"/>
+      <stop offset="100%" stop-color="#CCCCCC"/>
+    </linearGradient>
+    <linearGradient id="bar3" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#8B4513"/>
+      <stop offset="100%" stop-color="#CD853F"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Podium bars -->
+  <rect x="80" y="280" width="100" height="160" rx="6" fill="url(#bar2)"/>
+  <rect x="206" y="200" width="100" height="240" rx="6" fill="url(#bar1)"/>
+  <rect x="332" y="320" width="100" height="120" rx="6" fill="url(#bar3)"/>
+  <!-- Rank numbers -->
+  <text x="130" y="340" text-anchor="middle" fill="#1A1A1A" font-size="32" font-family="monospace" font-weight="bold">2</text>
+  <text x="256" y="260" text-anchor="middle" fill="#1A1A1A" font-size="36" font-family="monospace" font-weight="bold">1</text>
+  <text x="382" y="380" text-anchor="middle" fill="#1A1A1A" font-size="32" font-family="monospace" font-weight="bold">3</text>
+  <!-- Trophy on top of #1 -->
+  <path d="M240 155 L272 155 L272 185 Q272 200 256 205 Q240 200 240 185 Z" fill="url(#gold)"/>
+  <rect x="250" y="205" width="12" height="20" fill="url(#gold)"/>
+  <rect x="238" y="225" width="36" height="8" rx="3" fill="url(#gold)"/>
+  <!-- Trophy handles -->
+  <path d="M240 163 Q225 163 225 175 Q225 187 240 187" fill="none" stroke="url(#gold)" stroke-width="5"/>
+  <path d="M272 163 Q287 163 287 175 Q287 187 272 187" fill="none" stroke="url(#gold)" stroke-width="5"/>
+  <!-- Stars -->
+  <text x="130" y="268" text-anchor="middle" fill="#CCCCCC" font-size="22">★★</text>
+  <text x="382" y="308" text-anchor="middle" fill="#CD853F" font-size="22">★</text>
+  <!-- Commit count labels -->
+  <text x="130" y="460" text-anchor="middle" fill="#CCCCCC" font-size="16" font-family="monospace">248</text>
+  <text x="256" y="460" text-anchor="middle" fill="#FFB300" font-size="16" font-family="monospace">512</text>
+  <text x="382" y="460" text-anchor="middle" fill="#CD853F" font-size="16" font-family="monospace">189</text>
+</svg>

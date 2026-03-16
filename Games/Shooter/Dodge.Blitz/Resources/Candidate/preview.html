@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dodge.Blitz — Icon Candidates</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #1a1a1a;
+      color: #e0e0e0;
+      font-family: 'Segoe UI', sans-serif;
+      padding: 32px;
+    }
+    h1 { font-size: 22px; font-weight: 600; margin-bottom: 8px; color: #fca5a5; }
+    p.subtitle { font-size: 13px; color: #666; margin-bottom: 28px; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 20px;
+    }
+    .card {
+      background: #242424;
+      border: 1px solid #333;
+      border-radius: 12px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      transition: border-color 0.2s, transform 0.2s;
+      cursor: pointer;
+    }
+    .card:hover { border-color: #ef4444; transform: translateY(-3px); }
+    .card img { width: 128px; height: 128px; border-radius: 20px; }
+    .card .label { font-size: 11px; color: #888; text-align: center; word-break: break-all; }
+    .card .num { font-size: 18px; font-weight: 700; color: #f87171; }
+  </style>
+</head>
+<body>
+  <h1>Dodge.Blitz — Icon Candidates</h1>
+  <p class="subtitle">총알 피하기 슈팅 게임 | 10 candidates</p>
+  <div class="grid">
+    <div class="card"><span class="num">01</span><img src="candidate_01_lightning_dodge.svg" alt="lightning dodge"><span class="label">lightning_dodge</span></div>
+    <div class="card"><span class="num">02</span><img src="candidate_02_neon_evade.svg" alt="neon evade"><span class="label">neon_evade</span></div>
+    <div class="card"><span class="num">03</span><img src="candidate_03_crosshair_blitz.svg" alt="crosshair blitz"><span class="label">crosshair_blitz</span></div>
+    <div class="card"><span class="num">04</span><img src="candidate_04_pixel_runner.svg" alt="pixel runner"><span class="label">pixel_runner</span></div>
+    <div class="card"><span class="num">05</span><img src="candidate_05_spaceship_barrage.svg" alt="spaceship barrage"><span class="label">spaceship_barrage</span></div>
+    <div class="card"><span class="num">06</span><img src="candidate_06_explosion_burst.svg" alt="explosion burst"><span class="label">explosion_burst</span></div>
+    <div class="card"><span class="num">07</span><img src="candidate_07_shield_hero.svg" alt="shield hero"><span class="label">shield_hero</span></div>
+    <div class="card"><span class="num">08</span><img src="candidate_08_arcade_retro.svg" alt="arcade retro"><span class="label">arcade_retro</span></div>
+    <div class="card"><span class="num">09</span><img src="candidate_09_bullet_matrix.svg" alt="bullet matrix"><span class="label">bullet_matrix</span></div>
+    <div class="card"><span class="num">10</span><img src="candidate_10_vortex_dodge.svg" alt="vortex dodge"><span class="label">vortex_dodge</span></div>
+  </div>
+</body>
+</html>

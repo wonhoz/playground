@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0d1f10"/>
+      <stop offset="100%" stop-color="#1b3a1f"/>
+    </linearGradient>
+    <linearGradient id="on" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00e676"/>
+      <stop offset="100%" stop-color="#00c853"/>
+    </linearGradient>
+    <linearGradient id="net" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#69f0ae"/>
+      <stop offset="100%" stop-color="#00695c"/>
+    </linearGradient>
+    <filter id="glow"><feGaussianBlur stdDeviation="8"/></filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- large toggle switch -->
+  <rect x="100" y="210" width="312" height="92" rx="46" fill="#1b3a1f"/>
+  <rect x="100" y="210" width="312" height="92" rx="46" fill="url(#on)" opacity="0.8"/>
+  <!-- toggle ball on -->
+  <circle cx="366" cy="256" r="38" fill="white" filter="url(#glow)"/>
+  <circle cx="366" cy="256" r="25" fill="url(#on)"/>
+  <!-- network nodes above toggle -->
+  <circle cx="170" cy="140" r="20" fill="url(#net)" filter="url(#glow)"/>
+  <circle cx="256" cy="115" r="20" fill="url(#net)" filter="url(#glow)"/>
+  <circle cx="342" cy="140" r="20" fill="url(#net)" filter="url(#glow)"/>
+  <!-- connections between nodes -->
+  <line x1="170" y1="140" x2="256" y2="115" stroke="#69f0ae" stroke-width="4" opacity="0.6"/>
+  <line x1="256" y1="115" x2="342" y2="140" stroke="#69f0ae" stroke-width="4" opacity="0.6"/>
+  <line x1="170" y1="140" x2="342" y2="140" stroke="#69f0ae" stroke-width="3" opacity="0.4"/>
+  <!-- lines from nodes down to toggle -->
+  <line x1="170" y1="160" x2="190" y2="210" stroke="#69f0ae" stroke-width="3" opacity="0.4"/>
+  <line x1="256" y1="135" x2="256" y2="210" stroke="#69f0ae" stroke-width="3" opacity="0.4"/>
+  <line x1="342" y1="160" x2="322" y2="210" stroke="#69f0ae" stroke-width="3" opacity="0.4"/>
+  <!-- status below -->
+  <circle cx="170" cy="360" r="12" fill="#00e676" filter="url(#glow)"/>
+  <circle cx="256" cy="360" r="12" fill="#00e676" filter="url(#glow)"/>
+  <circle cx="342" cy="360" r="12" fill="#ffea00" filter="url(#glow)"/>
+</svg>

@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0A0E1A"/>
+      <stop offset="100%" stop-color="#0D1B2A"/>
+    </linearGradient>
+    <filter id="neon">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- 네온 돋보기 -->
+  <circle cx="210" cy="210" r="120" fill="none" stroke="#00E5FF" stroke-width="8" filter="url(#neon)"/>
+  <circle cx="210" cy="210" r="120" fill="none" stroke="#00B8D4" stroke-width="3"/>
+  <line x1="302" y1="302" x2="420" y2="420" stroke="#00E5FF" stroke-width="22" stroke-linecap="round" filter="url(#neon)"/>
+  <line x1="302" y1="302" x2="420" y2="420" stroke="#00B8D4" stroke-width="10" stroke-linecap="round"/>
+  <!-- 내부 크로스헤어 -->
+  <line x1="210" y1="120" x2="210" y2="300" stroke="#00E5FF" stroke-width="2" opacity="0.5"/>
+  <line x1="120" y1="210" x2="300" y2="210" stroke="#00E5FF" stroke-width="2" opacity="0.5"/>
+  <!-- 이모지 -->
+  <text x="210" y="235" font-size="90" text-anchor="middle" font-family="Segoe UI Emoji">🔍</text>
+  <!-- 데이터 점들 -->
+  <circle cx="380" cy="100" r="6" fill="#00E5FF" filter="url(#neon)"/>
+  <circle cx="420" cy="150" r="4" fill="#00B8D4" filter="url(#neon)"/>
+  <circle cx="100" cy="380" r="5" fill="#00E5FF" filter="url(#neon)"/>
+  <circle cx="140" cy="420" r="4" fill="#00B8D4" filter="url(#neon)"/>
+</svg>

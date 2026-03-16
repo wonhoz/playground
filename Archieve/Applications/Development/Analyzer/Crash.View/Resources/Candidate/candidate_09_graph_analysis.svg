@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0A192F"/>
+      <stop offset="100%" stop-color="#112240"/>
+    </linearGradient>
+    <linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#64FFDA"/>
+      <stop offset="60%" stop-color="#64FFDA"/>
+      <stop offset="80%" stop-color="#FF5252"/>
+      <stop offset="100%" stop-color="#FF5252"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Chart area -->
+  <rect x="72" y="80" width="368" height="280" rx="8" fill="#0D2137" stroke="#1E3A5F" stroke-width="2"/>
+  <!-- Grid -->
+  <g stroke="#1E3A5F" stroke-width="1" opacity="0.7">
+    <line x1="72" y1="150" x2="440" y2="150"/>
+    <line x1="72" y1="220" x2="440" y2="220"/>
+    <line x1="72" y1="290" x2="440" y2="290"/>
+    <line x1="152" y1="80" x2="152" y2="360"/>
+    <line x1="232" y1="80" x2="232" y2="360"/>
+    <line x1="312" y1="80" x2="312" y2="360"/>
+    <line x1="392" y1="80" x2="392" y2="360"/>
+  </g>
+  <!-- Normal signal (green) -->
+  <polyline points="80,250 120,240 150,245 180,235 210,238 230,230" stroke="#64FFDA" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Spike = crash -->
+  <polyline points="230,230 250,240 265,105 280,310 290,200" stroke="url(#lineGrad)" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Post-crash noise -->
+  <polyline points="290,200 320,340 350,280 380,310 420,290 440,300" stroke="#FF5252" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="6,3"/>
+  <!-- Crash marker -->
+  <line x1="265" y1="80" x2="265" y2="360" stroke="#FF5252" stroke-width="2" stroke-dasharray="4,3" opacity="0.7"/>
+  <circle cx="265" cy="105" r="10" fill="#FF5252"/>
+  <text x="272" y="101" font-family="monospace" font-size="11" fill="#FF5252">CRASH</text>
+  <!-- Y-axis labels -->
+  <text x="60" y="152" text-anchor="end" font-family="monospace" font-size="10" fill="#64FFDA">100%</text>
+  <text x="60" y="222" text-anchor="end" font-family="monospace" font-size="10" fill="#64FFDA">50%</text>
+  <text x="60" y="292" text-anchor="end" font-family="monospace" font-size="10" fill="#64FFDA">0%</text>
+  <!-- Legend -->
+  <rect x="72" y="375" width="368" height="52" rx="8" fill="#0D2137"/>
+  <line x1="92" y1="401" x2="122" y2="401" stroke="#64FFDA" stroke-width="3"/>
+  <text x="130" y="405" font-family="monospace" font-size="12" fill="#64FFDA">Normal</text>
+  <line x1="220" y1="401" x2="250" y2="401" stroke="#FF5252" stroke-width="3"/>
+  <text x="258" y="405" font-family="monospace" font-size="12" fill="#FF5252">Crash Point</text>
+  <text x="92" y="422" font-family="monospace" font-size="11" fill="#8892B0">CPU Usage over time — anomaly detected</text>
+</svg>

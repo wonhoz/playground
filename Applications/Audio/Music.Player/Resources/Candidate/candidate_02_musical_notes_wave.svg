@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#050020"/>
+      <stop offset="100%" stop-color="#100030"/>
+    </linearGradient>
+    <linearGradient id="waveGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#7c3aed"/>
+      <stop offset="33%" stop-color="#2563eb"/>
+      <stop offset="66%" stop-color="#0891b2"/>
+      <stop offset="100%" stop-color="#7c3aed"/>
+    </linearGradient>
+    <filter id="noteGlow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Sound wave background bands -->
+  <path d="M50 256 C100 200 150 310 200 256 C250 200 300 310 350 256 C400 200 450 310 462 256" fill="none" stroke="#7c3aed" stroke-width="2" opacity="0.2"/>
+  <path d="M50 256 C100 180 150 332 200 256 C250 180 300 332 350 256 C400 180 450 332 462 256" fill="none" stroke="#2563eb" stroke-width="2" opacity="0.2"/>
+  <path d="M50 256 C100 160 150 352 200 256 C250 160 300 352 350 256 C400 160 450 352 462 256" fill="none" stroke="#0891b2" stroke-width="1.5" opacity="0.15"/>
+  <!-- Main sound wave -->
+  <path d="M50 256 C100 150 150 362 200 256 C250 150 300 362 350 256 C400 150 450 362 462 256" fill="none" stroke="url(#waveGrad)" stroke-width="4" filter="url(#noteGlow)"/>
+  <!-- Music notes floating on the wave -->
+  <!-- Note 1 -->
+  <g transform="translate(105,175)" filter="url(#noteGlow)">
+    <ellipse cx="0" cy="0" rx="11" ry="8" fill="#7c3aed" transform="rotate(-20)"/>
+    <line x1="11" y1="-2" x2="11" y2="-45" stroke="#7c3aed" stroke-width="3"/>
+    <line x1="11" y1="-45" x2="30" y2="-38" stroke="#7c3aed" stroke-width="2.5"/>
+  </g>
+  <!-- Note 2 (double note) -->
+  <g transform="translate(210,170)" filter="url(#noteGlow)">
+    <ellipse cx="0" cy="0" rx="11" ry="8" fill="#2563eb" transform="rotate(-20)"/>
+    <ellipse cx="35" cy="10" rx="11" ry="8" fill="#2563eb" transform="rotate(-20)"/>
+    <line x1="11" y1="-2" x2="11" y2="-48" stroke="#2563eb" stroke-width="3"/>
+    <line x1="46" y1="8" x2="46" y2="-38" stroke="#2563eb" stroke-width="3"/>
+    <line x1="11" y1="-48" x2="46" y2="-38" stroke="#2563eb" stroke-width="2.5"/>
+  </g>
+  <!-- Note 3 -->
+  <g transform="translate(325,175)" filter="url(#noteGlow)">
+    <ellipse cx="0" cy="0" rx="11" ry="8" fill="#0891b2" transform="rotate(-20)"/>
+    <line x1="11" y1="-2" x2="11" y2="-45" stroke="#0891b2" stroke-width="3"/>
+    <line x1="11" y1="-45" x2="30" y2="-38" stroke="#0891b2" stroke-width="2.5"/>
+  </g>
+  <!-- Note 4 (lower) -->
+  <g transform="translate(150,330)" filter="url(#noteGlow)">
+    <ellipse cx="0" cy="0" rx="11" ry="8" fill="#a855f7" transform="rotate(-20)"/>
+    <line x1="11" y1="-2" x2="11" y2="-45" stroke="#a855f7" stroke-width="3"/>
+    <line x1="11" y1="-45" x2="30" y2="-38" stroke="#a855f7" stroke-width="2.5"/>
+  </g>
+  <!-- Note 5 (double lower) -->
+  <g transform="translate(290,340)" filter="url(#noteGlow)">
+    <ellipse cx="0" cy="0" rx="11" ry="8" fill="#06b6d4" transform="rotate(-20)"/>
+    <ellipse cx="35" cy="-10" rx="11" ry="8" fill="#06b6d4" transform="rotate(-20)"/>
+    <line x1="11" y1="-2" x2="11" y2="-48" stroke="#06b6d4" stroke-width="3"/>
+    <line x1="46" y1="-12" x2="46" y2="-58" stroke="#06b6d4" stroke-width="3"/>
+    <line x1="11" y1="-48" x2="46" y2="-58" stroke="#06b6d4" stroke-width="2.5"/>
+  </g>
+  <!-- Sparkle glitter on wave peak -->
+  <circle cx="200" cy="150" r="5" fill="#ffffff" opacity="0.8" filter="url(#noteGlow)"/>
+  <circle cx="350" cy="150" r="4" fill="#ffffff" opacity="0.7" filter="url(#noteGlow)"/>
+</svg>

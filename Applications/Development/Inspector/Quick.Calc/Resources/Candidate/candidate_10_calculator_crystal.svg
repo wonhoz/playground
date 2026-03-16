@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0a1e"/>
+      <stop offset="100%" stop-color="#1a1a3a"/>
+    </linearGradient>
+    <linearGradient id="crystal1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#a8edea" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#fed6e3" stop-opacity="0.7"/>
+    </linearGradient>
+    <linearGradient id="crystal2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4776E6" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#8E54E9" stop-opacity="0.6"/>
+    </linearGradient>
+    <linearGradient id="crystal3" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f7971e" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#ffd200" stop-opacity="0.7"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="crystal_blur">
+      <feGaussianBlur stdDeviation="1.5"/>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+
+  <!-- Main crystal calculator shape - hexagonal prism -->
+  <!-- Back face shadow -->
+  <polygon points="256,60 400,150 400,370 256,460 112,370 112,150" fill="#1a1a3a" opacity="0.5"/>
+  <!-- Main crystal face -->
+  <polygon points="256,70 390,155 390,360 256,445 122,360 122,155" fill="url(#crystal1)" opacity="0.15"/>
+  <polygon points="256,70 390,155 390,360 256,445 122,360 122,155" fill="none" stroke="#a8edea" stroke-width="2" opacity="0.6"/>
+
+  <!-- Internal facets -->
+  <line x1="256" y1="70" x2="256" y2="445" stroke="#a8edea" stroke-width="1" opacity="0.3"/>
+  <line x1="122" y1="155" x2="390" y2="360" stroke="#a8edea" stroke-width="1" opacity="0.2"/>
+  <line x1="390" y1="155" x2="122" y2="360" stroke="#a8edea" stroke-width="1" opacity="0.2"/>
+
+  <!-- Crystal key buttons -->
+  <!-- Row 1 keys -->
+  <polygon points="165,168 215,168 215,215 165,215" fill="url(#crystal2)" opacity="0.7" filter="url(#glow)"/>
+  <polygon points="165,168 215,168 215,215 165,215" fill="none" stroke="#56CCF2" stroke-width="1.5"/>
+  <line x1="182" y1="188" x2="196" y2="188" stroke="#fff" stroke-width="2.5" opacity="0.9"/>
+  <line x1="189" y1="181" x2="189" y2="208" stroke="#fff" stroke-width="2.5" opacity="0.9"/>
+
+  <polygon points="228,168 278,168 278,215 228,215" fill="url(#crystal2)" opacity="0.7" filter="url(#glow)"/>
+  <polygon points="228,168 278,168 278,215 228,215" fill="none" stroke="#56CCF2" stroke-width="1.5"/>
+  <line x1="244" y1="188" x2="260" y2="188" stroke="#fff" stroke-width="2.5" opacity="0.9"/>
+
+  <polygon points="291,168 341,168 341,215 291,215" fill="url(#crystal2)" opacity="0.7" filter="url(#glow)"/>
+  <polygon points="291,168 341,168 341,215 291,215" fill="none" stroke="#56CCF2" stroke-width="1.5"/>
+  <line x1="307" y1="190" x2="323" y2="198" stroke="#fff" stroke-width="2.5" opacity="0.9"/>
+  <line x1="323" y1="190" x2="307" y2="198" stroke="#fff" stroke-width="2.5" opacity="0.9"/>
+
+  <!-- Row 2 keys -->
+  <polygon points="165,228 215,228 215,275 165,275" fill="url(#crystal1)" opacity="0.45" filter="url(#glow)"/>
+  <polygon points="165,228 215,228 215,275 165,275" fill="none" stroke="#fed6e3" stroke-width="1.5"/>
+  <polygon points="228,228 278,228 278,275 228,275" fill="url(#crystal1)" opacity="0.45"/>
+  <polygon points="228,228 278,228 278,275 228,275" fill="none" stroke="#fed6e3" stroke-width="1.5"/>
+  <polygon points="291,228 341,228 341,275 291,275" fill="url(#crystal1)" opacity="0.45"/>
+  <polygon points="291,228 341,228 341,275 291,275" fill="none" stroke="#fed6e3" stroke-width="1.5"/>
+
+  <!-- Row 3 keys -->
+  <polygon points="165,288 215,288 215,335 165,335" fill="url(#crystal1)" opacity="0.4"/>
+  <polygon points="165,288 215,288 215,335 165,335" fill="none" stroke="#a8edea" stroke-width="1.5"/>
+  <polygon points="228,288 278,288 278,335 228,335" fill="url(#crystal1)" opacity="0.4"/>
+  <polygon points="228,288 278,288 278,335 228,335" fill="none" stroke="#a8edea" stroke-width="1.5"/>
+  <polygon points="291,288 341,288 341,335 291,335" fill="url(#crystal1)" opacity="0.4"/>
+  <polygon points="291,288 341,288 341,335 291,335" fill="none" stroke="#a8edea" stroke-width="1.5"/>
+
+  <!-- Equals button - crystal gold -->
+  <polygon points="165,348 341,348 341,395 165,395" fill="url(#crystal3)" opacity="0.85" filter="url(#glow)"/>
+  <polygon points="165,348 341,348 341,395 165,395" fill="none" stroke="#ffd200" stroke-width="2"/>
+  <line x1="210" y1="365" x2="295" y2="365" stroke="#fff" stroke-width="3" opacity="0.9"/>
+  <line x1="210" y1="378" x2="295" y2="378" stroke="#fff" stroke-width="3" opacity="0.9"/>
+
+  <!-- Display -->
+  <polygon points="165,108 341,108 341,156 165,156" fill="#05051a" opacity="0.9"/>
+  <polygon points="165,108 341,108 341,156 165,156" fill="none" stroke="#56CCF2" stroke-width="1.5"/>
+  <rect x="280" y="120" width="45" height="24" rx="4" fill="#56CCF2" opacity="0.25"/>
+  <text x="192" y="140" font-family="monospace" font-size="20" fill="#56CCF2" opacity="0.8" filter="url(#glow)">256.00</text>
+
+  <!-- Crystal sparkles -->
+  <circle cx="100" cy="120" r="3" fill="#a8edea" filter="url(#glow)"/>
+  <circle cx="415" cy="130" r="3" fill="#fed6e3" filter="url(#glow)"/>
+  <circle cx="95" cy="390" r="3" fill="#ffd200" filter="url(#glow)"/>
+  <circle cx="420" cy="400" r="3" fill="#8E54E9" filter="url(#glow)"/>
+</svg>

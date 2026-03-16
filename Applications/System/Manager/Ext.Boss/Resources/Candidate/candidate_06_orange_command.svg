@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#bf360c"/>
+      <stop offset="100%" stop-color="#e64a19"/>
+    </linearGradient>
+    <linearGradient id="termGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#212121"/>
+      <stop offset="100%" stop-color="#1a1a1a"/>
+    </linearGradient>
+    <linearGradient id="btnGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ff5722"/>
+      <stop offset="100%" stop-color="#ff8a65"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Terminal window -->
+  <rect x="60" y="120" width="392" height="280" rx="14" fill="url(#termGrad)"/>
+  <!-- Title bar -->
+  <rect x="60" y="120" width="392" height="40" rx="14" fill="#2a2a2a"/>
+  <rect x="60" y="148" width="392" height="12" fill="#2a2a2a"/>
+  <!-- Window buttons -->
+  <circle cx="100" cy="140" r="8" fill="#ff5f57"/>
+  <circle cx="126" cy="140" r="8" fill="#febc2e"/>
+  <circle cx="152" cy="140" r="8" fill="#28c840"/>
+  <!-- Title text -->
+  <text x="256" y="146" font-family="Arial" font-size="14" fill="#888888" text-anchor="middle">Extension Manager</text>
+  <!-- Terminal lines -->
+  <text x="85" y="192" font-family="'Courier New', monospace" font-size="14" fill="#ff8a65">$ ext --list</text>
+  <text x="85" y="215" font-family="'Courier New', monospace" font-size="13" fill="#aaaaaa">.pdf  → Adobe Reader</text>
+  <text x="85" y="235" font-family="'Courier New', monospace" font-size="13" fill="#aaaaaa">.mp3  → VLC Media</text>
+  <text x="85" y="255" font-family="'Courier New', monospace" font-size="13" fill="#aaaaaa">.zip  → 7-Zip</text>
+  <text x="85" y="275" font-family="'Courier New', monospace" font-size="14" fill="#ff8a65">$ ext --set .png</text>
+  <text x="85" y="298" font-family="'Courier New', monospace" font-size="13" fill="#69f0ae">✓ Associated: Paint.NET</text>
+  <!-- Cursor blink -->
+  <rect x="85" y="315" width="10" height="18" rx="1" fill="#ff8a65" opacity="0.8"/>
+  <!-- Boss badge -->
+  <rect x="350" y="70" width="120" height="38" rx="10" fill="url(#btnGrad)"/>
+  <text x="410" y="95" font-family="Arial" font-size="18" font-weight="bold" fill="white" text-anchor="middle">BOSS</text>
+</svg>

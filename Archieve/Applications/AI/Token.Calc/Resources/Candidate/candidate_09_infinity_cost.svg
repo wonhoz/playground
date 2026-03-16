@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#18181b"/>
+      <stop offset="100%" stop-color="#09090b"/>
+    </linearGradient>
+    <linearGradient id="infinityGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#a78bfa"/>
+      <stop offset="30%" stop-color="#818cf8"/>
+      <stop offset="70%" stop-color="#38bdf8"/>
+      <stop offset="100%" stop-color="#34d399"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- 무한대 기호 (두꺼운 경로) -->
+  <path d="M140,256 C140,210 175,175 220,175 C265,175 285,210 256,256 C285,302 320,338 365,338 C410,338 445,302 445,256 C445,210 410,175 365,175 C320,175 285,210 256,256 C227,302 210,338 160,338 C120,338 90,310 85,278" fill="none" stroke="url(#infinityGrad)" stroke-width="28" stroke-linecap="round" filter="url(#glow)"/>
+  <!-- 토큰 카운터 -->
+  <rect x="166" y="368" width="180" height="52" rx="12" fill="#1e1e2e" stroke="#818cf8" stroke-width="1.5"/>
+  <text x="256" y="387" font-family="Arial" font-size="13" fill="#a5b4fc" text-anchor="middle">tokens calculated</text>
+  <text x="256" y="410" font-family="'Courier New', monospace" font-weight="bold" font-size="22" fill="#e0e7ff" text-anchor="middle">∞ · Σ</text>
+  <!-- 작은 원들 (토큰 표현) -->
+  <circle cx="145" cy="256" r="8" fill="#a78bfa" opacity="0.8"/>
+  <circle cx="180" cy="200" r="6" fill="#818cf8" opacity="0.6"/>
+  <circle cx="256" cy="256" r="10" fill="#38bdf8" opacity="0.9" filter="url(#glow)"/>
+  <circle cx="330" cy="200" r="6" fill="#34d399" opacity="0.6"/>
+  <circle cx="370" cy="256" r="8" fill="#34d399" opacity="0.8"/>
+</svg>

@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0d0d0d"/>
+      <stop offset="100%" stop-color="#1a1a1a"/>
+    </linearGradient>
+    <linearGradient id="green" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00ff41"/>
+      <stop offset="100%" stop-color="#00c32b"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- 터미널 상단 바 -->
+  <rect x="70" y="80" width="372" height="36" rx="10" fill="#2d2d2d"/>
+  <circle cx="102" cy="98" r="8" fill="#ff5f57"/>
+  <circle cx="128" cy="98" r="8" fill="#ffbd2e"/>
+  <circle cx="154" cy="98" r="8" fill="#28ca41"/>
+  <!-- 터미널 본문 -->
+  <rect x="70" y="116" width="372" height="296" rx="0" fill="#0d0d0d"/>
+  <!-- 로그 라인들 (위쪽은 흐릿하게 → 아래쪽은 밝게) -->
+  <rect x="90" y="130" width="290" height="10" rx="2" fill="url(#green)" opacity="0.15"/>
+  <rect x="90" y="148" width="320" height="10" rx="2" fill="url(#green)" opacity="0.2"/>
+  <rect x="90" y="166" width="260" height="10" rx="2" fill="url(#green)" opacity="0.25"/>
+  <rect x="90" y="184" width="310" height="10" rx="2" fill="url(#green)" opacity="0.3"/>
+  <rect x="90" y="202" width="280" height="10" rx="2" fill="url(#green)" opacity="0.4"/>
+  <rect x="90" y="220" width="330" height="10" rx="2" fill="url(#green)" opacity="0.5"/>
+  <rect x="90" y="238" width="270" height="10" rx="2" fill="url(#green)" opacity="0.6"/>
+  <rect x="90" y="256" width="300" height="10" rx="2" fill="url(#green)" opacity="0.7"/>
+  <rect x="90" y="274" width="320" height="10" rx="2" fill="#f44336" opacity="0.8"/>
+  <rect x="90" y="292" width="280" height="10" rx="2" fill="url(#green)" opacity="0.85"/>
+  <rect x="90" y="310" width="310" height="10" rx="2" fill="url(#green)" opacity="0.9"/>
+  <rect x="90" y="328" width="270" height="10" rx="2" fill="url(#green)" opacity="0.95"/>
+  <rect x="90" y="346" width="330" height="10" rx="2" fill="url(#green)" opacity="1.0"/>
+  <rect x="90" y="364" width="295" height="10" rx="2" fill="#ffeb3b" opacity="0.9"/>
+  <!-- 커서 블링크 -->
+  <rect x="90" y="390" width="12" height="18" rx="2" fill="url(#green)"/>
+  <!-- 스크롤바 -->
+  <rect x="434" y="116" width="8" height="296" rx="4" fill="#333"/>
+  <rect x="434" y="340" width="8" height="72" rx="4" fill="url(#green)" opacity="0.7"/>
+</svg>

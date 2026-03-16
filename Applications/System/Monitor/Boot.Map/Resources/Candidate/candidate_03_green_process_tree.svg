@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#001500"/>
+      <stop offset="100%" stop-color="#002800"/>
+    </linearGradient>
+    <linearGradient id="node" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#44FF88"/>
+      <stop offset="100%" stop-color="#00AA44"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Tree lines -->
+  <line x1="256" y1="130" x2="256" y2="200" stroke="#00AA44" stroke-width="2.5" opacity="0.6"/>
+  <line x1="256" y1="200" x2="150" y2="270" stroke="#00AA44" stroke-width="2" opacity="0.6"/>
+  <line x1="256" y1="200" x2="362" y2="270" stroke="#00AA44" stroke-width="2" opacity="0.6"/>
+  <line x1="150" y1="300" x2="100" y2="370" stroke="#00AA44" stroke-width="1.5" opacity="0.5"/>
+  <line x1="150" y1="300" x2="200" y2="370" stroke="#00AA44" stroke-width="1.5" opacity="0.5"/>
+  <line x1="362" y1="300" x2="312" y2="370" stroke="#00AA44" stroke-width="1.5" opacity="0.5"/>
+  <line x1="362" y1="300" x2="412" y2="370" stroke="#00AA44" stroke-width="1.5" opacity="0.5"/>
+  <!-- Root node -->
+  <rect x="206" y="90" width="100" height="40" rx="10" fill="url(#node)"/>
+  <text x="256" y="116" font-family="monospace" font-size="14" fill="#001500" text-anchor="middle" font-weight="bold">boot</text>
+  <!-- Level 2 nodes -->
+  <rect x="100" y="260" width="100" height="40" rx="10" fill="url(#node)" opacity="0.85"/>
+  <text x="150" y="286" font-family="monospace" font-size="12" fill="#001500" text-anchor="middle">kernel</text>
+  <rect x="312" y="260" width="100" height="40" rx="10" fill="url(#node)" opacity="0.85"/>
+  <text x="362" y="286" font-family="monospace" font-size="12" fill="#001500" text-anchor="middle">init</text>
+  <!-- Level 3 nodes -->
+  <rect x="64" y="360" width="72" height="32" rx="8" fill="url(#node)" opacity="0.7"/>
+  <text x="100" y="381" font-family="monospace" font-size="10" fill="#001500" text-anchor="middle">drivers</text>
+  <rect x="164" y="360" width="72" height="32" rx="8" fill="url(#node)" opacity="0.7"/>
+  <text x="200" y="381" font-family="monospace" font-size="10" fill="#001500" text-anchor="middle">fs</text>
+  <rect x="276" y="360" width="72" height="32" rx="8" fill="url(#node)" opacity="0.7"/>
+  <text x="312" y="381" font-family="monospace" font-size="10" fill="#001500" text-anchor="middle">svc</text>
+  <rect x="376" y="360" width="72" height="32" rx="8" fill="url(#node)" opacity="0.7"/>
+  <text x="412" y="381" font-family="monospace" font-size="10" fill="#001500" text-anchor="middle">net</text>
+  <!-- Boot time badge -->
+  <rect x="190" y="440" width="132" height="36" rx="8" fill="#001500" stroke="#44FF88" stroke-width="1.5"/>
+  <text x="256" y="464" font-family="monospace" font-size="15" fill="#44FF88" text-anchor="middle">4.2s boot</text>
+</svg>

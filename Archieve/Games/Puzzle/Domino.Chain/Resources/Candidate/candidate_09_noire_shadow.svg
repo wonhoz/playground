@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#111111"/>
+      <stop offset="100%" stop-color="#1C1C1C"/>
+    </linearGradient>
+    <linearGradient id="tile_light" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#444444"/>
+      <stop offset="100%" stop-color="#2A2A2A"/>
+    </linearGradient>
+    <radialGradient id="lamp" cx="50%" cy="0%" r="60%">
+      <stop offset="0%" stop-color="#FFEEAA" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#FFEEAA" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Spotlight from above -->
+  <ellipse cx="256" cy="256" rx="200" ry="350" fill="url(#lamp)"/>
+  <!-- Dramatic shadows of dominos -->
+  <ellipse cx="96" cy="318" rx="28" ry="6" fill="#080808" opacity="0.8"/>
+  <ellipse cx="180" cy="320" rx="26" ry="5" fill="#080808" opacity="0.7"/>
+  <ellipse cx="258" cy="322" rx="24" ry="5" fill="#080808" opacity="0.6"/>
+  <!-- Dominos high contrast -->
+  <rect x="72" y="190" width="48" height="96" rx="7" fill="url(#tile_light)" stroke="#666666" stroke-width="2"/>
+  <line x1="72" y1="238" x2="120" y2="238" stroke="#555555" stroke-width="2"/>
+  <circle cx="88" cy="212" r="5" fill="#CCCCCC"/>
+  <circle cx="104" cy="212" r="5" fill="#CCCCCC"/>
+  <circle cx="96" cy="262" r="5" fill="#CCCCCC"/>
+  <rect x="156" y="190" width="48" height="96" rx="7" fill="#333333" stroke="#888888" stroke-width="2"/>
+  <line x1="156" y1="238" x2="204" y2="238" stroke="#777777" stroke-width="2"/>
+  <circle cx="172" cy="212" r="5" fill="#DDDDDD"/>
+  <circle cx="188" cy="262" r="5" fill="#DDDDDD"/>
+  <circle cx="172" cy="262" r="5" fill="#DDDDDD"/>
+  <!-- Tilting - high contrast edge light -->
+  <g transform="rotate(-32 258 272)">
+    <rect x="234" y="190" width="48" height="96" rx="7" fill="url(#tile_light)" stroke="#999999" stroke-width="2"/>
+    <line x1="234" y1="238" x2="282" y2="238" stroke="#888888" stroke-width="2"/>
+    <circle cx="250" cy="212" r="5" fill="#EEEEEE"/>
+    <circle cx="266" cy="212" r="5" fill="#EEEEEE"/>
+    <circle cx="258" cy="238" r="5" fill="#EEEEEE"/>
+    <circle cx="250" cy="262" r="5" fill="#EEEEEE"/>
+    <circle cx="266" cy="262" r="5" fill="#EEEEEE"/>
+  </g>
+  <!-- Fallen -->
+  <rect x="332" y="270" width="96" height="48" rx="7" fill="#222222" stroke="#555555" stroke-width="2"/>
+  <line x1="380" y1="270" x2="380" y2="318" stroke="#444444" stroke-width="2"/>
+  <circle cx="356" cy="286" r="5" fill="#888888"/>
+  <circle cx="404" cy="302" r="5" fill="#888888"/>
+  <!-- Film noir text style -->
+  <text x="256" y="450" font-family="Georgia" font-size="26" font-style="italic" fill="#CCCCCC" text-anchor="middle" letter-spacing="2">DOMINO·CHAIN</text>
+</svg>

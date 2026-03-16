@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#000A00"/>
+      <stop offset="100%" stop-color="#001200"/>
+    </linearGradient>
+    <linearGradient id="monsterGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7C3AED"/>
+      <stop offset="100%" stop-color="#4C1D95"/>
+    </linearGradient>
+    <linearGradient id="heroGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F59E0B"/>
+      <stop offset="100%" stop-color="#D97706"/>
+    </linearGradient>
+    <radialGradient id="monsterGlow" cx="30%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#7C3AED" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#7C3AED" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Floor -->
+  <rect x="0" y="400" width="512" height="112" fill="#0A0F0A"/>
+  <line x1="0" y1="400" x2="512" y2="400" stroke="#1F2F1F" stroke-width="3"/>
+  <!-- Floor tiles -->
+  <line x1="80" y1="400" x2="80" y2="512" stroke="#111811" stroke-width="1.5"/>
+  <line x1="180" y1="400" x2="180" y2="512" stroke="#111811" stroke-width="1.5"/>
+  <line x1="280" y1="400" x2="280" y2="512" stroke="#111811" stroke-width="1.5"/>
+  <line x1="380" y1="400" x2="380" y2="512" stroke="#111811" stroke-width="1.5"/>
+  <line x1="0" y1="440" x2="512" y2="440" stroke="#111811" stroke-width="1"/>
+  <!-- Monster glow (left) -->
+  <ellipse cx="130" cy="320" rx="100" ry="80" fill="url(#monsterGlow)"/>
+  <!-- Monster (chasing, left side) -->
+  <!-- Body -->
+  <ellipse cx="120" cy="320" rx="70" ry="60" fill="url(#monsterGrad)" stroke="#A855F7" stroke-width="2.5"/>
+  <!-- Eyes (red glowing) -->
+  <circle cx="100" cy="305" r="16" fill="#111" stroke="#EF4444" stroke-width="2"/>
+  <circle cx="100" cy="305" r="10" fill="#EF4444" opacity="0.8"/>
+  <circle cx="140" cy="305" r="16" fill="#111" stroke="#EF4444" stroke-width="2"/>
+  <circle cx="140" cy="305" r="10" fill="#EF4444" opacity="0.8"/>
+  <!-- Monster claws -->
+  <path d="M58,350 L40,370 M68,360 L50,385 M78,368 L62,395" stroke="#C084FC" stroke-width="3" stroke-linecap="round"/>
+  <!-- Monster teeth -->
+  <path d="M88,340 L96,356 L104,340 L112,356 L120,340 L128,356 L136,340 L144,356 L152,340" fill="none" stroke="#E9D5FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Hero (running right) -->
+  <!-- Body -->
+  <rect x="338" y="304" width="44" height="60" rx="8" fill="url(#heroGrad2)" stroke="#FDE68A" stroke-width="2"/>
+  <!-- Head -->
+  <circle cx="360" cy="294" r="22" fill="#FCD34D" stroke="#F59E0B" stroke-width="2"/>
+  <!-- Helmet -->
+  <path d="M338,290 L360,272 L382,290" fill="#F59E0B" stroke="#FDE68A" stroke-width="2"/>
+  <!-- Cape flying back -->
+  <path d="M338,310 Q290,305 280,330 Q285,355 338,352" fill="#EF4444" stroke="#B91C1C" stroke-width="1.5"/>
+  <!-- Legs running -->
+  <rect x="340" y="364" width="18" height="36" rx="5" fill="#D97706"/>
+  <rect x="364" y="370" width="18" height="30" rx="5" fill="#D97706"/>
+  <!-- Boots -->
+  <rect x="334" y="394" width="28" height="12" rx="5" fill="#92400E"/>
+  <rect x="358" y="392" width="28" height="12" rx="5" fill="#92400E"/>
+  <!-- Speed lines (motion) -->
+  <line x1="300" y1="300" x2="260" y2="300" stroke="#FDE68A" stroke-width="2" opacity="0.5"/>
+  <line x1="305" y1="320" x2="262" y2="320" stroke="#FDE68A" stroke-width="1.5" opacity="0.4"/>
+  <line x1="308" y1="340" x2="268" y2="340" stroke="#FDE68A" stroke-width="1.5" opacity="0.3"/>
+</svg>

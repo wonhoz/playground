@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f0a2a"/>
+      <stop offset="100%" stop-color="#1a0f3a"/>
+    </linearGradient>
+    <linearGradient id="tower" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#5a3a8a"/>
+      <stop offset="100%" stop-color="#3a1a6a"/>
+    </linearGradient>
+    <radialGradient id="orb" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#a0e0ff"/>
+      <stop offset="60%" stop-color="#4090e0"/>
+      <stop offset="100%" stop-color="#2050a0"/>
+    </radialGradient>
+    <radialGradient id="magic" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#e040ff" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#e040ff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Magic aura -->
+  <ellipse cx="256" cy="256" rx="180" ry="180" fill="url(#magic)" opacity="0.3"/>
+  <!-- Tower body -->
+  <rect x="206" y="200" width="100" height="240" rx="8" fill="url(#tower)"/>
+  <!-- Tower spire -->
+  <path d="M206 200 L256 80 L306 200Z" fill="#6a3a9a"/>
+  <!-- Spire highlight -->
+  <path d="M256 80 L256 200 L286 200Z" fill="#8a5ab0" opacity="0.5"/>
+  <!-- Battlements -->
+  <rect x="193" y="172" width="24" height="36" rx="4" fill="#5a3a8a"/>
+  <rect x="232" y="172" width="24" height="36" rx="4" fill="#5a3a8a"/>
+  <rect x="271" y="172" width="24" height="36" rx="4" fill="#5a3a8a"/>
+  <rect x="310" y="172" width="24" height="36" rx="4" fill="#5a3a8a"/>
+  <!-- Magic orb on top -->
+  <circle cx="256" cy="95" r="22" fill="url(#orb)"/>
+  <circle cx="256" cy="95" r="22" fill="none" stroke="#c0e8ff" stroke-width="2" opacity="0.7"/>
+  <!-- Orb sparkle -->
+  <circle cx="248" cy="88" r="5" fill="#ffffff" opacity="0.8"/>
+  <!-- Tower windows with magic glow -->
+  <ellipse cx="256" cy="280" rx="18" ry="24" fill="#0f0a2a"/>
+  <ellipse cx="256" cy="280" rx="12" ry="16" fill="#60b0ff" opacity="0.9"/>
+  <ellipse cx="256" cy="340" rx="14" ry="18" fill="#0f0a2a"/>
+  <ellipse cx="256" cy="340" rx="9" ry="12" fill="#e040ff" opacity="0.7"/>
+  <!-- Magic runes on tower -->
+  <text x="218" y="235" font-size="16" fill="#c080ff" opacity="0.7" font-family="serif">✦</text>
+  <text x="280" y="235" font-size="16" fill="#c080ff" opacity="0.7" font-family="serif">✦</text>
+  <!-- Tower base -->
+  <rect x="170" y="430" width="172" height="28" rx="8" fill="#4a2a7a"/>
+  <rect x="148" y="448" width="216" height="16" rx="8" fill="#3a1a6a"/>
+  <!-- Magic sparks -->
+  <circle cx="170" cy="140" r="4" fill="#e040ff" opacity="0.9"/>
+  <circle cx="340" cy="160" r="3" fill="#60b0ff" opacity="0.8"/>
+  <circle cx="150" cy="250" r="3" fill="#e040ff" opacity="0.7"/>
+  <circle cx="360" cy="280" r="4" fill="#60b0ff" opacity="0.9"/>
+  <circle cx="320" cy="120" r="3" fill="#ffffff" opacity="0.8"/>
+  <circle cx="190" cy="120" r="2" fill="#ffffff" opacity="0.6"/>
+</svg>

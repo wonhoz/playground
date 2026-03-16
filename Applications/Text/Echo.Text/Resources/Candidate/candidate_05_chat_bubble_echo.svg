@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#11998e"/>
+      <stop offset="100%" style="stop-color:#38ef7d"/>
+    </linearGradient>
+    <linearGradient id="bubble1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fff"/>
+      <stop offset="100%" style="stop-color:#e8f8f5"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Main bubble -->
+  <path d="M60 80 C60 62 75 48 93 48 L360 48 C378 48 393 62 393 80 L393 200 C393 218 378 232 360 232 L180 232 L110 290 L128 232 L93 232 C75 232 60 218 60 200 Z" fill="url(#bubble1)" opacity="0.95"/>
+  <!-- Text in bubble -->
+  <rect x="90" y="98" width="180" height="14" rx="7" fill="#11998e" opacity="0.7"/>
+  <rect x="90" y="125" width="230" height="14" rx="7" fill="#11998e" opacity="0.7"/>
+  <rect x="90" y="152" width="150" height="14" rx="7" fill="#11998e" opacity="0.7"/>
+  <rect x="90" y="179" width="200" height="14" rx="7" fill="#11998e" opacity="0.7"/>
+  <!-- Echo bubble 2 - smaller, shifted -->
+  <path d="M160 320 C160 305 172 294 186 294 L400 294 C414 294 426 305 426 320 L426 410 C426 425 414 436 400 436 L250 436 L210 470 L222 436 L186 436 C172 436 160 425 160 410 Z" fill="white" opacity="0.6"/>
+  <rect x="185" y="334" width="140" height="12" rx="6" fill="#11998e" opacity="0.5"/>
+  <rect x="185" y="356" width="180" height="12" rx="6" fill="#11998e" opacity="0.5"/>
+  <rect x="185" y="378" width="110" height="12" rx="6" fill="#11998e" opacity="0.5"/>
+  <!-- Echo ripple indicator -->
+  <path d="M420 150 C440 165 450 178 450 192 C450 206 440 219 420 234" stroke="white" stroke-width="6" fill="none" stroke-linecap="round" opacity="0.7"/>
+  <path d="M440 135 C468 153 480 173 480 192 C480 211 468 231 440 249" stroke="white" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.4"/>
+</svg>

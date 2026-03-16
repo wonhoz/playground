@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0a1a"/>
+      <stop offset="100%" style="stop-color:#0d0d2b"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="strongGlow">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <linearGradient id="runnerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#00ffff"/>
+      <stop offset="100%" style="stop-color:#ff00ff"/>
+    </linearGradient>
+    <linearGradient id="trailGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#00ffff;stop-opacity:0"/>
+      <stop offset="100%" style="stop-color:#00ffff;stop-opacity:0.8"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Ground lines -->
+  <line x1="40" y1="380" x2="472" y2="380" stroke="#00ffff" stroke-width="2" opacity="0.3"/>
+  <line x1="40" y1="400" x2="472" y2="400" stroke="#ff00ff" stroke-width="1" opacity="0.2"/>
+  <!-- Perspective grid -->
+  <line x1="256" y1="200" x2="40" y2="400" stroke="#00ffff" stroke-width="1" opacity="0.2"/>
+  <line x1="256" y1="200" x2="472" y2="400" stroke="#00ffff" stroke-width="1" opacity="0.2"/>
+  <line x1="256" y1="200" x2="150" y2="400" stroke="#00ffff" stroke-width="1" opacity="0.15"/>
+  <line x1="256" y1="200" x2="362" y2="400" stroke="#00ffff" stroke-width="1" opacity="0.15"/>
+  <!-- Runner trail -->
+  <path d="M80 340 Q160 320 240 330" stroke="url(#trailGrad)" stroke-width="6" fill="none" filter="url(#glow)"/>
+  <path d="M80 345 Q160 325 240 335" stroke="url(#trailGrad)" stroke-width="3" fill="none" opacity="0.5"/>
+  <!-- Runner figure -->
+  <g filter="url(#strongGlow)" transform="translate(260, 290)">
+    <!-- Head -->
+    <circle cx="0" cy="-55" r="16" fill="none" stroke="#00ffff" stroke-width="2.5"/>
+    <!-- Body -->
+    <line x1="0" y1="-38" x2="0" y2="5" stroke="url(#runnerGrad)" stroke-width="3"/>
+    <!-- Arms running -->
+    <line x1="0" y1="-25" x2="-22" y2="-5" stroke="#00ffff" stroke-width="2.5"/>
+    <line x1="0" y1="-25" x2="20" y2="-42" stroke="#ff00ff" stroke-width="2.5"/>
+    <!-- Legs running -->
+    <line x1="0" y1="5" x2="-18" y2="35" stroke="#00ffff" stroke-width="2.5"/>
+    <line x1="-18" y1="35" x2="-8" y2="55" stroke="#00ffff" stroke-width="2"/>
+    <line x1="0" y1="5" x2="20" y2="28" stroke="#ff00ff" stroke-width="2.5"/>
+    <line x1="20" y1="28" x2="30" y2="12" stroke="#ff00ff" stroke-width="2"/>
+  </g>
+  <!-- Obstacles -->
+  <rect x="340" y="330" width="20" height="50" rx="3" fill="none" stroke="#ff6600" stroke-width="2" filter="url(#glow)" opacity="0.8"/>
+  <rect x="390" y="310" width="20" height="70" rx="3" fill="none" stroke="#ff6600" stroke-width="2" filter="url(#glow)" opacity="0.6"/>
+  <rect x="430" y="340" width="20" height="40" rx="3" fill="none" stroke="#ffff00" stroke-width="2" filter="url(#glow)" opacity="0.5"/>
+  <!-- Speed lines -->
+  <line x1="60" y1="250" x2="200" y2="255" stroke="#00ffff" stroke-width="1.5" opacity="0.4" filter="url(#glow)"/>
+  <line x1="60" y1="265" x2="180" y2="268" stroke="#ff00ff" stroke-width="1" opacity="0.3" filter="url(#glow)"/>
+  <line x1="60" y1="238" x2="160" y2="242" stroke="#00ffff" stroke-width="1" opacity="0.25"/>
+</svg>

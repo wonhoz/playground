@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0010"/>
+      <stop offset="100%" stop-color="#1a0030"/>
+    </linearGradient>
+    <linearGradient id="compass" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e040fb"/>
+      <stop offset="100%" stop-color="#7c4dff"/>
+    </linearGradient>
+    <linearGradient id="needle" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ff5252"/>
+      <stop offset="50%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#448aff"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Compass outer ring -->
+  <circle cx="256" cy="256" r="180" fill="none" stroke="url(#compass)" stroke-width="4" filter="url(#glow)"/>
+  <circle cx="256" cy="256" r="168" fill="#1a0030" opacity="0.6"/>
+  <!-- Tick marks -->
+  <line x1="256" y1="78" x2="256" y2="98" stroke="url(#compass)" stroke-width="4"/>
+  <line x1="256" y1="414" x2="256" y2="434" stroke="url(#compass)" stroke-width="4"/>
+  <line x1="78" y1="256" x2="98" y2="256" stroke="url(#compass)" stroke-width="4"/>
+  <line x1="414" y1="256" x2="434" y2="256" stroke="url(#compass)" stroke-width="4"/>
+  <!-- Keyboard keys as compass directions -->
+  <rect x="228" y="98" width="56" height="40" rx="8" fill="url(#compass)" filter="url(#glow)" opacity="0.85"/>
+  <rect x="228" y="374" width="56" height="40" rx="8" fill="url(#compass)" filter="url(#glow)" opacity="0.6"/>
+  <rect x="98" y="236" width="56" height="40" rx="8" fill="url(#compass)" filter="url(#glow)" opacity="0.7"/>
+  <rect x="358" y="236" width="56" height="40" rx="8" fill="url(#compass)" filter="url(#glow)" opacity="0.8"/>
+  <!-- Inner compass ring -->
+  <circle cx="256" cy="256" r="80" fill="none" stroke="url(#compass)" stroke-width="2" opacity="0.5"/>
+  <!-- Needle -->
+  <polygon points="256,180 248,260 256,250 264,260" fill="#ff5252" filter="url(#glow)"/>
+  <polygon points="256,332 248,252 256,262 264,252" fill="#448aff" filter="url(#glow)" opacity="0.8"/>
+  <!-- Center hub -->
+  <circle cx="256" cy="256" r="14" fill="url(#compass)" filter="url(#glow)"/>
+  <circle cx="256" cy="256" r="6" fill="white"/>
+</svg>

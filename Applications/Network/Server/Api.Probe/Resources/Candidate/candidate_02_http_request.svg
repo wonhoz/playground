@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F172A"/>
+      <stop offset="100%" stop-color="#1E293B"/>
+    </linearGradient>
+    <linearGradient id="get" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#059669"/>
+      <stop offset="100%" stop-color="#10B981"/>
+    </linearGradient>
+    <linearGradient id="post" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#D97706"/>
+      <stop offset="100%" stop-color="#F59E0B"/>
+    </linearGradient>
+    <linearGradient id="put" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#2563EB"/>
+      <stop offset="100%" stop-color="#60A5FA"/>
+    </linearGradient>
+    <linearGradient id="del" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#DC2626"/>
+      <stop offset="100%" stop-color="#F87171"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- GET -->
+  <rect x="70" y="100" width="80" height="36" rx="6" fill="url(#get)"/>
+  <text x="110" y="124" font-family="monospace" font-weight="bold" font-size="16" fill="white" text-anchor="middle">GET</text>
+  <rect x="164" y="106" width="278" height="24" rx="4" fill="#1E293B" stroke="#334155" stroke-width="1"/>
+  <text x="172" y="123" font-family="monospace" font-size="13" fill="#94A3B8">/api/v1/users</text>
+  <!-- POST -->
+  <rect x="70" y="152" width="80" height="36" rx="6" fill="url(#post)"/>
+  <text x="110" y="176" font-family="monospace" font-weight="bold" font-size="16" fill="white" text-anchor="middle">POST</text>
+  <rect x="164" y="158" width="278" height="24" rx="4" fill="#1E293B" stroke="#334155" stroke-width="1"/>
+  <text x="172" y="175" font-family="monospace" font-size="13" fill="#94A3B8">/api/v1/data</text>
+  <!-- PUT -->
+  <rect x="70" y="204" width="80" height="36" rx="6" fill="url(#put)"/>
+  <text x="110" y="228" font-family="monospace" font-weight="bold" font-size="16" fill="white" text-anchor="middle">PUT</text>
+  <rect x="164" y="210" width="278" height="24" rx="4" fill="#1E293B" stroke="#334155" stroke-width="1"/>
+  <text x="172" y="227" font-family="monospace" font-size="13" fill="#94A3B8">/api/v1/item/42</text>
+  <!-- DELETE -->
+  <rect x="70" y="256" width="80" height="36" rx="6" fill="url(#del)"/>
+  <text x="110" y="280" font-family="monospace" font-weight="bold" font-size="14" fill="white" text-anchor="middle">DELETE</text>
+  <rect x="164" y="262" width="278" height="24" rx="4" fill="#1E293B" stroke="#334155" stroke-width="1"/>
+  <text x="172" y="279" font-family="monospace" font-size="13" fill="#94A3B8">/api/v1/item/42</text>
+  <!-- Response codes -->
+  <rect x="70" y="320" width="372" height="80" rx="8" fill="#0F172A" stroke="#334155" stroke-width="1"/>
+  <text x="90" y="350" font-family="monospace" font-size="14" fill="#10B981">200 OK</text>
+  <text x="200" y="350" font-family="monospace" font-size="14" fill="#F59E0B">404 Not Found</text>
+  <text x="90" y="380" font-family="monospace" font-size="14" fill="#F87171">500 Server Error</text>
+  <text x="240" y="380" font-family="monospace" font-size="14" fill="#60A5FA">201 Created</text>
+  <!-- Label -->
+  <text x="256" y="450" font-family="monospace" font-weight="bold" font-size="22" fill="#60A5FA" text-anchor="middle">Api.Probe</text>
+</svg>

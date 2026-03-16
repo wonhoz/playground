@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0D0D1A"/>
+      <stop offset="100%" stop-color="#1A0D2E"/>
+    </linearGradient>
+    <linearGradient id="block1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF6B35"/>
+      <stop offset="100%" stop-color="#FF3366"/>
+    </linearGradient>
+    <linearGradient id="block2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFD700"/>
+      <stop offset="100%" stop-color="#FF8C00"/>
+    </linearGradient>
+    <linearGradient id="block3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00E5FF"/>
+      <stop offset="100%" stop-color="#0080FF"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Ground -->
+  <rect x="60" y="420" width="392" height="16" rx="4" fill="#2A2A4A"/>
+  <!-- Stack blocks (stable) -->
+  <rect x="136" y="320" width="240" height="52" rx="6" fill="url(#block3)" filter="url(#glow)" opacity="0.9"/>
+  <rect x="160" y="264" width="192" height="52" rx="6" fill="url(#block2)" filter="url(#glow)" opacity="0.9"/>
+  <rect x="184" y="208" width="144" height="52" rx="6" fill="url(#block1)" filter="url(#glow)" opacity="0.9"/>
+  <!-- Top block tilting/crashing -->
+  <g transform="translate(256,182) rotate(-18) translate(-72,-28)">
+    <rect width="144" height="52" rx="6" fill="#A855F7" filter="url(#glow)" opacity="0.85"/>
+  </g>
+  <!-- Debris particles -->
+  <rect x="340" y="130" width="28" height="20" rx="4" fill="#FF3366" opacity="0.7" transform="rotate(25, 354, 140)"/>
+  <rect x="380" y="160" width="20" height="14" rx="3" fill="#FFD700" opacity="0.6" transform="rotate(-15, 390, 167)"/>
+  <rect x="310" y="100" width="16" height="12" rx="3" fill="#00E5FF" opacity="0.6" transform="rotate(40, 318, 106)"/>
+  <circle cx="370" cy="110" r="6" fill="#FF6B35" opacity="0.7"/>
+  <circle cx="410" cy="145" r="4" fill="#A855F7" opacity="0.7"/>
+  <!-- Impact lines -->
+  <line x1="320" y1="208" x2="370" y2="155" stroke="#FF3366" stroke-width="2" opacity="0.5" stroke-dasharray="4,4"/>
+  <line x1="344" y1="208" x2="400" y2="165" stroke="#FFD700" stroke-width="2" opacity="0.5" stroke-dasharray="4,4"/>
+</svg>

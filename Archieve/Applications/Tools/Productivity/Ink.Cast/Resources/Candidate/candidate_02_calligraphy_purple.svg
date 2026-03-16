@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4A148C"/>
+      <stop offset="100%" stop-color="#6A1B9A"/>
+    </linearGradient>
+    <linearGradient id="ink" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E040FB"/>
+      <stop offset="100%" stop-color="#CE93D8"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- 붓글씨 스트로크 -->
+  <path d="M 100 140 C 140 100 200 130 220 180 C 240 230 200 280 160 300 C 120 320 80 300 100 260" fill="url(#ink)" opacity="0.8"/>
+  <path d="M 260 120 C 310 90 380 110 400 160 C 420 210 390 270 340 290 C 290 310 240 280 260 230 C 280 180 340 190 360 230" fill="none" stroke="url(#ink)" stroke-width="18" stroke-linecap="round"/>
+  <!-- 잉크 번짐 -->
+  <ellipse cx="160" cy="180" rx="20" ry="28" fill="#CE93D8" opacity="0.4" transform="rotate(30 160 180)"/>
+  <ellipse cx="340" cy="200" rx="16" ry="22" fill="#E040FB" opacity="0.3" transform="rotate(-20 340 200)"/>
+  <!-- 붓 -->
+  <line x1="80" y1="400" x2="220" y2="260" stroke="#9C27B0" stroke-width="8" stroke-linecap="round"/>
+  <ellipse cx="76" cy="404" rx="10" ry="16" fill="#CE93D8" transform="rotate(45 76 404)"/>
+  <!-- 물결 아래 라인 -->
+  <path d="M 80 420 Q 130 400 180 420 Q 230 440 280 420 Q 330 400 380 420 Q 430 440 460 420" fill="none" stroke="#CE93D8" stroke-width="4" opacity="0.5"/>
+  <text x="256" y="470" font-size="20" text-anchor="middle" fill="#CE93D8" font-family="Segoe UI">Digital Ink</text>
+</svg>

@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1B5E20"/>
+      <stop offset="100%" stop-color="#8BC34A"/>
+    </linearGradient>
+    <linearGradient id="fab" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#F1F8E9"/>
+      <stop offset="100%" stop-color="#DCEDC8"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Large fabric blob -->
+  <ellipse cx="256" cy="256" rx="160" ry="130" fill="url(#fab)" opacity="0.9"/>
+  <!-- Cut lines radiating -->
+  <line x1="256" y1="126" x2="256" y2="386" stroke="#33691E" stroke-width="3" stroke-dasharray="10,7"/>
+  <line x1="96" y1="256" x2="416" y2="256" stroke="#33691E" stroke-width="3" stroke-dasharray="10,7"/>
+  <line x1="143" y1="143" x2="369" y2="369" stroke="#33691E" stroke-width="3" stroke-dasharray="10,7"/>
+  <line x1="369" y1="143" x2="143" y2="369" stroke="#33691E" stroke-width="3" stroke-dasharray="10,7"/>
+  <!-- Center scissors -->
+  <circle cx="244" cy="256" r="18" fill="none" stroke="#33691E" stroke-width="5"/>
+  <circle cx="270" cy="256" r="18" fill="none" stroke="#33691E" stroke-width="5"/>
+  <line x1="256" y1="240" x2="256" y2="100" stroke="#33691E" stroke-width="5" stroke-linecap="round"/>
+  <line x1="256" y1="272" x2="256" y2="412" stroke="#33691E" stroke-width="5" stroke-linecap="round"/>
+  <!-- Score badge -->
+  <circle cx="390" cy="148" r="38" fill="#558B2F"/>
+  <text x="390" y="140" text-anchor="middle" font-size="13" fill="#CCFF90" font-family="Arial" font-weight="bold">SCORE</text>
+  <text x="390" y="162" text-anchor="middle" font-size="18" fill="white" font-family="Arial" font-weight="bold">100</text>
+</svg>

@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0D1117"/>
+      <stop offset="100%" stop-color="#161B22"/>
+    </linearGradient>
+    <linearGradient id="screen" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0A1628"/>
+      <stop offset="100%" stop-color="#0D2137"/>
+    </linearGradient>
+    <filter id="scan">
+      <feTurbulence type="fractalNoise" baseFrequency="0 0.15" numOctaves="1" result="noise"/>
+      <feBlend in="SourceGraphic" in2="noise" mode="multiply"/>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Monitor frame -->
+  <rect x="56" y="80" width="400" height="290" rx="14" fill="#1C1C1C" stroke="#333" stroke-width="3"/>
+  <rect x="70" y="94" width="372" height="262" rx="6" fill="url(#screen)"/>
+  <!-- Terminal text lines -->
+  <text x="86" y="130" font-family="Courier New" font-size="20" fill="#39FF14">$ sys.monitor --live</text>
+  <text x="86" y="160" font-family="Courier New" font-size="18" fill="#39FF14" opacity="0.9">CPU  [========--]  72%</text>
+  <text x="86" y="188" font-family="Courier New" font-size="18" fill="#00CFFF" opacity="0.9">RAM  [======----]  58%</text>
+  <text x="86" y="216" font-family="Courier New" font-size="18" fill="#FFD700" opacity="0.9">DSK  [=====-----]  49%</text>
+  <text x="86" y="244" font-family="Courier New" font-size="18" fill="#FF6B6B" opacity="0.9">NET  [===-------]  31%</text>
+  <text x="86" y="272" font-family="Courier New" font-size="18" fill="#39FF14" opacity="0.7">TEMP 58°C  FAN 1420rpm</text>
+  <rect x="86" y="278" width="10" height="18" fill="#39FF14" opacity="0.9"/>
+  <!-- Stand -->
+  <rect x="216" y="370" width="80" height="20" rx="4" fill="#252525"/>
+  <rect x="180" y="385" width="152" height="14" rx="6" fill="#1C1C1C" stroke="#333" stroke-width="2"/>
+  <!-- Tray icon hint -->
+  <rect x="150" y="420" width="212" height="48" rx="10" fill="#1A1A1A" stroke="#39FF14" stroke-width="2" opacity="0.7"/>
+  <text x="256" y="452" text-anchor="middle" font-family="Courier New" font-size="20" fill="#39FF14">TRAY STATS v2</text>
+</svg>

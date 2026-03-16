@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0a18"/>
+      <stop offset="100%" stop-color="#181828"/>
+    </linearGradient>
+    <radialGradient id="iris" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#0088ff"/>
+      <stop offset="60%" stop-color="#0044cc"/>
+      <stop offset="100%" stop-color="#001a66"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Eye shape -->
+  <path d="M80,230 Q256,120 432,230 Q256,340 80,230 Z" fill="#0a1030" stroke="#4488ff" stroke-width="3"/>
+  <!-- Iris -->
+  <circle cx="256" cy="230" r="65" fill="url(#iris)"/>
+  <!-- Pupil -->
+  <circle cx="256" cy="230" r="32" fill="#000a20"/>
+  <!-- Code reflection in pupil -->
+  <text x="256" y="224" text-anchor="middle" font-family="monospace" font-size="8" fill="#4488ff">{}</text>
+  <text x="256" y="235" text-anchor="middle" font-family="monospace" font-size="7" fill="#44ff88">JWT</text>
+  <!-- Highlight -->
+  <circle cx="274" cy="214" r="8" fill="#88ccff" opacity="0.5"/>
+  <!-- Code lines below -->
+  <text x="80" y="370" font-family="monospace" font-size="12" fill="#4488ff">GET /oauth/token</text>
+  <text x="80" y="390" font-family="monospace" font-size="12" fill="#44ff88">Authorization: Bearer ...</text>
+  <text x="80" y="410" font-family="monospace" font-size="12" fill="#ffaa44">200 OK — expires_in: 3600</text>
+  <text x="256" y="470" text-anchor="middle" font-family="monospace" font-size="28" font-weight="bold" fill="#4488ff">OAUTH.PEEK</text>
+</svg>

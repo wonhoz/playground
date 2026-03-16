@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#2D1F00"/>
+      <stop offset="100%" stop-color="#1A1200"/>
+    </radialGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#EAB308" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#EAB308" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="lightning">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Glow center -->
+  <circle cx="256" cy="256" r="180" fill="url(#glow)"/>
+  <!-- Lightning bolt main -->
+  <polygon points="290,70 220,260 268,260 222,442 336,230 278,230" fill="#FDE68A" filter="url(#lightning)"/>
+  <polygon points="290,70 220,260 268,260 222,442 336,230 278,230" fill="#FCD34D" opacity="0.6"/>
+  <!-- API labels radiating -->
+  <rect x="66" y="130" width="100" height="28" rx="6" fill="#1C1200" stroke="#EAB308" stroke-width="1.5"/>
+  <text x="116" y="149" font-family="Courier New" font-size="11" fill="#FCD34D" text-anchor="middle">GET /users</text>
+  <rect x="66" y="240" width="100" height="28" rx="6" fill="#1C1200" stroke="#EAB308" stroke-width="1.5"/>
+  <text x="116" y="259" font-family="Courier New" font-size="11" fill="#FCD34D" text-anchor="middle">POST /data</text>
+  <rect x="66" y="350" width="100" height="28" rx="6" fill="#1C1200" stroke="#EAB308" stroke-width="1.5"/>
+  <text x="116" y="369" font-family="Courier New" font-size="11" fill="#FCD34D" text-anchor="middle">DELETE /id</text>
+  <!-- Right side responses -->
+  <rect x="346" y="130" width="100" height="28" rx="6" fill="#1C1200" stroke="#22C55E" stroke-width="1.5"/>
+  <text x="396" y="149" font-family="Courier New" font-size="11" fill="#22C55E" text-anchor="middle">200 OK</text>
+  <rect x="346" y="240" width="100" height="28" rx="6" fill="#1C1200" stroke="#F59E0B" stroke-width="1.5"/>
+  <text x="396" y="259" font-family="Courier New" font-size="11" fill="#F59E0B" text-anchor="middle">201 Created</text>
+  <rect x="346" y="350" width="100" height="28" rx="6" fill="#1C1200" stroke="#EF4444" stroke-width="1.5"/>
+  <text x="396" y="369" font-family="Courier New" font-size="11" fill="#EF4444" text-anchor="middle">204 No Ct.</text>
+  <!-- Connection arrows to bolt -->
+  <line x1="166" y1="144" x2="240" y2="200" stroke="#EAB308" stroke-width="1.5" opacity="0.5" stroke-dasharray="4,3"/>
+  <line x1="166" y1="254" x2="240" y2="256" stroke="#EAB308" stroke-width="1.5" opacity="0.5" stroke-dasharray="4,3"/>
+  <line x1="166" y1="364" x2="240" y2="320" stroke="#EAB308" stroke-width="1.5" opacity="0.5" stroke-dasharray="4,3"/>
+  <line x1="346" y1="144" x2="270" y2="200" stroke="#22C55E" stroke-width="1.5" opacity="0.5" stroke-dasharray="4,3"/>
+  <line x1="346" y1="254" x2="272" y2="250" stroke="#F59E0B" stroke-width="1.5" opacity="0.5" stroke-dasharray="4,3"/>
+  <line x1="346" y1="364" x2="272" y2="320" stroke="#EF4444" stroke-width="1.5" opacity="0.5" stroke-dasharray="4,3"/>
+  <!-- Port label bottom -->
+  <rect x="198" y="456" width="116" height="32" rx="8" fill="#2D1F00" stroke="#EAB308" stroke-width="2"/>
+  <text x="256" y="477" font-family="Courier New" font-size="15" fill="#FDE68A" text-anchor="middle" font-weight="bold">:8080</text>
+</svg>

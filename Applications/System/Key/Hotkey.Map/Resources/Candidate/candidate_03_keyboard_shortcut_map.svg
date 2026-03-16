@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#001a33"/>
+      <stop offset="100%" stop-color="#003366"/>
+    </linearGradient>
+    <linearGradient id="map" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00d4ff"/>
+      <stop offset="100%" stop-color="#0099cc"/>
+    </linearGradient>
+    <linearGradient id="key" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4776e6"/>
+      <stop offset="100%" stop-color="#8e54e9"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Map grid lines -->
+  <line x1="80" y1="160" x2="432" y2="160" stroke="url(#map)" stroke-width="1" opacity="0.3"/>
+  <line x1="80" y1="256" x2="432" y2="256" stroke="url(#map)" stroke-width="1" opacity="0.3"/>
+  <line x1="80" y1="352" x2="432" y2="352" stroke="url(#map)" stroke-width="1" opacity="0.3"/>
+  <line x1="160" y1="80" x2="160" y2="432" stroke="url(#map)" stroke-width="1" opacity="0.3"/>
+  <line x1="256" y1="80" x2="256" y2="432" stroke="url(#map)" stroke-width="1" opacity="0.3"/>
+  <line x1="352" y1="80" x2="352" y2="432" stroke="url(#map)" stroke-width="1" opacity="0.3"/>
+  <!-- Key nodes at intersections -->
+  <rect x="136" y="136" width="48" height="48" rx="8" fill="url(#key)" filter="url(#glow)"/>
+  <rect x="232" y="232" width="48" height="48" rx="8" fill="url(#key)" filter="url(#glow)"/>
+  <rect x="328" y="136" width="48" height="48" rx="8" fill="url(#key)" filter="url(#glow)"/>
+  <rect x="136" y="328" width="48" height="48" rx="8" fill="#8e54e9" opacity="0.7" filter="url(#glow)"/>
+  <rect x="328" y="328" width="48" height="48" rx="8" fill="#4776e6" opacity="0.7" filter="url(#glow)"/>
+  <!-- Arrow connections between keys -->
+  <path d="M184 160 L232 160 L232 232" stroke="url(#map)" stroke-width="3" fill="none" stroke-linecap="round" filter="url(#glow)" marker-end="url(#arrow)"/>
+  <path d="M352 184 L352 232 L280 256" stroke="url(#map)" stroke-width="3" fill="none" stroke-linecap="round" filter="url(#glow)"/>
+  <path d="M256 280 L256 328 L328 352" stroke="url(#map)" stroke-width="3" fill="none" stroke-linecap="round" filter="url(#glow)"/>
+  <path d="M160 184 L160 328" stroke="url(#map)" stroke-width="3" fill="none" stroke-linecap="round" filter="url(#glow)" opacity="0.5"/>
+  <!-- Arrowheads -->
+  <polygon points="228,226 237,246 246,226" fill="url(#map)" filter="url(#glow)"/>
+  <polygon points="272,252 284,264 284,248" fill="url(#map)" filter="url(#glow)"/>
+</svg>

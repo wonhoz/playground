@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a0033"/>
+      <stop offset="100%" stop-color="#330066"/>
+    </linearGradient>
+    <linearGradient id="bind" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e040fb"/>
+      <stop offset="100%" stop-color="#ea80fc"/>
+    </linearGradient>
+    <linearGradient id="action" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#40c4ff"/>
+      <stop offset="100%" stop-color="#80d8ff"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Left column: key buttons -->
+  <rect x="60" y="110" width="120" height="44" rx="10" fill="url(#bind)" filter="url(#glow)"/>
+  <rect x="60" y="170" width="120" height="44" rx="10" fill="url(#bind)" opacity="0.8" filter="url(#glow)"/>
+  <rect x="60" y="230" width="120" height="44" rx="10" fill="url(#bind)" opacity="0.6" filter="url(#glow)"/>
+  <rect x="60" y="290" width="120" height="44" rx="10" fill="url(#bind)" opacity="0.7" filter="url(#glow)"/>
+  <rect x="60" y="350" width="120" height="44" rx="10" fill="url(#bind)" opacity="0.5" filter="url(#glow)"/>
+  <!-- Right column: action boxes -->
+  <rect x="332" y="110" width="120" height="44" rx="10" fill="url(#action)" filter="url(#glow)"/>
+  <rect x="332" y="185" width="120" height="44" rx="10" fill="url(#action)" opacity="0.8" filter="url(#glow)"/>
+  <rect x="332" y="260" width="120" height="44" rx="10" fill="url(#action)" opacity="0.6" filter="url(#glow)"/>
+  <rect x="332" y="335" width="120" height="44" rx="10" fill="url(#action)" opacity="0.7" filter="url(#glow)"/>
+  <!-- Binding lines -->
+  <path d="M180 132 C260 132 252 132 332 132" stroke="url(#bind)" stroke-width="2.5" fill="none" filter="url(#glow)"/>
+  <path d="M180 192 C240 192 260 207 332 207" stroke="url(#bind)" stroke-width="2.5" fill="none" opacity="0.7" filter="url(#glow)"/>
+  <path d="M180 252 C220 252 260 282 332 282" stroke="url(#action)" stroke-width="2.5" fill="none" opacity="0.6" filter="url(#glow)"/>
+  <path d="M180 312 C240 312 276 357 332 357" stroke="url(#action)" stroke-width="2.5" fill="none" opacity="0.7" filter="url(#glow)"/>
+  <path d="M180 372 C240 372 270 207 332 207" stroke="url(#bind)" stroke-width="2" fill="none" opacity="0.35" stroke-dasharray="5,4" filter="url(#glow)"/>
+  <!-- Center binding node -->
+  <circle cx="256" cy="256" r="20" fill="url(#bind)" opacity="0.7" filter="url(#glow)"/>
+  <circle cx="256" cy="256" r="10" fill="white" opacity="0.5"/>
+</svg>

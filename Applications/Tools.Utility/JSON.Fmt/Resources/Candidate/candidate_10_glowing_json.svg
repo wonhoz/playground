@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#0a0a1e"/>
+      <stop offset="100%" stop-color="#000000"/>
+    </radialGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#f7d77440"/>
+      <stop offset="100%" stop-color="#f7d77400"/>
+    </radialGradient>
+    <linearGradient id="text1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffe57f"/>
+      <stop offset="100%" stop-color="#ffc107"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Background glow -->
+  <rect x="0" y="0" width="512" height="512" rx="80" fill="url(#glow)"/>
+  <!-- Large glowing JSON text -->
+  <text x="256" y="200" text-anchor="middle" font-family="monospace" font-size="100" font-weight="bold" fill="url(#text1)" opacity="0.95">{}</text>
+  <!-- Glow effect (blurred duplicate) -->
+  <text x="256" y="200" text-anchor="middle" font-family="monospace" font-size="100" font-weight="bold" fill="#ffc107" opacity="0.3" filter="blur(12px)">{}</text>
+  <!-- Formatted code underneath -->
+  <text x="256" y="270" text-anchor="middle" font-family="monospace" font-size="16" fill="#ffc107" opacity="0.6">JSON FORMATTER</text>
+  <!-- Key-value pairs decorating the bottom -->
+  <text x="100" y="320" font-family="monospace" font-size="13" fill="#79c0ff" opacity="0.7">"key":</text>
+  <text x="166" y="320" font-family="monospace" font-size="13" fill="#a5d6ff" opacity="0.7">"value"</text>
+  <text x="100" y="344" font-family="monospace" font-size="13" fill="#56d364" opacity="0.6">"num":</text>
+  <text x="162" y="344" font-family="monospace" font-size="13" fill="#f0883e" opacity="0.7">42</text>
+  <text x="100" y="368" font-family="monospace" font-size="13" fill="#56d364" opacity=" 0.6">"ok":</text>
+  <text x="154" y="368" font-family="monospace" font-size="13" fill="#79c0ff" opacity="0.7">true</text>
+  <text x="280" y="320" font-family="monospace" font-size="13" fill="#ff7eb6" opacity="0.6">"arr":</text>
+  <text x="336" y="320" font-family="monospace" font-size="13" fill="#f7d774" opacity="0.7">[...]</text>
+  <text x="280" y="344" font-family="monospace" font-size="13" fill="#79c0ff" opacity="0.6">"obj":</text>
+  <text x="336" y="344" font-family="monospace" font-size="13" fill="#f7d774" opacity="0.7">{...}</text>
+  <text x="280" y="368" font-family="monospace" font-size="13" fill="#ff7eb6" opacity="0.6">"n":</text>
+  <text x="318" y="368" font-family="monospace" font-size="13" fill="#e6edf3" opacity="0.7">null</text>
+  <!-- Decorative dots -->
+  <circle cx="256" cy="410" r="4" fill="#ffc107" opacity="0.6"/>
+  <circle cx="240" cy="410" r="3" fill="#ffc107" opacity="0.4"/>
+  <circle cx="272" cy="410" r="3" fill="#ffc107" opacity="0.4"/>
+  <text x="256" y="455" text-anchor="middle" font-family="Arial" font-size="16" letter-spacing="4" fill="#ffc107" opacity="0.5">FMT · VIEW · SORT</text>
+</svg>

@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#050508"/>
+      <stop offset="100%" style="stop-color:#0d0d15"/>
+    </linearGradient>
+    <radialGradient id="spot" cx="50%" cy="60%" r="50%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.12"/>
+      <stop offset="100%" style="stop-color:#ffffff;stop-opacity:0"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Spotlight cone -->
+  <polygon points="256,60 80,400 432,400" fill="url(#spot)"/>
+  <!-- Spotlight source -->
+  <circle cx="256" cy="52" r="20" fill="#ffffaa"/>
+  <circle cx="256" cy="52" r="14" fill="white"/>
+  <!-- Rays -->
+  <line x1="256" y1="72" x2="80" y2="400" stroke="#ffffaa" stroke-width="1" stroke-opacity="0.15"/>
+  <line x1="256" y1="72" x2="432" y2="400" stroke="#ffffaa" stroke-width="1" stroke-opacity="0.15"/>
+  <line x1="256" y1="72" x2="256" y2="400" stroke="#ffffaa" stroke-width="1" stroke-opacity="0.2"/>
+  <!-- Icons in spotlight -->
+  <!-- Center - highlighted -->
+  <rect x="216" y="280" width="80" height="80" rx="16" fill="#1a1a2a" stroke="#ffffff" stroke-width="2"/>
+  <text x="238" y="334" font-family="serif" font-size="48">⭐</text>
+  <!-- Surrounding icons in dark -->
+  <rect x="100" y="300" width="60" height="60" rx="12" fill="#111118" stroke="#333" stroke-width="1"/>
+  <text x="116" y="342" font-family="serif" font-size="34">🔍</text>
+  <rect x="350" y="300" width="60" height="60" rx="12" fill="#111118" stroke="#333" stroke-width="1"/>
+  <text x="366" y="342" font-family="serif" font-size="34">🏠</text>
+  <rect x="160" y="200" width="50" height="50" rx="10" fill="#0d0d15" stroke="#222" stroke-width="1"/>
+  <text x="174" y="236" font-family="serif" font-size="28">💡</text>
+  <rect x="305" y="200" width="50" height="50" rx="10" fill="#0d0d15" stroke="#222" stroke-width="1"/>
+  <text x="320" y="236" font-family="serif" font-size="28">🔔</text>
+  <!-- Search bar at bottom -->
+  <rect x="80" y="420" width="352" height="44" rx="22" fill="#1a1a28" stroke="#4444aa" stroke-width="1.5"/>
+  <text x="110" y="448" font-family="sans-serif" font-size="16" fill="#5555aa">Find your icon...</text>
+</svg>

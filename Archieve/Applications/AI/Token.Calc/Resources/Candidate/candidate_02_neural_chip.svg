@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0d0d1a"/>
+      <stop offset="100%" stop-color="#1a1a3e"/>
+    </linearGradient>
+    <linearGradient id="chipGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2a2a5a"/>
+      <stop offset="100%" stop-color="#1a1a3a"/>
+    </linearGradient>
+    <radialGradient id="nodeGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#00d4ff"/>
+      <stop offset="100%" stop-color="#0066aa" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="blur">
+      <feGaussianBlur stdDeviation="3"/>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- 칩 본체 -->
+  <rect x="156" y="156" width="200" height="200" rx="16" fill="url(#chipGrad)" stroke="#00d4ff" stroke-width="2"/>
+  <!-- 핀 왼쪽 -->
+  <rect x="106" y="186" width="50" height="10" rx="3" fill="#00d4ff" opacity="0.7"/>
+  <rect x="106" y="216" width="50" height="10" rx="3" fill="#00d4ff" opacity="0.7"/>
+  <rect x="106" y="246" width="50" height="10" rx="3" fill="#00d4ff" opacity="0.7"/>
+  <rect x="106" y="276" width="50" height="10" rx="3" fill="#00d4ff" opacity="0.7"/>
+  <rect x="106" y="306" width="50" height="10" rx="3" fill="#00d4ff" opacity="0.7"/>
+  <!-- 핀 오른쪽 -->
+  <rect x="356" y="186" width="50" height="10" rx="3" fill="#00d4ff" opacity="0.7"/>
+  <rect x="356" y="216" width="50" height="10" rx="3" fill="#00d4ff" opacity="0.7"/>
+  <rect x="356" y="246" width="50" height="10" rx="3" fill="#00d4ff" opacity="0.7"/>
+  <rect x="356" y="276" width="50" height="10" rx="3" fill="#00d4ff" opacity="0.7"/>
+  <rect x="356" y="306" width="50" height="10" rx="3" fill="#00d4ff" opacity="0.7"/>
+  <!-- 핀 위 -->
+  <rect x="186" y="106" width="10" height="50" rx="3" fill="#00d4ff" opacity="0.7"/>
+  <rect x="216" y="106" width="10" height="50" rx="3" fill="#00d4ff" opacity="0.7"/>
+  <rect x="246" y="106" width="10" height="50" rx="3" fill="#00d4ff" opacity="0.7"/>
+  <rect x="276" y="106" width="10" height="50" rx="3" fill="#00d4ff" opacity="0.7"/>
+  <rect x="306" y="106" width="10" height="50" rx="3" fill="#00d4ff" opacity="0.7"/>
+  <!-- 핀 아래 -->
+  <rect x="186" y="356" width="10" height="50" rx="3" fill="#00d4ff" opacity="0.7"/>
+  <rect x="216" y="356" width="10" height="50" rx="3" fill="#00d4ff" opacity="0.7"/>
+  <rect x="246" y="356" width="10" height="50" rx="3" fill="#00d4ff" opacity="0.7"/>
+  <rect x="276" y="356" width="10" height="50" rx="3" fill="#00d4ff" opacity="0.7"/>
+  <rect x="306" y="356" width="10" height="50" rx="3" fill="#00d4ff" opacity="0.7"/>
+  <!-- 칩 내부 회로 -->
+  <rect x="180" y="180" width="152" height="152" rx="8" fill="#111130" stroke="#2244aa" stroke-width="1.5"/>
+  <!-- AI 텍스트 -->
+  <text x="256" y="268" font-family="Arial" font-weight="bold" font-size="64" fill="#00d4ff" text-anchor="middle" dominant-baseline="middle" opacity="0.9">AI</text>
+  <text x="256" y="308" font-family="Arial" font-size="18" fill="#5588cc" text-anchor="middle">TOKEN</text>
+</svg>

@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FCE4EC"/>
+      <stop offset="100%" stop-color="#F8BBD0"/>
+    </linearGradient>
+    <radialGradient id="pie1" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#F06292"/>
+      <stop offset="100%" stop-color="#E91E63"/>
+    </radialGradient>
+    <radialGradient id="pie2" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#CE93D8"/>
+      <stop offset="100%" stop-color="#9C27B0"/>
+    </radialGradient>
+    <radialGradient id="pie3" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#80DEEA"/>
+      <stop offset="100%" stop-color="#00ACC1"/>
+    </radialGradient>
+    <radialGradient id="pie4" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFD54F"/>
+      <stop offset="100%" stop-color="#FFA000"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Pie chart for cost breakdown -->
+  <!-- Slice 1: ~40% (GPT) -->
+  <path d="M 220,200 L 220,80 A 120,120 0 0,1 340,200 Z" fill="url(#pie1)"/>
+  <!-- Slice 2: ~30% (Claude) -->
+  <path d="M 220,200 L 340,200 A 120,120 0 0,1 262,316 Z" fill="url(#pie2)"/>
+  <!-- Slice 3: ~20% (Gemini) -->
+  <path d="M 220,200 L 262,316 A 120,120 0 0,1 110,248 Z" fill="url(#pie3)"/>
+  <!-- Slice 4: ~10% (Llama) -->
+  <path d="M 220,200 L 110,248 A 120,120 0 0,1 220,80 Z" fill="url(#pie4)"/>
+  <!-- Center donut hole -->
+  <circle cx="220" cy="200" r="52" fill="#FCE4EC"/>
+  <text x="220" y="194" text-anchor="middle" font-size="13" fill="#AD1457" font-family="monospace" opacity="0.8">COST</text>
+  <text x="220" y="212" text-anchor="middle" font-size="16" font-weight="bold" fill="#C2185B" font-family="monospace">$1.24</text>
+  <!-- Legend -->
+  <rect x="356" y="100" width="108" height="196" rx="12" fill="white" opacity="0.9"/>
+  <!-- Legend items -->
+  <circle cx="372" cy="124" r="8" fill="url(#pie1)"/>
+  <rect x="388" y="118" width="68" height="8" rx="4" fill="#AD1457" opacity="0.8"/>
+  <rect x="388" y="130" width="48" height="6" rx="3" fill="#F48FB1" opacity="0.6"/>
+  <circle cx="372" cy="160" r="8" fill="url(#pie2)"/>
+  <rect x="388" y="154" width="68" height="8" rx="4" fill="#6A1B9A" opacity="0.8"/>
+  <rect x="388" y="166" width="48" height="6" rx="3" fill="#CE93D8" opacity="0.6"/>
+  <circle cx="372" cy="196" r="8" fill="url(#pie3)"/>
+  <rect x="388" y="190" width="68" height="8" rx="4" fill="#00838F" opacity="0.8"/>
+  <rect x="388" y="202" width="48" height="6" rx="3" fill="#80DEEA" opacity="0.6"/>
+  <circle cx="372" cy="232" r="8" fill="url(#pie4)"/>
+  <rect x="388" y="226" width="68" height="8" rx="4" fill="#E65100" opacity="0.8"/>
+  <rect x="388" y="238" width="48" height="6" rx="3" fill="#FFD54F" opacity="0.6"/>
+  <!-- Bottom total card -->
+  <rect x="72" y="348" width="368" height="100" rx="20" fill="white" stroke="#F48FB1" stroke-width="5"/>
+  <rect x="92" y="364" width="120" height="10" rx="5" fill="#AD1457" opacity="0.8"/>
+  <text x="400" y="400" text-anchor="end" font-size="32" font-weight="bold" fill="#C2185B" font-family="monospace">$1.2400</text>
+  <rect x="92" y="384" width="80" height="8" rx="4" fill="#F48FB1" opacity="0.7"/>
+  <rect x="92" y="400" width="200" height="8" rx="4" fill="#F48FB1" opacity="0.6"/>
+  <rect x="92" y="414" width="160" height="8" rx="4" fill="#F48FB1" opacity="0.5"/>
+  <rect x="92" y="428" width="120" height="8" rx="4" fill="#F48FB1" opacity="0.4"/>
+</svg>

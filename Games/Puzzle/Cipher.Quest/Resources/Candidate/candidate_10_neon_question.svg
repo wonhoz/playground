@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#0d0020"/>
+      <stop offset="100%" stop-color="#050010"/>
+    </radialGradient>
+    <linearGradient id="qmark" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff00ff"/>
+      <stop offset="100%" stop-color="#8800ff"/>
+    </linearGradient>
+    <filter id="neon">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="neon2">
+      <feGaussianBlur stdDeviation="15" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Outer neon ring -->
+  <circle cx="256" cy="256" r="200" fill="none" stroke="#ff00ff" stroke-width="4" filter="url(#neon2)" opacity="0.5"/>
+  <circle cx="256" cy="256" r="200" fill="none" stroke="#ff00ff" stroke-width="2" opacity="0.8"/>
+  <!-- Inner ring -->
+  <circle cx="256" cy="256" r="180" fill="none" stroke="#8800ff" stroke-width="2" opacity="0.5"/>
+  <!-- Big question mark -->
+  <text x="256" y="340" text-anchor="middle" font-family="Arial Black" font-size="260" fill="url(#qmark)" filter="url(#neon)" opacity="0.95">?</text>
+  <!-- Cipher characters orbiting -->
+  <text x="256" y="68" text-anchor="middle" font-family="monospace" font-size="22" fill="#ff00ff" filter="url(#neon)" opacity="0.8">0x4B</text>
+  <text x="418" y="190" text-anchor="middle" font-family="monospace" font-size="18" fill="#aa00ff" opacity="0.7">AES</text>
+  <text x="440" y="330" text-anchor="middle" font-family="monospace" font-size="18" fill="#ff00aa" opacity="0.7">RSA</text>
+  <text x="256" y="460" text-anchor="middle" font-family="monospace" font-size="22" fill="#ff00ff" filter="url(#neon)" opacity="0.8">0xE2</text>
+  <text x="72" y="330" text-anchor="middle" font-family="monospace" font-size="18" fill="#aa00ff" opacity="0.7">MD5</text>
+  <text x="88" y="190" text-anchor="middle" font-family="monospace" font-size="18" fill="#ff00aa" opacity="0.7">XOR</text>
+</svg>

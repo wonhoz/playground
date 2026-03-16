@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F0F0F"/>
+      <stop offset="100%" stop-color="#1A1A1A"/>
+    </linearGradient>
+    <radialGradient id="hot1" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FF2D00"/>
+      <stop offset="100%" stop-color="#FF6B00" stop-opacity="0.7"/>
+    </radialGradient>
+    <radialGradient id="hot2" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FF7700"/>
+      <stop offset="100%" stop-color="#FFB300" stop-opacity="0.7"/>
+    </radialGradient>
+    <radialGradient id="warm" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFDD00"/>
+      <stop offset="100%" stop-color="#FFEE77" stop-opacity="0.6"/>
+    </radialGradient>
+    <radialGradient id="cool" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#00AAFF"/>
+      <stop offset="100%" stop-color="#0055AA" stop-opacity="0.6"/>
+    </radialGradient>
+    <filter id="blur">
+      <feGaussianBlur stdDeviation="8"/>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Heatmap grid cells (7x6) -->
+  <!-- Row 1 -->
+  <rect x="62" y="100" width="52" height="52" rx="4" fill="#1A3A6B" opacity="0.9"/>
+  <rect x="122" y="100" width="52" height="52" rx="4" fill="#1E6BA8" opacity="0.9"/>
+  <rect x="182" y="100" width="52" height="52" rx="4" fill="#2196F3" opacity="0.9"/>
+  <rect x="242" y="100" width="52" height="52" rx="4" fill="#FF9800" opacity="0.9"/>
+  <rect x="302" y="100" width="52" height="52" rx="4" fill="#FF5722" opacity="0.9"/>
+  <rect x="362" y="100" width="52" height="52" rx="4" fill="#F44336" opacity="0.9"/>
+  <rect x="422" y="100" width="28" height="52" rx="4" fill="#D32F2F" opacity="0.9"/>
+  <!-- Row 2 -->
+  <rect x="62" y="160" width="52" height="52" rx="4" fill="#1565C0" opacity="0.9"/>
+  <rect x="122" y="160" width="52" height="52" rx="4" fill="#42A5F5" opacity="0.9"/>
+  <rect x="182" y="160" width="52" height="52" rx="4" fill="#FFC107" opacity="0.9"/>
+  <rect x="242" y="160" width="52" height="52" rx="4" fill="#FF6D00" opacity="0.9"/>
+  <rect x="302" y="160" width="52" height="52" rx="4" fill="#D50000" opacity="0.9"/>
+  <rect x="362" y="160" width="52" height="52" rx="4" fill="#B71C1C" opacity="0.9"/>
+  <rect x="422" y="160" width="28" height="52" rx="4" fill="#8B0000" opacity="0.9"/>
+  <!-- Row 3 -->
+  <rect x="62" y="220" width="52" height="52" rx="4" fill="#0D47A1" opacity="0.9"/>
+  <rect x="122" y="220" width="52" height="52" rx="4" fill="#1E88E5" opacity="0.9"/>
+  <rect x="182" y="220" width="52" height="52" rx="4" fill="#FFCA28" opacity="0.9"/>
+  <rect x="242" y="220" width="52" height="52" rx="4" fill="#FF8F00" opacity="0.9"/>
+  <rect x="302" y="220" width="52" height="52" rx="4" fill="#E53935" opacity="0.9"/>
+  <rect x="362" y="220" width="52" height="52" rx="4" fill="#C62828" opacity="0.9"/>
+  <rect x="422" y="220" width="28" height="52" rx="4" fill="#7F0000" opacity="0.9"/>
+  <!-- Row 4 -->
+  <rect x="62" y="280" width="52" height="52" rx="4" fill="#1A237E" opacity="0.9"/>
+  <rect x="122" y="280" width="52" height="52" rx="4" fill="#283593" opacity="0.9"/>
+  <rect x="182" y="280" width="52" height="52" rx="4" fill="#1565C0" opacity="0.9"/>
+  <rect x="242" y="280" width="52" height="52" rx="4" fill="#FF6F00" opacity="0.9"/>
+  <rect x="302" y="280" width="52" height="52" rx="4" fill="#FF3D00" opacity="0.9"/>
+  <rect x="362" y="280" width="52" height="52" rx="4" fill="#DD2C00" opacity="0.9"/>
+  <rect x="422" y="280" width="28" height="52" rx="4" fill="#BF360C" opacity="0.9"/>
+  <!-- Color legend bar -->
+  <defs>
+    <linearGradient id="legend" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1565C0"/>
+      <stop offset="40%" stop-color="#FFCA28"/>
+      <stop offset="70%" stop-color="#FF6D00"/>
+      <stop offset="100%" stop-color="#B71C1C"/>
+    </linearGradient>
+  </defs>
+  <rect x="62" y="360" width="388" height="18" rx="9" fill="url(#legend)" opacity="0.9"/>
+  <text x="62" y="400" fill="#888" font-family="Arial" font-size="14">Low</text>
+  <text x="430" y="400" text-anchor="end" fill="#888" font-family="Arial" font-size="14">High</text>
+  <!-- Disk icon -->
+  <text x="256" y="450" text-anchor="middle" fill="white" font-family="Arial" font-size="16" font-weight="bold" letter-spacing="3" opacity="0.8">DISK HEATMAP</text>
+  <text x="256" y="490" text-anchor="middle" fill="#888" font-family="Arial" font-size="14" letter-spacing="2">DISK.LENS</text>
+</svg>

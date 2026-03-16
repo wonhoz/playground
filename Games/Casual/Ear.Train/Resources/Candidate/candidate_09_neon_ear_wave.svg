@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0a0a"/>
+      <stop offset="100%" style="stop-color:#0d1117"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Neon ear outline -->
+  <path d="M256 80 C196 80 140 130 140 200 C140 260 172 308 220 328 C234 334 246 322 242 308 C206 292 184 248 184 200 C184 154 216 124 256 124 C296 124 328 154 328 200 C328 248 306 292 270 308 C266 322 278 334 292 328 C340 308 372 260 372 200 C372 130 316 80 256 80Z" stroke="#00ffff" stroke-width="4" fill="none" filter="url(#glow)"/>
+  <path d="M256 140 C228 140 208 165 208 200 C208 228 222 252 244 263 C252 267 260 260 257 251 C240 242 244 222 244 200 C244 178 249 172 256 172 C263 172 268 178 268 200 L302 200 C302 165 284 140 256 140Z" stroke="#ff00ff" stroke-width="3" fill="none" filter="url(#glow)"/>
+  <!-- Neon waves -->
+  <path d="M390 160 C415 175 430 187 430 200 C430 213 415 225 390 240" stroke="#00ff88" stroke-width="6" fill="none" stroke-linecap="round" filter="url(#glow)"/>
+  <path d="M410 135 C448 155 468 177 468 200 C468 223 448 245 410 265" stroke="#00ff88" stroke-width="4" fill="none" stroke-linecap="round" filter="url(#glow)" opacity="0.7"/>
+  <path d="M430 110 C480 135 505 167 505 200 C505 233 480 265 430 290" stroke="#00ff88" stroke-width="3" fill="none" stroke-linecap="round" filter="url(#glow)" opacity="0.4"/>
+  <!-- Waveform at bottom -->
+  <polyline points="50,390 90,350 130,430 170,360 210,400 250,330 290,400 330,360 370,430 410,350 450,390" stroke="#ffff00" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)"/>
+</svg>

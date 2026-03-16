@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0A0A14"/>
+      <stop offset="100%" stop-color="#141428"/>
+    </linearGradient>
+    <linearGradient id="robot" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6366F1"/>
+      <stop offset="100%" stop-color="#4338CA"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Robot body -->
+  <rect x="170" y="220" width="172" height="160" rx="16" fill="url(#robot)"/>
+  <!-- Robot head -->
+  <rect x="186" y="140" width="140" height="90" rx="12" fill="#4338CA"/>
+  <!-- Robot eyes -->
+  <circle cx="226" cy="178" r="18" fill="#0F0F28"/>
+  <circle cx="286" cy="178" r="18" fill="#0F0F28"/>
+  <circle cx="226" cy="178" r="10" fill="#00FFAA"/>
+  <circle cx="286" cy="178" r="10" fill="#00FFAA"/>
+  <!-- Robot antenna -->
+  <line x1="256" y1="140" x2="256" y2="100" stroke="#818CF8" stroke-width="4"/>
+  <circle cx="256" cy="92" r="10" fill="#818CF8"/>
+  <!-- Robot mouth (display) -->
+  <rect x="206" y="200" width="100" height="20" rx="4" fill="#0F0F28"/>
+  <text x="256" y="215" font-family="monospace" font-size="10" fill="#00FFAA" text-anchor="middle">CLEANING...</text>
+  <!-- Arms -->
+  <rect x="110" y="250" width="60" height="20" rx="10" fill="#4338CA"/>
+  <rect x="342" y="250" width="60" height="20" rx="10" fill="#4338CA"/>
+  <!-- Sweeping broom on right arm -->
+  <line x1="402" y1="260" x2="460" y2="320" stroke="#8B6914" stroke-width="6" stroke-linecap="round"/>
+  <ellipse cx="468" cy="330" rx="22" ry="8" fill="#DAA520" transform="rotate(-45 468 330)"/>
+  <!-- Temp files being collected -->
+  <rect x="60" y="300" width="40" height="48" rx="3" fill="#FEF3C7" transform="rotate(-15 80 324)"/>
+  <text x="80" y="322" font-family="monospace" font-size="8" fill="#666" text-anchor="middle">.tmp</text>
+  <!-- Delete beam from eyes -->
+  <line x1="294" y1="178" x2="380" y2="150" stroke="#00FFAA" stroke-width="2" opacity="0.4" stroke-dasharray="4,3"/>
+</svg>

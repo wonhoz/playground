@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- adjacency matrix style grid -->
+  <g fill="none" stroke="#334155" stroke-width="1">
+    <!-- 5x5 grid -->
+    <rect x="112" y="112" width="288" height="288"/>
+    <line x1="170" y1="112" x2="170" y2="400"/>
+    <line x1="228" y1="112" x2="228" y2="400"/>
+    <line x1="286" y1="112" x2="286" y2="400"/>
+    <line x1="344" y1="112" x2="344" y2="400"/>
+    <line x1="112" y1="170" x2="400" y2="170"/>
+    <line x1="112" y1="228" x2="400" y2="228"/>
+    <line x1="112" y1="286" x2="400" y2="286"/>
+    <line x1="112" y1="344" x2="400" y2="344"/>
+  </g>
+  <!-- dependency cells filled -->
+  <rect x="170" y="112" width="58" height="58" rx="3" fill="#3b82f6" opacity="0.7"/>
+  <rect x="286" y="112" width="58" height="58" rx="3" fill="#3b82f6" opacity="0.7"/>
+  <rect x="112" y="170" width="58" height="58" rx="3" fill="#8b5cf6" opacity="0.7"/>
+  <rect x="228" y="228" width="58" height="58" rx="3" fill="#3b82f6" opacity="0.7"/>
+  <rect x="344" y="228" width="58" height="58" rx="3" fill="#8b5cf6" opacity="0.7"/>
+  <rect x="112" y="286" width="58" height="58" rx="3" fill="#ec4899" opacity="0.7"/>
+  <rect x="228" y="344" width="58" height="58" rx="3" fill="#3b82f6" opacity="0.7"/>
+  <rect x="344" y="344" width="58" height="58" rx="3" fill="#3b82f6" opacity="0.7"/>
+  <!-- diagonal -->
+  <g fill="#1e293b" stroke="#475569" stroke-width="1">
+    <rect x="112" y="112" width="58" height="58" rx="3"/>
+    <rect x="170" y="170" width="58" height="58" rx="3"/>
+    <rect x="228" y="228" width="58" height="58" rx="3" fill="#0f172a"/>
+    <rect x="286" y="286" width="58" height="58" rx="3"/>
+    <rect x="344" y="344" width="58" height="58" rx="3" fill="#0f172a"/>
+  </g>
+  <!-- re-draw filled over diagonal -->
+  <rect x="228" y="228" width="58" height="58" rx="3" fill="#3b82f6" opacity="0.7"/>
+  <rect x="344" y="344" width="58" height="58" rx="3" fill="#3b82f6" opacity="0.7"/>
+  <!-- row/col labels -->
+  <text x="141" y="141" font-family="monospace" font-size="14" fill="#64748b" text-anchor="middle" dominant-baseline="central">A</text>
+  <text x="199" y="141" font-family="monospace" font-size="14" fill="#64748b" text-anchor="middle" dominant-baseline="central">B</text>
+  <text x="257" y="141" font-family="monospace" font-size="14" fill="#64748b" text-anchor="middle" dominant-baseline="central">C</text>
+  <text x="315" y="141" font-family="monospace" font-size="14" fill="#64748b" text-anchor="middle" dominant-baseline="central">D</text>
+  <text x="373" y="141" font-family="monospace" font-size="14" fill="#64748b" text-anchor="middle" dominant-baseline="central">E</text>
+</svg>

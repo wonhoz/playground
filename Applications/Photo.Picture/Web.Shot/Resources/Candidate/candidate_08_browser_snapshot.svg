@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#12002f"/>
+      <stop offset="100%" stop-color="#2d005f"/>
+    </linearGradient>
+    <linearGradient id="snap" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e040fb"/>
+      <stop offset="100%" stop-color="#7c4dff"/>
+    </linearGradient>
+    <linearGradient id="polaroid" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f0e6ff"/>
+      <stop offset="100%" stop-color="#d1b3ff"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Browser window (tilted slightly) -->
+  <rect x="80" y="90" width="310" height="220" rx="12" fill="#12002f" stroke="url(#snap)" stroke-width="3" transform="rotate(-3,235,200)"/>
+  <rect x="80" y="90" width="310" height="36" rx="12" fill="url(#snap)" opacity="0.7" transform="rotate(-3,235,200)"/>
+  <rect x="80" y="114" width="310" height="12" fill="url(#snap)" opacity="0.7" transform="rotate(-3,235,200)"/>
+  <!-- Browser content -->
+  <rect x="96" y="140" width="278" height="10" rx="3" fill="url(#snap)" opacity="0.2" transform="rotate(-3,235,200)"/>
+  <rect x="96" y="160" width="220" height="8" rx="3" fill="url(#snap)" opacity="0.15" transform="rotate(-3,235,200)"/>
+  <rect x="96" y="180" width="250" height="48" rx="5" fill="url(#snap)" opacity="0.1" transform="rotate(-3,235,200)"/>
+  <!-- Polaroid snapshot -->
+  <rect x="240" y="260" width="188" height="220" rx="8" fill="url(#polaroid)" transform="rotate(5,334,370)"/>
+  <rect x="252" y="272" width="164" height="140" rx="4" fill="#12002f" opacity="0.7" transform="rotate(5,334,370)"/>
+  <!-- Web content in polaroid -->
+  <rect x="260" y="280" width="148" height="10" rx="3" fill="url(#snap)" opacity="0.5" transform="rotate(5,334,370)"/>
+  <rect x="260" y="300" width="120" height="8" rx="3" fill="url(#snap)" opacity="0.4" transform="rotate(5,334,370)"/>
+  <rect x="260" y="318" width="148" height="48" rx="4" fill="url(#snap)" opacity="0.25" transform="rotate(5,334,370)"/>
+</svg>

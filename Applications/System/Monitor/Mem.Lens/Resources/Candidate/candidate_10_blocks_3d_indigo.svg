@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E1B4B"/>
+      <stop offset="100%" stop-color="#312E81"/>
+    </linearGradient>
+    <linearGradient id="blockTop" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#818CF8"/>
+      <stop offset="100%" stop-color="#6366F1"/>
+    </linearGradient>
+    <linearGradient id="blockFront" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#4F46E5"/>
+      <stop offset="100%" stop-color="#3730A3"/>
+    </linearGradient>
+    <linearGradient id="blockSide" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#6366F1"/>
+      <stop offset="100%" stop-color="#4338CA"/>
+    </linearGradient>
+    <linearGradient id="blockTopHot" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FCA5A5"/>
+      <stop offset="100%" stop-color="#EF4444"/>
+    </linearGradient>
+    <linearGradient id="blockFrontHot" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#DC2626"/>
+      <stop offset="100%" stop-color="#991B1B"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- 3D Memory blocks isometric view -->
+  <!-- Block helper: top face, front face, side face -->
+  <!-- Block 1 (small, 30%) -->
+  <polygon points="80,300 140,270 200,300 140,330" fill="url(#blockTop)"/>
+  <polygon points="80,300 80,360 140,390 140,330" fill="url(#blockFront)"/>
+  <polygon points="140,330 140,390 200,360 200,300" fill="url(#blockSide)"/>
+  <text x="140" y="310" font-family="Arial" font-size="10" fill="white" text-anchor="middle" opacity="0.9">30%</text>
+  <!-- Block 2 (medium, 55%) -->
+  <polygon points="200,240 260,210 320,240 260,270" fill="url(#blockTop)"/>
+  <polygon points="200,240 200,360 260,390 260,270" fill="url(#blockFront)"/>
+  <polygon points="260,270 260,390 320,360 320,240" fill="url(#blockSide)"/>
+  <text x="260" y="250" font-family="Arial" font-size="10" fill="white" text-anchor="middle" opacity="0.9">55%</text>
+  <!-- Block 3 (tall, HOT 90%) -->
+  <polygon points="320,160 380,130 440,160 380,190" fill="url(#blockTopHot)"/>
+  <polygon points="320,160 320,360 380,390 380,190" fill="url(#blockFrontHot)"/>
+  <polygon points="380,190 380,390 440,360 440,160" fill="url(#blockFrontHot)" opacity="0.8"/>
+  <text x="380" y="170" font-family="Arial" font-size="11" fill="white" text-anchor="middle" font-weight="bold">90%</text>
+  <!-- Warning icon on hot block -->
+  <polygon points="380,115 368,135 392,135" fill="#FCD34D" opacity="0.9"/>
+  <text x="380" y="130" font-family="Arial" font-size="11" fill="#1a1a00" text-anchor="middle" font-weight="bold">!</text>
+  <!-- Ground line -->
+  <line x1="60" y1="360" x2="460" y2="360" stroke="#4338CA" stroke-width="1.5" opacity="0.5"/>
+  <!-- Labels -->
+  <text x="140" y="400" font-family="Arial" font-size="11" fill="#A5B4FC" text-anchor="middle">Cache</text>
+  <text x="260" y="400" font-family="Arial" font-size="11" fill="#A5B4FC" text-anchor="middle">Apps</text>
+  <text x="380" y="400" font-family="Arial" font-size="11" fill="#FCA5A5" text-anchor="middle">Chrome</text>
+  <!-- Title -->
+  <text x="256" y="68" font-family="Arial" font-size="18" fill="#E0E7FF" text-anchor="middle" font-weight="bold">Memory.Lens</text>
+  <!-- Bottom summary bar -->
+  <rect x="66" y="425" width="380" height="36" rx="8" fill="#312E81" opacity="0.8"/>
+  <rect x="76" y="432" width="240" height="22" rx="6" fill="#4F46E5"/>
+  <rect x="76" y="432" width="240" height="22" rx="6" fill="none" stroke="#818CF8" stroke-width="1.5"/>
+  <rect x="76" y="432" width="56" height="22" rx="6" fill="#EF4444"/>
+  <text x="256" y="447" font-family="Arial" font-size="12" fill="white" text-anchor="middle">Used: 22.8 GB / 32 GB</text>
+</svg>

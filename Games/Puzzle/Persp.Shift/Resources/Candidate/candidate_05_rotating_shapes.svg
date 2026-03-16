@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f2027"/>
+      <stop offset="50%" stop-color="#203a43"/>
+      <stop offset="100%" stop-color="#2c5364"/>
+    </linearGradient>
+    <linearGradient id="shape1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#43e97b"/>
+      <stop offset="100%" stop-color="#38f9d7"/>
+    </linearGradient>
+    <linearGradient id="shape2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f093fb"/>
+      <stop offset="100%" stop-color="#f5576c"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- 3D rotating squares - perspective shift -->
+  <rect x="156" y="156" width="200" height="200" fill="none" stroke="url(#shape1)" stroke-width="3" transform="rotate(0,256,256)"/>
+  <rect x="176" y="176" width="160" height="160" fill="none" stroke="url(#shape2)" stroke-width="3" transform="rotate(20,256,256)"/>
+  <rect x="196" y="196" width="120" height="120" fill="none" stroke="url(#shape1)" stroke-width="3" transform="rotate(40,256,256)"/>
+  <rect x="216" y="216" width="80" height="80" fill="none" stroke="url(#shape2)" stroke-width="3" transform="rotate(60,256,256)"/>
+  <rect x="236" y="236" width="40" height="40" fill="url(#shape1)" opacity="0.6" transform="rotate(80,256,256)"/>
+  <!-- Corner dots -->
+  <circle cx="156" cy="156" r="6" fill="#43e97b"/>
+  <circle cx="356" cy="156" r="6" fill="#43e97b"/>
+  <circle cx="356" cy="356" r="6" fill="#43e97b"/>
+  <circle cx="156" cy="356" r="6" fill="#43e97b"/>
+  <!-- Rotation arrow arc -->
+  <path d="M 256 110 A 146 146 0 0 1 402 256" fill="none" stroke="#38f9d7" stroke-width="3" stroke-dasharray="8 6"/>
+  <polygon points="402,240 402,256 388,250" fill="#38f9d7"/>
+</svg>

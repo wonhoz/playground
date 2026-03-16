@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#141e30"/>
+      <stop offset="100%" style="stop-color:#243b55"/>
+    </linearGradient>
+    <linearGradient id="chain" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#c0c0c0"/>
+      <stop offset="100%" style="stop-color:#808080"/>
+    </linearGradient>
+    <linearGradient id="key_gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f7c548"/>
+      <stop offset="100%" style="stop-color:#e67e22"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Chain links -->
+  <ellipse cx="120" cy="200" rx="35" ry="22" stroke="url(#chain)" stroke-width="12" fill="none"/>
+  <ellipse cx="175" cy="230" rx="35" ry="22" stroke="url(#chain)" stroke-width="12" fill="none" transform="rotate(45,175,230)"/>
+  <ellipse cx="230" cy="200" rx="35" ry="22" stroke="url(#chain)" stroke-width="12" fill="none"/>
+  <ellipse cx="285" cy="230" rx="35" ry="22" stroke="url(#chain)" stroke-width="12" fill="none" transform="rotate(45,285,230)"/>
+  <!-- Last link broken -->
+  <path d="M305 218 C320 210 348 215 355 230" stroke="url(#chain)" stroke-width="12" fill="none" stroke-linecap="round" opacity="0.4"/>
+  <!-- Big key -->
+  <circle cx="390" cy="310" r="60" stroke="url(#key_gold)" stroke-width="14" fill="none"/>
+  <circle cx="390" cy="310" r="25" stroke="url(#key_gold)" stroke-width="8" fill="none"/>
+  <line x1="440" y1="352" x2="480" y2="400" stroke="url(#key_gold)" stroke-width="14" stroke-linecap="round"/>
+  <line x1="463" y1="388" x2="480" y2="368" stroke="url(#key_gold)" stroke-width="10" stroke-linecap="round"/>
+  <line x1="473" y1="404" x2="488" y2="385" stroke="url(#key_gold)" stroke-width="10" stroke-linecap="round"/>
+  <!-- Freedom arrow -->
+  <path d="M130 360 C160 380 200 385 240 370" stroke="url(#key_gold)" stroke-width="7" fill="none" stroke-linecap="round" stroke-dasharray="15,8"/>
+  <polygon points="235,358 255,370 235,382" fill="url(#key_gold)"/>
+</svg>

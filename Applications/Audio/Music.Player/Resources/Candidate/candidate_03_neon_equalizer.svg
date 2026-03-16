@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#000010"/>
+      <stop offset="100%" stop-color="#080018"/>
+    </linearGradient>
+    <linearGradient id="bar1" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#ff006e"/>
+      <stop offset="100%" stop-color="#ff9fe5"/>
+    </linearGradient>
+    <linearGradient id="bar2" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#8338ec"/>
+      <stop offset="100%" stop-color="#c77dff"/>
+    </linearGradient>
+    <linearGradient id="bar3" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#3a86ff"/>
+      <stop offset="100%" stop-color="#90e0ef"/>
+    </linearGradient>
+    <linearGradient id="bar4" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#06d6a0"/>
+      <stop offset="100%" stop-color="#a8f0dc"/>
+    </linearGradient>
+    <linearGradient id="bar5" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#ffbe0b"/>
+      <stop offset="100%" stop-color="#fff3a0"/>
+    </linearGradient>
+    <filter id="barGlow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Floor line -->
+  <line x1="70" y1="390" x2="442" y2="390" stroke="#333" stroke-width="2"/>
+  <!-- EQ Bars -->
+  <!-- Bar 1 -->
+  <rect x="82" y="240" width="50" height="150" rx="8" fill="url(#bar1)" filter="url(#barGlow)"/>
+  <!-- Bar 2 -->
+  <rect x="154" y="160" width="50" height="230" rx="8" fill="url(#bar2)" filter="url(#barGlow)"/>
+  <!-- Bar 3 (tallest) -->
+  <rect x="226" y="105" width="50" height="285" rx="8" fill="url(#bar3)" filter="url(#barGlow)"/>
+  <!-- Bar 4 -->
+  <rect x="298" y="140" width="50" height="250" rx="8" fill="url(#bar4)" filter="url(#barGlow)"/>
+  <!-- Bar 5 -->
+  <rect x="370" y="210" width="50" height="180" rx="8" fill="url(#bar5)" filter="url(#barGlow)"/>
+  <!-- Reflection below floor -->
+  <rect x="82" y="392" width="50" height="60" rx="8" fill="url(#bar1)" opacity="0.2" transform="scale(1,-1) translate(0,-840)"/>
+  <rect x="154" y="392" width="50" height="80" rx="8" fill="url(#bar2)" opacity="0.2" transform="scale(1,-1) translate(0,-840)"/>
+  <rect x="226" y="392" width="50" height="90" rx="8" fill="url(#bar3)" opacity="0.2" transform="scale(1,-1) translate(0,-840)"/>
+  <rect x="298" y="392" width="50" height="75" rx="8" fill="url(#bar4)" opacity="0.2" transform="scale(1,-1) translate(0,-840)"/>
+  <rect x="370" y="392" width="50" height="65" rx="8" fill="url(#bar5)" opacity="0.2" transform="scale(1,-1) translate(0,-840)"/>
+  <!-- Peak indicators (top dots) -->
+  <rect x="82" y="228" width="50" height="8" rx="4" fill="#ff9fe5" opacity="0.9" filter="url(#barGlow)"/>
+  <rect x="154" y="148" width="50" height="8" rx="4" fill="#c77dff" opacity="0.9" filter="url(#barGlow)"/>
+  <rect x="226" y="93" width="50" height="8" rx="4" fill="#90e0ef" opacity="0.9" filter="url(#barGlow)"/>
+  <rect x="298" y="128" width="50" height="8" rx="4" fill="#a8f0dc" opacity="0.9" filter="url(#barGlow)"/>
+  <rect x="370" y="198" width="50" height="8" rx="4" fill="#fff3a0" opacity="0.9" filter="url(#barGlow)"/>
+</svg>

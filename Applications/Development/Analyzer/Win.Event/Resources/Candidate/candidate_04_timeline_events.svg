@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0A0A14"/>
+      <stop offset="100%" stop-color="#14141E"/>
+    </linearGradient>
+    <linearGradient id="timeline" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#6C63FF"/>
+      <stop offset="100%" stop-color="#3D35A8"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Vertical timeline spine -->
+  <rect x="248" y="60" width="16" height="392" rx="8" fill="url(#timeline)" opacity="0.5"/>
+  <!-- Event nodes -->
+  <!-- Event 1: Error (top) -->
+  <circle cx="256" cy="100" r="22" fill="#E74C3C"/>
+  <text x="256" y="107" text-anchor="middle" font-family="Segoe UI" font-size="18" font-weight="700" fill="#FFF">E</text>
+  <rect x="290" y="84" width="170" height="34" rx="8" fill="#E74C3C" opacity="0.2"/>
+  <text x="302" y="106" font-family="Segoe UI" font-size="16" fill="#E74C3C">Critical Error #4242</text>
+  <!-- Event 2: Warning -->
+  <circle cx="256" cy="180" r="22" fill="#F39C12"/>
+  <text x="256" y="187" text-anchor="middle" font-family="Segoe UI" font-size="18" font-weight="700" fill="#FFF">W</text>
+  <rect x="52" y="164" width="170" height="34" rx="8" fill="#F39C12" opacity="0.2"/>
+  <text x="64" y="186" font-family="Segoe UI" font-size="16" fill="#F39C12">Disk Warning #1021</text>
+  <!-- Event 3: Info -->
+  <circle cx="256" cy="260" r="22" fill="#3498DB"/>
+  <text x="256" y="267" text-anchor="middle" font-family="Segoe UI" font-size="18" font-weight="700" fill="#FFF">I</text>
+  <rect x="290" y="244" width="170" height="34" rx="8" fill="#3498DB" opacity="0.2"/>
+  <text x="302" y="266" font-family="Segoe UI" font-size="16" fill="#3498DB">Service Started #800</text>
+  <!-- Event 4: Success -->
+  <circle cx="256" cy="340" r="22" fill="#2ECC71"/>
+  <text x="256" y="347" text-anchor="middle" font-family="Segoe UI" font-size="18" font-weight="700" fill="#FFF">S</text>
+  <rect x="52" y="324" width="170" height="34" rx="8" fill="#2ECC71" opacity="0.2"/>
+  <text x="64" y="346" font-family="Segoe UI" font-size="16" fill="#2ECC71">Backup Complete</text>
+  <!-- Event 5: Error (bottom) -->
+  <circle cx="256" cy="420" r="22" fill="#9B59B6"/>
+  <text x="256" y="427" text-anchor="middle" font-family="Segoe UI" font-size="18" font-weight="700" fill="#FFF">A</text>
+  <rect x="290" y="404" width="170" height="34" rx="8" fill="#9B59B6" opacity="0.2"/>
+  <text x="302" y="426" font-family="Segoe UI" font-size="16" fill="#9B59B6">Audit Event #4674</text>
+  <!-- Timestamps -->
+  <text x="238" y="76" text-anchor="end" font-family="Segoe UI" font-size="13" fill="#555">09:42:11</text>
+  <text x="238" y="156" text-anchor="end" font-family="Segoe UI" font-size="13" fill="#555">09:45:03</text>
+  <text x="238" y="236" text-anchor="end" font-family="Segoe UI" font-size="13" fill="#555">09:51:27</text>
+  <text x="238" y="316" text-anchor="end" font-family="Segoe UI" font-size="13" fill="#555">10:02:44</text>
+  <text x="238" y="396" text-anchor="end" font-family="Segoe UI" font-size="13" fill="#555">10:15:09</text>
+</svg>

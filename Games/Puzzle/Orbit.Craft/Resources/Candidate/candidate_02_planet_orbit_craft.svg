@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" style="stop-color:#050510"/>
+      <stop offset="100%" style="stop-color:#000005"/>
+    </radialGradient>
+    <radialGradient id="sun" cx="30%" cy="30%" r="70%">
+      <stop offset="0%" style="stop-color:#fde68a"/>
+      <stop offset="60%" style="stop-color:#f59e0b"/>
+      <stop offset="100%" style="stop-color:#b45309"/>
+    </radialGradient>
+    <radialGradient id="earth" cx="35%" cy="35%" r="65%">
+      <stop offset="0%" style="stop-color:#4ade80"/>
+      <stop offset="50%" style="stop-color:#2563eb"/>
+      <stop offset="100%" style="stop-color:#1e3a8a"/>
+    </radialGradient>
+    <radialGradient id="mars" cx="35%" cy="35%" r="65%">
+      <stop offset="0%" style="stop-color:#fca5a5"/>
+      <stop offset="100%" style="stop-color:#dc2626"/>
+    </radialGradient>
+    <filter id="sunglow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="16" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <filter id="sm"><feGaussianBlur stdDeviation="5" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Stars -->
+  <circle cx="100" cy="90" r="1.5" fill="#fff" opacity="0.8"/>
+  <circle cx="300" cy="70" r="1" fill="#fff" opacity="0.6"/>
+  <circle cx="440" cy="120" r="1.5" fill="#fff" opacity="0.7"/>
+  <circle cx="80" cy="400" r="1" fill="#fff" opacity="0.5"/>
+  <circle cx="440" cy="380" r="1.5" fill="#fff" opacity="0.7"/>
+  <circle cx="200" cy="450" r="1" fill="#fff" opacity="0.5"/>
+  <!-- Orbital rings -->
+  <ellipse cx="256" cy="256" rx="80" ry="80" fill="none" stroke="#ffffff15" stroke-width="1.5"/>
+  <ellipse cx="256" cy="256" rx="140" ry="140" fill="none" stroke="#ffffff10" stroke-width="1.5"/>
+  <ellipse cx="256" cy="256" rx="190" ry="80" fill="none" stroke="#ffffff08" stroke-width="1" transform="rotate(30 256 256)"/>
+  <!-- Central Sun -->
+  <circle cx="256" cy="256" r="48" fill="url(#sun)" filter="url(#sunglow)"/>
+  <!-- Earth in orbit -->
+  <circle cx="336" cy="256" r="20" fill="url(#earth)" filter="url(#sm)"/>
+  <!-- Mars in outer orbit -->
+  <circle cx="256" cy="116" r="14" fill="url(#mars)" filter="url(#sm)"/>
+  <!-- Spacecraft (craft) -->
+  <g transform="translate(380 150) rotate(45)">
+    <polygon points="0,-16 -8,8 0,4 8,8" fill="#e2e8f0" filter="url(#sm)"/>
+    <rect x="-14" y="2" width="28" height="6" rx="2" fill="#94a3b8"/>
+  </g>
+  <!-- Craft trajectory -->
+  <path d="M380,150 Q420,200 396,256 Q380,290 336,276" stroke="#e2e8f040" stroke-width="2" fill="none" stroke-dasharray="6,4"/>
+</svg>

@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#1a0a2e"/>
+      <stop offset="100%" stop-color="#0d0520"/>
+    </radialGradient>
+    <linearGradient id="p1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff4488"/>
+      <stop offset="100%" stop-color="#cc1155"/>
+    </linearGradient>
+    <linearGradient id="p2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#44aaff"/>
+      <stop offset="100%" stop-color="#1166cc"/>
+    </linearGradient>
+    <linearGradient id="p3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#44ff88"/>
+      <stop offset="100%" stop-color="#11aa44"/>
+    </linearGradient>
+    <linearGradient id="p4" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffcc44"/>
+      <stop offset="100%" stop-color="#cc8811"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- 4 clipboard/puzzle pieces in a 2x2 grid -->
+  <!-- Piece 1 (top-left) -->
+  <rect x="96" y="96" width="140" height="140" rx="16" fill="url(#p1)"/>
+  <rect x="112" y="120" width="100" height="10" rx="4" fill="#fff" opacity="0.8"/>
+  <rect x="112" y="140" width="80" height="8" rx="3" fill="#fff" opacity="0.6"/>
+  <rect x="112" y="156" width="90" height="8" rx="3" fill="#fff" opacity="0.6"/>
+  <!-- Connector bump right -->
+  <circle cx="236" cy="166" r="16" fill="url(#p1)" stroke="#ff4488" stroke-width="2"/>
+  <!-- Connector notch bottom -->
+  <circle cx="166" cy="236" r="16" fill="url(#bg)" stroke="#ff4488" stroke-width="2"/>
+  <!-- Piece 2 (top-right) -->
+  <rect x="276" y="96" width="140" height="140" rx="16" fill="url(#p2)"/>
+  <rect x="292" y="120" width="100" height="10" rx="4" fill="#fff" opacity="0.8"/>
+  <rect x="292" y="140" width="80" height="8" rx="3" fill="#fff" opacity="0.6"/>
+  <rect x="292" y="156" width="90" height="8" rx="3" fill="#fff" opacity="0.6"/>
+  <!-- Connector notch left (matches piece 1 bump) -->
+  <circle cx="276" cy="166" r="16" fill="url(#bg)" stroke="#44aaff" stroke-width="2"/>
+  <!-- Connector notch bottom -->
+  <circle cx="346" cy="236" r="16" fill="url(#bg)" stroke="#44aaff" stroke-width="2"/>
+  <!-- Piece 3 (bottom-left) -->
+  <rect x="96" y="276" width="140" height="140" rx="16" fill="url(#p3)"/>
+  <rect x="112" y="300" width="100" height="10" rx="4" fill="#fff" opacity="0.8"/>
+  <rect x="112" y="320" width="80" height="8" rx="3" fill="#fff" opacity="0.6"/>
+  <!-- Connector bump top (matches piece 1 notch) -->
+  <circle cx="166" cy="276" r="16" fill="url(#p3)" stroke="#44ff88" stroke-width="2"/>
+  <!-- Connector bump right -->
+  <circle cx="236" cy="346" r="16" fill="url(#p3)" stroke="#44ff88" stroke-width="2"/>
+  <!-- Piece 4 (bottom-right) - being placed, floating -->
+  <rect x="280" y="280" width="140" height="140" rx="16" fill="url(#p4)" opacity="0.85"/>
+  <rect x="296" y="304" width="100" height="10" rx="4" fill="#fff" opacity="0.8"/>
+  <rect x="296" y="324" width="80" height="8" rx="3" fill="#fff" opacity="0.6"/>
+  <!-- Connector notch left -->
+  <circle cx="280" cy="350" r="16" fill="url(#bg)" stroke="#ffcc44" stroke-width="2"/>
+  <!-- Connector notch top -->
+  <circle cx="350" cy="280" r="16" fill="url(#bg)" stroke="#ffcc44" stroke-width="2"/>
+  <!-- Floating arrow (being placed) -->
+  <line x1="440" y1="370" x2="434" y2="350" stroke="#ffcc44" stroke-width="3" stroke-dasharray="6 3"/>
+  <polygon points="434,350 428,368 446,362" fill="#ffcc44"/>
+</svg>

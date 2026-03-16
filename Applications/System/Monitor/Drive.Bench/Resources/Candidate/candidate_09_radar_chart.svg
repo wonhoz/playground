@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#020510"/>
+      <stop offset="100%" stop-color="#080C1E"/>
+    </linearGradient>
+    <linearGradient id="radarFill" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3B82F6" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#8B5CF6" stop-opacity="0.3"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Radar grid circles -->
+  <polygon points="256,106 376,181 376,331 256,406 136,331 136,181" fill="none" stroke="#1E3A5F" stroke-width="1.5"/>
+  <polygon points="256,151 341,203.5 341,308.5 256,361 171,308.5 171,203.5" fill="none" stroke="#1E3A5F" stroke-width="1.5"/>
+  <polygon points="256,196 306,226 306,286 256,316 206,286 206,226" fill="none" stroke="#1E3A5F" stroke-width="1.5"/>
+  <!-- Radar axes -->
+  <line x1="256" y1="106" x2="256" y2="406" stroke="#1E3A5F" stroke-width="1"/>
+  <line x1="376" y1="181" x2="136" y2="331" stroke="#1E3A5F" stroke-width="1"/>
+  <line x1="376" y1="331" x2="136" y2="181" stroke="#1E3A5F" stroke-width="1"/>
+  <!-- Performance polygon (NVMe values) -->
+  <!-- Seq Read: 90%, Seq Write: 75%, Rnd Read: 80%, Rnd Write: 70%, IOPS: 85%, Latency: 95% -->
+  <polygon points="256,124 365,189 362,322 256,393 160,318 147,193" fill="url(#radarFill)" stroke="#3B82F6" stroke-width="3"/>
+  <!-- Data points -->
+  <circle cx="256" cy="124" r="6" fill="#60A5FA"/>
+  <circle cx="365" cy="189" r="6" fill="#60A5FA"/>
+  <circle cx="362" cy="322" r="6" fill="#60A5FA"/>
+  <circle cx="256" cy="393" r="6" fill="#60A5FA"/>
+  <circle cx="160" cy="318" r="6" fill="#60A5FA"/>
+  <circle cx="147" cy="193" r="6" fill="#60A5FA"/>
+  <!-- Axis labels -->
+  <text x="256" y="95" font-family="sans-serif" font-size="11" fill="#93C5FD" text-anchor="middle">Seq Read</text>
+  <text x="398" y="180" font-family="sans-serif" font-size="11" fill="#93C5FD" text-anchor="start">Seq Write</text>
+  <text x="398" y="342" font-family="sans-serif" font-size="11" fill="#93C5FD" text-anchor="start">Rnd Read</text>
+  <text x="256" y="426" font-family="sans-serif" font-size="11" fill="#93C5FD" text-anchor="middle">Rnd Write</text>
+  <text x="114" y="342" font-family="sans-serif" font-size="11" fill="#93C5FD" text-anchor="end">IOPS</text>
+  <text x="114" y="180" font-family="sans-serif" font-size="11" fill="#93C5FD" text-anchor="end">Latency</text>
+  <!-- Center -->
+  <circle cx="256" cy="256" r="6" fill="#1D4ED8"/>
+  <!-- Score badge -->
+  <rect x="196" y="450" width="120" height="34" rx="10" fill="#1E293B" stroke="#3B82F6" stroke-width="1.5"/>
+  <text x="256" y="472" font-family="monospace" font-size="13" fill="#60A5FA" text-anchor="middle" font-weight="bold">Score: 9240</text>
+</svg>

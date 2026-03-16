@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#001a00"/>
+      <stop offset="100%" stop-color="#002600"/>
+    </linearGradient>
+    <linearGradient id="screen" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#001800"/>
+      <stop offset="100%" stop-color="#000e00"/>
+    </linearGradient>
+    <filter id="bloom">
+      <feGaussianBlur stdDeviation="3.5" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Oscilloscope body -->
+  <rect x="70" y="100" width="372" height="290" rx="16" fill="#0d1a0d" stroke="#33691e" stroke-width="2.5"/>
+  <!-- Screen area -->
+  <rect x="88" y="118" width="270" height="180" rx="8" fill="url(#screen)" stroke="#1b5e20" stroke-width="1.5"/>
+  <!-- Screen grid -->
+  <line x1="88" y1="208" x2="358" y2="208" stroke="#1b5e20" stroke-width="1"/>
+  <line x1="88" y1="168" x2="358" y2="168" stroke="#1b5e20" stroke-width="1" opacity="0.6"/>
+  <line x1="88" y1="248" x2="358" y2="248" stroke="#1b5e20" stroke-width="1" opacity="0.6"/>
+  <line x1="178" y1="118" x2="178" y2="298" stroke="#1b5e20" stroke-width="1" opacity="0.6"/>
+  <line x1="268" y1="118" x2="268" y2="298" stroke="#1b5e20" stroke-width="1" opacity="0.6"/>
+  <!-- Sine wave on screen -->
+  <path d="M94 208 Q112 148 130 208 Q148 268 166 208 Q184 148 202 208 Q220 268 238 208 Q256 148 274 208 Q292 268 310 208 Q328 148 346 208"
+        stroke="#00ff41" stroke-width="2.5" fill="none" filter="url(#bloom)"/>
+  <!-- Second trace (orange) -->
+  <path d="M94 208 L130 208 L130 168 L166 168 L166 248 L202 248 L202 168 L238 168 L238 248 L274 248 L274 168 L310 168 L310 248 L346 248"
+        stroke="#ff9800" stroke-width="1.5" fill="none" opacity="0.75"/>
+  <!-- Controls right side -->
+  <rect x="370" y="125" width="58" height="155" rx="6" fill="#0d1a0d" stroke="#33691e" stroke-width="1"/>
+  <circle cx="399" cy="150" r="10" fill="#1b5e20" stroke="#66bb6a" stroke-width="2"/>
+  <circle cx="399" cy="180" r="10" fill="#1b5e20" stroke="#66bb6a" stroke-width="2"/>
+  <rect x="381" y="198" width="36" height="10" rx="5" fill="#004d00" stroke="#66bb6a" stroke-width="1"/>
+  <rect x="381" y="218" width="36" height="10" rx="5" fill="#004d00" stroke="#66bb6a" stroke-width="1"/>
+  <circle cx="399" cy="252" r="14" fill="#1b5e20" stroke="#66bb6a" stroke-width="2"/>
+  <!-- Bottom status -->
+  <rect x="88" y="312" width="100" height="22" rx="4" fill="#001800"/>
+  <text x="96" y="328" font-family="monospace" font-size="13" fill="#00ff41">1kHz  5V/d</text>
+  <rect x="200" y="312" width="80" height="22" rx="4" fill="#001800"/>
+  <text x="208" y="328" font-family="monospace" font-size="13" fill="#ff9800">CH2 TTL</text>
+  <!-- Stand -->
+  <rect x="218" y="390" width="76" height="14" rx="5" fill="#1b5e20"/>
+  <rect x="196" y="400" width="120" height="14" rx="6" fill="#33691e"/>
+</svg>

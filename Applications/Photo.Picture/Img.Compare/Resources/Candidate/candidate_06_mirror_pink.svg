@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#880E4F"/>
+      <stop offset="100%" stop-color="#AD1457"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- 왼쪽 이미지 프레임 -->
+  <rect x="50" y="100" width="180" height="260" rx="14" fill="#560027" stroke="#F48FB1" stroke-width="3"/>
+  <!-- 오른쪽 이미지 프레임 (미러) -->
+  <rect x="280" y="100" width="180" height="260" rx="14" fill="#560027" stroke="#EC407A" stroke-width="3" transform="scale(-1,1) translate(-512,0)"/>
+  <!-- 내부 사진 요소들 -->
+  <circle cx="130" cy="190" r="40" fill="#AD1457"/>
+  <rect x="60" y="290" width="160" height="50" rx="0" fill="#880E4F"/>
+  <!-- 미러 내부 -->
+  <circle cx="382" cy="190" r="40" fill="#E91E63"/>
+  <rect x="290" y="290" width="160" height="50" rx="0" fill="#AD1457"/>
+  <!-- 중앙 축 -->
+  <line x1="256" y1="80" x2="256" y2="420" stroke="#FCE4EC" stroke-width="4" stroke-dasharray="12,8"/>
+  <!-- 화살표 대칭 -->
+  <polygon points="230,256 200,236 200,276" fill="#F48FB1"/>
+  <polygon points="282,256 312,236 312,276" fill="#F48FB1"/>
+  <!-- 레이블 -->
+  <text x="140" y="395" font-size="18" text-anchor="middle" fill="#F8BBD9" font-family="Segoe UI">BEFORE</text>
+  <text x="372" y="395" font-size="18" text-anchor="middle" fill="#FCE4EC" font-family="Segoe UI">AFTER</text>
+</svg>

@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E1E2E"/>
+      <stop offset="100%" stop-color="#2A2A3E"/>
+    </linearGradient>
+    <linearGradient id="doc" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ECEFF1"/>
+      <stop offset="100%" stop-color="#CFD8DC"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Document/file -->
+  <rect x="120" y="80" width="272" height="340" rx="12" fill="url(#doc)" stroke="#546E7A" stroke-width="4"/>
+  <!-- Folded corner -->
+  <polygon points="328,80 392,80 392,144 328,144" fill="#B0BEC5" stroke="#546E7A" stroke-width="3"/>
+  <polygon points="328,80 392,144 328,144" fill="#CFD8DC"/>
+  <!-- .dmp label -->
+  <rect x="136" y="96" width="100" height="26" rx="5" fill="#FF5252"/>
+  <text x="186" y="113" text-anchor="middle" font-family="monospace" font-size="14" font-weight="bold" fill="white">.dmp</text>
+  <!-- Hex dump lines -->
+  <text x="140" y="155" font-family="monospace" font-size="11" fill="#546E7A">0x0000  FF FE 00 00 4D 5A 90 00</text>
+  <text x="140" y="173" font-family="monospace" font-size="11" fill="#546E7A">0x0008  03 00 00 00 04 00 00 00</text>
+  <text x="140" y="191" font-family="monospace" font-size="11" fill="#E53935">0x0010  [ACCESS VIOLATION]</text>
+  <text x="140" y="209" font-family="monospace" font-size="11" fill="#546E7A">0x0018  C0 00 00 00 00 00 00 00</text>
+  <text x="140" y="227" font-family="monospace" font-size="11" fill="#FF9800">0x0020  EXCEPTION_CODE: 0xC0...</text>
+  <text x="140" y="245" font-family="monospace" font-size="11" fill="#546E7A">0x0028  40 00 00 00 00 10 00 00</text>
+  <text x="140" y="263" font-family="monospace" font-size="11" fill="#546E7A">0x0030  00 00 00 00 00 00 00 00</text>
+  <!-- Stack trace section -->
+  <rect x="136" y="276" width="240" height="112" rx="6" fill="#ECEFF1" stroke="#B0BEC5" stroke-width="2"/>
+  <text x="148" y="293" font-family="monospace" font-size="10" fill="#E53935">STACK TRACE:</text>
+  <text x="148" y="309" font-family="monospace" font-size="10" fill="#546E7A">  ntdll!RtlRaiseException</text>
+  <text x="148" y="323" font-family="monospace" font-size="10" fill="#546E7A">  kernel32!UnhandledExcep...</text>
+  <text x="148" y="337" font-family="monospace" font-size="10" fill="#546E7A">  App.exe!main+0x2F</text>
+  <text x="148" y="351" font-family="monospace" font-size="10" fill="#546E7A">  ...</text>
+  <!-- Warning icon -->
+  <polygon points="256,415 216,475 296,475" fill="#FF9800" stroke="#1E1E2E" stroke-width="4"/>
+  <text x="256" y="468" text-anchor="middle" font-family="Arial Black" font-size="28" fill="white">!</text>
+</svg>

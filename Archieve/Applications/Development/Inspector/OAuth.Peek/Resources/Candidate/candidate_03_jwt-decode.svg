@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0d0d0d"/>
+      <stop offset="100%" stop-color="#1a1500"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- JWT three parts -->
+  <!-- Header -->
+  <rect x="50" y="100" width="130" height="110" rx="8" fill="#1a1a3e" stroke="#4488ff" stroke-width="2"/>
+  <text x="115" y="122" text-anchor="middle" font-family="monospace" font-size="11" fill="#4488ff">HEADER</text>
+  <text x="65" y="143" font-family="monospace" font-size="10" fill="#8888ff">{</text>
+  <text x="72" y="158" font-family="monospace" font-size="9" fill="#88aaff">"alg":"RS256"</text>
+  <text x="72" y="172" font-family="monospace" font-size="9" fill="#88aaff">"typ":"JWT"</text>
+  <text x="65" y="186" font-family="monospace" font-size="10" fill="#8888ff">}</text>
+  <!-- Payload -->
+  <rect x="191" y="100" width="130" height="110" rx="8" fill="#1e3e1e" stroke="#44ff88" stroke-width="2"/>
+  <text x="256" y="122" text-anchor="middle" font-family="monospace" font-size="11" fill="#44ff88">PAYLOAD</text>
+  <text x="206" y="143" font-family="monospace" font-size="10" fill="#88ff88">{</text>
+  <text x="213" y="158" font-family="monospace" font-size="9" fill="#aaffaa">"sub":"user"</text>
+  <text x="213" y="172" font-family="monospace" font-size="9" fill="#aaffaa">"exp":1234</text>
+  <text x="206" y="186" font-family="monospace" font-size="10" fill="#88ff88">}</text>
+  <!-- Signature -->
+  <rect x="332" y="100" width="130" height="110" rx="8" fill="#3e1e1e" stroke="#ff8844" stroke-width="2"/>
+  <text x="397" y="122" text-anchor="middle" font-family="monospace" font-size="11" fill="#ff8844">SIGNATURE</text>
+  <text x="347" y="143" font-family="monospace" font-size="9" fill="#ffaa88">HMAC</text>
+  <text x="347" y="158" font-family="monospace" font-size="9" fill="#ffaa88">SHA256</text>
+  <text x="347" y="173" font-family="monospace" font-size="9" fill="#ffaa88">verified</text>
+  <text x="347" y="188" font-family="monospace" font-size="9" fill="#44ff44">✓ VALID</text>
+  <!-- Dots separator -->
+  <text x="182" y="163" text-anchor="middle" font-size="28" font-weight="bold" fill="#888">.</text>
+  <text x="324" y="163" text-anchor="middle" font-size="28" font-weight="bold" fill="#888">.</text>
+  <!-- Encoded token -->
+  <rect x="50" y="230" width="412" height="60" rx="8" fill="#111111" stroke="#444444" stroke-width="1"/>
+  <text x="256" y="254" text-anchor="middle" font-family="monospace" font-size="10" fill="#4488ff">eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9</text>
+  <text x="256" y="272" text-anchor="middle" font-family="monospace" font-size="10" fill="#44ff88">.eyJzdWIiOiJ1c2VyIiwiZXhwIjoxMjM0fQ</text>
+  <!-- Magnifier -->
+  <circle cx="256" cy="360" r="60" fill="none" stroke="#ffff44" stroke-width="4"/>
+  <line x1="302" y1="406" x2="345" y2="449" stroke="#ffff44" stroke-width="8" stroke-linecap="round"/>
+  <text x="256" y="352" text-anchor="middle" font-family="monospace" font-size="11" fill="#ffff44">INSPECT</text>
+  <text x="256" y="370" text-anchor="middle" font-family="monospace" font-size="10" fill="#88ff88">TOKEN</text>
+  <text x="256" y="480" text-anchor="middle" font-family="monospace" font-size="26" font-weight="bold" fill="#ffaa00">OAUTH.PEEK</text>
+</svg>

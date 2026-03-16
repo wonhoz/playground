@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a1000"/>
+      <stop offset="100%" stop-color="#2d1f00"/>
+    </linearGradient>
+    <linearGradient id="folder" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffe082"/>
+      <stop offset="100%" stop-color="#ff8f00"/>
+    </linearGradient>
+    <linearGradient id="wind" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#b2ebf2" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#80deea" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#b2ebf2" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- folder -->
+  <path d="M90 200 L90 375 L400 375 L400 225 L215 225 L185 200 Z" fill="url(#folder)"/>
+  <path d="M90 200 L90 228 L400 228 L400 225 L215 225 L185 200 Z" fill="#f57c00"/>
+  <!-- wind sweep lines -->
+  <path d="M60 290 Q200 270 420 290" stroke="url(#wind)" stroke-width="8" fill="none"/>
+  <path d="M60 310 Q200 295 420 315" stroke="url(#wind)" stroke-width="5" fill="none" opacity="0.7"/>
+  <path d="M60 330 Q200 316 420 335" stroke="url(#wind)" stroke-width="3" fill="none" opacity="0.5"/>
+  <!-- debris being blown -->
+  <circle cx="350" cy="350" r="9" fill="#8d6e63" opacity="0.7"/>
+  <circle cx="395" cy="330" r="7" fill="#78909c" opacity="0.6"/>
+  <circle cx="430" cy="315" r="5" fill="#8d6e63" opacity="0.5"/>
+  <rect x="420" y="355" width="16" height="10" rx="3" fill="#90a4ae" opacity="0.5" transform="rotate(20 428 360)"/>
+  <rect x="455" y="335" width="13" height="8" rx="3" fill="#8d6e63" opacity="0.4" transform="rotate(-15 461 339)"/>
+  <!-- arrows showing direction -->
+  <path d="M390 280 L420 280 L410 270 M420 280 L410 290" stroke="#b2ebf2" stroke-width="3" fill="none" opacity="0.5"/>
+  <path d="M410 300 L440 300 L430 290 M440 300 L430 310" stroke="#b2ebf2" stroke-width="3" fill="none" opacity="0.4"/>
+</svg>

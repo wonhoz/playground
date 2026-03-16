@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A0800"/>
+      <stop offset="100%" stop-color="#261200"/>
+    </linearGradient>
+    <radialGradient id="lens_o" cx="40%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#2A1600"/>
+      <stop offset="100%" stop-color="#140800"/>
+    </radialGradient>
+    <linearGradient id="gold_o" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF8800"/>
+      <stop offset="100%" stop-color="#CC5500"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Background hex text -->
+  <text x="68" y="100" fill="#331100" font-size="11" font-family="monospace">4D 5A 90 00 03 00 00 00 04 00 FF FF</text>
+  <text x="68" y="118" fill="#331100" font-size="11" font-family="monospace">00 00 B8 00 00 00 00 00 00 00 40 00</text>
+  <text x="68" y="136" fill="#331100" font-size="11" font-family="monospace">00 00 00 00 00 00 00 00 00 00 00 00</text>
+  <text x="68" y="154" fill="#331100" font-size="11" font-family="monospace">00 00 00 00 00 00 00 00 80 00 00 00</text>
+  <!-- Magnifier -->
+  <circle cx="210" cy="220" r="140" fill="url(#lens_o)" stroke="url(#gold_o)" stroke-width="14"/>
+  <!-- Hex inside magnifier - zoomed -->
+  <text x="140" y="186" fill="#331100" font-size="13" font-family="monospace">4D 5A 90</text>
+  <text x="140" y="208" fill="#FF8800" font-size="20" font-family="monospace" font-weight="bold">4D 5A</text>
+  <text x="155" y="240" fill="#FFCC66" font-size="26" font-family="monospace">MZ</text>
+  <text x="140" y="272" fill="#FF6600" font-size="14" font-family="monospace">PE Header</text>
+  <text x="140" y="294" fill="#CC4400" font-size="13" font-family="monospace">90 00 03 00</text>
+  <!-- Handle -->
+  <line x1="320" y1="330" x2="432" y2="432" stroke="url(#gold_o)" stroke-width="20" stroke-linecap="round"/>
+  <!-- Lens highlight -->
+  <ellipse cx="162" cy="168" rx="30" ry="18" fill="white" opacity="0.07" transform="rotate(-30 162 168)"/>
+  <!-- Status bottom -->
+  <text x="256" y="460" text-anchor="middle" fill="#885522" font-size="14" font-family="monospace">DOS MZ Executable</text>
+</svg>

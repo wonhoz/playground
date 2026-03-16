@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#141414"/>
+      <stop offset="100%" stop-color="#1E1E1E"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Minimalist: just outlines, precise geometry -->
+  <!-- Standing domino 1 -->
+  <rect x="72" y="192" width="42" height="84" rx="6" fill="none" stroke="#E0E0E0" stroke-width="2.5"/>
+  <line x1="72" y1="234" x2="114" y2="234" stroke="#E0E0E0" stroke-width="2"/>
+  <circle cx="86" cy="213" r="4" fill="#E0E0E0"/>
+  <circle cx="100" cy="213" r="4" fill="#E0E0E0"/>
+  <circle cx="93" cy="255" r="4" fill="#E0E0E0"/>
+  <!-- Standing domino 2 -->
+  <rect x="154" y="192" width="42" height="84" rx="6" fill="none" stroke="#AAAAAA" stroke-width="2.5"/>
+  <line x1="154" y1="234" x2="196" y2="234" stroke="#AAAAAA" stroke-width="2"/>
+  <circle cx="168" cy="213" r="4" fill="#AAAAAA"/>
+  <circle cx="182" cy="255" r="4" fill="#AAAAAA"/>
+  <!-- Tilting 15deg -->
+  <g transform="rotate(-15 255 276)">
+    <rect x="234" y="192" width="42" height="84" rx="6" fill="none" stroke="#888888" stroke-width="2.5"/>
+    <line x1="234" y1="234" x2="276" y2="234" stroke="#888888" stroke-width="2"/>
+    <circle cx="248" cy="213" r="4" fill="#888888"/>
+    <circle cx="262" cy="213" r="4" fill="#888888"/>
+    <circle cx="255" cy="234" r="4" fill="#888888"/>
+    <circle cx="248" cy="255" r="4" fill="#888888"/>
+    <circle cx="262" cy="255" r="4" fill="#888888"/>
+  </g>
+  <!-- Falling 50deg -->
+  <g transform="rotate(-50 336 280)">
+    <rect x="315" y="192" width="42" height="84" rx="6" fill="none" stroke="#555555" stroke-width="2.5"/>
+    <line x1="315" y1="234" x2="357" y2="234" stroke="#555555" stroke-width="2"/>
+    <circle cx="329" cy="213" r="4" fill="#555555"/>
+    <circle cx="343" cy="255" r="4" fill="#555555"/>
+  </g>
+  <!-- Horizontal fallen -->
+  <rect x="378" y="267" width="84" height="42" rx="6" fill="none" stroke="#333333" stroke-width="2.5"/>
+  <line x1="420" y1="267" x2="420" y2="309" stroke="#333333" stroke-width="2"/>
+  <circle cx="399" cy="281" r="4" fill="#333333"/>
+  <circle cx="441" cy="293" r="4" fill="#333333"/>
+  <!-- Floor -->
+  <line x1="40" y1="315" x2="472" y2="315" stroke="#444444" stroke-width="1.5"/>
+  <!-- Shadow dots -->
+  <ellipse cx="93" cy="318" rx="20" ry="4" fill="#333333" opacity="0.5"/>
+  <ellipse cx="175" cy="318" rx="20" ry="4" fill="#333333" opacity="0.4"/>
+  <ellipse cx="255" cy="318" rx="20" ry="4" fill="#333333" opacity="0.3"/>
+  <text x="256" y="455" font-family="'Helvetica Neue'" font-size="26" font-weight="300" fill="#888888" text-anchor="middle" letter-spacing="4">DOMINO·CHAIN</text>
+</svg>

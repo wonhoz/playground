@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#212121"/>
+      <stop offset="100%" stop-color="#303030"/>
+    </linearGradient>
+    <linearGradient id="dupGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff5252"/>
+      <stop offset="100%" stop-color="#d50000"/>
+    </linearGradient>
+    <linearGradient id="freeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#69f0ae"/>
+      <stop offset="100%" stop-color="#00c853"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Pie chart (roughly 35% duplicates = ~126 degrees) -->
+  <!-- Free space slice -->
+  <path d="M256,180 L256,60 A120,120 0 1,1 153,320 Z" fill="url(#freeGrad)"/>
+  <!-- Duplicate slice -->
+  <path d="M256,180 L153,320 A120,120 0 0,1 256,60 Z" fill="url(#dupGrad)"/>
+  <!-- Donut hole -->
+  <circle cx="256" cy="180" r="70" fill="#212121"/>
+  <!-- Center text -->
+  <text x="256" y="170" font-family="Arial" font-size="26" font-weight="bold" fill="#ff5252" text-anchor="middle">35%</text>
+  <text x="256" y="195" font-family="Arial" font-size="12" fill="#888" text-anchor="middle">duplicates</text>
+  <!-- Legend -->
+  <rect x="80" y="340" width="20" height="20" rx="4" fill="url(#dupGrad)"/>
+  <text x="108" y="355" font-family="Arial" font-size="14" fill="#ff8a80">Duplicates: 3.2 GB</text>
+  <rect x="80" y="370" width="20" height="20" rx="4" fill="url(#freeGrad)"/>
+  <text x="108" y="385" font-family="Arial" font-size="14" fill="#b9f6ca">Unique: 6.0 GB</text>
+  <!-- File count badges -->
+  <rect x="320" y="340" width="120" height="50" rx="10" fill="#1a1a1a" stroke="#ff5252" stroke-width="1.5"/>
+  <text x="380" y="360" font-family="Arial" font-size="12" fill="#888" text-anchor="middle">Found</text>
+  <text x="380" y="382" font-family="Arial" font-size="20" font-weight="bold" fill="#ff5252" text-anchor="middle">1,247</text>
+  <!-- Title -->
+  <text x="256" y="440" font-family="Arial" font-size="22" font-weight="bold" fill="white" text-anchor="middle">File Duplicates</text>
+  <!-- Small files icons at top -->
+  <rect x="338" y="70" width="45" height="58" rx="6" fill="#303030" stroke="#69f0ae" stroke-width="1.5" opacity="0.6"/>
+  <rect x="394" y="80" width="45" height="58" rx="6" fill="#303030" stroke="#ff5252" stroke-width="1.5" opacity="0.6"/>
+  <line x1="355" y1="70" x2="411" y2="80" stroke="#888" stroke-width="2" stroke-dasharray="4,3" opacity="0.5"/>
+</svg>

@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0A0014"/>
+      <stop offset="100%" stop-color="#140028"/>
+    </linearGradient>
+    <radialGradient id="wormhole" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#E040FB"/>
+      <stop offset="30%" stop-color="#7B1FA2" stop-opacity="0.6"/>
+      <stop offset="70%" stop-color="#4A148C" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#4A148C" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="violet" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#EA80FC"/>
+      <stop offset="100%" stop-color="#E040FB"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Wormhole tunnel -->
+  <circle cx="256" cy="256" r="190" fill="url(#wormhole)"/>
+  <!-- Concentric rings creating tunnel effect -->
+  <ellipse cx="256" cy="256" rx="180" ry="80" fill="none" stroke="#E040FB" stroke-width="2" opacity="0.8"/>
+  <ellipse cx="256" cy="256" rx="150" ry="62" fill="none" stroke="#CE93D8" stroke-width="2" opacity="0.7"/>
+  <ellipse cx="256" cy="256" rx="120" ry="48" fill="none" stroke="#AB47BC" stroke-width="1.5" opacity="0.6"/>
+  <ellipse cx="256" cy="256" rx="90" ry="36" fill="none" stroke="#8E24AA" stroke-width="1.5" opacity="0.5"/>
+  <ellipse cx="256" cy="256" rx="60" ry="24" fill="none" stroke="#6A1B9A" stroke-width="1.5" opacity="0.4"/>
+  <ellipse cx="256" cy="256" rx="30" ry="12" fill="none" stroke="#4A148C" stroke-width="1" opacity="0.3"/>
+  <!-- Geometric shape being distorted/shifted -->
+  <!-- Near cube -->
+  <polygon points="150,210 220,180 220,256 150,286" fill="#140028" stroke="#EA80FC" stroke-width="2.5"/>
+  <polygon points="220,180 290,210 290,286 220,256" fill="#0A0014" stroke="#E040FB" stroke-width="2.5"/>
+  <polygon points="150,210 220,180 290,210 220,240" fill="#1A003A" stroke="#EA80FC" stroke-width="2.5"/>
+  <!-- Far cube (distorted, smaller) -->
+  <polygon points="302,240 334,226 334,262 302,276" fill="#140028" stroke="#AB47BC" stroke-width="1.5" opacity="0.7"/>
+  <polygon points="334,226 366,240 366,276 334,262" fill="#0A0014" stroke="#8E24AA" stroke-width="1.5" opacity="0.7"/>
+  <polygon points="302,240 334,226 366,240 334,254" fill="#1A003A" stroke="#AB47BC" stroke-width="1.5" opacity="0.7"/>
+  <!-- Shift arrow -->
+  <path d="M292 250 L298 250 M298 250 L290 244 M298 250 L290 256" stroke="#EA80FC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</svg>

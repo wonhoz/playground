@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0d0020"/>
+      <stop offset="100%" stop-color="#1a0035"/>
+    </linearGradient>
+    <linearGradient id="bar1" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#9c27b0"/>
+      <stop offset="100%" stop-color="#e040fb"/>
+    </linearGradient>
+    <linearGradient id="bar2" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#4527a0"/>
+      <stop offset="100%" stop-color="#7c4dff"/>
+    </linearGradient>
+    <linearGradient id="bar3" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#00796b"/>
+      <stop offset="100%" stop-color="#1de9b6"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Time axis -->
+  <line x1="90" y1="420" x2="440" y2="420" stroke="#6a1b9a" stroke-width="2"/>
+  <polygon points="440,420 425,413 425,427" fill="#6a1b9a"/>
+  <!-- Tick marks -->
+  <line x1="140" y1="415" x2="140" y2="425" stroke="#9c27b0" stroke-width="1.5"/>
+  <line x1="215" y1="415" x2="215" y2="425" stroke="#9c27b0" stroke-width="1.5"/>
+  <line x1="290" y1="415" x2="290" y2="425" stroke="#9c27b0" stroke-width="1.5"/>
+  <line x1="365" y1="415" x2="365" y2="425" stroke="#9c27b0" stroke-width="1.5"/>
+  <text x="136" y="440" font-family="monospace" font-size="11" fill="#9c27b0" text-anchor="middle">0</text>
+  <text x="211" y="440" font-family="monospace" font-size="11" fill="#9c27b0" text-anchor="middle">25</text>
+  <text x="286" y="440" font-family="monospace" font-size="11" fill="#9c27b0" text-anchor="middle">50</text>
+  <text x="361" y="440" font-family="monospace" font-size="11" fill="#9c27b0" text-anchor="middle">75ms</text>
+  <!-- Lane 1 label -->
+  <text x="85" y="168" font-family="monospace" font-size="12" fill="#e040fb" text-anchor="end">CH1</text>
+  <!-- Lane 1 bars -->
+  <rect x="140" y="150" width="55" height="28" rx="6" fill="url(#bar1)"/>
+  <rect x="230" y="150" width="90" height="28" rx="6" fill="url(#bar1)" opacity="0.8"/>
+  <rect x="355" y="150" width="40" height="28" rx="6" fill="url(#bar1)" opacity="0.7"/>
+  <!-- Lane 2 label -->
+  <text x="85" y="242" font-family="monospace" font-size="12" fill="#7c4dff" text-anchor="end">CH2</text>
+  <!-- Lane 2 bars -->
+  <rect x="165" y="224" width="40" height="28" rx="6" fill="url(#bar2)"/>
+  <rect x="250" y="224" width="75" height="28" rx="6" fill="url(#bar2)" opacity="0.85"/>
+  <rect x="360" y="224" width="60" height="28" rx="6" fill="url(#bar2)" opacity="0.7"/>
+  <!-- Lane 3 label -->
+  <text x="85" y="316" font-family="monospace" font-size="12" fill="#1de9b6" text-anchor="end">EVT</text>
+  <!-- Lane 3 bars -->
+  <rect x="140" y="298" width="20" height="28" rx="6" fill="url(#bar3)"/>
+  <rect x="210" y="298" width="20" height="28" rx="6" fill="url(#bar3)" opacity="0.85"/>
+  <rect x="275" y="298" width="20" height="28" rx="6" fill="url(#bar3)" opacity="0.75"/>
+  <rect x="340" y="298" width="20" height="28" rx="6" fill="url(#bar3)" opacity="0.65"/>
+  <!-- Scan line (cursor) -->
+  <line x1="270" y1="120" x2="270" y2="420" stroke="#f3e5f5" stroke-width="1.5" stroke-dasharray="5,5" opacity="0.5"/>
+  <circle cx="270" cy="120" r="5" fill="#e040fb"/>
+  <!-- Title -->
+  <text x="256" y="480" font-family="monospace" font-size="17" fill="#ce93d8" text-anchor="middle" letter-spacing="3" opacity="0.9">SIGNAL.FLOW</text>
+</svg>

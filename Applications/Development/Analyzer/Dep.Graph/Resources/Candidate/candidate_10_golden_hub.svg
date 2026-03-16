@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A1200"/>
+      <stop offset="100%" stop-color="#2C2000"/>
+    </linearGradient>
+    <radialGradient id="hub" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFD600"/>
+      <stop offset="100%" stop-color="#FF8F00"/>
+    </radialGradient>
+    <radialGradient id="nodeG" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFF176"/>
+      <stop offset="100%" stop-color="#F9A825"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Glow rings -->
+  <circle cx="256" cy="256" r="195" fill="none" stroke="#FF8F00" stroke-width="1" opacity="0.2"/>
+  <circle cx="256" cy="256" r="145" fill="none" stroke="#FFD600" stroke-width="1.5" opacity="0.3"/>
+  <!-- Weighted edges (thickness = dependency weight) -->
+  <line x1="256" y1="256" x2="256" y2="80" stroke="#FF8F00" stroke-width="6" opacity="0.7"/>
+  <line x1="256" y1="256" x2="420" y2="175" stroke="#FF8F00" stroke-width="5" opacity="0.7"/>
+  <line x1="256" y1="256" x2="432" y2="330" stroke="#FF8F00" stroke-width="3" opacity="0.5"/>
+  <line x1="256" y1="256" x2="356" y2="432" stroke="#FF8F00" stroke-width="4" opacity="0.6"/>
+  <line x1="256" y1="256" x2="156" y2="432" stroke="#FF8F00" stroke-width="2" opacity="0.4"/>
+  <line x1="256" y1="256" x2="80" y2="330" stroke="#FF8F00" stroke-width="3" opacity="0.5"/>
+  <line x1="256" y1="256" x2="92" y2="175" stroke="#FF8F00" stroke-width="5" opacity="0.7"/>
+  <!-- Cross-edges -->
+  <line x1="256" y1="80" x2="420" y2="175" stroke="#F9A825" stroke-width="1.5" opacity="0.3"/>
+  <line x1="92" y1="175" x2="80" y2="330" stroke="#F9A825" stroke-width="1.5" opacity="0.3"/>
+  <line x1="432" y1="330" x2="356" y2="432" stroke="#F9A825" stroke-width="1.5" opacity="0.3"/>
+  <!-- Outer nodes sized by importance -->
+  <circle cx="256" cy="80" r="28" fill="url(#nodeG)" stroke="#FFD600" stroke-width="3"/>
+  <circle cx="420" cy="175" r="24" fill="url(#nodeG)" stroke="#FFD600" stroke-width="3"/>
+  <circle cx="432" cy="330" r="18" fill="#2C2000" stroke="#F9A825" stroke-width="2"/>
+  <circle cx="356" cy="432" r="22" fill="url(#nodeG)" stroke="#FFD600" stroke-width="3"/>
+  <circle cx="156" cy="432" r="16" fill="#2C2000" stroke="#F9A825" stroke-width="2"/>
+  <circle cx="80" cy="330" r="18" fill="#2C2000" stroke="#F9A825" stroke-width="2"/>
+  <circle cx="92" cy="175" r="26" fill="url(#nodeG)" stroke="#FFD600" stroke-width="3"/>
+  <!-- Node labels -->
+  <text x="256" y="85" text-anchor="middle" font-family="monospace" font-size="11" fill="#1A1200">Svc</text>
+  <text x="420" y="180" text-anchor="middle" font-family="monospace" font-size="10" fill="#1A1200">UI</text>
+  <text x="92" y="180" text-anchor="middle" font-family="monospace" font-size="10" fill="#1A1200">API</text>
+  <text x="356" y="437" text-anchor="middle" font-family="monospace" font-size="10" fill="#1A1200">DB</text>
+  <!-- Hub center -->
+  <circle cx="256" cy="256" r="48" fill="url(#hub)" stroke="white" stroke-width="5"/>
+  <circle cx="256" cy="256" r="30" fill="#1A1200" opacity="0.3"/>
+  <text x="256" y="261" text-anchor="middle" font-family="monospace" font-size="14" font-weight="bold" fill="white">HUB</text>
+</svg>

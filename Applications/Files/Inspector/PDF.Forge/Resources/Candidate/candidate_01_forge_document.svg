@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A0A0A"/>
+      <stop offset="100%" stop-color="#2D0D0D"/>
+    </linearGradient>
+    <linearGradient id="page" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#F5F0E8"/>
+      <stop offset="100%" stop-color="#E8E0D0"/>
+    </linearGradient>
+    <linearGradient id="fire" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#FF2200"/>
+      <stop offset="50%" stop-color="#FF8800"/>
+      <stop offset="100%" stop-color="#FFEE00"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Document shadow -->
+  <rect x="148" y="108" width="220" height="280" rx="10" fill="#000000" opacity="0.4"/>
+  <!-- Main document -->
+  <rect x="140" y="100" width="220" height="280" rx="10" fill="url(#page)"/>
+  <!-- Folded corner -->
+  <polygon points="300,100 360,100 360,160 300,100" fill="#E8E0D0"/>
+  <polygon points="300,100 360,160 300,160" fill="#C8C0B0"/>
+  <!-- Text lines on document -->
+  <rect x="160" y="135" width="120" height="8" rx="4" fill="#888888"/>
+  <rect x="160" y="153" width="160" height="6" rx="3" fill="#AAAAAA"/>
+  <rect x="160" y="167" width="140" height="6" rx="3" fill="#AAAAAA"/>
+  <rect x="160" y="181" width="150" height="6" rx="3" fill="#AAAAAA"/>
+  <rect x="160" y="195" width="130" height="6" rx="3" fill="#AAAAAA"/>
+  <!-- PDF text -->
+  <rect x="155" y="220" width="70" height="40" rx="6" fill="#FF0000"/>
+  <text x="190" y="248" font-family="sans-serif" font-size="22" fill="#FFFFFF" text-anchor="middle" font-weight="bold">PDF</text>
+  <!-- More text lines -->
+  <rect x="160" y="278" width="130" height="6" rx="3" fill="#AAAAAA"/>
+  <rect x="160" y="292" width="110" height="6" rx="3" fill="#AAAAAA"/>
+  <rect x="160" y="306" width="120" height="6" rx="3" fill="#AAAAAA"/>
+  <!-- Forge flames at bottom of document -->
+  <path d="M140,360 Q160,330 180,355 Q200,315 220,350 Q240,320 260,348 Q280,310 300,345 Q320,318 340,352 Q350,340 360,355 L360,385 Q310,395 256,395 Q200,395 140,385 Z" fill="url(#fire)" opacity="0.9"/>
+  <!-- Sparks -->
+  <circle cx="190" cy="325" r="6" fill="#FFEE00" opacity="0.8"/>
+  <circle cx="280" cy="310" r="5" fill="#FF8800" opacity="0.7"/>
+  <circle cx="240" cy="300" r="4" fill="#FFEE00" opacity="0.6"/>
+</svg>

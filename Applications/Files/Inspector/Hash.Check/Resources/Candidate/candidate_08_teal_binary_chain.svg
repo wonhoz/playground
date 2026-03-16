@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#001818"/>
+      <stop offset="100%" stop-color="#002020"/>
+    </linearGradient>
+    <linearGradient id="chain" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00CCAA"/>
+      <stop offset="100%" stop-color="#00FFCC"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Chain links -->
+  <rect x="80" y="220" width="80" height="72" rx="36" fill="none" stroke="url(#chain)" stroke-width="12"/>
+  <rect x="120" y="220" width="80" height="72" rx="36" fill="none" stroke="url(#chain)" stroke-width="12"/>
+  <rect x="200" y="220" width="80" height="72" rx="36" fill="none" stroke="url(#chain)" stroke-width="12"/>
+  <rect x="240" y="220" width="80" height="72" rx="36" fill="none" stroke="url(#chain)" stroke-width="12"/>
+  <rect x="320" y="220" width="80" height="72" rx="36" fill="none" stroke="url(#chain)" stroke-width="12"/>
+  <rect x="360" y="220" width="80" height="72" rx="36" fill="none" stroke="url(#chain)" stroke-width="12"/>
+  <!-- Binary text rain behind chain -->
+  <text x="82" y="155" fill="#004433" font-size="11" font-family="monospace">01101001</text>
+  <text x="172" y="140" fill="#004433" font-size="11" font-family="monospace">11010110</text>
+  <text x="262" y="150" fill="#004433" font-size="11" font-family="monospace">00101101</text>
+  <text x="352" y="145" fill="#004433" font-size="11" font-family="monospace">10110010</text>
+  <text x="82" y="380" fill="#004433" font-size="11" font-family="monospace">11001010</text>
+  <text x="172" y="395" fill="#004433" font-size="11" font-family="monospace">01011001</text>
+  <text x="262" y="385" fill="#004433" font-size="11" font-family="monospace">10100110</text>
+  <text x="352" y="390" fill="#004433" font-size="11" font-family="monospace">01101010</text>
+  <!-- Hash label above -->
+  <text x="256" y="110" text-anchor="middle" fill="#00CCAA" font-size="14" font-family="monospace">INTEGRITY CHAIN</text>
+  <!-- Checkmark right of chain -->
+  <rect x="450" y="220" width="40" height="72" rx="8" fill="none"/>
+  <polyline points="455,256 468,272 490,236" fill="none" stroke="#00FFCC" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Bottom hash display -->
+  <rect x="72" y="430" width="368" height="46" rx="8" fill="#001818" stroke="#00CCAA" stroke-width="1" opacity="0.6"/>
+  <text x="90" y="450" fill="#006655" font-size="11" font-family="monospace">SHA-256:</text>
+  <text x="90" y="466" fill="#00AAAA" font-size="12" font-family="monospace">d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9</text>
+</svg>

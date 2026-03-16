@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#001122"/>
+      <stop offset="100%" stop-color="#002244"/>
+    </linearGradient>
+    <linearGradient id="liquid" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#00CFFF"/>
+      <stop offset="100%" stop-color="#0066AA"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Battery outline -->
+  <rect x="120" y="120" width="260" height="260" rx="16" fill="#0A1A2A" stroke="#224466" stroke-width="3"/>
+  <!-- Terminal top -->
+  <rect x="206" y="96" width="100" height="28" rx="8" fill="#224466"/>
+  <!-- Liquid level (40%) -->
+  <rect x="128" y="276" width="244" height="96" rx="10" fill="url(#liquid)"/>
+  <!-- Liquid surface wave -->
+  <path d="M128 276 Q178 262 228 276 Q278 290 328 276 Q353 269 372 276 L372 278 Q353 271 328 278 Q278 292 228 278 Q178 264 128 278 Z" fill="#44DDFF" opacity="0.6"/>
+  <!-- Drip drop -->
+  <path d="M256 386 Q244 406 256 420 Q268 406 256 386 Z" fill="url(#liquid)"/>
+  <!-- Trickle line -->
+  <line x1="256" y1="380" x2="256" y2="390" stroke="#0099CC" stroke-width="3"/>
+  <!-- Level text -->
+  <text x="256" y="256" font-family="Arial" font-size="40" font-weight="bold" fill="white" text-anchor="middle">40%</text>
+  <text x="256" y="285" font-family="Arial" font-size="16" fill="#88CCFF" text-anchor="middle">remaining</text>
+  <!-- Title -->
+  <text x="256" y="462" font-family="Arial" font-size="26" font-weight="bold" fill="#00CFFF" text-anchor="middle">Burn.Rate</text>
+</svg>

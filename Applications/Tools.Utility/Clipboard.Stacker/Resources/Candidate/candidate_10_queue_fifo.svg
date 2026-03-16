@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a1a10"/>
+      <stop offset="100%" stop-color="#152a1a"/>
+    </linearGradient>
+    <linearGradient id="item1" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00cc44"/>
+      <stop offset="100%" stop-color="#009933"/>
+    </linearGradient>
+    <linearGradient id="item2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0099ff"/>
+      <stop offset="100%" stop-color="#0066cc"/>
+    </linearGradient>
+    <linearGradient id="item3" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ff9900"/>
+      <stop offset="100%" stop-color="#cc6600"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Queue container (horizontal pipe) -->
+  <rect x="60" y="200" width="392" height="112" rx="24" fill="#0d2010" stroke="#336633" stroke-width="3"/>
+  <!-- Queue items inside -->
+  <rect x="80" y="220" width="90" height="72" rx="10" fill="url(#item1)" filter="url(#glow)"/>
+  <rect x="186" y="220" width="90" height="72" rx="10" fill="url(#item2)"/>
+  <rect x="292" y="220" width="90" height="72" rx="10" fill="url(#item3)"/>
+  <!-- Item numbers -->
+  <text x="125" y="262" text-anchor="middle" font-family="Arial Black" font-size="24" fill="#fff">1</text>
+  <text x="231" y="262" text-anchor="middle" font-family="Arial Black" font-size="24" fill="#fff">2</text>
+  <text x="337" y="262" text-anchor="middle" font-family="Arial Black" font-size="24" fill="#fff">3</text>
+  <!-- Dequeue arrow (left - OUT) -->
+  <polygon points="60,256 20,240 20,272" fill="#00cc44" filter="url(#glow)"/>
+  <text x="30" y="300" text-anchor="middle" font-family="monospace" font-size="16" fill="#00cc44">OUT</text>
+  <!-- Enqueue arrow (right - IN) -->
+  <polygon points="452,256 492,240 492,272" fill="#333" stroke="#556655" stroke-width="2"/>
+  <line x1="452" y1="256" x2="490" y2="256" stroke="#556655" stroke-width="3" stroke-dasharray="8 4"/>
+  <text x="490" y="300" text-anchor="middle" font-family="monospace" font-size="16" fill="#556655">IN</text>
+  <!-- New item waiting to enter -->
+  <rect x="410" y="220" width="90" height="72" rx="10" fill="#2a4a2a" stroke="#446644" stroke-width="2" stroke-dasharray="6 3"/>
+  <text x="455" y="262" text-anchor="middle" font-family="Arial Black" font-size="24" fill="#446644">4</text>
+  <!-- Labels -->
+  <text x="256" y="360" text-anchor="middle" font-family="monospace" font-size="18" fill="#33aa55" filter="url(#glow)">FIFO CLIPBOARD STACK</text>
+  <!-- Stack pointer arrow -->
+  <polygon points="125,200 113,168 137,168" fill="#00cc44" filter="url(#glow)"/>
+  <text x="125" y="158" text-anchor="middle" font-family="monospace" font-size="12" fill="#00cc44">TOP</text>
+</svg>

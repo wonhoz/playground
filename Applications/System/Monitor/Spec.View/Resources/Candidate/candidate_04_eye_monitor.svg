@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" style="stop-color:#001a2e"/>
+      <stop offset="100%" style="stop-color:#000a14"/>
+    </radialGradient>
+    <radialGradient id="iris" cx="40%" cy="35%" r="60%">
+      <stop offset="0%" style="stop-color:#0288d1"/>
+      <stop offset="100%" style="stop-color:#01579b"/>
+    </radialGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Eye shape -->
+  <path d="M 60,256 Q 256,80 452,256 Q 256,432 60,256 Z" fill="#001a2e" stroke="#0288d1" stroke-width="4" filter="url(#glow)"/>
+  <!-- Iris -->
+  <circle cx="256" cy="256" r="100" fill="url(#iris)" filter="url(#glow)"/>
+  <!-- Iris detail rings -->
+  <circle cx="256" cy="256" r="95" fill="none" stroke="#0097a7" stroke-width="2" opacity="0.4"/>
+  <circle cx="256" cy="256" r="80" fill="none" stroke="#00bcd4" stroke-width="1" opacity="0.3"/>
+  <!-- Pupil -->
+  <circle cx="256" cy="256" r="50" fill="#000"/>
+  <!-- Pupil highlight -->
+  <circle cx="236" cy="236" r="14" fill="white" opacity="0.8"/>
+  <!-- Circuit overlay inside eye -->
+  <line x1="180" y1="256" x2="220" y2="256" stroke="#00e5ff" stroke-width="2" opacity="0.4"/>
+  <line x1="292" y1="256" x2="332" y2="256" stroke="#00e5ff" stroke-width="2" opacity="0.4"/>
+  <!-- Scanning lines -->
+  <line x1="60" y1="230" x2="452" y2="230" stroke="#0288d1" stroke-width="1" opacity="0.2"/>
+  <line x1="60" y1="282" x2="452" y2="282" stroke="#0288d1" stroke-width="1" opacity="0.2"/>
+  <!-- Spec data points -->
+  <circle cx="100" cy="256" r="6" fill="#00e5ff" opacity="0.8"/>
+  <circle cx="412" cy="256" r="6" fill="#00e5ff" opacity="0.8"/>
+  <!-- Info bars below -->
+  <rect x="100" y="390" width="312" height="10" rx="4" fill="#0288d1" opacity="0.3"/>
+  <rect x="100" y="412" width="240" height="8" rx="4" fill="#0288d1" opacity="0.2"/>
+  <rect x="100" y="430" width="280" height="8" rx="4" fill="#0288d1" opacity="0.2"/>
+</svg>

@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0D47A1"/>
+      <stop offset="100%" stop-color="#42A5F5"/>
+    </linearGradient>
+    <radialGradient id="lens" cx="40%" cy="35%" r="60%">
+      <stop offset="0%" stop-color="#E3F2FD"/>
+      <stop offset="100%" stop-color="#1565C0"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Halftone dot pattern -->
+  <g opacity="0.25" fill="#ffffff">
+    <circle cx="64" cy="64" r="8"/><circle cx="104" cy="64" r="10"/><circle cx="144" cy="64" r="7"/>
+    <circle cx="184" cy="64" r="12"/><circle cx="224" cy="64" r="9"/><circle cx="264" cy="64" r="6"/>
+    <circle cx="304" cy="64" r="11"/><circle cx="344" cy="64" r="8"/><circle cx="384" cy="64" r="13"/>
+    <circle cx="424" cy="64" r="7"/><circle cx="464" cy="64" r="10"/>
+    <circle cx="64" cy="104" r="11"/><circle cx="104" cy="104" r="7"/><circle cx="144" cy="104" r="13"/>
+    <circle cx="184" cy="104" r="8"/><circle cx="224" cy="104" r="11"/><circle cx="264" cy="104" r="9"/>
+    <circle cx="304" cy="104" r="6"/><circle cx="344" cy="104" r="12"/><circle cx="384" cy="104" r="8"/>
+    <circle cx="424" cy="104" r="10"/><circle cx="464" cy="104" r="7"/>
+    <circle cx="64" cy="448" r="9"/><circle cx="104" cy="448" r="12"/><circle cx="144" cy="448" r="7"/>
+    <circle cx="184" cy="448" r="10"/><circle cx="224" cy="448" r="8"/><circle cx="264" cy="448" r="13"/>
+    <circle cx="304" cy="448" r="6"/><circle cx="344" cy="448" r="11"/><circle cx="384" cy="448" r="9"/>
+    <circle cx="424" cy="448" r="7"/><circle cx="464" cy="448" r="12"/>
+  </g>
+  <!-- Photo frame -->
+  <rect x="96" y="130" width="320" height="260" rx="16" fill="white" stroke="#0D47A1" stroke-width="5"/>
+  <!-- Photo content - cartoon-ified landscape -->
+  <rect x="96" y="130" width="320" height="260" rx="16" fill="#87CEEB" clip-path="url(#photo)"/>
+  <rect x="96" y="300" width="320" height="90" fill="#4CAF50" rx="0"/>
+  <rect x="96" y="356" width="320" height="34" fill="#388E3C" rx="0"/>
+  <!-- Sun -->
+  <circle cx="340" cy="190" r="36" fill="#FFD600"/>
+  <!-- Cloud -->
+  <ellipse cx="170" cy="195" rx="48" ry="28" fill="white"/>
+  <ellipse cx="145" cy="205" rx="32" ry="22" fill="white"/>
+  <ellipse cx="198" cy="208" rx="34" ry="20" fill="white"/>
+  <!-- Comic effect lines -->
+  <line x1="96" y1="130" x2="416" y2="390" stroke="#0D47A1" stroke-width="2" stroke-dasharray="6,6" opacity="0.3"/>
+  <line x1="416" y1="130" x2="96" y2="390" stroke="#0D47A1" stroke-width="2" stroke-dasharray="6,6" opacity="0.3"/>
+  <!-- Wand icon -->
+  <line x1="350" y1="340" x2="420" y2="410" stroke="#FFD600" stroke-width="10" stroke-linecap="round"/>
+  <polygon points="350,310 365,340 335,340" fill="#FFD600"/>
+  <!-- Sparkles -->
+  <text x="390" y="360" font-size="28" fill="#FFD600">✦</text>
+  <text x="330" y="415" font-size="18" fill="white" opacity="0.9">✦</text>
+</svg>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#101018"/>
+      <stop offset="100%" stop-color="#1A1A28"/>
+    </linearGradient>
+    <linearGradient id="silver" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#C0C0C0"/>
+      <stop offset="50%" stop-color="#E8E8E8"/>
+      <stop offset="100%" stop-color="#A0A0A0"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Hexagonal shapes -->
+  <polygon points="256,80 320,116 320,188 256,224 192,188 192,116" fill="none" stroke="url(#silver)" stroke-width="4" opacity="0.8"/>
+  <polygon points="256,100 308,130 308,188 256,218 204,188 204,130" fill="#181828" opacity="0.9"/>
+  <!-- Large character in center hex -->
+  <text x="256" y="178" text-anchor="middle" fill="url(#silver)" font-size="80" font-family="Segoe UI Emoji">&#x2605;</text>
+  <!-- Hex code display -->
+  <rect x="80" y="260" width="352" height="60" rx="8" fill="#1A1A30"/>
+  <text x="110" y="285" fill="#888888" font-size="14" font-family="monospace">CODEPOINT</text>
+  <text x="110" y="308" fill="#AAAACC" font-size="26" font-family="monospace">U+2605</text>
+  <text x="320" y="308" fill="#666688" font-size="26" font-family="monospace">★</text>
+  <!-- Name display -->
+  <rect x="80" y="332" width="352" height="50" rx="8" fill="#141420"/>
+  <text x="110" y="352" fill="#666688" font-size="13" font-family="monospace">NAME</text>
+  <text x="110" y="372" fill="#9999BB" font-size="16" font-family="monospace">BLACK STAR</text>
+  <!-- Category -->
+  <rect x="80" y="394" width="352" height="50" rx="8" fill="#0E0E1C"/>
+  <text x="110" y="414" fill="#555577" font-size="13" font-family="monospace">CATEGORY</text>
+  <text x="110" y="434" fill="#7777AA" font-size="16" font-family="monospace">Other Symbol  [So]</text>
+  <!-- Corner hex decorations -->
+  <polygon points="100,90 116,99 116,117 100,126 84,117 84,99" fill="none" stroke="#A0A0A0" stroke-width="2" opacity="0.3"/>
+  <polygon points="412,90 428,99 428,117 412,126 396,117 396,99" fill="none" stroke="#A0A0A0" stroke-width="2" opacity="0.3"/>
+</svg>

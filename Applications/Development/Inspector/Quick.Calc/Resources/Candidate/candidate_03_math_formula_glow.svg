@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#000510"/>
+      <stop offset="100%" stop-color="#001030"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="softglow">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <linearGradient id="formulaLine" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#56CCF2"/>
+      <stop offset="50%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#8E54E9"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+
+  <!-- Background circuit-like grid -->
+  <g stroke="#0a2040" stroke-width="1" opacity="0.6">
+    <line x1="0" y1="128" x2="512" y2="128"/>
+    <line x1="0" y1="256" x2="512" y2="256"/>
+    <line x1="0" y1="384" x2="512" y2="384"/>
+    <line x1="128" y1="0" x2="128" y2="512"/>
+    <line x1="256" y1="0" x2="256" y2="512"/>
+    <line x1="384" y1="0" x2="384" y2="512"/>
+  </g>
+
+  <!-- E = mc² formula elements (visual representation with shapes) -->
+  <!-- E shape -->
+  <rect x="85" y="190" width="12" height="60" rx="3" fill="#56CCF2" filter="url(#glow)"/>
+  <rect x="85" y="190" width="45" height="12" rx="3" fill="#56CCF2" filter="url(#glow)"/>
+  <rect x="85" y="214" width="38" height="10" rx="3" fill="#56CCF2" filter="url(#glow)"/>
+  <rect x="85" y="238" width="45" height="12" rx="3" fill="#56CCF2" filter="url(#glow)"/>
+
+  <!-- = sign -->
+  <rect x="148" y="208" width="35" height="9" rx="4" fill="#ffd200" filter="url(#glow)"/>
+  <rect x="148" y="225" width="35" height="9" rx="4" fill="#ffd200" filter="url(#glow)"/>
+
+  <!-- m letter -->
+  <path d="M200,250 L200,195 L220,215 L240,195 L240,250" fill="none" stroke="#56CCF2" stroke-width="11" stroke-linejoin="round" stroke-linecap="round" filter="url(#glow)"/>
+
+  <!-- c² : c letter + superscript 2 -->
+  <path d="M270,250 Q258,250 255,235 Q252,220 255,208 Q258,196 270,196" fill="none" stroke="#ee0979" stroke-width="11" stroke-linecap="round" filter="url(#glow)"/>
+  <!-- Superscript 2 -->
+  <path d="M280,190 Q295,185 295,195 Q295,200 280,210 L295,210" fill="none" stroke="#ffd200" stroke-width="7" stroke-linecap="round" filter="url(#glow)"/>
+
+  <!-- Divider line -->
+  <rect x="85" y="280" width="330" height="4" rx="2" fill="url(#formulaLine)" filter="url(#glow)"/>
+
+  <!-- Pythagorean theorem: a² + b² = c² -->
+  <!-- a² -->
+  <rect x="100" y="310" width="25" height="55" rx="4" fill="#56ab2f" opacity="0.9" filter="url(#glow)"/>
+  <rect x="100" y="358" width="25" height="7" rx="3" fill="#56ab2f" filter="url(#glow)"/>
+  <rect x="133" y="310" width="10" height="18" rx="3" fill="#88e055" filter="url(#glow)"/>
+
+  <!-- + -->
+  <rect x="158" y="330" width="26" height="9" rx="4" fill="#ffd200" filter="url(#glow)"/>
+  <rect x="168" y="320" width="9" height="29" rx="4" fill="#ffd200" filter="url(#glow)"/>
+
+  <!-- b² -->
+  <path d="M205,312 L205,365 M205,312 Q228,312 228,328 Q228,343 205,343" fill="none" stroke="#f7971e" stroke-width="11" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)"/>
+  <rect x="233" y="312" width="10" height="18" rx="3" fill="#ffba66" filter="url(#glow)"/>
+
+  <!-- = -->
+  <rect x="258" y="330" width="26" height="9" rx="4" fill="#ffd200" filter="url(#glow)"/>
+  <rect x="258" y="348" width="26" height="9" rx="4" fill="#ffd200" filter="url(#glow)"/>
+
+  <!-- c² -->
+  <path d="M315,365 Q300,365 296,347 Q292,330 296,318 Q300,306 315,306" fill="none" stroke="#ee0979" stroke-width="11" stroke-linecap="round" filter="url(#glow)"/>
+  <rect x="320" y="306" width="10" height="18" rx="3" fill="#ff6a9a" filter="url(#glow)"/>
+
+  <!-- Decorative particles -->
+  <circle cx="130" cy="150" r="4" fill="#56CCF2" filter="url(#softglow)"/>
+  <circle cx="200" cy="120" r="3" fill="#8E54E9" filter="url(#softglow)"/>
+  <circle cx="330" cy="140" r="5" fill="#ffd200" filter="url(#softglow)"/>
+  <circle cx="390" cy="160" r="3" fill="#ee0979" filter="url(#softglow)"/>
+  <circle cx="430" cy="320" r="4" fill="#56CCF2" filter="url(#softglow)"/>
+  <circle cx="70" cy="360" r="3" fill="#56ab2f" filter="url(#softglow)"/>
+</svg>

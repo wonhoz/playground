@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1a2a1a"/>
+      <stop offset="100%" stop-color="#0a1a0a"/>
+    </linearGradient>
+    <linearGradient id="crumb" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#4ade80"/>
+      <stop offset="100%" stop-color="#22c55e"/>
+    </linearGradient>
+    <linearGradient id="active" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#86efac"/>
+      <stop offset="100%" stop-color="#4ade80"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Breadcrumb path bar at top -->
+  <rect x="50" y="70" width="412" height="40" rx="8" fill="#1a2e1a"/>
+  <text x="66" y="96" font-family="monospace" font-size="14" fill="#4ade80">root</text>
+  <text x="116" y="96" font-family="monospace" font-size="14" fill="#888"> › </text>
+  <text x="136" y="96" font-family="monospace" font-size="14" fill="#4ade80">user</text>
+  <text x="186" y="96" font-family="monospace" font-size="14" fill="#888"> › </text>
+  <text x="206" y="96" font-family="monospace" font-size="14" fill="#86efac" font-weight="bold">address</text>
+  <text x="300" y="96" font-family="monospace" font-size="14" fill="#888"> › </text>
+  <text x="320" y="96" font-family="monospace" font-size="14" fill="#86efac" font-weight="bold">city</text>
+  <!-- Current path highlight line -->
+  <line x1="50" y1="110" x2="370" y2="110" stroke="#4ade80" stroke-width="2" opacity="0.5"/>
+  <!-- Tree view -->
+  <line x1="80" y1="140" x2="80" y2="420" stroke="#1e3e1e" stroke-width="2"/>
+  <line x1="80" y1="175" x2="116" y2="175" stroke="#1e3e1e" stroke-width="2"/>
+  <line x1="80" y1="240" x2="116" y2="240" stroke="#1e3e1e" stroke-width="2"/>
+  <line x1="80" y1="370" x2="116" y2="370" stroke="#1e3e1e" stroke-width="2"/>
+  <line x1="150" y1="240" x2="150" y2="340" stroke="#1e3e1e" stroke-width="1.5"/>
+  <line x1="150" y1="280" x2="186" y2="280" stroke="#1e3e1e" stroke-width="1.5"/>
+  <line x1="150" y1="320" x2="186" y2="320" stroke="#1e3e1e" stroke-width="1.5"/>
+  <line x1="220" y1="280" x2="220" y2="350" stroke="#1e3e1e" stroke-width="1.5"/>
+  <line x1="220" y1="310" x2="256" y2="310" stroke="#1e3e1e" stroke-width="1.5"/>
+  <line x1="220" y1="340" x2="256" y2="340" stroke="#1e3e1e" stroke-width="1.5"/>
+  <!-- Tree rows -->
+  <text x="90" y="158" font-family="monospace" font-size="13" fill="#4ade80">▼ { root }</text>
+  <text x="126" y="180" font-family="monospace" font-size="13" fill="#888">▶ "meta": {}</text>
+  <!-- Highlighted path row (user) -->
+  <rect x="116" y="226" width="200" height="26" rx="5" fill="#1e3e1e"/>
+  <text x="126" y="244" font-family="monospace" font-size="13" fill="#4ade80">▼ "user": {}</text>
+  <!-- address row highlighted -->
+  <rect x="186" y="266" width="180" height="26" rx="5" fill="#1e3e1e"/>
+  <text x="196" y="284" font-family="monospace" font-size="13" fill="#86efac">▼ "address": {}</text>
+  <text x="196" y="324" font-family="monospace" font-size="13" fill="#888">  "zip": "123"</text>
+  <!-- city row (active / selected) -->
+  <rect x="256" y="296" width="160" height="26" rx="5" fill="#2a4a2a"/>
+  <rect x="256" y="296" width="160" height="26" rx="5" fill="none" stroke="#4ade80" stroke-width="1.5"/>
+  <text x="266" y="314" font-family="monospace" font-size="13" fill="#86efac">"city": "Seoul"</text>
+  <text x="266" y="350" font-family="monospace" font-size="13" fill="#888">"zip": "06260"</text>
+  <text x="126" y="380" font-family="monospace" font-size="13" fill="#888">▶ "settings": {}</text>
+  <!-- Value panel -->
+  <rect x="430" y="126" width="38" height="290" rx="8" fill="#1e3e1e"/>
+  <text x="449" y="260" text-anchor="middle" font-family="Arial" font-size="10" fill="#4ade80" transform="rotate(-90,449,260)">SELECTED VALUE: "Seoul"</text>
+</svg>

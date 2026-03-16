@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#001a00"/>
+      <stop offset="100%" stop-color="#002a00"/>
+    </linearGradient>
+    <linearGradient id="fileBody" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#022c02"/>
+      <stop offset="100%" stop-color="#011a01"/>
+    </linearGradient>
+    <radialGradient id="xrayGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#4ade80" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#4ade80" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="neon">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- X선 배경 효과 -->
+  <ellipse cx="256" cy="256" rx="200" ry="200" fill="url(#xrayGlow)"/>
+  <!-- 투명 ZIP 파일 외곽 (X선 뷰) -->
+  <rect x="120" y="100" width="272" height="320" rx="12" fill="url(#fileBody)" stroke="#4ade80" stroke-width="2.5" filter="url(#neon)"/>
+  <!-- 모서리 접힘 -->
+  <polygon points="340,100 392,100 392,152 340,152" fill="url(#fileBody)" stroke="#4ade80" stroke-width="1.5"/>
+  <line x1="340" y1="100" x2="392" y2="152" stroke="#4ade80" stroke-width="1.5" filter="url(#neon)"/>
+  <!-- 내부 구조 (X선으로 보이는 내용물) -->
+  <!-- 내부 파일 1 -->
+  <rect x="144" y="168" width="100" height="80" rx="6" fill="none" stroke="#22c55e" stroke-width="1.5" stroke-dasharray="5,3" filter="url(#neon)"/>
+  <text x="194" y="202" font-family="'Courier New',monospace" font-size="12" fill="#4ade80" text-anchor="middle" filter="url(#neon)">readme</text>
+  <text x="194" y="220" font-family="'Courier New',monospace" font-size="10" fill="#22c55e" text-anchor="middle">.txt</text>
+  <!-- 내부 파일 2 -->
+  <rect x="256" y="168" width="112" height="80" rx="6" fill="none" stroke="#22c55e" stroke-width="1.5" stroke-dasharray="5,3" filter="url(#neon)"/>
+  <text x="312" y="202" font-family="'Courier New',monospace" font-size="12" fill="#4ade80" text-anchor="middle" filter="url(#neon)">data</text>
+  <text x="312" y="220" font-family="'Courier New',monospace" font-size="10" fill="#22c55e" text-anchor="middle">.json</text>
+  <!-- 내부 파일 3 (큰 것) -->
+  <rect x="144" y="264" width="224" height="100" rx="6" fill="none" stroke="#16a34a" stroke-width="1.5" stroke-dasharray="5,3" filter="url(#neon)"/>
+  <text x="256" y="304" font-family="'Courier New',monospace" font-size="12" fill="#4ade80" text-anchor="middle" filter="url(#neon)">archive_data</text>
+  <text x="256" y="322" font-family="'Courier New',monospace" font-size="10" fill="#22c55e" text-anchor="middle">.bin  (14.2MB)</text>
+  <!-- X선 스캔 라인 -->
+  <rect x="120" y="248" width="272" height="20" fill="#4ade80" opacity="0.08" filter="url(#neon)"/>
+  <line x1="120" y1="258" x2="392" y2="258" stroke="#4ade80" stroke-width="1.5" opacity="0.5" filter="url(#neon)"/>
+  <!-- 하단 크기 -->
+  <text x="256" y="445" font-family="'Courier New',monospace" font-size="13" fill="#4ade80" text-anchor="middle" filter="url(#neon)">X-RAY VIEW · 3 items</text>
+</svg>

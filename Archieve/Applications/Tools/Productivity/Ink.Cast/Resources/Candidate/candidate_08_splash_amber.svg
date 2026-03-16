@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3E2723"/>
+      <stop offset="100%" stop-color="#4E342E"/>
+    </linearGradient>
+    <radialGradient id="splash" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFD54F"/>
+      <stop offset="60%" stop-color="#FFB300"/>
+      <stop offset="100%" stop-color="#FF6F00" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- 잉크 스플래시 -->
+  <ellipse cx="256" cy="256" rx="140" ry="130" fill="url(#splash)" opacity="0.8"/>
+  <!-- 잉크 방울들 -->
+  <ellipse cx="140" cy="160" rx="25" ry="35" fill="#FFD54F" opacity="0.7" transform="rotate(-30 140 160)"/>
+  <ellipse cx="380" cy="180" rx="20" ry="28" fill="#FFAB40" opacity="0.6" transform="rotate(20 380 180)"/>
+  <ellipse cx="120" cy="350" rx="18" ry="24" fill="#FFA000" opacity="0.6" transform="rotate(15 120 350)"/>
+  <ellipse cx="400" cy="340" rx="22" ry="30" fill="#FFD54F" opacity="0.7" transform="rotate(-25 400 340)"/>
+  <circle cx="100" cy="250" r="10" fill="#FFB300" opacity="0.5"/>
+  <circle cx="420" cy="260" r="8" fill="#FFD54F" opacity="0.5"/>
+  <circle cx="200" cy="100" r="7" fill="#FFCA28" opacity="0.6"/>
+  <circle cx="330" cy="90" r="9" fill="#FFB300" opacity="0.5"/>
+  <!-- 펜 -->
+  <line x1="370" y1="80" x2="200" y2="250" stroke="#FFCA28" stroke-width="8" stroke-linecap="round"/>
+  <polygon points="196,254 188,238 210,244" fill="#FFD54F"/>
+  <rect x="362" y="64" width="20" height="30" rx="6" fill="#A1887F"/>
+  <text x="256" y="430" font-size="22" text-anchor="middle" fill="#FFB300" font-family="Segoe UI">Ink.Cast</text>
+</svg>

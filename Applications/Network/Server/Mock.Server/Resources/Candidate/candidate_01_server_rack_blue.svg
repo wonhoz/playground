@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0C1445"/>
+      <stop offset="100%" stop-color="#1E3A5F"/>
+    </linearGradient>
+    <linearGradient id="rack" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1E293B"/>
+      <stop offset="100%" stop-color="#0F172A"/>
+    </linearGradient>
+    <linearGradient id="blade" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1E3A5F"/>
+      <stop offset="100%" stop-color="#1E4976"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Server rack frame -->
+  <rect x="120" y="60" width="272" height="400" rx="10" fill="url(#rack)" stroke="#3B82F6" stroke-width="2.5"/>
+  <!-- Rack mounting rails -->
+  <rect x="120" y="60" width="22" height="400" rx="6" fill="#1E293B" stroke="#3B82F6" stroke-width="1"/>
+  <rect x="370" y="60" width="22" height="400" rx="6" fill="#1E293B" stroke="#3B82F6" stroke-width="1"/>
+  <!-- Rack units (server blades) -->
+  <!-- Unit 1 - HTTP -->
+  <rect x="148" y="80" width="216" height="40" rx="5" fill="url(#blade)" stroke="#3B82F6" stroke-width="1"/>
+  <circle cx="172" cy="100" r="7" fill="#22C55E"/>
+  <rect x="190" y="92" width="70" height="8" rx="3" fill="#93C5FD" opacity="0.8"/>
+  <rect x="270" y="92" width="60" height="8" rx="3" fill="#64748B"/>
+  <text x="336" y="104" font-family="Courier New" font-size="10" fill="#22C55E">HTTP</text>
+  <!-- Unit 2 - GET endpoints -->
+  <rect x="148" y="128" width="216" height="40" rx="5" fill="url(#blade)" stroke="#3B82F6" stroke-width="1"/>
+  <circle cx="172" cy="148" r="7" fill="#22C55E"/>
+  <rect x="190" y="140" width="50" height="8" rx="3" fill="#34D399" opacity="0.8"/>
+  <rect x="248" y="140" width="80" height="8" rx="3" fill="#64748B"/>
+  <text x="336" y="152" font-family="Courier New" font-size="10" fill="#34D399">GET</text>
+  <!-- Unit 3 - POST endpoints -->
+  <rect x="148" y="176" width="216" height="40" rx="5" fill="url(#blade)" stroke="#3B82F6" stroke-width="1"/>
+  <circle cx="172" cy="196" r="7" fill="#F59E0B"/>
+  <rect x="190" y="188" width="65" height="8" rx="3" fill="#FCD34D" opacity="0.8"/>
+  <rect x="263" y="188" width="70" height="8" rx="3" fill="#64748B"/>
+  <text x="336" y="200" font-family="Courier New" font-size="10" fill="#F59E0B">POST</text>
+  <!-- Unit 4 - mock data -->
+  <rect x="148" y="224" width="216" height="40" rx="5" fill="url(#blade)" stroke="#3B82F6" stroke-width="1"/>
+  <circle cx="172" cy="244" r="7" fill="#E879F9"/>
+  <rect x="190" y="236" width="80" height="8" rx="3" fill="#E879F9" opacity="0.7"/>
+  <rect x="278" y="236" width="55" height="8" rx="3" fill="#64748B"/>
+  <text x="336" y="248" font-family="Courier New" font-size="10" fill="#E879F9">MOCK</text>
+  <!-- Unit 5 - status -->
+  <rect x="148" y="272" width="216" height="40" rx="5" fill="url(#blade)" stroke="#3B82F6" stroke-width="1"/>
+  <circle cx="172" cy="292" r="7" fill="#22C55E"/>
+  <rect x="190" y="284" width="90" height="8" rx="3" fill="#93C5FD" opacity="0.7"/>
+  <rect x="288" y="284" width="45" height="8" rx="3" fill="#64748B"/>
+  <text x="336" y="296" font-family="Courier New" font-size="10" fill="#22C55E">LIVE</text>
+  <!-- Unit 6 -->
+  <rect x="148" y="320" width="216" height="40" rx="5" fill="url(#blade)" stroke="#3B82F6" stroke-width="1" opacity="0.6"/>
+  <circle cx="172" cy="340" r="7" fill="#EF4444"/>
+  <rect x="190" y="332" width="55" height="8" rx="3" fill="#F87171" opacity="0.7"/>
+  <rect x="253" y="332" width="80" height="8" rx="3" fill="#64748B"/>
+  <text x="336" y="344" font-family="Courier New" font-size="10" fill="#EF4444">ERR</text>
+  <!-- Port number / status at bottom -->
+  <rect x="148" y="400" width="216" height="44" rx="6" fill="#0F172A"/>
+  <text x="256" y="418" font-family="Courier New" font-size="11" fill="#64748B" text-anchor="middle">localhost</text>
+  <text x="256" y="435" font-family="Courier New" font-size="14" fill="#3B82F6" text-anchor="middle" font-weight="bold">:8080</text>
+</svg>

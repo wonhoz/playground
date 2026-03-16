@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0a14"/>
+      <stop offset="100%" stop-color="#14141e"/>
+    </linearGradient>
+    <linearGradient id="kb" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2d2d3a"/>
+      <stop offset="100%" stop-color="#1a1a28"/>
+    </linearGradient>
+    <linearGradient id="lightning" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffd700"/>
+      <stop offset="100%" stop-color="#ff8c00"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Keyboard body -->
+  <rect x="60" y="260" width="392" height="160" rx="16" fill="url(#kb)"/>
+  <!-- Key rows -->
+  <rect x="80" y="280" width="28" height="24" rx="5" fill="#3a3a4a"/>
+  <rect x="116" y="280" width="28" height="24" rx="5" fill="#3a3a4a"/>
+  <rect x="152" y="280" width="28" height="24" rx="5" fill="#3a3a4a"/>
+  <rect x="188" y="280" width="28" height="24" rx="5" fill="#3a3a4a"/>
+  <rect x="224" y="280" width="28" height="24" rx="5" fill="#ffd700" filter="url(#glow)"/>
+  <rect x="260" y="280" width="28" height="24" rx="5" fill="#3a3a4a"/>
+  <rect x="296" y="280" width="28" height="24" rx="5" fill="#3a3a4a"/>
+  <rect x="332" y="280" width="28" height="24" rx="5" fill="#3a3a4a"/>
+  <rect x="368" y="280" width="28" height="24" rx="5" fill="#3a3a4a"/>
+  <rect x="404" y="280" width="28" height="24" rx="5" fill="#3a3a4a"/>
+  <!-- Second row -->
+  <rect x="80" y="316" width="28" height="24" rx="5" fill="#ffd700" filter="url(#glow)"/>
+  <rect x="116" y="316" width="28" height="24" rx="5" fill="#3a3a4a"/>
+  <rect x="152" y="316" width="28" height="24" rx="5" fill="#3a3a4a"/>
+  <rect x="188" y="316" width="28" height="24" rx="5" fill="#3a3a4a"/>
+  <rect x="224" y="316" width="28" height="24" rx="5" fill="#3a3a4a"/>
+  <rect x="260" y="316" width="28" height="24" rx="5" fill="#3a3a4a"/>
+  <rect x="296" y="316" width="28" height="24" rx="5" fill="#3a3a4a"/>
+  <rect x="332" y="316" width="28" height="24" rx="5" fill="#ffd700" filter="url(#glow)"/>
+  <rect x="368" y="316" width="64" height="24" rx="5" fill="#3a3a4a"/>
+  <!-- Space bar row -->
+  <rect x="80" y="352" width="64" height="24" rx="5" fill="#3a3a4a"/>
+  <rect x="152" y="352" width="200" height="24" rx="5" fill="#2a2a38"/>
+  <rect x="360" y="352" width="72" height="24" rx="5" fill="#3a3a4a"/>
+  <!-- Lightning bolt above keyboard -->
+  <polygon points="256,80 230,200 252,200 224,360 296,220 268,220 300,80" fill="url(#lightning)" filter="url(#glow)" opacity="0.95"/>
+</svg>

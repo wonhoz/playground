@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00695C"/>
+      <stop offset="100%" style="stop-color:#004D40"/>
+    </linearGradient>
+    <linearGradient id="mapgrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4DB6AC"/>
+      <stop offset="100%" style="stop-color:#26A69A"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Map fold background -->
+  <path d="M90,130 L200,110 L320,140 L422,110 L422,390 L320,420 L200,390 L90,420Z" fill="#1B5E20" stroke="#80CBC4" stroke-width="3"/>
+  <path d="M90,130 L200,110 L200,390 L90,420Z" fill="#2E7D32" opacity="0.8"/>
+  <path d="M200,110 L320,140 L320,420 L200,390Z" fill="url(#mapgrad)" opacity="0.85"/>
+  <path d="M320,140 L422,110 L422,390 L320,420Z" fill="#388E3C" opacity="0.8"/>
+  <!-- Map fold lines -->
+  <line x1="200" y1="110" x2="200" y2="390" stroke="#80CBC4" stroke-width="2" opacity="0.6"/>
+  <line x1="320" y1="140" x2="320" y2="420" stroke="#80CBC4" stroke-width="2" opacity="0.6"/>
+  <!-- Location pin -->
+  <path d="M256,165 C230,165 210,185 210,210 C210,240 256,295 256,295 C256,295 302,240 302,210 C302,185 282,165 256,165Z" fill="#FF7043" stroke="#BF360C" stroke-width="3"/>
+  <circle cx="256" cy="210" r="18" fill="#FFCCBC"/>
+  <!-- Quiz Q mark on map -->
+  <text x="256" y="370" text-anchor="middle" font-family="Arial Black,sans-serif" font-size="58" font-weight="900" fill="#FFD54F" opacity="0.9">?</text>
+</svg>

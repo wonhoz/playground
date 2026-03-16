@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" style="stop-color:#0d1b2a"/>
+      <stop offset="100%" style="stop-color:#000a14"/>
+    </linearGradient>
+    <radialGradient id="target-glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#00e5ff;stop-opacity:0.3"/>
+      <stop offset="100%" style="stop-color:#00e5ff;stop-opacity:0"/>
+    </radialGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Window being targeted -->
+  <rect x="140" y="160" width="232" height="185" rx="10" fill="#0a1e35" stroke="#1565c0" stroke-width="2" opacity="0.7"/>
+  <rect x="140" y="160" width="232" height="28" rx="10" fill="#1565c0" opacity="0.7"/>
+  <rect x="140" y="174" width="232" height="14" fill="#1565c0" opacity="0.7"/>
+  <!-- Target crosshair overlay -->
+  <circle cx="256" cy="256" r="130" fill="url(#target-glow)"/>
+  <circle cx="256" cy="252" r="90" fill="none" stroke="#00e5ff" stroke-width="2.5" opacity="0.8" filter="url(#glow)"/>
+  <circle cx="256" cy="252" r="60" fill="none" stroke="#00e5ff" stroke-width="2" opacity="0.7" filter="url(#glow)"/>
+  <circle cx="256" cy="252" r="30" fill="none" stroke="#00e5ff" stroke-width="2" opacity="0.9" filter="url(#glow)"/>
+  <!-- Crosshair lines -->
+  <line x1="256" y1="152" x2="256" y2="212" stroke="#00e5ff" stroke-width="2.5" opacity="0.8" filter="url(#glow)"/>
+  <line x1="256" y1="292" x2="256" y2="352" stroke="#00e5ff" stroke-width="2.5" opacity="0.8" filter="url(#glow)"/>
+  <line x1="156" y1="252" x2="216" y2="252" stroke="#00e5ff" stroke-width="2.5" opacity="0.8" filter="url(#glow)"/>
+  <line x1="296" y1="252" x2="356" y2="252" stroke="#00e5ff" stroke-width="2.5" opacity="0.8" filter="url(#glow)"/>
+  <!-- Corner brackets -->
+  <path d="M120 130 L120 160 L150 160" stroke="#00e5ff" stroke-width="3" fill="none" stroke-linecap="round" filter="url(#glow)" opacity="0.9"/>
+  <path d="M392 130 L392 160 L362 160" stroke="#00e5ff" stroke-width="3" fill="none" stroke-linecap="round" filter="url(#glow)" opacity="0.9"/>
+  <path d="M120 382 L120 352 L150 352" stroke="#00e5ff" stroke-width="3" fill="none" stroke-linecap="round" filter="url(#glow)" opacity="0.9"/>
+  <path d="M392 382 L392 352 L362 352" stroke="#00e5ff" stroke-width="3" fill="none" stroke-linecap="round" filter="url(#glow)" opacity="0.9"/>
+  <!-- Center dot -->
+  <circle cx="256" cy="252" r="6" fill="#00e5ff" filter="url(#glow)"/>
+</svg>

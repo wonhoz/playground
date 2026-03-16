@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#020815"/>
+      <stop offset="100%" stop-color="#050D1E"/>
+    </linearGradient>
+    <linearGradient id="cosmic" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A2A5A"/>
+      <stop offset="100%" stop-color="#0D1A40"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Star field -->
+  <circle cx="55" cy="70" r="1.5" fill="white" opacity="0.8"/>
+  <circle cx="150" cy="45" r="1" fill="white" opacity="0.6"/>
+  <circle cx="300" cy="55" r="1.5" fill="white" opacity="0.9"/>
+  <circle cx="420" cy="80" r="1" fill="white" opacity="0.7"/>
+  <circle cx="480" cy="130" r="1.5" fill="white" opacity="0.5"/>
+  <circle cx="60" cy="400" r="1" fill="white" opacity="0.6"/>
+  <circle cx="450" cy="380" r="1.5" fill="white" opacity="0.8"/>
+  <!-- Galaxy dominos: tiles filled with starfield color -->
+  <rect x="72" y="185" width="46" height="92" rx="7" fill="url(#cosmic)" stroke="#4488FF" stroke-width="2"/>
+  <line x1="72" y1="231" x2="118" y2="231" stroke="#4488FF" stroke-width="1.5" opacity="0.8"/>
+  <!-- Cosmic dot pips -->
+  <circle cx="88" cy="207" r="5" fill="#88AAFF"/>
+  <circle cx="103" cy="207" r="5" fill="#88AAFF"/>
+  <circle cx="95" cy="255" r="5" fill="#88AAFF"/>
+  <rect x="165" y="185" width="46" height="92" rx="7" fill="url(#cosmic)" stroke="#6644FF" stroke-width="2"/>
+  <line x1="165" y1="231" x2="211" y2="231" stroke="#6644FF" stroke-width="1.5" opacity="0.8"/>
+  <circle cx="181" cy="207" r="5" fill="#AA88FF"/>
+  <circle cx="181" cy="255" r="5" fill="#AA88FF"/>
+  <circle cx="196" cy="255" r="5" fill="#AA88FF"/>
+  <!-- Tilting -->
+  <g transform="rotate(-35 258 270)">
+    <rect x="235" y="185" width="46" height="92" rx="7" fill="url(#cosmic)" stroke="#FF44AA" stroke-width="2"/>
+    <line x1="235" y1="231" x2="281" y2="231" stroke="#FF44AA" stroke-width="1.5" opacity="0.8"/>
+    <circle cx="251" cy="207" r="5" fill="#FF88CC"/>
+    <circle cx="265" cy="207" r="5" fill="#FF88CC"/>
+    <circle cx="258" cy="231" r="5" fill="#FF88CC"/>
+    <circle cx="251" cy="255" r="5" fill="#FF88CC"/>
+    <circle cx="265" cy="255" r="5" fill="#FF88CC"/>
+  </g>
+  <!-- Fallen -->
+  <g transform="rotate(-90 360 277)">
+    <rect x="337" y="185" width="46" height="92" rx="7" fill="url(#cosmic)" stroke="#FFAA44" stroke-width="2" opacity="0.85"/>
+    <line x1="337" y1="231" x2="383" y2="231" stroke="#FFAA44" stroke-width="1.5" opacity="0.8"/>
+    <circle cx="353" cy="207" r="5" fill="#FFCC88"/>
+    <circle cx="367" cy="255" r="5" fill="#FFCC88"/>
+  </g>
+  <!-- Constellation chain lines -->
+  <line x1="95" y1="277" x2="165" y2="277" stroke="#4488FF" stroke-width="1" opacity="0.4" stroke-dasharray="4,4"/>
+  <line x1="211" y1="277" x2="258" y2="277" stroke="#6644FF" stroke-width="1" opacity="0.4" stroke-dasharray="4,4"/>
+  <line x1="300" y1="277" x2="337" y2="277" stroke="#FF44AA" stroke-width="1" opacity="0.4" stroke-dasharray="4,4"/>
+  <!-- Burst -->
+  <circle cx="408" cy="270" r="42" fill="#FFAA44" opacity="0.08"/>
+  <circle cx="408" cy="270" r="22" fill="#FFCC88" opacity="0.12"/>
+  <text x="256" y="450" font-family="Arial" font-size="26" font-weight="bold" fill="#4488FF" text-anchor="middle">DOMINO·CHAIN</text>
+</svg>

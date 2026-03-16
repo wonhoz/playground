@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0d1b2a"/>
+      <stop offset="100%" style="stop-color:#1b3a5c"/>
+    </linearGradient>
+    <linearGradient id="handle" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#90a4ae"/>
+      <stop offset="100%" style="stop-color:#37474f"/>
+    </linearGradient>
+    <linearGradient id="mop-head" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#80deea"/>
+      <stop offset="100%" style="stop-color:#00838f"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <radialGradient id="shine" cx="40%" cy="30%" r="60%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.3"/>
+      <stop offset="100%" style="stop-color:#ffffff;stop-opacity:0"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Floor shine -->
+  <ellipse cx="256" cy="440" rx="180" ry="25" fill="#00e5ff" opacity="0.1"/>
+  <path d="M100 440 Q256 420 412 440" stroke="#00e5ff" stroke-width="2" fill="none" opacity="0.3" stroke-dasharray="20,10"/>
+  <!-- Mop handle -->
+  <line x1="310" y1="120" x2="200" y2="390" stroke="url(#handle)" stroke-width="16" stroke-linecap="round"/>
+  <!-- Mop head connector -->
+  <rect x="175" y="382" width="60" height="16" rx="4" fill="#546e7a"/>
+  <!-- Mop strands -->
+  <line x1="165" y1="398" x2="145" y2="445" stroke="url(#mop-head)" stroke-width="7" stroke-linecap="round" filter="url(#glow)"/>
+  <line x1="178" y1="400" x2="165" y2="450" stroke="url(#mop-head)" stroke-width="7" stroke-linecap="round" filter="url(#glow)"/>
+  <line x1="191" y1="400" x2="185" y2="452" stroke="#4dd0e1" stroke-width="7" stroke-linecap="round" filter="url(#glow)"/>
+  <line x1="204" y1="398" x2="205" y2="450" stroke="url(#mop-head)" stroke-width="7" stroke-linecap="round" filter="url(#glow)"/>
+  <line x1="217" y1="395" x2="224" y2="447" stroke="#4dd0e1" stroke-width="7" stroke-linecap="round" filter="url(#glow)"/>
+  <line x1="228" y1="390" x2="243" y2="442" stroke="url(#mop-head)" stroke-width="7" stroke-linecap="round" filter="url(#glow)"/>
+  <!-- Wet shine marks on floor -->
+  <ellipse cx="185" cy="455" rx="60" ry="10" fill="#00e5ff" opacity="0.25"/>
+  <!-- Bubbles from mop -->
+  <circle cx="140" cy="400" r="8" fill="#80deea" opacity="0.5" filter="url(#glow)"/>
+  <circle cx="255" cy="375" r="6" fill="#4dd0e1" opacity="0.4" filter="url(#glow)"/>
+  <circle cx="160" cy="380" r="5" fill="#b2ebf2" opacity="0.5"/>
+  <!-- System circuit nodes -->
+  <circle cx="360" cy="180" r="16" fill="#00e5ff" filter="url(#glow)"/>
+  <circle cx="360" cy="180" r="8" fill="#006064"/>
+  <path d="M360 164 L360 196 M344 180 L376 180" stroke="#80deea" stroke-width="3"/>
+  <path d="M360 180 L312 280" stroke="#00bcd4" stroke-width="2" opacity="0.5" stroke-dasharray="8,4"/>
+  <path d="M310 128 Q345 150 360 180" stroke="#4dd0e1" stroke-width="2" opacity="0.4"/>
+</svg>

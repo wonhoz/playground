@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2A1A0A"/>
+      <stop offset="100%" stop-color="#1A0A00"/>
+    </linearGradient>
+    <linearGradient id="cam" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#D4A843"/>
+      <stop offset="100%" stop-color="#8B6914"/>
+    </linearGradient>
+    <radialGradient id="lens" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#AAAACC"/>
+      <stop offset="40%" stop-color="#334477"/>
+      <stop offset="70%" stop-color="#112244"/>
+      <stop offset="100%" stop-color="#000811"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Camera body -->
+  <rect x="80" y="160" width="352" height="220" rx="20" fill="url(#cam)"/>
+  <rect x="90" y="170" width="332" height="200" rx="16" fill="#B8860B"/>
+  <!-- Viewfinder bump -->
+  <rect x="155" y="130" width="100" height="38" rx="10" fill="url(#cam)"/>
+  <!-- Flash bumps -->
+  <rect x="290" y="135" width="60" height="28" rx="8" fill="#9A7A30"/>
+  <!-- Lens -->
+  <circle cx="256" cy="270" r="90" fill="#222222"/>
+  <circle cx="256" cy="270" r="82" fill="url(#lens)"/>
+  <circle cx="256" cy="270" r="55" fill="#112244"/>
+  <circle cx="256" cy="270" r="40" fill="#000811"/>
+  <circle cx="256" cy="270" r="28" fill="#1A2A44"/>
+  <!-- Lens reflection -->
+  <ellipse cx="240" cy="252" rx="14" ry="10" fill="white" opacity="0.25" transform="rotate(-20, 240, 252)"/>
+  <!-- Mosaic pixel overlay on lens -->
+  <rect x="228" y="250" width="14" height="14" rx="2" fill="#FF6B6B" opacity="0.4"/>
+  <rect x="245" y="250" width="14" height="14" rx="2" fill="#4ECDC4" opacity="0.4"/>
+  <rect x="262" y="250" width="14" height="14" rx="2" fill="#FFEAA7" opacity="0.4"/>
+  <rect x="228" y="266" width="14" height="14" rx="2" fill="#4ECDC4" opacity="0.4"/>
+  <rect x="245" y="266" width="14" height="14" rx="2" fill="#FFEAA7" opacity="0.4"/>
+  <rect x="262" y="266" width="14" height="14" rx="2" fill="#FF6B6B" opacity="0.4"/>
+  <!-- Shutter button -->
+  <circle cx="380" cy="180" r="20" fill="#8B6914"/>
+  <circle cx="380" cy="180" r="14" fill="#D4A843"/>
+  <!-- Knobs -->
+  <circle cx="140" cy="175" r="16" fill="#9A7A30"/>
+  <circle cx="140" cy="175" r="10" fill="#D4A843"/>
+  <!-- Film counter window -->
+  <rect x="95" y="320" width="60" height="40" rx="6" fill="#111111"/>
+  <text x="125" y="347" font-family="monospace" font-size="16" fill="#D4A843" text-anchor="middle">24</text>
+  <!-- Bottom pixel strip -->
+  <rect x="80" y="395" width="36" height="18" rx="3" fill="#FF6B6B"/>
+  <rect x="122" y="395" width="36" height="18" rx="3" fill="#4ECDC4"/>
+  <rect x="164" y="395" width="36" height="18" rx="3" fill="#FFEAA7"/>
+  <rect x="206" y="395" width="36" height="18" rx="3" fill="#DDA0DD"/>
+  <rect x="248" y="395" width="36" height="18" rx="3" fill="#96CEB4"/>
+  <rect x="290" y="395" width="36" height="18" rx="3" fill="#FF6B6B"/>
+  <rect x="332" y="395" width="36" height="18" rx="3" fill="#4ECDC4"/>
+  <rect x="374" y="395" width="36" height="18" rx="3" fill="#FFEAA7"/>
+</svg>

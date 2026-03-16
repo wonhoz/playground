@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#004D40"/>
+      <stop offset="100%" style="stop-color:#00695C"/>
+    </linearGradient>
+    <linearGradient id="areagrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#26A69A" stop-opacity="0.5"/>
+      <stop offset="100%" style="stop-color:#26A69A" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Chart area fill -->
+  <path d="M70,350 L130,300 L190,280 L240,200 L290,240 L340,150 L400,180 L440,120 L440,380 L70,380Z" fill="url(#areagrad)"/>
+  <!-- Chart line -->
+  <polyline points="70,350 130,300 190,280 240,200 290,240 340,150 400,180 440,120" fill="none" stroke="#26A69A" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
+  <!-- Data points -->
+  <circle cx="70" cy="350" r="8" fill="#80CBC4" stroke="#004D40" stroke-width="3"/>
+  <circle cx="130" cy="300" r="8" fill="#80CBC4" stroke="#004D40" stroke-width="3"/>
+  <circle cx="190" cy="280" r="8" fill="#80CBC4" stroke="#004D40" stroke-width="3"/>
+  <circle cx="240" cy="200" r="10" fill="#FFD54F" stroke="#004D40" stroke-width="3"/>
+  <circle cx="290" cy="240" r="8" fill="#80CBC4" stroke="#004D40" stroke-width="3"/>
+  <circle cx="340" cy="150" r="10" fill="#FFD54F" stroke="#004D40" stroke-width="3"/>
+  <circle cx="400" cy="180" r="8" fill="#80CBC4" stroke="#004D40" stroke-width="3"/>
+  <circle cx="440" cy="120" r="10" fill="#FF7043" stroke="#004D40" stroke-width="3"/>
+  <!-- Axes -->
+  <line x1="70" y1="100" x2="70" y2="380" stroke="#80CBC4" stroke-width="2.5" opacity="0.5"/>
+  <line x1="70" y1="380" x2="460" y2="380" stroke="#80CBC4" stroke-width="2.5" opacity="0.5"/>
+  <!-- Git log icon -->
+  <text x="256" y="460" text-anchor="middle" font-family="monospace" font-size="24" fill="#80CBC4">git log --stat</text>
+</svg>

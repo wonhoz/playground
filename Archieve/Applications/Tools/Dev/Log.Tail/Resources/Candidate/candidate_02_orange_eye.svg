@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A0D00"/>
+      <stop offset="100%" stop-color="#2D1800"/>
+    </linearGradient>
+    <radialGradient id="eyeGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FF8C00"/>
+      <stop offset="60%" stop-color="#CC5500"/>
+      <stop offset="100%" stop-color="#883300"/>
+    </radialGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Eye shape (watching / tail) -->
+  <path d="M80 256 Q168 140 256 140 Q344 140 432 256 Q344 372 256 372 Q168 372 80 256 Z" fill="#1A0D00" stroke="#FF8C00" stroke-width="3" filter="url(#glow)"/>
+  <!-- Iris -->
+  <circle cx="256" cy="256" r="72" fill="url(#eyeGrad)" filter="url(#glow)"/>
+  <!-- Pupil -->
+  <circle cx="256" cy="256" r="40" fill="#0A0500"/>
+  <!-- Pupil reflection -->
+  <circle cx="240" cy="240" r="10" fill="#FF8C00" opacity="0.3"/>
+  <!-- Scan line across pupil (tail indicator) -->
+  <line x1="220" y1="256" x2="292" y2="256" stroke="#FF8C00" stroke-width="2" filter="url(#glow)" opacity="0.8"/>
+  <circle cx="292" cy="256" r="5" fill="#FF8C00" filter="url(#glow)"/>
+  <!-- Log lines behind/around the eye -->
+  <rect x="76" y="140" width="100" height="5" rx="2" fill="#FF8C00" opacity="0.2"/>
+  <rect x="76" y="154" width="80" height="5" rx="2" fill="#FF8C00" opacity="0.15"/>
+  <rect x="336" y="140" width="100" height="5" rx="2" fill="#FF8C00" opacity="0.2"/>
+  <rect x="350" y="154" width="80" height="5" rx="2" fill="#FF8C00" opacity="0.15"/>
+  <rect x="76" y="358" width="90" height="5" rx="2" fill="#FF8C00" opacity="0.2"/>
+  <rect x="76" y="372" width="70" height="5" rx="2" fill="#FF8C00" opacity="0.15"/>
+  <rect x="336" y="358" width="100" height="5" rx="2" fill="#FF8C00" opacity="0.2"/>
+  <rect x="348" y="372" width="80" height="5" rx="2" fill="#FF8C00" opacity="0.15"/>
+  <!-- Log stream below eye -->
+  <rect x="80" y="404" width="352" height="7" rx="3" fill="#FF8C00" opacity="0.15"/>
+  <rect x="80" y="418" width="320" height="7" rx="3" fill="#FF8C00" opacity="0.12"/>
+  <rect x="80" y="432" width="340" height="7" rx="3" fill="#FF8C00" opacity="0.1"/>
+  <!-- Animated tail pointer -->
+  <path d="M420 432 L460 440 L420 448" fill="#FF8C00" filter="url(#glow)" opacity="0.7"/>
+  <!-- Title -->
+  <text x="256" y="470" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#FF8C00" font-weight="600" filter="url(#glow)" opacity="0.8">LOG.TAIL</text>
+</svg>

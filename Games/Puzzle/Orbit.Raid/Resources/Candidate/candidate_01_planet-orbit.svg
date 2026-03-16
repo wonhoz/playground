@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#050510"/>
+      <stop offset="100%" stop-color="#010108"/>
+    </linearGradient>
+    <radialGradient id="planet" cx="40%" cy="35%" r="60%">
+      <stop offset="0%" stop-color="#4466ff"/>
+      <stop offset="100%" stop-color="#001188"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="#050510"/>
+  <!-- Stars -->
+  <circle cx="80" cy="80" r="1.5" fill="white" opacity="0.6"/>
+  <circle cx="420" cy="60" r="2" fill="white" opacity="0.5"/>
+  <circle cx="460" cy="180" r="1" fill="white" opacity="0.7"/>
+  <circle cx="60" cy="380" r="1.5" fill="white" opacity="0.5"/>
+  <circle cx="440" cy="400" r="2" fill="white" opacity="0.6"/>
+  <circle cx="130" cy="450" r="1" fill="white" opacity="0.4"/>
+  <!-- Orbit rings -->
+  <ellipse cx="256" cy="256" rx="180" ry="60" fill="none" stroke="#334466" stroke-width="1.5"/>
+  <ellipse cx="256" cy="256" rx="120" ry="40" fill="none" stroke="#334466" stroke-width="1.5" opacity="0.7"/>
+  <!-- Planet -->
+  <circle cx="256" cy="256" r="70" fill="url(#planet)"/>
+  <!-- Planet surface detail -->
+  <path d="M210,236 Q256,225 300,240" fill="none" stroke="#2244aa" stroke-width="4" opacity="0.6"/>
+  <path d="M200,260 Q256,250 312,265" fill="none" stroke="#2244aa" stroke-width="3" opacity="0.4"/>
+  <!-- Raiding spaceships on orbit -->
+  <polygon points="380,196 370,210 390,210" fill="#ff4444"/>
+  <polygon points="148,290 138,276 158,276" fill="#ff6644" transform="rotate(180 148 283)"/>
+  <!-- Attack lines -->
+  <line x1="380" y1="205" x2="315" y2="230" stroke="#ff4444" stroke-width="2" stroke-dasharray="6,4" opacity="0.7"/>
+  <line x1="148" y1="283" x2="200" y2="258" stroke="#ff6644" stroke-width="2" stroke-dasharray="6,4" opacity="0.7"/>
+  <text x="256" y="420" text-anchor="middle" font-family="monospace" font-size="28" font-weight="bold" fill="#4466ff">ORBIT.RAID</text>
+</svg>

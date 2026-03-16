@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a0033"/>
+      <stop offset="100%" stop-color="#330066"/>
+    </linearGradient>
+    <linearGradient id="plug" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#dddddd"/>
+      <stop offset="100%" stop-color="#aaaaaa"/>
+    </linearGradient>
+    <filter id="spark">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Left plug -->
+  <rect x="80" y="200" width="130" height="112" rx="16" fill="url(#plug)"/>
+  <rect x="110" y="170" width="22" height="40" rx="6" fill="#aaaaaa"/>
+  <rect x="148" y="170" width="22" height="40" rx="6" fill="#aaaaaa"/>
+  <!-- Right socket -->
+  <rect x="302" y="200" width="130" height="112" rx="16" fill="#2a0055" stroke="#9900ff" stroke-width="4"/>
+  <rect x="332" y="220" width="22" height="40" rx="4" fill="#110033"/>
+  <rect x="370" y="220" width="22" height="40" rx="4" fill="#110033"/>
+  <!-- GAP - disconnected -->
+  <line x1="210" y1="256" x2="250" y2="256" stroke="#444" stroke-width="6" stroke-dasharray="8 6"/>
+  <line x1="262" y1="256" x2="302" y2="256" stroke="#444" stroke-width="6" stroke-dasharray="8 6"/>
+  <!-- Sparks at gap -->
+  <polygon points="248,238 262,248 252,252 268,270 252,258 258,254" fill="#ffcc00" filter="url(#spark)"/>
+  <polygon points="264,274 250,264 260,260 244,242 260,254 254,258" fill="#ff8800" filter="url(#spark)"/>
+  <!-- Electricity arcs -->
+  <path d="M245,245 Q252,256 245,267" fill="none" stroke="#00aaff" stroke-width="2" opacity="0.6" filter="url(#spark)"/>
+  <path d="M267,245 Q260,256 267,267" fill="none" stroke="#00aaff" stroke-width="2" opacity="0.6" filter="url(#spark)"/>
+  <!-- Glow effect at gap -->
+  <circle cx="256" cy="256" r="30" fill="#ffcc00" opacity="0.1" filter="url(#spark)"/>
+  <!-- Decorative circuit lines -->
+  <line x1="80" y1="360" x2="432" y2="360" stroke="#9900ff" stroke-width="2" opacity="0.4"/>
+  <circle cx="100" cy="360" r="6" fill="#9900ff" opacity="0.6"/>
+  <circle cx="412" cy="360" r="6" fill="#9900ff" opacity="0.6"/>
+  <circle cx="256" cy="360" r="8" fill="#ff00ff" opacity="0.7"/>
+</svg>

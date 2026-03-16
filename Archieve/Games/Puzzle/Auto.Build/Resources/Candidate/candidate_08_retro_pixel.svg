@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f0f23"/>
+      <stop offset="100%" stop-color="#1a1a3a"/>
+    </linearGradient>
+    <linearGradient id="px1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#8888FF"/>
+      <stop offset="100%" stop-color="#4444AA"/>
+    </linearGradient>
+    <linearGradient id="px2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FF8888"/>
+      <stop offset="100%" stop-color="#AA4444"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Pixel building - 16px grid style -->
+  <!-- Base row -->
+  <rect x="96" y="384" width="48" height="48" fill="url(#px1)"/>
+  <rect x="144" y="384" width="48" height="48" fill="url(#px2)"/>
+  <rect x="192" y="384" width="48" height="48" fill="url(#px1)"/>
+  <rect x="240" y="384" width="48" height="48" fill="url(#px2)"/>
+  <rect x="288" y="384" width="48" height="48" fill="url(#px1)"/>
+  <rect x="336" y="384" width="48" height="48" fill="url(#px2)"/>
+  <rect x="384" y="384" width="48" height="48" fill="url(#px1)"/>
+  <!-- Row 2 -->
+  <rect x="144" y="336" width="48" height="48" fill="url(#px1)"/>
+  <rect x="192" y="336" width="48" height="48" fill="url(#px2)"/>
+  <rect x="240" y="336" width="48" height="48" fill="url(#px1)"/>
+  <rect x="288" y="336" width="48" height="48" fill="url(#px2)"/>
+  <rect x="336" y="336" width="48" height="48" fill="url(#px1)"/>
+  <!-- Row 3 -->
+  <rect x="192" y="288" width="48" height="48" fill="url(#px2)"/>
+  <rect x="240" y="288" width="48" height="48" fill="url(#px1)"/>
+  <rect x="288" y="288" width="48" height="48" fill="url(#px2)"/>
+  <!-- Row 4 -->
+  <rect x="240" y="240" width="48" height="48" fill="url(#px1)"/>
+  <rect x="288" y="240" width="48" height="48" fill="url(#px2)"/>
+  <!-- Top pixel -->
+  <rect x="240" y="192" width="48" height="48" fill="url(#px2)"/>
+  <!-- Pixel grid lines -->
+  <line x1="96" y1="96" x2="432" y2="96" stroke="#8888FF" stroke-width="1" opacity="0.1"/>
+  <line x1="96" y1="144" x2="432" y2="144" stroke="#8888FF" stroke-width="1" opacity="0.1"/>
+  <!-- Star score effect -->
+  <circle cx="130" cy="140" r="5" fill="#FFFF88" opacity="0.8"/>
+  <circle cx="400" cy="110" r="4" fill="#FFFF88" opacity="0.6"/>
+  <circle cx="160" cy="200" r="3" fill="#FFFF88" opacity="0.5"/>
+</svg>

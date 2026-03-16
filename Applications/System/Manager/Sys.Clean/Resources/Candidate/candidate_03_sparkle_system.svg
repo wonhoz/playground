@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" style="stop-color:#0a1628"/>
+      <stop offset="100%" style="stop-color:#001f3f"/>
+    </radialGradient>
+    <linearGradient id="gear" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#26c6da"/>
+      <stop offset="100%" style="stop-color:#00838f"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="sparkle-glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Gear shape -->
+  <path d="M256 140 L270 170 L302 165 L290 193 L318 208 L304 234 L332 256 L304 278 L318 304 L290 319 L302 347 L270 342 L256 372 L242 342 L210 347 L222 319 L194 304 L208 278 L180 256 L208 234 L194 208 L222 193 L210 165 L242 170 Z" fill="url(#gear)" filter="url(#glow)" opacity="0.9"/>
+  <!-- Inner circle -->
+  <circle cx="256" cy="256" r="60" fill="#001f3f"/>
+  <circle cx="256" cy="256" r="55" fill="url(#gear)" opacity="0.3"/>
+  <!-- Sparkle stars -->
+  <path d="M256 210 L260 224 L275 224 L263 232 L267 246 L256 238 L245 246 L249 232 L237 224 L252 224 Z" fill="#ffffff" filter="url(#sparkle-glow)" opacity="0.95"/>
+  <!-- Multi sparkles around -->
+  <path d="M160 180 L163 190 L174 190 L165 197 L168 207 L160 200 L152 207 L155 197 L146 190 L157 190 Z" fill="#80deea" filter="url(#sparkle-glow)"/>
+  <path d="M350 170 L353 180 L364 180 L355 187 L358 197 L350 190 L342 197 L345 187 L336 180 L347 180 Z" fill="#e0f7fa" filter="url(#sparkle-glow)"/>
+  <path d="M380 320 L382 327 L390 327 L384 332 L386 340 L380 335 L374 340 L376 332 L370 327 L378 327 Z" fill="#80deea" filter="url(#sparkle-glow)"/>
+  <path d="M130 340 L132 348 L141 348 L134 353 L137 362 L130 357 L123 362 L126 353 L119 348 L128 348 Z" fill="#b2ebf2" filter="url(#sparkle-glow)"/>
+  <!-- Clean shine lines -->
+  <line x1="256" y1="90" x2="256" y2="140" stroke="#26c6da" stroke-width="3" opacity="0.5"/>
+  <line x1="256" y1="372" x2="256" y2="422" stroke="#26c6da" stroke-width="3" opacity="0.5"/>
+  <line x1="90" y1="256" x2="140" y2="256" stroke="#26c6da" stroke-width="3" opacity="0.5"/>
+  <line x1="372" y1="256" x2="422" y2="256" stroke="#26c6da" stroke-width="3" opacity="0.5"/>
+  <!-- Glow ring -->
+  <circle cx="256" cy="256" r="110" fill="none" stroke="#26c6da" stroke-width="2" opacity="0.3" stroke-dasharray="15,10"/>
+</svg>

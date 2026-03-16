@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#141428"/>
+      <stop offset="100%" stop-color="#1E1E38"/>
+    </linearGradient>
+    <linearGradient id="area" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FF416C" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#FF416C" stop-opacity="0.05"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Axes -->
+  <line x1="70" y1="380" x2="450" y2="380" stroke="#333" stroke-width="2"/>
+  <line x1="70" y1="100" x2="70" y2="380" stroke="#333" stroke-width="2"/>
+  <!-- Grid -->
+  <line x1="70" y1="300" x2="450" y2="300" stroke="#222" stroke-width="1"/>
+  <line x1="70" y1="220" x2="450" y2="220" stroke="#222" stroke-width="1"/>
+  <line x1="70" y1="140" x2="450" y2="140" stroke="#222" stroke-width="1"/>
+  <!-- Area chart for event frequency -->
+  <path d="M70,380 L70,360 L118,340 L166,300 L214,250 L262,180 L310,220 L358,160 L406,200 L450,170 L450,380 Z" fill="url(#area)"/>
+  <path d="M70,360 L118,340 L166,300 L214,250 L262,180 L310,220 L358,160 L406,200 L450,170" fill="none" stroke="#FF416C" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Data points -->
+  <circle cx="262" cy="180" r="6" fill="#FF416C" stroke="#FFF" stroke-width="2"/>
+  <circle cx="358" cy="160" r="6" fill="#FF416C" stroke="#FFF" stroke-width="2"/>
+  <!-- Spike annotation -->
+  <line x1="262" y1="180" x2="262" y2="140" stroke="#FFD700" stroke-width="1.5" stroke-dasharray="4 3"/>
+  <rect x="222" y="118" width="80" height="24" rx="5" fill="#333"/>
+  <text x="262" y="134" text-anchor="middle" font-family="Segoe UI" font-size="13" fill="#FFD700">SPIKE</text>
+  <!-- Y axis labels -->
+  <text x="58" y="383" text-anchor="end" font-family="Segoe UI" font-size="13" fill="#555">0</text>
+  <text x="58" y="303" text-anchor="end" font-family="Segoe UI" font-size="13" fill="#555">25</text>
+  <text x="58" y="223" text-anchor="end" font-family="Segoe UI" font-size="13" fill="#555">50</text>
+  <text x="58" y="143" text-anchor="end" font-family="Segoe UI" font-size="13" fill="#555">75</text>
+  <!-- X axis labels -->
+  <text x="70" y="400" text-anchor="middle" font-family="Segoe UI" font-size="13" fill="#555">00h</text>
+  <text x="166" y="400" text-anchor="middle" font-family="Segoe UI" font-size="13" fill="#555">06h</text>
+  <text x="262" y="400" text-anchor="middle" font-family="Segoe UI" font-size="13" fill="#555">12h</text>
+  <text x="358" y="400" text-anchor="middle" font-family="Segoe UI" font-size="13" fill="#555">18h</text>
+  <text x="450" y="400" text-anchor="middle" font-family="Segoe UI" font-size="13" fill="#555">24h</text>
+  <!-- Title -->
+  <text x="256" y="455" text-anchor="middle" font-family="Segoe UI" font-size="22" font-weight="700" fill="#FF416C" opacity="0.8">EVENT FREQUENCY / 24H</text>
+</svg>

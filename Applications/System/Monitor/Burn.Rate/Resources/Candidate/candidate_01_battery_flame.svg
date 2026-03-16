@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A0A00"/>
+      <stop offset="100%" stop-color="#2D1000"/>
+    </linearGradient>
+    <linearGradient id="bat" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FF4500"/>
+      <stop offset="60%" stop-color="#FF8C00"/>
+      <stop offset="100%" stop-color="#FFD700"/>
+    </linearGradient>
+    <linearGradient id="flame" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#FF4500"/>
+      <stop offset="50%" stop-color="#FF8C00"/>
+      <stop offset="100%" stop-color="#FFD700"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Battery body -->
+  <rect x="80" y="180" width="320" height="140" rx="14" fill="#1A1A1A" stroke="#444" stroke-width="3"/>
+  <!-- Battery terminal -->
+  <rect x="400" y="215" width="30" height="70" rx="6" fill="#333"/>
+  <!-- Battery fill (burn rate) -->
+  <rect x="90" y="190" width="200" height="120" rx="8" fill="url(#bat)"/>
+  <!-- Flame on battery -->
+  <path d="M220 180 C195 155 185 130 198 108 C204 95 215 90 224 80 C218 100 228 110 240 98 C252 110 262 100 256 80 C265 90 276 95 282 108 C295 130 285 155 260 180 Z" fill="url(#flame)"/>
+  <path d="M240 175 C225 158 220 140 228 122 C234 112 240 118 240 118 C240 118 246 112 252 122 C260 140 255 158 240 175 Z" fill="#FFFACD"/>
+  <!-- Percentage text -->
+  <text x="190" y="263" font-family="Arial" font-size="36" font-weight="bold" fill="white" text-anchor="middle">28%</text>
+  <!-- Title -->
+  <text x="256" y="460" font-family="Arial" font-size="26" font-weight="bold" fill="#FF8C00" text-anchor="middle">Burn.Rate</text>
+</svg>

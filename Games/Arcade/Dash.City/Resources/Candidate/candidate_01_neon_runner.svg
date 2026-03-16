@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0a0a1a"/>
+      <stop offset="100%" stop-color="#1a0a2e"/>
+    </linearGradient>
+    <linearGradient id="road" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#222244"/>
+      <stop offset="100%" stop-color="#111122"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Road -->
+  <rect x="60" y="300" width="392" height="120" rx="4" fill="url(#road)"/>
+  <!-- Road lines -->
+  <rect x="100" y="352" width="60" height="12" rx="4" fill="#ffcc00" opacity="0.8"/>
+  <rect x="226" y="352" width="60" height="12" rx="4" fill="#ffcc00" opacity="0.8"/>
+  <rect x="352" y="352" width="60" height="12" rx="4" fill="#ffcc00" opacity="0.8"/>
+  <!-- Buildings -->
+  <rect x="60" y="160" width="70" height="140" rx="4" fill="#1a1a3a"/>
+  <rect x="80" y="180" width="12" height="12" fill="#00ffff" opacity="0.7" filter="url(#glow)"/>
+  <rect x="100" y="180" width="12" height="12" fill="#00ffff" opacity="0.4"/>
+  <rect x="80" y="210" width="12" height="12" fill="#ff00ff" opacity="0.6"/>
+  <rect x="100" y="210" width="12" height="12" fill="#ff00ff" opacity="0.8" filter="url(#glow)"/>
+  <rect x="80" y="240" width="12" height="12" fill="#00ffff" opacity="0.5"/>
+  <rect x="100" y="240" width="12" height="12" fill="#ffcc00" opacity="0.7"/>
+
+  <rect x="150" y="110" width="80" height="190" rx="4" fill="#161630"/>
+  <rect x="168" y="130" width="14" height="14" fill="#ff6600" opacity="0.8" filter="url(#glow)"/>
+  <rect x="196" y="130" width="14" height="14" fill="#ff6600" opacity="0.5"/>
+  <rect x="168" y="158" width="14" height="14" fill="#00ffff" opacity="0.7"/>
+  <rect x="196" y="158" width="14" height="14" fill="#00ffff" opacity="0.4"/>
+  <rect x="168" y="186" width="14" height="14" fill="#ff00ff" opacity="0.6"/>
+  <rect x="196" y="186" width="14" height="14" fill="#ff6600" opacity="0.9" filter="url(#glow)"/>
+  <rect x="168" y="214" width="14" height="14" fill="#ffcc00" opacity="0.5"/>
+  <rect x="196" y="214" width="14" height="14" fill="#00ffff" opacity="0.7"/>
+  <rect x="168" y="242" width="14" height="14" fill="#ff6600" opacity="0.4"/>
+  <rect x="196" y="242" width="14" height="14" fill="#ff00ff" opacity="0.6"/>
+
+  <rect x="250" y="80" width="90" height="220" rx="4" fill="#0e0e28"/>
+  <rect x="268" y="100" width="14" height="14" fill="#00ffff" opacity="0.9" filter="url(#glow)"/>
+  <rect x="306" y="100" width="14" height="14" fill="#00ffff" opacity="0.5"/>
+  <rect x="268" y="128" width="14" height="14" fill="#ff00ff" opacity="0.7"/>
+  <rect x="306" y="128" width="14" height="14" fill="#ff6600" opacity="0.8" filter="url(#glow)"/>
+  <rect x="268" y="156" width="14" height="14" fill="#ffcc00" opacity="0.6"/>
+  <rect x="306" y="156" width="14" height="14" fill="#00ffff" opacity="0.4"/>
+  <rect x="268" y="184" width="14" height="14" fill="#ff6600" opacity="0.7"/>
+  <rect x="306" y="184" width="14" height="14" fill="#ff00ff" opacity="0.9" filter="url(#glow)"/>
+  <rect x="268" y="212" width="14" height="14" fill="#00ffff" opacity="0.5"/>
+  <rect x="306" y="212" width="14" height="14" fill="#ffcc00" opacity="0.7"/>
+  <rect x="268" y="240" width="14" height="14" fill="#ff00ff" opacity="0.6"/>
+  <rect x="306" y="240" width="14" height="14" fill="#ff6600" opacity="0.4"/>
+
+  <rect x="360" y="130" width="75" height="170" rx="4" fill="#141428"/>
+  <rect x="376" y="150" width="13" height="13" fill="#ff00ff" opacity="0.8" filter="url(#glow)"/>
+  <rect x="404" y="150" width="13" height="13" fill="#00ffff" opacity="0.5"/>
+  <rect x="376" y="178" width="13" height="13" fill="#ffcc00" opacity="0.7"/>
+  <rect x="404" y="178" width="13" height="13" fill="#ff6600" opacity="0.6"/>
+  <rect x="376" y="206" width="13" height="13" fill="#00ffff" opacity="0.4"/>
+  <rect x="404" y="206" width="13" height="13" fill="#ff00ff" opacity="0.8" filter="url(#glow)"/>
+  <rect x="376" y="234" width="13" height="13" fill="#ff6600" opacity="0.9"/>
+  <rect x="404" y="234" width="13" height="13" fill="#ffcc00" opacity="0.5"/>
+
+  <!-- Runner (silhouette) -->
+  <ellipse cx="200" cy="278" rx="16" ry="16" fill="#ff6600" filter="url(#glow)"/>
+  <rect x="190" y="290" width="20" height="30" rx="6" fill="#ff6600"/>
+  <line x1="190" y1="310" x2="175" y2="328" stroke="#ff6600" stroke-width="8" stroke-linecap="round"/>
+  <line x1="210" y1="310" x2="218" y2="330" stroke="#ff6600" stroke-width="8" stroke-linecap="round"/>
+  <line x1="198" y1="320" x2="188" y2="342" stroke="#ff6600" stroke-width="8" stroke-linecap="round"/>
+  <line x1="202" y1="320" x2="215" y2="340" stroke="#ff6600" stroke-width="8" stroke-linecap="round"/>
+
+  <!-- Speed lines -->
+  <line x1="60" y1="275" x2="160" y2="275" stroke="#00ffff" stroke-width="3" opacity="0.6" stroke-dasharray="20,10"/>
+  <line x1="60" y1="265" x2="140" y2="265" stroke="#ff00ff" stroke-width="2" opacity="0.4" stroke-dasharray="15,8"/>
+  <line x1="60" y1="285" x2="150" y2="285" stroke="#ff6600" stroke-width="2" opacity="0.5" stroke-dasharray="18,9"/>
+
+  <!-- Title -->
+  <text x="256" y="460" font-family="Arial Black, sans-serif" font-size="42" font-weight="900" fill="#00ffff" text-anchor="middle" filter="url(#glow)" letter-spacing="4">DASH</text>
+  <text x="256" y="498" font-family="Arial Black, sans-serif" font-size="28" font-weight="700" fill="#ff6600" text-anchor="middle" letter-spacing="6">CITY</text>
+</svg>

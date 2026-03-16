@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0a0a"/>
+      <stop offset="100%" stop-color="#111122"/>
+    </linearGradient>
+    <linearGradient id="wave" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00ff41" stop-opacity="0"/>
+      <stop offset="20%" stop-color="#00ff41" stop-opacity="1"/>
+      <stop offset="80%" stop-color="#00ff41" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#00ff41" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Grid lines (oscilloscope) -->
+  <line x1="80" y1="180" x2="432" y2="180" stroke="#1a2a1a" stroke-width="1"/>
+  <line x1="80" y1="220" x2="432" y2="220" stroke="#1a2a1a" stroke-width="1"/>
+  <line x1="80" y1="256" x2="432" y2="256" stroke="#2a3a2a" stroke-width="1.5"/>
+  <line x1="80" y1="292" x2="432" y2="292" stroke="#1a2a1a" stroke-width="1"/>
+  <line x1="80" y1="332" x2="432" y2="332" stroke="#1a2a1a" stroke-width="1"/>
+  <line x1="160" y1="160" x2="160" y2="352" stroke="#1a2a1a" stroke-width="1"/>
+  <line x1="240" y1="160" x2="240" y2="352" stroke="#1a2a1a" stroke-width="1"/>
+  <line x1="320" y1="160" x2="320" y2="352" stroke="#1a2a1a" stroke-width="1"/>
+  <line x1="400" y1="160" x2="400" y2="352" stroke="#1a2a1a" stroke-width="1"/>
+  <!-- Network heartbeat/pulse wave -->
+  <polyline points="80,256 120,256 130,180 145,330 160,256 200,256 210,200 220,310 235,256 280,256 290,170 305,340 320,256 360,256 370,210 385,300 400,256 432,256" fill="none" stroke="url(#wave)" stroke-width="3" stroke-linejoin="round"/>
+  <!-- Alert spike (port anomaly) -->
+  <polyline points="280,256 290,140 295,370 300,256" fill="none" stroke="#ff4444" stroke-width="3"/>
+  <circle cx="290" cy="140" r="5" fill="#ff4444"/>
+  <!-- Labels -->
+  <text x="100" y="155" font-family="monospace" font-size="13" fill="#00ff41" opacity="0.8">PORT ACTIVITY</text>
+  <text x="256" y="395" text-anchor="middle" font-family="monospace" font-size="11" fill="#00ff41" opacity="0.6">TIME →</text>
+  <text x="70" y="260" text-anchor="end" font-family="monospace" font-size="11" fill="#00ff41" opacity="0.6">0</text>
+  <!-- Anomaly label -->
+  <text x="295" y="130" font-family="monospace" font-size="11" fill="#ff4444">:3389</text>
+  <text x="295" y="145" font-family="monospace" font-size="10" fill="#ff4444">ALERT</text>
+  <!-- Y-axis -->
+  <line x1="80" y1="155" x2="80" y2="355" stroke="#00ff41" stroke-width="2" opacity="0.4"/>
+  <!-- X-axis -->
+  <line x1="78" y1="256" x2="434" y2="256" stroke="#00ff41" stroke-width="1.5" opacity="0.4"/>
+</svg>

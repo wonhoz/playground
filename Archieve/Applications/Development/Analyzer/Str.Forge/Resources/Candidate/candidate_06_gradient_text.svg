@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0E0E28"/>
+      <stop offset="100%" stop-color="#1A1040"/>
+    </linearGradient>
+    <linearGradient id="title_grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FF6B6B"/>
+      <stop offset="33%" stop-color="#FFD93D"/>
+      <stop offset="66%" stop-color="#6BCB77"/>
+      <stop offset="100%" stop-color="#4D96FF"/>
+    </linearGradient>
+    <linearGradient id="pipe" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#4D96FF"/>
+      <stop offset="100%" stop-color="#FF6B6B"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Giant stylized text -->
+  <text x="256" y="180" font-family="'Segoe UI', sans-serif" font-size="96" fill="url(#title_grad)" text-anchor="middle" font-weight="900" filter="url(#glow)" opacity="0.95">STR</text>
+  <!-- Underline/accent -->
+  <rect x="100" y="192" width="312" height="4" rx="2" fill="url(#title_grad)" filter="url(#glow)" opacity="0.8"/>
+  <!-- Forge text -->
+  <text x="256" y="240" font-family="'Segoe UI', sans-serif" font-size="36" fill="#AAAACC" text-anchor="middle" letter-spacing="12">FORGE</text>
+  <!-- Pipeline visualization -->
+  <rect x="68" y="290" width="88" height="36" rx="8" fill="#1A1A38" stroke="#4D96FF" stroke-width="1.5"/>
+  <text x="112" y="312" font-family="monospace" font-size="12" fill="#4D96FF" text-anchor="middle">Input</text>
+  <line x1="156" y1="308" x2="184" y2="308" stroke="url(#pipe)" stroke-width="2.5" marker-end="url(#arrowhead2)"/>
+  <rect x="184" y="290" width="88" height="36" rx="8" fill="#1A1A38" stroke="#FFD93D" stroke-width="1.5"/>
+  <text x="228" y="312" font-family="monospace" font-size="12" fill="#FFD93D" text-anchor="middle">Process</text>
+  <line x1="272" y1="308" x2="300" y2="308" stroke="url(#pipe)" stroke-width="2.5"/>
+  <polygon points="300,302 312,308 300,314" fill="#6BCB77"/>
+  <rect x="300" y="290" width="88" height="36" rx="8" fill="#1A1A38" stroke="#6BCB77" stroke-width="1.5"/>
+  <text x="344" y="312" font-family="monospace" font-size="12" fill="#6BCB77" text-anchor="middle">Output</text>
+  <!-- Feature tags -->
+  <rect x="80" y="356" width="80" height="24" rx="12" fill="#4D96FF" opacity="0.2" stroke="#4D96FF" stroke-width="1"/>
+  <text x="120" y="372" font-family="monospace" font-size="11" fill="#4D96FF" text-anchor="middle">Regex</text>
+  <rect x="174" y="356" width="80" height="24" rx="12" fill="#FF6B6B" opacity="0.2" stroke="#FF6B6B" stroke-width="1"/>
+  <text x="214" y="372" font-family="monospace" font-size="11" fill="#FF6B6B" text-anchor="middle">Encode</text>
+  <rect x="268" y="356" width="80" height="24" rx="12" fill="#FFD93D" opacity="0.2" stroke="#FFD93D" stroke-width="1"/>
+  <text x="308" y="372" font-family="monospace" font-size="11" fill="#FFD93D" text-anchor="middle">Hash</text>
+  <rect x="362" y="356" width="80" height="24" rx="12" fill="#6BCB77" opacity="0.2" stroke="#6BCB77" stroke-width="1"/>
+  <text x="402" y="372" font-family="monospace" font-size="11" fill="#6BCB77" text-anchor="middle">Format</text>
+  <!-- Decorative dots -->
+  <circle cx="80" cy="440" r="4" fill="#4D96FF" opacity="0.5"/>
+  <circle cx="160" cy="440" r="4" fill="#FF6B6B" opacity="0.5"/>
+  <circle cx="240" cy="440" r="4" fill="#FFD93D" opacity="0.5"/>
+  <circle cx="320" cy="440" r="4" fill="#6BCB77" opacity="0.5"/>
+  <circle cx="400" cy="440" r="4" fill="#AA88FF" opacity="0.5"/>
+</svg>

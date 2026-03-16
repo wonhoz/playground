@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#e96c1f"/>
+      <stop offset="100%" style="stop-color:#1a1a2e"/>
+    </linearGradient>
+    <linearGradient id="check" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#43e97b"/>
+      <stop offset="100%" style="stop-color:#38f9d7"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Clipboard -->
+  <rect x="80" y="100" width="352" height="380" rx="16" fill="white" opacity="0.1" stroke="white" stroke-width="3"/>
+  <rect x="190" y="80" width="132" height="44" rx="22" fill="white" opacity="0.8"/>
+  <!-- Check items -->
+  <!-- Item 1: checked -->
+  <rect x="108" y="168" width="28" height="28" rx="6" fill="url(#check)"/>
+  <path d="M115 182 L122 190 L132 174" stroke="white" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="152" y="172" width="180" height="16" rx="8" fill="white" opacity="0.8"/>
+  <!-- Item 2: checked -->
+  <rect x="108" y="218" width="28" height="28" rx="6" fill="url(#check)"/>
+  <path d="M115 232 L122 240 L132 224" stroke="white" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="152" y="222" width="220" height="16" rx="8" fill="white" opacity="0.8"/>
+  <!-- Item 3: warning -->
+  <rect x="108" y="268" width="28" height="28" rx="6" fill="#ffd200"/>
+  <text x="122" y="287" font-family="monospace" font-size="18" text-anchor="middle" fill="#1a1a1a" font-weight="bold">!</text>
+  <rect x="152" y="272" width="200" height="16" rx="8" fill="#ffd200" opacity="0.7"/>
+  <!-- Item 4: locked -->
+  <rect x="108" y="318" width="28" height="28" rx="6" fill="#e96c1f"/>
+  <circle cx="122" cy="326" r="7" stroke="white" stroke-width="3" fill="none"/>
+  <rect x="118" y="330" width="8" height="8" rx="2" fill="white"/>
+  <rect x="152" y="322" width="160" height="16" rx="8" fill="white" opacity="0.5"/>
+  <!-- Item 5: locked -->
+  <rect x="108" y="368" width="28" height="28" rx="6" fill="#e96c1f"/>
+  <circle cx="122" cy="376" r="7" stroke="white" stroke-width="3" fill="none"/>
+  <rect x="118" y="380" width="8" height="8" rx="2" fill="white"/>
+  <rect x="152" y="372" width="190" height="16" rx="8" fill="white" opacity="0.5"/>
+  <!-- Shield checkmark at bottom -->
+  <path d="M256 430 L300 448 L300 470 C300 488 280 498 256 506 C232 498 212 488 212 470 L212 448 Z" fill="url(#check)" opacity="0.4"/>
+  <path d="M240 468 L252 480 L272 458" stroke="white" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

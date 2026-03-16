@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0C0C00"/>
+      <stop offset="100%" stop-color="#1A1200"/>
+    </linearGradient>
+    <radialGradient id="starCore" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="30%" stop-color="#FFEE44"/>
+      <stop offset="70%" stop-color="#FF8800"/>
+      <stop offset="100%" stop-color="#FF2200" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="ship" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#886622"/>
+      <stop offset="100%" stop-color="#FFDD88"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="6" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Star field gold tint -->
+  <circle cx="90" cy="90" r="1.5" fill="#FFD700" opacity="0.7"/>
+  <circle cx="430" cy="70" r="2" fill="#FFD700" opacity="0.6"/>
+  <circle cx="460" cy="280" r="1" fill="white" opacity="0.6"/>
+  <circle cx="50" cy="380" r="1.5" fill="#FFD700" opacity="0.5"/>
+  <circle cx="380" cy="460" r="1" fill="white" opacity="0.5"/>
+  <!-- Giant star burst -->
+  <circle cx="256" cy="200" r="80" fill="url(#starCore)" opacity="0.8" filter="url(#glow)"/>
+  <!-- 8-point star -->
+  <polygon points="256,100 268,170 320,140 288,192 360,200 288,208 320,260 268,228 256,300 244,228 192,260 224,208 152,200 224,192 192,140 244,170" fill="#FFDD00" filter="url(#glow)" opacity="0.9"/>
+  <!-- Ship below -->
+  <g transform="translate(256, 380)">
+    <polygon points="0,-50 -22,14 0,-6 22,14" fill="url(#ship)"/>
+    <polygon points="-22,14 -60,38 -36,18 0,-4" fill="#CC9944"/>
+    <polygon points="22,14 60,38 36,18 0,-4" fill="#CC9944"/>
+    <ellipse cx="-12" cy="18" rx="7" ry="11" fill="#FF8800" filter="url(#glow)" opacity="0.9"/>
+    <ellipse cx="12" cy="18" rx="7" ry="11" fill="#FF8800" filter="url(#glow)" opacity="0.9"/>
+    <!-- Cockpit -->
+    <ellipse cx="0" cy="-26" rx="9" ry="14" fill="#FFEE99" opacity="0.9"/>
+  </g>
+  <!-- Laser beam -->
+  <rect x="251" y="294" width="10" height="56" rx="5" fill="#FFDD00" filter="url(#glow)"/>
+  <rect x="252" y="294" width="8" height="56" rx="4" fill="white" opacity="0.7"/>
+  <!-- Smaller enemy stars -->
+  <polygon points="130,150 134,160 146,160 136,168 140,180 130,172 120,180 124,168 114,160 126,160" fill="#FF6600" opacity="0.8" filter="url(#glow)"/>
+  <polygon points="400,170 403,180 414,180 406,186 409,197 400,191 391,197 394,186 386,180 397,180" fill="#FF4400" opacity="0.7" filter="url(#glow)"/>
+  <!-- Score multiplier UI hint -->
+  <text x="256" y="490" font-family="'Segoe UI', sans-serif" font-size="16" fill="#FFD700" text-anchor="middle" opacity="0.7" letter-spacing="4">STAR STRIKE</text>
+</svg>

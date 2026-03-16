@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0d0d1a"/>
+      <stop offset="100%" stop-color="#1a1a2e"/>
+    </linearGradient>
+    <linearGradient id="n1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ee0979"/>
+      <stop offset="100%" stop-color="#ff6a00"/>
+    </linearGradient>
+    <linearGradient id="n2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#56CCF2"/>
+      <stop offset="100%" stop-color="#2F80ED"/>
+    </linearGradient>
+    <linearGradient id="n3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#56ab2f"/>
+      <stop offset="100%" stop-color="#a8e063"/>
+    </linearGradient>
+    <linearGradient id="n4" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f7971e"/>
+      <stop offset="100%" stop-color="#ffd200"/>
+    </linearGradient>
+    <linearGradient id="n5" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8E54E9"/>
+      <stop offset="100%" stop-color="#4776E6"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+
+  <!-- Connection lines first (behind nodes) -->
+  <!-- Source to node1 -->
+  <line x1="110" y1="256" x2="190" y2="170" stroke="#ee0979" stroke-width="3" opacity="0.5"/>
+  <!-- Source to node2 -->
+  <line x1="110" y1="256" x2="190" y2="256" stroke="#56CCF2" stroke-width="3" opacity="0.5"/>
+  <!-- Source to node3 -->
+  <line x1="110" y1="256" x2="190" y2="342" stroke="#56ab2f" stroke-width="3" opacity="0.5"/>
+  <!-- Node1 to hub -->
+  <line x1="230" y1="170" x2="300" y2="210" stroke="#ee0979" stroke-width="3" opacity="0.5"/>
+  <!-- Node2 to hub -->
+  <line x1="230" y1="256" x2="300" y2="256" stroke="#56CCF2" stroke-width="3" opacity="0.5"/>
+  <!-- Node3 to hub -->
+  <line x1="230" y1="342" x2="300" y2="300" stroke="#56ab2f" stroke-width="3" opacity="0.5"/>
+  <!-- Hub to output1 -->
+  <line x1="340" y1="256" x2="400" y2="190" stroke="#f7971e" stroke-width="3" opacity="0.5"/>
+  <!-- Hub to output2 -->
+  <line x1="340" y1="256" x2="400" y2="322" stroke="#8E54E9" stroke-width="3" opacity="0.5"/>
+
+  <!-- Flowing particles on paths -->
+  <circle cx="150" cy="213" r="5" fill="#ee0979" filter="url(#glow)"/>
+  <circle cx="150" cy="256" r="5" fill="#56CCF2" filter="url(#glow)"/>
+  <circle cx="265" cy="210" r="5" fill="#ee0979" filter="url(#glow)"/>
+  <circle cx="320" cy="228" r="5" fill="#56CCF2" filter="url(#glow)"/>
+  <circle cx="370" cy="224" r="5" fill="#f7971e" filter="url(#glow)"/>
+
+  <!-- Source node -->
+  <circle cx="110" cy="256" r="34" fill="url(#n1)" filter="url(#glow)"/>
+  <circle cx="110" cy="256" r="28" fill="#0d0d1a"/>
+  <circle cx="110" cy="256" r="16" fill="url(#n1)" opacity="0.6"/>
+  <!-- Source symbol -->
+  <polygon points="103,246 103,266 120,256" fill="#fff" opacity="0.9"/>
+
+  <!-- Node 1 -->
+  <circle cx="210" cy="170" r="26" fill="url(#n2)" filter="url(#glow)"/>
+  <circle cx="210" cy="170" r="20" fill="#0d0d1a"/>
+  <rect x="203" y="164" width="14" height="12" rx="3" fill="#56CCF2" opacity="0.8"/>
+
+  <!-- Node 2 -->
+  <circle cx="210" cy="256" r="26" fill="url(#n3)" filter="url(#glow)"/>
+  <circle cx="210" cy="256" r="20" fill="#0d0d1a"/>
+  <!-- Wavy line inside node 2 -->
+  <path d="M200,256 Q204,250 208,256 Q212,262 216,256 Q220,250 224,256" fill="none" stroke="#56ab2f" stroke-width="2.5" opacity="0.9"/>
+
+  <!-- Node 3 -->
+  <circle cx="210" cy="342" r="26" fill="url(#n4)" filter="url(#glow)"/>
+  <circle cx="210" cy="342" r="20" fill="#0d0d1a"/>
+  <circle cx="210" cy="342" r="8" fill="#ffd200" opacity="0.7"/>
+
+  <!-- Hub/Processor node -->
+  <circle cx="320" cy="256" r="40" fill="url(#n5)" filter="url(#glow)"/>
+  <circle cx="320" cy="256" r="33" fill="#0d0d1a"/>
+  <!-- Processing symbol (gears simplified as rings) -->
+  <circle cx="320" cy="256" r="18" fill="none" stroke="#8E54E9" stroke-width="3" opacity="0.8"/>
+  <circle cx="320" cy="256" r="10" fill="#8E54E9" opacity="0.6"/>
+  <!-- Tick marks around hub -->
+  <line x1="320" y1="235" x2="320" y2="242" stroke="#8E54E9" stroke-width="2" opacity="0.7"/>
+  <line x1="320" y1="270" x2="320" y2="277" stroke="#8E54E9" stroke-width="2" opacity="0.7"/>
+  <line x1="299" y1="256" x2="306" y2="256" stroke="#8E54E9" stroke-width="2" opacity="0.7"/>
+  <line x1="334" y1="256" x2="341" y2="256" stroke="#8E54E9" stroke-width="2" opacity="0.7"/>
+
+  <!-- Output node 1 -->
+  <circle cx="402" cy="190" r="26" fill="url(#n4)" filter="url(#glow)"/>
+  <circle cx="402" cy="190" r="20" fill="#0d0d1a"/>
+  <polygon points="394,184 394,196 408,190" fill="#ffd200" opacity="0.8"/>
+
+  <!-- Output node 2 -->
+  <circle cx="402" cy="322" r="26" fill="url(#n5)" filter="url(#glow)"/>
+  <circle cx="402" cy="322" r="20" fill="#0d0d1a"/>
+  <polygon points="394,316 394,328 408,322" fill="#8E54E9" opacity="0.8"/>
+</svg>

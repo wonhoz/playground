@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#1C1C3A"/>
+      <stop offset="100%" stop-color="#0A0A1A"/>
+    </radialGradient>
+    <radialGradient id="inner" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FF6B6B"/>
+      <stop offset="100%" stop-color="#C0392B"/>
+    </radialGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Outer ring segments (12 segments) -->
+  <path d="M256,256 L256,66 A190,190 0 0,1 371,151 Z" fill="#FF6B6B" opacity="0.85"/>
+  <path d="M256,256 L371,151 A190,190 0 0,1 446,256 Z" fill="#FFA07A" opacity="0.85"/>
+  <path d="M256,256 L446,256 A190,190 0 0,1 371,361 Z" fill="#FFD700" opacity="0.85"/>
+  <path d="M256,256 L371,361 A190,190 0 0,1 256,446 Z" fill="#98FB98" opacity="0.85"/>
+  <path d="M256,256 L256,446 A190,190 0 0,1 141,361 Z" fill="#40E0D0" opacity="0.85"/>
+  <path d="M256,256 L141,361 A190,190 0 0,1 66,256 Z" fill="#87CEEB" opacity="0.85"/>
+  <path d="M256,256 L66,256 A190,190 0 0,1 141,151 Z" fill="#DDA0DD" opacity="0.85"/>
+  <path d="M256,256 L141,151 A190,190 0 0,1 256,66 Z" fill="#F0A0C0" opacity="0.85"/>
+  <!-- Separator lines -->
+  <line x1="256" y1="256" x2="256" y2="66" stroke="#0A0A1A" stroke-width="2.5"/>
+  <line x1="256" y1="256" x2="371" y2="151" stroke="#0A0A1A" stroke-width="2.5"/>
+  <line x1="256" y1="256" x2="446" y2="256" stroke="#0A0A1A" stroke-width="2.5"/>
+  <line x1="256" y1="256" x2="371" y2="361" stroke="#0A0A1A" stroke-width="2.5"/>
+  <line x1="256" y1="256" x2="256" y2="446" stroke="#0A0A1A" stroke-width="2.5"/>
+  <line x1="256" y1="256" x2="141" y2="361" stroke="#0A0A1A" stroke-width="2.5"/>
+  <line x1="256" y1="256" x2="66" y2="256" stroke="#0A0A1A" stroke-width="2.5"/>
+  <line x1="256" y1="256" x2="141" y2="151" stroke="#0A0A1A" stroke-width="2.5"/>
+  <!-- Middle ring -->
+  <circle cx="256" cy="256" r="130" fill="#0A0A1A" opacity="0.7"/>
+  <!-- Mid ring segments -->
+  <path d="M256,256 L256,126 A130,130 0 0,1 348,164 Z" fill="#FF8C69" opacity="0.9"/>
+  <path d="M256,256 L348,164 A130,130 0 0,1 386,256 Z" fill="#FFB347" opacity="0.9"/>
+  <path d="M256,256 L386,256 A130,130 0 0,1 348,348 Z" fill="#FFFACD" opacity="0.9"/>
+  <path d="M256,256 L348,348 A130,130 0 0,1 256,386 Z" fill="#90EE90" opacity="0.9"/>
+  <path d="M256,256 L256,386 A130,130 0 0,1 164,348 Z" fill="#48D1CC" opacity="0.9"/>
+  <path d="M256,256 L164,348 A130,130 0 0,1 126,256 Z" fill="#6495ED" opacity="0.9"/>
+  <path d="M256,256 L126,256 A130,130 0 0,1 164,164 Z" fill="#DA70D6" opacity="0.9"/>
+  <path d="M256,256 L164,164 A130,130 0 0,1 256,126 Z" fill="#FFB6C1" opacity="0.9"/>
+  <!-- Inner hole + disk icon -->
+  <circle cx="256" cy="256" r="75" fill="#0A0A1A"/>
+  <circle cx="256" cy="256" r="72" fill="none" stroke="#FF6B6B" stroke-width="2" opacity="0.5" filter="url(#glow)"/>
+  <ellipse cx="256" cy="256" rx="38" ry="28" fill="none" stroke="#FFD700" stroke-width="3.5" opacity="0.85" filter="url(#glow)"/>
+  <line x1="228" y1="262" x2="284" y2="262" stroke="#FFD700" stroke-width="2.5" opacity="0.6"/>
+  <circle cx="274" cy="250" r="5" fill="#FFD700" opacity="0.9" filter="url(#glow)"/>
+</svg>

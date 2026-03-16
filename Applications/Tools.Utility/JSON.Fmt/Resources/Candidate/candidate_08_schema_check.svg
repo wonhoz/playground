@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#002244"/>
+      <stop offset="100%" stop-color="#003366"/>
+    </linearGradient>
+    <linearGradient id="checkmark" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#00e676"/>
+      <stop offset="100%" stop-color="#00c853"/>
+    </linearGradient>
+    <linearGradient id="shield" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1a3a6a"/>
+      <stop offset="100%" stop-color="#0a1a3a"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Shield shape -->
+  <path d="M256,60 L380,110 L380,270 Q380,370 256,430 Q132,370 132,270 L132,110 Z" fill="url(#shield)"/>
+  <path d="M256,60 L380,110 L380,270 Q380,370 256,430 Q132,370 132,270 L132,110 Z" fill="none" stroke="#1e5799" stroke-width="4"/>
+  <!-- JSON code lines inside shield -->
+  <text x="175" y="148" font-family="monospace" font-size="11" fill="#79c0ff">"type":</text>
+  <text x="248" y="148" font-family="monospace" font-size="11" fill="#a5d6ff">"obj"</text>
+  <text x="175" y="168" font-family="monospace" font-size="11" fill="#79c0ff">"req":</text>
+  <text x="236" y="168" font-family="monospace" font-size="11" fill="#56d364">["id"]</text>
+  <text x="175" y="188" font-family="monospace" font-size="11" fill="#79c0ff">"props":</text>
+  <text x="246" y="188" font-family="monospace" font-size="11" fill="#f7d774">{...}</text>
+  <!-- Large checkmark overlay -->
+  <path d="M192,280 L234,330 L320,230" fill="none" stroke="url(#checkmark)" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Valid label -->
+  <rect x="186" y="355" width="140" height="30" rx="8" fill="#00c853" opacity="0.3"/>
+  <text x="256" y="376" text-anchor="middle" font-family="Arial" font-size="16" font-weight="bold" fill="#00e676">VALID JSON</text>
+  <!-- Title -->
+  <text x="256" y="465" text-anchor="middle" font-family="Arial" font-size="18" font-weight="bold" fill="#79c0ff" opacity="0.7">SCHEMA CHECK</text>
+</svg>

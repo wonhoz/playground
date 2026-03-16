@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A1400"/>
+      <stop offset="100%" stop-color="#2D2400"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFD700"/>
+      <stop offset="100%" stop-color="#FFA000"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="40%" r="50%">
+      <stop offset="0%" stop-color="#FFD700" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#FFD700" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <rect x="56" y="56" width="400" height="400" rx="40" fill="url(#glow)"/>
+  <!-- Large ornate shield -->
+  <path d="M256 62 L416 130 L416 290 Q416 420 256 470 Q96 420 96 290 L96 130 Z" fill="url(#gold)" opacity="0.12" stroke="url(#gold)" stroke-width="5"/>
+  <path d="M256 90 L392 152 L392 288 Q392 404 256 448 Q120 404 120 288 L120 152 Z" fill="#1A1400" stroke="#FFD700" stroke-width="2"/>
+  <!-- Inner shield decorative border -->
+  <path d="M256 110 L372 166 L372 284 Q372 388 256 428 Q140 388 140 284 L140 166 Z" fill="none" stroke="#FFA000" stroke-width="1.5" opacity="0.4"/>
+  <!-- Sword in shield center -->
+  <rect x="250" y="140" width="12" height="180" rx="4" fill="url(#gold)"/>
+  <rect x="224" y="186" width="64" height="12" rx="6" fill="url(#gold)"/>
+  <path d="M250 140 L256 120 L262 140 Z" fill="#FFD700"/>
+  <circle cx="256" cy="330" r="12" fill="#FFA000" stroke="#FFD700" stroke-width="2"/>
+  <!-- PATH dots around sword -->
+  <circle cx="188" cy="220" r="8" fill="#FFD700" opacity="0.7"/>
+  <circle cx="188" cy="248" r="8" fill="#FFA000" opacity="0.7"/>
+  <circle cx="188" cy="276" r="8" fill="#FFD700" opacity="0.7"/>
+  <circle cx="324" cy="220" r="8" fill="#FFA000" opacity="0.7"/>
+  <circle cx="324" cy="248" r="8" fill="#FFD700" opacity="0.7"/>
+  <circle cx="324" cy="276" r="8" fill="#FFA000" opacity="0.7"/>
+  <!-- Connecting lines -->
+  <line x1="196" y1="220" x2="248" y2="220" stroke="#FFD700" stroke-width="1.5" opacity="0.4" stroke-dasharray="4,3"/>
+  <line x1="264" y1="220" x2="316" y2="220" stroke="#FFD700" stroke-width="1.5" opacity="0.4" stroke-dasharray="4,3"/>
+  <line x1="196" y1="248" x2="248" y2="248" stroke="#FFD700" stroke-width="1.5" opacity="0.4" stroke-dasharray="4,3"/>
+  <line x1="264" y1="248" x2="316" y2="248" stroke="#FFD700" stroke-width="1.5" opacity="0.4" stroke-dasharray="4,3"/>
+</svg>

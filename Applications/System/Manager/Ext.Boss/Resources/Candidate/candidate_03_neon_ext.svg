@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0a0a"/>
+      <stop offset="100%" stop-color="#1a1a2e"/>
+    </linearGradient>
+    <linearGradient id="neonGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f72585"/>
+      <stop offset="50%" stop-color="#7209b7"/>
+      <stop offset="100%" stop-color="#4361ee"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Main file shape -->
+  <rect x="96" y="96" width="240" height="300" rx="16" fill="none" stroke="url(#neonGrad)" stroke-width="3" filter="url(#glow)"/>
+  <polygon points="280,96 336,152" fill="none" stroke="url(#neonGrad)" stroke-width="3" filter="url(#glow)"/>
+  <rect x="96" y="96" width="240" height="300" rx="16" fill="#0a0a0a" opacity="0.8"/>
+  <!-- Corner fold -->
+  <polygon points="280,96 336,96 336,152 280,152" fill="#0a0a0a"/>
+  <polyline points="280,96 280,152 336,152" fill="none" stroke="url(#neonGrad)" stroke-width="3" filter="url(#glow)"/>
+  <!-- Extension text with neon effect -->
+  <text x="216" y="200" font-family="'Courier New', monospace" font-size="48" font-weight="bold" fill="url(#neonGrad)" text-anchor="middle" filter="url(#glow)">.EXT</text>
+  <!-- Divider line -->
+  <line x1="120" y1="230" x2="312" y2="230" stroke="url(#neonGrad)" stroke-width="2" opacity="0.6" filter="url(#glow)"/>
+  <!-- Program link icon -->
+  <circle cx="160" cy="280" r="20" fill="none" stroke="#4361ee" stroke-width="2.5" filter="url(#glow)"/>
+  <circle cx="210" cy="280" r="20" fill="none" stroke="#7209b7" stroke-width="2.5" filter="url(#glow)"/>
+  <circle cx="260" cy="280" r="20" fill="none" stroke="#f72585" stroke-width="2.5" filter="url(#glow)"/>
+  <!-- Arrow connecting programs -->
+  <line x1="180" y1="280" x2="238" y2="280" stroke="#ffffff" stroke-width="2" opacity="0.4"/>
+  <!-- Boss crown at top right -->
+  <polygon points="360,80 380,110 400,88 420,110 440,80 440,130 360,130" fill="none" stroke="#f72585" stroke-width="2.5" filter="url(#glow)"/>
+  <circle cx="360" cy="80" r="6" fill="#f72585" filter="url(#glow)"/>
+  <circle cx="400" cy="72" r="6" fill="#7209b7" filter="url(#glow)"/>
+  <circle cx="440" cy="80" r="6" fill="#4361ee" filter="url(#glow)"/>
+</svg>

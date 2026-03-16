@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#000814"/>
+      <stop offset="100%" stop-color="#001830"/>
+    </linearGradient>
+    <linearGradient id="holo1" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00FFAA" stop-opacity="0.8"/>
+      <stop offset="50%" stop-color="#00AAFF" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#AA00FF" stop-opacity="0.8"/>
+    </linearGradient>
+    <linearGradient id="holo2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FF00AA" stop-opacity="0.8"/>
+      <stop offset="50%" stop-color="#FFAA00" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#00FFAA" stop-opacity="0.8"/>
+    </linearGradient>
+    <linearGradient id="holo3" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#AAFFFF" stop-opacity="0.8"/>
+      <stop offset="50%" stop-color="#FFAAFF" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#FFFFAA" stop-opacity="0.8"/>
+    </linearGradient>
+    <filter id="holo-glow">
+      <feGaussianBlur stdDeviation="5" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Stars in background -->
+  <circle cx="100" cy="100" r="1.5" fill="white" opacity="0.6"/>
+  <circle cx="420" cy="80" r="1" fill="white" opacity="0.5"/>
+  <circle cx="80" cy="350" r="1.5" fill="white" opacity="0.5"/>
+  <circle cx="430" cy="300" r="1" fill="white" opacity="0.6"/>
+  <circle cx="150" cy="420" r="1" fill="white" opacity="0.4"/>
+  <!-- Holographic base platform -->
+  <rect x="70" y="418" width="372" height="6" rx="3" fill="url(#holo1)" filter="url(#holo-glow)"/>
+  <!-- Translucent blocks with outline -->
+  <rect x="100" y="322" width="312" height="60" rx="8" fill="url(#holo1)" opacity="0.15"/>
+  <rect x="100" y="322" width="312" height="60" rx="8" fill="none" stroke="url(#holo1)" stroke-width="1.5" filter="url(#holo-glow)"/>
+  <!-- Scanline effect -->
+  <rect x="100" y="338" width="312" height="1" fill="#00FFAA" opacity="0.2"/>
+  <rect x="100" y="354" width="312" height="1" fill="#00AAFF" opacity="0.2"/>
+  <rect x="136" y="258" width="240" height="60" rx="8" fill="url(#holo2)" opacity="0.15"/>
+  <rect x="136" y="258" width="240" height="60" rx="8" fill="none" stroke="url(#holo2)" stroke-width="1.5" filter="url(#holo-glow)"/>
+  <rect x="136" y="274" width="240" height="1" fill="#FF00AA" opacity="0.2"/>
+  <rect x="178" y="194" width="156" height="60" rx="8" fill="url(#holo3)" opacity="0.15"/>
+  <rect x="178" y="194" width="156" height="60" rx="8" fill="none" stroke="url(#holo3)" stroke-width="1.5" filter="url(#holo-glow)"/>
+  <!-- Disintegrating block -->
+  <g transform="translate(256, 155) rotate(-18)">
+    <rect x="-78" y="-26" width="156" height="50" rx="8" fill="url(#holo1)" opacity="0.2"/>
+    <rect x="-78" y="-26" width="156" height="50" rx="8" fill="none" stroke="url(#holo1)" stroke-width="2" filter="url(#holo-glow)"/>
+    <!-- Dissolve pixels -->
+    <rect x="40" y="-20" width="8" height="8" fill="#00FFAA" opacity="0.6"/>
+    <rect x="54" y="-10" width="6" height="6" fill="#00AAFF" opacity="0.5"/>
+    <rect x="60" y="5" width="4" height="4" fill="#AA00FF" opacity="0.5"/>
+  </g>
+  <!-- Holographic particles -->
+  <circle cx="370" cy="115" r="5" fill="#00FFAA" filter="url(#holo-glow)" opacity="0.8"/>
+  <circle cx="395" cy="135" r="4" fill="#FF00AA" filter="url(#holo-glow)" opacity="0.7"/>
+  <circle cx="348" cy="100" r="6" fill="#AAFFFF" filter="url(#holo-glow)" opacity="0.7"/>
+  <circle cx="415" cy="115" r="3" fill="#FFAAFF" filter="url(#holo-glow)" opacity="0.7"/>
+  <circle cx="325" cy="118" r="4" fill="#00AAFF" filter="url(#holo-glow)" opacity="0.7"/>
+</svg>

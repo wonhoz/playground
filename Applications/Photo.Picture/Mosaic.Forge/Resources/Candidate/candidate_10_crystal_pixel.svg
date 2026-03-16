@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0E1621"/>
+      <stop offset="100%" stop-color="#162135"/>
+    </linearGradient>
+    <linearGradient id="crystal1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#A8EDEA"/>
+      <stop offset="100%" stop-color="#FED6E3"/>
+    </linearGradient>
+    <linearGradient id="crystal2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#D299C2"/>
+      <stop offset="100%" stop-color="#FEF9D7"/>
+    </linearGradient>
+    <linearGradient id="crystal3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#96FBC4"/>
+      <stop offset="100%" stop-color="#F9F586"/>
+    </linearGradient>
+    <filter id="crystalGlow">
+      <feGaussianBlur stdDeviation="4" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Crystal shards as mosaic pieces -->
+  <polygon points="256,60 310,140 256,160 202,140" fill="url(#crystal1)" opacity="0.85" filter="url(#crystalGlow)"/>
+  <polygon points="310,140 380,100 400,180 330,200" fill="url(#crystal2)" opacity="0.8" filter="url(#crystalGlow)"/>
+  <polygon points="400,180 450,240 400,300 350,260" fill="url(#crystal3)" opacity="0.85" filter="url(#crystalGlow)"/>
+  <polygon points="350,260 400,300 370,380 290,340" fill="url(#crystal1)" opacity="0.8" filter="url(#crystalGlow)"/>
+  <polygon points="290,340 256,430 222,340 256,310" fill="url(#crystal2)" opacity="0.85" filter="url(#crystalGlow)"/>
+  <polygon points="222,340 142,380 112,300 162,260" fill="url(#crystal3)" opacity="0.8" filter="url(#crystalGlow)"/>
+  <polygon points="112,300 62,240 112,180 162,220" fill="url(#crystal1)" opacity="0.85" filter="url(#crystalGlow)"/>
+  <polygon points="162,220 132,100 202,140 202,200" fill="url(#crystal2)" opacity="0.8" filter="url(#crystalGlow)"/>
+  <!-- Center facet -->
+  <polygon points="202,140 310,140 350,260 256,310 162,260" fill="white" opacity="0.12"/>
+  <polygon points="202,200 256,160 310,190 330,256 256,280 182,256" fill="url(#crystal1)" opacity="0.5" filter="url(#crystalGlow)"/>
+  <!-- Inner gem -->
+  <polygon points="256,190 294,256 256,310 218,256" fill="white" opacity="0.35" filter="url(#crystalGlow)"/>
+  <!-- Pixel dots at intersections -->
+  <rect x="246" y="150" width="20" height="20" rx="4" fill="white" opacity="0.6"/>
+  <rect x="290" y="180" width="16" height="16" rx="4" fill="white" opacity="0.5"/>
+  <rect x="338" y="244" width="16" height="16" rx="4" fill="white" opacity="0.5"/>
+  <rect x="300" y="302" width="16" height="16" rx="4" fill="white" opacity="0.5"/>
+  <rect x="210" y="302" width="16" height="16" rx="4" fill="white" opacity="0.5"/>
+  <rect x="152" y="244" width="16" height="16" rx="4" fill="white" opacity="0.5"/>
+  <rect x="192" y="178" width="16" height="16" rx="4" fill="white" opacity="0.5"/>
+</svg>

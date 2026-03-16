@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3D2B1F"/>
+      <stop offset="100%" stop-color="#1F1510"/>
+    </linearGradient>
+    <linearGradient id="woodGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#A0522D"/>
+      <stop offset="50%" stop-color="#8B4513"/>
+      <stop offset="100%" stop-color="#6B3410"/>
+    </linearGradient>
+    <linearGradient id="stoneGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#C4A882"/>
+      <stop offset="100%" stop-color="#9E7B5A"/>
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="2" dy="4" stdDeviation="6" flood-color="#00000060"/>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Wooden ruler (horizontal) -->
+  <rect x="72" y="224" width="368" height="36" rx="4" fill="url(#woodGrad)" filter="url(#shadow)"/>
+  <!-- Ruler markings -->
+  <line x1="100" y1="228" x2="100" y2="256" stroke="#D2A679" stroke-width="1" opacity="0.6"/>
+  <line x1="132" y1="232" x2="132" y2="256" stroke="#D2A679" stroke-width="1" opacity="0.5"/>
+  <line x1="164" y1="228" x2="164" y2="256" stroke="#D2A679" stroke-width="1" opacity="0.6"/>
+  <line x1="196" y1="232" x2="196" y2="256" stroke="#D2A679" stroke-width="1" opacity="0.5"/>
+  <line x1="228" y1="228" x2="228" y2="256" stroke="#D2A679" stroke-width="1" opacity="0.6"/>
+  <line x1="260" y1="232" x2="260" y2="256" stroke="#D2A679" stroke-width="1" opacity="0.5"/>
+  <line x1="292" y1="228" x2="292" y2="256" stroke="#D2A679" stroke-width="1" opacity="0.6"/>
+  <line x1="324" y1="232" x2="324" y2="256" stroke="#D2A679" stroke-width="1" opacity="0.5"/>
+  <line x1="356" y1="228" x2="356" y2="256" stroke="#D2A679" stroke-width="1" opacity="0.6"/>
+  <line x1="388" y1="232" x2="388" y2="256" stroke="#D2A679" stroke-width="1" opacity="0.5"/>
+  <!-- Wooden ruler (vertical) -->
+  <rect x="224" y="72" width="36" height="368" rx="4" fill="url(#woodGrad)" filter="url(#shadow)" opacity="0.9"/>
+  <line x1="228" y1="100" x2="256" y2="100" stroke="#D2A679" stroke-width="1" opacity="0.5"/>
+  <line x1="228" y1="132" x2="256" y2="132" stroke="#D2A679" stroke-width="1" opacity="0.5"/>
+  <line x1="228" y1="164" x2="256" y2="164" stroke="#D2A679" stroke-width="1" opacity="0.5"/>
+  <line x1="228" y1="196" x2="256" y2="196" stroke="#D2A679" stroke-width="1" opacity="0.5"/>
+  <line x1="228" y1="292" x2="256" y2="292" stroke="#D2A679" stroke-width="1" opacity="0.5"/>
+  <line x1="228" y1="324" x2="256" y2="324" stroke="#D2A679" stroke-width="1" opacity="0.5"/>
+  <line x1="228" y1="356" x2="256" y2="356" stroke="#D2A679" stroke-width="1" opacity="0.5"/>
+  <line x1="228" y1="388" x2="256" y2="388" stroke="#D2A679" stroke-width="1" opacity="0.5"/>
+  <!-- Stone slab blocks (layout panels) -->
+  <rect x="88" y="88" width="124" height="124" rx="6" fill="url(#stoneGrad)" filter="url(#shadow)" opacity="0.8"/>
+  <rect x="300" y="88" width="124" height="100" rx="6" fill="url(#stoneGrad)" filter="url(#shadow)" opacity="0.7"/>
+  <rect x="88" y="300" width="100" height="124" rx="6" fill="url(#stoneGrad)" filter="url(#shadow)" opacity="0.7"/>
+  <rect x="300" y="276" width="124" height="148" rx="6" fill="url(#stoneGrad)" filter="url(#shadow)" opacity="0.8"/>
+  <!-- Chisel lines on stones -->
+  <line x1="96" y1="100" x2="204" y2="100" stroke="#7A5230" stroke-width="1" opacity="0.5"/>
+  <line x1="96" y1="120" x2="204" y2="120" stroke="#7A5230" stroke-width="1" opacity="0.3"/>
+  <!-- Intersection block -->
+  <rect x="224" y="224" width="36" height="36" fill="#5C3D1E" stroke="#A0522D" stroke-width="1.5"/>
+  <!-- Label -->
+  <text x="256" y="464" font-family="Georgia, serif" font-size="18" text-anchor="middle" fill="#C4A882" font-weight="600" letter-spacing="3">LAYOUT.FORGE</text>
+</svg>

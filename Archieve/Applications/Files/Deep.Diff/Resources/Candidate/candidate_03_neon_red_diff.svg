@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0a0a"/>
+      <stop offset="100%" stop-color="#1a0505"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- code diff style -->
+  <rect x="72" y="90" width="368" height="340" rx="8" fill="#0d0d0d" stroke="#333" stroke-width="1"/>
+  <!-- line numbers -->
+  <rect x="72" y="90" width="44" height="340" rx="8" fill="#111"/>
+  <!-- diff lines -->
+  <rect x="116" y="106" width="324" height="24" rx="0" fill="#1a0000"/>
+  <text x="84" y="118" font-family="monospace" font-size="16" fill="#666" text-anchor="middle" dominant-baseline="central">1</text>
+  <text x="130" y="118" font-family="monospace" font-size="16" fill="#ff6b6b" dominant-baseline="central" filter="url(#glow)">- const value = 42;</text>
+
+  <rect x="116" y="136" width="324" height="24" rx="0" fill="#001a00"/>
+  <text x="84" y="148" font-family="monospace" font-size="16" fill="#666" text-anchor="middle" dominant-baseline="central">2</text>
+  <text x="130" y="148" font-family="monospace" font-size="16" fill="#4ade80" dominant-baseline="central" filter="url(#glow)">+ const value = 99;</text>
+
+  <text x="84" y="178" font-family="monospace" font-size="16" fill="#666" text-anchor="middle" dominant-baseline="central">3</text>
+  <text x="130" y="178" font-family="monospace" font-size="16" fill="#888" dominant-baseline="central">  let name = "hello";</text>
+
+  <rect x="116" y="196" width="324" height="24" rx="0" fill="#1a0000"/>
+  <text x="84" y="208" font-family="monospace" font-size="16" fill="#666" text-anchor="middle" dominant-baseline="central">4</text>
+  <text x="130" y="208" font-family="monospace" font-size="16" fill="#ff6b6b" dominant-baseline="central" filter="url(#glow)">- return false;</text>
+
+  <rect x="116" y="226" width="324" height="24" rx="0" fill="#001a00"/>
+  <text x="84" y="238" font-family="monospace" font-size="16" fill="#666" text-anchor="middle" dominant-baseline="central">5</text>
+  <text x="130" y="238" font-family="monospace" font-size="16" fill="#4ade80" dominant-baseline="central" filter="url(#glow)">+ return true;</text>
+
+  <text x="84" y="268" font-family="monospace" font-size="16" fill="#666" text-anchor="middle" dominant-baseline="central">6</text>
+  <text x="130" y="268" font-family="monospace" font-size="16" fill="#888" dominant-baseline="central">  console.log(name);</text>
+  <!-- bottom label -->
+  <text x="256" y="448" font-family="monospace" font-size="26" font-weight="bold" fill="#ef4444" text-anchor="middle" filter="url(#glow)">DEEP DIFF</text>
+</svg>

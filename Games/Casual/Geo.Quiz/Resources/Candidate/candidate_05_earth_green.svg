@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1B5E20"/>
+      <stop offset="100%" style="stop-color:#2E7D32"/>
+    </linearGradient>
+    <radialGradient id="earthgrad" cx="35%" cy="35%" r="65%">
+      <stop offset="0%" style="stop-color:#64B5F6"/>
+      <stop offset="60%" style="stop-color:#1976D2"/>
+      <stop offset="100%" style="stop-color:#0D47A1"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Earth -->
+  <circle cx="256" cy="235" r="155" fill="url(#earthgrad)"/>
+  <!-- Land masses -->
+  <path d="M160,175 Q185,158 215,168 Q235,162 245,175 Q258,162 275,170 Q290,178 282,195 Q270,212 250,205 Q235,215 218,205 Q200,210 185,198 Q165,195 160,175Z" fill="#66BB6A"/>
+  <path d="M280,182 Q300,170 325,178 Q345,188 338,205 Q322,218 300,210 Q278,200 280,182Z" fill="#66BB6A"/>
+  <path d="M145,220 Q165,210 182,218 Q188,232 175,240 Q158,246 145,236Z" fill="#66BB6A"/>
+  <path d="M200,255 Q220,242 242,250 Q252,265 238,275 Q218,282 200,270Z" fill="#66BB6A"/>
+  <path d="M290,248 Q310,235 335,242 Q350,255 340,268 Q322,278 300,270 Q285,260 290,248Z" fill="#66BB6A"/>
+  <!-- Shine effect -->
+  <ellipse cx="208" cy="180" rx="45" ry="28" fill="white" opacity="0.12" transform="rotate(-25,208,180)"/>
+  <!-- Quiz badge -->
+  <circle cx="256" cy="430" r="52" fill="#FFD54F" stroke="#F9A825" stroke-width="4"/>
+  <text x="256" y="446" text-anchor="middle" font-family="Arial Black,sans-serif" font-size="52" font-weight="900" fill="#1B5E20">?</text>
+</svg>

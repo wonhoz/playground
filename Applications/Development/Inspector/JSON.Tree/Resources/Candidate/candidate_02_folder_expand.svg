@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1a1a2e"/>
+      <stop offset="100%" stop-color="#16213e"/>
+    </linearGradient>
+    <linearGradient id="folder" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f7d774"/>
+      <stop offset="100%" stop-color="#e6b800"/>
+    </linearGradient>
+    <linearGradient id="folderSub" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#74b9ff"/>
+      <stop offset="100%" stop-color="#0984e3"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Tree lines -->
+  <line x1="90" y1="120" x2="90" y2="400" stroke="#3a3a5a" stroke-width="2"/>
+  <line x1="90" y1="180" x2="130" y2="180" stroke="#3a3a5a" stroke-width="2"/>
+  <line x1="90" y1="250" x2="130" y2="250" stroke="#3a3a5a" stroke-width="2"/>
+  <line x1="90" y1="320" x2="130" y2="320" stroke="#3a3a5a" stroke-width="2"/>
+  <line x1="90" y1="390" x2="130" y2="390" stroke="#3a3a5a" stroke-width="2"/>
+  <!-- Sub-tree lines level 2 -->
+  <line x1="170" y1="250" x2="170" y2="390" stroke="#3a3a5a" stroke-width="1.5"/>
+  <line x1="170" y1="290" x2="210" y2="290" stroke="#3a3a5a" stroke-width="1.5"/>
+  <line x1="170" y1="350" x2="210" y2="350" stroke="#3a3a5a" stroke-width="1.5"/>
+  <!-- Root folder -->
+  <rect x="90" y="90" width="200" height="30" rx="6" fill="url(#folder)"/>
+  <text x="102" y="111" font-family="monospace" font-size="14" fill="#333">▼ { root }</text>
+  <!-- Level 2 items -->
+  <rect x="130" y="164" width="160" height="28" rx="5" fill="#2a2a4a"/>
+  <text x="142" y="183" font-family="monospace" font-size="13" fill="#74b9ff">▶ "name"</text>
+  <rect x="130" y="234" width="160" height="28" rx="5" fill="url(#folderSub)" opacity="0.3"/>
+  <text x="142" y="253" font-family="monospace" font-size="13" fill="#74b9ff">▼ "data": {}</text>
+  <rect x="130" y="304" width="160" height="28" rx="5" fill="#2a2a4a"/>
+  <text x="142" y="323" font-family="monospace" font-size="13" fill="#56d364">▶ "tags": []</text>
+  <rect x="130" y="374" width="160" height="28" rx="5" fill="#2a2a4a"/>
+  <text x="142" y="393" font-family="monospace" font-size="13" fill="#f0883e">▶ "ok": true</text>
+  <!-- Level 3 items -->
+  <rect x="210" y="274" width="140" height="24" rx="4" fill="#1a1a3a"/>
+  <text x="220" y="291" font-family="monospace" font-size="12" fill="#a5d6ff">"x": 100</text>
+  <rect x="210" y="334" width="140" height="24" rx="4" fill="#1a1a3a"/>
+  <text x="220" y="351" font-family="monospace" font-size="12" fill="#a5d6ff">"y": 200</text>
+  <!-- Selected item highlight -->
+  <rect x="130" y="234" width="160" height="28" rx="5" fill="none" stroke="#74b9ff" stroke-width="2"/>
+  <!-- Right side: value display -->
+  <rect x="370" y="100" width="105" height="300" rx="10" fill="#0a0a1a"/>
+  <text x="378" y="126" font-family="monospace" font-size="11" fill="#888">Value</text>
+  <line x1="370" y1="134" x2="475" y2="134" stroke="#2a2a4a" stroke-width="1"/>
+  <text x="378" y="155" font-family="monospace" font-size="11" fill="#f7d774">{</text>
+  <text x="378" y="175" font-family="monospace" font-size="11" fill="#74b9ff">  x: 100</text>
+  <text x="378" y="195" font-family="monospace" font-size="11" fill="#74b9ff">  y: 200</text>
+  <text x="378" y="215" font-family="monospace" font-size="11" fill="#f7d774">}</text>
+</svg>

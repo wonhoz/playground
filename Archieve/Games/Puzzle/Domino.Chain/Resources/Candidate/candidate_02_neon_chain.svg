@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#050515"/>
+      <stop offset="100%" stop-color="#0A0A25"/>
+    </linearGradient>
+    <linearGradient id="tile1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#002244"/>
+      <stop offset="100%" stop-color="#001133"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Neon dominos falling in arc -->
+  <!-- Domino A -->
+  <rect x="80" y="190" width="40" height="80" rx="5" fill="url(#tile1)" stroke="#00FFFF" stroke-width="2" filter="url(#glow)"/>
+  <line x1="80" y1="230" x2="120" y2="230" stroke="#00FFFF" stroke-width="1.5" opacity="0.7"/>
+  <circle cx="92" cy="210" r="4" fill="#00FFFF" filter="url(#glow)"/>
+  <circle cx="108" cy="210" r="4" fill="#00FFFF" filter="url(#glow)"/>
+  <circle cx="100" cy="250" r="4" fill="#00FFFF" filter="url(#glow)"/>
+  <!-- Domino B tilting -->
+  <g transform="rotate(-20 172 270)">
+    <rect x="152" y="190" width="40" height="80" rx="5" fill="url(#tile1)" stroke="#44AAFF" stroke-width="2" filter="url(#glow)"/>
+    <line x1="152" y1="230" x2="192" y2="230" stroke="#44AAFF" stroke-width="1.5" opacity="0.7"/>
+    <circle cx="164" cy="210" r="4" fill="#44AAFF" filter="url(#glow)"/>
+    <circle cx="180" cy="250" r="4" fill="#44AAFF" filter="url(#glow)"/>
+    <circle cx="164" cy="250" r="4" fill="#44AAFF" filter="url(#glow)"/>
+  </g>
+  <!-- Domino C -->
+  <g transform="rotate(-45 244 280)">
+    <rect x="224" y="190" width="40" height="80" rx="5" fill="url(#tile1)" stroke="#8844FF" stroke-width="2" filter="url(#glow)"/>
+    <line x1="224" y1="230" x2="264" y2="230" stroke="#8844FF" stroke-width="1.5" opacity="0.7"/>
+    <circle cx="236" cy="212" r="4" fill="#8844FF" filter="url(#glow)"/>
+    <circle cx="252" cy="212" r="4" fill="#8844FF" filter="url(#glow)"/>
+    <circle cx="244" cy="230" r="4" fill="#8844FF" filter="url(#glow)"/>
+    <circle cx="236" cy="248" r="4" fill="#8844FF" filter="url(#glow)"/>
+    <circle cx="252" cy="248" r="4" fill="#8844FF" filter="url(#glow)"/>
+  </g>
+  <!-- Domino D -->
+  <g transform="rotate(-70 316 285)">
+    <rect x="296" y="190" width="40" height="80" rx="5" fill="url(#tile1)" stroke="#FF44FF" stroke-width="2" filter="url(#glow)"/>
+    <line x1="296" y1="230" x2="336" y2="230" stroke="#FF44FF" stroke-width="1.5" opacity="0.7"/>
+    <circle cx="308" cy="210" r="4" fill="#FF44FF" filter="url(#glow)"/>
+    <circle cx="324" cy="250" r="4" fill="#FF44FF" filter="url(#glow)"/>
+  </g>
+  <!-- Chain energy line -->
+  <path d="M100,270 Q172,310 244,310 Q316,310 380,280" stroke="#00FFFF" stroke-width="2" fill="none" opacity="0.4" stroke-dasharray="8,6"/>
+  <!-- Explosion at end -->
+  <circle cx="390" cy="260" r="35" fill="#FF44FF" opacity="0.15" filter="url(#glow)"/>
+  <circle cx="390" cy="260" r="22" fill="#FF44FF" opacity="0.25" filter="url(#glow)"/>
+  <circle cx="390" cy="260" r="10" fill="#FFFFFF" opacity="0.6" filter="url(#glow)"/>
+  <text x="256" y="450" font-family="Arial" font-size="26" font-weight="bold" fill="#00FFFF" text-anchor="middle" filter="url(#glow)">DOMINO·CHAIN</text>
+</svg>

@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0c0015"/>
+      <stop offset="50%" stop-color="#1e1b4b"/>
+      <stop offset="100%" stop-color="#4c1d95"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#a78bfa" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#a78bfa" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="blur">
+      <feGaussianBlur stdDeviation="2"/>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <circle cx="256" cy="256" r="200" fill="url(#glow)"/>
+  <!-- stars -->
+  <g fill="#ffffff" opacity="0.6">
+    <circle cx="100" cy="100" r="2"/>
+    <circle cx="400" cy="130" r="1.5"/>
+    <circle cx="150" cy="380" r="2"/>
+    <circle cx="430" cy="400" r="1.5"/>
+    <circle cx="80" cy="300" r="1"/>
+    <circle cx="460" cy="250" r="2"/>
+  </g>
+  <!-- crossword grid glowing -->
+  <g fill="none" stroke="#a78bfa" stroke-width="3" opacity="0.7" filter="url(#blur)">
+    <rect x="104" y="104" width="304" height="304" rx="8"/>
+    <line x1="180" y1="104" x2="180" y2="408"/>
+    <line x1="256" y1="104" x2="256" y2="408"/>
+    <line x1="332" y1="104" x2="332" y2="408"/>
+    <line x1="104" y1="180" x2="408" y2="180"/>
+    <line x1="104" y1="256" x2="408" y2="256"/>
+    <line x1="104" y1="332" x2="408" y2="332"/>
+  </g>
+  <!-- letter with cosmic glow -->
+  <text x="142" y="142" font-family="Georgia,serif" font-size="56" font-weight="bold" fill="#c4b5fd" text-anchor="middle" dominant-baseline="central">C</text>
+  <text x="218" y="142" font-family="Georgia,serif" font-size="56" font-weight="bold" fill="#e9d5ff" text-anchor="middle" dominant-baseline="central">R</text>
+  <text x="294" y="142" font-family="Georgia,serif" font-size="56" font-weight="bold" fill="#c4b5fd" text-anchor="middle" dominant-baseline="central">O</text>
+  <text x="370" y="142" font-family="Georgia,serif" font-size="56" font-weight="bold" fill="#c4b5fd" text-anchor="middle" dominant-baseline="central">S</text>
+  <text x="142" y="218" font-family="Georgia,serif" font-size="56" font-weight="bold" fill="#e9d5ff" text-anchor="middle" dominant-baseline="central">S</text>
+  <text x="142" y="294" font-family="Georgia,serif" font-size="56" font-weight="bold" fill="#c4b5fd" text-anchor="middle" dominant-baseline="central">W</text>
+  <text x="218" y="294" font-family="Georgia,serif" font-size="56" font-weight="bold" fill="#c4b5fd" text-anchor="middle" dominant-baseline="central">O</text>
+  <text x="294" y="294" font-family="Georgia,serif" font-size="56" font-weight="bold" fill="#e9d5ff" text-anchor="middle" dominant-baseline="central">R</text>
+  <text x="370" y="294" font-family="Georgia,serif" font-size="56" font-weight="bold" fill="#c4b5fd" text-anchor="middle" dominant-baseline="central">D</text>
+</svg>

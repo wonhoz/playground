@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2d3436"/>
+      <stop offset="100%" style="stop-color:#636e72"/>
+    </linearGradient>
+    <linearGradient id="gear_g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00b4db"/>
+      <stop offset="100%" style="stop-color:#0083b0"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Gear/settings icon -->
+  <circle cx="256" cy="220" r="70" fill="url(#gear_g)" opacity="0.3"/>
+  <circle cx="256" cy="220" r="70" stroke="url(#gear_g)" stroke-width="10" fill="none"/>
+  <!-- Gear teeth -->
+  <rect x="243" y="120" width="26" height="30" rx="5" fill="url(#gear_g)"/>
+  <rect x="243" y="290" width="26" height="30" rx="5" fill="url(#gear_g)"/>
+  <rect x="156" y="207" width="30" height="26" rx="5" fill="url(#gear_g)"/>
+  <rect x="326" y="207" width="30" height="26" rx="5" fill="url(#gear_g)"/>
+  <rect x="172" y="140" width="26" height="30" rx="5" fill="url(#gear_g)" transform="rotate(45,185,155)"/>
+  <rect x="314" y="140" width="26" height="30" rx="5" fill="url(#gear_g)" transform="rotate(-45,327,155)"/>
+  <rect x="172" y="255" width="26" height="30" rx="5" fill="url(#gear_g)" transform="rotate(-45,185,270)"/>
+  <rect x="314" y="255" width="26" height="30" rx="5" fill="url(#gear_g)" transform="rotate(45,327,270)"/>
+  <!-- Center circle -->
+  <circle cx="256" cy="220" r="32" fill="#2d3436"/>
+  <!-- Ext label in center -->
+  <text x="256" y="228" font-family="monospace" font-size="22" text-anchor="middle" fill="url(#gear_g)" font-weight="bold">.EXT</text>
+  <!-- List below -->
+  <rect x="80" y="330" width="352" height="44" rx="10" fill="url(#gear_g)" opacity="0.2" stroke="url(#gear_g)" stroke-width="2"/>
+  <text x="256" y="358" font-family="monospace" font-size="18" text-anchor="middle" fill="white">.txt → Notepad.exe</text>
+  <rect x="80" y="385" width="352" height="44" rx="10" fill="url(#gear_g)" opacity="0.1" stroke="url(#gear_g)" stroke-width="2" opacity="0.6"/>
+  <text x="256" y="413" font-family="monospace" font-size="18" text-anchor="middle" fill="white" opacity="0.7">.mp3 → Music.exe</text>
+</svg>

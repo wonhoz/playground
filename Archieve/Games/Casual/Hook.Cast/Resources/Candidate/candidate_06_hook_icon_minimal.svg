@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#e8f4fd"/>
+      <stop offset="100%" stop-color="#bee3f8"/>
+    </linearGradient>
+    <linearGradient id="hookGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#2b6cb0"/>
+      <stop offset="100%" stop-color="#1a365d"/>
+    </linearGradient>
+    <linearGradient id="fish" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ed8936"/>
+      <stop offset="100%" stop-color="#c05621"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Minimal water line -->
+  <path d="M56 300 Q128 288 200 300 Q272 312 344 300 Q416 288 456 300" fill="none" stroke="#90cdf4" stroke-width="3.5"/>
+  <path d="M56 318 Q128 308 200 318 Q272 328 344 318 Q416 308 456 318" fill="none" stroke="#90cdf4" stroke-width="2" opacity="0.6"/>
+  <!-- Fishing rod -->
+  <line x1="90" y1="340" x2="190" y2="295" stroke="#744210" stroke-width="11" stroke-linecap="round"/>
+  <line x1="190" y1="295" x2="274" y2="260" stroke="#744210" stroke-width="7" stroke-linecap="round"/>
+  <!-- Line -->
+  <line x1="274" y1="260" x2="290" y2="305" stroke="#4a5568" stroke-width="2"/>
+  <!-- Large bold hook -->
+  <path d="M290 305 Q294 360 262 392 Q234 420 210 404 Q186 388 198 364 Q210 340 232 352" fill="none" stroke="url(#hookGrad)" stroke-width="16" stroke-linecap="round"/>
+  <line x1="232" y1="352" x2="218" y2="378" stroke="#2b6cb0" stroke-width="13" stroke-linecap="round"/>
+  <!-- Ring at top of hook -->
+  <circle cx="290" cy="305" r="8" fill="none" stroke="#2b6cb0" stroke-width="5"/>
+  <!-- Fish on hook -->
+  <ellipse cx="194" cy="398" rx="36" ry="18" fill="url(#fish)" transform="rotate(-20 194 398)"/>
+  <path d="M226 385 L246 376 L242 394 Z" fill="#ed8936"/>
+  <circle cx="183" cy="393" r="5" fill="white"/>
+  <circle cx="185" cy="393" r="2.5" fill="#333"/>
+  <!-- Reel on rod -->
+  <ellipse cx="145" cy="320" rx="20" ry="13" fill="#744210" stroke="#5d3209" stroke-width="2"/>
+  <ellipse cx="145" cy="320" rx="9" ry="6" fill="#5d3209"/>
+  <!-- Fisherman stick figure -->
+  <circle cx="68" cy="326" r="12" fill="#4a5568"/>
+  <rect x="62" y="337" width="12" height="26" rx="4" fill="#4a5568"/>
+  <!-- Splash -->
+  <ellipse cx="290" cy="303" rx="18" ry="5" fill="none" stroke="#90cdf4" stroke-width="2.5" opacity="0.8"/>
+</svg>

@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#001400"/>
+      <stop offset="100%" stop-color="#002200"/>
+    </linearGradient>
+    <linearGradient id="green" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00FF87"/>
+      <stop offset="100%" stop-color="#00C853"/>
+    </linearGradient>
+    <radialGradient id="node_glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#00FF87" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#00FF87" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Network topology -->
+  <!-- Center hub -->
+  <circle cx="256" cy="256" r="30" fill="#001E00" stroke="#00FF87" stroke-width="3"/>
+  <circle cx="256" cy="256" r="20" fill="url(#green)" opacity="0.8"/>
+  <!-- Connections to port nodes -->
+  <line x1="256" y1="226" x2="256" y2="120" stroke="#00C853" stroke-width="2" opacity="0.6"/>
+  <line x1="256" y1="286" x2="256" y2="392" stroke="#00C853" stroke-width="2" opacity="0.6"/>
+  <line x1="226" y1="256" x2="120" y2="200" stroke="#00C853" stroke-width="2" opacity="0.6"/>
+  <line x1="286" y1="256" x2="392" y2="200" stroke="#00C853" stroke-width="2" opacity="0.6"/>
+  <line x1="226" y1="276" x2="140" y2="340" stroke="#00FF87" stroke-width="2" opacity="0.6"/>
+  <line x1="286" y1="276" x2="372" y2="340" stroke="#00FF87" stroke-width="2" opacity="0.6"/>
+  <!-- Port nodes -->
+  <circle cx="256" cy="104" r="22" fill="#001E00" stroke="#00FF87" stroke-width="2.5"/>
+  <text x="256" y="109" text-anchor="middle" font-family="Consolas" font-size="10" fill="#00FF87">:80</text>
+  <circle cx="256" cy="408" r="22" fill="#001E00" stroke="#00FF87" stroke-width="2.5"/>
+  <text x="256" y="413" text-anchor="middle" font-family="Consolas" font-size="10" fill="#00FF87">:22</text>
+  <circle cx="108" cy="190" r="22" fill="#001E00" stroke="#00C853" stroke-width="2.5"/>
+  <text x="108" y="195" text-anchor="middle" font-family="Consolas" font-size="9" fill="#00C853">:443</text>
+  <circle cx="404" cy="190" r="22" fill="#001E00" stroke="#00C853" stroke-width="2.5"/>
+  <text x="404" y="195" text-anchor="middle" font-family="Consolas" font-size="9" fill="#00C853">:3306</text>
+  <circle cx="128" cy="352" r="22" fill="#001E00" stroke="#00FF87" stroke-width="2.5"/>
+  <text x="128" y="357" text-anchor="middle" font-family="Consolas" font-size="9" fill="#00FF87">:8080</text>
+  <circle cx="384" cy="352" r="22" fill="#001E00" stroke="#00FF87" stroke-width="2.5"/>
+  <text x="384" y="357" text-anchor="middle" font-family="Consolas" font-size="9" fill="#00FF87">:5432</text>
+  <!-- Glow effects on active nodes -->
+  <circle cx="256" cy="104" r="32" fill="url(#node_glow)" opacity="0.4"/>
+  <circle cx="404" cy="190" r="32" fill="url(#node_glow)" opacity="0.3"/>
+</svg>

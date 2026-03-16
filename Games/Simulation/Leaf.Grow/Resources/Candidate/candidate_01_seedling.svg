@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1b5e20"/>
+      <stop offset="100%" stop-color="#2e7d32"/>
+    </linearGradient>
+    <linearGradient id="fg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#69f0ae"/>
+      <stop offset="100%" stop-color="#b9f6ca"/>
+    </linearGradient>
+    <linearGradient id="soil" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#5d4037"/>
+      <stop offset="100%" stop-color="#795548"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- 흙 -->
+  <ellipse cx="256" cy="420" rx="160" ry="40" fill="url(#soil)"/>
+  <!-- 줄기 -->
+  <line x1="256" y1="420" x2="256" y2="240" stroke="url(#fg)" stroke-width="14" stroke-linecap="round"/>
+  <!-- 왼쪽 잎 -->
+  <path d="M256 300 Q190 240 170 180 Q230 200 256 280" fill="url(#fg)" opacity="0.9"/>
+  <!-- 오른쪽 잎 -->
+  <path d="M256 280 Q322 220 342 160 Q282 182 256 260" fill="url(#fg)" opacity="0.7"/>
+  <!-- 새싹 상단 잎 -->
+  <path d="M256 240 Q230 180 256 130 Q282 180 256 240" fill="url(#fg)" opacity="0.95"/>
+  <!-- 물방울 -->
+  <path d="M160 120 Q155 100 160 90 Q165 100 160 120" fill="#81d4fa" opacity="0.8"/>
+  <path d="M340 150 Q335 130 340 120 Q345 130 340 150" fill="#81d4fa" opacity="0.7"/>
+</svg>

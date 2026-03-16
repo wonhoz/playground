@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a1000"/>
+      <stop offset="100%" stop-color="#2a1800"/>
+    </linearGradient>
+    <linearGradient id="ticket" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ffaa00"/>
+      <stop offset="100%" stop-color="#ff6600"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Ticket shape -->
+  <path d="M60,170 L452,170 L452,340 L60,340 Z" fill="#1a1000" stroke="url(#ticket)" stroke-width="3"/>
+  <!-- Ticket perforation -->
+  <line x1="180" y1="170" x2="180" y2="340" stroke="#ffaa00" stroke-width="2" stroke-dasharray="8,6"/>
+  <!-- Left stub -->
+  <rect x="60" y="170" width="120" height="170" fill="#ffaa00" opacity="0.15"/>
+  <text x="120" y="248" text-anchor="middle" font-family="Arial Black" font-size="18" fill="#ffaa00">Bearer</text>
+  <text x="120" y="268" text-anchor="middle" font-family="Arial Black" font-size="18" fill="#ff6600">Token</text>
+  <!-- Right content -->
+  <text x="320" y="210" text-anchor="middle" font-family="monospace" font-size="11" fill="#ffcc66">OAUTH 2.0 ACCESS</text>
+  <rect x="195" y="220" width="242" height="16" rx="3" fill="#332200"/>
+  <text x="316" y="233" text-anchor="middle" font-family="monospace" font-size="9" fill="#ffaa44">eyJhbGci.eyJzdWI.SflKx</text>
+  <text x="240" y="262" font-family="monospace" font-size="10" fill="#888">exp:</text>
+  <text x="278" y="262" font-family="monospace" font-size="10" fill="#44ff88">3600s</text>
+  <text x="240" y="278" font-family="monospace" font-size="10" fill="#888">scope:</text>
+  <text x="286" y="278" font-family="monospace" font-size="10" fill="#88aaff">read write</text>
+  <text x="240" y="294" font-family="monospace" font-size="10" fill="#888">state:</text>
+  <text x="284" y="294" font-family="monospace" font-size="10" fill="#ffcc44">verified</text>
+  <text x="256" y="440" text-anchor="middle" font-family="monospace" font-size="28" font-weight="bold" fill="#ffaa00">OAUTH.PEEK</text>
+</svg>

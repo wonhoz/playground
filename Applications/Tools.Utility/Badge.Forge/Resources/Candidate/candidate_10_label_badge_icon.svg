@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a1428"/>
+      <stop offset="100%" stop-color="#14203c"/>
+    </linearGradient>
+    <linearGradient id="tagGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff8a65"/>
+      <stop offset="100%" stop-color="#e64a19"/>
+    </linearGradient>
+    <linearGradient id="tag2Grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4db6ac"/>
+      <stop offset="100%" stop-color="#00796b"/>
+    </linearGradient>
+    <linearGradient id="tag3Grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ce93d8"/>
+      <stop offset="100%" stop-color="#7b1fa2"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Label tags stacked at angles -->
+  <!-- Tag 3 (back) -->
+  <g transform="rotate(12, 256, 260)">
+    <path d="M148 220 L336 220 L336 300 L268 300 L256 318 L244 300 L148 300 Z" fill="url(#tag3Grad)" opacity="0.7"/>
+    <circle cx="175" cy="260" r="9" fill="#1a0a2e"/>
+    <rect x="195" y="250" width="100" height="10" rx="4" fill="white" opacity="0.4"/>
+  </g>
+  <!-- Tag 2 (mid) -->
+  <g transform="rotate(-8, 256, 260)">
+    <path d="M152 218 L340 218 L340 298 L272 298 L256 316 L240 298 L152 298 Z" fill="url(#tag2Grad)" opacity="0.8"/>
+    <circle cx="178" cy="258" r="9" fill="#001a18"/>
+    <rect x="198" y="248" width="105" height="10" rx="4" fill="white" opacity="0.5"/>
+  </g>
+  <!-- Tag 1 (front) -->
+  <path d="M156 215 L344 215 L344 295 L276 295 L256 315 L236 295 L156 295 Z" fill="url(#tagGrad)"/>
+  <circle cx="182" cy="255" r="10" fill="#1a0500"/>
+  <circle cx="182" cy="255" r="5" fill="#ff8a65" opacity="0.6"/>
+  <rect x="202" y="243" width="110" height="12" rx="4" fill="white" opacity="0.7"/>
+  <rect x="202" y="261" width="85" height="10" rx="3" fill="white" opacity="0.5"/>
+  <!-- String -->
+  <path d="M182 245 Q182 180 256 140" stroke="#ff8a65" stroke-width="3" fill="none" opacity="0.5" stroke-dasharray="8,4"/>
+  <circle cx="256" cy="138" r="8" fill="#ff8a65" opacity="0.7"/>
+</svg>

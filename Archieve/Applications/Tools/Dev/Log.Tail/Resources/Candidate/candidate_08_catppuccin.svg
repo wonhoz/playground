@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E1E2E"/>
+      <stop offset="100%" stop-color="#181825"/>
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#CBA6F7"/>
+      <stop offset="100%" stop-color="#89B4FA"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Window chrome -->
+  <rect x="60" y="80" width="392" height="340" rx="12" fill="#313244" stroke="#45475A" stroke-width="1"/>
+  <rect x="60" y="80" width="392" height="40" rx="12" fill="#1E1E2E"/>
+  <rect x="60" y="104" width="392" height="16" fill="#1E1E2E"/>
+  <!-- Traffic lights -->
+  <circle cx="86" cy="100" r="7" fill="#F38BA8"/>
+  <circle cx="110" cy="100" r="7" fill="#F9E2AF"/>
+  <circle cx="134" cy="100" r="7" fill="#A6E3A1"/>
+  <text x="256" y="104" font-family="'Courier New', monospace" font-size="13" text-anchor="middle" fill="#CDD6F4">log.tail</text>
+  <!-- Log content with Catppuccin colors -->
+  <text x="76" y="144" font-family="'Courier New', monospace" font-size="11" fill="#6C7086">12:00:01</text>
+  <text x="150" y="144" font-family="'Courier New', monospace" font-size="11" fill="#A6ADC8">[INFO]</text>
+  <rect x="218" y="136" width="190" height="8" rx="4" fill="#585B70"/>
+  <text x="76" y="164" font-family="'Courier New', monospace" font-size="11" fill="#6C7086">12:00:08</text>
+  <text x="150" y="164" font-family="'Courier New', monospace" font-size="11" fill="#A6ADC8">[INFO]</text>
+  <rect x="218" y="156" width="160" height="8" rx="4" fill="#585B70"/>
+  <!-- WARN line -->
+  <rect x="72" y="170" width="374" height="16" rx="2" fill="#F9E2AF" opacity="0.08"/>
+  <text x="76" y="182" font-family="'Courier New', monospace" font-size="11" fill="#6C7086">12:00:15</text>
+  <text x="150" y="182" font-family="'Courier New', monospace" font-size="11" fill="#F9E2AF">[WARN]</text>
+  <rect x="218" y="174" width="220" height="8" rx="4" fill="#F9E2AF" opacity="0.6"/>
+  <text x="76" y="202" font-family="'Courier New', monospace" font-size="11" fill="#6C7086">12:00:22</text>
+  <text x="150" y="202" font-family="'Courier New', monospace" font-size="11" fill="#A6ADC8">[INFO]</text>
+  <rect x="218" y="194" width="175" height="8" rx="4" fill="#585B70"/>
+  <!-- ERROR line -->
+  <rect x="72" y="208" width="374" height="16" rx="2" fill="#F38BA8" opacity="0.1"/>
+  <text x="76" y="220" font-family="'Courier New', monospace" font-size="11" fill="#6C7086">12:00:31</text>
+  <text x="150" y="220" font-family="'Courier New', monospace" font-size="11" fill="#F38BA8">[ERROR]</text>
+  <rect x="224" y="212" width="210" height="8" rx="4" fill="#F38BA8" opacity="0.55"/>
+  <text x="76" y="240" font-family="'Courier New', monospace" font-size="11" fill="#6C7086">12:00:35</text>
+  <text x="150" y="240" font-family="'Courier New', monospace" font-size="11" fill="#A6ADC8">[INFO]</text>
+  <rect x="218" y="232" width="195" height="8" rx="4" fill="#585B70"/>
+  <text x="76" y="260" font-family="'Courier New', monospace" font-size="11" fill="#6C7086">12:00:40</text>
+  <text x="150" y="260" font-family="'Courier New', monospace" font-size="11" fill="#A6ADC8">[INFO]</text>
+  <rect x="218" y="252" width="170" height="8" rx="4" fill="#585B70"/>
+  <!-- Latest line highlighted with gradient -->
+  <rect x="72" y="274" width="374" height="20" rx="4" fill="url(#accentGrad)" opacity="0.12" filter="url(#glow)"/>
+  <text x="76" y="288" font-family="'Courier New', monospace" font-size="11" fill="#6C7086">12:00:47</text>
+  <text x="150" y="288" font-family="'Courier New', monospace" font-size="11" fill="#89B4FA">[DEBUG]</text>
+  <rect x="224" y="280" width="200" height="8" rx="4" fill="#89B4FA" opacity="0.7" filter="url(#glow)"/>
+  <!-- Cursor -->
+  <rect x="432" y="278" width="8" height="14" fill="#CBA6F7" filter="url(#glow)"/>
+  <!-- Status bar -->
+  <rect x="60" y="400" width="392" height="32" rx="0" fill="#181825"/>
+  <rect x="60" y="416" width="392" height="16" rx="0" fill="#181825"/>
+  <rect x="72" y="408" width="10" height="10" rx="5" fill="#A6E3A1" filter="url(#glow)"/>
+  <text x="90" y="417" font-family="'Courier New', monospace" font-size="11" fill="#A6E3A1">LIVE</text>
+  <text x="160" y="417" font-family="'Courier New', monospace" font-size="11" fill="#6C7086">|  3,401 lines</text>
+  <text x="316" y="417" font-family="'Courier New', monospace" font-size="11" fill="#6C7086">err: 1</text>
+  <!-- Bottom label -->
+  <text x="256" y="474" font-family="'Courier New', monospace" font-size="15" text-anchor="middle" fill="url(#accentGrad)" font-weight="700">Log.Tail</text>
+</svg>

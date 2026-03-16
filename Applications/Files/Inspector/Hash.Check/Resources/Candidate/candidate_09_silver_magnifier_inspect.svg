@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0C0C14"/>
+      <stop offset="100%" stop-color="#181820"/>
+    </linearGradient>
+    <radialGradient id="lens_s" cx="40%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#2A2A40"/>
+      <stop offset="100%" stop-color="#111118"/>
+    </radialGradient>
+    <linearGradient id="silver" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#C0C0C0"/>
+      <stop offset="100%" stop-color="#808080"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Magnifier glass -->
+  <circle cx="210" cy="210" r="145" fill="url(#lens_s)" stroke="url(#silver)" stroke-width="14"/>
+  <!-- Hash text inside lens -->
+  <text x="210" y="170" text-anchor="middle" fill="#8888AA" font-size="13" font-family="monospace">MD5</text>
+  <text x="210" y="192" text-anchor="middle" fill="#AAAACC" font-size="11" font-family="monospace">a3f9b2c1d4e5</text>
+  <text x="210" y="215" text-anchor="middle" fill="#8888AA" font-size="13" font-family="monospace">SHA-256</text>
+  <text x="210" y="234" text-anchor="middle" fill="#AAAACC" font-size="10" font-family="monospace">b9c4a1e5f2d8</text>
+  <text x="210" y="254" text-anchor="middle" fill="#00FF88" font-size="20">&#x2713; MATCH</text>
+  <!-- Handle -->
+  <line x1="322" y1="322" x2="432" y2="432" stroke="url(#silver)" stroke-width="20" stroke-linecap="round"/>
+  <!-- Highlight on lens -->
+  <ellipse cx="162" cy="158" rx="32" ry="20" fill="white" opacity="0.07" transform="rotate(-30 162 158)"/>
+</svg>

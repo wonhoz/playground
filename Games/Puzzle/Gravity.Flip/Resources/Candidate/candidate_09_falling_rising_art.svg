@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1c1c3a"/>
+      <stop offset="100%" style="stop-color:#2d1b69"/>
+    </linearGradient>
+    <linearGradient id="fallingGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ff6b35"/>
+      <stop offset="100%" style="stop-color:#f7971e"/>
+    </linearGradient>
+    <linearGradient id="risingGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#7c3aed"/>
+      <stop offset="100%" style="stop-color:#a78bfa"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Falling meteors from top-right -->
+  <line x1="380" y1="70" x2="310" y2="130" stroke="#ff6b35" stroke-width="3" stroke-linecap="round" filter="url(#glow)"/>
+  <circle cx="305" cy="134" r="8" fill="url(#fallingGrad)" filter="url(#glow)"/>
+  <line x1="430" y1="90" x2="370" y2="150" stroke="#ff6b3580" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="365" cy="154" r="5" fill="#ff6b35" filter="url(#glow)"/>
+  <line x1="340" y1="60" x2="290" y2="100" stroke="#f7971e60" stroke-width="1.5" stroke-linecap="round"/>
+  <!-- Rising particles from bottom-left -->
+  <line x1="130" y1="450" x2="200" y2="380" stroke="#a78bfa" stroke-width="3" stroke-linecap="round" filter="url(#glow)"/>
+  <circle cx="205" cy="375" r="8" fill="url(#risingGrad)" filter="url(#glow)"/>
+  <line x1="90" y1="430" x2="150" y2="360" stroke="#a78bfa80" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="155" cy="355" r="5" fill="#7c3aed" filter="url(#glow)"/>
+  <line x1="160" y1="460" x2="210" y2="400" stroke="#7c3aed60" stroke-width="1.5" stroke-linecap="round"/>
+  <!-- Central collision/exchange point -->
+  <circle cx="256" cy="256" r="50" fill="none" stroke="#ffffff20" stroke-width="2"/>
+  <!-- Yin-yang like split of falling and rising -->
+  <path d="M206,256 Q206,206 256,206 Q306,206 306,256" fill="url(#fallingGrad)" opacity="0.7"/>
+  <path d="M206,256 Q206,306 256,306 Q306,306 306,256" fill="url(#risingGrad)" opacity="0.7"/>
+  <circle cx="256" cy="206" r="20" fill="url(#fallingGrad)" filter="url(#glow)"/>
+  <circle cx="256" cy="306" r="20" fill="url(#risingGrad)" filter="url(#glow)"/>
+  <!-- Small falling dot in rising area and vice versa -->
+  <circle cx="256" cy="306" r="7" fill="url(#fallingGrad)"/>
+  <circle cx="256" cy="206" r="7" fill="url(#risingGrad)"/>
+</svg>

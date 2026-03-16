@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1E1E1E"/>
+      <stop offset="100%" stop-color="#252526"/>
+    </linearGradient>
+    <linearGradient id="titlebar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#3C3C3C"/>
+      <stop offset="100%" stop-color="#2D2D2D"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Console window -->
+  <rect x="48" y="72" width="416" height="356" rx="10" fill="#1E1E1E" stroke="#3C3C3C" stroke-width="2"/>
+  <!-- Titlebar -->
+  <rect x="48" y="72" width="416" height="34" rx="10" fill="url(#titlebar)"/>
+  <circle cx="76" cy="89" r="8" fill="#FF5F57"/>
+  <circle cx="100" cy="89" r="8" fill="#FEBC2E"/>
+  <circle cx="124" cy="89" r="8" fill="#28C840"/>
+  <text x="264" y="94" text-anchor="middle" font-family="Segoe UI" font-size="14" fill="#CCC">Win.Event — Event Analyzer</text>
+  <!-- Console output -->
+  <text x="68" y="128" font-family="Courier New" font-size="14" fill="#569CD6">[INFO]</text>
+  <text x="120" y="128" font-family="Courier New" font-size="14" fill="#9CDCFE"> Scanning System log...</text>
+  <text x="68" y="150" font-family="Courier New" font-size="14" fill="#F44747">[ERROR]</text>
+  <text x="128" y="150" font-family="Courier New" font-size="14" fill="#CE9178"> EventID 6008: UnexpShutdown</text>
+  <text x="68" y="172" font-family="Courier New" font-size="14" fill="#CCA700">[WARN]</text>
+  <text x="118" y="172" font-family="Courier New" font-size="14" fill="#CE9178"> EventID 7031: ServiceFail</text>
+  <text x="68" y="194" font-family="Courier New" font-size="14" fill="#569CD6">[INFO]</text>
+  <text x="120" y="194" font-family="Courier New" font-size="14" fill="#9CDCFE"> EventID 4624: Logon OK</text>
+  <text x="68" y="216" font-family="Courier New" font-size="14" fill="#F44747">[ERROR]</text>
+  <text x="128" y="216" font-family="Courier New" font-size="14" fill="#CE9178"> EventID 1000: AppCrash</text>
+  <text x="68" y="238" font-family="Courier New" font-size="14" fill="#4EC9B0">[AUDIT]</text>
+  <text x="128" y="238" font-family="Courier New" font-size="14" fill="#9CDCFE"> EventID 4688: ProcessCreate</text>
+  <text x="68" y="260" font-family="Courier New" font-size="14" fill="#569CD6">[INFO]</text>
+  <text x="120" y="260" font-family="Courier New" font-size="14" fill="#9CDCFE"> Scanning Security log...</text>
+  <text x="68" y="282" font-family="Courier New" font-size="14" fill="#F44747">[ERROR]</text>
+  <text x="128" y="282" font-family="Courier New" font-size="14" fill="#CE9178"> EventID 4625: LogonFail x3</text>
+  <text x="68" y="304" font-family="Courier New" font-size="14" fill="#CCA700">[WARN]</text>
+  <text x="118" y="304" font-family="Courier New" font-size="14" fill="#CE9178"> EventID 4698: TaskScheduled</text>
+  <!-- Prompt cursor -->
+  <text x="68" y="336" font-family="Courier New" font-size="14" fill="#4EC9B0">PS C:\&gt; _</text>
+  <rect x="130" y="322" width="10" height="17" fill="#4EC9B0" opacity="0.8"/>
+  <!-- Summary bar -->
+  <rect x="48" y="392" width="416" height="36" rx="0" fill="#007ACC"/>
+  <text x="68" y="414" font-family="Segoe UI" font-size="14" fill="#FFF">Events: 2847  ERR: 156  WARN: 83  INFO: 2608</text>
+  <!-- Footer -->
+  <text x="256" y="465" text-anchor="middle" font-family="Segoe UI" font-size="22" font-weight="700" fill="#569CD6">WIN.EVENT</text>
+</svg>

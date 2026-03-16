@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#311B92"/>
+      <stop offset="100%" stop-color="#7B1FA2"/>
+    </linearGradient>
+    <linearGradient id="cloth" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#CE93D8"/>
+      <stop offset="100%" stop-color="#9C27B0"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Cloth pieces after cut -->
+  <rect x="120" y="170" width="130" height="180" rx="10" fill="url(#cloth)" opacity="0.9"/>
+  <rect x="262" y="170" width="130" height="180" rx="10" fill="url(#cloth)" opacity="0.7"/>
+  <!-- Fabric texture -->
+  <line x1="120" y1="215" x2="250" y2="215" stroke="#7B1FA2" stroke-width="2" opacity="0.5"/>
+  <line x1="120" y1="260" x2="250" y2="260" stroke="#7B1FA2" stroke-width="2" opacity="0.5"/>
+  <line x1="120" y1="305" x2="250" y2="305" stroke="#7B1FA2" stroke-width="2" opacity="0.5"/>
+  <line x1="262" y1="215" x2="392" y2="215" stroke="#7B1FA2" stroke-width="2" opacity="0.4"/>
+  <line x1="262" y1="260" x2="392" y2="260" stroke="#7B1FA2" stroke-width="2" opacity="0.4"/>
+  <line x1="262" y1="305" x2="392" y2="305" stroke="#7B1FA2" stroke-width="2" opacity="0.4"/>
+  <!-- Scissors at center -->
+  <circle cx="248" cy="258" r="16" fill="none" stroke="#F3E5F5" stroke-width="5"/>
+  <circle cx="268" cy="258" r="16" fill="none" stroke="#F3E5F5" stroke-width="5"/>
+  <line x1="258" y1="244" x2="258" y2="140" stroke="#F3E5F5" stroke-width="5" stroke-linecap="round"/>
+  <line x1="258" y1="274" x2="258" y2="380" stroke="#F3E5F5" stroke-width="5" stroke-linecap="round"/>
+  <!-- Gap between pieces -->
+  <rect x="250" y="170" width="12" height="180" fill="#311B92" opacity="0.5"/>
+</svg>

@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#001a20"/>
+      <stop offset="100%" stop-color="#002a30"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Donut chart (center 256,220, r_outer=140, r_inner=88) -->
+  <!-- Full background ring -->
+  <circle cx="256" cy="220" r="140" fill="none" stroke="#0d3340" stroke-width="52"/>
+  <!-- Segments (stroke-dasharray trick): circumference of r=114 ≈ 716 -->
+  <!-- C# 32% = 229 -->
+  <circle cx="256" cy="220" r="114" fill="none" stroke="#00bcd4" stroke-width="52"
+          stroke-dasharray="229 487" stroke-dashoffset="0" transform="rotate(-90 256 220)"/>
+  <!-- .NET 22% = 157 -->
+  <circle cx="256" cy="220" r="114" fill="none" stroke="#00838f" stroke-width="52"
+          stroke-dasharray="157 559" stroke-dashoffset="-229" transform="rotate(-90 256 220)"/>
+  <!-- WPF 18% = 129 -->
+  <circle cx="256" cy="220" r="114" fill="none" stroke="#4dd0e1" stroke-width="52"
+          stroke-dasharray="129 587" stroke-dashoffset="-386" transform="rotate(-90 256 220)"/>
+  <!-- JS 15% = 107 -->
+  <circle cx="256" cy="220" r="114" fill="none" stroke="#26c6da" stroke-width="52"
+          stroke-dasharray="107 609" stroke-dashoffset="-515" transform="rotate(-90 256 220)"/>
+  <!-- Other 13% = 93 -->
+  <circle cx="256" cy="220" r="114" fill="none" stroke="#006064" stroke-width="52"
+          stroke-dasharray="93 623" stroke-dashoffset="-622" transform="rotate(-90 256 220)"/>
+  <!-- Center text -->
+  <circle cx="256" cy="220" r="70" fill="#001a20"/>
+  <text x="256" y="212" font-family="sans-serif" font-size="14" fill="#80deea" text-anchor="middle">SKILLS</text>
+  <text x="256" y="232" font-family="monospace" font-size="22" fill="white" text-anchor="middle" font-weight="bold">5</text>
+  <text x="256" y="248" font-family="sans-serif" font-size="11" fill="#80deea" text-anchor="middle">categories</text>
+  <!-- Legend -->
+  <rect x="88" y="385" width="12" height="12" rx="2" fill="#00bcd4"/>
+  <text x="106" y="396" font-family="sans-serif" font-size="12" fill="#b2ebf2">C# (32%)</text>
+  <rect x="188" y="385" width="12" height="12" rx="2" fill="#00838f"/>
+  <text x="206" y="396" font-family="sans-serif" font-size="12" fill="#b2ebf2">.NET (22%)</text>
+  <rect x="298" y="385" width="12" height="12" rx="2" fill="#4dd0e1"/>
+  <text x="316" y="396" font-family="sans-serif" font-size="12" fill="#b2ebf2">WPF (18%)</text>
+  <rect x="88" y="410" width="12" height="12" rx="2" fill="#26c6da"/>
+  <text x="106" y="421" font-family="sans-serif" font-size="12" fill="#b2ebf2">JS (15%)</text>
+  <rect x="188" y="410" width="12" height="12" rx="2" fill="#006064"/>
+  <text x="206" y="421" font-family="sans-serif" font-size="12" fill="#b2ebf2">Other (13%)</text>
+  <!-- Title -->
+  <text x="256" y="470" font-family="monospace" font-size="16" fill="#80deea" text-anchor="middle" letter-spacing="2" opacity="0.85">SKILL.CAST</text>
+</svg>

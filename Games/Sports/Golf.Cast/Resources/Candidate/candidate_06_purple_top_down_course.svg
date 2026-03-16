@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0A0015"/>
+      <stop offset="100%" stop-color="#120025"/>
+    </linearGradient>
+    <linearGradient id="fairway" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#006622"/>
+      <stop offset="100%" stop-color="#003311"/>
+    </linearGradient>
+    <linearGradient id="rough" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#004411"/>
+      <stop offset="100%" stop-color="#002208"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Course top-down view -->
+  <!-- Rough background -->
+  <rect x="72" y="72" width="368" height="368" rx="12" fill="url(#rough)"/>
+  <!-- Fairway path -->
+  <path d="M120 430 Q130 380 160 320 Q200 260 240 240 Q280 220 300 180 Q330 140 380 120 L400 120 L400 150 Q360 165 335 200 Q310 230 290 270 Q260 310 220 330 Q180 350 150 400 L150 430 Z" fill="url(#fairway)"/>
+  <!-- Tee box -->
+  <rect x="120" y="400" width="50" height="40" rx="6" fill="#00AA44"/>
+  <circle cx="145" cy="420" r="8" fill="white"/>
+  <!-- Green (putting area) -->
+  <ellipse cx="375" cy="136" rx="45" ry="35" fill="#00DD55"/>
+  <!-- Flag on green -->
+  <line x1="375" y1="108" x2="375" y2="136" stroke="#CCCCCC" stroke-width="3"/>
+  <polygon points="375,108 400,118 375,128" fill="#FF2222"/>
+  <ellipse cx="375" cy="137" rx="12" ry="5" fill="#003311"/>
+  <!-- Sand bunker -->
+  <ellipse cx="300" cy="290" rx="35" ry="22" fill="#DDCC88" opacity="0.8"/>
+  <!-- Water hazard -->
+  <ellipse cx="200" cy="370" rx="38" ry="24" fill="#0055AA" opacity="0.7"/>
+  <!-- Ball position marker -->
+  <circle cx="145" cy="420" r="8" fill="white" stroke="#9900FF" stroke-width="2"/>
+  <!-- Distance markers -->
+  <text x="256" y="460" text-anchor="middle" fill="#6633AA" font-size="13" font-family="monospace">PAR 4  |  380 YDS</text>
+</svg>

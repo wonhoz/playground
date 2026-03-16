@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" style="stop-color:#1a1a2e"/>
+      <stop offset="100%" style="stop-color:#0a0a1a"/>
+    </radialGradient>
+    <linearGradient id="arc" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#4caf50"/>
+      <stop offset="50%" style="stop-color:#ffeb3b"/>
+      <stop offset="100%" style="stop-color:#f44336"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Gauge background arc -->
+  <path d="M 96,320 A 160,160 0 1,1 416,320" stroke="#222" stroke-width="36" fill="none" stroke-linecap="round"/>
+  <!-- Colored arc -->
+  <path d="M 96,320 A 160,160 0 1,1 416,320" stroke="url(#arc)" stroke-width="32" fill="none" stroke-linecap="round" opacity="0.9"/>
+  <!-- Center circle -->
+  <circle cx="256" cy="320" r="20" fill="#e0e0e0"/>
+  <!-- Needle -->
+  <line x1="256" y1="320" x2="360" y2="180" stroke="#ff6e40" stroke-width="8" stroke-linecap="round"/>
+  <circle cx="256" cy="320" r="14" fill="#333"/>
+  <!-- Tick marks -->
+  <line x1="96" y1="320" x2="110" y2="320" stroke="white" stroke-width="4"/>
+  <line x1="256" y1="160" x2="256" y2="175" stroke="white" stroke-width="4"/>
+  <line x1="416" y1="320" x2="402" y2="320" stroke="white" stroke-width="4"/>
+  <line x1="130" y1="214" x2="141" y2="224" stroke="white" stroke-width="3"/>
+  <line x1="382" y1="214" x2="371" y2="224" stroke="white" stroke-width="3"/>
+  <!-- Report lines at bottom -->
+  <rect x="100" y="400" width="312" height="10" rx="4" fill="#7986cb" opacity="0.4"/>
+  <rect x="100" y="420" width="240" height="10" rx="4" fill="#7986cb" opacity="0.3"/>
+  <rect x="100" y="440" width="280" height="10" rx="4" fill="#7986cb" opacity="0.3"/>
+</svg>

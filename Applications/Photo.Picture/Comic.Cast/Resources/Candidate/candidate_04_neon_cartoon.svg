@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F0C29"/>
+      <stop offset="50%" stop-color="#302B63"/>
+      <stop offset="100%" stop-color="#24243E"/>
+    </linearGradient>
+    <filter id="neonGlow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Neon frame -->
+  <rect x="80" y="80" width="352" height="352" rx="20" fill="none" stroke="#FF00FF" stroke-width="4" filter="url(#neonGlow)" opacity="0.8"/>
+  <!-- Neon camera outline -->
+  <rect x="130" y="165" width="252" height="185" rx="18" fill="none" stroke="#00FFFF" stroke-width="5" filter="url(#neonGlow)"/>
+  <!-- Lens neon ring -->
+  <circle cx="256" cy="257" r="65" fill="none" stroke="#FF00FF" stroke-width="5" filter="url(#neonGlow)"/>
+  <circle cx="256" cy="257" r="48" fill="none" stroke="#00FFFF" stroke-width="3" filter="url(#neonGlow)"/>
+  <circle cx="256" cy="257" r="28" fill="#FF00FF" opacity="0.3"/>
+  <!-- Viewfinder neon -->
+  <rect x="200" y="143" width="112" height="30" rx="8" fill="none" stroke="#FFD700" stroke-width="4" filter="url(#neonGlow)"/>
+  <!-- Cartoon stars -->
+  <text x="100" y="140" font-size="32" fill="#FF00FF" filter="url(#neonGlow)">★</text>
+  <text x="380" y="140" font-size="28" fill="#00FFFF" filter="url(#neonGlow)">✦</text>
+  <text x="100" y="390" font-size="28" fill="#FFD700" filter="url(#neonGlow)">✦</text>
+  <text x="380" y="390" font-size="32" fill="#FF00FF" filter="url(#neonGlow)">★</text>
+  <!-- ZAP badge -->
+  <polygon points="330,90 370,90 350,120 385,120 310,175 340,135 305,135" fill="#FFD700" filter="url(#neonGlow)"/>
+  <!-- Pixel dots -->
+  <circle cx="148" cy="257" r="6" fill="#00FFFF" filter="url(#neonGlow)"/>
+  <circle cx="364" cy="257" r="6" fill="#00FFFF" filter="url(#neonGlow)"/>
+</svg>

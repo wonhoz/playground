@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0C1E3E"/>
+      <stop offset="100%" stop-color="#1E3A5F"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Blueprint grid -->
+  <g stroke="#1E4A7F" stroke-width="0.5" opacity="0.6">
+    <line x1="60" y1="60" x2="60" y2="452"/>
+    <line x1="120" y1="60" x2="120" y2="452"/>
+    <line x1="180" y1="60" x2="180" y2="452"/>
+    <line x1="240" y1="60" x2="240" y2="452"/>
+    <line x1="300" y1="60" x2="300" y2="452"/>
+    <line x1="360" y1="60" x2="360" y2="452"/>
+    <line x1="420" y1="60" x2="420" y2="452"/>
+    <line x1="60" y1="60" x2="452" y2="60"/>
+    <line x1="60" y1="120" x2="452" y2="120"/>
+    <line x1="60" y1="180" x2="452" y2="180"/>
+    <line x1="60" y1="240" x2="452" y2="240"/>
+    <line x1="60" y1="300" x2="452" y2="300"/>
+    <line x1="60" y1="360" x2="452" y2="360"/>
+    <line x1="60" y1="420" x2="452" y2="420"/>
+  </g>
+  <!-- Schema entity 1: User -->
+  <rect x="70" y="80" width="140" height="150" rx="6" fill="#0F2A4A" stroke="#3B82F6" stroke-width="2"/>
+  <rect x="70" y="80" width="140" height="30" rx="6" fill="#1D4ED8"/>
+  <rect x="70" y="100" width="140" height="10" fill="#1D4ED8"/>
+  <text x="140" y="100" font-family="Arial" font-size="12" fill="white" text-anchor="middle" font-weight="bold">User</text>
+  <line x1="70" y1="110" x2="210" y2="110" stroke="#3B82F6" stroke-width="1"/>
+  <text x="82" y="126" font-family="Courier New" font-size="10" fill="#93C5FD">id: int PK</text>
+  <text x="82" y="142" font-family="Courier New" font-size="10" fill="#BFDBFE">name: string</text>
+  <text x="82" y="158" font-family="Courier New" font-size="10" fill="#BFDBFE">email: string</text>
+  <text x="82" y="174" font-family="Courier New" font-size="10" fill="#BFDBFE">age: number</text>
+  <text x="82" y="190" font-family="Courier New" font-size="10" fill="#BFDBFE">role: string</text>
+  <text x="82" y="206" font-family="Courier New" font-size="10" fill="#BFDBFE">createdAt</text>
+  <!-- Schema entity 2: Order -->
+  <rect x="300" y="80" width="142" height="130" rx="6" fill="#0F2A4A" stroke="#3B82F6" stroke-width="2"/>
+  <rect x="300" y="80" width="142" height="30" rx="6" fill="#1D4ED8"/>
+  <rect x="300" y="100" width="142" height="10" fill="#1D4ED8"/>
+  <text x="371" y="100" font-family="Arial" font-size="12" fill="white" text-anchor="middle" font-weight="bold">Order</text>
+  <line x1="300" y1="110" x2="442" y2="110" stroke="#3B82F6" stroke-width="1"/>
+  <text x="312" y="126" font-family="Courier New" font-size="10" fill="#93C5FD">id: int PK</text>
+  <text x="312" y="142" font-family="Courier New" font-size="10" fill="#FCA5A5">userId: FK</text>
+  <text x="312" y="158" font-family="Courier New" font-size="10" fill="#BFDBFE">total: float</text>
+  <text x="312" y="174" font-family="Courier New" font-size="10" fill="#BFDBFE">status: string</text>
+  <text x="312" y="190" font-family="Courier New" font-size="10" fill="#BFDBFE">date: Date</text>
+  <!-- Schema entity 3: Product -->
+  <rect x="300" y="270" width="142" height="140" rx="6" fill="#0F2A4A" stroke="#3B82F6" stroke-width="2"/>
+  <rect x="300" y="270" width="142" height="30" rx="6" fill="#1D4ED8"/>
+  <rect x="300" y="290" width="142" height="10" fill="#1D4ED8"/>
+  <text x="371" y="290" font-family="Arial" font-size="12" fill="white" text-anchor="middle" font-weight="bold">Product</text>
+  <line x1="300" y1="300" x2="442" y2="300" stroke="#3B82F6" stroke-width="1"/>
+  <text x="312" y="316" font-family="Courier New" font-size="10" fill="#93C5FD">id: int PK</text>
+  <text x="312" y="332" font-family="Courier New" font-size="10" fill="#BFDBFE">name: string</text>
+  <text x="312" y="348" font-family="Courier New" font-size="10" fill="#BFDBFE">price: float</text>
+  <text x="312" y="364" font-family="Courier New" font-size="10" fill="#BFDBFE">stock: int</text>
+  <text x="312" y="380" font-family="Courier New" font-size="10" fill="#BFDBFE">category</text>
+  <!-- Relation lines -->
+  <line x1="210" y1="140" x2="300" y2="140" stroke="#F59E0B" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <line x1="371" y1="210" x2="371" y2="270" stroke="#F59E0B" stroke-width="1.5" stroke-dasharray="5,3"/>
+  <!-- Relation diamond connectors -->
+  <polygon points="210,137 220,140 210,143 200,140" fill="#F59E0B"/>
+  <polygon points="371,225 374,235 371,245 368,235" fill="#F59E0B"/>
+  <!-- Mock count badge -->
+  <circle cx="100" cy="430" r="28" fill="#1D4ED8"/>
+  <text x="100" y="425" font-family="Arial" font-size="11" fill="#BFDBFE" text-anchor="middle">Mock</text>
+  <text x="100" y="442" font-family="Arial" font-size="13" fill="white" text-anchor="middle" font-weight="bold">100×</text>
+</svg>

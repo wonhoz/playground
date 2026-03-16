@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1B2A1B"/>
+      <stop offset="100%" stop-color="#1A3A1A"/>
+    </linearGradient>
+    <linearGradient id="screen" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0A2A0A"/>
+      <stop offset="100%" stop-color="#051505"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Terminal window -->
+  <rect x="80" y="120" width="352" height="280" rx="12" fill="url(#screen)" stroke="#2E7D32" stroke-width="2"/>
+  <!-- Title bar -->
+  <rect x="80" y="120" width="352" height="36" rx="12" fill="#1B5E20"/>
+  <rect x="80" y="140" width="352" height="16" fill="#1B5E20"/>
+  <circle cx="110" cy="138" r="7" fill="#FF5252"/>
+  <circle cx="133" cy="138" r="7" fill="#FFD740"/>
+  <circle cx="156" cy="138" r="7" fill="#69F0AE"/>
+  <text x="192" y="144" font-family="monospace" font-size="14" fill="#81C784">serve.cast</text>
+  <!-- Terminal content -->
+  <text x="105" y="185" font-family="monospace" font-size="16" fill="#4CAF50">$ serve --port 8080 .</text>
+  <text x="105" y="210" font-family="monospace" font-size="15" fill="#81C784">Serving files from ./</text>
+  <text x="105" y="232" font-family="monospace" font-size="15" fill="#81C784">http://localhost:8080</text>
+  <text x="105" y="258" font-family="monospace" font-size="14" fill="#388E3C">GET /index.html 200</text>
+  <text x="105" y="278" font-family="monospace" font-size="14" fill="#388E3C">GET /style.css 200</text>
+  <text x="105" y="298" font-family="monospace" font-size="14" fill="#388E3C">GET /app.js 200</text>
+  <!-- Cursor -->
+  <rect x="105" y="318" width="10" height="18" fill="#4CAF50" opacity="0.9"/>
+  <!-- Bottom base -->
+  <rect x="200" y="405" width="112" height="12" rx="4" fill="#2E7D32"/>
+  <rect x="180" y="414" width="152" height="8" rx="4" fill="#1B5E20"/>
+</svg>

@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0A1628"/>
+      <stop offset="100%" stop-color="#0D2B4A"/>
+    </linearGradient>
+    <linearGradient id="wave1" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#29B6F6"/>
+      <stop offset="100%" stop-color="#0288D1"/>
+    </linearGradient>
+    <linearGradient id="wave2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#4FC3F7"/>
+      <stop offset="100%" stop-color="#29B6F6"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Bar chart (before/after) -->
+  <g opacity="0.4">
+    <rect x="130" y="200" width="38" height="140" rx="6" fill="#F44336"/>
+    <rect x="180" y="160" width="38" height="180" rx="6" fill="#FF7043"/>
+    <rect x="230" y="230" width="38" height="110" rx="6" fill="#F44336"/>
+  </g>
+  <!-- Cleaning wave -->
+  <path d="M112 290 Q175 260 240 290 Q305 320 368 290 Q410 270 440 290 L440 400 L112 400 Z" fill="#0288D1" opacity="0.7"/>
+  <path d="M112 270 Q175 240 240 270 Q305 300 368 270 Q410 250 440 270 L440 400 L112 400 Z" fill="url(#wave1)" opacity="0.6"/>
+  <path d="M112 255 Q175 228 240 255 Q305 282 368 255 Q410 238 440 255 L440 400 L112 400 Z" fill="url(#wave2)" opacity="0.5"/>
+  <!-- Clean bars after wash -->
+  <rect x="285" y="230" width="38" height="100" rx="6" fill="#29B6F6"/>
+  <rect x="335" y="210" width="38" height="120" rx="6" fill="#4FC3F7"/>
+  <rect x="385" y="245" width="38" height="85" rx="6" fill="#29B6F6"/>
+  <!-- Before/After divider -->
+  <line x1="270" y1="150" x2="270" y2="410" stroke="#E0E0E0" stroke-width="2" stroke-dasharray="8,6" opacity="0.4"/>
+  <text x="190" y="165" text-anchor="middle" font-family="Arial" font-size="16" fill="#EF9A9A" opacity="0.7">Before</text>
+  <text x="370" y="165" text-anchor="middle" font-family="Arial" font-size="16" fill="#81D4FA" opacity="0.7">After</text>
+  <!-- Checkmark -->
+  <circle cx="370" cy="130" r="28" fill="#0288D1" opacity="0.9"/>
+  <path d="M358 130 L367 139 L385 118" fill="none" stroke="#E0F7FA" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

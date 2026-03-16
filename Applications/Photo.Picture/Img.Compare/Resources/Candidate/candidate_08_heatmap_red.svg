@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#B71C1C"/>
+      <stop offset="100%" stop-color="#7F0000"/>
+    </linearGradient>
+    <radialGradient id="hot1" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FF5252" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#FF5252" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="hot2" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFAB40" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#FFAB40" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- 히트맵 베이스 -->
+  <rect x="50" y="80" width="412" height="300" rx="16" fill="#4A0000"/>
+  <!-- 히트 스팟들 -->
+  <ellipse cx="180" cy="200" rx="90" ry="80" fill="url(#hot1)"/>
+  <ellipse cx="320" cy="240" rx="70" ry="60" fill="url(#hot2)"/>
+  <ellipse cx="260" cy="170" rx="50" ry="45" fill="url(#hot1)" opacity="0.7"/>
+  <!-- 색상 범례 바 -->
+  <rect x="50" y="420" width="412" height="30" rx="8" fill="url(#bg)"/>
+  <defs>
+    <linearGradient id="legend" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#212121"/>
+      <stop offset="33%" stop-color="#1565C0"/>
+      <stop offset="66%" stop-color="#FFAB40"/>
+      <stop offset="100%" stop-color="#FF5252"/>
+    </linearGradient>
+  </defs>
+  <rect x="50" y="420" width="412" height="30" rx="8" fill="url(#legend)"/>
+  <text x="50" y="475" font-size="16" fill="#FFCDD2" font-family="Segoe UI">Same</text>
+  <text x="462" y="475" font-size="16" text-anchor="end" fill="#FF5252" font-family="Segoe UI">Different</text>
+  <!-- 퍼센트 -->
+  <text x="256" y="370" font-size="28" text-anchor="middle" fill="#FFCDD2" font-family="Segoe UI">Δ 23.4%</text>
+</svg>

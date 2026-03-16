@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#001219"/>
+      <stop offset="100%" stop-color="#005F73"/>
+    </linearGradient>
+    <linearGradient id="cloud" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0A9396"/>
+      <stop offset="100%" stop-color="#94D2BD"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Cloud shape -->
+  <circle cx="200" cy="220" r="70" fill="url(#cloud)" opacity="0.9"/>
+  <circle cx="270" cy="195" r="80" fill="url(#cloud)" opacity="0.9"/>
+  <circle cx="340" cy="225" r="60" fill="url(#cloud)" opacity="0.9"/>
+  <rect x="140" y="220" width="260" height="80" fill="url(#cloud)" opacity="0.9"/>
+  <!-- Server racks inside cloud -->
+  <rect x="170" y="230" width="170" height="22" rx="5" fill="#001219" opacity="0.7"/>
+  <rect x="170" y="258" width="170" height="22" rx="5" fill="#001219" opacity="0.6"/>
+  <circle cx="318" cy="241" r="5" fill="#00FF88"/>
+  <circle cx="318" cy="269" r="5" fill="#FFD600"/>
+  <!-- Arrow down (mock response) -->
+  <path d="M 256 320 L 220 370 L 292 370 Z" fill="#0A9396"/>
+  <line x1="256" y1="320" x2="256" y2="420" stroke="#0A9396" stroke-width="6"/>
+  <!-- Client node -->
+  <rect x="206" y="420" width="100" height="36" rx="10" fill="#0A9396"/>
+  <text x="256" y="443" text-anchor="middle" font-family="monospace" font-size="14" fill="#001219">CLIENT</text>
+</svg>

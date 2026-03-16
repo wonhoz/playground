@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1C1C2E"/>
+      <stop offset="100%" stop-color="#16213E"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#E040FB"/>
+      <stop offset="100%" stop-color="#7C4DFF"/>
+    </linearGradient>
+    <filter id="softGlow">
+      <feGaussianBlur stdDeviation="6" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Pulse waveform background -->
+  <polyline points="40,300 80,300 80,220 100,220 100,300 140,300 140,240 160,240 160,300 200,300 200,260 215,260 215,300 255,300 255,200 280,200 280,300 330,300 330,250 345,250 345,300 400,300 400,235 415,235 415,300 472,300" fill="none" stroke="url(#accent)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" filter="url(#softGlow)"/>
+  <!-- Morse dots overlay -->
+  <circle cx="140" cy="180" r="14" fill="#E040FB" filter="url(#softGlow)"/>
+  <rect x="168" y="168" width="38" height="24" rx="12" fill="#E040FB" filter="url(#softGlow)"/>
+  <circle cx="222" cy="180" r="14" fill="#7C4DFF" filter="url(#softGlow)"/>
+  <rect x="250" y="168" width="38" height="24" rx="12" fill="#7C4DFF" filter="url(#softGlow)"/>
+  <circle cx="304" cy="180" r="14" fill="#E040FB" filter="url(#softGlow)"/>
+  <!-- Runner minimal icon -->
+  <circle cx="256" cy="400" r="20" fill="none" stroke="url(#accent)" stroke-width="5"/>
+  <line x1="256" y1="420" x2="256" y2="448" stroke="url(#accent)" stroke-width="5" stroke-linecap="round"/>
+  <line x1="256" y1="434" x2="238" y2="455" stroke="url(#accent)" stroke-width="5" stroke-linecap="round"/>
+  <line x1="256" y1="434" x2="274" y2="450" stroke="url(#accent)" stroke-width="5" stroke-linecap="round"/>
+  <line x1="244" y1="410" x2="226" y2="400" stroke="url(#accent)" stroke-width="4" stroke-linecap="round"/>
+  <line x1="268" y1="410" x2="286" y2="400" stroke="url(#accent)" stroke-width="4" stroke-linecap="round"/>
+  <!-- Ground line -->
+  <rect x="80" y="468" width="352" height="4" rx="2" fill="url(#accent)" opacity="0.4"/>
+</svg>

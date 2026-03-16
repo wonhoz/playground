@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a1a2a"/>
+      <stop offset="100%" stop-color="#152535"/>
+    </linearGradient>
+    <linearGradient id="track" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#d04020"/>
+      <stop offset="100%" stop-color="#a03010"/>
+    </linearGradient>
+    <linearGradient id="runner" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f0d080"/>
+      <stop offset="100%" stop-color="#c0a050"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Track lanes -->
+  <ellipse cx="256" cy="380" rx="200" ry="80" fill="none" stroke="url(#track)" stroke-width="60"/>
+  <!-- Lane lines -->
+  <ellipse cx="256" cy="380" rx="180" ry="65" fill="none" stroke="#ffffff" stroke-width="2" opacity="0.4"/>
+  <ellipse cx="256" cy="380" rx="160" ry="50" fill="none" stroke="#ffffff" stroke-width="2" opacity="0.4"/>
+  <ellipse cx="256" cy="380" rx="140" ry="35" fill="none" stroke="#ffffff" stroke-width="2" opacity="0.4"/>
+  <ellipse cx="256" cy="380" rx="220" ry="90" fill="none" stroke="#ffffff" stroke-width="2" opacity="0.4"/>
+  <!-- Starting blocks -->
+  <rect x="80" y="360" width="30" height="16" rx="4" fill="#888"/>
+  <rect x="80" y="378" width="30" height="12" rx="4" fill="#666"/>
+  <!-- Runner figure -->
+  <circle cx="280" cy="260" r="22" fill="url(#runner)"/>
+  <!-- Body -->
+  <path d="M280 282 L268 340 L278 340 L280 305 L290 330 L300 330 L290 280Z" fill="#e04020"/>
+  <!-- Left arm -->
+  <path d="M280 295 L250 278 L255 270 L285 285Z" fill="#e04020"/>
+  <!-- Right arm -->
+  <path d="M280 295 L310 282 L308 274 L277 290Z" fill="#e04020"/>
+  <!-- Left leg running -->
+  <path d="M278 340 L262 370 L270 374 L282 348Z" fill="#e04020"/>
+  <!-- Right leg back -->
+  <path d="M290 330 L300 358 L308 354 L300 326Z" fill="#e04020"/>
+  <!-- Motion lines -->
+  <line x1="200" y1="265" x2="248" y2="265" stroke="#ffcc00" stroke-width="3" opacity="0.6" stroke-linecap="round"/>
+  <line x1="210" y1="280" x2="252" y2="280" stroke="#ffcc00" stroke-width="3" opacity="0.5" stroke-linecap="round"/>
+  <line x1="218" y1="295" x2="254" y2="295" stroke="#ffcc00" stroke-width="2" opacity="0.4" stroke-linecap="round"/>
+  <!-- Finish tape -->
+  <rect x="340" y="240" width="6" height="120" fill="#fff"/>
+  <rect x="346" y="240" width="80" height="120" fill="none"/>
+  <path d="M346 240 L420 240 L420 300 L346 300 Z" fill="#ffcc00" opacity="0.8"/>
+  <path d="M346 300 L420 300 L420 360 L346 360 Z" fill="#cc2020" opacity="0.8"/>
+  <!-- Star above runner -->
+  <polygon points="280,200 286,218 304,218 290,230 295,248 280,238 265,248 270,230 256,218 274,218" fill="#ffcc00"/>
+  <!-- Speed particles -->
+  <circle cx="220" cy="258" r="3" fill="#ffcc00" opacity="0.7"/>
+  <circle cx="230" cy="275" r="2" fill="#ffcc00" opacity="0.5"/>
+</svg>

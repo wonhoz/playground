@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1a1a2e"/>
+      <stop offset="100%" stop-color="#16213e"/>
+    </linearGradient>
+    <linearGradient id="left" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#4a90d9"/>
+      <stop offset="100%" stop-color="#357abd"/>
+    </linearGradient>
+    <linearGradient id="right" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#f5a623"/>
+      <stop offset="100%" stop-color="#e8941a"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Left image panel (before) -->
+  <rect x="60" y="80" width="175" height="352" rx="12" fill="url(#left)" opacity="0.9"/>
+  <!-- Right image panel (after) -->
+  <rect x="277" y="80" width="175" height="352" rx="12" fill="url(#right)" opacity="0.9"/>
+  <!-- Divider line -->
+  <rect x="244" y="60" width="24" height="392" rx="12" fill="#ffffff"/>
+  <!-- Arrow left -->
+  <polygon points="232,256 212,236 212,276" fill="#ffffff"/>
+  <!-- Arrow right -->
+  <polygon points="280,256 300,236 300,276" fill="#ffffff"/>
+  <!-- Before label -->
+  <text x="147" y="296" text-anchor="middle" font-family="Arial" font-size="28" font-weight="bold" fill="white" opacity="0.9">B</text>
+  <!-- After label -->
+  <text x="364" y="296" text-anchor="middle" font-family="Arial" font-size="28" font-weight="bold" fill="white" opacity="0.9">A</text>
+</svg>

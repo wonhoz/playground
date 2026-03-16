@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0C2233"/>
+      <stop offset="100%" stop-color="#0A1929"/>
+    </linearGradient>
+    <linearGradient id="wave1" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#06B6D4" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#06B6D4"/>
+      <stop offset="100%" stop-color="#06B6D4" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="wave2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#22D3EE" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#22D3EE"/>
+      <stop offset="100%" stop-color="#22D3EE" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Client side -->
+  <rect x="50" y="180" width="100" height="152" rx="10" fill="#0C2233" stroke="#06B6D4" stroke-width="2"/>
+  <rect x="58" y="193" width="84" height="60" rx="5" fill="#0a1929"/>
+  <rect x="66" y="204" width="60" height="8" rx="3" fill="#22D3EE" opacity="0.6"/>
+  <rect x="66" y="220" width="48" height="7" rx="3" fill="#22D3EE" opacity="0.4"/>
+  <rect x="66" y="235" width="54" height="7" rx="3" fill="#22D3EE" opacity="0.4"/>
+  <text x="100" y="278" font-family="Arial" font-size="10" fill="#22D3EE" text-anchor="middle">Client</text>
+  <!-- Request waves -->
+  <!-- Wave 1 -->
+  <path d="M156 215 Q256 195 360 215" fill="none" stroke="url(#wave1)" stroke-width="2.5" opacity="0.9"/>
+  <polygon points="360,208 374,215 360,222" fill="#06B6D4" opacity="0.8"/>
+  <!-- Wave 2 -->
+  <path d="M156 240 Q256 225 360 240" fill="none" stroke="url(#wave2)" stroke-width="2" opacity="0.7"/>
+  <polygon points="360,233 372,240 360,247" fill="#22D3EE" opacity="0.6"/>
+  <!-- Response waves -->
+  <!-- Response 1 -->
+  <path d="M362 280 Q256 260 152 280" fill="none" stroke="#34D399" stroke-width="2.5" opacity="0.7" stroke-dasharray="5,3"/>
+  <polygon points="152,273 138,280 152,287" fill="#34D399" opacity="0.7"/>
+  <!-- Response 2 -->
+  <path d="M362 305 Q256 285 152 305" fill="none" stroke="#34D399" stroke-width="2" opacity="0.5" stroke-dasharray="5,3"/>
+  <polygon points="152,298 140,305 152,312" fill="#34D399" opacity="0.5"/>
+  <!-- Labels -->
+  <rect x="200" y="198" width="60" height="16" rx="4" fill="#083344"/>
+  <text x="230" y="211" font-family="Courier New" font-size="9" fill="#06B6D4" text-anchor="middle">GET /users</text>
+  <rect x="218" y="243" width="60" height="16" rx="4" fill="#083344"/>
+  <text x="248" y="256" font-family="Courier New" font-size="9" fill="#22D3EE" text-anchor="middle">POST /data</text>
+  <rect x="200" y="262" width="68" height="16" rx="4" fill="#0a2a1a"/>
+  <text x="234" y="275" font-family="Courier New" font-size="9" fill="#34D399" text-anchor="middle">200 OK [...]</text>
+  <!-- Server side -->
+  <rect x="362" y="180" width="100" height="152" rx="10" fill="#0C2233" stroke="#0E7490" stroke-width="2"/>
+  <!-- Server racks inside -->
+  <rect x="372" y="193" width="80" height="16" rx="4" fill="#083344" stroke="#0E7490" stroke-width="1"/>
+  <circle cx="382" cy="201" r="4" fill="#22C55E"/>
+  <rect x="372" y="216" width="80" height="16" rx="4" fill="#083344" stroke="#0E7490" stroke-width="1"/>
+  <circle cx="382" cy="224" r="4" fill="#22C55E"/>
+  <rect x="372" y="239" width="80" height="16" rx="4" fill="#083344" stroke="#0E7490" stroke-width="1"/>
+  <circle cx="382" cy="247" r="4" fill="#F59E0B"/>
+  <text x="412" y="279" font-family="Arial" font-size="10" fill="#22D3EE" text-anchor="middle">Mock Server</text>
+  <text x="412" y="294" font-family="Courier New" font-size="9" fill="#0E7490" text-anchor="middle">:3000</text>
+  <!-- Status indicator top -->
+  <rect x="140" y="115" width="232" height="44" rx="10" fill="#083344" stroke="#06B6D4" stroke-width="1.5"/>
+  <circle cx="162" cy="137" r="7" fill="#22C55E"/>
+  <text x="260" y="141" font-family="Courier New" font-size="12" fill="#22D3EE" text-anchor="middle">Mock Server Active</text>
+  <!-- Bottom stats -->
+  <rect x="90" y="370" width="100" height="50" rx="8" fill="#083344"/>
+  <text x="140" y="389" font-family="Arial" font-size="10" fill="#8B949E" text-anchor="middle">Requests</text>
+  <text x="140" y="408" font-family="Arial" font-size="18" fill="#06B6D4" text-anchor="middle" font-weight="bold">1,247</text>
+  <rect x="206" y="370" width="100" height="50" rx="8" fill="#083344"/>
+  <text x="256" y="389" font-family="Arial" font-size="10" fill="#8B949E" text-anchor="middle">Avg. Delay</text>
+  <text x="256" y="408" font-family="Arial" font-size="18" fill="#22D3EE" text-anchor="middle" font-weight="bold">12ms</text>
+  <rect x="322" y="370" width="100" height="50" rx="8" fill="#083344"/>
+  <text x="372" y="389" font-family="Arial" font-size="10" fill="#8B949E" text-anchor="middle">Routes</text>
+  <text x="372" y="408" font-family="Arial" font-size="18" fill="#34D399" text-anchor="middle" font-weight="bold">16</text>
+</svg>

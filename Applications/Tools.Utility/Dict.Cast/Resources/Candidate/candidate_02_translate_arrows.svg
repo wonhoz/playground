@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#004D40"/>
+      <stop offset="100%" stop-color="#00897B"/>
+    </linearGradient>
+    <linearGradient id="bubble1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E0F2F1"/>
+      <stop offset="100%" stop-color="#B2DFDB"/>
+    </linearGradient>
+    <linearGradient id="bubble2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00BFA5"/>
+      <stop offset="100%" stop-color="#00796B"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Speech bubble 1 (source) -->
+  <rect x="72" y="100" width="220" height="130" rx="20" fill="url(#bubble1)" stroke="#00897B" stroke-width="4"/>
+  <polygon points="140,230 120,275 175,230" fill="url(#bubble1)" stroke="#00897B" stroke-width="3"/>
+  <!-- Speech bubble 1 text -->
+  <text x="182" y="152" text-anchor="middle" font-family="'Segoe UI Bold', sans-serif" font-size="22" font-weight="bold" fill="#004D40">Hello</text>
+  <text x="182" y="184" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="16" fill="#004D40">Good morning!</text>
+  <text x="182" y="212" text-anchor="middle" font-family="'Segoe UI', sans-serif" font-size="14" fill="#00695C">How are you?</text>
+  <!-- Translation arrow (down-right) -->
+  <path d="M256,256 L286,280 L316,256" stroke="#1DE9B6" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M256,256 Q286,290 316,256" stroke="#1DE9B6" stroke-width="3" fill="none" stroke-dasharray="6,4"/>
+  <!-- Speech bubble 2 (translated) -->
+  <rect x="220" y="310" width="220" height="130" rx="20" fill="url(#bubble2)" stroke="#1DE9B6" stroke-width="4"/>
+  <polygon points="300,310 265,270 310,310" fill="url(#bubble2)" stroke="#1DE9B6" stroke-width="3"/>
+  <!-- Speech bubble 2 text (Korean) -->
+  <text x="330" y="362" text-anchor="middle" font-family="'Malgun Gothic', sans-serif" font-size="22" font-weight="bold" fill="white">안녕하세요</text>
+  <text x="330" y="394" text-anchor="middle" font-family="'Malgun Gothic', sans-serif" font-size="16" fill="#E0F2F1">좋은 아침입니다!</text>
+  <text x="330" y="422" text-anchor="middle" font-family="'Malgun Gothic', sans-serif" font-size="14" fill="#B2DFDB">어떻게 지내세요?</text>
+  <!-- Translate icon center -->
+  <circle cx="256" cy="256" r="30" fill="#00695C" stroke="#1DE9B6" stroke-width="3"/>
+  <text x="256" y="263" text-anchor="middle" font-size="20" fill="#1DE9B6">⇄</text>
+</svg>

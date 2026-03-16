@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0E1117"/>
+      <stop offset="100%" style="stop-color:#161B22"/>
+    </linearGradient>
+    <linearGradient id="header" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#1F6FEB"/>
+      <stop offset="100%" style="stop-color:#0D4EA6"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Table -->
+  <rect x="60" y="100" width="392" height="310" rx="12" fill="#161B22" stroke="#30363D" stroke-width="2"/>
+  <!-- Header -->
+  <rect x="60" y="100" width="392" height="44" rx="12" fill="url(#header)"/>
+  <text x="100" y="127" font-family="monospace" font-size="14" fill="white" font-weight="bold">PORT</text>
+  <text x="190" y="127" font-family="monospace" font-size="14" fill="white" font-weight="bold">STATE</text>
+  <text x="300" y="127" font-family="monospace" font-size="14" fill="white" font-weight="bold">PROCESS</text>
+  <!-- Row 1 - open -->
+  <rect x="62" y="144" width="388" height="36" fill="#1F6FEB" opacity="0.08"/>
+  <text x="100" y="166" font-family="monospace" font-size="13" fill="#58A6FF">80</text>
+  <circle cx="205" cy="162" r="5" fill="#3FB950"/>
+  <text x="218" y="167" font-family="monospace" font-size="12" fill="#3FB950">LISTEN</text>
+  <text x="300" y="167" font-family="monospace" font-size="12" fill="#8B949E">nginx.exe</text>
+  <!-- Row 2 -->
+  <text x="100" y="202" font-family="monospace" font-size="13" fill="#58A6FF">443</text>
+  <circle cx="205" cy="198" r="5" fill="#3FB950"/>
+  <text x="218" y="203" font-family="monospace" font-size="12" fill="#3FB950">LISTEN</text>
+  <text x="300" y="203" font-family="monospace" font-size="12" fill="#8B949E">nginx.exe</text>
+  <!-- Row 3 - close -->
+  <rect x="62" y="216" width="388" height="36" fill="#FF4444" opacity="0.05"/>
+  <text x="100" y="238" font-family="monospace" font-size="13" fill="#58A6FF">8080</text>
+  <circle cx="205" cy="234" r="5" fill="#F85149"/>
+  <text x="218" y="239" font-family="monospace" font-size="12" fill="#F85149">CLOSED</text>
+  <text x="300" y="239" font-family="monospace" font-size="12" fill="#8B949E">—</text>
+  <!-- Row 4 -->
+  <text x="100" y="274" font-family="monospace" font-size="13" fill="#58A6FF">3306</text>
+  <circle cx="205" cy="270" r="5" fill="#3FB950"/>
+  <text x="218" y="275" font-family="monospace" font-size="12" fill="#3FB950">LISTEN</text>
+  <text x="300" y="275" font-family="monospace" font-size="12" fill="#8B949E">mysqld.exe</text>
+  <!-- Row 5 -->
+  <text x="100" y="310" font-family="monospace" font-size="13" fill="#58A6FF">22</text>
+  <circle cx="205" cy="306" r="5" fill="#E3B341"/>
+  <text x="218" y="311" font-family="monospace" font-size="12" fill="#E3B341">WAIT</text>
+  <text x="300" y="311" font-family="monospace" font-size="12" fill="#8B949E">sshd.exe</text>
+  <!-- Bottom bar -->
+  <rect x="60" y="410" width="392" height="46" rx="12" fill="#21262D" stroke="#30363D" stroke-width="2"/>
+  <circle cx="100" cy="433" r="8" fill="#3FB950" opacity="0.8"/>
+  <text x="120" y="438" font-family="monospace" font-size="12" fill="#8B949E">4 open  •  1 closed  •  scanning...</text>
+</svg>

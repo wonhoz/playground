@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF6B35"/>
+      <stop offset="100%" stop-color="#F7C59F"/>
+    </linearGradient>
+    <radialGradient id="burst" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFE400"/>
+      <stop offset="100%" stop-color="#FF6B35"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Burst rays -->
+  <g transform="translate(256,256)">
+    <polygon points="0,-220 18,-60 0,-80 -18,-60" fill="#FFE400" opacity="0.9"/>
+    <polygon points="156,-156 30,-30 60,0 30,30" fill="#FFE400" opacity="0.9" transform="rotate(45)"/>
+    <polygon points="220,0 60,18 80,0 60,-18" fill="#FFE400" opacity="0.9" transform="rotate(90)"/>
+    <polygon points="156,156 30,30 0,60 -30,30" fill="#FFE400" opacity="0.9" transform="rotate(135)"/>
+    <polygon points="0,220 -18,60 0,80 18,60" fill="#FFE400" opacity="0.9" transform="rotate(180)"/>
+    <polygon points="-156,156 -30,30 -60,0 -30,-30" fill="#FFE400" opacity="0.9" transform="rotate(225)"/>
+    <polygon points="-220,0 -60,-18 -80,0 -60,18" fill="#FFE400" opacity="0.9" transform="rotate(270)"/>
+    <polygon points="-156,-156 -30,-30 0,-60 30,-30" fill="#FFE400" opacity="0.9" transform="rotate(315)"/>
+  </g>
+  <!-- Camera body -->
+  <rect x="136" y="176" width="240" height="170" rx="24" fill="#1A1A2E" stroke="#FFE400" stroke-width="6"/>
+  <!-- Lens outer -->
+  <circle cx="256" cy="261" r="62" fill="#2D2D44" stroke="#FFE400" stroke-width="5"/>
+  <!-- Lens inner -->
+  <circle cx="256" cy="261" r="44" fill="url(#burst)" opacity="0.85"/>
+  <!-- Lens highlight -->
+  <circle cx="238" cy="244" r="14" fill="white" opacity="0.35"/>
+  <!-- Viewfinder bump -->
+  <rect x="206" y="154" width="100" height="32" rx="10" fill="#1A1A2E" stroke="#FFE400" stroke-width="4"/>
+  <!-- Halftone dots -->
+  <circle cx="156" cy="196" r="5" fill="#FFE400" opacity="0.7"/>
+  <circle cx="180" cy="196" r="5" fill="#FFE400" opacity="0.7"/>
+  <circle cx="356" cy="196" r="5" fill="#FFE400" opacity="0.7"/>
+  <circle cx="332" cy="196" r="5" fill="#FFE400" opacity="0.7"/>
+  <!-- POW text badge -->
+  <ellipse cx="380" cy="148" rx="56" ry="36" fill="#FF2D55" stroke="#1A1A2E" stroke-width="4"/>
+  <text x="380" y="157" text-anchor="middle" font-family="Arial Black, sans-serif" font-size="26" font-weight="900" fill="white" letter-spacing="-1">POW!</text>
+</svg>

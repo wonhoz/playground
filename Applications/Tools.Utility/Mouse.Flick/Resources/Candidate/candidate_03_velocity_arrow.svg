@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#000820"/>
+      <stop offset="100%" stop-color="#001040"/>
+    </linearGradient>
+    <linearGradient id="vel1" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FF416C"/>
+      <stop offset="100%" stop-color="#FF4B2B"/>
+    </linearGradient>
+    <linearGradient id="vel2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#F7971E"/>
+      <stop offset="100%" stop-color="#FFD200"/>
+    </linearGradient>
+    <linearGradient id="vel3" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#11998E"/>
+      <stop offset="100%" stop-color="#38EF7D"/>
+    </linearGradient>
+    <filter id="velGlow">
+      <feGaussianBlur stdDeviation="5" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Three velocity arrows at different angles -->
+  <!-- Right-up fast flick -->
+  <line x1="100" y1="380" x2="340" y2="180" stroke="url(#vel1)" stroke-width="10" stroke-linecap="round" filter="url(#velGlow)"/>
+  <polygon points="340,180 300,195 318,220" fill="#FF416C" filter="url(#velGlow)"/>
+  <!-- Trail dots -->
+  <circle cx="130" cy="354" r="8" fill="#FF416C" opacity="0.6"/>
+  <circle cx="175" cy="318" r="6" fill="#FF416C" opacity="0.4"/>
+  <circle cx="220" cy="282" r="5" fill="#FF416C" opacity="0.3"/>
+  <!-- Right fast flick -->
+  <line x1="80" y1="270" x2="380" y2="270" stroke="url(#vel2)" stroke-width="8" stroke-linecap="round" filter="url(#velGlow)"/>
+  <polygon points="380,270 348,254 348,286" fill="#FFD200" filter="url(#velGlow)"/>
+  <!-- Trail -->
+  <circle cx="120" cy="270" r="6" fill="#FFD200" opacity="0.6"/>
+  <circle cx="180" cy="270" r="5" fill="#FFD200" opacity="0.4"/>
+  <circle cx="240" cy="270" r="4" fill="#FFD200" opacity="0.2"/>
+  <!-- Right-down flick -->
+  <line x1="100" y1="160" x2="340" y2="370" stroke="url(#vel3)" stroke-width="10" stroke-linecap="round" filter="url(#velGlow)"/>
+  <polygon points="340,370 310,340 338,325" fill="#38EF7D" filter="url(#velGlow)"/>
+  <!-- Trail -->
+  <circle cx="130" cy="182" r="8" fill="#38EF7D" opacity="0.6"/>
+  <circle cx="175" cy="210" r="6" fill="#38EF7D" opacity="0.4"/>
+  <circle cx="220" cy="238" r="5" fill="#38EF7D" opacity="0.3"/>
+  <!-- Central origin point -->
+  <circle cx="100" cy="270" r="18" fill="#FFFFFF" opacity="0.3" filter="url(#velGlow)"/>
+  <circle cx="100" cy="270" r="10" fill="#FFFFFF" opacity="0.6"/>
+  <!-- Mouse cursor -->
+  <polygon points="410,120 410,175 425,160 435,185 445,180 435,155 455,155" fill="#FFFFFF" opacity="0.85"/>
+</svg>

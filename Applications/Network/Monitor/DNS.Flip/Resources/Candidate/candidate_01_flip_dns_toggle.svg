@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a1628"/>
+      <stop offset="100%" stop-color="#0d2137"/>
+    </linearGradient>
+    <linearGradient id="on" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00bcd4"/>
+      <stop offset="100%" stop-color="#00acc1"/>
+    </linearGradient>
+    <linearGradient id="off" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#546e7a"/>
+      <stop offset="100%" stop-color="#455a64"/>
+    </linearGradient>
+    <filter id="glow"><feGaussianBlur stdDeviation="8"/></filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- toggle track ON -->
+  <rect x="100" y="180" width="160" height="70" rx="35" fill="url(#on)"/>
+  <circle cx="225" cy="215" r="28" fill="white"/>
+  <circle cx="225" cy="215" r="28" fill="url(#glow)" opacity="0.3"/>
+  <!-- toggle track OFF -->
+  <rect x="100" y="285" width="160" height="70" rx="35" fill="url(#off)"/>
+  <circle cx="135" cy="320" r="28" fill="#90a4ae"/>
+  <!-- flip arrows -->
+  <path d="M285 200 Q340 170 380 215" stroke="#00e5ff" stroke-width="8" fill="none" stroke-linecap="round"/>
+  <polygon points="380,215 368,200 392,202" fill="#00e5ff"/>
+  <path d="M380 300 Q340 340 285 315" stroke="#546e7a" stroke-width="8" fill="none" stroke-linecap="round"/>
+  <polygon points="285,315 298,328 272,328" fill="#546e7a"/>
+  <!-- DNS label dots -->
+  <circle cx="380" cy="200" r="10" fill="#00e5ff" filter="url(#glow)"/>
+  <circle cx="380" cy="300" r="10" fill="#546e7a"/>
+  <!-- glow on active -->
+  <rect x="100" y="180" width="160" height="70" rx="35" fill="url(#on)" opacity="0.1" filter="url(#glow)"/>
+</svg>

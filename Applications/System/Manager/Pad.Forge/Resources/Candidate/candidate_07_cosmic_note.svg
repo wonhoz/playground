@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#1A0A3A"/>
+      <stop offset="100%" stop-color="#050010"/>
+    </radialGradient>
+    <linearGradient id="cosmicPad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2D1B4E"/>
+      <stop offset="100%" stop-color="#1A0A2E"/>
+    </linearGradient>
+    <linearGradient id="cosmicText" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#E040FB"/>
+      <stop offset="100%" stop-color="#7C4DFF"/>
+    </linearGradient>
+    <filter id="cosmicGlow">
+      <feGaussianBlur stdDeviation="5" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Stars -->
+  <circle cx="80" cy="100" r="2" fill="white" opacity="0.7"/>
+  <circle cx="160" cy="60" r="3" fill="white" opacity="0.5"/>
+  <circle cx="380" cy="80" r="2" fill="#E040FB" opacity="0.6"/>
+  <circle cx="440" cy="150" r="2" fill="white" opacity="0.8"/>
+  <circle cx="60" cy="300" r="2" fill="#7C4DFF" opacity="0.5"/>
+  <circle cx="450" cy="380" r="3" fill="white" opacity="0.4"/>
+  <!-- Notepad with cosmic glow -->
+  <rect x="112" y="88" width="258" height="325" rx="16" fill="url(#cosmicPad)" stroke="url(#cosmicText)" stroke-width="3" filter="url(#cosmicGlow)"/>
+  <!-- Top binding bar -->
+  <rect x="108" y="84" width="266" height="26" rx="12" fill="#3A1A5E"/>
+  <!-- Stars in the binding -->
+  <text x="180" y="101" font-family="sans-serif" font-size="12" fill="#E040FB">✦</text>
+  <text x="235" y="101" font-family="sans-serif" font-size="12" fill="#7C4DFF">✦</text>
+  <text x="290" y="101" font-family="sans-serif" font-size="12" fill="#E040FB">✦</text>
+  <!-- Title glow -->
+  <text x="241" y="130" font-family="sans-serif" font-size="18" fill="url(#cosmicText)" text-anchor="middle" font-weight="bold" filter="url(#cosmicGlow)">Pad.Forge</text>
+  <!-- Cosmic text lines (gradient colored) -->
+  <rect x="132" y="148" width="140" height="7" rx="3.5" fill="url(#cosmicText)" opacity="0.7" filter="url(#cosmicGlow)"/>
+  <rect x="132" y="165" width="110" height="5" rx="2.5" fill="#7C4DFF" opacity="0.5"/>
+  <rect x="132" y="180" width="130" height="5" rx="2.5" fill="#E040FB" opacity="0.4"/>
+  <rect x="132" y="195" width="100" height="5" rx="2.5" fill="#7C4DFF" opacity="0.4"/>
+  <rect x="132" y="210" width="120" height="5" rx="2.5" fill="#E040FB" opacity="0.3"/>
+  <rect x="132" y="240" width="130" height="5" rx="2.5" fill="#7C4DFF" opacity="0.4"/>
+  <rect x="132" y="255" width="110" height="5" rx="2.5" fill="#E040FB" opacity="0.3"/>
+  <rect x="132" y="270" width="140" height="5" rx="2.5" fill="#7C4DFF" opacity="0.3"/>
+  <!-- Cursor blink -->
+  <rect x="132" y="283" width="4" height="16" rx="2" fill="#E040FB" filter="url(#cosmicGlow)"/>
+  <!-- Small planet decoration -->
+  <circle cx="380" cy="300" r="36" fill="#1A0A2E" stroke="#7C4DFF" stroke-width="3" filter="url(#cosmicGlow)"/>
+  <ellipse cx="380" cy="300" rx="56" ry="14" fill="none" stroke="#E040FB" stroke-width="2.5" filter="url(#cosmicGlow)"/>
+  <!-- Bottom cosmic strip -->
+  <rect x="112" y="380" width="258" height="33" rx="10" fill="url(#cosmicText)" opacity="0.15"/>
+</svg>

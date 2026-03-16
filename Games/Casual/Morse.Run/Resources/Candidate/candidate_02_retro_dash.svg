@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#2D1B00"/>
+      <stop offset="100%" stop-color="#0A0800"/>
+    </linearGradient>
+    <radialGradient id="amber" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFB800"/>
+      <stop offset="100%" stop-color="#FF6600"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- CRT scanlines effect -->
+  <rect x="80" y="100" width="352" height="280" rx="12" fill="none" stroke="#FFB800" stroke-width="4" opacity="0.7"/>
+  <rect x="88" y="108" width="336" height="264" rx="8" fill="#0A0800" opacity="0.8"/>
+  <!-- Morse code display -->
+  <text x="256" y="160" font-family="monospace" font-size="28" fill="#FFB800" text-anchor="middle" opacity="0.9">... --- ...</text>
+  <!-- Pixel runner -->
+  <!-- Body pixels -->
+  <rect x="210" y="220" width="20" height="20" fill="#FFB800"/>
+  <rect x="190" y="240" width="60" height="20" fill="#FFB800"/>
+  <rect x="200" y="260" width="20" height="20" fill="#FFB800"/>
+  <rect x="240" y="260" width="20" height="20" fill="#FFB800"/>
+  <rect x="190" y="280" width="20" height="40" fill="#FFB800"/>
+  <rect x="250" y="280" width="20" height="40" fill="#FFB800"/>
+  <!-- Running legs -->
+  <rect x="175" y="320" width="20" height="20" fill="#FF6600"/>
+  <rect x="270" y="300" width="20" height="20" fill="#FF6600"/>
+  <!-- Ground -->
+  <rect x="80" y="380" width="352" height="8" rx="4" fill="#FFB800" opacity="0.5"/>
+  <!-- Score/dots display -->
+  <circle cx="130" cy="420" r="10" fill="#FFB800"/>
+  <rect x="155" y="412" width="28" height="16" rx="8" fill="#FFB800"/>
+  <circle cx="200" cy="420" r="10" fill="#FF6600"/>
+  <rect x="225" y="412" width="28" height="16" rx="8" fill="#FF6600"/>
+  <circle cx="270" cy="420" r="10" fill="#FFB800"/>
+</svg>

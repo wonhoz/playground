@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A0540"/>
+      <stop offset="100%" stop-color="#4A148C"/>
+    </linearGradient>
+    <radialGradient id="globe" cx="40%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#CE93D8"/>
+      <stop offset="50%" stop-color="#7B1FA2"/>
+      <stop offset="100%" stop-color="#4A148C"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Globe -->
+  <circle cx="256" cy="256" r="185" fill="url(#globe)" stroke="#CE93D8" stroke-width="4"/>
+  <!-- Longitude lines -->
+  <ellipse cx="256" cy="256" rx="80" ry="185" fill="none" stroke="#CE93D8" stroke-width="2" opacity="0.5"/>
+  <ellipse cx="256" cy="256" rx="140" ry="185" fill="none" stroke="#CE93D8" stroke-width="1.5" opacity="0.4"/>
+  <!-- Latitude lines -->
+  <line x1="71" y1="256" x2="441" y2="256" stroke="#CE93D8" stroke-width="2" opacity="0.5"/>
+  <ellipse cx="256" cy="210" rx="170" ry="35" fill="none" stroke="#CE93D8" stroke-width="1.5" opacity="0.35"/>
+  <ellipse cx="256" cy="302" rx="170" ry="35" fill="none" stroke="#CE93D8" stroke-width="1.5" opacity="0.35"/>
+  <ellipse cx="256" cy="160" rx="120" ry="28" fill="none" stroke="#CE93D8" stroke-width="1" opacity="0.25"/>
+  <ellipse cx="256" cy="352" rx="120" ry="28" fill="none" stroke="#CE93D8" stroke-width="1" opacity="0.25"/>
+  <!-- Language pins -->
+  <circle cx="200" cy="200" r="14" fill="#FFD600" stroke="white" stroke-width="2"/>
+  <text x="200" y="205" text-anchor="middle" font-family="monospace" font-size="10" fill="#1A0540">EN</text>
+  <circle cx="310" cy="220" r="14" fill="#FF4081" stroke="white" stroke-width="2"/>
+  <text x="310" y="225" text-anchor="middle" font-family="monospace" font-size="10" fill="white">KO</text>
+  <circle cx="256" cy="300" r="14" fill="#40C4FF" stroke="white" stroke-width="2"/>
+  <text x="256" y="305" text-anchor="middle" font-family="monospace" font-size="10" fill="#1A0540">JA</text>
+  <circle cx="180" cy="280" r="12" fill="#69F0AE" stroke="white" stroke-width="2"/>
+  <text x="180" y="285" text-anchor="middle" font-family="monospace" font-size="9" fill="#1A0540">FR</text>
+  <circle cx="330" cy="300" r="12" fill="#FF9800" stroke="white" stroke-width="2"/>
+  <text x="330" y="305" text-anchor="middle" font-family="monospace" font-size="9" fill="white">DE</text>
+  <!-- Connection lines between pins -->
+  <line x1="200" y1="200" x2="310" y2="220" stroke="#CE93D8" stroke-width="1.5" stroke-dasharray="5,4" opacity="0.6"/>
+  <line x1="310" y1="220" x2="256" y2="300" stroke="#CE93D8" stroke-width="1.5" stroke-dasharray="5,4" opacity="0.6"/>
+  <line x1="200" y1="200" x2="180" y2="280" stroke="#CE93D8" stroke-width="1.5" stroke-dasharray="5,4" opacity="0.5"/>
+</svg>

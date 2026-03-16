@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A1A1A"/>
+      <stop offset="100%" stop-color="#2D2D2D"/>
+    </linearGradient>
+    <linearGradient id="cursorGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#CCCCCC"/>
+    </linearGradient>
+    <filter id="curGlow">
+      <feGaussianBlur stdDeviation="6" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Large cursor arrow -->
+  <polygon points="120,100 120,340 175,285 215,375 255,358 215,268 280,268" fill="url(#cursorGrad)" filter="url(#curGlow)"/>
+  <polygon points="120,100 120,340 175,285 215,375 255,358 215,268 280,268" fill="none" stroke="#333333" stroke-width="4"/>
+  <!-- Flick gesture trail from cursor -->
+  <path d="M280,268 Q370,230 430,190" fill="none" stroke="#FF6600" stroke-width="8" stroke-linecap="round" filter="url(#curGlow)"/>
+  <polygon points="430,190 404,200 415,222" fill="#FF6600" filter="url(#curGlow)"/>
+  <!-- Motion trail dots -->
+  <circle cx="305" cy="257" r="7" fill="#FF6600" opacity="0.7"/>
+  <circle cx="335" cy="244" r="6" fill="#FF8800" opacity="0.5"/>
+  <circle cx="365" cy="232" r="5" fill="#FFAA00" opacity="0.3"/>
+  <circle cx="395" cy="220" r="4" fill="#FFCC00" opacity="0.2"/>
+  <!-- Click ripple effect at cursor tip -->
+  <circle cx="120" cy="100" r="25" fill="none" stroke="#FF6600" stroke-width="3" opacity="0.4" filter="url(#curGlow)"/>
+  <circle cx="120" cy="100" r="45" fill="none" stroke="#FF6600" stroke-width="2" opacity="0.2"/>
+  <!-- Speed lines below cursor -->
+  <line x1="155" y1="360" x2="220" y2="360" stroke="#FF6600" stroke-width="4" opacity="0.5" stroke-linecap="round"/>
+  <line x1="145" y1="380" x2="200" y2="380" stroke="#FF6600" stroke-width="3" opacity="0.3" stroke-linecap="round"/>
+  <line x1="150" y1="396" x2="190" y2="396" stroke="#FF6600" stroke-width="2" opacity="0.2" stroke-linecap="round"/>
+  <!-- App name -->
+  <text x="390" y="440" font-family="sans-serif" font-size="20" fill="#FF6600" text-anchor="middle" opacity="0.8">FLICK</text>
+</svg>

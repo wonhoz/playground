@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#030014"/>
+      <stop offset="100%" stop-color="#080028"/>
+    </linearGradient>
+    <linearGradient id="bodyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e1040"/>
+      <stop offset="100%" stop-color="#0e0828"/>
+    </linearGradient>
+    <linearGradient id="keyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#312060"/>
+      <stop offset="100%" stop-color="#201540"/>
+    </linearGradient>
+    <linearGradient id="cosmicGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00d4ff"/>
+      <stop offset="50%" stop-color="#a855f7"/>
+      <stop offset="100%" stop-color="#ec4899"/>
+    </linearGradient>
+    <filter id="cosmicGlow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Stars -->
+  <circle cx="80" cy="100" r="1.5" fill="#ffffff" opacity="0.6"/>
+  <circle cx="420" cy="130" r="2" fill="#ffffff" opacity="0.5"/>
+  <circle cx="350" cy="80" r="1.5" fill="#a855f7" opacity="0.7"/>
+  <circle cx="140" cy="450" r="2" fill="#00d4ff" opacity="0.6"/>
+  <circle cx="440" cy="420" r="1.5" fill="#ffffff" opacity="0.5"/>
+  <!-- Typewriter body -->
+  <rect x="95" y="250" width="322" height="160" rx="15" fill="url(#bodyGrad)" stroke="url(#cosmicGrad)" stroke-width="2"/>
+  <!-- Typewriter paper roller -->
+  <rect x="120" y="200" width="272" height="60" rx="10" fill="url(#bodyGrad)" stroke="url(#cosmicGrad)" stroke-width="1.5"/>
+  <rect x="130" y="210" width="252" height="38" rx="5" fill="#080018"/>
+  <!-- Paper coming out of roller -->
+  <rect x="158" y="130" width="196" height="88" rx="4" fill="#0e0828" stroke="#a855f7" stroke-width="1.5" stroke-opacity="0.6"/>
+  <!-- Cosmic text on paper -->
+  <line x1="175" y1="150" x2="338" y2="150" stroke="url(#cosmicGrad)" stroke-width="2" filter="url(#cosmicGlow)"/>
+  <line x1="175" y1="168" x2="320" y2="168" stroke="#a855f7" stroke-width="1.5" opacity="0.7"/>
+  <line x1="175" y1="185" x2="330" y2="185" stroke="#00d4ff" stroke-width="1.5" opacity="0.6"/>
+  <line x1="175" y1="202" x2="310" y2="202" stroke="#ec4899" stroke-width="1" opacity="0.5"/>
+  <!-- Carriage return arm -->
+  <rect x="350" y="210" width="55" height="12" rx="6" fill="#312060" stroke="#a855f7" stroke-width="1.5"/>
+  <!-- Keys - row 1 -->
+  <g fill="url(#keyGrad)" stroke="#a855f7" stroke-width="1">
+    <rect x="112" y="270" width="28" height="24" rx="5"/>
+    <rect x="148" y="270" width="28" height="24" rx="5"/>
+    <rect x="184" y="270" width="28" height="24" rx="5"/>
+    <rect x="220" y="270" width="28" height="24" rx="5"/>
+    <rect x="256" y="270" width="28" height="24" rx="5"/>
+    <rect x="292" y="270" width="28" height="24" rx="5"/>
+    <rect x="328" y="270" width="28" height="24" rx="5"/>
+    <rect x="364" y="270" width="28" height="24" rx="5"/>
+  </g>
+  <!-- Keys - row 2 -->
+  <g fill="url(#keyGrad)" stroke="#00d4ff" stroke-width="1">
+    <rect x="130" y="302" width="28" height="24" rx="5"/>
+    <rect x="166" y="302" width="28" height="24" rx="5"/>
+    <rect x="202" y="302" width="28" height="24" rx="5"/>
+    <rect x="238" y="302" width="28" height="24" rx="5"/>
+    <rect x="274" y="302" width="28" height="24" rx="5"/>
+    <rect x="310" y="302" width="28" height="24" rx="5"/>
+    <rect x="346" y="302" width="28" height="24" rx="5"/>
+  </g>
+  <!-- Space bar -->
+  <rect x="165" y="335" width="182" height="24" rx="7" fill="url(#keyGrad)" stroke="url(#cosmicGrad)" stroke-width="1.5" filter="url(#cosmicGlow)"/>
+  <!-- Cosmic aura -->
+  <circle cx="256" cy="370" rx="140" ry="20" fill="none" stroke="url(#cosmicGrad)" stroke-width="1" opacity="0.3"/>
+  <!-- Floating cosmic particles -->
+  <circle cx="115" cy="180" r="4" fill="#a855f7" filter="url(#cosmicGlow)" opacity="0.7"/>
+  <circle cx="400" cy="175" r="3" fill="#00d4ff" filter="url(#cosmicGlow)" opacity="0.7"/>
+  <circle cx="256" cy="110" r="5" fill="#ec4899" filter="url(#cosmicGlow)" opacity="0.6"/>
+</svg>

@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a1a2e"/>
+      <stop offset="100%" stop-color="#162447"/>
+    </linearGradient>
+    <linearGradient id="sw" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#42a5f5"/>
+      <stop offset="100%" stop-color="#1565c0"/>
+    </linearGradient>
+    <linearGradient id="active" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00e5ff"/>
+      <stop offset="100%" stop-color="#00acc1"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- network switch/router -->
+  <rect x="100" y="200" width="312" height="112" rx="16" fill="url(#sw)"/>
+  <ellipse cx="180" cy="204" rx="60" ry="10" fill="white" opacity="0.15"/>
+  <!-- ports top row -->
+  <rect x="128" y="222" width="30" height="20" rx="4" fill="#0d47a1"/>
+  <rect x="168" y="222" width="30" height="20" rx="4" fill="#0d47a1"/>
+  <rect x="208" y="222" width="30" height="20" rx="4" fill="#0d47a1"/>
+  <rect x="248" y="222" width="30" height="20" rx="4" fill="#0d47a1"/>
+  <rect x="288" y="222" width="30" height="20" rx="4" fill="#0d47a1"/>
+  <rect x="328" y="222" width="30" height="20" rx="4" fill="#0d47a1"/>
+  <!-- LEDs -->
+  <circle cx="143" cy="260" r="6" fill="#00e676"/>
+  <circle cx="183" cy="260" r="6" fill="#00e676"/>
+  <circle cx="223" cy="260" r="6" fill="#ffea00"/>
+  <circle cx="263" cy="260" r="6" fill="#00e676"/>
+  <circle cx="303" cy="260" r="6" fill="#00e676"/>
+  <circle cx="343" cy="260" r="6" fill="#ff5252"/>
+  <!-- flip indicator: two up-down arrows -->
+  <path d="M200 340 Q200 370 256 380 Q312 370 312 340" stroke="url(#active)" stroke-width="10" fill="none" stroke-linecap="round"/>
+  <path d="M160 380 L200 340 L240 380" fill="none" stroke="url(#active)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M272 380 L312 340 L352 380" fill="none" stroke="#00e5ff" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+</svg>

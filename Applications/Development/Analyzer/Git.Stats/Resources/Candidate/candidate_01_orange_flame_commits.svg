@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A0A00"/>
+      <stop offset="100%" stop-color="#3D1400"/>
+    </linearGradient>
+    <linearGradient id="flame" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#FF4500"/>
+      <stop offset="50%" stop-color="#FF8C00"/>
+      <stop offset="100%" stop-color="#FFD700"/>
+    </linearGradient>
+    <linearGradient id="bar1" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#FF6B00"/>
+      <stop offset="100%" stop-color="#FFAA00"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Bar chart bars -->
+  <rect x="80" y="310" width="52" height="120" rx="6" fill="url(#bar1)" opacity="0.6"/>
+  <rect x="148" y="260" width="52" height="170" rx="6" fill="url(#bar1)" opacity="0.7"/>
+  <rect x="216" y="200" width="52" height="230" rx="6" fill="url(#bar1)" opacity="0.8"/>
+  <rect x="284" y="160" width="52" height="270" rx="6" fill="url(#bar1)" opacity="0.9"/>
+  <rect x="352" y="100" width="52" height="330" rx="6" fill="url(#bar1)"/>
+  <!-- Flame on top bar -->
+  <path d="M378 100 C370 80 390 55 378 35 C395 55 410 40 400 20 C420 45 415 75 400 90 C410 75 420 85 410 100 Z" fill="url(#flame)"/>
+  <!-- Baseline -->
+  <rect x="65" y="428" width="380" height="6" rx="3" fill="#FF8C00" opacity="0.5"/>
+  <!-- Git branch icon top-left -->
+  <circle cx="110" cy="80" r="14" fill="none" stroke="#FF8C00" stroke-width="5"/>
+  <circle cx="160" cy="80" r="14" fill="none" stroke="#FF8C00" stroke-width="5"/>
+  <circle cx="135" cy="120" r="14" fill="none" stroke="#FF8C00" stroke-width="5"/>
+  <line x1="110" y1="94" x2="135" y2="106" stroke="#FF8C00" stroke-width="4"/>
+  <line x1="160" y1="94" x2="135" y2="106" stroke="#FF8C00" stroke-width="4"/>
+</svg>

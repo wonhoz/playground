@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#1A0015"/>
+      <stop offset="100%" stop-color="#080008"/>
+    </radialGradient>
+    <linearGradient id="strand1" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FF0088"/>
+      <stop offset="100%" stop-color="#FF44CC"/>
+    </linearGradient>
+    <linearGradient id="strand2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#CC00FF"/>
+      <stop offset="100%" stop-color="#FF44FF"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- DNA double helix (representing unique hash fingerprint) -->
+  <!-- Strand 1 (sine wave) -->
+  <path d="M256 80 Q300 120 256 160 Q212 200 256 240 Q300 280 256 320 Q212 360 256 400 Q300 440 256 460" fill="none" stroke="url(#strand1)" stroke-width="6"/>
+  <!-- Strand 2 (inverse sine wave) -->
+  <path d="M256 80 Q212 120 256 160 Q300 200 256 240 Q212 280 256 320 Q300 360 256 400 Q212 440 256 460" fill="none" stroke="url(#strand2)" stroke-width="6"/>
+  <!-- Cross rungs (base pairs) -->
+  <line x1="216" y1="120" x2="296" y2="120" stroke="#FF88CC" stroke-width="4" opacity="0.7"/>
+  <line x1="256" y1="160" x2="256" y2="160" stroke="#CC88FF" stroke-width="4" opacity="0.7"/>
+  <line x1="216" y1="200" x2="296" y2="200" stroke="#FF88CC" stroke-width="4" opacity="0.7"/>
+  <line x1="256" y1="240" x2="256" y2="240" stroke="#CC88FF" stroke-width="4" opacity="0.7"/>
+  <line x1="216" y1="280" x2="296" y2="280" stroke="#FF88CC" stroke-width="4" opacity="0.7"/>
+  <line x1="256" y1="320" x2="256" y2="320" stroke="#CC88FF" stroke-width="4" opacity="0.7"/>
+  <line x1="216" y1="360" x2="296" y2="360" stroke="#FF88CC" stroke-width="4" opacity="0.7"/>
+  <line x1="256" y1="400" x2="256" y2="400" stroke="#CC88FF" stroke-width="4" opacity="0.7"/>
+  <!-- Hash label left side -->
+  <text x="78" y="130" fill="#FF0088" font-size="11" font-family="monospace" opacity="0.6">A3F9</text>
+  <text x="78" y="200" fill="#CC00FF" font-size="11" font-family="monospace" opacity="0.6">B2C1</text>
+  <text x="78" y="270" fill="#FF0088" font-size="11" font-family="monospace" opacity="0.6">D4E5</text>
+  <text x="78" y="340" fill="#CC00FF" font-size="11" font-family="monospace" opacity="0.6">F6A7</text>
+  <!-- Hash label right side -->
+  <text x="358" y="130" fill="#FF44CC" font-size="11" font-family="monospace" opacity="0.6">A3F9</text>
+  <text x="358" y="200" fill="#FF44FF" font-size="11" font-family="monospace" opacity="0.6">B2C1</text>
+  <text x="358" y="270" fill="#FF44CC" font-size="11" font-family="monospace" opacity="0.6">D4E5</text>
+  <text x="358" y="340" fill="#FF44FF" font-size="11" font-family="monospace" opacity="0.6">F6A7</text>
+  <!-- IDENTICAL label -->
+  <rect x="160" y="455" width="192" height="32" rx="8" fill="#1A0015" stroke="#FF44CC" stroke-width="2"/>
+  <text x="256" y="476" text-anchor="middle" fill="#FF88CC" font-size="16" font-family="monospace">IDENTICAL</text>
+</svg>

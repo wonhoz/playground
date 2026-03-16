@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#3e1600"/>
+      <stop offset="100%" stop-color="#1a0800"/>
+    </radialGradient>
+    <linearGradient id="dragonGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff6f00"/>
+      <stop offset="100%" stop-color="#e65100"/>
+    </linearGradient>
+    <linearGradient id="flameGrad" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ff1744"/>
+      <stop offset="50%" stop-color="#ff6d00"/>
+      <stop offset="100%" stop-color="#ffea00"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Dragon coil body -->
+  <path d="M256,460 C150,430 80,350 100,270 C120,200 200,180 240,220 C280,260 270,310 240,330 C210,350 170,340 160,310 C150,280 175,260 200,270" fill="none" stroke="url(#dragonGrad)" stroke-width="28" stroke-linecap="round"/>
+  <!-- Dragon head -->
+  <ellipse cx="218" cy="260" rx="45" ry="35" fill="url(#dragonGrad)" transform="rotate(-30, 218, 260)"/>
+  <!-- Snout -->
+  <ellipse cx="195" cy="245" rx="22" ry="15" fill="#e65100" transform="rotate(-30, 195, 245)"/>
+  <!-- Eye -->
+  <circle cx="228" cy="248" r="10" fill="#ffea00"/>
+  <circle cx="231" cy="248" r="5" fill="#1a0800"/>
+  <!-- Spikes on back -->
+  <polygon points="250,320 265,290 258,325" fill="#ff6f00"/>
+  <polygon points="230,350 248,318 238,355" fill="#ff6f00"/>
+  <polygon points="205,375 226,346 214,380" fill="#ff6f00"/>
+  <!-- Fire breath -->
+  <path d="M175,235 C130,200 90,180 60,140 C80,155 95,145 100,130 C110,160 125,155 130,140 C140,175 160,170 165,155 C175,190 195,185 200,170 C205,205 220,210 225,200 C225,225 200,230 175,235 Z" fill="url(#flameGrad)" opacity="0.9"/>
+  <!-- Fist coming from right -->
+  <rect x="330" y="200" width="120" height="90" rx="15" fill="#8d6e63"/>
+  <rect x="335" y="188" width="26" height="20" rx="7" fill="#8d6e63"/>
+  <rect x="368" y="183" width="26" height="20" rx="7" fill="#8d6e63"/>
+  <rect x="401" y="187" width="22" height="18" rx="7" fill="#8d6e63"/>
+  <!-- Impact lines from fist -->
+  <line x1="325" y1="180" x2="290" y2="155" stroke="#ffea00" stroke-width="4" stroke-linecap="round" opacity="0.8"/>
+  <line x1="322" y1="218" x2="285" y2="218" stroke="#ffea00" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
+  <line x1="328" y1="255" x2="295" y2="270" stroke="#ffea00" stroke-width="3" stroke-linecap="round" opacity="0.6"/>
+  <!-- FIST FURY title -->
+  <text x="256" y="490" font-family="Arial" font-size="36" font-weight="900" fill="#ff6f00" text-anchor="middle" letter-spacing="3">FIST FURY</text>
+</svg>

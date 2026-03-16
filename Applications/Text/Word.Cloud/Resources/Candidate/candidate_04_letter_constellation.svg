@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#020208"/>
+      <stop offset="100%" stop-color="#080820"/>
+    </linearGradient>
+    <radialGradient id="starGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#88aaff"/>
+    </radialGradient>
+    <filter id="starGlow">
+      <feGaussianBlur stdDeviation="4" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Star constellation nodes -->
+  <circle cx="256" cy="180" r="10" fill="url(#starGrad)" filter="url(#starGlow)"/>
+  <circle cx="156" cy="240" r="7" fill="#aaccff" filter="url(#starGlow)"/>
+  <circle cx="356" cy="240" r="8" fill="#aaccff" filter="url(#starGlow)"/>
+  <circle cx="190" cy="330" r="6" fill="#8899ff" filter="url(#starGlow)"/>
+  <circle cx="322" cy="330" r="6" fill="#8899ff" filter="url(#starGlow)"/>
+  <circle cx="256" cy="380" r="9" fill="url(#starGrad)" filter="url(#starGlow)"/>
+  <circle cx="130" cy="300" r="5" fill="#667799" filter="url(#starGlow)"/>
+  <circle cx="382" cy="295" r="5" fill="#667799" filter="url(#starGlow)"/>
+  <circle cx="210" cy="200" r="6" fill="#aaccff" filter="url(#starGlow)"/>
+  <circle cx="305" cy="198" r="6" fill="#aaccff" filter="url(#starGlow)"/>
+  <!-- Constellation lines -->
+  <line x1="256" y1="180" x2="210" y2="200" stroke="#445588" stroke-width="1.5" opacity="0.7"/>
+  <line x1="210" y1="200" x2="156" y2="240" stroke="#445588" stroke-width="1.5" opacity="0.7"/>
+  <line x1="256" y1="180" x2="305" y2="198" stroke="#445588" stroke-width="1.5" opacity="0.7"/>
+  <line x1="305" y1="198" x2="356" y2="240" stroke="#445588" stroke-width="1.5" opacity="0.7"/>
+  <line x1="156" y1="240" x2="190" y2="330" stroke="#445588" stroke-width="1.5" opacity="0.6"/>
+  <line x1="356" y1="240" x2="322" y2="330" stroke="#445588" stroke-width="1.5" opacity="0.6"/>
+  <line x1="190" y1="330" x2="256" y2="380" stroke="#445588" stroke-width="1.5" opacity="0.6"/>
+  <line x1="322" y1="330" x2="256" y2="380" stroke="#445588" stroke-width="1.5" opacity="0.6"/>
+  <line x1="156" y1="240" x2="130" y2="300" stroke="#334466" stroke-width="1" opacity="0.5"/>
+  <line x1="356" y1="240" x2="382" y2="295" stroke="#334466" stroke-width="1" opacity="0.5"/>
+  <!-- Word labels near stars -->
+  <rect x="260" y="165" width="50" height="10" rx="3" fill="#6688cc" opacity="0.7"/>
+  <rect x="366" y="234" width="42" height="10" rx="3" fill="#6688cc" opacity="0.7"/>
+  <rect x="100" y="234" width="45" height="10" rx="3" fill="#6688cc" opacity="0.7"/>
+  <rect x="258" y="388" width="55" height="10" rx="3" fill="#6688cc" opacity="0.7"/>
+</svg>

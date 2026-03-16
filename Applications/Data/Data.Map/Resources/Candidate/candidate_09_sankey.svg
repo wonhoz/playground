@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#120024"/>
+      <stop offset="100%" stop-color="#1a0a30"/>
+    </linearGradient>
+    <linearGradient id="flow1" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#7c4dff" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#e040fb" stop-opacity="0.5"/>
+    </linearGradient>
+    <linearGradient id="flow2" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#00b0ff" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#00e5ff" stop-opacity="0.5"/>
+    </linearGradient>
+    <linearGradient id="flow3" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#00e676" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#76ff03" stop-opacity="0.5"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Title -->
+  <text x="256" y="68" font-family="Arial Black, sans-serif" font-size="32" font-weight="900" fill="#e040fb" text-anchor="middle" letter-spacing="2">DATA MAP</text>
+  <text x="256" y="90" font-family="Arial, sans-serif" font-size="12" fill="#888" text-anchor="middle">Sankey Flow Diagram</text>
+  <!-- Left source nodes -->
+  <rect x="70" y="120" width="28" height="120" rx="4" fill="#7c4dff"/>
+  <text x="56" y="186" font-family="Arial, sans-serif" font-size="11" fill="#b39ddb" text-anchor="end">Src A</text>
+  <rect x="70" y="255" width="28" height="80" rx="4" fill="#00b0ff"/>
+  <text x="56" y="299" font-family="Arial, sans-serif" font-size="11" fill="#81d4fa" text-anchor="end">Src B</text>
+  <rect x="70" y="348" width="28" height="54" rx="4" fill="#00e676"/>
+  <text x="56" y="378" font-family="Arial, sans-serif" font-size="11" fill="#b9f6ca" text-anchor="end">Src C</text>
+  <!-- Middle nodes -->
+  <rect x="242" y="138" width="28" height="90" rx="4" fill="#e040fb"/>
+  <text x="256" y="122" font-family="Arial, sans-serif" font-size="11" fill="#ea80fc" text-anchor="middle">Mid 1</text>
+  <rect x="242" y="242" width="28" height="64" rx="4" fill="#00e5ff"/>
+  <text x="256" y="232" font-family="Arial, sans-serif" font-size="11" fill="#80deea" text-anchor="middle">Mid 2</text>
+  <rect x="242" y="322" width="28" height="50" rx="4" fill="#76ff03"/>
+  <text x="256" y="312" font-family="Arial, sans-serif" font-size="11" fill="#ccff90" text-anchor="middle">Mid 3</text>
+  <rect x="242" y="384" width="28" height="38" rx="4" fill="#ffea00"/>
+  <text x="256" y="374" font-family="Arial, sans-serif" font-size="11" fill="#fff9c4" text-anchor="middle">Mid 4</text>
+  <!-- Right output nodes -->
+  <rect x="414" y="130" width="28" height="72" rx="4" fill="#ff4081"/>
+  <text x="455" y="170" font-family="Arial, sans-serif" font-size="11" fill="#ff80ab">Out 1</text>
+  <rect x="414" y="214" width="28" height="54" rx="4" fill="#ff6e40"/>
+  <text x="455" y="245" font-family="Arial, sans-serif" font-size="11" fill="#ff9e80">Out 2</text>
+  <rect x="414" y="280" width="28" height="48" rx="4" fill="#ffd740"/>
+  <text x="455" y="308" font-family="Arial, sans-serif" font-size="11" fill="#ffe57f">Out 3</text>
+  <rect x="414" y="340" width="28" height="42" rx="4" fill="#69f0ae"/>
+  <text x="455" y="364" font-family="Arial, sans-serif" font-size="11" fill="#b9f6ca">Out 4</text>
+  <rect x="414" y="394" width="28" height="30" rx="4" fill="#40c4ff"/>
+  <text x="455" y="412" font-family="Arial, sans-serif" font-size="11" fill="#80d8ff">Out 5</text>
+  <!-- Flow paths left to middle -->
+  <path d="M98,130 Q170,130 242,148" fill="none" stroke="url(#flow1)" stroke-width="60" opacity="0.35"/>
+  <path d="M98,256 Q170,256 242,248" fill="none" stroke="url(#flow2)" stroke-width="40" opacity="0.3"/>
+  <path d="M98,350 Q170,360 242,350" fill="none" stroke="url(#flow3)" stroke-width="28" opacity="0.3"/>
+  <!-- Flow paths middle to right -->
+  <path d="M270,158 Q342,158 414,156" fill="none" stroke="#e040fb" stroke-width="36" opacity="0.3"/>
+  <path d="M270,262 Q342,250 414,230" fill="none" stroke="#00e5ff" stroke-width="28" opacity="0.3"/>
+  <path d="M270,338 Q342,320 414,296" fill="none" stroke="#76ff03" stroke-width="22" opacity="0.3"/>
+  <path d="M270,396 Q342,390 414,406" fill="none" stroke="#ffea00" stroke-width="18" opacity="0.3"/>
+</svg>

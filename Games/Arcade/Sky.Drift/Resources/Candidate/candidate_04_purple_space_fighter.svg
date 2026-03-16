@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#000010"/>
+      <stop offset="100%" stop-color="#0a0020"/>
+    </linearGradient>
+    <linearGradient id="fighter" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#e1bee7"/>
+      <stop offset="100%" stop-color="#7b1fa2"/>
+    </linearGradient>
+    <radialGradient id="exhaust" cx="50%" cy="0%" r="100%">
+      <stop offset="0%" stop-color="#e040fb"/>
+      <stop offset="100%" stop-color="#e040fb" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Stars -->
+  <circle cx="80" cy="80" r="1.5" fill="white" opacity="0.8"/>
+  <circle cx="180" cy="50" r="2" fill="white" opacity="0.7"/>
+  <circle cx="350" cy="70" r="1.5" fill="white" opacity="0.8"/>
+  <circle cx="440" cy="120" r="2" fill="white" opacity="0.6"/>
+  <circle cx="100" cy="300" r="1.5" fill="white" opacity="0.7"/>
+  <circle cx="430" cy="350" r="2" fill="white" opacity="0.6"/>
+  <circle cx="60" cy="400" r="1.5" fill="white" opacity="0.8"/>
+  <circle cx="460" cy="260" r="1.5" fill="white" opacity="0.7"/>
+  <!-- Fighter body (top-down view, tilted) -->
+  <!-- Main body -->
+  <path d="M256 80 Q278 120 280 220 L280 310 Q276 325 256 330 Q236 325 232 310 L232 220 Q234 120 256 80 Z" fill="url(#fighter)"/>
+  <!-- Swept wings -->
+  <path d="M260 200 L380 280 L330 285 L270 228 Z" fill="#9c27b0" opacity="0.9"/>
+  <path d="M252 200 L132 280 L182 285 L242 228 Z" fill="#9c27b0" opacity="0.9"/>
+  <!-- Wing tips glow -->
+  <circle cx="380" cy="280" r="6" fill="#e040fb" opacity="0.8"/>
+  <circle cx="132" cy="280" r="6" fill="#e040fb" opacity="0.8"/>
+  <!-- Cockpit -->
+  <ellipse cx="256" cy="160" rx="18" ry="32" fill="#0d001a" stroke="#ce93d8" stroke-width="2"/>
+  <!-- Engine exhaust -->
+  <ellipse cx="256" cy="355" rx="30" ry="50" fill="url(#exhaust)"/>
+  <ellipse cx="256" cy="345" rx="16" ry="32" fill="#e040fb" opacity="0.6"/>
+  <ellipse cx="256" cy="337" rx="9" ry="22" fill="#f3e5f5" opacity="0.8"/>
+  <!-- Drift trail lines -->
+  <path d="M380 280 Q420 300 450 330" stroke="#e040fb" stroke-width="2" fill="none" stroke-dasharray="8,6" opacity="0.5"/>
+  <path d="M132 280 Q92 300 62 330" stroke="#e040fb" stroke-width="2" fill="none" stroke-dasharray="8,6" opacity="0.5"/>
+  <!-- Score HUD -->
+  <rect x="90" y="410" width="100" height="28" rx="6" fill="#1a0030" stroke="#e040fb" stroke-width="1.5"/>
+  <text x="140" y="429" font-family="monospace" font-size="13" fill="#e040fb" text-anchor="middle">x 4.2 DRIFT</text>
+  <rect x="322" y="410" width="100" height="28" rx="6" fill="#1a0030" stroke="#e040fb" stroke-width="1.5"/>
+  <text x="372" y="429" font-family="monospace" font-size="13" fill="#ce93d8" text-anchor="middle">SCORE 9800</text>
+</svg>

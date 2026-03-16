@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A1400"/>
+      <stop offset="100%" stop-color="#2D2200"/>
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFD700"/>
+      <stop offset="50%" stop-color="#FFA500"/>
+      <stop offset="100%" stop-color="#CC8800"/>
+    </linearGradient>
+    <linearGradient id="keyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#3D3000"/>
+      <stop offset="100%" stop-color="#1A1400"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Decorative border -->
+  <rect x="24" y="24" width="464" height="464" rx="68" fill="none" stroke="url(#goldGrad)" stroke-width="2" opacity="0.5"/>
+  <rect x="36" y="36" width="440" height="440" rx="60" fill="none" stroke="url(#goldGrad)" stroke-width="1" opacity="0.3"/>
+  <!-- Crown above keyboard -->
+  <path d="M176 90 L196 140 L216 100 L256 150 L296 100 L316 140 L336 90 L336 160 L176 160 Z" fill="url(#goldGrad)" filter="url(#glow)"/>
+  <circle cx="176" cy="90" r="10" fill="#FFD700" filter="url(#glow)"/>
+  <circle cx="216" cy="100" r="8" fill="#FFD700" filter="url(#glow)"/>
+  <circle cx="256" cy="90" r="12" fill="#FFD700" filter="url(#glow)"/>
+  <circle cx="296" cy="100" r="8" fill="#FFD700" filter="url(#glow)"/>
+  <circle cx="336" cy="90" r="10" fill="#FFD700" filter="url(#glow)"/>
+  <!-- Keyboard body -->
+  <rect x="80" y="196" width="352" height="200" rx="20" fill="url(#keyGrad)" stroke="url(#goldGrad)" stroke-width="2"/>
+  <!-- Keys with gold accents -->
+  <rect x="96" y="212" width="52" height="44" rx="8" fill="#2A2000" stroke="#FFD700" stroke-width="1.5"/>
+  <text x="122" y="241" font-family="Georgia, serif" font-size="20" text-anchor="middle" fill="#FFD700">Q</text>
+  <rect x="156" y="212" width="52" height="44" rx="8" fill="#2A2000" stroke="#FFD700" stroke-width="1.5"/>
+  <text x="182" y="241" font-family="Georgia, serif" font-size="20" text-anchor="middle" fill="#FFD700">W</text>
+  <rect x="216" y="212" width="52" height="44" rx="8" fill="#FFD700" stroke="#FFD700" stroke-width="1.5" filter="url(#glow)"/>
+  <text x="242" y="241" font-family="Georgia, serif" font-size="20" text-anchor="middle" fill="#1A1400" font-weight="bold">E</text>
+  <rect x="276" y="212" width="52" height="44" rx="8" fill="#2A2000" stroke="#FFD700" stroke-width="1.5"/>
+  <text x="302" y="241" font-family="Georgia, serif" font-size="20" text-anchor="middle" fill="#FFD700">R</text>
+  <rect x="336" y="212" width="80" height="44" rx="8" fill="#2A2000" stroke="#FFD700" stroke-width="1.5"/>
+  <text x="376" y="241" font-family="Georgia, serif" font-size="16" text-anchor="middle" fill="#FFD700">ENTER</text>
+  <!-- Row 2 -->
+  <rect x="96" y="264" width="40" height="44" rx="8" fill="#2A2000" stroke="#FFD700" stroke-width="1.5"/>
+  <text x="116" y="293" font-family="Georgia, serif" font-size="16" text-anchor="middle" fill="#FFD700">A</text>
+  <rect x="144" y="264" width="40" height="44" rx="8" fill="#2A2000" stroke="#FFD700" stroke-width="1.5"/>
+  <text x="164" y="293" font-family="Georgia, serif" font-size="16" text-anchor="middle" fill="#FFD700">S</text>
+  <rect x="192" y="264" width="40" height="44" rx="8" fill="#2A2000" stroke="#FFD700" stroke-width="1.5"/>
+  <text x="212" y="293" font-family="Georgia, serif" font-size="16" text-anchor="middle" fill="#FFD700">D</text>
+  <rect x="240" y="264" width="40" height="44" rx="8" fill="#2A2000" stroke="#FFD700" stroke-width="1.5"/>
+  <text x="260" y="293" font-family="Georgia, serif" font-size="16" text-anchor="middle" fill="#FFD700">F</text>
+  <!-- Spacebar -->
+  <rect x="96" y="316" width="300" height="44" rx="8" fill="#2A2000" stroke="#FFD700" stroke-width="1.5"/>
+  <text x="246" y="345" font-family="Georgia, serif" font-size="14" text-anchor="middle" fill="#AA8800">SPACE</text>
+  <!-- Bottom ornament -->
+  <path d="M196 430 Q256 410 316 430" stroke="url(#goldGrad)" stroke-width="2" fill="none" filter="url(#glow)"/>
+  <circle cx="256" cy="420" r="6" fill="#FFD700" filter="url(#glow)"/>
+</svg>

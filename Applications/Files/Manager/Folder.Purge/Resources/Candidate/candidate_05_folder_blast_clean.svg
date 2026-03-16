@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0a1a"/>
+      <stop offset="100%" stop-color="#1a0a2e"/>
+    </linearGradient>
+    <linearGradient id="folder" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ce93d8"/>
+      <stop offset="100%" stop-color="#6a1b9a"/>
+    </linearGradient>
+    <radialGradient id="blast" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#fff9c4" stop-opacity="1"/>
+      <stop offset="30%" stop-color="#ffe082" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#ff6d00" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="blastglow"><feGaussianBlur stdDeviation="16"/></filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- blast glow center -->
+  <circle cx="256" cy="256" r="120" fill="url(#blast)" filter="url(#blastglow)" opacity="0.7"/>
+  <!-- folder (blown open/clean) -->
+  <path d="M95 220 L95 385 L390 385 L390 245 L215 245 L185 220 Z" fill="url(#folder)"/>
+  <path d="M95 220 L95 248 L390 248 L390 245 L215 245 L185 220 Z" fill="#8e24aa"/>
+  <!-- blast shockwave rings -->
+  <circle cx="256" cy="256" r="80" fill="none" stroke="#ffe082" stroke-width="4" opacity="0.5"/>
+  <circle cx="256" cy="256" r="120" fill="none" stroke="#ffcc02" stroke-width="3" opacity="0.3"/>
+  <circle cx="256" cy="256" r="160" fill="none" stroke="#ff9800" stroke-width="2" opacity="0.2"/>
+  <!-- flying debris -->
+  <rect x="380" y="170" width="18" height="12" rx="3" fill="#ce93d8" opacity="0.7" transform="rotate(35 389 176)"/>
+  <rect x="110" y="160" width="15" height="10" rx="3" fill="#ce93d8" opacity="0.6" transform="rotate(-25 117 165)"/>
+  <circle cx="410" cy="290" r="8" fill="#e1bee7" opacity="0.6"/>
+  <circle cx="90" cy="310" r="7" fill="#e1bee7" opacity="0.5"/>
+  <circle cx="380" cy="400" r="6" fill="#ce93d8" opacity="0.4"/>
+</svg>

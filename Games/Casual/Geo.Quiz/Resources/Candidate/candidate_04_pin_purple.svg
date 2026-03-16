@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4A148C"/>
+      <stop offset="100%" style="stop-color:#311B92"/>
+    </linearGradient>
+    <linearGradient id="pingrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#CE93D8"/>
+      <stop offset="100%" style="stop-color:#AB47BC"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Multiple pins -->
+  <!-- Pin 1 (large, center) -->
+  <path d="M256,100 C215,100 182,133 182,174 C182,225 256,320 256,320 C256,320 330,225 330,174 C330,133 297,100 256,100Z" fill="url(#pingrad)" stroke="#E040FB" stroke-width="4"/>
+  <circle cx="256" cy="174" r="28" fill="#F3E5F5"/>
+  <text x="256" y="184" text-anchor="middle" font-family="Arial Black,sans-serif" font-size="28" font-weight="900" fill="#7B1FA2">?</text>
+  <!-- Pin 2 (small, left) -->
+  <path d="M145,200 C128,200 114,214 114,231 C114,252 145,290 145,290 C145,290 176,252 176,231 C176,214 162,200 145,200Z" fill="#FF8A65" stroke="#E64A19" stroke-width="3"/>
+  <circle cx="145" cy="231" r="14" fill="#FFF3E0"/>
+  <!-- Pin 3 (small, right) -->
+  <path d="M367,185 C350,185 336,199 336,216 C336,237 367,275 367,275 C367,275 398,237 398,216 C398,199 384,185 367,185Z" fill="#81C784" stroke="#388E3C" stroke-width="3"/>
+  <circle cx="367" cy="216" r="14" fill="#E8F5E9"/>
+  <!-- Road lines -->
+  <path d="M100,380 Q200,350 256,360 Q312,370 412,340" fill="none" stroke="#90CAF9" stroke-width="4" stroke-dasharray="15,8"/>
+  <!-- Score badge -->
+  <rect x="160" y="390" width="192" height="68" rx="34" fill="#FFD54F"/>
+  <text x="256" y="433" text-anchor="middle" font-family="Arial Black,sans-serif" font-size="32" font-weight="900" fill="#4A148C">GEO QUIZ</text>
+</svg>

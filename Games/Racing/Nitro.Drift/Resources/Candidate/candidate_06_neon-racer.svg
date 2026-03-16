@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#050010"/>
+      <stop offset="100%" stop-color="#0a0020"/>
+    </linearGradient>
+    <filter id="neon">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Neon road perspective -->
+  <path d="M256,400 L80,500 L80,430 L256,320 L432,430 L432,500 Z" fill="#0a0020"/>
+  <line x1="256" y1="320" x2="80" y2="500" stroke="#ff00ff" stroke-width="2" opacity="0.5" filter="url(#neon)"/>
+  <line x1="256" y1="320" x2="432" y2="500" stroke="#ff00ff" stroke-width="2" opacity="0.5" filter="url(#neon)"/>
+  <!-- Neon lane lines -->
+  <line x1="256" y1="320" x2="200" y2="500" stroke="#00ffff" stroke-width="1.5" opacity="0.4" filter="url(#neon)" stroke-dasharray="10,8"/>
+  <line x1="256" y1="320" x2="312" y2="500" stroke="#00ffff" stroke-width="1.5" opacity="0.4" filter="url(#neon)" stroke-dasharray="10,8"/>
+  <!-- Car silhouette neon -->
+  <path d="M210,280 L210,230 Q220,210 256,206 Q292,210 302,230 L302,280 Z" fill="none" stroke="#ff00ff" stroke-width="3" filter="url(#neon)"/>
+  <path d="M220,232 Q256,218 292,232 L286,265 L226,265 Z" fill="none" stroke="#00ffff" stroke-width="2" filter="url(#neon)"/>
+  <!-- Neon wheels -->
+  <circle cx="225" cy="290" r="20" fill="none" stroke="#ff00ff" stroke-width="3" filter="url(#neon)"/>
+  <circle cx="287" cy="290" r="20" fill="none" stroke="#ff00ff" stroke-width="3" filter="url(#neon)"/>
+  <!-- Speed boost glow -->
+  <path d="M210,255 Q160,250 110,240 Q165,258 140,272 Q175,262 210,264 Z" fill="#ff00ff" opacity="0.5" filter="url(#neon)"/>
+  <text x="256" y="460" text-anchor="middle" font-family="Arial Black" font-size="30" font-weight="900" fill="#ff00ff" filter="url(#neon)">NITRO.DRIFT</text>
+</svg>

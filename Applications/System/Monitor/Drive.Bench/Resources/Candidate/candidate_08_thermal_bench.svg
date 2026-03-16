@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0A0000"/>
+      <stop offset="100%" stop-color="#1A0800"/>
+    </linearGradient>
+    <linearGradient id="thermGrad" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#EF4444"/>
+      <stop offset="50%" stop-color="#EAB308"/>
+      <stop offset="100%" stop-color="#22C55E"/>
+    </linearGradient>
+    <radialGradient id="bulbGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FEF2F2"/>
+      <stop offset="100%" stop-color="#EF4444"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Thermometer body -->
+  <rect x="228" y="80" width="56" height="280" rx="28" fill="#1F0A00" stroke="#EF4444" stroke-width="3"/>
+  <!-- Thermometer fill (temp 72C out of 100) -->
+  <rect x="240" y="165" width="32" height="183" rx="16" fill="url(#thermGrad)"/>
+  <!-- Thermometer bulb -->
+  <circle cx="256" cy="376" r="40" fill="url(#bulbGrad)" stroke="#EF4444" stroke-width="3"/>
+  <!-- Temperature markings -->
+  <line x1="284" y1="120" x2="300" y2="120" stroke="#4B5563" stroke-width="2"/>
+  <text x="308" y="125" font-family="monospace" font-size="12" fill="#4B5563">100°C</text>
+  <line x1="284" y1="180" x2="300" y2="180" stroke="#4B5563" stroke-width="2"/>
+  <text x="308" y="185" font-family="monospace" font-size="12" fill="#4B5563">80°C</text>
+  <line x1="284" y1="240" x2="300" y2="240" stroke="#4B5563" stroke-width="2"/>
+  <text x="308" y="245" font-family="monospace" font-size="12" fill="#4B5563">60°C</text>
+  <line x1="284" y1="300" x2="300" y2="300" stroke="#4B5563" stroke-width="2"/>
+  <text x="308" y="305" font-family="monospace" font-size="12" fill="#4B5563">40°C</text>
+  <!-- Current temp indicator -->
+  <line x1="225" y1="168" x2="195" y2="168" stroke="#EF4444" stroke-width="2.5"/>
+  <rect x="120" y="152" width="75" height="30" rx="8" fill="#7F1D1D"/>
+  <text x="157" y="172" font-family="monospace" font-size="13" fill="#FCA5A5" text-anchor="middle">72°C</text>
+  <!-- Speed stats at bottom -->
+  <rect x="60" y="440" width="180" height="36" rx="10" fill="#1F0A00" stroke="#EF4444" stroke-width="1.5"/>
+  <text x="150" y="454" font-family="monospace" font-size="10" fill="#9CA3AF" text-anchor="middle">Throttling</text>
+  <text x="150" y="468" font-family="monospace" font-size="11" fill="#FCA5A5" text-anchor="middle">None (72°C)</text>
+  <rect x="272" y="440" width="180" height="36" rx="10" fill="#030D00" stroke="#22C55E" stroke-width="1.5"/>
+  <text x="362" y="454" font-family="monospace" font-size="10" fill="#9CA3AF" text-anchor="middle">Sustained</text>
+  <text x="362" y="468" font-family="monospace" font-size="11" fill="#86EFAC" text-anchor="middle">5,498 MB/s</text>
+</svg>

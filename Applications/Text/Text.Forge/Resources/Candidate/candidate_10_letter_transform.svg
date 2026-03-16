@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0a1a"/>
+      <stop offset="100%" stop-color="#1a0a2a"/>
+    </linearGradient>
+    <linearGradient id="fromGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4facfe"/>
+      <stop offset="100%" stop-color="#00f2fe"/>
+    </linearGradient>
+    <linearGradient id="toGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f093fb"/>
+      <stop offset="100%" stop-color="#f5576c"/>
+    </linearGradient>
+    <linearGradient id="warpGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#4facfe"/>
+      <stop offset="50%" stop-color="#bf00ff"/>
+      <stop offset="100%" stop-color="#f5576c"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Warp tunnel/transform arc -->
+  <path d="M256 180 Q320 256 256 332" stroke="url(#warpGrad)" stroke-width="40" fill="none" opacity="0.15" stroke-linecap="round"/>
+  <path d="M256 180 Q320 256 256 332" stroke="url(#warpGrad)" stroke-width="20" fill="none" opacity="0.25" stroke-linecap="round"/>
+  <path d="M256 180 Q320 256 256 332" stroke="url(#warpGrad)" stroke-width="6" fill="none" opacity="0.9" stroke-linecap="round" filter="url(#glow)"/>
+  <!-- Input letter "A" -->
+  <path d="M118 310 L164 160 L210 310 M134 255 L194 255" stroke="url(#fromGrad)" stroke-width="22" stroke-linecap="round" stroke-linejoin="round" fill="none" filter="url(#glow)"/>
+  <!-- Output letter "A" transformed into different shape -->
+  <path d="M302 310 L348 160 L394 310 M318 255 L378 255" stroke="url(#toGrad)" stroke-width="22" stroke-linecap="round" stroke-linejoin="round" fill="none" filter="url(#glow)" opacity="0.85"/>
+  <!-- Arrow particles along path -->
+  <circle cx="278" cy="200" r="5" fill="#4facfe" opacity="0.8"/>
+  <circle cx="295" cy="225" r="4" fill="#9d4edd" opacity="0.8"/>
+  <circle cx="300" cy="256" r="5" fill="#bf00ff" opacity="0.8"/>
+  <circle cx="293" cy="287" r="4" fill="#e040fb" opacity="0.8"/>
+  <circle cx="275" cy="310" r="5" fill="#f5576c" opacity="0.8"/>
+</svg>

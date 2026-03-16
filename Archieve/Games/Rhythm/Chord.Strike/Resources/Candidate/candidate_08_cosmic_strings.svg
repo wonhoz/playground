@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#0d0033"/>
+      <stop offset="60%" stop-color="#060022"/>
+      <stop offset="100%" stop-color="#000011"/>
+    </radialGradient>
+    <radialGradient id="planet" cx="35%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#aa44ff"/>
+      <stop offset="100%" stop-color="#330066"/>
+    </radialGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Stars -->
+  <circle cx="80" cy="80" r="2" fill="#fff" opacity="0.8"/>
+  <circle cx="150" cy="50" r="1.5" fill="#fff" opacity="0.6"/>
+  <circle cx="400" cy="90" r="2" fill="#fff" opacity="0.7"/>
+  <circle cx="450" cy="150" r="1.5" fill="#fff" opacity="0.5"/>
+  <circle cx="100" cy="380" r="2" fill="#fff" opacity="0.6"/>
+  <circle cx="430" cy="400" r="2" fill="#fff" opacity="0.7"/>
+  <circle cx="360" cy="50" r="1.5" fill="#fff" opacity="0.5"/>
+  <circle cx="60" cy="250" r="2" fill="#fff" opacity="0.6"/>
+  <circle cx="470" cy="280" r="1.5" fill="#fff" opacity="0.8"/>
+  <!-- Planet -->
+  <circle cx="256" cy="256" r="140" fill="url(#planet)"/>
+  <!-- Planet rings -->
+  <ellipse cx="256" cy="256" rx="200" ry="50" fill="none" stroke="#aa44ff" stroke-width="12" opacity="0.4"/>
+  <ellipse cx="256" cy="256" rx="220" ry="55" fill="none" stroke="#8822cc" stroke-width="6" opacity="0.3"/>
+  <!-- Guitar strings as planet rings -->
+  <ellipse cx="256" cy="256" rx="180" ry="45" fill="none" stroke="#ff00aa" stroke-width="2.5" opacity="0.7" filter="url(#glow)"/>
+  <ellipse cx="256" cy="256" rx="190" ry="48" fill="none" stroke="#00ffff" stroke-width="2" opacity="0.6" filter="url(#glow)"/>
+  <ellipse cx="256" cy="256" rx="170" ry="42" fill="none" stroke="#ffaa00" stroke-width="2" opacity="0.6" filter="url(#glow)"/>
+  <!-- Guitar pick overlay -->
+  <path d="M256,140 Q310,140 315,190 Q320,240 256,270 Q192,240 197,190 Q202,140 256,140Z" fill="#cc44ff" opacity="0.8" filter="url(#glow)"/>
+  <path d="M256,155 Q300,155 304,197 Q308,239 256,255 Q204,239 208,197 Q212,155 256,155Z" fill="none" stroke="#fff" stroke-width="2" opacity="0.5"/>
+  <!-- Chord diagram dots -->
+  <circle cx="220" cy="320" r="12" fill="#ff00aa" filter="url(#glow)"/>
+  <circle cx="256" cy="330" r="12" fill="#00ffff" filter="url(#glow)"/>
+  <circle cx="292" cy="315" r="12" fill="#ffaa00" filter="url(#glow)"/>
+</svg>

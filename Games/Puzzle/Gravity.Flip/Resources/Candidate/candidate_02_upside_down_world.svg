@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a2e"/>
+      <stop offset="100%" style="stop-color:#16213e"/>
+    </linearGradient>
+    <linearGradient id="topWorld" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#87ceeb"/>
+      <stop offset="100%" style="stop-color:#4a9eca"/>
+    </linearGradient>
+    <linearGradient id="bottomWorld" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#4a9eca"/>
+      <stop offset="100%" style="stop-color:#87ceeb"/>
+    </linearGradient>
+    <linearGradient id="ground1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#5cb85c"/>
+      <stop offset="100%" style="stop-color:#2d6a2d"/>
+    </linearGradient>
+    <linearGradient id="ground2" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" style="stop-color:#5cb85c"/>
+      <stop offset="100%" style="stop-color:#2d6a2d"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Top world (normal) -->
+  <rect x="60" y="60" width="392" height="175" rx="12" fill="url(#topWorld)"/>
+  <rect x="60" y="205" width="392" height="30" rx="0" fill="url(#ground1)"/>
+  <!-- Trees top -->
+  <polygon points="140,200 160,150 180,200" fill="#2d6a2d"/>
+  <polygon points="200,200 225,145 250,200" fill="#2d6a2d"/>
+  <polygon points="270,200 290,155 310,200" fill="#2d6a2d"/>
+  <!-- Sun top -->
+  <circle cx="360" cy="110" r="30" fill="#FFD700" filter="url(#glow)" opacity="0.9"/>
+  <!-- Dividing mirror line -->
+  <line x1="60" y1="256" x2="452" y2="256" stroke="#ffffff" stroke-width="3" stroke-dasharray="12,6"/>
+  <!-- Bottom world (flipped) -->
+  <rect x="60" y="277" width="392" height="30" rx="0" fill="url(#ground2)"/>
+  <rect x="60" y="277" width="392" height="175" rx="12" fill="url(#bottomWorld)" opacity="0.7"/>
+  <!-- Trees bottom (flipped) -->
+  <polygon points="140,282 160,332 180,282" fill="#2d6a2d" opacity="0.8"/>
+  <polygon points="200,282 225,337 250,282" fill="#2d6a2d" opacity="0.8"/>
+  <polygon points="270,282 290,327 310,282" fill="#2d6a2d" opacity="0.8"/>
+  <!-- Sun bottom (flipped) -->
+  <circle cx="360" cy="400" r="24" fill="#FFD700" filter="url(#glow)" opacity="0.6"/>
+  <!-- Flip indicator arrows -->
+  <path d="M456,200 Q480,256 456,312" stroke="#ffffff80" stroke-width="3" fill="none" stroke-dasharray="5,4"/>
+  <polygon points="456,312 446,298 466,298" fill="#ffffff80"/>
+</svg>

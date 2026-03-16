@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A001A"/>
+      <stop offset="100%" stop-color="#2D0033"/>
+    </linearGradient>
+    <linearGradient id="magenta" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E91E8C"/>
+      <stop offset="100%" stop-color="#9C0066"/>
+    </linearGradient>
+    <linearGradient id="pink" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FF006E"/>
+      <stop offset="100%" stop-color="#FF80AB"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Cast/broadcast waves from terminal -->
+  <path d="M256 380 A160 160 0 0 1 96 220" fill="none" stroke="#E91E8C" stroke-width="4" opacity="0.3"/>
+  <path d="M256 380 A120 120 0 0 1 136 260" fill="none" stroke="#E91E8C" stroke-width="4" opacity="0.5"/>
+  <path d="M256 380 A80 80 0 0 1 176 300" fill="none" stroke="#E91E8C" stroke-width="4" opacity="0.8"/>
+  <path d="M256 380 A160 160 0 0 0 416 220" fill="none" stroke="#FF006E" stroke-width="4" opacity="0.3"/>
+  <path d="M256 380 A120 120 0 0 0 376 260" fill="none" stroke="#FF006E" stroke-width="4" opacity="0.5"/>
+  <path d="M256 380 A80 80 0 0 0 336 300" fill="none" stroke="#FF006E" stroke-width="4" opacity="0.8"/>
+  <!-- Terminal window -->
+  <rect x="120" y="80" width="272" height="220" rx="12" fill="#200020" stroke="url(#magenta)" stroke-width="3"/>
+  <!-- Title bar -->
+  <rect x="120" y="80" width="272" height="36" rx="12" fill="url(#magenta)"/>
+  <rect x="120" y="96" width="272" height="20" fill="url(#magenta)"/>
+  <!-- Dots -->
+  <circle cx="148" cy="98" r="7" fill="#1A001A"/>
+  <circle cx="168" cy="98" r="7" fill="#1A001A"/>
+  <circle cx="188" cy="98" r="7" fill="#1A001A"/>
+  <!-- Pane split -->
+  <line x1="256" y1="116" x2="256" y2="300" stroke="#E91E8C" stroke-width="2" opacity="0.5"/>
+  <!-- Content lines left -->
+  <rect x="134" y="126" width="90" height="5" rx="2" fill="#FF80AB" opacity="0.9"/>
+  <rect x="134" y="140" width="60" height="5" rx="2" fill="#E91E8C" opacity="0.6"/>
+  <rect x="134" y="154" width="100" height="5" rx="2" fill="#E91E8C" opacity="0.6"/>
+  <rect x="134" y="168" width="70" height="5" rx="2" fill="#FF80AB" opacity="0.9"/>
+  <rect x="134" y="182" width="80" height="5" rx="2" fill="#E91E8C" opacity="0.6"/>
+  <rect x="134" y="196" width="50" height="5" rx="2" fill="#E91E8C" opacity="0.6"/>
+  <rect x="134" y="210" width="90" height="5" rx="2" fill="#FF80AB" opacity="0.9"/>
+  <rect x="134" y="224" width="70" height="5" rx="2" fill="#E91E8C" opacity="0.6"/>
+  <rect x="134" y="238" width="85" height="5" rx="2" fill="#E91E8C" opacity="0.6"/>
+  <!-- Content lines right -->
+  <rect x="268" y="126" width="80" height="5" rx="2" fill="#E91E8C" opacity="0.9"/>
+  <rect x="268" y="140" width="110" height="5" rx="2" fill="#FF006E" opacity="0.6"/>
+  <rect x="268" y="154" width="70" height="5" rx="2" fill="#FF006E" opacity="0.6"/>
+  <rect x="268" y="168" width="100" height="5" rx="2" fill="#E91E8C" opacity="0.9"/>
+  <rect x="268" y="182" width="60" height="5" rx="2" fill="#FF006E" opacity="0.6"/>
+  <rect x="268" y="196" width="90" height="5" rx="2" fill="#FF006E" opacity="0.6"/>
+  <!-- broadcast dot -->
+  <circle cx="256" cy="380" r="14" fill="url(#magenta)"/>
+  <circle cx="256" cy="380" r="6" fill="#FF80AB"/>
+</svg>

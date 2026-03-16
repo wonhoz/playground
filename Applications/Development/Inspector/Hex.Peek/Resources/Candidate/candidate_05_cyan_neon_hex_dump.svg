@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#001820"/>
+      <stop offset="100%" stop-color="#002030"/>
+    </linearGradient>
+    <linearGradient id="neon_c" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00FFFF"/>
+      <stop offset="100%" stop-color="#00CCFF"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Neon terminal frame -->
+  <rect x="56" y="72" width="400" height="368" rx="12" fill="#001020" stroke="url(#neon_c)" stroke-width="3"/>
+  <!-- Terminal title bar -->
+  <rect x="56" y="72" width="400" height="36" rx="12" fill="#002233"/>
+  <circle cx="84" cy="90" r="7" fill="#FF4444"/>
+  <circle cx="106" cy="90" r="7" fill="#FFAA00"/>
+  <circle cx="128" cy="90" r="7" fill="#44FF44"/>
+  <text x="256" y="95" text-anchor="middle" fill="#00AACC" font-size="14" font-family="monospace">hex-dump</text>
+  <!-- Hex dump content -->
+  <text x="72" y="130" fill="#006688" font-size="12" font-family="monospace">00000000:</text>
+  <text x="150" y="130" fill="#00CCDD" font-size="12" font-family="monospace">4D 5A 90 00 03 00 00 00</text>
+  <text x="72" y="150" fill="#006688" font-size="12" font-family="monospace">00000008:</text>
+  <text x="150" y="150" fill="#00AABB" font-size="12" font-family="monospace">04 00 00 00 FF FF 00 00</text>
+  <!-- Highlighted row neon -->
+  <rect x="64" y="157" width="384" height="22" rx="3" fill="#003344"/>
+  <text x="72" y="173" fill="#00FFFF" font-size="12" font-family="monospace">00000010:</text>
+  <text x="150" y="173" fill="#88FFFF" font-size="12" font-family="monospace">B8 00 00 00 00 00 00 00</text>
+  <text x="72" y="195" fill="#006688" font-size="12" font-family="monospace">00000018:</text>
+  <text x="150" y="195" fill="#00CCDD" font-size="12" font-family="monospace">40 00 00 00 00 00 00 00</text>
+  <text x="72" y="215" fill="#006688" font-size="12" font-family="monospace">00000020:</text>
+  <text x="150" y="215" fill="#00AABB" font-size="12" font-family="monospace">00 00 00 00 00 00 00 00</text>
+  <text x="72" y="235" fill="#006688" font-size="12" font-family="monospace">00000028:</text>
+  <text x="150" y="235" fill="#00CCDD" font-size="12" font-family="monospace">00 00 00 00 00 00 00 00</text>
+  <text x="72" y="255" fill="#006688" font-size="12" font-family="monospace">00000030:</text>
+  <text x="150" y="255" fill="#00AABB" font-size="12" font-family="monospace">00 00 00 00 00 00 00 00</text>
+  <text x="72" y="275" fill="#006688" font-size="12" font-family="monospace">00000038:</text>
+  <text x="150" y="275" fill="#00CCDD" font-size="12" font-family="monospace">80 00 00 00 0E 1F BA 0E</text>
+  <text x="72" y="295" fill="#006688" font-size="12" font-family="monospace">00000040:</text>
+  <text x="150" y="295" fill="#00AABB" font-size="12" font-family="monospace">00 B4 09 CD 21 B8 01 4C</text>
+  <text x="72" y="315" fill="#006688" font-size="12" font-family="monospace">00000048:</text>
+  <text x="150" y="315" fill="#00CCDD" font-size="12" font-family="monospace">CD 21 54 68 69 73 20 70</text>
+  <text x="72" y="335" fill="#006688" font-size="12" font-family="monospace">00000050:</text>
+  <text x="150" y="335" fill="#00AABB" font-size="12" font-family="monospace">72 6F 67 72 61 6D 20 63</text>
+  <!-- Status bar -->
+  <rect x="56" y="402" width="400" height="38" rx="8" fill="#002233"/>
+  <text x="72" y="417" fill="#004455" font-size="11" font-family="monospace">0x10 selected</text>
+  <text x="72" y="432" fill="#00AACC" font-size="11" font-family="monospace">B8 00 00 00  |  Uint32: 184  |  Float: 2.58e-43</text>
+</svg>

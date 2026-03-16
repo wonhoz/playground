@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0520"/>
+      <stop offset="100%" stop-color="#1a0a35"/>
+    </linearGradient>
+    <linearGradient id="hpGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7c3aed"/>
+      <stop offset="50%" stop-color="#2563eb"/>
+      <stop offset="100%" stop-color="#0891b2"/>
+    </linearGradient>
+    <radialGradient id="cupGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#312080"/>
+      <stop offset="100%" stop-color="#1a1048"/>
+    </radialGradient>
+    <radialGradient id="speakerGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#a855f7" stop-opacity="0.8"/>
+      <stop offset="70%" stop-color="#7c3aed" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#7c3aed" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="hpGlow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Headphone band arc -->
+  <path d="M120 280 C120 130 392 130 392 280" fill="none" stroke="url(#hpGrad)" stroke-width="22" stroke-linecap="round" filter="url(#hpGlow)"/>
+  <!-- Band highlight -->
+  <path d="M126 280 C126 142 386 142 386 280" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" opacity="0.2"/>
+  <!-- Left ear cup stem -->
+  <rect x="100" y="270" width="20" height="55" rx="8" fill="url(#hpGrad)"/>
+  <!-- Right ear cup stem -->
+  <rect x="392" y="270" width="20" height="55" rx="8" fill="url(#hpGrad)"/>
+  <!-- Left ear cup -->
+  <ellipse cx="110" cy="350" rx="55" ry="68" fill="url(#cupGrad)" stroke="url(#hpGrad)" stroke-width="3" filter="url(#hpGlow)"/>
+  <!-- Left speaker -->
+  <ellipse cx="110" cy="350" rx="35" ry="42" fill="url(#speakerGrad)"/>
+  <ellipse cx="110" cy="350" rx="20" ry="25" fill="#1a1048"/>
+  <ellipse cx="110" cy="350" rx="8" ry="10" fill="#a855f7" opacity="0.7" filter="url(#hpGlow)"/>
+  <!-- Right ear cup -->
+  <ellipse cx="402" cy="350" rx="55" ry="68" fill="url(#cupGrad)" stroke="url(#hpGrad)" stroke-width="3" filter="url(#hpGlow)"/>
+  <!-- Right speaker -->
+  <ellipse cx="402" cy="350" rx="35" ry="42" fill="url(#speakerGrad)"/>
+  <ellipse cx="402" cy="350" rx="20" ry="25" fill="#1a1048"/>
+  <ellipse cx="402" cy="350" rx="8" ry="10" fill="#a855f7" opacity="0.7" filter="url(#hpGlow)"/>
+  <!-- Sound waves from cups -->
+  <path d="M65 330 C50 345 50 365 65 375" fill="none" stroke="#a855f7" stroke-width="2.5" opacity="0.6" filter="url(#hpGlow)"/>
+  <path d="M50 315 C25 340 25 370 50 390" fill="none" stroke="#7c3aed" stroke-width="2" opacity="0.4"/>
+  <path d="M447 330 C462 345 462 365 447 375" fill="none" stroke="#a855f7" stroke-width="2.5" opacity="0.6" filter="url(#hpGlow)"/>
+  <path d="M462 315 C487 340 487 370 462 390" fill="none" stroke="#7c3aed" stroke-width="2" opacity="0.4"/>
+  <!-- Music note floating center -->
+  <g transform="translate(256,200)" filter="url(#hpGlow)">
+    <ellipse cx="0" cy="0" rx="14" ry="10" fill="#2563eb" transform="rotate(-20)"/>
+    <line x1="14" y1="-2" x2="14" y2="-55" stroke="#2563eb" stroke-width="3.5"/>
+    <line x1="14" y1="-55" x2="40" y2="-46" stroke="#2563eb" stroke-width="3"/>
+  </g>
+</svg>

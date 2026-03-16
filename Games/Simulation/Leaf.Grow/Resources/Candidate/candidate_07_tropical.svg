@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#004D99"/>
+      <stop offset="50%" stop-color="#00897B"/>
+      <stop offset="100%" stop-color="#1B5E20"/>
+    </linearGradient>
+    <linearGradient id="palmLeaf" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#66BB6A"/>
+      <stop offset="100%" stop-color="#2E7D32"/>
+    </linearGradient>
+    <radialGradient id="sunGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFFF00"/>
+      <stop offset="100%" stop-color="#FF9800"/>
+    </radialGradient>
+    <filter id="shadow">
+      <feDropShadow dx="2" dy="4" stdDeviation="6" flood-color="#00000050"/>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Ocean waves -->
+  <path d="M0 380 Q64 360 128 380 Q192 400 256 380 Q320 360 384 380 Q448 400 512 380 L512 512 L0 512 Z" fill="#006994" opacity="0.6"/>
+  <path d="M0 400 Q80 380 160 400 Q240 420 320 400 Q400 380 512 400 L512 512 L0 512 Z" fill="#004D70" opacity="0.5"/>
+  <!-- Sandy beach -->
+  <ellipse cx="256" cy="430" rx="200" ry="40" fill="#F5DEB3" opacity="0.5"/>
+  <!-- Palm trunk -->
+  <path d="M256 440 Q248 370 260 300 Q268 240 256 180" stroke="#8B6914" stroke-width="18" fill="none" stroke-linecap="round"/>
+  <path d="M256 420 Q260 380 258 340" stroke="#6B4F0F" stroke-width="12" fill="none" stroke-linecap="round" opacity="0.5"/>
+  <!-- Palm leaves -->
+  <path d="M256 200 Q300 150 360 120 Q310 160 268 204" fill="url(#palmLeaf)" filter="url(#shadow)"/>
+  <path d="M256 200 Q310 170 350 200 Q306 200 260 205" fill="#4CAF50" opacity="0.8" filter="url(#shadow)"/>
+  <path d="M256 200 Q200 150 140 128 Q198 162 252 204" fill="url(#palmLeaf)" filter="url(#shadow)"/>
+  <path d="M256 200 Q196 172 160 206 Q202 202 254 205" fill="#4CAF50" opacity="0.8" filter="url(#shadow)"/>
+  <path d="M256 200 Q256 130 256 80 Q260 130 260 202" fill="#56CC5A" filter="url(#shadow)"/>
+  <path d="M256 200 Q288 120 316 88 Q284 130 260 202" fill="url(#palmLeaf)" filter="url(#shadow)"/>
+  <path d="M256 200 Q220 120 196 90 Q228 132 254 202" fill="url(#palmLeaf)" filter="url(#shadow)"/>
+  <!-- Coconuts -->
+  <circle cx="264" cy="210" r="14" fill="#8B4513"/>
+  <circle cx="248" cy="218" r="12" fill="#6B3410"/>
+  <!-- Sun behind palm -->
+  <circle cx="380" cy="120" r="52" fill="url(#sunGrad)" opacity="0.6" filter="url(#shadow)"/>
+  <!-- Tropical birds -->
+  <path d="M420 180 Q430 170 440 180 Q430 192 420 180" fill="#FF6B35" opacity="0.7"/>
+  <path d="M420 180 Q408 170 400 180 Q408 192 420 180" fill="#FFB300" opacity="0.6"/>
+  <!-- Ripples in water -->
+  <ellipse cx="256" cy="450" rx="80" ry="8" fill="none" stroke="#87CEEB" stroke-width="2" opacity="0.4"/>
+  <ellipse cx="256" cy="450" rx="120" ry="12" fill="none" stroke="#87CEEB" stroke-width="1" opacity="0.2"/>
+</svg>

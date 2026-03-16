@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#120022"/>
+      <stop offset="100%" stop-color="#050010"/>
+    </linearGradient>
+    <linearGradient id="bar1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ff00aa"/>
+      <stop offset="100%" stop-color="#aa0066"/>
+    </linearGradient>
+    <linearGradient id="bar2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#00aaff"/>
+      <stop offset="100%" stop-color="#0066aa"/>
+    </linearGradient>
+    <linearGradient id="bar3" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffaa00"/>
+      <stop offset="100%" stop-color="#aa6600"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Rhythm bars (EQ style) -->
+  <rect x="60" y="250" width="52" height="200" rx="8" fill="url(#bar2)" filter="url(#glow)"/>
+  <rect x="126" y="160" width="52" height="290" rx="8" fill="url(#bar1)" filter="url(#glow)"/>
+  <rect x="192" y="110" width="52" height="340" rx="8" fill="url(#bar3)" filter="url(#glow)"/>
+  <rect x="258" y="180" width="52" height="270" rx="8" fill="url(#bar1)" filter="url(#glow)"/>
+  <rect x="324" y="130" width="52" height="320" rx="8" fill="url(#bar2)" filter="url(#glow)"/>
+  <rect x="390" y="200" width="52" height="250" rx="8" fill="url(#bar3)" filter="url(#glow)"/>
+  <!-- Guitar pick shape -->
+  <path d="M256,50 Q310,50 320,110 Q330,170 256,200 Q182,170 192,110 Q202,50 256,50Z" fill="#ff00aa" opacity="0.9" filter="url(#glow)"/>
+  <path d="M256,65 Q300,65 308,115 Q316,165 256,185 Q196,165 204,115 Q212,65 256,65Z" fill="none" stroke="#fff" stroke-width="3" opacity="0.5"/>
+  <!-- Hit lines -->
+  <line x1="80" y1="460" x2="442" y2="460" stroke="#333" stroke-width="3"/>
+  <circle cx="86" cy="460" r="6" fill="#ff00aa" filter="url(#glow)"/>
+  <circle cx="152" cy="460" r="6" fill="#00aaff" filter="url(#glow)"/>
+  <circle cx="218" cy="460" r="10" fill="#ffaa00" filter="url(#glow)"/>
+  <circle cx="284" cy="460" r="6" fill="#ff00aa" filter="url(#glow)"/>
+  <circle cx="350" cy="460" r="8" fill="#00aaff" filter="url(#glow)"/>
+  <circle cx="416" cy="460" r="6" fill="#ffaa00" filter="url(#glow)"/>
+</svg>

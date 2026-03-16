@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0C0C1E"/>
+      <stop offset="100%" stop-color="#1A1A3E"/>
+    </linearGradient>
+    <linearGradient id="hex1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#667EEA"/>
+      <stop offset="100%" stop-color="#764BA2"/>
+    </linearGradient>
+    <linearGradient id="hex2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#F093FB"/>
+      <stop offset="100%" stop-color="#F5576C"/>
+    </linearGradient>
+    <linearGradient id="hex3" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#4FACFE"/>
+      <stop offset="100%" stop-color="#00F2FE"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Center hexagon -->
+  <polygon points="256,140 310,172 310,236 256,268 202,236 202,172" fill="url(#hex1)" opacity="0.9" filter="url(#glow)"/>
+  <text x="256" y="214" text-anchor="middle" font-family="Segoe UI" font-size="22" font-weight="700" fill="#FFF">SYS</text>
+  <!-- Surrounding nodes + connectors -->
+  <!-- Top -->
+  <line x1="256" y1="140" x2="256" y2="78" stroke="#667EEA" stroke-width="2" opacity="0.5"/>
+  <polygon points="256,56 278,72 278,98 256,110 234,98 234,72" fill="url(#hex2)" opacity="0.8"/>
+  <text x="256" y="88" text-anchor="middle" font-family="Segoe UI" font-size="16" font-weight="700" fill="#FFF">CPU</text>
+  <!-- Top-right -->
+  <line x1="310" y1="172" x2="368" y2="138" stroke="#4FACFE" stroke-width="2" opacity="0.5"/>
+  <polygon points="380,116 402,132 402,158 380,170 358,158 358,132" fill="url(#hex3)" opacity="0.8"/>
+  <text x="380" y="148" text-anchor="middle" font-family="Segoe UI" font-size="16" font-weight="700" fill="#FFF">RAM</text>
+  <!-- Bottom-right -->
+  <line x1="310" y1="236" x2="368" y2="274" stroke="#F5576C" stroke-width="2" opacity="0.5"/>
+  <polygon points="380,252 402,268 402,294 380,306 358,294 358,268" fill="url(#hex2)" opacity="0.8"/>
+  <text x="380" y="284" text-anchor="middle" font-family="Segoe UI" font-size="16" font-weight="700" fill="#FFF">DSK</text>
+  <!-- Bottom -->
+  <line x1="256" y1="268" x2="256" y2="326" stroke="#667EEA" stroke-width="2" opacity="0.5"/>
+  <polygon points="256,328 278,344 278,370 256,382 234,370 234,344" fill="url(#hex1)" opacity="0.8"/>
+  <text x="256" y="360" text-anchor="middle" font-family="Segoe UI" font-size="16" font-weight="700" fill="#FFF">NET</text>
+  <!-- Bottom-left -->
+  <line x1="202" y1="236" x2="144" y2="274" stroke="#4FACFE" stroke-width="2" opacity="0.5"/>
+  <polygon points="132,252 154,268 154,294 132,306 110,294 110,268" fill="url(#hex3)" opacity="0.8"/>
+  <text x="132" y="284" text-anchor="middle" font-family="Segoe UI" font-size="16" font-weight="700" fill="#FFF">GPU</text>
+  <!-- Top-left -->
+  <line x1="202" y1="172" x2="144" y2="138" stroke="#F5576C" stroke-width="2" opacity="0.5"/>
+  <polygon points="132,116 154,132 154,158 132,170 110,158 110,132" fill="url(#hex2)" opacity="0.8"/>
+  <text x="132" y="148" text-anchor="middle" font-family="Segoe UI" font-size="16" font-weight="700" fill="#FFF">TMP</text>
+  <!-- Footer -->
+  <text x="256" y="455" text-anchor="middle" font-family="Segoe UI" font-size="24" font-weight="700" fill="#667EEA" opacity="0.7">SYSTEM HEX MAP</text>
+</svg>

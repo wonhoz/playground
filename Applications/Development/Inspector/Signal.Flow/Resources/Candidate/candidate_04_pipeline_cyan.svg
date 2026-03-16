@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#006064"/>
+      <stop offset="100%" stop-color="#00838F"/>
+    </linearGradient>
+    <linearGradient id="pipe" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#80DEEA"/>
+      <stop offset="100%" stop-color="#26C6DA"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Pipeline stages -->
+  <!-- Stage 1 -->
+  <rect x="60" y="200" width="90" height="112" rx="10" fill="#00838F" stroke="#80DEEA" stroke-width="2"/>
+  <text x="80" y="260" font-family="monospace" font-size="14" fill="#80DEEA">INPUT</text>
+  <!-- Arrow -->
+  <polygon points="162,256 182,244 182,268" fill="#80DEEA"/>
+  <!-- Stage 2 -->
+  <rect x="182" y="200" width="90" height="112" rx="10" fill="#00838F" stroke="#80DEEA" stroke-width="2"/>
+  <text x="193" y="252" font-family="monospace" font-size="12" fill="#80DEEA">FILTER</text>
+  <text x="193" y="272" font-family="monospace" font-size="12" fill="#80DEEA">PARSE</text>
+  <!-- Arrow -->
+  <polygon points="284,256 304,244 304,268" fill="#80DEEA"/>
+  <!-- Stage 3 -->
+  <rect x="304" y="200" width="90" height="112" rx="10" fill="#00838F" stroke="#80DEEA" stroke-width="2"/>
+  <text x="314" y="252" font-family="monospace" font-size="12" fill="#80DEEA">ANALYZE</text>
+  <text x="325" y="272" font-family="monospace" font-size="12" fill="#80DEEA">FLOW</text>
+  <!-- Arrow -->
+  <polygon points="406,256 426,244 426,268" fill="#80DEEA"/>
+  <!-- Stage 4 -->
+  <rect x="426" y="200" width="26" height="112" rx="8" fill="#004D40" stroke="#80DEEA" stroke-width="2"/>
+  <!-- Signal dots flowing -->
+  <circle cx="105" cy="256" r="10" fill="#00E5FF" opacity="0.9"/>
+  <circle cx="227" cy="256" r="10" fill="#00E5FF" opacity="0.7"/>
+  <circle cx="349" cy="256" r="10" fill="#00E5FF" opacity="0.5"/>
+  <!-- Top label -->
+  <text x="130" y="170" font-family="monospace" font-size="20" fill="#E0F7FA" letter-spacing="2">SIGNAL PIPELINE</text>
+  <!-- Waveform mini -->
+  <polyline points="80,380 100,360 110,400 120,340 130,380 150,380 160,355 170,400 180,380" stroke="#80DEEA" stroke-width="2.5" fill="none"/>
+  <polyline points="230,380 250,360 260,400 270,340 280,380 300,380 310,355 320,400 330,380" stroke="#80DEEA" stroke-width="2.5" fill="none" opacity="0.7"/>
+  <polyline points="370,380 390,360 400,400 410,340 420,380 440,380" stroke="#80DEEA" stroke-width="2.5" fill="none" opacity="0.4"/>
+</svg>

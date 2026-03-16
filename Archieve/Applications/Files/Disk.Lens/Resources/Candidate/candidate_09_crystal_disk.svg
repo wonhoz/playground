@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#667eea"/>
+      <stop offset="100%" stop-color="#764ba2"/>
+    </linearGradient>
+    <linearGradient id="crystalTop" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#C8D8FF" stop-opacity="0.6"/>
+    </linearGradient>
+    <linearGradient id="crystalLeft" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#A0B4FF" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#6070CC" stop-opacity="0.6"/>
+    </linearGradient>
+    <linearGradient id="crystalRight" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#D0DAFF" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#8090DD" stop-opacity="0.5"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Crystal disk shape (isometric) -->
+  <!-- Bottom face ellipse -->
+  <ellipse cx="256" cy="340" rx="155" ry="62" fill="#4040A0" opacity="0.6"/>
+  <!-- Side cylinders for depth -->
+  <rect x="101" y="200" width="310" height="140" rx="0" fill="#5050AA" opacity="0.5"/>
+  <!-- Top face ellipse -->
+  <ellipse cx="256" cy="200" rx="155" ry="62" fill="url(#crystalTop)" opacity="0.9" filter="url(#glow)"/>
+  <!-- Connecting sides -->
+  <path d="M101,200 L101,340 Q256,402 411,340 L411,200 Q256,262 101,200 Z" fill="url(#crystalLeft)" opacity="0.7"/>
+  <!-- Platter rings on top -->
+  <ellipse cx="256" cy="200" rx="120" ry="48" fill="none" stroke="white" stroke-width="1.5" opacity="0.4"/>
+  <ellipse cx="256" cy="200" rx="85" ry="34" fill="none" stroke="white" stroke-width="1.5" opacity="0.35"/>
+  <ellipse cx="256" cy="200" rx="50" ry="20" fill="none" stroke="white" stroke-width="1.5" opacity="0.3"/>
+  <!-- Center spindle -->
+  <ellipse cx="256" cy="200" rx="18" ry="7" fill="#FFFFFF" opacity="0.8"/>
+  <!-- Read arm -->
+  <line x1="256" y1="200" x2="355" y2="170" stroke="#FFD700" stroke-width="6" stroke-linecap="round" opacity="0.85" filter="url(#glow)"/>
+  <circle cx="358" cy="169" r="9" fill="#FFD700" opacity="0.9" filter="url(#glow)"/>
+  <!-- Data sparkles -->
+  <circle cx="180" cy="185" r="4" fill="#00FFFF" opacity="0.8" filter="url(#glow)"/>
+  <circle cx="310" cy="195" r="3" fill="#FF88FF" opacity="0.8" filter="url(#glow)"/>
+  <circle cx="230" cy="215" r="5" fill="#88FF88" opacity="0.8" filter="url(#glow)"/>
+  <!-- Usage bar at bottom of crystal -->
+  <rect x="156" y="375" width="200" height="16" rx="8" fill="#FFFFFF" opacity="0.2"/>
+  <rect x="156" y="375" width="140" height="16" rx="8" fill="#FFFFFF" opacity="0.7"/>
+  <text x="256" y="418" text-anchor="middle" fill="white" font-family="Arial" font-size="13" opacity="0.8">70% Used — 210 / 300 GB</text>
+  <!-- Label -->
+  <text x="256" y="468" text-anchor="middle" fill="white" font-family="Arial" font-size="22" font-weight="bold" letter-spacing="2" opacity="0.95">DISK.LENS</text>
+  <text x="256" y="492" text-anchor="middle" fill="white" font-family="Arial" font-size="12" letter-spacing="4" opacity="0.6">STORAGE ANALYZER</text>
+</svg>

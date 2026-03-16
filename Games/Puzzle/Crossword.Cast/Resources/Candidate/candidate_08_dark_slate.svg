@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="100%" stop-color="#818cf8"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- word grid -->
+  <g fill="none" stroke="#334155" stroke-width="3">
+    <rect x="72" y="72" width="368" height="368"/>
+    <line x1="164" y1="72" x2="164" y2="440"/>
+    <line x1="256" y1="72" x2="256" y2="440"/>
+    <line x1="348" y1="72" x2="348" y2="440"/>
+    <line x1="72" y1="164" x2="440" y2="164"/>
+    <line x1="72" y1="256" x2="440" y2="256"/>
+    <line x1="72" y1="348" x2="440" y2="348"/>
+  </g>
+  <!-- highlighted row -->
+  <rect x="72" y="164" width="368" height="92" fill="url(#accent)" opacity="0.15" rx="2"/>
+  <!-- highlighted col -->
+  <rect x="164" y="72" width="92" height="368" fill="url(#accent)" opacity="0.1" rx="2"/>
+  <!-- black cells -->
+  <rect x="72" y="72" width="92" height="92" fill="#060d1a"/>
+  <rect x="348" y="348" width="92" height="92" fill="#060d1a"/>
+  <!-- letters with gradient -->
+  <text x="210" y="210" font-family="'Courier New',monospace" font-size="68" font-weight="bold" fill="url(#accent)" text-anchor="middle" dominant-baseline="central">C</text>
+  <text x="302" y="210" font-family="'Courier New',monospace" font-size="68" font-weight="bold" fill="#94a3b8" text-anchor="middle" dominant-baseline="central">R</text>
+  <text x="210" y="302" font-family="'Courier New',monospace" font-size="68" font-weight="bold" fill="#94a3b8" text-anchor="middle" dominant-baseline="central">O</text>
+  <text x="394" y="210" font-family="'Courier New',monospace" font-size="68" font-weight="bold" fill="#94a3b8" text-anchor="middle" dominant-baseline="central">S</text>
+</svg>

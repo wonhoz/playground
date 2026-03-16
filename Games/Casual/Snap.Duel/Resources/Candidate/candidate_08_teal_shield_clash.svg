@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#001a18"/>
+      <stop offset="100%" stop-color="#002a28"/>
+    </linearGradient>
+    <linearGradient id="sh1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#4db6ac"/>
+      <stop offset="100%" stop-color="#00695c"/>
+    </linearGradient>
+    <linearGradient id="sh2" x1="1" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#80cbc4"/>
+      <stop offset="100%" stop-color="#26a69a"/>
+    </linearGradient>
+    <radialGradient id="clash" cx="50%" cy="50%" r="30%">
+      <stop offset="0%" stop-color="#1de9b6" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#1de9b6" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <circle cx="256" cy="256" r="80" fill="url(#clash)"/>
+  <!-- Left shield -->
+  <path d="M80 150 L80 280 Q80 340 148 370 L200 390 L200 150 Z" fill="url(#sh1)" opacity="0.9" stroke="#b2dfdb" stroke-width="2"/>
+  <path d="M80 150 L200 150 L200 390 L148 370 Q80 340 80 280 Z" fill="none" stroke="#e0f2f1" stroke-width="2" opacity="0.4"/>
+  <!-- Shield 1 emblem: left arrow -->
+  <polygon points="110 268 155 242 155 294" fill="#004d40" stroke="#80cbc4" stroke-width="2"/>
+  <!-- Right shield (mirrored) -->
+  <path d="M432 150 L432 280 Q432 340 364 370 L312 390 L312 150 Z" fill="url(#sh2)" opacity="0.9" stroke="#b2dfdb" stroke-width="2"/>
+  <path d="M432 150 L312 150 L312 390 L364 370 Q432 340 432 280 Z" fill="none" stroke="#e0f2f1" stroke-width="2" opacity="0.4"/>
+  <!-- Shield 2 emblem: right arrow -->
+  <polygon points="402 268 357 242 357 294" fill="#004d40" stroke="#80cbc4" stroke-width="2"/>
+  <!-- Clash sparks -->
+  <line x1="256" y1="256" x2="240" y2="220" stroke="#1de9b6" stroke-width="3" stroke-linecap="round"/>
+  <line x1="256" y1="256" x2="272" y2="220" stroke="#1de9b6" stroke-width="3" stroke-linecap="round"/>
+  <line x1="256" y1="256" x2="220" y2="256" stroke="#1de9b6" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="256" y1="256" x2="292" y2="256" stroke="#1de9b6" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="256" y1="256" x2="240" y2="292" stroke="#1de9b6" stroke-width="2" stroke-linecap="round"/>
+  <line x1="256" y1="256" x2="272" y2="292" stroke="#1de9b6" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="256" cy="256" r="10" fill="#1de9b6"/>
+  <!-- Title -->
+  <text x="256" y="462" font-family="sans-serif" font-size="22" fill="#4db6ac" text-anchor="middle" font-weight="bold" letter-spacing="3" opacity="0.9">SNAP.DUEL</text>
+</svg>

@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0a1f"/>
+      <stop offset="100%" stop-color="#151530"/>
+    </linearGradient>
+    <linearGradient id="metal" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#9090b0"/>
+      <stop offset="100%" stop-color="#404060"/>
+    </linearGradient>
+    <radialGradient id="electric" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="40%" stop-color="#a0c0ff"/>
+      <stop offset="100%" stop-color="#4060ff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Tower body -->
+  <rect x="206" y="220" width="100" height="240" rx="6" fill="url(#metal)"/>
+  <!-- Tower coils/rings -->
+  <rect x="196" y="235" width="120" height="14" rx="7" fill="#c0c0e0"/>
+  <rect x="196" y="270" width="120" height="14" rx="7" fill="#b0b0d0"/>
+  <rect x="196" y="305" width="120" height="14" rx="7" fill="#c0c0e0"/>
+  <rect x="196" y="340" width="120" height="14" rx="7" fill="#b0b0d0"/>
+  <rect x="196" y="375" width="120" height="14" rx="7" fill="#c0c0e0"/>
+  <!-- Tower top sphere -->
+  <circle cx="256" cy="200" r="40" fill="#6060a0"/>
+  <circle cx="256" cy="200" r="30" fill="#8080c0"/>
+  <circle cx="256" cy="200" r="20" fill="url(#electric)"/>
+  <!-- Lightning rod -->
+  <rect x="251" y="110" width="10" height="70" fill="#c0c0e0"/>
+  <polygon points="256,90 266,120 246,120" fill="#d0d0f0"/>
+  <!-- Lightning bolts from sphere -->
+  <polyline points="256,200 220,170 240,160 200,130" fill="none" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <polyline points="256,200 290,165 275,155 320,125" fill="none" stroke="#c0e0ff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <polyline points="256,200 150,220 170,240 110,260" fill="none" stroke="#a0c0ff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <polyline points="256,200 380,215 360,235 420,250" fill="none" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Glow around sphere -->
+  <circle cx="256" cy="200" r="50" fill="url(#electric)" opacity="0.4"/>
+  <!-- Enemy zapped -->
+  <ellipse cx="115" cy="255" rx="15" ry="18" fill="#cc3030" opacity="0.8"/>
+  <rect x="107" y="272" width="16" height="30" rx="4" fill="#cc3030" opacity="0.8"/>
+  <!-- Base -->
+  <rect x="170" y="452" width="172" height="18" rx="9" fill="#505070"/>
+  <rect x="148" y="464" width="216" height="14" rx="7" fill="#404060"/>
+  <!-- Stars/sparks -->
+  <circle cx="180" cy="150" r="3" fill="#a0c0ff" opacity="0.8"/>
+  <circle cx="340" cy="140" r="3" fill="#ffffff" opacity="0.9"/>
+  <circle cx="420" cy="180" r="2" fill="#c0e0ff" opacity="0.7"/>
+  <circle cx="130" cy="180" r="2" fill="#a0c0ff" opacity="0.8"/>
+</svg>

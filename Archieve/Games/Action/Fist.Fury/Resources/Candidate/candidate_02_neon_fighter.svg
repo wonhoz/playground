@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0a0a"/>
+      <stop offset="100%" stop-color="#120012"/>
+    </linearGradient>
+    <linearGradient id="fighter" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ea00d9"/>
+      <stop offset="100%" stop-color="#0abdc6"/>
+    </linearGradient>
+    <filter id="neonBlur">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Grid floor -->
+  <line x1="0" y1="400" x2="512" y2="400" stroke="#ea00d9" stroke-width="1" opacity="0.4" filter="url(#neonBlur)"/>
+  <line x1="64" y1="400" x2="96" y2="512" stroke="#ea00d9" stroke-width="0.8" opacity="0.2"/>
+  <line x1="128" y1="400" x2="144" y2="512" stroke="#ea00d9" stroke-width="0.8" opacity="0.2"/>
+  <line x1="192" y1="400" x2="200" y2="512" stroke="#ea00d9" stroke-width="0.8" opacity="0.2"/>
+  <line x1="256" y1="400" x2="256" y2="512" stroke="#ea00d9" stroke-width="0.8" opacity="0.2"/>
+  <line x1="320" y1="400" x2="312" y2="512" stroke="#0abdc6" stroke-width="0.8" opacity="0.2"/>
+  <line x1="384" y1="400" x2="368" y2="512" stroke="#0abdc6" stroke-width="0.8" opacity="0.2"/>
+  <line x1="448" y1="400" x2="416" y2="512" stroke="#0abdc6" stroke-width="0.8" opacity="0.2"/>
+  <!-- Fighter silhouette (stick figure fighting pose) -->
+  <!-- Head -->
+  <circle cx="256" cy="110" r="35" fill="none" stroke="url(#fighter)" stroke-width="4" filter="url(#neonBlur)"/>
+  <!-- Body -->
+  <line x1="256" y1="145" x2="256" y2="270" stroke="url(#fighter)" stroke-width="5" stroke-linecap="round" filter="url(#neonBlur)"/>
+  <!-- Right arm punching -->
+  <line x1="256" y1="180" x2="360" y2="155" stroke="#ea00d9" stroke-width="5" stroke-linecap="round" filter="url(#neonBlur)"/>
+  <!-- Left arm guard -->
+  <line x1="256" y1="180" x2="190" y2="210" stroke="#0abdc6" stroke-width="5" stroke-linecap="round" filter="url(#neonBlur)"/>
+  <line x1="190" y1="210" x2="175" y2="165" stroke="#0abdc6" stroke-width="5" stroke-linecap="round" filter="url(#neonBlur)"/>
+  <!-- Legs stance -->
+  <line x1="256" y1="270" x2="200" y2="390" stroke="url(#fighter)" stroke-width="5" stroke-linecap="round" filter="url(#neonBlur)"/>
+  <line x1="256" y1="270" x2="320" y2="380" stroke="url(#fighter)" stroke-width="5" stroke-linecap="round" filter="url(#neonBlur)"/>
+  <!-- Fist impact -->
+  <circle cx="368" cy="152" r="18" fill="none" stroke="#ea00d9" stroke-width="3" filter="url(#neonBlur)"/>
+  <!-- Impact sparks -->
+  <line x1="380" y1="140" x2="400" y2="120" stroke="#ffff00" stroke-width="3" stroke-linecap="round" filter="url(#neonBlur)"/>
+  <line x1="390" y1="155" x2="415" y2="148" stroke="#ffff00" stroke-width="2.5" stroke-linecap="round" filter="url(#neonBlur)"/>
+  <line x1="385" y1="168" x2="408" y2="178" stroke="#ffff00" stroke-width="2" stroke-linecap="round" filter="url(#neonBlur)"/>
+  <!-- Title -->
+  <text x="256" y="485" font-family="Arial" font-size="36" font-weight="900" fill="url(#fighter)" text-anchor="middle" filter="url(#neonBlur)" letter-spacing="4">FIST FURY</text>
+</svg>

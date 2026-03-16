@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a0500"/>
+      <stop offset="100%" stop-color="#2d0a00"/>
+    </linearGradient>
+    <linearGradient id="hammerGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#c0c0c0"/>
+      <stop offset="50%" stop-color="#808080"/>
+      <stop offset="100%" stop-color="#404040"/>
+    </linearGradient>
+    <linearGradient id="fireGrad" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#ff4500"/>
+      <stop offset="50%" stop-color="#ff8c00"/>
+      <stop offset="100%" stop-color="#ffd700"/>
+    </linearGradient>
+    <linearGradient id="promptGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffd700"/>
+      <stop offset="100%" stop-color="#ff8c00"/>
+    </linearGradient>
+    <filter id="fireGlow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Anvil base -->
+  <rect x="145" y="355" width="222" height="35" rx="8" fill="#2a2a2a"/>
+  <rect x="170" y="335" width="172" height="25" rx="6" fill="#333"/>
+  <rect x="140" y="310" width="232" height="40" rx="10" fill="#3a3a3a" stroke="#555" stroke-width="1.5"/>
+  <!-- Fire glow behind impact area -->
+  <ellipse cx="256" cy="310" rx="110" ry="35" fill="#ff4500" fill-opacity="0.3" filter="url(#fireGlow)"/>
+  <!-- Hammer head -->
+  <rect x="210" y="120" width="140" height="75" rx="10" fill="url(#hammerGrad)" transform="rotate(-30 280 157)"/>
+  <!-- Hammer handle -->
+  <rect x="268" y="180" width="22" height="140" rx="6" fill="#8B4513" transform="rotate(-30 279 250)"/>
+  <!-- Sparks at impact -->
+  <g filter="url(#fireGlow)">
+    <line x1="256" y1="310" x2="220" y2="268" stroke="#ffd700" stroke-width="2.5" opacity="0.8"/>
+    <line x1="256" y1="310" x2="295" y2="260" stroke="#ff8c00" stroke-width="2.5" opacity="0.8"/>
+    <line x1="256" y1="310" x2="300" y2="295" stroke="#ffd700" stroke-width="2" opacity="0.7"/>
+    <line x1="256" y1="310" x2="210" y2="298" stroke="#ff4500" stroke-width="2" opacity="0.7"/>
+    <line x1="256" y1="310" x2="275" y2="260" stroke="#ffd700" stroke-width="1.5" opacity="0.6"/>
+    <line x1="256" y1="310" x2="235" y2="280" stroke="#ff8c00" stroke-width="1.5" opacity="0.6"/>
+  </g>
+  <!-- Prompt text being forged (glowing on anvil) -->
+  <rect x="160" y="290" width="192" height="28" rx="6" fill="#ff8c00" fill-opacity="0.2" stroke="url(#promptGrad)" stroke-width="1.5" filter="url(#fireGlow)"/>
+  <!-- Prompt lines -->
+  <line x1="172" y1="300" x2="340" y2="300" stroke="url(#promptGrad)" stroke-width="2.5" filter="url(#fireGlow)"/>
+  <line x1="172" y1="312" x2="310" y2="312" stroke="#ff8c00" stroke-width="2" opacity="0.7"/>
+  <!-- Spark particles -->
+  <circle cx="230" cy="255" r="4" fill="#ffd700" filter="url(#fireGlow)" opacity="0.9"/>
+  <circle cx="285" cy="248" r="3" fill="#ff8c00" filter="url(#fireGlow)" opacity="0.8"/>
+  <circle cx="308" cy="278" r="4" fill="#ffd700" filter="url(#fireGlow)" opacity="0.7"/>
+  <circle cx="200" cy="275" r="3" fill="#ff4500" filter="url(#fireGlow)" opacity="0.8"/>
+</svg>

@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1A0800"/>
+      <stop offset="100%" style="stop-color:#2A1800"/>
+    </linearGradient>
+    <linearGradient id="sand" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFD080"/>
+      <stop offset="100%" style="stop-color:#CC8800"/>
+    </linearGradient>
+    <linearGradient id="glass" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#AACCFF;stop-opacity:0.4"/>
+      <stop offset="100%" style="stop-color:#6688CC;stop-opacity:0.2"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Hourglass frame -->
+  <rect x="170" y="80" width="172" height="20" rx="6" fill="#886644"/>
+  <rect x="170" y="412" width="172" height="20" rx="6" fill="#886644"/>
+  <!-- Hourglass glass top (triangle) -->
+  <path d="M180 100 L332 100 L270 256 L256 256 Z" fill="url(#glass)" stroke="#AAAACC" stroke-width="2"/>
+  <path d="M180 100 L332 100 L270 256 L256 256 Z" fill="url(#sand)" opacity="0.4" clip-path="url(#topclip)"/>
+  <!-- Sand in top (half empty) -->
+  <path d="M195 100 L317 100 L270 230 L242 230 Z" fill="url(#sand)" opacity="0.7"/>
+  <!-- Hourglass glass bottom (inverted triangle) -->
+  <path d="M180 412 L332 412 L270 256 L242 256 Z" fill="url(#glass)" stroke="#AAAACC" stroke-width="2"/>
+  <!-- Sand in bottom (accumulated) -->
+  <path d="M210 412 L302 412 L280 330 L232 330 Z" fill="url(#sand)" opacity="0.9"/>
+  <!-- Falling sand stream -->
+  <rect x="252" y="248" width="8" height="80" rx="4" fill="url(#sand)" opacity="0.8"/>
+  <!-- Sand particles -->
+  <circle cx="250" cy="270" r="3" fill="#FFCC44" opacity="0.9"/>
+  <circle cx="258" cy="285" r="2" fill="#FFCC44" opacity="0.8"/>
+  <circle cx="254" cy="300" r="3" fill="#FFCC44" opacity="0.9"/>
+</svg>

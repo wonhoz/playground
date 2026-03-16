@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0A1A2E"/>
+      <stop offset="100%" stop-color="#152D45"/>
+    </linearGradient>
+    <linearGradient id="ice" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#B3E5FF"/>
+      <stop offset="100%" stop-color="#4DB8FF"/>
+    </linearGradient>
+    <radialGradient id="snow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#B3E5FF"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Snowflakes -->
+  <text x="80" y="120" font-size="28" fill="#B3E5FF" opacity="0.5" text-anchor="middle">❄</text>
+  <text x="380" y="90" font-size="22" fill="#B3E5FF" opacity="0.4" text-anchor="middle">❄</text>
+  <text x="440" y="200" font-size="18" fill="#B3E5FF" opacity="0.3" text-anchor="middle">❄</text>
+  <text x="60" y="300" font-size="20" fill="#B3E5FF" opacity="0.3" text-anchor="middle">❄</text>
+  <!-- Ice ground -->
+  <rect x="0" y="380" width="512" height="132" rx="0" fill="#1A3A5C"/>
+  <rect x="0" y="375" width="512" height="14" rx="0" fill="url(#ice)" opacity="0.7"/>
+  <!-- Icicles -->
+  <polygon points="130,375 145,405 160,375" fill="url(#ice)" opacity="0.8"/>
+  <polygon points="200,375 212,398 224,375" fill="url(#ice)" opacity="0.7"/>
+  <polygon points="300,375 315,410 330,375" fill="url(#ice)" opacity="0.8"/>
+  <polygon points="390,375 402,395 414,375" fill="url(#ice)" opacity="0.6"/>
+  <!-- Runner -->
+  <circle cx="240" cy="280" r="26" fill="url(#snow)" opacity="0.9"/>
+  <line x1="240" y1="306" x2="240" y2="360" stroke="url(#ice)" stroke-width="8" stroke-linecap="round"/>
+  <line x1="240" y1="330" x2="215" y2="360" stroke="url(#ice)" stroke-width="7" stroke-linecap="round"/>
+  <line x1="240" y1="330" x2="265" y2="355" stroke="url(#ice)" stroke-width="7" stroke-linecap="round"/>
+  <line x1="240" y1="318" x2="212" y2="300" stroke="url(#ice)" stroke-width="6" stroke-linecap="round"/>
+  <line x1="240" y1="318" x2="268" y2="305" stroke="url(#ice)" stroke-width="6" stroke-linecap="round"/>
+  <!-- Morse code in ice style -->
+  <circle cx="310" cy="250" r="12" fill="url(#ice)" opacity="0.9"/>
+  <rect x="334" y="240" width="34" height="20" rx="10" fill="url(#ice)" opacity="0.9"/>
+  <circle cx="382" cy="250" r="12" fill="url(#ice)" opacity="0.9"/>
+  <rect x="310" y="278" width="34" height="20" rx="10" fill="#B3E5FF" opacity="0.7"/>
+  <circle cx="358" cy="288" r="12" fill="#B3E5FF" opacity="0.7"/>
+</svg>

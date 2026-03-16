@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#1a1a00"/>
+      <stop offset="100%" stop-color="#000000"/>
+    </radialGradient>
+    <linearGradient id="tire" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#333333"/>
+      <stop offset="100%" stop-color="#111111"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Skid marks -->
+  <path d="M100,350 Q150,330 200,310 Q230,295 250,260" fill="none" stroke="#333" stroke-width="18" stroke-linecap="round" opacity="0.9"/>
+  <path d="M120,370 Q170,350 220,330 Q250,315 270,280" fill="none" stroke="#2a2a2a" stroke-width="18" stroke-linecap="round" opacity="0.9"/>
+  <!-- Tire -->
+  <circle cx="280" cy="240" r="90" fill="url(#tire)" stroke="#555" stroke-width="4"/>
+  <circle cx="280" cy="240" r="60" fill="#1a1a1a" stroke="#444" stroke-width="3"/>
+  <circle cx="280" cy="240" r="25" fill="#333"/>
+  <!-- Wheel spokes -->
+  <line x1="280" y1="185" x2="280" y2="295" stroke="#666" stroke-width="5"/>
+  <line x1="225" y1="240" x2="335" y2="240" stroke="#666" stroke-width="5"/>
+  <line x1="241" y1="201" x2="319" y2="279" stroke="#666" stroke-width="5"/>
+  <line x1="241" y1="279" x2="319" y2="201" stroke="#666" stroke-width="5"/>
+  <!-- Smoke/dust -->
+  <circle cx="220" cy="295" r="25" fill="#888" opacity="0.2"/>
+  <circle cx="200" cy="310" r="20" fill="#666" opacity="0.15"/>
+  <circle cx="245" cy="285" r="18" fill="#999" opacity="0.18"/>
+  <!-- Flame streak -->
+  <path d="M200,240 Q170,235 130,220 Q170,242 145,260 Q175,248 200,250 Z" fill="#ff6600" opacity="0.7"/>
+  <text x="256" y="460" text-anchor="middle" font-family="Arial Black" font-size="32" font-weight="900" fill="#ffaa00">NITRO.DRIFT</text>
+</svg>

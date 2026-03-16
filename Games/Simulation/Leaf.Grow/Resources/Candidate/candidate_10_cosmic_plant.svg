@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#1A0033"/>
+      <stop offset="100%" stop-color="#000011"/>
+    </radialGradient>
+    <linearGradient id="cosmicLeaf" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E040FB"/>
+      <stop offset="50%" stop-color="#7C4DFF"/>
+      <stop offset="100%" stop-color="#00BCD4"/>
+    </linearGradient>
+    <linearGradient id="stemGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#7C4DFF"/>
+      <stop offset="100%" stop-color="#311B92"/>
+    </linearGradient>
+    <filter id="cosmicGlow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Stars -->
+  <circle cx="80" cy="70" r="2" fill="white" opacity="0.7"/>
+  <circle cx="150" cy="50" r="1.5" fill="white" opacity="0.5"/>
+  <circle cx="420" cy="80" r="2" fill="white" opacity="0.6"/>
+  <circle cx="460" cy="50" r="1" fill="white" opacity="0.5"/>
+  <circle cx="60" cy="140" r="1.5" fill="white" opacity="0.4"/>
+  <circle cx="450" cy="140" r="2" fill="white" opacity="0.6"/>
+  <circle cx="380" cy="40" r="1.5" fill="white" opacity="0.4"/>
+  <circle cx="120" cy="120" r="1" fill="white" opacity="0.5"/>
+  <!-- Nebula blobs -->
+  <circle cx="150" cy="200" r="80" fill="#E040FB" opacity="0.06" filter="url(#cosmicGlow)"/>
+  <circle cx="380" cy="180" r="70" fill="#00BCD4" opacity="0.07" filter="url(#cosmicGlow)"/>
+  <!-- Cosmic pot (planet-like) -->
+  <circle cx="256" cy="410" r="56" fill="#1A0044" stroke="#7C4DFF" stroke-width="2" filter="url(#cosmicGlow)"/>
+  <ellipse cx="256" cy="410" rx="80" ry="14" fill="none" stroke="#7C4DFF" stroke-width="2" opacity="0.6" filter="url(#cosmicGlow)"/>
+  <!-- Stem -->
+  <path d="M256 360 Q252 310 256 260 Q260 210 254 170" stroke="url(#stemGrad)" stroke-width="6" fill="none" stroke-linecap="round" filter="url(#cosmicGlow)"/>
+  <!-- Cosmic leaves -->
+  <path d="M256 280 Q310 240 356 212 Q316 248 262 286" fill="url(#cosmicLeaf)" filter="url(#cosmicGlow)" opacity="0.85"/>
+  <line x1="256" y1="280" x2="316" y2="240" stroke="#E040FB" stroke-width="1.5" opacity="0.5"/>
+  <path d="M256 240 Q200 208 158 188 Q196 216 252 246" fill="url(#cosmicLeaf)" filter="url(#cosmicGlow)" opacity="0.85"/>
+  <line x1="256" y1="240" x2="196" y2="208" stroke="#00BCD4" stroke-width="1.5" opacity="0.5"/>
+  <path d="M254 200 Q292 172 322 148 Q290 180 258 206" fill="#B388FF" filter="url(#cosmicGlow)" opacity="0.75"/>
+  <path d="M254 200 Q214 174 186 152 Q218 180 256 206" fill="#80DEEA" filter="url(#cosmicGlow)" opacity="0.7"/>
+  <!-- Glowing orb at top -->
+  <circle cx="254" cy="156" r="28" fill="#7C4DFF" opacity="0.3" filter="url(#cosmicGlow)"/>
+  <circle cx="254" cy="156" r="18" fill="#E040FB" opacity="0.6" filter="url(#cosmicGlow)"/>
+  <circle cx="254" cy="156" r="10" fill="white" opacity="0.9" filter="url(#cosmicGlow)"/>
+  <!-- Energy particles -->
+  <circle cx="180" cy="310" r="4" fill="#00BCD4" filter="url(#cosmicGlow)" opacity="0.8"/>
+  <circle cx="332" cy="266" r="4" fill="#E040FB" filter="url(#cosmicGlow)" opacity="0.8"/>
+  <circle cx="210" cy="186" r="3" fill="#7C4DFF" filter="url(#cosmicGlow)" opacity="0.7"/>
+  <circle cx="300" cy="170" r="3" fill="#00E5FF" filter="url(#cosmicGlow)" opacity="0.7"/>
+  <!-- Planet rings sparkle -->
+  <circle cx="200" cy="410" r="3" fill="#B388FF" filter="url(#cosmicGlow)" opacity="0.6"/>
+  <circle cx="318" cy="408" r="3" fill="#80DEEA" filter="url(#cosmicGlow)" opacity="0.6"/>
+</svg>

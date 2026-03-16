@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#020024"/>
+      <stop offset="50%" stop-color="#090979"/>
+      <stop offset="100%" stop-color="#00d4ff"/>
+    </linearGradient>
+    <linearGradient id="path" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00ffff"/>
+      <stop offset="100%" stop-color="#00aaff"/>
+    </linearGradient>
+    <filter id="glow1">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glow2">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Glowing path -->
+  <path d="M80 400 C140 320 180 180 256 200 C332 220 360 360 440 280" stroke="#00ffff" stroke-width="2" fill="none" opacity="0.3" filter="url(#glow1)"/>
+  <path d="M80 400 C140 320 180 180 256 200 C332 220 360 360 440 280" stroke="url(#path)" stroke-width="3" fill="none" filter="url(#glow2)"/>
+  <!-- Anchor diamonds -->
+  <g transform="translate(80,400)">
+    <polygon points="0,-14 14,0 0,14 -14,0" fill="url(#path)" filter="url(#glow1)"/>
+    <polygon points="0,-8 8,0 0,8 -8,0" fill="white"/>
+  </g>
+  <g transform="translate(256,200)">
+    <polygon points="0,-14 14,0 0,14 -14,0" fill="url(#path)" filter="url(#glow1)"/>
+    <polygon points="0,-8 8,0 0,8 -8,0" fill="white"/>
+  </g>
+  <g transform="translate(440,280)">
+    <polygon points="0,-14 14,0 0,14 -14,0" fill="url(#path)" filter="url(#glow1)"/>
+    <polygon points="0,-8 8,0 0,8 -8,0" fill="white"/>
+  </g>
+  <!-- Control handles with glow -->
+  <circle cx="140" cy="320" r="6" fill="#00ffff" opacity="0.6" filter="url(#glow1)"/>
+  <circle cx="180" cy="180" r="6" fill="#00ffff" opacity="0.6" filter="url(#glow1)"/>
+  <circle cx="332" cy="220" r="6" fill="#00ffff" opacity="0.6" filter="url(#glow1)"/>
+  <circle cx="360" cy="360" r="6" fill="#00ffff" opacity="0.6" filter="url(#glow1)"/>
+  <line x1="80" y1="400" x2="140" y2="320" stroke="#00ffff" stroke-width="1" opacity="0.4"/>
+  <line x1="256" y1="200" x2="180" y2="180" stroke="#00ffff" stroke-width="1" opacity="0.4"/>
+  <line x1="256" y1="200" x2="332" y2="220" stroke="#00ffff" stroke-width="1" opacity="0.4"/>
+  <line x1="440" y1="280" x2="360" y2="360" stroke="#00ffff" stroke-width="1" opacity="0.4"/>
+</svg>

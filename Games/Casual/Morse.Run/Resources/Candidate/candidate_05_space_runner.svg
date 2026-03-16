@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#1A0033"/>
+      <stop offset="100%" stop-color="#000011"/>
+    </radialGradient>
+    <radialGradient id="planet" cx="40%" cy="35%" r="60%">
+      <stop offset="0%" stop-color="#AA66FF"/>
+      <stop offset="100%" stop-color="#440088"/>
+    </radialGradient>
+    <filter id="glow2">
+      <feGaussianBlur stdDeviation="5" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Stars -->
+  <circle cx="80" cy="100" r="2" fill="white" opacity="0.8"/>
+  <circle cx="160" cy="60" r="3" fill="white" opacity="0.6"/>
+  <circle cx="300" cy="80" r="2" fill="white" opacity="0.9"/>
+  <circle cx="420" cy="50" r="2" fill="white" opacity="0.7"/>
+  <circle cx="450" cy="130" r="3" fill="#AA99FF" opacity="0.8"/>
+  <circle cx="50" cy="200" r="2" fill="white" opacity="0.5"/>
+  <circle cx="470" cy="300" r="2" fill="white" opacity="0.6"/>
+  <circle cx="100" cy="380" r="2" fill="#AA99FF" opacity="0.4"/>
+  <!-- Planet in background -->
+  <circle cx="390" cy="140" r="70" fill="url(#planet)" opacity="0.6"/>
+  <ellipse cx="390" cy="140" rx="100" ry="20" fill="none" stroke="#CC88FF" stroke-width="4" opacity="0.5"/>
+  <!-- Platform/asteroid -->
+  <ellipse cx="256" cy="390" rx="200" ry="30" fill="#2A1A44" opacity="0.9"/>
+  <ellipse cx="256" cy="385" rx="200" ry="28" fill="#3A2A55"/>
+  <!-- Astronaut runner -->
+  <rect x="228" y="280" width="56" height="56" rx="28" fill="none" stroke="#AA66FF" stroke-width="6" filter="url(#glow2)"/>
+  <rect x="236" y="288" width="40" height="40" rx="20" fill="#220044" opacity="0.8"/>
+  <line x1="256" y1="336" x2="256" y2="380" stroke="#AA66FF" stroke-width="6" stroke-linecap="round" filter="url(#glow2)"/>
+  <line x1="256" y1="355" x2="230" y2="380" stroke="#AA66FF" stroke-width="5" stroke-linecap="round" filter="url(#glow2)"/>
+  <line x1="256" y1="355" x2="280" y2="372" stroke="#AA66FF" stroke-width="5" stroke-linecap="round" filter="url(#glow2)"/>
+  <line x1="240" y1="310" x2="215" y2="300" stroke="#AA66FF" stroke-width="5" stroke-linecap="round" filter="url(#glow2)"/>
+  <line x1="272" y1="310" x2="298" y2="296" stroke="#AA66FF" stroke-width="5" stroke-linecap="round" filter="url(#glow2)"/>
+  <!-- Morse dots -->
+  <circle cx="320" cy="250" r="10" fill="#FF66FF" filter="url(#glow2)"/>
+  <rect x="345" y="242" width="28" height="16" rx="8" fill="#FF66FF" filter="url(#glow2)"/>
+  <circle cx="388" cy="250" r="10" fill="#FF66FF" filter="url(#glow2)"/>
+</svg>

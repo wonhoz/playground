@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="65%">
+      <stop offset="0%" stop-color="#1A0000"/>
+      <stop offset="100%" stop-color="#080000"/>
+    </radialGradient>
+    <radialGradient id="burst" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FF416C"/>
+      <stop offset="60%" stop-color="#C62828"/>
+      <stop offset="100%" stop-color="#B71C1C" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="6" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Burst rays -->
+  <g opacity="0.35" filter="url(#glow)">
+    <line x1="256" y1="256" x2="256" y2="60" stroke="#FF416C" stroke-width="3"/>
+    <line x1="256" y1="256" x2="256" y2="452" stroke="#FF416C" stroke-width="3"/>
+    <line x1="256" y1="256" x2="60" y2="256" stroke="#FF416C" stroke-width="3"/>
+    <line x1="256" y1="256" x2="452" y2="256" stroke="#FF416C" stroke-width="3"/>
+    <line x1="256" y1="256" x2="117" y2="117" stroke="#FF416C" stroke-width="2"/>
+    <line x1="256" y1="256" x2="395" y2="117" stroke="#FF416C" stroke-width="2"/>
+    <line x1="256" y1="256" x2="117" y2="395" stroke="#FF416C" stroke-width="2"/>
+    <line x1="256" y1="256" x2="395" y2="395" stroke="#FF416C" stroke-width="2"/>
+  </g>
+  <!-- Radial glow -->
+  <circle cx="256" cy="256" r="140" fill="url(#burst)" opacity="0.7"/>
+  <!-- Error X symbol -->
+  <line x1="196" y1="196" x2="316" y2="316" stroke="#FF416C" stroke-width="24" stroke-linecap="round" filter="url(#glow)"/>
+  <line x1="316" y1="196" x2="196" y2="316" stroke="#FF416C" stroke-width="24" stroke-linecap="round" filter="url(#glow)"/>
+  <!-- Circle border -->
+  <circle cx="256" cy="256" r="110" fill="none" stroke="#FF416C" stroke-width="6" filter="url(#glow)"/>
+  <!-- Event ID tags floating -->
+  <rect x="52" y="80" width="100" height="28" rx="6" fill="#C62828" opacity="0.8"/>
+  <text x="102" y="99" text-anchor="middle" font-family="Segoe UI" font-size="16" fill="#FFF">ID: 1000</text>
+  <rect x="360" y="80" width="100" height="28" rx="6" fill="#C62828" opacity="0.8"/>
+  <text x="410" y="99" text-anchor="middle" font-family="Segoe UI" font-size="16" fill="#FFF">ID: 4625</text>
+  <rect x="52" y="404" width="100" height="28" rx="6" fill="#C62828" opacity="0.8"/>
+  <text x="102" y="423" text-anchor="middle" font-family="Segoe UI" font-size="16" fill="#FFF">ID: 6008</text>
+  <rect x="360" y="404" width="100" height="28" rx="6" fill="#C62828" opacity="0.8"/>
+  <text x="410" y="423" text-anchor="middle" font-family="Segoe UI" font-size="16" fill="#FFF">ID: 7023</text>
+</svg>

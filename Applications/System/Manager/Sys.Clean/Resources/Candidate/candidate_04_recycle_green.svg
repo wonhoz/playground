@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#061208"/>
+      <stop offset="100%" stop-color="#0A1A0C"/>
+    </linearGradient>
+    <linearGradient id="arrow1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00FF88"/>
+      <stop offset="100%" stop-color="#00CC44"/>
+    </linearGradient>
+    <linearGradient id="arrow2" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#00DDAA"/>
+      <stop offset="100%" stop-color="#00AA44"/>
+    </linearGradient>
+    <linearGradient id="arrow3" x1="50%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" stop-color="#44FFAA"/>
+      <stop offset="100%" stop-color="#00BB66"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Recycle symbol (3 arrows forming triangle, each 120 degrees) -->
+  <!-- Arrow 1 (top-right going right) -->
+  <path d="M 256,110 L 340,255 L 300,255 L 364,370 L 424,370 L 340,230 L 310,230 L 256,130 Z" fill="url(#arrow1)" filter="url(#glow)" opacity="0.9"/>
+  <!-- Arrow 2 (bottom going left) -->
+  <path d="M 148,370 L 256,370 L 256,406 L 340,370 L 256,334 L 256,370 L 172,370 Z" fill="url(#arrow2)" filter="url(#glow)" opacity="0.85"/>
+  <!-- Arrow 3 (left going up) -->
+  <path d="M 88,370 L 170,255 L 210,255 L 148,140 L 88,140 L 172,265 L 132,265 Z" fill="url(#arrow3)" filter="url(#glow)" opacity="0.9"/>
+  <!-- Center clean icon -->
+  <circle cx="256" cy="270" r="44" fill="#060E08" stroke="url(#arrow1)" stroke-width="2" filter="url(#glow)"/>
+  <!-- Sparkle/clean lines inside -->
+  <line x1="256" y1="248" x2="256" y2="242" stroke="#00FF88" stroke-width="2.5" stroke-linecap="round" filter="url(#glow)"/>
+  <line x1="270" y1="252" x2="274" y2="248" stroke="#00FF88" stroke-width="2.5" stroke-linecap="round" filter="url(#glow)"/>
+  <line x1="276" y1="266" x2="282" y2="266" stroke="#00FF88" stroke-width="2.5" stroke-linecap="round" filter="url(#glow)"/>
+  <line x1="242" y1="252" x2="238" y2="248" stroke="#00FF88" stroke-width="2.5" stroke-linecap="round" filter="url(#glow)"/>
+  <line x1="236" y1="266" x2="230" y2="266" stroke="#00FF88" stroke-width="2.5" stroke-linecap="round" filter="url(#glow)"/>
+  <polygon points="256,252 260,264 272,264 262,272 266,284 256,276 246,284 250,272 240,264 252,264" fill="#00FF88" filter="url(#glow)" opacity="0.85"/>
+  <!-- Title -->
+  <text x="256" y="460" font-family="'Segoe UI', sans-serif" font-size="16" fill="#44FF88" text-anchor="middle" letter-spacing="2" filter="url(#glow)">SYS.CLEAN</text>
+</svg>

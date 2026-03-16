@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#040810"/>
+      <stop offset="100%" style="stop-color:#081828"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <linearGradient id="trailRainbow" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#ff0088;stop-opacity:0"/>
+      <stop offset="25%" style="stop-color:#ff8800"/>
+      <stop offset="50%" style="stop-color:#ffff00"/>
+      <stop offset="75%" style="stop-color:#00ff88"/>
+      <stop offset="100%" style="stop-color:#00aaff"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Rainbow drift trail -->
+  <path d="M60 380 Q130 280 200 240 Q270 200 320 240 Q370 280 420 220" stroke="url(#trailRainbow)" stroke-width="8" fill="none" filter="url(#glow)" stroke-linecap="round"/>
+  <path d="M60 380 Q130 280 200 240 Q270 200 320 240 Q370 280 420 220" stroke="#ffffff" stroke-width="2" fill="none" opacity="0.5" stroke-linecap="round"/>
+  <!-- Trail width variation (tapering) -->
+  <path d="M60 380 Q130 280 200 240 Q270 200 320 240 Q370 280 420 220" stroke="url(#trailRainbow)" stroke-width="25" fill="none" opacity="0.15" stroke-linecap="round"/>
+  <!-- Plane at trail end -->
+  <g transform="translate(418, 222) rotate(-25)" filter="url(#glow)">
+    <path d="M-55 0 Q-38 -7 0 -7 Q45 -7 62 0 Q45 7 0 7 Q-38 7 -55 0 Z" fill="#aaddff"/>
+    <path d="M-4 -7 L-26 -36 L17 -36 L23 -7 Z" fill="#88bbdd"/>
+    <path d="M-4 7 L-26 36 L17 36 L23 7 Z" fill="#88bbdd"/>
+    <path d="M-46 0 L-60 -22 L-38 -7 Z" fill="#6699bb"/>
+    <path d="M-46 0 L-58 15 L-38 7 Z" fill="#6699bb"/>
+    <ellipse cx="38" cy="0" rx="14" ry="6" fill="#0088cc" opacity="0.9"/>
+  </g>
+  <!-- Loop path dotted -->
+  <path d="M80 350 Q130 260 200 234 Q270 194 320 234 Q370 274 415 216" stroke="#ffffff" stroke-width="1" fill="none" opacity="0.2" stroke-dasharray="8,8" stroke-linecap="round"/>
+  <!-- Stars -->
+  <circle cx="160" cy="140" r="2" fill="#ffffff" opacity="0.5"/>
+  <circle cx="350" cy="160" r="1.5" fill="#aaddff" opacity="0.5"/>
+  <circle cx="420" cy="130" r="1" fill="#ffffff" opacity="0.4"/>
+  <circle cx="100" cy="170" r="1.5" fill="#ffffff" opacity="0.4"/>
+  <circle cx="280" cy="120" r="1" fill="#aaddff" opacity="0.5"/>
+</svg>

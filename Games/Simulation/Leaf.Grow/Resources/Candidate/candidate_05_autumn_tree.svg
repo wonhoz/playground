@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#87CEEB"/>
+      <stop offset="60%" stop-color="#DEB887"/>
+      <stop offset="100%" stop-color="#8B6914"/>
+    </linearGradient>
+    <radialGradient id="crownGrad" cx="50%" cy="40%" r="55%">
+      <stop offset="0%" stop-color="#FF8C00"/>
+      <stop offset="40%" stop-color="#FF4500"/>
+      <stop offset="100%" stop-color="#8B2500"/>
+    </radialGradient>
+    <filter id="shadow">
+      <feDropShadow dx="4" dy="4" stdDeviation="8" flood-color="#00000040"/>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Ground -->
+  <ellipse cx="256" cy="450" rx="220" ry="40" fill="#6B4F12" opacity="0.6"/>
+  <!-- Fallen leaves on ground -->
+  <ellipse cx="160" cy="445" rx="18" ry="8" fill="#FF6600" opacity="0.7" transform="rotate(-20 160 445)"/>
+  <ellipse cx="350" cy="448" rx="15" ry="7" fill="#FF8C00" opacity="0.6" transform="rotate(15 350 448)"/>
+  <ellipse cx="120" cy="452" rx="12" ry="6" fill="#CC4400" opacity="0.5" transform="rotate(-35 120 452)"/>
+  <ellipse cx="390" cy="455" rx="16" ry="7" fill="#FF4500" opacity="0.6" transform="rotate(25 390 455)"/>
+  <!-- Trunk -->
+  <path d="M236 450 Q230 380 236 320 Q240 280 238 240" stroke="#5C3A1A" stroke-width="24" fill="none" stroke-linecap="round"/>
+  <path d="M276 450 Q282 380 276 320 Q272 280 274 240" stroke="#4A2E10" stroke-width="20" fill="none" stroke-linecap="round"/>
+  <!-- Trunk texture lines -->
+  <path d="M240 420 Q244 400 240 380" stroke="#3D2508" stroke-width="3" fill="none" opacity="0.5"/>
+  <path d="M252 400 Q256 380 252 360" stroke="#3D2508" stroke-width="2" fill="none" opacity="0.4"/>
+  <!-- Crown (autumn foliage) -->
+  <circle cx="256" cy="200" r="140" fill="url(#crownGrad)" filter="url(#shadow)"/>
+  <circle cx="200" cy="230" r="90" fill="#FF6600" opacity="0.7"/>
+  <circle cx="310" cy="220" r="80" fill="#FF4500" opacity="0.6"/>
+  <circle cx="256" cy="150" r="80" fill="#FF8C00" opacity="0.6"/>
+  <circle cx="190" cy="170" r="60" fill="#FFB300" opacity="0.5"/>
+  <circle cx="320" cy="260" r="60" fill="#CC3300" opacity="0.5"/>
+  <!-- Falling leaves -->
+  <ellipse cx="350" cy="300" rx="12" ry="6" fill="#FF6600" opacity="0.8" transform="rotate(-30 350 300)"/>
+  <ellipse cx="170" cy="340" rx="10" ry="5" fill="#FF4500" opacity="0.7" transform="rotate(20 170 340)"/>
+  <ellipse cx="400" cy="350" rx="9" ry="5" fill="#FFB300" opacity="0.6" transform="rotate(-45 400 350)"/>
+  <ellipse cx="130" cy="290" rx="11" ry="5" fill="#CC4400" opacity="0.7" transform="rotate(35 130 290)"/>
+</svg>

@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f0f0f"/>
+      <stop offset="100%" stop-color="#1e1e1e"/>
+    </linearGradient>
+    <linearGradient id="chain" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#CCCCCC"/>
+      <stop offset="100%" stop-color="#888888"/>
+    </linearGradient>
+    <linearGradient id="file" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#AAAAAA"/>
+      <stop offset="100%" stop-color="#555555"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- 3 files linked by chain -->
+  <!-- File 1 -->
+  <rect x="56" y="196" width="110" height="140" rx="10" fill="url(#file)" opacity="0.8"/>
+  <polygon points="140,196 166,196 166,222" fill="#0f0f0f" opacity="0.4"/>
+  <polygon points="140,196 140,222 166,222" fill="#555" opacity="0.8"/>
+  <line x1="80" y1="240" x2="148" y2="240" stroke="white" stroke-width="3" opacity="0.3"/>
+  <line x1="80" y1="258" x2="148" y2="258" stroke="white" stroke-width="3" opacity="0.3"/>
+  <!-- Chain 1-2 -->
+  <ellipse cx="210" cy="256" rx="22" ry="14" fill="none" stroke="url(#chain)" stroke-width="8"/>
+  <ellipse cx="250" cy="256" rx="22" ry="14" fill="none" stroke="url(#chain)" stroke-width="8"/>
+  <ellipse cx="210" cy="256" rx="22" ry="14" fill="none" stroke="url(#chain)" stroke-width="8"/>
+  <!-- File 2 -->
+  <rect x="285" y="196" width="110" height="140" rx="10" fill="url(#file)" opacity="0.85"/>
+  <polygon points="369,196 395,196 395,222" fill="#0f0f0f" opacity="0.4"/>
+  <polygon points="369,196 369,222 395,222" fill="#555" opacity="0.8"/>
+  <line x1="305" y1="240" x2="379" y2="240" stroke="white" stroke-width="3" opacity="0.3"/>
+  <line x1="305" y1="258" x2="379" y2="258" stroke="white" stroke-width="3" opacity="0.3"/>
+  <!-- Rename arrow with lightning -->
+  <path d="M190,370 L256,340 L240,370 L320,340 L305,370 L370,340" fill="none" stroke="#FFFF44" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Serial numbers -->
+  <rect x="72" y="290" width="78" height="26" rx="4" fill="#333" stroke="#888" stroke-width="1"/>
+  <text x="111" y="308" font-family="monospace" font-size="14" fill="#CCC" text-anchor="middle">001.dat</text>
+  <rect x="301" y="290" width="78" height="26" rx="4" fill="#333" stroke="#AAAAFF" stroke-width="1.5"/>
+  <text x="340" y="308" font-family="monospace" font-size="14" fill="#AAAAFF" text-anchor="middle">002.dat</text>
+</svg>

@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#E65100"/>
+      <stop offset="100%" style="stop-color:#BF360C"/>
+    </linearGradient>
+    <radialGradient id="compassbg" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#FFF8E1"/>
+      <stop offset="100%" style="stop-color:#FFE082"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Compass circle -->
+  <circle cx="256" cy="256" r="160" fill="url(#compassbg)" stroke="#FF8A65" stroke-width="6"/>
+  <circle cx="256" cy="256" r="148" fill="none" stroke="#FFCCBC" stroke-width="2" stroke-dasharray="10,5"/>
+  <!-- Cardinal directions -->
+  <text x="256" y="128" text-anchor="middle" font-family="Arial Black,sans-serif" font-size="36" font-weight="900" fill="#C62828">N</text>
+  <text x="256" y="408" text-anchor="middle" font-family="Arial Black,sans-serif" font-size="36" font-weight="900" fill="#555">S</text>
+  <text x="398" y="268" text-anchor="middle" font-family="Arial Black,sans-serif" font-size="36" font-weight="900" fill="#555">E</text>
+  <text x="114" y="268" text-anchor="middle" font-family="Arial Black,sans-serif" font-size="36" font-weight="900" fill="#555">W</text>
+  <!-- Compass needle N -->
+  <polygon points="256,148 244,256 256,248 268,256" fill="#C62828"/>
+  <!-- Compass needle S -->
+  <polygon points="256,364 244,256 256,264 268,256" fill="#455A64"/>
+  <!-- Center dot -->
+  <circle cx="256" cy="256" r="12" fill="#37474F" stroke="#ECEFF1" stroke-width="3"/>
+  <!-- Tick marks -->
+  <line x1="256" y1="108" x2="256" y2="125" stroke="#BF360C" stroke-width="4"/>
+  <line x1="256" y1="387" x2="256" y2="404" stroke="#BF360C" stroke-width="4"/>
+  <line x1="108" y1="256" x2="125" y2="256" stroke="#BF360C" stroke-width="4"/>
+  <line x1="387" y1="256" x2="404" y2="256" stroke="#BF360C" stroke-width="4"/>
+</svg>

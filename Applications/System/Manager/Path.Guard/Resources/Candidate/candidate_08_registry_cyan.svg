@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#001A20"/>
+      <stop offset="100%" stop-color="#002A33"/>
+    </linearGradient>
+    <linearGradient id="cyan" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00E5FF"/>
+      <stop offset="100%" stop-color="#0097A7"/>
+    </linearGradient>
+    <linearGradient id="key" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#84FFFF"/>
+      <stop offset="100%" stop-color="#00E5FF"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Registry tree structure -->
+  <!-- Root node -->
+  <rect x="196" y="76" width="120" height="36" rx="6" fill="#003344" stroke="#00E5FF" stroke-width="2"/>
+  <text x="256" y="99" text-anchor="middle" font-family="Consolas" font-size="13" fill="#84FFFF">HKCU</text>
+  <!-- Level 2 -->
+  <line x1="256" y1="112" x2="256" y2="136" stroke="#00E5FF" stroke-width="2"/>
+  <rect x="136" y="136" width="120" height="34" rx="6" fill="#003344" stroke="#0097A7" stroke-width="2"/>
+  <text x="196" y="158" text-anchor="middle" font-family="Consolas" font-size="12" fill="#00E5FF">System</text>
+  <rect x="276" y="136" width="120" height="34" rx="6" fill="#003344" stroke="#0097A7" stroke-width="2"/>
+  <text x="336" y="158" text-anchor="middle" font-family="Consolas" font-size="12" fill="#0097A7">Control</text>
+  <!-- Connector -->
+  <line x1="196" y1="112" x2="196" y2="136" stroke="#00E5FF" stroke-width="2"/>
+  <line x1="196" y1="124" x2="336" y2="124" stroke="#00E5FF" stroke-width="2"/>
+  <line x1="336" y1="112" x2="336" y2="136" stroke="#00E5FF" stroke-width="2"/>
+  <!-- Level 3 - PATH node (highlighted) -->
+  <line x1="196" y1="170" x2="196" y2="194" stroke="#00E5FF" stroke-width="2"/>
+  <rect x="136" y="194" width="120" height="34" rx="6" fill="#005566" stroke="#84FFFF" stroke-width="2.5"/>
+  <text x="196" y="216" text-anchor="middle" font-family="Consolas" font-size="12" fill="#84FFFF">PATH</text>
+  <!-- Value display -->
+  <rect x="80" y="260" width="352" height="100" rx="10" fill="#002030" stroke="#00E5FF" stroke-width="2"/>
+  <rect x="80" y="260" width="352" height="28" rx="10" fill="#003344"/>
+  <rect x="80" y="276" width="352" height="12" fill="#003344"/>
+  <text x="96" y="279" font-family="Consolas" font-size="12" fill="#84FFFF">Value Data (REG_EXPAND_SZ)</text>
+  <text x="96" y="302" font-family="Consolas" font-size="10" fill="#00E5FF">C:\Windows\System32;</text>
+  <text x="96" y="318" font-family="Consolas" font-size="10" fill="#00E5FF">C:\Windows\System;</text>
+  <text x="96" y="334" font-family="Consolas" font-size="10" fill="#00E5FF">C:\Program Files\...</text>
+  <!-- Guard key icon -->
+  <circle cx="256" cy="420" r="40" fill="url(#cyan)" opacity="0.2" stroke="#00E5FF" stroke-width="2"/>
+  <circle cx="244" cy="414" r="14" fill="none" stroke="#84FFFF" stroke-width="4"/>
+  <path d="M254 424 L272 442 L266 448 L268 452 L260 452 L256 448 L260 440 L256 436" fill="none" stroke="#84FFFF" stroke-width="3" stroke-linejoin="round"/>
+</svg>

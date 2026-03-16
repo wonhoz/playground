@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#1E1E2E"/>
+      <stop offset="100%" stop-color="#0E0E18"/>
+    </radialGradient>
+    <linearGradient id="rose1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FF4757"/>
+      <stop offset="100%" stop-color="#CC1A2A"/>
+    </linearGradient>
+    <linearGradient id="rose2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#E8E8F0"/>
+      <stop offset="100%" stop-color="#A0A0B0"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Outer circle -->
+  <circle cx="256" cy="256" r="190" fill="none" stroke="#333355" stroke-width="3"/>
+  <circle cx="256" cy="256" r="150" fill="none" stroke="#222244" stroke-width="2"/>
+  <!-- Compass rose - 8 directions -->
+  <!-- N (red) -->
+  <polygon points="256,66 272,220 256,240 240,220" fill="url(#rose1)"/>
+  <!-- S (white) -->
+  <polygon points="256,446 272,292 256,272 240,292" fill="url(#rose2)"/>
+  <!-- E -->
+  <polygon points="446,256 292,240 272,256 292,272" fill="url(#rose2)" opacity="0.85"/>
+  <!-- W -->
+  <polygon points="66,256 220,240 240,256 220,272" fill="url(#rose2)" opacity="0.7"/>
+  <!-- NE -->
+  <polygon points="390,122 282,234 266,218 330,122" fill="url(#rose2)" opacity="0.6" transform="scale(0.85) translate(38,38)"/>
+  <!-- NW -->
+  <polygon points="122,122 234,234 218,218 122,154" fill="url(#rose2)" opacity="0.5"/>
+  <!-- SE -->
+  <polygon points="390,390 278,278 294,262 390,330" fill="url(#rose2)" opacity="0.5"/>
+  <!-- SW -->
+  <polygon points="122,390 234,278 218,294 122,358" fill="url(#rose2)" opacity="0.5"/>
+  <!-- Center circle -->
+  <circle cx="256" cy="256" r="30" fill="#1E1E2E" stroke="#FF4757" stroke-width="4"/>
+  <circle cx="256" cy="256" r="14" fill="#FF4757"/>
+  <!-- Mouse cursor overlay -->
+  <polygon points="256,178 264,240 256,252 248,240" fill="#FFFFFF" opacity="0.5"/>
+  <!-- N label -->
+  <text x="256" y="58" font-family="sans-serif" font-size="22" fill="#FF4757" text-anchor="middle" font-weight="bold">N</text>
+  <text x="256" y="470" font-family="sans-serif" font-size="18" fill="#CCCCDD" text-anchor="middle">S</text>
+  <text x="462" y="263" font-family="sans-serif" font-size="18" fill="#CCCCDD" text-anchor="middle">E</text>
+  <text x="50" y="263" font-family="sans-serif" font-size="18" fill="#CCCCDD" text-anchor="middle">W</text>
+</svg>

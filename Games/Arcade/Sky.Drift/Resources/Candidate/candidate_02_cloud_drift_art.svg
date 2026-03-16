@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#050820"/>
+      <stop offset="100%" style="stop-color:#102040"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="cloudGlow">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Large neon cloud left -->
+  <ellipse cx="140" cy="240" rx="90" ry="45" fill="none" stroke="#88bbff" stroke-width="2" filter="url(#cloudGlow)" opacity="0.6"/>
+  <ellipse cx="100" cy="255" rx="55" ry="35" fill="none" stroke="#88bbff" stroke-width="1.5" filter="url(#cloudGlow)" opacity="0.5"/>
+  <ellipse cx="175" cy="255" rx="55" ry="35" fill="none" stroke="#88bbff" stroke-width="1.5" filter="url(#cloudGlow)" opacity="0.5"/>
+  <!-- Large neon cloud right -->
+  <ellipse cx="385" cy="290" rx="80" ry="40" fill="none" stroke="#aabbff" stroke-width="2" filter="url(#cloudGlow)" opacity="0.5"/>
+  <ellipse cx="350" cy="304" rx="50" ry="30" fill="none" stroke="#aabbff" stroke-width="1.5" filter="url(#cloudGlow)" opacity="0.4"/>
+  <ellipse cx="415" cy="304" rx="50" ry="30" fill="none" stroke="#aabbff" stroke-width="1.5" filter="url(#cloudGlow)" opacity="0.4"/>
+  <!-- Plane silhouette with drift arc -->
+  <g transform="translate(256, 260) rotate(-8)">
+    <path d="M-65 0 Q-45 -7 0 -7 Q50 -7 75 0 Q50 7 0 7 Q-45 7 -65 0 Z" fill="#ddeeff" filter="url(#glow)"/>
+    <path d="M-5 -7 L-30 -38 L18 -38 L25 -7 Z" fill="#aaccee"/>
+    <path d="M-5 7 L-30 38 L18 38 L25 7 Z" fill="#aaccee"/>
+    <path d="M-55 0 L-72 -25 L-44 -7 Z" fill="#88aacc"/>
+    <path d="M-55 0 L-70 15 L-44 7 Z" fill="#88aacc" opacity="0.8"/>
+    <ellipse cx="45" cy="0" rx="16" ry="6" fill="#0066aa" opacity="0.8"/>
+  </g>
+  <!-- Drift spiral path -->
+  <path d="M80 300 Q150 240 256 260 Q370 285 420 230" stroke="#88aaff" stroke-width="3" fill="none" filter="url(#glow)" opacity="0.7" stroke-linecap="round"/>
+  <path d="M80 305 Q152 248 256 268 Q368 292 418 238" stroke="#aaccff" stroke-width="1.5" fill="none" opacity="0.4" stroke-linecap="round"/>
+  <!-- Dotted path -->
+  <path d="M80 295 Q150 235 256 253 Q370 277 420 222" stroke="#ffffff" stroke-width="1" fill="none" opacity="0.2" stroke-dasharray="6,6" stroke-linecap="round"/>
+</svg>

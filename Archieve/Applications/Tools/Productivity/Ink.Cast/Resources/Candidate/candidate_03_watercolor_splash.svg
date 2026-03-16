@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#1a2040"/>
+      <stop offset="100%" stop-color="#0a0f20"/>
+    </radialGradient>
+    <radialGradient id="splash1" cx="40%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#ff9a9e80"/>
+      <stop offset="100%" stop-color="#fad0c400"/>
+    </radialGradient>
+    <radialGradient id="splash2" cx="60%" cy="60%" r="55%">
+      <stop offset="0%" stop-color="#a1c4fd80"/>
+      <stop offset="100%" stop-color="#c2e9fb00"/>
+    </radialGradient>
+    <radialGradient id="splash3" cx="50%" cy="30%" r="50%">
+      <stop offset="0%" stop-color="#fddb9280"/>
+      <stop offset="100%" stop-color="#d1fdff00"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Watercolor splashes -->
+  <ellipse cx="180" cy="200" rx="130" ry="110" fill="url(#splash1)" opacity="0.85"/>
+  <ellipse cx="320" cy="300" rx="120" ry="100" fill="url(#splash2)" opacity="0.85"/>
+  <ellipse cx="260" cy="160" rx="90" ry="80" fill="url(#splash3)" opacity="0.75"/>
+  <!-- Ink blob shapes -->
+  <path d="M120,180 Q160,130 210,160 Q240,180 220,220 Q200,260 160,250 Q110,240 120,180 Z" fill="#ff9a9e" opacity="0.35"/>
+  <path d="M270,260 Q310,220 360,245 Q390,265 380,310 Q365,350 320,355 Q275,355 265,310 Q260,285 270,260 Z" fill="#a1c4fd" opacity="0.35"/>
+  <!-- Ink strokes -->
+  <path d="M80,350 Q160,310 240,330 Q320,350 400,310" fill="none" stroke="#ff9a9e" stroke-width="4" stroke-linecap="round" opacity="0.6"/>
+  <path d="M100,380 Q180,360 260,375 Q340,390 420,365" fill="none" stroke="#a1c4fd" stroke-width="3" stroke-linecap="round" opacity="0.5"/>
+  <!-- Drip effects -->
+  <ellipse cx="160" cy="270" rx="6" ry="12" fill="#ff9a9e" opacity="0.5"/>
+  <ellipse cx="160" cy="285" rx="4" ry="8" fill="#ff9a9e" opacity="0.3"/>
+  <ellipse cx="340" cy="365" rx="5" ry="10" fill="#a1c4fd" opacity="0.5"/>
+  <!-- Broadcast signal (cast) - pen drawing to screen -->
+  <path d="M240,430 Q256,415 272,430" fill="none" stroke="#fddb92" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
+  <path d="M218,448 Q256,425 294,448" fill="none" stroke="#fddb92" stroke-width="3" stroke-linecap="round" opacity="0.5"/>
+  <circle cx="256" cy="412" r="5" fill="#fddb92" opacity="0.8"/>
+  <!-- Title area -->
+  <text x="256" y="490" text-anchor="middle" font-family="Georgia" font-size="18" font-style="italic" fill="#fad0c4" opacity="0.6">ink · cast</text>
+</svg>

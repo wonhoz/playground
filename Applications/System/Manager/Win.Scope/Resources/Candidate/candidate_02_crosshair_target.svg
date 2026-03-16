@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="65%">
+      <stop offset="0%" stop-color="#001A00"/>
+      <stop offset="100%" stop-color="#000A00"/>
+    </radialGradient>
+    <radialGradient id="grd" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#00FF41" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#00FF41" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <circle cx="256" cy="256" r="220" fill="url(#grd)"/>
+  <!-- Crosshair rings -->
+  <circle cx="256" cy="256" r="180" fill="none" stroke="#00FF41" stroke-width="1.5" opacity="0.2" filter="url(#glow)"/>
+  <circle cx="256" cy="256" r="130" fill="none" stroke="#00FF41" stroke-width="2" opacity="0.4" filter="url(#glow)"/>
+  <circle cx="256" cy="256" r="80" fill="none" stroke="#00FF41" stroke-width="2.5" opacity="0.6" filter="url(#glow)"/>
+  <circle cx="256" cy="256" r="30" fill="none" stroke="#00FF41" stroke-width="3" opacity="0.9" filter="url(#glow)"/>
+  <!-- Cross lines -->
+  <line x1="70" y1="256" x2="200" y2="256" stroke="#00FF41" stroke-width="2" filter="url(#glow)"/>
+  <line x1="312" y1="256" x2="442" y2="256" stroke="#00FF41" stroke-width="2" filter="url(#glow)"/>
+  <line x1="256" y1="70" x2="256" y2="200" stroke="#00FF41" stroke-width="2" filter="url(#glow)"/>
+  <line x1="256" y1="312" x2="256" y2="442" stroke="#00FF41" stroke-width="2" filter="url(#glow)"/>
+  <!-- Corner brackets (targeting window) -->
+  <path d="M160,170 L160,130 L200,130" fill="none" stroke="#00FF41" stroke-width="4" stroke-linecap="round" filter="url(#glow)"/>
+  <path d="M352,170 L352,130 L312,130" fill="none" stroke="#00FF41" stroke-width="4" stroke-linecap="round" filter="url(#glow)"/>
+  <path d="M160,342 L160,382 L200,382" fill="none" stroke="#00FF41" stroke-width="4" stroke-linecap="round" filter="url(#glow)"/>
+  <path d="M352,342 L352,382 L312,382" fill="none" stroke="#00FF41" stroke-width="4" stroke-linecap="round" filter="url(#glow)"/>
+  <!-- Center dot -->
+  <circle cx="256" cy="256" r="7" fill="#00FF41" filter="url(#glow)"/>
+  <!-- Window info overlay -->
+  <rect x="68" y="68" width="140" height="50" rx="6" fill="#001A00" stroke="#00FF41" stroke-width="1.5" opacity="0.8"/>
+  <text x="78" y="87" font-family="Courier New" font-size="13" fill="#00FF41">HWND: 0x2D04</text>
+  <text x="78" y="107" font-family="Courier New" font-size="13" fill="#00FF41">chrome.exe</text>
+  <text x="256" y="460" text-anchor="middle" font-family="Courier New" font-size="20" fill="#00FF41" filter="url(#glow)">WIN.SCOPE</text>
+</svg>

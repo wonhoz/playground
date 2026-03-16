@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A0D00"/>
+      <stop offset="100%" stop-color="#2D1A00"/>
+    </linearGradient>
+    <linearGradient id="orange" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF9800"/>
+      <stop offset="100%" stop-color="#E65100"/>
+    </linearGradient>
+    <linearGradient id="road" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FF6D00"/>
+      <stop offset="100%" stop-color="#BF360C"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Road/path going through landscape -->
+  <!-- Road base -->
+  <path d="M100 420 Q256 300 412 420" fill="none" stroke="#4A2800" stroke-width="50"/>
+  <path d="M100 420 Q256 300 412 420" fill="none" stroke="url(#road)" stroke-width="40"/>
+  <!-- Road markings -->
+  <path d="M148 404 Q256 300 364 404" fill="none" stroke="#FF9800" stroke-width="3" stroke-dasharray="20,15"/>
+  <!-- Location pins on PATH nodes -->
+  <circle cx="156" cy="196" r="22" fill="url(#orange)"/>
+  <circle cx="156" cy="196" r="10" fill="#1A0D00"/>
+  <path d="M156 218 L156 240" stroke="url(#orange)" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="256" cy="140" r="22" fill="url(#orange)"/>
+  <circle cx="256" cy="140" r="10" fill="#1A0D00"/>
+  <path d="M256 162 L256 184" stroke="url(#orange)" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="356" cy="196" r="22" fill="url(#orange)"/>
+  <circle cx="356" cy="196" r="10" fill="#1A0D00"/>
+  <path d="M356 218 L356 240" stroke="url(#orange)" stroke-width="4" stroke-linecap="round"/>
+  <!-- Connecting roads -->
+  <path d="M178 206 Q217 160 234 150" fill="none" stroke="#FF9800" stroke-width="3" opacity="0.6"/>
+  <path d="M278 150 Q295 160 334 206" fill="none" stroke="#FF9800" stroke-width="3" opacity="0.6"/>
+  <!-- Shield at top -->
+  <path d="M256 60 L296 78 L296 110 Q296 136 256 150 Q216 136 216 110 L216 78 Z" fill="url(#orange)" opacity="0.3" stroke="#FF9800" stroke-width="3"/>
+  <!-- checkmark in shield -->
+  <path d="M238 105 L250 117 L274 93" stroke="#FF9800" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</svg>

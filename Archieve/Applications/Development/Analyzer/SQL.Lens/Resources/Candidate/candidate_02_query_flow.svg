@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0A0A14"/>
+      <stop offset="100%" style="stop-color:#14140A"/>
+    </linearGradient>
+    <linearGradient id="node1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FF8C00"/>
+      <stop offset="100%" style="stop-color:#CC5500"/>
+    </linearGradient>
+    <linearGradient id="node2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#44AAFF"/>
+      <stop offset="100%" style="stop-color:#0066CC"/>
+    </linearGradient>
+    <linearGradient id="node3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#44FF88"/>
+      <stop offset="100%" style="stop-color:#00AA44"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Query nodes with flow arrows -->
+  <!-- SELECT node -->
+  <rect x="80" y="110" width="130" height="48" rx="10" fill="url(#node1)"/>
+  <text x="145" y="140" text-anchor="middle" font-family="monospace" font-weight="bold" font-size="18" fill="white">SELECT</text>
+  <!-- Arrow -->
+  <path d="M210 134 L270 134 M255 120 L280 134 L255 148" fill="none" stroke="#FF8C00" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- FROM node -->
+  <rect x="280" y="110" width="130" height="48" rx="10" fill="url(#node2)"/>
+  <text x="345" y="140" text-anchor="middle" font-family="monospace" font-weight="bold" font-size="18" fill="white">FROM</text>
+  <!-- Arrow down -->
+  <path d="M345 158 L345 210 M331 195 L345 215 L359 195" fill="none" stroke="#44AAFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- WHERE node -->
+  <rect x="280" y="220" width="130" height="48" rx="10" fill="url(#node3)"/>
+  <text x="345" y="250" text-anchor="middle" font-family="monospace" font-weight="bold" font-size="18" fill="white">WHERE</text>
+  <!-- Arrow left -->
+  <path d="M280 244 L220 244 M235 230 L215 244 L235 258" fill="none" stroke="#44FF88" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- JOIN node -->
+  <rect x="80" y="220" width="130" height="48" rx="10" fill="#444455"/>
+  <text x="145" y="250" text-anchor="middle" font-family="monospace" font-weight="bold" font-size="18" fill="#AAAACC">JOIN</text>
+  <!-- Arrow down -->
+  <path d="M145 268 L145 310 M131 295 L145 315 L159 295" fill="none" stroke="#777788" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Result node -->
+  <rect x="80" y="320" width="332" height="50" rx="10" fill="#223344" stroke="#44AAFF" stroke-width="2"/>
+  <text x="246" y="351" text-anchor="middle" font-family="monospace" font-size="16" fill="#88CCFF">RESULT SET — 1,234 rows</text>
+  <!-- Performance bar -->
+  <rect x="80" y="390" width="332" height="20" rx="5" fill="#1A2233"/>
+  <rect x="80" y="390" width="220" height="20" rx="5" fill="#2244AA" opacity="0.7"/>
+  <text x="80" y="428" font-family="monospace" font-size="12" fill="#4488CC">Execution: 12ms | Rows scanned: 8,240</text>
+</svg>

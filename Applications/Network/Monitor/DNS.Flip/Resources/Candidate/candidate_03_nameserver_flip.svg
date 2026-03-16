@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0d0d1a"/>
+      <stop offset="100%" stop-color="#1a0d33"/>
+    </linearGradient>
+    <linearGradient id="server1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ce93d8"/>
+      <stop offset="100%" stop-color="#7b1fa2"/>
+    </linearGradient>
+    <linearGradient id="server2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#80cbc4"/>
+      <stop offset="100%" stop-color="#00695c"/>
+    </linearGradient>
+    <filter id="glow"><feGaussianBlur stdDeviation="8"/></filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- server rack 1 -->
+  <rect x="75" y="160" width="155" height="200" rx="12" fill="url(#server1)"/>
+  <rect x="90" y="178" width="125" height="28" rx="6" fill="#6a1b9a"/>
+  <rect x="90" y="216" width="125" height="28" rx="6" fill="#6a1b9a"/>
+  <rect x="90" y="254" width="125" height="28" rx="6" fill="#6a1b9a"/>
+  <circle cx="195" cy="192" r="7" fill="#00e676"/>
+  <circle cx="195" cy="230" r="7" fill="#00e676"/>
+  <circle cx="195" cy="268" r="7" fill="#ffea00"/>
+  <!-- server rack 2 -->
+  <rect x="282" y="160" width="155" height="200" rx="12" fill="url(#server2)"/>
+  <rect x="297" y="178" width="125" height="28" rx="6" fill="#004d40"/>
+  <rect x="297" y="216" width="125" height="28" rx="6" fill="#004d40"/>
+  <rect x="297" y="254" width="125" height="28" rx="6" fill="#004d40"/>
+  <circle cx="402" cy="192" r="7" fill="#00e676"/>
+  <circle cx="402" cy="230" r="7" fill="#00e676"/>
+  <circle cx="402" cy="268" r="7" fill="#00e676"/>
+  <!-- flip arrows between -->
+  <path d="M240 220 Q256 200 272 220" stroke="#ffe082" stroke-width="7" fill="none" stroke-linecap="round"/>
+  <polygon points="272,220 260,210 274,208" fill="#ffe082"/>
+  <path d="M272 290 Q256 310 240 290" stroke="#ffe082" stroke-width="7" fill="none" stroke-linecap="round"/>
+  <polygon points="240,290 252,300 238,302" fill="#ffe082"/>
+  <!-- active indicator -->
+  <circle cx="256" cy="256" r="16" fill="#ffe082" filter="url(#glow)"/>
+  <circle cx="256" cy="256" r="8" fill="white"/>
+</svg>

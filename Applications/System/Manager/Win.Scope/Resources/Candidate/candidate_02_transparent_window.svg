@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a1628"/>
+      <stop offset="100%" style="stop-color:#102040"/>
+    </linearGradient>
+    <linearGradient id="glass" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#e3f2fd;stop-opacity:0.15"/>
+      <stop offset="100%" style="stop-color:#0d47a1;stop-opacity:0.1"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <pattern id="checkers" width="30" height="30" patternUnits="userSpaceOnUse">
+      <rect width="15" height="15" fill="#1a1a2e" opacity="0.5"/>
+      <rect x="15" y="15" width="15" height="15" fill="#1a1a2e" opacity="0.5"/>
+      <rect x="15" y="0" width="15" height="15" fill="#2a2a4e" opacity="0.4"/>
+      <rect x="0" y="15" width="15" height="15" fill="#2a2a4e" opacity="0.4"/>
+    </pattern>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Background scene (visible through glass) -->
+  <rect x="80" y="160" width="352" height="230" rx="8" fill="url(#checkers)"/>
+  <!-- Cityscape silhouette behind -->
+  <rect x="100" y="280" width="40" height="110" fill="#0d47a1" opacity="0.4"/>
+  <rect x="150" y="250" width="50" height="140" fill="#1565c0" opacity="0.4"/>
+  <rect x="210" y="270" width="35" height="120" fill="#0d47a1" opacity="0.4"/>
+  <rect x="255" y="240" width="60" height="150" fill="#1565c0" opacity="0.4"/>
+  <rect x="325" y="260" width="45" height="130" fill="#0d47a1" opacity="0.4"/>
+  <rect x="378" y="275" width="38" height="115" fill="#1565c0" opacity="0.4"/>
+  <!-- Glass window overlay -->
+  <rect x="130" y="150" width="252" height="210" rx="14" fill="url(#glass)" stroke="#64b5f6" stroke-width="2.5" filter="url(#glow)"/>
+  <!-- Glass reflection highlights -->
+  <path d="M140 160 L240 160 L220 200 L140 200 Z" fill="white" opacity="0.08"/>
+  <line x1="370" y1="155" x2="350" y2="175" stroke="white" stroke-width="1.5" opacity="0.25"/>
+  <!-- Title bar transparent -->
+  <rect x="130" y="150" width="252" height="30" rx="14" fill="#1565c0" opacity="0.5"/>
+  <rect x="130" y="164" width="252" height="16" fill="#1565c0" opacity="0.5"/>
+  <!-- Opacity indicator -->
+  <rect x="155" y="390" width="202" height="24" rx="12" fill="#102040" stroke="#42a5f5" stroke-width="1.5"/>
+  <rect x="158" y="393" width="120" height="18" rx="10" fill="#1e88e5" opacity="0.7"/>
+  <!-- Opacity % indicator dot -->
+  <circle cx="278" cy="402" r="10" fill="#42a5f5" filter="url(#glow)"/>
+</svg>

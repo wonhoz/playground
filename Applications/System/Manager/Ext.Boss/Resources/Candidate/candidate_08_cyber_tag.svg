@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0d1117"/>
+      <stop offset="100%" stop-color="#161b22"/>
+    </linearGradient>
+    <linearGradient id="tagGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#58a6ff"/>
+      <stop offset="100%" stop-color="#1f6feb"/>
+    </linearGradient>
+    <filter id="blur">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Grid lines -->
+  <line x1="0" y1="128" x2="512" y2="128" stroke="#21262d" stroke-width="1"/>
+  <line x1="0" y1="256" x2="512" y2="256" stroke="#21262d" stroke-width="1"/>
+  <line x1="0" y1="384" x2="512" y2="384" stroke="#21262d" stroke-width="1"/>
+  <line x1="128" y1="0" x2="128" y2="512" stroke="#21262d" stroke-width="1"/>
+  <line x1="256" y1="0" x2="256" y2="512" stroke="#21262d" stroke-width="1"/>
+  <line x1="384" y1="0" x2="384" y2="512" stroke="#21262d" stroke-width="1"/>
+  <!-- Main tag shape -->
+  <path d="M80 80 L360 80 L432 256 L360 432 L80 432 Z" fill="#161b22" stroke="#30363d" stroke-width="2"/>
+  <!-- Tag hole -->
+  <circle cx="140" cy="256" r="25" fill="#0d1117" stroke="#58a6ff" stroke-width="3"/>
+  <!-- Tag content -->
+  <text x="270" y="185" font-family="'Courier New', monospace" font-size="36" font-weight="bold" fill="url(#tagGrad)" text-anchor="middle" filter="url(#blur)">.EXT</text>
+  <!-- Divider -->
+  <line x1="110" y1="215" x2="400" y2="215" stroke="#30363d" stroke-width="1.5"/>
+  <!-- Extension list -->
+  <text x="135" y="245" font-family="'Courier New', monospace" font-size="14" fill="#8b949e">.exe</text>
+  <text x="195" y="245" font-family="'Courier New', monospace" font-size="14" fill="#58a6ff">→</text>
+  <text x="220" y="245" font-family="'Courier New', monospace" font-size="14" fill="#3fb950">Windows</text>
+  <text x="135" y="270" font-family="'Courier New', monospace" font-size="14" fill="#8b949e">.mp4</text>
+  <text x="195" y="270" font-family="'Courier New', monospace" font-size="14" fill="#58a6ff">→</text>
+  <text x="220" y="270" font-family="'Courier New', monospace" font-size="14" fill="#3fb950">VLC</text>
+  <text x="135" y="295" font-family="'Courier New', monospace" font-size="14" fill="#8b949e">.doc</text>
+  <text x="195" y="295" font-family="'Courier New', monospace" font-size="14" fill="#58a6ff">→</text>
+  <text x="220" y="295" font-family="'Courier New', monospace" font-size="14" fill="#3fb950">Word</text>
+  <!-- Barcode bottom -->
+  <rect x="140" y="340" width="8" height="40" fill="#58a6ff" opacity="0.8"/>
+  <rect x="154" y="340" width="4" height="40" fill="#58a6ff" opacity="0.6"/>
+  <rect x="164" y="340" width="10" height="40" fill="#58a6ff" opacity="0.8"/>
+  <rect x="180" y="340" width="6" height="40" fill="#58a6ff" opacity="0.7"/>
+  <rect x="192" y="340" width="8" height="40" fill="#58a6ff" opacity="0.8"/>
+  <rect x="206" y="340" width="4" height="40" fill="#58a6ff" opacity="0.6"/>
+  <rect x="216" y="340" width="12" height="40" fill="#58a6ff" opacity="0.8"/>
+  <rect x="234" y="340" width="6" height="40" fill="#58a6ff" opacity="0.7"/>
+  <rect x="246" y="340" width="8" height="40" fill="#58a6ff" opacity="0.8"/>
+  <rect x="260" y="340" width="4" height="40" fill="#58a6ff" opacity="0.6"/>
+  <rect x="270" y="340" width="10" height="40" fill="#58a6ff" opacity="0.8"/>
+  <rect x="286" y="340" width="6" height="40" fill="#58a6ff" opacity="0.7"/>
+  <rect x="298" y="340" width="8" height="40" fill="#58a6ff" opacity="0.8"/>
+  <rect x="312" y="340" width="4" height="40" fill="#58a6ff" opacity="0.6"/>
+  <rect x="322" y="340" width="12" height="40" fill="#58a6ff" opacity="0.8"/>
+</svg>

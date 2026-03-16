@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#000510"/>
+      <stop offset="100%" style="stop-color:#100005"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <linearGradient id="trailFade" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#00aaff;stop-opacity:0"/>
+      <stop offset="100%" style="stop-color:#00aaff"/>
+    </linearGradient>
+    <linearGradient id="trailFade2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#ff0066;stop-opacity:0"/>
+      <stop offset="100%" style="stop-color:#ff0066"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- S-curve slash trail -->
+  <path d="M80 180 Q180 120 256 200 Q340 280 430 220" stroke="url(#trailFade)" stroke-width="6" fill="none" filter="url(#glow)" stroke-linecap="round"/>
+  <path d="M80 180 Q180 120 256 200 Q340 280 430 220" stroke="#aaddff" stroke-width="2" fill="none" opacity="0.6" stroke-linecap="round"/>
+  <!-- Second slash trail -->
+  <path d="M80 340 Q180 380 256 300 Q340 220 430 280" stroke="url(#trailFade2)" stroke-width="6" fill="none" filter="url(#glow)" stroke-linecap="round"/>
+  <path d="M80 340 Q180 380 256 300 Q340 220 430 280" stroke="#ffaabb" stroke-width="2" fill="none" opacity="0.6" stroke-linecap="round"/>
+  <!-- Intersection sparkle -->
+  <circle cx="256" cy="256" r="14" fill="#ffffff" filter="url(#glow)" opacity="0.8"/>
+  <circle cx="256" cy="256" r="7" fill="#00aaff"/>
+  <!-- Glow trail inner -->
+  <path d="M80 180 Q180 120 256 200 Q340 280 430 220" stroke="#ffffff" stroke-width="1" fill="none" opacity="0.4" stroke-linecap="round"/>
+  <path d="M80 340 Q180 380 256 300 Q340 220 430 280" stroke="#ffffff" stroke-width="1" fill="none" opacity="0.4" stroke-linecap="round"/>
+  <!-- Object shards -->
+  <polygon points="256,180 288,220 256,230 224,220" fill="none" stroke="#00aaff" stroke-width="2" filter="url(#glow)" opacity="0.7" transform="rotate(-15 256 205) translate(0,-25)"/>
+  <polygon points="256,280 288,320 256,330 224,320" fill="none" stroke="#ff0066" stroke-width="2" filter="url(#glow)" opacity="0.7" transform="rotate(20 256 305) translate(0,20)"/>
+  <!-- Particles along trails -->
+  <circle cx="180" cy="145" r="3" fill="#00aaff" filter="url(#glow)"/>
+  <circle cx="350" cy="260" r="2.5" fill="#00aaff" filter="url(#glow)"/>
+  <circle cx="180" cy="368" r="3" fill="#ff0066" filter="url(#glow)"/>
+  <circle cx="350" cy="240" r="2.5" fill="#ff0066" filter="url(#glow)"/>
+</svg>

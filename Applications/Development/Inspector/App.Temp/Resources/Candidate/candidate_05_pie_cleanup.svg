@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F1923"/>
+      <stop offset="100%" stop-color="#1A2535"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Pie chart segments representing disk usage by temp types -->
+  <!-- .tmp segment (large) -->
+  <path d="M256,256 L256,80 A176,176 0 0,1 432,256 Z" fill="#EF4444" opacity="0.85"/>
+  <!-- .log segment -->
+  <path d="M256,256 L432,256 A176,176 0 0,1 320,416 Z" fill="#F59E0B" opacity="0.85"/>
+  <!-- .cache segment -->
+  <path d="M256,256 L320,416 A176,176 0 0,1 150,390 Z" fill="#8B5CF6" opacity="0.85"/>
+  <!-- .dmp segment (small) -->
+  <path d="M256,256 L150,390 A176,176 0 0,1 80,256 Z" fill="#3B82F6" opacity="0.85"/>
+  <!-- free segment -->
+  <path d="M256,256 L80,256 A176,176 0 0,1 256,80 Z" fill="#10B981" opacity="0.85"/>
+  <!-- Center hole -->
+  <circle cx="256" cy="256" r="70" fill="#0F1923"/>
+  <text x="256" y="250" font-family="monospace" font-size="12" fill="#888" text-anchor="middle">TEMP</text>
+  <text x="256" y="268" font-family="monospace" font-weight="bold" font-size="18" fill="white" text-anchor="middle">2.4GB</text>
+  <!-- Legend -->
+  <rect x="60" y="440" width="14" height="14" rx="3" fill="#EF4444"/>
+  <text x="80" y="452" font-family="monospace" font-size="11" fill="#888">.tmp</text>
+  <rect x="125" y="440" width="14" height="14" rx="3" fill="#F59E0B"/>
+  <text x="145" y="452" font-family="monospace" font-size="11" fill="#888">.log</text>
+  <rect x="195" y="440" width="14" height="14" rx="3" fill="#8B5CF6"/>
+  <text x="215" y="452" font-family="monospace" font-size="11" fill="#888">.cache</text>
+  <rect x="290" y="440" width="14" height="14" rx="3" fill="#3B82F6"/>
+  <text x="310" y="452" font-family="monospace" font-size="11" fill="#888">.dmp</text>
+  <rect x="365" y="440" width="14" height="14" rx="3" fill="#10B981"/>
+  <text x="385" y="452" font-family="monospace" font-size="11" fill="#888">free</text>
+</svg>

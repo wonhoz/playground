@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#111827"/>
+      <stop offset="100%" style="stop-color:#1f2937"/>
+    </linearGradient>
+    <filter id="glow"><feGaussianBlur stdDeviation="5" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Spiral rainbow path from center outward -->
+  <path d="M256,256 Q296,226 316,256 Q336,296 256,326 Q196,346 166,256 Q146,176 236,136 Q316,106 376,176 Q426,236 396,316 Q366,396 256,416 Q146,426 96,326 Q76,246 116,176" stroke="#ef4444" stroke-width="8" fill="none" stroke-linecap="round" filter="url(#glow)" opacity="0.9"/>
+  <path d="M256,256 Q276,236 286,256 Q296,276 256,286 Q226,286 216,256 Q206,226 236,216 Q266,206 286,226" stroke="#f97316" stroke-width="8" fill="none" stroke-linecap="round" filter="url(#glow)" opacity="0.8"/>
+  <!-- Color spectrum strips -->
+  <rect x="65" y="65" width="50" height="382" rx="8" fill="none" stroke="#ef4444" stroke-width="3" opacity="0.4"/>
+  <rect x="397" y="65" width="50" height="382" rx="8" fill="none" stroke="#8b5cf6" stroke-width="3" opacity="0.4"/>
+  <!-- Colored dots at path terminals -->
+  <circle cx="256" cy="256" r="16" fill="#ffffff" filter="url(#glow)"/>
+  <circle cx="256" cy="256" r="8" fill="#fbbf24"/>
+  <!-- Rainbow gradient bar at bottom -->
+  <defs>
+    <linearGradient id="rainbow" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#ef4444"/>
+      <stop offset="17%" style="stop-color:#f97316"/>
+      <stop offset="33%" style="stop-color:#eab308"/>
+      <stop offset="50%" style="stop-color:#22c55e"/>
+      <stop offset="67%" style="stop-color:#3b82f6"/>
+      <stop offset="83%" style="stop-color:#8b5cf6"/>
+      <stop offset="100%" style="stop-color:#ec4899"/>
+    </linearGradient>
+  </defs>
+  <rect x="80" y="450" width="352" height="18" rx="9" fill="url(#rainbow)" filter="url(#glow)" opacity="0.8"/>
+  <!-- Puzzle dots scattered -->
+  <circle cx="140" cy="120" r="14" fill="#ef4444" filter="url(#glow)"/>
+  <circle cx="380" cy="140" r="14" fill="#22c55e" filter="url(#glow)"/>
+  <circle cx="120" cy="360" r="14" fill="#3b82f6" filter="url(#glow)"/>
+  <circle cx="390" cy="360" r="14" fill="#ec4899" filter="url(#glow)"/>
+  <circle cx="256" cy="90" r="14" fill="#f97316" filter="url(#glow)"/>
+  <circle cx="256" cy="420" r="14" fill="#8b5cf6" filter="url(#glow)"/>
+</svg>

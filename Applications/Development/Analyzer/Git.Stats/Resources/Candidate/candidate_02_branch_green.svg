@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1B5E20"/>
+      <stop offset="100%" style="stop-color:#2E7D32"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Git graph lines -->
+  <!-- Main branch -->
+  <line x1="160" y1="100" x2="160" y2="420" stroke="#69F0AE" stroke-width="6"/>
+  <!-- Feature branch -->
+  <path d="M160,200 Q200,200 240,160 L240,280 Q240,320 160,320" fill="none" stroke="#40C4FF" stroke-width="6"/>
+  <!-- Merge branch -->
+  <path d="M160,150 Q310,150 310,230 L310,310 Q310,380 160,380" fill="none" stroke="#FFD740" stroke-width="5" stroke-dasharray="14,7"/>
+  <!-- Commits on main -->
+  <circle cx="160" cy="100" r="14" fill="#69F0AE" stroke="#1B5E20" stroke-width="3"/>
+  <circle cx="160" cy="200" r="14" fill="#69F0AE" stroke="#1B5E20" stroke-width="3"/>
+  <circle cx="160" cy="320" r="14" fill="#69F0AE" stroke="#1B5E20" stroke-width="3"/>
+  <circle cx="160" cy="420" r="14" fill="#69F0AE" stroke="#1B5E20" stroke-width="3"/>
+  <!-- Commits on feature -->
+  <circle cx="240" cy="160" r="12" fill="#40C4FF" stroke="#1B5E20" stroke-width="3"/>
+  <circle cx="240" cy="220" r="12" fill="#40C4FF" stroke="#1B5E20" stroke-width="3"/>
+  <circle cx="240" cy="280" r="12" fill="#40C4FF" stroke="#1B5E20" stroke-width="3"/>
+  <!-- Commits on merge -->
+  <circle cx="310" cy="230" r="11" fill="#FFD740" stroke="#1B5E20" stroke-width="3"/>
+  <circle cx="310" cy="310" r="11" fill="#FFD740" stroke="#1B5E20" stroke-width="3"/>
+  <!-- Stats bars on right -->
+  <rect x="360" y="160" width="80" height="20" rx="4" fill="#69F0AE" opacity="0.7"/>
+  <rect x="360" y="200" width="55" height="20" rx="4" fill="#40C4FF" opacity="0.7"/>
+  <rect x="360" y="240" width="70" height="20" rx="4" fill="#FFD740" opacity="0.7"/>
+  <rect x="360" y="280" width="40" height="20" rx="4" fill="#FF6E40" opacity="0.7"/>
+  <rect x="360" y="320" width="65" height="20" rx="4" fill="#EA80FC" opacity="0.7"/>
+</svg>

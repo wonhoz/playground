@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#F0F4FF"/>
+      <stop offset="100%" stop-color="#E4EEFF"/>
+    </linearGradient>
+    <linearGradient id="shield" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3366FF"/>
+      <stop offset="100%" stop-color="#1144CC"/>
+    </linearGradient>
+    <linearGradient id="shieldLight" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6699FF"/>
+      <stop offset="100%" stop-color="#4477EE"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Shadow -->
+  <path d="M 256,100 L 390,152 L 390,272 Q 390,372 256,430 Q 122,372 122,272 L 122,152 Z" fill="#0033AA" opacity="0.12" transform="translate(6,8)"/>
+  <!-- Shield -->
+  <path d="M 256,96 L 386,148 L 386,268 Q 386,368 256,426 Q 126,368 126,268 L 126,148 Z" fill="url(#shield)"/>
+  <!-- Shield highlight -->
+  <path d="M 256,96 L 386,148 L 386,170 Q 320,120 256,130 Q 192,120 126,170 L 126,148 Z" fill="url(#shieldLight)" opacity="0.5"/>
+  <!-- Shield inner division lines (sections) -->
+  <line x1="256" y1="148" x2="256" y2="408" stroke="white" stroke-width="2" opacity="0.2"/>
+  <line x1="126" y1="270" x2="386" y2="270" stroke="white" stroke-width="2" opacity="0.15"/>
+  <!-- Check mark (large, centered) -->
+  <polyline points="198,264 238,308 314,216" stroke="white" stroke-width="18" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Service gear small -->
+  <circle cx="256" cy="370" r="22" fill="none" stroke="white" stroke-width="2.5" opacity="0.5"/>
+  <rect x="248" y="344" width="16" height="10" rx="3" fill="white" opacity="0.4"/>
+  <rect x="248" y="386" width="16" height="10" rx="3" fill="white" opacity="0.4"/>
+  <rect x="230" y="362" width="10" height="16" rx="3" fill="white" opacity="0.4"/>
+  <rect x="272" y="362" width="10" height="16" rx="3" fill="white" opacity="0.4"/>
+  <circle cx="256" cy="370" r="10" fill="white" opacity="0.3"/>
+  <!-- Title below shield -->
+  <text x="256" y="460" font-family="'Segoe UI', sans-serif" font-size="18" fill="#3366FF" text-anchor="middle" font-weight="700" letter-spacing="1">Svc.Guard</text>
+</svg>

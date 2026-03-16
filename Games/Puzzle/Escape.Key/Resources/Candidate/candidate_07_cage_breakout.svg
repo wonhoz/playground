@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a2e"/>
+      <stop offset="100%" style="stop-color:#16213e"/>
+    </linearGradient>
+    <linearGradient id="bar" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#bdc3c7"/>
+      <stop offset="100%" style="stop-color:#7f8c8d"/>
+    </linearGradient>
+    <linearGradient id="escape_g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#43e97b"/>
+      <stop offset="100%" style="stop-color:#38f9d7"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Cage bars -->
+  <rect x="100" y="80" width="312" height="360" rx="10" stroke="url(#bar)" stroke-width="5" fill="none"/>
+  <line x1="180" y1="80" x2="180" y2="440" stroke="url(#bar)" stroke-width="8"/>
+  <line x1="256" y1="80" x2="256" y2="440" stroke="url(#bar)" stroke-width="8"/>
+  <line x1="332" y1="80" x2="332" y2="440" stroke="url(#bar)" stroke-width="8"/>
+  <!-- Broken bar -->
+  <line x1="180" y1="80" x2="176" y2="230" stroke="url(#bar)" stroke-width="8"/>
+  <line x1="184" y1="270" x2="180" y2="440" stroke="url(#bar)" stroke-width="8"/>
+  <!-- Gap glow -->
+  <ellipse cx="180" cy="250" rx="30" ry="22" fill="url(#escape_g)" opacity="0.4"/>
+  <!-- Running figure going through gap -->
+  <circle cx="155" cy="200" r="16" fill="url(#escape_g)"/>
+  <line x1="155" y1="216" x2="155" y2="265" stroke="url(#escape_g)" stroke-width="8" stroke-linecap="round"/>
+  <line x1="155" y1="235" x2="136" y2="258" stroke="url(#escape_g)" stroke-width="6" stroke-linecap="round"/>
+  <line x1="155" y1="235" x2="172" y2="256" stroke="url(#escape_g)" stroke-width="6" stroke-linecap="round"/>
+  <line x1="155" y1="265" x2="136" y2="292" stroke="url(#escape_g)" stroke-width="6" stroke-linecap="round"/>
+  <line x1="155" y1="265" x2="170" y2="290" stroke="url(#escape_g)" stroke-width="6" stroke-linecap="round"/>
+  <!-- Key -->
+  <circle cx="330" cy="370" r="22" stroke="url(#escape_g)" stroke-width="6" fill="none"/>
+  <line x1="348" y1="385" x2="375" y2="410" stroke="url(#escape_g)" stroke-width="6" stroke-linecap="round"/>
+  <line x1="366" y1="403" x2="378" y2="390" stroke="url(#escape_g)" stroke-width="5" stroke-linecap="round"/>
+</svg>

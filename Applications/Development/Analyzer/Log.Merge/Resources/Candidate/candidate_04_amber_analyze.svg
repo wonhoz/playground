@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A0F00"/>
+      <stop offset="100%" stop-color="#2D1A00"/>
+    </linearGradient>
+    <linearGradient id="amberGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFB300"/>
+      <stop offset="100%" stop-color="#E65100"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Magnifying glass -->
+  <circle cx="220" cy="220" r="110" fill="none" stroke="#FFB300" stroke-width="8" filter="url(#glow)"/>
+  <circle cx="220" cy="220" r="94" fill="#0D0800" opacity="0.95"/>
+  <!-- Log lines inside magnifier -->
+  <rect x="150" y="168" width="140" height="8" rx="4" fill="#FFB300" opacity="0.7"/>
+  <rect x="150" y="184" width="110" height="6" rx="3" fill="#FF8F00" opacity="0.5"/>
+  <rect x="150" y="198" width="130" height="6" rx="3" fill="#FFB300" opacity="0.45"/>
+  <rect x="150" y="212" width="100" height="6" rx="3" fill="#FF8F00" opacity="0.4"/>
+  <!-- Highlighted line (found match) -->
+  <rect x="146" y="226" width="148" height="12" rx="4" fill="#FFB300" opacity="0.25" filter="url(#glow)"/>
+  <rect x="150" y="228" width="140" height="8" rx="4" fill="#FFD740" opacity="0.9" filter="url(#glow)"/>
+  <rect x="150" y="250" width="120" height="6" rx="3" fill="#FFB300" opacity="0.4"/>
+  <rect x="150" y="264" width="90" height="6" rx="3" fill="#FF8F00" opacity="0.35"/>
+  <!-- Magnifier handle -->
+  <line x1="310" y1="310" x2="390" y2="390" stroke="#FFB300" stroke-width="16" stroke-linecap="round" filter="url(#glow)"/>
+  <line x1="310" y1="310" x2="390" y2="390" stroke="#FF6D00" stroke-width="8" stroke-linecap="round"/>
+  <!-- Merge arrows on the left -->
+  <path d="M72 160 L110 220" stroke="#FF8F00" stroke-width="3" fill="none" stroke-dasharray="6 3" opacity="0.6"/>
+  <path d="M72 280 L110 220" stroke="#FF8F00" stroke-width="3" fill="none" stroke-dasharray="6 3" opacity="0.6"/>
+  <!-- Small file icons left -->
+  <rect x="44" y="132" width="44" height="36" rx="4" fill="#1A0F00" stroke="#FFB300" stroke-width="1.5" opacity="0.7"/>
+  <rect x="44" y="252" width="44" height="36" rx="4" fill="#1A0F00" stroke="#FFB300" stroke-width="1.5" opacity="0.7"/>
+  <text x="66" y="155" font-family="'Courier New', monospace" font-size="9" text-anchor="middle" fill="#FFB300" opacity="0.8">LOG</text>
+  <text x="66" y="275" font-family="'Courier New', monospace" font-size="9" text-anchor="middle" fill="#FFB300" opacity="0.8">LOG</text>
+  <!-- Stats text bottom right -->
+  <text x="312" y="400" font-family="'Courier New', monospace" font-size="13" fill="#FFB300" opacity="0.8">ERRORS: 3</text>
+  <text x="312" y="420" font-family="'Courier New', monospace" font-size="13" fill="#FF8F00" opacity="0.7">WARNS:  47</text>
+  <text x="312" y="440" font-family="'Courier New', monospace" font-size="13" fill="#FFD740" opacity="0.6">INFOS: 892</text>
+</svg>

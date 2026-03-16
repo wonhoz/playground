@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#100A20"/>
+      <stop offset="100%" stop-color="#1A1030"/>
+    </linearGradient>
+    <linearGradient id="body" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7744CC"/>
+      <stop offset="100%" stop-color="#4422AA"/>
+    </linearGradient>
+    <linearGradient id="suction" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#AA44FF" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#FF44AA" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Vacuum robot body (circular) -->
+  <circle cx="256" cy="300" r="110" fill="url(#body)"/>
+  <circle cx="256" cy="300" r="110" fill="none" stroke="#AA66FF" stroke-width="3" filter="url(#glow)" opacity="0.7"/>
+  <!-- Bumper front -->
+  <path d="M 152,280 Q 152,200 256,200 Q 360,200 360,280" stroke="#CC99FF" stroke-width="4" fill="none" filter="url(#glow)" opacity="0.7"/>
+  <!-- Top panel -->
+  <circle cx="256" cy="300" r="70" fill="#5533AA" opacity="0.8"/>
+  <circle cx="256" cy="300" r="50" fill="#3A2288" opacity="0.8"/>
+  <!-- Status light / display -->
+  <circle cx="256" cy="280" r="20" fill="#AA44FF" filter="url(#glow)" opacity="0.9"/>
+  <circle cx="256" cy="280" r="12" fill="#DD88FF" filter="url(#glow)"/>
+  <!-- Spinning indicator -->
+  <circle cx="256" cy="330" r="16" fill="none" stroke="#8844CC" stroke-width="2"/>
+  <line x1="256" y1="330" x2="268" y2="320" stroke="#AA66FF" stroke-width="2.5" filter="url(#glow)"/>
+  <!-- Suction trail (left side - sucking in junk) -->
+  <path d="M 60,280 Q 120,280 146,280" stroke="url(#suction)" stroke-width="16" fill="none" opacity="0.6"/>
+  <path d="M 80,250 Q 130,260 146,270" stroke="url(#suction)" stroke-width="10" fill="none" opacity="0.4"/>
+  <path d="M 80,310 Q 130,300 146,290" stroke="url(#suction)" stroke-width="10" fill="none" opacity="0.4"/>
+  <!-- Junk particles being sucked in -->
+  <circle cx="88" cy="280" r="7" fill="#1A1A2A" stroke="#7744CC" stroke-width="1.5" opacity="0.8"/>
+  <text x="88" y="284" font-family="monospace" font-size="8" fill="#9966CC" text-anchor="middle">tmp</text>
+  <circle cx="110" cy="260" r="6" fill="#1A1A2A" stroke="#7744CC" stroke-width="1.5" opacity="0.6"/>
+  <circle cx="100" cy="300" r="5" fill="#1A1A2A" stroke="#7744CC" stroke-width="1" opacity="0.6"/>
+  <!-- Wheels -->
+  <ellipse cx="190" cy="386" rx="20" ry="10" fill="#3A2288"/>
+  <ellipse cx="190" cy="386" rx="20" ry="10" fill="none" stroke="#7744CC" stroke-width="2"/>
+  <ellipse cx="322" cy="386" rx="20" ry="10" fill="#3A2288"/>
+  <ellipse cx="322" cy="386" rx="20" ry="10" fill="none" stroke="#7744CC" stroke-width="2"/>
+  <!-- Status text -->
+  <text x="256" y="450" font-family="'Segoe UI', sans-serif" font-size="13" fill="#AA66FF" text-anchor="middle" filter="url(#glow)">Auto-Clean Mode</text>
+</svg>

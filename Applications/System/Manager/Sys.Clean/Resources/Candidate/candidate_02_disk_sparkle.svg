@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#080818"/>
+      <stop offset="100%" stop-color="#0E0E28"/>
+    </linearGradient>
+    <radialGradient id="disk" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#2A2A4A"/>
+      <stop offset="100%" stop-color="#181830"/>
+    </radialGradient>
+    <radialGradient id="diskInner" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#444466"/>
+      <stop offset="100%" stop-color="#222244"/>
+    </radialGradient>
+    <linearGradient id="clean" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00DDFF"/>
+      <stop offset="100%" stop-color="#0088CC"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Hard disk body -->
+  <rect x="100" y="140" width="312" height="232" rx="20" fill="url(#disk)"/>
+  <rect x="100" y="140" width="312" height="232" rx="20" fill="none" stroke="#3A3A5A" stroke-width="2"/>
+  <!-- Disk platters (circles) -->
+  <circle cx="256" cy="256" r="96" fill="url(#diskInner)"/>
+  <circle cx="256" cy="256" r="96" fill="none" stroke="#4A4A6A" stroke-width="1.5"/>
+  <!-- Disk tracks -->
+  <circle cx="256" cy="256" r="72" fill="none" stroke="#333355" stroke-width="1" opacity="0.6"/>
+  <circle cx="256" cy="256" r="52" fill="none" stroke="#333355" stroke-width="1" opacity="0.5"/>
+  <circle cx="256" cy="256" r="32" fill="none" stroke="#333355" stroke-width="1" opacity="0.4"/>
+  <!-- Center hub -->
+  <circle cx="256" cy="256" r="16" fill="#4A4A6A"/>
+  <circle cx="256" cy="256" r="8" fill="#2A2A4A"/>
+  <!-- Disk arm -->
+  <rect x="256" y="190" width="8" height="100" rx="4" fill="#555577" transform="rotate(30, 260, 240)"/>
+  <circle cx="296" cy="228" r="8" fill="#4488FF" filter="url(#glow)"/>
+  <!-- Sparkles (clean effect) -->
+  <circle cx="340" cy="140" r="8" fill="#00DDFF" filter="url(#glow)" opacity="0.9"/>
+  <circle cx="378" cy="168" r="6" fill="#00FFCC" filter="url(#glow)" opacity="0.8"/>
+  <circle cx="360" cy="120" r="5" fill="#88FFFF" filter="url(#glow)" opacity="0.7"/>
+  <circle cx="400" cy="148" r="4" fill="#00DDFF" filter="url(#glow)" opacity="0.7"/>
+  <!-- Star sparkle -->
+  <polygon points="340,110 343,122 356,122 346,130 349,142 340,134 331,142 334,130 324,122 337,122" fill="#00DDFF" opacity="0.7" filter="url(#glow)"/>
+  <!-- Clean sector highlight on disk -->
+  <path d="M 256,256 L 256,160 A 96,96 0 0,1 340,220 Z" fill="url(#clean)" opacity="0.25" filter="url(#glow)"/>
+  <!-- Free space text -->
+  <rect x="108" y="388" width="296" height="52" rx="8" fill="#0A0A20" stroke="#2233AA" stroke-width="1"/>
+  <text x="256" y="408" font-family="'Segoe UI', sans-serif" font-size="12" fill="#88AACC" text-anchor="middle">Disk Cleaned</text>
+  <text x="256" y="430" font-family="'Segoe UI', sans-serif" font-size="14" fill="#00DDFF" text-anchor="middle" font-weight="bold" filter="url(#glow)">+3.8 GB Free</text>
+</svg>

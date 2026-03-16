@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0D1B3E"/>
+      <stop offset="100%" stop-color="#1A3A6B"/>
+    </linearGradient>
+    <linearGradient id="broom" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#64B5F6"/>
+      <stop offset="100%" stop-color="#1565C0"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Broom handle -->
+  <rect x="248" y="95" width="16" height="220" rx="8" fill="url(#broom)" transform="rotate(20 256 200)"/>
+  <!-- Broom head -->
+  <ellipse cx="280" cy="335" rx="90" ry="30" fill="#1565C0"/>
+  <ellipse cx="280" cy="335" rx="90" ry="30" fill="url(#broom)" opacity="0.8"/>
+  <!-- Bristles -->
+  <g stroke="#90CAF9" stroke-width="4" stroke-linecap="round">
+    <line x1="200" y1="345" x2="190" y2="380"/>
+    <line x1="218" y1="350" x2="212" y2="386"/>
+    <line x1="236" y1="354" x2="233" y2="390"/>
+    <line x1="254" y1="356" x2="254" y2="392"/>
+    <line x1="272" y1="356" x2="275" y2="390"/>
+    <line x1="290" y1="354" x2="296" y2="388"/>
+    <line x1="308" y1="350" x2="318" y2="384"/>
+    <line x1="325" y1="344" x2="340" y2="378"/>
+    <line x1="340" y1="335" x2="360" y2="365"/>
+  </g>
+  <!-- Sparkle / clean effect -->
+  <g fill="#E3F2FD" opacity="0.9">
+    <polygon points="155,180 160,195 175,195 163,204 168,219 155,210 142,219 147,204 135,195 150,195" transform="scale(0.7) translate(65,90)"/>
+    <polygon points="155,180 160,195 175,195 163,204 168,219 155,210 142,219 147,204 135,195 150,195" transform="scale(0.5) translate(500,180)"/>
+  </g>
+  <!-- Dust particles -->
+  <circle cx="155" cy="370" r="6" fill="#64B5F6" opacity="0.6"/>
+  <circle cx="170" cy="390" r="4" fill="#90CAF9" opacity="0.5"/>
+  <circle cx="142" cy="385" r="5" fill="#64B5F6" opacity="0.4"/>
+  <circle cx="368" cy="372" r="5" fill="#64B5F6" opacity="0.6"/>
+  <circle cx="380" cy="388" r="3" fill="#90CAF9" opacity="0.5"/>
+</svg>

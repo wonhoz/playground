@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#001a1a"/>
+      <stop offset="100%" stop-color="#002222"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Hexagonal cells with cipher letters -->
+  <!-- Row 1 -->
+  <polygon points="128,80 168,56 208,80 208,128 168,152 128,128" fill="#003333" stroke="#00ccaa" stroke-width="2"/>
+  <text x="168" y="111" text-anchor="middle" font-family="monospace" font-size="24" fill="#00ccaa">A</text>
+  <polygon points="216,80 256,56 296,80 296,128 256,152 216,128" fill="#003333" stroke="#00ccaa" stroke-width="2"/>
+  <text x="256" y="111" text-anchor="middle" font-family="monospace" font-size="24" fill="#00ccaa">B</text>
+  <polygon points="304,80 344,56 384,80 384,128 344,152 304,128" fill="#003333" stroke="#00ccaa" stroke-width="2"/>
+  <text x="344" y="111" text-anchor="middle" font-family="monospace" font-size="24" fill="#00ccaa">C</text>
+  <!-- Row 2 -->
+  <polygon points="84,152 124,128 164,152 164,200 124,224 84,200" fill="#003333" stroke="#00ccaa" stroke-width="2"/>
+  <text x="124" y="183" text-anchor="middle" font-family="monospace" font-size="24" fill="#00ccaa">D</text>
+  <polygon points="172,152 212,128 252,152 252,200 212,224 172,200" fill="#001a1a" stroke="#00ffcc" stroke-width="3" filter="url(#glow)"/>
+  <text x="212" y="183" text-anchor="middle" font-family="monospace" font-size="24" fill="#00ffcc" filter="url(#glow)">?</text>
+  <polygon points="260,152 300,128 340,152 340,200 300,224 260,200" fill="#003333" stroke="#00ccaa" stroke-width="2"/>
+  <text x="300" y="183" text-anchor="middle" font-family="monospace" font-size="24" fill="#00ccaa">F</text>
+  <polygon points="348,152 388,128 428,152 428,200 388,224 348,200" fill="#003333" stroke="#00ccaa" stroke-width="2"/>
+  <text x="388" y="183" text-anchor="middle" font-family="monospace" font-size="24" fill="#00ccaa">G</text>
+  <!-- Row 3 -->
+  <polygon points="128,224 168,200 208,224 208,272 168,296 128,272" fill="#003333" stroke="#00ccaa" stroke-width="2"/>
+  <text x="168" y="255" text-anchor="middle" font-family="monospace" font-size="24" fill="#00ccaa">H</text>
+  <polygon points="216,224 256,200 296,224 296,272 256,296 216,272" fill="#004444" stroke="#00ffcc" stroke-width="3" filter="url(#glow)"/>
+  <text x="256" y="255" text-anchor="middle" font-family="monospace" font-size="28" fill="#00ffcc" filter="url(#glow)">KEY</text>
+  <polygon points="304,224 344,200 384,224 384,272 344,296 304,272" fill="#003333" stroke="#00ccaa" stroke-width="2"/>
+  <text x="344" y="255" text-anchor="middle" font-family="monospace" font-size="24" fill="#00ccaa">J</text>
+  <!-- Row 4 -->
+  <polygon points="84,296 124,272 164,296 164,344 124,368 84,344" fill="#003333" stroke="#00ccaa" stroke-width="2"/>
+  <text x="124" y="327" text-anchor="middle" font-family="monospace" font-size="24" fill="#00ccaa">K</text>
+  <polygon points="172,296 212,272 252,296 252,344 212,368 172,344" fill="#003333" stroke="#00ccaa" stroke-width="2"/>
+  <text x="212" y="327" text-anchor="middle" font-family="monospace" font-size="24" fill="#00ccaa">L</text>
+  <polygon points="260,296 300,272 340,296 340,344 300,368 260,344" fill="#003333" stroke="#00ccaa" stroke-width="2"/>
+  <text x="300" y="327" text-anchor="middle" font-family="monospace" font-size="24" fill="#00ccaa">M</text>
+  <polygon points="348,296 388,272 428,296 428,344 388,368 348,344" fill="#003333" stroke="#00ccaa" stroke-width="2"/>
+  <text x="388" y="327" text-anchor="middle" font-family="monospace" font-size="24" fill="#00ccaa">N</text>
+  <!-- Row 5 -->
+  <polygon points="128,368 168,344 208,368 208,416 168,440 128,416" fill="#003333" stroke="#00ccaa" stroke-width="2"/>
+  <text x="168" y="399" text-anchor="middle" font-family="monospace" font-size="24" fill="#00ccaa">O</text>
+  <polygon points="216,368 256,344 296,368 296,416 256,440 216,416" fill="#003333" stroke="#00ccaa" stroke-width="2"/>
+  <text x="256" y="399" text-anchor="middle" font-family="monospace" font-size="24" fill="#00ccaa">P</text>
+  <polygon points="304,368 344,344 384,368 384,416 344,440 304,416" fill="#003333" stroke="#00ccaa" stroke-width="2"/>
+  <text x="344" y="399" text-anchor="middle" font-family="monospace" font-size="24" fill="#00ccaa">Q</text>
+</svg>

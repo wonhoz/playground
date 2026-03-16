@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#001a10"/>
+      <stop offset="100%" stop-color="#003020"/>
+    </linearGradient>
+    <radialGradient id="sweep" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#69f0ae" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#00c853" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glow"><feGaussianBlur stdDeviation="7"/></filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- radar rings -->
+  <circle cx="256" cy="256" r="50" fill="none" stroke="#00c853" stroke-width="2" opacity="0.8"/>
+  <circle cx="256" cy="256" r="100" fill="none" stroke="#00c853" stroke-width="2" opacity="0.55"/>
+  <circle cx="256" cy="256" r="150" fill="none" stroke="#00c853" stroke-width="2" opacity="0.35"/>
+  <line x1="256" y1="96" x2="256" y2="416" stroke="#00c853" stroke-width="1" opacity="0.2"/>
+  <line x1="96" y1="256" x2="416" y2="256" stroke="#00c853" stroke-width="1" opacity="0.2"/>
+  <!-- sweep -->
+  <path d="M256 256 L256 106 A150 150 0 0 1 405 325 Z" fill="url(#sweep)"/>
+  <!-- center -->
+  <circle cx="256" cy="256" r="12" fill="#00e676" filter="url(#glow)"/>
+  <circle cx="256" cy="256" r="6" fill="white"/>
+  <!-- device: PC at 320, 190 -->
+  <rect x="308" y="180" width="28" height="22" rx="3" fill="#00c853" filter="url(#glow)"/>
+  <rect x="316" y="202" width="12" height="5" rx="1" fill="#69f0ae"/>
+  <rect x="310" y="207" width="28" height="4" rx="2" fill="#00a040"/>
+  <!-- device: phone at 175, 320 -->
+  <rect x="168" y="310" width="16" height="24" rx="4" fill="#00e676" filter="url(#glow)"/>
+  <circle cx="176" cy="330" r="3" fill="#69f0ae"/>
+  <!-- device: router at 360, 330 -->
+  <rect x="345" y="322" width="30" height="18" rx="4" fill="#69f0ae" filter="url(#glow)"/>
+  <line x1="350" y1="322" x2="346" y2="312" stroke="#69f0ae" stroke-width="2"/>
+  <line x1="360" y1="322" x2="360" y2="310" stroke="#69f0ae" stroke-width="2"/>
+  <line x1="370" y1="322" x2="374" y2="312" stroke="#69f0ae" stroke-width="2"/>
+</svg>

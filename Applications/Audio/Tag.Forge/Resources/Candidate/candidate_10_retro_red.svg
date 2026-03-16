@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A0000"/>
+      <stop offset="100%" stop-color="#3D0000"/>
+    </linearGradient>
+    <linearGradient id="reel" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#EF5350"/>
+      <stop offset="100%" stop-color="#8B0000"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Cassette body -->
+  <rect x="100" y="145" width="312" height="222" rx="18" fill="#212121"/>
+  <rect x="115" y="160" width="282" height="192" rx="12" fill="#1A0000" opacity="0.7"/>
+  <!-- Reel left -->
+  <circle cx="188" cy="255" r="55" fill="url(#reel)" opacity="0.9"/>
+  <circle cx="188" cy="255" r="40" fill="#1A0000"/>
+  <circle cx="188" cy="255" r="14" fill="#EF5350" opacity="0.7"/>
+  <circle cx="188" cy="255" r="7" fill="#1A0000"/>
+  <!-- Reel spokes -->
+  <g stroke="#EF5350" stroke-width="4" opacity="0.7">
+    <line x1="188" y1="225" x2="188" y2="215"/>
+    <line x1="188" y1="285" x2="188" y2="295"/>
+    <line x1="158" y1="255" x2="148" y2="255"/>
+    <line x1="218" y1="255" x2="228" y2="255"/>
+    <line x1="167" y1="234" x2="160" y2="227"/>
+    <line x1="209" y1="276" x2="216" y2="283"/>
+    <line x1="167" y1="276" x2="160" y2="283"/>
+    <line x1="209" y1="234" x2="216" y2="227"/>
+  </g>
+  <!-- Reel right -->
+  <circle cx="324" cy="255" r="55" fill="url(#reel)" opacity="0.9"/>
+  <circle cx="324" cy="255" r="40" fill="#1A0000"/>
+  <circle cx="324" cy="255" r="14" fill="#EF5350" opacity="0.7"/>
+  <circle cx="324" cy="255" r="7" fill="#1A0000"/>
+  <g stroke="#EF5350" stroke-width="4" opacity="0.7">
+    <line x1="324" y1="225" x2="324" y2="215"/>
+    <line x1="324" y1="285" x2="324" y2="295"/>
+    <line x1="294" y1="255" x2="284" y2="255"/>
+    <line x1="354" y1="255" x2="364" y2="255"/>
+    <line x1="303" y1="234" x2="296" y2="227"/>
+    <line x1="345" y1="276" x2="352" y2="283"/>
+    <line x1="303" y1="276" x2="296" y2="283"/>
+    <line x1="345" y1="234" x2="352" y2="227"/>
+  </g>
+  <!-- Tape window -->
+  <rect x="230" y="235" width="52" height="40" rx="6" fill="#0A0000" stroke="#EF5350" stroke-width="2"/>
+  <!-- Label sticker -->
+  <rect x="130" y="318" width="252" height="38" rx="8" fill="#8B0000" opacity="0.8"/>
+  <rect x="148" y="328" width="216" height="8" rx="4" fill="#FFCDD2" opacity="0.6"/>
+  <rect x="180" y="340" width="152" height="6" rx="3" fill="#FFCDD2" opacity="0.4"/>
+  <!-- ID3 tag small badge -->
+  <rect x="100" y="383" width="60" height="24" rx="8" fill="#EF5350"/>
+  <text x="130" y="400" text-anchor="middle" font-family="Arial" font-size="13" fill="white" font-weight="bold">ID3</text>
+</svg>

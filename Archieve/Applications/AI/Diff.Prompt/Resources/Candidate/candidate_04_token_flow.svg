@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E1B4B"/>
+      <stop offset="100%" stop-color="#312E81"/>
+    </linearGradient>
+    <linearGradient id="flowGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#818CF8"/>
+      <stop offset="100%" stop-color="#C7D2FE"/>
+    </linearGradient>
+    <linearGradient id="boxA" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#4338CA"/>
+      <stop offset="100%" stop-color="#3730A3"/>
+    </linearGradient>
+    <linearGradient id="boxB" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#7C3AED"/>
+      <stop offset="100%" stop-color="#6D28D9"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Prompt A box -->
+  <rect x="50" y="140" width="160" height="230" rx="16" fill="url(#boxA)" stroke="#818CF8" stroke-width="2"/>
+  <text x="130" y="132" font-family="sans-serif" font-size="18" fill="#C7D2FE" text-anchor="middle">Prompt A</text>
+  <!-- Token chips A -->
+  <rect x="68" y="162" width="56" height="22" rx="11" fill="#6366F1"/>
+  <rect x="132" y="162" width="62" height="22" rx="11" fill="#6366F1"/>
+  <rect x="68" y="194" width="70" height="22" rx="11" fill="#6366F1"/>
+  <rect x="146" y="194" width="48" height="22" rx="11" fill="#EF4444" opacity="0.9"/>
+  <rect x="68" y="226" width="52" height="22" rx="11" fill="#6366F1"/>
+  <rect x="128" y="226" width="76" height="22" rx="11" fill="#EF4444" opacity="0.9"/>
+  <rect x="68" y="258" width="64" height="22" rx="11" fill="#6366F1"/>
+  <rect x="140" y="258" width="54" height="22" rx="11" fill="#6366F1"/>
+  <rect x="68" y="290" width="80" height="22" rx="11" fill="#EF4444" opacity="0.9"/>
+  <rect x="68" y="322" width="60" height="22" rx="11" fill="#6366F1"/>
+  <rect x="136" y="322" width="58" height="22" rx="11" fill="#6366F1"/>
+  <!-- Flow arrows -->
+  <path d="M215,200 Q256,200 256,256 Q256,312 297,312" stroke="url(#flowGrad)" stroke-width="3" fill="none" stroke-dasharray="8,4"/>
+  <polygon points="293,306 305,312 293,318" fill="#C7D2FE"/>
+  <!-- Prompt B box -->
+  <rect x="302" y="140" width="160" height="230" rx="16" fill="url(#boxB)" stroke="#A78BFA" stroke-width="2"/>
+  <text x="382" y="132" font-family="sans-serif" font-size="18" fill="#DDD6FE" text-anchor="middle">Prompt B</text>
+  <!-- Token chips B -->
+  <rect x="320" y="162" width="56" height="22" rx="11" fill="#7C3AED"/>
+  <rect x="384" y="162" width="62" height="22" rx="11" fill="#7C3AED"/>
+  <rect x="320" y="194" width="70" height="22" rx="11" fill="#7C3AED"/>
+  <rect x="398" y="194" width="48" height="22" rx="11" fill="#22C55E" opacity="0.9"/>
+  <rect x="320" y="226" width="52" height="22" rx="11" fill="#7C3AED"/>
+  <rect x="380" y="226" width="76" height="22" rx="11" fill="#22C55E" opacity="0.9"/>
+  <rect x="320" y="258" width="64" height="22" rx="11" fill="#7C3AED"/>
+  <rect x="392" y="258" width="54" height="22" rx="11" fill="#7C3AED"/>
+  <rect x="320" y="290" width="80" height="22" rx="11" fill="#22C55E" opacity="0.9"/>
+  <rect x="320" y="322" width="60" height="22" rx="11" fill="#7C3AED"/>
+  <rect x="388" y="322" width="58" height="22" rx="11" fill="#7C3AED"/>
+  <!-- Bottom diff summary -->
+  <rect x="80" y="400" width="140" height="60" rx="10" fill="#7F1D1D" opacity="0.8"/>
+  <text x="150" y="425" font-family="sans-serif" font-size="13" fill="#FCA5A5" text-anchor="middle">- 3 removed</text>
+  <text x="150" y="448" font-family="sans-serif" font-size="13" fill="#FCA5A5" text-anchor="middle">tokens</text>
+  <rect x="292" y="400" width="140" height="60" rx="10" fill="#14532D" opacity="0.8"/>
+  <text x="362" y="425" font-family="sans-serif" font-size="13" fill="#86EFAC" text-anchor="middle">+ 3 added</text>
+  <text x="362" y="448" font-family="sans-serif" font-size="13" fill="#86EFAC" text-anchor="middle">tokens</text>
+</svg>

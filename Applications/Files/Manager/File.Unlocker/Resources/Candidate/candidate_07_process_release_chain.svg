@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a192f"/>
+      <stop offset="100%" stop-color="#172a45"/>
+    </linearGradient>
+    <linearGradient id="proc" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00bcd4"/>
+      <stop offset="100%" stop-color="#006064"/>
+    </linearGradient>
+    <linearGradient id="file" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#a5d6a7"/>
+      <stop offset="100%" stop-color="#2e7d32"/>
+    </linearGradient>
+    <linearGradient id="chaingrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#78909c"/>
+      <stop offset="100%" stop-color="#546e7a"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- process box left -->
+  <rect x="60" y="200" width="130" height="110" rx="16" fill="url(#proc)"/>
+  <rect x="80" y="222" width="90" height="8" rx="4" fill="#e0f7fa" opacity="0.6"/>
+  <rect x="80" y="238" width="70" height="8" rx="4" fill="#e0f7fa" opacity="0.4"/>
+  <rect x="80" y="254" width="55" height="8" rx="4" fill="#e0f7fa" opacity="0.3"/>
+  <!-- chain links -->
+  <ellipse cx="215" cy="255" rx="16" ry="10" fill="none" stroke="url(#chaingrad)" stroke-width="9"/>
+  <ellipse cx="248" cy="255" rx="16" ry="10" fill="none" stroke="url(#chaingrad)" stroke-width="9"/>
+  <!-- break point glow -->
+  <circle cx="274" cy="255" r="12" fill="#ffeb3b" opacity="0.8"/>
+  <line x1="268" y1="248" x2="260" y2="240" stroke="#ffeb3b" stroke-width="3"/>
+  <line x1="280" y1="248" x2="288" y2="240" stroke="#ff9800" stroke-width="3"/>
+  <line x1="274" y1="244" x2="274" y2="234" stroke="#fff" stroke-width="2"/>
+  <!-- file freed right -->
+  <path d="M300 180 L400 180 L435 215 L435 370 L300 370 Z" fill="url(#file)"/>
+  <path d="M400 180 L400 215 L435 215" fill="none" stroke="#2e7d32" stroke-width="3"/>
+  <rect x="320" y="245" width="85" height="10" rx="5" fill="#e8f5e9" opacity="0.5"/>
+  <rect x="320" y="265" width="65" height="10" rx="5" fill="#e8f5e9" opacity="0.35"/>
+  <!-- shine on file -->
+  <ellipse cx="325" cy="198" rx="14" ry="6" fill="white" opacity="0.2" transform="rotate(-15 325 198)"/>
+</svg>

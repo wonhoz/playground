@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0A0A00"/>
+      <stop offset="100%" stop-color="#1A1A00"/>
+    </linearGradient>
+    <linearGradient id="bolt" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFFF00"/>
+      <stop offset="100%" stop-color="#FF8800"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Battery shell -->
+  <rect x="100" y="140" width="290" height="200" rx="14" fill="#111100" stroke="#333300" stroke-width="3"/>
+  <rect x="390" y="183" width="28" height="114" rx="6" fill="#222200"/>
+  <!-- Low battery fill (red) -->
+  <rect x="110" y="150" width="60" height="180" rx="8" fill="#FF2200"/>
+  <!-- Drain bar going down -->
+  <line x1="110" y1="335" x2="170" y2="335" stroke="#FF4400" stroke-width="3"/>
+  <!-- Lightning bolt (power draining) -->
+  <polygon points="290,80 240,240 270,240 220,380 320,200 285,200 330,80" fill="url(#bolt)"/>
+  <!-- Glow effect lines -->
+  <line x1="256" y1="72" x2="244" y2="80" stroke="#FFFF88" stroke-width="2" opacity="0.6"/>
+  <line x1="256" y1="72" x2="268" y2="80" stroke="#FFFF88" stroke-width="2" opacity="0.6"/>
+  <!-- Percentage -->
+  <text x="140" y="250" font-family="Arial" font-size="28" font-weight="bold" fill="#FF4400" text-anchor="middle">15%</text>
+  <!-- Warning label -->
+  <text x="256" y="400" font-family="Arial" font-size="20" fill="#FF8800" text-anchor="middle">HIGH DRAIN</text>
+  <text x="256" y="462" font-family="Arial" font-size="26" font-weight="bold" fill="#FFFF00" text-anchor="middle">Burn.Rate</text>
+</svg>

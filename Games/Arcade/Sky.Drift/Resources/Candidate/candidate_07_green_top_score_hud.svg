@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#001400"/>
+      <stop offset="100%" stop-color="#002000"/>
+    </linearGradient>
+    <linearGradient id="bar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#69f0ae"/>
+      <stop offset="100%" stop-color="#00e676"/>
+    </linearGradient>
+    <filter id="scanline" x="0%" y="0%" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0 0.35" numOctaves="1" result="noise"/>
+      <feColorMatrix type="saturate" values="0" in="noise" result="gray"/>
+      <feBlend in="SourceGraphic" in2="gray" mode="overlay" result="blend"/>
+      <feComposite in="blend" in2="SourceGraphic" operator="in"/>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- CRT screen feel border -->
+  <rect x="60" y="60" width="392" height="392" rx="20" fill="none" stroke="#00e676" stroke-width="2" opacity="0.3"/>
+  <!-- HUD elements -->
+  <!-- Score -->
+  <text x="256" y="130" font-family="monospace" font-size="14" fill="#00e676" text-anchor="middle" opacity="0.7">HIGH SCORE</text>
+  <text x="256" y="170" font-family="monospace" font-size="38" fill="#00ff41" text-anchor="middle" font-weight="bold">128,400</text>
+  <!-- Divider -->
+  <line x1="90" y1="185" x2="422" y2="185" stroke="#00e676" stroke-width="1" opacity="0.4"/>
+  <!-- Plane icon (simple) -->
+  <path d="M256 220 Q270 208 288 218 L256 236 L224 218 Q242 208 256 220 Z" fill="#00e676"/>
+  <path d="M256 220 L256 260" stroke="#00e676" stroke-width="3" stroke-linecap="round"/>
+  <path d="M244 248 L256 260 L268 248" stroke="#69f0ae" stroke-width="2" fill="none"/>
+  <!-- Stats bars -->
+  <text x="90" y="308" font-family="monospace" font-size="13" fill="#69f0ae">SPEED</text>
+  <rect x="90" y="314" width="332" height="12" rx="6" fill="#001400"/>
+  <rect x="90" y="314" width="265" height="12" rx="6" fill="url(#bar)"/>
+  <text x="90" y="345" font-family="monospace" font-size="13" fill="#69f0ae">DRIFT</text>
+  <rect x="90" y="351" width="332" height="12" rx="6" fill="#001400"/>
+  <rect x="90" y="351" width="220" height="12" rx="6" fill="#00e676" opacity="0.8"/>
+  <text x="90" y="382" font-family="monospace" font-size="13" fill="#69f0ae">ALTITUDE</text>
+  <rect x="90" y="388" width="332" height="12" rx="6" fill="#001400"/>
+  <rect x="90" y="388" width="298" height="12" rx="6" fill="#69f0ae" opacity="0.9"/>
+  <!-- Title -->
+  <text x="256" y="455" font-family="monospace" font-size="22" fill="#00e676" text-anchor="middle" letter-spacing="5" opacity="0.9">SKY.DRIFT</text>
+</svg>

@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <linearGradient id="inputBox" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e40af"/>
+      <stop offset="100%" stop-color="#1d4ed8"/>
+    </linearGradient>
+    <linearGradient id="outputBox" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#166534"/>
+      <stop offset="100%" stop-color="#15803d"/>
+    </linearGradient>
+    <linearGradient id="modelBox" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7c2d12"/>
+      <stop offset="100%" stop-color="#9a3412"/>
+    </linearGradient>
+    <marker id="arrowBlue" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#60a5fa"/>
+    </marker>
+    <marker id="arrowGreen" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#4ade80"/>
+    </marker>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- INPUT 박스 -->
+  <rect x="60" y="190" width="120" height="60" rx="10" fill="url(#inputBox)"/>
+  <text x="120" y="217" font-family="Arial" font-weight="bold" font-size="16" fill="white" text-anchor="middle">INPUT</text>
+  <text x="120" y="238" font-family="Arial" font-size="13" fill="#93c5fd" text-anchor="middle">512 tokens</text>
+  <!-- 화살표 INPUT → MODEL -->
+  <line x1="180" y1="220" x2="238" y2="220" stroke="#60a5fa" stroke-width="2.5" marker-end="url(#arrowBlue)"/>
+  <!-- MODEL 박스 (중앙) -->
+  <rect x="166" y="160" width="180" height="192" rx="14" fill="url(#modelBox)"/>
+  <text x="256" y="230" font-family="Arial" font-weight="bold" font-size="20" fill="white" text-anchor="middle">MODEL</text>
+  <text x="256" y="258" font-family="Arial" font-size="14" fill="#fca5a5" text-anchor="middle">GPT-4o</text>
+  <text x="256" y="282" font-family="Arial" font-size="14" fill="#fdba74" text-anchor="middle">$0.005/1K</text>
+  <text x="256" y="306" font-family="Arial" font-size="14" fill="#fde68a" text-anchor="middle">$0.002 total</text>
+  <!-- 화살표 MODEL → OUTPUT -->
+  <line x1="346" y1="220" x2="400" y2="220" stroke="#4ade80" stroke-width="2.5" marker-end="url(#arrowGreen)"/>
+  <!-- OUTPUT 박스 -->
+  <rect x="332" y="190" width="120" height="60" rx="10" fill="url(#outputBox)"/>
+  <text x="392" y="217" font-family="Arial" font-weight="bold" font-size="16" fill="white" text-anchor="middle">OUTPUT</text>
+  <text x="392" y="238" font-family="Arial" font-size="13" fill="#86efac" text-anchor="middle">256 tokens</text>
+  <!-- 비용 합산 박스 -->
+  <rect x="156" y="385" width="200" height="50" rx="10" fill="#1e293b" stroke="#38bdf8" stroke-width="2"/>
+  <text x="256" y="406" font-family="Arial" font-weight="bold" font-size="15" fill="#38bdf8" text-anchor="middle">TOTAL COST</text>
+  <text x="256" y="426" font-family="'Courier New', monospace" font-weight="bold" font-size="18" fill="#f0f9ff" text-anchor="middle">$0.0038</text>
+  <!-- 화살표 아래로 -->
+  <line x1="256" y1="352" x2="256" y2="384" stroke="#38bdf8" stroke-width="2" marker-end="url(#arrowBlue)"/>
+</svg>

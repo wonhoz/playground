@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0510"/>
+      <stop offset="100%" stop-color="#150a20"/>
+    </linearGradient>
+    <radialGradient id="nodeGlow1" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#56CCF2" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#2F80ED" stop-opacity="0.2"/>
+    </radialGradient>
+    <radialGradient id="nodeGlow2" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ee0979" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#ff6a00" stop-opacity="0.2"/>
+    </radialGradient>
+    <radialGradient id="nodeGlow3" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#56ab2f" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#a8e063" stop-opacity="0.2"/>
+    </radialGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+
+  <!-- Connection edges with animated dotted appearance -->
+  <line x1="256" y1="150" x2="160" y2="270" stroke="#56CCF2" stroke-width="3" stroke-dasharray="8,4" opacity="0.6"/>
+  <line x1="256" y1="150" x2="256" y2="290" stroke="#ffd200" stroke-width="3" stroke-dasharray="8,4" opacity="0.6"/>
+  <line x1="256" y1="150" x2="352" y2="270" stroke="#ee0979" stroke-width="3" stroke-dasharray="8,4" opacity="0.6"/>
+  <line x1="160" y1="270" x2="160" y2="390" stroke="#56CCF2" stroke-width="2.5" stroke-dasharray="6,4" opacity="0.45"/>
+  <line x1="160" y1="270" x2="256" y2="390" stroke="#56ab2f" stroke-width="2.5" stroke-dasharray="6,4" opacity="0.45"/>
+  <line x1="256" y1="290" x2="256" y2="390" stroke="#ffd200" stroke-width="2.5" stroke-dasharray="6,4" opacity="0.45"/>
+  <line x1="352" y1="270" x2="256" y2="390" stroke="#8E54E9" stroke-width="2.5" stroke-dasharray="6,4" opacity="0.45"/>
+  <line x1="352" y1="270" x2="352" y2="390" stroke="#ee0979" stroke-width="2.5" stroke-dasharray="6,4" opacity="0.45"/>
+
+  <!-- Flow arrows on edges -->
+  <polygon points="198,205 204,215 190,215" fill="#56CCF2" opacity="0.7"/>
+  <polygon points="254,215 258,226 248,226" fill="#ffd200" opacity="0.7"/>
+  <polygon points="314,205 320,215 308,215" fill="#ee0979" opacity="0.7"/>
+
+  <!-- Root node -->
+  <circle cx="256" cy="150" r="40" fill="url(#nodeGlow1)" filter="url(#glow)"/>
+  <circle cx="256" cy="150" r="32" fill="#0a0510"/>
+  <circle cx="256" cy="150" r="20" fill="#56CCF2" opacity="0.3"/>
+  <!-- Signal wave icon in root -->
+  <path d="M238,150 Q242,138 248,150 Q254,162 260,150 Q266,138 270,150" fill="none" stroke="#56CCF2" stroke-width="3" stroke-linecap="round" filter="url(#glow)"/>
+
+  <!-- Level 2 nodes -->
+  <circle cx="160" cy="270" r="30" fill="url(#nodeGlow1)" filter="url(#glow)"/>
+  <circle cx="160" cy="270" r="23" fill="#0a0510"/>
+  <!-- Flow arrows inside -->
+  <polygon points="151,262 151,278 168,270" fill="#56CCF2" opacity="0.8"/>
+
+  <circle cx="256" cy="290" r="30" fill="#1a2a1a" stroke="#ffd200" stroke-width="2.5" filter="url(#glow)"/>
+  <circle cx="256" cy="290" r="23" fill="#0a0510"/>
+  <line x1="244" y1="287" x2="268" y2="287" stroke="#ffd200" stroke-width="2.5" opacity="0.8"/>
+  <line x1="244" y1="295" x2="268" y2="295" stroke="#ffd200" stroke-width="2.5" opacity="0.8"/>
+
+  <circle cx="352" cy="270" r="30" fill="url(#nodeGlow2)" filter="url(#glow)"/>
+  <circle cx="352" cy="270" r="23" fill="#0a0510"/>
+  <polygon points="343,262 343,278 360,270" fill="#ee0979" opacity="0.8"/>
+
+  <!-- Level 3 nodes -->
+  <circle cx="160" cy="390" r="22" fill="#0a1520" stroke="#56CCF2" stroke-width="2"/>
+  <circle cx="160" cy="390" r="10" fill="#56CCF2" opacity="0.4"/>
+
+  <circle cx="256" cy="390" r="22" fill="url(#nodeGlow3)" filter="url(#glow)"/>
+  <circle cx="256" cy="390" r="15" fill="#0a0510"/>
+  <circle cx="256" cy="390" r="8" fill="#56ab2f" opacity="0.7"/>
+
+  <circle cx="352" cy="390" r="22" fill="#200a10" stroke="#ee0979" stroke-width="2"/>
+  <circle cx="352" cy="390" r="10" fill="#ee0979" opacity="0.4"/>
+
+  <!-- Particle flow dots on edges -->
+  <circle cx="210" cy="208" r="5" fill="#56CCF2" opacity="0.8" filter="url(#glow)"/>
+  <circle cx="300" cy="208" r="5" fill="#ee0979" opacity="0.8" filter="url(#glow)"/>
+  <circle cx="256" cy="240" r="5" fill="#ffd200" opacity="0.8" filter="url(#glow)"/>
+  <circle cx="208" cy="335" r="4" fill="#56ab2f" opacity="0.7" filter="url(#glow)"/>
+  <circle cx="304" cy="335" r="4" fill="#8E54E9" opacity="0.7" filter="url(#glow)"/>
+</svg>

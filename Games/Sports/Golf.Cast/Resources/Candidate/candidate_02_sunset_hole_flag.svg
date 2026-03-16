@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1A0A00"/>
+      <stop offset="40%" stop-color="#CC4400"/>
+      <stop offset="70%" stop-color="#FF8800"/>
+      <stop offset="100%" stop-color="#004400"/>
+    </linearGradient>
+    <radialGradient id="sun" cx="50%" cy="55%" r="15%">
+      <stop offset="0%" stop-color="#FFEE44"/>
+      <stop offset="100%" stop-color="#FF8800" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="grass2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#006622"/>
+      <stop offset="100%" stop-color="#003311"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Sun glow -->
+  <circle cx="256" cy="280" r="60" fill="url(#sun)"/>
+  <circle cx="256" cy="280" r="30" fill="#FFEE44" opacity="0.9"/>
+  <!-- Horizon grass -->
+  <ellipse cx="256" cy="440" rx="260" ry="120" fill="url(#grass2)"/>
+  <!-- Sun rays -->
+  <line x1="256" y1="200" x2="256" y2="170" stroke="#FFEE44" stroke-width="3" opacity="0.5"/>
+  <line x1="290" y1="210" x2="305" y2="183" stroke="#FFEE44" stroke-width="2" opacity="0.4"/>
+  <line x1="222" y1="210" x2="207" y2="183" stroke="#FFEE44" stroke-width="2" opacity="0.4"/>
+  <line x1="315" y1="248" x2="338" y2="232" stroke="#FFEE44" stroke-width="2" opacity="0.3"/>
+  <line x1="197" y1="248" x2="174" y2="232" stroke="#FFEE44" stroke-width="2" opacity="0.3"/>
+  <!-- Flag pin silhouette -->
+  <line x1="320" y1="350" x2="320" y2="190" stroke="#111111" stroke-width="5"/>
+  <polygon points="320,190 368,208 320,226" fill="#FF2222"/>
+  <!-- Hole -->
+  <ellipse cx="320" cy="352" rx="22" ry="9" fill="#002200"/>
+  <!-- Golfer silhouette -->
+  <circle cx="170" cy="330" r="16" fill="#111111"/>
+  <line x1="170" y1="346" x2="170" y2="400" stroke="#111111" stroke-width="8"/>
+  <line x1="170" y1="370" x2="140" y2="395" stroke="#111111" stroke-width="6"/>
+  <line x1="170" y1="370" x2="200" y2="395" stroke="#111111" stroke-width="6"/>
+  <line x1="170" y1="358" x2="135" y2="345" stroke="#111111" stroke-width="5"/>
+  <!-- Ball -->
+  <circle cx="110" cy="376" r="12" fill="white"/>
+</svg>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#001820"/>
+      <stop offset="100%" stop-color="#002228"/>
+    </linearGradient>
+    <linearGradient id="left_panel" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#001820"/>
+      <stop offset="100%" stop-color="#002030"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Left panel: source hash -->
+  <rect x="60" y="100" width="180" height="310" rx="10" fill="#001828" stroke="#00AACC" stroke-width="2"/>
+  <text x="150" y="128" text-anchor="middle" fill="#00CCDD" font-size="14" font-family="monospace">SOURCE</text>
+  <line x1="72" y1="136" x2="228" y2="136" stroke="#00AACC" stroke-width="1" opacity="0.3"/>
+  <text x="80" y="160" fill="#009999" font-size="11" font-family="monospace">MD5:</text>
+  <text x="80" y="177" fill="#00CCCC" font-size="10" font-family="monospace">a3f9b2c1</text>
+  <text x="80" y="193" fill="#00CCCC" font-size="10" font-family="monospace">d4e5f6a7</text>
+  <text x="80" y="220" fill="#009999" font-size="11" font-family="monospace">SHA256:</text>
+  <text x="80" y="237" fill="#00CCCC" font-size="10" font-family="monospace">b9c4a1e5</text>
+  <text x="80" y="253" fill="#00CCCC" font-size="10" font-family="monospace">f2d8c3b7</text>
+  <text x="80" y="269" fill="#00CCCC" font-size="10" font-family="monospace">a4e9f1c2</text>
+  <text x="80" y="285" fill="#00CCCC" font-size="10" font-family="monospace">d5b8a3f6</text>
+  <!-- Right panel: computed hash -->
+  <rect x="272" y="100" width="180" height="310" rx="10" fill="#001828" stroke="#00AACC" stroke-width="2"/>
+  <text x="362" y="128" text-anchor="middle" fill="#00CCDD" font-size="14" font-family="monospace">COMPUTED</text>
+  <line x1="284" y1="136" x2="440" y2="136" stroke="#00AACC" stroke-width="1" opacity="0.3"/>
+  <text x="292" y="160" fill="#009999" font-size="11" font-family="monospace">MD5:</text>
+  <text x="292" y="177" fill="#00CCCC" font-size="10" font-family="monospace">a3f9b2c1</text>
+  <text x="292" y="193" fill="#00CCCC" font-size="10" font-family="monospace">d4e5f6a7</text>
+  <text x="292" y="220" fill="#009999" font-size="11" font-family="monospace">SHA256:</text>
+  <text x="292" y="237" fill="#00CCCC" font-size="10" font-family="monospace">b9c4a1e5</text>
+  <text x="292" y="253" fill="#00CCCC" font-size="10" font-family="monospace">f2d8c3b7</text>
+  <text x="292" y="269" fill="#00CCCC" font-size="10" font-family="monospace">a4e9f1c2</text>
+  <text x="292" y="285" fill="#00CCCC" font-size="10" font-family="monospace">d5b8a3f6</text>
+  <!-- Center connector with = sign -->
+  <circle cx="256" cy="256" r="28" fill="#001828" stroke="#00FFCC" stroke-width="3"/>
+  <text x="256" y="263" text-anchor="middle" fill="#00FFCC" font-size="22" font-family="monospace">=</text>
+  <!-- Match result -->
+  <rect x="140" y="430" width="232" height="40" rx="8" fill="#001828" stroke="#00FFCC" stroke-width="2"/>
+  <text x="256" y="456" text-anchor="middle" fill="#00FFCC" font-size="18" font-family="monospace">MATCH &#x2713;</text>
+</svg>

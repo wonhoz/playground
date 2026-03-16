@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#000d1a"/>
+      <stop offset="100%" stop-color="#001a33"/>
+    </linearGradient>
+    <linearGradient id="ice" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#AADDFF"/>
+      <stop offset="100%" stop-color="#4499DD"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="40%" r="50%">
+      <stop offset="0%" stop-color="#88CCFF" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#88CCFF" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <circle cx="256" cy="256" r="200" fill="url(#glow)"/>
+  <!-- Ice block tower -->
+  <rect x="148" y="370" width="216" height="52" rx="6" fill="url(#ice)" opacity="0.7" stroke="#AADDFF" stroke-width="1.5"/>
+  <rect x="168" y="310" width="176" height="54" rx="6" fill="url(#ice)" opacity="0.65" stroke="#AADDFF" stroke-width="1.5"/>
+  <rect x="192" y="252" width="128" height="52" rx="6" fill="url(#ice)" opacity="0.6" stroke="#AADDFF" stroke-width="1.5"/>
+  <rect x="216" y="198" width="80" height="48" rx="6" fill="url(#ice)" opacity="0.55" stroke="#AADDFF" stroke-width="1.5"/>
+  <!-- Crystal on top -->
+  <polygon points="256,120 276,180 256,165 236,180" fill="#AADDFF" opacity="0.85"/>
+  <polygon points="256,120 276,180 256,160 236,180" fill="white" opacity="0.3"/>
+  <!-- Snowflake sparkles -->
+  <circle cx="140" cy="120" r="3" fill="#88CCFF" opacity="0.8"/>
+  <circle cx="380" cy="140" r="2" fill="#AADDFF" opacity="0.7"/>
+  <circle cx="420" cy="80" r="3" fill="#CCEEFF" opacity="0.6"/>
+  <circle cx="100" cy="200" r="2" fill="#88CCFF" opacity="0.5"/>
+  <!-- Shine lines on blocks -->
+  <line x1="158" y1="385" x2="195" y2="385" stroke="white" stroke-width="1.5" opacity="0.3"/>
+  <line x1="178" y1="325" x2="215" y2="325" stroke="white" stroke-width="1.5" opacity="0.3"/>
+</svg>

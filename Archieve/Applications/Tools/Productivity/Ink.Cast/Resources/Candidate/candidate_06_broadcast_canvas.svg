@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0a1628"/>
+      <stop offset="100%" stop-color="#1a2840"/>
+    </linearGradient>
+    <linearGradient id="canvas" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1e2d42"/>
+      <stop offset="100%" stop-color="#162236"/>
+    </linearGradient>
+    <linearGradient id="signal" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#00e5ff"/>
+      <stop offset="100%" stop-color="#00b4d8"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Main canvas/monitor -->
+  <rect x="60" y="80" width="280" height="200" rx="14" fill="url(#canvas)"/>
+  <rect x="74" y="94" width="252" height="172" rx="6" fill="#0e1a2e"/>
+  <!-- Drawing on canvas -->
+  <path d="M90,220 Q140,170 200,185 Q240,195 280,170" fill="none" stroke="#64ffda" stroke-width="6" stroke-linecap="round" opacity="0.9"/>
+  <path d="M90,240 Q150,230 220,245 Q270,255 310,240" fill="none" stroke="#40c4ff" stroke-width="4" stroke-linecap="round" opacity="0.7"/>
+  <!-- Stand -->
+  <rect x="170" y="280" width="80" height="14" rx="4" fill="#2a3a50"/>
+  <rect x="140" y="290" width="140" height="10" rx="4" fill="#2a3a50"/>
+  <!-- Wireless cast target monitors (right side) -->
+  <rect x="370" y="80" width="102" height="76" rx="8" fill="#1e2d42"/>
+  <rect x="378" y="88" width="86" height="56" rx="4" fill="#0e1a2e"/>
+  <path d="M386,128 Q421,115 456,128" fill="none" stroke="#64ffda" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
+  <rect x="396" y="156" width="50" height="6" rx="3" fill="#2a3a50"/>
+  <rect x="370" y="180" width="102" height="76" rx="8" fill="#1e2d42"/>
+  <rect x="378" y="188" width="86" height="56" rx="4" fill="#0e1a2e"/>
+  <path d="M386,228 Q421,215 456,228" fill="none" stroke="#40c4ff" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
+  <rect x="396" y="256" width="50" height="6" rx="3" fill="#2a3a50"/>
+  <!-- Signal waves from canvas to monitors -->
+  <path d="M340,155 Q356,118 370,118" fill="none" stroke="url(#signal)" stroke-width="3" stroke-dasharray="6,4" opacity="0.7"/>
+  <path d="M340,200 Q356,220 370,220" fill="none" stroke="#40c4ff" stroke-width="3" stroke-dasharray="6,4" opacity="0.6"/>
+  <!-- Signal dots -->
+  <circle cx="352" cy="136" r="5" fill="#00e5ff" opacity="0.8"/>
+  <circle cx="352" cy="210" r="5" fill="#40c4ff" opacity="0.8"/>
+  <!-- Pen/stylus at bottom right of canvas -->
+  <g transform="translate(305,250) rotate(-45)">
+    <rect x="-5" y="-45" width="10" height="32" rx="4" fill="#90a4ae"/>
+    <polygon points="-5,-13 5,-13 2,8 -2,8" fill="#78909c"/>
+    <polygon points="-2,8 2,8 0,22 0,22" fill="#64ffda"/>
+  </g>
+  <!-- Cast label -->
+  <text x="256" y="460" text-anchor="middle" font-family="Arial" font-size="16" letter-spacing="4" fill="#00e5ff" opacity="0.6">INK CAST</text>
+</svg>

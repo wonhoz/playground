@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#000a00"/>
+      <stop offset="100%" stop-color="#001400"/>
+    </linearGradient>
+    <linearGradient id="circuit" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#00ff41"/>
+      <stop offset="100%" stop-color="#00aa28"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- PCB-style right-angle tree connections -->
+  <!-- Root to level 2 left -->
+  <polyline points="256,90 256,160 80,160 80,230" fill="none" stroke="#00ff41" stroke-width="3" opacity="0.85"/>
+  <!-- Root to level 2 right -->
+  <polyline points="256,90 256,160 432,160 432,230" fill="none" stroke="#00ff41" stroke-width="3" opacity="0.85"/>
+  <!-- Level 2 left to level 3 -->
+  <polyline points="80,230 80,280 40,280 40,350" fill="none" stroke="#00aa28" stroke-width="2" opacity="0.8"/>
+  <polyline points="80,230 80,280 120,280 120,350" fill="none" stroke="#00aa28" stroke-width="2" opacity="0.8"/>
+  <!-- Level 2 right to level 3 -->
+  <polyline points="432,230 432,280 380,280 380,350" fill="none" stroke="#00aa28" stroke-width="2" opacity="0.8"/>
+  <polyline points="432,230 432,280 472,280 472,350" fill="none" stroke="#00aa28" stroke-width="2" opacity="0.8"/>
+  <!-- Level 3 to leaves -->
+  <polyline points="40,350 40,380 30,380 30,420" fill="none" stroke="#009920" stroke-width="1.5" opacity="0.7"/>
+  <polyline points="40,350 40,380 50,380 50,420" fill="none" stroke="#009920" stroke-width="1.5" opacity="0.7"/>
+  <polyline points="380,350 380,400 370,400 370,430" fill="none" stroke="#009920" stroke-width="1.5" opacity="0.7"/>
+  <polyline points="380,350 380,400 390,400 390,430" fill="none" stroke="#009920" stroke-width="1.5" opacity="0.7"/>
+  <!-- Nodes (IC chip style) -->
+  <rect x="236" y="68" width="40" height="28" rx="5" fill="#001400"/>
+  <rect x="236" y="68" width="40" height="28" rx="5" fill="none" stroke="#00ff41" stroke-width="2"/>
+  <text x="256" y="87" text-anchor="middle" font-family="monospace" font-size="11" fill="#00ff41">{}</text>
+  <rect x="58" y="218" width="44" height="24" rx="4" fill="#001400"/>
+  <rect x="58" y="218" width="44" height="24" rx="4" fill="none" stroke="#00ff41" stroke-width="2"/>
+  <text x="80" y="235" text-anchor="middle" font-family="monospace" font-size="10" fill="#00ff41">"a"</text>
+  <rect x="410" y="218" width="44" height="24" rx="4" fill="#001400"/>
+  <rect x="410" y="218" width="44" height="24" rx="4" fill="none" stroke="#00ff41" stroke-width="2"/>
+  <text x="432" y="235" text-anchor="middle" font-family="monospace" font-size="10" fill="#00ff41">[]</text>
+  <!-- Leaf chips -->
+  <rect x="22" y="348" width="36" height="20" rx="3" fill="#001400"/>
+  <rect x="22" y="348" width="36" height="20" rx="3" fill="none" stroke="#00aa28" stroke-width="1.5"/>
+  <text x="40" y="362" text-anchor="middle" font-family="monospace" font-size="9" fill="#00aa28">1</text>
+  <rect x="102" y="348" width="36" height="20" rx="3" fill="#001400"/>
+  <rect x="102" y="348" width="36" height="20" rx="3" fill="none" stroke="#00aa28" stroke-width="1.5"/>
+  <text x="120" y="362" text-anchor="middle" font-family="monospace" font-size="9" fill="#00aa28">2</text>
+  <rect x="358" y="348" width="44" height="20" rx="3" fill="#001400"/>
+  <rect x="358" y="348" width="44" height="20" rx="3" fill="none" stroke="#00aa28" stroke-width="1.5"/>
+  <text x="380" y="362" text-anchor="middle" font-family="monospace" font-size="9" fill="#00aa28">{}</text>
+  <rect x="450" y="348" width="44" height="20" rx="3" fill="#001400"/>
+  <rect x="450" y="348" width="44" height="20" rx="3" fill="none" stroke="#00aa28" stroke-width="1.5"/>
+  <text x="472" y="362" text-anchor="middle" font-family="monospace" font-size="9" fill="#00aa28">ok</text>
+  <!-- Leaf nodes -->
+  <circle cx="30" cy="424" r="6" fill="#009920"/>
+  <circle cx="50" cy="424" r="6" fill="#009920"/>
+  <circle cx="370" cy="434" r="5" fill="#007716"/>
+  <circle cx="390" cy="434" r="5" fill="#007716"/>
+  <!-- Solder dots at junctions -->
+  <circle cx="256" cy="160" r="5" fill="#00ff41"/>
+  <circle cx="80" cy="280" r="4" fill="#00aa28"/>
+  <circle cx="432" cy="280" r="4" fill="#00aa28"/>
+  <!-- Label -->
+  <text x="256" y="468" text-anchor="middle" font-family="monospace" font-size="14" letter-spacing="2" fill="#00ff41" opacity="0.5">CIRCUIT TREE</text>
+</svg>

@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg" cx="40%" cy="40%">
+      <stop offset="0%" stop-color="#1A1200"/>
+      <stop offset="100%" stop-color="#0D0900"/>
+    </radialGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFD700"/>
+      <stop offset="100%" stop-color="#FF8F00"/>
+    </linearGradient>
+    <linearGradient id="cell_hi" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#FFD700" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#FF8F00" stop-opacity="0.1"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Spreadsheet grid -->
+  <rect x="70" y="70" width="372" height="380" rx="10" fill="#1A1200" stroke="url(#gold)" stroke-width="3"/>
+  <!-- Header row -->
+  <rect x="70" y="70" width="372" height="36" rx="10" fill="#2C1F00"/>
+  <rect x="70" y="90" width="372" height="16" fill="#2C1F00"/>
+  <g fill="url(#gold)" opacity="0.7">
+    <rect x="90" y="80" width="60" height="10" rx="4"/>
+    <rect x="164" y="80" width="60" height="10" rx="4"/>
+    <rect x="238" y="80" width="60" height="10" rx="4"/>
+    <rect x="312" y="80" width="60" height="10" rx="4"/>
+    <rect x="386" y="80" width="40" height="10" rx="4"/>
+  </g>
+  <!-- Column separators -->
+  <g stroke="#2C1F00" stroke-width="2">
+    <line x1="156" y1="106" x2="156" y2="450"/>
+    <line x1="230" y1="106" x2="230" y2="450"/>
+    <line x1="304" y1="106" x2="304" y2="450"/>
+    <line x1="378" y1="106" x2="378" y2="450"/>
+  </g>
+  <!-- Row data -->
+  <g fill="url(#gold)">
+    <!-- Row 1 -->
+    <rect x="86" y="120" width="52" height="8" rx="3" opacity="0.6"/>
+    <rect x="160" y="120" width="52" height="8" rx="3" opacity="0.8"/>
+    <rect x="234" y="120" width="52" height="8" rx="3" opacity="0.5"/>
+    <rect x="308" y="120" width="52" height="8" rx="3" opacity="0.9"/>
+    <rect x="382" y="120" width="38" height="8" rx="3" opacity="0.6"/>
+    <!-- Row 2 highlight -->
+    <rect x="70" y="138" width="372" height="24" rx="0" fill="url(#cell_hi)"/>
+    <rect x="86" y="144" width="52" height="8" rx="3" fill="#FFD700"/>
+    <rect x="160" y="144" width="52" height="8" rx="3" fill="#FFD700"/>
+    <rect x="234" y="144" width="52" height="8" rx="3" fill="#FFD700"/>
+    <rect x="308" y="144" width="52" height="8" rx="3" fill="#FF8F00"/>
+    <rect x="382" y="144" width="38" height="8" rx="3" fill="#FF8F00"/>
+    <!-- Row 3 -->
+    <rect x="86" y="172" width="52" height="8" rx="3" opacity="0.7"/>
+    <rect x="160" y="172" width="52" height="8" rx="3" opacity="0.5"/>
+    <rect x="234" y="172" width="52" height="8" rx="3" opacity="0.8"/>
+    <rect x="308" y="172" width="52" height="8" rx="3" opacity="0.6"/>
+    <rect x="382" y="172" width="38" height="8" rx="3" opacity="0.7"/>
+    <!-- Row 4 -->
+    <rect x="86" y="196" width="52" height="8" rx="3" opacity="0.5"/>
+    <rect x="160" y="196" width="52" height="8" rx="3" opacity="0.9"/>
+    <rect x="234" y="196" width="52" height="8" rx="3" opacity="0.4"/>
+    <rect x="308" y="196" width="52" height="8" rx="3" opacity="0.8"/>
+    <rect x="382" y="196" width="38" height="8" rx="3" opacity="0.5"/>
+    <!-- Row 5 -->
+    <rect x="86" y="220" width="52" height="8" rx="3" opacity="0.8"/>
+    <rect x="160" y="220" width="52" height="8" rx="3" opacity="0.6"/>
+    <rect x="234" y="220" width="52" height="8" rx="3" opacity="0.9"/>
+    <rect x="308" y="220" width="52" height="8" rx="3" opacity="0.5"/>
+    <rect x="382" y="220" width="38" height="8" rx="3" opacity="0.7"/>
+  </g>
+  <!-- Auto-fill arrow -->
+  <rect x="400" y="230" width="30" height="200" rx="0" fill="#2C1F00" stroke="url(#gold)" stroke-width="2"/>
+  <rect x="400" y="230" width="30" height="100" rx="0" fill="url(#gold)" opacity="0.7"/>
+  <polygon points="415,450 400,420 430,420" fill="url(#gold)"/>
+</svg>

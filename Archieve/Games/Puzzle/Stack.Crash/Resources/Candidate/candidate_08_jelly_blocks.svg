@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF0F8"/>
+      <stop offset="100%" stop-color="#F0E8FF"/>
+    </linearGradient>
+    <linearGradient id="jelly1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FF9EBB"/>
+      <stop offset="100%" stop-color="#FF6699"/>
+    </linearGradient>
+    <linearGradient id="jelly2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFD080"/>
+      <stop offset="100%" stop-color="#FFB030"/>
+    </linearGradient>
+    <linearGradient id="jelly3" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#90E8FF"/>
+      <stop offset="100%" stop-color="#40C0FF"/>
+    </linearGradient>
+    <linearGradient id="jelly4" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#B8A0FF"/>
+      <stop offset="100%" stop-color="#8060FF"/>
+    </linearGradient>
+    <linearGradient id="jelly5" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#80FF90"/>
+      <stop offset="100%" stop-color="#30D040"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Ground -->
+  <ellipse cx="256" cy="440" rx="230" ry="28" fill="#FFE0F0" opacity="0.7"/>
+  <!-- Jelly stack - very rounded -->
+  <rect x="100" y="326" width="312" height="64" rx="32" fill="url(#jelly1)"/>
+  <rect x="100" y="326" width="312" height="20" rx="20" fill="white" opacity="0.3"/>
+  <rect x="132" y="258" width="248" height="64" rx="32" fill="url(#jelly2)"/>
+  <rect x="132" y="258" width="248" height="20" rx="20" fill="white" opacity="0.3"/>
+  <rect x="172" y="190" width="168" height="64" rx="32" fill="url(#jelly3)"/>
+  <rect x="172" y="190" width="168" height="20" rx="20" fill="white" opacity="0.3"/>
+  <rect x="204" y="122" width="104" height="64" rx="32" fill="url(#jelly4)"/>
+  <rect x="204" y="122" width="104" height="20" rx="20" fill="white" opacity="0.3"/>
+  <!-- Bouncing flying block -->
+  <g transform="translate(256, 82) rotate(15)">
+    <rect x="-52" y="-26" width="104" height="52" rx="26" fill="url(#jelly5)"/>
+    <rect x="-52" y="-26" width="104" height="18" rx="18" fill="white" opacity="0.4"/>
+  </g>
+  <!-- Splat/impact circles -->
+  <circle cx="340" cy="190" r="14" fill="#80FF90" opacity="0.5"/>
+  <circle cx="360" cy="178" r="9" fill="#80FF90" opacity="0.4"/>
+  <circle cx="370" cy="196" r="6" fill="#30D040" opacity="0.5"/>
+  <!-- Stars -->
+  <text x="388" y="148" font-size="24" fill="#FFD080" opacity="0.8">✦</text>
+  <text x="308" y="96" font-size="18" fill="#FF9EBB" opacity="0.7">✦</text>
+  <text x="420" y="178" font-size="14" fill="#B8A0FF" opacity="0.7">✦</text>
+</svg>

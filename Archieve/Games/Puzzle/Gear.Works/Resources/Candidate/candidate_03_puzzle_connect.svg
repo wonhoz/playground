@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a237e"/>
+      <stop offset="100%" stop-color="#283593"/>
+    </linearGradient>
+    <linearGradient id="puzzleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7986cb"/>
+      <stop offset="100%" stop-color="#5c6bc0"/>
+    </linearGradient>
+    <linearGradient id="gearAccent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffab40"/>
+      <stop offset="100%" stop-color="#ff6d00"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Puzzle piece 1 (top-left, has gear inside) -->
+  <path d="M90,90 L200,90 L200,140 Q220,140 220,160 Q220,180 200,180 L200,200 L90,200 L90,150 Q70,150 70,130 Q70,110 90,110 Z" fill="url(#puzzleGrad)"/>
+  <!-- Gear in puzzle 1 -->
+  <circle cx="145" cy="145" r="35" fill="#1a237e"/>
+  <circle cx="145" cy="145" r="22" fill="url(#gearAccent)"/>
+  <circle cx="145" cy="145" r="8" fill="#1a237e"/>
+  <rect x="141" y="102" width="8" height="14" rx="3" fill="url(#gearAccent)"/>
+  <rect x="141" y="174" width="8" height="14" rx="3" fill="url(#gearAccent)"/>
+  <rect x="102" y="141" width="14" height="8" rx="3" fill="url(#gearAccent)"/>
+  <rect x="174" y="141" width="14" height="8" rx="3" fill="url(#gearAccent)"/>
+  <!-- Puzzle piece 2 (top-right) -->
+  <path d="M230,90 L340,90 L340,110 Q360,110 360,130 Q360,150 340,150 L340,200 L230,200 L230,180 Q210,180 210,160 Q210,140 230,140 Z" fill="url(#puzzleGrad)" opacity="0.85"/>
+  <!-- Gear in puzzle 2 -->
+  <circle cx="285" cy="145" r="30" fill="#1a237e"/>
+  <circle cx="285" cy="145" r="18" fill="#ffab40" opacity="0.8"/>
+  <circle cx="285" cy="145" r="7" fill="#1a237e"/>
+  <rect x="282" y="110" width="6" height="12" rx="2" fill="#ffab40"/>
+  <rect x="282" y="173" width="6" height="12" rx="2" fill="#ffab40"/>
+  <rect x="248" y="142" width="12" height="6" rx="2" fill="#ffab40"/>
+  <rect x="310" y="142" width="12" height="6" rx="2" fill="#ffab40"/>
+  <!-- Puzzle piece 3 (bottom-left) -->
+  <path d="M90,230 L200,230 L200,280 Q220,280 220,300 Q220,320 200,320 L200,340 L90,340 L90,290 Q70,290 70,270 Q70,250 90,250 Z" fill="url(#puzzleGrad)" opacity="0.75"/>
+  <!-- Puzzle piece 4 (bottom-right, missing/highlighted) -->
+  <path d="M230,230 L340,230 L340,250 Q360,250 360,270 Q360,290 340,290 L340,340 L230,340 L230,320 Q210,320 210,300 Q210,280 230,280 Z" fill="url(#gearAccent)" opacity="0.9"/>
+  <!-- Question mark in last piece -->
+  <text x="285" y="298" font-family="Arial" font-size="55" font-weight="900" fill="#1a237e" text-anchor="middle">?</text>
+  <!-- Connection nodes -->
+  <circle cx="200" cy="145" r="6" fill="#ffab40"/>
+  <circle cx="230" cy="145" r="6" fill="#ffab40"/>
+  <line x1="206" y1="145" x2="224" y2="145" stroke="#ffab40" stroke-width="2"/>
+  <!-- Title -->
+  <text x="256" y="430" font-family="Arial" font-size="30" font-weight="900" fill="#ffab40" text-anchor="middle">GEAR.WORKS</text>
+  <text x="256" y="465" font-family="Arial" font-size="16" fill="#9fa8da" text-anchor="middle">Connect the mechanism</text>
+</svg>

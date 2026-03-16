@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#F8F9FA"/>
+      <stop offset="100%" stop-color="#E9ECEF"/>
+    </linearGradient>
+    <linearGradient id="bar1" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#4361EE"/>
+      <stop offset="100%" stop-color="#3A0CA3"/>
+    </linearGradient>
+    <linearGradient id="bar2" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#4CC9F0"/>
+      <stop offset="100%" stop-color="#4361EE"/>
+    </linearGradient>
+    <linearGradient id="bar3" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#7209B7"/>
+      <stop offset="100%" stop-color="#F72585"/>
+    </linearGradient>
+    <linearGradient id="bar4" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#06D6A0"/>
+      <stop offset="100%" stop-color="#118AB2"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- App name -->
+  <text x="256" y="90" text-anchor="middle" font-family="Segoe UI" font-size="36" font-weight="700" fill="#212529">Tray Stats</text>
+  <!-- Horizontal progress bars with labels -->
+  <!-- CPU -->
+  <text x="70" y="165" font-family="Segoe UI" font-size="22" font-weight="600" fill="#495057">CPU</text>
+  <rect x="140" y="145" width="300" height="28" rx="14" fill="#DEE2E6"/>
+  <rect x="140" y="145" width="216" height="28" rx="14" fill="url(#bar1)"/>
+  <text x="456" y="165" font-family="Segoe UI" font-size="20" fill="#495057">72%</text>
+  <!-- RAM -->
+  <text x="70" y="225" font-family="Segoe UI" font-size="22" font-weight="600" fill="#495057">RAM</text>
+  <rect x="140" y="205" width="300" height="28" rx="14" fill="#DEE2E6"/>
+  <rect x="140" y="205" width="174" height="28" rx="14" fill="url(#bar2)"/>
+  <text x="456" y="225" font-family="Segoe UI" font-size="20" fill="#495057">58%</text>
+  <!-- DSK -->
+  <text x="70" y="285" font-family="Segoe UI" font-size="22" font-weight="600" fill="#495057">DSK</text>
+  <rect x="140" y="265" width="300" height="28" rx="14" fill="#DEE2E6"/>
+  <rect x="140" y="265" width="147" height="28" rx="14" fill="url(#bar3)"/>
+  <text x="456" y="285" font-family="Segoe UI" font-size="20" fill="#495057">49%</text>
+  <!-- NET -->
+  <text x="70" y="345" font-family="Segoe UI" font-size="22" font-weight="600" fill="#495057">NET</text>
+  <rect x="140" y="325" width="300" height="28" rx="14" fill="#DEE2E6"/>
+  <rect x="140" y="325" width="93" height="28" rx="14" fill="url(#bar4)"/>
+  <text x="456" y="345" font-family="Segoe UI" font-size="20" fill="#495057">31%</text>
+  <!-- Divider -->
+  <line x1="70" y1="390" x2="442" y2="390" stroke="#CED4DA" stroke-width="2"/>
+  <!-- Status row -->
+  <circle cx="110" cy="430" r="10" fill="#2DC653"/>
+  <text x="130" y="436" font-family="Segoe UI" font-size="20" fill="#495057">All systems normal</text>
+  <text x="390" y="436" font-family="Segoe UI" font-size="18" fill="#ADB5BD">v2.0</text>
+  <!-- Tray icon representation -->
+  <rect x="190" y="460" width="132" height="32" rx="8" fill="#4361EE" opacity="0.15"/>
+  <text x="256" y="482" text-anchor="middle" font-family="Segoe UI" font-size="18" fill="#4361EE" font-weight="600">TRAY</text>
+</svg>

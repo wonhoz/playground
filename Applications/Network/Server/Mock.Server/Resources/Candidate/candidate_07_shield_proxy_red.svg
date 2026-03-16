@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1C0505"/>
+      <stop offset="100%" stop-color="#2D0A0A"/>
+    </linearGradient>
+    <linearGradient id="shield" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#B91C1C"/>
+      <stop offset="100%" stop-color="#7F1D1D"/>
+    </linearGradient>
+    <linearGradient id="inner" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#991B1B"/>
+      <stop offset="100%" stop-color="#450A0A"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Shield body -->
+  <path d="M256 70 L400 120 L400 270 Q400 380 256 440 Q112 380 112 270 L112 120 Z" fill="url(#shield)" stroke="#EF4444" stroke-width="3"/>
+  <!-- Shield inner -->
+  <path d="M256 100 L378 144 L378 270 Q378 366 256 416 Q134 366 134 270 L134 144 Z" fill="url(#inner)"/>
+  <!-- Server icon inside shield -->
+  <rect x="198" y="175" width="120" height="32" rx="6" fill="#DC2626" stroke="#FCA5A5" stroke-width="1.5"/>
+  <circle cx="216" cy="191" r="6" fill="#22C55E"/>
+  <rect x="228" y="185" width="70" height="8" rx="3" fill="#FCA5A5" opacity="0.7"/>
+  <rect x="198" y="215" width="120" height="32" rx="6" fill="#DC2626" stroke="#FCA5A5" stroke-width="1.5"/>
+  <circle cx="216" cy="231" r="6" fill="#F59E0B"/>
+  <rect x="228" y="225" width="55" height="8" rx="3" fill="#FCA5A5" opacity="0.7"/>
+  <!-- HTTP label in shield -->
+  <text x="256" y="283" font-family="Arial" font-size="16" fill="#FCA5A5" text-anchor="middle" font-weight="bold">MOCK</text>
+  <text x="256" y="303" font-family="Courier New" font-size="12" fill="#FCA5A5" text-anchor="middle">:8080</text>
+  <!-- Arrow decorations on sides -->
+  <path d="M80 220 L112 256" stroke="#EF4444" stroke-width="2.5" stroke-dasharray="6,4" opacity="0.7"/>
+  <path d="M80 292 L112 256" stroke="#EF4444" stroke-width="2.5" stroke-dasharray="6,4" opacity="0.7"/>
+  <path d="M432 220 L400 256" stroke="#EF4444" stroke-width="2.5" stroke-dasharray="6,4" opacity="0.7"/>
+  <path d="M432 292 L400 256" stroke="#EF4444" stroke-width="2.5" stroke-dasharray="6,4" opacity="0.7"/>
+  <!-- Client dots -->
+  <circle cx="66" cy="256" r="14" fill="#7F1D1D" stroke="#EF4444" stroke-width="2"/>
+  <text x="66" y="261" font-family="Arial" font-size="10" fill="white" text-anchor="middle">CLI</text>
+  <circle cx="446" cy="256" r="14" fill="#7F1D1D" stroke="#EF4444" stroke-width="2"/>
+  <text x="446" y="261" font-family="Arial" font-size="9" fill="white" text-anchor="middle">SRV</text>
+</svg>

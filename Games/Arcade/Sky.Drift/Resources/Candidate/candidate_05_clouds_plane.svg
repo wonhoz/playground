@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a1428"/>
+      <stop offset="100%" style="stop-color:#1a3060"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <radialGradient id="sunGrad" cx="50%" cy="50%">
+      <stop offset="0%" style="stop-color:#ffee88"/>
+      <stop offset="40%" style="stop-color:#ffaa00;stop-opacity:0.5"/>
+      <stop offset="100%" style="stop-color:#ff6600;stop-opacity:0"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Sun/moon glow -->
+  <circle cx="380" cy="130" r="50" fill="url(#sunGrad)"/>
+  <circle cx="380" cy="130" r="30" fill="#ffee88" opacity="0.8"/>
+  <!-- Volumetric cloud 1 - big white -->
+  <ellipse cx="150" cy="200" rx="100" ry="42" fill="#ddeeff" opacity="0.25" filter="url(#glow)"/>
+  <ellipse cx="110" cy="215" rx="65" ry="32" fill="#eef4ff" opacity="0.20"/>
+  <ellipse cx="185" cy="215" rx="65" ry="32" fill="#eef4ff" opacity="0.20"/>
+  <ellipse cx="148" cy="195" rx="75" ry="32" fill="#ffffff" opacity="0.18"/>
+  <!-- Cloud 2 -->
+  <ellipse cx="350" cy="310" rx="85" ry="36" fill="#cce0ff" opacity="0.20" filter="url(#glow)"/>
+  <ellipse cx="315" cy="324" rx="55" ry="28" fill="#ddeeff" opacity="0.18"/>
+  <ellipse cx="380" cy="324" rx="55" ry="28" fill="#ddeeff" opacity="0.18"/>
+  <!-- Plane breaking through clouds -->
+  <g transform="translate(240, 240) rotate(-12)" filter="url(#glow)">
+    <!-- Fuselage glow -->
+    <ellipse cx="0" cy="0" rx="85" ry="12" fill="#88bbff" opacity="0.3"/>
+    <!-- Body -->
+    <path d="M-75 0 Q-50 -9 0 -9 Q60 -9 88 0 Q60 9 0 9 Q-50 9 -75 0 Z" fill="#ccddff"/>
+    <!-- Wings -->
+    <path d="M-8 -9 L-42 -50 L24 -50 L34 -9 Z" fill="#aaccee"/>
+    <path d="M-8 9 L-42 50 L24 50 L34 9 Z" fill="#aaccee"/>
+    <!-- Tail -->
+    <path d="M-62 0 L-82 -32 L-50 -9 Z" fill="#8899bb"/>
+    <path d="M-62 0 L-80 20 L-50 9 Z" fill="#8899bb" opacity="0.8"/>
+    <!-- Cockpit -->
+    <ellipse cx="56" cy="-2" rx="18" ry="7" fill="#0066cc" opacity="0.9"/>
+    <!-- Engine 1 -->
+    <ellipse cx="-10" cy="-48" rx="12" ry="5" fill="#667799" opacity="0.8"/>
+    <!-- Engine 2 -->
+    <ellipse cx="-10" cy="48" rx="12" ry="5" fill="#667799" opacity="0.8"/>
+  </g>
+  <!-- Contrail -->
+  <path d="M80 270 Q155 258 230 250" stroke="#ffffff" stroke-width="3" fill="none" opacity="0.4" filter="url(#glow)" stroke-linecap="round"/>
+  <path d="M80 274 Q153 264 228 255" stroke="#aaccff" stroke-width="5" fill="none" opacity="0.2" stroke-linecap="round"/>
+</svg>

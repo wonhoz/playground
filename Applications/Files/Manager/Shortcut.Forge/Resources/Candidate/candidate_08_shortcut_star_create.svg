@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#001040"/>
+      <stop offset="100%" stop-color="#001a60"/>
+    </linearGradient>
+    <linearGradient id="star" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fff9c4"/>
+      <stop offset="100%" stop-color="#ffa000"/>
+    </linearGradient>
+    <linearGradient id="arrow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#90caf9"/>
+      <stop offset="100%" stop-color="#1565c0"/>
+    </linearGradient>
+    <filter id="starglow"><feGaussianBlur stdDeviation="12"/></filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- star glow -->
+  <circle cx="256" cy="210" r="100" fill="#ffe082" opacity="0.15" filter="url(#starglow)"/>
+  <!-- 5-point star -->
+  <polygon points="256,100 278,178 360,178 295,225 318,303 256,258 194,303 217,225 152,178 234,178" fill="url(#star)"/>
+  <ellipse cx="236" cy="148" rx="22" ry="8" fill="white" opacity="0.3" transform="rotate(-20 236 148)"/>
+  <!-- cursor arrow -->
+  <path d="M160 310 L160 430 L198 392 L230 450 L252 439 L220 381 L270 381 Z" fill="url(#arrow)"/>
+  <ellipse cx="180" cy="326" rx="12" ry="6" fill="white" opacity="0.2" transform="rotate(0 180 326)"/>
+  <!-- link badge bottom-right of arrow -->
+  <rect x="158" y="308" width="30" height="30" rx="6" fill="#1565c0"/>
+  <path d="M163 330 L173 322 L173 316 L181 322 L173 328 L173 334 Z" fill="white" opacity="0.9"/>
+  <!-- sparkle dots around star -->
+  <circle cx="380" cy="140" r="5" fill="#fff9c4" opacity="0.8" filter="url(#starglow)"/>
+  <circle cx="130" cy="155" r="4" fill="#ffe082" opacity="0.7" filter="url(#starglow)"/>
+  <circle cx="390" cy="260" r="4" fill="#fff9c4" opacity="0.6" filter="url(#starglow)"/>
+</svg>

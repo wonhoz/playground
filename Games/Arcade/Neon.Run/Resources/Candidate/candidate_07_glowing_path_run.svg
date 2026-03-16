@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#020510"/>
+      <stop offset="100%" style="stop-color:#051020"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <linearGradient id="pathGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#0044ff;stop-opacity:0.2"/>
+      <stop offset="50%" style="stop-color:#00aaff"/>
+      <stop offset="100%" style="stop-color:#0044ff;stop-opacity:0.2"/>
+    </linearGradient>
+    <linearGradient id="pathFill" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#00aaff;stop-opacity:0.3"/>
+      <stop offset="100%" style="stop-color:#0044ff;stop-opacity:0"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Glowing path -->
+  <path d="M40 420 Q120 400 180 360 Q240 320 300 340 Q360 360 430 320" stroke="url(#pathGrad)" stroke-width="30" fill="none" opacity="0.2"/>
+  <path d="M40 420 Q120 400 180 360 Q240 320 300 340 Q360 360 430 320" stroke="#00aaff" stroke-width="4" fill="none" filter="url(#glow)"/>
+  <path d="M40 420 Q120 400 180 360 Q240 320 300 340 Q360 360 430 320" stroke="#ffffff" stroke-width="1.5" fill="none" opacity="0.6"/>
+  <!-- Path edge lines -->
+  <path d="M40 440 Q120 420 180 380 Q240 340 300 360 Q360 380 430 340" stroke="#0044ff" stroke-width="1.5" fill="none" filter="url(#glow)" opacity="0.5"/>
+  <path d="M40 400 Q120 380 180 340 Q240 300 300 320 Q360 340 430 300" stroke="#0044ff" stroke-width="1.5" fill="none" filter="url(#glow)" opacity="0.5"/>
+  <!-- Runner -->
+  <g filter="url(#glow)" transform="translate(195, 325)">
+    <circle cx="0" cy="-50" r="14" fill="none" stroke="#00aaff" stroke-width="2.5"/>
+    <line x1="0" y1="-35" x2="0" y2="5" stroke="#00aaff" stroke-width="3"/>
+    <line x1="0" y1="-20" x2="-19" y2="-2" stroke="#00aaff" stroke-width="2.5"/>
+    <line x1="0" y1="-20" x2="17" y2="-36" stroke="#0066ff" stroke-width="2.5"/>
+    <line x1="0" y1="5" x2="-14" y2="32" stroke="#00aaff" stroke-width="2.5"/>
+    <line x1="-14" y1="32" x2="-5" y2="46" stroke="#00aaff" stroke-width="2"/>
+    <line x1="0" y1="5" x2="16" y2="26" stroke="#0066ff" stroke-width="2.5"/>
+    <line x1="16" y1="26" x2="23" y2="13" stroke="#0066ff" stroke-width="2"/>
+  </g>
+  <!-- Footstep glow marks on path -->
+  <ellipse cx="140" cy="398" rx="8" ry="4" fill="#00aaff" filter="url(#glow)" opacity="0.5"/>
+  <ellipse cx="160" cy="390" rx="6" ry="3" fill="#00aaff" filter="url(#glow)" opacity="0.4"/>
+  <ellipse cx="172" cy="383" rx="5" ry="3" fill="#0066ff" filter="url(#glow)" opacity="0.3"/>
+  <!-- Stars/particles -->
+  <circle cx="350" cy="250" r="2" fill="#00aaff" filter="url(#glow)"/>
+  <circle cx="380" cy="220" r="1.5" fill="#ffffff" filter="url(#glow)"/>
+  <circle cx="410" cy="240" r="2" fill="#00aaff" filter="url(#glow)"/>
+  <circle cx="120" cy="320" r="1.5" fill="#0066ff" filter="url(#glow)"/>
+</svg>

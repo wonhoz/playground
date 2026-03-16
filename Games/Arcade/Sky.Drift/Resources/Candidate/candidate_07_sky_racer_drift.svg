@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#100020"/>
+      <stop offset="100%" style="stop-color:#200030"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <linearGradient id="racerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#dd00ff"/>
+      <stop offset="100%" style="stop-color:#ffffff"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Stars -->
+  <circle cx="100" cy="100" r="1.5" fill="#ffffff" opacity="0.6"/>
+  <circle cx="200" cy="80" r="1" fill="#dd88ff" opacity="0.7"/>
+  <circle cx="380" cy="110" r="1.5" fill="#ffffff" opacity="0.5"/>
+  <circle cx="440" cy="90" r="1" fill="#dd88ff" opacity="0.6"/>
+  <circle cx="320" cy="130" r="1" fill="#ffffff" opacity="0.5"/>
+  <circle cx="80" cy="150" r="1" fill="#ffffff" opacity="0.4"/>
+  <!-- Nebula wisps -->
+  <ellipse cx="150" cy="180" rx="80" ry="30" fill="#dd00ff" opacity="0.06" filter="url(#glow)"/>
+  <ellipse cx="380" cy="350" rx="90" ry="35" fill="#8800ff" opacity="0.05" filter="url(#glow)"/>
+  <!-- Racing gate -->
+  <path d="M150 200 L150 320" stroke="#dd00ff" stroke-width="3" filter="url(#glow)" opacity="0.7"/>
+  <path d="M362 200 L362 320" stroke="#dd00ff" stroke-width="3" filter="url(#glow)" opacity="0.7"/>
+  <path d="M148 200 L364 200" stroke="#dd00ff" stroke-width="2" filter="url(#glow)" opacity="0.7"/>
+  <path d="M148 320 L364 320" stroke="#dd00ff" stroke-width="2" filter="url(#glow)" opacity="0.5"/>
+  <!-- Checkered top bar decoration -->
+  <rect x="148" y="196" width="18" height="8" fill="#dd00ff" opacity="0.8"/>
+  <rect x="184" y="196" width="18" height="8" fill="#dd00ff" opacity="0.8"/>
+  <rect x="220" y="196" width="18" height="8" fill="#dd00ff" opacity="0.8"/>
+  <rect x="256" y="196" width="18" height="8" fill="#dd00ff" opacity="0.8"/>
+  <rect x="292" y="196" width="18" height="8" fill="#dd00ff" opacity="0.8"/>
+  <rect x="328" y="196" width="18" height="8" fill="#dd00ff" opacity="0.8"/>
+  <!-- Racer plane speeding through gate -->
+  <g transform="translate(260, 260)" filter="url(#glow)">
+    <path d="M-62 0 Q-42 -8 0 -8 Q50 -8 72 0 Q50 8 0 8 Q-42 8 -62 0 Z" fill="url(#racerGrad)"/>
+    <path d="M-5 -8 L-32 -40 L20 -40 L28 -8 Z" fill="#dd00ff"/>
+    <path d="M-5 8 L-32 40 L20 40 L28 8 Z" fill="#aa00cc"/>
+    <path d="M-52 0 L-70 -24 L-44 -8 Z" fill="#bb00ee"/>
+    <path d="M-52 0 L-68 16 L-44 8 Z" fill="#bb00ee"/>
+    <ellipse cx="44" cy="0" rx="15" ry="6" fill="#8800ff" opacity="0.9"/>
+  </g>
+  <!-- Drift trail through gate -->
+  <path d="M70 260 Q155 262 244 260" stroke="#dd00ff" stroke-width="5" fill="none" filter="url(#glow)" stroke-linecap="round" opacity="0.8"/>
+  <path d="M70 264 Q153 267 240 264" stroke="#aa00cc" stroke-width="3" fill="none" filter="url(#glow)" stroke-linecap="round" opacity="0.5"/>
+</svg>

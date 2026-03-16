@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#001B1E"/>
+      <stop offset="100%" stop-color="#00363A"/>
+    </linearGradient>
+    <linearGradient id="key" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#00F5FF"/>
+      <stop offset="100%" stop-color="#0096C7"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Telegraph key base -->
+  <rect x="140" y="300" width="232" height="20" rx="6" fill="#00F5FF" opacity="0.3"/>
+  <rect x="180" y="290" width="152" height="14" rx="6" fill="url(#key)"/>
+  <!-- Key lever -->
+  <rect x="220" y="255" width="72" height="38" rx="8" fill="url(#key)" opacity="0.85"/>
+  <!-- Key knob -->
+  <circle cx="256" cy="248" r="20" fill="url(#key)" filter="url(#glow)"/>
+  <!-- Signal wire -->
+  <line x1="256" y1="228" x2="256" y2="150" stroke="#00F5FF" stroke-width="3" stroke-dasharray="8,4" opacity="0.7"/>
+  <!-- Morse output -->
+  <circle cx="160" cy="180" r="14" fill="#00F5FF" filter="url(#glow)"/>
+  <rect x="186" y="166" width="36" height="28" rx="6" fill="#00F5FF" filter="url(#glow)"/>
+  <circle cx="242" cy="180" r="14" fill="#00F5FF" filter="url(#glow)"/>
+  <rect x="266" y="166" width="36" height="28" rx="6" fill="#00F5FF" filter="url(#glow)"/>
+  <rect x="316" y="166" width="36" height="28" rx="6" fill="#00F5FF" filter="url(#glow)"/>
+  <!-- Speed arrows -->
+  <path d="M 100 360 L 130 350 L 120 370 Z" fill="#00F5FF" opacity="0.6"/>
+  <path d="M 130 360 L 160 350 L 150 370 Z" fill="#00F5FF" opacity="0.4"/>
+  <path d="M 160 360 L 190 350 L 180 370 Z" fill="#00F5FF" opacity="0.2"/>
+  <!-- Title -->
+  <text x="256" y="430" text-anchor="middle" font-family="monospace" font-size="22" font-weight="bold" fill="#00F5FF" filter="url(#glow)">MORSE.RUN</text>
+  <text x="256" y="460" text-anchor="middle" font-family="monospace" font-size="13" fill="#00F5FF" opacity="0.6">dit · dah · dit dit</text>
+</svg>

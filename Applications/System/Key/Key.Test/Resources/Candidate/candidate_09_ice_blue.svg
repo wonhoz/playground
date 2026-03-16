@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E8F4FD"/>
+      <stop offset="100%" stop-color="#C8E6FA"/>
+    </linearGradient>
+    <linearGradient id="keyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#B8D8F0"/>
+    </linearGradient>
+    <linearGradient id="activeKey" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#4FC3F7"/>
+      <stop offset="100%" stop-color="#0288D1"/>
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="3" stdDeviation="5" flood-color="#0288D130"/>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Snowflake / ice crystal top -->
+  <g transform="translate(256,110)">
+    <line x1="0" y1="-50" x2="0" y2="50" stroke="#4FC3F7" stroke-width="3"/>
+    <line x1="-50" y1="0" x2="50" y2="0" stroke="#4FC3F7" stroke-width="3"/>
+    <line x1="-35" y1="-35" x2="35" y2="35" stroke="#4FC3F7" stroke-width="3"/>
+    <line x1="35" y1="-35" x2="-35" y2="35" stroke="#4FC3F7" stroke-width="3"/>
+    <!-- Branch ticks -->
+    <line x1="-10" y1="-30" x2="-20" y2="-40" stroke="#4FC3F7" stroke-width="2"/>
+    <line x1="10" y1="-30" x2="20" y2="-40" stroke="#4FC3F7" stroke-width="2"/>
+    <line x1="-10" y1="30" x2="-20" y2="40" stroke="#4FC3F7" stroke-width="2"/>
+    <line x1="10" y1="30" x2="20" y2="40" stroke="#4FC3F7" stroke-width="2"/>
+    <line x1="-30" y1="-10" x2="-40" y2="-20" stroke="#4FC3F7" stroke-width="2"/>
+    <line x1="-30" y1="10" x2="-40" y2="20" stroke="#4FC3F7" stroke-width="2"/>
+    <line x1="30" y1="-10" x2="40" y2="-20" stroke="#4FC3F7" stroke-width="2"/>
+    <line x1="30" y1="10" x2="40" y2="20" stroke="#4FC3F7" stroke-width="2"/>
+    <circle cx="0" cy="0" r="8" fill="#0288D1"/>
+  </g>
+  <!-- Keyboard -->
+  <rect x="72" y="210" width="368" height="180" rx="16" fill="url(#keyGrad)" filter="url(#shadow)" stroke="#B0D4EC" stroke-width="1.5"/>
+  <!-- Keys row 1 -->
+  <rect x="88" y="226" width="48" height="42" rx="8" fill="url(#keyGrad)" stroke="#B0D4EC" stroke-width="1" filter="url(#shadow)"/>
+  <rect x="144" y="226" width="48" height="42" rx="8" fill="url(#keyGrad)" stroke="#B0D4EC" stroke-width="1" filter="url(#shadow)"/>
+  <rect x="200" y="226" width="48" height="42" rx="8" fill="url(#activeKey)" stroke="#4FC3F7" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="256" y="226" width="48" height="42" rx="8" fill="url(#keyGrad)" stroke="#B0D4EC" stroke-width="1" filter="url(#shadow)"/>
+  <rect x="312" y="226" width="48" height="42" rx="8" fill="url(#keyGrad)" stroke="#B0D4EC" stroke-width="1" filter="url(#shadow)"/>
+  <rect x="368" y="226" width="56" height="42" rx="8" fill="url(#keyGrad)" stroke="#B0D4EC" stroke-width="1" filter="url(#shadow)"/>
+  <!-- Key labels row 1 -->
+  <text x="112" y="253" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#5B9EC9">Q</text>
+  <text x="168" y="253" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#5B9EC9">W</text>
+  <text x="224" y="253" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="white" font-weight="bold">E</text>
+  <text x="280" y="253" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#5B9EC9">R</text>
+  <text x="336" y="253" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#5B9EC9">T</text>
+  <!-- Row 2 -->
+  <rect x="88" y="278" width="48" height="42" rx="8" fill="url(#keyGrad)" stroke="#B0D4EC" stroke-width="1" filter="url(#shadow)"/>
+  <rect x="144" y="278" width="48" height="42" rx="8" fill="url(#keyGrad)" stroke="#B0D4EC" stroke-width="1" filter="url(#shadow)"/>
+  <rect x="200" y="278" width="48" height="42" rx="8" fill="url(#keyGrad)" stroke="#B0D4EC" stroke-width="1" filter="url(#shadow)"/>
+  <rect x="256" y="278" width="48" height="42" rx="8" fill="url(#keyGrad)" stroke="#B0D4EC" stroke-width="1" filter="url(#shadow)"/>
+  <rect x="312" y="278" width="112" height="42" rx="8" fill="url(#keyGrad)" stroke="#B0D4EC" stroke-width="1" filter="url(#shadow)"/>
+  <text x="112" y="305" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#5B9EC9">A</text>
+  <text x="168" y="305" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#5B9EC9">S</text>
+  <text x="224" y="305" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#5B9EC9">D</text>
+  <text x="280" y="305" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#5B9EC9">F</text>
+  <text x="368" y="305" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#5B9EC9">ENTER</text>
+  <!-- Spacebar -->
+  <rect x="88" y="330" width="320" height="42" rx="8" fill="url(#keyGrad)" stroke="#B0D4EC" stroke-width="1" filter="url(#shadow)"/>
+  <!-- Bottom status -->
+  <text x="256" y="446" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#0288D1" font-weight="600">ICE KEY TESTER</text>
+</svg>

@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A1A2E"/>
+      <stop offset="100%" stop-color="#16213E"/>
+    </linearGradient>
+    <linearGradient id="shield" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3B82F6"/>
+      <stop offset="100%" stop-color="#1D4ED8"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Shield shape -->
+  <path d="M256,80 L400,140 L400,270 Q400,370 256,430 Q112,370 112,270 L112,140 Z" fill="url(#shield)" opacity="0.85"/>
+  <path d="M256,100 L384,155 L384,270 Q384,358 256,412 Q128,358 128,270 L128,155 Z" fill="none" stroke="#60A5FA" stroke-width="2" opacity="0.5"/>
+  <!-- API text in shield -->
+  <text x="256" y="210" font-family="monospace" font-weight="bold" font-size="42" fill="white" text-anchor="middle">API</text>
+  <!-- Lock icon in center -->
+  <rect x="226" y="260" width="60" height="46" rx="6" fill="white" opacity="0.9"/>
+  <path d="M236,260 L236,242 Q236,222 256,222 Q276,222 276,242 L276,260" fill="none" stroke="white" stroke-width="6" stroke-linecap="round"/>
+  <circle cx="256" cy="283" r="8" fill="#1D4ED8"/>
+  <!-- Status dots -->
+  <circle cx="190" cy="350" r="8" fill="#10B981"/>
+  <circle cx="256" cy="360" r="8" fill="#10B981"/>
+  <circle cx="322" cy="350" r="8" fill="#10B981"/>
+  <text x="256" y="470" font-family="monospace" font-size="18" fill="#3B82F6" text-anchor="middle">Secure API Probe</text>
+</svg>

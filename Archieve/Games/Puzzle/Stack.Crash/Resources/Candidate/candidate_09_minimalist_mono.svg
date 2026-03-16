@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#F8F8F8"/>
+      <stop offset="100%" stop-color="#E8E8E8"/>
+    </linearGradient>
+    <linearGradient id="dark1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#2C2C2C"/>
+      <stop offset="100%" stop-color="#1A1A1A"/>
+    </linearGradient>
+    <linearGradient id="dark2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#444444"/>
+      <stop offset="100%" stop-color="#2A2A2A"/>
+    </linearGradient>
+    <linearGradient id="dark3" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#5A5A5A"/>
+      <stop offset="100%" stop-color="#3A3A3A"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FF3333"/>
+      <stop offset="100%" stop-color="#FF0000"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Ground line -->
+  <rect x="72" y="422" width="368" height="4" fill="#CCCCCC"/>
+  <!-- Blocks - clean minimal -->
+  <rect x="112" y="340" width="288" height="58" rx="6" fill="url(#dark1)"/>
+  <rect x="144" y="278" width="224" height="58" rx="6" fill="url(#dark2)"/>
+  <rect x="184" y="216" width="144" height="58" rx="6" fill="url(#dark3)"/>
+  <!-- Red accent accent block -->
+  <rect x="216" y="154" width="80" height="58" rx="6" fill="url(#accent)"/>
+  <!-- Falling block - tilted, outlined only -->
+  <g transform="translate(320, 130) rotate(-30)">
+    <rect x="-44" y="-24" width="88" height="48" rx="6" fill="none" stroke="#2C2C2C" stroke-width="3"/>
+    <!-- X mark inside -->
+    <line x1="-20" y1="-10" x2="20" y2="10" stroke="#FF0000" stroke-width="2.5"/>
+    <line x1="20" y1="-10" x2="-20" y2="10" stroke="#FF0000" stroke-width="2.5"/>
+  </g>
+  <!-- Impact mark -->
+  <circle cx="320" cy="130" r="28" fill="none" stroke="#FF0000" stroke-width="2" opacity="0.3"/>
+  <circle cx="320" cy="130" r="16" fill="none" stroke="#FF0000" stroke-width="1.5" opacity="0.3"/>
+  <!-- Arrow indicating fall -->
+  <line x1="320" y1="78" x2="320" y2="108" stroke="#2C2C2C" stroke-width="2.5"/>
+  <polygon points="320,116 312,100 328,100" fill="#2C2C2C"/>
+  <!-- Small dots / debris -->
+  <circle cx="354" cy="108" r="4" fill="#2C2C2C"/>
+  <circle cx="372" cy="124" r="3" fill="#FF0000"/>
+  <circle cx="340" cy="90" r="3" fill="#555555"/>
+</svg>

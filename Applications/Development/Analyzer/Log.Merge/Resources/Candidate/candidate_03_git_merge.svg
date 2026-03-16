@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0d1117"/>
+      <stop offset="100%" stop-color="#161b22"/>
+    </linearGradient>
+    <linearGradient id="main" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#58a6ff"/>
+      <stop offset="100%" stop-color="#388bfd"/>
+    </linearGradient>
+    <linearGradient id="branch1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#3fb950"/>
+      <stop offset="100%" stop-color="#2ea043"/>
+    </linearGradient>
+    <linearGradient id="branch2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#f78166"/>
+      <stop offset="100%" stop-color="#da3633"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- 메인 브랜치 (중앙) -->
+  <line x1="256" y1="80" x2="256" y2="432" stroke="url(#main)" stroke-width="8"/>
+  <!-- 브랜치 1 (왼쪽) -->
+  <path d="M256 160 Q180 200 160 280 Q180 360 256 380" fill="none" stroke="url(#branch1)" stroke-width="6"/>
+  <!-- 브랜치 2 (오른쪽) -->
+  <path d="M256 200 Q340 240 360 310 Q340 380 256 390" fill="none" stroke="url(#branch2)" stroke-width="6"/>
+  <!-- 커밋 노드들 (메인) -->
+  <circle cx="256" cy="110" r="14" fill="url(#main)" stroke="#0d1117" stroke-width="4"/>
+  <circle cx="256" cy="200" r="14" fill="url(#main)" stroke="#0d1117" stroke-width="4"/>
+  <circle cx="256" cy="310" r="14" fill="url(#main)" stroke="#0d1117" stroke-width="4"/>
+  <circle cx="256" cy="410" r="14" fill="url(#main)" stroke="#0d1117" stroke-width="4"/>
+  <!-- 커밋 노드들 (브랜치1) -->
+  <circle cx="175" cy="240" r="12" fill="url(#branch1)" stroke="#0d1117" stroke-width="3"/>
+  <circle cx="162" cy="295" r="12" fill="url(#branch1)" stroke="#0d1117" stroke-width="3"/>
+  <!-- 커밋 노드들 (브랜치2) -->
+  <circle cx="348" cy="265" r="12" fill="url(#branch2)" stroke="#0d1117" stroke-width="3"/>
+  <circle cx="358" cy="320" r="12" fill="url(#branch2)" stroke="#0d1117" stroke-width="3"/>
+  <!-- 병합 포인트 강조 -->
+  <circle cx="256" cy="410" r="20" fill="none" stroke="#ffa657" stroke-width="5"/>
+</svg>

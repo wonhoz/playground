@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1a1a2e"/>
+      <stop offset="100%" stop-color="#16213e"/>
+    </linearGradient>
+    <linearGradient id="tablet" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2a2a4a"/>
+      <stop offset="100%" stop-color="#1a1a3a"/>
+    </linearGradient>
+    <linearGradient id="screen" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0a1a3a"/>
+      <stop offset="100%" stop-color="#0a0a2a"/>
+    </linearGradient>
+    <linearGradient id="stylus" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#e0e0e0"/>
+      <stop offset="100%" stop-color="#a0a0a0"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Drawing tablet body -->
+  <rect x="60" y="100" width="320" height="240" rx="18" fill="url(#tablet)"/>
+  <rect x="76" y="116" width="288" height="208" rx="10" fill="url(#screen)"/>
+  <!-- Drawing on screen -->
+  <path d="M96,200 Q150,170 220,185 Q290,200 330,175" fill="none" stroke="#7b68ee" stroke-width="5" stroke-linecap="round" opacity="0.9"/>
+  <path d="M96,230 Q160,220 240,235 Q300,248 350,228" fill="none" stroke="#48d1cc" stroke-width="4" stroke-linecap="round" opacity="0.8"/>
+  <path d="M110,260 Q180,250 250,265 Q310,278 350,260" fill="none" stroke="#ff7f7f" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
+  <!-- Tablet buttons -->
+  <rect x="74" y="338" width="8" height="28" rx="4" fill="#4a4a6a"/>
+  <rect x="88" y="338" width="8" height="28" rx="4" fill="#4a4a6a"/>
+  <circle cx="356" cy="352" r="10" fill="#3a3a5a"/>
+  <!-- Stylus -->
+  <g transform="translate(390,260) rotate(-45)">
+    <rect x="-8" y="-120" width="16" height="90" rx="6" fill="url(#stylus)"/>
+    <rect x="-6" y="-130" width="12" height="16" rx="3" fill="#888"/>
+    <polygon points="-8,-30 8,-30 4,10 -4,10" fill="#c0c0c0"/>
+    <polygon points="-4,10 4,10 1,30 -1,30" fill="#333"/>
+  </g>
+  <!-- Wireless cast signal below -->
+  <path d="M240,385 Q256,372 272,385" fill="none" stroke="#7b68ee" stroke-width="4" stroke-linecap="round" opacity="0.8"/>
+  <path d="M220,400 Q256,382 292,400" fill="none" stroke="#7b68ee" stroke-width="3" stroke-linecap="round" opacity="0.6"/>
+  <path d="M200,416 Q256,394 312,416" fill="none" stroke="#7b68ee" stroke-width="2" stroke-linecap="round" opacity="0.4"/>
+  <circle cx="256" cy="370" r="5" fill="#7b68ee" opacity="0.9"/>
+  <!-- Screen cast monitor icon -->
+  <rect x="420" y="80" width="60" height="46" rx="6" fill="none" stroke="#48d1cc" stroke-width="3" opacity="0.7"/>
+  <rect x="435" y="126" width="30" height="6" rx="3" fill="#48d1cc" opacity="0.5"/>
+  <line x1="350" y1="200" x2="420" y2="120" stroke="#48d1cc" stroke-width="2" stroke-dasharray="6,4" opacity="0.5"/>
+</svg>

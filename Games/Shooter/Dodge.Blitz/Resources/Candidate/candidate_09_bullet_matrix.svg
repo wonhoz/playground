@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#001200"/>
+      <stop offset="100%" stop-color="#002000"/>
+    </linearGradient>
+    <radialGradient id="heroGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#00FF41" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#00FF41" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="matrixGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#00FF41"/>
+      <stop offset="100%" stop-color="#008F11"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Matrix rain columns -->
+  <text x="65" y="100" font-family="monospace" font-size="12" fill="#00FF41" opacity="0.6">1</text>
+  <text x="65" y="120" font-family="monospace" font-size="12" fill="#00FF41" opacity="0.5">0</text>
+  <text x="65" y="140" font-family="monospace" font-size="12" fill="#00FF41" opacity="0.4">1</text>
+  <text x="115" y="80" font-family="monospace" font-size="12" fill="#00FF41" opacity="0.6">0</text>
+  <text x="115" y="100" font-family="monospace" font-size="12" fill="#00FF41" opacity="0.5">1</text>
+  <text x="165" y="90" font-family="monospace" font-size="12" fill="#00FF41" opacity="0.6">1</text>
+  <text x="165" y="110" font-family="monospace" font-size="12" fill="#00FF41" opacity="0.4">0</text>
+  <text x="365" y="95" font-family="monospace" font-size="12" fill="#00FF41" opacity="0.5">0</text>
+  <text x="365" y="115" font-family="monospace" font-size="12" fill="#00FF41" opacity="0.4">1</text>
+  <text x="415" y="80" font-family="monospace" font-size="12" fill="#00FF41" opacity="0.6">1</text>
+  <text x="415" y="100" font-family="monospace" font-size="12" fill="#00FF41" opacity="0.5">0</text>
+  <text x="465" y="90" font-family="monospace" font-size="12" fill="#00FF41" opacity="0.6">1</text>
+  <!-- Bullet grid (matrix) -->
+  <!-- Row 1 -->
+  <circle cx="130" cy="160" r="10" fill="#00FF41" opacity="0.7"/>
+  <circle cx="175" cy="160" r="10" fill="#00FF41" opacity="0.7"/>
+  <circle cx="220" cy="160" r="10" fill="#00FF41" opacity="0.7"/>
+  <circle cx="292" cy="160" r="10" fill="#00FF41" opacity="0.7"/>
+  <circle cx="337" cy="160" r="10" fill="#00FF41" opacity="0.7"/>
+  <circle cx="382" cy="160" r="10" fill="#00FF41" opacity="0.7"/>
+  <!-- Row 2 -->
+  <circle cx="107" cy="210" r="10" fill="#00DD38" opacity="0.6"/>
+  <circle cx="152" cy="210" r="10" fill="#00DD38" opacity="0.6"/>
+  <circle cx="197" cy="210" r="10" fill="#00DD38" opacity="0.6"/>
+  <circle cx="315" cy="210" r="10" fill="#00DD38" opacity="0.6"/>
+  <circle cx="360" cy="210" r="10" fill="#00DD38" opacity="0.6"/>
+  <circle cx="405" cy="210" r="10" fill="#00DD38" opacity="0.6"/>
+  <!-- Row 3 (sparse) -->
+  <circle cx="130" cy="265" r="10" fill="#00BB2F" opacity="0.5"/>
+  <circle cx="220" cy="265" r="10" fill="#00BB2F" opacity="0.5"/>
+  <circle cx="292" cy="265" r="10" fill="#00BB2F" opacity="0.5"/>
+  <circle cx="382" cy="265" r="10" fill="#00BB2F" opacity="0.5"/>
+  <!-- Hero player -->
+  <ellipse cx="256" cy="370" rx="60" ry="30" fill="url(#heroGlow)"/>
+  <polygon points="256,310 228,375 256,358 284,375" fill="#00FF41" stroke="#80FF80" stroke-width="2"/>
+  <ellipse cx="256" cy="380" rx="12" ry="20" fill="#AAFFAA" opacity="0.8"/>
+  <!-- Trails from hero dodging -->
+  <line x1="230" y1="360" x2="200" y2="340" stroke="#00FF41" stroke-width="2" stroke-dasharray="4,4" opacity="0.5"/>
+  <line x1="230" y1="370" x2="195" y2="375" stroke="#00FF41" stroke-width="1.5" stroke-dasharray="3,4" opacity="0.3"/>
+</svg>

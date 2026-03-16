@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a0a00"/>
+      <stop offset="100%" stop-color="#331500"/>
+    </linearGradient>
+    <linearGradient id="fire" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#e64a19"/>
+      <stop offset="60%" stop-color="#ff9800"/>
+      <stop offset="100%" stop-color="#fff9c4" stop-opacity="0.8"/>
+    </linearGradient>
+    <linearGradient id="link" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffcc80"/>
+      <stop offset="100%" stop-color="#ff6d00"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- forge fire -->
+  <path d="M170 395 Q160 340 185 300 Q178 340 205 318 Q195 295 218 270 Q215 305 240 285 Q235 255 258 235 Q262 268 285 248 Q278 275 302 260 Q295 288 320 270 Q315 300 340 285 Q332 318 355 300 Q348 345 340 395 Z" fill="url(#fire)" opacity="0.9"/>
+  <!-- chain link 1 being forged on fire -->
+  <path d="M155 250 Q155 200 205 200 L255 200 Q305 200 305 250 Q305 300 255 300 L205 300 Q155 300 155 250 Z" fill="none" stroke="url(#link)" stroke-width="32"/>
+  <!-- chain link 2 interlocked -->
+  <path d="M255 250 Q255 200 305 200 L355 200 Q405 200 405 250 Q405 300 355 300 L305 300 Q255 300 255 250 Z" fill="none" stroke="#ff8f00" stroke-width="32"/>
+  <!-- heat glow -->
+  <ellipse cx="256" cy="290" rx="110" ry="30" fill="#ff5722" opacity="0.2"/>
+  <!-- sparks -->
+  <circle cx="230" cy="260" r="5" fill="#ffe082"/>
+  <circle cx="280" cy="255" r="4" fill="#fff9c4"/>
+  <line x1="220" y1="252" x2="210" y2="240" stroke="#ffe082" stroke-width="2"/>
+  <line x1="260" y1="248" x2="258" y2="234" stroke="#fff9c4" stroke-width="2"/>
+</svg>

@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FF6B6B"/>
+      <stop offset="50%" style="stop-color:#C0392B"/>
+      <stop offset="100%" style="stop-color:#7B241C"/>
+    </linearGradient>
+    <linearGradient id="panel" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFFFFF;stop-opacity:0.15"/>
+      <stop offset="100%" style="stop-color:#FFFFFF;stop-opacity:0.05"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Camera body -->
+  <rect x="100" y="170" width="312" height="220" rx="20" fill="url(#panel)" stroke="white" stroke-width="3" opacity="0.8"/>
+  <!-- Camera lens -->
+  <circle cx="256" cy="280" r="75" fill="none" stroke="white" stroke-width="4" opacity="0.7"/>
+  <circle cx="256" cy="280" r="55" fill="white" opacity="0.1"/>
+  <circle cx="256" cy="280" r="35" fill="white" opacity="0.15"/>
+  <circle cx="256" cy="280" r="15" fill="white" opacity="0.8"/>
+  <!-- Viewfinder bump -->
+  <rect x="196" y="145" width="120" height="30" rx="10" fill="url(#panel)" stroke="white" stroke-width="2.5" opacity="0.8"/>
+  <!-- Terminal brackets on sides -->
+  <text x="125" y="265" font-family="monospace" font-size="28" fill="white" opacity="0.9">[</text>
+  <text x="368" y="265" font-family="monospace" font-size="28" fill="white" opacity="0.9">]</text>
+  <!-- Snap indicator -->
+  <circle cx="378" cy="200" r="12" fill="#FFEB3B"/>
+  <!-- Flash -->
+  <path d="M260 90 L245 130 L265 130 L248 170 L285 120 L262 120 L278 90 Z" fill="#FFEB3B" opacity="0.9"/>
+</svg>

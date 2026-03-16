@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a1628"/>
+      <stop offset="100%" style="stop-color:#1a2a40"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Countdown sequence boxes -->
+  <!-- T-5 -->
+  <rect x="88" y="120" width="68" height="68" rx="12" fill="#1a3a5c" stroke="#37474f" stroke-width="2"/>
+  <line x1="88" y1="174" x2="156" y2="174" stroke="#00e5ff" stroke-width="3" opacity="0.7"/>
+  <!-- T-4 -->
+  <rect x="176" y="120" width="68" height="68" rx="12" fill="#1a3a5c" stroke="#37474f" stroke-width="2"/>
+  <line x1="176" y1="174" x2="244" y2="174" stroke="#40c4ff" stroke-width="3" opacity="0.7"/>
+  <!-- T-3 -->
+  <rect x="264" y="120" width="68" height="68" rx="12" fill="#1a3a5c" stroke="#37474f" stroke-width="2"/>
+  <line x1="264" y1="174" x2="332" y2="174" stroke="#69f0ae" stroke-width="3" opacity="0.7"/>
+  <!-- T-2 -->
+  <rect x="352" y="120" width="68" height="68" rx="12" fill="#1a3a5c" stroke="#37474f" stroke-width="2"/>
+  <!-- T-1 highlight -->
+  <rect x="88" y="220" width="68" height="68" rx="12" fill="#1a3a5c" stroke="#ffd740" stroke-width="2" filter="url(#glow)"/>
+  <line x1="88" y1="274" x2="156" y2="274" stroke="#ffd740" stroke-width="3" opacity="0.8"/>
+  <!-- T-0 LAUNCH highlight -->
+  <rect x="176" y="220" width="156" height="68" rx="12" fill="#0d47a1" stroke="#00e5ff" stroke-width="3" filter="url(#glow)"/>
+  <!-- Launch arrow -->
+  <path d="M254 252 L288 252 M278 242 L292 252 L278 262" stroke="#00e5ff" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)"/>
+  <!-- Check marks for completed phases -->
+  <path d="M102 154 L112 164 L130 144" stroke="#69f0ae" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M190 154 L200 164 L218 144" stroke="#69f0ae" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M278 154 L288 164 L306 144" stroke="#69f0ae" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M366 154 L376 164 L394 144" stroke="#ffd740" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+  <!-- Progress connecting line -->
+  <path d="M156 154 L176 154" stroke="#37474f" stroke-width="2" opacity="0.5"/>
+  <path d="M244 154 L264 154" stroke="#37474f" stroke-width="2" opacity="0.5"/>
+  <path d="M332 154 L352 154" stroke="#37474f" stroke-width="2" opacity="0.5"/>
+  <!-- System status below -->
+  <rect x="88" y="320" width="336" height="130" rx="14" fill="#0a1e35" stroke="#1565c0" stroke-width="2"/>
+  <rect x="100" y="335" width="200" height="10" rx="5" fill="#1565c0" opacity="0.5"/>
+  <rect x="100" y="355" width="150" height="10" rx="5" fill="#1565c0" opacity="0.4"/>
+  <rect x="100" y="375" width="250" height="10" rx="5" fill="#00e5ff" opacity="0.5" filter="url(#glow)"/>
+  <rect x="100" y="395" width="100" height="10" rx="5" fill="#69f0ae" opacity="0.4"/>
+  <circle cx="390" cy="385" r="18" fill="#0d47a1" stroke="#00e5ff" stroke-width="2" filter="url(#glow)"/>
+  <path d="M382 385 L390 377 L398 385 L390 393 Z" fill="#00e5ff" opacity="0.9"/>
+</svg>

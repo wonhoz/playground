@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#102030"/>
+      <stop offset="100%" style="stop-color:#0a1520"/>
+    </linearGradient>
+    <linearGradient id="flow" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#00e5ff"/>
+      <stop offset="100%" style="stop-color:#0091ea"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Flow pipeline -->
+  <line x1="256" y1="100" x2="256" y2="420" stroke="#1a3a5c" stroke-width="6"/>
+  <!-- Flow liquid -->
+  <line x1="256" y1="100" x2="256" y2="420" stroke="url(#flow)" stroke-width="4" stroke-dasharray="30,10" opacity="0.7" filter="url(#glow)"/>
+  <!-- Phase nodes -->
+  <!-- Power/UEFI -->
+  <rect x="156" y="100" width="200" height="50" rx="10" fill="#0d2a4a" stroke="#00e5ff" stroke-width="2" filter="url(#glow)"/>
+  <circle cx="256" cy="125" r="8" fill="#00e5ff" filter="url(#glow)"/>
+  <!-- Bootloader -->
+  <rect x="156" y="175" width="200" height="50" rx="10" fill="#0d2a4a" stroke="#40c4ff" stroke-width="2"/>
+  <circle cx="256" cy="200" r="8" fill="#40c4ff" filter="url(#glow)"/>
+  <!-- Kernel init -->
+  <rect x="156" y="250" width="200" height="50" rx="10" fill="#0d2a4a" stroke="#69f0ae" stroke-width="2"/>
+  <circle cx="256" cy="275" r="8" fill="#69f0ae" filter="url(#glow)"/>
+  <!-- Services -->
+  <rect x="156" y="325" width="200" height="50" rx="10" fill="#0d2a4a" stroke="#ea80fc" stroke-width="2"/>
+  <circle cx="256" cy="350" r="8" fill="#ea80fc" filter="url(#glow)"/>
+  <!-- Desktop ready -->
+  <rect x="156" y="400" width="200" height="50" rx="10" fill="#0d2a4a" stroke="#ffd740" stroke-width="2.5" filter="url(#glow)"/>
+  <circle cx="256" cy="425" r="10" fill="#ffd740" filter="url(#glow)"/>
+  <!-- Arrows -->
+  <polygon points="249,168 256,180 263,168" fill="#00e5ff" opacity="0.8"/>
+  <polygon points="249,243 256,255 263,243" fill="#40c4ff" opacity="0.8"/>
+  <polygon points="249,318 256,330 263,318" fill="#69f0ae" opacity="0.8"/>
+  <polygon points="249,393 256,405 263,393" fill="#ea80fc" opacity="0.8"/>
+  <!-- Duration indicators (right side) -->
+  <line x1="365" y1="125" x2="430" y2="125" stroke="#37474f" stroke-width="1.5"/>
+  <circle cx="430" cy="125" r="4" fill="#00e5ff" opacity="0.7"/>
+  <line x1="365" y1="200" x2="410" y2="200" stroke="#37474f" stroke-width="1.5"/>
+  <circle cx="410" cy="200" r="4" fill="#40c4ff" opacity="0.7"/>
+  <line x1="365" y1="275" x2="440" y2="275" stroke="#37474f" stroke-width="1.5"/>
+  <circle cx="440" cy="275" r="4" fill="#69f0ae" opacity="0.7"/>
+</svg>

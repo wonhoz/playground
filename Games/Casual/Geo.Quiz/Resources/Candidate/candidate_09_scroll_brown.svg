@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4E342E"/>
+      <stop offset="100%" style="stop-color:#3E2723"/>
+    </linearGradient>
+    <linearGradient id="scrollgrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFECB3"/>
+      <stop offset="100%" style="stop-color:#FFD54F"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Scroll / parchment -->
+  <rect x="90" y="120" width="332" height="272" rx="8" fill="url(#scrollgrad)"/>
+  <!-- Scroll rolls top/bottom -->
+  <ellipse cx="256" cy="120" rx="166" ry="22" fill="#A1887F"/>
+  <ellipse cx="256" cy="392" rx="166" ry="22" fill="#A1887F"/>
+  <ellipse cx="256" cy="120" rx="166" ry="15" fill="#BCAAA4"/>
+  <ellipse cx="256" cy="392" rx="166" ry="15" fill="#BCAAA4"/>
+  <!-- Map lines on scroll -->
+  <path d="M130,180 Q200,165 256,175 Q312,185 382,168" fill="none" stroke="#8D6E63" stroke-width="2.5" stroke-dasharray="6,4"/>
+  <path d="M130,220 Q190,210 256,218 Q322,226 382,212" fill="none" stroke="#8D6E63" stroke-width="2.5" stroke-dasharray="6,4"/>
+  <!-- Map contour on scroll -->
+  <path d="M160,240 Q195,225 230,238 Q248,230 260,240 Q278,248 265,262 Q248,272 228,265 Q205,270 185,258Z" fill="#A5D6A7" opacity="0.7"/>
+  <!-- Location pin on scroll -->
+  <path d="M295,225 C283,225 272,236 272,248 C272,264 295,290 295,290 C295,290 318,264 318,248 C318,236 307,225 295,225Z" fill="#EF5350" stroke="#C62828" stroke-width="2"/>
+  <circle cx="295" cy="248" r="9" fill="#FFCDD2"/>
+  <!-- Question mark -->
+  <text x="256" y="366" text-anchor="middle" font-family="Georgia,serif" font-size="58" font-weight="bold" fill="#4E342E">?</text>
+</svg>

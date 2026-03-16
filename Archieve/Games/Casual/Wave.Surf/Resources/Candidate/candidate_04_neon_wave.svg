@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#080818"/>
+      <stop offset="100%" stop-color="#100820"/>
+    </linearGradient>
+    <linearGradient id="nwave" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00E5FF"/>
+      <stop offset="50%" stop-color="#E040FB"/>
+      <stop offset="100%" stop-color="#00E5FF"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <path d="M40 220 Q90 160 140 220 Q190 280 240 220 Q290 160 340 220 Q390 280 440 220 Q470 185 500 200" stroke="url(#nwave)" stroke-width="14" fill="none" stroke-linecap="round" filter="url(#glow)"/>
+  <path d="M40 270 Q90 210 140 270 Q190 330 240 270 Q290 210 340 270 Q390 330 440 270 Q470 235 500 250" stroke="url(#nwave)" stroke-width="8" fill="none" stroke-linecap="round" opacity="0.6"/>
+  <path d="M40 320 Q90 260 140 320 Q190 380 240 320 Q290 260 340 320 Q390 380 440 320 Q470 285 500 300" stroke="url(#nwave)" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.3"/>
+  <ellipse cx="280" cy="202" rx="38" ry="22" fill="#E040FB" opacity="0.8" transform="rotate(-25 280 202)" filter="url(#glow)"/>
+  <rect x="272" y="172" width="8" height="55" rx="4" fill="#00E5FF" opacity="0.9"/>
+</svg>

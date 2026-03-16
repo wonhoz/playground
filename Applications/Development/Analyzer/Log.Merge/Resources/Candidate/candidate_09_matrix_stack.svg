@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0A0F1E"/>
+      <stop offset="100%" stop-color="#0F1A2A"/>
+    </linearGradient>
+    <linearGradient id="stackGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00FFFF"/>
+      <stop offset="100%" stop-color="#0044FF"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Isometric stacked layers (log files as layers) -->
+  <!-- Layer 3 (top) -->
+  <g transform="translate(0 -60)">
+    <path d="M256 180 L380 240 L256 300 L132 240 Z" fill="#002244" stroke="#00FFFF" stroke-width="1.5" filter="url(#glow)" opacity="0.9"/>
+    <path d="M380 240 L380 280 L256 340 L256 300 Z" fill="#001133" stroke="#00FFFF" stroke-width="1" opacity="0.7"/>
+    <path d="M132 240 L132 280 L256 340 L256 300 Z" fill="#001A44" stroke="#00FFFF" stroke-width="1" opacity="0.7"/>
+    <text x="256" y="248" font-family="'Courier New', monospace" font-size="11" text-anchor="middle" fill="#00FFFF" filter="url(#glow)" opacity="0.8">net.log</text>
+  </g>
+  <!-- Layer 2 (middle) -->
+  <g transform="translate(0 -20)">
+    <path d="M256 220 L380 280 L256 340 L132 280 Z" fill="#002244" stroke="#44DDFF" stroke-width="1.5" filter="url(#glow)" opacity="0.9"/>
+    <path d="M380 280 L380 320 L256 380 L256 340 Z" fill="#001133" stroke="#44DDFF" stroke-width="1" opacity="0.7"/>
+    <path d="M132 280 L132 320 L256 380 L256 340 Z" fill="#001A44" stroke="#44DDFF" stroke-width="1" opacity="0.7"/>
+    <text x="256" y="288" font-family="'Courier New', monospace" font-size="11" text-anchor="middle" fill="#44DDFF" filter="url(#glow)" opacity="0.8">sys.log</text>
+  </g>
+  <!-- Layer 1 (bottom) -->
+  <g transform="translate(0 20)">
+    <path d="M256 260 L380 320 L256 380 L132 320 Z" fill="#002244" stroke="#88CCFF" stroke-width="1.5" filter="url(#glow)" opacity="0.9"/>
+    <path d="M380 320 L380 360 L256 420 L256 380 Z" fill="#001133" stroke="#88CCFF" stroke-width="1" opacity="0.7"/>
+    <path d="M132 320 L132 360 L256 420 L256 380 Z" fill="#001A44" stroke="#88CCFF" stroke-width="1" opacity="0.7"/>
+    <text x="256" y="328" font-family="'Courier New', monospace" font-size="11" text-anchor="middle" fill="#88CCFF" filter="url(#glow)" opacity="0.8">app.log</text>
+  </g>
+  <!-- Merge arrow going into bottom -->
+  <path d="M256 440 L256 480" stroke="url(#stackGrad)" stroke-width="4" filter="url(#glow)" opacity="0.7"/>
+  <!-- Top label -->
+  <text x="256" y="80" font-family="'Courier New', monospace" font-size="16" text-anchor="middle" fill="#00FFFF" filter="url(#glow)" font-weight="bold">LOG.MERGE</text>
+  <path d="M120 90 L392 90" stroke="#00FFFF" stroke-width="1" opacity="0.3" stroke-dasharray="4 4"/>
+</svg>

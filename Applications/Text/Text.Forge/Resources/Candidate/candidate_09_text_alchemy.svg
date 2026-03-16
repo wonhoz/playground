@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a1a0a"/>
+      <stop offset="100%" stop-color="#001a00"/>
+    </linearGradient>
+    <linearGradient id="flaskGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#44ff88" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#00aa44" stop-opacity="0.8"/>
+    </linearGradient>
+    <linearGradient id="liquidGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#88ffcc" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#00ff66" stop-opacity="1"/>
+    </linearGradient>
+    <radialGradient id="bubbleGrad" cx="30%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#aaffcc" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#00cc44" stop-opacity="0.3"/>
+    </radialGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="5" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Flask body -->
+  <path d="M206 200 L186 340 Q184 380 256 385 Q328 380 326 340 L306 200 Z" fill="url(#flaskGrad)" stroke="#44ff88" stroke-width="3"/>
+  <!-- Liquid inside -->
+  <path d="M196 300 L190 340 Q188 376 256 380 Q324 376 322 340 L316 300 Z" fill="url(#liquidGrad)" opacity="0.85"/>
+  <!-- Flask neck -->
+  <rect x="224" y="140" width="64" height="65" rx="6" fill="none" stroke="#44ff88" stroke-width="3"/>
+  <!-- Flask stopper -->
+  <rect x="236" y="128" width="40" height="18" rx="6" fill="#2a5a2a"/>
+  <!-- Bubbles in liquid -->
+  <circle cx="226" cy="345" r="10" fill="url(#bubbleGrad)" filter="url(#glow)"/>
+  <circle cx="276" cy="330" r="7" fill="url(#bubbleGrad)" filter="url(#glow)"/>
+  <circle cx="300" cy="355" r="8" fill="url(#bubbleGrad)" filter="url(#glow)"/>
+  <!-- Letters floating out -->
+  <g filter="url(#glow)" opacity="0.9">
+    <rect x="180" y="190" width="14" height="18" rx="3" fill="#44ff88" opacity="0.8"/>
+    <rect x="200" y="175" width="12" height="16" rx="3" fill="#88ffcc" opacity="0.7"/>
+    <rect x="310" y="185" width="14" height="18" rx="3" fill="#44ff88" opacity="0.8"/>
+    <rect x="328" y="168" width="12" height="16" rx="3" fill="#88ffcc" opacity="0.6"/>
+  </g>
+  <!-- Stars/sparkles -->
+  <circle cx="150" cy="250" r="4" fill="#44ff88" opacity="0.6" filter="url(#glow)"/>
+  <circle cx="370" cy="230" r="3" fill="#88ffcc" opacity="0.5" filter="url(#glow)"/>
+</svg>

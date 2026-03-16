@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A0A2E"/>
+      <stop offset="100%" stop-color="#0A1A2E"/>
+    </linearGradient>
+    <linearGradient id="gear1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F59E0B"/>
+      <stop offset="100%" stop-color="#D97706"/>
+    </linearGradient>
+    <linearGradient id="gear2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#10B981"/>
+      <stop offset="100%" stop-color="#059669"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Large gear -->
+  <circle cx="200" cy="230" r="90" fill="url(#gear1)"/>
+  <circle cx="200" cy="230" r="60" fill="#1A0A2E"/>
+  <circle cx="200" cy="230" r="18" fill="#F59E0B"/>
+  <!-- Gear teeth (large) -->
+  <rect x="188" y="132" width="24" height="22" rx="4" fill="#F59E0B"/>
+  <rect x="188" y="306" width="24" height="22" rx="4" fill="#F59E0B"/>
+  <rect x="132" y="218" width="22" height="24" rx="4" fill="#F59E0B"/>
+  <rect x="246" y="218" width="22" height="24" rx="4" fill="#F59E0B"/>
+  <rect x="143" y="150" width="20" height="22" rx="4" fill="#F59E0B" transform="rotate(45 153 161)"/>
+  <rect x="238" y="147" width="20" height="22" rx="4" fill="#F59E0B" transform="rotate(-45 248 158)"/>
+  <rect x="141" y="286" width="20" height="22" rx="4" fill="#F59E0B" transform="rotate(-45 151 297)"/>
+  <rect x="238" y="285" width="20" height="22" rx="4" fill="#F59E0B" transform="rotate(45 248 296)"/>
+  <!-- Small gear -->
+  <circle cx="340" cy="260" r="60" fill="url(#gear2)"/>
+  <circle cx="340" cy="260" r="38" fill="#1A0A2E"/>
+  <circle cx="340" cy="260" r="12" fill="#10B981"/>
+  <!-- Gear teeth (small) -->
+  <rect x="328" y="193" width="24" height="16" rx="3" fill="#10B981"/>
+  <rect x="328" y="311" width="24" height="16" rx="3" fill="#10B981"/>
+  <rect x="277" y="248" width="16" height="24" rx="3" fill="#10B981"/>
+  <rect x="387" y="248" width="16" height="24" rx="3" fill="#10B981"/>
+  <!-- Building block being placed by gears -->
+  <rect x="280" y="380" width="120" height="60" rx="8" fill="#3B82F6"/>
+  <rect x="295" y="395" width="20" height="24" rx="3" fill="#60A5FA"/>
+  <rect x="325" y="395" width="20" height="24" rx="3" fill="#60A5FA"/>
+  <rect x="355" y="395" width="20" height="24" rx="3" fill="#60A5FA"/>
+  <text x="340" y="457" font-family="monospace" font-size="14" fill="#60A5FA" text-anchor="middle">AUTO BUILD</text>
+</svg>

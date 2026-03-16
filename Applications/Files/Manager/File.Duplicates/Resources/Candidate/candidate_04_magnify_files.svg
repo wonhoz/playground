@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a1a2e"/>
+      <stop offset="100%" stop-color="#16213e"/>
+    </linearGradient>
+    <linearGradient id="lensGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e8f4f8" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#a8d8ea" stop-opacity="0.1"/>
+    </linearGradient>
+    <linearGradient id="fileGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#a8d8ea"/>
+      <stop offset="100%" stop-color="#84b5c9"/>
+    </linearGradient>
+    <linearGradient id="handleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f6c90e"/>
+      <stop offset="100%" stop-color="#e5a900"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Files in background -->
+  <rect x="70" y="160" width="120" height="155" rx="10" fill="#1e3a5f" stroke="#a8d8ea" stroke-width="1.5" opacity="0.7"/>
+  <polygon points="151,160 190,199 151,199" fill="#16213e" opacity="0.7"/>
+  <rect x="88" y="230" width="86" height="8" rx="4" fill="#a8d8ea" opacity="0.4"/>
+  <rect x="88" y="248" width="70" height="8" rx="4" fill="#a8d8ea" opacity="0.3"/>
+  <rect x="220" y="140" width="120" height="155" rx="10" fill="#1e3a5f" stroke="#a8d8ea" stroke-width="1.5" opacity="0.7"/>
+  <polygon points="301,140 340,179 301,179" fill="#16213e" opacity="0.7"/>
+  <rect x="238" y="210" width="86" height="8" rx="4" fill="#a8d8ea" opacity="0.4"/>
+  <rect x="238" y="228" width="70" height="8" rx="4" fill="#a8d8ea" opacity="0.3"/>
+  <!-- Equal sign between files -->
+  <rect x="193" y="220" width="24" height="7" rx="3" fill="#f6c90e"/>
+  <rect x="193" y="236" width="24" height="7" rx="3" fill="#f6c90e"/>
+  <!-- Magnifying glass -->
+  <circle cx="280" cy="300" r="130" fill="none" stroke="#f6c90e" stroke-width="12"/>
+  <circle cx="280" cy="300" r="120" fill="url(#lensGrad)"/>
+  <!-- Inside lens: duplicate highlight -->
+  <rect x="200" y="250" width="80" height="100" rx="8" fill="url(#fileGrad)" opacity="0.8"/>
+  <rect x="290" y="260" width="80" height="100" rx="8" fill="url(#fileGrad)" opacity="0.8"/>
+  <rect x="215" y="290" width="50" height="7" rx="3" fill="#16213e" opacity="0.5"/>
+  <rect x="305" y="295" width="50" height="7" rx="3" fill="#16213e" opacity="0.5"/>
+  <!-- Lens highlight -->
+  <circle cx="225" cy="240" r="25" fill="white" opacity="0.07"/>
+  <!-- Handle -->
+  <line x1="375" y1="395" x2="455" y2="465" stroke="url(#handleGrad)" stroke-width="22" stroke-linecap="round"/>
+</svg>

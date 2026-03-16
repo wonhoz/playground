@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E65100"/>
+      <stop offset="100%" stop-color="#BF360C"/>
+    </linearGradient>
+    <linearGradient id="bristle" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFD54F"/>
+      <stop offset="100%" stop-color="#FFAB40"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- 수채화 번짐 효과 -->
+  <ellipse cx="200" cy="220" rx="130" ry="100" fill="#FF7043" opacity="0.6"/>
+  <ellipse cx="280" cy="260" rx="110" ry="90" fill="#FF8A65" opacity="0.5"/>
+  <ellipse cx="240" cy="300" rx="100" ry="70" fill="#FFCCBC" opacity="0.4"/>
+  <!-- 붓 (대각선) -->
+  <rect x="320" y="60" width="24" height="180" rx="8" fill="#795548" transform="rotate(-40 320 60)"/>
+  <rect x="298" y="54" width="28" height="30" rx="6" fill="#A1887F" transform="rotate(-40 298 54)"/>
+  <!-- 붓털 -->
+  <path d="M 232 204 C 220 220 215 245 225 255 C 235 265 255 255 252 235 C 249 215 238 208 232 204 Z" fill="url(#bristle)" transform="rotate(-40 232 204)"/>
+  <!-- 잉크 스트로크들 -->
+  <path d="M 100 350 Q 180 310 256 350 Q 330 390 420 340" fill="none" stroke="#FFCCBC" stroke-width="12" stroke-linecap="round" opacity="0.7"/>
+  <path d="M 80 400 Q 160 370 240 400 Q 320 430 410 390" fill="none" stroke="#FFE0B2" stroke-width="8" stroke-linecap="round" opacity="0.5"/>
+</svg>

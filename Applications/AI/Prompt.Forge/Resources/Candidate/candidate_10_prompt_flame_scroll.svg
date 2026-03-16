@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#100500"/>
+      <stop offset="100%" stop-color="#1e0a00"/>
+    </linearGradient>
+    <linearGradient id="scrollGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2a1800"/>
+      <stop offset="100%" stop-color="#1a1000"/>
+    </linearGradient>
+    <linearGradient id="flameGrad" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#ff2200"/>
+      <stop offset="40%" stop-color="#ff6600"/>
+      <stop offset="70%" stop-color="#ff9900"/>
+      <stop offset="100%" stop-color="#ffcc00"/>
+    </linearGradient>
+    <filter id="flameGlow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Fire glow behind scroll -->
+  <ellipse cx="256" cy="420" rx="180" ry="60" fill="#ff4500" fill-opacity="0.2" filter="url(#flameGlow)"/>
+  <!-- Scroll bottom roll -->
+  <ellipse cx="256" cy="400" rx="125" ry="20" fill="#2a1800"/>
+  <ellipse cx="256" cy="395" rx="110" ry="12" fill="#3a2000"/>
+  <!-- Scroll body -->
+  <rect x="131" y="130" width="250" height="270" rx="8" fill="url(#scrollGrad)"/>
+  <!-- Scroll top roll -->
+  <ellipse cx="256" cy="130" rx="125" ry="20" fill="#3a2000"/>
+  <ellipse cx="256" cy="125" rx="110" ry="12" fill="#4a2800"/>
+  <!-- Scroll inner content -->
+  <!-- Decorative border lines -->
+  <rect x="148" y="150" width="216" height="240" rx="4" fill="none" stroke="#ff9900" stroke-width="1.5" opacity="0.4"/>
+  <!-- Prompt lines on scroll -->
+  <line x1="162" y1="175" x2="348" y2="175" stroke="#ff9900" stroke-width="2" opacity="0.7"/>
+  <line x1="162" y1="198" x2="335" y2="198" stroke="#ff6600" stroke-width="2" opacity="0.7"/>
+  <line x1="162" y1="221" x2="342" y2="221" stroke="#ff9900" stroke-width="1.5" opacity="0.6"/>
+  <line x1="162" y1="244" x2="328" y2="244" stroke="#ff6600" stroke-width="1.5" opacity="0.5"/>
+  <line x1="162" y1="267" x2="338" y2="267" stroke="#ff9900" stroke-width="1.5" opacity="0.5"/>
+  <line x1="162" y1="290" x2="322" y2="290" stroke="#ff6600" stroke-width="1" opacity="0.4"/>
+  <line x1="162" y1="312" x2="332" y2="312" stroke="#ff9900" stroke-width="1" opacity="0.4"/>
+  <line x1="162" y1="333" x2="318" y2="333" stroke="#ff6600" stroke-width="1" opacity="0.3"/>
+  <line x1="162" y1="355" x2="326" y2="355" stroke="#ff9900" stroke-width="1" opacity="0.3"/>
+  <!-- Large flame erupting from bottom of scroll -->
+  <path d="M200 400 C210 355 225 375 238 340 C244 362 252 348 258 328 C263 346 270 335 278 355 C285 338 295 352 302 370 C310 355 320 368 316 400Z" fill="url(#flameGrad)" filter="url(#flameGlow)"/>
+  <path d="M225 400 C230 370 238 382 244 358 C248 372 256 362 261 345 C265 360 272 352 278 368 C283 355 290 364 288 400Z" fill="#ffcc00" fill-opacity="0.5" filter="url(#flameGlow)"/>
+  <!-- Burning ember particles -->
+  <circle cx="230" cy="320" r="4" fill="#ff9900" filter="url(#flameGlow)" opacity="0.8"/>
+  <circle cx="280" cy="310" r="3" fill="#ffcc00" filter="url(#flameGlow)" opacity="0.7"/>
+  <circle cx="200" cy="295" r="4" fill="#ff6600" filter="url(#flameGlow)" opacity="0.6"/>
+  <circle cx="315" cy="305" r="3" fill="#ff9900" filter="url(#flameGlow)" opacity="0.7"/>
+  <!-- Scroll tie ribbons -->
+  <line x1="131" y1="260" x2="95" y2="290" stroke="#ff6600" stroke-width="3" stroke-linecap="round" opacity="0.6"/>
+  <line x1="381" y1="260" x2="417" y2="290" stroke="#ff6600" stroke-width="3" stroke-linecap="round" opacity="0.6"/>
+</svg>

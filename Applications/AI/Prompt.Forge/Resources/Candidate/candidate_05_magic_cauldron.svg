@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#050028"/>
+      <stop offset="100%" stop-color="#150040"/>
+    </linearGradient>
+    <linearGradient id="cauldronGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2a2a3a"/>
+      <stop offset="100%" stop-color="#1a1a28"/>
+    </linearGradient>
+    <radialGradient id="bubbleGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#a855f7" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#7c3aed" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="liquidGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7c3aed"/>
+      <stop offset="50%" stop-color="#a855f7"/>
+      <stop offset="100%" stop-color="#ec4899"/>
+    </linearGradient>
+    <filter id="cauldronGlow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Cauldron legs -->
+  <rect x="165" y="360" width="18" height="50" rx="5" fill="#1a1a28" transform="rotate(-10 174 385)"/>
+  <rect x="329" y="360" width="18" height="50" rx="5" fill="#1a1a28" transform="rotate(10 338 385)"/>
+  <rect x="247" y="370" width="18" height="45" rx="5" fill="#1a1a28"/>
+  <!-- Fire under cauldron -->
+  <ellipse cx="256" cy="400" rx="80" ry="20" fill="#ff4500" fill-opacity="0.3" filter="url(#cauldronGlow)"/>
+  <path d="M200 395 C210 370 220 380 230 360 C235 375 240 365 245 345 C250 365 258 355 262 370 C268 355 275 368 285 358 C285 375 295 368 302 385 C310 375 315 388 310 395Z" fill="url(#liquidGrad)" fill-opacity="0.6" filter="url(#cauldronGlow)"/>
+  <!-- Cauldron body -->
+  <path d="M150 285 L130 380 Q130 415 255 415 Q382 415 382 380 L362 285Z" fill="url(#cauldronGrad)" stroke="#3a3a4a" stroke-width="3"/>
+  <!-- Cauldron rim -->
+  <ellipse cx="256" cy="285" rx="106" ry="28" fill="#2a2a3a" stroke="#4a4a5a" stroke-width="2"/>
+  <!-- Liquid surface inside -->
+  <ellipse cx="256" cy="290" rx="92" ry="22" fill="url(#liquidGrad)" fill-opacity="0.8" filter="url(#cauldronGlow)"/>
+  <!-- Handle -->
+  <path d="M150 310 C130 280 382 280 362 310" fill="none" stroke="#3a3a4a" stroke-width="12" stroke-linecap="round"/>
+  <!-- Bubbles rising from cauldron -->
+  <circle cx="230" cy="260" r="14" fill="none" stroke="#a855f7" stroke-width="2.5" filter="url(#cauldronGlow)"/>
+  <circle cx="258" cy="240" r="10" fill="none" stroke="#ec4899" stroke-width="2" filter="url(#cauldronGlow)"/>
+  <circle cx="285" cy="255" r="16" fill="none" stroke="#7c3aed" stroke-width="2.5" filter="url(#cauldronGlow)"/>
+  <circle cx="200" cy="230" r="8" fill="none" stroke="#a855f7" stroke-width="2" filter="url(#cauldronGlow)"/>
+  <circle cx="318" cy="245" r="10" fill="none" stroke="#ec4899" stroke-width="2" filter="url(#cauldronGlow)"/>
+  <!-- Smaller steam bubbles -->
+  <circle cx="240" cy="195" r="6" fill="#a855f7" fill-opacity="0.5" filter="url(#cauldronGlow)"/>
+  <circle cx="270" cy="175" r="5" fill="#ec4899" fill-opacity="0.5" filter="url(#cauldronGlow)"/>
+  <circle cx="255" cy="148" r="7" fill="#7c3aed" fill-opacity="0.4" filter="url(#cauldronGlow)"/>
+  <!-- Stars above -->
+  <circle cx="190" cy="160" r="3" fill="#ffd700" filter="url(#cauldronGlow)"/>
+  <circle cx="330" cy="150" r="3" fill="#ffd700" filter="url(#cauldronGlow)"/>
+  <circle cx="360" cy="200" r="2.5" fill="#a855f7" filter="url(#cauldronGlow)"/>
+  <circle cx="145" cy="210" r="2.5" fill="#a855f7" filter="url(#cauldronGlow)"/>
+</svg>

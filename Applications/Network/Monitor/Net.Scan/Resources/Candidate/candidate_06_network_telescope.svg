@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0a20"/>
+      <stop offset="100%" stop-color="#141440"/>
+    </linearGradient>
+    <linearGradient id="scope" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#90a4ae"/>
+      <stop offset="100%" stop-color="#455a64"/>
+    </linearGradient>
+    <linearGradient id="lens" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#80deea"/>
+      <stop offset="100%" stop-color="#006064"/>
+    </linearGradient>
+    <filter id="glow"><feGaussianBlur stdDeviation="10"/></filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- telescope body -->
+  <rect x="160" y="220" width="200" height="55" rx="10" fill="url(#scope)" transform="rotate(-25 260 247)"/>
+  <rect x="340" y="195" width="80" height="42" rx="8" fill="#78909c" transform="rotate(-25 380 216)"/>
+  <rect x="135" y="245" width="55" height="35" rx="7" fill="#607d8b" transform="rotate(-25 162 262)"/>
+  <!-- lens glow -->
+  <circle cx="385" cy="190" r="38" fill="url(#lens)" filter="url(#glow)" transform="rotate(-25 385 190)"/>
+  <circle cx="385" cy="190" r="28" fill="#80deea" opacity="0.6" transform="rotate(-25 385 190)"/>
+  <circle cx="385" cy="190" r="16" fill="white" opacity="0.4" transform="rotate(-25 385 190)"/>
+  <!-- view beam from lens -->
+  <path d="M398 165 L460 90 L480 120 L415 190" fill="#80deea" opacity="0.2"/>
+  <!-- network nodes in beam -->
+  <circle cx="445" cy="100" r="8" fill="#80deea" filter="url(#glow)"/>
+  <circle cx="460" cy="130" r="6" fill="#b2ebf2" filter="url(#glow)"/>
+  <!-- stand/tripod -->
+  <line x1="230" y1="320" x2="180" y2="420" stroke="#546e7a" stroke-width="12" stroke-linecap="round"/>
+  <line x1="230" y1="320" x2="230" y2="430" stroke="#546e7a" stroke-width="12" stroke-linecap="round"/>
+  <line x1="230" y1="320" x2="280" y2="420" stroke="#546e7a" stroke-width="12" stroke-linecap="round"/>
+</svg>

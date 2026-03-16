@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#001A00"/>
+      <stop offset="100%" stop-color="#002B00"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Circuit traces -->
+  <polyline points="80,256 160,256 160,160 256,160" fill="none" stroke="#00FF41" stroke-width="3" opacity="0.8"/>
+  <polyline points="256,160 352,160 352,256 432,256" fill="none" stroke="#00FF41" stroke-width="3" opacity="0.8"/>
+  <polyline points="160,256 160,352 256,352" fill="none" stroke="#39FF14" stroke-width="2" opacity="0.6"/>
+  <polyline points="256,352 352,352 352,256" fill="none" stroke="#39FF14" stroke-width="2" opacity="0.6"/>
+  <line x1="256" y1="160" x2="256" y2="352" stroke="#00FF41" stroke-width="2" opacity="0.5"/>
+  <!-- Solder pads -->
+  <circle cx="80" cy="256" r="10" fill="#00FF41"/>
+  <circle cx="432" cy="256" r="10" fill="#00FF41"/>
+  <circle cx="160" cy="160" r="8" fill="#39FF14"/>
+  <circle cx="352" cy="160" r="8" fill="#39FF14"/>
+  <circle cx="160" cy="352" r="8" fill="#39FF14"/>
+  <circle cx="352" cy="352" r="8" fill="#39FF14"/>
+  <!-- Central chip -->
+  <rect x="206" y="206" width="100" height="100" rx="8" fill="#001A00" stroke="#00FF41" stroke-width="3"/>
+  <text x="256" y="252" font-family="monospace" font-size="13" fill="#00FF41" text-anchor="middle">BOOT</text>
+  <text x="256" y="272" font-family="monospace" font-size="13" fill="#00FF41" text-anchor="middle">CPU</text>
+  <!-- Chip pins -->
+  <line x1="206" y1="226" x2="186" y2="226" stroke="#00FF41" stroke-width="2"/>
+  <line x1="206" y1="246" x2="186" y2="246" stroke="#00FF41" stroke-width="2"/>
+  <line x1="206" y1="266" x2="186" y2="266" stroke="#00FF41" stroke-width="2"/>
+  <line x1="306" y1="226" x2="326" y2="226" stroke="#00FF41" stroke-width="2"/>
+  <line x1="306" y1="246" x2="326" y2="246" stroke="#00FF41" stroke-width="2"/>
+  <line x1="306" y1="266" x2="326" y2="266" stroke="#00FF41" stroke-width="2"/>
+  <text x="256" y="460" font-family="Arial" font-size="26" font-weight="bold" fill="#00FF41" text-anchor="middle">Boot.Map</text>
+</svg>

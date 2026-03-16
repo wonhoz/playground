@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A0A00"/>
+      <stop offset="100%" stop-color="#2A1400"/>
+    </linearGradient>
+    <linearGradient id="spectrum" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FF4400"/>
+      <stop offset="33%" stop-color="#FF8800"/>
+      <stop offset="66%" stop-color="#FFCC00"/>
+      <stop offset="100%" stop-color="#FFEE44"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Large A with spectrum fill effect -->
+  <text x="256" y="300" text-anchor="middle" fill="url(#spectrum)" font-size="250" font-family="serif" font-weight="bold" opacity="0.9">A</text>
+  <!-- Small characters orbiting -->
+  <text x="100" y="130" fill="#FF4400" font-size="30" font-family="monospace" opacity="0.7">a</text>
+  <text x="390" y="130" fill="#FFCC00" font-size="30" font-family="serif" opacity="0.7">&#x3042;</text>
+  <text x="85" y="390" fill="#FF6600" font-size="28" font-family="serif" opacity="0.6">&#x4E2D;</text>
+  <text x="400" y="390" fill="#FFAA00" font-size="28" font-family="sans-serif" opacity="0.6">&#x0391;</text>
+  <!-- Spectrum bar -->
+  <rect x="80" y="430" width="352" height="12" rx="6" fill="url(#spectrum)"/>
+  <!-- Code labels -->
+  <text x="80" y="465" fill="#FF6600" font-size="13" font-family="monospace">Latin</text>
+  <text x="180" y="465" fill="#FF8800" font-size="13" font-family="monospace">CJK</text>
+  <text x="260" y="465" fill="#FFAA00" font-size="13" font-family="monospace">Greek</text>
+  <text x="350" y="465" fill="#FFCC00" font-size="13" font-family="monospace">Symbol</text>
+  <!-- Dot accent top right -->
+  <circle cx="430" cy="85" r="12" fill="#FF8800" opacity="0.6"/>
+  <circle cx="430" cy="85" r="6" fill="#FFCC00" opacity="0.9"/>
+</svg>

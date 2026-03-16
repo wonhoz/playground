@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1a237e"/>
+      <stop offset="50%" stop-color="#1565c0"/>
+      <stop offset="100%" stop-color="#1976d2"/>
+    </linearGradient>
+    <linearGradient id="leaf" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1b5e20"/>
+      <stop offset="100%" stop-color="#43a047"/>
+    </linearGradient>
+    <linearGradient id="sun" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffee58"/>
+      <stop offset="100%" stop-color="#fdd835"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- 태양 -->
+  <circle cx="380" cy="130" r="56" fill="url(#sun)" opacity="0.95"/>
+  <!-- 태양 광선 -->
+  <line x1="380" y1="55" x2="380" y2="35" stroke="url(#sun)" stroke-width="8" stroke-linecap="round"/>
+  <line x1="380" y1="205" x2="380" y2="225" stroke="url(#sun)" stroke-width="8" stroke-linecap="round"/>
+  <line x1="305" y1="130" x2="285" y2="130" stroke="url(#sun)" stroke-width="8" stroke-linecap="round"/>
+  <line x1="455" y1="130" x2="475" y2="130" stroke="url(#sun)" stroke-width="8" stroke-linecap="round"/>
+  <line x1="326" y1="76" x2="313" y2="63" stroke="url(#sun)" stroke-width="8" stroke-linecap="round"/>
+  <line x1="434" y1="184" x2="447" y2="197" stroke="url(#sun)" stroke-width="8" stroke-linecap="round"/>
+  <!-- 큰 잎 -->
+  <path d="M150 420 Q80 300 150 200 Q200 280 180 380 Z" fill="url(#leaf)" opacity="0.9"/>
+  <path d="M180 380 Q220 260 320 200 Q280 300 220 380 Z" fill="url(#leaf)" opacity="0.8"/>
+  <!-- 잎맥 -->
+  <path d="M155 380 Q130 300 155 220" fill="none" stroke="#a5d6a7" stroke-width="4" opacity="0.7"/>
+  <path d="M195 370 Q220 270 310 210" fill="none" stroke="#a5d6a7" stroke-width="4" opacity="0.7"/>
+  <!-- 땅 -->
+  <ellipse cx="200" cy="440" rx="130" ry="36" fill="#3e2723"/>
+  <!-- 줄기 -->
+  <line x1="200" y1="440" x2="160" y2="250" stroke="#4caf50" stroke-width="16" stroke-linecap="round"/>
+</svg>

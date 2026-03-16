@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#041A08"/>
+      <stop offset="100%" stop-color="#081E0C"/>
+    </linearGradient>
+    <linearGradient id="shield" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00CC44"/>
+      <stop offset="100%" stop-color="#007722"/>
+    </linearGradient>
+    <radialGradient id="shineGrad" cx="35%" cy="25%" r="55%">
+      <stop offset="0%" stop-color="#88FFAA" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#00CC44" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="5" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Shield glow background -->
+  <path d="M 256,68 L 404,126 L 404,268 Q 404,378 256,444 Q 108,378 108,268 L 108,126 Z" fill="#00CC44" opacity="0.08" filter="url(#glow)"/>
+  <!-- Shield main -->
+  <path d="M 256,72 L 398,128 L 398,264 Q 398,372 256,440 Q 114,372 114,264 L 114,128 Z" fill="url(#shield)" filter="url(#glow)"/>
+  <path d="M 256,72 L 398,128 L 398,264 Q 398,372 256,440 Q 114,372 114,264 L 114,128 Z" fill="url(#shineGrad)"/>
+  <!-- Shield segments -->
+  <line x1="256" y1="136" x2="256" y2="428" stroke="white" stroke-width="2" opacity="0.1"/>
+  <!-- Service process tree inside -->
+  <!-- Root service node -->
+  <circle cx="256" cy="200" r="18" fill="#041A08" stroke="#AAFFCC" stroke-width="2.5" filter="url(#glow)"/>
+  <text x="256" y="204" font-family="monospace" font-size="10" fill="#AAFFCC" text-anchor="middle">svc</text>
+  <!-- Child nodes -->
+  <line x1="256" y1="218" x2="200" y2="266" stroke="#44FF88" stroke-width="1.5" opacity="0.6"/>
+  <line x1="256" y1="218" x2="312" y2="266" stroke="#44FF88" stroke-width="1.5" opacity="0.6"/>
+  <circle cx="200" cy="278" r="14" fill="#041A08" stroke="#44FF88" stroke-width="2" filter="url(#glow)"/>
+  <text x="200" y="282" font-family="monospace" font-size="9" fill="#44FF88" text-anchor="middle">dns</text>
+  <circle cx="312" cy="278" r="14" fill="#041A08" stroke="#44FF88" stroke-width="2" filter="url(#glow)"/>
+  <text x="312" y="282" font-family="monospace" font-size="9" fill="#44FF88" text-anchor="middle">upd</text>
+  <!-- Grandchild nodes -->
+  <line x1="200" y1="292" x2="168" y2="330" stroke="#44AA66" stroke-width="1" opacity="0.5"/>
+  <line x1="312" y1="292" x2="344" y2="330" stroke="#44AA66" stroke-width="1" opacity="0.5"/>
+  <circle cx="168" cy="340" r="11" fill="#041A08" stroke="#44AA66" stroke-width="1.5"/>
+  <circle cx="344" cy="340" r="11" fill="#041A08" stroke="#44AA66" stroke-width="1.5"/>
+  <!-- Guard indicator -->
+  <circle cx="256" cy="388" r="16" fill="#00CC44" filter="url(#glow)" opacity="0.9"/>
+  <polyline points="247,388 254,396 267,379" stroke="white" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Status text -->
+  <text x="256" y="456" font-family="'Segoe UI', sans-serif" font-size="14" fill="#44FF88" text-anchor="middle" letter-spacing="1" filter="url(#glow)">ALL SERVICES OK</text>
+</svg>

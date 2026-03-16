@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#B71C1C"/>
+      <stop offset="50%" style="stop-color:#E65100"/>
+      <stop offset="100%" style="stop-color:#F57F17"/>
+    </linearGradient>
+    <radialGradient id="sungrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#FFEE58"/>
+      <stop offset="100%" style="stop-color:#FFB300"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Sun -->
+  <circle cx="256" cy="200" r="62" fill="url(#sungrad)"/>
+  <!-- Sun rays -->
+  <line x1="256" y1="110" x2="256" y2="85" stroke="#FFD54F" stroke-width="5" stroke-linecap="round"/>
+  <line x1="322" y1="134" x2="340" y2="116" stroke="#FFD54F" stroke-width="5" stroke-linecap="round"/>
+  <line x1="346" y1="200" x2="371" y2="200" stroke="#FFD54F" stroke-width="5" stroke-linecap="round"/>
+  <line x1="322" y1="266" x2="340" y2="284" stroke="#FFD54F" stroke-width="5" stroke-linecap="round"/>
+  <line x1="190" y1="134" x2="172" y2="116" stroke="#FFD54F" stroke-width="5" stroke-linecap="round"/>
+  <line x1="166" y1="200" x2="141" y2="200" stroke="#FFD54F" stroke-width="5" stroke-linecap="round"/>
+  <line x1="190" y1="266" x2="172" y2="284" stroke="#FFD54F" stroke-width="5" stroke-linecap="round"/>
+  <!-- Horizon ground -->
+  <path d="M60,370 Q180,340 256,345 Q332,350 452,325 L452,512 L60,512Z" fill="#2E7D32"/>
+  <!-- Hole flag -->
+  <line x1="310" y1="295" x2="310" y2="390" stroke="#ECEFF1" stroke-width="5"/>
+  <path d="M310,295 L360,315 L310,335Z" fill="#FFEB3B"/>
+  <circle cx="310" cy="395" r="12" fill="#1A1A1A"/>
+  <!-- Ball silhouette -->
+  <circle cx="195" cy="368" r="22" fill="#FFFFFF"/>
+  <!-- Trajectory -->
+  <path d="M195,368 Q250,295 310,395" fill="none" stroke="#FFD54F" stroke-width="3" stroke-dasharray="10,5"/>
+</svg>

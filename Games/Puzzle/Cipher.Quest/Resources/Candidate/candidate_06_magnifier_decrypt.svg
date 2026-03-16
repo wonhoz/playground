@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#1a0d2e"/>
+      <stop offset="100%" stop-color="#0d0620"/>
+    </radialGradient>
+    <linearGradient id="lens" cx="35%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#2200aa"/>
+      <stop offset="100%" stop-color="#110055"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Scattered cipher text -->
+  <text x="40" y="100" font-family="monospace" font-size="14" fill="#7744cc" opacity="0.5">XK92#@!</text>
+  <text x="340" y="80" font-family="monospace" font-size="14" fill="#7744cc" opacity="0.5">9A$%^&amp;</text>
+  <text x="60" y="380" font-family="monospace" font-size="14" fill="#7744cc" opacity="0.5">!@#ZQ1</text>
+  <text x="380" y="420" font-family="monospace" font-size="14" fill="#7744cc" opacity="0.5">*K&amp;9ZX</text>
+  <!-- Magnifier glass circle -->
+  <circle cx="220" cy="215" r="145" fill="#1a0d2e" stroke="#9944ff" stroke-width="10" filter="url(#glow)"/>
+  <circle cx="220" cy="215" r="133" fill="#110033" opacity="0.9"/>
+  <!-- Decoded text inside lens -->
+  <text x="130" y="178" font-family="monospace" font-size="22" fill="#ff44ff" filter="url(#glow)">DECODE</text>
+  <text x="148" y="210" font-family="monospace" font-size="22" fill="#aa44ff" filter="url(#glow)">CIPHER</text>
+  <text x="160" y="242" font-family="monospace" font-size="22" fill="#6644ff" filter="url(#glow)">QUEST!</text>
+  <!-- Lens shine -->
+  <ellipse cx="175" cy="168" rx="40" ry="24" fill="#fff" opacity="0.06" transform="rotate(-30 175 168)"/>
+  <!-- Handle -->
+  <rect x="326" y="312" width="130" height="22" rx="11" fill="#6622aa" transform="rotate(45 326 312)" filter="url(#glow)"/>
+</svg>

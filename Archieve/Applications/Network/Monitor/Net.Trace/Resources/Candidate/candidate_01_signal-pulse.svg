@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0e1a"/>
+      <stop offset="100%" stop-color="#0d1f3c"/>
+    </linearGradient>
+    <linearGradient id="wave" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00d4ff"/>
+      <stop offset="100%" stop-color="#0088cc"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Grid lines -->
+  <line x1="60" y1="200" x2="452" y2="200" stroke="#1a3a5c" stroke-width="1"/>
+  <line x1="60" y1="256" x2="452" y2="256" stroke="#1a3a5c" stroke-width="1"/>
+  <line x1="60" y1="312" x2="452" y2="312" stroke="#1a3a5c" stroke-width="1"/>
+  <!-- Signal wave -->
+  <polyline points="60,256 100,256 110,200 120,312 130,200 140,312 150,256 190,256 210,180 230,330 250,256 290,256 310,210 330,302 350,256 452,256" fill="none" stroke="url(#wave)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)"/>
+  <!-- Trace dot -->
+  <circle cx="350" cy="256" r="8" fill="#00d4ff" filter="url(#glow)"/>
+  <circle cx="350" cy="256" r="16" fill="none" stroke="#00d4ff" stroke-width="2" opacity="0.5"/>
+  <!-- Label -->
+  <text x="256" y="420" text-anchor="middle" font-family="monospace" font-size="36" font-weight="bold" fill="#00d4ff" opacity="0.9">NET.TRACE</text>
+</svg>

@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" style="stop-color:#1a237e"/>
+      <stop offset="100%" style="stop-color:#0d0d0d"/>
+    </radialGradient>
+    <radialGradient id="blast" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#ffffff"/>
+      <stop offset="20%" style="stop-color:#80d8ff"/>
+      <stop offset="60%" style="stop-color:#0091ea"/>
+      <stop offset="100%" style="stop-color:#01579b;stop-opacity:0"/>
+    </radialGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Central blast -->
+  <circle cx="256" cy="256" r="60" fill="url(#blast)" filter="url(#glow)"/>
+  <!-- Blast rays -->
+  <path d="M256 196 L246 160 L256 170 L266 160 Z" fill="#80d8ff" opacity="0.9" filter="url(#glow)"/>
+  <path d="M316 236 L352 226 L342 236 L352 246 Z" fill="#80d8ff" opacity="0.9" filter="url(#glow)"/>
+  <path d="M256 316 L266 352 L256 342 L246 352 Z" fill="#80d8ff" opacity="0.9" filter="url(#glow)"/>
+  <path d="M196 256 L160 266 L170 256 L160 246 Z" fill="#80d8ff" opacity="0.9" filter="url(#glow)"/>
+  <!-- Diagonal rays -->
+  <path d="M299 213 L328 184 L322 210 L348 204 Z" fill="#40c4ff" opacity="0.8" filter="url(#glow)"/>
+  <path d="M299 299 L328 328 L304 322 L310 348 Z" fill="#40c4ff" opacity="0.8" filter="url(#glow)"/>
+  <path d="M213 299 L184 328 L190 304 L164 310 Z" fill="#40c4ff" opacity="0.8" filter="url(#glow)"/>
+  <path d="M213 213 L184 184 L208 190 L202 164 Z" fill="#40c4ff" opacity="0.8" filter="url(#glow)"/>
+  <!-- Debris particles flying away -->
+  <circle cx="150" cy="150" r="8" fill="#ffcc02" opacity="0.7"/>
+  <circle cx="370" cy="140" r="6" fill="#ff6e40" opacity="0.6"/>
+  <circle cx="380" cy="370" r="7" fill="#69f0ae" opacity="0.7"/>
+  <circle cx="140" cy="380" r="5" fill="#ea80fc" opacity="0.6"/>
+  <circle cx="130" cy="240" r="5" fill="#ffcc02" opacity="0.5"/>
+  <circle cx="390" cy="280" r="6" fill="#40c4ff" opacity="0.5"/>
+  <!-- Motion lines for blast -->
+  <circle cx="256" cy="256" r="90" fill="none" stroke="#80d8ff" stroke-width="2" opacity="0.4" stroke-dasharray="20,10"/>
+  <circle cx="256" cy="256" r="130" fill="none" stroke="#40c4ff" stroke-width="1.5" opacity="0.3" stroke-dasharray="15,12"/>
+  <circle cx="256" cy="256" r="170" fill="none" stroke="#0091ea" stroke-width="1" opacity="0.2" stroke-dasharray="10,15"/>
+</svg>

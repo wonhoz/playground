@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A0000"/>
+      <stop offset="100%" stop-color="#2A0000"/>
+    </linearGradient>
+    <linearGradient id="shield_r" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#CC2200"/>
+      <stop offset="100%" stop-color="#880000"/>
+    </linearGradient>
+    <radialGradient id="warn_glow" cx="50%" cy="40%" r="50%">
+      <stop offset="0%" stop-color="#FF4400" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#FF0000" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <rect width="512" height="512" rx="80" fill="url(#warn_glow)"/>
+  <!-- Shield shape -->
+  <path d="M256 80 L420 140 L420 280 Q420 390 256 450 Q92 390 92 280 L92 140 Z" fill="url(#shield_r)" opacity="0.85"/>
+  <!-- Shield inner dark -->
+  <path d="M256 110 L395 160 L395 280 Q395 370 256 420 Q117 370 117 280 L117 160 Z" fill="#1A0000" opacity="0.4"/>
+  <!-- X mark -->
+  <line x1="188" y1="192" x2="324" y2="328" stroke="white" stroke-width="22" stroke-linecap="round"/>
+  <line x1="324" y1="192" x2="188" y2="328" stroke="white" stroke-width="22" stroke-linecap="round"/>
+  <!-- Hash mismatch label -->
+  <text x="256" y="390" text-anchor="middle" fill="#FF6644" font-size="14" font-family="monospace" opacity="0.8">HASH MISMATCH</text>
+  <!-- Warning label -->
+  <rect x="148" y="440" width="216" height="36" rx="8" fill="#CC2200" opacity="0.3"/>
+  <text x="256" y="463" text-anchor="middle" fill="#FF4444" font-size="18" font-family="monospace">WARNING</text>
+</svg>

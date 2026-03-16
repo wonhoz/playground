@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A0A2E"/>
+      <stop offset="100%" stop-color="#0A1A2E"/>
+    </linearGradient>
+    <linearGradient id="bar1" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#7B2FBE"/>
+      <stop offset="100%" stop-color="#A855F7"/>
+    </linearGradient>
+    <linearGradient id="bar2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1D4ED8"/>
+      <stop offset="100%" stop-color="#60A5FA"/>
+    </linearGradient>
+    <linearGradient id="bar3" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#065F46"/>
+      <stop offset="100%" stop-color="#34D399"/>
+    </linearGradient>
+    <linearGradient id="bar4" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#92400E"/>
+      <stop offset="100%" stop-color="#FBBF24"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Mixer layers / tracks -->
+  <!-- Track 1: Rain -->
+  <rect x="70" y="110" width="372" height="56" rx="8" fill="#1A103A"/>
+  <rect x="80" y="120" width="200" height="36" rx="6" fill="url(#bar1)"/>
+  <circle cx="310" cy="138" r="16" fill="#A855F7" stroke="#7B2FBE" stroke-width="2"/>
+  <text x="340" y="143" font-family="sans-serif" font-size="14" fill="#A855F7">Rain</text>
+  <!-- Track 2: Wind -->
+  <rect x="70" y="180" width="372" height="56" rx="8" fill="#0A1830"/>
+  <rect x="80" y="190" width="280" height="36" rx="6" fill="url(#bar2)"/>
+  <circle cx="390" cy="208" r="16" fill="#60A5FA" stroke="#1D4ED8" stroke-width="2"/>
+  <text x="80" y="258" font-family="sans-serif" font-size="14" fill="#60A5FA">Wind</text>
+  <!-- Track 3: Forest -->
+  <rect x="70" y="250" width="372" height="56" rx="8" fill="#0A1A10"/>
+  <rect x="80" y="260" width="150" height="36" rx="6" fill="url(#bar3)"/>
+  <circle cx="260" cy="278" r="16" fill="#34D399" stroke="#065F46" stroke-width="2"/>
+  <text x="290" y="283" font-family="sans-serif" font-size="14" fill="#34D399">Forest</text>
+  <!-- Track 4: Fire -->
+  <rect x="70" y="320" width="372" height="56" rx="8" fill="#1A0E00"/>
+  <rect x="80" y="330" width="320" height="36" rx="6" fill="url(#bar4)"/>
+  <circle cx="430" cy="348" r="16" fill="#FBBF24" stroke="#92400E" stroke-width="2"/>
+  <text x="80" y="400" font-family="sans-serif" font-size="14" fill="#FBBF24">Fire</text>
+  <!-- Master volume knob -->
+  <circle cx="256" cy="455" r="22" fill="#333" stroke="#555" stroke-width="2"/>
+  <line x1="256" y1="433" x2="256" y2="448" stroke="#A855F7" stroke-width="3" stroke-linecap="round"/>
+</svg>

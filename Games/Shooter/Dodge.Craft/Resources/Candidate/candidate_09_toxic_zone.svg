@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0A1A00"/>
+      <stop offset="100%" stop-color="#152200"/>
+    </linearGradient>
+    <linearGradient id="toxic_ship" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#AAFF00"/>
+      <stop offset="100%" stop-color="#44BB00"/>
+    </linearGradient>
+    <radialGradient id="acid" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#88FF00" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#44AA00" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Toxic atmosphere -->
+  <ellipse cx="256" cy="350" rx="220" ry="100" fill="url(#acid)"/>
+  <!-- Hazard bubbles -->
+  <circle cx="100" cy="150" r="35" fill="#334400" opacity="0.8"/>
+  <circle cx="100" cy="150" r="25" fill="#446600" opacity="0.6"/>
+  <text x="100" y="155" font-size="24" fill="#AAFF00" text-anchor="middle" opacity="0.9">☢</text>
+  <circle cx="400" cy="130" r="30" fill="#334400" opacity="0.8"/>
+  <circle cx="400" cy="130" r="20" fill="#446600" opacity="0.6"/>
+  <text x="400" y="135" font-size="20" fill="#AAFF00" text-anchor="middle" opacity="0.9">☢</text>
+  <circle cx="180" cy="80" r="22" fill="#334400" opacity="0.7"/>
+  <circle cx="180" cy="80" r="14" fill="#446600" opacity="0.5"/>
+  <!-- Ship -->
+  <polygon points="256,100 304,270 256,252 208,270" fill="url(#toxic_ship)"/>
+  <polygon points="256,100 280,258 256,243 232,258" fill="#DDFFA0" opacity="0.4"/>
+  <ellipse cx="256" cy="195" rx="15" ry="21" fill="#EEFF88" opacity="0.9"/>
+  <!-- Wings -->
+  <polygon points="208,230 158,268 180,278 208,252" fill="url(#toxic_ship)" opacity="0.85"/>
+  <polygon points="304,230 354,268 332,278 304,252" fill="url(#toxic_ship)" opacity="0.85"/>
+  <!-- Toxic engine -->
+  <ellipse cx="256" cy="285" rx="20" ry="30" fill="#66FF00" opacity="0.8"/>
+  <ellipse cx="256" cy="300" rx="10" ry="18" fill="#AAFF44" opacity="0.6"/>
+  <!-- Drip effects -->
+  <circle cx="256" cy="320" r="4" fill="#88FF00" opacity="0.5"/>
+  <circle cx="256" cy="338" r="3" fill="#88FF00" opacity="0.35"/>
+  <circle cx="256" cy="352" r="2" fill="#88FF00" opacity="0.2"/>
+  <text x="256" y="450" font-family="Arial" font-size="26" font-weight="bold" fill="#AAFF00" text-anchor="middle">DODGE·CRAFT</text>
+</svg>

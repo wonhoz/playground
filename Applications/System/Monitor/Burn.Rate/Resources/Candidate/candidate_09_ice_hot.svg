@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#000820"/>
+      <stop offset="100%" stop-color="#001040"/>
+    </linearGradient>
+    <linearGradient id="cold" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00BFFF"/>
+      <stop offset="100%" stop-color="#4488FF"/>
+    </linearGradient>
+    <linearGradient id="hot" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FF4500"/>
+      <stop offset="100%" stop-color="#FF0000"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Split battery showing cold vs hot -->
+  <!-- Left side (eco/cold) -->
+  <rect x="80" y="160" width="148" height="170" rx="12" fill="#001040" stroke="#224466" stroke-width="2.5"/>
+  <rect x="88" y="168" width="130" height="154" rx="8" fill="url(#cold)" opacity="0.85"/>
+  <text x="154" y="260" font-family="Arial" font-size="22" font-weight="bold" fill="white" text-anchor="middle">ECO</text>
+  <text x="154" y="290" font-family="Arial" font-size="18" fill="#AADDFF" text-anchor="middle">5%/h</text>
+  <!-- Divider -->
+  <line x1="256" y1="140" x2="256" y2="352" stroke="#333" stroke-width="3" stroke-dasharray="8,4"/>
+  <!-- Right side (high/hot) -->
+  <rect x="284" y="160" width="148" height="170" rx="12" fill="#1A0000" stroke="#440000" stroke-width="2.5"/>
+  <rect x="292" y="168" width="130" height="154" rx="8" fill="url(#hot)" opacity="0.85"/>
+  <text x="358" y="260" font-family="Arial" font-size="22" font-weight="bold" fill="white" text-anchor="middle">HOT</text>
+  <text x="358" y="290" font-family="Arial" font-size="18" fill="#FFAAAA" text-anchor="middle">32%/h</text>
+  <!-- Terminals -->
+  <rect x="228" y="140" width="56" height="22" rx="6" fill="#333"/>
+  <!-- VS text -->
+  <text x="256" y="370" font-family="Arial" font-size="20" font-weight="bold" fill="#888" text-anchor="middle">vs</text>
+  <!-- Title -->
+  <text x="256" y="462" font-family="Arial" font-size="26" font-weight="bold" fill="#FF8800" text-anchor="middle">Burn.Rate</text>
+</svg>

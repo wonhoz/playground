@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#141428"/>
+      <stop offset="100%" stop-color="#1e1e38"/>
+    </linearGradient>
+    <linearGradient id="t1" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#818cf8"/>
+      <stop offset="100%" stop-color="#6366f1"/>
+    </linearGradient>
+    <linearGradient id="t2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#34d399"/>
+      <stop offset="100%" stop-color="#10b981"/>
+    </linearGradient>
+    <linearGradient id="t3" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#fb923c"/>
+      <stop offset="100%" stop-color="#f97316"/>
+    </linearGradient>
+    <linearGradient id="t4" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f472b6"/>
+      <stop offset="100%" stop-color="#ec4899"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Title -->
+  <text x="256" y="75" text-anchor="middle" font-family="monospace" font-size="15" fill="#c7d2fe" font-weight="bold">TIMELINE PROFILER</text>
+  <!-- Time axis -->
+  <line x1="130" y1="130" x2="450" y2="130" stroke="#4a4a6a" stroke-width="1.5"/>
+  <text x="130" y="122" font-family="monospace" font-size="10" fill="#888">0ms</text>
+  <text x="210" y="122" font-family="monospace" font-size="10" fill="#888">50ms</text>
+  <text x="290" y="122" font-family="monospace" font-size="10" fill="#888">100ms</text>
+  <text x="370" y="122" font-family="monospace" font-size="10" fill="#888">150ms</text>
+  <text x="438" y="122" font-family="monospace" font-size="10" fill="#888">200ms</text>
+  <!-- Process name column -->
+  <text x="115" y="178" text-anchor="end" font-family="monospace" font-size="11" fill="#c7d2fe">Thread-1</text>
+  <text x="115" y="228" text-anchor="end" font-family="monospace" font-size="11" fill="#86efac">Thread-2</text>
+  <text x="115" y="278" text-anchor="end" font-family="monospace" font-size="11" fill="#fdba74">Thread-3</text>
+  <text x="115" y="328" text-anchor="end" font-family="monospace" font-size="11" fill="#f9a8d4">Thread-4</text>
+  <!-- Timeline bars -->
+  <rect x="130" y="160" width="200" height="26" rx="4" fill="url(#t1)"/>
+  <rect x="340" y="160" width="80" height="26" rx="4" fill="url(#t1)" opacity="0.6"/>
+  <rect x="130" y="210" width="80" height="26" rx="4" fill="url(#t2)"/>
+  <rect x="220" y="210" width="160" height="26" rx="4" fill="url(#t2)" opacity="0.7"/>
+  <rect x="130" y="260" width="120" height="26" rx="4" fill="url(#t3)"/>
+  <rect x="260" y="260" width="60" height="26" rx="4" fill="url(#t3)" opacity="0.5"/>
+  <rect x="330" y="260" width="100" height="26" rx="4" fill="url(#t3)" opacity="0.7"/>
+  <rect x="190" y="310" width="240" height="26" rx="4" fill="url(#t4)"/>
+  <!-- Duration labels -->
+  <text x="230" y="178" text-anchor="middle" font-family="monospace" font-size="10" fill="#fff">62ms</text>
+  <text x="380" y="178" text-anchor="middle" font-family="monospace" font-size="10" fill="#fff">25ms</text>
+  <text x="170" y="228" text-anchor="middle" font-family="monospace" font-size="10" fill="#fff">25ms</text>
+  <text x="300" y="228" text-anchor="middle" font-family="monospace" font-size="10" fill="#fff">50ms</text>
+  <text x="190" y="278" text-anchor="middle" font-family="monospace" font-size="10" fill="#fff">37ms</text>
+  <text x="310" y="278" text-anchor="middle" font-family="monospace" font-size="9" fill="#fff">31ms</text>
+  <text x="310" y="328" text-anchor="middle" font-family="monospace" font-size="10" fill="#fff">75ms</text>
+  <!-- Total time indicator -->
+  <rect x="90" y="375" width="340" height="36" rx="6" fill="#2a2a4a" stroke="#818cf8" stroke-width="2"/>
+  <text x="256" y="398" text-anchor="middle" font-family="monospace" font-size="14" fill="#818cf8" font-weight="bold">TOTAL: 174ms  |  SCORE: 9842</text>
+</svg>

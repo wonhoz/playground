@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#001020"/>
+      <stop offset="100%" stop-color="#002040"/>
+    </linearGradient>
+    <linearGradient id="wifi" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#40c4ff"/>
+      <stop offset="100%" stop-color="#0091ea"/>
+    </linearGradient>
+    <filter id="glow"><feGaussianBlur stdDeviation="8"/></filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- wifi arc rings (bottom to top) -->
+  <!-- large outer -->
+  <path d="M100 300 Q256 120 412 300" fill="none" stroke="url(#wifi)" stroke-width="18" stroke-linecap="round" opacity="0.9"/>
+  <!-- medium -->
+  <path d="M145 315 Q256 175 367 315" fill="none" stroke="url(#wifi)" stroke-width="16" stroke-linecap="round" opacity="0.7"/>
+  <!-- small -->
+  <path d="M186 332 Q256 228 326 332" fill="none" stroke="url(#wifi)" stroke-width="14" stroke-linecap="round" opacity="0.55"/>
+  <!-- tiny -->
+  <path d="M220 350 Q256 288 292 350" fill="none" stroke="url(#wifi)" stroke-width="12" stroke-linecap="round" opacity="0.4"/>
+  <!-- center dot -->
+  <circle cx="256" cy="388" r="22" fill="url(#wifi)" filter="url(#glow)"/>
+  <circle cx="256" cy="388" r="11" fill="white"/>
+  <!-- scan lines effect (horizontal) -->
+  <line x1="80" y1="220" x2="432" y2="220" stroke="#40c4ff" stroke-width="2" opacity="0.2" stroke-dasharray="15,12"/>
+  <line x1="80" y1="250" x2="432" y2="250" stroke="#40c4ff" stroke-width="2" opacity="0.15" stroke-dasharray="15,12"/>
+</svg>

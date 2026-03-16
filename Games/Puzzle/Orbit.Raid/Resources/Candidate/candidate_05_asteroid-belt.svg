@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#060614"/>
+      <stop offset="100%" stop-color="#0a0a1e"/>
+    </linearGradient>
+    <radialGradient id="star" cx="40%" cy="35%" r="55%">
+      <stop offset="0%" stop-color="#ffeeaa"/>
+      <stop offset="60%" stop-color="#ff8800"/>
+      <stop offset="100%" stop-color="#662200"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Central star -->
+  <circle cx="256" cy="256" r="40" fill="url(#star)"/>
+  <!-- Asteroid belt orbit -->
+  <ellipse cx="256" cy="256" rx="150" ry="80" fill="none" stroke="#333" stroke-width="1" stroke-dasharray="4,4"/>
+  <!-- Asteroids (irregular shapes) -->
+  <polygon points="370,230 380,218 395,225 392,240 378,244" fill="#887755" stroke="#aaa" stroke-width="1"/>
+  <polygon points="200,185 210,175 222,182 220,196 207,200" fill="#776644" stroke="#999" stroke-width="1"/>
+  <polygon points="340,295 348,284 360,290 357,305 344,309" fill="#998866" stroke="#bbb" stroke-width="1"/>
+  <polygon points="155,265 160,252 172,258 170,273 156,278" fill="#887755" stroke="#aaa" stroke-width="1"/>
+  <polygon points="250,175 258,164 270,170 268,185 255,189" fill="#665544" stroke="#999" stroke-width="1"/>
+  <!-- Raider ship -->
+  <polygon points="430,200 415,220 445,220" fill="#ff4444" stroke="#ff6666" stroke-width="1"/>
+  <line x1="430" y1="210" x2="380" y2="240" stroke="#ff4444" stroke-width="2" stroke-dasharray="6,4" opacity="0.7"/>
+  <!-- Explosion near belt -->
+  <circle cx="385" cy="235" r="12" fill="#ff8800" opacity="0.6"/>
+  <circle cx="385" cy="235" r="6" fill="#ffff44" opacity="0.8"/>
+  <text x="256" y="430" text-anchor="middle" font-family="monospace" font-size="28" font-weight="bold" fill="#ff8844">ORBIT.RAID</text>
+</svg>

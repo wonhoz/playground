@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F1923"/>
+      <stop offset="100%" stop-color="#1A2D3D"/>
+    </linearGradient>
+    <linearGradient id="shieldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38BDF8"/>
+      <stop offset="100%" stop-color="#0284C7"/>
+    </linearGradient>
+    <radialGradient id="shieldGlow" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#7DD3FC" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#0284C7" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="heroGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FCD34D"/>
+      <stop offset="100%" stop-color="#D97706"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Shield shape -->
+  <ellipse cx="256" cy="256" rx="160" ry="160" fill="url(#shieldGlow)"/>
+  <path d="M256,80 L380,140 L380,280 Q380,380 256,430 Q132,380 132,280 L132,140 Z" fill="url(#shieldGrad)" opacity="0.25" stroke="#38BDF8" stroke-width="4"/>
+  <!-- Shield inner glow ring -->
+  <path d="M256,100 L366,152 L366,276 Q366,362 256,408 Q146,362 146,276 L146,152 Z" fill="none" stroke="#7DD3FC" stroke-width="2" opacity="0.5"/>
+  <!-- Hero emblem on shield (lightning bolt) -->
+  <polygon points="270,160 240,275 262,275 248,355 292,245 265,245 285,160" fill="#FDE68A" opacity="0.9"/>
+  <!-- Bullets being deflected -->
+  <rect x="60" y="200" width="36" height="12" rx="6" fill="#EF4444"/>
+  <line x1="96" y1="206" x2="140" y2="220" stroke="#EF4444" stroke-width="2" stroke-dasharray="4,3" opacity="0.6"/>
+  <!-- Ricochet spark -->
+  <circle cx="140" cy="220" r="8" fill="#FDE68A" opacity="0.8"/>
+  <line x1="140" y1="220" x2="110" y2="190" stroke="#FDE68A" stroke-width="2" opacity="0.6"/>
+  <line x1="140" y1="220" x2="115" y2="248" stroke="#FDE68A" stroke-width="2" opacity="0.6"/>
+  <rect x="420" y="230" width="36" height="12" rx="6" fill="#F97316" transform="scale(-1,1) translate(-876,0)"/>
+  <line x1="376" y1="236" x2="332" y2="220" stroke="#F97316" stroke-width="2" stroke-dasharray="4,3" opacity="0.6"/>
+  <circle cx="332" cy="220" r="8" fill="#FDE68A" opacity="0.8"/>
+</svg>

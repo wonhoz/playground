@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A0800"/>
+      <stop offset="100%" stop-color="#2D1200"/>
+    </linearGradient>
+    <linearGradient id="flame" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#FF0000"/>
+      <stop offset="50%" stop-color="#FF8800"/>
+      <stop offset="100%" stop-color="#FFFF00"/>
+    </linearGradient>
+    <radialGradient id="glow_center" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FF8800" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#FF8800" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="blur">
+      <feGaussianBlur stdDeviation="6"/>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Glow bg -->
+  <ellipse cx="256" cy="280" rx="200" ry="160" fill="url(#glow_center)"/>
+  <!-- Arrow/ship silhouette -->
+  <polygon points="256,80 320,320 256,290 192,320" fill="#FF6600" opacity="0.95"/>
+  <polygon points="256,80 300,300 256,275 212,300" fill="#FFAA00"/>
+  <!-- Cockpit glow -->
+  <ellipse cx="256" cy="200" rx="18" ry="24" fill="#FFFF88" opacity="0.9"/>
+  <!-- Fire trail -->
+  <ellipse cx="256" cy="340" rx="30" ry="50" fill="url(#flame)" opacity="0.9" filter="url(#blur)"/>
+  <ellipse cx="256" cy="360" rx="18" ry="40" fill="#FFFF00" opacity="0.7"/>
+  <!-- Falling rocks/obstacles -->
+  <polygon points="100,140 140,140 120,180" fill="#AA4422" opacity="0.9"/>
+  <polygon points="90,148 130,148 110,170" fill="#CC6644"/>
+  <polygon points="370,100 420,120 380,160" fill="#AA4422" opacity="0.9"/>
+  <polygon points="378,108 412,124 384,152" fill="#CC6644"/>
+  <polygon points="150,240 185,255 155,285" fill="#882200" opacity="0.8"/>
+  <polygon points="340,220 380,230 355,265" fill="#882200" opacity="0.8"/>
+  <!-- Dodge arrow indicators -->
+  <polyline points="80,380 120,360 80,340" stroke="#FF8800" stroke-width="4" fill="none" opacity="0.6"/>
+  <polyline points="432,380 392,360 432,340" stroke="#FF8800" stroke-width="4" fill="none" opacity="0.6"/>
+  <text x="256" y="450" font-family="Arial Black" font-size="26" fill="#FF8800" text-anchor="middle">DODGE·CRAFT</text>
+</svg>

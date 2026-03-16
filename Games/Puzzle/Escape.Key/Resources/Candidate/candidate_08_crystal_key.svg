@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" style="stop-color:#1a0a2e"/>
+      <stop offset="100%" style="stop-color:#0a0a0a"/>
+    </radialGradient>
+    <linearGradient id="crystal" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#a8edea"/>
+      <stop offset="50%" style="stop-color:#fed6e3"/>
+      <stop offset="100%" style="stop-color:#a8edea"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Crystal gemstone as key bow -->
+  <polygon points="256,60 310,130 340,210 310,270 256,300 202,270 172,210 202,130" fill="url(#crystal)" opacity="0.4"/>
+  <polygon points="256,60 310,130 340,210 310,270 256,300 202,270 172,210 202,130" stroke="url(#crystal)" stroke-width="4" fill="none"/>
+  <!-- Crystal internal lines -->
+  <line x1="256" y1="60" x2="256" y2="300" stroke="url(#crystal)" stroke-width="2" opacity="0.5"/>
+  <line x1="172" y1="210" x2="340" y2="210" stroke="url(#crystal)" stroke-width="2" opacity="0.5"/>
+  <line x1="202" y1="130" x2="310" y2="270" stroke="url(#crystal)" stroke-width="2" opacity="0.4"/>
+  <line x1="310" y1="130" x2="202" y2="270" stroke="url(#crystal)" stroke-width="2" opacity="0.4"/>
+  <!-- Key shaft -->
+  <rect x="235" y="295" width="42" height="130" rx="5" fill="url(#crystal)" opacity="0.7"/>
+  <!-- Key teeth -->
+  <rect x="277" y="320" width="30" height="18" rx="4" fill="url(#crystal)"/>
+  <rect x="277" y="355" width="25" height="18" rx="4" fill="url(#crystal)"/>
+  <rect x="277" y="390" width="20" height="18" rx="4" fill="url(#crystal)"/>
+  <!-- Sparkles -->
+  <circle cx="160" cy="150" r="6" fill="url(#crystal)" opacity="0.8"/>
+  <circle cx="355" cy="280" r="5" fill="url(#crystal)" opacity="0.6"/>
+  <circle cx="120" cy="350" r="4" fill="url(#crystal)" opacity="0.5"/>
+  <line x1="160" y1="135" x2="160" y2="165" stroke="url(#crystal)" stroke-width="3" opacity="0.8"/>
+  <line x1="145" y1="150" x2="175" y2="150" stroke="url(#crystal)" stroke-width="3" opacity="0.8"/>
+</svg>

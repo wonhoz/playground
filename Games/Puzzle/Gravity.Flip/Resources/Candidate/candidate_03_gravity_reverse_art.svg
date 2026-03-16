@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" style="stop-color:#1a0533"/>
+      <stop offset="100%" style="stop-color:#0a0010"/>
+    </radialGradient>
+    <linearGradient id="sphere1" x1="20%" y1="20%" x2="80%" y2="80%">
+      <stop offset="0%" style="stop-color:#a855f7"/>
+      <stop offset="100%" style="stop-color:#6366f1"/>
+    </linearGradient>
+    <linearGradient id="sphere2" x1="20%" y1="20%" x2="80%" y2="80%">
+      <stop offset="0%" style="stop-color:#f0abfc"/>
+      <stop offset="100%" style="stop-color:#a78bfa"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="bigglow">
+      <feGaussianBlur stdDeviation="20" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Energy field rings -->
+  <ellipse cx="256" cy="256" rx="190" ry="190" fill="none" stroke="#a855f730" stroke-width="2"/>
+  <ellipse cx="256" cy="256" rx="150" ry="150" fill="none" stroke="#6366f140" stroke-width="1.5"/>
+  <!-- Falling object (going up due to reversed gravity) -->
+  <circle cx="256" cy="160" r="36" fill="url(#sphere1)" filter="url(#glow)"/>
+  <circle cx="246" cy="150" r="10" fill="#ffffff40"/>
+  <!-- Gravity wave lines going upward -->
+  <path d="M180,320 Q200,290 220,310 Q240,330 260,300 Q280,270 300,290 Q320,310 340,280" stroke="#a855f760" stroke-width="2.5" fill="none"/>
+  <path d="M160,360 Q190,325 215,348 Q240,370 265,335 Q290,300 318,325 Q345,350 370,315" stroke="#6366f150" stroke-width="2" fill="none"/>
+  <!-- Ground platform (cracking) -->
+  <rect x="100" y="360" width="312" height="24" rx="6" fill="#4a3060"/>
+  <line x1="180" y1="360" x2="170" y2="384" stroke="#a855f780" stroke-width="2"/>
+  <line x1="256" y1="360" x2="256" y2="384" stroke="#a855f780" stroke-width="2"/>
+  <line x1="330" y1="360" x2="340" y2="384" stroke="#a855f780" stroke-width="2"/>
+  <!-- Force field lines above sphere -->
+  <line x1="256" y1="110" x2="220" y2="70" stroke="#f0abfc80" stroke-width="1.5" stroke-dasharray="4,4"/>
+  <line x1="256" y1="110" x2="256" y2="60" stroke="#f0abfc80" stroke-width="1.5" stroke-dasharray="4,4"/>
+  <line x1="256" y1="110" x2="292" y2="70" stroke="#f0abfc80" stroke-width="1.5" stroke-dasharray="4,4"/>
+  <!-- Stars -->
+  <circle cx="80" cy="90" r="2" fill="#ffffff70"/>
+  <circle cx="420" cy="110" r="2" fill="#ffffff70"/>
+  <circle cx="130" cy="440" r="1.5" fill="#ffffff50"/>
+  <circle cx="390" cy="420" r="1.5" fill="#ffffff50"/>
+</svg>

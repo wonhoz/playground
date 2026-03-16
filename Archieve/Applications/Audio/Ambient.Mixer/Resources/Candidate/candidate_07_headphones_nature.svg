@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0D1B2A"/>
+      <stop offset="100%" stop-color="#1B2838"/>
+    </linearGradient>
+    <linearGradient id="hp" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4A9EFF"/>
+      <stop offset="100%" stop-color="#0056D6"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Headphone arc -->
+  <path d="M130,260 Q130,130 256,130 Q382,130 382,260" fill="none" stroke="url(#hp)" stroke-width="18" stroke-linecap="round"/>
+  <!-- Left ear cup -->
+  <rect x="88" y="240" width="72" height="90" rx="20" fill="url(#hp)"/>
+  <!-- Right ear cup -->
+  <rect x="352" y="240" width="72" height="90" rx="20" fill="url(#hp)"/>
+  <!-- Nature icons inside ear cups -->
+  <!-- Left: Rain drop -->
+  <ellipse cx="124" cy="278" rx="14" ry="18" fill="#90CDF4"/>
+  <polygon points="124,258 114,278 134,278" fill="#90CDF4"/>
+  <!-- Right: Leaf -->
+  <ellipse cx="388" cy="278" rx="16" ry="12" fill="#68D391" transform="rotate(-30 388 278)"/>
+  <line x1="388" y1="290" x2="388" y2="308" stroke="#48BB78" stroke-width="2"/>
+  <!-- Sound waves emanating -->
+  <path d="M80,285 Q60,275 55,285 Q60,295 80,285" fill="none" stroke="#4A9EFF" stroke-width="2" opacity="0.5"/>
+  <path d="M70,270 Q40,256 34,270 Q40,284 70,270" fill="none" stroke="#4A9EFF" stroke-width="1.5" opacity="0.3"/>
+  <path d="M432,285 Q452,275 457,285 Q452,295 432,285" fill="none" stroke="#4A9EFF" stroke-width="2" opacity="0.5"/>
+  <path d="M442,270 Q472,256 478,270 Q472,284 442,270" fill="none" stroke="#4A9EFF" stroke-width="1.5" opacity="0.3"/>
+  <!-- Label -->
+  <text x="256" y="410" font-family="sans-serif" font-weight="bold" font-size="22" fill="#4A9EFF" text-anchor="middle">Ambient Mixer</text>
+</svg>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Disk.Lens — Icon Candidates</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #1a1a1a;
+      color: #e0e0e0;
+      font-family: 'Segoe UI', sans-serif;
+      padding: 32px;
+    }
+    h1 { font-size: 22px; font-weight: 600; margin-bottom: 8px; color: #5eead4; }
+    p.subtitle { font-size: 13px; color: #666; margin-bottom: 28px; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 20px;
+    }
+    .card {
+      background: #242424;
+      border: 1px solid #333;
+      border-radius: 12px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      transition: border-color 0.2s, transform 0.2s;
+      cursor: pointer;
+    }
+    .card:hover { border-color: #0891b2; transform: translateY(-3px); }
+    .card img { width: 128px; height: 128px; border-radius: 20px; }
+    .card .label { font-size: 11px; color: #888; text-align: center; word-break: break-all; }
+    .card .num { font-size: 18px; font-weight: 700; color: #22d3ee; }
+  </style>
+</head>
+<body>
+  <h1>Disk.Lens — Icon Candidates</h1>
+  <p class="subtitle">디스크 사용량 시각화 분석기 | 10 candidates</p>
+  <div class="grid">
+    <div class="card"><span class="num">01</span><img src="candidate_01_donut_chart.svg" alt="donut chart"><span class="label">donut_chart</span></div>
+    <div class="card"><span class="num">02</span><img src="candidate_02_treemap.svg" alt="treemap"><span class="label">treemap</span></div>
+    <div class="card"><span class="num">03</span><img src="candidate_03_magnifier_hdd.svg" alt="magnifier hdd"><span class="label">magnifier_hdd</span></div>
+    <div class="card"><span class="num">04</span><img src="candidate_04_sunburst.svg" alt="sunburst"><span class="label">sunburst</span></div>
+    <div class="card"><span class="num">05</span><img src="candidate_05_bar_chart_drive.svg" alt="bar chart drive"><span class="label">bar_chart_drive</span></div>
+    <div class="card"><span class="num">06</span><img src="candidate_06_folder_heat.svg" alt="folder heat"><span class="label">folder_heat</span></div>
+    <div class="card"><span class="num">07</span><img src="candidate_07_eye_scan.svg" alt="eye scan"><span class="label">eye_scan</span></div>
+    <div class="card"><span class="num">08</span><img src="candidate_08_radial_gauge.svg" alt="radial gauge"><span class="label">radial_gauge</span></div>
+    <div class="card"><span class="num">09</span><img src="candidate_09_circuit_disk.svg" alt="circuit disk"><span class="label">circuit_disk</span></div>
+    <div class="card"><span class="num">10</span><img src="candidate_10_cosmic_disk.svg" alt="cosmic disk"><span class="label">cosmic_disk</span></div>
+  </div>
+</body>
+</html>

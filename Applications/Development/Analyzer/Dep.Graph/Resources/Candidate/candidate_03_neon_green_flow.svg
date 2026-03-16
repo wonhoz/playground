@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#050f05"/>
+      <stop offset="100%" stop-color="#0a2010"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- directed flow edges with arrows -->
+  <g stroke="#00ff88" stroke-width="3" fill="none" filter="url(#glow)" opacity="0.7">
+    <path d="M256 105 L160 205"/>
+    <path d="M256 105 L352 205"/>
+    <path d="M160 235 L160 305"/>
+    <path d="M352 235 L256 305"/>
+    <path d="M352 235 L420 305"/>
+    <path d="M160 335 L256 405"/>
+    <path d="M256 335 L256 405"/>
+  </g>
+  <!-- arrowheads -->
+  <g fill="#00ff88" filter="url(#glow)">
+    <polygon points="155,200 165,200 160,215"/>
+    <polygon points="347,200 357,200 352,215"/>
+    <polygon points="155,298 165,298 160,313"/>
+    <polygon points="251,298 261,298 256,313"/>
+    <polygon points="415,298 425,298 420,313"/>
+    <polygon points="251,398 261,398 256,413"/>
+  </g>
+  <!-- nodes -->
+  <rect x="228" y="80" width="56" height="36" rx="6" fill="#001a08" stroke="#00ff88" stroke-width="3" filter="url(#glow)"/>
+  <rect x="132" y="208" width="56" height="36" rx="6" fill="#001a08" stroke="#00ff88" stroke-width="3" filter="url(#glow)"/>
+  <rect x="324" y="208" width="56" height="36" rx="6" fill="#001a08" stroke="#00ff88" stroke-width="3" filter="url(#glow)"/>
+  <rect x="228" y="308" width="56" height="36" rx="6" fill="#001a08" stroke="#00ff88" stroke-width="3" filter="url(#glow)"/>
+  <rect x="392" y="308" width="56" height="36" rx="6" fill="#001a08" stroke="#00ff88" stroke-width="3" filter="url(#glow)"/>
+  <rect x="228" y="405" width="56" height="36" rx="6" fill="#001a08" stroke="#00cc66" stroke-width="3" filter="url(#glow)"/>
+  <!-- labels -->
+  <text x="256" y="98" font-family="monospace" font-size="14" fill="#00ff88" text-anchor="middle" dominant-baseline="central">main</text>
+  <text x="160" y="226" font-family="monospace" font-size="12" fill="#00cc66" text-anchor="middle" dominant-baseline="central">lib</text>
+  <text x="352" y="226" font-family="monospace" font-size="12" fill="#00cc66" text-anchor="middle" dominant-baseline="central">api</text>
+  <text x="256" y="326" font-family="monospace" font-size="12" fill="#00cc66" text-anchor="middle" dominant-baseline="central">db</text>
+  <text x="420" y="326" font-family="monospace" font-size="12" fill="#00cc66" text-anchor="middle" dominant-baseline="central">ui</text>
+  <text x="256" y="423" font-family="monospace" font-size="12" fill="#009944" text-anchor="middle" dominant-baseline="central">core</text>
+</svg>

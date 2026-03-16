@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a1200"/>
+      <stop offset="100%" stop-color="#2d2000"/>
+    </linearGradient>
+    <linearGradient id="trophy" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffd700"/>
+      <stop offset="50%" stop-color="#ffaa00"/>
+      <stop offset="100%" stop-color="#cc8800"/>
+    </linearGradient>
+    <linearGradient id="base" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#cc8800"/>
+      <stop offset="100%" stop-color="#ffd700"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Trophy cup -->
+  <path d="M176,140 L176,280 Q176,340 256,340 Q336,340 336,280 L336,140 Z" fill="url(#trophy)"/>
+  <!-- Trophy handles -->
+  <path d="M176,160 Q120,160 120,220 Q120,280 176,260" fill="none" stroke="url(#trophy)" stroke-width="18" stroke-linecap="round"/>
+  <path d="M336,160 Q392,160 392,220 Q392,280 336,260" fill="none" stroke="url(#trophy)" stroke-width="18" stroke-linecap="round"/>
+  <!-- Stem -->
+  <rect x="236" y="340" width="40" height="50" fill="url(#base)"/>
+  <!-- Base -->
+  <rect x="186" y="388" width="140" height="26" rx="8" fill="url(#base)"/>
+  <!-- Score on trophy -->
+  <text x="256" y="230" text-anchor="middle" font-family="monospace" font-size="36" fill="#1a1200" font-weight="bold">9842</text>
+  <text x="256" y="260" text-anchor="middle" font-family="monospace" font-size="14" fill="#1a1200" font-weight="bold">SCORE</text>
+  <!-- Stars above trophy -->
+  <text x="140" y="130" text-anchor="middle" font-size="24" fill="#ffd700" opacity="0.8">★</text>
+  <text x="256" y="105" text-anchor="middle" font-size="32" fill="#ffd700">★</text>
+  <text x="372" y="130" text-anchor="middle" font-size="24" fill="#ffd700" opacity="0.8">★</text>
+  <!-- Title -->
+  <text x="256" y="450" text-anchor="middle" font-family="monospace" font-size="16" fill="#ffd700" font-weight="bold">PROC.BENCH</text>
+  <!-- Lightning bolts -->
+  <path d="M95 200 L88 220 L95 218 L88 240 L104 218 L97 221 L104 200 Z" fill="#ffd700" opacity="0.7"/>
+  <path d="M417 200 L410 220 L417 218 L410 240 L426 218 L419 221 L426 200 Z" fill="#ffd700" opacity="0.7"/>
+</svg>

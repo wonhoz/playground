@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0a0a"/>
+      <stop offset="100%" stop-color="#1a1a2e"/>
+    </linearGradient>
+    <linearGradient id="bolt" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffe000"/>
+      <stop offset="100%" stop-color="#ff8c00"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Guitar outline (electric) -->
+  <path d="M200,380 Q160,400 150,370 Q140,340 165,320 Q175,310 185,300 L185,160 Q185,140 200,135 L220,135 Q230,135 232,125 L235,80 Q237,70 256,70 Q275,70 277,80 L280,125 Q282,135 292,135 L312,135 Q327,140 327,160 L327,300 Q337,310 347,320 Q372,340 362,370 Q352,400 312,380 Q290,395 256,395 Q222,395 200,380Z" fill="#1e1e3e" stroke="#4444aa" stroke-width="3"/>
+  <!-- Guitar cutaway -->
+  <path d="M327,200 Q360,230 350,270 Q340,290 327,280Z" fill="#2a2a4e"/>
+  <!-- Strings on neck -->
+  <line x1="236" y1="80" x2="236" y2="310" stroke="#aaaaff" stroke-width="1.5" opacity="0.6"/>
+  <line x1="244" y1="80" x2="244" y2="310" stroke="#aaaaff" stroke-width="1.5" opacity="0.6"/>
+  <line x1="252" y1="80" x2="252" y2="310" stroke="#aaaaff" stroke-width="2" opacity="0.6"/>
+  <line x1="260" y1="80" x2="260" y2="310" stroke="#aaaaff" stroke-width="2" opacity="0.6"/>
+  <line x1="268" y1="80" x2="268" y2="310" stroke="#aaaaff" stroke-width="1.5" opacity="0.6"/>
+  <line x1="276" y1="80" x2="276" y2="310" stroke="#aaaaff" stroke-width="1.5" opacity="0.6"/>
+  <!-- Body details -->
+  <ellipse cx="256" cy="340" rx="45" ry="15" fill="#333355" opacity="0.8"/>
+  <!-- Lightning bolt overlay -->
+  <polygon points="310,100 280,190 300,190 265,310 345,195 320,195 355,100" fill="url(#bolt)" filter="url(#glow)" opacity="0.9"/>
+  <!-- Pickup -->
+  <rect x="220" y="305" width="72" height="20" rx="4" fill="#555577"/>
+  <rect x="225" y="308" width="62" height="14" rx="3" fill="#333355"/>
+</svg>

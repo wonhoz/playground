@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0a0a"/>
+      <stop offset="100%" stop-color="#1a1a1a"/>
+    </linearGradient>
+    <linearGradient id="calcBody" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e1e2e"/>
+      <stop offset="100%" stop-color="#161622"/>
+    </linearGradient>
+    <linearGradient id="display" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#001a0a"/>
+      <stop offset="100%" stop-color="#002a10"/>
+    </linearGradient>
+    <linearGradient id="btnGreen" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#39ff14"/>
+      <stop offset="100%" stop-color="#00cc00"/>
+    </linearGradient>
+    <filter id="neonGlow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- 계산기 몸체 -->
+  <rect x="116" y="76" width="280" height="360" rx="20" fill="url(#calcBody)" stroke="#333" stroke-width="2"/>
+  <!-- 디스플레이 -->
+  <rect x="140" y="106" width="232" height="90" rx="8" fill="url(#display)" stroke="#00ff88" stroke-width="1.5"/>
+  <!-- 디스플레이 숫자 -->
+  <text x="356" y="165" font-family="'Courier New', monospace" font-size="40" fill="#39ff14" text-anchor="end" filter="url(#neonGlow)">1,024</text>
+  <text x="156" y="142" font-family="Arial" font-size="13" fill="#00aa55" opacity="0.8">TOKEN COST</text>
+  <!-- 버튼 행 1 (연산) -->
+  <rect x="140" y="212" width="50" height="40" rx="6" fill="#2a1a3a" stroke="#9933ff" stroke-width="1.5"/>
+  <text x="165" y="238" font-family="Arial" font-weight="bold" font-size="20" fill="#cc66ff" text-anchor="middle">C</text>
+  <rect x="202" y="212" width="50" height="40" rx="6" fill="#2a1a3a" stroke="#9933ff" stroke-width="1.5"/>
+  <text x="227" y="238" font-family="Arial" font-weight="bold" font-size="20" fill="#cc66ff" text-anchor="middle">±</text>
+  <rect x="264" y="212" width="50" height="40" rx="6" fill="#2a1a3a" stroke="#9933ff" stroke-width="1.5"/>
+  <text x="289" y="238" font-family="Arial" font-weight="bold" font-size="20" fill="#cc66ff" text-anchor="middle">%</text>
+  <rect x="322" y="212" width="50" height="40" rx="6" fill="#392a00" stroke="#ffaa00" stroke-width="1.5"/>
+  <text x="347" y="238" font-family="Arial" font-weight="bold" font-size="24" fill="#ffcc44" text-anchor="middle">÷</text>
+  <!-- 버튼 행 2-4 (숫자) -->
+  <rect x="140" y="264" width="50" height="40" rx="6" fill="#252535" stroke="#444" stroke-width="1"/>
+  <text x="165" y="290" font-family="Arial" font-size="20" fill="#e0e0e0" text-anchor="middle">7</text>
+  <rect x="202" y="264" width="50" height="40" rx="6" fill="#252535" stroke="#444" stroke-width="1"/>
+  <text x="227" y="290" font-family="Arial" font-size="20" fill="#e0e0e0" text-anchor="middle">8</text>
+  <rect x="264" y="264" width="50" height="40" rx="6" fill="#252535" stroke="#444" stroke-width="1"/>
+  <text x="289" y="290" font-family="Arial" font-size="20" fill="#e0e0e0" text-anchor="middle">9</text>
+  <rect x="322" y="264" width="50" height="40" rx="6" fill="#392a00" stroke="#ffaa00" stroke-width="1.5"/>
+  <text x="347" y="290" font-family="Arial" font-weight="bold" font-size="24" fill="#ffcc44" text-anchor="middle">×</text>
+  <rect x="140" y="316" width="50" height="40" rx="6" fill="#252535" stroke="#444" stroke-width="1"/>
+  <text x="165" y="342" font-family="Arial" font-size="20" fill="#e0e0e0" text-anchor="middle">4</text>
+  <rect x="202" y="316" width="50" height="40" rx="6" fill="#252535" stroke="#444" stroke-width="1"/>
+  <text x="227" y="342" font-family="Arial" font-size="20" fill="#e0e0e0" text-anchor="middle">5</text>
+  <rect x="264" y="316" width="50" height="40" rx="6" fill="#252535" stroke="#444" stroke-width="1"/>
+  <text x="289" y="342" font-family="Arial" font-size="20" fill="#e0e0e0" text-anchor="middle">6</text>
+  <rect x="322" y="316" width="50" height="40" rx="6" fill="#392a00" stroke="#ffaa00" stroke-width="1.5"/>
+  <text x="347" y="342" font-family="Arial" font-weight="bold" font-size="24" fill="#ffcc44" text-anchor="middle">−</text>
+  <rect x="140" y="368" width="50" height="40" rx="6" fill="#252535" stroke="#444" stroke-width="1"/>
+  <text x="165" y="394" font-family="Arial" font-size="20" fill="#e0e0e0" text-anchor="middle">1</text>
+  <rect x="202" y="368" width="50" height="40" rx="6" fill="#252535" stroke="#444" stroke-width="1"/>
+  <text x="227" y="394" font-family="Arial" font-size="20" fill="#e0e0e0" text-anchor="middle">2</text>
+  <rect x="264" y="368" width="50" height="40" rx="6" fill="#252535" stroke="#444" stroke-width="1"/>
+  <text x="289" y="394" font-family="Arial" font-size="20" fill="#e0e0e0" text-anchor="middle">3</text>
+  <rect x="322" y="368" width="50" height="88" rx="6" fill="url(#btnGreen)" stroke="#00aa00" stroke-width="1.5"/>
+  <text x="347" y="418" font-family="Arial" font-weight="bold" font-size="28" fill="#003300" text-anchor="middle">=</text>
+</svg>

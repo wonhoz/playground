@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#050e1a"/>
+      <stop offset="100%" stop-color="#0a1f35"/>
+    </linearGradient>
+    <linearGradient id="chatGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0ea5e9"/>
+      <stop offset="100%" stop-color="#2563eb"/>
+    </linearGradient>
+    <linearGradient id="chatGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8b5cf6"/>
+      <stop offset="100%" stop-color="#6d28d9"/>
+    </linearGradient>
+    <linearGradient id="forgeGrad" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#ff4500"/>
+      <stop offset="100%" stop-color="#ffd700"/>
+    </linearGradient>
+    <filter id="chatGlow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Chat bubble 1 (user) -->
+  <path d="M80 120 L320 120 L320 210 L140 210 L120 240 L110 210 L80 210Z" fill="#0a1f35" stroke="url(#chatGrad1)" stroke-width="2.5" filter="url(#chatGlow)"/>
+  <line x1="100" y1="150" x2="300" y2="150" stroke="#0ea5e9" stroke-width="2" opacity="0.8"/>
+  <line x1="100" y1="172" x2="280" y2="172" stroke="#0ea5e9" stroke-width="2" opacity="0.7"/>
+  <line x1="100" y1="192" x2="265" y2="192" stroke="#0ea5e9" stroke-width="1.5" opacity="0.5"/>
+  <!-- Chat bubble 2 (AI) -->
+  <path d="M192 270 L432 270 L432 360 L370 360 L390 390 L400 360 L432 360" fill="none"/>
+  <path d="M432 270 L192 270 L192 360 L390 360 L402 390 L412 360 L432 360Z" fill="#0a1f35" stroke="url(#chatGrad2)" stroke-width="2.5" filter="url(#chatGlow)"/>
+  <line x1="212" y1="298" x2="412" y2="298" stroke="#8b5cf6" stroke-width="2" opacity="0.8"/>
+  <line x1="212" y1="320" x2="395" y2="320" stroke="#6d28d9" stroke-width="2" opacity="0.7"/>
+  <line x1="212" y1="342" x2="400" y2="342" stroke="#8b5cf6" stroke-width="1.5" opacity="0.5"/>
+  <!-- Forge anvil connecting the chats (center) -->
+  <rect x="210" y="215" width="92" height="55" rx="8" fill="#1a1a2a" stroke="#555" stroke-width="1.5"/>
+  <rect x="205" y="205" width="102" height="20" rx="5" fill="#2a2a3a"/>
+  <!-- Fire within forge element -->
+  <path d="M228 213 C233 200 240 208 244 196 C247 205 253 200 256 192 C258 200 264 196 268 205 C272 198 278 207 276 213Z" fill="url(#forgeGrad)" fill-opacity="0.8" filter="url(#chatGlow)"/>
+  <!-- Connection arrows forge to chats -->
+  <path d="M256 205 L256 210 L256 215" fill="none" stroke="#ff8c00" stroke-width="2"/>
+  <path d="M256 270 L256 265 L256 260" fill="none" stroke="#ffd700" stroke-width="2"/>
+  <!-- AI indicator dots in forge -->
+  <circle cx="235" cy="235" r="5" fill="#0ea5e9" filter="url(#chatGlow)" opacity="0.8"/>
+  <circle cx="256" cy="235" r="5" fill="#8b5cf6" filter="url(#chatGlow)" opacity="0.8"/>
+  <circle cx="277" cy="235" r="5" fill="#0ea5e9" filter="url(#chatGlow)" opacity="0.8"/>
+  <!-- Floating tag labels -->
+  <rect x="80" y="420" width="120" height="32" rx="8" fill="#0a1f35" stroke="#0ea5e9" stroke-width="1.5" opacity="0.8"/>
+  <rect x="312" y="420" width="120" height="32" rx="8" fill="#0a1f35" stroke="#8b5cf6" stroke-width="1.5" opacity="0.8"/>
+  <line x1="100" y1="436" x2="182" y2="436" stroke="#0ea5e9" stroke-width="1.5" opacity="0.7"/>
+  <line x1="330" y1="436" x2="412" y2="436" stroke="#8b5cf6" stroke-width="1.5" opacity="0.7"/>
+</svg>

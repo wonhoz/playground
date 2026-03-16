@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0a0a"/>
+      <stop offset="100%" stop-color="#1a1a00"/>
+    </linearGradient>
+    <filter id="amber">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Morse lines -->
+  <!-- Row 1: ... (S) -->
+  <circle cx="100" cy="130" r="14" fill="#ffaa00" filter="url(#amber)"/>
+  <circle cx="140" cy="130" r="14" fill="#ffaa00" filter="url(#amber)"/>
+  <circle cx="180" cy="130" r="14" fill="#ffaa00" filter="url(#amber)"/>
+  <!-- Row 2: --- (O) -->
+  <rect x="220" y="116" width="50" height="28" rx="14" fill="#ffaa00" filter="url(#amber)"/>
+  <rect x="286" y="116" width="50" height="28" rx="14" fill="#ffaa00" filter="url(#amber)"/>
+  <rect x="352" y="116" width="50" height="28" rx="14" fill="#ffaa00" filter="url(#amber)"/>
+  <!-- Row 3: ... (S) -->
+  <circle cx="100" cy="190" r="14" fill="#ffaa00" filter="url(#amber)"/>
+  <circle cx="140" cy="190" r="14" fill="#ffaa00" filter="url(#amber)"/>
+  <circle cx="180" cy="190" r="14" fill="#ffaa00" filter="url(#amber)"/>
+  <!-- Divider -->
+  <line x1="80" y1="230" x2="432" y2="230" stroke="#443300" stroke-width="2"/>
+  <!-- Caesar shift diagram -->
+  <text x="256" y="290" text-anchor="middle" font-family="monospace" font-size="18" fill="#888" opacity="0.8">PLAIN:  A B C D E F</text>
+  <text x="256" y="320" text-anchor="middle" font-family="monospace" font-size="18" fill="#ffaa00" filter="url(#amber)">CIPHER: D E F G H I</text>
+  <!-- Arrows showing shift -->
+  <text x="256" y="360" text-anchor="middle" font-family="sans-serif" font-size="36" fill="#ffaa00" opacity="0.8">+3</text>
+  <!-- Decorative lock icon -->
+  <rect x="215" y="390" width="82" height="70" rx="10" fill="#2a2000" stroke="#ffaa00" stroke-width="3"/>
+  <path d="M235,390 L235,368 Q235,345 256,345 Q277,345 277,368 L277,390" fill="none" stroke="#ffaa00" stroke-width="7" stroke-linecap="round"/>
+  <circle cx="256" cy="422" r="12" fill="#ffaa00" filter="url(#amber)"/>
+</svg>

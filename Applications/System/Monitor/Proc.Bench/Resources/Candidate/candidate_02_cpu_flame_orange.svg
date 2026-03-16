@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A0500"/>
+      <stop offset="100%" stop-color="#2D0A00"/>
+    </linearGradient>
+    <linearGradient id="chip" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#444"/>
+      <stop offset="100%" stop-color="#222"/>
+    </linearGradient>
+    <linearGradient id="fire" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#FF3D00"/>
+      <stop offset="40%" stop-color="#FF6D00"/>
+      <stop offset="80%" stop-color="#FFAB40"/>
+      <stop offset="100%" stop-color="#FFE57F"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- CPU Chip -->
+  <rect x="156" y="236" width="200" height="200" rx="10" fill="url(#chip)" stroke="#555" stroke-width="2"/>
+  <!-- CPU pins left -->
+  <rect x="132" y="256" width="24" height="8" rx="3" fill="#666"/>
+  <rect x="132" y="278" width="24" height="8" rx="3" fill="#666"/>
+  <rect x="132" y="300" width="24" height="8" rx="3" fill="#666"/>
+  <rect x="132" y="322" width="24" height="8" rx="3" fill="#666"/>
+  <rect x="132" y="344" width="24" height="8" rx="3" fill="#666"/>
+  <rect x="132" y="366" width="24" height="8" rx="3" fill="#666"/>
+  <rect x="132" y="388" width="24" height="8" rx="3" fill="#666"/>
+  <!-- CPU pins right -->
+  <rect x="356" y="256" width="24" height="8" rx="3" fill="#666"/>
+  <rect x="356" y="278" width="24" height="8" rx="3" fill="#666"/>
+  <rect x="356" y="300" width="24" height="8" rx="3" fill="#666"/>
+  <rect x="356" y="322" width="24" height="8" rx="3" fill="#666"/>
+  <rect x="356" y="344" width="24" height="8" rx="3" fill="#666"/>
+  <rect x="356" y="366" width="24" height="8" rx="3" fill="#666"/>
+  <rect x="356" y="388" width="24" height="8" rx="3" fill="#666"/>
+  <!-- CPU pins top -->
+  <rect x="196" y="212" width="8" height="24" rx="3" fill="#666"/>
+  <rect x="218" y="212" width="8" height="24" rx="3" fill="#666"/>
+  <rect x="240" y="212" width="8" height="24" rx="3" fill="#666"/>
+  <rect x="262" y="212" width="8" height="24" rx="3" fill="#666"/>
+  <rect x="284" y="212" width="8" height="24" rx="3" fill="#666"/>
+  <rect x="306" y="212" width="8" height="24" rx="3" fill="#666"/>
+  <rect x="328" y="212" width="8" height="24" rx="3" fill="#666"/>
+  <!-- CPU die interior grid -->
+  <rect x="170" y="250" width="172" height="172" rx="6" fill="#1A1A1A"/>
+  <line x1="227" y1="250" x2="227" y2="422" stroke="#333" stroke-width="1"/>
+  <line x1="284" y1="250" x2="284" y2="422" stroke="#333" stroke-width="1"/>
+  <line x1="341" y1="250" x2="341" y2="422" stroke="#333" stroke-width="1"/>
+  <line x1="170" y1="307" x2="342" y2="307" stroke="#333" stroke-width="1"/>
+  <line x1="170" y1="364" x2="342" y2="364" stroke="#333" stroke-width="1"/>
+  <!-- Flame rising from chip -->
+  <path d="M200 236 Q210 200 225 215 Q235 180 250 195 Q258 160 268 180 Q278 165 280 185 Q290 175 290 200 Q300 185 305 210 Q310 236 310 236 Z" fill="url(#fire)" opacity="0.9"/>
+  <path d="M215 236 Q222 210 232 222 Q240 196 252 210 Q260 188 265 204 Q272 196 272 218 Q280 208 282 228 Q284 236 284 236 Z" fill="#FFE57F" opacity="0.5"/>
+  <!-- Benchmark score -->
+  <text x="256" y="350" text-anchor="middle" font-family="Consolas" font-size="22" fill="#FF6D00" font-weight="bold">9847</text>
+  <text x="256" y="374" text-anchor="middle" font-family="Consolas" font-size="12" fill="#888">pts</text>
+</svg>

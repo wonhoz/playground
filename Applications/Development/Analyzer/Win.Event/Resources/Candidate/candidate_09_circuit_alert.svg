@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#000A0F"/>
+      <stop offset="100%" stop-color="#001A2A"/>
+    </linearGradient>
+    <linearGradient id="circuit" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#00FF88"/>
+      <stop offset="100%" stop-color="#00CCFF"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Circuit traces -->
+  <g stroke="url(#circuit)" stroke-width="2.5" fill="none" opacity="0.5" filter="url(#glow)">
+    <polyline points="70,256 130,256 130,160 200,160"/>
+    <polyline points="200,160 280,160 280,120 350,120"/>
+    <polyline points="350,120 420,120 420,200 442,200"/>
+    <polyline points="130,256 130,350 200,350"/>
+    <polyline points="200,350 320,350 320,400 442,400"/>
+    <polyline points="280,160 280,256 442,256"/>
+  </g>
+  <!-- Circuit nodes -->
+  <circle cx="130" cy="256" r="8" fill="#00FF88" filter="url(#glow)" opacity="0.8"/>
+  <circle cx="200" cy="160" r="8" fill="#00CCFF" filter="url(#glow)" opacity="0.8"/>
+  <circle cx="280" cy="160" r="8" fill="#00FF88" filter="url(#glow)" opacity="0.8"/>
+  <circle cx="280" cy="256" r="8" fill="#00CCFF" filter="url(#glow)" opacity="0.8"/>
+  <circle cx="200" cy="350" r="8" fill="#00FF88" filter="url(#glow)" opacity="0.8"/>
+  <circle cx="320" cy="350" r="8" fill="#00CCFF" filter="url(#glow)" opacity="0.8"/>
+  <!-- Central alert component -->
+  <rect x="160" y="210" width="192" height="92" rx="10" fill="#001A2A" stroke="url(#circuit)" stroke-width="3" filter="url(#glow)"/>
+  <!-- Warning triangle inside -->
+  <polygon points="256,222 296,274 216,274" fill="none" stroke="#FF4444" stroke-width="4" filter="url(#glow)"/>
+  <line x1="256" y1="234" x2="256" y2="258" stroke="#FF4444" stroke-width="4" stroke-linecap="round" filter="url(#glow)"/>
+  <circle cx="256" cy="266" r="3" fill="#FF4444" filter="url(#glow)"/>
+  <!-- Resistor symbols on traces -->
+  <rect x="148" y="252" width="24" height="8" rx="2" fill="#001A2A" stroke="#00FF88" stroke-width="2"/>
+  <rect x="275" y="176" width="10" height="24" rx="2" fill="#001A2A" stroke="#00CCFF" stroke-width="2"/>
+  <!-- Chip components -->
+  <rect x="340" y="108" width="24" height="24" rx="3" fill="#001A2A" stroke="#00FF88" stroke-width="2"/>
+  <rect x="308" y="338" width="24" height="24" rx="3" fill="#001A2A" stroke="#00CCFF" stroke-width="2"/>
+  <!-- Title -->
+  <text x="256" y="455" text-anchor="middle" font-family="Segoe UI" font-size="22" font-weight="700" fill="#00FF88" opacity="0.7" filter="url(#glow)">EVENT CIRCUIT</text>
+</svg>

@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1a1200"/>
+      <stop offset="100%" stop-color="#1a0800"/>
+    </linearGradient>
+    <linearGradient id="crown" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffe57f"/>
+      <stop offset="60%" stop-color="#ffd600"/>
+      <stop offset="100%" stop-color="#ff8f00"/>
+    </linearGradient>
+    <radialGradient id="jewel" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ff4081"/>
+      <stop offset="100%" stop-color="#880e4f"/>
+    </radialGradient>
+    <radialGradient id="halo" cx="50%" cy="40%" r="50%">
+      <stop offset="0%" stop-color="#ffd600" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#ffd600" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <ellipse cx="256" cy="240" rx="200" ry="160" fill="url(#halo)"/>
+  <!-- Crown shape -->
+  <path d="M110 320 L110 210 L160 280 L210 180 L256 260 L302 180 L352 280 L402 210 L402 320 Z" fill="url(#crown)" stroke="#fff9c4" stroke-width="2" stroke-linejoin="round"/>
+  <!-- Crown base -->
+  <rect x="110" y="316" width="292" height="36" rx="10" fill="#ff8f00" stroke="#ffe57f" stroke-width="1.5"/>
+  <!-- Jewels on crown -->
+  <circle cx="256" cy="270" r="18" fill="url(#jewel)" stroke="#fff9c4" stroke-width="2"/>
+  <circle cx="175" cy="305" r="10" fill="#00e5ff" stroke="#fff9c4" stroke-width="1.5"/>
+  <circle cx="337" cy="305" r="10" fill="#00e5ff" stroke="#fff9c4" stroke-width="1.5"/>
+  <circle cx="140" cy="318" r="8" fill="#69f0ae" stroke="#fff9c4" stroke-width="1"/>
+  <circle cx="372" cy="318" r="8" fill="#69f0ae" stroke="#fff9c4" stroke-width="1"/>
+  <!-- Sparkles above -->
+  <line x1="200" y1="150" x2="200" y2="120" stroke="#ffd600" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="186" y1="135" x2="214" y2="135" stroke="#ffd600" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="312" y1="150" x2="312" y2="120" stroke="#ffd600" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="298" y1="135" x2="326" y2="135" stroke="#ffd600" stroke-width="2.5" stroke-linecap="round"/>
+  <line x1="256" y1="120" x2="256" y2="90" stroke="#ffd600" stroke-width="3" stroke-linecap="round"/>
+  <line x1="242" y1="105" x2="270" y2="105" stroke="#ffd600" stroke-width="3" stroke-linecap="round"/>
+  <!-- Title -->
+  <text x="256" y="400" font-family="sans-serif" font-size="18" fill="#ffd600" text-anchor="middle" opacity="0.7">WINNER!</text>
+  <text x="256" y="462" font-family="sans-serif" font-size="22" fill="#ffd600" text-anchor="middle" font-weight="bold" letter-spacing="3" opacity="0.9">SNAP.DUEL</text>
+</svg>

@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" style="stop-color:#1a1a2e"/>
+      <stop offset="100%" style="stop-color:#0d0d1a"/>
+    </radialGradient>
+    <linearGradient id="gauge-arc" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#00c853"/>
+      <stop offset="50%" style="stop-color:#ffd600"/>
+      <stop offset="100%" style="stop-color:#ff1744"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Gauge background arc (150° span) -->
+  <path d="M100 350 A180 180 0 1 1 412 350" fill="none" stroke="#1a2a3a" stroke-width="28" stroke-linecap="round"/>
+  <!-- Gauge color arc -->
+  <path d="M100 350 A180 180 0 1 1 412 350" fill="none" stroke="url(#gauge-arc)" stroke-width="20" stroke-linecap="round" opacity="0.7"/>
+  <!-- Boot speed needle (pointing to ~60%) -->
+  <line x1="256" y1="310" x2="374" y2="185" stroke="#00e5ff" stroke-width="6" stroke-linecap="round" filter="url(#glow)"/>
+  <!-- Needle base -->
+  <circle cx="256" cy="310" r="22" fill="#1a2a3a" stroke="#00e5ff" stroke-width="3" filter="url(#glow)"/>
+  <circle cx="256" cy="310" r="10" fill="#00e5ff"/>
+  <!-- Tick marks -->
+  <g stroke="#546e7a" stroke-width="2" opacity="0.7">
+    <line x1="100" y1="350" x2="112" y2="340"/>
+    <line x1="140" y1="210" x2="150" y2="220"/>
+    <line x1="256" y1="130" x2="256" y2="148"/>
+    <line x1="372" y1="210" x2="362" y2="220"/>
+    <line x1="412" y1="350" x2="400" y2="340"/>
+  </g>
+  <!-- Secondary ticks -->
+  <g stroke="#37474f" stroke-width="1.5" opacity="0.5">
+    <line x1="119" y1="282" x2="129" y2="278"/>
+    <line x1="152" y1="178" x2="160" y2="188"/>
+    <line x1="203" y1="143" x2="207" y2="155"/>
+    <line x1="309" y1="143" x2="305" y2="155"/>
+    <line x1="360" y1="178" x2="352" y2="188"/>
+    <line x1="393" y1="282" x2="383" y2="278"/>
+  </g>
+  <!-- Speed zones label dots -->
+  <circle cx="130" cy="360" r="6" fill="#00c853" filter="url(#glow)"/>
+  <circle cx="256" cy="150" r="6" fill="#ffd600" filter="url(#glow)"/>
+  <circle cx="382" cy="360" r="6" fill="#ff1744" filter="url(#glow)"/>
+  <!-- Boot time display -->
+  <rect x="176" y="375" width="160" height="50" rx="10" fill="#1a2a3a" stroke="#00e5ff" stroke-width="1.5"/>
+  <line x1="196" y1="398" x2="200" y2="398" stroke="#00e5ff" stroke-width="1" opacity="0.5"/>
+</svg>

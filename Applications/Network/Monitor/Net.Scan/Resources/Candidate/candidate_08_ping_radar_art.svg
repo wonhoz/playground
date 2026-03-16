@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#001510"/>
+      <stop offset="100%" stop-color="#002520"/>
+    </linearGradient>
+    <radialGradient id="pulse" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#00e5ff" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#00acc1" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glow"><feGaussianBlur stdDeviation="8"/></filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- grid background -->
+  <g stroke="#004040" stroke-width="1" opacity="0.5">
+    <line x1="96" y1="96" x2="416" y2="96"/>
+    <line x1="96" y1="166" x2="416" y2="166"/>
+    <line x1="96" y1="236" x2="416" y2="236"/>
+    <line x1="96" y1="306" x2="416" y2="306"/>
+    <line x1="96" y1="376" x2="416" y2="376"/>
+    <line x1="96" y1="96" x2="96" y2="416"/>
+    <line x1="166" y1="96" x2="166" y2="416"/>
+    <line x1="236" y1="96" x2="236" y2="416"/>
+    <line x1="306" y1="96" x2="306" y2="416"/>
+    <line x1="376" y1="96" x2="376" y2="416"/>
+  </g>
+  <!-- ping waveform (horizontal sine-like) -->
+  <path d="M80 256 Q120 200 160 256 Q200 312 240 256 Q280 200 320 256 Q360 312 400 256 L432 256" fill="none" stroke="#00e5ff" stroke-width="5" filter="url(#glow)"/>
+  <!-- pulse glow -->
+  <circle cx="256" cy="256" r="80" fill="url(#pulse)" filter="url(#glow)"/>
+  <!-- blip points -->
+  <circle cx="160" cy="256" r="8" fill="#00e5ff" filter="url(#glow)"/>
+  <circle cx="256" cy="200" r="8" fill="#00e5ff" filter="url(#glow)"/>
+  <circle cx="320" cy="256" r="8" fill="#00e5ff" filter="url(#glow)"/>
+  <circle cx="400" cy="256" r="6" fill="#00acc1" filter="url(#glow)"/>
+</svg>

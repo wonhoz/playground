@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#001A10"/>
+      <stop offset="100%" style="stop-color:#002A20"/>
+    </linearGradient>
+    <linearGradient id="key" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFDD88"/>
+      <stop offset="100%" style="stop-color:#CC8800"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="30%" cy="40%" r="60%">
+      <stop offset="0%" style="stop-color:#44FF88;stop-opacity:0.3"/>
+      <stop offset="100%" style="stop-color:#44FF88;stop-opacity:0"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <circle cx="200" cy="200" r="200" fill="url(#glow)"/>
+  <!-- Tree structure (registry) -->
+  <line x1="100" y1="150" x2="100" y2="380" stroke="#44AA66" stroke-width="2" opacity="0.6"/>
+  <line x1="100" y1="190" x2="160" y2="190" stroke="#44AA66" stroke-width="2" opacity="0.6"/>
+  <line x1="100" y1="240" x2="160" y2="240" stroke="#44AA66" stroke-width="2" opacity="0.6"/>
+  <line x1="100" y1="290" x2="160" y2="290" stroke="#44AA66" stroke-width="2" opacity="0.6"/>
+  <line x1="100" y1="340" x2="160" y2="340" stroke="#44AA66" stroke-width="2" opacity="0.6"/>
+  <!-- Folder icons -->
+  <rect x="160" y="178" width="100" height="24" rx="4" fill="#2A5A3A"/>
+  <rect x="160" y="228" width="120" height="24" rx="4" fill="#2A5A3A"/>
+  <rect x="160" y="278" width="90" height="24" rx="4" fill="#2A5A3A"/>
+  <rect x="160" y="328" width="110" height="24" rx="4" fill="#2A5A3A"/>
+  <!-- Key overlaid -->
+  <circle cx="340" cy="220" r="55" fill="none" stroke="url(#key)" stroke-width="14"/>
+  <rect x="370" y="210" width="80" height="20" rx="5" fill="url(#key)"/>
+  <rect x="410" y="230" width="14" height="20" rx="3" fill="url(#key)"/>
+  <rect x="432" y="230" width="14" height="20" rx="3" fill="url(#key)"/>
+  <!-- Shield backdrop for key -->
+  <path d="M340 300 C290 280 270 320 270 360 C270 400 340 430 340 430 C340 430 410 400 410 360 C410 320 390 280 340 300Z" fill="#1A4A2A" stroke="#44AA66" stroke-width="2" opacity="0.7"/>
+  <text x="340" y="375" text-anchor="middle" font-family="Arial" font-weight="bold" font-size="18" fill="#88FFAA">VAULT</text>
+</svg>

@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#263238"/>
+      <stop offset="100%" stop-color="#37474f"/>
+    </linearGradient>
+    <linearGradient id="leftFile" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4fc3f7"/>
+      <stop offset="100%" stop-color="#0288d1"/>
+    </linearGradient>
+    <linearGradient id="rightFile" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4fc3f7" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#0288d1" stop-opacity="0.5"/>
+    </linearGradient>
+    <linearGradient id="mirrorLine" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#b2ebf2"/>
+      <stop offset="50%" stop-color="#4fc3f7"/>
+      <stop offset="100%" stop-color="#b2ebf2"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Mirror line center -->
+  <line x1="256" y1="60" x2="256" y2="452" stroke="url(#mirrorLine)" stroke-width="3" stroke-dasharray="12,6"/>
+  <!-- Left file (original) -->
+  <rect x="80" y="160" width="148" height="192" rx="12" fill="url(#leftFile)"/>
+  <polygon points="190,160 228,198 190,198" fill="#0277bd"/>
+  <polygon points="190,160 228,160 228,198" fill="#b2ebf2"/>
+  <rect x="100" y="228" width="108" height="10" rx="5" fill="#01579b" opacity="0.5"/>
+  <rect x="100" y="248" width="88" height="10" rx="5" fill="#01579b" opacity="0.4"/>
+  <rect x="100" y="268" width="98" height="10" rx="5" fill="#01579b" opacity="0.35"/>
+  <text x="154" y="318" font-family="Arial" font-size="14" font-weight="bold" fill="#01579b" text-anchor="middle">ORIGINAL</text>
+  <!-- Right file (mirror/duplicate) -->
+  <rect x="284" y="160" width="148" height="192" rx="12" fill="url(#rightFile)" opacity="0.8"/>
+  <polygon points="284,160 284,198 322,198" fill="#b2ebf2" opacity="0.5"/>
+  <polygon points="284,160 322,160 322,198" fill="#0277bd" opacity="0.5"/>
+  <rect x="304" y="228" width="108" height="10" rx="5" fill="#b2ebf2" opacity="0.3"/>
+  <rect x="304" y="248" width="88" height="10" rx="5" fill="#b2ebf2" opacity="0.25"/>
+  <rect x="304" y="268" width="98" height="10" rx="5" fill="#b2ebf2" opacity="0.2"/>
+  <text x="358" y="318" font-family="Arial" font-size="14" font-weight="bold" fill="#b2ebf2" text-anchor="middle" opacity="0.8">DUPLICATE</text>
+  <!-- Arrows pointing to duplicate -->
+  <path d="M256 256 L290 256" fill="none" stroke="#ff5252" stroke-width="4" marker-end="url(#redArr)"/>
+  <defs>
+    <marker id="redArr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L6,3 Z" fill="#ff5252"/>
+    </marker>
+  </defs>
+  <!-- Delete X on right -->
+  <circle cx="390" cy="390" r="35" fill="#b71c1c" opacity="0.9"/>
+  <line x1="372" y1="372" x2="408" y2="408" stroke="white" stroke-width="7" stroke-linecap="round"/>
+  <line x1="408" y1="372" x2="372" y2="408" stroke="white" stroke-width="7" stroke-linecap="round"/>
+  <!-- KEEP badge left -->
+  <rect x="96" y="380" width="80" height="28" rx="8" fill="#2e7d32"/>
+  <text x="136" y="399" font-family="Arial" font-size="14" font-weight="bold" fill="white" text-anchor="middle">KEEP</text>
+</svg>

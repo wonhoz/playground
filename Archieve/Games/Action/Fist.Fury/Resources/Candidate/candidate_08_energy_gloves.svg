@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a1628"/>
+      <stop offset="100%" stop-color="#162030"/>
+    </linearGradient>
+    <linearGradient id="gloveLeft" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00e5ff"/>
+      <stop offset="100%" stop-color="#0097a7"/>
+    </linearGradient>
+    <linearGradient id="gloveRight" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff1744"/>
+      <stop offset="100%" stop-color="#c62828"/>
+    </linearGradient>
+    <radialGradient id="glow1" cx="30%" cy="50%" r="40%">
+      <stop offset="0%" stop-color="#00e5ff" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#00e5ff" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glow2" cx="70%" cy="50%" r="40%">
+      <stop offset="0%" stop-color="#ff1744" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#ff1744" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Glow auras -->
+  <ellipse cx="165" cy="256" rx="130" ry="130" fill="url(#glow1)"/>
+  <ellipse cx="347" cy="256" rx="130" ry="130" fill="url(#glow2)"/>
+  <!-- Left glove (facing right) -->
+  <rect x="62" y="195" width="140" height="120" rx="20" fill="url(#gloveLeft)"/>
+  <!-- Glove thumb -->
+  <rect x="62" y="225" width="30" height="55" rx="12" fill="#0097a7" transform="rotate(-20, 77, 252)"/>
+  <!-- Glove knuckles -->
+  <rect x="176" y="190" width="26" height="20" rx="8" fill="url(#gloveLeft)"/>
+  <rect x="176" y="215" width="26" height="20" rx="8" fill="url(#gloveLeft)"/>
+  <rect x="176" y="240" width="26" height="20" rx="8" fill="url(#gloveLeft)"/>
+  <!-- Glove wrist band -->
+  <rect x="62" y="290" width="100" height="25" rx="6" fill="#006064"/>
+  <text x="112" y="308" font-family="Arial" font-size="12" font-weight="bold" fill="#b2ebf2" text-anchor="middle">FURY</text>
+  <!-- Right glove (facing left, mirrored) -->
+  <rect x="310" y="195" width="140" height="120" rx="20" fill="url(#gloveRight)"/>
+  <!-- Glove thumb right -->
+  <rect x="420" y="225" width="30" height="55" rx="12" fill="#c62828" transform="rotate(20, 435, 252)"/>
+  <!-- Glove knuckles -->
+  <rect x="310" y="190" width="26" height="20" rx="8" fill="url(#gloveRight)"/>
+  <rect x="310" y="215" width="26" height="20" rx="8" fill="url(#gloveRight)"/>
+  <rect x="310" y="240" width="26" height="20" rx="8" fill="url(#gloveRight)"/>
+  <!-- Glove wrist band right -->
+  <rect x="350" y="290" width="100" height="25" rx="6" fill="#7f0000"/>
+  <text x="400" y="308" font-family="Arial" font-size="12" font-weight="bold" fill="#ffcdd2" text-anchor="middle">FIST</text>
+  <!-- Energy clash center -->
+  <path d="M204,256 Q256,220 308,256 Q256,292 204,256 Z" fill="white" opacity="0.15"/>
+  <ellipse cx="256" cy="256" rx="20" ry="30" fill="white" opacity="0.3"/>
+  <!-- Lightning bolts -->
+  <path d="M240,230 L252,250 L244,252 L260,280" fill="none" stroke="#ffee58" stroke-width="4" stroke-linejoin="round" opacity="0.9"/>
+  <path d="M264,225 L272,248 L264,250 L276,278" fill="none" stroke="#ffee58" stroke-width="3" stroke-linejoin="round" opacity="0.7"/>
+</svg>

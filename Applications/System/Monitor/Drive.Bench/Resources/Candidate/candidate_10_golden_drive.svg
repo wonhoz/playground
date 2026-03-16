@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0A0700"/>
+      <stop offset="100%" stop-color="#1A1200"/>
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FDE68A"/>
+      <stop offset="40%" stop-color="#F59E0B"/>
+      <stop offset="100%" stop-color="#B45309"/>
+    </linearGradient>
+    <radialGradient id="goldGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#F59E0B" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#F59E0B" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="medalGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FEF3C7"/>
+      <stop offset="100%" stop-color="#D97706"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <circle cx="256" cy="240" r="160" fill="url(#goldGlow)"/>
+  <!-- Trophy/medal base -->
+  <ellipse cx="256" cy="420" rx="80" ry="18" fill="#92400E" opacity="0.6"/>
+  <rect x="228" y="380" width="56" height="42" rx="6" fill="url(#goldGrad)" stroke="#FDE68A" stroke-width="2"/>
+  <!-- Trophy cup -->
+  <path d="M156,120 Q156,80 256,80 Q356,80 356,120 L336,280 Q336,320 296,340 L296,380 L216,380 L216,340 Q176,320 176,280 Z" fill="url(#goldGrad)" stroke="#FDE68A" stroke-width="2.5"/>
+  <!-- Cup shine -->
+  <path d="M185,130 Q185,100 256,100 Q310,100 325,120" fill="none" stroke="#FEF9C3" stroke-width="3" opacity="0.6" stroke-linecap="round"/>
+  <!-- Handles -->
+  <path d="M156,160 Q100,160 100,220 Q100,280 156,280" fill="none" stroke="url(#goldGrad)" stroke-width="12" stroke-linecap="round"/>
+  <path d="M356,160 Q412,160 412,220 Q412,280 356,280" fill="none" stroke="url(#goldGrad)" stroke-width="12" stroke-linecap="round"/>
+  <!-- Star inside cup -->
+  <polygon points="256,150 268,182 302,182 276,202 286,234 256,214 226,234 236,202 210,182 244,182" fill="#FEF3C7" opacity="0.8"/>
+  <!-- Speed badge on cup -->
+  <text x="256" y="260" font-family="monospace" font-size="14" fill="#0A0700" text-anchor="middle" font-weight="bold">5,542 MB/s</text>
+  <text x="256" y="278" font-family="monospace" font-size="11" fill="#451A03" text-anchor="middle">#1 BENCHMARK</text>
+</svg>

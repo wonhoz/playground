@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#080812"/>
+      <stop offset="100%" stop-color="#0D0D20"/>
+    </linearGradient>
+    <linearGradient id="nvme" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2A2A3A"/>
+      <stop offset="100%" stop-color="#1A1A28"/>
+    </linearGradient>
+    <linearGradient id="bolt" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFD700"/>
+      <stop offset="100%" stop-color="#FF6600"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- NVMe SSD board -->
+  <rect x="80" y="180" width="352" height="80" rx="10" fill="url(#nvme)" stroke="#3A3A5A" stroke-width="2"/>
+  <!-- PCIe connector -->
+  <rect x="80" y="234" width="100" height="26" rx="4" fill="#252538" stroke="#4A4A6A" stroke-width="1.5"/>
+  <rect x="90" y="238" width="6" height="18" rx="1" fill="#6688AA" opacity="0.7"/>
+  <rect x="102" y="238" width="6" height="18" rx="1" fill="#6688AA" opacity="0.7"/>
+  <rect x="114" y="238" width="6" height="18" rx="1" fill="#6688AA" opacity="0.7"/>
+  <rect x="126" y="238" width="6" height="18" rx="1" fill="#6688AA" opacity="0.7"/>
+  <rect x="138" y="238" width="6" height="18" rx="1" fill="#6688AA" opacity="0.7"/>
+  <rect x="150" y="238" width="6" height="18" rx="1" fill="#6688AA" opacity="0.7"/>
+  <!-- NAND chips -->
+  <rect x="210" y="192" width="52" height="56" rx="5" fill="#333348" stroke="#555570" stroke-width="1.5"/>
+  <rect x="278" y="192" width="52" height="56" rx="5" fill="#333348" stroke="#555570" stroke-width="1.5"/>
+  <rect x="346" y="192" width="52" height="56" rx="5" fill="#333348" stroke="#555570" stroke-width="1.5"/>
+  <!-- Controller chip -->
+  <rect x="210" y="256" width="188" height="4" rx="2" fill="#555570"/>
+  <!-- Lightning bolt speed indicator -->
+  <polygon points="256,80 226,200 252,200 222,340 290,175 264,175 300,80" fill="url(#bolt)" filter="url(#glow)"/>
+  <!-- Speed bars -->
+  <rect x="80" y="320" width="352" height="12" rx="6" fill="#1A1A2E"/>
+  <rect x="80" y="320" width="300" height="12" rx="6" fill="#FF8800" filter="url(#glow)"/>
+  <text x="450" y="331" font-family="Arial" font-size="11" fill="#FFAA44" text-anchor="end">7.0 GB/s</text>
+  <rect x="80" y="346" width="352" height="12" rx="6" fill="#1A1A2E"/>
+  <rect x="80" y="346" width="260" height="12" rx="6" fill="#FFDD00" filter="url(#glow)"/>
+  <text x="450" y="357" font-family="Arial" font-size="11" fill="#FFEE66" text-anchor="end">6.5 GB/s</text>
+  <text x="256" y="455" font-family="Arial" font-size="24" font-weight="bold" fill="#FFDD00" text-anchor="middle" filter="url(#glow)">DRIVE·BENCH</text>
+</svg>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A0030"/>
+      <stop offset="100%" stop-color="#30004A"/>
+    </linearGradient>
+    <linearGradient id="keyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#CC00FF"/>
+      <stop offset="100%" stop-color="#6600CC"/>
+    </linearGradient>
+    <radialGradient id="pulseGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#CC00FF" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#CC00FF" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Background wave -->
+  <path d="M0 300 Q128 240 256 300 Q384 360 512 300 L512 512 L0 512 Z" fill="#CC00FF" opacity="0.08"/>
+  <path d="M0 330 Q128 270 256 330 Q384 390 512 330 L512 512 L0 512 Z" fill="#CC00FF" opacity="0.05"/>
+  <!-- Center pulse rings -->
+  <circle cx="256" cy="220" r="100" fill="url(#pulseGrad)"/>
+  <circle cx="256" cy="220" r="70" fill="none" stroke="#CC00FF" stroke-width="2" opacity="0.4"/>
+  <circle cx="256" cy="220" r="50" fill="none" stroke="#CC00FF" stroke-width="2" opacity="0.6"/>
+  <!-- Main key -->
+  <rect x="196" y="160" width="120" height="120" rx="16" fill="url(#keyGrad)" filter="url(#glow)"/>
+  <rect x="204" y="168" width="104" height="104" rx="12" fill="#AA00DD" opacity="0.5"/>
+  <!-- Key label -->
+  <text x="256" y="238" font-family="Arial Black, sans-serif" font-size="52" font-weight="900" text-anchor="middle" fill="white" filter="url(#glow)">K</text>
+  <!-- Waveform below -->
+  <polyline points="64,340 96,310 128,360 160,320 192,350 224,300 256,340 288,310 320,360 352,315 384,345 416,310 448,340" stroke="#CC00FF" stroke-width="3" fill="none" filter="url(#glow)" opacity="0.9"/>
+  <!-- Status dots -->
+  <circle cx="176" cy="420" r="12" fill="#CC00FF" filter="url(#glow)"/>
+  <text x="200" y="426" font-family="Arial, sans-serif" font-size="18" fill="#CC88FF">KEY ACTIVE</text>
+  <circle cx="176" cy="456" r="12" fill="#6600CC" opacity="0.5"/>
+  <text x="200" y="462" font-family="Arial, sans-serif" font-size="18" fill="#884499" opacity="0.7">SCANNING...</text>
+</svg>

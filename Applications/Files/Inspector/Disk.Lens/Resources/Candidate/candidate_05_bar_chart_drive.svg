@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0C1821"/>
+      <stop offset="100%" stop-color="#1B2A3B"/>
+    </linearGradient>
+    <linearGradient id="barC" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#1D4ED8"/>
+      <stop offset="100%" stop-color="#60A5FA"/>
+    </linearGradient>
+    <linearGradient id="barD" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#0F766E"/>
+      <stop offset="100%" stop-color="#2DD4BF"/>
+    </linearGradient>
+    <linearGradient id="barE" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#7C2D12"/>
+      <stop offset="100%" stop-color="#FB923C"/>
+    </linearGradient>
+    <linearGradient id="barF" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#5B21B6"/>
+      <stop offset="100%" stop-color="#C084FC"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Chart grid -->
+  <line x1="80" y1="80" x2="80" y2="390" stroke="#1E3A5F" stroke-width="2"/>
+  <line x1="80" y1="390" x2="460" y2="390" stroke="#1E3A5F" stroke-width="2"/>
+  <!-- Horizontal gridlines -->
+  <line x1="80" y1="313" x2="460" y2="313" stroke="#1E3A5F" stroke-width="1" stroke-dasharray="4,4"/>
+  <line x1="80" y1="236" x2="460" y2="236" stroke="#1E3A5F" stroke-width="1" stroke-dasharray="4,4"/>
+  <line x1="80" y1="159" x2="460" y2="159" stroke="#1E3A5F" stroke-width="1" stroke-dasharray="4,4"/>
+  <!-- Y labels -->
+  <text x="70" y="394" font-family="sans-serif" font-size="11" fill="#4B5563" text-anchor="end">0</text>
+  <text x="70" y="317" font-family="sans-serif" font-size="11" fill="#4B5563" text-anchor="end">250</text>
+  <text x="70" y="240" font-family="sans-serif" font-size="11" fill="#4B5563" text-anchor="end">500</text>
+  <text x="70" y="163" font-family="sans-serif" font-size="11" fill="#4B5563" text-anchor="end">750</text>
+  <!-- Bar C: 78% -->
+  <rect x="100" y="153" width="70" height="237" rx="6" fill="url(#barC)"/>
+  <text x="135" y="415" font-family="sans-serif" font-size="14" fill="#93C5FD" text-anchor="middle">C:</text>
+  <text x="135" y="143" font-family="sans-serif" font-size="11" fill="#60A5FA" text-anchor="middle">78%</text>
+  <!-- Bar D: 45% -->
+  <rect x="210" y="253" width="70" height="137" rx="6" fill="url(#barD)"/>
+  <text x="245" y="415" font-family="sans-serif" font-size="14" fill="#5EEAD4" text-anchor="middle">D:</text>
+  <text x="245" y="243" font-family="sans-serif" font-size="11" fill="#2DD4BF" text-anchor="middle">45%</text>
+  <!-- Bar E: 91% -->
+  <rect x="320" y="113" width="70" height="277" rx="6" fill="url(#barE)"/>
+  <text x="355" y="415" font-family="sans-serif" font-size="14" fill="#FCA5A5" text-anchor="middle">E:</text>
+  <text x="355" y="103" font-family="sans-serif" font-size="11" fill="#FB923C" text-anchor="middle">91%</text>
+  <!-- Free space indicator strip -->
+  <rect x="100" y="153" width="70" height="16" rx="4" fill="white" opacity="0.15"/>
+  <rect x="320" y="113" width="70" height="16" rx="4" fill="white" opacity="0.15"/>
+  <!-- Title -->
+  <text x="256" y="460" font-family="sans-serif" font-size="15" fill="#475569" text-anchor="middle">Disk Usage by Drive (GB)</text>
+</svg>

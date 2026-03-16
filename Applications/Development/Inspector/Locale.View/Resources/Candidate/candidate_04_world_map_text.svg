@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#141e30"/>
+      <stop offset="100%" stop-color="#243b55"/>
+    </linearGradient>
+    <linearGradient id="mapGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2ecc71"/>
+      <stop offset="100%" stop-color="#27ae60"/>
+    </linearGradient>
+    <linearGradient id="pinGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e74c3c"/>
+      <stop offset="100%" stop-color="#c0392b"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+
+  <!-- Simplified world map shapes -->
+  <!-- North America -->
+  <path d="M85,160 L150,145 L175,165 L185,200 L165,240 L140,260 L110,250 L90,220 L80,195 Z" fill="url(#mapGrad)" opacity="0.85"/>
+  <!-- South America -->
+  <path d="M145,275 L175,265 L185,290 L180,340 L160,370 L140,355 L130,320 L130,295 Z" fill="url(#mapGrad)" opacity="0.85"/>
+  <!-- Europe -->
+  <path d="M225,140 L270,135 L285,155 L280,180 L255,185 L230,175 L220,160 Z" fill="url(#mapGrad)" opacity="0.85"/>
+  <!-- Africa -->
+  <path d="M230,195 L280,190 L295,215 L290,285 L260,320 L235,310 L220,280 L215,240 Z" fill="url(#mapGrad)" opacity="0.85"/>
+  <!-- Asia -->
+  <path d="M295,130 L400,125 L420,155 L415,200 L390,220 L350,215 L310,210 L290,190 L285,165 Z" fill="url(#mapGrad)" opacity="0.85"/>
+  <!-- Australia -->
+  <path d="M360,285 L415,275 L430,300 L420,330 L390,340 L365,325 L355,305 Z" fill="url(#mapGrad)" opacity="0.85"/>
+
+  <!-- Grid lines (latitude/longitude) -->
+  <line x1="65" y1="256" x2="450" y2="256" stroke="#56CCF2" stroke-width="0.8" opacity="0.25"/>
+  <line x1="65" y1="200" x2="450" y2="200" stroke="#56CCF2" stroke-width="0.8" opacity="0.15"/>
+  <line x1="65" y1="310" x2="450" y2="310" stroke="#56CCF2" stroke-width="0.8" opacity="0.15"/>
+  <line x1="256" y1="100" x2="256" y2="420" stroke="#56CCF2" stroke-width="0.8" opacity="0.25"/>
+  <line x1="170" y1="100" x2="170" y2="420" stroke="#56CCF2" stroke-width="0.8" opacity="0.15"/>
+  <line x1="340" y1="100" x2="340" y2="420" stroke="#56CCF2" stroke-width="0.8" opacity="0.15"/>
+
+  <!-- Location pins with text bubbles -->
+  <!-- Pin 1 - Europe -->
+  <circle cx="252" cy="158" r="12" fill="url(#pinGrad)" filter="url(#glow)"/>
+  <circle cx="252" cy="158" r="5" fill="#fff"/>
+  <rect x="210" y="100" width="80" height="30" rx="8" fill="#e74c3c" opacity="0.9"/>
+  <polygon points="248,130 256,130 252,142" fill="#e74c3c" opacity="0.9"/>
+  <rect x="220" y="109" width="30" height="6" rx="3" fill="#fff" opacity="0.8"/>
+  <rect x="220" y="119" width="44" height="6" rx="3" fill="#fff" opacity="0.6"/>
+
+  <!-- Pin 2 - Asia -->
+  <circle cx="360" cy="175" r="12" fill="#f7971e" filter="url(#glow)"/>
+  <circle cx="360" cy="175" r="5" fill="#fff"/>
+  <rect x="370" y="118" width="80" height="30" rx="8" fill="#f7971e" opacity="0.9"/>
+  <polygon points="372,148 380,148 376,162" fill="#f7971e" opacity="0.9"/>
+  <rect x="380" y="127" width="28" height="6" rx="3" fill="#fff" opacity="0.8"/>
+  <rect x="380" y="137" width="44" height="6" rx="3" fill="#fff" opacity="0.6"/>
+
+  <!-- Pin 3 - Americas -->
+  <circle cx="130" cy="210" r="12" fill="#9b59b6" filter="url(#glow)"/>
+  <circle cx="130" cy="210" r="5" fill="#fff"/>
+  <rect x="60" y="158" width="80" height="30" rx="8" fill="#9b59b6" opacity="0.9"/>
+  <polygon points="125,188 133,188 129,202" fill="#9b59b6" opacity="0.9"/>
+  <rect x="70" y="167" width="36" height="6" rx="3" fill="#fff" opacity="0.8"/>
+  <rect x="70" y="177" width="50" height="6" rx="3" fill="#fff" opacity="0.6"/>
+
+  <!-- Connection lines between pins -->
+  <path d="M142,210 Q200,190 240,160" stroke="#ffffff" stroke-width="1.5" stroke-dasharray="5,4" fill="none" opacity="0.35"/>
+  <path d="M264,160 Q310,168 348,175" stroke="#ffffff" stroke-width="1.5" stroke-dasharray="5,4" fill="none" opacity="0.35"/>
+</svg>

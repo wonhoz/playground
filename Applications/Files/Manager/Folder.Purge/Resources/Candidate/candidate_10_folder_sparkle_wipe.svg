@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a001a"/>
+      <stop offset="100%" stop-color="#2d003d"/>
+    </linearGradient>
+    <linearGradient id="folder" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f8bbd0"/>
+      <stop offset="100%" stop-color="#c2185b"/>
+    </linearGradient>
+    <linearGradient id="wipe" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e040fb"/>
+      <stop offset="100%" stop-color="#aa00ff"/>
+    </linearGradient>
+    <filter id="glow"><feGaussianBlur stdDeviation="8"/></filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- folder -->
+  <path d="M85 210 L85 390 L410 390 L410 235 L220 235 L190 210 Z" fill="url(#folder)"/>
+  <path d="M85 210 L85 239 L410 239 L410 235 L220 235 L190 210 Z" fill="#ad1457"/>
+  <ellipse cx="142" cy="226" rx="26" ry="7" fill="white" opacity="0.25"/>
+  <!-- wipe cloth/sponge motion -->
+  <rect x="220" y="295" width="200" height="55" rx="18" fill="url(#wipe)" opacity="0.85"/>
+  <ellipse cx="310" cy="298" rx="60" ry="8" fill="white" opacity="0.2"/>
+  <!-- sparkle trail left of wipe -->
+  <path d="M80 295 Q150 290 220 310" stroke="#f8bbd0" stroke-width="5" fill="none" stroke-dasharray="10,8" opacity="0.5"/>
+  <!-- sparkle stars in trail -->
+  <path d="M100 280 L103 292 L115 295 L103 298 L100 310 L97 298 L85 295 L97 292 Z" fill="#f48fb1" opacity="0.7" filter="url(#glow)"/>
+  <path d="M155 270 L157 280 L167 282 L157 284 L155 294 L153 284 L143 282 L153 280 Z" fill="#e1bee7" opacity="0.6" filter="url(#glow)"/>
+  <path d="M195 278 L197 286 L205 288 L197 290 L195 298 L193 290 L185 288 L193 286 Z" fill="#fff9c4" opacity="0.7" filter="url(#glow)"/>
+  <!-- clean sparkles after wipe -->
+  <circle cx="280" cy="360" r="5" fill="white" opacity="0.6" filter="url(#glow)"/>
+  <circle cx="330" cy="370" r="4" fill="#e1bee7" opacity="0.5" filter="url(#glow)"/>
+  <circle cx="370" cy="355" r="3" fill="white" opacity="0.5" filter="url(#glow)"/>
+</svg>

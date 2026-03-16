@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0d1117"/>
+      <stop offset="100%" stop-color="#161b22"/>
+    </linearGradient>
+    <linearGradient id="gearTop" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#58a6ff"/>
+      <stop offset="100%" stop-color="#1f6feb"/>
+    </linearGradient>
+    <linearGradient id="gearSide" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1f6feb"/>
+      <stop offset="100%" stop-color="#0d3878"/>
+    </linearGradient>
+    <linearGradient id="gearFront" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#388bfd"/>
+      <stop offset="100%" stop-color="#1f6feb"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Isometric gear (hexagon-ish shape with perspective) -->
+  <!-- Large gear isometric view -->
+  <!-- Top face -->
+  <ellipse cx="220" cy="200" rx="110" ry="60" fill="url(#gearTop)"/>
+  <!-- Inner hole top -->
+  <ellipse cx="220" cy="200" rx="40" ry="22" fill="#0d1117"/>
+  <!-- Side body -->
+  <path d="M110,200 L110,245 Q110,275 220,275 Q330,275 330,245 L330,200 Q330,230 220,230 Q110,230 110,200 Z" fill="url(#gearSide)"/>
+  <!-- Front teeth -->
+  <rect x="104" y="188" width="18" height="45" rx="5" fill="url(#gearFront)"/>
+  <rect x="315" y="188" width="18" height="45" rx="5" fill="url(#gearFront)"/>
+  <!-- Top teeth -->
+  <ellipse cx="220" cy="135" rx="14" ry="8" fill="url(#gearTop)"/>
+  <ellipse cx="220" cy="135" rx="10" ry="5" fill="url(#gearTop)"/>
+  <rect x="212" y="135" width="16" height="25" rx="4" fill="url(#gearTop)"/>
+  <!-- Gear 2 small right -->
+  <ellipse cx="380" cy="280" rx="65" ry="36" fill="url(#gearTop)" opacity="0.8"/>
+  <ellipse cx="380" cy="280" rx="22" ry="12" fill="#0d1117"/>
+  <path d="M315,280 L315,310 Q315,330 380,330 Q445,330 445,310 L445,280 Q445,298 380,298 Q315,298 315,280 Z" fill="url(#gearSide)" opacity="0.8"/>
+  <!-- Connecting rod -->
+  <rect x="310" y="240" width="80" height="12" rx="6" fill="#58a6ff" opacity="0.6" transform="rotate(-30, 350, 246)"/>
+  <!-- Axle -->
+  <circle cx="220" cy="200" r="10" fill="#58a6ff"/>
+  <circle cx="380" cy="280" r="7" fill="#58a6ff" opacity="0.8"/>
+  <!-- Grid dots background -->
+  <circle cx="80" cy="80" r="2" fill="#21262d"/>
+  <circle cx="160" cy="80" r="2" fill="#21262d"/>
+  <circle cx="400" cy="80" r="2" fill="#21262d"/>
+  <circle cx="440" cy="120" r="2" fill="#21262d"/>
+  <!-- Title -->
+  <text x="256" y="440" font-family="Arial" font-size="28" font-weight="bold" fill="#58a6ff" text-anchor="middle">GEAR.WORKS</text>
+  <text x="256" y="472" font-family="Arial" font-size="14" fill="#6e7681" text-anchor="middle">3D Puzzle Mechanics</text>
+</svg>

@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0A0015"/>
+      <stop offset="100%" stop-color="#15002A"/>
+    </linearGradient>
+    <linearGradient id="topSand" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFD700"/>
+      <stop offset="100%" stop-color="#FF8C00"/>
+    </linearGradient>
+    <linearGradient id="botSand" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FF8C00"/>
+      <stop offset="100%" stop-color="#FF4500"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Hourglass frame -->
+  <rect x="180" y="72" width="152" height="18" rx="6" fill="#6600CC"/>
+  <rect x="180" y="402" width="152" height="18" rx="6" fill="#6600CC"/>
+  <!-- Hourglass glass shape -->
+  <path d="M188 90 L324 90 L268 238 L324 390 L188 390 L244 238 Z" fill="#1A0033" stroke="#6600CC" stroke-width="2.5"/>
+  <!-- Top sand (depleting - small) -->
+  <path d="M212 90 L300 90 L268 168 L244 168 Z" fill="url(#topSand)" opacity="0.85"/>
+  <!-- Drip stream -->
+  <line x1="256" y1="170" x2="256" y2="248" stroke="#FFD700" stroke-width="3" opacity="0.7"/>
+  <!-- Bottom sand (accumulated) -->
+  <path d="M244 298 L268 298 L310 390 L202 390 Z" fill="url(#botSand)" opacity="0.85"/>
+  <!-- Battery icon mini -->
+  <rect x="222" y="212" width="68" height="28" rx="5" fill="#1A0033" stroke="#AA44FF" stroke-width="2"/>
+  <rect x="290" y="221" width="12" height="10" rx="3" fill="#AA44FF"/>
+  <rect x="226" y="216" width="28" height="20" rx="4" fill="#AA44FF"/>
+  <!-- Glow sparkle at drip -->
+  <circle cx="256" cy="244" r="5" fill="#FFD700"/>
+  <!-- Title -->
+  <text x="256" y="435" font-family="Arial" font-size="20" fill="#AA44FF" text-anchor="middle">Time Remaining</text>
+  <text x="256" y="464" font-family="Arial" font-size="24" font-weight="bold" fill="#FFD700" text-anchor="middle">Burn.Rate</text>
+</svg>

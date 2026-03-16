@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#000A1A"/>
+      <stop offset="100%" stop-color="#001433"/>
+    </linearGradient>
+    <linearGradient id="scope" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1565C0"/>
+      <stop offset="100%" stop-color="#0D47A1"/>
+    </linearGradient>
+    <radialGradient id="lens" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#42A5F5" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#1565C0" stop-opacity="0.1"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Telescope tube -->
+  <rect x="100" y="228" width="280" height="56" rx="28" fill="url(#scope)" transform="rotate(-25 256 256)"/>
+  <!-- Lens section (wider end) -->
+  <ellipse cx="140" cy="310" rx="48" ry="32" fill="#001433" stroke="#1565C0" stroke-width="3" transform="rotate(-25 140 310)"/>
+  <ellipse cx="140" cy="310" rx="32" ry="22" fill="url(#lens)" transform="rotate(-25 140 310)"/>
+  <!-- Eyepiece section -->
+  <ellipse cx="372" cy="202" rx="22" ry="14" fill="#001433" stroke="#42A5F5" stroke-width="2" transform="rotate(-25 372 202)"/>
+  <!-- Tripod / mount lines -->
+  <line x1="256" y1="310" x2="200" y2="440" stroke="#1565C0" stroke-width="4" stroke-linecap="round"/>
+  <line x1="256" y1="310" x2="256" y2="440" stroke="#1565C0" stroke-width="4" stroke-linecap="round"/>
+  <line x1="256" y1="310" x2="316" y2="440" stroke="#1565C0" stroke-width="4" stroke-linecap="round"/>
+  <!-- Base plate -->
+  <ellipse cx="256" cy="440" rx="80" ry="14" fill="#0D47A1" opacity="0.6"/>
+  <!-- View through lens (port crosshair) -->
+  <circle cx="130" cy="318" r="26" fill="none" stroke="#42A5F5" stroke-width="1.5" opacity="0.6" transform="rotate(-25 130 318)"/>
+  <!-- Port target indicators -->
+  <circle cx="400" cy="100" r="20" fill="none" stroke="#42A5F5" stroke-width="2"/>
+  <line x1="392" y1="100" x2="408" y2="100" stroke="#42A5F5" stroke-width="1.5"/>
+  <line x1="400" y1="92" x2="400" y2="108" stroke="#42A5F5" stroke-width="1.5"/>
+  <text x="424" y="104" font-family="Consolas" font-size="11" fill="#42A5F5">:80</text>
+  <circle cx="420" cy="148" r="16" fill="none" stroke="#1565C0" stroke-width="2" opacity="0.7"/>
+  <text x="440" y="152" font-family="Consolas" font-size="11" fill="#1565C0">:443</text>
+  <circle cx="430" cy="188" r="14" fill="none" stroke="#1565C0" stroke-width="2" opacity="0.5"/>
+  <text x="448" y="192" font-family="Consolas" font-size="10" fill="#1565C0">:22</text>
+</svg>

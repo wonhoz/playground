@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#050D1A"/>
+      <stop offset="100%" stop-color="#0A1A00"/>
+    </linearGradient>
+    <radialGradient id="moonGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFFDE7"/>
+      <stop offset="100%" stop-color="#FFF9C4"/>
+    </radialGradient>
+    <linearGradient id="leafGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1B5E20"/>
+      <stop offset="100%" stop-color="#0A2D00"/>
+    </linearGradient>
+    <filter id="moonGlow">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="leafGlow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Stars -->
+  <circle cx="100" cy="80" r="2" fill="white" opacity="0.6"/>
+  <circle cx="160" cy="60" r="1.5" fill="white" opacity="0.5"/>
+  <circle cx="390" cy="70" r="2" fill="white" opacity="0.7"/>
+  <circle cx="430" cy="50" r="1.5" fill="white" opacity="0.4"/>
+  <circle cx="80" cy="130" r="1" fill="white" opacity="0.5"/>
+  <circle cx="450" cy="120" r="1.5" fill="white" opacity="0.6"/>
+  <!-- Moon -->
+  <circle cx="380" cy="90" r="44" fill="url(#moonGrad)" filter="url(#moonGlow)" opacity="0.9"/>
+  <circle cx="400" cy="78" r="36" fill="#050D1A" opacity="0.85"/>
+  <!-- Ground -->
+  <rect x="0" y="430" width="512" height="82" fill="#0A1500"/>
+  <!-- Background trees (silhouette) -->
+  <path d="M80 430 L80 280 L50 280 L110 180 L70 180 L120 100 L170 180 L130 180 L180 280 L150 280 L150 430 Z" fill="#0A1800"/>
+  <path d="M380 430 L380 300 L350 300 L400 210 L365 210 L410 140 L455 210 L420 210 L465 300 L435 300 L435 430 Z" fill="#0A1800"/>
+  <!-- Main tree center -->
+  <path d="M256 430 Q252 370 256 310" stroke="#1A0A00" stroke-width="16" fill="none" stroke-linecap="round"/>
+  <!-- Glowing leaves -->
+  <path d="M256 320 Q300 275 340 256 Q315 295 264 326" fill="url(#leafGrad)" filter="url(#leafGlow)"/>
+  <path d="M256 320 Q300 275 340 256 Q315 295 264 326" fill="#2E7D32" opacity="0.6"/>
+  <path d="M256 280 Q210 245 172 232 Q200 262 250 286" fill="url(#leafGrad)" filter="url(#leafGlow)"/>
+  <path d="M256 280 Q210 245 172 232 Q200 262 250 286" fill="#2E7D32" opacity="0.6"/>
+  <path d="M256 240 Q300 205 332 188 Q308 222 260 246" fill="#33691E" filter="url(#leafGlow)"/>
+  <path d="M256 240 Q208 210 180 196 Q206 226 252 246" fill="#33691E" filter="url(#leafGlow)"/>
+  <!-- Glowing top bud -->
+  <ellipse cx="256" cy="196" rx="20" ry="28" fill="#4CAF50" filter="url(#leafGlow)" opacity="0.9"/>
+  <!-- Fireflies -->
+  <circle cx="180" cy="350" r="4" fill="#AAFF00" filter="url(#leafGlow)" opacity="0.7"/>
+  <circle cx="330" cy="300" r="3" fill="#AAFF00" filter="url(#leafGlow)" opacity="0.6"/>
+  <circle cx="200" cy="250" r="3" fill="#CCFF44" filter="url(#leafGlow)" opacity="0.5"/>
+  <circle cx="310" cy="360" r="4" fill="#AAFF00" filter="url(#leafGlow)" opacity="0.7"/>
+</svg>

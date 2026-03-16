@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#001122"/>
+      <stop offset="100%" stop-color="#002244"/>
+    </linearGradient>
+    <linearGradient id="gearGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00c9ff"/>
+      <stop offset="100%" stop-color="#0070c0"/>
+    </linearGradient>
+    <linearGradient id="codeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00ff88"/>
+      <stop offset="100%" stop-color="#00cc66"/>
+    </linearGradient>
+    <filter id="techGlow">
+      <feGaussianBlur stdDeviation="5" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Large gear -->
+  <g transform="translate(256, 256)">
+    <circle r="110" fill="none" stroke="url(#gearGrad)" stroke-width="18" filter="url(#techGlow)"/>
+    <circle r="70" fill="#001122"/>
+    <!-- Gear teeth -->
+    <rect x="-15" y="-125" width="30" height="28" rx="4" fill="url(#gearGrad)"/>
+    <rect x="-15" y="97" width="30" height="28" rx="4" fill="url(#gearGrad)"/>
+    <rect x="-125" y="-15" width="28" height="30" rx="4" fill="url(#gearGrad)"/>
+    <rect x="97" y="-15" width="28" height="30" rx="4" fill="url(#gearGrad)"/>
+    <rect x="68" y="-115" width="28" height="28" rx="4" fill="url(#gearGrad)" transform="rotate(45,82,-101)"/>
+    <rect x="-96" y="-115" width="28" height="28" rx="4" fill="url(#gearGrad)" transform="rotate(-45,-82,-101)"/>
+    <rect x="68" y="87" width="28" height="28" rx="4" fill="url(#gearGrad)" transform="rotate(-45,82,101)"/>
+    <rect x="-96" y="87" width="28" height="28" rx="4" fill="url(#gearGrad)" transform="rotate(45,-82,101)"/>
+  </g>
+  <!-- Code lines in gear center -->
+  <rect x="196" y="228" width="68" height="8" rx="3" fill="url(#codeGrad)" opacity="0.9"/>
+  <rect x="196" y="244" width="50" height="8" rx="3" fill="url(#codeGrad)" opacity="0.7"/>
+  <rect x="196" y="260" width="60" height="8" rx="3" fill="url(#codeGrad)" opacity="0.8"/>
+  <rect x="196" y="276" width="44" height="8" rx="3" fill="url(#codeGrad)" opacity="0.6"/>
+  <!-- Cursor -->
+  <rect x="264" y="228" width="4" height="16" rx="1" fill="#00ff88" opacity="0.9"/>
+</svg>

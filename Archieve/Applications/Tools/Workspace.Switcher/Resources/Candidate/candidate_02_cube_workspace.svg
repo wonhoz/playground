@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0d0d1a"/>
+      <stop offset="100%" stop-color="#1a1a2e"/>
+    </linearGradient>
+    <linearGradient id="faceTop" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4338ca"/>
+      <stop offset="100%" stop-color="#3730a3"/>
+    </linearGradient>
+    <linearGradient id="faceLeft" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e1b4b"/>
+      <stop offset="100%" stop-color="#312e81"/>
+    </linearGradient>
+    <linearGradient id="faceRight" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2e1065"/>
+      <stop offset="100%" stop-color="#4c1d95"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- 3D 큐브 (아이소메트릭) -->
+  <!-- 윗면 -->
+  <polygon points="256,80 420,172 256,264 92,172" fill="url(#faceTop)" stroke="#818cf8" stroke-width="2"/>
+  <!-- 왼쪽 면 -->
+  <polygon points="92,172 256,264 256,420 92,328" fill="url(#faceLeft)" stroke="#6366f1" stroke-width="2"/>
+  <!-- 오른쪽 면 -->
+  <polygon points="256,264 420,172 420,328 256,420" fill="url(#faceRight)" stroke="#7c3aed" stroke-width="2"/>
+  <!-- 윗면 창 아이콘들 -->
+  <polygon points="210,148 256,122 302,148 256,174" fill="#4f46e5" stroke="#a5b4fc" stroke-width="1" opacity="0.8"/>
+  <!-- 왼쪽 면 창 아이콘들 -->
+  <polygon points="120,234 174,204 174,272 120,302" fill="#3730a3" stroke="#818cf8" stroke-width="1" opacity="0.8"/>
+  <!-- 오른쪽 면 창 아이콘들 -->
+  <polygon points="338,204 392,234 392,302 338,272" fill="#5b21b6" stroke="#a78bfa" stroke-width="1" opacity="0.8"/>
+  <!-- 모서리 강조 (발광) -->
+  <line x1="256" y1="80" x2="256" y2="264" stroke="#818cf8" stroke-width="1.5" opacity="0.4" filter="url(#glow)"/>
+  <line x1="92" y1="172" x2="420" y2="172" stroke="#818cf8" stroke-width="1.5" opacity="0.4" filter="url(#glow)"/>
+  <!-- 회전 화살표 -->
+  <path d="M380,380 A80,80 0 0,1 300,440" fill="none" stroke="#a78bfa" stroke-width="3" stroke-linecap="round" marker-end="url(#arrowPurple)"/>
+  <defs>
+    <marker id="arrowPurple" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#a78bfa"/>
+    </marker>
+  </defs>
+</svg>

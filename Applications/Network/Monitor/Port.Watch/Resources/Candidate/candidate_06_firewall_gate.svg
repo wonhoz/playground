@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a0a00"/>
+      <stop offset="100%" stop-color="#2d1500"/>
+    </linearGradient>
+    <linearGradient id="fire" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#ff4500"/>
+      <stop offset="50%" stop-color="#ff8c00"/>
+      <stop offset="100%" stop-color="#ffd700"/>
+    </linearGradient>
+    <linearGradient id="gate" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#555"/>
+      <stop offset="100%" stop-color="#333"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Fire wall background -->
+  <path d="M80,420 Q120,300 100,200 Q140,260 130,180 Q170,240 160,160 Q200,230 190,150 Q230,220 220,140 Q256,200 250,130 Q280,200 290,140 Q310,220 320,150 Q360,240 350,160 Q390,240 380,180 Q400,260 432,200 Q412,300 432,420 Z" fill="url(#fire)" opacity="0.35"/>
+  <!-- Gate frame -->
+  <rect x="130" y="150" width="60" height="220" rx="4" fill="url(#gate)" stroke="#888" stroke-width="2"/>
+  <rect x="322" y="150" width="60" height="220" rx="4" fill="url(#gate)" stroke="#888" stroke-width="2"/>
+  <!-- Arch top -->
+  <path d="M130,200 Q130,100 256,100 Q382,100 382,200" fill="none" stroke="#888" stroke-width="12"/>
+  <!-- Port label on gate -->
+  <text x="256" y="270" text-anchor="middle" font-family="monospace" font-size="28" fill="#ff8c00" font-weight="bold">PORT</text>
+  <text x="256" y="305" text-anchor="middle" font-family="monospace" font-size="28" fill="#ff8c00" font-weight="bold">WATCH</text>
+  <!-- Status lights on pillars -->
+  <circle cx="160" cy="300" r="8" fill="#00ff00"/>
+  <circle cx="352" cy="300" r="8" fill="#ff4500"/>
+  <!-- Open/Closed port indicators at bottom -->
+  <text x="160" y="335" text-anchor="middle" font-family="monospace" font-size="11" fill="#00ff00">OPEN</text>
+  <text x="352" y="335" text-anchor="middle" font-family="monospace" font-size="11" fill="#ff4500">ALERT</text>
+  <!-- Network flow arrows -->
+  <path d="M256 390 L256 370 M246 378 L256 370 L266 378" stroke="#ff8c00" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+</svg>

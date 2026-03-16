@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#1A001A"/>
+      <stop offset="100%" stop-color="#0A0010"/>
+    </radialGradient>
+    <radialGradient id="radar" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FF69B4" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#FF1493" stop-opacity="0.1"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Radar grid circles -->
+  <circle cx="256" cy="256" r="160" fill="none" stroke="#FF69B4" stroke-width="1" opacity="0.2"/>
+  <circle cx="256" cy="256" r="120" fill="none" stroke="#FF69B4" stroke-width="1" opacity="0.2"/>
+  <circle cx="256" cy="256" r="80" fill="none" stroke="#FF69B4" stroke-width="1" opacity="0.2"/>
+  <circle cx="256" cy="256" r="40" fill="none" stroke="#FF69B4" stroke-width="1" opacity="0.2"/>
+  <!-- Radar axes (6 axes) -->
+  <line x1="256" y1="96" x2="256" y2="416" stroke="#FF69B4" stroke-width="1" opacity="0.3"/>
+  <line x1="117" y1="176" x2="395" y2="336" stroke="#FF69B4" stroke-width="1" opacity="0.3"/>
+  <line x1="117" y1="336" x2="395" y2="176" stroke="#FF69B4" stroke-width="1" opacity="0.3"/>
+  <!-- Radar data polygon -->
+  <polygon points="256,136 355,196 355,316 256,376 157,316 157,196" fill="url(#radar)" stroke="#FF1493" stroke-width="3"/>
+  <!-- Axis labels -->
+  <text x="256" y="88" text-anchor="middle" fill="#FF69B4" font-size="16" font-family="monospace">Commits</text>
+  <text x="410" y="178" fill="#FF69B4" font-size="14" font-family="monospace">PRs</text>
+  <text x="410" y="340" fill="#FF69B4" font-size="14" font-family="monospace">Issues</text>
+  <text x="256" y="432" text-anchor="middle" fill="#FF69B4" font-size="16" font-family="monospace">Reviews</text>
+  <text x="78" y="340" text-anchor="end" fill="#FF69B4" font-size="14" font-family="monospace">Lines</text>
+  <text x="78" y="178" text-anchor="end" fill="#FF69B4" font-size="14" font-family="monospace">Files</text>
+  <!-- Center dot -->
+  <circle cx="256" cy="256" r="8" fill="#FF1493"/>
+  <!-- Data dots -->
+  <circle cx="256" cy="136" r="6" fill="#FF69B4"/>
+  <circle cx="355" cy="196" r="6" fill="#FF69B4"/>
+  <circle cx="355" cy="316" r="6" fill="#FF69B4"/>
+  <circle cx="256" cy="376" r="6" fill="#FF69B4"/>
+  <circle cx="157" cy="316" r="6" fill="#FF69B4"/>
+  <circle cx="157" cy="196" r="6" fill="#FF69B4"/>
+</svg>

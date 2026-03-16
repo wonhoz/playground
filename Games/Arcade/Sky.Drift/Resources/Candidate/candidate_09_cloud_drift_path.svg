@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#060510"/>
+      <stop offset="100%" style="stop-color:#0c1030"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <linearGradient id="pathGlow" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#ffcc00;stop-opacity:0"/>
+      <stop offset="30%" style="stop-color:#ffcc00;stop-opacity:0.8"/>
+      <stop offset="100%" style="stop-color:#ffffff"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Cloud obstacles left -->
+  <g opacity="0.7">
+    <ellipse cx="130" cy="220" rx="75" ry="35" fill="#334466" filter="url(#glow)"/>
+    <ellipse cx="95" cy="235" rx="50" ry="28" fill="#445577"/>
+    <ellipse cx="163" cy="235" rx="50" ry="28" fill="#445577"/>
+  </g>
+  <!-- Cloud obstacles right -->
+  <g opacity="0.65">
+    <ellipse cx="390" cy="290" rx="70" ry="32" fill="#334466" filter="url(#glow)"/>
+    <ellipse cx="358" cy="304" rx="48" ry="26" fill="#445577"/>
+    <ellipse cx="420" cy="304" rx="48" ry="26" fill="#445577"/>
+  </g>
+  <!-- Cloud obstacle top center -->
+  <g opacity="0.6">
+    <ellipse cx="256" cy="155" rx="65" ry="28" fill="#334466" filter="url(#glow)"/>
+    <ellipse cx="228" cy="168" rx="44" ry="22" fill="#445577"/>
+    <ellipse cx="283" cy="168" rx="44" ry="22" fill="#445577"/>
+  </g>
+  <!-- Winding drift path through clouds -->
+  <path d="M60 400 Q100 360 180 310 Q240 270 256 220 Q272 170 330 200 Q380 230 420 200" stroke="url(#pathGlow)" stroke-width="5" fill="none" filter="url(#glow)" stroke-linecap="round"/>
+  <path d="M60 400 Q100 360 180 310 Q240 270 256 220 Q272 170 330 200 Q380 230 420 200" stroke="#ffffff" stroke-width="1.5" fill="none" opacity="0.5" stroke-linecap="round"/>
+  <!-- Plane on path -->
+  <g transform="translate(256, 222) rotate(-40)" filter="url(#glow)">
+    <path d="M-48 0 Q-33 -6 0 -6 Q38 -6 55 0 Q38 6 0 6 Q-33 6 -48 0 Z" fill="#ffcc00"/>
+    <path d="M-4 -6 L-22 -30 L14 -30 L20 -6 Z" fill="#ddaa00"/>
+    <path d="M-4 6 L-22 30 L14 30 L20 6 Z" fill="#ddaa00"/>
+    <path d="M-40 0 L-52 -18 L-33 -6 Z" fill="#bb8800"/>
+    <path d="M-40 0 L-50 13 L-33 6 Z" fill="#bb8800"/>
+    <ellipse cx="33" cy="0" rx="12" ry="5" fill="#ff8800" opacity="0.9"/>
+  </g>
+  <!-- Path arrow markers -->
+  <path d="M180 312 L190 300 L198 312" stroke="#ffcc00" stroke-width="1.5" fill="none" filter="url(#glow)" opacity="0.6"/>
+</svg>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#001A1A"/>
+      <stop offset="100%" stop-color="#000D0D"/>
+    </radialGradient>
+    <radialGradient id="sun" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#00FFCC"/>
+      <stop offset="40%" stop-color="#00CCAA"/>
+      <stop offset="100%" stop-color="#008877" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Sunburst rings -->
+  <!-- Outer ring segments (8 segments, different teal shades) -->
+  <path d="M256 256 L256 96 A160 160 0 0 1 369 143 Z" fill="#00FFCC" opacity="0.7"/>
+  <path d="M256 256 L369 143 A160 160 0 0 1 416 256 Z" fill="#00DDAA" opacity="0.5"/>
+  <path d="M256 256 L416 256 A160 160 0 0 1 369 369 Z" fill="#00FFCC" opacity="0.6"/>
+  <path d="M256 256 L369 369 A160 160 0 0 1 256 416 Z" fill="#00BBAA" opacity="0.4"/>
+  <path d="M256 256 L256 416 A160 160 0 0 1 143 369 Z" fill="#00FFCC" opacity="0.8"/>
+  <path d="M256 256 L143 369 A160 160 0 0 1 96 256 Z" fill="#00DDCC" opacity="0.55"/>
+  <path d="M256 256 L96 256 A160 160 0 0 1 143 143 Z" fill="#00FFCC" opacity="0.65"/>
+  <path d="M256 256 L143 143 A160 160 0 0 1 256 96 Z" fill="#00AACC" opacity="0.45"/>
+  <!-- Mid ring segments -->
+  <path d="M256 256 L256 156 A100 100 0 0 1 325 187 Z" fill="#001A1A"/>
+  <path d="M256 256 L325 187 A100 100 0 0 1 356 256 Z" fill="#001A1A"/>
+  <path d="M256 256 L356 256 A100 100 0 0 1 325 325 Z" fill="#001A1A"/>
+  <path d="M256 256 L325 325 A100 100 0 0 1 256 356 Z" fill="#001A1A"/>
+  <path d="M256 256 L256 356 A100 100 0 0 1 187 325 Z" fill="#001A1A"/>
+  <path d="M256 256 L187 325 A100 100 0 0 1 156 256 Z" fill="#001A1A"/>
+  <path d="M256 256 L156 256 A100 100 0 0 1 187 187 Z" fill="#001A1A"/>
+  <path d="M256 256 L187 187 A100 100 0 0 1 256 156 Z" fill="#001A1A"/>
+  <!-- Inner ring -->
+  <circle cx="256" cy="256" r="70" fill="#00FFCC" opacity="0.15"/>
+  <circle cx="256" cy="256" r="70" fill="none" stroke="#00FFCC" stroke-width="3" opacity="0.5"/>
+  <!-- Center -->
+  <circle cx="256" cy="256" r="30" fill="url(#sun)"/>
+  <text x="256" y="263" text-anchor="middle" fill="#001A1A" font-size="22" font-family="monospace" font-weight="bold">git</text>
+</svg>

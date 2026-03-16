@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#00252A"/>
+      <stop offset="100%" stop-color="#004D50"/>
+    </linearGradient>
+    <linearGradient id="curve" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0%" stop-color="#00BCD4"/>
+      <stop offset="100%" stop-color="#80DEEA"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Photo thumbnail -->
+  <rect x="108" y="120" width="296" height="196" rx="10" fill="#001820" stroke="#006064" stroke-width="2"/>
+  <!-- Gradient overlay simulating color grade -->
+  <rect x="108" y="120" width="148" height="196" rx="10" fill="#004D50" opacity="0.5"/>
+  <rect x="256" y="120" width="148" height="196" rx="10" fill="#00BCD4" opacity="0.2"/>
+  <!-- Mountain silhouette -->
+  <polygon points="108,316 160,220 220,270 280,190 340,250 404,316" fill="#00696E" opacity="0.7"/>
+  <!-- Tone curve graph below -->
+  <rect x="108" y="340" width="296" height="130" rx="10" fill="#001820" stroke="#006064" stroke-width="2"/>
+  <line x1="120" y1="448" x2="392" y2="448" stroke="#00838F" stroke-width="1.5" opacity="0.5"/>
+  <line x1="120" y1="350" x2="120" y2="460" stroke="#00838F" stroke-width="1.5" opacity="0.5"/>
+  <!-- Diagonal baseline -->
+  <line x1="120" y1="448" x2="392" y2="356" stroke="#004D50" stroke-width="1.5" stroke-dasharray="5,4"/>
+  <!-- S-curve -->
+  <path d="M120 448 C160 440 180 430 220 400 C260 370 280 360 320 350 Q360 344 392 356" fill="none" stroke="url(#curve)" stroke-width="3.5" stroke-linecap="round"/>
+  <!-- Control points -->
+  <circle cx="196" cy="422" r="7" fill="#80DEEA"/>
+  <circle cx="316" cy="358" r="7" fill="#80DEEA"/>
+</svg>

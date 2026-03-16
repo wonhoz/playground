@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#001820"/>
+      <stop offset="100%" stop-color="#003038"/>
+    </linearGradient>
+    <linearGradient id="cd" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#80DEEA"/>
+      <stop offset="25%" stop-color="#E040FB"/>
+      <stop offset="50%" stop-color="#FFEE58"/>
+      <stop offset="75%" stop-color="#69F0AE"/>
+      <stop offset="100%" stop-color="#40C4FF"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- CD disc -->
+  <circle cx="256" cy="230" r="145" fill="url(#cd)" opacity="0.8"/>
+  <circle cx="256" cy="230" r="130" fill="#001820" opacity="0.7"/>
+  <circle cx="256" cy="230" r="55" fill="url(#cd)" opacity="0.5"/>
+  <circle cx="256" cy="230" r="40" fill="#001820"/>
+  <circle cx="256" cy="230" r="18" fill="url(#cd)" opacity="0.7"/>
+  <circle cx="256" cy="230" r="10" fill="#001820"/>
+  <!-- Reflection shimmer -->
+  <path d="M160 155 Q175 148 205 178" fill="none" stroke="white" stroke-width="4" stroke-linecap="round" opacity="0.4"/>
+  <!-- Tag below CD -->
+  <rect x="148" y="382" width="216" height="88" rx="12" fill="#002830" stroke="#00BCD4" stroke-width="2.5"/>
+  <g font-family="monospace" font-size="11" fill="#80DEEA">
+    <text x="164" y="402" opacity="0.9">Title  :</text>
+    <rect x="218" y="393" width="126" height="8" rx="4" fill="#00BCD4" opacity="0.5"/>
+    <text x="164" y="420" opacity="0.9">Artist :</text>
+    <rect x="222" y="411" width="100" height="8" rx="4" fill="#00BCD4" opacity="0.5"/>
+    <text x="164" y="438" opacity="0.9">Album  :</text>
+    <rect x="222" y="429" width="112" height="8" rx="4" fill="#00BCD4" opacity="0.5"/>
+    <text x="164" y="456" opacity="0.9">Year   :</text>
+    <rect x="222" y="447" width="60" height="8" rx="4" fill="#00BCD4" opacity="0.5"/>
+  </g>
+</svg>

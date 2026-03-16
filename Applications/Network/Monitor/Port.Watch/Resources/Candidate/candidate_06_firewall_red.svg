@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A0000"/>
+      <stop offset="100%" stop-color="#2D0000"/>
+    </linearGradient>
+    <linearGradient id="fire" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#FF3D00"/>
+      <stop offset="50%" stop-color="#FF6D00"/>
+      <stop offset="100%" stop-color="#FFAB40"/>
+    </linearGradient>
+    <linearGradient id="wall" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4A1414"/>
+      <stop offset="100%" stop-color="#3A0A0A"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Firewall brick wall -->
+  <!-- Row 1 (top) -->
+  <rect x="70" y="240" width="88" height="44" rx="4" fill="url(#wall)" stroke="#F44336" stroke-width="1.5"/>
+  <rect x="166" y="240" width="88" height="44" rx="4" fill="url(#wall)" stroke="#D32F2F" stroke-width="1.5"/>
+  <rect x="262" y="240" width="88" height="44" rx="4" fill="url(#wall)" stroke="#F44336" stroke-width="1.5"/>
+  <rect x="358" y="240" width="84" height="44" rx="4" fill="url(#wall)" stroke="#D32F2F" stroke-width="1.5"/>
+  <!-- Row 2 (offset) -->
+  <rect x="70" y="292" width="44" height="44" rx="4" fill="url(#wall)" stroke="#D32F2F" stroke-width="1.5"/>
+  <rect x="122" y="292" width="88" height="44" rx="4" fill="url(#wall)" stroke="#F44336" stroke-width="1.5"/>
+  <rect x="218" y="292" width="88" height="44" rx="4" fill="url(#wall)" stroke="#D32F2F" stroke-width="1.5"/>
+  <rect x="314" y="292" width="88" height="44" rx="4" fill="url(#wall)" stroke="#F44336" stroke-width="1.5"/>
+  <rect x="410" y="292" width="32" height="44" rx="4" fill="url(#wall)" stroke="#D32F2F" stroke-width="1.5"/>
+  <!-- Flames above wall -->
+  <path d="M100 240 Q110 200 120 210 Q130 170 150 185 Q160 150 170 170 Q185 140 190 165 Q200 155 200 175 Q210 145 220 170 Q230 158 230 180 Q240 175 240 240 Z" fill="url(#fire)" opacity="0.8"/>
+  <path d="M270 240 Q280 195 295 215 Q305 170 320 188 Q332 155 340 175 Q350 160 350 185 Q362 175 365 195 Q370 240 370 240 Z" fill="url(#fire)" opacity="0.7"/>
+  <!-- Blocked connection arrows -->
+  <!-- Incoming blocked -->
+  <line x1="256" y1="100" x2="256" y2="230" stroke="#FF1744" stroke-width="3" stroke-linecap="round"/>
+  <polygon points="248,224 264,224 256,238" fill="#FF1744"/>
+  <line x1="236" y1="100" x2="276" y2="100" stroke="#FF1744" stroke-width="3"/>
+  <!-- Port watch below wall -->
+  <rect x="100" y="360" width="312" height="80" rx="10" fill="#2D0000" stroke="#F44336" stroke-width="2"/>
+  <text x="130" y="388" font-family="Consolas" font-size="12" fill="#FF8A80">BLOCKED: :3389</text>
+  <text x="130" y="410" font-family="Consolas" font-size="12" fill="#FF5252">BLOCKED: :4444</text>
+  <text x="290" y="388" font-family="Consolas" font-size="11" fill="#FF6D00">WATCH: ON</text>
+</svg>

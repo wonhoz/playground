@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a0500"/>
+      <stop offset="100%" stop-color="#2d0a00"/>
+    </linearGradient>
+    <linearGradient id="flame1" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#ff4500"/>
+      <stop offset="50%" stop-color="#ff8c00"/>
+      <stop offset="100%" stop-color="#ffd700" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="flame2" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#ff6b00"/>
+      <stop offset="50%" stop-color="#ffaa00"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="textGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#fff5e0"/>
+      <stop offset="100%" stop-color="#ffd700"/>
+    </linearGradient>
+    <filter id="blur1">
+      <feGaussianBlur stdDeviation="3"/>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Flames behind text -->
+  <ellipse cx="256" cy="380" rx="120" ry="30" fill="#ff4500" opacity="0.3" filter="url(#blur1)"/>
+  <!-- Flame shapes -->
+  <path d="M196 380 Q176 320 206 280 Q216 320 236 300 Q226 350 256 310 Q280 340 266 380 Z" fill="url(#flame1)" opacity="0.8"/>
+  <path d="M216 380 Q200 340 220 305 Q232 335 252 318 Q242 355 256 335 Q268 355 268 380 Z" fill="url(#flame2)" opacity="0.9"/>
+  <path d="M260 380 Q244 340 266 300 Q278 330 296 312 Q284 355 300 340 Q318 358 316 380 Z" fill="url(#flame1)" opacity="0.7"/>
+  <!-- "Tx" letters -->
+  <rect x="170" y="200" width="110" height="26" rx="5" fill="url(#textGrad)"/>
+  <rect x="218" y="200" width="26" height="90" rx="5" fill="url(#textGrad)"/>
+  <!-- x shape -->
+  <line x1="308" y1="200" x2="368" y2="290" stroke="url(#textGrad)" stroke-width="26" stroke-linecap="round"/>
+  <line x1="368" y1="200" x2="308" y2="290" stroke="url(#textGrad)" stroke-width="26" stroke-linecap="round"/>
+  <!-- ember dots -->
+  <circle cx="190" cy="180" r="4" fill="#ffd700" opacity="0.9"/>
+  <circle cx="350" cy="165" r="3" fill="#ff8c00" opacity="0.8"/>
+  <circle cx="320" cy="190" r="2" fill="#ffd700" opacity="0.7"/>
+  <circle cx="168" cy="200" r="2.5" fill="#ff6b00" opacity="0.8"/>
+</svg>

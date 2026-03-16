@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#001a00"/>
+      <stop offset="100%" stop-color="#003300"/>
+    </linearGradient>
+    <linearGradient id="block" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#44FF88"/>
+      <stop offset="100%" stop-color="#00AA44"/>
+    </linearGradient>
+    <linearGradient id="leaf" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#88FF44"/>
+      <stop offset="100%" stop-color="#22CC44"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#44FF88" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#44FF88" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <circle cx="256" cy="280" r="200" fill="url(#glow)"/>
+  <!-- Stacked building blocks -->
+  <rect x="130" y="380" width="252" height="52" rx="8" fill="url(#block)"/>
+  <rect x="156" y="320" width="200" height="54" rx="8" fill="url(#block)" opacity="0.9"/>
+  <rect x="182" y="262" width="148" height="52" rx="8" fill="url(#block)" opacity="0.85"/>
+  <rect x="208" y="208" width="96" height="48" rx="8" fill="url(#block)" opacity="0.8"/>
+  <!-- Leaf on top -->
+  <ellipse cx="256" cy="175" rx="38" ry="52" fill="url(#leaf)" transform="rotate(-20 256 175)"/>
+  <ellipse cx="256" cy="175" rx="38" ry="52" fill="url(#leaf)" transform="rotate(20 256 175)"/>
+  <line x1="256" y1="145" x2="256" y2="215" stroke="#001a00" stroke-width="3"/>
+  <!-- Block lines/joints -->
+  <line x1="130" y1="406" x2="382" y2="406" stroke="#001a00" stroke-width="2" opacity="0.3"/>
+  <line x1="156" y1="347" x2="356" y2="347" stroke="#001a00" stroke-width="2" opacity="0.3"/>
+  <!-- Plus auto icon -->
+  <circle cx="400" cy="110" r="38" fill="#44FF88" opacity="0.15" stroke="#44FF88" stroke-width="2"/>
+  <rect x="390" y="95" width="20" height="30" rx="4" fill="#44FF88"/>
+  <rect x="382" y="106" width="36" height="8" rx="4" fill="#44FF88"/>
+</svg>

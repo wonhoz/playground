@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#120829"/>
+      <stop offset="100%" stop-color="#1e0a3c"/>
+    </linearGradient>
+    <radialGradient id="globe" cx="40%" cy="35%" r="60%">
+      <stop offset="0%" stop-color="#ce93d8"/>
+      <stop offset="60%" stop-color="#7b1fa2"/>
+      <stop offset="100%" stop-color="#4a148c"/>
+    </radialGradient>
+    <linearGradient id="beam" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#e040fb"/>
+      <stop offset="100%" stop-color="#e040fb" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Globe circle -->
+  <circle cx="256" cy="230" r="145" fill="url(#globe)"/>
+  <!-- Globe grid lines -->
+  <ellipse cx="256" cy="230" rx="145" ry="50" fill="none" stroke="#ce93d8" stroke-width="1.5" opacity="0.5"/>
+  <ellipse cx="256" cy="230" rx="145" ry="100" fill="none" stroke="#ce93d8" stroke-width="1.5" opacity="0.4"/>
+  <line x1="256" y1="85" x2="256" y2="375" stroke="#ce93d8" stroke-width="1.5" opacity="0.5"/>
+  <path d="M111 230 Q184 190 256 185 Q328 190 401 230 Q328 270 256 275 Q184 270 111 230" stroke="#ce93d8" stroke-width="1.5" fill="none" opacity="0.4"/>
+  <!-- Serve arrow/beam going out -->
+  <path d="M256 375 L256 430" stroke="#e040fb" stroke-width="4" stroke-linecap="round"/>
+  <polygon points="256,450 240,425 272,425" fill="#e040fb"/>
+  <!-- Upload arrows from below globe -->
+  <path d="M150 400 Q190 380 256 375 Q322 380 362 400" stroke="#e040fb" stroke-width="2" fill="none" opacity="0.7"/>
+  <!-- Small dots on globe -->
+  <circle cx="210" cy="200" r="6" fill="#f3e5f5" opacity="0.9"/>
+  <circle cx="290" cy="215" r="5" fill="#f3e5f5" opacity="0.9"/>
+  <circle cx="255" cy="180" r="4" fill="#f3e5f5" opacity="0.8"/>
+  <circle cx="320" cy="240" r="5" fill="#f3e5f5" opacity="0.9"/>
+</svg>

@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0A0A0F"/>
+      <stop offset="100%" stop-color="#12122A"/>
+    </linearGradient>
+    <filter id="neon">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Neon shield outline -->
+  <path d="M256 80 L380 130 L380 265 Q380 362 256 432 Q132 362 132 265 L132 130 Z" fill="none" stroke="#00FFFF" stroke-width="3" filter="url(#neon)" opacity="0.9"/>
+  <path d="M256 80 L380 130 L380 265 Q380 362 256 432 Q132 362 132 265 L132 130 Z" fill="none" stroke="#00FFFF" stroke-width="1" opacity="0.5"/>
+  <!-- Inner glow fill -->
+  <path d="M256 80 L380 130 L380 265 Q380 362 256 432 Q132 362 132 265 L132 130 Z" fill="#00FFFF" opacity="0.04"/>
+  <!-- Scan lines -->
+  <g stroke="#00FFFF" stroke-width="1" opacity="0.15">
+    <line x1="150" y1="170" x2="362" y2="170"/>
+    <line x1="145" y1="195" x2="367" y2="195"/>
+    <line x1="143" y1="220" x2="369" y2="220"/>
+    <line x1="143" y1="245" x2="369" y2="245"/>
+    <line x1="145" y1="270" x2="367" y2="270"/>
+    <line x1="150" y1="295" x2="362" y2="295"/>
+    <line x1="160" y1="320" x2="352" y2="320"/>
+  </g>
+  <!-- Process nodes -->
+  <circle cx="256" cy="200" r="18" fill="none" stroke="#00FFFF" stroke-width="2" filter="url(#neon)"/>
+  <circle cx="256" cy="200" r="8" fill="#00FFFF" opacity="0.8"/>
+  <circle cx="210" cy="255" r="14" fill="none" stroke="#FF00FF" stroke-width="2" filter="url(#neon)"/>
+  <circle cx="210" cy="255" r="6" fill="#FF00FF" opacity="0.8"/>
+  <circle cx="302" cy="255" r="14" fill="none" stroke="#FF00FF" stroke-width="2" filter="url(#neon)"/>
+  <circle cx="302" cy="255" r="6" fill="#FF00FF" opacity="0.8"/>
+  <circle cx="256" cy="310" r="14" fill="none" stroke="#FFFF00" stroke-width="2" filter="url(#neon)"/>
+  <circle cx="256" cy="310" r="6" fill="#FFFF00" opacity="0.8"/>
+  <!-- Connection lines -->
+  <line x1="256" y1="218" x2="210" y2="241" stroke="#00FFFF" stroke-width="1.5" opacity="0.6"/>
+  <line x1="256" y1="218" x2="302" y2="241" stroke="#00FFFF" stroke-width="1.5" opacity="0.6"/>
+  <line x1="210" y1="269" x2="256" y2="296" stroke="#FF00FF" stroke-width="1.5" opacity="0.6"/>
+  <line x1="302" y1="269" x2="256" y2="296" stroke="#FF00FF" stroke-width="1.5" opacity="0.6"/>
+</svg>

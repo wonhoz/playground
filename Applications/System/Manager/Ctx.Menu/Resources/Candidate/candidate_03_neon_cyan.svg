@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#050a0f"/>
+      <stop offset="100%" stop-color="#0c2340"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- mouse cursor -->
+  <path d="M150 120 L150 300 L196 256 L230 350 L262 338 L228 244 L286 244 Z" fill="#00e5ff" opacity="0.9" filter="url(#glow)"/>
+  <!-- neon menu -->
+  <rect x="270" y="190" width="185" height="190" rx="10" fill="#021020" stroke="#00e5ff" stroke-width="2" filter="url(#glow)"/>
+  <!-- active item -->
+  <rect x="282" y="204" width="161" height="28" rx="5" fill="#00e5ff" opacity="0.2"/>
+  <rect x="282" y="204" width="161" height="28" rx="5" fill="none" stroke="#00e5ff" stroke-width="1" opacity="0.5"/>
+  <!-- items -->
+  <rect x="292" y="211" width="90" height="14" rx="3" fill="#00e5ff" opacity="0.8" filter="url(#glow)"/>
+  <rect x="292" y="244" width="110" height="11" rx="3" fill="#00bcd4" opacity="0.5"/>
+  <rect x="292" y="268" width="95" height="11" rx="3" fill="#00bcd4" opacity="0.5"/>
+  <rect x="292" y="292" width="120" height="11" rx="3" fill="#00bcd4" opacity="0.5"/>
+  <rect x="292" y="316" width="80" height="11" rx="3" fill="#00bcd4" opacity="0.5"/>
+  <!-- submenu indicator -->
+  <polygon points="438,264 438,276 450,270" fill="#00e5ff" filter="url(#glow)"/>
+  <polygon points="438,288 438,300 450,294" fill="#00e5ff" filter="url(#glow)"/>
+</svg>

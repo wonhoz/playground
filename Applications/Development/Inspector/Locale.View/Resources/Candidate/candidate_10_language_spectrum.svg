@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0d0d1a"/>
+      <stop offset="100%" stop-color="#1a1a2e"/>
+    </linearGradient>
+    <linearGradient id="spectrum" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ee0979"/>
+      <stop offset="16%" stop-color="#ff6a00"/>
+      <stop offset="33%" stop-color="#ffd200"/>
+      <stop offset="50%" stop-color="#56ab2f"/>
+      <stop offset="66%" stop-color="#56CCF2"/>
+      <stop offset="83%" stop-color="#2F80ED"/>
+      <stop offset="100%" stop-color="#8E54E9"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="softglow">
+      <feGaussianBlur stdDeviation="12" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+
+  <!-- Spectrum arc background glow -->
+  <path d="M70,390 Q256,80 442,390" fill="none" stroke="url(#spectrum)" stroke-width="60" opacity="0.12" filter="url(#softglow)"/>
+  <!-- Main spectrum arc -->
+  <path d="M80,385 Q256,95 432,385" fill="none" stroke="url(#spectrum)" stroke-width="28" opacity="0.9" filter="url(#glow)"/>
+  <!-- Inner spectrum arc -->
+  <path d="M100,385 Q256,125 412,385" fill="none" stroke="url(#spectrum)" stroke-width="12" opacity="0.5"/>
+
+  <!-- Language script nodes on spectrum arc -->
+  <!-- Red zone - Latin -->
+  <circle cx="110" cy="360" r="22" fill="#ee0979" opacity="0.25"/>
+  <circle cx="110" cy="360" r="16" fill="#ee0979" opacity="0.7" filter="url(#glow)"/>
+  <!-- Orange zone - Cyrillic -->
+  <circle cx="165" cy="255" r="22" fill="#ff6a00" opacity="0.25"/>
+  <circle cx="165" cy="255" r="16" fill="#ff6a00" opacity="0.7" filter="url(#glow)"/>
+  <!-- Yellow zone - Arabic/Hebrew -->
+  <circle cx="220" cy="185" r="22" fill="#ffd200" opacity="0.25"/>
+  <circle cx="220" cy="185" r="16" fill="#ffd200" opacity="0.7" filter="url(#glow)"/>
+  <!-- Green zone - Chinese -->
+  <circle cx="256" cy="170" r="24" fill="#56ab2f" opacity="0.25"/>
+  <circle cx="256" cy="170" r="18" fill="#56ab2f" opacity="0.7" filter="url(#glow)"/>
+  <!-- Cyan zone - Japanese -->
+  <circle cx="292" cy="185" r="22" fill="#56CCF2" opacity="0.25"/>
+  <circle cx="292" cy="185" r="16" fill="#56CCF2" opacity="0.7" filter="url(#glow)"/>
+  <!-- Blue zone - Korean -->
+  <circle cx="347" cy="255" r="22" fill="#2F80ED" opacity="0.25"/>
+  <circle cx="347" cy="255" r="16" fill="#2F80ED" opacity="0.7" filter="url(#glow)"/>
+  <!-- Purple zone - Devanagari -->
+  <circle cx="402" cy="360" r="22" fill="#8E54E9" opacity="0.25"/>
+  <circle cx="402" cy="360" r="16" fill="#8E54E9" opacity="0.7" filter="url(#glow)"/>
+
+  <!-- Script symbols inside nodes (abstract shapes) -->
+  <!-- Latin A -->
+  <polygon points="110,352 106,366 114,366" fill="#fff" opacity="0.9"/>
+  <line x1="107.5" y1="362" x2="112.5" y2="362" stroke="#fff" stroke-width="1.5" opacity="0.9"/>
+  <!-- Cyrillic Б -->
+  <path d="M160,248 L168,248 L168,252 L160,252 L160,268 L169,268 L169,264 L160,264" fill="none" stroke="#fff" stroke-width="1.5" opacity="0.9"/>
+  <!-- Arabic ع (simplified) -->
+  <path d="M216,178 Q224,175 224,182 Q224,190 216,188" fill="none" stroke="#fff" stroke-width="1.5" opacity="0.9"/>
+  <!-- Chinese 语 simplified cross+lines -->
+  <line x1="256" y1="162" x2="256" y2="178" stroke="#fff" stroke-width="2" opacity="0.9"/>
+  <line x1="249" y1="167" x2="263" y2="167" stroke="#fff" stroke-width="2" opacity="0.9"/>
+  <line x1="249" y1="173" x2="263" y2="173" stroke="#fff" stroke-width="1.2" opacity="0.7"/>
+  <!-- Japanese あ (simplified) -->
+  <path d="M286,178 Q296,175 296,183 Q296,191 286,193 M291,178 L291,192" fill="none" stroke="#fff" stroke-width="1.5" opacity="0.9"/>
+  <!-- Korean ㄱ -->
+  <path d="M341,248 L349,248 L349,262" fill="none" stroke="#fff" stroke-width="2" opacity="0.9"/>
+  <!-- Devanagari अ (simplified) -->
+  <line x1="395" y1="352" x2="409" y2="352" stroke="#fff" stroke-width="2" opacity="0.9"/>
+  <path d="M402,352 L402,366 M398,358 L406,358" fill="none" stroke="#fff" stroke-width="1.5" opacity="0.9"/>
+
+  <!-- Center prism/refraction element -->
+  <polygon points="256,380 232,420 280,420" fill="#ffffff" opacity="0.08"/>
+  <polygon points="256,380 232,420 280,420" fill="none" stroke="url(#spectrum)" stroke-width="2.5" opacity="0.7"/>
+  <!-- White light entering prism -->
+  <line x1="256" y1="340" x2="256" y2="380" stroke="#ffffff" stroke-width="4" opacity="0.6" filter="url(#glow)"/>
+  <!-- Refracted beams -->
+  <line x1="232" y1="420" x2="180" y2="450" stroke="#ee0979" stroke-width="2.5" opacity="0.7"/>
+  <line x1="245" y1="420" x2="225" y2="455" stroke="#ffd200" stroke-width="2.5" opacity="0.7"/>
+  <line x1="256" y1="420" x2="256" y2="458" stroke="#56ab2f" stroke-width="2.5" opacity="0.7"/>
+  <line x1="267" y1="420" x2="287" y2="455" stroke="#56CCF2" stroke-width="2.5" opacity="0.7"/>
+  <line x1="280" y1="420" x2="332" y2="450" stroke="#8E54E9" stroke-width="2.5" opacity="0.7"/>
+</svg>

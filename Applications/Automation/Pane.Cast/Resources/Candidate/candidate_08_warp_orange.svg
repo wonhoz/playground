@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A0800"/>
+      <stop offset="100%" stop-color="#2D1000"/>
+    </linearGradient>
+    <linearGradient id="orange" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF6D00"/>
+      <stop offset="100%" stop-color="#E65100"/>
+    </linearGradient>
+    <linearGradient id="fire" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#FF3D00"/>
+      <stop offset="50%" stop-color="#FF6D00"/>
+      <stop offset="100%" stop-color="#FFAB40"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Terminal window with perspective/warp effect -->
+  <path d="M80 140 L432 100 L432 380 L80 420 Z" fill="#1A0800" stroke="url(#orange)" stroke-width="3"/>
+  <!-- Header bar -->
+  <path d="M80 140 L432 100 L432 128 L80 168 Z" fill="url(#orange)"/>
+  <!-- Traffic dots -->
+  <circle cx="110" cy="154" r="7" fill="#1A0800"/>
+  <circle cx="132" cy="151" r="7" fill="#1A0800"/>
+  <circle cx="154" cy="148" r="7" fill="#1A0800"/>
+  <!-- Pane divider (perspective) -->
+  <line x1="256" y1="168" x2="256" y2="420" stroke="#FF6D00" stroke-width="2" opacity="0.4"/>
+  <!-- Left pane lines (perspective adjusted) -->
+  <rect x="96" y="182" width="130" height="5" rx="2" fill="#FFAB40" opacity="0.8" transform="skewY(-1)"/>
+  <rect x="96" y="198" width="100" height="5" rx="2" fill="#FF6D00" opacity="0.6" transform="skewY(-1)"/>
+  <rect x="96" y="214" width="120" height="5" rx="2" fill="#FF6D00" opacity="0.6" transform="skewY(-1)"/>
+  <rect x="96" y="230" width="80" height="5" rx="2" fill="#FFAB40" opacity="0.8" transform="skewY(-1)"/>
+  <rect x="96" y="246" width="110" height="5" rx="2" fill="#FF6D00" opacity="0.6" transform="skewY(-1)"/>
+  <rect x="96" y="262" width="70" height="5" rx="2" fill="#FF6D00" opacity="0.6" transform="skewY(-1)"/>
+  <rect x="96" y="278" width="125" height="5" rx="2" fill="#FFAB40" opacity="0.8" transform="skewY(-1)"/>
+  <!-- Right pane lines -->
+  <rect x="270" y="176" width="140" height="5" rx="2" fill="#FF6D00" opacity="0.8" transform="skewY(-1)"/>
+  <rect x="270" y="192" width="100" height="5" rx="2" fill="#FF6D00" opacity="0.6" transform="skewY(-1)"/>
+  <rect x="270" y="208" width="130" height="5" rx="2" fill="#FFAB40" opacity="0.8" transform="skewY(-1)"/>
+  <rect x="270" y="224" width="90" height="5" rx="2" fill="#FF6D00" opacity="0.6" transform="skewY(-1)"/>
+  <rect x="270" y="240" width="120" height="5" rx="2" fill="#FF6D00" opacity="0.6" transform="skewY(-1)"/>
+  <!-- Flame/warp save icon -->
+  <path d="M236 360 Q240 330 256 320 Q272 330 276 360 Q270 370 256 374 Q242 370 236 360Z" fill="url(#fire)" opacity="0.9"/>
+  <path d="M244 365 Q247 348 256 340 Q265 348 268 365 Q264 372 256 374 Q248 372 244 365Z" fill="#FFAB40" opacity="0.7"/>
+  <ellipse cx="256" cy="370" rx="12" ry="6" fill="#FF3D00" opacity="0.5"/>
+</svg>

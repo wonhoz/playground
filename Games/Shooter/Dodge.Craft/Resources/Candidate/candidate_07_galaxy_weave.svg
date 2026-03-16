@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A0030"/>
+      <stop offset="100%" stop-color="#300050"/>
+    </linearGradient>
+    <linearGradient id="trail" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FF00FF" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#FF00FF" stop-opacity="0.8"/>
+    </linearGradient>
+    <linearGradient id="ship" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF88FF"/>
+      <stop offset="100%" stop-color="#8800CC"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Galaxy swirl -->
+  <ellipse cx="256" cy="256" rx="180" ry="60" fill="none" stroke="#6600AA" stroke-width="2" opacity="0.3" transform="rotate(-30 256 256)"/>
+  <ellipse cx="256" cy="256" rx="140" ry="45" fill="none" stroke="#8800CC" stroke-width="1.5" opacity="0.25" transform="rotate(-30 256 256)"/>
+  <!-- Stars scattered -->
+  <circle cx="80" cy="80" r="2" fill="#FFAAFF" opacity="0.8"/>
+  <circle cx="200" cy="50" r="1.5" fill="#FFAAFF" opacity="0.6"/>
+  <circle cx="400" cy="60" r="2" fill="#FFAAFF" opacity="0.9"/>
+  <circle cx="450" cy="180" r="1.5" fill="white" opacity="0.7"/>
+  <circle cx="70" cy="350" r="2" fill="#AAAAFF" opacity="0.8"/>
+  <circle cx="460" cy="380" r="1.5" fill="#AAAAFF" opacity="0.6"/>
+  <!-- Weaving path trail -->
+  <path d="M80,260 Q160,180 256,240 Q352,300 440,220" stroke="url(#trail)" stroke-width="3" fill="none" opacity="0.7"/>
+  <!-- Ship at curve peak -->
+  <polygon points="256,160 295,260 256,245 217,260" fill="url(#ship)"/>
+  <polygon points="256,160 278,248 256,235 234,248" fill="#FFCCFF" opacity="0.5"/>
+  <!-- Cockpit -->
+  <ellipse cx="256" cy="210" rx="14" ry="20" fill="#FFFFFF" opacity="0.8"/>
+  <!-- Engines -->
+  <polygon points="240,260 256,310 272,260" fill="#FF44FF" opacity="0.9"/>
+  <!-- Asteroids to dodge -->
+  <circle cx="110" cy="160" r="28" fill="#554466" opacity="0.9"/>
+  <circle cx="110" cy="160" r="20" fill="#665577" opacity="0.7"/>
+  <circle cx="390" cy="200" r="24" fill="#554466" opacity="0.9"/>
+  <circle cx="390" cy="200" r="16" fill="#665577" opacity="0.7"/>
+  <circle cx="170" cy="100" r="18" fill="#443355" opacity="0.8"/>
+  <circle cx="350" cy="120" r="20" fill="#443355" opacity="0.8"/>
+  <text x="256" y="450" font-family="Arial" font-size="26" font-weight="bold" fill="#FF88FF" text-anchor="middle">DODGE·CRAFT</text>
+</svg>

@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0D0D1A"/>
+      <stop offset="100%" style="stop-color:#1A0D2E"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3.5" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Neon git graph -->
+  <line x1="160" y1="80" x2="160" y2="440" stroke="#FF4081" stroke-width="4" filter="url(#glow)"/>
+  <path d="M160,180 Q220,180 280,130 L280,300 Q280,360 160,360" fill="none" stroke="#00E5FF" stroke-width="4" filter="url(#glow)"/>
+  <!-- Commit nodes neon -->
+  <circle cx="160" cy="100" r="14" fill="#FF4081" filter="url(#glow)"/>
+  <circle cx="160" cy="180" r="14" fill="#FF4081" filter="url(#glow)"/>
+  <circle cx="280" cy="130" r="12" fill="#00E5FF" filter="url(#glow)"/>
+  <circle cx="280" cy="210" r="12" fill="#00E5FF" filter="url(#glow)"/>
+  <circle cx="280" cy="300" r="12" fill="#00E5FF" filter="url(#glow)"/>
+  <circle cx="160" cy="360" r="14" fill="#FF4081" filter="url(#glow)"/>
+  <circle cx="160" cy="430" r="14" fill="#FF4081" filter="url(#glow)"/>
+  <!-- Neon stats bars right -->
+  <rect x="330" y="100" width="130" height="20" rx="4" fill="#FF4081" filter="url(#glow)" opacity="0.9"/>
+  <rect x="330" y="140" width="95" height="20" rx="4" fill="#00E5FF" filter="url(#glow)" opacity="0.9"/>
+  <rect x="330" y="180" width="115" height="20" rx="4" fill="#69F0AE" filter="url(#glow)" opacity="0.9"/>
+  <rect x="330" y="220" width="70" height="20" rx="4" fill="#FFD740" filter="url(#glow)" opacity="0.9"/>
+  <rect x="330" y="260" width="105" height="20" rx="4" fill="#FF4081" filter="url(#glow)" opacity="0.9"/>
+  <rect x="330" y="300" width="88" height="20" rx="4" fill="#00E5FF" filter="url(#glow)" opacity="0.9"/>
+  <!-- Title neon -->
+  <text x="256" y="472" text-anchor="middle" font-family="monospace" font-size="28" font-weight="bold" fill="#FF4081" filter="url(#glow)">GIT.STATS</text>
+</svg>

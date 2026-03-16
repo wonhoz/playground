@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0D1B2A"/>
+      <stop offset="100%" stop-color="#1B2A3D"/>
+    </linearGradient>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FF006E"/>
+      <stop offset="100%" stop-color="#FB5607"/>
+    </linearGradient>
+    <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FB5607"/>
+      <stop offset="100%" stop-color="#FFBE0B"/>
+    </linearGradient>
+    <linearGradient id="grad3" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#8338EC"/>
+      <stop offset="100%" stop-color="#3A86FF"/>
+    </linearGradient>
+    <linearGradient id="grad4" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#06D6A0"/>
+      <stop offset="100%" stop-color="#118AB2"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Escape symbol large -->
+  <text x="80" y="200" font-family="monospace" font-weight="bold" font-size="100" fill="#FFFFFF" opacity="0.08">ESC</text>
+  <!-- Gradient text bars representing colored ANSI output -->
+  <rect x="80" y="130" width="352" height="40" rx="6" fill="url(#grad1)"/>
+  <text x="100" y="158" font-family="monospace" font-size="18" fill="white">\033[31;1m  Hello, World!  \033[0m</text>
+  <rect x="80" y="182" width="280" height="40" rx="6" fill="url(#grad2)"/>
+  <text x="100" y="210" font-family="monospace" font-size="18" fill="white">\033[33m  Warning!  \033[0m</text>
+  <rect x="80" y="234" width="320" height="40" rx="6" fill="url(#grad3)"/>
+  <text x="100" y="262" font-family="monospace" font-size="18" fill="white">\033[35m  ANSI Art  \033[0m</text>
+  <rect x="80" y="286" width="260" height="40" rx="6" fill="url(#grad4)"/>
+  <text x="100" y="314" font-family="monospace" font-size="18" fill="white">\033[36m  Output  \033[0m</text>
+  <!-- Bottom label -->
+  <text x="256" y="420" font-family="monospace" font-weight="bold" font-size="32" fill="#3A86FF" text-anchor="middle">ANSI.FORGE</text>
+  <text x="256" y="455" font-family="monospace" font-size="16" fill="#555555" text-anchor="middle">Color Code Generator</text>
+</svg>

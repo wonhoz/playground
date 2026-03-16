@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#001A1A"/>
+      <stop offset="100%" stop-color="#003333"/>
+    </linearGradient>
+    <linearGradient id="teal" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00BCD4"/>
+      <stop offset="100%" stop-color="#00838F"/>
+    </linearGradient>
+    <linearGradient id="green" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00E676"/>
+      <stop offset="100%" stop-color="#00C853"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Monitor outline -->
+  <rect x="56" y="100" width="400" height="280" rx="14" fill="#001E1E" stroke="#00BCD4" stroke-width="3"/>
+  <rect x="200" y="380" width="112" height="20" fill="#00BCD4" opacity="0.4"/>
+  <rect x="160" y="400" width="192" height="12" rx="6" fill="#00BCD4" opacity="0.3"/>
+  <!-- Split vertical -->
+  <line x1="256" y1="114" x2="256" y2="380" stroke="#00BCD4" stroke-width="2" opacity="0.5" stroke-dasharray="6,4"/>
+  <!-- Left pane header -->
+  <rect x="70" y="114" width="172" height="28" rx="6" fill="#003F3F"/>
+  <text x="84" y="133" font-family="Consolas, monospace" font-size="14" fill="#00BCD4">session_1</text>
+  <!-- Right pane header -->
+  <rect x="270" y="114" width="172" height="28" rx="6" fill="#003F3F"/>
+  <text x="284" y="133" font-family="Consolas, monospace" font-size="14" fill="#00E676">session_2</text>
+  <!-- Left terminal lines -->
+  <rect x="78" y="154" width="100" height="5" rx="2" fill="#00BCD4" opacity="0.9"/>
+  <rect x="78" y="168" width="140" height="5" rx="2" fill="#00838F" opacity="0.7"/>
+  <rect x="78" y="182" width="80" height="5" rx="2" fill="#00838F" opacity="0.7"/>
+  <rect x="78" y="196" width="120" height="5" rx="2" fill="#00E676" opacity="0.8"/>
+  <rect x="78" y="210" width="100" height="5" rx="2" fill="#00838F" opacity="0.7"/>
+  <rect x="78" y="224" width="60" height="5" rx="2" fill="#00BCD4" opacity="0.9"/>
+  <rect x="78" y="238" width="130" height="5" rx="2" fill="#00838F" opacity="0.7"/>
+  <rect x="78" y="252" width="90" height="5" rx="2" fill="#00838F" opacity="0.7"/>
+  <rect x="78" y="266" width="110" height="5" rx="2" fill="#00E676" opacity="0.8"/>
+  <!-- Right terminal lines -->
+  <rect x="270" y="154" width="130" height="5" rx="2" fill="#00E676" opacity="0.9"/>
+  <rect x="270" y="168" width="90" height="5" rx="2" fill="#00838F" opacity="0.7"/>
+  <rect x="270" y="182" width="150" height="5" rx="2" fill="#00838F" opacity="0.7"/>
+  <rect x="270" y="196" width="80" height="5" rx="2" fill="#00BCD4" opacity="0.9"/>
+  <rect x="270" y="210" width="110" height="5" rx="2" fill="#00838F" opacity="0.7"/>
+  <rect x="270" y="224" width="70" height="5" rx="2" fill="#00838F" opacity="0.7"/>
+  <rect x="270" y="238" width="140" height="5" rx="2" fill="#00E676" opacity="0.8"/>
+  <!-- Camera/snapshot icon -->
+  <circle cx="256" cy="430" r="28" fill="url(#teal)"/>
+  <circle cx="256" cy="430" r="14" fill="#001E1E"/>
+  <circle cx="256" cy="430" r="8" fill="url(#green)"/>
+  <!-- Save arrows -->
+  <path d="M228 290 L256 318 L284 290" fill="none" stroke="#00E676" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="256" y1="318" x2="256" y2="348" stroke="#00E676" stroke-width="3" stroke-linecap="round"/>
+  <line x1="226" y1="350" x2="286" y2="350" stroke="#00E676" stroke-width="3" stroke-linecap="round"/>
+</svg>

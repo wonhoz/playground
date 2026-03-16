@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a1a2e"/>
+      <stop offset="100%" stop-color="#0d0d1a"/>
+    </linearGradient>
+    <linearGradient id="b1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4776E6"/>
+      <stop offset="100%" stop-color="#8E54E9"/>
+    </linearGradient>
+    <linearGradient id="b2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f7971e"/>
+      <stop offset="100%" stop-color="#ffd200"/>
+    </linearGradient>
+    <linearGradient id="b3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#11998e"/>
+      <stop offset="100%" stop-color="#38ef7d"/>
+    </linearGradient>
+    <linearGradient id="b4" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ee0979"/>
+      <stop offset="100%" stop-color="#ff6a00"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+
+  <!-- Central person/head silhouette -->
+  <circle cx="256" cy="310" r="45" fill="#2a2a4a"/>
+  <ellipse cx="256" cy="395" rx="65" ry="45" fill="#2a2a4a"/>
+  <circle cx="256" cy="310" r="42" fill="#3a3a5a"/>
+
+  <!-- Speech bubble top-left (blue/purple) -->
+  <rect x="55" y="75" width="160" height="100" rx="20" fill="url(#b1)" filter="url(#glow)"/>
+  <polygon points="100,175 130,175 115,210" fill="url(#b1)" filter="url(#glow)"/>
+  <!-- Content lines -->
+  <rect x="75" y="98" width="80" height="9" rx="4" fill="#fff" opacity="0.9"/>
+  <rect x="75" y="116" width="120" height="8" rx="4" fill="#fff" opacity="0.7"/>
+  <rect x="75" y="133" width="95" height="8" rx="4" fill="#fff" opacity="0.7"/>
+  <rect x="75" y="150" width="60" height="8" rx="4" fill="#fff" opacity="0.5"/>
+
+  <!-- Speech bubble top-right (orange/gold) -->
+  <rect x="295" y="75" width="160" height="100" rx="20" fill="url(#b2)" filter="url(#glow)"/>
+  <polygon points="380,175 410,175 395,210" fill="url(#b2)" filter="url(#glow)"/>
+  <rect x="315" y="98" width="90" height="9" rx="4" fill="#fff" opacity="0.9"/>
+  <rect x="315" y="116" width="120" height="8" rx="4" fill="#fff" opacity="0.7"/>
+  <rect x="315" y="133" width="75" height="8" rx="4" fill="#fff" opacity="0.7"/>
+  <rect x="315" y="150" width="100" height="8" rx="4" fill="#fff" opacity="0.5"/>
+
+  <!-- Speech bubble bottom-left (green) -->
+  <rect x="55" y="330" width="145" height="90" rx="20" fill="url(#b3)" filter="url(#glow)"/>
+  <polygon points="155,330 185,330 170,315" fill="url(#b3)" filter="url(#glow)"/>
+  <rect x="75" y="350" width="90" height="8" rx="4" fill="#fff" opacity="0.9"/>
+  <rect x="75" y="367" width="108" height="8" rx="4" fill="#fff" opacity="0.7"/>
+  <rect x="75" y="384" width="70" height="8" rx="4" fill="#fff" opacity="0.6"/>
+
+  <!-- Speech bubble bottom-right (pink/orange) -->
+  <rect x="310" y="330" width="145" height="90" rx="20" fill="url(#b4)" filter="url(#glow)"/>
+  <polygon points="325,330 355,330 340,315" fill="url(#b4)" filter="url(#glow)"/>
+  <rect x="330" y="350" width="80" height="8" rx="4" fill="#fff" opacity="0.9"/>
+  <rect x="330" y="367" width="105" height="8" rx="4" fill="#fff" opacity="0.7"/>
+  <rect x="330" y="384" width="88" height="8" rx="4" fill="#fff" opacity="0.6"/>
+
+  <!-- Connecting lines from head to bubbles -->
+  <path d="M220,295 L160,210" stroke="#ffffff" stroke-width="1.5" stroke-dasharray="4,3" fill="none" opacity="0.3"/>
+  <path d="M292,295 L360,210" stroke="#ffffff" stroke-width="1.5" stroke-dasharray="4,3" fill="none" opacity="0.3"/>
+  <path d="M215,340 L175,330" stroke="#ffffff" stroke-width="1.5" stroke-dasharray="4,3" fill="none" opacity="0.3"/>
+  <path d="M297,340 L337,330" stroke="#ffffff" stroke-width="1.5" stroke-dasharray="4,3" fill="none" opacity="0.3"/>
+
+  <!-- Star accent -->
+  <circle cx="256" cy="256" r="15" fill="#ffd200" opacity="0.2"/>
+  <circle cx="256" cy="256" r="8" fill="#ffd200" opacity="0.5"/>
+</svg>

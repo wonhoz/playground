@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F2027"/>
+      <stop offset="50%" stop-color="#203A43"/>
+      <stop offset="100%" stop-color="#2C5364"/>
+    </linearGradient>
+    <linearGradient id="strip" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00F5A0"/>
+      <stop offset="100%" stop-color="#00D9F5"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Phone frame -->
+  <rect x="156" y="50" width="200" height="380" rx="28" fill="#1a2a35" stroke="#00D9F5" stroke-width="3"/>
+  <rect x="170" y="70" width="172" height="340" rx="8" fill="#0d1b22"/>
+  <!-- Camera dot -->
+  <circle cx="256" cy="62" r="5" fill="#00D9F5" opacity="0.6"/>
+  <!-- Webtoon strips inside phone -->
+  <rect x="178" y="78" width="156" height="70" rx="4" fill="url(#strip)" opacity="0.85"/>
+  <rect x="178" y="156" width="156" height="50" rx="4" fill="#1e4a5c"/>
+  <rect x="178" y="214" width="156" height="80" rx="4" fill="url(#strip)" opacity="0.6"/>
+  <rect x="178" y="302" width="156" height="40" rx="4" fill="#1e4a5c"/>
+  <rect x="178" y="350" width="156" height="50" rx="4" fill="url(#strip)" opacity="0.4"/>
+  <!-- Scroll indicator -->
+  <rect x="336" y="150" width="8" height="100" rx="4" fill="#00D9F5" opacity="0.4"/>
+  <rect x="336" y="180" width="8" height="40" rx="4" fill="#00F5A0" opacity="0.9"/>
+  <!-- Glow effects -->
+  <circle cx="256" cy="113" r="30" fill="none" stroke="#00F5A0" stroke-width="1" opacity="0.4"/>
+  <!-- Arrow down indicator -->
+  <polygon points="256,460 236,440 276,440" fill="#00D9F5" opacity="0.8"/>
+</svg>

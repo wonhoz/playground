@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e65100"/>
+      <stop offset="100%" stop-color="#bf360c"/>
+    </linearGradient>
+    <linearGradient id="broom" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffcc80"/>
+      <stop offset="100%" stop-color="#ff9800"/>
+    </linearGradient>
+    <linearGradient id="bristle" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fff8e1"/>
+      <stop offset="100%" stop-color="#ffe082"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Files being swept -->
+  <rect x="60" y="300" width="80" height="100" rx="8" fill="#ff7043" opacity="0.8" transform="rotate(-20, 100, 350)"/>
+  <rect x="150" y="310" width="80" height="100" rx="8" fill="#ff8a65" opacity="0.7" transform="rotate(-10, 190, 360)"/>
+  <rect x="240" y="320" width="80" height="100" rx="8" fill="#ff7043" opacity="0.6" transform="rotate(5, 280, 370)"/>
+  <!-- Dust particles -->
+  <circle cx="90" cy="295" r="5" fill="#fff3e0" opacity="0.6"/>
+  <circle cx="130" cy="280" r="4" fill="#fff3e0" opacity="0.5"/>
+  <circle cx="200" cy="295" r="6" fill="#fff3e0" opacity="0.7"/>
+  <circle cx="350" cy="320" r="4" fill="#fff3e0" opacity="0.4"/>
+  <!-- Broom handle -->
+  <line x1="100" y1="80" x2="380" y2="340" stroke="url(#broom)" stroke-width="18" stroke-linecap="round"/>
+  <!-- Broom head -->
+  <rect x="340" y="320" width="100" height="65" rx="10" fill="url(#bristle)" transform="rotate(-35, 390, 352)"/>
+  <!-- Bristles -->
+  <line x1="338" y1="360" x2="320" y2="400" stroke="#ff9800" stroke-width="5" stroke-linecap="round" transform="rotate(-35, 338, 360)"/>
+  <line x1="358" y1="360" x2="340" y2="400" stroke="#ff9800" stroke-width="5" stroke-linecap="round" transform="rotate(-35, 358, 360)"/>
+  <line x1="378" y1="360" x2="360" y2="400" stroke="#ff9800" stroke-width="5" stroke-linecap="round" transform="rotate(-35, 378, 360)"/>
+  <line x1="398" y1="360" x2="380" y2="400" stroke="#ff9800" stroke-width="5" stroke-linecap="round" transform="rotate(-35, 398, 360)"/>
+  <!-- Title text -->
+  <text x="256" y="115" font-family="Arial" font-size="32" font-weight="bold" fill="white" text-anchor="middle" opacity="0.9">CLEAN</text>
+  <text x="256" y="150" font-family="Arial" font-size="20" fill="#ffcc80" text-anchor="middle">Duplicates</text>
+  <!-- Star sparkles -->
+  <text x="80" y="175" font-family="Arial" font-size="24" fill="#fff" opacity="0.8">✦</text>
+  <text x="400" y="150" font-family="Arial" font-size="20" fill="#fff" opacity="0.7">✦</text>
+  <text x="430" y="200" font-family="Arial" font-size="16" fill="#fff" opacity="0.6">✦</text>
+</svg>

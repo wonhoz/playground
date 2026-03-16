@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a0533"/>
+      <stop offset="100%" style="stop-color:#3d1168"/>
+    </linearGradient>
+    <linearGradient id="wand" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#9c27b0"/>
+      <stop offset="50%" style="stop-color:#e040fb"/>
+      <stop offset="100%" style="stop-color:#ce93d8"/>
+    </linearGradient>
+    <radialGradient id="star-tip" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#ffffff"/>
+      <stop offset="40%" style="stop-color:#ffe082"/>
+      <stop offset="100%" style="stop-color:#ff6f00;stop-opacity:0"/>
+    </radialGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="7" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="soft-glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Wand body -->
+  <line x1="340" y1="340" x2="155" y2="155" stroke="url(#wand)" stroke-width="18" stroke-linecap="round" filter="url(#glow)"/>
+  <!-- Wand grip bands -->
+  <rect x="296" y="315" width="36" height="12" rx="4" fill="#ce93d8" transform="rotate(45 314 321)" opacity="0.8"/>
+  <rect x="314" y="333" width="36" height="12" rx="4" fill="#ce93d8" transform="rotate(45 332 339)" opacity="0.7"/>
+  <!-- Star tip -->
+  <circle cx="148" cy="148" r="45" fill="url(#star-tip)" filter="url(#glow)"/>
+  <path d="M148 112 L155 134 L178 134 L160 148 L167 170 L148 157 L129 170 L136 148 L118 134 L141 134 Z" fill="#ffffff" filter="url(#glow)"/>
+  <!-- Magic sparkles emanating from wand -->
+  <path d="M200 200 L206 214 L221 214 L209 223 L213 237 L200 229 L187 237 L191 223 L179 214 L194 214 Z" fill="#ffe082" filter="url(#soft-glow)" opacity="0.9"/>
+  <path d="M250 250 L254 260 L265 260 L256 266 L259 277 L250 271 L241 277 L244 266 L235 260 L246 260 Z" fill="#f8bbd0" filter="url(#soft-glow)" opacity="0.85"/>
+  <!-- Scattered sparkle dots -->
+  <circle cx="170" cy="230" r="6" fill="#ffe082" filter="url(#soft-glow)" opacity="0.8"/>
+  <circle cx="230" cy="170" r="5" fill="#80cbc4" filter="url(#soft-glow)" opacity="0.8"/>
+  <circle cx="120" cy="200" r="4" fill="#ce93d8" opacity="0.7"/>
+  <circle cx="200" cy="120" r="4" fill="#ffe082" opacity="0.7"/>
+  <circle cx="100" cy="150" r="3" fill="#b39ddb" opacity="0.6"/>
+  <circle cx="155" cy="100" r="3" fill="#f48fb1" opacity="0.6"/>
+  <!-- Trail sparkles -->
+  <circle cx="280" cy="280" r="4" fill="#e040fb" opacity="0.5"/>
+  <circle cx="300" cy="295" r="3" fill="#9c27b0" opacity="0.4"/>
+  <circle cx="270" cy="265" r="5" fill="#e040fb" opacity="0.4"/>
+</svg>

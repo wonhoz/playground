@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#450A0A"/>
+      <stop offset="100%" stop-color="#7F1D1D"/>
+    </linearGradient>
+    <linearGradient id="diceTop" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FCA5A5"/>
+      <stop offset="100%" stop-color="#F87171"/>
+    </linearGradient>
+    <linearGradient id="diceFront" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#EF4444"/>
+      <stop offset="100%" stop-color="#DC2626"/>
+    </linearGradient>
+    <linearGradient id="diceSide" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#B91C1C"/>
+      <stop offset="100%" stop-color="#991B1B"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Large 3D dice -->
+  <!-- Top face -->
+  <polygon points="180,100 340,100 420,170 260,170" fill="url(#diceTop)"/>
+  <!-- Front face -->
+  <polygon points="180,100 260,170 260,340 180,270" fill="url(#diceFront)"/>
+  <!-- Right face -->
+  <polygon points="340,100 420,170 420,340 340,270" fill="url(#diceSide)"/>
+  <!-- Bottom edge -->
+  <polygon points="180,270 260,340 420,340 340,270" fill="#DC2626" opacity="0.7"/>
+  <!-- Dots on top face -->
+  <circle cx="230" cy="122" r="9" fill="#7F1D1D"/>
+  <circle cx="290" cy="122" r="9" fill="#7F1D1D"/>
+  <circle cx="350" cy="122" r="9" fill="#7F1D1D"/>
+  <circle cx="230" cy="148" r="9" fill="#7F1D1D"/>
+  <circle cx="290" cy="148" r="9" fill="#7F1D1D"/>
+  <circle cx="350" cy="148" r="9" fill="#7F1D1D"/>
+  <!-- Dots on front face -->
+  <circle cx="202" cy="170" r="7" fill="#9B1C1C"/>
+  <circle cx="238" cy="200" r="7" fill="#9B1C1C"/>
+  <circle cx="202" cy="230" r="7" fill="#9B1C1C"/>
+  <!-- Dots on right face (3) -->
+  <circle cx="355" cy="200" r="7" fill="#7F1D1D"/>
+  <circle cx="390" cy="230" r="7" fill="#7F1D1D"/>
+  <circle cx="355" cy="260" r="7" fill="#7F1D1D"/>
+  <!-- Random data flowing out -->
+  <line x1="260" y1="340" x2="180" y2="410" stroke="#FCA5A5" stroke-width="2" stroke-dasharray="6,4" opacity="0.7"/>
+  <line x1="300" y1="340" x2="300" y2="420" stroke="#FCA5A5" stroke-width="2" stroke-dasharray="6,4" opacity="0.7"/>
+  <line x1="340" y1="340" x2="400" y2="400" stroke="#FCA5A5" stroke-width="2" stroke-dasharray="6,4" opacity="0.7"/>
+  <!-- Data boxes -->
+  <rect x="140" y="415" width="70" height="36" rx="5" fill="#7F1D1D" stroke="#FCA5A5" stroke-width="1.5"/>
+  <text x="175" y="429" font-family="Courier New" font-size="8" fill="#FCA5A5" text-anchor="middle">"Jane"</text>
+  <text x="175" y="442" font-family="Courier New" font-size="8" fill="#FCA5A5" text-anchor="middle">42, true</text>
+  <rect x="265" y="425" width="70" height="36" rx="5" fill="#7F1D1D" stroke="#FCA5A5" stroke-width="1.5"/>
+  <text x="300" y="439" font-family="Courier New" font-size="8" fill="#FCA5A5" text-anchor="middle">0xA3F2</text>
+  <text x="300" y="452" font-family="Courier New" font-size="8" fill="#FCA5A5" text-anchor="middle">RANDOM</text>
+  <rect x="368" y="405" width="70" height="36" rx="5" fill="#7F1D1D" stroke="#FCA5A5" stroke-width="1.5"/>
+  <text x="403" y="419" font-family="Courier New" font-size="8" fill="#FCA5A5" text-anchor="middle">3.14159</text>
+  <text x="403" y="432" font-family="Courier New" font-size="8" fill="#FCA5A5" text-anchor="middle">false</text>
+</svg>

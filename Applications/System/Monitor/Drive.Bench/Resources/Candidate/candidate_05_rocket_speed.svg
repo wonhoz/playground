@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#000510"/>
+      <stop offset="100%" stop-color="#000C20"/>
+    </linearGradient>
+    <linearGradient id="rocketBody" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#E0E7FF"/>
+      <stop offset="100%" stop-color="#C7D2FE"/>
+    </linearGradient>
+    <radialGradient id="flameGrad" cx="50%" cy="0%" r="100%">
+      <stop offset="0%" stop-color="#FDE68A"/>
+      <stop offset="40%" stop-color="#F97316"/>
+      <stop offset="100%" stop-color="#B45309" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="speedBar" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#4F46E5"/>
+      <stop offset="100%" stop-color="#06B6D4"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Speed lines -->
+  <line x1="60" y1="200" x2="180" y2="200" stroke="#1E3A5F" stroke-width="2" opacity="0.6"/>
+  <line x1="60" y1="230" x2="160" y2="230" stroke="#1E3A5F" stroke-width="1.5" opacity="0.5"/>
+  <line x1="60" y1="260" x2="180" y2="260" stroke="#1E3A5F" stroke-width="2" opacity="0.6"/>
+  <line x1="60" y1="290" x2="140" y2="290" stroke="#1E3A5F" stroke-width="1.5" opacity="0.4"/>
+  <line x1="60" y1="320" x2="170" y2="320" stroke="#1E3A5F" stroke-width="2" opacity="0.5"/>
+  <!-- Rocket -->
+  <!-- Nose cone -->
+  <polygon points="256,80 230,170 282,170" fill="#818CF8" stroke="#A5B4FC" stroke-width="2"/>
+  <!-- Body -->
+  <rect x="226" y="168" width="60" height="160" rx="8" fill="url(#rocketBody)" stroke="#C7D2FE" stroke-width="2"/>
+  <!-- Window -->
+  <circle cx="256" cy="230" r="22" fill="#1E1B4B" stroke="#6366F1" stroke-width="3"/>
+  <circle cx="256" cy="230" r="14" fill="#3730A3" opacity="0.8"/>
+  <circle cx="260" cy="225" r="5" fill="#818CF8" opacity="0.6"/>
+  <!-- Wings -->
+  <polygon points="226,280 176,340 226,320" fill="#6366F1" stroke="#818CF8" stroke-width="1.5"/>
+  <polygon points="286,280 336,340 286,320" fill="#6366F1" stroke="#818CF8" stroke-width="1.5"/>
+  <!-- Engine nozzle -->
+  <rect x="238" y="328" width="36" height="20" rx="4" fill="#4B5563" stroke="#6B7280" stroke-width="2"/>
+  <!-- Flame -->
+  <ellipse cx="256" cy="370" rx="24" ry="50" fill="url(#flameGrad)"/>
+  <ellipse cx="256" cy="375" rx="14" ry="35" fill="#FDE68A" opacity="0.8"/>
+  <ellipse cx="256" cy="378" rx="7" ry="22" fill="white" opacity="0.7"/>
+  <!-- Speed readout -->
+  <rect x="80" y="430" width="352" height="44" rx="12" fill="#0F172A" stroke="#1E3A5F" stroke-width="1.5"/>
+  <rect x="88" y="438" width="270" height="28" rx="8" fill="url(#speedBar)" opacity="0.8"/>
+  <text x="250" y="457" font-family="monospace" font-size="14" fill="white" text-anchor="middle" font-weight="bold">5,542 MB/s</text>
+  <text x="400" y="457" font-family="monospace" font-size="12" fill="#475569" text-anchor="middle">79%</text>
+</svg>

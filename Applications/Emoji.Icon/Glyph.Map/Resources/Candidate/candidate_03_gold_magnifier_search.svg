@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A1500"/>
+      <stop offset="100%" stop-color="#2A2200"/>
+    </linearGradient>
+    <radialGradient id="lens" cx="40%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#2A2800" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#1A1500" stop-opacity="0.3"/>
+    </radialGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFD700"/>
+      <stop offset="100%" stop-color="#FFA500"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Magnifier glass circle -->
+  <circle cx="210" cy="210" r="140" fill="url(#lens)" stroke="url(#gold)" stroke-width="16"/>
+  <!-- Character inside lens -->
+  <text x="210" y="255" text-anchor="middle" fill="#FFD700" font-size="100" font-family="Segoe UI Emoji" opacity="0.9">&#x2605;</text>
+  <!-- Magnifier handle -->
+  <line x1="318" y1="318" x2="430" y2="430" stroke="url(#gold)" stroke-width="22" stroke-linecap="round"/>
+  <!-- Small unicode characters floating -->
+  <text x="110" y="120" fill="#FFD700" font-size="22" font-family="Segoe UI Emoji" opacity="0.5">&#x3042;</text>
+  <text x="280" y="105" fill="#FFA500" font-size="18" font-family="Segoe UI Emoji" opacity="0.4">&#x4E2D;</text>
+  <text x="95" y="300" fill="#FFD700" font-size="20" font-family="Segoe UI Emoji" opacity="0.4">&#x0391;</text>
+  <text x="290" y="315" fill="#FFA500" font-size="18" font-family="Segoe UI Emoji" opacity="0.4">&#x00AE;</text>
+  <!-- Highlight on lens -->
+  <ellipse cx="165" cy="155" rx="30" ry="18" fill="white" opacity="0.08" transform="rotate(-30 165 155)"/>
+</svg>

@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0a0015"/>
+      <stop offset="100%" stop-color="#050010"/>
+    </linearGradient>
+    <linearGradient id="purple" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#a855f7"/>
+      <stop offset="100%" stop-color="#7c3aed"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Neon map lines -->
+  <line x1="256" y1="64" x2="256" y2="448" stroke="#a855f7" stroke-width="1" opacity="0.2"/>
+  <line x1="64" y1="256" x2="448" y2="256" stroke="#a855f7" stroke-width="1" opacity="0.2"/>
+  <!-- Central key hub -->
+  <circle cx="256" cy="256" r="48" fill="#1a0030" stroke="#a855f7" stroke-width="3"/>
+  <circle cx="256" cy="256" r="38" fill="#0d0020" stroke="#7c3aed" stroke-width="1.5"/>
+  <text x="236" y="250" font-family="monospace" font-size="14" fill="#a855f7" font-weight="bold">Ctrl</text>
+  <text x="234" y="270" font-family="monospace" font-size="14" fill="#c084fc">+Alt</text>
+  <!-- Satellite key nodes -->
+  <!-- Top -->
+  <circle cx="256" cy="128" r="34" fill="#1a0030" stroke="#a855f7" stroke-width="2"/>
+  <text x="236" y="133" font-family="monospace" font-size="16" fill="#c084fc" font-weight="bold">F5</text>
+  <line x1="256" y1="162" x2="256" y2="208" stroke="#7c3aed" stroke-width="2" stroke-dasharray="5,3" opacity="0.8"/>
+  <!-- Bottom -->
+  <circle cx="256" cy="384" r="34" fill="#1a0030" stroke="#a855f7" stroke-width="2"/>
+  <text x="236" y="389" font-family="monospace" font-size="16" fill="#c084fc" font-weight="bold">F9</text>
+  <line x1="256" y1="304" x2="256" y2="350" stroke="#7c3aed" stroke-width="2" stroke-dasharray="5,3" opacity="0.8"/>
+  <!-- Left -->
+  <circle cx="128" cy="256" r="34" fill="#1a0030" stroke="#e879f9" stroke-width="2"/>
+  <text x="108" y="261" font-family="monospace" font-size="16" fill="#f0abfc" font-weight="bold">F1</text>
+  <line x1="162" y1="256" x2="208" y2="256" stroke="#c026d3" stroke-width="2" stroke-dasharray="5,3" opacity="0.8"/>
+  <!-- Right -->
+  <circle cx="384" cy="256" r="34" fill="#1a0030" stroke="#e879f9" stroke-width="2"/>
+  <text x="364" y="261" font-family="monospace" font-size="16" fill="#f0abfc" font-weight="bold">F12</text>
+  <line x1="304" y1="256" x2="350" y2="256" stroke="#c026d3" stroke-width="2" stroke-dasharray="5,3" opacity="0.8"/>
+  <!-- Diagonal nodes -->
+  <circle cx="164" cy="164" r="26" fill="#0d0020" stroke="#7c3aed" stroke-width="1.5"/>
+  <text x="148" y="169" font-family="monospace" font-size="14" fill="#a855f7">Win</text>
+  <line x1="182" y1="182" x2="220" y2="220" stroke="#4c1d95" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.7"/>
+  <circle cx="348" cy="164" r="26" fill="#0d0020" stroke="#7c3aed" stroke-width="1.5"/>
+  <text x="334" y="169" font-family="monospace" font-size="14" fill="#a855f7">Esc</text>
+  <line x1="330" y1="182" x2="292" y2="220" stroke="#4c1d95" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.7"/>
+  <circle cx="164" cy="348" r="26" fill="#0d0020" stroke="#7c3aed" stroke-width="1.5"/>
+  <text x="148" y="353" font-family="monospace" font-size="14" fill="#a855f7">Tab</text>
+  <line x1="182" y1="330" x2="220" y2="292" stroke="#4c1d95" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.7"/>
+  <circle cx="348" cy="348" r="26" fill="#0d0020" stroke="#7c3aed" stroke-width="1.5"/>
+  <text x="334" y="353" font-family="monospace" font-size="14" fill="#a855f7">Del</text>
+  <line x1="330" y1="330" x2="292" y2="292" stroke="#4c1d95" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.7"/>
+  <!-- Glow dots at intersections -->
+  <circle cx="256" cy="256" r="8" fill="#a855f7" opacity="0.8"/>
+</svg>

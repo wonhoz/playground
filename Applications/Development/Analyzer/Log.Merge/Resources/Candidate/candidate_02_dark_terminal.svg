@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E1E1E"/>
+      <stop offset="100%" stop-color="#252526"/>
+    </linearGradient>
+    <linearGradient id="termBg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1E1E1E"/>
+      <stop offset="100%" stop-color="#1A1A1A"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Terminal window -->
+  <rect x="60" y="80" width="392" height="320" rx="10" fill="#0D1117" stroke="#30363D" stroke-width="1.5"/>
+  <!-- Title bar -->
+  <rect x="60" y="80" width="392" height="36" rx="10" fill="#21262D"/>
+  <rect x="60" y="98" width="392" height="18" fill="#21262D"/>
+  <!-- Title bar buttons -->
+  <circle cx="88" cy="98" r="7" fill="#FF5F57"/>
+  <circle cx="112" cy="98" r="7" fill="#FEBC2E"/>
+  <circle cx="136" cy="98" r="7" fill="#28C840"/>
+  <text x="256" y="103" font-family="'Courier New', monospace" font-size="13" text-anchor="middle" fill="#8B949E">log.merge — terminal</text>
+  <!-- Terminal content -->
+  <text x="80" y="145" font-family="'Courier New', monospace" font-size="13" fill="#3FB950">$</text>
+  <text x="96" y="145" font-family="'Courier New', monospace" font-size="13" fill="#C9D1D9"> log.merge -i app.log sys.log net.log</text>
+  <text x="80" y="168" font-family="'Courier New', monospace" font-size="12" fill="#8B949E">[INFO] Reading app.log    (1,204 lines)</text>
+  <text x="80" y="186" font-family="'Courier New', monospace" font-size="12" fill="#8B949E">[INFO] Reading sys.log    (3,891 lines)</text>
+  <text x="80" y="204" font-family="'Courier New', monospace" font-size="12" fill="#8B949E">[INFO] Reading net.log      (487 lines)</text>
+  <text x="80" y="225" font-family="'Courier New', monospace" font-size="12" fill="#58A6FF">[SORT] Sorting by timestamp...</text>
+  <text x="80" y="248" font-family="'Courier New', monospace" font-size="12" fill="#58A6FF">[MERG] Merging 3 sources...</text>
+  <!-- Progress bar -->
+  <rect x="80" y="264" width="360" height="10" rx="5" fill="#21262D"/>
+  <rect x="80" y="264" width="288" height="10" rx="5" fill="#1F6FEB" filter="url(#glow)"/>
+  <text x="80" y="292" font-family="'Courier New', monospace" font-size="12" fill="#3FB950">[DONE] merged.log written (5,582 lines)</text>
+  <text x="80" y="312" font-family="'Courier New', monospace" font-size="12" fill="#3FB950">[STAT] Duplicates removed: 12</text>
+  <text x="80" y="335" font-family="'Courier New', monospace" font-size="13" fill="#C9D1D9">$</text>
+  <rect x="94" y="323" width="9" height="16" fill="#C9D1D9" filter="url(#glow)"/>
+  <!-- Bottom status bar -->
+  <rect x="60" y="400" width="392" height="28" rx="0" fill="#007ACC"/>
+  <rect x="60" y="414" width="392" height="14" rx="0" fill="#007ACC"/>
+  <rect x="60" y="400" width="392" height="28" rx="0" fill="#007ACC"/>
+  <text x="76" y="418" font-family="'Courier New', monospace" font-size="12" fill="white">Log.Merge v1.0  |  5,582 lines  |  3 sources</text>
+  <!-- Faint grid bottom decoration -->
+  <text x="256" y="468" font-family="'Courier New', monospace" font-size="14" text-anchor="middle" fill="#30363D">━━━━━━━━━━━━━━━━</text>
+</svg>

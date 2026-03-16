@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#080028"/>
+      <stop offset="100%" stop-color="#1a0040"/>
+    </linearGradient>
+    <radialGradient id="orbGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="1"/>
+      <stop offset="30%" stop-color="#a855f7" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#7c3aed" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="staffGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8B6914"/>
+      <stop offset="50%" stop-color="#C8962A"/>
+      <stop offset="100%" stop-color="#6B4F10"/>
+    </linearGradient>
+    <linearGradient id="bubbleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#c4b5fd"/>
+      <stop offset="100%" stop-color="#7c3aed"/>
+    </linearGradient>
+    <filter id="magicGlow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Stars in background -->
+  <circle cx="100" cy="120" r="2" fill="#ffffff" opacity="0.6"/>
+  <circle cx="160" cy="80" r="1.5" fill="#ffffff" opacity="0.5"/>
+  <circle cx="420" cy="150" r="2" fill="#ffffff" opacity="0.6"/>
+  <circle cx="390" cy="90" r="1.5" fill="#ffffff" opacity="0.4"/>
+  <circle cx="80" cy="350" r="2" fill="#a855f7" opacity="0.5"/>
+  <circle cx="450" cy="380" r="1.5" fill="#7c3aed" opacity="0.5"/>
+  <!-- Wizard staff -->
+  <rect x="248" y="200" width="16" height="280" rx="8" fill="url(#staffGrad)"/>
+  <!-- Staff crook top -->
+  <path d="M256 200 C256 150 290 130 290 155 C290 175 270 175 265 165" fill="none" stroke="url(#staffGrad)" stroke-width="16" stroke-linecap="round"/>
+  <!-- Magic orb on staff top -->
+  <circle cx="287" cy="148" rx="35" ry="35" fill="url(#orbGlow)" filter="url(#magicGlow)"/>
+  <circle cx="287" cy="148" r="28" fill="none" stroke="#a855f7" stroke-width="2" opacity="0.7"/>
+  <circle cx="295" cy="140" r="8" fill="#ffffff" opacity="0.4"/>
+  <!-- AI chat bubble floating right -->
+  <path d="M315 110 L440 110 L440 200 L375 200 L360 220 L345 200 L315 200Z" fill="#1a0040" stroke="url(#bubbleGrad)" stroke-width="2.5" filter="url(#magicGlow)"/>
+  <line x1="332" y1="138" x2="422" y2="138" stroke="#c4b5fd" stroke-width="2" opacity="0.8"/>
+  <line x1="332" y1="162" x2="415" y2="162" stroke="#a855f7" stroke-width="2" opacity="0.7"/>
+  <line x1="332" y1="183" x2="408" y2="183" stroke="#c4b5fd" stroke-width="1.5" opacity="0.5"/>
+  <!-- Magic runes/symbols floating around staff -->
+  <g filter="url(#magicGlow)" opacity="0.7">
+    <path d="M155 220 L165 235 L175 220 L175 250 L155 250Z" fill="none" stroke="#a855f7" stroke-width="1.5"/>
+    <path d="M355 280 L365 295 L375 280 L375 310 L355 310Z" fill="none" stroke="#c4b5fd" stroke-width="1.5"/>
+    <path d="M120 300 L130 310 L120 320 M130 310 L150 310" fill="none" stroke="#7c3aed" stroke-width="2"/>
+    <path d="M380 360 L390 370 L380 380 M390 370 L410 370" fill="none" stroke="#a855f7" stroke-width="2"/>
+  </g>
+  <!-- Sparkle trails -->
+  <circle cx="200" cy="190" r="5" fill="#ffd700" filter="url(#magicGlow)" opacity="0.8"/>
+  <circle cx="175" cy="165" r="3" fill="#c4b5fd" filter="url(#magicGlow)" opacity="0.7"/>
+  <circle cx="350" cy="170" r="4" fill="#ffd700" filter="url(#magicGlow)" opacity="0.7"/>
+  <circle cx="375" cy="200" r="3" fill="#c4b5fd" filter="url(#magicGlow)" opacity="0.6"/>
+</svg>

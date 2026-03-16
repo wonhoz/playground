@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a1a2e"/>
+      <stop offset="100%" stop-color="#16213e"/>
+    </linearGradient>
+    <linearGradient id="link" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#7986cb"/>
+      <stop offset="100%" stop-color="#5c6bc0"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Chain of log entries horizontal -->
+  <!-- Link 1 -->
+  <rect x="40" y="222" width="100" height="68" rx="34" fill="none" stroke="#42a5f5" stroke-width="10"/>
+  <rect x="54" y="236" width="72" height="40" rx="6" fill="#0d47a1" opacity="0.8"/>
+  <text x="90" y="261" font-family="monospace" font-size="14" fill="#90caf9" text-anchor="middle">ERR</text>
+  <!-- Link 2 -->
+  <rect x="120" y="222" width="100" height="68" rx="34" fill="none" stroke="#ff7043" stroke-width="10"/>
+  <rect x="134" y="236" width="72" height="40" rx="6" fill="#bf360c" opacity="0.8"/>
+  <text x="170" y="261" font-family="monospace" font-size="14" fill="#ffab91" text-anchor="middle">WRN</text>
+  <!-- Link 3 -->
+  <rect x="200" y="222" width="100" height="68" rx="34" fill="none" stroke="#66bb6a" stroke-width="10"/>
+  <rect x="214" y="236" width="72" height="40" rx="6" fill="#1b5e20" opacity="0.8"/>
+  <text x="250" y="261" font-family="monospace" font-size="14" fill="#a5d6a7" text-anchor="middle">INF</text>
+  <!-- Link 4 -->
+  <rect x="280" y="222" width="100" height="68" rx="34" fill="none" stroke="#ffd740" stroke-width="10"/>
+  <rect x="294" y="236" width="72" height="40" rx="6" fill="#e65100" opacity="0.8"/>
+  <text x="330" y="261" font-family="monospace" font-size="14" fill="#fff9c4" text-anchor="middle">DBG</text>
+  <!-- Link 5 -->
+  <rect x="360" y="222" width="100" height="68" rx="34" fill="none" stroke="#ce93d8" stroke-width="10"/>
+  <rect x="374" y="236" width="72" height="40" rx="6" fill="#4a148c" opacity="0.8"/>
+  <text x="410" y="261" font-family="monospace" font-size="14" fill="#e1bee7" text-anchor="middle">TRC</text>
+  <!-- Vertical links (two files stacked) -->
+  <line x1="256" y1="80" x2="256" y2="130" stroke="#7986cb" stroke-width="6" stroke-dasharray="8,5"/>
+  <rect x="206" y="100" width="100" height="52" rx="26" fill="none" stroke="#7986cb" stroke-width="8"/>
+  <line x1="256" y1="380" x2="256" y2="440" stroke="#7986cb" stroke-width="6" stroke-dasharray="8,5"/>
+  <rect x="206" y="400" width="100" height="52" rx="26" fill="none" stroke="#ff4081" stroke-width="8"/>
+  <text x="256" y="432" font-family="monospace" font-size="14" fill="#ff80ab" text-anchor="middle">merged</text>
+</svg>

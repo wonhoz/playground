@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg" cx="40%" cy="40%">
+      <stop offset="0%" stop-color="#2A0050"/>
+      <stop offset="100%" stop-color="#0D0020"/>
+    </radialGradient>
+    <linearGradient id="purple" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#CE93D8"/>
+      <stop offset="100%" stop-color="#7B1FA2"/>
+    </linearGradient>
+    <linearGradient id="gear" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#E1BEE7"/>
+      <stop offset="100%" stop-color="#9C27B0"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Large gear -->
+  <g transform="translate(256,240)">
+    <circle r="100" fill="url(#gear)" opacity="0.85"/>
+    <circle r="44" fill="#0D0020"/>
+    <!-- Gear teeth -->
+    <g fill="url(#gear)" opacity="0.85">
+      <rect x="-14" y="-124" width="28" height="36" rx="4"/>
+      <rect x="-14" y="88" width="28" height="36" rx="4"/>
+      <rect x="88" y="-14" width="36" height="28" rx="4"/>
+      <rect x="-124" y="-14" width="36" height="28" rx="4"/>
+      <rect transform="rotate(45)" x="-14" y="-124" width="28" height="36" rx="4"/>
+      <rect transform="rotate(45)" x="-14" y="88" width="28" height="36" rx="4"/>
+      <rect transform="rotate(45)" x="88" y="-14" width="36" height="28" rx="4"/>
+      <rect transform="rotate(45)" x="-124" y="-14" width="36" height="28" rx="4"/>
+    </g>
+    <!-- Clock hands in center -->
+    <line x1="0" y1="0" x2="0" y2="-30" stroke="url(#purple)" stroke-width="6" stroke-linecap="round"/>
+    <line x1="0" y1="0" x2="22" y2="10" stroke="url(#purple)" stroke-width="5" stroke-linecap="round"/>
+    <circle r="5" fill="url(#purple)"/>
+  </g>
+  <!-- Small gear -->
+  <g transform="translate(380,380)">
+    <circle r="54" fill="url(#gear)" opacity="0.65"/>
+    <circle r="22" fill="#0D0020"/>
+    <g fill="url(#gear)" opacity="0.65">
+      <rect x="-8" y="-68" width="16" height="20" rx="3"/>
+      <rect x="-8" y="48" width="16" height="20" rx="3"/>
+      <rect x="48" y="-8" width="20" height="16" rx="3"/>
+      <rect x="-68" y="-8" width="20" height="16" rx="3"/>
+      <rect transform="rotate(45)" x="-8" y="-68" width="16" height="20" rx="3"/>
+      <rect transform="rotate(45)" x="-8" y="48" width="16" height="20" rx="3"/>
+      <rect transform="rotate(45)" x="48" y="-8" width="20" height="16" rx="3"/>
+      <rect transform="rotate(45)" x="-68" y="-8" width="20" height="16" rx="3"/>
+    </g>
+  </g>
+  <!-- Schedule bars left -->
+  <g fill="url(#purple)" opacity="0.5">
+    <rect x="80" y="320" width="120" height="12" rx="5"/>
+    <rect x="80" y="344" width="90" height="12" rx="5"/>
+    <rect x="80" y="368" width="110" height="12" rx="5"/>
+    <rect x="80" y="392" width="70" height="12" rx="5"/>
+  </g>
+</svg>

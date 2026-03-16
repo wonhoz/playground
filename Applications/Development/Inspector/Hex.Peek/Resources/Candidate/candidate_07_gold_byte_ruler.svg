@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#181200"/>
+      <stop offset="100%" stop-color="#201A00"/>
+    </linearGradient>
+    <linearGradient id="ruler" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFD700"/>
+      <stop offset="100%" stop-color="#AA8800"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Ruler body -->
+  <rect x="72" y="150" width="368" height="212" rx="12" fill="url(#ruler)" opacity="0.2" stroke="#FFD700" stroke-width="3"/>
+  <!-- Ruler tick marks top -->
+  <line x1="72" y1="150" x2="440" y2="150" stroke="#FFD700" stroke-width="3"/>
+  <!-- Major ticks every 46px -->
+  <line x1="72" y1="150" x2="72" y2="178" stroke="#FFD700" stroke-width="3"/>
+  <text x="74" y="198" fill="#FFD700" font-size="11" font-family="monospace">0</text>
+  <line x1="118" y1="150" x2="118" y2="170" stroke="#FFAA00" stroke-width="2"/>
+  <line x1="164" y1="150" x2="164" y2="178" stroke="#FFD700" stroke-width="3"/>
+  <text x="157" y="198" fill="#FFD700" font-size="11" font-family="monospace">04</text>
+  <line x1="210" y1="150" x2="210" y2="170" stroke="#FFAA00" stroke-width="2"/>
+  <line x1="256" y1="150" x2="256" y2="178" stroke="#FFD700" stroke-width="3"/>
+  <text x="249" y="198" fill="#FFD700" font-size="11" font-family="monospace">08</text>
+  <line x1="302" y1="150" x2="302" y2="170" stroke="#FFAA00" stroke-width="2"/>
+  <line x1="348" y1="150" x2="348" y2="178" stroke="#FFD700" stroke-width="3"/>
+  <text x="341" y="198" fill="#FFD700" font-size="11" font-family="monospace">0C</text>
+  <line x1="394" y1="150" x2="394" y2="170" stroke="#FFAA00" stroke-width="2"/>
+  <line x1="440" y1="150" x2="440" y2="178" stroke="#FFD700" stroke-width="3"/>
+  <text x="433" y="198" fill="#FFD700" font-size="11" font-family="monospace">10</text>
+  <!-- Hex bytes on ruler -->
+  <text x="80" y="230" fill="#FFCC44" font-size="15" font-family="monospace">4D  5A  90  00</text>
+  <text x="240" y="230" fill="#FFCC44" font-size="15" font-family="monospace">03  00  00  00</text>
+  <!-- Selected byte highlight -->
+  <rect x="80" y="212" width="30" height="24" rx="4" fill="#FFD700" opacity="0.3"/>
+  <!-- ASCII below ruler -->
+  <line x1="72" y1="252" x2="440" y2="252" stroke="#AA8800" stroke-width="2" opacity="0.4"/>
+  <text x="82" y="275" fill="#FFAA22" font-size="18" font-family="monospace">M   Z   .   .   .   .   .   .</text>
+  <!-- Selection info -->
+  <rect x="80" y="300" width="352" height="40" rx="6" fill="#181200" stroke="#FFD700" stroke-width="1" opacity="0.6"/>
+  <text x="96" y="318" fill="#FFAA00" font-size="12" font-family="monospace">Offset: 0x00</text>
+  <text x="96" y="334" fill="#FFD700" font-size="12" font-family="monospace">Value: 0x4D  Dec: 77  'M'</text>
+  <!-- Title -->
+  <text x="256" y="440" text-anchor="middle" fill="#CC9900" font-size="18" font-family="monospace" font-weight="bold">Hex.Peek</text>
+  <text x="256" y="465" text-anchor="middle" fill="#886600" font-size="13" font-family="monospace">Byte Inspector</text>
+</svg>

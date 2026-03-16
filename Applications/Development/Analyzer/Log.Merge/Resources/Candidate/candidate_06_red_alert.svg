@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A0000"/>
+      <stop offset="100%" stop-color="#0A0010"/>
+    </linearGradient>
+    <linearGradient id="fileGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#2A2A3A"/>
+      <stop offset="100%" stop-color="#1A1A2A"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Three stacked log file icons -->
+  <!-- File 3 (back) -->
+  <rect x="148" y="100" width="216" height="264" rx="10" fill="#151520" stroke="#333" stroke-width="1.5" transform="rotate(8 256 232)"/>
+  <!-- File 2 (middle) -->
+  <rect x="148" y="100" width="216" height="264" rx="10" fill="#1A1A28" stroke="#444" stroke-width="1.5" transform="rotate(3 256 232)"/>
+  <!-- File 1 (front/main) -->
+  <rect x="148" y="100" width="216" height="264" rx="10" fill="url(#fileGrad)" stroke="#FF4444" stroke-width="2"/>
+  <!-- Corner fold -->
+  <path d="M316 100 L364 148 L316 148 Z" fill="#FF4444" opacity="0.3"/>
+  <path d="M316 100 L364 148" stroke="#FF4444" stroke-width="2"/>
+  <!-- Log content lines -->
+  <rect x="168" y="132" width="120" height="7" rx="3" fill="#666" opacity="0.6"/>
+  <rect x="168" y="148" width="100" height="7" rx="3" fill="#555" opacity="0.5"/>
+  <!-- ERROR line highlighted -->
+  <rect x="164" y="164" width="184" height="14" rx="3" fill="#FF4444" opacity="0.2"/>
+  <rect x="168" y="167" width="50" height="8" rx="3" fill="#FF4444" opacity="0.9" filter="url(#glow)"/>
+  <rect x="226" y="167" width="116" height="8" rx="3" fill="#FF8888" opacity="0.7"/>
+  <!-- More lines -->
+  <rect x="168" y="188" width="140" height="7" rx="3" fill="#555" opacity="0.5"/>
+  <rect x="168" y="204" width="110" height="7" rx="3" fill="#555" opacity="0.45"/>
+  <!-- WARN line -->
+  <rect x="164" y="218" width="184" height="14" rx="3" fill="#FF8C00" opacity="0.15"/>
+  <rect x="168" y="221" width="52" height="8" rx="3" fill="#FF8C00" opacity="0.8" filter="url(#glow)"/>
+  <rect x="228" y="221" width="100" height="8" rx="3" fill="#FFB300" opacity="0.6"/>
+  <rect x="168" y="243" width="130" height="7" rx="3" fill="#555" opacity="0.4"/>
+  <rect x="168" y="259" width="90" height="7" rx="3" fill="#555" opacity="0.35"/>
+  <rect x="168" y="275" width="150" height="7" rx="3" fill="#555" opacity="0.4"/>
+  <rect x="168" y="291" width="100" height="7" rx="3" fill="#555" opacity="0.35"/>
+  <!-- Alert badge top right -->
+  <circle cx="392" cy="108" r="36" fill="#FF4444" filter="url(#glow)"/>
+  <text x="392" y="102" font-family="Arial Black, sans-serif" font-size="28" text-anchor="middle" fill="white">!</text>
+  <text x="392" y="124" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="white">ERR</text>
+  <!-- Bottom merge arrow -->
+  <path d="M204 380 L308 380 L256 440 Z" fill="#FF4444" opacity="0.6" filter="url(#glow)"/>
+  <text x="256" y="470" font-family="'Courier New', monospace" font-size="13" text-anchor="middle" fill="#FF8888">MERGE</text>
+</svg>

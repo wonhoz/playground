@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#100020"/>
+      <stop offset="100%" stop-color="#200010"/>
+    </linearGradient>
+    <linearGradient id="leftStream" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FF00AA"/>
+      <stop offset="100%" stop-color="#8800FF"/>
+    </linearGradient>
+    <linearGradient id="rightStream" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00AAFF"/>
+      <stop offset="100%" stop-color="#0044FF"/>
+    </linearGradient>
+    <filter id="neon">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Zipper merge visualization -->
+  <!-- Left log stream -->
+  <path d="M100 100 L160 160 L100 220 L160 280 L100 340 L160 400" stroke="url(#leftStream)" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round" filter="url(#neon)"/>
+  <!-- Right log stream -->
+  <path d="M412 100 L352 160 L412 220 L352 280 L412 340 L352 400" stroke="url(#rightStream)" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round" filter="url(#neon)"/>
+  <!-- Zipper teeth meeting in center -->
+  <line x1="160" y1="160" x2="256" y2="200" stroke="#FF00AA" stroke-width="2.5" filter="url(#neon)" opacity="0.8"/>
+  <line x1="352" y1="160" x2="256" y2="200" stroke="#00AAFF" stroke-width="2.5" filter="url(#neon)" opacity="0.8"/>
+  <line x1="160" y1="280" x2="256" y2="256" stroke="#FF00AA" stroke-width="2.5" filter="url(#neon)" opacity="0.7"/>
+  <line x1="352" y1="280" x2="256" y2="256" stroke="#00AAFF" stroke-width="2.5" filter="url(#neon)" opacity="0.7"/>
+  <line x1="160" y1="400" x2="256" y2="380" stroke="#AA00FF" stroke-width="2.5" filter="url(#neon)" opacity="0.8"/>
+  <line x1="352" y1="400" x2="256" y2="380" stroke="#0044FF" stroke-width="2.5" filter="url(#neon)" opacity="0.8"/>
+  <!-- Center merged line -->
+  <path d="M256 200 Q256 256 256 380 L256 440" stroke="#CC44FF" stroke-width="6" fill="none" stroke-linecap="round" filter="url(#neon)"/>
+  <!-- Node dots at intersections -->
+  <circle cx="256" cy="200" r="10" fill="#FF00AA" filter="url(#neon)"/>
+  <circle cx="256" cy="256" r="10" fill="#CC44FF" filter="url(#neon)"/>
+  <circle cx="256" cy="380" r="10" fill="#0044FF" filter="url(#neon)"/>
+  <!-- Input labels -->
+  <text x="100" y="88" font-family="'Courier New', monospace" font-size="13" text-anchor="middle" fill="#FF00AA" filter="url(#neon)">A.log</text>
+  <text x="412" y="88" font-family="'Courier New', monospace" font-size="13" text-anchor="middle" fill="#00AAFF" filter="url(#neon)">B.log</text>
+  <!-- Output -->
+  <text x="256" y="470" font-family="'Courier New', monospace" font-size="14" text-anchor="middle" fill="#CC44FF" filter="url(#neon)" font-weight="bold">merged.log</text>
+  <!-- Left file icon -->
+  <rect x="60" y="68" width="80" height="20" rx="4" fill="#FF00AA" opacity="0.3"/>
+  <!-- Right file icon -->
+  <rect x="372" y="68" width="80" height="20" rx="4" fill="#00AAFF" opacity="0.3"/>
+</svg>

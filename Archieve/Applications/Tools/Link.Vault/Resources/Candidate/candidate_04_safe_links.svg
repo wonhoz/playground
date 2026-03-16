@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#37474f"/>
+      <stop offset="100%" stop-color="#1a237e" stop-opacity="0.9"/>
+    </radialGradient>
+    <linearGradient id="safe" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#78909c"/>
+      <stop offset="100%" stop-color="#546e7a"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Safe body -->
+  <rect x="100" y="100" width="312" height="312" rx="28" fill="url(#safe)" stroke="#90a4ae" stroke-width="5"/>
+  <!-- Safe door detail -->
+  <rect x="120" y="120" width="272" height="272" rx="20" fill="#546e7a" stroke="#78909c" stroke-width="3"/>
+  <!-- Dial -->
+  <circle cx="256" cy="245" r="60" fill="#37474f" stroke="#90a4ae" stroke-width="8"/>
+  <circle cx="256" cy="245" r="40" fill="#455a64" stroke="#78909c" stroke-width="4"/>
+  <!-- Dial marks -->
+  <line x1="256" y1="195" x2="256" y2="210" stroke="#cfd8dc" stroke-width="4"/>
+  <line x1="256" y1="280" x2="256" y2="295" stroke="#cfd8dc" stroke-width="4"/>
+  <line x1="206" y1="245" x2="221" y2="245" stroke="#cfd8dc" stroke-width="4"/>
+  <line x1="291" y1="245" x2="306" y2="245" stroke="#cfd8dc" stroke-width="4"/>
+  <line x1="256" y1="245" x2="256" y2="215" stroke="#29b6f6" stroke-width="5" stroke-linecap="round"/>
+  <!-- Link icons floating -->
+  <path d="M148 350 Q160 340 172 350" fill="none" stroke="#29b6f6" stroke-width="6" stroke-linecap="round"/>
+  <path d="M168 350 Q180 340 192 350" fill="none" stroke="#29b6f6" stroke-width="6" stroke-linecap="round"/>
+  <path d="M320 350 Q332 340 344 350" fill="none" stroke="#80cbc4" stroke-width="6" stroke-linecap="round"/>
+  <path d="M340 350 Q352 340 364 350" fill="none" stroke="#80cbc4" stroke-width="6" stroke-linecap="round"/>
+  <!-- Handle -->
+  <rect x="330" y="228" width="52" height="34" rx="8" fill="#ffd54f" stroke="#ffca28" stroke-width="3"/>
+</svg>

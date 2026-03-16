@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0A1628"/>
+      <stop offset="100%" stop-color="#1A2A48"/>
+    </linearGradient>
+    <linearGradient id="lightning" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFD700"/>
+      <stop offset="100%" stop-color="#FFA500"/>
+    </linearGradient>
+    <linearGradient id="ship" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#E8F0FF"/>
+      <stop offset="100%" stop-color="#8899CC"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Storm clouds -->
+  <ellipse cx="140" cy="120" rx="90" ry="50" fill="#2A3A5A" opacity="0.8"/>
+  <ellipse cx="100" cy="110" rx="60" ry="40" fill="#354A6A" opacity="0.7"/>
+  <ellipse cx="400" cy="140" rx="80" ry="45" fill="#2A3A5A" opacity="0.8"/>
+  <ellipse cx="430" cy="130" rx="55" ry="35" fill="#354A6A" opacity="0.7"/>
+  <!-- Lightning bolts -->
+  <polyline points="130,140 115,180 125,180 108,230" stroke="url(#lightning)" stroke-width="4" fill="none" opacity="0.9"/>
+  <polyline points="390,160 378,200 386,200 372,245" stroke="url(#lightning)" stroke-width="3" fill="none" opacity="0.8"/>
+  <!-- Speed lines rain -->
+  <line x1="60" y1="200" x2="90" y2="320" stroke="#4466AA" stroke-width="1" opacity="0.4"/>
+  <line x1="110" y1="170" x2="140" y2="290" stroke="#4466AA" stroke-width="1" opacity="0.3"/>
+  <line x1="380" y1="200" x2="410" y2="320" stroke="#4466AA" stroke-width="1" opacity="0.4"/>
+  <line x1="430" y1="170" x2="460" y2="290" stroke="#4466AA" stroke-width="1" opacity="0.3"/>
+  <!-- Ship -->
+  <polygon points="256,100 308,270 256,250 204,270" fill="url(#ship)"/>
+  <polygon points="256,100 280,250 256,235 232,250" fill="#FFFFFF" opacity="0.4"/>
+  <ellipse cx="256" cy="190" rx="16" ry="22" fill="#AACCFF" opacity="0.9"/>
+  <!-- Engine exhaust -->
+  <polygon points="238,268 256,340 274,268" fill="#6699FF" opacity="0.8"/>
+  <polygon points="245,268 256,310 267,268" fill="#AADDFF" opacity="0.6"/>
+  <!-- Wing lights -->
+  <circle cx="210" cy="240" r="6" fill="#FFD700" opacity="0.9"/>
+  <circle cx="302" cy="240" r="6" fill="#FFD700" opacity="0.9"/>
+  <text x="256" y="450" font-family="Arial" font-size="26" font-weight="bold" fill="#FFD700" text-anchor="middle">DODGE·CRAFT</text>
+</svg>

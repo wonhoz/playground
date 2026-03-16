@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0a1a"/>
+      <stop offset="100%" stop-color="#141430"/>
+    </linearGradient>
+    <linearGradient id="node" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7986cb"/>
+      <stop offset="100%" stop-color="#3949ab"/>
+    </linearGradient>
+    <linearGradient id="scan" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00e5ff" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#00e5ff" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#00e5ff" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="glow"><feGaussianBlur stdDeviation="8"/></filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- network topology lines -->
+  <line x1="256" y1="256" x2="150" y2="150" stroke="#3949ab" stroke-width="3" opacity="0.6"/>
+  <line x1="256" y1="256" x2="370" y2="150" stroke="#3949ab" stroke-width="3" opacity="0.6"/>
+  <line x1="256" y1="256" x2="140" y2="350" stroke="#3949ab" stroke-width="3" opacity="0.6"/>
+  <line x1="256" y1="256" x2="370" y2="350" stroke="#3949ab" stroke-width="3" opacity="0.6"/>
+  <line x1="150" y1="150" x2="370" y2="150" stroke="#3949ab" stroke-width="2" opacity="0.4"/>
+  <line x1="140" y1="350" x2="370" y2="350" stroke="#3949ab" stroke-width="2" opacity="0.4"/>
+  <!-- nodes -->
+  <circle cx="256" cy="256" r="25" fill="url(#node)" filter="url(#glow)"/>
+  <circle cx="256" cy="256" r="13" fill="white"/>
+  <circle cx="150" cy="150" r="18" fill="url(#node)" filter="url(#glow)"/>
+  <circle cx="370" cy="150" r="18" fill="url(#node)" filter="url(#glow)"/>
+  <circle cx="140" cy="350" r="18" fill="url(#node)" filter="url(#glow)"/>
+  <circle cx="370" cy="350" r="18" fill="url(#node)" filter="url(#glow)"/>
+  <!-- scan beam -->
+  <rect x="100" y="230" width="312" height="52" fill="url(#scan)" opacity="0.5"/>
+  <!-- scan line -->
+  <line x1="100" y1="256" x2="412" y2="256" stroke="#00e5ff" stroke-width="3"/>
+</svg>

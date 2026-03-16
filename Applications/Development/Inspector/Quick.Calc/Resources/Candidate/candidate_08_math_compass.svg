@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0a1e"/>
+      <stop offset="100%" stop-color="#1a1a3a"/>
+    </linearGradient>
+    <linearGradient id="compassArm" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#c8c8c8"/>
+      <stop offset="100%" stop-color="#888888"/>
+    </linearGradient>
+    <linearGradient id="circleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4776E6" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#8E54E9" stop-opacity="0.1"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+
+  <!-- Drawn circles -->
+  <circle cx="256" cy="260" r="150" fill="url(#circleGrad)" stroke="#4776E6" stroke-width="2" opacity="0.7"/>
+  <circle cx="256" cy="260" r="100" fill="none" stroke="#8E54E9" stroke-width="1.5" opacity="0.5"/>
+  <circle cx="256" cy="260" r="50" fill="none" stroke="#56CCF2" stroke-width="1" opacity="0.4"/>
+
+  <!-- Compass tool -->
+  <!-- Pivot point -->
+  <circle cx="256" cy="130" r="14" fill="url(#compassArm)" stroke="#ffd200" stroke-width="2"/>
+  <circle cx="256" cy="130" r="6" fill="#ffd200" filter="url(#glow)"/>
+
+  <!-- Left arm -->
+  <line x1="256" y1="130" x2="160" y2="350" stroke="url(#compassArm)" stroke-width="8" stroke-linecap="round"/>
+  <!-- Left arm hinge -->
+  <circle cx="192" cy="256" r="8" fill="#c8c8c8"/>
+  <!-- Left pencil tip -->
+  <polygon points="155,342 165,358 148,360" fill="#ffd200" filter="url(#glow)"/>
+
+  <!-- Right arm -->
+  <line x1="256" y1="130" x2="352" y2="350" stroke="url(#compassArm)" stroke-width="8" stroke-linecap="round"/>
+  <!-- Right arm hinge -->
+  <circle cx="320" cy="256" r="8" fill="#c8c8c8"/>
+  <!-- Right needle tip -->
+  <polygon points="351,344 358,362 344,362" fill="#c0c0c0"/>
+
+  <!-- Math symbols around circle -->
+  <!-- Plus at top -->
+  <rect x="249" y="83" width="14" height="5" rx="2" fill="#56CCF2" opacity="0.8"/>
+  <rect x="252" y="78" width="8" height="15" rx="2" fill="#56CCF2" opacity="0.8"/>
+  <!-- Minus at right -->
+  <rect x="423" y="253" width="14" height="5" rx="2" fill="#ee0979" opacity="0.8"/>
+  <!-- Multiply at bottom -->
+  <line x1="248" y1="425" x2="264" y2="441" stroke="#ffd200" stroke-width="3" opacity="0.8"/>
+  <line x1="264" y1="425" x2="248" y2="441" stroke="#ffd200" stroke-width="3" opacity="0.8"/>
+  <!-- Divide at left -->
+  <circle cx="74" cy="250" r="3.5" fill="#56ab2f" opacity="0.8"/>
+  <rect x="67" y="256" width="14" height="5" rx="2" fill="#56ab2f" opacity="0.8"/>
+  <circle cx="74" cy="268" r="3.5" fill="#56ab2f" opacity="0.8"/>
+
+  <!-- Equals highlighted in circle -->
+  <rect x="224" y="250" width="64" height="8" rx="4" fill="#ffd200" filter="url(#glow)"/>
+  <rect x="224" y="266" width="64" height="8" rx="4" fill="#ffd200" filter="url(#glow)"/>
+
+  <!-- Degree marks on circle -->
+  <g stroke="#4776E6" stroke-width="1.5" opacity="0.4">
+    <line x1="256" y1="110" x2="256" y2="124"/>
+    <line x1="256" y1="396" x2="256" y2="410"/>
+    <line x1="106" y1="260" x2="120" y2="260"/>
+    <line x1="392" y1="260" x2="406" y2="260"/>
+  </g>
+</svg>

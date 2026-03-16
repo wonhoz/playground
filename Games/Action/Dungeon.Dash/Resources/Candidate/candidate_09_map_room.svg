@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0A0800"/>
+      <stop offset="100%" stop-color="#160F00"/>
+    </linearGradient>
+    <linearGradient id="mapGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#D97706"/>
+      <stop offset="100%" stop-color="#92400E"/>
+    </linearGradient>
+    <radialGradient id="roomGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FDE68A" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#FDE68A" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Parchment/map background -->
+  <rect x="60" y="60" width="392" height="392" rx="10" fill="#1A1200" stroke="#D97706" stroke-width="2.5"/>
+  <rect x="70" y="70" width="372" height="372" rx="6" fill="#130E00" stroke="#B45309" stroke-width="1"/>
+  <!-- Map rooms -->
+  <!-- Room 1 (start) -->
+  <rect x="90" y="90" width="80" height="60" rx="4" fill="#1F1800" stroke="#F59E0B" stroke-width="2"/>
+  <text x="130" y="125" font-family="monospace" font-size="10" fill="#F59E0B" text-anchor="middle">START</text>
+  <!-- Corridor down from R1 -->
+  <rect x="122" y="150" width="16" height="40" fill="#1A1200" stroke="#B45309" stroke-width="1"/>
+  <!-- Room 2 (center) -->
+  <rect x="90" y="190" width="100" height="80" rx="4" fill="#1F1800" stroke="#F59E0B" stroke-width="2"/>
+  <circle cx="140" cy="230" r="18" fill="#F59E0B" opacity="0.15"/>
+  <text x="140" y="228" font-family="monospace" font-size="9" fill="#FDE68A" text-anchor="middle">BOSS</text>
+  <text x="140" y="242" font-family="monospace" font-size="9" fill="#FDE68A" text-anchor="middle">ROOM</text>
+  <!-- Corridor right from R2 -->
+  <rect x="190" y="222" width="50" height="16" fill="#1A1200" stroke="#B45309" stroke-width="1"/>
+  <!-- Room 3 (right top) -->
+  <rect x="240" y="90" width="80" height="60" rx="4" fill="#1F1800" stroke="#D97706" stroke-width="1.5"/>
+  <text x="280" y="125" font-family="monospace" font-size="9" fill="#D97706" text-anchor="middle">ARMORY</text>
+  <!-- Corridor connecting R3 to R4 -->
+  <rect x="272" y="150" width="16" height="80" fill="#1A1200" stroke="#B45309" stroke-width="1"/>
+  <!-- Room 4 (right center) -->
+  <rect x="240" y="190" width="80" height="80" rx="4" fill="#1F1800" stroke="#D97706" stroke-width="1.5"/>
+  <!-- Treasure icon -->
+  <rect x="265" y="210" width="30" height="22" rx="4" fill="#92400E" stroke="#F59E0B" stroke-width="1.5"/>
+  <rect x="265" y="210" width="30" height="8" rx="4" fill="#B45309"/>
+  <circle cx="280" cy="220" r="4" fill="#FDE68A"/>
+  <!-- Corridor down from R4 -->
+  <rect x="272" y="270" width="16" height="50" fill="#1A1200" stroke="#B45309" stroke-width="1"/>
+  <!-- Room 5 (bottom right, exit) -->
+  <rect x="240" y="320" width="80" height="60" rx="4" fill="#14532D" stroke="#22C55E" stroke-width="2"/>
+  <text x="280" y="355" font-family="monospace" font-size="10" fill="#22C55E" text-anchor="middle">EXIT</text>
+  <!-- Corridor bottom -->
+  <rect x="122" y="270" width="16" height="60" fill="#1A1200" stroke="#B45309" stroke-width="1"/>
+  <!-- Room 6 bottom left (trap) -->
+  <rect x="90" y="320" width="80" height="60" rx="4" fill="#7F1D1D" stroke="#EF4444" stroke-width="1.5" opacity="0.8"/>
+  <text x="130" y="355" font-family="monospace" font-size="9" fill="#EF4444" text-anchor="middle">TRAP!</text>
+  <!-- Secret corridor right-most -->
+  <rect x="320" y="190" width="30" height="16" fill="#1A1200" stroke="#B45309" stroke-width="1"/>
+  <rect x="350" y="185" width="60" height="80" rx="4" fill="#1F1800" stroke="#A855F7" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <text x="380" y="230" font-family="monospace" font-size="9" fill="#A855F7" text-anchor="middle">SECRET</text>
+  <!-- Player marker (X mark) -->
+  <circle cx="130" cy="120" r="10" fill="#EF4444"/>
+  <text x="130" y="125" font-family="monospace" font-size="12" fill="white" text-anchor="middle" font-weight="bold">X</text>
+</svg>

@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" style="stop-color:#0a2a4a"/>
+      <stop offset="100%" style="stop-color:#020c1b"/>
+    </radialGradient>
+    <radialGradient id="bubble" cx="35%" cy="35%" r="60%">
+      <stop offset="0%" style="stop-color:#ffffff60"/>
+      <stop offset="40%" style="stop-color:#7dd3fc30"/>
+      <stop offset="100%" style="stop-color:#0ea5e910"/>
+    </radialGradient>
+    <linearGradient id="bubble_stroke" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#7dd3fc"/>
+      <stop offset="100%" style="stop-color:#0ea5e9"/>
+    </linearGradient>
+    <radialGradient id="inner" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#bae6fd"/>
+      <stop offset="100%" style="stop-color:#0284c7"/>
+    </radialGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="12" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="softglow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Underwater/space particles falling -->
+  <circle cx="100" cy="420" r="4" fill="#7dd3fc50"/>
+  <circle cx="160" cy="440" r="3" fill="#7dd3fc40"/>
+  <circle cx="350" cy="430" r="4" fill="#7dd3fc50"/>
+  <circle cx="420" cy="410" r="3" fill="#7dd3fc40"/>
+  <!-- Rising bubbles (anti-gravity) -->
+  <circle cx="140" cy="300" r="12" fill="none" stroke="#7dd3fc60" stroke-width="2"/>
+  <circle cx="380" cy="280" r="9" fill="none" stroke="#7dd3fc50" stroke-width="1.5"/>
+  <circle cx="320" cy="340" r="7" fill="none" stroke="#7dd3fc40" stroke-width="1.5"/>
+  <!-- Main anti-gravity bubble -->
+  <circle cx="256" cy="220" r="120" fill="url(#bubble)" filter="url(#glow)"/>
+  <circle cx="256" cy="220" r="120" fill="none" stroke="url(#bubble_stroke)" stroke-width="4"/>
+  <!-- Shine on bubble -->
+  <ellipse cx="210" cy="170" rx="35" ry="22" fill="#ffffff30"/>
+  <!-- Object inside bubble floating upward -->
+  <rect x="226" y="195" width="60" height="50" rx="10" fill="url(#inner)" filter="url(#softglow)"/>
+  <!-- Up arrow inside -->
+  <polygon points="256,185 240,205 252,205 252,230 260,230 260,205 272,205" fill="#ffffff90"/>
+  <!-- Bubble trail going up -->
+  <path d="M256,100 Q270,80 256,60" stroke="#7dd3fc60" stroke-width="2" fill="none" stroke-dasharray="5,4"/>
+  <!-- Ground below -->
+  <rect x="60" y="380" width="392" height="24" rx="8" fill="#1e3a5f"/>
+  <!-- Particles around bubble -->
+  <circle cx="175" cy="180" r="5" fill="#7dd3fc" filter="url(#softglow)"/>
+  <circle cx="340" cy="200" r="4" fill="#7dd3fc" filter="url(#softglow)"/>
+  <circle cx="200" cy="310" r="3" fill="#7dd3fc80"/>
+  <circle cx="310" cy="320" r="3" fill="#7dd3fc80"/>
+</svg>

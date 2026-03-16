@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Disk.Lens — 아이콘 후보 미리보기</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #1a1a1a;
+      color: #e0e0e0;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      padding: 40px 32px 60px;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 26px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      color: #ffffff;
+      margin-bottom: 6px;
+    }
+
+    .subtitle {
+      text-align: center;
+      font-size: 13px;
+      color: #666;
+      letter-spacing: 2px;
+      margin-bottom: 40px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 28px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: #242424;
+      border: 1px solid #333;
+      border-radius: 12px;
+      padding: 18px 14px 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+      cursor: pointer;
+    }
+
+    .card:hover {
+      border-color: #666;
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+    }
+
+    .card img {
+      width: 140px;
+      height: 140px;
+      border-radius: 8px;
+      display: block;
+    }
+
+    .card-num {
+      font-size: 11px;
+      color: #555;
+      letter-spacing: 1px;
+    }
+
+    .card-name {
+      font-size: 13px;
+      color: #ccc;
+      text-align: center;
+      line-height: 1.4;
+      word-break: break-word;
+    }
+  </style>
+</head>
+<body>
+  <h1>DISK.LENS</h1>
+  <p class="subtitle">ICON CANDIDATES — 10 DESIGNS</p>
+
+  <div class="grid">
+    <div class="card">
+      <img src="candidate_01_donut_chart.svg" alt="Donut Chart"/>
+      <span class="card-num">01</span>
+      <span class="card-name">Donut Chart<br><em style="color:#555;font-size:11px;">Blue-Teal Gradient</em></span>
+    </div>
+    <div class="card">
+      <img src="candidate_02_treemap.svg" alt="Treemap"/>
+      <span class="card-num">02</span>
+      <span class="card-name">Treemap<br><em style="color:#555;font-size:11px;">Dark Multi-Color</em></span>
+    </div>
+    <div class="card">
+      <img src="candidate_03_lens_scan.svg" alt="Lens Scan"/>
+      <span class="card-num">03</span>
+      <span class="card-name">Lens Scan<br><em style="color:#555;font-size:11px;">Cyan HUD</em></span>
+    </div>
+    <div class="card">
+      <img src="candidate_04_bar_chart.svg" alt="Bar Chart"/>
+      <span class="card-num">04</span>
+      <span class="card-name">Bar Chart<br><em style="color:#555;font-size:11px;">Purple-Green</em></span>
+    </div>
+    <div class="card">
+      <img src="candidate_05_sunburst.svg" alt="Sunburst"/>
+      <span class="card-num">05</span>
+      <span class="card-name">Sunburst<br><em style="color:#555;font-size:11px;">Multi-Ring Rainbow</em></span>
+    </div>
+    <div class="card">
+      <img src="candidate_06_heatmap.svg" alt="Heatmap"/>
+      <span class="card-num">06</span>
+      <span class="card-name">Heatmap<br><em style="color:#555;font-size:11px;">Blue-Red Thermal</em></span>
+    </div>
+    <div class="card">
+      <img src="candidate_07_folder_tree.svg" alt="Folder Tree"/>
+      <span class="card-num">07</span>
+      <span class="card-name">Folder Tree<br><em style="color:#555;font-size:11px;">Forest Green</em></span>
+    </div>
+    <div class="card">
+      <img src="candidate_08_gauge.svg" alt="Gauge"/>
+      <span class="card-num">08</span>
+      <span class="card-name">Gauge<br><em style="color:#555;font-size:11px;">Purple Dark</em></span>
+    </div>
+    <div class="card">
+      <img src="candidate_09_crystal_disk.svg" alt="Crystal Disk"/>
+      <span class="card-num">09</span>
+      <span class="card-name">Crystal Disk<br><em style="color:#555;font-size:11px;">Indigo-Violet</em></span>
+    </div>
+    <div class="card">
+      <img src="candidate_10_neon_rings.svg" alt="Neon Rings"/>
+      <span class="card-num">10</span>
+      <span class="card-name">Neon Rings<br><em style="color:#555;font-size:11px;">Black Neon</em></span>
+    </div>
+  </div>
+</body>
+</html>

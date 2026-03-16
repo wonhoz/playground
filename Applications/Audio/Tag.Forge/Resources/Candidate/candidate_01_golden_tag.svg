@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#212121"/>
+      <stop offset="100%" stop-color="#37474F"/>
+    </linearGradient>
+    <linearGradient id="tag" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFD700"/>
+      <stop offset="100%" stop-color="#FFA000"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Tag shape -->
+  <path d="M 120,120 L 340,120 L 420,256 L 340,392 L 120,392 Z" fill="url(#tag)" opacity="0.9"/>
+  <!-- Tag hole -->
+  <circle cx="158" cy="256" r="24" fill="#212121"/>
+  <!-- Music note on tag -->
+  <g fill="#212121" opacity="0.85">
+    <rect x="244" y="196" width="18" height="72" rx="4"/>
+    <ellipse cx="236" cy="272" rx="20" ry="14" transform="rotate(-10 236 272)"/>
+    <rect x="262" y="196" width="18" height="56" rx="4"/>
+    <ellipse cx="254" cy="256" rx="20" ry="14" transform="rotate(-10 254 256)"/>
+    <rect x="244" y="196" width="36" height="12" rx="4"/>
+  </g>
+  <!-- ID3 text below -->
+  <text x="256" y="448" text-anchor="middle" font-size="36" font-weight="bold" fill="#FFD700" font-family="monospace" opacity="0.9">ID3</text>
+</svg>

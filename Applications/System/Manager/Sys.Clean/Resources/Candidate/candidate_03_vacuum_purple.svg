@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A0A2E"/>
+      <stop offset="100%" stop-color="#38006B"/>
+    </linearGradient>
+    <linearGradient id="vac" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#AB47BC"/>
+      <stop offset="100%" stop-color="#6A1B9A"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Vacuum body -->
+  <ellipse cx="256" cy="280" rx="120" ry="75" fill="url(#vac)"/>
+  <!-- Vacuum top dome -->
+  <ellipse cx="256" cy="220" rx="80" ry="50" fill="#8E24AA"/>
+  <!-- Suction tube -->
+  <rect x="166" y="305" width="180" height="20" rx="10" fill="#6A1B9A"/>
+  <!-- Suction mouth -->
+  <ellipse cx="346" cy="315" rx="18" ry="28" fill="#4A148C"/>
+  <!-- Suction effect lines -->
+  <g stroke="#CE93D8" stroke-width="3" fill="none" opacity="0.7">
+    <path d="M370 295 Q390 305 380 315 Q395 315 385 325"/>
+    <path d="M368 310 Q400 310 390 320"/>
+    <path d="M370 330 Q390 320 382 330"/>
+  </g>
+  <!-- Dust particles being sucked -->
+  <circle cx="395" cy="305" r="6" fill="#CE93D8" opacity="0.6"/>
+  <circle cx="405" cy="315" r="4" fill="#E1BEE7" opacity="0.5"/>
+  <circle cx="390" cy="328" r="5" fill="#CE93D8" opacity="0.4"/>
+  <circle cx="415" cy="310" r="3" fill="#E1BEE7" opacity="0.3"/>
+  <!-- Power button -->
+  <circle cx="256" cy="220" r="25" fill="#4A148C" stroke="#CE93D8" stroke-width="3"/>
+  <path d="M256 205 L256 218" stroke="#CE93D8" stroke-width="5" stroke-linecap="round"/>
+  <path d="M244 209 Q230 220 244 234" fill="none" stroke="#CE93D8" stroke-width="4" stroke-linecap="round"/>
+  <path d="M268 209 Q282 220 268 234" fill="none" stroke="#CE93D8" stroke-width="4" stroke-linecap="round"/>
+  <!-- Wheels -->
+  <circle cx="196" cy="348" r="18" fill="#4A148C" stroke="#CE93D8" stroke-width="3"/>
+  <circle cx="316" cy="348" r="18" fill="#4A148C" stroke="#CE93D8" stroke-width="3"/>
+</svg>

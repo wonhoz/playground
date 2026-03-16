@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1a0f2e"/>
+      <stop offset="100%" stop-color="#2e1a0f"/>
+    </linearGradient>
+    <linearGradient id="lens" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fbbf2420"/>
+      <stop offset="100%" stop-color="#f59e0b20"/>
+    </linearGradient>
+    <linearGradient id="handle" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#d97706"/>
+      <stop offset="100%" stop-color="#92400e"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Tree in background -->
+  <line x1="120" y1="80" x2="120" y2="400" stroke="#3a2a1a" stroke-width="2"/>
+  <line x1="120" y1="130" x2="160" y2="130" stroke="#3a2a1a" stroke-width="1.5"/>
+  <line x1="120" y1="185" x2="160" y2="185" stroke="#3a2a1a" stroke-width="1.5"/>
+  <line x1="120" y1="240" x2="160" y2="240" stroke="#3a2a1a" stroke-width="1.5"/>
+  <line x1="120" y1="295" x2="160" y2="295" stroke="#3a2a1a" stroke-width="1.5"/>
+  <line x1="120" y1="350" x2="160" y2="350" stroke="#3a2a1a" stroke-width="1.5"/>
+  <text x="164" y="136" font-family="monospace" font-size="13" fill="#555">"root": {}</text>
+  <text x="164" y="191" font-family="monospace" font-size="13" fill="#555">  "user": {}</text>
+  <text x="164" y="246" font-family="monospace" font-size="13" fill="#555">    "name": "J"</text>
+  <text x="164" y="301" font-family="monospace" font-size="13" fill="#555">    "age": 30</text>
+  <text x="164" y="356" font-family="monospace" font-size="13" fill="#555">  "tags": []</text>
+  <!-- Magnifier glass -->
+  <circle cx="290" cy="230" r="120" fill="url(#lens)"/>
+  <circle cx="290" cy="230" r="120" fill="none" stroke="#fbbf24" stroke-width="8"/>
+  <!-- Magnified content inside lens -->
+  <clipPath id="lensClip">
+    <circle cx="290" cy="230" r="116"/>
+  </clipPath>
+  <g clip-path="url(#lensClip)">
+    <text x="195" y="195" font-family="monospace" font-size="18" fill="#fbbf24">  "user": {</text>
+    <text x="195" y="225" font-family="monospace" font-size="18" fill="#a5d6ff">    "name":</text>
+    <text x="195" y="255" font-family="monospace" font-size="18" fill="#f0883e">      "John"</text>
+    <text x="195" y="285" font-family="monospace" font-size="18" fill="#a5d6ff">    "age":</text>
+    <text x="195" y="315" font-family="monospace" font-size="18" fill="#f0883e">      30</text>
+  </g>
+  <!-- Handle -->
+  <line x1="384" y1="324" x2="450" y2="400" stroke="url(#handle)" stroke-width="18" stroke-linecap="round"/>
+  <circle cx="290" cy="230" r="6" fill="#fbbf24" opacity="0.7"/>
+</svg>

@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#1a1200"/>
+      <stop offset="100%" stop-color="#0d0900"/>
+    </radialGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ffd700"/>
+      <stop offset="50%" stop-color="#ffec6e"/>
+      <stop offset="100%" stop-color="#b8860b"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Main large icon (256px) perspective card -->
+  <rect x="56" y="56" width="240" height="240" rx="24" fill="#1f1600" stroke="url(#gold)" stroke-width="3"/>
+  <!-- Fold corner -->
+  <polygon points="256,56 296,56 296,96 256,96" fill="#1f1600" stroke="#ffd700" stroke-width="2"/>
+  <polygon points="256,56 296,96 256,96" fill="#ffd700" opacity="0.4"/>
+  <!-- Star icon inside -->
+  <polygon points="176,100 189,136 228,136 196,158 208,194 176,172 144,194 156,158 124,136 163,136" fill="#ffd700" opacity="0.9"/>
+  <!-- Label -->
+  <text x="80" y="284" font-family="monospace" font-size="16" fill="#ffd700" font-weight="bold">256 × 256</text>
+  <text x="80" y="302" font-family="monospace" font-size="12" fill="#b8860b">32-bit RGBA</text>
+  <!-- Smaller size cards stacked -->
+  <rect x="320" y="56" width="136" height="136" rx="14" fill="#1f1600" stroke="#ffd700" stroke-width="2.5"/>
+  <polygon points="388,78 394,96 414,96 398,106 404,124 388,114 372,124 378,106 362,96 382,96" fill="#ffd700" opacity="0.8" transform="scale(0.75) translate(130 30)"/>
+  <text x="336" y="178" font-family="monospace" font-size="14" fill="#ffd700">128px</text>
+  <rect x="320" y="212" width="88" height="88" rx="12" fill="#1f1600" stroke="#d4a800" stroke-width="2"/>
+  <polygon points="364,224 368,236 382,236 372,242 376,254 364,248 352,254 356,242 346,236 360,236" fill="#d4a800" opacity="0.8"/>
+  <text x="328" y="314" font-family="monospace" font-size="13" fill="#d4a800">64px</text>
+  <rect x="320" y="316" width="60" height="60" rx="10" fill="#1f1600" stroke="#b8860b" stroke-width="1.5"/>
+  <polygon points="350,326 353,334 362,334 356,338 358,346 350,342 342,346 344,338 338,334 347,334" fill="#b8860b" opacity="0.7"/>
+  <text x="328" y="390" font-family="monospace" font-size="12" fill="#b8860b">48px</text>
+  <rect x="390" y="316" width="40" height="40" rx="8" fill="#1f1600" stroke="#8B6914" stroke-width="1.5"/>
+  <text x="394" y="342" font-family="monospace" font-size="14" fill="#8B6914">32</text>
+  <rect x="390" y="370" width="26" height="26" rx="6" fill="#1f1600" stroke="#5d4400" stroke-width="1.5"/>
+  <text x="394" y="389" font-family="monospace" font-size="12" fill="#5d4400">16</text>
+  <!-- ICO output badge -->
+  <rect x="56" y="356" width="240" height="64" rx="12" fill="#1f1600" stroke="#ffd700" stroke-width="2"/>
+  <text x="80" y="382" font-family="monospace" font-size="16" fill="#ffd700" font-weight="bold">icon.ico</text>
+  <text x="80" y="404" font-family="monospace" font-size="12" fill="#b8860b">All sizes packed · ICO v1.0</text>
+  <!-- Arrow down -->
+  <line x1="176" y1="320" x2="176" y2="356" stroke="#ffd700" stroke-width="2" stroke-dasharray="4,3" opacity="0.7"/>
+  <polygon points="176,360 168,346 184,346" fill="#ffd700" opacity="0.7"/>
+  <!-- Layers count right -->
+  <rect x="440" y="56" width="24" height="300" rx="6" fill="#1f1600" stroke="#8B6914" stroke-width="1"/>
+  <rect x="440" y="56" width="24" height="100" rx="6" fill="#ffd700" opacity="0.6"/>
+  <text x="440" y="370" font-family="monospace" font-size="10" fill="#8B6914" transform="rotate(90 452 370)">6 sizes</text>
+</svg>

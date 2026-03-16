@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0F0F23"/>
+      <stop offset="100%" style="stop-color:#1A1A3A"/>
+    </linearGradient>
+    <linearGradient id="bar1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#7C83FD"/>
+      <stop offset="100%" style="stop-color:#4B52D9"/>
+    </linearGradient>
+    <linearGradient id="bar2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#FC6C85"/>
+      <stop offset="100%" style="stop-color:#C9355A"/>
+    </linearGradient>
+    <linearGradient id="bar3" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#43E97B"/>
+      <stop offset="100%" style="stop-color:#1B8A45"/>
+    </linearGradient>
+    <linearGradient id="bar4" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#FDB44B"/>
+      <stop offset="100%" style="stop-color:#C07818"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Grid lines -->
+  <line x1="80" y1="120" x2="432" y2="120" stroke="#2A2A4A" stroke-width="1"/>
+  <line x1="80" y1="185" x2="432" y2="185" stroke="#2A2A4A" stroke-width="1"/>
+  <line x1="80" y1="250" x2="432" y2="250" stroke="#2A2A4A" stroke-width="1"/>
+  <line x1="80" y1="315" x2="432" y2="315" stroke="#2A2A4A" stroke-width="1"/>
+  <line x1="80" y1="380" x2="432" y2="380" stroke="#444460" stroke-width="2"/>
+  <!-- Bars -->
+  <rect x="105" y="155" width="60" height="225" rx="8" fill="url(#bar1)"/>
+  <rect x="200" y="185" width="60" height="195" rx="8" fill="url(#bar2)"/>
+  <rect x="295" y="130" width="60" height="250" rx="8" fill="url(#bar3)"/>
+  <rect x="390" y="215" width="60" height="165" rx="8" fill="url(#bar4)"/>
+  <!-- Bar labels -->
+  <text x="135" y="400" text-anchor="middle" font-family="monospace" font-size="12" fill="#7C83FD">CPU</text>
+  <text x="230" y="400" text-anchor="middle" font-family="monospace" font-size="12" fill="#FC6C85">MEM</text>
+  <text x="325" y="400" text-anchor="middle" font-family="monospace" font-size="12" fill="#43E97B">DISK</text>
+  <text x="420" y="400" text-anchor="middle" font-family="monospace" font-size="12" fill="#FDB44B">NET</text>
+  <!-- Value labels -->
+  <text x="135" y="148" text-anchor="middle" font-family="monospace" font-size="14" fill="#7C83FD" font-weight="bold">65%</text>
+  <text x="230" y="178" text-anchor="middle" font-family="monospace" font-size="14" fill="#FC6C85" font-weight="bold">54%</text>
+  <text x="325" y="123" text-anchor="middle" font-family="monospace" font-size="14" fill="#43E97B" font-weight="bold">72%</text>
+  <text x="420" y="208" text-anchor="middle" font-family="monospace" font-size="14" fill="#FDB44B" font-weight="bold">45%</text>
+  <!-- Title -->
+  <text x="256" y="460" text-anchor="middle" font-family="monospace" font-size="16" fill="#6060A0" letter-spacing="2">BENCHMARK</text>
+</svg>

@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#311b92"/>
+      <stop offset="100%" stop-color="#4527a0"/>
+    </linearGradient>
+    <linearGradient id="fg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ea80fc"/>
+      <stop offset="100%" stop-color="#f3e5f5"/>
+    </linearGradient>
+    <linearGradient id="log" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#b39ddb"/>
+      <stop offset="100%" stop-color="#ede7f6"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- tail 명령어의 고양이 꼬리 은유 -->
+  <!-- 고양이 몸체 (단순화) -->
+  <ellipse cx="200" cy="220" rx="90" ry="70" fill="url(#fg)" opacity="0.4"/>
+  <!-- 귀 -->
+  <polygon points="145,165 130,130 170,155" fill="url(#fg)" opacity="0.6"/>
+  <polygon points="255,165 270,130 230,155" fill="url(#fg)" opacity="0.6"/>
+  <!-- 눈 -->
+  <ellipse cx="175" cy="205" rx="14" ry="16" fill="#1a0530"/>
+  <ellipse cx="225" cy="205" rx="14" ry="16" fill="#1a0530"/>
+  <circle cx="175" cy="205" r="5" fill="url(#fg)"/>
+  <circle cx="225" cy="205" r="5" fill="url(#fg)"/>
+  <!-- 꼬리 (로그 스트림으로 변환) -->
+  <path d="M290 250 Q370 240 400 290 Q430 340 380 380 Q340 410 310 380 Q350 350 340 310 Q330 270 300 270 Z" fill="none" stroke="url(#fg)" stroke-width="10" stroke-linecap="round"/>
+  <!-- 꼬리 끝에서 로그 라인으로 변환 -->
+  <rect x="320" y="390" width="120" height="10" rx="3" fill="url(#log)" opacity="0.9"/>
+  <rect x="310" y="410" width="130" height="10" rx="3" fill="url(#log)" opacity="0.8"/>
+  <rect x="315" y="430" width="115" height="10" rx="3" fill="url(#log)" opacity="0.7"/>
+  <!-- 수염 -->
+  <line x1="110" y1="215" x2="145" y2="220" stroke="url(#fg)" stroke-width="3" opacity="0.7"/>
+  <line x1="110" y1="225" x2="145" y2="225" stroke="url(#fg)" stroke-width="3" opacity="0.7"/>
+  <line x1="255" y1="220" x2="290" y2="215" stroke="url(#fg)" stroke-width="3" opacity="0.7"/>
+  <line x1="255" y1="225" x2="290" y2="225" stroke="url(#fg)" stroke-width="3" opacity="0.7"/>
+</svg>

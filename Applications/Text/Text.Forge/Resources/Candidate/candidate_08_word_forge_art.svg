@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e003d"/>
+      <stop offset="100%" stop-color="#0d001a"/>
+    </linearGradient>
+    <linearGradient id="crystalGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff00ff"/>
+      <stop offset="50%" stop-color="#bf00ff"/>
+      <stop offset="100%" stop-color="#7b00ff"/>
+    </linearGradient>
+    <linearGradient id="swordGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#e0e0ff"/>
+      <stop offset="50%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#a0a0dd"/>
+    </linearGradient>
+    <radialGradient id="orbGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ff80ff"/>
+      <stop offset="100%" stop-color="#8000ff"/>
+    </radialGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="6" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Magic orb -->
+  <circle cx="256" cy="230" r="70" fill="url(#orbGrad)" opacity="0.25" filter="url(#glow)"/>
+  <!-- Sword with text etched -->
+  <path d="M256 100 L270 360 L256 385 L242 360 Z" fill="url(#swordGrad)" filter="url(#glow)"/>
+  <!-- Sword guard -->
+  <rect x="210" y="355" width="92" height="16" rx="8" fill="#c0a040"/>
+  <!-- Handle -->
+  <rect x="244" y="370" width="24" height="60" rx="6" fill="#8b5e2a"/>
+  <rect x="248" y="380" width="16" height="42" rx="4" fill="#a06a30"/>
+  <!-- Rune letters on sword -->
+  <rect x="251" y="155" width="10" height="30" rx="2" fill="url(#crystalGrad)" opacity="0.9"/>
+  <rect x="246" y="155" width="20" height="6" rx="2" fill="url(#crystalGrad)" opacity="0.9"/>
+  <rect x="251" y="205" width="10" height="30" rx="2" fill="url(#crystalGrad)" opacity="0.8"/>
+  <rect x="246" y="225" width="20" height="6" rx="2" fill="url(#crystalGrad)" opacity="0.8"/>
+  <!-- Floating letter particles -->
+  <circle cx="180" cy="200" r="6" fill="#ff00ff" opacity="0.7" filter="url(#glow)"/>
+  <circle cx="330" cy="180" r="4" fill="#bf00ff" opacity="0.6" filter="url(#glow)"/>
+  <circle cx="160" cy="280" r="5" fill="#ff80ff" opacity="0.5" filter="url(#glow)"/>
+  <circle cx="360" cy="260" r="4" fill="#7b00ff" opacity="0.7" filter="url(#glow)"/>
+</svg>

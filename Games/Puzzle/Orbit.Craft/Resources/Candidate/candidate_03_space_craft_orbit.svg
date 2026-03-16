@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0c0c1e"/>
+      <stop offset="100%" style="stop-color:#1a1040"/>
+    </linearGradient>
+    <linearGradient id="craft" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#e2e8f0"/>
+      <stop offset="100%" style="stop-color:#94a3b8"/>
+    </linearGradient>
+    <radialGradient id="planet" cx="35%" cy="35%" r="65%">
+      <stop offset="0%" style="stop-color:#818cf8"/>
+      <stop offset="100%" style="stop-color:#3730a3"/>
+    </radialGradient>
+    <filter id="glow"><feGaussianBlur stdDeviation="8" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <filter id="thrust"><feGaussianBlur stdDeviation="6" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Star field -->
+  <circle cx="90" cy="90" r="1.5" fill="#fff" opacity="0.7"/>
+  <circle cx="200" cy="60" r="1" fill="#fff" opacity="0.5"/>
+  <circle cx="420" cy="100" r="2" fill="#fff" opacity="0.8"/>
+  <circle cx="460" cy="300" r="1.5" fill="#fff" opacity="0.6"/>
+  <circle cx="70" cy="380" r="1.5" fill="#fff" opacity="0.6"/>
+  <circle cx="420" cy="430" r="1" fill="#fff" opacity="0.5"/>
+  <!-- Planet -->
+  <circle cx="256" cy="256" r="80" fill="url(#planet)" filter="url(#glow)"/>
+  <!-- Planet ring -->
+  <ellipse cx="256" cy="256" rx="120" ry="24" fill="none" stroke="#818cf880" stroke-width="8" transform="rotate(-20 256 256)"/>
+  <!-- Orbital path (ellipse) -->
+  <ellipse cx="256" cy="256" rx="180" ry="120" fill="none" stroke="#ffffff20" stroke-width="2" stroke-dasharray="8,6"/>
+  <!-- Spacecraft at orbital position (top-right of ellipse) -->
+  <g transform="translate(400 148) rotate(60)">
+    <!-- Body -->
+    <polygon points="0,-20 -10,10 0,6 10,10" fill="url(#craft)"/>
+    <!-- Wings -->
+    <polygon points="-10,0 -28,12 -10,8" fill="#64748b"/>
+    <polygon points="10,0 28,12 10,8" fill="#64748b"/>
+    <!-- Engine glow -->
+    <ellipse cx="0" cy="14" rx="5" ry="10" fill="#f97316" filter="url(#thrust)" opacity="0.8"/>
+  </g>
+  <!-- Speed lines (trajectory) -->
+  <path d="M400,148 Q420,200 396,250" stroke="#818cf840" stroke-width="2" fill="none" stroke-dasharray="5,4"/>
+</svg>

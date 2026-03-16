@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1E1B0A"/>
+      <stop offset="100%" style="stop-color:#2E2B1A"/>
+    </linearGradient>
+    <linearGradient id="box" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#D4A843"/>
+      <stop offset="100%" style="stop-color:#A07828"/>
+    </linearGradient>
+    <linearGradient id="lid" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#E8C060"/>
+      <stop offset="100%" style="stop-color:#C09030"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Box body -->
+  <rect x="90" y="220" width="332" height="210" rx="10" fill="url(#box)"/>
+  <!-- Box lid (slightly open) -->
+  <rect x="80" y="170" width="352" height="60" rx="10" fill="url(#lid)"/>
+  <rect x="90" y="175" width="332" height="48" rx="8" fill="#E8C060" opacity="0.5"/>
+  <!-- Lid stripe -->
+  <rect x="210" y="170" width="92" height="60" rx="0" fill="#C09030" opacity="0.4"/>
+  <!-- Box contents (registry files) -->
+  <rect x="120" y="250" width="70" height="90" rx="5" fill="#3A2A0A" stroke="#C09030" stroke-width="2"/>
+  <text x="155" y="285" text-anchor="middle" font-family="monospace" font-size="10" fill="#FFCC44">REG</text>
+  <text x="155" y="300" text-anchor="middle" font-family="monospace" font-size="9" fill="#FFAA22">HKLM</text>
+  <rect x="210" y="260" width="70" height="80" rx="5" fill="#3A2A0A" stroke="#C09030" stroke-width="2"/>
+  <text x="245" y="293" text-anchor="middle" font-family="monospace" font-size="10" fill="#FFCC44">BAK</text>
+  <text x="245" y="308" text-anchor="middle" font-family="monospace" font-size="9" fill="#FFAA22">2024</text>
+  <rect x="300" y="245" width="70" height="95" rx="5" fill="#3A2A0A" stroke="#C09030" stroke-width="2"/>
+  <text x="335" y="281" text-anchor="middle" font-family="monospace" font-size="10" fill="#FFCC44">SYS</text>
+  <text x="335" y="296" text-anchor="middle" font-family="monospace" font-size="9" fill="#FFAA22">USER</text>
+  <!-- Arrow down (backup action) -->
+  <path d="M256 110 L256 155 M236 135 L256 158 L276 135" stroke="#E8C060" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</svg>

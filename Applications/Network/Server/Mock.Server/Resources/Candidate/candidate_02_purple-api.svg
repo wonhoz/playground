@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A0533"/>
+      <stop offset="100%" stop-color="#2D1B69"/>
+    </linearGradient>
+    <linearGradient id="card" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7B2FBE"/>
+      <stop offset="100%" stop-color="#9D4EDD"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Central hub -->
+  <circle cx="256" cy="220" r="80" fill="url(#card)" opacity="0.9"/>
+  <!-- API text area -->
+  <rect x="210" y="200" width="92" height="40" rx="6" fill="#1A0533" opacity="0.7"/>
+  <text x="256" y="226" text-anchor="middle" font-family="monospace" font-size="22" font-weight="bold" fill="#E0B3FF">API</text>
+  <!-- Bracket symbol -->
+  <text x="224" y="218" text-anchor="middle" font-family="monospace" font-size="28" fill="#C77DFF" opacity="0.7">{</text>
+  <text x="288" y="218" text-anchor="middle" font-family="monospace" font-size="28" fill="#C77DFF" opacity="0.7">}</text>
+  <!-- Connection spokes -->
+  <line x1="256" y1="140" x2="256" y2="90" stroke="#9D4EDD" stroke-width="4"/>
+  <line x1="320" y1="170" x2="360" y2="130" stroke="#9D4EDD" stroke-width="4"/>
+  <line x1="336" y1="240" x2="390" y2="240" stroke="#9D4EDD" stroke-width="4"/>
+  <line x1="176" y1="170" x2="136" y2="130" stroke="#9D4EDD" stroke-width="4"/>
+  <line x1="176" y1="240" x2="122" y2="240" stroke="#9D4EDD" stroke-width="4"/>
+  <!-- Endpoint nodes -->
+  <rect x="220" y="64" width="72" height="36" rx="8" fill="#7B2FBE"/>
+  <text x="256" y="87" text-anchor="middle" font-family="monospace" font-size="13" fill="#E0B3FF">GET</text>
+  <rect x="348" y="108" width="72" height="36" rx="8" fill="#7B2FBE"/>
+  <text x="384" y="131" text-anchor="middle" font-family="monospace" font-size="13" fill="#E0B3FF">POST</text>
+  <rect x="378" y="222" width="72" height="36" rx="8" fill="#7B2FBE"/>
+  <text x="414" y="245" text-anchor="middle" font-family="monospace" font-size="13" fill="#E0B3FF">PUT</text>
+  <rect x="90" y="108" width="72" height="36" rx="8" fill="#7B2FBE"/>
+  <text x="126" y="131" text-anchor="middle" font-family="monospace" font-size="13" fill="#E0B3FF">DEL</text>
+  <rect x="54" y="222" width="80" height="36" rx="8" fill="#7B2FBE"/>
+  <text x="94" y="245" text-anchor="middle" font-family="monospace" font-size="13" fill="#E0B3FF">PATCH</text>
+  <!-- Mock badge -->
+  <rect x="160" y="340" width="192" height="52" rx="14" fill="#9D4EDD" opacity="0.85"/>
+  <text x="256" y="373" text-anchor="middle" font-family="monospace" font-size="22" font-weight="bold" fill="#FFFFFF">MOCK</text>
+</svg>

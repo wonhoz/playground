@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0D0020"/>
+      <stop offset="100%" stop-color="#1A0040"/>
+    </linearGradient>
+    <linearGradient id="purple1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7C4DFF"/>
+      <stop offset="100%" stop-color="#4527A0"/>
+    </linearGradient>
+    <linearGradient id="purple2" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#B388FF"/>
+      <stop offset="100%" stop-color="#7C4DFF"/>
+    </linearGradient>
+    <radialGradient id="vp" cx="50%" cy="50%" r="15%">
+      <stop offset="0%" stop-color="#EDE7F6"/>
+      <stop offset="100%" stop-color="#B388FF"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Vanishing point perspective lines -->
+  <!-- Vanishing point at center -->
+  <circle cx="256" cy="256" r="10" fill="url(#vp)"/>
+  <!-- Perspective lines outward -->
+  <line x1="256" y1="256" x2="80" y2="80" stroke="#7C4DFF" stroke-width="1.5" opacity="0.6"/>
+  <line x1="256" y1="256" x2="256" y2="60" stroke="#7C4DFF" stroke-width="1.5" opacity="0.6"/>
+  <line x1="256" y1="256" x2="432" y2="80" stroke="#7C4DFF" stroke-width="1.5" opacity="0.6"/>
+  <line x1="256" y1="256" x2="60" y2="256" stroke="#7C4DFF" stroke-width="1.5" opacity="0.6"/>
+  <line x1="256" y1="256" x2="452" y2="256" stroke="#7C4DFF" stroke-width="1.5" opacity="0.6"/>
+  <line x1="256" y1="256" x2="80" y2="432" stroke="#7C4DFF" stroke-width="1.5" opacity="0.6"/>
+  <line x1="256" y1="256" x2="256" y2="452" stroke="#7C4DFF" stroke-width="1.5" opacity="0.6"/>
+  <line x1="256" y1="256" x2="432" y2="432" stroke="#7C4DFF" stroke-width="1.5" opacity="0.6"/>
+  <!-- Floating geometric shapes at different perspectives -->
+  <!-- Near shape (large) -->
+  <polygon points="256,140 310,200 256,260 202,200" fill="url(#purple1)" opacity="0.7"/>
+  <!-- Far shape (small, shifted) -->
+  <polygon points="360,300 390,324 360,348 330,324" fill="url(#purple2)" opacity="0.8"/>
+  <!-- Another shifted shape -->
+  <polygon points="152,300 182,324 152,348 122,324" fill="url(#purple2)" opacity="0.8"/>
+  <!-- Shift indicator arrows -->
+  <path d="M290 200 L330 324" stroke="#B388FF" stroke-width="2" stroke-dasharray="6,4" opacity="0.6"/>
+  <path d="M222 200 L182 324" stroke="#B388FF" stroke-width="2" stroke-dasharray="6,4" opacity="0.6"/>
+  <!-- Perspective grid circles -->
+  <circle cx="256" cy="256" r="60" fill="none" stroke="#7C4DFF" stroke-width="1" opacity="0.3"/>
+  <circle cx="256" cy="256" r="120" fill="none" stroke="#7C4DFF" stroke-width="1" opacity="0.2"/>
+  <circle cx="256" cy="256" r="180" fill="none" stroke="#7C4DFF" stroke-width="1" opacity="0.1"/>
+</svg>

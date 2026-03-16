@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#050010"/>
+      <stop offset="100%" stop-color="#0a0020"/>
+    </linearGradient>
+    <radialGradient id="platGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#1a1030"/>
+      <stop offset="100%" stop-color="#0d0820"/>
+    </radialGradient>
+    <linearGradient id="slipmatGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3a1060"/>
+      <stop offset="100%" stop-color="#1a0840"/>
+    </linearGradient>
+    <filter id="djGlow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <radialGradient id="labelDJ" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ff006e"/>
+      <stop offset="50%" stop-color="#8338ec"/>
+      <stop offset="100%" stop-color="#3a86ff"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Turntable base -->
+  <rect x="65" y="200" width="382" height="255" rx="18" fill="#0d0820" stroke="#2a1a40" stroke-width="2"/>
+  <!-- Platter -->
+  <circle cx="210" cy="330" r="140" fill="url(#platGrad)"/>
+  <!-- Slipmat -->
+  <circle cx="210" cy="330" r="128" fill="url(#slipmatGrad)"/>
+  <!-- Vinyl record grooves -->
+  <circle cx="210" cy="330" r="120" fill="none" stroke="#ffffff" stroke-width="0.5" opacity="0.1"/>
+  <circle cx="210" cy="330" r="108" fill="none" stroke="#ffffff" stroke-width="0.5" opacity="0.1"/>
+  <circle cx="210" cy="330" r="96" fill="none" stroke="#ffffff" stroke-width="0.5" opacity="0.08"/>
+  <circle cx="210" cy="330" r="84" fill="none" stroke="#ffffff" stroke-width="0.5" opacity="0.08"/>
+  <circle cx="210" cy="330" r="72" fill="none" stroke="#ffffff" stroke-width="0.5" opacity="0.06"/>
+  <!-- Center label -->
+  <circle cx="210" cy="330" r="55" fill="url(#labelDJ)" filter="url(#djGlow)"/>
+  <circle cx="210" cy="330" r="40" fill="none" stroke="#ffffff" stroke-width="1" opacity="0.3"/>
+  <circle cx="210" cy="330" r="8" fill="#0d0820"/>
+  <!-- Tonearm pivot -->
+  <circle cx="375" cy="240" r="18" fill="#1a1030" stroke="#a855f7" stroke-width="2" filter="url(#djGlow)"/>
+  <circle cx="375" cy="240" r="9" fill="#a855f7"/>
+  <!-- Tonearm -->
+  <path d="M375 258 L295 375" fill="none" stroke="#c4b5fd" stroke-width="6" stroke-linecap="round"/>
+  <rect x="284" y="368" width="20" height="14" rx="3" fill="#888" stroke="#a855f7" stroke-width="1"/>
+  <!-- Needle glow -->
+  <circle cx="294" cy="378" r="5" fill="#00e5ff" filter="url(#djGlow)"/>
+  <!-- Mixer section (right) -->
+  <rect x="360" y="310" width="72" height="115" rx="8" fill="#0a0818" stroke="#2a1a40" stroke-width="1.5"/>
+  <!-- Mixer knobs -->
+  <circle cx="382" cy="335" r="12" fill="#1a1030" stroke="#7c3aed" stroke-width="2" filter="url(#djGlow)"/>
+  <circle cx="418" cy="335" r="12" fill="#1a1030" stroke="#7c3aed" stroke-width="2" filter="url(#djGlow)"/>
+  <circle cx="382" cy="372" r="12" fill="#1a1030" stroke="#a855f7" stroke-width="2" filter="url(#djGlow)"/>
+  <circle cx="418" cy="372" r="12" fill="#1a1030" stroke="#a855f7" stroke-width="2" filter="url(#djGlow)"/>
+  <!-- VU meter bars -->
+  <rect x="372" y="395" width="8" height="24" rx="2" fill="#06d6a0" opacity="0.8"/>
+  <rect x="384" y="402" width="8" height="17" rx="2" fill="#06d6a0" opacity="0.7"/>
+  <rect x="396" y="400" width="8" height="19" rx="2" fill="#ffbe0b" opacity="0.8"/>
+  <rect x="408" y="395" width="8" height="24" rx="2" fill="#ff006e" opacity="0.8"/>
+  <!-- Pitch slider -->
+  <rect x="90" y="310" width="16" height="80" rx="4" fill="#1a1030" stroke="#555" stroke-width="1"/>
+  <rect x="88" y="340" width="20" height="12" rx="3" fill="#a855f7"/>
+</svg>

@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a1a2e"/>
+      <stop offset="100%" stop-color="#0f3460"/>
+    </linearGradient>
+    <linearGradient id="arrow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#64b5f6"/>
+      <stop offset="100%" stop-color="#1565c0"/>
+    </linearGradient>
+    <linearGradient id="anvil" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#90a4ae"/>
+      <stop offset="100%" stop-color="#37474f"/>
+    </linearGradient>
+    <filter id="glow"><feGaussianBlur stdDeviation="8"/></filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- anvil -->
+  <rect x="130" y="340" width="252" height="50" rx="10" fill="url(#anvil)"/>
+  <path d="M160 340 Q180 290 256 285 Q332 290 352 340 Z" fill="#78909c"/>
+  <rect x="170" y="375" width="172" height="30" rx="8" fill="#546e7a"/>
+  <!-- arrow being forged -->
+  <path d="M140 200 L310 200 L310 160 L390 240 L310 320 L310 280 L140 280 Z" fill="url(#arrow)" filter="url(#glow)"/>
+  <ellipse cx="220" cy="240" rx="30" ry="8" fill="white" opacity="0.2" transform="rotate(-5 220 240)"/>
+  <!-- sparks from forging -->
+  <circle cx="256" cy="290" r="6" fill="#ffe082"/>
+  <line x1="240" y1="284" x2="228" y2="272" stroke="#ffe082" stroke-width="2"/>
+  <line x1="256" y1="282" x2="256" y2="268" stroke="#fff9c4" stroke-width="2"/>
+  <line x1="270" y1="284" x2="282" y2="272" stroke="#ff9800" stroke-width="2"/>
+  <line x1="245" y1="288" x2="235" y2="302" stroke="#ffcc02" stroke-width="2"/>
+  <line x1="268" y1="288" x2="278" y2="302" stroke="#ffe082" stroke-width="2"/>
+</svg>

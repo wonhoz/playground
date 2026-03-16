@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a0800"/>
+      <stop offset="100%" stop-color="#2d1200"/>
+    </linearGradient>
+    <linearGradient id="winGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#431407"/>
+      <stop offset="100%" stop-color="#7c2d12"/>
+    </linearGradient>
+    <linearGradient id="activeWin" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ea580c"/>
+      <stop offset="100%" stop-color="#c2410c"/>
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="6" dy="6" stdDeviation="10" flood-color="#000" flood-opacity="0.6"/>
+    </filter>
+    <marker id="arrowOrange" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="#fb923c"/>
+    </marker>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- 드래그 경로 (점선) -->
+  <path d="M160,180 C200,140 300,340 360,320" fill="none" stroke="#fb923c" stroke-width="2.5" stroke-dasharray="10,6" opacity="0.5" marker-end="url(#arrowOrange)"/>
+  <!-- 원래 위치 창 (반투명) -->
+  <rect x="90" y="140" width="160" height="120" rx="8" fill="url(#winGrad)" stroke="#92400e" stroke-width="1.5" opacity="0.4"/>
+  <rect x="90" y="140" width="160" height="24" rx="8" fill="#431407" opacity="0.4"/>
+  <!-- 드래그 중인 창 (원본에서 분리된 느낌) -->
+  <rect x="272" y="262" width="160" height="120" rx="8" fill="url(#activeWin)" stroke="#fb923c" stroke-width="2.5" filter="url(#shadow)"/>
+  <rect x="272" y="262" width="160" height="24" rx="8" fill="#c2410c"/>
+  <rect x="272" y="274" width="160" height="12" rx="0" fill="#c2410c"/>
+  <circle cx="290" cy="274" r="5" fill="#fca5a5"/>
+  <circle cx="308" cy="274" r="5" fill="#fde68a"/>
+  <circle cx="326" cy="274" r="5" fill="#86efac"/>
+  <!-- 창 내부 -->
+  <rect x="284" y="296" width="80" height="6" rx="2" fill="#fed7aa" opacity="0.6"/>
+  <rect x="284" y="310" width="120" height="6" rx="2" fill="#fed7aa" opacity="0.4"/>
+  <rect x="284" y="324" width="60" height="6" rx="2" fill="#fed7aa" opacity="0.5"/>
+  <!-- 커서 아이콘 -->
+  <polygon points="270,240 270,278 280,268 288,280 294,276 286,264 300,262" fill="white" stroke="#1a0800" stroke-width="2"/>
+  <!-- 목표 위치 표시 (점선 박스) -->
+  <rect x="272" y="262" width="160" height="120" rx="8" fill="none" stroke="#fb923c" stroke-width="2" stroke-dasharray="8,4" opacity="0.4"/>
+</svg>

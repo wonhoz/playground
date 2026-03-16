@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0D1117"/>
+      <stop offset="100%" stop-color="#161B22"/>
+    </linearGradient>
+    <linearGradient id="node" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#238636"/>
+      <stop offset="100%" stop-color="#2EA043"/>
+    </linearGradient>
+    <linearGradient id="nodeB" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1F6FEB"/>
+      <stop offset="100%" stop-color="#388BFD"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Root node: explorer.exe -->
+  <rect x="176" y="60" width="160" height="40" rx="8" fill="url(#node)"/>
+  <text x="256" y="85" text-anchor="middle" font-family="Segoe UI" font-size="16" font-weight="700" fill="#FFF">explorer.exe</text>
+  <!-- Branch lines -->
+  <line x1="256" y1="100" x2="256" y2="120" stroke="#30363D" stroke-width="2"/>
+  <line x1="130" y1="120" x2="382" y2="120" stroke="#30363D" stroke-width="2"/>
+  <line x1="130" y1="120" x2="130" y2="145" stroke="#30363D" stroke-width="2"/>
+  <line x1="256" y1="120" x2="256" y2="145" stroke="#30363D" stroke-width="2"/>
+  <line x1="382" y1="120" x2="382" y2="145" stroke="#30363D" stroke-width="2"/>
+  <!-- Level 2 nodes -->
+  <rect x="62" y="145" width="136" height="36" rx="7" fill="url(#nodeB)"/>
+  <text x="130" y="167" text-anchor="middle" font-family="Segoe UI" font-size="14" fill="#FFF">chrome.exe</text>
+  <rect x="188" y="145" width="136" height="36" rx="7" fill="url(#nodeB)"/>
+  <text x="256" y="167" text-anchor="middle" font-family="Segoe UI" font-size="14" fill="#FFF">notepad.exe</text>
+  <rect x="314" y="145" width="136" height="36" rx="7" fill="url(#nodeB)"/>
+  <text x="382" y="167" text-anchor="middle" font-family="Segoe UI" font-size="14" fill="#FFF">code.exe</text>
+  <!-- Chrome children -->
+  <line x1="130" y1="181" x2="130" y2="200" stroke="#30363D" stroke-width="2"/>
+  <line x1="90" y1="200" x2="170" y2="200" stroke="#30363D" stroke-width="2"/>
+  <line x1="90" y1="200" x2="90" y2="220" stroke="#30363D" stroke-width="2"/>
+  <line x1="170" y1="200" x2="170" y2="220" stroke="#30363D" stroke-width="2"/>
+  <rect x="36" y="220" width="108" height="30" rx="6" fill="#21262D" stroke="#30363D" stroke-width="1.5"/>
+  <text x="90" y="239" text-anchor="middle" font-family="Segoe UI" font-size="12" fill="#8B949E">chrome (renderer)</text>
+  <rect x="116" y="220" width="108" height="30" rx="6" fill="#21262D" stroke="#30363D" stroke-width="1.5"/>
+  <text x="170" y="239" text-anchor="middle" font-family="Segoe UI" font-size="12" fill="#8B949E">chrome (gpu)</text>
+  <!-- code.exe children -->
+  <line x1="382" y1="181" x2="382" y2="200" stroke="#30363D" stroke-width="2"/>
+  <line x1="326" y1="200" x2="438" y2="200" stroke="#30363D" stroke-width="2"/>
+  <line x1="326" y1="200" x2="326" y2="220" stroke="#30363D" stroke-width="2"/>
+  <line x1="438" y1="200" x2="438" y2="220" stroke="#30363D" stroke-width="2"/>
+  <rect x="272" y="220" width="108" height="30" rx="6" fill="#21262D" stroke="#30363D" stroke-width="1.5"/>
+  <text x="326" y="239" text-anchor="middle" font-family="Segoe UI" font-size="12" fill="#8B949E">code (extension)</text>
+  <rect x="384" y="220" width="108" height="30" rx="6" fill="#21262D" stroke="#30363D" stroke-width="1.5"/>
+  <text x="438" y="239" text-anchor="middle" font-family="Segoe UI" font-size="12" fill="#8B949E">code (worker)</text>
+  <!-- Window info cards bottom -->
+  <rect x="56" y="290" width="400" height="172" rx="10" fill="#161B22" stroke="#30363D" stroke-width="1.5"/>
+  <text x="76" y="315" font-family="Segoe UI" font-size="14" fill="#58A6FF" font-weight="600">Window Details</text>
+  <line x1="56" y1="324" x2="456" y2="324" stroke="#30363D" stroke-width="1"/>
+  <text x="76" y="346" font-family="Segoe UI" font-size="13" fill="#8B949E">Handle:   0x00080034</text>
+  <text x="76" y="368" font-family="Segoe UI" font-size="13" fill="#8B949E">Class:    Chrome_WidgetWin_1</text>
+  <text x="76" y="390" font-family="Segoe UI" font-size="13" fill="#8B949E">Position: (100, 80)   Size: 1280x720</text>
+  <text x="76" y="412" font-family="Segoe UI" font-size="13" fill="#8B949E">Style:    WS_OVERLAPPEDWINDOW</text>
+  <text x="76" y="434" font-family="Segoe UI" font-size="13" fill="#8B949E">Visible:  true   Enabled: true</text>
+  <text x="256" y="487" text-anchor="middle" font-family="Segoe UI" font-size="22" font-weight="700" fill="#238636">WIN.SCOPE</text>
+</svg>

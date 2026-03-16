@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#001400"/>
+      <stop offset="100%" style="stop-color:#002800"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Matrix rain glyphs (neon green) -->
+  <text x="80" y="90" font-family="monospace" font-size="20" fill="#00FF41" opacity="0.9" filter="url(#glow)">Ω Σ Δ</text>
+  <text x="80" y="120" font-family="monospace" font-size="20" fill="#00FF41" opacity="0.6">π α θ</text>
+  <text x="80" y="150" font-family="monospace" font-size="20" fill="#00FF41" opacity="0.4">λ μ ξ</text>
+  <text x="80" y="180" font-family="monospace" font-size="20" fill="#00FF41" opacity="0.2">φ ψ β</text>
+  <text x="190" y="110" font-family="monospace" font-size="20" fill="#00FF41" opacity="0.8" filter="url(#glow)">★ ♦ ♥</text>
+  <text x="190" y="140" font-family="monospace" font-size="20" fill="#00FF41" opacity="0.5">♠ ♣ ©</text>
+  <text x="190" y="170" font-family="monospace" font-size="20" fill="#00FF41" opacity="0.3">® ™ ∞</text>
+  <text x="300" y="90" font-family="monospace" font-size="20" fill="#00FF41" opacity="0.7" filter="url(#glow)">漢 字 가</text>
+  <text x="300" y="120" font-family="monospace" font-size="20" fill="#00FF41" opacity="0.5">나 다 라</text>
+  <text x="300" y="150" font-family="monospace" font-size="20" fill="#00FF41" opacity="0.3">マ ミ ム</text>
+  <text x="395" y="110" font-family="monospace" font-size="20" fill="#00FF41" opacity="0.9" filter="url(#glow)">Ж Ш Я</text>
+  <text x="395" y="140" font-family="monospace" font-size="20" fill="#00FF41" opacity="0.5">Д Э Ю</text>
+  <!-- Featured glyph panel -->
+  <rect x="100" y="230" width="312" height="180" rx="12" fill="#001A00" stroke="#00FF41" stroke-width="3" filter="url(#glow)" opacity="0.9"/>
+  <text x="256" y="365" text-anchor="middle" font-family="serif" font-size="130" fill="#00FF41" filter="url(#glow)">Ω</text>
+  <text x="256" y="248" text-anchor="middle" font-family="monospace" font-size="18" fill="#00FF41">U+03A9  GREEK CAPITAL OMEGA</text>
+  <!-- Bottom label -->
+  <text x="256" y="462" text-anchor="middle" font-family="monospace" font-size="24" fill="#00FF41" filter="url(#glow)">GLYPH.MAP</text>
+</svg>

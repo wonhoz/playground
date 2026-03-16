@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#0A0A2E"/>
+      <stop offset="100%" stop-color="#000008"/>
+    </radialGradient>
+    <linearGradient id="ship" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#E0E8FF"/>
+      <stop offset="100%" stop-color="#8090CC"/>
+    </linearGradient>
+    <linearGradient id="engine" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FF8800"/>
+      <stop offset="100%" stop-color="#FF4400"/>
+    </linearGradient>
+    <radialGradient id="blast" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="30%" stop-color="#FFFF00"/>
+      <stop offset="100%" stop-color="#FF4400" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Stars -->
+  <circle cx="80" cy="80" r="1.5" fill="white" opacity="0.8"/>
+  <circle cx="160" cy="50" r="1" fill="white" opacity="0.6"/>
+  <circle cx="420" cy="90" r="2" fill="white" opacity="0.7"/>
+  <circle cx="460" cy="160" r="1.5" fill="white" opacity="0.5"/>
+  <circle cx="50" cy="300" r="1" fill="white" opacity="0.6"/>
+  <circle cx="470" cy="340" r="2" fill="white" opacity="0.5"/>
+  <circle cx="380" cy="440" r="1" fill="white" opacity="0.6"/>
+  <circle cx="100" cy="420" r="1.5" fill="white" opacity="0.5"/>
+  <circle cx="340" cy="60" r="1" fill="white" opacity="0.7"/>
+  <!-- Star glow in background -->
+  <circle cx="256" cy="180" r="60" fill="url(#blast)" opacity="0.15"/>
+  <!-- Fighter ship (pointing up) -->
+  <!-- Main body -->
+  <polygon points="256,80 232,200 256,180 280,200" fill="url(#ship)"/>
+  <!-- Wings -->
+  <polygon points="232,200 160,260 196,220 256,210" fill="#A0B0E0"/>
+  <polygon points="280,200 352,260 316,220 256,210" fill="#A0B0E0"/>
+  <!-- Wing tips red accent -->
+  <polygon points="160,260 148,290 180,268" fill="#FF3344"/>
+  <polygon points="352,260 364,290 332,268" fill="#FF3344"/>
+  <!-- Cockpit -->
+  <ellipse cx="256" cy="155" rx="16" ry="24" fill="#00CCFF" opacity="0.9" filter="url(#glow)"/>
+  <!-- Engine exhausts -->
+  <ellipse cx="238" cy="210" rx="10" ry="16" fill="url(#engine)" filter="url(#glow)" opacity="0.9"/>
+  <ellipse cx="274" cy="210" rx="10" ry="16" fill="url(#engine)" filter="url(#glow)" opacity="0.9"/>
+  <!-- Engine trails -->
+  <rect x="232" y="220" width="12" height="40" rx="6" fill="#FF8800" opacity="0.5" filter="url(#glow)"/>
+  <rect x="268" y="220" width="12" height="40" rx="6" fill="#FF8800" opacity="0.5" filter="url(#glow)"/>
+  <!-- Laser blast going up -->
+  <rect x="252" y="50" width="8" height="36" rx="4" fill="#00FFFF" filter="url(#glow)"/>
+  <rect x="253" y="50" width="6" height="36" rx="3" fill="white" opacity="0.8"/>
+  <!-- Enemy star burst target -->
+  <circle cx="400" cy="120" r="22" fill="#FF2244" opacity="0.8" filter="url(#glow)"/>
+  <!-- Star shape enemy -->
+  <polygon points="400,96 406,110 422,110 410,120 414,136 400,126 386,136 390,120 378,110 394,110" fill="#FF6688" opacity="0.9"/>
+  <!-- Hit flash -->
+  <circle cx="400" cy="120" r="32" fill="none" stroke="#FFFF00" stroke-width="2" opacity="0.6" filter="url(#glow)"/>
+</svg>

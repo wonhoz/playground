@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#001440"/>
+      <stop offset="100%" style="stop-color:#002880"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Blueprint grid -->
+  <line x1="80" y1="130" x2="432" y2="130" stroke="#0033AA" stroke-width="1" opacity="0.5"/>
+  <line x1="80" y1="180" x2="432" y2="180" stroke="#0033AA" stroke-width="1" opacity="0.5"/>
+  <line x1="80" y1="230" x2="432" y2="230" stroke="#0033AA" stroke-width="1" opacity="0.5"/>
+  <line x1="80" y1="280" x2="432" y2="280" stroke="#0033AA" stroke-width="1" opacity="0.5"/>
+  <line x1="80" y1="330" x2="432" y2="330" stroke="#0033AA" stroke-width="1" opacity="0.5"/>
+  <line x1="80" y1="380" x2="432" y2="380" stroke="#0033AA" stroke-width="1" opacity="0.5"/>
+  <line x1="130" y1="80" x2="130" y2="432" stroke="#0033AA" stroke-width="1" opacity="0.5"/>
+  <line x1="180" y1="80" x2="180" y2="432" stroke="#0033AA" stroke-width="1" opacity="0.5"/>
+  <line x1="230" y1="80" x2="230" y2="432" stroke="#0033AA" stroke-width="1" opacity="0.5"/>
+  <line x1="280" y1="80" x2="280" y2="432" stroke="#0033AA" stroke-width="1" opacity="0.5"/>
+  <line x1="330" y1="80" x2="330" y2="432" stroke="#0033AA" stroke-width="1" opacity="0.5"/>
+  <line x1="380" y1="80" x2="380" y2="432" stroke="#0033AA" stroke-width="1" opacity="0.5"/>
+  <!-- Table schema boxes -->
+  <rect x="90" y="140" width="150" height="120" rx="6" fill="none" stroke="#4488FF" stroke-width="2"/>
+  <rect x="90" y="140" width="150" height="28" rx="6" fill="#1144CC" opacity="0.7"/>
+  <text x="165" y="160" text-anchor="middle" font-family="monospace" font-size="13" fill="#AACCFF">users</text>
+  <text x="100" y="186" font-family="monospace" font-size="11" fill="#7799CC">PK id INT</text>
+  <text x="100" y="204" font-family="monospace" font-size="11" fill="#7799CC">name VARCHAR</text>
+  <text x="100" y="222" font-family="monospace" font-size="11" fill="#7799CC">score INT</text>
+  <!-- Relationship line -->
+  <line x1="240" y1="200" x2="280" y2="200" stroke="#4488FF" stroke-width="2"/>
+  <rect x="280" y="155" width="140" height="90" rx="6" fill="none" stroke="#44AAFF" stroke-width="2"/>
+  <rect x="280" y="155" width="140" height="28" rx="6" fill="#1155CC" opacity="0.7"/>
+  <text x="350" y="175" text-anchor="middle" font-family="monospace" font-size="13" fill="#AACCFF">scores</text>
+  <text x="290" y="200" font-family="monospace" font-size="11" fill="#7799CC">PK id INT</text>
+  <text x="290" y="218" font-family="monospace" font-size="11" fill="#7799CC">FK uid INT</text>
+  <!-- Query text -->
+  <text x="90" y="310" font-family="monospace" font-size="13" fill="#44CCFF">SELECT * FROM</text>
+  <text x="90" y="330" font-family="monospace" font-size="13" fill="#44CCFF">users JOIN scores</text>
+  <!-- Magnifier -->
+  <circle cx="390" cy="360" r="42" fill="none" stroke="#FFDD44" stroke-width="5"/>
+  <line x1="420" y1="390" x2="440" y2="410" stroke="#FFDD44" stroke-width="8" stroke-linecap="round"/>
+  <text x="390" y="366" text-anchor="middle" font-family="monospace" font-size="14" fill="#FFDD44">idx</text>
+</svg>

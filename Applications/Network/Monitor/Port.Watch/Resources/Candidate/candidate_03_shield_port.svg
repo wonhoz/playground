@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f0c29"/>
+      <stop offset="50%" stop-color="#302b63"/>
+      <stop offset="100%" stop-color="#24243e"/>
+    </linearGradient>
+    <linearGradient id="shield" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4facfe"/>
+      <stop offset="100%" stop-color="#00f2fe"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Shield shape -->
+  <path d="M256,100 L380,150 L380,280 Q380,380 256,430 Q132,380 132,280 L132,150 Z" fill="url(#shield)" opacity="0.2" stroke="url(#shield)" stroke-width="3"/>
+  <!-- Shield inner detail -->
+  <path d="M256,130 L360,172 L360,276 Q360,356 256,400 Q152,356 152,276 L152,172 Z" fill="none" stroke="#4facfe" stroke-width="1.5" opacity="0.5"/>
+  <!-- Port number display -->
+  <text x="256" y="240" text-anchor="middle" font-family="monospace" font-size="36" fill="#00f2fe" font-weight="bold">:8080</text>
+  <text x="256" y="275" text-anchor="middle" font-family="monospace" font-size="16" fill="#4facfe" opacity="0.8">LISTENING</text>
+  <!-- Status indicator -->
+  <circle cx="256" cy="320" r="14" fill="#00ff88"/>
+  <circle cx="256" cy="320" r="20" fill="none" stroke="#00ff88" stroke-width="2" opacity="0.5"/>
+  <!-- Top emblem - eye/watch -->
+  <ellipse cx="256" cy="170" rx="30" ry="18" fill="none" stroke="#00f2fe" stroke-width="2.5"/>
+  <circle cx="256" cy="170" r="9" fill="#4facfe"/>
+  <!-- Scan lines -->
+  <line x1="175" y1="290" x2="337" y2="290" stroke="#4facfe" stroke-width="1" opacity="0.4" stroke-dasharray="4 3"/>
+  <line x1="175" y1="305" x2="337" y2="305" stroke="#4facfe" stroke-width="1" opacity="0.3" stroke-dasharray="4 3"/>
+</svg>

@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0c0c1e"/>
+      <stop offset="100%" stop-color="#1a0a2e"/>
+    </linearGradient>
+    <linearGradient id="colorSide" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ff6b6b"/>
+      <stop offset="100%" stop-color="#feca57"/>
+    </linearGradient>
+    <linearGradient id="grSide" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#636e72"/>
+      <stop offset="100%" stop-color="#2d3436"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <clipPath id="clip1">
+    <polygon points="70,70 442,70 70,442"/>
+  </clipPath>
+  <clipPath id="clip2">
+    <polygon points="442,70 442,442 70,442"/>
+  </clipPath>
+  <!-- Left triangle (before - greyscale) -->
+  <rect x="70" y="70" width="372" height="372" rx="12" fill="url(#grSide)" clip-path="url(#clip1)"/>
+  <!-- Greyscale photo elements -->
+  <circle cx="180" cy="200" r="50" fill="#888" opacity="0.5" clip-path="url(#clip1)"/>
+  <rect x="120" y="310" width="180" height="60" rx="8" fill="#aaa" opacity="0.3" clip-path="url(#clip1)"/>
+  <!-- Right triangle (after - color) -->
+  <rect x="70" y="70" width="372" height="372" rx="12" fill="url(#colorSide)" clip-path="url(#clip2)"/>
+  <!-- Color photo elements -->
+  <circle cx="320" cy="280" r="50" fill="#ff6b6b" opacity="0.5" clip-path="url(#clip2)"/>
+  <rect x="280" y="310" width="130" height="60" rx="8" fill="#feca57" opacity="0.3" clip-path="url(#clip2)"/>
+  <!-- Outer frame -->
+  <rect x="70" y="70" width="372" height="372" rx="12" fill="none" stroke="#ffffff30" stroke-width="3"/>
+  <!-- Diagonal divider line -->
+  <line x1="70" y1="70" x2="442" y2="442" stroke="white" stroke-width="6" stroke-linecap="round"/>
+  <!-- Diagonal arrow indicators -->
+  <circle cx="256" cy="256" r="20" fill="white" opacity="0.9"/>
+  <line x1="246" y1="256" x2="266" y2="256" stroke="#333" stroke-width="3"/>
+  <line x1="256" y1="246" x2="256" y2="266" stroke="#333" stroke-width="3"/>
+  <!-- Labels -->
+  <text x="150" y="420" text-anchor="middle" font-family="Arial" font-size="20" fill="white" opacity="0.7" transform="rotate(-45,150,420)">BEFORE</text>
+  <text x="380" y="160" text-anchor="middle" font-family="Arial" font-size="20" fill="white" opacity="0.7" transform="rotate(-45,380,160)">AFTER</text>
+</svg>

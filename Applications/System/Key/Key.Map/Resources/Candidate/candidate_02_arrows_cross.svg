@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0a1628"/>
+      <stop offset="100%" stop-color="#162840"/>
+    </linearGradient>
+    <linearGradient id="keyFrom" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ef4444"/>
+      <stop offset="100%" stop-color="#dc2626"/>
+    </linearGradient>
+    <linearGradient id="keyTo" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#22c55e"/>
+      <stop offset="100%" stop-color="#16a34a"/>
+    </linearGradient>
+    <linearGradient id="line" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ef4444"/>
+      <stop offset="100%" stop-color="#22c55e"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Source keys (left) -->
+  <rect x="60" y="100" width="70" height="70" rx="12" fill="url(#keyFrom)"/>
+  <text x="95" y="143" text-anchor="middle" font-family="monospace" font-size="22" font-weight="bold" fill="white">A</text>
+  <rect x="60" y="200" width="70" height="70" rx="12" fill="url(#keyFrom)"/>
+  <text x="95" y="243" text-anchor="middle" font-family="monospace" font-size="22" font-weight="bold" fill="white">B</text>
+  <rect x="60" y="300" width="70" height="70" rx="12" fill="url(#keyFrom)"/>
+  <text x="95" y="343" text-anchor="middle" font-family="monospace" font-size="22" font-weight="bold" fill="white">C</text>
+  <!-- Target keys (right) -->
+  <rect x="382" y="100" width="70" height="70" rx="12" fill="url(#keyTo)"/>
+  <text x="417" y="143" text-anchor="middle" font-family="monospace" font-size="22" font-weight="bold" fill="white">X</text>
+  <rect x="382" y="200" width="70" height="70" rx="12" fill="url(#keyTo)"/>
+  <text x="417" y="243" text-anchor="middle" font-family="monospace" font-size="22" font-weight="bold" fill="white">Y</text>
+  <rect x="382" y="300" width="70" height="70" rx="12" fill="url(#keyTo)"/>
+  <text x="417" y="343" text-anchor="middle" font-family="monospace" font-size="22" font-weight="bold" fill="white">Z</text>
+  <!-- Crossing remap lines -->
+  <!-- A -> Z -->
+  <path d="M135,135 Q256,135 382,335" fill="none" stroke="#ef4444" stroke-width="3" stroke-dasharray="8,5" opacity="0.7"/>
+  <!-- B -> X -->
+  <path d="M135,235 Q256,235 382,135" fill="none" stroke="#f97316" stroke-width="3" stroke-dasharray="8,5" opacity="0.7"/>
+  <!-- C -> Y -->
+  <path d="M135,335 Q256,256 382,235" fill="none" stroke="#eab308" stroke-width="3" stroke-dasharray="8,5" opacity="0.7"/>
+  <!-- Arrow heads -->
+  <polygon points="378,330 388,340 378,350" fill="#ef4444" opacity="0.8"/>
+  <polygon points="378,130 388,140 378,150" fill="#f97316" opacity="0.8"/>
+  <polygon points="378,228 388,238 378,248" fill="#eab308" opacity="0.8"/>
+  <!-- Center label -->
+  <rect x="196" y="228" width="120" height="48" rx="10" fill="#1a2840"/>
+  <text x="256" y="248" text-anchor="middle" font-family="Arial" font-size="12" fill="#888">REMAP</text>
+  <text x="256" y="268" text-anchor="middle" font-family="Arial" font-size="20" font-weight="bold" fill="#60a5fa">A→Z</text>
+  <!-- Title -->
+  <text x="256" y="430" text-anchor="middle" font-family="Arial" font-size="18" font-weight="bold" fill="#60a5fa" opacity="0.7">KEY REMAP</text>
+</svg>

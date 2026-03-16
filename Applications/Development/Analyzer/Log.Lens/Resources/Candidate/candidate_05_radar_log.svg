@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#1a2a1a"/>
+      <stop offset="100%" stop-color="#0a0a0a"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Radar rings -->
+  <circle cx="256" cy="256" r="160" fill="none" stroke="#1b5e20" stroke-width="2"/>
+  <circle cx="256" cy="256" r="120" fill="none" stroke="#1b5e20" stroke-width="2"/>
+  <circle cx="256" cy="256" r="80" fill="none" stroke="#1b5e20" stroke-width="2"/>
+  <circle cx="256" cy="256" r="40" fill="none" stroke="#1b5e20" stroke-width="2"/>
+  <!-- Crosshairs -->
+  <line x1="96" y1="256" x2="416" y2="256" stroke="#1b5e20" stroke-width="1.5"/>
+  <line x1="256" y1="96" x2="256" y2="416" stroke="#1b5e20" stroke-width="1.5"/>
+  <!-- Radar sweep -->
+  <path d="M256 256 L256 96 A160 160 0 0 1 415 296 Z" fill="#4caf50" opacity="0.15"/>
+  <line x1="256" y1="256" x2="415" y2="296" stroke="#4caf50" stroke-width="3" opacity="0.8"/>
+  <!-- Log error blips -->
+  <circle cx="340" cy="180" r="8" fill="#ef5350"/>
+  <circle cx="180" cy="300" r="6" fill="#ffd740"/>
+  <circle cx="310" cy="320" r="5" fill="#ef5350"/>
+  <circle cx="220" cy="200" r="4" fill="#4caf50"/>
+  <!-- Ripple on error blip -->
+  <circle cx="340" cy="180" r="18" fill="none" stroke="#ef5350" stroke-width="2" opacity="0.5"/>
+  <circle cx="340" cy="180" r="30" fill="none" stroke="#ef5350" stroke-width="1" opacity="0.3"/>
+  <!-- Center dot -->
+  <circle cx="256" cy="256" r="6" fill="#76ff03"/>
+  <!-- LOG text at top -->
+  <text x="256" y="60" font-family="monospace" font-size="32" font-weight="bold" fill="#4caf50" text-anchor="middle">LOG LENS</text>
+</svg>

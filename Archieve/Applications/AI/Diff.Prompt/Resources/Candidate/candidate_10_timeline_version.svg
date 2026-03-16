@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0D1B2A"/>
+      <stop offset="100%" stop-color="#1B263B"/>
+    </linearGradient>
+    <linearGradient id="timelineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#415A77"/>
+      <stop offset="100%" stop-color="#778DA9"/>
+    </linearGradient>
+    <linearGradient id="nodeA" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E0FBFC"/>
+      <stop offset="100%" stop-color="#98C1D9"/>
+    </linearGradient>
+    <linearGradient id="diffBar" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#EF4444"/>
+      <stop offset="100%" stop-color="#22C55E"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Timeline spine -->
+  <line x1="80" y1="256" x2="432" y2="256" stroke="url(#timelineGrad)" stroke-width="4"/>
+  <!-- Version nodes -->
+  <!-- v1 -->
+  <circle cx="110" cy="256" r="20" fill="#293241" stroke="#415A77" stroke-width="3"/>
+  <text x="110" y="262" font-family="monospace" font-size="11" fill="#98C1D9" text-anchor="middle">v1</text>
+  <rect x="75" y="180" width="70" height="55" rx="8" fill="#1B263B" stroke="#415A77" stroke-width="1.5"/>
+  <rect x="83" y="193" width="54" height="8" rx="4" fill="#415A77"/>
+  <rect x="83" y="208" width="40" height="8" rx="4" fill="#415A77"/>
+  <line x1="110" y1="236" x2="110" y2="180" stroke="#415A77" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <!-- v2 -->
+  <circle cx="200" cy="256" r="20" fill="#293241" stroke="#778DA9" stroke-width="3"/>
+  <text x="200" y="262" font-family="monospace" font-size="11" fill="#E0FBFC" text-anchor="middle">v2</text>
+  <rect x="165" y="180" width="70" height="55" rx="8" fill="#1B263B" stroke="#778DA9" stroke-width="1.5"/>
+  <rect x="173" y="193" width="54" height="8" rx="4" fill="#778DA9"/>
+  <rect x="173" y="208" width="46" height="8" rx="4" fill="#EF4444" opacity="0.7"/>
+  <line x1="200" y1="236" x2="200" y2="180" stroke="#778DA9" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <!-- v3 -->
+  <circle cx="290" cy="256" r="20" fill="#293241" stroke="#F97316" stroke-width="3"/>
+  <text x="290" y="262" font-family="monospace" font-size="11" fill="#FDBA74" text-anchor="middle">v3</text>
+  <rect x="255" y="300" width="70" height="55" rx="8" fill="#1B263B" stroke="#F97316" stroke-width="1.5"/>
+  <rect x="263" y="313" width="54" height="8" rx="4" fill="#F97316"/>
+  <rect x="263" y="328" width="42" height="8" rx="4" fill="#22C55E" opacity="0.8"/>
+  <line x1="290" y1="276" x2="290" y2="300" stroke="#F97316" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <!-- v4 (current) -->
+  <circle cx="400" cy="256" r="26" fill="#1B263B" stroke="#22C55E" stroke-width="4"/>
+  <text x="400" y="262" font-family="monospace" font-size="12" fill="#4ADE80" text-anchor="middle">v4</text>
+  <rect x="358" y="180" width="84" height="55" rx="8" fill="#14532D" stroke="#22C55E" stroke-width="2"/>
+  <rect x="366" y="193" width="68" height="8" rx="4" fill="#22C55E"/>
+  <rect x="366" y="208" width="52" height="8" rx="4" fill="#22C55E" opacity="0.7"/>
+  <line x1="400" y1="230" x2="400" y2="180" stroke="#22C55E" stroke-width="2" stroke-dasharray="4,3"/>
+  <!-- diff bar at bottom -->
+  <text x="256" y="405" font-family="sans-serif" font-size="14" fill="#778DA9" text-anchor="middle">Diff: v2 → v4</text>
+  <rect x="80" y="418" width="352" height="18" rx="9" fill="#1B263B" stroke="#415A77" stroke-width="1"/>
+  <rect x="80" y="418" width="220" height="18" rx="9" fill="url(#diffBar)" opacity="0.75"/>
+  <text x="256" y="458" font-family="sans-serif" font-size="13" fill="#98C1D9" text-anchor="middle">+14 / -8 / ~22 tokens changed</text>
+</svg>

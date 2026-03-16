@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a1a2e"/>
+      <stop offset="100%" stop-color="#2e2e4a"/>
+    </linearGradient>
+    <linearGradient id="robotBody" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3a3a5a"/>
+      <stop offset="100%" stop-color="#2a2a4a"/>
+    </linearGradient>
+    <linearGradient id="screen" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#00aaff"/>
+      <stop offset="100%" stop-color="#0066cc"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Robot body -->
+  <rect x="176" y="200" width="160" height="140" rx="16" fill="url(#robotBody)" stroke="#5a5a8a" stroke-width="3"/>
+  <!-- Robot head -->
+  <rect x="186" y="120" width="140" height="100" rx="20" fill="url(#robotBody)" stroke="#5a5a8a" stroke-width="3"/>
+  <!-- Screen on head (display) -->
+  <rect x="206" y="136" width="100" height="60" rx="8" fill="url(#screen)"/>
+  <!-- Performance bar on screen -->
+  <rect x="214" y="148" width="84" height="10" rx="3" fill="#0033aa"/>
+  <rect x="214" y="148" width="60" height="10" rx="3" fill="#00ffff"/>
+  <text x="256" y="178" text-anchor="middle" font-family="monospace" font-size="11" fill="#fff" font-weight="bold">88%</text>
+  <!-- Antenna -->
+  <line x1="256" y1="120" x2="256" y2="90" stroke="#5a5a8a" stroke-width="4"/>
+  <circle cx="256" cy="84" r="8" fill="#00aaff"/>
+  <!-- Robot arms -->
+  <rect x="100" y="215" width="76" height="30" rx="10" fill="url(#robotBody)" stroke="#5a5a8a" stroke-width="2"/>
+  <rect x="336" y="215" width="76" height="30" rx="10" fill="url(#robotBody)" stroke="#5a5a8a" stroke-width="2"/>
+  <!-- Fist/gear on arms -->
+  <circle cx="105" cy="230" r="14" fill="#3a3a5a" stroke="#5a5a8a" stroke-width="2"/>
+  <circle cx="407" cy="230" r="14" fill="#3a3a5a" stroke="#5a5a8a" stroke-width="2"/>
+  <!-- Benchmark gauges on body -->
+  <text x="220" y="248" font-family="monospace" font-size="10" fill="#aaaacc">CPU</text>
+  <rect x="246" y="238" width="70" height="10" rx="3" fill="#1a1a3a"/>
+  <rect x="246" y="238" width="56" height="10" rx="3" fill="#818cf8"/>
+  <text x="220" y="270" font-family="monospace" font-size="10" fill="#aaaacc">MEM</text>
+  <rect x="246" y="260" width="70" height="10" rx="3" fill="#1a1a3a"/>
+  <rect x="246" y="260" width="43" height="10" rx="3" fill="#34d399"/>
+  <text x="220" y="292" font-family="monospace" font-size="10" fill="#aaaacc">DISK</text>
+  <rect x="246" y="282" width="70" height="10" rx="3" fill="#1a1a3a"/>
+  <rect x="246" y="282" width="62" height="10" rx="3" fill="#fb923c"/>
+  <!-- Robot legs -->
+  <rect x="196" y="340" width="44" height="60" rx="8" fill="url(#robotBody)" stroke="#5a5a8a" stroke-width="2"/>
+  <rect x="272" y="340" width="44" height="60" rx="8" fill="url(#robotBody)" stroke="#5a5a8a" stroke-width="2"/>
+  <!-- Score badge -->
+  <text x="256" y="430" text-anchor="middle" font-family="monospace" font-size="16" fill="#a78bfa" font-weight="bold">SCORE: 9842</text>
+</svg>

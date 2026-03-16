@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#001840"/>
+      <stop offset="100%" stop-color="#000010"/>
+    </radialGradient>
+    <linearGradient id="beam" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="50%" stop-color="#44AAFF"/>
+      <stop offset="100%" stop-color="#0044FF" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="ship" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#DDEEFF"/>
+      <stop offset="100%" stop-color="#4477AA"/>
+    </linearGradient>
+    <radialGradient id="planet" cx="40%" cy="35%" r="60%">
+      <stop offset="0%" stop-color="#2244BB"/>
+      <stop offset="100%" stop-color="#001066"/>
+    </radialGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Planet in background -->
+  <circle cx="390" cy="150" r="88" fill="url(#planet)" opacity="0.6"/>
+  <circle cx="390" cy="150" r="88" fill="none" stroke="#4488FF" stroke-width="1" opacity="0.3"/>
+  <!-- Planet ring -->
+  <ellipse cx="390" cy="150" rx="120" ry="28" fill="none" stroke="#6699FF" stroke-width="3" opacity="0.5"/>
+  <!-- Stars -->
+  <circle cx="60" cy="80" r="1.5" fill="white" opacity="0.8"/>
+  <circle cx="180" cy="40" r="1" fill="white" opacity="0.6"/>
+  <circle cx="460" cy="320" r="1.5" fill="white" opacity="0.7"/>
+  <circle cx="80" cy="260" r="1" fill="white" opacity="0.5"/>
+  <circle cx="100" cy="430" r="1.5" fill="#AACCFF" opacity="0.6"/>
+  <!-- Main ship body -->
+  <g transform="translate(200, 320)">
+    <polygon points="0,-72 -28,20 0,-8 28,20" fill="url(#ship)"/>
+    <polygon points="-28,20 -88,52 -52,28 0,-5" fill="#8899BB"/>
+    <polygon points="28,20 88,52 52,28 0,-5" fill="#8899BB"/>
+    <!-- Cannons -->
+    <rect x="-88" y="45" width="20" height="8" rx="4" fill="#AABBDD"/>
+    <rect x="68" y="45" width="20" height="8" rx="4" fill="#AABBDD"/>
+    <ellipse cx="0" cy="-42" rx="12" ry="18" fill="#44CCFF" opacity="0.9" filter="url(#glow)"/>
+    <ellipse cx="-14" cy="22" rx="8" ry="13" fill="#0088FF" filter="url(#glow)" opacity="0.9"/>
+    <ellipse cx="14" cy="22" rx="8" ry="13" fill="#0088FF" filter="url(#glow)" opacity="0.9"/>
+  </g>
+  <!-- Triple laser beam -->
+  <rect x="192" y="60" width="7" height="180" rx="3.5" fill="url(#beam)" filter="url(#glow)" opacity="0.9"/>
+  <rect x="204" y="40" width="5" height="200" rx="2.5" fill="url(#beam)" filter="url(#glow)" opacity="0.7"/>
+  <rect x="216" y="60" width="7" height="180" rx="3.5" fill="url(#beam)" filter="url(#glow)" opacity="0.9"/>
+  <!-- Impact explosion -->
+  <circle cx="204" cy="80" r="28" fill="#4488FF" opacity="0.25" filter="url(#glow)"/>
+  <circle cx="204" cy="80" r="14" fill="#88CCFF" opacity="0.4" filter="url(#glow)"/>
+  <circle cx="204" cy="80" r="5" fill="white" opacity="0.8"/>
+</svg>

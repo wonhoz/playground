@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A0A00"/>
+      <stop offset="100%" stop-color="#2D1500"/>
+    </linearGradient>
+    <radialGradient id="screenGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FF6600" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#FF6600" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Monitor frame -->
+  <rect x="80" y="80" width="352" height="260" rx="12" fill="#1A1A1A" stroke="#FF6600" stroke-width="3"/>
+  <rect x="92" y="92" width="328" height="236" rx="6" fill="#000000"/>
+  <rect x="92" y="92" width="328" height="236" rx="6" fill="url(#screenGlow)"/>
+  <!-- Terminal text lines -->
+  <text x="108" y="130" font-family="'Courier New', monospace" font-size="18" fill="#FF6600" filter="url(#glow)">KEY TESTER v2.0</text>
+  <text x="108" y="158" font-family="'Courier New', monospace" font-size="14" fill="#FF6600" opacity="0.8">&gt; Press any key...</text>
+  <text x="108" y="184" font-family="'Courier New', monospace" font-size="14" fill="#FF8800" opacity="0.9">&gt; KEY: [SPACE] OK</text>
+  <text x="108" y="210" font-family="'Courier New', monospace" font-size="14" fill="#FF8800" opacity="0.9">&gt; KEY: [ENTER] OK</text>
+  <text x="108" y="236" font-family="'Courier New', monospace" font-size="14" fill="#FF6600" opacity="0.7">&gt; KEY: [ESC]   OK</text>
+  <text x="108" y="262" font-family="'Courier New', monospace" font-size="14" fill="#FF6600" opacity="0.8">&gt; _</text>
+  <!-- Cursor blink -->
+  <rect x="120" y="268" width="10" height="16" fill="#FF6600" filter="url(#glow)"/>
+  <!-- Stand -->
+  <rect x="220" y="340" width="72" height="16" rx="4" fill="#333333"/>
+  <rect x="180" y="354" width="152" height="12" rx="6" fill="#444444"/>
+  <!-- Mini keyboard -->
+  <rect x="96" y="384" width="320" height="80" rx="10" fill="#222222" stroke="#FF6600" stroke-width="1.5"/>
+  <rect x="112" y="396" width="28" height="22" rx="4" fill="#1A1A1A" stroke="#FF6600" stroke-width="1"/>
+  <rect x="148" y="396" width="28" height="22" rx="4" fill="#1A1A1A" stroke="#FF6600" stroke-width="1"/>
+  <rect x="184" y="396" width="28" height="22" rx="4" fill="#1A1A1A" stroke="#FF6600" stroke-width="1"/>
+  <rect x="220" y="396" width="28" height="22" rx="4" fill="#FF6600" stroke="#FF6600" stroke-width="1" filter="url(#glow)"/>
+  <rect x="256" y="396" width="28" height="22" rx="4" fill="#1A1A1A" stroke="#FF6600" stroke-width="1"/>
+  <rect x="292" y="396" width="28" height="22" rx="4" fill="#1A1A1A" stroke="#FF6600" stroke-width="1"/>
+  <rect x="328" y="396" width="52" height="22" rx="4" fill="#1A1A1A" stroke="#FF6600" stroke-width="1"/>
+  <rect x="112" y="428" width="268" height="22" rx="4" fill="#1A1A1A" stroke="#FF6600" stroke-width="1"/>
+</svg>

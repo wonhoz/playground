@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0a1a"/>
+      <stop offset="100%" stop-color="#1a0a2e"/>
+    </linearGradient>
+    <linearGradient id="pencilGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffd700"/>
+      <stop offset="80%" stop-color="#ff8c00"/>
+      <stop offset="100%" stop-color="#f5c5a3"/>
+    </linearGradient>
+    <linearGradient id="brainGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f472b6"/>
+      <stop offset="100%" stop-color="#9333ea"/>
+    </linearGradient>
+    <filter id="pencilGlow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <radialGradient id="brainHalo" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#f472b6" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#f472b6" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Brain halo -->
+  <ellipse cx="175" cy="260" rx="130" ry="120" fill="url(#brainHalo)"/>
+  <!-- Brain -->
+  <path d="M110 245 C106 215 118 195 138 200 C142 185 162 178 175 192 C186 174 210 172 218 192 C236 183 254 198 246 218 C266 220 272 242 258 258 C264 275 254 298 236 298 C230 318 212 328 196 320 C185 337 160 337 148 320 C130 327 112 314 110 298 C92 290 88 267 110 245Z" fill="none" stroke="url(#brainGrad)" stroke-width="2.5" filter="url(#pencilGlow)"/>
+  <!-- Brain fold lines -->
+  <path d="M138 220 C148 210 163 215 158 230" fill="none" stroke="#f472b6" stroke-width="1.8" opacity="0.6"/>
+  <path d="M188 205 C198 196 210 202 205 218" fill="none" stroke="#9333ea" stroke-width="1.8" opacity="0.6"/>
+  <path d="M125 258 C140 248 160 256 154 272" fill="none" stroke="#f472b6" stroke-width="1.8" opacity="0.5"/>
+  <path d="M205 240 C218 232 232 243 224 258" fill="none" stroke="#9333ea" stroke-width="1.8" opacity="0.5"/>
+  <!-- Glowing nodes on brain -->
+  <circle cx="148" cy="233" r="5" fill="#f472b6" filter="url(#pencilGlow)"/>
+  <circle cx="200" cy="220" r="4" fill="#9333ea" filter="url(#pencilGlow)"/>
+  <circle cx="235" cy="255" r="5" fill="#f472b6" filter="url(#pencilGlow)"/>
+  <circle cx="168" cy="298" r="4" fill="#9333ea" filter="url(#pencilGlow)"/>
+  <!-- Giant glowing pencil -->
+  <g transform="rotate(-35 310 255)">
+    <!-- Pencil body -->
+    <rect x="270" y="150" width="40" height="185" fill="url(#pencilGrad)" filter="url(#pencilGlow)"/>
+    <!-- Pencil tip -->
+    <polygon points="270,335 310,335 290,380" fill="#d4a57a"/>
+    <!-- Pencil graphite tip -->
+    <polygon points="280,365 300,365 290,390" fill="#444"/>
+    <!-- Pencil eraser -->
+    <rect x="270" y="138" width="40" height="18" rx="4" fill="#ff9aa2"/>
+    <!-- Pencil metal band -->
+    <rect x="270" y="155" width="40" height="10" fill="#c0c0c0"/>
+    <!-- Pencil stripe -->
+    <rect x="270" y="180" width="40" height="8" fill="#ffa500" opacity="0.5"/>
+  </g>
+  <!-- Writing sparkles at tip -->
+  <g filter="url(#pencilGlow)">
+    <circle cx="300" cy="380" r="6" fill="#ffd700" opacity="0.9"/>
+    <line x1="300" y1="390" x2="295" y2="405" stroke="#ffd700" stroke-width="2"/>
+    <line x1="300" y1="390" x2="310" y2="403" stroke="#ff8c00" stroke-width="2"/>
+    <line x1="300" y1="390" x2="285" y2="398" stroke="#ffd700" stroke-width="1.5"/>
+    <line x1="300" y1="390" x2="318" y2="395" stroke="#ff8c00" stroke-width="1.5"/>
+  </g>
+  <!-- Connection from brain to pencil -->
+  <path d="M240 270 C260 265 275 260 285 255" fill="none" stroke="url(#brainGrad)" stroke-width="2.5" stroke-dasharray="6,4" filter="url(#pencilGlow)"/>
+</svg>

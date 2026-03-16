@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" style="stop-color:#0d2818"/>
+      <stop offset="100%" style="stop-color:#050d09"/>
+    </radialGradient>
+    <linearGradient id="mic" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#69f0ae"/>
+      <stop offset="100%" style="stop-color:#00897b"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Sound burst rings -->
+  <circle cx="256" cy="256" r="180" fill="none" stroke="#69f0ae" stroke-width="2" opacity="0.15" filter="url(#glow)"/>
+  <circle cx="256" cy="256" r="140" fill="none" stroke="#69f0ae" stroke-width="2" opacity="0.25" filter="url(#glow)"/>
+  <circle cx="256" cy="256" r="100" fill="none" stroke="#69f0ae" stroke-width="3" opacity="0.4" filter="url(#glow)"/>
+  <!-- Microphone body -->
+  <rect x="220" y="100" width="72" height="140" rx="36" fill="url(#mic)" filter="url(#glow)"/>
+  <!-- Mic grille lines -->
+  <line x1="222" y1="130" x2="290" y2="130" stroke="#005a4a" stroke-width="2" opacity="0.5"/>
+  <line x1="220" y1="150" x2="292" y2="150" stroke="#005a4a" stroke-width="2" opacity="0.5"/>
+  <line x1="220" y1="170" x2="292" y2="170" stroke="#005a4a" stroke-width="2" opacity="0.5"/>
+  <line x1="222" y1="190" x2="290" y2="190" stroke="#005a4a" stroke-width="2" opacity="0.5"/>
+  <!-- Mic stand arm -->
+  <path d="M256,240 Q256,280 256,300" stroke="#00897b" stroke-width="10" fill="none" stroke-linecap="round"/>
+  <!-- Stand arc -->
+  <path d="M200,300 Q256,340 312,300" stroke="#00897b" stroke-width="8" fill="none" stroke-linecap="round"/>
+  <line x1="256" y1="338" x2="256" y2="400" stroke="#00897b" stroke-width="10" stroke-linecap="round"/>
+  <rect x="196" y="394" width="120" height="16" rx="8" fill="#00897b"/>
+</svg>

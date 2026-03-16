@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0d0010"/>
+      <stop offset="100%" stop-color="#1a001f"/>
+    </linearGradient>
+    <linearGradient id="b1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f48fb1"/>
+      <stop offset="100%" stop-color="#880e4f"/>
+    </linearGradient>
+    <linearGradient id="b2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ce93d8"/>
+      <stop offset="100%" stop-color="#4a148c"/>
+    </linearGradient>
+    <linearGradient id="b3" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#f06292"/>
+      <stop offset="100%" stop-color="#880e4f"/>
+    </linearGradient>
+    <linearGradient id="b4" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ea80fc"/>
+      <stop offset="100%" stop-color="#6a1b9a"/>
+    </linearGradient>
+    <linearGradient id="b5" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ff80ab"/>
+      <stop offset="100%" stop-color="#ad1457"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Baseline -->
+  <line x1="76" y1="360" x2="436" y2="360" stroke="#6a1b9a" stroke-width="2"/>
+  <!-- Spectrum bars -->
+  <rect x="88"  y="260" width="36" height="100" rx="4" fill="url(#b1)"/>
+  <rect x="136" y="200" width="36" height="160" rx="4" fill="url(#b2)"/>
+  <rect x="184" y="150" width="36" height="210" rx="4" fill="url(#b3)"/>
+  <rect x="232" y="110" width="36" height="250" rx="4" fill="url(#b4)"/>
+  <rect x="280" y="165" width="36" height="195" rx="4" fill="url(#b5)"/>
+  <rect x="328" y="225" width="36" height="135" rx="4" fill="url(#b1)" opacity="0.85"/>
+  <rect x="376" y="290" width="36" height="70" rx="4" fill="url(#b2)" opacity="0.7"/>
+  <!-- Peak dots -->
+  <circle cx="106" cy="255" r="5" fill="#f48fb1"/>
+  <circle cx="154" cy="195" r="5" fill="#ce93d8"/>
+  <circle cx="202" cy="145" r="5" fill="#f06292"/>
+  <circle cx="250" cy="105" r="6" fill="#ea80fc"/>
+  <circle cx="298" cy="160" r="5" fill="#ff80ab"/>
+  <circle cx="346" cy="220" r="5" fill="#f48fb1"/>
+  <circle cx="394" cy="285" r="5" fill="#ce93d8"/>
+  <!-- Connecting peak line -->
+  <polyline points="106,255 154,195 202,145 250,105 298,160 346,220 394,285"
+            stroke="#f48fb1" stroke-width="2" fill="none" stroke-linejoin="round" opacity="0.7"/>
+  <!-- Label -->
+  <text x="256" y="455" font-family="monospace" font-size="17" fill="#ce93d8" text-anchor="middle" letter-spacing="3" opacity="0.9">SIGNAL.FLOW</text>
+</svg>

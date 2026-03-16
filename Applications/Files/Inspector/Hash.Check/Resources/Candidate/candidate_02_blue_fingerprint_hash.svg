@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#001030"/>
+      <stop offset="100%" stop-color="#000818"/>
+    </radialGradient>
+    <linearGradient id="fp" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0088FF"/>
+      <stop offset="100%" stop-color="#00AAFF"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Fingerprint arcs -->
+  <path d="M256 256 m-10,0 a10,10 0 1,1 20,0 a10,10 0 1,1 -20,0" fill="none" stroke="#0088FF" stroke-width="4"/>
+  <path d="M256 256 m-30,0 a30,30 0 1,1 60,0 a30,30 0 1,1 -60,0" fill="none" stroke="#0088FF" stroke-width="4" stroke-dasharray="180,20"/>
+  <path d="M256 256 m-55,0 a55,55 0 1,1 110,0 a55,55 0 1,1 -110,0" fill="none" stroke="#0088FF" stroke-width="4" stroke-dasharray="320,30"/>
+  <path d="M256 256 m-80,0 a80,80 0 1,1 160,0 a80,80 0 1,1 -160,0" fill="none" stroke="#0055CC" stroke-width="4" stroke-dasharray="480,20"/>
+  <path d="M256 256 m-105,0 a105,105 0 1,1 210,0 a105,105 0 1,1 -210,0" fill="none" stroke="#0044AA" stroke-width="3.5" stroke-dasharray="620,25"/>
+  <path d="M256 256 m-130,0 a130,130 0 1,1 260,0 a130,130 0 1,1 -260,0" fill="none" stroke="#003388" stroke-width="3" stroke-dasharray="770,25"/>
+  <path d="M256 256 m-155,0 a155,155 0 1,1 310,0 a155,155 0 1,1 -310,0" fill="none" stroke="#002266" stroke-width="3" stroke-dasharray="920,20"/>
+  <!-- Hash text overlay bottom -->
+  <rect x="60" y="420" width="392" height="52" rx="8" fill="#000818"/>
+  <text x="80" y="440" fill="#003388" font-size="11" font-family="monospace">SHA-256</text>
+  <text x="80" y="460" fill="#0066AA" font-size="12" font-family="monospace">a3f9b2c1d4e5f6a7b8c9d0e1f2a3b4c5</text>
+  <!-- Scan line across fingerprint -->
+  <line x1="80" y1="256" x2="432" y2="256" stroke="#00AAFF" stroke-width="2" opacity="0.4" stroke-dasharray="4,4"/>
+</svg>

@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A1000"/>
+      <stop offset="100%" stop-color="#332000"/>
+    </linearGradient>
+    <linearGradient id="lock" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFC107"/>
+      <stop offset="100%" stop-color="#FF8F00"/>
+    </linearGradient>
+    <linearGradient id="body" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFD54F"/>
+      <stop offset="100%" stop-color="#FFA000"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Large lock body -->
+  <rect x="148" y="248" width="216" height="180" rx="20" fill="url(#lock)"/>
+  <!-- Lock shackle -->
+  <path d="M196 248 L196 188 Q196 128 256 128 Q316 128 316 188 L316 248" fill="none" stroke="url(#body)" stroke-width="28" stroke-linecap="round"/>
+  <!-- Keyhole -->
+  <circle cx="256" cy="326" r="28" fill="#332000"/>
+  <rect x="244" y="340" width="24" height="40" rx="6" fill="#332000"/>
+  <!-- PATH variable display -->
+  <rect x="68" y="72" width="376" height="44" rx="8" fill="#332000" stroke="#FFC107" stroke-width="2"/>
+  <text x="84" y="100" font-family="Consolas" font-size="13" fill="#FFC107">PATH=/usr/bin:/usr/local/bin</text>
+  <!-- Checkmark badge -->
+  <circle cx="370" cy="196" r="36" fill="url(#lock)"/>
+  <path d="M350 196 L364 210 L392 180" stroke="#332000" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</svg>

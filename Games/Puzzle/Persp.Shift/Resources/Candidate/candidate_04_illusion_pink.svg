@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A001A"/>
+      <stop offset="100%" stop-color="#2D0030"/>
+    </linearGradient>
+    <linearGradient id="pink1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF4081"/>
+      <stop offset="100%" stop-color="#AD1457"/>
+    </linearGradient>
+    <linearGradient id="pink2" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FF80AB"/>
+      <stop offset="100%" stop-color="#FF4081"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Impossible triangle / Penrose-style illusion -->
+  <!-- Triangle built from 3 blocks -->
+  <!-- Top block -->
+  <polygon points="256,80 310,172 202,172" fill="url(#pink1)" opacity="0.9"/>
+  <!-- Top block face right -->
+  <polygon points="310,172 338,124 256,80" fill="url(#pink2)" opacity="0.7"/>
+  <!-- Bottom left block -->
+  <polygon points="202,172 100,350 148,350" fill="url(#pink1)" opacity="0.9"/>
+  <polygon points="100,350 100,298 202,172" fill="url(#pink2)" opacity="0.7"/>
+  <!-- Bottom right block -->
+  <polygon points="364,172 412,350 310,172" fill="url(#pink1)" opacity="0.9"/>
+  <polygon points="412,350 412,298 364,172" fill="url(#pink2)" opacity="0.7"/>
+  <!-- Bottom bar connecting -->
+  <polygon points="100,350 412,350 388,394 124,394" fill="url(#pink1)" opacity="0.9"/>
+  <!-- Inner impossible gap (dark) -->
+  <polygon points="256,172 310,172 310,350 202,350 202,172 256,172" fill="#1A001A"/>
+  <!-- Necker cube style inner lines -->
+  <line x1="256" y1="172" x2="256" y2="350" stroke="#FF80AB" stroke-width="2" opacity="0.6"/>
+  <!-- Perspective shift indicator -->
+  <path d="M180 430 Q256 410 332 430" stroke="#FF4081" stroke-width="3" fill="none" stroke-dasharray="8,5" opacity="0.7"/>
+  <polygon points="180,423 170,437 190,437" fill="#FF4081" opacity="0.7"/>
+  <polygon points="332,423 322,437 342,437" fill="#FF4081" opacity="0.7"/>
+  <!-- Small observer eye -->
+  <ellipse cx="256" cy="460" rx="28" ry="16" fill="none" stroke="#FF80AB" stroke-width="2" opacity="0.6"/>
+  <circle cx="256" cy="460" r="7" fill="#FF4081" opacity="0.8"/>
+  <circle cx="256" cy="460" r="3" fill="#FF80AB"/>
+</svg>

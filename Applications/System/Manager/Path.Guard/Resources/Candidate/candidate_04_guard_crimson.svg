@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A0000"/>
+      <stop offset="100%" stop-color="#330000"/>
+    </linearGradient>
+    <linearGradient id="red" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F44336"/>
+      <stop offset="100%" stop-color="#B71C1C"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="40%" r="50%">
+      <stop offset="0%" stop-color="#F44336" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#F44336" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <rect x="56" y="56" width="400" height="400" rx="40" fill="url(#glow)"/>
+  <!-- Pentagon shield -->
+  <path d="M256 60 L430 150 L430 300 Q430 420 256 470 Q82 420 82 300 L82 150 Z" fill="url(#red)" opacity="0.15" stroke="url(#red)" stroke-width="4"/>
+  <path d="M256 90 L404 168 L404 298 Q404 400 256 444 Q108 400 108 298 L108 168 Z" fill="#1A0000"/>
+  <!-- Slash warning mark inside shield -->
+  <circle cx="256" cy="256" r="100" fill="none" stroke="#F44336" stroke-width="8"/>
+  <line x1="186" y1="186" x2="326" y2="326" stroke="#F44336" stroke-width="8" stroke-linecap="round"/>
+  <!-- PATH text segments -->
+  <rect x="130" y="230" width="90" height="24" rx="5" fill="#B71C1C" opacity="0.7"/>
+  <rect x="130" y="262" width="70" height="24" rx="5" fill="#B71C1C" opacity="0.7"/>
+  <rect x="292" y="230" width="90" height="24" rx="5" fill="#B71C1C" opacity="0.7"/>
+  <rect x="292" y="262" width="80" height="24" rx="5" fill="#B71C1C" opacity="0.7"/>
+  <!-- Sword/guard symbol top -->
+  <rect x="249" y="90" width="14" height="120" rx="4" fill="#F44336"/>
+  <rect x="219" y="160" width="74" height="10" rx="5" fill="#F44336"/>
+  <circle cx="256" cy="220" r="10" fill="#FF8A80"/>
+</svg>

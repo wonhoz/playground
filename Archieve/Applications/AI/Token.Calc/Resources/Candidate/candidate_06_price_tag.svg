@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#064e3b"/>
+      <stop offset="100%" stop-color="#022c22"/>
+    </linearGradient>
+    <linearGradient id="tagGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#059669"/>
+      <stop offset="100%" stop-color="#047857"/>
+    </linearGradient>
+    <linearGradient id="tagShadow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#047857"/>
+      <stop offset="100%" stop-color="#065f46"/>
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="4" dy="4" stdDeviation="8" flood-color="#000" flood-opacity="0.5"/>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- 가격표 도형 (오른쪽 끝 삼각 절개) -->
+  <polygon points="100,140 350,140 420,256 350,372 100,372" fill="url(#tagGrad)" filter="url(#shadow)"/>
+  <!-- 가격표 구멍 -->
+  <circle cx="148" cy="256" r="22" fill="#022c22" stroke="#34d399" stroke-width="3"/>
+  <!-- 가격표 텍스트 -->
+  <text x="248" y="230" font-family="Arial" font-weight="bold" font-size="32" fill="white" text-anchor="middle" opacity="0.9">TOKEN</text>
+  <text x="248" y="272" font-family="'Courier New', monospace" font-weight="bold" font-size="44" fill="#ecfdf5" text-anchor="middle">$0.002</text>
+  <text x="248" y="308" font-family="Arial" font-size="18" fill="#a7f3d0" text-anchor="middle">per 1K tokens</text>
+  <!-- 장식 줄 -->
+  <line x1="185" y1="250" x2="310" y2="250" stroke="#a7f3d0" stroke-width="1.5" opacity="0.4"/>
+</svg>

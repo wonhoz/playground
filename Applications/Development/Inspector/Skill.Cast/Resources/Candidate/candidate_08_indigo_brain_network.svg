@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0d0020"/>
+      <stop offset="100%" stop-color="#150030"/>
+    </linearGradient>
+    <radialGradient id="brain" cx="50%" cy="45%" r="50%">
+      <stop offset="0%" stop-color="#7c4dff" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#7c4dff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <ellipse cx="256" cy="230" rx="170" ry="140" fill="url(#brain)"/>
+  <!-- Brain outline (simplified) -->
+  <path d="M140 210 Q135 165 165 148 Q185 136 205 148 Q215 125 238 120 Q256 115 274 120 Q297 125 307 148 Q327 136 347 148 Q377 165 372 210 Q385 225 382 250 Q378 280 358 290 Q345 310 325 308 Q310 330 290 332 Q270 348 256 346 Q242 348 222 332 Q202 330 187 308 Q167 310 154 290 Q134 280 130 250 Q127 225 140 210 Z"
+        fill="none" stroke="#7c4dff" stroke-width="2.5" opacity="0.8"/>
+  <!-- Neural connections -->
+  <line x1="200" y1="190" x2="256" y2="220" stroke="#7c4dff" stroke-width="1.5" opacity="0.6"/>
+  <line x1="256" y1="220" x2="310" y2="190" stroke="#7c4dff" stroke-width="1.5" opacity="0.6"/>
+  <line x1="256" y1="220" x2="256" y2="280" stroke="#7c4dff" stroke-width="1.5" opacity="0.6"/>
+  <line x1="200" y1="190" x2="170" y2="240" stroke="#7c4dff" stroke-width="1" opacity="0.5"/>
+  <line x1="310" y1="190" x2="340" y2="240" stroke="#7c4dff" stroke-width="1" opacity="0.5"/>
+  <line x1="256" y1="280" x2="210" y2="315" stroke="#7c4dff" stroke-width="1" opacity="0.5"/>
+  <line x1="256" y1="280" x2="302" y2="315" stroke="#7c4dff" stroke-width="1" opacity="0.5"/>
+  <!-- Nodes with skill labels -->
+  <circle cx="256" cy="220" r="16" fill="#311b92" stroke="#b39ddb" stroke-width="2"/>
+  <text x="256" y="225" font-family="monospace" font-size="8" fill="white" text-anchor="middle">CORE</text>
+  <circle cx="200" cy="190" r="13" fill="#4527a0" stroke="#9575cd" stroke-width="1.5"/>
+  <text x="200" y="194" font-family="monospace" font-size="7" fill="white" text-anchor="middle">C#</text>
+  <circle cx="310" cy="190" r="13" fill="#4527a0" stroke="#9575cd" stroke-width="1.5"/>
+  <text x="310" y="194" font-family="monospace" font-size="7" fill="white" text-anchor="middle">JS</text>
+  <circle cx="256" cy="280" r="13" fill="#4527a0" stroke="#9575cd" stroke-width="1.5"/>
+  <text x="256" y="284" font-family="monospace" font-size="7" fill="white" text-anchor="middle">SQL</text>
+  <circle cx="170" cy="240" r="11" fill="#311b92" stroke="#9575cd" stroke-width="1.5"/>
+  <text x="170" y="244" font-family="monospace" font-size="7" fill="#e1bee7" text-anchor="middle">WPF</text>
+  <circle cx="340" cy="240" r="11" fill="#311b92" stroke="#9575cd" stroke-width="1.5"/>
+  <text x="340" y="244" font-family="monospace" font-size="7" fill="#e1bee7" text-anchor="middle">Git</text>
+  <circle cx="210" cy="315" r="10" fill="#1a0050" stroke="#9575cd" stroke-width="1.5"/>
+  <text x="210" y="319" font-family="monospace" font-size="6" fill="#d1c4e9" text-anchor="middle">CI/CD</text>
+  <circle cx="302" cy="315" r="10" fill="#1a0050" stroke="#9575cd" stroke-width="1.5"/>
+  <text x="302" y="319" font-family="monospace" font-size="6" fill="#d1c4e9" text-anchor="middle">K8s</text>
+  <!-- Title -->
+  <text x="256" y="460" font-family="monospace" font-size="17" fill="#b39ddb" text-anchor="middle" letter-spacing="2" opacity="0.9">SKILL.CAST</text>
+</svg>

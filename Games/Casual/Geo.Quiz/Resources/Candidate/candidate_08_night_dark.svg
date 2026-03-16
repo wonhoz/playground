@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0D1B2A"/>
+      <stop offset="100%" style="stop-color:#1B2838"/>
+    </linearGradient>
+    <radialGradient id="glowgrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#29B6F6" stop-opacity="0.4"/>
+      <stop offset="100%" style="stop-color:#01579B" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="earthnight" cx="40%" cy="40%" r="60%">
+      <stop offset="0%" style="stop-color:#1A3A5C"/>
+      <stop offset="100%" style="stop-color:#0A1628"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Stars -->
+  <circle cx="100" cy="80" r="2" fill="#FFF" opacity="0.8"/>
+  <circle cx="180" cy="55" r="1.5" fill="#FFF" opacity="0.6"/>
+  <circle cx="380" cy="70" r="2" fill="#FFF" opacity="0.9"/>
+  <circle cx="440" cy="100" r="1.5" fill="#FFF" opacity="0.7"/>
+  <circle cx="80" cy="160" r="1.5" fill="#FFF" opacity="0.5"/>
+  <circle cx="420" cy="150" r="2" fill="#FFF" opacity="0.8"/>
+  <!-- Glow behind earth -->
+  <circle cx="256" cy="235" r="175" fill="url(#glowgrad)"/>
+  <!-- Night earth -->
+  <circle cx="256" cy="235" r="145" fill="url(#earthnight)" stroke="#1565C0" stroke-width="3"/>
+  <!-- City lights -->
+  <circle cx="210" cy="185" r="4" fill="#FFD54F" opacity="0.9"/>
+  <circle cx="230" cy="178" r="3" fill="#FFD54F" opacity="0.7"/>
+  <circle cx="250" cy="190" r="3.5" fill="#FFD54F" opacity="0.85"/>
+  <circle cx="290" cy="195" r="3" fill="#FFD54F" opacity="0.75"/>
+  <circle cx="165" cy="225" r="3" fill="#FFD54F" opacity="0.8"/>
+  <circle cx="310" cy="220" r="4" fill="#FFD54F" opacity="0.9"/>
+  <circle cx="340" cy="210" r="2.5" fill="#FFD54F" opacity="0.7"/>
+  <circle cx="275" cy="260" r="3.5" fill="#FFD54F" opacity="0.8"/>
+  <circle cx="190" cy="255" r="3" fill="#FFD54F" opacity="0.7"/>
+  <circle cx="225" cy="270" r="2" fill="#FFD54F" opacity="0.6"/>
+  <!-- Continent outline glow -->
+  <path d="M190,180 Q215,165 245,175 Q260,162 278,172 Q294,183 285,200 Q270,215 248,207 Q225,218 205,205 Q182,200 190,180Z" fill="none" stroke="#2196F3" stroke-width="1.5" opacity="0.4"/>
+  <!-- Question mark glow -->
+  <text x="256" y="448" text-anchor="middle" font-family="Arial Black,sans-serif" font-size="72" font-weight="900" fill="#29B6F6">?</text>
+</svg>

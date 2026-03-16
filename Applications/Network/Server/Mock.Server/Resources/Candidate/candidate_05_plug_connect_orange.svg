@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#431407"/>
+      <stop offset="100%" stop-color="#7C2D12"/>
+    </linearGradient>
+    <linearGradient id="plug" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#EA580C"/>
+      <stop offset="100%" stop-color="#C2410C"/>
+    </linearGradient>
+    <linearGradient id="socket" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0369A1"/>
+      <stop offset="100%" stop-color="#075985"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Client plug (left) -->
+  <rect x="60" y="216" width="120" height="80" rx="12" fill="url(#plug)"/>
+  <!-- Plug pins -->
+  <rect x="176" y="232" width="40" height="14" rx="5" fill="#FED7AA"/>
+  <rect x="176" y="250" width="40" height="14" rx="5" fill="#FED7AA"/>
+  <rect x="176" y="268" width="40" height="14" rx="5" fill="#FED7AA"/>
+  <!-- Client label -->
+  <text x="120" y="208" font-family="Arial" font-size="12" fill="#FED7AA" text-anchor="middle">CLIENT</text>
+  <!-- Connection status: connected lightning bolt -->
+  <circle cx="256" cy="256" r="30" fill="#F97316"/>
+  <polygon points="256,230 244,256 252,256 244,282 268,256 260,256" fill="white"/>
+  <!-- Server socket (right) -->
+  <rect x="332" y="216" width="120" height="80" rx="12" fill="url(#socket)"/>
+  <!-- Socket holes -->
+  <rect x="296" y="232" width="40" height="14" rx="5" fill="#075985"/>
+  <rect x="296" y="250" width="40" height="14" rx="5" fill="#075985"/>
+  <rect x="296" y="268" width="40" height="14" rx="5" fill="#075985"/>
+  <!-- Server label -->
+  <text x="392" y="208" font-family="Arial" font-size="12" fill="#BAE6FD" text-anchor="middle">MOCK SERVER</text>
+  <!-- Wire / cable -->
+  <path d="M180 240 Q216 240 216 256" stroke="#FED7AA" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <path d="M180 272 Q216 272 216 256" stroke="#FED7AA" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <path d="M296 240 Q280 240 280 256" stroke="#BAE6FD" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <path d="M296 272 Q280 272 280 256" stroke="#BAE6FD" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <!-- Request / Response arrows -->
+  <path d="M120 330 L392 330" stroke="#F97316" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <polygon points="392,322 406,330 392,338" fill="#F97316"/>
+  <text x="256" y="320" font-family="Courier New" font-size="11" fill="#FED7AA" text-anchor="middle">GET /api/users →</text>
+  <path d="M392 370 L120 370" stroke="#38BDF8" stroke-width="2.5"/>
+  <polygon points="120,362 106,370 120,378" fill="#38BDF8"/>
+  <text x="256" y="360" font-family="Courier New" font-size="11" fill="#BAE6FD" text-anchor="middle">← 200 [&#123;"id":1,...&#125;]</text>
+  <!-- Port badge -->
+  <rect x="342" y="310" width="80" height="24" rx="6" fill="#075985"/>
+  <text x="382" y="326" font-family="Courier New" font-size="12" fill="#38BDF8" text-anchor="middle">:3000</text>
+</svg>

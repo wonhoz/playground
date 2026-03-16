@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0A1628"/>
+      <stop offset="100%" style="stop-color:#1A2840"/>
+    </linearGradient>
+    <linearGradient id="key" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#3A4A6A"/>
+      <stop offset="100%" style="stop-color:#1A2A4A"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00D4FF"/>
+      <stop offset="100%" style="stop-color:#0088FF"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Keyboard keys -->
+  <!-- Alt key -->
+  <rect x="80" y="200" width="100" height="70" rx="10" fill="url(#key)" stroke="#3A5A8A" stroke-width="2"/>
+  <text x="130" y="243" text-anchor="middle" font-family="Arial" font-weight="bold" font-size="22" fill="#8AAABB">Alt</text>
+  <!-- Plus -->
+  <text x="200" y="244" text-anchor="middle" font-family="Arial" font-size="30" fill="#AABBCC">+</text>
+  <!-- Space key (highlighted) -->
+  <rect x="218" y="200" width="220" height="70" rx="10" fill="url(#accent)" opacity="0.9"/>
+  <text x="328" y="243" text-anchor="middle" font-family="Arial" font-weight="bold" font-size="22" fill="white">Space</text>
+  <!-- Arrow pointing down -->
+  <path d="M256 295 L256 335 M236 315 L256 340 L276 315" stroke="url(#accent)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <!-- Launch bar -->
+  <rect x="80" y="355" width="352" height="60" rx="14" fill="#0D1B2A" stroke="#1A4A7A" stroke-width="2"/>
+  <text x="130" y="393" font-family="monospace" font-size="20" fill="#00D4FF">&#x276F;_</text>
+  <!-- Blink cursor animation suggestion -->
+  <rect x="132" y="370" width="3" height="24" rx="1" fill="#00D4FF" opacity="0.9"/>
+</svg>

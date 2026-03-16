@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#050A10"/>
+      <stop offset="100%" stop-color="#081018"/>
+    </linearGradient>
+    <linearGradient id="monitor" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0A1A28"/>
+      <stop offset="100%" stop-color="#061018"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Main monitor border -->
+  <rect x="56" y="68" width="400" height="296" rx="14" fill="url(#monitor)" stroke="#1A3A5A" stroke-width="2"/>
+  <!-- Screen area -->
+  <rect x="70" y="82" width="372" height="268" rx="8" fill="#040E18"/>
+  <!-- Header bar -->
+  <rect x="70" y="82" width="372" height="30" rx="8" fill="#0A1E32"/>
+  <rect x="70" y="100" width="372" height="12" fill="#0A1E32"/>
+  <!-- Header icons -->
+  <circle cx="92" cy="97" r="6" fill="#FF4444" opacity="0.7"/>
+  <circle cx="112" cy="97" r="6" fill="#FFAA00" opacity="0.7"/>
+  <circle cx="132" cy="97" r="6" fill="#44FF88" opacity="0.7"/>
+  <text x="256" y="100" font-family="monospace" font-size="11" fill="#4488CC" text-anchor="middle">Services Monitor</text>
+  <!-- Service list with status indicators -->
+  <!-- CPU bar -->
+  <text x="86" y="132" font-family="monospace" font-size="11" fill="#4488AA">CPU</text>
+  <rect x="120" y="122" width="200" height="10" rx="5" fill="#0A1E32"/>
+  <rect x="120" y="122" width="128" height="10" rx="5" fill="#4488FF" filter="url(#glow)" opacity="0.9"/>
+  <text x="328" y="132" font-family="monospace" font-size="11" fill="#4488AA">64%</text>
+  <!-- Memory bar -->
+  <text x="86" y="152" font-family="monospace" font-size="11" fill="#4488AA">MEM</text>
+  <rect x="120" y="142" width="200" height="10" rx="5" fill="#0A1E32"/>
+  <rect x="120" y="142" width="80" height="10" rx="5" fill="#44AAFF" filter="url(#glow)" opacity="0.9"/>
+  <text x="328" y="152" font-family="monospace" font-size="11" fill="#4488AA">40%</text>
+  <!-- Service status rows -->
+  <line x1="86" y1="165" x2="426" y2="165" stroke="#0A2A3A" stroke-width="1"/>
+  <!-- svc 1 -->
+  <circle cx="96" cy="182" r="5" fill="#44FF88" filter="url(#glow)"/>
+  <text x="110" y="186" font-family="monospace" font-size="11" fill="#AACCDD">wuauserv</text>
+  <text x="300" y="186" font-family="monospace" font-size="10" fill="#44FF88">RUNNING</text>
+  <text x="376" y="186" font-family="monospace" font-size="10" fill="#4466AA">GUARD</text>
+  <!-- svc 2 -->
+  <circle cx="96" cy="202" r="5" fill="#44FF88" filter="url(#glow)"/>
+  <text x="110" y="206" font-family="monospace" font-size="11" fill="#AACCDD">dnscache</text>
+  <text x="300" y="206" font-family="monospace" font-size="10" fill="#44FF88">RUNNING</text>
+  <!-- svc 3 - stopped alert -->
+  <circle cx="96" cy="222" r="5" fill="#FF4444" filter="url(#glow)"/>
+  <rect x="86" y="212" width="326" height="20" rx="2" fill="#1A0808" opacity="0.6"/>
+  <text x="110" y="226" font-family="monospace" font-size="11" fill="#FF8888">spooler</text>
+  <text x="300" y="226" font-family="monospace" font-size="10" fill="#FF4444">STOPPED</text>
+  <text x="376" y="226" font-family="monospace" font-size="10" fill="#FF8844">RESTART</text>
+  <!-- svc 4 -->
+  <circle cx="96" cy="242" r="5" fill="#44FF88" filter="url(#glow)"/>
+  <text x="110" y="246" font-family="monospace" font-size="11" fill="#AACCDD">WinDefend</text>
+  <text x="300" y="246" font-family="monospace" font-size="10" fill="#44FF88">RUNNING</text>
+  <text x="376" y="246" font-family="monospace" font-size="10" fill="#4466AA">GUARD</text>
+  <!-- svc 5 -->
+  <circle cx="96" cy="262" r="5" fill="#FFAA00" filter="url(#glow)"/>
+  <text x="110" y="266" font-family="monospace" font-size="11" fill="#AACCDD">TermService</text>
+  <text x="300" y="266" font-family="monospace" font-size="10" fill="#FFAA00">PAUSED</text>
+  <!-- Activity log -->
+  <line x1="86" y1="278" x2="426" y2="278" stroke="#0A2A3A" stroke-width="1"/>
+  <text x="86" y="294" font-family="monospace" font-size="10" fill="#226644">[14:32:08] spooler stopped unexpectedly</text>
+  <text x="86" y="310" font-family="monospace" font-size="10" fill="#4488FF">[14:32:09] Guard: restart attempt #1</text>
+  <text x="86" y="326" font-family="monospace" font-size="10" fill="#226644">[14:32:14] spooler restart failed</text>
+  <text x="86" y="342" font-family="monospace" font-size="10" fill="#FF8844">[14:32:15] Guard: alert sent to admin</text>
+  <!-- Stand -->
+  <rect x="228" y="364" width="56" height="20" rx="4" fill="#0A1E32"/>
+  <rect x="190" y="384" width="132" height="12" rx="6" fill="#0A1E32"/>
+</svg>

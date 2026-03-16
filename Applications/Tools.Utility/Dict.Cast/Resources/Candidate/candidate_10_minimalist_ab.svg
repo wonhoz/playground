@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E1E2E"/>
+      <stop offset="100%" stop-color="#2E2E4E"/>
+    </linearGradient>
+    <linearGradient id="split" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#5B8DEF"/>
+      <stop offset="50%" stop-color="#5B8DEF"/>
+      <stop offset="50%" stop-color="#EF5B8D"/>
+      <stop offset="100%" stop-color="#EF5B8D"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Split background halves -->
+  <rect x="80" y="80" width="176" height="352" rx="16" fill="#5B8DEF" opacity="0.12"/>
+  <rect x="256" y="80" width="176" height="352" rx="16" fill="#EF5B8D" opacity="0.12"/>
+  <!-- Divider line -->
+  <line x1="256" y1="90" x2="256" y2="422" stroke="#444466" stroke-width="2"/>
+  <!-- Left: English letter A -->
+  <text x="168" y="315" text-anchor="middle" font-family="'Segoe UI', Georgia, sans-serif" font-size="200" font-weight="100" fill="#5B8DEF" opacity="0.9">A</text>
+  <!-- Right: Korean letter 가 -->
+  <text x="344" y="315" text-anchor="middle" font-family="'Malgun Gothic', sans-serif" font-size="160" font-weight="100" fill="#EF5B8D" opacity="0.9">가</text>
+  <!-- Top label -->
+  <rect x="136" y="96" width="240" height="28" rx="14" fill="url(#split)" opacity="0.7"/>
+  <text x="256" y="115" text-anchor="middle" font-family="monospace" font-size="13" fill="white">EN  |  KO</text>
+  <!-- Bottom bar -->
+  <rect x="136" y="396" width="240" height="28" rx="14" fill="#2E2E4E" stroke="#444466" stroke-width="2"/>
+  <text x="256" y="415" text-anchor="middle" font-family="monospace" font-size="13" fill="#8888AA">Dict.Cast</text>
+  <!-- Minimal corner dots -->
+  <circle cx="100" cy="100" r="5" fill="#5B8DEF" opacity="0.5"/>
+  <circle cx="412" cy="100" r="5" fill="#EF5B8D" opacity="0.5"/>
+  <circle cx="100" cy="412" r="5" fill="#5B8DEF" opacity="0.5"/>
+  <circle cx="412" cy="412" r="5" fill="#EF5B8D" opacity="0.5"/>
+</svg>

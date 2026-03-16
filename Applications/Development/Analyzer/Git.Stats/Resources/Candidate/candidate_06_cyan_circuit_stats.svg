@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#001A1A"/>
+      <stop offset="100%" stop-color="#003333"/>
+    </linearGradient>
+    <linearGradient id="bar" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#00CCCC"/>
+      <stop offset="100%" stop-color="#00FFFF"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Circuit traces -->
+  <line x1="80" y1="80" x2="430" y2="80" stroke="#00CCCC" stroke-width="2" opacity="0.3"/>
+  <line x1="80" y1="80" x2="80" y2="430" stroke="#00CCCC" stroke-width="2" opacity="0.3"/>
+  <line x1="430" y1="80" x2="430" y2="430" stroke="#00CCCC" stroke-width="2" opacity="0.3"/>
+  <line x1="80" y1="430" x2="430" y2="430" stroke="#00CCCC" stroke-width="2" opacity="0.3"/>
+  <!-- Circuit nodes -->
+  <circle cx="80" cy="80" r="6" fill="#00FFFF"/>
+  <circle cx="430" cy="80" r="6" fill="#00FFFF"/>
+  <circle cx="80" cy="430" r="6" fill="#00FFFF"/>
+  <circle cx="430" cy="430" r="6" fill="#00FFFF"/>
+  <!-- Bar chart -->
+  <rect x="110" y="300" width="44" height="110" rx="5" fill="url(#bar)" opacity="0.5"/>
+  <rect x="166" y="250" width="44" height="160" rx="5" fill="url(#bar)" opacity="0.6"/>
+  <rect x="222" y="190" width="44" height="220" rx="5" fill="url(#bar)" opacity="0.7"/>
+  <rect x="278" y="160" width="44" height="250" rx="5" fill="url(#bar)" opacity="0.8"/>
+  <rect x="334" y="120" width="44" height="290" rx="5" fill="url(#bar)" opacity="0.95"/>
+  <!-- Circuit dots on bars -->
+  <circle cx="132" cy="300" r="5" fill="#00FFFF"/>
+  <circle cx="188" cy="250" r="5" fill="#00FFFF"/>
+  <circle cx="244" cy="190" r="5" fill="#00FFFF"/>
+  <circle cx="300" cy="160" r="5" fill="#00FFFF"/>
+  <circle cx="356" cy="120" r="5" fill="#00FFFF"/>
+  <!-- Connecting line -->
+  <polyline points="132,300 188,250 244,190 300,160 356,120" fill="none" stroke="#00FFFF" stroke-width="2" stroke-dasharray="6,3" opacity="0.7"/>
+  <!-- Bottom legend -->
+  <text x="110" y="425" fill="#00CCCC" font-size="14" font-family="monospace">Mon</text>
+  <text x="166" y="425" fill="#00CCCC" font-size="14" font-family="monospace">Tue</text>
+  <text x="222" y="425" fill="#00CCCC" font-size="14" font-family="monospace">Wed</text>
+  <text x="278" y="425" fill="#00CCCC" font-size="14" font-family="monospace">Thu</text>
+  <text x="334" y="425" fill="#00CCCC" font-size="14" font-family="monospace">Fri</text>
+</svg>

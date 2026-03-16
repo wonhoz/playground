@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0F0F1A"/>
+      <stop offset="100%" stop-color="#1A1A2E"/>
+    </linearGradient>
+    <linearGradient id="snap" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FF6B35"/>
+      <stop offset="100%" stop-color="#FFD23F"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Grid dots -->
+  <g fill="#FFFFFF" opacity="0.1">
+    <circle cx="100" cy="100" r="3"/><circle cx="160" cy="100" r="3"/><circle cx="220" cy="100" r="3"/>
+    <circle cx="280" cy="100" r="3"/><circle cx="340" cy="100" r="3"/><circle cx="400" cy="100" r="3"/>
+    <circle cx="100" cy="160" r="3"/><circle cx="160" cy="160" r="3"/><circle cx="220" cy="160" r="3"/>
+    <circle cx="280" cy="160" r="3"/><circle cx="340" cy="160" r="3"/><circle cx="400" cy="160" r="3"/>
+    <circle cx="100" cy="220" r="3"/><circle cx="160" cy="220" r="3"/><circle cx="220" cy="220" r="3"/>
+    <circle cx="280" cy="220" r="3"/><circle cx="340" cy="220" r="3"/><circle cx="400" cy="220" r="3"/>
+    <circle cx="100" cy="280" r="3"/><circle cx="160" cy="280" r="3"/><circle cx="220" cy="280" r="3"/>
+    <circle cx="280" cy="280" r="3"/><circle cx="340" cy="280" r="3"/><circle cx="400" cy="280" r="3"/>
+    <circle cx="100" cy="340" r="3"/><circle cx="160" cy="340" r="3"/><circle cx="220" cy="340" r="3"/>
+    <circle cx="280" cy="340" r="3"/><circle cx="340" cy="340" r="3"/><circle cx="400" cy="340" r="3"/>
+  </g>
+  <!-- Snapped windows -->
+  <rect x="100" y="100" width="180" height="180" rx="10" fill="#1A1A35" stroke="#FF6B35" stroke-width="3"/>
+  <rect x="100" y="100" width="180" height="24" rx="10" fill="#FF6B35" opacity="0.7"/>
+  <text x="122" y="117" font-family="Segoe UI" font-size="14" fill="#FFF">App 1</text>
+  <!-- snap corner markers -->
+  <circle cx="100" cy="100" r="6" fill="#FF6B35"/>
+  <circle cx="280" cy="100" r="6" fill="#FF6B35"/>
+  <circle cx="100" cy="280" r="6" fill="#FF6B35"/>
+  <circle cx="280" cy="280" r="6" fill="#FF6B35"/>
+  <rect x="292" y="100" width="108" height="84" rx="8" fill="#1A2035" stroke="#FFD23F" stroke-width="2.5"/>
+  <rect x="292" y="100" width="108" height="20" rx="8" fill="#FFD23F" opacity="0.6"/>
+  <text x="346" y="114" text-anchor="middle" font-family="Segoe UI" font-size="13" fill="#FFF">App 2</text>
+  <rect x="292" y="196" width="108" height="84" rx="8" fill="#1A2035" stroke="#FFD23F" stroke-width="2.5"/>
+  <rect x="292" y="196" width="108" height="20" rx="8" fill="#FFD23F" opacity="0.6"/>
+  <text x="346" y="210" text-anchor="middle" font-family="Segoe UI" font-size="13" fill="#FFF">App 3</text>
+  <rect x="100" y="292" width="300" height="48" rx="8" fill="#1A2035" stroke="#FF6B35" stroke-width="2"/>
+  <rect x="100" y="292" width="300" height="20" rx="8" fill="#FF6B35" opacity="0.5"/>
+  <text x="250" y="306" text-anchor="middle" font-family="Segoe UI" font-size="13" fill="#FFF">App 4 — Full Width Bottom</text>
+  <!-- Snap arrows -->
+  <text x="256" y="390" text-anchor="middle" font-family="Segoe UI" font-size="14" fill="#FF6B35" opacity="0.7">SNAP TO GRID</text>
+  <text x="256" y="460" text-anchor="middle" font-family="Segoe UI" font-size="24" font-weight="700" fill="url(#snap)">WINDOW PILOT</text>
+</svg>

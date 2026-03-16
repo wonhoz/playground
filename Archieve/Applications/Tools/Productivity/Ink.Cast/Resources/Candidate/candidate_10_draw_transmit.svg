@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#003366"/>
+      <stop offset="100%" stop-color="#006644"/>
+    </linearGradient>
+    <linearGradient id="hand" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ffd6b3"/>
+      <stop offset="100%" stop-color="#f4a460"/>
+    </linearGradient>
+    <linearGradient id="penGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#cccccc"/>
+    </linearGradient>
+    <linearGradient id="signal" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#00ffaa"/>
+      <stop offset="100%" stop-color="#00aaff"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Drawing surface -->
+  <rect x="50" y="70" width="220" height="220" rx="12" fill="#ffffff15"/>
+  <!-- Drawn strokes on surface -->
+  <path d="M70,180 Q120,150 180,165 Q220,175 250,155" fill="none" stroke="#00ffaa" stroke-width="5" stroke-linecap="round" opacity="0.85"/>
+  <path d="M70,210 Q130,200 200,215 Q235,222 265,210" fill="none" stroke="#00aaff" stroke-width="4" stroke-linecap="round" opacity="0.75"/>
+  <path d="M70,240 Q140,232 210,244 Q250,252 270,240" fill="none" stroke="#00ffaa" stroke-width="3" stroke-linecap="round" opacity="0.6"/>
+  <!-- Hand holding stylus -->
+  <g transform="translate(195,240)">
+    <!-- Stylus -->
+    <rect x="14" y="-60" width="10" height="40" rx="4" fill="url(#penGrad)" opacity="0.9"/>
+    <polygon points="14,-20 24,-20 21,5 17,5" fill="#dddddd"/>
+    <polygon points="17,5 21,5 19,16 19,16" fill="#00ffaa"/>
+    <!-- Hand shape -->
+    <ellipse cx="20" cy="10" rx="20" ry="14" fill="url(#hand)" opacity="0.8"/>
+    <!-- Fingers -->
+    <rect x="8" y="-8" width="7" height="20" rx="4" fill="url(#hand)" opacity="0.9"/>
+    <rect x="18" y="-12" width="7" height="24" rx="4" fill="url(#hand)" opacity="0.9"/>
+    <rect x="28" y="-8" width="7" height="20" rx="4" fill="url(#hand)" opacity="0.9"/>
+  </g>
+  <!-- Transmission arrow -->
+  <rect x="280" y="170" width="60" height="12" rx="6" fill="url(#signal)" opacity="0.9"/>
+  <polygon points="340,158 365,176 340,194" fill="#00ffaa"/>
+  <!-- Receiving device -->
+  <rect x="370" y="100" width="105" height="165" rx="14" fill="#1a1a2a"/>
+  <rect x="382" y="112" width="81" height="125" rx="6" fill="#0a0a1a"/>
+  <!-- Live ink appearing on device -->
+  <path d="M392,180 Q422,165 452,175" fill="none" stroke="#00ffaa" stroke-width="4" stroke-linecap="round" opacity="0.85"/>
+  <path d="M392,200 Q422,192 452,200" fill="none" stroke="#00aaff" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
+  <!-- Live dot indicator -->
+  <circle cx="450" cy="118" r="7" fill="#ff4444" opacity="0.9"/>
+  <circle cx="450" cy="118" r="4" fill="#ff6666"/>
+  <!-- Device buttons -->
+  <circle cx="422" cy="254" r="10" fill="#2a2a3a"/>
+  <!-- Signal waves -->
+  <path d="M370,280 Q420,265 470,280" fill="none" stroke="url(#signal)" stroke-width="3" stroke-linecap="round" opacity="0.5"/>
+  <path d="M360,298 Q420,280 480,298" fill="none" stroke="#00aaff" stroke-width="2" stroke-linecap="round" opacity="0.4"/>
+  <!-- Label -->
+  <text x="256" y="470" text-anchor="middle" font-family="Arial" font-size="16" letter-spacing="3" fill="#00ffaa" opacity="0.6">DRAW &amp; TRANSMIT</text>
+</svg>

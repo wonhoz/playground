@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a1628"/>
+      <stop offset="100%" stop-color="#0d2137"/>
+    </linearGradient>
+    <radialGradient id="radarGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#00e676" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#00e676" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="sweepGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00e676" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#00e676" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Radar circles -->
+  <circle cx="256" cy="256" r="200" fill="none" stroke="#00e676" stroke-width="1" opacity="0.3"/>
+  <circle cx="256" cy="256" r="150" fill="none" stroke="#00e676" stroke-width="1" opacity="0.25"/>
+  <circle cx="256" cy="256" r="100" fill="none" stroke="#00e676" stroke-width="1" opacity="0.2"/>
+  <circle cx="256" cy="256" r="50" fill="none" stroke="#00e676" stroke-width="1" opacity="0.15"/>
+  <!-- Crosshair -->
+  <line x1="56" y1="256" x2="456" y2="256" stroke="#00e676" stroke-width="0.8" opacity="0.2"/>
+  <line x1="256" y1="56" x2="256" y2="456" stroke="#00e676" stroke-width="0.8" opacity="0.2"/>
+  <!-- Radar sweep -->
+  <circle cx="256" cy="256" r="200" fill="url(#radarGlow)"/>
+  <path d="M256,256 L456,256 A200,200 0 0,0 256,56 Z" fill="url(#sweepGrad)" opacity="0.4" transform="rotate(-30, 256, 256)"/>
+  <!-- Duplicate blips -->
+  <circle cx="180" cy="200" r="8" fill="#ff5252"/>
+  <circle cx="200" cy="215" r="8" fill="#ff5252" opacity="0.85"/>
+  <line x1="184" y1="204" x2="196" y2="211" stroke="#ff5252" stroke-width="2" opacity="0.7"/>
+  <circle cx="320" cy="310" r="8" fill="#ff5252"/>
+  <circle cx="340" cy="295" r="8" fill="#ff5252" opacity="0.85"/>
+  <line x1="324" y1="306" x2="336" y2="299" stroke="#ff5252" stroke-width="2" opacity="0.7"/>
+  <!-- Center dot -->
+  <circle cx="256" cy="256" r="5" fill="#00e676"/>
+  <!-- Labels -->
+  <text x="165" y="193" font-family="'Courier New', monospace" font-size="11" fill="#ff5252">DUP</text>
+  <text x="345" y="315" font-family="'Courier New', monospace" font-size="11" fill="#ff5252">DUP</text>
+  <!-- Title -->
+  <text x="256" y="480" font-family="Arial" font-size="18" font-weight="bold" fill="#00e676" text-anchor="middle" opacity="0.8">DUPLICATE SCAN</text>
+</svg>

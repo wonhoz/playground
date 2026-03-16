@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#1A0030"/>
+      <stop offset="100%" stop-color="#0A0015"/>
+    </radialGradient>
+    <radialGradient id="nebula1" cx="40%" cy="40%" r="40%">
+      <stop offset="0%" stop-color="#8B00FF" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#8B00FF" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="nebula2" cx="70%" cy="60%" r="35%">
+      <stop offset="0%" stop-color="#FF00FF" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#FF00FF" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="branch" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#8B00FF"/>
+      <stop offset="100%" stop-color="#FF00FF"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <rect width="512" height="512" rx="80" fill="url(#nebula1)"/>
+  <rect width="512" height="512" rx="80" fill="url(#nebula2)"/>
+  <!-- Stars -->
+  <circle cx="100" cy="80" r="2" fill="white" opacity="0.8"/>
+  <circle cx="200" cy="60" r="1.5" fill="white" opacity="0.6"/>
+  <circle cx="350" cy="90" r="2" fill="white" opacity="0.9"/>
+  <circle cx="420" cy="70" r="1.5" fill="white" opacity="0.7"/>
+  <circle cx="80" cy="150" r="1" fill="white" opacity="0.5"/>
+  <circle cx="450" cy="200" r="2" fill="white" opacity="0.8"/>
+  <!-- Branch graph -->
+  <!-- Main branch (vertical) -->
+  <line x1="200" y1="100" x2="200" y2="420" stroke="url(#branch)" stroke-width="5"/>
+  <!-- Feature branch -->
+  <path d="M200 180 Q280 180 320 240 L320 360 Q320 400 280 400 L200 400" fill="none" stroke="#FF00FF" stroke-width="4" stroke-dasharray="8,4"/>
+  <!-- Commit nodes main -->
+  <circle cx="200" cy="140" r="14" fill="#8B00FF" stroke="#FF00FF" stroke-width="3"/>
+  <circle cx="200" cy="220" r="14" fill="#8B00FF" stroke="#FF00FF" stroke-width="3"/>
+  <circle cx="200" cy="300" r="14" fill="#FF00FF" stroke="white" stroke-width="3"/>
+  <circle cx="200" cy="380" r="14" fill="#8B00FF" stroke="#FF00FF" stroke-width="3"/>
+  <!-- Commit nodes feature -->
+  <circle cx="320" cy="270" r="12" fill="#6600CC" stroke="#FF00FF" stroke-width="3"/>
+  <circle cx="320" cy="330" r="12" fill="#6600CC" stroke="#FF00FF" stroke-width="3"/>
+  <!-- Labels -->
+  <text x="225" y="145" fill="#CC88FF" font-size="18" font-family="monospace">main</text>
+  <text x="345" y="275" fill="#FF88FF" font-size="15" font-family="monospace">feat</text>
+</svg>

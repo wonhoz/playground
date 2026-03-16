@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1A2A4A"/>
+      <stop offset="100%" stop-color="#0D1B2E"/>
+    </linearGradient>
+    <radialGradient id="snow" cx="50%" cy="50%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#B3E5FC"/>
+    </radialGradient>
+    <linearGradient id="ground" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#E3F2FD"/>
+      <stop offset="100%" stop-color="#90CAF9"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Snow pile on ground -->
+  <ellipse cx="256" cy="440" rx="200" ry="35" fill="url(#ground)" opacity="0.9"/>
+  <!-- Snowflake snowfall -->
+  <g fill="url(#snow)">
+    <!-- Large flakes -->
+    <circle cx="160" cy="120" r="12"/>
+    <circle cx="300" cy="100" r="10"/>
+    <circle cx="400" cy="160" r="11"/>
+    <circle cx="120" cy="240" r="9"/>
+    <circle cx="380" cy="280" r="13"/>
+    <!-- Medium flakes -->
+    <circle cx="200" cy="180" r="7"/>
+    <circle cx="340" cy="200" r="8"/>
+    <circle cx="150" cy="320" r="7"/>
+    <circle cx="420" cy="200" r="6"/>
+    <circle cx="80" cy="180" r="8"/>
+    <circle cx="256" cy="150" r="9"/>
+    <circle cx="360" cy="350" r="7"/>
+    <!-- Small flakes -->
+    <circle cx="240" cy="250" r="5"/>
+    <circle cx="290" cy="300" r="5"/>
+    <circle cx="190" cy="360" r="5"/>
+    <circle cx="330" cy="140" r="4"/>
+    <circle cx="100" cy="300" r="5"/>
+    <circle cx="440" cy="320" r="4"/>
+    <circle cx="256" cy="320" r="6"/>
+    <!-- Tiny flakes -->
+    <circle cx="170" cy="200" r="3"/>
+    <circle cx="320" cy="260" r="3"/>
+    <circle cx="210" cy="290" r="3"/>
+    <circle cx="280" cy="200" r="3"/>
+    <circle cx="140" cy="380" r="4"/>
+    <circle cx="390" cy="360" r="3"/>
+  </g>
+</svg>

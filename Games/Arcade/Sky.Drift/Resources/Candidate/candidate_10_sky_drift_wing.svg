@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#020508"/>
+      <stop offset="100%" style="stop-color:#081830"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <linearGradient id="wingGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00ccff"/>
+      <stop offset="60%" style="stop-color:#aaddff"/>
+      <stop offset="100%" style="stop-color:#ffffff;stop-opacity:0.7"/>
+    </linearGradient>
+    <linearGradient id="skyLine" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#0066cc"/>
+      <stop offset="100%" style="stop-color:#003388"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Aurora/sky gradient band -->
+  <ellipse cx="256" cy="420" rx="240" ry="80" fill="#0044aa" opacity="0.2" filter="url(#glow)"/>
+  <!-- Large wing art - center focus -->
+  <path d="M256 256 L80 180 Q60 160 80 150 Q120 140 200 200 Z" fill="url(#wingGrad)" filter="url(#glow)" opacity="0.85"/>
+  <path d="M256 256 L432 180 Q452 160 432 150 Q392 140 312 200 Z" fill="url(#wingGrad)" filter="url(#glow)" opacity="0.85"/>
+  <!-- Wing glow edge -->
+  <path d="M256 256 L80 180 Q60 160 80 150 Q120 140 200 200 Z" fill="none" stroke="#00ccff" stroke-width="2" filter="url(#glow)" opacity="0.7"/>
+  <path d="M256 256 L432 180 Q452 160 432 150 Q392 140 312 200 Z" fill="none" stroke="#00ccff" stroke-width="2" filter="url(#glow)" opacity="0.7"/>
+  <!-- Fuselage -->
+  <ellipse cx="256" cy="256" rx="18" ry="60" fill="#aaddff" filter="url(#glow)"/>
+  <!-- Tail wings -->
+  <path d="M256 300 L200 330 L218 300 Z" fill="#88aacc" filter="url(#glow)" opacity="0.8"/>
+  <path d="M256 300 L312 330 L294 300 Z" fill="#88aacc" filter="url(#glow)" opacity="0.8"/>
+  <!-- Cockpit -->
+  <ellipse cx="256" cy="215" rx="10" ry="14" fill="#0088cc" filter="url(#glow)" opacity="0.9"/>
+  <!-- Wing tip lights -->
+  <circle cx="84" cy="155" r="5" fill="#ff4444" filter="url(#glow)"/>
+  <circle cx="428" cy="155" r="5" fill="#00ff88" filter="url(#glow)"/>
+  <!-- Speed lines behind wing -->
+  <path d="M80 265 Q165 260 236 258" stroke="#00ccff" stroke-width="3" fill="none" filter="url(#glow)" stroke-linecap="round" opacity="0.6"/>
+  <path d="M90 275 Q168 272 234 270" stroke="#aaddff" stroke-width="2" fill="none" filter="url(#glow)" stroke-linecap="round" opacity="0.4"/>
+  <!-- Stars -->
+  <circle cx="150" cy="120" r="1.5" fill="#ffffff" opacity="0.6"/>
+  <circle cx="370" cy="110" r="1.5" fill="#aaddff" opacity="0.6"/>
+  <circle cx="430" cy="140" r="1" fill="#ffffff" opacity="0.5"/>
+  <circle cx="100" cy="140" r="1" fill="#aaddff" opacity="0.5"/>
+</svg>

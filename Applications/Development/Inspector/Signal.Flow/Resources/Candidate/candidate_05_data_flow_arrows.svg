@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#050510"/>
+      <stop offset="100%" stop-color="#10051a"/>
+    </linearGradient>
+    <linearGradient id="pipe1" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#4776E6"/>
+      <stop offset="100%" stop-color="#56CCF2"/>
+    </linearGradient>
+    <linearGradient id="pipe2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f7971e"/>
+      <stop offset="100%" stop-color="#ffd200"/>
+    </linearGradient>
+    <linearGradient id="pipe3" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ee0979"/>
+      <stop offset="100%" stop-color="#ff6a00"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+
+  <!-- Stage 1 boxes -->
+  <rect x="60" y="148" width="80" height="50" rx="10" fill="#1a1a3a" stroke="#4776E6" stroke-width="2"/>
+  <rect x="65" y="158" width="40" height="7" rx="3" fill="#4776E6" opacity="0.7"/>
+  <rect x="65" y="170" width="55" height="7" rx="3" fill="#4776E6" opacity="0.5"/>
+  <rect x="65" y="182" width="30" height="7" rx="3" fill="#4776E6" opacity="0.4"/>
+
+  <rect x="60" y="230" width="80" height="50" rx="10" fill="#1a1a3a" stroke="#f7971e" stroke-width="2"/>
+  <rect x="65" y="240" width="50" height="7" rx="3" fill="#f7971e" opacity="0.7"/>
+  <rect x="65" y="252" width="35" height="7" rx="3" fill="#f7971e" opacity="0.5"/>
+  <rect x="65" y="264" width="45" height="7" rx="3" fill="#f7971e" opacity="0.4"/>
+
+  <rect x="60" y="312" width="80" height="50" rx="10" fill="#1a1a3a" stroke="#ee0979" stroke-width="2"/>
+  <rect x="65" y="322" width="45" height="7" rx="3" fill="#ee0979" opacity="0.7"/>
+  <rect x="65" y="334" width="60" height="7" rx="3" fill="#ee0979" opacity="0.5"/>
+  <rect x="65" y="346" width="38" height="7" rx="3" fill="#ee0979" opacity="0.4"/>
+
+  <!-- Arrows / pipes -->
+  <path d="M140,173 L195,173" stroke="url(#pipe1)" stroke-width="10" stroke-linecap="round" filter="url(#glow)"/>
+  <polygon points="188,163 205,173 188,183" fill="#56CCF2" filter="url(#glow)"/>
+
+  <path d="M140,255 L195,255" stroke="url(#pipe2)" stroke-width="10" stroke-linecap="round" filter="url(#glow)"/>
+  <polygon points="188,245 205,255 188,265" fill="#ffd200" filter="url(#glow)"/>
+
+  <path d="M140,337 L195,337" stroke="url(#pipe3)" stroke-width="10" stroke-linecap="round" filter="url(#glow)"/>
+  <polygon points="188,327 205,337 188,347" fill="#ff6a00" filter="url(#glow)"/>
+
+  <!-- Stage 2 - Processing box -->
+  <rect x="205" y="155" width="100" height="210" rx="14" fill="#1a1a3a" stroke="#8E54E9" stroke-width="2.5" filter="url(#glow)"/>
+  <rect x="205" y="155" width="100" height="30" rx="14" fill="#8E54E9" opacity="0.3"/>
+  <!-- Gear icon simplified -->
+  <circle cx="255" cy="260" r="28" fill="none" stroke="#8E54E9" stroke-width="4" opacity="0.7"/>
+  <circle cx="255" cy="260" r="16" fill="#8E54E9" opacity="0.3"/>
+  <circle cx="255" cy="260" r="7" fill="#8E54E9" opacity="0.8"/>
+  <!-- Gear teeth -->
+  <rect x="252" y="228" width="6" height="10" rx="3" fill="#8E54E9" opacity="0.8"/>
+  <rect x="252" y="282" width="6" height="10" rx="3" fill="#8E54E9" opacity="0.8"/>
+  <rect x="222" y="257" width="10" height="6" rx="3" fill="#8E54E9" opacity="0.8"/>
+  <rect x="278" y="257" width="10" height="6" rx="3" fill="#8E54E9" opacity="0.8"/>
+
+  <!-- Arrows out of processor -->
+  <path d="M305,210 L355,160" stroke="#4776E6" stroke-width="10" stroke-linecap="round" filter="url(#glow)"/>
+  <polygon points="345,152 362,162 352,175" fill="#56CCF2" filter="url(#glow)"/>
+
+  <path d="M305,255 L360,255" stroke="url(#pipe2)" stroke-width="10" stroke-linecap="round" filter="url(#glow)"/>
+  <polygon points="353,245 370,255 353,265" fill="#ffd200" filter="url(#glow)"/>
+
+  <path d="M305,300 L355,350" stroke="#ee0979" stroke-width="10" stroke-linecap="round" filter="url(#glow)"/>
+  <polygon points="347,342 362,358 348,362" fill="#ff6a00" filter="url(#glow)"/>
+
+  <!-- Stage 3 boxes -->
+  <rect x="365" y="133" width="85" height="54" rx="10" fill="#1a1a3a" stroke="#56CCF2" stroke-width="2"/>
+  <rect x="375" y="148" width="55" height="7" rx="3" fill="#56CCF2" opacity="0.7"/>
+  <rect x="375" y="160" width="38" height="7" rx="3" fill="#56CCF2" opacity="0.5"/>
+
+  <rect x="373" y="228" width="85" height="54" rx="10" fill="#1a1a3a" stroke="#ffd200" stroke-width="2"/>
+  <rect x="383" y="243" width="45" height="7" rx="3" fill="#ffd200" opacity="0.7"/>
+  <rect x="383" y="255" width="60" height="7" rx="3" fill="#ffd200" opacity="0.5"/>
+
+  <rect x="365" y="323" width="85" height="54" rx="10" fill="#1a1a3a" stroke="#ee0979" stroke-width="2"/>
+  <rect x="375" y="338" width="55" height="7" rx="3" fill="#ee0979" opacity="0.7"/>
+  <rect x="375" y="350" width="38" height="7" rx="3" fill="#ee0979" opacity="0.5"/>
+</svg>

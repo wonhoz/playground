@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#001233"/>
+      <stop offset="100%" stop-color="#002060"/>
+    </linearGradient>
+    <linearGradient id="arr1" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#82b1ff" stop-opacity="0.2"/>
+      <stop offset="60%" stop-color="#82b1ff"/>
+      <stop offset="100%" stop-color="#82b1ff" stop-opacity="0.9"/>
+    </linearGradient>
+    <linearGradient id="arr2" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#80d8ff" stop-opacity="0.2"/>
+      <stop offset="60%" stop-color="#80d8ff"/>
+      <stop offset="100%" stop-color="#80d8ff" stop-opacity="0.9"/>
+    </linearGradient>
+    <linearGradient id="arr3" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#b9f6ca" stop-opacity="0.2"/>
+      <stop offset="60%" stop-color="#b9f6ca"/>
+      <stop offset="100%" stop-color="#b9f6ca" stop-opacity="0.9"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Stream arrows (stacked) -->
+  <!-- Arrow 1 -->
+  <path d="M80 168 L370 168 L370 145 L440 190 L370 235 L370 212 L80 212 Z" fill="url(#arr1)" opacity="0.9"/>
+  <!-- Arrow 2 -->
+  <path d="M80 248 L350 248 L350 225 L430 270 L350 315 L350 292 L80 292 Z" fill="url(#arr2)" opacity="0.85"/>
+  <!-- Arrow 3 -->
+  <path d="M80 328 L330 328 L330 305 L420 350 L330 395 L330 372 L80 372 Z" fill="url(#arr3)" opacity="0.8"/>
+  <!-- Labels on arrows -->
+  <text x="200" y="196" font-family="monospace" font-size="14" fill="#001233" font-weight="bold">EVENT STREAM</text>
+  <text x="200" y="276" font-family="monospace" font-size="14" fill="#001233" font-weight="bold">SIGNAL BUS</text>
+  <text x="200" y="356" font-family="monospace" font-size="14" fill="#001233" font-weight="bold">DATA FLOW</text>
+  <!-- Dots at start -->
+  <circle cx="80" cy="190" r="10" fill="#82b1ff"/>
+  <circle cx="80" cy="270" r="10" fill="#80d8ff"/>
+  <circle cx="80" cy="350" r="10" fill="#b9f6ca"/>
+  <!-- Title top -->
+  <text x="256" y="100" font-family="monospace" font-size="20" fill="#82b1ff" text-anchor="middle" letter-spacing="3">SIGNAL.FLOW</text>
+  <line x1="100" y1="112" x2="412" y2="112" stroke="#82b1ff" stroke-width="1.5" opacity="0.4"/>
+  <!-- Footer -->
+  <text x="256" y="465" font-family="monospace" font-size="13" fill="#80d8ff" text-anchor="middle" opacity="0.6">inspect · trace · analyze</text>
+</svg>

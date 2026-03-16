@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#010110"/>
+      <stop offset="100%" stop-color="#020220"/>
+    </linearGradient>
+    <radialGradient id="neb1" cx="40%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#ff6eb4" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#ff6eb4" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="neb2" cx="60%" cy="55%" r="55%">
+      <stop offset="0%" stop-color="#4fc3f7" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#4fc3f7" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="neb3" cx="50%" cy="65%" r="50%">
+      <stop offset="0%" stop-color="#b39ddb" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#b39ddb" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="softGlow">
+      <feGaussianBlur stdDeviation="3" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Nebula clouds -->
+  <ellipse cx="200" cy="220" rx="180" ry="130" fill="url(#neb1)"/>
+  <ellipse cx="300" cy="270" rx="180" ry="140" fill="url(#neb2)"/>
+  <ellipse cx="256" cy="300" rx="150" ry="110" fill="url(#neb3)"/>
+  <!-- Word stars scattered through nebula -->
+  <rect x="168" y="188" width="55" height="12" rx="4" fill="#ff6eb4" opacity="0.85" filter="url(#softGlow)"/>
+  <rect x="258" y="182" width="70" height="14" rx="4" fill="#fff" opacity="0.8" filter="url(#softGlow)"/>
+  <rect x="145" y="225" width="45" height="11" rx="3" fill="#4fc3f7" opacity="0.75" filter="url(#softGlow)"/>
+  <rect x="202" y="228" width="85" height="16" rx="5" fill="#ff6eb4" opacity="0.9" filter="url(#softGlow)"/>
+  <rect x="298" y="225" width="60" height="14" rx="4" fill="#b39ddb" opacity="0.8" filter="url(#softGlow)"/>
+  <rect x="170" y="262" width="65" height="13" rx="4" fill="#b39ddb" opacity="0.8"/>
+  <rect x="248" y="262" width="90" height="15" rx="5" fill="#4fc3f7" opacity="0.85" filter="url(#softGlow)"/>
+  <rect x="350" y="255" width="50" height="12" rx="4" fill="#ff6eb4" opacity="0.7"/>
+  <rect x="190" y="295" width="50" height="12" rx="4" fill="#fff" opacity="0.65" filter="url(#softGlow)"/>
+  <rect x="252" y="298" width="75" height="13" rx="4" fill="#b39ddb" opacity="0.75" filter="url(#softGlow)"/>
+  <!-- Star dots -->
+  <circle cx="148" cy="168" r="3" fill="white" opacity="0.8"/>
+  <circle cx="380" cy="192" r="2" fill="white" opacity="0.7"/>
+  <circle cx="420" cy="280" r="2.5" fill="#ff6eb4" opacity="0.8"/>
+  <circle cx="100" cy="300" r="2" fill="#4fc3f7" opacity="0.7"/>
+</svg>

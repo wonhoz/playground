@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#2D1B69"/>
+      <stop offset="100%" stop-color="#11012E"/>
+    </linearGradient>
+    <linearGradient id="rainbow" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#FF0000"/>
+      <stop offset="17%" stop-color="#FF8800"/>
+      <stop offset="33%" stop-color="#FFFF00"/>
+      <stop offset="50%" stop-color="#00FF00"/>
+      <stop offset="67%" stop-color="#0088FF"/>
+      <stop offset="83%" stop-color="#8800FF"/>
+      <stop offset="100%" stop-color="#FF00FF"/>
+    </linearGradient>
+    <linearGradient id="slider" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="1"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Window preview with opacity -->
+  <rect x="56" y="72" width="320" height="220" rx="12" fill="#1A0A4E" stroke="#6B2FD9" stroke-width="2" opacity="0.3"/>
+  <rect x="56" y="72" width="320" height="28" rx="12" fill="#6B2FD9" opacity="0.3"/>
+  <rect x="76" y="112" width="200" height="12" rx="3" fill="#9B59B6" opacity="0.2"/>
+  <rect x="76" y="132" width="240" height="12" rx="3" fill="#9B59B6" opacity="0.15"/>
+  <rect x="76" y="152" width="180" height="12" rx="3" fill="#9B59B6" opacity="0.15"/>
+  <!-- Opacity: 40% ghost -->
+  <text x="390" y="108" font-family="Segoe UI" font-size="13" fill="#9B59B6">40%</text>
+  <!-- Same window at 80% opacity -->
+  <rect x="100" y="160" width="320" height="220" rx="12" fill="#1A0A4E" stroke="#6B2FD9" stroke-width="2" opacity="0.7"/>
+  <rect x="100" y="160" width="320" height="28" rx="12" fill="#6B2FD9" opacity="0.7"/>
+  <rect x="120" y="200" width="200" height="12" rx="3" fill="#9B59B6" opacity="0.5"/>
+  <rect x="120" y="220" width="240" height="12" rx="3" fill="#9B59B6" opacity="0.4"/>
+  <rect x="120" y="240" width="180" height="12" rx="3" fill="#9B59B6" opacity="0.4"/>
+  <text x="430" y="196" font-family="Segoe UI" font-size="13" fill="#CE93D8">80%</text>
+  <!-- Opacity slider -->
+  <text x="56" y="410" font-family="Segoe UI" font-size="14" fill="#888">Opacity</text>
+  <rect x="56" y="420" width="400" height="16" rx="8" fill="url(#slider)"/>
+  <circle cx="380" cy="428" r="14" fill="#FFF" stroke="#6B2FD9" stroke-width="3" filter="url(#glow)"/>
+  <text x="456" y="434" font-family="Segoe UI" font-size="18" font-weight="700" fill="#FFF">80%</text>
+  <!-- Color stripe accent -->
+  <rect x="56" y="446" width="400" height="6" rx="3" fill="url(#rainbow)" opacity="0.6"/>
+  <text x="256" y="490" text-anchor="middle" font-family="Segoe UI" font-size="22" font-weight="700" fill="#9B59B6">WIN.SCOPE</text>
+</svg>

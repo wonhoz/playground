@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#003333"/>
+      <stop offset="100%" stop-color="#006064"/>
+    </linearGradient>
+    <linearGradient id="folder" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e0f7fa"/>
+      <stop offset="100%" stop-color="#80deea"/>
+    </linearGradient>
+    <radialGradient id="sparkle" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#b2ebf2" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glow"><feGaussianBlur stdDeviation="6"/></filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- folder -->
+  <path d="M90 210 L90 385 L420 385 L420 235 L225 235 L195 210 Z" fill="url(#folder)"/>
+  <path d="M90 210 L90 240 L420 240 L420 235 L225 235 L195 210 Z" fill="#80deea"/>
+  <!-- folder shine -->
+  <ellipse cx="148" cy="225" rx="28" ry="8" fill="white" opacity="0.3" transform="rotate(-5 148 225)"/>
+  <!-- clean interior -->
+  <rect x="120" y="265" width="270" height="100" rx="8" fill="white" opacity="0.08"/>
+  <!-- sparkle stars -->
+  <g fill="white" filter="url(#glow)">
+    <!-- 4-point star -->
+    <path d="M160 160 L165 185 L190 190 L165 195 L160 220 L155 195 L130 190 L155 185 Z" fill="#fff9c4" opacity="0.9"/>
+    <path d="M360 130 L364 150 L384 154 L364 158 L360 178 L356 158 L336 154 L356 150 Z" fill="#e0f7fa" opacity="0.8"/>
+    <path d="M420 260 L423 274 L437 277 L423 280 L420 294 L417 280 L403 277 L417 274 Z" fill="#fff9c4" opacity="0.7"/>
+    <path d="M110 330 L113 344 L127 347 L113 350 L110 364 L107 350 L93 347 L107 344 Z" fill="#b2ebf2" opacity="0.7"/>
+    <path d="M380 370 L383 381 L394 383 L383 385 L380 396 L377 385 L366 383 L377 381 Z" fill="#e0f7fa" opacity="0.6"/>
+  </g>
+  <!-- sparkle dots -->
+  <circle cx="250" cy="155" r="5" fill="#fff9c4" opacity="0.8" filter="url(#glow)"/>
+  <circle cx="320" cy="200" r="4" fill="#b2ebf2" opacity="0.7" filter="url(#glow)"/>
+  <circle cx="190" cy="180" r="3" fill="white" opacity="0.6" filter="url(#glow)"/>
+</svg>

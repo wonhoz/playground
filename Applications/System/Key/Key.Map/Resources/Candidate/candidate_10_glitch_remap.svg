@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0a0a0a"/>
+      <stop offset="100%" stop-color="#000000"/>
+    </linearGradient>
+    <linearGradient id="keyR" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ff0040"/>
+      <stop offset="100%" stop-color="#cc0033"/>
+    </linearGradient>
+    <linearGradient id="keyG" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#00ff80"/>
+      <stop offset="100%" stop-color="#00cc66"/>
+    </linearGradient>
+    <linearGradient id="keyB" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0080ff"/>
+      <stop offset="100%" stop-color="#0060cc"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Glitch effect: RGB-shifted key copies -->
+  <!-- Red channel key -->
+  <rect x="108" y="178" width="100" height="100" rx="14" fill="url(#keyR)" opacity="0.7"/>
+  <text x="158" y="240" text-anchor="middle" font-family="monospace" font-size="50" font-weight="bold" fill="#ff0040" opacity="0.8">A</text>
+  <!-- Green channel key (offset) -->
+  <rect x="118" y="188" width="100" height="100" rx="14" fill="url(#keyG)" opacity="0.4"/>
+  <text x="168" y="250" text-anchor="middle" font-family="monospace" font-size="50" font-weight="bold" fill="#00ff80" opacity="0.5">A</text>
+  <!-- Blue channel key (offset) -->
+  <rect x="126" y="196" width="100" height="100" rx="14" fill="url(#keyB)" opacity="0.3"/>
+  <text x="176" y="258" text-anchor="middle" font-family="monospace" font-size="50" font-weight="bold" fill="#0080ff" opacity="0.4">A</text>
+  <!-- Glitch scanlines -->
+  <rect x="40" y="200" width="432" height="3" rx="1" fill="#ff0040" opacity="0.3"/>
+  <rect x="40" y="245" width="432" height="2" rx="1" fill="#00ff80" opacity="0.2"/>
+  <rect x="40" y="280" width="432" height="2" rx="1" fill="#0080ff" opacity="0.2"/>
+  <!-- Arrow (remapping) -->
+  <path d="M250,235 L290,235" stroke="white" stroke-width="6" stroke-linecap="round" opacity="0.8"/>
+  <polygon points="292,228 308,235 292,242" fill="white" opacity="0.8"/>
+  <!-- Target key (clean) -->
+  <rect x="314" y="190" width="100" height="100" rx="14" fill="#111"/>
+  <rect x="314" y="190" width="100" height="100" rx="14" fill="none" stroke="white" stroke-width="3" opacity="0.9"/>
+  <text x="364" y="252" text-anchor="middle" font-family="monospace" font-size="50" font-weight="bold" fill="white">Z</text>
+  <!-- Glitch label -->
+  <text x="158" y="158" text-anchor="middle" font-family="monospace" font-size="11" fill="#ff0040" opacity="0.7">ORIGINAL</text>
+  <text x="364" y="172" text-anchor="middle" font-family="monospace" font-size="11" fill="white" opacity="0.7">MAPPED</text>
+  <!-- Bottom info -->
+  <text x="256" y="360" text-anchor="middle" font-family="monospace" font-size="16" fill="#ff0040" opacity="0.6">A</text>
+  <text x="256" y="360" text-anchor="middle" font-family="monospace" font-size="16" fill="#00ff80" opacity="0.4" dx="3">A</text>
+  <text x="270" y="360" text-anchor="middle" font-family="Arial" font-size="16" fill="white" opacity="0.7">→ Z</text>
+  <text x="256" y="400" text-anchor="middle" font-family="monospace" font-size="13" letter-spacing="2" fill="white" opacity="0.4">REMAP ACTIVE</text>
+  <text x="256" y="450" text-anchor="middle" font-family="Arial" font-size="18" font-weight="bold" fill="white" opacity="0.5">KEY.MAP</text>
+</svg>

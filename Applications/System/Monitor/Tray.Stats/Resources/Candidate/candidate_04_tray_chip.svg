@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0A0A0A"/>
+      <stop offset="100%" stop-color="#1C2833"/>
+    </linearGradient>
+    <linearGradient id="chip" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#2C3E50"/>
+      <stop offset="100%" stop-color="#1A252F"/>
+    </linearGradient>
+    <linearGradient id="active" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#00F5A0"/>
+      <stop offset="100%" stop-color="#00D9F5"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- CPU Chip body -->
+  <rect x="156" y="156" width="200" height="200" rx="16" fill="url(#chip)" stroke="#00F5A0" stroke-width="3"/>
+  <!-- Chip pins top -->
+  <rect x="196" y="130" width="14" height="26" rx="4" fill="#00F5A0" filter="url(#glow)"/>
+  <rect x="226" y="130" width="14" height="26" rx="4" fill="#00D9F5" filter="url(#glow)"/>
+  <rect x="256" y="130" width="14" height="26" rx="4" fill="#00F5A0" filter="url(#glow)"/>
+  <rect x="286" y="130" width="14" height="26" rx="4" fill="#00D9F5" filter="url(#glow)"/>
+  <!-- Chip pins bottom -->
+  <rect x="196" y="356" width="14" height="26" rx="4" fill="#00F5A0" filter="url(#glow)"/>
+  <rect x="226" y="356" width="14" height="26" rx="4" fill="#00D9F5" filter="url(#glow)"/>
+  <rect x="256" y="356" width="14" height="26" rx="4" fill="#00F5A0" filter="url(#glow)"/>
+  <rect x="286" y="356" width="14" height="26" rx="4" fill="#00D9F5" filter="url(#glow)"/>
+  <!-- Chip pins left -->
+  <rect x="130" y="196" width="26" height="14" rx="4" fill="#00F5A0" filter="url(#glow)"/>
+  <rect x="130" y="226" width="26" height="14" rx="4" fill="#00D9F5" filter="url(#glow)"/>
+  <rect x="130" y="256" width="26" height="14" rx="4" fill="#00F5A0" filter="url(#glow)"/>
+  <rect x="130" y="286" width="26" height="14" rx="4" fill="#00D9F5" filter="url(#glow)"/>
+  <!-- Chip pins right -->
+  <rect x="356" y="196" width="26" height="14" rx="4" fill="#00F5A0" filter="url(#glow)"/>
+  <rect x="356" y="226" width="26" height="14" rx="4" fill="#00D9F5" filter="url(#glow)"/>
+  <rect x="356" y="256" width="26" height="14" rx="4" fill="#00F5A0" filter="url(#glow)"/>
+  <rect x="356" y="286" width="26" height="14" rx="4" fill="#00D9F5" filter="url(#glow)"/>
+  <!-- Inner die -->
+  <rect x="196" y="196" width="120" height="120" rx="8" fill="#0D1F2D" stroke="url(#active)" stroke-width="2"/>
+  <!-- Activity indicator -->
+  <text x="256" y="262" text-anchor="middle" font-family="Segoe UI" font-size="34" font-weight="700" fill="#00F5A0" filter="url(#glow)">72%</text>
+  <text x="256" y="440" text-anchor="middle" font-family="Segoe UI" font-size="26" fill="#888" letter-spacing="4">STATS</text>
+</svg>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0D1117"/>
+      <stop offset="100%" stop-color="#161B22"/>
+    </linearGradient>
+    <linearGradient id="liveGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#3FB950"/>
+      <stop offset="100%" stop-color="#1A7F37"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Terminal/log viewer window -->
+  <rect x="60" y="80" width="392" height="320" rx="10" fill="#0D1117" stroke="#30363D" stroke-width="1.5"/>
+  <!-- Title bar -->
+  <rect x="60" y="80" width="392" height="38" rx="10" fill="#21262D"/>
+  <rect x="60" y="100" width="392" height="18" fill="#21262D"/>
+  <circle cx="86" cy="99" r="7" fill="#FF5F57"/>
+  <circle cx="110" cy="99" r="7" fill="#FEBC2E"/>
+  <circle cx="134" cy="99" r="7" fill="#28C840"/>
+  <!-- LIVE badge -->
+  <rect x="340" y="86" width="52" height="22" rx="11" fill="#3FB950" filter="url(#glow)"/>
+  <circle cx="352" cy="97" r="4" fill="white"/>
+  <text x="370" y="101" font-family="Arial, sans-serif" font-size="11" fill="white" font-weight="700">LIVE</text>
+  <text x="206" y="103" font-family="'Courier New', monospace" font-size="12" text-anchor="middle" fill="#8B949E">log.tail — app.log</text>
+  <!-- Log lines (scrolling content) -->
+  <!-- Faded older lines at top -->
+  <rect x="76" y="130" width="240" height="6" rx="3" fill="#21262D" opacity="0.6"/>
+  <rect x="76" y="144" width="200" height="6" rx="3" fill="#21262D" opacity="0.5"/>
+  <rect x="76" y="158" width="220" height="6" rx="3" fill="#21262D" opacity="0.4"/>
+  <rect x="76" y="172" width="180" height="6" rx="3" fill="#21262D" opacity="0.35"/>
+  <!-- Timestamp + normal lines -->
+  <text x="76" y="198" font-family="'Courier New', monospace" font-size="11" fill="#8B949E">10:24:18</text>
+  <rect x="144" y="192" width="160" height="7" rx="3" fill="#C9D1D9" opacity="0.5"/>
+  <text x="76" y="214" font-family="'Courier New', monospace" font-size="11" fill="#8B949E">10:24:19</text>
+  <rect x="144" y="208" width="140" height="7" rx="3" fill="#C9D1D9" opacity="0.45"/>
+  <!-- WARNING line -->
+  <rect x="72" y="222" width="380" height="14" rx="2" fill="#FF8C00" opacity="0.1"/>
+  <text x="76" y="232" font-family="'Courier New', monospace" font-size="11" fill="#8B949E">10:24:20</text>
+  <text x="144" y="232" font-family="'Courier New', monospace" font-size="11" fill="#FEBC2E">[WARN]</text>
+  <rect x="208" y="226" width="200" height="7" rx="3" fill="#FEBC2E" opacity="0.6"/>
+  <text x="76" y="252" font-family="'Courier New', monospace" font-size="11" fill="#8B949E">10:24:21</text>
+  <rect x="144" y="246" width="170" height="7" rx="3" fill="#C9D1D9" opacity="0.5"/>
+  <text x="76" y="268" font-family="'Courier New', monospace" font-size="11" fill="#8B949E">10:24:22</text>
+  <rect x="144" y="262" width="155" height="7" rx="3" fill="#C9D1D9" opacity="0.45"/>
+  <!-- ERROR line -->
+  <rect x="72" y="276" width="380" height="14" rx="2" fill="#FF4444" opacity="0.12"/>
+  <text x="76" y="286" font-family="'Courier New', monospace" font-size="11" fill="#8B949E">10:24:23</text>
+  <text x="144" y="286" font-family="'Courier New', monospace" font-size="11" fill="#FF7B72">[ERROR]</text>
+  <rect x="214" y="280" width="220" height="7" rx="3" fill="#FF7B72" opacity="0.6"/>
+  <!-- Latest line (most recent/highlighted) -->
+  <rect x="72" y="298" width="380" height="16" rx="2" fill="#1F6FEB" opacity="0.1"/>
+  <text x="76" y="310" font-family="'Courier New', monospace" font-size="11" fill="#8B949E">10:24:24</text>
+  <rect x="144" y="302" width="190" height="8" rx="4" fill="#58A6FF" opacity="0.8" filter="url(#glow)"/>
+  <!-- Blinking cursor at tail -->
+  <rect x="76" y="324" width="8" height="14" fill="#3FB950" filter="url(#glow)"/>
+  <!-- Scroll bar right side -->
+  <rect x="440" y="118" width="6" height="252" rx="3" fill="#21262D"/>
+  <rect x="440" y="298" width="6" height="72" rx="3" fill="#30363D"/>
+  <!-- Bottom status -->
+  <rect x="60" y="400" width="392" height="28" rx="0" fill="#1A7F37" opacity="0.8"/>
+  <rect x="60" y="414" width="392" height="14" rx="0" fill="#1A7F37" opacity="0.8"/>
+  <text x="76" y="418" font-family="'Courier New', monospace" font-size="11" fill="white">TAIL MODE  |  Lines: 2,847  |  Errors: 3  |  Warns: 12</text>
+</svg>

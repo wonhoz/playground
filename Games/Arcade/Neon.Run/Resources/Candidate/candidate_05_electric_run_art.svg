@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#001020"/>
+      <stop offset="100%" style="stop-color:#002010"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="lightning">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Electric ground -->
+  <rect x="40" y="390" width="432" height="3" fill="#00ff88" filter="url(#glow)" opacity="0.7"/>
+  <!-- Electric arcs from runner -->
+  <path d="M240 330 L220 310 L235 300 L215 280 L230 270" stroke="#00ff88" stroke-width="2" fill="none" filter="url(#lightning)" opacity="0.8"/>
+  <path d="M270 330 L290 305 L275 295 L295 275" stroke="#00ccff" stroke-width="2" fill="none" filter="url(#lightning)" opacity="0.8"/>
+  <path d="M256 350 L250 320 L260 310 L252 290" stroke="#ffffff" stroke-width="1.5" fill="none" filter="url(#lightning)" opacity="0.6"/>
+  <!-- Runner with electric aura -->
+  <g filter="url(#glow)" transform="translate(256, 330)">
+    <!-- Electric aura -->
+    <ellipse cx="0" cy="-20" rx="35" ry="50" fill="none" stroke="#00ff88" stroke-width="1" opacity="0.3" stroke-dasharray="3,4"/>
+    <!-- Runner -->
+    <circle cx="0" cy="-55" r="15" fill="none" stroke="#00ccff" stroke-width="2.5"/>
+    <line x1="0" y1="-39" x2="0" y2="2" stroke="#00ff88" stroke-width="3"/>
+    <line x1="0" y1="-22" x2="-20" y2="-4" stroke="#00ccff" stroke-width="2.5"/>
+    <line x1="0" y1="-22" x2="18" y2="-38" stroke="#00ff88" stroke-width="2.5"/>
+    <line x1="0" y1="2" x2="-16" y2="30" stroke="#00ccff" stroke-width="2.5"/>
+    <line x1="-16" y1="30" x2="-7" y2="46" stroke="#00ccff" stroke-width="2"/>
+    <line x1="0" y1="2" x2="17" y2="24" stroke="#00ff88" stroke-width="2.5"/>
+    <line x1="17" y1="24" x2="25" y2="12" stroke="#00ff88" stroke-width="2"/>
+  </g>
+  <!-- Electric particles -->
+  <circle cx="200" cy="280" r="3" fill="#00ff88" filter="url(#glow)"/>
+  <circle cx="310" cy="290" r="2.5" fill="#00ccff" filter="url(#glow)"/>
+  <circle cx="190" cy="310" r="2" fill="#00ff88" filter="url(#glow)"/>
+  <circle cx="325" cy="315" r="2" fill="#ffffff" filter="url(#glow)"/>
+  <!-- Speed lines electric -->
+  <line x1="60" y1="290" x2="210" y2="293" stroke="#00ff88" stroke-width="2" filter="url(#glow)" opacity="0.5" stroke-linecap="round"/>
+  <line x1="60" y1="305" x2="195" y2="307" stroke="#00ccff" stroke-width="1.5" filter="url(#glow)" opacity="0.4" stroke-linecap="round"/>
+  <line x1="70" y1="278" x2="185" y2="280" stroke="#00ff88" stroke-width="1" filter="url(#glow)" opacity="0.3" stroke-linecap="round"/>
+  <!-- Obstacle electric -->
+  <rect x="370" y="340" width="18" height="50" rx="3" fill="none" stroke="#ff4400" stroke-width="2" filter="url(#glow)"/>
+  <line x1="370" y1="345" x2="388" y2="345" stroke="#ff4400" stroke-width="1" opacity="0.5"/>
+  <line x1="370" y1="360" x2="388" y2="360" stroke="#ff4400" stroke-width="1" opacity="0.5"/>
+  <line x1="370" y1="375" x2="388" y2="375" stroke="#ff4400" stroke-width="1" opacity="0.5"/>
+</svg>

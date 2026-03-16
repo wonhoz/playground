@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#05080f"/>
+      <stop offset="100%" stop-color="#0a1020"/>
+    </linearGradient>
+    <radialGradient id="hud_glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#0044ff" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#0044ff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- HUD glow -->
+  <rect x="60" y="60" width="392" height="392" rx="20" fill="url(#hud_glow)"/>
+  <!-- HUD outer border -->
+  <rect x="60" y="60" width="392" height="392" rx="20" fill="none" stroke="#0066ff" stroke-width="2" opacity="0.5"/>
+  <!-- Corner decorations -->
+  <path d="M60 120 L60 60 L120 60" fill="none" stroke="#0088ff" stroke-width="3"/>
+  <path d="M452 120 L452 60 L392 60" fill="none" stroke="#0088ff" stroke-width="3"/>
+  <path d="M60 392 L60 452 L120 452" fill="none" stroke="#0088ff" stroke-width="3"/>
+  <path d="M452 392 L452 452 L392 452" fill="none" stroke="#0088ff" stroke-width="3"/>
+  <!-- Title bar -->
+  <text x="256" y="92" font-size="18" fill="#0088ff" font-family="monospace" text-anchor="middle" opacity="0.8">SYSTEM DASHBOARD</text>
+  <!-- CPU widget -->
+  <rect x="78" y="108" width="168" height="150" rx="8" fill="#080e18" stroke="#0044aa" stroke-width="1"/>
+  <text x="162" y="130" font-size="14" fill="#4488ff" font-family="monospace" text-anchor="middle">CPU USAGE</text>
+  <text x="162" y="185" font-size="48" fill="#ffffff" font-family="monospace" text-anchor="middle" font-weight="bold">48%</text>
+  <rect x="92" y="198" width="140" height="8" rx="4" fill="#0a1528"/>
+  <rect x="92" y="198" width="67" height="8" rx="4" fill="#4488ff"/>
+  <text x="162" y="238" font-size="12" fill="#446688" font-family="monospace" text-anchor="middle">4 cores  3.6GHz</text>
+  <!-- MEM widget -->
+  <rect x="266" y="108" width="168" height="150" rx="8" fill="#080e18" stroke="#004422" stroke-width="1"/>
+  <text x="350" y="130" font-size="14" fill="#44ff88" font-family="monospace" text-anchor="middle">MEMORY</text>
+  <text x="350" y="185" font-size="48" fill="#ffffff" font-family="monospace" text-anchor="middle" font-weight="bold">62%</text>
+  <rect x="280" y="198" width="140" height="8" rx="4" fill="#0a1810"/>
+  <rect x="280" y="198" width="87" height="8" rx="4" fill="#44ff88"/>
+  <text x="350" y="238" font-size="12" fill="#226644" font-family="monospace" text-anchor="middle">14.1 / 32 GB</text>
+  <!-- DISK widget -->
+  <rect x="78" y="274" width="168" height="150" rx="8" fill="#080e18" stroke="#442200" stroke-width="1"/>
+  <text x="162" y="296" font-size="14" fill="#ff9944" font-family="monospace" text-anchor="middle">DISK I/O</text>
+  <text x="162" y="351" font-size="48" fill="#ffffff" font-family="monospace" text-anchor="middle" font-weight="bold">28%</text>
+  <rect x="92" y="364" width="140" height="8" rx="4" fill="#180e08"/>
+  <rect x="92" y="364" width="39" height="8" rx="4" fill="#ff9944"/>
+  <text x="162" y="402" font-size="12" fill="#664422" font-family="monospace" text-anchor="middle">R:85  W:32 MB/s</text>
+  <!-- TEMP widget -->
+  <rect x="266" y="274" width="168" height="150" rx="8" fill="#080e18" stroke="#440000" stroke-width="1"/>
+  <text x="350" y="296" font-size="14" fill="#ff4444" font-family="monospace" text-anchor="middle">TEMPERATURE</text>
+  <text x="350" y="351" font-size="48" fill="#ffffff" font-family="monospace" text-anchor="middle" font-weight="bold">62°C</text>
+  <rect x="280" y="364" width="140" height="8" rx="4" fill="#180808"/>
+  <rect x="280" y="364" width="88" height="8" rx="4" fill="#ff4444"/>
+  <text x="350" y="402" font-size="12" fill="#662222" font-family="monospace" text-anchor="middle">Fan: 2400 rpm</text>
+  <!-- Bottom status -->
+  <text x="256" y="472" font-size="14" fill="#334455" font-family="monospace" text-anchor="middle">Uptime: 3d 14h 22m  |  TRAY.STATS</text>
+</svg>

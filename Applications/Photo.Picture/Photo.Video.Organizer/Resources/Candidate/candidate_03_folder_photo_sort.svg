@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2c3e50"/>
+      <stop offset="100%" stop-color="#1a1a2e"/>
+    </linearGradient>
+    <linearGradient id="folder" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f39c12"/>
+      <stop offset="100%" stop-color="#e67e22"/>
+    </linearGradient>
+    <linearGradient id="photo" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#74b9ff"/>
+      <stop offset="100%" stop-color="#0984e3"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Main folder -->
+  <path d="M80 200 Q80 180 100 180 L220 180 L240 160 L420 160 Q440 160 440 180 L440 360 Q440 380 420 380 L100 380 Q80 380 80 360 Z" fill="url(#folder)"/>
+  <path d="M80 200 L440 200 L440 360 Q440 380 420 380 L100 380 Q80 380 80 360 Z" fill="url(#folder)" opacity="0.8"/>
+  <!-- Photos inside folder -->
+  <rect x="116" y="220" width="80" height="60" rx="6" fill="url(#photo)" opacity="0.9"/>
+  <circle cx="148" cy="244" r="12" fill="white" opacity="0.3"/>
+  <path d="M116 268 L136 248 L156 260 L172 248 L196 268 Z" fill="white" opacity="0.3"/>
+  <rect x="216" y="220" width="80" height="60" rx="6" fill="#fd79a8" opacity="0.9"/>
+  <circle cx="248" cy="244" r="12" fill="white" opacity="0.3"/>
+  <rect x="316" y="220" width="80" height="60" rx="6" fill="#55efc4" opacity="0.9"/>
+  <!-- Sort arrows -->
+  <path d="M156 310 L256 310 L356 310" stroke="white" stroke-width="3" fill="none" opacity="0.6"/>
+  <polygon points="346,302 366,310 346,318" fill="white" opacity="0.6"/>
+  <line x1="256" y1="296" x2="256" y2="324" stroke="white" stroke-width="3" opacity="0.6"/>
+</svg>

@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#000000"/>
+      <stop offset="100%" stop-color="#1a1a1a"/>
+    </linearGradient>
+    <linearGradient id="web" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00c6ff"/>
+      <stop offset="100%" stop-color="#0072ff"/>
+    </linearGradient>
+    <linearGradient id="cam" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f7971e"/>
+      <stop offset="100%" stop-color="#ffd200"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Web globe lines -->
+  <circle cx="256" cy="256" r="170" fill="none" stroke="url(#web)" stroke-width="3" filter="url(#glow)"/>
+  <circle cx="256" cy="256" r="120" fill="none" stroke="url(#web)" stroke-width="2" opacity="0.5"/>
+  <circle cx="256" cy="256" r="70" fill="none" stroke="url(#web)" stroke-width="1.5" opacity="0.3"/>
+  <!-- Vertical/horizontal grid -->
+  <line x1="256" y1="86" x2="256" y2="426" stroke="url(#web)" stroke-width="2" opacity="0.4"/>
+  <line x1="86" y1="256" x2="426" y2="256" stroke="url(#web)" stroke-width="2" opacity="0.4"/>
+  <line x1="136" y1="136" x2="376" y2="376" stroke="url(#web)" stroke-width="1.5" opacity="0.25"/>
+  <line x1="376" y1="136" x2="136" y2="376" stroke="url(#web)" stroke-width="1.5" opacity="0.25"/>
+  <!-- Camera lens center -->
+  <circle cx="256" cy="256" r="50" fill="#000" stroke="url(#cam)" stroke-width="5" filter="url(#glow)"/>
+  <circle cx="256" cy="256" r="36" fill="url(#cam)" opacity="0.7" filter="url(#glow)"/>
+  <circle cx="256" cy="256" r="20" fill="#000"/>
+  <circle cx="256" cy="256" r="12" fill="url(#cam)" opacity="0.9"/>
+  <circle cx="248" cy="248" r="5" fill="white" opacity="0.5"/>
+</svg>

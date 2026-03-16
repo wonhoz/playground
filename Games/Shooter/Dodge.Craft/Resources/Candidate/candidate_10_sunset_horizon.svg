@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0D0020"/>
+      <stop offset="40%" stop-color="#3D0840"/>
+      <stop offset="70%" stop-color="#8B1A1A"/>
+      <stop offset="100%" stop-color="#CC4400"/>
+    </linearGradient>
+    <linearGradient id="sun" cx="50%" cy="50%" r="50%" gradientUnits="objectBoundingBox" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFE066"/>
+      <stop offset="100%" stop-color="#FF6600"/>
+    </linearGradient>
+    <linearGradient id="ship_dark" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#2A1A00"/>
+      <stop offset="100%" stop-color="#100800"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Sun -->
+  <circle cx="256" cy="340" r="90" fill="#FF8800" opacity="0.8"/>
+  <circle cx="256" cy="340" r="70" fill="#FFCC00" opacity="0.6"/>
+  <!-- Horizon line -->
+  <rect x="40" y="330" width="432" height="4" fill="#FF6600" opacity="0.6"/>
+  <!-- Silhouette ship -->
+  <polygon points="256,80 308,280 256,262 204,280" fill="url(#ship_dark)"/>
+  <!-- Wing silhouettes -->
+  <polygon points="204,235 148,275 172,280 204,252" fill="#0D0808"/>
+  <polygon points="308,235 364,275 340,280 308,252" fill="#0D0808"/>
+  <!-- Engine glow warm -->
+  <ellipse cx="256" cy="295" rx="22" ry="32" fill="#FF6600" opacity="0.7"/>
+  <ellipse cx="256" cy="310" rx="12" ry="20" fill="#FFAA00" opacity="0.6"/>
+  <!-- Birds / obstacles silhouette -->
+  <path d="M90,180 Q100,165 115,180" stroke="#0D0808" stroke-width="4" fill="none"/>
+  <path d="M115,180 Q130,165 145,180" stroke="#0D0808" stroke-width="4" fill="none"/>
+  <path d="M360,150 Q372,135 387,150" stroke="#0D0808" stroke-width="4" fill="none"/>
+  <path d="M387,150 Q402,135 416,150" stroke="#0D0808" stroke-width="4" fill="none"/>
+  <path d="M160,100 Q170,88 182,100" stroke="#0D0808" stroke-width="3" fill="none"/>
+  <path d="M182,100 Q194,88 205,100" stroke="#0D0808" stroke-width="3" fill="none"/>
+  <!-- Sun reflection on water -->
+  <rect x="220" y="334" width="72" height="100" fill="#FF8800" opacity="0.15"/>
+  <text x="256" y="455" font-family="Arial" font-size="26" font-weight="bold" fill="#FFCC66" text-anchor="middle">DODGE·CRAFT</text>
+</svg>

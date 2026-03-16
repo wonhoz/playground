@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0D0D1A"/>
+      <stop offset="100%" stop-color="#121224"/>
+    </linearGradient>
+    <linearGradient id="panel" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#141428"/>
+      <stop offset="100%" stop-color="#111120"/>
+    </linearGradient>
+    <linearGradient id="running" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00CC44"/>
+      <stop offset="100%" stop-color="#00FF66"/>
+    </linearGradient>
+    <linearGradient id="stopped" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#CC2200"/>
+      <stop offset="100%" stop-color="#FF3300"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Services panel -->
+  <rect x="56" y="72" width="400" height="368" rx="12" fill="url(#panel)" stroke="#222244" stroke-width="1.5"/>
+  <!-- Header -->
+  <rect x="56" y="72" width="400" height="44" rx="12" fill="#1A1A34"/>
+  <rect x="56" y="104" width="400" height="12" fill="#1A1A34"/>
+  <!-- Shield icon in header -->
+  <path d="M 84,86 L 96,90 L 96,99 Q 96,106 90,109 Q 84,106 84,99 Z" fill="#4488FF" filter="url(#glow)"/>
+  <text x="108" y="100" font-family="'Segoe UI', sans-serif" font-size="14" fill="#AACCFF" font-weight="bold">Svc.Guard — Service Manager</text>
+  <!-- Column headers -->
+  <rect x="64" y="116" width="384" height="22" rx="4" fill="#1E1E38"/>
+  <text x="80" y="131" font-family="'Segoe UI', sans-serif" font-size="11" fill="#666688">Name</text>
+  <text x="260" y="131" font-family="'Segoe UI', sans-serif" font-size="11" fill="#666688">Status</text>
+  <text x="340" y="131" font-family="'Segoe UI', sans-serif" font-size="11" fill="#666688">Startup</text>
+  <text x="420" y="131" font-family="'Segoe UI', sans-serif" font-size="11" fill="#666688">Guard</text>
+  <!-- Service rows -->
+  <!-- Row 1 - running, guarded -->
+  <rect x="64" y="140" width="384" height="30" rx="3" fill="#161628"/>
+  <text x="80" y="159" font-family="'Segoe UI', sans-serif" font-size="12" fill="#CCDDFF">Windows Update</text>
+  <circle cx="270" cy="155" r="6" fill="url(#running)" filter="url(#glow)"/>
+  <text x="283" y="159" font-family="'Segoe UI', sans-serif" font-size="11" fill="#44FF88">Running</text>
+  <text x="340" y="159" font-family="'Segoe UI', sans-serif" font-size="11" fill="#8888AA">Auto</text>
+  <rect x="418" y="146" width="22" height="18" rx="9" fill="#4488FF" opacity="0.8" filter="url(#glow)"/>
+  <!-- Row 2 - running -->
+  <rect x="64" y="172" width="384" height="30" rx="3" fill="#181830"/>
+  <text x="80" y="191" font-family="'Segoe UI', sans-serif" font-size="12" fill="#CCDDFF">DNS Client</text>
+  <circle cx="270" cy="187" r="6" fill="url(#running)" filter="url(#glow)"/>
+  <text x="283" y="191" font-family="'Segoe UI', sans-serif" font-size="11" fill="#44FF88">Running</text>
+  <text x="340" y="191" font-family="'Segoe UI', sans-serif" font-size="11" fill="#8888AA">Auto</text>
+  <!-- Row 3 - stopped, guarded -->
+  <rect x="64" y="204" width="384" height="30" rx="3" fill="#161628"/>
+  <text x="80" y="223" font-family="'Segoe UI', sans-serif" font-size="12" fill="#CCDDFF">Print Spooler</text>
+  <circle cx="270" cy="219" r="6" fill="url(#stopped)" filter="url(#glow)"/>
+  <text x="283" y="223" font-family="'Segoe UI', sans-serif" font-size="11" fill="#FF4444">Stopped</text>
+  <text x="340" y="223" font-family="'Segoe UI', sans-serif" font-size="11" fill="#8888AA">Manual</text>
+  <rect x="418" y="210" width="22" height="18" rx="9" fill="#4488FF" opacity="0.6" filter="url(#glow)"/>
+  <!-- Row 4 - running, highlighted -->
+  <rect x="64" y="236" width="384" height="30" rx="3" fill="#1A2040"/>
+  <text x="80" y="255" font-family="'Segoe UI', sans-serif" font-size="12" fill="#AACCFF">Windows Defender</text>
+  <circle cx="270" cy="251" r="6" fill="url(#running)" filter="url(#glow)"/>
+  <text x="283" y="255" font-family="'Segoe UI', sans-serif" font-size="11" fill="#44FF88">Running</text>
+  <text x="340" y="255" font-family="'Segoe UI', sans-serif" font-size="11" fill="#8888AA">Auto</text>
+  <rect x="418" y="242" width="22" height="18" rx="9" fill="#4488FF" opacity="0.9" filter="url(#glow)"/>
+  <!-- Row 5 -->
+  <rect x="64" y="268" width="384" height="30" rx="3" fill="#161628"/>
+  <text x="80" y="287" font-family="'Segoe UI', sans-serif" font-size="12" fill="#CCDDFF">Remote Desktop</text>
+  <circle cx="270" cy="283" r="6" fill="url(#stopped)"/>
+  <text x="283" y="287" font-family="'Segoe UI', sans-serif" font-size="11" fill="#FF4444">Stopped</text>
+  <text x="340" y="287" font-family="'Segoe UI', sans-serif" font-size="11" fill="#8888AA">Disabled</text>
+  <!-- Status bar -->
+  <rect x="64" y="316" width="384" height="1" fill="#222244"/>
+  <text x="80" y="340" font-family="'Segoe UI', sans-serif" font-size="11" fill="#4488FF">3 Running</text>
+  <text x="168" y="340" font-family="'Segoe UI', sans-serif" font-size="11" fill="#FF4444">2 Stopped</text>
+  <text x="268" y="340" font-family="'Segoe UI', sans-serif" font-size="11" fill="#44AAFF">3 Guarded</text>
+  <!-- Alert section -->
+  <rect x="64" y="358" width="384" height="68" rx="8" fill="#1A1A00" stroke="#AA8800" stroke-width="1"/>
+  <text x="80" y="378" font-family="'Segoe UI', sans-serif" font-size="12" fill="#FFCC44">! Alert</text>
+  <text x="80" y="396" font-family="'Segoe UI', sans-serif" font-size="11" fill="#AA8844">Print Spooler unexpectedly stopped</text>
+  <text x="80" y="414" font-family="'Segoe UI', sans-serif" font-size="11" fill="#886622">Guard will attempt restart in 30s</text>
+</svg>

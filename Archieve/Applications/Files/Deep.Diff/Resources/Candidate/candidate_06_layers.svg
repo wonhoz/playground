@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#17153B"/>
+      <stop offset="100%" stop-color="#2E236C"/>
+    </linearGradient>
+    <linearGradient id="l1" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#433D8B"/>
+      <stop offset="100%" stop-color="#C8ACD6"/>
+    </linearGradient>
+    <linearGradient id="l2" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#2E236C"/>
+      <stop offset="100%" stop-color="#433D8B"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Stacked layer cards -->
+  <!-- Layer 3 (bottom, diff result) -->
+  <rect x="116" y="320" width="280" height="80" rx="10" fill="#2E236C" stroke="#433D8B" stroke-width="2"/>
+  <rect x="128" y="332" width="200" height="8" rx="4" fill="#433D8B"/>
+  <rect x="128" y="348" width="160" height="8" rx="4" fill="#433D8B" opacity="0.7"/>
+  <rect x="128" y="364" width="180" height="8" rx="4" fill="#ff4d6d" opacity="0.8"/>
+  <text x="364" y="368" font-family="Arial, sans-serif" font-size="11" fill="#C8ACD6" text-anchor="end">DIFF</text>
+  <!-- Layer 2 (middle, file B) -->
+  <rect x="96" y="240" width="280" height="80" rx="10" fill="#433D8B" stroke="#C8ACD6" stroke-width="2" opacity="0.9"/>
+  <rect x="108" y="252" width="200" height="8" rx="4" fill="#C8ACD6" opacity="0.6"/>
+  <rect x="108" y="268" width="140" height="8" rx="4" fill="#88ff88" opacity="0.7"/>
+  <rect x="108" y="284" width="180" height="8" rx="4" fill="#C8ACD6" opacity="0.5"/>
+  <text x="344" y="288" font-family="Arial, sans-serif" font-size="11" fill="#C8ACD6" text-anchor="end">File B</text>
+  <!-- Layer 1 (top, file A) -->
+  <rect x="76" y="160" width="280" height="80" rx="10" fill="url(#l1)" stroke="#ffffff" stroke-width="2"/>
+  <rect x="88" y="172" width="200" height="8" rx="4" fill="#fff" opacity="0.7"/>
+  <rect x="88" y="188" width="160" height="8" rx="4" fill="#ff6644" opacity="0.8"/>
+  <rect x="88" y="204" width="180" height="8" rx="4" fill="#fff" opacity="0.5"/>
+  <text x="324" y="208" font-family="Arial, sans-serif" font-size="11" fill="#17153B" text-anchor="end" font-weight="bold">File A</text>
+  <!-- Connecting arrows -->
+  <line x1="256" y1="240" x2="256" y2="320" stroke="#C8ACD6" stroke-width="2" stroke-dasharray="5,3" opacity="0.6"/>
+  <polygon points="250,314 256,326 262,314" fill="#C8ACD6" opacity="0.6"/>
+  <line x1="256" y1="160" x2="256" y2="240" stroke="#C8ACD6" stroke-width="2" stroke-dasharray="5,3" opacity="0.6"/>
+  <polygon points="250,234 256,246 262,234" fill="#C8ACD6" opacity="0.6"/>
+  <!-- Title -->
+  <text x="256" y="116" font-family="Arial Black, sans-serif" font-size="42" font-weight="900" fill="#C8ACD6" text-anchor="middle" letter-spacing="2">DEEP</text>
+  <text x="256" y="152" font-family="Arial Black, sans-serif" font-size="42" font-weight="900" fill="#C8ACD6" text-anchor="middle" letter-spacing="2">DIFF</text>
+  <!-- Bottom stat -->
+  <text x="256" y="430" font-family="Arial, sans-serif" font-size="13" fill="#C8ACD6" text-anchor="middle" opacity="0.7">3-Layer Deep Analysis</text>
+  <!-- Diff badge -->
+  <rect x="192" y="440" width="128" height="32" rx="16" fill="#ff4d6d" opacity="0.9"/>
+  <text x="256" y="461" font-family="Arial Black, sans-serif" font-size="14" fill="#fff" text-anchor="middle" letter-spacing="2">COMPARE</text>
+</svg>

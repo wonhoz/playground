@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#000510"/>
+      <stop offset="100%" stop-color="#00101F"/>
+    </linearGradient>
+    <linearGradient id="shipBody" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#E0F2FE"/>
+      <stop offset="100%" stop-color="#7DD3FC"/>
+    </linearGradient>
+    <radialGradient id="engineGlow" cx="50%" cy="100%" r="80%">
+      <stop offset="0%" stop-color="#FDE68A" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#F97316" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="bulletGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FDE047"/>
+      <stop offset="100%" stop-color="#EAB308"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Stars -->
+  <circle cx="70" cy="60" r="1.5" fill="white" opacity="0.9"/>
+  <circle cx="180" cy="40" r="1" fill="white" opacity="0.7"/>
+  <circle cx="300" cy="70" r="2" fill="white" opacity="0.6"/>
+  <circle cx="430" cy="45" r="1.5" fill="white" opacity="0.8"/>
+  <circle cx="490" cy="130" r="1" fill="white" opacity="0.5"/>
+  <circle cx="50" cy="200" r="1.5" fill="white" opacity="0.6"/>
+  <circle cx="460" cy="220" r="1" fill="white" opacity="0.7"/>
+  <circle cx="120" cy="350" r="2" fill="white" opacity="0.5"/>
+  <circle cx="390" cy="370" r="1" fill="white" opacity="0.6"/>
+  <!-- Enemy ships (top) -->
+  <!-- Enemy 1 -->
+  <polygon points="130,80 110,130 130,118 150,130" fill="#EF4444" opacity="0.9"/>
+  <ellipse cx="130" cy="135" rx="10" ry="5" fill="#F97316" opacity="0.7"/>
+  <!-- Enemy 2 -->
+  <polygon points="256,60 236,110 256,98 276,110" fill="#F87171" opacity="0.9"/>
+  <ellipse cx="256" cy="115" rx="10" ry="5" fill="#F97316" opacity="0.7"/>
+  <!-- Enemy 3 -->
+  <polygon points="382,80 362,130 382,118 402,130" fill="#EF4444" opacity="0.9"/>
+  <ellipse cx="382" cy="135" rx="10" ry="5" fill="#F97316" opacity="0.7"/>
+  <!-- Enemy bullets falling down -->
+  <rect x="125" y="150" width="10" height="30" rx="5" fill="url(#bulletGrad)"/>
+  <rect x="251" y="140" width="10" height="30" rx="5" fill="url(#bulletGrad)"/>
+  <rect x="377" y="150" width="10" height="30" rx="5" fill="url(#bulletGrad)"/>
+  <rect x="125" y="210" width="10" height="30" rx="5" fill="url(#bulletGrad)" opacity="0.7"/>
+  <rect x="251" y="200" width="10" height="30" rx="5" fill="url(#bulletGrad)" opacity="0.7"/>
+  <rect x="377" y="210" width="10" height="30" rx="5" fill="url(#bulletGrad)" opacity="0.7"/>
+  <!-- Player ship (bottom, dodging) -->
+  <ellipse cx="320" cy="380" rx="60" ry="30" fill="url(#engineGlow)"/>
+  <polygon points="320,300 280,390 320,370 360,390" fill="url(#shipBody)" stroke="#BAE6FD" stroke-width="2"/>
+  <!-- Wing details -->
+  <polygon points="280,390 240,400 270,375" fill="#7DD3FC" opacity="0.8"/>
+  <polygon points="360,390 400,400 370,375" fill="#7DD3FC" opacity="0.8"/>
+  <!-- Engine flame -->
+  <ellipse cx="320" cy="395" rx="18" ry="25" fill="#FDE68A" opacity="0.8"/>
+  <ellipse cx="320" cy="400" rx="10" ry="18" fill="white" opacity="0.6"/>
+  <!-- Shield bar -->
+  <rect x="80" y="450" width="352" height="16" rx="8" fill="#1E293B" stroke="#334155" stroke-width="1.5"/>
+  <rect x="80" y="450" width="260" height="16" rx="8" fill="#22C55E" opacity="0.8"/>
+  <text x="256" y="490" font-family="monospace" font-size="12" fill="#7DD3FC" text-anchor="middle">DODGE BLITZ</text>
+</svg>

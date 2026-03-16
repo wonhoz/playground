@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0A1E35"/>
+      <stop offset="100%" stop-color="#0D2D4A"/>
+    </linearGradient>
+    <linearGradient id="ice_ship" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#DDFAFF"/>
+      <stop offset="50%" stop-color="#88DDFF"/>
+      <stop offset="100%" stop-color="#44AAEE"/>
+    </linearGradient>
+    <linearGradient id="ice_obs" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#BBEEFF"/>
+      <stop offset="100%" stop-color="#5599CC"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Aurora effect -->
+  <path d="M40,150 Q130,100 256,130 Q382,160 472,120" stroke="#00FFAA" stroke-width="3" fill="none" opacity="0.25"/>
+  <path d="M40,170 Q130,125 256,150 Q382,178 472,140" stroke="#44DDFF" stroke-width="2" fill="none" opacity="0.2"/>
+  <!-- Ice crystals obstacles -->
+  <polygon points="100,130 120,100 140,130 120,165" fill="url(#ice_obs)" opacity="0.85"/>
+  <polygon points="108,138 120,112 132,138 120,157" fill="#EEFFFF" opacity="0.6"/>
+  <polygon points="370,110 395,75 420,110 395,150" fill="url(#ice_obs)" opacity="0.85"/>
+  <polygon points="380,118 395,88 410,118 395,142" fill="#EEFFFF" opacity="0.6"/>
+  <polygon points="180,70 198,45 216,70 198,98" fill="url(#ice_obs)" opacity="0.7"/>
+  <polygon points="320,90 340,65 360,90 340,118" fill="url(#ice_obs)" opacity="0.7"/>
+  <!-- Ice ship -->
+  <polygon points="256,100 305,265 256,248 207,265" fill="url(#ice_ship)"/>
+  <polygon points="256,100 282,255 256,240 230,255" fill="#EEFFFF" opacity="0.45"/>
+  <!-- Cockpit -->
+  <ellipse cx="256" cy="195" rx="16" ry="22" fill="#AAEEFF" opacity="0.9"/>
+  <!-- Wings ice -->
+  <polygon points="207,230 155,265 175,275 207,248" fill="url(#ice_ship)" opacity="0.85"/>
+  <polygon points="305,230 357,265 337,275 305,248" fill="url(#ice_ship)" opacity="0.85"/>
+  <!-- Frost trail -->
+  <path d="M240,265 Q230,300 220,380" stroke="#88EEFF" stroke-width="2" fill="none" opacity="0.5"/>
+  <path d="M272,265 Q282,300 292,380" stroke="#88EEFF" stroke-width="2" fill="none" opacity="0.5"/>
+  <!-- Snowflakes -->
+  <text x="75" y="380" font-size="18" fill="#AADDFF" opacity="0.5">❄</text>
+  <text x="420" y="350" font-size="14" fill="#AADDFF" opacity="0.4">❄</text>
+  <text x="256" y="450" font-family="Arial" font-size="26" font-weight="bold" fill="#88DDFF" text-anchor="middle">DODGE·CRAFT</text>
+</svg>

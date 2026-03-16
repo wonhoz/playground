@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#020617"/>
+      <stop offset="100%" stop-color="#0F172A"/>
+    </linearGradient>
+    <radialGradient id="irisGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#06B6D4"/>
+      <stop offset="40%" stop-color="#0891B2"/>
+      <stop offset="100%" stop-color="#0E7490"/>
+    </radialGradient>
+    <radialGradient id="pupilGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#111827"/>
+      <stop offset="100%" stop-color="#030712"/>
+    </radialGradient>
+    <linearGradient id="scanLine" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#22D3EE" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#22D3EE" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#22D3EE" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Eye outline -->
+  <path d="M60,256 Q150,130 256,130 Q362,130 452,256 Q362,382 256,382 Q150,382 60,256Z" fill="#0C1A2E" stroke="#0891B2" stroke-width="3"/>
+  <!-- Iris -->
+  <circle cx="256" cy="256" r="100" fill="url(#irisGrad)"/>
+  <!-- Iris pattern rings -->
+  <circle cx="256" cy="256" r="90" fill="none" stroke="#0E7490" stroke-width="2" opacity="0.6"/>
+  <circle cx="256" cy="256" r="75" fill="none" stroke="#0891B2" stroke-width="1.5" opacity="0.5"/>
+  <circle cx="256" cy="256" r="58" fill="none" stroke="#22D3EE" stroke-width="1" opacity="0.4"/>
+  <!-- Iris radial lines -->
+  <line x1="256" y1="156" x2="256" y2="186" stroke="#67E8F9" stroke-width="2" opacity="0.6"/>
+  <line x1="326" y1="186" x2="312" y2="212" stroke="#67E8F9" stroke-width="2" opacity="0.6"/>
+  <line x1="356" y1="256" x2="326" y2="256" stroke="#67E8F9" stroke-width="2" opacity="0.6"/>
+  <line x1="326" y1="326" x2="312" y2="300" stroke="#67E8F9" stroke-width="2" opacity="0.6"/>
+  <line x1="256" y1="356" x2="256" y2="326" stroke="#67E8F9" stroke-width="2" opacity="0.6"/>
+  <line x1="186" y1="326" x2="200" y2="300" stroke="#67E8F9" stroke-width="2" opacity="0.6"/>
+  <line x1="156" y1="256" x2="186" y2="256" stroke="#67E8F9" stroke-width="2" opacity="0.6"/>
+  <line x1="186" y1="186" x2="200" y2="212" stroke="#67E8F9" stroke-width="2" opacity="0.6"/>
+  <!-- Pupil -->
+  <circle cx="256" cy="256" r="42" fill="url(#pupilGrad)"/>
+  <!-- Scan line -->
+  <rect x="60" y="248" width="392" height="16" rx="8" fill="url(#scanLine)"/>
+  <!-- Disk usage overlay: arcs in iris -->
+  <path d="M256,176 A80,80 0 0,1 335,296" fill="none" stroke="#F97316" stroke-width="8" stroke-linecap="round" opacity="0.8"/>
+  <path d="M335,296 A80,80 0 0,1 177,296" fill="none" stroke="#A855F7" stroke-width="8" stroke-linecap="round" opacity="0.8"/>
+  <path d="M177,296 A80,80 0 0,1 256,176" fill="none" stroke="#22C55E" stroke-width="8" stroke-linecap="round" opacity="0.8"/>
+  <!-- Corner scan markers -->
+  <path d="M60,200 L60,150 L110,150" fill="none" stroke="#0891B2" stroke-width="3" stroke-linecap="round"/>
+  <path d="M452,200 L452,150 L402,150" fill="none" stroke="#0891B2" stroke-width="3" stroke-linecap="round"/>
+  <path d="M60,312 L60,362 L110,362" fill="none" stroke="#0891B2" stroke-width="3" stroke-linecap="round"/>
+  <path d="M452,312 L452,362 L402,362" fill="none" stroke="#0891B2" stroke-width="3" stroke-linecap="round"/>
+  <!-- Label -->
+  <text x="256" y="430" font-family="monospace" font-size="14" fill="#0891B2" text-anchor="middle">SCANNING DISK...</text>
+</svg>

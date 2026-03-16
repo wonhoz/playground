@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0a0a"/>
+      <stop offset="100%" stop-color="#1a1a2e"/>
+    </linearGradient>
+    <linearGradient id="arrow" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00d2ff"/>
+      <stop offset="100%" stop-color="#3a7bd5"/>
+    </linearGradient>
+    <linearGradient id="folder1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f093fb"/>
+      <stop offset="100%" stop-color="#f5576c"/>
+    </linearGradient>
+    <linearGradient id="folder2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4facfe"/>
+      <stop offset="100%" stop-color="#00f2fe"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Source folder -->
+  <path d="M60 200 Q60 180 80 180 L160 180 L176 164 L260 164 Q280 164 280 184 L280 300 Q280 320 260 320 L80 320 Q60 320 60 300 Z" fill="url(#folder1)" opacity="0.9"/>
+  <!-- Photos in source folder -->
+  <rect x="80" y="210" width="44" height="36" rx="4" fill="white" opacity="0.2"/>
+  <rect x="132" y="210" width="44" height="36" rx="4" fill="white" opacity="0.2"/>
+  <rect x="184" y="210" width="44" height="36" rx="4" fill="white" opacity="0.2"/>
+  <rect x="80" y="256" width="44" height="36" rx="4" fill="white" opacity="0.2"/>
+  <rect x="132" y="256" width="44" height="36" rx="4" fill="white" opacity="0.2"/>
+  <!-- Flow arrow -->
+  <path d="M290 252 Q350 220 370 240" stroke="url(#arrow)" stroke-width="5" fill="none" stroke-linecap="round" filter="url(#glow)"/>
+  <polygon points="358,228 382,240 362,254" fill="url(#arrow)" filter="url(#glow)"/>
+  <!-- Target folder -->
+  <path d="M240 330 Q240 310 260 310 L340 310 L356 294 L440 294 Q460 294 460 314 L460 430 Q460 450 440 450 L260 450 Q240 450 240 430 Z" fill="url(#folder2)" opacity="0.9"/>
+  <!-- Organized photos in target folder -->
+  <rect x="262" y="340" width="40" height="32" rx="4" fill="white" opacity="0.25"/>
+  <rect x="310" y="340" width="40" height="32" rx="4" fill="white" opacity="0.25"/>
+  <rect x="358" y="340" width="40" height="32" rx="4" fill="white" opacity="0.25"/>
+  <rect x="406" y="340" width="40" height="32" rx="4" fill="white" opacity="0.25"/>
+  <rect x="262" y="382" width="40" height="32" rx="4" fill="white" opacity="0.25"/>
+  <rect x="310" y="382" width="40" height="32" rx="4" fill="white" opacity="0.25"/>
+</svg>

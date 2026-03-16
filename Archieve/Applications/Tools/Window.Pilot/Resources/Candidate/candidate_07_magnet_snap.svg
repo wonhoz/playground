@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1c0a00"/>
+      <stop offset="100%" stop-color="#2d1500"/>
+    </linearGradient>
+    <linearGradient id="magnetN" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ef4444"/>
+      <stop offset="100%" stop-color="#b91c1c"/>
+    </linearGradient>
+    <linearGradient id="magnetS" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#3b82f6"/>
+      <stop offset="100%" stop-color="#1d4ed8"/>
+    </linearGradient>
+    <linearGradient id="metalBody" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6b7280"/>
+      <stop offset="100%" stop-color="#374151"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- 말굽 자석 -->
+  <!-- 자석 몸체 (U형) -->
+  <path d="M150,340 L150,180 A106,106 0 0,1 362,180 L362,340" fill="none" stroke="url(#metalBody)" stroke-width="64" stroke-linecap="butt"/>
+  <!-- N극 (왼쪽) -->
+  <rect x="118" y="310" width="64" height="66" rx="6" fill="url(#magnetN)"/>
+  <text x="150" y="352" font-family="Arial" font-weight="bold" font-size="24" fill="white" text-anchor="middle">N</text>
+  <!-- S극 (오른쪽) -->
+  <rect x="330" y="310" width="64" height="66" rx="6" fill="url(#magnetS)"/>
+  <text x="362" y="352" font-family="Arial" font-weight="bold" font-size="24" fill="white" text-anchor="middle">S</text>
+  <!-- 자기장 선들 -->
+  <path d="M150,376 C150,430 362,430 362,376" fill="none" stroke="#fbbf24" stroke-width="2" stroke-dasharray="8,4" opacity="0.7" filter="url(#glow)"/>
+  <path d="M150,376 C150,450 362,450 362,376" fill="none" stroke="#fbbf24" stroke-width="1.5" stroke-dasharray="6,4" opacity="0.4"/>
+  <!-- 자석에 붙는 창 아이콘 -->
+  <rect x="174" y="380" width="60" height="50" rx="6" fill="#1e3a5f" stroke="#60a5fa" stroke-width="2" filter="url(#glow)"/>
+  <rect x="174" y="380" width="60" height="14" rx="6" fill="#1d4ed8"/>
+  <rect x="278" y="380" width="60" height="50" rx="6" fill="#1e3a5f" stroke="#60a5fa" stroke-width="2" filter="url(#glow)"/>
+  <rect x="278" y="380" width="60" height="14" rx="6" fill="#1d4ed8"/>
+</svg>

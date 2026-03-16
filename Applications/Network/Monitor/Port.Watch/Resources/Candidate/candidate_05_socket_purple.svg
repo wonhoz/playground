@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F001A"/>
+      <stop offset="100%" stop-color="#1E0033"/>
+    </linearGradient>
+    <linearGradient id="purple" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#9C27B0"/>
+      <stop offset="100%" stop-color="#6A1B9A"/>
+    </linearGradient>
+    <linearGradient id="signal" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#CE93D8"/>
+      <stop offset="100%" stop-color="#AB47BC"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Ethernet/network port visual -->
+  <!-- Main port body (large RJ45 style) -->
+  <rect x="156" y="160" width="200" height="160" rx="12" fill="#1A002A" stroke="#9C27B0" stroke-width="3"/>
+  <!-- Port openings (pin slots) -->
+  <rect x="174" y="220" width="12" height="60" rx="3" fill="#9C27B0" opacity="0.7"/>
+  <rect x="194" y="220" width="12" height="60" rx="3" fill="#9C27B0" opacity="0.7"/>
+  <rect x="214" y="220" width="12" height="60" rx="3" fill="#AB47BC" opacity="0.8"/>
+  <rect x="234" y="220" width="12" height="60" rx="3" fill="#AB47BC" opacity="0.8"/>
+  <rect x="254" y="220" width="12" height="60" rx="3" fill="#9C27B0" opacity="0.7"/>
+  <rect x="274" y="220" width="12" height="60" rx="3" fill="#9C27B0" stroke="#CE93D8" stroke-width="1.5"/>
+  <rect x="294" y="220" width="12" height="60" rx="3" fill="#9C27B0" opacity="0.7"/>
+  <rect x="314" y="220" width="12" height="60" rx="3" fill="#9C27B0" opacity="0.7"/>
+  <!-- Clip tab -->
+  <rect x="216" y="308" width="80" height="12" rx="4" fill="#9C27B0" opacity="0.5"/>
+  <!-- LED indicator -->
+  <circle cx="176" cy="180" r="8" fill="#CE93D8"/>
+  <circle cx="336" cy="180" r="8" fill="#AB47BC" opacity="0.5"/>
+  <!-- Signal waves coming out of port -->
+  <path d="M100 256 Q68 256 68 220 Q68 184 100 184" fill="none" stroke="#CE93D8" stroke-width="3" stroke-linecap="round" opacity="0.6"/>
+  <path d="M80 256 Q40 256 40 210 Q40 164 80 164" fill="none" stroke="#AB47BC" stroke-width="2" stroke-linecap="round" opacity="0.4"/>
+  <path d="M412 256 Q444 256 444 220 Q444 184 412 184" fill="none" stroke="#CE93D8" stroke-width="3" stroke-linecap="round" opacity="0.6"/>
+  <path d="M432 256 Q472 256 472 210 Q472 164 432 164" fill="none" stroke="#AB47BC" stroke-width="2" stroke-linecap="round" opacity="0.4"/>
+  <!-- Port number labels -->
+  <rect x="100" y="360" width="312" height="80" rx="10" fill="#1A002A" stroke="#9C27B0" stroke-width="2"/>
+  <text x="130" y="388" font-family="Consolas" font-size="12" fill="#CE93D8">:80   OPEN</text>
+  <text x="130" y="408" font-family="Consolas" font-size="12" fill="#AB47BC">:443  OPEN</text>
+  <text x="280" y="388" font-family="Consolas" font-size="12" fill="#9C27B0">:22   OPEN</text>
+  <text x="280" y="408" font-family="Consolas" font-size="12" fill="#6A1B9A">:3389 CLOSED</text>
+</svg>

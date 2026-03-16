@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0A001A"/>
+      <stop offset="100%" stop-color="#1A0033"/>
+    </linearGradient>
+    <linearGradient id="gem1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF6EC7"/>
+      <stop offset="100%" stop-color="#A855F7"/>
+    </linearGradient>
+    <linearGradient id="gem2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00BFFF"/>
+      <stop offset="100%" stop-color="#8A2BE2"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Diamond-shaped bricks -->
+  <polygon points="108,98 148,118 108,138 68,118" fill="url(#gem1)"/>
+  <polygon points="198,98 238,118 198,138 158,118" fill="url(#gem2)"/>
+  <polygon points="288,98 328,118 288,138 248,118" fill="url(#gem1)"/>
+  <polygon points="378,98 418,118 378,138 338,118" fill="url(#gem2)"/>
+  <polygon points="108,155 148,175 108,195 68,175" fill="url(#gem2)"/>
+  <polygon points="198,155 238,175 198,195 158,175" fill="url(#gem1)"/>
+  <polygon points="378,155 418,175 378,195 338,175" fill="url(#gem1)"/>
+  <polygon points="108,212 148,232 108,252 68,232" fill="url(#gem1)"/>
+  <polygon points="288,212 328,232 288,252 248,232" fill="url(#gem2)"/>
+  <polygon points="378,212 418,232 378,252 338,232" fill="url(#gem1)"/>
+  <!-- Glowing ball -->
+  <circle cx="238" cy="175" r="16" fill="white"/>
+  <circle cx="238" cy="175" r="24" fill="none" stroke="#FF6EC7" stroke-width="3" opacity="0.5"/>
+  <!-- Scatter sparkles -->
+  <circle cx="240" cy="118" r="4" fill="#FFD700"/>
+  <circle cx="290" cy="135" r="3" fill="#FF6EC7"/>
+  <circle cx="320" cy="100" r="3" fill="#00BFFF"/>
+  <!-- Paddle -->
+  <rect x="148" y="388" width="152" height="22" rx="11" fill="url(#gem1)" opacity="0.9"/>
+  <text x="256" y="460" font-family="Arial" font-size="26" font-weight="bold" fill="#FF6EC7" text-anchor="middle">Brick.Blitz</text>
+</svg>

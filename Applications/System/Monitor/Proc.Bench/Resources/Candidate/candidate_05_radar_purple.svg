@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F0020"/>
+      <stop offset="100%" stop-color="#1A0040"/>
+    </linearGradient>
+    <linearGradient id="purple" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#9C27B0"/>
+      <stop offset="100%" stop-color="#4A148C"/>
+    </linearGradient>
+    <radialGradient id="fill" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#AB47BC" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#AB47BC" stop-opacity="0.05"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Radar chart (spider/web) for benchmark metrics -->
+  <!-- 6 axes -->
+  <line x1="256" y1="256" x2="256" y2="80" stroke="#4A148C" stroke-width="1.5" opacity="0.5"/>
+  <line x1="256" y1="256" x2="410" y2="172" stroke="#4A148C" stroke-width="1.5" opacity="0.5"/>
+  <line x1="256" y1="256" x2="410" y2="340" stroke="#4A148C" stroke-width="1.5" opacity="0.5"/>
+  <line x1="256" y1="256" x2="256" y2="432" stroke="#4A148C" stroke-width="1.5" opacity="0.5"/>
+  <line x1="256" y1="256" x2="102" y2="340" stroke="#4A148C" stroke-width="1.5" opacity="0.5"/>
+  <line x1="256" y1="256" x2="102" y2="172" stroke="#4A148C" stroke-width="1.5" opacity="0.5"/>
+  <!-- Grid hexagons -->
+  <polygon points="256,108 344,160 344,264 256,316 168,264 168,160" fill="none" stroke="#4A148C" stroke-width="1" opacity="0.4"/>
+  <polygon points="256,136 324,174 324,252 256,290 188,252 188,174" fill="none" stroke="#4A148C" stroke-width="1" opacity="0.4"/>
+  <polygon points="256,164 304,190 304,244 256,270 208,244 208,190" fill="none" stroke="#4A148C" stroke-width="1" opacity="0.3"/>
+  <polygon points="256,192 284,208 284,232 256,248 228,232 228,208" fill="none" stroke="#4A148C" stroke-width="1" opacity="0.3"/>
+  <!-- Benchmark data polygon (filled) -->
+  <polygon points="256,110 390,186 378,328 256,400 158,312 148,168" fill="url(#fill)" stroke="#AB47BC" stroke-width="3"/>
+  <!-- Data points -->
+  <circle cx="256" cy="110" r="6" fill="#CE93D8"/>
+  <circle cx="390" cy="186" r="6" fill="#AB47BC"/>
+  <circle cx="378" cy="328" r="6" fill="#CE93D8"/>
+  <circle cx="256" cy="400" r="6" fill="#AB47BC"/>
+  <circle cx="158" cy="312" r="6" fill="#CE93D8"/>
+  <circle cx="148" cy="168" r="6" fill="#AB47BC"/>
+  <!-- Axis labels -->
+  <text x="256" y="70" text-anchor="middle" font-family="Consolas" font-size="12" fill="#CE93D8">CPU</text>
+  <text x="430" y="168" font-family="Consolas" font-size="12" fill="#AB47BC">MEM</text>
+  <text x="425" y="360" font-family="Consolas" font-size="12" fill="#CE93D8">DISK</text>
+  <text x="244" y="452" text-anchor="middle" font-family="Consolas" font-size="12" fill="#AB47BC">NET</text>
+  <text x="64" y="360" font-family="Consolas" font-size="12" fill="#CE93D8">GPU</text>
+  <text x="68" y="168" font-family="Consolas" font-size="12" fill="#AB47BC">I/O</text>
+  <!-- Center -->
+  <circle cx="256" cy="256" r="6" fill="#CE93D8"/>
+</svg>

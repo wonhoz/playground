@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#100010"/>
+      <stop offset="100%" stop-color="#200020"/>
+    </linearGradient>
+    <linearGradient id="link" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff44aa"/>
+      <stop offset="100%" stop-color="#aa0066"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Chain links -->
+  <!-- Link 1 -->
+  <ellipse cx="160" cy="230" rx="55" ry="30" fill="none" stroke="url(#link)" stroke-width="14"/>
+  <!-- Link 2 (perpendicular) -->
+  <ellipse cx="256" cy="230" rx="30" ry="55" fill="none" stroke="#ff88cc" stroke-width="14"/>
+  <!-- Link 3 -->
+  <ellipse cx="352" cy="230" rx="55" ry="30" fill="none" stroke="url(#link)" stroke-width="14"/>
+  <!-- Magnifier -->
+  <circle cx="256" cy="330" r="65" fill="none" stroke="#ffff66" stroke-width="4"/>
+  <line x1="304" y1="378" x2="360" y2="434" stroke="#ffff66" stroke-width="8" stroke-linecap="round"/>
+  <!-- Inside lens -->
+  <text x="256" y="320" text-anchor="middle" font-family="monospace" font-size="10" fill="#ffff66">client_id</text>
+  <text x="256" y="336" text-anchor="middle" font-family="monospace" font-size="9" fill="#ffff88">scope: api</text>
+  <text x="256" y="352" text-anchor="middle" font-family="monospace" font-size="9" fill="#44ff88">state: abc</text>
+  <text x="256" y="475" text-anchor="middle" font-family="monospace" font-size="28" font-weight="bold" fill="#ff44aa">OAUTH.PEEK</text>
+</svg>

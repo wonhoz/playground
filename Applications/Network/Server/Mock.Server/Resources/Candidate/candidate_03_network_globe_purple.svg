@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#1E0B3B"/>
+      <stop offset="100%" stop-color="#0D0015"/>
+    </radialGradient>
+    <radialGradient id="globe" cx="40%" cy="35%" r="60%">
+      <stop offset="0%" stop-color="#4C1D95"/>
+      <stop offset="100%" stop-color="#2E1065"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Globe circle -->
+  <circle cx="256" cy="240" r="160" fill="url(#globe)" stroke="#7C3AED" stroke-width="3"/>
+  <!-- Latitude lines -->
+  <ellipse cx="256" cy="240" rx="160" ry="50" fill="none" stroke="#7C3AED" stroke-width="1.5" opacity="0.5"/>
+  <ellipse cx="256" cy="200" rx="140" ry="40" fill="none" stroke="#7C3AED" stroke-width="1" opacity="0.35"/>
+  <ellipse cx="256" cy="280" rx="140" ry="40" fill="none" stroke="#7C3AED" stroke-width="1" opacity="0.35"/>
+  <!-- Longitude lines -->
+  <ellipse cx="256" cy="240" rx="80" ry="160" fill="none" stroke="#7C3AED" stroke-width="1.5" opacity="0.5"/>
+  <ellipse cx="256" cy="240" rx="30" ry="160" fill="none" stroke="#7C3AED" stroke-width="1" opacity="0.3"/>
+  <!-- Center vertical line -->
+  <line x1="256" y1="80" x2="256" y2="400" stroke="#7C3AED" stroke-width="1.5" opacity="0.4"/>
+  <!-- API call nodes on globe -->
+  <circle cx="200" cy="195" r="9" fill="#A855F7"/>
+  <circle cx="312" cy="210" r="9" fill="#A855F7"/>
+  <circle cx="256" cy="260" r="9" fill="#C084FC"/>
+  <circle cx="180" cy="270" r="9" fill="#A855F7"/>
+  <circle cx="330" cy="275" r="9" fill="#A855F7"/>
+  <!-- Connection arcs -->
+  <path d="M200 195 Q256 170 312 210" fill="none" stroke="#C084FC" stroke-width="2" opacity="0.7"/>
+  <path d="M200 195 Q215 228 256 260" fill="none" stroke="#C084FC" stroke-width="2" opacity="0.6"/>
+  <path d="M312 210 Q300 238 256 260" fill="none" stroke="#C084FC" stroke-width="2" opacity="0.6"/>
+  <path d="M180 270 Q218 268 256 260" fill="none" stroke="#9333EA" stroke-width="1.5" opacity="0.6"/>
+  <path d="M256 260 Q293 268 330 275" fill="none" stroke="#9333EA" stroke-width="1.5" opacity="0.6"/>
+  <!-- Glow reflection -->
+  <ellipse cx="210" cy="175" rx="35" ry="20" fill="white" opacity="0.05" transform="rotate(-20 210 175)"/>
+  <!-- HTTP labels near nodes -->
+  <rect x="140" y="175" width="36" height="16" rx="4" fill="#4C1D95"/>
+  <text x="158" y="187" font-family="Arial" font-size="9" fill="#C084FC" text-anchor="middle">GET</text>
+  <rect x="322" y="194" width="46" height="16" rx="4" fill="#4C1D95"/>
+  <text x="345" y="206" font-family="Arial" font-size="9" fill="#FCD34D" text-anchor="middle">POST</text>
+  <rect x="218" y="268" width="46" height="16" rx="4" fill="#4C1D95"/>
+  <text x="241" y="280" font-family="Arial" font-size="9" fill="#FCA5A5" text-anchor="middle">DELETE</text>
+  <!-- Port label below globe -->
+  <rect x="188" y="418" width="136" height="36" rx="10" fill="#2E1065" stroke="#7C3AED" stroke-width="2"/>
+  <text x="256" y="440" font-family="Courier New" font-size="16" fill="#C084FC" text-anchor="middle" font-weight="bold">:8080</text>
+</svg>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="60%" r="60%">
+      <stop offset="0%" stop-color="#2D0A00"/>
+      <stop offset="100%" stop-color="#0A0200"/>
+    </radialGradient>
+    <linearGradient id="lava" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#FF2200"/>
+      <stop offset="40%" stop-color="#FF6600"/>
+      <stop offset="100%" stop-color="#FFCC00"/>
+    </linearGradient>
+    <filter id="lavaGlow">
+      <feGaussianBlur stdDeviation="6" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Molten PDF letters dripping -->
+  <!-- P letter -->
+  <rect x="80" y="140" width="50" height="220" rx="8" fill="url(#lava)" filter="url(#lavaGlow)"/>
+  <rect x="80" y="140" width="110" height="100" rx="20" fill="url(#lava)" filter="url(#lavaGlow)"/>
+  <rect x="120" y="180" width="60" height="40" rx="8" fill="#2D0A00"/>
+  <!-- D letter -->
+  <rect x="215" y="140" width="50" height="220" rx="8" fill="url(#lava)" filter="url(#lavaGlow)"/>
+  <rect x="215" y="140" width="110" height="220" rx="50" fill="url(#lava)" filter="url(#lavaGlow)"/>
+  <rect x="252" y="175" width="60" height="150" rx="35" fill="#2D0A00"/>
+  <!-- F letter -->
+  <rect x="355" y="140" width="50" height="220" rx="8" fill="url(#lava)" filter="url(#lavaGlow)"/>
+  <rect x="355" y="140" width="100" height="40" rx="8" fill="url(#lava)" filter="url(#lavaGlow)"/>
+  <rect x="355" y="218" width="80" height="35" rx="8" fill="url(#lava)" filter="url(#lavaGlow)"/>
+  <!-- Drips from letters -->
+  <ellipse cx="110" cy="370" rx="15" ry="25" fill="url(#lava)" opacity="0.8" filter="url(#lavaGlow)"/>
+  <ellipse cx="270" cy="378" rx="18" ry="30" fill="url(#lava)" opacity="0.9" filter="url(#lavaGlow)"/>
+  <ellipse cx="390" cy="365" rx="14" ry="22" fill="url(#lava)" opacity="0.8" filter="url(#lavaGlow)"/>
+  <!-- Lava pool -->
+  <ellipse cx="256" cy="430" rx="180" ry="40" fill="#FF2200" opacity="0.4" filter="url(#lavaGlow)"/>
+  <ellipse cx="256" cy="430" rx="140" ry="30" fill="#FF6600" opacity="0.3"/>
+  <!-- Sparks floating up -->
+  <circle cx="150" cy="120" r="5" fill="#FFCC00" opacity="0.8" filter="url(#lavaGlow)"/>
+  <circle cx="300" cy="100" r="4" fill="#FFAA00" opacity="0.7"/>
+  <circle cx="400" cy="115" r="6" fill="#FFCC00" opacity="0.9" filter="url(#lavaGlow)"/>
+  <circle cx="200" cy="90" r="3" fill="#FF8800" opacity="0.6"/>
+  <circle cx="350" cy="85" r="4" fill="#FFEE00" opacity="0.5"/>
+</svg>

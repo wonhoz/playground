@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a1a2e"/>
+      <stop offset="100%" stop-color="#16213e"/>
+    </linearGradient>
+    <linearGradient id="cal" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e94560"/>
+      <stop offset="100%" stop-color="#f5a623"/>
+    </linearGradient>
+    <linearGradient id="photo" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f3460"/>
+      <stop offset="100%" stop-color="#533483"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Calendar base -->
+  <rect x="80" y="100" width="352" height="312" rx="16" fill="url(#photo)" opacity="0.8"/>
+  <!-- Calendar header -->
+  <rect x="80" y="100" width="352" height="64" rx="16" fill="url(#cal)"/>
+  <rect x="80" y="144" width="352" height="20" fill="url(#cal)"/>
+  <!-- Calendar grid pins -->
+  <circle cx="170" cy="88" r="12" fill="#e94560" filter="url(#glow)"/>
+  <circle cx="342" cy="88" r="12" fill="#e94560" filter="url(#glow)"/>
+  <!-- Photo thumbnails in grid -->
+  <rect x="100" y="196" width="72" height="56" rx="6" fill="#e94560" opacity="0.7"/>
+  <circle cx="136" cy="218" r="10" fill="white" opacity="0.4"/>
+  <polygon points="128,230 144,230 136,218" fill="white" opacity="0.6"/>
+  <rect x="188" y="196" width="72" height="56" rx="6" fill="#f5a623" opacity="0.7"/>
+  <circle cx="224" cy="218" r="10" fill="white" opacity="0.4"/>
+  <rect x="276" y="196" width="72" height="56" rx="6" fill="#533483" opacity="0.7"/>
+  <circle cx="312" cy="218" r="10" fill="white" opacity="0.4"/>
+  <rect x="364" y="196" width="68" height="56" rx="6" fill="#0f3460" opacity="0.9"/>
+  <circle cx="398" cy="218" r="10" fill="white" opacity="0.4"/>
+  <rect x="100" y="268" width="72" height="56" rx="6" fill="#533483" opacity="0.7"/>
+  <rect x="188" y="268" width="72" height="56" rx="6" fill="#e94560" opacity="0.5"/>
+  <rect x="276" y="268" width="72" height="56" rx="6" fill="#f5a623" opacity="0.5"/>
+  <rect x="364" y="268" width="68" height="56" rx="6" fill="#e94560" opacity="0.7"/>
+  <rect x="100" y="340" width="72" height="56" rx="6" fill="#f5a623" opacity="0.7"/>
+  <rect x="188" y="340" width="72" height="56" rx="6" fill="#0f3460" opacity="0.9"/>
+  <rect x="276" y="340" width="160" height="56" rx="6" fill="url(#cal)" opacity="0.4"/>
+</svg>

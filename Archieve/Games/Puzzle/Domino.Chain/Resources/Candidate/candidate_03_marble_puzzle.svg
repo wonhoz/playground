@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E1520"/>
+      <stop offset="100%" stop-color="#2A1E2E"/>
+    </linearGradient>
+    <linearGradient id="marble" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F0EAE0"/>
+      <stop offset="40%" stop-color="#D8C8B8"/>
+      <stop offset="100%" stop-color="#C0A888"/>
+    </linearGradient>
+    <linearGradient id="gold_line" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FFD700"/>
+      <stop offset="100%" stop-color="#CC9900"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Marble texture hint lines -->
+  <path d="M60,80 Q180,120 200,200 Q220,280 320,260" stroke="#AA8866" stroke-width="1" fill="none" opacity="0.2"/>
+  <path d="M400,60 Q350,150 380,240 Q410,330 360,400" stroke="#AA8866" stroke-width="1" fill="none" opacity="0.15"/>
+  <!-- Standing dominos with marble texture -->
+  <rect x="76" y="185" width="50" height="100" rx="8" fill="url(#marble)" stroke="#C0A060" stroke-width="2.5"/>
+  <line x1="76" y1="235" x2="126" y2="235" stroke="url(#gold_line)" stroke-width="2"/>
+  <circle cx="92" cy="210" r="5.5" fill="#6644AA"/>
+  <circle cx="110" cy="210" r="5.5" fill="#6644AA"/>
+  <circle cx="101" cy="258" r="5.5" fill="#6644AA"/>
+  <rect x="158" y="185" width="50" height="100" rx="8" fill="url(#marble)" stroke="#C0A060" stroke-width="2.5"/>
+  <line x1="158" y1="235" x2="208" y2="235" stroke="url(#gold_line)" stroke-width="2"/>
+  <circle cx="174" cy="210" r="5.5" fill="#AA4422"/>
+  <circle cx="192" cy="258" r="5.5" fill="#AA4422"/>
+  <circle cx="174" cy="258" r="5.5" fill="#AA4422"/>
+  <circle cx="192" cy="210" r="5.5" fill="#AA4422"/>
+  <!-- Tilting domino -->
+  <g transform="rotate(-25 285 270)">
+    <rect x="260" y="185" width="50" height="100" rx="8" fill="url(#marble)" stroke="#C0A060" stroke-width="2.5"/>
+    <line x1="260" y1="235" x2="310" y2="235" stroke="url(#gold_line)" stroke-width="2"/>
+    <circle cx="276" cy="210" r="5.5" fill="#226688"/>
+    <circle cx="294" cy="210" r="5.5" fill="#226688"/>
+    <circle cx="285" cy="235" r="5.5" fill="#226688"/>
+    <circle cx="276" cy="258" r="5.5" fill="#226688"/>
+    <circle cx="294" cy="258" r="5.5" fill="#226688"/>
+    <circle cx="285" cy="222" r="5.5" fill="#226688"/>
+  </g>
+  <!-- Fallen domino -->
+  <g transform="rotate(-90 390 285)">
+    <rect x="365" y="235" width="50" height="100" rx="8" fill="url(#marble)" stroke="#C0A060" stroke-width="2" opacity="0.9"/>
+    <line x1="365" y1="285" x2="415" y2="285" stroke="url(#gold_line)" stroke-width="2"/>
+    <circle cx="381" cy="260" r="5" fill="#884422"/>
+    <circle cx="399" cy="310" r="5" fill="#884422"/>
+  </g>
+  <!-- Chain reaction glow -->
+  <path d="M101,285 C140,320 200,320 240,290 C280,260 330,275 370,290" stroke="#FFD700" stroke-width="2" fill="none" opacity="0.5" stroke-dasharray="6,5"/>
+  <text x="256" y="455" font-family="Georgia" font-size="26" font-weight="bold" fill="#D4B870" text-anchor="middle">DOMINO·CHAIN</text>
+</svg>

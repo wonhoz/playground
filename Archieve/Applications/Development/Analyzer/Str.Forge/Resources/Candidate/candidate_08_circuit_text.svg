@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#040C08"/>
+      <stop offset="100%" stop-color="#081408"/>
+    </linearGradient>
+    <linearGradient id="circuit" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00FF88"/>
+      <stop offset="100%" stop-color="#00CC44"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2.5" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Circuit board traces -->
+  <line x1="80" y1="256" x2="160" y2="256" stroke="#00AA44" stroke-width="2" opacity="0.4"/>
+  <line x1="160" y1="256" x2="160" y2="180" stroke="#00AA44" stroke-width="2" opacity="0.4"/>
+  <line x1="160" y1="180" x2="256" y2="180" stroke="#00AA44" stroke-width="2" opacity="0.4"/>
+  <line x1="352" y1="256" x2="432" y2="256" stroke="#00AA44" stroke-width="2" opacity="0.4"/>
+  <line x1="352" y1="256" x2="352" y2="180" stroke="#00AA44" stroke-width="2" opacity="0.4"/>
+  <line x1="256" y1="180" x2="352" y2="180" stroke="#00AA44" stroke-width="2" opacity="0.4"/>
+  <!-- Circuit nodes -->
+  <circle cx="160" cy="256" r="5" fill="#00FF88" opacity="0.6" filter="url(#glow)"/>
+  <circle cx="352" cy="256" r="5" fill="#00FF88" opacity="0.6" filter="url(#glow)"/>
+  <circle cx="160" cy="180" r="5" fill="#00FF88" opacity="0.6" filter="url(#glow)"/>
+  <circle cx="352" cy="180" r="5" fill="#00FF88" opacity="0.6" filter="url(#glow)"/>
+  <!-- Lower circuit traces -->
+  <line x1="120" y1="340" x2="120" y2="400" stroke="#00AA44" stroke-width="1.5" opacity="0.35"/>
+  <line x1="120" y1="340" x2="390" y2="340" stroke="#00AA44" stroke-width="1.5" opacity="0.35"/>
+  <line x1="390" y1="340" x2="390" y2="400" stroke="#00AA44" stroke-width="1.5" opacity="0.35"/>
+  <!-- Central chip/processor -->
+  <rect x="160" y="208" width="192" height="96" rx="8" fill="#060E06" stroke="#00FF88" stroke-width="2" filter="url(#glow)"/>
+  <!-- Chip pins left -->
+  <rect x="140" y="222" width="20" height="6" rx="2" fill="#00AA44"/>
+  <rect x="140" y="238" width="20" height="6" rx="2" fill="#00AA44"/>
+  <rect x="140" y="254" width="20" height="6" rx="2" fill="#00FF88" filter="url(#glow)"/>
+  <rect x="140" y="270" width="20" height="6" rx="2" fill="#00AA44"/>
+  <rect x="140" y="286" width="20" height="6" rx="2" fill="#00AA44"/>
+  <!-- Chip pins right -->
+  <rect x="352" y="222" width="20" height="6" rx="2" fill="#00AA44"/>
+  <rect x="352" y="238" width="20" height="6" rx="2" fill="#00AA44"/>
+  <rect x="352" y="254" width="20" height="6" rx="2" fill="#00FF88" filter="url(#glow)"/>
+  <rect x="352" y="270" width="20" height="6" rx="2" fill="#00AA44"/>
+  <rect x="352" y="286" width="20" height="6" rx="2" fill="#00AA44"/>
+  <!-- Chip label -->
+  <text x="256" y="248" font-family="monospace" font-size="18" fill="#00FF88" text-anchor="middle" font-weight="bold" filter="url(#glow)">STR</text>
+  <text x="256" y="272" font-family="monospace" font-size="12" fill="#00AA44" text-anchor="middle">FORGE v1.0</text>
+  <text x="256" y="292" font-family="monospace" font-size="10" fill="#006622" text-anchor="middle">PROCESSOR</text>
+  <!-- Data stream at top -->
+  <text x="256" y="140" font-family="monospace" font-size="11" fill="#00AA44" text-anchor="middle" opacity="0.7">01001000 01000101 01001100</text>
+  <text x="256" y="158" font-family="monospace" font-size="11" fill="#00CC44" text-anchor="middle" opacity="0.5">68 65 6C 6C 6F 20 77 6F</text>
+  <!-- Data stream at bottom -->
+  <text x="256" y="420" font-family="monospace" font-size="11" fill="#00AA44" text-anchor="middle" opacity="0.7">OUTPUT: SGVsbG8gV29ybGQ=</text>
+  <text x="256" y="440" font-family="monospace" font-size="11" fill="#00CC44" text-anchor="middle" opacity="0.5">HELLO WORLD → base64</text>
+</svg>

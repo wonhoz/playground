@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#000d00"/>
+      <stop offset="100%" stop-color="#001a00"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Matrix background text -->
+  <text x="72" y="100" font-family="Courier New, monospace" font-size="10" fill="#003300" opacity="0.8">01001101 11010011 00110100 01101001</text>
+  <text x="72" y="116" font-family="Courier New, monospace" font-size="10" fill="#003300" opacity="0.6">10110010 00101100 11001011 10010110</text>
+  <text x="72" y="132" font-family="Courier New, monospace" font-size="10" fill="#003300" opacity="0.7">00011011 10110001 01100110 00110011</text>
+  <text x="72" y="148" font-family="Courier New, monospace" font-size="10" fill="#003300" opacity="0.5">11100010 01001101 10010001 11010010</text>
+  <!-- Diff view main -->
+  <rect x="68" y="160" width="380" height="220" rx="8" fill="#000800" stroke="#00aa00" stroke-width="1.5"/>
+  <!-- Header -->
+  <rect x="68" y="160" width="380" height="22" rx="8" fill="#001400"/>
+  <text x="258" y="175" font-family="Courier New, monospace" font-size="11" fill="#00ff00" text-anchor="middle" filter="url(#glow)">--- file_v1.bin +++ file_v2.bin</text>
+  <!-- Diff lines -->
+  <rect x="76" y="188" width="364" height="14" rx="2" fill="#001800"/>
+  <text x="80" y="199" font-family="Courier New, monospace" font-size="10" fill="#008800">@@ -12,7 +12,8 @@ Block:0x0034</text>
+  <rect x="76" y="206" width="364" height="14" rx="2" fill="#002200"/>
+  <text x="80" y="217" font-family="Courier New, monospace" font-size="10" fill="#00dd00">+0x4F 0x72 0x69 0x67 0x69 0x6E 0x61</text>
+  <rect x="76" y="224" width="364" height="14" rx="2" fill="#001800"/>
+  <text x="80" y="235" font-family="Courier New, monospace" font-size="10" fill="#006600"> 0x6C 0x20 0x62 0x79 0x74 0x65 0x73</text>
+  <rect x="76" y="242" width="364" height="14" rx="2" fill="#220000"/>
+  <text x="80" y="253" font-family="Courier New, monospace" font-size="10" fill="#dd0000">-0x44 0x61 0x74 0x61 0x20 0x56 0x31</text>
+  <rect x="76" y="260" width="364" height="14" rx="2" fill="#002200"/>
+  <text x="80" y="271" font-family="Courier New, monospace" font-size="10" fill="#00dd00">+0x44 0x61 0x74 0x61 0x20 0x56 0x32</text>
+  <rect x="76" y="278" width="364" height="14" rx="2" fill="#001800"/>
+  <text x="80" y="289" font-family="Courier New, monospace" font-size="10" fill="#006600"> 0x52 0x65 0x76 0x69 0x73 0x65 0x64</text>
+  <rect x="76" y="296" width="364" height="14" rx="2" fill="#220000"/>
+  <text x="80" y="307" font-family="Courier New, monospace" font-size="10" fill="#dd0000">-0x43 0x72 0x6F 0x6E 0x20 0x6A 0x6F</text>
+  <rect x="76" y="314" width="364" height="14" rx="2" fill="#001800"/>
+  <text x="80" y="325" font-family="Courier New, monospace" font-size="10" fill="#006600"> 0x62 0x20 0x72 0x75 0x6E 0x73 0x20</text>
+  <rect x="76" y="332" width="364" height="14" rx="2" fill="#002200"/>
+  <text x="80" y="343" font-family="Courier New, monospace" font-size="10" fill="#00dd00">+0x4E 0x65 0x77 0x20 0x64 0x61 0x74</text>
+  <rect x="76" y="350" width="364" height="14" rx="2" fill="#001800"/>
+  <text x="80" y="361" font-family="Courier New, monospace" font-size="10" fill="#006600"> 0x61 0x20 0x70 0x61 0x74 0x68 0x20</text>
+  <!-- Status bar -->
+  <rect x="68" y="388" width="380" height="22" rx="4" fill="#001400" stroke="#00aa00" stroke-width="1"/>
+  <text x="80" y="402" font-family="Courier New, monospace" font-size="10" fill="#00aa00">DELTA: +3 blocks | -2 blocks | checksum: 0xF4A2</text>
+  <!-- Title -->
+  <text x="256" y="446" font-family="Courier New, monospace" font-size="36" font-weight="bold" fill="#00ff00" text-anchor="middle" filter="url(#glow)" letter-spacing="4">DEEP.DIFF</text>
+  <text x="256" y="476" font-family="Courier New, monospace" font-size="13" fill="#006600" text-anchor="middle">Binary Comparison Engine</text>
+</svg>

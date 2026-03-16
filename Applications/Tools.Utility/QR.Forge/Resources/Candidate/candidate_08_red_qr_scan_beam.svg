@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1A0000"/>
+      <stop offset="100%" stop-color="#3E0000"/>
+    </linearGradient>
+    <linearGradient id="red" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FF5252"/>
+      <stop offset="100%" stop-color="#FF1744"/>
+    </linearGradient>
+    <linearGradient id="beam" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FF1744" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#FF1744" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#FF1744" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- QR frame corners only -->
+  <!-- TL corner -->
+  <path d="M 100 170 L 100 100 L 170 100" fill="none" stroke="url(#red)" stroke-width="20" stroke-linecap="round"/>
+  <!-- TR corner -->
+  <path d="M 342 100 L 412 100 L 412 170" fill="none" stroke="url(#red)" stroke-width="20" stroke-linecap="round"/>
+  <!-- BL corner -->
+  <path d="M 100 342 L 100 412 L 170 412" fill="none" stroke="url(#red)" stroke-width="20" stroke-linecap="round"/>
+  <!-- BR corner -->
+  <path d="M 342 412 L 412 412 L 412 342" fill="none" stroke="url(#red)" stroke-width="20" stroke-linecap="round"/>
+  <!-- Scan beam -->
+  <rect x="100" y="240" width="312" height="32" fill="url(#beam)" rx="4"/>
+  <line x1="100" y1="256" x2="412" y2="256" stroke="#FF1744" stroke-width="3" opacity="0.9"/>
+  <!-- QR dots inside -->
+  <g fill="url(#red)" opacity="0.8">
+    <rect x="140" y="140" width="60" height="60" rx="6"/>
+    <rect x="312" y="140" width="60" height="60" rx="6"/>
+    <rect x="140" y="312" width="60" height="60" rx="6"/>
+    <rect x="230" y="140" width="16" height="16" rx="3"/>
+    <rect x="256" y="140" width="16" height="16" rx="3"/>
+    <rect x="140" y="230" width="16" height="16" rx="3"/>
+    <rect x="230" y="312" width="16" height="16" rx="3"/>
+    <rect x="312" y="312" width="16" height="16" rx="3"/>
+    <rect x="336" y="312" width="16" height="16" rx="3"/>
+    <rect x="312" y="336" width="16" height="16" rx="3"/>
+  </g>
+</svg>

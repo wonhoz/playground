@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#120020"/>
+      <stop offset="100%" stop-color="#060010"/>
+    </radialGradient>
+    <linearGradient id="lock_body" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#8800FF"/>
+      <stop offset="100%" stop-color="#5500CC"/>
+    </linearGradient>
+    <radialGradient id="keyhole" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#CC88FF"/>
+      <stop offset="100%" stop-color="#9900FF"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Lock shackle -->
+  <path d="M168 240 L168 170 Q168 100 256 100 Q344 100 344 170 L344 240" fill="none" stroke="#8800FF" stroke-width="22" stroke-linecap="round"/>
+  <!-- Lock body -->
+  <rect x="136" y="235" width="240" height="200" rx="20" fill="url(#lock_body)"/>
+  <!-- Keyhole -->
+  <circle cx="256" cy="320" r="32" fill="#120020"/>
+  <rect x="244" y="330" width="24" height="50" rx="6" fill="#120020"/>
+  <!-- Hash value display -->
+  <rect x="80" y="448" width="352" height="36" rx="8" fill="#120020" stroke="#8800FF" stroke-width="1" opacity="0.8"/>
+  <text x="256" y="471" text-anchor="middle" fill="#CC88FF" font-size="13" font-family="monospace">SHA-256 secured</text>
+  <!-- Glow dots -->
+  <circle cx="136" cy="240" r="8" fill="#AA44FF" opacity="0.8"/>
+  <circle cx="376" cy="240" r="8" fill="#AA44FF" opacity="0.8"/>
+  <!-- Shimmer on lock body -->
+  <ellipse cx="190" cy="280" rx="20" ry="40" fill="white" opacity="0.06" transform="rotate(-20 190 280)"/>
+</svg>

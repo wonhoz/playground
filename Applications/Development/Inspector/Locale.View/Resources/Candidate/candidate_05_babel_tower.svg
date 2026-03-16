@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f0c29"/>
+      <stop offset="50%" stop-color="#302b63"/>
+      <stop offset="100%" stop-color="#24243e"/>
+    </linearGradient>
+    <linearGradient id="tier1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f7971e"/>
+      <stop offset="100%" stop-color="#ffd200"/>
+    </linearGradient>
+    <linearGradient id="tier2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#56CCF2"/>
+      <stop offset="100%" stop-color="#2F80ED"/>
+    </linearGradient>
+    <linearGradient id="tier3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ee0979"/>
+      <stop offset="100%" stop-color="#ff6a00"/>
+    </linearGradient>
+    <linearGradient id="tier4" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#56ab2f"/>
+      <stop offset="100%" stop-color="#a8e063"/>
+    </linearGradient>
+    <linearGradient id="tier5" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8E54E9"/>
+      <stop offset="100%" stop-color="#4776E6"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+
+  <!-- Tower base shadow -->
+  <ellipse cx="256" cy="435" rx="140" ry="18" fill="#000" opacity="0.5"/>
+
+  <!-- Tower tier 5 - widest base -->
+  <rect x="96" y="370" width="320" height="55" rx="10" fill="url(#tier1)"/>
+  <rect x="96" y="370" width="320" height="14" rx="10" fill="#fff" opacity="0.15"/>
+  <!-- Windows tier 5 -->
+  <rect x="120" y="385" width="20" height="25" rx="4" fill="#1a1a2e" opacity="0.6"/>
+  <rect x="155" y="385" width="20" height="25" rx="4" fill="#1a1a2e" opacity="0.6"/>
+  <rect x="245" y="385" width="20" height="25" rx="4" fill="#1a1a2e" opacity="0.6"/>
+  <rect x="320" y="385" width="20" height="25" rx="4" fill="#1a1a2e" opacity="0.6"/>
+  <rect x="355" y="385" width="20" height="25" rx="4" fill="#1a1a2e" opacity="0.6"/>
+
+  <!-- Tower tier 4 -->
+  <rect x="126" y="305" width="260" height="55" rx="10" fill="url(#tier2)"/>
+  <rect x="126" y="305" width="260" height="14" rx="10" fill="#fff" opacity="0.15"/>
+  <rect x="150" y="320" width="18" height="25" rx="4" fill="#1a1a2e" opacity="0.6"/>
+  <rect x="183" y="320" width="18" height="25" rx="4" fill="#1a1a2e" opacity="0.6"/>
+  <rect x="250" y="320" width="18" height="25" rx="4" fill="#1a1a2e" opacity="0.6"/>
+  <rect x="315" y="320" width="18" height="25" rx="4" fill="#1a1a2e" opacity="0.6"/>
+  <rect x="348" y="320" width="18" height="25" rx="4" fill="#1a1a2e" opacity="0.6"/>
+
+  <!-- Tower tier 3 -->
+  <rect x="156" y="243" width="200" height="52" rx="10" fill="url(#tier3)"/>
+  <rect x="156" y="243" width="200" height="13" rx="10" fill="#fff" opacity="0.15"/>
+  <rect x="176" y="257" width="16" height="24" rx="4" fill="#1a1a2e" opacity="0.6"/>
+  <rect x="205" y="257" width="16" height="24" rx="4" fill="#1a1a2e" opacity="0.6"/>
+  <rect x="256" y="257" width="16" height="24" rx="4" fill="#1a1a2e" opacity="0.6"/>
+  <rect x="305" y="257" width="16" height="24" rx="4" fill="#1a1a2e" opacity="0.6"/>
+  <rect x="334" y="257" width="16" height="24" rx="4" fill="#1a1a2e" opacity="0.6"/>
+
+  <!-- Tower tier 2 -->
+  <rect x="186" y="185" width="140" height="48" rx="10" fill="url(#tier4)"/>
+  <rect x="186" y="185" width="140" height="12" rx="10" fill="#fff" opacity="0.15"/>
+  <rect x="204" y="198" width="14" height="22" rx="4" fill="#1a1a2e" opacity="0.6"/>
+  <rect x="230" y="198" width="14" height="22" rx="4" fill="#1a1a2e" opacity="0.6"/>
+  <rect x="268" y="198" width="14" height="22" rx="4" fill="#1a1a2e" opacity="0.6"/>
+  <rect x="296" y="198" width="14" height="22" rx="4" fill="#1a1a2e" opacity="0.6"/>
+
+  <!-- Tower tier 1 - top -->
+  <rect x="216" y="130" width="80" height="45" rx="10" fill="url(#tier5)"/>
+  <rect x="216" y="130" width="80" height="12" rx="10" fill="#fff" opacity="0.15"/>
+  <rect x="230" y="144" width="12" height="20" rx="4" fill="#1a1a2e" opacity="0.6"/>
+  <rect x="270" y="144" width="12" height="20" rx="4" fill="#1a1a2e" opacity="0.6"/>
+
+  <!-- Spire -->
+  <polygon points="256,80 248,132 264,132" fill="#ffd200" filter="url(#glow)"/>
+  <circle cx="256" cy="78" r="8" fill="#ffd200" filter="url(#glow)"/>
+
+  <!-- Floating language symbols around tower -->
+  <text x="68" y="250" font-size="22" font-family="serif" fill="#f7971e" opacity="0.7">文</text>
+  <text x="420" y="250" font-size="22" font-family="serif" fill="#56CCF2" opacity="0.7">अ</text>
+  <text x="60" y="310" font-size="18" font-family="serif" fill="#ee0979" opacity="0.6">ع</text>
+  <text x="430" y="310" font-size="18" font-family="serif" fill="#56ab2f" opacity="0.6">あ</text>
+</svg>

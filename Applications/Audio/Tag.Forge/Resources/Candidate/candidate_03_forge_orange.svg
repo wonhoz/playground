@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#180800"/>
+      <stop offset="100%" stop-color="#4A1500"/>
+    </linearGradient>
+    <linearGradient id="fire" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#FF6D00"/>
+      <stop offset="60%" stop-color="#FF8F00"/>
+      <stop offset="100%" stop-color="#FFEB3B" stop-opacity="0.8"/>
+    </linearGradient>
+    <linearGradient id="hammer" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#90A4AE"/>
+      <stop offset="100%" stop-color="#546E7A"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Anvil -->
+  <rect x="155" y="330" width="202" height="18" rx="5" fill="#37474F"/>
+  <rect x="165" y="295" width="182" height="40" rx="8" fill="#455A64"/>
+  <path d="M200 250 L312 250 Q340 250 340 295 L172 295 Q172 250 200 250 Z" fill="#546E7A"/>
+  <!-- Music note being forged on anvil -->
+  <g transform="translate(256,265)" opacity="0.9">
+    <ellipse cx="-30" cy="10" rx="22" ry="15" fill="#FF8F00" transform="rotate(-15)"/>
+    <rect x="-12" y="-45" width="8" height="55" rx="4" fill="#FFA000"/>
+    <polygon points="-12,-45 30,-60 30,-40 -12,-25" fill="#FFA000"/>
+  </g>
+  <!-- Hammer -->
+  <g transform="translate(330,220) rotate(-40)">
+    <rect x="-10" y="-70" width="20" height="100" rx="8" fill="#795548"/>
+    <rect x="-28" y="-85" width="56" height="32" rx="6" fill="url(#hammer)"/>
+  </g>
+  <!-- Fire/sparks -->
+  <path d="M200 250 Q190 220 205 200 Q195 195 198 175 Q210 190 205 210 Q225 190 220 165 Q240 190 225 220 Q240 200 238 178 Q255 200 242 230 Z" fill="url(#fire)" opacity="0.8"/>
+  <!-- Tag label -->
+  <path d="M110 380 L110 430 Q110 445 125 445 L230 445 Q245 445 253 433 L275 405 Q280 397 275 389 L253 361 Q245 349 230 349 L125 349 Q110 349 110 364 Z" fill="#37474F" stroke="#90A4AE" stroke-width="2"/>
+  <circle cx="130" cy="390" r="7" fill="#180800" stroke="#90A4AE" stroke-width="2"/>
+  <rect x="145" y="365" width="80" height="6" rx="3" fill="#90A4AE" opacity="0.7"/>
+  <rect x="145" y="378" width="65" height="6" rx="3" fill="#90A4AE" opacity="0.5"/>
+  <rect x="145" y="391" width="72" height="6" rx="3" fill="#90A4AE" opacity="0.6"/>
+  <rect x="145" y="404" width="58" height="6" rx="3" fill="#90A4AE" opacity="0.4"/>
+</svg>

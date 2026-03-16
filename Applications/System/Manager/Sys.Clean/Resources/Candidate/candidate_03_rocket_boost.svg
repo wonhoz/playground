@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#0A1030"/>
+      <stop offset="100%" stop-color="#030510"/>
+    </radialGradient>
+    <linearGradient id="rocket" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#88AACC"/>
+      <stop offset="100%" stop-color="#DDEEFF"/>
+    </linearGradient>
+    <linearGradient id="flame" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFDD00"/>
+      <stop offset="50%" stop-color="#FF8800"/>
+      <stop offset="100%" stop-color="#FF2200" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="trail" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#4488FF" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#0022AA" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Stars -->
+  <circle cx="80" cy="80" r="1.5" fill="white" opacity="0.7"/>
+  <circle cx="400" cy="60" r="1" fill="white" opacity="0.6"/>
+  <circle cx="450" cy="180" r="1.5" fill="white" opacity="0.5"/>
+  <circle cx="60" cy="300" r="1" fill="white" opacity="0.6"/>
+  <!-- Rocket trail -->
+  <rect x="232" y="340" width="48" height="120" rx="24" fill="url(#trail)" filter="url(#glow)" opacity="0.7"/>
+  <!-- Rocket body -->
+  <g transform="translate(256, 240)">
+    <!-- Nose cone -->
+    <polygon points="0,-120 -30,0 30,0" fill="url(#rocket)"/>
+    <!-- Body -->
+    <rect x="-30" y="0" width="60" height="80" rx="8" fill="url(#rocket)"/>
+    <!-- Window -->
+    <circle cx="0" cy="20" r="14" fill="#88CCFF" opacity="0.8"/>
+    <circle cx="0" cy="20" r="10" fill="#4488FF" opacity="0.6" filter="url(#glow)"/>
+    <!-- Fins -->
+    <polygon points="-30,80 -60,120 -30,100" fill="#8899BB"/>
+    <polygon points="30,80 60,120 30,100" fill="#8899BB"/>
+    <!-- Engine bell -->
+    <rect x="-20" y="78" width="40" height="16" rx="4" fill="#556677"/>
+    <!-- Engine flame -->
+    <ellipse cx="0" cy="96" rx="18" ry="26" fill="url(#flame)" filter="url(#glow)" opacity="0.9"/>
+    <ellipse cx="0" cy="96" rx="8" ry="14" fill="#FFFF88" opacity="0.7" filter="url(#glow)"/>
+  </g>
+  <!-- Floating garbage being left behind -->
+  <rect x="130" y="340" width="36" height="28" rx="4" fill="#1A1A2A" stroke="#3344AA" stroke-width="1.5" opacity="0.7"/>
+  <text x="148" y="357" font-family="monospace" font-size="10" fill="#4466BB" text-anchor="middle">junk</text>
+  <rect x="330" y="360" width="40" height="28" rx="4" fill="#1A1A2A" stroke="#3344AA" stroke-width="1.5" opacity="0.6"/>
+  <text x="350" y="377" font-family="monospace" font-size="10" fill="#4466BB" text-anchor="middle">.tmp</text>
+  <rect x="100" y="400" width="32" height="22" rx="4" fill="#1A1A2A" stroke="#2233AA" stroke-width="1" opacity="0.5"/>
+  <text x="116" y="414" font-family="monospace" font-size="9" fill="#334499" text-anchor="middle">log</text>
+  <!-- Speed lines -->
+  <line x1="80" y1="200" x2="170" y2="220" stroke="#4488FF" stroke-width="1.5" opacity="0.4"/>
+  <line x1="76" y1="220" x2="164" y2="234" stroke="#4488FF" stroke-width="1" opacity="0.3"/>
+  <line x1="432" y1="200" x2="342" y2="220" stroke="#4488FF" stroke-width="1.5" opacity="0.4"/>
+  <!-- Performance indicator -->
+  <rect x="80" y="70" width="140" height="44" rx="8" fill="#0A1A2A" stroke="#2244AA" stroke-width="1"/>
+  <text x="150" y="88" font-family="'Segoe UI', sans-serif" font-size="11" fill="#88AACC" text-anchor="middle">Performance</text>
+  <text x="150" y="106" font-family="'Segoe UI', sans-serif" font-size="14" fill="#44AAFF" text-anchor="middle" font-weight="bold" filter="url(#glow)">+38%</text>
+</svg>

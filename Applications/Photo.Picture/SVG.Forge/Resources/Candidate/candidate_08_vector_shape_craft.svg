@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#141414"/>
+      <stop offset="100%" stop-color="#1e1e2e"/>
+    </linearGradient>
+    <linearGradient id="tri" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f6d365"/>
+      <stop offset="100%" stop-color="#fda085"/>
+    </linearGradient>
+    <linearGradient id="circ" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#a8edea"/>
+      <stop offset="100%" stop-color="#fed6e3"/>
+    </linearGradient>
+    <linearGradient id="rect" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#667eea"/>
+      <stop offset="100%" stop-color="#764ba2"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Triangle shape -->
+  <polygon points="256,90 380,290 132,290" fill="none" stroke="url(#tri)" stroke-width="5" filter="url(#glow)"/>
+  <polygon points="256,110 360,276 152,276" fill="url(#tri)" opacity="0.15"/>
+  <!-- Circle shape -->
+  <circle cx="160" cy="360" r="80" fill="none" stroke="url(#circ)" stroke-width="5" filter="url(#glow)"/>
+  <circle cx="160" cy="360" r="65" fill="url(#circ)" opacity="0.12"/>
+  <!-- Rectangle shape -->
+  <rect x="280" y="310" width="160" height="120" rx="8" fill="none" stroke="url(#rect)" stroke-width="5" filter="url(#glow)"/>
+  <rect x="292" y="322" width="136" height="96" rx="5" fill="url(#rect)" opacity="0.12"/>
+  <!-- Connecting dashes -->
+  <line x1="256" y1="290" x2="160" y2="360" stroke="white" stroke-width="1.5" opacity="0.2" stroke-dasharray="6,4"/>
+  <line x1="256" y1="290" x2="280" y2="370" stroke="white" stroke-width="1.5" opacity="0.2" stroke-dasharray="6,4"/>
+  <line x1="160" y1="440" x2="280" y2="440" stroke="white" stroke-width="1.5" opacity="0.2" stroke-dasharray="6,4"/>
+</svg>

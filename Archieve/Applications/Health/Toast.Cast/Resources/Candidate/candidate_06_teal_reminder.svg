@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#002020"/>
+      <stop offset="100%" stop-color="#00695C"/>
+    </linearGradient>
+    <linearGradient id="card1" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00897B"/>
+      <stop offset="100%" stop-color="#26A69A"/>
+    </linearGradient>
+    <linearGradient id="card2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00695C"/>
+      <stop offset="100%" stop-color="#00897B"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Stack of notification cards -->
+  <!-- Back card -->
+  <rect x="80" y="200" width="368" height="108" rx="20" fill="#004D40" stroke="#26A69A" stroke-width="4" opacity="0.7"/>
+  <!-- Middle card -->
+  <rect x="68" y="176" width="368" height="108" rx="20" fill="url(#card2)" stroke="#80CBC4" stroke-width="5" opacity="0.85"/>
+  <!-- Front card -->
+  <rect x="56" y="152" width="368" height="112" rx="20" fill="url(#card1)" stroke="#B2DFDB" stroke-width="6"/>
+  <!-- Front card content -->
+  <circle cx="108" cy="208" r="32" fill="#004D40" stroke="#80CBC4" stroke-width="4"/>
+  <!-- Exercise icon in circle -->
+  <circle cx="108" cy="192" r="10" fill="#80CBC4"/>
+  <line x1="108" y1="202" x2="108" y2="228" stroke="#80CBC4" stroke-width="8" stroke-linecap="round"/>
+  <line x1="108" y1="214" x2="88" y2="200" stroke="#80CBC4" stroke-width="8" stroke-linecap="round"/>
+  <line x1="108" y1="214" x2="128" y2="200" stroke="#80CBC4" stroke-width="8" stroke-linecap="round"/>
+  <!-- Text on front card -->
+  <rect x="160" y="164" width="200" height="12" rx="6" fill="#E0F2F1" opacity="0.95"/>
+  <rect x="160" y="183" width="160" height="10" rx="5" fill="#B2DFDB" opacity="0.8"/>
+  <rect x="160" y="199" width="180" height="10" rx="5" fill="#B2DFDB" opacity="0.7"/>
+  <!-- Action button -->
+  <rect x="160" y="220" width="100" height="32" rx="10" fill="#004D40" stroke="#80CBC4" stroke-width="3"/>
+  <rect x="174" y="230" width="72" height="8" rx="4" fill="#E0F2F1" opacity="0.9"/>
+  <!-- Timer chip -->
+  <rect x="360" y="160" width="56" height="28" rx="10" fill="#004D40" stroke="#26A69A" stroke-width="3"/>
+  <text x="388" y="179" text-anchor="middle" font-size="16" font-weight="bold" fill="#80CBC4" font-family="monospace">30m</text>
+  <!-- Dismiss X on front card -->
+  <circle cx="408" cy="208" r="18" fill="#004D40" stroke="#80CBC4" stroke-width="3"/>
+  <line x1="400" y1="200" x2="416" y2="216" stroke="#B2DFDB" stroke-width="5" stroke-linecap="round"/>
+  <line x1="416" y1="200" x2="400" y2="216" stroke="#B2DFDB" stroke-width="5" stroke-linecap="round"/>
+  <!-- Wellness icons below -->
+  <circle cx="156" cy="368" r="44" fill="#00695C" stroke="#80CBC4" stroke-width="5"/>
+  <path d="M 156,348 C 156,348 132,356 132,368 C 132,376 140,384 156,384 C 172,384 180,376 180,368 C 180,356 156,348 156,348 Z" fill="#80CBC4" opacity="0.8"/>
+  <circle cx="316" cy="368" r="44" fill="#00695C" stroke="#80CBC4" stroke-width="5"/>
+  <text x="316" y="380" text-anchor="middle" font-size="36" fill="#B2DFDB">+</text>
+</svg>

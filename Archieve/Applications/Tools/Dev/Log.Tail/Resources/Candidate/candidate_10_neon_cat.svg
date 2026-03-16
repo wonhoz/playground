@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0A0A1A"/>
+      <stop offset="100%" stop-color="#1A0A2A"/>
+    </linearGradient>
+    <linearGradient id="catGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF6B9D"/>
+      <stop offset="100%" stop-color="#C74B50"/>
+    </linearGradient>
+    <filter id="neon">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Stylized cat silhouette (for log TAIL) -->
+  <!-- Body -->
+  <ellipse cx="256" cy="320" rx="100" ry="80" fill="#1A0A2A" stroke="#FF6B9D" stroke-width="2" filter="url(#neon)"/>
+  <!-- Head -->
+  <circle cx="256" cy="210" r="70" fill="#1A0A2A" stroke="#FF6B9D" stroke-width="2" filter="url(#neon)"/>
+  <!-- Ears -->
+  <path d="M196 166 L172 110 L220 154 Z" fill="#1A0A2A" stroke="#FF6B9D" stroke-width="2" filter="url(#neon)"/>
+  <path d="M316 166 L340 110 L292 154 Z" fill="#1A0A2A" stroke="#FF6B9D" stroke-width="2" filter="url(#neon)"/>
+  <!-- Inner ears -->
+  <path d="M197 163 L178 122 L216 155 Z" fill="#FF6B9D" opacity="0.3" filter="url(#neon)"/>
+  <path d="M315 163 L334 122 L296 155 Z" fill="#FF6B9D" opacity="0.3" filter="url(#neon)"/>
+  <!-- Eyes (glowing) -->
+  <ellipse cx="228" cy="204" rx="14" ry="10" fill="#00FFAA" filter="url(#neon)"/>
+  <ellipse cx="284" cy="204" rx="14" ry="10" fill="#00FFAA" filter="url(#neon)"/>
+  <ellipse cx="228" cy="204" rx="5" ry="9" fill="#001A00"/>
+  <ellipse cx="284" cy="204" rx="5" ry="9" fill="#001A00"/>
+  <!-- Nose -->
+  <path d="M250 224 L256 232 L262 224 L256 220 Z" fill="#FF6B9D" filter="url(#neon)"/>
+  <!-- Whiskers -->
+  <line x1="200" y1="228" x2="248" y2="224" stroke="#FF6B9D" stroke-width="1.5" filter="url(#neon)"/>
+  <line x1="200" y1="238" x2="248" y2="234" stroke="#FF6B9D" stroke-width="1.5" filter="url(#neon)"/>
+  <line x1="264" y1="224" x2="312" y2="228" stroke="#FF6B9D" stroke-width="1.5" filter="url(#neon)"/>
+  <line x1="264" y1="234" x2="312" y2="238" stroke="#FF6B9D" stroke-width="1.5" filter="url(#neon)"/>
+  <!-- Tail (the "tail" of log.tail) -->
+  <path d="M356 360 Q420 340 440 290 Q460 240 420 210 Q390 190 380 220" stroke="#FF6B9D" stroke-width="6" fill="none" stroke-linecap="round" filter="url(#neon)"/>
+  <!-- Log scroll lines floating near tail -->
+  <rect x="366" y="246" width="60" height="5" rx="2" fill="#FF6B9D" opacity="0.3" transform="rotate(-15 396 249)"/>
+  <rect x="372" y="264" width="48" height="5" rx="2" fill="#FF6B9D" opacity="0.25" transform="rotate(-12 396 267)"/>
+  <!-- Terminal log at bottom -->
+  <rect x="80" y="420" width="352" height="52" rx="8" fill="#111122" stroke="#FF6B9D" stroke-width="1" opacity="0.8"/>
+  <text x="96" y="440" font-family="'Courier New', monospace" font-size="11" fill="#FF6B9D" filter="url(#neon)">$ tail -f app.log</text>
+  <text x="96" y="458" font-family="'Courier New', monospace" font-size="11" fill="#888888">12:00:47 [INFO] ...</text>
+  <rect x="252" y="452" width="8" height="12" fill="#FF6B9D" filter="url(#neon)"/>
+</svg>

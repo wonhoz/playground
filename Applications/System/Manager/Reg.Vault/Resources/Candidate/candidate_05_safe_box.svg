@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1A1005"/>
+      <stop offset="100%" style="stop-color:#2A2010"/>
+    </linearGradient>
+    <linearGradient id="box" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#5A4A3A"/>
+      <stop offset="100%" style="stop-color:#3A2A1A"/>
+    </linearGradient>
+    <linearGradient id="door" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#7A6A5A"/>
+      <stop offset="100%" style="stop-color:#4A3A2A"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Safe box body -->
+  <rect x="80" y="100" width="352" height="320" rx="16" fill="url(#box)" stroke="#6A5A4A" stroke-width="4"/>
+  <!-- Safe door (slightly open) -->
+  <rect x="96" y="116" width="240" height="288" rx="10" fill="url(#door)"/>
+  <!-- Hinges -->
+  <rect x="96" y="140" width="14" height="30" rx="5" fill="#AAA"/>
+  <rect x="96" y="342" width="14" height="30" rx="5" fill="#AAA"/>
+  <!-- Handle -->
+  <circle cx="316" cy="260" r="24" fill="#888" stroke="#AAA" stroke-width="3"/>
+  <circle cx="316" cy="260" r="12" fill="#666"/>
+  <!-- Combination lock -->
+  <circle cx="200" cy="260" r="50" fill="#3A2A1A" stroke="#888" stroke-width="4"/>
+  <circle cx="200" cy="260" r="36" fill="#2A1A0A"/>
+  <line x1="200" y1="224" x2="200" y2="236" stroke="#AAA" stroke-width="2"/>
+  <line x1="200" y1="284" x2="200" y2="296" stroke="#AAA" stroke-width="2"/>
+  <line x1="164" y1="260" x2="176" y2="260" stroke="#AAA" stroke-width="2"/>
+  <line x1="224" y1="260" x2="236" y2="260" stroke="#AAA" stroke-width="2"/>
+  <line x1="200" y1="260" x2="220" y2="244" stroke="#FFAA00" stroke-width="3" stroke-linecap="round"/>
+  <!-- Open door showing contents -->
+  <rect x="344" y="150" width="72" height="22" rx="4" fill="#2A4A2A"/>
+  <text x="380" y="165" text-anchor="middle" font-family="monospace" font-size="10" fill="#44AA44">REG</text>
+  <rect x="344" y="180" width="72" height="22" rx="4" fill="#2A3A4A"/>
+  <text x="380" y="195" text-anchor="middle" font-family="monospace" font-size="10" fill="#4488FF">SYS</text>
+  <rect x="344" y="210" width="72" height="22" rx="4" fill="#4A2A2A"/>
+  <text x="380" y="225" text-anchor="middle" font-family="monospace" font-size="10" fill="#FF4444">BAK</text>
+</svg>

@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A1200"/>
+      <stop offset="100%" stop-color="#3D2B00"/>
+    </linearGradient>
+    <linearGradient id="shield" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFD54F"/>
+      <stop offset="50%" stop-color="#FF8F00"/>
+      <stop offset="100%" stop-color="#E65100"/>
+    </linearGradient>
+    <linearGradient id="emblem" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF8E1"/>
+      <stop offset="100%" stop-color="#FFD54F"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Shield -->
+  <path d="M256 72 L390 128 L390 270 Q390 374 256 444 Q122 374 122 270 L122 128 Z" fill="url(#shield)"/>
+  <!-- Shield inner border -->
+  <path d="M256 98 L368 148 L368 265 Q368 356 256 420 Q144 356 144 265 L144 148 Z" fill="none" stroke="#FFF8E1" stroke-width="3" opacity="0.5"/>
+  <!-- Star/emblem center -->
+  <polygon points="256,168 268,205 307,205 276,227 288,264 256,242 224,264 236,227 205,205 244,205" fill="url(#emblem)"/>
+  <!-- Service status chips -->
+  <rect x="193" y="285" width="48" height="22" rx="11" fill="#1A1200" stroke="#FFD54F" stroke-width="2"/>
+  <rect x="248" y="285" width="48" height="22" rx="11" fill="#1A1200" stroke="#FFD54F" stroke-width="2"/>
+  <rect x="193" y="315" width="48" height="22" rx="11" fill="#1A1200" stroke="#4CAF50" stroke-width="2"/>
+  <rect x="248" y="315" width="48" height="22" rx="11" fill="#1A1200" stroke="#F44336" stroke-width="2"/>
+  <text x="217" y="300" text-anchor="middle" font-family="Arial" font-size="10" fill="#FFD54F" font-weight="bold">RUN</text>
+  <text x="272" y="300" text-anchor="middle" font-family="Arial" font-size="10" fill="#FFD54F" font-weight="bold">SVC</text>
+  <text x="217" y="330" text-anchor="middle" font-family="Arial" font-size="10" fill="#4CAF50" font-weight="bold">ON</text>
+  <text x="272" y="330" text-anchor="middle" font-family="Arial" font-size="10" fill="#F44336" font-weight="bold">OFF</text>
+</svg>

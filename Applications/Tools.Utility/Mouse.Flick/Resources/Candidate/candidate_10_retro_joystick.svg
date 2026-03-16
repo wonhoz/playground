@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A0A2E"/>
+      <stop offset="100%" stop-color="#0A0518"/>
+    </linearGradient>
+    <linearGradient id="stick" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#888888"/>
+      <stop offset="100%" stop-color="#444444"/>
+    </linearGradient>
+    <radialGradient id="ball" cx="35%" cy="30%" r="60%">
+      <stop offset="0%" stop-color="#FF6688"/>
+      <stop offset="100%" stop-color="#AA0033"/>
+    </radialGradient>
+    <filter id="retroGlow">
+      <feGaussianBlur stdDeviation="4" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Joystick base plate -->
+  <ellipse cx="256" cy="380" rx="140" ry="50" fill="#2A1A44"/>
+  <ellipse cx="256" cy="375" rx="140" ry="48" fill="#3A2A55"/>
+  <!-- Joystick stick tilted right (flick gesture) -->
+  <rect x="248" y="240" width="28" height="140" rx="14" fill="url(#stick)" transform="rotate(20, 262, 310)"/>
+  <!-- Flick trail behind stick -->
+  <rect x="238" y="248" width="18" height="120" rx="9" fill="#666666" opacity="0.4" transform="rotate(10, 247, 308)"/>
+  <rect x="228" y="256" width="14" height="100" rx="7" fill="#555555" opacity="0.2" transform="rotate(2, 235, 306)"/>
+  <!-- Joystick ball top -->
+  <circle cx="280" cy="228" r="36" fill="url(#ball)" filter="url(#retroGlow)"/>
+  <circle cx="272" cy="220" r="12" fill="#FF99BB" opacity="0.5"/>
+  <!-- Direction lights on base -->
+  <circle cx="155" cy="370" r="14" fill="#FF0040" filter="url(#retroGlow)"/>
+  <circle cx="357" cy="370" r="14" fill="#00FF80" filter="url(#retroGlow)"/>
+  <circle cx="256" cy="330" r="14" fill="#FFFF00" opacity="0.8" filter="url(#retroGlow)"/>
+  <circle cx="256" cy="420" r="14" fill="#0080FF" filter="url(#retroGlow)"/>
+  <!-- Flick gesture arrows around base -->
+  <polygon points="420,250 460,280 420,300 430,280" fill="#FF0040" opacity="0.7" filter="url(#retroGlow)"/>
+  <!-- Action buttons top left -->
+  <circle cx="100" cy="180" r="20" fill="#FF0040" opacity="0.8" filter="url(#retroGlow)"/>
+  <circle cx="145" cy="155" r="16" fill="#00FF80" opacity="0.8" filter="url(#retroGlow)"/>
+  <circle cx="100" cy="130" r="14" fill="#0080FF" opacity="0.8" filter="url(#retroGlow)"/>
+  <!-- Pixel label -->
+  <text x="256" y="475" font-family="monospace" font-size="18" fill="#FF6688" text-anchor="middle" filter="url(#retroGlow)">FLICK!</text>
+</svg>

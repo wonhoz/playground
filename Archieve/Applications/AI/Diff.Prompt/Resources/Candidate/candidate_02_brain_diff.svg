@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F0C29"/>
+      <stop offset="50%" stop-color="#302B63"/>
+      <stop offset="100%" stop-color="#24243E"/>
+    </linearGradient>
+    <radialGradient id="brainGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#A855F7" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#A855F7" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="diffLine" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#F59E0B"/>
+      <stop offset="100%" stop-color="#EF4444"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <ellipse cx="256" cy="230" rx="140" ry="110" fill="url(#brainGlow)"/>
+  <!-- Brain shape -->
+  <path d="M180,200 Q160,160 190,140 Q210,125 230,145 Q240,120 260,120 Q285,120 295,145 Q315,125 335,140 Q365,160 345,200 Q360,220 350,250 Q340,280 310,285 Q300,310 270,310 Q255,315 240,310 Q210,310 200,285 Q170,280 160,250 Q150,220 180,200Z" fill="#4C1D95" stroke="#A855F7" stroke-width="3"/>
+  <!-- Brain folds -->
+  <path d="M210,170 Q230,155 250,170 Q265,155 285,170" fill="none" stroke="#C084FC" stroke-width="2.5"/>
+  <path d="M195,210 Q215,195 235,210" fill="none" stroke="#C084FC" stroke-width="2"/>
+  <path d="M275,210 Q295,195 315,210" fill="none" stroke="#C084FC" stroke-width="2"/>
+  <path d="M205,245 Q225,230 245,245 Q265,230 285,245 Q305,230 320,245" fill="none" stroke="#C084FC" stroke-width="2"/>
+  <!-- Center split line -->
+  <line x1="256" y1="130" x2="256" y2="305" stroke="url(#diffLine)" stroke-width="3"/>
+  <!-- Diff markers -->
+  <rect x="100" y="350" width="140" height="16" rx="8" fill="#EF4444" opacity="0.85"/>
+  <rect x="272" y="350" width="140" height="16" rx="8" fill="#22C55E" opacity="0.85"/>
+  <rect x="100" y="378" width="100" height="16" rx="8" fill="#EF4444" opacity="0.6"/>
+  <rect x="272" y="378" width="120" height="16" rx="8" fill="#22C55E" opacity="0.6"/>
+  <!-- Minus / Plus labels -->
+  <text x="148" y="362" font-family="monospace" font-size="14" fill="white" text-anchor="middle">- old prompt</text>
+  <text x="350" y="362" font-family="monospace" font-size="14" fill="white" text-anchor="middle">+ new prompt</text>
+</svg>

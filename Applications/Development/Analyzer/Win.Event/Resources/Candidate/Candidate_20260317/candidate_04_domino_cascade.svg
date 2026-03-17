@@ -1,0 +1,167 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg04" cx="30%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#2a0800"/>
+      <stop offset="100%" stop-color="#1a0500"/>
+    </radialGradient>
+    <filter id="glow04">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="shadowFall04">
+      <feDropShadow dx="4" dy="8" stdDeviation="4" flood-color="#FF4500" flood-opacity="0.5"/>
+    </filter>
+    <filter id="glowStrong04">
+      <feGaussianBlur stdDeviation="7" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <linearGradient id="dominoGrad04" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E74C3C"/>
+      <stop offset="100%" stop-color="#FF6B35"/>
+    </linearGradient>
+    <linearGradient id="dominoFalling04" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF8C00"/>
+      <stop offset="100%" stop-color="#FF6B35"/>
+    </linearGradient>
+    <linearGradient id="floorGrad04" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#3a1200"/>
+      <stop offset="100%" stop-color="#1a0800"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="512" height="512" fill="url(#bg04)"/>
+
+  <!-- Floor surface -->
+  <rect x="0" y="380" width="512" height="132" fill="url(#floorGrad04)" opacity="0.6"/>
+  <line x1="0" y1="380" x2="512" y2="380" stroke="#FF4500" stroke-width="1.5" opacity="0.4"/>
+
+  <!-- Floor grid lines -->
+  <g stroke="#3a1000" stroke-width="1" opacity="0.4">
+    <line x1="0" y1="395" x2="512" y2="395"/>
+    <line x1="0" y1="415" x2="512" y2="415"/>
+    <line x1="0" y1="440" x2="512" y2="440"/>
+    <line x1="80" y1="380" x2="80" y2="512"/>
+    <line x1="160" y1="380" x2="160" y2="512"/>
+    <line x1="240" y1="380" x2="240" y2="512"/>
+    <line x1="320" y1="380" x2="320" y2="512"/>
+    <line x1="400" y1="380" x2="400" y2="512"/>
+    <line x1="480" y1="380" x2="480" y2="512"/>
+  </g>
+
+  <!-- Shadow on floor from falling domino -->
+  <ellipse cx="165" cy="383" rx="28" ry="6" fill="#FF2200" opacity="0.3"/>
+  <ellipse cx="245" cy="383" rx="22" ry="5" fill="#FF4500" opacity="0.2"/>
+
+  <!-- Domino 1 - Standing tall (INFO - blue) -->
+  <rect x="36" y="265" width="32" height="115" rx="4" fill="#1E90FF" stroke="#4ab0ff" stroke-width="1.5" filter="url(#glow04)"/>
+  <rect x="40" y="268" width="24" height="50" rx="2" fill="#0a4a80" opacity="0.7"/>
+  <rect x="40" y="322" width="24" height="50" rx="2" fill="#0a4a80" opacity="0.7"/>
+  <line x1="36" y1="318" x2="68" y2="318" stroke="#4ab0ff" stroke-width="1.5"/>
+  <!-- Dots - top half: 3 dots (INFO count) -->
+  <circle cx="52" cy="280" r="3" fill="#aaddff"/>
+  <circle cx="44" cy="293" r="3" fill="#aaddff"/>
+  <circle cx="60" cy="293" r="3" fill="#aaddff"/>
+  <!-- Dots - bottom half: 1 dot -->
+  <circle cx="52" cy="345" r="3" fill="#aaddff"/>
+  <text x="52" y="396" text-anchor="middle" font-family="monospace" font-size="8" fill="#4ab0ff" filter="url(#glow04)">INFO</text>
+
+  <!-- Domino 2 - Just tipped, starting to fall (WARN - orange) -->
+  <!-- Rotating ~20 degrees to the right -->
+  <g transform="rotate(20, 120, 380)">
+    <rect x="104" y="275" width="32" height="105" rx="4" fill="#FF8C00" stroke="#ffaa44" stroke-width="1.5" filter="url(#glow04)"/>
+    <rect x="108" y="278" width="24" height="45" rx="2" fill="#804000" opacity="0.7"/>
+    <rect x="108" y="328" width="24" height="40" rx="2" fill="#804000" opacity="0.7"/>
+    <line x1="104" y1="325" x2="136" y2="325" stroke="#ffaa44" stroke-width="1.5"/>
+    <!-- Dots -->
+    <circle cx="120" cy="290" r="3" fill="#ffddaa"/>
+    <circle cx="112" cy="303" r="3" fill="#ffddaa"/>
+    <circle cx="128" cy="303" r="3" fill="#ffddaa"/>
+    <circle cx="120" cy="315" r="3" fill="#ffddaa"/>
+    <circle cx="120" cy="340" r="3" fill="#ffddaa"/>
+    <circle cx="112" cy="352" r="3" fill="#ffddaa"/>
+  </g>
+  <text x="120" y="396" text-anchor="middle" font-family="monospace" font-size="8" fill="#FF8C00" filter="url(#glow04)">WARN</text>
+
+  <!-- Domino 3 - Falling at ~50 degrees (ERROR - red) with glow -->
+  <g transform="rotate(50, 192, 380)">
+    <rect x="176" y="265" width="32" height="115" rx="4" fill="url(#dominoGrad04)" stroke="#FF7755" stroke-width="2" filter="url(#glowStrong04)"/>
+    <rect x="180" y="268" width="24" height="50" rx="2" fill="#600000" opacity="0.7"/>
+    <rect x="180" y="322" width="24" height="50" rx="2" fill="#600000" opacity="0.7"/>
+    <line x1="176" y1="318" x2="208" y2="318" stroke="#FF7755" stroke-width="2"/>
+    <!-- Dots -->
+    <circle cx="192" cy="280" r="3.5" fill="#ffaaaa"/>
+    <circle cx="184" cy="293" r="3.5" fill="#ffaaaa"/>
+    <circle cx="200" cy="293" r="3.5" fill="#ffaaaa"/>
+    <circle cx="192" cy="306" r="3.5" fill="#ffaaaa"/>
+    <circle cx="184" cy="333" r="3.5" fill="#ffaaaa"/>
+    <circle cx="200" cy="333" r="3.5" fill="#ffaaaa"/>
+    <circle cx="192" cy="346" r="3.5" fill="#ffaaaa"/>
+    <circle cx="184" cy="359" r="3.5" fill="#ffaaaa"/>
+    <circle cx="200" cy="359" r="3.5" fill="#ffaaaa"/>
+  </g>
+  <text x="195" y="396" text-anchor="middle" font-family="monospace" font-size="8" fill="#FF4500" filter="url(#glowStrong04)" font-weight="bold">ERROR</text>
+
+  <!-- Domino 4 - Nearly flat (AUDIT - purple) -->
+  <g transform="rotate(72, 268, 380)">
+    <rect x="252" y="295" width="32" height="85" rx="4" fill="#9B59B6" stroke="#c080ff" stroke-width="1.5" filter="url(#glow04)"/>
+    <rect x="256" y="298" width="24" height="35" rx="2" fill="#3a1060" opacity="0.7"/>
+    <rect x="256" y="337" width="24" height="35" rx="2" fill="#3a1060" opacity="0.7"/>
+    <line x1="252" y1="334" x2="284" y2="334" stroke="#c080ff" stroke-width="1.5"/>
+    <!-- Dots -->
+    <circle cx="268" cy="314" r="3" fill="#ddaaff"/>
+    <circle cx="268" cy="353" r="3" fill="#ddaaff"/>
+    <circle cx="260" cy="353" r="3" fill="#ddaaff"/>
+  </g>
+  <text x="268" y="396" text-anchor="middle" font-family="monospace" font-size="8" fill="#9B59B6" filter="url(#glow04)">AUDIT</text>
+
+  <!-- Domino 5 - Already fallen, horizontal (red/error) -->
+  <rect x="300" y="368" width="115" height="28" rx="4" fill="#E74C3C" stroke="#FF7755" stroke-width="1.5" filter="url(#glow04)" opacity="0.9"/>
+  <rect x="303" y="371" width="50" height="22" rx="2" fill="#600000" opacity="0.7"/>
+  <rect x="357" y="371" width="55" height="22" rx="2" fill="#600000" opacity="0.7"/>
+  <line x1="353" y1="368" x2="353" y2="396" stroke="#FF7755" stroke-width="1.5"/>
+  <!-- Dots on lying domino -->
+  <circle cx="325" cy="382" r="3" fill="#ffaaaa"/>
+  <circle cx="340" cy="382" r="3" fill="#ffaaaa"/>
+  <circle cx="370" cy="376" r="2.5" fill="#ffaaaa"/>
+  <circle cx="385" cy="376" r="2.5" fill="#ffaaaa"/>
+  <circle cx="370" cy="388" r="2.5" fill="#ffaaaa"/>
+  <circle cx="385" cy="388" r="2.5" fill="#ffaaaa"/>
+  <text x="358" y="408" text-anchor="middle" font-family="monospace" font-size="8" fill="#FF4500" filter="url(#glow04)">CASCADED</text>
+
+  <!-- Motion blur lines for falling domino -->
+  <line x1="176" y1="270" x2="210" y2="270" stroke="#FF6B35" stroke-width="1" opacity="0.3" stroke-dasharray="3,4"/>
+  <line x1="178" y1="280" x2="218" y2="280" stroke="#FF6B35" stroke-width="1" opacity="0.2" stroke-dasharray="3,5"/>
+  <line x1="180" y1="290" x2="225" y2="290" stroke="#FF6B35" stroke-width="1" opacity="0.15" stroke-dasharray="2,6"/>
+
+  <!-- Spark/impact particles -->
+  <g filter="url(#glow04)">
+    <circle cx="290" cy="370" r="3" fill="#FF6B35" opacity="0.9"/>
+    <circle cx="298" cy="360" r="2" fill="#FF8C00" opacity="0.7"/>
+    <circle cx="280" cy="360" r="2" fill="#FF4500" opacity="0.8"/>
+    <circle cx="305" cy="350" r="1.5" fill="#FFAA00" opacity="0.6"/>
+    <line x1="290" y1="370" x2="305" y2="350" stroke="#FF6B35" stroke-width="1" opacity="0.5"/>
+    <line x1="290" y1="370" x2="275" y2="352" stroke="#FF4500" stroke-width="1" opacity="0.5"/>
+    <line x1="290" y1="370" x2="310" y2="365" stroke="#FF8C00" stroke-width="1" opacity="0.4"/>
+  </g>
+
+  <!-- Arrow showing cascade direction -->
+  <path d="M60,230 Q256,200 450,245" fill="none" stroke="#FF6B35" stroke-width="1.5" stroke-dasharray="6,4" opacity="0.4"/>
+  <polygon points="450,245 440,237 445,255" fill="#FF6B35" opacity="0.4"/>
+
+  <!-- Title area -->
+  <text x="256" y="48" text-anchor="middle" font-family="'Segoe UI',Arial,sans-serif" font-size="18" font-weight="bold" fill="#FF6B35" filter="url(#glow04)">DOMINO CASCADE</text>
+
+  <!-- Event severity label -->
+  <text x="256" y="75" text-anchor="middle" font-family="monospace" font-size="11" fill="#FF4500" opacity="0.7">INFO  →  WARN  →  ERROR  →  CRITICAL</text>
+
+  <!-- Cascading arrows between dominoes label -->
+  <g font-family="monospace" font-size="9" fill="#FF8C00" opacity="0.6">
+    <text x="86" y="245">TRIGGER</text>
+    <text x="145" y="235">CASCADE</text>
+    <text x="230" y="225">AMPLIFY</text>
+  </g>
+
+  <!-- Bottom label -->
+  <text x="256" y="470" text-anchor="middle" font-family="monospace" font-size="10" fill="#FF4500" opacity="0.5">SEQUENTIAL EVENT CASCADE ANALYZER</text>
+</svg>

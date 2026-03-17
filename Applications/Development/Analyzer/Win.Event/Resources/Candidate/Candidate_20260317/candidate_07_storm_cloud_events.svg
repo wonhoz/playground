@@ -1,0 +1,143 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg07" cx="50%" cy="40%" r="65%">
+      <stop offset="0%" stop-color="#0d0a20"/>
+      <stop offset="100%" stop-color="#050510"/>
+    </radialGradient>
+    <radialGradient id="cloudGrad07" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#2a1a4a"/>
+      <stop offset="70%" stop-color="#1a0a3a"/>
+      <stop offset="100%" stop-color="#0d0520"/>
+    </radialGradient>
+    <radialGradient id="lightningGlow07" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFE600"/>
+      <stop offset="100%" stop-color="#FF8C00" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glow07">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="lightningGlow07f">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="cloudGlow07">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="errorGlow07">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="512" height="512" fill="url(#bg07)"/>
+
+  <!-- Stars in background -->
+  <g fill="#ffffff" opacity="0.4">
+    <circle cx="50" cy="40" r="1"/>
+    <circle cx="120" cy="25" r="1.5"/>
+    <circle cx="200" cy="35" r="1"/>
+    <circle cx="320" cy="20" r="1.5"/>
+    <circle cx="420" cy="45" r="1"/>
+    <circle cx="470" cy="30" r="1.5"/>
+    <circle cx="30" cy="90" r="1"/>
+    <circle cx="490" cy="80" r="1"/>
+    <circle cx="90" cy="150" r="1"/>
+    <circle cx="460" cy="140" r="1.5"/>
+  </g>
+
+  <!-- Background cloud glow (ambient light from storm) -->
+  <ellipse cx="256" cy="195" rx="200" ry="110" fill="#6C3483" filter="url(#cloudGlow07)" opacity="0.25"/>
+
+  <!-- Storm cloud main body - composite shape -->
+  <!-- Cloud bottom arch -->
+  <ellipse cx="256" cy="220" rx="185" ry="75" fill="url(#cloudGrad07)" stroke="#6C3483" stroke-width="1" filter="url(#glow07)"/>
+  <!-- Cloud bumps on top -->
+  <circle cx="140" cy="175" r="55" fill="url(#cloudGrad07)" stroke="#6C3483" stroke-width="1" filter="url(#glow07)"/>
+  <circle cx="200" cy="155" r="65" fill="url(#cloudGrad07)" stroke="#5a2a70" stroke-width="1" filter="url(#glow07)"/>
+  <circle cx="270" cy="148" r="70" fill="url(#cloudGrad07)" stroke="#5a2a70" stroke-width="1" filter="url(#glow07)"/>
+  <circle cx="340" cy="158" r="58" fill="url(#cloudGrad07)" stroke="#6C3483" stroke-width="1" filter="url(#glow07)"/>
+  <circle cx="390" cy="180" r="48" fill="url(#cloudGrad07)" stroke="#6C3483" stroke-width="1" filter="url(#glow07)"/>
+
+  <!-- Cloud inner highlight -->
+  <ellipse cx="256" cy="185" rx="160" ry="65" fill="none" stroke="#8a4aaa" stroke-width="1.5" opacity="0.4"/>
+
+  <!-- Internal lightning glow inside cloud -->
+  <ellipse cx="256" cy="195" rx="120" ry="55" fill="#9B59B6" opacity="0.15" filter="url(#lightningGlow07f)"/>
+
+  <!-- Lightning bolt 1 - MAIN ERROR (bright yellow) -->
+  <polyline points="230,228 215,280 228,280 208,340 222,340 196,410"
+    fill="none" stroke="#FFE600" stroke-width="5" filter="url(#lightningGlow07f)" stroke-linejoin="round"/>
+  <polyline points="230,228 215,280 228,280 208,340 222,340 196,410"
+    fill="none" stroke="#FFFFFF" stroke-width="2" opacity="0.8"/>
+
+  <!-- Lightning bolt 2 - WARN (orange) -->
+  <polyline points="270,232 260,278 270,278 250,330 265,330 248,385"
+    fill="none" stroke="#FF8C00" stroke-width="3.5" filter="url(#glow07)" stroke-linejoin="round"/>
+  <polyline points="270,232 260,278 270,278 250,330 265,330 248,385"
+    fill="none" stroke="#FFD000" stroke-width="1.5" opacity="0.6"/>
+
+  <!-- Lightning bolt 3 - small (INFO/blue) -->
+  <polyline points="310,238 302,268 312,268 298,305 309,305 292,348"
+    fill="none" stroke="#4A9EFF" stroke-width="2.5" filter="url(#glow07)" stroke-linejoin="round"/>
+
+  <!-- Lightning bolt 4 - AUDIT (purple) -->
+  <polyline points="340,232 332,265 344,265 328,308 340,308 325,355"
+    fill="none" stroke="#C080FF" stroke-width="2" filter="url(#glow07)" stroke-linejoin="round"/>
+
+  <!-- Lightning bolt 5 - small ERROR -->
+  <polyline points="185,238 178,262 188,262 174,298 185,298 170,338"
+    fill="none" stroke="#FF4500" stroke-width="2" filter="url(#glow07)" stroke-linejoin="round"/>
+
+  <!-- Ground impact effects -->
+  <!-- ERROR impact zone -->
+  <ellipse cx="196" cy="415" rx="40" ry="12" fill="#FFE600" filter="url(#lightningGlow07f)" opacity="0.6"/>
+  <ellipse cx="196" cy="415" rx="20" ry="6" fill="#FFFFFF" opacity="0.8"/>
+  <!-- WARN impact -->
+  <ellipse cx="248" cy="388" rx="28" ry="8" fill="#FF8C00" filter="url(#glow07)" opacity="0.5"/>
+
+  <!-- Event labels on lightning tips -->
+  <g filter="url(#glow07)" font-family="monospace" font-size="10" font-weight="bold">
+    <text x="168" y="355" fill="#FF4500">ERR</text>
+    <text x="150" y="420" fill="#FFE600" font-size="11">ERROR!</text>
+    <text x="228" y="400" fill="#FF8C00">WARN</text>
+    <text x="272" y="362" fill="#4A9EFF">INFO</text>
+    <text x="302" y="370" fill="#C080FF">AUDIT</text>
+  </g>
+
+  <!-- Rain drops (event data flowing down) -->
+  <g opacity="0.5" filter="url(#glow07)">
+    <!-- Blue rain - INFO events -->
+    <line x1="130" y1="310" x2="126" y2="330" stroke="#4A9EFF" stroke-width="1.5"/>
+    <line x1="155" y1="325" x2="151" y2="348" stroke="#4A9EFF" stroke-width="1.5"/>
+    <line x1="375" y1="305" x2="371" y2="328" stroke="#4A9EFF" stroke-width="1.5"/>
+    <line x1="395" y1="320" x2="391" y2="342" stroke="#4A9EFF" stroke-width="1.5"/>
+    <line x1="415" y1="310" x2="411" y2="333" stroke="#4A9EFF" stroke-width="1.5"/>
+    <line x1="440" y1="298" x2="436" y2="320" stroke="#4A9EFF" stroke-width="1.5"/>
+    <!-- Orange rain - WARN -->
+    <line x1="360" y1="340" x2="356" y2="362" stroke="#FF8C00" stroke-width="2"/>
+    <line x1="420" y1="350" x2="416" y2="372" stroke="#FF8C00" stroke-width="2"/>
+    <!-- Purple rain - AUDIT -->
+    <line x1="100" y1="340" x2="96" y2="365" stroke="#9B59B6" stroke-width="1.5"/>
+    <line x1="450" y1="360" x2="446" y2="382" stroke="#9B59B6" stroke-width="1.5"/>
+  </g>
+
+  <!-- Event indicator badges on cloud -->
+  <g filter="url(#glow07)">
+    <circle cx="170" cy="175" r="14" fill="#FF4500" stroke="#FF7755" stroke-width="1.5"/>
+    <text x="170" y="179" text-anchor="middle" font-family="monospace" font-size="9" fill="#fff" font-weight="bold">2</text>
+    <circle cx="240" cy="148" r="14" fill="#FF8C00" stroke="#ffaa44" stroke-width="1.5"/>
+    <text x="240" y="152" text-anchor="middle" font-family="monospace" font-size="9" fill="#fff">5</text>
+    <circle cx="310" cy="145" r="14" fill="#4A9EFF" stroke="#77ccff" stroke-width="1.5"/>
+    <text x="310" y="149" text-anchor="middle" font-family="monospace" font-size="9" fill="#fff">42</text>
+    <circle cx="370" cy="162" r="14" fill="#9B59B6" stroke="#c080ff" stroke-width="1.5"/>
+    <text x="370" y="166" text-anchor="middle" font-family="monospace" font-size="9" fill="#fff">8</text>
+  </g>
+
+  <!-- Title -->
+  <text x="256" y="460" text-anchor="middle" font-family="'Segoe UI',Arial,sans-serif" font-size="15" font-weight="bold" fill="#FFE600" filter="url(#lightningGlow07f)" opacity="0.9">STORM CLOUD EVENTS</text>
+  <text x="256" y="482" text-anchor="middle" font-family="monospace" font-size="9" fill="#9B59B6" opacity="0.7">SYSTEM EVENT STORM ANALYZER</text>
+  <text x="256" y="498" text-anchor="middle" font-family="monospace" font-size="8" fill="#6C3483" opacity="0.5">ERR=2  WARN=5  INFO=42  AUDIT=8</text>
+</svg>

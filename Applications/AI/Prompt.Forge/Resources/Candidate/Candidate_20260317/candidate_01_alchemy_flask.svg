@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bgGrad01" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#0d2e0d"/>
+      <stop offset="100%" stop-color="#0a1a0a"/>
+    </radialGradient>
+    <linearGradient id="flaskGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a4a2e"/>
+      <stop offset="50%" stop-color="#2ECC71" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#0d2e18"/>
+    </linearGradient>
+    <linearGradient id="liquidGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#F1C40F" stop-opacity="0.9"/>
+      <stop offset="50%" stop-color="#2ECC71" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#1a8a45" stop-opacity="0.6"/>
+    </linearGradient>
+    <radialGradient id="glowGold" cx="50%" cy="30%" r="60%">
+      <stop offset="0%" stop-color="#F1C40F" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#F1C40F" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glow01">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="softGlow01">
+      <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="512" height="512" fill="url(#bgGrad01)" rx="40"/>
+
+  <!-- 배경 파티클 -->
+  <circle cx="80" cy="100" r="3" fill="#2ECC71" opacity="0.4" filter="url(#glow01)"/>
+  <circle cx="430" cy="80" r="2" fill="#F1C40F" opacity="0.5" filter="url(#glow01)"/>
+  <circle cx="450" cy="200" r="3" fill="#2ECC71" opacity="0.3" filter="url(#glow01)"/>
+  <circle cx="60" cy="380" r="2" fill="#F1C40F" opacity="0.4" filter="url(#glow01)"/>
+  <circle cx="480" cy="420" r="3" fill="#2ECC71" opacity="0.3" filter="url(#glow01)"/>
+
+  <!-- 플라스크 몸체 (에를렌마이어) -->
+  <!-- 플라스크 넥 -->
+  <rect x="210" y="100" width="92" height="130" rx="8" fill="url(#flaskGrad)" stroke="#2ECC71" stroke-width="2" opacity="0.9"/>
+  <!-- 넥 하이라이트 -->
+  <rect x="215" y="105" width="20" height="120" rx="5" fill="white" opacity="0.08"/>
+
+  <!-- 플라스크 바디 -->
+  <path d="M210 230 L140 370 Q128 400 140 420 L372 420 Q384 400 372 370 L302 230 Z"
+        fill="url(#flaskGrad)" stroke="#2ECC71" stroke-width="2.5" opacity="0.9"/>
+
+  <!-- 액체 (황금/에메랄드 포션) -->
+  <path d="M152 380 Q160 365 200 355 Q256 345 312 355 Q352 365 360 380 L372 420 Q384 400 372 420 L140 420 Q128 400 140 420 Z"
+        fill="url(#liquidGrad)" opacity="0.85"/>
+
+  <!-- 액체 표면 광택 -->
+  <ellipse cx="256" cy="355" rx="100" ry="12" fill="#F1C40F" opacity="0.3" filter="url(#glow01)"/>
+
+  <!-- 글로우 효과 (플라스크 내부) -->
+  <ellipse cx="256" cy="390" rx="90" ry="40" fill="url(#glowGold)" opacity="0.4"/>
+
+  <!-- 증류 중인 텍스트 파티클 (플라스크 위로 올라감) -->
+  <!-- 텍스트 심볼들 -->
+  <text x="256" y="195" font-family="monospace" font-size="18" font-weight="bold"
+        fill="#F1C40F" text-anchor="middle" opacity="0.9" filter="url(#glow01)">&gt;_</text>
+
+  <!-- 증기 / 텍스트가 올라가는 효과 -->
+  <text x="256" y="75" font-family="monospace" font-size="14"
+        fill="#2ECC71" text-anchor="middle" opacity="0.85" filter="url(#softGlow01)">{AI}</text>
+
+  <!-- 올라가는 글자 파티클들 -->
+  <text x="230" y="55" font-family="monospace" font-size="11"
+        fill="#F1C40F" opacity="0.7" filter="url(#glow01)">P</text>
+  <text x="270" y="45" font-family="monospace" font-size="10"
+        fill="#2ECC71" opacity="0.6" filter="url(#glow01)">R</text>
+  <text x="295" y="60" font-family="monospace" font-size="9"
+        fill="#F1C40F" opacity="0.5" filter="url(#glow01)">M</text>
+
+  <!-- 플라스크 내부 기포들 -->
+  <circle cx="190" cy="395" r="6" fill="#2ECC71" opacity="0.5" filter="url(#glow01)"/>
+  <circle cx="220" cy="375" r="4" fill="#F1C40F" opacity="0.6" filter="url(#glow01)"/>
+  <circle cx="300" cy="390" r="5" fill="#2ECC71" opacity="0.4" filter="url(#glow01)"/>
+  <circle cx="330" cy="370" r="3" fill="#F1C40F" opacity="0.5" filter="url(#glow01)"/>
+
+  <!-- 플라스크 스탠드/받침 -->
+  <rect x="195" y="95" width="122" height="12" rx="4" fill="#1a3a25" stroke="#2ECC71" stroke-width="1.5"/>
+  <rect x="220" y="88" width="72" height="10" rx="3" fill="#1a3a25" stroke="#2ECC71" stroke-width="1"/>
+
+  <!-- 하단 받침대 -->
+  <ellipse cx="256" cy="440" rx="100" ry="12" fill="#1a3a25" stroke="#2ECC71" stroke-width="1.5" opacity="0.8"/>
+  <rect x="156" y="428" width="200" height="14" rx="4" fill="#1a3a25" stroke="#2ECC71" stroke-width="1.5" opacity="0.8"/>
+
+  <!-- 연금술 기호들 -->
+  <text x="110" y="310" font-family="serif" font-size="22"
+        fill="#F1C40F" opacity="0.6" filter="url(#glow01)">⚗</text>
+  <text x="380" y="310" font-family="serif" font-size="18"
+        fill="#2ECC71" opacity="0.5" filter="url(#glow01)">✦</text>
+
+  <!-- 별빛 효과 -->
+  <line x1="256" y1="20" x2="256" y2="45" stroke="#F1C40F" stroke-width="2" opacity="0.6" filter="url(#glow01)"/>
+  <line x1="243" y1="32" x2="269" y2="32" stroke="#F1C40F" stroke-width="2" opacity="0.6" filter="url(#glow01)"/>
+
+  <!-- 하단 라벨 영역 (장식) -->
+  <rect x="180" y="455" width="152" height="28" rx="5" fill="#0d2e18" stroke="#2ECC71" stroke-width="1" opacity="0.7"/>
+  <text x="256" y="474" font-family="monospace" font-size="13" font-weight="bold"
+        fill="#2ECC71" text-anchor="middle" opacity="0.9">PROMPT.FORGE</text>
+</svg>

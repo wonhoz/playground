@@ -1,0 +1,141 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bgGrad06" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#0d1a1a"/>
+      <stop offset="100%" stop-color="#0a0f0f"/>
+    </radialGradient>
+    <linearGradient id="metalGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#E8E8E8"/>
+      <stop offset="30%" stop-color="#C0C0C0"/>
+      <stop offset="60%" stop-color="#909090"/>
+      <stop offset="100%" stop-color="#606060"/>
+    </linearGradient>
+    <linearGradient id="metalDark" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#808080"/>
+      <stop offset="100%" stop-color="#404040"/>
+    </linearGradient>
+    <linearGradient id="cyanAccent" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00CED1"/>
+      <stop offset="100%" stop-color="#007b7d"/>
+    </linearGradient>
+    <radialGradient id="glowCyan" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#00CED1" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#00CED1" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glow06">
+      <feGaussianBlur stdDeviation="5" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="metalSheen">
+      <feGaussianBlur stdDeviation="1" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="cncGlow">
+      <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="512" height="512" fill="url(#bgGrad06)" rx="40"/>
+
+  <!-- 배경 격자 (CNC 작업대) -->
+  <g opacity="0.06" stroke="#00CED1" stroke-width="0.5">
+    <line x1="0" y1="64" x2="512" y2="64"/>
+    <line x1="0" y1="128" x2="512" y2="128"/>
+    <line x1="0" y1="192" x2="512" y2="192"/>
+    <line x1="0" y1="256" x2="512" y2="256"/>
+    <line x1="0" y1="320" x2="512" y2="320"/>
+    <line x1="0" y1="384" x2="512" y2="384"/>
+    <line x1="0" y1="448" x2="512" y2="448"/>
+    <line x1="64" y1="0" x2="64" y2="512"/>
+    <line x1="128" y1="0" x2="128" y2="512"/>
+    <line x1="192" y1="0" x2="192" y2="512"/>
+    <line x1="256" y1="0" x2="256" y2="512"/>
+    <line x1="320" y1="0" x2="320" y2="512"/>
+    <line x1="384" y1="0" x2="384" y2="512"/>
+    <line x1="448" y1="0" x2="448" y2="512"/>
+  </g>
+
+  <!-- 선반 베드 (주 프레임) -->
+  <rect x="30" y="300" width="452" height="40" rx="6" fill="url(#metalGrad)" stroke="#C0C0C0" stroke-width="1.5"/>
+  <rect x="30" y="336" width="452" height="20" rx="4" fill="url(#metalDark)"/>
+
+  <!-- 주축대 (Headstock - 왼쪽) -->
+  <rect x="40" y="200" width="90" height="100" rx="6" fill="url(#metalGrad)" stroke="#C0C0C0" stroke-width="1.5"/>
+  <rect x="50" y="210" width="70" height="80" rx="4" fill="#909090"/>
+  <!-- 척 (Chuck) -->
+  <circle cx="130" cy="250" r="45" fill="#808080" stroke="#C0C0C0" stroke-width="2"/>
+  <circle cx="130" cy="250" r="35" fill="#606060"/>
+  <circle cx="130" cy="250" r="20" fill="#404040"/>
+  <!-- 척 조 (Jaw) - 4방향 -->
+  <rect x="108" y="228" width="44" height="8" rx="2" fill="#C0C0C0" transform="rotate(0, 130, 250)"/>
+  <rect x="108" y="214" width="44" height="8" rx="2" fill="#C0C0C0" transform="rotate(90, 130, 250)"/>
+  <rect x="108" y="228" width="44" height="8" rx="2" fill="#C0C0C0" transform="rotate(45, 130, 250)"/>
+  <rect x="108" y="228" width="44" height="8" rx="2" fill="#C0C0C0" transform="rotate(-45, 130, 250)"/>
+
+  <!-- 공작물 (텍스트 블록 - 가공 중) -->
+  <g filter="url(#metalSheen)">
+    <!-- 원통형 텍스트 블록 -->
+    <rect x="175" y="220" width="200" height="60" rx="30" fill="url(#metalGrad)" stroke="#C0C0C0" stroke-width="1.5"/>
+    <!-- 회전 효과 줄 -->
+    <line x1="180" y1="235" x2="370" y2="235" stroke="#E8E8E8" stroke-width="0.5" opacity="0.5"/>
+    <line x1="180" y1="242" x2="370" y2="242" stroke="#808080" stroke-width="0.5" opacity="0.4"/>
+    <line x1="180" y1="250" x2="370" y2="250" stroke="#E8E8E8" stroke-width="0.5" opacity="0.5"/>
+    <line x1="180" y1="258" x2="370" y2="258" stroke="#808080" stroke-width="0.5" opacity="0.4"/>
+    <line x1="180" y1="265" x2="370" y2="265" stroke="#E8E8E8" stroke-width="0.5" opacity="0.5"/>
+
+    <!-- 가공된 텍스트 각인 -->
+    <text x="275" y="257" font-family="monospace" font-size="22" font-weight="bold"
+          fill="#00CED1" text-anchor="middle" opacity="0.9" filter="url(#glow06)">PROMPT</text>
+  </g>
+
+  <!-- 바이트 (절삭 공구 - 우측) -->
+  <g filter="url(#glow06)">
+    <!-- 공구대 (Tool Post) -->
+    <rect x="385" y="190" width="70" height="110" rx="4" fill="url(#metalDark)" stroke="#C0C0C0" stroke-width="1.5"/>
+    <!-- 공구 홀더 -->
+    <rect x="375" y="235" width="90" height="25" rx="3" fill="url(#metalGrad)" stroke="#C0C0C0" stroke-width="1"/>
+    <!-- 절삭 바이트 -->
+    <polygon points="370,247 375,237 375,258 365,252" fill="url(#cyanAccent)" filter="url(#cncGlow)"/>
+
+    <!-- CNC 컨트롤러 디스플레이 -->
+    <rect x="395" y="200" width="50" height="32" rx="3" fill="#001a1a" stroke="#00CED1" stroke-width="1"/>
+    <text x="420" y="213" font-family="monospace" font-size="7" fill="#00CED1" text-anchor="middle" opacity="0.9">X:275.3</text>
+    <text x="420" y="224" font-family="monospace" font-size="7" fill="#00CED1" text-anchor="middle" opacity="0.9">Z: 12.8</text>
+  </g>
+
+  <!-- 가공 칩(쇳가루) 날리는 효과 -->
+  <g filter="url(#cncGlow)" opacity="0.8">
+    <circle cx="365" cy="240" r="3" fill="#00CED1"/>
+    <circle cx="358" cy="232" r="2" fill="#C0C0C0"/>
+    <circle cx="355" cy="248" r="2.5" fill="#00CED1"/>
+    <circle cx="348" cy="238" r="1.5" fill="#C0C0C0"/>
+
+    <!-- 칩 곡선들 -->
+    <path d="M365,245 Q380,230 395,240" stroke="#00CED1" stroke-width="1.5" fill="none" opacity="0.7"/>
+    <path d="M365,245 Q375,260 390,255" stroke="#C0C0C0" stroke-width="1" fill="none" opacity="0.5"/>
+  </g>
+
+  <!-- 회전 속도 표시 (심볼) -->
+  <g filter="url(#glow06)" opacity="0.7">
+    <path d="M110 140 A40 40 0 0 1 150 140" stroke="#00CED1" stroke-width="2" fill="none" stroke-dasharray="5 3"/>
+    <polygon points="150,135 150,145 160,140" fill="#00CED1"/>
+    <text x="130" y="130" font-family="monospace" font-size="10" fill="#00CED1" text-anchor="middle">1200 RPM</text>
+  </g>
+
+  <!-- 좌표계 표시 -->
+  <g filter="url(#glow06)" opacity="0.6">
+    <line x1="460" y1="420" x2="490" y2="420" stroke="#00CED1" stroke-width="1.5"/>
+    <line x1="460" y1="420" x2="460" y2="390" stroke="#C0C0C0" stroke-width="1.5"/>
+    <polygon points="490,417 490,423 498,420" fill="#00CED1"/>
+    <polygon points="457,390 463,390 460,382" fill="#C0C0C0"/>
+    <text x="492" y="423" font-family="monospace" font-size="9" fill="#00CED1">Z</text>
+    <text x="463" y="387" font-family="monospace" font-size="9" fill="#C0C0C0">X</text>
+  </g>
+
+  <!-- 하단 라벨 -->
+  <rect x="155" y="455" width="202" height="28" rx="5" fill="#0a0f0f" stroke="#00CED1" stroke-width="1" opacity="0.7"/>
+  <text x="256" y="474" font-family="monospace" font-size="13" font-weight="bold"
+        fill="#00CED1" text-anchor="middle" opacity="0.9">PROMPT.FORGE</text>
+</svg>

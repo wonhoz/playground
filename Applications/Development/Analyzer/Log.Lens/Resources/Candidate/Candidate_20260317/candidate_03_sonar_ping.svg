@@ -1,0 +1,125 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg03" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#061a0e"/>
+      <stop offset="70%" stop-color="#040f08"/>
+      <stop offset="100%" stop-color="#030f08"/>
+    </radialGradient>
+    <radialGradient id="screen_grad" cx="50%" cy="55%" r="50%">
+      <stop offset="0%" stop-color="#001a08"/>
+      <stop offset="80%" stop-color="#000d04"/>
+      <stop offset="100%" stop-color="#000000"/>
+    </radialGradient>
+    <radialGradient id="ping_glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#00FF41" stop-opacity="0.8"/>
+      <stop offset="50%" stop-color="#00FF41" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#00FF41" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="sonar_glow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="strong_glow">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <linearGradient id="sweep_line" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00FF41" stop-opacity="0"/>
+      <stop offset="80%" stop-color="#00FF41" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#00FFCC" stop-opacity="0.8"/>
+    </linearGradient>
+    <clipPath id="screen_clip">
+      <circle cx="256" cy="240" r="185"/>
+    </clipPath>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="512" height="512" fill="url(#bg03)"/>
+
+  <!-- 소나 화면 베젤 -->
+  <circle cx="256" cy="240" r="200" fill="#050f07"/>
+  <circle cx="256" cy="240" r="195" fill="#040d06" stroke="#00FF41" stroke-width="2" opacity="0.5"/>
+  <circle cx="256" cy="240" r="188" fill="url(#screen_grad)"/>
+
+  <!-- 화면 베젤 눈금 -->
+  <circle cx="256" cy="240" r="195" fill="none" stroke="#00FF41" stroke-width="1" stroke-dasharray="3,12" opacity="0.4"/>
+
+  <!-- 그리드 라인 (소나 화면) -->
+  <!-- 수평/수직 십자선 -->
+  <line x1="68" y1="240" x2="444" y2="240" stroke="#00FF41" stroke-width="0.8" opacity="0.25" clip-path="url(#screen_clip)"/>
+  <line x1="256" y1="52" x2="256" y2="428" stroke="#00FF41" stroke-width="0.8" opacity="0.25" clip-path="url(#screen_clip)"/>
+
+  <!-- 동심원 (소나 거리 표시) -->
+  <circle cx="256" cy="240" r="47" fill="none" stroke="#00FF41" stroke-width="0.8" opacity="0.2" clip-path="url(#screen_clip)"/>
+  <circle cx="256" cy="240" r="94" fill="none" stroke="#00FF41" stroke-width="0.8" opacity="0.2" clip-path="url(#screen_clip)"/>
+  <circle cx="256" cy="240" r="141" fill="none" stroke="#00FF41" stroke-width="0.8" opacity="0.2" clip-path="url(#screen_clip)"/>
+  <circle cx="256" cy="240" r="188" fill="none" stroke="#00FF41" stroke-width="0.8" opacity="0.2" clip-path="url(#screen_clip)"/>
+
+  <!-- 대각선 그리드 -->
+  <line x1="124" y1="108" x2="388" y2="372" stroke="#00FF41" stroke-width="0.5" opacity="0.15" clip-path="url(#screen_clip)"/>
+  <line x1="388" y1="108" x2="124" y2="372" stroke="#00FF41" stroke-width="0.5" opacity="0.15" clip-path="url(#screen_clip)"/>
+
+  <!-- 스윕 라인 (회전 스캔 빔) - 약 60도 방향 -->
+  <path d="M 256 240 L 350 90" stroke="#00FFCC" stroke-width="2" opacity="0.9" filter="url(#sonar_glow)" clip-path="url(#screen_clip)"/>
+  <!-- 스윕 후광 (trailing glow) -->
+  <path d="M 256 240 L 380 130 L 330 100 L 256 240Z" fill="#00FF41" opacity="0.08" clip-path="url(#screen_clip)"/>
+  <path d="M 256 240 L 400 160 L 380 130 L 256 240Z" fill="#00FF41" opacity="0.05" clip-path="url(#screen_clip)"/>
+
+  <!-- 로그 이벤트 핑 (탐지된 이벤트들) -->
+  <!-- ERROR 핑 (빨강) -->
+  <circle cx="320" cy="155" r="10" fill="#FF4444" opacity="0.9" filter="url(#sonar_glow)"/>
+  <circle cx="320" cy="155" r="16" fill="none" stroke="#FF4444" stroke-width="1.5" opacity="0.5"/>
+  <circle cx="320" cy="155" r="24" fill="none" stroke="#FF4444" stroke-width="1" opacity="0.3"/>
+
+  <!-- WARN 핑 (노랑) -->
+  <circle cx="190" cy="190" r="8" fill="#FFB300" opacity="0.9" filter="url(#sonar_glow)"/>
+  <circle cx="190" cy="190" r="14" fill="none" stroke="#FFB300" stroke-width="1.5" opacity="0.5"/>
+  <circle cx="190" cy="190" r="22" fill="none" stroke="#FFB300" stroke-width="1" opacity="0.3"/>
+
+  <!-- INFO 핑 (초록) -->
+  <circle cx="300" cy="300" r="7" fill="#00FF41" opacity="0.9" filter="url(#sonar_glow)"/>
+  <circle cx="300" cy="300" r="13" fill="none" stroke="#00FF41" stroke-width="1.5" opacity="0.5"/>
+  <circle cx="300" cy="300" r="21" fill="none" stroke="#00FF41" stroke-width="1" opacity="0.3"/>
+
+  <!-- DEBUG 핑 (청록) -->
+  <circle cx="195" cy="300" r="6" fill="#00FFCC" opacity="0.8" filter="url(#sonar_glow)"/>
+  <circle cx="195" cy="300" r="11" fill="none" stroke="#00FFCC" stroke-width="1" opacity="0.4"/>
+
+  <!-- 희미한 이전 핑들 -->
+  <circle cx="350" cy="260" r="5" fill="#00FF41" opacity="0.4"/>
+  <circle cx="350" cy="260" r="10" fill="none" stroke="#00FF41" stroke-width="0.8" opacity="0.2"/>
+  <circle cx="160" cy="270" r="4" fill="#FFB300" opacity="0.3"/>
+  <circle cx="280" cy="180" r="4" fill="#FF4444" opacity="0.3"/>
+
+  <!-- 중심점 (소나 원점) -->
+  <circle cx="256" cy="240" r="6" fill="#00FFCC" filter="url(#strong_glow)"/>
+  <circle cx="256" cy="240" r="3" fill="#FFFFFF"/>
+  <!-- 중심 동심원 -->
+  <circle cx="256" cy="240" r="12" fill="none" stroke="#00FF41" stroke-width="1" opacity="0.6"/>
+  <circle cx="256" cy="240" r="20" fill="none" stroke="#00FF41" stroke-width="0.8" opacity="0.4"/>
+
+  <!-- 화면 유리 반사 효과 -->
+  <ellipse cx="190" cy="130" rx="80" ry="35" fill="white" opacity="0.03" transform="rotate(-20, 190, 130)"/>
+
+  <!-- 로그 텍스트 라인 표시 (하단 바) -->
+  <rect x="30" y="450" width="452" height="40" rx="6" fill="#050f07" stroke="#00FF41" stroke-width="1" opacity="0.6"/>
+  <!-- 레벨 표시기 -->
+  <rect x="42" y="460" width="50" height="18" rx="3" fill="#FF4444" opacity="0.8"/>
+  <rect x="102" y="460" width="50" height="18" rx="3" fill="#FFB300" opacity="0.8"/>
+  <rect x="162" y="460" width="50" height="18" rx="3" fill="#00FF41" opacity="0.8"/>
+  <rect x="222" y="460" width="50" height="18" rx="3" fill="#00FFCC" opacity="0.8"/>
+  <!-- 레벨 텍스트 -->
+  <text x="67" y="473" font-family="monospace" font-size="8" fill="white" text-anchor="middle" font-weight="bold">ERR</text>
+  <text x="127" y="473" font-family="monospace" font-size="8" fill="white" text-anchor="middle" font-weight="bold">WRN</text>
+  <text x="187" y="473" font-family="monospace" font-size="8" fill="white" text-anchor="middle" font-weight="bold">INF</text>
+  <text x="247" y="473" font-family="monospace" font-size="8" fill="white" text-anchor="middle" font-weight="bold">DBG</text>
+
+  <!-- 상단 레이블 -->
+  <text x="256" y="485" font-family="monospace" font-size="7" fill="#00FF41" text-anchor="middle" opacity="0.6">SONAR LOG SCAN v2.1</text>
+
+  <!-- 화면 테두리 외부 장식 눈금 -->
+  <line x1="256" y1="42" x2="256" y2="52" stroke="#00FF41" stroke-width="2" opacity="0.6"/>
+  <line x1="256" y1="428" x2="256" y2="438" stroke="#00FF41" stroke-width="2" opacity="0.6"/>
+  <line x1="62" y1="240" x2="72" y2="240" stroke="#00FF41" stroke-width="2" opacity="0.6"/>
+  <line x1="440" y1="240" x2="450" y2="240" stroke="#00FF41" stroke-width="2" opacity="0.6"/>
+</svg>

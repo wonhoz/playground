@@ -1,0 +1,162 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="sky06" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#010a14"/>
+      <stop offset="100%" stop-color="#021525"/>
+    </linearGradient>
+    <linearGradient id="sea06" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#003087"/>
+      <stop offset="40%" stop-color="#001f5c"/>
+      <stop offset="100%" stop-color="#000a1e"/>
+    </linearGradient>
+    <linearGradient id="periscope_metal" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#4a4a5a"/>
+      <stop offset="30%" stop-color="#8a8a9a"/>
+      <stop offset="50%" stop-color="#C0C0C0"/>
+      <stop offset="70%" stop-color="#9a9aaa"/>
+      <stop offset="100%" stop-color="#4a4a5a"/>
+    </linearGradient>
+    <linearGradient id="lens_grad" cx="35%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#001a3a"/>
+      <stop offset="40%" stop-color="#003087"/>
+      <stop offset="100%" stop-color="#000d1e"/>
+    </linearGradient>
+    <radialGradient id="lens_radial" cx="40%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#1a3a6a"/>
+      <stop offset="40%" stop-color="#003087"/>
+      <stop offset="100%" stop-color="#000d1e"/>
+    </radialGradient>
+    <radialGradient id="crosshair_glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#C0C0C0" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#C0C0C0" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="periscope_glow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="metal_shine">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <clipPath id="lens_clip">
+      <circle cx="256" cy="200" r="130"/>
+    </clipPath>
+    <linearGradient id="log_navy" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#C0C0C0" stop-opacity="0"/>
+      <stop offset="15%" stop-color="#C0C0C0" stop-opacity="0.9"/>
+      <stop offset="85%" stop-color="#A0A0B0" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#A0A0B0" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 하늘 배경 -->
+  <rect width="512" height="512" fill="url(#sky06)"/>
+
+  <!-- 별 -->
+  <circle cx="40" cy="25" r="1" fill="white" opacity="0.7"/>
+  <circle cx="90" cy="50" r="0.8" fill="white" opacity="0.5"/>
+  <circle cx="170" cy="30" r="1" fill="white" opacity="0.6"/>
+  <circle cx="400" cy="20" r="1" fill="white" opacity="0.7"/>
+  <circle cx="460" cy="45" r="0.8" fill="white" opacity="0.5"/>
+
+  <!-- 수면 라인 위 (하늘 영역) -->
+  <!-- 구름 -->
+  <ellipse cx="100" cy="80" rx="60" ry="15" fill="#1a2a3a" opacity="0.6"/>
+  <ellipse cx="420" cy="100" rx="70" ry="18" fill="#1a2a3a" opacity="0.5"/>
+
+  <!-- 수면 -->
+  <rect x="0" y="350" width="512" height="162" fill="url(#sea06)"/>
+
+  <!-- 파도 -->
+  <path d="M 0 352 Q 80 345 160 352 Q 240 359 320 352 Q 400 345 480 352 L 512 352 L 512 370 L 0 370Z"
+        fill="#003580" opacity="0.5"/>
+  <path d="M 0 365 Q 64 360 128 365 Q 192 370 256 365 Q 320 360 384 365 Q 448 370 512 365"
+        fill="none" stroke="#0040a0" stroke-width="1.5" opacity="0.4"/>
+
+  <!-- 잠망경 튜브 (수직) -->
+  <!-- 메인 튜브 (수면 아래~위) -->
+  <rect x="240" y="120" width="32" height="400" rx="4" fill="url(#periscope_metal)"/>
+  <!-- 튜브 하이라이트 -->
+  <rect x="245" y="120" width="5" height="400" rx="2" fill="white" opacity="0.15"/>
+  <!-- 튜브 리브 (강도 링) -->
+  <rect x="239" y="200" width="34" height="8" rx="3" fill="#606070"/>
+  <rect x="239" y="270" width="34" height="8" rx="3" fill="#606070"/>
+  <rect x="239" y="340" width="34" height="8" rx="3" fill="#606070"/>
+  <rect x="239" y="410" width="34" height="8" rx="3" fill="#606070"/>
+
+  <!-- 수평 튜브 (상단 꺾임) -->
+  <rect x="200" y="108" width="96" height="32" rx="4" fill="url(#periscope_metal)"/>
+  <rect x="200" y="113" width="96" height="5" rx="2" fill="white" opacity="0.15"/>
+
+  <!-- 상단 렌즈 하우징 -->
+  <rect x="188" y="80" width="68" height="50" rx="5" fill="#5a5a6a"/>
+  <rect x="191" y="83" width="62" height="44" rx="4" fill="#4a4a5a"/>
+
+  <!-- 렌즈 자체 -->
+  <rect x="195" y="87" width="50" height="36" rx="3" fill="url(#lens_radial)"/>
+  <!-- 렌즈 반사 -->
+  <rect x="196" y="88" width="22" height="8" rx="2" fill="white" opacity="0.12"/>
+  <!-- 십자선 -->
+  <line x1="195" y1="105" x2="245" y2="105" stroke="#C0C0C0" stroke-width="0.8" opacity="0.6"/>
+  <line x1="220" y1="87" x2="220" y2="123" stroke="#C0C0C0" stroke-width="0.8" opacity="0.6"/>
+  <circle cx="220" cy="105" r="8" fill="none" stroke="#C0C0C0" stroke-width="0.8" opacity="0.4"/>
+  <circle cx="220" cy="105" r="14" fill="none" stroke="#C0C0C0" stroke-width="0.6" opacity="0.3"/>
+
+  <!-- 잠망경 뷰파인더 원형 (중앙 주요 요소) -->
+  <!-- 외부 링 -->
+  <circle cx="256" cy="200" r="142" fill="#3a3a4a"/>
+  <circle cx="256" cy="200" r="138" fill="#2a2a3a"/>
+  <circle cx="256" cy="200" r="133" fill="url(#lens_radial)"/>
+
+  <!-- 수중 풍경 (렌즈 뷰) -->
+  <rect x="123" y="67" width="266" height="266" fill="none" clip-path="url(#lens_clip)"/>
+
+  <!-- 렌즈 내부 배경 (수중) -->
+  <circle cx="256" cy="200" r="130" fill="#001428" clip-path="url(#lens_clip)"/>
+
+  <!-- 수중 로그 데이터 스트림 -->
+  <!-- 로그 라인들이 데이터 흐름처럼 표현 -->
+  <rect x="126" y="150" width="260" height="3" rx="1.5" fill="#FF4444" opacity="0.8" filter="url(#periscope_glow)" clip-path="url(#lens_clip)"/>
+  <rect x="126" y="163" width="220" height="2" rx="1" fill="#FF6666" opacity="0.5" clip-path="url(#lens_clip)"/>
+  <rect x="126" y="175" width="260" height="3" rx="1.5" fill="#FFB300" opacity="0.7" filter="url(#periscope_glow)" clip-path="url(#lens_clip)"/>
+  <rect x="126" y="188" width="200" height="2" rx="1" fill="#FFD740" opacity="0.5" clip-path="url(#lens_clip)"/>
+  <rect x="126" y="200" width="260" height="3" rx="1.5" fill="#4CAF50" opacity="0.7" filter="url(#periscope_glow)" clip-path="url(#lens_clip)"/>
+  <rect x="126" y="213" width="240" height="2" rx="1" fill="#81C784" opacity="0.5" clip-path="url(#lens_clip)"/>
+  <rect x="126" y="225" width="260" height="3" rx="1.5" fill="#42A5F5" opacity="0.7" filter="url(#periscope_glow)" clip-path="url(#lens_clip)"/>
+  <rect x="126" y="238" width="180" height="2" rx="1" fill="#90CAF9" opacity="0.5" clip-path="url(#lens_clip)"/>
+  <rect x="126" y="250" width="260" height="3" rx="1.5" fill="#C0C0C0" opacity="0.6" clip-path="url(#lens_clip)"/>
+
+  <!-- 로그 레벨 태그 (렌즈 내부 좌측) -->
+  <rect x="130" y="146" width="36" height="11" rx="2" fill="#FF1744" clip-path="url(#lens_clip)"/>
+  <text x="148" y="155" font-family="monospace" font-size="7" fill="white" text-anchor="middle" clip-path="url(#lens_clip)" font-weight="bold">ERR</text>
+  <rect x="130" y="171" width="36" height="11" rx="2" fill="#FF8C00" clip-path="url(#lens_clip)"/>
+  <text x="148" y="180" font-family="monospace" font-size="7" fill="white" text-anchor="middle" clip-path="url(#lens_clip)" font-weight="bold">WRN</text>
+  <rect x="130" y="196" width="36" height="11" rx="2" fill="#2E7D32" clip-path="url(#lens_clip)"/>
+  <text x="148" y="205" font-family="monospace" font-size="7" fill="white" text-anchor="middle" clip-path="url(#lens_clip)" font-weight="bold">INF</text>
+  <rect x="130" y="221" width="36" height="11" rx="2" fill="#1565C0" clip-path="url(#lens_clip)"/>
+  <text x="148" y="230" font-family="monospace" font-size="7" fill="white" text-anchor="middle" clip-path="url(#lens_clip)" font-weight="bold">DBG</text>
+
+  <!-- 렌즈 십자선 -->
+  <line x1="126" y1="200" x2="386" y2="200" stroke="#C0C0C0" stroke-width="1" opacity="0.5" clip-path="url(#lens_clip)"/>
+  <line x1="256" y1="70" x2="256" y2="330" stroke="#C0C0C0" stroke-width="1" opacity="0.5" clip-path="url(#lens_clip)"/>
+  <circle cx="256" cy="200" r="40" fill="none" stroke="#C0C0C0" stroke-width="0.8" opacity="0.4" clip-path="url(#lens_clip)"/>
+  <circle cx="256" cy="200" r="80" fill="none" stroke="#C0C0C0" stroke-width="0.6" opacity="0.3" clip-path="url(#lens_clip)"/>
+  <circle cx="256" cy="200" r="120" fill="none" stroke="#C0C0C0" stroke-width="0.6" opacity="0.25" clip-path="url(#lens_clip)"/>
+
+  <!-- 렌즈 반사 글레어 -->
+  <ellipse cx="195" cy="120" rx="50" ry="20" fill="white" opacity="0.06" transform="rotate(-20, 195, 120)" clip-path="url(#lens_clip)"/>
+
+  <!-- 렌즈 테두리 (베젤) -->
+  <circle cx="256" cy="200" r="133" fill="none" stroke="#8a8a9a" stroke-width="3"/>
+  <circle cx="256" cy="200" r="138" fill="none" stroke="#505060" stroke-width="2"/>
+
+  <!-- 하단 로그 패널 -->
+  <rect x="30" y="440" width="452" height="52" rx="6" fill="#0a1428" stroke="#003087" stroke-width="1.5" opacity="0.9"/>
+  <rect x="42" y="452" width="380" height="2.5" rx="1" fill="url(#log_navy)" opacity="0.8"/>
+  <rect x="42" y="462" width="310" height="2.5" rx="1" fill="url(#log_navy)" opacity="0.6"/>
+  <rect x="42" y="472" width="350" height="2.5" rx="1" fill="url(#log_navy)" opacity="0.7"/>
+
+  <circle cx="50" cy="453" r="4" fill="#FF4444"/>
+  <circle cx="50" cy="463" r="4" fill="#FFB300"/>
+  <circle cx="50" cy="473" r="4" fill="#4CAF50"/>
+</svg>

@@ -1,0 +1,129 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg10" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#0f1f0f"/>
+      <stop offset="100%" stop-color="#0a0f0a"/>
+    </radialGradient>
+    <linearGradient id="emerald_grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#55EE88"/>
+      <stop offset="50%" stop-color="#2ECC71"/>
+      <stop offset="100%" stop-color="#1a8a4a"/>
+    </linearGradient>
+    <linearGradient id="ruby_grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF6666"/>
+      <stop offset="50%" stop-color="#E74C3C"/>
+      <stop offset="100%" stop-color="#aa1a1a"/>
+    </linearGradient>
+    <linearGradient id="gem_face_top" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#66ffaa"/>
+      <stop offset="100%" stop-color="#2ECC71"/>
+    </linearGradient>
+    <linearGradient id="gem_face_left" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1a8a4a"/>
+      <stop offset="100%" stop-color="#2ECC71"/>
+    </linearGradient>
+    <linearGradient id="gem_face_right" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#2ECC71"/>
+      <stop offset="100%" stop-color="#1a6632"/>
+    </linearGradient>
+    <linearGradient id="ruby_top" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff9999"/>
+      <stop offset="100%" stop-color="#E74C3C"/>
+    </linearGradient>
+    <linearGradient id="clip_gem" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#88ffcc"/>
+      <stop offset="100%" stop-color="#E74C3C"/>
+    </linearGradient>
+    <filter id="glow10">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="gem_glow">
+      <feGaussianBlur stdDeviation="12" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="512" height="512" fill="url(#bg10)" rx="48"/>
+
+  <!-- 에메랄드 보석 다이아몬드 컷 (왼쪽 상단) -->
+  <!-- 크라운 (상단 파셋들) -->
+  <polygon points="160,95 256,55 310,95 256,115"
+           fill="url(#gem_face_top)" opacity="0.95" filter="url(#glow10)"/>
+  <polygon points="96,160 160,95 256,115 196,165"
+           fill="url(#gem_face_left)" opacity="0.9"/>
+  <polygon points="160,95 256,55 256,115"
+           fill="#88ffcc" opacity="0.5"/>
+  <!-- 파빌리온 (하단) -->
+  <polygon points="96,160 196,165 256,115 156,220"
+           fill="#1a6632" opacity="0.85"/>
+  <polygon points="196,165 256,115 296,200 196,260"
+           fill="url(#emerald_grad)" opacity="0.8"/>
+  <!-- 에메랄드 심 (중앙 테이블) -->
+  <polygon points="160,95 310,95 296,200 156,220"
+           fill="url(#emerald_grad)" opacity="0.7"/>
+  <!-- 보석 윤곽 -->
+  <polygon points="160,95 310,95 296,200 156,220 96,160"
+           fill="none" stroke="#2ECC71" stroke-width="2" opacity="0.8" filter="url(#glow10)"/>
+
+  <!-- 루비 보석 다이아몬드 컷 (오른쪽 하단) -->
+  <polygon points="256,295 352,255 415,295 352,315"
+           fill="url(#ruby_top)" opacity="0.95" filter="url(#glow10)"/>
+  <polygon points="196,360 256,295 352,315 295,365"
+           fill="#aa2222" opacity="0.85"/>
+  <polygon points="256,295 352,255 352,315"
+           fill="#ff9999" opacity="0.5"/>
+  <!-- 루비 파빌리온 -->
+  <polygon points="295,365 352,315 415,295 380,400"
+           fill="#882222" opacity="0.8"/>
+  <polygon points="196,360 295,365 352,315 230,420"
+           fill="url(#ruby_grad)" opacity="0.75"/>
+  <!-- 루비 심 -->
+  <polygon points="256,295 415,295 380,400 230,420"
+           fill="url(#ruby_grad)" opacity="0.65"/>
+  <!-- 루비 윤곽 -->
+  <polygon points="256,295 415,295 380,400 230,420 196,360"
+           fill="none" stroke="#E74C3C" stroke-width="2" opacity="0.8" filter="url(#glow10)"/>
+
+  <!-- 보석 내부 광채 라인들 (에메랄드) -->
+  <line x1="196" y1="145" x2="270" y2="155" stroke="#88ffcc" stroke-width="1" opacity="0.4"/>
+  <line x1="218" y1="170" x2="282" y2="175" stroke="#88ffcc" stroke-width="1" opacity="0.35"/>
+  <line x1="168" y1="155" x2="198" y2="195" stroke="#88ffcc" stroke-width="1" opacity="0.3"/>
+  <line x1="265" y1="115" x2="285" y2="170" stroke="#88ffcc" stroke-width="1" opacity="0.3"/>
+
+  <!-- 보석 내부 광채 라인들 (루비) -->
+  <line x1="296" y1="315" x2="365" y2="310" stroke="#ffaaaa" stroke-width="1" opacity="0.4"/>
+  <line x1="280" y1="340" x2="370" y2="338" stroke="#ffaaaa" stroke-width="1" opacity="0.35"/>
+  <line x1="268" y1="348" x2="280" y2="385" stroke="#ffaaaa" stroke-width="1" opacity="0.3"/>
+  <line x1="362" y1="300" x2="390" y2="350" stroke="#ffaaaa" stroke-width="1" opacity="0.3"/>
+
+  <!-- 중앙 클립보드 (두 보석이 만나는 곳) -->
+  <rect x="204" y="192" width="104" height="130" rx="12" ry="12"
+        fill="#080f08" stroke="url(#clip_gem)" stroke-width="3.5" filter="url(#glow10)"/>
+  <!-- 클립보드 클립 -->
+  <rect x="232" y="180" width="48" height="22" rx="7" ry="7"
+        fill="#080f08" stroke="url(#clip_gem)" stroke-width="3" filter="url(#glow10)"/>
+  <!-- 클립보드 내용 라인 -->
+  <line x1="222" y1="228" x2="300" y2="228" stroke="#2ECC71" stroke-width="2.5" opacity="0.8"/>
+  <line x1="222" y1="248" x2="300" y2="248" stroke="#E74C3C" stroke-width="2.5" opacity="0.8"/>
+  <line x1="222" y1="268" x2="285" y2="268" stroke="#2ECC71" stroke-width="2.5" opacity="0.75"/>
+  <line x1="222" y1="288" x2="292" y2="288" stroke="#E74C3C" stroke-width="2.5" opacity="0.75"/>
+  <line x1="222" y1="308" x2="278" y2="308" stroke="#2ECC71" stroke-width="2.5" opacity="0.7"/>
+
+  <!-- 보석 빛 반짝임 포인트 -->
+  <circle cx="220" cy="105" r="5" fill="#ffffff" opacity="0.9" filter="url(#gem_glow)"/>
+  <circle cx="220" cy="105" r="2" fill="#ffffff"/>
+  <circle cx="390" cy="268" r="5" fill="#ffffff" opacity="0.9" filter="url(#gem_glow)"/>
+  <circle cx="390" cy="268" r="2" fill="#ffffff"/>
+  <circle cx="155" cy="178" r="3" fill="#66ffaa" opacity="0.8" filter="url(#glow10)"/>
+  <circle cx="360" cy="385" r="3" fill="#ff8888" opacity="0.8" filter="url(#glow10)"/>
+
+  <!-- 산란된 광채 -->
+  <circle cx="256" cy="256" r="65" fill="none" stroke="#2ECC71" stroke-width="0.5" opacity="0.15"/>
+  <circle cx="256" cy="256" r="85" fill="none" stroke="#E74C3C" stroke-width="0.5" opacity="0.12"/>
+
+  <!-- AI 텍스트 -->
+  <text x="256" y="465" text-anchor="middle" font-family="Arial, sans-serif" font-size="22"
+        font-weight="bold" fill="url(#emerald_grad)" opacity="0.9" filter="url(#glow10)">AI.Clip</text>
+</svg>

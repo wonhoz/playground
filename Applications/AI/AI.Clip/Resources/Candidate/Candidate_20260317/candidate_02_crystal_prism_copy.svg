@@ -1,0 +1,114 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg02" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#1a1a3e"/>
+      <stop offset="100%" stop-color="#0d0d1a"/>
+    </radialGradient>
+    <linearGradient id="prism_face1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#aaaaff" stop-opacity="0.15"/>
+    </linearGradient>
+    <linearGradient id="prism_face2" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ccccff" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#8888cc" stop-opacity="0.1"/>
+    </linearGradient>
+    <linearGradient id="rainbow_red" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ff4444"/>
+      <stop offset="100%" stop-color="#ff6666"/>
+    </linearGradient>
+    <linearGradient id="rainbow_orange" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ff8800"/>
+      <stop offset="100%" stop-color="#ffaa44"/>
+    </linearGradient>
+    <linearGradient id="rainbow_yellow" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ffdd00"/>
+      <stop offset="100%" stop-color="#ffee55"/>
+    </linearGradient>
+    <linearGradient id="rainbow_green" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#44ff44"/>
+      <stop offset="100%" stop-color="#88ff88"/>
+    </linearGradient>
+    <linearGradient id="rainbow_cyan" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00ddff"/>
+      <stop offset="100%" stop-color="#44eeff"/>
+    </linearGradient>
+    <linearGradient id="rainbow_blue" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#4444ff"/>
+      <stop offset="100%" stop-color="#8888ff"/>
+    </linearGradient>
+    <linearGradient id="rainbow_violet" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#cc44ff"/>
+      <stop offset="100%" stop-color="#dd88ff"/>
+    </linearGradient>
+    <filter id="glow02">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="prism_glow">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="512" height="512" fill="url(#bg02)" rx="48"/>
+
+  <!-- 빛 입사 빔 (왼쪽에서) -->
+  <line x1="30" y1="220" x2="196" y2="252" stroke="#ffffff" stroke-width="3" opacity="0.6" filter="url(#glow02)"/>
+
+  <!-- 프리즘 삼각형 -->
+  <polygon points="196,100 340,340 52,340"
+           fill="url(#prism_face1)" stroke="#aaaaff" stroke-width="2.5" opacity="0.9" filter="url(#prism_glow)"/>
+  <!-- 프리즘 내부 반사면 -->
+  <polygon points="196,100 340,340 52,340"
+           fill="none" stroke="#ffffff" stroke-width="1" opacity="0.4"/>
+  <line x1="196" y1="100" x2="196" y2="340" stroke="#ccccff" stroke-width="1" opacity="0.25"/>
+  <!-- 프리즘 상단 빛 반짝임 -->
+  <circle cx="196" cy="100" r="5" fill="#ffffff" opacity="0.9" filter="url(#prism_glow)"/>
+  <circle cx="196" cy="100" r="12" fill="#ffffff" opacity="0.25"/>
+
+  <!-- 무지개 분산 빔들 (오른쪽으로) -->
+  <!-- 각 빔 끝에 미니 클립보드 아이콘 -->
+
+  <!-- 빨강 빔 + 클립보드 -->
+  <line x1="310" y1="265" x2="440" y2="200" stroke="url(#rainbow_red)" stroke-width="3.5" opacity="0.9" filter="url(#glow02)"/>
+  <rect x="440" y="182" width="38" height="46" rx="5" fill="none" stroke="#ff5555" stroke-width="2.5" opacity="0.9" filter="url(#glow02)"/>
+  <rect x="452" y="176" width="14" height="10" rx="3" fill="none" stroke="#ff5555" stroke-width="2" opacity="0.9"/>
+  <line x1="447" y1="200" x2="472" y2="200" stroke="#ff5555" stroke-width="1.5" opacity="0.7"/>
+  <line x1="447" y1="210" x2="472" y2="210" stroke="#ff5555" stroke-width="1.5" opacity="0.7"/>
+
+  <!-- 주황 빔 + 클립보드 -->
+  <line x1="318" y1="278" x2="450" y2="248" stroke="url(#rainbow_orange)" stroke-width="3.5" opacity="0.9" filter="url(#glow02)"/>
+  <rect x="450" y="230" width="36" height="44" rx="5" fill="none" stroke="#ff9922" stroke-width="2.5" opacity="0.9" filter="url(#glow02)"/>
+  <rect x="461" y="224" width="14" height="10" rx="3" fill="none" stroke="#ff9922" stroke-width="2" opacity="0.9"/>
+  <line x1="457" y1="248" x2="481" y2="248" stroke="#ff9922" stroke-width="1.5" opacity="0.7"/>
+  <line x1="457" y1="258" x2="481" y2="258" stroke="#ff9922" stroke-width="1.5" opacity="0.7"/>
+
+  <!-- 노랑 빔 + 클립보드 -->
+  <line x1="324" y1="292" x2="455" y2="296" stroke="url(#rainbow_yellow)" stroke-width="3.5" opacity="0.9" filter="url(#glow02)"/>
+  <rect x="455" y="278" width="36" height="44" rx="5" fill="none" stroke="#ffee00" stroke-width="2.5" opacity="0.9" filter="url(#glow02)"/>
+  <rect x="466" y="272" width="14" height="10" rx="3" fill="none" stroke="#ffee00" stroke-width="2" opacity="0.9"/>
+  <line x1="462" y1="296" x2="486" y2="296" stroke="#ffee00" stroke-width="1.5" opacity="0.7"/>
+  <line x1="462" y1="306" x2="486" y2="306" stroke="#ffee00" stroke-width="1.5" opacity="0.7"/>
+
+  <!-- 초록 빔 + 클립보드 -->
+  <line x1="325" y1="307" x2="450" y2="345" stroke="url(#rainbow_green)" stroke-width="3.5" opacity="0.9" filter="url(#glow02)"/>
+  <rect x="450" y="328" width="36" height="44" rx="5" fill="none" stroke="#44ff55" stroke-width="2.5" opacity="0.9" filter="url(#glow02)"/>
+  <rect x="461" y="322" width="14" height="10" rx="3" fill="none" stroke="#44ff55" stroke-width="2" opacity="0.9"/>
+  <line x1="457" y1="346" x2="481" y2="346" stroke="#44ff55" stroke-width="1.5" opacity="0.7"/>
+  <line x1="457" y1="356" x2="481" y2="356" stroke="#44ff55" stroke-width="1.5" opacity="0.7"/>
+
+  <!-- 청록 빔 -->
+  <line x1="322" y1="320" x2="445" y2="393" stroke="url(#rainbow_cyan)" stroke-width="3.5" opacity="0.9" filter="url(#glow02)"/>
+  <rect x="445" y="376" width="36" height="44" rx="5" fill="none" stroke="#00ddff" stroke-width="2.5" opacity="0.9" filter="url(#glow02)"/>
+  <rect x="456" y="370" width="14" height="10" rx="3" fill="none" stroke="#00ddff" stroke-width="2" opacity="0.9"/>
+  <line x1="452" y1="394" x2="476" y2="394" stroke="#00ddff" stroke-width="1.5" opacity="0.7"/>
+  <line x1="452" y1="404" x2="476" y2="404" stroke="#00ddff" stroke-width="1.5" opacity="0.7"/>
+
+  <!-- 프리즘 내부 광학 효과 -->
+  <line x1="196" y1="252" x2="316" y2="292" stroke="#ffffff" stroke-width="2" opacity="0.3"/>
+
+  <!-- AI 텍스트 -->
+  <text x="256" y="448" text-anchor="middle" font-family="Arial, sans-serif" font-size="22"
+        font-weight="bold" fill="#aaaaff" opacity="0.9" filter="url(#glow02)">AI.Clip</text>
+</svg>

@@ -1,0 +1,116 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bgGrad05" cx="50%" cy="50%" r="55%">
+      <stop offset="0%" stop-color="#1a1205"/>
+      <stop offset="100%" stop-color="#0f0a05"/>
+    </radialGradient>
+    <linearGradient id="frameGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8B6914"/>
+      <stop offset="100%" stop-color="#5a4510"/>
+    </linearGradient>
+    <filter id="glow05">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="threadGlow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="512" height="512" fill="url(#bgGrad05)" rx="40"/>
+
+  <!-- 베틀 프레임 -->
+  <!-- 상단 빔 -->
+  <rect x="60" y="80" width="392" height="24" rx="8" fill="url(#frameGrad)" stroke="#c0902a" stroke-width="1.5"/>
+  <!-- 하단 빔 -->
+  <rect x="60" y="380" width="392" height="24" rx="8" fill="url(#frameGrad)" stroke="#c0902a" stroke-width="1.5"/>
+  <!-- 좌측 기둥 -->
+  <rect x="60" y="80" width="24" height="324" rx="6" fill="url(#frameGrad)" stroke="#c0902a" stroke-width="1.5"/>
+  <!-- 우측 기둥 -->
+  <rect x="428" y="80" width="24" height="324" rx="6" fill="url(#frameGrad)" stroke="#c0902a" stroke-width="1.5"/>
+
+  <!-- 날실 (세로 실들) -->
+  <g opacity="0.85" filter="url(#threadGlow)">
+    <!-- 날실 - 여러 색상의 실 -->
+    <line x1="100" y1="104" x2="100" y2="380" stroke="#FF6B6B" stroke-width="1.5"/>
+    <line x1="118" y1="104" x2="118" y2="380" stroke="#FF9F43" stroke-width="1.5"/>
+    <line x1="136" y1="104" x2="136" y2="380" stroke="#FECA57" stroke-width="1.5"/>
+    <line x1="154" y1="104" x2="154" y2="380" stroke="#48CAE4" stroke-width="1.5"/>
+    <line x1="172" y1="104" x2="172" y2="380" stroke="#54A0FF" stroke-width="1.5"/>
+    <line x1="190" y1="104" x2="190" y2="380" stroke="#A29BFE" stroke-width="1.5"/>
+    <line x1="208" y1="104" x2="208" y2="380" stroke="#FD79A8" stroke-width="1.5"/>
+    <line x1="226" y1="104" x2="226" y2="380" stroke="#55EFC4" stroke-width="1.5"/>
+    <line x1="244" y1="104" x2="244" y2="380" stroke="#FDCB6E" stroke-width="1.5"/>
+    <line x1="262" y1="104" x2="262" y2="380" stroke="#E17055" stroke-width="1.5"/>
+    <line x1="280" y1="104" x2="280" y2="380" stroke="#74B9FF" stroke-width="1.5"/>
+    <line x1="298" y1="104" x2="298" y2="380" stroke="#A29BFE" stroke-width="1.5"/>
+    <line x1="316" y1="104" x2="316" y2="380" stroke="#55EFC4" stroke-width="1.5"/>
+    <line x1="334" y1="104" x2="334" y2="380" stroke="#FFEAA7" stroke-width="1.5"/>
+    <line x1="352" y1="104" x2="352" y2="380" stroke="#FD79A8" stroke-width="1.5"/>
+    <line x1="370" y1="104" x2="370" y2="380" stroke="#FF7675" stroke-width="1.5"/>
+    <line x1="388" y1="104" x2="388" y2="380" stroke="#74B9FF" stroke-width="1.5"/>
+    <line x1="406" y1="104" x2="406" y2="380" stroke="#55EFC4" stroke-width="1.5"/>
+    <line x1="424" y1="104" x2="424" y2="380" stroke="#FDCB6E" stroke-width="1.5"/>
+  </g>
+
+  <!-- 씨실 (가로로 엮인 실 - 완성된 부분) -->
+  <!-- 완성된 직물 영역 (위쪽 절반) -->
+  <g opacity="0.9">
+    <!-- 씨실 패턴들 (지그재그로 날실을 엮음) -->
+    <!-- 행 1 - 빨강 -->
+    <path d="M84,130 L100,122 L118,138 L136,122 L154,138 L172,122 L190,138 L208,122 L226,138 L244,122 L262,138 L280,122 L298,138 L316,122 L334,138 L352,122 L370,138 L388,122 L406,138 L424,122 L440,130"
+          stroke="#FF6B6B" stroke-width="2" fill="none" filter="url(#threadGlow)"/>
+    <!-- 행 2 - 오렌지 -->
+    <path d="M84,150 L100,158 L118,142 L136,158 L154,142 L172,158 L190,142 L208,158 L226,142 L244,158 L262,142 L280,158 L298,142 L316,158 L334,142 L352,158 L370,142 L388,158 L406,142 L424,158 L440,150"
+          stroke="#FF9F43" stroke-width="2" fill="none" filter="url(#threadGlow)"/>
+    <!-- 행 3 - 노랑 -->
+    <path d="M84,170 L100,162 L118,178 L136,162 L154,178 L172,162 L190,178 L208,162 L226,178 L244,162 L262,178 L280,162 L298,178 L316,162 L334,178 L352,162 L370,178 L388,162 L406,178 L424,162 L440,170"
+          stroke="#FECA57" stroke-width="2" fill="none" filter="url(#threadGlow)"/>
+    <!-- 행 4 - 하늘 -->
+    <path d="M84,190 L100,198 L118,182 L136,198 L154,182 L172,198 L190,182 L208,198 L226,182 L244,198 L262,182 L280,198 L298,182 L316,198 L334,182 L352,198 L370,182 L388,198 L406,182 L424,198 L440,190"
+          stroke="#48CAE4" stroke-width="2" fill="none" filter="url(#threadGlow)"/>
+    <!-- 행 5 - 파랑 -->
+    <path d="M84,210 L100,202 L118,218 L136,202 L154,218 L172,202 L190,218 L208,202 L226,218 L244,202 L262,218 L280,202 L298,218 L316,202 L334,218 L352,202 L370,218 L388,202 L406,218 L424,202 L440,210"
+          stroke="#54A0FF" stroke-width="2" fill="none" filter="url(#threadGlow)"/>
+    <!-- 행 6 - 보라 -->
+    <path d="M84,230 L100,238 L118,222 L136,238 L154,222 L172,238 L190,222 L208,238 L226,222 L244,238 L262,222 L280,238 L298,222 L316,238 L334,222 L352,238 L370,222 L388,238 L406,222 L424,238 L440,230"
+          stroke="#A29BFE" stroke-width="2" fill="none" filter="url(#threadGlow)"/>
+    <!-- 행 7 - 핑크 -->
+    <path d="M84,250 L100,242 L118,258 L136,242 L154,258 L172,242 L190,258 L208,242 L226,258 L244,242 L262,258 L280,242 L298,258 L316,242 L334,258 L352,242 L370,258 L388,242 L406,258 L424,242 L440,250"
+          stroke="#FD79A8" stroke-width="2" fill="none" filter="url(#threadGlow)"/>
+    <!-- 행 8 - 민트 -->
+    <path d="M84,270 L100,278 L118,262 L136,278 L154,262 L172,278 L190,262 L208,278 L226,262 L244,278 L262,262 L280,278 L298,262 L316,278 L334,262 L352,278 L370,262 L388,278 L406,262 L424,278 L440,270"
+          stroke="#55EFC4" stroke-width="2" fill="none" filter="url(#threadGlow)"/>
+  </g>
+
+  <!-- 북(shuttle) - 현재 엮는 중 -->
+  <g transform="translate(280, 295)" filter="url(#glow05)">
+    <ellipse cx="0" cy="0" rx="70" ry="16" fill="#8B6914" stroke="#FECA57" stroke-width="2"/>
+    <ellipse cx="0" cy="0" rx="55" ry="10" fill="#c0902a" opacity="0.8"/>
+    <!-- 북에 감긴 실 -->
+    <ellipse cx="0" cy="0" rx="30" ry="8" fill="none" stroke="#55EFC4" stroke-width="2.5" opacity="0.9"/>
+  </g>
+
+  <!-- 프롬프트 텍스트가 직물에 새겨진 느낌 -->
+  <text x="256" y="340" font-family="monospace" font-size="14" font-weight="bold"
+        fill="#FECA57" text-anchor="middle" opacity="0.8" filter="url(#glow05)">&lt;prompt&gt; weave &lt;/prompt&gt;</text>
+
+  <!-- 하단 실 뭉치들 -->
+  <circle cx="120" cy="440" r="22" fill="none" stroke="#FF6B6B" stroke-width="4" opacity="0.6"/>
+  <circle cx="120" cy="440" r="14" fill="none" stroke="#FF6B6B" stroke-width="3" opacity="0.5"/>
+  <circle cx="190" cy="445" r="18" fill="none" stroke="#54A0FF" stroke-width="4" opacity="0.6"/>
+  <circle cx="190" cy="445" r="11" fill="none" stroke="#54A0FF" stroke-width="3" opacity="0.5"/>
+  <circle cx="256" cy="442" r="20" fill="none" stroke="#55EFC4" stroke-width="4" opacity="0.6"/>
+  <circle cx="256" cy="442" r="12" fill="none" stroke="#55EFC4" stroke-width="3" opacity="0.5"/>
+  <circle cx="322" cy="445" r="18" fill="none" stroke="#FD79A8" stroke-width="4" opacity="0.6"/>
+  <circle cx="322" cy="445" r="11" fill="none" stroke="#FD79A8" stroke-width="3" opacity="0.5"/>
+  <circle cx="390" cy="440" r="22" fill="none" stroke="#A29BFE" stroke-width="4" opacity="0.6"/>
+  <circle cx="390" cy="440" r="14" fill="none" stroke="#A29BFE" stroke-width="3" opacity="0.5"/>
+
+  <!-- 라벨 -->
+  <rect x="155" y="475" width="202" height="24" rx="5" fill="#0f0a05" stroke="#c0902a" stroke-width="1" opacity="0.7"/>
+  <text x="256" y="492" font-family="monospace" font-size="12" font-weight="bold"
+        fill="#FECA57" text-anchor="middle" opacity="0.9">PROMPT.FORGE</text>
+</svg>

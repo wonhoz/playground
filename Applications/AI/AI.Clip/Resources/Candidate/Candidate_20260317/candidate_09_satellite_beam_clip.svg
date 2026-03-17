@@ -1,0 +1,116 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg09" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#080f22"/>
+      <stop offset="100%" stop-color="#050d1a"/>
+    </radialGradient>
+    <linearGradient id="sat_grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38BDF8"/>
+      <stop offset="100%" stop-color="#0EA5E9"/>
+    </linearGradient>
+    <linearGradient id="beam_grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#38BDF8" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#0EA5E9" stop-opacity="0.1"/>
+    </linearGradient>
+    <linearGradient id="panel_grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1a4060"/>
+      <stop offset="50%" stop-color="#2255aa"/>
+      <stop offset="100%" stop-color="#1a4060"/>
+    </linearGradient>
+    <radialGradient id="earth_grad" cx="40%" cy="35%" r="55%">
+      <stop offset="0%" stop-color="#2a6040"/>
+      <stop offset="40%" stop-color="#1a4060"/>
+      <stop offset="100%" stop-color="#0a1830"/>
+    </radialGradient>
+    <filter id="glow09">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="beam_filter">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="earth_glow">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- 배경 (우주) -->
+  <rect width="512" height="512" fill="url(#bg09)" rx="48"/>
+
+  <!-- 별들 -->
+  <circle cx="40" cy="50" r="1.5" fill="#ffffff" opacity="0.7"/>
+  <circle cx="120" cy="30" r="1" fill="#ffffff" opacity="0.6"/>
+  <circle cx="200" cy="55" r="1.5" fill="#38BDF8" opacity="0.5"/>
+  <circle cx="460" cy="40" r="1" fill="#ffffff" opacity="0.7"/>
+  <circle cx="490" cy="90" r="1.5" fill="#ffffff" opacity="0.5"/>
+  <circle cx="30" cy="160" r="1" fill="#ffffff" opacity="0.5"/>
+  <circle cx="480" cy="200" r="1" fill="#38BDF8" opacity="0.5"/>
+  <circle cx="55" cy="340" r="1.5" fill="#ffffff" opacity="0.4"/>
+  <circle cx="490" cy="350" r="1" fill="#ffffff" opacity="0.5"/>
+  <circle cx="75" cy="450" r="1" fill="#38BDF8" opacity="0.4"/>
+  <circle cx="450" cy="460" r="1.5" fill="#ffffff" opacity="0.4"/>
+  <circle cx="160" cy="490" r="1" fill="#ffffff" opacity="0.4"/>
+  <circle cx="380" cy="25" r="1" fill="#ffffff" opacity="0.6"/>
+
+  <!-- 지구 (하단 우측) -->
+  <circle cx="380" cy="400" r="85" fill="url(#earth_grad)" filter="url(#earth_glow)" opacity="0.9"/>
+  <!-- 지구 구름 레이어 -->
+  <circle cx="380" cy="400" r="85" fill="none" stroke="#4499cc" stroke-width="1.5" opacity="0.3"/>
+  <!-- 대륙 실루엣 (단순화) -->
+  <ellipse cx="365" cy="375" rx="22" ry="14" fill="#2a7a40" opacity="0.6"/>
+  <ellipse cx="395" cy="410" rx="18" ry="10" fill="#2a7a40" opacity="0.5"/>
+  <ellipse cx="350" cy="415" rx="12" ry="8" fill="#1a5030" opacity="0.5"/>
+  <!-- 지구 대기권 글로우 -->
+  <circle cx="380" cy="400" r="90" fill="none" stroke="#0EA5E9" stroke-width="3" opacity="0.35" filter="url(#glow09)"/>
+  <circle cx="380" cy="400" r="95" fill="none" stroke="#38BDF8" stroke-width="1.5" opacity="0.15"/>
+
+  <!-- 빔 전송 (위성 -> 지구) -->
+  <!-- 빔 주 줄기 -->
+  <polygon points="155,125 195,125 340,360 300,360"
+           fill="url(#beam_grad)" opacity="0.35" filter="url(#beam_filter)"/>
+  <!-- 빔 중심선 -->
+  <line x1="175" y1="125" x2="320" y2="360" stroke="#38BDF8" stroke-width="2.5" opacity="0.8" filter="url(#glow09)"/>
+  <!-- 빔 데이터 패킷들 -->
+  <circle cx="210" cy="175" r="5" fill="#38BDF8" opacity="0.9" filter="url(#glow09)"/>
+  <circle cx="235" cy="215" r="4" fill="#0EA5E9" opacity="0.85" filter="url(#glow09)"/>
+  <circle cx="260" cy="255" r="5" fill="#38BDF8" opacity="0.9" filter="url(#glow09)"/>
+  <circle cx="285" cy="295" r="4" fill="#0EA5E9" opacity="0.85" filter="url(#glow09)"/>
+  <circle cx="307" cy="332" r="5" fill="#38BDF8" opacity="0.8" filter="url(#glow09)"/>
+
+  <!-- 위성 본체 -->
+  <!-- 위성 메인 박스 -->
+  <rect x="130" y="70" width="90" height="60" rx="8" ry="8"
+        fill="#0a1f40" stroke="url(#sat_grad)" stroke-width="3" filter="url(#glow09)"/>
+  <!-- 위성 태양광 패널 왼쪽 -->
+  <rect x="52" y="82" width="78" height="38" rx="4" fill="url(#panel_grad)" stroke="#38BDF8" stroke-width="2" opacity="0.9" filter="url(#glow09)"/>
+  <!-- 패널 격자선 -->
+  <line x1="78" y1="82" x2="78" y2="120" stroke="#38BDF8" stroke-width="1" opacity="0.4"/>
+  <line x1="104" y1="82" x2="104" y2="120" stroke="#38BDF8" stroke-width="1" opacity="0.4"/>
+  <line x1="52" y1="101" x2="130" y2="101" stroke="#38BDF8" stroke-width="1" opacity="0.4"/>
+  <!-- 위성 태양광 패널 오른쪽 -->
+  <rect x="220" y="82" width="78" height="38" rx="4" fill="url(#panel_grad)" stroke="#38BDF8" stroke-width="2" opacity="0.9" filter="url(#glow09)"/>
+  <!-- 패널 격자선 -->
+  <line x1="246" y1="82" x2="246" y2="120" stroke="#38BDF8" stroke-width="1" opacity="0.4"/>
+  <line x1="272" y1="82" x2="272" y2="120" stroke="#38BDF8" stroke-width="1" opacity="0.4"/>
+  <line x1="220" y1="101" x2="298" y2="101" stroke="#38BDF8" stroke-width="1" opacity="0.4"/>
+  <!-- 위성 안테나 -->
+  <line x1="175" y1="130" x2="175" y2="155" stroke="#38BDF8" stroke-width="2.5" filter="url(#glow09)"/>
+  <circle cx="175" cy="160" r="8" fill="none" stroke="#38BDF8" stroke-width="2.5" filter="url(#glow09)"/>
+  <circle cx="175" cy="160" r="3" fill="#38BDF8" filter="url(#glow09)"/>
+
+  <!-- 위성 내부 - 클립보드 아이콘 (작게) -->
+  <rect x="148" y="82" width="54" height="38" rx="4" fill="none" stroke="#38BDF8" stroke-width="2" opacity="0.8"/>
+  <rect x="162" y="76" width="26" height="10" rx="3" fill="none" stroke="#38BDF8" stroke-width="1.5" opacity="0.8"/>
+  <line x1="155" y1="97" x2="195" y2="97" stroke="#38BDF8" stroke-width="1.5" opacity="0.6"/>
+  <line x1="155" y1="107" x2="195" y2="107" stroke="#38BDF8" stroke-width="1.5" opacity="0.6"/>
+
+  <!-- 수신 지점 글로우 (지구 표면) -->
+  <circle cx="330" cy="368" r="12" fill="#38BDF8" opacity="0.5" filter="url(#beam_filter)"/>
+  <circle cx="330" cy="368" r="6" fill="#ffffff" opacity="0.8" filter="url(#glow09)"/>
+
+  <!-- AI 텍스트 -->
+  <text x="256" y="488" text-anchor="middle" font-family="Arial, sans-serif" font-size="20"
+        font-weight="bold" fill="url(#sat_grad)" opacity="0.9" filter="url(#glow09)">AI.Clip</text>
+</svg>

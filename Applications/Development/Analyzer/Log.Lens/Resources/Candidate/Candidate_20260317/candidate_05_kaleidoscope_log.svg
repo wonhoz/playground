@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg05" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#1a1a1a"/>
+      <stop offset="100%" stop-color="#0d0d0d"/>
+    </radialGradient>
+    <radialGradient id="center_glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="30%" stop-color="#E0E0FF"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="kscope_glow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="seg_glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="512" height="512" fill="url(#bg05)"/>
+
+  <!-- 만화경 세그먼트들 (8방향 대칭) -->
+  <!-- 로그 레벨 색상: ERROR=#FF4444, WARN=#FFB300, INFO=#4CAF50, DEBUG=#42A5F5, TRACE=#9C27B0 -->
+
+  <!-- 중심에서 뻗어나가는 삼각형 섹터들 (총 8개 섹터) -->
+  <!-- 섹터 1 (0-45도) - ERROR 레드 -->
+  <path d="M 256 256 L 256 56 L 399 113 Z" fill="#FF1744" opacity="0.85" filter="url(#seg_glow)"/>
+  <path d="M 256 256 L 278 100 L 370 140 Z" fill="#FF6B6B" opacity="0.6"/>
+  <path d="M 256 256 L 260 140 L 330 168 Z" fill="#FF8A80" opacity="0.5"/>
+
+  <!-- 섹터 2 (45-90도) - WARN 오렌지/옐로우 -->
+  <path d="M 256 256 L 399 113 L 456 256 Z" fill="#FF8C00" opacity="0.85" filter="url(#seg_glow)"/>
+  <path d="M 256 256 L 380 150 L 420 240 Z" fill="#FFB300" opacity="0.6"/>
+  <path d="M 256 256 L 360 185 L 390 240 Z" fill="#FFD740" opacity="0.5"/>
+
+  <!-- 섹터 3 (90-135도) - INFO 그린 -->
+  <path d="M 256 256 L 456 256 L 399 399 Z" fill="#00C853" opacity="0.85" filter="url(#seg_glow)"/>
+  <path d="M 256 256 L 420 270 L 380 370 Z" fill="#69F0AE" opacity="0.6"/>
+  <path d="M 256 256 L 390 280 L 355 360 Z" fill="#B9F6CA" opacity="0.5"/>
+
+  <!-- 섹터 4 (135-180도) - DEBUG 블루 -->
+  <path d="M 256 256 L 399 399 L 256 456 Z" fill="#2979FF" opacity="0.85" filter="url(#seg_glow)"/>
+  <path d="M 256 256 L 370 380 L 280 430 Z" fill="#82B1FF" opacity="0.6"/>
+  <path d="M 256 256 L 345 365 L 275 405 Z" fill="#BBDEFB" opacity="0.5"/>
+
+  <!-- 섹터 5 (180-225도) - TRACE 퍼플 -->
+  <path d="M 256 256 L 256 456 L 113 399 Z" fill="#AA00FF" opacity="0.85" filter="url(#seg_glow)"/>
+  <path d="M 256 256 L 240 430 L 145 385 Z" fill="#EA80FC" opacity="0.6"/>
+  <path d="M 256 256 L 248 400 L 172 372 Z" fill="#E1BEE7" opacity="0.5"/>
+
+  <!-- 섹터 6 (225-270도) - CRITICAL 마젠타 -->
+  <path d="M 256 256 L 113 399 L 56 256 Z" fill="#D500F9" opacity="0.85" filter="url(#seg_glow)"/>
+  <path d="M 256 256 L 130 370 L 90 272 Z" fill="#FF4081" opacity="0.6"/>
+  <path d="M 256 256 L 155 355 L 120 270 Z" fill="#FF80AB" opacity="0.5"/>
+
+  <!-- 섹터 7 (270-315도) - WARN 옐로우/핑크 -->
+  <path d="M 256 256 L 56 256 L 113 113 Z" fill="#FF6D00" opacity="0.85" filter="url(#seg_glow)"/>
+  <path d="M 256 256 L 90 244 L 135 150 Z" fill="#FFAB40" opacity="0.6"/>
+  <path d="M 256 256 L 118 248 L 155 170 Z" fill="#FFE0B2" opacity="0.5"/>
+
+  <!-- 섹터 8 (315-360도) - INFO 시안 -->
+  <path d="M 256 256 L 113 113 L 256 56 Z" fill="#00B0FF" opacity="0.85" filter="url(#seg_glow)"/>
+  <path d="M 256 256 L 140 130 L 248 80 Z" fill="#40C4FF" opacity="0.6"/>
+  <path d="M 256 256 L 165 148 L 250 110 Z" fill="#80D8FF" opacity="0.5"/>
+
+  <!-- 동심원 구분선 -->
+  <circle cx="256" cy="256" r="200" fill="none" stroke="#1a1a1a" stroke-width="2" opacity="0.5"/>
+  <circle cx="256" cy="256" r="150" fill="none" stroke="#1a1a1a" stroke-width="1.5" opacity="0.4"/>
+  <circle cx="256" cy="256" r="100" fill="none" stroke="#1a1a1a" stroke-width="1.5" opacity="0.4"/>
+  <circle cx="256" cy="256" r="50" fill="none" stroke="#1a1a1a" stroke-width="1" opacity="0.5"/>
+
+  <!-- 섹터 구분선 -->
+  <line x1="256" y1="56" x2="256" y2="456" stroke="#0d0d0d" stroke-width="2" opacity="0.6"/>
+  <line x1="56" y1="256" x2="456" y2="256" stroke="#0d0d0d" stroke-width="2" opacity="0.6"/>
+  <line x1="113" y1="113" x2="399" y2="399" stroke="#0d0d0d" stroke-width="2" opacity="0.6"/>
+  <line x1="399" y1="113" x2="113" y2="399" stroke="#0d0d0d" stroke-width="2" opacity="0.6"/>
+
+  <!-- 로그 라인 패턴 (동심원 사이 호 형태) -->
+  <!-- 외부 링 로그 라인 -->
+  <circle cx="256" cy="256" r="175" fill="none" stroke="#FF1744" stroke-width="3" stroke-dasharray="30,10,15,10" opacity="0.6" filter="url(#seg_glow)"/>
+  <circle cx="256" cy="256" r="175" fill="none" stroke="#FF8C00" stroke-width="3" stroke-dasharray="15,10,30,10" stroke-dashoffset="55" opacity="0.6" filter="url(#seg_glow)"/>
+
+  <!-- 중간 링 -->
+  <circle cx="256" cy="256" r="125" fill="none" stroke="#00C853" stroke-width="2.5" stroke-dasharray="25,8,12,8" opacity="0.6" filter="url(#seg_glow)"/>
+  <circle cx="256" cy="256" r="125" fill="none" stroke="#2979FF" stroke-width="2.5" stroke-dasharray="12,8,25,8" stroke-dashoffset="45" opacity="0.6" filter="url(#seg_glow)"/>
+
+  <!-- 내부 링 -->
+  <circle cx="256" cy="256" r="75" fill="none" stroke="#AA00FF" stroke-width="2" stroke-dasharray="18,6,9,6" opacity="0.7" filter="url(#seg_glow)"/>
+
+  <!-- 중심 원 (렌즈/눈 효과) -->
+  <circle cx="256" cy="256" r="35" fill="#0d0d0d"/>
+  <circle cx="256" cy="256" r="30" fill="none" stroke="#FFFFFF" stroke-width="1.5" opacity="0.5"/>
+  <circle cx="256" cy="256" r="22" fill="url(#center_glow)" filter="url(#kscope_glow)"/>
+  <circle cx="256" cy="256" r="12" fill="#FFFFFF"/>
+  <circle cx="256" cy="256" r="6" fill="#0d0d0d"/>
+  <circle cx="252" cy="252" r="3" fill="white" opacity="0.7"/>
+
+  <!-- 외부 테두리 -->
+  <circle cx="256" cy="256" r="204" fill="none" stroke="#333333" stroke-width="3"/>
+  <circle cx="256" cy="256" r="207" fill="none" stroke="#222222" stroke-width="1.5"/>
+
+  <!-- 배경 코너 장식 -->
+  <circle cx="30" cy="30" r="15" fill="none" stroke="#333333" stroke-width="1" opacity="0.4"/>
+  <circle cx="482" cy="30" r="15" fill="none" stroke="#333333" stroke-width="1" opacity="0.4"/>
+  <circle cx="30" cy="482" r="15" fill="none" stroke="#333333" stroke-width="1" opacity="0.4"/>
+  <circle cx="482" cy="482" r="15" fill="none" stroke="#333333" stroke-width="1" opacity="0.4"/>
+</svg>

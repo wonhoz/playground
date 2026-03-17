@@ -1,0 +1,147 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg01" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#1a1000"/>
+      <stop offset="100%" stop-color="#0a0800"/>
+    </radialGradient>
+    <radialGradient id="eye_iris" cx="50%" cy="45%" r="50%">
+      <stop offset="0%" stop-color="#FFE57A"/>
+      <stop offset="40%" stop-color="#FFB300"/>
+      <stop offset="80%" stop-color="#FF8C00"/>
+      <stop offset="100%" stop-color="#E65100"/>
+    </radialGradient>
+    <radialGradient id="eye_glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFB300" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#FF8C00" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="pupil_grad" cx="40%" cy="35%" r="60%">
+      <stop offset="0%" stop-color="#1a0f00"/>
+      <stop offset="100%" stop-color="#000000"/>
+    </radialGradient>
+    <filter id="glow01">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="softglow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <linearGradient id="log_line_grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FF8C00" stop-opacity="0"/>
+      <stop offset="20%" stop-color="#FF8C00" stop-opacity="0.9"/>
+      <stop offset="80%" stop-color="#FFB300" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#FFB300" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="feather_grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3D2800"/>
+      <stop offset="100%" stop-color="#1a1000"/>
+    </linearGradient>
+    <clipPath id="circle_clip">
+      <circle cx="256" cy="220" r="180"/>
+    </clipPath>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="512" height="512" fill="url(#bg01)"/>
+
+  <!-- 별빛 -->
+  <circle cx="60" cy="40" r="1.5" fill="#FFB300" opacity="0.6"/>
+  <circle cx="440" cy="80" r="1" fill="#FFE57A" opacity="0.5"/>
+  <circle cx="120" cy="90" r="1" fill="#FFB300" opacity="0.4"/>
+  <circle cx="380" cy="50" r="1.5" fill="#FFE57A" opacity="0.5"/>
+  <circle cx="480" cy="130" r="1" fill="#FFB300" opacity="0.4"/>
+  <circle cx="30" cy="150" r="1" fill="#FFE57A" opacity="0.3"/>
+
+  <!-- 올빼미 몸통 (깃털 실루엣) -->
+  <ellipse cx="256" cy="370" rx="130" ry="120" fill="#1e1400"/>
+  <ellipse cx="256" cy="380" rx="110" ry="100" fill="#261a00"/>
+
+  <!-- 깃털 패턴 - 몸통 -->
+  <ellipse cx="220" cy="340" rx="30" ry="20" fill="#2d2000" opacity="0.8"/>
+  <ellipse cx="256" cy="335" rx="30" ry="20" fill="#332500" opacity="0.8"/>
+  <ellipse cx="292" cy="340" rx="30" ry="20" fill="#2d2000" opacity="0.8"/>
+  <ellipse cx="200" cy="370" rx="28" ry="18" fill="#261a00" opacity="0.8"/>
+  <ellipse cx="240" cy="365" rx="28" ry="18" fill="#2d2000" opacity="0.8"/>
+  <ellipse cx="272" cy="365" rx="28" ry="18" fill="#261a00" opacity="0.8"/>
+  <ellipse cx="312" cy="370" rx="28" ry="18" fill="#2d2000" opacity="0.8"/>
+
+  <!-- 날개 (좌) -->
+  <path d="M 126 300 Q 60 320 40 400 Q 80 380 130 370 Q 110 340 126 300Z" fill="#1e1400"/>
+  <path d="M 126 300 Q 70 315 55 380 Q 90 360 130 355Z" fill="#261a00"/>
+
+  <!-- 날개 (우) -->
+  <path d="M 386 300 Q 452 320 472 400 Q 432 380 382 370 Q 402 340 386 300Z" fill="#1e1400"/>
+  <path d="M 386 300 Q 442 315 457 380 Q 422 360 382 355Z" fill="#261a00"/>
+
+  <!-- 귀 깃털 -->
+  <path d="M 190 165 Q 175 130 195 110 Q 205 140 210 165Z" fill="#261a00"/>
+  <path d="M 322 165 Q 337 130 317 110 Q 307 140 302 165Z" fill="#261a00"/>
+
+  <!-- 얼굴 디스크 -->
+  <ellipse cx="256" cy="220" rx="150" ry="130" fill="#1a1200"/>
+  <ellipse cx="256" cy="220" rx="130" ry="110" fill="#221800"/>
+
+  <!-- 눈 글로우 배경 (좌) -->
+  <circle cx="210" cy="215" r="55" fill="url(#eye_glow)" filter="url(#glow01)"/>
+  <!-- 눈 글로우 배경 (우) -->
+  <circle cx="302" cy="215" r="55" fill="url(#eye_glow)" filter="url(#glow01)"/>
+
+  <!-- 왼쪽 눈 -->
+  <circle cx="210" cy="215" r="48" fill="#0d0800"/>
+  <circle cx="210" cy="215" r="44" fill="url(#eye_iris)"/>
+  <!-- 홍채 상세 패턴 -->
+  <circle cx="210" cy="215" r="44" fill="none" stroke="#E65100" stroke-width="2" opacity="0.5"/>
+  <circle cx="210" cy="215" r="36" fill="none" stroke="#FF8C00" stroke-width="1" opacity="0.4"/>
+  <circle cx="210" cy="215" r="28" fill="none" stroke="#FFB300" stroke-width="1" opacity="0.3"/>
+  <!-- 방사형 홍채 선 -->
+  <line x1="210" y1="171" x2="210" y2="181" stroke="#E65100" stroke-width="1.5" opacity="0.6"/>
+  <line x1="210" y1="249" x2="210" y2="259" stroke="#E65100" stroke-width="1.5" opacity="0.6"/>
+  <line x1="166" y1="215" x2="176" y2="215" stroke="#E65100" stroke-width="1.5" opacity="0.6"/>
+  <line x1="244" y1="215" x2="254" y2="215" stroke="#E65100" stroke-width="1.5" opacity="0.6"/>
+  <line x1="179" y1="184" x2="186" y2="191" stroke="#E65100" stroke-width="1.5" opacity="0.6"/>
+  <line x1="234" y1="239" x2="241" y2="246" stroke="#E65100" stroke-width="1.5" opacity="0.6"/>
+  <line x1="179" y1="246" x2="186" y2="239" stroke="#E65100" stroke-width="1.5" opacity="0.6"/>
+  <line x1="234" y1="191" x2="241" y2="184" stroke="#E65100" stroke-width="1.5" opacity="0.6"/>
+  <!-- 동공 -->
+  <circle cx="210" cy="215" r="20" fill="url(#pupil_grad)"/>
+  <!-- 눈 반사광 -->
+  <circle cx="200" cy="205" r="5" fill="white" opacity="0.6"/>
+  <circle cx="216" cy="202" r="2.5" fill="white" opacity="0.4"/>
+
+  <!-- 오른쪽 눈 -->
+  <circle cx="302" cy="215" r="48" fill="#0d0800"/>
+  <circle cx="302" cy="215" r="44" fill="url(#eye_iris)"/>
+  <circle cx="302" cy="215" r="44" fill="none" stroke="#E65100" stroke-width="2" opacity="0.5"/>
+  <circle cx="302" cy="215" r="36" fill="none" stroke="#FF8C00" stroke-width="1" opacity="0.4"/>
+  <circle cx="302" cy="215" r="28" fill="none" stroke="#FFB300" stroke-width="1" opacity="0.3"/>
+  <line x1="302" y1="171" x2="302" y2="181" stroke="#E65100" stroke-width="1.5" opacity="0.6"/>
+  <line x1="302" y1="249" x2="302" y2="259" stroke="#E65100" stroke-width="1.5" opacity="0.6"/>
+  <line x1="258" y1="215" x2="268" y2="215" stroke="#E65100" stroke-width="1.5" opacity="0.6"/>
+  <line x1="336" y1="215" x2="346" y2="215" stroke="#E65100" stroke-width="1.5" opacity="0.6"/>
+  <line x1="271" y1="184" x2="278" y2="191" stroke="#E65100" stroke-width="1.5" opacity="0.6"/>
+  <line x1="326" y1="239" x2="333" y2="246" stroke="#E65100" stroke-width="1.5" opacity="0.6"/>
+  <line x1="271" y1="246" x2="278" y2="239" stroke="#E65100" stroke-width="1.5" opacity="0.6"/>
+  <line x1="326" y1="191" x2="333" y2="184" stroke="#E65100" stroke-width="1.5" opacity="0.6"/>
+  <circle cx="302" cy="215" r="20" fill="url(#pupil_grad)"/>
+  <circle cx="292" cy="205" r="5" fill="white" opacity="0.6"/>
+  <circle cx="308" cy="202" r="2.5" fill="white" opacity="0.4"/>
+
+  <!-- 부리 -->
+  <path d="M 248 238 L 256 258 L 264 238 Q 256 245 248 238Z" fill="#CC7A00"/>
+
+  <!-- 로그 라인들 (하단) -->
+  <rect x="60" y="418" width="392" height="2" rx="1" fill="url(#log_line_grad)" opacity="0.9" filter="url(#softglow)"/>
+  <rect x="60" y="435" width="320" height="2" rx="1" fill="url(#log_line_grad)" opacity="0.7"/>
+  <rect x="60" y="452" width="360" height="2" rx="1" fill="url(#log_line_grad)" opacity="0.8"/>
+  <rect x="60" y="469" width="280" height="2" rx="1" fill="url(#log_line_grad)" opacity="0.6"/>
+
+  <!-- 로그 레벨 표시 도트 -->
+  <circle cx="72" cy="419" r="4" fill="#FF4444" filter="url(#softglow)"/>
+  <circle cx="72" cy="436" r="4" fill="#FFB300" filter="url(#softglow)"/>
+  <circle cx="72" cy="453" r="4" fill="#00E676" filter="url(#softglow)"/>
+  <circle cx="72" cy="470" r="4" fill="#64B5F6" filter="url(#softglow)"/>
+
+  <!-- 눈에서 나오는 스캔 빔 -->
+  <line x1="210" y1="259" x2="180" y2="410" stroke="#FFB300" stroke-width="1" opacity="0.3"/>
+  <line x1="302" y1="259" x2="332" y2="410" stroke="#FFB300" stroke-width="1" opacity="0.3"/>
+</svg>

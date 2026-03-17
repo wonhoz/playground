@@ -1,0 +1,127 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bgGrad07" cx="50%" cy="40%" r="55%">
+      <stop offset="0%" stop-color="#0d000d"/>
+      <stop offset="100%" stop-color="#050005"/>
+    </radialGradient>
+    <!-- 핑크 네온 글로우 -->
+    <filter id="neonPink">
+      <feGaussianBlur stdDeviation="6" result="blur1"/>
+      <feGaussianBlur stdDeviation="3" in="SourceGraphic" result="blur2"/>
+      <feMerge>
+        <feMergeNode in="blur1"/>
+        <feMergeNode in="blur2"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <!-- 시안 네온 글로우 -->
+    <filter id="neonCyan">
+      <feGaussianBlur stdDeviation="6" result="blur1"/>
+      <feGaussianBlur stdDeviation="3" in="SourceGraphic" result="blur2"/>
+      <feMerge>
+        <feMergeNode in="blur1"/>
+        <feMergeNode in="blur2"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <!-- 강한 네온 글로우 -->
+    <filter id="strongNeon">
+      <feGaussianBlur stdDeviation="12" result="blur1"/>
+      <feGaussianBlur stdDeviation="6" in="SourceGraphic" result="blur2"/>
+      <feGaussianBlur stdDeviation="2" in="SourceGraphic" result="blur3"/>
+      <feMerge>
+        <feMergeNode in="blur1"/>
+        <feMergeNode in="blur2"/>
+        <feMergeNode in="blur3"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="softGlow07">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <radialGradient id="floorReflect" cx="50%" cy="0%" r="100%">
+      <stop offset="0%" stop-color="#FF0080" stop-opacity="0.15"/>
+      <stop offset="50%" stop-color="#00FFFF" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#FF0080" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="512" height="512" fill="url(#bgGrad07)" rx="40"/>
+
+  <!-- 바닥 반사 효과 -->
+  <ellipse cx="256" cy="460" rx="220" ry="40" fill="url(#floorReflect)" opacity="0.6"/>
+
+  <!-- 벽 패널 (네온사인 배경) -->
+  <rect x="40" y="60" width="432" height="340" rx="12" fill="#080008" stroke="#220022" stroke-width="2" opacity="0.9"/>
+
+  <!-- 네온 테두리 프레임 -->
+  <rect x="50" y="70" width="412" height="320" rx="8" fill="none" stroke="#FF0080" stroke-width="2.5" filter="url(#neonPink)" opacity="0.8"/>
+  <rect x="55" y="75" width="402" height="310" rx="6" fill="none" stroke="#FF0080" stroke-width="1" opacity="0.4"/>
+
+  <!-- 상단 네온 장식 -->
+  <line x1="70" y1="100" x2="442" y2="100" stroke="#00FFFF" stroke-width="2" filter="url(#neonCyan)" opacity="0.6"/>
+
+  <!-- 메인 프롬프트 커서 "&gt;_" -->
+  <g filter="url(#strongNeon)">
+    <text x="80" y="220" font-family="monospace" font-size="120" font-weight="bold"
+          fill="#FF0080" opacity="0.95">&gt;</text>
+  </g>
+
+  <!-- 커서 블링크 박스 "_" -->
+  <g filter="url(#strongNeon)">
+    <rect x="220" y="145" width="70" height="90" rx="4" fill="#00FFFF" opacity="0.9"/>
+    <!-- 커서 내부 어둡게 (블링크 효과) -->
+    <rect x="228" y="153" width="54" height="74" rx="2" fill="#050005"/>
+  </g>
+
+  <!-- "PROMPT" 텍스트 (하단 라인) -->
+  <g filter="url(#neonPink)">
+    <text x="256" y="300" font-family="monospace" font-size="42" font-weight="bold"
+          fill="#FF0080" text-anchor="middle" letter-spacing="4" opacity="0.95">PROMPT</text>
+  </g>
+
+  <!-- "FORGE" 텍스트 (그 아래) -->
+  <g filter="url(#neonCyan)">
+    <text x="256" y="350" font-family="monospace" font-size="30" font-weight="bold"
+          fill="#00FFFF" text-anchor="middle" letter-spacing="6" opacity="0.9">FORGE</text>
+  </g>
+
+  <!-- 하단 구분선 -->
+  <line x1="70" y1="365" x2="442" y2="365" stroke="#FF0080" stroke-width="1.5" filter="url(#neonPink)" opacity="0.5"/>
+
+  <!-- 네온 튜브 배선 장식 (좌측) -->
+  <g filter="url(#softGlow07)" opacity="0.5">
+    <path d="M60 130 Q50 150 60 170 Q70 190 60 210" stroke="#FF0080" stroke-width="2" fill="none"/>
+    <circle cx="60" cy="130" r="4" fill="#FF0080"/>
+    <circle cx="60" cy="210" r="4" fill="#FF0080"/>
+  </g>
+
+  <!-- 네온 튜브 배선 장식 (우측) -->
+  <g filter="url(#softGlow07)" opacity="0.5">
+    <path d="M452 280 Q462 300 452 320 Q442 340 452 360" stroke="#00FFFF" stroke-width="2" fill="none"/>
+    <circle cx="452" cy="280" r="4" fill="#00FFFF"/>
+    <circle cx="452" cy="360" r="4" fill="#00FFFF"/>
+  </g>
+
+  <!-- 바닥 반사 텍스트 (뒤집힌) -->
+  <g opacity="0.15" transform="scale(1,-1) translate(0, -512)">
+    <text x="256" y="-210" font-family="monospace" font-size="42" font-weight="bold"
+          fill="#FF0080" text-anchor="middle" letter-spacing="4">PROMPT</text>
+  </g>
+
+  <!-- 작은 반짝이 별들 -->
+  <g filter="url(#strongNeon)" opacity="0.7">
+    <circle cx="90" cy="400" r="2" fill="#FF0080"/>
+    <circle cx="420" cy="410" r="2" fill="#00FFFF"/>
+    <circle cx="255" cy="415" r="1.5" fill="#FF0080"/>
+    <circle cx="150" cy="420" r="1.5" fill="#00FFFF"/>
+    <circle cx="350" cy="405" r="2" fill="#FF0080"/>
+  </g>
+
+  <!-- 하단 라벨 -->
+  <rect x="130" y="450" width="252" height="30" rx="5" fill="#080008" stroke="#FF0080" stroke-width="1.5" opacity="0.8" filter="url(#softGlow07)"/>
+  <text x="256" y="470" font-family="monospace" font-size="13" font-weight="bold"
+        fill="#00FFFF" text-anchor="middle" opacity="0.9" filter="url(#softGlow07)">PROMPT.FORGE</text>
+</svg>

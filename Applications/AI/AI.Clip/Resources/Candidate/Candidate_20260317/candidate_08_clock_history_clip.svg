@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg08" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#0f2a22"/>
+      <stop offset="100%" stop-color="#0a1a15"/>
+    </radialGradient>
+    <linearGradient id="teal_grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1ABC9C"/>
+      <stop offset="100%" stop-color="#00CEC9"/>
+    </linearGradient>
+    <linearGradient id="clock_face" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0d2520"/>
+      <stop offset="100%" stop-color="#081812"/>
+    </linearGradient>
+    <filter id="glow08">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="strong_glow08">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="512" height="512" fill="url(#bg08)" rx="48"/>
+
+  <!-- 시계 외곽 링 -->
+  <circle cx="256" cy="240" r="185" fill="none" stroke="#1ABC9C" stroke-width="2" opacity="0.2"/>
+  <circle cx="256" cy="240" r="175" fill="url(#clock_face)" stroke="#1ABC9C" stroke-width="3" opacity="0.9" filter="url(#glow08)"/>
+  <circle cx="256" cy="240" r="168" fill="none" stroke="#00CEC9" stroke-width="1" opacity="0.4"/>
+
+  <!-- 시계 눈금 (12개) -->
+  <!-- 12시 -->
+  <line x1="256" y1="72" x2="256" y2="88" stroke="#1ABC9C" stroke-width="3.5" opacity="0.9"/>
+  <!-- 3시 -->
+  <line x1="424" y1="240" x2="408" y2="240" stroke="#1ABC9C" stroke-width="3.5" opacity="0.9"/>
+  <!-- 6시 -->
+  <line x1="256" y1="408" x2="256" y2="392" stroke="#1ABC9C" stroke-width="3.5" opacity="0.9"/>
+  <!-- 9시 -->
+  <line x1="88" y1="240" x2="104" y2="240" stroke="#1ABC9C" stroke-width="3.5" opacity="0.9"/>
+  <!-- 중간 눈금들 -->
+  <line x1="340" y1="90" x2="333" y2="103" stroke="#1ABC9C" stroke-width="2" opacity="0.6"/>
+  <line x1="409" y1="159" x2="396" y2="166" stroke="#1ABC9C" stroke-width="2" opacity="0.6"/>
+  <line x1="409" y1="321" x2="396" y2="314" stroke="#1ABC9C" stroke-width="2" opacity="0.6"/>
+  <line x1="340" y1="390" x2="333" y2="377" stroke="#1ABC9C" stroke-width="2" opacity="0.6"/>
+  <line x1="172" y1="390" x2="179" y2="377" stroke="#1ABC9C" stroke-width="2" opacity="0.6"/>
+  <line x1="103" y1="321" x2="116" y2="314" stroke="#1ABC9C" stroke-width="2" opacity="0.6"/>
+  <line x1="103" y1="159" x2="116" y2="166" stroke="#1ABC9C" stroke-width="2" opacity="0.6"/>
+  <line x1="172" y1="90" x2="179" y2="103" stroke="#1ABC9C" stroke-width="2" opacity="0.6"/>
+
+  <!-- 시계 바늘 위에 미니 클립보드 기록들 -->
+  <!-- 9시 방향 (과거 기록) -->
+  <rect x="108" y="195" width="44" height="55" rx="5" fill="none" stroke="#1ABC9C" stroke-width="2" opacity="0.7" filter="url(#glow08)"/>
+  <rect x="122" y="188" width="16" height="10" rx="3" fill="none" stroke="#1ABC9C" stroke-width="1.5" opacity="0.7"/>
+  <line x1="116" y1="210" x2="144" y2="210" stroke="#1ABC9C" stroke-width="1.2" opacity="0.6"/>
+  <line x1="116" y1="220" x2="144" y2="220" stroke="#1ABC9C" stroke-width="1.2" opacity="0.6"/>
+  <line x1="116" y1="230" x2="138" y2="230" stroke="#1ABC9C" stroke-width="1.2" opacity="0.55"/>
+
+  <!-- 10시 방향 -->
+  <rect x="130" y="118" width="40" height="50" rx="5" fill="none" stroke="#00CEC9" stroke-width="2" opacity="0.65" filter="url(#glow08)"/>
+  <rect x="142" y="111" width="16" height="10" rx="3" fill="none" stroke="#00CEC9" stroke-width="1.5" opacity="0.65"/>
+  <line x1="138" y1="132" x2="163" y2="132" stroke="#00CEC9" stroke-width="1.2" opacity="0.55"/>
+  <line x1="138" y1="143" x2="163" y2="143" stroke="#00CEC9" stroke-width="1.2" opacity="0.55"/>
+  <line x1="138" y1="154" x2="158" y2="154" stroke="#00CEC9" stroke-width="1.2" opacity="0.5"/>
+
+  <!-- 12시 방향 -->
+  <rect x="222" y="96" width="42" height="52" rx="5" fill="none" stroke="#1ABC9C" stroke-width="2" opacity="0.6" filter="url(#glow08)"/>
+  <rect x="234" y="89" width="16" height="10" rx="3" fill="none" stroke="#1ABC9C" stroke-width="1.5" opacity="0.6"/>
+  <line x1="230" y1="112" x2="256" y2="112" stroke="#1ABC9C" stroke-width="1.2" opacity="0.5"/>
+  <line x1="230" y1="123" x2="256" y2="123" stroke="#1ABC9C" stroke-width="1.2" opacity="0.5"/>
+  <line x1="230" y1="134" x2="252" y2="134" stroke="#1ABC9C" stroke-width="1.2" opacity="0.45"/>
+
+  <!-- 중앙 대형 클립보드 (현재) -->
+  <rect x="210" y="185" width="92" height="115" rx="10" ry="10"
+        fill="#081812" stroke="url(#teal_grad)" stroke-width="3.5" filter="url(#glow08)"/>
+  <rect x="234" y="174" width="44" height="22" rx="7" ry="7"
+        fill="#081812" stroke="url(#teal_grad)" stroke-width="3" filter="url(#glow08)"/>
+  <!-- 현재 기록 내용 -->
+  <line x1="226" y1="220" x2="294" y2="220" stroke="#1ABC9C" stroke-width="2.5" opacity="0.85"/>
+  <line x1="226" y1="238" x2="294" y2="238" stroke="#1ABC9C" stroke-width="2.5" opacity="0.85"/>
+  <line x1="226" y1="256" x2="278" y2="256" stroke="#1ABC9C" stroke-width="2.5" opacity="0.8"/>
+  <line x1="226" y1="274" x2="286" y2="274" stroke="#00CEC9" stroke-width="2.5" opacity="0.8"/>
+  <line x1="226" y1="292" x2="272" y2="292" stroke="#00CEC9" stroke-width="2.5" opacity="0.75"/>
+
+  <!-- 시계 바늘 (분침) -->
+  <line x1="256" y1="240" x2="256" y2="118" stroke="#1ABC9C" stroke-width="3.5"
+        stroke-linecap="round" filter="url(#glow08)"/>
+  <!-- 시계 바늘 (시침) -->
+  <line x1="256" y1="240" x2="320" y2="200" stroke="#00CEC9" stroke-width="2.5"
+        stroke-linecap="round" filter="url(#glow08)"/>
+  <!-- 시계 중심 -->
+  <circle cx="256" cy="240" r="8" fill="#1ABC9C" filter="url(#strong_glow08)"/>
+  <circle cx="256" cy="240" r="4" fill="#FFFFFF"/>
+
+  <!-- AI 텍스트 -->
+  <text x="256" y="458" text-anchor="middle" font-family="Arial, sans-serif" font-size="22"
+        font-weight="bold" fill="url(#teal_grad)" opacity="0.9" filter="url(#glow08)">AI.Clip</text>
+</svg>

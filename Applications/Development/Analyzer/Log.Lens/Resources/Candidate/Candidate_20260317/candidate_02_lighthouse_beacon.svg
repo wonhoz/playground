@@ -1,0 +1,133 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="sky02" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#020d15"/>
+      <stop offset="60%" stop-color="#031a28"/>
+      <stop offset="100%" stop-color="#041f30"/>
+    </linearGradient>
+    <linearGradient id="sea02" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#052030"/>
+      <stop offset="100%" stop-color="#020d18"/>
+    </linearGradient>
+    <linearGradient id="tower_grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1a2a1a"/>
+      <stop offset="40%" stop-color="#243524"/>
+      <stop offset="60%" stop-color="#1e2e1e"/>
+      <stop offset="100%" stop-color="#141e14"/>
+    </linearGradient>
+    <linearGradient id="stripe_white" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#c8e6c9" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#e8f5e9" stop-opacity="0.7"/>
+    </linearGradient>
+    <radialGradient id="beacon_light" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="20%" stop-color="#E8F5E9"/>
+      <stop offset="50%" stop-color="#00E676"/>
+      <stop offset="100%" stop-color="#00E676" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="beacon_glow">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="beam_glow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="soft_glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <linearGradient id="beam_left" x1="100%" y1="0%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#00E676" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#00E676" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="beam_right" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00E676" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#00E676" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="log_scan" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00E676" stop-opacity="0"/>
+      <stop offset="30%" stop-color="#00E676" stop-opacity="0.8"/>
+      <stop offset="70%" stop-color="#FFFFFF" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#00E676" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 배경 하늘 -->
+  <rect width="512" height="512" fill="url(#sky02)"/>
+
+  <!-- 별 -->
+  <circle cx="50" cy="30" r="1.5" fill="#FFFFFF" opacity="0.7"/>
+  <circle cx="100" cy="60" r="1" fill="#FFFFFF" opacity="0.5"/>
+  <circle cx="160" cy="25" r="1.5" fill="#00E676" opacity="0.6"/>
+  <circle cx="350" cy="40" r="1" fill="#FFFFFF" opacity="0.6"/>
+  <circle cx="420" cy="20" r="1.5" fill="#FFFFFF" opacity="0.7"/>
+  <circle cx="470" cy="55" r="1" fill="#00E676" opacity="0.5"/>
+  <circle cx="310" cy="70" r="1" fill="#FFFFFF" opacity="0.4"/>
+  <circle cx="80" cy="100" r="1" fill="#FFFFFF" opacity="0.3"/>
+
+  <!-- 수평선 -->
+  <rect x="0" y="340" width="512" height="172" fill="url(#sea02)"/>
+
+  <!-- 바다 물결 -->
+  <path d="M 0 355 Q 64 348 128 355 Q 192 362 256 355 Q 320 348 384 355 Q 448 362 512 355" fill="none" stroke="#0a3a52" stroke-width="2" opacity="0.6"/>
+  <path d="M 0 375 Q 64 368 128 375 Q 192 382 256 375 Q 320 368 384 375 Q 448 382 512 375" fill="none" stroke="#0a3a52" stroke-width="1.5" opacity="0.5"/>
+  <path d="M 0 395 Q 80 388 160 395 Q 240 402 320 395 Q 400 388 512 395" fill="none" stroke="#0a3a52" stroke-width="1" opacity="0.4"/>
+
+  <!-- 바위/기단 -->
+  <ellipse cx="256" cy="345" rx="80" ry="20" fill="#0a1a0a"/>
+  <path d="M 196 345 Q 200 335 216 330 Q 256 325 296 330 Q 312 335 316 345Z" fill="#0d200d"/>
+
+  <!-- 등대 탑 -->
+  <path d="M 228 340 L 236 180 L 276 180 L 284 340Z" fill="url(#tower_grad)"/>
+
+  <!-- 흰색 줄무늬 -->
+  <path d="M 229 315 L 230 295 L 282 295 L 283 315Z" fill="url(#stripe_white)"/>
+  <path d="M 231 265 L 232 245 L 280 245 L 281 265Z" fill="url(#stripe_white)"/>
+  <path d="M 233 215 L 234 195 L 278 195 L 279 215Z" fill="url(#stripe_white)"/>
+
+  <!-- 탑 창문 -->
+  <rect x="249" y="280" width="14" height="18" rx="7" fill="#001a00" stroke="#00E676" stroke-width="1" opacity="0.7"/>
+  <rect x="249" y="250" width="14" height="14" rx="7" fill="#001a00" stroke="#00E676" stroke-width="1" opacity="0.5"/>
+
+  <!-- 등대 등실 (lantern room) -->
+  <rect x="228" y="155" width="56" height="28" rx="4" fill="#0d200d" stroke="#00E676" stroke-width="1.5"/>
+  <!-- 유리 패널 -->
+  <rect x="232" y="158" width="12" height="22" rx="2" fill="#001a00" stroke="#00E676" stroke-width="0.5" opacity="0.7"/>
+  <rect x="246" y="158" width="12" height="22" rx="2" fill="#002a00" stroke="#00E676" stroke-width="0.5" opacity="0.7"/>
+  <rect x="260" y="158" width="12" height="22" rx="2" fill="#001a00" stroke="#00E676" stroke-width="0.5" opacity="0.7"/>
+  <rect x="274" y="158" width="10" height="22" rx="2" fill="#002a00" stroke="#00E676" stroke-width="0.5" opacity="0.7"/>
+
+  <!-- 등대 꼭대기 -->
+  <polygon points="256,130 232,155 280,155" fill="#0d200d" stroke="#00E676" stroke-width="1"/>
+  <circle cx="256" cy="128" r="5" fill="#00E676"/>
+
+  <!-- 등불 (핵심 광원) -->
+  <circle cx="256" cy="169" r="18" fill="url(#beacon_light)" filter="url(#beacon_glow)"/>
+  <circle cx="256" cy="169" r="8" fill="#FFFFFF"/>
+
+  <!-- 빔 (좌측) -->
+  <path d="M 244 162 L 20 80 L 20 140 L 252 176Z" fill="url(#beam_left)" opacity="0.3" filter="url(#beam_glow)"/>
+  <!-- 빔 (우측) -->
+  <path d="M 268 162 L 492 80 L 492 140 L 260 176Z" fill="url(#beam_right)" opacity="0.3" filter="url(#beam_glow)"/>
+
+  <!-- 로그 스트림 라인들 (우측 빔 영역) -->
+  <rect x="290" y="410" width="190" height="2.5" rx="1" fill="url(#log_scan)" opacity="0.9" filter="url(#soft_glow)"/>
+  <rect x="290" y="428" width="170" height="2.5" rx="1" fill="url(#log_scan)" opacity="0.8"/>
+  <rect x="290" y="446" width="185" height="2.5" rx="1" fill="url(#log_scan)" opacity="0.7"/>
+  <rect x="290" y="464" width="155" height="2.5" rx="1" fill="url(#log_scan)" opacity="0.9"/>
+
+  <!-- 로그 레벨 레이블 -->
+  <circle cx="298" cy="411" r="4.5" fill="#FF4444"/>
+  <circle cx="298" cy="429" r="4.5" fill="#FFB300"/>
+  <circle cx="298" cy="447" r="4.5" fill="#00E676"/>
+  <circle cx="298" cy="465" r="4.5" fill="#64B5F6"/>
+
+  <!-- 바다 반사 (등대) -->
+  <line x1="256" y1="345" x2="256" y2="420" stroke="#00E676" stroke-width="2" opacity="0.2"/>
+  <ellipse cx="256" cy="420" rx="30" ry="5" fill="#00E676" opacity="0.1"/>
+
+  <!-- 수면 반사 빛 -->
+  <path d="M 200 365 Q 256 370 312 365" fill="none" stroke="#00E676" stroke-width="1" opacity="0.3"/>
+  <path d="M 220 380 Q 256 384 292 380" fill="none" stroke="#00E676" stroke-width="0.5" opacity="0.2"/>
+</svg>

@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg01" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#0d2140"/>
+      <stop offset="100%" stop-color="#0a1628"/>
+    </radialGradient>
+    <linearGradient id="dna_green" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00ff88"/>
+      <stop offset="100%" stop-color="#00ccff"/>
+    </linearGradient>
+    <linearGradient id="clip_grad01" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00ffaa"/>
+      <stop offset="100%" stop-color="#0088cc"/>
+    </linearGradient>
+    <filter id="glow01">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="softglow01">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="512" height="512" fill="url(#bg01)" rx="48"/>
+
+  <!-- 클립보드 메인 바디 -->
+  <rect x="156" y="130" width="200" height="255" rx="14" ry="14"
+        fill="none" stroke="url(#clip_grad01)" stroke-width="4" opacity="0.9" filter="url(#glow01)"/>
+  <!-- 클립보드 클립 -->
+  <rect x="220" y="118" width="72" height="28" rx="8" ry="8"
+        fill="none" stroke="url(#dna_green)" stroke-width="3.5" filter="url(#glow01)"/>
+  <!-- 클립보드 라인들 -->
+  <line x1="186" y1="185" x2="326" y2="185" stroke="url(#dna_green)" stroke-width="2.5" opacity="0.6"/>
+  <line x1="186" y1="210" x2="326" y2="210" stroke="url(#dna_green)" stroke-width="2.5" opacity="0.6"/>
+  <line x1="186" y1="235" x2="300" y2="235" stroke="url(#dna_green)" stroke-width="2.5" opacity="0.6"/>
+  <line x1="186" y1="260" x2="310" y2="260" stroke="url(#dna_green)" stroke-width="2.5" opacity="0.6"/>
+  <line x1="186" y1="285" x2="290" y2="285" stroke="url(#dna_green)" stroke-width="2.5" opacity="0.6"/>
+  <line x1="186" y1="310" x2="315" y2="310" stroke="url(#dna_green)" stroke-width="2.5" opacity="0.6"/>
+  <line x1="186" y1="335" x2="280" y2="335" stroke="url(#dna_green)" stroke-width="2.5" opacity="0.6"/>
+
+  <!-- DNA 이중나선 왼쪽 -->
+  <!-- 왼쪽 나선 백본 -->
+  <path d="M 95 80 C 75 130, 115 170, 95 220 C 75 270, 115 310, 95 360 C 75 410, 115 450, 95 500"
+        fill="none" stroke="#00ff88" stroke-width="3" opacity="0.85" filter="url(#glow01)"/>
+  <path d="M 115 80 C 135 130, 95 170, 115 220 C 135 270, 95 310, 115 360 C 135 410, 95 450, 115 500"
+        fill="none" stroke="#00ccff" stroke-width="3" opacity="0.85" filter="url(#glow01)"/>
+  <!-- 왼쪽 나선 가로 연결 -->
+  <line x1="97" y1="105" x2="113" y2="105" stroke="#00ffaa" stroke-width="2.5" opacity="0.7"/>
+  <line x1="91" y1="130" x2="119" y2="130" stroke="#00ffaa" stroke-width="2.5" opacity="0.7"/>
+  <line x1="96" y1="155" x2="114" y2="155" stroke="#00ffaa" stroke-width="2.5" opacity="0.7"/>
+  <line x1="104" y1="180" x2="106" y2="180" stroke="#00ffaa" stroke-width="2" opacity="0.5"/>
+  <line x1="97" y1="205" x2="113" y2="205" stroke="#00ffaa" stroke-width="2.5" opacity="0.7"/>
+  <line x1="91" y1="230" x2="119" y2="230" stroke="#00ffaa" stroke-width="2.5" opacity="0.7"/>
+  <line x1="96" y1="255" x2="114" y2="255" stroke="#00ffaa" stroke-width="2.5" opacity="0.7"/>
+  <line x1="97" y1="305" x2="113" y2="305" stroke="#00ffaa" stroke-width="2.5" opacity="0.7"/>
+  <line x1="91" y1="330" x2="119" y2="330" stroke="#00ffaa" stroke-width="2.5" opacity="0.7"/>
+  <line x1="96" y1="355" x2="114" y2="355" stroke="#00ffaa" stroke-width="2.5" opacity="0.7"/>
+  <line x1="97" y1="405" x2="113" y2="405" stroke="#00ffaa" stroke-width="2.5" opacity="0.7"/>
+  <line x1="91" y1="430" x2="119" y2="430" stroke="#00ffaa" stroke-width="2.5" opacity="0.7"/>
+  <line x1="96" y1="455" x2="114" y2="455" stroke="#00ffaa" stroke-width="2.5" opacity="0.7"/>
+  <!-- 왼쪽 나선 노드 -->
+  <circle cx="95" cy="105" r="4" fill="#00ff88" opacity="0.9" filter="url(#glow01)"/>
+  <circle cx="115" cy="155" r="4" fill="#00ccff" opacity="0.9" filter="url(#glow01)"/>
+  <circle cx="93" cy="205" r="4" fill="#00ff88" opacity="0.9" filter="url(#glow01)"/>
+  <circle cx="117" cy="255" r="4" fill="#00ccff" opacity="0.9" filter="url(#glow01)"/>
+  <circle cx="95" cy="305" r="4" fill="#00ff88" opacity="0.9" filter="url(#glow01)"/>
+  <circle cx="115" cy="355" r="4" fill="#00ccff" opacity="0.9" filter="url(#glow01)"/>
+  <circle cx="93" cy="405" r="4" fill="#00ff88" opacity="0.9" filter="url(#glow01)"/>
+
+  <!-- DNA 이중나선 오른쪽 -->
+  <path d="M 397 80 C 377 130, 417 170, 397 220 C 377 270, 417 310, 397 360 C 377 410, 417 450, 397 500"
+        fill="none" stroke="#00ccff" stroke-width="3" opacity="0.85" filter="url(#glow01)"/>
+  <path d="M 417 80 C 437 130, 397 170, 417 220 C 437 270, 397 310, 417 360 C 437 410, 397 450, 417 500"
+        fill="none" stroke="#00ff88" stroke-width="3" opacity="0.85" filter="url(#glow01)"/>
+  <!-- 오른쪽 나선 가로 연결 -->
+  <line x1="399" y1="105" x2="415" y2="105" stroke="#00ffaa" stroke-width="2.5" opacity="0.7"/>
+  <line x1="393" y1="130" x2="421" y2="130" stroke="#00ffaa" stroke-width="2.5" opacity="0.7"/>
+  <line x1="398" y1="155" x2="416" y2="155" stroke="#00ffaa" stroke-width="2.5" opacity="0.7"/>
+  <line x1="399" y1="205" x2="415" y2="205" stroke="#00ffaa" stroke-width="2.5" opacity="0.7"/>
+  <line x1="393" y1="230" x2="421" y2="230" stroke="#00ffaa" stroke-width="2.5" opacity="0.7"/>
+  <line x1="398" y1="255" x2="416" y2="255" stroke="#00ffaa" stroke-width="2.5" opacity="0.7"/>
+  <line x1="399" y1="305" x2="415" y2="305" stroke="#00ffaa" stroke-width="2.5" opacity="0.7"/>
+  <line x1="393" y1="330" x2="421" y2="330" stroke="#00ffaa" stroke-width="2.5" opacity="0.7"/>
+  <line x1="398" y1="355" x2="416" y2="355" stroke="#00ffaa" stroke-width="2.5" opacity="0.7"/>
+  <line x1="399" y1="405" x2="415" y2="405" stroke="#00ffaa" stroke-width="2.5" opacity="0.7"/>
+  <line x1="393" y1="430" x2="421" y2="430" stroke="#00ffaa" stroke-width="2.5" opacity="0.7"/>
+  <line x1="398" y1="455" x2="416" y2="455" stroke="#00ffaa" stroke-width="2.5" opacity="0.7"/>
+  <!-- 오른쪽 나선 노드 -->
+  <circle cx="397" cy="105" r="4" fill="#00ccff" opacity="0.9" filter="url(#glow01)"/>
+  <circle cx="417" cy="155" r="4" fill="#00ff88" opacity="0.9" filter="url(#glow01)"/>
+  <circle cx="395" cy="205" r="4" fill="#00ccff" opacity="0.9" filter="url(#glow01)"/>
+  <circle cx="419" cy="255" r="4" fill="#00ff88" opacity="0.9" filter="url(#glow01)"/>
+  <circle cx="397" cy="305" r="4" fill="#00ccff" opacity="0.9" filter="url(#glow01)"/>
+  <circle cx="417" cy="355" r="4" fill="#00ff88" opacity="0.9" filter="url(#glow01)"/>
+  <circle cx="395" cy="405" r="4" fill="#00ccff" opacity="0.9" filter="url(#glow01)"/>
+
+  <!-- 중앙 AI 텍스트 -->
+  <text x="256" y="430" text-anchor="middle" font-family="Arial, sans-serif" font-size="22"
+        font-weight="bold" fill="url(#dna_green)" opacity="0.9" filter="url(#glow01)">AI.Clip</text>
+
+  <!-- 배경 글로우 효과 -->
+  <circle cx="256" cy="257" r="120" fill="none" stroke="#00ff88" stroke-width="1" opacity="0.08"/>
+  <circle cx="256" cy="257" r="150" fill="none" stroke="#00ccff" stroke-width="1" opacity="0.05"/>
+</svg>

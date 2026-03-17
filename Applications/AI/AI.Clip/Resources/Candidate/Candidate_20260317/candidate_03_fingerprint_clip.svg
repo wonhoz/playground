@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg03" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#2a1c00"/>
+      <stop offset="100%" stop-color="#1a1000"/>
+    </radialGradient>
+    <linearGradient id="gold_grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFD700"/>
+      <stop offset="50%" stop-color="#FFA500"/>
+      <stop offset="100%" stop-color="#FF8C00"/>
+    </linearGradient>
+    <linearGradient id="clip_gold" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFE566"/>
+      <stop offset="100%" stop-color="#CC7A00"/>
+    </linearGradient>
+    <filter id="glow03">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="gold_glow">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <clipPath id="clip_shape">
+      <rect x="140" y="100" width="232" height="312" rx="18"/>
+    </clipPath>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="512" height="512" fill="url(#bg03)" rx="48"/>
+
+  <!-- 클립보드 외곽 (황금 테두리) -->
+  <rect x="140" y="100" width="232" height="312" rx="18" ry="18"
+        fill="#1a1000" stroke="url(#gold_grad)" stroke-width="4" filter="url(#glow03)"/>
+  <!-- 클립 -->
+  <rect x="216" y="86" width="80" height="32" rx="10" ry="10"
+        fill="#1a1000" stroke="url(#gold_grad)" stroke-width="3.5" filter="url(#glow03)"/>
+  <rect x="230" y="92" width="52" height="14" rx="5" fill="#2a1c00" stroke="#FFA500" stroke-width="1.5" opacity="0.7"/>
+
+  <!-- 지문 패턴 (클립보드 내부) -->
+  <!-- 중심 타원들 - 지문 루프 형태 -->
+  <!-- 가장 안쪽 타원 -->
+  <ellipse cx="256" cy="272" rx="18" ry="22" fill="none" stroke="url(#gold_grad)" stroke-width="2.2"
+           clip-path="url(#clip_shape)" opacity="0.95" filter="url(#glow03)"/>
+  <!-- 두번째 -->
+  <ellipse cx="256" cy="272" rx="36" ry="42" fill="none" stroke="url(#gold_grad)" stroke-width="2"
+           clip-path="url(#clip_shape)" opacity="0.9"/>
+  <!-- 세번째 -->
+  <ellipse cx="256" cy="272" rx="54" ry="62" fill="none" stroke="url(#gold_grad)" stroke-width="1.9"
+           clip-path="url(#clip_shape)" opacity="0.85"/>
+  <!-- 네번째 -->
+  <ellipse cx="256" cy="272" rx="72" ry="82" fill="none" stroke="url(#gold_grad)" stroke-width="1.8"
+           clip-path="url(#clip_shape)" opacity="0.8"/>
+  <!-- 다섯번째 -->
+  <ellipse cx="256" cy="272" rx="90" ry="100" fill="none" stroke="url(#gold_grad)" stroke-width="1.7"
+           clip-path="url(#clip_shape)" opacity="0.75"/>
+  <!-- 여섯번째 -->
+  <ellipse cx="256" cy="272" rx="106" ry="116" fill="none" stroke="url(#gold_grad)" stroke-width="1.6"
+           clip-path="url(#clip_shape)" opacity="0.7"/>
+  <!-- 일곱번째 -->
+  <ellipse cx="256" cy="272" rx="120" ry="128" fill="none" stroke="url(#gold_grad)" stroke-width="1.5"
+           clip-path="url(#clip_shape)" opacity="0.6"/>
+
+  <!-- 지문 중심 세로 선 (루프 방향) -->
+  <line x1="256" y1="148" x2="256" y2="210" stroke="#FFD700" stroke-width="2.2" opacity="0.7" clip-path="url(#clip_shape)"/>
+  <line x1="240" y1="150" x2="240" y2="205" stroke="#FFA500" stroke-width="1.5" opacity="0.5" clip-path="url(#clip_shape)"/>
+  <line x1="272" y1="150" x2="272" y2="205" stroke="#FFA500" stroke-width="1.5" opacity="0.5" clip-path="url(#clip_shape)"/>
+
+  <!-- 지문 델타 포인트들 -->
+  <circle cx="186" cy="300" r="5" fill="#FFD700" opacity="0.9" filter="url(#glow03)"/>
+  <circle cx="326" cy="300" r="5" fill="#FFD700" opacity="0.9" filter="url(#glow03)"/>
+
+  <!-- 스캔 라인 효과 -->
+  <rect x="140" y="185" width="232" height="3" fill="#FFD700" opacity="0.4" filter="url(#glow03)"/>
+  <rect x="140" y="183" width="232" height="1" fill="#FFFFaa" opacity="0.6"/>
+
+  <!-- 스캔 진행 바 -->
+  <rect x="140" y="390" width="232" height="8" rx="4" fill="#2a1c00" stroke="#FFA500" stroke-width="1.5" opacity="0.7"/>
+  <rect x="140" y="390" width="155" height="8" rx="4" fill="url(#gold_grad)" opacity="0.8" filter="url(#glow03)"/>
+
+  <!-- 스캔 완료 체크 표시 -->
+  <circle cx="347" cy="165" r="20" fill="none" stroke="#FFD700" stroke-width="2.5" filter="url(#glow03)"/>
+  <polyline points="338,165 345,172 357,158" fill="none" stroke="#FFD700" stroke-width="3"
+            stroke-linecap="round" stroke-linejoin="round" filter="url(#glow03)"/>
+
+  <!-- AI 텍스트 -->
+  <text x="256" y="450" text-anchor="middle" font-family="Arial, sans-serif" font-size="22"
+        font-weight="bold" fill="url(#gold_grad)" opacity="0.9" filter="url(#glow03)">AI.Clip</text>
+
+  <!-- 배경 광채 -->
+  <circle cx="256" cy="260" r="110" fill="none" stroke="#FFD700" stroke-width="1" opacity="0.06"/>
+  <circle cx="256" cy="260" r="140" fill="none" stroke="#FFA500" stroke-width="1" opacity="0.04"/>
+</svg>

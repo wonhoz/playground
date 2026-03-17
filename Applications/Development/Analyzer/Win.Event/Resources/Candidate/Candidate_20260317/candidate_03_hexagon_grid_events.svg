@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg03" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#12121f"/>
+      <stop offset="100%" stop-color="#0a0a0f"/>
+    </radialGradient>
+    <filter id="glow03">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glowStrong03">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="512" height="512" fill="url(#bg03)"/>
+
+  <!-- Helper: hexagon shape is drawn as polygon for each cell -->
+  <!-- Hex grid layout: flat-top hexagons, size=36px -->
+  <!-- Row 0 -->
+  <polygon points="256,52 283,67 283,97 256,112 229,97 229,67" fill="#1E90FF" stroke="#4ab0ff" stroke-width="1.5" filter="url(#glow03)" opacity="0.9"/>
+  <text x="256" y="87" text-anchor="middle" font-family="monospace" font-size="9" fill="#fff" opacity="0.9">INFO</text>
+
+  <!-- Row 1 - left to right -->
+  <polygon points="186,97 213,112 213,142 186,157 159,142 159,112" fill="#9B59B6" stroke="#c080ff" stroke-width="1.5" filter="url(#glow03)" opacity="0.85"/>
+  <text x="186" y="132" text-anchor="middle" font-family="monospace" font-size="9" fill="#fff" opacity="0.9">AUDIT</text>
+  <polygon points="326,97 353,112 353,142 326,157 299,142 299,112" fill="#FF4500" stroke="#ff7755" stroke-width="2" filter="url(#glowStrong03)" opacity="0.95"/>
+  <text x="326" y="127" text-anchor="middle" font-family="monospace" font-size="9" fill="#fff" font-weight="bold">ERROR</text>
+  <text x="326" y="140" text-anchor="middle" font-family="monospace" font-size="8" fill="#ffaaaa">CRIT</text>
+
+  <!-- Row 2 - 3 hexagons -->
+  <polygon points="116,142 143,157 143,187 116,202 89,187 89,157" fill="#1E90FF" stroke="#4ab0ff" stroke-width="1.5" filter="url(#glow03)" opacity="0.75"/>
+  <text x="116" y="177" text-anchor="middle" font-family="monospace" font-size="9" fill="#fff" opacity="0.9">INFO</text>
+  <polygon points="256,142 283,157 283,187 256,202 229,187 229,157" fill="#FF8C00" stroke="#ffaa44" stroke-width="1.5" filter="url(#glow03)" opacity="0.9"/>
+  <text x="256" y="177" text-anchor="middle" font-family="monospace" font-size="9" fill="#fff">WARN</text>
+  <polygon points="396,142 423,157 423,187 396,202 369,187 369,157" fill="#1E90FF" stroke="#4ab0ff" stroke-width="1.5" filter="url(#glow03)" opacity="0.8"/>
+  <text x="396" y="177" text-anchor="middle" font-family="monospace" font-size="9" fill="#fff">INFO</text>
+
+  <!-- Row 3 - 4 hexagons -->
+  <polygon points="46,187 73,202 73,232 46,247 19,232 19,202" fill="#1a1a2e" stroke="#333366" stroke-width="1" opacity="0.5"/>
+  <text x="46" y="222" text-anchor="middle" font-family="monospace" font-size="8" fill="#666" opacity="0.7">---</text>
+  <polygon points="186,187 213,202 213,232 186,247 159,232 159,202" fill="#FF4500" stroke="#ff7755" stroke-width="2" filter="url(#glowStrong03)" opacity="0.95"/>
+  <text x="186" y="212" text-anchor="middle" font-family="monospace" font-size="9" fill="#fff" font-weight="bold">ERROR</text>
+  <text x="186" y="225" text-anchor="middle" font-family="monospace" font-size="8" fill="#ffcccc">5 evts</text>
+  <polygon points="326,187 353,202 353,232 326,247 299,232 299,202" fill="#9B59B6" stroke="#c080ff" stroke-width="1.5" filter="url(#glow03)" opacity="0.85"/>
+  <text x="326" y="222" text-anchor="middle" font-family="monospace" font-size="9" fill="#fff">AUDIT</text>
+  <polygon points="466,187 493,202 493,232 466,247 439,232 439,202" fill="#FF8C00" stroke="#ffaa44" stroke-width="1.5" filter="url(#glow03)" opacity="0.8"/>
+  <text x="466" y="222" text-anchor="middle" font-family="monospace" font-size="9" fill="#fff">WARN</text>
+
+  <!-- Row 4 - 3 hexagons -->
+  <polygon points="116,232 143,247 143,277 116,292 89,277 89,247" fill="#FF8C00" stroke="#ffaa44" stroke-width="1.5" filter="url(#glow03)" opacity="0.85"/>
+  <text x="116" y="267" text-anchor="middle" font-family="monospace" font-size="9" fill="#fff">WARN</text>
+  <polygon points="256,232 283,247 283,277 256,292 229,277 229,247" fill="#1E90FF" stroke="#4ab0ff" stroke-width="1.5" filter="url(#glow03)" opacity="0.9"/>
+  <text x="256" y="262" text-anchor="middle" font-family="monospace" font-size="9" fill="#fff">INFO</text>
+  <text x="256" y="275" text-anchor="middle" font-family="monospace" font-size="8" fill="#aaddff">42 evts</text>
+  <polygon points="396,232 423,247 423,277 396,292 369,277 369,247" fill="#1a1a2e" stroke="#333366" stroke-width="1" opacity="0.5"/>
+  <text x="396" y="267" text-anchor="middle" font-family="monospace" font-size="8" fill="#666" opacity="0.7">---</text>
+
+  <!-- Row 5 - 2 hexagons -->
+  <polygon points="186,277 213,292 213,322 186,337 159,322 159,292" fill="#1E90FF" stroke="#4ab0ff" stroke-width="1.5" filter="url(#glow03)" opacity="0.7"/>
+  <text x="186" y="312" text-anchor="middle" font-family="monospace" font-size="9" fill="#fff">INFO</text>
+  <polygon points="326,277 353,292 353,322 326,337 299,322 299,292" fill="#FF4500" stroke="#ff7755" stroke-width="2" filter="url(#glowStrong03)" opacity="0.9"/>
+  <text x="326" y="307" text-anchor="middle" font-family="monospace" font-size="9" fill="#fff" font-weight="bold">ERROR</text>
+  <text x="326" y="320" text-anchor="middle" font-family="monospace" font-size="8" fill="#ffcccc">2 evts</text>
+
+  <!-- Row 6 - 3 hexagons -->
+  <polygon points="116,322 143,337 143,367 116,382 89,367 89,337" fill="#9B59B6" stroke="#c080ff" stroke-width="1.5" filter="url(#glow03)" opacity="0.75"/>
+  <text x="116" y="357" text-anchor="middle" font-family="monospace" font-size="9" fill="#fff">AUDIT</text>
+  <polygon points="256,322 283,337 283,367 256,382 229,367 229,337" fill="#FF8C00" stroke="#ffaa44" stroke-width="1.5" filter="url(#glow03)" opacity="0.8"/>
+  <text x="256" y="357" text-anchor="middle" font-family="monospace" font-size="9" fill="#fff">WARN</text>
+  <polygon points="396,322 423,337 423,367 396,382 369,367 369,337" fill="#1E90FF" stroke="#4ab0ff" stroke-width="1.5" filter="url(#glow03)" opacity="0.75"/>
+  <text x="396" y="357" text-anchor="middle" font-family="monospace" font-size="9" fill="#fff">INFO</text>
+
+  <!-- Bottom row - 2 hexagons -->
+  <polygon points="186,367 213,382 213,412 186,427 159,412 159,382" fill="#1a1a2e" stroke="#333366" stroke-width="1" opacity="0.4"/>
+  <text x="186" y="402" text-anchor="middle" font-family="monospace" font-size="8" fill="#555" opacity="0.7">---</text>
+  <polygon points="326,367 353,382 353,412 326,427 299,412 299,382" fill="#9B59B6" stroke="#c080ff" stroke-width="1.5" filter="url(#glow03)" opacity="0.7"/>
+  <text x="326" y="402" text-anchor="middle" font-family="monospace" font-size="9" fill="#fff">AUDIT</text>
+
+  <!-- Connection lines between related events -->
+  <g stroke="#ffffff" stroke-width="0.5" opacity="0.15">
+    <line x1="326" y1="142" x2="186" y2="187"/>
+    <line x1="326" y1="142" x2="326" y2="187"/>
+    <line x1="186" y1="187" x2="326" y2="277"/>
+    <line x1="256" y1="142" x2="256" y2="232"/>
+  </g>
+
+  <!-- Legend -->
+  <g font-family="monospace" font-size="9">
+    <rect x="30" y="440" width="10" height="10" fill="#FF4500" rx="2"/>
+    <text x="45" y="450" fill="#FF7755">ERROR</text>
+    <rect x="105" y="440" width="10" height="10" fill="#FF8C00" rx="2"/>
+    <text x="120" y="450" fill="#ffaa44">WARN</text>
+    <rect x="180" y="440" width="10" height="10" fill="#1E90FF" rx="2"/>
+    <text x="195" y="450" fill="#4ab0ff">INFO</text>
+    <rect x="255" y="440" width="10" height="10" fill="#9B59B6" rx="2"/>
+    <text x="270" y="450" fill="#c080ff">AUDIT</text>
+  </g>
+
+  <!-- Title -->
+  <text x="256" y="480" text-anchor="middle" font-family="'Segoe UI',Arial,sans-serif" font-size="13" font-weight="bold" fill="#8888ff" opacity="0.9">HEXAGON GRID EVENTS</text>
+  <text x="256" y="498" text-anchor="middle" font-family="monospace" font-size="9" fill="#4444aa" opacity="0.7">EVENT LOG TOPOLOGY MAP</text>
+</svg>

@@ -1,0 +1,120 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#050d1a"/>
+      <stop offset="100%" stop-color="#020610"/>
+    </radialGradient>
+    <radialGradient id="earth" cx="40%" cy="35%" r="55%">
+      <stop offset="0%" stop-color="#4FC3F7"/>
+      <stop offset="40%" stop-color="#1565C0"/>
+      <stop offset="100%" stop-color="#0D47A1"/>
+    </radialGradient>
+    <radialGradient id="atmo" cx="50%" cy="50%" r="50%">
+      <stop offset="80%" stop-color="#1E88E5" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#29B6F6" stop-opacity="0.3"/>
+    </radialGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glow-sm">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="star-glow">
+      <feGaussianBlur stdDeviation="1" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background (space) -->
+  <rect width="512" height="512" fill="url(#bg)"/>
+
+  <!-- Stars -->
+  <g fill="#FFFFFF" filter="url(#star-glow)" opacity="0.6">
+    <circle cx="40" cy="50" r="1.5"/>
+    <circle cx="90" cy="30" r="1"/>
+    <circle cx="150" cy="70" r="1.5"/>
+    <circle cx="420" cy="40" r="1"/>
+    <circle cx="470" cy="80" r="1.5"/>
+    <circle cx="490" cy="30" r="1"/>
+    <circle cx="30" cy="200" r="1"/>
+    <circle cx="480" cy="150" r="1.5"/>
+    <circle cx="60" cy="400" r="1"/>
+    <circle cx="490" cy="380" r="1.5"/>
+    <circle cx="450" cy="450" r="1"/>
+    <circle cx="80" cy="460" r="1.5"/>
+    <circle cx="370" cy="480" r="1"/>
+    <circle cx="130" cy="490" r="1"/>
+  </g>
+
+  <!-- Orbit paths -->
+  <ellipse cx="256" cy="270" rx="195" ry="60" fill="none" stroke="#1E88E5" stroke-width="1.5" opacity="0.35" stroke-dasharray="8,6"/>
+  <ellipse cx="256" cy="256" rx="170" ry="145" fill="none" stroke="#0EA5E9" stroke-width="1.5" opacity="0.3" stroke-dasharray="8,6" transform="rotate(-30 256 256)"/>
+  <ellipse cx="256" cy="256" rx="210" ry="90" fill="none" stroke="#38BDF8" stroke-width="1.5" opacity="0.25" stroke-dasharray="8,6" transform="rotate(50 256 256)"/>
+
+  <!-- Earth (center) -->
+  <circle cx="256" cy="270" r="78" fill="url(#earth)"/>
+  <!-- Atmosphere glow -->
+  <circle cx="256" cy="270" r="88" fill="url(#atmo)"/>
+  <!-- Land masses (simple shapes) -->
+  <ellipse cx="240" cy="255" rx="20" ry="14" fill="#2E7D32" opacity="0.7"/>
+  <ellipse cx="270" cy="275" rx="14" ry="10" fill="#388E3C" opacity="0.6"/>
+  <ellipse cx="255" cy="290" rx="10" ry="7" fill="#1B5E20" opacity="0.5"/>
+
+  <!-- Satellites with event type colors -->
+  <!-- ERROR satellite (red) - top orbit -->
+  <g transform="rotate(-30 256 256)" filter="url(#glow)">
+    <g transform="translate(256,111)">
+      <!-- Satellite body -->
+      <rect x="-8" y="-5" width="16" height="10" rx="2" fill="#B71C1C"/>
+      <!-- Solar panels -->
+      <rect x="-22" y="-3" width="12" height="6" rx="1" fill="#EF5350"/>
+      <rect x="10" y="-3" width="12" height="6" rx="1" fill="#EF5350"/>
+      <!-- Signal dot -->
+      <circle cx="0" cy="0" r="3" fill="#FF1744"/>
+    </g>
+  </g>
+  <text x="85" y="105" font-family="monospace" font-size="11" fill="#EF5350" filter="url(#glow-sm)">ERROR</text>
+
+  <!-- WARN satellite (orange) - equatorial orbit -->
+  <g filter="url(#glow)">
+    <g transform="translate(451,270)">
+      <rect x="-8" y="-5" width="16" height="10" rx="2" fill="#E65100"/>
+      <rect x="-22" y="-3" width="12" height="6" rx="1" fill="#FF9100"/>
+      <rect x="10" y="-3" width="12" height="6" rx="1" fill="#FF9100"/>
+      <circle cx="0" cy="0" r="3" fill="#FFAB40"/>
+    </g>
+  </g>
+  <text x="463" y="250" font-family="monospace" font-size="11" fill="#FF9100" filter="url(#glow-sm)">WARN</text>
+
+  <!-- INFO satellite (blue) - inclined orbit -->
+  <g transform="rotate(50 256 256)" filter="url(#glow)">
+    <g transform="translate(256,166)">
+      <rect x="-8" y="-5" width="16" height="10" rx="2" fill="#0D47A1"/>
+      <rect x="-22" y="-3" width="12" height="6" rx="1" fill="#1E88E5"/>
+      <rect x="10" y="-3" width="12" height="6" rx="1" fill="#1E88E5"/>
+      <circle cx="0" cy="0" r="3" fill="#40C4FF"/>
+    </g>
+  </g>
+
+  <!-- AUDIT satellite (purple) -->
+  <g transform="rotate(-30 256 256)" filter="url(#glow)">
+    <g transform="translate(256,401)">
+      <rect x="-8" y="-5" width="16" height="10" rx="2" fill="#4A148C"/>
+      <rect x="-22" y="-3" width="12" height="6" rx="1" fill="#9C27B0"/>
+      <rect x="10" y="-3" width="12" height="6" rx="1" fill="#9C27B0"/>
+      <circle cx="0" cy="0" r="3" fill="#E040FB"/>
+    </g>
+  </g>
+  <text x="265" y="432" font-family="monospace" font-size="11" fill="#CE93D8" filter="url(#glow-sm)">AUDIT</text>
+
+  <!-- Signal beams from satellites to earth -->
+  <g opacity="0.4" filter="url(#glow-sm)">
+    <line x1="256" y1="192" x2="256" y2="270" stroke="#EF5350" stroke-width="1.5" stroke-dasharray="5,4"/>
+    <line x1="451" y1="270" x2="334" y2="270" stroke="#FF9100" stroke-width="1.5" stroke-dasharray="5,4"/>
+  </g>
+
+  <!-- Bottom label -->
+  <text x="256" y="492" text-anchor="middle" font-family="monospace" font-size="15" fill="#38BDF8" opacity="0.85" filter="url(#glow-sm)">WIN.EVENT MONITOR</text>
+</svg>

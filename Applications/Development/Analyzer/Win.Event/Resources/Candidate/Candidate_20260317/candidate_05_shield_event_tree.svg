@@ -1,0 +1,135 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg05" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#060e1a"/>
+      <stop offset="100%" stop-color="#030d1a"/>
+    </radialGradient>
+    <radialGradient id="shieldGrad05" cx="40%" cy="30%" r="65%">
+      <stop offset="0%" stop-color="#1a3a6a"/>
+      <stop offset="70%" stop-color="#0a2048"/>
+      <stop offset="100%" stop-color="#061228"/>
+    </radialGradient>
+    <filter id="glow05">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="shieldGlow05">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="nodeGlow05">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="512" height="512" fill="url(#bg05)"/>
+
+  <!-- Shield outer glow -->
+  <path d="M256,28 L390,80 L390,230 Q390,370 256,440 Q122,370 122,230 L122,80 Z" fill="#1E90FF" filter="url(#shieldGlow05)" opacity="0.2"/>
+
+  <!-- Shield shape -->
+  <path d="M256,42 L378,90 L378,228 Q378,358 256,428 Q134,358 134,228 L134,90 Z" fill="url(#shieldGrad05)" stroke="#1E90FF" stroke-width="2.5" filter="url(#glow05)"/>
+
+  <!-- Shield inner border -->
+  <path d="M256,62 L362,104 L362,228 Q362,340 256,406 Q150,340 150,228 L150,104 Z" fill="none" stroke="#4ab0ff" stroke-width="1" opacity="0.4"/>
+
+  <!-- Shield emblem - Windows logo style -->
+  <rect x="230" y="56" width="26" height="26" rx="3" fill="#1E90FF" opacity="0.3" filter="url(#glow05)"/>
+  <rect x="258" y="56" width="26" height="26" rx="3" fill="#1E90FF" opacity="0.3" filter="url(#glow05)"/>
+  <rect x="230" y="84" width="26" height="26" rx="3" fill="#1E90FF" opacity="0.3" filter="url(#glow05)"/>
+  <rect x="258" y="84" width="26" height="26" rx="3" fill="#1E90FF" opacity="0.3" filter="url(#glow05)"/>
+
+  <!-- Event Tree inside shield -->
+  <!-- Root node - SYSTEM -->
+  <circle cx="256" cy="130" r="20" fill="#1E90FF" stroke="#4ab0ff" stroke-width="2" filter="url(#nodeGlow05)"/>
+  <text x="256" y="125" text-anchor="middle" font-family="monospace" font-size="7" fill="#fff" font-weight="bold">SYS</text>
+  <text x="256" y="136" text-anchor="middle" font-family="monospace" font-size="7" fill="#aaddff">ROOT</text>
+
+  <!-- Level 1 branches -->
+  <line x1="240" y1="148" x2="196" y2="190" stroke="#C0C0C0" stroke-width="1.5" opacity="0.6"/>
+  <line x1="256" y1="150" x2="256" y2="190" stroke="#C0C0C0" stroke-width="1.5" opacity="0.6"/>
+  <line x1="272" y1="148" x2="316" y2="190" stroke="#C0C0C0" stroke-width="1.5" opacity="0.6"/>
+
+  <!-- Level 1 nodes -->
+  <circle cx="196" cy="204" r="16" fill="#FF4500" stroke="#FF7755" stroke-width="2" filter="url(#nodeGlow05)"/>
+  <text x="196" y="199" text-anchor="middle" font-family="monospace" font-size="7" fill="#fff" font-weight="bold">ERR</text>
+  <text x="196" y="210" text-anchor="middle" font-family="monospace" font-size="6" fill="#ffaaaa">x2</text>
+
+  <circle cx="256" cy="204" r="16" fill="#FF8C00" stroke="#ffaa44" stroke-width="2" filter="url(#nodeGlow05)"/>
+  <text x="256" y="199" text-anchor="middle" font-family="monospace" font-size="7" fill="#fff">WRN</text>
+  <text x="256" y="210" text-anchor="middle" font-family="monospace" font-size="6" fill="#ffddaa">x5</text>
+
+  <circle cx="316" cy="204" r="16" fill="#1E90FF" stroke="#4ab0ff" stroke-width="2" filter="url(#nodeGlow05)"/>
+  <text x="316" y="199" text-anchor="middle" font-family="monospace" font-size="7" fill="#fff">INF</text>
+  <text x="316" y="210" text-anchor="middle" font-family="monospace" font-size="6" fill="#aaddff">x42</text>
+
+  <!-- Level 2 branches from ERROR -->
+  <line x1="184" y1="218" x2="168" y2="255" stroke="#C0C0C0" stroke-width="1.2" opacity="0.5"/>
+  <line x1="208" y1="218" x2="224" y2="255" stroke="#C0C0C0" stroke-width="1.2" opacity="0.5"/>
+
+  <!-- Level 2 branches from WARN -->
+  <line x1="244" y1="218" x2="232" y2="255" stroke="#C0C0C0" stroke-width="1.2" opacity="0.5"/>
+  <line x1="268" y1="218" x2="280" y2="255" stroke="#C0C0C0" stroke-width="1.2" opacity="0.5"/>
+
+  <!-- Level 2 branches from INFO -->
+  <line x1="308" y1="218" x2="304" y2="255" stroke="#C0C0C0" stroke-width="1.2" opacity="0.5"/>
+  <line x1="324" y1="218" x2="340" y2="255" stroke="#C0C0C0" stroke-width="1.2" opacity="0.5"/>
+
+  <!-- Level 2 nodes -->
+  <circle cx="168" cy="266" r="12" fill="#9B59B6" stroke="#c080ff" stroke-width="1.5" filter="url(#glow05)"/>
+  <text x="168" y="270" text-anchor="middle" font-family="monospace" font-size="6" fill="#fff">AUD</text>
+
+  <circle cx="224" cy="266" r="12" fill="#FF4500" stroke="#FF7755" stroke-width="1.5" filter="url(#glow05)"/>
+  <text x="224" y="270" text-anchor="middle" font-family="monospace" font-size="6" fill="#fff">ERR</text>
+
+  <circle cx="232" cy="266" r="12" fill="#1E90FF" stroke="#4ab0ff" stroke-width="1.5" filter="url(#glow05)"/>
+  <text x="232" y="270" text-anchor="middle" font-family="monospace" font-size="6" fill="#fff">INF</text>
+
+  <circle cx="280" cy="266" r="12" fill="#FF8C00" stroke="#ffaa44" stroke-width="1.5" filter="url(#glow05)"/>
+  <text x="280" y="270" text-anchor="middle" font-family="monospace" font-size="6" fill="#fff">WRN</text>
+
+  <circle cx="304" cy="266" r="12" fill="#1E90FF" stroke="#4ab0ff" stroke-width="1.5" filter="url(#glow05)"/>
+  <text x="304" y="270" text-anchor="middle" font-family="monospace" font-size="6" fill="#fff">INF</text>
+
+  <circle cx="340" cy="266" r="12" fill="#9B59B6" stroke="#c080ff" stroke-width="1.5" filter="url(#glow05)"/>
+  <text x="340" y="270" text-anchor="middle" font-family="monospace" font-size="6" fill="#fff">AUD</text>
+
+  <!-- Level 3 branches (simplified) -->
+  <line x1="196" y1="278" x2="196" y2="310" stroke="#C0C0C0" stroke-width="1" opacity="0.4"/>
+  <line x1="256" y1="278" x2="256" y2="310" stroke="#C0C0C0" stroke-width="1" opacity="0.4"/>
+  <line x1="316" y1="278" x2="316" y2="310" stroke="#C0C0C0" stroke-width="1" opacity="0.4"/>
+  <line x1="186" y1="278" x2="176" y2="310" stroke="#C0C0C0" stroke-width="1" opacity="0.4"/>
+  <line x1="266" y1="278" x2="276" y2="310" stroke="#C0C0C0" stroke-width="1" opacity="0.4"/>
+  <line x1="330" y1="278" x2="340" y2="310" stroke="#C0C0C0" stroke-width="1" opacity="0.4"/>
+
+  <!-- Level 3 nodes (leaf) -->
+  <g filter="url(#glow05)">
+    <circle cx="176" cy="318" r="9" fill="#FF4500" stroke="#FF7755" stroke-width="1.5"/>
+    <circle cx="196" cy="318" r="9" fill="#1E90FF" stroke="#4ab0ff" stroke-width="1.5"/>
+    <circle cx="256" cy="318" r="9" fill="#FF8C00" stroke="#ffaa44" stroke-width="1.5"/>
+    <circle cx="276" cy="318" r="9" fill="#9B59B6" stroke="#c080ff" stroke-width="1.5"/>
+    <circle cx="316" cy="318" r="9" fill="#1E90FF" stroke="#4ab0ff" stroke-width="1.5"/>
+    <circle cx="340" cy="318" r="9" fill="#FF4500" stroke="#FF7755" stroke-width="1.5"/>
+  </g>
+
+  <!-- Level 3 dots connecting to level 4 -->
+  <g opacity="0.35">
+    <line x1="176" y1="327" x2="170" y2="348" stroke="#aaa" stroke-width="1"/>
+    <circle cx="170" cy="353" r="5" fill="#666" stroke="#999" stroke-width="1"/>
+    <line x1="196" y1="327" x2="202" y2="348" stroke="#aaa" stroke-width="1"/>
+    <circle cx="202" cy="353" r="5" fill="#666" stroke="#999" stroke-width="1"/>
+    <line x1="256" y1="327" x2="250" y2="348" stroke="#aaa" stroke-width="1"/>
+    <circle cx="250" cy="353" r="5" fill="#666" stroke="#999" stroke-width="1"/>
+    <line x1="276" y1="327" x2="282" y2="348" stroke="#aaa" stroke-width="1"/>
+    <circle cx="282" cy="353" r="5" fill="#666" stroke="#999" stroke-width="1"/>
+  </g>
+
+  <!-- Shield bottom shine -->
+  <path d="M256,385 Q230,398 220,390" fill="none" stroke="#4ab0ff" stroke-width="1.5" opacity="0.3"/>
+
+  <!-- Title -->
+  <text x="256" y="470" text-anchor="middle" font-family="'Segoe UI',Arial,sans-serif" font-size="14" font-weight="bold" fill="#1E90FF" filter="url(#glow05)" opacity="0.9">SHIELD EVENT TREE</text>
+  <text x="256" y="490" text-anchor="middle" font-family="monospace" font-size="9" fill="#4060a0" opacity="0.7">HIERARCHICAL EVENT ANALYSIS</text>
+</svg>

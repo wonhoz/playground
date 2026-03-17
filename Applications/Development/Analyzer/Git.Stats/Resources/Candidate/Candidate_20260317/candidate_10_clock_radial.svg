@@ -1,0 +1,162 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg10" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#1a0500"/>
+      <stop offset="60%" stop-color="#0d0300"/>
+      <stop offset="100%" stop-color="#0f0000"/>
+    </radialGradient>
+    <radialGradient id="clockFace10" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#2a0800"/>
+      <stop offset="70%" stop-color="#1a0500"/>
+      <stop offset="100%" stop-color="#0f0300"/>
+    </radialGradient>
+    <radialGradient id="centerCore10" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="30%" stop-color="#FF9F0A"/>
+      <stop offset="70%" stop-color="#FF2D55"/>
+      <stop offset="100%" stop-color="#FF2D55" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glow10s">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glow10m">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glow10l">
+      <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="512" height="512" fill="url(#bg10)"/>
+
+  <!-- 시계 테두리 -->
+  <circle cx="256" cy="256" r="228" fill="#1a0500" stroke="#FF2D55" stroke-width="3" opacity="0.8"/>
+  <circle cx="256" cy="256" r="225" fill="url(#clockFace10)"/>
+  <circle cx="256" cy="256" r="222" fill="none" stroke="#FF9F0A" stroke-width="1" opacity="0.5" filter="url(#glow10s)"/>
+
+  <!-- 시계 시간대 눈금 (12개) -->
+  <!-- 12시 -->
+  <line x1="256" y1="38" x2="256" y2="65" stroke="#FF2D55" stroke-width="3" opacity="0.9" filter="url(#glow10s)"/>
+  <!-- 1시 -->
+  <line x1="369" y1="65" x2="354" y2="88" stroke="#FF9F0A" stroke-width="2" opacity="0.7"/>
+  <!-- 2시 -->
+  <line x1="451" y1="143" x2="431" y2="154" stroke="#FF9F0A" stroke-width="2" opacity="0.7"/>
+  <!-- 3시 -->
+  <line x1="474" y1="256" x2="447" y2="256" stroke="#FF2D55" stroke-width="3" opacity="0.9" filter="url(#glow10s)"/>
+  <!-- 4시 -->
+  <line x1="451" y1="369" x2="431" y2="358" stroke="#FF9F0A" stroke-width="2" opacity="0.7"/>
+  <!-- 5시 -->
+  <line x1="369" y1="447" x2="354" y2="424" stroke="#FF9F0A" stroke-width="2" opacity="0.7"/>
+  <!-- 6시 -->
+  <line x1="256" y1="474" x2="256" y2="447" stroke="#FF2D55" stroke-width="3" opacity="0.9" filter="url(#glow10s)"/>
+  <!-- 7시 -->
+  <line x1="143" y1="447" x2="158" y2="424" stroke="#FF9F0A" stroke-width="2" opacity="0.7"/>
+  <!-- 8시 -->
+  <line x1="61" y1="369" x2="81" y2="358" stroke="#FF9F0A" stroke-width="2" opacity="0.7"/>
+  <!-- 9시 -->
+  <line x1="38" y1="256" x2="65" y2="256" stroke="#FF2D55" stroke-width="3" opacity="0.9" filter="url(#glow10s)"/>
+  <!-- 10시 -->
+  <line x1="61" y1="143" x2="81" y2="154" stroke="#FF9F0A" stroke-width="2" opacity="0.7"/>
+  <!-- 11시 -->
+  <line x1="143" y1="65" x2="158" y2="88" stroke="#FF9F0A" stroke-width="2" opacity="0.7"/>
+
+  <!-- 방사형 활동 바 (24시간 - 커밋 빈도) -->
+  <!-- 각 막대는 중심(r=80)에서 바깥으로 뻗어남, 각도는 시간대 -->
+  <!-- 0시: 270도 (위쪽) -->
+  <!-- 막대 길이 = 커밋 빈도 (최대 r=110 기준) -->
+
+  <!-- 시간대별 활동 막대 (24개, 15도 간격) -->
+  <!-- 0시 (270도) - 낮은 활동 -->
+  <line x1="256" y1="176" x2="256" y2="155" stroke="#FF2D55" stroke-width="8" stroke-linecap="round" opacity="0.5" filter="url(#glow10s)"/>
+  <!-- 1시 (285도) - 아주 낮음 -->
+  <line x1="256" y1="176" x2="264" y2="158" stroke="#FF2D55" stroke-width="6" stroke-linecap="round" opacity="0.3"/>
+  <!-- 2시 (300도) - 낮음 -->
+  <line x1="256" y1="176" x2="283" y2="165" stroke="#FF2D55" stroke-width="7" stroke-linecap="round" opacity="0.4" filter="url(#glow10s)"/>
+  <!-- 3시 (315도) - 중간 -->
+  <line x1="256" y1="176" x2="304" y2="176" stroke="#FF9F0A" stroke-width="9" stroke-linecap="round" opacity="0.5" filter="url(#glow10m)"/>
+  <!-- 4시 (330도) - 중간 -->
+  <line x1="256" y1="176" x2="316" y2="195" stroke="#FF9F0A" stroke-width="8" stroke-linecap="round" opacity="0.5"/>
+  <!-- 5시 (345도) - 낮음 -->
+  <line x1="256" y1="176" x2="318" y2="220" stroke="#FF9F0A" stroke-width="7" stroke-linecap="round" opacity="0.4"/>
+  <!-- 6시 (0도) - 중간 -->
+  <line x1="256" y1="176" x2="308" y2="241" stroke="#FF9F0A" stroke-width="10" stroke-linecap="round" opacity="0.6" filter="url(#glow10m)"/>
+  <!-- 7시 (15도) - 높음 -->
+  <line x1="256" y1="176" x2="286" y2="258" stroke="#FF9F0A" stroke-width="12" stroke-linecap="round" opacity="0.7" filter="url(#glow10m)"/>
+  <!-- 8시 (30도) - 매우 높음 -->
+  <line x1="256" y1="176" x2="256" y2="261" stroke="#FF2D55" stroke-width="15" stroke-linecap="round" opacity="0.85" filter="url(#glow10l)"/>
+  <!-- 9시 (45도) - 최고 -->
+  <line x1="256" y1="176" x2="228" y2="258" stroke="#FF2D55" stroke-width="18" stroke-linecap="round" opacity="0.9" filter="url(#glow10l)"/>
+  <!-- 10시 (60도) - 매우 높음 -->
+  <line x1="256" y1="176" x2="208" y2="247" stroke="#FF2D55" stroke-width="16" stroke-linecap="round" opacity="0.85" filter="url(#glow10l)"/>
+  <!-- 11시 (75도) - 높음 -->
+  <line x1="256" y1="176" x2="196" y2="228" stroke="#FF9F0A" stroke-width="14" stroke-linecap="round" opacity="0.75" filter="url(#glow10m)"/>
+  <!-- 12시 (90도) - 중간 -->
+  <line x1="256" y1="176" x2="196" y2="205" stroke="#FF9F0A" stroke-width="11" stroke-linecap="round" opacity="0.65" filter="url(#glow10m)"/>
+  <!-- 13시 (105도) - 높음 -->
+  <line x1="256" y1="176" x2="205" y2="183" stroke="#FF2D55" stroke-width="14" stroke-linecap="round" opacity="0.75" filter="url(#glow10m)"/>
+  <!-- 14시 (120도) - 매우 높음 -->
+  <line x1="256" y1="176" x2="220" y2="162" stroke="#FF2D55" stroke-width="17" stroke-linecap="round" opacity="0.85" filter="url(#glow10l)"/>
+  <!-- 15시 (135도) - 최고 -->
+  <line x1="256" y1="176" x2="240" y2="145" stroke="#FF2D55" stroke-width="20" stroke-linecap="round" opacity="0.95" filter="url(#glow10l)"/>
+  <!-- 16시 (150도) - 매우 높음 -->
+  <line x1="256" y1="176" x2="262" y2="136" stroke="#FF2D55" stroke-width="17" stroke-linecap="round" opacity="0.85" filter="url(#glow10l)"/>
+  <!-- 17시 (165도) - 높음 -->
+  <line x1="256" y1="176" x2="283" y2="134" stroke="#FF9F0A" stroke-width="15" stroke-linecap="round" opacity="0.8" filter="url(#glow10m)"/>
+  <!-- 18시 (180도) - 중간 -->
+  <line x1="256" y1="176" x2="302" y2="145" stroke="#FF9F0A" stroke-width="12" stroke-linecap="round" opacity="0.65" filter="url(#glow10m)"/>
+  <!-- 19시 (195도) - 중간 -->
+  <line x1="256" y1="176" x2="315" y2="162" stroke="#FF9F0A" stroke-width="10" stroke-linecap="round" opacity="0.6"/>
+  <!-- 20시 (210도) - 낮음 -->
+  <line x1="256" y1="176" x2="320" y2="183" stroke="#FF9F0A" stroke-width="8" stroke-linecap="round" opacity="0.5"/>
+  <!-- 21시 (225도) - 중간 -->
+  <line x1="256" y1="176" x2="318" y2="207" stroke="#FF2D55" stroke-width="11" stroke-linecap="round" opacity="0.6" filter="url(#glow10s)"/>
+  <!-- 22시 (240도) - 낮음 -->
+  <line x1="256" y1="176" x2="308" y2="230" stroke="#FF2D55" stroke-width="7" stroke-linecap="round" opacity="0.45"/>
+  <!-- 23시 (255도) - 아주 낮음 -->
+  <line x1="256" y1="176" x2="290" y2="248" stroke="#FF2D55" stroke-width="5" stroke-linecap="round" opacity="0.3"/>
+
+  <!-- 내부 동심원 (기준선) -->
+  <circle cx="256" cy="176" r="80" fill="none" stroke="#FF2D55" stroke-width="0.8" opacity="0.25"/>
+  <circle cx="256" cy="176" r="60" fill="none" stroke="#FF9F0A" stroke-width="0.8" opacity="0.2"/>
+  <circle cx="256" cy="176" r="40" fill="none" stroke="#FF9F0A" stroke-width="0.8" opacity="0.15"/>
+
+  <!-- 시계 중심 (원형 차트의 축) -->
+  <circle cx="256" cy="176" r="22" fill="#0f0000" stroke="#FF2D55" stroke-width="2" filter="url(#glow10s)"/>
+  <circle cx="256" cy="176" r="15" fill="url(#centerCore10)" opacity="0.8" filter="url(#glow10m)"/>
+  <circle cx="256" cy="176" r="6" fill="#FFFFFF" filter="url(#glow10m)"/>
+
+  <!-- 시계바늘 (시침) - 현재 분석 중인 시간 표시 -->
+  <line x1="256" y1="176" x2="256" y2="116" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" opacity="0.9" filter="url(#glow10s)"/>
+  <!-- 분침 -->
+  <line x1="256" y1="176" x2="310" y2="148" stroke="#FF9F0A" stroke-width="2" stroke-linecap="round" opacity="0.8" filter="url(#glow10s)"/>
+
+  <!-- 하단 통계 영역 -->
+  <rect x="60" y="395" width="392" height="80" rx="6" fill="#1a0500" stroke="#FF2D55" stroke-width="1" stroke-opacity="0.3"/>
+
+  <!-- 하단 바 차트 (요일별 커밋) -->
+  <rect x="85" y="415" width="24" height="48" fill="#FF2D55" opacity="0.6" rx="3" filter="url(#glow10s)"/>
+  <rect x="120" y="425" width="24" height="38" fill="#FF9F0A" opacity="0.6" rx="3"/>
+  <rect x="155" y="405" width="24" height="58" fill="#FF2D55" opacity="0.7" rx="3" filter="url(#glow10s)"/>
+  <rect x="190" y="418" width="24" height="45" fill="#FF9F0A" opacity="0.65" rx="3"/>
+  <rect x="225" y="400" width="24" height="63" fill="#FF2D55" opacity="0.8" rx="3" filter="url(#glow10m)"/>
+  <rect x="260" y="408" width="24" height="55" fill="#FF9F0A" opacity="0.7" rx="3" filter="url(#glow10s)"/>
+  <rect x="295" y="420" width="24" height="43" fill="#FF2D55" opacity="0.6" rx="3"/>
+  <rect x="330" y="428" width="24" height="35" fill="#FF9F0A" opacity="0.55" rx="3"/>
+  <rect x="365" y="415" width="24" height="48" fill="#FF2D55" opacity="0.6" rx="3" filter="url(#glow10s)"/>
+  <rect x="400" y="422" width="24" height="41" fill="#FF9F0A" opacity="0.6" rx="3"/>
+
+  <!-- 하단 라인 -->
+  <line x1="75" y1="463" x2="437" y2="463" stroke="#FF2D55" stroke-width="0.8" opacity="0.4"/>
+
+  <!-- 차트 제목 느낌의 장식 점 -->
+  <circle cx="75" cy="475" r="3" fill="#FF2D55" opacity="0.7"/>
+  <rect x="84" y="473" width="60" height="4" fill="#FF2D55" opacity="0.3" rx="2"/>
+  <circle cx="200" cy="475" r="3" fill="#FF9F0A" opacity="0.7"/>
+  <rect x="209" y="473" width="50" height="4" fill="#FF9F0A" opacity="0.3" rx="2"/>
+  <circle cx="315" cy="475" r="3" fill="#FF2D55" opacity="0.5"/>
+  <rect x="324" y="473" width="40" height="4" fill="#FF2D55" opacity="0.2" rx="2"/>
+</svg>

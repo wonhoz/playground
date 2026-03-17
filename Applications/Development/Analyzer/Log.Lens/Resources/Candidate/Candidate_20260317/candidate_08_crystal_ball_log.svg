@@ -1,0 +1,157 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg08" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#12073a"/>
+      <stop offset="70%" stop-color="#0a0520"/>
+      <stop offset="100%" stop-color="#0a0514"/>
+    </radialGradient>
+    <radialGradient id="crystal_grad" cx="38%" cy="32%" r="65%">
+      <stop offset="0%" stop-color="#e8deff"/>
+      <stop offset="20%" stop-color="#C4B5FD"/>
+      <stop offset="50%" stop-color="#8B5CF6"/>
+      <stop offset="75%" stop-color="#5B21B6"/>
+      <stop offset="100%" stop-color="#2E1065"/>
+    </radialGradient>
+    <radialGradient id="inner_glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#C4B5FD" stop-opacity="0.6"/>
+      <stop offset="60%" stop-color="#8B5CF6" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#8B5CF6" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="orb_outer_glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#8B5CF6" stop-opacity="0.5"/>
+      <stop offset="60%" stop-color="#8B5CF6" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#8B5CF6" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="crystal_glow">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="soft_crystal">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="log_soft">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <radialGradient id="log_stream_r" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FF4444"/>
+      <stop offset="100%" stop-color="#FF4444" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="stand_grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#2E1065"/>
+      <stop offset="30%" stop-color="#5B21B6"/>
+      <stop offset="50%" stop-color="#7C3AED"/>
+      <stop offset="70%" stop-color="#5B21B6"/>
+      <stop offset="100%" stop-color="#2E1065"/>
+    </linearGradient>
+    <clipPath id="crystal_clip">
+      <circle cx="256" cy="220" r="150"/>
+    </clipPath>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="512" height="512" fill="url(#bg08)"/>
+
+  <!-- 배경 별 -->
+  <circle cx="30" cy="30" r="1.5" fill="#C4B5FD" opacity="0.7"/>
+  <circle cx="80" cy="60" r="1" fill="#C4B5FD" opacity="0.5"/>
+  <circle cx="150" cy="25" r="1.2" fill="white" opacity="0.6"/>
+  <circle cx="400" cy="35" r="1" fill="#C4B5FD" opacity="0.7"/>
+  <circle cx="460" cy="15" r="1.5" fill="white" opacity="0.6"/>
+  <circle cx="490" cy="55" r="1" fill="#C4B5FD" opacity="0.5"/>
+  <circle cx="50" cy="120" r="0.8" fill="white" opacity="0.4"/>
+  <circle cx="470" cy="100" r="0.8" fill="#C4B5FD" opacity="0.4"/>
+
+  <!-- 배경 마법 파티클 -->
+  <circle cx="60" cy="200" r="2" fill="#8B5CF6" opacity="0.5" filter="url(#soft_crystal)"/>
+  <circle cx="450" cy="150" r="2" fill="#C4B5FD" opacity="0.4" filter="url(#soft_crystal)"/>
+  <circle cx="90" cy="320" r="1.5" fill="#8B5CF6" opacity="0.4" filter="url(#soft_crystal)"/>
+  <circle cx="430" cy="280" r="1.5" fill="#C4B5FD" opacity="0.4" filter="url(#soft_crystal)"/>
+  <circle cx="120" cy="400" r="2" fill="#8B5CF6" opacity="0.3" filter="url(#soft_crystal)"/>
+  <circle cx="400" cy="380" r="2" fill="#C4B5FD" opacity="0.3" filter="url(#soft_crystal)"/>
+
+  <!-- 수정구슬 외부 글로우 -->
+  <circle cx="256" cy="220" r="175" fill="url(#orb_outer_glow)" filter="url(#crystal_glow)"/>
+
+  <!-- 수정구슬 본체 -->
+  <circle cx="256" cy="220" r="155" fill="#1a0a3a" opacity="0.5"/>
+  <circle cx="256" cy="220" r="152" fill="url(#crystal_grad)"/>
+
+  <!-- 구슬 내부 로그 스트림 (마법 데이터) -->
+  <!-- ERROR 스트림 - 빨강 -->
+  <path d="M 130 180 Q 180 170 230 185 Q 280 200 330 180 Q 360 168 382 178"
+        fill="none" stroke="#FF4444" stroke-width="2.5" opacity="0.9" filter="url(#log_soft)" clip-path="url(#crystal_clip)"/>
+  <!-- WARN 스트림 - 노랑 -->
+  <path d="M 115 205 Q 175 195 225 210 Q 275 225 320 205 Q 355 190 395 202"
+        fill="none" stroke="#FFB300" stroke-width="2.5" opacity="0.9" filter="url(#log_soft)" clip-path="url(#crystal_clip)"/>
+  <!-- INFO 스트림 - 그린 -->
+  <path d="M 110 230 Q 170 220 220 235 Q 270 250 315 230 Q 355 215 400 228"
+        fill="none" stroke="#00FF87" stroke-width="2.5" opacity="0.9" filter="url(#log_soft)" clip-path="url(#crystal_clip)"/>
+  <!-- DEBUG 스트림 - 블루 -->
+  <path d="M 118 255 Q 175 245 222 260 Q 270 275 318 255 Q 355 240 395 252"
+        fill="none" stroke="#42A5F5" stroke-width="2.5" opacity="0.9" filter="url(#log_soft)" clip-path="url(#crystal_clip)"/>
+  <!-- TRACE 스트림 - 퍼플 -->
+  <path d="M 128 280 Q 180 270 228 285 Q 276 300 324 280 Q 360 265 390 278"
+        fill="none" stroke="#CE93D8" stroke-width="2" opacity="0.8" filter="url(#log_soft)" clip-path="url(#crystal_clip)"/>
+
+  <!-- 추가 희미한 스트림 -->
+  <path d="M 140 160 Q 200 152 250 162 Q 300 172 350 160 Q 370 153 390 158"
+        fill="none" stroke="#FF4444" stroke-width="1.5" opacity="0.5" clip-path="url(#crystal_clip)"/>
+  <path d="M 135 305 Q 190 298 240 308 Q 290 318 340 305 Q 368 296 392 302"
+        fill="none" stroke="#42A5F5" stroke-width="1.5" opacity="0.5" clip-path="url(#crystal_clip)"/>
+
+  <!-- 구슬 내부 파티클/글리터 -->
+  <circle cx="200" cy="190" r="3" fill="#FFFFFF" opacity="0.6" filter="url(#soft_crystal)" clip-path="url(#crystal_clip)"/>
+  <circle cx="320" cy="200" r="2.5" fill="#FFFFFF" opacity="0.5" filter="url(#soft_crystal)" clip-path="url(#crystal_clip)"/>
+  <circle cx="230" cy="260" r="3" fill="#C4B5FD" opacity="0.7" filter="url(#soft_crystal)" clip-path="url(#crystal_clip)"/>
+  <circle cx="290" cy="240" r="2" fill="#FFFFFF" opacity="0.5" filter="url(#soft_crystal)" clip-path="url(#crystal_clip)"/>
+  <circle cx="175" cy="240" r="2" fill="#FF4444" opacity="0.6" filter="url(#soft_crystal)" clip-path="url(#crystal_clip)"/>
+  <circle cx="340" cy="265" r="2" fill="#FFB300" opacity="0.6" filter="url(#soft_crystal)" clip-path="url(#crystal_clip)"/>
+
+  <!-- 구슬 내부 글로우 (중앙) -->
+  <circle cx="256" cy="220" r="80" fill="url(#inner_glow)" clip-path="url(#crystal_clip)"/>
+
+  <!-- 반사/하이라이트 (상단 좌측) -->
+  <ellipse cx="196" cy="148" rx="55" ry="30" fill="white" opacity="0.18" transform="rotate(-25, 196, 148)" clip-path="url(#crystal_clip)"/>
+  <ellipse cx="185" cy="142" rx="25" ry="12" fill="white" opacity="0.25" transform="rotate(-25, 185, 142)" clip-path="url(#crystal_clip)"/>
+
+  <!-- 반사/하이라이트 (하단 우측 - 보조) -->
+  <ellipse cx="330" cy="295" rx="30" ry="15" fill="#8B5CF6" opacity="0.15" transform="rotate(-20, 330, 295)" clip-path="url(#crystal_clip)"/>
+
+  <!-- 구슬 테두리 -->
+  <circle cx="256" cy="220" r="152" fill="none" stroke="#C4B5FD" stroke-width="2" opacity="0.4"/>
+  <circle cx="256" cy="220" r="155" fill="none" stroke="#8B5CF6" stroke-width="1" opacity="0.2"/>
+
+  <!-- 수정구슬 받침대 -->
+  <!-- 받침대 상단 (원형 링) -->
+  <ellipse cx="256" cy="373" rx="80" ry="16" fill="#2E1065" opacity="0.9"/>
+  <ellipse cx="256" cy="370" rx="78" ry="14" fill="url(#stand_grad)"/>
+  <ellipse cx="256" cy="368" rx="60" ry="10" fill="#5B21B6" opacity="0.7"/>
+
+  <!-- 받침대 기둥 -->
+  <path d="M 220 372 Q 225 400 210 420 L 302 420 Q 287 400 292 372Z" fill="url(#stand_grad)"/>
+
+  <!-- 받침대 베이스 -->
+  <ellipse cx="256" cy="420" rx="75" ry="12" fill="#2E1065"/>
+  <ellipse cx="256" cy="418" rx="70" ry="10" fill="url(#stand_grad)"/>
+  <ellipse cx="256" cy="416" rx="60" ry="7" fill="#5B21B6" opacity="0.6"/>
+
+  <!-- 받침대 장식 -->
+  <ellipse cx="256" cy="372" rx="30" ry="5" fill="#C4B5FD" opacity="0.3"/>
+
+  <!-- 로그 라인 하단 패널 -->
+  <rect x="30" y="445" width="452" height="50" rx="6" fill="#0a0520" stroke="#8B5CF6" stroke-width="1" opacity="0.6"/>
+
+  <circle cx="50" cy="460" r="5" fill="#FF4444" filter="url(#log_soft)"/>
+  <rect x="60" y="457" width="180" height="3" rx="1.5" fill="#FF4444" opacity="0.7"/>
+
+  <circle cx="50" cy="475" r="5" fill="#00FF87" filter="url(#log_soft)"/>
+  <rect x="60" y="472" width="220" height="3" rx="1.5" fill="#00FF87" opacity="0.7"/>
+
+  <circle cx="260" cy="460" r="5" fill="#FFB300" filter="url(#log_soft)"/>
+  <rect x="270" y="457" width="190" height="3" rx="1.5" fill="#FFB300" opacity="0.7"/>
+
+  <circle cx="260" cy="475" r="5" fill="#42A5F5" filter="url(#log_soft)"/>
+  <rect x="270" y="472" width="160" height="3" rx="1.5" fill="#42A5F5" opacity="0.7"/>
+</svg>

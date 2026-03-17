@@ -1,0 +1,131 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg02" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#2d1b69"/>
+      <stop offset="60%" stop-color="#1a1a4e"/>
+      <stop offset="100%" stop-color="#0a0820"/>
+    </radialGradient>
+    <radialGradient id="core02" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="30%" stop-color="#FFD700"/>
+      <stop offset="70%" stop-color="#9B59B6"/>
+      <stop offset="100%" stop-color="#2d1b69" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="arm02a" cx="0%" cy="50%" r="100%">
+      <stop offset="0%" stop-color="#6C63FF" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#6C63FF" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glow02">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="starGlow">
+      <feGaussianBlur stdDeviation="1.5" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="coreGlow">
+      <feGaussianBlur stdDeviation="12" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="512" height="512" fill="url(#bg02)"/>
+
+  <!-- 배경 별들 -->
+  <circle cx="45" cy="30" r="1" fill="#FFFFFF" opacity="0.6"/>
+  <circle cx="120" cy="15" r="1.5" fill="#FFFFFF" opacity="0.8"/>
+  <circle cx="200" cy="40" r="1" fill="#FFD700" opacity="0.7"/>
+  <circle cx="380" cy="20" r="1" fill="#FFFFFF" opacity="0.5"/>
+  <circle cx="460" cy="50" r="1.5" fill="#FFFFFF" opacity="0.7"/>
+  <circle cx="30" cy="100" r="1" fill="#FFD700" opacity="0.6"/>
+  <circle cx="490" cy="120" r="1" fill="#FFFFFF" opacity="0.8"/>
+  <circle cx="70" cy="180" r="1.5" fill="#FFFFFF" opacity="0.5"/>
+  <circle cx="440" cy="160" r="1" fill="#FFD700" opacity="0.6"/>
+  <circle cx="20" cy="280" r="1" fill="#FFFFFF" opacity="0.7"/>
+  <circle cx="500" cy="300" r="1.5" fill="#FFFFFF" opacity="0.6"/>
+  <circle cx="50" cy="400" r="1" fill="#FFD700" opacity="0.5"/>
+  <circle cx="470" cy="380" r="1" fill="#FFFFFF" opacity="0.8"/>
+  <circle cx="100" cy="480" r="1.5" fill="#FFFFFF" opacity="0.6"/>
+  <circle cx="410" cy="470" r="1" fill="#FFD700" opacity="0.7"/>
+  <circle cx="160" cy="490" r="1" fill="#FFFFFF" opacity="0.5"/>
+  <circle cx="350" cy="500" r="1.5" fill="#FFFFFF" opacity="0.6"/>
+  <circle cx="310" cy="22" r="1" fill="#FFFFFF" opacity="0.7"/>
+  <circle cx="80" cy="320" r="1" fill="#6C63FF" opacity="0.8"/>
+  <circle cx="430" cy="240" r="1" fill="#6C63FF" opacity="0.7"/>
+
+  <!-- 은하 나선팔 - 브랜치 표현 -->
+  <!-- 나선팔 1 (오른쪽 위) -->
+  <path d="M256,256 Q310,220 360,180 Q400,150 430,120 Q450,100 460,80"
+        fill="none" stroke="#6C63FF" stroke-width="18" opacity="0.25" stroke-linecap="round"/>
+  <path d="M256,256 Q310,220 360,180 Q400,150 430,120 Q450,100 460,80"
+        fill="none" stroke="#9B59B6" stroke-width="8" opacity="0.5" stroke-linecap="round"/>
+  <path d="M256,256 Q310,220 360,180 Q400,150 430,120 Q450,100 460,80"
+        fill="none" stroke="#FFFFFF" stroke-width="2" opacity="0.7" stroke-linecap="round" filter="url(#glow02)"/>
+
+  <!-- 나선팔 2 (왼쪽 아래) -->
+  <path d="M256,256 Q200,290 150,330 Q110,360 80,390 Q60,410 50,430"
+        fill="none" stroke="#6C63FF" stroke-width="18" opacity="0.25" stroke-linecap="round"/>
+  <path d="M256,256 Q200,290 150,330 Q110,360 80,390 Q60,410 50,430"
+        fill="none" stroke="#9B59B6" stroke-width="8" opacity="0.5" stroke-linecap="round"/>
+  <path d="M256,256 Q200,290 150,330 Q110,360 80,390 Q60,410 50,430"
+        fill="none" stroke="#FFFFFF" stroke-width="2" opacity="0.7" stroke-linecap="round" filter="url(#glow02)"/>
+
+  <!-- 나선팔 3 (왼쪽 위) -->
+  <path d="M256,256 Q220,210 190,170 Q165,135 145,105 Q130,80 120,60"
+        fill="none" stroke="#3498DB" stroke-width="15" opacity="0.2" stroke-linecap="round"/>
+  <path d="M256,256 Q220,210 190,170 Q165,135 145,105 Q130,80 120,60"
+        fill="none" stroke="#5DADE2" stroke-width="6" opacity="0.45" stroke-linecap="round"/>
+  <path d="M256,256 Q220,210 190,170 Q165,135 145,105 Q130,80 120,60"
+        fill="none" stroke="#AED6F1" stroke-width="1.5" opacity="0.6" stroke-linecap="round" filter="url(#glow02)"/>
+
+  <!-- 나선팔 4 (오른쪽 아래) -->
+  <path d="M256,256 Q295,300 330,340 Q360,372 385,400 Q400,420 410,445"
+        fill="none" stroke="#3498DB" stroke-width="15" opacity="0.2" stroke-linecap="round"/>
+  <path d="M256,256 Q295,300 330,340 Q360,372 385,400 Q400,420 410,445"
+        fill="none" stroke="#5DADE2" stroke-width="6" opacity="0.45" stroke-linecap="round"/>
+  <path d="M256,256 Q295,300 330,340 Q360,372 385,400 Q400,420 410,445"
+        fill="none" stroke="#AED6F1" stroke-width="1.5" opacity="0.6" stroke-linecap="round" filter="url(#glow02)"/>
+
+  <!-- 나선팔 5 (오른쪽 중간) -->
+  <path d="M256,256 Q320,250 370,235 Q410,220 445,205"
+        fill="none" stroke="#E74C3C" stroke-width="10" opacity="0.2" stroke-linecap="round"/>
+  <path d="M256,256 Q320,250 370,235 Q410,220 445,205"
+        fill="none" stroke="#F1948A" stroke-width="4" opacity="0.4" stroke-linecap="round"/>
+
+  <!-- 나선팔 6 (왼쪽 중간) -->
+  <path d="M256,256 Q195,265 145,278 Q100,290 68,305"
+        fill="none" stroke="#2ECC71" stroke-width="10" opacity="0.2" stroke-linecap="round"/>
+  <path d="M256,256 Q195,265 145,278 Q100,290 68,305"
+        fill="none" stroke="#82E0AA" stroke-width="4" opacity="0.4" stroke-linecap="round"/>
+
+  <!-- 브랜치 끝 노드 (커밋 포인트) -->
+  <circle cx="460" cy="80" r="6" fill="#FFD700" filter="url(#starGlow)" opacity="0.9"/>
+  <circle cx="50" cy="430" r="6" fill="#FFD700" filter="url(#starGlow)" opacity="0.9"/>
+  <circle cx="120" cy="60" r="5" fill="#AED6F1" filter="url(#starGlow)" opacity="0.8"/>
+  <circle cx="410" cy="445" r="5" fill="#AED6F1" filter="url(#starGlow)" opacity="0.8"/>
+  <circle cx="445" cy="205" r="4" fill="#F1948A" filter="url(#starGlow)" opacity="0.8"/>
+  <circle cx="68" cy="305" r="4" fill="#82E0AA" filter="url(#starGlow)" opacity="0.8"/>
+
+  <!-- 중간 별 노드들 -->
+  <circle cx="360" cy="180" r="4" fill="#9B59B6" filter="url(#starGlow)" opacity="0.8"/>
+  <circle cx="150" cy="330" r="4" fill="#9B59B6" filter="url(#starGlow)" opacity="0.8"/>
+  <circle cx="190" cy="170" r="3.5" fill="#5DADE2" filter="url(#starGlow)" opacity="0.7"/>
+  <circle cx="330" cy="340" r="3.5" fill="#5DADE2" filter="url(#starGlow)" opacity="0.7"/>
+  <circle cx="370" cy="235" r="3" fill="#F1948A" filter="url(#starGlow)" opacity="0.7"/>
+  <circle cx="145" cy="278" r="3" fill="#82E0AA" filter="url(#starGlow)" opacity="0.7"/>
+
+  <!-- 은하 중심부 - main 브랜치 -->
+  <circle cx="256" cy="256" r="50" fill="url(#core02)" filter="url(#coreGlow)" opacity="0.6"/>
+  <circle cx="256" cy="256" r="25" fill="#2d1b69" opacity="0.9"/>
+  <circle cx="256" cy="256" r="18" fill="#FFD700" opacity="0.8" filter="url(#coreGlow)"/>
+  <circle cx="256" cy="256" r="10" fill="#FFFFFF" filter="url(#coreGlow)"/>
+
+  <!-- git 브랜치 심볼 (중앙) -->
+  <circle cx="256" cy="246" r="5" fill="#FFFFFF" opacity="0.9"/>
+  <circle cx="248" cy="262" r="4" fill="#FFFFFF" opacity="0.9"/>
+  <circle cx="264" cy="262" r="4" fill="#FFFFFF" opacity="0.9"/>
+  <line x1="256" y1="251" x2="256" y2="258" stroke="#FFFFFF" stroke-width="2" opacity="0.8"/>
+  <line x1="256" y1="258" x2="249" y2="258" stroke="#FFFFFF" stroke-width="1.5" opacity="0.8"/>
+  <line x1="256" y1="258" x2="263" y2="258" stroke="#FFFFFF" stroke-width="1.5" opacity="0.8"/>
+</svg>

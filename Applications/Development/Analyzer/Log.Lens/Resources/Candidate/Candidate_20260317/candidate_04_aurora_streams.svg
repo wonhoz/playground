@@ -1,0 +1,150 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg04" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#050010"/>
+      <stop offset="50%" stop-color="#080018"/>
+      <stop offset="100%" stop-color="#050010"/>
+    </linearGradient>
+    <!-- 오로라 스트림 그라데이션들 -->
+    <linearGradient id="aurora_pink" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF6EC7" stop-opacity="0"/>
+      <stop offset="30%" stop-color="#FF6EC7" stop-opacity="0.9"/>
+      <stop offset="60%" stop-color="#FF2D9B" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#FF6EC7" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="aurora_green" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00FF87" stop-opacity="0"/>
+      <stop offset="25%" stop-color="#00FF87" stop-opacity="0.8"/>
+      <stop offset="70%" stop-color="#00CC6A" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#00FF87" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="aurora_purple" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#B44FFF" stop-opacity="0"/>
+      <stop offset="40%" stop-color="#B44FFF" stop-opacity="0.85"/>
+      <stop offset="75%" stop-color="#8B2FDD" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#B44FFF" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="aurora_cyan" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00E5FF" stop-opacity="0"/>
+      <stop offset="35%" stop-color="#00E5FF" stop-opacity="0.7"/>
+      <stop offset="65%" stop-color="#00B8D4" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#00E5FF" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="aurora_blur">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="strong_aurora">
+      <feGaussianBlur stdDeviation="12" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="log_glow">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <linearGradient id="err_line" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FF6EC7" stop-opacity="0"/>
+      <stop offset="10%" stop-color="#FF6EC7"/>
+      <stop offset="90%" stop-color="#FF2D9B"/>
+      <stop offset="100%" stop-color="#FF2D9B" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="warn_line" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FFD700" stop-opacity="0"/>
+      <stop offset="10%" stop-color="#FFD700"/>
+      <stop offset="90%" stop-color="#FFB300"/>
+      <stop offset="100%" stop-color="#FFB300" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="info_line" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00FF87" stop-opacity="0"/>
+      <stop offset="10%" stop-color="#00FF87"/>
+      <stop offset="90%" stop-color="#00CC6A"/>
+      <stop offset="100%" stop-color="#00CC6A" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="debug_line" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#B44FFF" stop-opacity="0"/>
+      <stop offset="10%" stop-color="#B44FFF"/>
+      <stop offset="90%" stop-color="#8B2FDD"/>
+      <stop offset="100%" stop-color="#8B2FDD" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="512" height="512" fill="url(#bg04)"/>
+
+  <!-- 별 배경 -->
+  <circle cx="40" cy="30" r="1" fill="white" opacity="0.8"/>
+  <circle cx="80" cy="55" r="0.8" fill="white" opacity="0.6"/>
+  <circle cx="150" cy="20" r="1.2" fill="white" opacity="0.7"/>
+  <circle cx="220" cy="45" r="0.8" fill="white" opacity="0.5"/>
+  <circle cx="300" cy="15" r="1" fill="white" opacity="0.8"/>
+  <circle cx="380" cy="35" r="0.8" fill="white" opacity="0.6"/>
+  <circle cx="450" cy="25" r="1.2" fill="white" opacity="0.7"/>
+  <circle cx="490" cy="60" r="0.8" fill="white" opacity="0.5"/>
+  <circle cx="120" cy="75" r="0.8" fill="white" opacity="0.4"/>
+  <circle cx="350" cy="65" r="0.8" fill="white" opacity="0.4"/>
+
+  <!-- 오로라 스트림 레이어들 (강한 글로우) -->
+  <!-- 퍼플 오로라 (뒤) -->
+  <path d="M -50 380 Q 80 150 180 200 Q 280 250 350 100 Q 420 -50 560 120"
+        fill="none" stroke="url(#aurora_purple)" stroke-width="80" opacity="0.35" filter="url(#strong_aurora)"/>
+  <path d="M -50 380 Q 80 150 180 200 Q 280 250 350 100 Q 420 -50 560 120"
+        fill="none" stroke="#B44FFF" stroke-width="3" opacity="0.7" filter="url(#aurora_blur)"/>
+
+  <!-- 핑크 오로라 -->
+  <path d="M -30 420 Q 100 200 200 240 Q 300 280 380 130 Q 450 -20 550 150"
+        fill="none" stroke="url(#aurora_pink)" stroke-width="60" opacity="0.4" filter="url(#strong_aurora)"/>
+  <path d="M -30 420 Q 100 200 200 240 Q 300 280 380 130 Q 450 -20 550 150"
+        fill="none" stroke="#FF6EC7" stroke-width="2.5" opacity="0.8" filter="url(#aurora_blur)"/>
+
+  <!-- 그린 오로라 (앞) -->
+  <path d="M -20 460 Q 120 250 220 280 Q 320 310 400 160 Q 470 30 560 200"
+        fill="none" stroke="url(#aurora_green)" stroke-width="50" opacity="0.45" filter="url(#strong_aurora)"/>
+  <path d="M -20 460 Q 120 250 220 280 Q 320 310 400 160 Q 470 30 560 200"
+        fill="none" stroke="#00FF87" stroke-width="2" opacity="0.9" filter="url(#aurora_blur)"/>
+
+  <!-- 사이언 오로라 -->
+  <path d="M 10 500 Q 140 300 240 320 Q 330 340 410 190 Q 480 60 560 250"
+        fill="none" stroke="url(#aurora_cyan)" stroke-width="40" opacity="0.35" filter="url(#strong_aurora)"/>
+  <path d="M 10 500 Q 140 300 240 320 Q 330 340 410 190 Q 480 60 560 250"
+        fill="none" stroke="#00E5FF" stroke-width="1.5" opacity="0.7" filter="url(#aurora_blur)"/>
+
+  <!-- 오로라 하단 페이드 -->
+  <rect x="0" y="350" width="512" height="162" fill="url(#bg04)" opacity="0.6"/>
+
+  <!-- 로그 라인 영역 (하단) -->
+  <rect x="20" y="370" width="472" height="130" rx="8" fill="#0a0020" opacity="0.8"/>
+  <rect x="20" y="370" width="472" height="130" rx="8" fill="none" stroke="#B44FFF" stroke-width="1" opacity="0.3"/>
+
+  <!-- ERROR 로그 라인 -->
+  <rect x="36" y="385" width="440" height="3" rx="1.5" fill="url(#err_line)" filter="url(#log_glow)"/>
+  <rect x="36" y="393" width="320" height="2" rx="1" fill="#FF6EC7" opacity="0.4"/>
+
+  <!-- WARN 로그 라인 -->
+  <rect x="36" y="408" width="440" height="3" rx="1.5" fill="url(#warn_line)" filter="url(#log_glow)"/>
+  <rect x="36" y="416" width="280" height="2" rx="1" fill="#FFD700" opacity="0.4"/>
+
+  <!-- INFO 로그 라인 -->
+  <rect x="36" y="431" width="440" height="3" rx="1.5" fill="url(#info_line)" filter="url(#log_glow)"/>
+  <rect x="36" y="439" width="360" height="2" rx="1" fill="#00FF87" opacity="0.4"/>
+
+  <!-- DEBUG 로그 라인 -->
+  <rect x="36" y="454" width="440" height="3" rx="1.5" fill="url(#debug_line)" filter="url(#log_glow)"/>
+  <rect x="36" y="462" width="300" height="2" rx="1" fill="#B44FFF" opacity="0.4"/>
+
+  <!-- 로그 레벨 배지 -->
+  <rect x="36" y="382" width="42" height="16" rx="3" fill="#FF6EC7" opacity="0.9"/>
+  <text x="57" y="394" font-family="monospace" font-size="8" fill="#050010" text-anchor="middle" font-weight="bold">ERROR</text>
+
+  <rect x="36" y="405" width="42" height="16" rx="3" fill="#FFD700" opacity="0.9"/>
+  <text x="57" y="417" font-family="monospace" font-size="8" fill="#050010" text-anchor="middle" font-weight="bold">WARN</text>
+
+  <rect x="36" y="428" width="42" height="16" rx="3" fill="#00FF87" opacity="0.9"/>
+  <text x="57" y="440" font-family="monospace" font-size="8" fill="#050010" text-anchor="middle" font-weight="bold">INFO</text>
+
+  <rect x="36" y="451" width="42" height="16" rx="3" fill="#B44FFF" opacity="0.9"/>
+  <text x="57" y="463" font-family="monospace" font-size="8" fill="white" text-anchor="middle" font-weight="bold">DEBUG</text>
+
+  <!-- 오로라 반사 (상단) -->
+  <ellipse cx="256" cy="60" rx="200" ry="30" fill="#B44FFF" opacity="0.05"/>
+  <ellipse cx="256" cy="50" rx="150" ry="20" fill="#FF6EC7" opacity="0.05"/>
+</svg>

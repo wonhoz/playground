@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg04" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#1a0f2e"/>
+      <stop offset="100%" stop-color="#0d0a1a"/>
+    </radialGradient>
+    <linearGradient id="vortex_grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#9B59B6"/>
+      <stop offset="50%" stop-color="#E91E63"/>
+      <stop offset="100%" stop-color="#9B59B6"/>
+    </linearGradient>
+    <linearGradient id="clip_center" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#cc66ff"/>
+      <stop offset="100%" stop-color="#ff3399"/>
+    </linearGradient>
+    <filter id="glow04">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="strong_glow04">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="512" height="512" fill="url(#bg04)" rx="48"/>
+
+  <!-- 소용돌이 외곽 링들 -->
+  <!-- 가장 바깥 소용돌이 암 -->
+  <path d="M 256 256 Q 370 120, 420 256 Q 370 392, 256 420 Q 142 392, 92 256 Q 142 120, 256 80 Q 390 80, 430 200"
+        fill="none" stroke="#9B59B6" stroke-width="2.5" opacity="0.5"/>
+  <path d="M 256 256 Q 360 140, 400 256 Q 360 372, 256 400 Q 152 372, 112 256 Q 152 140, 256 100 Q 375 100, 410 205"
+        fill="none" stroke="#9B59B6" stroke-width="2" opacity="0.4"/>
+
+  <!-- 소용돌이 나선 (5개 암) -->
+  <!-- 암 1 -->
+  <path d="M 256 256 Q 310 200, 360 180 Q 400 165, 420 140"
+        fill="none" stroke="#E91E63" stroke-width="3" opacity="0.8" filter="url(#glow04)"/>
+  <!-- 암 2 -->
+  <path d="M 256 256 Q 320 270, 370 310 Q 405 345, 420 385"
+        fill="none" stroke="#9B59B6" stroke-width="3" opacity="0.8" filter="url(#glow04)"/>
+  <!-- 암 3 -->
+  <path d="M 256 256 Q 230 330, 190 360 Q 155 385, 130 415"
+        fill="none" stroke="#E91E63" stroke-width="3" opacity="0.7" filter="url(#glow04)"/>
+  <!-- 암 4 -->
+  <path d="M 256 256 Q 180 245, 140 205 Q 108 170, 88 135"
+        fill="none" stroke="#9B59B6" stroke-width="3" opacity="0.7" filter="url(#glow04)"/>
+  <!-- 암 5 -->
+  <path d="M 256 256 Q 255 180, 255 140 Q 256 105, 256 72"
+        fill="none" stroke="#cc44ff" stroke-width="2.5" opacity="0.65" filter="url(#glow04)"/>
+
+  <!-- 소용돌이 암 끝 데이터 파티클 -->
+  <circle cx="420" cy="140" r="6" fill="#E91E63" opacity="0.9" filter="url(#glow04)"/>
+  <circle cx="416" cy="130" r="3" fill="#ff66aa" opacity="0.7"/>
+  <circle cx="425" cy="148" r="3" fill="#ff66aa" opacity="0.6"/>
+
+  <circle cx="420" cy="385" r="6" fill="#9B59B6" opacity="0.9" filter="url(#glow04)"/>
+  <circle cx="130" cy="415" r="6" fill="#E91E63" opacity="0.9" filter="url(#glow04)"/>
+  <circle cx="88" cy="135" r="6" fill="#9B59B6" opacity="0.9" filter="url(#glow04)"/>
+  <circle cx="256" cy="72" r="6" fill="#cc44ff" opacity="0.9" filter="url(#glow04)"/>
+
+  <!-- 데이터 비트 파티클들 -->
+  <circle cx="340" cy="165" r="3" fill="#ff88cc" opacity="0.8"/>
+  <circle cx="380" cy="185" r="2.5" fill="#cc88ff" opacity="0.7"/>
+  <circle cx="395" cy="330" r="3" fill="#ff44aa" opacity="0.8"/>
+  <circle cx="355" cy="350" r="2.5" fill="#aa44ff" opacity="0.7"/>
+  <circle cx="165" cy="370" r="3" fill="#ff88cc" opacity="0.8"/>
+  <circle cx="145" cy="200" r="3" fill="#cc88ff" opacity="0.8"/>
+  <circle cx="110" cy="165" r="2.5" fill="#ff44aa" opacity="0.7"/>
+
+  <!-- 중앙 소용돌이 코어 글로우 -->
+  <circle cx="256" cy="256" r="55" fill="#1a0530" opacity="0.7"/>
+  <circle cx="256" cy="256" r="50" fill="none" stroke="#E91E63" stroke-width="2" opacity="0.6" filter="url(#glow04)"/>
+  <circle cx="256" cy="256" r="38" fill="none" stroke="#9B59B6" stroke-width="2.5" opacity="0.7" filter="url(#glow04)"/>
+
+  <!-- 중앙 클립보드 -->
+  <rect x="228" y="224" width="56" height="70" rx="8" ry="8"
+        fill="#150820" stroke="url(#clip_center)" stroke-width="3" filter="url(#glow04)"/>
+  <!-- 클립보드 클립 -->
+  <rect x="242" y="216" width="28" height="16" rx="5" ry="5"
+        fill="#150820" stroke="url(#clip_center)" stroke-width="2.5" filter="url(#glow04)"/>
+  <!-- 클립보드 텍스트 라인 -->
+  <line x1="238" y1="248" x2="276" y2="248" stroke="#cc66ff" stroke-width="2" opacity="0.8"/>
+  <line x1="238" y1="260" x2="276" y2="260" stroke="#cc66ff" stroke-width="2" opacity="0.8"/>
+  <line x1="238" y1="272" x2="264" y2="272" stroke="#cc66ff" stroke-width="2" opacity="0.7"/>
+  <line x1="238" y1="284" x2="270" y2="284" stroke="#ff3399" stroke-width="2" opacity="0.7"/>
+
+  <!-- 중앙 강한 글로우 -->
+  <circle cx="256" cy="256" r="20" fill="#E91E63" opacity="0.15" filter="url(#strong_glow04)"/>
+
+  <!-- AI 텍스트 -->
+  <text x="256" y="470" text-anchor="middle" font-family="Arial, sans-serif" font-size="22"
+        font-weight="bold" fill="url(#vortex_grad)" opacity="0.9" filter="url(#glow04)">AI.Clip</text>
+</svg>

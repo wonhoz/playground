@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg06" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#050d28"/>
+      <stop offset="100%" stop-color="#020820"/>
+    </radialGradient>
+    <radialGradient id="star_glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#FFE566" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="const_grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFE566"/>
+      <stop offset="100%" stop-color="#FFFFFF"/>
+    </linearGradient>
+    <filter id="glow06">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="star_filter">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="512" height="512" fill="url(#bg06)" rx="48"/>
+
+  <!-- 배경 미세 별들 -->
+  <circle cx="45" cy="55" r="1" fill="#FFE566" opacity="0.5"/>
+  <circle cx="80" cy="35" r="1.5" fill="#FFFFFF" opacity="0.4"/>
+  <circle cx="120" cy="65" r="1" fill="#FFE566" opacity="0.4"/>
+  <circle cx="440" cy="45" r="1.5" fill="#FFFFFF" opacity="0.5"/>
+  <circle cx="470" cy="80" r="1" fill="#FFE566" opacity="0.4"/>
+  <circle cx="60" cy="420" r="1.5" fill="#FFFFFF" opacity="0.4"/>
+  <circle cx="480" cy="390" r="1" fill="#FFE566" opacity="0.5"/>
+  <circle cx="35" cy="300" r="1" fill="#FFFFFF" opacity="0.3"/>
+  <circle cx="500" cy="260" r="1.5" fill="#FFE566" opacity="0.4"/>
+  <circle cx="150" cy="460" r="1" fill="#FFFFFF" opacity="0.4"/>
+  <circle cx="380" cy="470" r="1.5" fill="#FFE566" opacity="0.5"/>
+  <circle cx="90" cy="180" r="1" fill="#FFFFFF" opacity="0.3"/>
+  <circle cx="430" cy="155" r="1" fill="#FFE566" opacity="0.4"/>
+
+  <!-- 별자리 연결선 (클립보드 형태를 이루는) -->
+  <!-- 클립보드 외곽 별자리 연결 -->
+  <!-- 상단 좌 -> 상단 우 -->
+  <line x1="142" y1="122" x2="370" y2="122" stroke="#FFE566" stroke-width="1.2" opacity="0.5"/>
+  <!-- 상단 우 -> 하단 우 -->
+  <line x1="370" y1="122" x2="370" y2="385" stroke="#FFE566" stroke-width="1.2" opacity="0.5"/>
+  <!-- 하단 우 -> 하단 좌 -->
+  <line x1="370" y1="385" x2="142" y2="385" stroke="#FFE566" stroke-width="1.2" opacity="0.5"/>
+  <!-- 하단 좌 -> 상단 좌 -->
+  <line x1="142" y1="385" x2="142" y2="122" stroke="#FFE566" stroke-width="1.2" opacity="0.5"/>
+
+  <!-- 클립 부분 연결선 -->
+  <line x1="200" y1="88" x2="312" y2="88" stroke="#FFE566" stroke-width="1.2" opacity="0.5"/>
+  <line x1="200" y1="88" x2="200" y2="122" stroke="#FFE566" stroke-width="1.2" opacity="0.5"/>
+  <line x1="312" y1="88" x2="312" y2="122" stroke="#FFE566" stroke-width="1.2" opacity="0.5"/>
+
+  <!-- 내부 텍스트 라인 별자리 -->
+  <line x1="175" y1="185" x2="295" y2="175" stroke="#FFFFFF" stroke-width="1" opacity="0.35"/>
+  <line x1="295" y1="175" x2="338" y2="192" stroke="#FFFFFF" stroke-width="1" opacity="0.35"/>
+  <line x1="175" y1="230" x2="260" y2="222" stroke="#FFFFFF" stroke-width="1" opacity="0.35"/>
+  <line x1="260" y1="222" x2="338" y2="235" stroke="#FFFFFF" stroke-width="1" opacity="0.35"/>
+  <line x1="175" y1="275" x2="240" y2="268" stroke="#FFFFFF" stroke-width="1" opacity="0.3"/>
+  <line x1="240" y1="268" x2="310" y2="280" stroke="#FFFFFF" stroke-width="1" opacity="0.3"/>
+  <line x1="175" y1="320" x2="290" y2="315" stroke="#FFFFFF" stroke-width="1" opacity="0.3"/>
+  <line x1="290" y1="315" x2="338" y2="328" stroke="#FFFFFF" stroke-width="1" opacity="0.3"/>
+
+  <!-- 클립보드 외곽 코너 별 (밝은) -->
+  <circle cx="142" cy="122" r="6" fill="#FFE566" opacity="1" filter="url(#star_filter)"/>
+  <circle cx="142" cy="122" r="3" fill="#FFFFFF"/>
+  <circle cx="370" cy="122" r="6" fill="#FFE566" opacity="1" filter="url(#star_filter)"/>
+  <circle cx="370" cy="122" r="3" fill="#FFFFFF"/>
+  <circle cx="142" cy="385" r="6" fill="#FFE566" opacity="1" filter="url(#star_filter)"/>
+  <circle cx="142" cy="385" r="3" fill="#FFFFFF"/>
+  <circle cx="370" cy="385" r="6" fill="#FFE566" opacity="1" filter="url(#star_filter)"/>
+  <circle cx="370" cy="385" r="3" fill="#FFFFFF"/>
+
+  <!-- 클립 별 -->
+  <circle cx="200" cy="88" r="5" fill="#FFE566" opacity="0.95" filter="url(#star_filter)"/>
+  <circle cx="200" cy="88" r="2.5" fill="#FFFFFF"/>
+  <circle cx="312" cy="88" r="5" fill="#FFE566" opacity="0.95" filter="url(#star_filter)"/>
+  <circle cx="312" cy="88" r="2.5" fill="#FFFFFF"/>
+
+  <!-- 내부 텍스트 라인 별들 (중간 크기) -->
+  <circle cx="175" cy="185" r="3.5" fill="#FFE566" opacity="0.85" filter="url(#glow06)"/>
+  <circle cx="295" cy="175" r="4" fill="#FFFFFF" opacity="0.9" filter="url(#glow06)"/>
+  <circle cx="338" cy="192" r="3.5" fill="#FFE566" opacity="0.85" filter="url(#glow06)"/>
+
+  <circle cx="175" cy="230" r="3.5" fill="#FFE566" opacity="0.8" filter="url(#glow06)"/>
+  <circle cx="260" cy="222" r="4.5" fill="#FFFFFF" opacity="0.95" filter="url(#star_filter)"/>
+  <circle cx="260" cy="222" r="2" fill="#FFFFFF"/>
+  <circle cx="338" cy="235" r="3.5" fill="#FFE566" opacity="0.8" filter="url(#glow06)"/>
+
+  <circle cx="175" cy="275" r="3" fill="#FFE566" opacity="0.75" filter="url(#glow06)"/>
+  <circle cx="240" cy="268" r="4" fill="#FFFFFF" opacity="0.85" filter="url(#glow06)"/>
+  <circle cx="310" cy="280" r="3.5" fill="#FFE566" opacity="0.8" filter="url(#glow06)"/>
+
+  <circle cx="175" cy="320" r="3" fill="#FFE566" opacity="0.75" filter="url(#glow06)"/>
+  <circle cx="290" cy="315" r="3.5" fill="#FFFFFF" opacity="0.8" filter="url(#glow06)"/>
+  <circle cx="338" cy="328" r="3" fill="#FFE566" opacity="0.75" filter="url(#glow06)"/>
+
+  <!-- 중앙 강조 별 (AI 심볼) -->
+  <circle cx="256" cy="254" r="10" fill="#FFE566" opacity="0.9" filter="url(#star_filter)"/>
+  <circle cx="256" cy="254" r="5" fill="#FFFFFF"/>
+  <!-- 별 방사선 -->
+  <line x1="256" y1="238" x2="256" y2="232" stroke="#FFE566" stroke-width="1.5" opacity="0.8" filter="url(#glow06)"/>
+  <line x1="256" y1="270" x2="256" y2="276" stroke="#FFE566" stroke-width="1.5" opacity="0.8" filter="url(#glow06)"/>
+  <line x1="240" y1="254" x2="234" y2="254" stroke="#FFE566" stroke-width="1.5" opacity="0.8" filter="url(#glow06)"/>
+  <line x1="272" y1="254" x2="278" y2="254" stroke="#FFE566" stroke-width="1.5" opacity="0.8" filter="url(#glow06)"/>
+  <line x1="244" y1="242" x2="240" y2="238" stroke="#FFE566" stroke-width="1.2" opacity="0.6" filter="url(#glow06)"/>
+  <line x1="268" y1="266" x2="272" y2="270" stroke="#FFE566" stroke-width="1.2" opacity="0.6" filter="url(#glow06)"/>
+  <line x1="244" y1="266" x2="240" y2="270" stroke="#FFE566" stroke-width="1.2" opacity="0.6" filter="url(#glow06)"/>
+  <line x1="268" y1="242" x2="272" y2="238" stroke="#FFE566" stroke-width="1.2" opacity="0.6" filter="url(#glow06)"/>
+
+  <!-- AI 텍스트 -->
+  <text x="256" y="448" text-anchor="middle" font-family="Arial, sans-serif" font-size="22"
+        font-weight="bold" fill="url(#const_grad)" opacity="0.9" filter="url(#glow06)">AI.Clip</text>
+</svg>

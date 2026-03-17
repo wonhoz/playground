@@ -1,0 +1,152 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg07" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#06102e"/>
+      <stop offset="70%" stop-color="#030c20"/>
+      <stop offset="100%" stop-color="#020820"/>
+    </radialGradient>
+    <radialGradient id="starCore07" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="40%" stop-color="#FFD700"/>
+      <stop offset="100%" stop-color="#FFD700" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glow07s">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glow07m">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glow07l">
+      <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="512" height="512" fill="url(#bg07)"/>
+
+  <!-- 먼 배경 별들 (작고 희미함) -->
+  <circle cx="25" cy="18" r="0.8" fill="#FFFFFF" opacity="0.4"/>
+  <circle cx="78" cy="42" r="0.7" fill="#FFFFFF" opacity="0.3"/>
+  <circle cx="145" cy="12" r="0.9" fill="#FFD700" opacity="0.35"/>
+  <circle cx="195" cy="38" r="0.7" fill="#FFFFFF" opacity="0.3"/>
+  <circle cx="280" cy="20" r="0.8" fill="#FFFFFF" opacity="0.4"/>
+  <circle cx="355" cy="15" r="0.7" fill="#FFD700" opacity="0.3"/>
+  <circle cx="415" cy="35" r="0.9" fill="#FFFFFF" opacity="0.4"/>
+  <circle cx="488" cy="22" r="0.7" fill="#FFFFFF" opacity="0.3"/>
+  <circle cx="12" cy="95" r="0.8" fill="#FFD700" opacity="0.35"/>
+  <circle cx="62" cy="125" r="0.7" fill="#FFFFFF" opacity="0.3"/>
+  <circle cx="488" cy="105" r="0.8" fill="#FFFFFF" opacity="0.4"/>
+  <circle cx="430" cy="85" r="0.7" fill="#FFD700" opacity="0.3"/>
+  <circle cx="18" cy="320" r="0.8" fill="#FFFFFF" opacity="0.35"/>
+  <circle cx="495" cy="285" r="0.7" fill="#FFFFFF" opacity="0.3"/>
+  <circle cx="55" cy="450" r="0.8" fill="#FFD700" opacity="0.35"/>
+  <circle cx="462" cy="470" r="0.7" fill="#FFFFFF" opacity="0.3"/>
+  <circle cx="230" cy="495" r="0.8" fill="#FFFFFF" opacity="0.4"/>
+  <circle cx="385" cy="490" r="0.7" fill="#FFD700" opacity="0.3"/>
+
+  <!-- 별자리 연결선들 (희미한 선) -->
+  <!-- 메인 별자리 연결 -->
+  <line x1="256" y1="256" x2="150" y2="145" stroke="#FFFFFF" stroke-width="1" opacity="0.25"/>
+  <line x1="256" y1="256" x2="362" y2="140" stroke="#FFFFFF" stroke-width="1" opacity="0.25"/>
+  <line x1="256" y1="256" x2="100" y2="280" stroke="#FFD700" stroke-width="0.8" opacity="0.2"/>
+  <line x1="256" y1="256" x2="415" y2="295" stroke="#FFD700" stroke-width="0.8" opacity="0.2"/>
+  <line x1="256" y1="256" x2="175" y2="380" stroke="#FFFFFF" stroke-width="1" opacity="0.25"/>
+  <line x1="256" y1="256" x2="340" y2="390" stroke="#FFFFFF" stroke-width="1" opacity="0.25"/>
+  <line x1="256" y1="256" x2="256" y2="95" stroke="#FFD700" stroke-width="1.2" opacity="0.3"/>
+
+  <!-- 중간 레이어 연결 -->
+  <line x1="150" y1="145" x2="256" y2="95" stroke="#FFFFFF" stroke-width="0.8" opacity="0.2"/>
+  <line x1="362" y1="140" x2="256" y2="95" stroke="#FFFFFF" stroke-width="0.8" opacity="0.2"/>
+  <line x1="150" y1="145" x2="80" y2="175" stroke="#FFD700" stroke-width="0.8" opacity="0.18"/>
+  <line x1="362" y1="140" x2="440" y2="170" stroke="#FFD700" stroke-width="0.8" opacity="0.18"/>
+  <line x1="100" y1="280" x2="80" y2="175" stroke="#FFFFFF" stroke-width="0.7" opacity="0.15"/>
+  <line x1="415" y1="295" x2="440" y2="170" stroke="#FFFFFF" stroke-width="0.7" opacity="0.15"/>
+  <line x1="175" y1="380" x2="100" y2="280" stroke="#FFFFFF" stroke-width="0.8" opacity="0.2"/>
+  <line x1="340" y1="390" x2="415" y2="295" stroke="#FFFFFF" stroke-width="0.8" opacity="0.2"/>
+  <line x1="175" y1="380" x2="200" y2="450" stroke="#FFD700" stroke-width="0.8" opacity="0.18"/>
+  <line x1="340" y1="390" x2="318" y2="455" stroke="#FFD700" stroke-width="0.8" opacity="0.18"/>
+  <line x1="200" y1="450" x2="318" y2="455" stroke="#FFFFFF" stroke-width="0.7" opacity="0.15"/>
+
+  <!-- 외곽 노드 연결 추가 -->
+  <line x1="80" y1="175" x2="50" y2="120" stroke="#FFFFFF" stroke-width="0.7" opacity="0.15"/>
+  <line x1="440" y1="170" x2="475" y2="115" stroke="#FFFFFF" stroke-width="0.7" opacity="0.15"/>
+  <line x1="200" y1="450" x2="140" y2="490" stroke="#FFD700" stroke-width="0.7" opacity="0.15"/>
+  <line x1="318" y1="455" x2="378" y2="488" stroke="#FFD700" stroke-width="0.7" opacity="0.15"/>
+  <line x1="256" y1="95" x2="195" y2="58" stroke="#FFFFFF" stroke-width="0.7" opacity="0.15"/>
+  <line x1="256" y1="95" x2="318" y2="62" stroke="#FFFFFF" stroke-width="0.7" opacity="0.15"/>
+
+  <!-- 중간 크기 커밋 노드들 (레이어 2) -->
+  <circle cx="150" cy="145" r="10" fill="#020820" stroke="#FFD700" stroke-width="1.5" opacity="0.8"/>
+  <circle cx="150" cy="145" r="6" fill="#FFD700" opacity="0.7" filter="url(#glow07s)"/>
+  <circle cx="150" cy="145" r="2.5" fill="#FFFFFF" opacity="0.9"/>
+
+  <circle cx="362" cy="140" r="10" fill="#020820" stroke="#FFD700" stroke-width="1.5" opacity="0.8"/>
+  <circle cx="362" cy="140" r="6" fill="#FFD700" opacity="0.7" filter="url(#glow07s)"/>
+  <circle cx="362" cy="140" r="2.5" fill="#FFFFFF" opacity="0.9"/>
+
+  <circle cx="100" cy="280" r="9" fill="#020820" stroke="#FFFFFF" stroke-width="1.2" opacity="0.7"/>
+  <circle cx="100" cy="280" r="5" fill="#FFFFFF" opacity="0.6" filter="url(#glow07s)"/>
+  <circle cx="100" cy="280" r="2" fill="#FFFFFF" opacity="0.9"/>
+
+  <circle cx="415" cy="295" r="9" fill="#020820" stroke="#FFFFFF" stroke-width="1.2" opacity="0.7"/>
+  <circle cx="415" cy="295" r="5" fill="#FFFFFF" opacity="0.6" filter="url(#glow07s)"/>
+  <circle cx="415" cy="295" r="2" fill="#FFFFFF" opacity="0.9"/>
+
+  <circle cx="175" cy="380" r="10" fill="#020820" stroke="#FFD700" stroke-width="1.5" opacity="0.8"/>
+  <circle cx="175" cy="380" r="6" fill="#FFD700" opacity="0.7" filter="url(#glow07s)"/>
+  <circle cx="175" cy="380" r="2.5" fill="#FFFFFF" opacity="0.9"/>
+
+  <circle cx="340" cy="390" r="10" fill="#020820" stroke="#FFD700" stroke-width="1.5" opacity="0.8"/>
+  <circle cx="340" cy="390" r="6" fill="#FFD700" opacity="0.7" filter="url(#glow07s)"/>
+  <circle cx="340" cy="390" r="2.5" fill="#FFFFFF" opacity="0.9"/>
+
+  <!-- 중간 레이어 노드들 -->
+  <circle cx="80" cy="175" r="7" fill="#020820" stroke="#FFFFFF" stroke-width="1" opacity="0.6"/>
+  <circle cx="80" cy="175" r="4" fill="#FFFFFF" opacity="0.5" filter="url(#glow07s)"/>
+
+  <circle cx="440" cy="170" r="7" fill="#020820" stroke="#FFFFFF" stroke-width="1" opacity="0.6"/>
+  <circle cx="440" cy="170" r="4" fill="#FFFFFF" opacity="0.5" filter="url(#glow07s)"/>
+
+  <circle cx="200" cy="450" r="8" fill="#020820" stroke="#FFD700" stroke-width="1.2" opacity="0.7"/>
+  <circle cx="200" cy="450" r="5" fill="#FFD700" opacity="0.6" filter="url(#glow07s)"/>
+
+  <circle cx="318" cy="455" r="8" fill="#020820" stroke="#FFD700" stroke-width="1.2" opacity="0.7"/>
+  <circle cx="318" cy="455" r="5" fill="#FFD700" opacity="0.6" filter="url(#glow07s)"/>
+
+  <!-- 외곽 작은 노드들 -->
+  <circle cx="50" cy="120" r="5" fill="#FFFFFF" opacity="0.5" filter="url(#glow07s)"/>
+  <circle cx="475" cy="115" r="5" fill="#FFFFFF" opacity="0.5" filter="url(#glow07s)"/>
+  <circle cx="140" cy="490" r="5" fill="#FFD700" opacity="0.5" filter="url(#glow07s)"/>
+  <circle cx="378" cy="488" r="5" fill="#FFD700" opacity="0.5" filter="url(#glow07s)"/>
+  <circle cx="195" cy="58" r="4" fill="#FFFFFF" opacity="0.5" filter="url(#glow07s)"/>
+  <circle cx="318" cy="62" r="4" fill="#FFFFFF" opacity="0.5" filter="url(#glow07s)"/>
+
+  <!-- 메인 노드 (중앙 - main 브랜치) -->
+  <circle cx="256" cy="256" r="28" fill="#020820" stroke="#FFD700" stroke-width="2.5"/>
+  <circle cx="256" cy="256" r="22" fill="url(#starCore07)" opacity="0.3" filter="url(#glow07l)"/>
+  <circle cx="256" cy="256" r="16" fill="#020820"/>
+  <circle cx="256" cy="256" r="12" fill="#FFD700" opacity="0.7" filter="url(#glow07m)"/>
+  <circle cx="256" cy="256" r="6" fill="#FFFFFF" filter="url(#glow07m)"/>
+  <circle cx="256" cy="256" r="3" fill="#FFFFFF" opacity="0.95"/>
+
+  <!-- 상단 메인 노드 (HEAD) -->
+  <circle cx="256" cy="95" r="18" fill="#020820" stroke="#FFD700" stroke-width="2"/>
+  <circle cx="256" cy="95" r="12" fill="#FFD700" opacity="0.6" filter="url(#glow07m)"/>
+  <circle cx="256" cy="95" r="6" fill="#FFFFFF" filter="url(#glow07s)"/>
+  <circle cx="256" cy="95" r="3" fill="#FFFFFF" opacity="0.95"/>
+
+  <!-- 4각 방사 빛 (메인 노드) -->
+  <line x1="256" y1="230" x2="256" y2="210" stroke="#FFD700" stroke-width="1.5" opacity="0.6" filter="url(#glow07s)"/>
+  <line x1="256" y1="282" x2="256" y2="302" stroke="#FFD700" stroke-width="1.5" opacity="0.6" filter="url(#glow07s)"/>
+  <line x1="230" y1="256" x2="210" y2="256" stroke="#FFD700" stroke-width="1.5" opacity="0.6" filter="url(#glow07s)"/>
+  <line x1="282" y1="256" x2="302" y2="256" stroke="#FFD700" stroke-width="1.5" opacity="0.6" filter="url(#glow07s)"/>
+
+  <!-- 별 모양 빛 (대각선) -->
+  <line x1="237" y1="237" x2="225" y2="225" stroke="#FFD700" stroke-width="1" opacity="0.4" filter="url(#glow07s)"/>
+  <line x1="275" y1="237" x2="287" y2="225" stroke="#FFD700" stroke-width="1" opacity="0.4" filter="url(#glow07s)"/>
+  <line x1="237" y1="275" x2="225" y2="287" stroke="#FFD700" stroke-width="1" opacity="0.4" filter="url(#glow07s)"/>
+  <line x1="275" y1="275" x2="287" y2="287" stroke="#FFD700" stroke-width="1" opacity="0.4" filter="url(#glow07s)"/>
+</svg>

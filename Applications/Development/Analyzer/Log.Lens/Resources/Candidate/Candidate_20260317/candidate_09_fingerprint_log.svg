@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#051520"/>
+      <stop offset="100%" stop-color="#030d10"/>
+    </radialGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glow-soft">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="scan-glow">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="512" height="512" fill="url(#bg)"/>
+
+  <!-- Fingerprint arcs (concentric ovals simulating a fingerprint) -->
+  <g fill="none" stroke="#00BCD4" stroke-linecap="round" opacity="0.8" filter="url(#glow-soft)">
+    <!-- Center dot -->
+    <circle cx="256" cy="230" r="6" fill="#00BCD4"/>
+    <!-- Inner arcs -->
+    <path d="M220 230 Q220 195 256 190 Q292 195 292 230 Q292 265 256 272 Q220 265 220 230" stroke-width="2.5"/>
+    <path d="M195 230 Q195 172 256 164 Q317 172 317 230 Q317 290 256 300 Q195 290 195 230" stroke-width="2.5"/>
+    <path d="M170 228 Q170 148 256 138 Q342 148 342 228 Q342 314 256 328 Q170 314 170 228" stroke-width="2.5"/>
+    <path d="M145 225 Q145 124 256 112 Q367 124 367 225 Q367 338 256 356 Q145 338 145 225" stroke-width="2.5"/>
+    <path d="M118 220 Q118 96 256 82 Q394 96 394 220 Q394 362 256 384 Q118 362 118 220" stroke-width="2.5"/>
+    <path d="M90 215 Q88 65 256 50 Q424 65 422 215 Q420 388 256 412 Q92 388 90 215" stroke-width="2.5" stroke="#0097A7"/>
+    <!-- Outer loop with opening at bottom -->
+    <path d="M65 200 Q60 32 256 18 Q452 32 447 200 Q444 380 350 430" stroke-width="2" stroke="#006064" opacity="0.6"/>
+  </g>
+
+  <!-- Scan line overlay (horizontal sweep) -->
+  <g filter="url(#scan-glow)">
+    <line x1="80" y1="230" x2="432" y2="230" stroke="#00FFFF" stroke-width="2" opacity="0.5"/>
+    <rect x="80" y="225" width="352" height="10" fill="#00FFFF" opacity="0.05"/>
+  </g>
+
+  <!-- Scan beam indicator -->
+  <rect x="80" y="226" width="352" height="2" fill="#00E5FF" opacity="0.8" filter="url(#glow)"/>
+
+  <!-- Log line annotations on the fingerprint -->
+  <g font-family="monospace" font-size="11" filter="url(#glow-soft)">
+    <text x="420" y="145" fill="#EF5350" opacity="0.9">[ERR]</text>
+    <text x="420" y="185" fill="#FF9100" opacity="0.9">[WRN]</text>
+    <text x="420" y="225" fill="#00E5FF" opacity="0.9">[INF]</text>
+    <text x="420" y="265" fill="#69F0AE" opacity="0.9">[DBG]</text>
+    <text x="420" y="305" fill="#CE93D8" opacity="0.9">[TRC]</text>
+  </g>
+
+  <!-- Match indicators (small dots on arcs) -->
+  <g filter="url(#glow)">
+    <circle cx="256" cy="82" r="5" fill="#00E5FF"/>
+    <circle cx="367" cy="225" r="4" fill="#69F0AE"/>
+    <circle cx="145" cy="225" r="4" fill="#FF9100"/>
+    <circle cx="394" cy="220" r="4" fill="#EF5350"/>
+    <circle cx="118" cy="220" r="4" fill="#CE93D8"/>
+  </g>
+
+  <!-- Bottom ID tag -->
+  <rect x="156" y="448" width="200" height="36" rx="6" fill="#00BCD4" fill-opacity="0.12" stroke="#00BCD4" stroke-width="1.5" stroke-opacity="0.5"/>
+  <text x="256" y="471" text-anchor="middle" font-family="monospace" font-size="14" fill="#00E5FF" filter="url(#glow-soft)">LOG.IDENTIFY</text>
+
+  <!-- Corner scan brackets -->
+  <g stroke="#00BCD4" stroke-width="2.5" fill="none" opacity="0.6">
+    <path d="M60 60 L60 90 M60 60 L90 60"/>
+    <path d="M452 60 L452 90 M452 60 L422 60"/>
+    <path d="M60 452 L60 422 M60 452 L90 452"/>
+    <path d="M452 452 L452 422 M452 452 L422 452"/>
+  </g>
+</svg>

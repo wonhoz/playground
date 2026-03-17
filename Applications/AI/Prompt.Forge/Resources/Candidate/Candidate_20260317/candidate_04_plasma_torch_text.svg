@@ -1,0 +1,122 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bgGrad04" cx="50%" cy="60%" r="55%">
+      <stop offset="0%" stop-color="#1a0a05"/>
+      <stop offset="100%" stop-color="#0a0505"/>
+    </radialGradient>
+    <linearGradient id="torchBody" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8a6030"/>
+      <stop offset="50%" stop-color="#c0902a"/>
+      <stop offset="100%" stop-color="#5a4020"/>
+    </linearGradient>
+    <radialGradient id="plasmaCore" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="20%" stop-color="#00FFFF"/>
+      <stop offset="60%" stop-color="#FF6B00"/>
+      <stop offset="100%" stop-color="#FF6B00" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="plasmaOuter" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FF6B00" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#FF6B00" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="textEngraved" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FF6B00"/>
+      <stop offset="50%" stop-color="#FFAA00"/>
+      <stop offset="100%" stop-color="#00FFFF"/>
+    </linearGradient>
+    <filter id="glow04">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="plasmaGlow">
+      <feGaussianBlur stdDeviation="12" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="textGlow04">
+      <feGaussianBlur stdDeviation="6" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="512" height="512" fill="url(#bgGrad04)" rx="40"/>
+
+  <!-- 배경 열기 효과 -->
+  <ellipse cx="256" cy="300" rx="220" ry="150" fill="#FF6B00" opacity="0.04"/>
+
+  <!-- 토치 본체 (우측 상단에서 대각선으로) -->
+  <g transform="translate(380, 120) rotate(135)">
+    <!-- 토치 몸통 -->
+    <rect x="-18" y="-140" width="36" height="140" rx="8" fill="url(#torchBody)"/>
+    <!-- 토치 그립 줄 -->
+    <rect x="-20" y="-130" width="40" height="8" rx="2" fill="#3a2a10" opacity="0.7"/>
+    <rect x="-20" y="-110" width="40" height="8" rx="2" fill="#3a2a10" opacity="0.7"/>
+    <rect x="-20" y="-90" width="40" height="8" rx="2" fill="#3a2a10" opacity="0.7"/>
+    <!-- 토치 헤드 (노즐) -->
+    <path d="M-22,0 L22,0 L16,25 L-16,25 Z" fill="#4a3520" stroke="#c0902a" stroke-width="1.5"/>
+    <ellipse cx="0" cy="25" rx="16" ry="8" fill="#2a1a08" stroke="#FF6B00" stroke-width="1.5"/>
+  </g>
+
+  <!-- 플라즈마 불꽃 -->
+  <g transform="translate(270, 230)">
+    <!-- 외부 글로우 -->
+    <ellipse cx="0" cy="0" rx="80" ry="60" fill="url(#plasmaOuter)" filter="url(#plasmaGlow)" opacity="0.6"/>
+    <!-- 중간 레이어 -->
+    <ellipse cx="0" cy="0" rx="45" ry="35" fill="#FF6B00" opacity="0.7" filter="url(#plasmaGlow)"/>
+    <!-- 내부 코어 -->
+    <ellipse cx="0" cy="0" rx="25" ry="20" fill="url(#plasmaCore)" filter="url(#plasmaGlow)"/>
+    <!-- 아크/번개 느낌 -->
+    <path d="M-15,-10 L-5,0 L-12,8 L0,18" stroke="#00FFFF" stroke-width="2" fill="none" opacity="0.9" filter="url(#glow04)"/>
+    <path d="M10,-8 L3,2 L12,10" stroke="#FFFFFF" stroke-width="1.5" fill="none" opacity="0.8" filter="url(#glow04)"/>
+  </g>
+
+  <!-- 텍스트 블록 (금속판 느낌 - 새겨지는 중) -->
+  <g filter="url(#glow04)">
+    <!-- 금속판 배경 -->
+    <rect x="60" y="280" width="350" height="160" rx="8" fill="#1a0f05" stroke="#c0902a" stroke-width="2" opacity="0.9"/>
+    <rect x="65" y="285" width="340" height="150" rx="6" fill="#120a03" opacity="0.8"/>
+
+    <!-- 새겨진 텍스트 (왼쪽부터 플라즈마로 각인) -->
+    <!-- 완성된 부분 (오렌지/골드) -->
+    <text x="85" y="330" font-family="monospace" font-size="28" font-weight="bold"
+          fill="url(#textEngraved)" opacity="0.95" filter="url(#textGlow04)">PROMPT</text>
+    <text x="85" y="365" font-family="monospace" font-size="18"
+          fill="#FF6B00" opacity="0.85" filter="url(#glow04)">&gt;_ craft &amp; forge</text>
+    <text x="85" y="400" font-family="monospace" font-size="14"
+          fill="#c0902a" opacity="0.7">{ ai: true, mode: "create" }</text>
+
+    <!-- 커서 (현재 각인 중인 위치) -->
+    <rect x="263" y="415" width="12" height="3" rx="1" fill="#00FFFF" opacity="0.9" filter="url(#glow04)"/>
+  </g>
+
+  <!-- 플라즈마 스파크들 -->
+  <g filter="url(#plasmaGlow)" opacity="0.9">
+    <circle cx="310" cy="210" r="4" fill="#FF6B00"/>
+    <circle cx="330" cy="195" r="3" fill="#FFAA00"/>
+    <circle cx="295" cy="200" r="2" fill="#00FFFF"/>
+  </g>
+  <g filter="url(#glow04)" opacity="0.8">
+    <circle cx="350" cy="220" r="3" fill="#FF6B00"/>
+    <circle cx="285" cy="218" r="2.5" fill="#FFAA00"/>
+    <circle cx="340" cy="240" r="2" fill="#FF6B00"/>
+
+    <!-- 스파크 라인들 -->
+    <line x1="270" y1="230" x2="310" y2="210" stroke="#FF6B00" stroke-width="1.5" opacity="0.6"/>
+    <line x1="270" y1="230" x2="295" y2="200" stroke="#FFAA00" stroke-width="1" opacity="0.5"/>
+    <line x1="270" y1="230" x2="330" y2="245" stroke="#FF6B00" stroke-width="1" opacity="0.4"/>
+    <line x1="270" y1="230" x2="250" y2="200" stroke="#00FFFF" stroke-width="1" opacity="0.5"/>
+    <line x1="270" y1="230" x2="240" y2="215" stroke="#FF6B00" stroke-width="1" opacity="0.4"/>
+  </g>
+
+  <!-- 열기 왜곡 효과 (상단) -->
+  <ellipse cx="270" cy="240" rx="100" ry="20" fill="#FF6B00" opacity="0.03" filter="url(#plasmaGlow)"/>
+
+  <!-- 토치 전선/호스 -->
+  <path d="M380 120 Q420 160 440 200 Q460 240 450 280" stroke="#4a3520" stroke-width="8" fill="none" opacity="0.8"/>
+  <path d="M380 120 Q420 160 440 200 Q460 240 450 280" stroke="#c0902a" stroke-width="3" fill="none" opacity="0.4"/>
+
+  <!-- 하단 라벨 -->
+  <rect x="155" y="455" width="202" height="28" rx="5" fill="#0a0505" stroke="#FF6B00" stroke-width="1" opacity="0.7"/>
+  <text x="256" y="474" font-family="monospace" font-size="13" font-weight="bold"
+        fill="#FF6B00" text-anchor="middle" opacity="0.9" filter="url(#glow04)">PROMPT.FORGE</text>
+</svg>

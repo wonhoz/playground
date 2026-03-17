@@ -1,0 +1,174 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg07" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#030d14"/>
+      <stop offset="50%" stop-color="#040f18"/>
+      <stop offset="100%" stop-color="#030d14"/>
+    </linearGradient>
+    <radialGradient id="node_cyan" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="40%" stop-color="#00E5FF"/>
+      <stop offset="100%" stop-color="#00E5FF" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="node_magenta" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="40%" stop-color="#FF1493"/>
+      <stop offset="100%" stop-color="#FF1493" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="neural_glow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="strong_neural">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="scan_line_filter">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <linearGradient id="scan_bar" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#00E5FF" stop-opacity="0"/>
+      <stop offset="40%" stop-color="#00E5FF" stop-opacity="0.6"/>
+      <stop offset="50%" stop-color="#FFFFFF" stop-opacity="0.8"/>
+      <stop offset="60%" stop-color="#FF1493" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#FF1493" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="log_cyan_grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00E5FF" stop-opacity="0"/>
+      <stop offset="10%" stop-color="#00E5FF"/>
+      <stop offset="85%" stop-color="#00B8D4"/>
+      <stop offset="100%" stop-color="#00B8D4" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="log_magenta_grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FF1493" stop-opacity="0"/>
+      <stop offset="10%" stop-color="#FF1493"/>
+      <stop offset="85%" stop-color="#C2185B"/>
+      <stop offset="100%" stop-color="#C2185B" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="512" height="512" fill="url(#bg07)"/>
+
+  <!-- 그리드 배경 -->
+  <line x1="0" y1="128" x2="512" y2="128" stroke="#00E5FF" stroke-width="0.3" opacity="0.1"/>
+  <line x1="0" y1="256" x2="512" y2="256" stroke="#00E5FF" stroke-width="0.3" opacity="0.1"/>
+  <line x1="0" y1="384" x2="512" y2="384" stroke="#00E5FF" stroke-width="0.3" opacity="0.1"/>
+  <line x1="128" y1="0" x2="128" y2="512" stroke="#00E5FF" stroke-width="0.3" opacity="0.1"/>
+  <line x1="256" y1="0" x2="256" y2="512" stroke="#00E5FF" stroke-width="0.3" opacity="0.1"/>
+  <line x1="384" y1="0" x2="384" y2="512" stroke="#00E5FF" stroke-width="0.3" opacity="0.1"/>
+
+  <!-- 신경망 연결선들 -->
+  <!-- 레이어 1 → 2 연결 -->
+  <line x1="80" y1="100" x2="180" y2="80" stroke="#00E5FF" stroke-width="1" opacity="0.3"/>
+  <line x1="80" y1="100" x2="180" y2="160" stroke="#00E5FF" stroke-width="1" opacity="0.3"/>
+  <line x1="80" y1="100" x2="180" y2="240" stroke="#00E5FF" stroke-width="0.8" opacity="0.2"/>
+  <line x1="80" y1="200" x2="180" y2="80" stroke="#00E5FF" stroke-width="0.8" opacity="0.2"/>
+  <line x1="80" y1="200" x2="180" y2="160" stroke="#00E5FF" stroke-width="1" opacity="0.3"/>
+  <line x1="80" y1="200" x2="180" y2="240" stroke="#00E5FF" stroke-width="1" opacity="0.3"/>
+  <line x1="80" y1="300" x2="180" y2="160" stroke="#00E5FF" stroke-width="0.8" opacity="0.2"/>
+  <line x1="80" y1="300" x2="180" y2="240" stroke="#00E5FF" stroke-width="1" opacity="0.3"/>
+  <line x1="80" y1="300" x2="180" y2="320" stroke="#00E5FF" stroke-width="1" opacity="0.3"/>
+
+  <!-- 레이어 2 → 3 연결 -->
+  <line x1="180" y1="80" x2="280" y2="120" stroke="#FF1493" stroke-width="1" opacity="0.3"/>
+  <line x1="180" y1="80" x2="280" y2="220" stroke="#FF1493" stroke-width="0.8" opacity="0.2"/>
+  <line x1="180" y1="160" x2="280" y2="120" stroke="#FF1493" stroke-width="1" opacity="0.3"/>
+  <line x1="180" y1="160" x2="280" y2="220" stroke="#FF1493" stroke-width="1" opacity="0.3"/>
+  <line x1="180" y1="160" x2="280" y2="320" stroke="#FF1493" stroke-width="0.8" opacity="0.2"/>
+  <line x1="180" y1="240" x2="280" y2="120" stroke="#FF1493" stroke-width="0.8" opacity="0.2"/>
+  <line x1="180" y1="240" x2="280" y2="220" stroke="#FF1493" stroke-width="1" opacity="0.3"/>
+  <line x1="180" y1="240" x2="280" y2="320" stroke="#FF1493" stroke-width="1" opacity="0.3"/>
+  <line x1="180" y1="320" x2="280" y2="220" stroke="#FF1493" stroke-width="0.8" opacity="0.2"/>
+  <line x1="180" y1="320" x2="280" y2="320" stroke="#FF1493" stroke-width="1" opacity="0.3"/>
+
+  <!-- 레이어 3 → 4 연결 -->
+  <line x1="280" y1="120" x2="380" y2="100" stroke="#00E5FF" stroke-width="1" opacity="0.3"/>
+  <line x1="280" y1="120" x2="380" y2="220" stroke="#00E5FF" stroke-width="0.8" opacity="0.2"/>
+  <line x1="280" y1="220" x2="380" y2="100" stroke="#00E5FF" stroke-width="0.8" opacity="0.2"/>
+  <line x1="280" y1="220" x2="380" y2="220" stroke="#00E5FF" stroke-width="1" opacity="0.3"/>
+  <line x1="280" y1="220" x2="380" y2="320" stroke="#00E5FF" stroke-width="0.8" opacity="0.2"/>
+  <line x1="280" y1="320" x2="380" y2="220" stroke="#00E5FF" stroke-width="0.8" opacity="0.2"/>
+  <line x1="280" y1="320" x2="380" y2="320" stroke="#00E5FF" stroke-width="1" opacity="0.3"/>
+
+  <!-- 레이어 4 → 출력 연결 -->
+  <line x1="380" y1="100" x2="450" y2="210" stroke="#FF1493" stroke-width="1" opacity="0.3"/>
+  <line x1="380" y1="220" x2="450" y2="210" stroke="#FF1493" stroke-width="1.5" opacity="0.5"/>
+  <line x1="380" y1="320" x2="450" y2="210" stroke="#FF1493" stroke-width="1" opacity="0.3"/>
+
+  <!-- 활성화된 경로 (하이라이트) -->
+  <line x1="80" y1="200" x2="180" y2="160" stroke="#00E5FF" stroke-width="2" opacity="0.7" filter="url(#neural_glow)"/>
+  <line x1="180" y1="160" x2="280" y2="220" stroke="#FF1493" stroke-width="2" opacity="0.7" filter="url(#neural_glow)"/>
+  <line x1="280" y1="220" x2="380" y2="220" stroke="#00E5FF" stroke-width="2" opacity="0.7" filter="url(#neural_glow)"/>
+  <line x1="380" y1="220" x2="450" y2="210" stroke="#FF1493" stroke-width="2.5" opacity="0.8" filter="url(#neural_glow)"/>
+
+  <!-- 레이어 1 노드 -->
+  <circle cx="80" cy="100" r="10" fill="#00E5FF" opacity="0.9" filter="url(#neural_glow)"/>
+  <circle cx="80" cy="100" r="5" fill="white"/>
+  <circle cx="80" cy="200" r="12" fill="#00E5FF" opacity="1" filter="url(#strong_neural)"/>
+  <circle cx="80" cy="200" r="6" fill="white"/>
+  <circle cx="80" cy="300" r="10" fill="#00E5FF" opacity="0.9" filter="url(#neural_glow)"/>
+  <circle cx="80" cy="300" r="5" fill="white"/>
+
+  <!-- 레이어 2 노드 -->
+  <circle cx="180" cy="80" r="9" fill="#FF1493" opacity="0.8" filter="url(#neural_glow)"/>
+  <circle cx="180" cy="80" r="4" fill="white"/>
+  <circle cx="180" cy="160" r="11" fill="#FF1493" opacity="1" filter="url(#strong_neural)"/>
+  <circle cx="180" cy="160" r="5.5" fill="white"/>
+  <circle cx="180" cy="240" r="9" fill="#FF1493" opacity="0.8" filter="url(#neural_glow)"/>
+  <circle cx="180" cy="240" r="4" fill="white"/>
+  <circle cx="180" cy="320" r="9" fill="#FF1493" opacity="0.7" filter="url(#neural_glow)"/>
+  <circle cx="180" cy="320" r="4" fill="white"/>
+
+  <!-- 레이어 3 노드 -->
+  <circle cx="280" cy="120" r="9" fill="#00E5FF" opacity="0.8" filter="url(#neural_glow)"/>
+  <circle cx="280" cy="120" r="4" fill="white"/>
+  <circle cx="280" cy="220" r="12" fill="#00E5FF" opacity="1" filter="url(#strong_neural)"/>
+  <circle cx="280" cy="220" r="6" fill="white"/>
+  <circle cx="280" cy="320" r="9" fill="#00E5FF" opacity="0.8" filter="url(#neural_glow)"/>
+  <circle cx="280" cy="320" r="4" fill="white"/>
+
+  <!-- 레이어 4 노드 -->
+  <circle cx="380" cy="100" r="9" fill="#FF1493" opacity="0.7" filter="url(#neural_glow)"/>
+  <circle cx="380" cy="100" r="4" fill="white"/>
+  <circle cx="380" cy="220" r="11" fill="#FF1493" opacity="1" filter="url(#strong_neural)"/>
+  <circle cx="380" cy="220" r="5.5" fill="white"/>
+  <circle cx="380" cy="320" r="9" fill="#FF1493" opacity="0.7" filter="url(#neural_glow)"/>
+  <circle cx="380" cy="320" r="4" fill="white"/>
+
+  <!-- 출력 노드 (LOG ANALYSIS 결과) -->
+  <circle cx="450" cy="210" r="20" fill="#030d14"/>
+  <circle cx="450" cy="210" r="18" fill="#FF1493" opacity="0.3"/>
+  <circle cx="450" cy="210" r="14" fill="#FF1493" opacity="0.6" filter="url(#strong_neural)"/>
+  <circle cx="450" cy="210" r="8" fill="white"/>
+
+  <!-- MRI 스캔 라인 (수평 스캐닝) -->
+  <rect x="30" y="195" width="452" height="30" fill="url(#scan_bar)" opacity="0.15" filter="url(#scan_line_filter)"/>
+  <line x1="30" y1="210" x2="482" y2="210" stroke="#FFFFFF" stroke-width="1.5" opacity="0.4" filter="url(#neural_glow)"/>
+
+  <!-- 로그 데이터 패널 (하단) -->
+  <rect x="20" y="375" width="472" height="120" rx="8" fill="#030d14" stroke="#00E5FF" stroke-width="1" opacity="0.7"/>
+
+  <!-- 로그 라인들 -->
+  <rect x="36" y="390" width="440" height="3" rx="1.5" fill="url(#log_magenta_grad)" filter="url(#scan_line_filter)"/>
+  <rect x="36" y="398" width="350" height="2" rx="1" fill="#FF1493" opacity="0.3"/>
+
+  <rect x="36" y="410" width="440" height="3" rx="1.5" fill="url(#log_cyan_grad)" filter="url(#scan_line_filter)"/>
+  <rect x="36" y="418" width="300" height="2" rx="1" fill="#00E5FF" opacity="0.3"/>
+
+  <rect x="36" y="430" width="440" height="3" rx="1.5" fill="url(#log_cyan_grad)" filter="url(#scan_line_filter)"/>
+  <rect x="36" y="438" width="380" height="2" rx="1" fill="#00E5FF" opacity="0.3"/>
+
+  <rect x="36" y="450" width="440" height="3" rx="1.5" fill="url(#log_magenta_grad)" filter="url(#scan_line_filter)"/>
+  <rect x="36" y="458" width="260" height="2" rx="1" fill="#FF1493" opacity="0.3"/>
+
+  <rect x="36" y="470" width="440" height="3" rx="1.5" fill="url(#log_cyan_grad)" filter="url(#scan_line_filter)"/>
+
+  <!-- 레벨 배지 -->
+  <circle cx="44" cy="392" r="5" fill="#FF1493" filter="url(#neural_glow)"/>
+  <circle cx="44" cy="412" r="5" fill="#FFB300" filter="url(#neural_glow)"/>
+  <circle cx="44" cy="432" r="5" fill="#00E5FF" filter="url(#neural_glow)"/>
+  <circle cx="44" cy="452" r="5" fill="#00E5FF" filter="url(#neural_glow)" opacity="0.5"/>
+  <circle cx="44" cy="472" r="5" fill="#9C27B0" filter="url(#neural_glow)"/>
+</svg>

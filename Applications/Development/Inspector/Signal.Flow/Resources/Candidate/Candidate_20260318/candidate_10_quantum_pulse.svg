@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#000810"/>
+      <stop offset="100%" stop-color="#001018"/>
+    </linearGradient>
+    <linearGradient id="pulse" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#22D3EE" stop-opacity="0"/>
+      <stop offset="20%" stop-color="#22D3EE" stop-opacity="0.6"/>
+      <stop offset="50%" stop-color="#67E8F9" stop-opacity="1"/>
+      <stop offset="80%" stop-color="#22D3EE" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#22D3EE" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Quantum uncertainty envelope -->
+  <path d="M40,256 Q100,256 130,200 Q160,150 200,150 Q240,150 260,200 Q280,250 300,200 Q320,150 360,150 Q400,150 430,200 Q450,230 460,256" fill="none" stroke="#0284C7" stroke-width="1.5" stroke-dasharray="6,4" opacity="0.4"/>
+  <path d="M40,256 Q100,256 130,312 Q160,362 200,362 Q240,362 260,312 Q280,262 300,312 Q320,362 360,362 Q400,362 430,312 Q450,282 460,256" fill="none" stroke="#0284C7" stroke-width="1.5" stroke-dasharray="6,4" opacity="0.4"/>
+  <!-- Uncertainty fill -->
+  <path d="M40,256 Q100,256 130,200 Q160,150 200,150 Q240,150 260,200 Q280,250 300,200 Q320,150 360,150 Q400,150 430,200 Q450,230 460,256 Q450,282 430,312 Q400,362 360,362 Q320,362 300,312 Q280,262 260,312 Q240,362 200,362 Q160,362 130,312 Q100,256 40,256 Z" fill="#0284C7" opacity="0.05"/>
+  <!-- Main quantum signal (most probable path) -->
+  <path d="M40,256 Q100,256 130,256 Q180,256 200,220 Q220,190 256,180 Q292,190 312,220 Q332,256 380,256 Q420,256 460,256" fill="none" stroke="url(#pulse)" stroke-width="4"/>
+  <!-- Measurement collapse points (bright spikes) -->
+  <line x1="200" y1="220" x2="200" y2="180" stroke="#67E8F9" stroke-width="3" opacity="0.8"/>
+  <circle cx="200" cy="180" r="6" fill="#67E8F9"/>
+  <text x="200" y="168" text-anchor="middle" font-family="monospace" font-size="8" fill="#E0F2FE">|ψ₁⟩</text>
+  <line x1="256" y1="180" x2="256" y2="140" stroke="#67E8F9" stroke-width="3" opacity="0.9"/>
+  <circle cx="256" cy="140" r="8" fill="#22D3EE"/>
+  <text x="256" y="128" text-anchor="middle" font-family="monospace" font-size="8" fill="#E0F2FE">PEAK</text>
+  <text x="256" y="116" text-anchor="middle" font-family="monospace" font-size="9" fill="#67E8F9">3.2σ</text>
+  <line x1="312" y1="220" x2="312" y2="180" stroke="#67E8F9" stroke-width="3" opacity="0.8"/>
+  <circle cx="312" cy="180" r="6" fill="#67E8F9"/>
+  <text x="312" y="168" text-anchor="middle" font-family="monospace" font-size="8" fill="#E0F2FE">|ψ₂⟩</text>
+  <!-- Heisenberg uncertainty labels -->
+  <text x="256" y="400" text-anchor="middle" font-family="monospace" font-size="10" fill="#0EA5E9" opacity="0.6">ΔE · Δt ≥ ℏ/2</text>
+  <text x="256" y="420" text-anchor="middle" font-family="monospace" font-size="10" fill="#38BDF8" opacity="0.5">quantum signal uncertainty</text>
+  <!-- Base line -->
+  <line x1="40" y1="256" x2="460" y2="256" stroke="#0369A1" stroke-width="1" opacity="0.3"/>
+</svg>

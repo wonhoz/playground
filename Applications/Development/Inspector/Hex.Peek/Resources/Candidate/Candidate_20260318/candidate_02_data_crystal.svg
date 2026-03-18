@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0015"/>
+      <stop offset="100%" stop-color="#150028"/>
+    </linearGradient>
+    <linearGradient id="face1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#A78BFA" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#7C3AED" stop-opacity="0.3"/>
+    </linearGradient>
+    <linearGradient id="face2" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#C4B5FD" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#6D28D9" stop-opacity="0.2"/>
+    </linearGradient>
+    <linearGradient id="face3" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#DDD6FE" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#4C1D95" stop-opacity="0.1"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Crystal gem shape (hexagonal) -->
+  <!-- Top cap -->
+  <polygon points="256,80 340,150 340,310 256,380 172,310 172,150" fill="url(#face1)" stroke="#A78BFA" stroke-width="2"/>
+  <!-- Inner facets -->
+  <polygon points="256,80 340,150 256,200 172,150" fill="url(#face2)" stroke="#C4B5FD" stroke-width="1.5" opacity="0.8"/>
+  <polygon points="256,380 340,310 256,260 172,310" fill="url(#face3)" stroke="#C4B5FD" stroke-width="1.5" opacity="0.6"/>
+  <!-- Left face -->
+  <polygon points="172,150 256,200 256,260 172,310" fill="url(#face1)" stroke="#A78BFA" stroke-width="1" opacity="0.5"/>
+  <!-- Right face -->
+  <polygon points="340,150 256,200 256,260 340,310" fill="url(#face2)" stroke="#C4B5FD" stroke-width="1" opacity="0.7"/>
+  <!-- Center vertical line -->
+  <line x1="256" y1="80" x2="256" y2="380" stroke="#DDD6FE" stroke-width="1" opacity="0.3"/>
+  <!-- Hex bytes inscribed in crystal -->
+  <text x="256" y="200" text-anchor="middle" font-family="monospace" font-size="10" fill="#DDD6FE" opacity="0.7">FF 4A B2</text>
+  <text x="256" y="220" text-anchor="middle" font-family="monospace" font-size="10" fill="#C4B5FD" opacity="0.6">00 3E 9C</text>
+  <text x="256" y="240" text-anchor="middle" font-family="monospace" font-size="10" fill="#A78BFA" opacity="0.5">D1 88 5F</text>
+  <text x="256" y="260" text-anchor="middle" font-family="monospace" font-size="10" fill="#7C3AED" opacity="0.5">41 C7 0A</text>
+  <!-- Sparkle points -->
+  <circle cx="256" cy="80" r="5" fill="#DDD6FE" opacity="0.9"/>
+  <circle cx="172" cy="150" r="3" fill="#A78BFA" opacity="0.7"/>
+  <circle cx="340" cy="150" r="3" fill="#C4B5FD" opacity="0.7"/>
+  <circle cx="256" cy="380" r="4" fill="#A78BFA" opacity="0.8"/>
+  <!-- Glow particles -->
+  <circle cx="120" cy="120" r="2" fill="#A78BFA" opacity="0.4"/>
+  <circle cx="400" cy="100" r="2" fill="#C4B5FD" opacity="0.4"/>
+  <circle cx="80" cy="300" r="2" fill="#7C3AED" opacity="0.3"/>
+  <circle cx="430" cy="350" r="2" fill="#A78BFA" opacity="0.3"/>
+  <!-- Title -->
+  <text x="256" y="440" text-anchor="middle" font-family="monospace" font-size="12" fill="#A78BFA" opacity="0.6">DATA CRYSTAL</text>
+</svg>

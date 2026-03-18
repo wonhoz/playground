@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0000"/>
+      <stop offset="100%" stop-color="#1a0500"/>
+    </linearGradient>
+    <linearGradient id="clock" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#EF4444"/>
+      <stop offset="100%" stop-color="#B91C1C"/>
+    </linearGradient>
+    <linearGradient id="melt" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#EF4444"/>
+      <stop offset="100%" stop-color="#EF4444" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Clock face (slightly deformed/melting) -->
+  <ellipse cx="256" cy="220" rx="130" ry="128" fill="#1A0000" stroke="#EF4444" stroke-width="4"/>
+  <!-- Clock numbers -->
+  <text x="256" y="112" text-anchor="middle" font-family="monospace" font-size="18" fill="#EF4444">12</text>
+  <text x="374" y="228" text-anchor="middle" font-family="monospace" font-size="18" fill="#EF4444">3</text>
+  <text x="256" y="344" text-anchor="middle" font-family="monospace" font-size="18" fill="#EF4444">6</text>
+  <text x="140" y="228" text-anchor="middle" font-family="monospace" font-size="18" fill="#EF4444">9</text>
+  <!-- Clock hands -->
+  <line x1="256" y1="220" x2="256" y2="130" stroke="#EF4444" stroke-width="5" stroke-linecap="round"/>
+  <line x1="256" y1="220" x2="320" y2="270" stroke="#EF4444" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="256" cy="220" r="8" fill="#EF4444"/>
+  <!-- Melting drips -->
+  <path d="M220,340 Q215,380 210,420 Q208,430 220,432 Q232,434 230,420 Q228,390 225,348 Z" fill="url(#melt)" opacity="0.8"/>
+  <path d="M256,344 Q254,390 252,440 Q250,452 260,452 Q270,452 268,440 Q266,390 260,344 Z" fill="url(#melt)" opacity="0.9"/>
+  <path d="M290,336 Q292,376 296,416 Q298,428 308,424 Q318,420 312,410 Q306,390 298,340 Z" fill="url(#melt)" opacity="0.7"/>
+  <!-- Puddle at bottom -->
+  <ellipse cx="256" cy="456" rx="80" ry="14" fill="#EF4444" opacity="0.3"/>
+  <!-- .tmp label -->
+  <text x="256" y="225" text-anchor="middle" font-family="monospace" font-size="16" fill="#EF4444" opacity="0.4">TEMP</text>
+  <!-- Expiry countdown -->
+  <text x="256" y="500" text-anchor="middle" font-family="monospace" font-size="12" fill="#B91C1C" opacity="0.7">FILE EXPIRED</text>
+</svg>

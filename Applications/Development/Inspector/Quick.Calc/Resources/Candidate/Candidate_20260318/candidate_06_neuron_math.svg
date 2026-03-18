@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#05040f"/>
+      <stop offset="100%" stop-color="#0a0820"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Neural network doing math -->
+  <!-- Input layer: numbers -->
+  <line x1="90" y1="180" x2="200" y2="200" stroke="#A78BFA" stroke-width="1" opacity="0.3"/>
+  <line x1="90" y1="256" x2="200" y2="200" stroke="#A78BFA" stroke-width="1" opacity="0.3"/>
+  <line x1="90" y1="332" x2="200" y2="200" stroke="#A78BFA" stroke-width="1" opacity="0.3"/>
+  <line x1="90" y1="180" x2="200" y2="310" stroke="#A78BFA" stroke-width="1" opacity="0.2"/>
+  <line x1="90" y1="256" x2="200" y2="310" stroke="#A78BFA" stroke-width="1.5" opacity="0.4"/>
+  <line x1="90" y1="332" x2="200" y2="310" stroke="#A78BFA" stroke-width="1" opacity="0.3"/>
+  <!-- Hidden to output -->
+  <line x1="200" y1="200" x2="312" y2="256" stroke="#8B5CF6" stroke-width="2" opacity="0.5"/>
+  <line x1="200" y1="310" x2="312" y2="256" stroke="#8B5CF6" stroke-width="2" opacity="0.5"/>
+  <!-- Output to result -->
+  <line x1="312" y1="256" x2="422" y2="256" stroke="#7C3AED" stroke-width="3" opacity="0.7"/>
+  <!-- Input neurons (numbers) -->
+  <circle cx="90" cy="180" r="24" fill="#1e1b4b" stroke="#A78BFA" stroke-width="2"/>
+  <text x="90" y="177" text-anchor="middle" font-family="monospace" font-size="14" fill="#C4B5FD" font-weight="bold">7</text>
+  <text x="90" y="191" text-anchor="middle" font-family="monospace" font-size="8" fill="#8B5CF6">input</text>
+  <circle cx="90" cy="256" r="24" fill="#1e1b4b" stroke="#A78BFA" stroke-width="2"/>
+  <text x="90" y="253" text-anchor="middle" font-family="monospace" font-size="14" fill="#C4B5FD" font-weight="bold">×</text>
+  <text x="90" y="267" text-anchor="middle" font-family="monospace" font-size="8" fill="#8B5CF6">op</text>
+  <circle cx="90" cy="332" r="24" fill="#1e1b4b" stroke="#A78BFA" stroke-width="2"/>
+  <text x="90" y="329" text-anchor="middle" font-family="monospace" font-size="14" fill="#C4B5FD" font-weight="bold">6</text>
+  <text x="90" y="343" text-anchor="middle" font-family="monospace" font-size="8" fill="#8B5CF6">input</text>
+  <!-- Hidden neurons (operations) -->
+  <circle cx="200" cy="200" r="28" fill="#2d1a55" stroke="#8B5CF6" stroke-width="2"/>
+  <text x="200" y="196" text-anchor="middle" font-family="monospace" font-size="11" fill="#DDD6FE">mul</text>
+  <text x="200" y="210" text-anchor="middle" font-family="monospace" font-size="10" fill="#C4B5FD">42</text>
+  <circle cx="200" cy="310" r="28" fill="#2d1a55" stroke="#8B5CF6" stroke-width="2"/>
+  <text x="200" y="306" text-anchor="middle" font-family="monospace" font-size="11" fill="#DDD6FE">sum</text>
+  <text x="200" y="320" text-anchor="middle" font-family="monospace" font-size="10" fill="#C4B5FD">13</text>
+  <!-- Output neuron -->
+  <circle cx="312" cy="256" r="36" fill="#3d1d6e" stroke="#C4B5FD" stroke-width="2.5"/>
+  <text x="312" y="250" text-anchor="middle" font-family="monospace" font-size="11" fill="#DDD6FE">result</text>
+  <text x="312" y="267" text-anchor="middle" font-family="monospace" font-size="14" fill="#F3E8FF" font-weight="bold">55</text>
+  <!-- Result display -->
+  <rect x="360" y="228" width="100" height="56" rx="8" fill="#0a0820" stroke="#7C3AED" stroke-width="2"/>
+  <text x="410" y="249" text-anchor="middle" font-family="monospace" font-size="9" fill="#A78BFA">ANSWER</text>
+  <text x="410" y="271" text-anchor="middle" font-family="monospace" font-size="16" fill="#DDD6FE" font-weight="bold">55</text>
+</svg>

@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#05000f"/>
+      <stop offset="100%" stop-color="#0a0018"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Vortex/spiral signal -->
+  <path d="M256,256 Q300,220 320,200 Q340,178 330,152 Q318,124 292,116 Q262,106 236,118 Q208,132 200,160 Q192,192 206,218 Q224,248 256,256 Q288,264 314,250 Q342,234 350,204 Q358,172 340,146 Q320,118 288,108 Q254,96 222,110 Q188,126 176,160 Q162,196 178,230 Q196,266 232,280 Q270,294 308,278 Q348,260 360,224" fill="none" stroke="#A855F7" stroke-width="2.5" opacity="0.8"/>
+  <!-- Inner spiral tighter -->
+  <path d="M256,256 Q272,244 278,232 Q284,218 276,208 Q266,196 252,196 Q236,196 228,208 Q220,222 228,236 Q238,250 256,252" fill="none" stroke="#C084FC" stroke-width="2" opacity="0.6"/>
+  <!-- Signal data points on spiral -->
+  <circle cx="320" cy="200" r="5" fill="#A855F7"/>
+  <text x="332" y="196" font-family="monospace" font-size="8" fill="#A855F7">3.2V</text>
+  <circle cx="200" cy="160" r="5" fill="#A855F7"/>
+  <text x="180" y="156" font-family="monospace" font-size="8" fill="#A855F7">2.1V</text>
+  <circle cx="350" cy="204" r="4" fill="#C084FC"/>
+  <text x="362" y="200" font-family="monospace" font-size="8" fill="#C084FC">4.0V</text>
+  <circle cx="176" cy="160" r="4" fill="#C084FC"/>
+  <text x="150" y="156" font-family="monospace" font-size="8" fill="#C084FC">1.5V</text>
+  <circle cx="360" cy="224" r="4" fill="#A855F7"/>
+  <!-- Center point (signal source) -->
+  <circle cx="256" cy="256" r="12" fill="#2d0060" stroke="#A855F7" stroke-width="2"/>
+  <circle cx="256" cy="256" r="4" fill="#A855F7"/>
+  <!-- Frequency rings -->
+  <circle cx="256" cy="256" r="60" fill="none" stroke="#7C3AED" stroke-width="0.5" opacity="0.2"/>
+  <circle cx="256" cy="256" r="100" fill="none" stroke="#7C3AED" stroke-width="0.5" opacity="0.15"/>
+  <circle cx="256" cy="256" r="140" fill="none" stroke="#7C3AED" stroke-width="0.5" opacity="0.1"/>
+  <!-- Label -->
+  <text x="256" y="460" text-anchor="middle" font-family="monospace" font-size="11" fill="#A855F7" opacity="0.6">VORTEX SIGNAL</text>
+  <text x="256" y="478" text-anchor="middle" font-family="monospace" font-size="9" fill="#7C3AED" opacity="0.5">phase: 0° → 720°</text>
+</svg>

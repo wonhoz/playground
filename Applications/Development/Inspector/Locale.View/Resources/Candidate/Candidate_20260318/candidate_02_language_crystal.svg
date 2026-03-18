@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#030a12"/>
+      <stop offset="100%" stop-color="#051520"/>
+    </linearGradient>
+    <linearGradient id="c1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38BDF8" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#0EA5E9" stop-opacity="0.2"/>
+    </linearGradient>
+    <linearGradient id="c2" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#7DD3FC" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#0369A1" stop-opacity="0.2"/>
+    </linearGradient>
+    <linearGradient id="c3" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#BAE6FD" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#0284C7" stop-opacity="0.1"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Gem: each facet has a language script -->
+  <!-- Top facet (Kanji) -->
+  <polygon points="256,70 340,180 256,160 172,180" fill="url(#c1)" stroke="#38BDF8" stroke-width="1.5"/>
+  <text x="256" y="128" text-anchor="middle" font-family="serif" font-size="22" fill="#BAE6FD" opacity="0.8">語</text>
+  <!-- Left facet (Arabic) -->
+  <polygon points="172,180 256,160 256,290 140,320" fill="url(#c2)" stroke="#7DD3FC" stroke-width="1.5"/>
+  <text x="190" y="244" text-anchor="middle" font-family="serif" font-size="16" fill="#7DD3FC" opacity="0.7">مرحبا</text>
+  <!-- Right facet (Devanagari) -->
+  <polygon points="340,180 256,160 256,290 372,320" fill="url(#c3)" stroke="#38BDF8" stroke-width="1.5"/>
+  <text x="322" y="244" text-anchor="middle" font-family="serif" font-size="14" fill="#38BDF8" opacity="0.7">नमस्ते</text>
+  <!-- Bottom-left (Cyrillic) -->
+  <polygon points="140,320 256,290 256,420 120,400" fill="url(#c1)" stroke="#0EA5E9" stroke-width="1.5"/>
+  <text x="180" y="360" text-anchor="middle" font-family="serif" font-size="14" fill="#7DD3FC" opacity="0.7">Привет</text>
+  <!-- Bottom-right (Greek) -->
+  <polygon points="372,320 256,290 256,420 392,400" fill="url(#c2)" stroke="#0EA5E9" stroke-width="1.5"/>
+  <text x="326" y="360" text-anchor="middle" font-family="serif" font-size="15" fill="#38BDF8" opacity="0.7">Γεια</text>
+  <!-- Bottom tip (Latin) -->
+  <polygon points="120,400 256,420 392,400 256,470" fill="url(#c3)" stroke="#0369A1" stroke-width="1.5"/>
+  <text x="256" y="448" text-anchor="middle" font-family="serif" font-size="13" fill="#7DD3FC" opacity="0.6">Hello</text>
+  <!-- Top point -->
+  <circle cx="256" cy="70" r="5" fill="#BAE6FD"/>
+  <circle cx="256" cy="470" r="5" fill="#0284C7" opacity="0.7"/>
+</svg>

@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#030a08"/>
+      <stop offset="100%" stop-color="#060f10"/>
+    </linearGradient>
+    <linearGradient id="axon" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#4ADE80" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#4ADE80" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#4ADE80" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Neuron cell body (soma) - source -->
+  <circle cx="100" cy="256" r="40" fill="#0a2510" stroke="#4ADE80" stroke-width="2.5"/>
+  <text x="100" y="252" text-anchor="middle" font-family="monospace" font-size="9" fill="#6EE7B7">SENSOR</text>
+  <text x="100" y="265" text-anchor="middle" font-family="monospace" font-size="10" fill="#4ADE80">→</text>
+  <!-- Dendrites (input signal lines) -->
+  <path d="M60,200 Q80,228 100,216" stroke="#22C55E" stroke-width="2" fill="none" opacity="0.5"/>
+  <path d="M50,256 Q75,256 100,256" stroke="#22C55E" stroke-width="2" fill="none" opacity="0.5"/>
+  <path d="M60,312 Q80,284 100,296" stroke="#22C55E" stroke-width="2" fill="none" opacity="0.5"/>
+  <!-- Axon (main signal line) -->
+  <line x1="140" y1="256" x2="380" y2="256" stroke="url(#axon)" stroke-width="6"/>
+  <!-- Myelin sheath segments -->
+  <rect x="155" y="248" width="40" height="16" rx="8" fill="#0a2510" stroke="#4ADE80" stroke-width="1.5"/>
+  <rect x="215" y="248" width="40" height="16" rx="8" fill="#0a2510" stroke="#4ADE80" stroke-width="1.5"/>
+  <rect x="275" y="248" width="40" height="16" rx="8" fill="#0a2510" stroke="#4ADE80" stroke-width="1.5"/>
+  <rect x="335" y="248" width="40" height="16" rx="8" fill="#0a2510" stroke="#4ADE80" stroke-width="1.5"/>
+  <!-- Action potential markers -->
+  <circle cx="175" cy="256" r="4" fill="#4ADE80" opacity="0.9"/>
+  <circle cx="235" cy="256" r="4" fill="#4ADE80" opacity="0.8"/>
+  <circle cx="295" cy="256" r="4" fill="#4ADE80" opacity="0.7"/>
+  <circle cx="355" cy="256" r="4" fill="#4ADE80" opacity="0.6"/>
+  <!-- Action potential value display above axon -->
+  <text x="175" y="238" text-anchor="middle" font-family="monospace" font-size="8" fill="#6EE7B7">+70mV</text>
+  <text x="235" y="238" text-anchor="middle" font-family="monospace" font-size="8" fill="#22C55E">+65mV</text>
+  <text x="295" y="238" text-anchor="middle" font-family="monospace" font-size="8" fill="#16A34A">+58mV</text>
+  <text x="355" y="238" text-anchor="middle" font-family="monospace" font-size="8" fill="#15803D">+50mV</text>
+  <!-- Terminal synapses -->
+  <circle cx="420" cy="220" r="14" fill="#0d2a15" stroke="#4ADE80" stroke-width="1.5"/>
+  <text x="420" y="224" text-anchor="middle" font-family="monospace" font-size="7" fill="#4ADE80">OUT-A</text>
+  <circle cx="420" cy="256" r="14" fill="#0d2a15" stroke="#4ADE80" stroke-width="1.5"/>
+  <text x="420" y="260" text-anchor="middle" font-family="monospace" font-size="7" fill="#4ADE80">OUT-B</text>
+  <circle cx="420" cy="292" r="14" fill="#0d2a15" stroke="#4ADE80" stroke-width="1.5"/>
+  <text x="420" y="296" text-anchor="middle" font-family="monospace" font-size="7" fill="#4ADE80">OUT-C</text>
+  <!-- Synaptic connections -->
+  <line x1="380" y1="256" x2="406" y2="220" stroke="#4ADE80" stroke-width="1.5" opacity="0.6"/>
+  <line x1="380" y1="256" x2="406" y2="256" stroke="#4ADE80" stroke-width="1.5" opacity="0.6"/>
+  <line x1="380" y1="256" x2="406" y2="292" stroke="#4ADE80" stroke-width="1.5" opacity="0.6"/>
+</svg>

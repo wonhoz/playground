@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f0000"/>
+      <stop offset="100%" stop-color="#1a0800"/>
+    </linearGradient>
+    <linearGradient id="fire1" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#EF4444"/>
+      <stop offset="50%" stop-color="#F97316"/>
+      <stop offset="100%" stop-color="#FDE68A" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="fire2" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#DC2626"/>
+      <stop offset="60%" stop-color="#F59E0B"/>
+      <stop offset="100%" stop-color="#FEF3C7" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="trash" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#374151"/>
+      <stop offset="100%" stop-color="#1F2937"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Trash can body -->
+  <rect x="156" y="280" width="200" height="170" rx="10" fill="url(#trash)"/>
+  <rect x="140" y="265" width="232" height="24" rx="8" fill="#4B5563"/>
+  <!-- Trash can lines -->
+  <line x1="210" y1="289" x2="210" y2="444" stroke="#6B7280" stroke-width="2" opacity="0.5"/>
+  <line x1="256" y1="289" x2="256" y2="444" stroke="#6B7280" stroke-width="2" opacity="0.5"/>
+  <line x1="302" y1="289" x2="302" y2="444" stroke="#6B7280" stroke-width="2" opacity="0.5"/>
+  <!-- Trash handle -->
+  <path d="M220,265 L220,248 Q220,240 230,240 L282,240 Q292,240 292,248 L292,265" fill="none" stroke="#4B5563" stroke-width="6" stroke-linecap="round"/>
+  <!-- Fire flames -->
+  <path d="M180,270 Q170,220 200,190 Q190,240 210,220 Q215,180 240,150 Q238,200 260,170 Q262,210 280,180 Q285,220 310,200 Q295,240 320,220 Q330,250 320,270 Z" fill="url(#fire1)" opacity="0.9"/>
+  <path d="M210,268 Q205,230 226,210 Q220,245 240,228 Q244,196 260,175 Q260,210 274,194 Q278,225 298,210 Q288,248 308,234 Q312,262 308,270 Z" fill="url(#fire2)" opacity="0.7"/>
+  <!-- File ashes/sparks -->
+  <circle cx="200" cy="160" r="3" fill="#FDE68A" opacity="0.6"/>
+  <circle cx="320" cy="140" r="2" fill="#FEF3C7" opacity="0.5"/>
+  <circle cx="250" cy="120" r="4" fill="#F97316" opacity="0.4"/>
+  <circle cx="160" cy="200" r="2" fill="#FDE68A" opacity="0.5"/>
+  <circle cx="355" cy="190" r="3" fill="#F59E0B" opacity="0.4"/>
+  <!-- Burning file label -->
+  <text x="256" y="180" text-anchor="middle" font-family="monospace" font-size="13" fill="#FDE68A" opacity="0.4">.tmp</text>
+</svg>

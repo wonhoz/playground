@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#040010"/>
+      <stop offset="100%" stop-color="#08001e"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Fractal-like composite wave (sum of harmonics) -->
+  <!-- Fundamental -->
+  <path d="M40,256 Q136,180 232,256 Q328,332 424,256 Q446,242 460,256" fill="none" stroke="#818CF8" stroke-width="4" opacity="0.8"/>
+  <!-- 2nd harmonic -->
+  <path d="M40,256 Q88,210 136,256 Q184,302 232,256 Q280,210 328,256 Q376,302 424,256 Q440,248 460,256" fill="none" stroke="#6366F1" stroke-width="2.5" opacity="0.6"/>
+  <!-- 3rd harmonic -->
+  <path d="M40,256 Q67,230 94,256 Q121,282 148,256 Q175,230 202,256 Q229,282 256,256 Q283,230 310,256 Q337,282 364,256 Q391,230 418,256 Q436,248 460,256" fill="none" stroke="#4F46E5" stroke-width="1.5" opacity="0.5"/>
+  <!-- 4th harmonic (higher frequency) -->
+  <path d="M40,256 Q56,244 72,256 Q88,268 104,256 Q120,244 136,256 Q152,268 168,256 Q184,244 200,256 Q216,268 232,256 Q248,244 264,256 Q280,268 296,256 Q312,244 328,256 Q344,268 360,256 Q376,244 392,256 Q408,268 424,256 Q440,244 456,256" fill="none" stroke="#3730A3" stroke-width="1" opacity="0.4"/>
+  <!-- Sum (composite) wave - more interesting shape -->
+  <path d="M40,256 Q80,152 120,256 Q160,360 200,256 Q240,152 280,256 Q320,360 360,256 Q400,152 440,256 Q454,264 460,256" fill="none" stroke="#C7D2FE" stroke-width="3" opacity="0.5" stroke-dasharray="8,4"/>
+  <!-- Harmonic labels -->
+  <text x="60" y="180" font-family="monospace" font-size="9" fill="#818CF8" opacity="0.7">f₁ (fund.)</text>
+  <text x="60" y="196" font-family="monospace" font-size="9" fill="#6366F1" opacity="0.7">2f₁</text>
+  <text x="60" y="212" font-family="monospace" font-size="9" fill="#4F46E5" opacity="0.7">3f₁</text>
+  <text x="60" y="228" font-family="monospace" font-size="9" fill="#3730A3" opacity="0.7">4f₁</text>
+  <text x="60" y="290" font-family="monospace" font-size="9" fill="#C7D2FE" opacity="0.6">∑ harmonics</text>
+  <!-- Frequency spectrum bars at bottom -->
+  <rect x="100" y="380" width="16" height="60" rx="4" fill="#818CF8" opacity="0.7"/>
+  <rect x="160" y="400" width="16" height="40" rx="4" fill="#6366F1" opacity="0.6"/>
+  <rect x="220" y="415" width="16" height="25" rx="4" fill="#4F46E5" opacity="0.5"/>
+  <rect x="280" y="422" width="16" height="18" rx="4" fill="#3730A3" opacity="0.5"/>
+  <rect x="340" y="426" width="16" height="14" rx="4" fill="#312E81" opacity="0.4"/>
+  <rect x="400" y="428" width="16" height="12" rx="4" fill="#1E1B4B" opacity="0.4"/>
+  <text x="256" y="460" text-anchor="middle" font-family="monospace" font-size="9" fill="#818CF8" opacity="0.5">FREQUENCY SPECTRUM</text>
+</svg>

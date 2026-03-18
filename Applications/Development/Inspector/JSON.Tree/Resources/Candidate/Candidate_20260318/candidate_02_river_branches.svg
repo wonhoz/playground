@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#000a14"/>
+      <stop offset="100%" stop-color="#001020"/>
+    </linearGradient>
+    <linearGradient id="river" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0EA5E9"/>
+      <stop offset="100%" stop-color="#0369A1"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Main river (root JSON stream) -->
+  <path d="M256,60 Q250,100 256,140" stroke="#38BDF8" stroke-width="18" fill="none" stroke-linecap="round" opacity="0.8"/>
+  <!-- Branch left 1 -->
+  <path d="M256,140 Q210,180 170,220" stroke="#38BDF8" stroke-width="13" fill="none" stroke-linecap="round" opacity="0.7"/>
+  <!-- Branch right 1 -->
+  <path d="M256,140 Q300,180 340,220" stroke="#38BDF8" stroke-width="13" fill="none" stroke-linecap="round" opacity="0.7"/>
+  <!-- Branch left 1.1 -->
+  <path d="M170,220 Q140,270 110,310" stroke="#0EA5E9" stroke-width="8" fill="none" stroke-linecap="round" opacity="0.6"/>
+  <!-- Branch left 1.2 -->
+  <path d="M170,220 Q185,270 200,310" stroke="#0EA5E9" stroke-width="8" fill="none" stroke-linecap="round" opacity="0.6"/>
+  <!-- Branch right 1.1 -->
+  <path d="M340,220 Q318,270 306,310" stroke="#0EA5E9" stroke-width="8" fill="none" stroke-linecap="round" opacity="0.6"/>
+  <!-- Branch right 1.2 -->
+  <path d="M340,220 Q370,270 400,310" stroke="#0EA5E9" stroke-width="8" fill="none" stroke-linecap="round" opacity="0.6"/>
+  <!-- Smaller tributaries -->
+  <path d="M110,310 Q90,350 80,390" stroke="#0369A1" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.5"/>
+  <path d="M110,310 Q124,350 130,390" stroke="#0369A1" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.5"/>
+  <path d="M200,310 Q196,350 192,390" stroke="#0369A1" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.5"/>
+  <path d="M306,310 Q296,350 290,390" stroke="#0369A1" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.5"/>
+  <path d="M306,310 Q318,350 324,390" stroke="#0369A1" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.5"/>
+  <path d="M400,310 Q388,350 384,390" stroke="#0369A1" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.5"/>
+  <path d="M400,310 Q416,350 420,390" stroke="#0369A1" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.5"/>
+  <!-- JSON labels on branches -->
+  <text x="256" y="78" text-anchor="middle" font-family="monospace" font-size="10" fill="#38BDF8">{root}</text>
+  <text x="170" y="215" text-anchor="middle" font-family="monospace" font-size="9" fill="#38BDF8">{obj}</text>
+  <text x="340" y="215" text-anchor="middle" font-family="monospace" font-size="9" fill="#38BDF8">[arr]</text>
+  <text x="105" y="305" text-anchor="middle" font-family="monospace" font-size="7" fill="#7DD3FC">{}</text>
+  <text x="200" y="305" text-anchor="middle" font-family="monospace" font-size="7" fill="#7DD3FC">"str"</text>
+  <text x="302" y="305" text-anchor="middle" font-family="monospace" font-size="7" fill="#7DD3FC">42</text>
+  <text x="400" y="305" text-anchor="middle" font-family="monospace" font-size="7" fill="#7DD3FC">true</text>
+  <!-- Delta at bottom -->
+  <path d="M60,430 Q256,410 452,430" stroke="#0369A1" stroke-width="3" fill="none" opacity="0.3"/>
+  <path d="M70,445 Q256,425 445,445" stroke="#0369A1" stroke-width="2" fill="none" opacity="0.2"/>
+</svg>

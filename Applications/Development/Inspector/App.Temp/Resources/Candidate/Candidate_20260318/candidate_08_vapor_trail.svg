@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#030812"/>
+      <stop offset="100%" stop-color="#060f1e"/>
+    </linearGradient>
+    <linearGradient id="trail" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38BDF8" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#38BDF8" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#38BDF8" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="trail2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#818CF8" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#818CF8" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#818CF8" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Vapor/smoke trails representing deleted temp files -->
+  <!-- Trail 1 -->
+  <path d="M60,180 Q140,160 220,180 Q300,200 380,170 Q430,155 460,160" fill="none" stroke="url(#trail)" stroke-width="18" opacity="0.6"/>
+  <path d="M60,180 Q140,160 220,180 Q300,200 380,170 Q430,155 460,160" fill="none" stroke="url(#trail)" stroke-width="8" opacity="0.4"/>
+  <!-- Trail 2 -->
+  <path d="M60,240 Q130,260 200,240 Q280,220 360,250 Q410,262 460,250" fill="none" stroke="url(#trail2)" stroke-width="22" opacity="0.5"/>
+  <path d="M60,240 Q130,260 200,240 Q280,220 360,250 Q410,262 460,250" fill="none" stroke="url(#trail2)" stroke-width="10" opacity="0.3"/>
+  <!-- Trail 3 -->
+  <path d="M80,310 Q150,290 230,310 Q310,330 390,305 Q435,292 460,300" fill="none" stroke="url(#trail)" stroke-width="16" opacity="0.4"/>
+  <!-- File icons fading out (vaporizing) -->
+  <g opacity="0.8">
+    <rect x="60" y="156" width="54" height="44" rx="6" fill="#060f1e" stroke="#38BDF8" stroke-width="1.5"/>
+    <text x="87" y="178" text-anchor="middle" font-family="monospace" font-size="10" fill="#38BDF8">.tmp</text>
+  </g>
+  <g opacity="0.4">
+    <rect x="195" y="160" width="54" height="44" rx="6" fill="#060f1e" stroke="#38BDF8" stroke-width="1"/>
+    <text x="222" y="182" text-anchor="middle" font-family="monospace" font-size="10" fill="#38BDF8" opacity="0.6">.tmp</text>
+  </g>
+  <g opacity="0.1">
+    <rect x="360" y="150" width="54" height="44" rx="6" fill="none" stroke="#38BDF8" stroke-width="0.5"/>
+  </g>
+  <g opacity="0.8">
+    <rect x="60" y="218" width="54" height="44" rx="6" fill="#060f1e" stroke="#818CF8" stroke-width="1.5"/>
+    <text x="87" y="240" text-anchor="middle" font-family="monospace" font-size="10" fill="#818CF8">.log</text>
+  </g>
+  <g opacity="0.35">
+    <rect x="210" y="218" width="54" height="44" rx="6" fill="#060f1e" stroke="#818CF8" stroke-width="1"/>
+    <text x="237" y="240" text-anchor="middle" font-family="monospace" font-size="10" fill="#818CF8" opacity="0.5">.log</text>
+  </g>
+  <!-- Disappear label -->
+  <text x="256" y="420" text-anchor="middle" font-family="monospace" font-size="13" fill="#38BDF8" opacity="0.5">VANISHED</text>
+  <text x="256" y="440" text-anchor="middle" font-family="monospace" font-size="10" fill="#38BDF8" opacity="0.3">temp files cleared</text>
+</svg>

@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0d0a00"/>
+      <stop offset="100%" stop-color="#1a1200"/>
+    </linearGradient>
+    <linearGradient id="glass" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F59E0B" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#D97706" stop-opacity="0.1"/>
+    </linearGradient>
+    <linearGradient id="sand" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FDE68A"/>
+      <stop offset="100%" stop-color="#F59E0B"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Hourglass frame -->
+  <rect x="196" y="60" width="120" height="14" rx="7" fill="#92400E"/>
+  <rect x="196" y="438" width="120" height="14" rx="7" fill="#92400E"/>
+  <!-- Hourglass glass body -->
+  <path d="M200,74 L312,74 L280,256 L312,438 L200,438 L232,256 Z" fill="url(#glass)" stroke="#F59E0B" stroke-width="2"/>
+  <!-- Sand top (remaining) -->
+  <path d="M205,80 L307,80 L278,220 Z" fill="url(#sand)" opacity="0.7"/>
+  <!-- Sand stream -->
+  <rect x="253" y="220" width="6" height="36" rx="3" fill="#FDE68A" opacity="0.8"/>
+  <!-- Sand bottom (accumulated) -->
+  <path d="M235,390 L277,390 L290,438 L222,438 Z" fill="url(#sand)" opacity="0.9"/>
+  <!-- Floating temp files decaying -->
+  <rect x="80" y="100" width="80" height="56" rx="6" fill="#1A1A00" stroke="#F59E0B" stroke-width="1.5" opacity="0.9"/>
+  <text x="120" y="122" text-anchor="middle" font-family="monospace" font-size="10" fill="#F59E0B">.tmp</text>
+  <text x="120" y="140" text-anchor="middle" font-family="monospace" font-size="8" fill="#888">2.4 MB</text>
+  <!-- Expiry crack effect -->
+  <path d="M100,156 L108,148 L112,156 L120,144" stroke="#F59E0B" stroke-width="1.5" fill="none" opacity="0.6"/>
+  <rect x="352" y="90" width="80" height="56" rx="6" fill="#1A1A00" stroke="#F59E0B" stroke-width="1.5" opacity="0.7"/>
+  <text x="392" y="112" text-anchor="middle" font-family="monospace" font-size="10" fill="#D97706">.log</text>
+  <text x="392" y="130" text-anchor="middle" font-family="monospace" font-size="8" fill="#888">8.1 MB</text>
+  <rect x="60" y="280" width="80" height="56" rx="6" fill="#1A1A00" stroke="#92400E" stroke-width="1.5" opacity="0.5"/>
+  <text x="100" y="302" text-anchor="middle" font-family="monospace" font-size="10" fill="#92400E">.cache</text>
+  <text x="100" y="320" text-anchor="middle" font-family="monospace" font-size="8" fill="#555">12.7 MB</text>
+  <rect x="370" y="280" width="80" height="56" rx="6" fill="#1A1A00" stroke="#92400E" stroke-width="1.5" opacity="0.4"/>
+  <text x="410" y="302" text-anchor="middle" font-family="monospace" font-size="10" fill="#92400E">.bak</text>
+  <text x="410" y="320" text-anchor="middle" font-family="monospace" font-size="8" fill="#555">5.3 MB</text>
+  <!-- Arrows pointing to hourglass -->
+  <path d="M160,128 L196,200" stroke="#F59E0B" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.5"/>
+  <path d="M350,120 L318,200" stroke="#F59E0B" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.5"/>
+</svg>

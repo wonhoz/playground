@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#050a00"/>
+      <stop offset="100%" stop-color="#0a1200"/>
+    </linearGradient>
+    <linearGradient id="leaf1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F59E0B"/>
+      <stop offset="100%" stop-color="#EF4444"/>
+    </linearGradient>
+    <linearGradient id="leaf2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F97316"/>
+      <stop offset="100%" stop-color="#B45309"/>
+    </linearGradient>
+    <linearGradient id="leaf3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#EF4444"/>
+      <stop offset="100%" stop-color="#B91C1C"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Falling leaves (each has a .tmp/.log/.cache label) -->
+  <!-- Leaf 1 (large, .tmp) -->
+  <g transform="translate(160,100) rotate(-20)">
+    <path d="M0,0 Q40,-30 60,0 Q80,30 40,60 Q0,90 -20,60 Q-40,30 0,0 Z" fill="url(#leaf1)" opacity="0.9"/>
+    <path d="M0,0 Q30,30 40,60" stroke="#D97706" stroke-width="1.5" fill="none"/>
+    <path d="M15,10 Q30,30 35,50" stroke="#D97706" stroke-width="1" fill="none" opacity="0.5"/>
+    <text x="24" y="35" text-anchor="middle" font-family="monospace" font-size="9" fill="#1a0a00" transform="rotate(20)">.tmp</text>
+  </g>
+  <!-- Leaf 2 (medium, .log) -->
+  <g transform="translate(290,70) rotate(15)">
+    <path d="M0,0 Q35,-25 52,0 Q68,25 36,52 Q0,80 -18,52 Q-36,26 0,0 Z" fill="url(#leaf2)" opacity="0.85"/>
+    <path d="M0,0 Q26,26 36,52" stroke="#92400E" stroke-width="1.5" fill="none"/>
+    <text x="20" y="30" text-anchor="middle" font-family="monospace" font-size="8" fill="#1a0a00" transform="rotate(-15)">.log</text>
+  </g>
+  <!-- Leaf 3 (.cache) -->
+  <g transform="translate(100,220) rotate(30)">
+    <path d="M0,0 Q30,-22 46,0 Q62,22 30,48 Q0,74 -16,48 Q-32,24 0,0 Z" fill="url(#leaf3)" opacity="0.8"/>
+    <path d="M0,0 Q22,22 30,48" stroke="#991B1B" stroke-width="1.5" fill="none"/>
+    <text x="16" y="26" text-anchor="middle" font-family="monospace" font-size="7" fill="#fff" transform="rotate(-30)">.cache</text>
+  </g>
+  <!-- Leaf 4 (.bak) -->
+  <g transform="translate(350,160) rotate(-10)">
+    <path d="M0,0 Q28,-20 42,0 Q56,20 28,44 Q0,68 -14,44 Q-28,22 0,0 Z" fill="url(#leaf1)" opacity="0.75"/>
+    <path d="M0,0 Q21,20 28,44" stroke="#D97706" stroke-width="1.5" fill="none"/>
+    <text x="15" y="24" text-anchor="middle" font-family="monospace" font-size="8" fill="#1a0a00" transform="rotate(10)">.bak</text>
+  </g>
+  <!-- Leaf 5 (.swp) -->
+  <g transform="translate(200,300) rotate(25)">
+    <path d="M0,0 Q24,-18 36,0 Q48,18 24,40 Q0,62 -12,40 Q-24,20 0,0 Z" fill="url(#leaf2)" opacity="0.7"/>
+    <text x="13" y="22" text-anchor="middle" font-family="monospace" font-size="7" fill="#1a0a00" transform="rotate(-25)">.swp</text>
+  </g>
+  <!-- Leaf 6 (.tmp) -->
+  <g transform="translate(360,310) rotate(-35)">
+    <path d="M0,0 Q22,-16 34,0 Q44,16 22,36 Q0,56 -12,36 Q-22,18 0,0 Z" fill="url(#leaf3)" opacity="0.65"/>
+    <text x="12" y="20" text-anchor="middle" font-family="monospace" font-size="7" fill="#fff" transform="rotate(35)">.tmp</text>
+  </g>
+  <!-- Ground pile -->
+  <ellipse cx="256" cy="460" rx="140" ry="22" fill="#2a1000" opacity="0.8"/>
+  <path d="M130,450 Q170,440 200,452 Q230,462 260,448 Q290,436 320,452 Q350,464 385,450" fill="none" stroke="#F59E0B" stroke-width="2" opacity="0.4"/>
+  <!-- Tree branch (top) -->
+  <path d="M60,60 Q140,80 200,130" stroke="#6B4226" stroke-width="8" fill="none" stroke-linecap="round"/>
+  <path d="M200,130 Q240,100 280,90" stroke="#6B4226" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <path d="M200,130 Q220,160 260,155" stroke="#6B4226" stroke-width="4" fill="none" stroke-linecap="round"/>
+</svg>

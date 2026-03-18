@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#080600"/>
+      <stop offset="100%" stop-color="#100a00"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Golden spiral (Fibonacci rectangles) -->
+  <!-- Largest rectangle -->
+  <rect x="60" y="90" width="392" height="332" fill="none" stroke="#F59E0B" stroke-width="2" opacity="0.5"/>
+  <!-- Golden rectangle split -->
+  <line x1="297" y1="90" x2="297" y2="422" stroke="#F59E0B" stroke-width="1.5" opacity="0.4"/>
+  <!-- Right square -->
+  <rect x="297" y="90" width="155" height="155" fill="none" stroke="#D97706" stroke-width="1.5" opacity="0.4"/>
+  <!-- Lower-left area -->
+  <rect x="60" y="90" width="237" height="237" fill="none" stroke="#D97706" stroke-width="1" opacity="0.3"/>
+  <!-- Sub-divisions -->
+  <line x1="60" y1="185" x2="297" y2="185" stroke="#B45309" stroke-width="1" opacity="0.3"/>
+  <rect x="155" y="185" width="142" height="95" fill="none" stroke="#B45309" stroke-width="1" opacity="0.25"/>
+  <!-- Fibonacci spiral arc segments -->
+  <path d="M297,245 A155,155 0 0,0 142,90" fill="none" stroke="#F59E0B" stroke-width="3" opacity="0.7"/>
+  <path d="M60,327 A237,237 0 0,1 297,90" fill="none" stroke="#D97706" stroke-width="2.5" opacity="0.5"/>
+  <path d="M60,185 A125,125 0 0,0 60,327" fill="none" stroke="#B45309" stroke-width="2" opacity="0.4"/>
+  <path d="M155,185 A95,95 0 0,1 297,185" fill="none" stroke="#92400E" stroke-width="1.5" opacity="0.4"/>
+  <!-- φ label in center -->
+  <text x="200" y="350" text-anchor="middle" font-family="serif" font-size="60" fill="#F59E0B" opacity="0.15" font-weight="bold">φ</text>
+  <text x="350" y="185" text-anchor="middle" font-family="serif" font-size="40" fill="#D97706" opacity="0.2" font-weight="bold">φ</text>
+  <!-- Golden ratio value -->
+  <text x="175" y="382" text-anchor="middle" font-family="monospace" font-size="11" fill="#F59E0B" opacity="0.7">φ = 1.61803...</text>
+  <text x="375" y="280" text-anchor="middle" font-family="monospace" font-size="10" fill="#D97706" opacity="0.6">1+√5</text>
+  <line x1="345" y1="288" x2="415" y2="288" stroke="#D97706" stroke-width="1" opacity="0.5"/>
+  <text x="375" y="306" text-anchor="middle" font-family="monospace" font-size="10" fill="#D97706" opacity="0.6">  2</text>
+  <!-- Dimension labels -->
+  <text x="178" y="80" text-anchor="middle" font-family="monospace" font-size="9" fill="#F59E0B" opacity="0.5">237</text>
+  <text x="374" y="80" text-anchor="middle" font-family="monospace" font-size="9" fill="#D97706" opacity="0.5">155</text>
+</svg>

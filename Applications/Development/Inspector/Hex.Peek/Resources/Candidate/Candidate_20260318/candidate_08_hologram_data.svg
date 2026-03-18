@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#050005"/>
+      <stop offset="100%" stop-color="#0a000f"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Hologram projector base -->
+  <rect x="196" y="400" width="120" height="20" rx="6" fill="#1F2937"/>
+  <ellipse cx="256" cy="400" rx="60" ry="10" fill="#374151"/>
+  <!-- Projection cone -->
+  <path d="M220,400 L140,180 L372,180 L292,400 Z" fill="#7C3AED" opacity="0.05"/>
+  <path d="M220,400 L140,180" stroke="#7C3AED" stroke-width="1" opacity="0.2"/>
+  <path d="M292,400 L372,180" stroke="#7C3AED" stroke-width="1" opacity="0.2"/>
+  <!-- Hologram hex grid (floating) -->
+  <!-- Row 1 (top, faint) -->
+  <text x="170" y="200" font-family="monospace" font-size="11" fill="#A78BFA" opacity="0.3">00 FF A3 4B 0E C2</text>
+  <!-- Row 2 -->
+  <text x="155" y="220" font-family="monospace" font-size="11" fill="#8B5CF6" opacity="0.4">88 5D 3F A0 11 6E D7</text>
+  <!-- Row 3 -->
+  <text x="145" y="240" font-family="monospace" font-size="11" fill="#7C3AED" opacity="0.5">41 B9 CC 2F 7A 93 5B</text>
+  <!-- Row 4 (main) -->
+  <text x="140" y="260" font-family="monospace" font-size="12" fill="#A78BFA" opacity="0.7">FF 00 4A B2 33 E1 7C</text>
+  <!-- Row 5 -->
+  <text x="145" y="280" font-family="monospace" font-size="11" fill="#8B5CF6" opacity="0.5">90 DF 12 C8 55 3A 8E</text>
+  <!-- Row 6 -->
+  <text x="155" y="300" font-family="monospace" font-size="11" fill="#7C3AED" opacity="0.4">77 F3 19 6D A4 CB 0C</text>
+  <!-- Row 7 (bottom, faint) -->
+  <text x="170" y="320" font-family="monospace" font-size="11" fill="#6D28D9" opacity="0.3">29 E8 51 3C 84 B1 F6</text>
+  <!-- Scan line effect -->
+  <rect x="140" y="248" width="232" height="4" fill="#A78BFA" opacity="0.06"/>
+  <rect x="140" y="272" width="232" height="2" fill="#A78BFA" opacity="0.04"/>
+  <!-- Side emitters -->
+  <line x1="140" y1="180" x2="140" y2="340" stroke="#7C3AED" stroke-width="2" opacity="0.3"/>
+  <line x1="372" y1="180" x2="372" y2="340" stroke="#7C3AED" stroke-width="2" opacity="0.3"/>
+  <!-- Floating label -->
+  <text x="256" y="170" text-anchor="middle" font-family="monospace" font-size="10" fill="#A78BFA" opacity="0.5">HEX HOLOGRAM</text>
+  <!-- Projector light -->
+  <ellipse cx="256" cy="396" rx="20" ry="6" fill="#7C3AED" opacity="0.6"/>
+</svg>

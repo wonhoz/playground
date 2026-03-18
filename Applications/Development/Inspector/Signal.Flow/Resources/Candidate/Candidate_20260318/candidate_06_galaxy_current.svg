@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#000005"/>
+      <stop offset="100%" stop-color="#00000f"/>
+    </linearGradient>
+    <radialGradient id="core" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#F59E0B" stop-opacity="0.6"/>
+      <stop offset="30%" stop-color="#F97316" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#F59E0B" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <rect width="512" height="512" rx="80" fill="url(#core)"/>
+  <!-- Galaxy spiral signal current -->
+  <!-- Arm 1 (golden current) -->
+  <path d="M256,256 Q290,230 320,196 Q350,162 360,126 Q368,98 350,78 Q330,58 306,66 Q280,76 268,102 Q256,130 260,162 Q266,196 280,220 Q296,244 312,256" fill="none" stroke="#F59E0B" stroke-width="3" opacity="0.7"/>
+  <!-- Arm 2 (opposite) -->
+  <path d="M256,256 Q222,282 192,316 Q162,350 152,386 Q144,414 162,434 Q182,454 206,446 Q232,436 244,410 Q256,382 252,350 Q246,316 232,292 Q216,268 200,256" fill="none" stroke="#D97706" stroke-width="3" opacity="0.7"/>
+  <!-- Arm 3 -->
+  <path d="M256,256 Q240,222 210,196 Q178,170 148,166 Q120,162 106,180 Q90,200 100,224 Q112,250 138,262 Q166,274 196,268 Q228,260 248,248" fill="none" stroke="#EAB308" stroke-width="2" opacity="0.5"/>
+  <!-- Arm 4 -->
+  <path d="M256,256 Q272,290 302,316 Q334,342 364,346 Q392,350 406,332 Q422,312 412,288 Q400,262 374,250 Q344,238 314,244 Q284,252 264,264" fill="none" stroke="#CA8A04" stroke-width="2" opacity="0.5"/>
+  <!-- Signal value dots on arms -->
+  <circle cx="320" cy="196" r="5" fill="#FCD34D"/>
+  <text x="332" y="192" font-family="monospace" font-size="8" fill="#FCD34D">+2.4A</text>
+  <circle cx="192" cy="316" r="5" fill="#FDE68A"/>
+  <text x="170" y="320" font-family="monospace" font-size="8" fill="#FDE68A">-1.8A</text>
+  <circle cx="148" cy="166" r="4" fill="#F59E0B"/>
+  <text x="130" y="162" font-family="monospace" font-size="8" fill="#F59E0B">+1.2A</text>
+  <circle cx="364" cy="346" r="4" fill="#D97706"/>
+  <text x="368" y="342" font-family="monospace" font-size="8" fill="#D97706">-0.9A</text>
+  <!-- Core (signal source) -->
+  <circle cx="256" cy="256" r="22" fill="#78350F" stroke="#FCD34D" stroke-width="2.5"/>
+  <text x="256" y="252" text-anchor="middle" font-family="monospace" font-size="8" fill="#FDE68A">SRC</text>
+  <text x="256" y="264" text-anchor="middle" font-family="monospace" font-size="8" fill="#FCD34D">5V</text>
+  <!-- Stars -->
+  <circle cx="80" cy="80" r="1" fill="white" opacity="0.3"/>
+  <circle cx="420" cy="60" r="1" fill="white" opacity="0.3"/>
+  <circle cx="60" cy="420" r="1" fill="white" opacity="0.3"/>
+  <circle cx="440" cy="400" r="1" fill="white" opacity="0.3"/>
+</svg>

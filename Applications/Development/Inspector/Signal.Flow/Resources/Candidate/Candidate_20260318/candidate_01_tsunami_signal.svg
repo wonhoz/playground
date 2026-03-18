@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#000a14"/>
+      <stop offset="100%" stop-color="#001020"/>
+    </linearGradient>
+    <linearGradient id="wave" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#0369A1" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#38BDF8" stop-opacity="0.3"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Tsunami wave shape (large amplitude signal burst) -->
+  <!-- Background calm waves -->
+  <path d="M40,340 Q80,330 120,340 Q160,350 200,340 Q240,330 280,340 Q320,350 360,340 Q400,330 440,340 L440,400 L40,400 Z" fill="#0369A1" opacity="0.2"/>
+  <path d="M40,360 Q80,350 120,360 Q160,370 200,360 Q240,350 280,360 Q320,370 360,360 Q400,350 440,360 L440,420 L40,420 Z" fill="#0284C7" opacity="0.15"/>
+  <!-- Tsunami wave (large spike = signal burst) -->
+  <path d="M40,320 Q60,320 80,320 Q100,320 120,310 Q140,295 160,260 Q180,220 200,160 Q220,80 240,60 Q248,50 256,60 Q264,70 270,100 Q290,180 310,260 Q330,320 360,330 Q400,325 440,320 L440,400 L40,400 Z" fill="url(#wave)" opacity="0.7"/>
+  <!-- Wave crest detail -->
+  <path d="M40,320 Q80,316 120,310 Q148,298 168,258 Q192,208 210,148 Q224,96 240,66 Q248,52 256,62 Q262,72 268,104 Q286,180 308,262 Q326,318 360,328 Q400,322 440,320" fill="none" stroke="#38BDF8" stroke-width="3" opacity="0.8"/>
+  <!-- Signal metrics labels -->
+  <text x="256" y="80" text-anchor="middle" font-family="monospace" font-size="10" fill="#38BDF8" opacity="0.7">PEAK: 9.2V</text>
+  <line x1="256" y1="90" x2="256" y2="340" stroke="#38BDF8" stroke-width="1" stroke-dasharray="4,3" opacity="0.4"/>
+  <!-- Amplitude arrow -->
+  <line x1="46" y1="90" x2="46" y2="320" stroke="#0EA5E9" stroke-width="1.5" opacity="0.5"/>
+  <text x="44" y="210" text-anchor="end" font-family="monospace" font-size="9" fill="#0EA5E9" opacity="0.7">A</text>
+  <!-- Time axis -->
+  <line x1="40" y1="400" x2="440" y2="400" stroke="#38BDF8" stroke-width="1.5" opacity="0.4"/>
+  <text x="256" y="430" text-anchor="middle" font-family="monospace" font-size="10" fill="#38BDF8" opacity="0.5">time →</text>
+  <!-- Frequency label -->
+  <text x="400" y="310" text-anchor="middle" font-family="monospace" font-size="9" fill="#38BDF8" opacity="0.6">f=1Hz</text>
+</svg>

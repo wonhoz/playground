@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#000010"/>
+      <stop offset="100%" stop-color="#00001a"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Input: white signal -->
+  <path d="M40,256 Q60,230 80,256 Q100,282 120,256 Q140,230 160,256 Q180,282 190,256" stroke="white" stroke-width="5" fill="none" opacity="0.7"/>
+  <!-- Prism -->
+  <polygon points="190,140 190,372 320,256" fill="#060615" stroke="#6366F1" stroke-width="2.5"/>
+  <!-- Dispersed frequency bands -->
+  <!-- Very Low Freq (red) -->
+  <path d="M320,256 Q380,196 452,140" stroke="#EF4444" stroke-width="5" fill="none" opacity="0.7"/>
+  <path d="M426,166 Q436,156 444,148" stroke="#EF4444" stroke-width="3" fill="none" opacity="0.5"/>
+  <text x="370" y="193" font-family="monospace" font-size="8" fill="#EF4444">VLF 3-30kHz</text>
+  <!-- Low Freq (orange) -->
+  <path d="M320,256 Q375,214 452,180" stroke="#F97316" stroke-width="5" fill="none" opacity="0.7"/>
+  <path d="M420,198 Q432,192 444,186" stroke="#F97316" stroke-width="3" fill="none" opacity="0.5"/>
+  <text x="372" y="220" font-family="monospace" font-size="8" fill="#F97316">LF 30-300kHz</text>
+  <!-- Medium Freq (yellow) -->
+  <path d="M320,256 Q376,236 452,220" stroke="#EAB308" stroke-width="5" fill="none" opacity="0.7"/>
+  <text x="372" y="247" font-family="monospace" font-size="8" fill="#EAB308">MF 0.3-3MHz</text>
+  <!-- High Freq (green) -->
+  <path d="M320,256 Q376,256 452,256" stroke="#22C55E" stroke-width="5" fill="none" opacity="0.7"/>
+  <text x="372" y="274" font-family="monospace" font-size="8" fill="#22C55E">HF 3-30MHz</text>
+  <!-- Very High Freq (blue) -->
+  <path d="M320,256 Q375,276 452,292" stroke="#3B82F6" stroke-width="5" fill="none" opacity="0.7"/>
+  <text x="372" y="301" font-family="monospace" font-size="8" fill="#3B82F6">VHF 30-300MHz</text>
+  <!-- Ultra High Freq (indigo) -->
+  <path d="M320,256 Q374,296 452,328" stroke="#6366F1" stroke-width="5" fill="none" opacity="0.7"/>
+  <text x="370" y="328" font-family="monospace" font-size="8" fill="#6366F1">UHF 0.3-3GHz</text>
+  <!-- Super High Freq (violet) -->
+  <path d="M320,256 Q374,316 452,372" stroke="#8B5CF6" stroke-width="5" fill="none" opacity="0.7"/>
+  <text x="370" y="366" font-family="monospace" font-size="8" fill="#8B5CF6">SHF 3-30GHz</text>
+  <!-- Label -->
+  <text x="256" y="470" text-anchor="middle" font-family="monospace" font-size="11" fill="#6366F1" opacity="0.7">SPECTRUM ANALYZER</text>
+</svg>

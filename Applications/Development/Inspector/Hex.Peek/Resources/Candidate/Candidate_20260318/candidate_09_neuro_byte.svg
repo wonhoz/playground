@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f0008"/>
+      <stop offset="100%" stop-color="#1a0010"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Neural network connections -->
+  <!-- Input layer to hidden layer -->
+  <line x1="90" y1="150" x2="220" y2="180" stroke="#EC4899" stroke-width="1" opacity="0.3"/>
+  <line x1="90" y1="150" x2="220" y2="256" stroke="#EC4899" stroke-width="1" opacity="0.2"/>
+  <line x1="90" y1="256" x2="220" y2="180" stroke="#EC4899" stroke-width="1" opacity="0.3"/>
+  <line x1="90" y1="256" x2="220" y2="256" stroke="#F472B6" stroke-width="1.5" opacity="0.4"/>
+  <line x1="90" y1="256" x2="220" y2="330" stroke="#EC4899" stroke-width="1" opacity="0.2"/>
+  <line x1="90" y1="362" x2="220" y2="256" stroke="#EC4899" stroke-width="1" opacity="0.2"/>
+  <line x1="90" y1="362" x2="220" y2="330" stroke="#EC4899" stroke-width="1" opacity="0.3"/>
+  <!-- Hidden to output -->
+  <line x1="220" y1="180" x2="292" y2="200" stroke="#F472B6" stroke-width="1" opacity="0.4"/>
+  <line x1="220" y1="180" x2="292" y2="310" stroke="#EC4899" stroke-width="1" opacity="0.2"/>
+  <line x1="220" y1="256" x2="292" y2="200" stroke="#F472B6" stroke-width="1.5" opacity="0.5"/>
+  <line x1="220" y1="256" x2="292" y2="310" stroke="#F472B6" stroke-width="1" opacity="0.4"/>
+  <line x1="220" y1="330" x2="292" y2="200" stroke="#EC4899" stroke-width="1" opacity="0.2"/>
+  <line x1="220" y1="330" x2="292" y2="310" stroke="#F472B6" stroke-width="1.5" opacity="0.4"/>
+  <!-- Output to final -->
+  <line x1="292" y1="200" x2="422" y2="256" stroke="#F472B6" stroke-width="2" opacity="0.5"/>
+  <line x1="292" y1="310" x2="422" y2="256" stroke="#F472B6" stroke-width="2" opacity="0.5"/>
+  <!-- Input neurons (with hex values) -->
+  <circle cx="90" cy="150" r="22" fill="#1a0010" stroke="#EC4899" stroke-width="2"/>
+  <text x="90" y="154" text-anchor="middle" font-family="monospace" font-size="8" fill="#F472B6">FF</text>
+  <circle cx="90" cy="256" r="22" fill="#1a0010" stroke="#EC4899" stroke-width="2"/>
+  <text x="90" y="260" text-anchor="middle" font-family="monospace" font-size="8" fill="#F472B6">A3</text>
+  <circle cx="90" cy="362" r="22" fill="#1a0010" stroke="#EC4899" stroke-width="2"/>
+  <text x="90" y="366" text-anchor="middle" font-family="monospace" font-size="8" fill="#F472B6">4B</text>
+  <!-- Hidden neurons -->
+  <circle cx="220" cy="180" r="18" fill="#2d0018" stroke="#F472B6" stroke-width="1.5"/>
+  <text x="220" y="184" text-anchor="middle" font-family="monospace" font-size="7" fill="#F9A8D4">0E</text>
+  <circle cx="220" cy="256" r="18" fill="#2d0018" stroke="#F9A8D4" stroke-width="2"/>
+  <text x="220" y="260" text-anchor="middle" font-family="monospace" font-size="7" fill="#F9A8D4">C2</text>
+  <circle cx="220" cy="330" r="18" fill="#2d0018" stroke="#F472B6" stroke-width="1.5"/>
+  <text x="220" y="334" text-anchor="middle" font-family="monospace" font-size="7" fill="#F9A8D4">88</text>
+  <!-- Hidden layer 2 -->
+  <circle cx="292" cy="200" r="16" fill="#3d0022" stroke="#F9A8D4" stroke-width="1.5"/>
+  <text x="292" y="204" text-anchor="middle" font-family="monospace" font-size="7" fill="#FBCFE8">5D</text>
+  <circle cx="292" cy="310" r="16" fill="#3d0022" stroke="#F9A8D4" stroke-width="1.5"/>
+  <text x="292" y="314" text-anchor="middle" font-family="monospace" font-size="7" fill="#FBCFE8">A0</text>
+  <!-- Output neuron -->
+  <circle cx="422" cy="256" r="30" fill="#4d0030" stroke="#F9A8D4" stroke-width="2.5"/>
+  <text x="422" y="250" text-anchor="middle" font-family="monospace" font-size="8" fill="#FBCFE8">HEX</text>
+  <text x="422" y="264" text-anchor="middle" font-family="monospace" font-size="8" fill="#F9A8D4">OUT</text>
+</svg>

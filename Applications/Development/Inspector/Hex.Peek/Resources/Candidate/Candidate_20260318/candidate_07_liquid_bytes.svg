@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#000810"/>
+      <stop offset="100%" stop-color="#001020"/>
+    </linearGradient>
+    <linearGradient id="liquid" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0EA5E9"/>
+      <stop offset="100%" stop-color="#0369A1"/>
+    </linearGradient>
+    <linearGradient id="wave" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38BDF8" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#38BDF8" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#38BDF8" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Flask/beaker outline -->
+  <path d="M180,80 L180,220 L80,400 Q70,430 100,440 L412,440 Q442,430 432,400 L332,220 L332,80 Z" fill="none" stroke="#38BDF8" stroke-width="3"/>
+  <rect x="160" y="68" width="192" height="20" rx="6" fill="#0EA5E9" opacity="0.6"/>
+  <!-- Liquid inside flask -->
+  <path d="M180,300 L95,420 Q88,435 110,438 L402,438 Q424,435 417,420 L332,300 Z" fill="url(#liquid)" opacity="0.5"/>
+  <!-- Liquid surface wave -->
+  <path d="M120,298 Q170,288 220,300 Q270,312 320,298 Q340,293 345,302" fill="none" stroke="#38BDF8" stroke-width="2.5" opacity="0.7"/>
+  <!-- Hex bytes floating in liquid -->
+  <text x="180" y="350" text-anchor="middle" font-family="monospace" font-size="11" fill="#E0F2FE" opacity="0.9">FF A3 4B</text>
+  <text x="280" y="380" text-anchor="middle" font-family="monospace" font-size="11" fill="#BAE6FD" opacity="0.8">0E C2 88</text>
+  <text x="200" y="418" text-anchor="middle" font-family="monospace" font-size="11" fill="#7DD3FC" opacity="0.7">5D A0 11</text>
+  <text x="320" y="418" text-anchor="middle" font-family="monospace" font-size="11" fill="#38BDF8" opacity="0.6">6E D7 41</text>
+  <!-- Bubbles rising -->
+  <circle cx="200" cy="270" r="6" fill="none" stroke="#38BDF8" stroke-width="1.5" opacity="0.6"/>
+  <circle cx="250" cy="240" r="4" fill="none" stroke="#38BDF8" stroke-width="1.5" opacity="0.5"/>
+  <circle cx="290" cy="260" r="5" fill="none" stroke="#38BDF8" stroke-width="1.5" opacity="0.6"/>
+  <circle cx="230" cy="210" r="3" fill="none" stroke="#0EA5E9" stroke-width="1" opacity="0.4"/>
+  <!-- Byte labels on flask walls -->
+  <text x="220" y="140" text-anchor="middle" font-family="monospace" font-size="10" fill="#38BDF8" opacity="0.4">B9 CC</text>
+  <text x="290" y="160" text-anchor="middle" font-family="monospace" font-size="10" fill="#0EA5E9" opacity="0.4">2F 7A</text>
+  <!-- Title -->
+  <text x="256" y="488" text-anchor="middle" font-family="monospace" font-size="11" fill="#38BDF8" opacity="0.6">LIQUID HEX</text>
+</svg>

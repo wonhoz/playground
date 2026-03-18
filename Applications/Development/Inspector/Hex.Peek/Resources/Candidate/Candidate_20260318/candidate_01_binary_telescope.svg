@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#000814"/>
+      <stop offset="100%" stop-color="#001233"/>
+    </linearGradient>
+    <linearGradient id="scope" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E40AF"/>
+      <stop offset="100%" stop-color="#1E3A8A"/>
+    </linearGradient>
+    <radialGradient id="lens" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#93C5FD" stop-opacity="0.3"/>
+      <stop offset="70%" stop-color="#3B82F6" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#1D4ED8" stop-opacity="0.4"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Stars in background -->
+  <circle cx="80" cy="80" r="1.5" fill="white" opacity="0.6"/>
+  <circle cx="150" cy="50" r="1" fill="white" opacity="0.5"/>
+  <circle cx="400" cy="60" r="2" fill="white" opacity="0.7"/>
+  <circle cx="460" cy="100" r="1.5" fill="white" opacity="0.5"/>
+  <circle cx="60" cy="200" r="1" fill="white" opacity="0.4"/>
+  <circle cx="430" cy="180" r="1.5" fill="#93C5FD" opacity="0.6"/>
+  <!-- Telescope body -->
+  <rect x="100" y="200" width="240" height="60" rx="12" fill="url(#scope)"/>
+  <rect x="80" y="212" width="60" height="36" rx="8" fill="#1E3A8A"/>
+  <rect x="340" y="190" width="80" height="80" rx="10" fill="#1D4ED8"/>
+  <!-- Telescope lens (large circle) -->
+  <circle cx="420" cy="230" r="52" fill="url(#lens)" stroke="#3B82F6" stroke-width="3"/>
+  <circle cx="420" cy="230" r="40" fill="none" stroke="#60A5FA" stroke-width="1.5" opacity="0.5"/>
+  <!-- Hex bytes visible in lens -->
+  <text x="420" y="218" text-anchor="middle" font-family="monospace" font-size="9" fill="#93C5FD" opacity="0.8">FF A0</text>
+  <text x="420" y="232" text-anchor="middle" font-family="monospace" font-size="9" fill="#60A5FA" opacity="0.7">3B 4E</text>
+  <text x="420" y="246" text-anchor="middle" font-family="monospace" font-size="9" fill="#93C5FD" opacity="0.6">C2 88</text>
+  <!-- Crosshair in lens -->
+  <line x1="400" y1="230" x2="440" y2="230" stroke="#60A5FA" stroke-width="0.5" opacity="0.6"/>
+  <line x1="420" y1="210" x2="420" y2="250" stroke="#60A5FA" stroke-width="0.5" opacity="0.6"/>
+  <!-- Tripod legs -->
+  <line x1="256" y1="260" x2="180" y2="420" stroke="#1E40AF" stroke-width="6" stroke-linecap="round"/>
+  <line x1="256" y1="260" x2="256" y2="430" stroke="#1E40AF" stroke-width="6" stroke-linecap="round"/>
+  <line x1="256" y1="260" x2="330" y2="420" stroke="#1E40AF" stroke-width="6" stroke-linecap="round"/>
+  <!-- Hex stream in viewfinder path -->
+  <text x="256" y="300" text-anchor="middle" font-family="monospace" font-size="8" fill="#60A5FA" opacity="0.5">00 FF 4A B2 33 E1 7C 90 DF 12</text>
+  <text x="256" y="315" text-anchor="middle" font-family="monospace" font-size="8" fill="#3B82F6" opacity="0.4">41 6D 05 C8 FF 00 28 93 5B 77</text>
+</svg>

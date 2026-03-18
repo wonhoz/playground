@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#050003"/>
+      <stop offset="100%" stop-color="#0a0008"/>
+    </linearGradient>
+    <linearGradient id="gem" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E879F9" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#9333EA" stop-opacity="0.4"/>
+    </linearGradient>
+    <linearGradient id="gem2" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#F0ABFC" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#7C3AED" stop-opacity="0.3"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#E879F9" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#9333EA" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <rect width="512" height="512" rx="80" fill="url(#glow)"/>
+  <!-- Crystal gem (skill power crystal) -->
+  <!-- Crown top facets -->
+  <polygon points="256,70 310,130 256,120 202,130" fill="url(#gem)" stroke="#E879F9" stroke-width="1.5"/>
+  <polygon points="256,70 202,130 160,100" fill="url(#gem2)" stroke="#C026D3" stroke-width="1" opacity="0.6"/>
+  <polygon points="256,70 310,130 352,100" fill="url(#gem)" stroke="#C026D3" stroke-width="1" opacity="0.6"/>
+  <!-- Middle band facets -->
+  <polygon points="160,100 202,130 190,220 120,200" fill="url(#gem2)" stroke="#9333EA" stroke-width="1.5"/>
+  <polygon points="352,100 310,130 322,220 392,200" fill="url(#gem)" stroke="#9333EA" stroke-width="1.5"/>
+  <polygon points="202,130 310,130 322,220 190,220" fill="url(#gem2)" stroke="#E879F9" stroke-width="2"/>
+  <!-- Bottom facets -->
+  <polygon points="190,220 322,220 256,420" fill="url(#gem)" stroke="#E879F9" stroke-width="2"/>
+  <polygon points="120,200 190,220 256,420" fill="url(#gem2)" stroke="#9333EA" stroke-width="1.5" opacity="0.7"/>
+  <polygon points="392,200 322,220 256,420" fill="url(#gem)" stroke="#9333EA" stroke-width="1.5" opacity="0.7"/>
+  <!-- Inner glow lines -->
+  <line x1="256" y1="70" x2="256" y2="420" stroke="#F0ABFC" stroke-width="1" opacity="0.4"/>
+  <line x1="160" y1="100" x2="392" y2="200" stroke="#E879F9" stroke-width="0.5" opacity="0.3"/>
+  <line x1="352" y1="100" x2="120" y2="200" stroke="#E879F9" stroke-width="0.5" opacity="0.3"/>
+  <!-- Skill level text inside crystal -->
+  <text x="256" y="180" text-anchor="middle" font-family="monospace" font-size="13" fill="#F0ABFC" opacity="0.8">SKILL</text>
+  <text x="256" y="198" text-anchor="middle" font-family="monospace" font-size="11" fill="#E879F9" opacity="0.7">POWER</text>
+  <text x="256" y="230" text-anchor="middle" font-family="monospace" font-size="18" fill="#F0ABFC" font-weight="bold" opacity="0.9">9999</text>
+  <!-- Bottom point glow -->
+  <circle cx="256" cy="420" r="8" fill="#E879F9" opacity="0.6"/>
+  <circle cx="256" cy="420" r="16" fill="#E879F9" opacity="0.15"/>
+  <!-- Side sparkles -->
+  <circle cx="100" cy="180" r="3" fill="#F0ABFC" opacity="0.5"/>
+  <circle cx="80" cy="220" r="2" fill="#E879F9" opacity="0.4"/>
+  <circle cx="415" cy="180" r="3" fill="#F0ABFC" opacity="0.5"/>
+  <circle cx="430" cy="240" r="2" fill="#E879F9" opacity="0.4"/>
+</svg>

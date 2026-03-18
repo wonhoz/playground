@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#030a08"/>
+      <stop offset="100%" stop-color="#060f10"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- DNA double helix as two signal waves intertwined -->
+  <!-- Strand 1 (sine wave, teal) -->
+  <path d="M40,256 Q70,180 100,256 Q130,332 160,256 Q190,180 220,256 Q250,332 280,256 Q310,180 340,256 Q370,332 400,256 Q430,180 460,256" fill="none" stroke="#06B6D4" stroke-width="4"/>
+  <!-- Strand 2 (cosine wave, green, offset) -->
+  <path d="M40,256 Q70,332 100,256 Q130,180 160,256 Q190,332 220,256 Q250,180 280,256 Q310,332 340,256 Q370,180 400,256 Q430,332 460,256" fill="none" stroke="#4ADE80" stroke-width="4"/>
+  <!-- Base pairs (rungs connecting the two strands) -->
+  <line x1="100" y1="256" x2="100" y2="256" stroke="#E0E0E0" stroke-width="0"/>
+  <!-- Connecting rungs at crossover points -->
+  <line x1="70" y1="218" x2="70" y2="294" stroke="#94A3B8" stroke-width="2.5" opacity="0.5"/>
+  <text x="70" y="260" text-anchor="middle" font-family="monospace" font-size="7" fill="#CBD5E1" opacity="0.6">A-T</text>
+  <line x1="130" y1="294" x2="130" y2="218" stroke="#94A3B8" stroke-width="2.5" opacity="0.5"/>
+  <text x="130" y="260" text-anchor="middle" font-family="monospace" font-size="7" fill="#CBD5E1" opacity="0.6">G-C</text>
+  <line x1="190" y1="218" x2="190" y2="294" stroke="#94A3B8" stroke-width="2.5" opacity="0.5"/>
+  <text x="190" y="260" text-anchor="middle" font-family="monospace" font-size="7" fill="#CBD5E1" opacity="0.6">A-T</text>
+  <line x1="250" y1="294" x2="250" y2="218" stroke="#94A3B8" stroke-width="2.5" opacity="0.5"/>
+  <text x="250" y="260" text-anchor="middle" font-family="monospace" font-size="7" fill="#CBD5E1" opacity="0.6">C-G</text>
+  <line x1="310" y1="218" x2="310" y2="294" stroke="#94A3B8" stroke-width="2.5" opacity="0.5"/>
+  <text x="310" y="260" text-anchor="middle" font-family="monospace" font-size="7" fill="#CBD5E1" opacity="0.6">T-A</text>
+  <line x1="370" y1="294" x2="370" y2="218" stroke="#94A3B8" stroke-width="2.5" opacity="0.5"/>
+  <text x="370" y="260" text-anchor="middle" font-family="monospace" font-size="7" fill="#CBD5E1" opacity="0.6">G-C</text>
+  <line x1="430" y1="218" x2="430" y2="294" stroke="#94A3B8" stroke-width="2.5" opacity="0.5"/>
+  <text x="430" y="260" text-anchor="middle" font-family="monospace" font-size="7" fill="#CBD5E1" opacity="0.6">A-T</text>
+  <!-- Channel labels -->
+  <text x="48" y="180" font-family="monospace" font-size="9" fill="#06B6D4">SIG-1</text>
+  <text x="48" y="340" font-family="monospace" font-size="9" fill="#4ADE80">SIG-2</text>
+  <!-- Frequency markers -->
+  <text x="256" y="420" text-anchor="middle" font-family="monospace" font-size="10" fill="#06B6D4" opacity="0.6">f = 2.4 kHz  |  A = 76 mV</text>
+  <text x="256" y="440" text-anchor="middle" font-family="monospace" font-size="10" fill="#4ADE80" opacity="0.6">f = 2.4 kHz  |  A = 68 mV</text>
+</svg>

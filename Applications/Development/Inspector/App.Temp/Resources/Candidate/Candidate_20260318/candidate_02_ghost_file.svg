@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#060612"/>
+      <stop offset="100%" stop-color="#0f0f2a"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="40%" r="50%">
+      <stop offset="0%" stop-color="#818CF8" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#818CF8" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <rect width="512" height="512" rx="80" fill="url(#glow)"/>
+  <!-- Ghost body -->
+  <path d="M256,120 C180,120 140,170 140,230 L140,380 L170,360 L200,380 L230,360 L256,380 L282,360 L312,380 L342,360 L372,380 L372,230 C372,170 332,120 256,120 Z" fill="#818CF8" opacity="0.15"/>
+  <path d="M256,120 C180,120 140,170 140,230 L140,380 L170,360 L200,380 L230,360 L256,380 L282,360 L312,380 L342,360 L372,380 L372,230 C372,170 332,120 256,120 Z" fill="none" stroke="#818CF8" stroke-width="2.5" opacity="0.7"/>
+  <!-- Ghost eyes -->
+  <ellipse cx="220" cy="240" rx="18" ry="22" fill="#818CF8" opacity="0.8"/>
+  <ellipse cx="292" cy="240" rx="18" ry="22" fill="#818CF8" opacity="0.8"/>
+  <ellipse cx="220" cy="244" rx="8" ry="10" fill="#0f0f2a"/>
+  <ellipse cx="292" cy="244" rx="8" ry="10" fill="#0f0f2a"/>
+  <!-- File icon overlay (transparent/ghostly) -->
+  <path d="M170,150 L290,150 L330,190 L330,310 L170,310 Z" fill="none" stroke="#818CF8" stroke-width="1.5" stroke-dasharray="6,4" opacity="0.4"/>
+  <path d="M290,150 L290,190 L330,190" fill="none" stroke="#818CF8" stroke-width="1.5" stroke-dasharray="4,4" opacity="0.3"/>
+  <!-- .tmp text on ghost -->
+  <text x="256" y="298" text-anchor="middle" font-family="monospace" font-size="18" fill="#818CF8" opacity="0.5">.tmp</text>
+  <!-- Floating particles -->
+  <circle cx="120" cy="200" r="3" fill="#818CF8" opacity="0.4"/>
+  <circle cx="100" cy="250" r="2" fill="#818CF8" opacity="0.3"/>
+  <circle cx="400" cy="180" r="3" fill="#818CF8" opacity="0.4"/>
+  <circle cx="420" cy="300" r="2" fill="#818CF8" opacity="0.3"/>
+  <circle cx="130" cy="350" r="4" fill="#818CF8" opacity="0.2"/>
+  <circle cx="390" cy="380" r="3" fill="#818CF8" opacity="0.25"/>
+  <!-- Title -->
+  <text x="256" y="460" text-anchor="middle" font-family="monospace" font-size="14" fill="#818CF8" opacity="0.6">GHOST FILES</text>
+</svg>

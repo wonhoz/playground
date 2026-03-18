@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00050f"/>
+      <stop offset="100%" stop-color="#000a1a"/>
+    </linearGradient>
+    <radialGradient id="bubble1" cx="30%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#60A5FA" stop-opacity="0.2"/>
+      <stop offset="80%" stop-color="#3B82F6" stop-opacity="0.05"/>
+      <stop offset="100%" stop-color="#3B82F6" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="bubble2" cx="30%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#A78BFA" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#7C3AED" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Bubbles with temp files inside, some popping -->
+  <!-- Large bubble (intact) -->
+  <circle cx="180" cy="200" r="90" fill="url(#bubble1)" stroke="#60A5FA" stroke-width="2" opacity="0.8"/>
+  <text x="180" y="195" text-anchor="middle" font-family="monospace" font-size="14" fill="#60A5FA">.tmp</text>
+  <text x="180" y="214" text-anchor="middle" font-family="monospace" font-size="10" fill="#93C5FD">6.2 MB</text>
+  <!-- Highlight on bubble -->
+  <ellipse cx="156" cy="176" rx="22" ry="14" fill="white" opacity="0.08"/>
+  <!-- Medium bubble (intact) -->
+  <circle cx="340" cy="180" r="68" fill="url(#bubble2)" stroke="#A78BFA" stroke-width="2" opacity="0.7"/>
+  <text x="340" y="175" text-anchor="middle" font-family="monospace" font-size="12" fill="#A78BFA">.log</text>
+  <text x="340" y="192" text-anchor="middle" font-family="monospace" font-size="9" fill="#C4B5FD">3.1 MB</text>
+  <ellipse cx="322" cy="160" rx="16" ry="10" fill="white" opacity="0.07"/>
+  <!-- Small bubble (popping) -->
+  <circle cx="280" cy="360" r="55" fill="none" stroke="#60A5FA" stroke-width="1.5" stroke-dasharray="6,4" opacity="0.5"/>
+  <text x="280" y="358" text-anchor="middle" font-family="monospace" font-size="11" fill="#60A5FA" opacity="0.6">.cache</text>
+  <!-- Pop particles -->
+  <circle cx="250" cy="308" r="3" fill="#60A5FA" opacity="0.7"/>
+  <circle cx="240" cy="320" r="2" fill="#60A5FA" opacity="0.5"/>
+  <circle cx="320" cy="312" r="3" fill="#60A5FA" opacity="0.6"/>
+  <circle cx="330" cy="330" r="2" fill="#60A5FA" opacity="0.4"/>
+  <circle cx="270" cy="305" r="2" fill="#93C5FD" opacity="0.6"/>
+  <!-- Bottom bubble (tiny, rising) -->
+  <circle cx="120" cy="380" r="32" fill="url(#bubble1)" stroke="#3B82F6" stroke-width="1.5" opacity="0.5"/>
+  <text x="120" y="383" text-anchor="middle" font-family="monospace" font-size="9" fill="#60A5FA">.bak</text>
+  <circle cx="400" cy="340" r="24" fill="url(#bubble2)" stroke="#7C3AED" stroke-width="1.5" opacity="0.4"/>
+  <text x="400" y="343" text-anchor="middle" font-family="monospace" font-size="8" fill="#A78BFA">.swp</text>
+</svg>

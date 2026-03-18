@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="45%" r="55%">
+      <stop offset="0%" stop-color="#150810"/>
+      <stop offset="100%" stop-color="#030508"/>
+    </radialGradient>
+    <radialGradient id="bubbleGrad" cx="40%" cy="35%" r="60%">
+      <stop offset="0%" stop-color="#3d0a26"/>
+      <stop offset="60%" stop-color="#1f0514"/>
+      <stop offset="100%" stop-color="#0f0309"/>
+    </radialGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="softglow">
+      <feGaussianBlur stdDeviation="2.5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <rect width="512" height="512" fill="url(#bg)"/>
+
+  <!-- Main speech bubble -->
+  <path d="M80,60 Q80,30 110,30 L402,30 Q432,30 432,60 L432,280 Q432,310 402,310 L240,310 L180,390 L200,310 L110,310 Q80,310 80,280 Z"
+    fill="url(#bubbleGrad)" stroke="#EC4899" stroke-width="3" stroke-opacity="0.8" filter="url(#glow)"/>
+
+  <!-- Inner highlight -->
+  <path d="M96,68 Q96,46 116,46 L396,46 Q416,46 416,68 L416,100 Q340,90 256,90 Q172,90 96,100 Z"
+    fill="white" fill-opacity="0.07"/>
+
+  <!-- Manga action lines radiating from bubble -->
+  <g stroke="#EC4899" stroke-opacity="0.25" stroke-width="1.5">
+    <line x1="256" y1="170" x2="50" y2="30"/>
+    <line x1="256" y1="170" x2="30" y2="170"/>
+    <line x1="256" y1="170" x2="50" y2="310"/>
+    <line x1="256" y1="170" x2="462" y2="30"/>
+    <line x1="256" y1="170" x2="482" y2="170"/>
+    <line x1="256" y1="170" x2="462" y2="310"/>
+    <line x1="256" y1="170" x2="256" y2="20"/>
+  </g>
+
+  <!-- Text lines inside bubble (manga text) -->
+  <rect x="120" y="90" width="272" height="18" rx="9" fill="#EC4899" fill-opacity="0.7" filter="url(#softglow)"/>
+  <rect x="140" y="118" width="232" height="14" rx="7" fill="#F472B6" fill-opacity="0.55"/>
+  <rect x="130" y="144" width="252" height="14" rx="7" fill="#EC4899" fill-opacity="0.6"/>
+  <rect x="150" y="170" width="212" height="14" rx="7" fill="#F472B6" fill-opacity="0.5"/>
+  <rect x="120" y="196" width="272" height="18" rx="9" fill="#EC4899" fill-opacity="0.65" filter="url(#softglow)"/>
+  <rect x="160" y="224" width="192" height="14" rx="7" fill="#F472B6" fill-opacity="0.45"/>
+  <rect x="140" y="250" width="232" height="14" rx="7" fill="#EC4899" fill-opacity="0.55"/>
+  <rect x="180" y="276" width="152" height="14" rx="7" fill="#F472B6" fill-opacity="0.4"/>
+
+  <!-- Exclamation marks (manga style) -->
+  <rect x="372" y="90" width="12" height="40" rx="6" fill="#FB7185" filter="url(#glow)"/>
+  <circle cx="378" cy="140" r="6" fill="#FB7185" filter="url(#glow)"/>
+  <rect x="390" y="90" width="12" height="40" rx="6" fill="#EC4899" filter="url(#glow)"/>
+  <circle cx="396" cy="140" r="6" fill="#EC4899" filter="url(#glow)"/>
+
+  <!-- Small secondary bubble -->
+  <path d="M340,400 Q340,380 360,380 L450,380 Q470,380 470,400 L470,460 Q470,480 450,480 L360,480 Q340,480 340,460 Z"
+    fill="#1f0514" stroke="#F472B6" stroke-width="2" stroke-opacity="0.6"/>
+  <!-- Dots inside small bubble -->
+  <circle cx="368" cy="430" r="8" fill="#EC4899" fill-opacity="0.6"/>
+  <circle cx="392" cy="430" r="8" fill="#F472B6" fill-opacity="0.5"/>
+  <circle cx="416" cy="430" r="8" fill="#EC4899" fill-opacity="0.6"/>
+  <circle cx="440" cy="430" r="8" fill="#FB7185" fill-opacity="0.5"/>
+
+  <!-- Stars around bubble -->
+  <path d="M50,420 L55,408 L60,420 L72,415 L62,424 L67,436 L55,430 L43,436 L48,424 L38,415 Z"
+    fill="#EC4899" fill-opacity="0.5" filter="url(#softglow)"/>
+  <path d="M65,320 L69,311 L73,320 L82,316 L75,323 L79,332 L69,327 L59,332 L63,323 L56,316 Z"
+    fill="#F472B6" fill-opacity="0.4" filter="url(#softglow)"/>
+</svg>

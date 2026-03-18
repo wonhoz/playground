@@ -1,0 +1,128 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#040d06"/>
+      <stop offset="100%" stop-color="#030508"/>
+    </radialGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="softglow">
+      <feGaussianBlur stdDeviation="2.5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="starglow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <rect width="512" height="512" fill="url(#bg)"/>
+
+  <!-- Background stars (dim) -->
+  <circle cx="50" cy="80" r="1" fill="white" fill-opacity="0.4"/>
+  <circle cx="150" cy="50" r="1.5" fill="white" fill-opacity="0.5"/>
+  <circle cx="400" cy="70" r="1" fill="white" fill-opacity="0.35"/>
+  <circle cx="460" cy="110" r="1.5" fill="white" fill-opacity="0.45"/>
+  <circle cx="80" cy="430" r="1" fill="white" fill-opacity="0.4"/>
+  <circle cx="450" cy="420" r="1.5" fill="white" fill-opacity="0.4"/>
+  <circle cx="490" cy="350" r="1" fill="white" fill-opacity="0.3"/>
+  <circle cx="30" cy="300" r="1" fill="white" fill-opacity="0.35"/>
+  <circle cx="100" cy="160" r="1" fill="white" fill-opacity="0.3"/>
+  <circle cx="430" cy="200" r="1" fill="white" fill-opacity="0.35"/>
+
+  <!-- Constellation nodes (hash verification checkpoints) -->
+  <!-- Node positions -->
+  <!-- A:256,90  B:370,155  C:420,280  D:360,400  E:200,430  F:110,330  G:130,175  H:256,256 (center) -->
+
+  <!-- Constellation lines -->
+  <g stroke="#10B981" stroke-width="1.5" stroke-opacity="0.5" filter="url(#softglow)">
+    <line x1="256" y1="90" x2="370" y2="155"/>
+    <line x1="370" y1="155" x2="420" y2="280"/>
+    <line x1="420" y1="280" x2="360" y2="400"/>
+    <line x1="360" y1="400" x2="200" y2="430"/>
+    <line x1="200" y1="430" x2="110" y2="330"/>
+    <line x1="110" y1="330" x2="130" y2="175"/>
+    <line x1="130" y1="175" x2="256" y2="90"/>
+    <!-- Inner connections -->
+    <line x1="256" y1="90" x2="256" y2="256"/>
+    <line x1="370" y1="155" x2="256" y2="256"/>
+    <line x1="420" y1="280" x2="256" y2="256"/>
+    <line x1="360" y1="400" x2="256" y2="256"/>
+    <line x1="200" y1="430" x2="256" y2="256"/>
+    <line x1="110" y1="330" x2="256" y2="256"/>
+    <line x1="130" y1="175" x2="256" y2="256"/>
+  </g>
+
+  <!-- Verified constellation lines (bright green) -->
+  <g stroke="#34D399" stroke-width="2.5" stroke-opacity="0.8" filter="url(#glow)">
+    <line x1="256" y1="90" x2="370" y2="155"/>
+    <line x1="370" y1="155" x2="420" y2="280"/>
+    <line x1="256" y1="256" x2="420" y2="280"/>
+    <line x1="256" y1="256" x2="360" y2="400"/>
+  </g>
+
+  <!-- Constellation stars (nodes = hash segments) -->
+  <!-- Verified (bright) -->
+  <circle cx="256" cy="90" r="9" fill="#6EE7B7" filter="url(#starglow)"/>
+  <circle cx="256" cy="90" r="5" fill="white"/>
+
+  <circle cx="370" cy="155" r="9" fill="#34D399" filter="url(#starglow)"/>
+  <circle cx="370" cy="155" r="5" fill="white"/>
+
+  <circle cx="420" cy="280" r="10" fill="#10B981" filter="url(#starglow)"/>
+  <circle cx="420" cy="280" r="5" fill="white"/>
+
+  <circle cx="360" cy="400" r="8" fill="#34D399" filter="url(#starglow)"/>
+  <circle cx="360" cy="400" r="4" fill="white"/>
+
+  <!-- Unverified (dim) -->
+  <circle cx="200" cy="430" r="7" fill="#10B981" fill-opacity="0.4" stroke="#10B981" stroke-width="1.5" stroke-opacity="0.5"/>
+  <circle cx="110" cy="330" r="7" fill="#10B981" fill-opacity="0.35" stroke="#10B981" stroke-width="1.5" stroke-opacity="0.4"/>
+  <circle cx="130" cy="175" r="7" fill="#34D399" fill-opacity="0.4" stroke="#34D399" stroke-width="1.5" stroke-opacity="0.4"/>
+
+  <!-- Center node (main checksum star) -->
+  <circle cx="256" cy="256" r="22" fill="#051a0c" stroke="#10B981" stroke-width="2.5" filter="url(#glow)"/>
+  <circle cx="256" cy="256" r="16" fill="#10B981" fill-opacity="0.15" stroke="#34D399" stroke-width="1" stroke-opacity="0.5"/>
+  <!-- Checkmark in center -->
+  <path d="M244,256 L252,264 L268,244" fill="none" stroke="#10B981" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" filter="url(#softglow)"/>
+  <path d="M244,256 L252,264 L268,244" fill="none" stroke="#6EE7B7" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Star sparkle effects on verified nodes -->
+  <g stroke="#6EE7B7" stroke-width="1" stroke-opacity="0.6" fill="none">
+    <!-- Sparkle around first star -->
+    <line x1="256" y1="80" x2="256" y2="72"/>
+    <line x1="266" y1="84" x2="270" y2="77"/>
+    <line x1="246" y1="84" x2="242" y2="77"/>
+    <!-- Sparkle center star -->
+    <line x1="256" y1="226" x2="256" y2="218"/>
+    <line x1="280" y1="232" x2="286" y2="226"/>
+    <line x1="232" y1="232" x2="226" y2="226"/>
+  </g>
+
+  <!-- Hash string output at bottom -->
+  <rect x="70" y="468" width="372" height="28" rx="8" fill="#040e06" stroke="#10B981" stroke-width="1.5" stroke-opacity="0.5" filter="url(#softglow)"/>
+  <g fill="#10B981" fill-opacity="0.6">
+    <rect x="82" y="477" width="14" height="10" rx="2"/>
+    <rect x="100" y="477" width="14" height="10" rx="2"/>
+    <rect x="118" y="477" width="14" height="10" rx="2"/>
+    <rect x="136" y="477" width="14" height="10" rx="2"/>
+    <rect x="154" y="477" width="14" height="10" rx="2"/>
+    <rect x="172" y="477" width="14" height="10" rx="2"/>
+    <rect x="190" y="477" width="14" height="10" rx="2"/>
+    <rect x="208" y="477" width="14" height="10" rx="2"/>
+    <rect x="226" y="477" width="14" height="10" rx="2"/>
+    <rect x="244" y="477" width="14" height="10" rx="2"/>
+    <rect x="262" y="477" width="14" height="10" rx="2"/>
+    <rect x="280" y="477" width="14" height="10" rx="2"/>
+    <rect x="298" y="477" width="14" height="10" rx="2"/>
+    <rect x="316" y="477" width="14" height="10" rx="2"/>
+    <rect x="334" y="477" width="14" height="10" rx="2"/>
+    <rect x="352" y="477" width="14" height="10" rx="2"/>
+    <rect x="370" y="477" width="14" height="10" rx="2"/>
+    <rect x="388" y="477" width="14" height="10" rx="2"/>
+    <rect x="406" y="477" width="14" height="10" rx="2"/>
+    <rect x="424" y="477" width="14" height="10" rx="2"/>
+  </g>
+</svg>

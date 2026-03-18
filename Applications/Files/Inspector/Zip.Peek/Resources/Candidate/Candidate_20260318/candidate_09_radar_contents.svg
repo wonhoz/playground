@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#0a0900"/>
+      <stop offset="100%" stop-color="#030508"/>
+    </radialGradient>
+    <radialGradient id="sweep" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#EAB308" stop-opacity="0.4"/>
+      <stop offset="70%" stop-color="#EAB308" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="transparent"/>
+    </radialGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="softglow">
+      <feGaussianBlur stdDeviation="2.5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <rect width="512" height="512" fill="url(#bg)"/>
+
+  <!-- Radar rings -->
+  <circle cx="256" cy="256" r="210" fill="none" stroke="#EAB308" stroke-width="1" stroke-opacity="0.3"/>
+  <circle cx="256" cy="256" r="168" fill="none" stroke="#F59E0B" stroke-width="1" stroke-opacity="0.35"/>
+  <circle cx="256" cy="256" r="126" fill="none" stroke="#EAB308" stroke-width="1" stroke-opacity="0.4"/>
+  <circle cx="256" cy="256" r="84" fill="none" stroke="#FBBF24" stroke-width="1" stroke-opacity="0.45"/>
+  <circle cx="256" cy="256" r="42" fill="none" stroke="#EAB308" stroke-width="1" stroke-opacity="0.5"/>
+
+  <!-- Cross hairs -->
+  <line x1="46" y1="256" x2="466" y2="256" stroke="#EAB308" stroke-width="0.8" stroke-opacity="0.3"/>
+  <line x1="256" y1="46" x2="256" y2="466" stroke="#EAB308" stroke-width="0.8" stroke-opacity="0.3"/>
+  <line x1="107" y1="107" x2="405" y2="405" stroke="#F59E0B" stroke-width="0.5" stroke-opacity="0.2"/>
+  <line x1="405" y1="107" x2="107" y2="405" stroke="#F59E0B" stroke-width="0.5" stroke-opacity="0.2"/>
+
+  <!-- Radar sweep sector -->
+  <path d="M256,256 L256,46 A210,210 0 0,1 460,350 Z" fill="url(#sweep)"/>
+  <!-- Sweep leading edge -->
+  <line x1="256" y1="256" x2="460" y2="350" stroke="#EAB308" stroke-width="2.5" stroke-opacity="0.8" filter="url(#glow)"/>
+
+  <!-- Archive file blips on radar (files detected inside ZIP) -->
+  <!-- ZIP file main blip (large) -->
+  <rect x="322" y="140" width="30" height="24" rx="4" fill="#1a1800" stroke="#EAB308" stroke-width="2" stroke-opacity="0.8" filter="url(#glow)"/>
+  <polygon points="342,140 352,140 352,150" fill="#0a0900" stroke="#EAB308" stroke-width="1" stroke-opacity="0.6"/>
+  <line x1="328" y1="155" x2="346" y2="155" stroke="#EAB308" stroke-width="1.5" stroke-opacity="0.5"/>
+  <circle cx="337" cy="152" r="12" fill="none" stroke="#EAB308" stroke-width="1" stroke-opacity="0.3"/>
+
+  <!-- Image file blip -->
+  <rect x="170" y="300" width="24" height="20" rx="3" fill="#1a1800" stroke="#F59E0B" stroke-width="1.8" stroke-opacity="0.7" filter="url(#softglow)"/>
+  <line x1="174" y1="312" x2="190" y2="312" stroke="#F59E0B" stroke-width="1.5" stroke-opacity="0.5"/>
+  <circle cx="182" cy="310" r="10" fill="none" stroke="#F59E0B" stroke-width="1" stroke-opacity="0.3"/>
+
+  <!-- Text file blip -->
+  <rect x="370" y="300" width="22" height="18" rx="3" fill="#1a1800" stroke="#EAB308" stroke-width="1.8" stroke-opacity="0.7"/>
+  <circle cx="381" cy="309" r="9" fill="none" stroke="#EAB308" stroke-width="1" stroke-opacity="0.3"/>
+
+  <!-- Doc file blip -->
+  <rect x="155" y="180" width="20" height="16" rx="3" fill="#1a1800" stroke="#FBBF24" stroke-width="1.5" stroke-opacity="0.65"/>
+  <circle cx="165" cy="188" r="8" fill="none" stroke="#FBBF24" stroke-width="1" stroke-opacity="0.3"/>
+
+  <!-- Smaller blips -->
+  <circle cx="310" cy="340" r="6" fill="#EAB308" fill-opacity="0.5" filter="url(#softglow)"/>
+  <circle cx="210" cy="155" r="5" fill="#F59E0B" fill-opacity="0.45"/>
+  <circle cx="380" cy="220" r="5" fill="#EAB308" fill-opacity="0.5"/>
+  <circle cx="148" cy="348" r="4" fill="#FBBF24" fill-opacity="0.4"/>
+
+  <!-- Center (ZIP archive core) -->
+  <circle cx="256" cy="256" r="10" fill="#EAB308" filter="url(#glow)"/>
+  <circle cx="256" cy="256" r="5" fill="#FDE68A"/>
+
+  <!-- Corner decorations -->
+  <rect x="30" y="30" width="25" height="3" fill="#EAB308" fill-opacity="0.4" rx="1.5"/>
+  <rect x="30" y="30" width="3" height="25" fill="#EAB308" fill-opacity="0.4" rx="1.5"/>
+  <rect x="457" y="30" width="25" height="3" fill="#EAB308" fill-opacity="0.4" rx="1.5"/>
+  <rect x="479" y="30" width="3" height="25" fill="#EAB308" fill-opacity="0.4" rx="1.5"/>
+  <rect x="30" y="479" width="25" height="3" fill="#EAB308" fill-opacity="0.4" rx="1.5"/>
+  <rect x="30" y="457" width="3" height="25" fill="#EAB308" fill-opacity="0.4" rx="1.5"/>
+  <rect x="457" y="479" width="25" height="3" fill="#EAB308" fill-opacity="0.4" rx="1.5"/>
+  <rect x="479" y="457" width="3" height="25" fill="#EAB308" fill-opacity="0.4" rx="1.5"/>
+</svg>

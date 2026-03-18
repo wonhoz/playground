@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#14060f"/>
+      <stop offset="100%" stop-color="#030508"/>
+    </radialGradient>
+    <linearGradient id="crystalFace1" x1="0" y1="0" x2="0.5" y2="1">
+      <stop offset="0%" stop-color="#F472B6" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#EC4899" stop-opacity="0.25"/>
+    </linearGradient>
+    <linearGradient id="crystalFace2" x1="1" y1="0" x2="0.5" y2="1">
+      <stop offset="0%" stop-color="#EC4899" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#FB7185" stop-opacity="0.2"/>
+    </linearGradient>
+    <linearGradient id="crystalFace3" x1="0.5" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FB7185" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#EC4899" stop-opacity="0.15"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="softglow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="crystalglow">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <rect width="512" height="512" fill="url(#bg)"/>
+
+  <!-- Ambient crystal light -->
+  <circle cx="256" cy="256" r="210" fill="#EC4899" fill-opacity="0.04" filter="url(#crystalglow)"/>
+
+  <!-- Crystal page shape (folded page as crystal facets) -->
+  <!-- Main crystal body -->
+  <polygon points="256,55 380,200 356,420 256,470 156,420 132,200" fill="none" stroke="#EC4899" stroke-width="2" stroke-opacity="0.7" filter="url(#softglow)"/>
+
+  <!-- Crystal faces -->
+  <!-- Front face (page surface) -->
+  <polygon points="256,55 380,200 356,420 256,470" fill="url(#crystalFace1)" stroke="#F472B6" stroke-width="1.5" stroke-opacity="0.6"/>
+  <!-- Left face -->
+  <polygon points="256,55 132,200 156,420 256,470" fill="url(#crystalFace2)" stroke="#EC4899" stroke-width="1.5" stroke-opacity="0.6"/>
+  <!-- Bottom cap -->
+  <polygon points="156,420 256,470 356,420" fill="url(#crystalFace3)" stroke="#FB7185" stroke-width="1.5" stroke-opacity="0.5"/>
+
+  <!-- Crystal inner page lines (manga content embedded in crystal) -->
+  <g clip-path="">
+    <!-- Manga content inside crystal faces -->
+    <line x1="270" y1="120" x2="365" y2="210" stroke="#F472B6" stroke-width="1" stroke-opacity="0.5"/>
+    <line x1="275" y1="145" x2="368" y2="230" stroke="#F472B6" stroke-width="1" stroke-opacity="0.4"/>
+    <line x1="280" y1="170" x2="370" y2="250" stroke="#EC4899" stroke-width="1.5" stroke-opacity="0.5"/>
+    <line x1="285" y1="195" x2="372" y2="270" stroke="#F472B6" stroke-width="1" stroke-opacity="0.4"/>
+    <line x1="290" y1="220" x2="372" y2="292" stroke="#EC4899" stroke-width="1" stroke-opacity="0.4"/>
+    <line x1="295" y1="248" x2="370" y2="316" stroke="#F472B6" stroke-width="1.5" stroke-opacity="0.5"/>
+    <line x1="295" y1="275" x2="366" y2="340" stroke="#F472B6" stroke-width="1" stroke-opacity="0.4"/>
+    <line x1="290" y1="302" x2="360" y2="364" stroke="#EC4899" stroke-width="1" stroke-opacity="0.35"/>
+    <!-- Left face lines -->
+    <line x1="242" y1="120" x2="147" y2="210" stroke="#EC4899" stroke-width="1" stroke-opacity="0.4"/>
+    <line x1="237" y1="150" x2="143" y2="235" stroke="#EC4899" stroke-width="1" stroke-opacity="0.35"/>
+    <line x1="232" y1="180" x2="140" y2="260" stroke="#FB7185" stroke-width="1.5" stroke-opacity="0.4"/>
+    <line x1="230" y1="210" x2="139" y2="285" stroke="#EC4899" stroke-width="1" stroke-opacity="0.35"/>
+    <line x1="228" y1="240" x2="140" y2="308" stroke="#EC4899" stroke-width="1" stroke-opacity="0.3"/>
+    <line x1="228" y1="270" x2="143" y2="332" stroke="#FB7185" stroke-width="1" stroke-opacity="0.3"/>
+    <line x1="232" y1="298" x2="150" y2="356" stroke="#EC4899" stroke-width="1" stroke-opacity="0.3"/>
+  </g>
+
+  <!-- Crystal edge highlights -->
+  <line x1="256" y1="55" x2="380" y2="200" stroke="#FFB3D1" stroke-width="2" stroke-opacity="0.4" filter="url(#softglow)"/>
+  <line x1="256" y1="55" x2="132" y2="200" stroke="#F9A8D4" stroke-width="1.5" stroke-opacity="0.35"/>
+  <line x1="256" y1="470" x2="380" y2="200" stroke="#EC4899" stroke-width="0.8" stroke-opacity="0.3"/>
+  <line x1="256" y1="470" x2="132" y2="200" stroke="#EC4899" stroke-width="0.8" stroke-opacity="0.3"/>
+
+  <!-- Crystal apex glow -->
+  <circle cx="256" cy="55" r="18" fill="#EC4899" fill-opacity="0.5" filter="url(#crystalglow)"/>
+  <circle cx="256" cy="55" r="8" fill="#F472B6" filter="url(#glow)"/>
+  <circle cx="256" cy="55" r="4" fill="#FFB3D1"/>
+
+  <!-- Side crystal vertices glow -->
+  <circle cx="380" cy="200" r="6" fill="#EC4899" filter="url(#softglow)"/>
+  <circle cx="132" cy="200" r="6" fill="#F472B6" filter="url(#softglow)"/>
+  <circle cx="256" cy="470" r="8" fill="#FB7185" filter="url(#glow)"/>
+  <circle cx="356" cy="420" r="5" fill="#EC4899" filter="url(#softglow)"/>
+  <circle cx="156" cy="420" r="5" fill="#EC4899" filter="url(#softglow)"/>
+
+  <!-- Center crystal spine (page fold line) -->
+  <line x1="256" y1="55" x2="256" y2="470" stroke="#EC4899" stroke-width="2.5" stroke-opacity="0.6" filter="url(#softglow)"/>
+
+  <!-- Floating sakura petals -->
+  <path d="M80,100 Q88,92 96,100 Q88,108 80,100 Z" fill="#EC4899" fill-opacity="0.4" transform="rotate(20 88 100)"/>
+  <path d="M420,150 Q428,142 436,150 Q428,158 420,150 Z" fill="#F472B6" fill-opacity="0.35" transform="rotate(-15 428 150)"/>
+  <path d="M70,360 Q78,352 86,360 Q78,368 70,360 Z" fill="#EC4899" fill-opacity="0.35" transform="rotate(45 78 360)"/>
+  <path d="M430,390 Q438,382 446,390 Q438,398 430,390 Z" fill="#FB7185" fill-opacity="0.3" transform="rotate(-30 438 390)"/>
+  <!-- Shimmer dots -->
+  <circle cx="430" cy="100" r="3" fill="#EC4899" fill-opacity="0.5" filter="url(#softglow)"/>
+  <circle cx="75" cy="200" r="2.5" fill="#F472B6" fill-opacity="0.45"/>
+  <circle cx="450" cy="300" r="2" fill="#EC4899" fill-opacity="0.4"/>
+  <circle cx="60" cy="440" r="3" fill="#FB7185" fill-opacity="0.35"/>
+</svg>

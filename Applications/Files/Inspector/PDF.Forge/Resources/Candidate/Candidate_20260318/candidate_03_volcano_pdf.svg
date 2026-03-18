@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="70%" r="70%">
+      <stop offset="0%" stop-color="#200a04"/>
+      <stop offset="100%" stop-color="#030508"/>
+    </radialGradient>
+    <radialGradient id="lava" cx="50%" cy="100%" r="60%">
+      <stop offset="0%" stop-color="#F97316" stop-opacity="0.8"/>
+      <stop offset="50%" stop-color="#EF4444" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="transparent"/>
+    </radialGradient>
+    <linearGradient id="volcanoGrad" x1="0.5" y1="0" x2="0.5" y2="1">
+      <stop offset="0%" stop-color="#3d1408"/>
+      <stop offset="100%" stop-color="#1a0804"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="softglow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="lavaglow">
+      <feGaussianBlur stdDeviation="12" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <rect width="512" height="512" fill="url(#bg)"/>
+
+  <!-- Lava pool glow -->
+  <ellipse cx="256" cy="460" rx="230" ry="60" fill="url(#lava)" filter="url(#lavaglow)"/>
+
+  <!-- Volcano mountain -->
+  <polygon points="256,80 450,420 62,420" fill="url(#volcanoGrad)" stroke="#F97316" stroke-width="2" stroke-opacity="0.4"/>
+  <!-- Volcano ridge lines -->
+  <line x1="256" y1="80" x2="180" y2="260" stroke="#F97316" stroke-width="1" stroke-opacity="0.25"/>
+  <line x1="256" y1="80" x2="340" y2="275" stroke="#EF4444" stroke-width="1" stroke-opacity="0.2"/>
+
+  <!-- Crater rim -->
+  <ellipse cx="256" cy="95" rx="60" ry="25" fill="#2a0c04" stroke="#F97316" stroke-width="3" stroke-opacity="0.8" filter="url(#glow)"/>
+
+  <!-- Eruption (PDF pages shooting up) -->
+  <!-- Eruption column -->
+  <rect x="230" y="0" width="52" height="100" fill="#F97316" fill-opacity="0.15" rx="10" filter="url(#glow)"/>
+
+  <!-- Flying PDF documents from eruption -->
+  <!-- Doc 1 (high, left) -->
+  <g transform="rotate(-25 170 80) translate(100,-40)">
+    <rect x="0" y="0" width="55" height="70" rx="4" fill="#2a0e06" stroke="#F97316" stroke-width="2" stroke-opacity="0.8"/>
+    <polygon points="40,0 55,15 40,15" fill="#1a0804" stroke="#F97316" stroke-width="1"/>
+    <line x1="10" y1="25" x2="48" y2="25" stroke="#F97316" stroke-width="1.5" stroke-opacity="0.5"/>
+    <line x1="10" y1="35" x2="45" y2="35" stroke="#EF4444" stroke-width="1.5" stroke-opacity="0.4"/>
+    <line x1="10" y1="45" x2="48" y2="45" stroke="#F97316" stroke-width="1.5" stroke-opacity="0.5"/>
+    <line x1="10" y1="55" x2="40" y2="55" stroke="#EF4444" stroke-width="1" stroke-opacity="0.35"/>
+  </g>
+
+  <!-- Doc 2 (high, right) -->
+  <g transform="rotate(30 380 70) translate(280,-50)">
+    <rect x="0" y="0" width="55" height="70" rx="4" fill="#2a0e06" stroke="#EF4444" stroke-width="2" stroke-opacity="0.8"/>
+    <polygon points="42,0 55,13 42,13" fill="#1a0804" stroke="#EF4444" stroke-width="1"/>
+    <line x1="10" y1="23" x2="48" y2="23" stroke="#EF4444" stroke-width="1.5" stroke-opacity="0.5"/>
+    <line x1="10" y1="35" x2="44" y2="35" stroke="#F97316" stroke-width="1.5" stroke-opacity="0.4"/>
+    <line x1="10" y1="47" x2="48" y2="47" stroke="#EF4444" stroke-width="1.5" stroke-opacity="0.45"/>
+  </g>
+
+  <!-- Doc 3 (center, just above crater) -->
+  <g transform="rotate(5 256 120)">
+    <rect x="218" y="5" width="60" height="75" rx="5" fill="#2a0e06" stroke="#F97316" stroke-width="2.5" stroke-opacity="0.9" filter="url(#softglow)"/>
+    <polygon points="263,5 278,20 263,20" fill="#1a0804" stroke="#F97316" stroke-width="1.5"/>
+    <line x1="228" y1="30" x2="268" y2="30" stroke="#F97316" stroke-width="2" stroke-opacity="0.6" filter="url(#softglow)"/>
+    <line x1="228" y1="43" x2="262" y2="43" stroke="#EF4444" stroke-width="1.5" stroke-opacity="0.5"/>
+    <line x1="228" y1="56" x2="268" y2="56" stroke="#F97316" stroke-width="1.5" stroke-opacity="0.5"/>
+    <rect x="228" y="16" width="28" height="10" rx="5" fill="#F97316" fill-opacity="0.5" filter="url(#softglow)"/>
+  </g>
+
+  <!-- Lava flows down volcano sides -->
+  <path d="M256,95 Q240,150 230,200 Q220,250 235,300" fill="none" stroke="#F97316" stroke-width="5" stroke-opacity="0.4" stroke-linecap="round" filter="url(#softglow)"/>
+  <path d="M256,95 Q275,160 282,210 Q290,260 275,310" fill="none" stroke="#EF4444" stroke-width="4" stroke-opacity="0.35" stroke-linecap="round" filter="url(#softglow)"/>
+
+  <!-- Embers/sparks -->
+  <g filter="url(#glow)">
+    <circle cx="200" cy="120" r="4" fill="#F97316"/>
+    <circle cx="310" cy="130" r="3.5" fill="#EF4444"/>
+    <circle cx="175" cy="160" r="3" fill="#DC2626"/>
+    <circle cx="335" cy="165" r="4" fill="#F97316"/>
+    <circle cx="160" cy="200" r="2.5" fill="#EF4444"/>
+    <circle cx="355" cy="195" r="2.5" fill="#F97316"/>
+    <circle cx="145" cy="250" r="2" fill="#DC2626"/>
+    <circle cx="370" cy="240" r="2" fill="#F97316"/>
+  </g>
+
+  <!-- Smoke plume -->
+  <circle cx="256" cy="35" r="30" fill="#2a1008" fill-opacity="0.5"/>
+  <circle cx="240" cy="15" r="22" fill="#200c06" fill-opacity="0.4"/>
+  <circle cx="270" cy="10" r="18" fill="#2a1008" fill-opacity="0.3"/>
+</svg>

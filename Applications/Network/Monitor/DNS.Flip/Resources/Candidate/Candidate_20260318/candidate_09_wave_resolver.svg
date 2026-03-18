@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#030508"/>
+      <stop offset="100%" style="stop-color:#050d1a"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- 서버 아이콘 (왼쪽) -->
+  <rect x="80" y="196" width="80" height="120" rx="8" fill="#050d1a" stroke="#0EA5E9" stroke-width="2" filter="url(#glow)"/>
+  <rect x="92" y="210" width="56" height="10" rx="5" fill="#0EA5E9" opacity="0.8"/>
+  <rect x="92" y="226" width="56" height="10" rx="5" fill="#38BDF8" opacity="0.6"/>
+  <rect x="92" y="242" width="56" height="10" rx="5" fill="#0EA5E9" opacity="0.4"/>
+  <circle cx="150" cy="296" r="5" fill="#0EA5E9" opacity="0.9" filter="url(#glow)"/>
+  <!-- 서버 아이콘 (오른쪽) -->
+  <rect x="352" y="196" width="80" height="120" rx="8" fill="#050d1a" stroke="#38BDF8" stroke-width="2" filter="url(#glow)"/>
+  <rect x="364" y="210" width="56" height="10" rx="5" fill="#38BDF8" opacity="0.8"/>
+  <rect x="364" y="226" width="56" height="10" rx="5" fill="#0EA5E9" opacity="0.6"/>
+  <rect x="364" y="242" width="56" height="10" rx="5" fill="#38BDF8" opacity="0.4"/>
+  <circle cx="362" cy="296" r="5" fill="#38BDF8" opacity="0.9" filter="url(#glow)"/>
+  <!-- 파동 전환 신호 -->
+  <path d="M 160 220 Q 190 190 210 220 Q 230 250 256 220 Q 280 190 302 220 Q 322 250 352 220" fill="none" stroke="#0EA5E9" stroke-width="3" filter="url(#glow)"/>
+  <path d="M 160 290 Q 190 320 210 290 Q 230 260 256 290 Q 280 320 302 290 Q 322 260 352 290" fill="none" stroke="#38BDF8" stroke-width="2.5" filter="url(#glow)" opacity="0.7"/>
+  <!-- 중앙 전환 심볼 -->
+  <circle cx="256" cy="256" r="22" fill="#0EA5E9" opacity="0.2"/>
+  <path d="M 244 250 L 256 244 L 268 250 M 256 244 L 256 268 M 244 262 L 256 268 L 268 262" stroke="#0EA5E9" stroke-width="2.5" fill="none" stroke-linecap="round" filter="url(#glow)"/>
+</svg>

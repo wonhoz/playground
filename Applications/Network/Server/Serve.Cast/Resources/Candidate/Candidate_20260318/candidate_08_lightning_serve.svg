@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#030508"/>
+      <stop offset="100%" style="stop-color:#050814"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- 서버 박스 -->
+  <rect x="180" y="120" width="152" height="120" rx="10" fill="#3B82F6" opacity="0.1"/>
+  <rect x="180" y="120" width="152" height="120" rx="10" fill="none" stroke="#3B82F6" stroke-width="2.5" filter="url(#glow)"/>
+  <rect x="196" y="138" width="120" height="14" rx="7" fill="#3B82F6" opacity="0.6"/>
+  <rect x="196" y="158" width="120" height="14" rx="7" fill="#60A5FA" opacity="0.5"/>
+  <rect x="196" y="178" width="120" height="14" rx="7" fill="#3B82F6" opacity="0.4"/>
+  <rect x="196" y="198" width="80" height="14" rx="7" fill="#60A5FA" opacity="0.3"/>
+  <!-- 번개 (고속 서빙) -->
+  <path d="M 256 240 L 226 296 L 256 296 L 220 370" stroke="#3B82F6" stroke-width="5" fill="none" filter="url(#glow)"/>
+  <path d="M 256 240 L 226 296 L 256 296 L 220 370" stroke="#60A5FA" stroke-width="10" fill="none" opacity="0.15"/>
+  <!-- 속도 선들 -->
+  <line x1="80" y1="296" x2="200" y2="296" stroke="#3B82F6" stroke-width="2" stroke-dasharray="8,5" opacity="0.4"/>
+  <line x1="90" y1="320" x2="210" y2="305" stroke="#60A5FA" stroke-width="1.5" stroke-dasharray="6,6" opacity="0.3"/>
+  <line x1="95" y1="270" x2="205" y2="285" stroke="#3B82F6" stroke-width="1.5" stroke-dasharray="6,6" opacity="0.3"/>
+  <!-- 파일 아이콘들 (날아가는) -->
+  <rect x="100" y="288" width="22" height="16" rx="3" fill="#3B82F6" opacity="0.6"/>
+  <rect x="130" y="280" width="20" height="16" rx="3" fill="#60A5FA" opacity="0.5"/>
+  <rect x="158" y="290" width="22" height="16" rx="3" fill="#3B82F6" opacity="0.4"/>
+  <!-- 텍스트 -->
+  <text x="256" y="430" text-anchor="middle" fill="#3B82F6" font-size="14" font-family="monospace" font-weight="bold" filter="url(#glow)">INSTANT SERVE</text>
+</svg>

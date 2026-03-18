@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#030508"/>
+      <stop offset="100%" style="stop-color:#050d1a"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- 스파이럴 경로 (DNS 쿼리 흐름) -->
+  <path d="M 256 256 C 256 220 290 210 310 230 C 340 255 330 300 290 310 C 240 325 195 295 190 250 C 183 190 230 145 290 150 C 360 155 400 215 395 280 C 388 355 325 395 256 390 C 175 385 120 315 125 240 C 130 155 205 105 290 110" fill="none" stroke="#0EA5E9" stroke-width="2.5" opacity="0.6" filter="url(#glow)"/>
+  <!-- 중앙 DNS 아이콘 -->
+  <circle cx="256" cy="256" r="35" fill="#0EA5E9" opacity="0.15"/>
+  <circle cx="256" cy="256" r="28" fill="none" stroke="#0EA5E9" stroke-width="3" filter="url(#glow)"/>
+  <text x="256" y="261" text-anchor="middle" fill="#38BDF8" font-size="14" font-family="monospace" font-weight="bold">DNS</text>
+  <!-- 스파이럴 끝점들 -->
+  <circle cx="290" cy="110" r="8" fill="#38BDF8" opacity="0.9" filter="url(#glow)"/>
+  <circle cx="256" cy="256" r="5" fill="#0EA5E9" opacity="0.8"/>
+  <!-- 방사형 점들 -->
+  <circle cx="380" cy="180" r="4" fill="#0EA5E9" opacity="0.5"/>
+  <circle cx="150" cy="380" r="4" fill="#38BDF8" opacity="0.5"/>
+  <circle cx="410" cy="300" r="3" fill="#0EA5E9" opacity="0.4"/>
+  <!-- 빛 장식 -->
+  <circle cx="130" cy="120" r="3" fill="#38BDF8" opacity="0.6" filter="url(#glow)"/>
+  <circle cx="420" cy="400" r="4" fill="#0EA5E9" opacity="0.5"/>
+</svg>

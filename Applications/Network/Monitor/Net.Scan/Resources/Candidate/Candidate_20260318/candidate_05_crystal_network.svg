@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#030508"/>
+      <stop offset="100%" style="stop-color:#050d14"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- 결정 구조 (네트워크 다이아몬드) -->
+  <polygon points="256,100 370,210 370,350 256,460 142,350 142,210" fill="#14B8A6" opacity="0.05"/>
+  <polygon points="256,100 370,210 370,350 256,460 142,350 142,210" fill="none" stroke="#14B8A6" stroke-width="2" opacity="0.5"/>
+  <!-- 내부 구조 선 -->
+  <line x1="256" y1="100" x2="256" y2="460" stroke="#14B8A6" stroke-width="1.5" opacity="0.3"/>
+  <line x1="142" y1="210" x2="370" y2="350" stroke="#14B8A6" stroke-width="1.5" opacity="0.3"/>
+  <line x1="370" y1="210" x2="142" y2="350" stroke="#14B8A6" stroke-width="1.5" opacity="0.3"/>
+  <!-- 결정 면 -->
+  <polygon points="256,100 370,210 256,280" fill="#14B8A6" opacity="0.1"/>
+  <polygon points="256,100 142,210 256,280" fill="#2DD4BF" opacity="0.08"/>
+  <polygon points="142,350 256,280 142,210" fill="#14B8A6" opacity="0.07"/>
+  <polygon points="370,350 256,280 370,210" fill="#2DD4BF" opacity="0.07"/>
+  <!-- 버텍스 노드들 -->
+  <circle cx="256" cy="100" r="10" fill="#14B8A6" opacity="0.9" filter="url(#glow)"/>
+  <circle cx="370" cy="210" r="9" fill="#2DD4BF" opacity="0.8" filter="url(#glow)"/>
+  <circle cx="370" cy="350" r="9" fill="#14B8A6" opacity="0.8" filter="url(#glow)"/>
+  <circle cx="256" cy="460" r="9" fill="#2DD4BF" opacity="0.8" filter="url(#glow)"/>
+  <circle cx="142" cy="350" r="9" fill="#14B8A6" opacity="0.8" filter="url(#glow)"/>
+  <circle cx="142" cy="210" r="9" fill="#2DD4BF" opacity="0.8" filter="url(#glow)"/>
+  <!-- 중앙 -->
+  <circle cx="256" cy="280" r="18" fill="#14B8A6" opacity="0.2"/>
+  <circle cx="256" cy="280" r="12" fill="#14B8A6" opacity="0.6" filter="url(#glow)"/>
+</svg>

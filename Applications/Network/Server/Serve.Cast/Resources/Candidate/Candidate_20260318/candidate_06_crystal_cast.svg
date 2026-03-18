@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#030508"/>
+      <stop offset="100%" style="stop-color:#050814"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- 수정 형태 (서버) -->
+  <polygon points="256,80 360,200 360,340 256,440 152,340 152,200" fill="#3B82F6" opacity="0.06"/>
+  <polygon points="256,80 360,200 360,340 256,440 152,340 152,200" fill="none" stroke="#3B82F6" stroke-width="2.5" filter="url(#glow)"/>
+  <!-- 내부 면들 -->
+  <polygon points="256,80 360,200 256,250" fill="#3B82F6" opacity="0.1"/>
+  <polygon points="256,80 152,200 256,250" fill="#60A5FA" opacity="0.08"/>
+  <polygon points="152,340 256,250 256,440" fill="#3B82F6" opacity="0.08"/>
+  <polygon points="360,340 256,250 256,440" fill="#60A5FA" opacity="0.08"/>
+  <!-- 캐스트 빔들 (수정 면에서 반사) -->
+  <line x1="256" y1="250" x2="80" y2="180" stroke="#3B82F6" stroke-width="2" opacity="0.5" filter="url(#glow)"/>
+  <line x1="256" y1="250" x2="80" y2="320" stroke="#60A5FA" stroke-width="2" opacity="0.4"/>
+  <line x1="256" y1="250" x2="432" y2="180" stroke="#3B82F6" stroke-width="2" opacity="0.5" filter="url(#glow)"/>
+  <line x1="256" y1="250" x2="432" y2="320" stroke="#60A5FA" stroke-width="2" opacity="0.4"/>
+  <!-- 버텍스 노드 -->
+  <circle cx="256" cy="80" r="9" fill="#3B82F6" filter="url(#glow)"/>
+  <circle cx="360" cy="200" r="8" fill="#60A5FA" filter="url(#glow)"/>
+  <circle cx="360" cy="340" r="8" fill="#3B82F6"/>
+  <circle cx="256" cy="440" r="9" fill="#60A5FA" filter="url(#glow)"/>
+  <circle cx="152" cy="340" r="8" fill="#3B82F6"/>
+  <circle cx="152" cy="200" r="8" fill="#60A5FA" filter="url(#glow)"/>
+  <!-- 중앙 -->
+  <circle cx="256" cy="250" r="20" fill="#3B82F6" opacity="0.2"/>
+  <circle cx="256" cy="250" r="12" fill="#60A5FA" opacity="0.7" filter="url(#glow)"/>
+  <!-- 수신 클라이언트 -->
+  <rect x="55" y="170" width="26" height="20" rx="4" fill="#3B82F6" opacity="0.5"/>
+  <rect x="55" y="308" width="26" height="20" rx="4" fill="#60A5FA" opacity="0.5"/>
+  <rect x="431" y="170" width="26" height="20" rx="4" fill="#3B82F6" opacity="0.5"/>
+  <rect x="431" y="308" width="26" height="20" rx="4" fill="#60A5FA" opacity="0.5"/>
+</svg>

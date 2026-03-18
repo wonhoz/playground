@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#030508"/>
+      <stop offset="100%" style="stop-color:#140514"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- 거울 (중앙 분리선) -->
+  <line x1="256" y1="80" x2="256" y2="432" stroke="#EC4899" stroke-width="3" filter="url(#glow)"/>
+  <rect x="249" y="80" width="14" height="352" rx="7" fill="#EC4899" opacity="0.1"/>
+  <!-- 왼쪽: 실제 서버 -->
+  <rect x="90" y="150" width="130" height="100" rx="8" fill="#EC4899" opacity="0.1"/>
+  <rect x="90" y="150" width="130" height="100" rx="8" fill="none" stroke="#EC4899" stroke-width="2" opacity="0.8"/>
+  <rect x="102" y="165" width="106" height="12" rx="6" fill="#EC4899" opacity="0.6"/>
+  <rect x="102" y="183" width="106" height="12" rx="6" fill="#EC4899" opacity="0.5"/>
+  <rect x="102" y="201" width="106" height="12" rx="6" fill="#EC4899" opacity="0.4"/>
+  <text x="155" y="270" text-anchor="middle" fill="#F472B6" font-size="11" font-family="monospace" opacity="0.7">REAL SERVER</text>
+  <!-- 오른쪽: 목 서버 (미러링) -->
+  <rect x="292" y="150" width="130" height="100" rx="8" fill="#EC4899" opacity="0.07"/>
+  <rect x="292" y="150" width="130" height="100" rx="8" fill="none" stroke="#EC4899" stroke-width="2" stroke-dasharray="5,4" opacity="0.6"/>
+  <rect x="304" y="165" width="106" height="12" rx="6" fill="#EC4899" opacity="0.35"/>
+  <rect x="304" y="183" width="106" height="12" rx="6" fill="#EC4899" opacity="0.3"/>
+  <rect x="304" y="201" width="106" height="12" rx="6" fill="#EC4899" opacity="0.25"/>
+  <text x="357" y="270" text-anchor="middle" fill="#F472B6" font-size="11" font-family="monospace" opacity="0.6">MOCK SERVER</text>
+  <!-- 반사 화살표들 -->
+  <path d="M 220 200 L 256 200 M 246 193 L 256 200 L 246 207" stroke="#EC4899" stroke-width="2" fill="none" filter="url(#glow)"/>
+  <path d="M 256 320 L 292 320 M 282 313 L 292 320 L 282 327" stroke="#F472B6" stroke-width="2" fill="none" opacity="0.7"/>
+  <path d="M 292 350 L 256 350 M 266 343 L 256 350 L 266 357" stroke="#EC4899" stroke-width="1.5" fill="none" opacity="0.5"/>
+  <!-- 데이터 패킷들 -->
+  <rect x="90" y="310" width="130" height="60" rx="8" fill="none" stroke="#EC4899" stroke-width="1.5" opacity="0.5"/>
+  <text x="100" y="330" fill="#EC4899" font-size="9" font-family="monospace" opacity="0.6">{ "mock": true }</text>
+  <text x="100" y="348" fill="#EC4899" font-size="9" font-family="monospace" opacity="0.5">{ "data": [...] }</text>
+  <text x="100" y="366" fill="#EC4899" font-size="9" font-family="monospace" opacity="0.4">{ "ok": true }</text>
+</svg>

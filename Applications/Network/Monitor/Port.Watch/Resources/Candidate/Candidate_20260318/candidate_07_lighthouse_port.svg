@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#030508"/>
+      <stop offset="100%" style="stop-color:#120800"/>
+    </linearGradient>
+    <linearGradient id="beam" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#F97316;stop-opacity:0.5"/>
+      <stop offset="100%" style="stop-color:#F97316;stop-opacity:0"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- 등대 빔 -->
+  <path d="M 256 150 L 80 360 L 256 300 Z" fill="url(#beam)"/>
+  <path d="M 256 150 L 432 360 L 256 300 Z" fill="url(#beam)"/>
+  <!-- 등대 타워 -->
+  <polygon points="232,150 280,150 268,380 244,380" fill="#F97316" opacity="0.12"/>
+  <polygon points="232,150 280,150 268,380 244,380" fill="none" stroke="#F97316" stroke-width="2.5"/>
+  <!-- 등대 줄무늬 -->
+  <line x1="233" y1="200" x2="279" y2="200" stroke="#F97316" stroke-width="3" opacity="0.4"/>
+  <line x1="235" y1="250" x2="277" y2="250" stroke="#F97316" stroke-width="3" opacity="0.4"/>
+  <line x1="237" y1="300" x2="275" y2="300" stroke="#F97316" stroke-width="3" opacity="0.4"/>
+  <line x1="239" y1="350" x2="273" y2="350" stroke="#F97316" stroke-width="3" opacity="0.3"/>
+  <!-- 등대 꼭대기 -->
+  <circle cx="256" cy="140" r="25" fill="#F97316" opacity="0.2"/>
+  <circle cx="256" cy="140" r="18" fill="#F97316" opacity="0.4" filter="url(#glow)"/>
+  <circle cx="256" cy="140" r="10" fill="white" opacity="0.9" filter="url(#glow)"/>
+  <!-- 기초 -->
+  <rect x="220" y="380" width="72" height="30" rx="4" fill="#F97316" opacity="0.3"/>
+  <rect x="190" y="410" width="132" height="15" rx="4" fill="#F97316" opacity="0.2"/>
+  <!-- 물결 (바다) -->
+  <path d="M 80 440 Q 150 425 220 440 Q 290 455 360 440 Q 430 425 432 440" fill="none" stroke="#F97316" stroke-width="1.5" opacity="0.3"/>
+</svg>

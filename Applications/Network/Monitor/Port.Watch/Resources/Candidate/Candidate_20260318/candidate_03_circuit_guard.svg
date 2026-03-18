@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#030508"/>
+      <stop offset="100%" style="stop-color:#120800"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- 방패 형태 -->
+  <path d="M 256 90 L 380 140 L 380 280 Q 380 380 256 430 Q 132 380 132 280 L 132 140 Z" fill="#F97316" opacity="0.08"/>
+  <path d="M 256 90 L 380 140 L 380 280 Q 380 380 256 430 Q 132 380 132 280 L 132 140 Z" fill="none" stroke="#F97316" stroke-width="3" filter="url(#glow)"/>
+  <!-- 회로 패턴 (방패 내부) -->
+  <line x1="256" y1="140" x2="256" y2="380" stroke="#F97316" stroke-width="1.5" opacity="0.3"/>
+  <line x1="170" y1="220" x2="342" y2="220" stroke="#F97316" stroke-width="1.5" opacity="0.3"/>
+  <line x1="160" y1="290" x2="352" y2="290" stroke="#F97316" stroke-width="1.5" opacity="0.3"/>
+  <!-- 회로 노드들 -->
+  <circle cx="256" cy="140" r="6" fill="#F97316" opacity="0.7"/>
+  <circle cx="256" cy="220" r="8" fill="#F97316" opacity="0.9" filter="url(#glow)"/>
+  <circle cx="256" cy="290" r="6" fill="#F97316" opacity="0.7"/>
+  <circle cx="256" cy="380" r="6" fill="#F97316" opacity="0.5"/>
+  <circle cx="170" cy="220" r="5" fill="#FB923C" opacity="0.7"/>
+  <circle cx="342" cy="220" r="5" fill="#FB923C" opacity="0.7"/>
+  <circle cx="160" cy="290" r="5" fill="#FB923C" opacity="0.6"/>
+  <circle cx="352" cy="290" r="5" fill="#FB923C" opacity="0.6"/>
+  <!-- 중앙 자물쇠 심볼 -->
+  <rect x="234" y="242" width="44" height="38" rx="5" fill="#F97316" opacity="0.3" filter="url(#glow)"/>
+  <path d="M 242 242 C 242 225 270 225 270 242" fill="none" stroke="#F97316" stroke-width="3" filter="url(#glow)"/>
+  <circle cx="256" cy="262" r="5" fill="white" opacity="0.7"/>
+  <!-- 경고 삼각형들 -->
+  <polygon points="120,120 135,148 105,148" fill="#F97316" opacity="0.4"/>
+  <polygon points="392,120 407,148 377,148" fill="#F97316" opacity="0.4"/>
+</svg>

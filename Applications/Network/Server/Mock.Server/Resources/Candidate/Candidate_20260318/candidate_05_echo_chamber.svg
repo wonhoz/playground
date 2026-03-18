@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#030508"/>
+      <stop offset="100%" style="stop-color:#140514"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- 에코 챔버 (동굴 형태) -->
+  <path d="M 120 350 Q 120 150 256 120 Q 392 150 392 350" fill="#EC4899" opacity="0.05"/>
+  <path d="M 120 350 Q 120 150 256 120 Q 392 150 392 350" fill="none" stroke="#EC4899" stroke-width="2.5" filter="url(#glow)"/>
+  <!-- 에코 파동들 -->
+  <path d="M 175 350 Q 175 200 256 178 Q 337 200 337 350" fill="none" stroke="#EC4899" stroke-width="2" opacity="0.6"/>
+  <path d="M 215 350 Q 215 230 256 215 Q 297 230 297 350" fill="none" stroke="#F472B6" stroke-width="1.5" opacity="0.5" filter="url(#glow)"/>
+  <!-- 입력 신호 -->
+  <circle cx="90" cy="256" r="14" fill="#EC4899" opacity="0.8" filter="url(#glow)"/>
+  <text x="90" y="260" text-anchor="middle" fill="white" font-size="8" font-family="monospace">IN</text>
+  <path d="M 104 256 L 140 256 M 132 248 L 140 256 L 132 264" stroke="#EC4899" stroke-width="2.5" fill="none" filter="url(#glow)"/>
+  <!-- 에코 출력들 -->
+  <circle cx="256" cy="350" r="12" fill="#EC4899" opacity="0.9" filter="url(#glow)"/>
+  <text x="256" y="354" text-anchor="middle" fill="white" font-size="8" font-family="monospace">MOCK</text>
+  <!-- 파동 텍스트 -->
+  <text x="256" y="420" text-anchor="middle" fill="#EC4899" font-size="12" font-family="monospace" opacity="0.6">ECHO RESPONSE</text>
+  <!-- 장식 -->
+  <circle cx="150" cy="140" r="3" fill="#EC4899" opacity="0.5" filter="url(#glow)"/>
+  <circle cx="362" cy="140" r="3" fill="#F472B6" opacity="0.5" filter="url(#glow)"/>
+</svg>

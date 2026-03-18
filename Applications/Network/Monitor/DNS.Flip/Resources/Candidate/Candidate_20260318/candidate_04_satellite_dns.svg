@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#030508"/>
+      <stop offset="100%" style="stop-color:#050d1a"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- 신호 원 -->
+  <circle cx="200" cy="200" r="90" fill="none" stroke="#0EA5E9" stroke-width="1.5" opacity="0.2"/>
+  <circle cx="200" cy="200" r="65" fill="none" stroke="#0EA5E9" stroke-width="1.5" opacity="0.35"/>
+  <circle cx="200" cy="200" r="40" fill="none" stroke="#0EA5E9" stroke-width="2" opacity="0.5"/>
+  <!-- 위성 안테나 -->
+  <line x1="200" y1="200" x2="340" y2="340" stroke="#0EA5E9" stroke-width="2" opacity="0.5"/>
+  <rect x="320" y="320" width="55" height="35" rx="5" fill="#050d1a" stroke="#0EA5E9" stroke-width="2"/>
+  <line x1="347" y1="320" x2="347" y2="290" stroke="#0EA5E9" stroke-width="3" filter="url(#glow)"/>
+  <circle cx="347" cy="283" r="8" fill="#0EA5E9" opacity="0.9" filter="url(#glow)"/>
+  <!-- 태양 패널 -->
+  <rect x="283" y="342" width="25" height="14" rx="2" fill="#0EA5E9" opacity="0.7"/>
+  <rect x="392" y="342" width="25" height="14" rx="2" fill="#0EA5E9" opacity="0.7"/>
+  <!-- DNS 서버 (왼쪽 상단) -->
+  <rect x="130" y="130" width="70" height="70" rx="8" fill="#0EA5E9" opacity="0.15"/>
+  <rect x="130" y="130" width="70" height="70" rx="8" fill="none" stroke="#0EA5E9" stroke-width="2" filter="url(#glow)"/>
+  <!-- 서버 슬롯들 -->
+  <rect x="140" y="148" width="50" height="8" rx="4" fill="#38BDF8" opacity="0.7"/>
+  <rect x="140" y="162" width="50" height="8" rx="4" fill="#38BDF8" opacity="0.5"/>
+  <rect x="140" y="176" width="50" height="8" rx="4" fill="#38BDF8" opacity="0.3"/>
+  <!-- 전환 화살표 -->
+  <path d="M 200 200 L 260 260" stroke="#38BDF8" stroke-width="2" stroke-dasharray="6,4" opacity="0.6"/>
+  <!-- 상태 표시 -->
+  <circle cx="200" cy="200" r="14" fill="#0EA5E9" opacity="0.9" filter="url(#glow)"/>
+  <path d="M 193 200 L 200 193 L 207 200 L 200 207 Z" fill="white" opacity="0.9"/>
+</svg>

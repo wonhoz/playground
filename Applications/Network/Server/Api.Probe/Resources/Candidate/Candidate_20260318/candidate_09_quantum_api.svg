@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#030508"/>
+      <stop offset="100%" style="stop-color:#0a0514"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- 양자 궤도들 -->
+  <ellipse cx="256" cy="256" rx="150" ry="50" fill="none" stroke="#8B5CF6" stroke-width="2" opacity="0.4"/>
+  <ellipse cx="256" cy="256" rx="150" ry="50" fill="none" stroke="#8B5CF6" stroke-width="2" opacity="0.4" transform="rotate(60,256,256)"/>
+  <ellipse cx="256" cy="256" rx="150" ry="50" fill="none" stroke="#A78BFA" stroke-width="2" opacity="0.4" transform="rotate(120,256,256)"/>
+  <!-- 핵 (API) -->
+  <circle cx="256" cy="256" r="28" fill="#8B5CF6" opacity="0.2"/>
+  <circle cx="256" cy="256" r="20" fill="#8B5CF6" opacity="0.4" filter="url(#glow)"/>
+  <circle cx="256" cy="256" r="12" fill="#A78BFA" opacity="0.9" filter="url(#glow)"/>
+  <text x="256" y="260" text-anchor="middle" fill="white" font-size="7" font-family="monospace">API</text>
+  <!-- 전자들 (HTTP 메서드) -->
+  <circle cx="406" cy="256" r="11" fill="#8B5CF6" opacity="0.9" filter="url(#glow)"/>
+  <text x="406" y="260" text-anchor="middle" fill="white" font-size="7" font-family="monospace">GET</text>
+  <circle cx="187" cy="136" r="10" fill="#A78BFA" opacity="0.8" filter="url(#glow)"/>
+  <text x="187" y="140" text-anchor="middle" fill="white" font-size="7" font-family="monospace">POST</text>
+  <circle cx="187" cy="376" r="10" fill="#8B5CF6" opacity="0.8"/>
+  <text x="187" y="380" text-anchor="middle" fill="white" font-size="7" font-family="monospace">PUT</text>
+  <circle cx="106" cy="256" r="9" fill="#A78BFA" opacity="0.7"/>
+  <text x="106" y="260" text-anchor="middle" fill="white" font-size="6" font-family="monospace">DEL</text>
+  <circle cx="325" cy="136" r="9" fill="#8B5CF6" opacity="0.7"/>
+  <text x="325" y="140" text-anchor="middle" fill="white" font-size="7" font-family="monospace">PTCH</text>
+  <circle cx="325" cy="376" r="9" fill="#A78BFA" opacity="0.7"/>
+  <text x="325" y="380" text-anchor="middle" fill="white" font-size="7" font-family="monospace">HEAD</text>
+  <!-- 텍스트 -->
+  <text x="256" y="455" text-anchor="middle" fill="#8B5CF6" font-size="14" font-family="monospace" filter="url(#glow)">QUANTUM API</text>
+</svg>

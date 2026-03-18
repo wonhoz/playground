@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#030508"/>
+      <stop offset="100%" style="stop-color:#120800"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- 망루 타워 -->
+  <rect x="196" y="160" width="120" height="200" rx="4" fill="#F97316" opacity="0.1"/>
+  <rect x="196" y="160" width="120" height="200" rx="4" fill="none" stroke="#F97316" stroke-width="2.5"/>
+  <!-- 망루 상단 -->
+  <polygon points="186,160 326,160 306,120 206,120" fill="#F97316" opacity="0.2"/>
+  <polygon points="186,160 326,160 306,120 206,120" fill="none" stroke="#F97316" stroke-width="2" filter="url(#glow)"/>
+  <!-- 기둥 창문 (포트들) -->
+  <rect x="215" y="175" width="35" height="25" rx="3" fill="#F97316" opacity="0.3" filter="url(#glow)"/>
+  <rect x="262" y="175" width="35" height="25" rx="3" fill="#F97316" opacity="0.3" filter="url(#glow)"/>
+  <rect x="215" y="218" width="35" height="25" rx="3" fill="#F97316" opacity="0.2"/>
+  <rect x="262" y="218" width="35" height="25" rx="3" fill="#F97316" opacity="0.2"/>
+  <rect x="215" y="261" width="35" height="25" rx="3" fill="#F97316" opacity="0.15"/>
+  <rect x="262" y="261" width="35" height="25" rx="3" fill="#F97316" opacity="0.15"/>
+  <!-- 문 -->
+  <rect x="232" y="315" width="48" height="45" rx="4" fill="#F97316" opacity="0.25" filter="url(#glow)"/>
+  <!-- 스캔 빔 (망루에서) -->
+  <line x1="256" y1="120" x2="100" y2="200" stroke="#F97316" stroke-width="2" stroke-dasharray="8,5" opacity="0.5" filter="url(#glow)"/>
+  <line x1="256" y1="120" x2="412" y2="200" stroke="#F97316" stroke-width="2" stroke-dasharray="8,5" opacity="0.5" filter="url(#glow)"/>
+  <!-- 경고 라이트 (꼭대기) -->
+  <circle cx="256" cy="110" r="12" fill="#F97316" opacity="0.9" filter="url(#glow)"/>
+  <circle cx="256" cy="110" r="20" fill="#F97316" opacity="0.15"/>
+  <!-- 기초 -->
+  <rect x="160" y="360" width="192" height="20" rx="4" fill="#F97316" opacity="0.3"/>
+</svg>

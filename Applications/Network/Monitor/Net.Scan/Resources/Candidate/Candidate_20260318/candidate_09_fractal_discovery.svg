@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#030508"/>
+      <stop offset="100%" style="stop-color:#050d14"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- 프랙탈 트리 (서브네트워크) -->
+  <!-- 루트 -->
+  <line x1="256" y1="430" x2="256" y2="340" stroke="#14B8A6" stroke-width="3" opacity="0.8"/>
+  <!-- 1단계 분기 -->
+  <line x1="256" y1="340" x2="160" y2="265" stroke="#14B8A6" stroke-width="2.5" opacity="0.7"/>
+  <line x1="256" y1="340" x2="352" y2="265" stroke="#14B8A6" stroke-width="2.5" opacity="0.7"/>
+  <!-- 2단계 분기 -->
+  <line x1="160" y1="265" x2="105" y2="200" stroke="#2DD4BF" stroke-width="2" opacity="0.6"/>
+  <line x1="160" y1="265" x2="195" y2="200" stroke="#2DD4BF" stroke-width="2" opacity="0.6"/>
+  <line x1="352" y1="265" x2="317" y2="200" stroke="#2DD4BF" stroke-width="2" opacity="0.6"/>
+  <line x1="352" y1="265" x2="407" y2="200" stroke="#2DD4BF" stroke-width="2" opacity="0.6"/>
+  <!-- 3단계 분기 -->
+  <line x1="105" y1="200" x2="80" y2="150" stroke="#14B8A6" stroke-width="1.5" opacity="0.4"/>
+  <line x1="105" y1="200" x2="125" y2="150" stroke="#14B8A6" stroke-width="1.5" opacity="0.4"/>
+  <line x1="195" y1="200" x2="175" y2="150" stroke="#14B8A6" stroke-width="1.5" opacity="0.4"/>
+  <line x1="195" y1="200" x2="215" y2="150" stroke="#14B8A6" stroke-width="1.5" opacity="0.4"/>
+  <line x1="317" y1="200" x2="297" y2="150" stroke="#14B8A6" stroke-width="1.5" opacity="0.4"/>
+  <line x1="317" y1="200" x2="337" y2="150" stroke="#14B8A6" stroke-width="1.5" opacity="0.4"/>
+  <line x1="407" y1="200" x2="387" y2="150" stroke="#14B8A6" stroke-width="1.5" opacity="0.4"/>
+  <line x1="407" y1="200" x2="427" y2="150" stroke="#14B8A6" stroke-width="1.5" opacity="0.4"/>
+  <!-- 노드들 -->
+  <circle cx="256" cy="430" r="11" fill="#14B8A6" filter="url(#glow)"/>
+  <circle cx="256" cy="340" r="9" fill="#2DD4BF" filter="url(#glow)"/>
+  <circle cx="160" cy="265" r="8" fill="#14B8A6" filter="url(#glow)"/>
+  <circle cx="352" cy="265" r="8" fill="#14B8A6" filter="url(#glow)"/>
+  <circle cx="105" cy="200" r="6" fill="#2DD4BF" opacity="0.8"/>
+  <circle cx="195" cy="200" r="6" fill="#2DD4BF" opacity="0.8"/>
+  <circle cx="317" cy="200" r="6" fill="#2DD4BF" opacity="0.8"/>
+  <circle cx="407" cy="200" r="6" fill="#2DD4BF" opacity="0.8"/>
+  <!-- 리프 노드들 -->
+  <circle cx="80" cy="150" r="4" fill="#14B8A6" opacity="0.6"/>
+  <circle cx="125" cy="150" r="4" fill="#14B8A6" opacity="0.6"/>
+  <circle cx="175" cy="150" r="4" fill="#14B8A6" opacity="0.6"/>
+  <circle cx="215" cy="150" r="4" fill="#14B8A6" opacity="0.6"/>
+  <circle cx="297" cy="150" r="4" fill="#14B8A6" opacity="0.6"/>
+  <circle cx="337" cy="150" r="4" fill="#14B8A6" opacity="0.6"/>
+  <circle cx="387" cy="150" r="4" fill="#14B8A6" opacity="0.6"/>
+  <circle cx="427" cy="150" r="4" fill="#14B8A6" opacity="0.6"/>
+</svg>

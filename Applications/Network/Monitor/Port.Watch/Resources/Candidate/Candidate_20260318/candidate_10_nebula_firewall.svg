@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#030508"/>
+      <stop offset="100%" style="stop-color:#120800"/>
+    </linearGradient>
+    <radialGradient id="nebula" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#F97316;stop-opacity:0.3"/>
+      <stop offset="100%" style="stop-color:#F97316;stop-opacity:0"/>
+    </radialGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- 성운 효과 -->
+  <circle cx="256" cy="256" r="160" fill="url(#nebula)"/>
+  <circle cx="200" cy="220" r="80" fill="url(#nebula)" opacity="0.5"/>
+  <circle cx="300" cy="290" r="90" fill="url(#nebula)" opacity="0.4"/>
+  <!-- 방화벽 바 (세로) -->
+  <rect x="160" y="100" width="20" height="310" rx="10" fill="#F97316" opacity="0.3"/>
+  <rect x="196" y="120" width="20" height="270" rx="10" fill="#F97316" opacity="0.5" filter="url(#glow)"/>
+  <rect x="232" y="100" width="20" height="310" rx="10" fill="#F97316" opacity="0.3"/>
+  <rect x="268" y="120" width="20" height="270" rx="10" fill="#F97316" opacity="0.5" filter="url(#glow)"/>
+  <rect x="304" y="100" width="20" height="310" rx="10" fill="#F97316" opacity="0.3"/>
+  <rect x="340" y="120" width="20" height="270" rx="10" fill="#F97316" opacity="0.5" filter="url(#glow)"/>
+  <!-- 포트 게이트 (열린 틈) -->
+  <rect x="196" y="220" width="20" height="60" rx="4" fill="#120800"/>
+  <rect x="268" y="240" width="20" height="40" rx="4" fill="#120800"/>
+  <!-- 포트 열림 표시 -->
+  <circle cx="206" cy="222" r="5" fill="#F97316" filter="url(#glow)"/>
+  <circle cx="206" cy="278" r="5" fill="#F97316" filter="url(#glow)"/>
+  <circle cx="278" cy="242" r="5" fill="#FB923C" filter="url(#glow)"/>
+  <circle cx="278" cy="278" r="5" fill="#FB923C" filter="url(#glow)"/>
+  <!-- 상단/하단 바 -->
+  <rect x="150" y="88" width="212" height="14" rx="7" fill="#F97316" opacity="0.5"/>
+  <rect x="150" y="410" width="212" height="14" rx="7" fill="#F97316" opacity="0.5"/>
+  <text x="256" y="460" text-anchor="middle" fill="#F97316" font-size="12" font-family="monospace" opacity="0.6">NEBULA FIREWALL</text>
+</svg>

@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#030508"/>
+      <stop offset="100%" style="stop-color:#120800"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- 포트 리스트 (왼쪽) -->
+  <rect x="80" y="130" width="160" height="260" rx="8" fill="#F97316" opacity="0.06"/>
+  <rect x="80" y="130" width="160" height="260" rx="8" fill="none" stroke="#F97316" stroke-width="2"/>
+  <g font-family="monospace" font-size="11" fill="#F97316" opacity="0.6">
+    <text x="92" y="160">:22  SSH</text>
+    <text x="92" y="185">:25  SMTP</text>
+    <text x="92" y="210">:53  DNS</text>
+    <text x="92" y="235">:80  HTTP</text>
+    <text x="92" y="260">:443 HTTPS</text>
+    <text x="92" y="285">:3306 MySQL</text>
+    <text x="92" y="310">:8080 HTTP*</text>
+    <text x="92" y="335">:27017 Mongo</text>
+  </g>
+  <!-- 스캔 빔 -->
+  <path d="M 240 256 L 420 180" stroke="#F97316" stroke-width="3" filter="url(#glow)" opacity="0.8"/>
+  <path d="M 240 256 L 420 256" stroke="#F97316" stroke-width="2" filter="url(#glow)" opacity="0.6"/>
+  <path d="M 240 256 L 420 332" stroke="#FB923C" stroke-width="2" opacity="0.5"/>
+  <!-- 발신기 -->
+  <circle cx="240" cy="256" r="16" fill="#F97316" opacity="0.3"/>
+  <circle cx="240" cy="256" r="10" fill="#F97316" opacity="0.8" filter="url(#glow)"/>
+  <!-- 결과 상태 -->
+  <circle cx="420" cy="180" r="8" fill="#F97316" opacity="0.9" filter="url(#glow)"/>
+  <text x="432" y="184" fill="#F97316" font-size="10" font-family="monospace" opacity="0.8">OPEN</text>
+  <circle cx="420" cy="256" r="6" fill="#FB923C" opacity="0.7"/>
+  <text x="430" y="260" fill="#FB923C" font-size="10" font-family="monospace" opacity="0.7">OPEN</text>
+  <circle cx="420" cy="332" r="6" fill="#F97316" opacity="0.4"/>
+  <text x="430" y="336" fill="#F97316" font-size="10" font-family="monospace" opacity="0.4">CLOSED</text>
+</svg>

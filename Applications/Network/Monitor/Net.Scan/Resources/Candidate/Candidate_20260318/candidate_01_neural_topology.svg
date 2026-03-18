@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#030508"/>
+      <stop offset="100%" style="stop-color:#050d14"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- 네트워크 토폴로지 선들 -->
+  <line x1="256" y1="100" x2="140" y2="200" stroke="#14B8A6" stroke-width="2" opacity="0.5"/>
+  <line x1="256" y1="100" x2="256" y2="220" stroke="#14B8A6" stroke-width="2" opacity="0.5"/>
+  <line x1="256" y1="100" x2="372" y2="200" stroke="#14B8A6" stroke-width="2" opacity="0.5"/>
+  <line x1="140" y1="200" x2="100" y2="330" stroke="#2DD4BF" stroke-width="1.5" opacity="0.4"/>
+  <line x1="140" y1="200" x2="200" y2="340" stroke="#2DD4BF" stroke-width="1.5" opacity="0.4"/>
+  <line x1="256" y1="220" x2="256" y2="350" stroke="#14B8A6" stroke-width="2" opacity="0.5"/>
+  <line x1="372" y1="200" x2="312" y2="340" stroke="#2DD4BF" stroke-width="1.5" opacity="0.4"/>
+  <line x1="372" y1="200" x2="412" y2="330" stroke="#2DD4BF" stroke-width="1.5" opacity="0.4"/>
+  <!-- 노드들 -->
+  <circle cx="256" cy="100" r="16" fill="#14B8A6" opacity="0.9" filter="url(#glow)"/>
+  <circle cx="140" cy="200" r="12" fill="#2DD4BF" opacity="0.8" filter="url(#glow)"/>
+  <circle cx="256" cy="220" r="12" fill="#14B8A6" opacity="0.8" filter="url(#glow)"/>
+  <circle cx="372" cy="200" r="12" fill="#2DD4BF" opacity="0.8" filter="url(#glow)"/>
+  <circle cx="100" cy="330" r="9" fill="#14B8A6" opacity="0.6"/>
+  <circle cx="200" cy="340" r="9" fill="#2DD4BF" opacity="0.6"/>
+  <circle cx="256" cy="350" r="11" fill="#14B8A6" opacity="0.7"/>
+  <circle cx="312" cy="340" r="9" fill="#2DD4BF" opacity="0.6"/>
+  <circle cx="412" cy="330" r="9" fill="#14B8A6" opacity="0.6"/>
+  <!-- 스캔 웨이브 -->
+  <circle cx="256" cy="220" r="55" fill="none" stroke="#14B8A6" stroke-width="1.5" opacity="0.3" stroke-dasharray="8,5"/>
+  <circle cx="256" cy="220" r="80" fill="none" stroke="#2DD4BF" stroke-width="1" opacity="0.15" stroke-dasharray="5,7"/>
+  <!-- 루트 노드 아이콘 (라우터) -->
+  <rect x="238" y="82" width="36" height="24" rx="4" fill="none"/>
+  <path d="M 246 95 L 266 95 M 246 100 L 266 100 M 256 88 L 256 107" stroke="white" stroke-width="1.5" opacity="0.7"/>
+</svg>

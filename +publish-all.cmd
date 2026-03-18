@@ -27,6 +27,19 @@ echo !DG!Output: %BIN%!RS!
 echo !DG!--------------------------------------------------!RS!
 echo.
 
+:: 배포 전 버전 확인
+for /f "delims=" %%v in ('powershell -NoProfile -Command "(Select-String -Path \"%ROOT%Directory.Build.props\" -Pattern \"<AppVersion>(.+)</AppVersion>\").Matches[0].Groups[1].Value" 2^>nul') do set "APP_VER=%%v"
+if not defined APP_VER set "APP_VER=(알 수 없음)"
+echo !BD!현재 버전: !GR!!APP_VER!!RS!
+echo !DG!Directory.Build.props 기준 — 배포 전 버전을 확인하세요.!RS!
+echo.
+set /p "CONFIRM=계속 배포하시겠습니까? [Y/N] "
+if /i not "!CONFIRM!"=="Y" (
+    echo !RE!배포가 취소되었습니다.!RS!
+    exit /b 0
+)
+echo.
+
 :: ── Applications / AI ──────────────────────────────────────────────
 call :pub "AI.Clip"               "Applications\AI\AI.Clip"                                 "Ai.Clip.exe"               "Applications\AI"
 call :pub "Prompt.Forge"          "Applications\AI\Prompt.Forge"                            "Prompt.Forge.exe"          "Applications\AI\Prompt.Forge"

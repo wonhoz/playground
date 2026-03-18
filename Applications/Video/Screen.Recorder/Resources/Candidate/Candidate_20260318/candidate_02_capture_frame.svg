@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#030508"/>
+      <stop offset="100%" style="stop-color:#0d0000"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- 스크린 프레임 -->
+  <rect x="80" y="140" width="352" height="220" rx="10" fill="#EF4444" opacity="0.05"/>
+  <rect x="80" y="140" width="352" height="220" rx="10" fill="none" stroke="#EF4444" stroke-width="3" filter="url(#glow)"/>
+  <!-- 코너 마커 -->
+  <path d="M 80 180 L 80 140 L 120 140" fill="none" stroke="#EF4444" stroke-width="5" stroke-linecap="round" filter="url(#glow)"/>
+  <path d="M 392 140 L 432 140 L 432 180" fill="none" stroke="#EF4444" stroke-width="5" stroke-linecap="round" filter="url(#glow)"/>
+  <path d="M 80 320 L 80 360 L 120 360" fill="none" stroke="#EF4444" stroke-width="5" stroke-linecap="round" filter="url(#glow)"/>
+  <path d="M 392 360 L 432 360 L 432 320" fill="none" stroke="#EF4444" stroke-width="5" stroke-linecap="round" filter="url(#glow)"/>
+  <!-- REC 표시 -->
+  <circle cx="200" cy="250" r="14" fill="#EF4444" opacity="0.9" filter="url(#glow)"/>
+  <text x="225" y="257" fill="#EF4444" font-size="18" font-family="monospace" font-weight="bold" filter="url(#glow)">REC</text>
+  <!-- 레이블 -->
+  <text x="256" y="430" text-anchor="middle" fill="#EF4444" font-size="13" font-family="monospace" font-weight="bold" filter="url(#glow)">CAPTURE FRAME</text>
+</svg>

@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#030508"/>
+      <stop offset="100%" stop-color="#040d0a"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- 나이테 스타일 연도별 정리 -->
+  <!-- 가장 바깥 링 (오래된 연도) -->
+  <circle cx="256" cy="230" r="185" fill="none" stroke="#065f46" stroke-width="20" opacity="0.2"/>
+  <!-- 링들 -->
+  <circle cx="256" cy="230" r="160" fill="none" stroke="#065f46" stroke-width="18" opacity="0.25"/>
+  <circle cx="256" cy="230" r="136" fill="none" stroke="#10B981" stroke-width="16" opacity="0.3"/>
+  <circle cx="256" cy="230" r="112" fill="none" stroke="#10B981" stroke-width="16" opacity="0.4"/>
+  <circle cx="256" cy="230" r="88" fill="none" stroke="#34D399" stroke-width="18" opacity="0.5"/>
+  <circle cx="256" cy="230" r="62" fill="none" stroke="#34D399" stroke-width="18" opacity="0.65" filter="url(#glow)"/>
+  <circle cx="256" cy="230" r="36" fill="none" stroke="#6EE7B7" stroke-width="20" opacity="0.8" filter="url(#glow)"/>
+  <!-- 중앙 -->
+  <circle cx="256" cy="230" r="16" fill="#34D399" opacity="0.9" filter="url(#glow)"/>
+  <!-- 연도 라벨 (링에 표시) -->
+  <text x="256" y="40" text-anchor="middle" font-size="11" fill="#065f46" opacity="0.5">2018</text>
+  <text x="256" y="66" text-anchor="middle" font-size="11" fill="#065f46" opacity="0.55">2019</text>
+  <text x="256" y="90" text-anchor="middle" font-size="12" fill="#10B981" opacity="0.6">2020</text>
+  <text x="256" y="114" text-anchor="middle" font-size="12" fill="#10B981" opacity="0.65">2021</text>
+  <text x="256" y="136" text-anchor="middle" font-size="13" fill="#34D399" opacity="0.75">2022</text>
+  <text x="256" y="160" text-anchor="middle" font-size="14" fill="#34D399" opacity="0.85">2023</text>
+  <text x="256" y="185" text-anchor="middle" font-size="15" font-weight="bold" fill="#6EE7B7" filter="url(#glow)" opacity="0.95">2024</text>
+  <!-- 개수 표시 (우측) -->
+  <line x1="441" y1="230" x2="480" y2="230" stroke="#065f46" stroke-width="1" opacity="0.4"/>
+  <text x="486" y="234" font-size="10" fill="#065f46" opacity="0.5">45</text>
+  <line x1="415" y1="230" x2="480" y2="165" stroke="#065f46" stroke-width="1" opacity="0.4" transform="rotate(0,480,230)"/>
+  <line x1="256" y1="70" x2="440" y2="115" stroke="#065f46" stroke-width="1" opacity="0.3"/>
+  <text x="448" y="112" font-size="10" fill="#065f46" opacity="0.5">38</text>
+  <line x1="256" y1="93" x2="420" y2="130" stroke="#065f46" stroke-width="1" opacity="0.3"/>
+  <text x="428" y="127" font-size="10" fill="#065f46" opacity="0.5">52</text>
+  <line x1="256" y1="118" x2="396" y2="145" stroke="#10B981" stroke-width="1" opacity="0.4"/>
+  <text x="404" y="142" font-size="10" fill="#10B981" opacity="0.6">67</text>
+  <line x1="256" y1="142" x2="374" y2="165" stroke="#10B981" stroke-width="1" opacity="0.4"/>
+  <text x="382" y="162" font-size="10" fill="#10B981" opacity="0.6">89</text>
+  <line x1="256" y1="167" x2="352" y2="192" stroke="#34D399" stroke-width="1.5" opacity="0.5"/>
+  <text x="360" y="189" font-size="11" fill="#34D399" opacity="0.7">124</text>
+  <line x1="256" y1="193" x2="340" y2="214" stroke="#6EE7B7" stroke-width="2" opacity="0.7"/>
+  <text x="348" y="211" font-size="12" font-weight="bold" fill="#6EE7B7" filter="url(#glow)" opacity="0.9">198</text>
+  <!-- 분리선 (나이테 분할) -->
+  <line x1="256" y1="45" x2="256" y2="415" stroke="#1a3a28" stroke-width="0.5" opacity="0.3"/>
+  <!-- 하단 패널 -->
+  <rect x="80" y="400" width="352" height="70" rx="10" fill="#061510" stroke="#34D399" stroke-width="1.5" opacity="0.9"/>
+  <text x="256" y="428" text-anchor="middle" font-size="14" font-weight="bold" fill="#34D399" filter="url(#glow)" opacity="0.9">YEAR RING ORGANIZER</text>
+  <text x="256" y="450" text-anchor="middle" font-size="11" fill="#888" opacity="0.7">나이테 연도별 정리</text>
+</svg>

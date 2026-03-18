@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#030508"/>
+      <stop offset="100%" stop-color="#0d0508"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- 퀼트 패턴 모자이크 — 각 격자 안에 삼각형 분할 -->
+  <!-- 6x6 퀼트 블록 -->
+  <!-- 각 셀은 70x70, 시작점 (40,40) -->
+  <!-- 셀 (0,0) -->
+  <polygon points="40,40 110,40 75,75" fill="#F43F5E" opacity="0.85"/>
+  <polygon points="40,110 110,110 75,75" fill="#9F1239" opacity="0.7"/>
+  <polygon points="40,40 40,110 75,75" fill="#BE185D" opacity="0.75"/>
+  <polygon points="110,40 110,110 75,75" fill="#F43F5E" opacity="0.8"/>
+  <!-- 셀 (1,0) -->
+  <polygon points="110,40 180,40 145,75" fill="#9F1239" opacity="0.7"/>
+  <polygon points="110,110 180,110 145,75" fill="#F43F5E" opacity="0.85"/>
+  <polygon points="110,40 110,110 145,75" fill="#F43F5E" opacity="0.8"/>
+  <polygon points="180,40 180,110 145,75" fill="#BE185D" opacity="0.75"/>
+  <!-- 셀 (2,0) -->
+  <polygon points="180,40 250,40 215,75" fill="#F43F5E" opacity="0.9" filter="url(#glow)"/>
+  <polygon points="180,110 250,110 215,75" fill="#BE185D" opacity="0.75"/>
+  <polygon points="180,40 180,110 215,75" fill="#9F1239" opacity="0.7"/>
+  <polygon points="250,40 250,110 215,75" fill="#F43F5E" opacity="0.85"/>
+  <!-- 셀 (3,0) -->
+  <polygon points="250,40 320,40 285,75" fill="#BE185D" opacity="0.75"/>
+  <polygon points="250,110 320,110 285,75" fill="#F43F5E" opacity="0.9" filter="url(#glow)"/>
+  <polygon points="250,40 250,110 285,75" fill="#F43F5E" opacity="0.85"/>
+  <polygon points="320,40 320,110 285,75" fill="#9F1239" opacity="0.7"/>
+  <!-- 셀 (4,0) -->
+  <polygon points="320,40 390,40 355,75" fill="#F43F5E" opacity="0.85"/>
+  <polygon points="320,110 390,110 355,75" fill="#9F1239" opacity="0.7"/>
+  <polygon points="320,40 320,110 355,75" fill="#BE185D" opacity="0.8"/>
+  <polygon points="390,40 390,110 355,75" fill="#F43F5E" opacity="0.9" filter="url(#glow)"/>
+  <!-- 셀 (5,0) -->
+  <polygon points="390,40 460,40 425,75" fill="#9F1239" opacity="0.7"/>
+  <polygon points="390,110 460,110 425,75" fill="#F43F5E" opacity="0.85"/>
+  <polygon points="390,40 390,110 425,75" fill="#F43F5E" opacity="0.8"/>
+  <polygon points="460,40 460,110 425,75" fill="#BE185D" opacity="0.75"/>
+  <!-- 행 2 -->
+  <polygon points="40,110 110,110 75,145" fill="#F43F5E" opacity="0.7"/>
+  <polygon points="40,180 110,180 75,145" fill="#BE185D" opacity="0.8"/>
+  <polygon points="40,110 40,180 75,145" fill="#F43F5E" opacity="0.85"/>
+  <polygon points="110,110 110,180 75,145" fill="#9F1239" opacity="0.7"/>
+  <polygon points="110,110 180,110 145,145" fill="#BE185D" opacity="0.8"/>
+  <polygon points="110,180 180,180 145,145" fill="#F43F5E" opacity="0.85" filter="url(#glow)"/>
+  <polygon points="110,110 110,180 145,145" fill="#9F1239" opacity="0.7"/>
+  <polygon points="180,110 180,180 145,145" fill="#F43F5E" opacity="0.8"/>
+  <polygon points="180,110 250,110 215,145" fill="#F43F5E" opacity="0.9" filter="url(#glow)"/>
+  <polygon points="180,180 250,180 215,145" fill="#9F1239" opacity="0.7"/>
+  <polygon points="180,110 180,180 215,145" fill="#BE185D" opacity="0.8"/>
+  <polygon points="250,110 250,180 215,145" fill="#F43F5E" opacity="0.85"/>
+  <polygon points="250,110 320,110 285,145" fill="#9F1239" opacity="0.7"/>
+  <polygon points="250,180 320,180 285,145" fill="#F43F5E" opacity="0.85"/>
+  <polygon points="250,110 250,180 285,145" fill="#F43F5E" opacity="0.8"/>
+  <polygon points="320,110 320,180 285,145" fill="#BE185D" opacity="0.75"/>
+  <polygon points="320,110 390,110 355,145" fill="#F43F5E" opacity="0.85"/>
+  <polygon points="320,180 390,180 355,145" fill="#BE185D" opacity="0.8"/>
+  <polygon points="320,110 320,180 355,145" fill="#9F1239" opacity="0.7"/>
+  <polygon points="390,110 390,180 355,145" fill="#F43F5E" opacity="0.9" filter="url(#glow)"/>
+  <polygon points="390,110 460,110 425,145" fill="#BE185D" opacity="0.75"/>
+  <polygon points="390,180 460,180 425,145" fill="#F43F5E" opacity="0.85"/>
+  <polygon points="390,110 390,180 425,145" fill="#F43F5E" opacity="0.8"/>
+  <polygon points="460,110 460,180 425,145" fill="#9F1239" opacity="0.7"/>
+  <!-- 행 3 (중앙 강조) -->
+  <polygon points="40,180 110,180 75,215" fill="#BE185D" opacity="0.8"/>
+  <polygon points="40,250 110,250 75,215" fill="#F43F5E" opacity="0.9" filter="url(#glow)"/>
+  <polygon points="40,180 40,250 75,215" fill="#9F1239" opacity="0.7"/>
+  <polygon points="110,180 110,250 75,215" fill="#F43F5E" opacity="0.85"/>
+  <!-- 중앙 큰 강조 셀 -->
+  <polygon points="180,180 320,180 250,250" fill="#F43F5E" opacity="0.3" filter="url(#glow)"/>
+  <polygon points="180,320 320,320 250,250" fill="#9F1239" opacity="0.2"/>
+  <polygon points="180,180 180,320 250,250" fill="#BE185D" opacity="0.25"/>
+  <polygon points="320,180 320,320 250,250" fill="#F43F5E" opacity="0.3" filter="url(#glow)"/>
+  <!-- 중앙 아이콘 -->
+  <circle cx="250" cy="250" r="30" fill="#0a0508" stroke="#F43F5E" stroke-width="2" filter="url(#glow)" opacity="0.95"/>
+  <text x="250" y="255" text-anchor="middle" font-size="18" fill="#F43F5E" opacity="0.9">✦</text>
+  <!-- 하단 -->
+  <rect x="110" y="415" width="292" height="60" rx="10" fill="#0a0508" stroke="#F43F5E" stroke-width="1.5" opacity="0.9"/>
+  <text x="256" y="441" text-anchor="middle" font-size="14" font-weight="bold" fill="#F43F5E" filter="url(#glow)" opacity="0.9">QUILT MOSAIC</text>
+  <text x="256" y="462" text-anchor="middle" font-size="11" fill="#888" opacity="0.7">퀼트 삼각 패턴</text>
+</svg>

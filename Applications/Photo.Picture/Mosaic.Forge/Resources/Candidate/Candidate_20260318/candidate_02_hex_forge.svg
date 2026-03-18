@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#030508"/>
+      <stop offset="100%" stop-color="#0d0508"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- 헥사곤 모자이크 — 벌집 구조 -->
+  <!-- 헥사곤 정의: points 계산 (cx,cy, r=32) -->
+  <!-- 행 1 -->
+  <polygon points="100,70 132,88 132,124 100,142 68,124 68,88" fill="#F43F5E" opacity="0.8"/>
+  <polygon points="164,70 196,88 196,124 164,142 132,124 132,88" fill="#9F1239" opacity="0.7"/>
+  <polygon points="228,70 260,88 260,124 228,142 196,124 196,88" fill="#F43F5E" opacity="0.9"/>
+  <polygon points="292,70 324,88 324,124 292,142 260,124 260,88" fill="#BE185D" opacity="0.75"/>
+  <polygon points="356,70 388,88 388,124 356,142 324,124 324,88" fill="#F43F5E" opacity="0.85"/>
+  <polygon points="420,70 452,88 452,124 420,142 388,124 388,88" fill="#9F1239" opacity="0.8"/>
+  <!-- 행 2 (오프셋) -->
+  <polygon points="68,142 100,160 100,196 68,214 36,196 36,160" fill="#BE185D" opacity="0.7"/>
+  <polygon points="132,142 164,160 164,196 132,214 100,196 100,160" fill="#F43F5E" opacity="0.9"/>
+  <polygon points="196,142 228,160 228,196 196,214 164,196 164,160" fill="#9F1239" opacity="0.8"/>
+  <polygon points="260,142 292,160 292,196 260,214 228,196 228,160" fill="#F43F5E" opacity="0.95" filter="url(#glow)"/>
+  <polygon points="324,142 356,160 356,196 324,214 292,196 292,160" fill="#BE185D" opacity="0.85"/>
+  <polygon points="388,142 420,160 420,196 388,214 356,196 356,160" fill="#F43F5E" opacity="0.8"/>
+  <polygon points="452,142 484,160 484,196 452,214 420,196 420,160" fill="#9F1239" opacity="0.7"/>
+  <!-- 행 3 -->
+  <polygon points="100,214 132,232 132,268 100,286 68,268 68,232" fill="#F43F5E" opacity="0.85"/>
+  <polygon points="164,214 196,232 196,268 164,286 132,268 132,232" fill="#BE185D" opacity="0.8"/>
+  <polygon points="228,214 260,232 260,268 228,286 196,268 196,232" fill="#F43F5E" opacity="0.9"/>
+  <polygon points="292,214 324,232 324,268 292,286 260,268 260,232" fill="#9F1239" opacity="0.85"/>
+  <polygon points="356,214 388,232 388,268 356,286 324,268 324,232" fill="#F43F5E" opacity="0.9" filter="url(#glow)"/>
+  <polygon points="420,214 452,232 452,268 420,286 388,268 388,232" fill="#BE185D" opacity="0.75"/>
+  <!-- 행 4 (페이드) -->
+  <polygon points="68,286 100,304 100,340 68,358 36,340 36,304" fill="#F43F5E" opacity="0.4"/>
+  <polygon points="132,286 164,304 164,340 132,358 100,340 100,304" fill="#9F1239" opacity="0.45"/>
+  <polygon points="196,286 228,304 228,340 196,358 164,340 164,304" fill="#F43F5E" opacity="0.5"/>
+  <polygon points="260,286 292,304 292,340 260,358 228,340 228,304" fill="#BE185D" opacity="0.4"/>
+  <polygon points="324,286 356,304 356,340 324,358 292,340 292,304" fill="#F43F5E" opacity="0.45"/>
+  <polygon points="388,286 420,304 420,340 388,358 356,340 356,304" fill="#9F1239" opacity="0.35"/>
+  <polygon points="452,286 484,304 484,340 452,358 420,340 420,304" fill="#F43F5E" opacity="0.3"/>
+  <!-- 하단 -->
+  <rect x="90" y="375" width="332" height="70" rx="10" fill="#0a0508" stroke="#F43F5E" stroke-width="1.5" opacity="0.9"/>
+  <text x="256" y="404" text-anchor="middle" font-size="15" font-weight="bold" fill="#F43F5E" filter="url(#glow)" opacity="0.9">HEX MOSAIC FORGE</text>
+  <text x="256" y="425" text-anchor="middle" font-size="11" fill="#888" opacity="0.7">벌집 헥사곤 모자이크</text>
+</svg>

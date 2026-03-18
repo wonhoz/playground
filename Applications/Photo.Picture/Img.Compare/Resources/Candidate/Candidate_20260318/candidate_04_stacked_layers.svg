@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#030508"/>
+      <stop offset="100%" stop-color="#080c14"/>
+    </linearGradient>
+    <linearGradient id="layer1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2DD4BF" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#0891B2" stop-opacity="0.1"/>
+    </linearGradient>
+    <linearGradient id="layer2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F43F5E" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#9F1239" stop-opacity="0.1"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="7" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- 레이어 1 (뒤) -->
+  <g transform="translate(30, -30)">
+    <rect x="100" y="160" width="312" height="220" rx="10" fill="url(#layer1)" stroke="#2DD4BF" stroke-width="2" opacity="0.7"/>
+    <!-- 내부 이미지 패턴 -->
+    <rect x="116" y="176" width="80" height="80" rx="6" fill="#0d2020" stroke="#2DD4BF" stroke-width="1" opacity="0.8"/>
+    <circle cx="136" cy="196" r="8" fill="#2DD4BF" opacity="0.6"/>
+    <path d="M116,240 L146,210 L168,230 L185,218 L196,240" fill="none" stroke="#2DD4BF" stroke-width="2" opacity="0.7"/>
+    <rect x="210" y="180" width="180" height="12" rx="4" fill="#2DD4BF" opacity="0.3"/>
+    <rect x="210" y="200" width="140" height="10" rx="4" fill="#2DD4BF" opacity="0.2"/>
+    <rect x="210" y="218" width="160" height="10" rx="4" fill="#2DD4BF" opacity="0.2"/>
+    <text x="116" y="338" font-size="12" fill="#2DD4BF" opacity="0.7">IMAGE A</text>
+  </g>
+  <!-- 레이어 2 (앞) -->
+  <g transform="translate(-30, 30)">
+    <rect x="100" y="160" width="312" height="220" rx="10" fill="url(#layer2)" stroke="#F43F5E" stroke-width="2" opacity="0.7"/>
+    <!-- 내부 이미지 패턴 (다름) -->
+    <rect x="116" y="176" width="80" height="80" rx="6" fill="#200d14" stroke="#F43F5E" stroke-width="1" opacity="0.8"/>
+    <circle cx="136" cy="196" r="8" fill="#F43F5E" opacity="0.6"/>
+    <path d="M116,240 L136,218 L158,235 L175,220 L196,240" fill="none" stroke="#F43F5E" stroke-width="2" opacity="0.7"/>
+    <rect x="210" y="180" width="180" height="12" rx="4" fill="#F43F5E" opacity="0.3"/>
+    <rect x="210" y="200" width="155" height="10" rx="4" fill="#F43F5E" opacity="0.2"/>
+    <rect x="210" y="218" width="130" height="10" rx="4" fill="#F43F5E" opacity="0.2"/>
+    <text x="116" y="338" font-size="12" fill="#F43F5E" opacity="0.7">IMAGE B</text>
+  </g>
+  <!-- 연결 화살표 -->
+  <path d="M420,195 C450,195 460,340 420,340" fill="none" stroke="#2DD4BF" stroke-width="2" stroke-dasharray="6,4" opacity="0.7" filter="url(#glow)"/>
+  <circle cx="420" cy="267" r="6" fill="#2DD4BF" opacity="0.8" filter="url(#glow)"/>
+  <!-- COMPARE 라벨 -->
+  <rect x="180" y="455" width="152" height="28" rx="8" fill="#0d1a20" stroke="#2DD4BF" stroke-width="1.5" opacity="0.9"/>
+  <text x="256" y="473" text-anchor="middle" font-size="13" fill="#2DD4BF" font-weight="bold" opacity="0.9">COMPARE</text>
+</svg>

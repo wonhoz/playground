@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#030508"/>
+      <stop offset="100%" stop-color="#0a0510"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- 심볼 라이브러리 패널 -->
+  <rect x="60" y="80" width="392" height="340" rx="8" fill="#060410" stroke="#C084FC" stroke-width="1.5" opacity="0.9"/>
+  <text x="256" y="104" text-anchor="middle" font-size="13" font-weight="bold" fill="#C084FC" filter="url(#glow)" opacity="0.9">SYMBOL LIBRARY</text>
+  <line x1="60" y1="112" x2="452" y2="112" stroke="#2a0a4a" stroke-width="1" opacity="0.5"/>
+  <!-- 검색 바 -->
+  <rect x="72" y="118" width="280" height="26" rx="6" fill="#0d0820" stroke="#A855F7" stroke-width="1" opacity="0.8"/>
+  <text x="88" y="135" font-size="10" fill="#555577" opacity="0.7">Search symbols...</text>
+  <rect x="362" y="118" width="78" height="26" rx="6" fill="#C084FC" opacity="0.2" stroke="#C084FC" stroke-width="1" filter="url(#glow)"/>
+  <text x="401" y="135" text-anchor="middle" font-size="10" fill="#C084FC" opacity="0.9">+ New</text>
+  <!-- 심볼 그리드 (4×4) -->
+  <!-- 행 1 -->
+  <rect x="72" y="152" width="72" height="60" rx="6" fill="#0d0820" stroke="#A855F7" stroke-width="1.5" filter="url(#glow)" opacity="0.9"/>
+  <circle cx="108" cy="175" r="16" fill="none" stroke="#A855F7" stroke-width="2" opacity="0.8"/>
+  <text x="108" y="202" text-anchor="middle" font-size="9" fill="#888" opacity="0.7">circle</text>
+  <rect x="152" y="152" width="72" height="60" rx="6" fill="#0d0820" stroke="#7C3AED" stroke-width="1" opacity="0.8"/>
+  <rect x="172" y="162" width="32" height="28" rx="3" fill="none" stroke="#7C3AED" stroke-width="2" opacity="0.8"/>
+  <text x="188" y="202" text-anchor="middle" font-size="9" fill="#888" opacity="0.7">rect</text>
+  <rect x="232" y="152" width="72" height="60" rx="6" fill="#0d0820" stroke="#A855F7" stroke-width="1" opacity="0.8"/>
+  <polygon points="268,162 280,182 256,182" fill="none" stroke="#A855F7" stroke-width="2" opacity="0.8"/>
+  <text x="268" y="202" text-anchor="middle" font-size="9" fill="#888" opacity="0.7">triangle</text>
+  <rect x="312" y="152" width="72" height="60" rx="6" fill="#0d0820" stroke="#7C3AED" stroke-width="1" opacity="0.8"/>
+  <path d="M332,180 Q348,162 364,180 Q380,198 396,180" fill="none" stroke="#7C3AED" stroke-width="2" opacity="0.8" transform="translate(-36,0)"/>
+  <text x="348" y="202" text-anchor="middle" font-size="9" fill="#888" opacity="0.7">wave</text>
+  <!-- 행 2 -->
+  <rect x="72" y="222" width="72" height="60" rx="6" fill="#0d0820" stroke="#C084FC" stroke-width="1" opacity="0.8"/>
+  <path d="M96,258 L108,244 L120,258 L116,258 L116,270 L100,270 L100,258 Z" fill="none" stroke="#C084FC" stroke-width="1.5" opacity="0.8"/>
+  <text x="108" y="272" text-anchor="middle" font-size="9" fill="#888" opacity="0.7">arrow</text>
+  <rect x="152" y="222" width="72" height="60" rx="6" fill="#0d0820" stroke="#C084FC" stroke-width="1" opacity="0.8"/>
+  <polygon points="188,244 200,252 196,264 180,264 176,252" fill="none" stroke="#C084FC" stroke-width="1.5" opacity="0.8"/>
+  <text x="188" y="272" text-anchor="middle" font-size="9" fill="#888" opacity="0.7">pentagon</text>
+  <rect x="232" y="222" width="72" height="60" rx="6" fill="#0d0820" stroke="#A855F7" stroke-width="1" opacity="0.8"/>
+  <path d="M250,268 L268,250 L268,258 L286,258 L286,268 L268,268 L268,276 Z" fill="none" stroke="#A855F7" stroke-width="1.5" opacity="0.8"/>
+  <text x="268" y="280" text-anchor="middle" font-size="9" fill="#888" opacity="0.7">cursor</text>
+  <rect x="312" y="222" width="72" height="60" rx="6" fill="#1a0a2a" stroke="#C084FC" stroke-width="2" filter="url(#glow)" opacity="0.95"/>
+  <path d="M348,255 L340,247 L360,235 L348,255 Z" fill="#C084FC" opacity="0.8"/>
+  <text x="348" y="280" text-anchor="middle" font-size="9" fill="#C084FC" opacity="0.9" font-weight="bold">active</text>
+  <!-- 행 3 (흐릿한) -->
+  <rect x="72" y="292" width="72" height="60" rx="6" fill="#080618" stroke="#3a0a5a" stroke-width="1" opacity="0.5"/>
+  <text x="108" y="325" text-anchor="middle" font-size="9" fill="#555577" opacity="0.5">+ more</text>
+  <rect x="152" y="292" width="72" height="60" rx="6" fill="#080618" stroke="#3a0a5a" stroke-width="1" opacity="0.5"/>
+  <text x="188" y="325" text-anchor="middle" font-size="9" fill="#555577" opacity="0.5">custom</text>
+  <rect x="232" y="292" width="72" height="60" rx="6" fill="#080618" stroke="#3a0a5a" stroke-width="1" opacity="0.4"/>
+  <rect x="312" y="292" width="72" height="60" rx="6" fill="#080618" stroke="#3a0a5a" stroke-width="1" opacity="0.4"/>
+  <!-- 하단 도구 바 -->
+  <rect x="60" y="432" width="392" height="52" rx="10" fill="#0a0514" stroke="#C084FC" stroke-width="1.5" opacity="0.9"/>
+  <text x="256" y="462" text-anchor="middle" font-size="14" font-weight="bold" fill="#C084FC" filter="url(#glow)" opacity="0.9">SYMBOL LIBRARY</text>
+</svg>

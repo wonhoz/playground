@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#030508"/>
+      <stop offset="100%" stop-color="#040d0a"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- 얼굴 인식 그룹화 -->
+  <!-- 큰 얼굴 인식 프레임 (메인) -->
+  <rect x="160" y="80" width="192" height="192" rx="12" fill="#0a2018" stroke="#34D399" stroke-width="2.5" filter="url(#glow)" opacity="0.95"/>
+  <!-- 얼굴 -->
+  <ellipse cx="256" cy="162" rx="55" ry="62" fill="#1a3a28" stroke="#34D399" stroke-width="1.5" opacity="0.9"/>
+  <!-- 눈 -->
+  <ellipse cx="235" cy="148" rx="9" ry="10" fill="#34D399" opacity="0.5"/>
+  <ellipse cx="277" cy="148" rx="9" ry="10" fill="#34D399" opacity="0.5"/>
+  <circle cx="236" cy="148" r="5" fill="#030508" opacity="0.8"/>
+  <circle cx="278" cy="148" r="5" fill="#030508" opacity="0.8"/>
+  <!-- 코 -->
+  <path d="M250,160 Q256,170 262,160" fill="none" stroke="#34D399" stroke-width="1.5" opacity="0.6"/>
+  <!-- 입 -->
+  <path d="M238,180 Q256,192 274,180" fill="none" stroke="#34D399" stroke-width="2" opacity="0.7"/>
+  <!-- 인식 코너 마크 -->
+  <path d="M163,83 L163,97 M163,83 L177,83" stroke="#34D399" stroke-width="2.5" opacity="0.9"/>
+  <path d="M349,83 L349,97 M349,83 L335,83" stroke="#34D399" stroke-width="2.5" opacity="0.9"/>
+  <path d="M163,269 L163,255 M163,269 L177,269" stroke="#34D399" stroke-width="2.5" opacity="0.9"/>
+  <path d="M349,269 L349,255 M349,269 L335,269" stroke="#34D399" stroke-width="2.5" opacity="0.9"/>
+  <!-- 그룹 연결 라인 -->
+  <line x1="160" y1="176" x2="80" y2="176" stroke="#34D399" stroke-width="1.5" stroke-dasharray="5,4" opacity="0.6"/>
+  <line x1="352" y1="176" x2="432" y2="176" stroke="#34D399" stroke-width="1.5" stroke-dasharray="5,4" opacity="0.6"/>
+  <!-- 왼쪽 썸네일 그룹 -->
+  <rect x="50" y="130" width="32" height="32" rx="4" fill="#0a2018" stroke="#10B981" stroke-width="1" opacity="0.8"/>
+  <rect x="50" y="168" width="32" height="32" rx="4" fill="#0a2018" stroke="#10B981" stroke-width="1" opacity="0.7"/>
+  <rect x="50" y="206" width="32" height="32" rx="4" fill="#0a2018" stroke="#10B981" stroke-width="1" opacity="0.6"/>
+  <!-- 오른쪽 썸네일 그룹 -->
+  <rect x="430" y="130" width="32" height="32" rx="4" fill="#0a2018" stroke="#6EE7B7" stroke-width="1" opacity="0.8"/>
+  <rect x="430" y="168" width="32" height="32" rx="4" fill="#0a2018" stroke="#6EE7B7" stroke-width="1" opacity="0.7"/>
+  <rect x="430" y="206" width="32" height="32" rx="4" fill="#0a2018" stroke="#6EE7B7" stroke-width="1" opacity="0.6"/>
+  <!-- 그룹 라벨 -->
+  <rect x="56" y="250" width="20" height="14" rx="3" fill="#10B981" opacity="0.3"/>
+  <text x="66" y="261" text-anchor="middle" font-size="8" fill="#10B981" opacity="0.8">×3</text>
+  <rect x="436" y="250" width="20" height="14" rx="3" fill="#6EE7B7" opacity="0.3"/>
+  <text x="446" y="261" text-anchor="middle" font-size="8" fill="#6EE7B7" opacity="0.8">×3</text>
+  <!-- 하단 그룹 뷰 -->
+  <rect x="80" y="295" width="352" height="170" rx="10" fill="#061510" stroke="#34D399" stroke-width="1.5" opacity="0.9"/>
+  <text x="256" y="320" text-anchor="middle" font-size="13" font-weight="bold" fill="#34D399" filter="url(#glow)" opacity="0.9">FACE GROUPING</text>
+  <!-- 그룹 1 -->
+  <circle cx="115" cy="365" r="30" fill="#0d2a18" stroke="#34D399" stroke-width="2" opacity="0.9"/>
+  <ellipse cx="115" cy="358" rx="16" ry="18" fill="#1a3a28" opacity="0.8"/>
+  <rect x="100" y="380" width="30" height="6" rx="2" fill="#34D399" opacity="0.4"/>
+  <text x="115" y="410" text-anchor="middle" font-size="10" fill="#34D399" opacity="0.8">Person A</text>
+  <text x="115" y="425" text-anchor="middle" font-size="9" fill="#888" opacity="0.7">24 photos</text>
+  <!-- 그룹 2 -->
+  <circle cx="200" cy="365" r="30" fill="#0d2a18" stroke="#10B981" stroke-width="2" opacity="0.85"/>
+  <ellipse cx="200" cy="358" rx="16" ry="18" fill="#1a3a28" opacity="0.8"/>
+  <rect x="185" y="380" width="30" height="6" rx="2" fill="#10B981" opacity="0.4"/>
+  <text x="200" y="410" text-anchor="middle" font-size="10" fill="#10B981" opacity="0.8">Person B</text>
+  <text x="200" y="425" text-anchor="middle" font-size="9" fill="#888" opacity="0.7">18 photos</text>
+  <!-- 그룹 3 -->
+  <circle cx="285" cy="365" r="30" fill="#0d2a18" stroke="#6EE7B7" stroke-width="2" opacity="0.8"/>
+  <ellipse cx="285" cy="358" rx="16" ry="18" fill="#1a3a28" opacity="0.8"/>
+  <rect x="270" y="380" width="30" height="6" rx="2" fill="#6EE7B7" opacity="0.4"/>
+  <text x="285" y="410" text-anchor="middle" font-size="10" fill="#6EE7B7" opacity="0.8">Person C</text>
+  <text x="285" y="425" text-anchor="middle" font-size="9" fill="#888" opacity="0.7">31 photos</text>
+  <!-- + 더보기 -->
+  <circle cx="380" cy="365" r="30" fill="#0d2018" stroke="#34D399" stroke-width="1" opacity="0.6"/>
+  <text x="380" y="370" text-anchor="middle" font-size="20" fill="#34D399" opacity="0.7">+5</text>
+  <text x="380" y="425" text-anchor="middle" font-size="9" fill="#888" opacity="0.6">more groups</text>
+</svg>

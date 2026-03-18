@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#030508"/>
+      <stop offset="100%" style="stop-color:#0d0800"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- 거미줄 패턴 -->
+  <line x1="256" y1="256" x2="256" y2="120" stroke="#FBBF24" stroke-width="1" opacity="0.3"/>
+  <line x1="256" y1="256" x2="372" y2="189" stroke="#FBBF24" stroke-width="1" opacity="0.3"/>
+  <line x1="256" y1="256" x2="372" y2="323" stroke="#FBBF24" stroke-width="1" opacity="0.3"/>
+  <line x1="256" y1="256" x2="256" y2="392" stroke="#FBBF24" stroke-width="1" opacity="0.3"/>
+  <line x1="256" y1="256" x2="140" y2="323" stroke="#FBBF24" stroke-width="1" opacity="0.3"/>
+  <line x1="256" y1="256" x2="140" y2="189" stroke="#FBBF24" stroke-width="1" opacity="0.3"/>
+  <!-- 동심원 -->
+  <circle cx="256" cy="256" r="68" fill="none" stroke="#FBBF24" stroke-width="1" opacity="0.2"/>
+  <circle cx="256" cy="256" r="136" fill="none" stroke="#FBBF24" stroke-width="1" opacity="0.15"/>
+  <!-- 노드 이모지 -->
+  <text x="256" y="140" text-anchor="middle" font-size="22" font-family="Segoe UI Emoji">🔤</text>
+  <text x="372" y="198" text-anchor="middle" font-size="22" font-family="Segoe UI Emoji">🔣</text>
+  <text x="372" y="332" text-anchor="middle" font-size="22" font-family="Segoe UI Emoji">🔡</text>
+  <text x="256" y="402" text-anchor="middle" font-size="22" font-family="Segoe UI Emoji">🔢</text>
+  <text x="140" y="332" text-anchor="middle" font-size="22" font-family="Segoe UI Emoji">🔠</text>
+  <text x="140" y="198" text-anchor="middle" font-size="22" font-family="Segoe UI Emoji">🅰️</text>
+  <!-- 중앙 -->
+  <circle cx="256" cy="256" r="22" fill="#FBBF24" opacity="0.15" filter="url(#glow)"/>
+  <text x="256" y="264" text-anchor="middle" font-size="22" font-family="Segoe UI Emoji">🗃️</text>
+  <!-- 레이블 -->
+  <text x="256" y="455" text-anchor="middle" fill="#FBBF24" font-size="13" font-family="monospace" font-weight="bold" filter="url(#glow)">CHARACTER WEB</text>
+</svg>

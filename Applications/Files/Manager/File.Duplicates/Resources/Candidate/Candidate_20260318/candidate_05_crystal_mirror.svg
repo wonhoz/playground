@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#030508"/>
+      <stop offset="100%" style="stop-color:#041014"/>
+    </linearGradient>
+    <linearGradient id="crystalL" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#67E8F9;stop-opacity:0.9"/>
+      <stop offset="100%" style="stop-color:#06B6D4;stop-opacity:0.5"/>
+    </linearGradient>
+    <linearGradient id="crystalR" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#22D3EE;stop-opacity:0.85"/>
+      <stop offset="100%" style="stop-color:#0891B2;stop-opacity:0.4"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+    <filter id="mirrorGlow">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- 중앙 거울 선 -->
+  <line x1="256" y1="80" x2="256" y2="430" stroke="#22D3EE" stroke-width="3" opacity="0.7" filter="url(#glow)"/>
+  <line x1="256" y1="80" x2="256" y2="430" stroke="#67E8F9" stroke-width="1" opacity="0.5"/>
+  <!-- 거울 끝 장식 -->
+  <circle cx="256" cy="80" r="6" fill="#67E8F9" opacity="0.9" filter="url(#glow)"/>
+  <circle cx="256" cy="430" r="6" fill="#67E8F9" opacity="0.9" filter="url(#glow)"/>
+  <!-- 왼쪽 수정 파일 -->
+  <polygon points="130,130 195,90 195,200 130,240 130,130" fill="url(#crystalL)" opacity="0.9" filter="url(#glow)"/>
+  <polygon points="130,130 195,90 163,90 130,130" fill="white" opacity="0.2"/>
+  <!-- 왼쪽 파일 내용 선들 -->
+  <line x1="148" y1="168" x2="185" y2="158" stroke="white" stroke-width="2" opacity="0.6"/>
+  <line x1="148" y1="183" x2="180" y2="175" stroke="white" stroke-width="2" opacity="0.5"/>
+  <line x1="148" y1="198" x2="178" y2="192" stroke="white" stroke-width="1.5" opacity="0.4"/>
+  <!-- 오른쪽 수정 파일 (거울 반사) -->
+  <polygon points="382,130 317,90 317,200 382,240 382,130" fill="url(#crystalR)" opacity="0.85" filter="url(#glow)"/>
+  <polygon points="382,130 317,90 349,90 382,130" fill="white" opacity="0.15"/>
+  <line x1="364" y1="168" x2="327" y2="158" stroke="white" stroke-width="2" opacity="0.55"/>
+  <line x1="364" y1="183" x2="332" y2="175" stroke="white" stroke-width="2" opacity="0.45"/>
+  <line x1="364" y1="198" x2="334" y2="192" stroke="white" stroke-width="1.5" opacity="0.35"/>
+  <!-- 반사 광선들 -->
+  <line x1="195" y1="140" x2="256" y2="150" stroke="#67E8F9" stroke-width="1" opacity="0.4" stroke-dasharray="4,3"/>
+  <line x1="195" y1="160" x2="256" y2="165" stroke="#22D3EE" stroke-width="1" opacity="0.4" stroke-dasharray="4,3"/>
+  <line x1="317" y1="140" x2="256" y2="150" stroke="#67E8F9" stroke-width="1" opacity="0.4" stroke-dasharray="4,3"/>
+  <line x1="317" y1="160" x2="256" y2="165" stroke="#22D3EE" stroke-width="1" opacity="0.4" stroke-dasharray="4,3"/>
+  <!-- 하단 파일들 (소형) -->
+  <!-- 왼쪽 하단 -->
+  <rect x="90" y="300" width="70" height="88" rx="7" fill="#06B6D4" opacity="0.5" stroke="#22D3EE" stroke-width="1.5"/>
+  <polygon points="90,300 120,300 120,278 160,300" fill="#0891B2" opacity="0.6"/>
+  <line x1="103" y1="323" x2="152" y2="323" stroke="#67E8F9" stroke-width="2" opacity="0.6"/>
+  <line x1="103" y1="338" x2="140" y2="338" stroke="#22D3EE" stroke-width="1.5" opacity="0.5"/>
+  <line x1="103" y1="352" x2="145" y2="352" stroke="#06B6D4" stroke-width="1.5" opacity="0.4"/>
+  <!-- 오른쪽 하단 (거울) -->
+  <rect x="352" y="300" width="70" height="88" rx="7" fill="#06B6D4" opacity="0.5" stroke="#22D3EE" stroke-width="1.5"/>
+  <polygon points="352,300 382,300 382,278 422,300" fill="#0891B2" opacity="0.6"/>
+  <line x1="365" y1="323" x2="414" y2="323" stroke="#67E8F9" stroke-width="2" opacity="0.6"/>
+  <line x1="365" y1="338" x2="402" y2="338" stroke="#22D3EE" stroke-width="1.5" opacity="0.5"/>
+  <!-- 매칭 = -->
+  <text x="256" y="360" text-anchor="middle" font-family="Arial" font-size="36" fill="#22D3EE" opacity="0.8" filter="url(#glow)">=</text>
+  <!-- 빛 반사 파티클 -->
+  <circle cx="200" cy="260" r="3" fill="#67E8F9" opacity="0.7" filter="url(#glow)"/>
+  <circle cx="312" cy="260" r="3" fill="#22D3EE" opacity="0.7" filter="url(#glow)"/>
+</svg>

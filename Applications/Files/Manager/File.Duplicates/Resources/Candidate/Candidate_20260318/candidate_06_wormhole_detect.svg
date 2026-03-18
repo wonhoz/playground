@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#030508"/>
+      <stop offset="100%" style="stop-color:#040c10"/>
+    </linearGradient>
+    <radialGradient id="wormholeGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#67E8F9;stop-opacity:0.9"/>
+      <stop offset="40%" style="stop-color:#22D3EE;stop-opacity:0.5"/>
+      <stop offset="70%" style="stop-color:#06B6D4;stop-opacity:0.2"/>
+      <stop offset="100%" style="stop-color:#06B6D4;stop-opacity:0"/>
+    </radialGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+    <filter id="wormGlow">
+      <feGaussianBlur stdDeviation="15" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- 웜홀 링들 -->
+  <ellipse cx="256" cy="256" rx="180" ry="60" fill="none" stroke="#06B6D4" stroke-width="2" opacity="0.3"/>
+  <ellipse cx="256" cy="256" rx="155" ry="52" fill="none" stroke="#06B6D4" stroke-width="2" opacity="0.4"/>
+  <ellipse cx="256" cy="256" rx="128" ry="43" fill="none" stroke="#22D3EE" stroke-width="2.5" opacity="0.55"/>
+  <ellipse cx="256" cy="256" rx="100" ry="34" fill="none" stroke="#22D3EE" stroke-width="2.5" opacity="0.65"/>
+  <ellipse cx="256" cy="256" rx="70" ry="24" fill="none" stroke="#67E8F9" stroke-width="3" opacity="0.8" filter="url(#glow)"/>
+  <ellipse cx="256" cy="256" rx="42" ry="14" fill="none" stroke="#67E8F9" stroke-width="3" opacity="0.9" filter="url(#glow)"/>
+  <!-- 웜홀 코어 -->
+  <ellipse cx="256" cy="256" rx="25" ry="9" fill="#22D3EE" opacity="0.8" filter="url(#wormGlow)"/>
+  <ellipse cx="256" cy="256" rx="200" ry="70" fill="url(#wormholeGrad)" opacity="0.15"/>
+  <!-- 파일 1 (왼쪽 진입) -->
+  <g transform="translate(80, 230)">
+    <rect x="0" y="0" width="55" height="68" rx="6" fill="#06B6D4" opacity="0.85"/>
+    <polygon points="0,0 27,0 27,-20 55,0" fill="#22D3EE" opacity="0.8"/>
+    <line x1="10" y1="24" x2="45" y2="24" stroke="#E0F7FA" stroke-width="2" opacity="0.7"/>
+    <line x1="10" y1="38" x2="38" y2="38" stroke="#E0F7FA" stroke-width="2" opacity="0.6"/>
+    <line x1="10" y1="52" x2="42" y2="52" stroke="#E0F7FA" stroke-width="1.5" opacity="0.5"/>
+  </g>
+  <!-- 파일 2 (오른쪽 출현 - 복사본) -->
+  <g transform="translate(378, 230)">
+    <rect x="0" y="0" width="55" height="68" rx="6" fill="#22D3EE" opacity="0.75"/>
+    <polygon points="0,0 27,0 27,-20 55,0" fill="#67E8F9" opacity="0.7"/>
+    <line x1="10" y1="24" x2="45" y2="24" stroke="#E0F7FA" stroke-width="2" opacity="0.6"/>
+    <line x1="10" y1="38" x2="38" y2="38" stroke="#E0F7FA" stroke-width="1.5" opacity="0.5"/>
+    <line x1="10" y1="52" x2="42" y2="52" stroke="#E0F7FA" stroke-width="1.5" opacity="0.4"/>
+  </g>
+  <!-- 진입/출현 화살표 -->
+  <path d="M 135 264 L 170 264 M 163 257 L 170 264 L 163 271" stroke="#22D3EE" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.8"/>
+  <path d="M 342 264 L 378 264 M 371 257 L 378 264 L 371 271" stroke="#22D3EE" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.8"/>
+  <!-- 감지 텍스트 -->
+  <text x="256" y="350" text-anchor="middle" font-family="monospace" font-size="11" fill="#06B6D4" opacity="0.6">WORMHOLE SCAN</text>
+  <text x="256" y="370" text-anchor="middle" font-family="monospace" font-size="11" fill="#22D3EE" opacity="0.8">DUPLICATE FOUND</text>
+  <!-- 파티클 -->
+  <circle cx="200" cy="240" r="3" fill="#67E8F9" opacity="0.7" filter="url(#glow)"/>
+  <circle cx="312" cy="272" r="3" fill="#22D3EE" opacity="0.7" filter="url(#glow)"/>
+  <circle cx="256" cy="220" r="2" fill="#67E8F9" opacity="0.5"/>
+  <circle cx="256" cy="292" r="2" fill="#06B6D4" opacity="0.5"/>
+</svg>

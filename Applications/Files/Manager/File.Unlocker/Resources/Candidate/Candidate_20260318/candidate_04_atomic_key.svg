@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#030508"/>
+      <stop offset="100%" style="stop-color:#110700"/>
+    </linearGradient>
+    <radialGradient id="atomCore" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#FEF3C7;stop-opacity:1"/>
+      <stop offset="50%" style="stop-color:#FBBF24;stop-opacity:0.8"/>
+      <stop offset="100%" style="stop-color:#F59E0B;stop-opacity:0"/>
+    </radialGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- 원자 궤도들 -->
+  <ellipse cx="256" cy="256" rx="160" ry="55" fill="none" stroke="#F59E0B" stroke-width="2" opacity="0.5"/>
+  <ellipse cx="256" cy="256" rx="160" ry="55" fill="none" stroke="#FBBF24" stroke-width="1.5" opacity="0.35" transform="rotate(60 256 256)"/>
+  <ellipse cx="256" cy="256" rx="160" ry="55" fill="none" stroke="#F59E0B" stroke-width="1.5" opacity="0.35" transform="rotate(120 256 256)"/>
+  <!-- 원자 코어 (열쇠 모양) -->
+  <circle cx="256" cy="256" r="50" fill="url(#atomCore)" filter="url(#glow)"/>
+  <circle cx="256" cy="256" r="35" fill="#FBBF24" opacity="0.7" filter="url(#glow)"/>
+  <!-- 열쇠 심볼 (코어 안) -->
+  <circle cx="250" cy="248" r="12" fill="none" stroke="#030508" stroke-width="4"/>
+  <line x1="258" y1="255" x2="285" y2="255" stroke="#030508" stroke-width="5" stroke-linecap="round"/>
+  <line x1="278" y1="255" x2="278" y2="263" stroke="#030508" stroke-width="4" stroke-linecap="round"/>
+  <line x1="268" y1="255" x2="268" y2="261" stroke="#030508" stroke-width="4" stroke-linecap="round"/>
+  <!-- 전자들 (궤도 위) -->
+  <circle cx="416" cy="256" r="10" fill="#FCD34D" opacity="0.9" filter="url(#glow)"/>
+  <circle cx="96" cy="256" r="10" fill="#F59E0B" opacity="0.85" filter="url(#glow)"/>
+  <circle cx="336" cy="118" r="9" fill="#FBBF24" opacity="0.85" filter="url(#glow)"/>
+  <circle cx="176" cy="394" r="9" fill="#FCD34D" opacity="0.8" filter="url(#glow)"/>
+  <circle cx="176" cy="118" r="9" fill="#F59E0B" opacity="0.8" filter="url(#glow)"/>
+  <circle cx="336" cy="394" r="9" fill="#FBBF24" opacity="0.8" filter="url(#glow)"/>
+  <!-- 전자 안 미니 자물쇠 -->
+  <text x="416" y="260" text-anchor="middle" font-family="Arial" font-size="10" fill="#030508">🔓</text>
+  <!-- 에너지 방출 파티클 -->
+  <circle cx="310" cy="180" r="4" fill="#FCD34D" opacity="0.7" filter="url(#glow)"/>
+  <circle cx="190" cy="330" r="4" fill="#F59E0B" opacity="0.7" filter="url(#glow)"/>
+  <circle cx="320" cy="335" r="3.5" fill="#FBBF24" opacity="0.65"/>
+  <circle cx="200" cy="178" r="3.5" fill="#FCD34D" opacity="0.65"/>
+  <!-- 불확정성 구름 -->
+  <circle cx="256" cy="256" r="75" fill="none" stroke="#F59E0B" stroke-width="0.8" opacity="0.2" stroke-dasharray="4,6"/>
+  <circle cx="256" cy="256" r="90" fill="none" stroke="#FBBF24" stroke-width="0.8" opacity="0.15" stroke-dasharray="3,7"/>
+</svg>

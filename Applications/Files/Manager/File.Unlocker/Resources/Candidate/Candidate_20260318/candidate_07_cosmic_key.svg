@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#030508"/>
+      <stop offset="100%" style="stop-color:#0f0900"/>
+    </linearGradient>
+    <linearGradient id="keyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FEF3C7"/>
+      <stop offset="50%" style="stop-color:#F59E0B"/>
+      <stop offset="100%" style="stop-color:#92400E"/>
+    </linearGradient>
+    <radialGradient id="cosmicGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#FBBF24;stop-opacity:0.4"/>
+      <stop offset="100%" style="stop-color:#F59E0B;stop-opacity:0"/>
+    </radialGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- 우주 배경 성운 -->
+  <ellipse cx="256" cy="256" rx="200" ry="160" fill="url(#cosmicGrad)" filter="url(#glow)"/>
+  <!-- 우주 별들 -->
+  <circle cx="120" cy="130" r="2" fill="#FCD34D" opacity="0.6"/>
+  <circle cx="380" cy="110" r="2.5" fill="#FBBF24" opacity="0.5"/>
+  <circle cx="430" cy="300" r="2" fill="#F59E0B" opacity="0.6"/>
+  <circle cx="90" cy="370" r="1.5" fill="#FCD34D" opacity="0.5"/>
+  <circle cx="460" cy="200" r="1.5" fill="#FBBF24" opacity="0.4"/>
+  <circle cx="340" cy="420" r="2" fill="#F59E0B" opacity="0.5"/>
+  <circle cx="160" cy="410" r="1.5" fill="#FCD34D" opacity="0.45"/>
+  <circle cx="80" cy="250" r="1.5" fill="#FBBF24" opacity="0.5"/>
+  <!-- 우주 궤도 링들 -->
+  <ellipse cx="256" cy="256" rx="155" ry="50" fill="none" stroke="#F59E0B" stroke-width="1" opacity="0.3" transform="rotate(25 256 256)"/>
+  <ellipse cx="256" cy="256" rx="155" ry="50" fill="none" stroke="#FBBF24" stroke-width="1" opacity="0.25" transform="rotate(80 256 256)"/>
+  <!-- 대형 열쇠 (우주적) -->
+  <!-- 열쇠 고리 부분 -->
+  <circle cx="210" cy="220" r="65" fill="none" stroke="url(#keyGrad)" stroke-width="20" opacity="0.9" filter="url(#glow)"/>
+  <circle cx="210" cy="220" r="35" fill="#F59E0B" opacity="0.2" filter="url(#glow)"/>
+  <!-- 열쇠 몸체 -->
+  <rect x="262" y="212" width="150" height="16" rx="8" fill="url(#keyGrad)" opacity="0.9" filter="url(#glow)"/>
+  <!-- 열쇠 이빨들 -->
+  <rect x="350" y="228" width="15" height="28" rx="4" fill="url(#keyGrad)" opacity="0.85"/>
+  <rect x="380" y="228" width="15" height="22" rx="4" fill="#FBBF24" opacity="0.85"/>
+  <rect x="406" y="228" width="14" height="18" rx="4" fill="url(#keyGrad)" opacity="0.85"/>
+  <!-- 열쇠 고리 중심 -->
+  <circle cx="210" cy="220" r="22" fill="#030508" opacity="0.9"/>
+  <circle cx="210" cy="220" r="14" fill="#FBBF24" opacity="0.5" filter="url(#glow)"/>
+  <!-- 성좌 연결선 (열쇠 주변) -->
+  <line x1="210" y1="155" x2="256" y2="130" stroke="#F59E0B" stroke-width="1" opacity="0.4" stroke-dasharray="4,3"/>
+  <line x1="145" y1="220" x2="110" y2="200" stroke="#FBBF24" stroke-width="1" opacity="0.4" stroke-dasharray="4,3"/>
+  <line x1="210" y1="285" x2="180" y2="330" stroke="#F59E0B" stroke-width="1" opacity="0.4" stroke-dasharray="4,3"/>
+  <!-- 별 장식 -->
+  <circle cx="256" cy="130" r="5" fill="#FCD34D" opacity="0.8" filter="url(#glow)"/>
+  <circle cx="110" cy="200" r="4" fill="#F59E0B" opacity="0.7" filter="url(#glow)"/>
+  <circle cx="180" cy="330" r="5" fill="#FBBF24" opacity="0.75" filter="url(#glow)"/>
+  <!-- 우주 먼지 띠 -->
+  <path d="M 80,310 Q 200,280 320,320 Q 400,345 450,320" fill="none" stroke="#F59E0B" stroke-width="0.8" opacity="0.2"/>
+</svg>

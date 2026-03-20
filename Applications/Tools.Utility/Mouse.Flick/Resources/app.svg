@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0E1621"/>
+      <stop offset="100%" stop-color="#1A2235"/>
+    </linearGradient>
+    <linearGradient id="arrow" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00C9FF"/>
+      <stop offset="100%" stop-color="#92FE9D"/>
+    </linearGradient>
+    <filter id="swipeGlow">
+      <feGaussianBlur stdDeviation="4" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Mouse body -->
+  <rect x="196" y="100" width="120" height="180" rx="60" fill="#1E2E42" stroke="#2A3D5A" stroke-width="4"/>
+  <line x1="256" y1="100" x2="256" y2="190" stroke="#2A3D5A" stroke-width="3"/>
+  <!-- Scroll wheel -->
+  <rect x="244" y="150" width="24" height="40" rx="12" fill="#3A5A7A" opacity="0.8"/>
+  <!-- Left click highlight -->
+  <path d="M196,160 Q196,100 256,100 L256,190 Q196,190 196,160 Z" fill="#00C9FF" opacity="0.15"/>
+  <!-- Flick gesture arc -->
+  <path d="M290,320 Q350,280 420,260" fill="none" stroke="url(#arrow)" stroke-width="6" stroke-linecap="round" filter="url(#swipeGlow)"/>
+  <polygon points="420,248 440,268 416,272" fill="#92FE9D" filter="url(#swipeGlow)"/>
+  <!-- Gesture trail -->
+  <circle cx="295" cy="318" r="5" fill="#00C9FF" opacity="0.8"/>
+  <circle cx="320" cy="305" r="4" fill="#00C9FF" opacity="0.6"/>
+  <circle cx="345" cy="294" r="3" fill="#00C9FF" opacity="0.4"/>
+  <circle cx="370" cy="284" r="2" fill="#00C9FF" opacity="0.2"/>
+  <!-- Right swipe gesture -->
+  <path d="M80,360 Q130,330 200,340" fill="none" stroke="#FF6B9D" stroke-width="5" stroke-linecap="round" filter="url(#swipeGlow)"/>
+  <polygon points="200,328 218,342 196,352" fill="#FF6B9D" filter="url(#swipeGlow)"/>
+  <!-- Click ripple -->
+  <circle cx="380" cy="380" r="30" fill="none" stroke="#92FE9D" stroke-width="3" opacity="0.6"/>
+  <circle cx="380" cy="380" r="20" fill="none" stroke="#92FE9D" stroke-width="3" opacity="0.4"/>
+  <circle cx="380" cy="380" r="10" fill="#92FE9D" opacity="0.3"/>
+  <!-- Up flick -->
+  <path d="M140,420 Q120,360 130,300" fill="none" stroke="#FFC107" stroke-width="5" stroke-linecap="round" filter="url(#swipeGlow)"/>
+  <polygon points="118,300 132,280 142,302" fill="#FFC107" filter="url(#swipeGlow)"/>
+</svg>

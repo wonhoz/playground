@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0A0A1A"/>
+      <stop offset="100%" stop-color="#0D1B2A"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- 네온 중괄호 -->
+  <text x="256" y="340" font-size="340" text-anchor="middle" fill="none" stroke="#00E5FF" stroke-width="4" font-family="Courier New" font-weight="bold" filter="url(#glow)">{}</text>
+  <!-- 코드 라인 (네온) -->
+  <text x="115" y="160" font-size="18" fill="#00E5FF" font-family="Courier New" filter="url(#glow)">"key"</text>
+  <text x="205" y="160" font-size="18" fill="#69F0AE" font-family="Courier New">:</text>
+  <text x="225" y="160" font-size="18" fill="#FFD740" font-family="Courier New">"val"</text>
+  <text x="115" y="195" font-size="18" fill="#00E5FF" font-family="Courier New" filter="url(#glow)">"num"</text>
+  <text x="205" y="195" font-size="18" fill="#69F0AE" font-family="Courier New">:</text>
+  <text x="225" y="195" font-size="18" fill="#E040FB" font-family="Courier New">42</text>
+  <text x="115" y="230" font-size="18" fill="#00E5FF" font-family="Courier New" filter="url(#glow)">"flag"</text>
+  <text x="205" y="230" font-size="18" fill="#69F0AE" font-family="Courier New">:</text>
+  <text x="225" y="230" font-size="18" fill="#FF5252" font-family="Courier New">true</text>
+</svg>

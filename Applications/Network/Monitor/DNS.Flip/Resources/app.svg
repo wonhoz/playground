@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#001033"/>
+      <stop offset="100%" stop-color="#002055"/>
+    </linearGradient>
+    <radialGradient id="globe" cx="40%" cy="35%" r="60%">
+      <stop offset="0%" stop-color="#81d4fa"/>
+      <stop offset="100%" stop-color="#01579b"/>
+    </radialGradient>
+    <linearGradient id="arrow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00e5ff"/>
+      <stop offset="100%" stop-color="#0097a7"/>
+    </linearGradient>
+    <filter id="glow"><feGaussianBlur stdDeviation="8"/></filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- globe -->
+  <circle cx="256" cy="256" r="145" fill="url(#globe)"/>
+  <!-- latitude lines -->
+  <ellipse cx="256" cy="256" rx="145" ry="55" fill="none" stroke="#0277bd" stroke-width="2" opacity="0.5"/>
+  <ellipse cx="256" cy="256" rx="145" ry="100" fill="none" stroke="#0277bd" stroke-width="2" opacity="0.35"/>
+  <!-- longitude lines -->
+  <ellipse cx="256" cy="256" rx="55" ry="145" fill="none" stroke="#0277bd" stroke-width="2" opacity="0.4"/>
+  <ellipse cx="256" cy="256" rx="100" ry="145" fill="none" stroke="#0277bd" stroke-width="2" opacity="0.3"/>
+  <!-- land -->
+  <path d="M200 200 Q230 185 255 205 Q280 215 260 240 Q240 255 215 240 Q195 225 200 200 Z" fill="#66bb6a" opacity="0.7"/>
+  <ellipse cx="310" cy="270" rx="32" ry="22" fill="#66bb6a" opacity="0.6"/>
+  <!-- shine -->
+  <ellipse cx="205" cy="188" rx="40" ry="22" fill="white" opacity="0.2" transform="rotate(-20 205 188)"/>
+  <!-- rotation arrows (big curved around globe) -->
+  <path d="M110 160 Q80 256 130 350" stroke="url(#arrow)" stroke-width="10" fill="none" stroke-linecap="round"/>
+  <polygon points="130,350 115,335 140,328" fill="#00e5ff"/>
+  <path d="M402 350 Q432 256 382 162" stroke="url(#arrow)" stroke-width="10" fill="none" stroke-linecap="round" opacity="0.6"/>
+  <polygon points="382,162 397,177 372,184" fill="#00e5ff" opacity="0.6"/>
+</svg>

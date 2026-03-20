@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a1a2e"/>
+      <stop offset="100%" stop-color="#16213e"/>
+    </linearGradient>
+    <linearGradient id="hammerGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e94560"/>
+      <stop offset="100%" stop-color="#c23152"/>
+    </linearGradient>
+    <linearGradient id="handleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#a0785a"/>
+      <stop offset="100%" stop-color="#6b4c35"/>
+    </linearGradient>
+    <linearGradient id="textGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ff6b6b"/>
+      <stop offset="50%" stop-color="#ffd93d"/>
+      <stop offset="100%" stop-color="#6bcb77"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Anvil base -->
+  <ellipse cx="256" cy="370" rx="130" ry="22" fill="#0f3460" opacity="0.8"/>
+  <rect x="156" y="340" width="200" height="35" rx="8" fill="#0f3460"/>
+  <rect x="176" y="308" width="160" height="40" rx="6" fill="#1a4a7a"/>
+  <rect x="136" y="298" width="240" height="18" rx="6" fill="#0f3460"/>
+  <!-- T-Letter on anvil -->
+  <rect x="216" y="262" width="80" height="12" rx="3" fill="url(#textGrad)" filter="url(#glow)"/>
+  <rect x="248" y="262" width="16" height="36" rx="3" fill="url(#textGrad)" filter="url(#glow)"/>
+  <!-- Hammer -->
+  <g transform="rotate(-35, 256, 220)">
+    <rect x="220" y="120" width="72" height="52" rx="10" fill="url(#hammerGrad)"/>
+    <rect x="242" y="172" width="28" height="100" rx="8" fill="url(#handleGrad)"/>
+  </g>
+  <!-- Sparks -->
+  <circle cx="290" cy="240" r="4" fill="#ffd93d" opacity="0.9"/>
+  <circle cx="310" cy="225" r="3" fill="#ff9f43" opacity="0.8"/>
+  <circle cx="275" cy="218" r="2.5" fill="#ff6b6b" opacity="0.9"/>
+  <line x1="295" y1="238" x2="315" y2="218" stroke="#ffd93d" stroke-width="2" opacity="0.6"/>
+  <line x1="288" y1="230" x2="302" y2="212" stroke="#ff9f43" stroke-width="1.5" opacity="0.6"/>
+</svg>

@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#fafafa"/>
+      <stop offset="100%" stop-color="#f4f4f5"/>
+    </linearGradient>
+    <linearGradient id="brush" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f97316"/>
+      <stop offset="100%" stop-color="#ea580c"/>
+    </linearGradient>
+    <linearGradient id="ico" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#8b5cf6"/>
+      <stop offset="100%" stop-color="#7c3aed"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Canvas card center -->
+  <rect x="128" y="88" width="256" height="256" rx="20" fill="white" stroke="#e4e4e7" stroke-width="2"/>
+  <!-- Checkerboard subtle -->
+  <rect x="128" y="88" width="20" height="20" fill="#f4f4f5" rx="0"/>
+  <rect x="148" y="88" width="20" height="20" fill="white" rx="0"/>
+  <rect x="128" y="108" width="20" height="20" fill="white" rx="0"/>
+  <rect x="148" y="108" width="20" height="20" fill="#f4f4f5" rx="0"/>
+  <!-- Icon drawn on canvas -->
+  <rect x="160" y="120" width="192" height="192" rx="40" fill="#f97316"/>
+  <rect x="180" y="148" width="152" height="136" rx="30" fill="#ea580c"/>
+  <!-- Paintbrush icon on the card -->
+  <rect x="196" y="172" width="14" height="80" rx="6" fill="white" opacity="0.9" transform="rotate(-35 203 212)"/>
+  <rect x="195" y="167" width="14" height="14" rx="3" fill="#fca5a5" opacity="0.9" transform="rotate(-35 202 174)"/>
+  <ellipse cx="228" cy="245" rx="10" ry="20" fill="#4ade80" transform="rotate(-35 228 245)"/>
+  <!-- Brush tool indicator on canvas -->
+  <circle cx="300" cy="168" r="18" fill="white" opacity="0.2"/>
+  <!-- Output ICO sizes row -->
+  <rect x="56" y="376" width="400" height="88" rx="16" fill="white" stroke="#e4e4e7" stroke-width="1.5"/>
+  <!-- Size boxes -->
+  <rect x="76" y="392" width="28" height="28" rx="6" fill="#f97316" opacity="0.7"/>
+  <text x="82" y="411" font-family="sans-serif" font-size="11" fill="white" font-weight="bold">16</text>
+  <rect x="116" y="388" width="36" height="36" rx="7" fill="#f97316" opacity="0.8"/>
+  <text x="122" y="411" font-family="sans-serif" font-size="12" fill="white" font-weight="bold">32</text>
+  <rect x="164" y="384" width="44" height="44" rx="8" fill="#f97316" opacity="0.85"/>
+  <text x="172" y="411" font-family="sans-serif" font-size="13" fill="white" font-weight="bold">48</text>
+  <rect x="220" y="388" width="36" height="36" rx="7" fill="url(#ico)"/>
+  <text x="224" y="411" font-family="sans-serif" font-size="11" fill="white" font-weight="bold">64</text>
+  <rect x="268" y="382" width="52" height="52" rx="10" fill="url(#ico)"/>
+  <text x="274" y="413" font-family="sans-serif" font-size="14" fill="white" font-weight="bold">128</text>
+  <rect x="332" y="376" width="68" height="68" rx="12" fill="#7c3aed" stroke="#a78bfa" stroke-width="2"/>
+  <text x="340" y="418" font-family="sans-serif" font-size="16" fill="white" font-weight="bold">256</text>
+  <!-- Arrow from canvas to sizes -->
+  <line x1="256" y1="344" x2="256" y2="376" stroke="#d4d4d8" stroke-width="2"/>
+  <polygon points="256,380 248,368 264,368" fill="#d4d4d8"/>
+  <!-- Bottom label -->
+  <text x="176" y="478" font-family="sans-serif" font-size="14" fill="#71717a" text-anchor="middle">Icon Maker  •  ICO Generator</text>
+  <!-- Toolbar above canvas -->
+  <rect x="128" y="56" width="256" height="32" rx="10" fill="white" stroke="#e4e4e7" stroke-width="1.5"/>
+  <text x="148" y="77" font-size="18">✏️</text>
+  <text x="180" y="77" font-size="18">🖌️</text>
+  <text x="212" y="77" font-size="18">◻</text>
+  <text x="244" y="77" font-size="18">🪣</text>
+  <text x="280" y="77" font-size="16" fill="#8b5cf6">■</text>
+  <rect x="300" y="63" width="20" height="20" rx="4" fill="#f97316"/>
+  <rect x="326" y="63" width="20" height="20" rx="4" fill="#8b5cf6"/>
+  <rect x="352" y="63" width="20" height="20" rx="4" fill="#22c55e"/>
+</svg>

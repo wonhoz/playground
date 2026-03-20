@@ -233,6 +233,7 @@ public partial class MainWindow : Window
         tab.Child = inner;
 
         tab.MouseLeftButtonDown += Tab_Click;
+        tab.MouseDown += Tab_MouseDown;
         tab.MouseEnter += (s, _) =>
         {
             if ((int)((Border)s).Tag != _activeIndex)
@@ -251,6 +252,15 @@ public partial class MainWindow : Window
     {
         if (sender is Border b)
             SwitchTo((int)b.Tag);
+    }
+
+    private void Tab_MouseDown(object sender, MouseButtonEventArgs e)
+    {
+        if (e.ChangedButton == MouseButton.Middle && sender is Border b)
+        {
+            e.Handled = true;
+            CloseTab((int)b.Tag);
+        }
     }
 
     private void CloseTab_Click(object sender, MouseButtonEventArgs e)

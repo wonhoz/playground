@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Satellite with defense shield orbit -->
+  <rect x="80" y="80" width="864" height="864" rx="180" ry="180" fill="#030005"/>
+  <!-- Defense shield (large circle) -->
+  <circle cx="512" cy="512" r="300" fill="none" stroke="#00695C" stroke-width="14" opacity="0.7"/>
+  <circle cx="512" cy="512" r="310" fill="none" stroke="#004D40" stroke-width="6" opacity="0.4"/>
+  <!-- Shield glow segments -->
+  <path d="M 212,512 A 300,300 0 0 1 512,212" fill="none" stroke="#26A69A" stroke-width="16" stroke-linecap="round" opacity="0.8"/>
+  <path d="M 512,812 A 300,300 0 0 1 812,512" fill="none" stroke="#00897B" stroke-width="12" stroke-linecap="round" opacity="0.6"/>
+  <!-- Planet (center) -->
+  <circle cx="512" cy="512" r="110" fill="#00695C"/>
+  <circle cx="512" cy="512" r="90" fill="#00897B" opacity="0.7"/>
+  <!-- Planet detail rings -->
+  <ellipse cx="512" cy="512" rx="150" ry="42" fill="none" stroke="#004D40" stroke-width="8" opacity="0.5"/>
+  <!-- Orbiting satellite 1 -->
+  <g transform="rotate(-45,512,512)">
+    <circle cx="812" cy="512" r="36" fill="#00695C"/>
+    <!-- Satellite solar panels -->
+    <rect x="778" y="490" width="34" height="14" rx="4" fill="#004D40" transform="translate(-50,0)"/>
+    <rect x="812" y="490" width="34" height="14" rx="4" fill="#004D40" transform="translate(16,0)"/>
+    <circle cx="812" cy="512" r="18" fill="#26A69A"/>
+  </g>
+  <!-- Orbiting satellite 2 (opposite side) -->
+  <g transform="rotate(135,512,512)">
+    <circle cx="812" cy="512" r="28" fill="#004D40"/>
+    <circle cx="812" cy="512" r="16" fill="#00695C"/>
+    <!-- Solar panels -->
+    <rect x="762" y="504" width="30" height="10" rx="3" fill="#003D30" opacity="0.8"/>
+    <rect x="842" y="504" width="30" height="10" rx="3" fill="#003D30" opacity="0.8"/>
+  </g>
+  <!-- Shield pulse lines -->
+  <circle cx="512" cy="512" r="270" fill="none" stroke="#00695C" stroke-width="4" stroke-dasharray="30,20" opacity="0.35"/>
+</svg>

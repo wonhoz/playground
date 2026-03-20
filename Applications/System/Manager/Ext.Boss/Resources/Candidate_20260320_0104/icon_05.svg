@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Switch routing / direction fork -->
+  <rect x="80" y="80" width="864" height="864" rx="180" ry="180" fill="#0A0A0F"/>
+  <!-- Input line from left -->
+  <line x1="140" y1="512" x2="380" y2="512" stroke="#546E7A" stroke-width="28" stroke-linecap="round"/>
+  <!-- Switch pivot point -->
+  <circle cx="420" cy="512" r="52" fill="#263238"/>
+  <circle cx="420" cy="512" r="36" fill="#37474F"/>
+  <circle cx="420" cy="512" r="20" fill="#80CBC4"/>
+  <!-- Switch arm (pointing to upper-right route) -->
+  <line x1="452" y1="492" x2="680" y2="340" stroke="#546E7A" stroke-width="24" stroke-linecap="round"/>
+  <!-- Upper route (active) -->
+  <line x1="680" y1="340" x2="880" y2="280" stroke="#80CBC4" stroke-width="20" stroke-linecap="round"/>
+  <!-- Lower route (inactive dashed) -->
+  <line x1="440" y1="530" x2="880" y2="720" stroke="#37474F" stroke-width="14" stroke-dasharray="20,14" stroke-linecap="round"/>
+  <!-- Route end nodes -->
+  <circle cx="880" cy="280" r="36" fill="#37474F"/>
+  <circle cx="880" cy="280" r="22" fill="#80CBC4"/>
+  <circle cx="880" cy="720" r="32" fill="#263238"/>
+  <circle cx="880" cy="720" r="18" fill="#37474F"/>
+  <!-- Direction arrows on active route -->
+  <polygon points="800,306 770,286 786,318" fill="#80CBC4" opacity="0.8"/>
+  <!-- Signal dot moving on active path -->
+  <circle cx="590" cy="406" r="18" fill="#546E7A" opacity="0.9"/>
+</svg>

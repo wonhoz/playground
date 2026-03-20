@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <rect x="80" y="80" width="864" height="864" rx="180" fill="#100500"/>
+  <!-- Radar: detect duplicates -->
+  <!-- Radar circles -->
+  <circle cx="512" cy="512" r="320" fill="none" stroke="#BF360C" stroke-width="24" opacity="0.3"/>
+  <circle cx="512" cy="512" r="220" fill="none" stroke="#BF360C" stroke-width="24" opacity="0.5"/>
+  <circle cx="512" cy="512" r="120" fill="none" stroke="#BF360C" stroke-width="24" opacity="0.7"/>
+  <!-- Radar sweep line -->
+  <path d="M512 512 L820 300" stroke="#FF7043" stroke-width="28" stroke-linecap="round" opacity="0.9"/>
+  <!-- Sweep area fill -->
+  <path d="M512 512 L820 300 A320 320 0 0 1 820 724 Z" fill="#FF7043" opacity="0.1"/>
+  <!-- Center dot -->
+  <circle cx="512" cy="512" r="28" fill="#FF7043"/>
+  <!-- Detected duplicate dots -->
+  <circle cx="680" cy="380" r="20" fill="#FF7043" opacity="0.9"/>
+  <circle cx="700" cy="640" r="20" fill="#FF7043" opacity="0.7"/>
+  <!-- Cross-hairs -->
+  <path d="M512 200 L512 300 M512 724 L512 824 M200 512 L300 512 M724 512 L824 512" stroke="#BF360C" stroke-width="18" stroke-linecap="round" opacity="0.4"/>
+</svg>

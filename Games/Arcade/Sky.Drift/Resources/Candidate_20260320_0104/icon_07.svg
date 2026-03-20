@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <rect x="80" y="80" width="864" height="864" rx="180" ry="180" fill="#000A14"/>
+  <!-- 제트 엔진 추력선: 엔진 + 불꽃 -->
+  <!-- 엔진 외피 -->
+  <ellipse cx="540" cy="512" rx="200" ry="100" fill="#0288D1"/>
+  <ellipse cx="540" cy="512" rx="180" ry="84" fill="#01579B"/>
+  <!-- 엔진 흡입구 (앞) -->
+  <ellipse cx="740" cy="512" rx="50" ry="100" fill="#000A14"/>
+  <ellipse cx="740" cy="512" rx="36" ry="80" fill="#0288D1" opacity="0.5"/>
+  <!-- 블레이드 팬 (앞) -->
+  <g transform="translate(740,512)">
+    <line x1="0" y1="-72" x2="0" y2="-20" stroke="#4FC3F7" stroke-width="8"/>
+    <line x1="0" y1="72" x2="0" y2="20" stroke="#4FC3F7" stroke-width="8"/>
+    <line x1="-72" y1="0" x2="-20" y2="0" stroke="#4FC3F7" stroke-width="8"/>
+    <line x1="-51" y1="-51" x2="-14" y2="-14" stroke="#4FC3F7" stroke-width="8"/>
+    <line x1="51" y1="-51" x2="14" y2="-14" stroke="#4FC3F7" stroke-width="8"/>
+    <line x1="-51" y1="51" x2="-14" y2="14" stroke="#4FC3F7" stroke-width="8"/>
+    <line x1="51" y1="51" x2="14" y2="14" stroke="#4FC3F7" stroke-width="8"/>
+  </g>
+  <!-- 배기 노즐 (뒤) -->
+  <path d="M340,580 L200,620 L200,404 L340,444 Z" fill="#01579B"/>
+  <!-- 추력 불꽃 -->
+  <path d="M200,512 Q130,480 160,460 Q100,490 120,512 Q100,534 160,564 Q130,544 200,512 Z" fill="#4FC3F7" opacity="0.9"/>
+  <path d="M200,512 Q80,505 100,512 Q80,519 200,512 Z" fill="#4FC3F7"/>
+  <!-- 추력 광선 -->
+  <line x1="200" y1="512" x2="120" y2="512" stroke="#4FC3F7" stroke-width="6" opacity="0.4"/>
+  <line x1="200" y1="490" x2="140" y2="480" stroke="#4FC3F7" stroke-width="4" opacity="0.3"/>
+  <line x1="200" y1="534" x2="140" y2="544" stroke="#4FC3F7" stroke-width="4" opacity="0.3"/>
+</svg>

@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <rect x="80" y="80" width="864" height="864" rx="180" ry="180" fill="#000A14"/>
+  <!-- 번개구름 슬라롬: 구름 + 지그재그 -->
+  <!-- 구름 -->
+  <g>
+    <ellipse cx="512" cy="300" rx="200" ry="90" fill="#0288D1" opacity="0.7"/>
+    <ellipse cx="380" cy="330" rx="120" ry="80" fill="#0288D1" opacity="0.7"/>
+    <ellipse cx="640" cy="330" rx="120" ry="80" fill="#0288D1" opacity="0.7"/>
+    <ellipse cx="512" cy="360" rx="220" ry="70" fill="#0288D1" opacity="0.8"/>
+  </g>
+  <!-- 슬라롬 지그재그 경로 -->
+  <polyline points="300,430 420,530 330,630 460,730 370,820 500,880 640,800 550,700 680,600 580,500 720,430"
+            stroke="#4FC3F7" stroke-width="14" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
+  <!-- 장애물 게이트 표시 -->
+  <line x1="290" y1="460" x2="290" y2="540" stroke="#4FC3F7" stroke-width="8" opacity="0.5"/>
+  <line x1="450" y1="560" x2="450" y2="640" stroke="#4FC3F7" stroke-width="8" opacity="0.5"/>
+  <line x1="350" y1="660" x2="350" y2="740" stroke="#4FC3F7" stroke-width="8" opacity="0.5"/>
+  <!-- 비행기 -->
+  <g transform="translate(680,440) rotate(15)">
+    <ellipse cx="0" cy="0" rx="52" ry="14" fill="#0288D1"/>
+    <polygon points="10,0 -14,-40 -42,-5 -14,5" fill="#4FC3F7"/>
+    <polygon points="-36,-4 -48,-22 -58,-4" fill="#4FC3F7"/>
+  </g>
+</svg>

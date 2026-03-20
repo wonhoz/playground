@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+<rect x="80" y="80" width="864" height="864" rx="180" ry="180" fill="#030A03"/>
+<!-- 컨셉: 미로 출구 찾기 -->
+<!-- 미로 외벽 -->
+<rect x="200" y="200" width="624" height="624" rx="16" fill="none" stroke="#2E7D32" stroke-width="32"/>
+<!-- 미로 내부 벽들 -->
+<line x1="200" y1="356" x2="452" y2="356" stroke="#2E7D32" stroke-width="28"/>
+<line x1="356" y1="356" x2="356" y2="512" stroke="#2E7D32" stroke-width="28"/>
+<line x1="356" y1="512" x2="668" y2="512" stroke="#2E7D32" stroke-width="28"/>
+<line x1="512" y1="200" x2="512" y2="356" stroke="#2E7D32" stroke-width="28"/>
+<line x1="512" y1="668" x2="512" y2="824" stroke="#2E7D32" stroke-width="28"/>
+<line x1="668" y1="356" x2="824" y2="356" stroke="#2E7D32" stroke-width="28"/>
+<line x1="668" y1="356" x2="668" y2="668" stroke="#2E7D32" stroke-width="28"/>
+<line x1="200" y1="668" x2="512" y2="668" stroke="#2E7D32" stroke-width="28"/>
+<!-- 출구 표시 (우측) -->
+<rect x="808" y="480" width="40" height="80" rx="4" fill="#030A03"/>
+<!-- 경로 (올바른 길) -->
+<path d="M 280 280 L 440 280 L 440 440 L 600 440 L 600 280 L 750 280 L 750 600 L 600 600 L 600 740 L 440 740 L 440 600 L 280 600 L 280 440" fill="none" stroke="#66BB6A" stroke-width="20" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="18 10"/>
+<!-- 화살표 (탈출 방향) -->
+<path d="M 740 580 L 850 580" fill="none" stroke="#66BB6A" stroke-width="28" stroke-linecap="round"/>
+<path d="M 806 540 L 858 580 L 806 620" fill="none" stroke="#66BB6A" stroke-width="28" stroke-linecap="round" stroke-linejoin="round"/>
+<!-- 시작 점 -->
+<circle cx="280" cy="280" r="28" fill="#66BB6A"/>
+</svg>

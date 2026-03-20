@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Domino chain reaction cascade -->
+  <rect x="80" y="80" width="864" height="864" rx="180" ry="180" fill="#050A00"/>
+  <!-- Floor line -->
+  <line x1="140" y1="780" x2="884" y2="780" stroke="#1B5E20" stroke-width="8" stroke-linecap="round"/>
+  <!-- Domino 1 - already fallen (lying flat) -->
+  <rect x="150" y="740" width="120" height="40" rx="8" fill="#33691E" opacity="0.7"/>
+  <!-- Domino 2 - falling (tilted ~45deg) -->
+  <rect x="295" y="640" width="50" height="140" rx="8" fill="#558B2F" transform="rotate(40,320,780)"/>
+  <!-- Domino 3 - tilting (slight tilt) -->
+  <rect x="420" y="550" width="50" height="180" rx="8" fill="#558B2F" transform="rotate(15,445,740)"/>
+  <!-- Domino 4 - standing with lean -->
+  <rect x="540" y="520" width="50" height="200" rx="8" fill="#76FF03" transform="rotate(6,565,720)" opacity="0.9"/>
+  <!-- Domino 5 - standing upright -->
+  <rect x="660" y="530" width="50" height="200" rx="8" fill="#558B2F"/>
+  <!-- Domino 6 - standing upright -->
+  <rect x="770" y="530" width="50" height="200" rx="8" fill="#33691E" opacity="0.8"/>
+  <!-- Domino dots (signal dots) -->
+  <circle cx="325" cy="690" r="8" fill="#76FF03" opacity="0.7"/>
+  <circle cx="445" cy="610" r="8" fill="#76FF03" opacity="0.7"/>
+  <circle cx="565" cy="580" r="8" fill="#CCFF90" opacity="0.8"/>
+  <circle cx="685" cy="570" r="8" fill="#558B2F" opacity="0.7"/>
+  <!-- Trigger arrow from left -->
+  <polygon points="148,680 100,660 100,700" fill="#76FF03" opacity="0.8"/>
+  <!-- Cascade glow on active domino -->
+  <rect x="536" y="516" width="58" height="208" rx="12" fill="none" stroke="#76FF03" stroke-width="6" transform="rotate(6,565,720)" opacity="0.4"/>
+</svg>

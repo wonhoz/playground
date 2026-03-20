@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Space station donut ring structure -->
+  <rect x="80" y="80" width="864" height="864" rx="180" ry="180" fill="#030005"/>
+  <!-- Outer ring (torus viewed at angle) -->
+  <ellipse cx="512" cy="512" rx="340" ry="120" fill="none" stroke="#00695C" stroke-width="60" opacity="0.85"/>
+  <!-- Ring upper half (lighter) -->
+  <path d="M 172,512 A 340,120 0 0 1 852,512" fill="none" stroke="#00897B" stroke-width="62" stroke-linecap="butt"/>
+  <!-- Ring highlight top -->
+  <path d="M 200,500 A 312,100 0 0 1 824,500" fill="none" stroke="#26A69A" stroke-width="16" stroke-linecap="round" opacity="0.7"/>
+  <!-- Ring shadow bottom -->
+  <path d="M 172,512 A 340,120 0 0 0 852,512" fill="none" stroke="#004D40" stroke-width="60" stroke-linecap="butt" opacity="0.7"/>
+  <!-- Inner ring details (windows) -->
+  <circle cx="512" cy="392" r="14" fill="#80CBC4" opacity="0.7"/>
+  <circle cx="660" cy="408" r="12" fill="#80CBC4" opacity="0.6"/>
+  <circle cx="364" cy="408" r="12" fill="#80CBC4" opacity="0.6"/>
+  <circle cx="780" cy="454" r="10" fill="#26A69A" opacity="0.5"/>
+  <circle cx="244" cy="454" r="10" fill="#26A69A" opacity="0.5"/>
+  <!-- Central hub module -->
+  <circle cx="512" cy="512" r="70" fill="#00695C"/>
+  <circle cx="512" cy="512" r="50" fill="#004D40"/>
+  <circle cx="512" cy="512" r="30" fill="#00897B"/>
+  <!-- Spoke connectors (hub to ring) -->
+  <line x1="512" y1="442" x2="512" y2="393" stroke="#004D40" stroke-width="14" stroke-linecap="round"/>
+  <line x1="512" y1="582" x2="512" y2="632" stroke="#004D40" stroke-width="14" stroke-linecap="round" opacity="0.7"/>
+  <line x1="444" y1="500" x2="380" y2="484" stroke="#004D40" stroke-width="12" stroke-linecap="round" opacity="0.8"/>
+  <line x1="580" y1="500" x2="644" y2="484" stroke="#004D40" stroke-width="12" stroke-linecap="round" opacity="0.8"/>
+  <!-- Solar panel arrays -->
+  <rect x="250" y="490" width="90" height="28" rx="6" fill="#003D30" transform="rotate(-10,295,504)"/>
+  <rect x="684" y="490" width="90" height="28" rx="6" fill="#003D30" transform="rotate(10,729,504)"/>
+</svg>

@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <rect x="80" y="80" width="864" height="864" rx="180" ry="180" fill="#000A14"/>
+  <!-- 구름 사이 비행 궤적: 구름 + 곡선 경로 -->
+  <!-- 왼쪽 구름 -->
+  <g opacity="0.85">
+    <ellipse cx="230" cy="420" rx="110" ry="60" fill="#4FC3F7" opacity="0.4"/>
+    <ellipse cx="310" cy="390" rx="80" ry="55" fill="#4FC3F7" opacity="0.4"/>
+    <ellipse cx="170" cy="440" rx="70" ry="45" fill="#4FC3F7" opacity="0.4"/>
+  </g>
+  <!-- 오른쪽 구름 -->
+  <g opacity="0.85">
+    <ellipse cx="790" cy="560" rx="110" ry="60" fill="#4FC3F7" opacity="0.4"/>
+    <ellipse cx="860" cy="530" rx="80" ry="55" fill="#4FC3F7" opacity="0.4"/>
+    <ellipse cx="730" cy="580" rx="70" ry="45" fill="#4FC3F7" opacity="0.4"/>
+  </g>
+  <!-- 비행 궤적 -->
+  <path d="M200,500 Q400,200 512,430 Q620,660 820,460" stroke="#4FC3F7" stroke-width="12" fill="none" stroke-linecap="round"/>
+  <path d="M200,500 Q400,200 512,430 Q620,660 820,460" stroke="#0288D1" stroke-width="22" fill="none" stroke-linecap="round" opacity="0.3"/>
+  <!-- 비행기 작은 아이콘 -->
+  <g transform="translate(812,450) rotate(-30)">
+    <ellipse cx="0" cy="0" rx="60" ry="16" fill="#0288D1"/>
+    <polygon points="10,0 -15,-45 -45,-6 -15,6" fill="#4FC3F7"/>
+    <polygon points="-40,-4 -50,-26 -60,-4" fill="#4FC3F7"/>
+  </g>
+</svg>

@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <rect width="1024" height="1024" rx="180" fill="#0A0500"/>
+  <!-- Node handles — bezier editing -->
+  <!-- Main curve -->
+  <path d="M180 700 C320 400 500 800 700 300 S900 200 880 400" fill="none" stroke="#E65100" stroke-width="14" stroke-linecap="round"/>
+  <!-- Control line 1 -->
+  <line x1="180" y1="700" x2="320" y2="400" stroke="#FF8A65" stroke-width="5" opacity="0.6"/>
+  <!-- Control line 2 -->
+  <line x1="700" y1="300" x2="500" y2="800" stroke="#FF8A65" stroke-width="5" opacity="0.6"/>
+  <!-- Control line 3 -->
+  <line x1="880" y1="400" x2="900" y2="200" stroke="#FF8A65" stroke-width="5" opacity="0.6"/>
+
+  <!-- Anchor diamonds -->
+  <rect x="163" y="683" width="34" height="34" rx="4" fill="#FF8A65" transform="rotate(45 180 700)"/>
+  <rect x="683" y="283" width="34" height="34" rx="4" fill="#FF8A65" transform="rotate(45 700 300)"/>
+  <rect x="863" y="383" width="34" height="34" rx="4" fill="#FF8A65" transform="rotate(45 880 400)"/>
+
+  <!-- Control handle circles -->
+  <circle cx="320" cy="400" r="20" fill="#E65100" opacity="0.9"/>
+  <circle cx="500" cy="800" r="20" fill="#E65100" opacity="0.9"/>
+  <circle cx="900" cy="200" r="20" fill="#E65100" opacity="0.9"/>
+
+  <!-- Selected node highlight -->
+  <circle cx="700" cy="300" r="32" fill="none" stroke="#FF8A65" stroke-width="8"/>
+  <circle cx="700" cy="300" r="14" fill="#FF8A65"/>
+</svg>

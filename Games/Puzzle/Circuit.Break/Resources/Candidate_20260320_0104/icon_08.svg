@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <rect x="80" y="80" width="864" height="864" rx="180" ry="180" fill="#020A08"/>
+  <!-- 퓨즈 끊어짐 -> 연결: 퓨즈 연결 -->
+  <!-- 왼쪽 도선 -->
+  <line x1="160" y1="512" x2="320" y2="512" stroke="#4DB6AC" stroke-width="18" stroke-linecap="round"/>
+  <!-- 퓨즈 케이스 (왼쪽) -->
+  <rect x="320" y="456" width="140" height="112" rx="20" fill="#00897B"/>
+  <rect x="330" y="466" width="120" height="92" rx="14" fill="#020A08"/>
+  <!-- 끊어진 퓨즈 필라멘트 (왼쪽) -->
+  <line x1="340" y1="512" x2="420" y2="512" stroke="#4DB6AC" stroke-width="10" stroke-linecap="round"/>
+  <!-- 끊어진 간격 -->
+  <line x1="420" y1="512" x2="438" y2="480" stroke="#4DB6AC" stroke-width="8" stroke-linecap="round" opacity="0.6"/>
+  <line x1="438" y1="480" x2="456" y2="512" stroke="#4DB6AC" stroke-width="8" stroke-linecap="round" opacity="0.6"/>
+  <!-- 전류 아크 (끊어진 곳) -->
+  <path d="M428,502 Q442,470 456,502" stroke="#4DB6AC" stroke-width="6" fill="none" stroke-linecap="round" opacity="0.8"/>
+  <!-- 오른쪽 반쪽 -->
+  <rect x="564" y="456" width="140" height="112" rx="20" fill="#00897B"/>
+  <rect x="574" y="466" width="120" height="92" rx="14" fill="#020A08"/>
+  <line x1="584" y1="512" x2="674" y2="512" stroke="#4DB6AC" stroke-width="10" stroke-linecap="round"/>
+  <!-- 오른쪽 도선 -->
+  <line x1="704" y1="512" x2="864" y2="512" stroke="#4DB6AC" stroke-width="18" stroke-linecap="round"/>
+  <!-- 화살표 (해결 방향) -->
+  <polygon points="512,640 480,680 544,680" fill="#4DB6AC" opacity="0.7"/>
+  <!-- 새 퓨즐 (연결됨, 하단) -->
+  <rect x="380" y="720" width="264" height="100" rx="20" fill="#00897B"/>
+  <rect x="394" y="732" width="236" height="76" rx="14" fill="#020A08"/>
+  <line x1="400" y1="770" x2="624" y2="770" stroke="#4DB6AC" stroke-width="14" stroke-linecap="round"/>
+  <!-- 연결 선 (점선 from/to) -->
+  <line x1="160" y1="512" x2="160" y2="770" stroke="#00897B" stroke-width="8" stroke-dasharray="14,10" opacity="0.4"/>
+  <line x1="864" y1="512" x2="864" y2="770" stroke="#00897B" stroke-width="8" stroke-dasharray="14,10" opacity="0.4"/>
+  <line x1="160" y1="770" x2="380" y2="770" stroke="#00897B" stroke-width="8" opacity="0.4"/>
+  <line x1="644" y1="770" x2="864" y2="770" stroke="#00897B" stroke-width="8" opacity="0.4"/>
+</svg>

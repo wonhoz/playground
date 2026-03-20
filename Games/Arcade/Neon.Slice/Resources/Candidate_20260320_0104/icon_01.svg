@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <rect x="80" y="80" width="864" height="864" rx="180" ry="180" fill="#080005"/>
+  <!-- 칼날 + 네온 잘라내기 -->
+  <!-- 칼날 -->
+  <path d="M200 820 L740 280 L800 340 L380 720 L420 820 Z" fill="#E040FB" opacity="0.7"/>
+  <path d="M740 280 L800 340 L780 360 L720 300 Z" fill="#EA80FC"/>
+  <!-- 슬라이스 이펙트 -->
+  <line x1="200" y1="820" x2="800" y2="340" stroke="#EA80FC" stroke-width="8" opacity="0.6"/>
+  <!-- 잘린 조각들 -->
+  <rect x="480" y="380" width="160" height="120" rx="14" fill="#E040FB" opacity="0.4" transform="rotate(15 560 440)"/>
+  <rect x="300" y="540" width="140" height="100" rx="14" fill="#E040FB" opacity="0.3" transform="rotate(-10 370 590)"/>
+  <!-- 네온 글로우 효과 -->
+  <path d="M200 820 L740 280" stroke="#EA80FC" stroke-width="4" opacity="0.8" filter="url(#glow)"/>
+  <defs>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+</svg>

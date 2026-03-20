@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Multiple projectile arc trajectories -->
+  <rect x="80" y="80" width="864" height="864" rx="180" ry="180" fill="#030005"/>
+  <!-- Launch platform (bottom left area) -->
+  <rect x="160" y="800" width="160" height="50" rx="10" fill="#00695C" opacity="0.7"/>
+  <circle cx="240" cy="800" r="28" fill="#00897B" opacity="0.8"/>
+  <!-- Projectile arc 1 (main arc - high trajectory) -->
+  <path d="M 240,800 Q 380,200 760,480" fill="none" stroke="#26A69A" stroke-width="10" stroke-linecap="round"/>
+  <!-- Projectile arc 2 (medium trajectory) -->
+  <path d="M 240,800 Q 460,360 820,580" fill="none" stroke="#00897B" stroke-width="8" stroke-linecap="round" opacity="0.8"/>
+  <!-- Projectile arc 3 (lower flatter trajectory) -->
+  <path d="M 240,800 Q 500,540 840,680" fill="none" stroke="#00695C" stroke-width="7" stroke-linecap="round" opacity="0.7"/>
+  <!-- Projectile arc 4 (steep short arc) -->
+  <path d="M 240,800 Q 320,500 560,600" fill="none" stroke="#004D40" stroke-width="6" stroke-linecap="round" opacity="0.6"/>
+  <!-- Projectile dots at arc peaks/endpoints -->
+  <circle cx="760" cy="480" r="22" fill="#26A69A"/>
+  <circle cx="760" cy="480" r="12" fill="#80CBC4"/>
+  <circle cx="820" cy="580" r="16" fill="#00897B"/>
+  <circle cx="820" cy="580" r="8" fill="#26A69A"/>
+  <circle cx="840" cy="680" r="14" fill="#00695C"/>
+  <circle cx="560" cy="600" r="14" fill="#00695C"/>
+  <!-- Impact flashes -->
+  <circle cx="760" cy="480" r="36" fill="none" stroke="#26A69A" stroke-width="5" opacity="0.4"/>
+  <circle cx="820" cy="580" r="28" fill="none" stroke="#00695C" stroke-width="4" opacity="0.35"/>
+  <!-- Arc height markers (dashed vertical lines) -->
+  <line x1="380" y1="200" x2="380" y2="800" stroke="#004D40" stroke-width="3" stroke-dasharray="10,12" opacity="0.25"/>
+  <line x1="460" y1="360" x2="460" y2="800" stroke="#004D40" stroke-width="2" stroke-dasharray="8,12" opacity="0.2"/>
+  <!-- Small projectile dots on arcs -->
+  <circle cx="480" cy="440" r="10" fill="#00897B" opacity="0.7"/>
+  <circle cx="600" cy="510" r="9" fill="#00695C" opacity="0.6"/>
+</svg>

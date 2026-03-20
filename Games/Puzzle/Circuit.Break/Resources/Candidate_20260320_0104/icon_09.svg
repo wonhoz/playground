@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <rect x="80" y="80" width="864" height="864" rx="180" ry="180" fill="#020A08"/>
+  <!-- 배터리 충전 흐름: 배터리 + 화살표 -->
+  <!-- 배터리 외형 -->
+  <rect x="200" y="360" width="560" height="304" rx="24" fill="#00897B" opacity="0.8"/>
+  <rect x="760" y="432" width="64" height="160" rx="12" fill="#00897B" opacity="0.8"/>
+  <!-- 배터리 내부 -->
+  <rect x="220" y="380" width="520" height="264" rx="16" fill="#020A08"/>
+  <!-- 충전 레벨 바 -->
+  <rect x="236" y="396" width="380" height="232" rx="10" fill="#00897B" opacity="0.6"/>
+  <rect x="236" y="396" width="380" height="232" rx="10" fill="#4DB6AC" opacity="0.3"/>
+  <!-- 충전 화살표 -->
+  <polygon points="512,440 448,540 490,540 490,612 534,612 534,540 576,540" fill="#4DB6AC"/>
+  <!-- 마이너스 극 -->
+  <line x1="218" y1="512" x2="176" y2="512" stroke="#4DB6AC" stroke-width="14" stroke-linecap="round"/>
+  <!-- 플러스 극 (배터리 단자) -->
+  <line x1="808" y1="490" x2="808" y2="534" stroke="#4DB6AC" stroke-width="14" stroke-linecap="round"/>
+  <line x1="786" y1="512" x2="830" y2="512" stroke="#4DB6AC" stroke-width="14" stroke-linecap="round"/>
+  <!-- 충전 파동 -->
+  <path d="M160,300 Q220,260 280,300 Q340,340 400,300 Q460,260 520,300" stroke="#4DB6AC" stroke-width="10" fill="none" stroke-linecap="round" opacity="0.5"/>
+  <path d="M160,724 Q220,684 280,724 Q340,764 400,724 Q460,684 520,724" stroke="#4DB6AC" stroke-width="10" fill="none" stroke-linecap="round" opacity="0.5"/>
+  <!-- 충전 퍼센트 표시 (원형) -->
+  <circle cx="512" cy="870" r="60" fill="none" stroke="#00897B" stroke-width="12"/>
+  <path d="M512,810 A60,60 0 0,1 564,898" stroke="#4DB6AC" stroke-width="12" fill="none" stroke-linecap="round"/>
+</svg>

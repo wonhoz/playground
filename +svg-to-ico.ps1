@@ -9,25 +9,19 @@ Write-Host "     SVG  >  ICO   (16 / 32 / 48 / 256 px)" -ForegroundColor White
 Write-Host "  ================================================" -ForegroundColor Cyan
 Write-Host ""
 
-# ── Input ────────────────────────────────────────────────────
-:input_svg
-$svgPath = (Read-Host "  SVG file path").Trim().Trim('"')
-
-if (-not $svgPath) { goto input_svg }
-
-if (-not (Test-Path $svgPath)) {
-    Write-Host "  Error: file not found." -ForegroundColor Red
-    Write-Host "         $svgPath" -ForegroundColor DarkGray
-    Write-Host ""
-    $svgPath = (Read-Host "  SVG file path").Trim().Trim('"')
-}
-
-while (-not (Test-Path $svgPath)) {
-    Write-Host "  Error: file not found." -ForegroundColor Red
-    Write-Host ""
-    $svgPath = (Read-Host "  SVG file path").Trim().Trim('"')
-    $svgPath = $svgPath.Trim('"')
-}
+# ── Input: SVG path ──────────────────────────────────────────
+do {
+    $svgPath = (Read-Host "  SVG file path (drag & drop OK)").Trim().Trim('"')
+    if (-not $svgPath) {
+        continue
+    }
+    if (-not (Test-Path $svgPath)) {
+        Write-Host "  Error: file not found." -ForegroundColor Red
+        Write-Host "         $svgPath" -ForegroundColor DarkGray
+        Write-Host ""
+        $svgPath = ""
+    }
+} while (-not $svgPath)
 
 $dir      = Split-Path $svgPath -Parent
 $baseName = [IO.Path]::GetFileNameWithoutExtension($svgPath)
@@ -37,7 +31,7 @@ $icoPath  = Join-Path $dir "$baseName.ico"
 if (Test-Path $icoPath) {
     Write-Host ""
     Write-Host "  Already exists: $icoPath" -ForegroundColor Yellow
-    $ans = Read-Host "  Overwrite? (Y/N, default Y)"
+    $ans = (Read-Host "  Overwrite? (Y/N, default Y)").Trim()
     if ($ans -ieq 'N') {
         Write-Host ""
         Write-Host "  Cancelled." -ForegroundColor DarkGray
@@ -57,7 +51,7 @@ Write-Host ""
 $tmpDir = Join-Path $env:TEMP "svg2ico_$([System.IO.Path]::GetRandomFileName())"
 New-Item -ItemType Directory -Path $tmpDir | Out-Null
 
-$csproj = @'
+Set-Content -Path (Join-Path $tmpDir "Converter.csproj") -Encoding UTF8 -Value @'
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -71,7 +65,7 @@ $csproj = @'
 </Project>
 '@
 
-$program = @'
+Set-Content -Path (Join-Path $tmpDir "Program.cs") -Encoding UTF8 -Value @'
 using Svg.Skia;
 using SkiaSharp;
 
@@ -123,10 +117,8 @@ Console.WriteLine("OK");
 return 0;
 '@
 
-Set-Content -Path (Join-Path $tmpDir "Converter.csproj") -Value $csproj -Encoding UTF8
-Set-Content -Path (Join-Path $tmpDir "Program.cs")       -Value $program -Encoding UTF8
-
 # ── Run ──────────────────────────────────────────────────────
+$exitCode = 0
 try {
     & dotnet run --project (Join-Path $tmpDir "Converter.csproj") --configuration Release -- $svgPath $icoPath
     $exitCode = $LASTEXITCODE

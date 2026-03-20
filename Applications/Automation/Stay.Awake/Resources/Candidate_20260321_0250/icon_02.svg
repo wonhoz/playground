@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Background: very dark slate blue -->
+  <rect width="1024" height="1024" rx="190" fill="#050C1C"/>
+
+  <!-- Subtle horizontal grid lines (EKG paper feel) -->
+  <line x1="60" y1="380" x2="964" y2="380" stroke="#0D2040" stroke-width="6"/>
+  <line x1="60" y1="512" x2="964" y2="512" stroke="#0D2040" stroke-width="8"/>
+  <line x1="60" y1="644" x2="964" y2="644" stroke="#0D2040" stroke-width="6"/>
+
+  <!-- ECG glow (wide, soft) -->
+  <path d="M 60,512 L 260,512 L 300,484 L 326,512
+           L 362,512 L 384,560 L 406,150 L 428,730 L 450,300 L 472,512
+           L 516,512 L 552,428 L 590,512
+           L 964,512"
+        fill="none" stroke="#00E676" stroke-width="110" opacity="0.12"
+        stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- ECG main line -->
+  <path d="M 60,512 L 260,512 L 300,484 L 326,512
+           L 362,512 L 384,560 L 406,150 L 428,730 L 450,300 L 472,512
+           L 516,512 L 552,428 L 590,512
+           L 964,512"
+        fill="none" stroke="#00E676" stroke-width="52"
+        stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Pulse dot at right end -->
+  <circle cx="940" cy="512" r="56" fill="#00E676" opacity="0.25"/>
+  <circle cx="940" cy="512" r="36" fill="#00E676"/>
+  <circle cx="940" cy="512" r="16" fill="#CCFF90"/>
+</svg>

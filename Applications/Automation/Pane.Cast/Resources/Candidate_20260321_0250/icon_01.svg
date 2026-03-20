@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Background: dark purple -->
+  <rect width="1024" height="1024" rx="190" fill="#0D0820"/>
+
+  <!-- Motion trail (suggests fast movement, bottom-left to top-right) -->
+  <line x1="140" y1="820" x2="700" y2="200" stroke="#7B1FA2" stroke-width="40" opacity="0.2" stroke-linecap="round"/>
+
+  <!-- Window 1 (back, smallest, most bottom-left, dim) -->
+  <rect x="60" y="600" width="280" height="200" rx="16" fill="#1A0A30" stroke="#4A148C" stroke-width="10"
+        transform="rotate(-6 200 700)"/>
+  <rect x="76" y="616" width="280" height="30" rx="10 10 0 0" fill="#4A148C" opacity="0.4"
+        transform="rotate(-6 200 700)"/>
+
+  <!-- Window 2 (middle) -->
+  <rect x="240" y="350" width="360" height="260" rx="20" fill="#1C0A3A" stroke="#7B1FA2" stroke-width="14"
+        transform="rotate(-2 420 480)"/>
+  <rect x="256" y="366" width="360" height="38" rx="14 14 0 0" fill="#7B1FA2" opacity="0.45"
+        transform="rotate(-2 420 480)"/>
+  <!-- Prompt lines on W2 -->
+  <rect x="276" y="424" width="120" height="14" rx="4" fill="#CE93D8" opacity="0.5" transform="rotate(-2 420 480)"/>
+  <rect x="276" y="454" width="200" height="14" rx="4" fill="#CE93D8" opacity="0.3" transform="rotate(-2 420 480)"/>
+
+  <!-- Window 3 (front, largest, brightest, top-right) -->
+  <rect x="430" y="100" width="520" height="380" rx="24" fill="#0D0A20" stroke="#00BCD4" stroke-width="18"/>
+  <!-- Title bar -->
+  <rect x="430" y="100" width="520" height="48" rx="24 24 0 0" fill="#00BCD4" opacity="0.35"/>
+  <!-- Traffic dots -->
+  <circle cx="468" cy="124" r="10" fill="#EF5350" opacity="0.8"/>
+  <circle cx="502" cy="124" r="10" fill="#FFB300" opacity="0.8"/>
+  <circle cx="536" cy="124" r="10" fill="#00E676" opacity="0.8"/>
+  <!-- Prompt lines on W3 -->
+  <rect x="456" y="182" width="90" height="18" rx="5" fill="#00BCD4" opacity="0.9"/>
+  <rect x="458" y="220" width="280" height="16" rx="4" fill="#80DEEA" opacity="0.55"/>
+  <rect x="458" y="252" width="180" height="16" rx="4" fill="#80DEEA" opacity="0.35"/>
+  <rect x="458" y="284" width="220" height="16" rx="4" fill="#80DEEA" opacity="0.25"/>
+
+  <!-- Golden launch arrow (bottom-left, pointing toward top-right windows) -->
+  <polygon points="100,900 200,780 230,860" fill="#FFD600" opacity="0.85"/>
+  <polygon points="140,860 240,740 270,820" fill="#FFA000" opacity="0.55"/>
+</svg>

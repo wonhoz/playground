@@ -27,6 +27,7 @@ public partial class MainWindow : Window
     private bool _suppressEditorChange;
     private DispatcherTimer? _previewTimer;
     private string _currentTheme = "dark";
+    private double _pendingScrollY = 0;
 
     public MainWindow()
     {
@@ -107,6 +108,31 @@ public partial class MainWindow : Window
     {
         _ = HideLoadingAsync(300);
         _ = ExtractTocAsync();
+        if (_pendingScrollY > 0)
+            _ = RestoreScrollAsync();
+    }
+
+    private async Task<double> GetScrollYAsync()
+    {
+        try
+        {
+            var result = await Viewer.ExecuteScriptAsync("window.scrollY.toString()");
+            if (double.TryParse(result.Trim('"'), System.Globalization.NumberStyles.Any,
+                System.Globalization.CultureInfo.InvariantCulture, out var y)) return y;
+        }
+        catch { }
+        return 0;
+    }
+
+    private async Task RestoreScrollAsync()
+    {
+        await Task.Delay(50);
+        try
+        {
+            await Viewer.ExecuteScriptAsync($"window.scrollTo(0, {(int)_pendingScrollY})");
+        }
+        catch { }
+        _pendingScrollY = 0;
     }
 
     private async Task ExtractTocAsync()
@@ -165,7 +191,7 @@ public partial class MainWindow : Window
         _previewTimer.Tick += (_, _) =>
         {
             _previewTimer.Stop();
-            RenderPreview();
+            RenderPreview(saveScroll: true);
         };
     }
 
@@ -270,9 +296,13 @@ public partial class MainWindow : Window
             CloseTab((int)tb.Tag);
     }
 
-    private void SwitchTo(int index)
+    private async void SwitchTo(int index)
     {
         if (index < 0 || index >= _docs.Count) return;
+
+        // 현재 탭 스크롤 저장
+        if (_activeIndex >= 0 && _activeIndex < _docs.Count)
+            _docs[_activeIndex].ScrollY = await GetScrollYAsync();
 
         // 이전 탭 스타일 복원
         if (_activeIndex >= 0 && _activeIndex < _tabs.Count)
@@ -283,6 +313,7 @@ public partial class MainWindow : Window
         }
 
         _activeIndex = index;
+        _pendingScrollY = _docs[index].ScrollY;
         var tab = _tabs[index];
         tab.BorderBrush = (SolidColorBrush)FindResource("AccentBrush");
         if (tab.Child is StackPanel sp && sp.Children[0] is TextBlock t)
@@ -359,9 +390,11 @@ public partial class MainWindow : Window
 
     // ── 렌더링 ──────────────────────────────────────────────────────────
 
-    private async void RenderPreview()
+    private async void RenderPreview(bool saveScroll = false)
     {
         if (_activeIndex < 0 || _activeIndex >= _docs.Count) return;
+        if (saveScroll)
+            _pendingScrollY = await GetScrollYAsync();
         var doc = _docs[_activeIndex];
         var content = doc.Content;
         var filePath = doc.IsNew ? null : doc.FilePath;
@@ -507,13 +540,14 @@ public partial class MainWindow : Window
             _currentTheme = tag;
             _settings.Theme = tag;
             _settings.Save();
-            RenderPreview();
+            RenderPreview(saveScroll: true);
         }
     }
 
-    private void BtnReload_Click(object sender, RoutedEventArgs e)
+    private async void BtnReload_Click(object sender, RoutedEventArgs e)
     {
         if (_activeIndex < 0 || _activeIndex >= _docs.Count) return;
+        _pendingScrollY = await GetScrollYAsync();
         var doc = _docs[_activeIndex];
         if (!doc.IsNew && File.Exists(doc.FilePath))
         {

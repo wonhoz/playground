@@ -7,6 +7,7 @@ public class MarkDocument
     public string FilePath { get; set; } = string.Empty;
     public string Content { get; set; } = string.Empty;
     public bool IsModified { get; set; }
+    public double ScrollY { get; set; } = 0;
     public bool IsNew => string.IsNullOrEmpty(FilePath);
 
     public string TabTitle

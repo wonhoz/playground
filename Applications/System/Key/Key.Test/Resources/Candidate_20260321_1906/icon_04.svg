@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <filter id="wave_glow">
+      <feGaussianBlur stdDeviation="5" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="chatter_glow">
+      <feGaussianBlur stdDeviation="10" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <linearGradient id="wave_grad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#FFB800" stop-opacity="0.3"/>
+      <stop offset="40%" stop-color="#FFB800" stop-opacity="1"/>
+      <stop offset="70%" stop-color="#FF6600" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#FF3300" stop-opacity="0.6"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background: matte black -->
+  <rect width="1024" height="1024" rx="190" fill="#0A0A0A"/>
+
+  <!-- Grid lines (oscilloscope) -->
+  <g stroke="#1A1A1A" stroke-width="1">
+    <!-- Horizontal grid -->
+    <line x1="100" y1="256" x2="924" y2="256"/>
+    <line x1="100" y1="384" x2="924" y2="384"/>
+    <line x1="100" y1="512" x2="924" y2="512"/>
+    <line x1="100" y1="640" x2="924" y2="640"/>
+    <line x1="100" y1="768" x2="924" y2="768"/>
+    <!-- Vertical grid -->
+    <line x1="100" y1="200" x2="100" y2="820"/>
+    <line x1="306" y1="200" x2="306" y2="820"/>
+    <line x1="512" y1="200" x2="512" y2="820"/>
+    <line x1="718" y1="200" x2="718" y2="820"/>
+    <line x1="924" y1="200" x2="924" y2="820"/>
+  </g>
+  <!-- Center axis -->
+  <line x1="100" y1="512" x2="924" y2="512" stroke="#252525" stroke-width="2"/>
+
+  <!-- Label -->
+  <text x="120" y="240" font-family="Consolas,monospace" font-size="24" fill="#333333">OSCILLOSCOPE  |  KEY SIGNAL</text>
+
+  <!-- Normal waveform: flat line then pulse then flat -->
+  <!-- Segment 1: flat before key press -->
+  <polyline points="100,512 240,512" fill="none" stroke="url(#wave_grad)" stroke-width="4" stroke-linecap="round" filter="url(#wave_glow)"/>
+
+  <!-- Normal press: clean single pulse -->
+  <polyline points="240,512 252,512 256,340 300,340 304,512 440,512" fill="none" stroke="url(#wave_grad)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" filter="url(#wave_glow)"/>
+
+  <!-- Gap in middle -->
+  <polyline points="440,512 480,512" fill="none" stroke="url(#wave_grad)" stroke-width="4" stroke-linecap="round" filter="url(#wave_glow)"/>
+
+  <!-- CHATTERING: double bounce (the problematic signal) -->
+  <!-- First trigger -->
+  <polyline points="480,512 492,512 496,340 526,340 530,512"
+    fill="none" stroke="#FF6600" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" filter="url(#chatter_glow)"/>
+  <!-- Brief return to baseline -->
+  <polyline points="530,512 548,512"
+    fill="none" stroke="#FF4400" stroke-width="5" stroke-linecap="round" filter="url(#chatter_glow)"/>
+  <!-- Second ghost trigger (chattering!) -->
+  <polyline points="548,512 554,512 558,420 582,420 586,512"
+    fill="none" stroke="#FF2200" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" filter="url(#chatter_glow)"/>
+  <!-- After chattering: flat -->
+  <polyline points="586,512 924,512" fill="none" stroke="url(#wave_grad)" stroke-width="4" stroke-linecap="round" filter="url(#wave_glow)"/>
+
+  <!-- Chattering annotation -->
+  <line x1="530" y1="430" x2="530" y2="310" stroke="#FF4400" stroke-width="1.5" stroke-dasharray="6,4"/>
+  <line x1="586" y1="430" x2="586" y2="310" stroke="#FF4400" stroke-width="1.5" stroke-dasharray="6,4"/>
+  <line x1="530" y1="316" x2="586" y2="316" stroke="#FF4400" stroke-width="1.5"/>
+  <!-- Arrow tips -->
+  <polygon points="530,316 542,308 542,324" fill="#FF4400"/>
+  <polygon points="586,316 574,308 574,324" fill="#FF4400"/>
+  <text x="558" y="298" text-anchor="middle" font-family="Consolas,monospace" font-size="22" fill="#FF6600">15ms</text>
+
+  <!-- Warning label -->
+  <rect x="458" y="620" width="310" height="70" rx="8" fill="#1A0800" stroke="#FF4400" stroke-width="1.5"/>
+  <text x="613" y="651" text-anchor="middle" font-family="Consolas,monospace" font-size="20" fill="#FF8800">⚠ CHATTERING</text>
+  <text x="613" y="678" text-anchor="middle" font-family="Consolas,monospace" font-size="20" fill="#FF6600">DETECTED</text>
+
+  <!-- Normal label -->
+  <text x="272" y="776" text-anchor="middle" font-family="Consolas,monospace" font-size="22" fill="#FFB800">NORMAL</text>
+  <text x="613" y="776" text-anchor="middle" font-family="Consolas,monospace" font-size="22" fill="#FF4400">FAULT</text>
+
+  <!-- Title bottom -->
+  <text x="512" y="870" text-anchor="middle" font-family="Consolas,monospace" font-size="34" font-weight="bold" fill="#FFB800" letter-spacing="4">KEY.TEST</text>
+</svg>

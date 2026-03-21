@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg9" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#2D0040"/>
+      <stop offset="100%" stop-color="#1A0028"/>
+    </linearGradient>
+    <linearGradient id="key9" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#420058"/>
+      <stop offset="100%" stop-color="#280038"/>
+    </linearGradient>
+    <filter id="ekg_glow">
+      <feGaussianBlur stdDeviation="8" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="key9_shadow">
+      <feDropShadow dx="0" dy="8" stdDeviation="18" flood-color="#FF006C" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+
+  <!-- Background: hot magenta dark -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg9)"/>
+
+  <!-- Ambient radial glow -->
+  <radialGradient id="amb9" cx="50%" cy="50%" r="50%">
+    <stop offset="0%" stop-color="#FF006C" stop-opacity="0.12"/>
+    <stop offset="100%" stop-color="#FF006C" stop-opacity="0"/>
+  </radialGradient>
+  <rect width="1024" height="1024" rx="190" fill="url(#amb9)"/>
+
+  <!-- Large keyboard key silhouette as base -->
+  <rect x="212" y="340" width="600" height="500" rx="40" fill="url(#key9)" stroke="#9900CC" stroke-width="3" filter="url(#key9_shadow)"/>
+  <!-- Key inner bevel -->
+  <rect x="232" y="360" width="560" height="460" rx="30" fill="#320048" stroke="#6600A0" stroke-width="1.5"/>
+
+  <!-- EKG / heartbeat line through the key -->
+  <!-- The line goes across the key horizontally -->
+  <!-- Flat → rise → spike down → spike up → flat → dip → flat -->
+  <!-- Starts left: flat line from x=130 to x=350 at y=560 -->
+  <polyline
+    points="130,560  350,560  380,560  395,480  420,660  445,400  470,680  492,560  640,560  660,560  680,560"
+    fill="none" stroke="#FF3399" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" filter="url(#ekg_glow)"/>
+  <!-- Continue right side -->
+  <polyline
+    points="680,560  694,560  894,560"
+    fill="none" stroke="#FF3399" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" filter="url(#ekg_glow)"/>
+
+  <!-- Bright peak dots -->
+  <circle cx="445" cy="400" r="14" fill="#FF66BB" filter="url(#ekg_glow)"/>
+  <circle cx="470" cy="680" r="10" fill="#CC1177" opacity="0.7"/>
+
+  <!-- Health badge: green OK -->
+  <circle cx="760" cy="440" r="74" fill="#00C864"/>
+  <polyline points="722,440 750,468 800,404" fill="none" stroke="white" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Key center text label area -->
+  <text x="512" y="760" text-anchor="middle" font-family="Consolas,monospace" font-size="32" fill="#6600A0" letter-spacing="2">KEYBOARD HEALTH</text>
+
+  <!-- Top label -->
+  <text x="512" y="226" text-anchor="middle" font-family="Consolas,monospace" font-size="36" font-weight="bold" fill="#DD1188" letter-spacing="4">KEY.TEST</text>
+  <text x="512" y="270" text-anchor="middle" font-family="Consolas,monospace" font-size="26" fill="#660066">Diagnostics  ·  Chatter  ·  Stick</text>
+
+  <!-- Bottom stats -->
+  <text x="512" y="844" text-anchor="middle" font-family="Consolas,monospace" font-size="28" fill="#8800BB">Chattering  ·  0ms threshold</text>
+  <text x="512" y="882" text-anchor="middle" font-family="Consolas,monospace" font-size="28" fill="#660088">Sticky Key  ·  3s threshold</text>
+</svg>

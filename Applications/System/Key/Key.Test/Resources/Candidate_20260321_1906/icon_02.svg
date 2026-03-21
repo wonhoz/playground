@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0C1530"/>
+      <stop offset="100%" stop-color="#060A18"/>
+    </linearGradient>
+    <filter id="glow2" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="6" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg2)"/>
+
+  <!-- Window chrome -->
+  <rect x="112" y="210" width="800" height="600" rx="12" fill="#0A0F22" stroke="#1E2D50" stroke-width="2"/>
+  <!-- Title bar -->
+  <rect x="112" y="210" width="800" height="46" rx="12" fill="#111A36"/>
+  <rect x="112" y="240" width="800" height="16" fill="#111A36"/>
+  <!-- Window buttons -->
+  <circle cx="148" cy="233" r="10" fill="#FF5F57"/>
+  <circle cx="178" cy="233" r="10" fill="#FFBD2E"/>
+  <circle cx="208" cy="233" r="10" fill="#28CA41"/>
+  <!-- Title bar text -->
+  <text x="512" y="239" text-anchor="middle" font-family="Consolas,monospace" font-size="20" fill="#4A5A7A">Key.Test — Event Log</text>
+
+  <!-- Scanline subtle effect -->
+  <rect x="112" y="256" width="800" height="554" rx="0" fill="#040810" opacity="0.4"/>
+
+  <!-- Log lines (monospace terminal style) -->
+  <!-- Line 1: normal -->
+  <text x="150" y="320" font-family="Consolas,monospace" font-size="30" fill="#2D3A5A">13:42:06</text>
+  <text x="340" y="320" font-family="Consolas,monospace" font-size="30" fill="#7B68EE">↓ Enter</text>
+  <text x="570" y="320" font-family="Consolas,monospace" font-size="30" fill="#334466">VK=0x0D</text>
+
+  <!-- Line 2: normal -->
+  <text x="150" y="368" font-family="Consolas,monospace" font-size="30" fill="#2D3A5A">13:42:07</text>
+  <text x="340" y="368" font-family="Consolas,monospace" font-size="30" fill="#7B68EE">↓ A</text>
+  <text x="570" y="368" font-family="Consolas,monospace" font-size="30" fill="#334466">VK=0x41</text>
+
+  <!-- Line 3: CHATTERING WARNING — red highlight -->
+  <rect x="130" y="377" width="762" height="44" rx="4" fill="#2A0808" opacity="0.8"/>
+  <text x="150" y="412" font-family="Consolas,monospace" font-size="30" fill="#FF3333">⚠</text>
+  <text x="195" y="412" font-family="Consolas,monospace" font-size="30" fill="#FF6B6B" font-weight="bold">CHATTER</text>
+  <text x="420" y="412" font-family="Consolas,monospace" font-size="30" fill="#FF5050">[A]  15.2ms gap</text>
+
+  <!-- Line 4: normal -->
+  <text x="150" y="460" font-family="Consolas,monospace" font-size="30" fill="#2D3A5A">13:42:08</text>
+  <text x="340" y="460" font-family="Consolas,monospace" font-size="30" fill="#7B68EE">↓ Space</text>
+  <text x="570" y="460" font-family="Consolas,monospace" font-size="30" fill="#334466">VK=0x20</text>
+
+  <!-- Line 5: normal -->
+  <text x="150" y="508" font-family="Consolas,monospace" font-size="30" fill="#2D3A5A">13:42:09</text>
+  <text x="340" y="508" font-family="Consolas,monospace" font-size="30" fill="#7B68EE">↓ B</text>
+  <text x="570" y="508" font-family="Consolas,monospace" font-size="30" fill="#334466">VK=0x42</text>
+
+  <!-- Line 6: currently pressed — bright -->
+  <text x="150" y="556" font-family="Consolas,monospace" font-size="30" fill="#2D3A5A">13:42:10</text>
+  <text x="340" y="556" font-family="Consolas,monospace" font-size="30" fill="#00CFFF" filter="url(#glow2)">↓ E</text>
+  <text x="570" y="556" font-family="Consolas,monospace" font-size="30" fill="#007A9A">VK=0x45</text>
+
+  <!-- Faded lines -->
+  <text x="150" y="604" font-family="Consolas,monospace" font-size="30" fill="#1A2438">13:42:10</text>
+  <text x="340" y="604" font-family="Consolas,monospace" font-size="30" fill="#2A3050">↓ Ctrl</text>
+  <text x="570" y="604" font-family="Consolas,monospace" font-size="30" fill="#1C2438">VK=0xA2</text>
+
+  <text x="150" y="650" font-family="Consolas,monospace" font-size="30" fill="#141C30">13:42:11</text>
+  <text x="340" y="650" font-family="Consolas,monospace" font-size="30" fill="#1E2440">↓ Tab</text>
+  <text x="570" y="650" font-family="Consolas,monospace" font-size="30" fill="#141C30">VK=0x09</text>
+
+  <!-- Cursor blink bar -->
+  <rect x="150" y="668" width="18" height="28" rx="2" fill="#00CFFF" opacity="0.9"/>
+
+  <!-- Bottom status -->
+  <rect x="112" y="762" width="800" height="48" rx="4" fill="#080D1C"/>
+  <text x="155" y="793" font-family="Consolas,monospace" font-size="22" fill="#334466">Total: 124  |  Tested: 27/104  |  Issues: 1</text>
+</svg>

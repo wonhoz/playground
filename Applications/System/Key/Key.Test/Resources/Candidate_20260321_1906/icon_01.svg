@@ -1,0 +1,126 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <filter id="gg" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur stdDeviation="8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="gr" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur stdDeviation="12" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1024" height="1024" rx="190" fill="#0D1624"/>
+
+  <!-- Title -->
+  <text x="512" y="372" text-anchor="middle" font-family="Consolas,monospace" font-size="74" font-weight="bold" fill="#7B68EE" letter-spacing="6">KEY.TEST</text>
+
+  <!-- Keyboard body -->
+  <rect x="184" y="424" width="658" height="258" rx="10" fill="#080D1A" stroke="#1C2A44" stroke-width="2"/>
+
+  <!-- Row 0: Fn (y=434, h=26) idle -->
+  <rect x="197" y="434" width="40" height="26" rx="3" fill="#161E30" stroke="#242F4A" stroke-width="1"/>
+  <rect x="249" y="434" width="30" height="26" rx="3" fill="#161E30" stroke="#242F4A" stroke-width="1"/>
+  <rect x="282" y="434" width="30" height="26" rx="3" fill="#161E30" stroke="#242F4A" stroke-width="1"/>
+  <rect x="315" y="434" width="30" height="26" rx="3" fill="#161E30" stroke="#242F4A" stroke-width="1"/>
+  <rect x="348" y="434" width="30" height="26" rx="3" fill="#161E30" stroke="#242F4A" stroke-width="1"/>
+  <rect x="389" y="434" width="30" height="26" rx="3" fill="#161E30" stroke="#242F4A" stroke-width="1"/>
+  <rect x="422" y="434" width="30" height="26" rx="3" fill="#161E30" stroke="#242F4A" stroke-width="1"/>
+  <rect x="455" y="434" width="30" height="26" rx="3" fill="#161E30" stroke="#242F4A" stroke-width="1"/>
+  <rect x="488" y="434" width="30" height="26" rx="3" fill="#161E30" stroke="#242F4A" stroke-width="1"/>
+  <rect x="529" y="434" width="30" height="26" rx="3" fill="#161E30" stroke="#242F4A" stroke-width="1"/>
+  <rect x="562" y="434" width="30" height="26" rx="3" fill="#161E30" stroke="#242F4A" stroke-width="1"/>
+  <rect x="595" y="434" width="30" height="26" rx="3" fill="#161E30" stroke="#242F4A" stroke-width="1"/>
+  <rect x="628" y="434" width="30" height="26" rx="3" fill="#161E30" stroke="#242F4A" stroke-width="1"/>
+  <rect x="670" y="434" width="30" height="26" rx="3" fill="#161E30" stroke="#242F4A" stroke-width="1"/>
+  <rect x="703" y="434" width="30" height="26" rx="3" fill="#161E30" stroke="#242F4A" stroke-width="1"/>
+  <rect x="736" y="434" width="30" height="26" rx="3" fill="#161E30" stroke="#242F4A" stroke-width="1"/>
+
+  <!-- Row 1: Number (y=464, h=38) — green: `,1,2,3,4 -->
+  <rect x="197" y="464" width="40" height="38" rx="4" fill="#0D3018" stroke="#336628" stroke-width="1.5"/>
+  <rect x="240" y="464" width="40" height="38" rx="4" fill="#0D3018" stroke="#336628" stroke-width="1.5"/>
+  <rect x="283" y="464" width="40" height="38" rx="4" fill="#0D3018" stroke="#336628" stroke-width="1.5"/>
+  <rect x="326" y="464" width="40" height="38" rx="4" fill="#0D3018" stroke="#336628" stroke-width="1.5"/>
+  <rect x="369" y="464" width="40" height="38" rx="4" fill="#0D3018" stroke="#336628" stroke-width="1.5"/>
+  <rect x="412" y="464" width="40" height="38" rx="4" fill="#161E30" stroke="#242F4A" stroke-width="1"/>
+  <rect x="455" y="464" width="40" height="38" rx="4" fill="#161E30" stroke="#242F4A" stroke-width="1"/>
+  <rect x="498" y="464" width="40" height="38" rx="4" fill="#161E30" stroke="#242F4A" stroke-width="1"/>
+  <rect x="541" y="464" width="40" height="38" rx="4" fill="#161E30" stroke="#242F4A" stroke-width="1"/>
+  <rect x="584" y="464" width="40" height="38" rx="4" fill="#161E30" stroke="#242F4A" stroke-width="1"/>
+  <rect x="627" y="464" width="40" height="38" rx="4" fill="#161E30" stroke="#242F4A" stroke-width="1"/>
+  <rect x="670" y="464" width="40" height="38" rx="4" fill="#161E30" stroke="#242F4A" stroke-width="1"/>
+  <rect x="713" y="464" width="40" height="38" rx="4" fill="#161E30" stroke="#242F4A" stroke-width="1"/>
+  <rect x="756" y="464" width="67" height="38" rx="4" fill="#161E30" stroke="#242F4A" stroke-width="1"/>
+
+  <!-- Row 2: QWERTY (y=506, h=38) -->
+  <rect x="197" y="506" width="59" height="38" rx="4" fill="#161E30" stroke="#242F4A" stroke-width="1"/>
+  <!-- Q,W green -->
+  <rect x="259" y="506" width="40" height="38" rx="4" fill="#0D3018" stroke="#336628" stroke-width="1.5"/>
+  <rect x="302" y="506" width="40" height="38" rx="4" fill="#0D3018" stroke="#336628" stroke-width="1.5"/>
+  <!-- E: bright green (currently pressed) -->
+  <rect x="345" y="506" width="40" height="38" rx="4" fill="#1C5A28" stroke="#6EFF6E" stroke-width="3" filter="url(#gg)"/>
+  <!-- R green -->
+  <rect x="388" y="506" width="40" height="38" rx="4" fill="#0D3018" stroke="#336628" stroke-width="1.5"/>
+  <!-- T: RED chattering -->
+  <rect x="431" y="506" width="40" height="38" rx="4" fill="#3D0A0A" stroke="#FF5050" stroke-width="3" filter="url(#gr)"/>
+  <!-- Y-\ idle -->
+  <rect x="474" y="506" width="40" height="38" rx="4" fill="#161E30" stroke="#242F4A" stroke-width="1"/>
+  <rect x="517" y="506" width="40" height="38" rx="4" fill="#161E30" stroke="#242F4A" stroke-width="1"/>
+  <rect x="560" y="506" width="40" height="38" rx="4" fill="#161E30" stroke="#242F4A" stroke-width="1"/>
+  <rect x="603" y="506" width="40" height="38" rx="4" fill="#161E30" stroke="#242F4A" stroke-width="1"/>
+  <rect x="646" y="506" width="40" height="38" rx="4" fill="#161E30" stroke="#242F4A" stroke-width="1"/>
+  <rect x="689" y="506" width="40" height="38" rx="4" fill="#161E30" stroke="#242F4A" stroke-width="1"/>
+  <rect x="732" y="506" width="40" height="38" rx="4" fill="#161E30" stroke="#242F4A" stroke-width="1"/>
+  <rect x="775" y="506" width="48" height="38" rx="4" fill="#161E30" stroke="#242F4A" stroke-width="1"/>
+
+  <!-- Row 3: ASDF (y=548, h=38) -->
+  <rect x="197" y="548" width="73" height="38" rx="4" fill="#161E30" stroke="#242F4A" stroke-width="1"/>
+  <!-- A,S,D,F,G green -->
+  <rect x="273" y="548" width="40" height="38" rx="4" fill="#0D3018" stroke="#336628" stroke-width="1.5"/>
+  <rect x="316" y="548" width="40" height="38" rx="4" fill="#0D3018" stroke="#336628" stroke-width="1.5"/>
+  <rect x="359" y="548" width="40" height="38" rx="4" fill="#0D3018" stroke="#336628" stroke-width="1.5"/>
+  <rect x="402" y="548" width="40" height="38" rx="4" fill="#0D3018" stroke="#336628" stroke-width="1.5"/>
+  <rect x="445" y="548" width="40" height="38" rx="4" fill="#0D3018" stroke="#336628" stroke-width="1.5"/>
+  <!-- H-' idle -->
+  <rect x="488" y="548" width="40" height="38" rx="4" fill="#161E30" stroke="#242F4A" stroke-width="1"/>
+  <rect x="531" y="548" width="40" height="38" rx="4" fill="#161E30" stroke="#242F4A" stroke-width="1"/>
+  <rect x="574" y="548" width="40" height="38" rx="4" fill="#161E30" stroke="#242F4A" stroke-width="1"/>
+  <rect x="617" y="548" width="40" height="38" rx="4" fill="#161E30" stroke="#242F4A" stroke-width="1"/>
+  <rect x="660" y="548" width="40" height="38" rx="4" fill="#161E30" stroke="#242F4A" stroke-width="1"/>
+  <rect x="703" y="548" width="40" height="38" rx="4" fill="#161E30" stroke="#242F4A" stroke-width="1"/>
+  <rect x="746" y="548" width="77" height="38" rx="4" fill="#161E30" stroke="#242F4A" stroke-width="1"/>
+
+  <!-- Row 4: ZXCV (y=590, h=38) -->
+  <rect x="197" y="590" width="98" height="38" rx="4" fill="#161E30" stroke="#242F4A" stroke-width="1"/>
+  <!-- Z,X,C green -->
+  <rect x="298" y="590" width="40" height="38" rx="4" fill="#0D3018" stroke="#336628" stroke-width="1.5"/>
+  <rect x="341" y="590" width="40" height="38" rx="4" fill="#0D3018" stroke="#336628" stroke-width="1.5"/>
+  <rect x="384" y="590" width="40" height="38" rx="4" fill="#0D3018" stroke="#336628" stroke-width="1.5"/>
+  <!-- V-/ idle -->
+  <rect x="427" y="590" width="40" height="38" rx="4" fill="#161E30" stroke="#242F4A" stroke-width="1"/>
+  <rect x="470" y="590" width="40" height="38" rx="4" fill="#161E30" stroke="#242F4A" stroke-width="1"/>
+  <rect x="513" y="590" width="40" height="38" rx="4" fill="#161E30" stroke="#242F4A" stroke-width="1"/>
+  <rect x="556" y="590" width="40" height="38" rx="4" fill="#161E30" stroke="#242F4A" stroke-width="1"/>
+  <rect x="599" y="590" width="40" height="38" rx="4" fill="#161E30" stroke="#242F4A" stroke-width="1"/>
+  <rect x="642" y="590" width="40" height="38" rx="4" fill="#161E30" stroke="#242F4A" stroke-width="1"/>
+  <rect x="685" y="590" width="40" height="38" rx="4" fill="#161E30" stroke="#242F4A" stroke-width="1"/>
+  <rect x="728" y="590" width="95" height="38" rx="4" fill="#161E30" stroke="#242F4A" stroke-width="1"/>
+
+  <!-- Row 5: Space (y=632, h=38) -->
+  <rect x="197" y="632" width="64" height="38" rx="4" fill="#161E30" stroke="#242F4A" stroke-width="1"/>
+  <rect x="264" y="632" width="51" height="38" rx="4" fill="#161E30" stroke="#242F4A" stroke-width="1"/>
+  <rect x="318" y="632" width="51" height="38" rx="4" fill="#161E30" stroke="#242F4A" stroke-width="1"/>
+  <!-- Space green -->
+  <rect x="372" y="632" width="213" height="38" rx="4" fill="#0D3018" stroke="#336628" stroke-width="1.5"/>
+  <rect x="588" y="632" width="51" height="38" rx="4" fill="#161E30" stroke="#242F4A" stroke-width="1"/>
+  <rect x="642" y="632" width="51" height="38" rx="4" fill="#161E30" stroke="#242F4A" stroke-width="1"/>
+  <rect x="696" y="632" width="51" height="38" rx="4" fill="#161E30" stroke="#242F4A" stroke-width="1"/>
+  <rect x="750" y="632" width="73" height="38" rx="4" fill="#161E30" stroke="#242F4A" stroke-width="1"/>
+
+  <!-- Key labels on highlighted keys -->
+  <text x="365" y="530" font-family="Consolas,monospace" font-size="18" fill="#6EFF6E" text-anchor="middle" font-weight="bold">E</text>
+  <text x="451" y="530" font-family="Consolas,monospace" font-size="18" fill="#FF5050" text-anchor="middle" font-weight="bold">T</text>
+
+  <!-- Status bar -->
+  <text x="512" y="718" text-anchor="middle" font-family="Consolas,monospace" font-size="29" fill="#6EFF6E">27 / 104  tested</text>
+  <text x="512" y="756" text-anchor="middle" font-family="Consolas,monospace" font-size="23" fill="#FF5050">⚠ chattering: T key</text>
+</svg>

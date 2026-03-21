@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg7" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1C0404"/>
+      <stop offset="100%" stop-color="#0A0202"/>
+    </linearGradient>
+    <linearGradient id="key7_a" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#4A0808"/>
+      <stop offset="100%" stop-color="#2A0404"/>
+    </linearGradient>
+    <linearGradient id="key7_b" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#380606"/>
+      <stop offset="100%" stop-color="#1E0303"/>
+    </linearGradient>
+    <filter id="red_glow">
+      <feGaussianBlur stdDeviation="14" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="warn_glow">
+      <feGaussianBlur stdDeviation="20" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background: deep crimson dark -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg7)"/>
+
+  <!-- Ambient red glow -->
+  <radialGradient id="amb" cx="50%" cy="50%" r="50%">
+    <stop offset="0%" stop-color="#FF0000" stop-opacity="0.08"/>
+    <stop offset="100%" stop-color="#FF0000" stop-opacity="0"/>
+  </radialGradient>
+  <rect width="1024" height="1024" rx="190" fill="url(#amb)"/>
+
+  <!-- Three stacked/bouncing key duplicates (chattering = rapid repeat) -->
+  <!-- Shadow key 1 (lowest, farthest back) -->
+  <rect x="262" y="660" width="500" height="200" rx="20" fill="#1A0303" opacity="0.5"/>
+
+  <!-- Shadow key 2 (middle) -->
+  <rect x="262" y="590" width="500" height="200" rx="20" fill="url(#key7_b)" stroke="#5A0A0A" stroke-width="2" opacity="0.7"/>
+  <!-- Key label on shadow 2 -->
+  <text x="512" y="712" text-anchor="middle" font-family="Consolas,monospace" font-size="80" font-weight="bold" fill="#440808" opacity="0.6">A</text>
+
+  <!-- Main key (front, brightest red) -->
+  <rect x="262" y="460" width="500" height="200" rx="20" fill="url(#key7_a)" stroke="#FF4040" stroke-width="3.5" filter="url(#red_glow)"/>
+  <!-- Key shine -->
+  <rect x="278" y="476" width="468" height="50" rx="12" fill="white" opacity="0.05"/>
+  <!-- Key label -->
+  <text x="512" y="580" text-anchor="middle" font-family="Consolas,monospace" font-size="100" font-weight="bold" fill="#FF5050" filter="url(#red_glow)">A</text>
+
+  <!-- Warning triangle above -->
+  <polygon points="512,148 650,370 374,370" fill="none" stroke="#FF8800" stroke-width="12" stroke-linejoin="round" filter="url(#warn_glow)"/>
+  <polygon points="512,148 650,370 374,370" fill="none" stroke="#FFAA00" stroke-width="6" stroke-linejoin="round"/>
+  <!-- ! in triangle -->
+  <text x="512" y="340" text-anchor="middle" font-family="Consolas,monospace" font-size="100" font-weight="bold" fill="#FFAA00">!</text>
+
+  <!-- Warning text -->
+  <text x="512" y="424" text-anchor="middle" font-family="Consolas,monospace" font-size="26" fill="#FF6600">CHATTERING DETECTED</text>
+
+  <!-- Info text below -->
+  <text x="512" y="730" text-anchor="middle" font-family="Consolas,monospace" font-size="28" fill="#660C0C">A key  ·  15.2ms interval</text>
+  <text x="512" y="768" text-anchor="middle" font-family="Consolas,monospace" font-size="28" fill="#660C0C">Below 50ms threshold</text>
+
+  <!-- Red indicator dots (signal bounce) -->
+  <circle cx="360" cy="820" r="12" fill="#FF3300" filter="url(#red_glow)"/>
+  <circle cx="420" cy="808" r="12" fill="#CC2200" opacity="0.7"/>
+  <circle cx="480" cy="820" r="12" fill="#FF3300" filter="url(#red_glow)"/>
+  <circle cx="540" cy="808" r="12" fill="#CC2200" opacity="0.7"/>
+  <circle cx="600" cy="820" r="12" fill="#FF3300" filter="url(#red_glow)"/>
+  <circle cx="660" cy="808" r="12" fill="#CC2200" opacity="0.5"/>
+
+  <!-- VK code small text -->
+  <text x="512" y="880" text-anchor="middle" font-family="Consolas,monospace" font-size="24" fill="#440808">VK=0x41  SC=0x1E</text>
+</svg>

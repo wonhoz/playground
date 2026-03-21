@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>Key.Test — Icon Candidates (2026-03-21)</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #0F1620;
+    color: #C0C8D8;
+    font-family: Consolas, 'Courier New', monospace;
+    padding: 40px 24px;
+    min-height: 100vh;
+  }
+  header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+  header h1 {
+    font-size: 28px;
+    color: #7B68EE;
+    letter-spacing: 6px;
+    margin-bottom: 8px;
+  }
+  header p {
+    font-size: 14px;
+    color: #4A5A7A;
+  }
+  .project-info {
+    background: #0A0F1E;
+    border: 1px solid #1E2D50;
+    border-radius: 12px;
+    padding: 20px 28px;
+    max-width: 900px;
+    margin: 0 auto 48px;
+    font-size: 13px;
+    line-height: 1.8;
+  }
+  .project-info .label { color: #4A5A7A; }
+  .project-info .value { color: #9090C8; }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 32px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .card {
+    background: #0A0F1E;
+    border: 1px solid #1E2D50;
+    border-radius: 16px;
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    cursor: pointer;
+  }
+  .card:hover {
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 16px 48px rgba(123, 104, 238, 0.25);
+    border-color: #7B68EE;
+  }
+  .icon-wrap {
+    background: #080C18;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .icon-wrap img {
+    width: 200px;
+    height: 200px;
+    border-radius: 32px;
+    display: block;
+  }
+  .meta {
+    padding: 16px 18px 20px;
+  }
+  .meta .num {
+    font-size: 11px;
+    color: #3A4A6A;
+    margin-bottom: 4px;
+    letter-spacing: 2px;
+  }
+  .meta .concept {
+    font-size: 14px;
+    color: #9090C8;
+    margin-bottom: 8px;
+    line-height: 1.4;
+  }
+  .meta .tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .tag {
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 20px;
+    letter-spacing: 1px;
+  }
+  .tag.type-literal  { background: #1A2440; color: #6B78A8; border: 1px solid #2A3860; }
+  .tag.type-metaphor { background: #1A1A3A; color: #7B68EE; border: 1px solid #2A2A5A; }
+  .tag.type-hybrid   { background: #1A2A1A; color: #50A060; border: 1px solid #2A4A2A; }
+  .tag.pattern { background: #201428; color: #9060C0; border: 1px solid #382040; }
+  .palette {
+    display: flex;
+    gap: 4px;
+    margin-top: 10px;
+    align-items: center;
+  }
+  .palette-label { font-size: 11px; color: #3A4A6A; margin-right: 4px; }
+  .swatch {
+    width: 18px;
+    height: 18px;
+    border-radius: 4px;
+    border: 1px solid #1E2D50;
+  }
+  .size-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 20px;
+    background: #080C18;
+    border-top: 1px solid #1A2440;
+  }
+  .size-row img {
+    border-radius: 4px;
+    image-rendering: pixelated;
+  }
+  .size-label { font-size: 10px; color: #2A3A5A; }
+  footer {
+    text-align: center;
+    margin-top: 60px;
+    font-size: 12px;
+    color: #2A3A5A;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>⌨ KEY.TEST — Icon Candidates</h1>
+  <p>Generated: 2026-03-21 19:06 &nbsp;|&nbsp; Session: Candidate_20260321_1906 &nbsp;|&nbsp; Count: 10</p>
+</header>
+
+<div class="project-info">
+  <div><span class="label">App&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: </span><span class="value">Key.Test</span></div>
+  <div><span class="label">Summary : </span><span class="value">저수준 키보드 훅으로 채터링·고착·N-Key Rollover를 실시간 진단하는 키보드 테스터</span></div>
+  <div><span class="label">Features: </span><span class="value">104키 레이아웃 시각화 · 채터링 감지(50ms) · 고착 감지(3초) · VK/스캔코드 표시 · 이벤트 로그 · NKRO 측정</span></div>
+  <div><span class="label">Domain&nbsp;&nbsp;: </span><span class="value">키보드, 키 진단, 채터링, 점등 레이아웃, 이벤트 로그, VK코드</span></div>
+</div>
+
+<div class="grid">
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_01.svg" alt="icon_01"/></div>
+    <div class="meta">
+      <div class="num">ICON 01</div>
+      <div class="concept">104키 레이아웃 미니맵 — 앱 UI 직접 표현 (초록 점등 + 빨간 채터링 키)</div>
+      <div class="tags">
+        <span class="tag type-literal">literal</span>
+        <span class="tag pattern">중앙 심볼</span>
+      </div>
+      <div class="palette">
+        <span class="palette-label">팔레트</span>
+        <span class="swatch" style="background:#0D1624" title="다크 네이비 배경"></span>
+        <span class="swatch" style="background:#0D3018" title="초록 키 배경"></span>
+        <span class="swatch" style="background:#6EFF6E" title="초록 네온"></span>
+        <span class="swatch" style="background:#3D0A0A" title="레드 키 배경"></span>
+        <span class="swatch" style="background:#FF5050" title="레드 네온"></span>
+        <span class="swatch" style="background:#7B68EE" title="퍼플 타이틀"></span>
+      </div>
+    </div>
+    <div class="size-row">
+      <div><img src="icon_01.svg" width="64" height="64"/><div class="size-label">64px</div></div>
+      <div><img src="icon_01.svg" width="32" height="32"/><div class="size-label">32px</div></div>
+      <div><img src="icon_01.svg" width="16" height="16"/><div class="size-label">16px</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_02.svg" alt="icon_02"/></div>
+    <div class="meta">
+      <div class="num">ICON 02</div>
+      <div class="concept">이벤트 로그 터미널 — "↓ A  VK=0x41" 모노스페이스 로그 뷰어</div>
+      <div class="tags">
+        <span class="tag type-literal">literal</span>
+        <span class="tag pattern">레이어드</span>
+      </div>
+      <div class="palette">
+        <span class="palette-label">팔레트</span>
+        <span class="swatch" style="background:#060A18" title="딥 블루 배경"></span>
+        <span class="swatch" style="background:#111A36" title="윈도우 크롬"></span>
+        <span class="swatch" style="background:#7B68EE" title="퍼플 (일반 로그)"></span>
+        <span class="swatch" style="background:#00CFFF" title="시안 (현재 키)"></span>
+        <span class="swatch" style="background:#FF6B6B" title="레드 (채터링 경고)"></span>
+      </div>
+    </div>
+    <div class="size-row">
+      <div><img src="icon_02.svg" width="64" height="64"/><div class="size-label">64px</div></div>
+      <div><img src="icon_02.svg" width="32" height="32"/><div class="size-label">32px</div></div>
+      <div><img src="icon_02.svg" width="16" height="16"/><div class="size-label">16px</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap" style="background:#D0F4E4;"><img src="icon_03.svg" alt="icon_03"/></div>
+    <div class="meta">
+      <div class="num">ICON 03</div>
+      <div class="concept">Enter 키 클로즈업 + 초록 체크마크 — 테스트 완료 상태</div>
+      <div class="tags">
+        <span class="tag type-literal">literal</span>
+        <span class="tag pattern">중앙 심볼</span>
+      </div>
+      <div class="palette">
+        <span class="palette-label">팔레트</span>
+        <span class="swatch" style="background:#E8FFF4" title="민트 배경"></span>
+        <span class="swatch" style="background:#FFFFFF" title="키 하이라이트"></span>
+        <span class="swatch" style="background:#3A4A68" title="키 심볼 다크 슬레이트"></span>
+        <span class="swatch" style="background:#00D86E" title="초록 체크"></span>
+      </div>
+    </div>
+    <div class="size-row">
+      <div><img src="icon_03.svg" width="64" height="64"/><div class="size-label">64px</div></div>
+      <div><img src="icon_03.svg" width="32" height="32"/><div class="size-label">32px</div></div>
+      <div><img src="icon_03.svg" width="16" height="16"/><div class="size-label">16px</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap" style="background:#080808;"><img src="icon_04.svg" alt="icon_04"/></div>
+    <div class="meta">
+      <div class="num">ICON 04</div>
+      <div class="concept">채터링 오실로스코프 파형 — 정상 펄스 vs 이중 바운스 신호</div>
+      <div class="tags">
+        <span class="tag type-metaphor">metaphor</span>
+        <span class="tag pattern">대각선/동적</span>
+      </div>
+      <div class="palette">
+        <span class="palette-label">팔레트</span>
+        <span class="swatch" style="background:#0A0A0A" title="매트 블랙"></span>
+        <span class="swatch" style="background:#1A1A1A" title="그리드"></span>
+        <span class="swatch" style="background:#FFB800" title="골드 파형"></span>
+        <span class="swatch" style="background:#FF6600" title="오렌지 채터링"></span>
+        <span class="swatch" style="background:#FF2200" title="레드 피크"></span>
+      </div>
+    </div>
+    <div class="size-row">
+      <div><img src="icon_04.svg" width="64" height="64"/><div class="size-label">64px</div></div>
+      <div><img src="icon_04.svg" width="32" height="32"/><div class="size-label">32px</div></div>
+      <div><img src="icon_04.svg" width="16" height="16"/><div class="size-label">16px</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap" style="background:#EEE4CC;"><img src="icon_05.svg" alt="icon_05"/></div>
+    <div class="meta">
+      <div class="num">ICON 05</div>
+      <div class="concept">키보드 + 돋보기 — 진단 도구 (확대경으로 채터링 키 점검)</div>
+      <div class="tags">
+        <span class="tag type-hybrid">hybrid</span>
+        <span class="tag pattern">레이어드</span>
+      </div>
+      <div class="palette">
+        <span class="palette-label">팔레트</span>
+        <span class="swatch" style="background:#FFF8E7" title="따뜻한 아이보리 배경"></span>
+        <span class="swatch" style="background:#F0E8D4" title="키보드 본체"></span>
+        <span class="swatch" style="background:#D07820" title="돋보기 프레임"></span>
+        <span class="swatch" style="background:#C04000" title="T키 (문제키) 텍스트"></span>
+      </div>
+    </div>
+    <div class="size-row">
+      <div><img src="icon_05.svg" width="64" height="64"/><div class="size-label">64px</div></div>
+      <div><img src="icon_05.svg" width="32" height="32"/><div class="size-label">32px</div></div>
+      <div><img src="icon_05.svg" width="16" height="16"/><div class="size-label">16px</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap" style="background:#E8EAF4;"><img src="icon_06.svg" alt="icon_06"/></div>
+    <div class="meta">
+      <div class="num">ICON 06</div>
+      <div class="concept">진행 카운터 "37/104" — 테스트된 키 현황 + 프로그레스 바</div>
+      <div class="tags">
+        <span class="tag type-literal">literal</span>
+        <span class="tag pattern">레이어드</span>
+      </div>
+      <div class="palette">
+        <span class="palette-label">팔레트</span>
+        <span class="swatch" style="background:#FFFFFF" title="화이트 배경"></span>
+        <span class="swatch" style="background:#F0F4FF" title="라이트 블루 틴트"></span>
+        <span class="swatch" style="background:#3A2AEE" title="인디고 숫자"></span>
+        <span class="swatch" style="background:#7B68EE" title="퍼플 프로그레스 바"></span>
+        <span class="swatch" style="background:#00C864" title="초록 Issues OK"></span>
+      </div>
+    </div>
+    <div class="size-row">
+      <div><img src="icon_06.svg" width="64" height="64"/><div class="size-label">64px</div></div>
+      <div><img src="icon_06.svg" width="32" height="32"/><div class="size-label">32px</div></div>
+      <div><img src="icon_06.svg" width="16" height="16"/><div class="size-label">16px</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap" style="background:#100204;"><img src="icon_07.svg" alt="icon_07"/></div>
+    <div class="meta">
+      <div class="num">ICON 07</div>
+      <div class="concept">채터링 경고 Alert — 빨간 키 + 경고 삼각형 + 이중 바운스 연출</div>
+      <div class="tags">
+        <span class="tag type-hybrid">hybrid</span>
+        <span class="tag pattern">공간/장면</span>
+      </div>
+      <div class="palette">
+        <span class="palette-label">팔레트</span>
+        <span class="swatch" style="background:#0A0202" title="딥 크림슨 배경"></span>
+        <span class="swatch" style="background:#3D0A0A" title="레드 키 배경"></span>
+        <span class="swatch" style="background:#FF5050" title="레드 네온"></span>
+        <span class="swatch" style="background:#FF8800" title="경고 삼각형 오렌지"></span>
+        <span class="swatch" style="background:#FFAA00" title="느낌표 골드"></span>
+      </div>
+    </div>
+    <div class="size-row">
+      <div><img src="icon_07.svg" width="64" height="64"/><div class="size-label">64px</div></div>
+      <div><img src="icon_07.svg" width="32" height="32"/><div class="size-label">32px</div></div>
+      <div><img src="icon_07.svg" width="16" height="16"/><div class="size-label">16px</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap" style="background:#0A0418;"><img src="icon_08.svg" alt="icon_08"/></div>
+    <div class="meta">
+      <div class="num">ICON 08</div>
+      <div class="concept">N-Key Rollover — 동시 눌린 7키 클러스터 + 동심원 파동</div>
+      <div class="tags">
+        <span class="tag type-metaphor">metaphor</span>
+        <span class="tag pattern">기하학 추상</span>
+      </div>
+      <div class="palette">
+        <span class="palette-label">팔레트</span>
+        <span class="swatch" style="background:#0A0418" title="딥 인디고 배경"></span>
+        <span class="swatch" style="background:#2A1050" title="키 배경"></span>
+        <span class="swatch" style="background:#9B59FF" title="퍼플 네온"></span>
+        <span class="swatch" style="background:#BB99FF" title="라벤더 하이라이트"></span>
+        <span class="swatch" style="background:#C890FF" title="연보라 텍스트"></span>
+      </div>
+    </div>
+    <div class="size-row">
+      <div><img src="icon_08.svg" width="64" height="64"/><div class="size-label">64px</div></div>
+      <div><img src="icon_08.svg" width="32" height="32"/><div class="size-label">32px</div></div>
+      <div><img src="icon_08.svg" width="16" height="16"/><div class="size-label">16px</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap" style="background:#1A0028;"><img src="icon_09.svg" alt="icon_09"/></div>
+    <div class="meta">
+      <div class="num">ICON 09</div>
+      <div class="concept">EKG 심장 박동선 + 키 실루엣 — 키보드 건강 진단 은유</div>
+      <div class="tags">
+        <span class="tag type-metaphor">metaphor</span>
+        <span class="tag pattern">실루엣/캐릭터</span>
+      </div>
+      <div class="palette">
+        <span class="palette-label">팔레트</span>
+        <span class="swatch" style="background:#1A0028" title="딥 마젠타 배경"></span>
+        <span class="swatch" style="background:#420058" title="키 퍼플"></span>
+        <span class="swatch" style="background:#FF3399" title="핫 핑크 EKG"></span>
+        <span class="swatch" style="background:#FF66BB" title="라이트 핑크 피크"></span>
+        <span class="swatch" style="background:#00C864" title="초록 체크"></span>
+      </div>
+    </div>
+    <div class="size-row">
+      <div><img src="icon_09.svg" width="64" height="64"/><div class="size-label">64px</div></div>
+      <div><img src="icon_09.svg" width="32" height="32"/><div class="size-label">32px</div></div>
+      <div><img src="icon_09.svg" width="16" height="16"/><div class="size-label">16px</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap" style="background:#001810;"><img src="icon_10.svg" alt="icon_10"/></div>
+    <div class="meta">
+      <div class="num">ICON 10</div>
+      <div class="concept">VK 코드↔키 이름 변환 "0x41 → A" — VK Code Inspector</div>
+      <div class="tags">
+        <span class="tag type-literal">literal</span>
+        <span class="tag pattern">중앙 심볼</span>
+      </div>
+      <div class="palette">
+        <span class="palette-label">팔레트</span>
+        <span class="swatch" style="background:#001A10" title="딥 에메랄드 배경"></span>
+        <span class="swatch" style="background:#005C34" title="카드 그린"></span>
+        <span class="swatch" style="background:#00FF88" title="네온 그린 (0x41 / A)"></span>
+        <span class="swatch" style="background:#00CC66" title="미디엄 그린"></span>
+        <span class="swatch" style="background:#00AA55" title="화살표"></span>
+      </div>
+    </div>
+    <div class="size-row">
+      <div><img src="icon_10.svg" width="64" height="64"/><div class="size-label">64px</div></div>
+      <div><img src="icon_10.svg" width="32" height="32"/><div class="size-label">32px</div></div>
+      <div><img src="icon_10.svg" width="16" height="16"/><div class="size-label">16px</div></div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p>Key.Test &nbsp;·&nbsp; Candidate_20260321_1906 &nbsp;·&nbsp; 10 icons generated &nbsp;·&nbsp; Claude Code</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg10" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#004428"/>
+      <stop offset="100%" stop-color="#001A10"/>
+    </linearGradient>
+    <linearGradient id="card10" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#005C34"/>
+      <stop offset="100%" stop-color="#003820"/>
+    </linearGradient>
+    <filter id="hex_glow">
+      <feGaussianBlur stdDeviation="8" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="letter_glow">
+      <feGaussianBlur stdDeviation="14" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background: emerald green -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg10)"/>
+
+  <!-- Ambient glow center -->
+  <radialGradient id="amb10" cx="50%" cy="50%" r="40%">
+    <stop offset="0%" stop-color="#00FF88" stop-opacity="0.10"/>
+    <stop offset="100%" stop-color="#00FF88" stop-opacity="0"/>
+  </radialGradient>
+  <rect width="1024" height="1024" rx="190" fill="url(#amb10)"/>
+
+  <!-- Title -->
+  <text x="512" y="188" text-anchor="middle" font-family="Consolas,monospace" font-size="36" fill="#006644" letter-spacing="4">KEY.TEST</text>
+  <text x="512" y="230" text-anchor="middle" font-family="Consolas,monospace" font-size="24" fill="#004430">VK Code Inspector</text>
+
+  <!-- Top card: Hex code input -->
+  <rect x="162" y="280" width="700" height="190" rx="20" fill="url(#card10)" stroke="#00AA60" stroke-width="2"/>
+  <text x="240" y="338" font-family="Consolas,monospace" font-size="22" fill="#008844">VK CODE</text>
+  <text x="512" y="430" text-anchor="middle" font-family="Consolas,monospace" font-size="106" font-weight="bold" fill="#00FF88" letter-spacing="8" filter="url(#hex_glow)">0x41</text>
+
+  <!-- Arrow -->
+  <text x="512" y="534" text-anchor="middle" font-family="Consolas,monospace" font-size="60" fill="#00AA55" filter="url(#hex_glow)">↓</text>
+
+  <!-- Bottom card: Key name result -->
+  <rect x="162" y="570" width="700" height="220" rx="20" fill="#001C10" stroke="#00FF88" stroke-width="3" filter="url(#hex_glow)"/>
+  <text x="240" y="628" font-family="Consolas,monospace" font-size="22" fill="#00AA60">KEY NAME</text>
+  <text x="512" y="754" text-anchor="middle" font-family="Consolas,monospace" font-size="180" font-weight="bold" fill="#00FF88" filter="url(#letter_glow)">A</text>
+
+  <!-- VK detail row -->
+  <rect x="162" y="818" width="340" height="76" rx="14" fill="#003020" stroke="#006644" stroke-width="1.5"/>
+  <text x="200" y="850" font-family="Consolas,monospace" font-size="22" fill="#008844">SCAN CODE</text>
+  <text x="200" y="882" font-family="Consolas,monospace" font-size="28" font-weight="bold" fill="#00CC66">0x1E</text>
+
+  <rect x="522" y="818" width="340" height="76" rx="14" fill="#003020" stroke="#006644" stroke-width="1.5"/>
+  <text x="560" y="850" font-family="Consolas,monospace" font-size="22" fill="#008844">PRESSES</text>
+  <text x="560" y="882" font-family="Consolas,monospace" font-size="28" font-weight="bold" fill="#00CC66">47</text>
+</svg>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>Char.Art — Icon Candidates (20260321_1423)</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #0D1117;
+    color: #E6EDF3;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    padding: 40px 32px;
+    min-height: 100vh;
+  }
+  h1 { font-size: 22px; font-weight: 600; margin-bottom: 6px; color: #F0F6FC; }
+  .subtitle { font-size: 13px; color: #8B949E; margin-bottom: 36px; }
+  .grid { display: flex; flex-wrap: wrap; gap: 28px; }
+  .card {
+    background: #161B22;
+    border: 1px solid #30363D;
+    border-radius: 12px;
+    padding: 20px;
+    width: 220px;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+    cursor: pointer;
+  }
+  .card:hover {
+    transform: scale(1.08);
+    box-shadow: 0 8px 32px rgba(16,185,129,0.22);
+    border-color: #10B981;
+  }
+  .card img {
+    width: 160px;
+    height: 160px;
+    display: block;
+    margin: 0 auto 14px;
+    border-radius: 24px;
+    background: #0D1117;
+  }
+  .card-num { font-size: 11px; color: #6E7681; margin-bottom: 4px; }
+  .card-title { font-size: 14px; font-weight: 600; color: #E6EDF3; margin-bottom: 6px; }
+  .card-concept { font-size: 12px; color: #8B949E; margin-bottom: 8px; line-height: 1.5; }
+  .palette { display: flex; gap: 5px; flex-wrap: wrap; }
+  .swatch {
+    width: 18px; height: 18px; border-radius: 4px;
+    border: 1px solid rgba(255,255,255,0.1);
+    display: inline-block;
+  }
+  .tag {
+    display: inline-block;
+    font-size: 10px;
+    padding: 2px 7px;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+  .tag-literal   { background: #1C3D2A; color: #56D364; }
+  .tag-metaphor  { background: #1A2D4A; color: #79C0FF; }
+  .tag-hybrid    { background: #3A2060; color: #D2A8FF; }
+</style>
+</head>
+<body>
+<h1>Char.Art — 아이콘 후보</h1>
+<p class="subtitle">Candidate_20260321_1423 &nbsp;|&nbsp; 이미지를 ASCII/Unicode 문자 아트로 변환하는 앱</p>
+
+<div class="grid">
+
+  <div class="card">
+    <img src="icon_01.svg" alt="icon_01">
+    <div class="card-num">icon_01</div>
+    <span class="tag tag-literal">literal</span>
+    <div class="card-title">문자아트 얼굴</div>
+    <div class="card-concept">구성: 공간/장면<br>@#%*.으로 구성한 얼굴 그리드, 실제 변환 결과 미리보기</div>
+    <div class="palette">
+      <span class="swatch" style="background:#0A0A0A"></span>
+      <span class="swatch" style="background:#777777"></span>
+      <span class="swatch" style="background:#EEE"></span>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="icon_02.svg" alt="icon_02">
+    <div class="card-num">icon_02</div>
+    <span class="tag tag-literal">literal</span>
+    <div class="card-title">밝기→문자 밀도 스케일</div>
+    <div class="card-concept">구성: 레이어드<br>어둠(@)에서 밝음(□)으로 크기·밀도가 줄어드는 시각화</div>
+    <div class="palette">
+      <span class="swatch" style="background:#111827"></span>
+      <span class="swatch" style="background:#1E293B"></span>
+      <span class="swatch" style="background:#FFFFFF"></span>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="icon_03.svg" alt="icon_03">
+    <div class="card-num">icon_03</div>
+    <span class="tag tag-metaphor">metaphor</span>
+    <div class="card-title">문자로 구성된 하트</div>
+    <div class="card-concept">구성: 실루엣/캐릭터<br>보라 계열 @ # % * 문자들이 하트 실루엣을 이룸</div>
+    <div class="palette">
+      <span class="swatch" style="background:#1E1B4B"></span>
+      <span class="swatch" style="background:#6366F1"></span>
+      <span class="swatch" style="background:#E0E7FF"></span>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="icon_04.svg" alt="icon_04">
+    <div class="card-num">icon_04</div>
+    <span class="tag tag-hybrid">hybrid</span>
+    <div class="card-title">픽셀 → 문자 변환</div>
+    <div class="card-concept">구성: 대각선/동적<br>픽셀 그리드에서 화살표로 문자 배열로 변환되는 과정</div>
+    <div class="palette">
+      <span class="swatch" style="background:#F97316"></span>
+      <span class="swatch" style="background:#C2410C"></span>
+      <span class="swatch" style="background:#FFFFFF"></span>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="icon_05.svg" alt="icon_05">
+    <div class="card-num">icon_05</div>
+    <span class="tag tag-metaphor">metaphor</span>
+    <div class="card-title">동심 밀도 파동</div>
+    <div class="card-concept">구성: 기하학추상<br>중심(@)→바깥(.)으로 밀도가 감소하는 문자 격자 파동</div>
+    <div class="palette">
+      <span class="swatch" style="background:#0C1445"></span>
+      <span class="swatch" style="background:#1E88E5"></span>
+      <span class="swatch" style="background:#90CAF9"></span>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="icon_06.svg" alt="icon_06">
+    <div class="card-num">icon_06</div>
+    <span class="tag tag-hybrid">hybrid</span>
+    <div class="card-title">ASCII 별 실루엣</div>
+    <div class="card-concept">구성: 실루엣/캐릭터<br>에메랄드 계열 @#%*+- 문자들이 5각별 형태를 이룸</div>
+    <div class="palette">
+      <span class="swatch" style="background:#064E3B"></span>
+      <span class="swatch" style="background:#10B981"></span>
+      <span class="swatch" style="background:#6EE7B7"></span>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

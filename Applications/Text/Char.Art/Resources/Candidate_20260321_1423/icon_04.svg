@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg4b" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#F97316"/>
+      <stop offset="100%" stop-color="#C2410C"/>
+    </linearGradient>
+    <clipPath id="c4b"><rect width="1024" height="1024" rx="190"/></clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg4b)"/>
+  <circle cx="200" cy="200" r="240" fill="#EA580C" opacity="0.25" clip-path="url(#c4b)"/>
+  <circle cx="820" cy="820" r="200" fill="#9A3412" opacity="0.25" clip-path="url(#c4b)"/>
+
+  <!-- Layer 2: 픽셀 → 문자 확대 표현 -->
+  <!-- 왼쪽: 픽셀 그리드 (작은 사각형) -->
+  <g transform="translate(150, 250)">
+    <!-- 픽셀들 (흑백 이미지) -->
+    <rect x="0"  y="0"  width="50" height="50" rx="4" fill="#FFFFFF" opacity="0.9"/>
+    <rect x="56" y="0"  width="50" height="50" rx="4" fill="#AAAAAA" opacity="0.9"/>
+    <rect x="112" y="0" width="50" height="50" rx="4" fill="#555555" opacity="0.9"/>
+    <rect x="168" y="0" width="50" height="50" rx="4" fill="#111111" opacity="0.9"/>
+    <rect x="0"  y="56" width="50" height="50" rx="4" fill="#CCCCCC" opacity="0.9"/>
+    <rect x="56" y="56" width="50" height="50" rx="4" fill="#888888" opacity="0.9"/>
+    <rect x="112" y="56" width="50" height="50" rx="4" fill="#333333" opacity="0.9"/>
+    <rect x="168" y="56" width="50" height="50" rx="4" fill="#000000" opacity="0.9"/>
+    <rect x="0"  y="112" width="50" height="50" rx="4" fill="#EEEEEE" opacity="0.9"/>
+    <rect x="56" y="112" width="50" height="50" rx="4" fill="#666666" opacity="0.9"/>
+    <rect x="112" y="112" width="50" height="50" rx="4" fill="#222222" opacity="0.9"/>
+    <rect x="168" y="112" width="50" height="50" rx="4" fill="#000000" opacity="0.9"/>
+  </g>
+
+  <!-- 중앙 → 화살표 -->
+  <g transform="translate(512,512)">
+    <path d="M -80,0 L 80,0" stroke="white" stroke-width="44" stroke-linecap="round"/>
+    <polygon points="50,-30 110,0 50,30" fill="white"/>
+  </g>
+
+  <!-- 오른쪽: 문자로 변환된 결과 (큰 텍스트) -->
+  <g transform="translate(590, 250)" font-family="Consolas,monospace" font-weight="bold">
+    <text x="0" y="56" font-size="62" fill="#FFFFFF"> </text>
+    <text x="64" y="56" font-size="62" fill="#DDDDDD">+</text>
+    <text x="128" y="56" font-size="62" fill="#999999">*</text>
+    <text x="192" y="56" font-size="62" fill="#444444">@</text>
+    <text x="0" y="120" font-size="62" fill="#EEEEEE">.</text>
+    <text x="64" y="120" font-size="62" fill="#777777">-</text>
+    <text x="128" y="120" font-size="62" fill="#333333">#</text>
+    <text x="192" y="120" font-size="62" fill="#111111">@</text>
+    <text x="0" y="184" font-size="62" fill="#FFFFFF"> </text>
+    <text x="64" y="184" font-size="62" fill="#555555">%</text>
+    <text x="128" y="184" font-size="62" fill="#222222">#</text>
+    <text x="192" y="184" font-size="62" fill="#000000">@</text>
+  </g>
+
+  <!-- Layer 3: 하단 설명 -->
+  <rect x="200" y="720" width="624" height="66" rx="18" fill="#7C2D12" opacity="0.8"/>
+  <text x="512" y="762" text-anchor="middle" font-family="Consolas,monospace" font-size="32" fill="#FED7AA">pixel brightness → char</text>
+</svg>

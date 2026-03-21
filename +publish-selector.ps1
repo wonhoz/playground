@@ -1,7 +1,6 @@
 param([string]$OutFile)
 Add-Type -AssemblyName System.Windows.Forms
 Add-Type -AssemblyName System.Drawing
-[System.Windows.Forms.Application]::EnableVisualStyles()
 
 try {
     Add-Type -TypeDefinition @"

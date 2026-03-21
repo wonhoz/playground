@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg5c" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#78350F"/>
+      <stop offset="100%" stop-color="#92400E"/>
+    </linearGradient>
+    <clipPath id="c5c"><rect width="1024" height="1024" rx="190"/></clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg5c)"/>
+  <circle cx="180" cy="820" r="280" fill="#B45309" opacity="0.2" clip-path="url(#c5c)"/>
+  <circle cx="820" cy="200" r="220" fill="#D97706" opacity="0.15" clip-path="url(#c5c)"/>
+
+  <!-- Layer 2: 말풍선 안에 텍스트 + ♪ 음표 (공간/장면 hybrid) -->
+  <!-- 큰 말풍선 -->
+  <rect x="200" y="220" width="620" height="330" rx="36" fill="#FEF3C7"/>
+  <!-- 말풍선 꼬리 -->
+  <polygon points="320,550 280,640 400,550" fill="#FEF3C7"/>
+
+  <!-- 텍스트 내용 -->
+  <text x="240" y="295" font-family="Consolas,monospace" font-size="28" fill="#78350F">Hello! Welcome to</text>
+  <text x="240" y="333" font-family="Consolas,monospace" font-size="28" fill="#92400E">Echo.Text — your</text>
+  <text x="240" y="371" font-family="Consolas,monospace" font-size="28" fill="#78350F">personal TTS tool.</text>
+
+  <!-- 구분선 -->
+  <line x1="240" y1="395" x2="780" y2="395" stroke="#F59E0B" stroke-width="2" opacity="0.5"/>
+
+  <!-- 컨트롤 UI 힌트 -->
+  <text x="240" y="430" font-family="Segoe UI,sans-serif" font-size="20" fill="#B45309">Rate  </text>
+  <rect x="300" y="416" width="120" height="10" rx="5" fill="#F59E0B" opacity="0.4"/>
+  <rect x="300" y="416" width="70" height="10" rx="5" fill="#F59E0B" opacity="0.9"/>
+  <circle cx="370" cy="421" r="8" fill="#FBBF24"/>
+  <text x="450" y="430" font-family="Segoe UI,sans-serif" font-size="20" fill="#B45309">Vol </text>
+  <rect x="492" y="416" width="100" height="10" rx="5" fill="#F59E0B" opacity="0.4"/>
+  <rect x="492" y="416" width="85" height="10" rx="5" fill="#F59E0B" opacity="0.9"/>
+  <circle cx="577" cy="421" r="8" fill="#FBBF24"/>
+
+  <!-- 음표들 (오른쪽 위) -->
+  <text x="700" y="290" font-family="Segoe UI Emoji,serif" font-size="64" fill="#F59E0B" opacity="0.85">♪</text>
+  <text x="756" y="340" font-family="Segoe UI Emoji,serif" font-size="44" fill="#FBBF24" opacity="0.65">♫</text>
+  <text x="720" y="370" font-family="Segoe UI Emoji,serif" font-size="30" fill="#FDE68A" opacity="0.5">♪</text>
+
+  <!-- Layer 3: 재생 버튼 (말풍선 꼬리 아래) -->
+  <circle cx="350" cy="700" r="72" fill="#F59E0B"/>
+  <polygon points="332,672 392,700 332,728" fill="#FFF8DC"/>
+  <!-- WAV 저장 버튼 힌트 -->
+  <rect x="460" y="668" width="160" height="64" rx="16" fill="#B45309"/>
+  <text x="540" y="706" text-anchor="middle" font-family="Consolas,monospace" font-size="24" fill="#FEF3C7">▼ WAV</text>
+</svg>

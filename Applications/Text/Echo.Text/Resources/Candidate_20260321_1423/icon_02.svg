@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg2c" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1C1C2E"/>
+      <stop offset="100%" stop-color="#12121A"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg2c)"/>
+
+  <!-- Layer 2: 텍스트 에디터 UI + 재생 버튼 (레이어드) -->
+  <!-- 에디터 창 -->
+  <rect x="160" y="200" width="704" height="500" rx="20" fill="#1E1E30"/>
+  <rect x="160" y="200" width="704" height="500" rx="20" fill="none" stroke="#2D2D4A" stroke-width="4"/>
+
+  <!-- 창 상단 타이틀바 -->
+  <rect x="160" y="200" width="704" height="48" rx="20" fill="#252538"/>
+  <rect x="160" y="228" width="704" height="20" fill="#252538"/>
+  <!-- 타이틀바 아이콘들 -->
+  <circle cx="200" cy="224" r="8" fill="#FF5F57"/>
+  <circle cx="228" cy="224" r="8" fill="#FFBD2E"/>
+  <circle cx="256" cy="224" r="8" fill="#28CA42"/>
+  <text x="512" y="232" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="20" fill="#555577">Echo.Text</text>
+
+  <!-- 텍스트 에디터 내용 -->
+  <text x="196" y="300" font-family="Consolas,monospace" font-size="22" fill="#A0A0CC">Hello, world! This is a</text>
+  <text x="196" y="332" font-family="Consolas,monospace" font-size="22" fill="#A0A0CC">sample text for TTS.</text>
+  <text x="196" y="364" font-family="Consolas,monospace" font-size="22" fill="#7070AA">You can adjust voice,</text>
+  <text x="196" y="396" font-family="Consolas,monospace" font-size="22" fill="#7070AA">rate, pitch and volume.</text>
+  <!-- 커서 -->
+  <rect x="196" y="410" width="3" height="26" fill="#8888DD"/>
+
+  <!-- 하단 컨트롤 바 -->
+  <rect x="160" y="652" width="704" height="48" rx="20" fill="#252538"/>
+  <rect x="160" y="652" width="704" height="20" fill="#252538"/>
+
+  <!-- 슬라이더: Rate -->
+  <text x="190" y="672" font-family="Segoe UI,sans-serif" font-size="16" fill="#555577">Rate</text>
+  <rect x="230" y="665" width="100" height="6" rx="3" fill="#2D2D4A"/>
+  <rect x="230" y="665" width="60" height="6" rx="3" fill="#5C5CA0"/>
+  <circle cx="290" cy="668" r="7" fill="#8888CC"/>
+
+  <!-- 재생 버튼 (크고 눈에 띄게) -->
+  <circle cx="512" cy="590" r="68" fill="#4B4BCC"/>
+  <circle cx="512" cy="590" r="68" fill="none" stroke="#6666EE" stroke-width="4"/>
+  <!-- ▶ 삼각형 -->
+  <polygon points="498,560 554,590 498,620" fill="#FFFFFF"/>
+
+  <!-- Layer 3: 포인트 — 음파 아이콘 작게 -->
+  <path d="M 600,575 Q 625,590 600,605" fill="none" stroke="#8888CC" stroke-width="5" stroke-linecap="round"/>
+  <path d="M 618,562 Q 655,590 618,618" fill="none" stroke="#6666AA" stroke-width="5" stroke-linecap="round"/>
+</svg>

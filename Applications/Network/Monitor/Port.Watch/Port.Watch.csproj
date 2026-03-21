@@ -8,7 +8,7 @@
     <Nullable>enable</Nullable>
     <AssemblyName>PortWatch</AssemblyName>
     <RootNamespace>PortWatch</RootNamespace>
-    <ApplicationIcon>Resources\app.ico</ApplicationIcon>
+    <ApplicationIcon Condition="Exists('Resources\app.ico')">Resources\app.ico</ApplicationIcon>
     <PublishSingleFile>true</PublishSingleFile>
     <SelfContained>true</SelfContained>
     <RuntimeIdentifier>win-x64</RuntimeIdentifier>

@@ -8,7 +8,7 @@
     <UseWPF>true</UseWPF>
     <UseWindowsForms>true</UseWindowsForms>
     <NoWarn>$(NoWarn);WFO0003</NoWarn>
-    <ApplicationIcon>Resources\app.ico</ApplicationIcon>
+    <ApplicationIcon Condition="Exists('Resources\app.ico')">Resources\app.ico</ApplicationIcon>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <AssemblyName>QuickCalc</AssemblyName>
     <RootNamespace>QuickCalc</RootNamespace>

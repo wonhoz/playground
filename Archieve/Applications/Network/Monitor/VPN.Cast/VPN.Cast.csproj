@@ -7,7 +7,7 @@
     <Nullable>enable</Nullable>
     <AssemblyName>VpnCast</AssemblyName>
     <RootNamespace>VpnCast</RootNamespace>
-    <ApplicationIcon>Resources\app.ico</ApplicationIcon>
+    <ApplicationIcon Condition="Exists('Resources\app.ico')">Resources\app.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Content Include="Resources\app.ico" Condition="Exists('Resources\app.ico')">

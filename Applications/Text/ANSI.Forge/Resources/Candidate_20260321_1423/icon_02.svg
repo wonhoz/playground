@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg2a" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0F0F1A"/>
+      <stop offset="100%" stop-color="#1A0A2E"/>
+    </linearGradient>
+    <clipPath id="c2"><rect width="1024" height="1024" rx="190"/></clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg2a)"/>
+  <!-- 배경 글로우 -->
+  <circle cx="512" cy="512" r="360" fill="#1A0A2E" opacity="0.5" clip-path="url(#c2)"/>
+
+  <!-- Layer 2: 256색 xterm 팔레트 큐브 시각화 -->
+  <!-- 6x6 색상 격자 (실제 xterm 큐브 대략 표현) -->
+  <g transform="translate(150,200)">
+    <!-- 행 1: R=0 -->
+    <rect x="0"   y="0"  width="88" height="88" rx="8" fill="#000080"/>
+    <rect x="100" y="0"  width="88" height="88" rx="8" fill="#0000AF"/>
+    <rect x="200" y="0"  width="88" height="88" rx="8" fill="#0000D7"/>
+    <rect x="300" y="0"  width="88" height="88" rx="8" fill="#0000FF"/>
+    <rect x="400" y="0"  width="88" height="88" rx="8" fill="#0055FF"/>
+    <rect x="500" y="0"  width="88" height="88" rx="8" fill="#00AFFF"/>
+    <rect x="600" y="0"  width="88" height="88" rx="8" fill="#00FFFF"/>
+    <!-- 행 2: R=1 -->
+    <rect x="0"   y="100" width="88" height="88" rx="8" fill="#008000"/>
+    <rect x="100" y="100" width="88" height="88" rx="8" fill="#00AF00"/>
+    <rect x="200" y="100" width="88" height="88" rx="8" fill="#00D700"/>
+    <rect x="300" y="100" width="88" height="88" rx="8" fill="#00FF00"/>
+    <rect x="400" y="100" width="88" height="88" rx="8" fill="#55FF00"/>
+    <rect x="500" y="100" width="88" height="88" rx="8" fill="#AFFF00"/>
+    <rect x="600" y="100" width="88" height="88" rx="8" fill="#FFFF00"/>
+    <!-- 행 3: G 감소 -->
+    <rect x="0"   y="200" width="88" height="88" rx="8" fill="#FF0000"/>
+    <rect x="100" y="200" width="88" height="88" rx="8" fill="#FF005F"/>
+    <rect x="200" y="200" width="88" height="88" rx="8" fill="#FF00AF"/>
+    <rect x="300" y="200" width="88" height="88" rx="8" fill="#FF00FF"/>
+    <rect x="400" y="200" width="88" height="88" rx="8" fill="#D700FF"/>
+    <rect x="500" y="200" width="88" height="88" rx="8" fill="#8700FF"/>
+    <rect x="600" y="200" width="88" height="88" rx="8" fill="#5F00FF"/>
+    <!-- 행 4: 주황계 -->
+    <rect x="0"   y="300" width="88" height="88" rx="8" fill="#FF5F00"/>
+    <rect x="100" y="300" width="88" height="88" rx="8" fill="#FF8700"/>
+    <rect x="200" y="300" width="88" height="88" rx="8" fill="#FFAF00"/>
+    <rect x="300" y="300" width="88" height="88" rx="8" fill="#FFD700"/>
+    <rect x="400" y="300" width="88" height="88" rx="8" fill="#FF8787"/>
+    <rect x="500" y="300" width="88" height="88" rx="8" fill="#87AFFF"/>
+    <rect x="600" y="300" width="88" height="88" rx="8" fill="#5FD75F"/>
+  </g>
+
+  <!-- Layer 3: xterm 256 레이블 -->
+  <rect x="150" y="680" width="724" height="64" rx="16" fill="#0D0D1A" opacity="0.9"/>
+  <text x="512" y="721" text-anchor="middle" font-family="Consolas,monospace" font-size="36" fill="#888">xterm-256  ·  ESC[38;5;</text>
+  <text x="680" y="721" font-family="Consolas,monospace" font-size="36" fill="#FFCC00">n</text>
+  <text x="710" y="721" font-family="Consolas,monospace" font-size="36" fill="#888">m</text>
+
+  <!-- 회색조 바 (232-255) -->
+  <g transform="translate(150,776)">
+    <rect x="0"    y="0" width="45" height="40" rx="4" fill="#080808"/>
+    <rect x="52"   y="0" width="45" height="40" rx="4" fill="#1C1C1C"/>
+    <rect x="104"  y="0" width="45" height="40" rx="4" fill="#303030"/>
+    <rect x="156"  y="0" width="45" height="40" rx="4" fill="#444444"/>
+    <rect x="208"  y="0" width="45" height="40" rx="4" fill="#585858"/>
+    <rect x="260"  y="0" width="45" height="40" rx="4" fill="#767676"/>
+    <rect x="312"  y="0" width="45" height="40" rx="4" fill="#8A8A8A"/>
+    <rect x="364"  y="0" width="45" height="40" rx="4" fill="#9E9E9E"/>
+    <rect x="416"  y="0" width="45" height="40" rx="4" fill="#B2B2B2"/>
+    <rect x="468"  y="0" width="45" height="40" rx="4" fill="#C6C6C6"/>
+    <rect x="520"  y="0" width="45" height="40" rx="4" fill="#DADADA"/>
+    <rect x="572"  y="0" width="45" height="40" rx="4" fill="#EEEEEE"/>
+  </g>
+</svg>

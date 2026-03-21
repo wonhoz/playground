@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>ANSI.Forge — Icon Candidates (20260321_1423)</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #050510;
+    color: #E0E0FF;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    padding: 40px 32px;
+    min-height: 100vh;
+  }
+  h1 { font-size: 22px; font-weight: 600; margin-bottom: 6px; color: #AAAAFF; }
+  .subtitle { font-size: 13px; color: #5566AA; margin-bottom: 36px; }
+  .grid { display: flex; flex-wrap: wrap; gap: 28px; }
+  .card {
+    background: #0A0A1E;
+    border: 1px solid #1A1A44;
+    border-radius: 12px;
+    padding: 20px;
+    width: 220px;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+    cursor: pointer;
+  }
+  .card:hover {
+    transform: scale(1.08);
+    box-shadow: 0 8px 32px rgba(100,120,255,0.3);
+    border-color: #5566FF;
+  }
+  .card img {
+    width: 160px;
+    height: 160px;
+    display: block;
+    margin: 0 auto 14px;
+    border-radius: 24px;
+    background: #050510;
+  }
+  .card-num { font-size: 11px; color: #334466; margin-bottom: 4px; }
+  .card-title { font-size: 14px; font-weight: 600; color: #CCDDFF; margin-bottom: 6px; }
+  .card-concept { font-size: 12px; color: #5566AA; margin-bottom: 8px; line-height: 1.5; }
+  .palette { display: flex; gap: 5px; flex-wrap: wrap; }
+  .swatch {
+    width: 18px; height: 18px; border-radius: 4px;
+    border: 1px solid rgba(255,255,255,0.1);
+    display: inline-block;
+  }
+  .tag {
+    display: inline-block;
+    font-size: 10px;
+    padding: 2px 7px;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+  .tag-literal   { background: #1A2D1A; color: #55CC55; }
+  .tag-metaphor  { background: #1A1A44; color: #8888FF; }
+  .tag-hybrid    { background: #2D1A44; color: #CC88FF; }
+</style>
+</head>
+<body>
+<h1>ANSI.Forge — 아이콘 후보</h1>
+<p class="subtitle">Candidate_20260321_1423 &nbsp;|&nbsp; ANSI 이스케이프 코드 파서 및 렌더러</p>
+
+<div class="grid">
+
+  <div class="card">
+    <img src="icon_01.svg" alt="icon_01">
+    <div class="card-num">icon_01</div>
+    <span class="tag tag-literal">literal</span>
+    <div class="card-title">컬러 터미널 출력</div>
+    <div class="card-concept">구성: 공간/장면<br>다크 터미널에 ESC코드로 색칠된 텍스트 줄들</div>
+    <div class="palette">
+      <span class="swatch" style="background:#0A0A0A"></span>
+      <span class="swatch" style="background:#FF5555"></span>
+      <span class="swatch" style="background:#55FF55"></span>
+      <span class="swatch" style="background:#5555FF"></span>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="icon_02.svg" alt="icon_02">
+    <div class="card-num">icon_02</div>
+    <span class="tag tag-literal">literal</span>
+    <div class="card-title">256색 팔레트 큐브</div>
+    <div class="card-concept">구성: 기하학추상<br>xterm 256색 팔레트를 무지개 격자로 시각화</div>
+    <div class="palette">
+      <span class="swatch" style="background:#1A0A1A"></span>
+      <span class="swatch" style="background:#FF0000"></span>
+      <span class="swatch" style="background:#00FF00"></span>
+      <span class="swatch" style="background:#FFFF00"></span>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="icon_03.svg" alt="icon_03">
+    <div class="card-num">icon_03</div>
+    <span class="tag tag-hybrid">hybrid</span>
+    <div class="card-title">ESC코드 → 컬러 변환</div>
+    <div class="card-concept">구성: 레이어드<br>회색 Raw ESC코드가 렌더링되어 컬러 텍스트로 변환</div>
+    <div class="palette">
+      <span class="swatch" style="background:#0F0F1F"></span>
+      <span class="swatch" style="background:#333355"></span>
+      <span class="swatch" style="background:#44DDAA"></span>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="icon_04.svg" alt="icon_04">
+    <div class="card-num">icon_04</div>
+    <span class="tag tag-metaphor">metaphor</span>
+    <div class="card-title">네온 ESC[ 시퀀스</div>
+    <div class="card-concept">구성: 중앙심볼<br>CRT 네온 그린으로 빛나는 ESC[ 이스케이프 심볼</div>
+    <div class="palette">
+      <span class="swatch" style="background:#000500"></span>
+      <span class="swatch" style="background:#00FF41"></span>
+      <span class="swatch" style="background:#00CC33"></span>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="icon_05.svg" alt="icon_05">
+    <div class="card-num">icon_05</div>
+    <span class="tag tag-hybrid">hybrid</span>
+    <div class="card-title">색상화 변환 스트림</div>
+    <div class="card-concept">구성: 대각선/동적<br>회색 텍스트가 오른쪽으로 흐르며 색이 입혀지는 과정</div>
+    <div class="palette">
+      <span class="swatch" style="background:#0A0A14"></span>
+      <span class="swatch" style="background:#444466"></span>
+      <span class="swatch" style="background:#FF8844"></span>
+      <span class="swatch" style="background:#44FFAA"></span>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="icon_06.svg" alt="icon_06">
+    <div class="card-num">icon_06</div>
+    <span class="tag tag-metaphor">metaphor</span>
+    <div class="card-title">TrueColor RGB 채널</div>
+    <div class="card-concept">구성: 기하학추상<br>R G B 채널 글로우 + ESC[38;2;r;g;bm 코드 + 무지개 바</div>
+    <div class="palette">
+      <span class="swatch" style="background:#050510"></span>
+      <span class="swatch" style="background:#FF0000"></span>
+      <span class="swatch" style="background:#00FF00"></span>
+      <span class="swatch" style="background:#4488FF"></span>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

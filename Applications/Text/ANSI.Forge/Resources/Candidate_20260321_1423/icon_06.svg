@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg6a" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0A0A1A"/>
+      <stop offset="100%" stop-color="#050510"/>
+    </linearGradient>
+    <clipPath id="c6a"><rect width="1024" height="1024" rx="190"/></clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg6a)"/>
+
+  <!-- 글로우 원들 (컬러 빛) -->
+  <circle cx="300" cy="450" r="180" fill="#FF000020"/>
+  <circle cx="512" cy="350" r="180" fill="#00CC0025"/>
+  <circle cx="720" cy="450" r="180" fill="#0000FF20"/>
+  <circle cx="512" cy="620" r="160" fill="#FFCC0020"/>
+
+  <!-- Layer 2: 컬러 텍스트 원형 배열 (트루컬러 RGB 표현) -->
+  <!-- R 채널 -->
+  <text x="200" y="380" font-family="Consolas,monospace" font-size="80" fill="#FF0000" font-weight="bold" opacity="0.9">R</text>
+  <text x="200" y="460" font-family="Consolas,monospace" font-size="40" fill="#CC0000">255,0,0</text>
+
+  <!-- G 채널 -->
+  <text x="460" y="280" font-family="Consolas,monospace" font-size="80" fill="#00FF00" font-weight="bold" opacity="0.9">G</text>
+  <text x="450" y="360" font-family="Consolas,monospace" font-size="40" fill="#009900">0,255,0</text>
+
+  <!-- B 채널 -->
+  <text x="720" y="380" font-family="Consolas,monospace" font-size="80" fill="#4488FF" font-weight="bold" opacity="0.9">B</text>
+  <text x="710" y="460" font-family="Consolas,monospace" font-size="40" fill="#2255CC">0,0,255</text>
+
+  <!-- 중앙: 트루컬러 코드 -->
+  <rect x="290" y="520" width="444" height="120" rx="20" fill="#0F0F22" opacity="0.9"/>
+  <rect x="290" y="520" width="444" height="120" rx="20" fill="none" stroke="#333" stroke-width="3"/>
+  <text x="512" y="568" text-anchor="middle" font-family="Consolas,monospace" font-size="30" fill="#555">ESC[38;2;</text>
+  <text x="400" y="568" font-family="Consolas,monospace" font-size="30">
+    <tspan fill="#555">ESC[38;2;</tspan>
+  </text>
+  <text x="512" y="568" text-anchor="middle" font-family="Consolas,monospace" font-size="30">
+    <tspan fill="#444">ESC[38;2;</tspan><tspan fill="#FF5555">r</tspan><tspan fill="#444">;</tspan><tspan fill="#55FF55">g</tspan><tspan fill="#444">;</tspan><tspan fill="#5555FF">b</tspan><tspan fill="#444">m</tspan>
+  </text>
+  <text x="512" y="620" text-anchor="middle" font-family="Consolas,monospace" font-size="28" fill="#AAAAFF">TrueColor  16M+</text>
+
+  <!-- Layer 3: 컬러 스팬 바 (무지개) -->
+  <defs>
+    <linearGradient id="rainbow6a" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%"   stop-color="#FF0000"/>
+      <stop offset="16%"  stop-color="#FF8800"/>
+      <stop offset="33%"  stop-color="#FFFF00"/>
+      <stop offset="50%"  stop-color="#00FF00"/>
+      <stop offset="66%"  stop-color="#00FFFF"/>
+      <stop offset="83%"  stop-color="#0000FF"/>
+      <stop offset="100%" stop-color="#FF00FF"/>
+    </linearGradient>
+  </defs>
+  <rect x="150" y="730" width="724" height="52" rx="26" fill="url(#rainbow6a)" opacity="0.9"/>
+  <text x="512" y="765" text-anchor="middle" font-family="Consolas,monospace" font-size="28" fill="black" font-weight="bold" opacity="0.7">ANSI.Forge — TrueColor</text>
+</svg>

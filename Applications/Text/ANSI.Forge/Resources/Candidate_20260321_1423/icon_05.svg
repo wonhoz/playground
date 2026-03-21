@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg5a" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#111111"/>
+      <stop offset="40%" stop-color="#1A0A2E"/>
+      <stop offset="100%" stop-color="#0A2A1A"/>
+    </linearGradient>
+    <linearGradient id="text_color" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#555555"/>
+      <stop offset="35%" stop-color="#888888"/>
+      <stop offset="65%" stop-color="#FF4444"/>
+      <stop offset="80%" stop-color="#FFCC00"/>
+      <stop offset="100%" stop-color="#00CC00"/>
+    </linearGradient>
+    <clipPath id="c5"><rect width="1024" height="1024" rx="190"/></clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg5a)"/>
+
+  <!-- Layer 2: 가로 텍스트 줄들 — 왼쪽(회색) → 오른쪽(컬러) 그라데이션 -->
+  <!-- 줄 1 -->
+  <text x="150" y="310" font-family="Consolas,monospace" font-size="52" fill="url(#text_color)">ANSI Text Output █</text>
+  <!-- 줄 2 -->
+  <text x="150" y="390" font-family="Consolas,monospace" font-size="52">
+    <tspan fill="#444">Process </tspan>
+    <tspan fill="#888">started</tspan>
+    <tspan fill="#FFCC00"> [WARN]</tspan>
+    <tspan fill="#FF4444"> FAIL</tspan>
+  </text>
+  <!-- 줄 3 -->
+  <text x="150" y="470" font-family="Consolas,monospace" font-size="52">
+    <tspan fill="#333">Loading</tspan>
+    <tspan fill="#666"> .... </tspan>
+    <tspan fill="#00CC00"> OK</tspan>
+  </text>
+  <!-- 줄 4 -->
+  <text x="150" y="550" font-family="Consolas,monospace" font-size="52">
+    <tspan fill="#555">Version </tspan>
+    <tspan fill="#00AFFF">2.1.0</tspan>
+    <tspan fill="#444">  build</tspan>
+    <tspan fill="#CC66FF"> 42</tspan>
+  </text>
+  <!-- 줄 5 -->
+  <text x="150" y="630" font-family="Consolas,monospace" font-size="52">
+    <tspan fill="#333">[</tspan>
+    <tspan fill="#FF4444" font-weight="bold">ERROR</tspan>
+    <tspan fill="#333">] </tspan>
+    <tspan fill="#CC0000">Connection lost</tspan>
+  </text>
+  <!-- 줄 6 -->
+  <text x="150" y="710" font-family="Consolas,monospace" font-size="52">
+    <tspan fill="#333">[</tspan>
+    <tspan fill="#00CC00" font-weight="bold"> OK </tspan>
+    <tspan fill="#333">] </tspan>
+    <tspan fill="#55FF55">Service started</tspan>
+  </text>
+
+  <!-- Layer 3: 왼→오 변환 방향 화살표 (하단) -->
+  <rect x="150" y="770" width="724" height="60" rx="16" fill="#111" opacity="0.8"/>
+  <!-- 그라데이션 바 (회색 → 컬러) -->
+  <rect x="170" y="785" width="140" height="30" rx="8" fill="#555"/>
+  <rect x="330" y="785" width="60" height="30" rx="8" fill="#888"/>
+  <text x="420" y="810" font-family="Consolas,monospace" font-size="26" fill="#666">→</text>
+  <rect x="460" y="785" width="60" height="30" rx="8" fill="#FF4444"/>
+  <rect x="540" y="785" width="60" height="30" rx="8" fill="#FFCC00"/>
+  <rect x="620" y="785" width="60" height="30" rx="8" fill="#00CC00"/>
+  <rect x="700" y="785" width="60" height="30" rx="8" fill="#00AFFF"/>
+  <rect x="780" y="785" width="60" height="30" rx="8" fill="#CC66FF"/>
+</svg>

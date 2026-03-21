@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <clipPath id="c1"><rect width="1024" height="1024" rx="190"/></clipPath>
+  </defs>
+  <!-- Layer 1: 검정 터미널 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="#0C0C0C"/>
+  <rect width="1024" height="1024" rx="190" fill="#0D1117"/>
+
+  <!-- 터미널 CRT 스캔라인 느낌 -->
+  <g opacity="0.04" clip-path="url(#c1)">
+    <rect x="0" y="200" width="1024" height="2" fill="white"/>
+    <rect x="0" y="260" width="1024" height="2" fill="white"/>
+    <rect x="0" y="320" width="1024" height="2" fill="white"/>
+    <rect x="0" y="380" width="1024" height="2" fill="white"/>
+    <rect x="0" y="440" width="1024" height="2" fill="white"/>
+    <rect x="0" y="500" width="1024" height="2" fill="white"/>
+    <rect x="0" y="560" width="1024" height="2" fill="white"/>
+    <rect x="0" y="620" width="1024" height="2" fill="white"/>
+    <rect x="0" y="680" width="1024" height="2" fill="white"/>
+    <rect x="0" y="740" width="1024" height="2" fill="white"/>
+    <rect x="0" y="800" width="1024" height="2" fill="white"/>
+  </g>
+
+  <!-- Layer 2: ANSI 컬러 텍스트 줄들 -->
+  <!-- 줄 1: ESC 시퀀스 코드 (회색) + 컬러 출력 -->
+  <text x="140" y="310" font-family="Consolas,monospace" font-size="46" fill="#555">ESC[32m</text>
+  <text x="460" y="310" font-family="Consolas,monospace" font-size="46" fill="#00CC00" font-weight="bold"> Hello</text>
+  <text x="720" y="310" font-family="Consolas,monospace" font-size="38" fill="#444">ESC[0m</text>
+
+  <!-- 줄 2 -->
+  <text x="140" y="390" font-family="Consolas,monospace" font-size="46" fill="#555">ESC[31m</text>
+  <text x="460" y="390" font-family="Consolas,monospace" font-size="46" fill="#FF4444"> Error</text>
+  <text x="720" y="390" font-family="Consolas,monospace" font-size="38" fill="#444">ESC[0m</text>
+
+  <!-- 줄 3 -->
+  <text x="140" y="470" font-family="Consolas,monospace" font-size="46" fill="#555">ESC[33m</text>
+  <text x="460" y="470" font-family="Consolas,monospace" font-size="46" fill="#FFCC00"> Warn!</text>
+  <text x="720" y="470" font-family="Consolas,monospace" font-size="38" fill="#444">ESC[0m</text>
+
+  <!-- 줄 4 (256색) -->
+  <text x="140" y="550" font-family="Consolas,monospace" font-size="40" fill="#444">ESC[38;5;39m</text>
+  <text x="560" y="550" font-family="Consolas,monospace" font-size="46" fill="#00AFFF"> Info</text>
+  <text x="720" y="550" font-family="Consolas,monospace" font-size="38" fill="#444">ESC[0m</text>
+
+  <!-- 줄 5 (굵음+색) -->
+  <text x="140" y="630" font-family="Consolas,monospace" font-size="40" fill="#555">ESC[1;35m</text>
+  <text x="530" y="630" font-family="Consolas,monospace" font-size="46" fill="#CC66FF" font-weight="bold"> Bold</text>
+
+  <!-- Layer 3: 커서 깜빡임 + 프롬프트 -->
+  <text x="140" y="730" font-family="Consolas,monospace" font-size="44" fill="#00CC00">$ </text>
+  <rect x="220" y="694" width="26" height="46" rx="3" fill="#00CC00" opacity="0.9"/>
+
+  <!-- 상단 터미널 타이틀바 -->
+  <rect x="130" y="180" width="764" height="52" rx="14" fill="#161616"/>
+  <circle cx="174" cy="206" r="12" fill="#FF5F57"/>
+  <circle cx="210" cy="206" r="12" fill="#FFBD2E"/>
+  <circle cx="246" cy="206" r="12" fill="#28CA42"/>
+  <text x="512" y="212" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="22" fill="#555">ANSI.Forge — Terminal Viewer</text>
+</svg>

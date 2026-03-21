@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg3a" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1E1B4B"/>
+      <stop offset="100%" stop-color="#0F0C2A"/>
+    </linearGradient>
+    <linearGradient id="before_after" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#374151"/>
+      <stop offset="100%" stop-color="#00CC00"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg3a)"/>
+
+  <!-- Layer 2: 변환 전(회색) → 변환 후(컬러) 패널 -->
+  <!-- 왼쪽: 무색 텍스트 -->
+  <rect x="120" y="200" width="330" height="600" rx="16" fill="#111121"/>
+  <rect x="120" y="200" width="330" height="44" rx="16" fill="#1E2030"/>
+  <rect x="120" y="228" width="330" height="16" fill="#1E2030"/>
+  <text x="285" y="228" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="20" fill="#555">Raw</text>
+  <text x="148" y="288" font-family="Consolas,monospace" font-size="22" fill="#555">ESC[32mHello</text>
+  <text x="148" y="320" font-family="Consolas,monospace" font-size="22" fill="#555">ESC[0m</text>
+  <text x="148" y="352" font-family="Consolas,monospace" font-size="22" fill="#555">ESC[31;1mErr</text>
+  <text x="148" y="384" font-family="Consolas,monospace" font-size="22" fill="#555">ESC[0m</text>
+  <text x="148" y="416" font-family="Consolas,monospace" font-size="22" fill="#555">ESC[33mWarn</text>
+  <text x="148" y="448" font-family="Consolas,monospace" font-size="22" fill="#555">ESC[0m</text>
+  <text x="148" y="480" font-family="Consolas,monospace" font-size="22" fill="#555">ESC[38;5;39m</text>
+  <text x="148" y="512" font-family="Consolas,monospace" font-size="22" fill="#555">Info ESC[0m</text>
+  <text x="148" y="544" font-family="Consolas,monospace" font-size="22" fill="#555">ESC[35;1mBold</text>
+  <text x="148" y="576" font-family="Consolas,monospace" font-size="22" fill="#555">ESC[0m text</text>
+
+  <!-- 중앙 변환 화살표 -->
+  <g transform="translate(512,512)">
+    <rect x="-32" y="-22" width="64" height="44" rx="22" fill="#312E81"/>
+    <polygon points="30,-20 62,0 30,20" fill="#818CF8"/>
+    <line x1="-32" y1="0" x2="-62" y2="0" stroke="#818CF8" stroke-width="14" stroke-linecap="round"/>
+  </g>
+
+  <!-- 오른쪽: 컬러 텍스트 렌더링 -->
+  <rect x="574" y="200" width="330" height="600" rx="16" fill="#0D0D0D"/>
+  <rect x="574" y="200" width="330" height="44" rx="16" fill="#1A1A2E"/>
+  <rect x="574" y="228" width="330" height="16" fill="#1A1A2E"/>
+  <text x="739" y="228" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="20" fill="#555">Rendered</text>
+  <text x="602" y="288" font-family="Consolas,monospace" font-size="28" fill="#00CC00">Hello</text>
+  <text x="602" y="340" font-family="Consolas,monospace" font-size="28" fill="#FF4444" font-weight="bold">Err</text>
+  <text x="602" y="392" font-family="Consolas,monospace" font-size="28" fill="#FFCC00">Warn</text>
+  <text x="602" y="444" font-family="Consolas,monospace" font-size="28" fill="#00AFFF">Info</text>
+  <text x="602" y="496" font-family="Consolas,monospace" font-size="28" fill="#CC66FF" font-weight="bold">Bold</text>
+  <text x="602" y="548" font-family="Consolas,monospace" font-size="28" fill="#CCCCCC"> text</text>
+
+  <!-- Layer 3: 하단 레이블 -->
+  <rect x="200" y="840" width="624" height="56" rx="14" fill="#0F0C2A" opacity="0.9"/>
+  <text x="512" y="874" text-anchor="middle" font-family="Consolas,monospace" font-size="28" fill="#818CF8">ANSI  →  Color Spans</text>
+</svg>

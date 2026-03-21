@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg3km" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1A0A3E"/>
+      <stop offset="100%" stop-color="#311B92"/>
+    </linearGradient>
+    <clipPath id="c3km"><rect width="1024" height="1024" rx="190"/></clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg3km)"/>
+  <circle cx="512" cy="512" r="360" fill="#4527A0" opacity="0.15" clip-path="url(#c3km)"/>
+  <circle cx="200" cy="200" r="200" fill="#311B92" opacity="0.2" clip-path="url(#c3km)"/>
+
+  <!-- Layer 2: 큰 키보드 심볼 + Ctrl·⇧·Alt 조합 (중앙심볼) -->
+  <!-- 키보드 외곽 -->
+  <rect x="180" y="350" width="664" height="300" rx="28" fill="#240F6E" stroke="#5E35B1" stroke-width="6"/>
+
+  <!-- 키보드 내부 키캡들 (간략화, 3행) -->
+  <!-- Row 1: Q-P -->
+  <g fill="#311B92" stroke="#4527A0" stroke-width="2">
+    <rect x="200" y="368" width="36" height="36" rx="6"/>
+    <rect x="242" y="368" width="36" height="36" rx="6"/>
+    <rect x="284" y="368" width="36" height="36" rx="6"/>
+    <rect x="326" y="368" width="36" height="36" rx="6"/>
+    <rect x="368" y="368" width="36" height="36" rx="6"/>
+    <rect x="410" y="368" width="36" height="36" rx="6"/>
+    <rect x="452" y="368" width="36" height="36" rx="6"/>
+    <rect x="494" y="368" width="36" height="36" rx="6"/>
+    <rect x="536" y="368" width="36" height="36" rx="6"/>
+    <rect x="578" y="368" width="36" height="36" rx="6"/>
+  </g>
+
+  <!-- Row 2: A-L -->
+  <g fill="#311B92" stroke="#4527A0" stroke-width="2">
+    <rect x="220" y="412" width="36" height="36" rx="6"/>
+    <rect x="262" y="412" width="36" height="36" rx="6"/>
+    <rect x="304" y="412" width="36" height="36" rx="6"/>
+    <rect x="346" y="412" width="36" height="36" rx="6"/>
+    <rect x="388" y="412" width="36" height="36" rx="6"/>
+    <rect x="430" y="412" width="36" height="36" rx="6"/>
+    <rect x="472" y="412" width="36" height="36" rx="6"/>
+    <rect x="514" y="412" width="36" height="36" rx="6"/>
+    <rect x="556" y="412" width="36" height="36" rx="6"/>
+  </g>
+
+  <!-- Row 3: 수식키들 (하이라이트) -->
+  <!-- Ctrl 키 (하이라이트) -->
+  <rect x="200" y="492" width="80" height="44" rx="10" fill="#5E35B1" stroke="#9575CD" stroke-width="3"/>
+  <text x="240" y="518" text-anchor="middle" font-family="Consolas,monospace" font-size="18" font-weight="700" fill="#EDE7F6">Ctrl</text>
+  <!-- ⇧ Shift -->
+  <rect x="288" y="492" width="88" height="44" rx="10" fill="#7E57C2" stroke="#9575CD" stroke-width="3"/>
+  <text x="332" y="518" text-anchor="middle" font-family="Consolas,monospace" font-size="18" font-weight="700" fill="#EDE7F6">⇧</text>
+  <!-- Alt -->
+  <rect x="384" y="492" width="72" height="44" rx="10" fill="#5E35B1" stroke="#9575CD" stroke-width="3"/>
+  <text x="420" y="518" text-anchor="middle" font-family="Consolas,monospace" font-size="18" font-weight="700" fill="#EDE7F6">Alt</text>
+  <!-- Space -->
+  <rect x="464" y="492" width="180" height="44" rx="10" fill="#311B92" stroke="#4527A0" stroke-width="2"/>
+  <rect x="660" y="492" width="72" height="44" rx="10" fill="#311B92" stroke="#4527A0" stroke-width="2"/>
+  <text x="696" y="518" text-anchor="middle" font-family="Consolas,monospace" font-size="20" fill="#7E57C2">↵</text>
+
+  <!-- Layer 3: 단축키 조합 표시 (키보드 위) -->
+  <!-- + 기호들 -->
+  <text x="512" y="310" text-anchor="middle" font-family="Consolas,monospace" font-size="28" font-weight="700" fill="#9575CD">Ctrl  +  ⇧  +  S</text>
+
+  <!-- 빛나는 연결 선 -->
+  <line x1="240" y1="320" x2="240" y2="492" stroke="#9575CD" stroke-width="4" stroke-linecap="round" opacity="0.5"/>
+  <line x1="332" y1="320" x2="332" y2="492" stroke="#9575CD" stroke-width="4" stroke-linecap="round" opacity="0.5"/>
+
+  <!-- 하단 설명 -->
+  <rect x="280" y="740" width="464" height="54" rx="14" fill="#1A0A3E" opacity="0.9"/>
+  <text x="512" y="772" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="26" fill="#B39DDB">shortcut reference</text>
+</svg>

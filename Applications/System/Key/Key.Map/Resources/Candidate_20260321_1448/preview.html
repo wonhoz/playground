@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>Key.Map — Icon Candidates (20260321_1448)</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #07091A;
+    color: #C5CAE9;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    padding: 40px 32px;
+    min-height: 100vh;
+  }
+  h1 { font-size: 22px; font-weight: 600; margin-bottom: 6px; color: #9FA8DA; }
+  .subtitle { font-size: 13px; color: #283593; margin-bottom: 36px; }
+  .grid { display: flex; flex-wrap: wrap; gap: 28px; }
+  .card {
+    background: #0D0F28;
+    border: 1px solid #1A1E44;
+    border-radius: 12px;
+    padding: 20px;
+    width: 220px;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+    cursor: pointer;
+  }
+  .card:hover {
+    transform: scale(1.08);
+    box-shadow: 0 8px 32px rgba(92,107,192,0.35);
+    border-color: #5C6BC0;
+  }
+  .card img {
+    width: 160px;
+    height: 160px;
+    display: block;
+    margin: 0 auto 14px;
+    border-radius: 24px;
+    background: #060818;
+  }
+  .card-num { font-size: 11px; color: #1E2460; margin-bottom: 4px; }
+  .card-title { font-size: 14px; font-weight: 600; color: #C5CAE9; margin-bottom: 6px; }
+  .card-concept { font-size: 12px; color: #3949AB; margin-bottom: 8px; line-height: 1.5; }
+  .palette { display: flex; gap: 5px; flex-wrap: wrap; }
+  .swatch {
+    width: 18px; height: 18px; border-radius: 4px;
+    border: 1px solid rgba(255,255,255,0.1);
+    display: inline-block;
+  }
+  .tag {
+    display: inline-block;
+    font-size: 10px;
+    padding: 2px 7px;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+  .tag-literal   { background: #0A1A3A; color: #5C6BC0; }
+  .tag-metaphor  { background: #1A0A3E; color: #9575CD; }
+  .tag-hybrid    { background: #3E2000; color: #FFCA28; }
+</style>
+</head>
+<body>
+<h1>Key.Map — 아이콘 후보</h1>
+<p class="subtitle">Candidate_20260321_1448 &nbsp;|&nbsp; 앱별 키보드 단축키 프리셋 참조 뷰어</p>
+
+<div class="grid">
+
+  <div class="card">
+    <img src="icon_01.svg" alt="icon_01">
+    <div class="card-num">icon_01</div>
+    <span class="tag tag-literal">literal</span>
+    <div class="card-title">단축키 카드 목록</div>
+    <div class="card-concept">구성: 레이어드<br>Ctrl+S·Ctrl+Z 카드가 겹쳐 쌓인 단축키 참조북 형태</div>
+    <div class="palette">
+      <span class="swatch" style="background:#0A0E2A"></span>
+      <span class="swatch" style="background:#3F51B5"></span>
+      <span class="swatch" style="background:#E8EAF6"></span>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="icon_02.svg" alt="icon_02">
+    <div class="card-num">icon_02</div>
+    <span class="tag tag-literal">literal</span>
+    <div class="card-title">앱 선택 + 단축키 테이블</div>
+    <div class="card-concept">구성: 공간/장면<br>좌측 앱 프리셋 사이드바 + 우측 단축키 테이블 UI 미리보기</div>
+    <div class="palette">
+      <span class="swatch" style="background:#111118"></span>
+      <span class="swatch" style="background:#3F51B5"></span>
+      <span class="swatch" style="background:#9FA8DA"></span>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="icon_03.svg" alt="icon_03">
+    <div class="card-num">icon_03</div>
+    <span class="tag tag-metaphor">metaphor</span>
+    <div class="card-title">키보드 + 단축키 조합</div>
+    <div class="card-concept">구성: 중앙심볼<br>큰 키보드 위에 Ctrl+⇧+S 조합이 강조된 참조 심볼</div>
+    <div class="palette">
+      <span class="swatch" style="background:#1A0A3E"></span>
+      <span class="swatch" style="background:#5E35B1"></span>
+      <span class="swatch" style="background:#EDE7F6"></span>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="icon_04.svg" alt="icon_04">
+    <div class="card-num">icon_04</div>
+    <span class="tag tag-metaphor">metaphor</span>
+    <div class="card-title">단축키 네트워크 맵</div>
+    <div class="card-concept">구성: 기하학추상<br>앱 노드를 중심으로 단축키 조합들이 방사형으로 연결된 맵</div>
+    <div class="palette">
+      <span class="swatch" style="background:#003333"></span>
+      <span class="swatch" style="background:#00838F"></span>
+      <span class="swatch" style="background:#00E5FF"></span>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="icon_05.svg" alt="icon_05">
+    <div class="card-num">icon_05</div>
+    <span class="tag tag-hybrid">hybrid</span>
+    <div class="card-title">키들이 조합으로 수렴</div>
+    <div class="card-concept">구성: 대각선/동적<br>Ctrl·⇧·K 키가 따로 날아와 단축키 조합으로 합쳐지는 동적 표현</div>
+    <div class="palette">
+      <span class="swatch" style="background:#3E2000"></span>
+      <span class="swatch" style="background:#F57F17"></span>
+      <span class="swatch" style="background:#FFCA28"></span>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,91 +1,79 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
   <defs>
-    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#0d0d1a"/>
-      <stop offset="100%" stop-color="#1a0533"/>
+    <linearGradient id="bg01q" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#5BBFEE;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2A9ACC;stop-opacity:1" />
     </linearGradient>
-    <linearGradient id="calcBody" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#1e1e3a"/>
-      <stop offset="100%" stop-color="#12122a"/>
+    <linearGradient id="calc01q" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFFFFF;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#E8F4FF;stop-opacity:1" />
     </linearGradient>
-    <filter id="neon">
-      <feGaussianBlur stdDeviation="4" result="blur"/>
-      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
-    <filter id="strongneon">
-      <feGaussianBlur stdDeviation="8" result="blur"/>
-      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    <linearGradient id="btn01q" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3A8ACC;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1A6AAA;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="btnOp01q" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FF8C40;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#DD5500;stop-opacity:1" />
+    </linearGradient>
+    <filter id="calcshadow">
+      <feDropShadow dx="0" dy="10" stdDeviation="18" flood-color="#1A5A88" flood-opacity="0.35"/>
     </filter>
   </defs>
-  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
-  <!-- Calculator body -->
-  <rect x="105" y="80" width="302" height="370" rx="24" fill="url(#calcBody)" stroke="#8E54E9" stroke-width="2.5" filter="url(#neon)"/>
-  <rect x="105" y="80" width="302" height="370" rx="24" fill="none" stroke="#8E54E9" stroke-width="2.5"/>
-
-  <!-- Display screen -->
-  <rect x="128" y="105" width="256" height="85" rx="12" fill="#0a0a1a" stroke="#56CCF2" stroke-width="1.5"/>
-  <rect x="128" y="105" width="256" height="85" rx="12" fill="none" stroke="#56CCF2" stroke-width="1.5" filter="url(#neon)"/>
-  <!-- Display number glow -->
-  <rect x="230" y="120" width="8" height="55" rx="3" fill="#00ff88" filter="url(#neon)"/>
-  <rect x="244" y="120" width="8" height="55" rx="3" fill="#00ff88" filter="url(#neon)"/>
-  <rect x="258" y="120" width="8" height="55" rx="3" fill="#00ff88" filter="url(#neon)"/>
-  <rect x="280" y="134" width="8" height="41" rx="3" fill="#00ff88" filter="url(#neon)"/>
-  <rect x="294" y="120" width="8" height="55" rx="3" fill="#00ff88" filter="url(#neon)"/>
-  <!-- Cursor blink -->
-  <rect x="312" y="120" width="5" height="55" rx="2" fill="#00ff88" opacity="0.6" filter="url(#neon)"/>
-
-  <!-- Button rows -->
-  <!-- Row 1 -->
-  <rect x="128" y="212" width="56" height="44" rx="10" fill="#2a1050" stroke="#ee0979" stroke-width="1.5"/>
-  <rect x="128" y="212" width="56" height="44" rx="10" fill="none" stroke="#ee0979" stroke-width="1.5" filter="url(#neon)"/>
-  <line x1="150" y1="228" x2="164" y2="242" stroke="#ee0979" stroke-width="2.5" filter="url(#neon)"/>
-  <line x1="164" y1="228" x2="150" y2="242" stroke="#ee0979" stroke-width="2.5" filter="url(#neon)"/>
-
-  <rect x="196" y="212" width="56" height="44" rx="10" fill="#2a1050" stroke="#f7971e" stroke-width="1.5"/>
-  <rect x="196" y="212" width="56" height="44" rx="10" fill="none" stroke="#f7971e" stroke-width="1.5" filter="url(#neon)"/>
-  <line x1="216" y1="230" x2="236" y2="230" stroke="#f7971e" stroke-width="2.5" filter="url(#neon)"/>
-  <line x1="226" y1="222" x2="226" y2="246" stroke="#f7971e" stroke-width="2.5" filter="url(#neon)"/>
-
-  <rect x="264" y="212" width="56" height="44" rx="10" fill="#2a1050" stroke="#ffd200" stroke-width="1.5"/>
-  <rect x="264" y="212" width="56" height="44" rx="10" fill="none" stroke="#ffd200" stroke-width="1.5" filter="url(#neon)"/>
-  <line x1="284" y1="230" x2="304" y2="230" stroke="#ffd200" stroke-width="2.5" filter="url(#neon)"/>
-
-  <rect x="332" y="212" width="56" height="44" rx="10" fill="#1a0a30" stroke="#56CCF2" stroke-width="1.5"/>
-  <rect x="332" y="212" width="56" height="44" rx="10" fill="none" stroke="#56CCF2" stroke-width="1.5" filter="url(#neon)"/>
-  <line x1="352" y1="230" x2="372" y2="230" stroke="#56CCF2" stroke-width="2.5" filter="url(#neon)"/>
-  <line x1="362" y1="222" x2="362" y2="246" stroke="#56CCF2" stroke-width="2.5" filter="url(#neon)"/>
-
-  <!-- Number rows -->
-  <!-- Row 2 -->
-  <rect x="128" y="268" width="56" height="44" rx="10" fill="#1a1a35" stroke="#555" stroke-width="1"/>
-  <circle cx="156" cy="290" r="8" fill="#8E54E9" opacity="0.7" filter="url(#neon)"/>
-  <rect x="196" y="268" width="56" height="44" rx="10" fill="#1a1a35" stroke="#555" stroke-width="1"/>
-  <circle cx="224" cy="290" r="8" fill="#8E54E9" opacity="0.7" filter="url(#neon)"/>
-  <rect x="264" y="268" width="56" height="44" rx="10" fill="#1a1a35" stroke="#555" stroke-width="1"/>
-  <circle cx="292" cy="290" r="8" fill="#8E54E9" opacity="0.7" filter="url(#neon)"/>
-  <rect x="332" y="268" width="56" height="88" rx="10" fill="#1a0a30" stroke="#ee0979" stroke-width="1.5"/>
-  <rect x="332" y="268" width="56" height="88" rx="10" fill="none" stroke="#ee0979" stroke-width="1.5" filter="url(#neon)"/>
-  <!-- Divide symbol -->
-  <circle cx="360" cy="303" r="4" fill="#ee0979" filter="url(#neon)"/>
-  <line x1="348" y1="312" x2="372" y2="312" stroke="#ee0979" stroke-width="2.5" filter="url(#neon)"/>
-  <circle cx="360" cy="321" r="4" fill="#ee0979" filter="url(#neon)"/>
-
-  <!-- Row 3 -->
-  <rect x="128" y="324" width="56" height="44" rx="10" fill="#1a1a35" stroke="#555" stroke-width="1"/>
-  <circle cx="156" cy="346" r="8" fill="#56CCF2" opacity="0.7" filter="url(#neon)"/>
-  <rect x="196" y="324" width="56" height="44" rx="10" fill="#1a1a35" stroke="#555" stroke-width="1"/>
-  <circle cx="224" cy="346" r="8" fill="#56CCF2" opacity="0.7" filter="url(#neon)"/>
-  <rect x="264" y="324" width="56" height="44" rx="10" fill="#1a1a35" stroke="#555" stroke-width="1"/>
-  <circle cx="292" cy="346" r="8" fill="#56CCF2" opacity="0.7" filter="url(#neon)"/>
-
-  <!-- Row 4 - equals + zero -->
-  <rect x="128" y="380" width="124" height="44" rx="10" fill="#1a1a35" stroke="#555" stroke-width="1"/>
-  <circle cx="190" cy="402" r="8" fill="#56CCF2" opacity="0.5" filter="url(#neon)"/>
-  <rect x="264" y="380" width="56" height="44" rx="10" fill="#1a1a35" stroke="#555" stroke-width="1"/>
-  <circle cx="292" cy="402" r="8" fill="#56CCF2" opacity="0.7" filter="url(#neon)"/>
-  <!-- Equals button - highlight -->
-  <rect x="332" y="380" width="56" height="44" rx="10" fill="#2a0050" stroke="#00ff88" stroke-width="2"/>
-  <rect x="332" y="380" width="56" height="44" rx="10" fill="none" stroke="#00ff88" stroke-width="2" filter="url(#strongneon)"/>
-  <line x1="348" y1="396" x2="372" y2="396" stroke="#00ff88" stroke-width="2.5" filter="url(#strongneon)"/>
-  <line x1="348" y1="408" x2="372" y2="408" stroke="#00ff88" stroke-width="2.5" filter="url(#strongneon)"/>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg01q)"/>
+  <!-- 배경 원 장식 -->
+  <circle cx="300" cy="280" r="160" fill="#FFFFFF" opacity="0.08"/>
+  <circle cx="780" cy="760" r="130" fill="#FFFFFF" opacity="0.06"/>
+  <!-- Layer 2: 계산기 본체 -->
+  <rect x="308" y="240" width="408" height="544" rx="32" fill="url(#calc01q)" stroke="#C8E4F8" stroke-width="8" filter="url(#calcshadow)"/>
+  <!-- 디스플레이 -->
+  <rect x="336" y="272" width="352" height="100" rx="16" fill="#1A3A5A"/>
+  <text x="676" y="344" font-family="'Courier New', monospace" font-size="46" fill="#FFFFFF" text-anchor="end" font-weight="bold">1,234</text>
+  <!-- 버튼 그리드 (4x4) -->
+  <!-- 행 1: C, ±, %, ÷ -->
+  <rect x="336" y="392" width="72" height="56" rx="14" fill="#D0D8E0"/>
+  <text x="372" y="428" font-family="sans-serif" font-size="28" fill="#1A3A5A" text-anchor="middle" font-weight="bold">C</text>
+  <rect x="420" y="392" width="72" height="56" rx="14" fill="#D0D8E0"/>
+  <text x="456" y="428" font-family="sans-serif" font-size="28" fill="#1A3A5A" text-anchor="middle">±</text>
+  <rect x="504" y="392" width="72" height="56" rx="14" fill="#D0D8E0"/>
+  <text x="540" y="428" font-family="sans-serif" font-size="28" fill="#1A3A5A" text-anchor="middle">%</text>
+  <rect x="588" y="392" width="100" height="56" rx="14" fill="url(#btnOp01q)"/>
+  <text x="638" y="428" font-family="sans-serif" font-size="32" fill="#FFFFFF" text-anchor="middle">÷</text>
+  <!-- 행 2: 7, 8, 9, × -->
+  <rect x="336" y="462" width="72" height="56" rx="14" fill="url(#btn01q)"/>
+  <text x="372" y="498" font-family="sans-serif" font-size="30" fill="#FFFFFF" text-anchor="middle">7</text>
+  <rect x="420" y="462" width="72" height="56" rx="14" fill="url(#btn01q)"/>
+  <text x="456" y="498" font-family="sans-serif" font-size="30" fill="#FFFFFF" text-anchor="middle">8</text>
+  <rect x="504" y="462" width="72" height="56" rx="14" fill="url(#btn01q)"/>
+  <text x="540" y="498" font-family="sans-serif" font-size="30" fill="#FFFFFF" text-anchor="middle">9</text>
+  <rect x="588" y="462" width="100" height="56" rx="14" fill="url(#btnOp01q)"/>
+  <text x="638" y="498" font-family="sans-serif" font-size="32" fill="#FFFFFF" text-anchor="middle">×</text>
+  <!-- 행 3: 4, 5, 6, − -->
+  <rect x="336" y="532" width="72" height="56" rx="14" fill="url(#btn01q)"/>
+  <text x="372" y="568" font-family="sans-serif" font-size="30" fill="#FFFFFF" text-anchor="middle">4</text>
+  <rect x="420" y="532" width="72" height="56" rx="14" fill="url(#btn01q)"/>
+  <text x="456" y="568" font-family="sans-serif" font-size="30" fill="#FFFFFF" text-anchor="middle">5</text>
+  <rect x="504" y="532" width="72" height="56" rx="14" fill="url(#btn01q)"/>
+  <text x="540" y="568" font-family="sans-serif" font-size="30" fill="#FFFFFF" text-anchor="middle">6</text>
+  <rect x="588" y="532" width="100" height="56" rx="14" fill="url(#btnOp01q)"/>
+  <text x="638" y="568" font-family="sans-serif" font-size="36" fill="#FFFFFF" text-anchor="middle">−</text>
+  <!-- 행 4: 1, 2, 3, + -->
+  <rect x="336" y="602" width="72" height="56" rx="14" fill="url(#btn01q)"/>
+  <text x="372" y="638" font-family="sans-serif" font-size="30" fill="#FFFFFF" text-anchor="middle">1</text>
+  <rect x="420" y="602" width="72" height="56" rx="14" fill="url(#btn01q)"/>
+  <text x="456" y="638" font-family="sans-serif" font-size="30" fill="#FFFFFF" text-anchor="middle">2</text>
+  <rect x="504" y="602" width="72" height="56" rx="14" fill="url(#btn01q)"/>
+  <text x="540" y="638" font-family="sans-serif" font-size="30" fill="#FFFFFF" text-anchor="middle">3</text>
+  <rect x="588" y="602" width="100" height="56" rx="14" fill="url(#btnOp01q)"/>
+  <text x="638" y="638" font-family="sans-serif" font-size="36" fill="#FFFFFF" text-anchor="middle">+</text>
+  <!-- 행 5: 0(넓), ., = -->
+  <rect x="336" y="672" width="156" height="56" rx="14" fill="url(#btn01q)"/>
+  <text x="414" y="708" font-family="sans-serif" font-size="30" fill="#FFFFFF" text-anchor="middle">0</text>
+  <rect x="504" y="672" width="72" height="56" rx="14" fill="url(#btn01q)"/>
+  <text x="540" y="708" font-family="sans-serif" font-size="30" fill="#FFFFFF" text-anchor="middle">.</text>
+  <rect x="588" y="672" width="100" height="56" rx="14" fill="#2288DD"/>
+  <text x="638" y="708" font-family="sans-serif" font-size="30" fill="#FFFFFF" text-anchor="middle">=</text>
+  <!-- Layer 3: 계산기 상단 둥근 끝 광택 -->
+  <ellipse cx="512" cy="255" rx="180" ry="12" fill="#FFFFFF" opacity="0.3"/>
 </svg>

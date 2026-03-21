@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bgGraph" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#0A0E1F"/>
+      <stop offset="100%" stop-color="#060912"/>
+    </radialGradient>
+    <!-- 노드 색상들 -->
+    <radialGradient id="nodeBlue" cx="40%" cy="35%" r="70%">
+      <stop offset="0%" stop-color="#60A5FA"/>
+      <stop offset="100%" stop-color="#1D4ED8"/>
+    </radialGradient>
+    <radialGradient id="nodeRed" cx="40%" cy="35%" r="70%">
+      <stop offset="0%" stop-color="#FC8181"/>
+      <stop offset="100%" stop-color="#C53030"/>
+    </radialGradient>
+    <radialGradient id="nodeTeal" cx="40%" cy="35%" r="70%">
+      <stop offset="0%" stop-color="#4ECDC4"/>
+      <stop offset="100%" stop-color="#0E7490"/>
+    </radialGradient>
+    <radialGradient id="nodeGreen" cx="40%" cy="35%" r="70%">
+      <stop offset="0%" stop-color="#6EE7B7"/>
+      <stop offset="100%" stop-color="#047857"/>
+    </radialGradient>
+    <radialGradient id="nodeYellow" cx="40%" cy="35%" r="70%">
+      <stop offset="0%" stop-color="#FDE68A"/>
+      <stop offset="100%" stop-color="#D97706"/>
+    </radialGradient>
+    <filter id="nodeGlow">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="conflictGlow">
+      <feGaussianBlur stdDeviation="14" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Layer1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bgGraph)"/>
+
+  <!-- Layer2: 엣지 (연결선) -->
+  <!-- 중앙 루트 → 주요 노드들 -->
+  <line x1="512" y1="512" x2="300" y2="300" stroke="#2A4A8A" stroke-width="5"/>
+  <line x1="512" y1="512" x2="724" y2="300" stroke="#2A4A8A" stroke-width="5"/>
+  <line x1="512" y1="512" x2="280" y2="620" stroke="#2A4A8A" stroke-width="5"/>
+  <line x1="512" y1="512" x2="744" y2="620" stroke="#2A4A8A" stroke-width="5"/>
+  <line x1="512" y1="512" x2="512" y2="730" stroke="#2A4A8A" stroke-width="5"/>
+
+  <!-- 서브 노드 연결 -->
+  <line x1="300" y1="300" x2="190" y2="200" stroke="#1E3A6A" stroke-width="4" opacity="0.8"/>
+  <line x1="300" y1="300" x2="190" y2="380" stroke="#1E3A6A" stroke-width="4" opacity="0.8"/>
+  <line x1="724" y1="300" x2="834" y2="200" stroke="#1E3A6A" stroke-width="4" opacity="0.8"/>
+  <line x1="724" y1="300" x2="834" y2="380" stroke="#1E3A6A" stroke-width="4" opacity="0.8"/>
+  <line x1="280" y1="620" x2="190" y2="740" stroke="#1E3A6A" stroke-width="4" opacity="0.8"/>
+  <line x1="744" y1="620" x2="834" y2="740" stroke="#1E3A6A" stroke-width="4" opacity="0.8"/>
+  <line x1="512" y1="730" x2="400" y2="840" stroke="#1E3A6A" stroke-width="4" opacity="0.8"/>
+  <line x1="512" y1="730" x2="624" y2="840" stroke="#1E3A6A" stroke-width="4" opacity="0.8"/>
+
+  <!-- 충돌 노드 연결 (빨간 엣지) -->
+  <line x1="744" y1="620" x2="834" y2="620" stroke="#EF4444" stroke-width="5" stroke-dasharray="10,6" filter="url(#conflictGlow)" opacity="0.8"/>
+
+  <!-- Layer3: 노드들 -->
+  <!-- 루트 노드 (중앙 - 파랑, 큰) -->
+  <circle cx="512" cy="512" r="44" fill="url(#nodeBlue)" filter="url(#nodeGlow)"/>
+  <circle cx="512" cy="512" r="30" fill="#DBEAFE"/>
+  <text x="512" y="518" font-family="monospace" font-size="16" fill="#1E3A8A" text-anchor="middle" font-weight="bold">root</text>
+
+  <!-- 1차 노드들 -->
+  <circle cx="300" cy="300" r="34" fill="url(#nodeTeal)" filter="url(#nodeGlow)"/>
+  <circle cx="300" cy="300" r="22" fill="#CFFAFE"/>
+  <text x="300" y="306" font-family="monospace" font-size="13" fill="#0E7490" text-anchor="middle">lib-A</text>
+
+  <circle cx="724" cy="300" r="34" fill="url(#nodeGreen)" filter="url(#nodeGlow)"/>
+  <circle cx="724" cy="300" r="22" fill="#D1FAE5"/>
+  <text x="724" y="306" font-family="monospace" font-size="13" fill="#047857" text-anchor="middle">lib-B</text>
+
+  <circle cx="280" cy="620" r="34" fill="url(#nodeYellow)" filter="url(#nodeGlow)"/>
+  <circle cx="280" cy="620" r="22" fill="#FEF3C7"/>
+  <text x="280" y="626" font-family="monospace" font-size="13" fill="#92400E" text-anchor="middle">lib-C</text>
+
+  <!-- 충돌 노드 (빨강) -->
+  <circle cx="744" cy="620" r="38" fill="url(#nodeRed)" filter="url(#conflictGlow)"/>
+  <circle cx="744" cy="620" r="25" fill="#FEE2E2"/>
+  <text x="744" y="616" font-family="monospace" font-size="12" fill="#991B1B" text-anchor="middle">lib-D</text>
+  <text x="744" y="632" font-family="monospace" font-size="11" fill="#DC2626" text-anchor="middle">!conflict</text>
+  <!-- 충돌 링 -->
+  <circle cx="744" cy="620" r="50" fill="none" stroke="#EF4444" stroke-width="3" stroke-dasharray="8,4" opacity="0.7"/>
+
+  <circle cx="512" cy="730" r="30" fill="url(#nodeTeal)" filter="url(#nodeGlow)"/>
+  <circle cx="512" cy="730" r="19" fill="#CFFAFE"/>
+  <text x="512" y="736" font-family="monospace" font-size="12" fill="#0E7490" text-anchor="middle">lib-E</text>
+
+  <!-- 2차 서브 노드들 (작은) -->
+  <circle cx="190" cy="200" r="22" fill="url(#nodeBlue)" filter="url(#nodeGlow)" opacity="0.8"/>
+  <circle cx="190" cy="380" r="22" fill="url(#nodeBlue)" filter="url(#nodeGlow)" opacity="0.7"/>
+  <circle cx="834" cy="200" r="22" fill="url(#nodeGreen)" filter="url(#nodeGlow)" opacity="0.8"/>
+  <circle cx="834" cy="380" r="22" fill="url(#nodeGreen)" filter="url(#nodeGlow)" opacity="0.7"/>
+  <circle cx="190" cy="740" r="22" fill="url(#nodeYellow)" filter="url(#nodeGlow)" opacity="0.8"/>
+  <circle cx="834" cy="740" r="22" fill="url(#nodeRed)" filter="url(#nodeGlow)" opacity="0.7"/>
+  <circle cx="400" cy="840" r="20" fill="url(#nodeTeal)" filter="url(#nodeGlow)" opacity="0.7"/>
+  <circle cx="624" cy="840" r="20" fill="url(#nodeTeal)" filter="url(#nodeGlow)" opacity="0.7"/>
+</svg>

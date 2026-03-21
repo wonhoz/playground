@@ -1,17 +1,63 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
-  <rect x="80" y="80" width="864" height="864" rx="180" fill="#0A0010"/>
-  <!-- 마법봉 발사 -->
-  <line x1="260" y1="764" x2="680" y2="344" stroke="#4A148C" stroke-width="28" stroke-linecap="round"/>
-  <circle cx="260" cy="764" r="36" fill="#4A148C"/>
-  <circle cx="260" cy="764" r="18" fill="#CE93D8"/>
-  <!-- 마법봉 끝 별 -->
-  <polygon points="680,300 694,338 734,338 703,362 714,400 680,378 646,400 657,362 626,338 666,338" fill="#CE93D8"/>
-  <!-- 발사 광선 -->
-  <line x1="700" y1="280" x2="780" y2="200" stroke="#CE93D8" stroke-width="10" stroke-linecap="round" opacity="0.8"/>
-  <line x1="720" y1="310" x2="820" y2="270" stroke="#CE93D8" stroke-width="7" stroke-linecap="round" opacity="0.6"/>
-  <line x1="710" y1="350" x2="800" y2="360" stroke="#CE93D8" stroke-width="7" stroke-linecap="round" opacity="0.5"/>
+  <defs>
+    <radialGradient id="bg01" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#3D1A6E"/>
+      <stop offset="100%" stop-color="#1A0A3A"/>
+    </radialGradient>
+    <radialGradient id="glow01" cx="50%" cy="40%" r="50%">
+      <stop offset="0%" stop-color="#FFD700" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#FFD700" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="wand01" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFE566"/>
+      <stop offset="50%" stop-color="#FFD700"/>
+      <stop offset="100%" stop-color="#B8860B"/>
+    </linearGradient>
+    <linearGradient id="crystal01" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="50%" stop-color="#C8A0FF"/>
+      <stop offset="100%" stop-color="#9B59B6"/>
+    </linearGradient>
+    <filter id="glow-filter01">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="star-glow">
+      <feGaussianBlur stdDeviation="12" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg01)"/>
+  <circle cx="512" cy="420" r="280" fill="url(#glow01)"/>
+
+  <!-- Layer 2: 메인 오브젝트 — 마법사 지팡이 -->
+  <!-- 지팡이 몸통 -->
+  <line x1="320" y1="750" x2="600" y2="350" stroke="url(#wand01)" stroke-width="62" stroke-linecap="round"/>
+  <!-- 지팡이 끝 크리스탈 -->
+  <circle cx="620" cy="320" r="70" fill="url(#crystal01)" filter="url(#glow-filter01)"/>
+  <circle cx="620" cy="320" r="50" fill="white" fill-opacity="0.5"/>
+  <circle cx="600" cy="300" r="20" fill="white" fill-opacity="0.9"/>
+
+  <!-- Layer 3: 별빛 디테일 -->
+  <!-- 큰 별 -->
+  <g filter="url(#star-glow)">
+    <polygon points="512,220 530,270 582,270 540,300 556,352 512,322 468,352 484,300 442,270 494,270" fill="#FFD700"/>
+  </g>
+  <!-- 작은 별들 -->
+  <polygon points="380,300 388,324 412,324 392,338 400,362 380,348 360,362 368,338 348,324 372,324" fill="#FFFFFF" fill-opacity="0.9" filter="url(#star-glow)"/>
+  <polygon points="700,400 706,418 724,418 710,428 716,446 700,436 684,446 690,428 676,418 694,418" fill="#FFE566" fill-opacity="0.85" filter="url(#star-glow)"/>
+  <polygon points="660,560 665,574 680,574 668,582 673,596 660,588 647,596 652,582 640,574 655,574" fill="#FFFFFF" fill-opacity="0.7"/>
+
   <!-- 마법 파티클 -->
-  <circle cx="500" cy="550" r="8" fill="#CE93D8" opacity="0.7"/>
-  <circle cx="440" cy="610" r="6" fill="#CE93D8" opacity="0.5"/>
-  <circle cx="380" cy="670" r="5" fill="#4A148C" opacity="0.9"/>
+  <circle cx="440" cy="460" r="12" fill="#C8A0FF" fill-opacity="0.8" filter="url(#glow-filter01)"/>
+  <circle cx="680" cy="480" r="9" fill="#FFD700" fill-opacity="0.7" filter="url(#glow-filter01)"/>
+  <circle cx="350" cy="560" r="8" fill="#FFFFFF" fill-opacity="0.6"/>
+  <circle cx="720" cy="300" r="10" fill="#FF90E8" fill-opacity="0.7" filter="url(#glow-filter01)"/>
+  <circle cx="500" cy="600" r="7" fill="#80FFEA" fill-opacity="0.6"/>
+
+  <!-- 마법 곡선 -->
+  <path d="M620 320 Q720 250 750 350 Q780 450 700 500" stroke="#C8A0FF" stroke-width="6" fill="none" stroke-opacity="0.6" stroke-linecap="round"/>
+  <path d="M620 320 Q540 200 450 280 Q380 340 400 420" stroke="#FFE566" stroke-width="5" fill="none" stroke-opacity="0.5" stroke-linecap="round"/>
 </svg>

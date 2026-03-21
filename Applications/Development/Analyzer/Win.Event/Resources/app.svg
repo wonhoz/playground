@@ -1,30 +1,37 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
   <defs>
-    <radialGradient id="bg" cx="50%" cy="40%" r="70%">
-      <stop offset="0%" stop-color="#1A0A00"/>
-      <stop offset="100%" stop-color="#0D0500"/>
-    </radialGradient>
-    <linearGradient id="shield" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#F7971E"/>
-      <stop offset="100%" stop-color="#FFD200"/>
+    <clipPath id="we-bg-clip-01">
+      <rect width="1024" height="1024" rx="160"/>
+    </clipPath>
+    <linearGradient id="we-bg-01" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0078D4"/>
+      <stop offset="100%" stop-color="#005A9E"/>
     </linearGradient>
-    <filter id="glow">
-      <feGaussianBlur stdDeviation="5" result="b"/>
-      <feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
   </defs>
-  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
-  <!-- Shield shape -->
-  <path d="M256 80 L400 140 L400 270 Q400 380 256 440 Q112 380 112 270 L112 140 Z" fill="#1A0A00" stroke="url(#shield)" stroke-width="6" filter="url(#glow)"/>
-  <!-- Inner shield fill -->
-  <path d="M256 100 L385 154 L385 268 Q385 368 256 422 Q127 368 127 268 L127 154 Z" fill="#2A1500" opacity="0.8"/>
-  <!-- Warning exclamation -->
-  <text x="256" y="310" text-anchor="middle" font-family="Segoe UI" font-size="160" font-weight="900" fill="url(#shield)" filter="url(#glow)">!</text>
-  <!-- Event badges -->
-  <circle cx="156" cy="460" r="22" fill="#E74C3C"/>
-  <text x="156" y="467" text-anchor="middle" font-family="Segoe UI" font-size="18" font-weight="700" fill="#FFF">ERR</text>
-  <circle cx="256" cy="468" r="22" fill="#F7971E"/>
-  <text x="256" y="475" text-anchor="middle" font-family="Segoe UI" font-size="18" font-weight="700" fill="#FFF">WRN</text>
-  <circle cx="356" cy="460" r="22" fill="#3498DB"/>
-  <text x="356" y="467" text-anchor="middle" font-family="Segoe UI" font-size="18" font-weight="700" fill="#FFF">INF</text>
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="160" fill="url(#we-bg-01)"/>
+
+  <g clip-path="url(#we-bg-clip-01)">
+    <!-- Windows 로고 스타일 창 4분할 -->
+    <!-- 좌상 -->
+    <rect x="230" y="250" width="224" height="224" rx="20" fill="#FFFFFF"/>
+    <!-- 우상 -->
+    <rect x="474" y="250" width="224" height="224" rx="20" fill="#FFFFFF" opacity="0.88"/>
+    <!-- 좌하 -->
+    <rect x="230" y="494" width="224" height="224" rx="20" fill="#FFFFFF" opacity="0.88"/>
+    <!-- 우하 -->
+    <rect x="474" y="494" width="224" height="224" rx="20" fill="#FFFFFF" opacity="0.78"/>
+
+    <!-- 중간 갭 (십자) -->
+    <rect x="440" y="230" width="48" height="508" rx="24" fill="url(#we-bg-01)"/>
+    <rect x="210" y="440" width="508" height="48" rx="24" fill="url(#we-bg-01)"/>
+
+    <!-- 경고 배지 (우하 코너) -->
+    <circle cx="730" cy="740" r="130" fill="#D32F2F"/>
+    <circle cx="730" cy="740" r="108" fill="#E53935"/>
+    <!-- 느낌표 -->
+    <rect x="712" y="680" width="36" height="92" rx="18" fill="#FFFFFF"/>
+    <circle cx="730" cy="798" r="20" fill="#FFFFFF"/>
+  </g>
 </svg>

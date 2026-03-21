@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <clipPath id="bg-clip-01">
+      <rect width="1024" height="1024" rx="180"/>
+    </clipPath>
+    <linearGradient id="bg-grad-01" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00B4A0"/>
+      <stop offset="100%" stop-color="#007A6E"/>
+    </linearGradient>
+    <linearGradient id="glass-grad-01" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#E0F7F5" stop-opacity="0.85"/>
+    </linearGradient>
+  </defs>
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="180" fill="url(#bg-grad-01)"/>
+  <!-- 유리 케이스 외부 프레임 -->
+  <g clip-path="url(#bg-clip-01)">
+    <!-- 유리 케이스 본체 -->
+    <rect x="200" y="220" width="624" height="560" rx="32" fill="url(#glass-grad-01)" stroke="#FFFFFF" stroke-width="12"/>
+    <!-- 유리 케이스 뚜껑/상단 테두리 강조 -->
+    <rect x="200" y="220" width="624" height="60" rx="32" fill="#FFFFFF" opacity="0.9"/>
+    <rect x="200" y="262" width="624" height="18" fill="#FFFFFF" opacity="0.9"/>
+    <!-- 케이스 반사광 -->
+    <rect x="216" y="236" width="280" height="16" rx="8" fill="#FFFFFF" opacity="0.6"/>
+    <!-- 케이스 경첩 -->
+    <rect x="196" y="340" width="20" height="60" rx="6" fill="#CCEDE9" stroke="#00B4A0" stroke-width="4"/>
+    <rect x="808" y="340" width="20" height="60" rx="6" fill="#CCEDE9" stroke="#00B4A0" stroke-width="4"/>
+    <!-- 내부 EXE 창 - 코랄 색상 -->
+    <rect x="280" y="320" width="464" height="380" rx="16" fill="#FF6B5B" stroke="#FF3D2E" stroke-width="8"/>
+    <!-- EXE 창 타이틀바 -->
+    <rect x="280" y="320" width="464" height="52" rx="16" fill="#E03020"/>
+    <rect x="280" y="348" width="464" height="24" fill="#E03020"/>
+    <!-- 타이틀바 버튼들 -->
+    <circle cx="320" cy="346" r="12" fill="#FF8080"/>
+    <circle cx="360" cy="346" r="12" fill="#FFB347"/>
+    <circle cx="400" cy="346" r="12" fill="#66CC66"/>
+    <!-- 창 제목 텍스트 영역 -->
+    <rect x="430" y="336" width="200" height="20" rx="6" fill="#FF8070" opacity="0.7"/>
+    <!-- 창 내용 영역 -->
+    <rect x="300" y="390" width="180" height="14" rx="5" fill="#FFFFFF" opacity="0.8"/>
+    <rect x="300" y="416" width="240" height="14" rx="5" fill="#FFFFFF" opacity="0.6"/>
+    <rect x="300" y="442" width="200" height="14" rx="5" fill="#FFFFFF" opacity="0.6"/>
+    <rect x="300" y="468" width="160" height="14" rx="5" fill="#FFFFFF" opacity="0.4"/>
+    <!-- 잠금/격리 자물쇠 아이콘 (오른쪽 하단) -->
+    <rect x="580" y="560" width="100" height="80" rx="12" fill="#00B4A0" stroke="#FFFFFF" stroke-width="6"/>
+    <path d="M 598 562 Q 598 520 630 520 Q 662 520 662 562" fill="none" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round"/>
+    <circle cx="630" cy="600" r="14" fill="#FFFFFF"/>
+    <rect x="624" y="600" width="12" height="22" rx="4" fill="#FFFFFF"/>
+  </g>
+</svg>

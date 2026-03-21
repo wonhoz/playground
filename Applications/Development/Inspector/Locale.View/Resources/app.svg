@@ -1,16 +1,54 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
-  <rect width="1024" height="1024" rx="180" fill="#0D0520"/>
-  <!-- Globe -->
-  <circle cx="490" cy="510" r="300" fill="none" stroke="#6A1B9A" stroke-width="28"/>
-  <ellipse cx="490" cy="510" rx="120" ry="300" fill="none" stroke="#6A1B9A" stroke-width="14"/>
-  <line x1="190" y1="510" x2="790" y2="510" stroke="#6A1B9A" stroke-width="14"/>
-  <path d="M190 370 Q490 410 790 370" fill="none" stroke="#6A1B9A" stroke-width="10"/>
-  <path d="M190 650 Q490 610 790 650" fill="none" stroke="#6A1B9A" stroke-width="10"/>
-  <!-- Magnifier overlaid -->
-  <circle cx="680" cy="680" r="160" fill="none" stroke="#AB47BC" stroke-width="36"/>
-  <circle cx="680" cy="680" r="100" fill="#0D0520"/>
-  <line x1="796" y1="796" x2="880" y2="880" stroke="#AB47BC" stroke-width="48" stroke-linecap="round"/>
-  <!-- Search cross -->
-  <line x1="680" y1="630" x2="680" y2="730" stroke="#AB47BC" stroke-width="20" stroke-linecap="round"/>
-  <line x1="630" y1="680" x2="730" y2="680" stroke="#AB47BC" stroke-width="20" stroke-linecap="round"/>
+  <defs>
+    <clipPath id="lv2-clip">
+      <rect width="1024" height="1024" rx="180"/>
+    </clipPath>
+    <radialGradient id="lv2-bg" cx="50%" cy="50%" r="65%">
+      <stop offset="0%" stop-color="#C87800"/>
+      <stop offset="100%" stop-color="#7A4200"/>
+    </radialGradient>
+    <filter id="lv2-glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="14" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <g clip-path="url(#lv2-clip)">
+    <!-- Background: Deep Amber -->
+    <rect width="1024" height="1024" fill="url(#lv2-bg)"/>
+    <!-- Subtle radial overlay -->
+    <circle cx="512" cy="512" r="380" fill="#A06000" opacity="0.25"/>
+
+    <!-- Currency symbols flowing diagonally (white, large) -->
+    <g filter="url(#lv2-glow)" font-family="Arial, sans-serif" font-weight="bold" fill="#FFFFFF">
+      <!-- $ Dollar -->
+      <text x="220" y="350" font-size="160" opacity="0.95">$</text>
+      <!-- ¥ Yen -->
+      <text x="440" y="280" font-size="140" opacity="0.9">¥</text>
+      <!-- € Euro -->
+      <text x="660" y="360" font-size="150" opacity="0.88">€</text>
+      <!-- ₩ Won -->
+      <text x="240" y="560" font-size="130" opacity="0.82">₩</text>
+      <!-- £ Pound -->
+      <text x="500" y="520" font-size="140" opacity="0.85">£</text>
+      <!-- ₹ Rupee -->
+      <text x="720" y="560" font-size="120" opacity="0.75">₹</text>
+      <!-- ₿ Bitcoin (smaller accent) -->
+      <text x="320" y="740" font-size="100" opacity="0.65">₿</text>
+      <!-- ₺ Lira -->
+      <text x="580" y="720" font-size="100" opacity="0.60">₺</text>
+      <!-- CHF accent -->
+      <text x="730" y="720" font-size="80" opacity="0.50">Fr</text>
+    </g>
+
+    <!-- Flowing motion lines (diagonal streaks) -->
+    <g stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" opacity="0.15">
+      <line x1="200" y1="200" x2="824" y2="824"/>
+      <line x1="180" y1="280" x2="700" y2="800"/>
+      <line x1="300" y1="180" x2="900" y2="780"/>
+    </g>
+
+    <!-- Corner accents -->
+    <circle cx="820" cy="220" r="22" fill="#7A4200" opacity="0.5"/>
+    <circle cx="210" cy="800" r="28" fill="#7A4200" opacity="0.4"/>
+  </g>
 </svg>

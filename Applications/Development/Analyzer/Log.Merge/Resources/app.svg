@@ -1,64 +1,52 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
   <defs>
-    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#E8EAF6"/>
-      <stop offset="100%" stop-color="#C5CAE9"/>
+    <clipPath id="lm-bg-clip-02">
+      <rect width="1024" height="1024" rx="160"/>
+    </clipPath>
+    <linearGradient id="lm-bg-02" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E2535"/>
+      <stop offset="100%" stop-color="#252D40"/>
     </linearGradient>
-    <linearGradient id="doc1" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#90CAF9"/>
-      <stop offset="100%" stop-color="#42A5F5"/>
-    </linearGradient>
-    <linearGradient id="doc2" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#A5D6A7"/>
-      <stop offset="100%" stop-color="#66BB6A"/>
-    </linearGradient>
-    <linearGradient id="doc3" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#FFCC80"/>
-      <stop offset="100%" stop-color="#FFA726"/>
-    </linearGradient>
-    <linearGradient id="merged" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#CE93D8"/>
-      <stop offset="100%" stop-color="#AB47BC"/>
-    </linearGradient>
-    <filter id="shadow">
-      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#00000028"/>
-    </filter>
   </defs>
-  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
-  <!-- Three source doc cards -->
-  <rect x="56" y="100" width="104" height="140" rx="10" fill="url(#doc1)" filter="url(#shadow)"/>
-  <rect x="66" y="122" width="84" height="8" rx="4" fill="white" opacity="0.7"/>
-  <rect x="66" y="138" width="68" height="6" rx="3" fill="white" opacity="0.5"/>
-  <rect x="66" y="152" width="76" height="6" rx="3" fill="white" opacity="0.45"/>
-  <rect x="66" y="166" width="60" height="6" rx="3" fill="white" opacity="0.4"/>
-  <rect x="66" y="180" width="72" height="6" rx="3" fill="white" opacity="0.4"/>
-  <text x="108" y="222" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="white" font-weight="600">app.log</text>
-  <rect x="204" y="80" width="104" height="140" rx="10" fill="url(#doc2)" filter="url(#shadow)"/>
-  <rect x="214" y="102" width="84" height="8" rx="4" fill="white" opacity="0.7"/>
-  <rect x="214" y="118" width="68" height="6" rx="3" fill="white" opacity="0.5"/>
-  <rect x="214" y="132" width="76" height="6" rx="3" fill="white" opacity="0.45"/>
-  <rect x="214" y="146" width="60" height="6" rx="3" fill="white" opacity="0.4"/>
-  <rect x="214" y="160" width="72" height="6" rx="3" fill="white" opacity="0.4"/>
-  <text x="256" y="202" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="white" font-weight="600">sys.log</text>
-  <rect x="352" y="100" width="104" height="140" rx="10" fill="url(#doc3)" filter="url(#shadow)"/>
-  <rect x="362" y="122" width="84" height="8" rx="4" fill="white" opacity="0.7"/>
-  <rect x="362" y="138" width="68" height="6" rx="3" fill="white" opacity="0.5"/>
-  <rect x="362" y="152" width="76" height="6" rx="3" fill="white" opacity="0.45"/>
-  <rect x="362" y="166" width="60" height="6" rx="3" fill="white" opacity="0.4"/>
-  <text x="404" y="222" font-family="Arial, sans-serif" font-size="13" text-anchor="middle" fill="white" font-weight="600">net.log</text>
-  <!-- Arrows pointing down to merged -->
-  <line x1="108" y1="240" x2="204" y2="300" stroke="#7E57C2" stroke-width="2.5" stroke-dasharray="5 3" opacity="0.6"/>
-  <line x1="256" y1="220" x2="256" y2="300" stroke="#7E57C2" stroke-width="2.5" stroke-dasharray="5 3" opacity="0.7"/>
-  <line x1="404" y1="240" x2="308" y2="300" stroke="#7E57C2" stroke-width="2.5" stroke-dasharray="5 3" opacity="0.6"/>
-  <!-- Merge symbol -->
-  <circle cx="256" cy="300" r="20" fill="#7E57C2" filter="url(#shadow)"/>
-  <text x="256" y="307" font-family="Arial Black, sans-serif" font-size="16" text-anchor="middle" fill="white">+</text>
-  <!-- Output merged doc -->
-  <rect x="164" y="346" width="184" height="120" rx="12" fill="url(#merged)" filter="url(#shadow)"/>
-  <rect x="180" y="368" width="152" height="10" rx="5" fill="white" opacity="0.7"/>
-  <rect x="180" y="386" width="120" height="8" rx="4" fill="white" opacity="0.5"/>
-  <rect x="180" y="402" width="136" height="8" rx="4" fill="white" opacity="0.45"/>
-  <rect x="180" y="418" width="110" height="8" rx="4" fill="white" opacity="0.4"/>
-  <text x="256" y="450" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="white" font-weight="700">merged.log</text>
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="160" fill="url(#lm-bg-02)"/>
+
+  <g clip-path="url(#lm-bg-clip-02)">
+    <!-- 타임라인 수직 축 (좌측) -->
+    <line x1="270" y1="240" x2="270" y2="784" stroke="#3A4460" stroke-width="44" stroke-linecap="round"/>
+
+    <!-- 타임라인 노드 + 색상 카드들 -->
+
+    <!-- 노드 1 (오렌지) -->
+    <circle cx="270" cy="290" r="26" fill="#FF6B35"/>
+    <rect x="320" y="264" width="384" height="52" rx="14" fill="#FF6B35" opacity="0.9"/>
+    <rect x="332" y="276" width="200" height="28" rx="8" fill="rgba(255,255,255,0.25)"/>
+
+    <!-- 노드 2 (시안) -->
+    <circle cx="270" cy="390" r="26" fill="#00D4FF"/>
+    <rect x="320" y="364" width="340" height="52" rx="14" fill="#00D4FF" opacity="0.85"/>
+    <rect x="332" y="376" width="160" height="28" rx="8" fill="rgba(255,255,255,0.25)"/>
+
+    <!-- 노드 3 (그린) -->
+    <circle cx="270" cy="490" r="26" fill="#4ADE80"/>
+    <rect x="320" y="464" width="420" height="52" rx="14" fill="#4ADE80" opacity="0.85"/>
+    <rect x="332" y="476" width="240" height="28" rx="8" fill="rgba(255,255,255,0.25)"/>
+
+    <!-- 노드 4 (핑크) -->
+    <circle cx="270" cy="590" r="26" fill="#F472B6"/>
+    <rect x="320" y="564" width="300" height="52" rx="14" fill="#F472B6" opacity="0.85"/>
+    <rect x="332" y="576" width="130" height="28" rx="8" fill="rgba(255,255,255,0.25)"/>
+
+    <!-- 노드 5 (퍼플) -->
+    <circle cx="270" cy="690" r="26" fill="#A78BFA"/>
+    <rect x="320" y="664" width="360" height="52" rx="14" fill="#A78BFA" opacity="0.85"/>
+    <rect x="332" y="676" width="180" height="28" rx="8" fill="rgba(255,255,255,0.25)"/>
+
+    <!-- 연결선 -->
+    <line x1="270" y1="316" x2="270" y2="364" stroke="#3A4460" stroke-width="36" stroke-linecap="round"/>
+    <line x1="270" y1="416" x2="270" y2="464" stroke="#3A4460" stroke-width="36" stroke-linecap="round"/>
+    <line x1="270" y1="516" x2="270" y2="564" stroke="#3A4460" stroke-width="36" stroke-linecap="round"/>
+    <line x1="270" y1="616" x2="270" y2="664" stroke="#3A4460" stroke-width="36" stroke-linecap="round"/>
+  </g>
 </svg>

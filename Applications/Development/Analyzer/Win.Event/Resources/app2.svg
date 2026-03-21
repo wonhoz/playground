@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bgWin" x1="0" y1="0" x2="0.5" y2="1">
+      <stop offset="0%" stop-color="#0078D7"/>
+      <stop offset="100%" stop-color="#005A9E"/>
+    </linearGradient>
+    <!-- Windows 로고 4색 -->
+    <linearGradient id="winRed" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#F25022"/>
+      <stop offset="100%" stop-color="#E03A1A"/>
+    </linearGradient>
+    <linearGradient id="winGreen" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#7FBA00"/>
+      <stop offset="100%" stop-color="#5F9000"/>
+    </linearGradient>
+    <linearGradient id="winBlue" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#00A4EF"/>
+      <stop offset="100%" stop-color="#007CC0"/>
+    </linearGradient>
+    <linearGradient id="winYellow" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFB900"/>
+      <stop offset="100%" stop-color="#D49800"/>
+    </linearGradient>
+    <!-- 벨 그라데이션 -->
+    <linearGradient id="bellGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFE082"/>
+      <stop offset="100%" stop-color="#FFA000"/>
+    </linearGradient>
+    <filter id="bellGlow">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="shadow02w">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#00000044"/>
+    </filter>
+  </defs>
+
+  <!-- Layer1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bgWin)"/>
+
+  <!-- 배경 미묘한 패턴 -->
+  <circle cx="512" cy="512" r="420" fill="none" stroke="#FFFFFF" stroke-width="1" opacity="0.08"/>
+  <circle cx="512" cy="512" r="350" fill="none" stroke="#FFFFFF" stroke-width="1" opacity="0.05"/>
+
+  <!-- Layer2: Windows 로고 (왼쪽 중앙) -->
+  <!-- 4개 사각형 조각 -->
+  <rect x="240" y="360" width="160" height="140" rx="8" fill="url(#winRed)" filter="url(#shadow02w)"/>
+  <rect x="414" y="360" width="160" height="140" rx="8" fill="url(#winGreen)" filter="url(#shadow02w)"/>
+  <rect x="240" y="514" width="160" height="140" rx="8" fill="url(#winBlue)" filter="url(#shadow02w)"/>
+  <rect x="414" y="514" width="160" height="140" rx="8" fill="url(#winYellow)" filter="url(#shadow02w)"/>
+
+  <!-- 흰 분리선 (Windows 로고 가운데) -->
+  <line x1="406" y1="340" x2="406" y2="672" stroke="#0078D7" stroke-width="8"/>
+  <line x1="220" y1="506" x2="592" y2="506" stroke="#0078D7" stroke-width="8"/>
+
+  <!-- Layer3: 알림 벨 (오른쪽) -->
+  <!-- 벨 몸통 -->
+  <path d="M 680 360 C 680 310 710 280 740 270 C 770 280 800 310 800 360 L 820 560 L 660 560 Z" fill="url(#bellGrad)" filter="url(#bellGlow)"/>
+  <!-- 벨 손잡이 -->
+  <rect x="728" y="248" width="24" height="30" rx="12" fill="#FFE082"/>
+  <!-- 벨 바닥 반원 -->
+  <path d="M 650 560 Q 740 610 830 560" fill="url(#bellGrad)"/>
+  <!-- 벨 추 -->
+  <circle cx="740" cy="598" r="20" fill="#FFA000"/>
+  <!-- 울림 라인들 -->
+  <path d="M 836 380 Q 870 415 836 450" fill="none" stroke="#FFEB3B" stroke-width="7" stroke-linecap="round" opacity="0.9"/>
+  <path d="M 850 350 Q 900 415 850 480" fill="none" stroke="#FFEB3B" stroke-width="6" stroke-linecap="round" opacity="0.7"/>
+  <path d="M 644 380 Q 610 415 644 450" fill="none" stroke="#FFEB3B" stroke-width="7" stroke-linecap="round" opacity="0.9"/>
+  <path d="M 630 350 Q 580 415 630 480" fill="none" stroke="#FFEB3B" stroke-width="6" stroke-linecap="round" opacity="0.7"/>
+
+  <!-- 알림 배지 (빨강 원) -->
+  <circle cx="818" cy="300" r="34" fill="#FF4444" filter="url(#bellGlow)"/>
+  <text x="818" y="310" font-family="sans-serif" font-size="26" font-weight="bold" fill="#FFFFFF" text-anchor="middle">!</text>
+</svg>

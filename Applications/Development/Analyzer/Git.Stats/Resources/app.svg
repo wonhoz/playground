@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <clipPath id="bg-clip-01">
+      <rect width="1024" height="1024" rx="160"/>
+    </clipPath>
+    <radialGradient id="bg-grad-01" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#C0392B"/>
+      <stop offset="100%" stop-color="#7B1A1A"/>
+    </radialGradient>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="160" fill="url(#bg-grad-01)"/>
+
+  <g clip-path="url(#bg-clip-01)">
+    <!-- 메인 오브젝트: Git 브랜치 다이어그램 -->
+    <!-- 메인 브랜치 세로선 -->
+    <line x1="340" y1="220" x2="340" y2="800" stroke="#FFFFFF" stroke-width="64" stroke-linecap="round"/>
+    <!-- 피처 브랜치 곡선 -->
+    <path d="M340 340 C340 340 550 340 550 460" fill="none" stroke="#FFFFFF" stroke-width="56" stroke-linecap="round"/>
+    <path d="M550 460 C550 580 340 580 340 580" fill="none" stroke="#FFFFFF" stroke-width="56" stroke-linecap="round"/>
+    <!-- 두번째 브랜치 -->
+    <path d="M340 500 C340 500 680 500 680 620" fill="none" stroke="rgba(255,255,255,0.55)" stroke-width="48" stroke-linecap="round"/>
+    <line x1="680" y1="620" x2="680" y2="780" stroke="rgba(255,255,255,0.55)" stroke-width="48" stroke-linecap="round"/>
+
+    <!-- 디테일: 노드 원들 -->
+    <!-- 메인 브랜치 커밋 노드 -->
+    <circle cx="340" cy="260" r="50" fill="#FF8C42"/>
+    <circle cx="340" cy="260" r="28" fill="#FFFFFF"/>
+    <circle cx="340" cy="420" r="50" fill="#FF8C42"/>
+    <circle cx="340" cy="420" r="28" fill="#FFFFFF"/>
+    <circle cx="340" cy="580" r="50" fill="#FF8C42"/>
+    <circle cx="340" cy="580" r="28" fill="#FFFFFF"/>
+    <circle cx="340" cy="740" r="50" fill="#FF8C42"/>
+    <circle cx="340" cy="740" r="28" fill="#FFFFFF"/>
+
+    <!-- 피처 브랜치 노드 -->
+    <circle cx="550" cy="460" r="44" fill="#FFD166"/>
+    <circle cx="550" cy="460" r="24" fill="#FFFFFF"/>
+
+    <!-- 두번째 브랜치 노드 -->
+    <circle cx="680" cy="660" r="40" fill="rgba(255,255,255,0.7)"/>
+    <circle cx="680" cy="660" r="22" fill="#C0392B"/>
+    <circle cx="680" cy="780" r="40" fill="rgba(255,255,255,0.7)"/>
+    <circle cx="680" cy="780" r="22" fill="#C0392B"/>
+  </g>
+</svg>

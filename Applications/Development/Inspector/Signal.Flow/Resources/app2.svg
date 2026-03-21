@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <clipPath id="sf-bg-clip-04">
+      <rect width="1024" height="1024" rx="180"/>
+    </clipPath>
+    <linearGradient id="sf-bg-grad-04" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFD700"/>
+      <stop offset="100%" stop-color="#CC9900"/>
+    </linearGradient>
+    <filter id="glow-sf-04">
+      <feGaussianBlur stdDeviation="12" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- 배경 (딥 옐로) -->
+  <rect width="1024" height="1024" rx="180" fill="url(#sf-bg-grad-04)"/>
+  <g clip-path="url(#sf-bg-clip-04)">
+    <!-- 배경 밝기 방사 -->
+    <circle cx="512" cy="460" r="300" fill="#FFE840" opacity="0.35"/>
+    <!-- 번개 메인 심볼 (다크) -->
+    <polygon points="560,210 380,540 490,540 440,820 660,440 540,440" fill="#1A1200" filter="url(#glow-sf-04)"/>
+    <!-- 번개 하이라이트 -->
+    <polygon points="560,210 380,540 490,540 440,820 660,440 540,440" fill="none" stroke="#FFF8CC" stroke-width="8" opacity="0.4"/>
+    <!-- 번개 내부 밝은 부분 -->
+    <polygon points="548,248 400,514 488,514 444,776 638,460 538,460" fill="#2A2000" opacity="0.5"/>
+    <!-- 속도감 있는 모션 라인 (좌상단 → 번개) -->
+    <line x1="230" y1="340" x2="380" y2="400" stroke="#8A6000" stroke-width="10" stroke-linecap="round" opacity="0.6"/>
+    <line x1="230" y1="400" x2="360" y2="440" stroke="#8A6000" stroke-width="8" stroke-linecap="round" opacity="0.5"/>
+    <line x1="230" y1="460" x2="348" y2="480" stroke="#8A6000" stroke-width="6" stroke-linecap="round" opacity="0.4"/>
+    <!-- 속도감 라인 (우하단) -->
+    <line x1="660" y1="580" x2="790" y2="620" stroke="#8A6000" stroke-width="10" stroke-linecap="round" opacity="0.6"/>
+    <line x1="660" y1="640" x2="780" y2="660" stroke="#8A6000" stroke-width="8" stroke-linecap="round" opacity="0.5"/>
+    <line x1="660" y1="700" x2="770" y2="700" stroke="#8A6000" stroke-width="6" stroke-linecap="round" opacity="0.4"/>
+    <!-- 번개 끝 방사 광 -->
+    <circle cx="440" cy="820" r="30" fill="#FFE840" opacity="0.5"/>
+    <circle cx="440" cy="820" r="18" fill="#FFFFFF" opacity="0.6"/>
+  </g>
+</svg>

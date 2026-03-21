@@ -1,32 +1,39 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
   <defs>
-    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#1A1000"/>
-      <stop offset="100%" stop-color="#2A1A00"/>
+    <linearGradient id="bg01" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#87CEEB;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#4A9FCC;stop-opacity:1" />
     </linearGradient>
-    <linearGradient id="folder" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#F59E0B"/>
-      <stop offset="100%" stop-color="#D97706"/>
+    <linearGradient id="dome01" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFFFFF;stop-opacity:0.95" />
+      <stop offset="100%" style="stop-color:#B8E4F9;stop-opacity:0.6" />
     </linearGradient>
+    <linearGradient id="file01" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1A6BB5;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0D4A8A;stop-opacity:1" />
+    </linearGradient>
+    <filter id="glow01">
+      <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
   </defs>
-  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
-  <!-- Folder -->
-  <path d="M80,180 L80,380 Q80,400 100,400 L412,400 Q432,400 432,380 L432,200 Q432,180 412,180 L240,180 L210,155 Q200,145 190,145 L100,145 Q80,145 80,165 Z" fill="url(#folder)"/>
-  <path d="M80,200 L432,200" stroke="#92400E" stroke-width="2" opacity="0.5"/>
-  <!-- Temp files (crumpled papers) -->
-  <rect x="120" y="230" width="50" height="60" rx="4" fill="#FFF3CD" transform="rotate(-8 145 260)"/>
-  <text x="145" y="258" font-family="monospace" font-size="10" fill="#666" text-anchor="middle">.tmp</text>
-  <rect x="200" y="225" width="50" height="60" rx="4" fill="#FFF3CD" transform="rotate(5 225 255)"/>
-  <text x="225" y="253" font-family="monospace" font-size="10" fill="#666" text-anchor="middle">.log</text>
-  <rect x="280" y="235" width="50" height="60" rx="4" fill="#FFF3CD" transform="rotate(-3 305 265)"/>
-  <text x="305" y="263" font-family="monospace" font-size="10" fill="#666" text-anchor="middle">.cache</text>
-  <rect x="350" y="228" width="50" height="60" rx="4" fill="#FFF3CD" transform="rotate(10 375 258)"/>
-  <text x="375" y="256" font-family="monospace" font-size="10" fill="#666" text-anchor="middle">.tmp</text>
-  <!-- Broom sweeping -->
-  <line x1="350" y1="420" x2="450" y2="310" stroke="#8B4513" stroke-width="10" stroke-linecap="round"/>
-  <ellipse cx="362" cy="432" rx="30" ry="12" fill="#DAA520" transform="rotate(-45 362 432)"/>
-  <!-- Dust/particles -->
-  <circle cx="90" cy="420" r="4" fill="#888" opacity="0.5"/>
-  <circle cx="105" cy="410" r="3" fill="#888" opacity="0.4"/>
-  <circle cx="80" cy="405" r="3" fill="#888" opacity="0.3"/>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg01)"/>
+  <!-- Layer 2: 유리 돔 -->
+  <ellipse cx="512" cy="640" rx="260" ry="30" fill="#5AAFD0" opacity="0.5"/>
+  <path d="M260 640 Q260 340 512 320 Q764 340 764 640 Z" fill="url(#dome01)" stroke="#FFFFFF" stroke-width="10" opacity="0.9"/>
+  <ellipse cx="512" cy="640" rx="252" ry="26" fill="none" stroke="#FFFFFF" stroke-width="8" opacity="0.7"/>
+  <!-- 돔 하이라이트 -->
+  <path d="M310 550 Q350 380 480 350" fill="none" stroke="#FFFFFF" stroke-width="16" stroke-linecap="round" opacity="0.6"/>
+  <!-- Layer 3: 파일 아이콘 (돔 안) -->
+  <rect x="432" y="430" width="160" height="200" rx="12" fill="url(#file01)" stroke="#6BCFF6" stroke-width="6"/>
+  <path d="M432 430 L432 480 L512 480 Z" fill="#6BCFF6" opacity="0.8"/>
+  <line x1="466" y1="510" x2="558" y2="510" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round" opacity="0.9"/>
+  <line x1="466" y1="540" x2="558" y2="540" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round" opacity="0.9"/>
+  <line x1="466" y1="570" x2="520" y2="570" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round" opacity="0.7"/>
+  <!-- EXE 라벨 -->
+  <rect x="446" y="595" width="112" height="30" rx="6" fill="#6BCFF6" opacity="0.9"/>
+  <text x="502" y="617" font-family="monospace" font-size="20" fill="#0D4A8A" text-anchor="middle" font-weight="bold">.EXE</text>
+  <!-- 돔 테두리 광택 -->
+  <path d="M260 640 Q260 340 512 320 Q764 340 764 640" fill="none" stroke="#E0F4FF" stroke-width="4" opacity="0.5"/>
 </svg>

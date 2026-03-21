@@ -7,10 +7,6 @@
       <stop offset="0%" stop-color="#C87800"/>
       <stop offset="100%" stop-color="#7A4200"/>
     </radialGradient>
-    <filter id="lv2-glow" x="-30%" y="-30%" width="160%" height="160%">
-      <feGaussianBlur stdDeviation="14" result="blur"/>
-      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
   </defs>
   <g clip-path="url(#lv2-clip)">
     <!-- Background: Deep Amber -->
@@ -19,7 +15,7 @@
     <circle cx="512" cy="512" r="380" fill="#A06000" opacity="0.25"/>
 
     <!-- Currency symbols flowing diagonally (white, large) -->
-    <g filter="url(#lv2-glow)" font-family="Arial, sans-serif" font-weight="bold" fill="#FFFFFF">
+    <g font-family="Arial, sans-serif" font-weight="bold" fill="#FFFFFF">
       <!-- $ Dollar -->
       <text x="220" y="350" font-size="160" opacity="0.95">$</text>
       <!-- ¥ Yen -->

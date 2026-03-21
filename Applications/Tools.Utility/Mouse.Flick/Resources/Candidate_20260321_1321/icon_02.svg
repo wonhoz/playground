@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg02" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1E1B4B"/>
+      <stop offset="100%" stop-color="#312E81"/>
+    </linearGradient>
+    <linearGradient id="trail" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FBBF24" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#FBBF24"/>
+    </linearGradient>
+    <filter id="glow02">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <clipPath id="clip02">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+
+  <!-- Layer 1: 인디고 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg02)"/>
+  <circle cx="200" cy="800" r="220" fill="#3730A3" opacity="0.25" clip-path="url(#clip02)"/>
+
+  <!-- Layer 2: 제스처 궤적 (L자 - 왼쪽으로 드래그 후 완료) -->
+  <!-- 궤적 그림자/빛 -->
+  <path d="M 700,240 L 280,240 L 280,720"
+        stroke="#FBBF24" stroke-width="36" fill="none"
+        stroke-linecap="round" stroke-linejoin="round"
+        opacity="0.25" filter="url(#glow02)"/>
+  <!-- 궤적 실선 -->
+  <path d="M 700,240 L 280,240 L 280,720"
+        stroke="url(#trail)" stroke-width="28" fill="none"
+        stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- 시작점 (마우스 커서 위치) -->
+  <circle cx="700" cy="240" r="24" fill="#FBBF24" opacity="0.6"/>
+  <!-- 끝점 강조 -->
+  <circle cx="280" cy="720" r="32" fill="#FBBF24"/>
+  <circle cx="280" cy="720" r="18" fill="#1E1B4B"/>
+
+  <!-- 방향 화살표 꼬리 표시 (궤적 위) -->
+  <!-- 왼쪽 방향 화살표 힌트 -->
+  <polygon points="440,212 310,240 440,268" fill="#FBBF24" opacity="0.7"/>
+  <!-- 아래 방향 화살표 힌트 -->
+  <polygon points="252,520 280,650 308,520" fill="#FBBF24" opacity="0.7"/>
+
+  <!-- Layer 3: 인식 결과 UI (하단 오버레이 바) -->
+  <rect x="200" y="800" width="624" height="80" rx="20" fill="#0F0C2A" opacity="0.9"/>
+  <rect x="200" y="800" width="624" height="80" rx="20" fill="none" stroke="#4338CA" stroke-width="3"/>
+
+  <!-- 인식된 제스처 화살표 표시 -->
+  <text x="330" y="852" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="54" fill="#FBBF24" font-weight="bold">←</text>
+  <text x="440" y="852" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="54" fill="#FBBF24" font-weight="bold">↓</text>
+
+  <!-- 키 실행 힌트 -->
+  <rect x="508" y="820" width="290" height="42" rx="12" fill="#312E81" opacity="0.8"/>
+  <text x="653" y="848" text-anchor="middle" font-family="Consolas,monospace" font-size="26" fill="#A5B4FC">Alt+Left</text>
+</svg>

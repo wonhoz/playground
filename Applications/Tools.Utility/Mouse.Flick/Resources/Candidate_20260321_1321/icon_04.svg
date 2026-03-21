@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg04" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0D9488"/>
+      <stop offset="100%" stop-color="#134E4A"/>
+    </linearGradient>
+    <linearGradient id="flick_r" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#A7F3D0" stop-opacity="0.0"/>
+      <stop offset="40%" stop-color="#34D399"/>
+      <stop offset="100%" stop-color="#6EE7B7"/>
+    </linearGradient>
+    <linearGradient id="flick_l" x1="1" y1="0" x2="0" y2="0">
+      <stop offset="0%" stop-color="#99F6E4" stop-opacity="0.0"/>
+      <stop offset="40%" stop-color="#2DD4BF"/>
+      <stop offset="100%" stop-color="#5EEAD4"/>
+    </linearGradient>
+    <filter id="glow04">
+      <feGaussianBlur stdDeviation="12" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <clipPath id="clip04">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+
+  <!-- Layer 1: 청록 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg04)"/>
+
+  <!-- 배경 미세 격자 -->
+  <g opacity="0.05" clip-path="url(#clip04)">
+    <line x1="200" y1="0" x2="200" y2="1024" stroke="white" stroke-width="1"/>
+    <line x1="400" y1="0" x2="400" y2="1024" stroke="white" stroke-width="1"/>
+    <line x1="600" y1="0" x2="600" y2="1024" stroke="white" stroke-width="1"/>
+    <line x1="800" y1="0" x2="800" y2="1024" stroke="white" stroke-width="1"/>
+    <line x1="0" y1="200" x2="1024" y2="200" stroke="white" stroke-width="1"/>
+    <line x1="0" y1="400" x2="1024" y2="400" stroke="white" stroke-width="1"/>
+    <line x1="0" y1="600" x2="1024" y2="600" stroke="white" stroke-width="1"/>
+    <line x1="0" y1="800" x2="1024" y2="800" stroke="white" stroke-width="1"/>
+  </g>
+
+  <!-- Layer 2: RL 제스처 궤적 (오른쪽→왼쪽 되돌아오는 zig-zag) -->
+  <!-- 첫 번째 스윕: 왼쪽→오른쪽 (위쪽) -->
+  <path d="M 200,340 L 820,340" stroke="url(#flick_r)" stroke-width="56"
+        stroke-linecap="round" filter="url(#glow04)"/>
+  <!-- 연결 꺾임 -->
+  <path d="M 820,340 Q 880,340 880,420 Q 880,500 820,500"
+        stroke="#34D399" stroke-width="44" fill="none"
+        stroke-linecap="round" filter="url(#glow04)"/>
+  <!-- 두 번째 스윕: 오른쪽→왼쪽 (아래쪽) -->
+  <path d="M 820,500 L 200,500" stroke="url(#flick_l)" stroke-width="56"
+        stroke-linecap="round" filter="url(#glow04)"/>
+
+  <!-- 화살표 머리들 -->
+  <!-- → 방향 화살표 -->
+  <polygon points="750,296 876,340 750,384" fill="#6EE7B7"/>
+  <!-- ← 방향 화살표 -->
+  <polygon points="270,456 144,500 270,544" fill="#5EEAD4"/>
+
+  <!-- 시작점 -->
+  <circle cx="200" cy="340" r="22" fill="white" opacity="0.8"/>
+  <!-- 끝점 -->
+  <circle cx="200" cy="500" r="28" fill="#6EE7B7"/>
+  <circle cx="200" cy="500" r="14" fill="#134E4A"/>
+
+  <!-- Layer 3: 제스처 코드 표시 -->
+  <!-- "R → L" 시각화 -->
+  <rect x="340" y="608" width="344" height="80" rx="20" fill="#022C22" opacity="0.85"/>
+  <rect x="340" y="608" width="344" height="80" rx="20" fill="none" stroke="#34D399" stroke-width="3"/>
+  <text x="512" y="660" text-anchor="middle" font-family="Consolas,monospace" font-size="42" fill="#34D399" font-weight="bold">R → L</text>
+
+  <!-- 키 매핑 힌트 -->
+  <rect x="340" y="710" width="344" height="54" rx="14" fill="#134E4A" opacity="0.7"/>
+  <text x="512" y="745" text-anchor="middle" font-family="Consolas,monospace" font-size="28" fill="#99F6E4">Ctrl+Z  (Undo)</text>
+</svg>

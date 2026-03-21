@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg03" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#831843"/>
+      <stop offset="100%" stop-color="#BE185D"/>
+    </linearGradient>
+    <linearGradient id="arrow_r" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#FDE68A"/>
+      <stop offset="100%" stop-color="#F59E0B"/>
+    </linearGradient>
+    <linearGradient id="arrow_l" x1="1" y1="0" x2="0" y2="0">
+      <stop offset="0%" stop-color="#BAE6FD"/>
+      <stop offset="100%" stop-color="#38BDF8"/>
+    </linearGradient>
+    <linearGradient id="arrow_u" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0%" stop-color="#BBF7D0"/>
+      <stop offset="100%" stop-color="#34D399"/>
+    </linearGradient>
+    <linearGradient id="arrow_d" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#DDD6FE"/>
+      <stop offset="100%" stop-color="#A78BFA"/>
+    </linearGradient>
+    <clipPath id="clip03">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+
+  <!-- Layer 1: 비비드 핑크/마젠타 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg03)"/>
+  <circle cx="512" cy="512" r="420" fill="#9D174D" opacity="0.3" clip-path="url(#clip03)"/>
+
+  <!-- Layer 2: 4방향 화살표 (각 방향에 독립 컬러) -->
+
+  <!-- 오른쪽 화살표 (황색) -->
+  <rect x="568" y="468" width="240" height="88" rx="20" fill="url(#arrow_r)"/>
+  <polygon points="780,420 888,512 780,604" fill="url(#arrow_r)"/>
+
+  <!-- 왼쪽 화살표 (하늘색) -->
+  <rect x="216" y="468" width="240" height="88" rx="20" fill="url(#arrow_l)"/>
+  <polygon points="244,420 136,512 244,604" fill="url(#arrow_l)"/>
+
+  <!-- 위 화살표 (초록) -->
+  <rect x="468" y="216" width="88" height="240" rx="20" fill="url(#arrow_u)"/>
+  <polygon points="420,244 512,136 604,244" fill="url(#arrow_u)"/>
+
+  <!-- 아래 화살표 (보라) -->
+  <rect x="468" y="568" width="88" height="240" rx="20" fill="url(#arrow_d)"/>
+  <polygon points="420,780 512,888 604,780" fill="url(#arrow_d)"/>
+
+  <!-- Layer 3: 중앙 마우스 버튼 심볼 -->
+  <circle cx="512" cy="512" r="112" fill="#831843"/>
+  <circle cx="512" cy="512" r="100" fill="#9D174D"/>
+  <!-- 마우스 우클릭 표시 -->
+  <!-- 마우스 미니 실루엣 -->
+  <path d="M 512,450 C 546,450 568,468 568,495 L 568,530 C 568,558 546,576 512,576 C 478,576 456,558 456,530 L 456,495 C 456,468 478,450 512,450 Z"
+        fill="white" opacity="0.9"/>
+  <!-- 버튼 선 -->
+  <line x1="512" y1="453" x2="512" y2="490" stroke="#9D174D" stroke-width="6"/>
+  <!-- 오른쪽 버튼 강조 -->
+  <path d="M 512,450 C 546,450 568,468 568,495 L 568,490 L 512,490 L 512,453 Z"
+        fill="#FBBF24" opacity="0.8"/>
+</svg>

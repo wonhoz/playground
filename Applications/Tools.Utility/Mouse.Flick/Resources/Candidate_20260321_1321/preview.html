@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Mouse.Flick — Icon Candidates (20260321_1321)</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: radial-gradient(ellipse at 30% 20%, #1C0A00 0%, #0F0F23 60%, #0D1117 100%);
+      min-height: 100vh;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      color: #E2E8F0;
+      padding: 40px 20px;
+    }
+    h1 {
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 700;
+      color: #FEF3C7;
+      margin-bottom: 8px;
+    }
+    .subtitle {
+      text-align: center;
+      color: #6B7280;
+      font-size: 0.95rem;
+      margin-bottom: 48px;
+    }
+    .subtitle span { color: #FBBF24; font-weight: 600; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 28px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .card {
+      background: rgba(30, 20, 5, 0.6);
+      border: 1px solid rgba(251, 191, 36, 0.15);
+      border-radius: 20px;
+      padding: 28px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+      backdrop-filter: blur(8px);
+    }
+    .card:hover {
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: 0 24px 60px rgba(251, 191, 36, 0.15);
+      border-color: rgba(251, 191, 36, 0.4);
+    }
+    .icon-wrap {
+      width: 200px;
+      height: 200px;
+      margin: 0 auto 20px;
+    }
+    .icon-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 20px;
+    }
+    .filename {
+      text-align: center;
+      font-size: 0.85rem;
+      color: #FBBF24;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+    .concept {
+      font-size: 0.9rem;
+      color: #D1D5DB;
+      text-align: center;
+      line-height: 1.55;
+      margin-bottom: 12px;
+    }
+    .tags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 14px;
+    }
+    .tag {
+      padding: 3px 12px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+    .tag-literal  { background: #1D4ED8; color: #BFDBFE; }
+    .tag-metaphor { background: #7C3AED; color: #DDD6FE; }
+    .tag-hybrid   { background: #92400E; color: #FDE68A; border: 1px solid #F59E0B; }
+    .tag-pattern  { background: #111827; color: #4B5563; border: 1px solid #1F2937; }
+    .palette { display: flex; gap: 6px; justify-content: center; }
+    .swatch {
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.1);
+    }
+    .section-title {
+      text-align: center;
+      font-size: 0.72rem;
+      color: #4B5563;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Mouse.Flick — Icon Candidates</h1>
+  <p class="subtitle">
+    <span>Candidate_20260321_1321</span> &nbsp;·&nbsp; 5 icons
+    &nbsp;·&nbsp; Tools.Utility / Mouse Gesture
+  </p>
+
+  <div class="grid">
+
+    <!-- icon_01 -->
+    <div class="card">
+      <div class="icon-wrap"><img src="icon_01.svg" alt="icon_01"/></div>
+      <div class="filename">icon_01.svg</div>
+      <div class="concept">마우스 실루엣 + 오른쪽 버튼 강조(파랑)<br>아래 → 화살표로 드래그 제스처 표현</div>
+      <div class="tags">
+        <span class="tag tag-literal">Literal</span>
+        <span class="tag tag-pattern">중앙 심볼</span>
+      </div>
+      <div class="section-title">Palette</div>
+      <div class="palette">
+        <div class="swatch" style="background:#0F172A" title="진한 남색 배경"></div>
+        <div class="swatch" style="background:#CBD5E1" title="마우스 몸체"></div>
+        <div class="swatch" style="background:#3B82F6" title="오른쪽 버튼 파랑"></div>
+        <div class="swatch" style="background:#4ADE80" title="초록 화살표"></div>
+      </div>
+    </div>
+
+    <!-- icon_02 -->
+    <div class="card">
+      <div class="icon-wrap"><img src="icon_02.svg" alt="icon_02"/></div>
+      <div class="filename">icon_02.svg</div>
+      <div class="concept">L자 드래그 궤적 + 인식 결과 오버레이<br>← ↓ 화살표 표시 + "Alt+Left" 실행 힌트</div>
+      <div class="tags">
+        <span class="tag tag-literal">Literal</span>
+        <span class="tag tag-pattern">대각선/동적</span>
+      </div>
+      <div class="section-title">Palette</div>
+      <div class="palette">
+        <div class="swatch" style="background:#1E1B4B" title="인디고 배경"></div>
+        <div class="swatch" style="background:#FBBF24" title="황색 궤적"></div>
+        <div class="swatch" style="background:#A5B4FC" title="연보라 키 힌트"></div>
+        <div class="swatch" style="background:#ffffff" title="흰 화살표"></div>
+      </div>
+    </div>
+
+    <!-- icon_03 -->
+    <div class="card">
+      <div class="icon-wrap"><img src="icon_03.svg" alt="icon_03"/></div>
+      <div class="filename">icon_03.svg</div>
+      <div class="concept">4방향 화살표 각기 다른 컬러로 배열<br>중앙에 마우스 우클릭 버튼 강조</div>
+      <div class="tags">
+        <span class="tag tag-hybrid">Hybrid</span>
+        <span class="tag tag-pattern">레이어드</span>
+      </div>
+      <div class="section-title">Palette</div>
+      <div class="palette">
+        <div class="swatch" style="background:#BE185D" title="마젠타 배경"></div>
+        <div class="swatch" style="background:#F59E0B" title="황색 →"></div>
+        <div class="swatch" style="background:#38BDF8" title="하늘 ←"></div>
+        <div class="swatch" style="background:#34D399" title="초록 ↑"></div>
+        <div class="swatch" style="background:#A78BFA" title="보라 ↓"></div>
+      </div>
+    </div>
+
+    <!-- icon_04 -->
+    <div class="card">
+      <div class="icon-wrap"><img src="icon_04.svg" alt="icon_04"/></div>
+      <div class="filename">icon_04.svg</div>
+      <div class="concept">RL 제스처 — 오른쪽→왼쪽 왕복 궤적<br>"R → L" + "Ctrl+Z (Undo)" 매핑 표시</div>
+      <div class="tags">
+        <span class="tag tag-metaphor">Metaphor</span>
+        <span class="tag tag-pattern">기하학 추상</span>
+      </div>
+      <div class="section-title">Palette</div>
+      <div class="palette">
+        <div class="swatch" style="background:#0D9488" title="청록 배경"></div>
+        <div class="swatch" style="background:#34D399" title="초록 → 궤적"></div>
+        <div class="swatch" style="background:#2DD4BF" title="청록 ← 궤적"></div>
+        <div class="swatch" style="background:#6EE7B7" title="밝은 초록 화살표"></div>
+        <div class="swatch" style="background:#99F6E4" title="연청록 코드"></div>
+      </div>
+    </div>
+
+    <!-- icon_05 -->
+    <div class="card">
+      <div class="icon-wrap"><img src="icon_05.svg" alt="icon_05"/></div>
+      <div class="filename">icon_05.svg</div>
+      <div class="concept">마우스 커서가 빛줄기를 그어 명령 소환<br>빛 궤적 + ⚡ 실행 폭발 + 실행 정보 바</div>
+      <div class="tags">
+        <span class="tag tag-metaphor">Metaphor</span>
+        <span class="tag tag-pattern">공간/장면</span>
+      </div>
+      <div class="section-title">Palette</div>
+      <div class="palette">
+        <div class="swatch" style="background:#C2410C" title="주황 배경"></div>
+        <div class="swatch" style="background:#FBBF24" title="황색 빛 궤적"></div>
+        <div class="swatch" style="background:#ffffff" title="흰 커서/폭발"></div>
+        <div class="swatch" style="background:#FED7AA" title="연주황 텍스트"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <p style="text-align:center; margin-top:48px; color:#1C0A00; font-size:0.8rem; opacity:0.6;">
+    Mouse.Flick · Candidate_20260321_1321 · 2026-03-21
+  </p>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 배경 - 따뜻한 크림 -->
+  <defs>
+    <linearGradient id="bg4" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF8E7"/>
+      <stop offset="100%" stop-color="#FFF0C8"/>
+    </linearGradient>
+    <linearGradient id="card_a" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF8C42"/>
+      <stop offset="100%" stop-color="#FF6B1A"/>
+    </linearGradient>
+    <linearGradient id="card_b" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF7A2F"/>
+      <stop offset="100%" stop-color="#E85D04"/>
+    </linearGradient>
+    <linearGradient id="card_c" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFA040"/>
+      <stop offset="100%" stop-color="#FF7A00"/>
+    </linearGradient>
+    <linearGradient id="card_d" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFB347"/>
+      <stop offset="100%" stop-color="#FF9800"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="200" fill="url(#bg4)"/>
+
+  <!-- Layer 2: ICO 멀티사이즈 계단식 스택 (큰→작음, 앞→뒤 레이어드) -->
+
+  <!-- 그림자 효과 -->
+  <rect x="182" y="782" width="660" height="8" rx="4" fill="#C8A060" opacity="0.3"/>
+
+  <!-- 카드 4 (가장 뒤, 가장 큼 - 256px 상징) -->
+  <rect x="180" y="230" width="660" height="540" rx="22" fill="url(#card_a)" opacity="0.95"/>
+  <rect x="180" y="230" width="660" height="72" rx="22" fill="#CC5500" opacity="0.6"/>
+  <!-- 상단 파일 탭 -->
+  <rect x="180" y="218" width="120" height="40" rx="10" fill="#CC5500" opacity="0.7"/>
+  <!-- 크기 레이블 -->
+  <text x="510" y="320" font-family="'Segoe UI', Arial, sans-serif" font-size="42" font-weight="700"
+        fill="white" text-anchor="middle" opacity="0.65">256 × 256</text>
+  <!-- 이미지 플레이스홀더 -->
+  <rect x="230" y="340" width="560" height="380" rx="14" fill="white" opacity="0.2"/>
+
+  <!-- 카드 3 (128px 상징) -->
+  <rect x="220" y="290" width="570" height="460" rx="20" fill="url(#card_b)" opacity="0.97"/>
+  <rect x="220" y="290" width="570" height="65" rx="20" fill="#A84000" opacity="0.5"/>
+  <rect x="220" y="278" width="110" height="36" rx="9" fill="#A84000" opacity="0.6"/>
+  <text x="505" y="373" font-family="'Segoe UI', Arial, sans-serif" font-size="40" font-weight="700"
+        fill="white" text-anchor="middle" opacity="0.65">128 × 128</text>
+  <rect x="268" y="388" width="474" height="318" rx="12" fill="white" opacity="0.2"/>
+
+  <!-- 카드 2 (64px 상징) -->
+  <rect x="262" y="350" width="480" height="380" rx="18" fill="url(#card_c)" opacity="0.98"/>
+  <rect x="262" y="350" width="480" height="58" rx="18" fill="#9B3D00" opacity="0.45"/>
+  <rect x="262" y="338" width="100" height="32" rx="8" fill="#9B3D00" opacity="0.55"/>
+  <text x="502" y="427" font-family="'Segoe UI', Arial, sans-serif" font-size="38" font-weight="700"
+        fill="white" text-anchor="middle" opacity="0.65">64 × 64</text>
+  <rect x="306" y="438" width="392" height="250" rx="10" fill="white" opacity="0.2"/>
+
+  <!-- 카드 1 (앞, 가장 작음 - 32px 상징) -->
+  <rect x="308" y="412" width="390" height="300" rx="16" fill="url(#card_d)" opacity="1"/>
+  <rect x="308" y="412" width="390" height="52" rx="16" fill="#8B3300" opacity="0.4"/>
+  <rect x="308" y="400" width="90" height="28" rx="7" fill="#8B3300" opacity="0.5"/>
+  <text x="503" y="479" font-family="'Segoe UI', Arial, sans-serif" font-size="36" font-weight="700"
+        fill="white" text-anchor="middle" opacity="0.65">32 × 32</text>
+  <rect x="348" y="488" width="310" height="190" rx="8" fill="white" opacity="0.18"/>
+
+  <!-- Layer 3: 디테일 - ICO 뱃지 + 체크 -->
+  <circle cx="760" cy="740" r="84" fill="white" opacity="0.95"/>
+  <circle cx="760" cy="740" r="72" fill="#FF6B1A"/>
+  <text x="760" y="760" font-family="'Segoe UI', Arial, sans-serif" font-size="50" font-weight="900"
+        fill="white" text-anchor="middle">ICO</text>
+</svg>

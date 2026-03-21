@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 배경 - 딥 퍼플 그라데이션 -->
+  <defs>
+    <linearGradient id="bg1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2D1B69"/>
+      <stop offset="100%" stop-color="#4A1FA8"/>
+    </linearGradient>
+    <linearGradient id="arrow1" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FF8C00"/>
+      <stop offset="100%" stop-color="#FFD700"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="200" fill="url(#bg1)"/>
+
+  <!-- Layer 2: 메인 오브젝트 - SVG와 ICO 포맷 텍스트 + 화살표 -->
+  <!-- SVG 텍스트 (좌측) -->
+  <text x="130" y="430" font-family="'Segoe UI', Arial, sans-serif" font-size="160" font-weight="900"
+        fill="white" opacity="0.95" letter-spacing="-4">SVG</text>
+
+  <!-- ICO 텍스트 (우측) -->
+  <text x="630" y="430" font-family="'Segoe UI', Arial, sans-serif" font-size="160" font-weight="900"
+        fill="white" opacity="0.95" letter-spacing="-4">ICO</text>
+
+  <!-- 중앙 화살표 -->
+  <path d="M 360 395 L 520 395 L 490 355 M 520 395 L 490 435"
+        stroke="url(#arrow1)" stroke-width="52" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+
+  <!-- Layer 3: 디테일 - 하단 보조 텍스트 줄 -->
+  <text x="512" y="590" font-family="'Segoe UI', Arial, sans-serif" font-size="68" font-weight="400"
+        fill="white" opacity="0.45" text-anchor="middle" letter-spacing="8">PNG · JPG · BMP</text>
+
+  <!-- 하단 장식 라인 -->
+  <rect x="200" y="640" width="624" height="4" rx="2" fill="white" opacity="0.2"/>
+
+  <!-- 하단 설명 -->
+  <text x="512" y="720" font-family="'Segoe UI', Arial, sans-serif" font-size="58" font-weight="300"
+        fill="white" opacity="0.55" text-anchor="middle" letter-spacing="6">IMAGE CONVERTER</text>
+</svg>

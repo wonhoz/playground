@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Img.Cast — Icon Candidates</title>
+  <style>
+    :root {
+      --bg: #0E1420;
+      --surface: #161E2E;
+      --surface2: #1E2A3E;
+      --border: #2A3A55;
+      --accent: #4FC3F7;
+      --text: #E8F0FF;
+      --muted: #8AA0C0;
+      --tag-literal: #FF8C42;
+      --tag-metaphor: #A78BFA;
+      --tag-hybrid: #34D399;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      min-height: 100vh;
+      padding: 48px 32px;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 52px;
+    }
+    header h1 {
+      font-size: 2.4rem;
+      font-weight: 800;
+      color: var(--accent);
+      letter-spacing: 2px;
+      margin-bottom: 8px;
+    }
+    header p {
+      color: var(--muted);
+      font-size: 1rem;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      gap: 28px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .card {
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      border-radius: 18px;
+      overflow: hidden;
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+      cursor: pointer;
+    }
+    .card:hover {
+      transform: translateY(-6px) scale(1.02);
+      border-color: var(--accent);
+      box-shadow: 0 12px 40px rgba(79,195,247,0.18);
+    }
+    .icon-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--surface2);
+      padding: 36px;
+    }
+    .icon-wrap img {
+      width: 200px;
+      height: 200px;
+      object-fit: contain;
+      transition: transform 0.3s ease;
+      filter: drop-shadow(0 4px 16px rgba(0,0,0,0.5));
+    }
+    .card:hover .icon-wrap img {
+      transform: scale(1.12);
+    }
+    .info {
+      padding: 20px 22px 22px;
+    }
+    .info-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .filename {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--accent);
+      font-family: 'Courier New', monospace;
+    }
+    .type-badge {
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 999px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+    .type-literal  { background: rgba(255,140,66,0.18); color: var(--tag-literal); border: 1px solid var(--tag-literal); }
+    .type-metaphor { background: rgba(167,139,250,0.18); color: var(--tag-metaphor); border: 1px solid var(--tag-metaphor); }
+    .type-hybrid   { background: rgba(52,211,153,0.18); color: var(--tag-hybrid); border: 1px solid var(--tag-hybrid); }
+    .concept {
+      font-size: 0.95rem;
+      color: var(--text);
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    .desc {
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.55;
+      margin-bottom: 14px;
+    }
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .meta-chip {
+      font-size: 0.74rem;
+      padding: 3px 10px;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.06);
+      color: var(--muted);
+      border: 1px solid var(--border);
+    }
+    .palette {
+      display: flex;
+      gap: 5px;
+      margin-top: 12px;
+    }
+    .swatch {
+      width: 22px;
+      height: 22px;
+      border-radius: 5px;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    footer {
+      text-align: center;
+      margin-top: 56px;
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Img.Cast</h1>
+    <p>Icon Candidates &nbsp;·&nbsp; Candidate_20260321_1207 &nbsp;·&nbsp; 8 icons</p>
+  </header>
+
+  <div class="grid">
+
+    <!-- icon_01 -->
+    <div class="card">
+      <div class="icon-wrap">
+        <img src="icon_01.svg" alt="icon_01">
+      </div>
+      <div class="info">
+        <div class="info-header">
+          <span class="filename">icon_01.svg</span>
+          <span class="type-badge type-literal">literal</span>
+        </div>
+        <div class="concept">SVG → ICO 포맷 텍스트 변환</div>
+        <div class="desc">SVG와 ICO 포맷 레이블이 오렌지 화살표를 중심으로 배치. 앱을 처음 봐도 1초 안에 "이미지 포맷 변환기"임을 파악할 수 있음.</div>
+        <div class="meta-row">
+          <span class="meta-chip">중앙 심볼</span>
+          <span class="meta-chip">딥 퍼플 배경</span>
+          <span class="meta-chip">오렌지 화살표</span>
+        </div>
+        <div class="palette">
+          <div class="swatch" style="background:#2D1B69;"></div>
+          <div class="swatch" style="background:#4A1FA8;"></div>
+          <div class="swatch" style="background:#FF8C00;"></div>
+          <div class="swatch" style="background:#FFD700;"></div>
+          <div class="swatch" style="background:white;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- icon_02 -->
+    <div class="card">
+      <div class="icon-wrap">
+        <img src="icon_02.svg" alt="icon_02">
+      </div>
+      <div class="info">
+        <div class="info-header">
+          <span class="filename">icon_02.svg</span>
+          <span class="type-badge type-hybrid">hybrid</span>
+        </div>
+        <div class="concept">멀티 포맷 → 깔때기 → ICO 출력</div>
+        <div class="desc">PNG/SVG/JPG 파일들이 파란 깔때기를 거쳐 오렌지 ICO 파일 하나로 수렴. 배치 변환의 핵심 흐름을 시각화.</div>
+        <div class="meta-row">
+          <span class="meta-chip">대각선/동적</span>
+          <span class="meta-chip">밝은 하늘색</span>
+          <span class="meta-chip">포맷 파일 카드</span>
+        </div>
+        <div class="palette">
+          <div class="swatch" style="background:#E3F2FD;"></div>
+          <div class="swatch" style="background:#1565C0;"></div>
+          <div class="swatch" style="background:#9C27B0;"></div>
+          <div class="swatch" style="background:#00897B;"></div>
+          <div class="swatch" style="background:#FF6B35;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- icon_03 -->
+    <div class="card">
+      <div class="icon-wrap">
+        <img src="icon_03.svg" alt="icon_03">
+      </div>
+      <div class="info">
+        <div class="info-header">
+          <span class="filename">icon_03.svg</span>
+          <span class="type-badge type-metaphor">metaphor</span>
+        </div>
+        <div class="concept">마법 지팡이 — 파일을 변환하는 마법사</div>
+        <div class="desc">황금빛 지팡이 끝에서 별이 빛나며 SVG 파일이 ICO로 변환. "Cast"라는 앱 이름의 마법 주문 의미를 시각화.</div>
+        <div class="meta-row">
+          <span class="meta-chip">실루엣/캐릭터</span>
+          <span class="meta-chip">진한 남색</span>
+          <span class="meta-chip">황금 지팡이</span>
+        </div>
+        <div class="palette">
+          <div class="swatch" style="background:#0D1B2A;"></div>
+          <div class="swatch" style="background:#FFD700;"></div>
+          <div class="swatch" style="background:#9B59B6;"></div>
+          <div class="swatch" style="background:#FF6B35;"></div>
+          <div class="swatch" style="background:white;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- icon_04 -->
+    <div class="card">
+      <div class="icon-wrap">
+        <img src="icon_04.svg" alt="icon_04">
+      </div>
+      <div class="info">
+        <div class="info-header">
+          <span class="filename">icon_04.svg</span>
+          <span class="type-badge type-literal">literal</span>
+        </div>
+        <div class="concept">ICO 멀티사이즈 계단 스택</div>
+        <div class="desc">256→128→64→32px 카드가 계단식으로 쌓인 레이어드 구성. ICO의 핵심 특성인 멀티사이즈 패킹을 직관적으로 표현.</div>
+        <div class="meta-row">
+          <span class="meta-chip">레이어드</span>
+          <span class="meta-chip">크림 배경</span>
+          <span class="meta-chip">오렌지 그라데이션</span>
+        </div>
+        <div class="palette">
+          <div class="swatch" style="background:#FFF8E7;"></div>
+          <div class="swatch" style="background:#FF8C42;"></div>
+          <div class="swatch" style="background:#FF6B1A;"></div>
+          <div class="swatch" style="background:#E85D04;"></div>
+          <div class="swatch" style="background:#0D47A1;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- icon_05 -->
+    <div class="card">
+      <div class="icon-wrap">
+        <img src="icon_05.svg" alt="icon_05">
+      </div>
+      <div class="info">
+        <div class="info-header">
+          <span class="filename">icon_05.svg</span>
+          <span class="type-badge type-metaphor">metaphor</span>
+        </div>
+        <div class="concept">드래그&amp;드롭 — 파일들을 드롭존에 투하</div>
+        <div class="desc">PNG/SVG/JPG 파일들이 공중에 떠서 초록 점선 드롭존으로 떨어지는 장면. 이 앱의 핵심 UX인 드래그&amp;드롭을 직접 보여줌.</div>
+        <div class="meta-row">
+          <span class="meta-chip">공간/장면</span>
+          <span class="meta-chip">밝은 연초록</span>
+          <span class="meta-chip">드롭존 점선</span>
+        </div>
+        <div class="palette">
+          <div class="swatch" style="background:#F1F8F0;"></div>
+          <div class="swatch" style="background:#4CAF50;"></div>
+          <div class="swatch" style="background:#2196F3;"></div>
+          <div class="swatch" style="background:#9C27B0;"></div>
+          <div class="swatch" style="background:#FF5722;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- icon_06 -->
+    <div class="card">
+      <div class="icon-wrap">
+        <img src="icon_06.svg" alt="icon_06">
+      </div>
+      <div class="info">
+        <div class="info-header">
+          <span class="filename">icon_06.svg</span>
+          <span class="type-badge type-metaphor">metaphor</span>
+        </div>
+        <div class="concept">포맷 파이프라인 — 데이터 흐름</div>
+        <div class="desc">SVG/PNG/JPG/BMP 노드에서 메인 파이프를 통해 ICO로 출력. 기술적 파이프라인을 네온 시안 색상으로 시각화.</div>
+        <div class="meta-row">
+          <span class="meta-chip">기하학 추상</span>
+          <span class="meta-chip">다크 + 네온</span>
+          <span class="meta-chip">그리드 배경</span>
+        </div>
+        <div class="palette">
+          <div class="swatch" style="background:#070B1A;"></div>
+          <div class="swatch" style="background:#00BCD4;"></div>
+          <div class="swatch" style="background:#00E5FF;"></div>
+          <div class="swatch" style="background:#FF5722;"></div>
+          <div class="swatch" style="background:#4CAF50;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- icon_07 -->
+    <div class="card">
+      <div class="icon-wrap">
+        <img src="icon_07.svg" alt="icon_07">
+      </div>
+      <div class="info">
+        <div class="info-header">
+          <span class="filename">icon_07.svg</span>
+          <span class="type-badge type-hybrid">hybrid</span>
+        </div>
+        <div class="concept">이미지 + 포맷 순환 변환 사이클</div>
+        <div class="desc">중앙에 사진 이미지 파일, 주변에 PNG/ICO/SVG/JPG 레이블과 순환 화살표. 모든 포맷을 상호 변환할 수 있음을 표현.</div>
+        <div class="meta-row">
+          <span class="meta-chip">중앙 심볼</span>
+          <span class="meta-chip">산호 핑크</span>
+          <span class="meta-chip">순환 화살표</span>
+        </div>
+        <div class="palette">
+          <div class="swatch" style="background:#E53935;"></div>
+          <div class="swatch" style="background:#FF7F7F;"></div>
+          <div class="swatch" style="background:white;"></div>
+          <div class="swatch" style="background:#FFD700;"></div>
+          <div class="swatch" style="background:#C62828;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- icon_08 -->
+    <div class="card">
+      <div class="icon-wrap">
+        <img src="icon_08.svg" alt="icon_08">
+      </div>
+      <div class="info">
+        <div class="info-header">
+          <span class="filename">icon_08.svg</span>
+          <span class="type-badge type-hybrid">hybrid</span>
+        </div>
+        <div class="concept">연금술 플라스크 — 이미지를 황금으로 변환</div>
+        <div class="desc">플라스크 안에서 이미지 파일이 황금빛 액체 속에서 ICO로 변환 중. "Cast"의 연금술·주조 은유를 시각화. 에메랄드 기포가 변환 완료 신호.</div>
+        <div class="meta-row">
+          <span class="meta-chip">레이어드</span>
+          <span class="meta-chip">딥 네이비</span>
+          <span class="meta-chip">황금 그라데이션</span>
+        </div>
+        <div class="palette">
+          <div class="swatch" style="background:#060A1A;"></div>
+          <div class="swatch" style="background:#FFD700;"></div>
+          <div class="swatch" style="background:#FFA500;"></div>
+          <div class="swatch" style="background:#50C878;"></div>
+          <div class="swatch" style="background:#C9A227;"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <p>Img.Cast &nbsp;·&nbsp; Generated 2026-03-21 12:07 &nbsp;·&nbsp; 8 candidates</p>
+    <p style="margin-top:6px;">이미지 포맷 변환 (SVG · PNG · JPG · BMP → ICO · PNG · JPG · BMP) &nbsp;·&nbsp; Drag &amp; Drop Batch Converter</p>
+  </footer>
+</body>
+</html>

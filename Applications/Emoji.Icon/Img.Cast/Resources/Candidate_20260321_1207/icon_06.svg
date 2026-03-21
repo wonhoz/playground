@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 배경 - 다크 네이비 -->
+  <defs>
+    <linearGradient id="bg6" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#070B1A"/>
+      <stop offset="100%" stop-color="#0E1830"/>
+    </linearGradient>
+    <linearGradient id="pipe6" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#00BCD4"/>
+      <stop offset="100%" stop-color="#0097A7"/>
+    </linearGradient>
+    <linearGradient id="out6" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00E5FF"/>
+      <stop offset="100%" stop-color="#80FFFF"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="200" fill="url(#bg6)"/>
+
+  <!-- 배경 그리드 효과 -->
+  <g stroke="#1A2A4A" stroke-width="1.5" opacity="0.5">
+    <line x1="0" y1="200" x2="1024" y2="200"/>
+    <line x1="0" y1="400" x2="1024" y2="400"/>
+    <line x1="0" y1="600" x2="1024" y2="600"/>
+    <line x1="0" y1="800" x2="1024" y2="800"/>
+    <line x1="200" y1="0" x2="200" y2="1024"/>
+    <line x1="400" y1="0" x2="400" y2="1024"/>
+    <line x1="600" y1="0" x2="600" y2="1024"/>
+    <line x1="800" y1="0" x2="800" y2="1024"/>
+  </g>
+
+  <!-- Layer 2: 파이프라인 메인 관 -->
+  <!-- 메인 수평 파이프 -->
+  <rect x="130" y="456" width="764" height="112" rx="56" fill="url(#pipe6)" opacity="0.9"/>
+  <!-- 파이프 내부 광택 -->
+  <rect x="150" y="464" width="724" height="36" rx="18" fill="white" opacity="0.1"/>
+
+  <!-- 입력 노드들 (좌측) - 각 포맷 -->
+  <!-- SVG 노드 -->
+  <circle cx="155" cy="310" r="60" fill="#9C27B0" opacity="0.9"/>
+  <text x="155" y="322" font-family="'Segoe UI', Arial, sans-serif" font-size="34" font-weight="900"
+        fill="white" text-anchor="middle">SVG</text>
+  <line x1="155" y1="370" x2="155" y2="456" stroke="#9C27B0" stroke-width="16" stroke-linecap="round" opacity="0.8"/>
+
+  <!-- PNG 노드 -->
+  <circle cx="350" cy="280" r="60" fill="#2196F3" opacity="0.9"/>
+  <text x="350" y="292" font-family="'Segoe UI', Arial, sans-serif" font-size="34" font-weight="900"
+        fill="white" text-anchor="middle">PNG</text>
+  <line x1="350" y1="340" x2="350" y2="456" stroke="#2196F3" stroke-width="16" stroke-linecap="round" opacity="0.8"/>
+
+  <!-- JPG 노드 -->
+  <circle cx="512" cy="260" r="60" fill="#FF5722" opacity="0.9"/>
+  <text x="512" y="272" font-family="'Segoe UI', Arial, sans-serif" font-size="34" font-weight="900"
+        fill="white" text-anchor="middle">JPG</text>
+  <line x1="512" y1="320" x2="512" y2="456" stroke="#FF5722" stroke-width="16" stroke-linecap="round" opacity="0.8"/>
+
+  <!-- BMP 노드 -->
+  <circle cx="674" cy="280" r="60" fill="#4CAF50" opacity="0.9"/>
+  <text x="674" y="292" font-family="'Segoe UI', Arial, sans-serif" font-size="34" font-weight="900"
+        fill="white" text-anchor="middle">BMP</text>
+  <line x1="674" y1="340" x2="674" y2="456" stroke="#4CAF50" stroke-width="16" stroke-linecap="round" opacity="0.8"/>
+
+  <!-- 파이프 흐름 화살표 -->
+  <path d="M 858 510 L 910 512 M 885 488 L 910 512 L 885 536"
+        stroke="#00E5FF" stroke-width="18" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Layer 3: 출력 노드 - ICO (우측, 네온 효과) -->
+  <!-- 글로우 -->
+  <circle cx="870" cy="720" r="110" fill="#00E5FF" opacity="0.12"/>
+  <circle cx="870" cy="720" r="90" fill="#00BCD4" opacity="0.9"/>
+  <!-- 출력 파이프 연결 -->
+  <line x1="870" y1="568" x2="870" y2="630" stroke="url(#out6)" stroke-width="16" stroke-linecap="round" opacity="0.9"/>
+
+  <text x="870" y="700" font-family="'Segoe UI', Arial, sans-serif" font-size="42" font-weight="900"
+        fill="white" text-anchor="middle">ICO</text>
+
+  <!-- 멀티사이즈 표시 -->
+  <text x="870" y="752" font-family="'Segoe UI', Arial, sans-serif" font-size="22" font-weight="400"
+        fill="white" text-anchor="middle" opacity="0.7">16·32·64·256</text>
+
+  <!-- 파이프 내부 흐름 효과 점들 -->
+  <circle cx="250" cy="512" r="10" fill="#00E5FF" opacity="0.6"/>
+  <circle cx="430" cy="512" r="10" fill="#00E5FF" opacity="0.6"/>
+  <circle cx="610" cy="512" r="10" fill="#00E5FF" opacity="0.6"/>
+  <circle cx="770" cy="512" r="10" fill="#00E5FF" opacity="0.6"/>
+
+  <!-- 하단 포맷 흐름 표시 -->
+  <text x="512" y="800" font-family="'Courier New', monospace" font-size="30" font-weight="700"
+        fill="#00E5FF" text-anchor="middle" opacity="0.4" letter-spacing="4">FORMAT PIPELINE</text>
+</svg>

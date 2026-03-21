@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 배경 - 밝은 하늘색 -->
+  <defs>
+    <linearGradient id="bg2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E3F2FD"/>
+      <stop offset="100%" stop-color="#BBDEFB"/>
+    </linearGradient>
+    <linearGradient id="funnel2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1565C0"/>
+      <stop offset="100%" stop-color="#1976D2"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="200" fill="url(#bg2)"/>
+
+  <!-- Layer 2: 메인 오브젝트 - 깔때기 + 포맷 파일들 -->
+
+  <!-- 좌상단 파일 1 - PNG (파랑) -->
+  <rect x="80" y="130" width="180" height="180" rx="16" fill="#2196F3" opacity="0.9"/>
+  <rect x="80" y="130" width="180" height="50" rx="8" fill="#1565C0" opacity="0.9"/>
+  <text x="170" y="168" font-family="'Segoe UI', Arial, sans-serif" font-size="32" font-weight="700"
+        fill="white" text-anchor="middle">FILE</text>
+  <text x="170" y="265" font-family="'Segoe UI', Arial, sans-serif" font-size="52" font-weight="900"
+        fill="white" text-anchor="middle">PNG</text>
+
+  <!-- 좌중단 파일 2 - SVG (보라) -->
+  <rect x="80" y="420" width="180" height="180" rx="16" fill="#9C27B0" opacity="0.9"/>
+  <rect x="80" y="420" width="180" height="50" rx="8" fill="#6A1B9A" opacity="0.9"/>
+  <text x="170" y="458" font-family="'Segoe UI', Arial, sans-serif" font-size="32" font-weight="700"
+        fill="white" text-anchor="middle">FILE</text>
+  <text x="170" y="555" font-family="'Segoe UI', Arial, sans-serif" font-size="52" font-weight="900"
+        fill="white" text-anchor="middle">SVG</text>
+
+  <!-- 좌하단 파일 3 - JPG (청록) -->
+  <rect x="80" y="710" width="180" height="180" rx="16" fill="#00897B" opacity="0.9"/>
+  <rect x="80" y="710" width="180" height="50" rx="8" fill="#00695C" opacity="0.9"/>
+  <text x="170" y="748" font-family="'Segoe UI', Arial, sans-serif" font-size="32" font-weight="700"
+        fill="white" text-anchor="middle">FILE</text>
+  <text x="170" y="845" font-family="'Segoe UI', Arial, sans-serif" font-size="52" font-weight="900"
+        fill="white" text-anchor="middle">JPG</text>
+
+  <!-- 화살표들 (우측 방향) -->
+  <path d="M 272 210 C 400 210 380 510 500 510" stroke="#2196F3" stroke-width="14" fill="none"
+        stroke-linecap="round" stroke-dasharray="none" opacity="0.7"/>
+  <path d="M 272 510 L 500 510" stroke="#9C27B0" stroke-width="14" fill="none"
+        stroke-linecap="round" opacity="0.7"/>
+  <path d="M 272 800 C 400 800 380 510 500 510" stroke="#00897B" stroke-width="14" fill="none"
+        stroke-linecap="round" opacity="0.7"/>
+
+  <!-- 화살촉 -->
+  <path d="M 488 493 L 508 510 L 488 527" stroke="#555" stroke-width="14" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+
+  <!-- 깔때기 몸체 -->
+  <path d="M 505 380 L 505 640 L 620 740 L 620 850 L 680 850 L 680 740 L 795 640 L 795 380 Z"
+        fill="#1565C0" opacity="0.15" rx="8"/>
+  <path d="M 505 380 L 795 380 L 680 740 L 620 740 Z"
+        fill="url(#funnel2)" opacity="0.8"/>
+  <rect x="620" y="740" width="60" height="140" rx="8" fill="#0D47A1" opacity="0.85"/>
+
+  <!-- Layer 3: 디테일 - 우측에 출력 ICO 파일 -->
+  <rect x="810" y="430" width="160" height="160" rx="16" fill="#FF6B35" opacity="0.95"/>
+  <rect x="810" y="430" width="160" height="45" rx="8" fill="#E64A19" opacity="0.95"/>
+  <text x="890" y="464" font-family="'Segoe UI', Arial, sans-serif" font-size="28" font-weight="700"
+        fill="white" text-anchor="middle">OUT</text>
+  <text x="890" y="553" font-family="'Segoe UI', Arial, sans-serif" font-size="48" font-weight="900"
+        fill="white" text-anchor="middle">ICO</text>
+
+  <!-- 깔때기→출력 화살표 -->
+  <path d="M 685 870 L 685 910 C 685 930 760 930 810 880 L 810 530"
+        stroke="#FF6B35" stroke-width="14" fill="none" stroke-linecap="round" opacity="0.8"/>
+  <path d="M 795 518 L 810 498 L 825 518" stroke="#FF6B35" stroke-width="14" fill="none" stroke-linecap="round" stroke-linejoin="round" opacity="0.8"/>
+</svg>

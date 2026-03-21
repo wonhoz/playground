@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 배경 - 산호 핑크 그라데이션 -->
+  <defs>
+    <radialGradient id="bg7" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#FF7F7F"/>
+      <stop offset="100%" stop-color="#E53935"/>
+    </radialGradient>
+    <linearGradient id="photo7" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="white" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#FFE0E0" stop-opacity="0.9"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="200" fill="url(#bg7)"/>
+
+  <!-- Layer 2: 메인 오브젝트 - 이미지 파일 (사진 프레임) 중앙 -->
+  <!-- 사진 프레임 외곽 -->
+  <rect x="252" y="262" width="520" height="500" rx="26" fill="white" opacity="0.95"/>
+  <!-- 사진 영역 -->
+  <rect x="278" y="290" width="468" height="340" rx="14" fill="#FFB3B3" opacity="0.6"/>
+  <!-- 산 실루엣 (이미지 내용 표현) -->
+  <path d="M 278 590 L 390 430 L 460 510 L 540 400 L 650 590 Z" fill="#E53935" opacity="0.4"/>
+  <!-- 태양 -->
+  <circle cx="610" cy="360" r="42" fill="#FFD700" opacity="0.8"/>
+  <!-- 이미지 하단 텍스트 바 -->
+  <rect x="278" y="580" width="468" height="50" rx="0" fill="#F5F5F5" opacity="0.7"/>
+  <text x="512" y="615" font-family="'Segoe UI', Arial, sans-serif" font-size="32" font-weight="600"
+        fill="#666" text-anchor="middle">image.png</text>
+
+  <!-- 변환 포맷 표시 (하단) -->
+  <rect x="320" y="670" width="384" height="64" rx="12" fill="#FF4444" opacity="0.15"/>
+  <text x="512" y="713" font-family="'Segoe UI', Arial, sans-serif" font-size="38" font-weight="800"
+        fill="#C62828" text-anchor="middle">→ ICO</text>
+
+  <!-- Layer 3: 순환 화살표 (프레임 주변, 포맷 변환 사이클) -->
+  <!-- 순환 화살표 - 상단 우 -->
+  <path d="M 595 200 A 240 240 0 0 1 830 420"
+        stroke="white" stroke-width="24" fill="none" stroke-linecap="round" opacity="0.85"/>
+  <path d="M 808 400 L 830 420 L 808 440" stroke="white" stroke-width="24" fill="none"
+        stroke-linecap="round" stroke-linejoin="round" opacity="0.85"/>
+
+  <!-- 순환 화살표 - 하단 좌 -->
+  <path d="M 430 840 A 240 240 0 0 1 195 620"
+        stroke="white" stroke-width="24" fill="none" stroke-linecap="round" opacity="0.85"/>
+  <path d="M 218 640 L 195 620 L 218 600" stroke="white" stroke-width="24" fill="none"
+        stroke-linecap="round" stroke-linejoin="round" opacity="0.85"/>
+
+  <!-- 포맷 레이블 (화살표 주변) -->
+  <text x="870" y="330" font-family="'Segoe UI', Arial, sans-serif" font-size="44" font-weight="800"
+        fill="white" text-anchor="middle" opacity="0.9">PNG</text>
+  <text x="870" y="580" font-family="'Segoe UI', Arial, sans-serif" font-size="44" font-weight="800"
+        fill="white" text-anchor="middle" opacity="0.9">ICO</text>
+  <text x="155" y="730" font-family="'Segoe UI', Arial, sans-serif" font-size="44" font-weight="800"
+        fill="white" text-anchor="middle" opacity="0.9">SVG</text>
+  <text x="155" y="490" font-family="'Segoe UI', Arial, sans-serif" font-size="44" font-weight="800"
+        fill="white" text-anchor="middle" opacity="0.9">JPG</text>
+
+  <!-- 상단 좌 화살표 -->
+  <path d="M 195 420 A 240 240 0 0 1 430 200"
+        stroke="white" stroke-width="24" fill="none" stroke-linecap="round" opacity="0.85"/>
+
+  <!-- 하단 우 화살표 -->
+  <path d="M 830 620 A 240 240 0 0 1 595 840"
+        stroke="white" stroke-width="24" fill="none" stroke-linecap="round" opacity="0.85"/>
+</svg>

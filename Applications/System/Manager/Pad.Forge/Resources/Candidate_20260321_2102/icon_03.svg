@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="fire3" cx="50%" cy="85%" r="55%">
+      <stop offset="0%" stop-color="#FF6F00" stop-opacity="0.7"/>
+      <stop offset="60%" stop-color="#E65100" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#1C0A00" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="bg3" cx="50%" cy="60%" r="70%">
+      <stop offset="0%" stop-color="#2C1500"/>
+      <stop offset="100%" stop-color="#0E0500"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg3)"/>
+  <rect width="1024" height="1024" rx="190" fill="url(#fire3)"/>
+
+  <!-- Layer 2: 모루 -->
+  <!-- 모루 상단 평면 -->
+  <rect x="282" y="648" width="460" height="58" rx="10" fill="#6D4C41"/>
+  <rect x="282" y="648" width="460" height="18" rx="10" fill="#8D6E63"/>
+  <!-- 모루 목 -->
+  <rect x="365" y="700" width="75" height="55" fill="#5D4037"/>
+  <!-- 모루 받침대 -->
+  <rect x="268" y="748" width="220" height="52" rx="10" fill="#4E342E"/>
+  <rect x="268" y="748" width="220" height="16" rx="5" fill="#6D4C41"/>
+
+  <!-- 게임패드 실루엣 (모루 위에, 앰버 컬러) -->
+  <!-- 메인 바디 -->
+  <rect x="310" y="560" width="404" height="100" rx="40" fill="#FF8F00"/>
+  <!-- 왼쪽 그립 -->
+  <rect x="322" y="622" width="110" height="72" rx="36" fill="#FF8F00"/>
+  <!-- 오른쪽 그립 -->
+  <rect x="592" y="622" width="110" height="72" rx="36" fill="#FF8F00"/>
+
+  <!-- 패드 위 하이라이트 (단조 가열된 느낌) -->
+  <rect x="310" y="560" width="404" height="100" rx="40" fill="#FFD740" opacity="0.25"/>
+
+  <!-- D-pad -->
+  <rect x="362" y="592" width="48" height="16" rx="4" fill="#FFD54F"/>
+  <rect x="378" y="576" width="16" height="48" rx="4" fill="#FFD54F"/>
+
+  <!-- ABXY 버튼 작은 원들 -->
+  <circle cx="640" cy="596" r="14" fill="#FFD54F"/>
+  <circle cx="668" cy="574" r="14" fill="#FFD54F"/>
+  <circle cx="668" cy="618" r="14" fill="#FFD54F"/>
+  <circle cx="696" cy="596" r="14" fill="#FFD54F"/>
+
+  <!-- Layer 3: 망치 (대각선) -->
+  <!-- 망치 자루 -->
+  <rect x="365" y="380" width="28" height="290" rx="14" fill="#795548" transform="rotate(-38, 512, 490)"/>
+  <rect x="365" y="380" width="28" height="290" rx="14" fill="#A1887F" opacity="0.5" transform="rotate(-38, 512, 490)"/>
+
+  <!-- 망치 헤드 -->
+  <g transform="translate(628, 295) rotate(-38)">
+    <rect x="-75" y="-45" width="150" height="90" rx="14" fill="#9E9E9E"/>
+    <rect x="-72" y="-42" width="144" height="86" rx="12" fill="#BDBDBD"/>
+    <!-- 타격면 하단 -->
+    <rect x="-72" y="30" width="144" height="20" rx="6" fill="#757575"/>
+    <!-- 측면 강조 -->
+    <rect x="-72" y="-42" width="20" height="86" rx="6" fill="#E0E0E0" opacity="0.4"/>
+  </g>
+
+  <!-- 타격 스파크 -->
+  <line x1="512" y1="570" x2="466" y2="516" stroke="#FFD740" stroke-width="6" stroke-linecap="round"/>
+  <line x1="512" y1="570" x2="546" y2="510" stroke="#FF8F00" stroke-width="5" stroke-linecap="round"/>
+  <line x1="512" y1="570" x2="568" y2="542" stroke="#FFCC02" stroke-width="5" stroke-linecap="round"/>
+  <line x1="512" y1="570" x2="474" y2="548" stroke="#FF6D00" stroke-width="5" stroke-linecap="round"/>
+  <line x1="512" y1="570" x2="554" y2="558" stroke="#FFD740" stroke-width="4" stroke-linecap="round"/>
+  <line x1="512" y1="570" x2="488" y2="530" stroke="#FFAB40" stroke-width="4" stroke-linecap="round"/>
+
+  <!-- 불꽃들 -->
+  <ellipse cx="420" cy="768" rx="32" ry="46" fill="#FF6F00" opacity="0.9"/>
+  <ellipse cx="420" cy="768" rx="18" ry="30" fill="#FFD740" opacity="0.95"/>
+  <ellipse cx="600" cy="768" rx="32" ry="46" fill="#FF6F00" opacity="0.9"/>
+  <ellipse cx="600" cy="768" rx="18" ry="30" fill="#FFD740" opacity="0.95"/>
+  <ellipse cx="512" cy="758" rx="38" ry="54" fill="#FF8F00" opacity="0.8"/>
+  <ellipse cx="512" cy="758" rx="20" ry="36" fill="#FFD740" opacity="0.9"/>
+  <!-- 큰 불꽃 -->
+  <ellipse cx="460" cy="750" rx="22" ry="34" fill="#FF8F00" opacity="0.7"/>
+  <ellipse cx="560" cy="745" rx="20" ry="30" fill="#FFA000" opacity="0.7"/>
+</svg>

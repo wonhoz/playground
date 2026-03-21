@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg8" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#3949AB"/>
+      <stop offset="100%" stop-color="#1A237E"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg8)"/>
+
+  <!-- 배경 동심원 (점선) -->
+  <circle cx="512" cy="512" r="360" fill="none" stroke="#3F51B5" stroke-width="1.5" opacity="0.4" stroke-dasharray="6,5"/>
+  <circle cx="512" cy="512" r="250" fill="none" stroke="#5C6BC0" stroke-width="1.5" opacity="0.4" stroke-dasharray="6,5"/>
+  <circle cx="512" cy="512" r="150" fill="none" stroke="#7986CB" stroke-width="1.5" opacity="0.4" stroke-dasharray="6,5"/>
+
+  <!-- Layer 2: 중앙 게임패드 -->
+  <circle cx="512" cy="512" r="122" fill="#283593"/>
+  <circle cx="512" cy="512" r="114" fill="#3949AB"/>
+
+  <!-- 미니 게임패드 (중앙) -->
+  <rect x="452" y="490" width="120" height="52" rx="18" fill="#7986CB"/>
+  <rect x="458" y="510" width="36" height="30" rx="14" fill="#7986CB"/>
+  <rect x="546" y="510" width="36" height="30" rx="14" fill="#7986CB"/>
+  <!-- 스틱 -->
+  <circle cx="475" cy="514" r="9" fill="#9FA8DA"/>
+  <circle cx="475" cy="514" r="5" fill="#C5CAE9"/>
+  <circle cx="548" cy="520" r="9" fill="#9FA8DA"/>
+  <circle cx="548" cy="520" r="5" fill="#C5CAE9"/>
+  <!-- 버튼 점들 -->
+  <circle cx="542" cy="498" r="5" fill="#80CBC4"/>
+  <circle cx="556" cy="492" r="5" fill="#EF9A9A"/>
+  <circle cx="528" cy="492" r="5" fill="#90CAF9"/>
+  <circle cx="542" cy="486" r="5" fill="#FFE082"/>
+
+  <!-- Layer 3: 8방향 방사형 화살표 + 출력 심볼 -->
+
+  <!-- 상: KEY -->
+  <line x1="512" y1="390" x2="512" y2="224" stroke="#FF8A65" stroke-width="5"/>
+  <polygon points="498,228 512,196 526,228" fill="#FF8A65"/>
+  <rect x="460" y="138" width="104" height="56" rx="12" fill="#BF360C" stroke="#FF8A65" stroke-width="2.5"/>
+  <text x="512" y="166" text-anchor="middle" dominant-baseline="middle" fill="#FF8A65" font-size="24" font-family="Arial" font-weight="bold">KEY</text>
+
+  <!-- 하: MOUSE -->
+  <line x1="512" y1="634" x2="512" y2="802" stroke="#69F0AE" stroke-width="5"/>
+  <polygon points="498,798 512,830 526,798" fill="#69F0AE"/>
+  <rect x="452" y="836" width="120" height="56" rx="12" fill="#1B5E20" stroke="#69F0AE" stroke-width="2.5"/>
+  <text x="512" y="864" text-anchor="middle" dominant-baseline="middle" fill="#69F0AE" font-size="20" font-family="Arial" font-weight="bold">MOUSE</text>
+
+  <!-- 우: BTN (가상 버튼) -->
+  <line x1="634" y1="512" x2="802" y2="512" stroke="#80D8FF" stroke-width="5"/>
+  <polygon points="798,498 830,512 798,526" fill="#80D8FF"/>
+  <rect x="836" y="484" width="96" height="56" rx="12" fill="#01579B" stroke="#80D8FF" stroke-width="2.5"/>
+  <text x="884" y="512" text-anchor="middle" dominant-baseline="middle" fill="#80D8FF" font-size="22" font-family="Arial" font-weight="bold">BTN</text>
+
+  <!-- 좌: APP -->
+  <line x1="390" y1="512" x2="222" y2="512" stroke="#FFD740" stroke-width="5"/>
+  <polygon points="226,498 194,512 226,526" fill="#FFD740"/>
+  <rect x="92" y="484" width="96" height="56" rx="12" fill="#E65100" stroke="#FFD740" stroke-width="2.5"/>
+  <text x="140" y="512" text-anchor="middle" dominant-baseline="middle" fill="#FFD740" font-size="22" font-family="Arial" font-weight="bold">APP</text>
+
+  <!-- 우상: TXT -->
+  <line x1="597" y1="427" x2="750" y2="278" stroke="#CE93D8" stroke-width="5"/>
+  <polygon points="736,262 764,256 758,284" fill="#CE93D8"/>
+  <rect x="762" y="224" width="96" height="56" rx="12" fill="#4A148C" stroke="#CE93D8" stroke-width="2.5"/>
+  <text x="810" y="252" text-anchor="middle" dominant-baseline="middle" fill="#CE93D8" font-size="22" font-family="Arial" font-weight="bold">TXT</text>
+
+  <!-- 좌하: SCR (스크롤) -->
+  <line x1="427" y1="597" x2="278" y2="750" stroke="#80CBC4" stroke-width="5"/>
+  <polygon points="262,736 256,764 284,758" fill="#80CBC4"/>
+  <rect x="164" y="764" width="96" height="56" rx="12" fill="#004D40" stroke="#80CBC4" stroke-width="2.5"/>
+  <text x="212" y="792" text-anchor="middle" dominant-baseline="middle" fill="#80CBC4" font-size="22" font-family="Arial" font-weight="bold">SCR</text>
+
+  <!-- 우하: MACRO -->
+  <line x1="597" y1="597" x2="748" y2="748" stroke="#FFAB40" stroke-width="5"/>
+  <polygon points="734,762 762,766 758,738" fill="#FFAB40"/>
+  <rect x="752" y="766" width="116" height="56" rx="12" fill="#BF360C" stroke="#FFAB40" stroke-width="2.5"/>
+  <text x="810" y="794" text-anchor="middle" dominant-baseline="middle" fill="#FFAB40" font-size="20" font-family="Arial" font-weight="bold">MACRO</text>
+
+  <!-- 좌상: SEQ (시퀀스) -->
+  <line x1="427" y1="427" x2="278" y2="278" stroke="#F48FB1" stroke-width="5"/>
+  <polygon points="262,264 256,292 284,286" fill="#F48FB1"/>
+  <rect x="160" y="224" width="96" height="56" rx="12" fill="#880E4F" stroke="#F48FB1" stroke-width="2.5"/>
+  <text x="208" y="252" text-anchor="middle" dominant-baseline="middle" fill="#F48FB1" font-size="22" font-family="Arial" font-weight="bold">SEQ</text>
+</svg>

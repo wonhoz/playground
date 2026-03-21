@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>Pad.Forge — Icon Candidates (2026-03-21)</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #12101A;
+    color: #E0E0E0;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    padding: 40px 32px 64px;
+  }
+  header {
+    margin-bottom: 40px;
+    border-bottom: 1px solid #2A2A3A;
+    padding-bottom: 24px;
+  }
+  header h1 { font-size: 26px; font-weight: 700; color: #fff; margin-bottom: 6px; }
+  header p  { font-size: 14px; color: #888; }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 28px;
+  }
+  .card {
+    background: #1C1A28;
+    border: 1px solid #2E2A40;
+    border-radius: 16px;
+    padding: 24px 20px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+    cursor: default;
+  }
+  .card:hover {
+    transform: translateY(-6px) scale(1.03);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.55);
+    border-color: #5A4AFF;
+  }
+  .icon-wrap {
+    width: 180px;
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .icon-wrap img {
+    width: 180px;
+    height: 180px;
+    border-radius: 36px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    transition: transform 0.18s ease;
+  }
+  .card:hover .icon-wrap img {
+    transform: scale(1.06);
+  }
+  .info { width: 100%; }
+  .filename {
+    font-size: 12px;
+    font-weight: 600;
+    color: #7B7AFF;
+    letter-spacing: 0.04em;
+    margin-bottom: 6px;
+  }
+  .concept {
+    font-size: 14px;
+    font-weight: 600;
+    color: #E0E0E0;
+    margin-bottom: 4px;
+  }
+  .meta {
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 8px;
+  }
+  .palette {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+    margin-top: 4px;
+  }
+  .swatch {
+    width: 18px;
+    height: 18px;
+    border-radius: 4px;
+    border: 1px solid rgba(255,255,255,0.1);
+    display: inline-block;
+  }
+  .tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 11px;
+    font-weight: 600;
+    margin-right: 4px;
+    margin-bottom: 4px;
+  }
+  .tag.literal  { background: #1A3A6E; color: #82B1FF; }
+  .tag.metaphor { background: #2D1A4E; color: #CE93D8; }
+  .tag.hybrid   { background: #1A3A2A; color: #80CBC4; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🎮 Pad.Forge — 아이콘 후보</h1>
+  <p>게임패드 버튼 매핑 관리자 · 2026-03-21 · 후보 10개</p>
+</header>
+
+<div class="grid">
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_01.svg" alt="icon_01"/></div>
+    <div class="info">
+      <div class="filename">icon_01.svg</div>
+      <div class="concept">클래식 게임패드 — A/B/X/Y 컬러 버튼</div>
+      <div class="meta">
+        <span class="tag literal">literal</span>
+        <span class="tag">중앙 심볼</span>
+      </div>
+      <div class="palette">
+        <span class="swatch" style="background:#2D1B69" title="딥 퍼플 배경"></span>
+        <span class="swatch" style="background:#6D5AE6" title="패드 라벤더"></span>
+        <span class="swatch" style="background:#43A047" title="A 녹색"></span>
+        <span class="swatch" style="background:#E53935" title="B 빨강"></span>
+        <span class="swatch" style="background:#1E88E5" title="X 파랑"></span>
+        <span class="swatch" style="background:#FDD835" title="Y 노랑"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_02.svg" alt="icon_02"/></div>
+    <div class="info">
+      <div class="filename">icon_02.svg</div>
+      <div class="concept">A/B/X/Y → ENT/SPC/CTRL/TAB 변환 흐름</div>
+      <div class="meta">
+        <span class="tag literal">literal</span>
+        <span class="tag">대각선/동적</span>
+      </div>
+      <div class="palette">
+        <span class="swatch" style="background:#0D1B2A" title="네이비 배경"></span>
+        <span class="swatch" style="background:#00E5FF" title="시안 A선"></span>
+        <span class="swatch" style="background:#69F0AE" title="그린 B선"></span>
+        <span class="swatch" style="background:#FFD740" title="골드 X선"></span>
+        <span class="swatch" style="background:#FF80AB" title="핑크 Y선"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_03.svg" alt="icon_03"/></div>
+    <div class="info">
+      <div class="filename">icon_03.svg</div>
+      <div class="concept">단조(Forge) — 망치로 패드를 벼리는 장면</div>
+      <div class="meta">
+        <span class="tag metaphor">metaphor</span>
+        <span class="tag">공간/장면</span>
+      </div>
+      <div class="palette">
+        <span class="swatch" style="background:#0E0500" title="차콜 배경"></span>
+        <span class="swatch" style="background:#FF8F00" title="앰버 패드"></span>
+        <span class="swatch" style="background:#BDBDBD" title="회색 망치"></span>
+        <span class="swatch" style="background:#FFD740" title="불꽃 노랑"></span>
+        <span class="swatch" style="background:#6D4C41" title="모루 갈색"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_04.svg" alt="icon_04"/></div>
+    <div class="info">
+      <div class="filename">icon_04.svg</div>
+      <div class="concept">편집 가능한 패드 — 연필 오버레이</div>
+      <div class="meta">
+        <span class="tag hybrid">hybrid</span>
+        <span class="tag">레이어드</span>
+      </div>
+      <div class="palette">
+        <span class="swatch" style="background:#00695C" title="딥 청록 배경"></span>
+        <span class="swatch" style="background:#00BFA5" title="민트 그라데이션"></span>
+        <span class="swatch" style="background:#FFEB3B" title="연필 노랑"></span>
+        <span class="swatch" style="background:#FF8A80" title="지우개 핑크"></span>
+        <span class="swatch" style="background:#FF8F00" title="연필 팁 오렌지"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_05.svg" alt="icon_05"/></div>
+    <div class="info">
+      <div class="filename">icon_05.svg</div>
+      <div class="concept">버튼↔키 매핑 테이블 — 대응표</div>
+      <div class="meta">
+        <span class="tag literal">literal</span>
+        <span class="tag">기하학 추상</span>
+      </div>
+      <div class="palette">
+        <span class="swatch" style="background:#0D47A1" title="코발트 블루 배경"></span>
+        <span class="swatch" style="background:#82B1FF" title="헤더 하이라이트"></span>
+        <span class="swatch" style="background:#64B5F6" title="화살표/키 텍스트"></span>
+        <span class="swatch" style="background:#43A047" title="A 버튼 녹색"></span>
+        <span class="swatch" style="background:#E53935" title="B 버튼 빨강"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_06.svg" alt="icon_06"/></div>
+    <div class="info">
+      <div class="filename">icon_06.svg</div>
+      <div class="concept">프로파일 카드 팬 — 다중 프로파일 관리</div>
+      <div class="meta">
+        <span class="tag hybrid">hybrid</span>
+        <span class="tag">레이어드</span>
+      </div>
+      <div class="palette">
+        <span class="swatch" style="background:#6A1B9A" title="딥 퍼플 배경"></span>
+        <span class="swatch" style="background:#AD1457" title="딥 핑크 그라데이션"></span>
+        <span class="swatch" style="background:#E91E63" title="메인 카드 핑크"></span>
+        <span class="swatch" style="background:#F50057" title="+ 버튼 레드"></span>
+        <span class="swatch" style="background:#FF80AB" title="강조 핑크"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_07.svg" alt="icon_07"/></div>
+    <div class="info">
+      <div class="filename">icon_07.svg</div>
+      <div class="concept">패드 + 렌치 — 시스템 관리자 도구</div>
+      <div class="meta">
+        <span class="tag metaphor">metaphor</span>
+        <span class="tag">중앙 심볼</span>
+      </div>
+      <div class="palette">
+        <span class="swatch" style="background:#2E7D32" title="딥 그린 배경"></span>
+        <span class="swatch" style="background:#1B5E20" title="패드 다크 그린"></span>
+        <span class="swatch" style="background:#76FF03" title="네온 그린 아웃라인"></span>
+        <span class="swatch" style="background:#AED581" title="렌치 라임"></span>
+        <span class="swatch" style="background:#C5E1A5" title="렌치 헤드 라이트"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_08.svg" alt="icon_08"/></div>
+    <div class="info">
+      <div class="filename">icon_08.svg</div>
+      <div class="concept">8방향 방사형 매핑 — 출력 다이어그램</div>
+      <div class="meta">
+        <span class="tag metaphor">metaphor</span>
+        <span class="tag">기하학 추상</span>
+      </div>
+      <div class="palette">
+        <span class="swatch" style="background:#1A237E" title="딥 인디고 배경"></span>
+        <span class="swatch" style="background:#3949AB" title="인디고 중앙"></span>
+        <span class="swatch" style="background:#FF8A65" title="오렌지 KEY"></span>
+        <span class="swatch" style="background:#69F0AE" title="그린 MOUSE"></span>
+        <span class="swatch" style="background:#FFD740" title="골드 APP"></span>
+        <span class="swatch" style="background:#CE93D8" title="라벤더 TXT"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_09.svg" alt="icon_09"/></div>
+    <div class="info">
+      <div class="filename">icon_09.svg</div>
+      <div class="concept">패드 실루엣 안 키보드 — 직관적 리매핑</div>
+      <div class="meta">
+        <span class="tag hybrid">hybrid</span>
+        <span class="tag">실루엣/캐릭터</span>
+      </div>
+      <div class="palette">
+        <span class="swatch" style="background:#006064" title="딥 아쿠아 배경"></span>
+        <span class="swatch" style="background:#004D40" title="패드 다크 틸"></span>
+        <span class="swatch" style="background:#00BCD4" title="키 시안 1행"></span>
+        <span class="swatch" style="background:#00ACC1" title="키 시안 2행"></span>
+        <span class="swatch" style="background:#4DD0E1" title="특수 키 하이라이트"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_10.svg" alt="icon_10"/></div>
+    <div class="info">
+      <div class="filename">icon_10.svg</div>
+      <div class="concept">패드 → 번개 → 다양한 출력 변환</div>
+      <div class="meta">
+        <span class="tag metaphor">metaphor</span>
+        <span class="tag">대각선/동적</span>
+      </div>
+      <div class="palette">
+        <span class="swatch" style="background:#B71C1C" title="스칼렛 레드 배경"></span>
+        <span class="swatch" style="background:#880E4F" title="딥 핑크 그라데이션"></span>
+        <span class="swatch" style="background:#FF8A80" title="패드 아웃라인"></span>
+        <span class="swatch" style="background:#FFD740" title="번개 골드"></span>
+        <span class="swatch" style="background:#FF5252" title="버튼 강조 레드"></span>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

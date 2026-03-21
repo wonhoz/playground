@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg7" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2E7D32"/>
+      <stop offset="100%" stop-color="#558B2F"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg7)"/>
+
+  <!-- 배경 원형 패턴 -->
+  <circle cx="512" cy="512" r="400" fill="none" stroke="#43A047" stroke-width="2" opacity="0.3"/>
+  <circle cx="512" cy="512" r="310" fill="none" stroke="#66BB6A" stroke-width="1" opacity="0.2"/>
+
+  <!-- Layer 2: 게임패드 실루엣 (배경으로) -->
+  <!-- 어깨 버튼 -->
+  <rect x="264" y="338" width="136" height="36" rx="12" fill="#1B5E20" opacity="0.9"/>
+  <rect x="624" y="338" width="136" height="36" rx="12" fill="#1B5E20" opacity="0.9"/>
+
+  <!-- 패드 몸체 -->
+  <rect x="248" y="368" width="528" height="218" rx="84" fill="#1B5E20" opacity="0.9"/>
+  <!-- 왼쪽 그립 -->
+  <rect x="262" y="538" width="162" height="148" rx="54" fill="#1B5E20" opacity="0.9"/>
+  <!-- 오른쪽 그립 -->
+  <rect x="600" y="538" width="162" height="148" rx="54" fill="#1B5E20" opacity="0.9"/>
+
+  <!-- 패드 외곽선 강조 (네온 그린) -->
+  <rect x="248" y="368" width="528" height="218" rx="84" fill="none" stroke="#76FF03" stroke-width="4"/>
+  <rect x="262" y="538" width="162" height="148" rx="54" fill="none" stroke="#76FF03" stroke-width="4"/>
+  <rect x="600" y="538" width="162" height="148" rx="54" fill="none" stroke="#76FF03" stroke-width="4"/>
+  <rect x="264" y="338" width="136" height="36" rx="12" fill="none" stroke="#76FF03" stroke-width="3"/>
+  <rect x="624" y="338" width="136" height="36" rx="12" fill="none" stroke="#76FF03" stroke-width="3"/>
+
+  <!-- 패드 내부 버튼 (네온) -->
+  <!-- ABXY -->
+  <circle cx="690" cy="464" r="20" fill="#76FF03" opacity="0.75"/>
+  <circle cx="728" cy="430" r="20" fill="#CCFF90" opacity="0.75"/>
+  <circle cx="652" cy="430" r="20" fill="#B9F6CA" opacity="0.75"/>
+  <circle cx="690" cy="396" r="20" fill="#69F0AE" opacity="0.75"/>
+
+  <!-- D-pad -->
+  <rect x="316" y="456" width="58" height="18" rx="4" fill="#76FF03" opacity="0.75"/>
+  <rect x="335" y="437" width="18" height="58" rx="4" fill="#76FF03" opacity="0.75"/>
+
+  <!-- 스틱 -->
+  <circle cx="410" cy="490" r="30" fill="#2E7D32"/>
+  <circle cx="410" cy="490" r="18" fill="#76FF03" opacity="0.6"/>
+  <circle cx="630" cy="508" r="30" fill="#2E7D32"/>
+  <circle cx="630" cy="508" r="18" fill="#76FF03" opacity="0.6"/>
+
+  <!-- Layer 3: 렌치 (전면 오버레이, 대각선) -->
+  <g transform="translate(512, 512) rotate(-38)">
+    <!-- 렌치 손잡이 -->
+    <rect x="-22" y="-40" width="44" height="260" rx="22" fill="#AED581"/>
+    <!-- 손잡이 그루브 -->
+    <line x1="-14" y1="30" x2="14" y2="30" stroke="#8BC34A" stroke-width="5"/>
+    <line x1="-14" y1="60" x2="14" y2="60" stroke="#8BC34A" stroke-width="5"/>
+    <line x1="-14" y1="90" x2="14" y2="90" stroke="#8BC34A" stroke-width="5"/>
+    <line x1="-14" y1="120" x2="14" y2="120" stroke="#8BC34A" stroke-width="5"/>
+    <line x1="-14" y1="150" x2="14" y2="150" stroke="#8BC34A" stroke-width="5"/>
+    <line x1="-14" y1="180" x2="14" y2="180" stroke="#8BC34A" stroke-width="5"/>
+
+    <!-- 렌치 머리 (상단 개방형 조 - jaw) -->
+    <!-- 렌치 헤드 외부 -->
+    <ellipse cx="0" cy="-85" rx="70" ry="60" fill="#C5E1A5"/>
+    <!-- 왼쪽 조 -->
+    <rect x="-70" y="-128" width="30" height="92" rx="8" fill="#AED581"/>
+    <!-- 오른쪽 조 -->
+    <rect x="40" y="-128" width="30" height="92" rx="8" fill="#AED581"/>
+    <!-- 중앙 개구부 (나사 들어가는 공간) -->
+    <rect x="-40" y="-128" width="80" height="80" rx="6" fill="#2E7D32"/>
+    <!-- 개구부 하단 둥근 연결 -->
+    <ellipse cx="0" cy="-48" rx="40" ry="12" fill="#2E7D32"/>
+
+    <!-- 렌치 하단 끝 -->
+    <ellipse cx="0" cy="220" rx="22" ry="16" fill="#9CCC65"/>
+  </g>
+</svg>

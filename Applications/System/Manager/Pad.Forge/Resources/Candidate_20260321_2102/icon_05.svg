@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg5" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1565C0"/>
+      <stop offset="100%" stop-color="#0D47A1"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg5)"/>
+
+  <!-- 배경 격자 -->
+  <line x1="0" y1="256" x2="1024" y2="256" stroke="#1976D2" stroke-width="1" opacity="0.35"/>
+  <line x1="0" y1="512" x2="1024" y2="512" stroke="#1976D2" stroke-width="1" opacity="0.35"/>
+  <line x1="0" y1="768" x2="1024" y2="768" stroke="#1976D2" stroke-width="1" opacity="0.35"/>
+  <line x1="256" y1="0" x2="256" y2="1024" stroke="#1976D2" stroke-width="1" opacity="0.35"/>
+  <line x1="512" y1="0" x2="512" y2="1024" stroke="#1976D2" stroke-width="1" opacity="0.35"/>
+  <line x1="768" y1="0" x2="768" y2="1024" stroke="#1976D2" stroke-width="1" opacity="0.35"/>
+
+  <!-- Layer 2: 테이블 카드 -->
+  <rect x="152" y="162" width="720" height="700" rx="26" fill="#0A3880" opacity="0.85"/>
+  <rect x="160" y="170" width="704" height="684" rx="22" fill="#1050A0"/>
+
+  <!-- 테이블 헤더 -->
+  <rect x="160" y="170" width="704" height="64" rx="22" fill="#0A2F6E"/>
+  <rect x="160" y="214" width="704" height="20" fill="#0A2F6E"/>
+  <text x="348" y="202" text-anchor="middle" dominant-baseline="middle" fill="#82B1FF" font-size="26" font-family="Arial" font-weight="bold">INPUT</text>
+  <line x1="512" y1="170" x2="512" y2="234" stroke="#2196F3" stroke-width="2" opacity="0.8"/>
+  <text x="680" y="202" text-anchor="middle" dominant-baseline="middle" fill="#82B1FF" font-size="26" font-family="Arial" font-weight="bold">OUTPUT</text>
+
+  <!-- 행 구분선 -->
+  <line x1="160" y1="330" x2="864" y2="330" stroke="#1976D2" stroke-width="1" opacity="0.6"/>
+  <line x1="160" y1="430" x2="864" y2="430" stroke="#1976D2" stroke-width="1" opacity="0.6"/>
+  <line x1="160" y1="530" x2="864" y2="530" stroke="#1976D2" stroke-width="1" opacity="0.6"/>
+  <line x1="160" y1="630" x2="864" y2="630" stroke="#1976D2" stroke-width="1" opacity="0.6"/>
+  <line x1="160" y1="730" x2="864" y2="730" stroke="#1976D2" stroke-width="1" opacity="0.6"/>
+  <!-- 중앙 구분선 -->
+  <line x1="512" y1="234" x2="512" y2="854" stroke="#2196F3" stroke-width="2" opacity="0.8"/>
+
+  <!-- Layer 3: 행 내용들 -->
+
+  <!-- 행 1: A → ENT -->
+  <circle cx="340" cy="282" r="30" fill="#2E7D32"/>
+  <circle cx="340" cy="282" r="23" fill="#43A047"/>
+  <text x="340" y="282" text-anchor="middle" dominant-baseline="middle" fill="white" font-size="20" font-family="Arial" font-weight="bold">A</text>
+  <line x1="430" y1="282" x2="474" y2="282" stroke="#64B5F6" stroke-width="6"/>
+  <polygon points="472,273 496,282 472,291" fill="#64B5F6"/>
+  <rect x="574" y="258" width="110" height="48" rx="10" fill="#0A1E40" stroke="#64B5F6" stroke-width="2"/>
+  <text x="629" y="282" text-anchor="middle" dominant-baseline="middle" fill="#64B5F6" font-size="22" font-family="Arial" font-weight="bold">ENT</text>
+
+  <!-- 행 2: B → SPACE -->
+  <circle cx="340" cy="380" r="30" fill="#B71C1C"/>
+  <circle cx="340" cy="380" r="23" fill="#E53935"/>
+  <text x="340" y="380" text-anchor="middle" dominant-baseline="middle" fill="white" font-size="20" font-family="Arial" font-weight="bold">B</text>
+  <line x1="430" y1="380" x2="474" y2="380" stroke="#64B5F6" stroke-width="6"/>
+  <polygon points="472,371 496,380 472,389" fill="#64B5F6"/>
+  <rect x="550" y="356" width="158" height="48" rx="10" fill="#0A1E40" stroke="#64B5F6" stroke-width="2"/>
+  <text x="629" y="380" text-anchor="middle" dominant-baseline="middle" fill="#64B5F6" font-size="22" font-family="Arial" font-weight="bold">SPACE</text>
+
+  <!-- 행 3: X → CTRL -->
+  <circle cx="340" cy="480" r="30" fill="#1565C0"/>
+  <circle cx="340" cy="480" r="23" fill="#1E88E5"/>
+  <text x="340" y="480" text-anchor="middle" dominant-baseline="middle" fill="white" font-size="20" font-family="Arial" font-weight="bold">X</text>
+  <line x1="430" y1="480" x2="474" y2="480" stroke="#64B5F6" stroke-width="6"/>
+  <polygon points="472,471 496,480 472,489" fill="#64B5F6"/>
+  <rect x="558" y="456" width="142" height="48" rx="10" fill="#0A1E40" stroke="#64B5F6" stroke-width="2"/>
+  <text x="629" y="480" text-anchor="middle" dominant-baseline="middle" fill="#64B5F6" font-size="22" font-family="Arial" font-weight="bold">CTRL</text>
+
+  <!-- 행 4: Y → ALT -->
+  <circle cx="340" cy="580" r="30" fill="#F57F17"/>
+  <circle cx="340" cy="580" r="23" fill="#FDD835"/>
+  <text x="340" y="580" text-anchor="middle" dominant-baseline="middle" fill="#333" font-size="20" font-family="Arial" font-weight="bold">Y</text>
+  <line x1="430" y1="580" x2="474" y2="580" stroke="#64B5F6" stroke-width="6"/>
+  <polygon points="472,571 496,580 472,589" fill="#64B5F6"/>
+  <rect x="574" y="556" width="110" height="48" rx="10" fill="#0A1E40" stroke="#64B5F6" stroke-width="2"/>
+  <text x="629" y="580" text-anchor="middle" dominant-baseline="middle" fill="#64B5F6" font-size="22" font-family="Arial" font-weight="bold">ALT</text>
+
+  <!-- 행 5: LB → TAB -->
+  <rect x="304" y="656" width="72" height="38" rx="14" fill="#3A2E9A"/>
+  <text x="340" y="675" text-anchor="middle" dominant-baseline="middle" fill="#C4B8FF" font-size="20" font-family="Arial" font-weight="bold">LB</text>
+  <line x1="430" y1="675" x2="474" y2="675" stroke="#64B5F6" stroke-width="6"/>
+  <polygon points="472,666 496,675 472,684" fill="#64B5F6"/>
+  <rect x="574" y="651" width="110" height="48" rx="10" fill="#0A1E40" stroke="#64B5F6" stroke-width="2"/>
+  <text x="629" y="675" text-anchor="middle" dominant-baseline="middle" fill="#64B5F6" font-size="22" font-family="Arial" font-weight="bold">TAB</text>
+
+  <!-- 하단 더보기 -->
+  <text x="512" y="798" text-anchor="middle" fill="#3A6AAE" font-size="42" font-family="Arial" font-weight="bold">• • •</text>
+</svg>

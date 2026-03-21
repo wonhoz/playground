@@ -11,11 +11,21 @@ public static class WinDwm {
     public static extern int DwmSetWindowAttribute(IntPtr hwnd, int attr, ref int value, int size);
 }
 public static class WinUx {
+    [DllImport("uxtheme.dll", EntryPoint = "#135", CharSet = CharSet.Unicode)]
+    public static extern int SetPreferredAppMode(int mode);
+    [DllImport("uxtheme.dll", EntryPoint = "#136")]
+    public static extern void FlushMenuThemes();
     [DllImport("uxtheme.dll", CharSet = CharSet.Unicode)]
     public static extern int SetWindowTheme(IntPtr hwnd, string pszSubAppName, string pszSubIdList);
 }
 "@ -ErrorAction SilentlyContinue
+    # Must be called BEFORE EnableVisualStyles
+    [WinUx]::SetPreferredAppMode(2) | Out-Null
+    [WinUx]::FlushMenuThemes()
 } catch {}
+
+[System.Windows.Forms.Application]::EnableVisualStyles()
+[System.Windows.Forms.Application]::SetCompatibleTextRenderingDefault($false)
 
 $allApps = @(
     [pscustomobject]@{N=1;   Name="AI.Clip";               Cat="Applications/AI"}

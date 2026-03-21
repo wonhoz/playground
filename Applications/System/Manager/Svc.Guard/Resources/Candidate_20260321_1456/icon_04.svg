@@ -1,0 +1,65 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <clipPath id="clip04">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+    <linearGradient id="bg04" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#3730A3"/>
+      <stop offset="100%" stop-color="#6366F1"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Layer 1: Background – indigo gradient -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg04)"/>
+
+  <g clip-path="url(#clip04)">
+    <!-- Layer 2: Large shield outline -->
+    <path d="M512,140 L820,260 L820,560 Q820,790 512,900 Q204,790 204,560 L204,260 Z" fill="#2D2BA0" stroke="#818CF8" stroke-width="12"/>
+
+    <!-- Gears inside shield -->
+    <!-- Gear 1 (large center) -->
+    <circle cx="512" cy="510" r="130" fill="#1E1B8A"/>
+    <circle cx="512" cy="510" r="90" fill="#E2E8F0"/>
+    <circle cx="512" cy="510" r="45" fill="#2D2BA0"/>
+    <!-- Gear 1 teeth (8) -->
+    <g fill="#E2E8F0">
+      <rect x="496" y="368" width="32" height="48" rx="10"/>
+      <rect x="496" y="604" width="32" height="48" rx="10"/>
+      <rect x="372" y="494" width="48" height="32" rx="10"/>
+      <rect x="604" y="494" width="48" height="32" rx="10"/>
+      <rect x="393" y="393" width="48" height="32" rx="10" transform="rotate(45 417 409)"/>
+      <rect x="583" y="393" width="48" height="32" rx="10" transform="rotate(-45 607 409)"/>
+      <rect x="393" y="577" width="48" height="32" rx="10" transform="rotate(-45 417 593)"/>
+      <rect x="583" y="577" width="48" height="32" rx="10" transform="rotate(45 607 593)"/>
+    </g>
+
+    <!-- Gear 2 (small, top left) -->
+    <circle cx="330" cy="330" r="80" fill="#1E1B8A"/>
+    <circle cx="330" cy="330" r="54" fill="#F97316"/>
+    <circle cx="330" cy="330" r="24" fill="#2D2BA0"/>
+    <g fill="#F97316">
+      <rect x="318" y="240" width="24" height="36" rx="8"/>
+      <rect x="318" y="384" width="24" height="36" rx="8"/>
+      <rect x="258" y="318" width="36" height="24" rx="8"/>
+      <rect x="366" y="318" width="36" height="24" rx="8"/>
+    </g>
+
+    <!-- Gear 3 (small, top right) -->
+    <circle cx="694" cy="330" r="80" fill="#1E1B8A"/>
+    <circle cx="694" cy="330" r="54" fill="#818CF8"/>
+    <circle cx="694" cy="330" r="24" fill="#2D2BA0"/>
+    <g fill="#818CF8">
+      <rect x="682" y="240" width="24" height="36" rx="8"/>
+      <rect x="682" y="384" width="24" height="36" rx="8"/>
+      <rect x="622" y="318" width="36" height="24" rx="8"/>
+      <rect x="730" y="318" width="36" height="24" rx="8"/>
+    </g>
+
+    <!-- Layer 3: Shield glow edge -->
+    <path d="M512,140 L820,260 L820,560 Q820,790 512,900 Q204,790 204,560 L204,260 Z" fill="none" stroke="#C7D2FE" stroke-width="6" opacity="0.4"/>
+
+    <!-- Lock icon (center of big gear hole) -->
+    <rect x="490" y="498" width="44" height="36" rx="6" fill="#818CF8"/>
+    <path d="M500,498 L500,483 Q512,470 524,483 L524,498" fill="none" stroke="#818CF8" stroke-width="8" stroke-linecap="round"/>
+  </g>
+</svg>

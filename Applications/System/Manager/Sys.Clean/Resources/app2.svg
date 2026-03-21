@@ -1,49 +1,49 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#120800"/>
-      <stop offset="100%" stop-color="#1E1000"/>
+    <clipPath id="clip02">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+    <linearGradient id="bgCyan" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#CFFAFE"/>
+      <stop offset="100%" stop-color="#A5F3FC"/>
     </linearGradient>
-    <linearGradient id="gauge" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#FF4400"/>
-      <stop offset="50%" stop-color="#FFAA00"/>
-      <stop offset="100%" stop-color="#44FF88"/>
-    </linearGradient>
-    <linearGradient id="needle" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#FFFFFF"/>
-      <stop offset="100%" stop-color="#FFDD44"/>
-    </linearGradient>
-    <filter id="glow">
-      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
-      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
   </defs>
-  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
-  <!-- Speedometer outer ring -->
-  <circle cx="256" cy="280" r="185" fill="none" stroke="#2A1A00" stroke-width="4"/>
-  <circle cx="256" cy="280" r="172" fill="none" stroke="#1A1000" stroke-width="2"/>
-  <!-- Gauge arc (speed colors) -->
-  <!-- Arc from 210deg to 330deg (120 degree spread bottom half removed) -->
-  <path d="M 98,378 A 172,172 0 1,1 414,378" stroke="url(#gauge)" stroke-width="20" fill="none" stroke-linecap="round" filter="url(#glow)" opacity="0.8"/>
-  <!-- Gauge tick marks -->
-  <line x1="86" y1="280" x2="106" y2="280" stroke="#664422" stroke-width="2"/>
-  <line x1="256" y1="108" x2="256" y2="128" stroke="#664422" stroke-width="2"/>
-  <line x1="426" y1="280" x2="406" y2="280" stroke="#664422" stroke-width="2"/>
-  <!-- Labels -->
-  <text x="90" y="310" font-family="monospace" font-size="12" fill="#FF4444">0</text>
-  <text x="240" y="106" font-family="monospace" font-size="12" fill="#FFAA00">50</text>
-  <text x="408" y="310" font-family="monospace" font-size="12" fill="#44FF88">100</text>
-  <!-- Needle pointing to high performance -->
-  <line x1="256" y1="280" x2="380" y2="160" stroke="url(#needle)" stroke-width="5" stroke-linecap="round" filter="url(#glow)"/>
-  <circle cx="256" cy="280" r="14" fill="#CC6600" stroke="#FFAA00" stroke-width="2"/>
-  <circle cx="256" cy="280" r="8" fill="#FFDD44" filter="url(#glow)"/>
-  <!-- Center speed text -->
-  <text x="256" y="356" font-family="'Segoe UI', sans-serif" font-size="36" fill="#FFAA00" text-anchor="middle" font-weight="900" filter="url(#glow)">88</text>
-  <text x="256" y="382" font-family="'Segoe UI', sans-serif" font-size="13" fill="#CC7700" text-anchor="middle">performance</text>
-  <!-- Clean stats -->
-  <rect x="80" y="420" width="352" height="52" rx="10" fill="#1A0C00" stroke="#CC6600" stroke-width="1"/>
-  <text x="180" y="440" font-family="monospace" font-size="11" fill="#FF8844" text-anchor="middle">Cleaned</text>
-  <text x="180" y="458" font-family="monospace" font-size="13" fill="#FFCC44" text-anchor="middle" font-weight="bold">4.8 GB</text>
-  <text x="332" y="440" font-family="monospace" font-size="11" fill="#FF8844" text-anchor="middle">Startup</text>
-  <text x="332" y="458" font-family="monospace" font-size="13" fill="#FFCC44" text-anchor="middle" font-weight="bold">-5 items</text>
+
+  <!-- Layer 1: Background – light cyan -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bgCyan)"/>
+
+  <g clip-path="url(#clip02)">
+    <!-- Layer 2: Disk usage ring (donut chart) -->
+    <!-- Outer circle (background) -->
+    <circle cx="512" cy="480" r="300" fill="#FFFFFF" opacity="0.7"/>
+    <circle cx="512" cy="480" r="300" fill="none" stroke="#E0FAFC" stroke-width="70"/>
+
+    <!-- BEFORE: Used portion (red/orange ~75%) -->
+    <circle cx="512" cy="480" r="300" fill="none" stroke="#F87171" stroke-width="70"
+            stroke-dasharray="1414 472"
+            stroke-dashoffset="0"
+            transform="rotate(-90 512 480)"/>
+
+    <!-- AFTER: Clean portion (green ~25%) -->
+    <circle cx="512" cy="480" r="300" fill="none" stroke="#22C55E" stroke-width="70"
+            stroke-dasharray="471 1415"
+            stroke-dashoffset="-1413"
+            transform="rotate(-90 512 480)"/>
+
+    <!-- Inner hole -->
+    <circle cx="512" cy="480" r="200" fill="url(#bgCyan)"/>
+
+    <!-- Layer 3: Center text - before/after -->
+    <text x="512" y="450" text-anchor="middle" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="#0E7490">Clean</text>
+    <text x="512" y="510" text-anchor="middle" font-family="Arial, sans-serif" font-size="36" fill="#0E7490">25% free</text>
+
+    <!-- Legend bottom -->
+    <rect x="220" y="840" width="32" height="32" rx="6" fill="#F87171"/>
+    <text x="264" y="866" font-family="Arial, sans-serif" font-size="30" fill="#0E7490">Junk</text>
+    <rect x="450" y="840" width="32" height="32" rx="6" fill="#22C55E"/>
+    <text x="494" y="866" font-family="Arial, sans-serif" font-size="30" fill="#0E7490">Clean</text>
+
+    <!-- Arrow down (cleaning action) -->
+    <path d="M660,800 L720,800 L720,760 L760,820 L720,880 L720,840 L660,840 Z" fill="#06B6D4" opacity="0.7"/>
+  </g>
 </svg>

@@ -1,49 +1,45 @@
-<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
   <defs>
-    <clipPath id="clip02">
+    <clipPath id="c3-clip">
       <rect width="1024" height="1024" rx="190"/>
     </clipPath>
-    <linearGradient id="bgCyan" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#CFFAFE"/>
-      <stop offset="100%" stop-color="#A5F3FC"/>
+    <linearGradient id="c3-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF6B35"/>
+      <stop offset="100%" stop-color="#C03A10"/>
     </linearGradient>
   </defs>
+  <g clip-path="url(#c3-clip)">
+    <!-- Background: warm orange-red -->
+    <rect width="1024" height="1024" fill="url(#c3-bg)"/>
+    <circle cx="512" cy="512" r="450" fill="#E05520" opacity="0.25"/>
 
-  <!-- Layer 1: Background – light cyan -->
-  <rect width="1024" height="1024" rx="190" fill="url(#bgCyan)"/>
+    <!-- Trash can body -->
+    <rect x="310" y="380" width="404" height="460" rx="28" fill="#FFFFFF" opacity="0.95"/>
+    <!-- Trash can lid (open, tilted) -->
+    <rect x="280" y="300" width="464" height="68" rx="18" fill="#F0F0F0" transform="rotate(-12 512 334)"/>
+    <!-- Lid handle -->
+    <rect x="462" y="268" width="100" height="32" rx="12" fill="#E0E0E0" transform="rotate(-12 512 284)"/>
 
-  <g clip-path="url(#clip02)">
-    <!-- Layer 2: Disk usage ring (donut chart) -->
-    <!-- Outer circle (background) -->
-    <circle cx="512" cy="480" r="300" fill="#FFFFFF" opacity="0.7"/>
-    <circle cx="512" cy="480" r="300" fill="none" stroke="#E0FAFC" stroke-width="70"/>
+    <!-- Trash can lines -->
+    <line x1="420" y1="420" x2="420" y2="800" stroke="#FFB8A0" stroke-width="18" stroke-linecap="round" opacity="0.7"/>
+    <line x1="512" y1="420" x2="512" y2="800" stroke="#FFB8A0" stroke-width="18" stroke-linecap="round" opacity="0.7"/>
+    <line x1="604" y1="420" x2="604" y2="800" stroke="#FFB8A0" stroke-width="18" stroke-linecap="round" opacity="0.7"/>
 
-    <!-- BEFORE: Used portion (red/orange ~75%) -->
-    <circle cx="512" cy="480" r="300" fill="none" stroke="#F87171" stroke-width="70"
-            stroke-dasharray="1414 472"
-            stroke-dashoffset="0"
-            transform="rotate(-90 512 480)"/>
+    <!-- Flies / dust leaving the trash (empty!) -->
+    <circle cx="240" cy="350" r="14" fill="#FFD166" opacity="0.8"/>
+    <circle cx="200" cy="290" r="9" fill="#FFFFFF" opacity="0.6"/>
+    <circle cx="780" cy="310" r="11" fill="#FFD166" opacity="0.7"/>
+    <circle cx="810" cy="380" r="8" fill="#FFFFFF" opacity="0.5"/>
+    <circle cx="760" cy="240" r="7" fill="#FFD166" opacity="0.6"/>
 
-    <!-- AFTER: Clean portion (green ~25%) -->
-    <circle cx="512" cy="480" r="300" fill="none" stroke="#22C55E" stroke-width="70"
-            stroke-dasharray="471 1415"
-            stroke-dashoffset="-1413"
-            transform="rotate(-90 512 480)"/>
+    <!-- Empty label inside can -->
+    <rect x="380" y="560" width="264" height="60" rx="12" fill="#FF6B35" opacity="0.15"/>
+    <rect x="415" y="576" width="100" height="14" rx="4" fill="#FF6B35" opacity="0.25"/>
+    <rect x="415" y="598" width="140" height="14" rx="4" fill="#FF6B35" opacity="0.20"/>
 
-    <!-- Inner hole -->
-    <circle cx="512" cy="480" r="200" fill="url(#bgCyan)"/>
-
-    <!-- Layer 3: Center text - before/after -->
-    <text x="512" y="450" text-anchor="middle" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="#0E7490">Clean</text>
-    <text x="512" y="510" text-anchor="middle" font-family="Arial, sans-serif" font-size="36" fill="#0E7490">25% free</text>
-
-    <!-- Legend bottom -->
-    <rect x="220" y="840" width="32" height="32" rx="6" fill="#F87171"/>
-    <text x="264" y="866" font-family="Arial, sans-serif" font-size="30" fill="#0E7490">Junk</text>
-    <rect x="450" y="840" width="32" height="32" rx="6" fill="#22C55E"/>
-    <text x="494" y="866" font-family="Arial, sans-serif" font-size="30" fill="#0E7490">Clean</text>
-
-    <!-- Arrow down (cleaning action) -->
-    <path d="M660,800 L720,800 L720,760 L760,820 L720,880 L720,840 L660,840 Z" fill="#06B6D4" opacity="0.7"/>
+    <!-- Checkmark at bottom of can -->
+    <circle cx="512" cy="660" r="52" fill="#FF6B35" opacity="0.2"/>
+    <polyline points="484,660 506,682 548,632"
+              fill="none" stroke="#FF6B35" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
   </g>
 </svg>

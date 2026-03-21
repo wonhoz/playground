@@ -59,6 +59,7 @@
 | `Badge.Forge` | Dev/Tools | 오프라인 shields.io 스타일 SVG/PNG 배지 생성기 ★24차 |
 | `SQL.Lens` | Dev/Tools | SQLite EXPLAIN QUERY PLAN 시각화 + 최적화 힌트 ★24차 |
 | `Icon.Maker` | Tools.Utility | SVG/PNG→ICO 멀티사이즈 변환 + WriteableBitmap 픽셀 그리드 에디터 ★25차 |
+| `Img.Cast` | Photo.Picture | SVG/PNG/JPG/BMP → ICO(멀티사이즈)/PNG/JPG/BMP 포맷 변환기 (2026-03-21) |
 | `JSON.Tree` | Dev/Inspector | JSON/YAML/TOML 트리 탐색기 + 검색 필터 + Side-by-Side Diff + 형식 변환 ★25차 |
 | `JSON.Fmt` | Tools.Utility | JSON 붙여넣기 즉시 beautify + 구문 강조 + 오류 줄/열 진단 + Lenient 파싱(주석·trailing comma·따옴표) ★26차 |
 | `Str.Forge` | Development/Analyzer | 멀티파일 Find & Replace 엔진 ★27차 |

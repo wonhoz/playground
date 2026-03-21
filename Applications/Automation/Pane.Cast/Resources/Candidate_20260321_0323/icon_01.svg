@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bgStamp" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF6B6B"/>
+      <stop offset="100%" stop-color="#C0392B"/>
+    </linearGradient>
+    <!-- 잉크 자국 그라데이션 -->
+    <radialGradient id="inkGrad" cx="50%" cy="40%" r="55%">
+      <stop offset="0%" stop-color="#1A1040" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#0D0828" stop-opacity="0.8"/>
+    </radialGradient>
+    <!-- 스탬프 상단 그라데이션 -->
+    <linearGradient id="stampTop" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#F5F0E8"/>
+      <stop offset="100%" stop-color="#E8E0CC"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Layer 1: 코랄/레드 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bgStamp)"/>
+
+  <!-- 배경 질감: 미묘한 격자 (도장 관련성) -->
+  <rect x="0" y="0" width="1024" height="1024" rx="190" fill="none"
+        stroke="#D44" stroke-width="1" opacity="0.08"/>
+
+  <!-- Layer 2: 스탬프 본체 -->
+  <!-- 스탬프 핸들 (아이보리) -->
+  <rect x="412" y="148" width="200" height="140" rx="28" fill="url(#stampTop)"/>
+  <!-- 핸들 하이라이트 -->
+  <rect x="428" y="160" width="168" height="50" rx="16" fill="white" opacity="0.4"/>
+  <!-- 핸들 그림자 -->
+  <rect x="412" y="252" width="200" height="36" rx="0" fill="#C8BFAA" opacity="0.5"/>
+
+  <!-- 스탬프 넥 (좁아지는 부분) -->
+  <path d="M 444,288 L 444,360 L 580,360 L 580,288 Z" fill="#D8CEB8"/>
+  <!-- 넥 좌우 경사 -->
+  <path d="M 412,288 L 444,288 L 444,360 L 390,360 Z" fill="#C4BAA4"/>
+  <path d="M 580,288 L 612,288 L 634,360 L 580,360 Z" fill="#C4BAA4"/>
+
+  <!-- 스탬프 바디 (잉크 블록) — 둥근 모서리 단일값 -->
+  <rect x="260" y="360" width="504" height="200" rx="24" fill="#2A1E5A"/>
+  <!-- 바디 하이라이트 -->
+  <rect x="274" y="370" width="476" height="60" rx="14" fill="#3A2E6A" opacity="0.7"/>
+
+  <!-- 잉크 패드 바닥면 -->
+  <rect x="278" y="524" width="468" height="36" rx="12" fill="#1A0E40" opacity="0.9"/>
+
+  <!-- Layer 3: 스탬프 잉크 자국 (바닥에 찍힌 패턴) -->
+  <!-- 잉크 자국 배경 블러 효과 (여러 레이어로 자연스럽게) -->
+  <ellipse cx="512" cy="740" rx="300" ry="140" fill="#1A1040" opacity="0.15"/>
+
+  <!-- 찍힌 터미널 격자 패턴 (인각된 모양) -->
+  <!-- 외곽 직사각형 잉크 테두리 -->
+  <rect x="280" y="630" width="464" height="220" rx="16" fill="url(#inkGrad)"/>
+
+  <!-- 내부 격자 (잉크로 찍힌 패인 레이아웃) — clipPath로 rect 안에만 그려짐 -->
+  <clipPath id="stampPrint">
+    <rect x="280" y="630" width="464" height="220" rx="16"/>
+  </clipPath>
+  <g clip-path="url(#stampPrint)">
+    <!-- 세로 분할선 -->
+    <line x1="512" y1="630" x2="512" y2="850" stroke="#E8E0CC" stroke-width="8" stroke-linecap="round" opacity="0.7"/>
+    <!-- 가로 분할선 -->
+    <line x1="280" y1="740" x2="744" y2="740" stroke="#E8E0CC" stroke-width="8" stroke-linecap="round" opacity="0.7"/>
+    <!-- 패인 1 내용 라인들 -->
+    <rect x="304" y="660" width="80" height="10" rx="5" fill="#A8A0CC" opacity="0.8"/>
+    <rect x="304" y="678" width="60" height="8" rx="4" fill="#A8A0CC" opacity="0.55"/>
+    <rect x="304" y="694" width="90" height="8" rx="4" fill="#A8A0CC" opacity="0.4"/>
+    <!-- 패인 2 내용 라인들 -->
+    <rect x="534" y="660" width="80" height="10" rx="5" fill="#A8A0CC" opacity="0.8"/>
+    <rect x="534" y="678" width="50" height="8" rx="4" fill="#A8A0CC" opacity="0.55"/>
+    <!-- 패인 3 내용 라인들 -->
+    <rect x="304" y="764" width="70" height="10" rx="5" fill="#A8A0CC" opacity="0.7"/>
+    <rect x="304" y="780" width="90" height="8" rx="4" fill="#A8A0CC" opacity="0.45"/>
+    <!-- 패인 4 내용 라인들 -->
+    <rect x="534" y="764" width="80" height="10" rx="5" fill="#A8A0CC" opacity="0.7"/>
+    <rect x="534" y="780" width="60" height="8" rx="4" fill="#A8A0CC" opacity="0.45"/>
+  </g>
+
+  <!-- 잉크 자국 주변 번짐 효과 (하단) -->
+  <ellipse cx="512" cy="852" rx="240" ry="18" fill="#1A1040" opacity="0.2"/>
+</svg>

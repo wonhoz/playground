@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg2" cx="50%" cy="55%" r="60%">
+      <stop offset="0%" stop-color="#1A2A44"/>
+      <stop offset="100%" stop-color="#0A1428"/>
+    </radialGradient>
+    <!-- 전파 글로우 페이드 -->
+    <radialGradient id="waveGlow" cx="50%" cy="68%" r="50%">
+      <stop offset="0%" stop-color="#00E5FF" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#00E5FF" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Layer 1: 딥 슬레이트블루 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg2)"/>
+  <!-- 배경 글로우 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#waveGlow)"/>
+
+  <!-- Layer 2: 안테나 타워 (중앙, 단단한 fill 기반) -->
+  <!-- 기단 (받침) -->
+  <rect x="398" y="820" width="228" height="40" rx="20" fill="#F59E0B"/>
+  <!-- 기단 다리 좌 -->
+  <rect x="376" y="740" width="52" height="100" rx="14" fill="#D97706"/>
+  <!-- 기단 다리 우 -->
+  <rect x="596" y="740" width="52" height="100" rx="14" fill="#D97706"/>
+  <!-- 메인 타워 기둥 (아래→위로 좁아짐 path) -->
+  <path d="M 448,760 L 484,200 L 540,200 L 576,760 Z" fill="#F59E0B"/>
+  <!-- 타워 하이라이트 (왼쪽 면) -->
+  <path d="M 448,760 L 484,200 L 500,200 L 464,760 Z" fill="#FCD34D" opacity="0.4"/>
+
+  <!-- 타워 중간 가로대 (3개) -->
+  <rect x="430" y="560" width="164" height="18" rx="9" fill="#D97706"/>
+  <rect x="452" y="430" width="120" height="16" rx="8" fill="#D97706"/>
+  <rect x="466" y="320" width="92" height="14" rx="7" fill="#D97706"/>
+
+  <!-- 타워 꼭대기 전구 -->
+  <circle cx="512" cy="180" r="24" fill="#FCD34D"/>
+  <circle cx="512" cy="180" r="14" fill="#FFFDE7"/>
+
+  <!-- Layer 3: 전파 동심 호 (clipPath 적용하여 배경 밖 삐져나옴 방지) -->
+  <clipPath id="bgClip">
+    <rect width="1024" height="1024" rx="190"/>
+  </clipPath>
+  <g clip-path="url(#bgClip)">
+    <!-- 전파 호 1 (가장 안쪽, 가장 밝음) -->
+    <path d="M 310,700 Q 310,440 512,440 Q 714,440 714,700"
+          fill="none" stroke="#00E5FF" stroke-width="22" stroke-linecap="round" opacity="0.9"/>
+    <!-- 전파 호 2 -->
+    <path d="M 214,750 Q 214,320 512,320 Q 810,320 810,750"
+          fill="none" stroke="#00E5FF" stroke-width="18" stroke-linecap="round" opacity="0.6"/>
+    <!-- 전파 호 3 (가장 바깥, 가장 연함) -->
+    <path d="M 118,790 Q 118,190 512,190 Q 906,190 906,790"
+          fill="none" stroke="#00E5FF" stroke-width="14" stroke-linecap="round" opacity="0.3"/>
+  </g>
+
+  <!-- 전파 포인트 (안테나 꼭대기 발사점 강조) -->
+  <circle cx="512" cy="180" r="36" fill="none" stroke="#00E5FF" stroke-width="8" opacity="0.6"/>
+  <circle cx="512" cy="180" r="52" fill="none" stroke="#00E5FF" stroke-width="5" opacity="0.3"/>
+</svg>

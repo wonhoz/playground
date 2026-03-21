@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 딥 퍼플/바이올렛 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="#1A0A3A"/>
+
+  <!-- 배경 방사 글로우 (중심) -->
+  <radialGradient id="centerGlow" cx="50%" cy="50%" r="35%">
+    <stop offset="0%" stop-color="#F5E642" stop-opacity="0.35"/>
+    <stop offset="100%" stop-color="#1A0A3A" stop-opacity="0"/>
+  </radialGradient>
+  <rect width="1024" height="1024" rx="190" fill="url(#centerGlow)"/>
+
+  <!-- Layer 2: 중심에서 4방향으로 뻗는 빔 (레몬옐로우) -->
+  <!-- 좌상 빔 -->
+  <line x1="512" y1="512" x2="148" y2="188" stroke="#F5E642" stroke-width="12" stroke-linecap="round" opacity="0.7"/>
+  <!-- 우상 빔 -->
+  <line x1="512" y1="512" x2="876" y2="188" stroke="#F5E642" stroke-width="12" stroke-linecap="round" opacity="0.7"/>
+  <!-- 좌하 빔 -->
+  <line x1="512" y1="512" x2="148" y2="836" stroke="#F5E642" stroke-width="12" stroke-linecap="round" opacity="0.7"/>
+  <!-- 우하 빔 -->
+  <line x1="512" y1="512" x2="876" y2="836" stroke="#F5E642" stroke-width="12" stroke-linecap="round" opacity="0.7"/>
+
+  <!-- 빔 위 속도선 보조 -->
+  <line x1="512" y1="512" x2="148" y2="188" stroke="#F5E642" stroke-width="4" stroke-linecap="round" opacity="0.4" stroke-dasharray="20 18"/>
+  <line x1="512" y1="512" x2="876" y2="188" stroke="#F5E642" stroke-width="4" stroke-linecap="round" opacity="0.4" stroke-dasharray="20 18"/>
+  <line x1="512" y1="512" x2="148" y2="836" stroke="#F5E642" stroke-width="4" stroke-linecap="round" opacity="0.4" stroke-dasharray="20 18"/>
+  <line x1="512" y1="512" x2="876" y2="836" stroke="#F5E642" stroke-width="4" stroke-linecap="round" opacity="0.4" stroke-dasharray="20 18"/>
+
+  <!-- 터미널 창 1: 좌상 -->
+  <rect x="80" y="120" width="240" height="200" rx="18" fill="#2A1460" stroke="#F5E642" stroke-width="10"/>
+  <rect x="80" y="120" width="240" height="36" rx="18 18 0 0" fill="#3A1E80"/>
+  <!-- 창 내용 -->
+  <rect x="104" y="178" width="130" height="12" rx="4" fill="#F5E642" opacity="0.7"/>
+  <rect x="104" y="202" width="100" height="10" rx="4" fill="#D4B800" opacity="0.5"/>
+  <rect x="104" y="224" width="140" height="10" rx="4" fill="#D4B800" opacity="0.35"/>
+  <rect x="104" y="268" width="16" height="20" rx="3" fill="#F5E642" opacity="0.8"/>
+
+  <!-- 터미널 창 2: 우상 -->
+  <rect x="704" y="120" width="240" height="200" rx="18" fill="#2A1460" stroke="#F5E642" stroke-width="10"/>
+  <rect x="704" y="120" width="240" height="36" rx="18 18 0 0" fill="#3A1E80"/>
+  <rect x="728" y="178" width="140" height="12" rx="4" fill="#F5E642" opacity="0.7"/>
+  <rect x="728" y="202" width="110" height="10" rx="4" fill="#D4B800" opacity="0.5"/>
+  <rect x="728" y="224" width="90" height="10" rx="4" fill="#D4B800" opacity="0.35"/>
+  <rect x="728" y="268" width="16" height="20" rx="3" fill="#F5E642" opacity="0.8"/>
+
+  <!-- 터미널 창 3: 좌하 -->
+  <rect x="80" y="704" width="240" height="200" rx="18" fill="#2A1460" stroke="#F5E642" stroke-width="10"/>
+  <rect x="80" y="704" width="240" height="36" rx="18 18 0 0" fill="#3A1E80"/>
+  <rect x="104" y="762" width="120" height="12" rx="4" fill="#F5E642" opacity="0.7"/>
+  <rect x="104" y="786" width="150" height="10" rx="4" fill="#D4B800" opacity="0.5"/>
+  <rect x="104" y="808" width="80" height="10" rx="4" fill="#D4B800" opacity="0.35"/>
+  <rect x="104" y="852" width="16" height="20" rx="3" fill="#F5E642" opacity="0.8"/>
+
+  <!-- 터미널 창 4: 우하 -->
+  <rect x="704" y="704" width="240" height="200" rx="18" fill="#2A1460" stroke="#F5E642" stroke-width="10"/>
+  <rect x="704" y="704" width="240" height="36" rx="18 18 0 0" fill="#3A1E80"/>
+  <rect x="728" y="762" width="100" height="12" rx="4" fill="#F5E642" opacity="0.7"/>
+  <rect x="728" y="786" width="140" height="10" rx="4" fill="#D4B800" opacity="0.5"/>
+  <rect x="728" y="808" width="110" height="10" rx="4" fill="#D4B800" opacity="0.35"/>
+  <rect x="728" y="852" width="16" height="20" rx="3" fill="#F5E642" opacity="0.8"/>
+
+  <!-- Layer 3: 중심 원형 발사 포인트 -->
+  <circle cx="512" cy="512" r="64" fill="#2A1460"/>
+  <circle cx="512" cy="512" r="64" fill="none" stroke="#F5E642" stroke-width="14"/>
+  <circle cx="512" cy="512" r="38" fill="#F5E642"/>
+  <circle cx="512" cy="512" r="18" fill="#1A0A3A"/>
+  <!-- 중심 글로우 -->
+  <circle cx="512" cy="512" r="90" fill="none" stroke="#F5E642" stroke-width="4" opacity="0.3"/>
+</svg>

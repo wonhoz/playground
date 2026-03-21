@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg3" cx="50%" cy="45%" r="70%">
+      <stop offset="0%" stop-color="#FFF5EE"/>
+      <stop offset="100%" stop-color="#FDEBD0"/>
+    </radialGradient>
+    <!-- 방패 그라데이션 -->
+    <linearGradient id="shieldGrad" x1="20%" y1="10%" x2="80%" y2="90%">
+      <stop offset="0%" stop-color="#FF7043"/>
+      <stop offset="100%" stop-color="#BF360C"/>
+    </linearGradient>
+    <!-- 방패 내부 그라데이션 -->
+    <linearGradient id="shieldInner" x1="20%" y1="10%" x2="80%" y2="90%">
+      <stop offset="0%" stop-color="#1A237E"/>
+      <stop offset="100%" stop-color="#0D1457"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Layer 1: 따뜻한 크림 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg3)"/>
+
+  <!-- 배경 장식: 흐릿한 동심 링 (깊이감) -->
+  <circle cx="512" cy="520" r="380" fill="none" stroke="#FF7043" stroke-width="4" opacity="0.12"/>
+  <circle cx="512" cy="520" r="300" fill="none" stroke="#FF7043" stroke-width="3" opacity="0.08"/>
+
+  <!-- Layer 2: 방패 외곽 (코랄/레드 — 바깥 레이어) -->
+  <!-- 방패 path: 상단 둥글고 하단 뾰족한 고전 방패 형태 -->
+  <path d="M 512,870
+           L 230,620
+           Q 180,530 180,420
+           L 180,280
+           Q 180,230 230,210
+           L 512,150
+           L 794,210
+           Q 844,230 844,280
+           L 844,420
+           Q 844,530 794,620
+           Z"
+        fill="url(#shieldGrad)"/>
+
+  <!-- 방패 외곽 하이라이트 (왼쪽 상단 빛 반사) -->
+  <path d="M 512,150 L 230,210 Q 190,230 188,280 L 188,380 Q 220,240 340,190 L 512,158 Z"
+        fill="white" opacity="0.18"/>
+
+  <!-- 방패 내부 (딥 네이비 — 안쪽 레이어) -->
+  <path d="M 512,820
+           L 270,600
+           Q 228,520 228,420
+           L 228,295
+           Q 228,262 265,248
+           L 512,198
+           L 759,248
+           Q 796,262 796,295
+           L 796,420
+           Q 796,520 754,600
+           Z"
+        fill="url(#shieldInner)"/>
+
+  <!-- Layer 3: 방패 내부 심볼 — 초록 체크 (PC 보호됨) -->
+  <!-- 초록 글로우 원 -->
+  <circle cx="512" cy="500" r="130" fill="#00C853" opacity="0.18"/>
+  <!-- 체크마크 (두꺼운 fill 기반) -->
+  <path d="M 374,500 L 460,590 L 650,390"
+        fill="none" stroke="#00E676" stroke-width="70" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- 체크마크 내부 밝은 선 -->
+  <path d="M 374,500 L 460,590 L 650,390"
+        fill="none" stroke="#A8FFD8" stroke-width="24" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- 방패 상단 테두리 장식 (금속 느낌) -->
+  <path d="M 512,150 L 794,210 Q 844,230 844,280 L 844,300 Q 844,250 794,232 L 512,172 L 230,232 Q 180,250 180,300 L 180,280 Q 180,230 230,210 Z"
+        fill="#FF8A65" opacity="0.5"/>
+
+  <!-- 방패 중앙 세로 리지 -->
+  <path d="M 512,200 L 512,800" fill="none" stroke="#FF8A65" stroke-width="6" opacity="0.3" stroke-linecap="round"/>
+</svg>

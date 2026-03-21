@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg4" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#2D1B5A"/>
+      <stop offset="100%" stop-color="#0F0820"/>
+    </radialGradient>
+    <!-- 포털 내부 빛 -->
+    <radialGradient id="portalCore" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFE600"/>
+      <stop offset="40%" stop-color="#FFB300"/>
+      <stop offset="100%" stop-color="#FF6D00" stop-opacity="0.4"/>
+    </radialGradient>
+    <!-- 포털 링 그라데이션 -->
+    <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7C4DFF"/>
+      <stop offset="50%" stop-color="#00B0FF"/>
+      <stop offset="100%" stop-color="#7C4DFF"/>
+    </linearGradient>
+    <!-- 포털 바닥 그림자 -->
+    <radialGradient id="portalFloor" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFE600" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#FFE600" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Layer 1: 딥 퍼플 우주 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg4)"/>
+
+  <!-- 배경 별 효과 (작은 점들) -->
+  <circle cx="180" cy="200" r="3" fill="white" opacity="0.6"/>
+  <circle cx="830" cy="180" r="4" fill="white" opacity="0.5"/>
+  <circle cx="150" cy="700" r="3" fill="white" opacity="0.4"/>
+  <circle cx="870" cy="750" r="3" fill="white" opacity="0.5"/>
+  <circle cx="260" cy="870" r="2" fill="white" opacity="0.4"/>
+  <circle cx="780" cy="880" r="3" fill="white" opacity="0.35"/>
+  <circle cx="700" cy="140" r="2" fill="#B0B0FF" opacity="0.5"/>
+  <circle cx="340" cy="130" r="3" fill="#B0B0FF" opacity="0.4"/>
+
+  <!-- Layer 2: 포털 아치 프레임 (돌/금속 기둥) -->
+  <!-- 왼쪽 기둥 -->
+  <rect x="240" y="280" width="100" height="540" rx="20" fill="#3A2D6A"/>
+  <rect x="252" y="292" width="76" height="516" rx="14" fill="#4A3D7A" opacity="0.6"/>
+  <!-- 오른쪽 기둥 -->
+  <rect x="684" y="280" width="100" height="540" rx="20" fill="#3A2D6A"/>
+  <rect x="696" y="292" width="76" height="516" rx="14" fill="#4A3D7A" opacity="0.6"/>
+  <!-- 상단 아치 -->
+  <path d="M 240,320 Q 240,200 512,200 Q 784,200 784,320 L 740,320 Q 740,240 512,240 Q 284,240 284,320 Z"
+        fill="#3A2D6A"/>
+
+  <!-- 포털 바닥 광원 -->
+  <ellipse cx="512" cy="800" rx="220" ry="30" fill="url(#portalFloor)"/>
+
+  <!-- 포털 내부 (어두운 배경에서 빛나는 게이트) -->
+  <!-- 포털 내부 공간 -->
+  <path d="M 340,780 L 340,340 Q 340,250 512,250 Q 684,250 684,340 L 684,780 Z"
+        fill="#0A0414"/>
+  <!-- 포털 내부 빛 코어 -->
+  <ellipse cx="512" cy="520" rx="160" ry="240" fill="url(#portalCore)" opacity="0.85"/>
+
+  <!-- 포털 링 (엣지 글로우) -->
+  <path d="M 340,780 L 340,340 Q 340,250 512,250 Q 684,250 684,340 L 684,780"
+        fill="none" stroke="url(#ringGrad)" stroke-width="18"/>
+  <!-- 포털 링 내부 얇은 밝은 선 -->
+  <path d="M 352,778 L 352,342 Q 352,264 512,264 Q 672,264 672,342 L 672,778"
+        fill="none" stroke="white" stroke-width="4" opacity="0.35"/>
+
+  <!-- Layer 3: 포털 속으로 빨려들어가는 터미널 창 실루엣 -->
+  <!-- 터미널 창 (중앙, 반투명, 포털로 들어가는 중) -->
+  <rect x="416" y="390" width="192" height="140" rx="14" fill="#FFE600" opacity="0.15"/>
+  <rect x="416" y="390" width="192" height="30" rx="14" fill="#FFB300" opacity="0.3"/>
+  <rect x="416" y="390" width="192" height="140" rx="14" fill="none" stroke="#FFE600" stroke-width="6" opacity="0.6"/>
+  <!-- 창 내부 내용 라인 (빛나게) -->
+  <rect x="432" y="438" width="100" height="10" rx="5" fill="#FFE600" opacity="0.5"/>
+  <rect x="432" y="458" width="70" height="8" rx="4" fill="#FFB300" opacity="0.4"/>
+  <rect x="432" y="475" width="120" height="8" rx="4" fill="#FFB300" opacity="0.3"/>
+
+  <!-- 빨려들어가는 속도선 (포털 가장자리에서 중심으로) -->
+  <line x1="390" y1="420" x2="440" y2="460" stroke="#7C4DFF" stroke-width="5" stroke-linecap="round" opacity="0.5"/>
+  <line x1="634" y1="420" x2="582" y2="460" stroke="#00B0FF" stroke-width="5" stroke-linecap="round" opacity="0.5"/>
+  <line x1="390" y1="600" x2="440" y2="560" stroke="#7C4DFF" stroke-width="4" stroke-linecap="round" opacity="0.4"/>
+  <line x1="634" y1="600" x2="582" y2="560" stroke="#00B0FF" stroke-width="4" stroke-linecap="round" opacity="0.4"/>
+</svg>

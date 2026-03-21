@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 코발트 블루 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="#0D2B6E"/>
+
+  <!-- 배경 미묘한 그라데이션 -->
+  <radialGradient id="bgGrad" cx="50%" cy="50%" r="60%">
+    <stop offset="0%" stop-color="#1A4A9E" stop-opacity="0.6"/>
+    <stop offset="100%" stop-color="#0D2B6E" stop-opacity="0"/>
+  </radialGradient>
+  <rect width="1024" height="1024" rx="190" fill="url(#bgGrad)"/>
+
+  <!-- Layer 2: 카메라 렌즈 외곽 링 -->
+  <!-- 바깥 링 (흰색) -->
+  <circle cx="512" cy="512" r="380" fill="none" stroke="white" stroke-width="24"/>
+  <!-- 렌즈 바디 -->
+  <circle cx="512" cy="512" r="340" fill="#0A2060" stroke="#FFFFFF" stroke-width="10" stroke-opacity="0.5"/>
+  <!-- 두 번째 링 -->
+  <circle cx="512" cy="512" r="300" fill="none" stroke="white" stroke-width="8" opacity="0.4"/>
+
+  <!-- 뷰파인더 격자선 (3x3) -->
+  <!-- 세로선 1 -->
+  <line x1="399" y1="212" x2="399" y2="812" stroke="white" stroke-width="6" opacity="0.5"/>
+  <!-- 세로선 2 -->
+  <line x1="625" y1="212" x2="625" y2="812" stroke="white" stroke-width="6" opacity="0.5"/>
+  <!-- 가로선 1 -->
+  <line x1="212" y1="399" x2="812" y2="399" stroke="white" stroke-width="6" opacity="0.5"/>
+  <!-- 가로선 2 -->
+  <line x1="212" y1="625" x2="812" y2="625" stroke="white" stroke-width="6" opacity="0.5"/>
+
+  <!-- 격자 클리핑 마스크 (원 안으로만) -->
+  <clipPath id="lensClip">
+    <circle cx="512" cy="512" r="336"/>
+  </clipPath>
+  <g clip-path="url(#lensClip)">
+    <!-- 세로선 재그리기 (클립 적용) -->
+    <line x1="399" y1="176" x2="399" y2="848" stroke="white" stroke-width="6" opacity="0.5"/>
+    <line x1="625" y1="176" x2="625" y2="848" stroke="white" stroke-width="6" opacity="0.5"/>
+    <!-- 가로선 재그리기 -->
+    <line x1="176" y1="399" x2="848" y2="399" stroke="white" stroke-width="6" opacity="0.5"/>
+    <line x1="176" y1="625" x2="848" y2="625" stroke="white" stroke-width="6" opacity="0.5"/>
+  </g>
+
+  <!-- Layer 3: 중앙 초점 포인트 (비비드 오렌지레드) -->
+  <!-- 외곽 오렌지 링 -->
+  <circle cx="512" cy="512" r="110" fill="none" stroke="#FF4500" stroke-width="18"/>
+  <!-- 초점 십자선 -->
+  <line x1="512" y1="446" x2="512" y2="388" stroke="#FF4500" stroke-width="14" stroke-linecap="round"/>
+  <line x1="512" y1="578" x2="512" y2="636" stroke="#FF4500" stroke-width="14" stroke-linecap="round"/>
+  <line x1="446" y1="512" x2="388" y2="512" stroke="#FF4500" stroke-width="14" stroke-linecap="round"/>
+  <line x1="578" y1="512" x2="636" y2="512" stroke="#FF4500" stroke-width="14" stroke-linecap="round"/>
+
+  <!-- 중앙 발광 점 -->
+  <circle cx="512" cy="512" r="52" fill="#FF4500" opacity="0.3"/>
+  <circle cx="512" cy="512" r="32" fill="#FF6030"/>
+  <circle cx="512" cy="512" r="16" fill="#FF8C00"/>
+
+  <!-- 코너 브라켓 (뷰파인더 특유의 코너 마커) -->
+  <!-- 좌상 -->
+  <path d="M 188,260 L 188,188 L 260,188" fill="none" stroke="white" stroke-width="16" stroke-linecap="square"/>
+  <!-- 우상 -->
+  <path d="M 764,188 L 836,188 L 836,260" fill="none" stroke="white" stroke-width="16" stroke-linecap="square"/>
+  <!-- 좌하 -->
+  <path d="M 188,764 L 188,836 L 260,836" fill="none" stroke="white" stroke-width="16" stroke-linecap="square"/>
+  <!-- 우하 -->
+  <path d="M 764,836 L 836,836 L 836,764" fill="none" stroke="white" stroke-width="16" stroke-linecap="square"/>
+</svg>

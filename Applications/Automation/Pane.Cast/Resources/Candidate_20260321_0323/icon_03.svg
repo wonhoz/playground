@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg5" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F5F0DC"/>
+      <stop offset="100%" stop-color="#EDE4C4"/>
+    </linearGradient>
+    <!-- 트레이 그라데이션 -->
+    <linearGradient id="trayGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#2D4A30"/>
+      <stop offset="100%" stop-color="#1A2E1C"/>
+    </linearGradient>
+    <!-- 오렌지 포인트 그라데이션 -->
+    <radialGradient id="orangeDot" cx="50%" cy="35%" r="60%">
+      <stop offset="0%" stop-color="#FF8C00"/>
+      <stop offset="100%" stop-color="#E65100"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Layer 1: 연한 올리브/크림 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg5)"/>
+
+  <!-- 배경 테이블 상판 느낌 (미묘한 나무결 선) -->
+  <line x1="120" y1="380" x2="904" y2="380" stroke="#D4C898" stroke-width="3" opacity="0.4"/>
+  <line x1="120" y1="420" x2="904" y2="420" stroke="#D4C898" stroke-width="2" opacity="0.25"/>
+  <line x1="120" y1="460" x2="904" y2="460" stroke="#D4C898" stroke-width="2" opacity="0.18"/>
+
+  <!-- Layer 2: 미장플라스 트레이 (다크 그린 준비 트레이) -->
+  <!-- 트레이 본체 -->
+  <rect x="160" y="480" width="704" height="360" rx="28" fill="url(#trayGrad)"/>
+  <!-- 트레이 상단 테두리 -->
+  <rect x="160" y="480" width="704" height="28" rx="28" fill="#3E6642" opacity="0.8"/>
+  <!-- 트레이 내부 광택 -->
+  <rect x="176" y="496" width="672" height="60" rx="14" fill="#4A7A4E" opacity="0.25"/>
+  <!-- 트레이 외곽 테두리 (단일 rx) -->
+  <rect x="160" y="480" width="704" height="360" rx="28" fill="none" stroke="#1A2E1C" stroke-width="10"/>
+
+  <!-- 트레이 내부 칸막이 (세로 3개 구획) -->
+  <!-- clipPath로 트레이 안에만 그려지도록 -->
+  <clipPath id="trayClip">
+    <rect x="160" y="480" width="704" height="360" rx="28"/>
+  </clipPath>
+  <g clip-path="url(#trayClip)">
+    <!-- 구획 경계선 -->
+    <line x1="394" y1="508" x2="394" y2="840" stroke="#1E3A22" stroke-width="8" stroke-linecap="round"/>
+    <line x1="630" y1="508" x2="630" y2="840" stroke="#1E3A22" stroke-width="8" stroke-linecap="round"/>
+    <!-- 가로 경계선 -->
+    <line x1="188" y1="660" x2="836" y2="660" stroke="#1E3A22" stroke-width="6" stroke-linecap="round"/>
+
+    <!-- 구획 1: 좌상 — 작은 정사각형 블록들 (코드 모듈 상징) -->
+    <rect x="196" y="528" width="60" height="60" rx="10" fill="#5A8A5E" opacity="0.9"/>
+    <rect x="270" y="528" width="60" height="60" rx="10" fill="#4A7A4E" opacity="0.7"/>
+    <rect x="196" y="600" width="60" height="44" rx="10" fill="#3E6642" opacity="0.8"/>
+    <rect x="270" y="600" width="60" height="44" rx="10" fill="#5A8A5E" opacity="0.6"/>
+
+    <!-- 구획 2: 중앙상 — 길쭉한 막대들 (코드 라인 상징) -->
+    <rect x="412" y="528" width="120" height="18" rx="9" fill="#7AAA7E" opacity="0.9"/>
+    <rect x="412" y="556" width="90" height="16" rx="8" fill="#5A8A5E" opacity="0.7"/>
+    <rect x="412" y="580" width="110" height="16" rx="8" fill="#5A8A5E" opacity="0.55"/>
+    <rect x="412" y="604" width="70" height="16" rx="8" fill="#4A7A4E" opacity="0.5"/>
+
+    <!-- 구획 3: 우상 — 원형들 (설정/도구 상징) -->
+    <circle cx="688" cy="554" r="30" fill="#5A8A5E" opacity="0.85"/>
+    <circle cx="750" cy="554" r="22" fill="#4A7A4E" opacity="0.7"/>
+    <circle cx="688" cy="618" r="22" fill="#3E6642" opacity="0.75"/>
+    <circle cx="750" cy="618" r="16" fill="#5A8A5E" opacity="0.6"/>
+
+    <!-- 구획 4~6: 하단 행 (더 간단하게) -->
+    <rect x="196" y="680" width="168" height="30" rx="15" fill="#4A7A4E" opacity="0.8"/>
+    <rect x="196" y="720" width="130" height="24" rx="12" fill="#3E6642" opacity="0.6"/>
+    <rect x="196" y="752" width="150" height="24" rx="12" fill="#4A7A4E" opacity="0.5"/>
+
+    <rect x="412" y="680" width="110" height="24" rx="12" fill="#5A8A5E" opacity="0.75"/>
+    <rect x="412" y="714" width="150" height="24" rx="12" fill="#4A7A4E" opacity="0.6"/>
+    <rect x="412" y="748" width="80" height="24" rx="12" fill="#3E6642" opacity="0.5"/>
+
+    <rect x="648" y="680" width="100" height="24" rx="12" fill="#5A8A5E" opacity="0.75"/>
+    <rect x="648" y="714" width="130" height="24" rx="12" fill="#4A7A4E" opacity="0.6"/>
+    <rect x="648" y="748" width="90" height="24" rx="12" fill="#3E6642" opacity="0.5"/>
+  </g>
+
+  <!-- Layer 3: 오렌지 포인트 — 트레이 위 재료들 (준비 완료 표시) -->
+  <!-- 오렌지 태그/라벨 카드들 (트레이 위에 레이어드) -->
+  <!-- 카드 1 (좌) -->
+  <rect x="192" y="390" width="190" height="116" rx="16" fill="white" opacity="0.92"/>
+  <rect x="192" y="390" width="190" height="116" rx="16" fill="none" stroke="#D4C898" stroke-width="6"/>
+  <rect x="206" y="420" width="110" height="14" rx="7" fill="#2D4A30" opacity="0.7"/>
+  <rect x="206" y="444" width="80" height="12" rx="6" fill="#2D4A30" opacity="0.5"/>
+  <rect x="206" y="464" width="130" height="12" rx="6" fill="#2D4A30" opacity="0.4"/>
+  <!-- 카드 1 오렌지 탭 -->
+  <rect x="192" y="390" width="190" height="24" rx="16" fill="url(#orangeDot)"/>
+
+  <!-- 카드 2 (중앙) — 살짝 위에 겹쳐서 깊이감 -->
+  <rect x="416" y="370" width="192" height="130" rx="16" fill="white" opacity="0.95"/>
+  <rect x="416" y="370" width="192" height="130" rx="16" fill="none" stroke="#D4C898" stroke-width="7"/>
+  <rect x="430" y="402" width="130" height="14" rx="7" fill="#2D4A30" opacity="0.75"/>
+  <rect x="430" y="426" width="100" height="12" rx="6" fill="#2D4A30" opacity="0.55"/>
+  <rect x="430" y="446" width="120" height="12" rx="6" fill="#2D4A30" opacity="0.4"/>
+  <rect x="430" y="464" width="80" height="12" rx="6" fill="#2D4A30" opacity="0.3"/>
+  <!-- 카드 2 오렌지 탭 -->
+  <rect x="416" y="370" width="192" height="26" rx="16" fill="url(#orangeDot)"/>
+
+  <!-- 카드 3 (우) -->
+  <rect x="642" y="395" width="190" height="112" rx="16" fill="white" opacity="0.92"/>
+  <rect x="642" y="395" width="190" height="112" rx="16" fill="none" stroke="#D4C898" stroke-width="6"/>
+  <rect x="658" y="425" width="110" height="14" rx="7" fill="#2D4A30" opacity="0.7"/>
+  <rect x="658" y="449" width="90" height="12" rx="6" fill="#2D4A30" opacity="0.5"/>
+  <rect x="658" y="469" width="120" height="12" rx="6" fill="#2D4A30" opacity="0.4"/>
+  <!-- 카드 3 오렌지 탭 -->
+  <rect x="642" y="395" width="190" height="24" rx="16" fill="url(#orangeDot)"/>
+</svg>

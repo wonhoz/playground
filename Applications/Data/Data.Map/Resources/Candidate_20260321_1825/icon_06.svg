@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_06: 데이터 핀들이 지도 위에서 피어나는 (metaphor) | 공간/장면 | 밝은 산호 배경 + 다색 핀들 -->
+  <!-- Layer 1: 배경 - 따뜻한 아이보리 -->
+  <defs>
+    <linearGradient id="bg06" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF8F0"/>
+      <stop offset="100%" stop-color="#FFE0CC"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg06)"/>
+
+  <!-- Layer 2: 지도 배경 (종이 지도 느낌) -->
+  <rect x="120" y="180" width="784" height="560" rx="12" fill="#FFF3E8" stroke="#DDB8A0" stroke-width="3"/>
+
+  <!-- 지도 지형 패치들 -->
+  <!-- 물/바다 영역 -->
+  <rect x="120" y="180" width="784" height="560" rx="12" fill="#DCF0FF"/>
+
+  <!-- 육지 패치들 (불규칙한 지형) -->
+  <path d="M200 220 Q270 205 350 225 Q430 210 510 230 Q540 215 580 228 Q620 210 680 225 L700 320 Q660 340 610 325 Q560 350 500 335 Q440 360 380 340 Q310 360 260 345 Q220 330 200 300 Z"
+        fill="#D4E8C2" stroke="#B8D49A" stroke-width="2"/>
+
+  <path d="M350 340 Q420 325 500 345 Q560 330 620 350 L640 440 Q590 460 530 445 Q460 465 400 450 Q360 460 350 430 Z"
+        fill="#C8DFB0" stroke="#A8C888" stroke-width="2"/>
+
+  <path d="M180 380 Q240 365 300 385 L320 480 Q270 495 210 480 Q185 460 180 430 Z"
+        fill="#BDDBA0" stroke="#9CC878" stroke-width="2"/>
+
+  <path d="M680 360 Q750 345 820 370 L840 480 Q800 495 740 480 Q700 490 680 460 Z"
+        fill="#D4E8C2" stroke="#B0CC90" stroke-width="2"/>
+
+  <path d="M250 490 Q350 475 480 500 Q580 485 700 505 L720 600 L230 610 Z"
+        fill="#C0D8A4" stroke="#A0C080" stroke-width="2"/>
+
+  <!-- 도로/경로 -->
+  <path d="M200 400 Q400 380 512 420 Q700 390 820 410" fill="none" stroke="#E8C888" stroke-width="3" stroke-dasharray="8,5"/>
+  <path d="M350 300 L400 450 L380 600" fill="none" stroke="#E8C888" stroke-width="2" stroke-dasharray="6,4"/>
+  <path d="M640 280 L660 420 L640 600" fill="none" stroke="#E8C888" stroke-width="2" stroke-dasharray="6,4"/>
+
+  <!-- Layer 2: 위치 핀들 (location pins) - 다양한 색상과 크기 -->
+  <!-- 핀 모양 그룹: 원형 머리 + 삼각 꼬리 -->
+  <!-- 큰 빨간 핀 -->
+  <circle cx="400" cy="340" r="32" fill="#F44336" stroke="white" stroke-width="4"/>
+  <circle cx="400" cy="340" r="12" fill="white" opacity="0.9"/>
+  <path d="M380 364 L400 410 L420 364 Z" fill="#F44336"/>
+  <!-- 피어나는 효과 -->
+  <circle cx="400" cy="340" r="48" fill="none" stroke="#F44336" stroke-width="3" opacity="0.3"/>
+  <circle cx="400" cy="340" r="64" fill="none" stroke="#F44336" stroke-width="2" opacity="0.15"/>
+
+  <!-- 파란 핀 -->
+  <circle cx="600" cy="310" r="26" fill="#2196F3" stroke="white" stroke-width="3.5"/>
+  <circle cx="600" cy="310" r="10" fill="white" opacity="0.9"/>
+  <path d="M582 330 L600 372 L618 330 Z" fill="#2196F3"/>
+  <circle cx="600" cy="310" r="40" fill="none" stroke="#2196F3" stroke-width="2.5" opacity="0.25"/>
+
+  <!-- 녹색 핀 -->
+  <circle cx="300" cy="470" r="22" fill="#4CAF50" stroke="white" stroke-width="3"/>
+  <circle cx="300" cy="470" r="8" fill="white" opacity="0.9"/>
+  <path d="M285 487 L300 524 L315 487 Z" fill="#4CAF50"/>
+
+  <!-- 오렌지 핀 -->
+  <circle cx="720" cy="400" r="24" fill="#FF9800" stroke="white" stroke-width="3"/>
+  <circle cx="720" cy="400" r="9" fill="white" opacity="0.9"/>
+  <path d="M704 419 L720 459 L736 419 Z" fill="#FF9800"/>
+
+  <!-- 보라 핀 -->
+  <circle cx="520" cy="500" r="20" fill="#9C27B0" stroke="white" stroke-width="3"/>
+  <circle cx="520" cy="500" r="7" fill="white" opacity="0.9"/>
+  <path d="M507 515 L520 551 L533 515 Z" fill="#9C27B0"/>
+
+  <!-- 분홍 핀 -->
+  <circle cx="780" cy="300" r="18" fill="#E91E63" stroke="white" stroke-width="2.5"/>
+  <path d="M769 312 L780 344 L791 312 Z" fill="#E91E63"/>
+
+  <!-- Layer 3: 하단 설명 바 -->
+  <rect x="120" y="760" width="784" height="76" rx="12" fill="#FF8A65" opacity="0.15" stroke="#DDB8A0" stroke-width="2"/>
+  <text x="512" y="800" text-anchor="middle" font-family="Arial" font-size="34" font-weight="bold" fill="#BF360C">GeoJSON / CSV → 인터랙티브 지도</text>
+  <text x="512" y="824" text-anchor="middle" font-family="Arial" font-size="24" fill="#E64A19">Data.Map</text>
+</svg>

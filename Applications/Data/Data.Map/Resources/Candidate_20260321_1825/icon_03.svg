@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_03: 데이터 파일 → 지도 변환 (literal) | 레이어드 | 코발트블루 + 황금 포인트 -->
+  <!-- Layer 1: 배경 그라데이션 - 코발트블루 -->
+  <defs>
+    <linearGradient id="bg03" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1565C0"/>
+      <stop offset="100%" stop-color="#0D3875"/>
+    </linearGradient>
+    <linearGradient id="arrow03" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FFC107"/>
+      <stop offset="100%" stop-color="#FF8F00"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg03)"/>
+
+  <!-- Layer 2: 왼쪽 - 데이터 파일 (JSON 파일 아이콘) -->
+  <rect x="110" y="270" width="300" height="360" rx="16" fill="#0D2E6A" stroke="#2979FF" stroke-width="3"/>
+  <!-- 파일 귀접기 -->
+  <path d="M354 270 L410 326 L354 326 Z" fill="#1565C0"/>
+  <path d="M354 270 L410 326 L410 330 L350 330 L350 270 Z" fill="#2979FF" opacity="0.5"/>
+  <!-- JSON 텍스트 내용 -->
+  <text x="130" y="350" font-family="Consolas,monospace" font-size="28" fill="#82B1FF">{"type":</text>
+  <text x="130" y="388" font-family="Consolas,monospace" font-size="26" fill="#69F0AE"> "Feature"</text>
+  <text x="130" y="426" font-family="Consolas,monospace" font-size="26" fill="#82B1FF"> "geometry"</text>
+  <text x="130" y="462" font-family="Consolas,monospace" font-size="26" fill="#FFD740"> [120.5,</text>
+  <text x="130" y="498" font-family="Consolas,monospace" font-size="26" fill="#FFD740">  37.2]</text>
+  <text x="130" y="534" font-family="Consolas,monospace" font-size="28" fill="#82B1FF">}</text>
+
+  <!-- 파일 레이블 -->
+  <rect x="130" y="580" width="120" height="30" rx="6" fill="#2979FF" opacity="0.7"/>
+  <text x="190" y="601" text-anchor="middle" font-family="Arial" font-size="22" fill="white" font-weight="bold">.geojson</text>
+
+  <!-- Layer 2: 화살표 변환 -->
+  <path d="M440 480 L590 480" stroke="url(#arrow03)" stroke-width="12" stroke-linecap="round"/>
+  <polygon points="590,460 630,480 590,500" fill="#FFC107"/>
+  <!-- 화살표 위 텍스트 -->
+  <text x="512" y="460" text-anchor="middle" font-family="Arial" font-size="22" fill="#FFD740">렌더</text>
+
+  <!-- Layer 2: 오른쪽 - 지도 미리보기 -->
+  <rect x="640" y="270" width="290" height="360" rx="16" fill="#0A2554" stroke="#42A5F5" stroke-width="3"/>
+
+  <!-- 지도 지역들 -->
+  <path d="M660 310 Q700 290 750 300 Q790 285 840 295 L900 350 Q880 400 840 380 Q800 400 760 385 Q720 405 690 390 Q665 370 660 350 Z"
+        fill="#1976D2" opacity="0.8"/>
+  <path d="M660 390 Q700 380 740 395 Q780 380 840 395 L910 460 Q880 510 840 490 Q790 520 740 500 Q700 520 665 500 Z"
+        fill="#1565C0" opacity="0.7"/>
+  <path d="M670 510 Q720 500 770 515 Q820 505 900 520 L910 580 L660 580 Z"
+        fill="#0D47A1" opacity="0.6"/>
+
+  <!-- 지도 위 마커들 -->
+  <circle cx="730" cy="340" r="14" fill="#FFC107"/>
+  <circle cx="800" cy="410" r="10" fill="#FF5722"/>
+  <circle cx="690" cy="430" r="12" fill="#69F0AE"/>
+  <circle cx="850" cy="350" r="8" fill="#FFC107"/>
+  <circle cx="760" cy="520" r="11" fill="#E040FB"/>
+
+  <!-- 마커 포인트 연결선 -->
+  <line x1="730" y1="340" x2="800" y2="410" stroke="#FFD740" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.5"/>
+  <line x1="800" y1="410" x2="690" y2="430" stroke="#FFD740" stroke-width="1.5" stroke-dasharray="4,3" opacity="0.5"/>
+
+  <!-- Layer 3: 하단 포맷 배지들 -->
+  <rect x="110" y="700" width="118" height="34" rx="8" fill="#1565C0" stroke="#2979FF" stroke-width="2"/>
+  <text x="169" y="723" text-anchor="middle" font-family="Arial" font-size="22" fill="#82B1FF" font-weight="bold">GeoJSON</text>
+
+  <rect x="245" y="700" width="110" height="34" rx="8" fill="#1A3A6A" stroke="#1976D2" stroke-width="2"/>
+  <text x="300" y="723" text-anchor="middle" font-family="Arial" font-size="22" fill="#64B5F6" font-weight="bold">TopoJSON</text>
+
+  <rect x="375" y="700" width="72" height="34" rx="8" fill="#1A3A6A" stroke="#1976D2" stroke-width="2"/>
+  <text x="411" y="723" text-anchor="middle" font-family="Arial" font-size="22" fill="#64B5F6" font-weight="bold">CSV</text>
+</svg>

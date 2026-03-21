@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_10: 앱 UI 미리보기 (지도+사이드패널) (hybrid) | 중앙 심볼 | 보라+청보라 배경 + 앱 UI -->
+  <!-- Layer 1: 배경 - 보라빛 그라데이션 -->
+  <defs>
+    <linearGradient id="bg10" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4A148C"/>
+      <stop offset="100%" stop-color="#1A237E"/>
+    </linearGradient>
+    <linearGradient id="mapbg10" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0D1B4A"/>
+      <stop offset="100%" stop-color="#1A2870"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg10)"/>
+
+  <!-- Layer 2: 앱 윈도우 프레임 -->
+  <rect x="110" y="180" width="804" height="620" rx="16" fill="#0D0D20" stroke="#5C35A0" stroke-width="3"/>
+
+  <!-- 타이틀바 -->
+  <rect x="110" y="180" width="804" height="44" rx="16" fill="#14142A"/>
+  <rect x="110" y="204" width="804" height="20" fill="#14142A"/>
+  <!-- 타이틀 텍스트 -->
+  <text x="160" y="210" font-family="Arial" font-size="24" fill="#50C8DC" font-weight="bold">🗺 Data.Map</text>
+  <text x="350" y="210" font-family="Arial" font-size="18" fill="#444466">GeoJSON / TopoJSON / CSV 오프라인 시각화</text>
+
+  <!-- 앱 내부: 사이드바 + 지도 -->
+  <!-- 사이드바 -->
+  <rect x="118" y="224" width="230" height="568" rx="8" fill="#0F0F20" stroke="#222244" stroke-width="1"/>
+
+  <!-- 사이드바 내용 -->
+  <!-- 섹션 헤더 -->
+  <rect x="118" y="224" width="230" height="28" rx="6" fill="#1A1A30"/>
+  <text x="133" y="244" font-family="Arial" font-size="18" fill="#7777AA">데이터 파일</text>
+
+  <!-- 파일 버튼들 -->
+  <rect x="128" y="262" width="100" height="26" rx="5" fill="#252538" stroke="#444466" stroke-width="1"/>
+  <text x="178" y="280" text-anchor="middle" font-family="Arial" font-size="16" fill="#D0D0E0">📂 열기</text>
+
+  <rect x="238" y="262" width="100" height="26" rx="5" fill="#252538" stroke="#444466" stroke-width="1"/>
+  <text x="288" y="280" text-anchor="middle" font-family="Arial" font-size="16" fill="#D0D0E0">✕ 지우기</text>
+
+  <!-- 파일 경로 박스 -->
+  <rect x="128" y="298" width="210" height="36" rx="4" fill="#1E1E30" stroke="#444466" stroke-width="1"/>
+  <text x="138" y="320" font-family="Consolas,monospace" font-size="14" fill="#888899">korea.geojson</text>
+
+  <!-- 형식 라벨 -->
+  <text x="133" y="352" font-family="Arial" font-size="15" fill="#50C8DC">형식: GeoJSON</text>
+
+  <!-- GeoJSON 옵션 -->
+  <text x="133" y="382" font-family="Arial" font-size="14" fill="#7777AA">GeoJSON 옵션</text>
+  <!-- 색상 필드 콤보 -->
+  <text x="133" y="406" font-family="Arial" font-size="13" fill="#AAAACC">색상 필드:</text>
+  <rect x="200" y="392" width="128" height="22" rx="4" fill="#252538" stroke="#444466" stroke-width="1"/>
+  <text x="214" y="408" font-family="Arial" font-size="13" fill="#D0D0E0">population</text>
+
+  <!-- 값 필드 콤보 -->
+  <text x="133" y="432" font-family="Arial" font-size="13" fill="#AAAACC">값 필드:</text>
+  <rect x="200" y="418" width="128" height="22" rx="4" fill="#252538" stroke="#444466" stroke-width="1"/>
+  <text x="214" y="434" font-family="Arial" font-size="13" fill="#D0D0E0">gdp</text>
+
+  <!-- 필드 목록 -->
+  <text x="133" y="465" font-family="Arial" font-size="14" fill="#7777AA">GeoJSON: 17개 Feature</text>
+  <rect x="128" y="472" width="210" height="200" rx="4" fill="#13132A" stroke="#333355" stroke-width="1"/>
+  <text x="138" y="494" font-family="Consolas,monospace" font-size="14" fill="#AAAACC">name</text>
+  <text x="138" y="514" font-family="Consolas,monospace" font-size="14" fill="#AAAACC">population</text>
+  <text x="138" y="534" font-family="Consolas,monospace" font-size="14" fill="#AAAACC">gdp</text>
+  <text x="138" y="554" font-family="Consolas,monospace" font-size="14" fill="#AAAACC">area_km2</text>
+  <text x="138" y="574" font-family="Consolas,monospace" font-size="14" fill="#AAAACC">density</text>
+
+  <!-- 렌더링 버튼 -->
+  <rect x="128" y="688" width="210" height="36" rx="6" fill="#1A3A2A" stroke="#2A6A4A" stroke-width="2"/>
+  <text x="233" y="712" text-anchor="middle" font-family="Arial" font-size="18" fill="#80FFC0" font-weight="bold">🗺 지도에 표시</text>
+
+  <!-- 지도 영역 -->
+  <rect x="355" y="224" width="551" height="568" rx="8" fill="url(#mapbg10)"/>
+
+  <!-- 지도 격자 -->
+  <line x1="355" y1="320" x2="906" y2="320" stroke="#1A2A60" stroke-width="1"/>
+  <line x1="355" y1="440" x2="906" y2="440" stroke="#1A2A60" stroke-width="1"/>
+  <line x1="355" y1="560" x2="906" y2="560" stroke="#1A2A60" stroke-width="1"/>
+  <line x1="355" y1="680" x2="906" y2="680" stroke="#1A2A60" stroke-width="1"/>
+  <line x1="500" y1="224" x2="500" y2="792" stroke="#1A2A60" stroke-width="1"/>
+  <line x1="650" y1="224" x2="650" y2="792" stroke="#1A2A60" stroke-width="1"/>
+  <line x1="800" y1="224" x2="800" y2="792" stroke="#1A2A60" stroke-width="1"/>
+
+  <!-- Choropleth 지역들 -->
+  <path d="M380 270 Q440 255 510 270 Q570 250 630 265 L640 350 Q580 375 510 358 Q440 378 390 360 Z" fill="#1565C0" opacity="0.8"/>
+  <path d="M640 265 Q700 250 760 270 Q800 255 880 270 L890 360 Q840 380 780 362 Q710 382 650 360 Z" fill="#2E7D32" opacity="0.8"/>
+  <path d="M380 360 Q440 345 510 360 Q560 345 640 360 L640 460 Q570 480 490 460 Q420 480 380 460 Z" fill="#9C27B0" opacity="0.7"/>
+  <path d="M640 360 L890 360 L890 460 L640 460 Z" fill="#F57F17" opacity="0.7"/>
+  <path d="M380 460 L640 460 L640 580 Q560 600 460 580 Q410 590 380 570 Z" fill="#C62828" opacity="0.7"/>
+  <path d="M640 460 L890 460 L890 580 L640 580 Z" fill="#00838F" opacity="0.7"/>
+  <path d="M380 580 L640 580 L640 780 L380 780 Z" fill="#E91E63" opacity="0.6"/>
+  <path d="M640 580 L890 580 L890 780 L640 780 Z" fill="#1565C0" opacity="0.65"/>
+
+  <!-- 지도 범례 오버레이 -->
+  <rect x="375" y="730" width="300" height="54" rx="8" fill="#0D0D20" opacity="0.85" stroke="#5C35A0" stroke-width="1"/>
+  <text x="395" y="752" font-family="Arial" font-size="15" fill="#9E9ECC">population</text>
+  <rect x="395" y="758" width="44" height="14" rx="3" fill="#C62828"/>
+  <rect x="441" y="758" width="44" height="14" fill="#F57F17"/>
+  <rect x="487" y="758" width="44" height="14" fill="#2E7D32"/>
+  <rect x="533" y="758" width="44" height="14" fill="#1565C0"/>
+  <rect x="579" y="758" width="44" height="14" rx="3" fill="#00838F"/>
+  <text x="395" y="776" font-family="Arial" font-size="12" fill="#666688">낮음</text>
+  <text x="610" y="776" font-family="Arial" font-size="12" fill="#666688">높음</text>
+
+  <!-- Layer 3: 상태바 -->
+  <rect x="110" y="776" width="804" height="24" rx="8" fill="#0A0A1A" stroke="#1A1A30" stroke-width="1"/>
+  <text x="130" y="793" font-family="Consolas,monospace" font-size="15" fill="#4A6A8A">GeoJSON 렌더링 완료 — korea.geojson</text>
+</svg>

@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_05: 지구 위에 데이터 격자 (metaphor) | 기하학 추상 | 민트그린 배경 + 다크 격자 -->
+  <!-- Layer 1: 배경 - 밝은 민트 -->
+  <defs>
+    <linearGradient id="bg05" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E0F7FA"/>
+      <stop offset="100%" stop-color="#B2EBF2"/>
+    </linearGradient>
+    <radialGradient id="globe05" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#26C6DA"/>
+      <stop offset="70%" stop-color="#0097A7"/>
+      <stop offset="100%" stop-color="#006064"/>
+    </radialGradient>
+    <clipPath id="globeClip">
+      <circle cx="512" cy="490" r="300"/>
+    </clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg05)"/>
+
+  <!-- Layer 2: 지구본 -->
+  <!-- 지구 기본 -->
+  <circle cx="512" cy="490" r="300" fill="url(#globe05)"/>
+
+  <!-- 위도선 (위경도 격자) -->
+  <ellipse cx="512" cy="490" rx="300" ry="60" fill="none" stroke="#004D40" stroke-width="3" opacity="0.5" clip-path="url(#globeClip)"/>
+  <ellipse cx="512" cy="390" rx="285" ry="50" fill="none" stroke="#004D40" stroke-width="2.5" opacity="0.4" clip-path="url(#globeClip)"/>
+  <ellipse cx="512" cy="290" rx="240" ry="38" fill="none" stroke="#004D40" stroke-width="2" opacity="0.35" clip-path="url(#globeClip)"/>
+  <ellipse cx="512" cy="590" rx="285" ry="50" fill="none" stroke="#004D40" stroke-width="2.5" opacity="0.4" clip-path="url(#globeClip)"/>
+  <ellipse cx="512" cy="690" rx="240" ry="38" fill="none" stroke="#004D40" stroke-width="2" opacity="0.35" clip-path="url(#globeClip)"/>
+
+  <!-- 경도선 -->
+  <line x1="512" y1="190" x2="512" y2="790" stroke="#004D40" stroke-width="3" opacity="0.5" clip-path="url(#globeClip)"/>
+  <path d="M 400 193 Q 362 490 400 787" fill="none" stroke="#004D40" stroke-width="2.5" opacity="0.4" clip-path="url(#globeClip)"/>
+  <path d="M 624 193 Q 662 490 624 787" fill="none" stroke="#004D40" stroke-width="2.5" opacity="0.4" clip-path="url(#globeClip)"/>
+  <path d="M 310 240 Q 250 490 310 740" fill="none" stroke="#004D40" stroke-width="2" opacity="0.35" clip-path="url(#globeClip)"/>
+  <path d="M 714 240 Q 774 490 714 740" fill="none" stroke="#004D40" stroke-width="2" opacity="0.35" clip-path="url(#globeClip)"/>
+
+  <!-- 대륙 (단순 패치) -->
+  <path d="M420 380 Q450 360 490 370 Q520 355 550 370 Q580 360 610 380 L620 450 Q590 470 550 455 Q510 475 470 460 Q440 475 420 455 Z"
+        fill="#4CAF50" opacity="0.75" clip-path="url(#globeClip)"/>
+  <path d="M330 440 Q360 420 390 435 L400 500 Q370 515 340 500 Z"
+        fill="#66BB6A" opacity="0.7" clip-path="url(#globeClip)"/>
+  <path d="M620 410 Q660 390 700 410 L720 480 Q690 500 650 480 Q630 490 620 470 Z"
+        fill="#81C784" opacity="0.65" clip-path="url(#globeClip)"/>
+
+  <!-- 지구 하이라이트 -->
+  <circle cx="420" cy="360" r="80" fill="white" opacity="0.08"/>
+  <!-- 지구 윤곽 -->
+  <circle cx="512" cy="490" r="300" fill="none" stroke="#004D40" stroke-width="5"/>
+
+  <!-- Layer 3: 데이터 포인트들 on globe -->
+  <circle cx="490" cy="410" r="16" fill="#FF5722" stroke="white" stroke-width="3"/>
+  <circle cx="570" cy="450" r="12" fill="#FFC107" stroke="white" stroke-width="2.5"/>
+  <circle cx="430" cy="460" r="14" fill="#E91E63" stroke="white" stroke-width="2.5"/>
+  <circle cx="650" cy="430" r="10" fill="#FF5722" stroke="white" stroke-width="2"/>
+  <circle cx="380" cy="470" r="11" fill="#FFC107" stroke="white" stroke-width="2"/>
+
+  <!-- 포인트 연결 (아크) -->
+  <path d="M490 410 Q530 390 570 450" fill="none" stroke="white" stroke-width="2" stroke-dasharray="5,4" opacity="0.6"/>
+
+  <!-- 하단 "DATA" 텍스트 -->
+  <text x="512" y="870" text-anchor="middle" font-family="Arial" font-size="56" font-weight="bold" fill="#00838F" letter-spacing="8">MAP</text>
+</svg>

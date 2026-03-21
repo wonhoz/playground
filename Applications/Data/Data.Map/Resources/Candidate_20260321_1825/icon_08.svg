@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_08: 색상 범례 스트라이프 + 지도 레이어 (hybrid) | 레이어드 | 진청색 + 컬러 스트라이프 -->
+  <!-- Layer 1: 배경 - 진한 네이비 -->
+  <defs>
+    <linearGradient id="bg08" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0D1B2A"/>
+      <stop offset="100%" stop-color="#1B2838"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg08)"/>
+
+  <!-- Layer 2: 레이어드 지도 카드들 (깊이감) -->
+  <!-- 뒤쪽 카드 3 (가장 뒤) -->
+  <rect x="180" y="220" width="664" height="460" rx="14" fill="#0D2137" stroke="#1A3454" stroke-width="2" transform="rotate(-5 512 450)"/>
+  <!-- 뒤쪽 카드 2 -->
+  <rect x="180" y="220" width="664" height="460" rx="14" fill="#0F2840" stroke="#1E3D60" stroke-width="2" transform="rotate(-2 512 450)"/>
+  <!-- 앞쪽 카드 (메인) -->
+  <rect x="180" y="230" width="664" height="460" rx="14" fill="#132A45" stroke="#1E4060" stroke-width="2"/>
+
+  <!-- 메인 지도 내용 -->
+  <!-- 지형 -->
+  <path d="M210 300 Q280 275 360 295 Q440 270 530 290 Q610 265 690 285 Q730 272 790 290 L800 470 Q760 500 700 480 Q630 510 550 490 Q470 515 390 495 Q310 520 255 500 Q220 485 210 460 Z"
+        fill="#0D3460" stroke="#1A4A80" stroke-width="2"/>
+
+  <!-- 행정구역 경계 -->
+  <line x1="430" y1="270" x2="430" y2="480" stroke="#1E5080" stroke-width="2" stroke-dasharray="5,3"/>
+  <line x1="620" y1="270" x2="620" y2="480" stroke="#1E5080" stroke-width="2" stroke-dasharray="5,3"/>
+  <line x1="210" y1="390" x2="800" y2="390" stroke="#1E5080" stroke-width="2" stroke-dasharray="5,3"/>
+
+  <!-- 지역 색상 코딩 (choropleth) -->
+  <path d="M210 300 Q280 275 360 295 Q395 275 430 295 L430 390 L210 390 Z" fill="#1565C0" opacity="0.7"/>
+  <path d="M430 295 Q440 270 530 290 Q575 270 620 290 L620 390 L430 390 Z" fill="#2E7D32" opacity="0.7"/>
+  <path d="M620 285 Q630 265 690 285 Q730 272 800 290 L800 390 L620 390 Z" fill="#F57F17" opacity="0.7"/>
+  <path d="M210 390 L430 390 L430 480 Q310 520 255 500 Q220 485 210 460 Z" fill="#6A1B9A" opacity="0.7"/>
+  <path d="M430 390 L620 390 L620 480 Q470 515 390 495 L430 480 Z" fill="#C62828" opacity="0.7"/>
+  <path d="M620 390 L800 390 L800 480 Q760 500 700 480 L620 480 Z" fill="#00838F" opacity="0.7"/>
+
+  <!-- 데이터 마커 -->
+  <circle cx="320" cy="345" r="10" fill="white" opacity="0.9"/>
+  <circle cx="525" cy="335" r="10" fill="white" opacity="0.9"/>
+  <circle cx="710" cy="340" r="10" fill="white" opacity="0.9"/>
+  <circle cx="320" cy="435" r="10" fill="white" opacity="0.9"/>
+  <circle cx="510" cy="435" r="10" fill="white" opacity="0.9"/>
+  <circle cx="710" cy="435" r="10" fill="white" opacity="0.9"/>
+
+  <!-- Layer 3: 오른쪽 세로 범례 바 -->
+  <rect x="860" y="230" width="48" height="460" rx="10" fill="#0D1B2A" stroke="#1E4060" stroke-width="2"/>
+  <!-- 범례 색상 세그먼트들 -->
+  <rect x="864" y="234" width="40" height="68" rx="8" fill="#C62828"/>
+  <rect x="864" y="304" width="40" height="68" fill="#F57F17"/>
+  <rect x="864" y="374" width="40" height="68" fill="#F9A825"/>
+  <rect x="864" y="444" width="40" height="68" fill="#2E7D32"/>
+  <rect x="864" y="514" width="40" height="68" fill="#1565C0"/>
+  <rect x="864" y="584" width="40" height="68" rx="8" fill="#6A1B9A"/>
+
+  <!-- 범례 라벨 -->
+  <text x="850" y="270" text-anchor="end" font-family="Arial" font-size="20" fill="#EF9A9A">100</text>
+  <text x="850" y="340" text-anchor="end" font-family="Arial" font-size="20" fill="#FFCC80">80</text>
+  <text x="850" y="410" text-anchor="end" font-family="Arial" font-size="20" fill="#FFF176">60</text>
+  <text x="850" y="480" text-anchor="end" font-family="Arial" font-size="20" fill="#A5D6A7">40</text>
+  <text x="850" y="550" text-anchor="end" font-family="Arial" font-size="20" fill="#90CAF9">20</text>
+  <text x="850" y="620" text-anchor="end" font-family="Arial" font-size="20" fill="#CE93D8">0</text>
+
+  <!-- 하단 상태바 (앱 UI 요소) -->
+  <rect x="180" y="720" width="664" height="30" rx="8" fill="#0A1520" stroke="#1A3050" stroke-width="1"/>
+  <text x="200" y="741" font-family="Consolas,monospace" font-size="20" fill="#4A90D9">GeoJSON: 42개 Feature | colorField: value</text>
+</svg>

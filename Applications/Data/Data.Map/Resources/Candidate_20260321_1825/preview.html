@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>Data.Map — Icon Candidates (2026-03-21)</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #0E1A2E;
+    color: #C0D8F0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    padding: 40px 24px;
+  }
+  h1 {
+    text-align: center;
+    font-size: 28px;
+    font-weight: 300;
+    color: #7EC8E3;
+    margin-bottom: 8px;
+    letter-spacing: 3px;
+  }
+  .subtitle {
+    text-align: center;
+    font-size: 14px;
+    color: #4A6A8A;
+    margin-bottom: 48px;
+    letter-spacing: 1px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 28px;
+    max-width: 1300px;
+    margin: 0 auto;
+  }
+  .card {
+    background: #121E32;
+    border: 1px solid #1E3454;
+    border-radius: 14px;
+    padding: 20px 16px 16px;
+    text-align: center;
+    transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+  }
+  .card:hover {
+    transform: scale(1.08) translateY(-4px);
+    border-color: #4A8FBF;
+    box-shadow: 0 8px 32px rgba(74, 143, 191, 0.3);
+  }
+  .card img {
+    width: 180px;
+    height: 180px;
+    border-radius: 22px;
+    display: block;
+    margin: 0 auto 14px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+  }
+  .icon-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: #7EC8E3;
+    margin-bottom: 6px;
+    letter-spacing: 1px;
+  }
+  .concept {
+    font-size: 11px;
+    color: #8AAAC8;
+    margin-bottom: 6px;
+    line-height: 1.5;
+  }
+  .type-badge {
+    display: inline-block;
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    letter-spacing: 0.5px;
+  }
+  .literal { background: #1E4060; color: #7EC8E3; }
+  .metaphor { background: #2A1840; color: #CE93D8; }
+  .hybrid { background: #1A3020; color: #80FFC0; }
+  .palette {
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+    margin-top: 8px;
+  }
+  .color-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(255,255,255,0.15);
+  }
+  .pattern-tag {
+    font-size: 10px;
+    color: #3A5A7A;
+    margin-top: 4px;
+  }
+</style>
+</head>
+<body>
+
+<h1>Data.Map — Icon Candidates</h1>
+<div class="subtitle">Candidate_20260321_1825 &nbsp;·&nbsp; GeoJSON / TopoJSON / CSV 오프라인 지도 시각화 앱 &nbsp;·&nbsp; 10 variants</div>
+
+<div class="grid">
+
+  <div class="card">
+    <img src="icon_01.svg" alt="icon_01">
+    <div class="icon-name">icon_01</div>
+    <span class="type-badge literal">LITERAL</span>
+    <div class="concept">Choropleth 색상 지도<br>다채로운 지역 구역 + 범례 바</div>
+    <div class="palette">
+      <div class="color-dot" style="background:#F8F5EE"></div>
+      <div class="color-dot" style="background:#FF7043"></div>
+      <div class="color-dot" style="background:#4CAF50"></div>
+      <div class="color-dot" style="background:#2196F3"></div>
+      <div class="color-dot" style="background:#9C27B0"></div>
+    </div>
+    <div class="pattern-tag">중앙 심볼</div>
+  </div>
+
+  <div class="card">
+    <img src="icon_02.svg" alt="icon_02">
+    <div class="icon-name">icon_02</div>
+    <span class="type-badge literal">LITERAL</span>
+    <div class="concept">CSV 점 데이터 → 지도<br>위경도 그리드 + 형광 포인트</div>
+    <div class="palette">
+      <div class="color-dot" style="background:#0B1628"></div>
+      <div class="color-dot" style="background:#00E5FF"></div>
+      <div class="color-dot" style="background:#69F0AE"></div>
+      <div class="color-dot" style="background:#FFE57F"></div>
+      <div class="color-dot" style="background:#E040FB"></div>
+    </div>
+    <div class="pattern-tag">공간/장면</div>
+  </div>
+
+  <div class="card">
+    <img src="icon_03.svg" alt="icon_03">
+    <div class="icon-name">icon_03</div>
+    <span class="type-badge literal">LITERAL</span>
+    <div class="concept">GeoJSON 파일 → 지도 변환<br>파일 아이콘 + 화살표 + 지도</div>
+    <div class="palette">
+      <div class="color-dot" style="background:#1565C0"></div>
+      <div class="color-dot" style="background:#82B1FF"></div>
+      <div class="color-dot" style="background:#FFC107"></div>
+      <div class="color-dot" style="background:#69F0AE"></div>
+      <div class="color-dot" style="background:#0D2E6A"></div>
+    </div>
+    <div class="pattern-tag">레이어드</div>
+  </div>
+
+  <div class="card">
+    <img src="icon_04.svg" alt="icon_04">
+    <div class="icon-name">icon_04</div>
+    <span class="type-badge metaphor">METAPHOR</span>
+    <div class="concept">색상이 지도를 물들이는<br>그라데이션 범례 흐름</div>
+    <div class="palette">
+      <div class="color-dot" style="background:#1A0A2E"></div>
+      <div class="color-dot" style="background:#7C4DFF"></div>
+      <div class="color-dot" style="background:#E040FB"></div>
+      <div class="color-dot" style="background:#FF6D00"></div>
+      <div class="color-dot" style="background:#FFD600"></div>
+    </div>
+    <div class="pattern-tag">대각선/동적</div>
+  </div>
+
+  <div class="card">
+    <img src="icon_05.svg" alt="icon_05">
+    <div class="icon-name">icon_05</div>
+    <span class="type-badge metaphor">METAPHOR</span>
+    <div class="concept">지구본 위의 데이터 격자<br>위경도선 + 대륙 + 마커</div>
+    <div class="palette">
+      <div class="color-dot" style="background:#E0F7FA"></div>
+      <div class="color-dot" style="background:#26C6DA"></div>
+      <div class="color-dot" style="background:#004D40"></div>
+      <div class="color-dot" style="background:#4CAF50"></div>
+      <div class="color-dot" style="background:#FF5722"></div>
+    </div>
+    <div class="pattern-tag">기하학 추상</div>
+  </div>
+
+  <div class="card">
+    <img src="icon_06.svg" alt="icon_06">
+    <div class="icon-name">icon_06</div>
+    <span class="type-badge metaphor">METAPHOR</span>
+    <div class="concept">지도 위에 핀들이 피어나는<br>다색 위치 마커들</div>
+    <div class="palette">
+      <div class="color-dot" style="background:#FFF8F0"></div>
+      <div class="color-dot" style="background:#F44336"></div>
+      <div class="color-dot" style="background:#2196F3"></div>
+      <div class="color-dot" style="background:#4CAF50"></div>
+      <div class="color-dot" style="background:#9C27B0"></div>
+    </div>
+    <div class="pattern-tag">공간/장면</div>
+  </div>
+
+  <div class="card">
+    <img src="icon_07.svg" alt="icon_07">
+    <div class="icon-name">icon_07</div>
+    <span class="type-badge metaphor">METAPHOR</span>
+    <div class="concept">JSON 중괄호 안의 지도<br>{"type":"FeatureCollection"}</div>
+    <div class="palette">
+      <div class="color-dot" style="background:#1A1008"></div>
+      <div class="color-dot" style="background:#FF6D00"></div>
+      <div class="color-dot" style="background:#FFD600"></div>
+      <div class="color-dot" style="background:#1565C0"></div>
+      <div class="color-dot" style="background:#4CAF50"></div>
+    </div>
+    <div class="pattern-tag">실루엣/캐릭터</div>
+  </div>
+
+  <div class="card">
+    <img src="icon_08.svg" alt="icon_08">
+    <div class="icon-name">icon_08</div>
+    <span class="type-badge hybrid">HYBRID</span>
+    <div class="concept">색상 범례 바 + Choropleth 지도<br>레이어드 카드 구조</div>
+    <div class="palette">
+      <div class="color-dot" style="background:#0D1B2A"></div>
+      <div class="color-dot" style="background:#1565C0"></div>
+      <div class="color-dot" style="background:#2E7D32"></div>
+      <div class="color-dot" style="background:#F57F17"></div>
+      <div class="color-dot" style="background:#6A1B9A"></div>
+    </div>
+    <div class="pattern-tag">레이어드</div>
+  </div>
+
+  <div class="card">
+    <img src="icon_09.svg" alt="icon_09">
+    <div class="icon-name">icon_09</div>
+    <span class="type-badge hybrid">HYBRID</span>
+    <div class="concept">파일 스택 → 지도 변환<br>라임그린 배경 인포그래픽</div>
+    <div class="palette">
+      <div class="color-dot" style="background:#CCFF90"></div>
+      <div class="color-dot" style="background:#1B5E20"></div>
+      <div class="color-dot" style="background:#76FF03"></div>
+      <div class="color-dot" style="background:#4CAF50"></div>
+      <div class="color-dot" style="background:#2E7D32"></div>
+    </div>
+    <div class="pattern-tag">대각선/동적</div>
+  </div>
+
+  <div class="card">
+    <img src="icon_10.svg" alt="icon_10">
+    <div class="icon-name">icon_10</div>
+    <span class="type-badge hybrid">HYBRID</span>
+    <div class="concept">앱 UI 미리보기<br>사이드패널 + Choropleth 지도</div>
+    <div class="palette">
+      <div class="color-dot" style="background:#4A148C"></div>
+      <div class="color-dot" style="background:#1565C0"></div>
+      <div class="color-dot" style="background:#50C8DC"></div>
+      <div class="color-dot" style="background:#80FFC0"></div>
+      <div class="color-dot" style="background:#E91E63"></div>
+    </div>
+    <div class="pattern-tag">중앙 심볼</div>
+  </div>
+
+</div>
+
+<div style="text-align:center; margin-top:48px; font-size:12px; color:#2A4060;">
+  Data.Map · GeoJSON / TopoJSON / CSV 오프라인 인터랙티브 지도 시각화 · Candidate_20260321_1825
+</div>
+
+</body>
+</html>

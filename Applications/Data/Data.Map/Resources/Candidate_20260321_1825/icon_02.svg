@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_02: CSV 점 데이터가 지도에 뿌려지는 장면 (literal) | 공간/장면 | 딥 네이비 + 형광 시안 점들 -->
+  <!-- Layer 1: 배경 - 딥 네이비 -->
+  <rect width="1024" height="1024" rx="190" fill="#0B1628"/>
+
+  <!-- Layer 2: 지도 격자선 (위경도 그리드) -->
+  <!-- 수평선 -->
+  <line x1="120" y1="300" x2="904" y2="300" stroke="#1A2840" stroke-width="2"/>
+  <line x1="120" y1="420" x2="904" y2="420" stroke="#1A2840" stroke-width="2"/>
+  <line x1="120" y1="540" x2="904" y2="540" stroke="#1A2840" stroke-width="2"/>
+  <line x1="120" y1="660" x2="904" y2="660" stroke="#1A2840" stroke-width="2"/>
+  <line x1="120" y1="780" x2="904" y2="780" stroke="#1A2840" stroke-width="2"/>
+  <!-- 수직선 -->
+  <line x1="200" y1="200" x2="200" y2="850" stroke="#1A2840" stroke-width="2"/>
+  <line x1="320" y1="200" x2="320" y2="850" stroke="#1A2840" stroke-width="2"/>
+  <line x1="440" y1="200" x2="440" y2="850" stroke="#1A2840" stroke-width="2"/>
+  <line x1="560" y1="200" x2="560" y2="850" stroke="#1A2840" stroke-width="2"/>
+  <line x1="680" y1="200" x2="680" y2="850" stroke="#1A2840" stroke-width="2"/>
+  <line x1="800" y1="200" x2="800" y2="850" stroke="#1A2840" stroke-width="2"/>
+
+  <!-- 대륙 윤곽선 (단순화) -->
+  <path d="M180 380 Q220 340 280 360 Q340 310 420 330 Q480 290 540 320 Q600 280 660 310 Q720 290 780 330 L800 520 Q760 560 700 540 Q640 580 580 550 Q520 590 460 560 Q400 600 340 570 Q280 610 220 580 Q190 560 180 520 Z"
+        fill="#0F2140" stroke="#1E3458" stroke-width="3"/>
+
+  <!-- Layer 2: 데이터 포인트들 (CSV → 지도 점) -->
+  <!-- 큰 포인트들 -->
+  <circle cx="260" cy="420" r="22" fill="#00E5FF" opacity="0.9"/>
+  <circle cx="390" cy="380" r="18" fill="#00E5FF" opacity="0.8"/>
+  <circle cx="480" cy="450" r="28" fill="#69F0AE" opacity="0.9"/>
+  <circle cx="570" cy="400" r="16" fill="#00E5FF" opacity="0.7"/>
+  <circle cx="650" cy="460" r="24" fill="#FFE57F" opacity="0.9"/>
+  <circle cx="730" cy="380" r="14" fill="#00E5FF" opacity="0.6"/>
+  <circle cx="310" cy="490" r="20" fill="#FF7043" opacity="0.85"/>
+  <circle cx="540" cy="510" r="32" fill="#E040FB" opacity="0.8"/>
+  <circle cx="690" cy="520" r="18" fill="#69F0AE" opacity="0.75"/>
+  <!-- 중간 포인트들 -->
+  <circle cx="230" cy="530" r="12" fill="#00E5FF" opacity="0.6"/>
+  <circle cx="360" cy="550" r="15" fill="#FFE57F" opacity="0.7"/>
+  <circle cx="440" cy="560" r="10" fill="#00E5FF" opacity="0.55"/>
+  <circle cx="610" cy="540" r="13" fill="#FF7043" opacity="0.65"/>
+  <circle cx="770" cy="490" r="11" fill="#E040FB" opacity="0.6"/>
+  <!-- 작은 포인트들 -->
+  <circle cx="280" cy="600" r="8" fill="#00E5FF" opacity="0.5"/>
+  <circle cx="420" cy="620" r="7" fill="#69F0AE" opacity="0.5"/>
+  <circle cx="500" cy="590" r="9" fill="#FFE57F" opacity="0.5"/>
+  <circle cx="660" cy="600" r="8" fill="#00E5FF" opacity="0.45"/>
+  <circle cx="740" cy="570" r="6" fill="#FF7043" opacity="0.5"/>
+
+  <!-- 포인트 광선/글로우 효과 -->
+  <circle cx="480" cy="450" r="50" fill="none" stroke="#69F0AE" stroke-width="3" opacity="0.3"/>
+  <circle cx="540" cy="510" r="55" fill="none" stroke="#E040FB" stroke-width="3" opacity="0.25"/>
+
+  <!-- Layer 3: 상단 타이틀과 CSV 힌트 -->
+  <rect x="140" y="160" width="520" height="52" rx="8" fill="#0F2140" stroke="#1A3A60" stroke-width="2"/>
+  <text x="165" y="195" font-family="Consolas,monospace" font-size="28" fill="#00E5FF">lat,lon,value</text>
+  <text x="680" y="195" font-family="Consolas,monospace" font-size="28" fill="#FFE57F">✓</text>
+
+  <!-- 하단 축 레이블 -->
+  <text x="200" y="880" text-anchor="middle" font-family="Arial" font-size="24" fill="#1E3A5F">120°E</text>
+  <text x="560" y="880" text-anchor="middle" font-family="Arial" font-size="24" fill="#1E3A5F">130°E</text>
+  <text x="800" y="880" text-anchor="middle" font-family="Arial" font-size="24" fill="#1E3A5F">140°E</text>
+</svg>

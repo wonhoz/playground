@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_04: 색상 범례가 지도를 물들이는 (metaphor) | 대각선/동적 | 보라+오렌지 그라데이션 -->
+  <!-- Layer 1: 배경 - 딥 퍼플 -->
+  <defs>
+    <linearGradient id="bg04" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A0A2E"/>
+      <stop offset="100%" stop-color="#2D1B4E"/>
+    </linearGradient>
+    <linearGradient id="paint04" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7C4DFF"/>
+      <stop offset="30%" stop-color="#E040FB"/>
+      <stop offset="60%" stop-color="#FF6D00"/>
+      <stop offset="100%" stop-color="#FFD600"/>
+    </linearGradient>
+    <linearGradient id="mapfill04" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4527A0" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#E65100" stop-opacity="0.9"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg04)"/>
+
+  <!-- Layer 2: 물결치는 색상 흐름 (대각선 동적) -->
+  <!-- 색상 흐름 파동 1 -->
+  <path d="M0 600 Q200 500 400 550 Q600 600 800 500 Q900 460 1024 480 L1024 1024 L0 1024 Z"
+        fill="#7C4DFF" opacity="0.15"/>
+  <path d="M0 650 Q250 560 500 620 Q700 660 900 580 L1024 560 L1024 1024 L0 1024 Z"
+        fill="#E040FB" opacity="0.1"/>
+
+  <!-- 대각선 색상 페인트 스트로크 -->
+  <path d="M100 200 Q300 180 500 220 Q700 180 900 230" stroke="url(#paint04)" stroke-width="40" fill="none" stroke-linecap="round" opacity="0.6"/>
+  <path d="M80 300 Q280 270 480 310 Q680 270 900 320" stroke="url(#paint04)" stroke-width="32" fill="none" stroke-linecap="round" opacity="0.5"/>
+  <path d="M60 390 Q260 360 460 400 Q680 360 920 410" stroke="url(#paint04)" stroke-width="25" fill="none" stroke-linecap="round" opacity="0.4"/>
+
+  <!-- 지도 윤곽 (색상이 스며드는 중) -->
+  <path d="M200 380 Q260 340 340 360 Q400 310 480 340 Q560 300 640 330 Q720 300 800 340 L820 580 Q760 620 700 600 Q640 640 560 610 Q480 650 400 620 Q320 660 260 630 Q220 610 200 580 Z"
+        fill="url(#mapfill04)" opacity="0.85"/>
+
+  <!-- 색상이 퍼지는 방사형 효과 -->
+  <circle cx="512" cy="470" r="180" fill="none" stroke="url(#paint04)" stroke-width="6" opacity="0.4"/>
+  <circle cx="512" cy="470" r="130" fill="none" stroke="url(#paint04)" stroke-width="4" opacity="0.3"/>
+  <circle cx="512" cy="470" r="80" fill="none" stroke="url(#paint04)" stroke-width="3" opacity="0.25"/>
+
+  <!-- 지도 위 데이터 마커 -->
+  <circle cx="350" cy="440" r="18" fill="#7C4DFF"/>
+  <circle cx="450" cy="480" r="22" fill="#E040FB"/>
+  <circle cx="560" cy="450" r="16" fill="#FF6D00"/>
+  <circle cx="660" cy="470" r="20" fill="#FFD600"/>
+  <circle cx="740" cy="440" r="14" fill="#FF6D00"/>
+
+  <!-- Layer 3: 하단 색상 범례 바 -->
+  <rect x="180" y="720" width="664" height="36" rx="18" fill="url(#paint04)"/>
+  <!-- 범례 마커 -->
+  <circle cx="180" cy="738" r="8" fill="#7C4DFF" stroke="white" stroke-width="2"/>
+  <circle cx="844" cy="738" r="8" fill="#FFD600" stroke="white" stroke-width="2"/>
+  <text x="180" y="795" text-anchor="middle" font-family="Arial" font-size="28" fill="#9F7AFF">MIN</text>
+  <text x="844" y="795" text-anchor="middle" font-family="Arial" font-size="28" fill="#FFD600">MAX</text>
+
+  <!-- 데이터 필드 라벨 -->
+  <rect x="370" y="820" width="284" height="44" rx="10" fill="#2A0E4E" stroke="#7C4DFF" stroke-width="2"/>
+  <text x="512" y="849" text-anchor="middle" font-family="Consolas,monospace" font-size="26" fill="#E040FB">colorField: value</text>
+</svg>

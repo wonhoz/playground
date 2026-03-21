@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_09: 파일 → 지도 변환 화살표 인포그래픽 (hybrid) | 대각선/동적 | 라임그린 배경 + 다크 -->
+  <!-- Layer 1: 배경 - 밝고 생동감 있는 라임 그라데이션 -->
+  <defs>
+    <linearGradient id="bg09" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#CCFF90"/>
+      <stop offset="100%" stop-color="#76FF03"/>
+    </linearGradient>
+    <linearGradient id="arrow09" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1B5E20"/>
+      <stop offset="100%" stop-color="#33691E"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg09)"/>
+
+  <!-- Layer 2: 왼쪽 - 데이터 파일 스택 -->
+  <!-- 파일 3개 (스택) -->
+  <!-- 맨 뒤 파일 -->
+  <rect x="120" y="310" width="280" height="340" rx="14" fill="#33691E" stroke="#1B5E20" stroke-width="3" transform="rotate(-6 260 480)"/>
+  <!-- 중간 파일 -->
+  <rect x="130" y="310" width="280" height="340" rx="14" fill="#388E3C" stroke="#2E7D32" stroke-width="3" transform="rotate(-2 270 480)"/>
+  <!-- 앞 파일 (메인) -->
+  <rect x="140" y="320" width="280" height="340" rx="14" fill="#1B5E20" stroke="#2E7D32" stroke-width="3"/>
+  <!-- 파일 귀접기 -->
+  <path d="M360 320 L420 380 L360 380 Z" fill="#2E7D32"/>
+  <path d="M360 320 L420 380 L420 384 L356 384 L356 320 Z" fill="#388E3C" opacity="0.7"/>
+
+  <!-- 파일 내용 (데이터 행들) -->
+  <line x1="168" y1="400" x2="380" y2="400" stroke="#4CAF50" stroke-width="3" stroke-linecap="round"/>
+  <line x1="168" y1="430" x2="360" y2="430" stroke="#4CAF50" stroke-width="3" stroke-linecap="round"/>
+  <line x1="168" y1="460" x2="375" y2="460" stroke="#4CAF50" stroke-width="3" stroke-linecap="round"/>
+  <line x1="168" y1="490" x2="345" y2="490" stroke="#4CAF50" stroke-width="3" stroke-linecap="round"/>
+  <line x1="168" y1="520" x2="370" y2="520" stroke="#4CAF50" stroke-width="3" stroke-linecap="round"/>
+  <line x1="168" y1="550" x2="355" y2="550" stroke="#4CAF50" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- CSV/GeoJSON 라벨 -->
+  <rect x="168" y="580" width="80" height="26" rx="5" fill="#4CAF50" opacity="0.8"/>
+  <text x="208" y="599" text-anchor="middle" font-family="Arial" font-size="19" fill="white" font-weight="bold">CSV</text>
+  <rect x="262" y="580" width="108" height="26" rx="5" fill="#388E3C" opacity="0.8"/>
+  <text x="316" y="599" text-anchor="middle" font-family="Arial" font-size="19" fill="#CCFF90" font-weight="bold">GeoJSON</text>
+
+  <!-- Layer 2: 중앙 변환 화살표 (대각선/동적) -->
+  <!-- 화살표 몸통 -->
+  <path d="M445 460 L555 460" stroke="#1B5E20" stroke-width="20" stroke-linecap="round"/>
+  <!-- 화살표 머리 -->
+  <polygon points="548,435 600,460 548,485" fill="#1B5E20"/>
+  <!-- 화살표 위 아이콘 (변환 심볼) -->
+  <circle cx="512" cy="420" r="24" fill="#1B5E20"/>
+  <text x="512" y="430" text-anchor="middle" font-family="Arial" font-size="26" fill="#CCFF90">⇄</text>
+
+  <!-- Layer 2: 오른쪽 - 지도 미리보기 -->
+  <rect x="625" y="290" width="310" height="380" rx="14" fill="#1B5E20" stroke="#2E7D32" stroke-width="3"/>
+
+  <!-- 지도 내용 -->
+  <!-- 지형 구역들 (choropleth) -->
+  <rect x="635" y="300" width="145" height="175" rx="8" fill="#2E7D32"/>
+  <rect x="788" y="300" width="137" height="175" rx="8" fill="#33691E"/>
+  <rect x="635" y="483" width="100" height="177" rx="8" fill="#388E3C"/>
+  <rect x="743" y="483" width="182" height="177" rx="8" fill="#1B5E20"/>
+
+  <!-- 구역 경계 -->
+  <line x1="785" y1="300" x2="785" y2="660" stroke="#1B5E20" stroke-width="2"/>
+  <line x1="635" y1="480" x2="935" y2="480" stroke="#1B5E20" stroke-width="2"/>
+  <line x1="740" y1="480" x2="740" y2="660" stroke="#1B5E20" stroke-width="2"/>
+
+  <!-- 데이터 점들 -->
+  <circle cx="710" cy="385" r="16" fill="#CCFF90" stroke="#1B5E20" stroke-width="2"/>
+  <circle cx="850" cy="360" r="12" fill="#76FF03" stroke="#1B5E20" stroke-width="2"/>
+  <circle cx="680" cy="570" r="14" fill="#CCFF90" stroke="#1B5E20" stroke-width="2"/>
+  <circle cx="820" cy="580" r="18" fill="#76FF03" stroke="#1B5E20" stroke-width="2"/>
+
+  <!-- Layer 3: 하단 앱 이름 + 배지 -->
+  <rect x="200" y="760" width="624" height="60" rx="14" fill="#1B5E20" opacity="0.85"/>
+  <text x="512" y="800" text-anchor="middle" font-family="Arial" font-size="38" font-weight="bold" fill="#CCFF90" letter-spacing="2">Data.Map</text>
+  <text x="512" y="828" text-anchor="middle" font-family="Arial" font-size="22" fill="#76FF03">오프라인 지리 데이터 시각화</text>
+</svg>

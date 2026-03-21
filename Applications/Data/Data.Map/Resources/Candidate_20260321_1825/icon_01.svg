@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_01: Choropleth 색상 지도 (literal) | 중앙 심볼 | 밝은 크림 배경 + 다채로운 지역 구역 -->
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="#F8F5EE"/>
+
+  <!-- Layer 2: 지도 메인 - 대륙/지역 구역들 (choropleth 느낌) -->
+  <!-- 지도 외곽 프레임 -->
+  <rect x="140" y="200" width="744" height="580" rx="16" fill="#E8E0D0" stroke="#C8B8A0" stroke-width="4"/>
+
+  <!-- 지역 구역들 - 격자 느낌의 다색 choropleth -->
+  <!-- 상단 행 -->
+  <rect x="152" y="212" width="185" height="142" rx="8" fill="#FF7043"/>
+  <rect x="345" y="212" width="162" height="142" rx="8" fill="#4CAF50"/>
+  <rect x="515" y="212" width="175" height="142" rx="8" fill="#2196F3"/>
+  <rect x="698" y="212" width="174" height="142" rx="8" fill="#FFC107"/>
+
+  <!-- 중간 행 -->
+  <rect x="152" y="362" width="230" height="138" rx="8" fill="#9C27B0"/>
+  <rect x="390" y="362" width="192" height="138" rx="8" fill="#FF5722"/>
+  <rect x="590" y="362" width="155" height="138" rx="8" fill="#00BCD4"/>
+  <rect x="753" y="362" width="119" height="138" rx="8" fill="#8BC34A"/>
+
+  <!-- 하단 행 -->
+  <rect x="152" y="508" width="142" height="160" rx="8" fill="#3F51B5"/>
+  <rect x="302" y="508" width="200" height="160" rx="8" fill="#FF9800"/>
+  <rect x="510" y="508" width="243" height="160" rx="8" fill="#E91E63"/>
+  <rect x="761" y="508" width="111" height="160" rx="8" fill="#009688"/>
+
+  <!-- 구역 경계선 (지도 느낌) -->
+  <line x1="340" y1="212" x2="340" y2="354" stroke="#F8F5EE" stroke-width="3"/>
+  <line x1="510" y1="212" x2="510" y2="354" stroke="#F8F5EE" stroke-width="3"/>
+  <line x1="694" y1="212" x2="694" y2="354" stroke="#F8F5EE" stroke-width="3"/>
+  <line x1="152" y1="354" x2="872" y2="354" stroke="#F8F5EE" stroke-width="3"/>
+  <line x1="385" y1="354" x2="385" y2="500" stroke="#F8F5EE" stroke-width="3"/>
+  <line x1="585" y1="354" x2="585" y2="500" stroke="#F8F5EE" stroke-width="3"/>
+  <line x1="748" y1="354" x2="748" y2="500" stroke="#F8F5EE" stroke-width="3"/>
+  <line x1="152" y1="500" x2="872" y2="500" stroke="#F8F5EE" stroke-width="3"/>
+  <line x1="297" y1="500" x2="297" y2="668" stroke="#F8F5EE" stroke-width="3"/>
+  <line x1="505" y1="500" x2="505" y2="668" stroke="#F8F5EE" stroke-width="3"/>
+  <line x1="756" y1="500" x2="756" y2="668" stroke="#F8F5EE" stroke-width="3"/>
+
+  <!-- Layer 3: 색상 범례 바 (choropleth 정체성) -->
+  <rect x="190" y="720" width="644" height="28" rx="14" fill="none" stroke="#C8B8A0" stroke-width="2"/>
+  <rect x="192" y="722" width="107" height="24" rx="12" fill="#3F51B5"/>
+  <rect x="299" y="722" width="107" height="24" fill="#4CAF50"/>
+  <rect x="406" y="722" width="107" height="24" fill="#FFC107"/>
+  <rect x="513" y="722" width="107" height="24" fill="#FF7043"/>
+  <rect x="620" y="722" width="115" height="24" rx="12" fill="#E91E63"/>
+
+  <!-- 범례 라벨 -->
+  <text x="245" y="776" text-anchor="middle" font-family="Arial" font-size="30" fill="#888880">LOW</text>
+  <text x="780" y="776" text-anchor="middle" font-family="Arial" font-size="30" fill="#888880">HIGH</text>
+  <line x1="188" y1="762" x2="836" y2="762" stroke="#C8B8A0" stroke-width="2" stroke-dasharray="4,4"/>
+</svg>

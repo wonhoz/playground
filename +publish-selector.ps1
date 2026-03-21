@@ -10,18 +10,7 @@ public static class WinDwm {
     [DllImport("dwmapi.dll")]
     public static extern int DwmSetWindowAttribute(IntPtr hwnd, int attr, ref int value, int size);
 }
-public static class WinUx {
-    [DllImport("uxtheme.dll", EntryPoint = "#135", CharSet = CharSet.Unicode)]
-    public static extern int SetPreferredAppMode(int mode);
-    [DllImport("uxtheme.dll", EntryPoint = "#136")]
-    public static extern void FlushMenuThemes();
-    [DllImport("uxtheme.dll", CharSet = CharSet.Unicode)]
-    public static extern int SetWindowTheme(IntPtr hwnd, string pszSubAppName, string pszSubIdList);
-}
 "@ -ErrorAction SilentlyContinue
-    # Must be called BEFORE EnableVisualStyles
-    [WinUx]::SetPreferredAppMode(2) | Out-Null
-    [WinUx]::FlushMenuThemes()
 } catch {}
 
 [System.Windows.Forms.Application]::EnableVisualStyles()
@@ -164,7 +153,6 @@ $form.Add_Shown({
     try {
         $v = 1
         [WinDwm]::DwmSetWindowAttribute($form.Handle, 20, [ref]$v, 4) | Out-Null
-        [WinUx]::SetWindowTheme($clb.Handle, "DarkMode_Explorer", $null) | Out-Null
     } catch {}
 })
 
@@ -196,18 +184,40 @@ $lbCount.ForeColor = $CDm
 $lbCount.Font = New-Object System.Drawing.Font("Segoe UI", 8.5)
 $form.Controls.Add($lbCount)
 
-# CheckedListBox
+# Container panel (clips the CheckedListBox to hide native scrollbar)
+$SB_W = 14   # custom scrollbar width
+$pnl = New-Object System.Windows.Forms.Panel
+$pnl.Location = New-Object System.Drawing.Point(14, 108)
+$pnl.Size = New-Object System.Drawing.Size(686, 590)
+$pnl.Anchor = [System.Windows.Forms.AnchorStyles]::Top -bor [System.Windows.Forms.AnchorStyles]::Left -bor [System.Windows.Forms.AnchorStyles]::Right -bor [System.Windows.Forms.AnchorStyles]::Bottom
+$pnl.BackColor = $CPB
+$pnl.BorderStyle = [System.Windows.Forms.BorderStyle]::FixedSingle
+$form.Controls.Add($pnl)
+
+# CheckedListBox — wider than panel so native scrollbar is hidden outside clip
 $clb = New-Object System.Windows.Forms.CheckedListBox
-$clb.Location = New-Object System.Drawing.Point(14, 108)
-$clb.Size = New-Object System.Drawing.Size(686, 590)
-$clb.Anchor = [System.Windows.Forms.AnchorStyles]::Top -bor [System.Windows.Forms.AnchorStyles]::Left -bor [System.Windows.Forms.AnchorStyles]::Right -bor [System.Windows.Forms.AnchorStyles]::Bottom
+$clb.Location = New-Object System.Drawing.Point(0, 0)
+$clb.Size = New-Object System.Drawing.Size($pnl.Width + 20, $pnl.Height)
 $clb.BackColor = $CPB
 $clb.ForeColor = $CT
 $clb.Font = New-Object System.Drawing.Font("Consolas", 9.5)
 $clb.CheckOnClick = $true
-$clb.BorderStyle = [System.Windows.Forms.BorderStyle]::FixedSingle
+$clb.BorderStyle = [System.Windows.Forms.BorderStyle]::None
 $clb.ItemHeight = 22
-$form.Controls.Add($clb)
+$clb.IntegralHeight = $false
+$pnl.Controls.Add($clb)
+
+# Custom dark VScrollBar
+$vsb = New-Object System.Windows.Forms.VScrollBar
+$vsb.Location = New-Object System.Drawing.Point(($pnl.Width - $SB_W), 0)
+$vsb.Size = New-Object System.Drawing.Size($SB_W, $pnl.Height)
+$vsb.Anchor = [System.Windows.Forms.AnchorStyles]::Top -bor [System.Windows.Forms.AnchorStyles]::Right -bor [System.Windows.Forms.AnchorStyles]::Bottom
+$vsb.BackColor = [System.Drawing.Color]::FromArgb(28, 28, 44)
+$vsb.Minimum = 0
+$vsb.SmallChange = 1
+$vsb.LargeChange = 10
+$pnl.Controls.Add($vsb)
+$vsb.BringToFront()
 
 # Button factory
 function MakeBtn($text, $x, $y, $w) {
@@ -266,6 +276,14 @@ function RefreshList {
     }
     $clb.EndUpdate()
     UpdateCount
+    SyncScrollBar
+}
+
+function SyncScrollBar {
+    $max = [Math]::Max(0, $clb.Items.Count - 1)
+    $vsb.Maximum = $max
+    $vsb.LargeChange = [Math]::Max(1, [int]($pnl.Height / $clb.ItemHeight))
+    $vsb.Enabled = ($clb.Items.Count -gt 0)
 }
 
 $clb.Add_ItemCheck({
@@ -275,7 +293,33 @@ $clb.Add_ItemCheck({
     UpdateCount
 })
 
-$tbFilter.Add_TextChanged({ RefreshList })
+$vsb.Add_Scroll({
+    param($s, $e)
+    $clb.TopIndex = $vsb.Value
+})
+
+$clb.Add_MouseWheel({
+    param($s, $e)
+    $delta = -[Math]::Sign($e.Delta)
+    $newVal = [Math]::Max($vsb.Minimum, [Math]::Min($vsb.Maximum, $vsb.Value + $delta * 3))
+    $vsb.Value = $newVal
+    $clb.TopIndex = $newVal
+})
+
+# Sync custom scrollbar when clb scrolls natively (keyboard, etc.)
+$clb.Add_SelectedIndexChanged({
+    if ($clb.TopIndex -ne $vsb.Value) { $vsb.Value = [Math]::Min($vsb.Maximum, $clb.TopIndex) }
+})
+
+# Panel resize → update clb and scrollbar sizes
+$pnl.Add_Resize({
+    $clb.Size = New-Object System.Drawing.Size($pnl.Width + 20, $pnl.Height)
+    $vsb.Location = New-Object System.Drawing.Point(($pnl.Width - $SB_W), 0)
+    $vsb.Size = New-Object System.Drawing.Size($SB_W, $pnl.Height)
+    SyncScrollBar
+})
+
+$tbFilter.Add_TextChanged({ RefreshList; SyncScrollBar })
 
 $btnAll.Add_Click({
     for ($i = 0; $i -lt $checkedArr.Length; $i++) { $checkedArr[$i] = $true }

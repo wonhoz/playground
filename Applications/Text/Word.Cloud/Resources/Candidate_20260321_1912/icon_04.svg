@@ -1,0 +1,63 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="sunsetBg" x1="0" y1="0" x2="0.6" y2="1">
+      <stop offset="0%" stop-color="#FF6B35"/>
+      <stop offset="45%" stop-color="#E91E63"/>
+      <stop offset="100%" stop-color="#7B1FA2"/>
+    </linearGradient>
+    <clipPath id="cc4a">
+      <circle cx="512" cy="575" r="232"/>
+      <circle cx="298" cy="610" r="180"/>
+      <circle cx="726" cy="610" r="180"/>
+      <circle cx="512" cy="388" r="200"/>
+      <circle cx="370" cy="444" r="170"/>
+      <circle cx="660" cy="444" r="170"/>
+    </clipPath>
+    <clipPath id="cc4b">
+      <circle cx="512" cy="555" r="218"/>
+      <circle cx="315" cy="590" r="168"/>
+      <circle cx="709" cy="590" r="168"/>
+      <circle cx="512" cy="394" r="188"/>
+      <circle cx="382" cy="448" r="158"/>
+      <circle cx="645" cy="448" r="158"/>
+    </clipPath>
+  </defs>
+
+  <!-- Layer 1: 선셋 그라데이션 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#sunsetBg)"/>
+
+  <!-- 뒤쪽 구름 레이어 (더 큰, 더 투명) -->
+  <g fill="rgba(255,255,255,0.28)" clip-path="url(#cc4a)">
+    <rect x="0" y="0" width="1024" height="1024"/>
+  </g>
+  <g fill="rgba(255,255,255,0.28)">
+    <circle cx="512" cy="575" r="232"/>
+    <circle cx="298" cy="610" r="180"/>
+    <circle cx="726" cy="610" r="180"/>
+    <circle cx="512" cy="388" r="200"/>
+    <circle cx="370" cy="444" r="170"/>
+    <circle cx="660" cy="444" r="170"/>
+  </g>
+
+  <!-- 앞쪽 구름 레이어 (불투명) -->
+  <g fill="rgba(255,255,255,0.92)">
+    <circle cx="512" cy="555" r="218"/>
+    <circle cx="315" cy="590" r="168"/>
+    <circle cx="709" cy="590" r="168"/>
+    <circle cx="512" cy="394" r="188"/>
+    <circle cx="382" cy="448" r="158"/>
+    <circle cx="645" cy="448" r="158"/>
+  </g>
+
+  <!-- Layer 3: 구름 안 선셋 컬러 단어들 -->
+  <g clip-path="url(#cc4b)" font-family="Arial Black, Arial" font-weight="900" text-anchor="middle">
+    <text x="512" y="492" font-size="128" fill="#E91E63">Word</text>
+    <text x="322" y="598" font-size="80" fill="#FF6B35">Hello</text>
+    <text x="702" y="593" font-size="76" fill="#7B1FA2">Cloud</text>
+    <text x="268" y="676" font-size="51" fill="#FF9800">Text</text>
+    <text x="512" y="684" font-size="51" fill="#E91E63">Data</text>
+    <text x="756" y="676" font-size="51" fill="#7B1FA2">Love</text>
+    <text x="390" y="752" font-size="39" fill="#FF6B35">Web</text>
+    <text x="612" y="752" font-size="39" fill="#FF9800">Art</text>
+  </g>
+</svg>

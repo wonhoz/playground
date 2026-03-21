@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>Word.Cloud — Icon Candidates</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #F0F4FF;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    padding: 40px 32px 60px;
+    color: #1a1a2e;
+  }
+
+  header {
+    text-align: center;
+    margin-bottom: 42px;
+  }
+  header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #1a237e;
+    letter-spacing: 2px;
+  }
+  header p {
+    margin-top: 6px;
+    font-size: 14px;
+    color: #546E7A;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 28px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .card {
+    background: #ffffff;
+    border-radius: 18px;
+    padding: 20px 14px 18px;
+    box-shadow: 0 3px 16px rgba(0,0,0,0.10);
+    transition: transform 0.22s ease, box-shadow 0.22s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+  }
+  .card:hover {
+    transform: scale(1.07) translateY(-4px);
+    box-shadow: 0 10px 32px rgba(0,0,0,0.18);
+  }
+
+  .card img {
+    width: 160px;
+    height: 160px;
+    object-fit: contain;
+    border-radius: 10px;
+  }
+
+  .card .num {
+    font-size: 11px;
+    font-weight: 700;
+    color: #90A4AE;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .card .concept {
+    font-size: 12.5px;
+    font-weight: 600;
+    color: #1a237e;
+    text-align: center;
+    line-height: 1.4;
+  }
+
+  .card .meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    justify-content: center;
+  }
+  .tag {
+    font-size: 10px;
+    padding: 2px 7px;
+    border-radius: 20px;
+    font-weight: 600;
+    letter-spacing: 0.4px;
+  }
+  .tag.type-literal   { background:#E3F2FD; color:#1565C0; }
+  .tag.type-metaphor  { background:#FCE4EC; color:#B71C1C; }
+  .tag.type-hybrid    { background:#E8F5E9; color:#2E7D32; }
+  .tag.pattern        { background:#F3E5F5; color:#6A1B9A; }
+  .tag.palette        { background:#FFF8E1; color:#E65100; }
+
+  .second-row { margin-top: 12px; }
+
+  footer {
+    text-align: center;
+    margin-top: 50px;
+    font-size: 12px;
+    color: #90A4AE;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Word.Cloud — Icon Candidates</h1>
+  <p>Candidate_20260321_1912 &nbsp;·&nbsp; 10 icons &nbsp;·&nbsp; 가급적 구름 모양으로</p>
+</header>
+
+<div class="grid">
+
+  <div class="card">
+    <span class="num">01</span>
+    <img src="icon_01.svg" alt="icon_01">
+    <div class="concept">하늘 위 흰 구름 안 컬러풀 단어들</div>
+    <div class="meta">
+      <span class="tag type-literal">literal</span>
+      <span class="tag pattern">중앙 심볼</span>
+      <span class="tag palette">스카이블루 + 흰 구름</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <span class="num">02</span>
+    <img src="icon_02.svg" alt="icon_02">
+    <div class="concept">보라 구름에서 단어들이 비처럼 쏟아짐</div>
+    <div class="meta">
+      <span class="tag type-metaphor">metaphor</span>
+      <span class="tag pattern">공간/장면</span>
+      <span class="tag palette">딥 네이비 + 민트/노랑</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <span class="num">03</span>
+    <img src="icon_03.svg" alt="icon_03">
+    <div class="concept">크림 배경, 구름 윤곽선 + 코랄 단어 방사</div>
+    <div class="meta">
+      <span class="tag type-literal">literal</span>
+      <span class="tag pattern">기하학 추상</span>
+      <span class="tag palette">크림 + 코랄/오렌지</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <span class="num">04</span>
+    <img src="icon_04.svg" alt="icon_04">
+    <div class="concept">선셋 배경 + 2겹 구름 레이어드 + 선셋 단어</div>
+    <div class="meta">
+      <span class="tag type-metaphor">metaphor</span>
+      <span class="tag pattern">레이어드</span>
+      <span class="tag palette">오렌지→마젠타→퍼플</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <span class="num">05</span>
+    <img src="icon_05.svg" alt="icon_05">
+    <div class="concept">아쿠아 배경, 구름 안 "W·C" 대형 이니셜</div>
+    <div class="meta">
+      <span class="tag type-hybrid">hybrid</span>
+      <span class="tag pattern">중앙 심볼</span>
+      <span class="tag palette">딥 티얼 + 아쿠아</span>
+    </div>
+  </div>
+
+  <div class="card second-row">
+    <span class="num">06</span>
+    <img src="icon_06.svg" alt="icon_06">
+    <div class="concept">다크 배경, 청록 네온 구름 테두리 + 단어</div>
+    <div class="meta">
+      <span class="tag type-metaphor">metaphor</span>
+      <span class="tag pattern">기하학 추상</span>
+      <span class="tag palette">다크 + 청록 네온</span>
+    </div>
+  </div>
+
+  <div class="card second-row">
+    <span class="num">07</span>
+    <img src="icon_07.svg" alt="icon_07">
+    <div class="concept">핑크→퍼플 배경, 3겹 투명도 구름 레이어</div>
+    <div class="meta">
+      <span class="tag type-metaphor">metaphor</span>
+      <span class="tag pattern">레이어드</span>
+      <span class="tag palette">핑크-퍼플 그라데이션</span>
+    </div>
+  </div>
+
+  <div class="card second-row">
+    <span class="num">08</span>
+    <img src="icon_08.svg" alt="icon_08">
+    <div class="concept">오렌지 배경, 구름 중심 단어 폭발 방사</div>
+    <div class="meta">
+      <span class="tag type-hybrid">hybrid</span>
+      <span class="tag pattern">대각선/동적</span>
+      <span class="tag palette">비비드 오렌지 + 흰 구름</span>
+    </div>
+  </div>
+
+  <div class="card second-row">
+    <span class="num">09</span>
+    <img src="icon_09.svg" alt="icon_09">
+    <div class="concept">밝은 배경, 무지개 구름 + 산재 다색 단어</div>
+    <div class="meta">
+      <span class="tag type-literal">literal</span>
+      <span class="tag pattern">공간/장면</span>
+      <span class="tag palette">흰/연보라 + 레인보우</span>
+    </div>
+  </div>
+
+  <div class="card second-row">
+    <span class="num">10</span>
+    <img src="icon_10.svg" alt="icon_10">
+    <div class="concept">에메랄드 배경, 알파벳들이 구름 실루엣 형성</div>
+    <div class="meta">
+      <span class="tag type-hybrid">hybrid</span>
+      <span class="tag pattern">실루엣/캐릭터</span>
+      <span class="tag palette">에메랄드/딥 그린</span>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  Word.Cloud &nbsp;|&nbsp; .NET 10 / WPF / SkiaSharp / Sdcb.WordCloud
+  &nbsp;|&nbsp; 생성: 2026-03-21
+</footer>
+
+</body>
+</html>

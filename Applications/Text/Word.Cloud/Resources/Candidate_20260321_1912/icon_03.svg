@@ -1,0 +1,49 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="creamBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFF8F0"/>
+      <stop offset="100%" stop-color="#FFE0CC"/>
+    </linearGradient>
+    <clipPath id="cc3">
+      <circle cx="512" cy="570" r="225"/>
+      <circle cx="305" cy="605" r="175"/>
+      <circle cx="719" cy="605" r="175"/>
+      <circle cx="512" cy="392" r="195"/>
+      <circle cx="375" cy="447" r="165"/>
+      <circle cx="655" cy="447" r="165"/>
+    </clipPath>
+  </defs>
+
+  <!-- Layer 1: 크림 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#creamBg)"/>
+
+  <!-- Layer 2: 구름 윤곽선 (fill 연한 + 테두리 오렌지) -->
+  <g fill="rgba(255,160,80,0.12)">
+    <circle cx="512" cy="570" r="225"/>
+    <circle cx="305" cy="605" r="175"/>
+    <circle cx="719" cy="605" r="175"/>
+    <circle cx="512" cy="392" r="195"/>
+    <circle cx="375" cy="447" r="165"/>
+    <circle cx="655" cy="447" r="165"/>
+  </g>
+  <g fill="none" stroke="#FF7043" stroke-width="9" opacity="0.55">
+    <circle cx="512" cy="570" r="225"/>
+    <circle cx="305" cy="605" r="175"/>
+    <circle cx="719" cy="605" r="175"/>
+    <circle cx="512" cy="392" r="195"/>
+    <circle cx="375" cy="447" r="165"/>
+    <circle cx="655" cy="447" r="165"/>
+  </g>
+
+  <!-- Layer 3: 구름 안 코랄/오렌지 단어들 -->
+  <g clip-path="url(#cc3)" font-family="Georgia, serif" text-anchor="middle">
+    <text x="512" y="498" font-size="138" font-weight="900" fill="#D84315">Word</text>
+    <text x="322" y="608" font-size="86" font-weight="700" fill="#E64A19">Hello</text>
+    <text x="705" y="602" font-size="80" font-weight="700" fill="#FF7043">Cloud</text>
+    <text x="268" y="688" font-size="54" font-weight="600" fill="#BF360C">Text</text>
+    <text x="512" y="696" font-size="54" font-weight="600" fill="#FF5722">Data</text>
+    <text x="758" y="688" font-size="54" font-weight="600" fill="#FF8A65">Love</text>
+    <text x="392" y="762" font-size="40" font-weight="500" fill="#FFAB91">Web</text>
+    <text x="612" y="762" font-size="40" font-weight="500" fill="#FFCCBC">Art</text>
+  </g>
+</svg>

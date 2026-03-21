@@ -1,0 +1,75 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="darkBg6" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0D1117"/>
+      <stop offset="100%" stop-color="#161B22"/>
+    </linearGradient>
+    <filter id="glow6" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="14" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <clipPath id="cc6">
+      <circle cx="512" cy="570" r="225"/>
+      <circle cx="305" cy="605" r="175"/>
+      <circle cx="719" cy="605" r="175"/>
+      <circle cx="512" cy="392" r="195"/>
+      <circle cx="375" cy="447" r="165"/>
+      <circle cx="655" cy="447" r="165"/>
+    </clipPath>
+  </defs>
+
+  <!-- Layer 1: 다크 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#darkBg6)"/>
+
+  <!-- 미세 점 장식 -->
+  <g fill="rgba(0,229,255,0.15)">
+    <circle cx="150" cy="150" r="2"/>
+    <circle cx="870" cy="200" r="2"/>
+    <circle cx="100" cy="800" r="2"/>
+    <circle cx="920" cy="850" r="2"/>
+  </g>
+
+  <!-- 외부 glow 구름 -->
+  <g fill="rgba(0,229,255,0.12)" filter="url(#glow6)">
+    <circle cx="512" cy="570" r="232"/>
+    <circle cx="305" cy="605" r="182"/>
+    <circle cx="719" cy="605" r="182"/>
+    <circle cx="512" cy="392" r="202"/>
+    <circle cx="375" cy="447" r="172"/>
+    <circle cx="655" cy="447" r="172"/>
+  </g>
+
+  <!-- Layer 2: 구름 테두리 (청록 네온) -->
+  <g fill="none" stroke="#00E5FF" stroke-width="7" opacity="0.85">
+    <circle cx="512" cy="570" r="225"/>
+    <circle cx="305" cy="605" r="175"/>
+    <circle cx="719" cy="605" r="175"/>
+    <circle cx="512" cy="392" r="195"/>
+    <circle cx="375" cy="447" r="165"/>
+    <circle cx="655" cy="447" r="165"/>
+  </g>
+  <!-- 구름 내부 반투명 fill -->
+  <g fill="rgba(0,229,255,0.07)">
+    <circle cx="512" cy="570" r="225"/>
+    <circle cx="305" cy="605" r="175"/>
+    <circle cx="719" cy="605" r="175"/>
+    <circle cx="512" cy="392" r="195"/>
+    <circle cx="375" cy="447" r="165"/>
+    <circle cx="655" cy="447" r="165"/>
+  </g>
+
+  <!-- Layer 3: 구름 안 단어들 -->
+  <g clip-path="url(#cc6)" font-family="Consolas, monospace" text-anchor="middle">
+    <text x="512" y="505" font-size="122" font-weight="bold" fill="#00E5FF">Word</text>
+    <text x="310" y="608" font-size="77" font-weight="bold" fill="#FFFF00">Hello</text>
+    <text x="714" y="602" font-size="74" font-weight="bold" fill="#69F0AE">Cloud</text>
+    <text x="265" y="682" font-size="50" fill="#FF80AB">Text</text>
+    <text x="512" y="688" font-size="50" fill="#FFD740">Data</text>
+    <text x="758" y="682" font-size="50" fill="#00E5FF">Code</text>
+    <text x="390" y="755" font-size="37" fill="#69F0AE">Web</text>
+    <text x="615" y="755" font-size="37" fill="#FF80AB">AI</text>
+  </g>
+</svg>

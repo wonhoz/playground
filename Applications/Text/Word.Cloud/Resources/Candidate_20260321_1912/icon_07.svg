@@ -1,0 +1,61 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="pinkBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#F06292"/>
+      <stop offset="50%" stop-color="#CE93D8"/>
+      <stop offset="100%" stop-color="#7E57C2"/>
+    </linearGradient>
+    <clipPath id="cc7">
+      <circle cx="512" cy="565" r="222"/>
+      <circle cx="308" cy="600" r="172"/>
+      <circle cx="716" cy="600" r="172"/>
+      <circle cx="512" cy="394" r="192"/>
+      <circle cx="378" cy="448" r="162"/>
+      <circle cx="648" cy="448" r="162"/>
+    </clipPath>
+  </defs>
+
+  <!-- Layer 1: 핑크-퍼플 그라데이션 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#pinkBg)"/>
+
+  <!-- Layer 2: 3겹 구름 레이어 -->
+  <!-- 뒤쪽 구름 (가장 크고 투명) -->
+  <g fill="rgba(255,255,255,0.22)">
+    <circle cx="512" cy="582" r="255"/>
+    <circle cx="285" cy="618" r="202"/>
+    <circle cx="739" cy="618" r="202"/>
+    <circle cx="512" cy="380" r="225"/>
+    <circle cx="357" cy="436" r="192"/>
+    <circle cx="672" cy="436" r="192"/>
+  </g>
+  <!-- 중간 구름 -->
+  <g fill="rgba(255,255,255,0.48)">
+    <circle cx="512" cy="572" r="238"/>
+    <circle cx="297" cy="607" r="186"/>
+    <circle cx="727" cy="607" r="186"/>
+    <circle cx="512" cy="390" r="206"/>
+    <circle cx="368" cy="444" r="176"/>
+    <circle cx="660" cy="444" r="176"/>
+  </g>
+  <!-- 앞쪽 메인 구름 -->
+  <g fill="rgba(255,255,255,0.90)">
+    <circle cx="512" cy="565" r="222"/>
+    <circle cx="308" cy="600" r="172"/>
+    <circle cx="716" cy="600" r="172"/>
+    <circle cx="512" cy="394" r="192"/>
+    <circle cx="378" cy="448" r="162"/>
+    <circle cx="648" cy="448" r="162"/>
+  </g>
+
+  <!-- Layer 3: 구름 안 퍼플-핑크 단어들 -->
+  <g clip-path="url(#cc7)" font-family="Arial Black, Arial" font-weight="900" text-anchor="middle">
+    <text x="512" y="495" font-size="130" fill="#7E57C2">Word</text>
+    <text x="322" y="603" font-size="80" fill="#E91E63">Hello</text>
+    <text x="702" cy="603" y="598" font-size="76" fill="#F06292">Cloud</text>
+    <text x="267" y="678" font-size="52" fill="#AB47BC">Text</text>
+    <text x="512" y="686" font-size="52" fill="#7E57C2">Data</text>
+    <text x="756" y="678" font-size="52" fill="#E91E63">Love</text>
+    <text x="390" y="755" font-size="39" fill="#CE93D8">Web</text>
+    <text x="610" y="755" font-size="39" fill="#AB47BC">Art</text>
+  </g>
+</svg>

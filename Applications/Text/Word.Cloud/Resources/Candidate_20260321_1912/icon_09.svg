@@ -1,0 +1,72 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="lightBg9" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#EDE7F6"/>
+    </linearGradient>
+    <linearGradient id="rainbow9" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%"   stop-color="#F44336"/>
+      <stop offset="16%"  stop-color="#FF9800"/>
+      <stop offset="33%"  stop-color="#FFEB3B"/>
+      <stop offset="50%"  stop-color="#4CAF50"/>
+      <stop offset="67%"  stop-color="#2196F3"/>
+      <stop offset="83%"  stop-color="#9C27B0"/>
+      <stop offset="100%" stop-color="#E91E63"/>
+    </linearGradient>
+    <clipPath id="cc9">
+      <circle cx="512" cy="510" r="218"/>
+      <circle cx="306" cy="545" r="170"/>
+      <circle cx="718" cy="545" r="170"/>
+      <circle cx="512" cy="338" r="190"/>
+      <circle cx="378" cy="393" r="160"/>
+      <circle cx="648" cy="393" r="160"/>
+    </clipPath>
+  </defs>
+
+  <!-- Layer 1: 밝은 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#lightBg9)"/>
+
+  <!-- 구름 밖 산재 단어들 -->
+  <g font-family="Arial" font-weight="bold">
+    <text x="128" y="278" font-size="38" fill="#F44336" opacity="0.68">Hello</text>
+    <text x="752" y="238" font-size="46" fill="#9C27B0" opacity="0.68">World</text>
+    <text x="98"  y="755" font-size="42" fill="#2196F3" opacity="0.62">Code</text>
+    <text x="785" y="808" font-size="34" fill="#FF9800" opacity="0.68">Art</text>
+    <text x="198" y="878" font-size="38" fill="#4CAF50" opacity="0.62">Web</text>
+    <text x="708" y="888" font-size="32" fill="#E91E63" opacity="0.58">Data</text>
+    <text x="862" y="478" font-size="40" fill="#FFEB3B" opacity="0.75">Tech</text>
+    <text x="88"  y="492" font-size="36" fill="#00BCD4" opacity="0.68">AI</text>
+    <text x="840" y="308" font-size="34" fill="#FF5722" opacity="0.60">NLP</text>
+    <text x="148" y="608" font-size="30" fill="#607D8B" opacity="0.55">ML</text>
+  </g>
+
+  <!-- Layer 2: 무지개 구름 테두리 + 반투명 fill -->
+  <g fill="rgba(150,100,255,0.08)">
+    <circle cx="512" cy="510" r="218"/>
+    <circle cx="306" cy="545" r="170"/>
+    <circle cx="718" cy="545" r="170"/>
+    <circle cx="512" cy="338" r="190"/>
+    <circle cx="378" cy="393" r="160"/>
+    <circle cx="648" cy="393" r="160"/>
+  </g>
+  <g fill="none" stroke="url(#rainbow9)" stroke-width="11" opacity="0.92">
+    <circle cx="512" cy="510" r="218"/>
+    <circle cx="306" cy="545" r="170"/>
+    <circle cx="718" cy="545" r="170"/>
+    <circle cx="512" cy="338" r="190"/>
+    <circle cx="378" cy="393" r="160"/>
+    <circle cx="648" cy="393" r="160"/>
+  </g>
+
+  <!-- Layer 3: 구름 안 무지개 단어들 -->
+  <g clip-path="url(#cc9)" font-family="Arial Black, Arial" font-weight="900" text-anchor="middle">
+    <text x="512" y="460" font-size="128" fill="#F44336">Word</text>
+    <text x="318" y="562" font-size="80" fill="#2196F3">Hello</text>
+    <text x="706" y="557" font-size="76" fill="#4CAF50">Cloud</text>
+    <text x="264" y="642" font-size="52" fill="#FF9800">Text</text>
+    <text x="512" y="650" font-size="52" fill="#9C27B0">Data</text>
+    <text x="760" y="642" font-size="52" fill="#E91E63">Love</text>
+    <text x="392" y="718" font-size="39" fill="#00BCD4">News</text>
+    <text x="612" y="718" font-size="39" fill="#FF9800">Art</text>
+  </g>
+</svg>

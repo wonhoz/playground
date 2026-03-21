@@ -1,0 +1,61 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="aquaBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#006064"/>
+      <stop offset="100%" stop-color="#0097A7"/>
+    </linearGradient>
+    <linearGradient id="cloudGrad5" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#E0F7FA"/>
+      <stop offset="100%" stop-color="#B2EBF2"/>
+    </linearGradient>
+    <clipPath id="cc5">
+      <circle cx="512" cy="578" r="235"/>
+      <circle cx="296" cy="613" r="183"/>
+      <circle cx="728" cy="613" r="183"/>
+      <circle cx="512" cy="386" r="203"/>
+      <circle cx="365" cy="442" r="173"/>
+      <circle cx="662" cy="442" r="173"/>
+    </clipPath>
+  </defs>
+
+  <!-- Layer 1: 딥 티얼 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#aquaBg)"/>
+
+  <!-- 배경 장식 원들 -->
+  <g fill="rgba(255,255,255,0.08)">
+    <circle cx="160" cy="200" r="28"/>
+    <circle cx="290" cy="150" r="18"/>
+    <circle cx="800" cy="900" r="22"/>
+    <circle cx="895" cy="815" r="15"/>
+    <circle cx="920" cy="350" r="20"/>
+    <circle cx="100" cy="680" r="16"/>
+  </g>
+
+  <!-- Layer 2: 연한 구름 -->
+  <g fill="url(#cloudGrad5)">
+    <circle cx="512" cy="578" r="235"/>
+    <circle cx="296" cy="613" r="183"/>
+    <circle cx="728" cy="613" r="183"/>
+    <circle cx="512" cy="386" r="203"/>
+    <circle cx="365" cy="442" r="173"/>
+    <circle cx="662" cy="442" r="173"/>
+  </g>
+  <!-- 구름 하단 그림자 -->
+  <g fill="rgba(0,150,170,0.12)">
+    <circle cx="512" cy="610" r="205"/>
+    <circle cx="296" cy="643" r="158"/>
+    <circle cx="728" cy="643" r="158"/>
+  </g>
+
+  <!-- Layer 3: 이니셜 "W" + "C" -->
+  <g clip-path="url(#cc5)" text-anchor="middle">
+    <!-- 배경 워터마크 -->
+    <text x="512" y="560" font-family="Arial Black" font-size="340" font-weight="900" fill="rgba(0,96,100,0.08)">W</text>
+    <!-- 메인 W -->
+    <text x="390" y="545" font-family="Arial Black, Arial" font-size="210" font-weight="900" fill="#00838F">W</text>
+    <!-- 메인 C -->
+    <text x="682" cy="545" y="600" font-family="Arial Black, Arial" font-size="170" font-weight="900" fill="#00ACC1">C</text>
+    <!-- 하단 라벨 -->
+    <text x="512" y="710" font-family="Arial" font-size="46" font-weight="400" fill="#00696F" letter-spacing="6">WORD CLOUD</text>
+  </g>
+</svg>

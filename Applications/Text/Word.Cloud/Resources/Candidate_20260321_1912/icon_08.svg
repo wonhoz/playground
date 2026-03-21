@@ -1,0 +1,62 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="orangeBg" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#FFA726"/>
+      <stop offset="100%" stop-color="#BF360C"/>
+    </radialGradient>
+    <clipPath id="cc8">
+      <circle cx="512" cy="488" r="205"/>
+      <circle cx="325" cy="522" r="158"/>
+      <circle cx="699" cy="522" r="158"/>
+      <circle cx="512" cy="330" r="178"/>
+      <circle cx="390" cy="378" r="150"/>
+      <circle cx="638" cy="378" r="150"/>
+    </clipPath>
+  </defs>
+
+  <!-- Layer 1: 비비드 오렌지 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#orangeBg)"/>
+
+  <!-- 방사형 빛줄기 -->
+  <g stroke="rgba(255,255,255,0.18)" stroke-width="4" stroke-linecap="round">
+    <line x1="512" y1="488" x2="140" y2="820"/>
+    <line x1="512" y1="488" x2="88"  y2="488"/>
+    <line x1="512" y1="488" x2="195" y2="175"/>
+    <line x1="512" y1="488" x2="512" y2="88"/>
+    <line x1="512" y1="488" x2="830" y2="175"/>
+    <line x1="512" y1="488" x2="936" y2="488"/>
+    <line x1="512" y1="488" x2="830" y2="810"/>
+    <line x1="512" y1="488" x2="512" y2="936"/>
+  </g>
+
+  <!-- Layer 2: 구름 밖 방사 단어들 -->
+  <g font-family="Arial" font-weight="bold" text-anchor="middle">
+    <text x="178" y="418" font-size="50" fill="rgba(255,255,255,0.88)">Hello</text>
+    <text x="155" y="625" font-size="42" fill="rgba(255,255,255,0.75)">Text</text>
+    <text x="350" y="825" font-size="46" fill="rgba(255,255,255,0.82)">Data</text>
+    <text x="565" y="888" font-size="54" fill="rgba(255,255,255,0.88)">Love</text>
+    <text x="748" y="832" font-size="42" fill="rgba(255,255,255,0.78)">Web</text>
+    <text x="866" y="648" font-size="48" fill="rgba(255,255,255,0.82)">News</text>
+    <text x="878" y="435" font-size="44" fill="rgba(255,255,255,0.78)">Tech</text>
+    <text x="728" y="235" font-size="52" fill="rgba(255,255,255,0.88)">AI</text>
+    <text x="505" y="152" font-size="46" fill="rgba(255,255,255,0.82)">Code</text>
+    <text x="285" y="228" font-size="48" fill="rgba(255,255,255,0.78)">Art</text>
+  </g>
+
+  <!-- 흰 구름 (중앙) -->
+  <g fill="white">
+    <circle cx="512" cy="488" r="205"/>
+    <circle cx="325" cy="522" r="158"/>
+    <circle cx="699" cy="522" r="158"/>
+    <circle cx="512" cy="330" r="178"/>
+    <circle cx="390" cy="378" r="150"/>
+    <circle cx="638" cy="378" r="150"/>
+  </g>
+
+  <!-- Layer 3: 구름 안 핵심 텍스트 -->
+  <g clip-path="url(#cc8)" font-family="Arial Black, Arial" font-weight="900" text-anchor="middle">
+    <text x="512" y="430" font-size="118" fill="#E64A19">Word</text>
+    <text x="352" y="530" font-size="75" fill="#FF6D00">Cloud</text>
+    <text x="678" y="525" font-size="58" fill="#BF360C">Now</text>
+  </g>
+</svg>

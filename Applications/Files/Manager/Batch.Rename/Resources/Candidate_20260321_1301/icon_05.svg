@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg05" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#F97316"/>
+      <stop offset="100%" stop-color="#DC2626"/>
+    </linearGradient>
+    <linearGradient id="file_grad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0EA5E9"/>
+      <stop offset="100%" stop-color="#0284C7"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Layer 1: 배경 - 주황→빨강 그라데이션 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg05)"/>
+
+  <!-- 배경 장식 원들 -->
+  <circle cx="820" cy="820" r="300" fill="#EA580C" opacity="0.3"/>
+  <circle cx="200" cy="200" r="200" fill="#F97316" opacity="0.2"/>
+
+  <!-- Layer 2: 파일 아이콘들 (여러 개 - 왼쪽) -->
+  <!-- 파일 1 -->
+  <g transform="translate(80, 200)">
+    <rect x="0" y="0" width="200" height="240" rx="16" fill="url(#file_grad)"/>
+    <path d="M136,0 L200,64 L200,0 Z" fill="#0284C7"/>
+    <path d="M136,0 L136,64 L200,64" fill="none" stroke="#BAE6FD" stroke-width="6"/>
+    <line x1="30" y1="108" x2="170" y2="108" stroke="white" stroke-width="12" stroke-linecap="round" opacity="0.8"/>
+    <line x1="30" y1="140" x2="150" y2="140" stroke="white" stroke-width="12" stroke-linecap="round" opacity="0.6"/>
+    <line x1="30" y1="172" x2="160" y2="172" stroke="white" stroke-width="12" stroke-linecap="round" opacity="0.4"/>
+  </g>
+
+  <!-- 파일 2 -->
+  <g transform="translate(80, 480)">
+    <rect x="0" y="0" width="200" height="240" rx="16" fill="url(#file_grad)"/>
+    <path d="M136,0 L200,64 L200,0 Z" fill="#0284C7"/>
+    <path d="M136,0 L136,64 L200,64" fill="none" stroke="#BAE6FD" stroke-width="6"/>
+    <line x1="30" y1="108" x2="170" y2="108" stroke="white" stroke-width="12" stroke-linecap="round" opacity="0.8"/>
+    <line x1="30" y1="140" x2="150" y2="140" stroke="white" stroke-width="12" stroke-linecap="round" opacity="0.6"/>
+    <line x1="30" y1="172" x2="160" y2="172" stroke="white" stroke-width="12" stroke-linecap="round" opacity="0.4"/>
+  </g>
+
+  <!-- 중앙 기어 (대형) -->
+  <g transform="translate(512,512)">
+    <!-- 기어 외곽 -->
+    <path d="
+      M0,-220 L28,-192 L56,-220 L84,-192
+      A220,220 0 0 1 192,-84
+      L220,-56 L192,-28 L220,0
+      L192,28 L220,56 L192,84
+      A220,220 0 0 1 84,192
+      L56,220 L28,192 L0,220
+      L-28,192 L-56,220 L-84,192
+      A220,220 0 0 1 -192,84
+      L-220,56 L-192,28 L-220,0
+      L-192,-28 L-220,-56 L-192,-84
+      A220,220 0 0 1 -84,-192
+      L-56,-220 L-28,-192 Z
+    " fill="white" opacity="0.95"/>
+    <!-- 기어 내부 원 -->
+    <circle cx="0" cy="0" r="120" fill="#F97316"/>
+    <!-- 기어 홀 -->
+    <circle cx="0" cy="0" r="55" fill="white" opacity="0.2"/>
+
+    <!-- 화살표/변환 심볼 (기어 안) -->
+    <text x="0" y="18" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="88" fill="white" font-weight="bold">✦</text>
+  </g>
+
+  <!-- 오른쪽 파일들 (변환 후, 더 밝게) -->
+  <!-- 파일 3 -->
+  <g transform="translate(744, 200)">
+    <rect x="0" y="0" width="200" height="240" rx="16" fill="white" opacity="0.9"/>
+    <path d="M136,0 L200,64 L200,0 Z" fill="#E0F2FE"/>
+    <path d="M136,0 L136,64 L200,64" fill="none" stroke="#BAE6FD" stroke-width="6"/>
+    <line x1="30" y1="108" x2="170" y2="108" stroke="#0EA5E9" stroke-width="12" stroke-linecap="round"/>
+    <text x="100" y="162" text-anchor="middle" font-family="Consolas,monospace" font-size="24" fill="#0369A1">001.jpg</text>
+  </g>
+
+  <!-- 파일 4 -->
+  <g transform="translate(744, 480)">
+    <rect x="0" y="0" width="200" height="240" rx="16" fill="white" opacity="0.9"/>
+    <path d="M136,0 L200,64 L200,0 Z" fill="#E0F2FE"/>
+    <path d="M136,0 L136,64 L200,64" fill="none" stroke="#BAE6FD" stroke-width="6"/>
+    <line x1="30" y1="108" x2="170" y2="108" stroke="#0EA5E9" stroke-width="12" stroke-linecap="round"/>
+    <text x="100" y="162" text-anchor="middle" font-family="Consolas,monospace" font-size="24" fill="#0369A1">002.jpg</text>
+  </g>
+
+  <!-- Layer 3: 화살표들 (파일→기어→파일) -->
+  <path d="M300,310 L440,430" stroke="#FDE68A" stroke-width="28" stroke-linecap="round"/>
+  <polygon points="440,430 410,384 464,400" fill="#FDE68A"/>
+
+  <path d="M590,590 L720,690" stroke="#FDE68A" stroke-width="28" stroke-linecap="round"/>
+  <polygon points="720,690 680,660 700,714" fill="#FDE68A"/>
+</svg>

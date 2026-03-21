@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg08" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#F8FAFC"/>
+      <stop offset="100%" stop-color="#E2E8F0"/>
+    </linearGradient>
+    <linearGradient id="header_grad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#0F172A"/>
+      <stop offset="100%" stop-color="#1E293B"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Layer 1: 배경 - 밝은 크림/연한 회색 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg08)"/>
+
+  <!-- 배경 장식 -->
+  <circle cx="880" cy="160" r="180" fill="#E0F2FE" opacity="0.5"/>
+  <circle cx="150" cy="900" r="150" fill="#DCFCE7" opacity="0.4"/>
+
+  <!-- Layer 2: DataGrid 미리보기 테이블 -->
+  <!-- 테이블 외곽 -->
+  <rect x="100" y="180" width="824" height="640" rx="16" fill="white" opacity="0.95"/>
+  <rect x="100" y="180" width="824" height="640" rx="16" fill="none" stroke="#CBD5E1" stroke-width="4"/>
+
+  <!-- 헤더 행 -->
+  <rect x="100" y="180" width="824" height="60" rx="16" fill="url(#header_grad)"/>
+  <rect x="100" y="216" width="824" height="24" fill="url(#header_grad)"/>
+  <text x="200" y="218" font-family="Segoe UI,sans-serif" font-size="26" fill="#94A3B8">Original Name</text>
+  <line x1="510" y1="185" x2="510" y2="240" stroke="#334155" stroke-width="2"/>
+  <text x="600" y="218" font-family="Segoe UI,sans-serif" font-size="26" fill="#94A3B8">New Name</text>
+  <line x1="876" y1="185" x2="876" y2="240" stroke="#334155" stroke-width="2"/>
+  <text x="900" y="218" font-family="Segoe UI,sans-serif" font-size="22" fill="#94A3B8">✓</text>
+
+  <!-- 행 구분선 컬러 -->
+  <!-- 행 1 (강조 - 현재 처리 중) -->
+  <rect x="100" y="240" width="824" height="66" fill="#EFF6FF"/>
+  <text x="130" y="281" font-family="Consolas,monospace" font-size="28" fill="#475569">IMG_0042.jpg</text>
+  <line x1="510" y1="244" x2="510" y2="306" stroke="#E2E8F0" stroke-width="2"/>
+  <text x="530" y="281" font-family="Consolas,monospace" font-size="28" fill="#1D4ED8" font-weight="bold">20260321_001.jpg</text>
+  <line x1="876" y1="244" x2="876" y2="306" stroke="#E2E8F0" stroke-width="2"/>
+  <text x="900" y="284" font-family="serif" font-size="32" fill="#16A34A">✓</text>
+
+  <!-- 행 2 -->
+  <rect x="100" y="306" width="824" height="66" fill="white"/>
+  <line x1="100" y1="306" x2="924" y2="306" stroke="#F1F5F9" stroke-width="2"/>
+  <text x="130" y="347" font-family="Consolas,monospace" font-size="28" fill="#64748B">photo_001.png</text>
+  <line x1="510" y1="310" x2="510" y2="372" stroke="#E2E8F0" stroke-width="2"/>
+  <text x="530" y="347" font-family="Consolas,monospace" font-size="28" fill="#1D4ED8" font-weight="bold">20260321_002.png</text>
+  <line x1="876" y1="310" x2="876" y2="372" stroke="#E2E8F0" stroke-width="2"/>
+  <text x="900" y="350" font-family="serif" font-size="32" fill="#16A34A">✓</text>
+
+  <!-- 행 3 -->
+  <rect x="100" y="372" width="824" height="66" fill="#F8FAFC"/>
+  <line x1="100" y1="372" x2="924" y2="372" stroke="#F1F5F9" stroke-width="2"/>
+  <text x="130" y="413" font-family="Consolas,monospace" font-size="28" fill="#64748B">DSC_8812.jpg</text>
+  <line x1="510" y1="376" x2="510" y2="438" stroke="#E2E8F0" stroke-width="2"/>
+  <text x="530" y="413" font-family="Consolas,monospace" font-size="28" fill="#1D4ED8" font-weight="bold">20260321_003.jpg</text>
+  <line x1="876" y1="376" x2="876" y2="438" stroke="#E2E8F0" stroke-width="2"/>
+  <text x="900" y="416" font-family="serif" font-size="32" fill="#16A34A">✓</text>
+
+  <!-- 행 4 -->
+  <rect x="100" y="438" width="824" height="66" fill="white"/>
+  <line x1="100" y1="438" x2="924" y2="438" stroke="#F1F5F9" stroke-width="2"/>
+  <text x="130" y="479" font-family="Consolas,monospace" font-size="28" fill="#64748B">screenshot.png</text>
+  <line x1="510" y1="442" x2="510" y2="504" stroke="#E2E8F0" stroke-width="2"/>
+  <text x="530" y="479" font-family="Consolas,monospace" font-size="28" fill="#1D4ED8" font-weight="bold">20260321_004.png</text>
+  <line x1="876" y1="442" x2="876" y2="504" stroke="#E2E8F0" stroke-width="2"/>
+  <text x="900" y="482" font-family="serif" font-size="32" fill="#16A34A">✓</text>
+
+  <!-- 행 5 (오류) -->
+  <rect x="100" y="504" width="824" height="66" fill="#FFF7ED"/>
+  <line x1="100" y1="504" x2="924" y2="504" stroke="#F1F5F9" stroke-width="2"/>
+  <text x="130" y="545" font-family="Consolas,monospace" font-size="28" fill="#64748B">backup copy.jpg</text>
+  <line x1="510" y1="508" x2="510" y2="570" stroke="#E2E8F0" stroke-width="2"/>
+  <text x="530" y="545" font-family="Consolas,monospace" font-size="28" fill="#EA580C">20260321_005.jpg</text>
+  <line x1="876" y1="508" x2="876" y2="570" stroke="#E2E8F0" stroke-width="2"/>
+  <text x="896" y="548" font-family="serif" font-size="28" fill="#EA580C">⚠</text>
+
+  <!-- 행 6 -->
+  <rect x="100" y="570" width="824" height="66" fill="#F8FAFC"/>
+  <line x1="100" y1="570" x2="924" y2="570" stroke="#F1F5F9" stroke-width="2"/>
+  <text x="130" y="611" font-family="Consolas,monospace" font-size="28" fill="#64748B">IMG_9999.jpg</text>
+  <line x1="510" y1="574" x2="510" y2="636" stroke="#E2E8F0" stroke-width="2"/>
+  <text x="530" y="611" font-family="Consolas,monospace" font-size="28" fill="#1D4ED8" font-weight="bold">20260321_006.jpg</text>
+  <line x1="876" y1="574" x2="876" y2="636" stroke="#E2E8F0" stroke-width="2"/>
+  <text x="900" y="614" font-family="serif" font-size="32" fill="#16A34A">✓</text>
+
+  <!-- 하단 패딩 -->
+  <rect x="100" y="636" width="824" height="184" rx="16" fill="white" opacity="0.0"/>
+
+  <!-- Layer 3: 하단 상태바 및 Apply 버튼 -->
+  <rect x="100" y="736" width="824" height="84" rx="16" fill="#0F172A"/>
+  <rect x="100" y="736" width="824" height="44" fill="#0F172A"/>
+  <text x="150" y="784" font-family="Segoe UI,sans-serif" font-size="28" fill="#64748B">5 files ready  •  1 warning</text>
+  <rect x="714" y="748" width="196" height="60" rx="14" fill="#16A34A"/>
+  <text x="812" y="785" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="30" fill="white" font-weight="bold">Apply ✓</text>
+</svg>

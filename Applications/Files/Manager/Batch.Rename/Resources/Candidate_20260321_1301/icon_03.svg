@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg03" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#059669"/>
+      <stop offset="100%" stop-color="#065F46"/>
+    </linearGradient>
+    <linearGradient id="stamp_grad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#7C3AED"/>
+      <stop offset="100%" stop-color="#4C1D95"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Layer 1: 배경 - 에메랄드 그린 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg03)"/>
+
+  <!-- 배경 장식 원 -->
+  <circle cx="800" cy="200" r="200" fill="#047857" opacity="0.4"/>
+  <circle cx="200" cy="800" r="160" fill="#047857" opacity="0.3"/>
+
+  <!-- Layer 2: 파일 카드 스택 (뒤에서부터) -->
+  <!-- 3번째 카드 (가장 뒤) -->
+  <g transform="translate(-40,40) rotate(-12 512 520)">
+    <rect x="230" y="280" width="340" height="430" rx="18" fill="#D1FAE5" opacity="0.6"/>
+    <line x1="265" y1="360" x2="535" y2="360" stroke="#A7F3D0" stroke-width="14" stroke-linecap="round"/>
+    <line x1="265" y1="410" x2="480" y2="410" stroke="#A7F3D0" stroke-width="14" stroke-linecap="round"/>
+    <line x1="265" y1="460" x2="510" y2="460" stroke="#A7F3D0" stroke-width="14" stroke-linecap="round"/>
+  </g>
+
+  <!-- 2번째 카드 (중간) -->
+  <g transform="translate(-16,16) rotate(-5 512 520)">
+    <rect x="230" y="280" width="340" height="430" rx="18" fill="#ECFDF5" opacity="0.8"/>
+    <line x1="265" y1="360" x2="535" y2="360" stroke="#6EE7B7" stroke-width="14" stroke-linecap="round"/>
+    <line x1="265" y1="410" x2="480" y2="410" stroke="#6EE7B7" stroke-width="14" stroke-linecap="round"/>
+    <line x1="265" y1="460" x2="510" y2="460" stroke="#6EE7B7" stroke-width="14" stroke-linecap="round"/>
+  </g>
+
+  <!-- 1번째 카드 (앞, 메인) -->
+  <rect x="230" y="280" width="340" height="430" rx="18" fill="white"/>
+  <rect x="230" y="280" width="340" height="48" rx="18" fill="#ECFDF5"/>
+  <rect x="230" y="304" width="340" height="24" fill="#ECFDF5"/>
+  <!-- 파일 아이콘 모서리 접기 -->
+  <path d="M524,280 L570,280 L570,330 L524,330 Z" fill="#D1FAE5"/>
+  <path d="M524,280 L570,330 L524,330 Z" fill="#A7F3D0"/>
+  <!-- 파일 내용 줄 -->
+  <line x1="265" y1="370" x2="510" y2="370" stroke="#D1FAE5" stroke-width="14" stroke-linecap="round"/>
+  <text x="400" y="448" text-anchor="middle" font-family="Consolas,monospace" font-size="34" fill="#065F46" font-weight="bold">file_001.jpg</text>
+  <text x="400" y="494" text-anchor="middle" font-family="Consolas,monospace" font-size="34" fill="#065F46" font-weight="bold">file_002.jpg</text>
+  <text x="400" y="540" text-anchor="middle" font-family="Consolas,monospace" font-size="34" fill="#065F46" font-weight="bold">file_003.jpg</text>
+  <line x1="265" y1="570" x2="510" y2="570" stroke="#D1FAE5" stroke-width="10" stroke-linecap="round"/>
+
+  <!-- Layer 3: 인장/스탬프 -->
+  <g transform="translate(560, 280)">
+    <!-- 스탬프 원 -->
+    <circle cx="120" cy="120" r="130" fill="url(#stamp_grad)" opacity="0.95"/>
+    <circle cx="120" cy="120" r="108" fill="none" stroke="#C4B5FD" stroke-width="10" stroke-dasharray="20,10"/>
+    <!-- 스탬프 텍스트 -->
+    <text x="120" y="102" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="32" fill="white" font-weight="bold">BATCH</text>
+    <text x="120" y="144" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="32" fill="#DDD6FE" font-weight="bold">RENAME</text>
+    <!-- 별 장식 -->
+    <text x="70" y="168" font-family="serif" font-size="28" fill="#C4B5FD">★</text>
+    <text x="152" y="168" font-family="serif" font-size="28" fill="#C4B5FD">★</text>
+  </g>
+
+  <!-- 스탬프 효과 선 (찍히는 느낌) -->
+  <line x1="610" y1="430" x2="610" y2="480" stroke="#7C3AED" stroke-width="14" stroke-linecap="round" opacity="0.6"/>
+  <line x1="640" y1="440" x2="640" y2="490" stroke="#7C3AED" stroke-width="14" stroke-linecap="round" opacity="0.4"/>
+  <line x1="580" y1="440" x2="580" y2="490" stroke="#7C3AED" stroke-width="14" stroke-linecap="round" opacity="0.4"/>
+</svg>

@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg06" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#38BDF8"/>
+      <stop offset="100%" stop-color="#0369A1"/>
+    </linearGradient>
+    <linearGradient id="pipe_grad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#7DD3FC"/>
+      <stop offset="100%" stop-color="#0284C7"/>
+    </linearGradient>
+    <clipPath id="clip06">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+
+  <!-- Layer 1: 배경 - 하늘색 그라데이션 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg06)"/>
+
+  <!-- 구름/배경 장식 -->
+  <ellipse cx="150" cy="200" rx="180" ry="100" fill="#BAE6FD" opacity="0.2" clip-path="url(#clip06)"/>
+  <ellipse cx="900" cy="850" rx="200" ry="120" fill="#0EA5E9" opacity="0.15" clip-path="url(#clip06)"/>
+
+  <!-- Layer 2: 파이프라인/컨베이어 벨트 -->
+  <!-- 파이프 본체 -->
+  <rect x="130" y="460" width="764" height="104" rx="52" fill="url(#pipe_grad)" opacity="0.9"/>
+  <rect x="130" y="460" width="764" height="104" rx="52" fill="none" stroke="#BAE6FD" stroke-width="8"/>
+  <!-- 파이프 광택 -->
+  <rect x="150" y="474" width="720" height="30" rx="15" fill="white" opacity="0.15"/>
+
+  <!-- 화살표들 (방향 표시) -->
+  <polygon points="400,490 448,512 400,534" fill="#FDE68A" opacity="0.9"/>
+  <polygon points="520,490 568,512 520,534" fill="#FDE68A" opacity="0.9"/>
+  <polygon points="640,490 688,512 640,534" fill="#FDE68A" opacity="0.9"/>
+
+  <!-- 입력 파일들 (왼쪽, 파이프 들어가는 곳) -->
+  <!-- 파일 아이콘 1 -->
+  <g transform="translate(130, 270)">
+    <rect x="0" y="0" width="130" height="160" rx="12" fill="white" opacity="0.85"/>
+    <path d="M88,0 L130,42 L130,0 Z" fill="#E0F2FE"/>
+    <path d="M88,0 L88,42 L130,42" fill="none" stroke="#BAE6FD" stroke-width="4"/>
+    <line x1="18" y1="72" x2="112" y2="72" stroke="#94A3B8" stroke-width="9" stroke-linecap="round"/>
+    <line x1="18" y1="96" x2="100" y2="96" stroke="#94A3B8" stroke-width="9" stroke-linecap="round"/>
+    <text x="65" y="138" text-anchor="middle" font-family="Consolas,monospace" font-size="20" fill="#64748B">IMG_42</text>
+  </g>
+
+  <!-- 파일 아이콘 2 -->
+  <g transform="translate(280, 290)">
+    <rect x="0" y="0" width="130" height="160" rx="12" fill="white" opacity="0.7"/>
+    <path d="M88,0 L130,42 L130,0 Z" fill="#E0F2FE"/>
+    <path d="M88,0 L88,42 L130,42" fill="none" stroke="#BAE6FD" stroke-width="4"/>
+    <line x1="18" y1="72" x2="112" y2="72" stroke="#94A3B8" stroke-width="9" stroke-linecap="round"/>
+    <line x1="18" y1="96" x2="100" y2="96" stroke="#94A3B8" stroke-width="9" stroke-linecap="round"/>
+    <text x="65" y="138" text-anchor="middle" font-family="Consolas,monospace" font-size="20" fill="#64748B">pic.png</text>
+  </g>
+
+  <!-- 출력 파일들 (오른쪽, 파이프 나오는 곳) - 새 이름으로 변환됨 -->
+  <!-- 출력 파일 1 -->
+  <g transform="translate(590, 270)">
+    <rect x="0" y="0" width="162" height="160" rx="12" fill="#FEFCE8" opacity="0.95"/>
+    <path d="M110,0 L162,52 L162,0 Z" fill="#FEF08A"/>
+    <path d="M110,0 L110,52 L162,52" fill="none" stroke="#FDE047" stroke-width="4"/>
+    <line x1="18" y1="80" x2="140" y2="80" stroke="#16A34A" stroke-width="9" stroke-linecap="round"/>
+    <text x="81" y="120" text-anchor="middle" font-family="Consolas,monospace" font-size="19" fill="#15803D" font-weight="bold">20260321</text>
+    <text x="81" y="144" text-anchor="middle" font-family="Consolas,monospace" font-size="19" fill="#16A34A">_001.jpg</text>
+  </g>
+
+  <!-- 출력 파일 2 -->
+  <g transform="translate(770, 290)">
+    <rect x="0" y="0" width="162" height="160" rx="12" fill="#FEFCE8" opacity="0.8"/>
+    <path d="M110,0 L162,52 L162,0 Z" fill="#FEF08A"/>
+    <path d="M110,0 L110,52 L162,52" fill="none" stroke="#FDE047" stroke-width="4"/>
+    <line x1="18" y1="80" x2="140" y2="80" stroke="#16A34A" stroke-width="9" stroke-linecap="round"/>
+    <text x="81" y="120" text-anchor="middle" font-family="Consolas,monospace" font-size="19" fill="#15803D" font-weight="bold">20260321</text>
+    <text x="81" y="144" text-anchor="middle" font-family="Consolas,monospace" font-size="19" fill="#16A34A">_002.png</text>
+  </g>
+
+  <!-- Layer 3: 변환 표시 - 파이프 중간 빛나는 포인트 -->
+  <circle cx="512" cy="512" r="46" fill="#FDE68A" opacity="0.9"/>
+  <text x="512" y="530" text-anchor="middle" font-family="serif" font-size="44" fill="#92400E">✦</text>
+
+  <!-- 하단 파이프 연결 장식 -->
+  <circle cx="130" cy="512" r="40" fill="#0284C7" stroke="#BAE6FD" stroke-width="8"/>
+  <circle cx="894" cy="512" r="40" fill="#0284C7" stroke="#BAE6FD" stroke-width="8"/>
+
+  <!-- 파이프 내려가는 파일들 표시 -->
+  <path d="M195,460 L195,430" stroke="#BAE6FD" stroke-width="16" stroke-linecap="round" opacity="0.6"/>
+  <path d="M360,460 L360,450" stroke="#BAE6FD" stroke-width="16" stroke-linecap="round" opacity="0.4"/>
+  <path d="M660,564 L660,430" stroke="#FDE68A" stroke-width="16" stroke-linecap="round" opacity="0.7"/>
+  <path d="M840,564 L840,450" stroke="#FDE68A" stroke-width="16" stroke-linecap="round" opacity="0.5"/>
+
+  <!-- 하단 텍스트 -->
+  <text x="512" y="760" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="48" fill="white" font-weight="bold" opacity="0.9">Batch Rename</text>
+</svg>

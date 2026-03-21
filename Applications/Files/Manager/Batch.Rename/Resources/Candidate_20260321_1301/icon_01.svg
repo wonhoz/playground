@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 배경 - 코발트 블루 둥근 사각형 -->
+  <rect width="1024" height="1024" rx="190" fill="#2563EB"/>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg_grad01)"/>
+  <defs>
+    <linearGradient id="bg_grad01" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#3B82F6"/>
+      <stop offset="100%" stop-color="#1D4ED8"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Layer 2: 뒤 파일 카드 (원본) - 약간 기울어진 흰 카드 -->
+  <g transform="rotate(-8 512 512)">
+    <rect x="190" y="270" width="380" height="460" rx="24" fill="#BFDBFE" opacity="0.85"/>
+    <!-- 파일 상단 탭 -->
+    <path d="M190,270 h140 l30,40 h210 a24,24 0 0 1 0,0 v-40 a24,24 0 0 1 24,24 v0" fill="none"/>
+    <rect x="190" y="270" width="380" height="460" rx="24" fill="none" stroke="#93C5FD" stroke-width="6"/>
+    <!-- 원본 파일명 텍스트 -->
+    <text x="380" y="440" text-anchor="middle" font-family="Consolas,monospace" font-size="46" font-weight="bold" fill="#1E40AF">IMG_0042</text>
+    <text x="380" y="500" text-anchor="middle" font-family="Consolas,monospace" font-size="38" fill="#3B82F6">.jpg</text>
+  </g>
+
+  <!-- 변환 화살표 -->
+  <g transform="translate(512,512)">
+    <path d="M-30,0 L90,0" stroke="#F59E0B" stroke-width="52" stroke-linecap="round"/>
+    <polygon points="90,-36 160,0 90,36" fill="#F59E0B"/>
+  </g>
+
+  <!-- Layer 2: 앞 파일 카드 (변환 후) - 앞에 위치한 흰 카드 -->
+  <g transform="rotate(6 512 512)">
+    <rect x="454" y="240" width="380" height="460" rx="24" fill="white"/>
+    <rect x="454" y="240" width="380" height="460" rx="24" fill="none" stroke="#E2E8F0" stroke-width="6"/>
+    <!-- 상단 컬러 바 -->
+    <rect x="454" y="240" width="380" height="52" rx="24" fill="#1D4ED8"/>
+    <rect x="454" y="268" width="380" height="24" fill="#1D4ED8"/>
+    <!-- 변환된 파일명 텍스트 -->
+    <text x="644" y="420" text-anchor="middle" font-family="Consolas,monospace" font-size="40" font-weight="bold" fill="#1E293B">2026</text>
+    <text x="644" y="468" text-anchor="middle" font-family="Consolas,monospace" font-size="36" fill="#475569">0321_photo</text>
+    <text x="644" y="516" text-anchor="middle" font-family="Consolas,monospace" font-size="36" fill="#3B82F6">.jpg</text>
+  </g>
+
+  <!-- Layer 3: 체크 마크 (성공 표시) -->
+  <circle cx="780" cy="280" r="72" fill="#10B981"/>
+  <path d="M748,280 L768,302 L814,254" stroke="white" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+</svg>

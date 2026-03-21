@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg04" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#DB2777"/>
+      <stop offset="100%" stop-color="#9D174D"/>
+    </linearGradient>
+    <clipPath id="clip04">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+
+  <!-- Layer 1: 배경 - 비비드 핑크 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg04)"/>
+
+  <!-- 배경 장식 -->
+  <circle cx="900" cy="150" r="250" fill="#BE185D" opacity="0.3" clip-path="url(#clip04)"/>
+  <circle cx="150" cy="880" r="200" fill="#BE185D" opacity="0.2" clip-path="url(#clip04)"/>
+
+  <!-- Layer 2: 왼쪽 - 뒤죽박죽 파일명 줄들 -->
+  <!-- 들쭉날쭉한 선들 (원본 상태) -->
+  <g opacity="0.7">
+    <rect x="130" y="250" width="280" height="52" rx="8" fill="white" opacity="0.3"/>
+    <text x="150" y="286" font-family="Consolas,monospace" font-size="30" fill="white">IMG_3421.jpg</text>
+
+    <rect x="130" y="320" width="200" height="52" rx="8" fill="white" opacity="0.3"/>
+    <text x="150" y="356" font-family="Consolas,monospace" font-size="30" fill="white">photo.png</text>
+
+    <rect x="130" y="390" width="340" height="52" rx="8" fill="white" opacity="0.3"/>
+    <text x="150" y="426" font-family="Consolas,monospace" font-size="30" fill="white">DSC_00123_edit.jpg</text>
+
+    <rect x="130" y="460" width="160" height="52" rx="8" fill="white" opacity="0.3"/>
+    <text x="150" y="496" font-family="Consolas,monospace" font-size="30" fill="white">pic.jpg</text>
+
+    <rect x="130" y="530" width="310" height="52" rx="8" fill="white" opacity="0.3"/>
+    <text x="150" y="566" font-family="Consolas,monospace" font-size="30" fill="white">screenshot_final2.png</text>
+
+    <rect x="130" y="600" width="240" height="52" rx="8" fill="white" opacity="0.3"/>
+    <text x="150" y="636" font-family="Consolas,monospace" font-size="30" fill="white">IMG_backup.jpg</text>
+
+    <rect x="130" y="670" width="186" height="52" rx="8" fill="white" opacity="0.3"/>
+    <text x="150" y="706" font-family="Consolas,monospace" font-size="30" fill="white">test_img.jpg</text>
+  </g>
+
+  <!-- 중앙 화살표 (변환) - 동적 대각선 -->
+  <g transform="translate(512,512)">
+    <path d="M-70,-60 L70,60" stroke="#FDE68A" stroke-width="44" stroke-linecap="round"/>
+    <path d="M-70,60 L70,-60" stroke="#FDE68A" stroke-width="44" stroke-linecap="round"/>
+    <!-- 화살표 쉐브론 -->
+    <path d="M20,-20 L80,0 L20,20" stroke="#FBBF24" stroke-width="36" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  </g>
+
+  <!-- Layer 3: 오른쪽 - 정렬된 파일명들 -->
+  <g>
+    <rect x="614" y="250" width="280" height="52" rx="8" fill="#FBCFE8" opacity="0.9"/>
+    <text x="634" y="286" font-family="Consolas,monospace" font-size="30" fill="#831843" font-weight="bold">20260321_001.jpg</text>
+
+    <rect x="614" y="320" width="280" height="52" rx="8" fill="#FBCFE8" opacity="0.9"/>
+    <text x="634" y="356" font-family="Consolas,monospace" font-size="30" fill="#831843" font-weight="bold">20260321_002.png</text>
+
+    <rect x="614" y="390" width="280" height="52" rx="8" fill="#FBCFE8" opacity="0.9"/>
+    <text x="634" y="426" font-family="Consolas,monospace" font-size="30" fill="#831843" font-weight="bold">20260321_003.jpg</text>
+
+    <rect x="614" y="460" width="280" height="52" rx="8" fill="#FBCFE8" opacity="0.9"/>
+    <text x="634" y="496" font-family="Consolas,monospace" font-size="30" fill="#831843" font-weight="bold">20260321_004.jpg</text>
+
+    <rect x="614" y="530" width="280" height="52" rx="8" fill="#FBCFE8" opacity="0.9"/>
+    <text x="634" y="566" font-family="Consolas,monospace" font-size="30" fill="#831843" font-weight="bold">20260321_005.png</text>
+
+    <rect x="614" y="600" width="280" height="52" rx="8" fill="#FBCFE8" opacity="0.9"/>
+    <text x="634" y="636" font-family="Consolas,monospace" font-size="30" fill="#831843" font-weight="bold">20260321_006.jpg</text>
+
+    <rect x="614" y="670" width="280" height="52" rx="8" fill="#FBCFE8" opacity="0.9"/>
+    <text x="634" y="706" font-family="Consolas,monospace" font-size="30" fill="#831843" font-weight="bold">20260321_007.jpg</text>
+  </g>
+
+  <!-- 정렬 강조 - 오른쪽 세로 선 -->
+  <line x1="614" y1="240" x2="614" y2="735" stroke="#F9A8D4" stroke-width="6" stroke-linecap="round" stroke-dasharray="12,8"/>
+</svg>

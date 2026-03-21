@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>Mark.View — Icon Candidates (20260321_1423)</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #282A36;
+    color: #F8F8F2;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    padding: 40px 32px;
+    min-height: 100vh;
+  }
+  h1 { font-size: 22px; font-weight: 600; margin-bottom: 6px; color: #FF79C6; }
+  .subtitle { font-size: 13px; color: #6272A4; margin-bottom: 36px; }
+  .grid { display: flex; flex-wrap: wrap; gap: 28px; }
+  .card {
+    background: #21222C;
+    border: 1px solid #44475A;
+    border-radius: 12px;
+    padding: 20px;
+    width: 220px;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+    cursor: pointer;
+  }
+  .card:hover {
+    transform: scale(1.08);
+    box-shadow: 0 8px 32px rgba(189,147,249,0.3);
+    border-color: #BD93F9;
+  }
+  .card img {
+    width: 160px;
+    height: 160px;
+    display: block;
+    margin: 0 auto 14px;
+    border-radius: 24px;
+    background: #1E1F29;
+  }
+  .card-num { font-size: 11px; color: #44475A; margin-bottom: 4px; }
+  .card-title { font-size: 14px; font-weight: 600; color: #F8F8F2; margin-bottom: 6px; }
+  .card-concept { font-size: 12px; color: #6272A4; margin-bottom: 8px; line-height: 1.5; }
+  .palette { display: flex; gap: 5px; flex-wrap: wrap; }
+  .swatch {
+    width: 18px; height: 18px; border-radius: 4px;
+    border: 1px solid rgba(255,255,255,0.1);
+    display: inline-block;
+  }
+  .tag {
+    display: inline-block;
+    font-size: 10px;
+    padding: 2px 7px;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+  .tag-literal   { background: #1A2D1A; color: #50FA7B; }
+  .tag-metaphor  { background: #2D1A44; color: #BD93F9; }
+  .tag-hybrid    { background: #44252A; color: #FF79C6; }
+</style>
+</head>
+<body>
+<h1>Mark.View — 아이콘 후보</h1>
+<p class="subtitle">Candidate_20260321_1423 &nbsp;|&nbsp; Markdown 렌더러 — 6가지 CSS 테마(Dark/Nord/Dracula/Sepia/Light/GitHub)</p>
+
+<div class="grid">
+
+  <div class="card">
+    <img src="icon_01.svg" alt="icon_01">
+    <div class="card-num">icon_01</div>
+    <span class="tag tag-literal">literal</span>
+    <div class="card-title">MD 렌더링 문서 뷰</div>
+    <div class="card-concept">구성: 레이어드<br>다크 테마로 렌더링된 MD 문서 UI + 하단 6 테마 스와치</div>
+    <div class="palette">
+      <span class="swatch" style="background:#1E1E2E"></span>
+      <span class="swatch" style="background:#89B4FA"></span>
+      <span class="swatch" style="background:#CBA6F7"></span>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="icon_02.svg" alt="icon_02">
+    <div class="card-num">icon_02</div>
+    <span class="tag tag-literal">literal</span>
+    <div class="card-title"># ## ### 헤더 스택</div>
+    <div class="card-concept">구성: 중앙심볼<br>H1→H4 헤더 기호가 크기·밝기로 계층을 표현하는 MD 심볼</div>
+    <div class="palette">
+      <span class="swatch" style="background:#0A1628"></span>
+      <span class="swatch" style="background:#1E88E5"></span>
+      <span class="swatch" style="background:#90CAF9"></span>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="icon_03.svg" alt="icon_03">
+    <div class="card-num">icon_03</div>
+    <span class="tag tag-metaphor">metaphor</span>
+    <div class="card-title">MD → 렌더링 변환</div>
+    <div class="card-concept">구성: 대각선/동적<br>왼쪽 Raw MD 코드가 화살표를 거쳐 렌더링 결과로 변환</div>
+    <div class="palette">
+      <span class="swatch" style="background:#003838"></span>
+      <span class="swatch" style="background:#26A69A"></span>
+      <span class="swatch" style="background:#80CBC4"></span>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="icon_04.svg" alt="icon_04">
+    <div class="card-num">icon_04</div>
+    <span class="tag tag-metaphor">metaphor</span>
+    <div class="card-title">6 테마 팔레트 원형</div>
+    <div class="card-concept">구성: 기하학추상<br>6개 테마가 정육각형으로 배열, 중앙의 M↓ 로고를 둘러쌈</div>
+    <div class="palette">
+      <span class="swatch" style="background:#0E0E1A"></span>
+      <span class="swatch" style="background:#FF79C6"></span>
+      <span class="swatch" style="background:#88C0D0"></span>
+      <span class="swatch" style="background:#F4ECD8"></span>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="icon_05.svg" alt="icon_05">
+    <div class="card-num">icon_05</div>
+    <span class="tag tag-hybrid">hybrid</span>
+    <div class="card-title">Dracula 테마 코드뷰</div>
+    <div class="card-concept">구성: 공간/장면<br>Dracula 보라/핑크로 렌더링된 문서 — 코드블록+체크리스트</div>
+    <div class="palette">
+      <span class="swatch" style="background:#282A36"></span>
+      <span class="swatch" style="background:#FF79C6"></span>
+      <span class="swatch" style="background:#50FA7B"></span>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="icon_06.svg" alt="icon_06">
+    <div class="card-num">icon_06</div>
+    <span class="tag tag-hybrid">hybrid</span>
+    <div class="card-title">펼쳐진 책 — Sepia</div>
+    <div class="card-concept">구성: 실루엣/캐릭터<br>왼쪽(Raw MD) ← 책 ← 오른쪽(렌더링)이 펼쳐진 Sepia 책 형태</div>
+    <div class="palette">
+      <span class="swatch" style="background:#F4ECD8"></span>
+      <span class="swatch" style="background:#C8A870"></span>
+      <span class="swatch" style="background:#7C4B00"></span>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

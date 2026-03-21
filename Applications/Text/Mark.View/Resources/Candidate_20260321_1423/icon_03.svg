@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg3d" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#004D4D"/>
+      <stop offset="100%" stop-color="#003838"/>
+    </linearGradient>
+    <clipPath id="c3d"><rect width="1024" height="1024" rx="190"/></clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg3d)"/>
+  <circle cx="200" cy="820" r="280" fill="#00897B" opacity="0.12" clip-path="url(#c3d)"/>
+
+  <!-- Layer 2: MD 기호 → 렌더링 변환 흐름 (대각선/동적) -->
+
+  <!-- 왼쪽: Raw Markdown -->
+  <rect x="155" y="240" width="310" height="440" rx="16" fill="#002A2A"/>
+  <rect x="155" y="240" width="310" height="440" rx="16" fill="none" stroke="#00695C" stroke-width="3"/>
+  <text x="178" y="280" font-family="Segoe UI,sans-serif" font-size="16" fill="#444444">.md  (raw)</text>
+
+  <text x="178" y="322" font-family="Consolas,monospace" font-size="24" fill="#4DB6AC"># Title</text>
+  <text x="178" y="358" font-family="Consolas,monospace" font-size="20" fill="#4DB6AC">## Section</text>
+  <text x="178" y="392" font-family="Consolas,monospace" font-size="18" fill="#00897B">Normal text here.</text>
+  <text x="178" y="428" font-family="Consolas,monospace" font-size="18" fill="#00897B">**bold** and _italic_</text>
+  <text x="178" y="464" font-family="Consolas,monospace" font-size="16" fill="#006858">```code block```</text>
+  <text x="178" y="498" font-family="Consolas,monospace" font-size="16" fill="#006858">- item one</text>
+  <text x="178" y="528" font-family="Consolas,monospace" font-size="16" fill="#006858">- item two</text>
+  <text x="178" y="558" font-family="Consolas,monospace" font-size="16" fill="#005548">&gt; blockquote</text>
+  <text x="178" y="588" font-family="Consolas,monospace" font-size="16" fill="#005548">| col | val |</text>
+  <text x="178" y="618" font-family="Consolas,monospace" font-size="16" fill="#004D40">[ ] task done</text>
+  <text x="178" y="648" font-family="Consolas,monospace" font-size="16" fill="#004040">[link](url)</text>
+
+  <!-- 중간 화살표 (굵고 눈에 띄게) -->
+  <path d="M 475,460 L 570,460" stroke="#26A69A" stroke-width="14" stroke-linecap="round"/>
+  <polygon points="550,440 600,460 550,480" fill="#26A69A"/>
+
+  <!-- 오른쪽: 렌더링 결과 -->
+  <rect x="590" y="240" width="310" height="440" rx="16" fill="#002A2A"/>
+  <rect x="590" y="240" width="310" height="440" rx="16" fill="none" stroke="#00897B" stroke-width="3"/>
+  <text x="613" y="280" font-family="Segoe UI,sans-serif" font-size="16" fill="#444444">rendered</text>
+
+  <!-- 렌더링된 H1 (파란색 큰 제목) -->
+  <text x="613" y="322" font-family="Segoe UI,sans-serif" font-size="26" font-weight="700" fill="#80CBC4">Title</text>
+  <line x1="613" y1="328" x2="876" y2="328" stroke="#00695C" stroke-width="2"/>
+
+  <!-- H2 -->
+  <text x="613" y="358" font-family="Segoe UI,sans-serif" font-size="20" font-weight="600" fill="#4DB6AC">Section</text>
+  <line x1="613" y1="364" x2="800" y2="364" stroke="#004D4D" stroke-width="1"/>
+
+  <!-- 본문 -->
+  <text x="613" y="392" font-family="Segoe UI,sans-serif" font-size="15" fill="#B2DFDB">Normal text here.</text>
+  <!-- bold + italic -->
+  <text x="613" y="422" font-family="Segoe UI,sans-serif" font-size="15" font-weight="bold" fill="#E0F2F1">bold</text>
+  <text x="650" y="422" font-family="Segoe UI,sans-serif" font-size="15" fill="#B2DFDB"> and </text>
+  <text x="692" y="422" font-family="Segoe UI,sans-serif" font-size="15" font-style="italic" fill="#E0F2F1">italic</text>
+
+  <!-- 코드블록 -->
+  <rect x="613" y="430" width="264" height="32" rx="6" fill="#001A1A"/>
+  <text x="628" y="450" font-family="Consolas,monospace" font-size="14" fill="#80CBC4">code block</text>
+
+  <!-- 리스트 -->
+  <circle cx="623" cy="480" r="4" fill="#4DB6AC"/>
+  <text x="636" y="485" font-family="Segoe UI,sans-serif" font-size="14" fill="#B2DFDB">item one</text>
+  <circle cx="623" cy="504" r="4" fill="#4DB6AC"/>
+  <text x="636" y="509" font-family="Segoe UI,sans-serif" font-size="14" fill="#B2DFDB">item two</text>
+
+  <!-- 인용구 -->
+  <rect x="613" y="516" width="6" height="36" rx="3" fill="#26A69A"/>
+  <text x="628" y="536" font-family="Segoe UI,sans-serif" font-size="13" fill="#80CBC4">blockquote</text>
+
+  <!-- 테이블 -->
+  <rect x="613" y="558" width="264" height="24" rx="4" fill="#003333"/>
+  <text x="620" y="574" font-family="Consolas,monospace" font-size="12" fill="#4DB6AC">col</text>
+  <line x1="672" y1="558" x2="672" y2="582" stroke="#004D4D" stroke-width="1"/>
+  <text x="680" y="574" font-family="Consolas,monospace" font-size="12" fill="#4DB6AC">val</text>
+
+  <!-- Layer 3: 제목 배지 -->
+  <rect x="320" y="750" width="384" height="52" rx="14" fill="#002222" opacity="0.9"/>
+  <text x="512" y="782" text-anchor="middle" font-family="Consolas,monospace" font-size="26" fill="#4DB6AC">md → render</text>
+</svg>

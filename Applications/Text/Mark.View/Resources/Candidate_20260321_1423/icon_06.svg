@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg6d" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#F4ECD8"/>
+      <stop offset="100%" stop-color="#EDE0C4"/>
+    </linearGradient>
+    <clipPath id="c6d"><rect width="1024" height="1024" rx="190"/></clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg6d)"/>
+  <circle cx="820" cy="820" r="300" fill="#C8B89A" opacity="0.25" clip-path="url(#c6d)"/>
+  <circle cx="200" cy="200" r="200" fill="#D4B896" opacity="0.2" clip-path="url(#c6d)"/>
+
+  <!-- Layer 2: 펼쳐진 책 실루엣 안에 MD 기호들 (실루엣/hybrid) -->
+  <!-- 책 왼쪽 페이지 -->
+  <rect x="165" y="245" width="310" height="490" rx="8" fill="#FAF3E8"/>
+  <rect x="165" y="245" width="310" height="490" rx="8" fill="none" stroke="#A87040" stroke-width="3"/>
+
+  <!-- 책 오른쪽 페이지 -->
+  <rect x="489" y="245" width="310" height="490" rx="8" fill="#FAF3E8"/>
+  <rect x="489" y="245" width="310" height="490" rx="8" fill="none" stroke="#A87040" stroke-width="3"/>
+
+  <!-- 책 가운데 바인딩 -->
+  <rect x="469" y="240" width="36" height="500" rx="4" fill="#C8A870"/>
+  <line x1="487" y1="240" x2="487" y2="740" stroke="#A87040" stroke-width="3" opacity="0.5"/>
+
+  <!-- 왼쪽 페이지: Raw MD -->
+  <text x="186" y="306" font-family="Consolas,monospace" font-size="20" fill="#9B6B3A"># Chapter 1</text>
+  <line x1="186" y1="314" x2="458" y2="314" stroke="#C8B89A" stroke-width="1.5"/>
+  <text x="186" y="344" font-family="Consolas,monospace" font-size="16" fill="#806040">## Introduction</text>
+  <text x="186" y="372" font-family="Consolas,monospace" font-size="14" fill="#9B7050">Normal paragraph text.</text>
+  <text x="186" y="398" font-family="Consolas,monospace" font-size="14" fill="#9B7050">**bold** and _italic_</text>
+
+  <!-- 코드블록 힌트 -->
+  <rect x="186" y="412" width="260" height="58" rx="6" fill="#EDE0C4" stroke="#C8B89A" stroke-width="1"/>
+  <text x="202" y="436" font-family="Consolas,monospace" font-size="13" fill="#7C4B00">```python</text>
+  <text x="202" y="458" font-family="Consolas,monospace" font-size="13" fill="#9B6B3A">print("hello")</text>
+
+  <text x="186" y="494" font-family="Consolas,monospace" font-size="14" fill="#8B5E40">- Item one</text>
+  <text x="186" y="518" font-family="Consolas,monospace" font-size="14" fill="#8B5E40">- Item two</text>
+  <text x="186" y="544" font-family="Consolas,monospace" font-size="13" fill="#A87040">&gt; A quote line.</text>
+
+  <!-- 페이지 라인들 (배경) -->
+  <line x1="186" y1="560" x2="456" y2="560" stroke="#EDE0C4" stroke-width="1"/>
+  <line x1="186" y1="582" x2="400" y2="582" stroke="#EDE0C4" stroke-width="1"/>
+  <line x1="186" y1="604" x2="440" y2="604" stroke="#EDE0C4" stroke-width="1"/>
+  <line x1="186" y1="626" x2="380" y2="626" stroke="#EDE0C4" stroke-width="1"/>
+  <line x1="186" y1="648" x2="440" y2="648" stroke="#EDE0C4" stroke-width="1"/>
+  <line x1="186" y1="670" x2="430" y2="670" stroke="#EDE0C4" stroke-width="1"/>
+  <line x1="186" y1="692" x2="380" y2="692" stroke="#EDE0C4" stroke-width="1"/>
+
+  <!-- 오른쪽 페이지: 렌더링 결과 -->
+  <text x="510" y="306" font-family="Segoe UI,sans-serif" font-size="22" font-weight="700" fill="#7C4B00">Chapter 1</text>
+  <line x1="510" y1="314" x2="778" y2="314" stroke="#A87040" stroke-width="2"/>
+
+  <text x="510" y="344" font-family="Segoe UI,sans-serif" font-size="17" font-weight="600" fill="#6B3C1A">Introduction</text>
+  <line x1="510" y1="350" x2="720" y2="350" stroke="#C8B89A" stroke-width="1"/>
+
+  <text x="510" y="376" font-family="Segoe UI,sans-serif" font-size="14" fill="#433422">Normal paragraph text.</text>
+  <text x="510" y="400" font-family="Segoe UI,sans-serif" font-size="14" font-weight="bold" fill="#433422">bold</text>
+  <text x="548" y="400" font-family="Segoe UI,sans-serif" font-size="14" fill="#433422"> and </text>
+  <text x="588" y="400" font-family="Segoe UI,sans-serif" font-size="14" font-style="italic" fill="#433422">italic</text>
+
+  <rect x="510" y="412" width="256" height="58" rx="6" fill="#EDE0C4" stroke="#C8B89A" stroke-width="1"/>
+  <text x="526" y="436" font-family="Consolas,monospace" font-size="13" fill="#9B3B00">python</text>
+  <text x="526" y="458" font-family="Consolas,monospace" font-size="13" fill="#6B3C1A">print("hello")</text>
+
+  <circle cx="520" cy="488" r="4" fill="#6B3C1A"/>
+  <text x="534" y="493" font-family="Segoe UI,sans-serif" font-size="14" fill="#433422">Item one</text>
+  <circle cx="520" cy="512" r="4" fill="#6B3C1A"/>
+  <text x="534" y="517" font-family="Segoe UI,sans-serif" font-size="14" fill="#433422">Item two</text>
+
+  <rect x="510" y="524" width="6" height="36" rx="3" fill="#A87040"/>
+  <text x="528" y="545" font-family="Segoe UI,sans-serif" font-size="13" fill="#806040">A quote line.</text>
+
+  <!-- 오른쪽 페이지 라인들 -->
+  <line x1="510" y1="572" x2="778" y2="572" stroke="#EDE0C4" stroke-width="1"/>
+  <line x1="510" y1="594" x2="720" y2="594" stroke="#EDE0C4" stroke-width="1"/>
+  <line x1="510" y1="616" x2="760" y2="616" stroke="#EDE0C4" stroke-width="1"/>
+  <line x1="510" y1="638" x2="700" y2="638" stroke="#EDE0C4" stroke-width="1"/>
+  <line x1="510" y1="660" x2="750" y2="660" stroke="#EDE0C4" stroke-width="1"/>
+  <line x1="510" y1="682" x2="720" y2="682" stroke="#EDE0C4" stroke-width="1"/>
+
+  <!-- 책 그림자 -->
+  <rect x="165" y="730" width="634" height="10" rx="5" fill="#C8B89A" opacity="0.5"/>
+
+  <!-- Layer 3: 하단 레이블 -->
+  <rect x="320" y="770" width="384" height="52" rx="14" fill="#C8B89A" opacity="0.5"/>
+  <text x="512" y="802" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="24" font-weight="600" fill="#7C4B00">Mark.View — Sepia</text>
+</svg>

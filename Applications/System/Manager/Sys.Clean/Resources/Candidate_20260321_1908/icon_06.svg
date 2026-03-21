@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <clipPath id="c6-clip">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+    <linearGradient id="c6-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E8F8E0"/>
+      <stop offset="100%" stop-color="#B8EAA0"/>
+    </linearGradient>
+    <linearGradient id="c6-wipe" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2ECC71"/>
+      <stop offset="100%" stop-color="#1A9E52"/>
+    </linearGradient>
+  </defs>
+  <g clip-path="url(#c6-clip)">
+    <!-- Background: fresh lime/mint -->
+    <rect width="1024" height="1024" fill="url(#c6-bg)"/>
+
+    <!-- Dirty surface (upper-right, smudged) -->
+    <rect x="400" y="180" width="440" height="440" rx="20" fill="#C8D0B8" opacity="0.60"/>
+    <rect x="430" y="210" width="160" height="30" rx="6" fill="#B0BAA8" opacity="0.7"/>
+    <rect x="430" y="260" width="260" height="22" rx="5" fill="#B0BAA8" opacity="0.55"/>
+    <rect x="430" y="300" width="200" height="22" rx="5" fill="#B0BAA8" opacity="0.45"/>
+    <rect x="430" y="340" width="300" height="22" rx="5" fill="#B0BAA8" opacity="0.40"/>
+    <rect x="430" y="380" width="180" height="22" rx="5" fill="#B0BAA8" opacity="0.50"/>
+
+    <!-- Clean surface (lower-left, revealed) -->
+    <rect x="184" y="404" width="440" height="440" rx="20" fill="#FFFFFF" opacity="0.90"/>
+    <!-- Clean surface dots (subtle) -->
+    <circle cx="280" cy="520" r="6" fill="#2ECC71" opacity="0.25"/>
+    <circle cx="380" cy="580" r="5" fill="#2ECC71" opacity="0.20"/>
+    <circle cx="460" cy="660" r="6" fill="#2ECC71" opacity="0.22"/>
+    <circle cx="320" cy="740" r="5" fill="#2ECC71" opacity="0.18"/>
+
+    <!-- Wiper squeegee (diagonal blade) -->
+    <rect x="290" y="260" width="500" height="60" rx="18"
+          fill="url(#c6-wipe)"
+          transform="rotate(45 512 512)"/>
+    <!-- Wiper handle -->
+    <rect x="605" y="160" width="30" height="180" rx="12" fill="#1A8A48"
+          transform="rotate(45 605 250)"/>
+
+    <!-- Water droplets left behind by wiper -->
+    <ellipse cx="340" cy="450" rx="14" ry="20" fill="#4FC3F7" opacity="0.70" transform="rotate(-20 340 450)"/>
+    <ellipse cx="390" cy="510" rx="10" ry="15" fill="#4FC3F7" opacity="0.55" transform="rotate(-15 390 510)"/>
+    <ellipse cx="280" cy="500" rx="8" ry="12" fill="#4FC3F7" opacity="0.45" transform="rotate(-25 280 500)"/>
+    <ellipse cx="430" cy="570" rx="12" ry="17" fill="#4FC3F7" opacity="0.60" transform="rotate(-18 430 570)"/>
+
+    <!-- Sparkle clean result -->
+    <circle cx="260" cy="760" r="12" fill="#2ECC71" opacity="0.9"/>
+    <line x1="260" y1="742" x2="260" y2="778" stroke="#2ECC71" stroke-width="5" stroke-linecap="round"/>
+    <line x1="242" y1="760" x2="278" y2="760" stroke="#2ECC71" stroke-width="5" stroke-linecap="round"/>
+    <line x1="247" y1="747" x2="273" y2="773" stroke="#2ECC71" stroke-width="4" stroke-linecap="round" opacity="0.7"/>
+    <line x1="273" y1="747" x2="247" y2="773" stroke="#2ECC71" stroke-width="4" stroke-linecap="round" opacity="0.7"/>
+
+    <circle cx="740" cy="760" r="9" fill="#2ECC71" opacity="0.7"/>
+    <line x1="740" y1="746" x2="740" y2="774" stroke="#2ECC71" stroke-width="4" stroke-linecap="round"/>
+    <line x1="726" y1="760" x2="754" y2="760" stroke="#2ECC71" stroke-width="4" stroke-linecap="round"/>
+  </g>
+</svg>

@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <clipPath id="c1-clip">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+    <linearGradient id="c1-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0D7E6E"/>
+      <stop offset="100%" stop-color="#064D43"/>
+    </linearGradient>
+    <linearGradient id="c1-broom" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#A8F0DF"/>
+      <stop offset="100%" stop-color="#4ECDB4"/>
+    </linearGradient>
+  </defs>
+  <g clip-path="url(#c1-clip)">
+    <!-- Background -->
+    <rect width="1024" height="1024" fill="url(#c1-bg)"/>
+    <!-- Subtle grid overlay -->
+    <rect width="1024" height="1024" fill="#0A6B5C" opacity="0.3"/>
+
+    <!-- Broom handle (diagonal, top-right to bottom-center) -->
+    <line x1="720" y1="180" x2="380" y2="680"
+          stroke="#C8F5E8" stroke-width="52" stroke-linecap="round"/>
+    <!-- Broom head band -->
+    <ellipse cx="368" cy="695" rx="90" ry="28"
+             fill="#FFD166" transform="rotate(-45 368 695)"/>
+
+    <!-- Broom bristles (fan shape) -->
+    <line x1="365" y1="690" x2="230" y2="820" stroke="#A8F0DF" stroke-width="22" stroke-linecap="round"/>
+    <line x1="365" y1="690" x2="260" y2="840" stroke="#7FDFCA" stroke-width="22" stroke-linecap="round"/>
+    <line x1="365" y1="690" x2="295" y2="855" stroke="#A8F0DF" stroke-width="22" stroke-linecap="round"/>
+    <line x1="365" y1="690" x2="335" y2="860" stroke="#7FDFCA" stroke-width="22" stroke-linecap="round"/>
+    <line x1="365" y1="690" x2="375" y2="858" stroke="#A8F0DF" stroke-width="22" stroke-linecap="round"/>
+    <line x1="365" y1="690" x2="415" y2="848" stroke="#7FDFCA" stroke-width="22" stroke-linecap="round"/>
+    <line x1="365" y1="690" x2="450" y2="832" stroke="#A8F0DF" stroke-width="22" stroke-linecap="round"/>
+
+    <!-- Dust particles being swept (small rectangles flying left) -->
+    <rect x="195" y="640" width="42" height="20" rx="6" fill="#FFD166" opacity="0.85" transform="rotate(-20 195 640)"/>
+    <rect x="148" y="690" width="30" height="14" rx="5" fill="#FFFFFF" opacity="0.60" transform="rotate(-15 148 690)"/>
+    <rect x="170" y="730" width="36" height="16" rx="5" fill="#FFD166" opacity="0.70" transform="rotate(-25 170 730)"/>
+    <rect x="125" y="755" width="24" height="12" rx="4" fill="#FFFFFF" opacity="0.50" transform="rotate(-10 125 755)"/>
+    <rect x="220" y="770" width="28" height="13" rx="4" fill="#4ECDB4" opacity="0.75" transform="rotate(-30 220 770)"/>
+
+    <!-- Sparkle top-right -->
+    <circle cx="820" cy="220" r="10" fill="#FFD166" opacity="0.9"/>
+    <line x1="820" y1="196" x2="820" y2="244" stroke="#FFD166" stroke-width="5" stroke-linecap="round" opacity="0.8"/>
+    <line x1="796" y1="220" x2="844" y2="220" stroke="#FFD166" stroke-width="5" stroke-linecap="round" opacity="0.8"/>
+    <line x1="803" y1="203" x2="837" y2="237" stroke="#FFD166" stroke-width="4" stroke-linecap="round" opacity="0.6"/>
+    <line x1="837" y1="203" x2="803" y2="237" stroke="#FFD166" stroke-width="4" stroke-linecap="round" opacity="0.6"/>
+  </g>
+</svg>

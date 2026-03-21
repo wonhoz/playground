@@ -102,6 +102,7 @@ call :pub "Serve.Cast"            "Applications\Network\Server\Serve.Cast"      
 :: ── Applications / Photo.Picture ───────────────────────────────────
 call :pub "Color.Grade"           "Applications\Photo.Picture\Color.Grade"                  "Color.Grade.exe"           "Applications\Photo.Picture\Color.Grade"
 call :pub "Comic.Cast"            "Applications\Photo.Picture\Comic.Cast"                   "Comic.Cast.exe"            "Applications\Photo.Picture\Comic.Cast"
+call :pub "Img.Cast"              "Applications\Photo.Picture\Img.Cast"                     "ImgCast.exe"               "Applications\Photo.Picture\Img.Cast"
 call :pub "Img.Compare"           "Applications\Photo.Picture\Img.Compare"                  "Img.Compare.exe"           "Applications\Photo.Picture"
 call :pub "Mosaic.Forge"          "Applications\Photo.Picture\Mosaic.Forge"                 "Mosaic.Forge.exe"          "Applications\Photo.Picture\Mosaic.Forge"
 call :pub "Photo.Video.Organizer" "Applications\Photo.Picture\Photo.Video.Organizer"        "Photo.Video.Organizer.exe" "Applications\Photo.Picture"

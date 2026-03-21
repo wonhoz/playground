@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg04q" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2A0A5A;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#44108A;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="bolt04q" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFE840;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#FFCC00;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FFAA00;stop-opacity:1" />
+    </linearGradient>
+    <filter id="boltglow04q">
+      <feGaussianBlur stdDeviation="16" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg04q)"/>
+  <!-- 배경 방사 빛 -->
+  <circle cx="512" cy="512" r="300" fill="#3A0A7A" opacity="0.5"/>
+  <circle cx="512" cy="512" r="200" fill="#500ACC" opacity="0.3"/>
+  <!-- Layer 2: 번개 볼트 (좌측) -->
+  <path d="M 420 220 L 300 530 L 420 530 L 350 800 L 580 470 L 460 470 Z"
+    fill="url(#bolt04q)" stroke="#FFE840" stroke-width="8" stroke-linejoin="round" filter="url(#boltglow04q)"/>
+  <!-- 번개 내부 코어 밝음 -->
+  <path d="M 410 260 L 315 530 L 415 530 L 360 770 L 566 490 L 450 490 Z"
+    fill="#FFFCE0" opacity="0.3"/>
+  <!-- Layer 2: 등호 기호 (우측) -->
+  <rect x="590" y="410" width="200" height="52" rx="22" fill="#FFFFFF" opacity="0.95"/>
+  <rect x="590" y="490" width="200" height="52" rx="22" fill="#FFFFFF" opacity="0.95"/>
+  <!-- 등호 기호 배경 빛 -->
+  <rect x="582" y="402" width="216" height="68" rx="26" fill="#FFE840" opacity="0.15" filter="url(#boltglow04q)"/>
+  <rect x="582" y="482" width="216" height="68" rx="26" fill="#FFE840" opacity="0.15" filter="url(#boltglow04q)"/>
+  <!-- Layer 3: 장식 원 + 작은 계산 기호들 -->
+  <!-- 상단 작은 별/스파크 -->
+  <circle cx="700" cy="280" r="16" fill="#FFE840" opacity="0.8" filter="url(#boltglow04q)"/>
+  <circle cx="780" cy="360" r="10" fill="#FFAA00" opacity="0.7"/>
+  <circle cx="740" cy="730" r="12" fill="#FFE840" opacity="0.7" filter="url(#boltglow04q)"/>
+  <circle cx="660" cy="800" r="8" fill="#FFCC00" opacity="0.6"/>
+  <!-- 결과 숫자 표시 (번개 아래) -->
+  <rect x="340" y="818" width="344" height="50" rx="16" fill="#1A0040" stroke="#7A3AFF" stroke-width="4"/>
+  <text x="512" y="852" font-family="'Courier New', monospace" font-size="34" fill="#FFE840" text-anchor="middle" font-weight="bold" filter="url(#boltglow04q)">= INSTANT</text>
+</svg>

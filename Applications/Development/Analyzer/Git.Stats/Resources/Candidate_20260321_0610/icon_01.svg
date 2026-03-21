@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <!-- Layer1: 배경 그라데이션 -->
+    <linearGradient id="bg01" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0D1117"/>
+      <stop offset="100%" stop-color="#161B22"/>
+    </linearGradient>
+    <!-- 브랜치 오렌지 그라데이션 -->
+    <linearGradient id="branch1" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#FF6B35"/>
+      <stop offset="100%" stop-color="#FF9500"/>
+    </linearGradient>
+    <linearGradient id="branch2" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#7C3AED"/>
+      <stop offset="100%" stop-color="#A855F7"/>
+    </linearGradient>
+    <linearGradient id="branch3" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#10B981"/>
+      <stop offset="100%" stop-color="#34D399"/>
+    </linearGradient>
+    <!-- 커밋 노드 글로우 -->
+    <filter id="glow01" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="softglow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Layer1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg01)"/>
+
+  <!-- Layer2: Git 브랜치 다이어그램 메인 구조 -->
+  <!-- main 브랜치 (수평 중심선) -->
+  <line x1="220" y1="512" x2="804" y2="512" stroke="url(#branch1)" stroke-width="14" stroke-linecap="round"/>
+
+  <!-- feature 브랜치 1 (위쪽) -->
+  <path d="M 340 512 Q 370 440 420 400" stroke="url(#branch2)" stroke-width="10" stroke-linecap="round" fill="none"/>
+  <line x1="420" y1="400" x2="640" y2="400" stroke="url(#branch2)" stroke-width="10" stroke-linecap="round"/>
+  <path d="M 640 400 Q 690 440 720 512" stroke="url(#branch2)" stroke-width="10" stroke-linecap="round" fill="none"/>
+
+  <!-- feature 브랜치 2 (아래쪽) -->
+  <path d="M 440 512 Q 470 580 510 620" stroke="url(#branch3)" stroke-width="10" stroke-linecap="round" fill="none"/>
+  <line x1="510" y1="620" x2="620" y2="620" stroke="url(#branch3)" stroke-width="10" stroke-linecap="round"/>
+  <path d="M 620 620 Q 660 580 680 512" stroke="url(#branch3)" stroke-width="10" stroke-linecap="round" fill="none"/>
+
+  <!-- Layer3: 커밋 노드들 -->
+  <!-- main 브랜치 커밋들 -->
+  <circle cx="260" cy="512" r="22" fill="#FF6B35" filter="url(#softglow)"/>
+  <circle cx="260" cy="512" r="14" fill="#FFFFFF"/>
+
+  <circle cx="340" cy="512" r="22" fill="#FF9500" filter="url(#softglow)"/>
+  <circle cx="340" cy="512" r="14" fill="#FFFFFF"/>
+
+  <circle cx="440" cy="512" r="22" fill="#FF6B35" filter="url(#softglow)"/>
+  <circle cx="440" cy="512" r="14" fill="#FFFFFF"/>
+
+  <circle cx="560" cy="512" r="22" fill="#FF9500" filter="url(#softglow)"/>
+  <circle cx="560" cy="512" r="14" fill="#FFFFFF"/>
+
+  <circle cx="680" cy="512" r="28" fill="#FF6B35" filter="url(#glow01)"/>
+  <circle cx="680" cy="512" r="18" fill="#FFD700"/>
+  <circle cx="680" cy="512" r="8" fill="#FFFFFF"/>
+
+  <circle cx="764" cy="512" r="22" fill="#FF9500" filter="url(#softglow)"/>
+  <circle cx="764" cy="512" r="14" fill="#FFFFFF"/>
+
+  <!-- feature 브랜치 1 커밋들 -->
+  <circle cx="420" cy="400" r="18" fill="#7C3AED" filter="url(#softglow)"/>
+  <circle cx="420" cy="400" r="11" fill="#FFFFFF"/>
+
+  <circle cx="530" cy="400" r="18" fill="#A855F7" filter="url(#softglow)"/>
+  <circle cx="530" cy="400" r="11" fill="#FFFFFF"/>
+
+  <circle cx="640" cy="400" r="18" fill="#7C3AED" filter="url(#softglow)"/>
+  <circle cx="640" cy="400" r="11" fill="#FFFFFF"/>
+
+  <!-- feature 브랜치 2 커밋들 -->
+  <circle cx="510" cy="620" r="18" fill="#10B981" filter="url(#softglow)"/>
+  <circle cx="510" cy="620" r="11" fill="#FFFFFF"/>
+
+  <circle cx="620" cy="620" r="18" fill="#34D399" filter="url(#softglow)"/>
+  <circle cx="620" cy="620" r="11" fill="#FFFFFF"/>
+
+  <!-- HEAD 태그 표시 -->
+  <rect x="740" y="458" width="88" height="30" rx="6" fill="#FF6B35" opacity="0.9"/>
+  <text x="784" y="478" font-family="monospace" font-size="20" font-weight="bold" fill="#FFFFFF" text-anchor="middle">HEAD</text>
+
+  <!-- 브랜치 라벨들 -->
+  <text x="220" y="490" font-family="monospace" font-size="22" fill="#FF9500" opacity="0.8">main</text>
+  <text x="380" y="378" font-family="monospace" font-size="20" fill="#A855F7" opacity="0.8">feature</text>
+  <text x="462" y="660" font-family="monospace" font-size="20" fill="#34D399" opacity="0.8">hotfix</text>
+</svg>

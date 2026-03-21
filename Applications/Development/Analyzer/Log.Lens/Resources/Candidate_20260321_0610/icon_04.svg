@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg_ll04" cx="50%" cy="50%" r="55%">
+      <stop offset="0%" stop-color="#5B2D8A"/>
+      <stop offset="60%" stop-color="#3D1A6E"/>
+      <stop offset="100%" stop-color="#1A0040"/>
+    </radialGradient>
+    <linearGradient id="funnelGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="40%" stop-color="#E8E0FF"/>
+      <stop offset="100%" stop-color="#C8B8FF"/>
+    </linearGradient>
+    <linearGradient id="funnelSide" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#9A80FF"/>
+      <stop offset="100%" stop-color="#7A60FF"/>
+    </linearGradient>
+    <filter id="shadow_ll04">
+      <feDropShadow dx="0" dy="10" stdDeviation="20" flood-color="#000" flood-opacity="0.6"/>
+    </filter>
+    <filter id="glow_ll04">
+      <feGaussianBlur stdDeviation="12" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="dot_glow">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg_ll04)"/>
+  <!-- 별 파티클 -->
+  <circle cx="260" cy="280" r="3" fill="#B090FF" fill-opacity="0.5"/>
+  <circle cx="780" cy="260" r="4" fill="#B090FF" fill-opacity="0.4"/>
+  <circle cx="820" cy="450" r="2" fill="#B090FF" fill-opacity="0.5"/>
+  <circle cx="220" cy="650" r="3" fill="#B090FF" fill-opacity="0.4"/>
+  <circle cx="810" cy="720" r="4" fill="#B090FF" fill-opacity="0.3"/>
+  <circle cx="380" cy="820" r="2" fill="#B090FF" fill-opacity="0.4"/>
+
+  <!-- 깔때기 위쪽 입력 도트들 (다양한 색상) -->
+  <!-- 행 1 입력 점들 -->
+  <circle cx="280" cy="250" r="24" fill="#FF5555" filter="url(#dot_glow)"/>
+  <circle cx="360" cy="250" r="22" fill="#22CC22" filter="url(#dot_glow)"/>
+  <circle cx="440" cy="250" r="24" fill="#FFAA22" filter="url(#dot_glow)"/>
+  <circle cx="520" cy="250" r="20" fill="#FF5555" filter="url(#dot_glow)"/>
+  <circle cx="600" cy="250" r="24" fill="#22CC22" filter="url(#dot_glow)"/>
+  <circle cx="680" cy="250" r="22" fill="#4488FF" filter="url(#dot_glow)"/>
+  <circle cx="760" cy="250" r="24" fill="#FFAA22" filter="url(#dot_glow)"/>
+
+  <!-- 행 2 -->
+  <circle cx="310" cy="300" r="18" fill="#22CC22" fill-opacity="0.7"/>
+  <circle cx="390" cy="300" r="20" fill="#FF5555" fill-opacity="0.7"/>
+  <circle cx="470" cy="300" r="16" fill="#4488FF" fill-opacity="0.7"/>
+  <circle cx="550" cy="300" r="18" fill="#22CC22" fill-opacity="0.7"/>
+  <circle cx="630" cy="300" r="20" fill="#FFAA22" fill-opacity="0.7"/>
+  <circle cx="710" cy="300" r="18" fill="#FF5555" fill-opacity="0.7"/>
+
+  <!-- 행 3 (점점 수렴) -->
+  <circle cx="350" cy="348" r="15" fill="#4488FF" fill-opacity="0.5"/>
+  <circle cx="430" cy="348" r="16" fill="#FFAA22" fill-opacity="0.6"/>
+  <circle cx="512" cy="348" r="15" fill="#FF5555" fill-opacity="0.5"/>
+  <circle cx="592" cy="348" r="16" fill="#22CC22" fill-opacity="0.6"/>
+  <circle cx="672" cy="348" r="15" fill="#4488FF" fill-opacity="0.5"/>
+
+  <!-- Layer 2: 메인 오브젝트 — 깔때기 -->
+  <polygon points="220,370 804,370 620,560 512,560" fill="url(#funnelGrad)" fill-opacity="0.85" filter="url(#shadow_ll04)"/>
+  <polygon points="804,370 620,560 512,560 728,370" fill="#C8B8FF" fill-opacity="0.5"/>
+  <!-- 깔때기 몸통 (아래 좁아지는 부분) -->
+  <polygon points="404,560 620,560 570,760 454,760" fill="url(#funnelGrad)" fill-opacity="0.9" filter="url(#shadow_ll04)"/>
+  <polygon points="620,560 570,760 512,760 568,560" fill="#C0A8FF" fill-opacity="0.5"/>
+
+  <!-- 깔때기 테두리 강조 -->
+  <polygon points="220,370 804,370 620,560 404,560" fill="none" stroke="#9A80FF" stroke-width="6"/>
+  <polygon points="404,560 620,560 570,760 454,760" fill="none" stroke="#9A80FF" stroke-width="6"/>
+
+  <!-- 깔때기 안쪽 그라데이션 효과 -->
+  <polygon points="280,378 744,378 590,540 434,540" fill="url(#funnelSide)" fill-opacity="0.2"/>
+
+  <!-- Layer 3: 출력 점들 (필터링된 결과) -->
+  <!-- 출력 파이프 -->
+  <rect x="454" y="760" width="116" height="80" rx="10" fill="#7A60FF" fill-opacity="0.6"/>
+
+  <!-- 출력 점들 (ERROR만 통과) -->
+  <circle cx="512" cy="870" r="30" fill="#FF5555" filter="url(#glow_ll04)"/>
+  <circle cx="460" cy="920" r="22" fill="#FF5555" fill-opacity="0.7" filter="url(#glow_ll04)"/>
+  <circle cx="564" cy="920" r="22" fill="#FFAA22" fill-opacity="0.7" filter="url(#glow_ll04)"/>
+
+  <!-- 필터 라벨 -->
+  <rect x="300" y="590" width="200" height="38" rx="14" fill="#3D1A6E" fill-opacity="0.8" stroke="#9A80FF" stroke-width="2"/>
+  <text x="400" y="614" font-size="22" text-anchor="middle" fill="#C8B8FF" font-family="monospace">FILTER</text>
+
+  <!-- 위쪽 ALL 라벨 -->
+  <rect x="524" y="238" width="120" height="32" rx="10" fill="#3D1A6E" fill-opacity="0.7"/>
+  <text x="584" y="260" font-size="20" text-anchor="middle" fill="#B090FF" font-family="monospace">ALL</text>
+
+  <!-- 아래쪽 OUT 라벨 -->
+  <rect x="452" y="840" width="120" height="32" rx="10" fill="#3D1A6E" fill-opacity="0.7"/>
+  <text x="512" y="862" font-size="20" text-anchor="middle" fill="#FF9999" font-family="monospace">ERRORS</text>
+</svg>

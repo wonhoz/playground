@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg01" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#87CEEB;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#4A9FCC;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="dome01" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFFFFF;stop-opacity:0.95" />
+      <stop offset="100%" style="stop-color:#B8E4F9;stop-opacity:0.6" />
+    </linearGradient>
+    <linearGradient id="file01" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1A6BB5;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0D4A8A;stop-opacity:1" />
+    </linearGradient>
+    <filter id="glow01">
+      <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg01)"/>
+  <!-- Layer 2: 유리 돔 -->
+  <ellipse cx="512" cy="640" rx="260" ry="30" fill="#5AAFD0" opacity="0.5"/>
+  <path d="M260 640 Q260 340 512 320 Q764 340 764 640 Z" fill="url(#dome01)" stroke="#FFFFFF" stroke-width="10" opacity="0.9"/>
+  <ellipse cx="512" cy="640" rx="252" ry="26" fill="none" stroke="#FFFFFF" stroke-width="8" opacity="0.7"/>
+  <!-- 돔 하이라이트 -->
+  <path d="M310 550 Q350 380 480 350" fill="none" stroke="#FFFFFF" stroke-width="16" stroke-linecap="round" opacity="0.6"/>
+  <!-- Layer 3: 파일 아이콘 (돔 안) -->
+  <rect x="432" y="430" width="160" height="200" rx="12" fill="url(#file01)" stroke="#6BCFF6" stroke-width="6"/>
+  <path d="M432 430 L432 480 L512 480 Z" fill="#6BCFF6" opacity="0.8"/>
+  <line x1="466" y1="510" x2="558" y2="510" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round" opacity="0.9"/>
+  <line x1="466" y1="540" x2="558" y2="540" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round" opacity="0.9"/>
+  <line x1="466" y1="570" x2="520" y2="570" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round" opacity="0.7"/>
+  <!-- EXE 라벨 -->
+  <rect x="446" y="595" width="112" height="30" rx="6" fill="#6BCFF6" opacity="0.9"/>
+  <text x="502" y="617" font-family="monospace" font-size="20" fill="#0D4A8A" text-anchor="middle" font-weight="bold">.EXE</text>
+  <!-- 돔 테두리 광택 -->
+  <path d="M260 640 Q260 340 512 320 Q764 340 764 640" fill="none" stroke="#E0F4FF" stroke-width="4" opacity="0.5"/>
+</svg>

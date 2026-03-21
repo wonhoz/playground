@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <clipPath id="lm-bg-clip-05">
+      <rect width="1024" height="1024" rx="160"/>
+    </clipPath>
+    <linearGradient id="lm-bg-05" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0B1020"/>
+      <stop offset="100%" stop-color="#111828"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="160" fill="url(#lm-bg-05)"/>
+
+  <g clip-path="url(#lm-bg-clip-05)">
+    <!-- 시간축 (수평, 중앙) -->
+    <line x1="210" y1="512" x2="814" y2="512" stroke="#FFFFFF" stroke-width="52" stroke-linecap="round"/>
+    <!-- 화살표 끝 -->
+    <polygon points="814,512 764,472 764,552" fill="#FFFFFF"/>
+
+    <!-- 타임 틱 마크들 -->
+    <line x1="290" y1="486" x2="290" y2="538" stroke="#FFFFFF" stroke-width="28" stroke-linecap="round"/>
+    <line x1="400" y1="486" x2="400" y2="538" stroke="#FFFFFF" stroke-width="28" stroke-linecap="round"/>
+    <line x1="510" y1="480" x2="510" y2="544" stroke="#FFFFFF" stroke-width="32" stroke-linecap="round"/>
+    <line x1="620" y1="486" x2="620" y2="538" stroke="#FFFFFF" stroke-width="28" stroke-linecap="round"/>
+    <line x1="720" y1="486" x2="720" y2="538" stroke="#FFFFFF" stroke-width="28" stroke-linecap="round"/>
+
+    <!-- 이벤트 점들 (컬러, 타임라인 위아래) -->
+    <!-- 위쪽 이벤트들 -->
+    <circle cx="290" cy="400" r="38" fill="#FF6B35"/>
+    <line x1="290" y1="438" x2="290" y2="486" stroke="#FF6B35" stroke-width="24" stroke-dasharray="12,10"/>
+
+    <circle cx="370" cy="330" r="32" fill="#00D4FF"/>
+    <line x1="370" y1="362" x2="370" y2="486" stroke="#00D4FF" stroke-width="22" stroke-dasharray="12,10"/>
+
+    <circle cx="510" cy="370" r="42" fill="#4ADE80"/>
+    <line x1="510" y1="412" x2="510" y2="480" stroke="#4ADE80" stroke-width="26" stroke-dasharray="12,10"/>
+
+    <circle cx="620" cy="310" r="36" fill="#F472B6"/>
+    <line x1="620" y1="346" x2="620" y2="486" stroke="#F472B6" stroke-width="24" stroke-dasharray="12,10"/>
+
+    <!-- 아래쪽 이벤트들 -->
+    <circle cx="340" cy="640" r="34" fill="#FFD700"/>
+    <line x1="340" y1="538" x2="340" y2="606" stroke="#FFD700" stroke-width="22" stroke-dasharray="12,10"/>
+
+    <circle cx="455" cy="680" r="36" fill="#A78BFA"/>
+    <line x1="455" y1="538" x2="455" y2="644" stroke="#A78BFA" stroke-width="22" stroke-dasharray="12,10"/>
+
+    <circle cx="680" cy="640" r="34" fill="#00D4FF"/>
+    <line x1="680" y1="538" x2="680" y2="606" stroke="#00D4FF" stroke-width="22" stroke-dasharray="12,10"/>
+  </g>
+</svg>

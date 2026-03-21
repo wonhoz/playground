@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <clipPath id="lm-bg-clip-01">
+      <rect width="1024" height="1024" rx="160"/>
+    </clipPath>
+    <linearGradient id="lm-bg-01" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#121218"/>
+      <stop offset="100%" stop-color="#1C1C28"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="160" fill="url(#lm-bg-01)"/>
+
+  <g clip-path="url(#lm-bg-clip-01)">
+    <!-- 4개 색 스트림이 오른쪽 합류점으로 수렴 -->
+
+    <!-- 오렌지 스트림 -->
+    <path d="M210 270 C360 270 430 440 560 490" fill="none" stroke="#FF6B35" stroke-width="62" stroke-linecap="round"/>
+    <!-- 시안 스트림 -->
+    <path d="M210 400 C340 400 440 460 560 490" fill="none" stroke="#00D4FF" stroke-width="62" stroke-linecap="round"/>
+    <!-- 그린 스트림 -->
+    <path d="M210 590 C340 590 440 530 560 490" fill="none" stroke="#4ADE80" stroke-width="62" stroke-linecap="round"/>
+    <!-- 핑크 스트림 -->
+    <path d="M210 720 C360 720 430 540 560 490" fill="none" stroke="#F472B6" stroke-width="62" stroke-linecap="round"/>
+
+    <!-- 합류 후 메인 화이트 스트림 -->
+    <path d="M560 490 L820 490" fill="none" stroke="#FFFFFF" stroke-width="72" stroke-linecap="round"/>
+
+    <!-- 합류점 -->
+    <circle cx="560" cy="490" r="54" fill="#FFFFFF"/>
+    <circle cx="560" cy="490" r="30" fill="#1C1C28"/>
+
+    <!-- 끝점 화살표 -->
+    <polygon points="820,490 770,450 770,530" fill="#FFFFFF"/>
+
+    <!-- 각 스트림 시작점 -->
+    <circle cx="210" cy="270" r="30" fill="#FF6B35"/>
+    <circle cx="210" cy="400" r="30" fill="#00D4FF"/>
+    <circle cx="210" cy="590" r="30" fill="#4ADE80"/>
+    <circle cx="210" cy="720" r="30" fill="#F472B6"/>
+  </g>
+</svg>

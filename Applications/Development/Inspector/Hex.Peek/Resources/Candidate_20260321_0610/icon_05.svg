@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg05h" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0A2A2A;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#103838;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="fileA05" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1A6A6A;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0A4040;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="fileB05" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2A8A8A;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1A6060;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="diffhl" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#00FFCC;stop-opacity:0.0" />
+      <stop offset="50%" style="stop-color:#00FFCC;stop-opacity:0.35" />
+      <stop offset="100%" style="stop-color:#00FFCC;stop-opacity:0.0" />
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg05h)"/>
+  <!-- Layer 2: 파일 A (왼쪽) -->
+  <rect x="212" y="260" width="228" height="504" rx="16" fill="url(#fileA05)" stroke="#1ABEAA" stroke-width="8"/>
+  <!-- 파일 A 헤더 -->
+  <rect x="212" y="260" width="228" height="48" rx="16" fill="#0A3A3A"/>
+  <rect x="212" y="280" width="228" height="28" fill="#0A3A3A"/>
+  <text x="326" y="292" font-family="sans-serif" font-size="24" fill="#1ABEAA" text-anchor="middle" font-weight="bold">File A</text>
+  <!-- 파일 A 헥스 행들 -->
+  <text x="230" y="356" font-family="'Courier New', monospace" font-size="22" fill="#80DDCC">FF 4D 5A 00</text>
+  <text x="230" y="394" font-family="'Courier New', monospace" font-size="22" fill="#80DDCC">00 00 00 00</text>
+  <text x="230" y="432" font-family="'Courier New', monospace" font-size="22" fill="#80DDCC">40 00 00 00</text>
+  <text x="230" y="470" font-family="'Courier New', monospace" font-size="22" fill="#A0FFEE" font-weight="bold">AA BB CC DD</text>
+  <text x="230" y="508" font-family="'Courier New', monospace" font-size="22" fill="#80DDCC">00 0E 1F BA</text>
+  <text x="230" y="546" font-family="'Courier New', monospace" font-size="22" fill="#80DDCC">0E 00 B4 09</text>
+  <text x="230" y="584" font-family="'Courier New', monospace" font-size="22" fill="#80DDCC">CD 21 B8 01</text>
+  <text x="230" y="622" font-family="'Courier New', monospace" font-size="22" fill="#80DDCC">4C CD 21 54</text>
+  <text x="230" y="660" font-family="'Courier New', monospace" font-size="22" fill="#80DDCC">68 69 73 20</text>
+  <text x="230" y="698" font-family="'Courier New', monospace" font-size="22" fill="#80DDCC">70 72 6F 67</text>
+  <!-- Layer 2: 파일 B (오른쪽) -->
+  <rect x="584" y="260" width="228" height="504" rx="16" fill="url(#fileB05)" stroke="#00FFCC" stroke-width="8"/>
+  <!-- 파일 B 헤더 -->
+  <rect x="584" y="260" width="228" height="48" rx="16" fill="#0A3A3A"/>
+  <rect x="584" y="280" width="228" height="28" fill="#0A3A3A"/>
+  <text x="698" y="292" font-family="sans-serif" font-size="24" fill="#00FFCC" text-anchor="middle" font-weight="bold">File B</text>
+  <!-- 파일 B 헥스 행들 -->
+  <text x="602" y="356" font-family="'Courier New', monospace" font-size="22" fill="#80DDCC">FF 4D 5A 00</text>
+  <text x="602" y="394" font-family="'Courier New', monospace" font-size="22" fill="#80DDCC">00 00 00 00</text>
+  <text x="602" y="432" font-family="'Courier New', monospace" font-size="22" fill="#80DDCC">40 00 00 00</text>
+  <!-- 다른 값 강조 (주황색) -->
+  <rect x="590" y="452" width="214" height="36" rx="6" fill="#FF6600" opacity="0.25"/>
+  <text x="602" y="470" font-family="'Courier New', monospace" font-size="22" fill="#FF9933" font-weight="bold">AA BB FF DD</text>
+  <text x="602" y="508" font-family="'Courier New', monospace" font-size="22" fill="#80DDCC">00 0E 1F BA</text>
+  <text x="602" y="546" font-family="'Courier New', monospace" font-size="22" fill="#80DDCC">0E 00 B4 09</text>
+  <text x="602" y="584" font-family="'Courier New', monospace" font-size="22" fill="#80DDCC">CD 21 B8 01</text>
+  <text x="602" y="622" font-family="'Courier New', monospace" font-size="22" fill="#80DDCC">4C CD 21 54</text>
+  <text x="602" y="660" font-family="'Courier New', monospace" font-size="22" fill="#80DDCC">68 69 73 20</text>
+  <text x="602" y="698" font-family="'Courier New', monospace" font-size="22" fill="#80DDCC">70 72 6F 67</text>
+  <!-- 파일 A 차이 행 강조 -->
+  <rect x="218" y="452" width="214" height="36" rx="6" fill="url(#diffhl)"/>
+  <!-- Layer 3: 중앙 diff 아이콘 + 연결선 -->
+  <rect x="450" y="488" width="124" height="48" rx="14" fill="#0A3030" stroke="#00FFCC" stroke-width="6"/>
+  <text x="512" y="519" font-family="sans-serif" font-size="28" fill="#00FFCC" text-anchor="middle" font-weight="bold">DIFF</text>
+  <!-- 연결선 -->
+  <line x1="440" y1="470" x2="392" y2="470" stroke="#FF9933" stroke-width="5" stroke-dasharray="10,6" opacity="0.9"/>
+  <line x1="584" y1="470" x2="574" y2="470" stroke="#FF9933" stroke-width="5" stroke-dasharray="10,6" opacity="0.9"/>
+  <!-- 오프셋 표시 -->
+  <text x="512" y="800" font-family="'Courier New', monospace" font-size="26" fill="#00CCAA" text-anchor="middle" opacity="0.8">offset: 0x000C</text>
+</svg>

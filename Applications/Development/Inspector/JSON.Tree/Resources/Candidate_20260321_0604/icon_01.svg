@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <clipPath id="jt1-clip">
+      <rect width="1024" height="1024" rx="180"/>
+    </clipPath>
+    <radialGradient id="jt1-bg" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#C8860A"/>
+      <stop offset="100%" stop-color="#7A4800"/>
+    </radialGradient>
+    <filter id="jt1-shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="6" stdDeviation="12" flood-color="#000000" flood-opacity="0.5"/>
+    </filter>
+  </defs>
+  <g clip-path="url(#jt1-clip)">
+    <!-- Background: Deep Amber/Gold -->
+    <rect width="1024" height="1024" fill="url(#jt1-bg)"/>
+
+    <!-- Big curly braces (dark brown) -->
+    <g filter="url(#jt1-shadow)" fill="#3A1800">
+      <!-- Left brace { -->
+      <path d="M 310 200
+               Q 270 200 260 240 L 260 430
+               Q 260 480 220 500
+               Q 260 520 260 570 L 260 760
+               Q 270 800 310 800
+               L 340 800 Q 310 800 310 760 L 310 570
+               Q 310 500 360 480
+               Q 310 460 310 430 L 310 240
+               Q 310 200 340 200 Z"/>
+      <!-- Right brace } -->
+      <path d="M 714 200
+               Q 754 200 764 240 L 764 430
+               Q 764 480 804 500
+               Q 764 520 764 570 L 764 760
+               Q 754 800 714 800
+               L 684 800 Q 714 800 714 760 L 714 570
+               Q 714 500 664 480
+               Q 714 460 714 430 L 714 240
+               Q 714 200 684 200 Z"/>
+    </g>
+
+    <!-- Tree structure inside braces (white branches) -->
+    <!-- Root node -->
+    <circle cx="512" cy="380" r="24" fill="#FFFFFF" opacity="0.95"/>
+    <!-- Trunk line -->
+    <line x1="512" y1="404" x2="512" y2="456" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round" opacity="0.8"/>
+    <!-- Branch left -->
+    <line x1="512" y1="456" x2="390" y2="510" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round" opacity="0.8"/>
+    <!-- Branch right -->
+    <line x1="512" y1="456" x2="634" y2="510" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round" opacity="0.8"/>
+    <!-- Level 2 nodes -->
+    <circle cx="390" cy="520" r="20" fill="#FFD580" opacity="0.95"/>
+    <circle cx="634" cy="520" r="20" fill="#FFD580" opacity="0.95"/>
+    <!-- Sub-branches left -->
+    <line x1="390" y1="540" x2="330" y2="590" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" opacity="0.7"/>
+    <line x1="390" y1="540" x2="450" y2="590" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" opacity="0.7"/>
+    <!-- Sub-branches right -->
+    <line x1="634" y1="540" x2="574" y2="590" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" opacity="0.7"/>
+    <line x1="634" y1="540" x2="694" y2="590" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" opacity="0.7"/>
+    <!-- Level 3 nodes -->
+    <circle cx="330" cy="600" r="16" fill="#FFFFFF" opacity="0.85"/>
+    <circle cx="450" cy="600" r="16" fill="#FFFFFF" opacity="0.85"/>
+    <circle cx="574" cy="600" r="16" fill="#FFFFFF" opacity="0.85"/>
+    <circle cx="694" cy="600" r="16" fill="#FFFFFF" opacity="0.85"/>
+    <!-- Level 3 leaves -->
+    <line x1="330" y1="616" x2="300" y2="660" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" opacity="0.5"/>
+    <line x1="330" y1="616" x2="356" y2="660" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" opacity="0.5"/>
+    <line x1="694" y1="616" x2="668" y2="660" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" opacity="0.5"/>
+    <line x1="694" y1="616" x2="720" y2="660" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" opacity="0.5"/>
+    <circle cx="300" cy="668" r="10" fill="#FFD580" opacity="0.7"/>
+    <circle cx="356" cy="668" r="10" fill="#FFD580" opacity="0.7"/>
+    <circle cx="668" cy="668" r="10" fill="#FFD580" opacity="0.7"/>
+    <circle cx="720" cy="668" r="10" fill="#FFD580" opacity="0.7"/>
+
+    <!-- Key label dots -->
+    <rect x="440" y="368" width="60" height="12" rx="6" fill="#3A1800" opacity="0.5"/>
+  </g>
+</svg>

@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <clipPath id="sf-bg-clip-01">
+      <rect width="1024" height="1024" rx="180"/>
+    </clipPath>
+    <linearGradient id="sf-bg-grad-01" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2A0A5A"/>
+      <stop offset="100%" stop-color="#180640"/>
+    </linearGradient>
+    <linearGradient id="arrow-grad-sf-01" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00DDFF"/>
+      <stop offset="100%" stop-color="#00AAFF"/>
+    </linearGradient>
+    <filter id="glow-sf-01">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="180" fill="url(#sf-bg-grad-01)"/>
+  <g clip-path="url(#sf-bg-clip-01)">
+    <!-- 서버 (왼쪽) -->
+    <rect x="130" y="380" width="180" height="240" rx="20" fill="#3A2060" stroke="#6A40A0" stroke-width="6"/>
+    <!-- 서버 상단 -->
+    <rect x="130" y="380" width="180" height="50" rx="20" fill="#4A2A70"/>
+    <rect x="130" y="412" width="180" height="18" fill="#4A2A70"/>
+    <!-- 서버 LED들 -->
+    <circle cx="162" cy="406" r="8" fill="#00FF88"/>
+    <circle cx="190" cy="406" r="8" fill="#00CCFF"/>
+    <circle cx="218" cy="406" r="8" fill="#FF8800"/>
+    <!-- 서버 슬롯들 -->
+    <rect x="150" y="446" width="140" height="18" rx="5" fill="#2A1040" stroke="#5A3080" stroke-width="2"/>
+    <rect x="150" y="476" width="140" height="18" rx="5" fill="#2A1040" stroke="#5A3080" stroke-width="2"/>
+    <rect x="150" y="506" width="140" height="18" rx="5" fill="#2A1040" stroke="#5A3080" stroke-width="2"/>
+    <rect x="150" y="536" width="140" height="18" rx="5" fill="#2A1040" stroke="#5A3080" stroke-width="2"/>
+    <!-- 클라이언트 (오른쪽) -->
+    <rect x="714" y="350" width="200" height="280" rx="16" fill="#1A2A4A" stroke="#2A4060" stroke-width="6"/>
+    <!-- 클라이언트 화면 -->
+    <rect x="726" y="362" width="176" height="220" rx="10" fill="#0A1428"/>
+    <!-- 화면 내용 (수신된 이벤트) -->
+    <rect x="738" y="380" width="120" height="12" rx="4" fill="#00DDFF" opacity="0.8"/>
+    <rect x="738" y="400" width="100" height="12" rx="4" fill="#00DDFF" opacity="0.6"/>
+    <rect x="738" y="420" width="140" height="12" rx="4" fill="#00DDFF" opacity="0.7"/>
+    <rect x="738" y="440" width="90" height="12" rx="4" fill="#44FF88" opacity="0.8"/>
+    <rect x="738" y="460" width="130" height="12" rx="4" fill="#00DDFF" opacity="0.5"/>
+    <!-- 클라이언트 스탠드 -->
+    <rect x="784" y="630" width="60" height="30" rx="6" fill="#2A3A5A"/>
+    <rect x="754" y="658" width="120" height="16" rx="6" fill="#2A3A5A"/>
+    <!-- 이벤트 화살표들 (서버 → 클라이언트) -->
+    <!-- 화살표 1 (위) -->
+    <path d="M 310 430 Q 512 350 714 420" fill="none" stroke="url(#arrow-grad-sf-01)" stroke-width="14" stroke-linecap="round" filter="url(#glow-sf-01)"/>
+    <polygon points="710,404 730,422 706,440" fill="#00DDFF" filter="url(#glow-sf-01)"/>
+    <!-- 화살표 2 (중간) -->
+    <path d="M 310 500 Q 512 500 714 490" fill="none" stroke="url(#arrow-grad-sf-01)" stroke-width="14" stroke-linecap="round" filter="url(#glow-sf-01)"/>
+    <polygon points="710,474 730,492 706,510" fill="#00DDFF" filter="url(#glow-sf-01)"/>
+    <!-- 화살표 3 (아래) -->
+    <path d="M 310 570 Q 512 620 714 560" fill="none" stroke="url(#arrow-grad-sf-01)" stroke-width="14" stroke-linecap="round" filter="url(#glow-sf-01)"/>
+    <polygon points="710,544 730,562 706,580" fill="#00DDFF" filter="url(#glow-sf-01)"/>
+    <!-- 이벤트 점들 (이동 중) -->
+    <circle cx="380" cy="444" r="12" fill="#00FFCC" filter="url(#glow-sf-01)"/>
+    <circle cx="480" cy="504" r="16" fill="#00DDFF" filter="url(#glow-sf-01)"/>
+    <circle cx="590" cy="596" r="12" fill="#00FFCC" filter="url(#glow-sf-01)"/>
+    <circle cx="440" cy="402" r="10" fill="#AAFFEE" opacity="0.7"/>
+    <circle cx="600" cy="460" r="8" fill="#AAFFEE" opacity="0.6"/>
+  </g>
+</svg>

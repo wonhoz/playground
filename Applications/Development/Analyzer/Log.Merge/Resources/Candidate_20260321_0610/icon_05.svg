@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bgFunnel" x1="0" y1="0" x2="0.4" y2="1">
+      <stop offset="0%" stop-color="#1A0A2E"/>
+      <stop offset="100%" stop-color="#0D0518"/>
+    </linearGradient>
+    <!-- 깔때기 본체 -->
+    <linearGradient id="funnelBody" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#4A3070"/>
+      <stop offset="100%" stop-color="#2D1A50"/>
+    </linearGradient>
+    <linearGradient id="funnelHighlight" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#7C4DFF" stop-opacity="0"/>
+      <stop offset="40%" stop-color="#7C4DFF" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#7C4DFF" stop-opacity="0"/>
+    </linearGradient>
+    <!-- 입력 스트림들 -->
+    <linearGradient id="inStream1" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0%" stop-color="#FF6B6B"/>
+      <stop offset="100%" stop-color="#FF6B6B" stop-opacity="0.3"/>
+    </linearGradient>
+    <linearGradient id="inStream2" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0%" stop-color="#4ECDC4"/>
+      <stop offset="100%" stop-color="#4ECDC4" stop-opacity="0.3"/>
+    </linearGradient>
+    <linearGradient id="inStream3" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0%" stop-color="#FFE66D"/>
+      <stop offset="100%" stop-color="#FFE66D" stop-opacity="0.3"/>
+    </linearGradient>
+    <linearGradient id="inStream4" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0%" stop-color="#C084FC"/>
+      <stop offset="100%" stop-color="#C084FC" stop-opacity="0.3"/>
+    </linearGradient>
+    <!-- 출력 스트림 (흰색) -->
+    <linearGradient id="outStream" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#CCDDFF" stop-opacity="0.8"/>
+    </linearGradient>
+    <filter id="funnelGlow">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="outputGlow">
+      <feGaussianBlur stdDeviation="16" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Layer1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bgFunnel)"/>
+
+  <!-- 배경 방사 빛 -->
+  <circle cx="512" cy="512" r="400" fill="#7C4DFF" opacity="0.04"/>
+  <circle cx="512" cy="512" r="280" fill="#7C4DFF" opacity="0.04"/>
+
+  <!-- Layer2: 입력 스트림 (위에서 깔때기로) -->
+  <!-- 스트림 1 (빨강) - 왼쪽 -->
+  <path d="M 215 220 L 215 340 Q 215 390 280 420 L 400 460" fill="none" stroke="url(#inStream1)" stroke-width="22" stroke-linecap="round" filter="url(#funnelGlow)"/>
+  <rect x="195" y="210" width="40" height="120" rx="8" fill="#FF6B6B" opacity="0.4"/>
+  <text x="215" y="195" font-family="monospace" font-size="18" fill="#FF6B6B" text-anchor="middle">app.log</text>
+
+  <!-- 스트림 2 (청록) - 중왼쪽 -->
+  <path d="M 380 220 L 380 330 Q 380 380 420 420 L 460 470" fill="none" stroke="url(#inStream2)" stroke-width="22" stroke-linecap="round" filter="url(#funnelGlow)"/>
+  <rect x="360" y="210" width="40" height="110" rx="8" fill="#4ECDC4" opacity="0.4"/>
+  <text x="380" y="195" font-family="monospace" font-size="18" fill="#4ECDC4" text-anchor="middle">api.log</text>
+
+  <!-- 스트림 3 (노랑) - 중오른쪽 -->
+  <path d="M 644 220 L 644 330 Q 644 380 604 420 L 564 470" fill="none" stroke="url(#inStream3)" stroke-width="22" stroke-linecap="round" filter="url(#funnelGlow)"/>
+  <rect x="624" y="210" width="40" height="110" rx="8" fill="#FFE66D" opacity="0.4"/>
+  <text x="644" y="195" font-family="monospace" font-size="18" fill="#FFE66D" text-anchor="middle">db.log</text>
+
+  <!-- 스트림 4 (퍼플) - 오른쪽 -->
+  <path d="M 809 220 L 809 340 Q 809 390 744 420 L 624 460" fill="none" stroke="url(#inStream4)" stroke-width="22" stroke-linecap="round" filter="url(#funnelGlow)"/>
+  <rect x="789" y="210" width="40" height="120" rx="8" fill="#C084FC" opacity="0.4"/>
+  <text x="809" y="195" font-family="monospace" font-size="18" fill="#C084FC" text-anchor="middle">sys.log</text>
+
+  <!-- 깔때기 본체 -->
+  <path d="M 280 450 L 744 450 L 600 620 L 560 620 L 560 780 L 464 780 L 464 620 L 424 620 Z" fill="url(#funnelBody)" stroke="#6A3A9A" stroke-width="4"/>
+  <!-- 깔때기 하이라이트 -->
+  <path d="M 320 450 L 704 450 L 570 610 L 454 610 Z" fill="url(#funnelHighlight)" opacity="0.5"/>
+
+  <!-- 깔때기 입구 테두리 -->
+  <line x1="280" y1="450" x2="744" y2="450" stroke="#9C5DFF" stroke-width="6" opacity="0.7"/>
+
+  <!-- Layer3: 출력 스트림 (아래로) -->
+  <rect x="455" y="775" width="114" height="40" rx="8" fill="#7C4DFF" opacity="0.5"/>
+  <path d="M 512 815 L 512 870" stroke="url(#outStream)" stroke-width="28" stroke-linecap="round" filter="url(#outputGlow)"/>
+  <!-- 화살표 -->
+  <polygon points="512,900 480,865 544,865" fill="#FFFFFF" opacity="0.9" filter="url(#outputGlow)"/>
+
+  <!-- 출력 라벨 -->
+  <text x="512" y="945" font-family="monospace" font-size="22" fill="#C084FC" text-anchor="middle" opacity="0.8">merged.log</text>
+</svg>

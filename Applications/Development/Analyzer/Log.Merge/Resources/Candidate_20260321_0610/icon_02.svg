@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bgLines" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1A1C20"/>
+      <stop offset="100%" stop-color="#111315"/>
+    </linearGradient>
+    <!-- 카드 배경 -->
+    <linearGradient id="cardBg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2A2D33"/>
+      <stop offset="100%" stop-color="#22252A"/>
+    </linearGradient>
+    <filter id="cardShadow">
+      <feDropShadow dx="0" dy="8" stdDeviation="16" flood-color="#00000066"/>
+    </filter>
+    <filter id="lineGlow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Layer1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bgLines)"/>
+
+  <!-- 배경 카드 -->
+  <rect x="160" y="180" width="704" height="664" rx="20" fill="url(#cardBg)" filter="url(#cardShadow)"/>
+
+  <!-- Layer2: 컬러 로그 라인들 -->
+  <!-- 타임스탬프 컬럼 (회색 배경) -->
+  <rect x="178" y="198" width="168" height="628" rx="8" fill="#1E2026" opacity="0.8"/>
+
+  <!-- 소스 인디케이터 바 (좌측) -->
+  <!-- 라인들 영역 -->
+  <!-- 각 로그 라인은 소스별 색상으로 구분 -->
+
+  <!-- 타임스탬프 텍스트 -->
+  <text x="188" y="254" font-family="monospace" font-size="17" fill="#666677">14:22:01.001</text>
+  <text x="188" y="306" font-family="monospace" font-size="17" fill="#666677">14:22:01.043</text>
+  <text x="188" y="358" font-family="monospace" font-size="17" fill="#666677">14:22:01.087</text>
+  <text x="188" y="410" font-family="monospace" font-size="17" fill="#666677">14:22:01.122</text>
+  <text x="188" y="462" font-family="monospace" font-size="17" fill="#666677">14:22:01.201</text>
+  <text x="188" y="514" font-family="monospace" font-size="17" fill="#666677">14:22:01.244</text>
+  <text x="188" y="566" font-family="monospace" font-size="17" fill="#666677">14:22:01.298</text>
+  <text x="188" y="618" font-family="monospace" font-size="17" fill="#666677">14:22:01.340</text>
+  <text x="188" y="670" font-family="monospace" font-size="17" fill="#666677">14:22:01.401</text>
+  <text x="188" y="722" font-family="monospace" font-size="17" fill="#666677">14:22:01.455</text>
+  <text x="188" y="774" font-family="monospace" font-size="17" fill="#666677">14:22:01.512</text>
+
+  <!-- 소스 태그 + 컬러 바 -->
+  <!-- 라인 1: app (빨강) -->
+  <rect x="356" y="232" width="6" height="36" rx="3" fill="#FF6B6B"/>
+  <rect x="368" y="234" width="80" height="28" rx="6" fill="#FF6B6B" opacity="0.25"/>
+  <text x="378" y="253" font-family="monospace" font-size="16" fill="#FF6B6B" font-weight="bold">app</text>
+  <rect x="458" y="238" width="360" height="18" rx="3" fill="#FF6B6B" opacity="0.5" filter="url(#lineGlow)"/>
+  <rect x="458" y="238" width="240" height="18" rx="3" fill="#FF6B6B" opacity="0.3"/>
+
+  <!-- 라인 2: api (청록) -->
+  <rect x="356" y="284" width="6" height="36" rx="3" fill="#4ECDC4"/>
+  <rect x="368" y="286" width="80" height="28" rx="6" fill="#4ECDC4" opacity="0.25"/>
+  <text x="378" y="305" font-family="monospace" font-size="16" fill="#4ECDC4" font-weight="bold">api</text>
+  <rect x="458" y="290" width="420" height="18" rx="3" fill="#4ECDC4" opacity="0.5" filter="url(#lineGlow)"/>
+
+  <!-- 라인 3: db (주황) -->
+  <rect x="356" y="336" width="6" height="36" rx="3" fill="#FFB347"/>
+  <rect x="368" y="338" width="80" height="28" rx="6" fill="#FFB347" opacity="0.25"/>
+  <text x="381" y="357" font-family="monospace" font-size="16" fill="#FFB347" font-weight="bold">db</text>
+  <rect x="458" y="342" width="300" height="18" rx="3" fill="#FFB347" opacity="0.5" filter="url(#lineGlow)"/>
+
+  <!-- 라인 4: app (빨강) -->
+  <rect x="356" y="388" width="6" height="36" rx="3" fill="#FF6B6B"/>
+  <rect x="368" y="390" width="80" height="28" rx="6" fill="#FF6B6B" opacity="0.25"/>
+  <text x="378" y="409" font-family="monospace" font-size="16" fill="#FF6B6B" font-weight="bold">app</text>
+  <rect x="458" y="394" width="380" height="18" rx="3" fill="#FF6B6B" opacity="0.4"/>
+
+  <!-- 라인 5: sys (연두) -->
+  <rect x="356" y="440" width="6" height="36" rx="3" fill="#A8E6CF"/>
+  <rect x="368" y="442" width="80" height="28" rx="6" fill="#A8E6CF" opacity="0.25"/>
+  <text x="378" y="461" font-family="monospace" font-size="16" fill="#A8E6CF" font-weight="bold">sys</text>
+  <rect x="458" y="446" width="260" height="18" rx="3" fill="#A8E6CF" opacity="0.5" filter="url(#lineGlow)"/>
+
+  <!-- 라인 6: api (청록) -->
+  <rect x="356" y="492" width="6" height="36" rx="3" fill="#4ECDC4"/>
+  <rect x="368" y="494" width="80" height="28" rx="6" fill="#4ECDC4" opacity="0.25"/>
+  <text x="378" y="513" font-family="monospace" font-size="16" fill="#4ECDC4" font-weight="bold">api</text>
+  <rect x="458" y="498" width="440" height="18" rx="3" fill="#4ECDC4" opacity="0.4"/>
+
+  <!-- 라인 7: db (주황) -->
+  <rect x="356" y="544" width="6" height="36" rx="3" fill="#FFB347"/>
+  <rect x="368" y="546" width="80" height="28" rx="6" fill="#FFB347" opacity="0.25"/>
+  <text x="381" y="565" font-family="monospace" font-size="16" fill="#FFB347" font-weight="bold">db</text>
+  <rect x="458" y="550" width="320" height="18" rx="3" fill="#FFB347" opacity="0.4"/>
+
+  <!-- 라인 8: app (빨강) -->
+  <rect x="356" y="596" width="6" height="36" rx="3" fill="#FF6B6B"/>
+  <rect x="368" y="598" width="80" height="28" rx="6" fill="#FF6B6B" opacity="0.25"/>
+  <text x="378" y="617" font-family="monospace" font-size="16" fill="#FF6B6B" font-weight="bold">app</text>
+  <rect x="458" y="602" width="200" height="18" rx="3" fill="#FF6B6B" opacity="0.5"/>
+
+  <!-- 라인 9-11 더 희미하게 -->
+  <rect x="356" y="648" width="6" height="36" rx="3" fill="#A8E6CF" opacity="0.6"/>
+  <rect x="458" y="654" width="350" height="18" rx="3" fill="#A8E6CF" opacity="0.25"/>
+  <rect x="356" y="700" width="6" height="36" rx="3" fill="#4ECDC4" opacity="0.5"/>
+  <rect x="458" y="706" width="280" height="18" rx="3" fill="#4ECDC4" opacity="0.2"/>
+  <rect x="356" y="752" width="6" height="36" rx="3" fill="#FFB347" opacity="0.4"/>
+  <rect x="458" y="758" width="400" height="18" rx="3" fill="#FFB347" opacity="0.15"/>
+
+  <!-- Layer3: 컬러 범례 -->
+  <circle cx="240" cy="808" r="8" fill="#FF6B6B"/>
+  <text x="254" y="814" font-family="monospace" font-size="16" fill="#FF6B6B">app</text>
+  <circle cx="330" cy="808" r="8" fill="#4ECDC4"/>
+  <text x="344" y="814" font-family="monospace" font-size="16" fill="#4ECDC4">api</text>
+  <circle cx="420" cy="808" r="8" fill="#FFB347"/>
+  <text x="434" y="814" font-family="monospace" font-size="16" fill="#FFB347">db</text>
+  <circle cx="500" cy="808" r="8" fill="#A8E6CF"/>
+  <text x="514" y="814" font-family="monospace" font-size="16" fill="#A8E6CF">sys</text>
+</svg>

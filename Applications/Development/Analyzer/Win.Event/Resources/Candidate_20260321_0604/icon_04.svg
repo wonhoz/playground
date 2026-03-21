@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <clipPath id="we-bg-clip-04">
+      <rect width="1024" height="1024" rx="160"/>
+    </clipPath>
+    <linearGradient id="we-bg-04" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#050D10"/>
+      <stop offset="100%" stop-color="#0A1520"/>
+    </linearGradient>
+    <radialGradient id="radar-glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#00FF41" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#00FF41" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="160" fill="url(#we-bg-04)"/>
+
+  <g clip-path="url(#we-bg-clip-04)">
+    <!-- 레이더 글로우 -->
+    <circle cx="512" cy="512" r="340" fill="url(#radar-glow)"/>
+
+    <!-- 레이더 동심원들 -->
+    <circle cx="512" cy="512" r="280" fill="none" stroke="#00FF41" stroke-width="36" opacity="0.25"/>
+    <circle cx="512" cy="512" r="210" fill="none" stroke="#00FF41" stroke-width="32" opacity="0.35"/>
+    <circle cx="512" cy="512" r="140" fill="none" stroke="#00FF41" stroke-width="28" opacity="0.5"/>
+    <circle cx="512" cy="512" r="70" fill="none" stroke="#00FF41" stroke-width="24" opacity="0.7"/>
+
+    <!-- 레이더 십자선 -->
+    <line x1="512" y1="232" x2="512" y2="792" stroke="#00FF41" stroke-width="28" opacity="0.3" stroke-linecap="round"/>
+    <line x1="232" y1="512" x2="792" y2="512" stroke="#00FF41" stroke-width="28" opacity="0.3" stroke-linecap="round"/>
+    <line x1="314" y1="314" x2="710" y2="710" stroke="#00FF41" stroke-width="20" opacity="0.2" stroke-linecap="round"/>
+    <line x1="710" y1="314" x2="314" y2="710" stroke="#00FF41" stroke-width="20" opacity="0.2" stroke-linecap="round"/>
+
+    <!-- 레이더 스윕 (부채꼴 형태) -->
+    <path d="M512 512 L512 232 A280 280 0 0 1 790 490 Z" fill="#00FF41" opacity="0.12"/>
+    <path d="M512 512 L790 490 A280 280 0 0 1 740 700 Z" fill="#00FF41" opacity="0.06"/>
+
+    <!-- 탐지 신호들 (깜박이는 점처럼) -->
+    <circle cx="620" cy="390" r="18" fill="#00FF41" opacity="0.95"/>
+    <circle cx="620" cy="390" r="36" fill="none" stroke="#00FF41" stroke-width="8" opacity="0.45"/>
+    <circle cx="430" cy="460" r="14" fill="#00FF41" opacity="0.7"/>
+    <circle cx="700" cy="550" r="12" fill="#00FF41" opacity="0.6"/>
+
+    <!-- 중심점 -->
+    <circle cx="512" cy="512" r="22" fill="#00FF41"/>
+    <circle cx="512" cy="512" r="10" fill="#FFFFFF"/>
+  </g>
+</svg>

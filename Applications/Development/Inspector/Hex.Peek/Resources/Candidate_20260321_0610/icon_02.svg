@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg02h" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#F5F0E8;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#EDE8D8;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="glass02h" x1="30%" y1="10%" x2="90%" y2="90%">
+      <stop offset="0%" style="stop-color:#FF9A00;stop-opacity:0.85" />
+      <stop offset="100%" style="stop-color:#FF6600;stop-opacity:0.7" />
+    </linearGradient>
+    <linearGradient id="handle02h" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4A2800;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2A1400;stop-opacity:1" />
+    </linearGradient>
+    <filter id="glassglow">
+      <feGaussianBlur stdDeviation="10" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg02h)"/>
+  <!-- 배경 도트 패턴 -->
+  <circle cx="300" cy="280" r="5" fill="#C8B890" opacity="0.4"/>
+  <circle cx="380" cy="280" r="5" fill="#C8B890" opacity="0.4"/>
+  <circle cx="460" cy="280" r="5" fill="#C8B890" opacity="0.4"/>
+  <circle cx="300" cy="360" r="5" fill="#C8B890" opacity="0.4"/>
+  <circle cx="380" cy="360" r="5" fill="#C8B890" opacity="0.4"/>
+  <circle cx="300" cy="440" r="5" fill="#C8B890" opacity="0.4"/>
+  <!-- Layer 2: 돋보기 원형 -->
+  <circle cx="460" cy="460" r="220" fill="url(#glass02h)" stroke="#3A1800" stroke-width="18" filter="url(#glassglow)"/>
+  <!-- 렌즈 내부 반사 -->
+  <circle cx="460" cy="460" r="218" fill="none" stroke="#FFD060" stroke-width="6" opacity="0.4"/>
+  <ellipse cx="400" cy="360" rx="70" ry="50" fill="#FFFFFF" opacity="0.22" transform="rotate(-20,400,360)"/>
+  <!-- 렌즈 안 01 바이너리 패턴 -->
+  <text x="380" y="400" font-family="'Courier New', monospace" font-size="38" fill="#3A1800" text-anchor="middle" font-weight="bold" opacity="0.9">0101</text>
+  <text x="480" y="440" font-family="'Courier New', monospace" font-size="38" fill="#3A1800" text-anchor="middle" font-weight="bold" opacity="0.9">1100</text>
+  <text x="430" y="480" font-family="'Courier New', monospace" font-size="38" fill="#3A1800" text-anchor="middle" font-weight="bold" opacity="0.9">0011</text>
+  <text x="510" y="520" font-family="'Courier New', monospace" font-size="38" fill="#FFFFFF" text-anchor="middle" font-weight="bold" opacity="0.9">1011</text>
+  <text x="410" y="555" font-family="'Courier New', monospace" font-size="38" fill="#3A1800" text-anchor="middle" font-weight="bold" opacity="0.7">0110</text>
+  <!-- 렌즈 테두리 링 (외부 광택) -->
+  <circle cx="460" cy="460" r="220" fill="none" stroke="#7A4A10" stroke-width="8" opacity="0.4"/>
+  <!-- Layer 3: 손잡이 -->
+  <line x1="632" y1="632" x2="790" y2="790" stroke="url(#handle02h)" stroke-width="60" stroke-linecap="round"/>
+  <!-- 손잡이 광택 -->
+  <line x1="645" y1="640" x2="780" y2="776" stroke="#8A5A20" stroke-width="16" stroke-linecap="round" opacity="0.5"/>
+  <!-- 손잡이 그립 선 -->
+  <line x1="680" y1="660" x2="700" y2="680" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" opacity="0.35"/>
+  <line x1="700" y1="680" x2="720" y2="700" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" opacity="0.35"/>
+  <line x1="720" y1="700" x2="740" y2="720" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" opacity="0.35"/>
+</svg>

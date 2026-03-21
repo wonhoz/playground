@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <clipPath id="lv3-clip">
+      <rect width="1024" height="1024" rx="180"/>
+    </clipPath>
+    <linearGradient id="lv3-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A1A60"/>
+      <stop offset="100%" stop-color="#0A0A3C"/>
+    </linearGradient>
+  </defs>
+  <g clip-path="url(#lv3-clip)">
+    <!-- Background: Deep Indigo -->
+    <rect width="1024" height="1024" fill="url(#lv3-bg)"/>
+
+    <!-- World map grid lines (mint) -->
+    <!-- Latitude lines -->
+    <g stroke="#40E0A0" stroke-width="3" fill="none" opacity="0.5">
+      <line x1="220" y1="300" x2="804" y2="300"/>
+      <line x1="220" y1="380" x2="804" y2="380"/>
+      <line x1="220" y1="460" x2="804" y2="460"/>
+      <line x1="220" y1="540" x2="804" y2="540"/>
+      <line x1="220" y1="620" x2="804" y2="620"/>
+      <line x1="220" y1="700" x2="804" y2="700"/>
+    </g>
+    <!-- Longitude lines -->
+    <g stroke="#40E0A0" stroke-width="3" fill="none" opacity="0.5">
+      <line x1="280" y1="260" x2="280" y2="740"/>
+      <line x1="360" y1="260" x2="360" y2="740"/>
+      <line x1="440" y1="260" x2="440" y2="740"/>
+      <line x1="512" y1="260" x2="512" y2="740"/>
+      <line x1="584" y1="260" x2="584" y2="740"/>
+      <line x1="664" y1="260" x2="664" y2="740"/>
+      <line x1="744" y1="260" x2="744" y2="740"/>
+    </g>
+    <!-- Equator highlight (brighter) -->
+    <line x1="220" y1="500" x2="804" y2="500" stroke="#40E0A0" stroke-width="5" opacity="0.8"/>
+    <!-- Prime meridian highlight -->
+    <line x1="512" y1="260" x2="512" y2="740" stroke="#40E0A0" stroke-width="5" opacity="0.8"/>
+
+    <!-- Continents (white fill, simplified silhouettes) -->
+    <!-- North America rough shape -->
+    <path d="M 270 310 L 360 300 L 400 320 L 420 360 L 410 420 L 380 460 L 340 480 L 310 460 L 280 420 L 270 370 Z"
+          fill="#FFFFFF" opacity="0.82"/>
+    <!-- South America -->
+    <path d="M 340 500 L 380 490 L 400 520 L 410 580 L 400 640 L 370 670 L 340 650 L 320 600 L 320 550 Z"
+          fill="#FFFFFF" opacity="0.80"/>
+    <!-- Europe rough -->
+    <path d="M 470 300 L 530 295 L 560 315 L 555 345 L 530 360 L 500 358 L 475 340 Z"
+          fill="#FFFFFF" opacity="0.82"/>
+    <!-- Africa -->
+    <path d="M 480 380 L 560 375 L 580 420 L 575 500 L 555 560 L 520 580 L 490 555 L 470 500 L 468 430 Z"
+          fill="#FFFFFF" opacity="0.80"/>
+    <!-- Asia (large) -->
+    <path d="M 560 295 L 730 290 L 780 320 L 775 380 L 740 420 L 700 440 L 650 450 L 600 440 L 565 420 L 555 370 Z"
+          fill="#FFFFFF" opacity="0.80"/>
+    <!-- Australia -->
+    <path d="M 680 520 L 750 510 L 775 540 L 770 590 L 740 610 L 700 600 L 678 570 Z"
+          fill="#FFFFFF" opacity="0.78"/>
+
+    <!-- Axis labels (mint text) -->
+    <g font-family="monospace" font-size="18" fill="#40E0A0" opacity="0.7">
+      <text x="225" y="296">90°N</text>
+      <text x="225" y="376">60°N</text>
+      <text x="225" y="456">30°N</text>
+      <text x="225" y="536">0°</text>
+      <text x="225" y="616">30°S</text>
+      <text x="225" y="696">60°S</text>
+    </g>
+
+    <!-- Location pins for locales -->
+    <circle cx="350" cy="380" r="8" fill="#FF6060" opacity="0.9"/>
+    <circle cx="510" cy="325" r="8" fill="#FF6060" opacity="0.85"/>
+    <circle cx="650" cy="345" r="8" fill="#FF6060" opacity="0.85"/>
+    <circle cx="510" cy="460" r="8" fill="#FF9040" opacity="0.8"/>
+    <circle cx="715" cy="550" r="8" fill="#FF6060" opacity="0.8"/>
+  </g>
+</svg>

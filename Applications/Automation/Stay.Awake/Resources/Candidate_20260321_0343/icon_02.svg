@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <!-- 배경: 딥 다크 네이비 -->
+    <linearGradient id="bg2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0C1A2E"/>
+      <stop offset="100%" stop-color="#060C18"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Layer 1: 딥 다크 네이비 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg2)"/>
+
+  <!-- 배경 그리드 (희미한 네이비, 심전도 모니터 느낌) -->
+  <line x1="130" y1="312" x2="894" y2="312" stroke="#1B3A5C" stroke-width="1.5" opacity="0.55"/>
+  <line x1="130" y1="512" x2="894" y2="512" stroke="#1B3A5C" stroke-width="2" opacity="0.65"/>
+  <line x1="130" y1="712" x2="894" y2="712" stroke="#1B3A5C" stroke-width="1.5" opacity="0.55"/>
+  <line x1="260" y1="200" x2="260" y2="824" stroke="#1B3A5C" stroke-width="1.5" opacity="0.42"/>
+  <line x1="512" y1="200" x2="512" y2="824" stroke="#1B3A5C" stroke-width="1.5" opacity="0.42"/>
+  <line x1="764" y1="200" x2="764" y2="824" stroke="#1B3A5C" stroke-width="1.5" opacity="0.42"/>
+
+  <!-- Layer 2: ECG 맥박선 — 3중 레이어 (외부 글로우 → 메인 → 하이라이트) -->
+
+  <!-- 외부 글로우 (넓고 반투명) -->
+  <path d="M 120,512 L 272,512
+           C 292,512 302,474 322,512
+           L 356,512
+           L 392,296 L 426,728 L 454,512
+           C 492,512 522,452 554,512
+           L 904,512"
+        fill="none" stroke="#39FF14" stroke-width="100"
+        stroke-linecap="round" stroke-linejoin="round" opacity="0.15"/>
+
+  <!-- 메인 맥박선 -->
+  <path d="M 120,512 L 272,512
+           C 292,512 302,474 322,512
+           L 356,512
+           L 392,296 L 426,728 L 454,512
+           C 492,512 522,452 554,512
+           L 904,512"
+        fill="none" stroke="#39FF14" stroke-width="64"
+        stroke-linecap="round" stroke-linejoin="round" opacity="0.88"/>
+
+  <!-- 하이라이트 중심선 (밝은 연두) -->
+  <path d="M 120,512 L 272,512
+           C 292,512 302,474 322,512
+           L 356,512
+           L 392,296 L 426,728 L 454,512
+           C 492,512 522,452 554,512
+           L 904,512"
+        fill="none" stroke="#CCFF66" stroke-width="22"
+        stroke-linecap="round" stroke-linejoin="round" opacity="0.52"/>
+
+  <!-- Layer 3: 피크 포인트 빛나는 원 (QRS 최고점) -->
+  <!-- 외부 글로우 -->
+  <circle cx="392" cy="296" r="56" fill="#39FF14" opacity="0.24"/>
+  <!-- 중간 글로우 -->
+  <circle cx="392" cy="296" r="36" fill="#6AFF40" opacity="0.50"/>
+  <!-- 코어 포인트 -->
+  <circle cx="392" cy="296" r="20" fill="white" opacity="0.90"/>
+
+  <!-- 딥 포인트 (S파 최저점) 작은 표시 -->
+  <circle cx="426" cy="728" r="14" fill="#39FF14" opacity="0.40"/>
+
+  <!-- 우측 끝 페이드 포인트 (활동이 계속됨을 암시) -->
+  <circle cx="820" cy="512" r="10" fill="#39FF14" opacity="0.35"/>
+  <circle cx="862" cy="512" r="7" fill="#39FF14" opacity="0.22"/>
+</svg>

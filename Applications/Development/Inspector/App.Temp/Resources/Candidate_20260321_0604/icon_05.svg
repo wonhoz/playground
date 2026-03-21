@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <clipPath id="bg-clip-05">
+      <rect width="1024" height="1024" rx="180"/>
+    </clipPath>
+    <linearGradient id="bg-grad-05" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F5F0E8"/>
+      <stop offset="100%" stop-color="#E8E0D0"/>
+    </linearGradient>
+    <linearGradient id="box-grad-05" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4A2E10"/>
+      <stop offset="100%" stop-color="#2E1A08"/>
+    </linearGradient>
+  </defs>
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="180" fill="url(#bg-grad-05)"/>
+  <g clip-path="url(#bg-clip-05)">
+    <!-- 보호막 외곽 (반투명 쉴드) -->
+    <ellipse cx="512" cy="520" rx="340" ry="360" fill="#C8D8C8" opacity="0.35"/>
+    <ellipse cx="512" cy="520" rx="300" ry="320" fill="#B0C8B0" opacity="0.25"/>
+    <!-- 샌드박스 박스 (딥 브라운) -->
+    <rect x="240" y="280" width="544" height="460" rx="28" fill="url(#box-grad-05)" stroke="#6A3E18" stroke-width="10"/>
+    <!-- 박스 상단 라인 강조 -->
+    <rect x="240" y="280" width="544" height="50" rx="28" fill="#5A3010"/>
+    <rect x="240" y="310" width="544" height="20" fill="#5A3010"/>
+    <!-- 박스 나사/연결부 -->
+    <circle cx="264" cy="305" r="10" fill="#8A5020"/>
+    <circle cx="760" cy="305" r="10" fill="#8A5020"/>
+    <circle cx="264" cy="716" r="10" fill="#8A5020"/>
+    <circle cx="760" cy="716" r="10" fill="#8A5020"/>
+    <!-- 박스 내부 파일 흔적들 (회색/흐릿) -->
+    <rect x="290" y="370" width="180" height="20" rx="6" fill="#8A6040" opacity="0.5"/>
+    <rect x="290" y="404" width="140" height="16" rx="5" fill="#8A6040" opacity="0.4"/>
+    <rect x="290" y="434" width="160" height="16" rx="5" fill="#8A6040" opacity="0.3"/>
+    <!-- 청소 빗자루/지우개 효과 (오른쪽 영역) -->
+    <rect x="530" y="360" width="200" height="300" rx="12" fill="#F5F0E8" opacity="0.08"/>
+    <!-- 지워지는 점선 흔적들 -->
+    <rect x="540" y="380" width="120" height="14" rx="5" fill="#C0A080" opacity="0.3"/>
+    <rect x="540" y="408" width="90" height="14" rx="5" fill="#C0A080" opacity="0.2"/>
+    <rect x="540" y="436" width="140" height="14" rx="5" fill="#C0A080" opacity="0.15"/>
+    <!-- 빨간 X 마크 (중앙 우측) -->
+    <circle cx="640" cy="560" r="90" fill="#CC1A1A" opacity="0.92"/>
+    <line x1="596" y1="516" x2="684" y2="604" stroke="#FFFFFF" stroke-width="22" stroke-linecap="round"/>
+    <line x1="684" y1="516" x2="596" y2="604" stroke="#FFFFFF" stroke-width="22" stroke-linecap="round"/>
+    <!-- 청소 완료 체크 (왼쪽 하단) -->
+    <circle cx="360" cy="650" r="50" fill="#22AA44" opacity="0.9"/>
+    <polyline points="335,650 355,670 390,628" fill="none" stroke="#FFFFFF" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- 보호막 상단 광택 -->
+    <ellipse cx="400" cy="300" rx="80" ry="16" fill="#FFFFFF" opacity="0.15"/>
+  </g>
+</svg>

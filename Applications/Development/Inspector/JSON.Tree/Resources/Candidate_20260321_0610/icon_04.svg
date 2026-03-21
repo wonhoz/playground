@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg_jt04" cx="50%" cy="50%" r="55%">
+      <stop offset="0%" stop-color="#FF9A3C"/>
+      <stop offset="60%" stop-color="#E07020"/>
+      <stop offset="100%" stop-color="#A04800"/>
+    </radialGradient>
+    <radialGradient id="onion1" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#FFE0C0" stop-opacity="0.7"/>
+    </radialGradient>
+    <radialGradient id="onion2" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFD0A0" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#FFA050" stop-opacity="0.6"/>
+    </radialGradient>
+    <radialGradient id="onion3" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFA050" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#E06010" stop-opacity="0.5"/>
+    </radialGradient>
+    <radialGradient id="onion4" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#E06010" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#B04000" stop-opacity="0.4"/>
+    </radialGradient>
+    <filter id="glow_jt04">
+      <feGaussianBlur stdDeviation="12" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg_jt04)"/>
+  <!-- 빛 반사 -->
+  <ellipse cx="400" cy="350" rx="200" ry="120" fill="#FFFFFF" fill-opacity="0.12"/>
+
+  <!-- Layer 2: 메인 오브젝트 — 겹겹이 양파 레이어 (타원형) -->
+  <!-- 가장 바깥층 -->
+  <ellipse cx="512" cy="510" rx="290" ry="240" fill="none" stroke="url(#onion4)" stroke-width="50" stroke-linecap="round"/>
+  <!-- 3번째 층 -->
+  <ellipse cx="512" cy="510" rx="230" ry="186" fill="none" stroke="url(#onion3)" stroke-width="50" stroke-linecap="round"/>
+  <!-- 2번째 층 -->
+  <ellipse cx="512" cy="510" rx="168" ry="132" fill="none" stroke="url(#onion2)" stroke-width="50" stroke-linecap="round"/>
+  <!-- 가장 안쪽 층 (하이라이트) -->
+  <ellipse cx="512" cy="510" rx="106" ry="78" fill="url(#onion1)" filter="url(#glow_jt04)"/>
+
+  <!-- 양파 형태 윗부분 (잎) -->
+  <path d="M 470 260 Q 512 200 554 260 Q 580 230 560 270 Q 540 250 512 280 Q 484 250 464 270 Q 444 230 470 260 Z" fill="#A04800" fill-opacity="0.7"/>
+  <path d="M 490 280 Q 512 240 534 280" fill="none" stroke="#8B3A00" stroke-width="8" stroke-linecap="round"/>
+
+  <!-- 핵심부 JSON 심볼 -->
+  <text x="512" y="526" font-size="60" text-anchor="middle" fill="#3D1F00" fill-opacity="0.85" font-family="monospace" font-weight="bold">{}</text>
+
+  <!-- Layer 3: 레이어 라벨 (오른쪽에 연결선) -->
+  <!-- 레이어 연결선들 -->
+  <line x1="802" y1="510" x2="870" y2="380" stroke="#FFFFFF" stroke-width="3" stroke-opacity="0.5" stroke-dasharray="8,6"/>
+  <line x1="742" y1="510" x2="870" y2="430" stroke="#FFFFFF" stroke-width="3" stroke-opacity="0.4" stroke-dasharray="8,6"/>
+  <line x1="680" y1="510" x2="870" y2="480" stroke="#FFFFFF" stroke-width="3" stroke-opacity="0.35" stroke-dasharray="8,6"/>
+  <line x1="618" y1="510" x2="870" y2="530" stroke="#FFFFFF" stroke-width="3" stroke-opacity="0.3" stroke-dasharray="8,6"/>
+
+  <!-- 레이어 배지 -->
+  <rect x="870" y="362" width="110" height="36" rx="12" fill="#3D1F00" fill-opacity="0.6"/>
+  <text x="925" y="386" font-size="20" text-anchor="middle" fill="#FFFFFF" fill-opacity="0.9" font-family="monospace">root</text>
+
+  <rect x="870" y="412" width="110" height="36" rx="12" fill="#3D1F00" fill-opacity="0.5"/>
+  <text x="925" y="436" font-size="18" text-anchor="middle" fill="#FFD0A0" fill-opacity="0.9" font-family="monospace">obj</text>
+
+  <rect x="870" y="462" width="110" height="36" rx="12" fill="#3D1F00" fill-opacity="0.4"/>
+  <text x="925" y="486" font-size="18" text-anchor="middle" fill="#FFA050" fill-opacity="0.9" font-family="monospace">arr</text>
+
+  <rect x="870" y="512" width="110" height="36" rx="12" fill="#3D1F00" fill-opacity="0.3"/>
+  <text x="925" y="536" font-size="18" text-anchor="middle" fill="#FF8030" fill-opacity="0.9" font-family="monospace">val</text>
+
+  <!-- 빛 반짝임 -->
+  <circle cx="400" cy="380" r="16" fill="#FFFFFF" fill-opacity="0.4" filter="url(#glow_jt04)"/>
+  <circle cx="340" cy="440" r="10" fill="#FFFFFF" fill-opacity="0.3"/>
+</svg>

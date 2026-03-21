@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg02q" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFD900;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FFAA00;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="sym02q" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#CC1100;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#990000;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg02q)"/>
+  <!-- 배경 도트 격자 -->
+  <circle cx="280" cy="280" r="8" fill="#E8A000" opacity="0.4"/>
+  <circle cx="400" cy="280" r="8" fill="#E8A000" opacity="0.4"/>
+  <circle cx="520" cy="280" r="8" fill="#E8A000" opacity="0.4"/>
+  <circle cx="640" cy="280" r="8" fill="#E8A000" opacity="0.4"/>
+  <circle cx="760" cy="280" r="8" fill="#E8A000" opacity="0.4"/>
+  <circle cx="280" cy="400" r="8" fill="#E8A000" opacity="0.4"/>
+  <circle cx="760" cy="400" r="8" fill="#E8A000" opacity="0.4"/>
+  <circle cx="280" cy="640" r="8" fill="#E8A000" opacity="0.4"/>
+  <circle cx="760" cy="640" r="8" fill="#E8A000" opacity="0.4"/>
+  <circle cx="280" cy="760" r="8" fill="#E8A000" opacity="0.4"/>
+  <circle cx="400" cy="760" r="8" fill="#E8A000" opacity="0.4"/>
+  <circle cx="520" cy="760" r="8" fill="#E8A000" opacity="0.4"/>
+  <circle cx="640" cy="760" r="8" fill="#E8A000" opacity="0.4"/>
+  <circle cx="760" cy="760" r="8" fill="#E8A000" opacity="0.4"/>
+  <!-- Layer 2: 사칙연산 기호 4개 (격자 배열) -->
+  <!-- 왼위: + -->
+  <circle cx="340" cy="380" r="130" fill="#CC1100" opacity="0.12"/>
+  <line x1="290" y1="380" x2="390" y2="380" stroke="url(#sym02q)" stroke-width="62" stroke-linecap="round"/>
+  <line x1="340" y1="330" x2="340" y2="430" stroke="url(#sym02q)" stroke-width="62" stroke-linecap="round"/>
+  <!-- 오른위: × -->
+  <circle cx="684" cy="380" r="130" fill="#CC1100" opacity="0.12"/>
+  <line x1="636" y1="332" x2="732" y2="428" stroke="url(#sym02q)" stroke-width="62" stroke-linecap="round"/>
+  <line x1="732" y1="332" x2="636" y2="428" stroke="url(#sym02q)" stroke-width="62" stroke-linecap="round"/>
+  <!-- 왼아: − -->
+  <circle cx="340" cy="644" r="130" fill="#CC1100" opacity="0.12"/>
+  <line x1="284" y1="644" x2="396" y2="644" stroke="url(#sym02q)" stroke-width="62" stroke-linecap="round"/>
+  <!-- 오른아: ÷ -->
+  <circle cx="684" cy="644" r="130" fill="#CC1100" opacity="0.12"/>
+  <line x1="634" y1="644" x2="734" y2="644" stroke="url(#sym02q)" stroke-width="62" stroke-linecap="round"/>
+  <circle cx="684" cy="590" r="26" fill="url(#sym02q)"/>
+  <circle cx="684" cy="698" r="26" fill="url(#sym02q)"/>
+  <!-- Layer 3: 중앙 분리 십자선 + 중앙 원 -->
+  <line x1="512" y1="264" x2="512" y2="760" stroke="#FFFFFF" stroke-width="10" stroke-dasharray="20,14" opacity="0.5"/>
+  <line x1="264" y1="512" x2="760" y2="512" stroke="#FFFFFF" stroke-width="10" stroke-dasharray="20,14" opacity="0.5"/>
+  <circle cx="512" cy="512" r="52" fill="#FFD900" stroke="#CC1100" stroke-width="10"/>
+  <text x="512" y="528" font-family="sans-serif" font-size="44" fill="#CC1100" text-anchor="middle" font-weight="900">=</text>
+</svg>

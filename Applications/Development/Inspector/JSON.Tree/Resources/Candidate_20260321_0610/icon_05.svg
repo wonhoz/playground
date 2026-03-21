@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg_jt05" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8BC34A"/>
+      <stop offset="50%" stop-color="#66A820"/>
+      <stop offset="100%" stop-color="#3D7A00"/>
+    </linearGradient>
+    <linearGradient id="docA" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1565C0"/>
+      <stop offset="100%" stop-color="#0D47A1"/>
+    </linearGradient>
+    <linearGradient id="docB" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#C62828"/>
+      <stop offset="100%" stop-color="#B71C1C"/>
+    </linearGradient>
+    <linearGradient id="arrowGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#E0FFD0"/>
+    </linearGradient>
+    <filter id="shadow_jt05">
+      <feDropShadow dx="6" dy="8" stdDeviation="14" flood-color="#000" flood-opacity="0.5"/>
+    </filter>
+    <filter id="glow_jt05">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg_jt05)"/>
+  <!-- 배경 광택 -->
+  <ellipse cx="380" cy="380" rx="240" ry="160" fill="#FFFFFF" fill-opacity="0.12"/>
+
+  <!-- Layer 2: 메인 오브젝트 — 두 문서가 교차 (대각선) -->
+  <!-- 문서 A (파랑, 좌→우 하강) -->
+  <g transform="rotate(-20, 512, 512)" filter="url(#shadow_jt05)">
+    <rect x="220" y="300" width="320" height="420" rx="18" fill="url(#docA)"/>
+    <!-- 문서 A 헤더 -->
+    <rect x="220" y="300" width="320" height="58" rx="18" fill="#0D47A1"/>
+    <rect x="220" y="340" width="320" height="18" fill="#0D47A1"/>
+    <!-- 문서 A 텍스트 라인 -->
+    <rect x="244" y="316" width="120" height="14" rx="7" fill="#FFFFFF" fill-opacity="0.8"/>
+    <rect x="244" y="380" width="260" height="10" rx="5" fill="#FFFFFF" fill-opacity="0.4"/>
+    <rect x="244" y="404" width="200" height="10" rx="5" fill="#FFFFFF" fill-opacity="0.4"/>
+    <rect x="244" y="428" width="240" height="10" rx="5" fill="#FFFFFF" fill-opacity="0.4"/>
+    <rect x="244" y="452" width="180" height="10" rx="5" fill="#FFFFFF" fill-opacity="0.4"/>
+    <rect x="244" y="476" width="220" height="10" rx="5" fill="#90CAF9" fill-opacity="0.6"/>
+    <rect x="244" y="500" width="160" height="10" rx="5" fill="#FFFFFF" fill-opacity="0.4"/>
+    <rect x="244" y="524" width="200" height="10" rx="5" fill="#FFFFFF" fill-opacity="0.4"/>
+    <!-- JSON A 라벨 -->
+    <text x="380" y="672" font-size="52" text-anchor="middle" fill="#FFFFFF" fill-opacity="0.6" font-family="monospace" font-weight="bold">A</text>
+  </g>
+
+  <!-- 문서 B (빨강, 우→좌 하강) -->
+  <g transform="rotate(20, 512, 512)" filter="url(#shadow_jt05)">
+    <rect x="484" y="300" width="320" height="420" rx="18" fill="url(#docB)"/>
+    <!-- 문서 B 헤더 -->
+    <rect x="484" y="300" width="320" height="58" rx="18" fill="#B71C1C"/>
+    <rect x="484" y="340" width="320" height="18" fill="#B71C1C"/>
+    <!-- 문서 B 텍스트 라인 -->
+    <rect x="508" y="316" width="120" height="14" rx="7" fill="#FFFFFF" fill-opacity="0.8"/>
+    <rect x="508" y="380" width="260" height="10" rx="5" fill="#FFFFFF" fill-opacity="0.4"/>
+    <rect x="508" y="404" width="200" height="10" rx="5" fill="#FFCDD2" fill-opacity="0.6"/>
+    <rect x="508" y="428" width="240" height="10" rx="5" fill="#FFFFFF" fill-opacity="0.4"/>
+    <rect x="508" y="452" width="180" height="10" rx="5" fill="#FFFFFF" fill-opacity="0.4"/>
+    <rect x="508" y="476" width="220" height="10" rx="5" fill="#FFFFFF" fill-opacity="0.4"/>
+    <rect x="508" y="500" width="160" height="10" rx="5" fill="#FFCDD2" fill-opacity="0.6"/>
+    <rect x="508" y="524" width="200" height="10" rx="5" fill="#FFFFFF" fill-opacity="0.4"/>
+    <!-- JSON B 라벨 -->
+    <text x="644" y="672" font-size="52" text-anchor="middle" fill="#FFFFFF" fill-opacity="0.6" font-family="monospace" font-weight="bold">B</text>
+  </g>
+
+  <!-- Layer 3: 교차 영역 — diff 하이라이트 -->
+  <!-- 교차 중심 글로우 -->
+  <ellipse cx="512" cy="540" rx="80" ry="100" fill="#FFFF00" fill-opacity="0.25" filter="url(#glow_jt05)"/>
+
+  <!-- 양방향 화살표 -->
+  <path d="M 330 760 L 680 760" stroke="url(#arrowGrad)" stroke-width="28" stroke-linecap="round"/>
+  <!-- 화살표 왼쪽 -->
+  <polygon points="310,760 366,730 366,790" fill="#FFFFFF"/>
+  <!-- 화살표 오른쪽 -->
+  <polygon points="700,760 644,730 644,790" fill="#FFFFFF"/>
+
+  <!-- DIFF 텍스트 -->
+  <rect x="440" y="740" width="144" height="40" rx="20" fill="#FFFFFF" fill-opacity="0.9"/>
+  <text x="512" y="768" font-size="26" text-anchor="middle" fill="#3D7A00" font-family="monospace" font-weight="bold">DIFF</text>
+</svg>

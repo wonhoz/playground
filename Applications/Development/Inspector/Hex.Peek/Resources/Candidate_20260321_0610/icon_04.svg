@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg04h" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2D0A4E;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#4A1070;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="bit1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FF60C0;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#CC1880;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="bit0" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#7A3A9A;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#4A1A6A;stop-opacity:1" />
+    </linearGradient>
+    <filter id="bitglow">
+      <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg04h)"/>
+  <!-- 외부 원 (바이트 링) -->
+  <circle cx="512" cy="512" r="320" fill="none" stroke="#3A1060" stroke-width="60"/>
+  <!-- Layer 2: 8비트 원형 배열 (1바이트) -->
+  <!-- 비트 0: 상단 (bit7=1) -->
+  <circle cx="512" cy="200" r="52" fill="url(#bit1)" stroke="#FF80D0" stroke-width="8" filter="url(#bitglow)"/>
+  <text x="512" y="216" font-family="'Courier New', monospace" font-size="44" fill="#FFFFFF" text-anchor="middle" font-weight="bold">1</text>
+  <!-- 비트 1: 우상단 (bit6=0) -->
+  <circle cx="738" cy="274" r="52" fill="url(#bit0)" stroke="#8A5AAA" stroke-width="8"/>
+  <text x="738" y="290" font-family="'Courier New', monospace" font-size="44" fill="#CCAAEE" text-anchor="middle" font-weight="bold">0</text>
+  <!-- 비트 2: 우측 (bit5=1) -->
+  <circle cx="824" cy="512" r="52" fill="url(#bit1)" stroke="#FF80D0" stroke-width="8" filter="url(#bitglow)"/>
+  <text x="824" y="528" font-family="'Courier New', monospace" font-size="44" fill="#FFFFFF" text-anchor="middle" font-weight="bold">1</text>
+  <!-- 비트 3: 우하단 (bit4=0) -->
+  <circle cx="738" cy="750" r="52" fill="url(#bit0)" stroke="#8A5AAA" stroke-width="8"/>
+  <text x="738" y="766" font-family="'Courier New', monospace" font-size="44" fill="#CCAAEE" text-anchor="middle" font-weight="bold">0</text>
+  <!-- 비트 4: 하단 (bit3=1) -->
+  <circle cx="512" cy="824" r="52" fill="url(#bit1)" stroke="#FF80D0" stroke-width="8" filter="url(#bitglow)"/>
+  <text x="512" y="840" font-family="'Courier New', monospace" font-size="44" fill="#FFFFFF" text-anchor="middle" font-weight="bold">1</text>
+  <!-- 비트 5: 좌하단 (bit2=0) -->
+  <circle cx="286" cy="750" r="52" fill="url(#bit0)" stroke="#8A5AAA" stroke-width="8"/>
+  <text x="286" y="766" font-family="'Courier New', monospace" font-size="44" fill="#CCAAEE" text-anchor="middle" font-weight="bold">0</text>
+  <!-- 비트 6: 좌측 (bit1=1) -->
+  <circle cx="200" cy="512" r="52" fill="url(#bit1)" stroke="#FF80D0" stroke-width="8" filter="url(#bitglow)"/>
+  <text x="200" y="528" font-family="'Courier New', monospace" font-size="44" fill="#FFFFFF" text-anchor="middle" font-weight="bold">1</text>
+  <!-- 비트 7: 좌상단 (bit0=0) -->
+  <circle cx="286" cy="274" r="52" fill="url(#bit0)" stroke="#8A5AAA" stroke-width="8"/>
+  <text x="286" y="290" font-family="'Courier New', monospace" font-size="44" fill="#CCAAEE" text-anchor="middle" font-weight="bold">0</text>
+  <!-- Layer 3: 중앙 헥스값 표시 -->
+  <circle cx="512" cy="512" r="140" fill="#1A0030" stroke="#FF60C0" stroke-width="10"/>
+  <text x="512" y="492" font-family="'Courier New', monospace" font-size="28" fill="#AA80CC" text-anchor="middle">0x</text>
+  <text x="512" y="546" font-family="'Courier New', monospace" font-size="56" fill="#FF60C0" text-anchor="middle" font-weight="bold" filter="url(#bitglow)">A5</text>
+  <!-- 비트 번호 인덱스 작은 텍스트 -->
+  <text x="512" y="164" font-family="sans-serif" font-size="22" fill="#AA80CC" text-anchor="middle" opacity="0.7">7</text>
+  <text x="762" y="248" font-family="sans-serif" font-size="22" fill="#AA80CC" text-anchor="middle" opacity="0.7">6</text>
+  <text x="858" y="516" font-family="sans-serif" font-size="22" fill="#AA80CC" text-anchor="middle" opacity="0.7">5</text>
+  <text x="762" y="788" font-family="sans-serif" font-size="22" fill="#AA80CC" text-anchor="middle" opacity="0.7">4</text>
+  <text x="512" y="870" font-family="sans-serif" font-size="22" fill="#AA80CC" text-anchor="middle" opacity="0.7">3</text>
+  <text x="262" y="788" font-family="sans-serif" font-size="22" fill="#AA80CC" text-anchor="middle" opacity="0.7">2</text>
+  <text x="166" y="516" font-family="sans-serif" font-size="22" fill="#AA80CC" text-anchor="middle" opacity="0.7">1</text>
+  <text x="262" y="248" font-family="sans-serif" font-size="22" fill="#AA80CC" text-anchor="middle" opacity="0.7">0</text>
+</svg>

@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg_jt02" x1="0%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" stop-color="#FDFAF3"/>
+      <stop offset="100%" stop-color="#EDE8D5"/>
+    </linearGradient>
+    <linearGradient id="trunk" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#4A7A5A"/>
+      <stop offset="100%" stop-color="#2D5C3A"/>
+    </linearGradient>
+    <linearGradient id="branch" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#3D9960"/>
+      <stop offset="100%" stop-color="#2A7040"/>
+    </linearGradient>
+    <radialGradient id="leaf" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#A8E6B0"/>
+      <stop offset="100%" stop-color="#4CAF50"/>
+    </radialGradient>
+    <radialGradient id="leaf2" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#C8F0CC"/>
+      <stop offset="100%" stop-color="#66BB6A"/>
+    </radialGradient>
+    <filter id="shadow_jt02">
+      <feDropShadow dx="2" dy="4" stdDeviation="6" flood-color="#2D5C3A" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg_jt02)"/>
+  <!-- 땅 -->
+  <ellipse cx="512" cy="780" rx="280" ry="40" fill="#C8B89A" fill-opacity="0.5"/>
+
+  <!-- Layer 2: 메인 오브젝트 — JSON 트리 구조 -->
+  <!-- 루트 줄기 (수직) -->
+  <line x1="512" y1="220" x2="512" y2="400" stroke="url(#trunk)" stroke-width="64" stroke-linecap="round"/>
+
+  <!-- 루트 노드 -->
+  <circle cx="512" cy="200" r="60" fill="url(#trunk)" filter="url(#shadow_jt02)"/>
+  <text x="512" y="215" font-size="52" text-anchor="middle" fill="#FFFFFF" font-family="monospace" font-weight="bold">{}</text>
+
+  <!-- 레벨 1 가지 왼쪽 -->
+  <line x1="512" y1="400" x2="310" y2="400" stroke="url(#branch)" stroke-width="48" stroke-linecap="round"/>
+  <line x1="310" y1="400" x2="310" y2="510" stroke="url(#branch)" stroke-width="48" stroke-linecap="round"/>
+  <!-- 레벨 1 가지 가운데 -->
+  <line x1="512" y1="400" x2="512" y2="510" stroke="url(#branch)" stroke-width="48" stroke-linecap="round"/>
+  <!-- 레벨 1 가지 오른쪽 -->
+  <line x1="512" y1="400" x2="714" y2="400" stroke="url(#branch)" stroke-width="48" stroke-linecap="round"/>
+  <line x1="714" y1="400" x2="714" y2="510" stroke="url(#branch)" stroke-width="48" stroke-linecap="round"/>
+
+  <!-- 레벨 1 노드들 -->
+  <circle cx="310" cy="530" r="46" fill="#3D9960" filter="url(#shadow_jt02)"/>
+  <rect x="284" y="514" width="52" height="32" rx="8" fill="none"/>
+  <text x="310" y="541" font-size="28" text-anchor="middle" fill="#FFFFFF" font-family="monospace">"a"</text>
+
+  <circle cx="512" cy="530" r="46" fill="#3D9960" filter="url(#shadow_jt02)"/>
+  <text x="512" y="541" font-size="28" text-anchor="middle" fill="#FFFFFF" font-family="monospace">"b"</text>
+
+  <circle cx="714" cy="530" r="46" fill="#3D9960" filter="url(#shadow_jt02)"/>
+  <text x="714" y="541" font-size="28" text-anchor="middle" fill="#FFFFFF" font-family="monospace">"c"</text>
+
+  <!-- 레벨 2 가지 (왼쪽 → 잎들) -->
+  <line x1="310" y1="576" x2="220" y2="576" stroke="#2A7040" stroke-width="36" stroke-linecap="round"/>
+  <line x1="220" y1="576" x2="220" y2="660" stroke="#2A7040" stroke-width="36" stroke-linecap="round"/>
+  <line x1="310" y1="576" x2="400" y2="576" stroke="#2A7040" stroke-width="36" stroke-linecap="round"/>
+  <line x1="400" y1="576" x2="400" y2="660" stroke="#2A7040" stroke-width="36" stroke-linecap="round"/>
+
+  <!-- 레벨 2 잎 노드들 -->
+  <ellipse cx="220" cy="680" rx="50" ry="34" fill="url(#leaf)" filter="url(#shadow_jt02)"/>
+  <text x="220" y="690" font-size="22" text-anchor="middle" fill="#1A4A24" font-family="monospace">123</text>
+
+  <ellipse cx="400" cy="680" rx="60" ry="34" fill="url(#leaf)" filter="url(#shadow_jt02)"/>
+  <text x="400" y="690" font-size="20" text-anchor="middle" fill="#1A4A24" font-family="monospace">true</text>
+
+  <!-- 레벨 2 가지 (오른쪽 → 잎들) -->
+  <line x1="714" y1="576" x2="640" y2="576" stroke="#2A7040" stroke-width="36" stroke-linecap="round"/>
+  <line x1="640" y1="576" x2="640" y2="660" stroke="#2A7040" stroke-width="36" stroke-linecap="round"/>
+  <line x1="714" y1="576" x2="788" y2="576" stroke="#2A7040" stroke-width="36" stroke-linecap="round"/>
+  <line x1="788" y1="576" x2="788" y2="660" stroke="#2A7040" stroke-width="36" stroke-linecap="round"/>
+
+  <ellipse cx="640" cy="680" rx="64" ry="34" fill="url(#leaf2)" filter="url(#shadow_jt02)"/>
+  <text x="640" y="690" font-size="18" text-anchor="middle" fill="#1A4A24" font-family="monospace">"val"</text>
+
+  <ellipse cx="788" cy="680" rx="58" ry="34" fill="url(#leaf2)" filter="url(#shadow_jt02)"/>
+  <text x="788" y="690" font-size="20" text-anchor="middle" fill="#1A4A24" font-family="monospace">null</text>
+
+  <!-- Layer 3: 풀잎 장식 -->
+  <ellipse cx="512" cy="740" rx="30" ry="14" fill="#4CAF50" fill-opacity="0.4" transform="rotate(-20, 512, 740)"/>
+  <ellipse cx="512" cy="740" rx="30" ry="14" fill="#4CAF50" fill-opacity="0.4" transform="rotate(20, 512, 740)"/>
+</svg>

@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bgMerge1" x1="0" y1="0" x2="0.4" y2="1">
+      <stop offset="0%" stop-color="#050E1A"/>
+      <stop offset="100%" stop-color="#020810"/>
+    </linearGradient>
+    <!-- 스트림 색상들 -->
+    <linearGradient id="stream1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FF6B6B"/>
+      <stop offset="100%" stop-color="#FF4444"/>
+    </linearGradient>
+    <linearGradient id="stream2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#4ECDC4"/>
+      <stop offset="100%" stop-color="#2AB5AB"/>
+    </linearGradient>
+    <linearGradient id="stream3" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFE66D"/>
+      <stop offset="100%" stop-color="#FFD600"/>
+    </linearGradient>
+    <linearGradient id="stream4" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#A8E6CF"/>
+      <stop offset="100%" stop-color="#6BD9A0"/>
+    </linearGradient>
+    <linearGradient id="mergedStream" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="30%" stop-color="#E8F4FF"/>
+      <stop offset="60%" stop-color="#CCDFFF"/>
+      <stop offset="100%" stop-color="#99BBFF"/>
+    </linearGradient>
+    <filter id="streamGlow">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="mergeGlow">
+      <feGaussianBlur stdDeviation="16" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Layer1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bgMerge1)"/>
+
+  <!-- 배경 흐름 암시 -->
+  <path d="M 0 512 Q 200 480 400 512 Q 600 544 800 512 Q 900 500 1024 512" fill="none" stroke="#0D2040" stroke-width="2" opacity="0.5"/>
+
+  <!-- Layer2: 4개 입력 스트림 (왼쪽에서 오른쪽으로 흘러 합류) -->
+  <!-- 스트림 1 (빨강, 맨 위) -->
+  <path d="M 185 290 Q 320 290 400 360 Q 460 410 512 470" fill="none" stroke="url(#stream1)" stroke-width="18" stroke-linecap="round" filter="url(#streamGlow)"/>
+  <!-- 스트림 1 흐름 파티클 -->
+  <circle cx="260" cy="290" r="9" fill="#FF6B6B" opacity="0.8"/>
+  <circle cx="340" cy="316" r="9" fill="#FF6B6B" opacity="0.7"/>
+
+  <!-- 스트림 2 (청록, 위쪽) -->
+  <path d="M 185 400 Q 310 400 390 430 Q 450 454 512 480" fill="none" stroke="url(#stream2)" stroke-width="18" stroke-linecap="round" filter="url(#streamGlow)"/>
+  <circle cx="250" cy="400" r="9" fill="#4ECDC4" opacity="0.8"/>
+  <circle cx="355" cy="420" r="9" fill="#4ECDC4" opacity="0.7"/>
+
+  <!-- 스트림 3 (노랑, 아래쪽) -->
+  <path d="M 185 624 Q 310 624 390 594 Q 450 570 512 544" fill="none" stroke="url(#stream3)" stroke-width="18" stroke-linecap="round" filter="url(#streamGlow)"/>
+  <circle cx="250" cy="624" r="9" fill="#FFE66D" opacity="0.8"/>
+  <circle cx="355" cy="608" r="9" fill="#FFE66D" opacity="0.7"/>
+
+  <!-- 스트림 4 (연두, 맨 아래) -->
+  <path d="M 185 734 Q 320 734 400 664 Q 460 614 512 554" fill="none" stroke="url(#stream4)" stroke-width="18" stroke-linecap="round" filter="url(#streamGlow)"/>
+  <circle cx="260" cy="734" r="9" fill="#A8E6CF" opacity="0.8"/>
+  <circle cx="340" cy="708" r="9" fill="#A8E6CF" opacity="0.7"/>
+
+  <!-- 합류 지점 글로우 -->
+  <circle cx="512" cy="512" r="60" fill="#FFFFFF" opacity="0.05" filter="url(#mergeGlow)"/>
+  <circle cx="512" cy="512" r="30" fill="#FFFFFF" opacity="0.1"/>
+
+  <!-- 합류된 단일 스트림 (오른쪽으로) -->
+  <path d="M 512 512 Q 640 512 780 512" fill="none" stroke="url(#mergedStream)" stroke-width="28" stroke-linecap="round" filter="url(#mergeGlow)"/>
+
+  <!-- 출력 화살표 -->
+  <polygon points="820,512 780,488 780,536" fill="#FFFFFF" opacity="0.9" filter="url(#streamGlow)"/>
+
+  <!-- Layer3: 소스 라벨 -->
+  <text x="172" y="286" font-family="monospace" font-size="20" fill="#FF6B6B" text-anchor="end" opacity="0.8">app.log</text>
+  <text x="172" y="396" font-family="monospace" font-size="20" fill="#4ECDC4" text-anchor="end" opacity="0.8">api.log</text>
+  <text x="172" y="628" font-family="monospace" font-size="20" fill="#FFE66D" text-anchor="end" opacity="0.8">db.log</text>
+  <text x="172" y="738" font-family="monospace" font-size="20" fill="#A8E6CF" text-anchor="end" opacity="0.8">sys.log</text>
+  <text x="838" y="518" font-family="monospace" font-size="22" fill="#CCDFFF" opacity="0.9">merged</text>
+</svg>

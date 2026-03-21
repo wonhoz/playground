@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg03s" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#071A07;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0E2A0E;stop-opacity:1" />
+    </linearGradient>
+    <radialGradient id="nodeGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#80FF80;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#20AA20;stop-opacity:1" />
+    </radialGradient>
+    <linearGradient id="edgeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#20AA20;stop-opacity:0.5" />
+      <stop offset="50%" style="stop-color:#FFDD00;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#20AA20;stop-opacity:0.5" />
+    </linearGradient>
+    <filter id="nodeglow">
+      <feGaussianBlur stdDeviation="10" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg03s)"/>
+  <!-- 배경 격자 (원근감) -->
+  <line x1="250" y1="750" x2="512" y2="400" stroke="#0A2A0A" stroke-width="1" opacity="0.6"/>
+  <line x1="774" y1="750" x2="512" y2="400" stroke="#0A2A0A" stroke-width="1" opacity="0.6"/>
+  <line x1="350" y1="820" x2="512" y2="400" stroke="#0A2A0A" stroke-width="1" opacity="0.5"/>
+  <line x1="674" y1="820" x2="512" y2="400" stroke="#0A2A0A" stroke-width="1" opacity="0.5"/>
+  <!-- Layer 2: 서비스 노드들 -->
+  <!-- 중앙 이벤트 버스 노드 (큰) -->
+  <circle cx="512" cy="420" r="72" fill="#071A07" stroke="#80FF80" stroke-width="12" filter="url(#nodeglow)"/>
+  <text x="512" y="410" font-family="sans-serif" font-size="20" fill="#80FF80" text-anchor="middle" font-weight="bold">Event</text>
+  <text x="512" y="436" font-family="sans-serif" font-size="20" fill="#40CC40" text-anchor="middle">Bus</text>
+  <!-- 왼쪽 상단 노드 A -->
+  <circle cx="296" cy="280" r="52" fill="#071A07" stroke="#40CC40" stroke-width="10" filter="url(#nodeglow)"/>
+  <text x="296" y="275" font-family="sans-serif" font-size="20" fill="#60EE60" text-anchor="middle">API</text>
+  <text x="296" y="298" font-family="sans-serif" font-size="18" fill="#30AA30" text-anchor="middle">Server</text>
+  <!-- 오른쪽 상단 노드 B -->
+  <circle cx="728" cy="280" r="52" fill="#071A07" stroke="#40CC40" stroke-width="10" filter="url(#nodeglow)"/>
+  <text x="728" y="275" font-family="sans-serif" font-size="20" fill="#60EE60" text-anchor="middle">Auth</text>
+  <text x="728" y="298" font-family="sans-serif" font-size="18" fill="#30AA30" text-anchor="middle">Svc</text>
+  <!-- 왼쪽 하단 노드 C -->
+  <circle cx="280" cy="640" r="52" fill="#071A07" stroke="#40CC40" stroke-width="10"/>
+  <text x="280" y="635" font-family="sans-serif" font-size="20" fill="#60EE60" text-anchor="middle">DB</text>
+  <text x="280" y="658" font-family="sans-serif" font-size="18" fill="#30AA30" text-anchor="middle">Store</text>
+  <!-- 오른쪽 하단 노드 D -->
+  <circle cx="744" cy="640" r="52" fill="#071A07" stroke="#40CC40" stroke-width="10"/>
+  <text x="744" y="635" font-family="sans-serif" font-size="20" fill="#60EE60" text-anchor="middle">Cache</text>
+  <text x="744" y="658" font-family="sans-serif" font-size="18" fill="#30AA30" text-anchor="middle">Redis</text>
+  <!-- 하단 중앙 노드 E -->
+  <circle cx="512" cy="720" r="52" fill="#071A07" stroke="#40CC40" stroke-width="10"/>
+  <text x="512" y="715" font-family="sans-serif" font-size="20" fill="#60EE60" text-anchor="middle">Worker</text>
+  <text x="512" y="738" font-family="sans-serif" font-size="18" fill="#30AA30" text-anchor="middle">Service</text>
+  <!-- Layer 3: 연결선 (이벤트 흐름 화살표) -->
+  <!-- A → 버스 -->
+  <line x1="342" y1="302" x2="450" y2="378" stroke="url(#edgeGrad)" stroke-width="8"/>
+  <polygon points="450,358 440,390 460,390" fill="#FFDD00" opacity="0.9"/>
+  <!-- B → 버스 -->
+  <line x1="682" y1="302" x2="574" y2="378" stroke="url(#edgeGrad)" stroke-width="8"/>
+  <polygon points="574,358 564,390 584,390" fill="#FFDD00" opacity="0.9"/>
+  <!-- 버스 → C -->
+  <line x1="454" y1="466" x2="322" y2="600" stroke="url(#edgeGrad)" stroke-width="8"/>
+  <polygon points="322,580 308,610 336,610" fill="#FFDD00" opacity="0.9"/>
+  <!-- 버스 → D -->
+  <line x1="570" y1="466" x2="702" y2="600" stroke="url(#edgeGrad)" stroke-width="8"/>
+  <polygon points="702,580 692,610 712,610" fill="#FFDD00" opacity="0.9"/>
+  <!-- 버스 → E -->
+  <line x1="512" y1="492" x2="512" y2="668" stroke="url(#edgeGrad)" stroke-width="8"/>
+  <polygon points="492,668 512,700 532,668" fill="#FFDD00" opacity="0.9"/>
+</svg>

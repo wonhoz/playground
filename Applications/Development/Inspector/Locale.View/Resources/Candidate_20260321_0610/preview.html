@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>Locale.View — Icon Candidates (Candidate_20260321_0610)</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #0A1830;
+    color: #D0E8FF;
+    font-family: 'Segoe UI', sans-serif;
+    padding: 40px;
+  }
+  h1 {
+    font-size: 28px;
+    margin-bottom: 8px;
+    color: #80C8FF;
+    letter-spacing: 1px;
+  }
+  .subtitle {
+    color: #4A7AAA;
+    font-size: 15px;
+    margin-bottom: 40px;
+  }
+  .grid {
+    display: flex;
+    gap: 28px;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+  .card {
+    background: #0E2040;
+    border: 1px solid #1A3A60;
+    border-radius: 16px;
+    width: 210px;
+    padding: 20px 16px 18px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+  }
+  .card:hover {
+    transform: scale(1.06);
+    box-shadow: 0 12px 40px rgba(64, 140, 255, 0.35);
+    border-color: #2A6AAA;
+  }
+  .card img {
+    width: 160px;
+    height: 160px;
+    display: block;
+    margin: 0 auto 14px;
+    border-radius: 22px;
+  }
+  .filename {
+    font-size: 13px;
+    color: #4A7AAA;
+    font-family: monospace;
+    margin-bottom: 6px;
+    text-align: center;
+  }
+  .concept {
+    font-size: 13px;
+    color: #80C8FF;
+    text-align: center;
+    line-height: 1.5;
+    margin-bottom: 10px;
+    min-height: 40px;
+  }
+  .pattern-badge {
+    display: inline-block;
+    background: #0A1A38;
+    color: #5090CC;
+    font-size: 11px;
+    padding: 2px 10px;
+    border-radius: 10px;
+    border: 1px solid #1A3A60;
+    margin: 0 auto 10px;
+    display: block;
+    text-align: center;
+  }
+  .swatches {
+    display: flex;
+    gap: 6px;
+    justify-content: center;
+    margin-top: 8px;
+  }
+  .swatch {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.15);
+  }
+</style>
+</head>
+<body>
+<h1>Locale.View</h1>
+<p class="subtitle">로케일별 날짜/숫자/통화 형식 시각화 비교 (CultureInfo 기반) — Candidate_20260321_0610</p>
+<div class="grid">
+
+  <div class="card">
+    <img src="icon_01.svg" alt="icon_01">
+    <div class="filename">icon_01.svg</div>
+    <div class="concept">지구 + 날짜/숫자 형식<br>전세계 로케일 표현</div>
+    <div class="pattern-badge">중앙 심볼 · literal</div>
+    <div class="swatches">
+      <div class="swatch" style="background:#0D47A1" title="딥블루 배경"></div>
+      <div class="swatch" style="background:#42A5F5" title="하늘색 지구"></div>
+      <div class="swatch" style="background:#4CAF50" title="초록 대륙"></div>
+      <div class="swatch" style="background:#FFD700" title="노랑 텍스트"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="icon_02.svg" alt="icon_02">
+    <div class="filename">icon_02.svg</div>
+    <div class="concept">국기들 — 다국가 비교<br>로케일 비교 직접 표현</div>
+    <div class="pattern-badge">공간 장면 · literal</div>
+    <div class="swatches">
+      <div class="swatch" style="background:#87CEEB" title="하늘 배경"></div>
+      <div class="swatch" style="background:#BC002D" title="일본 빨강"></div>
+      <div class="swatch" style="background:#003478" title="한국 파랑"></div>
+      <div class="swatch" style="background:#90EE90" title="초록 잔디"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="icon_03.svg" alt="icon_03">
+    <div class="filename">icon_03.svg</div>
+    <div class="concept">달력 + 화폐 기호 $€¥<br>날짜/통화 형식 핵심</div>
+    <div class="pattern-badge">레이어드 · metaphor</div>
+    <div class="swatches">
+      <div class="swatch" style="background:#1B5E20" title="그린 배경"></div>
+      <div class="swatch" style="background:#FFFFFF" title="흰 달력"></div>
+      <div class="swatch" style="background:#F44336" title="빨강 헤더"></div>
+      <div class="swatch" style="background:#FFD700" title="금색 화폐"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="icon_04.svg" alt="icon_04">
+    <div class="filename">icon_04.svg</div>
+    <div class="concept">바벨탑 — 언어 다양성<br>각기 다른 형식 공존</div>
+    <div class="pattern-badge">기하학 추상 · metaphor</div>
+    <div class="swatches">
+      <div class="swatch" style="background:#F4A460" title="살구 배경"></div>
+      <div class="swatch" style="background:#8B5E2A" title="테라코타 탑"></div>
+      <div class="swatch" style="background:#FFE566" title="황금 장식"></div>
+      <div class="swatch" style="background:#87CEEB" title="하늘"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="icon_05.svg" alt="icon_05">
+    <div class="filename">icon_05.svg</div>
+    <div class="concept">나침반 + 시계<br>로케일 두 핵심 요소</div>
+    <div class="pattern-badge">대각선 동적 · hybrid</div>
+    <div class="swatches">
+      <div class="swatch" style="background:#1A237E" title="네이비 배경"></div>
+      <div class="swatch" style="background:#FFD700" title="금 나침반"></div>
+      <div class="swatch" style="background:#FFFFFF" title="흰 시계"></div>
+      <div class="swatch" style="background:#FF3B3B" title="빨강 바늘"></div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

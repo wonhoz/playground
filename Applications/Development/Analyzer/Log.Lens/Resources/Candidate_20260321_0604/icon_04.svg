@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <clipPath id="ll4-clip">
+      <rect width="1024" height="1024" rx="180"/>
+    </clipPath>
+    <linearGradient id="ll4-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A2230"/>
+      <stop offset="100%" stop-color="#0E1620"/>
+    </linearGradient>
+    <filter id="ll4-glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <g clip-path="url(#ll4-clip)">
+    <!-- Background: Deep Slate -->
+    <rect width="1024" height="1024" fill="url(#ll4-bg)"/>
+
+    <!-- Many input lines (left side, wide, fanning out) -->
+    <g stroke="#AABBCC" stroke-width="6" stroke-linecap="round" opacity="0.4">
+      <line x1="220" y1="260" x2="480" y2="430"/>
+      <line x1="220" y1="300" x2="480" y2="445"/>
+      <line x1="220" y1="340" x2="480" y2="460"/>
+      <line x1="220" y1="380" x2="480" y2="475"/>
+      <line x1="220" y1="420" x2="480" y2="490"/>
+      <line x1="220" y1="460" x2="480" y2="505"/>
+      <line x1="220" y1="500" x2="480" y2="512"/>
+      <line x1="220" y1="540" x2="480" y2="519"/>
+      <line x1="220" y1="580" x2="480" y2="530"/>
+      <line x1="220" y1="620" x2="480" y2="545"/>
+      <line x1="220" y1="660" x2="480" y2="558"/>
+      <line x1="220" y1="700" x2="480" y2="572"/>
+      <line x1="220" y1="740" x2="480" y2="592"/>
+    </g>
+
+    <!-- Filter funnel shape (cyan) -->
+    <g filter="url(#ll4-glow)">
+      <!-- Funnel outline -->
+      <path d="M 480 400 L 544 400 L 600 700 L 424 700 Z" fill="#00CDD4" opacity="0.12"/>
+      <path d="M 480 400 L 544 400 L 600 700 L 424 700 Z" fill="none" stroke="#00CDD4" stroke-width="8" stroke-linejoin="round"/>
+      <!-- Funnel horizontal bars (filter stages) -->
+      <line x1="464" y1="460" x2="560" y2="460" stroke="#00CDD4" stroke-width="6" stroke-linecap="round" opacity="0.8"/>
+      <line x1="450" y1="530" x2="574" y2="530" stroke="#00CDD4" stroke-width="6" stroke-linecap="round" opacity="0.7"/>
+      <line x1="438" y1="600" x2="586" y2="600" stroke="#00CDD4" stroke-width="6" stroke-linecap="round" opacity="0.6"/>
+    </g>
+
+    <!-- Filtered output lines (right side, fewer, narrower) -->
+    <g filter="url(#ll4-glow)">
+      <!-- Filtered lines in cyan/white -->
+      <line x1="600" y1="630" x2="804" y2="500" stroke="#00CDD4" stroke-width="8" stroke-linecap="round" opacity="0.9"/>
+      <line x1="600" y1="650" x2="804" y2="520" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" opacity="0.75"/>
+      <line x1="600" y1="670" x2="804" y2="540" stroke="#00CDD4" stroke-width="7" stroke-linecap="round" opacity="0.7"/>
+      <line x1="600" y1="690" x2="804" y2="560" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" opacity="0.55"/>
+    </g>
+
+    <!-- Funnel tip highlight -->
+    <circle cx="512" cy="706" r="14" fill="#00CDD4" opacity="0.9"/>
+
+    <!-- Left side line type labels (dots) -->
+    <g opacity="0.55">
+      <circle cx="212" cy="260" r="7" fill="#888899"/>
+      <circle cx="212" cy="300" r="7" fill="#888899"/>
+      <circle cx="212" cy="340" r="7" fill="#888899"/>
+      <circle cx="212" cy="380" r="7" fill="#FF8888"/>
+      <circle cx="212" cy="420" r="7" fill="#888899"/>
+      <circle cx="212" cy="460" r="7" fill="#888899"/>
+      <circle cx="212" cy="500" r="7" fill="#888899"/>
+      <circle cx="212" cy="540" r="7" fill="#FF8888"/>
+      <circle cx="212" cy="580" r="7" fill="#888899"/>
+      <circle cx="212" cy="620" r="7" fill="#FFAA44"/>
+      <circle cx="212" cy="660" r="7" fill="#888899"/>
+      <circle cx="212" cy="700" r="7" fill="#888899"/>
+      <circle cx="212" cy="740" r="7" fill="#FF8888"/>
+    </g>
+
+    <!-- Right side labels -->
+    <g filter="url(#ll4-glow)">
+      <circle cx="812" cy="500" r="8" fill="#00CDD4"/>
+      <circle cx="812" cy="520" r="8" fill="#FFFFFF"/>
+      <circle cx="812" cy="540" r="8" fill="#00CDD4"/>
+      <circle cx="812" cy="560" r="8" fill="#FFFFFF"/>
+    </g>
+
+    <!-- Arrow indicating filtering direction -->
+    <g opacity="0.3">
+      <line x1="512" y1="200" x2="512" y2="390" stroke="#00CDD4" stroke-width="4" stroke-linecap="round"/>
+      <polygon points="500,380 512,400 524,380" fill="#00CDD4"/>
+    </g>
+  </g>
+</svg>

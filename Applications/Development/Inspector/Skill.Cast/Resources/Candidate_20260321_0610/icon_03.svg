@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg03" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0D4A47"/>
+      <stop offset="100%" stop-color="#062A28"/>
+    </linearGradient>
+    <linearGradient id="puzzle1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2EC4B6"/>
+      <stop offset="100%" stop-color="#1A8C82"/>
+    </linearGradient>
+    <linearGradient id="puzzle2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#40D9CA"/>
+      <stop offset="100%" stop-color="#2EC4B6"/>
+    </linearGradient>
+    <linearGradient id="puzzle3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#80EEE6"/>
+      <stop offset="100%" stop-color="#40D9CA"/>
+    </linearGradient>
+    <linearGradient id="puzzle4" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#C0F5F0"/>
+    </linearGradient>
+    <filter id="glow03">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg03)"/>
+  <!-- 배경 광원 -->
+  <radialGradient id="bg03glow" cx="50%" cy="50%" r="45%">
+    <stop offset="0%" stop-color="#2EC4B6" stop-opacity="0.25"/>
+    <stop offset="100%" stop-color="#2EC4B6" stop-opacity="0"/>
+  </radialGradient>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg03glow)"/>
+
+  <!-- Layer 2: 메인 오브젝트 — 4개 퍼즐 조각 연결 -->
+  <!-- 좌상단 퍼즐 조각 -->
+  <path d="M 260 280 L 440 280 L 440 380 Q 460 380 460 400 Q 460 420 440 420 L 440 460 L 260 460 L 260 380 Q 240 380 240 400 Q 240 420 260 420 Z" fill="url(#puzzle1)" stroke="#0D4A47" stroke-width="6"/>
+  <!-- 우상단 퍼즐 조각 -->
+  <path d="M 560 280 L 760 280 L 760 460 L 680 460 Q 680 440 660 440 Q 640 440 640 460 L 560 460 L 560 380 Q 580 380 580 400 Q 580 420 560 420 Z" fill="url(#puzzle2)" stroke="#0D4A47" stroke-width="6"/>
+  <!-- 좌하단 퍼즐 조각 -->
+  <path d="M 260 560 L 440 560 Q 440 540 460 540 Q 480 540 480 560 L 480 640 L 440 640 L 440 740 L 260 740 L 260 640 Q 240 640 240 660 Q 240 680 260 680 Z" fill="url(#puzzle3)" stroke="#0D4A47" stroke-width="6"/>
+  <!-- 우하단 퍼즐 조각 (흰색 - 메인 연결 완성) -->
+  <path d="M 560 560 Q 560 540 580 540 Q 600 540 600 560 L 760 560 L 760 680 Q 740 680 740 660 Q 740 640 760 640 L 760 740 L 560 740 L 560 640 Q 580 640 580 660 Q 580 680 560 680 Z" fill="url(#puzzle4)" stroke="#0D4A47" stroke-width="6"/>
+
+  <!-- 연결 글로우 효과 (중앙) -->
+  <circle cx="510" cy="510" r="40" fill="#2EC4B6" fill-opacity="0.3" filter="url(#glow03)"/>
+  <circle cx="510" cy="510" r="20" fill="#80EEE6" fill-opacity="0.6" filter="url(#glow03)"/>
+
+  <!-- Layer 3: 각 조각의 아이콘 심볼 -->
+  <!-- 좌상단: 스킬 기호 -->
+  <text x="330" y="388" font-size="80" text-anchor="middle" fill="#FFFFFF" fill-opacity="0.9" font-family="monospace">⌘</text>
+  <!-- 우상단: 플러그인 기호 -->
+  <text x="650" y="388" font-size="72" text-anchor="middle" fill="#0D4A47" fill-opacity="0.8" font-family="monospace">⚙</text>
+  <!-- 좌하단: 메모리 기호 -->
+  <text x="330" y="668" font-size="72" text-anchor="middle" fill="#0D4A47" fill-opacity="0.8" font-family="monospace">♦</text>
+  <!-- 우하단: 통합 기호 -->
+  <text x="640" y="668" font-size="72" text-anchor="middle" fill="#1A8C82" fill-opacity="0.9" font-family="monospace">✦</text>
+
+  <!-- 퍼즐 연결 포인트 강조 -->
+  <circle cx="460" cy="400" r="18" fill="#FFD700" fill-opacity="0.8" filter="url(#glow03)"/>
+  <circle cx="660" cy="510" r="18" fill="#FFD700" fill-opacity="0.8" filter="url(#glow03)"/>
+  <circle cx="460" cy="600" r="18" fill="#FFD700" fill-opacity="0.8" filter="url(#glow03)"/>
+  <circle cx="570" cy="600" r="18" fill="#FFD700" fill-opacity="0.8" filter="url(#glow03)"/>
+</svg>

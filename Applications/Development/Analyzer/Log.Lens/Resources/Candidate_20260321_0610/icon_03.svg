@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg_ll03" x1="0%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" stop-color="#FAF3E0"/>
+      <stop offset="50%" stop-color="#F0E4C0"/>
+      <stop offset="100%" stop-color="#DDD0A0"/>
+    </linearGradient>
+    <linearGradient id="scroll01" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#F5E8C0"/>
+      <stop offset="50%" stop-color="#E8D498"/>
+      <stop offset="100%" stop-color="#C8B060"/>
+    </linearGradient>
+    <linearGradient id="scrollEdge" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#8B6914"/>
+      <stop offset="100%" stop-color="#5C4010"/>
+    </linearGradient>
+    <filter id="shadow_ll03">
+      <feDropShadow dx="8" dy="12" stdDeviation="20" flood-color="#5C4010" flood-opacity="0.5"/>
+    </filter>
+    <filter id="parchment">
+      <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="3" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs>
+
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg_ll03)"/>
+  <!-- 배경 나무결 느낌 -->
+  <line x1="230" y1="300" x2="790" y2="290" stroke="#C8B080" stroke-width="2" stroke-opacity="0.3"/>
+  <line x1="230" y1="500" x2="790" y2="495" stroke="#C8B080" stroke-width="1.5" stroke-opacity="0.25"/>
+  <line x1="230" y1="700" x2="790" y2="698" stroke="#C8B080" stroke-width="2" stroke-opacity="0.3"/>
+
+  <!-- Layer 2: 메인 오브젝트 — 두루마리 -->
+  <!-- 두루마리 그림자 -->
+  <ellipse cx="514" cy="820" rx="240" ry="22" fill="#8B6914" fill-opacity="0.3"/>
+
+  <!-- 두루마리 위쪽 롤 -->
+  <ellipse cx="512" cy="240" rx="220" ry="44" fill="url(#scrollEdge)"/>
+  <ellipse cx="512" cy="240" rx="210" ry="36" fill="#C8A040"/>
+  <ellipse cx="512" cy="240" rx="210" ry="24" fill="#DDB850"/>
+  <!-- 아래쪽 롤 (반쯤 펼쳐짐) -->
+  <ellipse cx="512" cy="810" rx="220" ry="44" fill="url(#scrollEdge)"/>
+  <ellipse cx="512" cy="810" rx="210" ry="36" fill="#C8A040"/>
+  <ellipse cx="512" cy="810" rx="210" ry="24" fill="#DDB850"/>
+
+  <!-- 두루마리 본체 -->
+  <rect x="292" y="240" width="440" height="570" fill="url(#scroll01)" filter="url(#shadow_ll03)"/>
+  <!-- 두루마리 측면 -->
+  <rect x="292" y="240" width="14" height="570" fill="#D4B870"/>
+  <rect x="718" y="240" width="14" height="570" fill="#D4B870"/>
+
+  <!-- 상단 롤 앞면 완성 -->
+  <ellipse cx="512" cy="240" rx="220" ry="44" fill="none" stroke="url(#scrollEdge)" stroke-width="6"/>
+
+  <!-- Layer 2 (계속): 두루마리 내용 — 로그 텍스트 -->
+  <g font-family="monospace" font-size="19">
+    <!-- 타임스탬프 + 로그 -->
+    <text x="316" y="298" fill="#5C4010" fill-opacity="0.6" font-size="14">03/21 06:00:01.234</text>
+    <text x="316" y="318" fill="#228B22" fill-opacity="0.9">[INFO] Service boot sequence init</text>
+
+    <line x1="310" y1="328" x2="722" y2="328" stroke="#C8A040" stroke-width="1" stroke-opacity="0.4"/>
+
+    <text x="316" y="352" fill="#5C4010" fill-opacity="0.6" font-size="14">03/21 06:00:01.890</text>
+    <text x="316" y="372" fill="#228B22" fill-opacity="0.9">[INFO] Config loaded OK</text>
+
+    <line x1="310" y1="382" x2="722" y2="382" stroke="#C8A040" stroke-width="1" stroke-opacity="0.4"/>
+
+    <text x="316" y="406" fill="#5C4010" fill-opacity="0.6" font-size="14">03/21 06:00:02.120</text>
+    <text x="316" y="426" fill="#CC7700" fill-opacity="0.9">[WARN] Retry connect #1</text>
+
+    <line x1="310" y1="436" x2="722" y2="436" stroke="#C8A040" stroke-width="1" stroke-opacity="0.4"/>
+
+    <text x="316" y="460" fill="#5C4010" fill-opacity="0.6" font-size="14">03/21 06:00:03.445</text>
+    <text x="316" y="480" fill="#CC2222" fill-opacity="0.9">[ERROR] DB unreachable</text>
+
+    <line x1="310" y1="490" x2="722" y2="490" stroke="#C8A040" stroke-width="1" stroke-opacity="0.4"/>
+
+    <text x="316" y="514" fill="#5C4010" fill-opacity="0.6" font-size="14">03/21 06:00:03.890</text>
+    <text x="316" y="534" fill="#228B22" fill-opacity="0.9">[INFO] Fallback activated</text>
+
+    <line x1="310" y1="544" x2="722" y2="544" stroke="#C8A040" stroke-width="1" stroke-opacity="0.4"/>
+
+    <text x="316" y="568" fill="#5C4010" fill-opacity="0.6" font-size="14">03/21 06:00:05.010</text>
+    <text x="316" y="588" fill="#228B22" fill-opacity="0.85">[INFO] Connection restored</text>
+
+    <line x1="310" y1="598" x2="722" y2="598" stroke="#C8A040" stroke-width="1" stroke-opacity="0.4"/>
+
+    <text x="316" y="622" fill="#5C4010" fill-opacity="0.6" font-size="14">03/21 06:00:06.780</text>
+    <text x="316" y="642" fill="#4444CC" fill-opacity="0.9">[DEBUG] Heap: 512MB/2048MB</text>
+
+    <line x1="310" y1="652" x2="722" y2="652" stroke="#C8A040" stroke-width="1" stroke-opacity="0.4"/>
+
+    <text x="316" y="676" fill="#5C4010" fill-opacity="0.6" font-size="14">03/21 06:00:07.230</text>
+    <text x="316" y="696" fill="#228B22" fill-opacity="0.8">[INFO] Ready to serve</text>
+
+    <line x1="310" y1="706" x2="722" y2="706" stroke="#C8A040" stroke-width="1" stroke-opacity="0.4"/>
+    <!-- 마지막 라인 (흐릿하게) -->
+    <text x="316" y="730" fill="#228B22" fill-opacity="0.4">[INFO] ...</text>
+    <text x="316" y="754" fill="#228B22" fill-opacity="0.25">[INFO] ...</text>
+    <text x="316" y="778" fill="#228B22" fill-opacity="0.1">[INFO] ...</text>
+  </g>
+
+  <!-- Layer 3: 장식 — 두루마리 끝 곡선 강조 -->
+  <path d="M 292 240 Q 280 400 280 510 Q 280 620 292 810" stroke="#B89030" stroke-width="4" fill="none" stroke-opacity="0.5"/>
+  <path d="M 732 240 Q 744 400 744 510 Q 744 620 732 810" stroke="#B89030" stroke-width="4" fill="none" stroke-opacity="0.5"/>
+
+  <!-- 인장 (오른쪽 아래) -->
+  <circle cx="680" cy="720" r="36" fill="#CC2222" fill-opacity="0.15" stroke="#CC2222" stroke-width="3" stroke-opacity="0.4"/>
+  <text x="680" y="728" font-size="20" text-anchor="middle" fill="#CC2222" fill-opacity="0.6" font-family="serif">LOG</text>
+</svg>

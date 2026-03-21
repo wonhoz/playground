@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <clipPath id="hp-bg-clip-04">
+      <rect width="1024" height="1024" rx="180"/>
+    </clipPath>
+    <linearGradient id="hp-bg-grad-04" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#B8E8F8"/>
+      <stop offset="100%" stop-color="#80C8E8"/>
+    </linearGradient>
+    <linearGradient id="file-grad-04" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0A1E40"/>
+      <stop offset="100%" stop-color="#142850"/>
+    </linearGradient>
+    <linearGradient id="hex-overlay-04" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#00AAFF" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#0066CC" stop-opacity="0.08"/>
+    </linearGradient>
+  </defs>
+  <!-- 배경 (스카이블루) -->
+  <rect width="1024" height="1024" rx="180" fill="url(#hp-bg-grad-04)"/>
+  <g clip-path="url(#hp-bg-clip-04)">
+    <!-- 파일 아이콘 본체 (X-ray 스타일 딥 네이비) -->
+    <rect x="220" y="200" width="580" height="660" rx="28" fill="url(#file-grad-04)" stroke="#1E3A60" stroke-width="8"/>
+    <!-- 파일 모서리 접힘 -->
+    <path d="M 700 200 L 800 200 L 800 280 Z" fill="#0A1E40"/>
+    <path d="M 700 200 L 800 280 L 700 280 Z" fill="#162840"/>
+    <!-- X-ray 투명 효과 (헥스 오버레이) -->
+    <rect x="220" y="200" width="580" height="660" rx="28" fill="url(#hex-overlay-04)"/>
+    <!-- 내부 헥스 값들 (투명하게 보이는 효과) -->
+    <!-- 상단 섹션 - 파일 헤더 -->
+    <rect x="260" y="260" width="440" height="40" rx="6" fill="#1E3A60" opacity="0.6"/>
+    <rect x="270" y="270" width="60" height="20" rx="4" fill="#4080FF" opacity="0.8"/>
+    <rect x="340" y="270" width="50" height="20" rx="4" fill="#4080FF" opacity="0.6"/>
+    <rect x="400" y="270" width="50" height="20" rx="4" fill="#4080FF" opacity="0.6"/>
+    <rect x="460" y="270" width="50" height="20" rx="4" fill="#FF8040" opacity="0.8"/>
+    <!-- 구조체 파싱 표시 -->
+    <rect x="260" y="320" width="440" height="8" rx="3" fill="#00AAFF" opacity="0.5"/>
+    <!-- 바이트 그리드 영역 1 -->
+    <rect x="260" y="340" width="200" height="30" rx="5" fill="#1E3A60" opacity="0.7"/>
+    <rect x="268" y="348" width="40" height="14" rx="3" fill="#80DDFF" opacity="0.8"/>
+    <rect x="316" y="348" width="40" height="14" rx="3" fill="#80DDFF" opacity="0.7"/>
+    <rect x="364" y="348" width="40" height="14" rx="3" fill="#FF9060" opacity="0.8"/>
+    <rect x="412" y="348" width="40" height="14" rx="3" fill="#80DDFF" opacity="0.6"/>
+    <!-- 바이트 그리드 영역 2 -->
+    <rect x="260" y="380" width="200" height="30" rx="5" fill="#1E3A60" opacity="0.6"/>
+    <rect x="268" y="388" width="40" height="14" rx="3" fill="#80DDFF" opacity="0.6"/>
+    <rect x="316" y="388" width="40" height="14" rx="3" fill="#80DDFF" opacity="0.7"/>
+    <rect x="364" y="388" width="40" height="14" rx="3" fill="#80DDFF" opacity="0.6"/>
+    <rect x="412" y="388" width="40" height="14" rx="3" fill="#80DDFF" opacity="0.7"/>
+    <!-- 구조체 파싱 섹션 (우측) -->
+    <rect x="476" y="340" width="224" height="70" rx="6" fill="#0066AA" opacity="0.35"/>
+    <rect x="486" y="350" width="120" height="12" rx="3" fill="#80DDFF" opacity="0.7"/>
+    <rect x="486" y="368" width="80" height="12" rx="3" fill="#AAEEFF" opacity="0.6"/>
+    <rect x="486" y="386" width="100" height="12" rx="3" fill="#AAEEFF" opacity="0.5"/>
+    <!-- 중간 분리선 -->
+    <rect x="260" y="422" width="440" height="4" rx="2" fill="#00AAFF" opacity="0.4"/>
+    <!-- 추가 헥스 데이터 -->
+    <rect x="260" y="436" width="60" height="16" rx="3" fill="#80DDFF" opacity="0.5"/>
+    <rect x="328" y="436" width="60" height="16" rx="3" fill="#80DDFF" opacity="0.45"/>
+    <rect x="396" y="436" width="60" height="16" rx="3" fill="#FF8040" opacity="0.6"/>
+    <rect x="464" y="436" width="60" height="16" rx="3" fill="#80DDFF" opacity="0.5"/>
+    <rect x="532" y="436" width="60" height="16" rx="3" fill="#80DDFF" opacity="0.45"/>
+    <rect x="260" y="462" width="60" height="16" rx="3" fill="#80DDFF" opacity="0.4"/>
+    <rect x="328" y="462" width="60" height="16" rx="3" fill="#80DDFF" opacity="0.5"/>
+    <rect x="396" y="462" width="60" height="16" rx="3" fill="#80DDFF" opacity="0.4"/>
+    <rect x="464" y="462" width="60" height="16" rx="3" fill="#80DDFF" opacity="0.45"/>
+    <rect x="532" y="462" width="60" height="16" rx="3" fill="#80DDFF" opacity="0.5"/>
+    <!-- 투명 오버레이 글로우 -->
+    <rect x="220" y="200" width="580" height="660" rx="28" fill="none" stroke="#00AAFF" stroke-width="3" opacity="0.3"/>
+    <!-- X-ray 빛 효과 (왼쪽 상단 강조) -->
+    <ellipse cx="340" cy="300" rx="100" ry="60" fill="#FFFFFF" opacity="0.06"/>
+    <!-- 하단 파일명 표시 영역 -->
+    <rect x="260" y="740" width="300" height="28" rx="6" fill="#1E3A60" opacity="0.7"/>
+    <rect x="270" y="750" width="200" height="8" rx="3" fill="#80DDFF" opacity="0.6"/>
+  </g>
+</svg>

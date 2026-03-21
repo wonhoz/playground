@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <clipPath id="jt3-clip">
+      <rect width="1024" height="1024" rx="180"/>
+    </clipPath>
+    <radialGradient id="jt3-sky" cx="50%" cy="30%" r="60%">
+      <stop offset="0%" stop-color="#F5EDD8"/>
+      <stop offset="100%" stop-color="#E8D8B0"/>
+    </radialGradient>
+    <filter id="jt3-shadow" x="-15%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="10" stdDeviation="20" flood-color="#3A2800" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+  <g clip-path="url(#jt3-clip)">
+    <!-- Background: Cream -->
+    <rect width="1024" height="1024" fill="url(#jt3-sky)"/>
+    <!-- Ground -->
+    <ellipse cx="512" cy="870" rx="320" ry="50" fill="#C8B880" opacity="0.5"/>
+
+    <!-- Tree trunk -->
+    <g filter="url(#jt3-shadow)">
+      <rect x="476" y="640" width="72" height="200" rx="20" fill="#5A3010"/>
+      <!-- Root spread -->
+      <path d="M476 820 Q440 860 400 870" stroke="#5A3010" stroke-width="20" fill="none" stroke-linecap="round"/>
+      <path d="M548 820 Q584 860 624 870" stroke="#5A3010" stroke-width="20" fill="none" stroke-linecap="round"/>
+      <path d="M490 840 Q470 880 450 890" stroke="#5A3010" stroke-width="14" fill="none" stroke-linecap="round"/>
+      <path d="M534 840 Q554 880 574 890" stroke="#5A3010" stroke-width="14" fill="none" stroke-linecap="round"/>
+    </g>
+
+    <!-- Main foliage (deep green silhouette) -->
+    <g filter="url(#jt3-shadow)">
+      <!-- Bottom canopy layer -->
+      <ellipse cx="512" cy="560" rx="260" ry="140" fill="#1A5C28"/>
+      <!-- Mid canopy -->
+      <ellipse cx="512" cy="460" rx="210" ry="120" fill="#228B3A"/>
+      <!-- Upper canopy -->
+      <ellipse cx="512" cy="370" rx="160" ry="110" fill="#2DAA46"/>
+      <!-- Top peak -->
+      <ellipse cx="512" cy="290" rx="110" ry="90" fill="#38CC55"/>
+      <!-- Crown -->
+      <ellipse cx="512" cy="230" rx="70" ry="65" fill="#44DD66"/>
+
+      <!-- Canopy texture lumps left -->
+      <ellipse cx="340" cy="520" rx="90" ry="70" fill="#1A5C28"/>
+      <ellipse cx="380" cy="450" rx="80" ry="65" fill="#228B3A"/>
+      <!-- Canopy lumps right -->
+      <ellipse cx="684" cy="520" rx="90" ry="70" fill="#1A5C28"/>
+      <ellipse cx="644" cy="450" rx="80" ry="65" fill="#228B3A"/>
+    </g>
+
+    <!-- Gold berries/fruits scattered in foliage -->
+    <circle cx="420" cy="480" r="16" fill="#FFD700" opacity="0.9"/>
+    <circle cx="600" cy="460" r="16" fill="#FFD700" opacity="0.9"/>
+    <circle cx="460" cy="380" r="14" fill="#FFA500" opacity="0.9"/>
+    <circle cx="560" cy="350" r="14" fill="#FFD700" opacity="0.85"/>
+    <circle cx="512" cy="310" r="12" fill="#FFA500" opacity="0.9"/>
+    <circle cx="370" cy="540" r="12" fill="#FFD700" opacity="0.75"/>
+    <circle cx="650" cy="530" r="12" fill="#FFA500" opacity="0.75"/>
+    <circle cx="480" cy="430" r="10" fill="#FFD700" opacity="0.7"/>
+    <circle cx="544" cy="410" r="10" fill="#FFA500" opacity="0.7"/>
+    <circle cx="436" cy="310" r="10" fill="#FFD700" opacity="0.6"/>
+    <circle cx="586" cy="320" r="10" fill="#FFD700" opacity="0.6"/>
+
+    <!-- Small birds/decorations in sky -->
+    <path d="M 260 220 Q 280 210 300 220" stroke="#7A6040" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <path d="M 730 180 Q 750 168 770 180" stroke="#7A6040" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <!-- Sun hint -->
+    <circle cx="800" cy="220" r="40" fill="#FFE080" opacity="0.3"/>
+  </g>
+</svg>

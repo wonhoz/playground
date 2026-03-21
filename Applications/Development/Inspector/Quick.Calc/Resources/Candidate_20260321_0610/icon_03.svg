@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg03q" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#121218;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1C1C26;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="keyboard03q" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2A2A38;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1A1A28;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="popup03q" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFE040;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FFAA00;stop-opacity:1" />
+    </linearGradient>
+    <filter id="popupglow">
+      <feDropShadow dx="0" dy="-6" stdDeviation="18" flood-color="#FFAA00" flood-opacity="0.5"/>
+    </filter>
+  </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg03q)"/>
+  <!-- Layer 2: 키보드 -->
+  <rect x="220" y="560" width="584" height="240" rx="24" fill="url(#keyboard03q)" stroke="#3A3A4A" stroke-width="8"/>
+  <!-- 키보드 키들 (작은 사각형들) -->
+  <!-- 행 1 -->
+  <rect x="244" y="584" width="54" height="42" rx="8" fill="#3A3A4A" stroke="#4A4A5A" stroke-width="2"/>
+  <rect x="310" y="584" width="54" height="42" rx="8" fill="#3A3A4A" stroke="#4A4A5A" stroke-width="2"/>
+  <rect x="376" y="584" width="54" height="42" rx="8" fill="#3A3A4A" stroke="#4A4A5A" stroke-width="2"/>
+  <rect x="442" y="584" width="54" height="42" rx="8" fill="#3A3A4A" stroke="#4A4A5A" stroke-width="2"/>
+  <rect x="508" y="584" width="54" height="42" rx="8" fill="#3A3A4A" stroke="#4A4A5A" stroke-width="2"/>
+  <rect x="574" y="584" width="54" height="42" rx="8" fill="#3A3A4A" stroke="#4A4A5A" stroke-width="2"/>
+  <rect x="640" y="584" width="54" height="42" rx="8" fill="#3A3A4A" stroke="#4A4A5A" stroke-width="2"/>
+  <rect x="706" y="584" width="54" height="42" rx="8" fill="#3A3A4A" stroke="#4A4A5A" stroke-width="2"/>
+  <!-- 행 2 -->
+  <rect x="260" y="642" width="54" height="42" rx="8" fill="#3A3A4A" stroke="#4A4A5A" stroke-width="2"/>
+  <rect x="326" y="642" width="54" height="42" rx="8" fill="#3A3A4A" stroke="#4A4A5A" stroke-width="2"/>
+  <rect x="392" y="642" width="54" height="42" rx="8" fill="#3A3A4A" stroke="#4A4A5A" stroke-width="2"/>
+  <rect x="458" y="642" width="54" height="42" rx="8" fill="#3A3A4A" stroke="#4A4A5A" stroke-width="2"/>
+  <rect x="524" y="642" width="54" height="42" rx="8" fill="#3A3A4A" stroke="#4A4A5A" stroke-width="2"/>
+  <rect x="590" y="642" width="54" height="42" rx="8" fill="#3A3A4A" stroke="#4A4A5A" stroke-width="2"/>
+  <rect x="656" y="642" width="104" height="42" rx="8" fill="#3A3A4A" stroke="#4A4A5A" stroke-width="2"/>
+  <!-- 스페이스바 -->
+  <rect x="310" y="700" width="404" height="42" rx="8" fill="#4A4A5A" stroke="#5A5A6A" stroke-width="2"/>
+  <!-- 강조된 Win+K 키 -->
+  <rect x="244" y="642" width="54" height="42" rx="8" fill="#2266CC" stroke="#4488FF" stroke-width="3"/>
+  <text x="271" y="669" font-family="sans-serif" font-size="18" fill="#FFFFFF" text-anchor="middle" font-weight="bold">Win</text>
+  <text x="448" y="595" font-family="sans-serif" font-size="26" fill="#AAAACC" text-anchor="middle">K</text>
+  <!-- 연결 + 표시 -->
+  <text x="308" y="669" font-family="sans-serif" font-size="22" fill="#4488FF" text-anchor="middle">+</text>
+  <!-- Layer 2: 팝업 계산기 (키보드 위에서 튀어나옴) -->
+  <rect x="360" y="260" width="304" height="280" rx="22" fill="url(#popup03q)" stroke="#FFE040" stroke-width="8" filter="url(#popupglow)"/>
+  <!-- 팝업 내부 계산기 미니 -->
+  <rect x="378" y="280" width="268" height="64" rx="12" fill="#CC7700"/>
+  <text x="636" y="326" font-family="'Courier New', monospace" font-size="38" fill="#FFFFFF" text-anchor="end" font-weight="bold">42</text>
+  <!-- 팝업 버튼들 미니 -->
+  <rect x="378" y="360" width="56" height="38" rx="8" fill="#FF8800"/>
+  <text x="406" y="385" font-family="sans-serif" font-size="22" fill="#FFFFFF" text-anchor="middle">7</text>
+  <rect x="444" y="360" width="56" height="38" rx="8" fill="#FF8800"/>
+  <text x="472" y="385" font-family="sans-serif" font-size="22" fill="#FFFFFF" text-anchor="middle">8</text>
+  <rect x="510" y="360" width="56" height="38" rx="8" fill="#FF8800"/>
+  <text x="538" y="385" font-family="sans-serif" font-size="22" fill="#FFFFFF" text-anchor="middle">9</text>
+  <rect x="576" y="360" width="56" height="38" rx="8" fill="#CC5500"/>
+  <text x="604" y="385" font-family="sans-serif" font-size="26" fill="#FFFFFF" text-anchor="middle">+</text>
+  <rect x="378" y="410" width="56" height="38" rx="8" fill="#FF8800"/>
+  <text x="406" y="435" font-family="sans-serif" font-size="22" fill="#FFFFFF" text-anchor="middle">4</text>
+  <rect x="444" y="410" width="56" height="38" rx="8" fill="#FF8800"/>
+  <text x="472" y="435" font-family="sans-serif" font-size="22" fill="#FFFFFF" text-anchor="middle">5</text>
+  <rect x="510" y="410" width="56" height="38" rx="8" fill="#FF8800"/>
+  <text x="538" y="435" font-family="sans-serif" font-size="22" fill="#FFFFFF" text-anchor="middle">6</text>
+  <rect x="576" y="410" width="56" height="38" rx="8" fill="#CC5500"/>
+  <text x="604" y="435" font-family="sans-serif" font-size="26" fill="#FFFFFF" text-anchor="middle">=</text>
+  <!-- 팝업 꼬리 화살표 (아래) -->
+  <polygon points="480,536 512,570 544,536" fill="url(#popup03q)" stroke="#FFE040" stroke-width="4"/>
+  <!-- Layer 3: 핫키 라벨 -->
+  <rect x="380" y="484" width="264" height="40" rx="12" fill="#CC7700" opacity="0.9"/>
+  <text x="512" y="510" font-family="sans-serif" font-size="26" fill="#FFFFFF" text-anchor="middle" font-weight="bold">Win + K</text>
+</svg>

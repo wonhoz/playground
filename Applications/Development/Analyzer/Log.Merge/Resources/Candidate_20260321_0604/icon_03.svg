@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <clipPath id="lm-bg-clip-03">
+      <rect width="1024" height="1024" rx="160"/>
+    </clipPath>
+    <linearGradient id="lm-bg-03" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F5F0E8"/>
+      <stop offset="100%" stop-color="#EDE8DC"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="160" fill="url(#lm-bg-03)"/>
+
+  <g clip-path="url(#lm-bg-clip-03)">
+    <!-- 여러 줄기가 하나의 강으로 합류 -->
+
+    <!-- 합류점 원 -->
+    <circle cx="512" cy="680" r="80" fill="#2C3347"/>
+
+    <!-- 블루 줄기 -->
+    <path d="M240 240 C240 400 400 520 512 600" fill="none" stroke="#3B82F6" stroke-width="70" stroke-linecap="round"/>
+    <!-- 레드 줄기 -->
+    <path d="M400 230 C440 370 470 500 512 600" fill="none" stroke="#EF4444" stroke-width="64" stroke-linecap="round"/>
+    <!-- 그린 줄기 -->
+    <path d="M624 230 C584 370 554 500 512 600" fill="none" stroke="#22C55E" stroke-width="64" stroke-linecap="round"/>
+    <!-- 옐로 줄기 -->
+    <path d="M784 240 C784 400 624 520 512 600" fill="none" stroke="#EAB308" stroke-width="70" stroke-linecap="round"/>
+
+    <!-- 합류 후 메인 줄기 -->
+    <path d="M512 600 C512 640 512 680 512 760" fill="none" stroke="#2C3347" stroke-width="80" stroke-linecap="round"/>
+
+    <!-- 합류점 강조 -->
+    <circle cx="512" cy="680" r="60" fill="#2C3347"/>
+    <circle cx="512" cy="680" r="36" fill="#F5F0E8"/>
+
+    <!-- 하단 종착 -->
+    <rect x="442" y="760" width="140" height="54" rx="27" fill="#2C3347"/>
+
+    <!-- 상단 줄기 시작점 장식 -->
+    <circle cx="240" cy="240" r="32" fill="#3B82F6"/>
+    <circle cx="400" cy="230" r="28" fill="#EF4444"/>
+    <circle cx="624" cy="230" r="28" fill="#22C55E"/>
+    <circle cx="784" cy="240" r="32" fill="#EAB308"/>
+  </g>
+</svg>

@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <clipPath id="bg-clip-02">
+      <rect width="1024" height="1024" rx="160"/>
+    </clipPath>
+    <linearGradient id="bg-grad-02" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A1A2E"/>
+      <stop offset="100%" stop-color="#16213E"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="160" fill="url(#bg-grad-02)"/>
+
+  <g clip-path="url(#bg-clip-02)">
+    <!-- 타임라인 수평 축 -->
+    <line x1="200" y1="700" x2="820" y2="700" stroke="#444466" stroke-width="50" stroke-linecap="round"/>
+
+    <!-- 커밋 히스토리 연결선 (지그재그 그래프) -->
+    <polyline points="220,620 320,480 420,560 520,380 620,440 720,300 800,360" fill="none" stroke="#FFFFFF" stroke-width="52" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <!-- 디테일: 커밋 포인트들 (코랄/살구) -->
+    <circle cx="220" cy="620" r="42" fill="#FF6B6B"/>
+    <circle cx="220" cy="620" r="22" fill="#FFD4C2"/>
+
+    <circle cx="320" cy="480" r="42" fill="#FF8C69"/>
+    <circle cx="320" cy="480" r="22" fill="#FFD4C2"/>
+
+    <circle cx="420" cy="560" r="42" fill="#FFA07A"/>
+    <circle cx="420" cy="560" r="22" fill="#FFFFFF"/>
+
+    <circle cx="520" cy="380" r="48" fill="#FF6B6B"/>
+    <circle cx="520" cy="380" r="26" fill="#FFD4C2"/>
+
+    <circle cx="620" cy="440" r="42" fill="#FF8C69"/>
+    <circle cx="620" cy="440" r="22" fill="#FFFFFF"/>
+
+    <circle cx="720" cy="300" r="48" fill="#FFA07A"/>
+    <circle cx="720" cy="300" r="26" fill="#FFD4C2"/>
+
+    <circle cx="800" cy="360" r="42" fill="#FF6B6B"/>
+    <circle cx="800" cy="360" r="22" fill="#FFFFFF"/>
+
+    <!-- 수직 드롭라인 -->
+    <line x1="220" y1="620" x2="220" y2="700" stroke="#444466" stroke-width="36" stroke-linecap="round" stroke-dasharray="10,14"/>
+    <line x1="320" y1="480" x2="320" y2="700" stroke="#444466" stroke-width="36" stroke-linecap="round" stroke-dasharray="10,14"/>
+    <line x1="420" y1="560" x2="420" y2="700" stroke="#444466" stroke-width="36" stroke-linecap="round" stroke-dasharray="10,14"/>
+    <line x1="520" y1="380" x2="520" y2="700" stroke="#444466" stroke-width="36" stroke-linecap="round" stroke-dasharray="10,14"/>
+    <line x1="620" y1="440" x2="620" y2="700" stroke="#444466" stroke-width="36" stroke-linecap="round" stroke-dasharray="10,14"/>
+    <line x1="720" y1="300" x2="720" y2="700" stroke="#444466" stroke-width="36" stroke-linecap="round" stroke-dasharray="10,14"/>
+    <line x1="800" y1="360" x2="800" y2="700" stroke="#444466" stroke-width="36" stroke-linecap="round" stroke-dasharray="10,14"/>
+  </g>
+</svg>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>Log.Lens — Icon Candidates 20260321_0604</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #0A0E14;
+    font-family: 'Segoe UI', sans-serif;
+    color: #C8D8E8;
+    min-height: 100vh;
+    padding: 40px 32px;
+  }
+  header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+  header h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #00CDD4;
+    letter-spacing: 0.08em;
+  }
+  header p {
+    margin-top: 8px;
+    font-size: 0.9rem;
+    color: #406070;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 28px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .card {
+    background: #101820;
+    border: 1px solid #1A2A38;
+    border-radius: 16px;
+    padding: 24px 16px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .card:hover {
+    transform: scale(1.08);
+    box-shadow: 0 0 32px #00CDD455;
+  }
+  .icon-wrap {
+    width: 160px;
+    height: 160px;
+    border-radius: 28px;
+    overflow: hidden;
+    box-shadow: 0 4px 24px #00000088;
+  }
+  .icon-wrap img {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+  .card-label {
+    font-size: 0.78rem;
+    color: #4090A0;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+  }
+  .card-concept {
+    font-size: 0.72rem;
+    color: #304A58;
+    text-align: center;
+    line-height: 1.5;
+  }
+  .palette {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .swatch {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid #1A2A38;
+  }
+  .type-badge {
+    font-size: 0.65rem;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+  }
+  .literal { background: #1A2A1A; color: #60DD60; }
+  .metaphor { background: #2A1A10; color: #FF9040; }
+  .hybrid { background: #1A1A2A; color: #A080FF; }
+</style>
+</head>
+<body>
+<header>
+  <h1>🔍 Log.Lens</h1>
+  <p>로그 파일 멀티탭 뷰어 + 실시간 필터링 도구 | Candidate_20260321_0604</p>
+</header>
+<div class="grid">
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_01.svg" alt="icon_01"/></div>
+    <div class="card-label">icon_01.svg</div>
+    <span class="type-badge literal">literal</span>
+    <div class="card-concept">돋보기 + 로그 텍스트<br>= 로그 검색<br>중앙 심볼 패턴</div>
+    <div class="palette">
+      <div class="swatch" style="background:#C86800" title="딥앰버"></div>
+      <div class="swatch" style="background:#FFFFFF" title="화이트돋보기"></div>
+      <div class="swatch" style="background:#FF6600" title="하이라이트"></div>
+      <div class="swatch" style="background:#3A2000" title="다크텍스트"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_02.svg" alt="icon_02"/></div>
+    <div class="card-label">icon_02.svg</div>
+    <span class="type-badge literal">literal</span>
+    <div class="card-concept">멀티탭 창에<br>색상별 로그 라인<br>공간/장면 패턴</div>
+    <div class="palette">
+      <div class="swatch" style="background:#0D1117" title="다크배경"></div>
+      <div class="swatch" style="background:#40AA60" title="그린INFO"></div>
+      <div class="swatch" style="background:#FF4444" title="레드ERROR"></div>
+      <div class="swatch" style="background:#FFAA30" title="오렌지WARN"></div>
+      <div class="swatch" style="background:#C0C8D0" title="화이트텍스트"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_03.svg" alt="icon_03"/></div>
+    <div class="card-label">icon_03.svg</div>
+    <span class="type-badge metaphor">metaphor</span>
+    <div class="card-concept">렌즈를 통과해<br>빛이 집중되는 형태<br>기하학 추상 패턴</div>
+    <div class="palette">
+      <div class="swatch" style="background:#FF7A00" title="비비드오렌지"></div>
+      <div class="swatch" style="background:#C84000" title="딥오렌지"></div>
+      <div class="swatch" style="background:#FFF5E8" title="크림렌즈"></div>
+      <div class="swatch" style="background:#FFFFFF" title="화이트광선"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_04.svg" alt="icon_04"/></div>
+    <div class="card-label">icon_04.svg</div>
+    <span class="type-badge metaphor">metaphor</span>
+    <div class="card-concept">많은 라인들이<br>필터를 통과해 좁혀짐<br>대각선/동적 패턴</div>
+    <div class="palette">
+      <div class="swatch" style="background:#0E1620" title="딥슬레이트"></div>
+      <div class="swatch" style="background:#00CDD4" title="시안필터"></div>
+      <div class="swatch" style="background:#AABBCC" title="화이트라인"></div>
+      <div class="swatch" style="background:#FF8888" title="레드강조"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_05.svg" alt="icon_05"/></div>
+    <div class="card-label">icon_05.svg</div>
+    <span class="type-badge hybrid">hybrid</span>
+    <div class="card-concept">ERROR 빨간 라인과<br>일반/OK 라인 혼재<br>레이어드 패턴</div>
+    <div class="palette">
+      <div class="swatch" style="background:#F4F6F8" title="라이트배경"></div>
+      <div class="swatch" style="background:#EE2222" title="레드ERROR"></div>
+      <div class="swatch" style="background:#22AA44" title="그린OK"></div>
+      <div class="swatch" style="background:#EE8800" title="오렌지WARN"></div>
+      <div class="swatch" style="background:#2C3E50" title="다크헤더"></div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

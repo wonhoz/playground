@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg01q" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#5BBFEE;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2A9ACC;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="calc01q" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFFFFF;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#E8F4FF;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="btn01q" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3A8ACC;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1A6AAA;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="btnOp01q" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FF8C40;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#DD5500;stop-opacity:1" />
+    </linearGradient>
+    <filter id="calcshadow">
+      <feDropShadow dx="0" dy="10" stdDeviation="18" flood-color="#1A5A88" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg01q)"/>
+  <!-- 배경 원 장식 -->
+  <circle cx="300" cy="280" r="160" fill="#FFFFFF" opacity="0.08"/>
+  <circle cx="780" cy="760" r="130" fill="#FFFFFF" opacity="0.06"/>
+  <!-- Layer 2: 계산기 본체 -->
+  <rect x="308" y="240" width="408" height="544" rx="32" fill="url(#calc01q)" stroke="#C8E4F8" stroke-width="8" filter="url(#calcshadow)"/>
+  <!-- 디스플레이 -->
+  <rect x="336" y="272" width="352" height="100" rx="16" fill="#1A3A5A"/>
+  <text x="676" y="344" font-family="'Courier New', monospace" font-size="46" fill="#FFFFFF" text-anchor="end" font-weight="bold">1,234</text>
+  <!-- 버튼 그리드 (4x4) -->
+  <!-- 행 1: C, ±, %, ÷ -->
+  <rect x="336" y="392" width="72" height="56" rx="14" fill="#D0D8E0"/>
+  <text x="372" y="428" font-family="sans-serif" font-size="28" fill="#1A3A5A" text-anchor="middle" font-weight="bold">C</text>
+  <rect x="420" y="392" width="72" height="56" rx="14" fill="#D0D8E0"/>
+  <text x="456" y="428" font-family="sans-serif" font-size="28" fill="#1A3A5A" text-anchor="middle">±</text>
+  <rect x="504" y="392" width="72" height="56" rx="14" fill="#D0D8E0"/>
+  <text x="540" y="428" font-family="sans-serif" font-size="28" fill="#1A3A5A" text-anchor="middle">%</text>
+  <rect x="588" y="392" width="100" height="56" rx="14" fill="url(#btnOp01q)"/>
+  <text x="638" y="428" font-family="sans-serif" font-size="32" fill="#FFFFFF" text-anchor="middle">÷</text>
+  <!-- 행 2: 7, 8, 9, × -->
+  <rect x="336" y="462" width="72" height="56" rx="14" fill="url(#btn01q)"/>
+  <text x="372" y="498" font-family="sans-serif" font-size="30" fill="#FFFFFF" text-anchor="middle">7</text>
+  <rect x="420" y="462" width="72" height="56" rx="14" fill="url(#btn01q)"/>
+  <text x="456" y="498" font-family="sans-serif" font-size="30" fill="#FFFFFF" text-anchor="middle">8</text>
+  <rect x="504" y="462" width="72" height="56" rx="14" fill="url(#btn01q)"/>
+  <text x="540" y="498" font-family="sans-serif" font-size="30" fill="#FFFFFF" text-anchor="middle">9</text>
+  <rect x="588" y="462" width="100" height="56" rx="14" fill="url(#btnOp01q)"/>
+  <text x="638" y="498" font-family="sans-serif" font-size="32" fill="#FFFFFF" text-anchor="middle">×</text>
+  <!-- 행 3: 4, 5, 6, − -->
+  <rect x="336" y="532" width="72" height="56" rx="14" fill="url(#btn01q)"/>
+  <text x="372" y="568" font-family="sans-serif" font-size="30" fill="#FFFFFF" text-anchor="middle">4</text>
+  <rect x="420" y="532" width="72" height="56" rx="14" fill="url(#btn01q)"/>
+  <text x="456" y="568" font-family="sans-serif" font-size="30" fill="#FFFFFF" text-anchor="middle">5</text>
+  <rect x="504" y="532" width="72" height="56" rx="14" fill="url(#btn01q)"/>
+  <text x="540" y="568" font-family="sans-serif" font-size="30" fill="#FFFFFF" text-anchor="middle">6</text>
+  <rect x="588" y="532" width="100" height="56" rx="14" fill="url(#btnOp01q)"/>
+  <text x="638" y="568" font-family="sans-serif" font-size="36" fill="#FFFFFF" text-anchor="middle">−</text>
+  <!-- 행 4: 1, 2, 3, + -->
+  <rect x="336" y="602" width="72" height="56" rx="14" fill="url(#btn01q)"/>
+  <text x="372" y="638" font-family="sans-serif" font-size="30" fill="#FFFFFF" text-anchor="middle">1</text>
+  <rect x="420" y="602" width="72" height="56" rx="14" fill="url(#btn01q)"/>
+  <text x="456" y="638" font-family="sans-serif" font-size="30" fill="#FFFFFF" text-anchor="middle">2</text>
+  <rect x="504" y="602" width="72" height="56" rx="14" fill="url(#btn01q)"/>
+  <text x="540" y="638" font-family="sans-serif" font-size="30" fill="#FFFFFF" text-anchor="middle">3</text>
+  <rect x="588" y="602" width="100" height="56" rx="14" fill="url(#btnOp01q)"/>
+  <text x="638" y="638" font-family="sans-serif" font-size="36" fill="#FFFFFF" text-anchor="middle">+</text>
+  <!-- 행 5: 0(넓), ., = -->
+  <rect x="336" y="672" width="156" height="56" rx="14" fill="url(#btn01q)"/>
+  <text x="414" y="708" font-family="sans-serif" font-size="30" fill="#FFFFFF" text-anchor="middle">0</text>
+  <rect x="504" y="672" width="72" height="56" rx="14" fill="url(#btn01q)"/>
+  <text x="540" y="708" font-family="sans-serif" font-size="30" fill="#FFFFFF" text-anchor="middle">.</text>
+  <rect x="588" y="672" width="100" height="56" rx="14" fill="#2288DD"/>
+  <text x="638" y="708" font-family="sans-serif" font-size="30" fill="#FFFFFF" text-anchor="middle">=</text>
+  <!-- Layer 3: 계산기 상단 둥근 끝 광택 -->
+  <ellipse cx="512" cy="255" rx="180" ry="12" fill="#FFFFFF" opacity="0.3"/>
+</svg>

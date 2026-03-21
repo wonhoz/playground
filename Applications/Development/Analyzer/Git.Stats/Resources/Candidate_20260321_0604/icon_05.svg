@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <clipPath id="bg-clip-05">
+      <rect width="1024" height="1024" rx="160"/>
+    </clipPath>
+    <linearGradient id="bg-grad-05" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1C2333"/>
+      <stop offset="100%" stop-color="#2C3347"/>
+    </linearGradient>
+    <linearGradient id="flame-grad" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#FF4500"/>
+      <stop offset="50%" stop-color="#FFB300"/>
+      <stop offset="100%" stop-color="#FFE082"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="160" fill="url(#bg-grad-05)"/>
+
+  <g clip-path="url(#bg-clip-05)">
+    <!-- 막대 차트 (그린 계열) -->
+    <!-- 바 1 -->
+    <rect x="220" y="620" width="96" height="160" rx="12" fill="#00BFA5"/>
+    <!-- 바 2 -->
+    <rect x="336" y="520" width="96" height="260" rx="12" fill="#00E676"/>
+    <!-- 바 3 -->
+    <rect x="452" y="400" width="96" height="380" rx="12" fill="#69F0AE"/>
+    <!-- 바 4 -->
+    <rect x="568" y="480" width="96" height="300" rx="12" fill="#00E676"/>
+    <!-- 바 5 -->
+    <rect x="684" y="560" width="96" height="220" rx="12" fill="#00BFA5"/>
+
+    <!-- X축 -->
+    <line x1="200" y1="790" x2="800" y2="790" stroke="#445566" stroke-width="44" stroke-linecap="round"/>
+
+    <!-- 불꽃 (가장 높은 바 위) -->
+    <!-- 메인 불꽃 -->
+    <path d="M500 390 C480 340 440 310 460 250 C440 280 420 260 430 220 C400 260 390 290 410 330 C390 310 380 290 395 265 C365 310 370 360 400 390 C390 370 400 340 420 350 C410 380 440 400 500 390 Z" fill="url(#flame-grad)"/>
+    <!-- 내부 불꽃 -->
+    <path d="M490 385 C475 355 460 340 470 310 C455 330 448 315 455 290 C440 315 442 340 458 360 C450 348 456 332 466 340 C460 362 472 380 490 385 Z" fill="#FFE082" opacity="0.85"/>
+
+    <!-- 불꽃 반사광 -->
+    <ellipse cx="500" cy="395" rx="52" ry="14" fill="#FFB300" opacity="0.3"/>
+  </g>
+</svg>

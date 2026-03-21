@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <clipPath id="bg-clip-04">
+      <rect width="1024" height="1024" rx="160"/>
+    </clipPath>
+    <linearGradient id="bg-grad-04" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0D2137"/>
+      <stop offset="100%" stop-color="#1A3A5C"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="160" fill="url(#bg-grad-04)"/>
+
+  <g clip-path="url(#bg-clip-04)">
+    <!-- 기여자 1: 좌측 인물 실루엣 -->
+    <!-- 머리 -->
+    <circle cx="280" cy="310" r="72" fill="#FFFFFF"/>
+    <!-- 몸통 -->
+    <path d="M180 580 C180 460 380 460 380 580 L380 700 L180 700 Z" fill="#FFFFFF"/>
+
+    <!-- 기여자 2: 중앙 인물 실루엣 (더 큼) -->
+    <circle cx="512" cy="280" r="84" fill="#E0E0E0"/>
+    <path d="M390 570 C390 430 634 430 634 570 L634 710 L390 710 Z" fill="#E0E0E0"/>
+
+    <!-- 기여자 3: 우측 인물 실루엣 -->
+    <circle cx="744" cy="310" r="72" fill="#BDBDBD"/>
+    <path d="M644 580 C644 460 844 460 844 580 L844 700 L644 700 Z" fill="#BDBDBD"/>
+
+    <!-- 오렌지 화살표들 (커밋 기여 방향) -->
+    <!-- 화살표 1 (좌 → 중) -->
+    <line x1="370" y1="420" x2="440" y2="390" stroke="#FF8C00" stroke-width="52" stroke-linecap="round"/>
+    <polygon points="440,390 400,350 480,352" fill="#FF8C00"/>
+
+    <!-- 화살표 2 (우 → 중) -->
+    <line x1="654" y1="420" x2="584" y2="390" stroke="#FF8C00" stroke-width="52" stroke-linecap="round"/>
+    <polygon points="584,390 600,346 528,366" fill="#FF8C00"/>
+
+    <!-- 화살표 3 (중 상향 = 메인 기여자) -->
+    <line x1="512" y1="196" x2="512" y2="240" stroke="#FFD166" stroke-width="60" stroke-linecap="round"/>
+    <polygon points="512,196 472,250 552,250" fill="#FFD166"/>
+
+    <!-- 기여 수치 바 (하단) -->
+    <rect x="210" y="760" width="180" height="42" rx="21" fill="#FF8C00" opacity="0.85"/>
+    <rect x="412" y="760" width="220" height="42" rx="21" fill="#FFD166" opacity="0.95"/>
+    <rect x="648" y="760" width="140" height="42" rx="21" fill="#FF8C00" opacity="0.7"/>
+  </g>
+</svg>

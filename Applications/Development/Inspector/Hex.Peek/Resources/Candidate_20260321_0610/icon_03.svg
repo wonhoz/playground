@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg03h" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1C1C1C;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2A2A2A;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="xray03h" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#60C8FF;stop-opacity:0.9" />
+      <stop offset="100%" style="stop-color:#0080C0;stop-opacity:0.7" />
+    </linearGradient>
+    <linearGradient id="envelope03h" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#444444;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2A2A2A;stop-opacity:1" />
+    </linearGradient>
+    <filter id="xrayglow">
+      <feGaussianBlur stdDeviation="14" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg03h)"/>
+  <!-- X레이 조사 빛줄기 (배경) -->
+  <path d="M512 180 L320 840" stroke="#0060A0" stroke-width="160" opacity="0.2"/>
+  <path d="M512 180 L512 840" stroke="#0070B0" stroke-width="140" opacity="0.25"/>
+  <path d="M512 180 L704 840" stroke="#0060A0" stroke-width="160" opacity="0.2"/>
+  <!-- Layer 2: 파일 봉투 (투명하게) -->
+  <!-- 봉투 외형 -->
+  <rect x="260" y="320" width="504" height="400" rx="18" fill="url(#envelope03h)" stroke="#555555" stroke-width="10"/>
+  <!-- 봉투 접힌 삼각형 -->
+  <path d="M260 320 L512 520 L764 320 Z" fill="#3A3A3A" stroke="#555555" stroke-width="6"/>
+  <!-- 봉투 하단 접힌선 -->
+  <line x1="260" y1="720" x2="380" y2="590" stroke="#555555" stroke-width="4" opacity="0.6"/>
+  <line x1="764" y1="720" x2="644" y2="590" stroke="#555555" stroke-width="4" opacity="0.6"/>
+  <!-- X레이로 투영된 내부 바이트 구조 (파란빛 발광) -->
+  <g filter="url(#xrayglow)" opacity="0.9">
+    <text x="370" y="430" font-family="'Courier New', monospace" font-size="32" fill="#60C8FF" text-anchor="middle" font-weight="bold">FF 4D 5A</text>
+    <text x="512" y="476" font-family="'Courier New', monospace" font-size="32" fill="#A0E0FF" text-anchor="middle" font-weight="bold">50 45 00 00</text>
+    <text x="512" y="522" font-family="'Courier New', monospace" font-size="32" fill="#60C8FF" text-anchor="middle">4C 01 A8 3F</text>
+    <text x="512" y="566" font-family="'Courier New', monospace" font-size="32" fill="#40A8E0" text-anchor="middle" opacity="0.8">0E FF C0 78</text>
+    <text x="512" y="610" font-family="'Courier New', monospace" font-size="32" fill="#2A80B0" text-anchor="middle" opacity="0.6">DE AD BE EF</text>
+  </g>
+  <!-- Layer 3: X레이 장치 헤드 (위) -->
+  <rect x="382" y="220" width="260" height="70" rx="18" fill="#303030" stroke="#555555" stroke-width="8"/>
+  <!-- X 마크 -->
+  <text x="512" y="272" font-family="sans-serif" font-size="44" fill="#60C8FF" text-anchor="middle" font-weight="900" filter="url(#xrayglow)">X-RAY</text>
+  <!-- 조사 지점 화살표 -->
+  <line x1="512" y1="290" x2="512" y2="318" stroke="#60C8FF" stroke-width="6" stroke-dasharray="8,4" opacity="0.7"/>
+  <!-- 투명도 게이지 -->
+  <rect x="680" y="380" width="40" height="280" rx="8" fill="#1A1A1A" stroke="#444444" stroke-width="4"/>
+  <rect x="684" y="384" width="32" height="200" rx="6" fill="url(#xray03h)" opacity="0.8"/>
+  <text x="700" y="690" font-family="sans-serif" font-size="22" fill="#60C8FF" text-anchor="middle">SEE</text>
+</svg>

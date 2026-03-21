@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg04" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3A1A6A;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#5A2A9A;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="shield04" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#7B3FBF;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#4A1A8A;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="gold04" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFD700;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FFA500;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow04">
+      <feDropShadow dx="0" dy="8" stdDeviation="16" flood-color="#000000" flood-opacity="0.5"/>
+    </filter>
+  </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg04)"/>
+  <!-- 배경 육각형 패턴 장식 -->
+  <polygon points="512,180 620,240 620,360 512,420 404,360 404,240" fill="none" stroke="#6A3AAA" stroke-width="3" opacity="0.4"/>
+  <polygon points="512,140 650,220 650,380 512,460 374,380 374,220" fill="none" stroke="#6A3AAA" stroke-width="2" opacity="0.25"/>
+  <!-- Layer 2: 방패 -->
+  <path d="M512 260 L740 340 L740 560 Q740 720 512 790 Q284 720 284 560 L284 340 Z" fill="url(#shield04)" stroke="#9B6FDF" stroke-width="12" filter="url(#shadow04)"/>
+  <!-- 방패 내부 테두리 장식 -->
+  <path d="M512 300 L710 368 L710 560 Q710 690 512 752 Q314 690 314 560 L314 368 Z" fill="none" stroke="#9B6FDF" stroke-width="6" opacity="0.6"/>
+  <!-- 방패 상단 광택 -->
+  <path d="M380 320 Q512 285 644 320 L644 400 Q512 370 380 400 Z" fill="#FFFFFF" opacity="0.12"/>
+  <!-- Layer 3: 방패 위 EXE 파일 아이콘 (금색) -->
+  <rect x="436" y="420" width="152" height="196" rx="14" fill="url(#gold04)" stroke="#FFE066" stroke-width="6"/>
+  <!-- 파일 접힌 모서리 -->
+  <path d="M436 420 L436 470 L488 470 Z" fill="#FFA500"/>
+  <polygon points="436,420 488,420 488,470" fill="#CC8800" opacity="0.5"/>
+  <!-- 파일 텍스트 라인 -->
+  <line x1="464" y1="500" x2="564" y2="500" stroke="#7A5000" stroke-width="10" stroke-linecap="round"/>
+  <line x1="464" y1="526" x2="564" y2="526" stroke="#7A5000" stroke-width="10" stroke-linecap="round"/>
+  <line x1="464" y1="552" x2="530" y2="552" stroke="#7A5000" stroke-width="8" stroke-linecap="round" opacity="0.7"/>
+  <!-- EXE 뱃지 -->
+  <rect x="450" y="577" width="124" height="30" rx="8" fill="#7A5000"/>
+  <text x="512" y="598" font-family="monospace" font-size="22" fill="#FFD700" text-anchor="middle" font-weight="bold">.EXE</text>
+  <!-- 방패 중앙 체크 인장 -->
+  <circle cx="512" cy="680" r="38" fill="#4A1A8A" stroke="#FFD700" stroke-width="6"/>
+  <polyline points="494,680 508,696 534,662" fill="none" stroke="#FFD700" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

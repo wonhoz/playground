@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bgTree" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#F0FAF4"/>
+      <stop offset="100%" stop-color="#DCF0E4"/>
+    </linearGradient>
+    <!-- 나무 잎 -->
+    <radialGradient id="leafGrad" cx="40%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#4ADE80"/>
+      <stop offset="50%" stop-color="#22C55E"/>
+      <stop offset="100%" stop-color="#15803D"/>
+    </radialGradient>
+    <radialGradient id="leafDark" cx="40%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#166534"/>
+      <stop offset="100%" stop-color="#052e16"/>
+    </radialGradient>
+    <!-- 줄기 -->
+    <linearGradient id="trunkGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#6B3A1A"/>
+      <stop offset="50%" stop-color="#92400E"/>
+      <stop offset="100%" stop-color="#6B3A1A"/>
+    </linearGradient>
+    <!-- 뿌리 -->
+    <linearGradient id="rootGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#78350F"/>
+      <stop offset="100%" stop-color="#451A03"/>
+    </linearGradient>
+    <filter id="treeShadow">
+      <feDropShadow dx="4" dy="8" stdDeviation="14" flood-color="#00000022"/>
+    </filter>
+    <filter id="leafGlow">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Layer1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bgTree)"/>
+
+  <!-- 땅 -->
+  <ellipse cx="512" cy="790" rx="300" ry="28" fill="#15803D" opacity="0.2"/>
+
+  <!-- Layer2: 나무 줄기 -->
+  <!-- 메인 줄기 -->
+  <path d="M 492 780 Q 498 680 500 580 Q 502 500 512 440" fill="none" stroke="url(#trunkGrad)" stroke-width="36" stroke-linecap="round"/>
+  <!-- 줄기 질감 -->
+  <path d="M 498 780 Q 504 680 506 580 Q 508 500 516 440" fill="none" stroke="#92400E" stroke-width="12" stroke-linecap="round" opacity="0.3"/>
+
+  <!-- 굵은 가지들 -->
+  <!-- 왼쪽 아래 가지 -->
+  <path d="M 506 660 Q 440 630 370 620" fill="none" stroke="url(#trunkGrad)" stroke-width="22" stroke-linecap="round"/>
+  <!-- 오른쪽 아래 가지 -->
+  <path d="M 508 630 Q 580 600 650 590" fill="none" stroke="url(#trunkGrad)" stroke-width="20" stroke-linecap="round"/>
+  <!-- 왼쪽 위 가지 -->
+  <path d="M 510 540 Q 440 500 360 480" fill="none" stroke="url(#trunkGrad)" stroke-width="18" stroke-linecap="round"/>
+  <!-- 오른쪽 위 가지 -->
+  <path d="M 514 520 Q 590 480 670 460" fill="none" stroke="url(#trunkGrad)" stroke-width="16" stroke-linecap="round"/>
+  <!-- 왼쪽 최상 가지 -->
+  <path d="M 511 470 Q 450 430 400 400" fill="none" stroke="url(#trunkGrad)" stroke-width="12" stroke-linecap="round"/>
+  <!-- 오른쪽 최상 가지 -->
+  <path d="M 513 460 Q 565 420 615 395" fill="none" stroke="url(#trunkGrad)" stroke-width="11" stroke-linecap="round"/>
+
+  <!-- Layer3: 잎 클러스터들 (가지 끝) -->
+  <!-- 최상단 잎 -->
+  <ellipse cx="512" cy="310" rx="140" ry="110" fill="url(#leafGrad)" filter="url(#leafGlow)"/>
+  <ellipse cx="470" cy="280" rx="90" ry="70" fill="url(#leafGrad)" opacity="0.8"/>
+  <ellipse cx="560" cy="290" rx="85" ry="65" fill="url(#leafDark)" opacity="0.4"/>
+
+  <!-- 왼쪽 잎 클러스터 -->
+  <ellipse cx="370" cy="450" rx="100" ry="80" fill="url(#leafGrad)" filter="url(#leafGlow)" opacity="0.9"/>
+  <ellipse cx="350" cy="430" rx="65" ry="50" fill="url(#leafGrad)" opacity="0.8"/>
+
+  <!-- 오른쪽 잎 클러스터 -->
+  <ellipse cx="680" cy="430" rx="100" ry="80" fill="url(#leafGrad)" filter="url(#leafGlow)" opacity="0.9"/>
+  <ellipse cx="700" cy="415" rx="65" ry="50" fill="url(#leafDark)" opacity="0.3"/>
+
+  <!-- 왼쪽 하단 잎 -->
+  <ellipse cx="355" cy="590" rx="90" ry="72" fill="url(#leafGrad)" filter="url(#leafGlow)" opacity="0.8"/>
+  <!-- 오른쪽 하단 잎 -->
+  <ellipse cx="668" cy="560" rx="90" ry="72" fill="url(#leafGrad)" filter="url(#leafGlow)" opacity="0.8"/>
+
+  <!-- 뿌리 시스템 (아래) -->
+  <path d="M 510 780 Q 480 820 450 850 Q 420 880 390 870" fill="none" stroke="url(#rootGrad)" stroke-width="16" stroke-linecap="round"/>
+  <path d="M 512 780 Q 512 830 512 870" fill="none" stroke="url(#rootGrad)" stroke-width="18" stroke-linecap="round"/>
+  <path d="M 514 780 Q 544 820 574 850 Q 604 880 634 870" fill="none" stroke="url(#rootGrad)" stroke-width="16" stroke-linecap="round"/>
+  <path d="M 468 800 Q 430 840 400 860 Q 370 875 350 860" fill="none" stroke="url(#rootGrad)" stroke-width="10" stroke-linecap="round" opacity="0.7"/>
+  <path d="M 556 800 Q 594 840 624 860 Q 654 875 674 860" fill="none" stroke="url(#rootGrad)" stroke-width="10" stroke-linecap="round" opacity="0.7"/>
+
+  <!-- 패키지 라벨들 (잎에 붙여) -->
+  <text x="512" y="318" font-family="monospace" font-size="17" fill="#FFFFFF" text-anchor="middle" font-weight="bold">root</text>
+  <text x="370" y="454" font-family="monospace" font-size="15" fill="#FFFFFF" text-anchor="middle">pkg-A</text>
+  <text x="680" y="434" font-family="monospace" font-size="15" fill="#FFFFFF" text-anchor="middle">pkg-B</text>
+  <text x="355" y="594" font-family="monospace" font-size="14" fill="#FFFFFF" text-anchor="middle">dep-1</text>
+  <text x="668" y="564" font-family="monospace" font-size="14" fill="#FFFFFF" text-anchor="middle">dep-2</text>
+</svg>

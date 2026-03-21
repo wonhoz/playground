@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <clipPath id="dg-bg-clip-05">
+      <rect width="1024" height="1024" rx="160"/>
+    </clipPath>
+    <linearGradient id="dg-bg-05" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E85D04"/>
+      <stop offset="100%" stop-color="#D44A00"/>
+    </linearGradient>
+    <linearGradient id="pkg-shine" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#F0F0F0" stop-opacity="0.75"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="160" fill="url(#dg-bg-05)"/>
+
+  <g clip-path="url(#dg-bg-clip-05)">
+    <!-- 중앙 NuGet 패키지 박스 아이콘 -->
+    <!-- 메인 박스 (화이트) -->
+    <rect x="318" y="298" width="388" height="388" rx="48" fill="url(#pkg-shine)"/>
+    <!-- 박스 뚜껑 라인 -->
+    <line x1="318" y1="400" x2="706" y2="400" stroke="rgba(200,200,200,0.5)" stroke-width="8"/>
+    <!-- 리본 (가로) -->
+    <rect x="470" y="298" width="84" height="388" rx="0" fill="rgba(230,93,4,0.15)"/>
+    <!-- 리본 매듭 (중앙 원) -->
+    <circle cx="512" cy="492" r="52" fill="#E85D04"/>
+    <circle cx="512" cy="492" r="34" fill="#FFFFFF"/>
+    <!-- NuGet 스타일 다이아 형태 -->
+    <polygon points="512,460 544,492 512,524 480,492" fill="#E85D04"/>
+
+    <!-- 그래프 오버레이 (다크, 박스 바깥) -->
+    <!-- 노드들 -->
+    <circle cx="240" cy="310" r="38" fill="#1A0A00" opacity="0.85"/>
+    <circle cx="240" cy="310" r="22" fill="#2C1000" opacity="0.9"/>
+
+    <circle cx="784" cy="310" r="38" fill="#1A0A00" opacity="0.85"/>
+    <circle cx="784" cy="310" r="22" fill="#2C1000" opacity="0.9"/>
+
+    <circle cx="240" cy="714" r="38" fill="#1A0A00" opacity="0.85"/>
+    <circle cx="240" cy="714" r="22" fill="#2C1000" opacity="0.9"/>
+
+    <circle cx="784" cy="714" r="38" fill="#1A0A00" opacity="0.85"/>
+    <circle cx="784" cy="714" r="22" fill="#2C1000" opacity="0.9"/>
+
+    <!-- 엣지들 -->
+    <line x1="278" y1="310" x2="318" y2="380" stroke="#1A0A00" stroke-width="30" stroke-linecap="round" opacity="0.7"/>
+    <line x1="746" y1="310" x2="706" y2="380" stroke="#1A0A00" stroke-width="30" stroke-linecap="round" opacity="0.7"/>
+    <line x1="278" y1="714" x2="318" y2="644" stroke="#1A0A00" stroke-width="30" stroke-linecap="round" opacity="0.7"/>
+    <line x1="746" y1="714" x2="706" y2="644" stroke="#1A0A00" stroke-width="30" stroke-linecap="round" opacity="0.7"/>
+
+    <!-- 추가 미니 노드들 (오른쪽 하단) -->
+    <circle cx="800" cy="512" r="26" fill="#1A0A00" opacity="0.7"/>
+    <line x1="746" y1="512" x2="774" y2="512" stroke="#1A0A00" stroke-width="24" stroke-linecap="round" opacity="0.6"/>
+    <circle cx="224" cy="512" r="26" fill="#1A0A00" opacity="0.7"/>
+    <line x1="278" y1="512" x2="250" y2="512" stroke="#1A0A00" stroke-width="24" stroke-linecap="round" opacity="0.6"/>
+  </g>
+</svg>

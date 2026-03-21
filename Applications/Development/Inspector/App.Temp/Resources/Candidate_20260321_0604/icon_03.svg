@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <clipPath id="bg-clip-03">
+      <rect width="1024" height="1024" rx="180"/>
+    </clipPath>
+    <linearGradient id="bg-grad-03" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF6B00"/>
+      <stop offset="100%" stop-color="#E04000"/>
+    </linearGradient>
+    <linearGradient id="arrow-grad-03" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#FFE0CC"/>
+    </linearGradient>
+  </defs>
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="180" fill="url(#bg-grad-03)"/>
+  <g clip-path="url(#bg-clip-03)">
+    <!-- 배경 원형 글로우 -->
+    <circle cx="512" cy="512" r="340" fill="#FF8020" opacity="0.3"/>
+    <circle cx="512" cy="512" r="280" fill="#FF9040" opacity="0.2"/>
+    <!-- 되감기 원형 화살표 (큰 호) -->
+    <!-- 반시계 방향 큰 호 -->
+    <path d="M 512 200 A 312 312 0 1 0 820 512" fill="none" stroke="url(#arrow-grad-03)" stroke-width="80" stroke-linecap="round"/>
+    <!-- 화살표 머리 (오른쪽 상단, 시계 반대 방향 가리킴) -->
+    <polygon points="820,430 760,490 880,530" fill="url(#arrow-grad-03)"/>
+    <!-- 중앙 "뒤로" 아이콘 / 롤백 심볼 -->
+    <circle cx="512" cy="512" r="100" fill="#FFFFFF" opacity="0.15"/>
+    <!-- 중앙 되감기 기호 (두 삼각형) -->
+    <polygon points="560,442 460,512 560,582" fill="#FFFFFF"/>
+    <polygon points="500,442 400,512 500,582" fill="#FFFFFF" opacity="0.75"/>
+    <!-- 중앙 세로 바 -->
+    <rect x="558" y="440" width="28" height="144" rx="8" fill="#FFFFFF" opacity="0.9"/>
+    <!-- 작은 파티클 장식 -->
+    <circle cx="300" cy="280" r="18" fill="#FFFFFF" opacity="0.3"/>
+    <circle cx="740" cy="730" r="12" fill="#FFFFFF" opacity="0.2"/>
+    <circle cx="740" cy="300" r="10" fill="#FFFFFF" opacity="0.25"/>
+    <circle cx="300" cy="720" r="14" fill="#FFFFFF" opacity="0.2"/>
+  </g>
+</svg>

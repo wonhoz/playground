@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"/>
+<title>Dep.Graph Icon Candidates — 20260321_0604</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: linear-gradient(135deg, #0D0820 0%, #150E35 100%);
+    font-family: 'Segoe UI', sans-serif;
+    color: #E0E0E0;
+    min-height: 100vh;
+    padding: 48px 32px;
+  }
+  h1 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    color: #A78BFA;
+    letter-spacing: 1px;
+  }
+  .subtitle {
+    font-size: 14px;
+    color: #888;
+    margin-bottom: 40px;
+  }
+  .grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px;
+    justify-content: center;
+  }
+  .card {
+    background: #130F28;
+    border: 1.5px solid #221C44;
+    border-radius: 20px;
+    padding: 28px 24px 22px;
+    width: 210px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    transition: transform 0.22s cubic-bezier(.34,1.56,.64,1), box-shadow 0.22s;
+    cursor: pointer;
+  }
+  .card:hover {
+    transform: scale(1.10);
+    box-shadow: 0 12px 40px rgba(167,139,250,0.28);
+    border-color: #A78BFA;
+  }
+  .card img {
+    width: 148px;
+    height: 148px;
+    border-radius: 30px;
+    display: block;
+  }
+  .card-name {
+    font-size: 13px;
+    font-weight: 700;
+    color: #A78BFA;
+    letter-spacing: 0.5px;
+  }
+  .card-concept {
+    font-size: 12px;
+    color: #AAAAAA;
+    text-align: center;
+    line-height: 1.5;
+  }
+  .palette {
+    display: flex;
+    gap: 7px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .swatch {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.15);
+  }
+</style>
+</head>
+<body>
+  <h1>Dep.Graph</h1>
+  <div class="subtitle">Candidate_20260321_0604 &nbsp;·&nbsp; NuGet/npm/pip 의존성 노드-엣지 그래프 시각화</div>
+  <div class="grid">
+
+    <div class="card">
+      <img src="icon_01.svg" alt="icon_01"/>
+      <div class="card-name">icon_01</div>
+      <div class="card-concept">노드·엣지 의존성 네트워크<br/>literal · 기하학추상</div>
+      <div class="palette">
+        <div class="swatch" style="background:#1A1040;"></div>
+        <div class="swatch" style="background:#231560;"></div>
+        <div class="swatch" style="background:#FFFFFF;"></div>
+        <div class="swatch" style="background:#00BCD4;"></div>
+        <div class="swatch" style="background:#BEF264;"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="icon_02.svg" alt="icon_02"/>
+      <div class="card-name">icon_02</div>
+      <div class="card-concept">중앙 패키지 박스 → 가지치기 트리<br/>literal · 공간/장면</div>
+      <div class="palette">
+        <div class="swatch" style="background:#E8380A;"></div>
+        <div class="swatch" style="background:#1A0A00;"></div>
+        <div class="swatch" style="background:#FFFFFF;"></div>
+        <div class="swatch" style="background:#2C1000;"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="icon_03.svg" alt="icon_03"/>
+      <div class="card-name">icon_03</div>
+      <div class="card-concept">거미줄 = 복잡한 의존성 네트워크<br/>metaphor · 기하학추상</div>
+      <div class="palette">
+        <div class="swatch" style="background:#080B10;"></div>
+        <div class="swatch" style="background:#84CC16;"></div>
+        <div class="swatch" style="background:#A3E635;"></div>
+        <div class="swatch" style="background:#BEF264;"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="icon_04.svg" alt="icon_04"/>
+      <div class="card-name">icon_04</div>
+      <div class="card-concept">앰버 블록 + 화이트 화살표<br/>metaphor · 레이어드</div>
+      <div class="palette">
+        <div class="swatch" style="background:#1A0A40;"></div>
+        <div class="swatch" style="background:#FFB300;"></div>
+        <div class="swatch" style="background:#FF8F00;"></div>
+        <div class="swatch" style="background:#FFFFFF;"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="icon_05.svg" alt="icon_05"/>
+      <div class="card-name">icon_05</div>
+      <div class="card-concept">NuGet 패키지 박스 + 그래프 오버레이<br/>hybrid · 중앙심볼</div>
+      <div class="palette">
+        <div class="swatch" style="background:#E85D04;"></div>
+        <div class="swatch" style="background:#FFFFFF;"></div>
+        <div class="swatch" style="background:#1A0A00;"></div>
+        <div class="swatch" style="background:#D44A00;"></div>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

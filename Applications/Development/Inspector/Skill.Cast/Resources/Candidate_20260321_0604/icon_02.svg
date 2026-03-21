@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <clipPath id="sc2-clip">
+      <rect width="1024" height="1024" rx="180"/>
+    </clipPath>
+    <radialGradient id="sc2-brain-grd" cx="50%" cy="45%" r="50%">
+      <stop offset="0%" stop-color="#FF9040"/>
+      <stop offset="100%" stop-color="#C85000"/>
+    </radialGradient>
+    <filter id="sc2-glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="12" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <g clip-path="url(#sc2-clip)">
+    <!-- Background: Deep Purple -->
+    <rect width="1024" height="1024" fill="#1E0A3C"/>
+    <!-- Radial glow -->
+    <circle cx="512" cy="480" r="320" fill="#2D1060" opacity="0.8"/>
+
+    <!-- AI Brain (orange) -->
+    <g filter="url(#sc2-glow)">
+      <!-- Brain left lobe -->
+      <ellipse cx="460" cy="420" rx="130" ry="150" fill="url(#sc2-brain-grd)"/>
+      <!-- Brain right lobe -->
+      <ellipse cx="564" cy="420" rx="130" ry="150" fill="url(#sc2-brain-grd)"/>
+      <!-- Brain center division -->
+      <rect x="498" y="290" width="12" height="250" rx="6" fill="#1E0A3C" opacity="0.6"/>
+      <!-- Brain stem -->
+      <rect x="490" y="550" width="44" height="60" rx="10" fill="#C85000"/>
+      <!-- Brain wrinkles -->
+      <path d="M380 380 Q420 360 460 380 Q500 360 540 380" stroke="#1E0A3C" stroke-width="8" fill="none" stroke-linecap="round" opacity="0.5"/>
+      <path d="M390 420 Q440 400 490 420 Q540 400 590 420" stroke="#1E0A3C" stroke-width="8" fill="none" stroke-linecap="round" opacity="0.5"/>
+      <path d="M395 460 Q450 440 510 460 Q560 440 605 460" stroke="#1E0A3C" stroke-width="8" fill="none" stroke-linecap="round" opacity="0.5"/>
+    </g>
+
+    <!-- Gear ring (white) around the brain -->
+    <!-- Gear body -->
+    <circle cx="512" cy="460" r="220" fill="none" stroke="#FFFFFF" stroke-width="28" opacity="0.9"/>
+    <!-- Gear teeth -->
+    <rect x="498" y="218" width="28" height="50" rx="8" fill="#FFFFFF"/>
+    <rect x="498" y="650" width="28" height="50" rx="8" fill="#FFFFFF"/>
+    <rect x="218" y="446" width="50" height="28" rx="8" fill="#FFFFFF"/>
+    <rect x="756" y="446" width="50" height="28" rx="8" fill="#FFFFFF"/>
+    <!-- Diagonal teeth -->
+    <g transform="rotate(45 512 460)">
+      <rect x="498" y="218" width="28" height="50" rx="8" fill="#FFFFFF"/>
+      <rect x="498" y="650" width="28" height="50" rx="8" fill="#FFFFFF"/>
+      <rect x="218" y="446" width="50" height="28" rx="8" fill="#FFFFFF"/>
+      <rect x="756" y="446" width="50" height="28" rx="8" fill="#FFFFFF"/>
+    </g>
+    <!-- Inner gear detail -->
+    <circle cx="512" cy="460" r="185" fill="none" stroke="#FFFFFF" stroke-width="6" opacity="0.3"/>
+
+    <!-- Spark dots -->
+    <circle cx="300" cy="260" r="12" fill="#FF9040" opacity="0.7"/>
+    <circle cx="724" cy="260" r="8" fill="#FF9040" opacity="0.5"/>
+    <circle cx="200" cy="650" r="10" fill="#7B3FBE" opacity="0.6"/>
+    <circle cx="820" cy="700" r="14" fill="#FF9040" opacity="0.4"/>
+  </g>
+</svg>

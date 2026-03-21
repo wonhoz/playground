@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <clipPath id="jt2-clip">
+      <rect width="1024" height="1024" rx="180"/>
+    </clipPath>
+  </defs>
+  <g clip-path="url(#jt2-clip)">
+    <!-- Background: Dark Slate -->
+    <rect width="1024" height="1024" fill="#1A2030"/>
+
+    <!-- Left file panel -->
+    <rect x="200" y="220" width="260" height="560" rx="14" fill="#222E40" stroke="#3A4A60" stroke-width="3"/>
+    <!-- Left file header -->
+    <rect x="200" y="220" width="260" height="44" rx="14" fill="#2D3F55"/>
+    <rect x="200" y="248" width="260" height="16" fill="#2D3F55"/>
+    <rect x="216" y="232" width="120" height="14" rx="7" fill="#8090A8" opacity="0.8"/>
+
+    <!-- Right file panel -->
+    <rect x="564" y="220" width="260" height="560" rx="14" fill="#222E40" stroke="#3A4A60" stroke-width="3"/>
+    <!-- Right file header -->
+    <rect x="564" y="220" width="260" height="44" rx="14" fill="#2D3F55"/>
+    <rect x="564" y="248" width="260" height="16" fill="#2D3F55"/>
+    <rect x="580" y="232" width="120" height="14" rx="7" fill="#8090A8" opacity="0.8"/>
+
+    <!-- Diff lines — LEFT (removed = red) and RIGHT (added = green) -->
+    <!-- Shared line 1 -->
+    <rect x="216" y="284" width="180" height="14" rx="7" fill="#6080A0" opacity="0.6"/>
+    <rect x="580" y="284" width="180" height="14" rx="7" fill="#6080A0" opacity="0.6"/>
+    <!-- Shared line 2 -->
+    <rect x="216" y="310" width="140" height="14" rx="7" fill="#6080A0" opacity="0.5"/>
+    <rect x="580" y="310" width="140" height="14" rx="7" fill="#6080A0" opacity="0.5"/>
+
+    <!-- Removed lines (red, left only) -->
+    <rect x="200" y="336" width="260" height="32" rx="0" fill="#FF303020"/>
+    <text x="212" y="358" font-family="monospace" font-size="20" fill="#FF5555" font-weight="bold">-</text>
+    <rect x="228" y="346" width="180" height="14" rx="7" fill="#FF5555" opacity="0.7"/>
+
+    <rect x="200" y="376" width="260" height="32" rx="0" fill="#FF303020"/>
+    <text x="212" y="398" font-family="monospace" font-size="20" fill="#FF5555" font-weight="bold">-</text>
+    <rect x="228" y="386" width="140" height="14" rx="7" fill="#FF5555" opacity="0.6"/>
+
+    <rect x="200" y="416" width="260" height="32" rx="0" fill="#FF303020"/>
+    <text x="212" y="438" font-family="monospace" font-size="20" fill="#FF5555" font-weight="bold">-</text>
+    <rect x="228" y="426" width="160" height="14" rx="7" fill="#FF5555" opacity="0.5"/>
+
+    <!-- Added lines (green, right only) -->
+    <rect x="564" y="336" width="260" height="32" rx="0" fill="#30FF3020"/>
+    <text x="576" y="358" font-family="monospace" font-size="20" fill="#44EE55" font-weight="bold">+</text>
+    <rect x="592" y="346" width="200" height="14" rx="7" fill="#44EE55" opacity="0.7"/>
+
+    <rect x="564" y="376" width="260" height="32" rx="0" fill="#30FF3020"/>
+    <text x="576" y="398" font-family="monospace" font-size="20" fill="#44EE55" font-weight="bold">+</text>
+    <rect x="592" y="386" width="160" height="14" rx="7" fill="#44EE55" opacity="0.6"/>
+
+    <!-- Shared lines below diff -->
+    <rect x="216" y="460" width="160" height="14" rx="7" fill="#6080A0" opacity="0.5"/>
+    <rect x="580" y="460" width="160" height="14" rx="7" fill="#6080A0" opacity="0.5"/>
+    <rect x="216" y="486" width="200" height="14" rx="7" fill="#6080A0" opacity="0.4"/>
+    <rect x="580" y="486" width="200" height="14" rx="7" fill="#6080A0" opacity="0.4"/>
+    <rect x="216" y="512" width="130" height="14" rx="7" fill="#6080A0" opacity="0.4"/>
+    <rect x="580" y="512" width="130" height="14" rx="7" fill="#6080A0" opacity="0.4"/>
+
+    <!-- More diff lines below -->
+    <rect x="200" y="538" width="260" height="32" rx="0" fill="#FF303015"/>
+    <text x="212" y="560" font-family="monospace" font-size="20" fill="#FF5555" font-weight="bold">-</text>
+    <rect x="228" y="548" width="150" height="14" rx="7" fill="#FF5555" opacity="0.5"/>
+
+    <rect x="564" y="538" width="260" height="32" rx="0" fill="#30FF3015"/>
+    <text x="576" y="560" font-family="monospace" font-size="20" fill="#44EE55" font-weight="bold">+</text>
+    <rect x="592" y="548" width="170" height="14" rx="7" fill="#44EE55" opacity="0.5"/>
+
+    <rect x="564" y="578" width="260" height="32" rx="0" fill="#30FF3015"/>
+    <text x="576" y="600" font-family="monospace" font-size="20" fill="#44EE55" font-weight="bold">+</text>
+    <rect x="592" y="588" width="130" height="14" rx="7" fill="#44EE55" opacity="0.4"/>
+
+    <!-- Center comparison arrows -->
+    <line x1="460" y1="500" x2="564" y2="500" stroke="#5080B0" stroke-width="4" stroke-linecap="round" opacity="0.6"/>
+    <polygon points="552,492 568,500 552,508" fill="#5080B0" opacity="0.6"/>
+    <polygon points="472,492 456,500 472,508" fill="#5080B0" opacity="0.6"/>
+
+    <!-- VS badge -->
+    <circle cx="512" cy="500" r="28" fill="#2D3F55" stroke="#5080B0" stroke-width="3"/>
+    <text x="512" y="507" font-family="monospace" font-size="18" fill="#FFFFFF" text-anchor="middle" font-weight="bold">vs</text>
+  </g>
+</svg>

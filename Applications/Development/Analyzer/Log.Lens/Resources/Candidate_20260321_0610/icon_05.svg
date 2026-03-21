@@ -1,0 +1,118 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg_ll05" cx="45%" cy="45%" r="55%">
+      <stop offset="0%" stop-color="#FF8C00"/>
+      <stop offset="50%" stop-color="#E06000"/>
+      <stop offset="100%" stop-color="#8B3000"/>
+    </radialGradient>
+    <radialGradient id="outerRing" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.9"/>
+      <stop offset="80%" stop-color="#FFE0C0" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#FF8C00" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="lensBody" cx="35%" cy="30%" r="60%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.95"/>
+      <stop offset="40%" stop-color="#E8F4FF" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#B0D0FF" stop-opacity="0.7"/>
+    </radialGradient>
+    <linearGradient id="focusRing1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4499FF"/>
+      <stop offset="100%" stop-color="#0055CC"/>
+    </linearGradient>
+    <linearGradient id="focusRing2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#88BBFF"/>
+      <stop offset="100%" stop-color="#4488DD"/>
+    </linearGradient>
+    <filter id="shadow_ll05">
+      <feDropShadow dx="6" dy="10" stdDeviation="18" flood-color="#000" flood-opacity="0.6"/>
+    </filter>
+    <filter id="glow_ll05">
+      <feGaussianBlur stdDeviation="16" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="inner_glow05">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <clipPath id="lensClip05">
+      <circle cx="512" cy="480" r="200"/>
+    </clipPath>
+  </defs>
+
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg_ll05)"/>
+  <!-- 빛 번짐 (방사형) -->
+  <circle cx="512" cy="480" r="400" fill="url(#outerRing)"/>
+
+  <!-- 배경 로그 라인들 (흐릿하게) -->
+  <g fill-opacity="0.15" font-family="monospace" font-size="18" fill="#3D1800">
+    <text x="240" y="250">[INFO] System boot complete at 06:00:01</text>
+    <text x="200" y="290">[WARN] High memory usage detected</text>
+    <text x="260" y="330">[ERROR] Failed to connect to DB server</text>
+    <text x="220" y="720">[INFO] Request processed in 234ms</text>
+    <text x="200" y="760">[WARN] Retry limit approaching</text>
+    <text x="240" y="800">[DEBUG] Cache hit ratio: 0.87</text>
+    <text x="220" y="840">[INFO] Health check OK</text>
+  </g>
+
+  <!-- Layer 2: 메인 오브젝트 — 카메라 렌즈 + 포커스 링 -->
+  <!-- 바깥 포커스 링들 (대각선으로 기울어진 느낌) -->
+  <g transform="rotate(-15, 512, 480)">
+    <!-- 가장 바깥 링 -->
+    <circle cx="512" cy="480" r="290" fill="none" stroke="url(#focusRing2)" stroke-width="16" stroke-opacity="0.4" filter="url(#shadow_ll05)"/>
+    <!-- 두 번째 링 -->
+    <circle cx="512" cy="480" r="254" fill="none" stroke="url(#focusRing1)" stroke-width="20" stroke-opacity="0.6" filter="url(#shadow_ll05)"/>
+    <!-- 세 번째 링 -->
+    <circle cx="512" cy="480" r="218" fill="none" stroke="url(#focusRing2)" stroke-width="16" stroke-opacity="0.7"/>
+  </g>
+
+  <!-- 렌즈 본체 (흰 원형) -->
+  <circle cx="512" cy="480" r="200" fill="url(#lensBody)" filter="url(#shadow_ll05)"/>
+
+  <!-- 렌즈 안에 포커스된 로그 내용 -->
+  <g clip-path="url(#lensClip05)">
+    <!-- 포커스된 로그 라인 (확대, 선명) -->
+    <rect x="330" y="420" width="364" height="36" rx="8" fill="#FF5555" fill-opacity="0.15"/>
+    <text x="350" y="444" font-size="22" fill="#CC0000" font-family="monospace" font-weight="bold">[ERROR] DB connect fail</text>
+
+    <rect x="330" y="462" width="364" height="36" rx="8" fill="#FFAA00" fill-opacity="0.12"/>
+    <text x="350" y="486" font-size="22" fill="#CC6600" font-family="monospace" font-weight="bold">[WARN] Memory: 91%</text>
+
+    <rect x="330" y="504" width="364" height="36" rx="8" fill="#3366FF" fill-opacity="0.1"/>
+    <text x="350" y="528" font-size="20" fill="#0044BB" font-family="monospace">[DEBUG] line 492</text>
+  </g>
+
+  <!-- 렌즈 광학 반사 효과 -->
+  <ellipse cx="430" cy="390" rx="80" ry="40" fill="#FFFFFF" fill-opacity="0.3" transform="rotate(-20, 430, 390)" clip-path="url(#lensClip05)"/>
+  <!-- 렌즈 외부 링 강조 -->
+  <circle cx="512" cy="480" r="200" fill="none" stroke="#FFFFFF" stroke-width="6" stroke-opacity="0.8"/>
+
+  <!-- 포커스 십자선 -->
+  <g stroke="#FF4400" stroke-width="4" stroke-opacity="0.6" filter="url(#inner_glow05)">
+    <!-- 좌우 선 -->
+    <line x1="290" y1="480" x2="360" y2="480" stroke-linecap="round"/>
+    <line x1="664" y1="480" x2="734" y2="480" stroke-linecap="round"/>
+    <!-- 상하 선 -->
+    <line x1="512" y1="258" x2="512" y2="328" stroke-linecap="round"/>
+    <line x1="512" y1="632" x2="512" y2="702" stroke-linecap="round"/>
+    <!-- 코너 브라켓 (포커스 박스) -->
+    <path d="M 358 366 L 358 334 L 390 334" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M 634 366 L 634 334 L 602 334" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M 358 594 L 358 626 L 390 626" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M 634 594 L 634 626 L 602 626" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <!-- Layer 3: 하단 "Log.Lens" 텍스트 배지 -->
+  <!-- 렌즈 나사/볼트 장식 -->
+  <circle cx="512" cy="480" r="24" fill="#FF6600" filter="url(#glow_ll05)"/>
+  <circle cx="512" cy="480" r="14" fill="#FFFFFF" fill-opacity="0.9"/>
+  <circle cx="512" cy="480" r="8" fill="#FF4400"/>
+
+  <!-- 상단 "FOCUS" 라벨 -->
+  <rect x="442" y="200" width="140" height="34" rx="17" fill="#8B3000" fill-opacity="0.7"/>
+  <text x="512" y="223" font-size="22" text-anchor="middle" fill="#FFD0A0" font-family="monospace" font-weight="bold">FOCUS</text>
+
+  <!-- 하단 스펙 라벨 -->
+  <rect x="370" y="800" width="284" height="38" rx="19" fill="#FFFFFF" fill-opacity="0.85"/>
+  <text x="512" y="826" font-size="22" text-anchor="middle" fill="#8B3000" font-family="monospace" font-weight="bold">Log.Lens</text>
+</svg>

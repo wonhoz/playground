@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg03" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1A4A2A;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2A6A3A;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="leftPanel" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#3A8A4A;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2A6A3A;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="rightPanel" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#90EE90;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#50C060;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg03)"/>
+  <!-- 구분선 중앙 -->
+  <line x1="512" y1="200" x2="512" y2="824" stroke="#90EE90" stroke-width="6" stroke-dasharray="16,10" opacity="0.7"/>
+  <!-- Layer 2: 좌측 패널 (변경 전 - Before) -->
+  <rect x="220" y="240" width="260" height="544" rx="18" fill="url(#leftPanel)" stroke="#3A8A4A" stroke-width="6"/>
+  <!-- 왼쪽 헤더 -->
+  <rect x="220" y="240" width="260" height="52" rx="18" fill="#1A4A2A"/>
+  <rect x="220" y="264" width="260" height="28" fill="#1A4A2A"/>
+  <text x="350" y="278" font-family="sans-serif" font-size="26" fill="#90EE90" text-anchor="middle" font-weight="bold">BEFORE</text>
+  <!-- 왼쪽 파일 트리 라인들 -->
+  <rect x="246" y="316" width="180" height="18" rx="6" fill="#2A6A3A"/>
+  <rect x="266" y="348" width="140" height="14" rx="5" fill="#2A6A3A" opacity="0.8"/>
+  <rect x="266" y="376" width="120" height="14" rx="5" fill="#2A6A3A" opacity="0.8"/>
+  <rect x="266" y="404" width="160" height="14" rx="5" fill="#2A6A3A" opacity="0.6"/>
+  <rect x="246" y="436" width="190" height="18" rx="6" fill="#2A6A3A"/>
+  <rect x="266" y="468" width="130" height="14" rx="5" fill="#2A6A3A" opacity="0.8"/>
+  <rect x="266" y="496" width="150" height="14" rx="5" fill="#2A6A3A" opacity="0.8"/>
+  <!-- Layer 2: 우측 패널 (변경 후 - After) -->
+  <rect x="544" y="240" width="260" height="544" rx="18" fill="#1D3A2A" stroke="#90EE90" stroke-width="6"/>
+  <!-- 오른쪽 헤더 -->
+  <rect x="544" y="240" width="260" height="52" rx="18" fill="#3A8A3A"/>
+  <rect x="544" y="264" width="260" height="28" fill="#3A8A3A"/>
+  <text x="674" y="278" font-family="sans-serif" font-size="26" fill="#FFFFFF" text-anchor="middle" font-weight="bold">AFTER</text>
+  <!-- 오른쪽 파일 트리 - 변경된 항목들 -->
+  <rect x="570" y="316" width="180" height="18" rx="6" fill="#3A7A3A"/>
+  <rect x="590" y="348" width="140" height="14" rx="5" fill="#3A7A3A" opacity="0.8"/>
+  <!-- 추가된 항목 (녹색 강조) -->
+  <rect x="570" y="376" width="180" height="22" rx="5" fill="#50C060" opacity="0.9"/>
+  <text x="660" y="393" font-family="monospace" font-size="18" fill="#FFFFFF" text-anchor="middle">+ new_file.tmp</text>
+  <!-- 수정된 항목 (노랑 강조) -->
+  <rect x="570" y="410" width="180" height="22" rx="5" fill="#C8A000" opacity="0.9"/>
+  <text x="660" y="427" font-family="monospace" font-size="18" fill="#FFFFFF" text-anchor="middle">~ config.reg</text>
+  <rect x="570" y="448" width="180" height="18" rx="6" fill="#3A7A3A"/>
+  <rect x="590" y="480" width="130" height="14" rx="5" fill="#3A7A3A" opacity="0.8"/>
+  <!-- Layer 3: 중앙 DIFF 배지 -->
+  <circle cx="512" cy="512" r="44" fill="#0A2A1A" stroke="#90EE90" stroke-width="6"/>
+  <text x="512" y="522" font-family="sans-serif" font-size="26" fill="#90EE90" text-anchor="middle" font-weight="bold">±</text>
+  <!-- 변경 카운트 배지 -->
+  <rect x="248" y="570" width="196" height="36" rx="10" fill="#1A4A2A" stroke="#50AA50" stroke-width="3"/>
+  <text x="346" y="594" font-family="monospace" font-size="20" fill="#90EE90" text-anchor="middle">0 changes</text>
+  <rect x="572" y="570" width="196" height="36" rx="10" fill="#1A4A1A" stroke="#90EE90" stroke-width="3"/>
+  <text x="670" y="594" font-family="monospace" font-size="20" fill="#90EE90" text-anchor="middle">+2 / ~1 items</text>
+</svg>

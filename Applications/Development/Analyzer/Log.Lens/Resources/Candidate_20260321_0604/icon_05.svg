@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <clipPath id="ll5-clip">
+      <rect width="1024" height="1024" rx="180"/>
+    </clipPath>
+  </defs>
+  <g clip-path="url(#ll5-clip)">
+    <!-- Background: Light -->
+    <rect width="1024" height="1024" fill="#F4F6F8"/>
+    <!-- Subtle top stripe -->
+    <rect width="1024" height="60" fill="#E8EBF0"/>
+
+    <!-- Log viewer panel frame -->
+    <rect x="200" y="200" width="624" height="620" rx="16" fill="#FFFFFF" stroke="#D0D8E4" stroke-width="3"/>
+    <!-- Panel header -->
+    <rect x="200" y="200" width="624" height="44" rx="16" fill="#2C3E50"/>
+    <rect x="200" y="228" width="624" height="16" fill="#2C3E50"/>
+    <text x="420" y="226" font-family="monospace" font-size="15" fill="#A0B0C0">Log.Lens — app.log</text>
+
+    <!-- Line number gutter -->
+    <rect x="200" y="244" width="56" height="576" fill="#F0F2F5" stroke="#D8DCE4" stroke-width="1"/>
+
+    <!-- Log lines -->
+    <!-- Line 1: normal -->
+    <text x="212" y="280" font-family="monospace" font-size="14" fill="#8090A0">1</text>
+    <text x="268" y="280" font-family="monospace" font-size="14" fill="#6080A0">[06:04:11]</text>
+    <text x="352" y="280" font-family="monospace" font-size="14" fill="#2A8A40" font-weight="bold">INFO</text>
+    <text x="392" y="280" font-family="monospace" font-size="14" fill="#3A4A5A">Service started on port 8080</text>
+
+    <!-- Line 2: normal -->
+    <text x="212" y="306" font-family="monospace" font-size="14" fill="#8090A0">2</text>
+    <text x="268" y="306" font-family="monospace" font-size="14" fill="#6080A0">[06:04:12]</text>
+    <text x="352" y="306" font-family="monospace" font-size="14" fill="#4070C0">DEBUG</text>
+    <text x="392" y="306" font-family="monospace" font-size="14" fill="#7A8A9A">Connection pool initialized</text>
+
+    <!-- Line 3: ERROR (red highlight) -->
+    <rect x="202" y="314" width="620" height="30" rx="4" fill="#FFF0F0"/>
+    <text x="212" y="334" font-family="monospace" font-size="14" fill="#CC4040">3</text>
+    <text x="268" y="334" font-family="monospace" font-size="14" fill="#AA6060">[06:04:13]</text>
+    <text x="352" y="334" font-family="monospace" font-size="14" fill="#EE2222" font-weight="bold">ERROR</text>
+    <text x="396" y="334" font-family="monospace" font-size="14" fill="#CC2222" font-weight="bold">NullReferenceException at line 42</text>
+    <!-- Left red indicator bar -->
+    <rect x="200" y="314" width="6" height="30" rx="2" fill="#EE2222"/>
+
+    <!-- Line 4: normal -->
+    <text x="212" y="360" font-family="monospace" font-size="14" fill="#8090A0">4</text>
+    <text x="268" y="360" font-family="monospace" font-size="14" fill="#6080A0">[06:04:14]</text>
+    <text x="352" y="360" font-family="monospace" font-size="14" fill="#2A8A40" font-weight="bold">INFO</text>
+    <text x="392" y="360" font-family="monospace" font-size="14" fill="#3A4A5A">Retry attempt 1/3...</text>
+
+    <!-- Line 5: WARN -->
+    <rect x="202" y="368" width="620" height="30" rx="4" fill="#FFF8F0"/>
+    <text x="212" y="388" font-family="monospace" font-size="14" fill="#AA7020">5</text>
+    <text x="268" y="388" font-family="monospace" font-size="14" fill="#AA8040">[06:04:15]</text>
+    <text x="352" y="388" font-family="monospace" font-size="14" fill="#EE8800" font-weight="bold">WARN</text>
+    <text x="396" y="388" font-family="monospace" font-size="14" fill="#BB6600">Memory usage: 87% (threshold 80%)</text>
+    <rect x="200" y="368" width="6" height="30" rx="2" fill="#EE8800"/>
+
+    <!-- Line 6: OK (green) -->
+    <rect x="202" y="398" width="620" height="30" rx="4" fill="#F0FFF4"/>
+    <text x="212" y="418" font-family="monospace" font-size="14" fill="#208A40">6</text>
+    <text x="268" y="418" font-family="monospace" font-size="14" fill="#409060">[06:04:16]</text>
+    <text x="352" y="418" font-family="monospace" font-size="14" fill="#22AA44" font-weight="bold">INFO</text>
+    <text x="392" y="418" font-family="monospace" font-size="14" fill="#228844">Request processed OK (120ms)</text>
+    <rect x="200" y="398" width="6" height="30" rx="2" fill="#22AA44"/>
+
+    <!-- Lines 7-9: normal/debug -->
+    <text x="212" y="444" font-family="monospace" font-size="14" fill="#8090A0">7</text>
+    <text x="268" y="444" font-family="monospace" font-size="14" fill="#6080A0">[06:04:17]</text>
+    <text x="352" y="444" font-family="monospace" font-size="14" fill="#4070C0">DEBUG</text>
+    <text x="392" y="444" font-family="monospace" font-size="14" fill="#7A8A9A">Cache hit ratio: 94.2%</text>
+
+    <text x="212" y="470" font-family="monospace" font-size="14" fill="#8090A0">8</text>
+    <text x="268" y="470" font-family="monospace" font-size="14" fill="#6080A0">[06:04:18]</text>
+    <text x="352" y="470" font-family="monospace" font-size="14" fill="#2A8A40" font-weight="bold">INFO</text>
+    <text x="392" y="470" font-family="monospace" font-size="14" fill="#3A4A5A">Background worker completed</text>
+
+    <!-- Line 9: ERROR again -->
+    <rect x="202" y="478" width="620" height="30" rx="4" fill="#FFF0F0"/>
+    <text x="212" y="498" font-family="monospace" font-size="14" fill="#CC4040">9</text>
+    <text x="268" y="498" font-family="monospace" font-size="14" fill="#AA6060">[06:04:19]</text>
+    <text x="352" y="498" font-family="monospace" font-size="14" fill="#EE2222" font-weight="bold">ERROR</text>
+    <text x="396" y="498" font-family="monospace" font-size="14" fill="#CC2222" font-weight="bold">Connection timeout after 30000ms</text>
+    <rect x="200" y="478" width="6" height="30" rx="2" fill="#EE2222"/>
+
+    <!-- More lines faded -->
+    <text x="212" y="524" font-family="monospace" font-size="14" fill="#A0AAB4">10</text>
+    <text x="268" y="524" font-family="monospace" font-size="14" fill="#8090A0" opacity="0.7">[06:04:20]</text>
+    <text x="352" y="524" font-family="monospace" font-size="14" fill="#4070C0" opacity="0.6">DEBUG</text>
+    <text x="392" y="524" font-family="monospace" font-size="14" fill="#9AAABB" opacity="0.6">Queue flushed (124 items)</text>
+
+    <text x="212" y="550" font-family="monospace" font-size="14" fill="#A0AAB4">11</text>
+    <text x="268" y="550" font-family="monospace" font-size="14" fill="#8090A0" opacity="0.6">[06:04:21]</text>
+    <text x="352" y="550" font-family="monospace" font-size="14" fill="#2A8A40" opacity="0.5" font-weight="bold">INFO</text>
+    <text x="392" y="550" font-family="monospace" font-size="14" fill="#3A4A5A" opacity="0.5">Graceful shutdown initiated</text>
+
+    <!-- Fade out remaining lines -->
+    <rect x="200" y="560" width="624" height="260" fill="url(#ll5-fade)" opacity="1"/>
+    <defs>
+      <linearGradient id="ll5-fade" x1="0%" y1="0%" x2="0%" y2="100%">
+        <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0"/>
+        <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0.85"/>
+      </linearGradient>
+    </defs>
+
+    <!-- Status bar at bottom -->
+    <rect x="200" y="792" width="624" height="28" rx="10" fill="#2C3E50"/>
+    <text x="220" y="811" font-family="monospace" font-size="12" fill="#80A0C0">Lines: 11/2048  |  ERRORs: 2  |  WARNs: 1  |  Filter: off</text>
+  </g>
+</svg>

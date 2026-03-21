@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <clipPath id="sf-bg-clip-05">
+      <rect width="1024" height="1024" rx="180"/>
+    </clipPath>
+    <linearGradient id="sf-bg-grad-05" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0A2010"/>
+      <stop offset="100%" stop-color="#061408"/>
+    </linearGradient>
+    <linearGradient id="conn-line-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00CCFF" stop-opacity="0.2"/>
+      <stop offset="40%" stop-color="#00FFCC"/>
+      <stop offset="60%" stop-color="#00FFCC"/>
+      <stop offset="100%" stop-color="#00CCFF" stop-opacity="0.2"/>
+    </linearGradient>
+    <filter id="glow-sf-05">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- 배경 (딥 그린) -->
+  <rect width="1024" height="1024" rx="180" fill="url(#sf-bg-grad-05)"/>
+  <g clip-path="url(#sf-bg-clip-05)">
+    <!-- 서버탑 (왼쪽, 화이트) -->
+    <!-- 서버 랙 본체 -->
+    <rect x="150" y="280" width="180" height="460" rx="16" fill="#FFFFFF" stroke="#CCCCCC" stroke-width="5"/>
+    <!-- 서버 상단 장식 -->
+    <rect x="150" y="280" width="180" height="40" rx="16" fill="#F0F0F0"/>
+    <rect x="150" y="308" width="180" height="12" fill="#F0F0F0"/>
+    <!-- 서버 유닛들 -->
+    <rect x="165" y="334" width="150" height="30" rx="6" fill="#E8E8E8" stroke="#CCCCCC" stroke-width="2"/>
+    <circle cx="182" cy="349" r="7" fill="#00FF88"/>
+    <rect x="196" y="343" width="80" height="12" rx="3" fill="#CCCCCC" opacity="0.7"/>
+    <rect x="165" y="372" width="150" height="30" rx="6" fill="#E8E8E8" stroke="#CCCCCC" stroke-width="2"/>
+    <circle cx="182" cy="387" r="7" fill="#00CCFF"/>
+    <rect x="196" y="381" width="60" height="12" rx="3" fill="#CCCCCC" opacity="0.7"/>
+    <rect x="165" y="410" width="150" height="30" rx="6" fill="#E8E8E8" stroke="#CCCCCC" stroke-width="2"/>
+    <circle cx="182" cy="425" r="7" fill="#FF8800"/>
+    <rect x="196" y="419" width="90" height="12" rx="3" fill="#CCCCCC" opacity="0.7"/>
+    <rect x="165" y="448" width="150" height="30" rx="6" fill="#E8E8E8" stroke="#CCCCCC" stroke-width="2"/>
+    <circle cx="182" cy="463" r="7" fill="#00FF88"/>
+    <rect x="196" y="457" width="70" height="12" rx="3" fill="#CCCCCC" opacity="0.7"/>
+    <!-- 서버 하단 -->
+    <rect x="165" y="490" width="150" height="20" rx="4" fill="#DDDDDD" opacity="0.7"/>
+    <rect x="165" y="518" width="150" height="20" rx="4" fill="#DDDDDD" opacity="0.5"/>
+    <rect x="165" y="546" width="150" height="20" rx="4" fill="#DDDDDD" opacity="0.5"/>
+    <rect x="165" y="574" width="150" height="20" rx="4" fill="#DDDDDD" opacity="0.4"/>
+    <rect x="165" y="602" width="150" height="20" rx="4" fill="#DDDDDD" opacity="0.4"/>
+    <rect x="165" y="630" width="150" height="20" rx="4" fill="#DDDDDD" opacity="0.35"/>
+    <!-- 서버 포트 (오른쪽) -->
+    <rect x="318" y="490" width="12" height="8" rx="2" fill="#888888"/>
+    <rect x="318" y="505" width="12" height="8" rx="2" fill="#888888"/>
+    <rect x="318" y="520" width="12" height="8" rx="2" fill="#888888"/>
+    <!-- 연결 케이블/빛줄기 (시안) -->
+    <!-- 메인 연결선 1 -->
+    <path d="M 330 349 Q 512 280 694 390" fill="none" stroke="url(#conn-line-grad)" stroke-width="10" stroke-linecap="round" filter="url(#glow-sf-05)"/>
+    <!-- 메인 연결선 2 -->
+    <path d="M 330 387 Q 512 387 694 470" fill="none" stroke="url(#conn-line-grad)" stroke-width="14" stroke-linecap="round" filter="url(#glow-sf-05)"/>
+    <!-- 메인 연결선 3 -->
+    <path d="M 330 425 Q 512 500 694 540" fill="none" stroke="url(#conn-line-grad)" stroke-width="10" stroke-linecap="round" filter="url(#glow-sf-05)"/>
+    <!-- 연결선 이동 패킷들 -->
+    <circle cx="440" cy="340" r="14" fill="#00FFCC" filter="url(#glow-sf-05)"/>
+    <circle cx="580" cy="394" r="18" fill="#00FFCC" filter="url(#glow-sf-05)"/>
+    <circle cx="460" cy="490" r="12" fill="#00FFCC" filter="url(#glow-sf-05)"/>
+    <!-- 클라이언트 (오른쪽) -->
+    <!-- 랩톱 화면 -->
+    <rect x="694" y="320" width="220" height="280" rx="14" fill="#1A2A1A" stroke="#00CC88" stroke-width="5"/>
+    <rect x="706" y="332" width="196" height="240" rx="8" fill="#0A1A0A"/>
+    <!-- 화면 내용 (실시간 수신) -->
+    <rect x="718" y="350" width="140" height="12" rx="4" fill="#00DDFF" opacity="0.8"/>
+    <rect x="718" y="370" width="120" height="12" rx="4" fill="#00FF88" opacity="0.9"/>
+    <rect x="718" y="390" width="160" height="12" rx="4" fill="#00DDFF" opacity="0.7"/>
+    <rect x="718" y="410" width="100" height="12" rx="4" fill="#00FF88" opacity="0.8"/>
+    <rect x="718" y="430" width="140" height="12" rx="4" fill="#00DDFF" opacity="0.6"/>
+    <rect x="718" y="450" width="120" height="12" rx="4" fill="#00FF88" opacity="0.7"/>
+    <!-- 커서 -->
+    <rect x="850" y="468" width="6" height="14" rx="2" fill="#00FF88"/>
+    <!-- 랩톱 하단 -->
+    <rect x="694" y="600" width="220" height="30" rx="6" fill="#0E1E0E" stroke="#00CC88" stroke-width="4"/>
+    <rect x="664" y="628" width="280" height="20" rx="8" fill="#1A2A1A" stroke="#00CC88" stroke-width="3"/>
+  </g>
+</svg>

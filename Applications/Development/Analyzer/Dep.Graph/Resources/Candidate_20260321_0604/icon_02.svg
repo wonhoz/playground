@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <clipPath id="dg-bg-clip-02">
+      <rect width="1024" height="1024" rx="160"/>
+    </clipPath>
+    <linearGradient id="dg-bg-02" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E8380A"/>
+      <stop offset="100%" stop-color="#C62800"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="160" fill="url(#dg-bg-02)"/>
+
+  <g clip-path="url(#dg-bg-clip-02)">
+    <!-- 루트 패키지 박스 (중앙 상단) -->
+    <rect x="376" y="248" width="272" height="110" rx="18" fill="#1A0A00"/>
+    <rect x="390" y="262" width="244" height="82" rx="12" fill="#2C1000"/>
+    <!-- 박스 내 텍스트 대신 점 3개 -->
+    <circle cx="462" cy="303" r="10" fill="#FFFFFF" opacity="0.6"/>
+    <circle cx="512" cy="303" r="10" fill="#FFFFFF" opacity="0.6"/>
+    <circle cx="562" cy="303" r="10" fill="#FFFFFF" opacity="0.6"/>
+
+    <!-- 가지 연결선 -->
+    <!-- 루트 → 좌하1 -->
+    <line x1="430" y1="358" x2="300" y2="500" stroke="#FFFFFF" stroke-width="40" stroke-linecap="round"/>
+    <!-- 루트 → 하 -->
+    <line x1="512" y1="358" x2="512" y2="500" stroke="#FFFFFF" stroke-width="40" stroke-linecap="round"/>
+    <!-- 루트 → 우하1 -->
+    <line x1="594" y1="358" x2="724" y2="500" stroke="#FFFFFF" stroke-width="40" stroke-linecap="round"/>
+
+    <!-- 하위 박스들 (Level 2) -->
+    <rect x="210" y="500" width="180" height="90" rx="14" fill="#1A0A00"/>
+    <rect x="222" y="512" width="156" height="66" rx="10" fill="#2C1000"/>
+    <circle cx="276" cy="545" r="9" fill="#FFFFFF" opacity="0.55"/>
+    <circle cx="300" cy="545" r="9" fill="#FFFFFF" opacity="0.55"/>
+    <circle cx="324" cy="545" r="9" fill="#FFFFFF" opacity="0.55"/>
+
+    <rect x="422" y="500" width="180" height="90" rx="14" fill="#1A0A00"/>
+    <rect x="434" y="512" width="156" height="66" rx="10" fill="#2C1000"/>
+    <circle cx="488" cy="545" r="9" fill="#FFFFFF" opacity="0.55"/>
+    <circle cx="512" cy="545" r="9" fill="#FFFFFF" opacity="0.55"/>
+    <circle cx="536" cy="545" r="9" fill="#FFFFFF" opacity="0.55"/>
+
+    <rect x="634" y="500" width="180" height="90" rx="14" fill="#1A0A00"/>
+    <rect x="646" y="512" width="156" height="66" rx="10" fill="#2C1000"/>
+    <circle cx="700" cy="545" r="9" fill="#FFFFFF" opacity="0.55"/>
+    <circle cx="724" cy="545" r="9" fill="#FFFFFF" opacity="0.55"/>
+    <circle cx="748" cy="545" r="9" fill="#FFFFFF" opacity="0.55"/>
+
+    <!-- Level 2 → Level 3 -->
+    <line x1="300" y1="590" x2="270" y2="690" stroke="#FFFFFF" stroke-width="30" stroke-linecap="round" opacity="0.75"/>
+    <line x1="300" y1="590" x2="360" y2="690" stroke="#FFFFFF" stroke-width="30" stroke-linecap="round" opacity="0.75"/>
+    <line x1="512" y1="590" x2="480" y2="690" stroke="#FFFFFF" stroke-width="30" stroke-linecap="round" opacity="0.75"/>
+    <line x1="512" y1="590" x2="544" y2="690" stroke="#FFFFFF" stroke-width="30" stroke-linecap="round" opacity="0.75"/>
+    <line x1="724" y1="590" x2="724" y2="690" stroke="#FFFFFF" stroke-width="30" stroke-linecap="round" opacity="0.75"/>
+
+    <!-- Level 3 박스들 (작음) -->
+    <rect x="228" y="690" width="84" height="54" rx="10" fill="#1A0A00" opacity="0.9"/>
+    <rect x="326" y="690" width="84" height="54" rx="10" fill="#1A0A00" opacity="0.9"/>
+    <rect x="438" y="690" width="84" height="54" rx="10" fill="#1A0A00" opacity="0.9"/>
+    <rect x="502" y="690" width="84" height="54" rx="10" fill="#1A0A00" opacity="0.9"/>
+    <rect x="682" y="690" width="84" height="54" rx="10" fill="#1A0A00" opacity="0.9"/>
+  </g>
+</svg>

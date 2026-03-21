@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <clipPath id="we-bg-clip-05">
+      <rect width="1024" height="1024" rx="160"/>
+    </clipPath>
+    <linearGradient id="we-bg-05" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E8EAF0"/>
+      <stop offset="100%" stop-color="#D0D4E0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="160" fill="url(#we-bg-05)"/>
+
+  <g clip-path="url(#we-bg-clip-05)">
+    <!-- 시스템 모니터 아이콘 (중앙 딥블루) -->
+    <!-- 모니터 외곽 -->
+    <rect x="230" y="280" width="564" height="400" rx="36" fill="#1A237E"/>
+    <!-- 모니터 스크린 -->
+    <rect x="258" y="310" width="508" height="340" rx="20" fill="#283593"/>
+    <!-- 받침대 -->
+    <rect x="450" y="680" width="124" height="44" rx="10" fill="#1A237E"/>
+    <rect x="416" y="718" width="192" height="24" rx="12" fill="#283593"/>
+
+    <!-- 화면 내용: ECG 라인 (심장 박동처럼 = 모니터링) -->
+    <polyline points="290,500 350,500 380,380 410,600 440,420 470,560 500,500 790,500" fill="none" stroke="#7986CB" stroke-width="40" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- 하이라이트 펄스 -->
+    <polyline points="380,380 410,600 440,420 470,560" fill="none" stroke="#C5CAE9" stroke-width="48" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <!-- 레드 알림 배지 (우상단) -->
+    <circle cx="756" cy="304" r="108" fill="#C62828"/>
+    <circle cx="756" cy="304" r="90" fill="#E53935"/>
+    <!-- 느낌표 -->
+    <rect x="739" y="254" width="34" height="74" rx="17" fill="#FFFFFF"/>
+    <circle cx="756" cy="352" r="19" fill="#FFFFFF"/>
+  </g>
+</svg>

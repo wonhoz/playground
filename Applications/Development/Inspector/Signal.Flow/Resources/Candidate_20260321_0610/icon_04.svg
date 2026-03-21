@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg04s" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#020808;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#041010;stop-opacity:1" />
+    </linearGradient>
+    <filter id="waveGlow">
+      <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <linearGradient id="waveGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#00FF44;stop-opacity:0.2" />
+      <stop offset="20%" style="stop-color:#00FF44;stop-opacity:1" />
+      <stop offset="80%" style="stop-color:#00FF44;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#00FF44;stop-opacity:0.2" />
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg04s)"/>
+  <!-- 오실로스코프 화면 -->
+  <rect x="220" y="260" width="584" height="504" rx="24" fill="#030E0A" stroke="#1A4A1A" stroke-width="10"/>
+  <!-- 격자선 수평 -->
+  <line x1="240" y1="362" x2="784" y2="362" stroke="#0A2A0A" stroke-width="1.5"/>
+  <line x1="240" y1="462" x2="784" y2="462" stroke="#1A4A1A" stroke-width="2" opacity="0.6"/>
+  <line x1="240" y1="512" x2="784" y2="512" stroke="#0A3A0A" stroke-width="2.5"/>
+  <line x1="240" y1="562" x2="784" y2="562" stroke="#1A4A1A" stroke-width="2" opacity="0.6"/>
+  <line x1="240" y1="662" x2="784" y2="662" stroke="#0A2A0A" stroke-width="1.5"/>
+  <!-- 격자선 수직 -->
+  <line x1="340" y1="270" x2="340" y2="754" stroke="#0A2A0A" stroke-width="1.5"/>
+  <line x1="452" y1="270" x2="452" y2="754" stroke="#0A2A0A" stroke-width="1.5"/>
+  <line x1="564" y1="270" x2="564" y2="754" stroke="#0A2A0A" stroke-width="1.5"/>
+  <line x1="676" y1="270" x2="676" y2="754" stroke="#0A2A0A" stroke-width="1.5"/>
+  <!-- Layer 2: 파형 (네온 그린 사인파) -->
+  <path d="M240 512
+    C270 512 280 362 310 362
+    C340 362 350 662 380 662
+    C410 662 420 362 450 362
+    C480 362 490 662 520 662
+    C550 662 560 362 590 362
+    C620 362 630 662 660 662
+    C690 662 700 362 730 362
+    C760 362 770 512 784 512"
+    fill="none" stroke="url(#waveGrad)" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" filter="url(#waveGlow)"/>
+  <!-- 파형 내부 밝은 코어 -->
+  <path d="M240 512
+    C270 512 280 376 310 376
+    C340 376 350 648 380 648
+    C410 648 420 376 450 376
+    C480 376 490 648 520 648
+    C550 648 560 376 590 376
+    C620 376 630 648 660 648
+    C690 648 700 376 730 376
+    C760 376 770 512 784 512"
+    fill="none" stroke="#80FFAA" stroke-width="5" stroke-linecap="round" opacity="0.8"/>
+  <!-- Layer 3: UI 프레임 요소 -->
+  <!-- 스크린 글로우 효과 -->
+  <rect x="220" y="260" width="584" height="504" rx="24" fill="none" stroke="#00FF44" stroke-width="3" opacity="0.2"/>
+  <!-- 상단 레이블 -->
+  <text x="260" y="300" font-family="monospace" font-size="24" fill="#00AA33" opacity="0.8">CH1</text>
+  <text x="510" y="300" font-family="monospace" font-size="24" fill="#00FF44" text-anchor="middle" opacity="0.9">20ms/div</text>
+  <text x="764" y="300" font-family="monospace" font-size="24" fill="#00AA33" text-anchor="end" opacity="0.8">5V/div</text>
+  <!-- 하단 상태 바 -->
+  <rect x="220" y="730" width="584" height="34" rx="14" fill="#020E06" stroke="#1A4A1A" stroke-width="4"/>
+  <text x="240" y="752" font-family="monospace" font-size="20" fill="#00BB33">LIVE</text>
+  <circle cx="296" cy="747" r="7" fill="#00FF44" filter="url(#waveGlow)"/>
+  <text x="330" y="752" font-family="monospace" font-size="20" fill="#00AA33" opacity="0.8">SignalR  SSE  WebSocket</text>
+  <!-- Y축 수치 -->
+  <text x="216" y="368" font-family="monospace" font-size="20" fill="#006622" text-anchor="end" opacity="0.7">+2</text>
+  <text x="216" y="518" font-family="monospace" font-size="20" fill="#006622" text-anchor="end" opacity="0.7">0</text>
+  <text x="216" y="668" font-family="monospace" font-size="20" fill="#006622" text-anchor="end" opacity="0.7">-2</text>
+</svg>

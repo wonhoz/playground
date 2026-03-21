@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bgSpool" x1="0" y1="0" x2="0.5" y2="1">
+      <stop offset="0%" stop-color="#2A2015"/>
+      <stop offset="100%" stop-color="#1A1308"/>
+    </linearGradient>
+    <!-- 실 색상들 -->
+    <linearGradient id="thread1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FF6B6B"/>
+      <stop offset="100%" stop-color="#FF4444"/>
+    </linearGradient>
+    <linearGradient id="thread2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#4ECDC4"/>
+      <stop offset="100%" stop-color="#2AB5AB"/>
+    </linearGradient>
+    <linearGradient id="thread3" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFE66D"/>
+      <stop offset="100%" stop-color="#FFD600"/>
+    </linearGradient>
+    <linearGradient id="thread4" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#C084FC"/>
+      <stop offset="100%" stop-color="#A855F7"/>
+    </linearGradient>
+    <!-- 정돈된 실 뭉치 -->
+    <radialGradient id="cleanSpool" cx="50%" cy="40%" r="65%">
+      <stop offset="0%" stop-color="#FFEEDD"/>
+      <stop offset="60%" stop-color="#FFD4AA"/>
+      <stop offset="100%" stop-color="#E8B888"/>
+    </radialGradient>
+    <filter id="threadGlow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="spoolShadow">
+      <feDropShadow dx="0" dy="10" stdDeviation="18" flood-color="#00000066"/>
+    </filter>
+  </defs>
+
+  <!-- Layer1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bgSpool)"/>
+
+  <!-- Layer2: 엉킨 실타래 (왼쪽) -->
+  <!-- 엉킨 실들 - 복잡한 곡선들 -->
+  <path d="M 195 350 Q 230 280 290 310 Q 340 338 310 400 Q 280 460 240 440 Q 200 420 220 370" fill="none" stroke="url(#thread1)" stroke-width="10" stroke-linecap="round" filter="url(#threadGlow)"/>
+  <path d="M 215 420 Q 265 380 320 420 Q 360 450 340 510 Q 318 570 270 550 Q 222 528 225 480" fill="none" stroke="url(#thread2)" stroke-width="10" stroke-linecap="round" filter="url(#threadGlow)"/>
+  <path d="M 240 310 Q 310 350 350 310 Q 390 270 380 330 Q 370 390 310 410 Q 258 428 245 380" fill="none" stroke="url(#thread3)" stroke-width="10" stroke-linecap="round" filter="url(#threadGlow)"/>
+  <path d="M 200 500 Q 250 470 300 500 Q 340 530 320 580 Q 300 630 250 610 Q 200 590 210 540" fill="none" stroke="url(#thread4)" stroke-width="10" stroke-linecap="round" filter="url(#threadGlow)"/>
+  <path d="M 270 550 Q 330 530 360 570 Q 390 610 360 660 Q 330 710 280 690 Q 230 670 250 620" fill="none" stroke="url(#thread1)" stroke-width="8" stroke-linecap="round" opacity="0.7"/>
+  <path d="M 235 640 Q 280 600 330 640 Q 370 672 350 720 Q 330 768 280 750" fill="none" stroke="url(#thread2)" stroke-width="8" stroke-linecap="round" opacity="0.6"/>
+
+  <!-- 화살표: 정리 방향 -->
+  <path d="M 420 512 L 520 512" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round" opacity="0.6"/>
+  <polygon points="540,512 510,492 510,532" fill="#FFFFFF" opacity="0.6"/>
+
+  <!-- 손 실루엣 (정리하는 모습) -->
+  <path d="M 370 480 Q 380 460 400 460 Q 420 460 425 480 Q 428 496 415 500 L 400 504 Q 385 506 375 495 Z" fill="#C8A882" opacity="0.5"/>
+
+  <!-- Layer3: 정돈된 실뭉치 (오른쪽) -->
+  <circle cx="680" cy="500" r="170" fill="url(#cleanSpool)" filter="url(#spoolShadow)"/>
+
+  <!-- 실뭉치 위 색상 레이어들 (정돈된 모습) -->
+  <circle cx="680" cy="500" r="150" fill="none" stroke="#FF6B6B" stroke-width="12" opacity="0.6"/>
+  <circle cx="680" cy="500" r="130" fill="none" stroke="#4ECDC4" stroke-width="12" opacity="0.6"/>
+  <circle cx="680" cy="500" r="110" fill="none" stroke="#FFE66D" stroke-width="12" opacity="0.6"/>
+  <circle cx="680" cy="500" r="90" fill="none" stroke="#C084FC" stroke-width="12" opacity="0.6"/>
+  <circle cx="680" cy="500" r="70" fill="none" stroke="#FF6B6B" stroke-width="10" opacity="0.5"/>
+  <circle cx="680" cy="500" r="52" fill="none" stroke="#4ECDC4" stroke-width="10" opacity="0.5"/>
+
+  <!-- 중심 -->
+  <circle cx="680" cy="500" r="32" fill="#E8B888"/>
+  <circle cx="680" cy="500" r="16" fill="#D4A070" opacity="0.8"/>
+
+  <!-- 라벨 -->
+  <text x="680" y="710" font-family="sans-serif" font-size="22" fill="#FFD4AA" text-anchor="middle" opacity="0.8">Merged</text>
+  <text x="310" y="780" font-family="sans-serif" font-size="20" fill="#AAAAAA" text-anchor="middle" opacity="0.6">Tangled</text>
+</svg>

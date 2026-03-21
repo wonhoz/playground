@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg05q" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FF6A4A;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#E84A2A;stop-opacity:1" />
+    </linearGradient>
+    <radialGradient id="numBg05q" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#FFFFFF;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FFE8E0;stop-opacity:1" />
+    </radialGradient>
+    <linearGradient id="numEdge05q" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#CC3A1A;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#AA2A0A;stop-opacity:1" />
+    </linearGradient>
+    <filter id="numglow">
+      <feGaussianBlur stdDeviation="6" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg05q)"/>
+  <!-- 원형 트랙 -->
+  <circle cx="512" cy="512" r="300" fill="none" stroke="#CC3A1A" stroke-width="30" opacity="0.5"/>
+  <circle cx="512" cy="512" r="300" fill="none" stroke="#FFFFFF" stroke-width="8" opacity="0.2"/>
+  <!-- Layer 2: 숫자 0~9 원형 배열 -->
+  <!-- 반지름 300 원 위에 10개 숫자, 각도 36도 간격, 0부터 시작 (상단) -->
+  <!-- 0: 상단 (270도) -->
+  <circle cx="512" cy="212" r="52" fill="url(#numBg05q)" stroke="url(#numEdge05q)" stroke-width="8"/>
+  <text x="512" y="230" font-family="sans-serif" font-size="46" fill="#CC3A1A" text-anchor="middle" font-weight="900">0</text>
+  <!-- 1: 36도 (270+36=306도) → x=512+300*cos(306°), y=512+300*sin(306°) -->
+  <!-- cos(306°)=0.588, sin(306°)=-0.809 -->
+  <circle cx="688" cy="269" r="48" fill="url(#numBg05q)" stroke="url(#numEdge05q)" stroke-width="7"/>
+  <text x="688" y="286" font-family="sans-serif" font-size="44" fill="#CC3A1A" text-anchor="middle" font-weight="900">1</text>
+  <!-- 2: 72도 → cos(342°)=0.951, sin(342°)=-0.309 -->
+  <circle cx="797" cy="419" r="48" fill="url(#numBg05q)" stroke="url(#numEdge05q)" stroke-width="7"/>
+  <text x="797" y="437" font-family="sans-serif" font-size="44" fill="#CC3A1A" text-anchor="middle" font-weight="900">2</text>
+  <!-- 3: 108도 → cos(18°)=0.951, sin(18°)=0.309 -->
+  <circle cx="797" cy="605" r="48" fill="url(#numBg05q)" stroke="url(#numEdge05q)" stroke-width="7"/>
+  <text x="797" y="623" font-family="sans-serif" font-size="44" fill="#CC3A1A" text-anchor="middle" font-weight="900">3</text>
+  <!-- 4: 144도 → cos(54°)=0.588, sin(54°)=0.809 -->
+  <circle cx="688" cy="755" r="48" fill="url(#numBg05q)" stroke="url(#numEdge05q)" stroke-width="7"/>
+  <text x="688" y="773" font-family="sans-serif" font-size="44" fill="#CC3A1A" text-anchor="middle" font-weight="900">4</text>
+  <!-- 5: 180도 → 하단 -->
+  <circle cx="512" cy="812" r="52" fill="url(#numBg05q)" stroke="url(#numEdge05q)" stroke-width="8"/>
+  <text x="512" y="830" font-family="sans-serif" font-size="46" fill="#CC3A1A" text-anchor="middle" font-weight="900">5</text>
+  <!-- 6: 216도 → cos(234°)=-0.588, sin(234°)=0.809 -->
+  <circle cx="336" cy="755" r="48" fill="url(#numBg05q)" stroke="url(#numEdge05q)" stroke-width="7"/>
+  <text x="336" y="773" font-family="sans-serif" font-size="44" fill="#CC3A1A" text-anchor="middle" font-weight="900">6</text>
+  <!-- 7: 252도 → cos(198°)=-0.951, sin(198°)=0.309 -->
+  <circle cx="227" cy="605" r="48" fill="url(#numBg05q)" stroke="url(#numEdge05q)" stroke-width="7"/>
+  <text x="227" y="623" font-family="sans-serif" font-size="44" fill="#CC3A1A" text-anchor="middle" font-weight="900">7</text>
+  <!-- 8: 288도 → cos(198°)=-0.951, sin(198°)=-0.309 -->
+  <circle cx="227" cy="419" r="48" fill="url(#numBg05q)" stroke="url(#numEdge05q)" stroke-width="7"/>
+  <text x="227" y="437" font-family="sans-serif" font-size="44" fill="#CC3A1A" text-anchor="middle" font-weight="900">8</text>
+  <!-- 9: 324도 → cos(234°)=-0.588, sin(234°)=-0.809 -->
+  <circle cx="336" cy="269" r="48" fill="url(#numBg05q)" stroke="url(#numEdge05q)" stroke-width="7"/>
+  <text x="336" y="286" font-family="sans-serif" font-size="44" fill="#CC3A1A" text-anchor="middle" font-weight="900">9</text>
+  <!-- Layer 3: 중앙 계산기 심볼 -->
+  <circle cx="512" cy="512" r="110" fill="#CC3A1A" stroke="#FFFFFF" stroke-width="8"/>
+  <!-- 계산기 아이콘 미니 -->
+  <rect x="462" y="462" width="100" height="100" rx="14" fill="#FFFFFF" opacity="0.15"/>
+  <text x="512" y="495" font-family="sans-serif" font-size="22" fill="#FFFFFF" text-anchor="middle" font-weight="bold" opacity="0.9">QUICK</text>
+  <text x="512" y="530" font-family="sans-serif" font-size="40" fill="#FFE0D8" text-anchor="middle" font-weight="900">Σ</text>
+  <text x="512" y="565" font-family="sans-serif" font-size="18" fill="#FF9A80" text-anchor="middle" opacity="0.8">CALC</text>
+</svg>

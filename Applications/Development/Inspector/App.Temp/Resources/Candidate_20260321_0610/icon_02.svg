@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg02" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0F1E3D;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1A2F5E;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="arrow02" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00F5FF;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0090C0;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="inner02" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFFFFF;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#C8F0FF;stop-opacity:1" />
+    </linearGradient>
+    <filter id="glow02">
+      <feGaussianBlur stdDeviation="12" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg02)"/>
+  <!-- 배경 원형 장식 -->
+  <circle cx="512" cy="512" r="340" fill="none" stroke="#1E3A6E" stroke-width="2" opacity="0.5"/>
+  <circle cx="512" cy="512" r="280" fill="none" stroke="#1E3A6E" stroke-width="1" opacity="0.4"/>
+  <!-- Layer 2: 롤백 화살표 (반시계 방향 큰 원호) -->
+  <g filter="url(#glow02)">
+    <path d="M 512 200 A 310 310 0 1 0 820 560" fill="none" stroke="url(#arrow02)" stroke-width="72" stroke-linecap="round"/>
+  </g>
+  <!-- 화살표 헤드 -->
+  <polygon points="820,480 900,560 820,640" fill="#00F5FF" filter="url(#glow02)"/>
+  <!-- 화살표 헤드 흰 하이라이트 -->
+  <polygon points="828,510 880,560 828,610" fill="url(#inner02)" opacity="0.6"/>
+  <!-- Layer 3: 중앙 되돌리기 심볼 -->
+  <circle cx="512" cy="512" r="110" fill="#0F1E3D" stroke="#00F5FF" stroke-width="8" opacity="0.95"/>
+  <path d="M450 490 L490 450 L490 472 Q540 460 560 500 Q580 540 550 570 Q540 580 526 582" fill="none" stroke="#FFFFFF" stroke-width="18" stroke-linecap="round"/>
+  <path d="M490 450 L450 490 L510 495 Z" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="4"/>
+  <!-- 되돌리기 작은 장식선 -->
+  <line x1="460" y1="540" x2="490" y2="540" stroke="#00F5FF" stroke-width="8" stroke-linecap="round" opacity="0.7"/>
+  <line x1="460" y1="560" x2="495" y2="560" stroke="#00F5FF" stroke-width="8" stroke-linecap="round" opacity="0.5"/>
+</svg>

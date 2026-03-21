@@ -1,0 +1,120 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg_ll02" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2C3E6A"/>
+      <stop offset="50%" stop-color="#1A2A50"/>
+      <stop offset="100%" stop-color="#0A1430"/>
+    </linearGradient>
+    <linearGradient id="tab1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#4A6FD4"/>
+      <stop offset="100%" stop-color="#2A4FBC"/>
+    </linearGradient>
+    <linearGradient id="tab2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#2A4AA0"/>
+      <stop offset="100%" stop-color="#1A3080"/>
+    </linearGradient>
+    <linearGradient id="tab3" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1A3480"/>
+      <stop offset="100%" stop-color="#0A1E60"/>
+    </linearGradient>
+    <linearGradient id="activeTab" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#6A8FFF"/>
+      <stop offset="100%" stop-color="#4A6FE0"/>
+    </linearGradient>
+    <linearGradient id="tabContent" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1E2D58"/>
+      <stop offset="100%" stop-color="#141E40"/>
+    </linearGradient>
+    <filter id="shadow_ll02">
+      <feDropShadow dx="4" dy="8" stdDeviation="12" flood-color="#000" flood-opacity="0.5"/>
+    </filter>
+  </defs>
+
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg_ll02)"/>
+  <!-- 배경 그리드 -->
+  <g stroke="#2A3A6A" stroke-width="1" stroke-opacity="0.3">
+    <line x1="0" y1="300" x2="1024" y2="300"/>
+    <line x1="0" y1="500" x2="1024" y2="500"/>
+    <line x1="0" y1="700" x2="1024" y2="700"/>
+    <line x1="300" y1="0" x2="300" y2="1024"/>
+    <line x1="600" y1="0" x2="600" y2="1024"/>
+    <line x1="900" y1="0" x2="900" y2="1024"/>
+  </g>
+
+  <!-- Layer 2: 메인 오브젝트 — 겹쳐진 탭들 -->
+  <!-- 탭 3 (가장 뒤) -->
+  <rect x="290" y="320" width="480" height="400" rx="12" fill="url(#tab3)" filter="url(#shadow_ll02)" transform="translate(20, 20)"/>
+  <!-- 탭 3 헤더 -->
+  <rect x="310" y="340" width="480" height="44" rx="12" fill="#0E1840"/>
+  <rect x="310" y="368" width="480" height="16" fill="#0E1840"/>
+  <text x="340" y="367" font-size="20" fill="#5577AA" font-family="monospace">error.log</text>
+  <!-- 탭 3 내용 -->
+  <rect x="328" y="402" width="380" height="12" rx="6" fill="#FF5555" fill-opacity="0.3"/>
+  <rect x="328" y="424" width="320" height="12" rx="6" fill="#5577AA" fill-opacity="0.2"/>
+  <rect x="328" y="446" width="350" height="12" rx="6" fill="#5577AA" fill-opacity="0.2"/>
+
+  <!-- 탭 2 (중간) -->
+  <rect x="270" y="300" width="480" height="400" rx="12" fill="url(#tab2)" filter="url(#shadow_ll02)" transform="translate(10, 10)"/>
+  <!-- 탭 2 헤더 -->
+  <rect x="280" y="310" width="480" height="44" rx="12" fill="#121E44"/>
+  <rect x="280" y="338" width="480" height="16" fill="#121E44"/>
+  <text x="308" y="337" font-size="20" fill="#6688BB" font-family="monospace">access.log</text>
+  <!-- 탭 2 내용 -->
+  <rect x="296" y="372" width="380" height="12" rx="6" fill="#4488FF" fill-opacity="0.3"/>
+  <rect x="296" y="394" width="320" height="12" rx="6" fill="#4488FF" fill-opacity="0.2"/>
+  <rect x="296" y="416" width="360" height="12" rx="6" fill="#4488FF" fill-opacity="0.2"/>
+  <rect x="296" y="438" width="300" height="12" rx="6" fill="#44FF88" fill-opacity="0.2"/>
+
+  <!-- 탭 1 (앞, 활성) -->
+  <rect x="250" y="280" width="500" height="440" rx="12" fill="url(#tabContent)" filter="url(#shadow_ll02)"/>
+  <!-- 탭 헤더 -->
+  <rect x="250" y="280" width="500" height="52" rx="12" fill="url(#activeTab)"/>
+  <rect x="250" y="312" width="500" height="20" fill="url(#activeTab)"/>
+
+  <!-- 탭 이름 영역 -->
+  <rect x="262" y="290" width="160" height="30" rx="8" fill="#FFFFFF" fill-opacity="0.2"/>
+  <text x="280" y="311" font-size="20" fill="#FFFFFF" font-family="monospace">app.log</text>
+  <!-- 닫기 버튼 -->
+  <circle cx="714" cy="306" r="10" fill="#FF6B6B" fill-opacity="0.8"/>
+  <text x="714" y="312" font-size="14" text-anchor="middle" fill="#FFFFFF">×</text>
+
+  <!-- 탭 내용 (로그 라인들) -->
+  <g font-family="monospace" font-size="18">
+    <rect x="268" y="356" width="440" height="24" rx="4" fill="#22CC22" fill-opacity="0.1"/>
+    <text x="276" y="373" fill="#44CC44">[INFO] Service started on port 3000</text>
+
+    <rect x="268" y="386" width="440" height="24" rx="4" fill="#22CC22" fill-opacity="0.05"/>
+    <text x="276" y="403" fill="#338833">[INFO] Database connected</text>
+
+    <rect x="268" y="416" width="440" height="24" rx="4" fill="#FFAA00" fill-opacity="0.1"/>
+    <text x="276" y="433" fill="#FFAA22">[WARN] Deprecated API call</text>
+
+    <rect x="268" y="446" width="440" height="24" rx="4" fill="#22CC22" fill-opacity="0.05"/>
+    <text x="276" y="463" fill="#338833">[INFO] Cache initialized</text>
+
+    <rect x="268" y="476" width="440" height="24" rx="4" fill="#FF3333" fill-opacity="0.1"/>
+    <text x="276" y="493" fill="#FF5555">[ERROR] Auth failed: user_99</text>
+
+    <rect x="268" y="506" width="440" height="24" rx="4" fill="#22CC22" fill-opacity="0.05"/>
+    <text x="276" y="523" fill="#338833">[INFO] Request 200 /api/v1/data</text>
+
+    <rect x="268" y="536" width="440" height="24" rx="4" fill="#2244AA" fill-opacity="0.1"/>
+    <text x="276" y="553" fill="#6688FF">[DEBUG] SQL: SELECT 48 rows</text>
+
+    <rect x="268" y="566" width="440" height="24" rx="4" fill="#22CC22" fill-opacity="0.05"/>
+    <text x="276" y="583" fill="#338833">[INFO] Response sent 124ms</text>
+  </g>
+
+  <!-- 검색바 -->
+  <rect x="250" y="620" width="500" height="50" rx="8" fill="#0E1840"/>
+  <text x="276" y="650" font-size="18" fill="#6688BB" font-family="monospace">🔍 Filter: ERROR WARN</text>
+
+  <!-- Layer 3: 탭 스크롤바 (우측) -->
+  <rect x="742" y="280" width="12" height="390" rx="6" fill="#1A2A50"/>
+  <rect x="742" y="320" width="12" height="120" rx="6" fill="#4A6FD4" fill-opacity="0.7"/>
+
+  <!-- 탭 뒤쪽 효과 (더 많은 탭 암시) -->
+  <rect x="780" y="640" width="96" height="36" rx="8" fill="#1A2A50" filter="url(#shadow_ll02)"/>
+  <text x="828" y="663" font-size="16" text-anchor="middle" fill="#4A6FD4" font-family="monospace">+3 tabs</text>
+</svg>

@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <clipPath id="ll3-clip">
+      <rect width="1024" height="1024" rx="180"/>
+    </clipPath>
+    <radialGradient id="ll3-bg" cx="50%" cy="50%" r="55%">
+      <stop offset="0%" stop-color="#FF7A00"/>
+      <stop offset="100%" stop-color="#C84000"/>
+    </radialGradient>
+    <radialGradient id="ll3-lens-inner" cx="35%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#FFF5E8"/>
+      <stop offset="60%" stop-color="#FFE4C0"/>
+      <stop offset="100%" stop-color="#E8C080"/>
+    </radialGradient>
+    <filter id="ll3-glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="20" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <g clip-path="url(#ll3-clip)">
+    <!-- Background: Vivid Orange -->
+    <rect width="1024" height="1024" fill="url(#ll3-bg)"/>
+    <!-- Concentric rings (texture) -->
+    <circle cx="512" cy="512" r="350" fill="none" stroke="#C84000" stroke-width="3" opacity="0.3"/>
+    <circle cx="512" cy="512" r="280" fill="none" stroke="#C84000" stroke-width="3" opacity="0.25"/>
+    <circle cx="512" cy="512" r="200" fill="none" stroke="#C84000" stroke-width="3" opacity="0.2"/>
+
+    <!-- Lens form: large geometric lens shape -->
+    <!-- Outer ring glow -->
+    <g filter="url(#ll3-glow)">
+      <circle cx="512" cy="490" r="240" fill="url(#ll3-lens-inner)"/>
+    </g>
+
+    <!-- Lens border rings (cream, geometric) -->
+    <circle cx="512" cy="490" r="240" fill="none" stroke="#FFF5E8" stroke-width="20" opacity="0.9"/>
+    <circle cx="512" cy="490" r="210" fill="none" stroke="#F0DDB0" stroke-width="8" opacity="0.7"/>
+    <circle cx="512" cy="490" r="180" fill="none" stroke="#F0DDB0" stroke-width="4" opacity="0.5"/>
+    <circle cx="512" cy="490" r="140" fill="none" stroke="#F0DDB0" stroke-width="3" opacity="0.4"/>
+    <circle cx="512" cy="490" r="90" fill="none" stroke="#F0DDB0" stroke-width="3" opacity="0.35"/>
+
+    <!-- Lens cross-hairs -->
+    <line x1="512" y1="252" x2="512" y2="728" stroke="#F0DDB0" stroke-width="4" opacity="0.3" stroke-linecap="round"/>
+    <line x1="274" y1="490" x2="750" y2="490" stroke="#F0DDB0" stroke-width="4" opacity="0.3" stroke-linecap="round"/>
+
+    <!-- Lens highlight (reflection effect) -->
+    <ellipse cx="440" cy="400" rx="80" ry="40" fill="#FFFFFF" opacity="0.25" transform="rotate(-30 440 400)"/>
+
+    <!-- Central focus point -->
+    <circle cx="512" cy="490" r="18" fill="#FF7A00" stroke="#FFFFFF" stroke-width="6"/>
+    <circle cx="512" cy="490" r="6" fill="#FFFFFF"/>
+
+    <!-- Light rays passing through lens -->
+    <g stroke="#FF7A00" stroke-width="8" stroke-linecap="round" opacity="0.4">
+      <line x1="340" y1="340" x2="440" y2="430"/>
+      <line x1="512" y1="260" x2="512" y2="380"/>
+      <line x1="684" y1="340" x2="584" y2="430"/>
+      <line x1="340" y1="640" x2="440" y2="550"/>
+      <line x1="684" y1="640" x2="584" y2="550"/>
+    </g>
+    <!-- Converged rays after lens -->
+    <g stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" opacity="0.5">
+      <line x1="512" y1="580" x2="480" y2="730"/>
+      <line x1="512" y1="580" x2="512" y2="740"/>
+      <line x1="512" y1="580" x2="544" y2="730"/>
+    </g>
+  </g>
+</svg>

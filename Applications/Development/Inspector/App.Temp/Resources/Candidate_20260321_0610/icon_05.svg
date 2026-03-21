@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg05" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#D4460A;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#F07030;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="glass05" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFF0E0;stop-opacity:0.95" />
+      <stop offset="50%" style="stop-color:#FFD0A0;stop-opacity:0.85" />
+      <stop offset="100%" style="stop-color:#FFF0E0;stop-opacity:0.9" />
+    </linearGradient>
+    <linearGradient id="sand05" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#FF8C40;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#CC5500;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg05)"/>
+  <!-- 배경 줄무늬 장식 -->
+  <line x1="200" y1="200" x2="400" y2="400" stroke="#E05010" stroke-width="3" opacity="0.3"/>
+  <line x1="624" y1="200" x2="824" y2="400" stroke="#E05010" stroke-width="3" opacity="0.3"/>
+  <line x1="200" y1="624" x2="400" y2="824" stroke="#E05010" stroke-width="3" opacity="0.3"/>
+  <line x1="624" y1="624" x2="824" y2="824" stroke="#E05010" stroke-width="3" opacity="0.3"/>
+  <!-- Layer 2: 모래시계 몸체 -->
+  <!-- 위쪽 챔버 -->
+  <path d="M320 240 L704 240 L620 500 Q540 540 512 540 Q484 540 404 500 Z" fill="url(#glass05)" stroke="#FFFFFF" stroke-width="10"/>
+  <!-- 아래쪽 챔버 -->
+  <path d="M320 784 L704 784 L620 524 Q540 484 512 484 Q484 484 404 524 Z" fill="url(#glass05)" stroke="#FFFFFF" stroke-width="10"/>
+  <!-- 위 모래 -->
+  <path d="M344 258 L680 258 L624 462 Q560 492 512 492 Q464 492 400 462 Z" fill="url(#sand05)" opacity="0.7"/>
+  <!-- 아래 모래 (쌓인 형태) -->
+  <path d="M380 766 L644 766 L608 640 Q560 610 512 610 Q464 610 416 640 Z" fill="url(#sand05)" opacity="0.8"/>
+  <!-- 모래 흐름 (중간 가는 줄기) -->
+  <line x1="512" y1="500" x2="512" y2="612" stroke="#FF8C40" stroke-width="8" stroke-linecap="round" opacity="0.9"/>
+  <!-- 테두리 프레임 상하 -->
+  <rect x="300" y="218" width="424" height="40" rx="14" fill="#8B2200" stroke="#FFFFFF" stroke-width="6"/>
+  <rect x="300" y="766" width="424" height="40" rx="14" fill="#8B2200" stroke="#FFFFFF" stroke-width="6"/>
+  <!-- Layer 3: 오른쪽 위로 향하는 화살표 (복구 방향) -->
+  <path d="M780 680 C840 580 840 400 780 300" fill="none" stroke="#FFFFFF" stroke-width="18" stroke-linecap="round" stroke-dasharray="24,14"/>
+  <!-- 화살표 헤드 (위쪽) -->
+  <polygon points="780,300 740,360 820,360" fill="#FFFFFF"/>
+  <!-- 시작점 원 -->
+  <circle cx="780" cy="680" r="18" fill="#FFFFFF" opacity="0.9"/>
+  <!-- TEMP 라벨 상단 -->
+  <text x="512" y="205" font-family="sans-serif" font-size="30" fill="#FFFFFF" text-anchor="middle" font-weight="bold" opacity="0.9">TEMP</text>
+  <!-- RESTORE 라벨 하단 -->
+  <text x="512" y="836" font-family="sans-serif" font-size="28" fill="#FFFFFF" text-anchor="middle" font-weight="bold" opacity="0.9">RESTORE</text>
+</svg>

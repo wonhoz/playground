@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg02s" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#070D22;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0C1530;stop-opacity:1" />
+    </linearGradient>
+    <radialGradient id="ripple02s" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#FFFFFF;stop-opacity:0.95" />
+      <stop offset="30%" style="stop-color:#A0E0FF;stop-opacity:0.7" />
+      <stop offset="100%" style="stop-color:#1080FF;stop-opacity:0" />
+    </radialGradient>
+    <filter id="rippleglow">
+      <feGaussianBlur stdDeviation="12" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg02s)"/>
+  <!-- 배경 물결 수면 (미세) -->
+  <ellipse cx="512" cy="512" r="380" fill="none" stroke="#0A1840" stroke-width="2" opacity="0.5"/>
+  <!-- Layer 2: 동심원 파문 (이벤트 전파) -->
+  <circle cx="512" cy="512" r="280" fill="none" stroke="#1A80FF" stroke-width="10" opacity="0.2"/>
+  <circle cx="512" cy="512" r="220" fill="none" stroke="#2A90FF" stroke-width="14" opacity="0.35"/>
+  <circle cx="512" cy="512" r="160" fill="none" stroke="#40A8FF" stroke-width="18" opacity="0.5"/>
+  <circle cx="512" cy="512" r="100" fill="none" stroke="#60C0FF" stroke-width="22" opacity="0.65" filter="url(#rippleglow)"/>
+  <circle cx="512" cy="512" r="42" fill="none" stroke="#90D8FF" stroke-width="26" opacity="0.85" filter="url(#rippleglow)"/>
+  <!-- 중심점 발원지 -->
+  <circle cx="512" cy="512" r="26" fill="#FFFFFF" filter="url(#rippleglow)"/>
+  <circle cx="512" cy="512" r="16" fill="#A0E0FF"/>
+  <!-- Layer 3: 전파 방향 점선 (4방향) -->
+  <line x1="512" y1="488" x2="512" y2="240" stroke="#60C0FF" stroke-width="5" stroke-dasharray="14,10" opacity="0.5"/>
+  <line x1="512" y1="536" x2="512" y2="784" stroke="#60C0FF" stroke-width="5" stroke-dasharray="14,10" opacity="0.5"/>
+  <line x1="488" y1="512" x2="240" y2="512" stroke="#60C0FF" stroke-width="5" stroke-dasharray="14,10" opacity="0.5"/>
+  <line x1="536" y1="512" x2="784" y2="512" stroke="#60C0FF" stroke-width="5" stroke-dasharray="14,10" opacity="0.5"/>
+  <!-- 수신 노드 아이콘들 (4방향 끝점) -->
+  <circle cx="512" cy="256" r="28" fill="#0A2A4A" stroke="#40A8FF" stroke-width="8"/>
+  <text x="512" y="264" font-family="monospace" font-size="20" fill="#40A8FF" text-anchor="middle">SVC</text>
+  <circle cx="512" cy="768" r="28" fill="#0A2A4A" stroke="#40A8FF" stroke-width="8"/>
+  <text x="512" y="776" font-family="monospace" font-size="20" fill="#40A8FF" text-anchor="middle">DB</text>
+  <circle cx="256" cy="512" r="28" fill="#0A2A4A" stroke="#40A8FF" stroke-width="8"/>
+  <text x="256" y="520" font-family="monospace" font-size="20" fill="#40A8FF" text-anchor="middle">UI</text>
+  <circle cx="768" cy="512" r="28" fill="#0A2A4A" stroke="#40A8FF" stroke-width="8"/>
+  <text x="768" y="520" font-family="monospace" font-size="20" fill="#40A8FF" text-anchor="middle">LOG</text>
+  <!-- EVENT 라벨 -->
+  <text x="512" y="460" font-family="sans-serif" font-size="22" fill="#80C8FF" text-anchor="middle" opacity="0.7">event</text>
+</svg>

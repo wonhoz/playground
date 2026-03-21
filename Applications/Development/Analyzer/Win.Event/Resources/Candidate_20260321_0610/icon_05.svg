@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bgEye" x1="0" y1="0" x2="0.3" y2="1">
+      <stop offset="0%" stop-color="#0A1628"/>
+      <stop offset="100%" stop-color="#060E1A"/>
+    </linearGradient>
+    <!-- 화면 파란 그라데이션 -->
+    <linearGradient id="screenBlue" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1A2D4A"/>
+      <stop offset="100%" stop-color="#0E1B2E"/>
+    </linearGradient>
+    <!-- 눈 흰자 -->
+    <radialGradient id="eyeWhite" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#E8F4FD"/>
+      <stop offset="100%" stop-color="#B8D8F0"/>
+    </radialGradient>
+    <!-- 홍채 -->
+    <radialGradient id="iris" cx="50%" cy="45%" r="65%">
+      <stop offset="0%" stop-color="#4FC3F7"/>
+      <stop offset="50%" stop-color="#0288D1"/>
+      <stop offset="100%" stop-color="#01579B"/>
+    </radialGradient>
+    <!-- 동공 -->
+    <radialGradient id="pupil" cx="40%" cy="38%" r="70%">
+      <stop offset="0%" stop-color="#333333"/>
+      <stop offset="100%" stop-color="#000000"/>
+    </radialGradient>
+    <filter id="eyeGlow">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="screenGlow05">
+      <feGaussianBlur stdDeviation="15" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="orangeGlow">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Layer1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bgEye)"/>
+
+  <!-- Layer2: 모니터 화면 -->
+  <rect x="220" y="520" width="584" height="320" rx="20" fill="url(#screenBlue)" stroke="#2A4A7A" stroke-width="4" filter="url(#screenGlow05)"/>
+
+  <!-- 화면 내 텍스트 로그 라인들 -->
+  <rect x="246" y="548" width="300" height="16" rx="4" fill="#2A5A8A" opacity="0.8"/>
+  <rect x="246" y="578" width="420" height="16" rx="4" fill="#FF444422" opacity="0.8"/>
+  <rect x="246" y="608" width="340" height="16" rx="4" fill="#2A5A8A" opacity="0.8"/>
+  <rect x="246" y="638" width="380" height="16" rx="4" fill="#FF888822" opacity="0.8"/>
+  <rect x="246" y="668" width="310" height="16" rx="4" fill="#2A5A8A" opacity="0.8"/>
+  <rect x="246" y="698" width="460" height="16" rx="4" fill="#FF444422" opacity="0.8"/>
+  <rect x="246" y="728" width="350" height="16" rx="4" fill="#2A5A8A" opacity="0.8"/>
+  <rect x="246" y="758" width="280" height="16" rx="4" fill="#2A5A8A" opacity="0.8"/>
+  <rect x="246" y="788" width="440" height="16" rx="4" fill="#2A5A8A" opacity="0.8"/>
+
+  <!-- 주황 경고 점 (이벤트 발생) -->
+  <circle cx="766" cy="586" r="9" fill="#FF6B35" filter="url(#orangeGlow)"/>
+  <circle cx="766" cy="646" r="9" fill="#FF6B35" filter="url(#orangeGlow)"/>
+  <circle cx="766" cy="706" r="9" fill="#FFD700" filter="url(#orangeGlow)"/>
+
+  <!-- 화면 테두리 -->
+  <rect x="220" y="840" width="584" height="28" rx="8" fill="#1A2D4A" stroke="#2A4A7A" stroke-width="3"/>
+
+  <!-- Layer3: 눈/관측자 실루엣 (위쪽) -->
+  <!-- 눈꺼풀 클립 -->
+  <clipPath id="eyeClip">
+    <ellipse cx="512" cy="370" rx="260" ry="130"/>
+  </clipPath>
+
+  <!-- 눈 흰자 -->
+  <ellipse cx="512" cy="370" rx="260" ry="130" fill="url(#eyeWhite)" filter="url(#eyeGlow)"/>
+
+  <!-- 홍채 -->
+  <circle cx="512" cy="370" r="90" fill="url(#iris)" clip-path="url(#eyeClip)"/>
+  <!-- 홍채 패턴 -->
+  <circle cx="512" cy="370" r="90" fill="none" stroke="#0277BD" stroke-width="4" opacity="0.5" clip-path="url(#eyeClip)"/>
+  <circle cx="512" cy="370" r="70" fill="none" stroke="#01579B" stroke-width="3" opacity="0.4" clip-path="url(#eyeClip)"/>
+
+  <!-- 동공 -->
+  <circle cx="512" cy="370" r="44" fill="url(#pupil)" clip-path="url(#eyeClip)"/>
+  <!-- 하이라이트 -->
+  <circle cx="530" cy="355" r="14" fill="#FFFFFF" opacity="0.7" clip-path="url(#eyeClip)"/>
+  <circle cx="538" cy="360" r="6" fill="#FFFFFF" opacity="0.4" clip-path="url(#eyeClip)"/>
+
+  <!-- 눈꺼풀 외곽선 -->
+  <path d="M 252 370 Q 380 240 512 240 Q 644 240 772 370" fill="none" stroke="#1A3A5C" stroke-width="12" stroke-linecap="round"/>
+  <path d="M 252 370 Q 380 500 512 500 Q 644 500 772 370" fill="none" stroke="#1A3A5C" stroke-width="12" stroke-linecap="round"/>
+
+  <!-- 눈썹 -->
+  <path d="M 285 280 Q 400 240 540 255" fill="none" stroke="#2A4A7A" stroke-width="14" stroke-linecap="round" opacity="0.7"/>
+
+  <!-- 시선 화살표 (눈 → 화면) -->
+  <line x1="512" y1="500" x2="512" y2="525" stroke="#4FC3F7" stroke-width="5" stroke-dasharray="6,4" opacity="0.5"/>
+</svg>

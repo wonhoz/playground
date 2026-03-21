@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <clipPath id="sc4-clip">
+      <rect width="1024" height="1024" rx="180"/>
+    </clipPath>
+    <radialGradient id="sc4-bg" cx="40%" cy="60%" r="70%">
+      <stop offset="0%" stop-color="#FFD700"/>
+      <stop offset="60%" stop-color="#FFA500"/>
+      <stop offset="100%" stop-color="#FF6600"/>
+    </radialGradient>
+    <filter id="sc4-glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="18" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <linearGradient id="sc4-wand" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2D0060"/>
+      <stop offset="100%" stop-color="#4A0080"/>
+    </linearGradient>
+  </defs>
+  <g clip-path="url(#sc4-clip)">
+    <!-- Background: Vivid Gold gradient -->
+    <rect width="1024" height="1024" fill="url(#sc4-bg)"/>
+
+    <!-- Glow burst at wand tip -->
+    <g filter="url(#sc4-glow)">
+      <circle cx="680" cy="340" r="70" fill="#FFFFFF" opacity="0.9"/>
+    </g>
+
+    <!-- Sparkle rays from tip -->
+    <g stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" opacity="0.8">
+      <line x1="680" y1="340" x2="740" y2="280"/>
+      <line x1="680" y1="340" x2="760" y2="330"/>
+      <line x1="680" y1="340" x2="740" y2="390"/>
+      <line x1="680" y1="340" x2="680" y2="270"/>
+      <line x1="680" y1="340" x2="620" y2="280"/>
+    </g>
+    <g stroke="#FFE680" stroke-width="5" stroke-linecap="round" opacity="0.6">
+      <line x1="680" y1="340" x2="800" y2="260"/>
+      <line x1="680" y1="340" x2="800" y2="380"/>
+      <line x1="680" y1="340" x2="660" y2="240"/>
+    </g>
+
+    <!-- Wand staff (diagonal, deep purple) -->
+    <rect x="270" y="530" width="480" height="48" rx="24" fill="url(#sc4-wand)" transform="rotate(-45 512 554)"/>
+    <!-- Wand handle detail -->
+    <rect x="270" y="558" width="80" height="20" rx="10" fill="#8B40CC" opacity="0.8" transform="rotate(-45 310 568)"/>
+
+    <!-- Floating skill list items -->
+    <!-- List card 1 -->
+    <g transform="translate(440, 420)">
+      <rect x="0" y="0" width="260" height="44" rx="12" fill="#2D0060" opacity="0.85"/>
+      <circle cx="22" cy="22" r="10" fill="#FFD700"/>
+      <rect x="42" y="15" width="140" height="14" rx="7" fill="#E8C0FF" opacity="0.8"/>
+    </g>
+    <!-- List card 2 -->
+    <g transform="translate(420, 476)">
+      <rect x="0" y="0" width="280" height="44" rx="12" fill="#2D0060" opacity="0.8"/>
+      <circle cx="22" cy="22" r="10" fill="#FF9040"/>
+      <rect x="42" y="15" width="160" height="14" rx="7" fill="#E8C0FF" opacity="0.7"/>
+    </g>
+    <!-- List card 3 -->
+    <g transform="translate(400, 532)">
+      <rect x="0" y="0" width="300" height="44" rx="12" fill="#2D0060" opacity="0.75"/>
+      <circle cx="22" cy="22" r="10" fill="#40E080"/>
+      <rect x="42" y="15" width="180" height="14" rx="7" fill="#E8C0FF" opacity="0.6"/>
+    </g>
+    <!-- List card 4 -->
+    <g transform="translate(380, 588)">
+      <rect x="0" y="0" width="320" height="44" rx="12" fill="#2D0060" opacity="0.65"/>
+      <circle cx="22" cy="22" r="10" fill="#40AAFF"/>
+      <rect x="42" y="15" width="200" height="14" rx="7" fill="#E8C0FF" opacity="0.5"/>
+    </g>
+
+    <!-- Star sparkles -->
+    <g fill="#FFFFFF" opacity="0.9">
+      <polygon points="300,280 308,300 328,300 312,314 318,334 300,322 282,334 288,314 272,300 292,300" transform="scale(0.5) translate(300,280)"/>
+    </g>
+    <circle cx="820" cy="680" r="15" fill="#2D0060" opacity="0.4"/>
+    <circle cx="220" cy="750" r="20" fill="#2D0060" opacity="0.3"/>
+  </g>
+</svg>

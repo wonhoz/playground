@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <clipPath id="sf-bg-clip-03">
+      <rect width="1024" height="1024" rx="180"/>
+    </clipPath>
+    <linearGradient id="sf-bg-grad-03" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00C8FF"/>
+      <stop offset="100%" stop-color="#0090CC"/>
+    </linearGradient>
+    <filter id="glow-sf-03">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- 배경 (비비드 시안) -->
+  <rect width="1024" height="1024" rx="180" fill="url(#sf-bg-grad-03)"/>
+  <g clip-path="url(#sf-bg-clip-03)">
+    <!-- 배경 밝기 -->
+    <circle cx="512" cy="512" r="420" fill="#20D8FF" opacity="0.15"/>
+    <!-- 동심원 파문 1 (가장 큰) -->
+    <circle cx="512" cy="512" r="380" fill="none" stroke="#FFFFFF" stroke-width="18" opacity="0.20"/>
+    <!-- 동심원 파문 2 -->
+    <circle cx="512" cy="512" r="300" fill="none" stroke="#FFFFFF" stroke-width="22" opacity="0.30"/>
+    <!-- 동심원 파문 3 -->
+    <circle cx="512" cy="512" r="220" fill="none" stroke="#FFFFFF" stroke-width="28" opacity="0.45"/>
+    <!-- 동심원 파문 4 -->
+    <circle cx="512" cy="512" r="140" fill="none" stroke="#FFFFFF" stroke-width="32" opacity="0.65"/>
+    <!-- 중앙 원 -->
+    <circle cx="512" cy="512" r="70" fill="#FFFFFF" filter="url(#glow-sf-03)"/>
+    <circle cx="512" cy="512" r="50" fill="#00C8FF"/>
+    <!-- 중앙 방송 아이콘 -->
+    <circle cx="512" cy="512" r="20" fill="#FFFFFF"/>
+    <!-- 방향성 파문 포인트들 -->
+    <circle cx="512" cy="132" r="18" fill="#FFFFFF" opacity="0.8" filter="url(#glow-sf-03)"/>
+    <circle cx="512" cy="892" r="18" fill="#FFFFFF" opacity="0.8" filter="url(#glow-sf-03)"/>
+    <circle cx="132" cy="512" r="18" fill="#FFFFFF" opacity="0.8" filter="url(#glow-sf-03)"/>
+    <circle cx="892" cy="512" r="18" fill="#FFFFFF" opacity="0.8" filter="url(#glow-sf-03)"/>
+    <!-- 대각선 방향 파문 포인트들 -->
+    <circle cx="243" cy="243" r="14" fill="#FFFFFF" opacity="0.6"/>
+    <circle cx="781" cy="243" r="14" fill="#FFFFFF" opacity="0.6"/>
+    <circle cx="243" cy="781" r="14" fill="#FFFFFF" opacity="0.6"/>
+    <circle cx="781" cy="781" r="14" fill="#FFFFFF" opacity="0.6"/>
+    <!-- 파문 선 강조 (위) -->
+    <path d="M 512 300 A 212 212 0 0 1 724 512" fill="none" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" opacity="0.5"/>
+    <path d="M 300 512 A 212 212 0 0 1 512 724" fill="none" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" opacity="0.4"/>
+  </g>
+</svg>

@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bgECG" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0A0A0A"/>
+      <stop offset="100%" stop-color="#111111"/>
+    </linearGradient>
+    <linearGradient id="screenGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0D1F0D"/>
+      <stop offset="100%" stop-color="#050F05"/>
+    </linearGradient>
+    <!-- ECG 파형 색상 -->
+    <linearGradient id="ecgLine" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#FF1744" stop-opacity="0.5"/>
+      <stop offset="30%" stop-color="#FF1744"/>
+      <stop offset="70%" stop-color="#FF6090"/>
+      <stop offset="100%" stop-color="#FF1744" stop-opacity="0.5"/>
+    </linearGradient>
+    <filter id="ecgGlow">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="screenGlow">
+      <feGaussianBlur stdDeviation="20" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Layer1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bgECG)"/>
+
+  <!-- 모니터 프레임 -->
+  <rect x="160" y="220" width="704" height="500" rx="28" fill="#1A1A1A" stroke="#333333" stroke-width="6"/>
+  <!-- 모니터 화면 영역 -->
+  <rect x="185" y="245" width="654" height="450" rx="16" fill="url(#screenGrad)" filter="url(#screenGlow)"/>
+
+  <!-- 화면 내 그리드 -->
+  <line x1="185" y1="370" x2="839" y2="370" stroke="#0D2B0D" stroke-width="1.5"/>
+  <line x1="185" y1="470" x2="839" y2="470" stroke="#0D2B0D" stroke-width="1.5"/>
+  <line x1="185" y1="570" x2="839" y2="570" stroke="#0D2B0D" stroke-width="1.5"/>
+  <line x1="300" y1="245" x2="300" y2="695" stroke="#0D2B0D" stroke-width="1.5"/>
+  <line x1="440" y1="245" x2="440" y2="695" stroke="#0D2B0D" stroke-width="1.5"/>
+  <line x1="580" y1="245" x2="580" y2="695" stroke="#0D2B0D" stroke-width="1.5"/>
+  <line x1="720" y1="245" x2="720" y2="695" stroke="#0D2B0D" stroke-width="1.5"/>
+
+  <!-- 기준선 -->
+  <line x1="185" y1="470" x2="839" y2="470" stroke="#1A3D1A" stroke-width="2.5"/>
+
+  <!-- Layer2: 심박 ECG 파형 -->
+  <polyline
+    points="
+      190,470
+      220,470 228,465 236,470
+      255,470
+      264,458 272,420 278,380
+      284,340 290,280 296,340
+      302,380 308,420 314,458
+      320,470
+      348,470 356,465 364,470
+      385,470
+      394,458 402,425 408,390
+      414,355 420,295 426,355
+      432,390 438,425 444,458
+      450,470
+      478,470 486,462 494,470
+      515,470
+      524,450 530,400 536,350
+      542,300 548,255 554,300
+      560,350 566,400 572,450
+      578,470
+      606,470 614,462 622,470
+      645,470
+      654,455 660,415 666,375
+      672,335 678,285 684,335
+      690,375 696,415 702,455
+      708,470
+      736,470 744,464 752,470
+      775,470
+      784,452 790,405 796,358
+      802,310 808,260 814,310
+      820,358 826,405 832,452
+      838,470
+    "
+    fill="none"
+    stroke="url(#ecgLine)"
+    stroke-width="7"
+    stroke-linejoin="round"
+    stroke-linecap="round"
+    filter="url(#ecgGlow)"
+  />
+
+  <!-- Layer3: 모니터 스탠드 -->
+  <rect x="470" y="720" width="84" height="60" rx="4" fill="#1A1A1A" stroke="#333333" stroke-width="4"/>
+  <rect x="390" y="774" width="244" height="30" rx="8" fill="#1A1A1A" stroke="#333333" stroke-width="4"/>
+
+  <!-- 상태 표시 -->
+  <text x="220" y="278" font-family="monospace" font-size="18" fill="#00CC00" opacity="0.8">SYSTEM MONITOR</text>
+  <!-- HR 수치 -->
+  <circle cx="780" cy="280" r="8" fill="#FF1744" filter="url(#ecgGlow)"/>
+  <text x="798" y="286" font-family="monospace" font-size="22" fill="#FF6090" font-weight="bold">72 BPM</text>
+
+  <!-- 경고 메시지 줄 -->
+  <text x="220" y="660" font-family="monospace" font-size="16" fill="#FF4444" opacity="0.7">⚠ Critical Event ID 4625 detected</text>
+</svg>

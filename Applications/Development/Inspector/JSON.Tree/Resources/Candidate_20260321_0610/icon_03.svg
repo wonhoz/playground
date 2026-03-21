@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg_jt03" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1A1A2E"/>
+      <stop offset="100%" stop-color="#0D0D1A"/>
+    </linearGradient>
+    <linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#333355" stop-opacity="0"/>
+      <stop offset="30%" stop-color="#333355"/>
+      <stop offset="70%" stop-color="#333355"/>
+      <stop offset="100%" stop-color="#333355" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="glow_jt03">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="plusglow">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg_jt03)"/>
+  <!-- 터미널 스캔라인 효과 -->
+  <rect x="0" y="0" width="1024" height="1024" rx="190" fill="url(#lineGrad)" fill-opacity="0.05"/>
+
+  <!-- 코드 블록 배경 -->
+  <rect x="220" y="220" width="584" height="584" rx="16" fill="#111122"/>
+  <rect x="220" y="220" width="584" height="48" rx="16" fill="#222240"/>
+  <rect x="220" y="252" width="584" height="16" fill="#222240"/>
+  <!-- 터미널 도트 -->
+  <circle cx="254" cy="244" r="10" fill="#FF5F57"/>
+  <circle cx="286" cy="244" r="10" fill="#FEBC2E"/>
+  <circle cx="318" cy="244" r="10" fill="#28C840"/>
+
+  <!-- Layer 2: diff 기호들 (메인 오브젝트) -->
+  <!-- + 라인들 (초록) -->
+  <rect x="236" y="296" width="30" height="60" rx="4" fill="#28C840" fill-opacity="0.2"/>
+  <text x="244" y="342" font-size="52" fill="#28C840" font-family="monospace" font-weight="bold" filter="url(#plusglow)">+</text>
+  <rect x="274" y="312" width="460" height="28" rx="8" fill="#28C840" fill-opacity="0.15"/>
+  <rect x="274" y="312" width="280" height="28" rx="8" fill="#28C840" fill-opacity="0.08"/>
+  <text x="288" y="334" font-size="24" fill="#28C840" fill-opacity="0.9" font-family="monospace">"name": "updated_value"</text>
+
+  <rect x="236" y="362" width="30" height="60" rx="4" fill="#28C840" fill-opacity="0.2"/>
+  <text x="244" y="408" font-size="52" fill="#28C840" font-family="monospace" font-weight="bold" filter="url(#plusglow)">+</text>
+  <rect x="274" y="378" width="460" height="28" rx="8" fill="#28C840" fill-opacity="0.15"/>
+  <text x="288" y="400" font-size="24" fill="#28C840" fill-opacity="0.9" font-family="monospace">"newKey": true</text>
+
+  <!-- - 라인들 (빨강) -->
+  <rect x="236" y="430" width="30" height="60" rx="4" fill="#FF5F57" fill-opacity="0.2"/>
+  <text x="247" y="476" font-size="52" fill="#FF5F57" font-family="monospace" font-weight="bold" filter="url(#plusglow)">-</text>
+  <rect x="274" y="446" width="460" height="28" rx="8" fill="#FF5F57" fill-opacity="0.12"/>
+  <text x="288" y="468" font-size="24" fill="#FF5F57" fill-opacity="0.9" font-family="monospace">"oldKey": false</text>
+
+  <rect x="236" y="496" width="30" height="60" rx="4" fill="#FF5F57" fill-opacity="0.2"/>
+  <text x="247" y="542" font-size="52" fill="#FF5F57" font-family="monospace" font-weight="bold" filter="url(#plusglow)">-</text>
+  <rect x="274" y="512" width="460" height="28" rx="8" fill="#FF5F57" fill-opacity="0.12"/>
+  <text x="288" y="534" font-size="24" fill="#FF5F57" fill-opacity="0.9" font-family="monospace">"name": "old_value"</text>
+
+  <!-- ~ 라인들 (노랑/변경) -->
+  <rect x="236" y="562" width="30" height="60" rx="4" fill="#FEBC2E" fill-opacity="0.2"/>
+  <text x="240" y="608" font-size="52" fill="#FEBC2E" font-family="monospace" font-weight="bold" filter="url(#plusglow)">~</text>
+  <rect x="274" y="578" width="460" height="28" rx="8" fill="#FEBC2E" fill-opacity="0.12"/>
+  <text x="288" y="600" font-size="24" fill="#FEBC2E" fill-opacity="0.9" font-family="monospace">"version": 1 → 2</text>
+
+  <rect x="236" y="628" width="30" height="60" rx="4" fill="#FEBC2E" fill-opacity="0.2"/>
+  <text x="240" y="674" font-size="52" fill="#FEBC2E" font-family="monospace" font-weight="bold" filter="url(#plusglow)">~</text>
+  <rect x="274" y="644" width="460" height="28" rx="8" fill="#FEBC2E" fill-opacity="0.12"/>
+  <text x="288" y="666" font-size="24" fill="#FEBC2E" fill-opacity="0.9" font-family="monospace">"count": 3 → 7</text>
+
+  <!-- Layer 3: 상단 라벨 + 장식 -->
+  <rect x="236" y="696" width="460" height="28" rx="8" fill="#444470" fill-opacity="0.4"/>
+  <text x="288" y="716" font-size="20" fill="#8888AA" fill-opacity="0.8" font-family="monospace">@@ -1,8 +1,9 @@ JSON diff</text>
+
+  <!-- 우상단 diff 통계 배지 -->
+  <rect x="620" y="232" width="160" height="28" rx="10" fill="#1A1A2E"/>
+  <text x="636" y="252" font-size="20" fill="#28C840" font-family="monospace">+3</text>
+  <text x="676" y="252" font-size="20" fill="#FF5F57" font-family="monospace">-2</text>
+  <text x="716" y="252" font-size="20" fill="#FEBC2E" font-family="monospace">~2</text>
+</svg>

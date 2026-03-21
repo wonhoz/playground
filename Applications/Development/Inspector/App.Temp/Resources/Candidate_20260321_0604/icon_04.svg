@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <clipPath id="bg-clip-04">
+      <rect width="1024" height="1024" rx="180"/>
+    </clipPath>
+    <linearGradient id="bg-grad-04" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E2A3A"/>
+      <stop offset="100%" stop-color="#0A1520"/>
+    </linearGradient>
+  </defs>
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="180" fill="url(#bg-grad-04)"/>
+  <g clip-path="url(#bg-clip-04)">
+    <!-- 그래프 격자 배경 -->
+    <line x1="220" y1="300" x2="220" y2="760" stroke="#2A3A4A" stroke-width="2"/>
+    <line x1="340" y1="300" x2="340" y2="760" stroke="#2A3A4A" stroke-width="2"/>
+    <line x1="460" y1="300" x2="460" y2="760" stroke="#2A3A4A" stroke-width="2"/>
+    <line x1="580" y1="300" x2="580" y2="760" stroke="#2A3A4A" stroke-width="2"/>
+    <line x1="700" y1="300" x2="700" y2="760" stroke="#2A3A4A" stroke-width="2"/>
+    <line x1="820" y1="300" x2="820" y2="760" stroke="#2A3A4A" stroke-width="2"/>
+    <line x1="200" y1="340" x2="840" y2="340" stroke="#2A3A4A" stroke-width="2"/>
+    <line x1="200" y1="440" x2="840" y2="440" stroke="#2A3A4A" stroke-width="2"/>
+    <line x1="200" y1="540" x2="840" y2="540" stroke="#2A3A4A" stroke-width="2"/>
+    <line x1="200" y1="640" x2="840" y2="640" stroke="#2A3A4A" stroke-width="2"/>
+    <line x1="200" y1="740" x2="840" y2="740" stroke="#2A3A4A" stroke-width="2"/>
+    <!-- 기준선 (X축) -->
+    <line x1="200" y1="540" x2="840" y2="540" stroke="#405060" stroke-width="3"/>
+    <!-- Y축 -->
+    <line x1="220" y1="300" x2="220" y2="760" stroke="#405060" stroke-width="3"/>
+    <!-- 추가(+) 그래프 라인 (초록) - 파일 추가 -->
+    <polyline points="220,540 310,480 400,420 490,380 580,360 670,340 760,320 820,320" fill="none" stroke="#22DD66" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- 추가 그래프 점들 -->
+    <circle cx="310" cy="480" r="12" fill="#22DD66"/>
+    <circle cx="400" cy="420" r="12" fill="#22DD66"/>
+    <circle cx="490" cy="380" r="12" fill="#22DD66"/>
+    <circle cx="580" cy="360" r="12" fill="#22DD66"/>
+    <circle cx="670" cy="340" r="12" fill="#22DD66"/>
+    <circle cx="760" cy="320" r="12" fill="#22DD66"/>
+    <!-- 삭제(-) 그래프 라인 (빨강) - 파일 삭제 -->
+    <polyline points="220,540 310,590 400,620 490,660 580,680 670,710 760,730 820,740" fill="none" stroke="#FF3333" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- 삭제 그래프 점들 -->
+    <circle cx="310" cy="590" r="12" fill="#FF3333"/>
+    <circle cx="400" cy="620" r="12" fill="#FF3333"/>
+    <circle cx="490" cy="660" r="12" fill="#FF3333"/>
+    <circle cx="580" cy="680" r="12" fill="#FF3333"/>
+    <circle cx="670" cy="710" r="12" fill="#FF3333"/>
+    <circle cx="760" cy="730" r="12" fill="#FF3333"/>
+    <!-- + 레이블 (오른쪽 상단) -->
+    <rect x="700" y="270" width="90" height="46" rx="10" fill="#22DD66" opacity="0.2"/>
+    <rect x="736" y="283" width="18" height="20" rx="3" fill="#22DD66"/>
+    <rect x="730" y="289" width="30" height="8" rx="3" fill="#22DD66"/>
+    <!-- - 레이블 (오른쪽 하단) -->
+    <rect x="700" y="750" width="90" height="46" rx="10" fill="#FF3333" opacity="0.2"/>
+    <rect x="730" y="769" width="30" height="8" rx="3" fill="#FF3333"/>
+    <!-- 왼쪽 파일 아이콘 -->
+    <rect x="238" y="410" width="16" height="20" rx="3" fill="#607080"/>
+    <path d="M 247 410 L 254 410 L 254 417 L 247 417 Z" fill="#405060"/>
+    <!-- 트래킹 마커 (주황) -->
+    <polygon points="512,290 490,330 534,330" fill="#FFB020"/>
+    <rect x="504" y="326" width="16" height="40" rx="4" fill="#FFB020"/>
+  </g>
+</svg>

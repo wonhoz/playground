@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bgRadar" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#001A00"/>
+      <stop offset="100%" stop-color="#000D00"/>
+    </radialGradient>
+    <!-- 레이더 녹색 스캔선 -->
+    <linearGradient id="scanLine" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#00FF41" stop-opacity="0"/>
+      <stop offset="60%" stop-color="#00FF41" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#00FF41" stop-opacity="0.15"/>
+    </linearGradient>
+    <filter id="radarGlow">
+      <feGaussianBlur stdDeviation="12" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="dotGlow">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <!-- 원형 클립 -->
+    <clipPath id="radarClip">
+      <circle cx="512" cy="512" r="320"/>
+    </clipPath>
+  </defs>
+
+  <!-- Layer1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bgRadar)"/>
+
+  <!-- 외곽 원형 테두리 -->
+  <circle cx="512" cy="512" r="340" fill="none" stroke="#003300" stroke-width="4"/>
+
+  <!-- Layer2: 레이더 동심원 -->
+  <circle cx="512" cy="512" r="80" fill="none" stroke="#00AA00" stroke-width="2.5" opacity="0.6"/>
+  <circle cx="512" cy="512" r="160" fill="none" stroke="#00AA00" stroke-width="2" opacity="0.5"/>
+  <circle cx="512" cy="512" r="240" fill="none" stroke="#00AA00" stroke-width="2" opacity="0.4"/>
+  <circle cx="512" cy="512" r="320" fill="none" stroke="#00AA00" stroke-width="2.5" opacity="0.6"/>
+
+  <!-- 레이더 십자선 -->
+  <line x1="192" y1="512" x2="832" y2="512" stroke="#004400" stroke-width="2" opacity="0.8"/>
+  <line x1="512" y1="192" x2="512" y2="832" stroke="#004400" stroke-width="2" opacity="0.8"/>
+  <line x1="286" y1="286" x2="738" y2="738" stroke="#003300" stroke-width="1.5" opacity="0.6"/>
+  <line x1="738" y1="286" x2="286" y2="738" stroke="#003300" stroke-width="1.5" opacity="0.6"/>
+
+  <!-- 레이더 스캔 부채꼴 (약 60도) -->
+  <path d="M 512 512 L 832 512 A 320 320 0 0 0 672 235 Z"
+        fill="#00FF41" opacity="0.06" clip-path="url(#radarClip)"/>
+  <path d="M 512 512 L 832 512 A 320 320 0 0 0 780 330 Z"
+        fill="#00FF41" opacity="0.08" clip-path="url(#radarClip)"/>
+
+  <!-- 스캔 라인 (현재 각도) -->
+  <line x1="512" y1="512" x2="832" y2="512" stroke="#00FF41" stroke-width="4" filter="url(#radarGlow)" opacity="0.9"/>
+
+  <!-- Layer3: 탐지된 이벤트 점들 -->
+  <circle cx="660" cy="430" r="14" fill="#00FF41" filter="url(#dotGlow)"/>
+  <circle cx="660" cy="430" r="7" fill="#FFFFFF"/>
+
+  <circle cx="380" cy="360" r="10" fill="#00FF41" filter="url(#dotGlow)" opacity="0.7"/>
+  <circle cx="380" cy="360" r="5" fill="#ADFF2F"/>
+
+  <circle cx="620" cy="620" r="12" fill="#FFD700" filter="url(#dotGlow)"/>
+  <circle cx="620" cy="620" r="6" fill="#FFFFFF"/>
+
+  <circle cx="440" cy="650" r="9" fill="#00FF41" filter="url(#dotGlow)" opacity="0.6"/>
+  <circle cx="440" cy="650" r="4" fill="#ADFF2F"/>
+
+  <circle cx="740" cy="560" r="18" fill="#FF4444" filter="url(#radarGlow)"/>
+  <circle cx="740" cy="560" r="9" fill="#FFAAAA"/>
+  <!-- 긴급 이벤트 링 -->
+  <circle cx="740" cy="560" r="28" fill="none" stroke="#FF4444" stroke-width="3" opacity="0.5"/>
+
+  <!-- 중앙 십자 조준점 -->
+  <circle cx="512" cy="512" r="18" fill="none" stroke="#00FF41" stroke-width="3" opacity="0.8"/>
+  <line x1="492" y1="512" x2="530" y2="512" stroke="#00FF41" stroke-width="3" opacity="0.8"/>
+  <line x1="512" y1="492" x2="512" y2="530" stroke="#00FF41" stroke-width="3" opacity="0.8"/>
+
+  <!-- 레이더 타이틀 -->
+  <text x="512" y="880" font-family="monospace" font-size="22" fill="#00AA00" text-anchor="middle" opacity="0.7">EVENT RADAR</text>
+</svg>

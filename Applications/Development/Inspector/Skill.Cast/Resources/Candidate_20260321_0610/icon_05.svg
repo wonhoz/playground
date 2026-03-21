@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg05" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF8EE"/>
+      <stop offset="100%" stop-color="#F5E8D0"/>
+    </linearGradient>
+    <linearGradient id="desk05" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#8B6340"/>
+      <stop offset="100%" stop-color="#5C3D1E"/>
+    </linearGradient>
+    <linearGradient id="doc1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#F0EEE8"/>
+    </linearGradient>
+    <linearGradient id="doc2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#F8F4FF"/>
+      <stop offset="100%" stop-color="#EAE4FF"/>
+    </linearGradient>
+    <linearGradient id="pen05" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF8C42"/>
+      <stop offset="50%" stop-color="#E06020"/>
+      <stop offset="100%" stop-color="#C04A0A"/>
+    </linearGradient>
+    <filter id="shadow05">
+      <feDropShadow dx="3" dy="5" stdDeviation="8" flood-color="#5C3D1E" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg05)"/>
+  <!-- 책상 표면 -->
+  <rect x="0" y="680" width="1024" height="344" rx="0" fill="url(#desk05)"/>
+  <rect x="0" y="680" width="1024" height="20" fill="#A07848"/>
+  <!-- 배경 위쪽 부드러운 그림자 -->
+  <ellipse cx="512" cy="680" rx="400" ry="30" fill="#5C3D1E" fill-opacity="0.2"/>
+
+  <!-- Layer 2: 메인 오브젝트 — 문서들 -->
+  <!-- 뒤쪽 문서 -->
+  <rect x="320" y="300" width="340" height="420" rx="12" fill="url(#doc2)" filter="url(#shadow05)" transform="rotate(-6, 490, 510)"/>
+  <!-- 중간 문서 -->
+  <rect x="320" y="300" width="340" height="420" rx="12" fill="url(#doc1)" filter="url(#shadow05)" transform="rotate(-2, 490, 510)"/>
+  <!-- 앞쪽 메인 문서 -->
+  <rect x="330" y="295" width="340" height="420" rx="12" fill="#FFFFFF" filter="url(#shadow05)"/>
+
+  <!-- 메인 문서 내용 (스킬 파일 텍스트) -->
+  <!-- 문서 헤더 -->
+  <rect x="348" y="318" width="200" height="16" rx="8" fill="#3A3080" fill-opacity="0.6"/>
+  <!-- 구분선 -->
+  <line x1="348" y1="348" x2="652" y2="348" stroke="#E0D8F0" stroke-width="2"/>
+
+  <!-- 코드 라인들 -->
+  <rect x="348" y="366" width="80" height="12" rx="6" fill="#E06020" fill-opacity="0.7"/>
+  <rect x="442" y="366" width="140" height="12" rx="6" fill="#3A3080" fill-opacity="0.4"/>
+
+  <rect x="362" y="392" width="60" height="10" rx="5" fill="#2E7D32" fill-opacity="0.6"/>
+  <rect x="434" y="392" width="180" height="10" rx="5" fill="#3A3080" fill-opacity="0.3"/>
+
+  <rect x="362" y="414" width="50" height="10" rx="5" fill="#2E7D32" fill-opacity="0.6"/>
+  <rect x="424" y="414" width="120" height="10" rx="5" fill="#3A3080" fill-opacity="0.3"/>
+
+  <rect x="348" y="440" width="80" height="12" rx="6" fill="#E06020" fill-opacity="0.7"/>
+  <rect x="442" y="440" width="100" height="12" rx="6" fill="#3A3080" fill-opacity="0.4"/>
+
+  <rect x="362" y="466" width="160" height="10" rx="5" fill="#3A3080" fill-opacity="0.3"/>
+  <rect x="362" y="488" width="130" height="10" rx="5" fill="#3A3080" fill-opacity="0.3"/>
+  <rect x="362" y="510" width="190" height="10" rx="5" fill="#3A3080" fill-opacity="0.3"/>
+
+  <rect x="348" y="536" width="80" height="12" rx="6" fill="#E06020" fill-opacity="0.7"/>
+  <rect x="362" y="562" width="140" height="10" rx="5" fill="#3A3080" fill-opacity="0.3"/>
+  <rect x="362" y="584" width="100" height="10" rx="5" fill="#3A3080" fill-opacity="0.3"/>
+
+  <!-- 편집 중 커서 -->
+  <rect x="348" y="610" width="3" height="24" fill="#E06020" fill-opacity="0.9"/>
+
+  <!-- Layer 3: 편집 펜 -->
+  <g transform="rotate(-35, 700, 440)">
+    <!-- 펜 몸통 -->
+    <rect x="670" y="300" width="60" height="280" rx="8" fill="url(#pen05)"/>
+    <!-- 펜 클립 -->
+    <rect x="710" y="310" width="14" height="200" rx="7" fill="#C04A0A"/>
+    <!-- 펜 끝 (촉) -->
+    <polygon points="670,580 730,580 700,640" fill="#8B4513"/>
+    <!-- 펜 끝 금속 -->
+    <rect x="670" y="560" width="60" height="24" rx="4" fill="#C0A060"/>
+    <!-- 펜 캡 top -->
+    <rect x="670" y="300" width="60" height="40" rx="8" fill="#FF9955"/>
+    <!-- 볼펜 버튼 -->
+    <circle cx="700" cy="292" r="14" fill="#FF6020"/>
+  </g>
+
+  <!-- 글씨 효과 (펜 흔적) -->
+  <path d="M 450 680 Q 520 670 590 680 Q 620 684 640 675" stroke="#FF8C42" stroke-width="5" fill="none" stroke-linecap="round" stroke-opacity="0.7"/>
+
+  <!-- 구석 장식 -->
+  <circle cx="760" cy="260" r="20" fill="#FFE566" fill-opacity="0.6"/>
+  <circle cx="800" cy="300" r="12" fill="#FF9955" fill-opacity="0.5"/>
+  <circle cx="260" cy="700" r="16" fill="#E06020" fill-opacity="0.4"/>
+</svg>

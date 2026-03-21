@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg_lv03" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2E7D32"/>
+      <stop offset="50%" stop-color="#1B5E20"/>
+      <stop offset="100%" stop-color="#0A3010"/>
+    </linearGradient>
+    <linearGradient id="calendar" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#F1F8E9"/>
+    </linearGradient>
+    <linearGradient id="calHeader" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#F44336"/>
+      <stop offset="100%" stop-color="#E53935"/>
+    </linearGradient>
+    <radialGradient id="goldCoin" cx="40%" cy="35%" r="55%">
+      <stop offset="0%" stop-color="#FFE566"/>
+      <stop offset="60%" stop-color="#FFD700"/>
+      <stop offset="100%" stop-color="#B8860B"/>
+    </radialGradient>
+    <filter id="shadow_lv03">
+      <feDropShadow dx="4" dy="8" stdDeviation="14" flood-color="#000" flood-opacity="0.4"/>
+    </filter>
+    <filter id="glow_lv03">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg_lv03)"/>
+  <!-- 배경 광택 -->
+  <ellipse cx="400" cy="350" rx="300" ry="200" fill="#4CAF50" fill-opacity="0.15"/>
+
+  <!-- Layer 2: 메인 오브젝트 — 달력 -->
+  <!-- 달력 본체 -->
+  <rect x="230" y="240" width="430" height="480" rx="20" fill="url(#calendar)" filter="url(#shadow_lv03)"/>
+  <!-- 달력 헤더 -->
+  <rect x="230" y="240" width="430" height="80" rx="20" fill="url(#calHeader)"/>
+  <rect x="230" y="290" width="430" height="30" fill="url(#calHeader)"/>
+  <!-- 달력 링 구멍 -->
+  <circle cx="340" cy="242" r="14" fill="#1B5E20"/>
+  <circle cx="410" cy="242" r="14" fill="#1B5E20"/>
+  <circle cx="480" cy="242" r="14" fill="#1B5E20"/>
+  <circle cx="550" cy="242" r="14" fill="#1B5E20"/>
+  <!-- 링 세로선 -->
+  <rect x="334" y="220" width="12" height="44" rx="6" fill="#FFD700"/>
+  <rect x="404" y="220" width="12" height="44" rx="6" fill="#FFD700"/>
+  <rect x="474" y="220" width="12" height="44" rx="6" fill="#FFD700"/>
+  <rect x="544" y="220" width="12" height="44" rx="6" fill="#FFD700"/>
+
+  <!-- 헤더 텍스트 -->
+  <text x="445" y="278" font-size="28" text-anchor="middle" fill="#FFFFFF" font-family="sans-serif" font-weight="bold">March 2026</text>
+
+  <!-- 요일 행 -->
+  <rect x="230" y="320" width="430" height="36" fill="#E8F5E9"/>
+  <text x="270" y="344" font-size="18" text-anchor="middle" fill="#388E3C" font-family="sans-serif">S</text>
+  <text x="332" y="344" font-size="18" text-anchor="middle" fill="#757575" font-family="sans-serif">M</text>
+  <text x="394" y="344" font-size="18" text-anchor="middle" fill="#757575" font-family="sans-serif">T</text>
+  <text x="445" y="344" font-size="18" text-anchor="middle" fill="#757575" font-family="sans-serif">W</text>
+  <text x="507" y="344" font-size="18" text-anchor="middle" fill="#757575" font-family="sans-serif">T</text>
+  <text x="569" y="344" font-size="18" text-anchor="middle" fill="#757575" font-family="sans-serif">F</text>
+  <text x="622" y="344" font-size="18" text-anchor="middle" fill="#F44336" font-family="sans-serif">S</text>
+
+  <!-- 날짜 격자 -->
+  <!-- Row 1 -->
+  <text x="507" y="390" font-size="22" text-anchor="middle" fill="#424242" font-family="sans-serif">1</text>
+  <text x="569" y="390" font-size="22" text-anchor="middle" fill="#424242" font-family="sans-serif">2</text>
+  <text x="622" y="390" font-size="22" text-anchor="middle" fill="#F44336" font-family="sans-serif">3</text>
+  <!-- Row 2 -->
+  <text x="270" y="430" font-size="22" text-anchor="middle" fill="#F44336" font-family="sans-serif">4</text>
+  <text x="332" y="430" font-size="22" text-anchor="middle" fill="#424242" font-family="sans-serif">5</text>
+  <text x="394" y="430" font-size="22" text-anchor="middle" fill="#424242" font-family="sans-serif">6</text>
+  <text x="445" y="430" font-size="22" text-anchor="middle" fill="#424242" font-family="sans-serif">7</text>
+  <text x="507" y="430" font-size="22" text-anchor="middle" fill="#424242" font-family="sans-serif">8</text>
+  <!-- Row 3 -->
+  <!-- 21일 강조 (오늘) -->
+  <circle cx="394" cy="480" r="22" fill="#F44336"/>
+  <text x="394" y="488" font-size="22" text-anchor="middle" fill="#FFFFFF" font-family="sans-serif" font-weight="bold">21</text>
+
+  <!-- 구분선들 -->
+  <line x1="250" y1="408" x2="640" y2="408" stroke="#E0E0E0" stroke-width="1"/>
+  <line x1="250" y1="448" x2="640" y2="448" stroke="#E0E0E0" stroke-width="1"/>
+  <line x1="250" y1="488" x2="640" y2="488" stroke="#E0E0E0" stroke-width="1"/>
+  <line x1="250" y1="528" x2="640" y2="528" stroke="#E0E0E0" stroke-width="1"/>
+  <line x1="250" y1="568" x2="640" y2="568" stroke="#E0E0E0" stroke-width="1"/>
+  <line x1="250" y1="608" x2="640" y2="608" stroke="#E0E0E0" stroke-width="1"/>
+
+  <!-- 추가 날짜들 -->
+  <text x="332" y="470" font-size="22" text-anchor="middle" fill="#424242" font-family="sans-serif">19</text>
+  <text x="270" y="470" font-size="22" text-anchor="middle" fill="#F44336" font-family="sans-serif">18</text>
+
+  <!-- Layer 3: 화폐 기호들 (우측) -->
+  <!-- $ 달러 -->
+  <circle cx="760" cy="320" r="70" fill="url(#goldCoin)" filter="url(#glow_lv03)"/>
+  <text x="760" y="340" font-size="58" text-anchor="middle" fill="#5C3D00" font-family="serif" font-weight="bold">$</text>
+
+  <!-- € 유로 -->
+  <circle cx="750" cy="510" r="58" fill="url(#goldCoin)" fill-opacity="0.9" filter="url(#glow_lv03)"/>
+  <text x="750" y="528" font-size="48" text-anchor="middle" fill="#5C3D00" font-family="serif" font-weight="bold">€</text>
+
+  <!-- ¥ 엔/위안 -->
+  <circle cx="740" cy="680" r="50" fill="url(#goldCoin)" fill-opacity="0.8" filter="url(#glow_lv03)"/>
+  <text x="740" y="697" font-size="42" text-anchor="middle" fill="#5C3D00" font-family="serif" font-weight="bold">¥</text>
+</svg>

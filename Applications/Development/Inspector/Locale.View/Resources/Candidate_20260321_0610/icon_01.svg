@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg_lv01" cx="50%" cy="50%" r="55%">
+      <stop offset="0%" stop-color="#1565C0"/>
+      <stop offset="70%" stop-color="#0D47A1"/>
+      <stop offset="100%" stop-color="#062A6E"/>
+    </radialGradient>
+    <radialGradient id="globe01" cx="40%" cy="35%" r="55%">
+      <stop offset="0%" stop-color="#42A5F5"/>
+      <stop offset="50%" stop-color="#1976D2"/>
+      <stop offset="100%" stop-color="#0D47A1"/>
+    </radialGradient>
+    <linearGradient id="land01" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4CAF50"/>
+      <stop offset="100%" stop-color="#2E7D32"/>
+    </linearGradient>
+    <filter id="glow_lv01">
+      <feGaussianBlur stdDeviation="12" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="shadow_lv01">
+      <feDropShadow dx="0" dy="10" stdDeviation="20" flood-color="#000" flood-opacity="0.5"/>
+    </filter>
+    <clipPath id="globeClip">
+      <circle cx="512" cy="480" r="240"/>
+    </clipPath>
+  </defs>
+
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg_lv01)"/>
+  <!-- 별 배경 -->
+  <circle cx="280" cy="260" r="4" fill="#FFFFFF" fill-opacity="0.6"/>
+  <circle cx="750" cy="210" r="3" fill="#FFFFFF" fill-opacity="0.5"/>
+  <circle cx="820" cy="320" r="5" fill="#FFFFFF" fill-opacity="0.4"/>
+  <circle cx="220" cy="680" r="3" fill="#FFFFFF" fill-opacity="0.5"/>
+  <circle cx="800" cy="720" r="4" fill="#FFFFFF" fill-opacity="0.4"/>
+  <circle cx="310" cy="800" r="3" fill="#FFFFFF" fill-opacity="0.3"/>
+
+  <!-- Layer 2: 메인 오브젝트 — 지구본 -->
+  <circle cx="512" cy="480" r="240" fill="url(#globe01)" filter="url(#shadow_lv01)"/>
+
+  <!-- 대륙 (지구 표면) -->
+  <g clip-path="url(#globeClip)">
+    <!-- 유럽/아프리카 -->
+    <path d="M 460 310 Q 500 300 530 320 Q 550 340 545 380 Q 540 420 520 440 Q 500 460 480 450 Q 460 440 445 420 Q 430 400 435 370 Q 440 340 460 310 Z" fill="url(#land01)"/>
+    <!-- 아시아 -->
+    <path d="M 550 280 Q 620 270 680 300 Q 720 320 730 360 Q 735 400 710 430 Q 690 460 650 470 Q 610 475 580 460 Q 555 445 545 420 Q 540 395 550 370 Q 558 340 550 280 Z" fill="url(#land01)"/>
+    <!-- 아메리카 -->
+    <path d="M 330 330 Q 360 310 390 325 Q 415 340 420 380 Q 422 420 405 450 Q 390 475 365 480 Q 340 482 325 465 Q 310 448 312 420 Q 315 390 330 330 Z" fill="url(#land01)"/>
+    <!-- 호주 -->
+    <path d="M 620 540 Q 660 530 690 550 Q 710 565 705 590 Q 698 615 675 622 Q 650 628 630 615 Q 610 600 612 575 Q 614 552 620 540 Z" fill="url(#land01)"/>
+    <!-- 남극 근처 -->
+    <path d="M 400 660 Q 450 650 510 655 Q 560 660 590 670 L 590 720 L 400 720 Z" fill="url(#land01)" fill-opacity="0.7"/>
+  </g>
+
+  <!-- 지구본 격자선 -->
+  <g clip-path="url(#globeClip)" fill="none" stroke="#90CAF9" stroke-width="2" stroke-opacity="0.4">
+    <!-- 위도선 -->
+    <ellipse cx="512" cy="360" rx="200" ry="40"/>
+    <ellipse cx="512" cy="480" rx="240" ry="48"/>
+    <ellipse cx="512" cy="600" rx="200" ry="40"/>
+    <!-- 경도선 -->
+    <path d="M 512 240 Q 560 360 560 480 Q 560 600 512 720"/>
+    <path d="M 512 240 Q 464 360 464 480 Q 464 600 512 720"/>
+    <path d="M 512 240 Q 630 380 650 480 Q 630 580 512 720"/>
+    <path d="M 512 240 Q 394 380 374 480 Q 394 580 512 720"/>
+  </g>
+
+  <!-- 지구본 하이라이트 -->
+  <ellipse cx="440" cy="380" rx="80" ry="50" fill="#FFFFFF" fill-opacity="0.12" clip-path="url(#globeClip)"/>
+
+  <!-- Layer 3: 날짜/숫자 형식 텍스트 (지구 위) -->
+  <!-- 텍스트 배경 패널 -->
+  <rect x="230" y="740" width="564" height="110" rx="18" fill="#0A1A3A" fill-opacity="0.85"/>
+  <!-- 날짜 형식 표시 -->
+  <text x="512" y="786" font-size="28" text-anchor="middle" fill="#FFD700" font-family="monospace">2026/03/21</text>
+  <text x="512" y="824" font-size="24" text-anchor="middle" fill="#90CAF9" font-family="monospace">¥1,234,567  $1,234.56</text>
+
+  <!-- 빛 반사 링 -->
+  <circle cx="512" cy="480" r="248" fill="none" stroke="#42A5F5" stroke-width="4" stroke-opacity="0.4" filter="url(#glow_lv01)"/>
+</svg>

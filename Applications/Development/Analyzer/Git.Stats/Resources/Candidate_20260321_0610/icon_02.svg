@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg02" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#E8F4FD"/>
+      <stop offset="100%" stop-color="#C8E6F8"/>
+    </linearGradient>
+    <linearGradient id="bar_blue" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3B82F6"/>
+      <stop offset="100%" stop-color="#1D4ED8"/>
+    </linearGradient>
+    <linearGradient id="bar_green" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#22C55E"/>
+      <stop offset="100%" stop-color="#15803D"/>
+    </linearGradient>
+    <linearGradient id="bar_red" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#EF4444"/>
+      <stop offset="100%" stop-color="#B91C1C"/>
+    </linearGradient>
+    <linearGradient id="bar_orange" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#F97316"/>
+      <stop offset="100%" stop-color="#C2410C"/>
+    </linearGradient>
+    <linearGradient id="bar_purple" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#A855F7"/>
+      <stop offset="100%" stop-color="#7E22CE"/>
+    </linearGradient>
+    <filter id="shadow02">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#0000001A"/>
+    </filter>
+  </defs>
+
+  <!-- Layer1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg02)"/>
+
+  <!-- 배경 카드 -->
+  <rect x="130" y="150" width="764" height="724" rx="24" fill="#FFFFFF" opacity="0.85" filter="url(#shadow02)"/>
+
+  <!-- Layer2: 차트 영역 -->
+  <!-- Y축 -->
+  <line x1="230" y1="220" x2="230" y2="720" stroke="#CBD5E1" stroke-width="3" stroke-linecap="round"/>
+  <!-- X축 -->
+  <line x1="230" y1="720" x2="840" y2="720" stroke="#CBD5E1" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- 그리드 라인 -->
+  <line x1="230" y1="620" x2="840" y2="620" stroke="#E2E8F0" stroke-width="2" stroke-dasharray="8,6"/>
+  <line x1="230" y1="520" x2="840" y2="520" stroke="#E2E8F0" stroke-width="2" stroke-dasharray="8,6"/>
+  <line x1="230" y1="420" x2="840" y2="420" stroke="#E2E8F0" stroke-width="2" stroke-dasharray="8,6"/>
+  <line x1="230" y1="320" x2="840" y2="320" stroke="#E2E8F0" stroke-width="2" stroke-dasharray="8,6"/>
+
+  <!-- Y축 라벨 -->
+  <text x="215" y="625" font-family="sans-serif" font-size="22" fill="#94A3B8" text-anchor="end">25</text>
+  <text x="215" y="525" font-family="sans-serif" font-size="22" fill="#94A3B8" text-anchor="end">50</text>
+  <text x="215" y="425" font-family="sans-serif" font-size="22" fill="#94A3B8" text-anchor="end">75</text>
+  <text x="215" y="325" font-family="sans-serif" font-size="22" fill="#94A3B8" text-anchor="end">100</text>
+
+  <!-- 막대 그래프 - 5명의 기여자 -->
+  <!-- Alice: 블루 80% -->
+  <rect x="268" y="320" width="80" height="400" rx="6" fill="url(#bar_blue)"/>
+  <text x="308" y="756" font-family="sans-serif" font-size="20" fill="#475569" text-anchor="middle">Alice</text>
+  <text x="308" y="305" font-family="sans-serif" font-size="22" fill="#1D4ED8" text-anchor="middle" font-weight="bold">83</text>
+
+  <!-- Bob: 초록 60% -->
+  <rect x="388" y="420" width="80" height="300" rx="6" fill="url(#bar_green)"/>
+  <text x="428" y="756" font-family="sans-serif" font-size="20" fill="#475569" text-anchor="middle">Bob</text>
+  <text x="428" y="405" font-family="sans-serif" font-size="22" fill="#15803D" text-anchor="middle" font-weight="bold">60</text>
+
+  <!-- Carol: 빨강 90% -->
+  <rect x="508" y="260" width="80" height="460" rx="6" fill="url(#bar_red)"/>
+  <text x="548" y="756" font-family="sans-serif" font-size="20" fill="#475569" text-anchor="middle">Carol</text>
+  <text x="548" y="245" font-family="sans-serif" font-size="22" fill="#B91C1C" text-anchor="middle" font-weight="bold">92</text>
+
+  <!-- Dave: 오렌지 45% -->
+  <rect x="628" y="495" width="80" height="225" rx="6" fill="url(#bar_orange)"/>
+  <text x="668" y="756" font-family="sans-serif" font-size="20" fill="#475569" text-anchor="middle">Dave</text>
+  <text x="668" y="480" font-family="sans-serif" font-size="22" fill="#C2410C" text-anchor="middle" font-weight="bold">45</text>
+
+  <!-- Eve: 퍼플 70% -->
+  <rect x="748" y="370" width="80" height="350" rx="6" fill="url(#bar_purple)"/>
+  <text x="788" y="756" font-family="sans-serif" font-size="20" fill="#475569" text-anchor="middle">Eve</text>
+  <text x="788" y="355" font-family="sans-serif" font-size="22" fill="#7E22CE" text-anchor="middle" font-weight="bold">70</text>
+
+  <!-- Layer3: 차트 제목 -->
+  <text x="512" y="205" font-family="sans-serif" font-size="28" font-weight="bold" fill="#1E293B" text-anchor="middle">Commits by Author</text>
+</svg>

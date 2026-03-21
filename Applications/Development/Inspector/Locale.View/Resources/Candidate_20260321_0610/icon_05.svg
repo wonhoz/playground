@@ -1,0 +1,130 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg_lv05" cx="50%" cy="50%" r="55%">
+      <stop offset="0%" stop-color="#283593"/>
+      <stop offset="60%" stop-color="#1A237E"/>
+      <stop offset="100%" stop-color="#0A0F4A"/>
+    </radialGradient>
+    <radialGradient id="compassGold" cx="40%" cy="35%" r="55%">
+      <stop offset="0%" stop-color="#FFE566"/>
+      <stop offset="60%" stop-color="#FFD700"/>
+      <stop offset="100%" stop-color="#9A7200"/>
+    </radialGradient>
+    <radialGradient id="clockFace" cx="40%" cy="35%" r="55%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="80%" stop-color="#E8F0FF"/>
+      <stop offset="100%" stop-color="#C8D8FF"/>
+    </radialGradient>
+    <linearGradient id="compassNeedle" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FF3B3B"/>
+      <stop offset="50%" stop-color="#CC1111"/>
+      <stop offset="50%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#CCCCCC"/>
+    </linearGradient>
+    <filter id="shadow_lv05">
+      <feDropShadow dx="4" dy="8" stdDeviation="16" flood-color="#000" flood-opacity="0.6"/>
+    </filter>
+    <filter id="glow_lv05">
+      <feGaussianBlur stdDeviation="12" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg_lv05)"/>
+  <!-- 별 배경 -->
+  <circle cx="240" cy="250" r="3" fill="#FFFFFF" fill-opacity="0.7"/>
+  <circle cx="760" cy="230" r="4" fill="#FFFFFF" fill-opacity="0.6"/>
+  <circle cx="820" cy="400" r="3" fill="#FFFFFF" fill-opacity="0.5"/>
+  <circle cx="200" cy="620" r="3" fill="#FFFFFF" fill-opacity="0.5"/>
+  <circle cx="830" cy="700" r="4" fill="#FFFFFF" fill-opacity="0.4"/>
+  <circle cx="380" cy="800" r="2" fill="#FFFFFF" fill-opacity="0.5"/>
+  <circle cx="650" cy="820" r="3" fill="#FFFFFF" fill-opacity="0.4"/>
+
+  <!-- 동심원 배경 (나침반 배경) -->
+  <circle cx="330" cy="450" r="200" fill="none" stroke="#3D5AFE" stroke-width="1" stroke-opacity="0.2"/>
+  <circle cx="330" cy="450" r="160" fill="none" stroke="#3D5AFE" stroke-width="1" stroke-opacity="0.2"/>
+
+  <!-- Layer 2: 나침반 (좌측) -->
+  <!-- 나침반 외부 링 -->
+  <circle cx="330" cy="450" r="190" fill="url(#compassGold)" filter="url(#shadow_lv05)"/>
+  <!-- 나침반 눈금 링 -->
+  <circle cx="330" cy="450" r="176" fill="#1A1A5E"/>
+  <!-- 나침반 내부 -->
+  <circle cx="330" cy="450" r="150" fill="#0D0D40"/>
+
+  <!-- 나침반 방위 마크 -->
+  <text x="330" y="298" font-size="32" text-anchor="middle" fill="#FFD700" font-family="sans-serif" font-weight="bold">N</text>
+  <text x="330" y="618" font-size="28" text-anchor="middle" fill="#CCCCCC" font-family="sans-serif">S</text>
+  <text x="174" y="459" font-size="28" text-anchor="middle" fill="#CCCCCC" font-family="sans-serif">W</text>
+  <text x="488" y="459" font-size="28" text-anchor="middle" fill="#CCCCCC" font-family="sans-serif">E</text>
+
+  <!-- 나침반 눈금들 -->
+  <g stroke="#9E9E9E" stroke-width="3">
+    <line x1="330" y1="302" x2="330" y2="318"/>
+    <line x1="330" y1="582" x2="330" y2="598"/>
+    <line x1="182" y1="450" x2="198" y2="450"/>
+    <line x1="462" y1="450" x2="478" y2="450"/>
+    <!-- 45도 눈금 -->
+    <line x1="437" y1="343" x2="430" y2="357"/>
+    <line x1="437" y1="557" x2="430" y2="543"/>
+    <line x1="223" y1="343" x2="230" y2="357"/>
+    <line x1="223" y1="557" x2="230" y2="543"/>
+  </g>
+
+  <!-- 나침반 바늘 (대각선) -->
+  <g transform="rotate(-35, 330, 450)">
+    <polygon points="330,310 322,450 330,470 338,450" fill="#FF3B3B"/>
+    <polygon points="330,590 322,450 330,430 338,450" fill="#FFFFFF" fill-opacity="0.9"/>
+  </g>
+  <!-- 중심점 -->
+  <circle cx="330" cy="450" r="14" fill="url(#compassGold)"/>
+  <circle cx="330" cy="450" r="7" fill="#1A1A5E"/>
+
+  <!-- Layer 2 (계속): 시계 (우측) -->
+  <!-- 시계 외부 -->
+  <circle cx="700" cy="540" r="200" fill="#1A237E" filter="url(#shadow_lv05)"/>
+  <!-- 시계 링 -->
+  <circle cx="700" cy="540" r="190" fill="none" stroke="url(#compassGold)" stroke-width="14"/>
+  <!-- 시계 면 -->
+  <circle cx="700" cy="540" r="172" fill="url(#clockFace)"/>
+
+  <!-- 시계 숫자 (12, 3, 6, 9) -->
+  <text x="700" y="388" font-size="32" text-anchor="middle" fill="#1A237E" font-family="sans-serif" font-weight="bold">12</text>
+  <text x="862" y="550" font-size="32" text-anchor="middle" fill="#1A237E" font-family="sans-serif" font-weight="bold">3</text>
+  <text x="700" y="718" font-size="32" text-anchor="middle" fill="#1A237E" font-family="sans-serif" font-weight="bold">6</text>
+  <text x="538" y="550" font-size="32" text-anchor="middle" fill="#1A237E" font-family="sans-serif" font-weight="bold">9</text>
+
+  <!-- 시계 눈금들 -->
+  <g stroke="#283593" stroke-width="4">
+    <line x1="700" y1="372" x2="700" y2="392"/>
+    <line x1="700" y1="688" x2="700" y2="708"/>
+    <line x1="532" y1="540" x2="552" y2="540"/>
+    <line x1="848" y1="540" x2="868" y2="540"/>
+  </g>
+  <g stroke="#5C6BC0" stroke-width="2">
+    <line x1="784" y1="380" x2="776" y2="394"/>
+    <line x1="700" y1="540" x2="700" y2="540"/>
+    <line x1="616" y1="380" x2="624" y2="394"/>
+    <line x1="784" y1="700" x2="776" y2="686"/>
+    <line x1="616" y1="700" x2="624" y2="686"/>
+  </g>
+
+  <!-- 시침 (10시 방향) -->
+  <line x1="700" y1="540" x2="648" y2="436" stroke="#1A237E" stroke-width="12" stroke-linecap="round"/>
+  <!-- 분침 (2시 방향) -->
+  <line x1="700" y1="540" x2="774" y2="396" stroke="#283593" stroke-width="8" stroke-linecap="round"/>
+  <!-- 초침 -->
+  <line x1="700" y1="540" x2="766" y2="656" stroke="#FF3B3B" stroke-width="4" stroke-linecap="round"/>
+  <!-- 시계 중심 -->
+  <circle cx="700" cy="540" r="14" fill="url(#compassGold)"/>
+  <circle cx="700" cy="540" r="7" fill="#283593"/>
+
+  <!-- Layer 3: 연결 요소 + Locale 텍스트 -->
+  <!-- 두 오브젝트를 연결하는 라인 -->
+  <path d="M 520 450 Q 512 490 520 540" stroke="#FFD700" stroke-width="5" fill="none" stroke-opacity="0.6" stroke-dasharray="10,8" stroke-linecap="round"/>
+
+  <!-- 하단 locale 배지 -->
+  <rect x="310" y="800" width="404" height="50" rx="25" fill="#FFD700" fill-opacity="0.9" filter="url(#glow_lv05)"/>
+  <text x="512" y="833" font-size="26" text-anchor="middle" fill="#1A237E" font-family="monospace" font-weight="bold">LOCALE VIEW</text>
+</svg>

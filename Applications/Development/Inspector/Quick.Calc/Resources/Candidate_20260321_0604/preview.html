@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"/>
+<title>Quick.Calc — Icon Candidates 20260321_0604</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: linear-gradient(135deg, #FF4040 0%, #CC1010 50%, #880808 100%);
+    font-family: 'Segoe UI', sans-serif;
+    color: #FFE0E0;
+    min-height: 100vh;
+    padding: 40px 20px;
+  }
+  h1 {
+    text-align: center;
+    font-size: 26px;
+    font-weight: 700;
+    color: #FFFFFF;
+    margin-bottom: 8px;
+    letter-spacing: 2px;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.4);
+  }
+  .subtitle {
+    text-align: center;
+    font-size: 13px;
+    color: #FFBBBB;
+    margin-bottom: 48px;
+  }
+  .grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px;
+    justify-content: center;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .card {
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 16px;
+    padding: 28px 24px 24px;
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+    backdrop-filter: blur(10px);
+  }
+  .card:hover {
+    transform: scale(1.10);
+    box-shadow: 0 8px 40px rgba(0,0,0,0.4);
+    border-color: #FFFFFF;
+    background: rgba(255,255,255,0.2);
+  }
+  .card img {
+    width: 120px;
+    height: 120px;
+    border-radius: 22px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+  }
+  .filename {
+    font-size: 12px;
+    font-weight: 600;
+    color: #FFFFFF;
+    letter-spacing: 0.5px;
+  }
+  .concept {
+    font-size: 11px;
+    color: #FFCCCC;
+    text-align: center;
+    line-height: 1.5;
+  }
+  .type-badge {
+    font-size: 10px;
+    padding: 2px 10px;
+    border-radius: 20px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+  .literal  { background: rgba(255,255,255,0.2); color: #FFFFFF; }
+  .metaphor { background: rgba(255,220,0,0.25); color: #FFE040; }
+  .hybrid   { background: rgba(128,255,200,0.2); color: #80FFD0; }
+  .swatches {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .swatch {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(255,255,255,0.3);
+  }
+</style>
+</head>
+<body>
+<h1>Quick.Calc</h1>
+<p class="subtitle">Win+K 핫키 즉시호출 · 트레이 계산기 · 포커스 유지 — Candidate 20260321_0604</p>
+<div class="grid">
+
+  <div class="card">
+    <img src="icon_01.svg" alt="icon_01"/>
+    <div class="filename">icon_01.svg</div>
+    <span class="type-badge literal">literal</span>
+    <div class="concept">계산기 본체 = 직관적</div>
+    <div class="swatches">
+      <div class="swatch" style="background:#FF6B6B"></div>
+      <div class="swatch" style="background:#FFFFFF"></div>
+      <div class="swatch" style="background:#22DD44"></div>
+      <div class="swatch" style="background:#CC2020"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="icon_02.svg" alt="icon_02"/>
+    <div class="filename">icon_02.svg</div>
+    <span class="type-badge literal">literal</span>
+    <div class="concept">팝업창이 순식간에 등장 = 즉시호출</div>
+    <div class="swatches">
+      <div class="swatch" style="background:#1A1050"></div>
+      <div class="swatch" style="background:#CCFF44"></div>
+      <div class="swatch" style="background:#88CC00"></div>
+      <div class="swatch" style="background:#55BB00"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="icon_03.svg" alt="icon_03"/>
+    <div class="filename">icon_03.svg</div>
+    <span class="type-badge metaphor">metaphor</span>
+    <div class="concept">+×÷− 기호 기하학 배열 = 연산</div>
+    <div class="swatches">
+      <div class="swatch" style="background:#0A0E28"></div>
+      <div class="swatch" style="background:#FFFFFF"></div>
+      <div class="swatch" style="background:#FFD700"></div>
+      <div class="swatch" style="background:#FF7070"></div>
+      <div class="swatch" style="background:#CC88FF"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="icon_04.svg" alt="icon_04"/>
+    <div class="filename">icon_04.svg</div>
+    <span class="type-badge metaphor">metaphor</span>
+    <div class="concept">번개 + 숫자 = 빠른 계산</div>
+    <div class="swatches">
+      <div class="swatch" style="background:#FFE040"></div>
+      <div class="swatch" style="background:#1A1000"></div>
+      <div class="swatch" style="background:#FFFFFF"></div>
+      <div class="swatch" style="background:#FFBB00"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="icon_05.svg" alt="icon_05"/>
+    <div class="filename">icon_05.svg</div>
+    <span class="type-badge hybrid">hybrid</span>
+    <div class="concept">Win 키 위에 계산기 오버레이 = Win+K</div>
+    <div class="swatches">
+      <div class="swatch" style="background:#80EED0"></div>
+      <div class="swatch" style="background:#0A1A30"></div>
+      <div class="swatch" style="background:#FF7070"></div>
+      <div class="swatch" style="background:#FFCC00"></div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

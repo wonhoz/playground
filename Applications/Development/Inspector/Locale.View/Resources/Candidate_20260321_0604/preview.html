@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>Locale.View — Icon Candidates 20260321_0604</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #1A1408;
+    font-family: 'Segoe UI', sans-serif;
+    color: #F0E8D0;
+    min-height: 100vh;
+    padding: 40px 32px;
+  }
+  header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+  header h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #FFB830;
+    letter-spacing: 0.08em;
+  }
+  header p {
+    margin-top: 8px;
+    font-size: 0.9rem;
+    color: #9A8050;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 28px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .card {
+    background: #22180A;
+    border: 1px solid #3A2A10;
+    border-radius: 16px;
+    padding: 24px 16px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .card:hover {
+    transform: scale(1.08);
+    box-shadow: 0 0 32px #FFB83044;
+  }
+  .icon-wrap {
+    width: 160px;
+    height: 160px;
+    border-radius: 28px;
+    overflow: hidden;
+    box-shadow: 0 4px 24px #00000088;
+  }
+  .icon-wrap img {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+  .card-label {
+    font-size: 0.78rem;
+    color: #C09040;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+  }
+  .card-concept {
+    font-size: 0.72rem;
+    color: #806030;
+    text-align: center;
+    line-height: 1.5;
+  }
+  .palette {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .swatch {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid #3A2A10;
+  }
+  .type-badge {
+    font-size: 0.65rem;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+  }
+  .literal { background: #1A2A4A; color: #60AAFF; }
+  .metaphor { background: #2A1A3A; color: #C080FF; }
+  .hybrid { background: #2A1A10; color: #FF9040; }
+</style>
+</head>
+<body>
+<header>
+  <h1>🌐 Locale.View</h1>
+  <p>전 세계 로케일 날짜·숫자·통화 형식 탐색 도구 | Candidate_20260321_0604</p>
+</header>
+<div class="grid">
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_01.svg" alt="icon_01"/></div>
+    <div class="card-label">icon_01.svg</div>
+    <span class="type-badge literal">literal</span>
+    <div class="card-concept">지구본 + 달력<br>= 세계 날짜 형식<br>중앙 심볼 패턴</div>
+    <div class="palette">
+      <div class="swatch" style="background:#0A3A80" title="비비드코발트"></div>
+      <div class="swatch" style="background:#FFFFFF" title="화이트지구"></div>
+      <div class="swatch" style="background:#E89020" title="골드달력"></div>
+      <div class="swatch" style="background:#FF9030" title="오렌지하이라이트"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_02.svg" alt="icon_02"/></div>
+    <div class="card-label">icon_02.svg</div>
+    <span class="type-badge literal">literal</span>
+    <div class="card-concept">다양한 통화 기호<br>$¥€₩ 흐름<br>대각선/동적 패턴</div>
+    <div class="palette">
+      <div class="swatch" style="background:#C87800" title="딥앰버"></div>
+      <div class="swatch" style="background:#7A4200" title="다크앰버"></div>
+      <div class="swatch" style="background:#FFFFFF" title="화이트기호"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_03.svg" alt="icon_03"/></div>
+    <div class="card-label">icon_03.svg</div>
+    <span class="type-badge metaphor">metaphor</span>
+    <div class="card-concept">세계 지도 격자<br>= 글로벌 기준 참조<br>기하학 추상 패턴</div>
+    <div class="palette">
+      <div class="swatch" style="background:#0A0A3C" title="딥인디고"></div>
+      <div class="swatch" style="background:#40E0A0" title="민트격자"></div>
+      <div class="swatch" style="background:#FFFFFF" title="화이트대륙"></div>
+      <div class="swatch" style="background:#FF6060" title="레드핀"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_04.svg" alt="icon_04"/></div>
+    <div class="card-label">icon_04.svg</div>
+    <span class="type-badge metaphor">metaphor</span>
+    <div class="card-concept">언어별 날짜가<br>나란히 비교<br>레이어드 패턴</div>
+    <div class="palette">
+      <div class="swatch" style="background:#FFF8EC" title="라이트크림"></div>
+      <div class="swatch" style="background:#1A3A8A" title="딥블루"></div>
+      <div class="swatch" style="background:#8A1A30" title="레드"></div>
+      <div class="swatch" style="background:#1A6A30" title="그린"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_05.svg" alt="icon_05"/></div>
+    <div class="card-label">icon_05.svg</div>
+    <span class="type-badge hybrid">hybrid</span>
+    <div class="card-concept">달력+시계가<br>지구 위에 레이어드<br>공간/장면 패턴</div>
+    <div class="palette">
+      <div class="swatch" style="background:#3A1A80" title="비비드퍼플"></div>
+      <div class="swatch" style="background:#FFFFFF" title="화이트지구"></div>
+      <div class="swatch" style="background:#EE2A50" title="레드달력"></div>
+      <div class="swatch" style="background:#00D4D4" title="틸시계"></div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

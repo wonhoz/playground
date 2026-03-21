@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <clipPath id="hp-bg-clip-03">
+      <rect width="1024" height="1024" rx="180"/>
+    </clipPath>
+    <linearGradient id="hp-bg-grad-03" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2A0A5E"/>
+      <stop offset="100%" stop-color="#180640"/>
+    </linearGradient>
+  </defs>
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="180" fill="url(#hp-bg-grad-03)"/>
+  <g clip-path="url(#hp-bg-clip-03)">
+    <!-- 배경 글로우 원 -->
+    <circle cx="512" cy="512" r="360" fill="#3A1080" opacity="0.4"/>
+    <!-- 8개 비트 원형 배열 (1바이트) -->
+    <!-- 비트 0 (위) - ON -->
+    <circle cx="512" cy="230" r="58" fill="#FFFFFF" stroke="#AA80FF" stroke-width="8"/>
+    <circle cx="512" cy="230" r="32" fill="#8040FF"/>
+    <!-- 비트 1 (오른쪽 위) - OFF -->
+    <circle cx="718" cy="306" r="58" fill="none" stroke="#FFFFFF" stroke-width="8" opacity="0.5"/>
+    <circle cx="718" cy="306" r="32" fill="#2A0A5E"/>
+    <!-- 비트 2 (오른쪽) - ON -->
+    <circle cx="794" cy="512" r="58" fill="#FFFFFF" stroke="#AA80FF" stroke-width="8"/>
+    <circle cx="794" cy="512" r="32" fill="#8040FF"/>
+    <!-- 비트 3 (오른쪽 아래) - OFF -->
+    <circle cx="718" cy="718" r="58" fill="none" stroke="#FFFFFF" stroke-width="8" opacity="0.5"/>
+    <circle cx="718" cy="718" r="32" fill="#2A0A5E"/>
+    <!-- 비트 4 (아래) - ON -->
+    <circle cx="512" cy="794" r="58" fill="#FFFFFF" stroke="#AA80FF" stroke-width="8"/>
+    <circle cx="512" cy="794" r="32" fill="#8040FF"/>
+    <!-- 비트 5 (왼쪽 아래) - ON -->
+    <circle cx="306" cy="718" r="58" fill="#FFFFFF" stroke="#AA80FF" stroke-width="8"/>
+    <circle cx="306" cy="718" r="32" fill="#8040FF"/>
+    <!-- 비트 6 (왼쪽) - OFF -->
+    <circle cx="230" cy="512" r="58" fill="none" stroke="#FFFFFF" stroke-width="8" opacity="0.5"/>
+    <circle cx="230" cy="512" r="32" fill="#2A0A5E"/>
+    <!-- 비트 7 (왼쪽 위) - ON -->
+    <circle cx="306" cy="306" r="58" fill="#FFFFFF" stroke="#AA80FF" stroke-width="8"/>
+    <circle cx="306" cy="306" r="32" fill="#8040FF"/>
+    <!-- 연결선들 -->
+    <line x1="512" y1="288" x2="660" y2="348" stroke="#FFFFFF" stroke-width="5" opacity="0.3" stroke-linecap="round"/>
+    <line x1="660" y1="348" x2="736" y2="464" stroke="#FFFFFF" stroke-width="5" opacity="0.3" stroke-linecap="round"/>
+    <line x1="736" y1="560" x2="660" y2="660" stroke="#FFFFFF" stroke-width="5" opacity="0.3" stroke-linecap="round"/>
+    <line x1="660" y1="660" x2="512" y2="736" stroke="#FFFFFF" stroke-width="5" opacity="0.3" stroke-linecap="round"/>
+    <line x1="512" y1="736" x2="364" y2="676" stroke="#FFFFFF" stroke-width="5" opacity="0.3" stroke-linecap="round"/>
+    <line x1="364" y1="676" x2="288" y2="560" stroke="#FFFFFF" stroke-width="5" opacity="0.3" stroke-linecap="round"/>
+    <line x1="288" y1="464" x2="364" y2="364" stroke="#FFFFFF" stroke-width="5" opacity="0.3" stroke-linecap="round"/>
+    <line x1="364" y1="364" x2="512" y2="288" stroke="#FFFFFF" stroke-width="5" opacity="0.3" stroke-linecap="round"/>
+    <!-- 중앙 바이트 값 표시 -->
+    <circle cx="512" cy="512" r="110" fill="#200850" stroke="#8040FF" stroke-width="6"/>
+    <!-- 중앙 "B5" 텍스트 표현 (사각형 블록) -->
+    <rect x="460" y="470" width="26" height="80" rx="6" fill="#C080FF"/>
+    <rect x="460" y="470" width="70" height="20" rx="6" fill="#C080FF"/>
+    <rect x="460" y="500" width="70" height="20" rx="6" fill="#C080FF" opacity="0.7"/>
+    <rect x="496" y="490" width="34" height="60" rx="6" fill="#C080FF"/>
+    <rect x="460" y="530" width="70" height="20" rx="6" fill="#C080FF"/>
+    <!-- 5 -->
+    <rect x="508" y="470" width="22" height="20" rx="6" fill="#FF80C0"/>
+    <rect x="508" y="470" width="56" height="20" rx="6" fill="#FF80C0"/>
+    <rect x="508" y="490" width="22" height="20" rx="6" fill="#FF80C0"/>
+    <rect x="508" y="510" width="56" height="20" rx="6" fill="#FF80C0"/>
+    <rect x="534" y="510" width="30" height="40" rx="6" fill="#FF80C0"/>
+    <rect x="508" y="530" width="56" height="20" rx="6" fill="#FF80C0"/>
+  </g>
+</svg>

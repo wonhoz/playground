@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"/>
+<title>Hex.Peek — Icon Candidates 20260321_0604</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #050F0A;
+    font-family: 'Segoe UI', monospace;
+    color: #A0FFCC;
+    min-height: 100vh;
+    padding: 40px 20px;
+  }
+  h1 {
+    text-align: center;
+    font-size: 26px;
+    font-weight: 700;
+    color: #00FF66;
+    margin-bottom: 8px;
+    letter-spacing: 2px;
+    text-shadow: 0 0 20px rgba(0,255,102,0.5);
+  }
+  .subtitle {
+    text-align: center;
+    font-size: 13px;
+    color: #408060;
+    margin-bottom: 48px;
+    font-family: monospace;
+  }
+  .grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px;
+    justify-content: center;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .card {
+    background: #0A1810;
+    border: 1px solid #1A3020;
+    border-radius: 16px;
+    padding: 28px 24px 24px;
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+  }
+  .card:hover {
+    transform: scale(1.10);
+    box-shadow: 0 8px 32px rgba(0,255,102,0.25);
+    border-color: #00FF66;
+  }
+  .card img {
+    width: 120px;
+    height: 120px;
+    border-radius: 22px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.7);
+  }
+  .filename {
+    font-size: 12px;
+    font-weight: 600;
+    color: #00FF66;
+    letter-spacing: 0.5px;
+    font-family: monospace;
+  }
+  .concept {
+    font-size: 11px;
+    color: #60A080;
+    text-align: center;
+    line-height: 1.5;
+  }
+  .type-badge {
+    font-size: 10px;
+    padding: 2px 10px;
+    border-radius: 20px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+  .literal  { background: #00330F; color: #00FF66; }
+  .metaphor { background: #1A0A40; color: #AA80FF; }
+  .hybrid   { background: #001A2A; color: #00CCFF; }
+  .swatches {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .swatch {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(255,255,255,0.12);
+  }
+</style>
+</head>
+<body>
+<h1>Hex.Peek</h1>
+<p class="subtitle">16진수 바이트 · 구조체 파싱 · 바이너리 비교 — Candidate 20260321_0604</p>
+<div class="grid">
+
+  <div class="card">
+    <img src="icon_01.svg" alt="icon_01"/>
+    <div class="filename">icon_01.svg</div>
+    <span class="type-badge literal">literal</span>
+    <div class="concept">중앙 "FF" 네온 텍스트 = 바이너리 값</div>
+    <div class="swatches">
+      <div class="swatch" style="background:#0A0A0A"></div>
+      <div class="swatch" style="background:#00FF66"></div>
+      <div class="swatch" style="background:#003A18"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="icon_02.svg" alt="icon_02"/>
+    <div class="filename">icon_02.svg</div>
+    <span class="type-badge literal">literal</span>
+    <div class="concept">헥스 그리드 테이블 = 에디터 화면</div>
+    <div class="swatches">
+      <div class="swatch" style="background:#0A1428"></div>
+      <div class="swatch" style="background:#00DD66"></div>
+      <div class="swatch" style="background:#FFEE44"></div>
+      <div class="swatch" style="background:#304870"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="icon_03.svg" alt="icon_03"/>
+    <div class="filename">icon_03.svg</div>
+    <span class="type-badge metaphor">metaphor</span>
+    <div class="concept">8개 비트 원형 배열 = 1바이트</div>
+    <div class="swatches">
+      <div class="swatch" style="background:#2A0A5E"></div>
+      <div class="swatch" style="background:#FFFFFF"></div>
+      <div class="swatch" style="background:#8040FF"></div>
+      <div class="swatch" style="background:#FF80C0"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="icon_04.svg" alt="icon_04"/>
+    <div class="filename">icon_04.svg</div>
+    <span class="type-badge metaphor">metaphor</span>
+    <div class="concept">X-ray처럼 파일 내부가 투명하게 보임</div>
+    <div class="swatches">
+      <div class="swatch" style="background:#B8E8F8"></div>
+      <div class="swatch" style="background:#0A1E40"></div>
+      <div class="swatch" style="background:#4080FF"></div>
+      <div class="swatch" style="background:#FF8040"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="icon_05.svg" alt="icon_05"/>
+    <div class="filename">icon_05.svg</div>
+    <span class="type-badge hybrid">hybrid</span>
+    <div class="concept">두 파일 나란히 비교 (Diff)</div>
+    <div class="swatches">
+      <div class="swatch" style="background:#2A3040"></div>
+      <div class="swatch" style="background:#00CCCC"></div>
+      <div class="swatch" style="background:#FFAA00"></div>
+      <div class="swatch" style="background:#FF4444"></div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

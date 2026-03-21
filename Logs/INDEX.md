@@ -4,6 +4,7 @@
 
 | 파일 | 날짜 | 태그 | 설명 |
 |------|------|------|------|
+| [20260321_123249_refactor_전체프로젝트_아이콘설정_일괄정규화.md](20260321_123249_refactor_전체프로젝트_아이콘설정_일괄정규화.md) | 2026-03-21 | refactor | 전체 프로젝트 ApplicationIcon 및 XAML Icon 속성 일괄 정규화 |
 | [20260321_111028_feature_ImgCast_이미지포맷변환툴.md](20260321_111028_feature_ImgCast_이미지포맷변환툴.md) | 2026-03-21 | feature | Img.Cast 이미지 포맷 변환 툴 신규 개발 |
 | [20260318_171911_docs_Inspector_아이콘후보_Candidate_20260318.md](20260318_171911_docs_Inspector_아이콘후보_Candidate_20260318.md) | 2026-03-18 | docs | Inspector/Analyzer 프로젝트 아이콘 후보 생성 |
 | [20260315_153735_feature_Token.Calc_Pane.Cast_구현.md](20260315_153735_feature_Token.Calc_Pane.Cast_구현.md) | 2026-03-15 | feature | Token.Calc, Pane.Cast 구현 |

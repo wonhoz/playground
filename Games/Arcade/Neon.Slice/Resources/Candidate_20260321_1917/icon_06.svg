@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <clipPath id="n6-clip">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+    <linearGradient id="n6-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0C0820"/>
+      <stop offset="100%" stop-color="#04020F"/>
+    </linearGradient>
+    <radialGradient id="n6-starglow" cx="50%" cy="42%" r="40%">
+      <stop offset="0%" stop-color="#FFD700" stop-opacity="0.50"/>
+      <stop offset="100%" stop-color="#FFD700" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <g clip-path="url(#n6-clip)">
+    <!-- Background: deep indigo -->
+    <rect width="1024" height="1024" fill="url(#n6-bg)"/>
+
+    <!-- Perspective grid (vanishing point horizon) -->
+    <g stroke="#6040FF" stroke-width="1" opacity="0.22">
+      <!-- Horizontal lines (closer = lower) -->
+      <line x1="0" y1="580" x2="1024" y2="580"/>
+      <line x1="0" y1="640" x2="1024" y2="640"/>
+      <line x1="0" y1="710" x2="1024" y2="710"/>
+      <line x1="0" y1="800" x2="1024" y2="800"/>
+      <line x1="0" y1="920" x2="1024" y2="920"/>
+      <!-- Vertical vanishing lines -->
+      <line x1="512" y1="580" x2="0" y2="1024"/>
+      <line x1="512" y1="580" x2="180" y2="1024"/>
+      <line x1="512" y1="580" x2="350" y2="1024"/>
+      <line x1="512" y1="580" x2="512" y2="1024"/>
+      <line x1="512" y1="580" x2="674" y2="1024"/>
+      <line x1="512" y1="580" x2="844" y2="1024"/>
+      <line x1="512" y1="580" x2="1024" y2="1024"/>
+    </g>
+
+    <!-- Star glow halo -->
+    <ellipse cx="512" cy="432" rx="340" ry="280" fill="url(#n6-starglow)"/>
+
+    <!-- Large STAR shape (bonus +10 item) -->
+    <polygon points="512,240 548,360 672,360 574,432 610,552 512,480 414,552 450,432 352,360 476,360"
+             fill="#1A1000" stroke="#FFD700" stroke-width="10" opacity="0.95"/>
+    <!-- Star inner fill highlight -->
+    <polygon points="512,272 540,356 628,356 558,408 584,492 512,442 440,492 466,408 396,356 484,356"
+             fill="#FFD700" opacity="0.18"/>
+
+    <!-- Neon circle (left, purple accent) -->
+    <circle cx="270" cy="540" r="52" fill="#0A0018" stroke="#BF5FFF" stroke-width="5" opacity="0.75"/>
+
+    <!-- Neon triangle (right, pink accent) -->
+    <polygon points="754,480 800,560 708,560"
+             fill="#150008" stroke="#FF2D78" stroke-width="5" opacity="0.75"/>
+
+    <!-- Stars in sky (small decorative) -->
+    <circle cx="240" cy="260" r="5" fill="#FFD700" opacity="0.80"/>
+    <line x1="240" y1="248" x2="240" y2="272" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round" opacity="0.7"/>
+    <line x1="228" y1="260" x2="252" y2="260" stroke="#FFD700" stroke-width="2.5" stroke-linecap="round" opacity="0.7"/>
+
+    <circle cx="800" cy="300" r="4" fill="#FFD700" opacity="0.70"/>
+    <line x1="800" y1="290" x2="800" y2="310" stroke="#FFD700" stroke-width="2" stroke-linecap="round" opacity="0.65"/>
+    <line x1="790" y1="300" x2="810" y2="300" stroke="#FFD700" stroke-width="2" stroke-linecap="round" opacity="0.65"/>
+
+    <circle cx="700" cy="220" r="3" fill="#BF5FFF" opacity="0.65"/>
+    <circle cx="340" cy="330" r="3" fill="#BF5FFF" opacity="0.60"/>
+    <circle cx="820" cy="440" r="3" fill="#FF2D78" opacity="0.55"/>
+    <circle cx="200" cy="420" r="4" fill="#00FFFF" opacity="0.50"/>
+  </g>
+</svg>

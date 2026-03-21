@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <clipPath id="n8-clip">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+    <linearGradient id="n8-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#120010"/>
+      <stop offset="100%" stop-color="#040008"/>
+    </linearGradient>
+  </defs>
+  <g clip-path="url(#n8-clip)">
+    <!-- Background: deep magenta-black -->
+    <rect width="1024" height="1024" fill="url(#n8-bg)"/>
+    <!-- Grid -->
+    <g stroke="#FF2D78" stroke-width="0.7" opacity="0.07">
+      <line x1="0" y1="170" x2="1024" y2="170"/>
+      <line x1="0" y1="340" x2="1024" y2="340"/>
+      <line x1="0" y1="512" x2="1024" y2="512"/>
+      <line x1="0" y1="682" x2="1024" y2="682"/>
+      <line x1="0" y1="852" x2="1024" y2="852"/>
+      <line x1="170" y1="0" x2="170" y2="1024"/>
+      <line x1="340" y1="0" x2="340" y2="1024"/>
+      <line x1="512" y1="0" x2="512" y2="1024"/>
+      <line x1="682" y1="0" x2="682" y2="1024"/>
+      <line x1="852" y1="0" x2="852" y2="1024"/>
+    </g>
+
+    <!-- Original triangle (ghost outline) -->
+    <polygon points="512,220 760,680 264,680"
+             fill="none" stroke="#FF2D78" stroke-width="5" opacity="0.25" stroke-dasharray="18 12"/>
+
+    <!-- LEFT HALF of triangle (upper-left piece) -->
+    <clipPath id="n8-tl">
+      <polygon points="512,220 264,680 512,450 760,680"/>
+    </clipPath>
+    <!-- Upper left piece -->
+    <polygon points="512,220 264,680 512,450"
+             fill="#250010" stroke="#FF2D78" stroke-width="7" opacity="0.95"/>
+    <!-- Glow edge on cut face -->
+    <line x1="512" y1="220" x2="512" y2="450" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" opacity="0.70"/>
+
+    <!-- RIGHT HALF of triangle (upper-right piece) -->
+    <polygon points="512,220 760,680 512,450"
+             fill="#180008" stroke="#FF2D78" stroke-width="7" opacity="0.95"/>
+    <!-- Highlight inner face -->
+    <line x1="512" y1="220" x2="512" y2="450" stroke="#FF80B0" stroke-width="2" stroke-linecap="round" opacity="0.55"/>
+
+    <!-- Bottom piece (falling) -->
+    <polygon points="264,680 760,680 512,450"
+             fill="#0D0005" stroke="#FF2D78" stroke-width="7" opacity="0.90"
+             transform="translate(0 60)"/>
+
+    <!-- Vertical slice line -->
+    <line x1="512" y1="200" x2="512" y2="760"
+          stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" opacity="0.80"/>
+
+    <!-- Slice cut particles -->
+    <circle cx="512" cy="320" r="8" fill="#FFFFFF" opacity="0.85"/>
+    <circle cx="512" cy="380" r="6" fill="#FF2D78" opacity="0.70"/>
+    <circle cx="512" cy="450" r="10" fill="#FFFFFF" opacity="0.90"/>
+    <line x1="480" y1="420" x2="450" y2="390" stroke="#FF2D78" stroke-width="4" stroke-linecap="round" opacity="0.60"/>
+    <line x1="544" y1="420" x2="574" y2="390" stroke="#FF2D78" stroke-width="4" stroke-linecap="round" opacity="0.60"/>
+    <line x1="480" y1="480" x2="444" y2="510" stroke="#FF2D78" stroke-width="4" stroke-linecap="round" opacity="0.50"/>
+    <line x1="544" y1="480" x2="580" y2="510" stroke="#FF2D78" stroke-width="4" stroke-linecap="round" opacity="0.50"/>
+
+    <!-- Score pop (combo) -->
+    <text x="700" y="340"
+          font-family="Arial Black, Arial, sans-serif"
+          font-weight="900"
+          font-size="72"
+          fill="#FF2D78"
+          text-anchor="middle"
+          opacity="0.90">+3</text>
+  </g>
+</svg>

@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <clipPath id="n4-clip">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+    <radialGradient id="n4-burst" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFE600" stop-opacity="0.80"/>
+      <stop offset="40%" stop-color="#FF8C00" stop-opacity="0.40"/>
+      <stop offset="100%" stop-color="#FF4500" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <g clip-path="url(#n4-clip)">
+    <!-- Background: very dark -->
+    <rect width="1024" height="1024" fill="#080600"/>
+    <!-- Radial burst background -->
+    <circle cx="512" cy="512" r="440" fill="url(#n4-burst)"/>
+
+    <!-- Burst rays (combo explosion) -->
+    <g stroke="#FFE600" stroke-linecap="round" opacity="0.70">
+      <line x1="512" y1="512" x2="512" y2="230" stroke-width="6"/>
+      <line x1="512" y1="512" x2="512" y2="794" stroke-width="6"/>
+      <line x1="512" y1="512" x2="230" y2="512" stroke-width="6"/>
+      <line x1="512" y1="512" x2="794" y2="512" stroke-width="6"/>
+      <line x1="512" y1="512" x2="712" y2="312" stroke-width="5"/>
+      <line x1="512" y1="512" x2="312" y2="712" stroke-width="5"/>
+      <line x1="512" y1="512" x2="312" y2="312" stroke-width="5"/>
+      <line x1="512" y1="512" x2="712" y2="712" stroke-width="5"/>
+    </g>
+    <!-- Secondary rays (orange) -->
+    <g stroke="#FF8C00" stroke-linecap="round" opacity="0.50">
+      <line x1="512" y1="512" x2="620" y2="252" stroke-width="4"/>
+      <line x1="512" y1="512" x2="404" y2="252" stroke-width="4"/>
+      <line x1="512" y1="512" x2="772" y2="620" stroke-width="4"/>
+      <line x1="512" y1="512" x2="772" y2="404" stroke-width="4"/>
+      <line x1="512" y1="512" x2="252" y2="620" stroke-width="4"/>
+      <line x1="512" y1="512" x2="252" y2="404" stroke-width="4"/>
+      <line x1="512" y1="512" x2="620" y2="772" stroke-width="4"/>
+      <line x1="512" y1="512" x2="404" y2="772" stroke-width="4"/>
+    </g>
+
+    <!-- Central bright core -->
+    <circle cx="512" cy="512" r="64" fill="#FFE600" opacity="0.95"/>
+    <circle cx="512" cy="512" r="44" fill="#FFFFFF" opacity="0.90"/>
+
+    <!-- COMBO text -->
+    <text x="512" y="530"
+          font-family="Arial Black, Arial, sans-serif"
+          font-weight="900"
+          font-size="56"
+          fill="#FF4500"
+          text-anchor="middle">FEVER</text>
+
+    <!-- Scattered particles at various distances -->
+    <circle cx="512" cy="248" r="14" fill="#FFE600" opacity="0.90"/>
+    <circle cx="512" cy="776" r="12" fill="#FF8C00" opacity="0.80"/>
+    <circle cx="248" cy="512" r="13" fill="#FFE600" opacity="0.85"/>
+    <circle cx="776" cy="512" r="11" fill="#FF8C00" opacity="0.80"/>
+    <circle cx="324" cy="324" r="10" fill="#FFE600" opacity="0.75"/>
+    <circle cx="700" cy="700" r="9" fill="#FF8C00" opacity="0.70"/>
+    <circle cx="700" cy="324" r="10" fill="#FFE600" opacity="0.75"/>
+    <circle cx="324" cy="700" r="9" fill="#FF8C00" opacity="0.70"/>
+
+    <!-- Outer ring -->
+    <circle cx="512" cy="512" r="300" fill="none" stroke="#FFE600" stroke-width="4" opacity="0.25" stroke-dasharray="20 16"/>
+  </g>
+</svg>

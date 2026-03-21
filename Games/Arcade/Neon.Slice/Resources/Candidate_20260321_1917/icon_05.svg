@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <clipPath id="n5-clip">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+    <linearGradient id="n5-blade" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#39FF14" stop-opacity="0.0"/>
+      <stop offset="50%" stop-color="#39FF14" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#AFFFAF" stop-opacity="1.0"/>
+    </linearGradient>
+    <linearGradient id="n5-aura" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#39FF14" stop-opacity="0.0"/>
+      <stop offset="100%" stop-color="#39FF14" stop-opacity="0.4"/>
+    </linearGradient>
+  </defs>
+  <g clip-path="url(#n5-clip)">
+    <!-- Background: deep black -->
+    <rect width="1024" height="1024" fill="#030803"/>
+    <!-- Subtle grid -->
+    <g stroke="#39FF14" stroke-width="0.6" opacity="0.05">
+      <line x1="0" y1="170" x2="1024" y2="170"/>
+      <line x1="0" y1="340" x2="1024" y2="340"/>
+      <line x1="0" y1="512" x2="1024" y2="512"/>
+      <line x1="0" y1="682" x2="1024" y2="682"/>
+      <line x1="0" y1="852" x2="1024" y2="852"/>
+      <line x1="170" y1="0" x2="170" y2="1024"/>
+      <line x1="340" y1="0" x2="340" y2="1024"/>
+      <line x1="512" y1="0" x2="512" y2="1024"/>
+      <line x1="682" y1="0" x2="682" y2="1024"/>
+      <line x1="852" y1="0" x2="852" y2="1024"/>
+    </g>
+
+    <!-- Wide aura sweep -->
+    <line x1="160" y1="840" x2="864" y2="200"
+          stroke="url(#n5-aura)" stroke-width="120" stroke-linecap="round" opacity="0.50"/>
+
+    <!-- Secondary aura -->
+    <line x1="200" y1="860" x2="880" y2="220"
+          stroke="#39FF14" stroke-width="50" stroke-linecap="round" opacity="0.20"/>
+
+    <!-- Main blade line -->
+    <line x1="200" y1="820" x2="860" y2="220"
+          stroke="url(#n5-blade)" stroke-width="8" stroke-linecap="round" opacity="1.0"/>
+
+    <!-- Fine edge line -->
+    <line x1="200" y1="820" x2="860" y2="220"
+          stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" opacity="0.70"/>
+
+    <!-- Tip glow -->
+    <circle cx="860" cy="220" r="28" fill="#39FF14" opacity="0.60"/>
+    <circle cx="860" cy="220" r="14" fill="#FFFFFF" opacity="0.90"/>
+
+    <!-- Sliced circle halves (result of cut) -->
+    <!-- Left half - cyan -->
+    <clipPath id="n5-lhalf">
+      <polygon points="0,0 512,0 512,1024 0,1024"/>
+    </clipPath>
+    <g clip-path="url(#n5-lhalf)">
+      <circle cx="420" cy="560" r="110" fill="#001A00" stroke="#39FF14" stroke-width="5" opacity="0.80"/>
+    </g>
+    <!-- Right half - falling -->
+    <clipPath id="n5-rhalf">
+      <polygon points="512,0 1024,0 1024,1024 512,1024"/>
+    </clipPath>
+    <g clip-path="url(#n5-rhalf)">
+      <circle cx="420" cy="580" r="110" fill="#001A00" stroke="#39FF14" stroke-width="5" opacity="0.60"/>
+    </g>
+
+    <!-- Particles scattered along blade -->
+    <circle cx="320" cy="700" r="7" fill="#39FF14" opacity="0.70"/>
+    <circle cx="430" cy="610" r="6" fill="#39FF14" opacity="0.60"/>
+    <circle cx="540" cy="520" r="8" fill="#39FF14" opacity="0.75"/>
+    <circle cx="650" cy="430" r="6" fill="#FFFFFF" opacity="0.55"/>
+    <circle cx="760" cy="340" r="5" fill="#39FF14" opacity="0.65"/>
+    <circle cx="280" cy="720" r="5" fill="#FFFFFF" opacity="0.45"/>
+    <circle cx="700" cy="370" r="4" fill="#FFFFFF" opacity="0.50"/>
+  </g>
+</svg>

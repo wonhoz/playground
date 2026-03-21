@@ -1,0 +1,50 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <clipPath id="clip03">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+    <linearGradient id="bg03" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1E0A3C"/>
+      <stop offset="100%" stop-color="#2D1055"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Layer 1: Background – dark purple -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg03)"/>
+
+  <g clip-path="url(#clip03)">
+    <!-- Layer 2: Broken chain links (left, orange) -->
+    <!-- Chain link 1 (left) -->
+    <rect x="148" y="460" width="130" height="100" rx="50" fill="none" stroke="#FF9800" stroke-width="28"/>
+    <!-- Chain link 2 (left, overlapping) -->
+    <rect x="240" y="480" width="130" height="100" rx="50" fill="none" stroke="#FF9800" stroke-width="28"/>
+    <!-- Broken gap / crack mark -->
+    <path d="M360,530 L390,490 L370,520 L400,480" stroke="#FF5555" stroke-width="16" fill="none" stroke-linecap="round"/>
+
+    <!-- Center: lightning bolt (connection/repair) -->
+    <path d="M440,400 L500,490 L468,490 L540,640 L480,540 L516,540 Z" fill="#FFDD00"/>
+    <!-- Glow -->
+    <path d="M440,400 L500,490 L468,490 L540,640 L480,540 L516,540 Z" fill="none" stroke="#FFDD00" stroke-width="6" opacity="0.5"/>
+
+    <!-- Connected chain links (right, mint) -->
+    <!-- Chain link 3 -->
+    <rect x="580" y="460" width="130" height="100" rx="50" fill="none" stroke="#00E5CC" stroke-width="28"/>
+    <!-- Chain link 4 (overlapping) -->
+    <rect x="672" y="440" width="130" height="100" rx="50" fill="none" stroke="#00E5CC" stroke-width="28"/>
+    <!-- Chain link 5 (overlapping) -->
+    <rect x="764" y="460" width="110" height="100" rx="50" fill="none" stroke="#00E5CC" stroke-width="28"/>
+
+    <!-- Layer 3: Arrow from broken to connected -->
+    <path d="M404,740 Q512,690 620,740" stroke="#FFDD00" stroke-width="6" fill="none" stroke-dasharray="12 8" opacity="0.6"/>
+
+    <!-- Labels -->
+    <text x="200" y="620" text-anchor="middle" font-family="Arial, sans-serif" font-size="36" fill="#FF9800" font-weight="bold">Broken</text>
+    <text x="730" y="600" text-anchor="middle" font-family="Arial, sans-serif" font-size="36" fill="#00E5CC" font-weight="bold">Fixed</text>
+
+    <!-- Sparkle particles -->
+    <circle cx="570" cy="340" r="12" fill="#00E5CC" opacity="0.7"/>
+    <circle cx="620" cy="290" r="8" fill="#FFDD00" opacity="0.6"/>
+    <circle cx="510" cy="300" r="6" fill="#00E5CC" opacity="0.5"/>
+    <circle cx="450" cy="360" r="5" fill="#FF9800" opacity="0.6"/>
+  </g>
+</svg>

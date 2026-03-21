@@ -1,0 +1,53 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <clipPath id="clip05">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+    <linearGradient id="bg05" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FF6B35"/>
+      <stop offset="100%" stop-color="#FBBF24"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Layer 1: Background – coral/orange gradient -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg05)"/>
+
+  <g clip-path="url(#clip05)">
+    <!-- Layer 2: Left column – extension boxes -->
+    <!-- .txt -->
+    <rect x="100" y="250" width="230" height="80" rx="14" fill="#FFFFFF" opacity="0.92"/>
+    <text x="122" y="305" font-family="'Courier New', Courier, monospace" font-size="44" font-weight="bold" fill="#C04A00">.txt</text>
+    <!-- .pdf -->
+    <rect x="100" y="460" width="230" height="80" rx="14" fill="#FFFFFF" opacity="0.92"/>
+    <text x="122" y="515" font-family="'Courier New', Courier, monospace" font-size="44" font-weight="bold" fill="#C04A00">.pdf</text>
+    <!-- .jpg -->
+    <rect x="100" y="670" width="230" height="80" rx="14" fill="#FFFFFF" opacity="0.92"/>
+    <text x="122" y="725" font-family="'Courier New', Courier, monospace" font-size="44" font-weight="bold" fill="#C04A00">.jpg</text>
+
+    <!-- Layer 3: Arrows (center) -->
+    <!-- Arrow 1 (txt) -->
+    <path d="M335,290 L670,290" stroke="#FFFFFF" stroke-width="12" fill="none" stroke-linecap="round"/>
+    <polygon points="670,270 710,290 670,310" fill="#FFFFFF"/>
+    <!-- Arrow 2 (pdf) -->
+    <path d="M335,500 L670,500" stroke="#FFFFFF" stroke-width="12" fill="none" stroke-linecap="round"/>
+    <polygon points="670,480 710,500 670,520" fill="#FFFFFF"/>
+    <!-- Arrow 3 (jpg) -->
+    <path d="M335,710 L670,710" stroke="#FFFFFF" stroke-width="12" fill="none" stroke-linecap="round"/>
+    <polygon points="670,690 710,710 670,730" fill="#FFFFFF"/>
+
+    <!-- Right column – app circles -->
+    <!-- App 1 (Notepad) -->
+    <circle cx="780" cy="290" r="80" fill="#FFFFFF" opacity="0.92"/>
+    <rect x="748" y="258" width="64" height="8" rx="4" fill="#C04A00"/>
+    <rect x="748" y="280" width="64" height="8" rx="4" fill="#C04A00"/>
+    <rect x="748" y="302" width="44" height="8" rx="4" fill="#C04A00"/>
+    <!-- App 2 (PDF) -->
+    <circle cx="780" cy="500" r="80" fill="#FFFFFF" opacity="0.92"/>
+    <text x="751" y="520" font-family="Arial, sans-serif" font-size="42" font-weight="bold" fill="#C04A00">PDF</text>
+    <!-- App 3 (Image viewer) -->
+    <circle cx="780" cy="710" r="80" fill="#FFFFFF" opacity="0.92"/>
+    <!-- Mountain/image icon -->
+    <polygon points="740,750 780,700 820,750" fill="#C04A00" opacity="0.7"/>
+    <circle cx="806" cy="716" r="16" fill="#FBBF24"/>
+  </g>
+</svg>

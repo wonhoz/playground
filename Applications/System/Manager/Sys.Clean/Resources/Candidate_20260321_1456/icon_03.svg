@@ -1,0 +1,49 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <clipPath id="clip03">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+    <linearGradient id="bg03" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0%" stop-color="#1E0A3C"/>
+      <stop offset="100%" stop-color="#3B0D6A"/>
+    </linearGradient>
+    <radialGradient id="starGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FCD34D" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#F59E0B" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Layer 1: Background – deep purple -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg03)"/>
+
+  <g clip-path="url(#clip03)">
+    <!-- Glow ring behind star -->
+    <circle cx="512" cy="490" r="280" fill="url(#starGlow)"/>
+
+    <!-- Layer 2: Large star (center) -->
+    <path d="M512,180 L566,360 L758,360 L606,468 L662,650 L512,542 L362,650 L418,468 L266,360 L458,360 Z" fill="#F59E0B"/>
+    <!-- Star inner highlight -->
+    <path d="M512,230 L552,356 L684,356 L578,434 L618,560 L512,484 L406,560 L446,434 L340,356 L472,356 Z" fill="#FCD34D"/>
+    <!-- Star center bright spot -->
+    <circle cx="512" cy="426" r="60" fill="#FEFCE8" opacity="0.8"/>
+
+    <!-- Layer 3: Sparkle rays -->
+    <line x1="512" y1="140" x2="512" y2="100" stroke="#FCD34D" stroke-width="10" stroke-linecap="round" opacity="0.8"/>
+    <line x1="512" y1="838" x2="512" y2="878" stroke="#FCD34D" stroke-width="10" stroke-linecap="round" opacity="0.8"/>
+    <line x1="272" y1="300" x2="240" y2="268" stroke="#FCD34D" stroke-width="10" stroke-linecap="round" opacity="0.7"/>
+    <line x1="752" y1="300" x2="784" y2="268" stroke="#FCD34D" stroke-width="10" stroke-linecap="round" opacity="0.7"/>
+    <line x1="272" y1="680" x2="240" y2="712" stroke="#FCD34D" stroke-width="8" stroke-linecap="round" opacity="0.6"/>
+    <line x1="752" y1="680" x2="784" y2="712" stroke="#FCD34D" stroke-width="8" stroke-linecap="round" opacity="0.6"/>
+
+    <!-- Small sparkle dots -->
+    <circle cx="300" cy="200" r="14" fill="#FCD34D" opacity="0.7"/>
+    <circle cx="724" cy="220" r="10" fill="#FCD34D" opacity="0.6"/>
+    <circle cx="200" cy="500" r="10" fill="#F59E0B" opacity="0.5"/>
+    <circle cx="824" cy="480" r="12" fill="#FCD34D" opacity="0.6"/>
+    <circle cx="350" cy="800" r="8" fill="#FCD34D" opacity="0.4"/>
+    <circle cx="680" cy="810" r="9" fill="#FCD34D" opacity="0.4"/>
+
+    <!-- "Clean" text -->
+    <text x="512" y="820" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="52" font-weight="bold" fill="#FCD34D" opacity="0.9">CLEAN</text>
+  </g>
+</svg>

@@ -1,0 +1,52 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <clipPath id="clip01">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+    <linearGradient id="bgOrange" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#EA580C"/>
+      <stop offset="100%" stop-color="#FBBF24"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bgOrange)"/>
+
+  <g clip-path="url(#clip01)">
+    <!-- Layer 2: Trash/junk files (left side, scattered) -->
+    <!-- File 1 -->
+    <rect x="150" y="260" width="140" height="170" rx="12" fill="#7C3AED" opacity="0.85" transform="rotate(-15 220 345)"/>
+    <rect x="155" y="265" width="100" height="12" rx="4" fill="#9D60FF" opacity="0.6" transform="rotate(-15 205 271)"/>
+    <rect x="155" y="290" width="120" height="10" rx="4" fill="#9D60FF" opacity="0.5" transform="rotate(-15 215 295)"/>
+    <!-- File 2 -->
+    <rect x="200" y="460" width="130" height="160" rx="12" fill="#5B21B6" opacity="0.8" transform="rotate(8 265 540)"/>
+    <!-- File 3 -->
+    <rect x="130" y="580" width="120" height="150" rx="12" fill="#7C3AED" opacity="0.7" transform="rotate(-20 190 655)"/>
+
+    <!-- Broom (diagonal, sweeping right) -->
+    <!-- Broom handle -->
+    <rect x="310" y="160" width="52" height="620" rx="26" fill="#FFFFFF" transform="rotate(-35 512 512)"/>
+    <!-- Broom head -->
+    <ellipse cx="640" cy="720" rx="180" ry="55" fill="#FFFFFF" transform="rotate(-35 640 720)"/>
+    <!-- Broom bristle lines -->
+    <g stroke="#FED7AA" stroke-width="8" stroke-linecap="round" opacity="0.8" transform="rotate(-35 640 720)">
+      <line x1="490" y1="720" x2="490" y2="790"/>
+      <line x1="540" y1="720" x2="540" y2="795"/>
+      <line x1="590" y1="720" x2="590" y2="792"/>
+      <line x1="640" y1="720" x2="640" y2="790"/>
+      <line x1="690" y1="720" x2="690" y2="792"/>
+      <line x1="740" y1="720" x2="740" y2="788"/>
+      <line x1="790" y1="720" x2="790" y2="780"/>
+    </g>
+
+    <!-- Layer 3: Sparkle/clean particles (right side) -->
+    <circle cx="820" cy="350" r="16" fill="#FFFFFF" opacity="0.9"/>
+    <circle cx="870" cy="440" r="10" fill="#FFFFFF" opacity="0.7"/>
+    <circle cx="800" cy="510" r="14" fill="#FFFFFF" opacity="0.8"/>
+    <circle cx="850" cy="580" r="8" fill="#FFFFFF" opacity="0.6"/>
+
+    <!-- Motion lines under broom -->
+    <path d="M460,780 Q580,760 680,790" stroke="#FFFFFF" stroke-width="10" fill="none" stroke-linecap="round" opacity="0.5"/>
+    <path d="M480,820 Q580,800 660,830" stroke="#FFFFFF" stroke-width="8" fill="none" stroke-linecap="round" opacity="0.4"/>
+  </g>
+</svg>

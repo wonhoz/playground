@@ -1,47 +1,63 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="bg3e" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#0A0018"/>
-      <stop offset="100%" stop-color="#1A0A30"/>
+    <linearGradient id="sunsetBg" x1="0" y1="0" x2="0.6" y2="1">
+      <stop offset="0%" stop-color="#FF6B35"/>
+      <stop offset="45%" stop-color="#E91E63"/>
+      <stop offset="100%" stop-color="#7B1FA2"/>
     </linearGradient>
-    <clipPath id="c3e"><rect width="1024" height="1024" rx="190"/></clipPath>
+    <clipPath id="cc4a">
+      <circle cx="512" cy="575" r="232"/>
+      <circle cx="298" cy="610" r="180"/>
+      <circle cx="726" cy="610" r="180"/>
+      <circle cx="512" cy="388" r="200"/>
+      <circle cx="370" cy="444" r="170"/>
+      <circle cx="660" cy="444" r="170"/>
+    </clipPath>
+    <clipPath id="cc4b">
+      <circle cx="512" cy="555" r="218"/>
+      <circle cx="315" cy="590" r="168"/>
+      <circle cx="709" cy="590" r="168"/>
+      <circle cx="512" cy="394" r="188"/>
+      <circle cx="382" cy="448" r="158"/>
+      <circle cx="645" cy="448" r="158"/>
+    </clipPath>
   </defs>
-  <rect width="1024" height="1024" rx="190" fill="url(#bg3e)"/>
-  <circle cx="512" cy="480" r="320" fill="#3B528B" opacity="0.1" clip-path="url(#c3e)"/>
 
-  <!-- Layer 2: 빈도수 → 크기 단어 배열 (기하학추상, Viridis 팔레트) -->
-  <!-- 동심원 구조 — 중앙부터 큰 단어, 바깥으로 갈수록 작아짐 -->
+  <!-- Layer 1: 선셋 그라데이션 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#sunsetBg)"/>
 
-  <!-- 1위: 중앙, 최대 크기 -->
-  <text x="512" y="516" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="110" font-weight="800" fill="#FDE725">cloud</text>
+  <!-- 뒤쪽 구름 레이어 (더 큰, 더 투명) -->
+  <g fill="rgba(255,255,255,0.28)" clip-path="url(#cc4a)">
+    <rect x="0" y="0" width="1024" height="1024"/>
+  </g>
+  <g fill="rgba(255,255,255,0.28)">
+    <circle cx="512" cy="575" r="232"/>
+    <circle cx="298" cy="610" r="180"/>
+    <circle cx="726" cy="610" r="180"/>
+    <circle cx="512" cy="388" r="200"/>
+    <circle cx="370" cy="444" r="170"/>
+    <circle cx="660" cy="444" r="170"/>
+  </g>
 
-  <!-- 2위 레이어 -->
-  <text x="260" y="400" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="70" font-weight="700" fill="#5DC863">word</text>
-  <text x="760" y="400" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="70" font-weight="700" fill="#5DC863">text</text>
+  <!-- 앞쪽 구름 레이어 (불투명) -->
+  <g fill="rgba(255,255,255,0.92)">
+    <circle cx="512" cy="555" r="218"/>
+    <circle cx="315" cy="590" r="168"/>
+    <circle cx="709" cy="590" r="168"/>
+    <circle cx="512" cy="394" r="188"/>
+    <circle cx="382" cy="448" r="158"/>
+    <circle cx="645" cy="448" r="158"/>
+  </g>
 
-  <!-- 3위 레이어 -->
-  <text x="310" y="600" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="52" font-weight="600" fill="#21908C">font</text>
-  <text x="712" y="600" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="52" font-weight="600" fill="#21908C">mask</text>
-  <text x="512" y="290" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="52" font-weight="600" fill="#21908C">freq</text>
-
-  <!-- 4위 레이어 -->
-  <text x="185" y="500" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="38" font-weight="500" fill="#3B528B">rank</text>
-  <text x="838" y="500" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="38" font-weight="500" fill="#3B528B">data</text>
-  <text x="240" y="678" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="36" font-weight="500" fill="#3B528B">size</text>
-  <text x="784" y="678" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="36" font-weight="500" fill="#3B528B">color</text>
-  <text x="380" y="724" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="32" font-weight="500" fill="#3B528B">art</text>
-  <text x="644" y="724" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="32" font-weight="500" fill="#3B528B">svg</text>
-
-  <!-- 5위 레이어 (바깥, 최소) -->
-  <text x="180" y="350" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="26" fill="#440154">skia</text>
-  <text x="840" y="350" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="26" fill="#440154">png</text>
-  <text x="180" y="640" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="24" fill="#440154">jpg</text>
-  <text x="840" y="640" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="24" fill="#440154">vis</text>
-  <text x="310" y="770" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="22" fill="#440154">hue</text>
-  <text x="714" y="770" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="22" fill="#440154">fit</text>
-
-  <!-- Layer 3: 동심원 가이드 (희미) -->
-  <circle cx="512" cy="490" r="80"  fill="none" stroke="#FDE725" stroke-width="2" opacity="0.15"/>
-  <circle cx="512" cy="490" r="200" fill="none" stroke="#5DC863" stroke-width="2" opacity="0.1"/>
-  <circle cx="512" cy="490" r="310" fill="none" stroke="#21908C" stroke-width="1.5" opacity="0.08"/>
+  <!-- Layer 3: 구름 안 선셋 컬러 단어들 -->
+  <g clip-path="url(#cc4b)" font-family="Arial Black, Arial" font-weight="900" text-anchor="middle">
+    <text x="512" y="492" font-size="128" fill="#E91E63">Word</text>
+    <text x="322" y="598" font-size="80" fill="#FF6B35">Hello</text>
+    <text x="702" y="593" font-size="76" fill="#7B1FA2">Cloud</text>
+    <text x="268" y="676" font-size="51" fill="#FF9800">Text</text>
+    <text x="512" y="684" font-size="51" fill="#E91E63">Data</text>
+    <text x="756" y="676" font-size="51" fill="#7B1FA2">Love</text>
+    <text x="390" y="752" font-size="39" fill="#FF6B35">Web</text>
+    <text x="612" y="752" font-size="39" fill="#FF9800">Art</text>
+  </g>
 </svg>

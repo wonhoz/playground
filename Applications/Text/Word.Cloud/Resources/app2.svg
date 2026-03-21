@@ -1,50 +1,61 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="bg1e" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#03045E"/>
-      <stop offset="100%" stop-color="#0077B6"/>
+    <linearGradient id="pinkBg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#F06292"/>
+      <stop offset="50%" stop-color="#CE93D8"/>
+      <stop offset="100%" stop-color="#7E57C2"/>
     </linearGradient>
-    <clipPath id="c1e"><rect width="1024" height="1024" rx="190"/></clipPath>
+    <clipPath id="cc7">
+      <circle cx="512" cy="565" r="222"/>
+      <circle cx="308" cy="600" r="172"/>
+      <circle cx="716" cy="600" r="172"/>
+      <circle cx="512" cy="394" r="192"/>
+      <circle cx="378" cy="448" r="162"/>
+      <circle cx="648" cy="448" r="162"/>
+    </clipPath>
   </defs>
-  <rect width="1024" height="1024" rx="190" fill="url(#bg1e)"/>
-  <circle cx="200" cy="820" r="300" fill="#0077B6" opacity="0.15" clip-path="url(#c1e)"/>
 
-  <!-- Layer 2: 구름 형태 안에 크기 다른 단어들 (중앙심볼, Ocean 팔레트) -->
-  <!-- 구름 실루엣 (여러 원의 합) -->
-  <circle cx="512" cy="500" r="240" fill="#023E8A" opacity="0.5"/>
-  <circle cx="340" cy="540" r="170" fill="#0077B6" opacity="0.45"/>
-  <circle cx="680" cy="540" r="170" fill="#0077B6" opacity="0.45"/>
-  <circle cx="440" cy="420" r="140" fill="#0096C7" opacity="0.35"/>
-  <circle cx="590" cy="420" r="140" fill="#0096C7" opacity="0.35"/>
+  <!-- Layer 1: 핑크-퍼플 그라데이션 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#pinkBg)"/>
 
-  <!-- 구름 외곽 (선) -->
-  <circle cx="512" cy="500" r="240" fill="none" stroke="#00B4D8" stroke-width="3" opacity="0.4"/>
-  <circle cx="340" cy="540" r="170" fill="none" stroke="#00B4D8" stroke-width="3" opacity="0.35"/>
-  <circle cx="680" cy="540" r="170" fill="none" stroke="#00B4D8" stroke-width="3" opacity="0.35"/>
+  <!-- Layer 2: 3겹 구름 레이어 -->
+  <!-- 뒤쪽 구름 (가장 크고 투명) -->
+  <g fill="rgba(255,255,255,0.22)">
+    <circle cx="512" cy="582" r="255"/>
+    <circle cx="285" cy="618" r="202"/>
+    <circle cx="739" cy="618" r="202"/>
+    <circle cx="512" cy="380" r="225"/>
+    <circle cx="357" cy="436" r="192"/>
+    <circle cx="672" cy="436" r="192"/>
+  </g>
+  <!-- 중간 구름 -->
+  <g fill="rgba(255,255,255,0.48)">
+    <circle cx="512" cy="572" r="238"/>
+    <circle cx="297" cy="607" r="186"/>
+    <circle cx="727" cy="607" r="186"/>
+    <circle cx="512" cy="390" r="206"/>
+    <circle cx="368" cy="444" r="176"/>
+    <circle cx="660" cy="444" r="176"/>
+  </g>
+  <!-- 앞쪽 메인 구름 -->
+  <g fill="rgba(255,255,255,0.90)">
+    <circle cx="512" cy="565" r="222"/>
+    <circle cx="308" cy="600" r="172"/>
+    <circle cx="716" cy="600" r="172"/>
+    <circle cx="512" cy="394" r="192"/>
+    <circle cx="378" cy="448" r="162"/>
+    <circle cx="648" cy="448" r="162"/>
+  </g>
 
-  <!-- 단어들 (빈도수 → 크기) -->
-  <!-- 가장 큰 단어 (1위) -->
-  <text x="512" y="525" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="88" font-weight="700" fill="#CAF0F8">cloud</text>
-
-  <!-- 2~3위 -->
-  <text x="340" y="468" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="52" font-weight="600" fill="#90E0EF">word</text>
-  <text x="700" y="472" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="52" font-weight="600" fill="#90E0EF">text</text>
-
-  <!-- 4~6위 -->
-  <text x="430" y="590" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="38" font-weight="600" fill="#00B4D8">data</text>
-  <text x="600" y="596" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="38" font-weight="600" fill="#00B4D8">font</text>
-  <text x="512" y="440" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="34" font-weight="500" fill="#48CAE4">freq</text>
-
-  <!-- 소형 단어들 -->
-  <text x="280" y="520" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="26" fill="#0096C7">art</text>
-  <text x="740" y="520" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="26" fill="#0096C7">size</text>
-  <text x="360" y="570" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="22" fill="#0077B6">rank</text>
-  <text x="670" y="574" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="22" fill="#0077B6">mask</text>
-  <text x="350" y="610" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="18" fill="#005F8A">skia</text>
-  <text x="660" y="614" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="18" fill="#005F8A">png</text>
-  <text x="512" y="620" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="18" fill="#004D70">svg</text>
-
-  <!-- Layer 3: 하단 -->
-  <rect x="300" y="750" width="424" height="52" rx="14" fill="#03045E" opacity="0.85"/>
-  <text x="512" y="782" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="26" fill="#90E0EF">Word Cloud</text>
+  <!-- Layer 3: 구름 안 퍼플-핑크 단어들 -->
+  <g clip-path="url(#cc7)" font-family="Arial Black, Arial" font-weight="900" text-anchor="middle">
+    <text x="512" y="495" font-size="130" fill="#7E57C2">Word</text>
+    <text x="322" y="603" font-size="80" fill="#E91E63">Hello</text>
+    <text x="702" cy="603" y="598" font-size="76" fill="#F06292">Cloud</text>
+    <text x="267" y="678" font-size="52" fill="#AB47BC">Text</text>
+    <text x="512" y="686" font-size="52" fill="#7E57C2">Data</text>
+    <text x="756" y="678" font-size="52" fill="#E91E63">Love</text>
+    <text x="390" y="755" font-size="39" fill="#CE93D8">Web</text>
+    <text x="610" y="755" font-size="39" fill="#AB47BC">Art</text>
+  </g>
 </svg>

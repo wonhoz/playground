@@ -1,0 +1,51 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="skyBg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#B3E5FC"/>
+      <stop offset="100%" stop-color="#29B6F6"/>
+    </linearGradient>
+    <clipPath id="cc1">
+      <circle cx="512" cy="570" r="225"/>
+      <circle cx="305" cy="605" r="175"/>
+      <circle cx="719" cy="605" r="175"/>
+      <circle cx="512" cy="392" r="195"/>
+      <circle cx="375" cy="447" r="165"/>
+      <circle cx="655" cy="447" r="165"/>
+    </clipPath>
+  </defs>
+
+  <!-- Layer 1: 하늘 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#skyBg)"/>
+
+  <!-- 장식 작은 구름들 -->
+  <g fill="rgba(255,255,255,0.3)">
+    <circle cx="155" cy="185" r="42"/>
+    <circle cx="215" cy="178" r="55"/>
+    <circle cx="275" cy="185" r="42"/>
+    <circle cx="760" cy="860" r="36"/>
+    <circle cx="822" cy="853" r="46"/>
+    <circle cx="882" cy="860" r="36"/>
+  </g>
+
+  <!-- Layer 2: 흰 구름 -->
+  <g fill="white">
+    <circle cx="512" cy="570" r="225"/>
+    <circle cx="305" cy="605" r="175"/>
+    <circle cx="719" cy="605" r="175"/>
+    <circle cx="512" cy="392" r="195"/>
+    <circle cx="375" cy="447" r="165"/>
+    <circle cx="655" cy="447" r="165"/>
+  </g>
+
+  <!-- Layer 3: 구름 안 컬러풀 단어들 -->
+  <g clip-path="url(#cc1)" font-family="Arial Black, Arial" font-weight="900" text-anchor="middle">
+    <text x="512" y="500" font-size="135" fill="#E53935">Word</text>
+    <text x="320" y="608" font-size="82" fill="#1E88E5">Hello</text>
+    <text x="706" y="603" font-size="78" fill="#43A047">Cloud</text>
+    <text x="268" y="688" font-size="53" fill="#FB8C00">Text</text>
+    <text x="512" y="695" font-size="53" fill="#8E24AA">Data</text>
+    <text x="758" y="688" font-size="53" fill="#E91E63">Love</text>
+    <text x="392" y="760" font-size="40" fill="#00ACC1">Web</text>
+    <text x="612" y="760" font-size="40" fill="#F06292">News</text>
+  </g>
+</svg>

@@ -12,19 +12,11 @@ public static class WinDwm {
     public static extern int DwmSetWindowAttribute(IntPtr hwnd, int attr, ref int value, int size);
 }
 public static class WinUx {
-    [DllImport("uxtheme.dll", EntryPoint = "#133", CharSet = CharSet.Unicode)]
-    public static extern bool AllowDarkModeForWindow(IntPtr hwnd, bool allow);
-    [DllImport("uxtheme.dll", EntryPoint = "#135", CharSet = CharSet.Unicode)]
-    public static extern int SetPreferredAppMode(int mode);
-    [DllImport("uxtheme.dll", EntryPoint = "#136")]
-    public static extern void FlushMenuThemes();
     [DllImport("uxtheme.dll", CharSet = CharSet.Unicode)]
     public static extern int SetWindowTheme(IntPtr hwnd, string pszSubAppName, string pszSubIdList);
 }
 "@ -ErrorAction SilentlyContinue
 } catch {}
-
-try { [WinUx]::SetPreferredAppMode(2) | Out-Null; [WinUx]::FlushMenuThemes() } catch {}
 
 $allApps = @(
     [pscustomobject]@{N=1;   Name="AI.Clip";               Cat="Applications/AI"}
@@ -163,7 +155,6 @@ $form.Add_Shown({
     try {
         $v = 1
         [WinDwm]::DwmSetWindowAttribute($form.Handle, 20, [ref]$v, 4) | Out-Null
-        [WinUx]::AllowDarkModeForWindow($form.Handle, $true) | Out-Null
         [WinUx]::SetWindowTheme($clb.Handle, "DarkMode_Explorer", $null) | Out-Null
     } catch {}
 })

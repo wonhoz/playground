@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg03" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0D9488"/>
+      <stop offset="100%" stop-color="#065F46"/>
+    </linearGradient>
+    <linearGradient id="path_grad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#FDE68A" stop-opacity="0.3"/>
+      <stop offset="60%" stop-color="#FDE68A"/>
+      <stop offset="100%" stop-color="#FBBF24"/>
+    </linearGradient>
+    <clipPath id="clip03">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+
+  <!-- Layer 1: 배경 - 청록 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg03)"/>
+
+  <!-- 배경 격자 (미세) -->
+  <g opacity="0.06" clip-path="url(#clip03)">
+    <line x1="0" y1="256" x2="1024" y2="256" stroke="white" stroke-width="2"/>
+    <line x1="0" y1="512" x2="1024" y2="512" stroke="white" stroke-width="2"/>
+    <line x1="0" y1="768" x2="1024" y2="768" stroke="white" stroke-width="2"/>
+    <line x1="256" y1="0" x2="256" y2="1024" stroke="white" stroke-width="2"/>
+    <line x1="512" y1="0" x2="512" y2="1024" stroke="white" stroke-width="2"/>
+    <line x1="768" y1="0" x2="768" y2="1024" stroke="white" stroke-width="2"/>
+  </g>
+
+  <!-- Layer 2: SVG 패스가 그려지는 모습 (황색 곡선 라인) -->
+  <!-- 베지어 곡선 패스 (펜이 지나간 자국) -->
+  <path d="M 160,700 C 260,400 400,280 512,320 C 624,360 720,520 840,380"
+        stroke="url(#path_grad)" stroke-width="52" fill="none" stroke-linecap="round"/>
+
+  <!-- 패스 위의 앵커 포인트들 (흰 원) -->
+  <circle cx="160" cy="700" r="22" fill="white" opacity="0.9"/>
+  <circle cx="512" cy="320" r="22" fill="white" opacity="0.9"/>
+  <!-- 아직 그려지는 중인 끝점 (강조) -->
+  <circle cx="840" cy="380" r="28" fill="white"/>
+  <circle cx="840" cy="380" r="16" fill="#FBBF24"/>
+
+  <!-- 제어선 (연한) -->
+  <line x1="160" y1="700" x2="260" y2="400" stroke="#99F6E4" stroke-width="8" stroke-dasharray="16,10" opacity="0.5"/>
+  <line x1="512" y1="320" x2="400" y2="280" stroke="#99F6E4" stroke-width="8" stroke-dasharray="16,10" opacity="0.5"/>
+  <line x1="512" y1="320" x2="624" y2="360" stroke="#99F6E4" stroke-width="8" stroke-dasharray="16,10" opacity="0.5"/>
+  <line x1="840" y1="380" x2="720" y2="520" stroke="#99F6E4" stroke-width="8" stroke-dasharray="16,10" opacity="0.5"/>
+  <!-- 제어 핸들 포인트 -->
+  <circle cx="260" cy="400" r="14" fill="none" stroke="#A7F3D0" stroke-width="6"/>
+  <circle cx="400" cy="280" r="14" fill="none" stroke="#A7F3D0" stroke-width="6"/>
+  <circle cx="624" cy="360" r="14" fill="none" stroke="#A7F3D0" stroke-width="6"/>
+  <circle cx="720" cy="520" r="14" fill="none" stroke="#A7F3D0" stroke-width="6"/>
+
+  <!-- Layer 3: 펜 도구 (오른쪽 위 방향) -->
+  <!-- 펜 몸체 -->
+  <g transform="translate(720, 200) rotate(40)">
+    <!-- 펜 배럴 -->
+    <rect x="-20" y="-140" width="40" height="130" rx="12" fill="white"/>
+    <!-- 펜 팁 -->
+    <path d="M-20,-10 L0,50 L20,-10 Z" fill="white"/>
+    <path d="M-8,-10 L0,30 L8,-10 Z" fill="#FBBF24"/>
+    <!-- 펜 상단 버튼 -->
+    <rect x="-14" y="-148" width="28" height="22" rx="6" fill="#FBBF24"/>
+    <!-- 그립 줄무늬 -->
+    <line x1="-18" y1="-100" x2="18" y2="-100" stroke="#E2E8F0" stroke-width="4" opacity="0.5"/>
+    <line x1="-18" y1="-80" x2="18" y2="-80" stroke="#E2E8F0" stroke-width="4" opacity="0.5"/>
+    <line x1="-18" y1="-60" x2="18" y2="-60" stroke="#E2E8F0" stroke-width="4" opacity="0.5"/>
+  </g>
+
+  <!-- 잉크 방울 (펜 끝에서) -->
+  <circle cx="840" cy="380" r="8" fill="#FBBF24" opacity="0.6"/>
+</svg>

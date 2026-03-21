@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg02" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FEF9EF"/>
+      <stop offset="100%" stop-color="#FEF3C7"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Layer 1: 배경 - 밝은 크림 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg02)"/>
+
+  <!-- 배경 장식 원 -->
+  <circle cx="860" cy="180" r="180" fill="#FDE68A" opacity="0.35"/>
+  <circle cx="180" cy="860" r="150" fill="#FDBA74" opacity="0.25"/>
+
+  <!-- Layer 2: 레이어 카드 스택 (아래→위) -->
+
+  <!-- 레이어 3 (가장 뒤, 가장 아래 카드) -->
+  <g transform="translate(20, 40) rotate(-8 512 512)">
+    <rect x="170" y="430" width="680" height="130" rx="18" fill="#64748B"/>
+    <rect x="170" y="430" width="680" height="130" rx="18" fill="none" stroke="#94A3B8" stroke-width="4"/>
+    <!-- 레이어 아이콘 -->
+    <rect x="200" y="460" width="48" height="48" rx="8" fill="#94A3B8"/>
+    <text x="224" y="492" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="28" fill="white">■</text>
+    <text x="280" y="496" font-family="Segoe UI,sans-serif" font-size="28" fill="#CBD5E1">Layer 3</text>
+    <!-- 가시성 아이콘 -->
+    <circle cx="790" cy="495" r="18" fill="#475569"/>
+    <ellipse cx="790" cy="495" rx="12" ry="8" fill="none" stroke="#94A3B8" stroke-width="4"/>
+    <circle cx="790" cy="495" r="4" fill="#94A3B8"/>
+  </g>
+
+  <!-- 레이어 2 (중간 카드) -->
+  <g transform="translate(10, 16) rotate(-3 512 512)">
+    <rect x="170" y="370" width="680" height="130" rx="18" fill="#334155"/>
+    <rect x="170" y="370" width="680" height="130" rx="18" fill="none" stroke="#64748B" stroke-width="4"/>
+    <rect x="200" y="400" width="48" height="48" rx="8" fill="#6366F1"/>
+    <text x="224" y="432" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="28" fill="white">○</text>
+    <text x="280" y="436" font-family="Segoe UI,sans-serif" font-size="28" fill="#94A3B8">Layer 2</text>
+    <circle cx="790" cy="435" r="18" fill="#3B4A63"/>
+    <ellipse cx="790" cy="435" rx="12" ry="8" fill="none" stroke="#64748B" stroke-width="4"/>
+    <circle cx="790" cy="435" r="4" fill="#64748B"/>
+  </g>
+
+  <!-- 레이어 1 (맨 앞, 선택됨 - 주황 강조) -->
+  <rect x="170" y="290" width="680" height="145" rx="18" fill="#1E293B"/>
+  <rect x="170" y="290" width="680" height="145" rx="18" fill="none" stroke="#F59E0B" stroke-width="5"/>
+  <!-- 선택 강조 왼쪽 바 -->
+  <rect x="170" y="290" width="8" height="145" rx="4" fill="#F59E0B"/>
+  <rect x="200" y="323" width="48" height="48" rx="8" fill="#F59E0B"/>
+  <text x="224" y="356" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="28" fill="white">◆</text>
+  <text x="280" y="371" font-family="Segoe UI,sans-serif" font-size="30" fill="white" font-weight="bold">Layer 1</text>
+  <text x="280" y="403" font-family="Segoe UI,sans-serif" font-size="22" fill="#94A3B8">3 elements</text>
+  <!-- 눈 아이콘 (활성) -->
+  <circle cx="790" cy="362" r="20" fill="#F59E0B" opacity="0.2"/>
+  <ellipse cx="790" cy="362" rx="14" ry="9" fill="none" stroke="#F59E0B" stroke-width="5"/>
+  <circle cx="790" cy="362" r="5" fill="#F59E0B"/>
+
+  <!-- Layer 3: 상단 툴바 힌트 -->
+  <!-- 레이어 추가 버튼 -->
+  <rect x="170" y="220" width="680" height="56" rx="14" fill="#0F172A" opacity="0.8"/>
+  <text x="294" y="258" font-family="Segoe UI,sans-serif" font-size="26" fill="#64748B">Layers</text>
+  <rect x="760" y="228" width="68" height="40" rx="10" fill="#F59E0B" opacity="0.9"/>
+  <text x="794" y="254" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="28" fill="white" font-weight="bold">+</text>
+
+  <!-- 하단 미니 캔버스 미리보기 -->
+  <rect x="170" y="570" width="680" height="200" rx="18" fill="#0F172A" opacity="0.85"/>
+  <rect x="170" y="570" width="680" height="200" rx="18" fill="none" stroke="#1E293B" stroke-width="3"/>
+  <text x="220" y="606" font-family="Segoe UI,sans-serif" font-size="22" fill="#475569">Canvas Preview</text>
+  <!-- 미니 도형들 -->
+  <rect x="240" y="618" width="120" height="80" rx="6" fill="#6366F1" opacity="0.7"/>
+  <ellipse cx="480" cy="658" rx="80" ry="50" fill="#F59E0B" opacity="0.7"/>
+  <line x1="580" y1="618" x2="720" y2="698" stroke="#F472B6" stroke-width="20" stroke-linecap="round" opacity="0.7"/>
+</svg>

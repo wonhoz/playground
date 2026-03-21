@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg01" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0F172A"/>
+      <stop offset="100%" stop-color="#1E3A5F"/>
+    </linearGradient>
+    <clipPath id="clip01">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+
+  <!-- Layer 1: 배경 - 진한 남색 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg01)"/>
+
+  <!-- 그리드 패턴 (캔버스 느낌) -->
+  <g opacity="0.07" clip-path="url(#clip01)">
+    <line x1="200" y1="160" x2="200" y2="864" stroke="white" stroke-width="1"/>
+    <line x1="320" y1="160" x2="320" y2="864" stroke="white" stroke-width="1"/>
+    <line x1="440" y1="160" x2="440" y2="864" stroke="white" stroke-width="1"/>
+    <line x1="560" y1="160" x2="560" y2="864" stroke="white" stroke-width="1"/>
+    <line x1="680" y1="160" x2="680" y2="864" stroke="white" stroke-width="1"/>
+    <line x1="800" y1="160" x2="800" y2="864" stroke="white" stroke-width="1"/>
+    <line x1="160" y1="200" x2="864" y2="200" stroke="white" stroke-width="1"/>
+    <line x1="160" y1="320" x2="864" y2="320" stroke="white" stroke-width="1"/>
+    <line x1="160" y1="440" x2="864" y2="440" stroke="white" stroke-width="1"/>
+    <line x1="160" y1="560" x2="864" y2="560" stroke="white" stroke-width="1"/>
+    <line x1="160" y1="680" x2="864" y2="680" stroke="white" stroke-width="1"/>
+    <line x1="160" y1="800" x2="864" y2="800" stroke="white" stroke-width="1"/>
+  </g>
+
+  <!-- Layer 2: 캔버스 위 도형들 -->
+  <!-- 사각형 (흰색) -->
+  <rect x="210" y="260" width="300" height="220" rx="12" fill="white" opacity="0.95"/>
+
+  <!-- 타원 (반투명 겹침) -->
+  <ellipse cx="610" cy="560" rx="190" ry="140" fill="#60A5FA" opacity="0.85"/>
+
+  <!-- 선 -->
+  <line x1="250" y1="620" x2="560" y2="740" stroke="#F472B6" stroke-width="44" stroke-linecap="round"/>
+
+  <!-- 텍스트 요소 -->
+  <rect x="500" y="240" width="260" height="72" rx="10" fill="#34D399" opacity="0.85"/>
+  <text x="630" y="292" text-anchor="middle" font-family="Consolas,monospace" font-size="36" fill="#064E3B" font-weight="bold">SVG</text>
+
+  <!-- Layer 3: 선택 핸들 (파랑 점선 + 핸들 포인트) -->
+  <!-- 선택된 사각형 선택 영역 -->
+  <rect x="200" y="250" width="320" height="240" rx="4" fill="none"
+        stroke="#3B82F6" stroke-width="5" stroke-dasharray="14,7"/>
+  <!-- 코너 핸들 -->
+  <rect x="190" y="240" width="20" height="20" rx="4" fill="white" stroke="#3B82F6" stroke-width="3"/>
+  <rect x="350" y="240" width="20" height="20" rx="4" fill="white" stroke="#3B82F6" stroke-width="3"/>
+  <rect x="510" y="240" width="20" height="20" rx="4" fill="white" stroke="#3B82F6" stroke-width="3"/>
+  <rect x="190" y="370" width="20" height="20" rx="4" fill="white" stroke="#3B82F6" stroke-width="3"/>
+  <rect x="510" y="370" width="20" height="20" rx="4" fill="white" stroke="#3B82F6" stroke-width="3"/>
+  <rect x="190" y="480" width="20" height="20" rx="4" fill="white" stroke="#3B82F6" stroke-width="3"/>
+  <rect x="350" y="480" width="20" height="20" rx="4" fill="white" stroke="#3B82F6" stroke-width="3"/>
+  <rect x="510" y="480" width="20" height="20" rx="4" fill="white" stroke="#3B82F6" stroke-width="3"/>
+</svg>

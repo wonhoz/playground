@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>SVG.Forge — Icon Candidates (20260321_1313)</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: linear-gradient(160deg, #0C4A6E 0%, #064E3B 50%, #1E1B4B 100%);
+      min-height: 100vh;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      color: #E2E8F0;
+      padding: 40px 20px;
+    }
+    h1 {
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 700;
+      color: #F0FDF4;
+      margin-bottom: 8px;
+      letter-spacing: -0.5px;
+    }
+    .subtitle {
+      text-align: center;
+      color: #6B7280;
+      font-size: 0.95rem;
+      margin-bottom: 48px;
+    }
+    .subtitle span { color: #34D399; font-weight: 600; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 28px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    .card {
+      background: rgba(6, 78, 59, 0.35);
+      border: 1px solid rgba(52, 211, 153, 0.15);
+      border-radius: 20px;
+      padding: 28px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+      backdrop-filter: blur(8px);
+    }
+    .card:hover {
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: 0 24px 60px rgba(16, 185, 129, 0.2);
+      border-color: rgba(52, 211, 153, 0.5);
+    }
+    .icon-wrap {
+      width: 180px;
+      height: 180px;
+      margin: 0 auto 20px;
+      display: block;
+    }
+    .icon-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 18px;
+      display: block;
+    }
+    .filename {
+      text-align: center;
+      font-size: 0.85rem;
+      color: #6EE7B7;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      margin-bottom: 12px;
+    }
+    .concept {
+      font-size: 0.92rem;
+      color: #D1FAE5;
+      text-align: center;
+      line-height: 1.5;
+      margin-bottom: 12px;
+      font-weight: 500;
+    }
+    .tags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 14px;
+    }
+    .tag {
+      padding: 3px 12px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+    }
+    .tag-literal  { background: #1D4ED8; color: #BFDBFE; }
+    .tag-metaphor { background: #7C3AED; color: #DDD6FE; }
+    .tag-hybrid   { background: #065F46; color: #6EE7B7; border: 1px solid #34D399; }
+    .tag-pattern  { background: #0F172A; color: #64748B; border: 1px solid #1E293B; }
+    .palette {
+      display: flex;
+      gap: 6px;
+      justify-content: center;
+    }
+    .swatch {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.12);
+      flex-shrink: 0;
+    }
+    .section-title {
+      text-align: center;
+      font-size: 0.75rem;
+      color: #4B5563;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+  </style>
+</head>
+<body>
+  <h1>SVG.Forge — Icon Candidates</h1>
+  <p class="subtitle">
+    <span>Candidate_20260321_1313</span> &nbsp;·&nbsp; 8 icons
+    &nbsp;·&nbsp; Photo.Picture / SVG Editor
+  </p>
+
+  <div class="grid">
+
+    <!-- icon_01 -->
+    <div class="card">
+      <div class="icon-wrap"><img src="icon_01.svg" alt="icon_01"/></div>
+      <div class="filename">icon_01.svg</div>
+      <div class="concept">캔버스 위 도형 집합 + 선택 핸들<br>rect · ellipse · line + 파랑 선택 박스</div>
+      <div class="tags">
+        <span class="tag tag-literal">Literal</span>
+        <span class="tag tag-pattern">중앙 심볼</span>
+      </div>
+      <div class="section-title">Palette</div>
+      <div class="palette">
+        <div class="swatch" style="background:#0F172A" title="진한 남색 배경"></div>
+        <div class="swatch" style="background:#ffffff" title="흰 사각형"></div>
+        <div class="swatch" style="background:#60A5FA" title="파랑 타원"></div>
+        <div class="swatch" style="background:#F472B6" title="핑크 선"></div>
+        <div class="swatch" style="background:#3B82F6" title="선택 핸들"></div>
+      </div>
+    </div>
+
+    <!-- icon_02 -->
+    <div class="card">
+      <div class="icon-wrap"><img src="icon_02.svg" alt="icon_02"/></div>
+      <div class="filename">icon_02.svg</div>
+      <div class="concept">레이어 패널 UI (카드 3개 스택)<br>Layer 1 선택됨 (주황 강조) + 미니 캔버스</div>
+      <div class="tags">
+        <span class="tag tag-literal">Literal</span>
+        <span class="tag tag-pattern">레이어드</span>
+      </div>
+      <div class="section-title">Palette</div>
+      <div class="palette">
+        <div class="swatch" style="background:#FEF3C7" title="크림 배경"></div>
+        <div class="swatch" style="background:#1E293B" title="레이어 카드 1"></div>
+        <div class="swatch" style="background:#334155" title="레이어 카드 2"></div>
+        <div class="swatch" style="background:#F59E0B" title="선택 강조"></div>
+        <div class="swatch" style="background:#6366F1" title="미니 캔버스 도형"></div>
+      </div>
+    </div>
+
+    <!-- icon_03 -->
+    <div class="card">
+      <div class="icon-wrap"><img src="icon_03.svg" alt="icon_03"/></div>
+      <div class="filename">icon_03.svg</div>
+      <div class="concept">펜 도구가 SVG 패스를 그어나감<br>베지어 곡선 + 앵커 포인트 + 제어 핸들</div>
+      <div class="tags">
+        <span class="tag tag-hybrid">Hybrid</span>
+        <span class="tag tag-pattern">대각선/동적</span>
+      </div>
+      <div class="section-title">Palette</div>
+      <div class="palette">
+        <div class="swatch" style="background:#0D9488" title="청록 배경"></div>
+        <div class="swatch" style="background:#FBBF24" title="황색 패스"></div>
+        <div class="swatch" style="background:#ffffff" title="흰 펜/앵커"></div>
+        <div class="swatch" style="background:#A7F3D0" title="연초록 제어선"></div>
+      </div>
+    </div>
+
+    <!-- icon_04 -->
+    <div class="card">
+      <div class="icon-wrap"><img src="icon_04.svg" alt="icon_04"/></div>
+      <div class="filename">icon_04.svg</div>
+      <div class="concept">벡터 앵커 포인트·베지어 제어 핸들<br>C x1,y1 x2,y2 x,y 노드 시각화</div>
+      <div class="tags">
+        <span class="tag tag-metaphor">Metaphor</span>
+        <span class="tag tag-pattern">기하학 추상</span>
+      </div>
+      <div class="section-title">Palette</div>
+      <div class="palette">
+        <div class="swatch" style="background:#4C1D95" title="진보라 배경"></div>
+        <div class="swatch" style="background:#EC4899" title="핑크 곡선"></div>
+        <div class="swatch" style="background:#F0ABFC" title="자주 곡선 상단"></div>
+        <div class="swatch" style="background:#C4B5FD" title="연보라 제어선"></div>
+        <div class="swatch" style="background:#ffffff" title="흰 앵커"></div>
+      </div>
+    </div>
+
+    <!-- icon_05 -->
+    <div class="card">
+      <div class="icon-wrap"><img src="icon_05.svg" alt="icon_05"/></div>
+      <div class="filename">icon_05.svg</div>
+      <div class="concept">SVG 편집기 전체 화면 미리보기<br>도구바 + 캔버스(그리드+도형) + 속성/레이어 패널</div>
+      <div class="tags">
+        <span class="tag tag-hybrid">Hybrid</span>
+        <span class="tag tag-pattern">공간/장면</span>
+      </div>
+      <div class="section-title">Palette</div>
+      <div class="palette">
+        <div class="swatch" style="background:#111827" title="다크 배경"></div>
+        <div class="swatch" style="background:#6366F1" title="인디고 도형"></div>
+        <div class="swatch" style="background:#F59E0B" title="황색 타원"></div>
+        <div class="swatch" style="background:#F472B6" title="핑크 선"></div>
+        <div class="swatch" style="background:#3B82F6" title="선택 박스"></div>
+      </div>
+    </div>
+
+    <!-- icon_06 -->
+    <div class="card">
+      <div class="icon-wrap"><img src="icon_06.svg" alt="icon_06"/></div>
+      <div class="filename">icon_06.svg</div>
+      <div class="concept">스타일러스가 벡터 패스를 그리는 실루엣<br>철필 + S자 곡선 + &lt;path d="M..."/&gt; 힌트</div>
+      <div class="tags">
+        <span class="tag tag-metaphor">Metaphor</span>
+        <span class="tag tag-pattern">실루엣/캐릭터</span>
+      </div>
+      <div class="section-title">Palette</div>
+      <div class="palette">
+        <div class="swatch" style="background:#F97316" title="주황 배경"></div>
+        <div class="swatch" style="background:#FEF3C7" title="크림 펜 몸통"></div>
+        <div class="swatch" style="background:#92400E" title="갈색 펜 캡"></div>
+        <div class="swatch" style="background:#FEF9C3" title="황금 패스"></div>
+      </div>
+    </div>
+
+    <!-- icon_07 -->
+    <div class="card">
+      <div class="icon-wrap"><img src="icon_07.svg" alt="icon_07"/></div>
+      <div class="filename">icon_07.svg</div>
+      <div class="concept">벡터 확장성 (512px에서도 선명한 별)<br>흰 별 + 동심원 배경 = "무한 확장 가능"</div>
+      <div class="tags">
+        <span class="tag tag-metaphor">Metaphor</span>
+        <span class="tag tag-pattern">기하학 추상</span>
+      </div>
+      <div class="section-title">Palette</div>
+      <div class="palette">
+        <div class="swatch" style="background:#0369A1" title="하늘 파랑 배경"></div>
+        <div class="swatch" style="background:#0EA5E9" title="동심원"></div>
+        <div class="swatch" style="background:#ffffff" title="흰 별"></div>
+        <div class="swatch" style="background:#FDE68A" title="황색 외곽선"></div>
+        <div class="swatch" style="background:#64748B" title="픽셀 대비"></div>
+      </div>
+    </div>
+
+    <!-- icon_08 -->
+    <div class="card">
+      <div class="icon-wrap"><img src="icon_08.svg" alt="icon_08"/></div>
+      <div class="filename">icon_08.svg</div>
+      <div class="concept">SVG 코드 에디터 + 실시간 렌더링 프리뷰<br>&lt;rect&gt;·&lt;ellipse&gt; 코드 → 오른쪽 실제 도형</div>
+      <div class="tags">
+        <span class="tag tag-literal">Literal</span>
+        <span class="tag tag-pattern">레이어드</span>
+      </div>
+      <div class="section-title">Palette</div>
+      <div class="palette">
+        <div class="swatch" style="background:#065F46" title="에메랄드 배경"></div>
+        <div class="swatch" style="background:#022C22" title="코드 패널"></div>
+        <div class="swatch" style="background:#34D399" title="민트 태그"></div>
+        <div class="swatch" style="background:#FDE68A" title="황색 값"></div>
+        <div class="swatch" style="background:#6366F1" title="인디고 렌더링"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <p style="text-align:center; margin-top:48px; color:#14532D; font-size:0.8rem;">
+    SVG.Forge · Candidate_20260321_1313 · 2026-03-21
+  </p>
+</body>
+</html>

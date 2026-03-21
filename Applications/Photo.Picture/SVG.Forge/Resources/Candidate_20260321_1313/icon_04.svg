@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg04" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#4C1D95"/>
+      <stop offset="50%" stop-color="#6D28D9"/>
+      <stop offset="100%" stop-color="#7C3AED"/>
+    </linearGradient>
+    <linearGradient id="curve04" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#F0ABFC"/>
+      <stop offset="100%" stop-color="#EC4899"/>
+    </linearGradient>
+    <clipPath id="clip04">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+
+  <!-- Layer 1: 보라 그라데이션 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg04)"/>
+
+  <!-- 배경 원 장식 -->
+  <circle cx="820" cy="200" r="280" fill="#5B21B6" opacity="0.35" clip-path="url(#clip04)"/>
+  <circle cx="200" cy="820" r="220" fill="#4C1D95" opacity="0.3" clip-path="url(#clip04)"/>
+
+  <!-- Layer 2: 베지어 곡선 (핑크) -->
+  <path d="M 200,700 C 280,200 740,800 820,300"
+        stroke="url(#curve04)" stroke-width="60" fill="none"
+        stroke-linecap="round"/>
+
+  <!-- 앵커 포인트 1 (시작점) -->
+  <circle cx="200" cy="700" r="36" fill="#1E1338" stroke="#F0ABFC" stroke-width="10"/>
+  <circle cx="200" cy="700" r="16" fill="#F0ABFC"/>
+
+  <!-- 앵커 포인트 2 (끝점) -->
+  <circle cx="820" cy="300" r="36" fill="#1E1338" stroke="#F0ABFC" stroke-width="10"/>
+  <circle cx="820" cy="300" r="16" fill="#EC4899"/>
+
+  <!-- 제어핸들 선 1 (시작점 핸들) -->
+  <line x1="200" y1="700" x2="280" y2="200" stroke="#C4B5FD" stroke-width="6" stroke-dasharray="18,12"/>
+  <!-- 제어핸들 포인트 1 -->
+  <circle cx="280" cy="200" r="22" fill="#C4B5FD" opacity="0.9"/>
+
+  <!-- 제어핸들 선 2 (끝점 핸들) -->
+  <line x1="820" y1="300" x2="740" y2="800" stroke="#C4B5FD" stroke-width="6" stroke-dasharray="18,12"/>
+  <!-- 제어핸들 포인트 2 -->
+  <circle cx="740" cy="800" r="22" fill="#C4B5FD" opacity="0.9"/>
+
+  <!-- 곡선 위 중간 포인트 (선택 불가, 추가 정보용) -->
+  <circle cx="510" cy="512" r="16" fill="#DDD6FE" opacity="0.6"/>
+
+  <!-- Layer 3: 좌표 정보 레이블 -->
+  <!-- 앵커1 좌표 -->
+  <rect x="100" y="720" width="172" height="52" rx="10" fill="#2D1B69" opacity="0.9"/>
+  <text x="116" y="751" font-family="Consolas,monospace" font-size="24" fill="#DDD6FE">x:200 y:700</text>
+
+  <!-- 앵커2 좌표 -->
+  <rect x="720" y="240" width="172" height="52" rx="10" fill="#2D1B69" opacity="0.9"/>
+  <text x="736" y="271" font-family="Consolas,monospace" font-size="24" fill="#DDD6FE">x:820 y:300</text>
+
+  <!-- 핸들1 좌표 -->
+  <rect x="192" y="140" width="172" height="52" rx="10" fill="#1E1338" opacity="0.85"/>
+  <text x="208" y="171" font-family="Consolas,monospace" font-size="24" fill="#A78BFA">C 280,200</text>
+
+  <!-- 핸들2 좌표 -->
+  <rect x="648" y="810" width="172" height="52" rx="10" fill="#1E1338" opacity="0.85"/>
+  <text x="664" y="841" font-family="Consolas,monospace" font-size="24" fill="#A78BFA">C 740,800</text>
+</svg>

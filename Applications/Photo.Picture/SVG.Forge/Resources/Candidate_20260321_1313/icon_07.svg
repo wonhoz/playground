@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg07" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0369A1"/>
+      <stop offset="100%" stop-color="#0C4A6E"/>
+    </linearGradient>
+    <clipPath id="clip07">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+
+  <!-- Layer 1: 하늘 파랑 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg07)"/>
+
+  <!-- 배경 동심원 (벡터 확장 암시) -->
+  <circle cx="512" cy="512" r="440" fill="none" stroke="#0284C7" stroke-width="3" opacity="0.3"/>
+  <circle cx="512" cy="512" r="370" fill="none" stroke="#0284C7" stroke-width="3" opacity="0.3"/>
+  <circle cx="512" cy="512" r="300" fill="none" stroke="#0EA5E9" stroke-width="3" opacity="0.3"/>
+  <circle cx="512" cy="512" r="230" fill="none" stroke="#38BDF8" stroke-width="3" opacity="0.3"/>
+
+  <!-- Layer 2: 중앙 큰 별 (벡터 - 항상 선명) -->
+  <path d="M 512,220
+           L 560,400 L 740,400 L 600,510
+           L 648,690 L 512,580 L 376,690
+           L 424,510 L 284,400 L 464,400 Z"
+        fill="white" opacity="0.95"/>
+
+  <!-- 오른쪽 아래: 작은 별 (픽셀 느낌, 흐릿하게 - 대비) -->
+  <g transform="translate(740,720)">
+    <!-- 작은 픽셀화된 별 -->
+    <rect x="-30" y="-60" width="60" height="20" rx="2" fill="#64748B" opacity="0.5"/>
+    <rect x="-50" y="-40" width="100" height="20" rx="2" fill="#64748B" opacity="0.5"/>
+    <rect x="-60" y="-20" width="120" height="20" rx="2" fill="#64748B" opacity="0.5"/>
+    <rect x="-50" y="0" width="100" height="20" rx="2" fill="#64748B" opacity="0.5"/>
+    <rect x="-30" y="20" width="60" height="20" rx="2" fill="#64748B" opacity="0.5"/>
+    <text x="0" y="68" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="20" fill="#475569">pixel</text>
+  </g>
+
+  <!-- Layer 3: 크기 표시 (벡터 확장성) -->
+  <!-- 큰 별 옆 크기 표시 -->
+  <text x="200" y="320" font-family="Segoe UI,sans-serif" font-size="28" fill="#7DD3FC" font-weight="bold">512px</text>
+  <text x="780" y="780" font-family="Segoe UI,sans-serif" font-size="22" fill="#475569">16px</text>
+
+  <!-- 크기 화살표 -->
+  <path d="M 190,340 L 190,690" stroke="#38BDF8" stroke-width="6" stroke-linecap="round" opacity="0.6"/>
+  <polygon points="190,330 178,354 202,354" fill="#38BDF8" opacity="0.6"/>
+  <polygon points="190,700 178,676 202,676" fill="#38BDF8" opacity="0.6"/>
+
+  <!-- 선명도 강조: 별 외곽 미세 선 -->
+  <path d="M 512,220
+           L 560,400 L 740,400 L 600,510
+           L 648,690 L 512,580 L 376,690
+           L 424,510 L 284,400 L 464,400 Z"
+        fill="none" stroke="#FDE68A" stroke-width="5" opacity="0.7"/>
+
+  <!-- SVG 레이블 -->
+  <rect x="380" y="166" width="264" height="52" rx="14" fill="#075985" opacity="0.8"/>
+  <text x="512" y="200" text-anchor="middle" font-family="Consolas,monospace" font-size="28" fill="#7DD3FC" font-weight="bold">Vector SVG</text>
+</svg>

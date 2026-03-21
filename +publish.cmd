@@ -72,7 +72,7 @@ echo !CY!  46!RS! Hotkey.Map            !DG!Applications/System/Key!RS!
 echo !CY!  47!RS! Hue.Flow              !DG!Games/Puzzle!RS!
 echo !CY!  48!RS! Icon.Hunt             !DG!Applications/Emoji.Icon!RS!
 echo !CY!  49!RS! Icon.Maker            !DG!Applications/Tools.Utility!RS!
-echo !CY!  50!RS! Img.Cast             !DG!Applications/Photo.Picture!RS!
+echo !CY!  50!RS! Img.Cast             !DG!Applications/Emoji.Icon!RS!
 echo !CY!  51!RS! Img.Compare           !DG!Applications/Photo.Picture!RS!
 echo !CY!  52!RS! JSON.Fmt              !DG!Applications/Tools.Utility!RS!
 echo !CY!  53!RS! JSON.Tree             !DG!Applications/Development/Inspector!RS!
@@ -121,8 +121,8 @@ echo !CY!  95!RS! Spec.Report           !DG!Applications/System/Monitor!RS!
 echo !CY!  96!RS! Spec.View             !DG!Applications/System/Monitor!RS!
 echo !CY!  97!RS! Star.Strike           !DG!Games/Shooter!RS!
 echo !CY!  98!RS! Stay.Awake            !DG!Applications/Automation!RS!
-echo !CY!  99!RS! SVG.Forge             !DG!Applications/Photo.Picture!RS!
-echo !CY! 100!RS! Svc.Guard             !DG!Applications/System/Manager!RS!
+echo !CY!  99!RS! Svc.Guard             !DG!Applications/System/Manager!RS!
+echo !CY! 100!RS! SVG.Forge             !DG!Applications/Photo.Picture!RS!
 echo !CY! 101!RS! Sys.Clean             !DG!Applications/System/Manager!RS!
 echo !CY! 102!RS! Tag.Forge             !DG!Applications/Audio!RS!
 echo !CY! 103!RS! Text.Forge            !DG!Applications/Text!RS!
@@ -210,7 +210,7 @@ for %%n in (!SEL!) do (
     if "%%n"=="47"  call :pub "Hue.Flow"               "Games\Puzzle\Hue.Flow"                                   "Hue.Flow.exe"              "Games\Puzzle"
     if "%%n"=="48"  call :pub "Icon.Hunt"              "Applications\Emoji.Icon\Icon.Hunt"                       "Icon.Hunt.exe"             "Applications\Emoji.Icon"
     if "%%n"=="49"  call :pub "Icon.Maker"             "Applications\Tools.Utility\Icon.Maker"                   "Icon.Maker.exe"            "Applications\Tools.Utility"
-    if "%%n"=="50"  call :pub "Img.Cast"             "Applications\Photo.Picture\Img.Cast"                   "ImgCast.exe"               "Applications\Photo.Picture\Img.Cast"
+    if "%%n"=="50"  call :pub "Img.Cast"             "Applications\Emoji.Icon\Img.Cast"                      "ImgCast.exe"               "Applications\Emoji.Icon\Img.Cast"
     if "%%n"=="51"  call :pub "Img.Compare"            "Applications\Photo.Picture\Img.Compare"                  "Img.Compare.exe"           "Applications\Photo.Picture"
     if "%%n"=="52"  call :pub "JSON.Fmt"               "Applications\Tools.Utility\JSON.Fmt"                     "JSON.Fmt.exe"              "Applications\Tools.Utility"
     if "%%n"=="53"  call :pub "JSON.Tree"              "Applications\Development\Inspector\JSON.Tree"             "JSON.Tree.exe"             "Applications\Development\Inspector"
@@ -259,8 +259,8 @@ for %%n in (!SEL!) do (
     if "%%n"=="96"  call :pub "Spec.View"              "Applications\System\Monitor\Spec.View"                   "Spec.View.exe"             "Applications\System\Monitor\Spec.View"
     if "%%n"=="97"  call :pub "Star.Strike"            "Games\Shooter\Star.Strike"                               "Star.Strike.exe"           "Games\Shooter"
     if "%%n"=="98"  call :pub "Stay.Awake"             "Applications\Automation\Stay.Awake"                      "Stay.Awake.exe"            "Applications\Automation\Stay.Awake"
-    if "%%n"=="99"  call :pub "SVG.Forge"              "Applications\Photo.Picture\SVG.Forge"                    "SVG.Forge.exe"             "Applications\Photo.Picture\SVG.Forge"
-    if "%%n"=="100"  call :pub "Svc.Guard"              "Applications\System\Manager\Svc.Guard"                   "Svc.Guard.exe"             "Applications\System\Manager\Svc.Guard"
+    if "%%n"=="99"  call :pub "Svc.Guard"              "Applications\System\Manager\Svc.Guard"                   "Svc.Guard.exe"             "Applications\System\Manager\Svc.Guard"
+    if "%%n"=="100" call :pub "SVG.Forge"              "Applications\Photo.Picture\SVG.Forge"                    "SVG.Forge.exe"             "Applications\Photo.Picture\SVG.Forge"
     if "%%n"=="101" call :pub "Sys.Clean"              "Applications\System\Manager\Sys.Clean"                   "Sys.Clean.exe"             "Applications\System\Manager\Sys.Clean"
     if "%%n"=="102" call :pub "Tag.Forge"              "Applications\Audio\Tag.Forge"                            "Tag.Forge.exe"             "Applications\Audio\Tag.Forge"
     if "%%n"=="103" call :pub "Text.Forge"             "Applications\Text\Text.Forge"                            "Text.Forge.exe"            "Applications\Text"
@@ -326,7 +326,7 @@ call :pub "Mock.Server"           "Applications\Network\Server\Mock.Server"     
 call :pub "Serve.Cast"            "Applications\Network\Server\Serve.Cast"                  "Serve.Cast.exe"            "Applications\Network\Server"
 call :pub "Color.Grade"           "Applications\Photo.Picture\Color.Grade"                  "Color.Grade.exe"           "Applications\Photo.Picture\Color.Grade"
 call :pub "Comic.Cast"            "Applications\Photo.Picture\Comic.Cast"                   "Comic.Cast.exe"            "Applications\Photo.Picture\Comic.Cast"
-call :pub "Img.Cast"             "Applications\Photo.Picture\Img.Cast"                   "ImgCast.exe"               "Applications\Photo.Picture\Img.Cast"
+call :pub "Img.Cast"             "Applications\Emoji.Icon\Img.Cast"                      "ImgCast.exe"               "Applications\Emoji.Icon\Img.Cast"
 call :pub "Img.Compare"           "Applications\Photo.Picture\Img.Compare"                  "Img.Compare.exe"           "Applications\Photo.Picture"
 call :pub "Mosaic.Forge"          "Applications\Photo.Picture\Mosaic.Forge"                 "Mosaic.Forge.exe"          "Applications\Photo.Picture\Mosaic.Forge"
 call :pub "Photo.Video.Organizer" "Applications\Photo.Picture\Photo.Video.Organizer"        "Photo.Video.Organizer.exe" "Applications\Photo.Picture"

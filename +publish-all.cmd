@@ -74,6 +74,7 @@ call :pub "Skill.Cast"            "Applications\Development\Inspector\Skill.Cast
 :: ── Applications / Emoji.Icon ──────────────────────────────────────
 call :pub "Glyph.Map"             "Applications\Emoji.Icon\Glyph.Map"                       "Glyph.Map.exe"             "Applications\Emoji.Icon\Glyph.Map"
 call :pub "Icon.Hunt"             "Applications\Emoji.Icon\Icon.Hunt"                       "Icon.Hunt.exe"             "Applications\Emoji.Icon"
+call :pub "Img.Cast"              "Applications\Emoji.Icon\Img.Cast"                        "ImgCast.exe"               "Applications\Emoji.Icon\Img.Cast"
 
 :: ── Applications / Files / Inspector ──────────────────────────────
 call :pub "Disk.Lens"             "Applications\Files\Inspector\Disk.Lens"                  "Disk.Lens.exe"             "Applications\Files\Inspector\Disk.Lens"
@@ -102,7 +103,6 @@ call :pub "Serve.Cast"            "Applications\Network\Server\Serve.Cast"      
 :: ── Applications / Photo.Picture ───────────────────────────────────
 call :pub "Color.Grade"           "Applications\Photo.Picture\Color.Grade"                  "Color.Grade.exe"           "Applications\Photo.Picture\Color.Grade"
 call :pub "Comic.Cast"            "Applications\Photo.Picture\Comic.Cast"                   "Comic.Cast.exe"            "Applications\Photo.Picture\Comic.Cast"
-call :pub "Img.Cast"              "Applications\Photo.Picture\Img.Cast"                     "ImgCast.exe"               "Applications\Photo.Picture\Img.Cast"
 call :pub "Img.Compare"           "Applications\Photo.Picture\Img.Compare"                  "Img.Compare.exe"           "Applications\Photo.Picture"
 call :pub "Mosaic.Forge"          "Applications\Photo.Picture\Mosaic.Forge"                 "Mosaic.Forge.exe"          "Applications\Photo.Picture\Mosaic.Forge"
 call :pub "Photo.Video.Organizer" "Applications\Photo.Picture\Photo.Video.Organizer"        "Photo.Video.Organizer.exe" "Applications\Photo.Picture"

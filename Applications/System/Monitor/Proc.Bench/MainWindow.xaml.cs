@@ -485,7 +485,7 @@ public partial class MainWindow : Window
             var pos = (long)(rng.NextDouble() * (fileSize - 4096));
             pos = pos / 4096 * 4096;
             fs.Seek(pos, SeekOrigin.Begin);
-            fs.Read(buf, 0, 4096);
+            fs.ReadExactly(buf, 0, 4096);
             totalBytes += 4096;
         }
         return totalBytes / (1024.0 * 1024) * 1000.0 / sw.ElapsedMilliseconds;

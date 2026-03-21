@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg4kt" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#03045E"/>
+      <stop offset="100%" stop-color="#023E8A"/>
+    </linearGradient>
+    <clipPath id="c4kt"><rect width="1024" height="1024" rx="190"/></clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg4kt)"/>
+  <circle cx="512" cy="512" r="360" fill="#0077B6" opacity="0.1" clip-path="url(#c4kt)"/>
+
+  <!-- Layer 2: 50ms 임계 파형 + 채터링 시각화 (기하학추상) -->
+  <!-- 오실로스코프 스타일 그리드 -->
+  <g stroke="#0077B6" stroke-width="1" opacity="0.2">
+    <line x1="160" y1="340" x2="864" y2="340"/>
+    <line x1="160" y1="430" x2="864" y2="430"/>
+    <line x1="160" y1="520" x2="864" y2="520"/>
+    <line x1="160" y1="610" x2="864" y2="610"/>
+    <line x1="160" y1="700" x2="864" y2="700"/>
+    <line x1="280" y1="300" x2="280" y2="740"/>
+    <line x1="400" y1="300" x2="400" y2="740"/>
+    <line x1="520" y1="300" x2="520" y2="740"/>
+    <line x1="640" y1="300" x2="640" y2="740"/>
+    <line x1="760" y1="300" x2="760" y2="740"/>
+  </g>
+
+  <!-- 정상 키 입력 파형 (좌측, 파랑) -->
+  <!-- 1회 입력 -->
+  <polyline points="200,700 200,400 264,400 264,700" fill="none" stroke="#00B4D8" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- 레이블 -->
+  <text x="232" y="738" text-anchor="middle" font-family="Consolas,monospace" font-size="16" fill="#90E0EF">Normal</text>
+  <text x="232" y="758" text-anchor="middle" font-family="Consolas,monospace" font-size="14" fill="#0096C7">~200ms</text>
+
+  <!-- 50ms 임계선 -->
+  <line x1="160" y1="520" x2="864" y2="520" stroke="#FF5555" stroke-width="3" stroke-dasharray="10,6" opacity="0.8"/>
+  <rect x="164" y="505" width="88" height="22" rx="6" fill="#3A0808" opacity="0.9"/>
+  <text x="208" y="520" text-anchor="middle" font-family="Consolas,monospace" font-size="13" fill="#FF6B6B">50ms</text>
+
+  <!-- 채터링 파형 (우측, 빨강) -->
+  <!-- 1회 DOWN -->
+  <polyline points="480,700 480,380 530,380 530,700" fill="none" stroke="#4488FF" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- 채터링 반복 (23ms 뒤) -->
+  <polyline points="554,700 554,380 598,380 598,700" fill="none" stroke="#FF3333" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- 채터링 간격 강조 브라켓 -->
+  <line x1="530" y1="350" x2="554" y2="350" stroke="#FF5555" stroke-width="4" stroke-linecap="round"/>
+  <line x1="530" y1="343" x2="530" y2="357" stroke="#FF5555" stroke-width="4" stroke-linecap="round"/>
+  <line x1="554" y1="343" x2="554" y2="357" stroke="#FF5555" stroke-width="4" stroke-linecap="round"/>
+  <text x="542" y="340" text-anchor="middle" font-family="Consolas,monospace" font-size="16" font-weight="700" fill="#FF5555">23ms</text>
+
+  <!-- 채터링 경고 오버레이 -->
+  <rect x="460" y="730" width="180" height="28" rx="8" fill="#3A0808" opacity="0.9"/>
+  <text x="550" y="748" text-anchor="middle" font-family="Consolas,monospace" font-size="14" fill="#FF6B6B">⚠ CHATTER</text>
+
+  <!-- 세 번째: 또 채터링 (더 많이 반복) -->
+  <polyline points="660,700 660,380 700,380 700,700" fill="none" stroke="#4488FF" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+  <polyline points="718,700 718,380 752,380 752,700" fill="none" stroke="#FF3333" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+  <polyline points="768,700 768,380 800,380 800,700" fill="none" stroke="#FF5555" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+
+  <!-- Layer 3: VK 코드 디스플레이 (상단) -->
+  <rect x="280" y="218" width="464" height="72" rx="16" fill="#012040"/>
+  <rect x="280" y="218" width="464" height="72" rx="16" fill="none" stroke="#00B4D8" stroke-width="3"/>
+  <text x="360" y="256" font-family="Consolas,monospace" font-size="20" fill="#90E0EF">Key:</text>
+  <text x="416" y="256" font-family="Consolas,monospace" font-size="24" font-weight="700" fill="#FFFFFF">U</text>
+  <text x="468" y="256" font-family="Consolas,monospace" font-size="18" fill="#00B4D8">VK=0x55</text>
+  <text x="360" y="280" font-family="Consolas,monospace" font-size="16" fill="#0096C7">Chatter: 3  |  Total: 28</text>
+</svg>

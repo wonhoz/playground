@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg2kt" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1A0505"/>
+      <stop offset="100%" stop-color="#0A0202"/>
+    </linearGradient>
+    <clipPath id="c2kt"><rect width="1024" height="1024" rx="190"/></clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg2kt)"/>
+  <circle cx="512" cy="512" r="340" fill="#601010" opacity="0.1" clip-path="url(#c2kt)"/>
+
+  <!-- Layer 2: 채터링 파형 그래프 + 문제 키 경고 (레이어드) -->
+  <!-- 그래프 창 -->
+  <rect x="155" y="210" width="714" height="400" rx="16" fill="#110808"/>
+  <rect x="155" y="210" width="714" height="400" rx="16" fill="none" stroke="#3A1010" stroke-width="4"/>
+
+  <!-- 그래프 상단 레이블 -->
+  <text x="185" y="248" font-family="Consolas,monospace" font-size="18" fill="#FF6B6B">Key [U]  —  Press Event Timeline</text>
+  <line x1="175" y1="258" x2="850" y2="258" stroke="#3A1010" stroke-width="2"/>
+
+  <!-- Y축 레이블 -->
+  <text x="176" y="310" font-family="Consolas,monospace" font-size="13" fill="#601010">DOWN</text>
+  <text x="176" y="460" font-family="Consolas,monospace" font-size="13" fill="#601010">UP</text>
+
+  <!-- 그래프 기준선 -->
+  <line x1="240" y1="310" x2="840" y2="310" stroke="#3A1010" stroke-width="1" stroke-dasharray="4,4"/>
+  <line x1="240" y1="460" x2="840" y2="460" stroke="#3A1010" stroke-width="1" stroke-dasharray="4,4"/>
+
+  <!-- 정상 키 입력 파형 (첫 번째) -->
+  <polyline points="260,460 260,310 320,310 320,460" fill="none" stroke="#666666" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+  <text x="280" y="490" font-family="Consolas,monospace" font-size="12" fill="#555555" text-anchor="middle">t=0ms</text>
+
+  <!-- 정상 키 입력 파형 (두 번째, 간격 넓음) -->
+  <polyline points="440,460 440,310 500,310 500,460" fill="none" stroke="#666666" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+  <text x="460" y="490" font-family="Consolas,monospace" font-size="12" fill="#555555" text-anchor="middle">t=180ms</text>
+
+  <!-- 채터링 파형 (문제 구간 — 붉은 강조) -->
+  <!-- 정상 down -->
+  <polyline points="580,460 580,310 620,310 620,460" fill="none" stroke="#CC3333" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- 채터링 반복 (23ms 뒤 또 DOWN) -->
+  <polyline points="640,460 640,310 680,310 680,460" fill="none" stroke="#FF5555" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- 채터링 임계 표시 -->
+  <rect x="618" y="300" width="64" height="22" rx="6" fill="#601010"/>
+  <text x="650" y="315" text-anchor="middle" font-family="Consolas,monospace" font-size="13" fill="#FF9999">23ms!</text>
+  <!-- 빨간 화살표 -->
+  <line x1="650" y1="296" x2="650" y2="268" stroke="#FF5555" stroke-width="3" stroke-linecap="round"/>
+  <polygon points="644,270 650,254 656,270" fill="#FF5555"/>
+  <rect x="590" y="490" width="118" height="22" rx="6" fill="#601010"/>
+  <text x="649" y="504" text-anchor="middle" font-family="Consolas,monospace" font-size="12" fill="#FF6B6B">채터링 구간</text>
+
+  <!-- 50ms 임계선 -->
+  <line x1="580" y1="222" x2="700" y2="222" stroke="#FF4444" stroke-width="2" stroke-dasharray="6,4"/>
+  <text x="710" y="228" font-family="Consolas,monospace" font-size="12" fill="#CC3333">< 50ms</text>
+
+  <!-- Layer 3: 하단 진단 결과 패널 -->
+  <rect x="155" y="638" width="714" height="150" rx="16" fill="#200808"/>
+  <rect x="155" y="638" width="714" height="150" rx="16" fill="none" stroke="#601010" stroke-width="3"/>
+
+  <text x="185" y="675" font-family="Consolas,monospace" font-size="18" fill="#FF6B6B">⚠  채터링 감지: [U]</text>
+  <text x="185" y="706" font-family="Consolas,monospace" font-size="15" fill="#CC4444">간격: 23.4ms  (임계: 50ms)</text>
+  <text x="185" y="730" font-family="Consolas,monospace" font-size="14" fill="#884444">총 입력: 247회  |  최대 동시 입력: 3키</text>
+  <text x="185" y="754" font-family="Consolas,monospace" font-size="14" fill="#664444">테스트: 72 / 104키  |  문제 키: 2개</text>
+
+  <!-- 상태 배지 -->
+  <rect x="680" y="648" width="168" height="48" rx="12" fill="#601010" stroke="#FF4444" stroke-width="2"/>
+  <text x="764" y="676" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="18" font-weight="700" fill="#FF6B6B">문제 감지</text>
+</svg>

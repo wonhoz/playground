@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg5kt" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#064E3B"/>
+      <stop offset="100%" stop-color="#065F46"/>
+    </linearGradient>
+    <clipPath id="c5kt"><rect width="1024" height="1024" rx="190"/></clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg5kt)"/>
+  <circle cx="820" cy="200" r="280" fill="#10B981" opacity="0.1" clip-path="url(#c5kt)"/>
+  <circle cx="200" cy="820" r="240" fill="#059669" opacity="0.1" clip-path="url(#c5kt)"/>
+
+  <!-- Layer 2: 키보드 실루엣 + 초록 체크 (대각선/동적, hybrid) -->
+  <!-- 키보드 실루엣 (단순화) -->
+  <rect x="162" y="400" width="700" height="280" rx="22" fill="#033A2E" stroke="#34D399" stroke-width="5"/>
+
+  <!-- 키들 (테스트됨 = 초록) -->
+  <g fill="#065F46" stroke="#059669" stroke-width="1.5">
+    <!-- F열 -->
+    <rect x="186" y="420" width="30" height="24" rx="5"/>
+    <rect x="232" y="420" width="30" height="24" rx="5"/>
+    <rect x="268" y="420" width="30" height="24" rx="5"/>
+    <rect x="304" y="420" width="30" height="24" rx="5"/>
+    <rect x="340" y="420" width="30" height="24" rx="5"/>
+    <rect x="392" y="420" width="30" height="24" rx="5"/>
+    <rect x="428" y="420" width="30" height="24" rx="5"/>
+    <rect x="464" y="420" width="30" height="24" rx="5"/>
+    <rect x="500" y="420" width="30" height="24" rx="5"/>
+    <rect x="552" y="420" width="30" height="24" rx="5"/>
+    <rect x="588" y="420" width="30" height="24" rx="5"/>
+    <rect x="624" y="420" width="30" height="24" rx="5"/>
+    <rect x="660" y="420" width="30" height="24" rx="5"/>
+    <!-- Number row -->
+    <rect x="186" y="452" width="30" height="30" rx="5"/>
+    <rect x="222" y="452" width="30" height="30" rx="5"/>
+    <rect x="258" y="452" width="30" height="30" rx="5"/>
+    <rect x="294" y="452" width="30" height="30" rx="5"/>
+    <rect x="330" y="452" width="30" height="30" rx="5"/>
+    <rect x="366" y="452" width="30" height="30" rx="5"/>
+    <rect x="402" y="452" width="30" height="30" rx="5"/>
+    <rect x="438" y="452" width="30" height="30" rx="5"/>
+    <rect x="474" y="452" width="30" height="30" rx="5"/>
+    <rect x="510" y="452" width="30" height="30" rx="5"/>
+    <rect x="546" y="452" width="30" height="30" rx="5"/>
+    <rect x="582" y="452" width="30" height="30" rx="5"/>
+    <rect x="618" y="452" width="30" height="30" rx="5"/>
+    <!-- QWERTY -->
+    <rect x="216" y="490" width="30" height="30" rx="5"/>
+    <rect x="252" y="490" width="30" height="30" rx="5"/>
+    <rect x="288" y="490" width="30" height="30" rx="5"/>
+    <rect x="324" y="490" width="30" height="30" rx="5"/>
+    <rect x="360" y="490" width="30" height="30" rx="5"/>
+    <rect x="396" y="490" width="30" height="30" rx="5"/>
+    <rect x="432" y="490" width="30" height="30" rx="5"/>
+    <rect x="468" y="490" width="30" height="30" rx="5"/>
+    <rect x="504" y="490" width="30" height="30" rx="5"/>
+    <rect x="540" y="490" width="30" height="30" rx="5"/>
+    <rect x="576" y="490" width="30" height="30" rx="5"/>
+    <rect x="612" y="490" width="30" height="30" rx="5"/>
+    <!-- ASDF -->
+    <rect x="228" y="528" width="30" height="30" rx="5"/>
+    <rect x="264" y="528" width="30" height="30" rx="5"/>
+    <rect x="300" y="528" width="30" height="30" rx="5"/>
+    <rect x="336" y="528" width="30" height="30" rx="5"/>
+    <rect x="372" y="528" width="30" height="30" rx="5"/>
+    <rect x="408" y="528" width="30" height="30" rx="5"/>
+    <rect x="444" y="528" width="30" height="30" rx="5"/>
+    <rect x="480" y="528" width="30" height="30" rx="5"/>
+    <rect x="516" y="528" width="30" height="30" rx="5"/>
+    <!-- Space -->
+    <rect x="330" y="568" width="180" height="30" rx="6"/>
+  </g>
+
+  <!-- 큰 초록 체크마크 (대각선 동적으로 그어지는 느낌) -->
+  <!-- 체크마크 배경 원 -->
+  <circle cx="700" cy="350" r="130" fill="#022C22" stroke="#34D399" stroke-width="6"/>
+  <!-- 체크 아이콘 -->
+  <polyline points="648,350 688,390 756,302" fill="none" stroke="#34D399" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Layer 3: 통계 배지 -->
+  <rect x="162" y="706" width="700" height="66" rx="16" fill="#022C22" stroke="#10B981" stroke-width="3"/>
+  <text x="282" y="734" font-family="Consolas,monospace" font-size="17" fill="#34D399">테스트 완료:</text>
+  <text x="430" y="734" font-family="Consolas,monospace" font-size="20" font-weight="700" fill="#6EE7B7">104 / 104</text>
+  <text x="282" y="758" font-family="Consolas,monospace" font-size="15" fill="#10B981">문제 없음  |  최대 동시 입력: 6키  |  NKRO ✓</text>
+</svg>

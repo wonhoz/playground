@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg5e" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#1A0A14"/>
+      <stop offset="100%" stop-color="#0A0A0A"/>
+    </radialGradient>
+    <clipPath id="c5e"><rect width="1024" height="1024" rx="190"/></clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg5e)"/>
+
+  <!-- Layer 2: 단어들이 중심으로 수렴하는 Rainbow (대각선/동적) -->
+  <!-- 중심 구름 -->
+  <circle cx="512" cy="490" r="140" fill="#1A0A14" opacity="0.8"/>
+  <circle cx="512" cy="490" r="140" fill="none" stroke="#FF0000" stroke-width="3" opacity="0.3"/>
+
+  <!-- 중앙 단어 -->
+  <text x="512" y="510" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="72" font-weight="800" fill="#FFFFFF">word</text>
+
+  <!-- 단어들이 중심으로 이동하는 방향선들 + 단어 -->
+  <!-- 상단에서 내려오는 단어 (빨강) -->
+  <text x="512" y="276" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="44" font-weight="700" fill="#FF0000">cloud</text>
+  <path d="M 512,290 L 512,360" stroke="#FF0000" stroke-width="4" stroke-linecap="round" opacity="0.5"
+        marker-end="url(#a)"/>
+  <line x1="512" y1="296" x2="512" y2="348" stroke="#FF0000" stroke-width="4" stroke-linecap="round" opacity="0.4"/>
+  <polygon points="506,344 512,362 518,344" fill="#FF0000" opacity="0.5"/>
+
+  <!-- 우상 (주황) -->
+  <text x="740" y="288" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="36" font-weight="600" fill="#FF7700">text</text>
+  <line x1="720" y1="296" x2="628" y2="388" stroke="#FF7700" stroke-width="4" stroke-linecap="round" opacity="0.45"/>
+  <polygon points="624,380 638,398 646,380" fill="#FF7700" opacity="0.5"/>
+
+  <!-- 우측 (노랑) -->
+  <text x="820" y="500" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="36" font-weight="600" fill="#FFFF00">font</text>
+  <line x1="792" y1="490" x2="652" y2="490" stroke="#FFFF00" stroke-width="4" stroke-linecap="round" opacity="0.45"/>
+  <polygon points="652,482 634,490 652,498" fill="#FFFF00" opacity="0.5"/>
+
+  <!-- 우하 (초록) -->
+  <text x="740" y="710" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="36" font-weight="600" fill="#00FF00">data</text>
+  <line x1="720" y1="696" x2="628" y2="604" stroke="#00FF00" stroke-width="4" stroke-linecap="round" opacity="0.45"/>
+  <polygon points="628,608 620,592 636,592" fill="#00FF00" opacity="0.5"/>
+
+  <!-- 하단 (시안) -->
+  <text x="512" y="730" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="40" font-weight="700" fill="#00FFFF">freq</text>
+  <line x1="512" y1="714" x2="512" y2="632" stroke="#00FFFF" stroke-width="4" stroke-linecap="round" opacity="0.45"/>
+  <polygon points="504,632 512,618 520,632" fill="#00FFFF" opacity="0.5"/>
+
+  <!-- 좌하 (파랑) -->
+  <text x="284" y="710" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="36" font-weight="600" fill="#0000FF">rank</text>
+  <line x1="304" y1="696" x2="396" y2="604" stroke="#0000FF" stroke-width="4" stroke-linecap="round" opacity="0.45"/>
+  <polygon points="398,600 412,590 406,606" fill="#0000FF" opacity="0.5"/>
+
+  <!-- 좌측 (보라) -->
+  <text x="204" y="500" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="36" font-weight="600" fill="#8800FF">mask</text>
+  <line x1="232" y1="490" x2="372" y2="490" stroke="#8800FF" stroke-width="4" stroke-linecap="round" opacity="0.45"/>
+  <polygon points="372,482 390,490 372,498" fill="#8800FF" opacity="0.5"/>
+
+  <!-- 좌상 (자홍) -->
+  <text x="284" y="288" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="36" font-weight="600" fill="#FF00FF">size</text>
+  <line x1="304" y1="296" x2="396" y2="388" stroke="#FF00FF" stroke-width="4" stroke-linecap="round" opacity="0.45"/>
+  <polygon points="392,392 408,380 400,396" fill="#FF00FF" opacity="0.5"/>
+
+  <!-- Layer 3: Rainbow 테마 바 -->
+  <defs>
+    <linearGradient id="rbow5e" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%"   stop-color="#FF0000"/>
+      <stop offset="14%"  stop-color="#FF7700"/>
+      <stop offset="29%"  stop-color="#FFFF00"/>
+      <stop offset="43%"  stop-color="#00FF00"/>
+      <stop offset="57%"  stop-color="#00FFFF"/>
+      <stop offset="71%"  stop-color="#0000FF"/>
+      <stop offset="86%"  stop-color="#8800FF"/>
+      <stop offset="100%" stop-color="#FF00FF"/>
+    </linearGradient>
+  </defs>
+  <rect x="200" y="786" width="624" height="30" rx="15" fill="url(#rbow5e)" opacity="0.85"/>
+  <text x="512" y="842" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="22" fill="#888888">Rainbow theme</text>
+</svg>

@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg4e" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#7C1D1D"/>
+      <stop offset="100%" stop-color="#C2410C"/>
+    </linearGradient>
+    <clipPath id="c4e"><rect width="1024" height="1024" rx="190"/></clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg4e)"/>
+  <circle cx="820" cy="820" r="300" fill="#F77F00" opacity="0.12" clip-path="url(#c4e)"/>
+  <circle cx="200" cy="200" r="200" fill="#D62828" opacity="0.1" clip-path="url(#c4e)"/>
+
+  <!-- Layer 2: 텍스트 → 구름 변환 흐름 (공간/장면, Sunset) -->
+  <!-- 왼쪽: 텍스트 입력 -->
+  <rect x="160" y="308" width="280" height="360" rx="16" fill="#5C0A0A" opacity="0.9"/>
+  <rect x="160" y="308" width="280" height="360" rx="16" fill="none" stroke="#D62828" stroke-width="3"/>
+  <text x="186" y="348" font-family="Segoe UI,sans-serif" font-size="16" fill="#E63946">Input</text>
+  <line x1="186" y1="358" x2="418" y2="358" stroke="#5C1A1A" stroke-width="1"/>
+
+  <!-- 텍스트 라인들 -->
+  <text x="186" y="386" font-family="Consolas,monospace" font-size="14" fill="#FCBF49">the quick brown</text>
+  <text x="186" y="408" font-family="Consolas,monospace" font-size="14" fill="#F77F00">fox jumps over</text>
+  <text x="186" y="430" font-family="Consolas,monospace" font-size="14" fill="#FCBF49">the lazy dog word</text>
+  <text x="186" y="452" font-family="Consolas,monospace" font-size="14" fill="#EAE2B7">cloud text data</text>
+  <text x="186" y="474" font-family="Consolas,monospace" font-size="14" fill="#FCBF49">visualization font</text>
+  <text x="186" y="496" font-family="Consolas,monospace" font-size="14" fill="#F77F00">size rank color art</text>
+  <text x="186" y="518" font-family="Consolas,monospace" font-size="14" fill="#EAE2B7">mask shape theme</text>
+  <text x="186" y="540" font-family="Consolas,monospace" font-size="14" fill="#FCBF49">export png svg jpg</text>
+
+  <!-- 빈도수 카운트 힌트 -->
+  <rect x="186" y="580" width="232" height="52" rx="8" fill="#400808" stroke="#E63946" stroke-width="1"/>
+  <text x="302" y="600" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="14" fill="#E63946">the: 3  fox: 1</text>
+  <text x="302" y="622" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="14" fill="#E63946">word: 2  dog: 1</text>
+
+  <!-- 변환 화살표 -->
+  <path d="M 450,488 L 558,488" stroke="#FCBF49" stroke-width="14" stroke-linecap="round"/>
+  <polygon points="540,468 588,488 540,508" fill="#FCBF49"/>
+
+  <!-- 오른쪽: 워드클라우드 결과 -->
+  <!-- 구름 배경 -->
+  <circle cx="730" cy="480" r="200" fill="#3D0A00" opacity="0.8"/>
+  <circle cx="610" cy="510" r="130" fill="#4A0E00" opacity="0.7"/>
+  <circle cx="844" cy="510" r="130" fill="#4A0E00" opacity="0.7"/>
+  <circle cx="670" cy="420" r="110" fill="#550E00" opacity="0.6"/>
+  <circle cx="800" cy="415" r="110" fill="#550E00" opacity="0.6"/>
+
+  <!-- 구름 테두리 -->
+  <circle cx="730" cy="480" r="200" fill="none" stroke="#E63946" stroke-width="3" opacity="0.3"/>
+
+  <!-- 워드클라우드 단어들 (Sunset 팔레트) -->
+  <text x="730" y="510" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="64" font-weight="800" fill="#EAE2B7">the</text>
+  <text x="640" y="452" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="42" font-weight="700" fill="#FCBF49">word</text>
+  <text x="820" y="456" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="42" font-weight="700" fill="#F77F00">fox</text>
+  <text x="650" y="558" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="30" fill="#E63946">dog</text>
+  <text x="810" y="558" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="30" fill="#D62828">lazy</text>
+  <text x="730" y="586" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="22" fill="#FCBF49">cloud</text>
+
+  <!-- Layer 3: 처리 중 표시 -->
+  <rect x="280" y="760" width="464" height="52" rx="14" fill="#400808" opacity="0.9"/>
+  <text x="512" y="791" text-anchor="middle" font-family="Segoe UI,sans-serif" font-size="24" fill="#FCBF49">text  →  cloud</text>
+</svg>

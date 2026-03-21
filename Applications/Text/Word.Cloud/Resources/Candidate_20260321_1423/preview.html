@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>Word.Cloud — Icon Candidates (20260321_1423)</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #0A1628;
+    color: #E0F2FE;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    padding: 40px 32px;
+    min-height: 100vh;
+  }
+  h1 { font-size: 22px; font-weight: 600; margin-bottom: 6px; color: #5DC863; }
+  .subtitle { font-size: 13px; color: #3B528B; margin-bottom: 36px; }
+  .grid { display: flex; flex-wrap: wrap; gap: 28px; }
+  .card {
+    background: #0D1B2E;
+    border: 1px solid #1A3044;
+    border-radius: 12px;
+    padding: 20px;
+    width: 220px;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+    cursor: pointer;
+  }
+  .card:hover {
+    transform: scale(1.08);
+    box-shadow: 0 8px 32px rgba(93,200,99,0.25);
+    border-color: #5DC863;
+  }
+  .card img {
+    width: 160px;
+    height: 160px;
+    display: block;
+    margin: 0 auto 14px;
+    border-radius: 24px;
+    background: #060E1A;
+  }
+  .card-num { font-size: 11px; color: #1A3044; margin-bottom: 4px; }
+  .card-title { font-size: 14px; font-weight: 600; color: #E0F2FE; margin-bottom: 6px; }
+  .card-concept { font-size: 12px; color: #3B528B; margin-bottom: 8px; line-height: 1.5; }
+  .palette { display: flex; gap: 5px; flex-wrap: wrap; }
+  .swatch {
+    width: 18px; height: 18px; border-radius: 4px;
+    border: 1px solid rgba(255,255,255,0.1);
+    display: inline-block;
+  }
+  .tag {
+    display: inline-block;
+    font-size: 10px;
+    padding: 2px 7px;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+  .tag-literal   { background: #0A2A0A; color: #5DC863; }
+  .tag-metaphor  { background: #0A1A2A; color: #21908C; }
+  .tag-hybrid    { background: #2A1A0A; color: #FCBF49; }
+</style>
+</head>
+<body>
+<h1>Word.Cloud — 아이콘 후보</h1>
+<p class="subtitle">Candidate_20260321_1423 &nbsp;|&nbsp; 텍스트 빈도분석 → 워드클라우드 생성기 (8가지 테마)</p>
+
+<div class="grid">
+
+  <div class="card">
+    <img src="icon_01.svg" alt="icon_01">
+    <div class="card-num">icon_01</div>
+    <span class="tag tag-literal">literal</span>
+    <div class="card-title">구름 안의 단어들</div>
+    <div class="card-concept">구성: 중앙심볼<br>Ocean 팔레트 — 구름 실루엣 안에 빈도 비례 크기의 단어들</div>
+    <div class="palette">
+      <span class="swatch" style="background:#03045E"></span>
+      <span class="swatch" style="background:#0096C7"></span>
+      <span class="swatch" style="background:#CAF0F8"></span>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="icon_02.svg" alt="icon_02">
+    <div class="card-num">icon_02</div>
+    <span class="tag tag-literal">literal</span>
+    <div class="card-title">앱 UI 미리보기</div>
+    <div class="card-concept">구성: 레이어드<br>좌측 텍스트 입력 + 테마 선택 + 우측 Viridis 워드클라우드 결과</div>
+    <div class="palette">
+      <span class="swatch" style="background:#141420"></span>
+      <span class="swatch" style="background:#21908C"></span>
+      <span class="swatch" style="background:#FDE725"></span>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="icon_03.svg" alt="icon_03">
+    <div class="card-num">icon_03</div>
+    <span class="tag tag-metaphor">metaphor</span>
+    <div class="card-title">동심원 빈도 배열</div>
+    <div class="card-concept">구성: 기하학추상<br>Viridis — 중앙에서 바깥으로 크기 감소하는 단어 동심원 구조</div>
+    <div class="palette">
+      <span class="swatch" style="background:#0A0018"></span>
+      <span class="swatch" style="background:#3B528B"></span>
+      <span class="swatch" style="background:#FDE725"></span>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="icon_04.svg" alt="icon_04">
+    <div class="card-num">icon_04</div>
+    <span class="tag tag-metaphor">metaphor</span>
+    <div class="card-title">텍스트 → 구름 변환</div>
+    <div class="card-concept">구성: 공간/장면<br>Sunset — 텍스트 입력 → 빈도 분석 → 워드클라우드 생성 흐름</div>
+    <div class="palette">
+      <span class="swatch" style="background:#7C1D1D"></span>
+      <span class="swatch" style="background:#F77F00"></span>
+      <span class="swatch" style="background:#EAE2B7"></span>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="icon_05.svg" alt="icon_05">
+    <div class="card-num">icon_05</div>
+    <span class="tag tag-hybrid">hybrid</span>
+    <div class="card-title">Rainbow 수렴</div>
+    <div class="card-concept">구성: 대각선/동적<br>무지개 색상 단어들이 8방향에서 중심 "word"로 수렴하는 동적 표현</div>
+    <div class="palette">
+      <span class="swatch" style="background:#FF0000"></span>
+      <span class="swatch" style="background:#00FF00"></span>
+      <span class="swatch" style="background:#0000FF"></span>
+      <span class="swatch" style="background:#FF00FF"></span>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="icon_06.svg" alt="icon_06">
+    <div class="card-num">icon_06</div>
+    <span class="tag tag-hybrid">hybrid</span>
+    <div class="card-title">Forest 구름 실루엣</div>
+    <div class="card-concept">구성: 실루엣/캐릭터<br>Forest 초록 구름 실루엣 안에 밝은 단어들이 채워진 자연스러운 구름</div>
+    <div class="palette">
+      <span class="swatch" style="background:#F0FFF4"></span>
+      <span class="swatch" style="background:#40916C"></span>
+      <span class="swatch" style="background:#1B4332"></span>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

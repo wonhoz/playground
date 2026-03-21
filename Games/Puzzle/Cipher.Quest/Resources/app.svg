@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#001a0d"/>
+      <stop offset="100%" stop-color="#003322"/>
+    </linearGradient>
+    <linearGradient id="key" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffcc00"/>
+      <stop offset="100%" stop-color="#cc8800"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Cipher symbols background -->
+  <text x="40" y="80" font-family="monospace" font-size="18" fill="#00ff44" opacity="0.15">01001010</text>
+  <text x="340" y="120" font-family="monospace" font-size="18" fill="#00ff44" opacity="0.15">11001001</text>
+  <text x="60" y="420" font-family="monospace" font-size="18" fill="#00ff44" opacity="0.15">10110100</text>
+  <text x="300" y="460" font-family="monospace" font-size="18" fill="#00ff44" opacity="0.15">01110101</text>
+  <!-- Lock body -->
+  <rect x="156" y="220" width="200" height="200" rx="20" fill="#004422" stroke="#00aa44" stroke-width="4"/>
+  <!-- Lock shackle -->
+  <path d="M196,220 L196,160 Q196,100 256,100 Q316,100 316,160 L316,220" fill="none" stroke="#00ff44" stroke-width="18" stroke-linecap="round" filter="url(#glow)"/>
+  <!-- Keyhole -->
+  <circle cx="256" cy="310" r="30" fill="#001a0d"/>
+  <rect x="244" y="310" width="24" height="50" rx="8" fill="#001a0d"/>
+  <!-- Key -->
+  <circle cx="380" cy="390" r="30" fill="url(#key)" stroke="#ffdd44" stroke-width="3" filter="url(#glow)"/>
+  <circle cx="380" cy="390" r="18" fill="none" stroke="#001a0d" stroke-width="6"/>
+  <rect x="396" y="383" width="70" height="14" rx="5" fill="url(#key)" filter="url(#glow)"/>
+  <rect x="440" y="397" width="12" height="20" rx="3" fill="url(#key)"/>
+  <rect x="458" y="397" width="12" height="16" rx="3" fill="url(#key)"/>
+  <!-- Green glow lines -->
+  <line x1="156" y1="290" x2="100" y2="290" stroke="#00ff44" stroke-width="2" opacity="0.4" filter="url(#glow)"/>
+  <line x1="356" y1="290" x2="412" y2="290" stroke="#00ff44" stroke-width="2" opacity="0.4" filter="url(#glow)"/>
+</svg>

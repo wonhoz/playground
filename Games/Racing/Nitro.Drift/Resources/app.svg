@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#1a1000"/>
+      <stop offset="100%" stop-color="#0a0800"/>
+    </radialGradient>
+    <radialGradient id="smoke1" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#666666" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#333333" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Smoke puffs -->
+  <circle cx="160" cy="310" r="60" fill="url(#smoke1)"/>
+  <circle cx="120" cy="280" r="50" fill="url(#smoke1)"/>
+  <circle cx="180" cy="260" r="45" fill="url(#smoke1)"/>
+  <circle cx="100" cy="320" r="55" fill="url(#smoke1)"/>
+  <circle cx="145" cy="340" r="40" fill="url(#smoke1)"/>
+  <!-- Car body top-down drift view -->
+  <g transform="rotate(-30, 290, 250)">
+    <rect x="258" y="218" width="64" height="120" rx="14" fill="#cc2200"/>
+    <rect x="268" y="224" width="44" height="60" rx="6" fill="#001a33" opacity="0.7"/>
+    <!-- Wheels -->
+    <rect x="244" y="220" width="14" height="30" rx="4" fill="#222"/>
+    <rect x="322" y="220" width="14" height="30" rx="4" fill="#222"/>
+    <rect x="244" y="288" width="14" height="30" rx="4" fill="#222"/>
+    <rect x="322" y="288" width="14" height="30" rx="4" fill="#222"/>
+  </g>
+  <!-- Drift arc trail -->
+  <path d="M310,290 Q280,330 240,340 Q200,345 170,320" fill="none" stroke="#ffaa00" stroke-width="3" stroke-dasharray="10,6" opacity="0.7"/>
+  <text x="256" y="460" text-anchor="middle" font-family="Arial Black" font-size="32" font-weight="900" fill="#ffaa00">NITRO.DRIFT</text>
+</svg>

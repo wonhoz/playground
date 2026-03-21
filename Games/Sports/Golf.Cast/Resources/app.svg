@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#001A33"/>
+      <stop offset="60%" stop-color="#001A00"/>
+      <stop offset="100%" stop-color="#002200"/>
+    </linearGradient>
+    <linearGradient id="grass" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#00CC44"/>
+      <stop offset="100%" stop-color="#006622"/>
+    </linearGradient>
+    <radialGradient id="ball" cx="40%" cy="35%" r="60%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#DDDDDD"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Sky stars -->
+  <circle cx="100" cy="80" r="2" fill="white" opacity="0.6"/>
+  <circle cx="200" cy="60" r="1.5" fill="white" opacity="0.5"/>
+  <circle cx="350" cy="90" r="2" fill="white" opacity="0.7"/>
+  <circle cx="420" cy="70" r="1.5" fill="white" opacity="0.4"/>
+  <!-- Green terrain -->
+  <ellipse cx="256" cy="440" rx="230" ry="100" fill="url(#grass)"/>
+  <!-- Fairway arc trajectory -->
+  <path d="M130 380 Q180 180 380 220" fill="none" stroke="white" stroke-width="3" stroke-dasharray="10,6" opacity="0.5"/>
+  <!-- Flag pin -->
+  <line x1="380" y1="220" x2="380" y2="340" stroke="#CCCCCC" stroke-width="4"/>
+  <polygon points="380,220 420,238 380,256" fill="#FF2222"/>
+  <!-- Hole circle -->
+  <ellipse cx="380" cy="342" rx="20" ry="8" fill="#001A00" stroke="#00CC44" stroke-width="2"/>
+  <!-- Golf ball -->
+  <circle cx="130" cy="376" r="22" fill="url(#ball)"/>
+  <circle cx="123" cy="370" r="4" fill="#DDDDDD" opacity="0.5"/>
+  <circle cx="135" cy="365" r="3" fill="#DDDDDD" opacity="0.5"/>
+  <circle cx="130" cy="380" r="3" fill="#DDDDDD" opacity="0.5"/>
+  <circle cx="140" cy="375" r="3.5" fill="#DDDDDD" opacity="0.4"/>
+  <!-- Club shadow -->
+  <line x1="80" y1="340" x2="140" y2="390" stroke="#AAAAAA" stroke-width="5" stroke-linecap="round" opacity="0.7"/>
+</svg>

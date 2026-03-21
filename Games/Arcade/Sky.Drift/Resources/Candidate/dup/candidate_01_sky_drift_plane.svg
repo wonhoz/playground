@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#001030"/>
+      <stop offset="100%" style="stop-color:#002060"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <linearGradient id="planeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#aaddff"/>
+      <stop offset="100%" style="stop-color:#ffffff"/>
+    </linearGradient>
+    <linearGradient id="skyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#001030"/>
+      <stop offset="100%" style="stop-color:#0050a0"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#skyGrad)"/>
+  <!-- Clouds -->
+  <ellipse cx="100" cy="180" rx="55" ry="22" fill="#ffffff" opacity="0.15"/>
+  <ellipse cx="130" cy="170" rx="40" ry="18" fill="#ffffff" opacity="0.12"/>
+  <ellipse cx="80" cy="185" rx="35" ry="15" fill="#ffffff" opacity="0.10"/>
+  <ellipse cx="380" cy="220" rx="60" ry="24" fill="#ffffff" opacity="0.12"/>
+  <ellipse cx="410" cy="210" rx="45" ry="20" fill="#ffffff" opacity="0.10"/>
+  <ellipse cx="360" cy="225" rx="38" ry="16" fill="#ffffff" opacity="0.08"/>
+  <!-- Stars/particles -->
+  <circle cx="200" cy="100" r="1.5" fill="#ffffff" opacity="0.6"/>
+  <circle cx="350" cy="130" r="1" fill="#ffffff" opacity="0.5"/>
+  <circle cx="420" cy="90" r="1.5" fill="#aaddff" opacity="0.6"/>
+  <circle cx="80" cy="120" r="1" fill="#ffffff" opacity="0.5"/>
+  <!-- Plane body -->
+  <g transform="translate(256, 270) rotate(-15)" filter="url(#glow)">
+    <!-- Fuselage -->
+    <path d="M-80 0 Q-60 -8 0 -8 Q60 -8 90 0 Q60 8 0 8 Q-60 8 -80 0 Z" fill="url(#planeGrad)"/>
+    <!-- Wings -->
+    <path d="M-10 -8 L-40 -45 L20 -45 L30 -8 Z" fill="#aaddff" opacity="0.9"/>
+    <path d="M-10 8 L-40 45 L20 45 L30 8 Z" fill="#aaddff" opacity="0.9"/>
+    <!-- Tail fin -->
+    <path d="M-70 0 L-90 -30 L-55 -8 Z" fill="#88bbee"/>
+    <path d="M-70 0 L-88 18 L-55 8 Z" fill="#88bbee" opacity="0.8"/>
+    <!-- Cockpit -->
+    <ellipse cx="55" cy="0" rx="18" ry="7" fill="#0088cc" opacity="0.8"/>
+    <!-- Engine trails -->
+    <path d="M-80 -3 L-130 -8 L-125 -3 L-130 2 L-80 3" fill="#00aaff" opacity="0.4" filter="url(#glow)"/>
+  </g>
+  <!-- Drift trail -->
+  <path d="M80 310 Q160 290 236 278" stroke="#00aaff" stroke-width="5" fill="none" filter="url(#glow)" stroke-linecap="round" opacity="0.7"/>
+  <path d="M80 315 Q155 298 232 284" stroke="#aaddff" stroke-width="2.5" fill="none" filter="url(#glow)" stroke-linecap="round" opacity="0.5"/>
+  <path d="M90 303 Q160 284 230 272" stroke="#00aaff" stroke-width="2" fill="none" filter="url(#glow)" stroke-linecap="round" opacity="0.3"/>
+  <!-- Horizon glow -->
+  <ellipse cx="256" cy="430" rx="200" ry="40" fill="#0080ff" opacity="0.15" filter="url(#glow)"/>
+</svg>

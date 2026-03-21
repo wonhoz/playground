@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#002b33"/>
+      <stop offset="100%" stop-color="#004d5e"/>
+    </linearGradient>
+    <linearGradient id="trail" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#1de9b6" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#1de9b6"/>
+    </linearGradient>
+    <linearGradient id="plane" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#b2ebf2"/>
+      <stop offset="100%" stop-color="#00bcd4"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Aerial drift trail (S-curve) -->
+  <path d="M60 380 Q130 340 180 280 Q230 220 280 220 Q330 220 370 170 Q400 130 450 120"
+        stroke="url(#trail)" stroke-width="8" fill="none" stroke-linecap="round" opacity="0.7"/>
+  <path d="M60 390 Q130 355 180 295 Q230 235 280 235 Q330 235 370 185 Q400 148 450 140"
+        stroke="url(#trail)" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.4"/>
+  <!-- Plane at tip of trail -->
+  <g transform="translate(430,118) rotate(-35)">
+    <path d="M0 -30 Q8 -15 8 10 L8 30 Q4 35 0 36 Q-4 35 -8 30 L-8 10 Q-8 -15 0 -30 Z" fill="url(#plane)"/>
+    <path d="M4 -5 L36 18 L22 20 L6 5 Z" fill="#b2ebf2" opacity="0.9"/>
+    <path d="M-4 -5 L-36 18 L-22 20 L-6 5 Z" fill="#b2ebf2" opacity="0.9"/>
+    <path d="M2 28 L14 40 L-2 32 Z" fill="#b2ebf2"/>
+    <path d="M-2 28 L-14 40 L2 32 Z" fill="#b2ebf2"/>
+  </g>
+  <!-- Motion circles along trail -->
+  <circle cx="180" cy="280" r="7" fill="#1de9b6" opacity="0.7"/>
+  <circle cx="280" cy="220" r="6" fill="#1de9b6" opacity="0.55"/>
+  <circle cx="370" cy="170" r="5" fill="#1de9b6" opacity="0.4"/>
+  <!-- Cloud wisps -->
+  <ellipse cx="150" cy="320" rx="40" ry="15" fill="white" opacity="0.06"/>
+  <ellipse cx="300" cy="260" rx="50" ry="18" fill="white" opacity="0.06"/>
+  <ellipse cx="420" cy="170" rx="45" ry="16" fill="white" opacity="0.07"/>
+  <!-- Title -->
+  <text x="256" y="455" font-family="sans-serif" font-size="26" fill="#1de9b6" text-anchor="middle" font-weight="bold" letter-spacing="4" opacity="0.9">SKY.DRIFT</text>
+</svg>

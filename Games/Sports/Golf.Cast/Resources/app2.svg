@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#001030"/>
+      <stop offset="100%" stop-color="#002244"/>
+    </linearGradient>
+    <linearGradient id="water" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0066CC"/>
+      <stop offset="100%" stop-color="#003388"/>
+    </linearGradient>
+    <linearGradient id="green" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#00AA33"/>
+      <stop offset="100%" stop-color="#006622"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Water hazard -->
+  <ellipse cx="256" cy="340" rx="200" ry="80" fill="url(#water)" opacity="0.9"/>
+  <!-- Water ripples -->
+  <ellipse cx="256" cy="340" rx="160" ry="55" fill="none" stroke="#4499FF" stroke-width="2" opacity="0.4"/>
+  <ellipse cx="256" cy="340" rx="100" ry="35" fill="none" stroke="#4499FF" stroke-width="2" opacity="0.3"/>
+  <!-- Green island -->
+  <ellipse cx="380" cy="310" rx="80" ry="50" fill="url(#green)"/>
+  <!-- Flag on island -->
+  <line x1="380" y1="265" x2="380" y2="310" stroke="#AAAAAA" stroke-width="4"/>
+  <polygon points="380,265 415,278 380,291" fill="#FF4444"/>
+  <!-- Hole on island -->
+  <ellipse cx="380" cy="312" rx="14" ry="6" fill="#002200"/>
+  <!-- Ball trajectory into water -->
+  <path d="M100 200 Q160 100 220 280" fill="none" stroke="white" stroke-width="3" stroke-dasharray="8,5" opacity="0.5"/>
+  <!-- Splash -->
+  <circle cx="220" cy="310" r="25" fill="none" stroke="#88CCFF" stroke-width="3" opacity="0.6"/>
+  <circle cx="220" cy="310" r="12" fill="#88CCFF" opacity="0.4"/>
+  <!-- Ball in water -->
+  <circle cx="220" cy="312" r="10" fill="white" opacity="0.8"/>
+  <!-- Stars in sky -->
+  <circle cx="120" cy="100" r="2" fill="white" opacity="0.7"/>
+  <circle cx="300" cy="80" r="1.5" fill="white" opacity="0.5"/>
+  <circle cx="440" cy="120" r="2" fill="white" opacity="0.6"/>
+</svg>

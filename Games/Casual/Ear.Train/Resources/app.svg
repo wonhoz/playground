@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f0c29"/>
+      <stop offset="50%" style="stop-color:#302b63"/>
+      <stop offset="100%" style="stop-color:#24243e"/>
+    </linearGradient>
+    <linearGradient id="note" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#a8edea"/>
+      <stop offset="100%" style="stop-color:#fed6e3"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Staff lines -->
+  <line x1="60" y1="200" x2="452" y2="200" stroke="white" stroke-width="3" opacity="0.3"/>
+  <line x1="60" y1="230" x2="452" y2="230" stroke="white" stroke-width="3" opacity="0.3"/>
+  <line x1="60" y1="260" x2="452" y2="260" stroke="white" stroke-width="3" opacity="0.3"/>
+  <line x1="60" y1="290" x2="452" y2="290" stroke="white" stroke-width="3" opacity="0.3"/>
+  <line x1="60" y1="320" x2="452" y2="320" stroke="white" stroke-width="3" opacity="0.3"/>
+  <!-- Treble clef simplified -->
+  <path d="M110 150 C130 140 150 150 148 175 C146 200 120 210 120 240 C120 270 148 280 148 310 C148 340 120 355 100 345 C80 335 75 310 90 300 C105 290 130 300 130 320" stroke="url(#note)" stroke-width="8" fill="none" stroke-linecap="round"/>
+  <line x1="130" y1="145" x2="130" y2="370" stroke="url(#note)" stroke-width="8"/>
+  <!-- Notes on staff -->
+  <ellipse cx="220" cy="245" rx="20" ry="14" fill="url(#note)" transform="rotate(-15,220,245)"/>
+  <line x1="238" y1="245" x2="238" y2="145" stroke="url(#note)" stroke-width="7"/>
+  <ellipse cx="300" cy="215" rx="20" ry="14" fill="url(#note)" transform="rotate(-15,300,215)" opacity="0.85"/>
+  <line x1="318" y1="215" x2="318" y2="115" stroke="url(#note)" stroke-width="7" opacity="0.85"/>
+  <path d="M318 115 C340 108 360 118 355 132" stroke="url(#note)" stroke-width="7" fill="none" opacity="0.85"/>
+  <ellipse cx="385" cy="230" rx="20" ry="14" fill="url(#note)" transform="rotate(-15,385,230)" opacity="0.7"/>
+  <line x1="403" y1="230" x2="403" y2="130" stroke="url(#note)" stroke-width="7" opacity="0.7"/>
+  <!-- Ear icon small -->
+  <path d="M195 390 C175 390 158 405 158 425 C158 440 168 452 183 457 C189 459 193 454 190 449 C180 444 172 436 172 425 C172 413 182 404 195 404 C208 404 218 413 218 425 C218 435 212 444 202 449 C199 454 203 459 209 457 C224 452 234 440 234 425 C234 405 215 390 195 390Z" fill="url(#note)" opacity="0.9"/>
+</svg>

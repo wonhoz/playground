@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" style="stop-color:#2c1810"/>
+      <stop offset="100%" style="stop-color:#0a0a0a"/>
+    </radialGradient>
+    <linearGradient id="lock_g" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#bdc3c7"/>
+      <stop offset="100%" style="stop-color:#95a5a6"/>
+    </linearGradient>
+    <linearGradient id="crack" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ff6b6b"/>
+      <stop offset="100%" style="stop-color:#ee5a24"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Lock body -->
+  <rect x="130" y="240" width="252" height="210" rx="24" fill="url(#lock_g)"/>
+  <!-- Lock arc (broken) -->
+  <path d="M176 240 L176 175 C176 130 220 100 256 100" stroke="url(#lock_g)" stroke-width="32" fill="none" stroke-linecap="round"/>
+  <!-- Broken right side -->
+  <path d="M336 240 L336 175 C336 148 316 124 296 108" stroke="url(#lock_g)" stroke-width="32" fill="none" stroke-linecap="round" opacity="0.5"/>
+  <!-- Crack lines on body -->
+  <path d="M240 280 L256 320 L270 295 L290 360" stroke="url(#crack)" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M180 300 L200 330 L185 350" stroke="url(#crack)" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.7"/>
+  <!-- Keyhole -->
+  <circle cx="256" cy="330" r="26" fill="#2c1810"/>
+  <polygon points="244,350 268,350 256,385" fill="#2c1810"/>
+  <!-- Escape shine -->
+  <circle cx="300" cy="180" r="40" fill="url(#crack)" opacity="0.3"/>
+  <path d="M275 155 L325 205 M300 145 L300 215 M285 148 L315 212" stroke="url(#crack)" stroke-width="4" opacity="0.6" stroke-linecap="round"/>
+  <!-- ESCAPE label -->
+  <text x="256" y="488" font-family="monospace" font-size="26" text-anchor="middle" fill="url(#crack)" font-weight="bold">ESCAPE</text>
+</svg>

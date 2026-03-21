@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0a0a0a"/>
+      <stop offset="100%" stop-color="#1a0500"/>
+    </linearGradient>
+    <linearGradient id="flame1" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#ff0000"/>
+      <stop offset="50%" stop-color="#ff6600"/>
+      <stop offset="100%" stop-color="#ffff00"/>
+    </linearGradient>
+    <linearGradient id="flame2" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#ff2200"/>
+      <stop offset="100%" stop-color="#ffaa00"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Background glow -->
+  <ellipse cx="256" cy="320" rx="140" ry="60" fill="#ff3300" opacity="0.15"/>
+  <!-- Flame outer -->
+  <path d="M256,420 Q180,380 160,300 Q155,260 190,230 Q180,280 210,270 Q200,240 220,200 Q230,240 240,230 Q235,200 256,150 Q277,200 272,230 Q282,240 292,200 Q312,240 302,270 Q332,280 322,230 Q358,260 353,300 Q336,380 256,420 Z" fill="url(#flame1)"/>
+  <!-- Flame inner -->
+  <path d="M256,400 Q210,370 200,310 Q198,280 218,260 Q212,295 232,285 Q226,260 240,230 Q248,260 252,250 Q256,190 256,190 Q260,250 264,250 Q268,260 272,230 Q286,260 280,285 Q300,295 294,260 Q314,280 312,310 Q302,370 256,400 Z" fill="url(#flame2)"/>
+  <!-- Core -->
+  <path d="M256,380 Q230,355 225,320 Q228,300 242,290 Q238,310 252,305 Q256,270 256,270 Q260,305 272,305 Q262,310 268,290 Q282,300 287,320 Q282,355 256,380 Z" fill="#ffffff" opacity="0.9"/>
+  <!-- N letter overlay -->
+  <text x="256" y="460" text-anchor="middle" font-family="Arial Black" font-size="34" font-weight="900" fill="#ff4400">NITRO.DRIFT</text>
+</svg>

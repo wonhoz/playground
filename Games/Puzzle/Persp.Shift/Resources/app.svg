@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#050A20"/>
+      <stop offset="100%" stop-color="#0A1440"/>
+    </linearGradient>
+    <linearGradient id="top" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#5B9BFF"/>
+      <stop offset="100%" stop-color="#2962FF"/>
+    </linearGradient>
+    <linearGradient id="left" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1565C0"/>
+      <stop offset="100%" stop-color="#1E88E5"/>
+    </linearGradient>
+    <linearGradient id="right" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0D47A1"/>
+      <stop offset="100%" stop-color="#1565C0"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Large isometric cube -->
+  <!-- Top face -->
+  <polygon points="256,80 420,172 256,264 92,172" fill="url(#top)"/>
+  <!-- Left face -->
+  <polygon points="92,172 256,264 256,400 92,308" fill="url(#left)"/>
+  <!-- Right face -->
+  <polygon points="256,264 420,172 420,308 256,400" fill="url(#right)"/>
+  <!-- Cube edges -->
+  <polygon points="256,80 420,172 256,264 92,172" fill="none" stroke="#82B1FF" stroke-width="2"/>
+  <polygon points="92,172 256,264 256,400 92,308" fill="none" stroke="#2962FF" stroke-width="2"/>
+  <polygon points="256,264 420,172 420,308 256,400" fill="none" stroke="#1565C0" stroke-width="2"/>
+  <!-- Vertical edges -->
+  <line x1="92" y1="172" x2="92" y2="308" stroke="#82B1FF" stroke-width="2"/>
+  <line x1="420" y1="172" x2="420" y2="308" stroke="#82B1FF" stroke-width="2"/>
+  <line x1="256" y1="80" x2="256" y2="400" stroke="#82B1FF" stroke-width="2" opacity="0.3"/>
+  <!-- Perspective shift arrows -->
+  <path d="M60 256 L30 256 M30 256 L44 242 M30 256 L44 270" stroke="#5B9BFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <path d="M452 256 L482 256 M482 256 L468 242 M482 256 L468 270" stroke="#5B9BFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <!-- Grid lines on top face -->
+  <line x1="174" y1="126" x2="338" y2="218" stroke="#82B1FF" stroke-width="1" opacity="0.4"/>
+  <line x1="215" y1="103" x2="379" y2="195" stroke="#82B1FF" stroke-width="1" opacity="0.4"/>
+  <line x1="338" y1="218" x2="174" y2="310" stroke="#82B1FF" stroke-width="1" opacity="0.4"/>
+  <line x1="379" y1="195" x2="215" y2="287" stroke="#82B1FF" stroke-width="1" opacity="0.4"/>
+</svg>

@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A0A00"/>
+      <stop offset="100%" stop-color="#2D1500"/>
+    </linearGradient>
+    <linearGradient id="bladeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F0F9FF"/>
+      <stop offset="50%" stop-color="#BAE6FD"/>
+      <stop offset="100%" stop-color="#7DD3FC"/>
+    </linearGradient>
+    <linearGradient id="shieldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7C3AED"/>
+      <stop offset="100%" stop-color="#4C1D95"/>
+    </linearGradient>
+    <radialGradient id="swordGlow" cx="50%" cy="20%" r="60%">
+      <stop offset="0%" stop-color="#7DD3FC" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#7DD3FC" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Glow behind sword -->
+  <ellipse cx="256" cy="200" rx="100" ry="160" fill="url(#swordGlow)"/>
+  <!-- Sword (center, vertical) -->
+  <!-- Blade -->
+  <polygon points="256,60 248,300 256,320 264,300" fill="url(#bladeGrad)" stroke="#BAE6FD" stroke-width="1.5"/>
+  <!-- Crossguard -->
+  <rect x="200" y="295" width="112" height="16" rx="8" fill="#D97706" stroke="#FDE68A" stroke-width="2"/>
+  <!-- Grip -->
+  <rect x="244" y="311" width="24" height="60" rx="8" fill="#92400E" stroke="#D97706" stroke-width="2"/>
+  <!-- Pommel -->
+  <circle cx="256" cy="380" r="18" fill="#D97706" stroke="#FDE68A" stroke-width="2"/>
+  <!-- Blade shine line -->
+  <line x1="253" y1="80" x2="250" y2="280" stroke="white" stroke-width="2" opacity="0.5" stroke-linecap="round"/>
+  <!-- Shield (left) -->
+  <path d="M90,160 L170,160 L170,300 Q130,360 90,340 Q50,320 50,300 Z" fill="url(#shieldGrad)" stroke="#A855F7" stroke-width="3"/>
+  <!-- Shield emblem -->
+  <polygon points="130,190 140,215 165,215 145,230 153,255 130,240 107,255 115,230 95,215 120,215" fill="#FDE68A" opacity="0.8"/>
+  <!-- Shield boss -->
+  <circle cx="130" cy="260" r="14" fill="#6D28D9" stroke="#A855F7" stroke-width="2"/>
+  <!-- Shield (right) -->
+  <path d="M422,160 L342,160 L342,300 Q382,360 422,340 Q462,320 462,300 Z" fill="#7F1D1D" stroke="#EF4444" stroke-width="3"/>
+  <!-- Right shield emblem (dragon) -->
+  <polygon points="382,190 392,215 417,215 397,230 405,255 382,240 359,255 367,230 347,215 372,215" fill="#F97316" opacity="0.8"/>
+  <!-- Runes on ground -->
+  <text x="256" y="440" font-family="serif" font-size="18" fill="#B45309" text-anchor="middle">⚔ DUNGEON DASH ⚔</text>
+  <text x="256" y="468" font-family="sans-serif" font-size="12" fill="#78350F" text-anchor="middle">Choose your path</text>
+</svg>

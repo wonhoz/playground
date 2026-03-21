@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0d1117"/>
+      <stop offset="100%" stop-color="#161b22"/>
+    </linearGradient>
+    <linearGradient id="chip" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2d4a2d"/>
+      <stop offset="100%" stop-color="#1a2e1a"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Chip body -->
+  <rect x="156" y="156" width="200" height="200" rx="12" fill="url(#chip)" stroke="#44aa44" stroke-width="3"/>
+  <!-- Chip inner die -->
+  <rect x="180" y="180" width="152" height="152" rx="6" fill="#0d1a0d"/>
+  <!-- Grid pattern on die -->
+  <line x1="204" y1="180" x2="204" y2="332" stroke="#1a3a1a" stroke-width="1"/>
+  <line x1="228" y1="180" x2="228" y2="332" stroke="#1a3a1a" stroke-width="1"/>
+  <line x1="252" y1="180" x2="252" y2="332" stroke="#1a3a1a" stroke-width="1"/>
+  <line x1="276" y1="180" x2="276" y2="332" stroke="#1a3a1a" stroke-width="1"/>
+  <line x1="300" y1="180" x2="300" y2="332" stroke="#1a3a1a" stroke-width="1"/>
+  <line x1="180" y1="204" x2="332" y2="204" stroke="#1a3a1a" stroke-width="1"/>
+  <line x1="180" y1="228" x2="332" y2="228" stroke="#1a3a1a" stroke-width="1"/>
+  <line x1="180" y1="252" x2="332" y2="252" stroke="#1a3a1a" stroke-width="1"/>
+  <line x1="180" y1="276" x2="332" y2="276" stroke="#1a3a1a" stroke-width="1"/>
+  <line x1="180" y1="300" x2="332" y2="300" stroke="#1a3a1a" stroke-width="1"/>
+  <!-- Highlighted circuit path -->
+  <polyline points="204,204 228,204 228,228 276,228 276,276 252,276 252,300 300,300" fill="none" stroke="#00ff44" stroke-width="4" stroke-linecap="round" filter="url(#glow)"/>
+  <!-- Broken segment -->
+  <line x1="300" y1="276" x2="300" y2="300" stroke="#ff4400" stroke-width="4" stroke-dasharray="6 4"/>
+  <!-- Pins (left) -->
+  <rect x="120" y="176" width="36" height="12" rx="4" fill="#888"/>
+  <rect x="120" y="200" width="36" height="12" rx="4" fill="#888"/>
+  <rect x="120" y="224" width="36" height="12" rx="4" fill="#00ff44" filter="url(#glow)"/>
+  <rect x="120" y="248" width="36" height="12" rx="4" fill="#888"/>
+  <rect x="120" y="272" width="36" height="12" rx="4" fill="#888"/>
+  <rect x="120" y="296" width="36" height="12" rx="4" fill="#888"/>
+  <rect x="120" y="320" width="36" height="12" rx="4" fill="#888"/>
+  <!-- Pins (right) -->
+  <rect x="356" y="176" width="36" height="12" rx="4" fill="#888"/>
+  <rect x="356" y="200" width="36" height="12" rx="4" fill="#888"/>
+  <rect x="356" y="224" width="36" height="12" rx="4" fill="#888"/>
+  <rect x="356" y="248" width="36" height="12" rx="4" fill="#00ff44" filter="url(#glow)"/>
+  <rect x="356" y="272" width="36" height="12" rx="4" fill="#888"/>
+  <rect x="356" y="296" width="36" height="12" rx="4" fill="#888"/>
+  <rect x="356" y="320" width="36" height="12" rx="4" fill="#888"/>
+  <!-- Pins (top) -->
+  <rect x="176" y="120" width="12" height="36" rx="4" fill="#888"/>
+  <rect x="200" y="120" width="12" height="36" rx="4" fill="#888"/>
+  <rect x="224" y="120" width="12" height="36" rx="4" fill="#888"/>
+  <rect x="248" y="120" width="12" height="36" rx="4" fill="#00ff44" filter="url(#glow)"/>
+  <rect x="272" y="120" width="12" height="36" rx="4" fill="#888"/>
+  <rect x="296" y="120" width="12" height="36" rx="4" fill="#888"/>
+  <rect x="320" y="120" width="12" height="36" rx="4" fill="#888"/>
+  <!-- Pins (bottom) -->
+  <rect x="176" y="356" width="12" height="36" rx="4" fill="#888"/>
+  <rect x="200" y="356" width="12" height="36" rx="4" fill="#888"/>
+  <rect x="224" y="356" width="12" height="36" rx="4" fill="#888"/>
+  <rect x="248" y="356" width="12" height="36" rx="4" fill="#ff4400"/>
+  <rect x="272" y="356" width="12" height="36" rx="4" fill="#888"/>
+  <rect x="296" y="356" width="12" height="36" rx="4" fill="#888"/>
+  <rect x="320" y="356" width="12" height="36" rx="4" fill="#888"/>
+  <!-- Pin 1 notch -->
+  <circle cx="168" cy="168" r="8" fill="#0d1117"/>
+</svg>

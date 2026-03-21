@@ -2,7 +2,7 @@
 
 > 이름만 기재. 상세 내용은 각 차수 idea 파일 참조.
 > ★N차 = 해당 차수 브레인스토밍에서 처음 제안됨
-> 마지막 갱신: 2026-03-15 (30차)
+> 마지막 갱신: 2026-03-21 (31차)
 
 ---
 
@@ -33,6 +33,9 @@
 | `Num.Board` | 범용 자유 수치 지표 시계열 추적 대시보드 ★22차 |
 | `Slide.Cast` | Markdown → 오프라인 발표자 뷰 지원 프레젠테이션 슬라이드 ★23차 |
 | `Mouse.Map` | 마우스 이동 궤적·클릭 히트맵 패시브 분석기 ★23차 |
+| `Read.Flow` | RSVP 속독 훈련기 (WPM 조절·단어/청크/문장 모드, TXT/EPUB/PDF 불러오기) ★31차 |
+| `Read.Stat` | Flesch·Gunning Fog 텍스트 가독성 분석 (문장 복잡도 히트맵·어휘 다양성 TTR) ★31차 |
+| `Wall.Plan` | 벽 액자·포스터 배치 시뮬레이터 (mm 치수 입력, 못 위치 계산, PDF/SVG 출력) ★31차 |
 
 ### Apps — Tray / Automation / System
 
@@ -60,6 +63,8 @@
 | `Desk.Paint` | 시간·날씨·계절 기반 월페이퍼 자동 전환 스케줄러 ★22차 |
 | `Time.Lapse` | 화면 타임랩스 레코더 (스크린샷 → MP4/GIF) ★22차 |
 | `Hotspot.Cast` | Windows 모바일 핫스팟 원클릭 트레이 (SSID/PW 설정·QR 공유·접속 기기 모니터) ★27차 |
+| `Morse.Cast` | 모스부호 인코더/디코더 + 청음 훈련 트레이 앱 (시각·음향 재생, WPM 조절) ★31차 |
+| `Boot.Seq` | UEFI 부팅 순서 GUI 관리자 (BCDEdit 래퍼, 멀티OS 항목 편집·순서 조정·백업) ★31차 |
 
 ### Apps — Dev / Tools
 
@@ -175,6 +180,8 @@
 | `Color.Space` | sRGB/CIELAB/OKLab/OKLCh/XYZ 색공간 변환·보간·ΔE 계산 실험실 ★30차 |
 | `Map.Config` | TOML/INI/YAML/JSON/XML/.env 멀티포맷 설정 파일 통합 트리 편집기 + 포맷 변환 ★30차 |
 | `Cron.Eye` | Task Scheduler + 서비스 실행 이력 일별·주별·월별 캘린더 타임라인 히트맵 분석기 ★30차 |
+| `Patch.Forge` | 바이너리 XDelta3/BSDiff 패치 생성·적용기 (두 EXE 비교→델타 파일, 해시 검증) ★31차 |
+| `Ratio.Forge` | 디자이너 수치 계산기 (황금비·√2·8pt 그리드·픽셀↔rem·타이포 모듈라 스케일) ★31차 |
 
 ### Apps — Network / Security / Privacy
 
@@ -236,6 +243,9 @@
 | `OCR.Live` | 화면 영역 실시간 스트리밍 OCR + 번역 파이프라인 ★23차 |
 | `Tape.Delay` | 화면 타임시프트 뷰어 (지정 초 딜레이 2번 모니터 표시) ★23차 |
 | `Kiosk.Mode` | 이미지·동영상·웹 무한 루프 키오스크 디스플레이 관리자 ★23차 |
+| `Sub.Forge` | SRT/VTT/ASS 자막 타이밍·텍스트 편집기 (다중 언어 병렬, 비디오 썸네일 타임라인) ★31차 |
+| `GIF.Opt` | GIF 팔레트 양자화·중복 프레임 압축 최적화 + WebP/APNG 변환 도구 ★31차 |
+| `Crop.Guide` | 사진/영상 구도 오버레이(황금비·1/3법칙·안전영역) + 종횡비·플랫폼 프리셋 계산기 ★31차 |
 
 ### Apps — Productivity / Personal Finance / Health
 
@@ -417,6 +427,16 @@
 | `Swarm.Ant` | Simulation/Strategy | ACO 페로몬 개미 군집 시각화, 멀티 군집 경쟁 |
 | `Wave.Form` | Puzzle/Music/Educational | 사인파 조각 드래그 → 목표 합성파 완성, 푸리에 학습 |
 | `Crystal.Grow` | Simulation/Sandbox/Puzzle | 셀룰러 오토마타 결정화, 온도·농도·씨앗 위치 조절 |
+| `Tower.Hoist` | Puzzle/Logic | N기둥+색상 제약 하노이 탑 진화형, 최소 이동 챌린지, DFS 솔버 힌트 ★31차 |
+| `Dice.Keep` | Roguelike/Casual | 야추 주사위 조합 × 로그라이크 던전, 특수 주사위·유물 빌드 ★31차 |
+| `Antenna.Grid` | Puzzle/Strategy | 신호 탑 커버리지 배치 최적화, 간섭 최소화, 지형 장애물 ★31차 |
+| `String.Pin` | Puzzle/Creative | 핀 보드에 실 감아 목표 이미지 재현 (Thread Art, 색 레이어 가산 혼합) ★31차 |
+| `Snow.Cast` | Puzzle/Physics | 바람·장애물로 눈 쌓임 방향 유도→목표 실루엣 패턴 달성 ★31차 |
+| `Binary.Drop` | Educational/Arcade | 낙하 비트 잡기→8비트 목표 값 완성, 진법 변환 학습 아케이드 ★31차 |
+| `Maze.Forge` | Strategy/Puzzle | 미로 제작자 역발상 — AI 탈출자를 벽 배치로 최대한 오래 봉쇄 ★31차 |
+| `Ink.Stroke` | Puzzle/Zen | 목표 붓획 속도·방향·굵기 곡선 정밀 재현 서예 퍼즐 (DTW 채점) ★31차 |
+| `Farm.Flow` | Simulation/Puzzle | 컨베이어·관개·수확기 배치로 농장 생산 파이프라인 자동화 최적화 ★31차 |
+| `Plat.Flip` | Puzzle/Platformer | 밟으면 뒤집히는 발판 플랫포머 — 상태 역산 경로 설계 ★31차 |
 | `Balance.Act` | Casual/Physics/Arcade | 다양한 형태 블록 정밀 균형 쌓기, 바람·지진 이벤트 |
 | `Dice.Shift` | Puzzle/Logic | 격자 위 주사위 굴리기 소코반, 바닥 면 값 변경 |
 | `Maze.Craft` | Puzzle/Strategy | 역발상 미로 — 플레이어가 벽 배치, BFS/A* AI 탈출 |

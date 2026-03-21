@@ -1,7 +1,7 @@
 # Avoid — 유사 개념 그룹 (중복 주의)
 
 > 브레인스토밍 시 아래 그룹 내 변형 아이디어는 **이미 제안된 것으로 간주**한다.
-> 마지막 갱신: 2026-03-15 (30차)
+> 마지막 갱신: 2026-03-21 (31차)
 
 ---
 
@@ -198,3 +198,23 @@
 | **멀티레인 협력 리듬** | Choir.Run (3레인 독립 캐릭터 화음 형성 러너) ≠ Beat.Drop ✅ (단일 리듬 퍼포먼스) ≠ Chord.Strike ✅ (단일 리듬 퍼포먼스) ≠ Pulse.Run (BPM 온비트 무한 러너) ≠ Morse.Run ✅ (모스 해독+러너 이중 조작) |
 | **안개 / 가시성 탐험 퍼즐** | Fog.Sculpt (바람 카드로 안개 밀어내 보물 노출) ≠ Fog.Build (이동 시만 시야 기억력 안개 전쟁) ≠ Echo.Hunt (소나 핑 지형 실루엣 파악) ≠ Sonar.Run (반향 탐지 스텔스 어드벤처) |
 | **레트로 / CRT 복원 퍼즐** | Retro.Cast (CRT 신호 왜곡 슬라이더 조절 픽셀 아트 원본 복원) ≠ Cipher.Quest ✅ (역사적 암호 해독 텍스트) ≠ Pixel.Cross (노노그램 격자 픽셀 아트 완성) |
+| **자막 편집** | Sub.Forge (SRT/VTT/ASS 타이밍+다중 언어 편집기) ≠ Video.Trim (무손실 비디오 컷) ≠ OCR.Forge (문서 OCR→텍스트 추출) ≠ Manga.View ✅ (만화 리더) |
+| **속독 / 읽기 훈련** | Read.Flow (RSVP 속독 WPM 훈련기) ≠ Type.Rocket (타이핑 속도 입력 훈련) ≠ Flash.Card (SM-2 플래시카드) ≠ Dict.Cast (사전) |
+| **GIF 최적화 / 변환** | GIF.Opt (팔레트 양자화·중복 프레임·WebP 변환 최적화기) ≠ GIF.Cast (화면 GIF 녹화) ≠ Screen.Recorder ✅ (실시간 전체 녹화) ≠ Img.Forge (이미지 일괄 처리) |
+| **모스부호** | Morse.Cast (인코더/디코더+청음 훈련 트레이) ≠ Ear.Train ✅ (음정·화음 청음) ≠ Wave.Gen (사인파 신호 생성기) ≠ Signal.Cast (시각+청각 시퀀스 재현 게임) |
+| **구도 / 종횡비 설계** | Crop.Guide (구도 오버레이+종횡비 계산+플랫폼 프리셋) ≠ Pixel.Tape (화면 픽셀 줄자) ≠ Img.Compare ✅ (SSIM 품질 비교) ≠ Wall.Plan (실내 벽 배치) |
+| **바이너리 패치 생성** | Patch.Forge (XDelta3/BSDiff 패치 파일 생성·적용) ≠ Hex.Peek (헥스 에디터) ≠ Bin.View (PE 리소스 브라우저) ≠ Deep.Diff ✅ (텍스트/HEX 2-way 비교) |
+| **텍스트 가독성 분석** | Read.Stat (Flesch·Gunning Fog 가독성 지수+어휘 TTR 분석) ≠ Spell.Cast (맞춤법 오류 교정) ≠ Typo.Guard (기술 오타 감지) ≠ Read.Flow (속독 훈련) |
+| **인테리어 배치 시뮬** | Wall.Plan (벽 액자 mm 치수 배치+못 위치 계산) ≠ Draw.Board (범용 인피니트 캔버스) ≠ Pixel.Forge (픽셀 아트 에디터) ≠ Mood.Board (로컬 무드보드 이미지 배치) |
+| **디자인 수치 계산** | Ratio.Forge (황금비·타이포 스케일·8pt 그리드·픽셀↔rem 디자인 계산기) ≠ Unit.Forge (물리 단위 변환) ≠ Quick.Calc (HEX/Bin/IEEE754 개발자 계산기) ≠ Access.Check (WCAG 대비율) |
+| **UEFI 부팅 관리** | Boot.Seq (BCDEdit 래퍼 부팅 순서 GUI, 항목 추가·이름 편집·백업) ≠ Boot.Map ✅ (ETW 부팅 성능 타임라인 시각화) ≠ Sched.Cast ✅ (Task Scheduler CRUD GUI) |
+| **핀 보드 Thread Art** | String.Pin (핀 사이 직선 실 감기 이미지 재현 퍼즐) ≠ Knit.Cast (격자 실 Over/Under 텍스타일 패턴) ≠ Knot.Craft (매듭 드래그 분리) ≠ Sym.Draw (대칭 만다라 드로잉) |
+| **눈 쌓임 물리 퍼즐** | Snow.Cast (바람·장애물로 눈 쌓임 방향 유도→목표 패턴) ≠ Sand.Fall ✅ (범용 낙하 입자 샌드박스) ≠ Sand.Storm (모래폭풍 생존) ≠ Seed.Fall (씨앗 분산 목표 착지) |
+| **진법 변환 교육 게임** | Binary.Drop (낙하 비트 잡기→8비트 목표 값 완성) ≠ Bug.Hunt ✅ (소스코드 버그 탐색) ≠ Circuit.Break ✅ (전기 회로 디버깅) ≠ Grid.Hack (Logo 터틀 로봇 프로그래밍) |
+| **미로 설계 역발상** | Maze.Forge (AI 탈출자 봉쇄 미로 제작자 전략) ≠ Maze.Dread (정적 미로 탈출+시야 제한) ≠ Fog.Build (이동 시만 시야 안개 전쟁) ≠ Bloom.Maze (덩굴 성장 동적 미로) |
+| **서예 획 정밀 재현** | Ink.Stroke (붓획 속도·압력·방향 곡선 DTW 채점) ≠ Quill.Quest (역사 문자 DTW 획 순서) ≠ Sym.Draw (대칭 만다라 드로잉) ≠ Ink.Spread (잉크 BFS 전파 전략) |
+| **농장 자동화 파이프라인** | Farm.Flow (컨베이어·관개·수확기 연결 농장 생산 최적화) ≠ Auto.Build ✅ (테트로미노 자동화 퍼즐) ≠ Colony.Sim (개미 페로몬 군집 AI) ≠ Route.Fox (물류 컨베이어 소포 분류) |
+| **뒤집히는 발판 플랫포머** | Plat.Flip (밟으면 뒤집히는 발판 상태 역산 플랫포머) ≠ Phase.Gate (두 차원 전환 발판) ≠ Jelly.Jump (소프트바디 변형 발판) ≠ Trail.Blaze (파쿠르 벽달리기) |
+| **타워/스택 퍼즐** | Tower.Hoist (하노이 탑 N기둥+색상 제약 최적화) ≠ Tower.Guard ✅ (타워 디펜스 웨이브) ≠ Wobble.Stack (소프트바디 타워 쌓기) ≠ Stack.Crash ✅ (파괴 샌드박스) |
+| **주사위 전략 게임** | Dice.Keep (야추 조합 로그라이크) ≠ Card.Solo (솔리테어 카드 컬렉션) ≠ Neon.Card (덱빌딩 로그라이크) ≠ Rogue.Tile (턴제 던전 로그라이크) |
+| **커버리지 최적화 퍼즐** | Antenna.Grid (신호 탑 반경 배치, 간섭 최소) ≠ Tower.Guard ✅ (타워 배치 적 방어) ≠ Laser.Net (레이저 빔 반사 타겟) ≠ Light.Cast (단색 빔 집중) |

@@ -115,6 +115,23 @@ sealed class MainViewModel : INotifyPropertyChanged
         Selected = Items.FirstOrDefault(x => x.Id == p.Id);
     }
 
+    public void Duplicate(PromptItem p)
+    {
+        var copy = new PromptItem
+        {
+            Title   = p.Title + " (복사)",
+            Content = p.Content,
+            Tags    = p.Tags,
+            Service = p.Service,
+            Notes   = p.Notes
+        };
+        int id = _db.Insert(copy);
+        copy.Id = id;
+        Refresh();
+        Selected = Items.FirstOrDefault(x => x.Id == id);
+        StatusText = $"복제 완료: {copy.Title}";
+    }
+
     /// 현재 버전을 히스토리로 복사 후 새 버전 저장
     public void SaveAsNewVersion(PromptItem p)
     {

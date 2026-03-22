@@ -326,9 +326,12 @@
                          Margin="16,0" Height="30"
                          Text="{Binding Search, UpdateSourceTrigger=PropertyChanged}"
                          VerticalContentAlignment="Center"/>
-                <Button Grid.Column="2" Content="+ 새 프롬프트"
-                        Style="{StaticResource AccentBtn}"
-                        Click="NewPrompt_Click"/>
+                <StackPanel Grid.Column="2" Orientation="Horizontal">
+                    <Button Content="↑ 내보내기" Click="Export_Click" Margin="0,0,6,0"/>
+                    <Button Content="↓ 가져오기" Click="Import_Click" Margin="0,0,8,0"/>
+                    <Button Content="+ 새 프롬프트" Style="{StaticResource AccentBtn}"
+                            Click="NewPrompt_Click"/>
+                </StackPanel>
             </Grid>
         </Border>
 
@@ -544,6 +547,8 @@
                     <Grid>
                         <StackPanel Orientation="Horizontal">
                             <Button Content="💾  저장" Click="Save_Click"
+                                    IsEnabled="{Binding HasSelection}" Margin="0,0,8,0"/>
+                            <Button Content="⧉  복제" Click="Duplicate_Click"
                                     IsEnabled="{Binding HasSelection}" Margin="0,0,8,0"/>
                             <Button Content="📋  버전 저장" Click="SaveVersion_Click"
                                     IsEnabled="{Binding HasSelection}" Margin="0,0,8,0"/>

@@ -153,6 +153,13 @@ sealed class Database : IDisposable
         cmd.ExecuteNonQuery();
     }
 
+    public List<PromptItem> GetAll()
+    {
+        var cmd = _conn.CreateCommand();
+        cmd.CommandText = "SELECT * FROM prompts WHERE parent_id IS NULL ORDER BY is_favorite DESC, updated_at DESC";
+        return ReadItems(cmd);
+    }
+
     public List<string> GetAllTags()
     {
         var cmd = _conn.CreateCommand();

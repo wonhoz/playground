@@ -134,47 +134,47 @@ public partial class MainWindow : Window
     {
         if (!IsLoaded || _refreshing) return;
 
-        // 다른 항목 선택 전 편집 내용 자동 저장
-        if (e.RemovedItems.Count > 0 && e.RemovedItems[0] is PromptItem prev)
+        if (e.RemovedItems.Count > 0 && e.RemovedItems[0] is PromptItem prev && IsDirty(prev))
         {
-            var next = e.AddedItems.Count > 0 ? e.AddedItems[0] as PromptItem : null;
-            AutoSave(prev, next);
-            return; // AutoSave 내에서 LoadSelected 호출
-        }
+            var result = MessageBox.Show(
+                $"'{prev.Title}' 변경 내용을 저장하시겠습니까?",
+                "저장 확인", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
 
-        LoadSelected();
-    }
-
-    void AutoSave(PromptItem prev, PromptItem? next)
-    {
-        var newTitle   = TxtTitle.Text.Trim();
-        var newContent = TxtContent.Text;
-        var newTags    = TxtTags.Text.Trim();
-        var newService = TxtService.Text.Trim();
-        var newNotes   = TxtNotes.Text.Trim();
-
-        bool changed = newTitle   != prev.Title   ||
-                       newContent != prev.Content  ||
-                       newTags    != prev.Tags     ||
-                       newService != prev.Service  ||
-                       newNotes   != prev.Notes;
-
-        if (changed)
-        {
-            ApplyEditToModel(prev);
-            _refreshing = true;
-            try
+            if (result == MessageBoxResult.Cancel)
             {
-                _vm.Save(prev);
-                // Refresh 후 사용자가 선택한 next로 재설정
-                if (next != null)
-                    _vm.Selected = _vm.Items.FirstOrDefault(x => x.Id == next.Id);
+                // 선택을 이전 항목으로 되돌림
+                _refreshing = true;
+                try { LstItems.SelectedItem = prev; }
+                finally { _refreshing = false; }
+                return;
             }
-            finally { _refreshing = false; }
+
+            if (result == MessageBoxResult.Yes)
+            {
+                var nextId = e.AddedItems.Count > 0 && e.AddedItems[0] is PromptItem next
+                    ? next.Id : (int?)null;
+                ApplyEditToModel(prev);
+                _refreshing = true;
+                try
+                {
+                    _vm.Save(prev);
+                    if (nextId.HasValue)
+                        _vm.Selected = _vm.Items.FirstOrDefault(x => x.Id == nextId);
+                }
+                finally { _refreshing = false; }
+            }
+            // No: 변경 내용 버리고 진행
         }
 
         LoadSelected();
     }
+
+    bool IsDirty(PromptItem p) =>
+        TxtTitle.Text.Trim()   != p.Title   ||
+        TxtContent.Text        != p.Content  ||
+        TxtTags.Text.Trim()    != p.Tags     ||
+        TxtService.Text.Trim() != p.Service  ||
+        TxtNotes.Text.Trim()   != p.Notes;
 
     void LoadSelected()
     {
@@ -272,6 +272,83 @@ public partial class MainWindow : Window
             _vm.StatusText = "변수 채우기 완료 — 클립보드에 복사됨";
     }
 
+    void Duplicate_Click(object sender, RoutedEventArgs e)
+    {
+        if (_vm.Selected == null) return;
+        _vm.Duplicate(_vm.Selected);
+        LoadSelected();
+    }
+
+    void Export_Click(object sender, RoutedEventArgs e)
+    {
+        var dlg = new Microsoft.Win32.SaveFileDialog
+        {
+            Title      = "프롬프트 내보내기",
+            Filter     = "JSON 파일 (*.json)|*.json",
+            DefaultExt = ".json",
+            FileName   = $"prompts_{DateTime.Now:yyyyMMdd}"
+        };
+        if (dlg.ShowDialog() != true) return;
+
+        var all  = _db.GetAll();
+        var data = all.Select(p => new
+        {
+            title      = p.Title,
+            content    = p.Content,
+            tags       = p.Tags,
+            service    = p.Service,
+            isFavorite = p.IsFavorite,
+            version    = p.Version,
+            notes      = p.Notes
+        });
+        var json = System.Text.Json.JsonSerializer.Serialize(data,
+            new System.Text.Json.JsonSerializerOptions { WriteIndented = true });
+        File.WriteAllText(dlg.FileName, json, System.Text.Encoding.UTF8);
+        _vm.StatusText = $"내보내기 완료 — {all.Count}개";
+    }
+
+    void Import_Click(object sender, RoutedEventArgs e)
+    {
+        var dlg = new Microsoft.Win32.OpenFileDialog
+        {
+            Title  = "프롬프트 가져오기",
+            Filter = "JSON 파일 (*.json)|*.json"
+        };
+        if (dlg.ShowDialog() != true) return;
+
+        try
+        {
+            var json = File.ReadAllText(dlg.FileName, System.Text.Encoding.UTF8);
+            var opts = new System.Text.Json.JsonSerializerOptions
+                { PropertyNameCaseInsensitive = true };
+            var items = System.Text.Json.JsonSerializer
+                .Deserialize<List<ImportDto>>(json, opts);
+
+            if (items == null || items.Count == 0)
+            {
+                _vm.StatusText = "가져올 데이터가 없습니다";
+                return;
+            }
+            foreach (var item in items)
+                _db.Insert(new PromptItem
+                {
+                    Title      = item.Title ?? "",
+                    Content    = item.Content ?? "",
+                    Tags       = item.Tags ?? "",
+                    Service    = item.Service ?? "",
+                    IsFavorite = item.IsFavorite,
+                    Version    = item.Version > 0 ? item.Version : 1,
+                    Notes      = item.Notes ?? ""
+                });
+            _vm.Refresh();
+            _vm.StatusText = $"가져오기 완료 — {items.Count}개";
+        }
+        catch (Exception ex)
+        {
+            _vm.StatusText = $"가져오기 실패: {ex.Message}";
+        }
+    }
+
     // ── 헬퍼 ─────────────────────────────────────────────────────────────────
 
     void ApplyEditToModel(PromptItem p)
@@ -282,4 +359,8 @@ public partial class MainWindow : Window
         p.Service = TxtService.Text.Trim();
         p.Notes   = TxtNotes.Text.Trim();
     }
+
+    private record ImportDto(
+        string? Title, string? Content, string? Tags,
+        string? Service, bool IsFavorite, int Version, string? Notes);
 }

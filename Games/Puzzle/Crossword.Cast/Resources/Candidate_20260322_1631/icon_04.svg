@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg04" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0A0A20"/>
+      <stop offset="100%" stop-color="#080818"/>
+    </linearGradient>
+    <clipPath id="frame04">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg04)"/>
+  <g clip-path="url(#frame04)">
+    <!-- Layer 2: Main visual — two words crossing -->
+    <!-- Horizontal word: "WORD" in blue cells, large centered -->
+    <!-- Cell size: 190px, gap 8px, 4 letters = 4*190+3*8=784px, centered at 512 -->
+    <!-- Start x: (1024-784)/2 = 120 -->
+
+    <!-- Horizontal direction bar (blue) -->
+    <rect x="90" y="438" width="844" height="4" fill="#3949AB" opacity="0.3"/>
+
+    <!-- "WORD" cells - horizontal, row at y=380 -->
+    <rect x="120" y="380" width="185" height="185" rx="12" fill="#1A1A3A"/>
+    <rect x="120" y="380" width="185" height="185" rx="12" fill="none" stroke="#3949AB" stroke-width="4"/>
+    <text x="212" y="504" font-family="'Segoe UI',Arial" font-size="130" font-weight="900" fill="#5C6BC0" text-anchor="middle">W</text>
+
+    <rect x="313" y="380" width="185" height="185" rx="12" fill="#1A1A3A"/>
+    <rect x="313" y="380" width="185" height="185" rx="12" fill="none" stroke="#3949AB" stroke-width="4"/>
+    <text x="405" y="504" font-family="'Segoe UI',Arial" font-size="130" font-weight="900" fill="#5C6BC0" text-anchor="middle">O</text>
+
+    <!-- Intersection cell (O/R) - bright highlight -->
+    <rect x="506" y="380" width="185" height="185" rx="12" fill="#221A10"/>
+    <rect x="506" y="380" width="185" height="185" rx="12" fill="none" stroke="#FFD700" stroke-width="6"/>
+    <text x="598" y="504" font-family="'Segoe UI',Arial" font-size="130" font-weight="900" fill="#FFD700" text-anchor="middle">R</text>
+
+    <rect x="699" y="380" width="185" height="185" rx="12" fill="#1A1A3A"/>
+    <rect x="699" y="380" width="185" height="185" rx="12" fill="none" stroke="#3949AB" stroke-width="4"/>
+    <text x="791" y="504" font-family="'Segoe UI',Arial" font-size="130" font-weight="900" fill="#5C6BC0" text-anchor="middle">D</text>
+
+    <!-- Vertical direction bar (red) -->
+    <rect x="596" y="140" width="4" height="744" fill="#E53935" opacity="0.3"/>
+
+    <!-- "CROSS" cells - vertical, col at x=506 -->
+    <!-- C -->
+    <rect x="506" y="148" width="185" height="185" rx="12" fill="#2A1A1A"/>
+    <rect x="506" y="148" width="185" height="185" rx="12" fill="none" stroke="#E53935" stroke-width="4"/>
+    <text x="598" y="272" font-family="'Segoe UI',Arial" font-size="130" font-weight="900" fill="#EF5350" text-anchor="middle">C</text>
+    <!-- R already at intersection (highlighted gold) -->
+    <!-- O -->
+    <rect x="506" y="573" width="185" height="185" rx="12" fill="#2A1A1A"/>
+    <rect x="506" y="573" width="185" height="185" rx="12" fill="none" stroke="#E53935" stroke-width="4"/>
+    <text x="598" y="697" font-family="'Segoe UI',Arial" font-size="130" font-weight="900" fill="#EF5350" text-anchor="middle">O</text>
+    <!-- S -->
+    <rect x="506" y="766" width="185" height="185" rx="12" fill="#2A1A1A"/>
+    <rect x="506" y="766" width="185" height="185" rx="12" fill="none" stroke="#E53935" stroke-width="4"/>
+    <text x="598" y="890" font-family="'Segoe UI',Arial" font-size="130" font-weight="900" fill="#EF5350" text-anchor="middle">S</text>
+
+    <!-- Layer 3: Arrows showing directions -->
+    <!-- Horizontal arrow (right) -->
+    <line x1="92" y1="472" x2="900" y2="472" stroke="#5C6BC0" stroke-width="8" stroke-linecap="round" opacity="0.5"/>
+    <polygon points="900,472 870,455 870,489" fill="#5C6BC0" opacity="0.5"/>
+    <!-- Vertical arrow (down) -->
+    <line x1="598" y1="142" x2="598" y2="960" stroke="#EF5350" stroke-width="8" stroke-linecap="round" opacity="0.5"/>
+    <polygon points="598,960 581,930 615,930" fill="#EF5350" opacity="0.5"/>
+
+    <!-- Labels -->
+    <text x="108" y="366" font-family="'Segoe UI',Arial" font-size="34" font-weight="700" fill="#5C6BC0" opacity="0.7">ACROSS →</text>
+    <text x="706" y="172" font-family="'Segoe UI',Arial" font-size="34" font-weight="700" fill="#EF5350" opacity="0.7">↓ DOWN</text>
+
+    <!-- Intersection sparkle -->
+    <circle cx="598" cy="472" r="20" fill="#FFD700" opacity="0.6"/>
+    <circle cx="598" cy="472" r="10" fill="white" opacity="0.8"/>
+  </g>
+</svg>

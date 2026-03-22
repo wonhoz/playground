@@ -38,6 +38,7 @@ public partial class MainWindow : Window
         ApplySavedTheme();
         InitWebView();
         SetupPreviewTimer();
+        RefreshRecentList();
     }
 
     private void ApplySavedTheme()
@@ -708,6 +709,9 @@ public partial class MainWindow : Window
         {
             var content = await Task.Run(() => File.ReadAllText(path));
             OpenDocument(new MarkDocument { FilePath = path, Content = content });
+            _settings.AddRecentFile(path);
+            _settings.Save();
+            RefreshRecentList();
         }
         catch (Exception ex)
         {
@@ -716,6 +720,50 @@ public partial class MainWindow : Window
                 MessageBoxButton.OK, MessageBoxImage.Error);
         }
         // 정상 경로는 RenderPreview → NavigationCompleted 에서 HideLoading 호출
+    }
+
+    // ── 최근 파일 ────────────────────────────────────────────────────────
+
+    private record RecentFileItem(string FileName, string Directory, string FullPath);
+
+    private void RefreshRecentList()
+    {
+        var valid = _settings.RecentFiles.Where(File.Exists).ToList();
+        if (valid.Count != _settings.RecentFiles.Count)
+        {
+            _settings.RecentFiles = valid;
+            _settings.Save();
+        }
+
+        if (valid.Count == 0)
+        {
+            RecentFilesPanel.Visibility = Visibility.Collapsed;
+            return;
+        }
+
+        RecentFilesList.ItemsSource = valid.Select(p => new RecentFileItem(
+            System.IO.Path.GetFileName(p),
+            System.IO.Path.GetDirectoryName(p) ?? "",
+            p)).ToList();
+        RecentFilesPanel.Visibility = Visibility.Visible;
+    }
+
+    private void RecentFile_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
+    {
+        if (sender is Border b && b.DataContext is RecentFileItem item)
+            OpenFile(item.FullPath);
+    }
+
+    private void RecentFile_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+    {
+        if (sender is Border b)
+            b.Background = (System.Windows.Media.SolidColorBrush)FindResource("HoverBrush");
+    }
+
+    private void RecentFile_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+    {
+        if (sender is Border b)
+            b.Background = System.Windows.Media.Brushes.Transparent;
     }
 
     // ── 종료 ────────────────────────────────────────────────────────────

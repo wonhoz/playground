@@ -10,6 +10,17 @@ public class AppSettings
         "MarkView", "settings.json");
 
     public string Theme { get; set; } = "dark";
+    public List<string> RecentFiles { get; set; } = [];
+
+    private const int MaxRecentFiles = 10;
+
+    public void AddRecentFile(string path)
+    {
+        RecentFiles.Remove(path);
+        RecentFiles.Insert(0, path);
+        if (RecentFiles.Count > MaxRecentFiles)
+            RecentFiles.RemoveAt(RecentFiles.Count - 1);
+    }
 
     public static AppSettings Load()
     {

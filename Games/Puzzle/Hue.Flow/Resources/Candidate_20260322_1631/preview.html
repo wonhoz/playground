@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"/>
+<title>Hue.Flow — Icon Candidates</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #181825; color: #CDD6F4; font-family: 'Segoe UI', sans-serif; min-height: 100vh; padding: 40px 24px; }
+  h1 { text-align: center; font-size: 28px; font-weight: 700; letter-spacing: 2px; margin-bottom: 8px; color: #A6E3A1; text-shadow: 0 0 24px #A6E3A180; }
+  .subtitle { text-align: center; color: #585B70; font-size: 13px; margin-bottom: 42px; letter-spacing: 1px; }
+  .grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 32px; }
+  .card { background: #1E1E2E; border: 1px solid #313244; border-radius: 16px; padding: 24px; width: 220px; display: flex; flex-direction: column; align-items: center; gap: 14px; transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease; cursor: pointer; }
+  .card:hover { transform: scale(1.08); box-shadow: 0 8px 40px #A6E3A140; border-color: #A6E3A160; }
+  .card img { width: 160px; height: 160px; border-radius: 32px; }
+  .card-num { font-size: 11px; font-weight: 700; letter-spacing: 2px; color: #585B70; text-transform: uppercase; }
+  .card-concept { font-size: 12px; color: #A6ADC8; text-align: center; line-height: 1.5; min-height: 50px; }
+  .card-type { font-size: 11px; padding: 3px 10px; border-radius: 20px; font-weight: 600; letter-spacing: 1px; }
+  .type-literal { background: #1A3A5A; color: #89B4FA; }
+  .type-metaphor { background: #2A1A3A; color: #CBA6F7; }
+  .type-hybrid { background: #3A2A0A; color: #FAB387; }
+  .palette { display: flex; gap: 6px; }
+  .swatch { width: 20px; height: 20px; border-radius: 50%; border: 2px solid #313244; }
+  .card-pattern { font-size: 10px; color: #585B70; letter-spacing: 0.5px; }
+</style>
+</head>
+<body>
+<h1>🎨 HUE.FLOW</h1>
+<p class="subtitle">아이콘 후보 · Candidate_20260322_1631 · 좌상단에서 색을 확장해 30회 안에 전체 격자를 채우는 Flood-Fill 퍼즐</p>
+<div class="grid">
+
+  <div class="card">
+    <div class="card-num">icon_01</div>
+    <img src="icon_01.svg" alt="icon_01"/>
+    <div class="card-concept">좌상단 확장 중인 격자 + 6색 버튼 — 게임 장면</div>
+    <span class="card-type type-literal">literal</span>
+    <div class="card-pattern">공간 / 장면</div>
+    <div class="palette">
+      <div class="swatch" style="background:#1E1E2E;"></div>
+      <div class="swatch" style="background:#89B4FA;"></div>
+      <div class="swatch" style="background:#A6E3A1;"></div>
+      <div class="swatch" style="background:#F38BA8;"></div>
+      <div class="swatch" style="background:#FAB387;"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-num">icon_02</div>
+    <img src="icon_02.svg" alt="icon_02"/>
+    <div class="card-concept">격자 + 이동 카운터 + 6색 선택 버튼 — UI 축소판</div>
+    <span class="card-type type-literal">literal</span>
+    <div class="card-pattern">레이어드</div>
+    <div class="palette">
+      <div class="swatch" style="background:#181825;"></div>
+      <div class="swatch" style="background:#A6E3A1;"></div>
+      <div class="swatch" style="background:#89DCEB;"></div>
+      <div class="swatch" style="background:#CBA6F7;"></div>
+      <div class="swatch" style="background:#FAB387;"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-num">icon_03</div>
+    <img src="icon_03.svg" alt="icon_03"/>
+    <div class="card-concept">좌상단에서 퍼지는 색 파동 — Flood Fill 시각화</div>
+    <span class="card-type type-metaphor">metaphor</span>
+    <div class="card-pattern">기하학 추상</div>
+    <div class="palette">
+      <div class="swatch" style="background:#1A0A3A;"></div>
+      <div class="swatch" style="background:#A6E3A1;"></div>
+      <div class="swatch" style="background:#89B4FA;"></div>
+      <div class="swatch" style="background:#F38BA8;"></div>
+      <div class="swatch" style="background:#CBA6F7;"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-num">icon_04</div>
+    <img src="icon_04.svg" alt="icon_04"/>
+    <div class="card-concept">민트 그린이 대각선으로 다른 색들을 뒤덮는 확장 진행</div>
+    <span class="card-type type-metaphor">metaphor</span>
+    <div class="card-pattern">대각선 / 동적</div>
+    <div class="palette">
+      <div class="swatch" style="background:#040E08;"></div>
+      <div class="swatch" style="background:#A6E3A1;"></div>
+      <div class="swatch" style="background:#F38BA8;"></div>
+      <div class="swatch" style="background:#89DCEB;"></div>
+      <div class="swatch" style="background:#CBA6F7;"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-num">icon_05</div>
+    <img src="icon_05.svg" alt="icon_05"/>
+    <div class="card-concept">전체가 코랄 레드로 채워진 승리 순간 + NEW BEST!</div>
+    <span class="card-type type-hybrid">hybrid</span>
+    <div class="card-pattern">중앙 심볼</div>
+    <div class="palette">
+      <div class="swatch" style="background:#120808;"></div>
+      <div class="swatch" style="background:#F38BA8;"></div>
+      <div class="swatch" style="background:#FAB387;"></div>
+      <div class="swatch" style="background:#A6E3A1;"></div>
+      <div class="swatch" style="background:#89DCEB;"></div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

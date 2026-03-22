@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg03" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#1A0A3A"/>
+      <stop offset="100%" stop-color="#0A041A"/>
+    </radialGradient>
+    <clipPath id="frame03">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <!-- Layer 1: Deep purple background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg03)"/>
+  <g clip-path="url(#frame03)">
+    <!-- Layer 2: Flood wave rings expanding from top-left -->
+    <!-- The concept: concentric rings of color flood outward from top-left corner -->
+    <!-- Wave 1 (outermost, faintest) - Mauve -->
+    <circle cx="200" cy="200" r="750" fill="none" stroke="#CBA6F7" stroke-width="60" opacity="0.12"/>
+    <!-- Wave 2 - Sky blue -->
+    <circle cx="200" cy="200" r="640" fill="none" stroke="#89DCEB" stroke-width="65" opacity="0.16"/>
+    <!-- Wave 3 - Peach -->
+    <circle cx="200" cy="200" r="530" fill="none" stroke="#FAB387" stroke-width="70" opacity="0.20"/>
+    <!-- Wave 4 - Red -->
+    <circle cx="200" cy="200" r="420" fill="none" stroke="#F38BA8" stroke-width="75" opacity="0.25"/>
+    <!-- Wave 5 - Blue -->
+    <circle cx="200" cy="200" r="310" fill="none" stroke="#89B4FA" stroke-width="80" opacity="0.32"/>
+    <!-- Wave 6 (innermost, brightest) - Green -->
+    <circle cx="200" cy="200" r="200" fill="none" stroke="#A6E3A1" stroke-width="85" opacity="0.45"/>
+
+    <!-- Source point (top-left, where flood starts) -->
+    <circle cx="200" cy="200" r="80" fill="#A6E3A1" opacity="0.9"/>
+    <circle cx="200" cy="200" r="50" fill="white" opacity="0.8"/>
+
+    <!-- Grid overlay (subtle, showing the cell structure) -->
+    <!-- Horizontal lines -->
+    <line x1="80" y1="252" x2="944" y2="252" stroke="white" stroke-width="1" opacity="0.06"/>
+    <line x1="80" y1="352" x2="944" y2="352" stroke="white" stroke-width="1" opacity="0.06"/>
+    <line x1="80" y1="452" x2="944" y2="452" stroke="white" stroke-width="1" opacity="0.06"/>
+    <line x1="80" y1="552" x2="944" y2="552" stroke="white" stroke-width="1" opacity="0.06"/>
+    <line x1="80" y1="652" x2="944" y2="652" stroke="white" stroke-width="1" opacity="0.06"/>
+    <line x1="80" y1="752" x2="944" y2="752" stroke="white" stroke-width="1" opacity="0.06"/>
+    <line x1="80" y1="852" x2="944" y2="852" stroke="white" stroke-width="1" opacity="0.06"/>
+    <!-- Vertical lines -->
+    <line x1="188" y1="80" x2="188" y2="944" stroke="white" stroke-width="1" opacity="0.06"/>
+    <line x1="296" y1="80" x2="296" y2="944" stroke="white" stroke-width="1" opacity="0.06"/>
+    <line x1="404" y1="80" x2="404" y2="944" stroke="white" stroke-width="1" opacity="0.06"/>
+    <line x1="512" y1="80" x2="512" y2="944" stroke="white" stroke-width="1" opacity="0.06"/>
+    <line x1="620" y1="80" x2="620" y2="944" stroke="white" stroke-width="1" opacity="0.06"/>
+    <line x1="728" y1="80" x2="728" y2="944" stroke="white" stroke-width="1" opacity="0.06"/>
+    <line x1="836" y1="80" x2="836" y2="944" stroke="white" stroke-width="1" opacity="0.06"/>
+
+    <!-- Layer 3: Color dot indicators (bottom row, the 6 choices) -->
+    <circle cx="270" cy="880" r="45" fill="#F38BA8" opacity="0.9"/>
+    <circle cx="380" cy="880" r="45" fill="#89B4FA" opacity="0.9"/>
+    <circle cx="490" cy="880" r="52" fill="#A6E3A1"/> <!-- Active (larger) -->
+    <circle cx="490" cy="880" r="52" fill="none" stroke="white" stroke-width="6"/>
+    <circle cx="600" cy="880" r="45" fill="#FAB387" opacity="0.9"/>
+    <circle cx="710" cy="880" r="45" fill="#CBA6F7" opacity="0.9"/>
+    <circle cx="820" cy="880" r="45" fill="#89DCEB" opacity="0.9"/>
+
+    <!-- Arrow showing direction of flood expansion -->
+    <line x1="252" y1="200" x2="900" y2="200" stroke="#A6E3A1" stroke-width="8" stroke-dasharray="15,20" stroke-linecap="round" opacity="0.35"/>
+    <line x1="200" y1="252" x2="200" y2="840" stroke="#A6E3A1" stroke-width="8" stroke-dasharray="15,20" stroke-linecap="round" opacity="0.35"/>
+
+    <!-- Title text -->
+    <text x="620" y="200" font-family="'Segoe UI',Arial" font-size="62" font-weight="900" fill="#CBA6F7" text-anchor="middle" opacity="0.7">HUE FLOW</text>
+  </g>
+</svg>

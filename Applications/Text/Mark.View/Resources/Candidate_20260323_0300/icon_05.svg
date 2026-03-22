@@ -1,0 +1,46 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Mark.View | 다크/라이트 모드 스플릿 | 기하학 | 반반 -->
+  <!-- Layer 1: Background split -->
+  <rect width="1024" height="1024" rx="160" fill="#F8FAFC"/>
+  <clipPath id="darkHalf">
+    <rect x="0" y="0" width="512" height="1024" rx="0"/>
+  </clipPath>
+  <rect width="512" height="1024" rx="0" fill="#0F172A" clip-path="url(#darkHalf)"/>
+  <!-- Rounded corners on dark side -->
+  <rect width="512" height="1024" rx="160" fill="#0F172A"/>
+  <!-- Layer 2: Left dark side content -->
+  <!-- Markdown source (dark theme) -->
+  <rect x="80" y="240" width="360" height="500" rx="14" fill="#1E293B"/>
+  <text x="110" y="288" font-family="Consolas,monospace" font-size="18" fill="#569CD6"># </text>
+  <text x="136" y="288" font-family="Consolas,monospace" font-size="18" fill="#4EC9B0">Mark.View</text>
+  <text x="110" y="320" font-family="Consolas,monospace" font-size="16" fill="#569CD6">##</text>
+  <text x="148" y="320" font-family="Consolas,monospace" font-size="16" fill="#94A3B8"> 소개</text>
+  <text x="110" y="350" font-family="Consolas,monospace" font-size="14" fill="#9CDCFE">**마크다운**</text>
+  <text x="110" y="376" font-family="Consolas,monospace" font-size="14" fill="#D4D4D4"> 뷰어 앱</text>
+  <text x="110" y="406" font-family="Consolas,monospace" font-size="14" fill="#6A9955">```</text>
+  <text x="110" y="432" font-family="Consolas,monospace" font-size="14" fill="#CE9178">const x = 1</text>
+  <text x="110" y="458" font-family="Consolas,monospace" font-size="14" fill="#6A9955">```</text>
+  <text x="110" y="488" font-family="Consolas,monospace" font-size="14" fill="#D4D4D4">- 항목 1</text>
+  <text x="110" y="514" font-family="Consolas,monospace" font-size="14" fill="#D4D4D4">- 항목 2</text>
+  <!-- Dark mode label -->
+  <rect x="90" y="680" width="130" height="32" rx="8" fill="#334155"/>
+  <text x="155" y="701" font-family="Arial,sans-serif" font-size="14" fill="#94A3B8" text-anchor="middle">🌙 다크</text>
+  <!-- Right light side content (rendered) -->
+  <rect x="584" y="240" width="360" height="500" rx="14" fill="white" stroke="#E5E7EB" stroke-width="2"/>
+  <text x="614" y="288" font-family="Arial,sans-serif" font-size="24" fill="#111827" font-weight="bold">Mark.View</text>
+  <text x="614" y="326" font-family="Arial,sans-serif" font-size="18" fill="#374151" font-weight="bold">소개</text>
+  <text x="614" y="358" font-family="Arial,sans-serif" font-size="15" fill="#374151"><tspan font-weight="bold">마크다운</tspan></text>
+  <text x="665" y="358" font-family="Arial,sans-serif" font-size="15" fill="#374151"> 뷰어 앱</text>
+  <rect x="614" y="374" width="310" height="56" rx="6" fill="#F3F4F6"/>
+  <text x="628" y="400" font-family="Consolas,monospace" font-size="14" fill="#374151">const x = 1</text>
+  <text x="614" y="462" font-family="Arial,sans-serif" font-size="15" fill="#374151">• 항목 1</text>
+  <text x="614" y="490" font-family="Arial,sans-serif" font-size="15" fill="#374151">• 항목 2</text>
+  <!-- Light mode label -->
+  <rect x="804" y="680" width="120" height="32" rx="8" fill="#F3F4F6"/>
+  <text x="864" y="701" font-family="Arial,sans-serif" font-size="14" fill="#374151" text-anchor="middle">☀️ 라이트</text>
+  <!-- Layer 3: Divider line in center -->
+  <line x1="512" y1="200" x2="512" y2="824" stroke="#64748B" stroke-width="3"/>
+  <!-- Toggle icon at divider -->
+  <circle cx="512" cy="512" r="22" fill="#6366F1" stroke="white" stroke-width="3"/>
+  <text x="512" y="520" font-family="Arial,sans-serif" font-size="16" fill="white" text-anchor="middle">⇄</text>
+</svg>

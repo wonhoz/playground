@@ -1,0 +1,38 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Sand.Fall | 유리병 속 모래 | 중앙심볼 | #1A1408 -->
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="160" fill="#1A1408"/>
+  <!-- Layer 2: Glass bottle (hourglass like) -->
+  <!-- Bottle outline -->
+  <path d="M380 200 L640 200 L640 260 Q640 310 570 380 L570 600 Q640 660 640 720 L640 840 L380 840 L380 720 Q380 660 454 600 L454 380 Q380 310 380 260 Z"
+    fill="#2A2410" stroke="#8B8060" stroke-width="6"/>
+  <!-- Glass shine left -->
+  <path d="M400 220 L420 220 L400 400 Z" fill="white" opacity="0.08"/>
+  <!-- Sand inside (colored by layer) -->
+  <!-- Bottom heavy layer (sand, golden) -->
+  <clipPath id="bottleClip">
+    <path d="M382 200 L638 200 L638 260 Q638 308 568 378 L568 600 Q638 658 638 718 L638 840 L382 840 L382 718 Q382 658 456 600 L456 378 Q382 308 382 260 Z"/>
+  </clipPath>
+  <!-- Sand fill at bottom -->
+  <rect x="382" y="640" width="256" height="200" fill="#E8C878" clip-path="url(#bottleClip)"/>
+  <!-- Water layer above sand -->
+  <rect x="382" y="540" width="256" height="100" fill="#3468C8" opacity="0.7" clip-path="url(#bottleClip)"/>
+  <!-- Empty space above -->
+  <!-- Falling sand through neck -->
+  <!-- Narrow neck area -->
+  <rect x="456" y="376" width="116" height="224" fill="#0D1117" clip-path="url(#bottleClip)"/>
+  <!-- Sand falling through neck -->
+  <rect x="500" y="390" width="12" height="12" rx="2" fill="#E8C878" clip-path="url(#bottleClip)"/>
+  <rect x="498" y="420" width="10" height="10" rx="2" fill="#DEB858" clip-path="url(#bottleClip)"/>
+  <rect x="504" y="446" width="12" height="12" rx="2" fill="#E8C878" clip-path="url(#bottleClip)"/>
+  <rect x="496" y="474" width="10" height="10" rx="2" fill="#C9A040" clip-path="url(#bottleClip)"/>
+  <rect x="502" y="500" width="12" height="12" rx="2" fill="#E8C878" clip-path="url(#bottleClip)"/>
+  <rect x="498" y="526" width="10" height="10" rx="2" fill="#DEB858" clip-path="url(#bottleClip)"/>
+  <!-- Layer 3: Material count labels -->
+  <text x="512" y="680" font-family="Arial,sans-serif" font-size="16" fill="#A0751A" text-anchor="middle">모래</text>
+  <text x="512" y="596" font-family="Arial,sans-serif" font-size="16" fill="#93C5FD" text-anchor="middle">물</text>
+  <!-- Bottle cap/cork -->
+  <rect x="460" y="190" width="104" height="20" rx="6" fill="#A0751A"/>
+  <!-- Ground -->
+  <ellipse cx="512" cy="856" rx="180" ry="20" fill="#2C2010"/>
+</svg>

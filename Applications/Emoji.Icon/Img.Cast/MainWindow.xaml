@@ -282,10 +282,23 @@
             BorderThickness="0,0,0,1"
             Padding="20,14">
       <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-        <TextBlock Text="🎨"
-                   FontSize="22"
-                   VerticalAlignment="Center"
-                   Margin="0,0,10,0"/>
+        <Viewbox Width="28" Height="28"
+                 VerticalAlignment="Center"
+                 Margin="0,0,10,0">
+          <Canvas Width="30" Height="30">
+            <!-- 팔레트 외곽 -->
+            <Ellipse Canvas.Left="2" Canvas.Top="2" Width="26" Height="26"
+                     Stroke="{StaticResource AccentBrush}" StrokeThickness="1.8" Fill="Transparent"/>
+            <!-- 엄지 구멍 -->
+            <Ellipse Canvas.Left="11" Canvas.Top="16" Width="6" Height="6"
+                     Stroke="{StaticResource AccentBrush}" StrokeThickness="1.5" Fill="Transparent"/>
+            <!-- 물감 점 4개 -->
+            <Ellipse Canvas.Left="7"  Canvas.Top="8"  Width="4" Height="4" Fill="{StaticResource AccentBrush}"/>
+            <Ellipse Canvas.Left="13" Canvas.Top="6"  Width="4" Height="4" Fill="{StaticResource AccentBrush}"/>
+            <Ellipse Canvas.Left="19" Canvas.Top="8"  Width="4" Height="4" Fill="{StaticResource AccentBrush}"/>
+            <Ellipse Canvas.Left="21" Canvas.Top="14" Width="4" Height="4" Fill="{StaticResource AccentBrush}"/>
+          </Canvas>
+        </Viewbox>
         <StackPanel>
           <TextBlock Text="Img.Cast"
                      Foreground="{StaticResource TextBrush}"
@@ -398,11 +411,20 @@
         <StackPanel x:Name="DropHint"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center">
-          <TextBlock x:Name="DropIcon"
-                     Text="📂"
-                     FontSize="48"
-                     HorizontalAlignment="Center"
-                     Margin="0,0,0,12"/>
+          <Viewbox x:Name="DropIcon"
+                   Width="56" Height="56"
+                   HorizontalAlignment="Center"
+                   Margin="0,0,0,12">
+            <Canvas Width="32" Height="32">
+              <Path Data="M 3 11 C 3 9.9 3.9 9 5 9 L 12.5 9 L 14.5 12 L 27 12 C 28.1 12 29 12.9 29 14 L 29 24 C 29 25.1 28.1 26 27 26 L 5 26 C 3.9 26 3 25.1 3 24 Z"
+                    Stroke="{StaticResource AccentBrush}"
+                    StrokeThickness="1.8"
+                    StrokeLineJoin="Round"
+                    StrokeStartLineCap="Round"
+                    StrokeEndLineCap="Round"
+                    Fill="Transparent"/>
+            </Canvas>
+          </Viewbox>
           <TextBlock Text="파일 또는 폴더를 여기에 드롭"
                      Foreground="{StaticResource TextBrush}"
                      FontSize="15"

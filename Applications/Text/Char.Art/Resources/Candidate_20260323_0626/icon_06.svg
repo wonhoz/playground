@@ -1,0 +1,64 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Char.Art | 망원경 별자리 — 별을 ASCII 문자로 그리기 | 중앙심볼 | #020818 -->
+  <defs>
+    <radialGradient id="starField6" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#0A1A3A"/>
+      <stop offset="100%" stop-color="#020818"/>
+    </radialGradient>
+    <filter id="starGlow6">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="160" fill="url(#starField6)"/>
+  <!-- Layer 2: Telescope pointing up-right -->
+  <!-- Telescope body -->
+  <rect x="320" y="580" width="260" height="80" rx="12" fill="#1A2A4A" stroke="#4A6A8A" stroke-width="4" transform="rotate(-35 450 620)"/>
+  <!-- Lens cap -->
+  <ellipse cx="290" cy="450" rx="44" ry="44" fill="#1A2A4A" stroke="#22D3EE" stroke-width="4"/>
+  <ellipse cx="290" cy="450" rx="32" ry="32" fill="#0A1A2A" stroke="#22D3EE" stroke-width="2"/>
+  <!-- Eyepiece -->
+  <ellipse cx="590" cy="710" rx="30" ry="30" fill="#1A2A4A" stroke="#4A6A8A" stroke-width="3"/>
+  <ellipse cx="590" cy="710" rx="18" ry="18" fill="#0A1020"/>
+  <!-- Tripod legs -->
+  <line x1="460" y1="760" x2="350" y2="860" stroke="#2A3A5A" stroke-width="8" stroke-linecap="round"/>
+  <line x1="530" y1="760" x2="540" y2="870" stroke="#2A3A5A" stroke-width="8" stroke-linecap="round"/>
+  <line x1="500" y1="780" x2="640" y2="860" stroke="#2A3A5A" stroke-width="8" stroke-linecap="round"/>
+  <!-- Layer 3: Star constellation being observed (in view) -->
+  <!-- Stars forming Big Dipper pattern -->
+  <circle cx="290" cy="250" r="10" fill="#FFFF88" filter="url(#starGlow6)"/>
+  <circle cx="360" cy="220" r="8" fill="#FFFF88" filter="url(#starGlow6)"/>
+  <circle cx="440" cy="210" r="10" fill="#FFDDAA" filter="url(#starGlow6)"/>
+  <circle cx="520" cy="220" r="9" fill="#FFFF88" filter="url(#starGlow6)"/>
+  <circle cx="560" cy="280" r="8" fill="#FFDDAA" filter="url(#starGlow6)"/>
+  <circle cx="500" cy="310" r="10" fill="#FFFF88" filter="url(#starGlow6)"/>
+  <circle cx="420" cy="320" r="8" fill="#FFFF88" filter="url(#starGlow6)"/>
+  <!-- Constellation lines -->
+  <line x1="290" y1="250" x2="360" y2="220" stroke="#4488FF" stroke-width="2" opacity="0.5"/>
+  <line x1="360" y1="220" x2="440" y2="210" stroke="#4488FF" stroke-width="2" opacity="0.5"/>
+  <line x1="440" y1="210" x2="520" y2="220" stroke="#4488FF" stroke-width="2" opacity="0.5"/>
+  <line x1="520" y1="220" x2="560" y2="280" stroke="#4488FF" stroke-width="2" opacity="0.5"/>
+  <line x1="560" y1="280" x2="500" y2="310" stroke="#4488FF" stroke-width="2" opacity="0.5"/>
+  <line x1="500" y1="310" x2="420" y2="320" stroke="#4488FF" stroke-width="2" opacity="0.5"/>
+  <!-- ASCII representation of stars near each one -->
+  <text x="302" y="240" font-family="monospace" font-size="10" fill="#88AAFF" opacity="0.8">*</text>
+  <text x="372" y="210" font-family="monospace" font-size="10" fill="#88AAFF" opacity="0.8">.</text>
+  <text x="452" y="200" font-family="monospace" font-size="10" fill="#88AAFF" opacity="0.8">*</text>
+  <text x="532" y="210" font-family="monospace" font-size="10" fill="#88AAFF" opacity="0.8">+</text>
+  <text x="572" y="270" font-family="monospace" font-size="10" fill="#88AAFF" opacity="0.8">.</text>
+  <text x="512" y="300" font-family="monospace" font-size="10" fill="#88AAFF" opacity="0.8">*</text>
+  <text x="432" y="310" font-family="monospace" font-size="10" fill="#88AAFF" opacity="0.8">+</text>
+  <!-- ASCII art preview box (what the telescope sees converted) -->
+  <rect x="620" y="240" width="220" height="180" rx="8" fill="#0A1428" stroke="#22D3EE" stroke-width="2" opacity="0.9"/>
+  <text x="730" y="268" font-family="monospace" font-size="10" fill="#22D3EE" text-anchor="middle" opacity="0.7">ASCII VIEW</text>
+  <text x="636" y="290" font-family="monospace" font-size="11" fill="#88DDFF">. * . + . * .</text>
+  <text x="636" y="308" font-family="monospace" font-size="11" fill="#88DDFF"> * . + * . +</text>
+  <text x="636" y="326" font-family="monospace" font-size="11" fill="#FFFF88">* . ☆ . * .</text>
+  <text x="636" y="344" font-family="monospace" font-size="11" fill="#88DDFF"> . * . + * .</text>
+  <text x="636" y="362" font-family="monospace" font-size="11" fill="#88DDFF">+ . * . + *</text>
+  <text x="636" y="380" font-family="monospace" font-size="11" fill="#FFFF88">. * . ✦ . *</text>
+  <text x="636" y="398" font-family="monospace" font-size="11" fill="#88DDFF">* + . * + .</text>
+  <!-- View line from telescope to sky -->
+  <line x1="290" y1="450" x2="290" y2="280" stroke="#22D3EE" stroke-width="2" stroke-dasharray="8,6" opacity="0.4"/>
+</svg>

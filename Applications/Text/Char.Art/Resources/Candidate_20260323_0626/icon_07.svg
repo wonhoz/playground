@@ -1,0 +1,76 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Char.Art | 픽셀→문자 팔레트 변환기 — 밝기 테이블과 변환 과정 | 대각선/동적 | #1A0A00 -->
+  <defs>
+    <linearGradient id="arrowGrad7" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FF8800"/>
+      <stop offset="100%" stop-color="#FFDD00"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="160" fill="#1A0A00"/>
+  <!-- Layer 2: Pixel palette table on left -->
+  <!-- Title -->
+  <text x="260" y="220" font-family="monospace" font-size="16" fill="#FF8800" text-anchor="middle" font-weight="bold">밝기 → 문자 매핑</text>
+  <!-- Gradient bar (dark to bright) -->
+  <defs>
+    <linearGradient id="brightnessBar7" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#000000"/>
+      <stop offset="100%" stop-color="#FFFFFF"/>
+    </linearGradient>
+  </defs>
+  <rect x="160" y="235" width="200" height="24" rx="4" fill="url(#brightnessBar7)" stroke="#6A4A00" stroke-width="2"/>
+  <text x="160" y="280" font-family="monospace" font-size="11" fill="#AA7A00">어둠</text>
+  <text x="340" y="280" font-family="monospace" font-size="11" fill="#FFDD88">밝음</text>
+  <!-- Character mapping table -->
+  <!-- Row 1: darkest (0-25) -->
+  <rect x="160" y="295" width="50" height="40" fill="#000000" stroke="#3A2A00" stroke-width="1"/>
+  <text x="185" y="320" font-family="monospace" font-size="16" fill="#FFFFFF" text-anchor="middle" font-weight="bold">█</text>
+  <text x="224" y="320" font-family="monospace" font-size="10" fill="#886600">0-25</text>
+  <!-- Row 2 -->
+  <rect x="160" y="337" width="50" height="40" fill="#333333" stroke="#3A2A00" stroke-width="1"/>
+  <text x="185" y="362" font-family="monospace" font-size="16" fill="#FFFFFF" text-anchor="middle">▓</text>
+  <text x="224" y="362" font-family="monospace" font-size="10" fill="#886600">26-51</text>
+  <!-- Row 3 -->
+  <rect x="160" y="379" width="50" height="40" fill="#666666" stroke="#3A2A00" stroke-width="1"/>
+  <text x="185" y="404" font-family="monospace" font-size="16" fill="#FFFFFF" text-anchor="middle">▒</text>
+  <text x="224" y="404" font-family="monospace" font-size="10" fill="#886600">52-102</text>
+  <!-- Row 4 -->
+  <rect x="160" y="421" width="50" height="40" fill="#999999" stroke="#3A2A00" stroke-width="1"/>
+  <text x="185" y="446" font-family="monospace" font-size="16" fill="#000000" text-anchor="middle">░</text>
+  <text x="224" y="446" font-family="monospace" font-size="10" fill="#886600">103-153</text>
+  <!-- Row 5 -->
+  <rect x="160" y="463" width="50" height="40" fill="#BBBBBB" stroke="#3A2A00" stroke-width="1"/>
+  <text x="185" y="488" font-family="monospace" font-size="16" fill="#000000" text-anchor="middle">+</text>
+  <text x="224" y="488" font-family="monospace" font-size="10" fill="#886600">154-204</text>
+  <!-- Row 6 -->
+  <rect x="160" y="505" width="50" height="40" fill="#DDDDDD" stroke="#3A2A00" stroke-width="1"/>
+  <text x="185" y="530" font-family="monospace" font-size="16" fill="#000000" text-anchor="middle">-</text>
+  <text x="224" y="530" font-family="monospace" font-size="10" fill="#886600">205-230</text>
+  <!-- Row 7: brightest (230-255) -->
+  <rect x="160" y="547" width="50" height="40" fill="#FFFFFF" stroke="#3A2A00" stroke-width="1"/>
+  <text x="185" y="572" font-family="monospace" font-size="16" fill="#000000" text-anchor="middle">.</text>
+  <text x="224" y="572" font-family="monospace" font-size="10" fill="#886600">231-255</text>
+  <!-- Conversion arrow -->
+  <line x1="460" y1="500" x2="560" y2="500" stroke="url(#arrowGrad7)" stroke-width="10" stroke-linecap="round"/>
+  <polygon points="560,482 600,500 560,518" fill="#FFDD00"/>
+  <text x="510" y="540" font-family="monospace" font-size="14" fill="#FF8800" text-anchor="middle">변환</text>
+  <!-- Layer 3: ASCII output panel on right -->
+  <rect x="620" y="220" width="240" height="400" rx="8" fill="#0A0800" stroke="#FF8800" stroke-width="3"/>
+  <text x="740" y="250" font-family="monospace" font-size="12" fill="#FF8800" text-anchor="middle">ASCII 출력</text>
+  <text x="636" y="278" font-family="monospace" font-size="11" fill="#FFCC00">▓▓▒░░ + . . + ░░▒▓</text>
+  <text x="636" y="296" font-family="monospace" font-size="11" fill="#FFCC00">▒▒ █ ░ + ░ █ ░░▒▒</text>
+  <text x="636" y="314" font-family="monospace" font-size="11" fill="#FFCC00">░░ + ▒ █ ▒ + ░░░░</text>
+  <text x="636" y="332" font-family="monospace" font-size="11" fill="#FFCC00">+ . ░▒█▒░ . + . .</text>
+  <text x="636" y="350" font-family="monospace" font-size="11" fill="#FFCC00">. + ░ ▒▓▒░ + . +</text>
+  <text x="636" y="368" font-family="monospace" font-size="11" fill="#FFCC00">░▒▓▓▓▒░ . . . ░▒▓</text>
+  <text x="636" y="386" font-family="monospace" font-size="11" fill="#FFCC00">▒▓ █ ▓▒ ░ + ░ ▒▓</text>
+  <text x="636" y="404" font-family="monospace" font-size="11" fill="#FFCC00">░░▒▒░░ . + . ░░▒▒</text>
+  <text x="636" y="422" font-family="monospace" font-size="11" fill="#FFCC00">+ . . ░▒▓▒░ . + .</text>
+  <text x="636" y="440" font-family="monospace" font-size="11" fill="#FFCC00">▓▒░ + . . + ░▒▓▓</text>
+  <text x="636" y="458" font-family="monospace" font-size="11" fill="#FFCC00">█▓▒░░ + . + ░░▒▓█</text>
+  <text x="636" y="476" font-family="monospace" font-size="11" fill="#FFCC00">▓▒ + ░░▒▒░░ + ▒▓</text>
+  <text x="636" y="494" font-family="monospace" font-size="11" fill="#FFCC00">▒░ + . . . + ░▒▒</text>
+  <text x="636" y="512" font-family="monospace" font-size="11" fill="#FFCC00">░ + . . . . . + ░</text>
+  <!-- Zoom indicator -->
+  <text x="740" y="596" font-family="monospace" font-size="12" fill="#886600" text-anchor="middle">72×48 chars</text>
+</svg>

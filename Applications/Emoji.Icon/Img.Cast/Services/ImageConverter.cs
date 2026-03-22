@@ -1,4 +1,5 @@
 using System.IO;
+using System.Text;
 using SkiaSharp;
 using Svg.Skia;
 
@@ -164,6 +165,23 @@ public static class ImageConverter
     }
 
     static SKBitmap LoadSvgAsBitmap(string path, int size)
+    {
+        // SVG 전처리: 8자리 hex 색상 변환 + feDropShadow 확장
+        string svgText    = File.ReadAllText(path, Encoding.UTF8);
+        string processed  = SvgPreprocessor.Process(svgText);
+        string tempPath   = Path.Combine(Path.GetTempPath(), $"imgcast_{Guid.NewGuid():N}.svg");
+        try
+        {
+            File.WriteAllText(tempPath, processed, new UTF8Encoding(false));
+            return RenderSvg(tempPath, size);
+        }
+        finally
+        {
+            try { File.Delete(tempPath); } catch { }
+        }
+    }
+
+    static SKBitmap RenderSvg(string path, int size)
     {
         var svg = new SKSvg();
         svg.Load(path);

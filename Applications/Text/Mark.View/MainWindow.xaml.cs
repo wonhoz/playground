@@ -754,6 +754,8 @@ public partial class MainWindow : Window
         { SetTocVisible(!_isTocVisible); e.Handled = true; }
         else if (e.Key == Key.Tab && Keyboard.Modifiers == ModifierKeys.Control && _docs.Count > 1)
         { SwitchTo((_activeIndex + 1) % _docs.Count); e.Handled = true; }
+        else if (e.Key == Key.Tab && Keyboard.Modifiers == (ModifierKeys.Control | ModifierKeys.Shift) && _docs.Count > 1)
+        { SwitchTo((_activeIndex - 1 + _docs.Count) % _docs.Count); e.Handled = true; }
         else if (e.Key == Key.P && Keyboard.Modifiers == ModifierKeys.Control)
         { BtnExportPdf_Click(this, new RoutedEventArgs()); e.Handled = true; }
     }

@@ -109,10 +109,15 @@
             <TextBlock Text="&#x2630;" FontSize="14"/>
           </Button>
           <Separator Width="1" Height="20" Margin="4,0" Background="{StaticResource BorderBrush}"/>
-          <!-- 내보내기 -->
+          <!-- HTML 내보내기 -->
           <Button Style="{StaticResource IconButton}" Click="BtnExportHtml_Click"
                   ToolTip="HTML로 내보내기 (Ctrl+B)" Margin="0,0,2,0" Padding="8,5">
             <TextBlock Text="&#x1F4E4;" FontSize="14"/>
+          </Button>
+          <!-- PDF 내보내기 -->
+          <Button Style="{StaticResource IconButton}" Click="BtnExportPdf_Click"
+                  ToolTip="PDF로 내보내기 (Ctrl+P)" Margin="0,0,2,0" Padding="8,5">
+            <TextBlock Text="&#x1F4CB;" FontSize="14"/>
           </Button>
           <!-- 새로고침 -->
           <Button Style="{StaticResource IconButton}" Click="BtnReload_Click"

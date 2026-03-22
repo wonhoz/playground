@@ -603,6 +603,35 @@ public partial class MainWindow : Window
         else RenderPreview();
     }
 
+    private async void BtnExportPdf_Click(object sender, RoutedEventArgs e)
+    {
+        if (_activeIndex < 0 || !_webViewReady) return;
+        var doc = _docs[_activeIndex];
+        var dlg = new SaveFileDialog
+        {
+            Filter = "PDF 파일 (*.pdf)|*.pdf",
+            DefaultExt = ".pdf",
+            FileName = System.IO.Path.GetFileNameWithoutExtension(doc.FileName) + ".pdf",
+        };
+        if (doc.Directory != null) dlg.InitialDirectory = doc.Directory;
+        if (dlg.ShowDialog() != true) return;
+
+        await ShowLoadingAsync("PDF 내보내기 중...");
+        try
+        {
+            await Viewer.CoreWebView2.PrintToPdfAsync(dlg.FileName);
+            HideLoading();
+            MessageBox.Show($"PDF 내보내기 완료:\n{dlg.FileName}", "완료",
+                MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+        catch (Exception ex)
+        {
+            HideLoading();
+            MessageBox.Show($"PDF 내보내기 실패:\n{ex.Message}", "오류",
+                MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+    }
+
     private async void BtnExportHtml_Click(object sender, RoutedEventArgs e)
     {
         if (_activeIndex < 0) return;
@@ -725,6 +754,8 @@ public partial class MainWindow : Window
         { SetTocVisible(!_isTocVisible); e.Handled = true; }
         else if (e.Key == Key.Tab && Keyboard.Modifiers == ModifierKeys.Control && _docs.Count > 1)
         { SwitchTo((_activeIndex + 1) % _docs.Count); e.Handled = true; }
+        else if (e.Key == Key.P && Keyboard.Modifiers == ModifierKeys.Control)
+        { BtnExportPdf_Click(this, new RoutedEventArgs()); e.Handled = true; }
     }
 
     // ── 드래그 앤 드롭 ───────────────────────────────────────────────────

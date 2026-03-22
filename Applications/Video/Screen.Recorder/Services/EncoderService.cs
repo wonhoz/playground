@@ -24,46 +24,30 @@ public static class EncoderService
                 "  • choco install ffmpeg\n" +
                 "  • https://ffmpeg.org/download.html");
 
-        // 프레임 파일을 연번 심볼릭 링크로 정리 (FFmpeg 입력용)
-        var tempDir = Path.Combine(Path.GetTempPath(), $"sr_enc_{Guid.NewGuid():N}");
-        Directory.CreateDirectory(tempDir);
+        // 프레임이 이미 frame_000000.png 연번으로 저장된 폴더를 직접 사용
+        var inputDir = Path.GetDirectoryName(framePaths[0])!;
+        var inputPattern = Path.Combine(inputDir, "frame_%06d.png");
 
-        try
+        // FFmpeg 인코딩: H.264, yuv420p (호환성), CRF 23 (적정 품질)
+        var args = $"-framerate {fps} -i \"{inputPattern}\" " +
+                   $"-c:v libx264 -pix_fmt yuv420p -crf 23 -preset fast " +
+                   $"-movflags +faststart -y \"{outputPath}\"";
+
+        var psi = new ProcessStartInfo
         {
-            // 프레임 파일 복사 (연번)
-            for (var i = 0; i < framePaths.Count; i++)
-            {
-                var dest = Path.Combine(tempDir, $"frame_{i:D6}.png");
-                File.Copy(framePaths[i], dest);
-            }
+            FileName = ffmpegPath,
+            Arguments = args,
+            UseShellExecute = false,
+            CreateNoWindow = true,
+            RedirectStandardError = true
+        };
 
-            var inputPattern = Path.Combine(tempDir, "frame_%06d.png");
+        using var process = Process.Start(psi) ?? throw new InvalidOperationException("FFmpeg 프로세스를 시작할 수 없습니다.");
+        var stderr = await process.StandardError.ReadToEndAsync();
+        await process.WaitForExitAsync();
 
-            // FFmpeg 인코딩: H.264, yuv420p (호환성), CRF 23 (적정 품질)
-            var args = $"-framerate {fps} -i \"{inputPattern}\" " +
-                       $"-c:v libx264 -pix_fmt yuv420p -crf 23 -preset fast " +
-                       $"-movflags +faststart -y \"{outputPath}\"";
-
-            var psi = new ProcessStartInfo
-            {
-                FileName = ffmpegPath,
-                Arguments = args,
-                UseShellExecute = false,
-                CreateNoWindow = true,
-                RedirectStandardError = true
-            };
-
-            using var process = Process.Start(psi) ?? throw new InvalidOperationException("FFmpeg 프로세스를 시작할 수 없습니다.");
-            var stderr = await process.StandardError.ReadToEndAsync();
-            await process.WaitForExitAsync();
-
-            if (process.ExitCode != 0)
-                throw new InvalidOperationException($"FFmpeg 인코딩 실패 (exit {process.ExitCode}):\n{stderr[..Math.Min(stderr.Length, 500)]}");
-        }
-        finally
-        {
-            try { Directory.Delete(tempDir, true); } catch { }
-        }
+        if (process.ExitCode != 0)
+            throw new InvalidOperationException($"FFmpeg 인코딩 실패 (exit {process.ExitCode}):\n{stderr[..Math.Min(stderr.Length, 500)]}");
     }
 
     /// <summary>프레임 시퀀스를 GIF로 인코딩 (네이티브 System.Drawing)</summary>
@@ -85,20 +69,13 @@ public static class EncoderService
 
     private static async Task EncodeGifWithFfmpegAsync(string ffmpegPath, List<string> framePaths, int fps, string outputPath)
     {
-        var tempDir = Path.Combine(Path.GetTempPath(), $"sr_gif_{Guid.NewGuid():N}");
-        Directory.CreateDirectory(tempDir);
+        // 프레임이 이미 frame_000000.png 연번으로 저장된 폴더를 직접 사용
+        var inputDir = Path.GetDirectoryName(framePaths[0])!;
+        var inputPattern = Path.Combine(inputDir, "frame_%06d.png");
+        var palettePath = Path.Combine(inputDir, "palette.png");
 
         try
         {
-            for (var i = 0; i < framePaths.Count; i++)
-            {
-                var dest = Path.Combine(tempDir, $"frame_{i:D6}.png");
-                File.Copy(framePaths[i], dest);
-            }
-
-            var inputPattern = Path.Combine(tempDir, "frame_%06d.png");
-            var palettePath = Path.Combine(tempDir, "palette.png");
-
             // 2-pass: 팔레트 생성 → GIF 인코딩 (고품질)
             var paletteArgs = $"-framerate {fps} -i \"{inputPattern}\" " +
                               $"-vf \"fps={fps},palettegen=stats_mode=diff\" -y \"{palettePath}\"";
@@ -111,7 +88,7 @@ public static class EncoderService
         }
         finally
         {
-            try { Directory.Delete(tempDir, true); } catch { }
+            try { File.Delete(palettePath); } catch { }
         }
     }
 

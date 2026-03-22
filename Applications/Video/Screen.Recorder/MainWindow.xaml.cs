@@ -51,6 +51,9 @@ public partial class MainWindow : Window
         // 저장된 포맷 복원
         FormatCombo.SelectedIndex = _settings.OutputFormat == "gif" ? 1 : 0;
 
+        // 저장된 커서 설정 복원
+        CursorCheckBox.IsChecked = _settings.ShowCursor;
+
         // 저장된 영역 복원
         if (_settings.LastRegionWidth > 0 && _settings.LastRegionHeight > 0)
         {
@@ -310,6 +313,13 @@ public partial class MainWindow : Window
         _settings.Save();
     }
 
+    private void CursorCheckBox_Click(object sender, RoutedEventArgs e)
+    {
+        if (!IsLoaded) return;
+        _settings.ShowCursor = CursorCheckBox.IsChecked == true;
+        _settings.Save();
+    }
+
     private int GetSelectedFps()
     {
         return FpsCombo.SelectedIndex switch
@@ -413,24 +423,31 @@ public partial class MainWindow : Window
             StatusText.Text = "인코딩 중...";
             StatusDot.Fill = ColorBrush("#F39C12");
 
+            string? completedPath = null;
             try
             {
-                var outputPath = await _captureService!.StopAsync();
+                completedPath = await _captureService!.StopAsync();
                 SetState(RecordState.Idle);
-
-                var result = System.Windows.MessageBox.Show(
-                    $"녹화 완료!\n{outputPath}\n\n파일을 열까요?",
-                    "Screen.Recorder", MessageBoxButton.YesNo, MessageBoxImage.Information);
-
-                if (result == MessageBoxResult.Yes)
-                {
-                    Process.Start(new ProcessStartInfo(outputPath) { UseShellExecute = true });
-                }
             }
             catch (Exception ex)
             {
                 System.Windows.MessageBox.Show($"인코딩 오류: {ex.Message}", "오류", MessageBoxButton.OK, MessageBoxImage.Error);
                 SetState(RecordState.Idle);
+            }
+            finally
+            {
+                _captureService?.Dispose();
+                _captureService = null;
+            }
+
+            if (completedPath is not null)
+            {
+                var result = System.Windows.MessageBox.Show(
+                    $"녹화 완료!\n{completedPath}\n\n파일을 열까요?",
+                    "Screen.Recorder", MessageBoxButton.YesNo, MessageBoxImage.Information);
+
+                if (result == MessageBoxResult.Yes)
+                    Process.Start(new ProcessStartInfo(completedPath) { UseShellExecute = true });
             }
         }
     }

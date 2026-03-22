@@ -39,6 +39,11 @@ record BreadcrumbItem(string Name, DiskItem? Item);
 
 public partial class MainWindow : Window
 {
+    // ── 설정 경로 ────────────────────────────────────────────────────
+    private static readonly string SettingsFile = System.IO.Path.Combine(
+        Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+        "DiskLens", "settings.txt");
+
     // ── 상태 ─────────────────────────────────────────────────────────
     private DiskItem? _root;
     private DiskItem? _currentRoot;
@@ -66,6 +71,31 @@ public partial class MainWindow : Window
         LoadDrives();
         Breadcrumb.ItemsSource = _breadcrumbs;
         SetViewMode("Tree");
+        RestoreLastPath();
+    }
+
+    private void RestoreLastPath()
+    {
+        try
+        {
+            if (File.Exists(SettingsFile))
+            {
+                var saved = File.ReadAllText(SettingsFile).Trim();
+                if (!string.IsNullOrEmpty(saved) && Directory.Exists(saved))
+                    TxtPath.Text = saved;
+            }
+        }
+        catch { }
+    }
+
+    private void SaveLastPath(string path)
+    {
+        try
+        {
+            Directory.CreateDirectory(System.IO.Path.GetDirectoryName(SettingsFile)!);
+            File.WriteAllText(SettingsFile, path);
+        }
+        catch { }
     }
 
     private void OnKeyDown(object sender, KeyEventArgs e)
@@ -145,6 +175,7 @@ public partial class MainWindow : Window
             UpdateBreadcrumbs(_root);
             ApplySortAndDisplay(_root);
             UpdateStatusBar(_root, path);
+            SaveLastPath(path);
 
             TbScanStatus.Text = $"완료: {_root.FileCount:N0}개 파일, {_root.FolderCount:N0}개 폴더  ({sw.Elapsed.TotalSeconds:F1}초)";
 
@@ -207,8 +238,10 @@ public partial class MainWindow : Window
             "Modified" => _sortAscending ? items.OrderBy(i => i.LastModified) : items.OrderByDescending(i => i.LastModified),
             _ => items.OrderByDescending(i => i.Size),
         };
-        // 폴더 우선
-        return [.. q.OrderByDescending(i => i.IsDirectory).ThenBy(i => q.ToList().IndexOf(i))];
+        // 폴더 우선 (정렬 순서 유지)
+        var dirs = q.Where(i => i.IsDirectory);
+        var files = q.Where(i => !i.IsDirectory);
+        return [.. dirs.Concat(files)];
     }
 
     private void Header_Click(object sender, RoutedEventArgs e)
@@ -435,11 +468,7 @@ public partial class MainWindow : Window
             double step = horizontal ? y : x;
             foreach (var ri in row)
             {
-                double ratio = rowSize > 0 ? (double)ri.Size / rowSize : 0;
-                double len = ratio * shortSide;
-                double thick = rowSize > 0 ? (horizontal ? w * rowSize / totalSize : h * rowSize / totalSize) : 0;
-                // actually compute per-item
-                thick = rowSize > 0 ? (horizontal
+                double thick = rowSize > 0 ? (horizontal
                     ? (w * (double)rowSize / totalSize)
                     : (h * (double)rowSize / totalSize)) : 0;
 
@@ -591,8 +620,10 @@ public partial class MainWindow : Window
             else
                 File.Delete(item.FullPath);
 
-            // 트리에서 제거
+            // 트리에서 제거 및 부모 통계 갱신
             RemoveFromParent(item);
+            if (_root != null) RecalcStats(_root);
+            UpdateStatusBar(_currentRoot ?? _root, TxtPath.Text);
             TbScanStatus.Text = $"삭제 완료: {item.Name}";
         }
         catch (Exception ex)
@@ -622,6 +653,28 @@ public partial class MainWindow : Window
         foreach (var child in parent.Children)
             if (RemoveChildRecursive(child, target)) return true;
         return false;
+    }
+
+    // 삭제 후 트리 전체 통계 재계산
+    private static void RecalcStats(DiskItem item)
+    {
+        if (!item.IsDirectory) return;
+        long size = 0, alloc = 0, files = 0, folders = 0;
+        foreach (var child in item.Children)
+        {
+            RecalcStats(child);
+            size += child.Size;
+            alloc += child.AllocatedSize;
+            files += child.IsDirectory ? child.FileCount : 1;
+            folders += child.IsDirectory ? child.FolderCount + 1 : 0;
+        }
+        item.Size = size;
+        item.AllocatedSize = alloc;
+        item.FileCount = files;
+        item.FolderCount = folders;
+        if (size > 0)
+            foreach (var child in item.Children)
+                child.PercentOfParent = child.Size * 100.0 / size;
     }
 
     // ═════════════════════════════════════════════════════════════════

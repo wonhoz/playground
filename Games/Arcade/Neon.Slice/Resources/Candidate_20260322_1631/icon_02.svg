@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg02" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#2A0E52"/>
+      <stop offset="100%" stop-color="#0E0420"/>
+    </radialGradient>
+    <radialGradient id="bomb02" cx="35%" cy="30%" r="60%">
+      <stop offset="0%" stop-color="#333"/>
+      <stop offset="100%" stop-color="#080808"/>
+    </radialGradient>
+    <clipPath id="frame02">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+    <!-- Pentagon upper-left half clip -->
+    <clipPath id="pentUpper02">
+      <rect x="0" y="0" width="1024" height="495"/>
+    </clipPath>
+    <!-- Pentagon lower-right half clip -->
+    <clipPath id="pentLower02">
+      <rect x="0" y="505" width="1024" height="519"/>
+    </clipPath>
+  </defs>
+
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg02)"/>
+
+  <g clip-path="url(#frame02)">
+    <!-- Layer 2: Sliced pentagon (two halves separating at the cut) -->
+    <!-- Upper half - shifted slightly up-left -->
+    <g transform="translate(-18, -22)" clip-path="url(#pentUpper02)">
+      <polygon points="512,248 680,372 616,560 408,560 344,372" fill="#AAFF44" opacity="0.95"/>
+    </g>
+    <!-- Lower half - shifted slightly down-right -->
+    <g transform="translate(18, 22)" clip-path="url(#pentLower02)">
+      <polygon points="512,248 680,372 616,560 408,560 344,372" fill="#88EE22" opacity="0.95"/>
+    </g>
+
+    <!-- Small floating shapes - cyan circle -->
+    <circle cx="220" cy="300" r="72" fill="#00CFFF" opacity="0.85"/>
+    <!-- Small triangle - lower right area -->
+    <polygon points="820,640 920,640 870,740" fill="#FF66AA" opacity="0.9"/>
+    <!-- Small square - upper right -->
+    <rect x="790" y="210" width="80" height="80" rx="8" fill="#FF8C00" opacity="0.85" transform="rotate(20 830 250)"/>
+
+    <!-- Sparkle particles at the cut point -->
+    <!-- Left sparkles -->
+    <circle cx="380" cy="500" r="10" fill="#CCFF44"/>
+    <circle cx="355" cy="475" r="7" fill="#AAFF44" opacity="0.7"/>
+    <circle cx="335" cy="510" r="5" fill="white" opacity="0.6"/>
+    <!-- Right sparkles -->
+    <circle cx="648" cy="508" r="10" fill="#CCFF44"/>
+    <circle cx="672" cy="483" r="7" fill="#AAFF44" opacity="0.7"/>
+    <circle cx="690" cy="518" r="5" fill="white" opacity="0.6"/>
+    <!-- Center sparkles -->
+    <circle cx="512" cy="494" r="14" fill="white" opacity="0.5"/>
+    <circle cx="490" cy="500" r="8" fill="#DDFF88" opacity="0.4"/>
+    <circle cx="534" cy="500" r="8" fill="#DDFF88" opacity="0.4"/>
+
+    <!-- Bomb - lower left (avoid!) -->
+    <circle cx="215" cy="805" r="76" fill="url(#bomb02)"/>
+    <ellipse cx="196" cy="783" rx="18" ry="13" fill="white" opacity="0.12"/>
+    <path d="M215,729 Q242,700 258,675" stroke="#666" stroke-width="12" fill="none" stroke-linecap="round"/>
+    <ellipse cx="263" cy="667" rx="11" ry="16" fill="#FF6A00" transform="rotate(-25 263 667)"/>
+    <ellipse cx="263" cy="667" rx="6" ry="9" fill="#FFE040" transform="rotate(-25 263 667)"/>
+
+    <!-- Layer 3: Slash line (lime green, sharp and bold) -->
+    <!-- Outer glow -->
+    <line x1="160" y1="728" x2="864" y2="268" stroke="#AAFF44" stroke-width="55" stroke-linecap="round" opacity="0.15"/>
+    <!-- Inner glow -->
+    <line x1="160" y1="728" x2="864" y2="268" stroke="#BBFF55" stroke-width="28" stroke-linecap="round" opacity="0.38"/>
+    <!-- White core -->
+    <line x1="160" y1="728" x2="864" y2="268" stroke="white" stroke-width="12" stroke-linecap="round"/>
+    <!-- Trail -->
+    <line x1="175" y1="760" x2="880" y2="300" stroke="#AAFF44" stroke-width="4" stroke-linecap="round" opacity="0.5"/>
+    <line x1="145" y1="696" x2="848" y2="236" stroke="#AAFF44" stroke-width="4" stroke-linecap="round" opacity="0.38"/>
+  </g>
+</svg>

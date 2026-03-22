@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg05" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#FF6A00"/>
+      <stop offset="60%" stop-color="#DD2200"/>
+      <stop offset="100%" stop-color="#7A0800"/>
+    </radialGradient>
+    <radialGradient id="bomb05" cx="35%" cy="30%" r="60%">
+      <stop offset="0%" stop-color="#2A2A2A"/>
+      <stop offset="100%" stop-color="#060606"/>
+    </radialGradient>
+    <clipPath id="frame05">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+    <!-- Pentagon upper-left clip (above the slash line) -->
+    <clipPath id="pent05upper">
+      <!-- Slash line: from (150,870) to (874,146), y = 870 + (146-870)*(x-150)/(874-150) = 870 - 724/724*(x-150) = 1020 - x -->
+      <!-- y = -x + 1020, so upper region: y < -x + 1020 -->
+      <polygon points="0,0 1024,0 1024,1024 0,1024 0,0"/>
+    </clipPath>
+  </defs>
+
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg05)"/>
+
+  <g clip-path="url(#frame05)">
+    <!-- Pentagon upper half (slash goes diagonally, so we split with clipPath trick) -->
+    <!-- Pentagon centered at 512,490 radius=230 -->
+    <!-- Points: 512,260  726,420  642,660  382,660  298,420 -->
+
+    <!-- Upper-left half of pentagon (above slash: y < -x + 1020 approx) -->
+    <!-- Using clip approach: upper portion shifts slightly up-left -->
+    <g transform="translate(-16,-20)">
+      <polygon points="512,260 726,420 642,660 382,660 298,420" fill="white" opacity="0.95"/>
+    </g>
+    <!-- Lower-right half shifts slightly down-right, slightly darker -->
+    <g transform="translate(16,20)">
+      <polygon points="512,260 726,420 642,660 382,660 298,420" fill="#FFDDCC" opacity="0.85"/>
+    </g>
+    <!-- White re-draw of pentagon outline for full shape feel -->
+    <polygon points="512,260 726,420 642,660 382,660 298,420" fill="none" stroke="white" stroke-width="8" opacity="0.3"/>
+
+    <!-- Pentagon inner details (cross lines for depth) -->
+    <polygon points="512,310 686,440 622,640 402,640 338,440" fill="none" stroke="white" stroke-width="3" opacity="0.18"/>
+
+    <!-- Cut debris/particles -->
+    <circle cx="340" cy="420" r="12" fill="#FFE080" opacity="0.85"/>
+    <circle cx="320" cy="460" r="8" fill="white" opacity="0.65"/>
+    <circle cx="700" cy="530" r="12" fill="#FFE080" opacity="0.85"/>
+    <circle cx="724" cy="495" r="8" fill="white" opacity="0.65"/>
+    <circle cx="512" cy="480" r="18" fill="white" opacity="0.5"/>
+
+    <!-- Small triangle (upper left floating) -->
+    <polygon points="215,245 310,245 262,335" fill="#FFFF80" opacity="0.85"/>
+    <!-- Small circle (upper right floating) -->
+    <circle cx="800" cy="285" r="58" fill="#FFAAAA" opacity="0.8"/>
+
+    <!-- Bomb - lower left (clearly visible: AVOID!) -->
+    <circle cx="230" cy="800" r="82" fill="url(#bomb05)"/>
+    <ellipse cx="210" cy="778" rx="19" ry="14" fill="white" opacity="0.12"/>
+    <path d="M230,718 Q256,686 272,660" stroke="#555" stroke-width="13" fill="none" stroke-linecap="round"/>
+    <ellipse cx="278" cy="652" rx="11" ry="16" fill="#FF6A00" transform="rotate(-25 278 652)"/>
+    <ellipse cx="278" cy="652" rx="6" ry="10" fill="#FFE040" transform="rotate(-25 278 652)"/>
+    <!-- Warning label on bomb -->
+    <text x="230" y="807" font-family="Arial" font-size="52" font-weight="bold" fill="#FF4444" text-anchor="middle" opacity="0.9">✕</text>
+
+    <!-- Layer 3: Diagonal slash (main visual — bold white, cutting the pentagon) -->
+    <!-- Outer glow -->
+    <line x1="150" y1="874" x2="874" y2="150" stroke="white" stroke-width="75" stroke-linecap="round" opacity="0.10"/>
+    <!-- Inner glow -->
+    <line x1="150" y1="874" x2="874" y2="150" stroke="white" stroke-width="38" stroke-linecap="round" opacity="0.30"/>
+    <!-- Core white slash -->
+    <line x1="150" y1="874" x2="874" y2="150" stroke="white" stroke-width="16" stroke-linecap="round"/>
+    <!-- Trail lines -->
+    <line x1="165" y1="906" x2="890" y2="182" stroke="#FFE0CC" stroke-width="5" stroke-linecap="round" opacity="0.5"/>
+    <line x1="135" y1="842" x2="858" y2="118" stroke="#FFE0CC" stroke-width="4" stroke-linecap="round" opacity="0.38"/>
+  </g>
+</svg>

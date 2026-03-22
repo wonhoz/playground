@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg01" cx="50%" cy="45%" r="65%">
+      <stop offset="0%" stop-color="#1E1E32"/>
+      <stop offset="100%" stop-color="#080810"/>
+    </radialGradient>
+    <radialGradient id="bomb01" cx="35%" cy="30%" r="60%">
+      <stop offset="0%" stop-color="#3A3A3A"/>
+      <stop offset="100%" stop-color="#080808"/>
+    </radialGradient>
+    <clipPath id="frame01">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg01)"/>
+
+  <g clip-path="url(#frame01)">
+    <!-- Layer 2: Shapes -->
+    <!-- Cyan triangle - upper left -->
+    <polygon points="210,158 408,158 309,335" fill="#00F5FF"/>
+
+    <!-- Hot pink pentagon - center, being sliced -->
+    <polygon points="600,298 762,417 700,608 500,608 438,417" fill="#FF2D78"/>
+
+    <!-- Lime green circle - lower left -->
+    <circle cx="225" cy="730" r="112" fill="#39FF14"/>
+
+    <!-- Orange rotated square - upper right -->
+    <rect x="754" y="175" width="128" height="128" rx="10" fill="#FF8C00" transform="rotate(45 818 239)"/>
+
+    <!-- Bomb - lower right (avoid!) -->
+    <circle cx="810" cy="805" r="94" fill="url(#bomb01)"/>
+    <!-- Bomb shine -->
+    <ellipse cx="778" cy="772" rx="23" ry="16" fill="white" opacity="0.13"/>
+    <!-- Fuse wire -->
+    <path d="M810,711 Q848,668 872,634" stroke="#777" stroke-width="15" fill="none" stroke-linecap="round"/>
+    <!-- Spark flame -->
+    <ellipse cx="878" cy="624" rx="14" ry="20" fill="#FF6A00" transform="rotate(-28 878 624)"/>
+    <ellipse cx="878" cy="624" rx="8" ry="12" fill="#FFE140" transform="rotate(-28 878 624)"/>
+
+    <!-- Layer 3: Diagonal slash (hot pink + white core) -->
+    <!-- Outer glow -->
+    <line x1="115" y1="328" x2="922" y2="702" stroke="#FF2D78" stroke-width="70" stroke-linecap="round" opacity="0.12"/>
+    <!-- Inner glow -->
+    <line x1="115" y1="328" x2="922" y2="702" stroke="#FF2D78" stroke-width="36" stroke-linecap="round" opacity="0.42"/>
+    <!-- White core -->
+    <line x1="115" y1="328" x2="922" y2="702" stroke="white" stroke-width="14" stroke-linecap="round"/>
+    <!-- Motion trail lines -->
+    <line x1="125" y1="292" x2="932" y2="666" stroke="#FF2D78" stroke-width="5" stroke-linecap="round" opacity="0.55"/>
+    <line x1="105" y1="364" x2="912" y2="738" stroke="#FF2D78" stroke-width="4" stroke-linecap="round" opacity="0.38"/>
+  </g>
+</svg>

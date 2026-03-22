@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg03" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0B1860"/>
+      <stop offset="100%" stop-color="#060E38"/>
+    </linearGradient>
+    <linearGradient id="slashGrad03" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFD700"/>
+      <stop offset="50%" stop-color="#FFA500"/>
+      <stop offset="100%" stop-color="#FFD700"/>
+    </linearGradient>
+    <clipPath id="frame03">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg03)"/>
+
+  <g clip-path="url(#frame03)">
+    <!-- Layer 2: Scattered shape fragments (aftermath of slicing) -->
+    <!-- Triangle fragment - upper left -->
+    <polygon points="175,190 310,190 242,290" fill="#00CFFF" opacity="0.9"/>
+    <!-- Triangle fragment (bottom half) - slightly below -->
+    <polygon points="195,305 330,305 262,400" fill="#00A8D6" opacity="0.7" transform="rotate(12 262 352)"/>
+
+    <!-- Circle fragment - upper right (half circle) -->
+    <path d="M760,200 A90,90 0 0 1 760,380 Z" fill="#FF3A8C" opacity="0.9"/>
+    <!-- Other half - shifted -->
+    <path d="M800,210 A90,90 0 0 0 800,390 Z" fill="#FF6AAC" opacity="0.7"/>
+
+    <!-- Pentagon fragment - lower left (partial shape) -->
+    <polygon points="185,660 300,620 340,720 240,780 165,740" fill="#7B2FFF" opacity="0.85"/>
+
+    <!-- Square fragment - lower right (rotated, partial) -->
+    <rect x="720" y="680" width="110" height="110" rx="8" fill="#FF6600" opacity="0.88" transform="rotate(28 775 735)"/>
+    <!-- Square shadow fragment -->
+    <rect x="755" y="720" width="80" height="80" rx="8" fill="#CC4400" opacity="0.5" transform="rotate(28 795 760)"/>
+
+    <!-- Bomb with a red X cross through it (= avoid!) -->
+    <!-- Bomb circle -->
+    <circle cx="512" cy="290" r="80" fill="#181818"/>
+    <ellipse cx="490" cy="268" rx="20" ry="14" fill="white" opacity="0.12"/>
+    <!-- Fuse -->
+    <path d="M512,210 Q535,185 550,165" stroke="#666" stroke-width="13" fill="none" stroke-linecap="round"/>
+    <ellipse cx="556" cy="158" rx="11" ry="16" fill="#FF6A00" transform="rotate(-20 556 158)"/>
+    <ellipse cx="556" cy="158" rx="6" ry="9" fill="#FFE040" transform="rotate(-20 556 158)"/>
+    <!-- Red X overlay (= do NOT slice!) -->
+    <line x1="448" y1="228" x2="576" y2="352" stroke="#FF2222" stroke-width="22" stroke-linecap="round"/>
+    <line x1="576" y1="228" x2="448" y2="352" stroke="#FF2222" stroke-width="22" stroke-linecap="round"/>
+    <!-- X circle border -->
+    <circle cx="512" cy="290" r="84" fill="none" stroke="#FF3333" stroke-width="14"/>
+
+    <!-- Layer 3: Bold golden curved slash trajectory (the main action arc) -->
+    <!-- Glow outer -->
+    <path d="M155,820 Q350,240 870,200" fill="none" stroke="#FFD700" stroke-width="65" stroke-linecap="round" opacity="0.12"/>
+    <!-- Glow inner -->
+    <path d="M155,820 Q350,240 870,200" fill="none" stroke="#FFD700" stroke-width="35" stroke-linecap="round" opacity="0.35"/>
+    <!-- Core gold line -->
+    <path d="M155,820 Q350,240 870,200" fill="none" stroke="url(#slashGrad03)" stroke-width="16" stroke-linecap="round"/>
+    <!-- Arrow head at end of slash -->
+    <polygon points="870,200 825,228 848,188" fill="#FFD700"/>
+    <!-- Trail -->
+    <path d="M165,852 Q360,272 880,232" fill="none" stroke="#FFD700" stroke-width="5" stroke-linecap="round" opacity="0.5"/>
+    <path d="M145,788 Q340,208 860,168" fill="none" stroke="#FFD700" stroke-width="4" stroke-linecap="round" opacity="0.35"/>
+  </g>
+</svg>

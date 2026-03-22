@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="gOrbit" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#A855F7"/>
+      <stop offset="50%" stop-color="#EC4899"/>
+      <stop offset="100%" stop-color="#A855F7"/>
+    </linearGradient>
+    <radialGradient id="gStar3" cx="40%" cy="35%" r="60%">
+      <stop offset="0%" stop-color="#FEF9C3"/>
+      <stop offset="100%" stop-color="#EAB308"/>
+    </radialGradient>
+  </defs>
+  <!-- 배경: 딥 퍼플 -->
+  <rect width="1024" height="1024" rx="190" fill="#16032E"/>
+  <!-- 케플러 타원: rx=380, ry=240 -->
+  <!-- 초점 위치: c=√(380²-240²)=√86800≈295 → (217,512) (807,512) -->
+  <ellipse cx="512" cy="512" rx="380" ry="240" fill="none"
+           stroke="url(#gOrbit)" stroke-width="22"/>
+  <!-- 항성 (초점 1) -->
+  <circle cx="217" cy="512" r="46" fill="url(#gStar3)"/>
+  <!-- 초점 2 (빈 점) -->
+  <circle cx="807" cy="512" r="14" fill="rgba(255,255,255,0.25)"/>
+  <!-- 탐사선: 타원 우측 끝 (512+380=892, 512) -->
+  <circle cx="892" cy="512" r="22" fill="white" opacity="0.88"/>
+</svg>

@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="gStarA" cx="38%" cy="32%" r="65%">
+      <stop offset="0%" stop-color="#FEF3C7"/>
+      <stop offset="100%" stop-color="#D97706"/>
+    </radialGradient>
+    <radialGradient id="gStarB" cx="38%" cy="32%" r="65%">
+      <stop offset="0%" stop-color="#BFDBFE"/>
+      <stop offset="100%" stop-color="#2563EB"/>
+    </radialGradient>
+  </defs>
+  <!-- 배경: 딥 다크 블루 -->
+  <rect width="1024" height="1024" rx="190" fill="#061018"/>
+  <!-- 별 A (왼쪽): 황금 -->
+  <circle cx="296" cy="512" r="84" fill="url(#gStarA)"/>
+  <!-- 별 B (오른쪽): 파랑 -->
+  <circle cx="728" cy="512" r="84" fill="url(#gStarB)"/>
+  <!-- 별 A 주위 공전 궤도 -->
+  <ellipse cx="296" cy="512" rx="196" ry="136" fill="none"
+           stroke="rgba(255,255,255,0.55)" stroke-width="12"/>
+  <!-- 탐사선: 궤도 상단 (296, 512-136=376) -->
+  <polygon points="296,346 316,386 276,386" fill="#F9A8D4"/>
+</svg>

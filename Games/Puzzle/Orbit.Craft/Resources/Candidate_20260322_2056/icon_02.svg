@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="gPlanet2" cx="38%" cy="32%" r="65%">
+      <stop offset="0%" stop-color="#86EFAC"/>
+      <stop offset="100%" stop-color="#15803D"/>
+    </radialGradient>
+  </defs>
+  <!-- 배경: 미드나이트 블루 -->
+  <rect width="1024" height="1024" rx="190" fill="#050A18"/>
+  <!-- 목표 행성: 오른쪽 위 -->
+  <circle cx="690" cy="310" r="96" fill="url(#gPlanet2)"/>
+  <!-- 탐사선 궤도 미리보기 (점선 포물선) -->
+  <path d="M 228,808 Q 420,310 690,408"
+        fill="none"
+        stroke="rgba(255,255,255,0.52)"
+        stroke-width="12"
+        stroke-dasharray="26,18"/>
+  <!-- 탐사선: 왼쪽 하단 -->
+  <polygon points="204,788 240,800 220,840" fill="#FB923C"
+           transform="rotate(-45 220 808)"/>
+</svg>

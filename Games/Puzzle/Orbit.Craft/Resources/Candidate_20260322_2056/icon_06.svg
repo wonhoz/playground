@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="gSA6" cx="38%" cy="32%" r="65%">
+      <stop offset="0%" stop-color="#FEF08A"/>
+      <stop offset="100%" stop-color="#CA8A04"/>
+    </radialGradient>
+    <radialGradient id="gSB6" cx="38%" cy="32%" r="65%">
+      <stop offset="0%" stop-color="#BBF7D0"/>
+      <stop offset="100%" stop-color="#16A34A"/>
+    </radialGradient>
+    <radialGradient id="gSC6" cx="38%" cy="32%" r="65%">
+      <stop offset="0%" stop-color="#FED7AA"/>
+      <stop offset="100%" stop-color="#EA580C"/>
+    </radialGradient>
+  </defs>
+  <!-- 배경: 완전한 딥 블랙 -->
+  <rect width="1024" height="1024" rx="190" fill="#050508"/>
+  <!-- 별빛 미세 점 -->
+  <circle cx="180" cy="200" r="3" fill="rgba(255,255,255,0.40)"/>
+  <circle cx="840" cy="180" r="3" fill="rgba(255,255,255,0.35)"/>
+  <circle cx="200" cy="820" r="3" fill="rgba(255,255,255,0.35)"/>
+  <circle cx="820" cy="840" r="3" fill="rgba(255,255,255,0.30)"/>
+  <!-- 복잡한 3체 궤도 곡선 (목표별 C 주위) -->
+  <path d="M 512,572 C 400,510 290,410 316,330 C 342,250 480,268 580,356 C 680,444 718,560 664,644 C 610,728 390,738 350,664 C 310,590 400,510 512,572"
+        fill="none" stroke="rgba(255,255,255,0.48)" stroke-width="10"
+        stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- 별 A (왼쪽 위): 노랑 -->
+  <circle cx="316" cy="340" r="54" fill="url(#gSA6)"/>
+  <!-- 별 B (오른쪽 위): 초록 -->
+  <circle cx="708" cy="340" r="54" fill="url(#gSB6)"/>
+  <!-- 별 C (아래 중앙, 목표): 오렌지, 조금 더 큼 -->
+  <circle cx="512" cy="664" r="64" fill="url(#gSC6)"/>
+  <!-- 탐사선: 궤도 위 -->
+  <circle cx="512" cy="572" r="20" fill="white" opacity="0.90"/>
+</svg>

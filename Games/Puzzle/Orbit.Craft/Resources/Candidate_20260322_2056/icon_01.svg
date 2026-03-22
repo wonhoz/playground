@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="gPlanet" cx="38%" cy="32%" r="65%">
+      <stop offset="0%" stop-color="#93C5FD"/>
+      <stop offset="100%" stop-color="#1D4ED8"/>
+    </radialGradient>
+  </defs>
+  <!-- 배경: 딥 스페이스 -->
+  <rect width="1024" height="1024" rx="190" fill="#080820"/>
+  <!-- 별빛 점 -->
+  <circle cx="210" cy="190" r="5" fill="rgba(255,255,255,0.55)"/>
+  <circle cx="810" cy="215" r="4" fill="rgba(255,255,255,0.45)"/>
+  <circle cx="165" cy="760" r="5" fill="rgba(255,255,255,0.45)"/>
+  <circle cx="868" cy="790" r="4" fill="rgba(255,255,255,0.40)"/>
+  <circle cx="760" cy="145" r="3" fill="rgba(255,255,255,0.40)"/>
+  <circle cx="340" cy="840" r="3" fill="rgba(255,255,255,0.35)"/>
+  <!-- 타원 궤도 -->
+  <ellipse cx="512" cy="512" rx="312" ry="208" fill="none"
+           stroke="rgba(255,255,255,0.58)" stroke-width="14"/>
+  <!-- 중앙 행성 -->
+  <circle cx="512" cy="512" r="112" fill="url(#gPlanet)"/>
+  <!-- 탐사선: 타원 상단 (512, 512-208=304) -->
+  <polygon points="512,262 532,306 492,306" fill="#FCD34D"/>
+</svg>

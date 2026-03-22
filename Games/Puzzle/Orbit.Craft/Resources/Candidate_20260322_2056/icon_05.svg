@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="gBg5" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#0C4A6E"/>
+      <stop offset="100%" stop-color="#020617"/>
+    </radialGradient>
+    <radialGradient id="gPlanet5" cx="38%" cy="32%" r="65%">
+      <stop offset="0%" stop-color="#7DD3FC"/>
+      <stop offset="100%" stop-color="#0369A1"/>
+    </radialGradient>
+  </defs>
+  <!-- 배경: 중앙이 밝은 방사형 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#gBg5)"/>
+  <!-- 중력장 동심원 (바깥 → 안으로 점점 밝아짐) -->
+  <circle cx="512" cy="512" r="400" fill="none" stroke="rgba(125,211,252,0.10)" stroke-width="3"/>
+  <circle cx="512" cy="512" r="322" fill="none" stroke="rgba(125,211,252,0.16)" stroke-width="3"/>
+  <circle cx="512" cy="512" r="246" fill="none" stroke="rgba(125,211,252,0.24)" stroke-width="3"/>
+  <circle cx="512" cy="512" r="172" fill="none" stroke="rgba(125,211,252,0.36)" stroke-width="4"/>
+  <!-- 중앙 행성 -->
+  <circle cx="512" cy="512" r="104" fill="url(#gPlanet5)"/>
+  <!-- 탐사선: 동심원 위 (512, 512-246=266) -->
+  <polygon points="512,240 530,278 494,278" fill="white" opacity="0.92"/>
+</svg>

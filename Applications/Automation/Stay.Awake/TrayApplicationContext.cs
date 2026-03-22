@@ -94,8 +94,8 @@ namespace StayAwake
             var menu = new ContextMenuStrip
             {
                 Renderer = new DarkMenuRenderer(),
-                ShowImageMargin = true,
-                ShowCheckMargin = true,
+                ShowImageMargin = false,
+                ShowCheckMargin = false,
                 BackColor = Color.FromArgb(32, 32, 32),
                 ForeColor = Color.FromArgb(240, 240, 240)
             };
@@ -329,10 +329,11 @@ namespace StayAwake
 
         private async void OnTimerTick(object? sender, EventArgs e)
         {
-            // 자정이 넘어가면 일일 통계 초기화
+            // 자정이 넘어가면 일일 통계 초기화 (새 날 기준으로 리셋)
             if (DateTime.Today != _statsDate)
             {
-                _todayActiveTime = DateTime.Now - _sessionRunStart; // 오늘 치 시작 시간 기준 재산정
+                _todayActiveTime = TimeSpan.Zero;
+                _sessionRunStart = DateTime.Now;
                 _dailySimCount = 0;
                 _dailySkipCount = 0;
                 _statsDate = DateTime.Today;
@@ -406,7 +407,9 @@ namespace StayAwake
                 ? "마우스 + 키보드"
                 : "마우스 이동";
 
-            var message = $@"StayAwake v1.3
+            var version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
+            var versionStr = version != null ? $"v{version.Major}.{version.Minor}" : "v1.3";
+            var message = $@"StayAwake {versionStr}
 
 Slack 자리 비움 상태 방지 도구
 

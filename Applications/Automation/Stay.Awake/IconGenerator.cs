@@ -15,8 +15,16 @@ namespace StayAwake
         public static Icon LoadRunningIcon()
         {
             var path = Path.Combine(ResourceDir, "running.png");
-            using var bitmap = new Bitmap(path);
-            return Icon.FromHandle(bitmap.GetHicon());
+            if (File.Exists(path))
+            {
+                try
+                {
+                    using var bitmap = new Bitmap(path);
+                    return Icon.FromHandle(bitmap.GetHicon());
+                }
+                catch { }
+            }
+            return CreateFallbackIcon(Color.FromArgb(67, 217, 123)); // 초록
         }
 
         /// <summary>
@@ -25,7 +33,29 @@ namespace StayAwake
         public static Icon LoadStoppedIcon()
         {
             var path = Path.Combine(ResourceDir, "stopped.png");
-            using var bitmap = new Bitmap(path);
+            if (File.Exists(path))
+            {
+                try
+                {
+                    using var bitmap = new Bitmap(path);
+                    return Icon.FromHandle(bitmap.GetHicon());
+                }
+                catch { }
+            }
+            return CreateFallbackIcon(Color.FromArgb(128, 128, 128)); // 회색
+        }
+
+        /// <summary>
+        /// 단색 원형 폴백 아이콘 생성 (리소스 파일 없을 때)
+        /// </summary>
+        private static Icon CreateFallbackIcon(Color color)
+        {
+            var bitmap = new Bitmap(16, 16);
+            using var g = Graphics.FromImage(bitmap);
+            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+            g.Clear(Color.Transparent);
+            using var brush = new SolidBrush(color);
+            g.FillEllipse(brush, 1, 1, 14, 14);
             return Icon.FromHandle(bitmap.GetHicon());
         }
     }

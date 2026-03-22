@@ -1,0 +1,49 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Mark.View | HTML 태그 — MD→HTML 렌더링 과정 | 레이어드 | #022C22 -->
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="160" fill="#022C22"/>
+  <!-- Layer 2: Stacked conversion cards -->
+  <!-- Card 3 (back) - MD source -->
+  <rect x="200" y="240" width="380" height="460" rx="12" fill="#0A4A30" stroke="#1A7A58" stroke-width="3" transform="rotate(-6 390 470)"/>
+  <!-- Card 2 (middle) - parsing -->
+  <rect x="220" y="230" width="380" height="460" rx="12" fill="#0E5A3A" stroke="#22885A" stroke-width="3" transform="rotate(-2 410 460)"/>
+  <!-- Card 1 (front) - HTML output -->
+  <rect x="240" y="220" width="380" height="460" rx="12" fill="#145A40" stroke="#22AA6A" stroke-width="3"/>
+  <!-- Markdown source content on back card -->
+  <text x="212" y="290" font-family="monospace" font-size="14" fill="#4ADE80" transform="rotate(-6 390 470)" opacity="0.7"># Heading</text>
+  <text x="212" y="314" font-family="monospace" font-size="12" fill="#86EFAC" transform="rotate(-6 390 470)" opacity="0.6">**bold** _italic_</text>
+  <text x="212" y="338" font-family="monospace" font-size="12" fill="#86EFAC" transform="rotate(-6 390 470)" opacity="0.6">[link](url)</text>
+  <!-- HTML tag content on front card -->
+  <text x="260" y="280" font-family="monospace" font-size="16" fill="#4ADE80">&lt;h1&gt;</text>
+  <text x="316" y="280" font-family="monospace" font-size="16" fill="#F0FFF4">제목</text>
+  <text x="356" y="280" font-family="monospace" font-size="16" fill="#4ADE80">&lt;/h1&gt;</text>
+  <text x="260" y="316" font-family="monospace" font-size="14" fill="#4ADE80">&lt;p&gt;</text>
+  <text x="292" y="316" font-family="monospace" font-size="14" fill="#86EFAC">&lt;strong&gt;</text>
+  <text x="390" y="316" font-family="monospace" font-size="14" fill="#F0FFF4">굵게</text>
+  <text x="430" y="316" font-family="monospace" font-size="14" fill="#4ADE80">&lt;/strong&gt;</text>
+  <text x="260" y="352" font-family="monospace" font-size="14" fill="#4ADE80">&lt;em&gt;</text>
+  <text x="308" y="352" font-family="monospace" font-size="14" fill="#F0FFF4">기울임</text>
+  <text x="368" y="352" font-family="monospace" font-size="14" fill="#4ADE80">&lt;/em&gt;&lt;/p&gt;</text>
+  <text x="260" y="388" font-family="monospace" font-size="14" fill="#4ADE80">&lt;a href=</text>
+  <text x="364" y="388" font-family="monospace" font-size="14" fill="#22D3EE">"url"</text>
+  <text x="408" y="388" font-family="monospace" font-size="14" fill="#4ADE80">&gt;</text>
+  <text x="260" y="416" font-family="monospace" font-size="14" fill="#F0FFF4">  링크</text>
+  <text x="308" y="416" font-family="monospace" font-size="14" fill="#4ADE80">&lt;/a&gt;</text>
+  <text x="260" y="452" font-family="monospace" font-size="14" fill="#4ADE80">&lt;ul&gt;</text>
+  <text x="260" y="480" font-family="monospace" font-size="13" fill="#86EFAC">  &lt;li&gt;항목 1&lt;/li&gt;</text>
+  <text x="260" y="504" font-family="monospace" font-size="13" fill="#86EFAC">  &lt;li&gt;항목 2&lt;/li&gt;</text>
+  <text x="260" y="528" font-family="monospace" font-size="14" fill="#4ADE80">&lt;/ul&gt;</text>
+  <!-- Layer 3: Arrow from right side showing rendered output -->
+  <!-- Right panel: rendered result -->
+  <rect x="650" y="240" width="200" height="460" rx="12" fill="#F0FFF4" stroke="#22AA6A" stroke-width="3"/>
+  <text x="660" y="280" font-family="serif" font-size="22" fill="#1A1A1A" font-weight="bold">제목</text>
+  <line x1="660" y1="290" x2="836" y2="290" stroke="#22AA6A" stroke-width="2"/>
+  <text x="660" y="320" font-family="serif" font-size="14" fill="#1A1A1A"><tspan font-weight="bold">굵게</tspan></text>
+  <text x="660" y="348" font-family="serif" font-size="14" fill="#1A1A1A" font-style="italic">기울임</text>
+  <text x="660" y="380" font-family="serif" font-size="14" fill="#0066CC" text-decoration="underline">링크</text>
+  <text x="660" y="418" font-family="serif" font-size="13" fill="#1A1A1A">• 항목 1</text>
+  <text x="660" y="444" font-family="serif" font-size="13" fill="#1A1A1A">• 항목 2</text>
+  <!-- Arrow between cards and right panel -->
+  <polygon points="628,450 648,438 648,462" fill="#4ADE80"/>
+  <line x1="620" y1="450" x2="648" y2="450" stroke="#4ADE80" stroke-width="4"/>
+</svg>

@@ -1,0 +1,57 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Mark.View | 독서 램프 — 마크다운 문서 독서 환경 | 공간/장면 | #1A1400 -->
+  <defs>
+    <radialGradient id="lampLight7" cx="40%" cy="30%" r="60%">
+      <stop offset="0%" stop-color="#FFF8DC" stop-opacity="0.8"/>
+      <stop offset="60%" stop-color="#FFD700" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#1A1400" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <!-- Layer 1: Background (dark desk at night) -->
+  <rect width="1024" height="1024" rx="160" fill="#1A1400"/>
+  <!-- Desk surface -->
+  <rect x="0" y="680" width="1024" height="344" rx="0" fill="#2A1E0A"/>
+  <!-- Lamp light glow on scene -->
+  <rect width="1024" height="1024" rx="160" fill="url(#lampLight7)"/>
+  <!-- Layer 2: Desk lamp -->
+  <!-- Lamp base -->
+  <rect x="680" y="680" width="80" height="20" rx="6" fill="#5A4A28" stroke="#7A6A48" stroke-width="2"/>
+  <!-- Lamp arm (articulated) -->
+  <line x1="720" y1="680" x2="680" y2="560" stroke="#6A5A38" stroke-width="12" stroke-linecap="round"/>
+  <line x1="680" y1="560" x2="500" y2="460" stroke="#6A5A38" stroke-width="12" stroke-linecap="round"/>
+  <!-- Lamp joint circles -->
+  <circle cx="680" cy="560" r="12" fill="#7A6A48"/>
+  <!-- Lamp shade (cone) -->
+  <polygon points="440,420 560,420 520,460 480,460" fill="#CC8800" stroke="#AA6600" stroke-width="3"/>
+  <ellipse cx="500" cy="460" rx="40" ry="10" fill="#AA6600"/>
+  <!-- Bulb glow -->
+  <circle cx="500" cy="440" r="20" fill="#FFFF80" opacity="0.9"/>
+  <circle cx="500" cy="440" r="30" fill="#FFD700" opacity="0.4"/>
+  <!-- Document on desk (illuminated) -->
+  <rect x="180" y="440" width="420" height="500" rx="8" fill="#FAF0D8" stroke="#D4B870" stroke-width="3"/>
+  <!-- Document content - Markdown rendered -->
+  <!-- Title with # hash visible -->
+  <text x="210" y="490" font-family="monospace" font-size="16" fill="#4A3800"># 제목</text>
+  <text x="210" y="516" font-family="serif" font-size="22" fill="#1A0A00" font-weight="bold">마크다운 문서</text>
+  <line x1="210" y1="524" x2="570" y2="524" stroke="#8A6A30" stroke-width="2"/>
+  <!-- Body text lines -->
+  <text x="210" y="548" font-family="serif" font-size="13" fill="#3A2800">이 문서는 **마크다운** 형식으로</text>
+  <text x="210" y="566" font-family="serif" font-size="13" fill="#3A2800">작성되었습니다. _기울임_ 텍스트와</text>
+  <text x="210" y="584" font-family="serif" font-size="13" fill="#3A2800">`코드 블록`도 지원합니다.</text>
+  <!-- Code block -->
+  <rect x="210" y="596" width="340" height="50" rx="4" fill="#EEE0C0" stroke="#C0A860" stroke-width="1"/>
+  <text x="220" y="617" font-family="monospace" font-size="11" fill="#1A1000">const viewer = new MarkView();</text>
+  <text x="220" y="634" font-family="monospace" font-size="11" fill="#1A1000">viewer.render(document);</text>
+  <!-- List -->
+  <text x="210" y="666" font-family="serif" font-size="13" fill="#3A2800">• 라이브 프리뷰</text>
+  <text x="210" y="684" font-family="serif" font-size="13" fill="#3A2800">• 구문 하이라이팅</text>
+  <text x="210" y="702" font-family="serif" font-size="13" fill="#3A2800">• 테마 전환</text>
+  <!-- Page number -->
+  <text x="390" y="900" font-family="serif" font-size="12" fill="#8A6A30" text-anchor="middle">- 1 -</text>
+  <!-- Layer 3: Reading glasses on desk corner -->
+  <ellipse cx="620" cy="730" rx="30" ry="22" fill="none" stroke="#8A7050" stroke-width="4"/>
+  <ellipse cx="680" cy="730" rx="30" ry="22" fill="none" stroke="#8A7050" stroke-width="4"/>
+  <line x1="590" y1="730" x2="570" y2="738" stroke="#8A7050" stroke-width="4" stroke-linecap="round"/>
+  <line x1="710" y1="730" x2="730" y2="738" stroke="#8A7050" stroke-width="4" stroke-linecap="round"/>
+  <line x1="650" y1="730" x2="650" y2="730" stroke="#8A7050" stroke-width="4"/>
+</svg>

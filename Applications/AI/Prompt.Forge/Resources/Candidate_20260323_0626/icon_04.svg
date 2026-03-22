@@ -1,0 +1,44 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Prompt.Forge | 로켓 발사 — 프롬프트 실행 | 실루엣/캐릭터 | #001428 -->
+  <defs>
+    <radialGradient id="thrustGrad" cx="50%" cy="100%" r="60%">
+      <stop offset="0%" stop-color="#F59E0B"/>
+      <stop offset="50%" stop-color="#EF4444"/>
+      <stop offset="100%" stop-color="#EF4444" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="160" fill="#001428"/>
+  <!-- Stars -->
+  <circle cx="200" cy="180" r="2" fill="white" opacity="0.4"/>
+  <circle cx="820" cy="200" r="1.5" fill="white" opacity="0.5"/>
+  <circle cx="160" cy="600" r="2" fill="white" opacity="0.3"/>
+  <circle cx="860" cy="400" r="1.5" fill="white" opacity="0.4"/>
+  <circle cx="700" cy="160" r="2" fill="white" opacity="0.3"/>
+  <!-- Layer 2: Rocket -->
+  <!-- Rocket body -->
+  <rect x="448" y="340" width="128" height="280" rx="20" fill="#E2E8F0" stroke="#94A3B8" stroke-width="4"/>
+  <!-- Rocket nose cone -->
+  <path d="M448 340 Q448 220 512 180 Q576 220 576 340 Z" fill="#3B82F6" stroke="#1D4ED8" stroke-width="3"/>
+  <!-- Window -->
+  <circle cx="512" cy="420" r="32" fill="#0EA5E9" stroke="#7DD3FC" stroke-width="4"/>
+  <circle cx="512" cy="420" r="20" fill="#0C4A6E"/>
+  <!-- Message/prompt text on rocket body -->
+  <text x="512" y="490" font-family="monospace" font-size="10" fill="#64748B" text-anchor="middle">{{prompt}}</text>
+  <text x="512" y="508" font-family="monospace" font-size="10" fill="#64748B" text-anchor="middle">→ AI</text>
+  <!-- Fins -->
+  <polygon points="448,560 380,660 448,620" fill="#1D4ED8"/>
+  <polygon points="576,560 644,660 576,620" fill="#1D4ED8"/>
+  <!-- Thrust flame -->
+  <ellipse cx="512" cy="680" rx="60" ry="120" fill="url(#thrustGrad)" opacity="0.9"/>
+  <ellipse cx="490" cy="700" rx="20" ry="80" fill="#FCD34D" opacity="0.7"/>
+  <ellipse cx="534" cy="700" rx="20" ry="80" fill="#FCD34D" opacity="0.7"/>
+  <!-- Layer 3: Launch smoke trails -->
+  <ellipse cx="460" cy="800" rx="30" ry="14" fill="#6B7280" opacity="0.3"/>
+  <ellipse cx="564" cy="800" rx="26" ry="12" fill="#6B7280" opacity="0.3"/>
+  <ellipse cx="512" cy="820" rx="50" ry="18" fill="#9CA3AF" opacity="0.2"/>
+  <!-- Speed lines -->
+  <line x1="380" y1="260" x2="340" y2="240" stroke="#93C5FD" stroke-width="3" stroke-linecap="round" opacity="0.5"/>
+  <line x1="644" y1="280" x2="684" y2="260" stroke="#93C5FD" stroke-width="3" stroke-linecap="round" opacity="0.5"/>
+  <line x1="360" y1="320" x2="308" y2="310" stroke="#93C5FD" stroke-width="2" stroke-linecap="round" opacity="0.4"/>
+</svg>

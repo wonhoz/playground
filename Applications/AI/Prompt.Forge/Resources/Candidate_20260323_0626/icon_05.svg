@@ -1,0 +1,39 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Prompt.Forge | 화학 플라스크 — 프롬프트 실험 조합 | 중앙심볼 | #0A1A0A -->
+  <defs>
+    <radialGradient id="liquidGrad" cx="50%" cy="80%" r="60%">
+      <stop offset="0%" stop-color="#4ADE80" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#4ADE80" stop-opacity="0.2"/>
+    </radialGradient>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="160" fill="#0A1A0A"/>
+  <!-- Layer 2: Erlenmeyer flask -->
+  <!-- Flask body -->
+  <path d="M424 280 L424 500 L240 760 Q230 790 260 800 L764 800 Q794 790 784 760 L600 500 L600 280 Z" fill="#0D2010" stroke="#4ADE80" stroke-width="6"/>
+  <!-- Liquid inside flask (bubbling) -->
+  <path d="M260 760 Q240 790 264 796 L760 796 Q784 790 764 760 L580 496 L580 640 Q512 680 444 640 L444 496 Z" fill="url(#liquidGrad)"/>
+  <!-- Liquid surface waves -->
+  <path d="M280 700 Q350 680 424 700 Q500 720 580 700 Q658 680 740 700" fill="none" stroke="#4ADE80" stroke-width="3" opacity="0.6"/>
+  <!-- Bubbles in liquid -->
+  <circle cx="380" cy="740" r="10" fill="none" stroke="#86EFAC" stroke-width="2" opacity="0.7"/>
+  <circle cx="460" cy="720" r="8" fill="none" stroke="#86EFAC" stroke-width="2" opacity="0.6"/>
+  <circle cx="560" cy="730" r="12" fill="none" stroke="#86EFAC" stroke-width="2" opacity="0.7"/>
+  <circle cx="640" cy="710" r="9" fill="none" stroke="#86EFAC" stroke-width="2" opacity="0.5"/>
+  <!-- Text/prompt labels dissolving into liquid -->
+  <text x="310" y="756" font-family="monospace" font-size="14" fill="#22C55E" opacity="0.7">role:</text>
+  <text x="490" y="736" font-family="monospace" font-size="14" fill="#16A34A" opacity="0.6">task:</text>
+  <text x="610" y="758" font-family="monospace" font-size="14" fill="#22C55E" opacity="0.7">tone:</text>
+  <!-- Flask neck -->
+  <rect x="420" y="220" width="184" height="64" rx="12" fill="#0D2010" stroke="#4ADE80" stroke-width="5"/>
+  <!-- Cork stopper -->
+  <rect x="440" y="196" width="144" height="30" rx="8" fill="#92400E"/>
+  <!-- Steam/smoke from top -->
+  <path d="M512 190 Q500 150 512 120 Q524 90 512 60" fill="none" stroke="#4ADE80" stroke-width="3" stroke-dasharray="6,4" opacity="0.5"/>
+  <path d="M470 190 Q458 155 466 128" fill="none" stroke="#22C55E" stroke-width="2" stroke-dasharray="4,3" opacity="0.4"/>
+  <path d="M554 190 Q566 155 558 128" fill="none" stroke="#22C55E" stroke-width="2" stroke-dasharray="4,3" opacity="0.4"/>
+  <!-- Layer 3: Labels floating above flask -->
+  <text x="280" y="420" font-family="monospace" font-size="20" fill="#4ADE80" opacity="0.8">{{role}}</text>
+  <text x="620" y="400" font-family="monospace" font-size="18" fill="#22C55E" opacity="0.7">{{task}}</text>
+  <text x="650" y="480" font-family="monospace" font-size="16" fill="#16A34A" opacity="0.6">{{tone}}</text>
+</svg>

@@ -1,0 +1,52 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Prompt.Forge | 열쇠+자물쇠 언락 — 잠긴 AI 잠재력을 여는 프롬프트 | 대각선/동적 | #050A20 -->
+  <defs>
+    <linearGradient id="keyGrad7" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFD700"/>
+      <stop offset="100%" stop-color="#CC8800"/>
+    </linearGradient>
+    <filter id="goldGlow7">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="160" fill="#050A20"/>
+  <!-- Stars/circuit dots -->
+  <circle cx="200" cy="200" r="3" fill="#1D4ED8" opacity="0.5"/>
+  <circle cx="800" cy="200" r="3" fill="#1D4ED8" opacity="0.5"/>
+  <circle cx="200" cy="800" r="3" fill="#1D4ED8" opacity="0.5"/>
+  <circle cx="800" cy="800" r="3" fill="#1D4ED8" opacity="0.5"/>
+  <circle cx="400" cy="240" r="2" fill="#3B82F6" opacity="0.4"/>
+  <circle cx="620" cy="260" r="2" fill="#3B82F6" opacity="0.4"/>
+  <!-- Layer 2: Lock (being opened) -->
+  <!-- Lock body -->
+  <rect x="360" y="500" width="304" height="260" rx="24" fill="#0F2040" stroke="#1D4ED8" stroke-width="5"/>
+  <!-- Lock shackle (open/raised) -->
+  <path d="M 420 500 L 420 370 Q 420 280 512 280 Q 604 280 604 370 L 604 440" stroke="#FFD700" stroke-width="16" fill="none" stroke-linecap="round" filter="url(#goldGlow7)"/>
+  <!-- Keyhole -->
+  <circle cx="512" cy="610" r="32" fill="#050A20" stroke="#1D4ED8" stroke-width="3"/>
+  <rect x="500" y="610" width="24" height="50" rx="4" fill="#050A20"/>
+  <!-- Key flying into keyhole (diagonal, dynamic) -->
+  <g transform="rotate(-35 380 520)" filter="url(#goldGlow7)">
+    <!-- Key bow (ring) -->
+    <circle cx="260" cy="500" r="50" fill="none" stroke="url(#keyGrad7)" stroke-width="16"/>
+    <circle cx="260" cy="500" r="28" fill="none" stroke="url(#keyGrad7)" stroke-width="6"/>
+    <!-- Key blade -->
+    <line x1="308" y1="500" x2="500" y2="500" stroke="url(#keyGrad7)" stroke-width="16" stroke-linecap="round"/>
+    <!-- Key teeth -->
+    <line x1="360" y1="500" x2="360" y2="530" stroke="url(#keyGrad7)" stroke-width="12" stroke-linecap="round"/>
+    <line x1="400" y1="500" x2="400" y2="522" stroke="url(#keyGrad7)" stroke-width="12" stroke-linecap="round"/>
+    <line x1="440" y1="500" x2="440" y2="535" stroke="url(#keyGrad7)" stroke-width="12" stroke-linecap="round"/>
+    <line x1="475" y1="500" x2="475" y2="520" stroke="url(#keyGrad7)" stroke-width="12" stroke-linecap="round"/>
+  </g>
+  <!-- Motion sparkles from key turning -->
+  <circle cx="480" cy="560" r="8" fill="#FFD700" opacity="0.8" filter="url(#goldGlow7)"/>
+  <circle cx="555" cy="540" r="6" fill="#60A5FA" opacity="0.7" filter="url(#goldGlow7)"/>
+  <circle cx="430" cy="590" r="5" fill="#FFD700" opacity="0.6" filter="url(#goldGlow7)"/>
+  <!-- Layer 3: "UNLOCK" text beaming out -->
+  <text x="512" y="830" font-family="monospace" font-size="22" fill="#FFD700" text-anchor="middle" font-weight="bold" filter="url(#goldGlow7)">PROMPT UNLOCK</text>
+  <!-- Glow rays from lock opening -->
+  <line x1="512" y1="500" x2="320" y2="320" stroke="#FFD700" stroke-width="2" opacity="0.3" stroke-dasharray="10,8" filter="url(#goldGlow7)"/>
+  <line x1="512" y1="500" x2="700" y2="300" stroke="#60A5FA" stroke-width="2" opacity="0.3" stroke-dasharray="10,8" filter="url(#goldGlow7)"/>
+</svg>

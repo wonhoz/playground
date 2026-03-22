@@ -1,0 +1,33 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="diamondGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#BAE6FD"/>
+      <stop offset="50%" stop-color="#7DD3FC"/>
+      <stop offset="100%" stop-color="#38BDF8"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="150" fill="#FB7185"/>
+  <!-- Background glow -->
+  <ellipse cx="512" cy="512" rx="340" ry="320" fill="#FCA5A5" opacity="0.4"/>
+  <!-- Layer 2: Diamond shape -->
+  <!-- Diamond top -->
+  <polygon points="512,200 700,420 512,460 324,420" fill="url(#diamondGrad)"/>
+  <!-- Diamond bottom -->
+  <polygon points="512,820 700,420 512,460 324,420" fill="#0EA5E9"/>
+  <!-- Diamond left facets -->
+  <polygon points="324,420 512,460 420,620" fill="#7DD3FC" opacity="0.85"/>
+  <polygon points="324,420 420,620 512,820" fill="#38BDF8" opacity="0.7"/>
+  <!-- Diamond right facets -->
+  <polygon points="700,420 512,460 604,620" fill="#93C5FD" opacity="0.85"/>
+  <polygon points="700,420 604,620 512,820" fill="#0369A1" opacity="0.7"/>
+  <!-- Layer 3: Shine lines and sparkles -->
+  <line x1="420" y1="310" x2="512" y2="200" stroke="white" stroke-width="4" opacity="0.5" stroke-linecap="round"/>
+  <line x1="512" y1="200" x2="604" y2="310" stroke="white" stroke-width="4" opacity="0.5" stroke-linecap="round"/>
+  <!-- Sparkle stars -->
+  <polygon points="780,220 787,240 808,240 791,252 797,272 780,261 763,272 769,252 752,240 773,240" fill="white" opacity="0.9"/>
+  <polygon points="250,260 256,278 274,278 260,288 266,306 250,297 234,306 240,288 226,278 244,278" fill="white" opacity="0.75"/>
+  <polygon points="810,580 815,595 831,595 818,604 823,619 810,611 797,619 802,604 789,595 805,595" fill="white" opacity="0.7"/>
+  <!-- Center shine -->
+  <ellipse cx="480" cy="390" rx="30" ry="22" fill="white" opacity="0.55" transform="rotate(-30 480 390)"/>
+</svg>

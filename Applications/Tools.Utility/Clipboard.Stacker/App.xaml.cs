@@ -164,7 +164,7 @@ public partial class App : Application
                         : SystemIcons.Application,
         };
 
-        var menu = new ContextMenuStrip { Renderer = new DarkMenuRenderer(), ShowImageMargin = false, ShowCheckMargin = false };
+        var menu = new ContextMenuStrip { Renderer = new DarkMenuRenderer(), ShowImageMargin = true, ShowCheckMargin = true };
         menu.Items.Add("스택 보기 / 붙여넣기", null, (_, _) => Dispatcher.Invoke(() => _popup?.TogglePopup()));
         menu.Items.Add("스택 지우기",           null, (_, _) => Dispatcher.Invoke(() => _stack?.Clear()));
         menu.Items.Add(new ToolStripSeparator());

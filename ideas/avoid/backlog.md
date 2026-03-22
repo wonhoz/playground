@@ -2,7 +2,7 @@
 
 > 이름만 기재. 상세 내용은 각 차수 idea 파일 참조.
 > ★N차 = 해당 차수 브레인스토밍에서 처음 제안됨
-> 마지막 갱신: 2026-03-22 (32차)
+> 마지막 갱신: 2026-03-22 (33차)
 
 ---
 
@@ -192,6 +192,16 @@
 | `SMTP.Test` | 내장 SMTP 서버로 이메일 발송 테스트 — HTML 미리보기·헤더 분석·MIME 트리·릴레이 (Mailtrap 오프라인 대체) ★32차 |
 | `Pixel.Scope` | 픽셀 단위 돋보기+좌표+색상 실시간 확대경 — 1x~16x 배율, 거리 측정, 색상 HEX 복사 (UI QA 전용) ★32차 |
 | `Event.Count` | 멀티 이벤트 D-day 카운트다운 트레이 — 여러 마감일·기념일 동시 추적, 트레이 아이콘에 남은 일수 동적 렌더링 ★32차 |
+| `Folder.Watch` | FSW 다중 폴더 변경 감시 트레이, 확장자 필터·Toast 즉시 알림·이벤트 로그 ★33차 |
+| `Readme.Craft` | README.md 섹션 블록 드래그&드롭 대화형 빌더 (뱃지·TOC·스크린샷 블록 자동 삽입) ★33차 |
+| `Code.Time` | 파일 변경 감지 기반 프로젝트별 코딩 시간 자동 추적 트레이 (WakaTime 오프라인 대체) ★33차 |
+| `Reg.Watch` | 레지스트리 키 변경 실시간 감시 트레이 (변경 전후 스냅샷·설치 감지 모드) ★33차 |
+| `Img.Strip` | EXIF/GPS/IPTC 이미지 메타데이터 일괄 무손실 제거기 (프라이버시 보호) ★33차 |
+| `Proc.Shot` | 특정 프로세스 창 pHash 변화 감지 자동 스크린샷 스케줄러 (타임랩스 생성 포함) ★33차 |
+| `Pipe.View` | Windows Named Pipe IPC 실시간 캡처·HEX/JSON/XML 디코딩·테스트 주입 인스펙터 ★33차 |
+| `Tab.Space` | 프로젝트 인덴테이션 스타일 감지·일괄 변환 (.editorconfig 읽기/생성 지원) ★33차 |
+| `Git.Quick` | 트레이 팝업 Git status·add·commit·push 원클릭, 브랜치·저장소 자동 감지 ★33차 |
+| `Code.Map` | 코드베이스 언어별 LOC 트리맵 시각화, 두 시점 스냅샷 비교 (Disk.Lens의 코드판) ★33차 |
 
 ### Apps — Network / Security / Privacy
 
@@ -563,3 +573,13 @@
 | `Sky.Scraper` | Puzzle/Logic | 4방향 외곽 시야 숫자 힌트로 건물 높이 배치 스카이스크래퍼 퍼즐 (AC-3 솔버) ★32차 |
 | `Pirate.Map` | Puzzle/Adventure | 방향·거리 단서 조합으로 격자 지도 위 보물 위치 추론하는 공간 논리 퍼즐 ★32차 |
 | `Fleet.Strike` | Strategy/Classic | 확률 밀도 맵 AI와 함선 격침 배틀십, AI 전략 히트맵 시각화, 로컬 2P 모드 ★32차 |
+| `Void.Rush` | Arcade/Survival | 사방 수축 전기 격자벽 + 탄환 이중 압박 회피, 게이트 탈출 전술 ★33차 |
+| `Cut.Forge` | Sandbox/Physics | 재질별(유리·목재·젤리·폭발물) 완전 다른 마우스 드로잉 파단 샌드박스 ★33차 |
+| `Blitz.Shift` | Arcade/Classic | 상하 이중 패들 동시 조작 블록깨기 변형 (미러/분리 모드) ★33차 |
+| `Chain.Rune` | Puzzle/Physics | Verlet 실로 마법 절점 연결 → 진동 안정화로 목표 패턴 달성 ★33차 |
+| `Coral.Grow` | Simulation/Zen | 수온·염도·빛 조절 산호 군체 성장 유도, 셀룰러 오토마타+생태계 공생 ★33차 |
+| `Pixel.Surge` | Arcade/Shooter | 픽셀 격자 슈팅 + 색상 잉크 비율 전략 관리 (레트로 CRT 필터) ★33차 |
+| `Cue.Blitz` | Arcade/Physics | 당구 스핀·쿠션 물리로 블록 파괴, 3쿠션 보너스 ★33차 |
+| `Volt.Surge` | Shooter/Survival | 회로 기판 위 전류 파형 생존 슈터, 소자별(저항·커패시터·코일) 이동 효과 ★33차 |
+| `Fire.Craft` | Sandbox/Simulation | 재질별 연소 속도·온도·연기 완전 다른 화재 물리 샌드박스 (소화 인터랙션) ★33차 |
+| `Glitch.Hop` | Platformer/Surreal | 글리치 아트 위장 지형 시각 판별 점프 플랫포머 (HLSL 글리치 쉐이더) ★33차 |

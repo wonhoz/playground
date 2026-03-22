@@ -1,7 +1,7 @@
 # Avoid — 유사 개념 그룹 (중복 주의)
 
 > 브레인스토밍 시 아래 그룹 내 변형 아이디어는 **이미 제안된 것으로 간주**한다.
-> 마지막 갱신: 2026-03-22 (32차)
+> 마지막 갱신: 2026-03-22 (33차)
 
 ---
 
@@ -238,3 +238,22 @@
 | **시야 제약 논리 퍼즐** | Sky.Scraper (4방향 외곽 시야 힌트+스도쿠 제약 건물 배치) ≠ Sudoku.Cast (스도쿠) ≠ Kakuro.Cast (합산 십자말) ≠ Logic.Zebra (아인슈타인 소거) |
 | **공간 방향 추론 퍼즐** | Pirate.Map (방향·거리 단서 조합으로 격자 위 위치 추론) ≠ Logic.Zebra (표 소거 추론) ≠ Sky.Scraper (시야 제약 배치) ≠ Echo.Hunt (소나 핑 탐색) |
 | **해전 / 함선 전략** | Fleet.Strike (배틀십 확률 밀도 맵 AI, 로컬 2P) ≠ Hex.Storm (헥사 마이크로 RTS) ≠ Tower.Guard ✅ (타워 디펜스) ≠ Astro.Mine (소행성+중력 슈터) |
+| **폴더 변경 감시** | Folder.Watch (실시간 FSW Toast 알림·이벤트 로그) ≠ Diff.Snap (스냅샷 타임머신 비교) ≠ Dupe.Guard (중복 파일 실시간 감시) ≠ File.Duplicates ✅ (온디맨드 스캔) |
+| **코딩 시간 추적** | Code.Time (파일 변경 기반 언어·프로젝트별 자동 추적) ≠ Focus.Log (모든 앱 사용시간) ≠ Time.Track (프리랜서 수동 타이머) ≠ Key.Heat (키스트로크 히트맵) |
+| **레지스트리 감시** | Reg.Watch (실시간 RegNotifyChangeKeyValue 변경 Toast) ≠ Reg.Vault (레지스트리 브라우저·비교기) ≠ Path.Audit (ETW 파일시스템 접근 감사) ≠ Env.Guard ✅ (환경변수 GUI) |
+| **이미지 메타데이터 처리** | Img.Strip (GPS/EXIF/IPTC 일괄 제거, 프라이버시) ≠ Img.Meta (EXIF/XMP 뷰어·편집기) ≠ Geo.Tag (GPS 태거) ≠ Photo.Video.Organizer ✅ (EXIF 날짜 기반 정리) |
+| **창 자동 스크린샷** | Proc.Shot (특정 프로세스 창 pHash 변화 감지 스케줄러) ≠ Time.Lapse (전체화면 타임랩스) ≠ Clip.Snap (전역 단축키 수동 캡처) ≠ Screen.Recorder ✅ (실시간 영상 녹화) |
+| **IPC / 파이프 인스펙터** | Pipe.View (Named Pipe IPC 캡처·HEX/JSON 디코딩) ≠ Serial.Cast (UART 시리얼) ≠ Hook.Lab (Webhook 수신+터널) ≠ Api.Probe ✅ (HTTP REST) |
+| **인덴테이션 스타일 변환** | Tab.Space (탭↔스페이스 프로젝트 일괄 변환·editorconfig) ≠ Str.Forge ✅ (Find&Replace 엔진) ≠ Typo.Guard (오타 감지) ≠ Deep.Diff ✅ (범용 파일 비교) |
+| **Git 빠른 조작** | Git.Quick (트레이 팝업 add·commit·push 원클릭) ≠ Git.Reel (커밋 그래프 탐색기) ≠ Git.Guard (훅 설정) ≠ Repo.Radar (저장소 대시보드) ≠ Run.Deck (런처) |
+| **코드베이스 언어 시각화** | Code.Map (LOC 트리맵, 언어 비율 도넛, 두 시점 비교) ≠ Git.Stats ✅ (커밋 히트맵·핫파일) ≠ Disk.Lens ✅ (파일 용량 트리맵) ≠ Git.Blame (줄별 히트맵) |
+| **화재 / 연소 샌드박스** | Fire.Craft (재질별 연소 속도·온도·연기 셀룰러 오토마타+소화) ≠ Sand.Fall ✅ (입자 낙하 샌드박스) ≠ Magma.Flow (용암 점성 유체 제어) ≠ Crush.Box (압착 파괴) |
+| **픽셀 격자 슈팅** | Pixel.Surge (격자 스냅 이동+색상 잉크 비율 전략) ≠ Star.Strike ✅ (자유 이동 슈터) ≠ Dodge.Blitz ✅ (탄막 회피) ≠ Mural.Rush (2P 픽셀 영역 전쟁) |
+| **당구 물리 블록깨기** | Cue.Blitz (큐 스핀·3쿠션 물리+블록 파괴 콤보) ≠ Brick.Blitz ✅ (패들 블록깨기) ≠ Pool.Break (순수 당구) ≠ Bounce.House (탄성 반사각 퍼즐) |
+| **글리치 아트 플랫포머** | Glitch.Hop (RGB 쉐이더 왜곡 속 지형 시각 판별 점프) ≠ Retro.Cast (CRT 왜곡 복원 퍼즐) ≠ Dream.Shift (중력 8방향 회전) ≠ Phase.Gate (두 차원 발판) |
+| **이중 패들 / 상하 대칭 게임** | Blitz.Shift (상하 패들 동시 조작 블록깨기, 미러/분리 모드) ≠ Brick.Blitz ✅ (단일 패들) ≠ Neon.Wall (Pong+궤적 벽화) ≠ Fuse.Ball (단일 입력 두 공) |
+| **Verlet 실 연결 퍼즐** | Chain.Rune (절점 실 연결+진동 안정화→마법진 패턴) ≠ Spring.Web (Verlet 거미줄에서 물체 잡기) ≠ Knot.Craft (매듭 드래그 풀기) ≠ Slice.Chain (체인 절단) |
+| **해양 생태계 성장 시뮬** | Coral.Grow (수온·염도·빛 조절 산호 군체 셀룰러 오토마타) ≠ Leaf.Grow ✅ (L-시스템 육상 식물) ≠ Eco.Chain (Lotka-Volterra 먹이사슬) ≠ Root.Spread (지하 뿌리) |
+| **수축 / 공간 압박 생존** | Void.Rush (사방 전기 격자벽 수축+탄환 이중 압박+게이트 탈출) ≠ Spiral.Rush (나선형 수축 원심력) ≠ Frost.Line (위→아래 결빙선) ≠ Dodge.Blitz ✅ (탄막 회피) |
+| **재질별 파단 샌드박스** | Cut.Forge (마우스 드로잉 절단, 재질별 Voronoi/Verlet/폭발 파단) ≠ Fracture.Fall (Voronoi 파단 지형 러너) ≠ Cloth.Cut (스프링-질량 천 절단) ≠ Crush.Box (유압 압착 파괴) |
+| **회로 기판 생존 슈터** | Volt.Surge (배선 그래프 이동, 소자별 이동 효과, BFS 적 AI) ≠ Volt.Chain (회로 설계 퍼즐) ≠ Volt.Race (전기 소자 트랙 레이싱) ≠ Chip.Logic (논리 게이트 빌더) |

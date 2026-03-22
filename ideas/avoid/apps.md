@@ -1,7 +1,7 @@
 # Avoid — 구현 완료 앱 (Applications)
 
 > ★N차 = 해당 차수 브레인스토밍에서 처음 제안됨 / ✅ = 구현 완료
-> 마지막 갱신: 2026-03-22 (32차)
+> 마지막 갱신: 2026-03-22 (33차)
 
 ---
 
@@ -73,3 +73,13 @@
 | `Prompt.Forge` | AI | AI 프롬프트 라이브러리 관리자 ★30차 |
 | `Schema.Mock` | Dev/Tools | JSON Schema/OpenAPI 3.x → Bogus Faker 가짜 데이터 즉시 생성 + JSON/CSV 내보내기 ★29차 |
 | `Proc.Bench` | System | CPU 단일·멀티스레드 / 메모리 대역폭·레이턴시 / 스토리지 IOPS 종합 벤치마크 스위트 ★29차 |
+| `Folder.Watch` | System/Tray | FSW 다중 폴더 변경 감시 트레이, 확장자 필터·Toast 즉시 알림 ★33차 |
+| `Readme.Craft` | Dev/Docs | README.md 섹션 블록 드래그&드롭 대화형 빌더 ★33차 |
+| `Code.Time` | Dev/Tray | 파일 변경 감지 기반 프로젝트별 코딩 시간 자동 추적 트레이 ★33차 |
+| `Reg.Watch` | System/Security | 레지스트리 키 변경 실시간 감시 + 변경 전후 스냅샷 트레이 ★33차 |
+| `Img.Strip` | Media/Privacy | EXIF/GPS/IPTC 이미지 메타데이터 일괄 제거기 (무손실) ★33차 |
+| `Proc.Shot` | System/Auto | 특정 프로세스 창 pHash 변화 감지 자동 스크린샷 스케줄러 ★33차 |
+| `Pipe.View` | Dev/Debug | Windows Named Pipe IPC 실시간 캡처·디코딩 인스펙터 ★33차 |
+| `Tab.Space` | Dev/Quality | 프로젝트 인덴테이션 스타일 감지·일괄 변환 (.editorconfig 지원) ★33차 |
+| `Git.Quick` | Dev/Tray | 트레이 팝업 Git status·add·commit·push 원클릭 (LibGit2Sharp) ★33차 |
+| `Code.Map` | Dev/Visual | 코드베이스 언어별 LOC 트리맵 시각화 (Disk.Lens의 코드판) ★33차 |

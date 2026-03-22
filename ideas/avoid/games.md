@@ -1,7 +1,7 @@
 # Avoid — 구현 완료 게임 + 아카이브
 
 > ★N차 = 해당 차수 브레인스토밍에서 처음 제안됨 / ✅ = 구현 완료
-> 마지막 갱신: 2026-03-22 (32차)
+> 마지막 갱신: 2026-03-22 (33차)
 
 ---
 
@@ -45,6 +45,16 @@
 | `Orbit.Raid` | Puzzle/Physics ★27차 |
 | `Gear.Works` | Puzzle/Engineering ★27차 |
 | `Vortex.Pull` | Puzzle/Physics ★28차 |
+| `Void.Rush` | Arcade/Survival ★33차 |
+| `Cut.Forge` | Sandbox/Physics ★33차 |
+| `Blitz.Shift` | Arcade/Classic ★33차 |
+| `Chain.Rune` | Puzzle/Physics ★33차 |
+| `Coral.Grow` | Simulation/Zen ★33차 |
+| `Pixel.Surge` | Arcade/Shooter ★33차 |
+| `Cue.Blitz` | Arcade/Physics ★33차 |
+| `Volt.Surge` | Shooter/Survival ★33차 |
+| `Fire.Craft` | Sandbox/Simulation ★33차 |
+| `Glitch.Hop` | Platformer/Surreal ★33차 |
 
 ---
 

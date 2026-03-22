@@ -1,0 +1,125 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg03" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#1A0808"/>
+      <stop offset="100%" stop-color="#060010"/>
+    </radialGradient>
+    <radialGradient id="burstGlow03" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FF4400" stop-opacity="0.35"/>
+      <stop offset="50%" stop-color="#FF4400" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#FF4400" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="frame03">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg03)"/>
+  <g clip-path="url(#frame03)">
+
+    <!-- Burst glow from center -->
+    <circle cx="512" cy="512" r="420" fill="url(#burstGlow03)"/>
+
+    <!-- Concentric danger rings -->
+    <circle cx="512" cy="512" r="340" fill="none" stroke="#FF2200" stroke-width="2" opacity="0.25"/>
+    <circle cx="512" cy="512" r="240" fill="none" stroke="#FF4400" stroke-width="2" opacity="0.3"/>
+    <circle cx="512" cy="512" r="150" fill="none" stroke="#FF6600" stroke-width="2" opacity="0.35"/>
+
+    <!-- 16 radial bullet lines (from center outward) -->
+    <!-- 0° -->
+    <line x1="512" y1="512" x2="512" y2="140" stroke="#FF3300" stroke-width="3" opacity="0.4" stroke-linecap="round"/>
+    <!-- 22.5° -->
+    <line x1="512" y1="512" x2="654" y2="158" stroke="#FF3300" stroke-width="3" opacity="0.35" stroke-linecap="round"/>
+    <!-- 45° -->
+    <line x1="512" y1="512" x2="774" y2="250" stroke="#FF3300" stroke-width="3" opacity="0.4" stroke-linecap="round"/>
+    <!-- 67.5° -->
+    <line x1="512" y1="512" x2="866" y2="370" stroke="#FF3300" stroke-width="3" opacity="0.35" stroke-linecap="round"/>
+    <!-- 90° -->
+    <line x1="512" y1="512" x2="884" y2="512" stroke="#FF3300" stroke-width="3" opacity="0.4" stroke-linecap="round"/>
+    <!-- 112.5° -->
+    <line x1="512" y1="512" x2="866" y2="654" stroke="#FF3300" stroke-width="3" opacity="0.35" stroke-linecap="round"/>
+    <!-- 135° -->
+    <line x1="512" y1="512" x2="774" y2="774" stroke="#FF3300" stroke-width="3" opacity="0.4" stroke-linecap="round"/>
+    <!-- 157.5° -->
+    <line x1="512" y1="512" x2="654" y2="866" stroke="#FF3300" stroke-width="3" opacity="0.35" stroke-linecap="round"/>
+    <!-- 180° -->
+    <line x1="512" y1="512" x2="512" y2="884" stroke="#FF3300" stroke-width="3" opacity="0.4" stroke-linecap="round"/>
+    <!-- 202.5° -->
+    <line x1="512" y1="512" x2="370" y2="866" stroke="#FF3300" stroke-width="3" opacity="0.35" stroke-linecap="round"/>
+    <!-- 225° -->
+    <line x1="512" y1="512" x2="250" y2="774" stroke="#FF3300" stroke-width="3" opacity="0.4" stroke-linecap="round"/>
+    <!-- 247.5° -->
+    <line x1="512" y1="512" x2="158" y2="654" stroke="#FF3300" stroke-width="3" opacity="0.35" stroke-linecap="round"/>
+    <!-- 270° -->
+    <line x1="512" y1="512" x2="140" y2="512" stroke="#FF3300" stroke-width="3" opacity="0.4" stroke-linecap="round"/>
+    <!-- 292.5° -->
+    <line x1="512" y1="512" x2="158" y2="370" stroke="#FF3300" stroke-width="3" opacity="0.35" stroke-linecap="round"/>
+    <!-- 315° -->
+    <line x1="512" y1="512" x2="250" y2="250" stroke="#FF3300" stroke-width="3" opacity="0.4" stroke-linecap="round"/>
+    <!-- 337.5° -->
+    <line x1="512" y1="512" x2="370" y2="158" stroke="#FF3300" stroke-width="3" opacity="0.35" stroke-linecap="round"/>
+
+    <!-- Outer ring: 16 bullets (radius ~340) -->
+    <!-- 0° -->
+    <ellipse cx="512" cy="172" rx="11" ry="24" fill="#FF3300" opacity="0.95"/>
+    <!-- 22.5° -->
+    <ellipse cx="650" cy="203" rx="11" ry="24" fill="#FF4400" opacity="0.9" transform="rotate(-22.5 650 203)"/>
+    <!-- 45° -->
+    <ellipse cx="752" cy="272" rx="11" ry="24" fill="#FF3300" opacity="0.95" transform="rotate(-45 752 272)"/>
+    <!-- 67.5° -->
+    <ellipse cx="821" cy="374" rx="11" ry="24" fill="#FF4400" opacity="0.9" transform="rotate(-67.5 821 374)"/>
+    <!-- 90° -->
+    <ellipse cx="852" cy="512" rx="24" ry="11" fill="#FF3300" opacity="0.95"/>
+    <!-- 112.5° -->
+    <ellipse cx="821" cy="650" rx="11" ry="24" fill="#FF4400" opacity="0.9" transform="rotate(67.5 821 650)"/>
+    <!-- 135° -->
+    <ellipse cx="752" cy="752" rx="11" ry="24" fill="#FF3300" opacity="0.95" transform="rotate(45 752 752)"/>
+    <!-- 157.5° -->
+    <ellipse cx="650" cy="821" rx="11" ry="24" fill="#FF4400" opacity="0.9" transform="rotate(22.5 650 821)"/>
+    <!-- 180° -->
+    <ellipse cx="512" cy="852" rx="11" ry="24" fill="#FF3300" opacity="0.95"/>
+    <!-- 202.5° -->
+    <ellipse cx="374" cy="821" rx="11" ry="24" fill="#FF4400" opacity="0.9" transform="rotate(-22.5 374 821)"/>
+    <!-- 225° -->
+    <ellipse cx="272" cy="752" rx="11" ry="24" fill="#FF3300" opacity="0.95" transform="rotate(45 272 752)"/>
+    <!-- 247.5° -->
+    <ellipse cx="203" cy="650" rx="11" ry="24" fill="#FF4400" opacity="0.9" transform="rotate(-67.5 203 650)"/>
+    <!-- 270° -->
+    <ellipse cx="172" cy="512" rx="24" ry="11" fill="#FF3300" opacity="0.95"/>
+    <!-- 292.5° -->
+    <ellipse cx="203" cy="374" rx="11" ry="24" fill="#FF4400" opacity="0.9" transform="rotate(67.5 203 374)"/>
+    <!-- 315° -->
+    <ellipse cx="272" cy="272" rx="11" ry="24" fill="#FF3300" opacity="0.95" transform="rotate(-45 272 272)"/>
+    <!-- 337.5° -->
+    <ellipse cx="374" cy="203" rx="11" ry="24" fill="#FF4400" opacity="0.9" transform="rotate(22.5 374 203)"/>
+
+    <!-- Inner ring: 8 bullets (radius ~220) — hot orange -->
+    <!-- 0° -->
+    <ellipse cx="512" cy="292" rx="9" ry="20" fill="#FF6600" opacity="0.85"/>
+    <!-- 45° -->
+    <ellipse cx="668" cy="356" rx="9" ry="20" fill="#FF6600" opacity="0.85" transform="rotate(-45 668 356)"/>
+    <!-- 90° -->
+    <ellipse cx="732" cy="512" rx="20" ry="9" fill="#FF6600" opacity="0.85"/>
+    <!-- 135° -->
+    <ellipse cx="668" cy="668" rx="9" ry="20" fill="#FF6600" opacity="0.85" transform="rotate(45 668 668)"/>
+    <!-- 180° -->
+    <ellipse cx="512" cy="732" rx="9" ry="20" fill="#FF6600" opacity="0.85"/>
+    <!-- 225° -->
+    <ellipse cx="356" cy="668" rx="9" ry="20" fill="#FF6600" opacity="0.85" transform="rotate(-45 356 668)"/>
+    <!-- 270° -->
+    <ellipse cx="292" cy="512" rx="20" ry="9" fill="#FF6600" opacity="0.85"/>
+    <!-- 315° -->
+    <ellipse cx="356" cy="356" rx="9" ry="20" fill="#FF6600" opacity="0.85" transform="rotate(45 356 356)"/>
+
+    <!-- Center: danger zone burst -->
+    <circle cx="512" cy="512" r="48" fill="#FF2200" opacity="0.15"/>
+    <circle cx="512" cy="512" r="30" fill="#FF4400" opacity="0.25"/>
+    <!-- Center cross hairs -->
+    <line x1="492" y1="512" x2="532" y2="512" stroke="#FF6600" stroke-width="3" stroke-linecap="round" opacity="0.8"/>
+    <line x1="512" y1="492" x2="512" y2="532" stroke="#FF6600" stroke-width="3" stroke-linecap="round" opacity="0.8"/>
+    <!-- "BLITZ" text at center -->
+    <text x="512" y="522" font-family="'Segoe UI',Arial" font-size="28" font-weight="900" fill="#FF6600" text-anchor="middle" opacity="0.9" letter-spacing="4">BLITZ</text>
+
+    <!-- Label bottom -->
+    <text x="512" y="970" font-family="'Segoe UI',Arial" font-size="32" font-weight="700" fill="#FF3300" text-anchor="middle" opacity="0.6">DODGE · BLITZ</text>
+  </g>
+</svg>

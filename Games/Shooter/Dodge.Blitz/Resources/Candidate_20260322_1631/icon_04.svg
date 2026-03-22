@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg04db" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#021218"/>
+      <stop offset="100%" stop-color="#04080C"/>
+    </linearGradient>
+    <radialGradient id="trailGlow04" cx="50%" cy="50%" r="55%">
+      <stop offset="0%" stop-color="#00EEFF" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#00EEFF" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="frame04db">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg04db)"/>
+  <g clip-path="url(#frame04db)">
+
+    <!-- Subtle grid lines (game grid feel) -->
+    <line x1="256" y1="100" x2="256" y2="924" stroke="#0A2030" stroke-width="1" opacity="0.6"/>
+    <line x1="512" y1="100" x2="512" y2="924" stroke="#0A2030" stroke-width="1" opacity="0.6"/>
+    <line x1="768" y1="100" x2="768" y2="924" stroke="#0A2030" stroke-width="1" opacity="0.6"/>
+    <line x1="100" y1="256" x2="924" y2="256" stroke="#0A2030" stroke-width="1" opacity="0.6"/>
+    <line x1="100" y1="512" x2="924" y2="512" stroke="#0A2030" stroke-width="1" opacity="0.6"/>
+    <line x1="100" y1="768" x2="924" y2="768" stroke="#0A2030" stroke-width="1" opacity="0.6"/>
+
+    <!-- Trail glow along the evasion path -->
+    <circle cx="512" cy="512" r="300" fill="url(#trailGlow04)"/>
+
+    <!-- Evasion path — curved S-shape trajectory -->
+    <path d="M 280 760 Q 180 640 320 512 Q 460 384 380 260" fill="none" stroke="#00CCDD" stroke-width="5" stroke-linecap="round" stroke-dasharray="12,10" opacity="0.5"/>
+
+    <!-- Ghost layers (past ship positions — fading cyan) -->
+    <!-- Position 1 — oldest, most faded (lower-left) -->
+    <polygon points="280,760 255,820 280,805 305,820" fill="#00AACC" opacity="0.15" transform="rotate(20 280 790)"/>
+    <!-- Position 2 -->
+    <polygon points="240,650 215,710 240,695 265,710" fill="#00BBDD" opacity="0.25" transform="rotate(10 240 680)"/>
+    <!-- Position 3 -->
+    <polygon points="300,550 275,610 300,595 325,610" fill="#00CCEE" opacity="0.35" transform="rotate(0 300 580)"/>
+    <!-- Position 4 -->
+    <polygon points="400,450 375,510 400,495 425,510" fill="#00DDFF" opacity="0.45" transform="rotate(-5 400 480)"/>
+    <!-- Position 5 — most recent ghost -->
+    <polygon points="420,360 395,420 420,405 445,420" fill="#00EEFF" opacity="0.55" transform="rotate(-10 420 390)"/>
+
+    <!-- Current ship (brightest, at upper area) — bright cyan -->
+    <polygon points="380,260 350,340 380,320 410,340" fill="#00FFFF" transform="rotate(-15 380 300)"/>
+    <polygon points="380,260 350,340 380,320 410,340" fill="none" stroke="#AAFFFF" stroke-width="3" transform="rotate(-15 380 300)"/>
+    <!-- Cockpit -->
+    <ellipse cx="377" cy="282" rx="12" ry="16" fill="#88FFFF" opacity="0.8" transform="rotate(-15 377 282)"/>
+    <!-- Engine trail (current ship) -->
+    <ellipse cx="392" cy="332" rx="10" ry="18" fill="#0088FF" opacity="0.5" transform="rotate(-15 392 332)"/>
+    <ellipse cx="396" cy="344" rx="6" ry="12" fill="#00CCFF" opacity="0.4" transform="rotate(-15 396 344)"/>
+
+    <!-- Bullets on the right side (threats) — layer 1 -->
+    <!-- Top-right incoming bullets -->
+    <ellipse cx="720" cy="200" rx="22" ry="10" fill="#FF3300" opacity="0.9" transform="rotate(-45 720 200)"/>
+    <ellipse cx="760" cy="165" rx="20" ry="9" fill="#FF4400" opacity="0.85" transform="rotate(-45 760 165)"/>
+    <line x1="720" y1="200" x2="680" y2="240" stroke="#FF3300" stroke-width="3" stroke-linecap="round" opacity="0.4"/>
+
+    <!-- Right side incoming bullets -->
+    <ellipse cx="850" cy="420" rx="24" ry="10" fill="#FF4400" opacity="0.9"/>
+    <ellipse cx="880" cy="390" rx="22" ry="9" fill="#FF5500" opacity="0.85"/>
+    <ellipse cx="875" cy="460" rx="22" ry="9" fill="#FF3300" opacity="0.8"/>
+    <line x1="850" y1="420" x2="790" y2="420" stroke="#FF4400" stroke-width="3" stroke-linecap="round" opacity="0.4"/>
+
+    <!-- Lower-right bullets -->
+    <ellipse cx="800" cy="680" rx="10" ry="22" fill="#FF5500" opacity="0.9" transform="rotate(45 800 680)"/>
+    <ellipse cx="840" cy="720" rx="9" ry="20" fill="#FF6600" opacity="0.85" transform="rotate(45 840 720)"/>
+    <line x1="800" y1="680" x2="755" y2="635" stroke="#FF5500" stroke-width="3" stroke-linecap="round" opacity="0.4"/>
+
+    <!-- Bottom bullets (coming from below) -->
+    <ellipse cx="560" cy="870" rx="10" ry="22" fill="#FF4422" opacity="0.9"/>
+    <ellipse cx="610" cy="890" rx="9" ry="20" fill="#FF5533" opacity="0.85"/>
+    <line x1="560" y1="870" x2="560" y2="810" stroke="#FF4422" stroke-width="3" stroke-linecap="round" opacity="0.4"/>
+
+    <!-- "EVASION" label -->
+    <text x="512" y="968" font-family="'Segoe UI',Arial" font-size="34" font-weight="700" fill="#00BBCC" text-anchor="middle" opacity="0.65">DODGE · BLITZ</text>
+  </g>
+</svg>

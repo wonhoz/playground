@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg01" cx="50%" cy="50%" r="65%">
+      <stop offset="0%" stop-color="#0A0A20"/>
+      <stop offset="100%" stop-color="#030308"/>
+    </radialGradient>
+    <radialGradient id="playerGlow01" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#00FFFF" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#00FFFF" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="frame01">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg01)"/>
+  <g clip-path="url(#frame01)">
+    <!-- Stars background -->
+    <circle cx="200" cy="180" r="2" fill="white" opacity="0.5"/>
+    <circle cx="380" cy="100" r="1.5" fill="white" opacity="0.4"/>
+    <circle cx="760" cy="140" r="2" fill="white" opacity="0.5"/>
+    <circle cx="900" cy="260" r="1.5" fill="white" opacity="0.4"/>
+    <circle cx="140" cy="600" r="2" fill="white" opacity="0.5"/>
+    <circle cx="950" cy="550" r="1.5" fill="white" opacity="0.4"/>
+    <circle cx="300" cy="880" r="2" fill="white" opacity="0.4"/>
+    <circle cx="850" cy="820" r="1.5" fill="white" opacity="0.5"/>
+    <circle cx="600" cy="950" r="2" fill="white" opacity="0.4"/>
+    <circle cx="80" cy="440" r="1.5" fill="white" opacity="0.35"/>
+    <circle cx="720" cy="940" r="2" fill="white" opacity="0.4"/>
+
+    <!-- Layer 2: Bullets from ALL directions (radial arrangement) -->
+    <!-- Bullets are elongated ellipses pointing toward center (512,512) -->
+    <!-- The player is at (512,512), bullets at radius ~350 -->
+
+    <!-- Top (0°) -->
+    <ellipse cx="512" cy="165" rx="12" ry="28" fill="#FF3344" opacity="0.9"/>
+    <!-- Top-right (45°) -->
+    <ellipse cx="759" cy="265" rx="12" ry="28" fill="#FF4444" opacity="0.9" transform="rotate(-45 759 265)"/>
+    <!-- Right (90°) -->
+    <ellipse cx="860" cy="512" rx="28" ry="12" fill="#FF3344" opacity="0.9"/>
+    <!-- Bottom-right (135°) -->
+    <ellipse cx="758" cy="758" rx="12" ry="28" fill="#FF4444" opacity="0.9" transform="rotate(45 758 758)"/>
+    <!-- Bottom (180°) -->
+    <ellipse cx="512" cy="860" rx="12" ry="28" fill="#FF3344" opacity="0.9"/>
+    <!-- Bottom-left (225°) -->
+    <ellipse cx="266" cy="758" rx="12" ry="28" fill="#FF4444" opacity="0.9" transform="rotate(-45 266 758)"/>
+    <!-- Left (270°) -->
+    <ellipse cx="165" cy="512" rx="28" ry="12" fill="#FF3344" opacity="0.9"/>
+    <!-- Top-left (315°) -->
+    <ellipse cx="266" cy="265" rx="12" ry="28" fill="#FF4444" opacity="0.9" transform="rotate(45 266 265)"/>
+
+    <!-- Secondary ring of bullets (closer, radius ~220) -->
+    <!-- Top-right (22°) -->
+    <ellipse cx="595" cy="296" rx="10" ry="22" fill="#FF6655" opacity="0.8" transform="rotate(-22 595 296)"/>
+    <!-- Right-top (67°) -->
+    <ellipse cx="716" cy="396" rx="10" ry="22" fill="#FF5544" opacity="0.8" transform="rotate(-67 716 396)"/>
+    <!-- Right-bottom (112°) -->
+    <ellipse cx="716" cy="628" rx="10" ry="22" fill="#FF6655" opacity="0.8" transform="rotate(67 716 628)"/>
+    <!-- Bottom-right (157°) -->
+    <ellipse cx="595" cy="728" rx="10" ry="22" fill="#FF5544" opacity="0.8" transform="rotate(22 595 728)"/>
+    <!-- Bottom-left (202°) -->
+    <ellipse cx="429" cy="728" rx="10" ry="22" fill="#FF6655" opacity="0.8" transform="rotate(-22 429 728)"/>
+    <!-- Left-bottom (247°) -->
+    <ellipse cx="308" cy="628" rx="10" ry="22" fill="#FF5544" opacity="0.8" transform="rotate(67 308 628)"/>
+    <!-- Left-top (292°) -->
+    <ellipse cx="308" cy="396" rx="10" ry="22" fill="#FF6655" opacity="0.8" transform="rotate(-67 308 396)"/>
+    <!-- Top-left (337°) -->
+    <ellipse cx="429" cy="296" rx="10" ry="22" fill="#FF5544" opacity="0.8" transform="rotate(22 429 296)"/>
+
+    <!-- Bullet trail lines (showing direction of approach) -->
+    <line x1="512" y1="165" x2="512" y2="205" stroke="#FF3344" stroke-width="4" stroke-linecap="round" opacity="0.5"/>
+    <line x1="860" y1="512" x2="820" y2="512" stroke="#FF3344" stroke-width="4" stroke-linecap="round" opacity="0.5"/>
+    <line x1="512" y1="860" x2="512" y2="820" stroke="#FF3344" stroke-width="4" stroke-linecap="round" opacity="0.5"/>
+    <line x1="165" y1="512" x2="205" y2="512" stroke="#FF3344" stroke-width="4" stroke-linecap="round" opacity="0.5"/>
+
+    <!-- Player ship glow -->
+    <circle cx="512" cy="512" r="65" fill="url(#playerGlow01)"/>
+
+    <!-- Player ship (cyan triangle pointing up, centered) -->
+    <polygon points="512,440 465,580 512,555 559,580" fill="#00DDFF"/>
+    <polygon points="512,440 465,580 512,555 559,580" fill="none" stroke="#AAFFFF" stroke-width="3"/>
+    <!-- Cockpit -->
+    <ellipse cx="512" cy="490" rx="16" ry="20" fill="#66FFFF" opacity="0.7"/>
+    <!-- Wing details -->
+    <polygon points="465,580 440,600 512,555" fill="#0099CC"/>
+    <polygon points="559,580 584,600 512,555" fill="#0099CC"/>
+    <!-- Engine glow (bottom) -->
+    <ellipse cx="512" cy="560" rx="18" ry="30" fill="#00FFFF" opacity="0.3"/>
+    <ellipse cx="512" cy="568" rx="10" ry="18" fill="#AAFFFF" opacity="0.5"/>
+
+    <!-- Layer 3: Survival timer and level -->
+    <rect x="380" y="82" width="264" height="56" rx="14" fill="#0A0A20"/>
+    <rect x="380" y="82" width="264" height="56" rx="14" fill="none" stroke="#00FFFF" stroke-width="2" opacity="0.4"/>
+    <text x="512" y="120" font-family="'Segoe UI',Arial" font-size="36" font-weight="700" fill="#00FFFF" text-anchor="middle" opacity="0.85">⏱ 12.8s</text>
+
+    <!-- Level indicator -->
+    <text x="512" y="960" font-family="'Segoe UI',Arial" font-size="40" font-weight="700" fill="#FF3344" text-anchor="middle" opacity="0.7">DODGE!</text>
+  </g>
+</svg>

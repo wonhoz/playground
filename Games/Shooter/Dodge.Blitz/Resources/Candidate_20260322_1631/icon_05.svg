@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg05db" cx="50%" cy="50%" r="65%">
+      <stop offset="0%" stop-color="#0E0E24"/>
+      <stop offset="100%" stop-color="#040408"/>
+    </radialGradient>
+    <radialGradient id="shipGlow05" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFE000" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#FFE000" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="dangerRing05" cx="50%" cy="50%" r="50%">
+      <stop offset="60%" stop-color="#FF2200" stop-opacity="0"/>
+      <stop offset="85%" stop-color="#FF2200" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#FF2200" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="frame05db">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg05db)"/>
+  <g clip-path="url(#frame05db)">
+
+    <!-- Stars -->
+    <circle cx="160" cy="190" r="2" fill="white" opacity="0.5"/>
+    <circle cx="840" cy="160" r="1.5" fill="white" opacity="0.4"/>
+    <circle cx="130" cy="720" r="2" fill="white" opacity="0.5"/>
+    <circle cx="900" cy="820" r="1.5" fill="white" opacity="0.4"/>
+    <circle cx="560" cy="100" r="2" fill="white" opacity="0.5"/>
+    <circle cx="380" cy="930" r="1.5" fill="white" opacity="0.4"/>
+    <circle cx="920" cy="460" r="2" fill="white" opacity="0.45"/>
+    <circle cx="95" cy="400" r="1.5" fill="white" opacity="0.35"/>
+
+    <!-- Outer danger zone glow ring -->
+    <circle cx="512" cy="512" r="380" fill="url(#dangerRing05)"/>
+
+    <!-- Circular bullet wall (12 bullets evenly spaced at radius ~360) -->
+    <!-- 0° top -->
+    <ellipse cx="512" cy="152" rx="12" ry="26" fill="#FF2200" opacity="0.95"/>
+    <line x1="512" y1="152" x2="512" y2="192" stroke="#FF2200" stroke-width="4" stroke-linecap="round" opacity="0.5"/>
+    <!-- 30° -->
+    <ellipse cx="692" cy="212" rx="12" ry="26" fill="#FF3300" opacity="0.9" transform="rotate(-30 692 212)"/>
+    <line x1="692" y1="212" x2="661" y2="246" stroke="#FF3300" stroke-width="4" stroke-linecap="round" opacity="0.45"/>
+    <!-- 60° -->
+    <ellipse cx="824" cy="332" rx="12" ry="26" fill="#FF2200" opacity="0.95" transform="rotate(-60 824 332)"/>
+    <line x1="824" y1="332" x2="792" y2="352" stroke="#FF2200" stroke-width="4" stroke-linecap="round" opacity="0.5"/>
+    <!-- 90° right -->
+    <ellipse cx="872" cy="512" rx="26" ry="12" fill="#FF3300" opacity="0.9"/>
+    <line x1="872" y1="512" x2="832" y2="512" stroke="#FF3300" stroke-width="4" stroke-linecap="round" opacity="0.45"/>
+    <!-- 120° -->
+    <ellipse cx="824" cy="692" rx="12" ry="26" fill="#FF2200" opacity="0.95" transform="rotate(60 824 692)"/>
+    <line x1="824" y1="692" x2="792" y2="672" stroke="#FF2200" stroke-width="4" stroke-linecap="round" opacity="0.5"/>
+    <!-- 150° -->
+    <ellipse cx="692" cy="812" rx="12" ry="26" fill="#FF3300" opacity="0.9" transform="rotate(30 692 812)"/>
+    <line x1="692" y1="812" x2="661" y2="778" stroke="#FF3300" stroke-width="4" stroke-linecap="round" opacity="0.45"/>
+    <!-- 180° bottom -->
+    <ellipse cx="512" cy="872" rx="12" ry="26" fill="#FF2200" opacity="0.95"/>
+    <line x1="512" y1="872" x2="512" y2="832" stroke="#FF2200" stroke-width="4" stroke-linecap="round" opacity="0.5"/>
+    <!-- 210° -->
+    <ellipse cx="332" cy="812" rx="12" ry="26" fill="#FF3300" opacity="0.9" transform="rotate(-30 332 812)"/>
+    <line x1="332" y1="812" x2="363" y2="778" stroke="#FF3300" stroke-width="4" stroke-linecap="round" opacity="0.45"/>
+    <!-- 240° -->
+    <ellipse cx="200" cy="692" rx="12" ry="26" fill="#FF2200" opacity="0.95" transform="rotate(-60 200 692)"/>
+    <line x1="200" y1="692" x2="232" y2="672" stroke="#FF2200" stroke-width="4" stroke-linecap="round" opacity="0.5"/>
+    <!-- 270° left -->
+    <ellipse cx="152" cy="512" rx="26" ry="12" fill="#FF3300" opacity="0.9"/>
+    <line x1="152" y1="512" x2="192" y2="512" stroke="#FF3300" stroke-width="4" stroke-linecap="round" opacity="0.45"/>
+    <!-- 300° -->
+    <ellipse cx="200" cy="332" rx="12" ry="26" fill="#FF2200" opacity="0.95" transform="rotate(60 200 332)"/>
+    <line x1="200" y1="332" x2="232" y2="352" stroke="#FF2200" stroke-width="4" stroke-linecap="round" opacity="0.5"/>
+    <!-- 330° -->
+    <ellipse cx="332" cy="212" rx="12" ry="26" fill="#FF3300" opacity="0.9" transform="rotate(30 332 212)"/>
+    <line x1="332" y1="212" x2="363" y2="246" stroke="#FF3300" stroke-width="4" stroke-linecap="round" opacity="0.45"/>
+
+    <!-- Thin circular bullet-wall ring -->
+    <circle cx="512" cy="512" r="360" fill="none" stroke="#FF3300" stroke-width="2" opacity="0.35" stroke-dasharray="20,30"/>
+
+    <!-- Player ship glow -->
+    <circle cx="512" cy="512" r="70" fill="url(#shipGlow05)"/>
+
+    <!-- Player ship — gold, centered, pointing up -->
+    <polygon points="512,430 478,545 512,525 546,545" fill="#FFE040"/>
+    <polygon points="512,430 478,545 512,525 546,545" fill="none" stroke="#FFFF88" stroke-width="3"/>
+    <!-- Wing details -->
+    <polygon points="478,545 456,568 512,525" fill="#CC9900"/>
+    <polygon points="546,545 568,568 512,525" fill="#CC9900"/>
+    <!-- Cockpit -->
+    <ellipse cx="512" cy="480" rx="14" ry="18" fill="#FFF088" opacity="0.8"/>
+    <!-- Engine glow -->
+    <ellipse cx="512" cy="530" rx="16" ry="26" fill="#FF8800" opacity="0.35"/>
+    <ellipse cx="512" cy="540" rx="9" ry="16" fill="#FFD000" opacity="0.4"/>
+
+    <!-- Survival timer (top) -->
+    <rect x="378" y="80" width="268" height="58" rx="14" fill="#0A0A20"/>
+    <rect x="378" y="80" width="268" height="58" rx="14" fill="none" stroke="#FFE040" stroke-width="2" opacity="0.5"/>
+    <text x="512" y="120" font-family="'Segoe UI',Arial" font-size="36" font-weight="700" fill="#FFE040" text-anchor="middle" opacity="0.9">⏱ 42.0s</text>
+
+    <!-- DODGE·BLITZ label bottom -->
+    <text x="512" y="968" font-family="'Segoe UI',Arial" font-size="34" font-weight="700" fill="#FF4400" text-anchor="middle" opacity="0.65">DODGE · BLITZ</text>
+  </g>
+</svg>

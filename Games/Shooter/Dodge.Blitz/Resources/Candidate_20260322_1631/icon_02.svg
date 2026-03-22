@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg02" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#040818"/>
+      <stop offset="100%" stop-color="#0A0418"/>
+    </linearGradient>
+    <radialGradient id="playerGlow02" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFE040" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#FFE040" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="frame02">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg02)"/>
+  <g clip-path="url(#frame02)">
+    <!-- Stars -->
+    <circle cx="180" cy="200" r="2" fill="white" opacity="0.5"/>
+    <circle cx="820" cy="150" r="1.5" fill="white" opacity="0.4"/>
+    <circle cx="150" cy="700" r="2" fill="white" opacity="0.5"/>
+    <circle cx="900" cy="800" r="1.5" fill="white" opacity="0.4"/>
+    <circle cx="550" cy="80" r="2" fill="white" opacity="0.5"/>
+    <circle cx="400" cy="940" r="1.5" fill="white" opacity="0.4"/>
+
+    <!-- Layer 2: Dense bullet clusters from multiple directions -->
+    <!-- Upper-left cluster -->
+    <ellipse cx="230" cy="260" rx="10" ry="22" fill="#FF7700" opacity="0.9" transform="rotate(45 230 260)"/>
+    <ellipse cx="190" cy="220" rx="9" ry="20" fill="#FF9900" opacity="0.85" transform="rotate(45 190 220)"/>
+    <ellipse cx="270" cy="300" rx="9" ry="20" fill="#FF7700" opacity="0.8" transform="rotate(45 270 300)"/>
+    <line x1="230" y1="260" x2="280" y2="310" stroke="#FF7700" stroke-width="4" stroke-linecap="round" opacity="0.5"/>
+    <line x1="190" y1="220" x2="240" y2="270" stroke="#FF9900" stroke-width="3" stroke-linecap="round" opacity="0.4"/>
+
+    <!-- Right cluster -->
+    <ellipse cx="810" cy="380" rx="22" ry="10" fill="#FF5500" opacity="0.9"/>
+    <ellipse cx="850" cy="350" rx="20" ry="9" fill="#FF7700" opacity="0.85"/>
+    <ellipse cx="860" cy="420" rx="20" ry="9" fill="#FF5500" opacity="0.8"/>
+    <ellipse cx="890" cy="390" rx="20" ry="9" fill="#FF9900" opacity="0.8"/>
+    <line x1="810" y1="380" x2="750" y2="380" stroke="#FF5500" stroke-width="4" stroke-linecap="round" opacity="0.5"/>
+    <line x1="860" y1="420" x2="800" y2="420" stroke="#FF7700" stroke-width="3" stroke-linecap="round" opacity="0.4"/>
+
+    <!-- Lower-right cluster -->
+    <ellipse cx="780" cy="740" rx="10" ry="22" fill="#FF4400" opacity="0.9" transform="rotate(-45 780 740)"/>
+    <ellipse cx="820" cy="780" rx="9" ry="20" fill="#FF6600" opacity="0.85" transform="rotate(-45 820 780)"/>
+    <ellipse cx="740" cy="700" rx="9" ry="20" fill="#FF4400" opacity="0.8" transform="rotate(-45 740 700)"/>
+    <line x1="780" y1="740" x2="730" y2="690" stroke="#FF4400" stroke-width="4" stroke-linecap="round" opacity="0.5"/>
+
+    <!-- Bottom cluster -->
+    <ellipse cx="480" cy="880" rx="10" ry="22" fill="#FF5533" opacity="0.9"/>
+    <ellipse cx="512" cy="900" rx="9" ry="20" fill="#FF7744" opacity="0.85"/>
+    <ellipse cx="540" cy="876" rx="9" ry="20" fill="#FF5533" opacity="0.8"/>
+    <line x1="512" y1="880" x2="512" y2="820" stroke="#FF5533" stroke-width="4" stroke-linecap="round" opacity="0.5"/>
+
+    <!-- Upper-right cluster (different angle) -->
+    <ellipse cx="760" cy="250" rx="10" ry="22" fill="#FF3300" opacity="0.9" transform="rotate(-45 760 250)"/>
+    <ellipse cx="800" cy="210" rx="9" ry="20" fill="#FF5500" opacity="0.85" transform="rotate(-45 800 210)"/>
+    <line x1="760" y1="250" x2="710" y2="300" stroke="#FF3300" stroke-width="4" stroke-linecap="round" opacity="0.5"/>
+
+    <!-- Left cluster -->
+    <ellipse cx="200" cy="600" rx="22" ry="10" fill="#FF6644" opacity="0.9"/>
+    <ellipse cx="160" cy="570" rx="20" ry="9" fill="#FF8866" opacity="0.85"/>
+    <ellipse cx="165" cy="630" rx="20" ry="9" fill="#FF6644" opacity="0.8"/>
+    <line x1="200" y1="600" x2="260" y2="600" stroke="#FF6644" stroke-width="4" stroke-linecap="round" opacity="0.5"/>
+
+    <!-- Player ship (yellow, in motion — slightly diagonal) -->
+    <circle cx="520" cy="510" r="52" fill="url(#playerGlow02)"/>
+    <!-- Ship body (triangular, tilted slightly to show motion) -->
+    <polygon points="520,430 470,560 520,535 570,560" fill="#FFE040" transform="rotate(-15 520 495)"/>
+    <polygon points="520,430 470,560 520,535 570,560" fill="none" stroke="#FFFF88" stroke-width="3" transform="rotate(-15 520 495)"/>
+    <!-- Cockpit -->
+    <ellipse cx="515" cy="472" rx="14" ry="18" fill="#FFFF88" opacity="0.8" transform="rotate(-15 515 472)"/>
+    <!-- Engine trail (motion effect) -->
+    <ellipse cx="548" cy="548" rx="14" ry="24" fill="#FF8800" opacity="0.4" transform="rotate(-15 548 548)"/>
+    <ellipse cx="556" cy="562" rx="8" ry="16" fill="#FFCC00" opacity="0.3" transform="rotate(-15 556 562)"/>
+
+    <!-- Bullet just MISSED the player (very close, passing by) -->
+    <ellipse cx="458" cy="495" rx="8" ry="18" fill="#FF3300" opacity="0.95" transform="rotate(-20 458 495)"/>
+    <!-- Near-miss flash -->
+    <circle cx="458" cy="495" r="22" fill="#FF3300" opacity="0.2"/>
+
+    <!-- Layer 3: Score/time -->
+    <rect x="380" y="82" width="264" height="56" rx="14" fill="#080818"/>
+    <rect x="380" y="82" width="264" height="56" rx="14" fill="none" stroke="#FFE040" stroke-width="2" opacity="0.5"/>
+    <text x="512" y="120" font-family="'Segoe UI',Arial" font-size="36" font-weight="700" fill="#FFE040" text-anchor="middle" opacity="0.9">⏱ 28.5s</text>
+
+    <text x="512" y="980" font-family="'Segoe UI',Arial" font-size="36" font-weight="700" fill="#FF5500" text-anchor="middle" opacity="0.65">DODGE·BLITZ</text>
+  </g>
+</svg>

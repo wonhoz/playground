@@ -26,6 +26,7 @@ public partial class MainWindow : Window
     private bool _isTocVisible;
     private bool _suppressEditorChange;
     private DispatcherTimer? _previewTimer;
+    private DispatcherTimer? _autoSaveTimer;
     private string _currentTheme = "dark";
     private double _pendingScrollY = 0;
     private bool _webViewReady = false;
@@ -38,6 +39,7 @@ public partial class MainWindow : Window
         ApplySavedTheme();
         InitWebView();
         SetupPreviewTimer();
+        SetupAutoSaveTimer();
         RefreshRecentList();
     }
 
@@ -196,6 +198,43 @@ public partial class MainWindow : Window
             _previewTimer.Stop();
             RenderPreview(saveScroll: true);
         };
+    }
+
+    // ── 자동 저장 ────────────────────────────────────────────────────────
+
+    private void SetupAutoSaveTimer()
+    {
+        _autoSaveTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(30) };
+        _autoSaveTimer.Tick += AutoSave_Tick;
+    }
+
+    private async void AutoSave_Tick(object? sender, EventArgs e)
+    {
+        _autoSaveTimer?.Stop();
+        var modified = _docs.Where(d => d.IsModified && !string.IsNullOrEmpty(d.Content)).ToList();
+        if (modified.Count == 0) return;
+
+        var autoSaveDir = Path.Combine(
+            Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+            "MarkView", "autosave");
+        Directory.CreateDirectory(autoSaveDir);
+
+        await Task.Run(() =>
+        {
+            foreach (var doc in modified)
+            {
+                var baseName = doc.IsNew
+                    ? "unsaved"
+                    : Path.GetFileNameWithoutExtension(doc.FilePath);
+                var path = Path.Combine(autoSaveDir, baseName + ".autosave.md");
+                File.WriteAllText(path, doc.Content, new UTF8Encoding(true));
+            }
+        });
+
+        var prev = StatusPath.Text;
+        StatusPath.Text = $"자동 저장 완료 ({modified.Count}개)";
+        await Task.Delay(2000);
+        if (StatusPath.Text.StartsWith("자동 저장")) StatusPath.Text = prev;
     }
 
     // ── 탭 관리 ─────────────────────────────────────────────────────────
@@ -604,6 +643,9 @@ public partial class MainWindow : Window
         UpdateStatusBar(doc);
         _previewTimer?.Stop();
         _previewTimer?.Start();
+        // 자동 저장 타이머 재시작 (30초 비활동 후 저장)
+        _autoSaveTimer?.Stop();
+        _autoSaveTimer?.Start();
     }
 
     private void Editor_KeyDown(object sender, KeyEventArgs e)

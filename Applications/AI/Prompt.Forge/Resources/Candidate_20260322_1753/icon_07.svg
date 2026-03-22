@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 인디고 배경 -->
+  <defs>
+    <linearGradient id="bg7" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#312E81"/>
+      <stop offset="100%" stop-color="#1E1B4B"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg7)"/>
+  <!-- Layer 2: 로켓 — 대각선 상승 방향 -->
+  <g transform="rotate(-40 512 512)">
+    <!-- 로켓 몸통 -->
+    <ellipse cx="512" cy="460" rx="80" ry="160" fill="white"/>
+    <!-- 로켓 뾰족한 상단 -->
+    <path d="M432 360 Q512 200 592 360 Z" fill="#E0E7FF"/>
+    <!-- 로켓 창문 -->
+    <circle cx="512" cy="440" r="40" fill="#6366F1"/>
+    <circle cx="512" cy="440" r="28" fill="#818CF8"/>
+    <circle cx="500" cy="428" r="10" fill="white" opacity="0.6"/>
+    <!-- 로켓 날개 왼쪽 -->
+    <path d="M432 560 L380 640 L432 600 Z" fill="#C7D2FE"/>
+    <!-- 로켓 날개 오른쪽 -->
+    <path d="M592 560 L644 640 L592 600 Z" fill="#C7D2FE"/>
+    <!-- 불꽃 -->
+    <ellipse cx="512" cy="660" rx="45" ry="70" fill="#FF6B00" opacity="0.9"/>
+    <ellipse cx="512" cy="660" rx="28" ry="50" fill="#FFD700" opacity="0.9"/>
+    <ellipse cx="512" cy="655" rx="14" ry="30" fill="white" opacity="0.9"/>
+  </g>
+  <!-- Layer 3: 주변 별들과 텍스트 -->
+  <circle cx="200" cy="200" r="8" fill="white" opacity="0.7"/>
+  <circle cx="800" cy="250" r="6" fill="white" opacity="0.5"/>
+  <circle cx="850" cy="700" r="8" fill="white" opacity="0.6"/>
+  <circle cx="180" cy="750" r="5" fill="white" opacity="0.5"/>
+  <circle cx="320" cy="150" r="5" fill="white" opacity="0.6"/>
+  <!-- 궤적 선 -->
+  <path d="M200 820 Q380 680 520 540" stroke="white" stroke-width="4" fill="none" stroke-dasharray="10,8" opacity="0.3"/>
+  <!-- Prompt 레이블 -->
+  <rect x="620" y="750" width="240" height="52" rx="26" fill="#4F46E5" opacity="0.8"/>
+  <text x="740" y="782" font-family="sans-serif" font-size="22" fill="white" text-anchor="middle" font-weight="bold">Prompt →</text>
+</svg>

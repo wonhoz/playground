@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 에메랄드 배경 -->
+  <defs>
+    <linearGradient id="bg9" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#065F46"/>
+      <stop offset="100%" stop-color="#064E3B"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg9)"/>
+  <!-- Layer 2: 채팅 버블들 -->
+  <!-- 왼쪽 수신 버블 (AI) -->
+  <rect x="140" y="200" width="440" height="160" rx="28" fill="#10B981" opacity="0.85"/>
+  <path d="M160 360 L130 400 L220 360 Z" fill="#10B981" opacity="0.85"/>
+  <!-- 오른쪽 발신 버블 (사용자 — 프롬프트) -->
+  <rect x="440" y="480" width="440" height="200" rx="28" fill="white" opacity="0.95"/>
+  <path d="M864 680 L894 720 L804 680 Z" fill="white" opacity="0.95"/>
+  <!-- Layer 3: 버블 내용 + 화살표 -->
+  <!-- AI 버블 내용 -->
+  <rect x="176" y="230" width="280" height="16" rx="4" fill="white" opacity="0.7"/>
+  <rect x="176" y="258" width="240" height="16" rx="4" fill="white" opacity="0.7"/>
+  <rect x="176" y="286" width="200" height="16" rx="4" fill="white" opacity="0.7"/>
+  <!-- 사용자 버블 내용 (프롬프트 텍스트) -->
+  <rect x="472" y="510" width="360" height="16" rx="4" fill="#D1FAE5"/>
+  <rect x="472" y="538" width="300" height="16" rx="4" fill="#D1FAE5"/>
+  <!-- 하이라이트된 변수 부분 -->
+  <rect x="472" y="566" width="180" height="24" rx="6" fill="#10B981"/>
+  <text x="562" y="584" font-family="monospace" font-size="16" fill="white" text-anchor="middle" font-weight="bold">{{topic}}</text>
+  <rect x="472" y="602" width="280" height="16" rx="4" fill="#D1FAE5"/>
+  <!-- 복사 화살표 — 프롬프트가 흘러들어가는 연결선 -->
+  <path d="M350 430 Q420 440 440 490" stroke="#6EE7B7" stroke-width="6" fill="none" stroke-dasharray="12,8" marker-end="url(#arrow9)"/>
+  <defs>
+    <marker id="arrow9" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#6EE7B7"/>
+    </marker>
+  </defs>
+  <!-- 상태 표시 -->
+  <text x="512" y="840" font-family="sans-serif" font-size="24" fill="#6EE7B7" text-anchor="middle" opacity="0.8">copied to AI chat ✓</text>
+</svg>

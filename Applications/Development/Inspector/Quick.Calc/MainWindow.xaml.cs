@@ -49,7 +49,8 @@ public partial class MainWindow : Window
         var menu = new ContextMenuStrip
         {
             Renderer       = new DarkMenuRenderer(),
-            ShowImageMargin = false,
+            ShowImageMargin = true,
+            ShowCheckMargin = true,
             AutoSize        = true,
             Font            = new Font("Segoe UI", 9.5f)
         };

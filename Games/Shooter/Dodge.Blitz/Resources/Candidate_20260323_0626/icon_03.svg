@@ -1,0 +1,26 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Dodge.Blitz | 하트 게이지 — 생명력 | 레이어드 | #1A0008 -->
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="160" fill="#1A0008"/>
+  <!-- Layer 2: Hearts life gauge + player diamond -->
+  <!-- Life bar label -->
+  <text x="512" y="260" font-family="Arial,sans-serif" font-size="28" fill="#FB7185" text-anchor="middle">LIVES</text>
+  <!-- Heart 1 (full) -->
+  <path d="M260 320 Q260 280 300 280 Q320 280 340 300 Q360 280 380 280 Q420 280 420 320 Q420 360 340 400 Q260 360 260 320 Z" fill="#EF4444"/>
+  <!-- Heart 2 (full) -->
+  <path d="M420 320 Q420 280 460 280 Q480 280 500 300 Q520 280 540 280 Q580 280 580 320 Q580 360 500 400 Q420 360 420 320 Z" fill="#EF4444"/>
+  <!-- Heart 3 (full) -->
+  <path d="M580 320 Q580 280 620 280 Q640 280 660 300 Q680 280 700 280 Q740 280 740 320 Q740 360 660 400 Q580 360 580 320 Z" fill="#EF4444"/>
+  <!-- Heart 4 (half - taking damage) -->
+  <path d="M740 320 Q740 280 780 280 Q800 280 820 300 Q840 280 860 280 Q900 280 900 320 Q900 360 820 400 Q740 360 740 320 Z" fill="#374151" stroke="#6B7280" stroke-width="2"/>
+  <path d="M740 320 Q740 280 780 280 Q800 280 820 300 L820 400 Q740 360 740 320 Z" fill="#EF4444"/>
+  <!-- Player diamond (large, central) -->
+  <polygon points="512,460 660,580 512,700 364,580" fill="#00FFCC" opacity="0.15"/>
+  <polygon points="512,460 660,580 512,700 364,580" fill="none" stroke="#00FFCC" stroke-width="8" opacity="0.9"/>
+  <!-- Inner diamond -->
+  <polygon points="512,500 620,580 512,660 404,580" fill="none" stroke="#80FFEE" stroke-width="3" opacity="0.5"/>
+  <!-- Layer 3: Damage flash -->
+  <text x="860" y="700" font-family="Arial,sans-serif" font-size="32" fill="#EF4444" text-anchor="middle" opacity="0.7">-1</text>
+  <!-- Score -->
+  <text x="512" y="820" font-family="monospace" font-size="24" fill="#00FFCC" text-anchor="middle">SCORE: 8,420</text>
+</svg>

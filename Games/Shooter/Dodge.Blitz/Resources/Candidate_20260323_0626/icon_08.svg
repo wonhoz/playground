@@ -1,0 +1,54 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Dodge.Blitz | 분신술 — 고속 회피로 생기는 다중 잔상 | 실루엣 | #001818 -->
+  <defs>
+    <filter id="afterimageGlow8">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="160" fill="#001818"/>
+  <!-- Faint grid lines -->
+  <line x1="200" y1="200" x2="800" y2="200" stroke="#002222" stroke-width="1"/>
+  <line x1="200" y1="400" x2="800" y2="400" stroke="#002222" stroke-width="1"/>
+  <line x1="200" y1="600" x2="800" y2="600" stroke="#002222" stroke-width="1"/>
+  <line x1="200" y1="800" x2="800" y2="800" stroke="#002222" stroke-width="1"/>
+  <line x1="200" y1="200" x2="200" y2="800" stroke="#002222" stroke-width="1"/>
+  <line x1="400" y1="200" x2="400" y2="800" stroke="#002222" stroke-width="1"/>
+  <line x1="600" y1="200" x2="600" y2="800" stroke="#002222" stroke-width="1"/>
+  <line x1="800" y1="200" x2="800" y2="800" stroke="#002222" stroke-width="1"/>
+  <!-- Layer 2: Multiple player afterimages (oldest = most faded, rightmost = current) -->
+  <!-- Afterimage 1 (oldest, far left, very faint) -->
+  <polygon points="200,600 184,576 192,550 208,550 216,576" fill="#00FFAA" opacity="0.08"/>
+  <!-- Afterimage 2 -->
+  <polygon points="260,480 244,456 252,430 268,430 276,456" fill="#00FFAA" opacity="0.14"/>
+  <!-- Afterimage 3 -->
+  <polygon points="340,420 324,396 332,370 348,370 356,396" fill="#00FFAA" opacity="0.22"/>
+  <!-- Afterimage 4 -->
+  <polygon points="420,460 404,436 412,410 428,410 436,436" fill="#00FFAA" opacity="0.32"/>
+  <!-- Afterimage 5 -->
+  <polygon points="500,380 484,356 492,330 508,330 516,356" fill="#00FFAA" opacity="0.44"/>
+  <!-- Afterimage 6 -->
+  <polygon points="580,440 564,416 572,390 588,390 596,416" fill="#00FFAA" opacity="0.58"/>
+  <!-- Afterimage 7 (most recent) -->
+  <polygon points="660,360 644,336 652,310 668,310 676,336" fill="#00FFAA" opacity="0.75"/>
+  <!-- Current player position (fully visible, bright) -->
+  <polygon points="740,300 724,276 732,252 748,252 756,276" fill="#FFFFFF" stroke="#00FFAA" stroke-width="3" filter="url(#afterimageGlow8)"/>
+  <!-- Speed blur trail connecting all positions -->
+  <path d="M 200 575 Q 280 450 340 395 Q 400 440 500 355 Q 580 440 660 335 Q 700 308 740 275" stroke="#00FFAA" stroke-width="3" fill="none" opacity="0.3" stroke-dasharray="8,6" filter="url(#afterimageGlow8)"/>
+  <!-- Incoming bullets being dodged -->
+  <!-- Bullet wave from right -->
+  <ellipse cx="850" cy="300" rx="22" ry="9" fill="#FF3333" stroke="#FF6666" stroke-width="2" filter="url(#afterimageGlow8)"/>
+  <line x1="810" y1="300" x2="850" y2="300" stroke="#FF6666" stroke-width="3" opacity="0.6"/>
+  <ellipse cx="830" cy="450" rx="22" ry="9" fill="#FF6600" stroke="#FFAA44" stroke-width="2" filter="url(#afterimageGlow8)"/>
+  <line x1="790" y1="450" x2="830" y2="450" stroke="#FFAA44" stroke-width="3" opacity="0.6"/>
+  <ellipse cx="860" cy="550" rx="22" ry="9" fill="#FF3333" stroke="#FF6666" stroke-width="2"/>
+  <line x1="820" y1="550" x2="860" y2="550" stroke="#FF6666" stroke-width="3" opacity="0.5"/>
+  <!-- Impact markers where bullets missed -->
+  <text x="720" y="310" font-family="monospace" font-size="20" fill="#FF3333" opacity="0.4">✕</text>
+  <text x="660" y="460" font-family="monospace" font-size="18" fill="#FF6600" opacity="0.3">✕</text>
+  <!-- Layer 3: Multiplier display -->
+  <rect x="200" y="840" width="240" height="50" rx="8" fill="#001A14" stroke="#00FFAA" stroke-width="2"/>
+  <text x="320" y="864" font-family="monospace" font-size="14" fill="#00FFAA" text-anchor="middle">분신: ×8</text>
+  <text x="320" y="882" font-family="monospace" font-size="12" fill="#44DDAA" text-anchor="middle">회피 보너스 ×2</text>
+</svg>

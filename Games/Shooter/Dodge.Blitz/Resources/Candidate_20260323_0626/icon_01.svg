@@ -1,0 +1,45 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Dodge.Blitz | 매트릭스 녹색 코드 비처럼 탄막 | 공간/장면 | #000A04 -->
+  <defs>
+    <filter id="matrixGlow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="160" fill="#000A04"/>
+  <!-- Layer 2: Falling bullet columns (matrix-style) -->
+  <!-- Column 1 -->
+  <circle cx="188" cy="200" r="12" fill="#00FF66" filter="url(#matrixGlow)" opacity="0.9"/>
+  <circle cx="188" cy="280" r="11" fill="#00DD55" opacity="0.7"/>
+  <circle cx="188" cy="360" r="10" fill="#00BB44" opacity="0.5"/>
+  <circle cx="188" cy="440" r="9" fill="#009933" opacity="0.3"/>
+  <!-- Column 2 -->
+  <circle cx="308" cy="320" r="12" fill="#EF4444" filter="url(#matrixGlow)" opacity="0.9"/>
+  <circle cx="308" cy="400" r="11" fill="#DC2626" opacity="0.7"/>
+  <circle cx="308" cy="480" r="10" fill="#B91C1C" opacity="0.5"/>
+  <circle cx="308" cy="560" r="9" fill="#991B1B" opacity="0.3"/>
+  <!-- Column 3 -->
+  <circle cx="428" cy="160" r="12" fill="#FBBF24" filter="url(#matrixGlow)" opacity="0.9"/>
+  <circle cx="428" cy="240" r="11" fill="#F59E0B" opacity="0.7"/>
+  <circle cx="428" cy="320" r="10" fill="#D97706" opacity="0.5"/>
+  <circle cx="428" cy="400" r="9" fill="#B45309" opacity="0.3"/>
+  <!-- Column 5 (right of player) -->
+  <circle cx="596" cy="240" r="12" fill="#EF4444" filter="url(#matrixGlow)" opacity="0.9"/>
+  <circle cx="596" cy="320" r="11" fill="#DC2626" opacity="0.7"/>
+  <circle cx="596" cy="400" r="10" fill="#B91C1C" opacity="0.5"/>
+  <!-- Column 6 -->
+  <circle cx="716" cy="180" r="12" fill="#FBBF24" filter="url(#matrixGlow)" opacity="0.9"/>
+  <circle cx="716" cy="260" r="11" fill="#F59E0B" opacity="0.7"/>
+  <circle cx="716" cy="340" r="10" fill="#D97706" opacity="0.5"/>
+  <circle cx="716" cy="420" r="9" fill="#B45309" opacity="0.3"/>
+  <!-- Column 7 -->
+  <circle cx="836" cy="300" r="12" fill="#00FF66" filter="url(#matrixGlow)" opacity="0.9"/>
+  <circle cx="836" cy="380" r="11" fill="#00DD55" opacity="0.7"/>
+  <circle cx="836" cy="460" r="10" fill="#00BB44" opacity="0.5"/>
+  <!-- Layer 3: Player diamond (dodging) at bottom -->
+  <polygon points="512,740 600,820 512,900 424,820" fill="#00FFCC" opacity="0.9" filter="url(#matrixGlow)"/>
+  <polygon points="512,740 600,820 512,900 424,820" fill="none" stroke="#80FFEE" stroke-width="5"/>
+  <!-- Movement indicator -->
+  <line x1="512" y1="740" x2="452" y2="680" stroke="#00FFCC" stroke-width="3" stroke-dasharray="8,4" opacity="0.5"/>
+</svg>

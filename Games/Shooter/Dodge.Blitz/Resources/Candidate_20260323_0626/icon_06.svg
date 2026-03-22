@@ -1,0 +1,53 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Dodge.Blitz | 미로 속 이동 — 총알이 가득한 미로 탈출 | 기하학 | #0A000A -->
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="160" fill="#0A000A"/>
+  <!-- Layer 2: Maze walls -->
+  <!-- Outer boundary -->
+  <rect x="180" y="180" width="664" height="664" rx="4" fill="none" stroke="#FF0066" stroke-width="6"/>
+  <!-- Maze internal walls (simplified but recognizable maze) -->
+  <!-- Horizontal walls -->
+  <line x1="180" y1="290" x2="400" y2="290" stroke="#FF0066" stroke-width="5"/>
+  <line x1="460" y1="290" x2="600" y2="290" stroke="#FF0066" stroke-width="5"/>
+  <line x1="280" y1="400" x2="440" y2="400" stroke="#FF0066" stroke-width="5"/>
+  <line x1="500" y1="400" x2="700" y2="400" stroke="#FF0066" stroke-width="5"/>
+  <line x1="180" y1="510" x2="320" y2="510" stroke="#FF0066" stroke-width="5"/>
+  <line x1="380" y1="510" x2="560" y2="510" stroke="#FF0066" stroke-width="5"/>
+  <line x1="620" y1="510" x2="844" y2="510" stroke="#FF0066" stroke-width="5"/>
+  <line x1="240" y1="620" x2="480" y2="620" stroke="#FF0066" stroke-width="5"/>
+  <line x1="540" y1="620" x2="700" y2="620" stroke="#FF0066" stroke-width="5"/>
+  <line x1="400" y1="730" x2="660" y2="730" stroke="#FF0066" stroke-width="5"/>
+  <!-- Vertical walls -->
+  <line x1="290" y1="180" x2="290" y2="400" stroke="#FF0066" stroke-width="5"/>
+  <line x1="400" y1="290" x2="400" y2="510" stroke="#FF0066" stroke-width="5"/>
+  <line x1="510" y1="180" x2="510" y2="290" stroke="#FF0066" stroke-width="5"/>
+  <line x1="620" y1="290" x2="620" y2="400" stroke="#FF0066" stroke-width="5"/>
+  <line x1="730" y1="400" x2="730" y2="620" stroke="#FF0066" stroke-width="5"/>
+  <line x1="510" y1="510" x2="510" y2="730" stroke="#FF0066" stroke-width="5"/>
+  <line x1="290" y1="510" x2="290" y2="730" stroke="#FF0066" stroke-width="5"/>
+  <line x1="620" y1="620" x2="620" y2="844" stroke="#FF0066" stroke-width="5"/>
+  <!-- Layer 2b: Player (diamond) navigating the maze -->
+  <!-- Player current position (bright diamond) -->
+  <polygon points="430,455 455,430 480,455 455,480" fill="#00FFFF" stroke="#88FFFF" stroke-width="3"/>
+  <!-- Player trail -->
+  <polygon points="320,345 338,327 356,345 338,363" fill="#00FFFF" opacity="0.3" stroke="#44CCCC" stroke-width="1"/>
+  <polygon points="430,345 448,327 466,345 448,363" fill="#00FFFF" opacity="0.2" stroke="#44CCCC" stroke-width="1"/>
+  <!-- Bullets in corridors -->
+  <!-- Bullet coming from right -->
+  <ellipse cx="680" cy="455" rx="16" ry="8" fill="#FF4444" stroke="#FF8888" stroke-width="2"/>
+  <polygon points="696,455 714,447 714,463" fill="#FF2222"/>
+  <!-- Bullet coming from top -->
+  <ellipse cx="455" cy="230" rx="8" ry="16" fill="#FF8800" stroke="#FFAA44" stroke-width="2"/>
+  <polygon points="455,214 447,200 463,200" fill="#FF6600"/>
+  <!-- Bullet from left (different corridor) -->
+  <ellipse cx="220" cy="345" rx="16" ry="8" fill="#FF4444" stroke="#FF8888" stroke-width="2"/>
+  <polygon points="204,345 186,337 186,353" fill="#FF2222"/>
+  <!-- Exit marker (green glow at bottom-right) -->
+  <rect x="772" y="772" width="68" height="68" rx="4" fill="#001A00" stroke="#00FF44" stroke-width="4"/>
+  <text x="806" y="815" font-family="Arial,sans-serif" font-size="22" fill="#00FF44" text-anchor="middle" font-weight="bold">GO</text>
+  <!-- Start marker (top-left) -->
+  <rect x="184" y="184" width="60" height="60" rx="4" fill="#000A14" stroke="#22D3EE" stroke-width="3"/>
+  <text x="214" y="222" font-family="Arial,sans-serif" font-size="16" fill="#22D3EE" text-anchor="middle" font-weight="bold">ST</text>
+  <!-- Layer 3: HUD elements -->
+  <text x="512" y="900" font-family="monospace" font-size="16" fill="#FF0066" text-anchor="middle">WAVE 03  |  탈출구까지: 3단계</text>
+</svg>

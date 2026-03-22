@@ -1,0 +1,36 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Dodge.Blitz | 방패 배리어 — 방어막 | 중앙심볼 | #000A1E -->
+  <defs>
+    <radialGradient id="shieldGrad" cx="50%" cy="40%" r="65%">
+      <stop offset="0%" stop-color="#1E40AF" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#1E3A8A" stop-opacity="0.2"/>
+    </radialGradient>
+    <filter id="shieldGlow">
+      <feGaussianBlur stdDeviation="16" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="160" fill="#000A1E"/>
+  <!-- Layer 2: Shield energy barrier -->
+  <!-- Outer shield ring -->
+  <circle cx="512" cy="480" r="260" fill="none" stroke="#3B82F6" stroke-width="8" opacity="0.7" filter="url(#shieldGlow)"/>
+  <circle cx="512" cy="480" r="230" fill="none" stroke="#60A5FA" stroke-width="4" opacity="0.5"/>
+  <circle cx="512" cy="480" r="200" fill="url(#shieldGrad)"/>
+  <!-- Shield hexagon pattern inside -->
+  <polygon points="512,300 660,390 660,570 512,660 364,570 364,390" fill="none" stroke="#60A5FA" stroke-width="5" filter="url(#shieldGlow)"/>
+  <!-- Inner diamond (player) -->
+  <polygon points="512,400 572,480 512,560 452,480" fill="#00FFCC" opacity="0.9" filter="url(#shieldGlow)"/>
+  <!-- Bullets deflecting off shield -->
+  <circle cx="276" cy="380" r="14" fill="#EF4444" opacity="0.8"/>
+  <line x1="276" y1="380" x2="230" y2="340" stroke="#EF4444" stroke-width="5" stroke-linecap="round" opacity="0.7"/>
+  <circle cx="746" cy="400" r="14" fill="#FBBF24" opacity="0.8"/>
+  <line x1="746" y1="400" x2="792" y2="360" stroke="#FBBF24" stroke-width="5" stroke-linecap="round" opacity="0.7"/>
+  <circle cx="340" cy="660" r="14" fill="#F472B6" opacity="0.8"/>
+  <line x1="340" y1="660" x2="296" y2="706" stroke="#F472B6" stroke-width="5" stroke-linecap="round" opacity="0.7"/>
+  <!-- Shield ripple on impact -->
+  <circle cx="276" cy="380" r="36" fill="none" stroke="#3B82F6" stroke-width="3" opacity="0.5"/>
+  <circle cx="746" cy="400" r="36" fill="none" stroke="#3B82F6" stroke-width="3" opacity="0.5"/>
+  <!-- Layer 3: Shield timer -->
+  <text x="512" y="800" font-family="Arial,sans-serif" font-size="28" fill="#60A5FA" text-anchor="middle">배리어 2.0s</text>
+</svg>

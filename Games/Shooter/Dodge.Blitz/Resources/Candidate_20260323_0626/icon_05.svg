@@ -1,0 +1,71 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Dodge.Blitz | 잔상 궤적 — 고속 회피 이동의 흔적 | 대각선/동적 | #001A10 -->
+  <defs>
+    <filter id="trailGlow5">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <linearGradient id="trailFade5a" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00FF88" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#00FF88" stop-opacity="0.8"/>
+    </linearGradient>
+    <linearGradient id="trailFade5b" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00DDFF" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#00DDFF" stop-opacity="0.7"/>
+    </linearGradient>
+    <linearGradient id="trailFade5c" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FFFF00" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#FFFF00" stop-opacity="0.6"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="160" fill="#001A10"/>
+  <!-- Subtle grid -->
+  <line x1="200" y1="200" x2="800" y2="200" stroke="#003A20" stroke-width="1" opacity="0.5"/>
+  <line x1="200" y1="350" x2="800" y2="350" stroke="#003A20" stroke-width="1" opacity="0.5"/>
+  <line x1="200" y1="500" x2="800" y2="500" stroke="#003A20" stroke-width="1" opacity="0.5"/>
+  <line x1="200" y1="650" x2="800" y2="650" stroke="#003A20" stroke-width="1" opacity="0.5"/>
+  <line x1="200" y1="800" x2="800" y2="800" stroke="#003A20" stroke-width="1" opacity="0.5"/>
+  <line x1="200" y1="200" x2="200" y2="800" stroke="#003A20" stroke-width="1" opacity="0.5"/>
+  <line x1="350" y1="200" x2="350" y2="800" stroke="#003A20" stroke-width="1" opacity="0.5"/>
+  <line x1="500" y1="200" x2="500" y2="800" stroke="#003A20" stroke-width="1" opacity="0.5"/>
+  <line x1="650" y1="200" x2="650" y2="800" stroke="#003A20" stroke-width="1" opacity="0.5"/>
+  <line x1="800" y1="200" x2="800" y2="800" stroke="#003A20" stroke-width="1" opacity="0.5"/>
+  <!-- Layer 2: Motion trail path (S-curve dodge trajectory) -->
+  <!-- Ghost trail 1 (oldest, faintest - bottom left) -->
+  <polygon points="280,710 264,694 272,670 288,670 296,694" fill="#00FF88" opacity="0.12"/>
+  <!-- Ghost trail 2 -->
+  <polygon points="320,640 304,624 312,600 328,600 336,624" fill="#00FF88" opacity="0.2"/>
+  <!-- Ghost trail 3 -->
+  <polygon points="400,540 384,524 392,500 408,500 416,524" fill="#00FF88" opacity="0.3"/>
+  <!-- Ghost trail 4 -->
+  <polygon points="480,460 464,444 472,420 488,420 496,444" fill="#00FF88" opacity="0.4"/>
+  <!-- Ghost trail 5 -->
+  <polygon points="560,500 544,484 552,460 568,460 576,484" fill="#00FF88" opacity="0.5"/>
+  <!-- Ghost trail 6 -->
+  <polygon points="640,420 624,404 632,380 648,380 656,404" fill="#00FF88" opacity="0.65"/>
+  <!-- Ghost trail 7 (most recent) -->
+  <polygon points="700,340 684,324 692,300 708,300 716,324" fill="#00FF88" opacity="0.8"/>
+  <!-- Current player position (brightest) -->
+  <polygon points="760,280 744,264 752,240 768,240 776,264" fill="#FFFFFF" stroke="#00FF88" stroke-width="3" filter="url(#trailGlow5)"/>
+  <!-- Trail glow line connecting all positions -->
+  <path d="M 284 690 Q 340 600 400 520 Q 460 440 500 480 Q 540 520 620 400 Q 680 310 760 260" stroke="url(#trailFade5a)" stroke-width="8" fill="none" stroke-linecap="round" filter="url(#trailGlow5)"/>
+  <!-- Bullets being dodged (red projectiles) -->
+  <!-- Bullet 1 - flying past -->
+  <ellipse cx="340" cy="500" rx="20" ry="8" fill="#FF3333" transform="rotate(-15 340 500)" filter="url(#trailGlow5)"/>
+  <line x1="300" y1="510" x2="340" y2="500" stroke="#FF6666" stroke-width="3" opacity="0.6"/>
+  <!-- Bullet 2 -->
+  <ellipse cx="580" cy="380" rx="20" ry="8" fill="#FF3333" transform="rotate(10 580 380)" filter="url(#trailGlow5)"/>
+  <line x1="540" y1="374" x2="580" y2="380" stroke="#FF6666" stroke-width="3" opacity="0.6"/>
+  <!-- Bullet 3 -->
+  <ellipse cx="450" cy="630" rx="20" ry="8" fill="#FF8800" transform="rotate(-5 450 630)" filter="url(#trailGlow5)"/>
+  <line x1="410" y1="632" x2="450" y2="630" stroke="#FFAA44" stroke-width="3" opacity="0.6"/>
+  <!-- Speed lines from player -->
+  <line x1="745" y1="248" x2="680" y2="240" stroke="#00FF88" stroke-width="2" opacity="0.5" stroke-dasharray="8,6"/>
+  <line x1="745" y1="260" x2="680" y2="260" stroke="#00FF88" stroke-width="3" opacity="0.6" stroke-dasharray="10,5"/>
+  <line x1="745" y1="272" x2="680" y2="278" stroke="#00FF88" stroke-width="2" opacity="0.5" stroke-dasharray="8,6"/>
+  <!-- Layer 3: Speed indicator -->
+  <rect x="200" y="820" width="200" height="40" rx="6" fill="#002A18" stroke="#00FF88" stroke-width="2"/>
+  <text x="300" y="846" font-family="monospace" font-size="16" fill="#00FF88" text-anchor="middle" font-weight="bold">× SPEED</text>
+  <rect x="200" y="820" width="140" height="40" rx="6" fill="#00FF88" opacity="0.25"/>
+</svg>

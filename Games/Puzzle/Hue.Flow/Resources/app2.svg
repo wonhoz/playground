@@ -1,84 +1,110 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
-  <!-- Layer 1: Background -->
-  <rect width="1024" height="1024" rx="180" fill="#1e1e2e"/>
+  <!-- Layer 1: Background - mint/green tinted light -->
+  <defs>
+    <linearGradient id="bg5" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E8FFF0"/>
+      <stop offset="100%" stop-color="#D0F5E8"/>
+    </linearGradient>
+    <linearGradient id="flood5" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#A6E3A1"/>
+      <stop offset="100%" stop-color="#89DCEB"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="180" fill="url(#bg5)"/>
 
-  <!-- Layer 2: 10x10 Grid - flood fill spreading from top-left (periwinkle blue) -->
-  <!-- Tile size: 74px, gap: 6px, grid start: 215, 215 -->
-  <!-- Flooded tiles (blue region - top-left spreading) -->
+  <!-- Layer 2: Game board representation (8x8 tiles visible) -->
+  <!-- Tile size 68px, gap 7px, start at (155, 155) -->
+  <!-- Flood zone: top-left 4x4 = mint/teal gradient -->
   <!-- Row 0 -->
-  <rect x="215" y="215" width="74" height="74" rx="8" fill="#89B4FA"/>
-  <rect x="295" y="215" width="74" height="74" rx="8" fill="#89B4FA"/>
-  <rect x="375" y="215" width="74" height="74" rx="8" fill="#89B4FA"/>
-  <rect x="455" y="215" width="74" height="74" rx="8" fill="#89B4FA"/>
-  <rect x="535" y="215" width="74" height="74" rx="8" fill="#89B4FA"/>
-  <rect x="615" y="215" width="74" height="74" rx="8" fill="#CBA6F7"/>
-  <rect x="695" y="215" width="74" height="74" rx="8" fill="#F38BA8"/>
-  <rect x="775" y="215" width="74" height="74" rx="8" fill="#A6E3A1"/>
+  <rect x="155" y="155" width="68" height="68" rx="9" fill="url(#flood5)"/>
+  <rect x="230" y="155" width="68" height="68" rx="9" fill="url(#flood5)"/>
+  <rect x="305" y="155" width="68" height="68" rx="9" fill="url(#flood5)"/>
+  <rect x="380" y="155" width="68" height="68" rx="9" fill="url(#flood5)"/>
+  <rect x="455" y="155" width="68" height="68" rx="9" fill="url(#flood5)"/>
+  <rect x="530" y="155" width="68" height="68" rx="9" fill="#CBA6F7"/>
+  <rect x="605" y="155" width="68" height="68" rx="9" fill="#F38BA8"/>
+  <rect x="680" y="155" width="68" height="68" rx="9" fill="#FAB387"/>
   <!-- Row 1 -->
-  <rect x="215" y="295" width="74" height="74" rx="8" fill="#89B4FA"/>
-  <rect x="295" y="295" width="74" height="74" rx="8" fill="#89B4FA"/>
-  <rect x="375" y="295" width="74" height="74" rx="8" fill="#89B4FA"/>
-  <rect x="455" y="295" width="74" height="74" rx="8" fill="#89B4FA"/>
-  <rect x="535" y="295" width="74" height="74" rx="8" fill="#CBA6F7"/>
-  <rect x="615" y="295" width="74" height="74" rx="8" fill="#FAB387"/>
-  <rect x="695" y="295" width="74" height="74" rx="8" fill="#A6E3A1"/>
-  <rect x="775" y="295" width="74" height="74" rx="8" fill="#89DCEB"/>
+  <rect x="155" y="230" width="68" height="68" rx="9" fill="url(#flood5)"/>
+  <rect x="230" y="230" width="68" height="68" rx="9" fill="url(#flood5)"/>
+  <rect x="305" y="230" width="68" height="68" rx="9" fill="url(#flood5)"/>
+  <rect x="380" y="230" width="68" height="68" rx="9" fill="url(#flood5)"/>
+  <rect x="455" y="230" width="68" height="68" rx="9" fill="#CBA6F7"/>
+  <rect x="530" y="230" width="68" height="68" rx="9" fill="#F38BA8"/>
+  <rect x="605" y="230" width="68" height="68" rx="9" fill="#FAB387"/>
+  <rect x="680" y="230" width="68" height="68" rx="9" fill="#89B4FA"/>
   <!-- Row 2 -->
-  <rect x="215" y="375" width="74" height="74" rx="8" fill="#89B4FA"/>
-  <rect x="295" y="375" width="74" height="74" rx="8" fill="#89B4FA"/>
-  <rect x="375" y="375" width="74" height="74" rx="8" fill="#89B4FA"/>
-  <rect x="455" y="375" width="74" height="74" rx="8" fill="#CBA6F7"/>
-  <rect x="535" y="375" width="74" height="74" rx="8" fill="#F38BA8"/>
-  <rect x="615" y="375" width="74" height="74" rx="8" fill="#A6E3A1"/>
-  <rect x="695" y="375" width="74" height="74" rx="8" fill="#FAB387"/>
-  <rect x="775" y="375" width="74" height="74" rx="8" fill="#CBA6F7"/>
+  <rect x="155" y="305" width="68" height="68" rx="9" fill="url(#flood5)"/>
+  <rect x="230" y="305" width="68" height="68" rx="9" fill="url(#flood5)"/>
+  <rect x="305" y="305" width="68" height="68" rx="9" fill="url(#flood5)"/>
+  <rect x="380" y="305" width="68" height="68" rx="9" fill="#CBA6F7"/>
+  <rect x="455" y="305" width="68" height="68" rx="9" fill="#FAB387"/>
+  <rect x="530" y="305" width="68" height="68" rx="9" fill="#89B4FA"/>
+  <rect x="605" y="305" width="68" height="68" rx="9" fill="#F38BA8"/>
+  <rect x="680" y="305" width="68" height="68" rx="9" fill="#CBA6F7"/>
   <!-- Row 3 -->
-  <rect x="215" y="455" width="74" height="74" rx="8" fill="#89B4FA"/>
-  <rect x="295" y="455" width="74" height="74" rx="8" fill="#89B4FA"/>
-  <rect x="375" y="455" width="74" height="74" rx="8" fill="#CBA6F7"/>
-  <rect x="455" y="455" width="74" height="74" rx="8" fill="#F38BA8"/>
-  <rect x="535" y="455" width="74" height="74" rx="8" fill="#FAB387"/>
-  <rect x="615" y="455" width="74" height="74" rx="8" fill="#89DCEB"/>
-  <rect x="695" y="455" width="74" height="74" rx="8" fill="#A6E3A1"/>
-  <rect x="775" y="455" width="74" height="74" rx="8" fill="#F38BA8"/>
+  <rect x="155" y="380" width="68" height="68" rx="9" fill="url(#flood5)"/>
+  <rect x="230" y="380" width="68" height="68" rx="9" fill="url(#flood5)"/>
+  <rect x="305" y="380" width="68" height="68" rx="9" fill="#CBA6F7"/>
+  <rect x="380" y="380" width="68" height="68" rx="9" fill="#F38BA8"/>
+  <rect x="455" y="380" width="68" height="68" rx="9" fill="#89B4FA"/>
+  <rect x="530" y="380" width="68" height="68" rx="9" fill="#FAB387"/>
+  <rect x="605" y="380" width="68" height="68" rx="9" fill="#89DCEB"/>
+  <rect x="680" y="380" width="68" height="68" rx="9" fill="#A6E3A1"/>
   <!-- Row 4 -->
-  <rect x="215" y="535" width="74" height="74" rx="8" fill="#89B4FA"/>
-  <rect x="295" y="535" width="74" height="74" rx="8" fill="#CBA6F7"/>
-  <rect x="375" y="535" width="74" height="74" rx="8" fill="#F38BA8"/>
-  <rect x="455" y="535" width="74" height="74" rx="8" fill="#89DCEB"/>
-  <rect x="535" y="535" width="74" height="74" rx="8" fill="#A6E3A1"/>
-  <rect x="615" y="535" width="74" height="74" rx="8" fill="#FAB387"/>
-  <rect x="695" y="535" width="74" height="74" rx="8" fill="#CBA6F7"/>
-  <rect x="775" y="535" width="74" height="74" rx="8" fill="#89DCEB"/>
+  <rect x="155" y="455" width="68" height="68" rx="9" fill="url(#flood5)"/>
+  <rect x="230" y="455" width="68" height="68" rx="9" fill="#CBA6F7"/>
+  <rect x="305" y="455" width="68" height="68" rx="9" fill="#F38BA8"/>
+  <rect x="380" y="455" width="68" height="68" rx="9" fill="#89DCEB"/>
+  <rect x="455" y="455" width="68" height="68" rx="9" fill="#FAB387"/>
+  <rect x="530" y="455" width="68" height="68" rx="9" fill="#CBA6F7"/>
+  <rect x="605" y="455" width="68" height="68" rx="9" fill="#F38BA8"/>
+  <rect x="680" y="455" width="68" height="68" rx="9" fill="#89B4FA"/>
   <!-- Row 5 -->
-  <rect x="215" y="615" width="74" height="74" rx="8" fill="#CBA6F7"/>
-  <rect x="295" y="615" width="74" height="74" rx="8" fill="#F38BA8"/>
-  <rect x="375" y="615" width="74" height="74" rx="8" fill="#A6E3A1"/>
-  <rect x="455" y="615" width="74" height="74" rx="8" fill="#FAB387"/>
-  <rect x="535" y="615" width="74" height="74" rx="8" fill="#89B4FA"/>
-  <rect x="615" y="615" width="74" height="74" rx="8" fill="#F38BA8"/>
-  <rect x="695" y="615" width="74" height="74" rx="8" fill="#89DCEB"/>
-  <rect x="775" y="615" width="74" height="74" rx="8" fill="#A6E3A1"/>
+  <rect x="155" y="530" width="68" height="68" rx="9" fill="#CBA6F7"/>
+  <rect x="230" y="530" width="68" height="68" rx="9" fill="#F38BA8"/>
+  <rect x="305" y="530" width="68" height="68" rx="9" fill="#89B4FA"/>
+  <rect x="380" y="530" width="68" height="68" rx="9" fill="#CBA6F7"/>
+  <rect x="455" y="530" width="68" height="68" rx="9" fill="#89DCEB"/>
+  <rect x="530" y="530" width="68" height="68" rx="9" fill="#A6E3A1"/>
+  <rect x="605" y="530" width="68" height="68" rx="9" fill="#FAB387"/>
+  <rect x="680" y="530" width="68" height="68" rx="9" fill="#F38BA8"/>
   <!-- Row 6 -->
-  <rect x="215" y="695" width="74" height="74" rx="8" fill="#F38BA8"/>
-  <rect x="295" y="695" width="74" height="74" rx="8" fill="#A6E3A1"/>
-  <rect x="375" y="695" width="74" height="74" rx="8" fill="#FAB387"/>
-  <rect x="455" y="695" width="74" height="74" rx="8" fill="#89DCEB"/>
-  <rect x="535" y="695" width="74" height="74" rx="8" fill="#CBA6F7"/>
-  <rect x="615" y="695" width="74" height="74" rx="8" fill="#89B4FA"/>
-  <rect x="695" y="695" width="74" height="74" rx="8" fill="#FAB387"/>
-  <rect x="775" y="695" width="74" height="74" rx="8" fill="#F38BA8"/>
+  <rect x="155" y="605" width="68" height="68" rx="9" fill="#F38BA8"/>
+  <rect x="230" y="605" width="68" height="68" rx="9" fill="#89B4FA"/>
+  <rect x="305" y="605" width="68" height="68" rx="9" fill="#FAB387"/>
+  <rect x="380" y="605" width="68" height="68" rx="9" fill="#A6E3A1"/>
+  <rect x="455" y="605" width="68" height="68" rx="9" fill="#F38BA8"/>
+  <rect x="530" y="605" width="68" height="68" rx="9" fill="#89B4FA"/>
+  <rect x="605" y="605" width="68" height="68" rx="9" fill="#CBA6F7"/>
+  <rect x="680" y="605" width="68" height="68" rx="9" fill="#89DCEB"/>
   <!-- Row 7 -->
-  <rect x="215" y="775" width="74" height="74" rx="8" fill="#A6E3A1"/>
-  <rect x="295" y="775" width="74" height="74" rx="8" fill="#89DCEB"/>
-  <rect x="375" y="775" width="74" height="74" rx="8" fill="#CBA6F7"/>
-  <rect x="455" y="775" width="74" height="74" rx="8" fill="#89B4FA"/>
-  <rect x="535" y="775" width="74" height="74" rx="8" fill="#F38BA8"/>
-  <rect x="615" y="775" width="74" height="74" rx="8" fill="#A6E3A1"/>
-  <rect x="695" y="775" width="74" height="74" rx="8" fill="#89B4FA"/>
-  <rect x="775" y="775" width="74" height="74" rx="8" fill="#CBA6F7"/>
+  <rect x="155" y="680" width="68" height="68" rx="9" fill="#89B4FA"/>
+  <rect x="230" y="680" width="68" height="68" rx="9" fill="#CBA6F7"/>
+  <rect x="305" y="680" width="68" height="68" rx="9" fill="#89DCEB"/>
+  <rect x="380" y="680" width="68" height="68" rx="9" fill="#FAB387"/>
+  <rect x="455" y="680" width="68" height="68" rx="9" fill="#89B4FA"/>
+  <rect x="530" y="680" width="68" height="68" rx="9" fill="#F38BA8"/>
+  <rect x="605" y="680" width="68" height="68" rx="9" fill="#A6E3A1"/>
+  <rect x="680" y="680" width="68" height="68" rx="9" fill="#FAB387"/>
 
-  <!-- Layer 3: Flood arrow overlay (top-left corner marker) -->
-  <circle cx="252" cy="252" r="22" fill="#ffffff" opacity="0.25"/>
-  <polygon points="252,234 270,270 252,260 234,270" fill="#ffffff" opacity="0.85"/>
+  <!-- Layer 3: Palette bar + counter right side -->
+  <!-- Counter badge -->
+  <rect x="770" y="155" width="110" height="60" rx="14" fill="#1e1e2e" opacity="0.85"/>
+  <text x="825" y="198" font-family="Arial Black, sans-serif" font-size="38" font-weight="900" text-anchor="middle" fill="#FAB387">30</text>
+
+  <!-- Palette dots vertical -->
+  <circle cx="825" cy="295" r="26" fill="#F38BA8"/>
+  <circle cx="825" cy="355" r="26" fill="#89B4FA"/>
+  <circle cx="825" cy="415" r="26" fill="#A6E3A1"/>
+  <circle cx="825" cy="475" r="26" fill="#FAB387"/>
+  <circle cx="825" cy="535" r="26" fill="#CBA6F7"/>
+  <circle cx="825" cy="595" r="26" fill="#89DCEB"/>
+
+  <!-- Flood origin star -->
+  <polygon points="189,189 202,175 215,189 202,203" fill="#ffffff" opacity="0.9"/>
+  <!-- Wave lines emanating -->
+  <path d="M230 230 Q 290 240 350 230" fill="none" stroke="#ffffff" stroke-width="5" stroke-linecap="round" opacity="0.4"/>
+  <path d="M230 260 Q 310 275 390 260" fill="none" stroke="#ffffff" stroke-width="4" stroke-linecap="round" opacity="0.3"/>
+  <path d="M230 290 Q 330 308 430 290" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" opacity="0.2"/>
 </svg>

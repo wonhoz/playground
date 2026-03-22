@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg02" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFF5E8"/>
+      <stop offset="100%" stop-color="#FEECD4"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Layer 1: Warm cream background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg02)"/>
+
+  <!-- Layer 2: 3x3 Tiles — salmon expanding from top-left (3 cells taken) -->
+  <!-- tile size=230, gap=24, start=143 -->
+  <!-- Row 0 -->
+  <rect x="143" y="143" width="230" height="230" rx="24" fill="#F4956A"/>
+  <rect x="397" y="143" width="230" height="230" rx="24" fill="#F4956A"/>
+  <rect x="651" y="143" width="230" height="230" rx="24" fill="#64BCE0"/>
+  <!-- Row 1 -->
+  <rect x="143" y="397" width="230" height="230" rx="24" fill="#F4956A"/>
+  <rect x="397" y="397" width="230" height="230" rx="24" fill="#7CCA7C"/>
+  <rect x="651" y="397" width="230" height="230" rx="24" fill="#B48CD4"/>
+  <!-- Row 2 -->
+  <rect x="143" y="651" width="230" height="230" rx="24" fill="#4CC8DC"/>
+  <rect x="397" y="651" width="230" height="230" rx="24" fill="#F08CAC"/>
+  <rect x="651" y="651" width="230" height="230" rx="24" fill="#64BCE0"/>
+
+  <!-- Layer 3: Territory highlight — subtle bright border on salmon tiles -->
+  <rect x="143" y="143" width="230" height="230" rx="24" fill="none" stroke="#FFFFFF" stroke-width="8" opacity="0.5"/>
+  <rect x="397" y="143" width="230" height="230" rx="24" fill="none" stroke="#FFFFFF" stroke-width="8" opacity="0.5"/>
+  <rect x="143" y="397" width="230" height="230" rx="24" fill="none" stroke="#FFFFFF" stroke-width="8" opacity="0.5"/>
+</svg>

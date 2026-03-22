@@ -1,0 +1,142 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="teal_bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#006994"/>
+      <stop offset="50%" stop-color="#0096C7"/>
+      <stop offset="100%" stop-color="#00B4D8"/>
+    </linearGradient>
+    <linearGradient id="file_grad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#E3F2FD"/>
+    </linearGradient>
+    <linearGradient id="doc_grad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#F0F9FF"/>
+    </linearGradient>
+    <linearGradient id="arrow_grad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#48CAE4"/>
+      <stop offset="100%" stop-color="#90E0EF"/>
+    </linearGradient>
+    <filter id="drop_shadow">
+      <feDropShadow dx="4" dy="8" stdDeviation="14" flood-color="#004466" flood-opacity="0.35"/>
+    </filter>
+    <filter id="doc_shadow">
+      <feDropShadow dx="6" dy="10" stdDeviation="18" flood-color="#004466" flood-opacity="0.4"/>
+    </filter>
+    <filter id="sparkle_glow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Layer 1: Background — teal gradient -->
+  <rect width="1024" height="1024" rx="190" fill="url(#teal_bg)"/>
+
+  <!-- Wave pattern in background -->
+  <ellipse cx="200" cy="900" rx="300" ry="180" fill="white" opacity="0.04"/>
+  <ellipse cx="850" cy="150" rx="260" ry="160" fill="white" opacity="0.04"/>
+  <ellipse cx="512" cy="512" rx="420" ry="320" fill="white" opacity="0.03"/>
+
+  <!-- Layer 2: Main object — .md file → arrow → rendered document -->
+
+  <!-- Left: .md file icon -->
+  <g filter="url(#drop_shadow)" transform="translate(148, 260)">
+    <!-- File body -->
+    <rect x="0" y="0" width="240" height="300" rx="16" fill="url(#file_grad)"/>
+    <!-- Folded corner -->
+    <polygon points="176,0 240,64 176,64" fill="#B0D4E8"/>
+    <polygon points="176,0 240,64 176,64" fill="none" stroke="#90BDD4" stroke-width="1.5"/>
+    <!-- Fold shadow -->
+    <polygon points="176,0 240,64 176,64" fill="#C8E0EE" opacity="0.6"/>
+
+    <!-- .md extension label -->
+    <rect x="16" y="218" width="130" height="44" rx="10" fill="#0096C7"/>
+    <text x="28" y="249" font-family="Arial" font-size="26" font-weight="bold" fill="white">.md</text>
+
+    <!-- File lines (raw markdown) -->
+    <text x="20" y="70" font-family="monospace" font-size="24" fill="#546E7A" opacity="0.7">#</text>
+    <rect x="48" y="50" width="150" height="26" rx="4" fill="#546E7A" opacity="0.2"/>
+
+    <text x="20" y="112" font-family="monospace" font-size="18" fill="#78909C" opacity="0.6">**</text>
+    <rect x="50" y="96" width="110" height="20" rx="4" fill="#78909C" opacity="0.15"/>
+    <text x="164" y="112" font-family="monospace" font-size="18" fill="#78909C" opacity="0.6">**</text>
+
+    <text x="20" y="148" font-family="monospace" font-size="18" fill="#90A4AE" opacity="0.5">-</text>
+    <rect x="42" y="132" width="150" height="18" rx="4" fill="#90A4AE" opacity="0.15"/>
+
+    <text x="20" y="182" font-family="monospace" font-size="18" fill="#90A4AE" opacity="0.5">-</text>
+    <rect x="42" y="166" width="120" height="18" rx="4" fill="#90A4AE" opacity="0.15"/>
+  </g>
+
+  <!-- Center: Animated arrow -->
+  <g filter="url(#drop_shadow)">
+    <!-- Arrow shaft -->
+    <rect x="428" y="490" width="168" height="44" rx="22" fill="url(#arrow_grad)"/>
+    <!-- Arrow head -->
+    <polygon points="596,455 672,512 596,569" fill="url(#arrow_grad)"/>
+    <!-- Motion lines -->
+    <rect x="396" y="502" width="40" height="8" rx="4" fill="#90E0EF" opacity="0.5"/>
+    <rect x="380" y="520" width="28" height="8" rx="4" fill="#90E0EF" opacity="0.35"/>
+  </g>
+
+  <!-- Right: rendered document (beautiful result) -->
+  <g filter="url(#doc_shadow)" transform="translate(700, 200)">
+    <!-- Document body — slightly larger, cleaner -->
+    <rect x="0" y="0" width="220" height="520" rx="20" fill="url(#doc_grad)"/>
+
+    <!-- Colored header bar (rendered title area) -->
+    <rect x="0" y="0" width="220" height="80" rx="20" fill="#0096C7"/>
+    <rect x="0" y="60" width="220" height="20" fill="#0096C7"/>
+
+    <!-- H1 in header -->
+    <text x="18" y="50" font-family="Georgia, serif" font-size="28" font-weight="bold" fill="white" opacity="0.95">Heading</text>
+
+    <!-- Horizontal rule -->
+    <rect x="18" y="98" width="184" height="3" rx="2" fill="#B0D4E8" opacity="0.6"/>
+
+    <!-- Rendered bold text -->
+    <rect x="18" y="116" width="150" height="22" rx="5" fill="#0D47A1" opacity="0.18"/>
+    <text x="18" y="134" font-family="Arial" font-size="19" font-weight="bold" fill="#1A237E" opacity="0.75">bold text</text>
+
+    <!-- Rendered list items -->
+    <circle cx="30" cy="176" r="6" fill="#0096C7" opacity="0.7"/>
+    <rect x="46" y="164" width="148" height="18" rx="4" fill="#37474F" opacity="0.3"/>
+
+    <circle cx="30" cy="210" r="6" fill="#0096C7" opacity="0.7"/>
+    <rect x="46" y="198" width="130" height="18" rx="4" fill="#37474F" opacity="0.3"/>
+
+    <circle cx="30" cy="244" r="6" fill="#0096C7" opacity="0.7"/>
+    <rect x="46" y="232" width="155" height="18" rx="4" fill="#37474F" opacity="0.3"/>
+
+    <!-- Code block rendered -->
+    <rect x="18" y="272" width="184" height="48" rx="8" fill="#E3F2FD" opacity="0.7"/>
+    <rect x="22" y="276" width="5" height="40" rx="2" fill="#0096C7" opacity="0.7"/>
+    <rect x="36" y="290" width="140" height="14" rx="4" fill="#0D47A1" opacity="0.25"/>
+
+    <!-- More text lines -->
+    <rect x="18" y="338" width="170" height="16" rx="4" fill="#546E7A" opacity="0.25"/>
+    <rect x="18" y="364" width="140" height="16" rx="4" fill="#546E7A" opacity="0.2"/>
+    <rect x="18" y="390" width="160" height="16" rx="4" fill="#546E7A" opacity="0.2"/>
+    <rect x="18" y="416" width="120" height="16" rx="4" fill="#546E7A" opacity="0.18"/>
+
+    <!-- Footer bar -->
+    <rect x="0" y="476" width="220" height="44" rx="20" fill="#E3F2FD" opacity="0.4"/>
+    <rect x="0" y="456" width="220" height="20" fill="#E3F2FD" opacity="0.4"/>
+    <text x="24" y="501" font-family="monospace" font-size="13" fill="#546E7A" opacity="0.6">42줄  PDF/HTML</text>
+  </g>
+
+  <!-- Layer 3: Sparkle details — success/completion sparkles near document -->
+  <g filter="url(#sparkle_glow)">
+    <!-- Star 1 -->
+    <polygon points="680,220 688,238 706,238 692,250 698,268 680,256 662,268 668,250 654,238 672,238" fill="#FFE566" opacity="0.9" transform="scale(0.7) translate(295,82)"/>
+    <!-- Star 2 small -->
+    <polygon points="760,170 765,182 778,182 768,190 772,202 760,194 748,202 752,190 742,182 755,182" fill="#FFFDE7" opacity="0.75" transform="scale(0.6) translate(500,100)"/>
+    <!-- Star 3 tiny -->
+    <circle cx="860" cy="320" r="8" fill="#FFE566" opacity="0.6"/>
+    <circle cx="872" cy="308" r="5" fill="white" opacity="0.5"/>
+  </g>
+
+  <!-- Small circles along arrow path (motion dots) -->
+  <circle cx="418" cy="512" r="6" fill="white" opacity="0.3"/>
+  <circle cx="408" cy="512" r="4" fill="white" opacity="0.2"/>
+</svg>

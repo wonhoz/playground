@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Mark.View — 아이콘 후보 | 20260322_2047</title>
+<style>
+  :root {
+    --bg: #0F1923;
+    --card: #162030;
+    --border: #1E3050;
+    --text: #E0ECF8;
+    --dim: #6B8BAD;
+    --accent: #00C9FF;
+    --accent2: #7C4DFF;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Segoe UI', 'Malgun Gothic', sans-serif;
+    min-height: 100vh;
+    padding: 48px 24px;
+  }
+  header {
+    text-align: center;
+    margin-bottom: 52px;
+  }
+  header h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 10px;
+  }
+  header p {
+    color: var(--dim);
+    font-size: 0.92rem;
+    line-height: 1.7;
+  }
+  header .tag {
+    display: inline-block;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 0.8rem;
+    color: var(--accent);
+    margin: 4px;
+  }
+  .grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px;
+    justify-content: center;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 28px 24px 24px;
+    width: 220px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    cursor: pointer;
+    position: relative;
+  }
+  .card:hover {
+    transform: scale(1.07) translateY(-4px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 30px rgba(0,201,255,0.12);
+    border-color: var(--accent);
+  }
+  .card .num {
+    position: absolute;
+    top: 14px;
+    left: 18px;
+    font-size: 0.72rem;
+    color: var(--dim);
+    font-weight: 700;
+    letter-spacing: 0.05em;
+  }
+  .icon-wrap {
+    width: 160px;
+    height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .icon-wrap img {
+    width: 160px;
+    height: 160px;
+    object-fit: contain;
+    border-radius: 12px;
+    display: block;
+  }
+  .card-info { width: 100%; }
+  .card-title {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 6px;
+    text-align: center;
+  }
+  .card-concept {
+    font-size: 0.76rem;
+    color: var(--dim);
+    line-height: 1.5;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  .badge-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    justify-content: center;
+  }
+  .badge {
+    font-size: 0.68rem;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+  }
+  .badge.type-literal  { background: #0D3B26; color: #4ADE80; border: 1px solid #166534; }
+  .badge.type-metaphor { background: #1E1B4B; color: #A78BFA; border: 1px solid #3730A3; }
+  .badge.type-hybrid   { background: #1C1917; color: #FB923C; border: 1px solid #92400E; }
+  .badge.pattern { background: #0F2535; color: #7DD3FC; border: 1px solid #1E40AF; }
+  .palette {
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .swatch {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.12);
+    title: attr(data-label);
+  }
+  .link-row {
+    margin-top: 6px;
+    text-align: center;
+  }
+  .link-row a {
+    font-size: 0.72rem;
+    color: var(--accent);
+    text-decoration: none;
+    opacity: 0.7;
+    transition: opacity 0.15s;
+  }
+  .link-row a:hover { opacity: 1; }
+  footer {
+    text-align: center;
+    margin-top: 60px;
+    color: var(--dim);
+    font-size: 0.8rem;
+    opacity: 0.5;
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>Mark.View — 아이콘 후보</h1>
+  <p>
+    <span class="tag">Candidate_20260322_2047</span>
+    <span class="tag">5개 후보</span>
+    <span class="tag">Markdown 뷰어/에디터</span>
+  </p>
+  <p style="margin-top:12px; font-size:0.85rem; color:var(--dim);">
+    실시간 렌더링 미리보기 · 탭 기반 멀티 문서 · TOC · PDF/HTML 내보내기
+  </p>
+</header>
+
+<div class="grid">
+
+  <!-- icon_01 -->
+  <div class="card">
+    <span class="num">01</span>
+    <div class="icon-wrap">
+      <img src="icon_01.svg" alt="icon_01"/>
+    </div>
+    <div class="card-info">
+      <div class="card-title">MD 소스 ↔ 렌더링</div>
+      <div class="card-concept">마크다운 원본과 렌더링 결과가 나란히 — 앱의 핵심 화면을 직접 표현</div>
+      <div class="badge-row">
+        <span class="badge type-literal">literal</span>
+        <span class="badge pattern">레이어드</span>
+      </div>
+    </div>
+    <div class="palette">
+      <div class="swatch" style="background:#FFF8E1" title="크림 배경"></div>
+      <div class="swatch" style="background:#546E7A" title="철회색 MD 텍스트"></div>
+      <div class="swatch" style="background:#FF6D00" title="오렌지 화살표"></div>
+      <div class="swatch" style="background:#212121" title="렌더링 텍스트"></div>
+    </div>
+    <div class="link-row"><a href="icon_01.svg" target="_blank">SVG 열기</a></div>
+  </div>
+
+  <!-- icon_02 -->
+  <div class="card">
+    <span class="num">02</span>
+    <div class="icon-wrap">
+      <img src="icon_02.svg" alt="icon_02"/>
+    </div>
+    <div class="card-info">
+      <div class="card-title">황금 루페 뷰어</div>
+      <div class="card-concept">루페(돋보기) 안에 렌더링된 문서 — View = 보다는 뜻, 마크다운을 들여다보면 아름다운 문서가 보임</div>
+      <div class="badge-row">
+        <span class="badge type-metaphor">metaphor</span>
+        <span class="badge pattern">중앙 심볼</span>
+      </div>
+    </div>
+    <div class="palette">
+      <div class="swatch" style="background:#0D1B2A" title="딥 네이비 배경"></div>
+      <div class="swatch" style="background:#FFD700" title="황금 루페 링"></div>
+      <div class="swatch" style="background:#FFFDE7" title="렌즈 내부 크림"></div>
+      <div class="swatch" style="background:#7C4DFF" title="# 심볼 퍼플"></div>
+    </div>
+    <div class="link-row"><a href="icon_02.svg" target="_blank">SVG 열기</a></div>
+  </div>
+
+  <!-- icon_03 -->
+  <div class="card">
+    <span class="num">03</span>
+    <div class="icon-wrap">
+      <img src="icon_03.svg" alt="icon_03"/>
+    </div>
+    <div class="card-info">
+      <div class="card-title"># 헤딩 기호</div>
+      <div class="card-concept">마크다운의 첫 번째 언어 — # = 제목 = 모든 문서의 시작. 아래 텍스트 라인과 함께 뷰어 정체성 표현</div>
+      <div class="badge-row">
+        <span class="badge type-literal">literal</span>
+        <span class="badge pattern">중앙 심볼</span>
+      </div>
+    </div>
+    <div class="palette">
+      <div class="swatch" style="background:#667EEA" title="라벤더 퍼플"></div>
+      <div class="swatch" style="background:#764BA2" title="딥 퍼플"></div>
+      <div class="swatch" style="background:#FFFFFF" title="흰색 # 기호"></div>
+      <div class="swatch" style="background:#E8E0FF" title="연보라 텍스트"></div>
+    </div>
+    <div class="link-row"><a href="icon_03.svg" target="_blank">SVG 열기</a></div>
+  </div>
+
+  <!-- icon_04 -->
+  <div class="card">
+    <span class="num">04</span>
+    <div class="icon-wrap">
+      <img src="icon_04.svg" alt="icon_04"/>
+    </div>
+    <div class="card-info">
+      <div class="card-title">탭바 에디터 창</div>
+      <div class="card-concept">Mark.View 앱 UI의 미니어처 — 탭바, 편집 패널, 렌더링 패널이 그대로 담긴 앱 자체의 아이콘</div>
+      <div class="badge-row">
+        <span class="badge type-metaphor">metaphor</span>
+        <span class="badge pattern">공간/장면</span>
+      </div>
+    </div>
+    <div class="palette">
+      <div class="swatch" style="background:#1A1A2E" title="다크 네이비 배경"></div>
+      <div class="swatch" style="background:#00D4FF" title="시안 활성 탭"></div>
+      <div class="swatch" style="background:#0F3460" title="창 바디"></div>
+      <div class="swatch" style="background:#FF6B6B" title="코랄 마크다운 강조"></div>
+    </div>
+    <div class="link-row"><a href="icon_04.svg" target="_blank">SVG 열기</a></div>
+  </div>
+
+  <!-- icon_05 -->
+  <div class="card">
+    <span class="num">05</span>
+    <div class="icon-wrap">
+      <img src="icon_05.svg" alt="icon_05"/>
+    </div>
+    <div class="card-info">
+      <div class="card-title">.md → 문서 변환</div>
+      <div class="card-concept">.md 파일이 화살표를 통해 아름다운 렌더링 문서로 — Mark.View의 핵심 가치 프로세스를 대각선 구도로</div>
+      <div class="badge-row">
+        <span class="badge type-hybrid">hybrid</span>
+        <span class="badge pattern">대각선/동적</span>
+      </div>
+    </div>
+    <div class="palette">
+      <div class="swatch" style="background:#006994" title="딥 티일 배경"></div>
+      <div class="swatch" style="background:#00B4D8" title="밝은 티일"></div>
+      <div class="swatch" style="background:#90E0EF" title="민트 화살표"></div>
+      <div class="swatch" style="background:#FFFFFF" title="파일/문서 흰색"></div>
+      <div class="swatch" style="background:#FFE566" title="골드 스파클"></div>
+    </div>
+    <div class="link-row"><a href="icon_05.svg" target="_blank">SVG 열기</a></div>
+  </div>
+
+</div>
+
+<footer>Mark.View · Candidate_20260322_2047 · Generated 2026-03-22</footer>
+</body>
+</html>

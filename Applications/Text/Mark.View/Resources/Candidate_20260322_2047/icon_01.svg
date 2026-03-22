@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: Background — cream warm -->
+  <rect width="1024" height="1024" rx="190" fill="#FFF8E1"/>
+  <rect x="20" y="20" width="984" height="984" rx="175" fill="url(#bg_grad)"/>
+  <defs>
+    <linearGradient id="bg_grad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFFDE7"/>
+      <stop offset="100%" stop-color="#FFF3CD"/>
+    </linearGradient>
+    <clipPath id="clip_main">
+      <rect x="100" y="100" width="824" height="824" rx="140"/>
+    </clipPath>
+  </defs>
+
+  <!-- Layer 2: Main object — two panels side by side -->
+  <!-- Left panel: markdown source -->
+  <rect x="108" y="200" width="330" height="620" rx="12" fill="#ECEFF1" clip-path="url(#clip_main)"/>
+  <!-- MD text lines -->
+  <!-- # Title -->
+  <text x="135" y="288" font-family="monospace" font-size="44" font-weight="bold" fill="#37474F">#</text>
+  <rect x="200" y="258" width="200" height="38" rx="6" fill="#546E7A" opacity="0.85"/>
+
+  <!-- **bold** line -->
+  <text x="135" y="370" font-family="monospace" font-size="32" fill="#78909C">**</text>
+  <rect x="200" y="345" width="140" height="28" rx="5" fill="#78909C" opacity="0.6"/>
+  <text x="348" y="370" font-family="monospace" font-size="32" fill="#78909C">**</text>
+
+  <!-- - list item 1 -->
+  <text x="135" y="440" font-family="monospace" font-size="32" fill="#90A4AE">-</text>
+  <rect x="168" y="418" width="230" height="24" rx="4" fill="#90A4AE" opacity="0.5"/>
+
+  <!-- - list item 2 -->
+  <text x="135" y="498" font-family="monospace" font-size="32" fill="#90A4AE">-</text>
+  <rect x="168" y="476" width="180" height="24" rx="4" fill="#90A4AE" opacity="0.5"/>
+
+  <!-- ~~strikethrough~~ -->
+  <text x="135" y="556" font-family="monospace" font-size="28" fill="#B0BEC5">~~</text>
+  <rect x="196" y="536" width="150" height="22" rx="4" fill="#B0BEC5" opacity="0.4"/>
+  <text x="350" y="556" font-family="monospace" font-size="28" fill="#B0BEC5">~~</text>
+
+  <!-- code block -->
+  <rect x="135" y="590" width="280" height="60" rx="6" fill="#CFD8DC" opacity="0.5"/>
+  <text x="155" y="630" font-family="monospace" font-size="26" fill="#546E7A">` code `</text>
+
+  <!-- Layer 2: Arrow in center -->
+  <g transform="translate(512,512)">
+    <!-- Arrow body -->
+    <rect x="-28" y="-18" width="56" height="36" rx="10" fill="#FF6D00"/>
+    <!-- Arrow head -->
+    <polygon points="28,-40 80,0 28,40" fill="#FF6D00"/>
+    <!-- Tail -->
+    <rect x="-70" y="-18" width="44" height="36" rx="10" fill="#FF6D00"/>
+  </g>
+
+  <!-- Right panel: rendered result -->
+  <rect x="586" y="200" width="330" height="620" rx="12" fill="#FFFFFF" clip-path="url(#clip_main)"/>
+
+  <!-- Rendered: H1 heading -->
+  <rect x="610" y="258" width="270" height="44" rx="6" fill="#212121" opacity="0.88"/>
+
+  <!-- Rendered: bold text -->
+  <rect x="610" y="340" width="180" height="28" rx="5" fill="#37474F" opacity="0.75"/>
+
+  <!-- Rendered: list items with dots -->
+  <circle cx="624" cy="423" r="8" fill="#546E7A" opacity="0.7"/>
+  <rect x="644" y="410" width="220" height="24" rx="4" fill="#546E7A" opacity="0.55"/>
+
+  <circle cx="624" cy="478" r="8" fill="#546E7A" opacity="0.7"/>
+  <rect x="644" y="465" width="170" height="24" rx="4" fill="#546E7A" opacity="0.55"/>
+
+  <!-- Rendered: strikethrough text (line through) -->
+  <rect x="610" y="530" width="160" height="22" rx="4" fill="#90A4AE" opacity="0.5"/>
+  <rect x="607" y="539" width="166" height="4" rx="2" fill="#546E7A" opacity="0.6"/>
+
+  <!-- Rendered: code block styled -->
+  <rect x="610" y="590" width="280" height="60" rx="8" fill="#E8EAF6"/>
+  <rect x="614" y="594" width="6" height="52" rx="3" fill="#7C4DFF"/>
+  <rect x="632" y="610" width="180" height="18" rx="4" fill="#78909C" opacity="0.6"/>
+
+  <!-- Layer 3: Detail — .md badge top-left panel -->
+  <rect x="108" y="148" width="96" height="44" rx="10" fill="#546E7A"/>
+  <text x="122" y="179" font-family="Arial" font-size="22" font-weight="bold" fill="white">.md</text>
+
+  <!-- Rendered badge top-right panel -->
+  <rect x="586" y="148" width="120" height="44" rx="10" fill="#FF6D00"/>
+  <text x="602" y="179" font-family="Arial" font-size="20" font-weight="bold" fill="white">preview</text>
+
+  <!-- Divider line bottom -->
+  <rect x="108" y="820" width="808" height="4" rx="2" fill="#ECEFF1" opacity="0.8"/>
+</svg>

@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="navy_bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0D1B2A"/>
+      <stop offset="100%" stop-color="#1B2838"/>
+    </linearGradient>
+    <linearGradient id="gold_ring" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFE566"/>
+      <stop offset="60%" stop-color="#FFD700"/>
+      <stop offset="100%" stop-color="#FFA000"/>
+    </linearGradient>
+    <radialGradient id="lens_bg" cx="45%" cy="40%" r="55%">
+      <stop offset="0%" stop-color="#FFFDE7"/>
+      <stop offset="100%" stop-color="#FFF8E1"/>
+    </radialGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <clipPath id="lens_clip">
+      <circle cx="448" cy="440" r="268"/>
+    </clipPath>
+  </defs>
+
+  <!-- Layer 1: Background — deep navy -->
+  <rect width="1024" height="1024" rx="190" fill="url(#navy_bg)"/>
+
+  <!-- Stars/dots decoration -->
+  <circle cx="180" cy="160" r="4" fill="#FFD700" opacity="0.3"/>
+  <circle cx="820" cy="200" r="3" fill="#FFD700" opacity="0.25"/>
+  <circle cx="150" cy="700" r="5" fill="#FFD700" opacity="0.2"/>
+  <circle cx="880" cy="750" r="3" fill="#FFD700" opacity="0.3"/>
+  <circle cx="300" cy="880" r="4" fill="#4FC3F7" opacity="0.2"/>
+  <circle cx="760" cy="120" r="5" fill="#4FC3F7" opacity="0.15"/>
+
+  <!-- Layer 2: Main object — magnifying glass -->
+  <!-- Lens interior (cream) -->
+  <circle cx="448" cy="440" r="268" fill="url(#lens_bg)"/>
+
+  <!-- Rendered content inside lens -->
+  <!-- H1 heading bar -->
+  <rect x="232" y="300" width="380" height="50" rx="8" fill="#1A237E" opacity="0.12" clip-path="url(#lens_clip)"/>
+  <text x="250" y="340" font-family="Georgia, serif" font-size="46" font-weight="bold" fill="#1A237E" clip-path="url(#lens_clip)">Heading</text>
+
+  <!-- Text lines -->
+  <rect x="250" y="375" width="340" height="20" rx="4" fill="#37474F" opacity="0.45" clip-path="url(#lens_clip)"/>
+  <rect x="250" y="405" width="290" height="20" rx="4" fill="#37474F" opacity="0.35" clip-path="url(#lens_clip)"/>
+  <rect x="250" y="435" width="310" height="20" rx="4" fill="#37474F" opacity="0.35" clip-path="url(#lens_clip)"/>
+
+  <!-- Divider -->
+  <rect x="250" y="470" width="320" height="3" rx="2" fill="#90A4AE" opacity="0.4" clip-path="url(#lens_clip)"/>
+
+  <!-- List items -->
+  <circle cx="266" cy="505" r="7" fill="#546E7A" opacity="0.55" clip-path="url(#lens_clip)"/>
+  <rect x="284" y="492" width="260" height="18" rx="4" fill="#546E7A" opacity="0.4" clip-path="url(#lens_clip)"/>
+  <circle cx="266" cy="537" r="7" fill="#546E7A" opacity="0.55" clip-path="url(#lens_clip)"/>
+  <rect x="284" y="524" width="220" height="18" rx="4" fill="#546E7A" opacity="0.4" clip-path="url(#lens_clip)"/>
+  <circle cx="266" cy="569" r="7" fill="#546E7A" opacity="0.55" clip-path="url(#lens_clip)"/>
+  <rect x="284" y="556" width="240" height="18" rx="4" fill="#546E7A" opacity="0.4" clip-path="url(#lens_clip)"/>
+
+  <!-- Gold ring of lens -->
+  <circle cx="448" cy="440" r="268" fill="none" stroke="url(#gold_ring)" stroke-width="28"/>
+  <!-- Inner ring highlight -->
+  <circle cx="448" cy="440" r="254" fill="none" stroke="#FFE566" stroke-width="4" opacity="0.5"/>
+
+  <!-- Lens glare -->
+  <ellipse cx="360" cy="320" rx="70" ry="42" fill="white" opacity="0.18" transform="rotate(-30 360 320)"/>
+
+  <!-- Layer 3: Handle -->
+  <!-- Handle bar -->
+  <rect x="670" y="640" width="160" height="50" rx="25" fill="url(#gold_ring)" transform="rotate(45 750 665)"/>
+  <!-- Handle end cap -->
+  <circle cx="800" cy="820" r="32" fill="#FFA000"/>
+  <circle cx="800" cy="820" r="22" fill="#FFD700"/>
+
+  <!-- Small # symbol peeking at top of lens -->
+  <text x="230" y="270" font-family="monospace" font-size="52" font-weight="bold" fill="#7C4DFF" opacity="0.35" clip-path="url(#lens_clip)">#</text>
+
+  <!-- Glow accent around lens -->
+  <circle cx="448" cy="440" r="285" fill="none" stroke="#FFD700" stroke-width="6" opacity="0.12"/>
+</svg>

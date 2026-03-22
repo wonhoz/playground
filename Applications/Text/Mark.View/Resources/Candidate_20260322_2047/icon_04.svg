@@ -1,0 +1,140 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="dark_bg" x1="0" y1="0" x2="0.5" y2="1">
+      <stop offset="0%" stop-color="#1A1A2E"/>
+      <stop offset="100%" stop-color="#16213E"/>
+    </linearGradient>
+    <linearGradient id="window_grad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0F3460"/>
+      <stop offset="100%" stop-color="#0A2540"/>
+    </linearGradient>
+    <linearGradient id="tab_active" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#00D4FF"/>
+      <stop offset="100%" stop-color="#0096FF"/>
+    </linearGradient>
+    <filter id="win_shadow">
+      <feDropShadow dx="0" dy="8" stdDeviation="20" flood-color="#000000" flood-opacity="0.5"/>
+    </filter>
+    <clipPath id="win_clip">
+      <rect x="112" y="160" width="800" height="660" rx="18"/>
+    </clipPath>
+  </defs>
+
+  <!-- Layer 1: Background — dark navy -->
+  <rect width="1024" height="1024" rx="190" fill="url(#dark_bg)"/>
+
+  <!-- Ambient dots -->
+  <circle cx="200" cy="200" r="3" fill="#00D4FF" opacity="0.2"/>
+  <circle cx="840" cy="180" r="4" fill="#00D4FF" opacity="0.15"/>
+  <circle cx="160" cy="820" r="3" fill="#00D4FF" opacity="0.2"/>
+  <circle cx="860" cy="860" r="4" fill="#7C4DFF" opacity="0.2"/>
+
+  <!-- Layer 2: Main object — app window mockup -->
+  <g filter="url(#win_shadow)">
+    <!-- Window body -->
+    <rect x="112" y="160" width="800" height="660" rx="18" fill="url(#window_grad)"/>
+
+    <!-- Titlebar -->
+    <rect x="112" y="160" width="800" height="52" rx="0" fill="#0D2137" clip-path="url(#win_clip)"/>
+    <rect x="112" y="160" width="800" height="52" rx="18" fill="#0D2137"/>
+    <rect x="112" y="186" width="800" height="26" fill="#0D2137"/>
+
+    <!-- Window traffic lights -->
+    <circle cx="150" cy="186" r="10" fill="#FF5F57" opacity="0.8"/>
+    <circle cx="178" cy="186" r="10" fill="#FEBC2E" opacity="0.8"/>
+    <circle cx="206" cy="186" r="10" fill="#28C840" opacity="0.8"/>
+
+    <!-- Title text area -->
+    <rect x="310" y="173" width="220" height="26" rx="6" fill="#1B3A5C" opacity="0.5"/>
+    <text x="360" y="191" font-family="Arial" font-size="17" fill="#90CAF9" opacity="0.7">Mark.View</text>
+
+    <!-- Tab bar -->
+    <rect x="112" y="212" width="800" height="44" fill="#0A2040"/>
+
+    <!-- Active tab -->
+    <rect x="124" y="216" width="160" height="36" rx="8" fill="url(#tab_active)"/>
+    <text x="144" y="239" font-family="Arial" font-size="14" fill="white">README.md</text>
+
+    <!-- Inactive tab 1 -->
+    <rect x="294" y="216" width="140" height="36" rx="8" fill="#1B3A5C" opacity="0.6"/>
+    <text x="310" y="239" font-family="Arial" font-size="14" fill="#7EB8D4" opacity="0.7">GUIDE.md</text>
+
+    <!-- Inactive tab 2 -->
+    <rect x="444" y="216" width="130" height="36" rx="8" fill="#1B3A5C" opacity="0.4"/>
+    <text x="458" y="239" font-family="Arial" font-size="14" fill="#7EB8D4" opacity="0.5">notes.md</text>
+
+    <!-- Content area -->
+    <!-- Left: editor panel -->
+    <rect x="112" y="256" width="370" height="564" fill="#0C1F35"/>
+
+    <!-- Editor content — markdown source -->
+    <!-- # heading line -->
+    <text x="132" y="305" font-family="monospace" font-size="22" fill="#00D4FF" opacity="0.8">#</text>
+    <rect x="160" y="286" width="280" height="26" rx="4" fill="#E3F2FD" opacity="0.15"/>
+
+    <!-- ** bold -->
+    <text x="132" y="350" font-family="monospace" font-size="18" fill="#FF6B6B" opacity="0.7">**bold**</text>
+    <rect x="245" y="333" width="140" height="22" rx="4" fill="#E3F2FD" opacity="0.1"/>
+
+    <!-- - list -->
+    <text x="132" y="392" font-family="monospace" font-size="18" fill="#A5D6A7" opacity="0.7">- item</text>
+    <rect x="210" y="375" width="180" height="22" rx="4" fill="#E3F2FD" opacity="0.1"/>
+
+    <text x="132" y="432" font-family="monospace" font-size="18" fill="#A5D6A7" opacity="0.7">- item</text>
+    <rect x="210" y="415" width="140" height="22" rx="4" fill="#E3F2FD" opacity="0.1"/>
+
+    <!-- ``` code block -->
+    <rect x="132" y="458" width="310" height="52" rx="6" fill="#1B3A5C" opacity="0.5"/>
+    <text x="148" y="490" font-family="monospace" font-size="16" fill="#80DEEA" opacity="0.8">` console.log() `</text>
+
+    <!-- More lines -->
+    <rect x="132" y="528" width="260" height="18" rx="4" fill="#E3F2FD" opacity="0.1"/>
+    <rect x="132" y="558" width="200" height="18" rx="4" fill="#E3F2FD" opacity="0.1"/>
+    <rect x="132" y="588" width="240" height="18" rx="4" fill="#E3F2FD" opacity="0.1"/>
+
+    <!-- Cursor line -->
+    <rect x="132" y="618" width="3" height="20" rx="1" fill="#00D4FF" opacity="0.9"/>
+    <rect x="135" y="618" width="100" height="18" rx="4" fill="#E3F2FD" opacity="0.1"/>
+
+    <!-- Splitter -->
+    <rect x="482" y="256" width="4" height="564" fill="#00D4FF" opacity="0.2"/>
+
+    <!-- Right: preview panel -->
+    <rect x="486" y="256" width="426" height="564" fill="#0E2742"/>
+
+    <!-- Rendered heading -->
+    <rect x="506" y="284" width="360" height="40" rx="6" fill="#E3F2FD" opacity="0.18"/>
+    <text x="516" y="312" font-family="Georgia, serif" font-size="28" font-weight="bold" fill="#E3F2FD" opacity="0.85">Heading Title</text>
+
+    <!-- Rendered bold -->
+    <text x="506" y="370" font-family="Arial" font-size="20" font-weight="bold" fill="#E3F2FD" opacity="0.7">bold text here</text>
+
+    <!-- Rendered list -->
+    <circle cx="520" cy="412" r="5" fill="#00D4FF" opacity="0.7"/>
+    <rect x="536" y="400" width="260" height="20" rx="4" fill="#E3F2FD" opacity="0.45"/>
+    <circle cx="520" cy="445" r="5" fill="#00D4FF" opacity="0.7"/>
+    <rect x="536" y="433" width="220" height="20" rx="4" fill="#E3F2FD" opacity="0.45"/>
+
+    <!-- Rendered code block -->
+    <rect x="506" y="476" width="370" height="50" rx="8" fill="#1B3A5C" opacity="0.6"/>
+    <rect x="510" y="480" width="5" height="42" rx="2" fill="#00D4FF" opacity="0.7"/>
+    <rect x="526" y="494" width="240" height="16" rx="4" fill="#80DEEA" opacity="0.45"/>
+
+    <!-- More rendered lines -->
+    <rect x="506" y="544" width="320" height="18" rx="4" fill="#E3F2FD" opacity="0.3"/>
+    <rect x="506" y="574" width="280" height="18" rx="4" fill="#E3F2FD" opacity="0.25"/>
+    <rect x="506" y="604" width="300" height="18" rx="4" fill="#E3F2FD" opacity="0.25"/>
+  </g>
+
+  <!-- Layer 3: Detail — status bar -->
+  <rect x="112" y="792" width="800" height="28" rx="0" fill="#061626" clip-path="url(#win_clip)"/>
+  <text x="130" y="811" font-family="monospace" font-size="14" fill="#00D4FF" opacity="0.6">README.md</text>
+  <text x="700" y="811" font-family="monospace" font-size="13" fill="#90A4AE" opacity="0.5">42줄  230단어  뷰</text>
+
+  <!-- Bottom roundcap -->
+  <rect x="112" y="796" width="800" height="24" fill="#061626"/>
+  <rect x="112" y="796" width="800" height="24" rx="18" fill="#061626" clip-path="url(#win_clip)"/>
+
+  <!-- Active tab indicator glow -->
+  <rect x="124" y="248" width="160" height="4" rx="2" fill="#00D4FF" opacity="0.7"/>
+</svg>

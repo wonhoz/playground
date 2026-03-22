@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 배경 - 밝은 연두/흰색 -->
+  <defs>
+    <linearGradient id="bg5" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F1F8F0"/>
+      <stop offset="100%" stop-color="#E8F5E9"/>
+    </linearGradient>
+    <linearGradient id="dropzone5" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#E8F5E9"/>
+      <stop offset="100%" stop-color="#C8E6C9"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="200" fill="url(#bg5)"/>
+
+  <!-- Layer 2: 드롭존 (점선 사각형) -->
+  <rect x="150" y="480" width="724" height="370" rx="28"
+        fill="url(#dropzone5)" stroke="#4CAF50" stroke-width="12"
+        stroke-dasharray="28 16" opacity="0.85"/>
+
+  <!-- 드롭존 내부 텍스트 -->
+  <text x="512" y="640" font-family="'Segoe UI', Arial, sans-serif" font-size="70" font-weight="700"
+        fill="#388E3C" text-anchor="middle" opacity="0.5">DROP HERE</text>
+  <text x="512" y="720" font-family="'Segoe UI', Arial, sans-serif" font-size="46" font-weight="400"
+        fill="#4CAF50" text-anchor="middle" opacity="0.45">SVG · PNG · JPG · BMP</text>
+
+  <!-- 드롭 화살표 (드롭존 위) -->
+  <path d="M 512 400 L 512 470" stroke="#4CAF50" stroke-width="22" stroke-linecap="round" opacity="0.7"/>
+  <path d="M 470 440 L 512 480 L 554 440" stroke="#4CAF50" stroke-width="22" fill="none"
+        stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+
+  <!-- Layer 3: 공중에 떠있는 파일들 -->
+  <!-- 파일 1 (PNG) - 왼쪽 -->
+  <g transform="translate(185,175) rotate(-12)">
+    <rect x="0" y="0" width="145" height="165" rx="14" fill="#2196F3"/>
+    <path d="M 0 0 L 105 0 L 145 40 L 145 165 L 0 165 Z" fill="#2196F3"/>
+    <path d="M 105 0 L 105 40 L 145 40" fill="#1565C0"/>
+    <text x="72" y="120" font-family="'Segoe UI', Arial, sans-serif" font-size="42" font-weight="900"
+          fill="white" text-anchor="middle">PNG</text>
+  </g>
+
+  <!-- 파일 2 (SVG) - 중앙 위 -->
+  <g transform="translate(432,110) rotate(5)">
+    <rect x="0" y="0" width="155" height="175" rx="14" fill="#9C27B0"/>
+    <path d="M 0 0 L 113 0 L 155 44 L 155 175 L 0 175 Z" fill="#9C27B0"/>
+    <path d="M 113 0 L 113 44 L 155 44" fill="#6A1B9A"/>
+    <text x="78" y="130" font-family="'Segoe UI', Arial, sans-serif" font-size="44" font-weight="900"
+          fill="white" text-anchor="middle">SVG</text>
+  </g>
+
+  <!-- 파일 3 (JPG) - 오른쪽 -->
+  <g transform="translate(665,185) rotate(10)">
+    <rect x="0" y="0" width="140" height="160" rx="14" fill="#FF5722"/>
+    <path d="M 0 0 L 100 0 L 140 40 L 140 160 L 0 160 Z" fill="#FF5722"/>
+    <path d="M 100 0 L 100 40 L 140 40" fill="#BF360C"/>
+    <text x="70" y="115" font-family="'Segoe UI', Arial, sans-serif" font-size="42" font-weight="900"
+          fill="white" text-anchor="middle">JPG</text>
+  </g>
+
+  <!-- 점선 곡선 경로 (파일들이 드롭존으로 향하는 궤적) -->
+  <path d="M 258 340 C 300 420 380 460 430 480" stroke="#4CAF50" stroke-width="6" fill="none"
+        stroke-linecap="round" stroke-dasharray="12 10" opacity="0.45"/>
+  <path d="M 512 285 C 512 360 512 400 512 468" stroke="#4CAF50" stroke-width="6" fill="none"
+        stroke-linecap="round" stroke-dasharray="12 10" opacity="0.45"/>
+  <path d="M 740 345 C 700 420 640 460 595 478" stroke="#4CAF50" stroke-width="6" fill="none"
+        stroke-linecap="round" stroke-dasharray="12 10" opacity="0.45"/>
+</svg>

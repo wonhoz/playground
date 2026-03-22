@@ -1,0 +1,42 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Word.Cloud | 책 + 구름 폭발 — 책에서 단어 폭발 | 대각선/동적 | #001428 -->
+  <defs>
+    <filter id="explodeGlow">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="160" fill="#001428"/>
+  <!-- Layer 2: Open book with word explosion -->
+  <!-- Left page -->
+  <rect x="200" y="520" width="280" height="320" rx="6" fill="#0F2040" stroke="#1D4ED8" stroke-width="3" transform="rotate(-5 340 680)"/>
+  <!-- Right page -->
+  <rect x="544" y="520" width="280" height="320" rx="6" fill="#0F2040" stroke="#1D4ED8" stroke-width="3" transform="rotate(5 684 680)"/>
+  <!-- Book spine -->
+  <rect x="488" y="524" width="48" height="316" fill="#1D4ED8"/>
+  <!-- Page text (readable) -->
+  <line x1="220" y1="570" x2="456" y2="570" stroke="#1E40AF" stroke-width="2" opacity="0.5"/>
+  <line x1="220" y1="590" x2="440" y2="590" stroke="#1E40AF" stroke-width="2" opacity="0.5"/>
+  <line x1="220" y1="610" x2="456" y2="610" stroke="#1E40AF" stroke-width="2" opacity="0.5"/>
+  <line x1="576" y1="570" x2="800" y2="570" stroke="#1E40AF" stroke-width="2" opacity="0.5"/>
+  <line x1="576" y1="590" x2="780" y2="590" stroke="#1E40AF" stroke-width="2" opacity="0.5"/>
+  <!-- Explosive burst from book center -->
+  <circle cx="512" cy="520" r="50" fill="#1D4ED8" filter="url(#explodeGlow)" opacity="0.8"/>
+  <!-- Burst rays -->
+  <line x1="512" y1="520" x2="512" y2="380" stroke="#60A5FA" stroke-width="4" opacity="0.7"/>
+  <line x1="512" y1="520" x2="620" y2="400" stroke="#93C5FD" stroke-width="4" opacity="0.6"/>
+  <line x1="512" y1="520" x2="660" y2="450" stroke="#60A5FA" stroke-width="3" opacity="0.5"/>
+  <line x1="512" y1="520" x2="364" y2="400" stroke="#93C5FD" stroke-width="4" opacity="0.6"/>
+  <line x1="512" y1="520" x2="320" y2="450" stroke="#60A5FA" stroke-width="3" opacity="0.5"/>
+  <!-- Words flying out from burst -->
+  <text x="512" y="300" font-family="Arial,sans-serif" font-size="44" fill="#60A5FA" text-anchor="middle" font-weight="bold" filter="url(#explodeGlow)">단어</text>
+  <text x="700" y="350" font-family="Arial,sans-serif" font-size="32" fill="#FCD34D" font-weight="bold" transform="rotate(20 700 350)">cloud</text>
+  <text x="320" y="340" font-family="Arial,sans-serif" font-size="28" fill="#4ADE80" transform="rotate(-15 320 340)">텍스트</text>
+  <text x="760" y="470" font-family="Arial,sans-serif" font-size="24" fill="#F472B6" transform="rotate(8 760 470)">word</text>
+  <text x="220" y="460" font-family="Arial,sans-serif" font-size="22" fill="#A78BFA" transform="rotate(-10 220 460)">빈도</text>
+  <text x="660" y="260" font-family="Arial,sans-serif" font-size="20" fill="#22D3EE" transform="rotate(30 660 260)">AI</text>
+  <text x="340" y="260" font-family="Arial,sans-serif" font-size="18" fill="#F9A8D4" transform="rotate(-25 340 260)">구름</text>
+  <!-- Layer 3: Central burst dot -->
+  <circle cx="512" cy="520" r="18" fill="#DBEAFE" filter="url(#explodeGlow)"/>
+</svg>

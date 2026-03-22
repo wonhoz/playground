@@ -1,0 +1,29 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Word.Cloud | 말풍선 모양 단어 구름 | 중앙심볼 | #0A0A14 -->
+  <defs>
+    <filter id="glow1">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="160" fill="#0A0A14"/>
+  <!-- Layer 2: Speech bubble shape -->
+  <!-- Bubble body -->
+  <path d="M200 280 Q200 200 280 200 L744 200 Q824 200 824 280 L824 580 Q824 660 744 660 L560 660 L512 740 L464 660 L280 660 Q200 660 200 580 Z" fill="#1A1A2E" stroke="#4338CA" stroke-width="5"/>
+  <!-- Words inside bubble - sized by frequency -->
+  <text x="512" y="340" font-family="Arial,sans-serif" font-size="72" fill="#818CF8" text-anchor="middle" font-weight="bold" filter="url(#glow1)">단어</text>
+  <text x="330" y="420" font-family="Arial,sans-serif" font-size="44" fill="#A78BFA" text-anchor="middle" font-weight="bold">Cloud</text>
+  <text x="680" y="415" font-family="Arial,sans-serif" font-size="38" fill="#60A5FA" text-anchor="middle" font-weight="bold">Word</text>
+  <text x="260" y="490" font-family="Arial,sans-serif" font-size="28" fill="#6D28D9" text-anchor="middle">빈도</text>
+  <text x="430" y="500" font-family="Arial,sans-serif" font-size="22" fill="#7C3AED" text-anchor="middle">텍스트</text>
+  <text x="610" y="500" font-family="Arial,sans-serif" font-size="26" fill="#8B5CF6" text-anchor="middle">분석</text>
+  <text x="740" y="490" font-family="Arial,sans-serif" font-size="20" fill="#7C3AED" text-anchor="middle">AI</text>
+  <text x="320" y="560" font-family="Arial,sans-serif" font-size="20" fill="#5B21B6" text-anchor="middle">생성</text>
+  <text x="490" y="565" font-family="Arial,sans-serif" font-size="24" fill="#6D28D9" text-anchor="middle">구름</text>
+  <text x="660" y="558" font-family="Arial,sans-serif" font-size="18" fill="#4C1D95" text-anchor="middle">색상</text>
+  <!-- Layer 3: Glow dots on bubble edge -->
+  <circle cx="200" cy="430" r="8" fill="#818CF8" opacity="0.5"/>
+  <circle cx="824" cy="400" r="8" fill="#60A5FA" opacity="0.5"/>
+  <circle cx="512" cy="200" r="8" fill="#A78BFA" opacity="0.5"/>
+</svg>

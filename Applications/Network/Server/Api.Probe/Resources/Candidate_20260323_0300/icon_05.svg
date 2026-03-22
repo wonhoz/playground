@@ -1,0 +1,28 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Api.Probe | 청진기 헬스체크 | 실루엣/캐릭터 | #FFF1F2 밝은배경 -->
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="160" fill="#FFF1F2"/>
+  <!-- Layer 2: Stethoscope silhouette -->
+  <!-- Ear tubes (top two arms) -->
+  <line x1="340" y1="200" x2="340" y2="360" stroke="#E11D48" stroke-width="16" stroke-linecap="round"/>
+  <line x1="684" y1="200" x2="684" y2="360" stroke="#E11D48" stroke-width="16" stroke-linecap="round"/>
+  <!-- Ear tips -->
+  <circle cx="340" cy="192" r="20" fill="#9F1239"/>
+  <circle cx="684" cy="192" r="20" fill="#9F1239"/>
+  <!-- Yoke (connecting bend) -->
+  <path d="M340 360 Q340 420 512 420 Q684 420 684 360" fill="none" stroke="#E11D48" stroke-width="16" stroke-linecap="round"/>
+  <!-- Chest tube going down -->
+  <line x1="512" y1="420" x2="512" y2="680" stroke="#BE123C" stroke-width="16" stroke-linecap="round"/>
+  <!-- Chest piece (chest bell) -->
+  <circle cx="512" cy="720" r="80" fill="#E11D48" stroke="#9F1239" stroke-width="8"/>
+  <circle cx="512" cy="720" r="55" fill="#BE123C"/>
+  <circle cx="512" cy="720" r="28" fill="#9F1239"/>
+  <!-- Shine on chest piece -->
+  <ellipse cx="490" cy="700" rx="20" ry="14" fill="white" opacity="0.2" transform="rotate(-20 490 700)"/>
+  <!-- Layer 3: Heartbeat/health signal -->
+  <!-- API heartbeat line -->
+  <path d="M160 512 L280 512 L320 430 L360 580 L400 450 L440 560 L480 512 L840 512" fill="none" stroke="#BE123C" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Health check label -->
+  <rect x="300" y="840" width="424" height="56" rx="14" fill="#BE123C"/>
+  <text x="512" y="876" font-family="Arial,sans-serif" font-size="22" fill="white" text-anchor="middle" font-weight="bold">GET /health → 200 OK</text>
+</svg>

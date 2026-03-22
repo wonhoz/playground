@@ -1,0 +1,30 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Api.Probe | 레이더/소나 음파탐지 | 중앙심볼 | #0C2461 -->
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="160" fill="#060E2A"/>
+  <!-- Layer 2: Radar circles -->
+  <circle cx="512" cy="512" r="360" fill="none" stroke="#1E3A8A" stroke-width="2" opacity="0.5"/>
+  <circle cx="512" cy="512" r="270" fill="none" stroke="#1E40AF" stroke-width="2" opacity="0.6"/>
+  <circle cx="512" cy="512" r="180" fill="none" stroke="#2563EB" stroke-width="2" opacity="0.7"/>
+  <circle cx="512" cy="512" r="90" fill="none" stroke="#3B82F6" stroke-width="2" opacity="0.8"/>
+  <!-- Cross lines -->
+  <line x1="152" y1="512" x2="872" y2="512" stroke="#1E3A8A" stroke-width="1.5" opacity="0.4"/>
+  <line x1="512" y1="152" x2="512" y2="872" stroke="#1E3A8A" stroke-width="1.5" opacity="0.4"/>
+  <!-- Diagonal lines -->
+  <line x1="257" y1="257" x2="767" y2="767" stroke="#1E3A8A" stroke-width="1" opacity="0.25"/>
+  <line x1="767" y1="257" x2="257" y2="767" stroke="#1E3A8A" stroke-width="1" opacity="0.25"/>
+  <!-- Radar sweep (pie slice glow) -->
+  <path d="M512 512 L512 152 A360 360 0 0 1 818 690 Z" fill="#0EA5E9" opacity="0.08"/>
+  <path d="M512 512 L818 690" stroke="#0EA5E9" stroke-width="4" opacity="0.7"/>
+  <!-- Blips (detected endpoints) -->
+  <circle cx="680" cy="320" r="14" fill="#00FF88" opacity="0.9"/>
+  <circle cx="680" cy="320" r="28" fill="none" stroke="#00FF88" stroke-width="2" opacity="0.4"/>
+  <circle cx="400" cy="620" r="10" fill="#00FF88" opacity="0.6"/>
+  <circle cx="740" cy="560" r="8" fill="#00CC66" opacity="0.5"/>
+  <!-- Center dot -->
+  <circle cx="512" cy="512" r="12" fill="#60A5FA"/>
+  <!-- Layer 3: Labels -->
+  <text x="690" y="310" font-family="Consolas,monospace" font-size="18" fill="#00FF88">/api/v1</text>
+  <text x="406" y="648" font-family="Consolas,monospace" font-size="16" fill="#00CC66" opacity="0.8">/health</text>
+  <text x="512" y="870" font-family="Arial,sans-serif" font-size="22" fill="#3B82F6" text-anchor="middle">서버 탐색 중...</text>
+</svg>

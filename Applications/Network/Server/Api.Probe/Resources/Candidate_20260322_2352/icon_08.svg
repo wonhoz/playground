@@ -1,0 +1,33 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="150" fill="#0C2461"/>
+  <!-- Sonar screen circle -->
+  <circle cx="512" cy="512" r="360" fill="#0A1A3A"/>
+  <circle cx="512" cy="512" r="360" fill="none" stroke="#0E3A6E" stroke-width="6"/>
+  <!-- Concentric sonar rings -->
+  <circle cx="512" cy="512" r="270" fill="none" stroke="#0E3A6E" stroke-width="3" opacity="0.8"/>
+  <circle cx="512" cy="512" r="180" fill="none" stroke="#0E3A6E" stroke-width="3" opacity="0.7"/>
+  <circle cx="512" cy="512" r="90" fill="none" stroke="#0E3A6E" stroke-width="3" opacity="0.6"/>
+  <!-- Grid lines -->
+  <line x1="152" y1="512" x2="872" y2="512" stroke="#0E3A6E" stroke-width="2" opacity="0.5"/>
+  <line x1="512" y1="152" x2="512" y2="872" stroke="#0E3A6E" stroke-width="2" opacity="0.5"/>
+  <line x1="258" y1="258" x2="766" y2="766" stroke="#0E3A6E" stroke-width="2" opacity="0.3"/>
+  <line x1="766" y1="258" x2="258" y2="766" stroke="#0E3A6E" stroke-width="2" opacity="0.3"/>
+  <!-- Layer 2: Sonar sweep sector -->
+  <path d="M 512 512 L 512 152 A 360 360 0 0 1 797 693 Z" fill="#2DD4BF" opacity="0.14"/>
+  <line x1="512" y1="512" x2="797" y2="693" stroke="#2DD4BF" stroke-width="5" opacity="0.8"/>
+  <!-- Layer 3: Detected endpoints (blips) -->
+  <!-- Strong blip -->
+  <circle cx="660" cy="350" r="16" fill="#2DD4BF" opacity="0.95"/>
+  <circle cx="660" cy="350" r="32" fill="none" stroke="#2DD4BF" stroke-width="4" opacity="0.5"/>
+  <circle cx="660" cy="350" r="48" fill="none" stroke="#2DD4BF" stroke-width="2" opacity="0.25"/>
+  <!-- Medium blip -->
+  <circle cx="720" cy="620" r="12" fill="#67E8F9" opacity="0.8"/>
+  <circle cx="720" cy="620" r="24" fill="none" stroke="#67E8F9" stroke-width="3" opacity="0.4"/>
+  <!-- Faint blip -->
+  <circle cx="380" cy="680" r="9" fill="#2DD4BF" opacity="0.65"/>
+  <!-- Center dot -->
+  <circle cx="512" cy="512" r="10" fill="#2DD4BF"/>
+  <!-- Corner: "SONAR" label -->
+  <text x="185" y="876" font-family="Consolas,monospace" font-size="18" fill="#1D4ED8" opacity="0.7">API PROBE v2.0</text>
+</svg>

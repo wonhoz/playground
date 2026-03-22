@@ -1,0 +1,37 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="radarPulse" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#4ADE80" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#4ADE80" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="150" fill="#022C22"/>
+  <!-- Radar screen circle -->
+  <circle cx="512" cy="512" rx="350" r="350" fill="#0A1F12"/>
+  <circle cx="512" cy="512" r="350" fill="none" stroke="#166534" stroke-width="6"/>
+  <!-- Concentric rings -->
+  <circle cx="512" cy="512" r="250" fill="none" stroke="#166534" stroke-width="3" opacity="0.6"/>
+  <circle cx="512" cy="512" r="160" fill="none" stroke="#166534" stroke-width="3" opacity="0.5"/>
+  <circle cx="512" cy="512" r="80" fill="none" stroke="#166534" stroke-width="3" opacity="0.4"/>
+  <!-- Cross lines -->
+  <line x1="162" y1="512" x2="862" y2="512" stroke="#166534" stroke-width="2" opacity="0.4"/>
+  <line x1="512" y1="162" x2="512" y2="862" stroke="#166534" stroke-width="2" opacity="0.4"/>
+  <!-- Layer 2: Radar sweep (pie sector) -->
+  <path d="M 512 512 L 762 262 A 350 350 0 0 1 862 512 Z" fill="#4ADE80" opacity="0.18"/>
+  <!-- Pulse glow at sweep edge -->
+  <line x1="512" y1="512" x2="862" y2="512" stroke="#4ADE80" stroke-width="4" opacity="0.7"/>
+  <!-- Layer 2: Antenna above -->
+  <line x1="512" y1="162" x2="512" y2="60" stroke="#4ADE80" stroke-width="14" stroke-linecap="round"/>
+  <circle cx="512" cy="50" r="18" fill="#4ADE80"/>
+  <!-- Small wing lines on antenna -->
+  <line x1="512" y1="90" x2="460" y2="70" stroke="#4ADE80" stroke-width="8" stroke-linecap="round" opacity="0.7"/>
+  <line x1="512" y1="90" x2="564" y2="70" stroke="#4ADE80" stroke-width="8" stroke-linecap="round" opacity="0.7"/>
+  <!-- Layer 3: Blip dots (API endpoints found) -->
+  <circle cx="640" cy="380" r="14" fill="#4ADE80" opacity="0.9"/>
+  <circle cx="640" cy="380" r="28" fill="none" stroke="#4ADE80" stroke-width="4" opacity="0.4"/>
+  <circle cx="720" cy="600" r="10" fill="#86EFAC" opacity="0.75"/>
+  <circle cx="380" cy="640" r="10" fill="#86EFAC" opacity="0.7"/>
+  <!-- Center dot -->
+  <circle cx="512" cy="512" r="10" fill="#4ADE80"/>
+</svg>

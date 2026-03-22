@@ -170,24 +170,36 @@ public static class ImageConverter
         if (svg.Picture is null)
             throw new InvalidOperationException("SVG 파싱 실패");
 
-        var bmp = new SKBitmap(size, size);
-        using var canvas = new SKCanvas(bmp);
-        canvas.Clear(SKColors.Transparent);
-
         float srcW = svg.Picture.CullRect.Width;
         float srcH = svg.Picture.CullRect.Height;
         if (srcW <= 0 || srcH <= 0) { srcW = size; srcH = size; }
 
-        // aspect ratio 유지 + 투명 패딩
-        float scale = Math.Min(size / srcW, size / srcH);
-        float dx = (size - srcW * scale) / 2f;
-        float dy = (size - srcH * scale) / 2f;
+        // 소형 사이즈는 2x 슈퍼샘플링으로 계단 현상 방지
+        int renderSize = size < 64 ? size * 2 : size;
 
-        canvas.Translate(dx, dy);
-        canvas.Scale(scale);
-        canvas.DrawPicture(svg.Picture);
+        var renderBmp = new SKBitmap(new SKImageInfo(renderSize, renderSize, SKColorType.Rgba8888, SKAlphaType.Premul));
+        using (var canvas = new SKCanvas(renderBmp))
+        {
+            canvas.Clear(SKColors.Transparent);
 
-        return bmp;
+            float scale = Math.Min(renderSize / srcW, renderSize / srcH);
+            float dx = (renderSize - srcW * scale) / 2f;
+            float dy = (renderSize - srcH * scale) / 2f;
+
+            canvas.Translate(dx, dy);
+            canvas.Scale(scale);
+            canvas.DrawPicture(svg.Picture);
+        }
+
+        if (renderSize == size)
+            return renderBmp;
+
+        // 2x → target 다운스케일
+        var downscaled = renderBmp.Resize(
+            new SKImageInfo(size, size, SKColorType.Rgba8888, SKAlphaType.Premul),
+            SKFilterQuality.High);
+        renderBmp.Dispose();
+        return downscaled ?? throw new InvalidOperationException("SVG 다운스케일 실패");
     }
 
     static SKBitmap ResizeFit(SKBitmap src, int size)
@@ -196,19 +208,17 @@ public static class ImageConverter
         int fw = (int)(src.Width  * scale);
         int fh = (int)(src.Height * scale);
 
-        var resized = src.Resize(new SKImageInfo(fw, fh), SKFilterQuality.High)
+        var resized = src.Resize(new SKImageInfo(fw, fh, SKColorType.Rgba8888, SKAlphaType.Premul), SKFilterQuality.High)
             ?? throw new InvalidOperationException("리사이즈 실패");
 
         if (fw == size && fh == size)
             return resized;
 
         // 투명 패딩으로 정사각형 완성
-        var padded = new SKBitmap(size, size);
+        var padded = new SKBitmap(new SKImageInfo(size, size, SKColorType.Rgba8888, SKAlphaType.Premul));
         using var canvas = new SKCanvas(padded);
         canvas.Clear(SKColors.Transparent);
-        int ox = (size - fw) / 2;
-        int oy = (size - fh) / 2;
-        canvas.DrawBitmap(resized, ox, oy);
+        canvas.DrawBitmap(resized, (size - fw) / 2, (size - fh) / 2);
         resized.Dispose();
         return padded;
     }

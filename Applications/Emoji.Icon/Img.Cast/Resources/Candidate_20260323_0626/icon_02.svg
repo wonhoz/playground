@@ -1,0 +1,35 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Img.Cast | 망원경 — 프리뷰/확대보기 | 중앙심볼 | #1A0A30 -->
+  <defs>
+    <radialGradient id="lensGrad" cx="40%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#7DD3FC"/>
+      <stop offset="100%" stop-color="#0369A1"/>
+    </radialGradient>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="160" fill="#1A0A30"/>
+  <!-- Layer 2: Telescope body -->
+  <!-- Tripod legs -->
+  <line x1="512" y1="700" x2="340" y2="860" stroke="#4B3A60" stroke-width="14" stroke-linecap="round"/>
+  <line x1="512" y1="700" x2="512" y2="880" stroke="#4B3A60" stroke-width="14" stroke-linecap="round"/>
+  <line x1="512" y1="700" x2="684" y2="860" stroke="#4B3A60" stroke-width="14" stroke-linecap="round"/>
+  <!-- Telescope barrel (angled) -->
+  <rect x="300" y="420" width="424" height="120" rx="30" fill="#3A2060" stroke="#7C3AED" stroke-width="5" transform="rotate(-20 512 480)"/>
+  <!-- Large objective lens end -->
+  <circle cx="680" cy="370" r="72" fill="url(#lensGrad)" stroke="#A78BFA" stroke-width="6"/>
+  <!-- Lens gleam -->
+  <ellipse cx="660" cy="348" rx="22" ry="14" fill="white" opacity="0.25" transform="rotate(-20 660 348)"/>
+  <!-- Eyepiece end -->
+  <circle cx="344" cy="566" r="36" fill="#1A0A30" stroke="#7C3AED" stroke-width="5"/>
+  <!-- Layer 3: ICO format preview visible in lens -->
+  <text x="680" y="376" font-family="Arial,sans-serif" font-size="22" fill="white" text-anchor="middle" font-weight="bold" opacity="0.85">ICO</text>
+  <!-- Stars around -->
+  <circle cx="200" cy="200" r="3" fill="white" opacity="0.5"/>
+  <circle cx="840" cy="180" r="2" fill="white" opacity="0.4"/>
+  <circle cx="180" cy="600" r="2" fill="white" opacity="0.3"/>
+  <circle cx="860" cy="650" r="3" fill="#C4B5FD" opacity="0.5"/>
+  <circle cx="760" cy="220" r="2" fill="white" opacity="0.4"/>
+  <!-- Focus rings -->
+  <circle cx="680" cy="370" r="86" fill="none" stroke="#7C3AED" stroke-width="2" opacity="0.4"/>
+  <circle cx="680" cy="370" r="100" fill="none" stroke="#7C3AED" stroke-width="1" opacity="0.2"/>
+</svg>

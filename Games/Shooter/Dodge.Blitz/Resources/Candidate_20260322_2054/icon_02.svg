@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="storm_bg" x1="0.2" y1="0" x2="0.8" y2="1">
+      <stop offset="0%" stop-color="#1A0533"/>
+      <stop offset="50%" stop-color="#0D0120"/>
+      <stop offset="100%" stop-color="#200520"/>
+    </linearGradient>
+    <linearGradient id="bolt_grad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFEE00"/>
+      <stop offset="50%" stop-color="#FFE600"/>
+      <stop offset="100%" stop-color="#FF9900"/>
+    </linearGradient>
+    <linearGradient id="bolt2_grad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FF1DB4"/>
+      <stop offset="100%" stop-color="#FF6BE8"/>
+    </linearGradient>
+    <filter id="bolt_glow">
+      <feGaussianBlur stdDeviation="16" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="pink_glow">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="bg_clouds">
+      <feTurbulence type="fractalNoise" baseFrequency="0.025" numOctaves="3" result="noise"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0.15  0 0 0 0 0.01  0 0 0 0 0.2  0 0 0 0.25 0" in="noise" result="colored"/>
+      <feMerge><feMergeNode in="colored"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Layer 1: Storm background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#storm_bg)"/>
+
+  <!-- Storm swirl haze -->
+  <ellipse cx="512" cy="512" rx="380" ry="300" fill="none" stroke="#3A0A6A" stroke-width="60" opacity="0.35"/>
+  <ellipse cx="512" cy="512" rx="270" ry="200" fill="none" stroke="#4A0080" stroke-width="40" opacity="0.25"/>
+
+  <!-- Radial speed lines from center -->
+  <g opacity="0.18" stroke="#AA66FF" stroke-width="3" stroke-linecap="round">
+    <line x1="512" y1="512" x2="200" y2="250"/>
+    <line x1="512" y1="512" x2="512" y2="180"/>
+    <line x1="512" y1="512" x2="824" y2="250"/>
+    <line x1="512" y1="512" x2="900" y2="512"/>
+    <line x1="512" y1="512" x2="824" y2="774"/>
+    <line x1="512" y1="512" x2="512" y2="844"/>
+    <line x1="512" y1="512" x2="200" y2="774"/>
+    <line x1="512" y1="512" x2="124" y2="512"/>
+  </g>
+
+  <!-- Layer 2: Main lightning bolt (diagonal, dynamic) -->
+  <g filter="url(#bolt_glow)">
+    <!-- Main bolt path: top-left to bottom-right -->
+    <polygon
+      points="310,200 460,200 380,440 560,440 360,820 480,820 400,580 220,580"
+      fill="url(#bolt_grad)"
+    />
+  </g>
+
+  <!-- Secondary smaller bolt (crossing) -->
+  <g filter="url(#pink_glow)">
+    <polygon
+      points="680,220 760,220 620,480 740,480 560,820 640,820 720,560 600,560"
+      fill="url(#bolt2_grad)"
+      opacity="0.85"
+    />
+  </g>
+
+  <!-- Layer 3: Energy particles / sparks around bolts -->
+  <!-- Spark dots -->
+  <circle cx="380" cy="360" r="12" fill="#FFE600" opacity="0.9"/>
+  <circle cx="440" cy="300" r="8" fill="#FFD000" opacity="0.7"/>
+  <circle cx="560" cy="500" r="10" fill="#FFE600" opacity="0.8"/>
+  <circle cx="620" cy="420" r="7" fill="#FF9900" opacity="0.7"/>
+  <circle cx="480" cy="650" r="11" fill="#FFE600" opacity="0.75"/>
+  <circle cx="350" cy="700" r="8" fill="#FF9900" opacity="0.65"/>
+  <!-- Pink sparks -->
+  <circle cx="700" cy="380" r="10" fill="#FF1DB4" opacity="0.85"/>
+  <circle cx="740" cy="560" r="8" fill="#FF6BE8" opacity="0.7"/>
+  <circle cx="640" cy="660" r="9" fill="#FF1DB4" opacity="0.75"/>
+
+  <!-- BLITZ text at bottom -->
+  <text x="512" y="930" font-family="Arial Black, Impact" font-size="80" font-weight="900"
+        text-anchor="middle" fill="#FFE600" opacity="0.85" letter-spacing="8">BLITZ</text>
+
+  <!-- Glow overlay on BLITZ -->
+  <text x="512" y="930" font-family="Arial Black, Impact" font-size="80" font-weight="900"
+        text-anchor="middle" fill="none" stroke="#FFE600" stroke-width="2" opacity="0.3" letter-spacing="8">BLITZ</text>
+</svg>

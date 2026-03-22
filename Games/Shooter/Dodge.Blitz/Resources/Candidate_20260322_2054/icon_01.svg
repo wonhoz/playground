@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="space_bg" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#0D0F20"/>
+      <stop offset="100%" stop-color="#050510"/>
+    </radialGradient>
+    <radialGradient id="player_glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#00FFCC" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#00FFCC" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="cyan_glow">
+      <feGaussianBlur stdDeviation="14" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="bullet_glow">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Layer 1: Background — deep space black -->
+  <rect width="1024" height="1024" rx="190" fill="url(#space_bg)"/>
+
+  <!-- Stars -->
+  <circle cx="200" cy="180" r="2.5" fill="white" opacity="0.5"/>
+  <circle cx="340" cy="130" r="1.5" fill="white" opacity="0.4"/>
+  <circle cx="650" cy="155" r="2" fill="white" opacity="0.45"/>
+  <circle cx="820" cy="200" r="1.5" fill="white" opacity="0.35"/>
+  <circle cx="150" cy="450" r="2" fill="white" opacity="0.4"/>
+  <circle cx="880" cy="380" r="2.5" fill="white" opacity="0.4"/>
+  <circle cx="760" cy="850" r="2" fill="white" opacity="0.35"/>
+  <circle cx="250" cy="800" r="1.5" fill="white" opacity="0.4"/>
+  <circle cx="920" cy="700" r="2" fill="white" opacity="0.3"/>
+  <circle cx="130" cy="650" r="1.5" fill="white" opacity="0.35"/>
+  <circle cx="480" cy="200" r="1.5" fill="white" opacity="0.3"/>
+  <circle cx="560" cy="860" r="2" fill="#00FFCC" opacity="0.25"/>
+  <circle cx="400" cy="880" r="1.5" fill="white" opacity="0.3"/>
+  <circle cx="820" cy="820" r="2" fill="white" opacity="0.35"/>
+
+  <!-- Layer 2: Bullets surrounding player -->
+
+  <!-- Top bullets — red tracking -->
+  <g filter="url(#bullet_glow)">
+    <ellipse cx="512" cy="238" rx="22" ry="22" fill="#FF3737"/>
+    <ellipse cx="400" cy="270" rx="18" ry="18" fill="#FF3737" opacity="0.85"/>
+    <ellipse cx="624" cy="280" rx="20" ry="20" fill="#FF3737" opacity="0.9"/>
+  </g>
+
+  <!-- Left bullets — orange spread -->
+  <g filter="url(#bullet_glow)">
+    <ellipse cx="240" cy="512" rx="20" ry="20" fill="#FF8200"/>
+    <ellipse cx="272" cy="400" rx="16" ry="16" fill="#FF8200" opacity="0.8"/>
+    <ellipse cx="268" cy="624" rx="18" ry="18" fill="#FF8200" opacity="0.85"/>
+  </g>
+
+  <!-- Right bullets — purple spread -->
+  <g filter="url(#bullet_glow)">
+    <ellipse cx="784" cy="512" rx="20" ry="20" fill="#B432FF"/>
+    <ellipse cx="752" cy="400" rx="16" ry="16" fill="#B432FF" opacity="0.8"/>
+    <ellipse cx="756" cy="630" rx="18" ry="18" fill="#B432FF" opacity="0.85"/>
+  </g>
+
+  <!-- Bottom bullets — pink straight -->
+  <g filter="url(#bullet_glow)">
+    <ellipse cx="512" cy="786" rx="22" ry="22" fill="#FF3C96"/>
+    <ellipse cx="400" cy="754" rx="17" ry="17" fill="#FF3C96" opacity="0.8"/>
+    <ellipse cx="630" cy="748" rx="19" ry="19" fill="#FF3C96" opacity="0.9"/>
+  </g>
+
+  <!-- Diagonal bullets -->
+  <g filter="url(#bullet_glow)">
+    <ellipse cx="312" cy="310" rx="16" ry="16" fill="#FF5500" opacity="0.8"/>
+    <ellipse cx="720" cy="310" rx="15" ry="15" fill="#FF3737" opacity="0.75"/>
+    <ellipse cx="310" cy="718" rx="16" ry="16" fill="#FF8200" opacity="0.8"/>
+    <ellipse cx="720" cy="716" rx="15" ry="15" fill="#B432FF" opacity="0.75"/>
+  </g>
+
+  <!-- Player glow aura -->
+  <circle cx="512" cy="512" r="130" fill="url(#player_glow)"/>
+
+  <!-- Layer 3: Player — cyan diamond -->
+  <g filter="url(#cyan_glow)">
+    <polygon
+      points="512,356 668,512 512,668 356,512"
+      fill="#00FFCC"
+      stroke="#00BF98"
+      stroke-width="8"
+      stroke-linejoin="round"
+    />
+    <!-- Inner highlight -->
+    <polygon
+      points="512,406 618,512 512,618 406,512"
+      fill="none"
+      stroke="#80FFE8"
+      stroke-width="4"
+      opacity="0.5"
+    />
+    <!-- Center dot -->
+    <circle cx="512" cy="512" r="24" fill="#00FFCC" opacity="0.7"/>
+    <circle cx="512" cy="512" r="12" fill="white" opacity="0.4"/>
+  </g>
+</svg>

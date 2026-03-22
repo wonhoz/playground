@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Dodge.Blitz — 아이콘 후보 | 20260322_2054</title>
+<style>
+  :root {
+    --bg: #04080F;
+    --card: #080E1A;
+    --border: #0F1F38;
+    --text: #C8E8FF;
+    --dim: #4A6A8A;
+    --accent: #00FFCC;
+    --accent2: #FF3737;
+    --accent3: #FFD700;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Segoe UI', 'Malgun Gothic', sans-serif;
+    min-height: 100vh;
+    padding: 48px 24px;
+  }
+
+  /* Scanline overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 3px,
+      rgba(0,255,204,0.01) 3px,
+      rgba(0,255,204,0.01) 4px
+    );
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  header {
+    text-align: center;
+    margin-bottom: 52px;
+    position: relative;
+    z-index: 1;
+  }
+  header h1 {
+    font-size: 2.2rem;
+    font-weight: 900;
+    background: linear-gradient(90deg, var(--accent), #00AAFF, var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  header .subtitle {
+    color: var(--dim);
+    font-size: 0.88rem;
+    margin-bottom: 14px;
+    letter-spacing: 1px;
+  }
+  header .tag {
+    display: inline-block;
+    background: rgba(0,255,204,0.08);
+    border: 1px solid rgba(0,255,204,0.25);
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 0.78rem;
+    color: var(--accent);
+    margin: 3px;
+    font-family: monospace;
+  }
+  header .tag.red { color: var(--accent2); border-color: rgba(255,55,55,0.25); background: rgba(255,55,55,0.06); }
+  header .tag.gold { color: var(--accent3); border-color: rgba(255,215,0,0.25); background: rgba(255,215,0,0.06); }
+
+  .grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 28px;
+    justify-content: center;
+    max-width: 1300px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 24px 20px 20px;
+    width: 210px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    cursor: pointer;
+    position: relative;
+  }
+  .card:hover {
+    transform: scale(1.08) translateY(-6px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.7), 0 0 40px rgba(0,255,204,0.15);
+    border-color: var(--accent);
+  }
+  .card .num {
+    position: absolute;
+    top: 12px;
+    left: 16px;
+    font-size: 0.7rem;
+    color: var(--dim);
+    font-weight: 700;
+    font-family: monospace;
+    letter-spacing: 0.05em;
+  }
+  .icon-wrap {
+    width: 150px;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 16px;
+    overflow: hidden;
+    background: #000;
+  }
+  .icon-wrap img {
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
+    display: block;
+  }
+  .card-title {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--text);
+    text-align: center;
+    letter-spacing: 0.5px;
+  }
+  .card-concept {
+    font-size: 0.72rem;
+    color: var(--dim);
+    line-height: 1.5;
+    text-align: center;
+    margin-bottom: 4px;
+  }
+  .badge-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    justify-content: center;
+  }
+  .badge {
+    font-size: 0.65rem;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    font-family: monospace;
+  }
+  .badge.type-literal  { background: #041A0D; color: #00FFAA; border: 1px solid #096040; }
+  .badge.type-metaphor { background: #1A0A2E; color: #B432FF; border: 1px solid #5A1880; }
+  .badge.type-hybrid   { background: #1A0800; color: #FF8200; border: 1px solid #804020; }
+  .badge.pattern { background: #040C1A; color: #4499FF; border: 1px solid #1A3060; }
+  .palette {
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .swatch {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(255,255,255,0.1);
+    cursor: help;
+  }
+  .link-row {
+    margin-top: 4px;
+    text-align: center;
+  }
+  .link-row a {
+    font-size: 0.68rem;
+    color: var(--accent);
+    text-decoration: none;
+    opacity: 0.5;
+    font-family: monospace;
+    transition: opacity 0.15s;
+  }
+  .link-row a:hover { opacity: 1; }
+  footer {
+    text-align: center;
+    margin-top: 64px;
+    color: var(--dim);
+    font-size: 0.75rem;
+    opacity: 0.4;
+    font-family: monospace;
+    letter-spacing: 2px;
+    position: relative;
+    z-index: 1;
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>⬡ Dodge.Blitz</h1>
+  <p class="subtitle">탄막 슈터 — 총알을 피해 최대한 오래 생존하라</p>
+  <p>
+    <span class="tag">Candidate_20260322_2054</span>
+    <span class="tag">6개 후보</span>
+    <span class="tag red">탄막 / 회피</span>
+    <span class="tag gold">NOVICE → LEGEND</span>
+  </p>
+</header>
+
+<div class="grid">
+
+  <!-- icon_01 -->
+  <div class="card">
+    <span class="num">01</span>
+    <div class="icon-wrap"><img src="icon_01.svg" alt="icon_01"/></div>
+    <div class="card-title">시안 다이아몬드 포위</div>
+    <div class="card-concept">게임 화면 그대로 — 시안 마름모 플레이어가 사방 컬러 총알에 둘러싸인 도지 슈터의 핵심 장면</div>
+    <div class="badge-row">
+      <span class="badge type-literal">literal</span>
+      <span class="badge pattern">중앙 심볼</span>
+    </div>
+    <div class="palette">
+      <div class="swatch" style="background:#0D0F20" title="딥 스페이스 블랙"></div>
+      <div class="swatch" style="background:#00FFCC" title="시안 플레이어"></div>
+      <div class="swatch" style="background:#FF3737" title="레드 추적 총알"></div>
+      <div class="swatch" style="background:#FF8200" title="오렌지 스프레드"></div>
+      <div class="swatch" style="background:#B432FF" title="퍼플 스프레드"></div>
+    </div>
+    <div class="link-row"><a href="icon_01.svg" target="_blank">SVG 열기</a></div>
+  </div>
+
+  <!-- icon_02 -->
+  <div class="card">
+    <span class="num">02</span>
+    <div class="icon-wrap"><img src="icon_02.svg" alt="icon_02"/></div>
+    <div class="card-title">BLITZ 번개</div>
+    <div class="card-concept">Blitz = 독일어 번개 — 번개가 폭풍을 가르는 장면으로 게임의 속도감과 긴장감을 표현</div>
+    <div class="badge-row">
+      <span class="badge type-metaphor">metaphor</span>
+      <span class="badge pattern">대각선/동적</span>
+    </div>
+    <div class="palette">
+      <div class="swatch" style="background:#1A0533" title="폭풍 퍼플 배경"></div>
+      <div class="swatch" style="background:#FFE600" title="번개 옐로우"></div>
+      <div class="swatch" style="background:#FF1DB4" title="에너지 핑크 번개"></div>
+      <div class="swatch" style="background:#FF9900" title="볼트 오렌지"></div>
+    </div>
+    <div class="link-row"><a href="icon_02.svg" target="_blank">SVG 열기</a></div>
+  </div>
+
+  <!-- icon_03 -->
+  <div class="card">
+    <span class="num">03</span>
+    <div class="icon-wrap"><img src="icon_03.svg" alt="icon_03"/></div>
+    <div class="card-title">HUD — LEGEND 63.4s</div>
+    <div class="card-concept">게임 HUD 직접 표현 — 레벨 LEGEND, 생존 시간, 총알 대기줄 — 플레이 중 화면을 아이콘에 담음</div>
+    <div class="badge-row">
+      <span class="badge type-literal">literal</span>
+      <span class="badge pattern">공간/장면</span>
+    </div>
+    <div class="palette">
+      <div class="swatch" style="background:#0A0D22" title="다크 네이비 배경"></div>
+      <div class="swatch" style="background:#FFD700" title="골드 LEGEND"></div>
+      <div class="swatch" style="background:#00FFCC" title="시안 생존 시간"></div>
+      <div class="swatch" style="background:#FF3737" title="레드 총알 대기"></div>
+      <div class="swatch" style="background:#B432FF" title="퍼플 총알"></div>
+    </div>
+    <div class="link-row"><a href="icon_03.svg" target="_blank">SVG 열기</a></div>
+  </div>
+
+  <!-- icon_04 -->
+  <div class="card">
+    <span class="num">04</span>
+    <div class="icon-wrap"><img src="icon_04.svg" alt="icon_04"/></div>
+    <div class="card-title">총알 수렴 소용돌이</div>
+    <div class="card-concept">모든 방향에서 총알이 중앙을 향해 동시에 쏟아지는 탄막 패턴 — 기하학적으로 추상화한 도지 게임의 공포</div>
+    <div class="badge-row">
+      <span class="badge type-metaphor">metaphor</span>
+      <span class="badge pattern">기하학 추상</span>
+    </div>
+    <div class="palette">
+      <div class="swatch" style="background:#0E0A2A" title="딥 인디고 배경"></div>
+      <div class="swatch" style="background:#00FFCC" title="시안 중앙 표적"></div>
+      <div class="swatch" style="background:#FF3737" title="레드 총알"></div>
+      <div class="swatch" style="background:#FF8200" title="오렌지 총알"></div>
+      <div class="swatch" style="background:#B432FF" title="퍼플 총알"></div>
+      <div class="swatch" style="background:#FF3C96" title="핑크 총알"></div>
+    </div>
+    <div class="link-row"><a href="icon_04.svg" target="_blank">SVG 열기</a></div>
+  </div>
+
+  <!-- icon_05 -->
+  <div class="card">
+    <span class="num">05</span>
+    <div class="icon-wrap"><img src="icon_05.svg" alt="icon_05"/></div>
+    <div class="card-title">파티클 폭발 게임오버</div>
+    <div class="card-concept">피격 시 24개 시안 파티클이 폭발하는 게임 오버 순간 — 코드에서 직접 나온 가장 강렬한 감정의 장면</div>
+    <div class="badge-row">
+      <span class="badge type-hybrid">hybrid</span>
+      <span class="badge pattern">레이어드</span>
+    </div>
+    <div class="palette">
+      <div class="swatch" style="background:#030308" title="블랙 배경"></div>
+      <div class="swatch" style="background:#00FFCC" title="시안 파티클"></div>
+      <div class="swatch" style="background:#FFD700" title="황금 스파크"></div>
+      <div class="swatch" style="background:#FF3737" title="레드 히트 스파크"></div>
+      <div class="swatch" style="background:#FFFFFF" title="폭발 코어"></div>
+    </div>
+    <div class="link-row"><a href="icon_05.svg" target="_blank">SVG 열기</a></div>
+  </div>
+
+  <!-- icon_06 -->
+  <div class="card">
+    <span class="num">06</span>
+    <div class="icon-wrap"><img src="icon_06.svg" alt="icon_06"/></div>
+    <div class="card-title">다이아몬드 무적 글로우</div>
+    <div class="card-concept">플레이어가 피격 후 무적 상태로 빛나는 장면 — 총알 궤적이 스치고 지나가며 플레이어의 생존을 강조</div>
+    <div class="badge-row">
+      <span class="badge type-hybrid">hybrid</span>
+      <span class="badge pattern">실루엣/캐릭터</span>
+    </div>
+    <div class="palette">
+      <div class="swatch" style="background:#041B0E" title="다크 그린블랙 배경"></div>
+      <div class="swatch" style="background:#00FFCC" title="시안 글로우"></div>
+      <div class="swatch" style="background:#80FFE8" title="민트 하이라이트"></div>
+      <div class="swatch" style="background:#FF3737" title="레드 총알 궤적"></div>
+      <div class="swatch" style="background:#B432FF" title="퍼플 총알 궤적"></div>
+    </div>
+    <div class="link-row"><a href="icon_06.svg" target="_blank">SVG 열기</a></div>
+  </div>
+
+</div>
+
+<footer>DODGE.BLITZ · CANDIDATE_20260322_2054 · 6 ICONS · 2026-03-22</footer>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="indigo_bg" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#0E0A2A"/>
+      <stop offset="100%" stop-color="#05030F"/>
+    </radialGradient>
+    <radialGradient id="center_pulse" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#00FFCC" stop-opacity="0.5"/>
+      <stop offset="40%" stop-color="#00FFCC" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#00FFCC" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="orb_glow">
+      <feGaussianBlur stdDeviation="18" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="trail_glow">
+      <feGaussianBlur stdDeviation="9" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Layer 1: Deep indigo background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#indigo_bg)"/>
+
+  <!-- Concentric ring decorations (orbit lines) -->
+  <circle cx="512" cy="512" r="340" fill="none" stroke="#2A1060" stroke-width="1.5" opacity="0.5"/>
+  <circle cx="512" cy="512" r="250" fill="none" stroke="#2A1060" stroke-width="1.5" opacity="0.4"/>
+  <circle cx="512" cy="512" r="160" fill="none" stroke="#2A1060" stroke-width="1.5" opacity="0.35"/>
+
+  <!-- Layer 2: Bullets spiraling inward (geometric abstract) -->
+  <!-- Outer ring — 8 bullets at 45° intervals, large, far -->
+  <g filter="url(#trail_glow)">
+    <!-- 0° -->
+    <ellipse cx="852" cy="512" rx="22" ry="22" fill="#FF3737"/>
+    <!-- 45° -->
+    <ellipse cx="752" cy="270" rx="20" ry="20" fill="#FF6600"/>
+    <!-- 90° -->
+    <ellipse cx="512" cy="172" rx="21" ry="21" fill="#FF8200"/>
+    <!-- 135° -->
+    <ellipse cx="272" cy="270" rx="20" ry="20" fill="#B432FF"/>
+    <!-- 180° -->
+    <ellipse cx="172" cy="512" rx="22" ry="22" fill="#FF3737"/>
+    <!-- 225° -->
+    <ellipse cx="272" cy="754" rx="20" ry="20" fill="#FF6600"/>
+    <!-- 270° -->
+    <ellipse cx="512" cy="852" rx="21" ry="21" fill="#FF8200"/>
+    <!-- 315° -->
+    <ellipse cx="752" cy="754" rx="20" ry="20" fill="#B432FF"/>
+  </g>
+
+  <!-- Mid ring — 8 bullets, closer, medium -->
+  <g filter="url(#trail_glow)">
+    <!-- Offset 22.5° from outer ring -->
+    <ellipse cx="724" cy="371" rx="16" ry="16" fill="#FF3C96" opacity="0.9"/>
+    <ellipse cx="724" cy="653" rx="16" ry="16" fill="#FF3C96" opacity="0.9"/>
+    <ellipse cx="371" cy="300" rx="15" ry="15" fill="#FF3737" opacity="0.85"/>
+    <ellipse cx="300" cy="653" rx="15" ry="15" fill="#FF8200" opacity="0.85"/>
+    <ellipse cx="653" cy="300" rx="15" ry="15" fill="#B432FF" opacity="0.85"/>
+    <ellipse cx="300" cy="371" rx="14" ry="14" fill="#FF3C96" opacity="0.8"/>
+    <ellipse cx="653" cy="724" rx="15" ry="15" fill="#FF6600" opacity="0.85"/>
+    <ellipse cx="371" cy="724" rx="14" ry="14" fill="#B432FF" opacity="0.8"/>
+  </g>
+
+  <!-- Inner ring — 4 bullets, close, small -->
+  <g filter="url(#trail_glow)">
+    <ellipse cx="630" cy="395" rx="13" ry="13" fill="#FF3737" opacity="0.8"/>
+    <ellipse cx="630" cy="630" rx="13" ry="13" fill="#FF8200" opacity="0.8"/>
+    <ellipse cx="395" cy="630" rx="13" ry="13" fill="#B432FF" opacity="0.8"/>
+    <ellipse cx="395" cy="395" rx="13" ry="13" fill="#FF3C96" opacity="0.8"/>
+  </g>
+
+  <!-- Motion trails (lines from outer to inner showing convergence) -->
+  <g opacity="0.2" stroke-linecap="round">
+    <line x1="852" y1="512" x2="680" y2="512" stroke="#FF3737" stroke-width="5"/>
+    <line x1="512" y1="172" x2="512" y2="344" stroke="#FF8200" stroke-width="5"/>
+    <line x1="172" y1="512" x2="344" y2="512" stroke="#FF3737" stroke-width="5"/>
+    <line x1="512" y1="852" x2="512" y2="680" stroke="#FF8200" stroke-width="5"/>
+    <line x1="752" y1="272" x2="630" y2="395" stroke="#FF6600" stroke-width="4"/>
+    <line x1="272" y1="272" x2="395" y2="395" stroke="#B432FF" stroke-width="4"/>
+    <line x1="752" y1="752" x2="630" y2="630" stroke="#B432FF" stroke-width="4"/>
+    <line x1="272" y1="752" x2="395" y2="630" stroke="#FF6600" stroke-width="4"/>
+  </g>
+
+  <!-- Center pulse / target area -->
+  <circle cx="512" cy="512" r="110" fill="url(#center_pulse)"/>
+
+  <!-- Layer 3: Center diamond target -->
+  <g filter="url(#orb_glow)">
+    <polygon
+      points="512,420 604,512 512,604 420,512"
+      fill="#00FFCC"
+      stroke="#80FFE8"
+      stroke-width="6"
+      stroke-linejoin="round"
+    />
+    <circle cx="512" cy="512" r="18" fill="white" opacity="0.4"/>
+  </g>
+
+  <!-- Target cross-hairs -->
+  <line x1="492" y1="512" x2="456" y2="512" stroke="#00FFCC" stroke-width="3" opacity="0.4" stroke-linecap="round"/>
+  <line x1="532" y1="512" x2="568" y2="512" stroke="#00FFCC" stroke-width="3" opacity="0.4" stroke-linecap="round"/>
+  <line x1="512" y1="492" x2="512" y2="456" stroke="#00FFCC" stroke-width="3" opacity="0.4" stroke-linecap="round"/>
+  <line x1="512" y1="532" x2="512" y2="568" stroke="#00FFCC" stroke-width="3" opacity="0.4" stroke-linecap="round"/>
+</svg>

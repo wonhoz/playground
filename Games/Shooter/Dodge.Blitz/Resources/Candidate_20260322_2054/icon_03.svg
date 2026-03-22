@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="hud_bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0A0D22"/>
+      <stop offset="100%" stop-color="#050818"/>
+    </linearGradient>
+    <linearGradient id="panel_grad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0F1435" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#080B20" stop-opacity="0.95"/>
+    </linearGradient>
+    <filter id="gold_glow">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="cyan_soft">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="red_soft">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Layer 1: Background — dark navy HUD style -->
+  <rect width="1024" height="1024" rx="190" fill="url(#hud_bg)"/>
+
+  <!-- Grid scanlines (HUD feel) -->
+  <g opacity="0.07" stroke="#4466AA" stroke-width="1">
+    <line x1="0" y1="256" x2="1024" y2="256"/>
+    <line x1="0" y1="512" x2="1024" y2="512"/>
+    <line x1="0" y1="768" x2="1024" y2="768"/>
+    <line x1="256" y1="0" x2="256" y2="1024"/>
+    <line x1="512" y1="0" x2="512" y2="1024"/>
+    <line x1="768" y1="0" x2="768" y2="1024"/>
+  </g>
+
+  <!-- HUD panel body -->
+  <rect x="130" y="180" width="764" height="660" rx="20" fill="url(#panel_grad)"/>
+  <rect x="130" y="180" width="764" height="660" rx="20" fill="none" stroke="#1E2B60" stroke-width="2"/>
+
+  <!-- Level badge — LEGEND -->
+  <g filter="url(#gold_glow)">
+    <rect x="162" y="208" width="700" height="76" rx="12" fill="#1A1200" opacity="0.8"/>
+    <rect x="162" y="208" width="700" height="76" rx="12" fill="none" stroke="#FFD700" stroke-width="2.5" opacity="0.7"/>
+    <text x="512" y="264" font-family="Arial Black, Impact" font-size="52" font-weight="900"
+          text-anchor="middle" fill="#FFD700" letter-spacing="12">LEGEND</text>
+  </g>
+
+  <!-- Time display section -->
+  <rect x="162" y="302" width="700" height="160" rx="10" fill="#050B18" opacity="0.7"/>
+
+  <text x="192" y="352" font-family="monospace" font-size="24" fill="#556688" opacity="0.8">SURVIVED</text>
+
+  <g filter="url(#cyan_soft)">
+    <text x="512" y="440" font-family="Arial Black, monospace" font-size="110" font-weight="900"
+          text-anchor="middle" fill="#00FFCC">63.4</text>
+    <text x="730" y="440" font-family="Arial Black, monospace" font-size="52" font-weight="700"
+          fill="#00FFCC" opacity="0.7">s</text>
+  </g>
+
+  <!-- NEW BEST label -->
+  <g filter="url(#gold_glow)">
+    <text x="192" y="470" font-family="Arial" font-size="22" fill="#FFD700" opacity="0.9">NEW BEST!</text>
+  </g>
+
+  <!-- Divider -->
+  <rect x="162" y="478" width="700" height="2" rx="1" fill="#1E2B60" opacity="0.8"/>
+
+  <!-- Bullet count / incoming display -->
+  <rect x="162" y="488" width="700" height="100" rx="10" fill="#050B18" opacity="0.5"/>
+  <text x="192" y="525" font-family="monospace" font-size="20" fill="#556688" opacity="0.7">INCOMING</text>
+
+  <!-- Bullets row -->
+  <g filter="url(#red_soft)">
+    <circle cx="210" cy="562" r="14" fill="#FF3737"/>
+    <circle cx="250" cy="562" r="14" fill="#FF3737"/>
+    <circle cx="290" cy="562" r="14" fill="#FF8200"/>
+    <circle cx="330" cy="562" r="14" fill="#FF8200"/>
+    <circle cx="370" cy="562" r="14" fill="#B432FF"/>
+    <circle cx="410" cy="562" r="14" fill="#B432FF"/>
+    <circle cx="450" cy="562" r="14" fill="#FF3C96"/>
+    <circle cx="490" cy="562" r="14" fill="#FF3C96"/>
+    <circle cx="530" cy="562" r="12" fill="#FF3737" opacity="0.7"/>
+    <circle cx="568" cy="562" r="12" fill="#FF8200" opacity="0.65"/>
+    <text x="608" y="570" font-family="Arial" font-size="26" fill="#AABBCC" opacity="0.6">+∞</text>
+  </g>
+
+  <!-- Player diamond small icon in corner -->
+  <g filter="url(#cyan_soft)">
+    <polygon
+      points="192,650 232,690 192,730 152,690"
+      fill="#00FFCC"
+      stroke="#00BF98"
+      stroke-width="3"
+      stroke-linejoin="round"
+    />
+  </g>
+
+  <!-- Lives / status -->
+  <text x="255" y="700" font-family="monospace" font-size="26" fill="#00FFCC" opacity="0.8">PLAYER 1</text>
+
+  <!-- DODGE label bottom right -->
+  <text x="830" y="800" font-family="Arial Black" font-size="30" font-weight="900"
+        text-anchor="end" fill="#FFFFFF" opacity="0.1">DODGE</text>
+
+  <!-- Corner accent lines -->
+  <line x1="130" y1="220" x2="130" y2="300" stroke="#00FFCC" stroke-width="4" opacity="0.4" stroke-linecap="round"/>
+  <line x1="894" y1="220" x2="894" y2="300" stroke="#00FFCC" stroke-width="4" opacity="0.4" stroke-linecap="round"/>
+  <line x1="130" y1="760" x2="130" y2="840" stroke="#FFD700" stroke-width="4" opacity="0.4" stroke-linecap="round"/>
+  <line x1="894" y1="760" x2="894" y2="840" stroke="#FFD700" stroke-width="4" opacity="0.4" stroke-linecap="round"/>
+</svg>

@@ -201,19 +201,28 @@ namespace Music.Player
             _currentIndex = index;
             var track = _playlist[index];
 
-            HistoryService.Instance.RecordPlay(track);
-            LoadLyrics(track.FilePath);
+            try
+            {
+                HistoryService.Instance.RecordPlay(track);
+                LoadLyrics(track.FilePath);
 
-            _player.Load(track.FilePath);
-            _player.Play();
+                _player.Load(track.FilePath);
+                _player.Play();
 
-            UpdateTrackDisplay(track);
-            UpdatePlayPauseIcon(true);
-            PlaylistBox.SelectedIndex = index;
-            PlaylistBox.ScrollIntoView(PlaylistBox.SelectedItem);
+                UpdateTrackDisplay(track);
+                UpdatePlayPauseIcon(true);
+                PlaylistBox.SelectedIndex = index;
+                PlaylistBox.ScrollIntoView(PlaylistBox.SelectedItem);
 
-            ProgressSlider.Maximum = track.Duration.TotalSeconds;
-            TotalTimeText.Text = track.DurationText;
+                ProgressSlider.Maximum = track.Duration.TotalSeconds;
+                TotalTimeText.Text = track.DurationText;
+            }
+            catch (Exception ex)
+            {
+                TitleText.Text = $"재생 오류: {track.DisplayTitle}";
+                ArtistText.Text = ex.Message;
+                UpdatePlayPauseIcon(false);
+            }
         }
 
         private void UpdateTrackDisplay(TrackInfo track)
@@ -1006,10 +1015,18 @@ namespace Music.Player
             _playlist.Clear();
             _currentIndex = -1;
 
-            // 파일 추가
+            // 파일 추가 (디렉토리 포함)
             foreach (var arg in args)
             {
-                if (File.Exists(arg) && SupportedExtensions.Contains(System.IO.Path.GetExtension(arg).ToLower()))
+                if (Directory.Exists(arg))
+                {
+                    var files = Directory.GetFiles(arg, "*.*", SearchOption.AllDirectories)
+                        .Where(f => SupportedExtensions.Contains(System.IO.Path.GetExtension(f).ToLower()))
+                        .OrderBy(f => f);
+                    foreach (var file in files)
+                        AddTrack(file);
+                }
+                else if (File.Exists(arg) && SupportedExtensions.Contains(System.IO.Path.GetExtension(arg).ToLower()))
                 {
                     AddTrack(arg);
                 }
@@ -1097,6 +1114,9 @@ namespace Music.Player
                 var track = _playlist[_currentIndex];
 
                 // Load track and seek to saved position, then auto-play
+                HistoryService.Instance.RecordPlay(track);
+                LoadLyrics(track.FilePath);
+
                 _player.Load(track.FilePath);
                 if (state.CurrentPositionSeconds > 0 && state.CurrentPositionSeconds < track.Duration.TotalSeconds)
                 {

@@ -22,7 +22,8 @@ public class TrayService : IDisposable
     {
         _menu = new ContextMenuStrip
         {
-            ShowImageMargin = false,
+            ShowImageMargin = true,
+            ShowCheckMargin = true,
             AutoSize        = true,
             Font            = new Font("Segoe UI", 9.5f),
             Renderer        = new DarkMenuRenderer()

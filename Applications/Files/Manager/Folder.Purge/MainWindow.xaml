@@ -7,15 +7,16 @@
         WindowStartupLocation="CenterScreen"
         AllowDrop="True"
         Drop="Window_Drop"
-        DragOver="Window_DragOver">
+        DragOver="Window_DragOver"
+        DragLeave="Window_DragLeave">
 
     <Window.Resources>
         <!-- Brushes -->
         <SolidColorBrush x:Key="BgBrush"          Color="#1A1A1A"/>
         <SolidColorBrush x:Key="PanelBrush"        Color="#242424"/>
         <SolidColorBrush x:Key="BorderBrush"       Color="#333333"/>
-        <SolidColorBrush x:Key="AccentBrush"       Color="#E8643C"/>
-        <SolidColorBrush x:Key="AccentHoverBrush"  Color="#FF7A50"/>
+        <SolidColorBrush x:Key="AccentBrush"       Color="#E89A3C"/>
+        <SolidColorBrush x:Key="AccentHoverBrush"  Color="#FFB050"/>
         <SolidColorBrush x:Key="GreenBrush"        Color="#4CAF50"/>
         <SolidColorBrush x:Key="TextPrimary"       Color="#E0E0E0"/>
         <SolidColorBrush x:Key="TextSecondary"     Color="#888888"/>
@@ -78,6 +79,31 @@
                     <Setter Property="Background" Value="#388E3C"/>
                 </Trigger>
             </Style.Triggers>
+        </Style>
+
+        <!-- ScrollBar -->
+        <Style TargetType="ScrollBar">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Width" Value="6"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ScrollBar">
+                        <Grid>
+                            <Track x:Name="PART_Track" IsDirectionReversed="True">
+                                <Track.Thumb>
+                                    <Thumb>
+                                        <Thumb.Template>
+                                            <ControlTemplate TargetType="Thumb">
+                                                <Border Background="#444455" CornerRadius="3"/>
+                                            </ControlTemplate>
+                                        </Thumb.Template>
+                                    </Thumb>
+                                </Track.Thumb>
+                            </Track>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
 
         <!-- CheckBox (Window 로컬) -->

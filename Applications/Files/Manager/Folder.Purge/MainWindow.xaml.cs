@@ -40,6 +40,11 @@ public partial class MainWindow : Window
         DropZone.BorderBrush = new SolidColorBrush(Color.FromRgb(0xE8, 0x64, 0x3C));
     }
 
+    private void Window_DragLeave(object sender, System.Windows.DragEventArgs e)
+    {
+        DropZone.BorderBrush = new SolidColorBrush(Color.FromRgb(0x44, 0x44, 0x55));
+    }
+
     private void Window_Drop(object sender, System.Windows.DragEventArgs e)
     {
         DropZone.BorderBrush = new SolidColorBrush(Color.FromRgb(0x44, 0x44, 0x55));
@@ -235,8 +240,9 @@ public partial class MainWindow : Window
         }
 
         var log = new StringBuilder();
-        int successCount = 0;
-        int failCount    = 0;
+        int  successCount = 0;
+        int  failCount    = 0;
+        long freedBytes   = 0;
 
         SetScanningState(true);
 
@@ -268,6 +274,7 @@ public partial class MainWindow : Window
                     if (ok)
                     {
                         successCount++;
+                        freedBytes += item.SizeBytes;
                         Dispatcher.Invoke(() =>
                             log.AppendLine($"  [삭제] {item.Path}  ({item.SizeText})"));
                     }
@@ -281,6 +288,7 @@ public partial class MainWindow : Window
                 else
                 {
                     successCount++;
+                    freedBytes += item.SizeBytes;
                 }
             }
         });
@@ -299,7 +307,7 @@ public partial class MainWindow : Window
         string summary = previewOnly
             ? $"미리보기: {successCount:N0}개 항목이 삭제 대상입니다."
             : $"완료: {successCount:N0}개 삭제{(failCount > 0 ? $"  /  {failCount:N0}개 실패" : "")}"
-              + $"  |  확보 용량: {FormatSize(toDelete.Where(t => t.IsSelected).Sum(t => t.SizeBytes))}";
+              + $"  |  확보 용량: {FormatSize(freedBytes)}";
 
         DeleteResultText.Text = summary + "\n" + log.ToString();
         DeleteResultPanel.Visibility = Visibility.Visible;

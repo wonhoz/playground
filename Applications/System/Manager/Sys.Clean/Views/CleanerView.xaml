@@ -41,7 +41,7 @@
                                             <StackPanel>
                                                 <TextBlock Text="{Binding Name}" FontSize="13"/>
                                                 <TextBlock Text="{Binding SizeText}"
-                                                           FontSize="11" Foreground="#4FC3F7"
+                                                           FontSize="11" Foreground="{StaticResource BrAccent}"
                                                            Margin="0,1,0,0"/>
                                             </StackPanel>
                                         </CheckBox>
@@ -95,7 +95,7 @@
 
         <!-- ── 진행률 바 ── -->
         <ProgressBar x:Name="PbProgress" Grid.Row="1" Height="3"
-                     Background="#1A1A1A" Foreground="#4FC3F7"
+                     Background="#1A1A1A" Foreground="{StaticResource BrAccent}"
                      Visibility="Collapsed"/>
 
         <!-- ── 하단 액션 바 ── -->
@@ -111,7 +111,7 @@
                 <!-- 상태 텍스트 -->
                 <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
                     <TextBlock x:Name="TbStatus" Text="준비" Foreground="#888" FontSize="12"/>
-                    <TextBlock x:Name="TbTotalSize" Text="" Foreground="#4FC3F7" FontSize="12"
+                    <TextBlock x:Name="TbTotalSize" Text="" Foreground="{StaticResource BrAccent}" FontSize="12"
                                FontWeight="SemiBold" Margin="12,0,0,0"/>
                 </StackPanel>
 
@@ -124,7 +124,8 @@
                 <Button Grid.Column="2" x:Name="BtnAnalyze" Content="🔍  분석"
                         Click="BtnAnalyze_Click" Margin="0,0,6,0"
                         Padding="14,7" FontSize="13"
-                        Background="#1E4A6A" Foreground="#4FC3F7" BorderBrush="#2979FF"/>
+                        Background="{StaticResource BrAccentDim}" Foreground="{StaticResource BrAccent}"
+                        BorderBrush="{StaticResource BrAccent}"/>
 
                 <!-- 청소 버튼 -->
                 <Button Grid.Column="3" x:Name="BtnClean" Content="🧹  청소 실행"

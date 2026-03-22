@@ -32,7 +32,7 @@ public partial class CleanerView : UserControl
         BtnClean.IsEnabled = false;
         BtnAnalyze.Content = "⏹  중지";
         BtnAnalyze.Background = new SolidColorBrush(Color.FromRgb(0x3A, 0x1A, 0x1A));
-        BtnAnalyze.Foreground = new SolidColorBrush(Color.FromRgb(0xEF, 0x53, 0x50));
+        BtnAnalyze.Foreground = (Brush)Application.Current.FindResource("BrDanger");
         PbProgress.Visibility = Visibility.Visible;
         PbProgress.IsIndeterminate = false;
         PbProgress.Value = 0;
@@ -71,8 +71,8 @@ public partial class CleanerView : UserControl
             _cts?.Dispose();
             _cts = null;
             BtnAnalyze.Content = "🔍  분석";
-            BtnAnalyze.Background = new SolidColorBrush(Color.FromRgb(0x1E, 0x4A, 0x6A));
-            BtnAnalyze.Foreground = new SolidColorBrush(Color.FromRgb(0x4F, 0xC3, 0xF7));
+            BtnAnalyze.Background = (Brush)Application.Current.FindResource("BrAccentDim");
+            BtnAnalyze.Foreground = (Brush)Application.Current.FindResource("BrAccent");
             PbProgress.Visibility = Visibility.Collapsed;
         }
     }
@@ -82,7 +82,6 @@ public partial class CleanerView : UserControl
         ResultPanel.Children.Clear();
         TbHint.Visibility = Visibility.Collapsed;
 
-        long totalSelected = 0;
         string? currentGroup = null;
 
         foreach (var target in _targets)
@@ -95,16 +94,12 @@ public partial class CleanerView : UserControl
 
             if (target.Size <= 0 && !target.IsSelected) continue;
 
-            // 그룹 헤더 (처음 나타날 때)
             var groupItems = _targets.Where(t => !t.IsGroup && t.Category == currentGroup && t.Size > 0).ToList();
             if (groupItems.Count == 0) continue;
 
             // 결과 카드
             var card = BuildResultCard(target);
             ResultPanel.Children.Add(card);
-
-            if (target.IsSelected && target.Size > 0)
-                totalSelected += target.Size;
         }
 
         var totalCleanable = _targets.Where(t => !t.IsGroup && t.IsSelected).Sum(t => t.Size > 0 ? t.Size : 0);
@@ -132,8 +127,9 @@ public partial class CleanerView : UserControl
 
     private static Border BuildResultCard(CleanTarget target)
     {
+        var accentBrush = (SolidColorBrush)Application.Current.FindResource("BrAccent");
         var sizeColor = target.Size > 0
-            ? Color.FromRgb(0x4F, 0xC3, 0xF7)
+            ? accentBrush.Color
             : Color.FromRgb(0x55, 0x55, 0x55);
 
         var grid = new Grid { Margin = new Thickness(0, 2, 0, 2) };
@@ -203,23 +199,27 @@ public partial class CleanerView : UserControl
         int totalErrors = 0;
         int done = 0;
 
-        foreach (var target in toClean)
+        try
         {
-            TbStatus.Text = $"청소 중: {target.Name}";
-            var (cleaned, errors) = await _service.CleanTargetAsync(target, ct);
-            totalCleaned += cleaned;
-            totalErrors += errors;
-            target.Size = 0;
-            done++;
-            PbProgress.Value = done;
+            foreach (var target in toClean)
+            {
+                TbStatus.Text = $"청소 중: {target.Name}";
+                var (cleaned, errors) = await _service.CleanTargetAsync(target, ct);
+                totalCleaned += cleaned;
+                totalErrors += errors;
+                target.Size = 0;
+                done++;
+                PbProgress.Value = done;
+            }
         }
-
-        _cts?.Dispose();
-        _cts = null;
-
-        PbProgress.Visibility = Visibility.Collapsed;
-        BtnAnalyze.IsEnabled = true;
-        _analyzed = false;
+        finally
+        {
+            _cts?.Dispose();
+            _cts = null;
+            PbProgress.Visibility = Visibility.Collapsed;
+            BtnAnalyze.IsEnabled = true;
+            _analyzed = false;
+        }
 
         var msg = totalErrors > 0
             ? $"청소 완료!\n\n해제된 공간: {CleanTarget.FormatSize(totalCleaned)}\n실패 항목: {totalErrors}개 (사용 중인 파일 등)"

@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -9,6 +10,7 @@ namespace SysClean.Views;
 public partial class CleanerView : UserControl
 {
     private readonly CleanerService _service = new();
+    private readonly CleanHistoryService _history = new();
     private List<CleanTarget> _targets = [];
     private CancellationTokenSource? _cts;
     private bool _analyzed;
@@ -18,8 +20,20 @@ public partial class CleanerView : UserControl
         InitializeComponent();
         _targets = _service.GetTargets();
         TargetList.ItemsSource = _targets;
+
+        var last = _history.GetLast();
+        TbStatus.Text = last != null
+            ? $"마지막 청소: {CleanHistoryService.FormatRelativeTime(last.Time)}  ({CleanTarget.FormatSize(last.CleanedBytes)} 해제)"
+            : "준비";
     }
 
+    // ── 키보드 단축키 트리거 (MainWindow에서 호출) ─────────────────────
+    internal void TriggerAnalyze() => BtnAnalyze_Click(BtnAnalyze, new RoutedEventArgs());
+    internal void TriggerClean()   { if (BtnClean.IsEnabled) BtnClean_Click(BtnClean, new RoutedEventArgs()); }
+    internal void TriggerSelectAll() => BtnSelectAll_Click(BtnSelectAll, new RoutedEventArgs());
+    internal bool IsCleanEnabled => BtnClean.IsEnabled;
+
+    // ── 분석 ──────────────────────────────────────────────────────────
     private async void BtnAnalyze_Click(object sender, RoutedEventArgs e)
     {
         if (_cts != null)
@@ -77,12 +91,14 @@ public partial class CleanerView : UserControl
         }
     }
 
+    // ── 결과 업데이트 (그룹 헤더 포함) ───────────────────────────────
     private void UpdateResults()
     {
         ResultPanel.Children.Clear();
         TbHint.Visibility = Visibility.Collapsed;
 
         string? currentGroup = null;
+        string? lastRenderedGroup = null;
 
         foreach (var target in _targets)
         {
@@ -97,9 +113,15 @@ public partial class CleanerView : UserControl
             var groupItems = _targets.Where(t => !t.IsGroup && t.Category == currentGroup && t.Size > 0).ToList();
             if (groupItems.Count == 0) continue;
 
-            // 결과 카드
-            var card = BuildResultCard(target);
-            ResultPanel.Children.Add(card);
+            // 그룹이 바뀔 때 헤더 삽입
+            if (currentGroup != lastRenderedGroup)
+            {
+                var groupName = _targets.FirstOrDefault(t => t.IsGroup && t.Category == currentGroup)?.Name;
+                ResultPanel.Children.Add(BuildGroupHeader(groupName));
+                lastRenderedGroup = currentGroup;
+            }
+
+            ResultPanel.Children.Add(BuildResultCard(target));
         }
 
         var totalCleanable = _targets.Where(t => !t.IsGroup && t.IsSelected).Sum(t => t.Size > 0 ? t.Size : 0);
@@ -125,6 +147,7 @@ public partial class CleanerView : UserControl
             TbHint.Visibility = Visibility.Visible;
     }
 
+    // ── 결과 카드 (우클릭 → 폴더 열기) ───────────────────────────────
     private static Border BuildResultCard(CleanTarget target)
     {
         var accentBrush = (SolidColorBrush)Application.Current.FindResource("BrAccent");
@@ -159,6 +182,23 @@ public partial class CleanerView : UserControl
         grid.Children.Add(nameBlock);
         grid.Children.Add(sizeBlock);
 
+        // 우클릭 → 폴더 열기
+        var menuOpen = new MenuItem { Header = "📂  폴더 열기" };
+        menuOpen.Click += (_, _) =>
+        {
+            string? folder = null;
+            foreach (var p in target.Paths)
+            {
+                if (Directory.Exists(p)) { folder = p; break; }
+                if (File.Exists(p)) { folder = Path.GetDirectoryName(p); break; }
+            }
+            if (folder != null)
+                Process.Start("explorer.exe", folder);
+        };
+
+        var ctx = new ContextMenu();
+        ctx.Items.Add(menuOpen);
+
         return new Border
         {
             Background = new SolidColorBrush(Color.FromRgb(0x22, 0x22, 0x22)),
@@ -166,10 +206,31 @@ public partial class CleanerView : UserControl
             Padding = new Thickness(12, 8, 12, 8),
             Margin = new Thickness(0, 2, 0, 2),
             Child = grid,
-            ToolTip = target.Description
+            ToolTip = target.Description,
+            ContextMenu = ctx
         };
     }
 
+    // ── 그룹 헤더 ────────────────────────────────────────────────────
+    private static Border BuildGroupHeader(string? name)
+    {
+        return new Border
+        {
+            Margin = new Thickness(0, 10, 0, 2),
+            Padding = new Thickness(4, 2, 0, 6),
+            BorderBrush = new SolidColorBrush(Color.FromRgb(0x33, 0x33, 0x33)),
+            BorderThickness = new Thickness(0, 0, 0, 1),
+            Child = new TextBlock
+            {
+                Text = name ?? "",
+                FontSize = 11,
+                FontWeight = FontWeights.SemiBold,
+                Foreground = new SolidColorBrush(Color.FromRgb(0x66, 0x66, 0x66))
+            }
+        };
+    }
+
+    // ── 청소 ─────────────────────────────────────────────────────────
     private async void BtnClean_Click(object sender, RoutedEventArgs e)
     {
         if (!_analyzed) return;
@@ -220,6 +281,10 @@ public partial class CleanerView : UserControl
             BtnAnalyze.IsEnabled = true;
             _analyzed = false;
         }
+
+        // 이력 저장
+        if (totalCleaned > 0)
+            _history.Append(new CleanHistoryEntry(DateTime.Now, toClean.Count, totalCleaned));
 
         var msg = totalErrors > 0
             ? $"청소 완료!\n\n해제된 공간: {CleanTarget.FormatSize(totalCleaned)}\n실패 항목: {totalErrors}개 (사용 중인 파일 등)"

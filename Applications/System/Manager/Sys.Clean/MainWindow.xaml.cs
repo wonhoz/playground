@@ -1,5 +1,6 @@
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace SysClean;
 
@@ -11,6 +12,28 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
         _activeNavBtn = BtnNavCleaner;
+    }
+
+    protected override void OnKeyDown(KeyEventArgs e)
+    {
+        base.OnKeyDown(e);
+        if (ViewCleaner.Visibility != Visibility.Visible) return;
+
+        switch (e.Key)
+        {
+            case Key.F5:
+                ViewCleaner.TriggerAnalyze();
+                e.Handled = true;
+                break;
+            case Key.Delete when ViewCleaner.IsCleanEnabled:
+                ViewCleaner.TriggerClean();
+                e.Handled = true;
+                break;
+            case Key.A when (Keyboard.Modifiers & ModifierKeys.Control) != 0:
+                ViewCleaner.TriggerSelectAll();
+                e.Handled = true;
+                break;
+        }
     }
 
     private void Nav_Click(object sender, RoutedEventArgs e)

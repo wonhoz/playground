@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_04: Metaphor / 기하학 추상 / 총알 폭풍 = 방사형 패턴 / 빨강-암적색 -->
+  <defs>
+    <radialGradient id="bg04" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#1C0000"/>
+      <stop offset="100%" stop-color="#080000"/>
+    </radialGradient>
+    <radialGradient id="center04" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FF2200"/>
+      <stop offset="60%" stop-color="#CC0000"/>
+      <stop offset="100%" stop-color="#880000"/>
+    </radialGradient>
+    <filter id="glow04">
+      <feGaussianBlur stdDeviation="10"/>
+    </filter>
+    <filter id="glow04sm">
+      <feGaussianBlur stdDeviation="4"/>
+    </filter>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="160" fill="url(#bg04)"/>
+
+  <!-- 방사형 탄막 패턴 — 중심에서 바깥으로 뻗는 총알 궤적 -->
+  <!-- 탄막 라인들 (궤적) -->
+  <line x1="512" y1="512" x2="512" y2="230" stroke="#FF2200" stroke-width="2" opacity="0.3"/>
+  <line x1="512" y1="512" x2="712" y2="270" stroke="#FF2200" stroke-width="2" opacity="0.3"/>
+  <line x1="512" y1="512" x2="800" y2="430" stroke="#FF2200" stroke-width="2" opacity="0.3"/>
+  <line x1="512" y1="512" x2="800" y2="600" stroke="#FF2200" stroke-width="2" opacity="0.3"/>
+  <line x1="512" y1="512" x2="712" y2="760" stroke="#FF2200" stroke-width="2" opacity="0.3"/>
+  <line x1="512" y1="512" x2="512" y2="800" stroke="#FF2200" stroke-width="2" opacity="0.3"/>
+  <line x1="512" y1="512" x2="312" y2="760" stroke="#FF2200" stroke-width="2" opacity="0.3"/>
+  <line x1="512" y1="512" x2="224" y2="600" stroke="#FF2200" stroke-width="2" opacity="0.3"/>
+  <line x1="512" y1="512" x2="224" y2="430" stroke="#FF2200" stroke-width="2" opacity="0.3"/>
+  <line x1="512" y1="512" x2="312" y2="270" stroke="#FF2200" stroke-width="2" opacity="0.3"/>
+  <!-- 대각 보조 -->
+  <line x1="512" y1="512" x2="630" y2="240" stroke="#FF2200" stroke-width="1.5" opacity="0.2"/>
+  <line x1="512" y1="512" x2="770" y2="360" stroke="#FF2200" stroke-width="1.5" opacity="0.2"/>
+  <line x1="512" y1="512" x2="770" y2="670" stroke="#FF2200" stroke-width="1.5" opacity="0.2"/>
+  <line x1="512" y1="512" x2="630" y2="790" stroke="#FF2200" stroke-width="1.5" opacity="0.2"/>
+  <line x1="512" y1="512" x2="390" y2="790" stroke="#FF2200" stroke-width="1.5" opacity="0.2"/>
+  <line x1="512" y1="512" x2="250" y2="670" stroke="#FF2200" stroke-width="1.5" opacity="0.2"/>
+  <line x1="512" y1="512" x2="250" y2="360" stroke="#FF2200" stroke-width="1.5" opacity="0.2"/>
+  <line x1="512" y1="512" x2="390" y2="240" stroke="#FF2200" stroke-width="1.5" opacity="0.2"/>
+
+  <!-- 총알들 — 각 라인 위에 배치 -->
+  <!-- 12시 방향 -->
+  <ellipse cx="512" cy="350" rx="12" ry="20" fill="#FF4422"/>
+  <ellipse cx="512" cy="280" rx="10" ry="17" fill="#FF2200"/>
+  <!-- 2시 방향 -->
+  <ellipse cx="637" cy="350" rx="12" ry="20" transform="rotate(36 637 350)" fill="#FF4422"/>
+  <ellipse cx="690" cy="300" rx="10" ry="17" transform="rotate(36 690 300)" fill="#FF2200"/>
+  <!-- 3시 방향 -->
+  <ellipse cx="730" cy="430" rx="12" ry="20" transform="rotate(72 730 430)" fill="#FF4422"/>
+  <ellipse cx="776" cy="450" rx="10" ry="17" transform="rotate(72 776 450)" fill="#FF2200"/>
+  <!-- 4-5시 방향 -->
+  <ellipse cx="730" cy="580" rx="12" ry="20" transform="rotate(108 730 580)" fill="#FF4422"/>
+  <ellipse cx="776" cy="575" rx="10" ry="17" transform="rotate(108 776 575)" fill="#FF2200"/>
+  <!-- 5-6시 방향 -->
+  <ellipse cx="637" cy="670" rx="12" ry="20" transform="rotate(144 637 670)" fill="#FF4422"/>
+  <ellipse cx="690" cy="718" rx="10" ry="17" transform="rotate(144 690 718)" fill="#FF2200"/>
+  <!-- 6시 방향 -->
+  <ellipse cx="512" cy="660" rx="12" ry="20" fill="#FF4422"/>
+  <ellipse cx="512" cy="726" rx="10" ry="17" fill="#FF2200"/>
+  <!-- 7-8시 방향 -->
+  <ellipse cx="387" cy="670" rx="12" ry="20" transform="rotate(-144 387 670)" fill="#FF4422"/>
+  <ellipse cx="334" cy="718" rx="10" ry="17" transform="rotate(-144 334 718)" fill="#FF2200"/>
+  <!-- 9시 방향 -->
+  <ellipse cx="294" cy="580" rx="12" ry="20" transform="rotate(-108 294 580)" fill="#FF4422"/>
+  <ellipse cx="248" cy="575" rx="10" ry="17" transform="rotate(-108 248 575)" fill="#FF2200"/>
+  <!-- 10시 방향 -->
+  <ellipse cx="294" cy="430" rx="12" ry="20" transform="rotate(-72 294 430)" fill="#FF4422"/>
+  <ellipse cx="248" cy="450" rx="10" ry="17" transform="rotate(-72 248 450)" fill="#FF2200"/>
+  <!-- 11시 방향 -->
+  <ellipse cx="387" cy="350" rx="12" ry="20" transform="rotate(-36 387 350)" fill="#FF4422"/>
+  <ellipse cx="334" cy="300" rx="10" ry="17" transform="rotate(-36 334 300)" fill="#FF2200"/>
+
+  <!-- 중심 글로우 -->
+  <circle cx="512" cy="512" r="80" fill="#FF2200" opacity="0.4" filter="url(#glow04)"/>
+
+  <!-- 중앙 심볼 — "피해야 할 공간" — 중심이 위험 -->
+  <circle cx="512" cy="512" r="60" fill="url(#center04)"/>
+  <circle cx="512" cy="512" r="40" fill="#FF6644"/>
+  <circle cx="512" cy="512" r="22" fill="#FFAA88"/>
+  <!-- 경고 X 표시 -->
+  <line x1="488" y1="488" x2="536" y2="536" stroke="#8B0000" stroke-width="8" stroke-linecap="round"/>
+  <line x1="536" y1="488" x2="488" y2="536" stroke="#8B0000" stroke-width="8" stroke-linecap="round"/>
+
+  <!-- 회피 경로 힌트 — 파란 화살표 -->
+  <path d="M400 512 L340 460 L340 490 L220 490 L220 534 L340 534 L340 564 Z" fill="#00AAFF" opacity="0.8"/>
+</svg>

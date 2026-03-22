@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_05 | hybrid | 대각선·동적 | 원이 슬라이스되며 터지는 순간 + SLICE 텍스트 칼날 | 코랄/화이트/딥퍼플 -->
+
+  <defs>
+    <radialGradient id="bg05" cx="45%" cy="48%" r="70%">
+      <stop offset="0%" stop-color="#1A0030"/>
+      <stop offset="60%" stop-color="#120020"/>
+      <stop offset="100%" stop-color="#080008"/>
+    </radialGradient>
+    <radialGradient id="circleGrad" cx="35%" cy="30%" r="60%">
+      <stop offset="0%" stop-color="#FF6A6A"/>
+      <stop offset="50%" stop-color="#FF2244"/>
+      <stop offset="100%" stop-color="#CC0033"/>
+    </radialGradient>
+    <radialGradient id="burstGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.9"/>
+      <stop offset="40%" stop-color="#FFD700" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#FF4400" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glow05">
+      <feGaussianBlur stdDeviation="9" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="superGlow05">
+      <feGaussianBlur stdDeviation="22" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <clipPath id="leftHalf">
+      <rect x="0" y="0" width="512" height="1024"/>
+    </clipPath>
+    <clipPath id="rightHalf">
+      <rect x="512" y="0" width="512" height="1024"/>
+    </clipPath>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="180" fill="url(#bg05)"/>
+
+  <!-- 터짐 광휘 (원 슬라이스 순간) -->
+  <circle cx="512" cy="490" r="200" fill="url(#burstGrad)" filter="url(#superGlow05)" opacity="0.7"/>
+
+  <!-- 원 왼쪽 절반 (슬라이스되어 왼쪽으로 날아감) -->
+  <g clip-path="url(#leftHalf)">
+    <circle cx="490" cy="480" r="155"
+      fill="url(#circleGrad)" filter="url(#glow05)"
+      transform="translate(-30, -18) rotate(-10, 490, 480)"/>
+  </g>
+
+  <!-- 원 오른쪽 절반 (슬라이스되어 오른쪽으로 날아감) -->
+  <g clip-path="url(#rightHalf)">
+    <circle cx="534" cy="502" r="155"
+      fill="#FF4488" filter="url(#glow05)"
+      transform="translate(28, 20) rotate(8, 534, 502)"/>
+  </g>
+
+  <!-- 원 내부 — 과즙 스플래시 효과 -->
+  <ellipse cx="440" cy="460" rx="60" ry="40" fill="#FF2244" opacity="0.4"
+    transform="rotate(-15, 440, 460)"/>
+  <ellipse cx="585" cy="515" rx="55" ry="35" fill="#FF6688" opacity="0.35"
+    transform="rotate(12, 585, 515)"/>
+
+  <!-- 슬라이스 선 — 수직+살짝 기울어짐, 중앙 통과 -->
+  <line x1="530" y1="220" x2="490" y2="790"
+    stroke="#FFFFFF" stroke-width="8" stroke-linecap="round"
+    opacity="0.95" filter="url(#superGlow05)"/>
+  <line x1="530" y1="220" x2="490" y2="790"
+    stroke="#FFD700" stroke-width="3" stroke-linecap="round" opacity="1"/>
+
+  <!-- 슬라이스 끝 스파크 (상단 — 커서 끝) -->
+  <circle cx="530" cy="218" r="18" fill="#FFFFFF" opacity="0.95" filter="url(#superGlow05)"/>
+  <circle cx="530" cy="218" r="8" fill="#FFD700" opacity="1"/>
+  <!-- 스파크 방사선 -->
+  <line x1="530" y1="196" x2="530" y2="180" stroke="#FFD700" stroke-width="3" stroke-linecap="round" opacity="0.8"/>
+  <line x1="549" y1="199" x2="560" y2="186" stroke="#FFD700" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
+  <line x1="511" y1="199" x2="500" y2="186" stroke="#FFD700" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
+  <line x1="554" y1="218" x2="572" y2="218" stroke="#FFD700" stroke-width="3" stroke-linecap="round" opacity="0.6"/>
+  <line x1="506" y1="218" x2="488" y2="218" stroke="#FFD700" stroke-width="3" stroke-linecap="round" opacity="0.6"/>
+
+  <!-- 파편 조각들 (사방으로 흩날림) -->
+  <circle cx="290" cy="360" r="10" fill="#FF2244" opacity="0.8" filter="url(#glow05)"/>
+  <circle cx="245" cy="500" r="7" fill="#FF6688" opacity="0.7" filter="url(#glow05)"/>
+  <circle cx="320" cy="610" r="9" fill="#FF2244" opacity="0.6" filter="url(#glow05)"/>
+  <polygon points="745,330 765,358 725,355" fill="#FF4488" opacity="0.75" filter="url(#glow05)"/>
+  <polygon points="780,490 796,516 760,513" fill="#FF2244" opacity="0.65" filter="url(#glow05)"/>
+  <circle cx="720" cy="610" r="8" fill="#FF6688" opacity="0.6" filter="url(#glow05)"/>
+
+  <!-- 중간 크기 파편 -->
+  <circle cx="230" cy="430" r="14" fill="#FF4466" opacity="0.5" filter="url(#glow05)"/>
+  <polygon points="760,400 782,435 738,432" fill="#FF2244" opacity="0.5" filter="url(#glow05)"/>
+
+  <!-- 하단 "SLICE" — 칼날처럼 이탤릭 텍스트 -->
+  <text x="512" y="830" text-anchor="middle"
+    font-family="Arial Black, Impact, sans-serif"
+    font-size="96" font-weight="900" font-style="italic"
+    letter-spacing="10" fill="#FFFFFF" opacity="0.9" filter="url(#glow05)">SLICE</text>
+  <!-- 텍스트 아래 밑줄 (칼날 선) -->
+  <line x1="270" y1="848" x2="754" y2="848"
+    stroke="#FFD700" stroke-width="4" stroke-linecap="round"
+    opacity="0.7" filter="url(#glow05)"/>
+</svg>

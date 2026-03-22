@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!--
+    icon_02 [literal] — 포맷 카드 부채꼴 스택
+    컨셉: SVG/PNG/JPG 카드들이 扇形으로 펼쳐지고 앞에 ICO 출력 카드가 배치
+    연결고리: 다양한 입력 포맷 카드들이 변환되어 ICO 카드로 나온다
+    패턴: 레이어드
+    색상: 아이보리(#FFFBEB) + 컬러 코딩된 카드들
+  -->
+  <defs>
+    <filter id="cardShadow">
+      <feDropShadow dx="0" dy="6" stdDeviation="12"
+                    flood-color="#000" flood-opacity="0.22"/>
+    </filter>
+  </defs>
+
+  <!-- Layer 1: 아이보리 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="#FFFBEB"/>
+  <rect width="1024" height="1024" rx="190" fill="none"
+        stroke="#FDE68A" stroke-width="24"/>
+
+  <!-- Layer 2: 입력 카드 스택 (부채꼴, 뒤→앞) -->
+  <!-- 카드 중심 기준: x=350, y=630 (카드 하단 중앙) -->
+  <!-- 카드 크기: 300×220, 기준 좌상단: x=200, y=410 -->
+
+  <!-- 카드1: BMP (가장 뒤, -18도) -->
+  <g transform="rotate(-18, 350, 620)" filter="url(#cardShadow)">
+    <rect x="200" y="410" width="300" height="210" rx="18" fill="#8B5CF6"/>
+    <text x="340" y="600"
+          font-family="Arial Black, Arial, sans-serif"
+          font-size="72" font-weight="900"
+          fill="white" text-anchor="middle" opacity="0.92">BMP</text>
+  </g>
+
+  <!-- 카드2: JPG (-7도) -->
+  <g transform="rotate(-7, 350, 620)" filter="url(#cardShadow)">
+    <rect x="200" y="410" width="300" height="210" rx="18" fill="#059669"/>
+    <text x="340" y="600"
+          font-family="Arial Black, Arial, sans-serif"
+          font-size="72" font-weight="900"
+          fill="white" text-anchor="middle" opacity="0.92">JPG</text>
+  </g>
+
+  <!-- 카드3: PNG (+5도) -->
+  <g transform="rotate(5, 350, 620)" filter="url(#cardShadow)">
+    <rect x="200" y="410" width="300" height="210" rx="18" fill="#0284C7"/>
+    <text x="340" y="600"
+          font-family="Arial Black, Arial, sans-serif"
+          font-size="72" font-weight="900"
+          fill="white" text-anchor="middle" opacity="0.92">PNG</text>
+  </g>
+
+  <!-- 카드4: SVG (가장 앞, +17도) -->
+  <g transform="rotate(17, 350, 620)" filter="url(#cardShadow)">
+    <rect x="200" y="410" width="300" height="210" rx="18" fill="#F97316"/>
+    <text x="340" y="600"
+          font-family="Arial Black, Arial, sans-serif"
+          font-size="72" font-weight="900"
+          fill="white" text-anchor="middle" opacity="0.92">SVG</text>
+  </g>
+
+  <!-- Layer 3: 화살표 + ICO 출력 카드 -->
+  <!-- 화살표 -->
+  <text x="620" y="570"
+        font-family="Arial Black, Arial, sans-serif"
+        font-size="120" font-weight="900"
+        fill="#D97706" text-anchor="middle">→</text>
+
+  <!-- ICO 출력 카드 (강조) -->
+  <rect x="680" y="410" width="230" height="210" rx="18"
+        fill="#D97706" filter="url(#cardShadow)"/>
+  <!-- ICO 하이라이트 테두리 -->
+  <rect x="680" y="410" width="230" height="210" rx="18"
+        fill="none" stroke="#FDE68A" stroke-width="8"/>
+  <text x="795" y="595"
+        font-family="Arial Black, Arial, sans-serif"
+        font-size="80" font-weight="900"
+        fill="white" text-anchor="middle">ICO</text>
+</svg>

@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_03: metaphor — L-시스템 프랙탈 패턴 (기하학적, 딥 그린 다크 배경, 발광 효과) -->
+
+  <defs>
+    <linearGradient id="bg03" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0A1A0F"/>
+      <stop offset="100%" stop-color="#0D2818"/>
+    </linearGradient>
+    <filter id="glow03">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="glow03soft">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="200" fill="url(#bg03)"/>
+
+  <!-- 미묘한 배경 격자 (L-시스템 분위기) -->
+  <g opacity="0.07" stroke="#00FF88" stroke-width="1">
+    <line x1="200" y1="0" x2="200" y2="1024"/>
+    <line x1="400" y1="0" x2="400" y2="1024"/>
+    <line x1="600" y1="0" x2="600" y2="1024"/>
+    <line x1="800" y1="0" x2="800" y2="1024"/>
+    <line x1="0" y1="200" x2="1024" y2="200"/>
+    <line x1="0" y1="400" x2="1024" y2="400"/>
+    <line x1="0" y1="600" x2="1024" y2="600"/>
+    <line x1="0" y1="800" x2="1024" y2="800"/>
+  </g>
+
+  <!-- === 발광 프랙탈 나무 (중앙, 위로 성장) === -->
+  <!-- 줄기 -->
+  <line x1="512" y1="840" x2="512" y2="620" stroke="#00CC66" stroke-width="12" stroke-linecap="round" filter="url(#glow03)"/>
+
+  <!-- 1단계 -->
+  <line x1="512" y1="680" x2="392" y2="540" stroke="#00DD77" stroke-width="8" stroke-linecap="round" filter="url(#glow03soft)"/>
+  <line x1="512" y1="680" x2="632" y2="540" stroke="#00DD77" stroke-width="8" stroke-linecap="round" filter="url(#glow03soft)"/>
+
+  <!-- 2단계 왼쪽 -->
+  <line x1="392" y1="540" x2="318" y2="448" stroke="#22EE88" stroke-width="5" stroke-linecap="round" filter="url(#glow03soft)"/>
+  <line x1="392" y1="540" x2="454" y2="448" stroke="#22EE88" stroke-width="5" stroke-linecap="round" filter="url(#glow03soft)"/>
+  <!-- 2단계 오른쪽 -->
+  <line x1="632" y1="540" x2="570" y2="448" stroke="#22EE88" stroke-width="5" stroke-linecap="round" filter="url(#glow03soft)"/>
+  <line x1="632" y1="540" x2="706" y2="448" stroke="#22EE88" stroke-width="5" stroke-linecap="round" filter="url(#glow03soft)"/>
+
+  <!-- 줄기 상단 -->
+  <line x1="512" y1="620" x2="512" y2="500" stroke="#11DD77" stroke-width="6" stroke-linecap="round" filter="url(#glow03soft)"/>
+
+  <!-- 3단계 (왼-왼) -->
+  <line x1="318" y1="448" x2="278" y2="390" stroke="#44FF99" stroke-width="3" stroke-linecap="round"/>
+  <line x1="318" y1="448" x2="348" y2="382" stroke="#44FF99" stroke-width="3" stroke-linecap="round"/>
+  <!-- 3단계 (왼-오) -->
+  <line x1="454" y1="448" x2="422" y2="382" stroke="#44FF99" stroke-width="3" stroke-linecap="round"/>
+  <line x1="454" y1="448" x2="484" y2="382" stroke="#44FF99" stroke-width="3" stroke-linecap="round"/>
+  <!-- 3단계 (오-왼) -->
+  <line x1="570" y1="448" x2="540" y2="382" stroke="#44FF99" stroke-width="3" stroke-linecap="round"/>
+  <line x1="570" y1="448" x2="600" y2="382" stroke="#44FF99" stroke-width="3" stroke-linecap="round"/>
+  <!-- 3단계 (오-오) -->
+  <line x1="706" y1="448" x2="676" y2="382" stroke="#44FF99" stroke-width="3" stroke-linecap="round"/>
+  <line x1="706" y1="448" x2="736" y2="382" stroke="#44FF99" stroke-width="3" stroke-linecap="round"/>
+  <!-- 중앙 상단 -->
+  <line x1="512" y1="500" x2="478" y2="430" stroke="#44FF99" stroke-width="3" stroke-linecap="round"/>
+  <line x1="512" y1="500" x2="546" y2="430" stroke="#44FF99" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- 끝점 발광 노드 (잎 끝) -->
+  <circle cx="278" cy="386" r="9" fill="#00FF88" filter="url(#glow03)"/>
+  <circle cx="348" cy="378" r="9" fill="#00FF88" filter="url(#glow03)"/>
+  <circle cx="422" cy="378" r="9" fill="#44FFAA" filter="url(#glow03)"/>
+  <circle cx="484" cy="378" r="9" fill="#44FFAA" filter="url(#glow03)"/>
+  <circle cx="540" cy="378" r="9" fill="#44FFAA" filter="url(#glow03)"/>
+  <circle cx="600" cy="378" r="9" fill="#44FFAA" filter="url(#glow03)"/>
+  <circle cx="676" cy="378" r="9" fill="#00FF88" filter="url(#glow03)"/>
+  <circle cx="736" cy="378" r="9" fill="#00FF88" filter="url(#glow03)"/>
+  <circle cx="478" cy="426" r="9" fill="#88FFCC" filter="url(#glow03)"/>
+  <circle cx="546" cy="426" r="9" fill="#88FFCC" filter="url(#glow03)"/>
+
+  <!-- L-시스템 텍스트 뱃지 -->
+  <rect x="362" y="228" width="300" height="56" rx="28" fill="#00AA55" opacity="0.85"/>
+  <text x="512" y="268" text-anchor="middle" font-family="Consolas, monospace" font-size="30" font-weight="bold" fill="#CCFFE8">L-System</text>
+
+  <!-- 이터레이션 카운터 -->
+  <text x="512" y="920" text-anchor="middle" font-family="Consolas, monospace" font-size="28" fill="#00AA55">n = 3</text>
+
+  <!-- 뿌리 글로우 -->
+  <ellipse cx="512" cy="845" rx="80" ry="18" fill="#00CC66" opacity="0.3" filter="url(#glow03)"/>
+</svg>

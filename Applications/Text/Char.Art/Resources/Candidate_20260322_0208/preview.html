@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Char.Art Icon Candidates — 2026-03-22</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #12121C;
+      color: #E0E0E0;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      padding: 40px 32px 64px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    header h1 {
+      font-size: 28px;
+      font-weight: 700;
+      color: #FFFFFF;
+      letter-spacing: 2px;
+    }
+    header p {
+      margin-top: 8px;
+      font-size: 14px;
+      color: #888;
+      font-family: 'Courier New', monospace;
+    }
+
+    /* ── Grid ── */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 28px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: #1E1E2E;
+      border: 1px solid #2E2E42;
+      border-radius: 16px;
+      padding: 20px 16px 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+    }
+
+    .icon-wrap {
+      width: 160px;
+      height: 160px;
+      border-radius: 20px;
+      overflow: hidden;
+      background: #0A0A14;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .icon-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .filename {
+      font-family: 'Courier New', monospace;
+      font-size: 13px;
+      color: #A0A0C0;
+      letter-spacing: 0.5px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+    .badge-literal  { background: #1A3A5A; color: #60B8FF; border: 1px solid #2A5A8A; }
+    .badge-metaphor { background: #2A1A4A; color: #C080FF; border: 1px solid #4A2A7A; }
+    .badge-hybrid   { background: #1A3A2A; color: #60FF98; border: 1px solid #2A6A4A; }
+
+    .desc {
+      font-size: 12px;
+      color: #A0A0A0;
+      text-align: center;
+      line-height: 1.5;
+      min-height: 40px;
+    }
+
+    .palette {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+    .swatch {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(255,255,255,0.1);
+      flex-shrink: 0;
+    }
+
+    /* ── Size Preview ── */
+    .size-section {
+      max-width: 1200px;
+      margin: 60px auto 0;
+    }
+    .size-section h2 {
+      font-size: 18px;
+      color: #CCC;
+      margin-bottom: 24px;
+      letter-spacing: 1px;
+      border-bottom: 1px solid #2E2E42;
+      padding-bottom: 12px;
+    }
+    .size-row {
+      display: flex;
+      align-items: flex-end;
+      gap: 32px;
+      flex-wrap: wrap;
+      background: #1E1E2E;
+      border: 1px solid #2E2E42;
+      border-radius: 12px;
+      padding: 28px 32px;
+    }
+    .size-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+    .size-label {
+      font-family: 'Courier New', monospace;
+      font-size: 12px;
+      color: #666;
+    }
+    .size-item img {
+      background: #0A0A14;
+      border-radius: 8px;
+      border: 1px solid #333;
+    }
+
+    .icon-selector {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+    .icon-btn {
+      padding: 6px 14px;
+      background: #252535;
+      border: 1px solid #3A3A55;
+      border-radius: 8px;
+      color: #AAA;
+      cursor: pointer;
+      font-size: 13px;
+      font-family: 'Courier New', monospace;
+      transition: background 0.1s, color 0.1s;
+    }
+    .icon-btn:hover, .icon-btn.active {
+      background: #3A3A6A;
+      color: #E0E0FF;
+      border-color: #6A6ABA;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Char.Art — Icon Candidates</h1>
+  <p>Candidate_20260322_0208 &nbsp;|&nbsp; 10 icons &nbsp;|&nbsp; image → ASCII art converter</p>
+</header>
+
+<div class="grid">
+
+  <!-- icon_01 -->
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_01.svg" alt="icon_01"></div>
+    <div class="filename">icon_01.svg</div>
+    <span class="badge badge-literal">Literal</span>
+    <div class="desc">사람 실루엣이 @#*. 문자 격자로 채워진 모습 — ASCII 인물 아트</div>
+    <div class="palette">
+      <div class="swatch" style="background:#0D1B2A" title="#0D1B2A"></div>
+      <div class="swatch" style="background:#0A3060" title="#0A3060"></div>
+      <div class="swatch" style="background:#00E5FF" title="#00E5FF"></div>
+    </div>
+  </div>
+
+  <!-- icon_02 -->
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_02.svg" alt="icon_02"></div>
+    <div class="filename">icon_02.svg</div>
+    <span class="badge badge-literal">Literal</span>
+    <div class="desc">사진 프레임(좌) → 화살표 → ASCII 텍스트 결과(우) 나란히 비교</div>
+    <div class="palette">
+      <div class="swatch" style="background:#1A0E00" title="#1A0E00"></div>
+      <div class="swatch" style="background:#2A1A00" title="#2A1A00"></div>
+      <div class="swatch" style="background:#FF8C00" title="#FF8C00"></div>
+    </div>
+  </div>
+
+  <!-- icon_03 -->
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_03.svg" alt="icon_03"></div>
+    <div class="filename">icon_03.svg</div>
+    <span class="badge badge-metaphor">Metaphor</span>
+    <div class="desc">@ 기호 자체가 문자 타일 격자로 조립됨 — 메타적 ASCII 심볼</div>
+    <div class="palette">
+      <div class="swatch" style="background:#1A0030" title="#1A0030"></div>
+      <div class="swatch" style="background:#330044" title="#330044"></div>
+      <div class="swatch" style="background:#FF69B4" title="#FF69B4"></div>
+    </div>
+  </div>
+
+  <!-- icon_04 -->
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_04.svg" alt="icon_04"></div>
+    <div class="filename">icon_04.svg</div>
+    <span class="badge badge-hybrid">Hybrid</span>
+    <div class="desc">사진 이미지가 오른쪽으로 ASCII 텍스트 스트림으로 흘러나오는 동적 변환</div>
+    <div class="palette">
+      <div class="swatch" style="background:#001A0D" title="#001A0D"></div>
+      <div class="swatch" style="background:#0A2A1A" title="#0A2A1A"></div>
+      <div class="swatch" style="background:#00FF88" title="#00FF88"></div>
+    </div>
+  </div>
+
+  <!-- icon_05 -->
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_05.svg" alt="icon_05"></div>
+    <div class="filename">icon_05.svg</div>
+    <span class="badge badge-literal">Literal</span>
+    <div class="desc">고양이 실루엣이 @#*. 문자로 채워진 텍스트 아트 — 귀여운 도메인 표현</div>
+    <div class="palette">
+      <div class="swatch" style="background:#1A0A00" title="#1A0A00"></div>
+      <div class="swatch" style="background:#FFB300" title="#FFB300"></div>
+      <div class="swatch" style="background:#FF6600" title="#FF6600"></div>
+    </div>
+  </div>
+
+  <!-- icon_06 -->
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_06.svg" alt="icon_06"></div>
+    <div class="filename">icon_06.svg</div>
+    <span class="badge badge-metaphor">Metaphor</span>
+    <div class="desc">CRT 터미널 화면에 ASCII 얼굴이 출력되는 장면 — 고전 텍스트 아트 감성</div>
+    <div class="palette">
+      <div class="swatch" style="background:#001515" title="#001515"></div>
+      <div class="swatch" style="background:#0A1A1A" title="#0A1A1A"></div>
+      <div class="swatch" style="background:#00FF88" title="#00FF88"></div>
+      <div class="swatch" style="background:#00CCAA" title="#00CCAA"></div>
+    </div>
+  </div>
+
+  <!-- icon_07 -->
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_07.svg" alt="icon_07"></div>
+    <div class="filename">icon_07.svg</div>
+    <span class="badge badge-hybrid">Hybrid</span>
+    <div class="desc">카메라 렌즈 안에 @#*. 문자 격자가 채워짐 — 이미지 캡처 + 텍스트 변환</div>
+    <div class="palette">
+      <div class="swatch" style="background:#050A1F" title="#050A1F"></div>
+      <div class="swatch" style="background:#0D1A3A" title="#0D1A3A"></div>
+      <div class="swatch" style="background:#2A4ABA" title="#2A4ABA"></div>
+      <div class="swatch" style="background:#A0C0FF" title="#A0C0FF"></div>
+    </div>
+  </div>
+
+  <!-- icon_08 -->
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_08.svg" alt="icon_08"></div>
+    <div class="filename">icon_08.svg</div>
+    <span class="badge badge-metaphor">Metaphor</span>
+    <div class="desc">ASCII * 문자들이 모여 별(★) 형태를 구성 — 텍스트가 이미지가 되는 역전</div>
+    <div class="palette">
+      <div class="swatch" style="background:#1A0010" title="#1A0010"></div>
+      <div class="swatch" style="background:#2A0020" title="#2A0020"></div>
+      <div class="swatch" style="background:#FFD700" title="#FFD700"></div>
+    </div>
+  </div>
+
+  <!-- icon_09 -->
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_09.svg" alt="icon_09"></div>
+    <div class="filename">icon_09.svg</div>
+    <span class="badge badge-literal">Literal</span>
+    <div class="desc">픽셀 격자 + 명도 팔레트(@#*:.) 로 알고리즘 원리를 명시 — 라이트 테마</div>
+    <div class="palette">
+      <div class="swatch" style="background:#F5F0E8" title="#F5F0E8"></div>
+      <div class="swatch" style="background:#EDE8DC" title="#EDE8DC"></div>
+      <div class="swatch" style="background:#333333" title="#333333"></div>
+      <div class="swatch" style="background:#FFE066" title="#FFE066"></div>
+    </div>
+  </div>
+
+  <!-- icon_10 -->
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_10.svg" alt="icon_10"></div>
+    <div class="filename">icon_10.svg</div>
+    <span class="badge badge-hybrid">Hybrid</span>
+    <div class="desc">순수 ASCII 문자만으로 산 풍경 아트를 구성 — 텍스트 아트 그 자체가 아이콘</div>
+    <div class="palette">
+      <div class="swatch" style="background:#0A2A20" title="#0A2A20"></div>
+      <div class="swatch" style="background:#00FF88" title="#00FF88"></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ── Size Preview ── -->
+<div class="size-section">
+  <h2>크기별 미리보기</h2>
+
+  <div class="icon-selector" id="selectorRow">
+    <button class="icon-btn active" onclick="selectIcon('icon_01.svg', this)">icon_01</button>
+    <button class="icon-btn" onclick="selectIcon('icon_02.svg', this)">icon_02</button>
+    <button class="icon-btn" onclick="selectIcon('icon_03.svg', this)">icon_03</button>
+    <button class="icon-btn" onclick="selectIcon('icon_04.svg', this)">icon_04</button>
+    <button class="icon-btn" onclick="selectIcon('icon_05.svg', this)">icon_05</button>
+    <button class="icon-btn" onclick="selectIcon('icon_06.svg', this)">icon_06</button>
+    <button class="icon-btn" onclick="selectIcon('icon_07.svg', this)">icon_07</button>
+    <button class="icon-btn" onclick="selectIcon('icon_08.svg', this)">icon_08</button>
+    <button class="icon-btn" onclick="selectIcon('icon_09.svg', this)">icon_09</button>
+    <button class="icon-btn" onclick="selectIcon('icon_10.svg', this)">icon_10</button>
+  </div>
+
+  <div class="size-row">
+    <div class="size-item">
+      <img id="prev256" src="icon_01.svg" width="256" height="256" alt="256px">
+      <div class="size-label">256px</div>
+    </div>
+    <div class="size-item">
+      <img id="prev64" src="icon_01.svg" width="64" height="64" alt="64px">
+      <div class="size-label">64px</div>
+    </div>
+    <div class="size-item">
+      <img id="prev32" src="icon_01.svg" width="32" height="32" alt="32px">
+      <div class="size-label">32px</div>
+    </div>
+    <div class="size-item">
+      <img id="prev16" src="icon_01.svg" width="16" height="16" alt="16px">
+      <div class="size-label">16px</div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function selectIcon(src, btn) {
+    document.getElementById('prev256').src = src;
+    document.getElementById('prev64').src  = src;
+    document.getElementById('prev32').src  = src;
+    document.getElementById('prev16').src  = src;
+    document.querySelectorAll('.icon-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+</script>
+
+</body>
+</html>

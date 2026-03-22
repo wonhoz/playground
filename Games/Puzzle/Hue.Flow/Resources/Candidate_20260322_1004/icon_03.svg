@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: Background - sky teal gradient feel -->
+  <defs>
+    <radialGradient id="bg3" cx="30%" cy="30%" r="75%">
+      <stop offset="0%" stop-color="#1a1a2e"/>
+      <stop offset="100%" stop-color="#0d0d1a"/>
+    </radialGradient>
+    <radialGradient id="flood3" cx="20%" cy="20%" r="80%">
+      <stop offset="0%" stop-color="#89B4FA" stop-opacity="1"/>
+      <stop offset="45%" stop-color="#CBA6F7" stop-opacity="0.9"/>
+      <stop offset="75%" stop-color="#F38BA8" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#FAB387" stop-opacity="0.0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="180" fill="url(#bg3)"/>
+
+  <!-- Layer 2: Flood ripple rings from top-left -->
+  <!-- Concentric arcs spreading from top-left origin ~(230,230) -->
+  <circle cx="230" cy="230" r="120" fill="none" stroke="#89B4FA" stroke-width="28" opacity="0.9"/>
+  <circle cx="230" cy="230" r="220" fill="none" stroke="#89B4FA" stroke-width="22" opacity="0.7"/>
+  <circle cx="230" cy="230" r="320" fill="none" stroke="#CBA6F7" stroke-width="18" opacity="0.55"/>
+  <circle cx="230" cy="230" r="420" fill="none" stroke="#F38BA8" stroke-width="14" opacity="0.4"/>
+  <circle cx="230" cy="230" r="520" fill="none" stroke="#FAB387" stroke-width="10" opacity="0.28"/>
+  <circle cx="230" cy="230" r="620" fill="none" stroke="#A6E3A1" stroke-width="7" opacity="0.18"/>
+
+  <!-- Flood fill overlay — gradient blob -->
+  <circle cx="230" cy="230" r="430" fill="url(#flood3)" opacity="0.22"/>
+
+  <!-- Grid tiles (5x5 visible, partial) scattered with color -->
+  <!-- Row 0 (y=200) partial tiles -->
+  <rect x="580" y="200" width="68" height="68" rx="10" fill="#FAB387" opacity="0.85"/>
+  <rect x="656" y="200" width="68" height="68" rx="10" fill="#A6E3A1" opacity="0.85"/>
+  <rect x="732" y="200" width="68" height="68" rx="10" fill="#F38BA8" opacity="0.85"/>
+  <rect x="808" y="200" width="68" height="68" rx="10" fill="#89DCEB" opacity="0.85"/>
+  <!-- Row 1 -->
+  <rect x="504" y="276" width="68" height="68" rx="10" fill="#CBA6F7" opacity="0.85"/>
+  <rect x="580" y="276" width="68" height="68" rx="10" fill="#F38BA8" opacity="0.85"/>
+  <rect x="656" y="276" width="68" height="68" rx="10" fill="#89DCEB" opacity="0.85"/>
+  <rect x="732" y="276" width="68" height="68" rx="10" fill="#FAB387" opacity="0.85"/>
+  <rect x="808" y="276" width="68" height="68" rx="10" fill="#CBA6F7" opacity="0.85"/>
+  <!-- Row 2 -->
+  <rect x="428" y="352" width="68" height="68" rx="10" fill="#A6E3A1" opacity="0.85"/>
+  <rect x="504" y="352" width="68" height="68" rx="10" fill="#FAB387" opacity="0.85"/>
+  <rect x="580" y="352" width="68" height="68" rx="10" fill="#89B4FA" opacity="0.85"/>
+  <rect x="656" y="352" width="68" height="68" rx="10" fill="#F38BA8" opacity="0.85"/>
+  <rect x="732" y="352" width="68" height="68" rx="10" fill="#A6E3A1" opacity="0.85"/>
+  <rect x="808" y="352" width="68" height="68" rx="10" fill="#FAB387" opacity="0.85"/>
+  <!-- Row 3 -->
+  <rect x="352" y="428" width="68" height="68" rx="10" fill="#89DCEB" opacity="0.85"/>
+  <rect x="428" y="428" width="68" height="68" rx="10" fill="#CBA6F7" opacity="0.85"/>
+  <rect x="504" y="428" width="68" height="68" rx="10" fill="#F38BA8" opacity="0.85"/>
+  <rect x="580" y="428" width="68" height="68" rx="10" fill="#89DCEB" opacity="0.85"/>
+  <rect x="656" y="428" width="68" height="68" rx="10" fill="#CBA6F7" opacity="0.85"/>
+  <rect x="732" y="428" width="68" height="68" rx="10" fill="#89B4FA" opacity="0.85"/>
+  <rect x="808" y="428" width="68" height="68" rx="10" fill="#A6E3A1" opacity="0.85"/>
+  <!-- Row 4 lower rows mixed -->
+  <rect x="276" y="504" width="68" height="68" rx="10" fill="#FAB387" opacity="0.85"/>
+  <rect x="352" y="504" width="68" height="68" rx="10" fill="#89B4FA" opacity="0.85"/>
+  <rect x="428" y="504" width="68" height="68" rx="10" fill="#A6E3A1" opacity="0.85"/>
+  <rect x="504" y="504" width="68" height="68" rx="10" fill="#F38BA8" opacity="0.85"/>
+  <rect x="580" y="504" width="68" height="68" rx="10" fill="#FAB387" opacity="0.85"/>
+  <rect x="656" y="504" width="68" height="68" rx="10" fill="#89DCEB" opacity="0.85"/>
+  <rect x="732" y="504" width="68" height="68" rx="10" fill="#CBA6F7" opacity="0.85"/>
+  <rect x="808" y="504" width="68" height="68" rx="10" fill="#F38BA8" opacity="0.85"/>
+
+  <!-- Row 5 -->
+  <rect x="200" y="580" width="68" height="68" rx="10" fill="#CBA6F7" opacity="0.85"/>
+  <rect x="276" y="580" width="68" height="68" rx="10" fill="#F38BA8" opacity="0.85"/>
+  <rect x="352" y="580" width="68" height="68" rx="10" fill="#89DCEB" opacity="0.85"/>
+  <rect x="428" y="580" width="68" height="68" rx="10" fill="#CBA6F7" opacity="0.85"/>
+  <rect x="504" y="580" width="68" height="68" rx="10" fill="#A6E3A1" opacity="0.85"/>
+  <rect x="580" y="580" width="68" height="68" rx="10" fill="#89B4FA" opacity="0.85"/>
+  <rect x="656" y="580" width="68" height="68" rx="10" fill="#FAB387" opacity="0.85"/>
+  <rect x="732" y="580" width="68" height="68" rx="10" fill="#A6E3A1" opacity="0.85"/>
+  <rect x="808" y="580" width="68" height="68" rx="10" fill="#89DCEB" opacity="0.85"/>
+
+  <!-- Row 6 -->
+  <rect x="200" y="656" width="68" height="68" rx="10" fill="#A6E3A1" opacity="0.85"/>
+  <rect x="276" y="656" width="68" height="68" rx="10" fill="#89B4FA" opacity="0.85"/>
+  <rect x="352" y="656" width="68" height="68" rx="10" fill="#FAB387" opacity="0.85"/>
+  <rect x="428" y="656" width="68" height="68" rx="10" fill="#F38BA8" opacity="0.85"/>
+  <rect x="504" y="656" width="68" height="68" rx="10" fill="#89B4FA" opacity="0.85"/>
+  <rect x="580" y="656" width="68" height="68" rx="10" fill="#CBA6F7" opacity="0.85"/>
+  <rect x="656" y="656" width="68" height="68" rx="10" fill="#F38BA8" opacity="0.85"/>
+  <rect x="732" y="656" width="68" height="68" rx="10" fill="#89B4FA" opacity="0.85"/>
+  <rect x="808" y="656" width="68" height="68" rx="10" fill="#FAB387" opacity="0.85"/>
+
+  <!-- Row 7 -->
+  <rect x="200" y="732" width="68" height="68" rx="10" fill="#89DCEB" opacity="0.85"/>
+  <rect x="276" y="732" width="68" height="68" rx="10" fill="#CBA6F7" opacity="0.85"/>
+  <rect x="352" y="732" width="68" height="68" rx="10" fill="#A6E3A1" opacity="0.85"/>
+  <rect x="428" y="732" width="68" height="68" rx="10" fill="#89DCEB" opacity="0.85"/>
+  <rect x="504" y="732" width="68" height="68" rx="10" fill="#FAB387" opacity="0.85"/>
+  <rect x="580" y="732" width="68" height="68" rx="10" fill="#F38BA8" opacity="0.85"/>
+  <rect x="656" y="732" width="68" height="68" rx="10" fill="#A6E3A1" opacity="0.85"/>
+  <rect x="732" y="732" width="68" height="68" rx="10" fill="#CBA6F7" opacity="0.85"/>
+  <rect x="808" y="732" width="68" height="68" rx="10" fill="#89B4FA" opacity="0.85"/>
+
+  <!-- Layer 3: Origin droplet top-left -->
+  <circle cx="230" cy="230" r="55" fill="#89B4FA" opacity="0.95"/>
+  <circle cx="230" cy="230" r="32" fill="#ffffff" opacity="0.35"/>
+  <!-- Droplet tip pointing down-right -->
+  <ellipse cx="262" cy="262" rx="18" ry="10" fill="#89B4FA" transform="rotate(45 262 262)" opacity="0.9"/>
+</svg>

@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sand.Fall — Icon Candidates (20260322_1004)</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #111318;
+      color: #D0D8E8;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      min-height: 100vh;
+      padding: 40px 32px 60px;
+    }
+
+    /* ─── Header ─────────────────────────────── */
+    .header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    .header h1 {
+      font-size: 28px;
+      font-weight: 700;
+      color: #F9C040;
+      letter-spacing: 1.5px;
+    }
+    .header .sub {
+      font-size: 13px;
+      color: #607080;
+      margin-top: 6px;
+    }
+    .header .domain-tag {
+      display: inline-block;
+      margin-top: 14px;
+      padding: 4px 14px;
+      border-radius: 20px;
+      background: #1E2438;
+      border: 1px solid #2E3858;
+      font-size: 12px;
+      color: #8090B0;
+    }
+
+    /* ─── Main Grid (5 cols) ─────────────────── */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 24px;
+      max-width: 1080px;
+      margin: 0 auto 56px;
+    }
+
+    .card {
+      background: #161A26;
+      border: 1px solid #222838;
+      border-radius: 16px;
+      padding: 20px 16px 18px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .card:hover {
+      border-color: #3A4868;
+      box-shadow: 0 6px 24px rgba(0,0,0,0.5);
+    }
+
+    .icon-wrap {
+      width: 160px;
+      height: 160px;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #0D1018;
+      border: 1px solid #1E2438;
+      flex-shrink: 0;
+    }
+    .icon-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    .type-badge {
+      display: inline-block;
+      padding: 2px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+    .type-badge.literal  { background: #1A3A2A; color: #4CAF90; border: 1px solid #2A6040; }
+    .type-badge.metaphor { background: #2A1A3A; color: #B070E0; border: 1px solid #5040A0; }
+    .type-badge.hybrid   { background: #3A2A0A; color: #E0A030; border: 1px solid #8060A0; }
+
+    .icon-num {
+      font-size: 11px;
+      color: #404858;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+
+    .icon-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #C8D4E8;
+      text-align: center;
+      line-height: 1.3;
+    }
+
+    .icon-desc {
+      font-size: 11.5px;
+      color: #5A6880;
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    /* ─── Palette Swatches ───────────────────── */
+    .swatches {
+      display: flex;
+      gap: 5px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .swatch {
+      width: 18px;
+      height: 18px;
+      border-radius: 4px;
+      border: 1px solid rgba(255,255,255,0.08);
+      flex-shrink: 0;
+      title: attr(data-name);
+    }
+
+    /* ─── Size Preview ───────────────────────── */
+    .section-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #4A5878;
+      text-align: center;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .size-section {
+      max-width: 1080px;
+      margin: 0 auto 40px;
+    }
+
+    .size-row {
+      display: flex;
+      align-items: flex-end;
+      gap: 32px;
+      flex-wrap: wrap;
+      padding: 24px 28px;
+      background: #161A26;
+      border: 1px solid #222838;
+      border-radius: 14px;
+      margin-bottom: 16px;
+    }
+    .size-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+    .size-label {
+      font-size: 11px;
+      color: #404858;
+      font-weight: 600;
+    }
+    .size-item img {
+      display: block;
+      image-rendering: pixelated;
+      background: #0D1018;
+      border-radius: 4px;
+      border: 1px solid #1E2438;
+    }
+
+    /* ─── Material Legend ────────────────────── */
+    .legend {
+      max-width: 1080px;
+      margin: 0 auto 40px;
+      background: #161A26;
+      border: 1px solid #222838;
+      border-radius: 14px;
+      padding: 22px 28px;
+    }
+    .legend-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 11.5px;
+      color: #7080A0;
+    }
+    .legend-dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 3px;
+      flex-shrink: 0;
+    }
+
+    /* ─── Divider ────────────────────────────── */
+    hr { border: none; border-top: 1px solid #1E2438; margin: 36px 0; }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <h1>SAND.FALL — Icon Candidates</h1>
+  <div class="sub">Candidate Set: 20260322_1004 &nbsp;·&nbsp; 5 icons &nbsp;·&nbsp; literal×2 / metaphor×2 / hybrid×1</div>
+  <div class="domain-tag">셀룰러 오토마타 샌드박스 · 12종 물질 · 중력 물리</div>
+</div>
+
+<!-- ── 5열 메인 그리드 ── -->
+<div class="grid">
+
+  <!-- icon_01 -->
+  <div class="card">
+    <span class="icon-num">01</span>
+    <div class="icon-wrap"><img src="icon_01.svg" alt="icon_01"/></div>
+    <span class="type-badge literal">Literal</span>
+    <div class="icon-title">픽셀 샌드박스 화면</div>
+    <div class="icon-desc">실제 게임 화면처럼 각 물질이 컬러 픽셀 타일로 배치된 살아있는 단면</div>
+    <div class="swatches">
+      <div class="swatch" style="background:#F9C040" title="Sand"></div>
+      <div class="swatch" style="background:#2196F3" title="Water"></div>
+      <div class="swatch" style="background:#FF4500" title="Fire"></div>
+      <div class="swatch" style="background:#8B5E3C" title="Wood"></div>
+      <div class="swatch" style="background:#6B7280" title="Stone"></div>
+      <div class="swatch" style="background:#8D5524" title="Oil"></div>
+      <div class="swatch" style="background:#76FF03" title="Acid"></div>
+      <div class="swatch" style="background:#B0BEC5" title="Steam"></div>
+    </div>
+  </div>
+
+  <!-- icon_02 -->
+  <div class="card">
+    <span class="icon-num">02</span>
+    <div class="icon-wrap"><img src="icon_02.svg" alt="icon_02"/></div>
+    <span class="type-badge literal">Literal</span>
+    <div class="icon-title">물질 팔레트 선택기</div>
+    <div class="icon-desc">12종 물질을 모두 나열한 게임 내 UI 팔레트, 모래가 선택됨</div>
+    <div class="swatches">
+      <div class="swatch" style="background:#FDF6E3" title="BG"></div>
+      <div class="swatch" style="background:#F9C040" title="Sand (selected)"></div>
+      <div class="swatch" style="background:#1565C0" title="Water"></div>
+      <div class="swatch" style="background:#BF360C" title="Fire"></div>
+      <div class="swatch" style="background:#4A2C0A" title="Oil"></div>
+      <div class="swatch" style="background:#546E7A" title="Steam"></div>
+      <div class="swatch" style="background:#455A64" title="Stone"></div>
+      <div class="swatch" style="background:#4E342E" title="Wood"></div>
+      <div class="swatch" style="background:#0288D1" title="Ice"></div>
+      <div class="swatch" style="background:#33691E" title="Seed"></div>
+      <div class="swatch" style="background:#1B5E20" title="Plant"></div>
+      <div class="swatch" style="background:#1B5E00" title="Acid"></div>
+      <div class="swatch" style="background:#212121" title="Ash"></div>
+    </div>
+  </div>
+
+  <!-- icon_03 -->
+  <div class="card">
+    <span class="icon-num">03</span>
+    <div class="icon-wrap"><img src="icon_03.svg" alt="icon_03"/></div>
+    <span class="type-badge metaphor">Metaphor</span>
+    <div class="icon-title">원소 순환 고리</div>
+    <div class="icon-desc">모래→불→증기→물→모래 사이클을 픽셀 도트 궤적의 원형 고리로 추상화</div>
+    <div class="swatches">
+      <div class="swatch" style="background:#0A0E1A" title="BG Dark Navy"></div>
+      <div class="swatch" style="background:#F9C040" title="Sand"></div>
+      <div class="swatch" style="background:#FF4500" title="Fire"></div>
+      <div class="swatch" style="background:#B0BEC5" title="Steam"></div>
+      <div class="swatch" style="background:#2196F3" title="Water"></div>
+      <div class="swatch" style="background:#4A5580" title="Track"></div>
+    </div>
+  </div>
+
+  <!-- icon_04 -->
+  <div class="card">
+    <span class="icon-num">04</span>
+    <div class="icon-wrap"><img src="icon_04.svg" alt="icon_04"/></div>
+    <span class="type-badge metaphor">Metaphor</span>
+    <div class="icon-title">중력의 손</div>
+    <div class="icon-desc">손에서 모래/물/불이 서로 다른 궤적으로 낙하·상승하는 물질별 행동 차이</div>
+    <div class="swatches">
+      <div class="swatch" style="background:#0E0820" title="BG Deep Purple"></div>
+      <div class="swatch" style="background:#D4A078" title="Hand"></div>
+      <div class="swatch" style="background:#F9C040" title="Sand (falls, piles)"></div>
+      <div class="swatch" style="background:#2196F3" title="Water (drops, spreads)"></div>
+      <div class="swatch" style="background:#FF6D00" title="Fire (rises)"></div>
+      <div class="swatch" style="background:#607D8B" title="Ash"></div>
+    </div>
+  </div>
+
+  <!-- icon_05 -->
+  <div class="card">
+    <span class="icon-num">05</span>
+    <div class="icon-wrap"><img src="icon_05.svg" alt="icon_05"/></div>
+    <span class="type-badge hybrid">Hybrid</span>
+    <div class="icon-title">원소 단면 큐브</div>
+    <div class="icon-desc">윗면=모래, 좌면=물, 우면=나무+불 — 샌드박스 세계를 등축 큐브 단면으로</div>
+    <div class="swatches">
+      <div class="swatch" style="background:#FFF8E7" title="BG Warm Ivory"></div>
+      <div class="swatch" style="background:#F9C040" title="Sand (top face)"></div>
+      <div class="swatch" style="background:#1565C0" title="Water (left face)"></div>
+      <div class="swatch" style="background:#795548" title="Wood (right face)"></div>
+      <div class="swatch" style="background:#FF4500" title="Fire overlay"></div>
+      <div class="swatch" style="background:#424242" title="Ash (burnt)"></div>
+    </div>
+  </div>
+
+</div>
+
+<hr/>
+
+<!-- ── 크기별 미리보기 ── -->
+<div class="size-section">
+  <div class="section-title">크기별 미리보기</div>
+
+  <!-- 256px -->
+  <div class="size-row">
+    <div class="size-item">
+      <img src="icon_01.svg" width="256" height="256" alt="01@256"/>
+      <span class="size-label">256px</span>
+    </div>
+    <div class="size-item">
+      <img src="icon_02.svg" width="256" height="256" alt="02@256"/>
+      <span class="size-label">256px</span>
+    </div>
+    <div class="size-item">
+      <img src="icon_03.svg" width="256" height="256" alt="03@256"/>
+      <span class="size-label">256px</span>
+    </div>
+    <div class="size-item">
+      <img src="icon_04.svg" width="256" height="256" alt="04@256"/>
+      <span class="size-label">256px</span>
+    </div>
+    <div class="size-item">
+      <img src="icon_05.svg" width="256" height="256" alt="05@256"/>
+      <span class="size-label">256px</span>
+    </div>
+  </div>
+
+  <!-- 64px -->
+  <div class="size-row">
+    <div class="size-item">
+      <img src="icon_01.svg" width="64" height="64" alt="01@64"/>
+      <span class="size-label">64px</span>
+    </div>
+    <div class="size-item">
+      <img src="icon_02.svg" width="64" height="64" alt="02@64"/>
+      <span class="size-label">64px</span>
+    </div>
+    <div class="size-item">
+      <img src="icon_03.svg" width="64" height="64" alt="03@64"/>
+      <span class="size-label">64px</span>
+    </div>
+    <div class="size-item">
+      <img src="icon_04.svg" width="64" height="64" alt="04@64"/>
+      <span class="size-label">64px</span>
+    </div>
+    <div class="size-item">
+      <img src="icon_05.svg" width="64" height="64" alt="05@64"/>
+      <span class="size-label">64px</span>
+    </div>
+  </div>
+
+  <!-- 32px -->
+  <div class="size-row">
+    <div class="size-item">
+      <img src="icon_01.svg" width="32" height="32" alt="01@32"/>
+      <span class="size-label">32px</span>
+    </div>
+    <div class="size-item">
+      <img src="icon_02.svg" width="32" height="32" alt="02@32"/>
+      <span class="size-label">32px</span>
+    </div>
+    <div class="size-item">
+      <img src="icon_03.svg" width="32" height="32" alt="03@32"/>
+      <span class="size-label">32px</span>
+    </div>
+    <div class="size-item">
+      <img src="icon_04.svg" width="32" height="32" alt="04@32"/>
+      <span class="size-label">32px</span>
+    </div>
+    <div class="size-item">
+      <img src="icon_05.svg" width="32" height="32" alt="05@32"/>
+      <span class="size-label">32px</span>
+    </div>
+  </div>
+
+  <!-- 16px -->
+  <div class="size-row">
+    <div class="size-item">
+      <img src="icon_01.svg" width="16" height="16" alt="01@16"/>
+      <span class="size-label">16px</span>
+    </div>
+    <div class="size-item">
+      <img src="icon_02.svg" width="16" height="16" alt="02@16"/>
+      <span class="size-label">16px</span>
+    </div>
+    <div class="size-item">
+      <img src="icon_03.svg" width="16" height="16" alt="03@16"/>
+      <span class="size-label">16px</span>
+    </div>
+    <div class="size-item">
+      <img src="icon_04.svg" width="16" height="16" alt="04@16"/>
+      <span class="size-label">16px</span>
+    </div>
+    <div class="size-item">
+      <img src="icon_05.svg" width="16" height="16" alt="05@16"/>
+      <span class="size-label">16px</span>
+    </div>
+  </div>
+</div>
+
+<hr/>
+
+<!-- ── 물질 범례 ── -->
+<div class="legend">
+  <div class="section-title" style="margin-bottom:0; text-align:left;">물질 색상 범례 (12종)</div>
+  <div class="legend-grid">
+    <div class="legend-item"><div class="legend-dot" style="background:#F9C040"></div>Sand 모래</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#2196F3"></div>Water 물</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#FF4500"></div>Fire 불</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#8D5524"></div>Oil 기름</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#B0BEC5"></div>Steam 증기</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#78909C"></div>Stone 돌</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#795548"></div>Wood 나무</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#81D4FA"></div>Ice 얼음</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#CDDC39"></div>Seed 씨앗</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#4CAF50"></div>Plant 식물</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#76FF03"></div>Acid 산</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#616161"></div>Ash 재</div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_02: Metaphor / 대각선·동적 / 거울 반사 탄막 메카닉 -->
+  <!-- 배경: 딥 퍼플 -->
+  <rect width="1024" height="1024" rx="160" fill="#1A0A2E"/>
+
+  <!-- 배경 빛 번짐 -->
+  <radialGradient id="g02bg" cx="50%" cy="50%" r="50%">
+    <stop offset="0%" stop-color="#3D1A7A" stop-opacity="0.6"/>
+    <stop offset="100%" stop-color="#1A0A2E" stop-opacity="0"/>
+  </radialGradient>
+  <rect width="1024" height="1024" rx="160" fill="url(#g02bg)"/>
+
+  <!-- 거울 구조물 (연두, 대각선 배치) -->
+  <g transform="translate(512, 512) rotate(-45)">
+    <rect x="-18" y="-200" width="36" height="400" rx="12" fill="#2ECC40" stroke="#7FFF7F" stroke-width="5"/>
+    <!-- 거울 반사 광택 -->
+    <rect x="-8" y="-180" width="10" height="360" rx="5" fill="#AAFFAA" opacity="0.35"/>
+    <!-- 거울 테두리 장식 -->
+    <circle cx="0" cy="-200" r="14" fill="#5AFF5A" stroke="#2ECC40" stroke-width="3"/>
+    <circle cx="0" cy="200" r="14" fill="#5AFF5A" stroke="#2ECC40" stroke-width="3"/>
+  </g>
+
+  <!-- 탄막 들어오는 방향 (좌측에서) -->
+  <circle cx="258" cy="380" r="18" fill="#FF3333" stroke="#FF6666" stroke-width="4"/>
+  <circle cx="210" cy="420" r="13" fill="#FF4444" stroke="#FF7777" stroke-width="3"/>
+  <circle cx="240" cy="460" r="10" fill="#FF5555" opacity="0.8"/>
+  <!-- 궤적 -->
+  <path d="M280 380 L420 460" stroke="#FF3333" stroke-width="3" stroke-dasharray="8,5" opacity="0.6"/>
+  <path d="M225 420 L380 490" stroke="#FF4444" stroke-width="2.5" stroke-dasharray="6,4" opacity="0.5"/>
+
+  <!-- 반사된 탄막 (우측 위로) -->
+  <circle cx="690" cy="310" r="18" fill="#FF3333" stroke="#FF6666" stroke-width="4"/>
+  <circle cx="740" cy="270" r="13" fill="#FF4444" stroke="#FF7777" stroke-width="3"/>
+  <circle cx="720" cy="250" r="10" fill="#FF5555" opacity="0.8"/>
+  <!-- 반사 궤적 -->
+  <path d="M480 480 L660 320" stroke="#FF3333" stroke-width="3" stroke-dasharray="8,5" opacity="0.6"/>
+
+  <!-- 반사 충격 효과 -->
+  <circle cx="512" cy="512" r="55" fill="none" stroke="#7FFF7F" stroke-width="4" opacity="0.5"/>
+  <circle cx="512" cy="512" r="80" fill="none" stroke="#5AFF5A" stroke-width="2" opacity="0.25"/>
+
+  <!-- 탄막 반사된 후 적 맞춤 -->
+  <circle cx="740" cy="220" r="28" fill="#CC1111" stroke="#FF4444" stroke-width="5"/>
+  <!-- 적 피격 이펙트 -->
+  <g stroke="#FF6600" stroke-width="3" fill="none" opacity="0.8">
+    <line x1="740" y1="185" x2="740" y2="170"/>
+    <line x1="766" y1="194" x2="778" y2="182"/>
+    <line x1="775" y1="220" x2="792" y2="220"/>
+    <line x1="766" y1="246" x2="778" y2="258"/>
+    <line x1="714" y1="185" x2="702" y2="173"/>
+    <line x1="705" y1="220" x2="688" y2="220"/>
+  </g>
+
+  <!-- 플레이어 (핑크, 좌하단 안전구역) -->
+  <circle cx="300" cy="700" r="36" fill="#FF6EB4" stroke="#FFB3D9" stroke-width="5"/>
+  <circle cx="300" cy="700" r="16" fill="#FFD6EC"/>
+
+  <!-- REFLECT 텍스트 (하단) -->
+  <text x="512" y="850" text-anchor="middle" font-family="Arial Black, sans-serif" font-size="52" font-weight="900" fill="#2ECC40" opacity="0.9" letter-spacing="4">REFLECT</text>
+</svg>

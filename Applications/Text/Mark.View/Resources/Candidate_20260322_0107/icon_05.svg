@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!--
+    icon_05 [hybrid] — # 워터마크 + 렌더링 줄들 + 하단 테마 팔레트
+    컨셉: 거대한 # 기호 위에 아름답게 렌더링된 줄들이 놓이고, 하단에 6종 테마 팔레트
+    연결고리: Markdown의 # 기호(원료) + 렌더링 결과(줄들) + 6종 테마 선택(앱 특징)
+    패턴: 기하학 추상
+    색상: Nord 다크(#2e3440) + 틸 헤딩(#88c0d0) + 멀티 테마 팔레트
+  -->
+  <defs>
+    <linearGradient id="bg05" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3b4252"/>
+      <stop offset="100%" stop-color="#2e3440"/>
+    </linearGradient>
+    <filter id="lineGlow05">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Layer 1: Nord 다크 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg05)"/>
+
+  <!-- # 워터마크 (배경에 희미하게) -->
+  <!-- 세로선1 -->
+  <rect x="330" y="200" width="50" height="580" rx="25" fill="white" opacity="0.055"/>
+  <!-- 세로선2 -->
+  <rect x="490" y="200" width="50" height="580" rx="25" fill="white" opacity="0.055"/>
+  <!-- 가로선1 -->
+  <rect x="268" y="360" width="334" height="46" rx="23" fill="white" opacity="0.055"/>
+  <!-- 가로선2 -->
+  <rect x="268" y="500" width="334" height="46" rx="23" fill="white" opacity="0.055"/>
+
+  <!-- Layer 2: 렌더링된 Markdown 줄들 -->
+
+  <!-- H1 헤딩 줄 (틸, 굵게) -->
+  <rect x="160" y="222" width="520" height="34" rx="7"
+        fill="#88c0d0" filter="url(#lineGlow05)"/>
+  <!-- H1 구분선 -->
+  <rect x="160" y="268" width="700" height="4" rx="2"
+        fill="#88c0d0" opacity="0.35"/>
+
+  <!-- H2 헤딩 줄 (파랑) -->
+  <rect x="160" y="296" width="380" height="26" rx="6"
+        fill="#81a1c1" opacity="0.9"/>
+
+  <!-- 본문 줄들 (밝은 그레이) -->
+  <rect x="160" y="342" width="680" height="16" rx="4" fill="#4c566a" opacity="0.9"/>
+  <rect x="160" y="372" width="620" height="16" rx="4" fill="#4c566a" opacity="0.9"/>
+  <rect x="160" y="402" width="700" height="16" rx="4" fill="#4c566a" opacity="0.9"/>
+
+  <!-- 코드 블록 -->
+  <rect x="160" y="438" width="700" height="86" rx="10" fill="#3b4252"/>
+  <rect x="184" y="456" width="360" height="13" rx="3" fill="#d08770" opacity="0.9"/>
+  <rect x="184" y="482" width="240" height="13" rx="3" fill="#a3be8c" opacity="0.85"/>
+  <rect x="184" y="506" width="290" height="13" rx="3" fill="#b48ead" opacity="0.75"/>
+
+  <!-- 인용구 -->
+  <rect x="160" y="544" width="700" height="52" rx="8" fill="#3b4252" opacity="0.7"/>
+  <rect x="160" y="544" width="8" height="52" rx="0" fill="#88c0d0"/>
+  <rect x="180" y="558" width="360" height="12" rx="3" fill="#9099a7" opacity="0.85"/>
+  <rect x="180" y="578" width="240" height="10" rx="3" fill="#9099a7" opacity="0.6"/>
+
+  <!-- 본문 줄 5~6 -->
+  <rect x="160" y="616" width="640" height="16" rx="4" fill="#4c566a" opacity="0.7"/>
+  <rect x="160" y="646" width="560" height="16" rx="4" fill="#4c566a" opacity="0.7"/>
+
+  <!-- Layer 3: 하단 테마 팔레트 (6종) -->
+  <!-- 구분선 -->
+  <rect x="160" y="705" width="700" height="2" rx="1" fill="#4c566a" opacity="0.5"/>
+
+  <!-- 테마 팔레트 원들 -->
+  <!-- dark (Catppuccin) -->
+  <circle cx="246" cy="768" r="34" fill="#1e1e2e"/>
+  <circle cx="246" cy="768" r="34" fill="none" stroke="#cba6f7" stroke-width="5"/>
+
+  <!-- github-dark -->
+  <circle cx="334" cy="768" r="34" fill="#0d1117"/>
+  <circle cx="334" cy="768" r="34" fill="none" stroke="#58a6ff" stroke-width="5"/>
+
+  <!-- nord -->
+  <circle cx="422" cy="768" r="34" fill="#2e3440"/>
+  <circle cx="422" cy="768" r="34" fill="none" stroke="#88c0d0" stroke-width="5"/>
+
+  <!-- dracula -->
+  <circle cx="510" cy="768" r="34" fill="#282a36"/>
+  <circle cx="510" cy="768" r="34" fill="none" stroke="#ff79c6" stroke-width="5"/>
+
+  <!-- sepia -->
+  <circle cx="598" cy="768" r="34" fill="#f4ecd8"/>
+  <circle cx="598" cy="768" r="34" fill="none" stroke="#7c4b00" stroke-width="5"/>
+
+  <!-- light -->
+  <circle cx="686" cy="768" r="34" fill="#ffffff"/>
+  <circle cx="686" cy="768" r="34" fill="none" stroke="#0969da" stroke-width="5"/>
+
+  <!-- "6 themes" 텍스트 -->
+  <text x="466" y="848"
+        font-family="'Segoe UI', Arial, sans-serif"
+        font-size="40" fill="#6c7a8f" text-anchor="middle">6 themes</text>
+</svg>

@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_02 | literal | 공이 벽돌에 충돌하는 폭발 순간 -->
+  <!-- 배경: 다크 퍼플-블랙 -->
+  <defs>
+    <radialGradient id="expGlow" cx="50%" cy="42%" r="45%">
+      <stop offset="0%" stop-color="#FFD700" stop-opacity="0.6"/>
+      <stop offset="50%" stop-color="#FF6B00" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#1A0A2E" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="ballG2" cx="40%" cy="38%" r="55%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="70%" stop-color="#FFE066"/>
+      <stop offset="100%" stop-color="#FF8C00"/>
+    </radialGradient>
+    <filter id="blur1">
+      <feGaussianBlur stdDeviation="8"/>
+    </filter>
+  </defs>
+
+  <rect width="1024" height="1024" rx="180" fill="#1A0A2E"/>
+  <!-- 폭발 글로우 배경 -->
+  <circle cx="512" cy="430" r="280" fill="url(#expGlow)" filter="url(#blur1)"/>
+
+  <!-- 벽돌 잔해 (날아가는 파편) — 위쪽 -->
+  <rect x="320" y="170" width="88" height="40" rx="5" fill="#FF4757" transform="rotate(-15 364 190)" opacity="0.9"/>
+  <rect x="540" y="155" width="80" height="38" rx="5" fill="#FF4757" transform="rotate(12 580 174)" opacity="0.85"/>
+  <rect x="430" y="145" width="70" height="35" rx="5" fill="#FF6B35" transform="rotate(-5 465 162)" opacity="0.75"/>
+
+  <!-- 벽돌 잔해 — 좌우 -->
+  <rect x="200" y="300" width="85" height="38" rx="5" fill="#FF7F00" transform="rotate(-20 242 319)" opacity="0.85"/>
+  <rect x="730" y="280" width="82" height="38" rx="5" fill="#FF7F00" transform="rotate(18 771 299)" opacity="0.85"/>
+  <rect x="170" y="400" width="75" height="34" rx="5" fill="#FFD700" transform="rotate(8 207 417)" opacity="0.7"/>
+  <rect x="770" y="390" width="78" height="35" rx="5" fill="#FFD700" transform="rotate(-10 809 407)" opacity="0.7"/>
+
+  <!-- 온전한 벽돌 그리드 (뒷쪽에 남은 것들) -->
+  <rect x="218" y="560" width="90" height="42" rx="5" fill="#2ED573" opacity="0.9"/>
+  <rect x="322" y="560" width="90" height="42" rx="5" fill="#2ED573" opacity="0.9"/>
+  <rect x="426" y="560" width="90" height="42" rx="5" fill="#2ED573" opacity="0.9"/>
+  <rect x="530" y="560" width="90" height="42" rx="5" fill="#2ED573" opacity="0.9"/>
+  <rect x="634" y="560" width="90" height="42" rx="5" fill="#2ED573" opacity="0.9"/>
+  <rect x="738" y="560" width="68" height="42" rx="5" fill="#2ED573" opacity="0.9"/>
+
+  <!-- 폭발 광선 -->
+  <line x1="512" y1="430" x2="512" y2="220" stroke="#FFD700" stroke-width="4" opacity="0.5"/>
+  <line x1="512" y1="430" x2="340" y2="260" stroke="#FFD700" stroke-width="3" opacity="0.4"/>
+  <line x1="512" y1="430" x2="684" y2="260" stroke="#FFD700" stroke-width="3" opacity="0.4"/>
+  <line x1="512" y1="430" x2="280" y2="430" stroke="#FF6B35" stroke-width="3" opacity="0.35"/>
+  <line x1="512" y1="430" x2="744" y2="430" stroke="#FF6B35" stroke-width="3" opacity="0.35"/>
+
+  <!-- 폭발 파티클 -->
+  <circle cx="440" cy="310" r="10" fill="#FFD700" opacity="0.9"/>
+  <circle cx="595" cy="295" r="8" fill="#FF6B35" opacity="0.85"/>
+  <circle cx="370" cy="380" r="7" fill="#FFFFFF" opacity="0.8"/>
+  <circle cx="660" cy="365" r="9" fill="#FFD700" opacity="0.85"/>
+  <circle cx="480" cy="270" r="6" fill="#FF4757" opacity="0.8"/>
+  <circle cx="550" cy="260" r="7" fill="#FFFFFF" opacity="0.75"/>
+  <circle cx="412" cy="460" r="8" fill="#FF7F00" opacity="0.8"/>
+  <circle cx="616" cy="455" r="7" fill="#FFD700" opacity="0.8"/>
+
+  <!-- 작은 파편 조각들 -->
+  <polygon points="430,340 438,328 446,340" fill="#FF4757" opacity="0.7"/>
+  <polygon points="570,325 578,313 586,325" fill="#FFD700" opacity="0.7"/>
+  <polygon points="350,415 358,403 366,415" fill="#FF7F00" opacity="0.65"/>
+  <polygon points="660,405 668,393 676,405" fill="#2ED573" opacity="0.65"/>
+
+  <!-- 공 (충돌 직전 — 뜨거운 불꽃 글로우) -->
+  <circle cx="512" cy="430" r="55" fill="#FF6B00" opacity="0.4"/>
+  <circle cx="512" cy="430" r="42" fill="#FFD700" opacity="0.6"/>
+  <circle cx="512" cy="430" r="32" fill="url(#ballG2)"/>
+  <circle cx="500" cy="418" r="10" fill="#FFFFFF" opacity="0.7"/>
+
+  <!-- 패들 (하단) -->
+  <rect x="352" y="790" width="320" height="48" rx="24" fill="#5B8CFF"/>
+  <rect x="362" y="794" width="276" height="16" rx="8" fill="#FFFFFF" opacity="0.22"/>
+</svg>

@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Orbit.Craft — Icon Candidates (2026-03-22)</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #111118;
+      color: #E0E0E0;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      padding: 40px 32px 60px;
+      min-height: 100vh;
+    }
+
+    h1 {
+      font-size: 22px;
+      font-weight: 700;
+      color: #FFFFFF;
+      margin-bottom: 4px;
+      letter-spacing: 0.04em;
+    }
+    .subtitle {
+      font-size: 13px;
+      color: #666688;
+      margin-bottom: 36px;
+      letter-spacing: 0.02em;
+    }
+
+    /* ─── 메인 그리드 (5열 1행) ─── */
+    .icon-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 24px;
+      margin-bottom: 56px;
+    }
+
+    .icon-card {
+      background: #1A1A28;
+      border: 1px solid #2A2A3A;
+      border-radius: 14px;
+      padding: 20px 16px 18px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      transition: border-color 0.2s, transform 0.15s;
+    }
+    .icon-card:hover {
+      border-color: #4A4A6A;
+      transform: translateY(-3px);
+    }
+
+    .icon-canvas {
+      width: 160px;
+      height: 160px;
+      border-radius: 24px;
+      overflow: hidden;
+      background: #0A0A10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    }
+    .icon-canvas img {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .icon-meta {
+      width: 100%;
+      text-align: center;
+    }
+
+    .icon-number {
+      font-size: 11px;
+      color: #555570;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+    }
+
+    .type-badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .type-literal  { background: #1A2E1A; color: #66FF88; border: 1px solid #336633; }
+    .type-metaphor { background: #1E1A2E; color: #AA88FF; border: 1px solid #443366; }
+    .type-hybrid   { background: #2E2A14; color: #FFCC44; border: 1px solid #665522; }
+
+    .icon-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: #D0D0E8;
+      margin-bottom: 5px;
+      line-height: 1.3;
+    }
+    .icon-desc {
+      font-size: 11.5px;
+      color: #888898;
+      line-height: 1.5;
+    }
+
+    /* 팔레트 스워치 */
+    .palette {
+      display: flex;
+      gap: 5px;
+      justify-content: center;
+      margin-top: 2px;
+    }
+    .swatch {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(255,255,255,0.1);
+      flex-shrink: 0;
+    }
+
+    /* ─── 구분선 ─── */
+    .section-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: #666688;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #222230;
+    }
+
+    /* ─── 크기별 미리보기 ─── */
+    .size-preview {
+      margin-bottom: 40px;
+    }
+    .size-row {
+      display: flex;
+      align-items: flex-end;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+    .size-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+    .size-item img {
+      display: block;
+      border-radius: 6px;
+      background: #0A0A10;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.4);
+    }
+    .size-label {
+      font-size: 11px;
+      color: #555570;
+      letter-spacing: 0.04em;
+    }
+    .size-sep {
+      width: 1px;
+      background: #2A2A3A;
+      height: 60px;
+      align-self: center;
+    }
+
+    /* ─── 개별 아이콘 크기 섹션 ─── */
+    .per-icon-sizes {
+      margin-top: 48px;
+    }
+    .per-icon-row {
+      display: flex;
+      align-items: flex-end;
+      gap: 20px;
+      padding: 20px 0;
+      border-bottom: 1px solid #1C1C28;
+      flex-wrap: wrap;
+    }
+    .per-icon-row:last-child { border-bottom: none; }
+    .per-icon-label {
+      font-size: 12px;
+      color: #555570;
+      width: 90px;
+      flex-shrink: 0;
+      padding-top: 4px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Orbit.Craft — Icon Candidates</h1>
+  <p class="subtitle">Generated: 2026-03-22 10:04 KST &nbsp;|&nbsp; 5 candidates &nbsp;|&nbsp; literal ×2 / metaphor ×2 / hybrid ×1</p>
+
+  <!-- ─── 메인 그리드 ─── -->
+  <div class="icon-grid">
+
+    <!-- icon_01 -->
+    <div class="icon-card">
+      <div class="icon-canvas">
+        <img src="icon_01.svg" alt="icon_01"/>
+      </div>
+      <div class="icon-meta">
+        <div class="icon-number">icon_01</div>
+        <span class="type-badge type-literal">Literal</span>
+        <div class="icon-title">궤도 안착 순간</div>
+        <div class="icon-desc">우주선이 중력 행성을 거쳐 목표 행성 궤도에 안착. 휘어진 경로 + 링 행성</div>
+        <div class="palette" style="margin-top:10px">
+          <div class="swatch" style="background:#0D1B3E" title="딥 네이비 배경"></div>
+          <div class="swatch" style="background:#FF6B35" title="오렌지 경로"></div>
+          <div class="swatch" style="background:#E05A00" title="중력 행성"></div>
+          <div class="swatch" style="background:#FFD700" title="골드 목표"></div>
+          <div class="swatch" style="background:#E8F4FF" title="우주선 화이트"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- icon_02 -->
+    <div class="icon-card">
+      <div class="icon-canvas">
+        <img src="icon_02.svg" alt="icon_02"/>
+      </div>
+      <div class="icon-meta">
+        <div class="icon-number">icon_02</div>
+        <span class="type-badge type-literal">Literal</span>
+        <div class="icon-title">조준 발사 UI</div>
+        <div class="icon-desc">부채꼴 조준선 드래그로 발사 방향·세기 설정하는 게임 핵심 조작</div>
+        <div class="palette" style="margin-top:10px">
+          <div class="swatch" style="background:#1A0A3A" title="다크 퍼플 배경"></div>
+          <div class="swatch" style="background:#00FFCC" title="시안 조준선"></div>
+          <div class="swatch" style="background:#40E0D0" title="목표 행성"></div>
+          <div class="swatch" style="background:#AADDFF" title="우주선 블루"></div>
+          <div class="swatch" style="background:#FFFFFF" title="화이트 동체"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- icon_03 -->
+    <div class="icon-card">
+      <div class="icon-canvas">
+        <img src="icon_03.svg" alt="icon_03"/>
+      </div>
+      <div class="icon-meta">
+        <div class="icon-number">icon_03</div>
+        <span class="type-badge type-metaphor">Metaphor</span>
+        <div class="icon-title">동심 궤도 시스템</div>
+        <div class="icon-desc">3개 궤도 타원 + 중심 행성 추상화. 여러 우주선이 각 궤도 위를 비행</div>
+        <div class="palette" style="margin-top:10px">
+          <div class="swatch" style="background:#0A0F0A" title="순수 블랙 배경"></div>
+          <div class="swatch" style="background:#00FF41" title="네온 그린 궤도"></div>
+          <div class="swatch" style="background:#7FFF00" title="라임 중간궤도"></div>
+          <div class="swatch" style="background:#228B22" title="다크 그린 행성"></div>
+          <div class="swatch" style="background:#CCFFCC" title="라이트 그린 우주선"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- icon_04 -->
+    <div class="icon-card">
+      <div class="icon-canvas">
+        <img src="icon_04.svg" alt="icon_04"/>
+      </div>
+      <div class="icon-meta">
+        <div class="icon-number">icon_04</div>
+        <span class="type-badge type-metaphor">Metaphor</span>
+        <div class="icon-title">중력 뒤틀림 장</div>
+        <div class="icon-desc">거대 행성이 격자 공간을 구부리는 상대성 이론 시각화. 우주선이 왜곡 경로 따라 이동</div>
+        <div class="palette" style="margin-top:10px">
+          <div class="swatch" style="background:#060A1E" title="딥 블루 배경"></div>
+          <div class="swatch" style="background:#BB55EE" title="밝은 마젠타 격자"></div>
+          <div class="swatch" style="background:#CC44CC" title="행성 마젠타"></div>
+          <div class="swatch" style="background:#FF88FF" title="링 핑크"></div>
+          <div class="swatch" style="background:#FFCCFF" title="우주선 라이트"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- icon_05 -->
+    <div class="icon-card">
+      <div class="icon-canvas">
+        <img src="icon_05.svg" alt="icon_05"/>
+      </div>
+      <div class="icon-meta">
+        <div class="icon-number">icon_05</div>
+        <span class="type-badge type-hybrid">Hybrid</span>
+        <div class="icon-title">레벨 클리어 순간</div>
+        <div class="icon-desc">3개 행성 스윙바이 → 목표 궤도 안착 + CLEAR UI 배지. 현실 + 게임 UI 결합</div>
+        <div class="palette" style="margin-top:10px">
+          <div class="swatch" style="background:#0A1208" title="딥 그린-블랙 배경"></div>
+          <div class="swatch" style="background:#FFB800" title="골드 목표 행성"></div>
+          <div class="swatch" style="background:#FFD700" title="경로 골드"></div>
+          <div class="swatch" style="background:#6699FF" title="행성 A 블루"></div>
+          <div class="swatch" style="background:#FF9955" title="행성 B 오렌지"></div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /icon-grid -->
+
+  <!-- ─── 크기별 미리보기 ─── -->
+  <div class="size-preview">
+    <div class="section-title">크기별 미리보기 — 전체 비교</div>
+    <div class="size-row">
+      <!-- 256px -->
+      <div class="size-item">
+        <div style="display:flex;gap:10px;align-items:flex-end">
+          <img src="icon_01.svg" width="256" height="256" style="border-radius:36px"/>
+          <img src="icon_02.svg" width="256" height="256" style="border-radius:36px"/>
+          <img src="icon_03.svg" width="256" height="256" style="border-radius:36px"/>
+          <img src="icon_04.svg" width="256" height="256" style="border-radius:36px"/>
+          <img src="icon_05.svg" width="256" height="256" style="border-radius:36px"/>
+        </div>
+        <span class="size-label">256 × 256 px</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── 아이콘별 소형 크기 비교 ─── -->
+  <div class="per-icon-sizes">
+    <div class="section-title">아이콘별 소형 크기 비교</div>
+
+    <!-- icon_01 -->
+    <div class="per-icon-row">
+      <div class="per-icon-label">icon_01<br/><span style="color:#66FF88;font-size:10px">Literal</span></div>
+      <div class="size-item"><img src="icon_01.svg" width="64" height="64" style="border-radius:10px"/><span class="size-label">64px</span></div>
+      <div class="size-item"><img src="icon_01.svg" width="32" height="32" style="border-radius:6px"/><span class="size-label">32px</span></div>
+      <div class="size-item"><img src="icon_01.svg" width="16" height="16" style="border-radius:3px"/><span class="size-label">16px</span></div>
+    </div>
+
+    <!-- icon_02 -->
+    <div class="per-icon-row">
+      <div class="per-icon-label">icon_02<br/><span style="color:#66FF88;font-size:10px">Literal</span></div>
+      <div class="size-item"><img src="icon_02.svg" width="64" height="64" style="border-radius:10px"/><span class="size-label">64px</span></div>
+      <div class="size-item"><img src="icon_02.svg" width="32" height="32" style="border-radius:6px"/><span class="size-label">32px</span></div>
+      <div class="size-item"><img src="icon_02.svg" width="16" height="16" style="border-radius:3px"/><span class="size-label">16px</span></div>
+    </div>
+
+    <!-- icon_03 -->
+    <div class="per-icon-row">
+      <div class="per-icon-label">icon_03<br/><span style="color:#AA88FF;font-size:10px">Metaphor</span></div>
+      <div class="size-item"><img src="icon_03.svg" width="64" height="64" style="border-radius:10px"/><span class="size-label">64px</span></div>
+      <div class="size-item"><img src="icon_03.svg" width="32" height="32" style="border-radius:6px"/><span class="size-label">32px</span></div>
+      <div class="size-item"><img src="icon_03.svg" width="16" height="16" style="border-radius:3px"/><span class="size-label">16px</span></div>
+    </div>
+
+    <!-- icon_04 -->
+    <div class="per-icon-row">
+      <div class="per-icon-label">icon_04<br/><span style="color:#AA88FF;font-size:10px">Metaphor</span></div>
+      <div class="size-item"><img src="icon_04.svg" width="64" height="64" style="border-radius:10px"/><span class="size-label">64px</span></div>
+      <div class="size-item"><img src="icon_04.svg" width="32" height="32" style="border-radius:6px"/><span class="size-label">32px</span></div>
+      <div class="size-item"><img src="icon_04.svg" width="16" height="16" style="border-radius:3px"/><span class="size-label">16px</span></div>
+    </div>
+
+    <!-- icon_05 -->
+    <div class="per-icon-row">
+      <div class="per-icon-label">icon_05<br/><span style="color:#FFCC44;font-size:10px">Hybrid</span></div>
+      <div class="size-item"><img src="icon_05.svg" width="64" height="64" style="border-radius:10px"/><span class="size-label">64px</span></div>
+      <div class="size-item"><img src="icon_05.svg" width="32" height="32" style="border-radius:6px"/><span class="size-label">32px</span></div>
+      <div class="size-item"><img src="icon_05.svg" width="16" height="16" style="border-radius:3px"/><span class="size-label">16px</span></div>
+    </div>
+
+  </div><!-- /per-icon-sizes -->
+
+</body>
+</html>

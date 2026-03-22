@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_03 | Literal | 레이어드 | QR 코드 위 불꽃(Forge) 오버레이 | 오렌지 + 골드 + 다크 -->
+
+  <!-- Layer 1: 배경 (다크 브라운) -->
+  <defs>
+    <radialGradient id="bgGrad03" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#2D1A00"/>
+      <stop offset="100%" stop-color="#1A0D00"/>
+    </radialGradient>
+    <radialGradient id="flameGrad" cx="50%" cy="80%" r="60%">
+      <stop offset="0%" stop-color="#FFD700"/>
+      <stop offset="40%" stop-color="#FF6B00"/>
+      <stop offset="100%" stop-color="#FF2200" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="180" fill="url(#bgGrad03)"/>
+
+  <!-- Layer 2: QR 코드 기본 구조 (황금색) -->
+  <g fill="#FFD700" opacity="0.9">
+    <!-- 좌상단 파인더 -->
+    <rect x="152" y="152" width="224" height="224" rx="16"/>
+    <rect x="176" y="176" width="176" height="176" rx="10" fill="#1A0D00"/>
+    <rect x="204" y="204" width="120" height="120" rx="6" fill="#FFD700"/>
+
+    <!-- 우상단 파인더 -->
+    <rect x="648" y="152" width="224" height="224" rx="16"/>
+    <rect x="672" y="176" width="176" height="176" rx="10" fill="#1A0D00"/>
+    <rect x="700" y="204" width="120" height="120" rx="6" fill="#FFD700"/>
+
+    <!-- 좌하단 파인더 -->
+    <rect x="152" y="648" width="224" height="224" rx="16"/>
+    <rect x="176" y="672" width="176" height="176" rx="10" fill="#1A0D00"/>
+    <rect x="204" y="700" width="120" height="120" rx="6" fill="#FFD700"/>
+
+    <!-- 데이터 모듈 -->
+    <rect x="416" y="416" width="32" height="32" rx="4"/>
+    <rect x="480" y="416" width="32" height="32" rx="4"/>
+    <rect x="544" y="416" width="32" height="32" rx="4"/>
+    <rect x="608" y="416" width="32" height="32" rx="4"/>
+    <rect x="416" y="480" width="32" height="32" rx="4"/>
+    <rect x="544" y="480" width="32" height="32" rx="4"/>
+    <rect x="416" y="544" width="32" height="32" rx="4"/>
+    <rect x="480" y="544" width="32" height="32" rx="4"/>
+    <rect x="608" y="544" width="32" height="32" rx="4"/>
+    <rect x="448" y="608" width="32" height="32" rx="4"/>
+    <rect x="576" y="608" width="32" height="32" rx="4"/>
+
+    <!-- 우측 데이터 -->
+    <rect x="672" y="416" width="32" height="32" rx="4"/>
+    <rect x="736" y="416" width="32" height="32" rx="4"/>
+    <rect x="800" y="416" width="32" height="32" rx="4"/>
+    <rect x="672" y="480" width="32" height="32" rx="4"/>
+    <rect x="800" y="480" width="32" height="32" rx="4"/>
+    <rect x="736" y="480" width="32" height="32" rx="4"/>
+
+    <!-- 하단 데이터 -->
+    <rect x="448" y="672" width="32" height="32" rx="4"/>
+    <rect x="512" y="672" width="32" height="32" rx="4"/>
+    <rect x="576" y="672" width="32" height="32" rx="4"/>
+    <rect x="640" y="672" width="32" height="32" rx="4"/>
+    <rect x="480" y="736" width="32" height="32" rx="4"/>
+    <rect x="608" y="736" width="32" height="32" rx="4"/>
+    <rect x="448" y="800" width="32" height="32" rx="4"/>
+    <rect x="544" y="800" width="32" height="32" rx="4"/>
+    <rect x="640" y="800" width="32" height="32" rx="4"/>
+  </g>
+
+  <!-- Layer 3: 불꽃 오버레이 (Forge 의미) -->
+  <!-- 중앙 불꽃 형태 -->
+  <ellipse cx="512" cy="480" rx="80" ry="110" fill="url(#flameGrad)" opacity="0.9"/>
+  <path d="M512 360 C480 390 460 430 470 470 C448 450 442 420 450 395 C430 420 428 455 440 480 C420 460 415 430 420 405 C400 440 400 490 420 520 C435 545 460 560 512 560 C564 560 589 545 604 520 C624 490 624 440 604 405 C609 430 604 460 584 480 C596 455 594 420 574 395 C582 420 576 450 554 470 C564 430 544 390 512 360Z" fill="url(#flameGrad)" opacity="0.85"/>
+  <!-- 불꽃 하이라이트 -->
+  <ellipse cx="512" cy="460" rx="30" ry="50" fill="#FFFDE7" opacity="0.6"/>
+</svg>

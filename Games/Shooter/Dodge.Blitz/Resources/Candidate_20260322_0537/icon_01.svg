@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_01: Literal / 중앙 심볼 / 우주선 + 탄막 원형 배열 / 파랑-청록 -->
+  <!-- 배경 -->
+  <defs>
+    <radialGradient id="bg01" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#0D1B2A"/>
+      <stop offset="100%" stop-color="#040810"/>
+    </radialGradient>
+    <radialGradient id="glow01" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#00CFFF" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#00CFFF" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="blur01">
+      <feGaussianBlur stdDeviation="8"/>
+    </filter>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="160" fill="url(#bg01)"/>
+
+  <!-- 배경 별들 -->
+  <circle cx="220" cy="180" r="3" fill="#FFFFFF" opacity="0.6"/>
+  <circle cx="380" cy="240" r="2" fill="#FFFFFF" opacity="0.4"/>
+  <circle cx="640" cy="200" r="3" fill="#FFFFFF" opacity="0.5"/>
+  <circle cx="800" cy="160" r="2" fill="#FFFFFF" opacity="0.6"/>
+  <circle cx="180" cy="400" r="2" fill="#FFFFFF" opacity="0.3"/>
+  <circle cx="850" cy="380" r="3" fill="#FFFFFF" opacity="0.5"/>
+  <circle cx="760" cy="820" r="2" fill="#FFFFFF" opacity="0.4"/>
+  <circle cx="240" cy="780" r="3" fill="#FFFFFF" opacity="0.5"/>
+  <circle cx="910" cy="700" r="2" fill="#FFFFFF" opacity="0.3"/>
+  <circle cx="140" cy="640" r="2" fill="#FFFFFF" opacity="0.6"/>
+
+  <!-- 글로우 효과 (중앙) -->
+  <circle cx="512" cy="512" r="220" fill="url(#glow01)" filter="url(#blur01)"/>
+
+  <!-- 탄막 원형 배열 (빨간 총알들) — 위협적 배치 -->
+  <!-- 바깥 링 -->
+  <circle cx="512" cy="270" r="18" fill="#FF3A3A" opacity="0.9"/>
+  <circle cx="650" cy="310" r="16" fill="#FF5520" opacity="0.85"/>
+  <circle cx="740" cy="430" r="18" fill="#FF3A3A" opacity="0.9"/>
+  <circle cx="740" cy="580" r="16" fill="#FF5520" opacity="0.85"/>
+  <circle cx="650" cy="700" r="18" fill="#FF3A3A" opacity="0.9"/>
+  <circle cx="512" cy="750" r="16" fill="#FF5520" opacity="0.85"/>
+  <circle cx="370" cy="700" r="18" fill="#FF3A3A" opacity="0.9"/>
+  <circle cx="280" cy="580" r="16" fill="#FF5520" opacity="0.85"/>
+  <circle cx="280" cy="430" r="18" fill="#FF3A3A" opacity="0.9"/>
+  <circle cx="370" cy="310" r="16" fill="#FF5520" opacity="0.85"/>
+
+  <!-- 안쪽 링 (더 가까이) -->
+  <circle cx="512" cy="355" r="14" fill="#FF6B35" opacity="0.8"/>
+  <circle cx="610" cy="385" r="12" fill="#FF3A3A" opacity="0.75"/>
+  <circle cx="668" cy="470" r="14" fill="#FF6B35" opacity="0.8"/>
+  <circle cx="668" cy="558" r="12" fill="#FF3A3A" opacity="0.75"/>
+  <circle cx="610" cy="638" r="14" fill="#FF6B35" opacity="0.8"/>
+  <circle cx="512" cy="668" r="12" fill="#FF3A3A" opacity="0.75"/>
+  <circle cx="414" cy="638" r="14" fill="#FF6B35" opacity="0.8"/>
+  <circle cx="356" cy="558" r="12" fill="#FF3A3A" opacity="0.75"/>
+  <circle cx="356" cy="470" r="14" fill="#FF6B35" opacity="0.8"/>
+  <circle cx="414" cy="385" r="12" fill="#FF3A3A" opacity="0.75"/>
+
+  <!-- 총알 꼬리 효과 -->
+  <ellipse cx="512" cy="258" rx="6" ry="20" fill="#FF8888" opacity="0.5"/>
+  <ellipse cx="656" cy="296" rx="6" ry="20" transform="rotate(35 656 296)" fill="#FF8888" opacity="0.5"/>
+
+  <!-- 중앙 우주선 -->
+  <!-- 선체 -->
+  <path d="M512 430 L548 530 L512 510 L476 530 Z" fill="#00CFFF"/>
+  <path d="M512 430 L548 530 L512 510 L476 530 Z" fill="#00E5FF" opacity="0.3"/>
+  <!-- 날개 -->
+  <path d="M476 530 L440 570 L512 550 L584 570 L548 530 L512 510 Z" fill="#0099CC"/>
+  <!-- 엔진 글로우 -->
+  <ellipse cx="512" cy="560" rx="20" ry="12" fill="#00FFAA" opacity="0.9"/>
+  <ellipse cx="512" cy="568" rx="12" ry="20" fill="#00FFAA" opacity="0.5" filter="url(#blur01)"/>
+  <!-- 조종석 -->
+  <ellipse cx="512" cy="482" rx="14" ry="18" fill="#88EEFF" opacity="0.8"/>
+
+  <!-- 위험 경고 글로우 (우주선 주변) -->
+  <circle cx="512" cy="500" r="68" fill="none" stroke="#00CFFF" stroke-width="2" opacity="0.4"/>
+  <circle cx="512" cy="500" r="80" fill="none" stroke="#00CFFF" stroke-width="1" opacity="0.2"/>
+</svg>

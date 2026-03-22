@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- 배경: 딥 틸/청록 계열 -->
+  <rect x="80" y="80" width="864" height="864" rx="180" fill="#051C2C"/>
+
+  <!-- Layer 1: 크로스워드 격자 (5x5) — 흑백 패턴 표현 -->
+  <!-- 검은 칸 (막힌 칸) -->
+  <rect x="190" y="190" width="118" height="118" rx="8" fill="#0A3D5C"/>
+  <rect x="460" y="190" width="118" height="118" rx="8" fill="#0A3D5C"/>
+  <rect x="730" y="190" width="104" height="118" rx="8" fill="#0A3D5C"/>
+  <rect x="190" y="460" width="118" height="118" rx="8" fill="#0A3D5C"/>
+  <rect x="730" y="460" width="104" height="118" rx="8" fill="#0A3D5C"/>
+  <rect x="190" y="716" width="118" height="118" rx="8" fill="#0A3D5C"/>
+  <rect x="460" y="716" width="118" height="118" rx="8" fill="#0A3D5C"/>
+  <rect x="730" y="716" width="104" height="118" rx="8" fill="#0A3D5C"/>
+
+  <!-- 흰 칸 (입력 가능 칸) -->
+  <rect x="322" y="190" width="124" height="118" rx="8" fill="#E8F4F8" opacity="0.92"/>
+  <rect x="592" y="190" width="124" height="118" rx="8" fill="#E8F4F8" opacity="0.92"/>
+
+  <rect x="190" y="322" width="118" height="124" rx="8" fill="#E8F4F8" opacity="0.92"/>
+  <rect x="322" y="322" width="124" height="124" rx="8" fill="#00BCD4" opacity="0.85"/>
+  <rect x="460" y="322" width="118" height="124" rx="8" fill="#E8F4F8" opacity="0.92"/>
+  <rect x="592" y="322" width="124" height="124" rx="8" fill="#E8F4F8" opacity="0.92"/>
+  <rect x="730" y="322" width="104" height="124" rx="8" fill="#E8F4F8" opacity="0.92"/>
+
+  <rect x="322" y="460" width="124" height="118" rx="8" fill="#00BCD4" opacity="0.85"/>
+  <rect x="460" y="460" width="118" height="118" rx="8" fill="#00BCD4"/>
+  <rect x="592" y="460" width="124" height="118" rx="8" fill="#00BCD4" opacity="0.85"/>
+
+  <rect x="190" y="592" width="118" height="110" rx="8" fill="#E8F4F8" opacity="0.92"/>
+  <rect x="322" y="592" width="124" height="110" rx="8" fill="#E8F4F8" opacity="0.92"/>
+  <rect x="460" y="592" width="118" height="110" rx="8" fill="#E8F4F8" opacity="0.92"/>
+  <rect x="592" y="592" width="124" height="110" rx="8" fill="#E8F4F8" opacity="0.92"/>
+  <rect x="730" y="592" width="104" height="110" rx="8" fill="#E8F4F8" opacity="0.92"/>
+
+  <rect x="322" y="716" width="124" height="118" rx="8" fill="#E8F4F8" opacity="0.92"/>
+  <rect x="592" y="716" width="124" height="118" rx="8" fill="#E8F4F8" opacity="0.92"/>
+
+  <!-- Layer 2: ACROSS 가로 단어 (3행 중앙 하이라이트 셀들에 알파벳) -->
+  <!-- 가로 단어: W O R D (2행) -->
+  <text x="362" y="406" font-family="'Arial Black', Arial" font-weight="900" font-size="82" fill="#006064" text-anchor="middle" dominant-baseline="middle">W</text>
+  <text x="500" y="406" font-family="'Arial Black', Arial" font-weight="900" font-size="82" fill="#E8F4F8" text-anchor="middle" dominant-baseline="middle">O</text>
+  <text x="640" y="406" font-family="'Arial Black', Arial" font-weight="900" font-size="82" fill="#006064" text-anchor="middle" dominant-baseline="middle">R</text>
+  <text x="780" y="406" font-family="'Arial Black', Arial" font-weight="900" font-size="82" fill="#006064" text-anchor="middle" dominant-baseline="middle">D</text>
+
+  <!-- 세로 단어: W(공유) O R D (3열) -->
+  <text x="500" y="252" font-family="'Arial Black', Arial" font-weight="900" font-size="82" fill="#006064" text-anchor="middle" dominant-baseline="middle">C</text>
+  <!-- O는 교차점 (이미 표시됨) -->
+  <text x="500" y="520" font-family="'Arial Black', Arial" font-weight="900" font-size="90" fill="#FFFFFF" text-anchor="middle" dominant-baseline="middle">✕</text>
+  <text x="500" y="642" font-family="'Arial Black', Arial" font-weight="900" font-size="82" fill="#006064" text-anchor="middle" dominant-baseline="middle">S</text>
+  <text x="500" y="773" font-family="'Arial Black', Arial" font-weight="900" font-size="82" fill="#006064" text-anchor="middle" dominant-baseline="middle">S</text>
+
+  <!-- Layer 3: ACROSS / DOWN 라벨 -->
+  <!-- 가로 방향 화살표 표시 -->
+  <rect x="192" y="192" width="22" height="22" rx="4" fill="#00BCD4" opacity="0.9"/>
+  <rect x="192" y="324" width="22" height="22" rx="4" fill="#00BCD4" opacity="0.9"/>
+
+  <!-- ACROSS 라벨 -->
+  <rect x="210" y="860" width="280" height="50" rx="10" fill="#00BCD4" opacity="0.2"/>
+  <text x="350" y="890" font-family="'Arial Black', Arial" font-weight="900" font-size="38" fill="#4DD0E1" text-anchor="middle" dominant-baseline="middle">ACROSS</text>
+
+  <!-- DOWN 라벨 -->
+  <rect x="530" y="860" width="210" height="50" rx="10" fill="#00BCD4" opacity="0.2"/>
+  <text x="635" y="890" font-family="'Arial Black', Arial" font-weight="900" font-size="38" fill="#4DD0E1" text-anchor="middle" dominant-baseline="middle">DOWN</text>
+</svg>

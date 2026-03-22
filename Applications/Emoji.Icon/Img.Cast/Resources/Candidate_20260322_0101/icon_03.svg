@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!--
+    icon_03 [metaphor] — 대각선 분할 변신
+    컨셉: 동일 파일이 대각선을 기준으로 왼쪽은 .svg, 오른쪽은 .ico로 변신
+    연결고리: 하나의 파일이 포맷만 달라지는 "변신" 순간을 대각선 분할로 표현
+    패턴: 대각선/동적
+    색상: 인디고(#3730A3) ↔ 에메랄드(#065F46) + 흰 분할선
+  -->
+  <defs>
+    <clipPath id="leftSide">
+      <polygon points="0,0 660,0 364,1024 0,1024"/>
+    </clipPath>
+    <clipPath id="rightSide">
+      <polygon points="660,0 1024,0 1024,1024 364,1024"/>
+    </clipPath>
+    <clipPath id="bgClip">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+    <filter id="glow03">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- 배경 클립 적용 -->
+  <g clip-path="url(#bgClip)">
+
+    <!-- Layer 1: 왼쪽 인디고 반 (.svg) -->
+    <g clip-path="url(#leftSide)">
+      <rect width="1024" height="1024" fill="#3730A3"/>
+      <!-- 은은한 패턴 -->
+      <rect width="1024" height="1024" fill="#4338CA" opacity="0.4"
+            transform="translate(-80, 80)"/>
+      <!-- .svg 텍스트 -->
+      <text x="298" y="460"
+            font-family="Arial Black, Arial, sans-serif"
+            font-size="155" font-weight="900"
+            fill="white" text-anchor="middle"
+            opacity="0.95">.svg</text>
+      <!-- 서브: 작은 포맷들 -->
+      <text x="238" y="590"
+            font-family="Arial, sans-serif"
+            font-size="52" font-weight="600"
+            fill="#A5B4FC" text-anchor="middle">.png  .jpg  .bmp</text>
+    </g>
+
+    <!-- Layer 1: 오른쪽 에메랄드 반 (.ico) -->
+    <g clip-path="url(#rightSide)">
+      <rect width="1024" height="1024" fill="#065F46"/>
+      <rect width="1024" height="1024" fill="#047857" opacity="0.4"
+            transform="translate(80, -80)"/>
+      <!-- .ico 텍스트 -->
+      <text x="760" y="590"
+            font-family="Arial Black, Arial, sans-serif"
+            font-size="155" font-weight="900"
+            fill="white" text-anchor="middle"
+            opacity="0.95">.ico</text>
+      <!-- 서브: 작은 포맷들 -->
+      <text x="820" y="720"
+            font-family="Arial, sans-serif"
+            font-size="52" font-weight="600"
+            fill="#6EE7B7" text-anchor="middle">.png  .jpg  .bmp</text>
+    </g>
+
+    <!-- Layer 3: 대각선 분할선 (번개처럼) -->
+    <!-- 메인 두꺼운 흰 선 -->
+    <line x1="660" y1="0" x2="364" y2="1024"
+          stroke="white" stroke-width="20"
+          stroke-linecap="round" filter="url(#glow03)"/>
+    <!-- 얇은 글로우 선 -->
+    <line x1="660" y1="0" x2="364" y2="1024"
+          stroke="white" stroke-width="5" opacity="0.8"/>
+    <!-- 중앙 변환 심볼 -->
+    <circle cx="512" cy="512" r="44" fill="white"/>
+    <text x="512" y="531"
+          font-family="Arial Black, Arial, sans-serif"
+          font-size="44" font-weight="900"
+          fill="#1E1B4B" text-anchor="middle">⇌</text>
+  </g>
+</svg>

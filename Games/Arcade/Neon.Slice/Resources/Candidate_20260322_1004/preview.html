@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Neon.Slice — Icon Candidates (2026-03-22)</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #0D0D0D;
+      color: #E0E0E0;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      padding: 40px 32px 60px;
+      min-height: 100vh;
+    }
+
+    h1 {
+      font-size: 22px;
+      font-weight: 700;
+      color: #FFFFFF;
+      margin-bottom: 4px;
+      letter-spacing: 1px;
+    }
+
+    .subtitle {
+      font-size: 13px;
+      color: #666;
+      margin-bottom: 36px;
+      letter-spacing: 0.5px;
+    }
+
+    /* ── 메인 그리드 (5열 1행) ── */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 20px;
+      margin-bottom: 56px;
+    }
+
+    .card {
+      background: #161616;
+      border: 1px solid #2A2A2A;
+      border-radius: 12px;
+      padding: 20px 16px 18px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      transition: border-color 0.2s;
+    }
+    .card:hover { border-color: #444; }
+
+    .icon-wrap {
+      width: 160px;
+      height: 160px;
+      border-radius: 28px;
+      overflow: hidden;
+      background: #111;
+      flex-shrink: 0;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.6);
+    }
+    .icon-wrap img {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .card-meta {
+      width: 100%;
+    }
+
+    .card-num {
+      font-size: 11px;
+      color: #555;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+
+    .badge-row {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 8px;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 20px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+    .badge.literal  { background: #1A3A2A; color: #44DD88; border: 1px solid #226644; }
+    .badge.metaphor { background: #1A1A3A; color: #6688FF; border: 1px solid #334488; }
+    .badge.hybrid   { background: #3A1A2A; color: #FF6699; border: 1px solid #883344; }
+
+    .badge.pattern {
+      background: #222;
+      color: #AAAAAA;
+      border: 1px solid #333;
+      font-weight: 600;
+    }
+
+    .desc {
+      font-size: 12px;
+      color: #AAAAAA;
+      line-height: 1.55;
+      margin-bottom: 10px;
+    }
+
+    .palette {
+      display: flex;
+      gap: 5px;
+      align-items: center;
+    }
+    .swatch {
+      width: 18px;
+      height: 18px;
+      border-radius: 4px;
+      border: 1px solid rgba(255,255,255,0.08);
+      flex-shrink: 0;
+    }
+    .palette-label {
+      font-size: 10px;
+      color: #555;
+      margin-left: 4px;
+    }
+
+    /* ── 크기별 미리보기 ── */
+    .section-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #666;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #222;
+    }
+
+    .size-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    .size-row {
+      display: flex;
+      align-items: flex-end;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .size-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .size-label {
+      font-size: 10px;
+      color: #555;
+      letter-spacing: 0.5px;
+    }
+
+    .icon-size {
+      background: #111;
+      border-radius: 4px;
+      border: 1px solid #222;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .icon-size img { display: block; }
+
+    .row-header {
+      font-size: 11px;
+      color: #444;
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      letter-spacing: 1px;
+      margin-right: 4px;
+      flex-shrink: 0;
+      align-self: center;
+    }
+
+    .divider {
+      border: none;
+      border-top: 1px solid #1E1E1E;
+      margin: 48px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Neon.Slice — 아이콘 후보</h1>
+  <p class="subtitle">Candidate_20260322_1004 &nbsp;·&nbsp; 5개 후보 &nbsp;·&nbsp; 2026-03-22</p>
+
+  <!-- ── 메인 그리드 ── -->
+  <div class="grid">
+
+    <!-- 01 -->
+    <div class="card">
+      <div class="icon-wrap">
+        <img src="icon_01.svg" alt="icon_01"/>
+      </div>
+      <div class="card-meta">
+        <div class="card-num">ICON 01</div>
+        <div class="badge-row">
+          <span class="badge literal">Literal</span>
+          <span class="badge pattern">중앙 심볼</span>
+        </div>
+        <p class="desc">오각형이 대각선 칼날에 슬라이스되어 두 조각으로 분리. 슬라이스 궤적과 파편 강조. SLICE 텍스트.</p>
+        <div class="palette">
+          <span class="swatch" style="background:#0D0D1A;"></span>
+          <span class="swatch" style="background:#00FFCC;"></span>
+          <span class="swatch" style="background:#CC00FF;"></span>
+          <span class="swatch" style="background:#FFFFFF;"></span>
+          <span class="palette-label">다크 네이비 / 네온 시안 / 네온 퍼플 / 화이트</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 02 -->
+    <div class="card">
+      <div class="icon-wrap">
+        <img src="icon_02.svg" alt="icon_02"/>
+      </div>
+      <div class="card-meta">
+        <div class="card-num">ICON 02</div>
+        <div class="badge-row">
+          <span class="badge literal">Literal</span>
+          <span class="badge pattern">레이어드</span>
+        </div>
+        <p class="desc">슬라이스된 삼각형(히트)과 X 표시 폭탄(위험)이 대비되는 2레이어 장면. 도화선 불꽃 포함.</p>
+        <div class="palette">
+          <span class="swatch" style="background:#0A0A0A;"></span>
+          <span class="swatch" style="background:#FF9900;"></span>
+          <span class="swatch" style="background:#FF2200;"></span>
+          <span class="swatch" style="background:#333333;"></span>
+          <span class="palette-label">다크 / 오렌지 / 레드 / 다크 그레이</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 03 -->
+    <div class="card">
+      <div class="icon-wrap">
+        <img src="icon_03.svg" alt="icon_03"/>
+      </div>
+      <div class="card-meta">
+        <div class="card-num">ICON 03</div>
+        <div class="badge-row">
+          <span class="badge metaphor">Metaphor</span>
+          <span class="badge pattern">기하학 추상</span>
+        </div>
+        <p class="desc">두 칼날이 X자로 교차하는 추상 구성. 핫핑크와 일렉트릭블루의 대비, 교차점 백색 폭발.</p>
+        <div class="palette">
+          <span class="swatch" style="background:#0A001A;"></span>
+          <span class="swatch" style="background:#FF0080;"></span>
+          <span class="swatch" style="background:#0080FF;"></span>
+          <span class="swatch" style="background:#FFFFFF;"></span>
+          <span class="palette-label">딥 퍼플 / 핫핑크 / 일렉트릭블루 / 화이트</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 04 -->
+    <div class="card">
+      <div class="icon-wrap">
+        <img src="icon_04.svg" alt="icon_04"/>
+      </div>
+      <div class="card-meta">
+        <div class="card-num">ICON 04</div>
+        <div class="badge-row">
+          <span class="badge metaphor">Metaphor</span>
+          <span class="badge pattern">공간 장면</span>
+        </div>
+        <p class="desc">아케이드 공간감 — 원/사각형/삼각형이 각기 다른 높이에서 날아오르고, 마우스 커브 궤적이 관통.</p>
+        <div class="palette">
+          <span class="swatch" style="background:#001A00;"></span>
+          <span class="swatch" style="background:#00FF44;"></span>
+          <span class="swatch" style="background:#FFEE00;"></span>
+          <span class="swatch" style="background:#FF8800;"></span>
+          <span class="palette-label">딥 그린 / 네온 그린 / 옐로우 / 오렌지</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 05 -->
+    <div class="card">
+      <div class="icon-wrap">
+        <img src="icon_05.svg" alt="icon_05"/>
+      </div>
+      <div class="card-meta">
+        <div class="card-num">ICON 05</div>
+        <div class="badge-row">
+          <span class="badge hybrid">Hybrid</span>
+          <span class="badge pattern">대각선 동적</span>
+        </div>
+        <p class="desc">원이 수직 칼날에 정확히 슬라이스되는 순간 포착. 이탤릭 SLICE 텍스트 + 골드 밑줄 칼날. 파편 방사.</p>
+        <div class="palette">
+          <span class="swatch" style="background:#1A0030;"></span>
+          <span class="swatch" style="background:#FF2244;"></span>
+          <span class="swatch" style="background:#FFD700;"></span>
+          <span class="swatch" style="background:#FFFFFF;"></span>
+          <span class="palette-label">딥 퍼플 / 코랄레드 / 골드 / 화이트</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <hr class="divider"/>
+
+  <!-- ── 크기별 미리보기 ── -->
+  <div class="section-title">크기별 미리보기</div>
+
+  <div class="size-grid">
+
+    <!-- icon_01 -->
+    <div class="size-row">
+      <span class="row-header">ICON 01</span>
+      <div class="size-group">
+        <div class="icon-size" style="width:256px;height:256px;border-radius:48px;">
+          <img src="icon_01.svg" width="256" height="256"/>
+        </div>
+        <span class="size-label">256px</span>
+      </div>
+      <div class="size-group">
+        <div class="icon-size" style="width:64px;height:64px;border-radius:12px;">
+          <img src="icon_01.svg" width="64" height="64"/>
+        </div>
+        <span class="size-label">64px</span>
+      </div>
+      <div class="size-group">
+        <div class="icon-size" style="width:32px;height:32px;border-radius:6px;">
+          <img src="icon_01.svg" width="32" height="32"/>
+        </div>
+        <span class="size-label">32px</span>
+      </div>
+      <div class="size-group">
+        <div class="icon-size" style="width:16px;height:16px;border-radius:3px;">
+          <img src="icon_01.svg" width="16" height="16"/>
+        </div>
+        <span class="size-label">16px</span>
+      </div>
+    </div>
+
+    <!-- icon_02 -->
+    <div class="size-row">
+      <span class="row-header">ICON 02</span>
+      <div class="size-group">
+        <div class="icon-size" style="width:256px;height:256px;border-radius:48px;">
+          <img src="icon_02.svg" width="256" height="256"/>
+        </div>
+        <span class="size-label">256px</span>
+      </div>
+      <div class="size-group">
+        <div class="icon-size" style="width:64px;height:64px;border-radius:12px;">
+          <img src="icon_02.svg" width="64" height="64"/>
+        </div>
+        <span class="size-label">64px</span>
+      </div>
+      <div class="size-group">
+        <div class="icon-size" style="width:32px;height:32px;border-radius:6px;">
+          <img src="icon_02.svg" width="32" height="32"/>
+        </div>
+        <span class="size-label">32px</span>
+      </div>
+      <div class="size-group">
+        <div class="icon-size" style="width:16px;height:16px;border-radius:3px;">
+          <img src="icon_02.svg" width="16" height="16"/>
+        </div>
+        <span class="size-label">16px</span>
+      </div>
+    </div>
+
+    <!-- icon_03 -->
+    <div class="size-row">
+      <span class="row-header">ICON 03</span>
+      <div class="size-group">
+        <div class="icon-size" style="width:256px;height:256px;border-radius:48px;">
+          <img src="icon_03.svg" width="256" height="256"/>
+        </div>
+        <span class="size-label">256px</span>
+      </div>
+      <div class="size-group">
+        <div class="icon-size" style="width:64px;height:64px;border-radius:12px;">
+          <img src="icon_03.svg" width="64" height="64"/>
+        </div>
+        <span class="size-label">64px</span>
+      </div>
+      <div class="size-group">
+        <div class="icon-size" style="width:32px;height:32px;border-radius:6px;">
+          <img src="icon_03.svg" width="32" height="32"/>
+        </div>
+        <span class="size-label">32px</span>
+      </div>
+      <div class="size-group">
+        <div class="icon-size" style="width:16px;height:16px;border-radius:3px;">
+          <img src="icon_03.svg" width="16" height="16"/>
+        </div>
+        <span class="size-label">16px</span>
+      </div>
+    </div>
+
+    <!-- icon_04 -->
+    <div class="size-row">
+      <span class="row-header">ICON 04</span>
+      <div class="size-group">
+        <div class="icon-size" style="width:256px;height:256px;border-radius:48px;">
+          <img src="icon_04.svg" width="256" height="256"/>
+        </div>
+        <span class="size-label">256px</span>
+      </div>
+      <div class="size-group">
+        <div class="icon-size" style="width:64px;height:64px;border-radius:12px;">
+          <img src="icon_04.svg" width="64" height="64"/>
+        </div>
+        <span class="size-label">64px</span>
+      </div>
+      <div class="size-group">
+        <div class="icon-size" style="width:32px;height:32px;border-radius:6px;">
+          <img src="icon_04.svg" width="32" height="32"/>
+        </div>
+        <span class="size-label">32px</span>
+      </div>
+      <div class="size-group">
+        <div class="icon-size" style="width:16px;height:16px;border-radius:3px;">
+          <img src="icon_04.svg" width="16" height="16"/>
+        </div>
+        <span class="size-label">16px</span>
+      </div>
+    </div>
+
+    <!-- icon_05 -->
+    <div class="size-row">
+      <span class="row-header">ICON 05</span>
+      <div class="size-group">
+        <div class="icon-size" style="width:256px;height:256px;border-radius:48px;">
+          <img src="icon_05.svg" width="256" height="256"/>
+        </div>
+        <span class="size-label">256px</span>
+      </div>
+      <div class="size-group">
+        <div class="icon-size" style="width:64px;height:64px;border-radius:12px;">
+          <img src="icon_05.svg" width="64" height="64"/>
+        </div>
+        <span class="size-label">64px</span>
+      </div>
+      <div class="size-group">
+        <div class="icon-size" style="width:32px;height:32px;border-radius:6px;">
+          <img src="icon_05.svg" width="32" height="32"/>
+        </div>
+        <span class="size-label">32px</span>
+      </div>
+      <div class="size-group">
+        <div class="icon-size" style="width:16px;height:16px;border-radius:3px;">
+          <img src="icon_05.svg" width="16" height="16"/>
+        </div>
+        <span class="size-label">16px</span>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>

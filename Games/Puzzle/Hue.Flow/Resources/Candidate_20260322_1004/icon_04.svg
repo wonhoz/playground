@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: Background - soft peach/warm -->
+  <defs>
+    <radialGradient id="bg4" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#FFF5EB"/>
+      <stop offset="100%" stop-color="#FFE4CC"/>
+    </radialGradient>
+    <clipPath id="hexclip">
+      <circle cx="512" cy="512" r="390"/>
+    </clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="180" fill="url(#bg4)"/>
+
+  <!-- Layer 2: Six colored wedges flowing into center (pie metaphor) -->
+  <!-- Each wedge = 60deg sector, colors = 6 palette -->
+  <!-- Coral Red wedge: 270-330 deg (top-right) -->
+  <path d="M512,512 L512,122 A390,390 0 0,1 850,312 Z" fill="#F38BA8" opacity="0.9"/>
+  <!-- Periwinkle Blue: 330-30 deg (right) -->
+  <path d="M512,512 L850,312 A390,390 0 0,1 850,712 Z" fill="#89B4FA" opacity="0.9"/>
+  <!-- Mint Green: 30-90 deg (bottom-right) -->
+  <path d="M512,512 L850,712 A390,390 0 0,1 512,902 Z" fill="#A6E3A1" opacity="0.9"/>
+  <!-- Peach Orange: 90-150 deg (bottom-left) -->
+  <path d="M512,512 L512,902 A390,390 0 0,1 174,712 Z" fill="#FAB387" opacity="0.9"/>
+  <!-- Mauve Purple: 150-210 deg (left) -->
+  <path d="M512,512 L174,712 A390,390 0 0,1 174,312 Z" fill="#CBA6F7" opacity="0.9"/>
+  <!-- Sky Teal: 210-270 deg (top-left) -->
+  <path d="M512,512 L174,312 A390,390 0 0,1 512,122 Z" fill="#89DCEB" opacity="0.9"/>
+
+  <!-- White dividers between wedges -->
+  <line x1="512" y1="512" x2="512" y2="122" stroke="#ffffff" stroke-width="4" opacity="0.6"/>
+  <line x1="512" y1="512" x2="850" y2="312" stroke="#ffffff" stroke-width="4" opacity="0.6"/>
+  <line x1="512" y1="512" x2="850" y2="712" stroke="#ffffff" stroke-width="4" opacity="0.6"/>
+  <line x1="512" y1="512" x2="512" y2="902" stroke="#ffffff" stroke-width="4" opacity="0.6"/>
+  <line x1="512" y1="512" x2="174" y2="712" stroke="#ffffff" stroke-width="4" opacity="0.6"/>
+  <line x1="512" y1="512" x2="174" y2="312" stroke="#ffffff" stroke-width="4" opacity="0.6"/>
+
+  <!-- Layer 3: Center circle with "30" counter -->
+  <circle cx="512" cy="512" r="160" fill="#1e1e2e" opacity="0.92"/>
+  <circle cx="512" cy="512" r="152" fill="none" stroke="#ffffff" stroke-width="3" opacity="0.25"/>
+  <text x="512" y="488" font-family="Arial Black, sans-serif" font-size="48" font-weight="900" text-anchor="middle" fill="#ffffff" opacity="0.6">MOVES</text>
+  <text x="512" y="560" font-family="Arial Black, sans-serif" font-size="80" font-weight="900" text-anchor="middle" fill="#FAB387">30</text>
+
+  <!-- Small grid tiles hinting at board — 4 corners -->
+  <rect x="200" y="200" width="36" height="36" rx="5" fill="#89DCEB" opacity="0.7"/>
+  <rect x="242" y="200" width="36" height="36" rx="5" fill="#CBA6F7" opacity="0.7"/>
+  <rect x="200" y="242" width="36" height="36" rx="5" fill="#CBA6F7" opacity="0.7"/>
+  <rect x="242" y="242" width="36" height="36" rx="5" fill="#89B4FA" opacity="0.7"/>
+
+  <rect x="746" y="200" width="36" height="36" rx="5" fill="#F38BA8" opacity="0.7"/>
+  <rect x="788" y="200" width="36" height="36" rx="5" fill="#A6E3A1" opacity="0.7"/>
+  <rect x="746" y="242" width="36" height="36" rx="5" fill="#89B4FA" opacity="0.7"/>
+  <rect x="788" y="242" width="36" height="36" rx="5" fill="#F38BA8" opacity="0.7"/>
+
+  <rect x="200" y="746" width="36" height="36" rx="5" fill="#A6E3A1" opacity="0.7"/>
+  <rect x="242" y="746" width="36" height="36" rx="5" fill="#FAB387" opacity="0.7"/>
+  <rect x="200" y="788" width="36" height="36" rx="5" fill="#FAB387" opacity="0.7"/>
+  <rect x="242" y="788" width="36" height="36" rx="5" fill="#89DCEB" opacity="0.7"/>
+
+  <rect x="746" y="746" width="36" height="36" rx="5" fill="#CBA6F7" opacity="0.7"/>
+  <rect x="788" y="746" width="36" height="36" rx="5" fill="#F38BA8" opacity="0.7"/>
+  <rect x="746" y="788" width="36" height="36" rx="5" fill="#89DCEB" opacity="0.7"/>
+  <rect x="788" y="788" width="36" height="36" rx="5" fill="#A6E3A1" opacity="0.7"/>
+</svg>

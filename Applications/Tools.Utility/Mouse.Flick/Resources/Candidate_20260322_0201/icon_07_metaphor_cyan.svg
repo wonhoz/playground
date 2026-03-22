@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg07" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#001820"/>
+      <stop offset="100%" stop-color="#000D14"/>
+    </linearGradient>
+    <filter id="glow07">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="180" fill="url(#bg07)"/>
+
+  <!-- 마우스 커서 (대각선 이동 - 동적 구성) -->
+  <g transform="translate(200,180) rotate(-10)" filter="url(#glow07)">
+    <!-- 커서 화살표 -->
+    <polygon points="0,0 0,80 20,58 38,96 52,90 34,52 64,40" fill="#00E5FF" stroke="#FFFFFF" stroke-width="6" stroke-linejoin="round"/>
+  </g>
+
+  <!-- 제스처 궤적: 오른쪽→위 (RU) — 부드러운 곡선 -->
+  <path d="M 230 620 Q 330 620 430 520 Q 530 420 700 320" fill="none" stroke="#00E5FF" stroke-width="18" stroke-linecap="round" filter="url(#glow07)" opacity="0.9"/>
+
+  <!-- 이동 잔상 (fade trail) -->
+  <path d="M 230 620 Q 330 620 430 520 Q 530 420 700 320" fill="none" stroke="#00E5FF" stroke-width="32" stroke-linecap="round" opacity="0.15"/>
+  <path d="M 230 620 Q 330 620 430 520 Q 530 420 700 320" fill="none" stroke="#00E5FF" stroke-width="50" stroke-linecap="round" opacity="0.07"/>
+
+  <!-- 끝점 커서 (최종 위치) -->
+  <g transform="translate(660,275) rotate(-10)" filter="url(#glow07)">
+    <polygon points="0,0 0,80 20,58 38,96 52,90 34,52 64,40" fill="#FFFFFF" stroke="#00E5FF" stroke-width="6" stroke-linejoin="round"/>
+  </g>
+
+  <!-- 변환 화살표 (→ 동작) -->
+  <path d="M 440 760 L 584 760" fill="none" stroke="#00B8CC" stroke-width="10" stroke-linecap="round"/>
+  <polyline points="558,735 590,760 558,785" fill="none" stroke="#00B8CC" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- 왼쪽: 제스처 표시 -->
+  <rect x="150" y="730" width="250" height="60" rx="12" fill="#002830" stroke="#00E5FF" stroke-width="3"/>
+  <text x="275" y="768" font-family="monospace" font-size="32" font-weight="bold" fill="#00E5FF" text-anchor="middle">RU</text>
+
+  <!-- 오른쪽: 동작 표시 -->
+  <rect x="624" y="730" width="250" height="60" rx="12" fill="#002830" stroke="#00B8CC" stroke-width="3"/>
+  <text x="749" y="768" font-family="monospace" font-size="26" font-weight="bold" fill="#80F0FF" text-anchor="middle">Ctrl+T</text>
+</svg>

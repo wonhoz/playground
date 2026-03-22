@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- 골든 — 구름 실루엣 자체가 단어들로 이루어진 모습, 실루엣 패턴 -->
+  <defs>
+    <linearGradient id="bg06" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#3A2800"/>
+      <stop offset="100%" stop-color="#1A1000"/>
+    </linearGradient>
+    <filter id="glow06">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="120" fill="url(#bg06)"/>
+
+  <!-- 구름 형태를 단어 텍스트들로 직접 채운 모습 -->
+  <!-- 구름 윗 테두리 부분 단어들 (원호 따라 배치) -->
+
+  <!-- 구름 상단 왼쪽 둥근 부분 -->
+  <text x="295" y="310" font-family="Arial Black, sans-serif" font-size="52" font-weight="900" fill="#FFD700" text-anchor="middle" filter="url(#glow06)">WORD</text>
+  <!-- 구름 상단 중앙 높은 부분 -->
+  <text x="480" y="230" font-family="Arial Black, sans-serif" font-size="68" font-weight="900" fill="#FFC200" text-anchor="middle" filter="url(#glow06)">CLOUD</text>
+  <!-- 구름 상단 오른쪽 둥근 부분 -->
+  <text x="730" y="295" font-family="Arial Black, sans-serif" font-size="56" font-weight="900" fill="#FFD700" text-anchor="middle" filter="url(#glow06)">TEXT</text>
+
+  <!-- 구름 중간 층 -->
+  <text x="175" y="420" font-family="Arial, sans-serif" font-size="40" font-weight="700" fill="#FFCC00" text-anchor="middle">hello</text>
+  <text x="360" y="390" font-family="Arial, sans-serif" font-size="44" font-weight="700" fill="#FFB800" text-anchor="middle">world</text>
+  <text x="570" y="370" font-family="Arial, sans-serif" font-size="46" font-weight="700" fill="#FFCC00" text-anchor="middle">love</text>
+  <text x="780" y="400" font-family="Arial, sans-serif" font-size="40" font-weight="700" fill="#FFD700" text-anchor="middle">sky</text>
+  <text x="875" y="460" font-family="Arial, sans-serif" font-size="34" font-weight="700" fill="#FFC200" text-anchor="middle">big</text>
+
+  <!-- 구름 본체 (가장 넓은 중간 영역) -->
+  <text x="200" y="510" font-family="Arial, sans-serif" font-size="36" font-weight="600" fill="#FFB000" text-anchor="middle">data</text>
+  <text x="380" y="490" font-family="Arial, sans-serif" font-size="50" font-weight="800" fill="#FFCC00" text-anchor="middle">small</text>
+  <text x="570" y="480" font-family="Arial, sans-serif" font-size="54" font-weight="800" fill="#FFD700" text-anchor="middle">READ</text>
+  <text x="760" y="493" font-family="Arial, sans-serif" font-size="42" font-weight="700" fill="#FFBB00" text-anchor="middle">fast</text>
+  <text x="880" y="528" font-family="Arial, sans-serif" font-size="30" font-weight="600" fill="#FFA800" text-anchor="middle">art</text>
+
+  <!-- 구름 하단 넓은 부분 -->
+  <text x="250" y="590" font-family="Arial, sans-serif" font-size="42" font-weight="700" fill="#FFCC00" text-anchor="middle">list</text>
+  <text x="435" y="575" font-family="Arial, sans-serif" font-size="46" font-weight="700" fill="#FFD700" text-anchor="middle">word</text>
+  <text x="620" y="565" font-family="Arial, sans-serif" font-size="50" font-weight="700" fill="#FFC200" text-anchor="middle">key</text>
+  <text x="790" y="583" font-family="Arial, sans-serif" font-size="38" font-weight="700" fill="#FFB000" text-anchor="middle">tag</text>
+
+  <!-- 구름 맨 아래 가장자리 -->
+  <text x="340" y="645" font-family="Arial, sans-serif" font-size="36" font-weight="600" fill="#FFB800" text-anchor="middle">map</text>
+  <text x="510" y="640" font-family="Arial, sans-serif" font-size="40" font-weight="700" fill="#FFD700" text-anchor="middle">raw</text>
+  <text x="670" y="638" font-family="Arial, sans-serif" font-size="34" font-weight="600" fill="#FFCC00" text-anchor="middle">note</text>
+
+  <!-- 아주 작은 단어들 (구름 테두리 영역) -->
+  <text x="420" y="680" font-family="Arial, sans-serif" font-size="20" font-weight="500" fill="#FFAA00" text-anchor="middle" opacity="0.7">scan</text>
+  <text x="580" y="675" font-family="Arial, sans-serif" font-size="18" font-weight="400" fill="#FF9900" text-anchor="middle" opacity="0.6">hot</text>
+
+  <!-- 빛나는 별 장식 -->
+  <circle cx="512" cy="750" r="8" fill="#FFD700" opacity="0.5"/>
+  <circle cx="200" cy="680" r="5" fill="#FFCC00" opacity="0.4"/>
+  <circle cx="820" cy="670" r="5" fill="#FFD700" opacity="0.4"/>
+</svg>

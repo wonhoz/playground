@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Word.Cloud Icon Candidates — 20260322_0201</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #111318;
+    color: #e0e0e0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    min-height: 100vh;
+    padding: 40px 32px 60px;
+  }
+
+  h1 {
+    font-size: 22px;
+    font-weight: 700;
+    color: #f0f0f0;
+    margin-bottom: 6px;
+    letter-spacing: 0.02em;
+  }
+  .subtitle {
+    font-size: 13px;
+    color: #888;
+    margin-bottom: 36px;
+  }
+
+  /* ── 5열 2행 그리드 ── */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 24px;
+    max-width: 1340px;
+  }
+
+  .card {
+    background: #1a1d25;
+    border: 1px solid #2c2f3a;
+    border-radius: 14px;
+    padding: 20px 16px 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    cursor: default;
+  }
+  .card:hover {
+    transform: scale(1.06);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.55);
+    border-color: #4a4f60;
+  }
+
+  /* 메인 아이콘 미리보기 */
+  .icon-main {
+    width: 160px;
+    height: 160px;
+    object-fit: contain;
+    border-radius: 18px;
+    background: #0d0f14;
+    padding: 6px;
+    flex-shrink: 0;
+  }
+
+  /* 메타 정보 */
+  .filename {
+    font-size: 11px;
+    color: #666;
+    word-break: break-all;
+    text-align: center;
+    line-height: 1.5;
+  }
+
+  .badges {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .badge {
+    font-size: 10px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .badge.literal  { background: #1a3a5c; color: #4fc3f7; }
+  .badge.metaphor { background: #2a1e40; color: #ce93d8; }
+  .badge.hybrid   { background: #1a3a28; color: #81c784; }
+
+  .badge-color {
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 7px;
+    border-radius: 20px;
+    border: 1px solid #333;
+    color: #bbb;
+    background: #161920;
+  }
+
+  .concept {
+    font-size: 12px;
+    color: #aaa;
+    text-align: center;
+    line-height: 1.55;
+    min-height: 36px;
+  }
+
+  /* 팔레트 */
+  .palette {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .swatch {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 1px solid #333;
+    flex-shrink: 0;
+    title: attr(data-hex);
+  }
+
+  /* 크기별 미리보기 섹션 */
+  .size-section {
+    margin-top: 52px;
+    max-width: 1340px;
+  }
+  .size-section h2 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #ccc;
+    margin-bottom: 24px;
+    border-bottom: 1px solid #2a2d35;
+    padding-bottom: 10px;
+  }
+
+  .size-rows {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  .size-row {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    overflow-x: auto;
+    padding-bottom: 4px;
+  }
+  .size-label {
+    width: 56px;
+    font-size: 12px;
+    color: #666;
+    flex-shrink: 0;
+    font-variant-numeric: tabular-nums;
+  }
+  .size-icons {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .size-icons img {
+    background: #0d0f14;
+    border-radius: 6px;
+    border: 1px solid #222;
+    image-rendering: auto;
+  }
+  .size-icons .lbl {
+    font-size: 9px;
+    color: #444;
+    text-align: center;
+    margin-top: 2px;
+  }
+  .icon-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+</style>
+</head>
+<body>
+
+<h1>Word.Cloud — 아이콘 후보 (20260322_0201)</h1>
+<p class="subtitle">특정 글 속의 모든 단어들로 구름과 같은 형상의 이미지를 만들어준다는 것이 한 눈에 뚜렷하게 보이도록 디자인 · literal 3 / metaphor 4 / hybrid 3</p>
+
+<div class="grid">
+
+  <!-- 01 -->
+  <div class="card">
+    <img class="icon-main" src="icon_01_literal_sky_blue.svg" alt="icon_01">
+    <div class="badges">
+      <span class="badge literal">literal</span>
+      <span class="badge-color">하늘파랑</span>
+    </div>
+    <div class="filename">icon_01_literal_sky_blue.svg</div>
+    <div class="concept">구름 실루엣 안에 CLOUD·WORD 등 크고 작은 단어들이 빽빽하게 채워진 직접 표현</div>
+    <div class="palette">
+      <div class="swatch" style="background:#E0F4FF" title="#E0F4FF"></div>
+      <div class="swatch" style="background:#A8D8F0" title="#A8D8F0"></div>
+      <div class="swatch" style="background:#1B7EC2" title="#1B7EC2"></div>
+      <div class="swatch" style="background:#FFFFFF" title="#FFFFFF"></div>
+      <div class="swatch" style="background:#2A6FA0" title="#2A6FA0"></div>
+    </div>
+  </div>
+
+  <!-- 02 -->
+  <div class="card">
+    <img class="icon-main" src="icon_02_literal_deep_purple.svg" alt="icon_02">
+    <div class="badges">
+      <span class="badge literal">literal</span>
+      <span class="badge-color">딥퍼플</span>
+    </div>
+    <div class="filename">icon_02_literal_deep_purple.svg</div>
+    <div class="concept">텍스트 문서 → 화살표 → 구름 형태 워드클라우드로 변환되는 공간 장면</div>
+    <div class="palette">
+      <div class="swatch" style="background:#2A1550" title="#2A1550"></div>
+      <div class="swatch" style="background:#9B59B6" title="#9B59B6"></div>
+      <div class="swatch" style="background:#D7BDE2" title="#D7BDE2"></div>
+      <div class="swatch" style="background:#BB8FCE" title="#BB8FCE"></div>
+      <div class="swatch" style="background:#F0E6FF" title="#F0E6FF"></div>
+    </div>
+  </div>
+
+  <!-- 03 -->
+  <div class="card">
+    <img class="icon-main" src="icon_03_literal_sunset_orange.svg" alt="icon_03">
+    <div class="badges">
+      <span class="badge literal">literal</span>
+      <span class="badge-color">선셋오렌지</span>
+    </div>
+    <div class="filename">icon_03_literal_sunset_orange.svg</div>
+    <div class="concept">단어 빈도 → 크기 차이 직관 표현. CLOUD(대) WORD(중) hello(소) 크기 스펙트럼</div>
+    <div class="palette">
+      <div class="swatch" style="background:#FF8C42" title="#FF8C42"></div>
+      <div class="swatch" style="background:#C0392B" title="#C0392B"></div>
+      <div class="swatch" style="background:#FFEDD5" title="#FFEDD5"></div>
+      <div class="swatch" style="background:#E05A20" title="#E05A20"></div>
+      <div class="swatch" style="background:#FFD700" title="#FFD700"></div>
+    </div>
+  </div>
+
+  <!-- 04 -->
+  <div class="card">
+    <img class="icon-main" src="icon_04_metaphor_mint_emerald.svg" alt="icon_04">
+    <div class="badges">
+      <span class="badge metaphor">metaphor</span>
+      <span class="badge-color">민트에메랄드</span>
+    </div>
+    <div class="filename">icon_04_metaphor_mint_emerald.svg</div>
+    <div class="concept">구름에서 단어들이 비처럼 떨어지는 모습. 투명도 페이드로 멀리 흩어지는 단어 표현</div>
+    <div class="palette">
+      <div class="swatch" style="background:#0D4A3A" title="#0D4A3A"></div>
+      <div class="swatch" style="background:#A8F0D8" title="#A8F0D8"></div>
+      <div class="swatch" style="background:#50D0A0" title="#50D0A0"></div>
+      <div class="swatch" style="background:#70F0C0" title="#70F0C0"></div>
+      <div class="swatch" style="background:#054030" title="#054030"></div>
+    </div>
+  </div>
+
+  <!-- 05 -->
+  <div class="card">
+    <img class="icon-main" src="icon_05_metaphor_raspberry.svg" alt="icon_05">
+    <div class="badges">
+      <span class="badge metaphor">metaphor</span>
+      <span class="badge-color">라즈베리</span>
+    </div>
+    <div class="filename">icon_05_metaphor_raspberry.svg</div>
+    <div class="concept">사방에서 단어들이 중심 구름으로 모여드는 동적 화살표 장면. 대각선·동적 패턴</div>
+    <div class="palette">
+      <div class="swatch" style="background:#5A0828" title="#5A0828"></div>
+      <div class="swatch" style="background:#FF6B8A" title="#FF6B8A"></div>
+      <div class="swatch" style="background:#E91E63" title="#E91E63"></div>
+      <div class="swatch" style="background:#FF8FAA" title="#FF8FAA"></div>
+      <div class="swatch" style="background:#C2185B" title="#C2185B"></div>
+    </div>
+  </div>
+
+  <!-- 06 -->
+  <div class="card">
+    <img class="icon-main" src="icon_06_metaphor_golden.svg" alt="icon_06">
+    <div class="badges">
+      <span class="badge metaphor">metaphor</span>
+      <span class="badge-color">골든</span>
+    </div>
+    <div class="filename">icon_06_metaphor_golden.svg</div>
+    <div class="concept">구름 실루엣 자체가 단어들로 이루어진 모습. 단어가 구름 형태의 외곽선을 채움</div>
+    <div class="palette">
+      <div class="swatch" style="background:#3A2800" title="#3A2800"></div>
+      <div class="swatch" style="background:#FFD700" title="#FFD700"></div>
+      <div class="swatch" style="background:#FFC200" title="#FFC200"></div>
+      <div class="swatch" style="background:#FFB000" title="#FFB000"></div>
+      <div class="swatch" style="background:#FF6600" title="#FF6600"></div>
+    </div>
+  </div>
+
+  <!-- 07 -->
+  <div class="card">
+    <img class="icon-main" src="icon_07_metaphor_dark_steel.svg" alt="icon_07">
+    <div class="badges">
+      <span class="badge metaphor">metaphor</span>
+      <span class="badge-color">다크스틸</span>
+    </div>
+    <div class="filename">icon_07_metaphor_dark_steel.svg</div>
+    <div class="concept">TXT 문서 → 구름 변환 + 단어 빈도 척도 바. 분석·변환 도구 느낌의 기하학추상</div>
+    <div class="palette">
+      <div class="swatch" style="background:#1C2434" title="#1C2434"></div>
+      <div class="swatch" style="background:#8FA8C8" title="#8FA8C8"></div>
+      <div class="swatch" style="background:#C8D8E8" title="#C8D8E8"></div>
+      <div class="swatch" style="background:#4FC3F7" title="#4FC3F7"></div>
+      <div class="swatch" style="background:#0288D1" title="#0288D1"></div>
+    </div>
+  </div>
+
+  <!-- 08 -->
+  <div class="card">
+    <img class="icon-main" src="icon_08_hybrid_lavender.svg" alt="icon_08">
+    <div class="badges">
+      <span class="badge hybrid">hybrid</span>
+      <span class="badge-color">라벤더</span>
+    </div>
+    <div class="filename">icon_08_hybrid_lavender.svg</div>
+    <div class="concept">3겹 레이어드 구름 + 단어들. 안쪽 구름이 가장 밝고 바깥으로 갈수록 어두워짐</div>
+    <div class="palette">
+      <div class="swatch" style="background:#1E102E" title="#1E102E"></div>
+      <div class="swatch" style="background:#E8D5FF" title="#E8D5FF"></div>
+      <div class="swatch" style="background:#C0A0FF" title="#C0A0FF"></div>
+      <div class="swatch" style="background:#8E5FC0" title="#8E5FC0"></div>
+      <div class="swatch" style="background:#4A3570" title="#4A3570"></div>
+    </div>
+  </div>
+
+  <!-- 09 -->
+  <div class="card">
+    <img class="icon-main" src="icon_09_hybrid_coral.svg" alt="icon_09">
+    <div class="badges">
+      <span class="badge hybrid">hybrid</span>
+      <span class="badge-color">코랄</span>
+    </div>
+    <div class="filename">icon_09_hybrid_coral.svg</div>
+    <div class="concept">중앙 구름 + 단어 버블들이 구름 주변에 크기 차이로 떠있는 중앙심볼+기하학 패턴</div>
+    <div class="palette">
+      <div class="swatch" style="background:#4A1A0E" title="#4A1A0E"></div>
+      <div class="swatch" style="background:#FF8A70" title="#FF8A70"></div>
+      <div class="swatch" style="background:#FFB8A0" title="#FFB8A0"></div>
+      <div class="swatch" style="background:#E06050" title="#E06050"></div>
+      <div class="swatch" style="background:#FF6040" title="#FF6040"></div>
+    </div>
+  </div>
+
+  <!-- 10 -->
+  <div class="card">
+    <img class="icon-main" src="icon_10_hybrid_dark_blue_green.svg" alt="icon_10">
+    <div class="badges">
+      <span class="badge hybrid">hybrid</span>
+      <span class="badge-color">다크블루그린</span>
+    </div>
+    <div class="filename">icon_10_hybrid_dark_blue_green.svg</div>
+    <div class="concept">앱 화면 장면. 모니터 스크린 안에 워드클라우드 완성 장면 + 주변 단어들</div>
+    <div class="palette">
+      <div class="swatch" style="background:#042A2A" title="#042A2A"></div>
+      <div class="swatch" style="background:#0A6060" title="#0A6060"></div>
+      <div class="swatch" style="background:#00C8A8" title="#00C8A8"></div>
+      <div class="swatch" style="background:#008870" title="#008870"></div>
+      <div class="swatch" style="background:#4FC3F7" title="#4FC3F7"></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- 크기별 미리보기 -->
+<div class="size-section">
+  <h2>크기별 미리보기</h2>
+  <div class="size-rows">
+
+    <div class="size-row">
+      <div class="size-label">256px</div>
+      <div class="size-icons">
+        <div class="icon-wrapper"><img src="icon_01_literal_sky_blue.svg" width="256" height="256"><div class="lbl">01</div></div>
+        <div class="icon-wrapper"><img src="icon_02_literal_deep_purple.svg" width="256" height="256"><div class="lbl">02</div></div>
+        <div class="icon-wrapper"><img src="icon_03_literal_sunset_orange.svg" width="256" height="256"><div class="lbl">03</div></div>
+        <div class="icon-wrapper"><img src="icon_04_metaphor_mint_emerald.svg" width="256" height="256"><div class="lbl">04</div></div>
+        <div class="icon-wrapper"><img src="icon_05_metaphor_raspberry.svg" width="256" height="256"><div class="lbl">05</div></div>
+        <div class="icon-wrapper"><img src="icon_06_metaphor_golden.svg" width="256" height="256"><div class="lbl">06</div></div>
+        <div class="icon-wrapper"><img src="icon_07_metaphor_dark_steel.svg" width="256" height="256"><div class="lbl">07</div></div>
+        <div class="icon-wrapper"><img src="icon_08_hybrid_lavender.svg" width="256" height="256"><div class="lbl">08</div></div>
+        <div class="icon-wrapper"><img src="icon_09_hybrid_coral.svg" width="256" height="256"><div class="lbl">09</div></div>
+        <div class="icon-wrapper"><img src="icon_10_hybrid_dark_blue_green.svg" width="256" height="256"><div class="lbl">10</div></div>
+      </div>
+    </div>
+
+    <div class="size-row">
+      <div class="size-label">64px</div>
+      <div class="size-icons">
+        <div class="icon-wrapper"><img src="icon_01_literal_sky_blue.svg" width="64" height="64"><div class="lbl">01</div></div>
+        <div class="icon-wrapper"><img src="icon_02_literal_deep_purple.svg" width="64" height="64"><div class="lbl">02</div></div>
+        <div class="icon-wrapper"><img src="icon_03_literal_sunset_orange.svg" width="64" height="64"><div class="lbl">03</div></div>
+        <div class="icon-wrapper"><img src="icon_04_metaphor_mint_emerald.svg" width="64" height="64"><div class="lbl">04</div></div>
+        <div class="icon-wrapper"><img src="icon_05_metaphor_raspberry.svg" width="64" height="64"><div class="lbl">05</div></div>
+        <div class="icon-wrapper"><img src="icon_06_metaphor_golden.svg" width="64" height="64"><div class="lbl">06</div></div>
+        <div class="icon-wrapper"><img src="icon_07_metaphor_dark_steel.svg" width="64" height="64"><div class="lbl">07</div></div>
+        <div class="icon-wrapper"><img src="icon_08_hybrid_lavender.svg" width="64" height="64"><div class="lbl">08</div></div>
+        <div class="icon-wrapper"><img src="icon_09_hybrid_coral.svg" width="64" height="64"><div class="lbl">09</div></div>
+        <div class="icon-wrapper"><img src="icon_10_hybrid_dark_blue_green.svg" width="64" height="64"><div class="lbl">10</div></div>
+      </div>
+    </div>
+
+    <div class="size-row">
+      <div class="size-label">32px</div>
+      <div class="size-icons">
+        <div class="icon-wrapper"><img src="icon_01_literal_sky_blue.svg" width="32" height="32"><div class="lbl">01</div></div>
+        <div class="icon-wrapper"><img src="icon_02_literal_deep_purple.svg" width="32" height="32"><div class="lbl">02</div></div>
+        <div class="icon-wrapper"><img src="icon_03_literal_sunset_orange.svg" width="32" height="32"><div class="lbl">03</div></div>
+        <div class="icon-wrapper"><img src="icon_04_metaphor_mint_emerald.svg" width="32" height="32"><div class="lbl">04</div></div>
+        <div class="icon-wrapper"><img src="icon_05_metaphor_raspberry.svg" width="32" height="32"><div class="lbl">05</div></div>
+        <div class="icon-wrapper"><img src="icon_06_metaphor_golden.svg" width="32" height="32"><div class="lbl">06</div></div>
+        <div class="icon-wrapper"><img src="icon_07_metaphor_dark_steel.svg" width="32" height="32"><div class="lbl">07</div></div>
+        <div class="icon-wrapper"><img src="icon_08_hybrid_lavender.svg" width="32" height="32"><div class="lbl">08</div></div>
+        <div class="icon-wrapper"><img src="icon_09_hybrid_coral.svg" width="32" height="32"><div class="lbl">09</div></div>
+        <div class="icon-wrapper"><img src="icon_10_hybrid_dark_blue_green.svg" width="32" height="32"><div class="lbl">10</div></div>
+      </div>
+    </div>
+
+    <div class="size-row">
+      <div class="size-label">16px</div>
+      <div class="size-icons">
+        <div class="icon-wrapper"><img src="icon_01_literal_sky_blue.svg" width="16" height="16"><div class="lbl">01</div></div>
+        <div class="icon-wrapper"><img src="icon_02_literal_deep_purple.svg" width="16" height="16"><div class="lbl">02</div></div>
+        <div class="icon-wrapper"><img src="icon_03_literal_sunset_orange.svg" width="16" height="16"><div class="lbl">03</div></div>
+        <div class="icon-wrapper"><img src="icon_04_metaphor_mint_emerald.svg" width="16" height="16"><div class="lbl">04</div></div>
+        <div class="icon-wrapper"><img src="icon_05_metaphor_raspberry.svg" width="16" height="16"><div class="lbl">05</div></div>
+        <div class="icon-wrapper"><img src="icon_06_metaphor_golden.svg" width="16" height="16"><div class="lbl">06</div></div>
+        <div class="icon-wrapper"><img src="icon_07_metaphor_dark_steel.svg" width="16" height="16"><div class="lbl">07</div></div>
+        <div class="icon-wrapper"><img src="icon_08_hybrid_lavender.svg" width="16" height="16"><div class="lbl">08</div></div>
+        <div class="icon-wrapper"><img src="icon_09_hybrid_coral.svg" width="16" height="16"><div class="lbl">09</div></div>
+        <div class="icon-wrapper"><img src="icon_10_hybrid_dark_blue_green.svg" width="16" height="16"><div class="lbl">10</div></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>

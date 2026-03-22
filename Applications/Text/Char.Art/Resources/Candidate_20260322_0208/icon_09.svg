@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_09 | Literal | 레이어드 | 픽셀 격자: 각 셀에 명도에 따라 @#*.공백 문자가 채워짐 — 실제 ASCII 아트 알고리즘 시각화 -->
+  <!-- 색조: 밝은 아이보리/크림 배경 + 다크 차콜 텍스트 (라이트 테마) -->
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="128" fill="#F5F0E8"/>
+
+  <!-- 원본 이미지 섬네일 (좌상단) — 작은 산 사진 -->
+  <rect x="220" y="220" width="180" height="180" rx="10" fill="#B8D4E8" stroke="#888" stroke-width="3"/>
+  <!-- 하늘 -->
+  <rect x="220" y="220" width="180" height="90" rx="10" fill="#7EAEC8"/>
+  <rect x="220" y="280" width="180" height="30" fill="#7EAEC8"/>
+  <!-- 태양 -->
+  <circle cx="370" cy="255" r="20" fill="#FFE066"/>
+  <!-- 산 -->
+  <polygon points="220,400 290,300 350,340 400,290 400,400" fill="#5A8A4A"/>
+
+  <!-- 화살표 -->
+  <path d="M420 312 L480 312" stroke="#555" stroke-width="6" stroke-linecap="round"/>
+  <polygon points="478,302 500,312 478,322" fill="#555"/>
+
+  <!-- ASCII 격자 결과 (우측) -->
+  <!-- 격자 배경 -->
+  <rect x="510" y="220" width="294" height="294" rx="8" fill="#FAFAF5" stroke="#CCBBAA" stroke-width="3"/>
+
+  <!-- 격자 셀들 — 명도에 따라 문자 선택 표현 -->
+  <!-- 각 셀: 18x18px, 14열 x 14행 = 252x252 내부 -->
+  <g font-family="Courier New, monospace" font-size="16" fill="#222222">
+    <!-- Row 1 (하늘 — 밝음 → 공백/점) -->
+    <text x="515" y="243">. . . . . . . . . . . . . .</text>
+    <!-- Row 2 -->
+    <text x="515" y="262">. . . . . . . : : . . . . .</text>
+    <!-- Row 3 (태양 부분) -->
+    <text x="515" y="281">. . . . . . . * @ * . . . .</text>
+    <!-- Row 4 -->
+    <text x="515" y="300">. . . . . . : @ @ @ : . . .</text>
+    <!-- Row 5 -->
+    <text x="515" y="319">. . . . . . . * @ * . . . .</text>
+    <!-- Row 6 -->
+    <text x="515" y="338">. . . . . . . . : . . . . .</text>
+    <!-- Row 7 (산 시작) -->
+    <text x="515" y="357">. . . . . : * # . . . . . .</text>
+    <!-- Row 8 -->
+    <text x="515" y="376">. . . . : * # @ # * . . . .</text>
+    <!-- Row 9 -->
+    <text x="515" y="395">. . . . # @ @ @ @ @ # . . .</text>
+    <!-- Row 10 (산 중간) -->
+    <text x="515" y="414">. . . # @ @ @ @ @ @ @ # . .</text>
+    <!-- Row 11 -->
+    <text x="515" y="433">. . # @ @ @ @ @ @ @ @ @ # .</text>
+    <!-- Row 12 -->
+    <text x="515" y="452">. # @ @ @ @ @ @ @ @ @ @ @ #</text>
+    <!-- Row 13 -->
+    <text x="515" y="471">@@@@@@@@@@@@@@@@@@@@@@@@@@@</text>
+    <!-- Row 14 -->
+    <text x="515" y="490">@@@@@@@@@@@@@@@@@@@@@@@@@@@</text>
+  </g>
+
+  <!-- 격자 구분선 -->
+  <g stroke="#DDCCBB" stroke-width="0.5" opacity="0.5">
+    <line x1="510" y1="249" x2="804" y2="249"/>
+    <line x1="510" y1="268" x2="804" y2="268"/>
+    <line x1="510" y1="287" x2="804" y2="287"/>
+    <line x1="510" y1="306" x2="804" y2="306"/>
+    <line x1="510" y1="325" x2="804" y2="325"/>
+    <line x1="510" y1="344" x2="804" y2="344"/>
+    <line x1="510" y1="363" x2="804" y2="363"/>
+    <line x1="510" y1="382" x2="804" y2="382"/>
+    <line x1="510" y1="401" x2="804" y2="401"/>
+    <line x1="510" y1="420" x2="804" y2="420"/>
+    <line x1="510" y1="439" x2="804" y2="439"/>
+    <line x1="510" y1="458" x2="804" y2="458"/>
+    <line x1="510" y1="477" x2="804" y2="477"/>
+  </g>
+
+  <!-- 하단: 문자 팔레트 바 -->
+  <rect x="220" y="580" width="584" height="80" rx="12" fill="#EDE8DC" stroke="#CCBBAA" stroke-width="3"/>
+  <text x="258" y="610" font-family="Courier New, monospace" font-size="15" fill="#555">명도 낮음</text>
+  <text x="258" y="640" font-family="Courier New, monospace" font-size="22" fill="#111">@  #  *  :  .  &apos; </text>
+  <text x="590" y="640" font-family="Courier New, monospace" font-size="22" fill="#666">  (공백)</text>
+  <text x="690" y="610" font-family="Courier New, monospace" font-size="15" fill="#555">명도 높음</text>
+
+  <!-- 팔레트 내 그라디언트 스케일 -->
+  <defs>
+    <linearGradient id="brightnessGrad09" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#111111"/>
+      <stop offset="100%" stop-color="#F0F0F0"/>
+    </linearGradient>
+  </defs>
+  <rect x="220" y="670" width="584" height="20" rx="6" fill="url(#brightnessGrad09)" opacity="0.5"/>
+
+  <!-- 앱 이름 레이블 -->
+  <text x="512" y="780" font-family="Courier New, monospace" font-size="32" fill="#333" text-anchor="middle" letter-spacing="4">CHAR ART</text>
+  <text x="512" y="815" font-family="Courier New, monospace" font-size="18" fill="#888" text-anchor="middle">image → text art converter</text>
+</svg>

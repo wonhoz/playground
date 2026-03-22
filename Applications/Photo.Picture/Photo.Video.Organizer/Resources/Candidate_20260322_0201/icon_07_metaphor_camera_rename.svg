@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <clipPath id="bg-clip-07">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+    <linearGradient id="bg-grad-07" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#8B0000"/>
+      <stop offset="100%" stop-color="#5C0000"/>
+    </linearGradient>
+    <radialGradient id="lens-grad-07" cx="40%" cy="35%" r="60%">
+      <stop offset="0%" stop-color="#666666"/>
+      <stop offset="60%" stop-color="#222222"/>
+      <stop offset="100%" stop-color="#111111"/>
+    </radialGradient>
+    <linearGradient id="body-grad-07" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FF4444"/>
+      <stop offset="100%" stop-color="#CC2222"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg-grad-07)"/>
+
+  <!-- 카메라 본체 (중앙 상단) -->
+  <rect x="200" y="220" width="624" height="360" rx="40" fill="url(#body-grad-07)" stroke="#FF6666" stroke-width="4"/>
+  <!-- 카메라 상단 돌출부 (뷰파인더 영역) -->
+  <rect x="340" y="180" width="200" height="70" rx="20" fill="#CC2222" stroke="#FF6666" stroke-width="3"/>
+  <!-- 뷰파인더 창 -->
+  <rect x="370" y="196" width="140" height="38" rx="8" fill="#440000"/>
+
+  <!-- 플래시 -->
+  <rect x="240" y="236" width="60" height="40" rx="8" fill="#FF8888"/>
+  <circle cx="270" cy="256" r="14" fill="#FFCCCC"/>
+
+  <!-- 셔터 버튼 -->
+  <circle cx="740" cy="252" r="34" fill="#CC1111" stroke="#FF4444" stroke-width="3"/>
+  <circle cx="740" cy="252" r="20" fill="#AA0000"/>
+
+  <!-- 카메라 렌즈 (중앙) -->
+  <circle cx="512" cy="400" r="130" fill="#333333" stroke="#FF4444" stroke-width="5"/>
+  <circle cx="512" cy="400" r="100" fill="url(#lens-grad-07)"/>
+  <circle cx="512" cy="400" r="60" fill="#111111"/>
+  <circle cx="512" cy="400" r="30" fill="#1A1A1A"/>
+  <!-- 렌즈 반사 -->
+  <ellipse cx="490" cy="378" rx="20" ry="14" fill="#444444" opacity="0.8"/>
+
+  <!-- 하단: 파일명 변환 표시 -->
+  <rect x="140" y="640" width="350" height="72" rx="14" fill="#440000" stroke="#FF4444" stroke-width="2"/>
+  <text x="315" y="682" text-anchor="middle" font-family="'Courier New', monospace" font-size="26" fill="#FF9999">IMG_0001.jpg</text>
+  <!-- EXIF 태그 아이콘 -->
+  <circle cx="315" cy="640" r="20" fill="#CC1111" stroke="#FF4444" stroke-width="2"/>
+  <text x="315" y="648" text-anchor="middle" font-family="Arial" font-size="20" font-weight="700" fill="white">i</text>
+
+  <!-- 화살표 -->
+  <path d="M 506 670 L 546 670 L 546 648 L 590 676 L 546 704 L 546 682 L 506 682 Z"
+        fill="#FF6600" stroke="#CC4400" stroke-width="2" stroke-linejoin="round"/>
+
+  <!-- 변환 후 파일명 -->
+  <rect x="600" y="640" width="290" height="72" rx="14" fill="#660000" stroke="#FF6666" stroke-width="2"/>
+  <text x="745" y="668" text-anchor="middle" font-family="'Courier New', monospace" font-size="22" fill="#FFB0B0" font-weight="700">2024-07-15</text>
+  <text x="745" y="700" text-anchor="middle" font-family="'Courier New', monospace" font-size="22" fill="#FFB0B0">_vacation.jpg</text>
+
+  <!-- 하단 메타데이터 표시 -->
+  <rect x="140" y="758" width="748" height="70" rx="14" fill="#330000" stroke="#884444" stroke-width="1"/>
+  <text x="180" y="788" font-family="'Segoe UI', Arial, sans-serif" font-size="24" fill="#FF7777">EXIF</text>
+  <text x="260" y="788" font-family="'Courier New', monospace" font-size="24" fill="#FFAAAA">2024:07:15 · GPS 35.6892,139.6917 · f/1.8</text>
+  <text x="180" y="818" font-family="'Segoe UI', Arial, sans-serif" font-size="24" fill="#FF7777">→</text>
+  <text x="214" y="818" font-family="'Courier New', monospace" font-size="24" fill="#FF9999" font-weight="700">2024-07-15_vacation.jpg</text>
+
+  <!-- 하단 레이블 -->
+  <text x="512" y="946" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-size="36" font-weight="700" fill="#FF6666">Photo &amp; Video Organizer</text>
+</svg>

@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="180" fill="#0D2A3A"/>
+
+  <!-- 브라우저 창 (메인 오브젝트) -->
+  <rect x="140" y="160" width="744" height="560" rx="18" fill="#0E3D52"/>
+  <rect x="140" y="160" width="744" height="70" rx="18" fill="#0A7EA4"/>
+  <!-- 타이틀바 하단 직선 커버 -->
+  <rect x="140" y="208" width="744" height="22" fill="#0A7EA4"/>
+
+  <!-- URL 바 -->
+  <rect x="220" y="178" width="480" height="34" rx="17" fill="#052F40"/>
+  <text x="460" y="201" font-family="monospace" font-size="18" fill="#4DD9F5" text-anchor="middle">https://example.com</text>
+
+  <!-- 트래픽 라이트 버튼 -->
+  <circle cx="168" cy="195" r="10" fill="#FF5F57"/>
+  <circle cx="196" cy="195" r="10" fill="#FEBC2E"/>
+  <circle cx="224" cy="195" r="10" fill="#28C840"/>
+
+  <!-- 웹페이지 긴 스크롤 콘텐츠 -->
+  <rect x="160" y="250" width="704" height="440" rx="6" fill="#0A2A38"/>
+  <!-- 헤더 이미지 영역 -->
+  <rect x="180" y="268" width="664" height="120" rx="6" fill="#0D4060"/>
+  <rect x="180" y="268" width="664" height="120" rx="6" fill="url(#hdr)"/>
+  <!-- 텍스트 줄들 -->
+  <rect x="180" y="408" width="420" height="16" rx="4" fill="#0A5F80"/>
+  <rect x="180" y="434" width="580" height="12" rx="4" fill="#0A4A60"/>
+  <rect x="180" y="456" width="540" height="12" rx="4" fill="#0A4A60"/>
+  <rect x="180" y="478" width="500" height="12" rx="4" fill="#0A4A60"/>
+  <rect x="180" y="510" width="350" height="12" rx="4" fill="#0A3A50"/>
+  <rect x="180" y="532" width="500" height="12" rx="4" fill="#0A3A50"/>
+  <rect x="180" y="554" width="460" height="12" rx="4" fill="#0A3A50"/>
+  <rect x="180" y="580" width="580" height="12" rx="4" fill="#0A3050"/>
+  <rect x="180" y="602" width="400" height="12" rx="4" fill="#0A3050"/>
+  <rect x="180" y="624" width="520" height="12" rx="4" fill="#0A3050"/>
+
+  <!-- 카메라 셔터 오버레이 (우하단) -->
+  <circle cx="800" cy="720" r="110" fill="#00B8D9" opacity="0.15"/>
+  <circle cx="800" cy="720" r="90" fill="none" stroke="#00D8FF" stroke-width="8"/>
+  <!-- 셔터 블레이드 6개 -->
+  <g transform="translate(800,720)">
+    <ellipse cx="0" cy="-50" rx="18" ry="38" fill="#00D8FF" opacity="0.9" transform="rotate(0)"/>
+    <ellipse cx="0" cy="-50" rx="18" ry="38" fill="#00D8FF" opacity="0.9" transform="rotate(60)"/>
+    <ellipse cx="0" cy="-50" rx="18" ry="38" fill="#00D8FF" opacity="0.9" transform="rotate(120)"/>
+    <ellipse cx="0" cy="-50" rx="18" ry="38" fill="#00D8FF" opacity="0.9" transform="rotate(180)"/>
+    <ellipse cx="0" cy="-50" rx="18" ry="38" fill="#00D8FF" opacity="0.9" transform="rotate(240)"/>
+    <ellipse cx="0" cy="-50" rx="18" ry="38" fill="#00D8FF" opacity="0.9" transform="rotate(300)"/>
+    <circle cx="0" cy="0" r="22" fill="#052F40"/>
+  </g>
+
+  <!-- 스크린샷 저장 화살표 (우측) -->
+  <line x1="880" y1="620" x2="880" y2="680" stroke="#4DD9F5" stroke-width="10" stroke-linecap="round"/>
+  <polyline points="858,662 880,688 902,662" fill="none" stroke="#4DD9F5" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <defs>
+    <linearGradient id="hdr" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#0A5F80"/>
+      <stop offset="100%" stop-color="#0D7AA0"/>
+    </linearGradient>
+  </defs>
+</svg>

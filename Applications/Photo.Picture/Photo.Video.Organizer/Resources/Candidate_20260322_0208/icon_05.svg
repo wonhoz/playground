@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_05 | Hybrid / 실루엣·캐릭터 | 카메라 실루엣 + EXIF 코드 텍스트 채움 -->
+  <!-- 컨셉: 카메라 실루엣 안에 EXIF 날짜/파일명 코드가 가득 채워진 모습 -->
+  <!-- 색조: 산호빛 오렌지 배경 + 화이트 실루엣 + 다크 텍스트 -->
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="160" fill="#FF6B35"/>
+
+  <!-- 배경 패턴 (희미한 파일 아이콘들) -->
+  <g opacity="0.12" fill="white">
+    <rect x="80" y="80" width="56" height="70" rx="6"/>
+    <rect x="888" y="80" width="56" height="70" rx="6"/>
+    <rect x="80" y="874" width="56" height="70" rx="6"/>
+    <rect x="888" y="874" width="56" height="70" rx="6"/>
+  </g>
+
+  <!-- 카메라 실루엣 - 흰색 채움 -->
+  <!-- 카메라 바디 메인 -->
+  <rect x="162" y="330" width="700" height="420" rx="46" fill="white" opacity="0.97"/>
+  <!-- 카메라 상단 뷰파인더 -->
+  <rect x="270" y="272" width="200" height="70" rx="20" fill="white" opacity="0.97"/>
+  <!-- 플래시 마운트 -->
+  <rect x="554" y="286" width="80" height="42" rx="10" fill="white" opacity="0.97"/>
+  <!-- 셔터 버튼 -->
+  <circle cx="680" cy="300" r="38" fill="white" opacity="0.97"/>
+  <!-- 렌즈 링 -->
+  <circle cx="400" cy="540" r="155" fill="#FF6B35" opacity="0.4"/>
+  <circle cx="400" cy="540" r="138" fill="white" opacity="0.97"/>
+  <circle cx="400" cy="540" r="108" fill="#FF6B35" opacity="0.35"/>
+  <circle cx="400" cy="540" r="90" fill="white" opacity="0.97"/>
+  <!-- 렌즈 중심 -->
+  <circle cx="400" cy="540" r="60" fill="#FF6B35" opacity="0.6"/>
+  <circle cx="400" cy="540" r="36" fill="#4A1500" opacity="0.9"/>
+  <ellipse cx="388" cy="526" rx="14" ry="10" fill="white" opacity="0.3"/>
+
+  <!-- 카메라 바디 안 EXIF 코드 텍스트 (우측 공간) -->
+  <clipPath id="bodyClip">
+    <rect x="162" y="330" width="700" height="420" rx="46"/>
+  </clipPath>
+  <g clip-path="url(#bodyClip)" font-family="Consolas,monospace" font-size="15" fill="#C0392B" opacity="0.7">
+    <text x="570" y="380">DateTimeOriginal</text>
+    <text x="570" y="402">2024:03:15 09:42:11</text>
+    <text x="570" y="424">Make: Canon</text>
+    <text x="570" y="446">Model: EOS R5</text>
+    <text x="570" y="468">ISO: 400</text>
+    <text x="570" y="490">F/2.8  1/500s</text>
+    <text x="570" y="512">GPS: 37.5665N</text>
+    <text x="570" y="534">126.9780E</text>
+    <text x="570" y="556">Width: 8192px</text>
+    <text x="570" y="578">Height: 5464px</text>
+    <text x="570" y="600">Orientation: 1</text>
+    <text x="570" y="622">Flash: Off</text>
+    <text x="570" y="644">FocalLength: 50mm</text>
+    <text x="570" y="666">WhiteBalance: Auto</text>
+    <text x="570" y="688">ExposureBias: 0</text>
+    <text x="570" y="710">MeteringMode: Multi</text>
+  </g>
+
+  <!-- 출력 파일명 강조 배너 -->
+  <rect x="200" y="770" width="624" height="76" rx="14" fill="#4A1500" opacity="0.9"/>
+  <!-- 이름변경 화살표 -->
+  <text x="234" y="800" font-family="Consolas,monospace" font-size="14" fill="#FF9966">IMG_9821.jpg</text>
+  <text x="352" y="806" font-family="Arial" font-size="26" fill="#FF6B35">⟶</text>
+  <text x="400" y="800" font-family="Consolas,monospace" font-size="14" fill="#FFFFFF" font-weight="bold">20240315_094211</text>
+  <text x="400" y="820" font-family="Consolas,monospace" font-size="14" fill="#FFFFFF" font-weight="bold">_IMG_001.jpg</text>
+
+  <!-- 상단 배지 - "Batch Rename" -->
+  <rect x="630" y="168" width="234" height="58" rx="12" fill="#4A1500" opacity="0.85"/>
+  <text x="747" y="194" font-family="Arial,sans-serif" font-size="17" fill="white" text-anchor="middle" font-weight="bold">Batch</text>
+  <text x="747" y="216" font-family="Arial,sans-serif" font-size="17" fill="#FFB380" text-anchor="middle">Rename</text>
+</svg>

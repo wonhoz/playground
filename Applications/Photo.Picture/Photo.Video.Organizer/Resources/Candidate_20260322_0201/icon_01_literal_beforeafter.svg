@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <clipPath id="bg-clip-01">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+    <linearGradient id="bg-grad-01" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FF6B35"/>
+      <stop offset="100%" stop-color="#FF4500"/>
+    </linearGradient>
+    <linearGradient id="card-grad-01" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFF3ED"/>
+      <stop offset="100%" stop-color="#FFE0CC"/>
+    </linearGradient>
+    <linearGradient id="arrow-grad-01" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#FFD700"/>
+      <stop offset="100%" stop-color="#FFA500"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg-grad-01)"/>
+
+  <!-- 상단 BEFORE 카드 -->
+  <rect x="100" y="180" width="420" height="240" rx="18" fill="url(#card-grad-01)" clip-path="url(#bg-clip-01)"/>
+  <rect x="100" y="180" width="420" height="52" rx="18" fill="#E8C4A8"/>
+  <rect x="100" y="214" width="420" height="18" fill="#E8C4A8"/>
+  <!-- BEFORE 카드 아이콘 영역 -->
+  <rect x="122" y="196" width="36" height="28" rx="4" fill="#CC6633"/>
+  <!-- BEFORE 파일명 -->
+  <text x="520" y="274" text-anchor="end" font-family="'Courier New', monospace" font-size="44" font-weight="700" fill="#CC4400">IMG_0001.jpg</text>
+  <text x="520" y="326" text-anchor="end" font-family="'Courier New', monospace" font-size="44" font-weight="700" fill="#CC4400">IMG_0002.jpg</text>
+  <text x="520" y="378" text-anchor="end" font-family="'Courier New', monospace" font-size="44" font-weight="700" fill="#CC4400">IMG_0003.jpg</text>
+
+  <!-- 큰 변환 화살표 -->
+  <path d="M 280 450 L 280 530 L 220 530 L 512 660 L 804 530 L 744 530 L 744 450 Z"
+        fill="url(#arrow-grad-01)" stroke="#FF8C00" stroke-width="4" stroke-linejoin="round"/>
+
+  <!-- 하단 AFTER 카드 -->
+  <rect x="100" y="690" width="824" height="230" rx="18" fill="url(#card-grad-01)"/>
+  <rect x="100" y="690" width="824" height="52" rx="18" fill="#B8E4C0"/>
+  <rect x="100" y="724" width="824" height="18" fill="#B8E4C0"/>
+  <!-- AFTER 파일명 -->
+  <text x="138" y="788" font-family="'Courier New', monospace" font-size="38" font-weight="700" fill="#1A7A3A">2024-07-15_도쿄.jpg</text>
+  <text x="138" y="836" font-family="'Courier New', monospace" font-size="38" font-weight="700" fill="#1A7A3A">2024-07-16_후지산.jpg</text>
+  <text x="138" y="884" font-family="'Courier New', monospace" font-size="38" font-weight="700" fill="#1A7A3A">2024-07-17_교토.jpg</text>
+</svg>

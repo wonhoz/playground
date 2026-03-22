@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_05: hybrid — 트로피 + 성조기 배경 패턴 -->
+  <defs>
+    <linearGradient id="bg5" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#B71C1C"/>
+      <stop offset="50%" stop-color="#880E4F"/>
+      <stop offset="100%" stop-color="#4A148C"/>
+    </linearGradient>
+    <linearGradient id="trophy5" x1="20%" y1="0%" x2="80%" y2="100%">
+      <stop offset="0%" stop-color="#FFF176"/>
+      <stop offset="40%" stop-color="#FFD600"/>
+      <stop offset="100%" stop-color="#F9A825"/>
+    </linearGradient>
+    <linearGradient id="trophyShine" x1="20%" y1="10%" x2="40%" y2="40%">
+      <stop offset="0%" stop-color="#FFFFFF99"/>
+      <stop offset="100%" stop-color="#FFFFFF00"/>
+    </linearGradient>
+    <filter id="glow5">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <clipPath id="bgClip5">
+      <rect width="1024" height="1024" rx="180"/>
+    </clipPath>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1024" height="1024" rx="180" fill="url(#bg5)"/>
+
+  <!-- Stars-and-stripes pattern in background (simplified) -->
+  <g clip-path="url(#bgClip5)" opacity="0.18">
+    <!-- Stripes (alternating) -->
+    <rect x="0" y="0" width="1024" height="79" fill="#FFFFFF"/>
+    <rect x="0" y="158" width="1024" height="79" fill="#FFFFFF"/>
+    <rect x="0" y="316" width="1024" height="79" fill="#FFFFFF"/>
+    <rect x="0" y="474" width="1024" height="79" fill="#FFFFFF"/>
+    <rect x="0" y="632" width="1024" height="79" fill="#FFFFFF"/>
+    <rect x="0" y="790" width="1024" height="79" fill="#FFFFFF"/>
+    <rect x="0" y="948" width="1024" height="79" fill="#FFFFFF"/>
+    <!-- Blue canton -->
+    <rect x="0" y="0" width="420" height="425" fill="#1565C0"/>
+    <!-- Stars grid (5x4 simplified dots) -->
+    <g fill="#FFFFFF">
+      <circle cx="48" cy="40" r="14"/><circle cx="132" cy="40" r="14"/><circle cx="216" cy="40" r="14"/>
+      <circle cx="300" cy="40" r="14"/><circle cx="384" cy="40" r="14"/>
+      <circle cx="48" cy="120" r="14"/><circle cx="132" cy="120" r="14"/><circle cx="216" cy="120" r="14"/>
+      <circle cx="300" cy="120" r="14"/><circle cx="384" cy="120" r="14"/>
+      <circle cx="48" cy="200" r="14"/><circle cx="132" cy="200" r="14"/><circle cx="216" cy="200" r="14"/>
+      <circle cx="300" cy="200" r="14"/><circle cx="384" cy="200" r="14"/>
+      <circle cx="48" cy="280" r="14"/><circle cx="132" cy="280" r="14"/><circle cx="216" cy="280" r="14"/>
+      <circle cx="300" cy="280" r="14"/><circle cx="384" cy="280" r="14"/>
+      <circle cx="48" cy="360" r="14"/><circle cx="132" cy="360" r="14"/><circle cx="216" cy="360" r="14"/>
+      <circle cx="300" cy="360" r="14"/><circle cx="384" cy="360" r="14"/>
+    </g>
+  </g>
+
+  <!-- Trophy cup body -->
+  <!-- Cup main shape -->
+  <path d="M 362,220 Q 340,420 380,500 L 430,520 L 430,580 L 370,600 L 370,640 L 654,640 L 654,600 L 594,580 L 594,520 L 644,500 Q 684,420 662,220 Z"
+        fill="url(#trophy5)" filter="url(#glow5)"/>
+
+  <!-- Trophy handles (left and right arcs) -->
+  <path d="M 365,270 Q 280,300 285,410 Q 290,460 362,460" fill="none" stroke="url(#trophy5)" stroke-width="36" stroke-linecap="round"/>
+  <path d="M 659,270 Q 744,300 739,410 Q 734,460 662,460" fill="none" stroke="url(#trophy5)" stroke-width="36" stroke-linecap="round"/>
+
+  <!-- Trophy shine overlay -->
+  <path d="M 400,240 Q 390,360 405,450 L 445,465 L 445,240 Z"
+        fill="url(#trophyShine)" opacity="0.6"/>
+
+  <!-- Star on trophy -->
+  <text x="512" y="460" font-family="Arial, sans-serif" font-size="120" fill="#FFFFFF" text-anchor="middle" opacity="0.85">★</text>
+
+  <!-- Base stem and stand -->
+  <rect x="468" y="640" width="88" height="30" rx="6" fill="#F9A825"/>
+  <rect x="390" y="670" width="244" height="38" rx="12" fill="#F9A825"/>
+
+  <!-- Score badges below trophy -->
+  <g filter="url(#glow5)">
+    <!-- Trophy label -->
+    <rect x="362" y="730" width="300" height="64" rx="16" fill="#FFD600"/>
+    <text x="512" y="775" font-family="Arial Black, sans-serif" font-size="38" font-weight="900"
+          fill="#4A148C" text-anchor="middle">GEO QUIZ</text>
+  </g>
+
+  <!-- Rank indicators -->
+  <text x="280" y="860" font-family="Arial, sans-serif" font-size="52" text-anchor="middle">🏆</text>
+  <text x="400" y="860" font-family="Arial, sans-serif" font-size="52" text-anchor="middle">🥈</text>
+  <text x="520" y="860" font-family="Arial, sans-serif" font-size="52" text-anchor="middle">🥉</text>
+  <text x="640" y="860" font-family="Arial, sans-serif" font-size="52" text-anchor="middle">📝</text>
+  <text x="760" y="860" font-family="Arial, sans-serif" font-size="52" text-anchor="middle">💀</text>
+</svg>

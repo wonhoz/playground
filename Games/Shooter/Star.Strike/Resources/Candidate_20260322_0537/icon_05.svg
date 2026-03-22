@@ -1,0 +1,108 @@
+<!-- icon_05 | Hybrid | 대각선·동적 | 플레이어 우주선 대각선 돌진 + 총알 연사 궤적 -->
+<!-- 색조: 일렉트릭 퍼플 + 핫 핑크 + 딥 네이비 -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg05" cx="30%" cy="70%" r="70%">
+      <stop offset="0%" stop-color="#0E0620"/>
+      <stop offset="100%" stop-color="#040210"/>
+    </radialGradient>
+    <linearGradient id="shipGrad05" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#CC44FF"/>
+      <stop offset="100%" stop-color="#7700CC"/>
+    </linearGradient>
+    <filter id="motionBlur05" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="4 1" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="1024" height="1024" rx="120" fill="url(#bg05)"/>
+
+  <!-- Star streaks (motion blur effect of stars passing by) -->
+  <rect x="180" y="200" width="60" height="2" rx="1" fill="#FFFFFF" opacity="0.4"/>
+  <rect x="220" y="310" width="90" height="2" rx="1" fill="#FFFFFF" opacity="0.35"/>
+  <rect x="150" y="430" width="70" height="2" rx="1" fill="#FFFFFF" opacity="0.3"/>
+  <rect x="600" y="180" width="80" height="2" rx="1" fill="#FFFFFF" opacity="0.4"/>
+  <rect x="680" y="290" width="110" height="2" rx="1" fill="#FFFFFF" opacity="0.35"/>
+  <rect x="640" y="420" width="75" height="2" rx="1" fill="#FFFFFF" opacity="0.3"/>
+  <rect x="750" y="540" width="90" height="2" rx="1" fill="#FFFFFF" opacity="0.3"/>
+  <rect x="200" y="600" width="65" height="2" rx="1" fill="#FFFFFF" opacity="0.25"/>
+  <rect x="160" y="720" width="85" height="2" rx="1" fill="#FFFFFF" opacity="0.2"/>
+  <rect x="720" y="700" width="100" height="2" rx="1" fill="#FFFFFF" opacity="0.25"/>
+  <rect x="840" y="400" width="55" height="2" rx="1" fill="#FFFFFF" opacity="0.3"/>
+
+  <!-- Motion trail of ship (fading copies going bottom-right to top-left) -->
+  <!-- Trail 1 (farthest, most faded) -->
+  <g transform="translate(700,680) rotate(-40)" opacity="0.12">
+    <polygon points="0,-80 -55,60 0,30 55,60" fill="#CC44FF"/>
+    <polygon points="-55,60 -100,90 -70,60 -55,40" fill="#7700CC"/>
+    <polygon points="55,60 100,90 70,60 55,40" fill="#7700CC"/>
+  </g>
+  <!-- Trail 2 -->
+  <g transform="translate(620,600) rotate(-40)" opacity="0.2">
+    <polygon points="0,-80 -55,60 0,30 55,60" fill="#CC44FF"/>
+    <polygon points="-55,60 -100,90 -70,60 -55,40" fill="#7700CC"/>
+    <polygon points="55,60 100,90 70,60 55,40" fill="#7700CC"/>
+  </g>
+  <!-- Trail 3 -->
+  <g transform="translate(545,525) rotate(-40)" opacity="0.32">
+    <polygon points="0,-80 -55,60 0,30 55,60" fill="#CC44FF"/>
+    <polygon points="-55,60 -100,90 -70,60 -55,40" fill="#7700CC"/>
+    <polygon points="55,60 100,90 70,60 55,40" fill="#7700CC"/>
+  </g>
+
+  <!-- Bullet trails (diagonal, going upper-left direction) -->
+  <!-- Multiple bullets at different positions -->
+  <rect x="290" y="290" width="7" height="130" rx="3" fill="#FF44CC" opacity="0.85"
+        transform="rotate(-40 326 355)"/>
+  <rect x="310" y="260" width="5" height="100" rx="2" fill="#FF88EE" opacity="0.6"
+        transform="rotate(-40 335 310)"/>
+  <rect x="268" y="320" width="7" height="130" rx="3" fill="#FF44CC" opacity="0.75"
+        transform="rotate(-40 302 385)"/>
+  <rect x="248" y="350" width="5" height="110" rx="2" fill="#FF88EE" opacity="0.55"
+        transform="rotate(-40 275 405)"/>
+  <rect x="330" y="230" width="7" height="130" rx="3" fill="#FF44CC" opacity="0.7"
+        transform="rotate(-40 364 295)"/>
+
+  <!-- Explosion at hit point (upper-left) -->
+  <circle cx="240" cy="260" r="80" fill="#FF44CC" opacity="0.15"/>
+  <circle cx="240" cy="260" r="50" fill="#FFB0E8" opacity="0.2"/>
+  <circle cx="240" cy="260" r="28" fill="#FFFFFF" opacity="0.45"/>
+  <!-- Explosion fragments -->
+  <polygon points="240,200 248,232 240,228 232,232" fill="#FF44CC" opacity="0.8"/>
+  <polygon points="290,240 258,248 260,240 258,232" fill="#FF44CC" opacity="0.8"/>
+  <polygon points="240,310 248,278 240,282 232,278" fill="#FF44CC" opacity="0.7"/>
+  <polygon points="190,240 222,248 220,240 222,232" fill="#FF44CC" opacity="0.8"/>
+  <polygon points="276,210 260,234 256,230 260,225" fill="#FFB0E8" opacity="0.7"/>
+  <polygon points="276,290 260,266 256,270 260,275" fill="#FFB0E8" opacity="0.7"/>
+  <polygon points="204,210 220,234 224,230 220,225" fill="#FFB0E8" opacity="0.7"/>
+  <polygon points="204,290 220,266 224,270 220,275" fill="#FFB0E8" opacity="0.7"/>
+
+  <!-- Main player ship (diagonal, upper-left direction) -->
+  <g transform="translate(460,540) rotate(-40)" filter="url(#motionBlur05)">
+    <!-- Wings -->
+    <polygon points="-68,70 -120,110 -88,70 -68,48" fill="#5500AA"/>
+    <polygon points="68,70 120,110 88,70 68,48" fill="#5500AA"/>
+    <!-- Main body -->
+    <polygon points="0,-90 -60,70 0,40 60,70" fill="url(#shipGrad05)"/>
+    <!-- Cockpit -->
+    <polygon points="0,-90 -32,20 0,10 32,20" fill="#DD88FF"/>
+    <!-- Cockpit glass -->
+    <ellipse cx="0" cy="-24" rx="14" ry="22" fill="#FFFFFF" opacity="0.75"/>
+    <!-- Wing tip glows -->
+    <ellipse cx="-116" cy="108" rx="14" ry="7" fill="#FF44CC" opacity="0.8"/>
+    <ellipse cx="116" cy="108" rx="14" ry="7" fill="#FF44CC" opacity="0.8"/>
+    <!-- Engine glow -->
+    <ellipse cx="-36" cy="72" rx="14" ry="8" fill="#FF6600" opacity="0.85"/>
+    <ellipse cx="36" cy="72" rx="14" ry="8" fill="#FF6600" opacity="0.85"/>
+    <!-- Engine fire -->
+    <polygon points="-43,78 -29,78 -32,130 -40,130" fill="#FF9900" opacity="0.6"/>
+    <polygon points="29,78 43,78 40,130 32,130" fill="#FF9900" opacity="0.6"/>
+  </g>
+
+  <!-- Game title overlay -->
+  <text x="512" y="870" font-family="'Arial Black', sans-serif" font-size="62" font-weight="900"
+        fill="#CC44FF" text-anchor="middle" letter-spacing="6" opacity="0.9">STAR STRIKE</text>
+  <!-- Subtitle -->
+  <text x="512" y="920" font-family="'Courier New', monospace" font-size="28"
+        fill="#FF88EE" text-anchor="middle" letter-spacing="8" opacity="0.7">RAPID  FIRE</text>
+</svg>

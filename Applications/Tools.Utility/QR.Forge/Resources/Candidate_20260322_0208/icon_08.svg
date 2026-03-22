@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_08 | Hybrid | 레이어드 | 다양한 콘텐츠 타입(URL/WiFi/vCard)이 QR로 수렴 | 라임 + 다크 -->
+
+  <defs>
+    <linearGradient id="bgGrad08" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0A1A00"/>
+      <stop offset="100%" stop-color="#0F2200"/>
+    </linearGradient>
+    <linearGradient id="arrow08" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#76FF03" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#76FF03" stop-opacity="1"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="180" fill="url(#bgGrad08)"/>
+
+  <!-- Layer 2: 좌측 입력 타입 아이콘 3개 -->
+
+  <!-- URL 아이콘 (상단 좌) -->
+  <g transform="translate(130, 210)">
+    <rect width="200" height="120" rx="16" fill="#1A3300" stroke="#76FF03" stroke-width="3"/>
+    <!-- 링크 체인 심볼 -->
+    <rect x="28"  y="44" width="64" height="32" rx="16" fill="none" stroke="#76FF03" stroke-width="8"/>
+    <rect x="108" y="44" width="64" height="32" rx="16" fill="none" stroke="#76FF03" stroke-width="8"/>
+    <line x1="88" y1="60" x2="112" y2="60" stroke="#76FF03" stroke-width="8" stroke-linecap="round"/>
+    <text x="100" y="108" font-family="monospace" font-size="20" fill="#76FF03" text-anchor="middle">URL</text>
+  </g>
+
+  <!-- WiFi 아이콘 (중간 좌) -->
+  <g transform="translate(130, 452)">
+    <rect width="200" height="120" rx="16" fill="#1A3300" stroke="#AEEA00" stroke-width="3"/>
+    <!-- WiFi 아크 -->
+    <path d="M100 90 L100 70" stroke="#AEEA00" stroke-width="8" stroke-linecap="round"/>
+    <path d="M70 80 Q100 50 130 80" fill="none" stroke="#AEEA00" stroke-width="7" stroke-linecap="round"/>
+    <path d="M48 62 Q100 15 152 62" fill="none" stroke="#AEEA00" stroke-width="7" stroke-linecap="round"/>
+    <path d="M28 46 Q100 -10 172 46" fill="none" stroke="#AEEA00" stroke-width="6" stroke-linecap="round"/>
+    <text x="100" y="108" font-family="monospace" font-size="20" fill="#AEEA00" text-anchor="middle">WiFi</text>
+  </g>
+
+  <!-- vCard 아이콘 (하단 좌) -->
+  <g transform="translate(130, 694)">
+    <rect width="200" height="120" rx="16" fill="#1A3300" stroke="#B2FF59" stroke-width="3"/>
+    <!-- 사람 실루엣 -->
+    <circle cx="70" cy="44" r="20" fill="#B2FF59"/>
+    <path d="M30 100 Q30 72 70 72 Q110 72 110 100" fill="#B2FF59"/>
+    <!-- 텍스트 줄 -->
+    <rect x="118" y="34" width="60" height="10" rx="5" fill="#B2FF59" opacity="0.7"/>
+    <rect x="118" y="52" width="48" height="10" rx="5" fill="#B2FF59" opacity="0.5"/>
+    <text x="100" y="113" font-family="monospace" font-size="18" fill="#B2FF59" text-anchor="middle">vCard</text>
+  </g>
+
+  <!-- 수렴 화살표 3개 -->
+  <path d="M340 270 Q520 290 570 440" fill="none" stroke="url(#arrow08)" stroke-width="12" stroke-linecap="round"/>
+  <path d="M340 512 L570 512" fill="none" stroke="url(#arrow08)" stroke-width="12" stroke-linecap="round"/>
+  <path d="M340 754 Q520 730 570 584" fill="none" stroke="url(#arrow08)" stroke-width="12" stroke-linecap="round"/>
+  <!-- 화살표 헤드 -->
+  <polygon points="555,420 585,440 545,452" fill="#76FF03"/>
+  <polygon points="555,500 585,512 555,524" fill="#76FF03"/>
+  <polygon points="555,572 585,584 545,564" fill="#76FF03"/>
+
+  <!-- Layer 3: QR 코드 결과 (우측) -->
+  <g fill="#76FF03">
+    <!-- 좌상단 파인더 -->
+    <rect x="600" y="256" width="192" height="192" rx="16"/>
+    <rect x="622" y="278" width="148" height="148" rx="10" fill="#0A1A00"/>
+    <rect x="646" y="302" width="100" height="100" rx="6" fill="#76FF03"/>
+
+    <!-- 우상단 파인더 -->
+    <rect x="820" y="256" width="120" height="120" rx="12"/>
+    <rect x="836" y="272" width="88"  height="88"  rx="7" fill="#0A1A00"/>
+    <rect x="854" y="290" width="52"  height="52"  rx="4" fill="#76FF03"/>
+
+    <!-- 좌하단 파인더 -->
+    <rect x="600" y="476" width="120" height="120" rx="12"/>
+    <rect x="616" y="492" width="88"  height="88"  rx="7" fill="#0A1A00"/>
+    <rect x="634" y="510" width="52"  height="52"  rx="4" fill="#76FF03"/>
+
+    <!-- 데이터 모듈 -->
+    <rect x="740" y="476" width="28" height="28" rx="4"/>
+    <rect x="780" y="476" width="28" height="28" rx="4"/>
+    <rect x="820" y="476" width="28" height="28" rx="4"/>
+    <rect x="860" y="476" width="28" height="28" rx="4"/>
+    <rect x="740" y="516" width="28" height="28" rx="4"/>
+    <rect x="820" y="516" width="28" height="28" rx="4"/>
+    <rect x="860" y="516" width="28" height="28" rx="4"/>
+    <rect x="740" y="556" width="28" height="28" rx="4"/>
+    <rect x="780" y="556" width="28" height="28" rx="4"/>
+    <rect x="860" y="556" width="28" height="28" rx="4"/>
+    <rect x="620" y="618" width="28" height="28" rx="4"/>
+    <rect x="660" y="618" width="28" height="28" rx="4"/>
+    <rect x="740" y="618" width="28" height="28" rx="4"/>
+    <rect x="820" y="618" width="28" height="28" rx="4"/>
+    <rect x="860" y="618" width="28" height="28" rx="4"/>
+    <rect x="620" y="658" width="28" height="28" rx="4"/>
+    <rect x="700" y="658" width="28" height="28" rx="4"/>
+    <rect x="780" y="658" width="28" height="28" rx="4"/>
+    <rect x="860" y="658" width="28" height="28" rx="4"/>
+    <rect x="660" y="698" width="28" height="28" rx="4"/>
+    <rect x="740" y="698" width="28" height="28" rx="4"/>
+    <rect x="820" y="698" width="28" height="28" rx="4"/>
+    <rect x="620" y="738" width="28" height="28" rx="4"/>
+    <rect x="700" y="738" width="28" height="28" rx="4"/>
+    <rect x="780" y="738" width="28" height="28" rx="4"/>
+    <rect x="860" y="738" width="28" height="28" rx="4"/>
+  </g>
+</svg>

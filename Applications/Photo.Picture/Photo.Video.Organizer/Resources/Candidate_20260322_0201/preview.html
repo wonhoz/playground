@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Photo.Video.Organizer — 아이콘 후보 20260322_0201</title>
+  <style>
+    :root {
+      --bg:        #0F1520;
+      --surface:   #161E2C;
+      --surface2:  #1C2638;
+      --border:    #2A3A4A;
+      --text-main: #E8EEF6;
+      --text-sub:  #7A90A8;
+      --accent:    #4A9ECC;
+      --accent2:   #66CCAA;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text-main);
+      font-family: 'Segoe UI', 'Malgun Gothic', Arial, sans-serif;
+      min-height: 100vh;
+      padding: 40px 32px 60px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 48px;
+      padding-bottom: 28px;
+      border-bottom: 1px solid var(--border);
+    }
+    header h1 {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--text-main);
+      letter-spacing: 0.02em;
+    }
+    header p {
+      margin-top: 10px;
+      font-size: 15px;
+      color: var(--text-sub);
+      line-height: 1.6;
+    }
+    header .stamp {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 4px 14px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      font-size: 13px;
+      color: var(--accent);
+      font-family: 'Courier New', monospace;
+    }
+
+    /* 5열 2행 그리드 */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 24px;
+      max-width: 1400px;
+      margin: 0 auto 60px;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+      cursor: default;
+    }
+    .card:hover {
+      transform: scale(1.06) translateY(-4px);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.5);
+      border-color: var(--accent);
+    }
+
+    .icon-wrap {
+      width: 100%;
+      aspect-ratio: 1;
+      background: var(--surface2);
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .icon-wrap img {
+      width: 88%;
+      height: 88%;
+      object-fit: contain;
+    }
+
+    .card-filename {
+      font-family: 'Courier New', monospace;
+      font-size: 11px;
+      color: var(--text-sub);
+      word-break: break-all;
+      line-height: 1.4;
+    }
+
+    .badges {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .badge {
+      padding: 2px 10px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .badge-literal  { background: #2A4A2A; color: #66EE88; border: 1px solid #3A6A3A; }
+    .badge-metaphor { background: #2A2A4A; color: #8888FF; border: 1px solid #3A3A6A; }
+    .badge-hybrid   { background: #3A2A1A; color: #FFAA44; border: 1px solid #5A4A2A; }
+
+    .concept {
+      font-size: 12px;
+      color: var(--text-sub);
+      line-height: 1.55;
+    }
+    .concept strong {
+      color: var(--text-main);
+      display: block;
+      font-size: 13px;
+      margin-bottom: 3px;
+    }
+
+    .palette {
+      display: flex;
+      gap: 5px;
+      flex-wrap: wrap;
+    }
+    .swatch {
+      width: 20px;
+      height: 20px;
+      border-radius: 4px;
+      border: 1px solid rgba(255,255,255,0.1);
+      flex-shrink: 0;
+    }
+    .swatch-label {
+      display: none;
+    }
+
+    /* 크기별 미리보기 섹션 */
+    .size-section {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding-top: 40px;
+      border-top: 1px solid var(--border);
+    }
+    .size-section h2 {
+      font-size: 18px;
+      color: var(--text-main);
+      margin-bottom: 32px;
+      font-weight: 600;
+    }
+
+    .size-row {
+      margin-bottom: 40px;
+    }
+    .size-row h3 {
+      font-size: 13px;
+      color: var(--text-sub);
+      margin-bottom: 14px;
+      font-family: 'Courier New', monospace;
+      letter-spacing: 0.05em;
+    }
+    .size-icons {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      background: var(--surface);
+      padding: 20px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+    .size-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+    .size-item img {
+      display: block;
+      image-rendering: auto;
+    }
+    .size-item span {
+      font-size: 10px;
+      color: var(--text-sub);
+      font-family: 'Courier New', monospace;
+    }
+
+    /* 어두운 체크무늬 배경 (16px 같은 작은 크기 테스트용) -->
+    .bg-checker {
+      background-image:
+        linear-gradient(45deg, #222 25%, transparent 25%),
+        linear-gradient(-45deg, #222 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #222 75%),
+        linear-gradient(-45deg, transparent 75%, #222 75%);
+      background-size: 12px 12px;
+      background-position: 0 0, 0 6px, 6px -6px, -6px 0px;
+      background-color: #333;
+      padding: 8px;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Photo.Video.Organizer — 아이콘 후보</h1>
+  <p>
+    핵심 메시지: 사진/동영상의 EXIF·QuickTime 태그 값을 바탕으로 파일 이름을 일괄 변경<br/>
+    10개 후보 · literal 3 / metaphor 4 / hybrid 3 · 색조 독립
+  </p>
+  <span class="stamp">Candidate_20260322_0201</span>
+</header>
+
+<!-- 5열 2행 그리드 -->
+<div class="grid">
+
+  <!-- 01 -->
+  <div class="card">
+    <div class="icon-wrap">
+      <img src="icon_01_literal_beforeafter.svg" alt="Before/After 파일명 변환"/>
+    </div>
+    <div class="card-filename">icon_01_literal_beforeafter.svg</div>
+    <div class="badges">
+      <span class="badge badge-literal">Literal</span>
+    </div>
+    <div class="concept">
+      <strong>Before → After 파일명 직접 비교</strong>
+      IMG_0001.jpg 3개가 큰 하향 화살표 아래 날짜+장소 기반 파일명으로 변환. 가장 직접적인 메시지 전달.
+    </div>
+    <div class="palette">
+      <div class="swatch" style="background:#FF6B35;" title="코랄 오렌지"></div>
+      <div class="swatch" style="background:#FFD700;" title="골든 옐로우"></div>
+      <div class="swatch" style="background:#FFF3ED;" title="크림"></div>
+      <div class="swatch" style="background:#1A7A3A;" title="다크 그린"></div>
+      <div class="swatch" style="background:#CC4400;" title="번트 레드"></div>
+    </div>
+  </div>
+
+  <!-- 02 -->
+  <div class="card">
+    <div class="icon-wrap">
+      <img src="icon_02_literal_exif_tag.svg" alt="EXIF 태그에서 파일명 추출"/>
+    </div>
+    <div class="card-filename">icon_02_literal_exif_tag.svg</div>
+    <div class="badges">
+      <span class="badge badge-literal">Literal</span>
+    </div>
+    <div class="concept">
+      <strong>카메라 → EXIF 칩 → 파일명</strong>
+      카메라 본체에서 DATE/LOC 태그 칩 2개가 추출되고, 화살표 후 결과 파일명 바에 합쳐지는 데이터 흐름.
+    </div>
+    <div class="palette">
+      <div class="swatch" style="background:#0D2B5E;" title="딥 네이비"></div>
+      <div class="swatch" style="background:#2A5BAF;" title="코발트"></div>
+      <div class="swatch" style="background:#4A90D9;" title="스카이 블루"></div>
+      <div class="swatch" style="background:#7DC4FF;" title="라이트 블루"></div>
+      <div class="swatch" style="background:#F0A830;" title="앰버"></div>
+    </div>
+  </div>
+
+  <!-- 03 -->
+  <div class="card">
+    <div class="icon-wrap">
+      <img src="icon_03_literal_batch_rename.svg" alt="배치 파일명 변경"/>
+    </div>
+    <div class="card-filename">icon_03_literal_batch_rename.svg</div>
+    <div class="badges">
+      <span class="badge badge-literal">Literal</span>
+    </div>
+    <div class="concept">
+      <strong>배치 처리 — 기어 엔진 좌우 대칭</strong>
+      왼쪽 4개 구형 파일명 → 중앙 기어(✎) → 오른쪽 4개 날짜 파일명. 하단 "BATCH RENAME" 텍스트.
+    </div>
+    <div class="palette">
+      <div class="swatch" style="background:#0F4C35;" title="다크 에메랄드"></div>
+      <div class="swatch" style="background:#2ECC71;" title="에메랄드 그린"></div>
+      <div class="swatch" style="background:#884422;" title="러스트"></div>
+      <div class="swatch" style="background:#99AA88;" title="세이지"></div>
+      <div class="swatch" style="background:#88FFB8;" title="민트"></div>
+    </div>
+  </div>
+
+  <!-- 04 -->
+  <div class="card">
+    <div class="icon-wrap">
+      <img src="icon_04_metaphor_magic_wand.svg" alt="마법 지팡이 파일명 변환"/>
+    </div>
+    <div class="card-filename">icon_04_metaphor_magic_wand.svg</div>
+    <div class="badges">
+      <span class="badge badge-metaphor">Metaphor</span>
+    </div>
+    <div class="concept">
+      <strong>마법 지팡이 — 파티클 변환 경로</strong>
+      어두운 라벤더 배경에 별빛 지팡이가 IMG_0001을 터치하자 파티클 경로를 따라 날짜 파일명으로 변환.
+    </div>
+    <div class="palette">
+      <div class="swatch" style="background:#4B0082;" title="인디고 퍼플"></div>
+      <div class="swatch" style="background:#DDA0FF;" title="파스텔 라벤더"></div>
+      <div class="swatch" style="background:#FFD700;" title="골든 스타"></div>
+      <div class="swatch" style="background:#FF80FF;" title="핫 핑크"></div>
+      <div class="swatch" style="background:#6600CC;" title="다크 바이올렛"></div>
+    </div>
+  </div>
+
+  <!-- 05 -->
+  <div class="card">
+    <div class="icon-wrap">
+      <img src="icon_05_metaphor_label_to_file.svg" alt="가격표 태그 → 파일명"/>
+    </div>
+    <div class="card-filename">icon_05_metaphor_label_to_file.svg</div>
+    <div class="badges">
+      <span class="badge badge-metaphor">Metaphor</span>
+    </div>
+    <div class="concept">
+      <strong>가격표/라벨 태그 → 파일 카드</strong>
+      DATE·LOC·TYPE 항목이 적힌 황금 가격표에서 화살표 후 해당 데이터가 박힌 파일 아이콘 생성.
+    </div>
+    <div class="palette">
+      <div class="swatch" style="background:#B8860B;" title="다크 골든로드"></div>
+      <div class="swatch" style="background:#FFD700;" title="골드"></div>
+      <div class="swatch" style="background:#FFF8DC;" title="콘실크"></div>
+      <div class="swatch" style="background:#5C3D00;" title="다크 브라운"></div>
+      <div class="swatch" style="background:#FF8C00;" title="다크 오렌지"></div>
+    </div>
+  </div>
+
+  <!-- 06 -->
+  <div class="card">
+    <div class="icon-wrap">
+      <img src="icon_06_metaphor_chaos_order.svg" alt="혼돈에서 정돈으로"/>
+    </div>
+    <div class="card-filename">icon_06_metaphor_chaos_order.svg</div>
+    <div class="badges">
+      <span class="badge badge-metaphor">Metaphor</span>
+    </div>
+    <div class="concept">
+      <strong>혼돈 → 정돈 대비 구도</strong>
+      왼쪽 삐뚤빼뚤 파일명 5개 vs 오른쪽 깔끔하게 정렬된 날짜 파일명. 번개+화살표가 중앙 분기점.
+    </div>
+    <div class="palette">
+      <div class="swatch" style="background:#005555;" title="다크 틸"></div>
+      <div class="swatch" style="background:#00CCCC;" title="사이안"></div>
+      <div class="swatch" style="background:#66EEEE;" title="라이트 틸"></div>
+      <div class="swatch" style="background:#FFD700;" title="골드 번개"></div>
+      <div class="swatch" style="background:#556655;" title="올리브 그린"></div>
+    </div>
+  </div>
+
+  <!-- 07 -->
+  <div class="card">
+    <div class="icon-wrap">
+      <img src="icon_07_metaphor_camera_rename.svg" alt="카메라 렌즈 + 파일명 변경"/>
+    </div>
+    <div class="card-filename">icon_07_metaphor_camera_rename.svg</div>
+    <div class="badges">
+      <span class="badge badge-metaphor">Metaphor</span>
+    </div>
+    <div class="concept">
+      <strong>카메라 실루엣 + 하단 파일명 변환 바</strong>
+      비비드 레드 카메라 본체 아래 EXIF 메타데이터가 읽히고 파일명이 변환되는 2단 구조.
+    </div>
+    <div class="palette">
+      <div class="swatch" style="background:#8B0000;" title="다크 레드"></div>
+      <div class="swatch" style="background:#FF4444;" title="비비드 레드"></div>
+      <div class="swatch" style="background:#FF8888;" title="라이트 레드"></div>
+      <div class="swatch" style="background:#FF6600;" title="오렌지 레드"></div>
+      <div class="swatch" style="background:#222222;" title="다크 그레이"></div>
+    </div>
+  </div>
+
+  <!-- 08 -->
+  <div class="card">
+    <div class="icon-wrap">
+      <img src="icon_08_hybrid_film_stream.svg" alt="필름 스트립 + 변환 스트림"/>
+    </div>
+    <div class="card-filename">icon_08_hybrid_film_stream.svg</div>
+    <div class="badges">
+      <span class="badge badge-hybrid">Hybrid</span>
+    </div>
+    <div class="concept">
+      <strong>필름 스트립 + 스트림 처리</strong>
+      왼쪽 필름 스트립(미디어 소스), 우측으로 흐르는 파일명 변환 스트림 4줄. 민트 화이트 배경.
+    </div>
+    <div class="palette">
+      <div class="swatch" style="background:#B0FFE8;" title="민트 화이트"></div>
+      <div class="swatch" style="background:#70EED4;" title="라이트 민트"></div>
+      <div class="swatch" style="background:#006655;" title="다크 민트"></div>
+      <div class="swatch" style="background:#00AA88;" title="에메랄드 틸"></div>
+      <div class="swatch" style="background:#F0A830;" title="앰버 EXIF"></div>
+    </div>
+  </div>
+
+  <!-- 09 -->
+  <div class="card">
+    <div class="icon-wrap">
+      <img src="icon_09_hybrid_geometric_flow.svg" alt="기하학 데이터 흐름"/>
+    </div>
+    <div class="card-filename">icon_09_hybrid_geometric_flow.svg</div>
+    <div class="badges">
+      <span class="badge badge-hybrid">Hybrid</span>
+    </div>
+    <div class="concept">
+      <strong>기하학 추상 + 데이터 플로우</strong>
+      인디고 배경 격자 위 헥사곤 소스 → 다이아몬드 EXIF 변환 노드 → 출력 카드. 기술적 흐름 시각화.
+    </div>
+    <div class="palette">
+      <div class="swatch" style="background:#1A1460;" title="딥 인디고"></div>
+      <div class="swatch" style="background:#3344DD;" title="인디고 블루"></div>
+      <div class="swatch" style="background:#88AAFF;" title="라이트 인디고"></div>
+      <div class="swatch" style="background:#4455EE;" title="미드 인디고"></div>
+      <div class="swatch" style="background:#2233BB;" title="다크 인디고"></div>
+    </div>
+  </div>
+
+  <!-- 10 -->
+  <div class="card">
+    <div class="icon-wrap">
+      <img src="icon_10_hybrid_sepia_rename.svg" alt="세피아 사진 + 연필 이름 변경"/>
+    </div>
+    <div class="card-filename">icon_10_hybrid_sepia_rename.svg</div>
+    <div class="badges">
+      <span class="badge badge-hybrid">Hybrid</span>
+    </div>
+    <div class="concept">
+      <strong>세피아 사진 + 연필 수정 + 결과 카드</strong>
+      따뜻한 세피아 사진 프레임 옆에 대각선 연필이 이름을 쓰고, 우측에 날짜 기반 파일명 3개 완성.
+    </div>
+    <div class="palette">
+      <div class="swatch" style="background:#6B4226;" title="세피아 브라운"></div>
+      <div class="swatch" style="background:#D4A574;" title="웜 탄"></div>
+      <div class="swatch" style="background:#F5DEB3;" title="위트"></div>
+      <div class="swatch" style="background:#F0C040;" title="골든"></div>
+      <div class="swatch" style="background:#3D1F0A;" title="다크 세피아"></div>
+    </div>
+  </div>
+
+</div><!-- /grid -->
+
+<!-- 크기별 미리보기 -->
+<div class="size-section">
+  <h2>크기별 미리보기 — 10개 아이콘 전체</h2>
+
+  <div class="size-row">
+    <h3>256px — 고해상도 / 앱 스토어</h3>
+    <div class="size-icons">
+      <div class="size-item">
+        <img src="icon_01_literal_beforeafter.svg" width="256" height="256" alt="01"/>
+        <span>01</span>
+      </div>
+      <div class="size-item">
+        <img src="icon_02_literal_exif_tag.svg" width="256" height="256" alt="02"/>
+        <span>02</span>
+      </div>
+      <div class="size-item">
+        <img src="icon_03_literal_batch_rename.svg" width="256" height="256" alt="03"/>
+        <span>03</span>
+      </div>
+      <div class="size-item">
+        <img src="icon_04_metaphor_magic_wand.svg" width="256" height="256" alt="04"/>
+        <span>04</span>
+      </div>
+      <div class="size-item">
+        <img src="icon_05_metaphor_label_to_file.svg" width="256" height="256" alt="05"/>
+        <span>05</span>
+      </div>
+      <div class="size-item">
+        <img src="icon_06_metaphor_chaos_order.svg" width="256" height="256" alt="06"/>
+        <span>06</span>
+      </div>
+      <div class="size-item">
+        <img src="icon_07_metaphor_camera_rename.svg" width="256" height="256" alt="07"/>
+        <span>07</span>
+      </div>
+      <div class="size-item">
+        <img src="icon_08_hybrid_film_stream.svg" width="256" height="256" alt="08"/>
+        <span>08</span>
+      </div>
+      <div class="size-item">
+        <img src="icon_09_hybrid_geometric_flow.svg" width="256" height="256" alt="09"/>
+        <span>09</span>
+      </div>
+      <div class="size-item">
+        <img src="icon_10_hybrid_sepia_rename.svg" width="256" height="256" alt="10"/>
+        <span>10</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="size-row">
+    <h3>64px — 일반 앱 아이콘</h3>
+    <div class="size-icons">
+      <div class="size-item">
+        <img src="icon_01_literal_beforeafter.svg" width="64" height="64" alt="01"/>
+        <span>01</span>
+      </div>
+      <div class="size-item">
+        <img src="icon_02_literal_exif_tag.svg" width="64" height="64" alt="02"/>
+        <span>02</span>
+      </div>
+      <div class="size-item">
+        <img src="icon_03_literal_batch_rename.svg" width="64" height="64" alt="03"/>
+        <span>03</span>
+      </div>
+      <div class="size-item">
+        <img src="icon_04_metaphor_magic_wand.svg" width="64" height="64" alt="04"/>
+        <span>04</span>
+      </div>
+      <div class="size-item">
+        <img src="icon_05_metaphor_label_to_file.svg" width="64" height="64" alt="05"/>
+        <span>05</span>
+      </div>
+      <div class="size-item">
+        <img src="icon_06_metaphor_chaos_order.svg" width="64" height="64" alt="06"/>
+        <span>06</span>
+      </div>
+      <div class="size-item">
+        <img src="icon_07_metaphor_camera_rename.svg" width="64" height="64" alt="07"/>
+        <span>07</span>
+      </div>
+      <div class="size-item">
+        <img src="icon_08_hybrid_film_stream.svg" width="64" height="64" alt="08"/>
+        <span>08</span>
+      </div>
+      <div class="size-item">
+        <img src="icon_09_hybrid_geometric_flow.svg" width="64" height="64" alt="09"/>
+        <span>09</span>
+      </div>
+      <div class="size-item">
+        <img src="icon_10_hybrid_sepia_rename.svg" width="64" height="64" alt="10"/>
+        <span>10</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="size-row">
+    <h3>32px — 작업 표시줄 / 타이틀바</h3>
+    <div class="size-icons">
+      <div class="size-item">
+        <img src="icon_01_literal_beforeafter.svg" width="32" height="32" alt="01"/>
+        <span>01</span>
+      </div>
+      <div class="size-item">
+        <img src="icon_02_literal_exif_tag.svg" width="32" height="32" alt="02"/>
+        <span>02</span>
+      </div>
+      <div class="size-item">
+        <img src="icon_03_literal_batch_rename.svg" width="32" height="32" alt="03"/>
+        <span>03</span>
+      </div>
+      <div class="size-item">
+        <img src="icon_04_metaphor_magic_wand.svg" width="32" height="32" alt="04"/>
+        <span>04</span>
+      </div>
+      <div class="size-item">
+        <img src="icon_05_metaphor_label_to_file.svg" width="32" height="32" alt="05"/>
+        <span>05</span>
+      </div>
+      <div class="size-item">
+        <img src="icon_06_metaphor_chaos_order.svg" width="32" height="32" alt="06"/>
+        <span>06</span>
+      </div>
+      <div class="size-item">
+        <img src="icon_07_metaphor_camera_rename.svg" width="32" height="32" alt="07"/>
+        <span>07</span>
+      </div>
+      <div class="size-item">
+        <img src="icon_08_hybrid_film_stream.svg" width="32" height="32" alt="08"/>
+        <span>08</span>
+      </div>
+      <div class="size-item">
+        <img src="icon_09_hybrid_geometric_flow.svg" width="32" height="32" alt="09"/>
+        <span>09</span>
+      </div>
+      <div class="size-item">
+        <img src="icon_10_hybrid_sepia_rename.svg" width="32" height="32" alt="10"/>
+        <span>10</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="size-row">
+    <h3>16px — 탐색기 소형 아이콘 (체크무늬 배경)</h3>
+    <div class="size-icons bg-checker">
+      <div class="size-item">
+        <img src="icon_01_literal_beforeafter.svg" width="16" height="16" alt="01"/>
+        <span style="color:#aaa">01</span>
+      </div>
+      <div class="size-item">
+        <img src="icon_02_literal_exif_tag.svg" width="16" height="16" alt="02"/>
+        <span style="color:#aaa">02</span>
+      </div>
+      <div class="size-item">
+        <img src="icon_03_literal_batch_rename.svg" width="16" height="16" alt="03"/>
+        <span style="color:#aaa">03</span>
+      </div>
+      <div class="size-item">
+        <img src="icon_04_metaphor_magic_wand.svg" width="16" height="16" alt="04"/>
+        <span style="color:#aaa">04</span>
+      </div>
+      <div class="size-item">
+        <img src="icon_05_metaphor_label_to_file.svg" width="16" height="16" alt="05"/>
+        <span style="color:#aaa">05</span>
+      </div>
+      <div class="size-item">
+        <img src="icon_06_metaphor_chaos_order.svg" width="16" height="16" alt="06"/>
+        <span style="color:#aaa">06</span>
+      </div>
+      <div class="size-item">
+        <img src="icon_07_metaphor_camera_rename.svg" width="16" height="16" alt="07"/>
+        <span style="color:#aaa">07</span>
+      </div>
+      <div class="size-item">
+        <img src="icon_08_hybrid_film_stream.svg" width="16" height="16" alt="08"/>
+        <span style="color:#aaa">08</span>
+      </div>
+      <div class="size-item">
+        <img src="icon_09_hybrid_geometric_flow.svg" width="16" height="16" alt="09"/>
+        <span style="color:#aaa">09</span>
+      </div>
+      <div class="size-item">
+        <img src="icon_10_hybrid_sepia_rename.svg" width="16" height="16" alt="10"/>
+        <span style="color:#aaa">10</span>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /size-section -->
+
+</body>
+</html>

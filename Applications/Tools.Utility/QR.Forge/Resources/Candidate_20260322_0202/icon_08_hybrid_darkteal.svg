@@ -1,0 +1,212 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- 다크틸 — 대각선·동적 구성 / QR + 스캔 화살표 -->
+  <defs>
+    <linearGradient id="bg8" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#002828"/>
+      <stop offset="100%" stop-color="#001A1A"/>
+    </linearGradient>
+    <linearGradient id="tealGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#00BCD4"/>
+      <stop offset="100%" stop-color="#00838F"/>
+    </linearGradient>
+    <linearGradient id="qrBg8" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#E0FFFF"/>
+      <stop offset="100%" stop-color="#B2EBF2"/>
+    </linearGradient>
+    <linearGradient id="arrowGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#00BCD4"/>
+      <stop offset="100%" stop-color="#00E5FF"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="145" fill="url(#bg8)"/>
+  <!-- 빛 번짐 효과 배경 -->
+  <circle cx="800" cy="200" r="300" fill="#00BCD4" opacity="0.06"/>
+  <circle cx="200" cy="800" r="250" fill="#006064" opacity="0.08"/>
+
+  <!-- 대각선 동적 배치: QR 코드가 좌상단에서 우하단으로 각도를 약간 준 느낌 -->
+  <!-- QR 코드 패널 (약간 기울임 효과를 그림자로) -->
+  <rect x="182" y="202" width="640" height="640" rx="20" fill="#004040" opacity="0.5"/>
+  <rect x="172" y="192" width="640" height="640" rx="20" fill="url(#qrBg8)"/>
+
+  <!-- 좌상 코너 파인더 -->
+  <rect x="200" y="220" width="164" height="164" rx="13" fill="url(#tealGrad)"/>
+  <rect x="218" y="238" width="128" height="128" rx="8" fill="url(#qrBg8)"/>
+  <rect x="236" y="256" width="92" height="92" rx="6" fill="url(#tealGrad)"/>
+
+  <!-- 우상 코너 파인더 -->
+  <rect x="648" y="220" width="164" height="164" rx="13" fill="url(#tealGrad)"/>
+  <rect x="666" y="238" width="128" height="128" rx="8" fill="url(#qrBg8)"/>
+  <rect x="684" y="256" width="92" height="92" rx="6" fill="url(#tealGrad)"/>
+
+  <!-- 좌하 코너 파인더 -->
+  <rect x="200" y="648" width="164" height="164" rx="13" fill="url(#tealGrad)"/>
+  <rect x="218" y="666" width="128" height="128" rx="8" fill="url(#qrBg8)"/>
+  <rect x="236" y="684" width="92" height="92" rx="6" fill="url(#tealGrad)"/>
+
+  <!-- 타이밍 패턴 -->
+  <rect x="388" y="256" width="22" height="22" rx="4" fill="#006064"/>
+  <rect x="414" y="256" width="22" height="22" rx="4" fill="#006064"/>
+  <rect x="440" y="256" width="22" height="22" rx="4" fill="#006064"/>
+  <rect x="466" y="256" width="22" height="22" rx="4" fill="#006064"/>
+  <rect x="492" y="256" width="22" height="22" rx="4" fill="#006064"/>
+  <rect x="518" y="256" width="22" height="22" rx="4" fill="#006064"/>
+  <rect x="544" y="256" width="22" height="22" rx="4" fill="#006064"/>
+  <rect x="570" y="256" width="22" height="22" rx="4" fill="#006064"/>
+  <rect x="596" y="256" width="22" height="22" rx="4" fill="#006064"/>
+  <rect x="622" y="256" width="22" height="22" rx="4" fill="#006064"/>
+
+  <rect x="256" y="388" width="22" height="22" rx="4" fill="#006064"/>
+  <rect x="256" y="414" width="22" height="22" rx="4" fill="#006064"/>
+  <rect x="256" y="440" width="22" height="22" rx="4" fill="#006064"/>
+  <rect x="256" y="466" width="22" height="22" rx="4" fill="#006064"/>
+  <rect x="256" y="492" width="22" height="22" rx="4" fill="#006064"/>
+  <rect x="256" y="518" width="22" height="22" rx="4" fill="#006064"/>
+  <rect x="256" y="544" width="22" height="22" rx="4" fill="#006064"/>
+  <rect x="256" y="570" width="22" height="22" rx="4" fill="#006064"/>
+  <rect x="256" y="596" width="22" height="22" rx="4" fill="#006064"/>
+  <rect x="256" y="622" width="22" height="22" rx="4" fill="#006064"/>
+
+  <!-- 데이터 영역 -->
+  <rect x="388" y="388" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="408" y="388" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="448" y="388" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="488" y="388" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="528" y="388" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="568" y="388" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="608" y="388" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="648" y="388" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="688" y="388" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="728" y="388" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="760" y="388" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="388" y="408" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="428" y="408" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="488" y="408" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="548" y="408" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="628" y="408" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="688" y="408" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="748" y="408" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="408" y="428" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="468" y="428" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="528" y="428" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="608" y="428" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="668" y="428" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="728" y="428" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="388" y="448" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="428" y="448" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="508" y="448" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="568" y="448" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="628" y="448" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="708" y="448" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="760" y="448" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="408" y="468" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="488" y="468" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="548" y="468" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="608" y="468" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="648" y="468" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="728" y="468" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="388" y="488" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="448" y="488" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="508" y="488" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="568" y="488" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="668" y="488" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="748" y="488" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="760" y="488" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="408" y="508" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="468" y="508" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="528" y="508" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="608" y="508" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="648" y="508" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="728" y="508" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="388" y="528" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="428" y="528" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="488" y="528" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="548" y="528" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="628" y="528" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="688" y="528" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="760" y="528" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="408" y="548" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="468" y="548" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="508" y="548" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="568" y="548" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="648" y="548" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="708" y="548" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="748" y="548" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="388" y="568" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="448" y="568" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="528" y="568" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="608" y="568" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="668" y="568" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="728" y="568" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="388" y="588" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="468" y="588" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="508" y="588" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="588" y="588" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="648" y="588" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="748" y="588" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="760" y="588" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="408" y="608" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="488" y="608" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="568" y="608" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="628" y="608" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="688" y="608" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="728" y="608" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="388" y="628" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="428" y="628" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="508" y="628" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="568" y="628" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="648" y="628" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="708" y="628" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="760" y="628" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="408" y="648" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="468" y="648" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="548" y="648" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="588" y="648" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="668" y="648" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="728" y="648" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="388" y="668" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="428" y="668" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="508" y="668" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="568" y="668" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="628" y="668" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="708" y="668" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="748" y="668" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="408" y="688" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="488" y="688" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="528" y="688" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="608" y="688" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="648" y="688" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="728" y="688" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="760" y="688" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="388" y="708" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="448" y="708" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="508" y="708" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="568" y="708" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="648" y="708" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="688" y="708" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="748" y="708" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="408" y="728" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="468" y="728" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="528" y="728" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="608" y="728" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="668" y="728" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="728" y="728" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="760" y="728" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="388" y="748" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="428" y="748" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="488" y="748" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="568" y="748" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="628" y="748" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="708" y="748" width="16" height="16" rx="2" fill="#00838F"/>
+  <rect x="748" y="748" width="16" height="16" rx="2" fill="#00838F"/>
+
+  <!-- 우측 스캔 화살표 오버레이 -->
+  <g opacity="0.85">
+    <rect x="830" y="460" width="130" height="30" rx="15" fill="url(#arrowGrad)"/>
+    <polygon points="975,475 940,445 940,505" fill="#00E5FF"/>
+  </g>
+  <!-- 화살표 위 "SCAN" 텍스트 -->
+  <text x="975" y="560" font-family="Arial, sans-serif" font-size="38" font-weight="bold"
+        fill="#00BCD4" text-anchor="middle" opacity="0.7" transform="rotate(90, 975, 560)">SCAN</text>
+</svg>

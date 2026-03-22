@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg05" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#141820"/>
+      <stop offset="100%" stop-color="#0A0E14"/>
+    </linearGradient>
+    <linearGradient id="mouse05" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#4A5568"/>
+      <stop offset="100%" stop-color="#2D3748"/>
+    </linearGradient>
+    <filter id="glow05">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="180" fill="url(#bg05)"/>
+
+  <!-- 마우스 본체 (중앙심볼) -->
+  <rect x="382" y="180" width="260" height="380" rx="130" fill="url(#mouse05)" stroke="#718096" stroke-width="12"/>
+  <!-- 마우스 좌우 버튼 분할선 -->
+  <line x1="512" y1="180" x2="512" y2="360" stroke="#9AA5B4" stroke-width="8"/>
+  <!-- 스크롤휠 -->
+  <rect x="494" y="220" width="36" height="100" rx="18" fill="#9AA5B4"/>
+  <!-- 우클릭 버튼 하이라이트 (제스처 트리거) -->
+  <path d="M 512 180 Q 642 180 642 280 L 642 360 L 512 360 Z" fill="#A0AEC0" opacity="0.6" rx="0"/>
+
+  <!-- 오른쪽 버튼 위에 "우클릭" 표시 -->
+  <text x="577" y="285" font-family="sans-serif" font-size="22" fill="#E2E8F0" text-anchor="middle" opacity="0.9">R</text>
+
+  <!-- 4방향 화살표 (제스처 방향) -->
+  <!-- 오른쪽 화살표 -->
+  <path d="M 700 512 L 830 512" fill="none" stroke="#63B3ED" stroke-width="16" stroke-linecap="round" filter="url(#glow05)"/>
+  <polyline points="795,477 835,512 795,547" fill="none" stroke="#63B3ED" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow05)"/>
+  <!-- 왼쪽 화살표 -->
+  <path d="M 324 512 L 194 512" fill="none" stroke="#63B3ED" stroke-width="16" stroke-linecap="round" filter="url(#glow05)"/>
+  <polyline points="229,477 189,512 229,547" fill="none" stroke="#63B3ED" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow05)"/>
+  <!-- 위쪽 화살표 -->
+  <path d="M 512 176 L 512 90" fill="none" stroke="#68D391" stroke-width="16" stroke-linecap="round" filter="url(#glow05)"/>
+  <polyline points="477,120 512,82 547,120" fill="none" stroke="#68D391" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow05)"/>
+  <!-- 아래쪽 화살표 -->
+  <path d="M 512 564 L 512 650" fill="none" stroke="#68D391" stroke-width="16" stroke-linecap="round" filter="url(#glow05)"/>
+  <polyline points="477,618 512,658 547,618" fill="none" stroke="#68D391" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow05)"/>
+
+  <!-- 하단: 연결되는 앱 동작 아이콘들 -->
+  <!-- 이전 탭 -->
+  <rect x="160" y="720" width="160" height="120" rx="16" fill="#1A2030" stroke="#4A5568" stroke-width="4"/>
+  <text x="240" y="768" font-family="monospace" font-size="20" fill="#9AA5B4" text-anchor="middle">Tab-1</text>
+  <text x="240" y="800" font-family="monospace" font-size="28" font-weight="bold" fill="#63B3ED" text-anchor="middle">←</text>
+  <!-- 닫기 -->
+  <rect x="432" y="720" width="160" height="120" rx="16" fill="#1A2030" stroke="#4A5568" stroke-width="4"/>
+  <text x="512" y="768" font-family="monospace" font-size="20" fill="#9AA5B4" text-anchor="middle">Close</text>
+  <text x="512" y="802" font-family="monospace" font-size="32" font-weight="bold" fill="#FC8181" text-anchor="middle">×</text>
+  <!-- 다음 탭 -->
+  <rect x="704" y="720" width="160" height="120" rx="16" fill="#1A2030" stroke="#4A5568" stroke-width="4"/>
+  <text x="784" y="768" font-family="monospace" font-size="20" fill="#9AA5B4" text-anchor="middle">Tab+1</text>
+  <text x="784" y="800" font-family="monospace" font-size="28" font-weight="bold" fill="#63B3ED" text-anchor="middle">→</text>
+</svg>

@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Leaf.Grow — Icon Candidates (2026-03-22)</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #111a14;
+    color: #d8f0dc;
+    font-family: 'Segoe UI', 'Malgun Gothic', sans-serif;
+    padding: 40px 24px 60px;
+    min-height: 100vh;
+  }
+  h1 {
+    text-align: center;
+    font-size: 28px;
+    font-weight: 700;
+    color: #7EE8A2;
+    margin-bottom: 6px;
+    letter-spacing: 0.04em;
+  }
+  .subtitle {
+    text-align: center;
+    font-size: 14px;
+    color: #6aaa7e;
+    margin-bottom: 40px;
+  }
+
+  /* ── 5열 메인 그리드 ── */
+  .main-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 200px);
+    gap: 24px;
+    justify-content: center;
+    margin-bottom: 56px;
+  }
+  .card {
+    background: #1a2a1f;
+    border: 1px solid #2a4030;
+    border-radius: 16px;
+    padding: 20px 16px 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    transition: transform 0.18s, box-shadow 0.18s;
+  }
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 32px rgba(80,220,120,0.18);
+  }
+  .card img {
+    width: 160px;
+    height: 160px;
+    border-radius: 10px;
+    display: block;
+    background: #0e160f;
+  }
+  .card-label {
+    font-size: 15px;
+    font-weight: 700;
+    color: #b0d8b8;
+    letter-spacing: 0.02em;
+  }
+  .badge {
+    display: inline-block;
+    padding: 3px 12px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .badge-literal  { background: #2e5e38; color: #88FFB0; border: 1px solid #44AA66; }
+  .badge-metaphor { background: #1e2e5e; color: #88AAFF; border: 1px solid #4466AA; }
+  .badge-hybrid   { background: #5e2e4e; color: #FFAACC; border: 1px solid #AA4488; }
+
+  .concept {
+    font-size: 12px;
+    color: #80a88a;
+    text-align: center;
+    line-height: 1.55;
+    min-height: 50px;
+  }
+  .palette {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .swatch {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    border: 1px solid rgba(255,255,255,0.1);
+    cursor: default;
+    title: attr(title);
+  }
+
+  /* ── 크기별 미리보기 ── */
+  .size-section {
+    margin-top: 16px;
+  }
+  .size-section h2 {
+    text-align: center;
+    font-size: 17px;
+    color: #7EE8A2;
+    margin-bottom: 24px;
+    letter-spacing: 0.03em;
+  }
+  .size-rows {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+  .size-row {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .size-row-label {
+    font-size: 12px;
+    color: #4a7a58;
+    width: 48px;
+    text-align: right;
+    flex-shrink: 0;
+    padding-bottom: 4px;
+  }
+  .size-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+  .size-item img {
+    display: block;
+    border-radius: 4px;
+    background: #0e160f;
+  }
+  .size-item span {
+    font-size: 10px;
+    color: #5a8a68;
+  }
+  .size-256 { width: 256px; height: 256px; }
+  .size-64  { width: 64px;  height: 64px;  }
+  .size-32  { width: 32px;  height: 32px;  }
+  .size-16  { width: 16px;  height: 16px;  }
+
+  hr.divider {
+    border: none;
+    border-top: 1px solid #2a4030;
+    margin: 48px 0 40px;
+  }
+</style>
+</head>
+<body>
+
+<h1>🌿 Leaf.Grow — Icon Candidates</h1>
+<p class="subtitle">Candidate_20260322_1004 &nbsp;·&nbsp; 프랙탈 나무 성장 시뮬레이션 &nbsp;·&nbsp; 2026-03-22</p>
+
+<!-- ── 메인 5열 그리드 ── -->
+<div class="main-grid">
+
+  <!-- icon_01 -->
+  <div class="card">
+    <img src="icon_01.svg" alt="icon_01"/>
+    <div class="card-label">icon_01</div>
+    <span class="badge badge-literal">literal</span>
+    <p class="concept">대칭 3단계 프랙탈 나무.<br/>줄기→가지→잔가지 재귀 구조,<br/>하늘-녹색 배경, 핑크 꽃.</p>
+    <div class="palette">
+      <div class="swatch" style="background:#D0EEFF" title="#D0EEFF"></div>
+      <div class="swatch" style="background:#A8D8B0" title="#A8D8B0"></div>
+      <div class="swatch" style="background:#6B4423" title="#6B4423"></div>
+      <div class="swatch" style="background:#2ECC71" title="#2ECC71"></div>
+      <div class="swatch" style="background:#FF6B9D" title="#FF6B9D"></div>
+      <div class="swatch" style="background:#FFD700" title="#FFD700"></div>
+    </div>
+  </div>
+
+  <!-- icon_02 -->
+  <div class="card">
+    <img src="icon_02.svg" alt="icon_02"/>
+    <div class="card-label">icon_02</div>
+    <span class="badge badge-literal">literal</span>
+    <p class="concept">씨앗→새싹→완성 3단계 성장.<br/>이터레이션 카운터 뱃지,<br/>아이보리 따뜻한 배경.</p>
+    <div class="palette">
+      <div class="swatch" style="background:#FFF8E8" title="#FFF8E8"></div>
+      <div class="swatch" style="background:#7DB87A" title="#7DB87A"></div>
+      <div class="swatch" style="background:#A0522D" title="#A0522D"></div>
+      <div class="swatch" style="background:#4CAF50" title="#4CAF50"></div>
+      <div class="swatch" style="background:#2E7D32" title="#2E7D32"></div>
+      <div class="swatch" style="background:#FF7043" title="#FF7043"></div>
+    </div>
+  </div>
+
+  <!-- icon_03 -->
+  <div class="card">
+    <img src="icon_03.svg" alt="icon_03"/>
+    <div class="card-label">icon_03</div>
+    <span class="badge badge-metaphor">metaphor</span>
+    <p class="concept">다크 배경 발광 L-시스템.<br/>네온 그린 가지 + glow 효과,<br/>"n = 3" 이터레이션 표시.</p>
+    <div class="palette">
+      <div class="swatch" style="background:#0A1A0F" title="#0A1A0F"></div>
+      <div class="swatch" style="background:#00CC66" title="#00CC66"></div>
+      <div class="swatch" style="background:#00FF88" title="#00FF88"></div>
+      <div class="swatch" style="background:#44FF99" title="#44FF99"></div>
+      <div class="swatch" style="background:#00AA55" title="#00AA55"></div>
+    </div>
+  </div>
+
+  <!-- icon_04 -->
+  <div class="card">
+    <img src="icon_04.svg" alt="icon_04"/>
+    <div class="card-label">icon_04</div>
+    <span class="badge badge-metaphor">metaphor</span>
+    <p class="concept">퍼즐 모드 PuzzleGoal.<br/>점선 타겟 실루엣 + 현재 나무,<br/>보라 다크 + 별 보상 암시.</p>
+    <div class="palette">
+      <div class="swatch" style="background:#1A1230" title="#1A1230"></div>
+      <div class="swatch" style="background:#9B59B6" title="#9B59B6"></div>
+      <div class="swatch" style="background:#BB88FF" title="#BB88FF"></div>
+      <div class="swatch" style="background:#E8B84B" title="#E8B84B"></div>
+      <div class="swatch" style="background:#F39C12" title="#F39C12"></div>
+      <div class="swatch" style="background:#FFD700" title="#FFD700"></div>
+    </div>
+  </div>
+
+  <!-- icon_05 -->
+  <div class="card">
+    <img src="icon_05.svg" alt="icon_05"/>
+    <div class="card-label">icon_05</div>
+    <span class="badge badge-hybrid">hybrid</span>
+    <p class="concept">원형 링 스피너 + 나무 합성.<br/>봄 핑크 벚꽃 + 연두 잎,<br/>Leaf.Grow 앱명 + n=3 뱃지.</p>
+    <div class="palette">
+      <div class="swatch" style="background:#FFF0F8" title="#FFF0F8"></div>
+      <div class="swatch" style="background:#FF4D88" title="#FF4D88"></div>
+      <div class="swatch" style="background:#FFB7D5" title="#FFB7D5"></div>
+      <div class="swatch" style="background:#88CC44" title="#88CC44"></div>
+      <div class="swatch" style="background:#8B5A2B" title="#8B5A2B"></div>
+      <div class="swatch" style="background:#D4E8A0" title="#D4E8A0"></div>
+    </div>
+  </div>
+
+</div>
+
+<hr class="divider"/>
+
+<!-- ── 크기별 미리보기 ── -->
+<div class="size-section">
+  <h2>크기별 미리보기</h2>
+  <div class="size-rows">
+
+    <!-- 256px -->
+    <div class="size-row">
+      <span class="size-row-label">256px</span>
+      <div class="size-item">
+        <img src="icon_01.svg" class="size-256" alt="icon_01 256px"/>
+        <span>icon_01</span>
+      </div>
+      <div class="size-item">
+        <img src="icon_02.svg" class="size-256" alt="icon_02 256px"/>
+        <span>icon_02</span>
+      </div>
+      <div class="size-item">
+        <img src="icon_03.svg" class="size-256" alt="icon_03 256px"/>
+        <span>icon_03</span>
+      </div>
+      <div class="size-item">
+        <img src="icon_04.svg" class="size-256" alt="icon_04 256px"/>
+        <span>icon_04</span>
+      </div>
+      <div class="size-item">
+        <img src="icon_05.svg" class="size-256" alt="icon_05 256px"/>
+        <span>icon_05</span>
+      </div>
+    </div>
+
+    <!-- 64px -->
+    <div class="size-row">
+      <span class="size-row-label">64px</span>
+      <div class="size-item">
+        <img src="icon_01.svg" class="size-64" alt="icon_01 64px"/>
+        <span>icon_01</span>
+      </div>
+      <div class="size-item">
+        <img src="icon_02.svg" class="size-64" alt="icon_02 64px"/>
+        <span>icon_02</span>
+      </div>
+      <div class="size-item">
+        <img src="icon_03.svg" class="size-64" alt="icon_03 64px"/>
+        <span>icon_03</span>
+      </div>
+      <div class="size-item">
+        <img src="icon_04.svg" class="size-64" alt="icon_04 64px"/>
+        <span>icon_04</span>
+      </div>
+      <div class="size-item">
+        <img src="icon_05.svg" class="size-64" alt="icon_05 64px"/>
+        <span>icon_05</span>
+      </div>
+    </div>
+
+    <!-- 32px -->
+    <div class="size-row">
+      <span class="size-row-label">32px</span>
+      <div class="size-item">
+        <img src="icon_01.svg" class="size-32" alt="icon_01 32px"/>
+        <span>icon_01</span>
+      </div>
+      <div class="size-item">
+        <img src="icon_02.svg" class="size-32" alt="icon_02 32px"/>
+        <span>icon_02</span>
+      </div>
+      <div class="size-item">
+        <img src="icon_03.svg" class="size-32" alt="icon_03 32px"/>
+        <span>icon_03</span>
+      </div>
+      <div class="size-item">
+        <img src="icon_04.svg" class="size-32" alt="icon_04 32px"/>
+        <span>icon_04</span>
+      </div>
+      <div class="size-item">
+        <img src="icon_05.svg" class="size-32" alt="icon_05 32px"/>
+        <span>icon_05</span>
+      </div>
+    </div>
+
+    <!-- 16px -->
+    <div class="size-row">
+      <span class="size-row-label">16px</span>
+      <div class="size-item">
+        <img src="icon_01.svg" class="size-16" alt="icon_01 16px"/>
+        <span>icon_01</span>
+      </div>
+      <div class="size-item">
+        <img src="icon_02.svg" class="size-16" alt="icon_02 16px"/>
+        <span>icon_02</span>
+      </div>
+      <div class="size-item">
+        <img src="icon_03.svg" class="size-16" alt="icon_03 16px"/>
+        <span>icon_03</span>
+      </div>
+      <div class="size-item">
+        <img src="icon_04.svg" class="size-16" alt="icon_04 16px"/>
+        <span>icon_04</span>
+      </div>
+      <div class="size-item">
+        <img src="icon_05.svg" class="size-16" alt="icon_05 16px"/>
+        <span>icon_05</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>

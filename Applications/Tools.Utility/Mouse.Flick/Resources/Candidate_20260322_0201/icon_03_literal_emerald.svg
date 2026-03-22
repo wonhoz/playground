@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg03" cx="40%" cy="40%" r="70%">
+      <stop offset="0%" stop-color="#0A2420"/>
+      <stop offset="100%" stop-color="#051510"/>
+    </linearGradient>
+    <filter id="glow03">
+      <feGaussianBlur stdDeviation="9" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="180" fill="#061812"/>
+
+  <!-- 격자 (제스처 영역 암시) -->
+  <line x1="200" y1="200" x2="200" y2="824" stroke="#0D3828" stroke-width="2"/>
+  <line x1="512" y1="200" x2="512" y2="824" stroke="#0D3828" stroke-width="2"/>
+  <line x1="824" y1="200" x2="824" y2="824" stroke="#0D3828" stroke-width="2"/>
+  <line x1="200" y1="200" x2="824" y2="200" stroke="#0D3828" stroke-width="2"/>
+  <line x1="200" y1="512" x2="824" y2="512" stroke="#0D3828" stroke-width="2"/>
+  <line x1="200" y1="824" x2="824" y2="824" stroke="#0D3828" stroke-width="2"/>
+
+  <!-- Z자 제스처 궤적 -->
+  <path d="M 220 280 L 780 280 L 220 720 L 780 720" fill="none" stroke="#00E87A" stroke-width="20" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow03)"/>
+
+  <!-- 시작점 -->
+  <circle cx="220" cy="280" r="24" fill="#00E87A" filter="url(#glow03)"/>
+
+  <!-- 끝 화살표 (오른쪽) -->
+  <polyline points="730,680 780,720 730,760" fill="none" stroke="#00E87A" stroke-width="20" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow03)"/>
+
+  <!-- 레이블: Z = Ctrl+Z -->
+  <rect x="352" y="440" width="320" height="70" rx="12" fill="#004A28" stroke="#00E87A" stroke-width="3"/>
+  <text x="512" y="468" font-family="monospace" font-size="22" fill="#66FFB0" text-anchor="middle">Z gesture</text>
+  <text x="512" y="498" font-family="monospace" font-size="26" font-weight="bold" fill="#00E87A" text-anchor="middle">Ctrl+Z</text>
+</svg>

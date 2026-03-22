@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- LAYER 1: 배경 (다크 퍼플) -->
+  <defs>
+    <radialGradient id="bg02" cx="45%" cy="40%" r="55%">
+      <stop offset="0%" stop-color="#1A0A3A"/>
+      <stop offset="100%" stop-color="#08051A"/>
+    </radialGradient>
+    <radialGradient id="targetPlanet02" cx="35%" cy="30%" r="60%">
+      <stop offset="0%" stop-color="#40E0D0"/>
+      <stop offset="50%" stop-color="#00AAAA"/>
+      <stop offset="100%" stop-color="#004455"/>
+    </radialGradient>
+    <radialGradient id="probe02" cx="40%" cy="35%" r="60%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#AADDFF"/>
+    </radialGradient>
+    <filter id="cyanGlow">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="180" fill="url(#bg02)"/>
+
+  <!-- 별들 -->
+  <circle cx="240" cy="195" r="2" fill="#FFFFFF" opacity="0.6"/>
+  <circle cx="380" cy="175" r="1.5" fill="#FFFFFF" opacity="0.4"/>
+  <circle cx="750" cy="200" r="2.2" fill="#FFFFFF" opacity="0.5"/>
+  <circle cx="870" cy="280" r="1.8" fill="#FFFFFF" opacity="0.4"/>
+  <circle cx="160" cy="420" r="1.5" fill="#FFFFFF" opacity="0.45"/>
+  <circle cx="910" cy="680" r="2" fill="#FFFFFF" opacity="0.5"/>
+  <circle cx="830" cy="830" r="1.5" fill="#FFFFFF" opacity="0.35"/>
+  <circle cx="300" cy="860" r="2" fill="#FFFFFF" opacity="0.4"/>
+  <circle cx="180" cy="760" r="1.5" fill="#FFFFFF" opacity="0.35"/>
+  <circle cx="450" cy="890" r="1.8" fill="#FFFFFF" opacity="0.4"/>
+  <circle cx="620" cy="175" r="1.5" fill="#FFFFFF" opacity="0.35"/>
+  <circle cx="940" cy="450" r="1.5" fill="#FFFFFF" opacity="0.3"/>
+  <circle cx="100" cy="560" r="2" fill="#FFFFFF" opacity="0.35"/>
+  <circle cx="490" cy="910" r="1.5" fill="#CCEEFF" opacity="0.35"/>
+
+  <!-- LAYER 2: 메인 오브젝트 -->
+
+  <!-- 목표 행성 (우상단, 시안 컬러) -->
+  <circle cx="680" cy="290" r="90" fill="url(#targetPlanet02)" filter="url(#cyanGlow)"/>
+  <!-- 행성 대기 효과 -->
+  <circle cx="680" cy="290" r="90" fill="none" stroke="#40E0D0" stroke-width="14" opacity="0.18"/>
+  <!-- 행성 표면 밴드 -->
+  <ellipse cx="668" cy="270" rx="55" ry="15" fill="#00CCCC" opacity="0.35" transform="rotate(-10,668,270)"/>
+  <ellipse cx="695" cy="315" rx="38" ry="10" fill="#004455" opacity="0.4" transform="rotate(5,695,315)"/>
+
+  <!-- 목표 마커 (행성 위 체크원) -->
+  <circle cx="680" cy="290" r="118" fill="none" stroke="#40E0D0" stroke-width="3.5" opacity="0.7"/>
+  <!-- 체크 마크 -->
+  <path d="M 645 288 L 668 312 L 718 262" fill="none" stroke="#FFFFFF" stroke-width="6"
+        stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
+
+  <!-- 조준선 (우주선에서 방사형으로) -->
+  <!-- 중심선 (발사 방향) -->
+  <line x1="300" y1="700" x2="620" y2="360" stroke="#00FFCC" stroke-width="2.5" stroke-dasharray="18 8" opacity="0.65"/>
+  <!-- 조준 보조선들 (부채꼴 형태) -->
+  <line x1="300" y1="700" x2="540" y2="310" stroke="#00FFCC" stroke-width="1.5" stroke-dasharray="12 10" opacity="0.3"/>
+  <line x1="300" y1="700" x2="680" y2="390" stroke="#00FFCC" stroke-width="1.5" stroke-dasharray="12 10" opacity="0.3"/>
+  <line x1="300" y1="700" x2="720" y2="460" stroke="#00FFCC" stroke-width="1" stroke-dasharray="10 12" opacity="0.18"/>
+
+  <!-- 조준선 끝 화살표 -->
+  <path d="M 600 377 L 622 357 L 638 382" fill="none" stroke="#00FFCC" stroke-width="3"
+        stroke-linecap="round" stroke-linejoin="round" opacity="0.8"/>
+
+  <!-- 발사 지점 원형 UI -->
+  <circle cx="300" cy="700" r="22" fill="none" stroke="#00FFCC" stroke-width="3" opacity="0.7"/>
+  <circle cx="300" cy="700" r="8" fill="#00FFCC" opacity="0.85"/>
+  <circle cx="300" cy="700" r="38" fill="none" stroke="#00FFCC" stroke-width="1.5" opacity="0.3" stroke-dasharray="6 6"/>
+
+  <!-- LAYER 3: 우주선 -->
+  <g transform="translate(300, 700) rotate(-52)">
+    <!-- 우주선 동체 -->
+    <ellipse cx="0" cy="0" rx="18" ry="36" fill="url(#probe02)"/>
+    <!-- 노즐 -->
+    <path d="M -9 22 L 0 40 L 9 22 Z" fill="#88BBDD"/>
+    <!-- 엔진 화염 (발사 직전 준비 중) -->
+    <path d="M -7 38 Q 0 62 7 38" fill="#00FFCC" opacity="0.9" filter="url(#cyanGlow)"/>
+    <path d="M -4 38 Q 0 52 4 38" fill="#FFFFFF" opacity="0.7"/>
+    <!-- 날개 -->
+    <path d="M -18 6 L -36 24 L -13 18 Z" fill="#AADDFF"/>
+    <path d="M 18 6 L 36 24 L 13 18 Z" fill="#AADDFF"/>
+    <!-- 창문 -->
+    <circle cx="0" cy="-10" r="8" fill="#40E0D0" opacity="0.9"/>
+    <circle cx="0" cy="-10" r="4" fill="#FFFFFF" opacity="0.6"/>
+    <!-- 안테나 -->
+    <line x1="0" y1="-36" x2="0" y2="-52" stroke="#AADDFF" stroke-width="2.5"/>
+    <circle cx="0" cy="-54" r="4" fill="#00FFCC"/>
+  </g>
+
+  <!-- 중력 영향 시각화 (행성 주위 구부러진 격자선 암시) -->
+  <path d="M 400 580 Q 520 480 580 380 Q 620 320 660 280"
+        fill="none" stroke="#40E0D0" stroke-width="2" opacity="0.25" stroke-dasharray="8 12"/>
+
+  <!-- 조준 각도 표시 호 -->
+  <path d="M 340 668 A 50 50 0 0 1 332 660" fill="none" stroke="#00FFCC" stroke-width="2" opacity="0.5"/>
+
+  <!-- 빛나는 별 -->
+  <g transform="translate(820, 700)" opacity="0.5">
+    <path d="M0,-10 L2.5,-2.5 L10,0 L2.5,2.5 L0,10 L-2.5,2.5 L-10,0 L-2.5,-2.5 Z" fill="#AAFFEE"/>
+  </g>
+  <g transform="translate(200, 310)" opacity="0.4">
+    <path d="M0,-8 L2,-2 L8,0 L2,2 L0,8 L-2,2 L-8,0 L-2,-2 Z" fill="#AAFFEE"/>
+  </g>
+</svg>

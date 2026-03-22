@@ -1,0 +1,255 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_05 | hybrid | 원소 단면 큐브 -->
+  <!-- 컨셉: 각 면에 다른 물질이 픽셀아트로 새겨진 등축투영(isometric) 큐브 -->
+  <!-- 윗면=모래, 좌면=물, 우면=불/나무 — 하나의 샌드박스 세계를 큐브 단면으로 표현 -->
+
+  <!-- 배경: 따뜻한 크림색 → 중앙 아이보리 -->
+  <rect x="80" y="80" width="864" height="864" rx="160" fill="#FFF8E7"/>
+  <defs>
+    <radialGradient id="topGrad" cx="50%" cy="40%" r="50%">
+      <stop offset="0%" stop-color="#FFFBF2"/>
+      <stop offset="100%" stop-color="#F5E8C0"/>
+    </radialGradient>
+    <linearGradient id="leftFace" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0D47A1"/>
+      <stop offset="100%" stop-color="#1565C0"/>
+    </linearGradient>
+    <linearGradient id="rightFace" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#BF360C"/>
+      <stop offset="100%" stop-color="#7B1FA2" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect x="80" y="80" width="864" height="864" rx="160" fill="url(#topGrad)"/>
+
+  <!-- ===== 등축투영 큐브 ===== -->
+  <!-- 큐브 중심: cx=512, cy=500 -->
+  <!-- 큐브 반지름 약 260px (하프엣지) -->
+
+  <!-- 큐브 윗면 (평행사변형 — 노랑/모래) -->
+  <!-- 좌상: (252, 372) 우상: (772, 372) 중앙상: (512, 244) -->
+  <!-- 실제 등축: 좌(252,500) 위중심(512,244) 우(772,500) 앞중심(512,756) -->
+  <!-- 단순화 형태 -->
+  <polygon points="512,230 780,390 512,550 244,390" fill="#E8B820"/>
+  <polygon points="512,238 772,394 512,542 252,394" fill="#F9C040"/>
+
+  <!-- 큐브 좌면 (평행사변형 — 파랑/물) -->
+  <polygon points="244,390 512,550 512,810 244,650" fill="#0D47A1"/>
+  <polygon points="252,394 512,550 512,802 252,646" fill="#1565C0"/>
+
+  <!-- 큐브 우면 (평행사변형 — 갈색+빨강/나무+불) -->
+  <polygon points="512,550 780,390 780,650 512,810" fill="#3E1F0A"/>
+  <polygon points="512,550 772,394 772,646 512,802" fill="#4E2810"/>
+
+  <!-- ===== 윗면 픽셀 — 모래 (Sand) ===== -->
+  <!-- 등축 픽셀 (菱形 형태로 배치) -->
+  <!-- 간략하게 직사각형 픽셀을 skew 변환으로 배치 -->
+  <g transform="matrix(0.866,-0.5,0,1,0,0) translate(-130,0)">
+    <!-- 모래 알갱이 도트 -->
+    <rect x="590" y="278" width="18" height="18" rx="2" fill="#FFD740"/>
+    <rect x="616" y="282" width="18" height="18" rx="2" fill="#F9C040"/>
+    <rect x="642" y="278" width="18" height="18" rx="2" fill="#FFD740"/>
+    <rect x="668" y="282" width="18" height="18" rx="2" fill="#F9C040"/>
+    <rect x="590" y="306" width="18" height="18" rx="2" fill="#F9C040"/>
+    <rect x="616" y="302" width="18" height="18" rx="2" fill="#FFD740"/>
+    <rect x="642" y="306" width="18" height="18" rx="2" fill="#F9C040"/>
+    <rect x="668" y="302" width="18" height="18" rx="2" fill="#FFD740"/>
+    <rect x="590" y="330" width="18" height="18" rx="2" fill="#FFD740"/>
+    <rect x="616" y="326" width="18" height="18" rx="2" fill="#F9C040"/>
+    <rect x="642" y="330" width="18" height="18" rx="2" fill="#FFD740"/>
+    <rect x="668" y="326" width="18" height="18" rx="2" fill="#F9C040"/>
+    <rect x="590" y="354" width="18" height="18" rx="2" fill="#F9C040"/>
+    <rect x="616" y="350" width="18" height="18" rx="2" fill="#FFD740"/>
+    <rect x="642" y="354" width="18" height="18" rx="2" fill="#F9C040"/>
+    <rect x="668" y="350" width="18" height="18" rx="2" fill="#FFD740"/>
+    <rect x="590" y="378" width="18" height="18" rx="2" fill="#FFD740"/>
+    <rect x="616" y="374" width="18" height="18" rx="2" fill="#F9C040"/>
+    <rect x="642" y="378" width="18" height="18" rx="2" fill="#FFD740"/>
+    <rect x="668" y="374" width="18" height="18" rx="2" fill="#F9C040"/>
+    <rect x="590" y="402" width="18" height="18" rx="2" fill="#F9C040"/>
+    <rect x="616" y="398" width="18" height="18" rx="2" fill="#FFD740"/>
+    <rect x="642" y="402" width="18" height="18" rx="2" fill="#F9C040"/>
+    <rect x="668" y="398" width="18" height="18" rx="2" fill="#FFD740"/>
+  </g>
+
+  <!-- ===== 좌면 픽셀 — 물 (Water) 패턴 ===== -->
+  <!-- skew for left isometric face -->
+  <g transform="matrix(1,0,-0.5,0.866,0,0) translate(0,100)">
+    <rect x="262" y="420" width="16" height="16" rx="2" fill="#42A5F5"/>
+    <rect x="282" y="420" width="16" height="16" rx="2" fill="#2196F3"/>
+    <rect x="302" y="420" width="16" height="16" rx="2" fill="#42A5F5"/>
+    <rect x="322" y="420" width="16" height="16" rx="2" fill="#1E88E5"/>
+    <rect x="342" y="420" width="16" height="16" rx="2" fill="#42A5F5"/>
+    <rect x="362" y="420" width="16" height="16" rx="2" fill="#2196F3"/>
+    <rect x="382" y="420" width="16" height="16" rx="2" fill="#42A5F5"/>
+    <rect x="402" y="420" width="16" height="16" rx="2" fill="#1E88E5"/>
+    <rect x="422" y="420" width="16" height="16" rx="2" fill="#42A5F5"/>
+    <rect x="442" y="420" width="16" height="16" rx="2" fill="#2196F3"/>
+    <rect x="262" y="440" width="16" height="16" rx="2" fill="#2196F3"/>
+    <rect x="282" y="440" width="16" height="16" rx="2" fill="#42A5F5"/>
+    <rect x="302" y="440" width="16" height="16" rx="2" fill="#1E88E5"/>
+    <rect x="322" y="440" width="16" height="16" rx="2" fill="#42A5F5"/>
+    <rect x="342" y="440" width="16" height="16" rx="2" fill="#2196F3"/>
+    <rect x="362" y="440" width="16" height="16" rx="2" fill="#1E88E5"/>
+    <rect x="382" y="440" width="16" height="16" rx="2" fill="#42A5F5"/>
+    <rect x="402" y="440" width="16" height="16" rx="2" fill="#2196F3"/>
+    <rect x="422" y="440" width="16" height="16" rx="2" fill="#1E88E5"/>
+    <rect x="442" y="440" width="16" height="16" rx="2" fill="#42A5F5"/>
+    <rect x="262" y="460" width="16" height="16" rx="2" fill="#42A5F5"/>
+    <rect x="282" y="460" width="16" height="16" rx="2" fill="#2196F3"/>
+    <rect x="302" y="460" width="16" height="16" rx="2" fill="#42A5F5"/>
+    <rect x="322" y="460" width="16" height="16" rx="2" fill="#2196F3"/>
+    <rect x="342" y="460" width="16" height="16" rx="2" fill="#1E88E5"/>
+    <rect x="362" y="460" width="16" height="16" rx="2" fill="#42A5F5"/>
+    <rect x="382" y="460" width="16" height="16" rx="2" fill="#2196F3"/>
+    <rect x="402" y="460" width="16" height="16" rx="2" fill="#42A5F5"/>
+    <rect x="422" y="460" width="16" height="16" rx="2" fill="#2196F3"/>
+    <rect x="442" y="460" width="16" height="16" rx="2" fill="#1E88E5"/>
+    <rect x="262" y="480" width="16" height="16" rx="2" fill="#1E88E5"/>
+    <rect x="282" y="480" width="16" height="16" rx="2" fill="#42A5F5"/>
+    <rect x="302" y="480" width="16" height="16" rx="2" fill="#2196F3"/>
+    <rect x="322" y="480" width="16" height="16" rx="2" fill="#42A5F5"/>
+    <rect x="342" y="480" width="16" height="16" rx="2" fill="#2196F3"/>
+    <rect x="362" y="480" width="16" height="16" rx="2" fill="#1E88E5"/>
+    <rect x="382" y="480" width="16" height="16" rx="2" fill="#42A5F5"/>
+    <rect x="402" y="480" width="16" height="16" rx="2" fill="#2196F3"/>
+    <rect x="422" y="480" width="16" height="16" rx="2" fill="#42A5F5"/>
+    <rect x="442" y="480" width="16" height="16" rx="2" fill="#2196F3"/>
+    <rect x="262" y="500" width="16" height="16" rx="2" fill="#42A5F5"/>
+    <rect x="282" y="500" width="16" height="16" rx="2" fill="#1E88E5"/>
+    <rect x="302" y="500" width="16" height="16" rx="2" fill="#42A5F5"/>
+    <rect x="322" y="500" width="16" height="16" rx="2" fill="#2196F3"/>
+    <rect x="342" y="500" width="16" height="16" rx="2" fill="#42A5F5"/>
+    <rect x="362" y="500" width="16" height="16" rx="2" fill="#2196F3"/>
+    <rect x="382" y="500" width="16" height="16" rx="2" fill="#1E88E5"/>
+    <rect x="402" y="500" width="16" height="16" rx="2" fill="#42A5F5"/>
+    <rect x="422" y="500" width="16" height="16" rx="2" fill="#2196F3"/>
+    <rect x="442" y="500" width="16" height="16" rx="2" fill="#1E88E5"/>
+  </g>
+
+  <!-- ===== 우면 픽셀 — 나무 + 불 패턴 ===== -->
+  <!-- 나무 배경 (갈색) + 불꽃 오버레이 -->
+  <g transform="matrix(1,0,0.5,0.866,0,-100)">
+    <!-- 나무 줄기/결 -->
+    <rect x="540" y="500" width="16" height="16" rx="2" fill="#6D4C41"/>
+    <rect x="560" y="500" width="16" height="16" rx="2" fill="#795548"/>
+    <rect x="580" y="500" width="16" height="16" rx="2" fill="#6D4C41"/>
+    <rect x="600" y="500" width="16" height="16" rx="2" fill="#5D3A1A"/>
+    <rect x="620" y="500" width="16" height="16" rx="2" fill="#6D4C41"/>
+    <rect x="640" y="500" width="16" height="16" rx="2" fill="#795548"/>
+    <rect x="660" y="500" width="16" height="16" rx="2" fill="#6D4C41"/>
+    <rect x="680" y="500" width="16" height="16" rx="2" fill="#5D3A1A"/>
+    <rect x="700" y="500" width="16" height="16" rx="2" fill="#6D4C41"/>
+    <rect x="540" y="520" width="16" height="16" rx="2" fill="#795548"/>
+    <rect x="560" y="520" width="16" height="16" rx="2" fill="#6D4C41"/>
+    <rect x="580" y="520" width="16" height="16" rx="2" fill="#795548"/>
+    <rect x="600" y="520" width="16" height="16" rx="2" fill="#6D4C41"/>
+    <rect x="620" y="520" width="16" height="16" rx="2" fill="#5D3A1A"/>
+    <rect x="640" y="520" width="16" height="16" rx="2" fill="#6D4C41"/>
+    <rect x="660" y="520" width="16" height="16" rx="2" fill="#795548"/>
+    <rect x="680" y="520" width="16" height="16" rx="2" fill="#6D4C41"/>
+    <rect x="700" y="520" width="16" height="16" rx="2" fill="#795548"/>
+    <rect x="540" y="540" width="16" height="16" rx="2" fill="#6D4C41"/>
+    <rect x="560" y="540" width="16" height="16" rx="2" fill="#795548"/>
+    <rect x="580" y="540" width="16" height="16" rx="2" fill="#6D4C41"/>
+    <rect x="600" y="540" width="16" height="16" rx="2" fill="#795548"/>
+    <rect x="620" y="540" width="16" height="16" rx="2" fill="#6D4C41"/>
+    <rect x="640" y="540" width="16" height="16" rx="2" fill="#5D3A1A"/>
+    <rect x="660" y="540" width="16" height="16" rx="2" fill="#6D4C41"/>
+    <rect x="680" y="540" width="16" height="16" rx="2" fill="#795548"/>
+    <rect x="700" y="540" width="16" height="16" rx="2" fill="#6D4C41"/>
+    <!-- 불꽃 오버레이 (나무 위) -->
+    <rect x="548" y="482" width="12" height="16" rx="3" fill="#FF4500" opacity="0.9"/>
+    <rect x="566" y="474" width="12" height="22" rx="3" fill="#FF6D00" opacity="0.85"/>
+    <rect x="584" y="468" width="12" height="26" rx="3" fill="#FFC107" opacity="0.9"/>
+    <rect x="602" y="474" width="12" height="22" rx="3" fill="#FF6D00" opacity="0.85"/>
+    <rect x="620" y="480" width="12" height="18" rx="3" fill="#FF4500" opacity="0.9"/>
+    <rect x="638" y="472" width="12" height="24" rx="3" fill="#FF8C00" opacity="0.85"/>
+    <rect x="656" y="476" width="12" height="22" rx="3" fill="#FFC107" opacity="0.9"/>
+    <rect x="674" y="480" width="12" height="18" rx="3" fill="#FF6D00" opacity="0.85"/>
+    <rect x="692" y="474" width="12" height="24" rx="3" fill="#FF4500" opacity="0.9"/>
+    <!-- 불꽃 2단 -->
+    <rect x="556" y="462" width="10" height="18" rx="3" fill="#FF8C00" opacity="0.75"/>
+    <rect x="574" y="454" width="10" height="20" rx="3" fill="#FFCA28" opacity="0.7"/>
+    <rect x="592" y="450" width="10" height="22" rx="3" fill="#FFF59D" opacity="0.65"/>
+    <rect x="610" y="456" width="10" height="20" rx="3" fill="#FFCA28" opacity="0.7"/>
+    <rect x="628" y="462" width="10" height="16" rx="3" fill="#FF8C00" opacity="0.75"/>
+    <rect x="646" y="454" width="10" height="20" rx="3" fill="#FFCA28" opacity="0.7"/>
+    <rect x="664" y="460" width="10" height="18" rx="3" fill="#FF8C00" opacity="0.75"/>
+    <!-- 나무 하단 (더 많은 줄기 레이어) -->
+    <rect x="540" y="560" width="16" height="16" rx="2" fill="#795548"/>
+    <rect x="560" y="560" width="16" height="16" rx="2" fill="#6D4C41"/>
+    <rect x="580" y="560" width="16" height="16" rx="2" fill="#795548"/>
+    <rect x="600" y="560" width="16" height="16" rx="2" fill="#6D4C41"/>
+    <rect x="620" y="560" width="16" height="16" rx="2" fill="#795548"/>
+    <rect x="640" y="560" width="16" height="16" rx="2" fill="#6D4C41"/>
+    <rect x="660" y="560" width="16" height="16" rx="2" fill="#795548"/>
+    <rect x="680" y="560" width="16" height="16" rx="2" fill="#6D4C41"/>
+    <rect x="700" y="560" width="16" height="16" rx="2" fill="#795548"/>
+    <!-- 재 (타고 남은 흔적) -->
+    <rect x="540" y="580" width="16" height="12" rx="2" fill="#424242" opacity="0.8"/>
+    <rect x="560" y="580" width="16" height="12" rx="2" fill="#616161" opacity="0.7"/>
+    <rect x="580" y="580" width="16" height="12" rx="2" fill="#424242" opacity="0.8"/>
+    <rect x="600" y="580" width="16" height="12" rx="2" fill="#757575" opacity="0.65"/>
+    <rect x="620" y="580" width="16" height="12" rx="2" fill="#424242" opacity="0.8"/>
+    <rect x="640" y="580" width="16" height="12" rx="2" fill="#616161" opacity="0.7"/>
+    <rect x="660" y="580" width="16" height="12" rx="2" fill="#424242" opacity="0.75"/>
+    <rect x="680" y="580" width="16" height="12" rx="2" fill="#757575" opacity="0.65"/>
+    <rect x="700" y="580" width="16" height="12" rx="2" fill="#424242" opacity="0.8"/>
+  </g>
+
+  <!-- ===== 큐브 엣지 (윤곽선) ===== -->
+  <!-- 윗면 테두리 -->
+  <polygon points="512,230 780,390 512,550 244,390" fill="none" stroke="#C8A020" stroke-width="5" stroke-linejoin="round"/>
+  <!-- 좌면 테두리 -->
+  <polygon points="244,390 512,550 512,810 244,650" fill="none" stroke="#0D47A1" stroke-width="5" stroke-linejoin="round"/>
+  <!-- 우면 테두리 -->
+  <polygon points="512,550 780,390 780,650 512,810" fill="none" stroke="#4E2810" stroke-width="5" stroke-linejoin="round"/>
+  <!-- 중앙 수직선 -->
+  <line x1="512" y1="550" x2="512" y2="810" stroke="#1A0A00" stroke-width="5"/>
+  <!-- 윗 꼭짓점에서 내려오는 선들 -->
+  <line x1="512" y1="230" x2="512" y2="550" stroke="#A08010" stroke-width="3" opacity="0.6"/>
+
+  <!-- 큐브 윗면 광택 (하이라이트) -->
+  <polygon points="512,238 640,312 512,386 384,312" fill="white" opacity="0.08"/>
+
+  <!-- ===== 레이블 (각 면 이름) ===== -->
+  <!-- 윗면: "SAND" -->
+  <rect x="488" y="370" width="6" height="12" rx="1" fill="#7A5010" opacity="0.8"/>
+  <rect x="498" y="370" width="6" height="12" rx="1" fill="#7A5010" opacity="0.8"/>
+  <rect x="508" y="370" width="6" height="12" rx="1" fill="#7A5010" opacity="0.8"/>
+  <rect x="518" y="370" width="6" height="12" rx="1" fill="#7A5010" opacity="0.8"/>
+  <rect x="528" y="370" width="6" height="12" rx="1" fill="#7A5010" opacity="0.8"/>
+
+  <!-- 좌면: "WATER" -->
+  <rect x="310" y="622" width="5" height="10" rx="1" fill="#90CAF9" opacity="0.85"/>
+  <rect x="319" y="622" width="5" height="10" rx="1" fill="#90CAF9" opacity="0.85"/>
+  <rect x="328" y="622" width="5" height="10" rx="1" fill="#90CAF9" opacity="0.85"/>
+  <rect x="337" y="622" width="5" height="10" rx="1" fill="#90CAF9" opacity="0.85"/>
+  <rect x="346" y="622" width="5" height="10" rx="1" fill="#90CAF9" opacity="0.85"/>
+
+  <!-- 우면: "FIRE" -->
+  <rect x="666" y="622" width="5" height="10" rx="1" fill="#FF8C00" opacity="0.9"/>
+  <rect x="675" y="622" width="5" height="10" rx="1" fill="#FF8C00" opacity="0.9"/>
+  <rect x="684" y="622" width="5" height="10" rx="1" fill="#FF8C00" opacity="0.9"/>
+  <rect x="693" y="622" width="5" height="10" rx="1" fill="#FF8C00" opacity="0.9"/>
+
+  <!-- 하단 그림자 -->
+  <ellipse cx="512" cy="820" rx="280" ry="28" fill="#C8A020" opacity="0.18"/>
+
+  <!-- 날리는 모래 파티클 (위) -->
+  <rect x="440" y="200" width="10" height="10" rx="2" fill="#FFD740" opacity="0.6"/>
+  <rect x="468" y="185" width="8" height="8" rx="2" fill="#F9C040" opacity="0.5"/>
+  <rect x="548" y="190" width="10" height="10" rx="2" fill="#FFD740" opacity="0.6"/>
+  <rect x="574" y="202" width="8" height="8" rx="2" fill="#F9C040" opacity="0.5"/>
+
+  <!-- 날리는 물 파티클 (좌) -->
+  <rect x="184" y="560" width="10" height="10" rx="2" fill="#42A5F5" opacity="0.55"/>
+  <rect x="170" y="588" width="8" height="8" rx="2" fill="#2196F3" opacity="0.45"/>
+  <rect x="178" y="614" width="10" height="10" rx="2" fill="#42A5F5" opacity="0.5"/>
+
+  <!-- 불꽃 파티클 (우) -->
+  <rect x="814" y="440" width="10" height="14" rx="3" fill="#FF6D00" opacity="0.65"/>
+  <rect x="830" y="460" width="8" height="12" rx="3" fill="#FFC107" opacity="0.55"/>
+  <rect x="820" y="484" width="10" height="12" rx="3" fill="#FF4500" opacity="0.5"/>
+  <rect x="836" y="506" width="8" height="10" rx="3" fill="#FF8C00" opacity="0.45"/>
+</svg>

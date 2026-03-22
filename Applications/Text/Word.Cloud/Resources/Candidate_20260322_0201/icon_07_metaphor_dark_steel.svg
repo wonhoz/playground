@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- 다크스틸 — 기어+문서+구름 기계적 변환, 기하학추상 패턴 -->
+  <defs>
+    <linearGradient id="bg07" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1C2434"/>
+      <stop offset="100%" stop-color="#0D1520"/>
+    </linearGradient>
+    <linearGradient id="steelGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#8FA8C8"/>
+      <stop offset="100%" stop-color="#4A6A8A"/>
+    </linearGradient>
+    <linearGradient id="cloudSteel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#C8D8E8"/>
+      <stop offset="100%" stop-color="#8AAAC5"/>
+    </linearGradient>
+    <linearGradient id="accentBlue" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#4FC3F7"/>
+      <stop offset="100%" stop-color="#0288D1"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="120" fill="url(#bg07)"/>
+
+  <!-- 구름 (우측 상단 영역) -->
+  <g fill="url(#cloudSteel)" opacity="0.9">
+    <circle cx="680" cy="310" r="165"/>
+    <circle cx="555" cy="355" r="115"/>
+    <circle cx="795" cy="345" r="125"/>
+    <circle cx="625" cy="260" r="95"/>
+    <circle cx="740" cy="255" r="105"/>
+  </g>
+
+  <!-- 구름 안 단어들 -->
+  <text x="680" y="295" font-family="Arial Black, sans-serif" font-size="72" font-weight="900" fill="#1C2434" text-anchor="middle">CLOUD</text>
+  <text x="610" y="348" font-family="Arial, sans-serif" font-size="30" font-weight="700" fill="#2C3A50" text-anchor="middle">WORD</text>
+  <text x="755" y="342" font-family="Arial, sans-serif" font-size="26" font-weight="700" fill="#2C3A50" text-anchor="middle">TEXT</text>
+  <text x="650" y="385" font-family="Arial, sans-serif" font-size="18" font-weight="600" fill="#3A4A60" text-anchor="middle">data</text>
+  <text x="728" y="380" font-family="Arial, sans-serif" font-size="16" font-weight="500" fill="#3A4A60" text-anchor="middle">big</text>
+
+  <!-- 변환 화살표 (중앙) -->
+  <path d="M 430 420 C 480 380 520 380 560 400" stroke="url(#accentBlue)" stroke-width="14" fill="none" stroke-linecap="round"/>
+  <polygon points="556,384 578,405 550,415" fill="#4FC3F7"/>
+
+  <!-- 왼쪽: 텍스트 문서 아이콘 -->
+  <rect x="145" y="290" width="250" height="310" rx="16" fill="url(#steelGrad)" opacity="0.85"/>
+  <!-- 문서 접힘 모서리 -->
+  <polygon points="335,290 395,290 395,350" fill="#4A6A8A" opacity="0.7"/>
+  <rect x="145" y="290" width="190" height="310" rx="16" fill="url(#steelGrad)" opacity="0.9"/>
+  <polygon points="275,290 335,290 335,350 275,350" fill="#6A8AAA" opacity="0.5"/>
+  <!-- 줄들 -->
+  <rect x="175" y="370" width="130" height="14" rx="5" fill="#C8D8E8" opacity="0.8"/>
+  <rect x="175" y="398" width="110" height="12" rx="4" fill="#A8C0D8" opacity="0.7"/>
+  <rect x="175" y="422" width="120" height="12" rx="4" fill="#A8C0D8" opacity="0.7"/>
+  <rect x="175" y="446" width="100" height="12" rx="4" fill="#A8C0D8" opacity="0.65"/>
+  <rect x="175" y="470" width="115" height="12" rx="4" fill="#A8C0D8" opacity="0.60"/>
+  <rect x="175" y="494" width="95" height="12" rx="4" fill="#A8C0D8" opacity="0.55"/>
+  <rect x="175" y="518" width="108" height="12" rx="4" fill="#A8C0D8" opacity="0.5"/>
+  <!-- 문서 아이콘 레이블 -->
+  <text x="220" y="350" font-family="Arial, sans-serif" font-size="28" font-weight="700" fill="#E0EAF5" text-anchor="middle">TXT</text>
+
+  <!-- 하단: 다양한 크기 단어들 표시 (빈도 차이 시각화) -->
+  <text x="280" y="680" font-family="Arial, sans-serif" font-size="44" font-weight="800" fill="#8AAAC5" text-anchor="middle" opacity="0.9">world</text>
+  <text x="450" y="690" font-family="Arial, sans-serif" font-size="34" font-weight="700" fill="#6A8CAE" text-anchor="middle" opacity="0.85">hello</text>
+  <text x="600" y="685" font-family="Arial, sans-serif" font-size="26" font-weight="600" fill="#5A7A9E" text-anchor="middle" opacity="0.75">love</text>
+  <text x="720" y="680" font-family="Arial, sans-serif" font-size="20" font-weight="600" fill="#4A6A8E" text-anchor="middle" opacity="0.65">sky</text>
+  <text x="820" y="675" font-family="Arial, sans-serif" font-size="16" font-weight="500" fill="#4A6080" text-anchor="middle" opacity="0.55">art</text>
+  <text x="890" y="672" font-family="Arial, sans-serif" font-size="12" font-weight="400" fill="#3A5070" text-anchor="middle" opacity="0.45">tag</text>
+
+  <!-- 빈도 척도 바 -->
+  <rect x="230" y="720" width="680" height="8" rx="4" fill="#2A3A50" opacity="0.6"/>
+  <rect x="230" y="720" width="680" height="8" rx="4" fill="url(#accentBlue)" opacity="0.4"/>
+  <text x="230" y="752" font-family="Arial, sans-serif" font-size="16" fill="#5A7A9A" text-anchor="start" opacity="0.7">high freq</text>
+  <text x="910" y="752" font-family="Arial, sans-serif" font-size="16" fill="#3A5A7A" text-anchor="end" opacity="0.7">low</text>
+</svg>

@@ -1,0 +1,120 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_10 | Hybrid / 대각선·동적 | 사진 프레임 비행 + 날짜 변환 흔적 -->
+  <!-- 컨셉: 사진 프레임이 빠르게 날아가며 파일명이 변환되는 속도감 -->
+  <!-- 색조: 브라이트 스카이 블루 배경 + 딥 네이비 + 비비드 라임 그린 -->
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="160" fill="#E3F2FD"/>
+
+  <!-- 속도 흔적 라인들 (배경) -->
+  <g stroke="#BBDEFB" stroke-width="8" stroke-linecap="round">
+    <line x1="80" y1="320" x2="380" y2="280"/>
+    <line x1="80" y1="380" x2="340" y2="350"/>
+    <line x1="80" y1="440" x2="360" y2="420"/>
+    <line x1="80" y1="500" x2="350" y2="490"/>
+    <line x1="80" y1="560" x2="340" y2="555"/>
+    <line x1="80" y1="620" x2="360" y2="610"/>
+    <line x1="80" y1="680" x2="380" y2="670"/>
+    <line x1="80" y1="740" x2="350" y2="730"/>
+  </g>
+
+  <!-- 파일 변환 스트림 (대각선) -->
+  <!-- 원본 파일 1 (상단 좌측에서 날아옴) -->
+  <g transform="translate(200,220) rotate(-8)">
+    <rect x="0" y="0" width="140" height="176" rx="12" fill="white" stroke="#90CAF9" stroke-width="5"/>
+    <polygon points="102,0 140,0 140,38 102,38" fill="white"/>
+    <polygon points="102,0 140,38 102,38" fill="#90CAF9"/>
+    <!-- 사진 -->
+    <rect x="10" y="46" width="120" height="80" rx="6" fill="#B3E5FC"/>
+    <path d="M10 100 Q25 84 42 92 Q58 76 76 88 Q92 72 130 86 L130 126 L10 126Z" fill="#4A8A3A" opacity="0.6"/>
+    <circle cx="100" cy="68" r="16" fill="#FFE082"/>
+    <text x="70" y="152" font-family="Consolas,monospace" font-size="13" fill="#90A4AE" text-anchor="middle">IMG_9821</text>
+    <text x="70" y="168" font-family="Consolas,monospace" font-size="11" fill="#B0BEC5" text-anchor="middle">.jpg</text>
+  </g>
+
+  <!-- 원본 파일 2 (대각선 중간) -->
+  <g transform="translate(320,420) rotate(-6)">
+    <rect x="0" y="0" width="130" height="162" rx="12" fill="white" stroke="#90CAF9" stroke-width="4"/>
+    <polygon points="94,0 130,0 130,36 94,36" fill="white"/>
+    <polygon points="94,0 130,36 94,36" fill="#90CAF9"/>
+    <!-- 영상 -->
+    <rect x="10" y="42" width="110" height="72" rx="5" fill="#1A237E" opacity="0.6"/>
+    <polygon points="44,68 78,78 44,88" fill="#FFB300"/>
+    <text x="65" y="136" font-family="Consolas,monospace" font-size="12" fill="#90A4AE" text-anchor="middle">VID_0042</text>
+    <text x="65" y="150" font-family="Consolas,monospace" font-size="10" fill="#B0BEC5" text-anchor="middle">.mp4</text>
+  </g>
+
+  <!-- 처리 번개 / 변환 심볼 (중앙) -->
+  <g transform="translate(512,480)">
+    <!-- 번개 배경 글로우 -->
+    <circle cx="0" cy="0" r="90" fill="#1565C0" opacity="0.2"/>
+    <circle cx="0" cy="0" r="70" fill="#1565C0" opacity="0.3"/>
+    <!-- 번개 심볼 -->
+    <path d="M20,-80 L-20,10 L10,10 L-20,80 L20,-10 L-10,-10 Z" fill="#FFD600" stroke="#FF8F00" stroke-width="3" stroke-linejoin="round"/>
+    <!-- EXIF 텍스트 -->
+    <text x="0" y="-100" font-family="Consolas,monospace" font-size="20" fill="#1565C0" text-anchor="middle" font-weight="bold">EXIF</text>
+  </g>
+
+  <!-- 변환 후 파일 1 (우측 상단으로 날아감) -->
+  <g transform="translate(640,200) rotate(6)">
+    <rect x="0" y="0" width="140" height="176" rx="12" fill="#1B5E20" stroke="#66BB6A" stroke-width="6"/>
+    <polygon points="102,0 140,0 140,38 102,38" fill="#1B5E20"/>
+    <polygon points="102,0 140,38 102,38" fill="#66BB6A"/>
+    <!-- 사진 -->
+    <rect x="10" y="46" width="120" height="80" rx="6" fill="#B3E5FC" opacity="0.5"/>
+    <path d="M10 100 Q25 84 42 92 Q58 76 76 88 Q92 72 130 86 L130 126 L10 126Z" fill="#4A8A3A" opacity="0.5"/>
+    <circle cx="100" cy="68" r="16" fill="#FFE082" opacity="0.8"/>
+    <!-- 새 파일명 -->
+    <text x="70" y="148" font-family="Consolas,monospace" font-size="11" fill="#A5D6A7" text-anchor="middle">20240315_</text>
+    <text x="70" y="162" font-family="Consolas,monospace" font-size="11" fill="#A5D6A7" text-anchor="middle">094211_001</text>
+    <text x="70" y="173" font-family="Consolas,monospace" font-size="10" fill="#81C784" text-anchor="middle">.jpg</text>
+    <!-- 체크 -->
+    <circle cx="122" cy="14" r="16" fill="#66BB6A"/>
+    <path d="M114,14 L120,20 L130,8" stroke="white" stroke-width="3" fill="none" stroke-linecap="round"/>
+  </g>
+
+  <!-- 변환 후 파일 2 (우측 하단으로 날아감) -->
+  <g transform="translate(700,500) rotate(8)">
+    <rect x="0" y="0" width="130" height="162" rx="12" fill="#1B5E20" stroke="#66BB6A" stroke-width="5"/>
+    <polygon points="94,0 130,0 130,36 94,36" fill="#1B5E20"/>
+    <polygon points="94,0 130,36 94,36" fill="#66BB6A"/>
+    <!-- 영상 -->
+    <rect x="10" y="42" width="110" height="72" rx="5" fill="#1A237E" opacity="0.5"/>
+    <polygon points="44,68 78,78 44,88" fill="#FFB300" opacity="0.8"/>
+    <!-- 새 파일명 -->
+    <text x="65" y="132" font-family="Consolas,monospace" font-size="11" fill="#A5D6A7" text-anchor="middle">20240315_</text>
+    <text x="65" y="146" font-family="Consolas,monospace" font-size="11" fill="#A5D6A7" text-anchor="middle">143022_001</text>
+    <text x="65" y="157" font-family="Consolas,monospace" font-size="10" fill="#81C784" text-anchor="middle">.mp4</text>
+    <!-- 체크 -->
+    <circle cx="112" cy="14" r="16" fill="#66BB6A"/>
+    <path d="M104,14 L110,20 L120,8" stroke="white" stroke-width="3" fill="none" stroke-linecap="round"/>
+  </g>
+
+  <!-- 하단 통계 바 -->
+  <rect x="140" y="780" width="744" height="120" rx="20" fill="#1565C0" opacity="0.9"/>
+  <!-- 아이콘들 -->
+  <!-- 사진 아이콘 -->
+  <rect x="168" y="808" width="46" height="36" rx="5" fill="white" opacity="0.25"/>
+  <path d="M168 830 Q178 822 188 826 Q198 818 208 822 L214 822 L214 844 L168 844Z" fill="white" opacity="0.3"/>
+  <circle cx="198" cy="816" r="6" fill="#FFD600" opacity="0.8"/>
+  <text x="191" y="862" font-family="Arial,sans-serif" font-size="14" fill="white" text-anchor="middle">Photo</text>
+
+  <!-- 구분 -->
+  <line x1="240" y1="800" x2="240" y2="880" stroke="white" stroke-width="2" opacity="0.3"/>
+
+  <!-- 비디오 아이콘 -->
+  <rect x="256" y="808" width="46" height="36" rx="5" fill="white" opacity="0.25"/>
+  <polygon points="268,814 290,826 268,838" fill="#FFB300" opacity="0.9"/>
+  <text x="279" y="862" font-family="Arial,sans-serif" font-size="14" fill="white" text-anchor="middle">Video</text>
+
+  <!-- 구분 -->
+  <line x1="336" y1="800" x2="336" y2="880" stroke="white" stroke-width="2" opacity="0.3"/>
+
+  <!-- 중앙 설명 -->
+  <text x="610" y="828" font-family="Arial,sans-serif" font-size="20" fill="white" text-anchor="middle" font-weight="bold">EXIF · QuickTime</text>
+  <text x="610" y="854" font-family="Consolas,monospace" font-size="16" fill="#90CAF9" text-anchor="middle">Batch Rename by Capture Date</text>
+  <!-- 진행 표시 -->
+  <rect x="360" y="866" width="500" height="14" rx="5" fill="#0D47A1"/>
+  <rect x="360" y="866" width="380" height="14" rx="5" fill="#66BB6A"/>
+  <text x="880" y="878" font-family="Arial,sans-serif" font-size="14" fill="#A5D6A7">76%</text>
+</svg>

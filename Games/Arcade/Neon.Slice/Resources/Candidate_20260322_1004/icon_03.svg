@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_03 | metaphor | 기하학 추상 | 칼날 형태의 추상 구성 + 도형 파편 | 핫핑크/일렉트릭블루 -->
+
+  <defs>
+    <linearGradient id="bg03" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0A001A"/>
+      <stop offset="50%" stop-color="#100020"/>
+      <stop offset="100%" stop-color="#001A10"/>
+    </linearGradient>
+    <linearGradient id="bladeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF0080"/>
+      <stop offset="40%" stop-color="#FF40AA"/>
+      <stop offset="100%" stop-color="#FFFFFF"/>
+    </linearGradient>
+    <linearGradient id="blade2Grad" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0080FF"/>
+      <stop offset="60%" stop-color="#00CCFF"/>
+      <stop offset="100%" stop-color="#FFFFFF"/>
+    </linearGradient>
+    <filter id="glow03">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="softGlow03">
+      <feGaussianBlur stdDeviation="20" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="180" fill="url(#bg03)"/>
+
+  <!-- 배경 광휘 -->
+  <ellipse cx="512" cy="512" rx="300" ry="300" fill="#FF0080" opacity="0.04" filter="url(#softGlow03)"/>
+  <ellipse cx="512" cy="512" rx="220" ry="220" fill="#0080FF" opacity="0.04" filter="url(#softGlow03)"/>
+
+  <!-- 칼날 1 — 핫핑크 대각 (왼쪽 아래 → 오른쪽 위) -->
+  <!-- 칼날 몸체 (긴 마름모꼴) -->
+  <polygon points="200,750 480,520 820,270 750,320 460,560 230,790"
+    fill="url(#bladeGrad)" opacity="0.9" filter="url(#glow03)"/>
+  <!-- 칼날 엣지 (날카로운 끝) -->
+  <polygon points="820,270 780,260 750,320"
+    fill="#FFFFFF" opacity="0.95" filter="url(#glow03)"/>
+  <!-- 칼날 핸들 -->
+  <rect x="190" y="755" width="60" height="22" rx="6"
+    fill="#FF0080" opacity="0.7" transform="rotate(-35, 220, 766)"/>
+
+  <!-- 칼날 2 — 일렉트릭블루 (반대 방향, 교차) -->
+  <polygon points="750,750 490,530 210,290 270,340 530,545 780,770"
+    fill="url(#blade2Grad)" opacity="0.85" filter="url(#glow03)"/>
+  <!-- 칼날 2 끝 -->
+  <polygon points="210,290 248,278 270,340"
+    fill="#FFFFFF" opacity="0.95" filter="url(#glow03)"/>
+
+  <!-- 교차 중심 폭발 광휘 -->
+  <circle cx="512" cy="512" r="30" fill="#FFFFFF" opacity="0.6" filter="url(#softGlow03)"/>
+  <circle cx="512" cy="512" r="14" fill="#FFFFFF" opacity="0.95"/>
+
+  <!-- 도형 파편들 — 핑크 -->
+  <polygon points="320,280 348,320 292,318" fill="#FF0080" opacity="0.8" filter="url(#glow03)"/>
+  <rect x="360" y="248" width="36" height="36" rx="4"
+    fill="#FF40AA" opacity="0.7" filter="url(#glow03)" transform="rotate(22, 378, 266)"/>
+  <circle cx="260" cy="360" r="14" fill="#FF0080" opacity="0.6" filter="url(#glow03)"/>
+
+  <!-- 도형 파편들 — 블루 -->
+  <polygon points="700,320 726,360 672,356" fill="#0080FF" opacity="0.8" filter="url(#glow03)"/>
+  <rect x="730" y="380" width="32" height="32" rx="4"
+    fill="#00CCFF" opacity="0.7" filter="url(#glow03)" transform="rotate(-18, 746, 396)"/>
+  <circle cx="780" cy="440" r="12" fill="#0080FF" opacity="0.6" filter="url(#glow03)"/>
+
+  <!-- 하단 파편들 -->
+  <polygon points="350,720 372,752 328,748" fill="#FF40AA" opacity="0.55"/>
+  <circle cx="680" cy="740" r="10" fill="#00CCFF" opacity="0.5"/>
+  <polygon points="460,760 478,784 442,782" fill="#FFFFFF" opacity="0.3"/>
+</svg>

@@ -1,0 +1,104 @@
+<!-- icon_06 | Hybrid | 레이어드 | 3-레이어 원근 별 배경 + 게임 HUD 오버레이 -->
+<!-- 색조: 아이스 블루 + 다크 슬레이트 + 화이트 -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg06" cx="50%" cy="50%" r="65%">
+      <stop offset="0%" stop-color="#0D1B2A"/>
+      <stop offset="100%" stop-color="#050D15"/>
+    </radialGradient>
+    <radialGradient id="cockpitGlow" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#88CCFF" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#88CCFF" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="120" fill="url(#bg06)"/>
+
+  <!-- Layer 1: Distant stars (tiny, dim) -->
+  <circle cx="240" cy="195" r="1.5" fill="#AACCFF" opacity="0.4"/>
+  <circle cx="310" cy="240" r="1" fill="#FFFFFF" opacity="0.35"/>
+  <circle cx="390" cy="175" r="1.5" fill="#FFFFFF" opacity="0.4"/>
+  <circle cx="450" cy="215" r="1" fill="#AACCFF" opacity="0.35"/>
+  <circle cx="530" cy="185" r="1.5" fill="#FFFFFF" opacity="0.4"/>
+  <circle cx="600" cy="230" r="1" fill="#FFFFFF" opacity="0.35"/>
+  <circle cx="680" cy="190" r="1.5" fill="#AACCFF" opacity="0.4"/>
+  <circle cx="740" cy="245" r="1" fill="#FFFFFF" opacity="0.35"/>
+  <circle cx="820" cy="200" r="1.5" fill="#FFFFFF" opacity="0.4"/>
+  <circle cx="270" cy="320" r="1" fill="#FFFFFF" opacity="0.3"/>
+  <circle cx="420" cy="340" r="1.5" fill="#AACCFF" opacity="0.35"/>
+  <circle cx="570" cy="300" r="1" fill="#FFFFFF" opacity="0.3"/>
+  <circle cx="720" cy="330" r="1.5" fill="#AACCFF" opacity="0.4"/>
+  <circle cx="860" cy="310" r="1" fill="#FFFFFF" opacity="0.3"/>
+  <circle cx="200" cy="420" r="1" fill="#FFFFFF" opacity="0.3"/>
+  <circle cx="350" cy="450" r="1.5" fill="#AACCFF" opacity="0.35"/>
+  <circle cx="480" cy="400" r="1" fill="#FFFFFF" opacity="0.3"/>
+  <circle cx="640" cy="430" r="1" fill="#AACCFF" opacity="0.3"/>
+  <circle cx="800" cy="460" r="1.5" fill="#FFFFFF" opacity="0.35"/>
+
+  <!-- Layer 2: Mid-distance stars (medium, slightly brighter) -->
+  <circle cx="270" cy="220" r="2.5" fill="#CCE8FF" opacity="0.55"/>
+  <circle cx="470" cy="260" r="2.5" fill="#FFFFFF" opacity="0.5"/>
+  <circle cx="650" cy="210" r="3" fill="#CCE8FF" opacity="0.55"/>
+  <circle cx="820" cy="270" r="2.5" fill="#FFFFFF" opacity="0.5"/>
+  <circle cx="200" cy="380" r="2.5" fill="#CCE8FF" opacity="0.5"/>
+  <circle cx="760" cy="380" r="2.5" fill="#FFFFFF" opacity="0.5"/>
+  <circle cx="370" cy="410" r="3" fill="#CCE8FF" opacity="0.55"/>
+  <circle cx="560" cy="440" r="2.5" fill="#FFFFFF" opacity="0.5"/>
+
+  <!-- Layer 3: Close stars (large, bright, slight glow) -->
+  <circle cx="320" cy="290" r="5" fill="#FFFFFF" opacity="0.75"/>
+  <circle cx="320" cy="290" r="10" fill="#88CCFF" opacity="0.2"/>
+  <circle cx="710" cy="310" r="5" fill="#FFFFFF" opacity="0.75"/>
+  <circle cx="710" cy="310" r="10" fill="#88CCFF" opacity="0.2"/>
+  <circle cx="220" cy="480" r="4" fill="#FFFFFF" opacity="0.7"/>
+  <circle cx="800" cy="490" r="4" fill="#FFFFFF" opacity="0.7"/>
+  <circle cx="500" cy="350" r="4" fill="#FFFFFF" opacity="0.65"/>
+
+  <!-- HUD Frame — targeting reticle overlay -->
+  <!-- Corner brackets -->
+  <!-- Top-left -->
+  <path d="M 260 260 L 260 310 M 260 260 L 310 260" stroke="#88CCFF" stroke-width="4" fill="none" opacity="0.8"/>
+  <!-- Top-right -->
+  <path d="M 764 260 L 764 310 M 764 260 L 714 260" stroke="#88CCFF" stroke-width="4" fill="none" opacity="0.8"/>
+  <!-- Bottom-left -->
+  <path d="M 260 764 L 260 714 M 260 764 L 310 764" stroke="#88CCFF" stroke-width="4" fill="none" opacity="0.8"/>
+  <!-- Bottom-right -->
+  <path d="M 764 764 L 764 714 M 764 764 L 714 764" stroke="#88CCFF" stroke-width="4" fill="none" opacity="0.8"/>
+
+  <!-- Crosshair in center -->
+  <circle cx="512" cy="512" r="60" fill="none" stroke="#88CCFF" stroke-width="2" opacity="0.6"/>
+  <circle cx="512" cy="512" r="90" fill="none" stroke="#88CCFF" stroke-width="1" opacity="0.35" stroke-dasharray="8 6"/>
+  <line x1="512" y1="440" x2="512" y2="470" stroke="#88CCFF" stroke-width="2.5" opacity="0.8"/>
+  <line x1="512" y1="554" x2="512" y2="584" stroke="#88CCFF" stroke-width="2.5" opacity="0.8"/>
+  <line x1="440" y1="512" x2="470" y2="512" stroke="#88CCFF" stroke-width="2.5" opacity="0.8"/>
+  <line x1="554" y1="512" x2="584" y2="512" stroke="#88CCFF" stroke-width="2.5" opacity="0.8"/>
+  <!-- Center dot -->
+  <circle cx="512" cy="512" r="8" fill="#88CCFF" opacity="0.9"/>
+  <circle cx="512" cy="512" r="4" fill="#FFFFFF"/>
+
+  <!-- Enemy locked in reticle -->
+  <rect x="480" y="480" width="64" height="64" rx="6" fill="#FF3355" opacity="0.35"/>
+  <rect x="480" y="480" width="64" height="64" rx="6" fill="none" stroke="#FF3355" stroke-width="2" opacity="0.6"/>
+  <!-- Enemy shape in reticle -->
+  <rect x="492" y="492" width="40" height="22" rx="4" fill="#FF3355" opacity="0.7"/>
+  <rect x="498" y="484" width="28" height="12" rx="3" fill="#FF5577" opacity="0.7"/>
+  <circle cx="500" cy="501" r="4" fill="#FFFFFF" opacity="0.8"/>
+  <circle cx="524" cy="501" r="4" fill="#FFFFFF" opacity="0.8"/>
+  <!-- LOCK indicator -->
+  <text x="512" y="426" font-family="'Courier New', monospace" font-size="22" font-weight="bold"
+        fill="#FF3355" text-anchor="middle" letter-spacing="4" opacity="0.9">LOCKED</text>
+
+  <!-- Cockpit glow hint -->
+  <ellipse cx="512" cy="600" rx="200" ry="120" fill="url(#cockpitGlow)"/>
+
+  <!-- HUD stats panel -->
+  <rect x="230" y="790" width="180" height="36" rx="6" fill="#88CCFF" opacity="0.08"/>
+  <text x="320" y="813" font-family="'Courier New', monospace" font-size="24"
+        fill="#88CCFF" text-anchor="middle" letter-spacing="2" opacity="0.8">HP: ▮▮▮▮▮</text>
+
+  <rect x="614" y="790" width="180" height="36" rx="6" fill="#88CCFF" opacity="0.08"/>
+  <text x="704" y="813" font-family="'Courier New', monospace" font-size="24"
+        fill="#88CCFF" text-anchor="middle" letter-spacing="2" opacity="0.8">LV: 07</text>
+
+  <text x="512" y="880" font-family="'Courier New', monospace" font-size="38" font-weight="bold"
+        fill="#FFFFFF" text-anchor="middle" letter-spacing="6" opacity="0.75">STAR  STRIKE</text>
+</svg>

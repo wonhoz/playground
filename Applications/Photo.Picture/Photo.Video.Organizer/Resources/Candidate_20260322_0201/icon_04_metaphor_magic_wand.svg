@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <clipPath id="bg-clip-04">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+    <radialGradient id="bg-grad-04" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#4B0082"/>
+      <stop offset="100%" stop-color="#1A0040"/>
+    </radialGradient>
+    <linearGradient id="wand-grad-04" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#E8D5FF"/>
+      <stop offset="100%" stop-color="#B380FF"/>
+    </linearGradient>
+    <filter id="glow-04">
+      <feGaussianBlur stdDeviation="6" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg-grad-04)"/>
+
+  <!-- 파스텔 라벤더 파티클들 -->
+  <circle cx="200" cy="200" r="12" fill="#DDA0FF" opacity="0.8" filter="url(#glow-04)"/>
+  <circle cx="820" cy="180" r="8" fill="#FF80FF" opacity="0.7"/>
+  <circle cx="160" cy="600" r="10" fill="#C880FF" opacity="0.6"/>
+  <circle cx="870" cy="700" r="14" fill="#DDA0FF" opacity="0.8"/>
+  <circle cx="300" cy="820" r="9" fill="#FF80C0" opacity="0.7"/>
+  <circle cx="750" cy="840" r="11" fill="#A860FF" opacity="0.6"/>
+  <!-- 별 모양 -->
+  <path d="M 140 400 L 152 428 L 180 428 L 158 446 L 166 474 L 140 456 L 114 474 L 122 446 L 100 428 L 128 428 Z"
+        fill="#E8B0FF" opacity="0.7" filter="url(#glow-04)"/>
+  <path d="M 850 350 L 858 372 L 880 372 L 863 385 L 869 407 L 850 394 L 831 407 L 837 385 L 820 372 L 842 372 Z"
+        fill="#FFD0FF" opacity="0.6"/>
+
+  <!-- 마법 지팡이 (대각선 배치) -->
+  <rect x="280" y="280" width="36" height="440" rx="18" fill="url(#wand-grad-04)"
+        transform="rotate(-45 512 512)" filter="url(#glow-04)"/>
+  <!-- 지팡이 끝 별 -->
+  <path d="M 242 242 L 260 292 L 312 292 L 270 322 L 288 372 L 242 340 L 196 372 L 214 322 L 172 292 L 224 292 Z"
+        fill="#FFD700" filter="url(#glow-04)"/>
+
+  <!-- 변환 스파크 효과 (중앙) -->
+  <circle cx="512" cy="512" r="80" fill="none" stroke="#DDA0FF" stroke-width="3" opacity="0.5"/>
+  <circle cx="512" cy="512" r="55" fill="none" stroke="#FF80FF" stroke-width="2" opacity="0.6"/>
+  <circle cx="512" cy="512" r="30" fill="#6600CC" opacity="0.9"/>
+
+  <!-- OLD 파일명 (왼쪽 상단) -->
+  <rect x="80" y="140" width="340" height="58" rx="12" fill="#2A1040" stroke="#6633AA" stroke-width="2" opacity="0.9"/>
+  <text x="250" y="178" text-anchor="middle" font-family="'Courier New', monospace" font-size="28" fill="#9966CC">IMG_0001.jpg</text>
+  <!-- 흐릿해지는 효과 -->
+  <rect x="80" y="140" width="340" height="58" rx="12" fill="#1A0040" opacity="0.4"/>
+
+  <!-- NEW 파일명 (오른쪽 하단, 빛나는) -->
+  <rect x="600" y="826" width="340" height="58" rx="12" fill="#3A0080" stroke="#DDA0FF" stroke-width="3" filter="url(#glow-04)"/>
+  <text x="770" y="864" text-anchor="middle" font-family="'Courier New', monospace" font-size="28" fill="#E8B0FF" font-weight="700">2024-07-15.jpg</text>
+
+  <!-- 중간 마법 변환 화살표 (파티클 경로) -->
+  <path d="M 350 240 Q 512 380 680 680" stroke="#DDA0FF" stroke-width="3" fill="none"
+        stroke-dasharray="12,8" opacity="0.8"/>
+  <!-- 작은 점들 -->
+  <circle cx="420" cy="316" r="6" fill="#FF80FF" opacity="0.8"/>
+  <circle cx="490" cy="400" r="5" fill="#DDA0FF" opacity="0.7"/>
+  <circle cx="560" cy="490" r="7" fill="#C060FF" opacity="0.8"/>
+  <circle cx="620" cy="576" r="5" fill="#DDA0FF" opacity="0.7"/>
+
+  <!-- 하단 설명 -->
+  <text x="512" y="950" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-size="34" font-weight="700" fill="#DDA0FF">Tag → Name</text>
+</svg>

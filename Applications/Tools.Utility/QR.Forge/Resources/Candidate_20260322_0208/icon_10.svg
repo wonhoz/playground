@@ -1,0 +1,116 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_10 | Metaphor | 공간·장면 | QR 코드 + 마법 지팡이 생성 이펙트 | 딥 그린 + 에메랄드 -->
+
+  <defs>
+    <radialGradient id="bgGrad10" cx="50%" cy="50%" r="55%">
+      <stop offset="0%" stop-color="#001A12"/>
+      <stop offset="100%" stop-color="#000D08"/>
+    </radialGradient>
+    <linearGradient id="wandGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#A5D6A7"/>
+      <stop offset="100%" stop-color="#1B5E20"/>
+    </linearGradient>
+    <radialGradient id="magicGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#00E676" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#00E676" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glow10">
+      <feGaussianBlur stdDeviation="12" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="180" fill="url(#bgGrad10)"/>
+
+  <!-- 마법 파티클 배경 -->
+  <g fill="#00E676" opacity="0.25" filter="url(#glow10)">
+    <circle cx="180" cy="200" r="5"/>
+    <circle cx="280" cy="150" r="3"/>
+    <circle cx="850" cy="180" r="4"/>
+    <circle cx="900" cy="280" r="6"/>
+    <circle cx="160" cy="800" r="4"/>
+    <circle cx="240" cy="900" r="3"/>
+    <circle cx="800" cy="880" r="5"/>
+    <circle cx="920" cy="750" r="4"/>
+  </g>
+
+  <!-- Layer 2: QR 코드 (중앙 약간 우상) -->
+  <g fill="#00C853">
+    <!-- 좌상단 파인더 -->
+    <rect x="320" y="180" width="200" height="200" rx="16"/>
+    <rect x="342" y="202" width="156" height="156" rx="10" fill="#000D08"/>
+    <rect x="366" y="226" width="108" height="108" rx="6" fill="#00C853"/>
+
+    <!-- 우상단 파인더 -->
+    <rect x="660" y="180" width="200" height="200" rx="16"/>
+    <rect x="682" y="202" width="156" height="156" rx="10" fill="#000D08"/>
+    <rect x="706" y="226" width="108" height="108" rx="6" fill="#00C853"/>
+
+    <!-- 좌하단 파인더 -->
+    <rect x="320" y="520" width="200" height="200" rx="16"/>
+    <rect x="342" y="542" width="156" height="156" rx="10" fill="#000D08"/>
+    <rect x="366" y="566" width="108" height="108" rx="6" fill="#00C853"/>
+
+    <!-- 데이터 모듈 -->
+    <rect x="548" y="520" width="32" height="32" rx="5"/>
+    <rect x="596" y="520" width="32" height="32" rx="5"/>
+    <rect x="644" y="520" width="32" height="32" rx="5"/>
+    <rect x="548" y="568" width="32" height="32" rx="5"/>
+    <rect x="644" y="568" width="32" height="32" rx="5"/>
+    <rect x="548" y="616" width="32" height="32" rx="5"/>
+    <rect x="596" y="616" width="32" height="32" rx="5"/>
+    <rect x="548" y="664" width="32" height="32" rx="5"/>
+    <rect x="644" y="664" width="32" height="32" rx="5"/>
+
+    <rect x="700" y="408" width="32" height="32" rx="5"/>
+    <rect x="748" y="408" width="32" height="32" rx="5"/>
+    <rect x="796" y="408" width="32" height="32" rx="5"/>
+    <rect x="844" y="408" width="32" height="32" rx="5"/>
+    <rect x="700" y="456" width="32" height="32" rx="5"/>
+    <rect x="796" y="456" width="32" height="32" rx="5"/>
+    <rect x="844" y="456" width="32" height="32" rx="5"/>
+    <rect x="748" y="456" width="32" height="32" rx="5"/>
+
+    <!-- 하단 데이터 -->
+    <rect x="370" y="742" width="32" height="32" rx="5"/>
+    <rect x="418" y="742" width="32" height="32" rx="5"/>
+    <rect x="466" y="742" width="32" height="32" rx="5"/>
+    <rect x="548" y="742" width="32" height="32" rx="5"/>
+    <rect x="596" y="742" width="32" height="32" rx="5"/>
+    <rect x="644" y="742" width="32" height="32" rx="5"/>
+    <rect x="418" y="790" width="32" height="32" rx="5"/>
+    <rect x="548" y="790" width="32" height="32" rx="5"/>
+    <rect x="596" y="790" width="32" height="32" rx="5"/>
+    <rect x="370" y="838" width="32" height="32" rx="5"/>
+    <rect x="466" y="838" width="32" height="32" rx="5"/>
+    <rect x="548" y="838" width="32" height="32" rx="5"/>
+    <rect x="644" y="838" width="32" height="32" rx="5"/>
+  </g>
+
+  <!-- Layer 3: 마법 지팡이 (좌하단에서 QR을 향해 터치) -->
+  <!-- 지팡이 몸통 -->
+  <rect x="116" y="780" width="24" height="180" rx="12" transform="rotate(-45 116 780)" fill="url(#wandGrad)" stroke="#A5D6A7" stroke-width="3"/>
+  <!-- 지팡이 끝 별 -->
+  <g transform="translate(230, 640)" filter="url(#glow10)">
+    <circle cx="0" cy="0" r="48" fill="url(#magicGlow)"/>
+    <path d="M0 -36 L8 -12 L34 -12 L14 4 L22 30 L0 16 L-22 30 L-14 4 L-34 -12 L-8 -12 Z" fill="#00E676"/>
+    <!-- 별 광채 -->
+    <line x1="0"  y1="-52" x2="0"  y2="-42" stroke="#69F0AE" stroke-width="4" stroke-linecap="round"/>
+    <line x1="52" y1="0"   x2="42" y2="0"   stroke="#69F0AE" stroke-width="4" stroke-linecap="round"/>
+    <line x1="0"  y1="52"  x2="0"  y2="42"  stroke="#69F0AE" stroke-width="4" stroke-linecap="round"/>
+    <line x1="-52" y1="0"  x2="-42" y2="0"  stroke="#69F0AE" stroke-width="4" stroke-linecap="round"/>
+    <line x1="38"  y1="-38"  x2="30" y2="-30" stroke="#69F0AE" stroke-width="3" stroke-linecap="round"/>
+    <line x1="38"  y1="38"   x2="30" y2="30"  stroke="#69F0AE" stroke-width="3" stroke-linecap="round"/>
+    <line x1="-38" y1="-38"  x2="-30" y2="-30" stroke="#69F0AE" stroke-width="3" stroke-linecap="round"/>
+    <line x1="-38" y1="38"   x2="-30" y2="30"  stroke="#69F0AE" stroke-width="3" stroke-linecap="round"/>
+  </g>
+  <!-- 마법 파티클 이펙트 (지팡이 → QR 방향) -->
+  <g fill="#69F0AE" filter="url(#glow10)">
+    <circle cx="270" cy="600" r="8"/>
+    <circle cx="310" cy="560" r="6"/>
+    <circle cx="350" cy="530" r="5"/>
+    <circle cx="290" cy="530" r="4"/>
+    <circle cx="330" cy="490" r="7"/>
+  </g>
+</svg>

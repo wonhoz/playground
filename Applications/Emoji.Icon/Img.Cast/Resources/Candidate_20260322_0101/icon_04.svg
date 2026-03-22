@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!--
+    icon_04 [metaphor] — 같은 이미지, 다른 포맷 틀
+    컨셉: 동일한 이미지 콘텐츠(별)가 .jpg / .png / .ico 세 가지 다른 포맷 프레임에 담김
+    연결고리: 포맷 변환 = 이미지 본질은 같고 저장 방식(틀)만 교체 — 같은 내용, 다른 옷
+    패턴: 공간/장면 (3개 프레임 나열)
+    색상: 따뜻한 크림(#FFF9F0) + 빨강/파랑/노랑 포맷 프레임
+  -->
+  <defs>
+    <linearGradient id="bg04" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF9F0"/>
+      <stop offset="100%" stop-color="#FDE8CC"/>
+    </linearGradient>
+    <filter id="frameShadow">
+      <feDropShadow dx="0" dy="5" stdDeviation="10"
+                    flood-color="#000" flood-opacity="0.18"/>
+    </filter>
+    <!-- 별 경로 클립 (각 프레임 안에서 사용) -->
+  </defs>
+
+  <!-- Layer 1: 따뜻한 크림 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg04)"/>
+
+  <!-- 상단 레이블 -->
+  <text x="512" y="232"
+        font-family="Arial, sans-serif"
+        font-size="52" font-weight="700"
+        fill="#92400E" text-anchor="middle"
+        opacity="0.70">같은 이미지, 다른 포맷</text>
+
+  <!-- Layer 2: 3개 포맷 프레임 -->
+
+  <!-- 프레임1: .jpg (빨강, 왼쪽) -->
+  <g filter="url(#frameShadow)">
+    <rect x="78" y="280" width="240" height="260" rx="16" fill="white"/>
+    <rect x="78" y="280" width="240" height="260" rx="16"
+          fill="none" stroke="#EF4444" stroke-width="14"/>
+    <!-- 별 아이콘 (중앙) -->
+    <polygon points="198,320 211,360 254,360 220,385 232,425 198,401 164,425 176,385 142,360 185,360"
+             fill="#FBBF24"/>
+    <!-- 포맷 텍스트 -->
+    <rect x="78" y="492" width="240" height="48" rx="0" fill="#EF4444"
+          style="border-radius:0 0 16px 16px"/>
+    <text x="198" y="526"
+          font-family="Arial Black, Arial, sans-serif"
+          font-size="36" font-weight="900"
+          fill="white" text-anchor="middle">.jpg</text>
+  </g>
+
+  <!-- 프레임2: .png (파랑, 중앙, 약간 앞/위) -->
+  <g filter="url(#frameShadow)">
+    <rect x="388" y="252" width="248" height="270" rx="16" fill="white"/>
+    <rect x="388" y="252" width="248" height="270" rx="16"
+          fill="none" stroke="#3B82F6" stroke-width="14"/>
+    <!-- 별 아이콘 -->
+    <polygon points="512,294 526,336 571,336 535,362 548,404 512,379 476,404 489,362 453,336 498,336"
+             fill="#FBBF24"/>
+    <!-- 포맷 텍스트 -->
+    <rect x="388" y="474" width="248" height="48" rx="0" fill="#3B82F6"/>
+    <text x="512" y="508"
+          font-family="Arial Black, Arial, sans-serif"
+          font-size="36" font-weight="900"
+          fill="white" text-anchor="middle">.png</text>
+  </g>
+
+  <!-- 프레임3: .ico (노랑, 오른쪽) -->
+  <g filter="url(#frameShadow)">
+    <rect x="706" y="280" width="240" height="260" rx="16" fill="white"/>
+    <rect x="706" y="280" width="240" height="260" rx="16"
+          fill="none" stroke="#D97706" stroke-width="14"/>
+    <!-- 별 아이콘 -->
+    <polygon points="826,320 839,360 882,360 848,385 860,425 826,401 792,425 804,385 770,360 813,360"
+             fill="#FBBF24"/>
+    <!-- 포맷 텍스트 -->
+    <rect x="706" y="492" width="240" height="48" rx="0" fill="#D97706"/>
+    <text x="826" y="526"
+          font-family="Arial Black, Arial, sans-serif"
+          font-size="36" font-weight="900"
+          fill="white" text-anchor="middle">.ico</text>
+  </g>
+
+  <!-- Layer 3: 변환 화살표들 (프레임 사이) -->
+  <text x="334" y="438"
+        font-family="Arial, sans-serif"
+        font-size="72" font-weight="900"
+        fill="#D97706" text-anchor="middle" opacity="0.8">→</text>
+  <text x="660" y="438"
+        font-family="Arial, sans-serif"
+        font-size="72" font-weight="900"
+        fill="#D97706" text-anchor="middle" opacity="0.8">→</text>
+
+  <!-- 하단 설명 텍스트 -->
+  <text x="512" y="810"
+        font-family="Arial, sans-serif"
+        font-size="56" font-weight="700"
+        fill="#92400E" text-anchor="middle"
+        opacity="0.65">드래그 앤 드롭으로 변환</text>
+</svg>

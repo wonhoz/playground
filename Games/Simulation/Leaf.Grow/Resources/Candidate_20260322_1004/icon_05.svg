@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_05: hybrid — 원형 성장 스피너 + 나무 (이터레이션 숫자 + 봄 핑크 테마) -->
+
+  <defs>
+    <linearGradient id="bg05" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFF0F8"/>
+      <stop offset="100%" stop-color="#FFE0F0"/>
+    </linearGradient>
+    <linearGradient id="trunkGrad05" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#8B5A2B"/>
+      <stop offset="100%" stop-color="#5C3317"/>
+    </linearGradient>
+    <radialGradient id="ringGrad05" cx="50%" cy="50%" r="50%">
+      <stop offset="60%" stop-color="transparent"/>
+      <stop offset="100%" stop-color="#FF9EBC" stop-opacity="0.1"/>
+    </radialGradient>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="200" fill="url(#bg05)"/>
+
+  <!-- 바깥 원형 이터레이션 링 (반원호 3개 = 3단계) -->
+  <!-- 링 3 (가장 바깥, 희미) -->
+  <circle cx="512" cy="490" r="340" fill="none" stroke="#FFAAC8" stroke-width="10" opacity="0.3" stroke-dasharray="800,200"/>
+  <!-- 링 2 -->
+  <circle cx="512" cy="490" r="280" fill="none" stroke="#FF7BAC" stroke-width="12" opacity="0.5" stroke-dasharray="600,160"/>
+  <!-- 링 1 (가장 안쪽, 진함) -->
+  <circle cx="512" cy="490" r="220" fill="none" stroke="#FF4D88" stroke-width="14" opacity="0.7" stroke-dasharray="400,120"/>
+
+  <!-- 링 숫자 레이블 -->
+  <text x="860" y="490" text-anchor="middle" font-family="Consolas, monospace" font-size="26" fill="#FF4D88" opacity="0.8">3</text>
+  <text x="800" y="490" text-anchor="middle" font-family="Consolas, monospace" font-size="26" fill="#FF7BAC" opacity="0.7">2</text>
+  <text x="740" y="490" text-anchor="middle" font-family="Consolas, monospace" font-size="26" fill="#FFAAC8" opacity="0.6">1</text>
+
+  <!-- === 중앙 나무 === -->
+  <!-- 땅 -->
+  <ellipse cx="512" cy="800" rx="200" ry="34" fill="#D4E8A0" opacity="0.8"/>
+
+  <!-- 줄기 -->
+  <line x1="512" y1="800" x2="512" y2="570" stroke="url(#trunkGrad05)" stroke-width="22" stroke-linecap="round"/>
+
+  <!-- 1단계 가지 -->
+  <line x1="512" y1="660" x2="402" y2="548" stroke="#8B5A2B" stroke-width="13" stroke-linecap="round"/>
+  <line x1="512" y1="660" x2="622" y2="548" stroke="#8B5A2B" stroke-width="13" stroke-linecap="round"/>
+
+  <!-- 2단계 가지 -->
+  <line x1="402" y1="548" x2="340" y2="472" stroke="#A06830" stroke-width="8" stroke-linecap="round"/>
+  <line x1="402" y1="548" x2="456" y2="470" stroke="#A06830" stroke-width="8" stroke-linecap="round"/>
+  <line x1="622" y1="548" x2="568" y2="470" stroke="#A06830" stroke-width="8" stroke-linecap="round"/>
+  <line x1="622" y1="548" x2="684" y2="472" stroke="#A06830" stroke-width="8" stroke-linecap="round"/>
+  <!-- 줄기 상단 -->
+  <line x1="512" y1="570" x2="512" y2="456" stroke="#9A6838" stroke-width="10" stroke-linecap="round"/>
+
+  <!-- 잎 (봄 핑크+연두) -->
+  <circle cx="332" cy="462" r="34" fill="#88CC44" opacity="0.95"/>
+  <circle cx="456" cy="460" r="28" fill="#AAE055" opacity="0.9"/>
+  <circle cx="568" cy="460" r="28" fill="#AAE055" opacity="0.9"/>
+  <circle cx="692" cy="462" r="34" fill="#88CC44" opacity="0.95"/>
+  <circle cx="512" cy="442" r="30" fill="#BBEE66" opacity="0.95"/>
+
+  <!-- 벚꽃 (Ellipse 꽃) -->
+  <circle cx="332" cy="458" r="12" fill="#FFB7D5"/>
+  <circle cx="692" cy="458" r="12" fill="#FFB7D5"/>
+  <circle cx="512" cy="438" r="10" fill="#FF8FAB"/>
+  <circle cx="456" cy="456" r="9" fill="#FFCCE0"/>
+  <circle cx="568" cy="456" r="9" fill="#FFCCE0"/>
+
+  <!-- 이터레이션 카운터 뱃지 (중앙 하단) -->
+  <rect x="398" y="848" width="228" height="56" rx="28" fill="#FF4D88" opacity="0.9"/>
+  <text x="512" y="884" text-anchor="middle" font-family="Consolas, monospace" font-size="32" font-weight="bold" fill="white">n = 3</text>
+
+  <!-- 상단 앱명 -->
+  <text x="512" y="246" text-anchor="middle" font-family="Segoe UI, Arial" font-size="38" font-weight="bold" fill="#C2185B" opacity="0.85">Leaf.Grow</text>
+
+  <!-- 씨앗 (아래쪽 귀여운 포인트) -->
+  <ellipse cx="512" cy="808" rx="20" ry="15" fill="#8B5A2B" opacity="0.7"/>
+</svg>

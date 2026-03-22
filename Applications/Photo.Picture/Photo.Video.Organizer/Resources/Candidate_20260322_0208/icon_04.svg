@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_04 | Metaphor / 기하학 추상 | 메타데이터 칩 + 파일명 변환 회로 -->
+  <!-- 컨셉: 반도체 칩처럼 EXIF 데이터를 처리해 파일명을 출력 -->
+  <!-- 색조: 에메랄드 그린 + 다크 그레이 + 앰버 -->
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="160" fill="#111A14"/>
+
+  <!-- 회로 기판 패턴 (배경) -->
+  <g stroke="#1E3A22" stroke-width="3" opacity="0.6">
+    <line x1="200" y1="200" x2="200" y2="400"/>
+    <line x1="200" y1="400" x2="350" y2="400"/>
+    <line x1="824" y1="200" x2="824" y2="400"/>
+    <line x1="824" y1="400" x2="674" y2="400"/>
+    <line x1="200" y1="620" x2="200" y2="800"/>
+    <line x1="200" y1="620" x2="350" y2="620"/>
+    <line x1="824" y1="620" x2="824" y2="800"/>
+    <line x1="824" y1="620" x2="674" y2="620"/>
+  </g>
+  <!-- 회로 노드 -->
+  <circle cx="200" cy="200" r="8" fill="#2ECC71" opacity="0.5"/>
+  <circle cx="824" cy="200" r="8" fill="#2ECC71" opacity="0.5"/>
+  <circle cx="200" cy="800" r="8" fill="#2ECC71" opacity="0.5"/>
+  <circle cx="824" cy="800" r="8" fill="#2ECC71" opacity="0.5"/>
+
+  <!-- 중앙 프로세서 칩 (EXIF 처리) -->
+  <rect x="310" y="310" width="404" height="404" rx="20" fill="#1A2E1E" stroke="#2ECC71" stroke-width="8"/>
+  <!-- 칩 내부 격자 -->
+  <g stroke="#2ECC71" stroke-width="2" opacity="0.2">
+    <line x1="380" y1="310" x2="380" y2="714"/>
+    <line x1="450" y1="310" x2="450" y2="714"/>
+    <line x1="512" y1="310" x2="512" y2="714"/>
+    <line x1="574" y1="310" x2="574" y2="714"/>
+    <line x1="644" y1="310" x2="644" y2="714"/>
+    <line x1="310" y1="380" x2="714" y2="380"/>
+    <line x1="310" y1="450" x2="714" y2="450"/>
+    <line x1="310" y1="512" x2="714" y2="512"/>
+    <line x1="310" y1="574" x2="714" y2="574"/>
+    <line x1="310" y1="644" x2="714" y2="644"/>
+  </g>
+  <!-- 칩 핀 (상단) -->
+  <rect x="380" y="280" width="20" height="34" rx="4" fill="#2ECC71"/>
+  <rect x="450" y="280" width="20" height="34" rx="4" fill="#2ECC71"/>
+  <rect x="520" y="280" width="20" height="34" rx="4" fill="#2ECC71"/>
+  <rect x="590" y="280" width="20" height="34" rx="4" fill="#2ECC71"/>
+  <!-- 칩 핀 (하단) -->
+  <rect x="380" y="710" width="20" height="34" rx="4" fill="#F59E0B"/>
+  <rect x="450" y="710" width="20" height="34" rx="4" fill="#F59E0B"/>
+  <rect x="520" y="710" width="20" height="34" rx="4" fill="#F59E0B"/>
+  <rect x="590" y="710" width="20" height="34" rx="4" fill="#F59E0B"/>
+  <!-- 칩 핀 (좌측) -->
+  <rect x="280" y="385" width="34" height="20" rx="4" fill="#2ECC71"/>
+  <rect x="280" y="455" width="34" height="20" rx="4" fill="#2ECC71"/>
+  <rect x="280" y="525" width="34" height="20" rx="4" fill="#2ECC71"/>
+  <rect x="280" y="595" width="34" height="20" rx="4" fill="#2ECC71"/>
+  <!-- 칩 핀 (우측) -->
+  <rect x="710" y="385" width="34" height="20" rx="4" fill="#F59E0B"/>
+  <rect x="710" y="455" width="34" height="20" rx="4" fill="#F59E0B"/>
+  <rect x="710" y="525" width="34" height="20" rx="4" fill="#F59E0B"/>
+  <rect x="710" y="595" width="34" height="20" rx="4" fill="#F59E0B"/>
+
+  <!-- 칩 내부 EXIF 텍스트 -->
+  <rect x="350" y="350" width="324" height="80" rx="8" fill="#2ECC71" opacity="0.1" stroke="#2ECC71" stroke-width="2"/>
+  <text x="512" y="382" font-family="Consolas,monospace" font-size="22" fill="#2ECC71" text-anchor="middle" font-weight="bold">EXIF</text>
+  <text x="512" y="410" font-family="Consolas,monospace" font-size="14" fill="#27AE60" text-anchor="middle">metadata processor</text>
+
+  <!-- 칩 중앙 - 처리 아이콘 -->
+  <circle cx="512" cy="512" r="70" fill="#1E3A22" stroke="#2ECC71" stroke-width="5"/>
+  <!-- 사진+영상 심볼 -->
+  <!-- 사진 프레임 -->
+  <rect x="470" y="475" width="50" height="40" rx="5" fill="none" stroke="#2ECC71" stroke-width="4"/>
+  <circle cx="480" cy="485" r="6" fill="#2ECC71" opacity="0.7"/>
+  <path d="M470 508 Q482 496 490 502 Q498 490 520 505 L520 515 L470 515Z" fill="#2ECC71" opacity="0.6"/>
+  <!-- 재생 버튼 -->
+  <polygon points="535,476 560,492 535,508" fill="#F59E0B" opacity="0.9"/>
+
+  <!-- 파일명 출력 텍스트 (하단 핀 연결) -->
+  <rect x="340" y="760" width="344" height="70" rx="10" fill="#1A2A10" stroke="#F59E0B" stroke-width="5"/>
+  <text x="512" y="790" font-family="Consolas,monospace" font-size="17" fill="#F59E0B" text-anchor="middle" font-weight="bold">20240315_094211</text>
+  <text x="512" y="816" font-family="Consolas,monospace" font-size="15" fill="#FCD34D" text-anchor="middle">_IMG_001.jpg</text>
+
+  <!-- 입력 EXIF 데이터 (상단 핀 연결) -->
+  <rect x="340" y="194" width="344" height="70" rx="10" fill="#0D1F10" stroke="#2ECC71" stroke-width="5"/>
+  <text x="512" y="222" font-family="Consolas,monospace" font-size="15" fill="#2ECC71" text-anchor="middle">DateTimeOriginal:</text>
+  <text x="512" y="248" font-family="Consolas,monospace" font-size="15" fill="#27AE60" text-anchor="middle">2024:03:15 09:42:11</text>
+
+  <!-- 칩 내부 하단 - 변환 완료 표시 -->
+  <rect x="350" y="594" width="324" height="70" rx="8" fill="#F59E0B" opacity="0.1" stroke="#F59E0B" stroke-width="2"/>
+  <text x="512" y="624" font-family="Consolas,monospace" font-size="16" fill="#F59E0B" text-anchor="middle">OUTPUT</text>
+  <text x="512" y="648" font-family="Consolas,monospace" font-size="13" fill="#FCD34D" text-anchor="middle">filename pattern applied</text>
+</svg>

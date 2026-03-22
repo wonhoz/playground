@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_04 | metaphor | 공간 장면 | 도형들이 날아오르는 아케이드 공간 | 네온 그린/옐로우 -->
+
+  <defs>
+    <linearGradient id="bg04" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#001A00"/>
+      <stop offset="100%" stop-color="#050505"/>
+    </linearGradient>
+    <radialGradient id="floorGlow" cx="50%" cy="100%" r="50%">
+      <stop offset="0%" stop-color="#00FF44" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#00FF44" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glow04">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="strongGlow04">
+      <feGaussianBlur stdDeviation="16" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="180" fill="url(#bg04)"/>
+  <rect width="1024" height="1024" rx="180" fill="url(#floorGlow)"/>
+
+  <!-- 바닥 네온 라인 (아케이드 느낌) -->
+  <line x1="200" y1="800" x2="824" y2="800"
+    stroke="#00FF44" stroke-width="3" opacity="0.6" filter="url(#glow04)"/>
+  <line x1="200" y1="800" x2="824" y2="800"
+    stroke="#00FF44" stroke-width="8" opacity="0.15"/>
+
+  <!-- 원근감 바닥 격자 -->
+  <line x1="512" y1="800" x2="240" y2="1000" stroke="#00FF44" stroke-width="1" opacity="0.12"/>
+  <line x1="512" y1="800" x2="350" y2="1000" stroke="#00FF44" stroke-width="1" opacity="0.10"/>
+  <line x1="512" y1="800" x2="460" y2="1000" stroke="#00FF44" stroke-width="1" opacity="0.08"/>
+  <line x1="512" y1="800" x2="570" y2="1000" stroke="#00FF44" stroke-width="1" opacity="0.08"/>
+  <line x1="512" y1="800" x2="680" y2="1000" stroke="#00FF44" stroke-width="1" opacity="0.10"/>
+  <line x1="512" y1="800" x2="790" y2="1000" stroke="#00FF44" stroke-width="1" opacity="0.12"/>
+
+  <!-- 날아오르는 도형들 -->
+
+  <!-- 원 (왼쪽 낮은 위치) -->
+  <circle cx="310" cy="600" r="72" fill="none" stroke="#00FF44" stroke-width="8"
+    filter="url(#glow04)" opacity="0.9"/>
+  <circle cx="310" cy="600" r="72" fill="#00FF44" opacity="0.08"/>
+  <!-- 원에 속도감 궤적 -->
+  <line x1="310" y1="700" x2="310" y2="780" stroke="#00FF44" stroke-width="3" opacity="0.4"/>
+
+  <!-- 사각형 (중앙 중간 높이, 회전) -->
+  <rect x="452" y="360" width="120" height="120" rx="8"
+    fill="none" stroke="#FFEE00" stroke-width="8"
+    filter="url(#glow04)" opacity="0.9"
+    transform="rotate(22, 512, 420)"/>
+  <rect x="452" y="360" width="120" height="120" rx="8"
+    fill="#FFEE00" opacity="0.07"
+    transform="rotate(22, 512, 420)"/>
+  <!-- 사각형 궤적 -->
+  <line x1="512" y1="490" x2="512" y2="700" stroke="#FFEE00" stroke-width="3" opacity="0.3"/>
+
+  <!-- 삼각형 (오른쪽 높은 위치) -->
+  <polygon points="720,280 660,430 780,430"
+    fill="none" stroke="#FF8800" stroke-width="8"
+    filter="url(#glow04)" opacity="0.9"/>
+  <polygon points="720,280 660,430 780,430"
+    fill="#FF8800" opacity="0.08"/>
+  <!-- 삼각형 궤적 -->
+  <line x1="720" y1="440" x2="720" y2="680" stroke="#FF8800" stroke-width="3" opacity="0.35"/>
+
+  <!-- 슬라이스 커서 (마우스 스와이프 — 대각선으로 모든 도형 관통) -->
+  <path d="M 180 720 Q 400 480 512 420 Q 620 360 840 220"
+    stroke="#FFFFFF" stroke-width="7" fill="none" stroke-linecap="round"
+    opacity="0.9" filter="url(#strongGlow04)"/>
+  <path d="M 180 720 Q 400 480 512 420 Q 620 360 840 220"
+    stroke="#AAFFAA" stroke-width="2" fill="none" stroke-linecap="round" opacity="1"/>
+
+  <!-- 슬라이스 궤적 후광 -->
+  <path d="M 180 720 Q 400 480 512 420 Q 620 360 840 220"
+    stroke="#00FF44" stroke-width="20" fill="none" stroke-linecap="round" opacity="0.06"/>
+
+  <!-- 커서 끝점 스파크 -->
+  <circle cx="840" cy="220" r="16" fill="#FFFFFF" opacity="0.9" filter="url(#strongGlow04)"/>
+  <circle cx="840" cy="220" r="7" fill="#AAFFAA" opacity="1"/>
+
+  <!-- 파편들 (슬라이스 후) -->
+  <polygon points="290,545 308,570 272,568" fill="#00FF44" opacity="0.7" filter="url(#glow04)"/>
+  <polygon points="538,310 554,332 520,330" fill="#FFEE00" opacity="0.65" filter="url(#glow04)"/>
+  <polygon points="760,240 774,262 744,260" fill="#FF8800" opacity="0.6" filter="url(#glow04)"/>
+  <circle cx="248" cy="618" r="7" fill="#00FF44" opacity="0.5"/>
+  <circle cx="490" cy="495" r="6" fill="#FFEE00" opacity="0.5"/>
+  <circle cx="688" cy="306" r="5" fill="#FF8800" opacity="0.5"/>
+
+  <!-- 점수 표시 (아케이드) -->
+  <text x="512" y="870" text-anchor="middle" font-family="Courier New, monospace"
+    font-size="48" font-weight="700" letter-spacing="8"
+    fill="#00FF44" opacity="0.7" filter="url(#glow04)">NEON SLICE</text>
+</svg>

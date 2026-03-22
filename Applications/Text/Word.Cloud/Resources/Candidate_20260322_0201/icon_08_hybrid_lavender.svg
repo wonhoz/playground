@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- 라벤더 — 구름 안에 단어들이 레이어드된 모습, 레이어드 패턴 -->
+  <defs>
+    <radialGradient id="bg08" cx="50%" cy="40%" r="65%">
+      <stop offset="0%" stop-color="#4A3570"/>
+      <stop offset="100%" stop-color="#1E102E"/>
+    </radialGradient>
+    <linearGradient id="cloud08a" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#E8D5FF"/>
+      <stop offset="100%" stop-color="#C49FE8"/>
+    </linearGradient>
+    <linearGradient id="cloud08b" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#D4B8FF"/>
+      <stop offset="100%" stop-color="#A87DD4"/>
+    </linearGradient>
+    <linearGradient id="cloud08c" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#C0A0FF"/>
+      <stop offset="100%" stop-color="#8E5FC0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="120" fill="url(#bg08)"/>
+
+  <!-- 레이어 1: 가장 뒤 큰 구름 (옅은 색) -->
+  <g fill="url(#cloud08c)" opacity="0.4">
+    <circle cx="512" cy="480" r="270"/>
+    <circle cx="295" cy="545" r="200"/>
+    <circle cx="730" cy="535" r="210"/>
+    <circle cx="400" cy="390" r="165"/>
+    <circle cx="640" cy="380" r="175"/>
+  </g>
+
+  <!-- 레이어 2: 중간 구름 -->
+  <g fill="url(#cloud08b)" opacity="0.65">
+    <circle cx="512" cy="470" r="220"/>
+    <circle cx="340" cy="525" r="160"/>
+    <circle cx="685" cy="515" r="170"/>
+    <circle cx="430" cy="400" r="130"/>
+    <circle cx="600" cy="395" r="140"/>
+  </g>
+
+  <!-- 레이어 3: 앞 구름 (가장 진한 색) -->
+  <g fill="url(#cloud08a)" opacity="0.88">
+    <circle cx="512" cy="460" r="175"/>
+    <circle cx="375" cy="505" r="120"/>
+    <circle cx="650" cy="498" r="128"/>
+    <circle cx="455" cy="410" r="95"/>
+    <circle cx="572" cy="405" r="105"/>
+  </g>
+
+  <!-- 구름 안 단어들 — 레이어별로 크기 차이 -->
+  <!-- 메인 단어 (레이어3 위에) -->
+  <text x="512" y="448" font-family="Georgia, serif" font-size="95" font-weight="900" fill="#2E0A50" text-anchor="middle">WORD</text>
+
+  <!-- 레이어2 단어들 -->
+  <text x="390" y="498" font-family="Georgia, serif" font-size="42" font-weight="700" fill="#3A1560" text-anchor="middle">cloud</text>
+  <text x="638" y="492" font-family="Georgia, serif" font-size="38" font-weight="700" fill="#3A1560" text-anchor="middle">text</text>
+
+  <!-- 레이어1 단어들 (가장자리 쪽) -->
+  <text x="265" y="535" font-family="Arial, sans-serif" font-size="30" font-weight="600" fill="#6A3090" text-anchor="middle" opacity="0.8">hello</text>
+  <text x="770" y="528" font-family="Arial, sans-serif" font-size="28" font-weight="600" fill="#6A3090" text-anchor="middle" opacity="0.8">love</text>
+  <text x="430" y="548" font-family="Arial, sans-serif" font-size="24" font-weight="600" fill="#7A4098" text-anchor="middle" opacity="0.75">world</text>
+  <text x="595" y="542" font-family="Arial, sans-serif" font-size="22" font-weight="600" fill="#7A4098" text-anchor="middle" opacity="0.75">sky</text>
+
+  <!-- 배경 레이어 단어들 (가장 바깥) -->
+  <text x="195" y="490" font-family="Arial, sans-serif" font-size="20" font-weight="500" fill="#9060B8" text-anchor="middle" opacity="0.6">data</text>
+  <text x="840" y="485" font-family="Arial, sans-serif" font-size="20" font-weight="500" fill="#9060B8" text-anchor="middle" opacity="0.6">art</text>
+  <text x="340" y="580" font-family="Arial, sans-serif" font-size="18" font-weight="500" fill="#A070C8" text-anchor="middle" opacity="0.55">big</text>
+  <text x="685" y="572" font-family="Arial, sans-serif" font-size="17" font-weight="500" fill="#A070C8" text-anchor="middle" opacity="0.5">tag</text>
+  <text x="512" y="578" font-family="Arial, sans-serif" font-size="16" font-weight="400" fill="#B080D5" text-anchor="middle" opacity="0.5">key</text>
+
+  <!-- 구름 테두리 글로우 효과 -->
+  <g fill="none" stroke="#C49FE8" stroke-width="3" opacity="0.3">
+    <circle cx="512" cy="460" r="178"/>
+    <circle cx="375" cy="505" r="123"/>
+    <circle cx="650" cy="498" r="131"/>
+  </g>
+
+  <!-- 별들 (배경 장식) -->
+  <circle cx="150" cy="180" r="4" fill="#D4B8FF" opacity="0.5"/>
+  <circle cx="880" cy="200" r="3" fill="#C0A0FF" opacity="0.4"/>
+  <circle cx="200" cy="800" r="3" fill="#D4B8FF" opacity="0.3"/>
+  <circle cx="820" cy="820" r="4" fill="#C0A0FF" opacity="0.35"/>
+  <circle cx="100" cy="500" r="2" fill="#E8D5FF" opacity="0.3"/>
+  <circle cx="930" cy="550" r="2" fill="#E8D5FF" opacity="0.3"/>
+</svg>

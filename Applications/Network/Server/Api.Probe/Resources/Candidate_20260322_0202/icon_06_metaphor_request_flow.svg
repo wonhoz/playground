@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- 배경: 퍼플 계열 -->
+  <rect width="1024" height="1024" rx="180" fill="#1E1030"/>
+  <rect x="24" y="24" width="976" height="976" rx="160" fill="#2D1B4E"/>
+
+  <!-- 요청 클라이언트 박스 (왼쪽) -->
+  <rect x="80" y="380" width="220" height="264" rx="16" fill="#3B1F6B"/>
+  <rect x="92" y="392" width="196" height="240" rx="12" fill="#4C2A8A"/>
+  <!-- 클라이언트 화면 -->
+  <rect x="104" y="412" width="172" height="110" rx="6" fill="#1A0E30"/>
+  <!-- 메서드 배지 -->
+  <rect x="112" y="420" width="80" height="28" rx="4" fill="#A78BFA"/>
+  <text x="152" y="434" font-family="'Segoe UI', Arial, sans-serif" font-size="16" font-weight="900" fill="#FFFFFF" text-anchor="middle" dominant-baseline="middle">POST</text>
+  <!-- URL 필드 -->
+  <rect x="112" y="456" width="156" height="22" rx="4" fill="#0F0820"/>
+  <text x="190" y="467" font-family="'Courier New', monospace" font-size="12" fill="#A78BFA" text-anchor="middle" dominant-baseline="middle">/api/create</text>
+  <!-- 버튼 -->
+  <rect x="112" y="488" width="156" height="26" rx="4" fill="#7C3AED"/>
+  <text x="190" y="501" font-family="'Segoe UI', Arial, sans-serif" font-size="14" font-weight="700" fill="#FFFFFF" text-anchor="middle" dominant-baseline="middle">Send</text>
+  <!-- 클라이언트 하단 -->
+  <text x="190" y="590" font-family="'Segoe UI', Arial, sans-serif" font-size="18" fill="#C4B5FD" text-anchor="middle" dominant-baseline="middle">Client</text>
+
+  <!-- 화살표: 요청 전송 (위로) -->
+  <path d="M300,460 Q512,300 724,460" stroke="#A78BFA" stroke-width="6" fill="none" stroke-linecap="round" stroke-dasharray="14,6"/>
+  <polyline points="700,442 724,462 700,480" stroke="#A78BFA" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <!-- 요청 라벨 -->
+  <rect x="380" y="285" width="264" height="50" rx="8" fill="#4C2A8A"/>
+  <text x="406" y="304" font-family="'Courier New', monospace" font-size="16" fill="#A78BFA">POST /api/create</text>
+  <text x="406" y="324" font-family="'Courier New', monospace" font-size="14" fill="#7C3AED">{"name": "Alice"}</text>
+
+  <!-- 서버 박스 (오른쪽) -->
+  <rect x="724" y="380" width="220" height="264" rx="16" fill="#1E3A5F"/>
+  <rect x="736" y="392" width="196" height="240" rx="12" fill="#1E4D80"/>
+  <!-- 서버 아이콘 -->
+  <rect x="756" y="420" width="156" height="32" rx="6" fill="#0C2A4A"/>
+  <rect x="756" y="460" width="156" height="32" rx="6" fill="#0C2A4A"/>
+  <rect x="756" y="500" width="156" height="32" rx="6" fill="#0C2A4A"/>
+  <!-- 서버 LED -->
+  <circle cx="898" cy="436" r="6" fill="#22C55E"/>
+  <circle cx="898" cy="476" r="6" fill="#22C55E"/>
+  <circle cx="898" cy="516" r="6" fill="#F59E0B"/>
+  <!-- 서버 라벨 -->
+  <text x="824" y="590" font-family="'Segoe UI', Arial, sans-serif" font-size="18" fill="#60A5FA" text-anchor="middle" dominant-baseline="middle">Server</text>
+
+  <!-- 화살표: 응답 수신 (아래로) -->
+  <path d="M724,560 Q512,720 300,560" stroke="#22C55E" stroke-width="6" fill="none" stroke-linecap="round" stroke-dasharray="14,6"/>
+  <polyline points="324,540 300,562 324,580" stroke="#22C55E" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <!-- 응답 라벨 -->
+  <rect x="380" y="670" width="264" height="50" rx="8" fill="#0D2D1F"/>
+  <text x="406" y="690" font-family="'Courier New', monospace" font-size="16" fill="#22C55E">201 CREATED</text>
+  <text x="406" y="710" font-family="'Courier New', monospace" font-size="14" fill="#4ADE80">{"id": 42, "ok": true}</text>
+
+  <!-- 상단 제목 -->
+  <text x="512" y="140" font-family="'Segoe UI', Arial, sans-serif" font-size="70" font-weight="900" fill="#A78BFA" text-anchor="middle" dominant-baseline="middle" letter-spacing="2">Api.Probe</text>
+  <text x="512" y="196" font-family="'Segoe UI', Arial, sans-serif" font-size="26" fill="#7C3AED" text-anchor="middle" dominant-baseline="middle" letter-spacing="4">REST API TEST TOOL</text>
+
+  <!-- 하단 시간 -->
+  <text x="512" y="890" font-family="'Courier New', monospace" font-size="24" fill="#7C3AED" text-anchor="middle" dominant-baseline="middle">Elapsed: 87 ms</text>
+</svg>

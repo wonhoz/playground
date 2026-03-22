@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_03 | metaphor | 레이저 빔 발사 — 사이버 네온 감성 -->
+  <!-- 배경: 딥 다크 틸-블랙 -->
+  <defs>
+    <radialGradient id="laserCore" cx="50%" cy="100%" r="80%">
+      <stop offset="0%" stop-color="#00FFCC" stop-opacity="0.7"/>
+      <stop offset="60%" stop-color="#00B8FF" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#0A1628" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="laserBeam" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0%" stop-color="#00FFCC"/>
+      <stop offset="50%" stop-color="#00FFCC" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0.4"/>
+    </linearGradient>
+    <linearGradient id="laserBeam2" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0%" stop-color="#FF00FF"/>
+      <stop offset="50%" stop-color="#FF00FF" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0.4"/>
+    </linearGradient>
+    <filter id="glow3">
+      <feGaussianBlur stdDeviation="12" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glowSoft">
+      <feGaussianBlur stdDeviation="6"/>
+    </filter>
+  </defs>
+
+  <rect width="1024" height="1024" rx="180" fill="#0A1628"/>
+  <!-- 레이저 글로우 배경 -->
+  <rect width="1024" height="1024" rx="180" fill="url(#laserCore)"/>
+
+  <!-- 격자선 (사이버 그리드) -->
+  <line x1="256" y1="210" x2="256" y2="780" stroke="#1A4A6A" stroke-width="1" opacity="0.5"/>
+  <line x1="512" y1="210" x2="512" y2="780" stroke="#1A4A6A" stroke-width="1" opacity="0.5"/>
+  <line x1="768" y1="210" x2="768" y2="780" stroke="#1A4A6A" stroke-width="1" opacity="0.5"/>
+  <line x1="210" y1="350" x2="814" y2="350" stroke="#1A4A6A" stroke-width="1" opacity="0.5"/>
+  <line x1="210" y1="490" x2="814" y2="490" stroke="#1A4A6A" stroke-width="1" opacity="0.5"/>
+  <line x1="210" y1="630" x2="814" y2="630" stroke="#1A4A6A" stroke-width="1" opacity="0.5"/>
+
+  <!-- 벽돌 (레이저에 뚫린 구멍 있음) -->
+  <!-- Row 1 -->
+  <rect x="218" y="215" width="100" height="44" rx="5" fill="#FF4757" opacity="0.9"/>
+  <rect x="330" y="215" width="100" height="44" rx="5" fill="#FF4757" opacity="0.9"/>
+  <!-- 레이저 통과 흔적 -->
+  <rect x="442" y="215" width="100" height="44" rx="5" fill="#FF4757" opacity="0.2"/>
+  <rect x="442" y="215" width="100" height="44" rx="5" fill="none" stroke="#00FFCC" stroke-width="2" opacity="0.6"/>
+  <rect x="554" y="215" width="100" height="44" rx="5" fill="#FF4757" opacity="0.9"/>
+  <rect x="666" y="215" width="100" height="44" rx="5" fill="#FF4757" opacity="0.9"/>
+
+  <!-- Row 2 -->
+  <rect x="218" y="271" width="100" height="44" rx="5" fill="#FF7F00" opacity="0.9"/>
+  <rect x="330" y="271" width="100" height="44" rx="5" fill="#FF7F00" opacity="0.9"/>
+  <!-- 레이저 통과 -->
+  <rect x="442" y="271" width="100" height="44" rx="5" fill="#FF7F00" opacity="0.15"/>
+  <rect x="442" y="271" width="100" height="44" rx="5" fill="none" stroke="#00FFCC" stroke-width="2" opacity="0.5"/>
+  <rect x="554" y="271" width="100" height="44" rx="5" fill="#FF7F00" opacity="0.9"/>
+  <rect x="666" y="271" width="100" height="44" rx="5" fill="#FF7F00" opacity="0.9"/>
+
+  <!-- Row 3 -->
+  <rect x="218" y="327" width="100" height="44" rx="5" fill="#FFD700" opacity="0.9"/>
+  <rect x="330" y="327" width="100" height="44" rx="5" fill="#FFD700" opacity="0.9"/>
+  <!-- 레이저 통과 -->
+  <rect x="442" y="327" width="100" height="44" rx="5" fill="#FFD700" opacity="0.15"/>
+  <rect x="442" y="327" width="100" height="44" rx="5" fill="none" stroke="#00FFCC" stroke-width="2" opacity="0.4"/>
+  <rect x="554" y="327" width="100" height="44" rx="5" fill="#FFD700" opacity="0.9"/>
+  <rect x="666" y="327" width="100" height="44" rx="5" fill="#FFD700" opacity="0.9"/>
+
+  <!-- 레이저 빔 글로우 (배경) -->
+  <rect x="479" y="215" width="26" height="590" fill="#00FFCC" opacity="0.15" filter="url(#glowSoft)"/>
+
+  <!-- 레이저 빔 (메인) -->
+  <rect x="487" y="215" width="10" height="590" fill="url(#laserBeam)" opacity="0.95" filter="url(#glow3)"/>
+  <!-- 레이저 빔 코어 -->
+  <rect x="490" y="215" width="4" height="590" fill="#FFFFFF" opacity="0.9"/>
+
+  <!-- 레이저 충돌 파티클 (row 1에서) -->
+  <circle cx="492" cy="215" r="16" fill="#00FFCC" opacity="0.6" filter="url(#glowSoft)"/>
+  <circle cx="492" cy="215" r="8" fill="#FFFFFF" opacity="0.9"/>
+  <polygon points="466,200 470,215 466,230 455,215" fill="#00FFCC" opacity="0.7"/>
+  <polygon points="518,200 522,215 518,230 529,215" fill="#00FFCC" opacity="0.7"/>
+
+  <!-- 패들 (사이버 스타일) -->
+  <rect x="340" y="775" width="344" height="50" rx="25" fill="#0D3A5C"/>
+  <rect x="340" y="775" width="344" height="50" rx="25" fill="none" stroke="#00FFCC" stroke-width="2" opacity="0.8"/>
+  <!-- 패들 레이저 포트 -->
+  <circle cx="492" cy="800" r="10" fill="#00FFCC" opacity="0.9"/>
+  <circle cx="492" cy="800" r="5" fill="#FFFFFF"/>
+  <!-- 패들 글로우 -->
+  <rect x="346" y="779" width="298" height="14" rx="7" fill="#00FFCC" opacity="0.12"/>
+
+  <!-- 사이드 장식 -->
+  <circle cx="218" cy="800" r="6" fill="#00FFCC" opacity="0.4"/>
+  <circle cx="684" cy="800" r="6" fill="#00FFCC" opacity="0.4"/>
+
+  <!-- 레이저 쿨다운 표시 (우측 하단 UI) -->
+  <rect x="670" y="750" width="120" height="12" rx="6" fill="#1A3A5A"/>
+  <rect x="670" y="750" width="48" height="12" rx="6" fill="#00FFCC" opacity="0.8"/>
+  <text x="730" y="785" text-anchor="middle" font-family="monospace" font-size="22" fill="#00FFCC" opacity="0.7">0.4s</text>
+</svg>

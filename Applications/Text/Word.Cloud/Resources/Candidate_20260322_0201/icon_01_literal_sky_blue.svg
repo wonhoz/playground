@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- 배경: 밝은 하늘파랑 그라디언트 -->
+  <defs>
+    <linearGradient id="bg01" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#E0F4FF"/>
+      <stop offset="100%" stop-color="#A8D8F0"/>
+    </linearGradient>
+    <linearGradient id="cloud01" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#D6EEFF"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="120" fill="url(#bg01)"/>
+
+  <!-- 구름 실루엣 (구름 형태 마스크 역할) -->
+  <!-- 구름 몸통: 크고 작은 원들로 구름 실루엣 형성 -->
+  <g fill="url(#cloud01)" stroke="#B8DCEF" stroke-width="6">
+    <circle cx="512" cy="460" r="220"/>
+    <circle cx="340" cy="520" r="155"/>
+    <circle cx="680" cy="510" r="165"/>
+    <circle cx="430" cy="390" r="130"/>
+    <circle cx="610" cy="380" r="140"/>
+    <circle cx="512" cy="620" r="100"/>
+  </g>
+
+  <!-- 단어들 (구름 안에 빽빽하게) -->
+  <!-- 중앙 큰 단어 -->
+  <text x="512" y="440" font-family="Arial, sans-serif" font-size="88" font-weight="900" fill="#1B7EC2" text-anchor="middle">CLOUD</text>
+  <!-- 중간 단어들 -->
+  <text x="400" y="520" font-family="Arial, sans-serif" font-size="52" font-weight="700" fill="#2A6FA0" text-anchor="middle">WORD</text>
+  <text x="640" y="515" font-family="Arial, sans-serif" font-size="44" font-weight="700" fill="#3388BB" text-anchor="middle">TEXT</text>
+  <!-- 작은 단어들 -->
+  <text x="340" y="570" font-family="Arial, sans-serif" font-size="30" font-weight="600" fill="#4499CC" text-anchor="middle">love</text>
+  <text x="500" y="580" font-family="Arial, sans-serif" font-size="26" font-weight="600" fill="#5599BB" text-anchor="middle">sky</text>
+  <text x="650" y="565" font-family="Arial, sans-serif" font-size="28" font-weight="600" fill="#3377AA" text-anchor="middle">hello</text>
+  <text x="420" y="465" font-family="Arial, sans-serif" font-size="22" font-weight="500" fill="#2288CC" text-anchor="middle">big</text>
+  <text x="620" y="460" font-family="Arial, sans-serif" font-size="20" font-weight="500" fill="#5588AA" text-anchor="middle">small</text>
+  <text x="510" y="600" font-family="Arial, sans-serif" font-size="22" font-weight="500" fill="#3399BB" text-anchor="middle">world</text>
+  <text x="360" y="445" font-family="Arial, sans-serif" font-size="18" font-weight="500" fill="#6699BB" text-anchor="middle">data</text>
+  <text x="670" y="450" font-family="Arial, sans-serif" font-size="18" font-weight="500" fill="#4488AA" text-anchor="middle">art</text>
+  <text x="460" y="395" font-family="Arial, sans-serif" font-size="16" font-weight="400" fill="#7799BB" text-anchor="middle">tag</text>
+  <text x="560" y="400" font-family="Arial, sans-serif" font-size="16" font-weight="400" fill="#5577AA" text-anchor="middle">map</text>
+
+  <!-- 구름 하단 평탄한 바닥 (구름다운 느낌) -->
+  <ellipse cx="512" cy="640" rx="280" ry="30" fill="#D6EEFF" opacity="0.7"/>
+</svg>

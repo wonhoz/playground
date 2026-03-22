@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg4" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#110820"/>
+      <stop offset="100%" stop-color="#060210"/>
+    </radialGradient>
+    <radialGradient id="purple_glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#8833FF" stop-opacity="0.3"/>
+      <stop offset="70%" stop-color="#4400AA" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#4400AA" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="danger_glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FF2266" stop-opacity="0"/>
+      <stop offset="60%" stop-color="#FF2266" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#FF2266" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glow4">
+      <feGaussianBlur stdDeviation="5" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="blur4">
+      <feGaussianBlur stdDeviation="14"/>
+    </filter>
+    <linearGradient id="bullet_grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#BB66FF"/>
+      <stop offset="100%" stop-color="#6622DD"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg4)"/>
+
+  <!-- 퍼플 글로우 배경 -->
+  <circle cx="512" cy="512" r="340" fill="url(#purple_glow)"/>
+  <circle cx="512" cy="512" r="260" fill="url(#danger_glow)"/>
+
+  <!-- 별들 -->
+  <circle cx="220" cy="220" r="2" fill="#CC88FF" opacity="0.6"/>
+  <circle cx="400" cy="200" r="1.5" fill="#FFFFFF" opacity="0.5"/>
+  <circle cx="650" cy="215" r="2" fill="#CC88FF" opacity="0.7"/>
+  <circle cx="810" cy="230" r="1.5" fill="#FFFFFF" opacity="0.5"/>
+  <circle cx="215" cy="800" r="2" fill="#CC88FF" opacity="0.6"/>
+  <circle cx="800" cy="800" r="1.5" fill="#FFFFFF" opacity="0.5"/>
+  <circle cx="205" cy="510" r="1.5" fill="#9944DD" opacity="0.6"/>
+  <circle cx="820" cy="500" r="2" fill="#9944DD" opacity="0.5"/>
+  <circle cx="500" cy="825" r="1.5" fill="#FFFFFF" opacity="0.5"/>
+  <circle cx="300" cy="750" r="2" fill="#CC88FF" opacity="0.5"/>
+  <circle cx="720" cy="760" r="1.5" fill="#CC88FF" opacity="0.6"/>
+
+  <!-- 메인 오브젝트 레이어 -->
+
+  <!-- 위협 화살 (사방에서 중앙으로 향하는 넓은 화살형 총알) -->
+
+  <!-- 위에서 아래로 (N -> center) -->
+  <polygon points="512,215 542,320 512,300 482,320" fill="#BB66FF" filter="url(#glow4)"/>
+  <polygon points="512,280 536,360 512,345 488,360" fill="#9944DD" opacity="0.8"/>
+
+  <!-- 아래서 위로 (S -> center) -->
+  <polygon points="512,809 542,704 512,724 482,704" fill="#BB66FF" filter="url(#glow4)"/>
+  <polygon points="512,744 536,664 512,679 488,664" fill="#9944DD" opacity="0.8"/>
+
+  <!-- 왼쪽에서 오른쪽으로 (W -> center) -->
+  <polygon points="215,512 320,482 300,512 320,542" fill="#BB66FF" filter="url(#glow4)"/>
+  <polygon points="280,512 360,488 345,512 360,536" fill="#9944DD" opacity="0.8"/>
+
+  <!-- 오른쪽에서 왼쪽으로 (E -> center) -->
+  <polygon points="809,512 704,482 724,512 704,542" fill="#BB66FF" filter="url(#glow4)"/>
+  <polygon points="744,512 664,488 679,512 664,536" fill="#9944DD" opacity="0.8"/>
+
+  <!-- NW 대각선 -->
+  <polygon points="258,258 342,318 312,312 318,342" fill="#8833FF" filter="url(#glow4)"/>
+  <polygon points="318,318 384,366 362,362 366,384" fill="#6622CC" opacity="0.8"/>
+
+  <!-- NE 대각선 -->
+  <polygon points="766,258 682,318 712,312 706,342" fill="#8833FF" filter="url(#glow4)"/>
+  <polygon points="706,318 640,366 662,362 658,384" fill="#6622CC" opacity="0.8"/>
+
+  <!-- SW 대각선 -->
+  <polygon points="258,766 342,706 312,712 318,682" fill="#8833FF" filter="url(#glow4)"/>
+  <polygon points="318,706 384,658 362,662 366,640" fill="#6622CC" opacity="0.8"/>
+
+  <!-- SE 대각선 -->
+  <polygon points="766,766 682,706 712,712 706,682" fill="#8833FF" filter="url(#glow4)"/>
+  <polygon points="706,706 640,658 662,662 658,640" fill="#6622CC" opacity="0.8"/>
+
+  <!-- 위험 경고 원 (중앙 주변 좁은 생존 공간) -->
+  <circle cx="512" cy="512" r="130" fill="none" stroke="#FF2266" stroke-width="2" stroke-dasharray="12 8" opacity="0.4"/>
+
+  <!-- 디테일 레이어 -->
+
+  <!-- 중앙 비행기 (큰 위협들 사이에서 작게 강조) -->
+  <!-- 비행기 글로우 -->
+  <ellipse cx="512" cy="512" rx="40" ry="40" fill="#FFFFFF" opacity="0.06" filter="url(#blur4)"/>
+
+  <!-- 비행기 몸통 -->
+  <polygon points="512,458 548,562 512,542 476,562" fill="#FFFFFF" filter="url(#glow4)"/>
+  <!-- 날개 -->
+  <polygon points="476,562 452,586 512,542" fill="#DDBBFF"/>
+  <polygon points="548,562 572,586 512,542" fill="#DDBBFF"/>
+  <!-- 엔진 글로우 -->
+  <ellipse cx="512" cy="564" rx="9" ry="14" fill="#8833FF" opacity="0.8" filter="url(#glow4)"/>
+  <ellipse cx="512" cy="562" rx="4" ry="6" fill="#FFFFFF" opacity="0.9"/>
+  <!-- 조종석 -->
+  <ellipse cx="512" cy="483" rx="7" ry="10" fill="#CC88FF" opacity="0.7"/>
+
+  <!-- 좁은 공간 강조 점선 -->
+  <circle cx="512" cy="512" r="75" fill="none" stroke="#FFFFFF" stroke-width="1" stroke-dasharray="5 5" opacity="0.15"/>
+</svg>

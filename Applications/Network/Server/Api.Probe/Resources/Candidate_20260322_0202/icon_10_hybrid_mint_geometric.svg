@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- 배경: 민트 화이트 / 밝고 화사한 -->
+  <rect width="1024" height="1024" rx="180" fill="#F0FDFB"/>
+  <rect x="24" y="24" width="976" height="976" rx="160" fill="#ECFDF5"/>
+
+  <!-- 배경 기하학 도형들 (밝은 민트 계열) -->
+  <circle cx="900" cy="160" r="140" fill="#A7F3D0" opacity="0.3"/>
+  <circle cx="140" cy="860" r="120" fill="#6EE7B7" opacity="0.2"/>
+  <circle cx="512" cy="512" r="380" fill="none" stroke="#A7F3D0" stroke-width="3" opacity="0.4"/>
+  <circle cx="512" cy="512" r="300" fill="none" stroke="#A7F3D0" stroke-width="2" opacity="0.3"/>
+
+  <!-- 중앙 메인 카드 -->
+  <rect x="140" y="220" width="744" height="580" rx="24" fill="#FFFFFF" opacity="0.9"/>
+  <!-- 카드 상단 컬러바 -->
+  <rect x="140" y="220" width="744" height="12" rx="12" fill="#10B981"/>
+  <rect x="140" y="228" width="744" height="4" fill="#10B981"/>
+
+  <!-- 탭 헤더 -->
+  <rect x="152" y="248" width="110" height="40" rx="8" fill="#10B981"/>
+  <text x="207" y="268" font-family="'Segoe UI', Arial, sans-serif" font-size="18" font-weight="700" fill="#FFFFFF" text-anchor="middle" dominant-baseline="middle">Request</text>
+  <text x="330" y="268" font-family="'Segoe UI', Arial, sans-serif" font-size="18" fill="#6B7280" dominant-baseline="middle">Response</text>
+  <text x="450" y="268" font-family="'Segoe UI', Arial, sans-serif" font-size="18" fill="#6B7280" dominant-baseline="middle">Headers</text>
+
+  <!-- 구분선 -->
+  <line x1="152" y1="296" x2="872" y2="296" stroke="#E5E7EB" stroke-width="1"/>
+
+  <!-- URL 입력 행 -->
+  <rect x="152" y="310" width="718" height="58" rx="10" fill="#F9FAFB"/>
+  <rect x="152" y="310" width="718" height="58" rx="10" fill="none" stroke="#D1FAE5" stroke-width="2"/>
+
+  <!-- 메서드 배지 (GET) -->
+  <rect x="160" y="318" width="80" height="42" rx="7" fill="#ECFDF5"/>
+  <text x="200" y="339" font-family="'Segoe UI', Arial, sans-serif" font-size="20" font-weight="900" fill="#059669" text-anchor="middle" dominant-baseline="middle">GET</text>
+  <text x="248" y="343" font-family="'Segoe UI', Arial, sans-serif" font-size="16" fill="#6B7280">▼</text>
+
+  <!-- URL 텍스트 -->
+  <text x="268" y="341" font-family="'Courier New', monospace" font-size="19" fill="#374151" dominant-baseline="middle">https://api.example.com/v2/users</text>
+
+  <!-- Send 버튼 -->
+  <rect x="778" y="320" width="82" height="38" rx="7" fill="#10B981"/>
+  <text x="819" y="339" font-family="'Segoe UI', Arial, sans-serif" font-size="18" font-weight="700" fill="#FFFFFF" text-anchor="middle" dominant-baseline="middle">Send</text>
+
+  <!-- 응답 영역 -->
+  <rect x="152" y="386" width="718" height="390" rx="10" fill="#F9FAFB"/>
+  <rect x="152" y="386" width="718" height="390" rx="10" fill="none" stroke="#D1FAE5" stroke-width="2"/>
+
+  <!-- 상태 코드 배지 -->
+  <rect x="160" y="396" width="130" height="38" rx="7" fill="#DCFCE7"/>
+  <text x="225" y="415" font-family="'Segoe UI', Arial, sans-serif" font-size="20" font-weight="900" fill="#15803D" text-anchor="middle" dominant-baseline="middle">200 OK</text>
+
+  <!-- 응답 시간 -->
+  <text x="310" y="419" font-family="'Segoe UI', Arial, sans-serif" font-size="17" fill="#9CA3AF" dominant-baseline="middle">56ms</text>
+
+  <!-- 복사 버튼 -->
+  <rect x="800" y="400" width="60" height="28" rx="6" fill="#ECFDF5"/>
+  <text x="830" y="414" font-family="'Segoe UI', Arial, sans-serif" font-size="15" fill="#059669" text-anchor="middle" dominant-baseline="middle">Copy</text>
+
+  <!-- 구분선 -->
+  <line x1="160" y1="444" x2="862" y2="444" stroke="#E5E7EB" stroke-width="1"/>
+
+  <!-- JSON 응답 -->
+  <text x="168" y="476" font-family="'Courier New', monospace" font-size="22" fill="#10B981">{</text>
+  <text x="184" y="508" font-family="'Courier New', monospace" font-size="20" fill="#374151">  <tspan fill="#DC2626">"users"</tspan>: [</text>
+  <text x="200" y="540" font-family="'Courier New', monospace" font-size="20" fill="#374151">    { <tspan fill="#DC2626">"id"</tspan>: <tspan fill="#D97706">1</tspan>, <tspan fill="#DC2626">"name"</tspan>: <tspan fill="#059669">"Alice"</tspan> },</text>
+  <text x="200" y="572" font-family="'Courier New', monospace" font-size="20" fill="#374151">    { <tspan fill="#DC2626">"id"</tspan>: <tspan fill="#D97706">2</tspan>, <tspan fill="#DC2626">"name"</tspan>: <tspan fill="#059669">"Bob"</tspan> }</text>
+  <text x="184" y="604" font-family="'Courier New', monospace" font-size="20" fill="#374151">  ],</text>
+  <text x="184" y="636" font-family="'Courier New', monospace" font-size="20" fill="#374151">  <tspan fill="#DC2626">"total"</tspan>: <tspan fill="#D97706">2</tspan></text>
+  <text x="168" y="668" font-family="'Courier New', monospace" font-size="22" fill="#10B981">}</text>
+
+  <!-- 앱 이름 (상단) -->
+  <text x="512" y="130" font-family="'Segoe UI', Arial, sans-serif" font-size="80" font-weight="900" fill="#059669" text-anchor="middle" dominant-baseline="middle">Api.Probe</text>
+  <text x="512" y="188" font-family="'Segoe UI', Arial, sans-serif" font-size="28" fill="#6EE7B7" text-anchor="middle" dominant-baseline="middle">REST API Testing Tool</text>
+
+  <!-- 하단 메서드 컬러 점 표시 -->
+  <circle cx="340" cy="890" r="10" fill="#14B8A6"/>
+  <text x="358" y="893" font-family="'Segoe UI', Arial, sans-serif" font-size="18" fill="#374151" dominant-baseline="middle">GET</text>
+  <circle cx="430" cy="890" r="10" fill="#22C55E"/>
+  <text x="448" y="893" font-family="'Segoe UI', Arial, sans-serif" font-size="18" fill="#374151" dominant-baseline="middle">POST</text>
+  <circle cx="524" cy="890" r="10" fill="#F59E0B"/>
+  <text x="542" y="893" font-family="'Segoe UI', Arial, sans-serif" font-size="18" fill="#374151" dominant-baseline="middle">PUT</text>
+  <circle cx="616" cy="890" r="10" fill="#EF4444"/>
+  <text x="634" y="893" font-family="'Segoe UI', Arial, sans-serif" font-size="18" fill="#374151" dominant-baseline="middle">DELETE</text>
+
+  <!-- 하단 체크 완료 배지 -->
+  <rect x="370" y="930" width="284" height="52" rx="12" fill="#DCFCE7"/>
+  <text x="512" y="957" font-family="'Segoe UI', Arial, sans-serif" font-size="26" font-weight="700" fill="#15803D" text-anchor="middle" dominant-baseline="middle">✓ Response Verified</text>
+</svg>

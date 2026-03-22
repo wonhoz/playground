@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_05 | hybrid | 파워업 아이템 + 무지개 벽돌 피라미드 — 화사한 파스텔 팝 -->
+  <!-- 배경: 밝고 화사한 소프트 그라디언트 -->
+  <defs>
+    <linearGradient id="bgGrad5" x1="0" y1="0" x2="0.3" y2="1">
+      <stop offset="0%" stop-color="#1A1035"/>
+      <stop offset="40%" stop-color="#2A1850"/>
+      <stop offset="100%" stop-color="#0E0C28"/>
+    </linearGradient>
+    <radialGradient id="centerGlow5" cx="50%" cy="55%" r="50%">
+      <stop offset="0%" stop-color="#FF88FF" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#1A1035" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glow5">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="softDrop">
+      <feGaussianBlur stdDeviation="14"/>
+    </filter>
+    <radialGradient id="powerGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FF88FF"/>
+      <stop offset="60%" stop-color="#CC44FF"/>
+      <stop offset="100%" stop-color="#8800CC"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1024" height="1024" rx="180" fill="url(#bgGrad5)"/>
+  <rect width="1024" height="1024" rx="180" fill="url(#centerGlow5)"/>
+
+  <!-- 별 파티클 -->
+  <circle cx="230" cy="220" r="3" fill="#FF88FF" opacity="0.5"/>
+  <circle cx="810" cy="195" r="2.5" fill="#FFCC44" opacity="0.45"/>
+  <circle cx="195" cy="700" r="2" fill="#88FFCC" opacity="0.4"/>
+  <circle cx="825" cy="740" r="3" fill="#FF88FF" opacity="0.4"/>
+  <circle cx="760" cy="350" r="2" fill="#FFFFFF" opacity="0.35"/>
+  <circle cx="260" cy="800" r="2" fill="#FFCC44" opacity="0.35"/>
+
+  <!-- 무지개 벽돌 피라미드 — 5열 5행 (피라미드 형태) -->
+  <!-- Row 1 (가장 좁음, 1개) -->
+  <rect x="462" y="215" width="100" height="46" rx="6" fill="#FF6B9D"/>
+  <rect x="464" y="217" width="94" height="14" rx="4" fill="#FFFFFF" opacity="0.25"/>
+
+  <!-- Row 2 (3개) -->
+  <rect x="350" y="273" width="100" height="46" rx="6" fill="#FF9F43"/>
+  <rect x="462" y="273" width="100" height="46" rx="6" fill="#FFDD44"/>
+  <rect x="574" y="273" width="100" height="46" rx="6" fill="#FF9F43"/>
+  <rect x="352" y="275" width="94" height="14" rx="4" fill="#FFFFFF" opacity="0.22"/>
+  <rect x="464" y="275" width="94" height="14" rx="4" fill="#FFFFFF" opacity="0.22"/>
+  <rect x="576" y="275" width="94" height="14" rx="4" fill="#FFFFFF" opacity="0.22"/>
+
+  <!-- Row 3 (5개) -->
+  <rect x="238" y="331" width="100" height="46" rx="6" fill="#44DD88"/>
+  <rect x="350" y="331" width="100" height="46" rx="6" fill="#44BBFF"/>
+  <rect x="462" y="331" width="100" height="46" rx="6" fill="#9B59B6"/>
+  <rect x="574" y="331" width="100" height="46" rx="6" fill="#44BBFF"/>
+  <rect x="686" y="331" width="100" height="46" rx="6" fill="#44DD88"/>
+  <rect x="240" y="333" width="94" height="14" rx="4" fill="#FFFFFF" opacity="0.22"/>
+  <rect x="352" y="333" width="94" height="14" rx="4" fill="#FFFFFF" opacity="0.22"/>
+  <rect x="464" y="333" width="94" height="14" rx="4" fill="#FFFFFF" opacity="0.22"/>
+  <rect x="576" y="333" width="94" height="14" rx="4" fill="#FFFFFF" opacity="0.22"/>
+  <rect x="688" y="333" width="94" height="14" rx="4" fill="#FFFFFF" opacity="0.22"/>
+
+  <!-- Row 4 (3개 — 아래 일부 파괴됨) -->
+  <rect x="350" y="389" width="100" height="46" rx="6" fill="#FF4757" opacity="0.3"/>
+  <rect x="462" y="389" width="100" height="46" rx="6" fill="#FF6B9D" opacity="0.9"/>
+  <rect x="462" y="391" width="94" height="14" rx="4" fill="#FFFFFF" opacity="0.2"/>
+  <rect x="574" y="389" width="100" height="46" rx="6" fill="#FF4757" opacity="0.3"/>
+
+  <!-- 파워업 아이템 (떠있는 별 모양) — 중앙 하단 -->
+  <!-- 파워업 글로우 -->
+  <circle cx="512" cy="600" r="80" fill="#CC44FF" opacity="0.15" filter="url(#softDrop)"/>
+  <!-- 파워업 외곽 링 -->
+  <circle cx="512" cy="600" r="62" fill="none" stroke="#FF88FF" stroke-width="3" opacity="0.6" stroke-dasharray="12 6"/>
+  <!-- 파워업 본체 (다이아몬드) -->
+  <polygon points="512,545 558,600 512,655 466,600" fill="url(#powerGlow)" filter="url(#glow5)"/>
+  <polygon points="512,558 545,600 512,642 479,600" fill="#FF88FF" opacity="0.5"/>
+  <!-- 파워업 반짝이 -->
+  <circle cx="497" cy="585" r="8" fill="#FFFFFF" opacity="0.7"/>
+  <!-- 파워업 텍스트 -->
+  <text x="512" y="608" text-anchor="middle" font-family="'Arial Black', sans-serif" font-size="26" font-weight="900" fill="#FFFFFF" opacity="0.95">+</text>
+
+  <!-- 공 (파워업을 향해 날아가는 중) -->
+  <circle cx="420" cy="510" r="28" fill="#FFFFFF" filter="url(#glow5)"/>
+  <circle cx="420" cy="510" r="24" fill="#FFFFFF"/>
+  <circle cx="412" cy="502" r="8" fill="#FFFFFF" opacity="0.6"/>
+  <!-- 공 궤적 -->
+  <circle cx="452" cy="538" r="5" fill="#FFFFFF" opacity="0.4"/>
+  <circle cx="470" cy="554" r="4" fill="#FFFFFF" opacity="0.3"/>
+
+  <!-- 패들 (화사한 그라디언트) -->
+  <defs>
+    <linearGradient id="paddleGrad5" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#FF6B9D"/>
+      <stop offset="50%" stop-color="#CC44FF"/>
+      <stop offset="100%" stop-color="#44BBFF"/>
+    </linearGradient>
+  </defs>
+  <rect x="332" y="775" width="360" height="52" rx="26" fill="url(#paddleGrad5)"/>
+  <rect x="342" y="779" width="316" height="16" rx="8" fill="#FFFFFF" opacity="0.25"/>
+
+  <!-- 라이프 하트 (우측 하단) -->
+  <text x="780" y="790" text-anchor="middle" font-family="serif" font-size="28" fill="#FF4757" opacity="0.85">♥ ♥ ♥</text>
+</svg>

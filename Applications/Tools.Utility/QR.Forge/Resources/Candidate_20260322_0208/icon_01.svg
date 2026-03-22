@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_01 | Literal | 중앙 심볼 | 실제 QR 모듈 패턴 + 불꽃 파인더 | 딥 네이비 + 시안 -->
+
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="180" fill="#0D1B2A"/>
+
+  <!-- Layer 2: QR 코드 실제 패턴 (SVG rect 모듈, 중앙 배치) -->
+  <!-- 모듈 크기: 48px, 전체 QR: 17모듈 x 48 = 816px, 중앙 오프셋: (1024-816)/2 = 104 -->
+  <g transform="translate(104, 104)" fill="#00E5FF">
+
+    <!-- 좌상단 파인더 패턴 (7x7 모듈) -->
+    <!-- 외곽 테두리 (7x7) -->
+    <rect x="0"   y="0"   width="336" height="48"/>
+    <rect x="0"   y="48"  width="48"  height="240"/>
+    <rect x="288" y="48"  width="48"  height="240"/>
+    <rect x="0"   y="288" width="336" height="48"/>
+    <!-- 내부 채움 (3x3) -->
+    <rect x="96"  y="96"  width="144" height="144"/>
+
+    <!-- 우상단 파인더 패턴 -->
+    <rect x="432" y="0"   width="336" height="48"/>
+    <rect x="432" y="48"  width="48"  height="240"/>
+    <rect x="720" y="48"  width="48"  height="240"/>
+    <rect x="432" y="288" width="336" height="48"/>
+    <rect x="528" y="96"  width="144" height="144"/>
+
+    <!-- 좌하단 파인더 패턴 -->
+    <rect x="0"   y="432" width="336" height="48"/>
+    <rect x="0"   y="480" width="48"  height="240"/>
+    <rect x="288" y="480" width="48"  height="240"/>
+    <rect x="0"   y="720" width="336" height="48"/>
+    <rect x="96"  y="528" width="144" height="144"/>
+
+    <!-- 타이밍 패턴 (가로) -->
+    <rect x="336" y="288" width="48" height="48"/>
+    <rect x="432" y="288" width="48" height="48"/> <!-- 이미 파인더 영역이므로 스킵 -->
+
+    <!-- 데이터 모듈 (랜덤 패턴처럼) -->
+    <rect x="384" y="336" width="48" height="48"/>
+    <rect x="480" y="336" width="48" height="48"/>
+    <rect x="576" y="336" width="48" height="48"/>
+    <rect x="384" y="432" width="48" height="48"/>
+    <rect x="576" y="432" width="48" height="48"/>
+    <rect x="672" y="432" width="48" height="48"/>
+    <rect x="384" y="528" width="48" height="48"/>
+    <rect x="480" y="528" width="48" height="48"/>
+    <rect x="672" y="528" width="48" height="48"/>
+    <rect x="384" y="624" width="48" height="48"/>
+    <rect x="528" y="624" width="48" height="48"/>
+    <rect x="672" y="624" width="48" height="48"/>
+    <rect x="432" y="720" width="48" height="48"/>
+    <rect x="528" y="720" width="48" height="48"/>
+    <rect x="624" y="720" width="48" height="48"/>
+    <rect x="336" y="384" width="48" height="48"/>
+    <rect x="720" y="384" width="48" height="48"/>
+    <rect x="336" y="480" width="48" height="48"/>
+    <rect x="720" y="480" width="48" height="48"/>
+    <rect x="336" y="576" width="48" height="48"/>
+    <rect x="720" y="576" width="48" height="48"/>
+    <rect x="336" y="672" width="48" height="48"/>
+    <rect x="720" y="672" width="48" height="48"/>
+    <rect x="384" y="768" width="48" height="48"/>
+    <rect x="576" y="768" width="48" height="48"/>
+    <rect x="768" y="336" width="48" height="48"/>
+    <rect x="768" y="432" width="48" height="48"/>
+    <rect x="768" y="528" width="48" height="48"/>
+  </g>
+
+  <!-- Layer 3: 중앙 Forge 불꽃 오버레이 (반투명 강조) -->
+  <circle cx="512" cy="512" r="90" fill="#0D1B2A" opacity="0.85"/>
+  <!-- 플러스(+) 생성 심볼 -->
+  <rect x="488" y="452" width="48" height="120" rx="8" fill="#00E5FF"/>
+  <rect x="452" y="488" width="120" height="48" rx="8" fill="#00E5FF"/>
+</svg>

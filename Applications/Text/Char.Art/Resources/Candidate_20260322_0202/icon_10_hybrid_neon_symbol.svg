@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg10" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#1A0025"/>
+      <stop offset="70%" stop-color="#0D001A"/>
+      <stop offset="100%" stop-color="#050008"/>
+    </radialGradient>
+    <filter id="neonGlow10">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="softGlow10">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="160" fill="url(#bg10)"/>
+
+  <!-- 배경 글로우 원 -->
+  <circle cx="512" cy="480" r="320" fill="none" stroke="#FF00CC" stroke-width="1" opacity="0.1"/>
+  <circle cx="512" cy="480" r="280" fill="none" stroke="#FF44DD" stroke-width="1" opacity="0.08"/>
+
+  <!-- 중앙 대형 @ 심볼 - 네온 핑크 -->
+  <text x="512" y="580" font-family="Consolas,monospace" font-size="380" fill="#FF00CC" text-anchor="middle" filter="url(#softGlow10)" opacity="0.15">@</text>
+  <text x="512" y="580" font-family="Consolas,monospace" font-size="380" fill="#FF44DD" text-anchor="middle" filter="url(#neonGlow10)" opacity="0.4">@</text>
+  <text x="512" y="580" font-family="Consolas,monospace" font-size="380" fill="#FF88EE" text-anchor="middle" opacity="0.7">@</text>
+  <!-- 가장 밝은 레이어 -->
+  <text x="512" y="580" font-family="Consolas,monospace" font-size="380" fill="none" text-anchor="middle" stroke="#FF00CC" stroke-width="1">@</text>
+
+  <!-- @의 내부를 채우는 작은 문자들 (장식) -->
+  <!-- 상단 호 부분 -->
+  <text x="280" y="310" font-family="Consolas,monospace" font-size="22" fill="#FF44DD" opacity="0.7">#</text>
+  <text x="360" y="245" font-family="Consolas,monospace" font-size="22" fill="#FF55EE" opacity="0.8">%</text>
+  <text x="455" y="218" font-family="Consolas,monospace" font-size="22" fill="#FF66FF" opacity="0.9">*</text>
+  <text x="555" y="218" font-family="Consolas,monospace" font-size="22" fill="#FF66FF" opacity="0.9">*</text>
+  <text x="650" y="248" font-family="Consolas,monospace" font-size="22" fill="#FF55EE" opacity="0.8">%</text>
+  <text x="730" y="312" font-family="Consolas,monospace" font-size="22" fill="#FF44DD" opacity="0.7">#</text>
+  <text x="775" y="405" font-family="Consolas,monospace" font-size="22" fill="#FF33CC" opacity="0.6">@</text>
+  <text x="790" y="510" font-family="Consolas,monospace" font-size="22" fill="#FF22BB" opacity="0.5">@</text>
+
+  <!-- 왼쪽 -->
+  <text x="218" y="408" font-family="Consolas,monospace" font-size="22" fill="#FF33CC" opacity="0.6">;</text>
+  <text x="195" y="510" font-family="Consolas,monospace" font-size="22" fill="#FF22BB" opacity="0.5">:</text>
+  <text x="218" y="612" font-family="Consolas,monospace" font-size="22" fill="#FF33CC" opacity="0.6">;</text>
+
+  <!-- 하단 -->
+  <text x="278" y="700" font-family="Consolas,monospace" font-size="22" fill="#FF44DD" opacity="0.7">.</text>
+  <text x="360" y="750" font-family="Consolas,monospace" font-size="22" fill="#FF55EE" opacity="0.5">.</text>
+  <text x="455" y="768" font-family="Consolas,monospace" font-size="22" fill="#FF66FF" opacity="0.3">.</text>
+  <text x="555" y="768" font-family="Consolas,monospace" font-size="22" fill="#FF66FF" opacity="0.3">.</text>
+  <text x="650" y="750" font-family="Consolas,monospace" font-size="22" fill="#FF55EE" opacity="0.5">.</text>
+  <text x="730" y="700" font-family="Consolas,monospace" font-size="22" fill="#FF44DD" opacity="0.7">.</text>
+
+  <!-- @의 내부 원 (작은 문자들) -->
+  <text x="460" y="430" font-family="Consolas,monospace" font-size="18" fill="#FF99FF" opacity="0.6">@</text>
+  <text x="500" y="415" font-family="Consolas,monospace" font-size="18" fill="#FF99FF" opacity="0.7">@</text>
+  <text x="540" y="430" font-family="Consolas,monospace" font-size="18" fill="#FF99FF" opacity="0.6">@</text>
+  <text x="555" y="470" font-family="Consolas,monospace" font-size="18" fill="#FF99FF" opacity="0.5">#</text>
+  <text x="545" y="510" font-family="Consolas,monospace" font-size="18" fill="#FFAAFF" opacity="0.8">@</text>
+  <text x="505" y="525" font-family="Consolas,monospace" font-size="18" fill="#FFBBFF" opacity="0.9">@</text>
+  <text x="465" y="510" font-family="Consolas,monospace" font-size="18" fill="#FFAAFF" opacity="0.8">@</text>
+  <text x="450" y="470" font-family="Consolas,monospace" font-size="18" fill="#FF99FF" opacity="0.5">#</text>
+
+  <!-- 코너 장식 문자들 -->
+  <text x="100" y="150" font-family="Consolas,monospace" font-size="28" fill="#FF00CC" opacity="0.3">@</text>
+  <text x="890" y="150" font-family="Consolas,monospace" font-size="28" fill="#FF00CC" opacity="0.3">#</text>
+  <text x="100" y="890" font-family="Consolas,monospace" font-size="28" fill="#FF00CC" opacity="0.3">%</text>
+  <text x="890" y="890" font-family="Consolas,monospace" font-size="28" fill="#FF00CC" opacity="0.3">*</text>
+
+  <!-- 테두리 글로우 -->
+  <rect width="1024" height="1024" rx="160" fill="none" stroke="#FF00CC" stroke-width="3" opacity="0.2"/>
+  <rect x="10" y="10" width="1004" height="1004" rx="155" fill="none" stroke="#FF44DD" stroke-width="1" opacity="0.15"/>
+
+  <!-- 하단 타이틀 -->
+  <text x="512" y="875" font-family="Consolas,monospace" font-size="36" fill="#FF00CC" text-anchor="middle" font-weight="bold" filter="url(#neonGlow10)">Char.Art</text>
+  <text x="512" y="918" font-family="Consolas,monospace" font-size="20" fill="#CC0099" text-anchor="middle" opacity="0.7">@ # % * ; : , .</text>
+</svg>

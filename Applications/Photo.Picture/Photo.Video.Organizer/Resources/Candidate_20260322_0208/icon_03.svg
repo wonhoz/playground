@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_03 | Metaphor / 대각선·동적 | 카메라 렌즈 + 변환 흐름 광선 -->
+  <!-- 컨셉: 카메라 렌즈에서 EXIF 데이터가 파일명으로 방출되는 광선 -->
+  <!-- 색조: 미드나잇 블랙 + 시안 네온 + 핫핑크 -->
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="160" fill="#0A0A0F"/>
+
+  <!-- 렌즈 광선 방사 효과 -->
+  <g opacity="0.3">
+    <line x1="512" y1="512" x2="900" y2="200" stroke="#00E5FF" stroke-width="3"/>
+    <line x1="512" y1="512" x2="950" y2="400" stroke="#00E5FF" stroke-width="3"/>
+    <line x1="512" y1="512" x2="940" y2="620" stroke="#00E5FF" stroke-width="3"/>
+    <line x1="512" y1="512" x2="870" y2="800" stroke="#00E5FF" stroke-width="3"/>
+  </g>
+
+  <!-- 카메라 바디 -->
+  <rect x="180" y="340" width="380" height="280" rx="28" fill="#1A1A2E" stroke="#00E5FF" stroke-width="7"/>
+  <!-- 카메라 상단 돌출 (뷰파인더) -->
+  <rect x="250" y="305" width="130" height="50" rx="10" fill="#1A1A2E" stroke="#00E5FF" stroke-width="6"/>
+  <!-- 셔터 버튼 -->
+  <circle cx="430" cy="318" r="22" fill="#FF1E78" stroke="#FF1E78" stroke-width="4"/>
+  <circle cx="430" cy="318" r="12" fill="#C2185B"/>
+
+  <!-- 렌즈 (카메라 중앙) -->
+  <circle cx="360" cy="480" r="105" fill="#0D0D1A" stroke="#00E5FF" stroke-width="8"/>
+  <circle cx="360" cy="480" r="82" fill="#0A0A14" stroke="#00BFFF" stroke-width="5"/>
+  <circle cx="360" cy="480" r="58" fill="#050510" stroke="#0080FF" stroke-width="4"/>
+  <!-- 렌즈 반사 하이라이트 -->
+  <ellipse cx="335" cy="455" rx="20" ry="14" fill="#00E5FF" opacity="0.25"/>
+  <circle cx="360" cy="480" r="24" fill="#0A0AFF" opacity="0.6"/>
+
+  <!-- 렌즈 조리개 블레이드 -->
+  <g opacity="0.5">
+    <ellipse cx="360" cy="480" rx="50" ry="16" fill="none" stroke="#00E5FF" stroke-width="2" transform="rotate(0,360,480)"/>
+    <ellipse cx="360" cy="480" rx="50" ry="16" fill="none" stroke="#00E5FF" stroke-width="2" transform="rotate(60,360,480)"/>
+    <ellipse cx="360" cy="480" rx="50" ry="16" fill="none" stroke="#00E5FF" stroke-width="2" transform="rotate(120,360,480)"/>
+  </g>
+
+  <!-- EXIF 데이터 스트림 (카메라에서 오른쪽으로) -->
+  <!-- 흘러나오는 데이터 라인들 -->
+  <g transform="translate(560,400)">
+    <!-- 데이터 스트림 1 -->
+    <path d="M0,-60 Q80,-80 160,-50 Q220,-30 280,0" stroke="#00E5FF" stroke-width="5" fill="none" opacity="0.9" stroke-linecap="round"/>
+    <circle cx="280" cy="0" r="7" fill="#00E5FF"/>
+    <rect x="288" y="-20" width="170" height="36" rx="6" fill="#00E5FF" opacity="0.15" stroke="#00E5FF" stroke-width="2"/>
+    <text x="373" y="4" font-family="Consolas,monospace" font-size="15" fill="#00E5FF" text-anchor="middle">DateTimeOriginal</text>
+
+    <!-- 데이터 스트림 2 -->
+    <path d="M0,0 Q100,-10 200,10 Q240,18 280,40" stroke="#FF1E78" stroke-width="5" fill="none" opacity="0.9" stroke-linecap="round"/>
+    <circle cx="280" cy="40" r="7" fill="#FF1E78"/>
+    <rect x="288" y="22" width="150" height="34" rx="6" fill="#FF1E78" opacity="0.15" stroke="#FF1E78" stroke-width="2"/>
+    <text x="363" y="44" font-family="Consolas,monospace" font-size="15" fill="#FF1E78" text-anchor="middle">Make / Model</text>
+
+    <!-- 데이터 스트림 3 -->
+    <path d="M0,60 Q90,70 180,80 Q240,86 280,90" stroke="#FFD600" stroke-width="5" fill="none" opacity="0.9" stroke-linecap="round"/>
+    <circle cx="280" cy="90" r="7" fill="#FFD600"/>
+    <rect x="288" y="72" width="130" height="34" rx="6" fill="#FFD600" opacity="0.15" stroke="#FFD600" stroke-width="2"/>
+    <text x="353" y="94" font-family="Consolas,monospace" font-size="15" fill="#FFD600" text-anchor="middle">GPS Location</text>
+
+    <!-- 출력 파일명 박스 -->
+    <rect x="288" y="130" width="220" height="60" rx="12" fill="#0D2A0D" stroke="#39FF14" stroke-width="4"/>
+    <text x="398" y="155" font-family="Consolas,monospace" font-size="14" fill="#39FF14" text-anchor="middle" font-weight="bold">20240315_</text>
+    <text x="398" y="178" font-family="Consolas,monospace" font-size="14" fill="#39FF14" text-anchor="middle" font-weight="bold">094211.jpg</text>
+    <!-- 체크 아이콘 -->
+    <path d="M472,145 L480,158 L498,135" stroke="#39FF14" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <!-- 연결 화살표 -->
+    <path d="M280,90 Q285,110 290,130" stroke="#39FF14" stroke-width="4" fill="none" stroke-dasharray="8,4" opacity="0.8"/>
+  </g>
+
+  <!-- 하단 배지 - 지원 포맷 -->
+  <rect x="160" y="730" width="704" height="70" rx="14" fill="#1A1A2E" stroke="#00E5FF" stroke-width="3"/>
+  <text x="200" y="768" font-family="Consolas,monospace" font-size="17" fill="#00E5FF">.jpg</text>
+  <text x="270" y="768" font-family="Consolas,monospace" font-size="17" fill="#00BFFF">.heic</text>
+  <text x="348" y="768" font-family="Consolas,monospace" font-size="17" fill="#0080FF">.mp4</text>
+  <text x="420" y="768" font-family="Consolas,monospace" font-size="17" fill="#00E5FF">.mov</text>
+  <text x="490" y="768" font-family="Consolas,monospace" font-size="17" fill="#FF1E78">.cr2</text>
+  <text x="556" y="768" font-family="Consolas,monospace" font-size="17" fill="#FFD600">.nef</text>
+  <text x="618" y="768" font-family="Consolas,monospace" font-size="17" fill="#00E5FF">.arw</text>
+  <text x="684" y="768" font-family="Consolas,monospace" font-size="17" fill="#39FF14">...</text>
+
+  <!-- 네온 글로우 효과 (렌즈 테두리 보강) -->
+  <circle cx="360" cy="480" r="108" fill="none" stroke="#00E5FF" stroke-width="3" opacity="0.3"/>
+  <circle cx="360" cy="480" r="116" fill="none" stroke="#00E5FF" stroke-width="2" opacity="0.15"/>
+</svg>

@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_06 | Metaphor / 공간·장면 | 사진 인화 + 날짜 스탬프 오버레이 -->
+  <!-- 컨셉: 인화된 사진 위에 날짜 도장이 찍히듯 파일명이 각인되는 장면 -->
+  <!-- 색조: 크림 아이보리 배경 + 인디고 블루 + 선명한 레드 스탬프 -->
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="160" fill="#F5F0E8"/>
+
+  <!-- 인화된 사진 카드 (흰색 보더가 있는 클래식 사진) -->
+  <rect x="152" y="148" width="540" height="580" rx="10" fill="white" stroke="#D4C9B0" stroke-width="4"/>
+  <!-- 사진 하단 흰 여백 (인화 사진 특유) -->
+  <rect x="152" y="618" width="540" height="110" rx="6" fill="white"/>
+  <!-- 사진 본체 -->
+  <rect x="172" y="168" width="500" height="430" fill="#B8D4E8"/>
+  <!-- 사진 내용 - 풍경 -->
+  <!-- 하늘 -->
+  <rect x="172" y="168" width="500" height="200" fill="#87CEEB"/>
+  <!-- 구름 -->
+  <ellipse cx="290" cy="220" rx="65" ry="35" fill="white" opacity="0.85"/>
+  <ellipse cx="340" cy="210" rx="50" ry="28" fill="white" opacity="0.9"/>
+  <ellipse cx="500" cy="240" rx="70" ry="32" fill="white" opacity="0.8"/>
+  <!-- 태양 -->
+  <circle cx="590" cy="210" rx="38" ry="38" fill="#FFD700" opacity="0.95"/>
+  <!-- 산 -->
+  <path d="M172 368 L280 258 L390 368 Z" fill="#6B8E5A"/>
+  <path d="M310 368 L430 240 L560 368 Z" fill="#5A7A4A"/>
+  <path d="M450 368 L560 280 L672 368 Z" fill="#4A6B3A"/>
+  <!-- 산 눈 -->
+  <path d="M416 253 L430 240 L444 253 L430 268 Z" fill="white" opacity="0.9"/>
+  <!-- 땅 -->
+  <rect x="172" y="368" width="500" height="230" fill="#8FBC6F"/>
+  <!-- 초원 풀 -->
+  <path d="M172 420 Q230 400 290 420 Q350 395 410 420 Q470 400 530 420 Q590 395 640 415 Q660 400 672 415 L672 598 L172 598 Z" fill="#6B9A4F"/>
+
+  <!-- 인화 날짜 텍스트 (사진 하단 여백) -->
+  <text x="422" y="665" font-family="Georgia,serif" font-size="18" fill="#8B6914" text-anchor="middle" font-style="italic">Mar 15, 2024</text>
+
+  <!-- 날짜 스탬프 도장 (사진 위 오버레이) - 핵심 요소 -->
+  <g transform="translate(390,430) rotate(-15)">
+    <!-- 스탬프 외곽 -->
+    <rect x="-180" y="-70" width="360" height="140" rx="16" fill="none" stroke="#C0392B" stroke-width="10" opacity="0.9"/>
+    <rect x="-172" y="-62" width="344" height="124" rx="12" fill="none" stroke="#C0392B" stroke-width="4" opacity="0.7"/>
+    <!-- 스탬프 배경 (반투명 레드) -->
+    <rect x="-180" y="-70" width="360" height="140" rx="16" fill="#C0392B" opacity="0.15"/>
+    <!-- 스탬프 텍스트 -->
+    <text x="0" y="-20" font-family="Courier New,monospace" font-size="28" fill="#C0392B" text-anchor="middle" font-weight="bold" opacity="0.9">20240315_094211</text>
+    <text x="0" y="18" font-family="Courier New,monospace" font-size="24" fill="#C0392B" text-anchor="middle" font-weight="bold" opacity="0.9">_IMG_001.jpg</text>
+    <!-- 스탬프 잉크 번짐 효과 -->
+    <text x="0" y="-20" font-family="Courier New,monospace" font-size="28" fill="#E74C3C" text-anchor="middle" font-weight="bold" opacity="0.1" transform="translate(2,2)">20240315_094211</text>
+  </g>
+
+  <!-- 우측 패널 - 이름변경 프로세스 -->
+  <rect x="730" y="148" width="244" height="580" rx="16" fill="#1A2A6C" opacity="0.95"/>
+  <text x="852" y="200" font-family="Arial,sans-serif" font-size="18" fill="#87CEEB" text-anchor="middle" font-weight="bold">RENAME</text>
+  <text x="852" y="224" font-family="Arial,sans-serif" font-size="14" fill="#5BA3D0" text-anchor="middle">LOG</text>
+
+  <!-- 로그 라인들 -->
+  <g font-family="Consolas,monospace" font-size="13" fill="#A8D8F0">
+    <text x="748" y="270">IMG_9821.jpg</text>
+    <text x="748" y="290" fill="#4FC3F7">→ 20240315_</text>
+    <text x="748" y="308" fill="#4FC3F7">  094211_001</text>
+    <line x1="748" y1="320" x2="960" y2="320" stroke="#2E5A8E" stroke-width="1"/>
+    <text x="748" y="346">VID_0042.mp4</text>
+    <text x="748" y="366" fill="#4FC3F7">→ 20240315_</text>
+    <text x="748" y="384" fill="#4FC3F7">  143022_001</text>
+    <line x1="748" y1="396" x2="960" y2="396" stroke="#2E5A8E" stroke-width="1"/>
+    <text x="748" y="422">IMG_9822.jpg</text>
+    <text x="748" y="442" fill="#4FC3F7">→ 20240315_</text>
+    <text x="748" y="460" fill="#4FC3F7">  094312_002</text>
+    <line x1="748" y1="472" x2="960" y2="472" stroke="#2E5A8E" stroke-width="1"/>
+    <text x="748" y="498" fill="#81C784">✓ 3 / 127</text>
+    <text x="748" y="518" fill="#81C784">  renamed</text>
+  </g>
+
+  <!-- 우측 패널 하단 진행률 바 -->
+  <rect x="748" y="600" width="212" height="16" rx="6" fill="#0D1B45"/>
+  <rect x="748" y="600" width="50" height="16" rx="6" fill="#4FC3F7"/>
+  <text x="852" y="638" font-family="Arial,sans-serif" font-size="14" fill="#4FC3F7" text-anchor="middle">2.4%</text>
+
+  <!-- 하단 포맷 지원 표시 -->
+  <rect x="152" y="754" width="540" height="76" rx="10" fill="#1A2A6C" opacity="0.12" stroke="#B8D0E8" stroke-width="2"/>
+  <text x="422" y="786" font-family="Arial,sans-serif" font-size="16" fill="#1A2A6C" text-anchor="middle">Photos + Videos  ·  EXIF + QuickTime</text>
+  <text x="422" y="810" font-family="Arial,sans-serif" font-size="14" fill="#5A7A9A" text-anchor="middle">Batch rename by capture date</text>
+</svg>

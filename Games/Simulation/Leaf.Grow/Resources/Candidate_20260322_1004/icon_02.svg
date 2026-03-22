@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_02: literal — 씨앗→새싹→나무 성장 단계 (3단계 순서 표시, 따뜻한 아이보리 배경) -->
+
+  <defs>
+    <linearGradient id="bg02" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFF8E8"/>
+      <stop offset="100%" stop-color="#F0E8C8"/>
+    </linearGradient>
+    <linearGradient id="ground02" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#7DB87A"/>
+      <stop offset="100%" stop-color="#4A7A46"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="200" fill="url(#bg02)"/>
+
+  <!-- 땅 라인 -->
+  <rect x="160" y="730" width="704" height="90" rx="18" fill="url(#ground02)" opacity="0.7"/>
+
+  <!-- === Stage 1: 씨앗 (왼쪽) === -->
+  <!-- 씨앗 -->
+  <ellipse cx="248" cy="760" rx="28" ry="22" fill="#A0522D" stroke="#7A3A1A" stroke-width="3"/>
+  <!-- 아주 작은 새싹 -->
+  <line x1="248" y1="738" x2="248" y2="700" stroke="#5A9A3A" stroke-width="6" stroke-linecap="round"/>
+  <ellipse cx="238" cy="700" rx="14" ry="10" fill="#7EC850" transform="rotate(-30,238,700)"/>
+  <!-- 숫자 -->
+  <text x="248" y="820" text-anchor="middle" font-family="Georgia, serif" font-size="40" font-weight="bold" fill="#5A3A1A">1</text>
+
+  <!-- 화살표 1→2 -->
+  <path d="M300 730 Q350 700 400 730" stroke="#8B7040" stroke-width="6" fill="none" stroke-dasharray="8,4"/>
+  <polygon points="400,720 410,730 400,740" fill="#8B7040"/>
+
+  <!-- === Stage 2: 새싹 (중앙) === -->
+  <line x1="512" y1="730" x2="512" y2="580" stroke="#6B4423" stroke-width="14" stroke-linecap="round"/>
+  <!-- 1단계 가지 -->
+  <line x1="512" y1="650" x2="452" y2="590" stroke="#8B6040" stroke-width="9" stroke-linecap="round"/>
+  <line x1="512" y1="650" x2="572" y2="590" stroke="#8B6040" stroke-width="9" stroke-linecap="round"/>
+  <!-- 잎 -->
+  <ellipse cx="440" cy="582" rx="26" ry="18" fill="#4CAF50" transform="rotate(-40,440,582)"/>
+  <ellipse cx="584" cy="582" rx="26" ry="18" fill="#4CAF50" transform="rotate(40,584,582)"/>
+  <ellipse cx="512" cy="568" rx="22" ry="16" fill="#66BB6A"/>
+  <!-- 숫자 -->
+  <text x="512" y="820" text-anchor="middle" font-family="Georgia, serif" font-size="40" font-weight="bold" fill="#5A3A1A">2</text>
+
+  <!-- 화살표 2→3 -->
+  <path d="M624 730 Q674 700 724 730" stroke="#8B7040" stroke-width="6" fill="none" stroke-dasharray="8,4"/>
+  <polygon points="724,720 734,730 724,740" fill="#8B7040"/>
+
+  <!-- === Stage 3: 완성된 나무 (오른쪽) === -->
+  <!-- 줄기 -->
+  <line x1="776" y1="730" x2="776" y2="530" stroke="#6B4423" stroke-width="18" stroke-linecap="round"/>
+  <!-- 1단계 -->
+  <line x1="776" y1="640" x2="706" y2="560" stroke="#7A5030" stroke-width="11" stroke-linecap="round"/>
+  <line x1="776" y1="640" x2="846" y2="560" stroke="#7A5030" stroke-width="11" stroke-linecap="round"/>
+  <!-- 2단계 -->
+  <line x1="706" y1="560" x2="662" y2="500" stroke="#8B6040" stroke-width="7" stroke-linecap="round"/>
+  <line x1="706" y1="560" x2="740" y2="495" stroke="#8B6040" stroke-width="7" stroke-linecap="round"/>
+  <line x1="846" y1="560" x2="812" y2="495" stroke="#8B6040" stroke-width="7" stroke-linecap="round"/>
+  <line x1="846" y1="560" x2="890" y2="500" stroke="#8B6040" stroke-width="7" stroke-linecap="round"/>
+  <!-- 줄기 상단 -->
+  <line x1="776" y1="530" x2="776" y2="450" stroke="#8B6040" stroke-width="9" stroke-linecap="round"/>
+  <!-- 잎 군집 -->
+  <circle cx="656" cy="492" r="28" fill="#2E7D32"/>
+  <circle cx="740" cy="484" r="24" fill="#388E3C"/>
+  <circle cx="812" cy="484" r="24" fill="#388E3C"/>
+  <circle cx="890" cy="492" r="28" fill="#2E7D32"/>
+  <circle cx="776" cy="438" r="30" fill="#43A047"/>
+  <!-- 꽃 포인트 -->
+  <circle cx="776" cy="434" r="10" fill="#FF7043"/>
+  <!-- 숫자 -->
+  <text x="776" y="820" text-anchor="middle" font-family="Georgia, serif" font-size="40" font-weight="bold" fill="#5A3A1A">3</text>
+
+  <!-- 상단 타이틀 이터레이션 카운터 뱃지 -->
+  <rect x="370" y="230" width="284" height="64" rx="32" fill="#4CAF50" opacity="0.9"/>
+  <text x="512" y="274" text-anchor="middle" font-family="Consolas, monospace" font-size="34" font-weight="bold" fill="white">iter: 1 → 2 → 3</text>
+</svg>

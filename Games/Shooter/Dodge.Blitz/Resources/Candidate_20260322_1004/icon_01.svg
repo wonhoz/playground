@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg1" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#0D1B2A"/>
+      <stop offset="100%" stop-color="#010810"/>
+    </radialGradient>
+    <radialGradient id="glow1" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#00FFCC" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#00FFCC" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="blur1">
+      <feGaussianBlur stdDeviation="6"/>
+    </filter>
+    <filter id="glow_filter">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- 배경 레이어 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg1)"/>
+
+  <!-- 별 배경 -->
+  <circle cx="200" cy="220" r="2.5" fill="#FFFFFF" opacity="0.7"/>
+  <circle cx="340" cy="170" r="1.8" fill="#FFFFFF" opacity="0.5"/>
+  <circle cx="480" cy="240" r="1.5" fill="#AADDFF" opacity="0.6"/>
+  <circle cx="650" cy="190" r="2" fill="#FFFFFF" opacity="0.8"/>
+  <circle cx="780" cy="230" r="1.5" fill="#FFFFFF" opacity="0.5"/>
+  <circle cx="820" cy="300" r="2" fill="#AADDFF" opacity="0.6"/>
+  <circle cx="220" cy="380" r="1.5" fill="#FFFFFF" opacity="0.4"/>
+  <circle cx="750" cy="380" r="2" fill="#FFFFFF" opacity="0.6"/>
+  <circle cx="860" cy="500" r="1.5" fill="#AADDFF" opacity="0.5"/>
+  <circle cx="170" cy="520" r="2" fill="#FFFFFF" opacity="0.7"/>
+  <circle cx="300" cy="700" r="1.8" fill="#FFFFFF" opacity="0.5"/>
+  <circle cx="700" cy="720" r="2" fill="#AADDFF" opacity="0.6"/>
+  <circle cx="820" cy="680" r="1.5" fill="#FFFFFF" opacity="0.5"/>
+  <circle cx="240" cy="800" r="2" fill="#FFFFFF" opacity="0.7"/>
+  <circle cx="750" cy="820" r="1.5" fill="#FFFFFF" opacity="0.4"/>
+  <circle cx="580" cy="860" r="2" fill="#AADDFF" opacity="0.6"/>
+  <circle cx="430" cy="780" r="1.5" fill="#FFFFFF" opacity="0.5"/>
+
+  <!-- 메인 오브젝트 레이어 -->
+
+  <!-- 중앙 글로우 영역 -->
+  <circle cx="512" cy="512" r="180" fill="url(#glow1)"/>
+
+  <!-- 8방향 총알 궤적 (도트 트레일) -->
+  <!-- 위쪽 (N) -->
+  <circle cx="512" cy="390" r="6" fill="#00FFCC" opacity="0.9" filter="url(#glow_filter)"/>
+  <circle cx="512" cy="340" r="8" fill="#00FFCC" opacity="0.8" filter="url(#glow_filter)"/>
+  <circle cx="512" cy="285" r="10" fill="#00FFCC" opacity="0.7"/>
+  <circle cx="512" cy="225" r="12" fill="#00DDAA" opacity="0.6"/>
+  <circle cx="512" cy="200" r="7" fill="#00FFCC" opacity="0.5"/>
+
+  <!-- 아래쪽 (S) -->
+  <circle cx="512" cy="634" r="6" fill="#00FFCC" opacity="0.9" filter="url(#glow_filter)"/>
+  <circle cx="512" cy="684" r="8" fill="#00FFCC" opacity="0.8" filter="url(#glow_filter)"/>
+  <circle cx="512" cy="739" r="10" fill="#00FFCC" opacity="0.7"/>
+  <circle cx="512" cy="799" r="12" fill="#00DDAA" opacity="0.6"/>
+  <circle cx="512" cy="824" r="7" fill="#00FFCC" opacity="0.5"/>
+
+  <!-- 왼쪽 (W) -->
+  <circle cx="390" cy="512" r="6" fill="#00FFCC" opacity="0.9" filter="url(#glow_filter)"/>
+  <circle cx="340" cy="512" r="8" fill="#00FFCC" opacity="0.8" filter="url(#glow_filter)"/>
+  <circle cx="285" cy="512" r="10" fill="#00FFCC" opacity="0.7"/>
+  <circle cx="225" cy="512" r="12" fill="#00DDAA" opacity="0.6"/>
+  <circle cx="200" cy="512" r="7" fill="#00FFCC" opacity="0.5"/>
+
+  <!-- 오른쪽 (E) -->
+  <circle cx="634" cy="512" r="6" fill="#00FFCC" opacity="0.9" filter="url(#glow_filter)"/>
+  <circle cx="684" cy="512" r="8" fill="#00FFCC" opacity="0.8" filter="url(#glow_filter)"/>
+  <circle cx="739" cy="512" r="10" fill="#00FFCC" opacity="0.7"/>
+  <circle cx="799" cy="512" r="12" fill="#00DDAA" opacity="0.6"/>
+  <circle cx="824" cy="512" r="7" fill="#00FFCC" opacity="0.5"/>
+
+  <!-- NW 대각선 -->
+  <circle cx="427" cy="427" r="6" fill="#33EEBB" opacity="0.85"/>
+  <circle cx="384" cy="384" r="8" fill="#33EEBB" opacity="0.75"/>
+  <circle cx="340" cy="340" r="10" fill="#33EEBB" opacity="0.65"/>
+  <circle cx="280" cy="280" r="11" fill="#22CCAA" opacity="0.55"/>
+
+  <!-- NE 대각선 -->
+  <circle cx="597" cy="427" r="6" fill="#33EEBB" opacity="0.85"/>
+  <circle cx="640" cy="384" r="8" fill="#33EEBB" opacity="0.75"/>
+  <circle cx="684" cy="340" r="10" fill="#33EEBB" opacity="0.65"/>
+  <circle cx="744" cy="280" r="11" fill="#22CCAA" opacity="0.55"/>
+
+  <!-- SW 대각선 -->
+  <circle cx="427" cy="597" r="6" fill="#33EEBB" opacity="0.85"/>
+  <circle cx="384" cy="640" r="8" fill="#33EEBB" opacity="0.75"/>
+  <circle cx="340" cy="684" r="10" fill="#33EEBB" opacity="0.65"/>
+  <circle cx="280" cy="744" r="11" fill="#22CCAA" opacity="0.55"/>
+
+  <!-- SE 대각선 -->
+  <circle cx="597" cy="597" r="6" fill="#33EEBB" opacity="0.85"/>
+  <circle cx="640" cy="640" r="8" fill="#33EEBB" opacity="0.75"/>
+  <circle cx="684" cy="684" r="10" fill="#33EEBB" opacity="0.65"/>
+  <circle cx="744" cy="744" r="11" fill="#22CCAA" opacity="0.55"/>
+
+  <!-- 디테일 레이어 -->
+
+  <!-- 중앙 비행기 (흰색 삼각형 우주선) -->
+  <!-- 비행기 몸통 -->
+  <polygon points="512,454 548,568 512,548 476,568" fill="#E8F4FF" filter="url(#glow_filter)"/>
+  <!-- 날개 -->
+  <polygon points="476,568 456,590 512,548" fill="#AACCEE"/>
+  <polygon points="548,568 568,590 512,548" fill="#AACCEE"/>
+  <!-- 엔진 글로우 -->
+  <ellipse cx="512" cy="570" rx="12" ry="18" fill="#00FFCC" opacity="0.6" filter="url(#blur1)"/>
+  <!-- 엔진 코어 -->
+  <ellipse cx="512" cy="568" rx="5" ry="7" fill="#FFFFFF" opacity="0.9"/>
+
+  <!-- 비행기 조종석 디테일 -->
+  <ellipse cx="512" cy="490" rx="7" ry="10" fill="#88CCFF" opacity="0.7"/>
+</svg>

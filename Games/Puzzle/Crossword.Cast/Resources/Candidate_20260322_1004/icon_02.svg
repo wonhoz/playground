@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- 배경: 따뜻한 크림/아이보리 계열 -->
+  <rect x="80" y="80" width="864" height="864" rx="180" fill="#2C1A08"/>
+
+  <!-- Layer 1: 격자 용지 배경 -->
+  <rect x="185" y="185" width="570" height="570" rx="16" fill="#FFF8E7" opacity="0.1"/>
+  <rect x="200" y="200" width="540" height="540" rx="12" fill="#FFF8E7" opacity="0.08"/>
+
+  <!-- 크로스워드 격자 (4x4 심플) -->
+  <!-- 막힌 칸 (어두운 앰버) -->
+  <rect x="210" y="210" width="120" height="120" rx="6" fill="#5D3A1A"/>
+  <rect x="460" y="210" width="120" height="120" rx="6" fill="#5D3A1A"/>
+  <rect x="210" y="590" width="120" height="120" rx="6" fill="#5D3A1A"/>
+  <rect x="460" y="590" width="120" height="120" rx="6" fill="#5D3A1A"/>
+
+  <!-- 입력 가능 칸 (밝은 크림) -->
+  <rect x="340" y="210" width="110" height="120" rx="6" fill="#FFF3CD" opacity="0.95"/>
+  <rect x="580" y="210" width="130" height="120" rx="6" fill="#FFF3CD" opacity="0.95"/>
+
+  <rect x="210" y="340" width="120" height="110" rx="6" fill="#FFF3CD" opacity="0.95"/>
+  <rect x="340" y="340" width="110" height="110" rx="6" fill="#FFD54F" opacity="0.95"/>
+  <rect x="460" y="340" width="120" height="110" rx="6" fill="#FFF3CD" opacity="0.95"/>
+  <rect x="580" y="340" width="130" height="110" rx="6" fill="#FFF3CD" opacity="0.95"/>
+
+  <rect x="210" y="460" width="120" height="120" rx="6" fill="#FFF3CD" opacity="0.95"/>
+  <rect x="340" y="460" width="110" height="120" rx="6" fill="#FFF3CD" opacity="0.95"/>
+  <rect x="460" y="460" width="120" height="120" rx="6" fill="#FFD54F" opacity="0.95"/>
+  <rect x="580" y="460" width="130" height="120" rx="6" fill="#FFF3CD" opacity="0.95"/>
+
+  <rect x="340" y="590" width="110" height="120" rx="6" fill="#FFF3CD" opacity="0.95"/>
+  <rect x="580" y="590" width="130" height="120" rx="6" fill="#FFF3CD" opacity="0.95"/>
+
+  <!-- Layer 2: 알파벳 텍스트 -->
+  <!-- 가로 단어: P U Z Z (2행) -->
+  <text x="395" y="307" font-family="'Arial Black', Arial" font-weight="900" font-size="76" fill="#8B4513" text-anchor="middle" dominant-baseline="middle">P</text>
+  <text x="645" y="307" font-family="'Arial Black', Arial" font-weight="900" font-size="76" fill="#8B4513" text-anchor="middle" dominant-baseline="middle">U</text>
+
+  <text x="270" y="397" font-family="'Arial Black', Arial" font-weight="900" font-size="76" fill="#8B4513" text-anchor="middle" dominant-baseline="middle">L</text>
+  <text x="395" y="397" font-family="'Arial Black', Arial" font-weight="900" font-size="76" fill="#5D3A1A" text-anchor="middle" dominant-baseline="middle">Z</text>
+  <text x="520" y="397" font-family="'Arial Black', Arial" font-weight="900" font-size="76" fill="#8B4513" text-anchor="middle" dominant-baseline="middle">Z</text>
+  <text x="645" y="397" font-family="'Arial Black', Arial" font-weight="900" font-size="76" fill="#8B4513" text-anchor="middle" dominant-baseline="middle">L</text>
+
+  <text x="270" y="522" font-family="'Arial Black', Arial" font-weight="900" font-size="76" fill="#8B4513" text-anchor="middle" dominant-baseline="middle">E</text>
+  <text x="395" y="522" font-family="'Arial Black', Arial" font-weight="900" font-size="76" fill="#8B4513" text-anchor="middle" dominant-baseline="middle">E</text>
+  <text x="520" y="522" font-family="'Arial Black', Arial" font-weight="900" font-size="76" fill="#5D3A1A" text-anchor="middle" dominant-baseline="middle">L</text>
+  <text x="645" y="522" font-family="'Arial Black', Arial" font-weight="900" font-size="76" fill="#8B4513" text-anchor="middle" dominant-baseline="middle">E</text>
+
+  <text x="395" y="652" font-family="'Arial Black', Arial" font-weight="900" font-size="76" fill="#8B4513" text-anchor="middle" dominant-baseline="middle">S</text>
+  <text x="645" y="652" font-family="'Arial Black', Arial" font-weight="900" font-size="76" fill="#8B4513" text-anchor="middle" dominant-baseline="middle">S</text>
+
+  <!-- Layer 3: 연필 (우측 하단) -->
+  <!-- 연필 몸체 -->
+  <g transform="translate(760, 680) rotate(-40)">
+    <rect x="-18" y="-140" width="36" height="200" rx="4" fill="#FFB300"/>
+    <rect x="-18" y="-140" width="36" height="24" rx="4" fill="#D4A574"/>
+    <!-- 연필 심 끝 -->
+    <polygon points="-18,60 18,60 0,110" fill="#FFF3CD"/>
+    <polygon points="-4,80 4,80 0,110" fill="#5D3A1A"/>
+    <!-- 연필 지우개 -->
+    <rect x="-18" y="-160" width="36" height="22" rx="4" fill="#FF8A80"/>
+    <rect x="-18" y="-140" width="36" height="6" fill="#8B4513" opacity="0.6"/>
+  </g>
+
+  <!-- 힌트 텍스트 표시 (하단) -->
+  <rect x="200" y="770" width="480" height="64" rx="12" fill="#5D3A1A" opacity="0.8"/>
+  <text x="248" y="792" font-family="Arial" font-weight="600" font-size="24" fill="#FFD54F" dominant-baseline="middle">1.</text>
+  <text x="278" y="792" font-family="Arial" font-size="24" fill="#FFF3CD" opacity="0.8" dominant-baseline="middle">A word puzzle game</text>
+
+  <!-- 번호 마커 -->
+  <rect x="212" y="342" width="20" height="20" rx="3" fill="#FFD54F" opacity="0.9"/>
+  <rect x="342" y="212" width="20" height="20" rx="3" fill="#FFD54F" opacity="0.9"/>
+</svg>

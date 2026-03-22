@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_07: Metaphor / 기하학 추상 / 위험 구역 + 좁은 탈출 경로 / 청록-시안 -->
+  <defs>
+    <linearGradient id="bg07" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#000E14"/>
+      <stop offset="100%" stop-color="#00060A"/>
+    </linearGradient>
+    <linearGradient id="safe07" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00FFDD" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#00FFDD" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#00FFDD" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="glow07">
+      <feGaussianBlur stdDeviation="10"/>
+    </filter>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="160" fill="url(#bg07)"/>
+
+  <!-- 별들 -->
+  <circle cx="240" cy="210" r="2" fill="#AAFFEE" opacity="0.4"/>
+  <circle cx="790" cy="190" r="2" fill="#AAFFEE" opacity="0.5"/>
+  <circle cx="160" cy="600" r="3" fill="#AAFFEE" opacity="0.3"/>
+  <circle cx="870" cy="640" r="2" fill="#AAFFEE" opacity="0.4"/>
+  <circle cx="450" cy="860" r="2" fill="#AAFFEE" opacity="0.5"/>
+
+  <!-- 위험 구역들 — 촘촘한 총알 장벽 (층층이) -->
+  <!-- 1열 (위) -->
+  <rect x="220" y="220" width="70" height="70" rx="6" fill="#FF2244" opacity="0.85"/>
+  <rect x="310" y="220" width="70" height="70" rx="6" fill="#FF4466" opacity="0.8"/>
+  <rect x="400" y="220" width="70" height="70" rx="6" fill="#FF2244" opacity="0.85"/>
+  <!-- 512 ~ 580 공백 (탈출로!) -->
+  <rect x="590" y="220" width="70" height="70" rx="6" fill="#FF2244" opacity="0.85"/>
+  <rect x="680" y="220" width="70" height="70" rx="6" fill="#FF4466" opacity="0.8"/>
+  <rect x="770" y="220" width="70" height="70" rx="6" fill="#FF2244" opacity="0.85"/>
+
+  <!-- 2열 -->
+  <rect x="220" y="320" width="70" height="70" rx="6" fill="#FF4466" opacity="0.8"/>
+  <rect x="310" y="320" width="70" height="70" rx="6" fill="#FF2244" opacity="0.85"/>
+  <!-- 400 ~ 500 공백 -->
+  <rect x="510" y="320" width="70" height="70" rx="6" fill="#FF2244" opacity="0.85"/>
+  <rect x="600" y="320" width="70" height="70" rx="6" fill="#FF4466" opacity="0.8"/>
+  <rect x="690" y="320" width="70" height="70" rx="6" fill="#FF2244" opacity="0.85"/>
+  <rect x="780" y="320" width="70" height="70" rx="6" fill="#FF4466" opacity="0.8"/>
+
+  <!-- 3열 -->
+  <rect x="220" y="420" width="70" height="70" rx="6" fill="#FF2244" opacity="0.85"/>
+  <rect x="310" y="420" width="70" height="70" rx="6" fill="#FF4466" opacity="0.8"/>
+  <rect x="400" y="420" width="70" height="70" rx="6" fill="#FF2244" opacity="0.85"/>
+  <rect x="490" y="420" width="70" height="70" rx="6" fill="#FF4466" opacity="0.8"/>
+  <!-- 560 ~ 650 공백 -->
+  <rect x="660" y="420" width="70" height="70" rx="6" fill="#FF2244" opacity="0.85"/>
+  <rect x="750" y="420" width="70" height="70" rx="6" fill="#FF4466" opacity="0.8"/>
+
+  <!-- 4열 (중앙 - 우주선 있는 층) -->
+  <rect x="220" y="520" width="70" height="70" rx="6" fill="#FF4466" opacity="0.8"/>
+  <rect x="310" y="520" width="70" height="70" rx="6" fill="#FF2244" opacity="0.85"/>
+  <!-- 380 ~ 480 공백 (우주선 위치) -->
+  <rect x="590" y="520" width="70" height="70" rx="6" fill="#FF2244" opacity="0.85"/>
+  <rect x="680" y="520" width="70" height="70" rx="6" fill="#FF4466" opacity="0.8"/>
+  <rect x="770" y="520" width="70" height="70" rx="6" fill="#FF2244" opacity="0.85"/>
+
+  <!-- 5열 -->
+  <rect x="220" y="620" width="70" height="70" rx="6" fill="#FF2244" opacity="0.8"/>
+  <rect x="310" y="620" width="70" height="70" rx="6" fill="#FF4466" opacity="0.75"/>
+  <rect x="400" y="620" width="70" height="70" rx="6" fill="#FF2244" opacity="0.8"/>
+  <rect x="490" y="620" width="70" height="70" rx="6" fill="#FF4466" opacity="0.75"/>
+  <rect x="580" y="620" width="70" height="70" rx="6" fill="#FF2244" opacity="0.8"/>
+  <rect x="670" y="620" width="70" height="70" rx="6" fill="#FF4466" opacity="0.75"/>
+  <rect x="760" y="620" width="70" height="70" rx="6" fill="#FF2244" opacity="0.8"/>
+
+  <!-- 안전 구역 하이라이트 (탈출 경로) -->
+  <rect x="380" y="200" width="120" height="420" fill="url(#safe07)" opacity="0.8"/>
+
+  <!-- 우주선 (안전 구역에 위치) -->
+  <path d="M440 480 L420 545 L440 533 L460 533 L480 545 L460 480 Z" fill="#00FFDD" filter="url(#glow07)"/>
+  <path d="M420 545 L400 570 L440 558 L480 558 L520 570 L480 545 L460 533 Z" fill="#009988"/>
+  <ellipse cx="450" cy="508" rx="10" ry="14" fill="#AAFFEE" opacity="0.9"/>
+  <!-- 엔진 불꽃 -->
+  <ellipse cx="432" cy="552" rx="7" ry="14" fill="#00FFDD" opacity="0.7"/>
+  <ellipse cx="468" cy="552" rx="7" ry="14" fill="#00FFDD" opacity="0.7"/>
+
+  <!-- 경로 화살표 (위로 이동 방향) -->
+  <path d="M450 450 L440 420 L434 430 L434 420 L450 400 L466 420 L466 430 L460 420 Z" fill="#00FFDD" opacity="0.9"/>
+
+  <!-- 하단 텍스트 -->
+  <text x="512" y="780" font-family="'Courier New', monospace" font-weight="700" font-size="52" fill="#00FFDD" text-anchor="middle" opacity="0.7">FIND THE GAP</text>
+</svg>

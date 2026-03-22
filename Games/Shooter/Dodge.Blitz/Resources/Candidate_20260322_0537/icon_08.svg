@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_08: Hybrid / 레이어드 / 우주선 실루엣 + 스피드라인 + 탄막 / 핑크-코랄 -->
+  <defs>
+    <radialGradient id="bg08" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#1A0010"/>
+      <stop offset="100%" stop-color="#060006"/>
+    </radialGradient>
+    <linearGradient id="speedline08" x1="100%" y1="0%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#FF1493" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#FF1493" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="ship08" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FF88CC"/>
+      <stop offset="100%" stop-color="#CC0066"/>
+    </linearGradient>
+    <filter id="glow08">
+      <feGaussianBlur stdDeviation="8"/>
+    </filter>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="160" fill="url(#bg08)"/>
+
+  <!-- 스피드 라인들 (왼쪽으로 흐름) -->
+  <rect x="200" y="298" width="380" height="3" rx="1" fill="url(#speedline08)"/>
+  <rect x="200" y="326" width="280" height="2" rx="1" fill="url(#speedline08)" opacity="0.7"/>
+  <rect x="200" y="350" width="340" height="3" rx="1" fill="url(#speedline08)"/>
+  <rect x="200" y="374" width="220" height="2" rx="1" fill="url(#speedline08)" opacity="0.6"/>
+  <rect x="200" y="400" width="300" height="3" rx="1" fill="url(#speedline08)"/>
+  <rect x="200" y="424" width="260" height="2" rx="1" fill="url(#speedline08)" opacity="0.7"/>
+  <rect x="200" y="450" width="360" height="3" rx="1" fill="url(#speedline08)"/>
+  <rect x="200" y="474" width="200" height="2" rx="1" fill="url(#speedline08)" opacity="0.5"/>
+  <rect x="200" y="500" width="320" height="3" rx="1" fill="url(#speedline08)"/>
+  <rect x="200" y="524" width="240" height="2" rx="1" fill="url(#speedline08)" opacity="0.7"/>
+  <rect x="200" y="550" width="380" height="3" rx="1" fill="url(#speedline08)"/>
+  <rect x="200" y="574" width="180" height="2" rx="1" fill="url(#speedline08)" opacity="0.6"/>
+  <rect x="200" y="598" width="300" height="3" rx="1" fill="url(#speedline08)"/>
+  <rect x="200" y="622" width="260" height="2" rx="1" fill="url(#speedline08)" opacity="0.7"/>
+  <rect x="200" y="648" width="340" height="3" rx="1" fill="url(#speedline08)"/>
+  <rect x="200" y="672" width="220" height="2" rx="1" fill="url(#speedline08)" opacity="0.5"/>
+  <rect x="200" y="698" width="280" height="3" rx="1" fill="url(#speedline08)"/>
+  <rect x="200" y="722" width="350" height="2" rx="1" fill="url(#speedline08)" opacity="0.6"/>
+
+  <!-- 총알들 — 오른쪽에서 날아오는 (다양한 크기) -->
+  <!-- 큰 총알들 -->
+  <ellipse cx="820" cy="310" rx="22" ry="14" fill="#FF4499" opacity="0.9"/>
+  <ellipse cx="860" cy="390" rx="22" ry="14" fill="#FF6699" opacity="0.85"/>
+  <ellipse cx="790" cy="470" rx="22" ry="14" fill="#FF4499" opacity="0.9"/>
+  <ellipse cx="840" cy="550" rx="22" ry="14" fill="#FF6699" opacity="0.85"/>
+  <ellipse cx="810" cy="630" rx="22" ry="14" fill="#FF4499" opacity="0.9"/>
+  <ellipse cx="870" cy="710" rx="22" ry="14" fill="#FF6699" opacity="0.85"/>
+  <!-- 중간 총알들 -->
+  <ellipse cx="740" cy="280" rx="16" ry="10" fill="#FF6699" opacity="0.85"/>
+  <ellipse cx="760" cy="430" rx="16" ry="10" fill="#FF4499" opacity="0.9"/>
+  <ellipse cx="720" cy="510" rx="16" ry="10" fill="#FF6699" opacity="0.85"/>
+  <ellipse cx="750" cy="600" rx="16" ry="10" fill="#FF4499" opacity="0.9"/>
+  <ellipse cx="730" cy="680" rx="16" ry="10" fill="#FF6699" opacity="0.85"/>
+  <ellipse cx="770" cy="750" rx="16" ry="10" fill="#FF4499" opacity="0.9"/>
+  <!-- 작은 총알들 -->
+  <ellipse cx="680" cy="320" rx="10" ry="6" fill="#FF88AA" opacity="0.8"/>
+  <ellipse cx="700" cy="460" rx="10" ry="6" fill="#FF4499" opacity="0.85"/>
+  <ellipse cx="660" cy="570" rx="10" ry="6" fill="#FF88AA" opacity="0.8"/>
+  <ellipse cx="690" cy="640" rx="10" ry="6" fill="#FF4499" opacity="0.85"/>
+  <ellipse cx="650" cy="730" rx="10" ry="6" fill="#FF88AA" opacity="0.8"/>
+
+  <!-- 총알 글로우 -->
+  <ellipse cx="820" cy="310" rx="30" ry="20" fill="#FF4499" opacity="0.2" filter="url(#glow08)"/>
+  <ellipse cx="790" cy="470" rx="30" ry="20" fill="#FF4499" opacity="0.2" filter="url(#glow08)"/>
+
+  <!-- 우주선 (왼쪽, 탄막에서 멀리 빠져나온) -->
+  <!-- 주 선체 -->
+  <path d="M380 440 L340 540 L380 522 L420 522 L460 540 L420 440 Z" fill="url(#ship08)"/>
+  <!-- 날개 -->
+  <path d="M340 540 L295 590 L360 570 L380 555 Z" fill="#AA0055"/>
+  <path d="M460 540 L505 590 L440 570 L420 555 Z" fill="#AA0055"/>
+  <!-- 전방 센서 -->
+  <line x1="400" y1="440" x2="400" y2="405" stroke="#FF88CC" stroke-width="4" stroke-linecap="round"/>
+  <!-- 조종석 -->
+  <ellipse cx="400" cy="478" rx="16" ry="20" fill="#FFBBDD" opacity="0.85"/>
+  <!-- 엔진 블레이즈 -->
+  <ellipse cx="360" cy="535" rx="10" ry="18" fill="#FF44CC" opacity="0.8"/>
+  <ellipse cx="440" cy="535" rx="10" ry="18" fill="#FF44CC" opacity="0.8"/>
+  <ellipse cx="360" cy="548" rx="5" ry="24" fill="#FFAAEE" opacity="0.5"/>
+  <ellipse cx="440" cy="548" rx="5" ry="24" fill="#FFAAEE" opacity="0.5"/>
+
+  <!-- 실드 이펙트 -->
+  <circle cx="400" cy="490" r="80" fill="none" stroke="#FF88CC" stroke-width="2" opacity="0.3" stroke-dasharray="12 6"/>
+
+  <!-- 레벨 표시 -->
+  <text x="512" y="870" font-family="Arial Black, Arial" font-weight="900" font-size="60" fill="#FF4499" text-anchor="middle" opacity="0.8" letter-spacing="2">DODGE BLITZ</text>
+</svg>

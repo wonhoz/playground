@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!--
+    icon_05 [hybrid] — 마우스 커서 + Slack Active 배지
+    컨셉: 마우스 커서(자동 이동) → Slack active 배지(상태 유지) — 메커니즘과 결과를 하나로
+    연결고리: 커서가 자동으로 움직여 Slack away 전환을 막고 초록 active 배지를 유지함
+    패턴: 레이어드
+    색상: 스카이블루(#0EA5E9→#0369A1) + 흰 커서 + 초록 배지(#22C55E)
+  -->
+  <defs>
+    <linearGradient id="bg05" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38BDF8"/>
+      <stop offset="100%" stop-color="#0369A1"/>
+    </linearGradient>
+    <radialGradient id="badge05" cx="38%" cy="32%" r="62%">
+      <stop offset="0%" stop-color="#4ADE80"/>
+      <stop offset="100%" stop-color="#15803D"/>
+    </radialGradient>
+    <filter id="cursorShadow05">
+      <feDropShadow dx="6" dy="8" stdDeviation="12" flood-color="#0369A1" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+
+  <!-- Layer 1: 스카이블루 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg05)"/>
+  <!-- 배경 밝기 변화 -->
+  <circle cx="300" cy="280" r="380" fill="white" opacity="0.07"/>
+
+  <!-- Layer 2: 마우스 커서 (화살표 포인터) -->
+  <g filter="url(#cursorShadow05)">
+    <path d="M 282 162
+             L 282 686
+             L 422 558
+             L 524 762
+             L 608 722
+             L 506 518
+             L 672 518
+             Z"
+          fill="white" stroke="#E0F2FE" stroke-width="12"
+          stroke-linejoin="round" stroke-linecap="round"/>
+    <!-- 커서 내부 하이라이트 -->
+    <path d="M 282 162 L 282 500 L 382 404 Z"
+          fill="white" opacity="0.4"/>
+  </g>
+
+  <!-- Layer 3: 초록 Active 배지 (오른쪽 하단 — 커서 꼬리 근처) -->
+  <!-- 배지 구분 링 (배경색) -->
+  <circle cx="738" cy="778" r="158" fill="#0369A1" opacity="0.8"/>
+  <!-- 배지 본체 -->
+  <circle cx="738" cy="778" r="138" fill="url(#badge05)"/>
+  <!-- 체크 표시 -->
+  <polyline points="664,778 710,834 822,692"
+            fill="none" stroke="white" stroke-width="46"
+            stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- 배지 내부 하이라이트 -->
+  <circle cx="700" cy="740" r="32" fill="white" opacity="0.28"/>
+</svg>

@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg10" cx="50%" cy="40%" r="65%">
+      <stop offset="0%" stop-color="#1E1408"/>
+      <stop offset="100%" stop-color="#0C0804"/>
+    </radialGradient>
+    <linearGradient id="path10" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#D4956A"/>
+      <stop offset="100%" stop-color="#A0622A"/>
+    </linearGradient>
+    <filter id="glow10">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="180" fill="url(#bg10)"/>
+
+  <!-- 공간/장면: 데스크탑 화면 -->
+  <rect x="140" y="180" width="744" height="520" rx="20" fill="#0E0A04" stroke="#5A3A1A" stroke-width="8"/>
+  <!-- 화면 내부 -->
+  <rect x="160" y="200" width="704" height="480" rx="12" fill="#160E04"/>
+
+  <!-- 화면 내 제스처 궤적 -->
+  <!-- 궤적: 오른쪽 드래그 (R) -->
+  <path d="M 260 420 L 720 420" fill="none" stroke="url(#path10)" stroke-width="18" stroke-linecap="round" filter="url(#glow10)"/>
+  <!-- 화살표 끝 -->
+  <polyline points="678,385 724,420 678,455" fill="none" stroke="#D4956A" stroke-width="18" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow10)"/>
+
+  <!-- 시작점: 마우스 커서 -->
+  <g transform="translate(228,378)" filter="url(#glow10)">
+    <polygon points="0,0 0,52 13,38 24,64 34,60 23,34 44,28" fill="#D4956A" stroke="#F0C090" stroke-width="5" stroke-linejoin="round"/>
+  </g>
+
+  <!-- 궤적 위 글씨: R -->
+  <text x="490" y="386" font-family="monospace" font-size="28" font-weight="bold" fill="#D4956A" text-anchor="middle" opacity="0.7">R</text>
+
+  <!-- 화면 아래: 동작 실행 결과 표시 -->
+  <!-- 브라우저 뒤로가기 버튼 하이라이트 -->
+  <rect x="180" y="580" width="320" height="70" rx="10" fill="#2A1808" stroke="#7A4820" stroke-width="3"/>
+  <text x="340" y="610" font-family="sans-serif" font-size="18" fill="#A07040" text-anchor="middle">Triggered:</text>
+  <text x="340" y="638" font-family="monospace" font-size="26" font-weight="bold" fill="#D4956A" text-anchor="middle">Alt+Left</text>
+
+  <!-- 화살표 -->
+  <path d="M 510 615 L 570 615" fill="none" stroke="#7A4820" stroke-width="8" stroke-linecap="round"/>
+  <polyline points="552,596 574,615 552,634" fill="none" stroke="#7A4820" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- 결과 아이콘: 뒤로가기 -->
+  <rect x="584" y="580" width="310" height="70" rx="10" fill="#2A1808" stroke="#7A4820" stroke-width="3"/>
+  <text x="739" y="615" font-family="sans-serif" font-size="18" fill="#A07040" text-anchor="middle">Result:</text>
+  <text x="739" y="638" font-family="sans-serif" font-size="24" font-weight="bold" fill="#D4956A" text-anchor="middle">Go Back</text>
+
+  <!-- 하단 스탠드 -->
+  <rect x="432" y="700" width="160" height="24" rx="6" fill="#3A2010"/>
+  <rect x="312" y="724" width="400" height="18" rx="8" fill="#5A3A1A"/>
+</svg>

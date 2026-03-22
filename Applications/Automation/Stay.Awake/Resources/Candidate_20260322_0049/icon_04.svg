@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!--
+    icon_04 [metaphor] — 방패 + 초록 Presence
+    컨셉: 방패가 AWAY 전환을 막아 초록 presence를 지킨다
+    연결고리: 방패 = away 전환 차단 / 초록 원 = Slack active 상태
+    패턴: 대각선/동적
+    색상: 다크 네이비(#0D1B2A) + 인디고 방패(#4F46E5) + 에메랄드 포인트(#10B981)
+  -->
+  <defs>
+    <linearGradient id="bg04" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0D1B2A"/>
+      <stop offset="100%" stop-color="#1B2838"/>
+    </linearGradient>
+    <linearGradient id="shield04" x1="10%" y1="0%" x2="90%" y2="100%">
+      <stop offset="0%" stop-color="#6366F1"/>
+      <stop offset="60%" stop-color="#4F46E5"/>
+      <stop offset="100%" stop-color="#3730A3"/>
+    </linearGradient>
+    <radialGradient id="presence04" cx="38%" cy="32%" r="60%">
+      <stop offset="0%" stop-color="#4ADE80"/>
+      <stop offset="100%" stop-color="#059669"/>
+    </radialGradient>
+    <filter id="presenceGlow04">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Layer 1: 다크 네이비 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg04)"/>
+
+  <!-- Layer 2: 방패 -->
+  <!-- 방패 그림자/깊이 -->
+  <path d="M 208 188 L 836 188 L 836 572
+           Q 836 818 512 910
+           Q 188 818 188 572
+           L 188 188 Z"
+        fill="#1E1B4B" opacity="0.7"/>
+  <!-- 방패 본체 -->
+  <path d="M 200 180 L 824 180 L 824 562
+           Q 824 810 512 900
+           Q 200 810 200 562
+           L 200 180 Z"
+        fill="url(#shield04)"/>
+  <!-- 방패 상단 하이라이트 -->
+  <path d="M 200 180 L 824 180 L 824 340 L 200 340 Z"
+        fill="white" opacity="0.08"/>
+  <!-- 방패 테두리 -->
+  <path d="M 200 180 L 824 180 L 824 562
+           Q 824 810 512 900
+           Q 200 810 200 562
+           L 200 180 Z"
+        fill="none" stroke="#818CF8" stroke-width="16" opacity="0.6"/>
+
+  <!-- Layer 3: 초록 Presence 원 (방패 중앙) -->
+  <!-- 발광 효과 -->
+  <circle cx="512" cy="548" r="195"
+          fill="#10B981" opacity="0.22" filter="url(#presenceGlow04)"/>
+  <!-- 메인 원 -->
+  <circle cx="512" cy="548" r="162" fill="url(#presence04)"/>
+  <!-- 하이라이트 -->
+  <circle cx="468" cy="504" r="46" fill="white" opacity="0.28"/>
+  <!-- 내부 빛 링 -->
+  <circle cx="512" cy="548" r="162" fill="none"
+          stroke="#86EFAC" stroke-width="14" opacity="0.55"/>
+</svg>

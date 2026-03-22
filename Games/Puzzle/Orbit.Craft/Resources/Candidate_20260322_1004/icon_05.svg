@@ -1,0 +1,150 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- LAYER 1: 배경 (딥 그린-블랙, 레벨 클리어 hybrid) -->
+  <defs>
+    <radialGradient id="bg05" cx="50%" cy="50%" r="55%">
+      <stop offset="0%" stop-color="#0A1208"/>
+      <stop offset="100%" stop-color="#030503"/>
+    </radialGradient>
+    <radialGradient id="planet05a" cx="40%" cy="35%" r="58%">
+      <stop offset="0%" stop-color="#6699FF"/>
+      <stop offset="55%" stop-color="#3355CC"/>
+      <stop offset="100%" stop-color="#0A1544"/>
+    </radialGradient>
+    <radialGradient id="planet05b" cx="38%" cy="32%" r="58%">
+      <stop offset="0%" stop-color="#FF9955"/>
+      <stop offset="55%" stop-color="#CC5500"/>
+      <stop offset="100%" stop-color="#331500"/>
+    </radialGradient>
+    <radialGradient id="planet05target" cx="35%" cy="30%" r="60%">
+      <stop offset="0%" stop-color="#FFE566"/>
+      <stop offset="45%" stop-color="#FFB800"/>
+      <stop offset="100%" stop-color="#664400"/>
+    </radialGradient>
+    <radialGradient id="probeGlow05" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#FFEE88"/>
+    </radialGradient>
+    <filter id="goldGlow">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="brightGlow">
+      <feGaussianBlur stdDeviation="14" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="180" fill="url(#bg05)"/>
+
+  <!-- 별들 (조금 더 많이) -->
+  <circle cx="228" cy="208" r="2" fill="#FFFFFF" opacity="0.55"/>
+  <circle cx="375" cy="172" r="1.5" fill="#FFEE88" opacity="0.4"/>
+  <circle cx="762" cy="208" r="2" fill="#FFFFFF" opacity="0.5"/>
+  <circle cx="862" cy="285" r="1.8" fill="#FFFFFF" opacity="0.4"/>
+  <circle cx="152" cy="418" r="1.5" fill="#FFFFFF" opacity="0.45"/>
+  <circle cx="908" cy="682" r="2" fill="#FFEE88" opacity="0.45"/>
+  <circle cx="822" cy="828" r="1.5" fill="#FFFFFF" opacity="0.35"/>
+  <circle cx="292" cy="852" r="1.8" fill="#FFFFFF" opacity="0.4"/>
+  <circle cx="174" cy="762" r="1.5" fill="#FFFFFF" opacity="0.35"/>
+  <circle cx="448" cy="888" r="1.5" fill="#FFEE88" opacity="0.4"/>
+  <circle cx="612" cy="178" r="1.5" fill="#FFFFFF" opacity="0.35"/>
+  <circle cx="936" cy="452" r="1.2" fill="#FFFFFF" opacity="0.28"/>
+  <circle cx="96" cy="552" r="1.8" fill="#FFFFFF" opacity="0.35"/>
+  <circle cx="488" cy="912" r="1.5" fill="#FFEE88" opacity="0.35"/>
+  <circle cx="330" cy="280" r="1.5" fill="#FFFFFF" opacity="0.35"/>
+  <circle cx="700" cy="380" r="1.2" fill="#FFEE88" opacity="0.3"/>
+
+  <!-- LAYER 2: 3개 행성 배치 -->
+
+  <!-- 행성 A (좌중단, 파란색 - 중간 장애물) -->
+  <circle cx="310" cy="490" r="58" fill="url(#planet05a)"/>
+  <!-- 행성 A 대기 -->
+  <circle cx="310" cy="490" r="58" fill="none" stroke="#6699FF" stroke-width="10" opacity="0.2"/>
+
+  <!-- 행성 B (우중단, 오렌지 - 중간 장애물) -->
+  <circle cx="680" cy="560" r="52" fill="url(#planet05b)"/>
+  <circle cx="680" cy="560" r="52" fill="none" stroke="#FF9955" stroke-width="9" opacity="0.2"/>
+
+  <!-- 목표 행성 (상단 중앙, 골드 - 목표) -->
+  <circle cx="512" cy="260" r="80" fill="url(#planet05target)" filter="url(#goldGlow)"/>
+  <!-- 목표 행성 링 -->
+  <ellipse cx="512" cy="260" rx="118" ry="28" fill="none"
+           stroke="#FFB800" stroke-width="5.5" opacity="0.7" transform="rotate(-12,512,260)"/>
+  <!-- 목표 행성 표면 디테일 -->
+  <ellipse cx="496" cy="244" rx="52" ry="16" fill="#FFE566" opacity="0.3" transform="rotate(-10,496,244)"/>
+  <ellipse cx="532" cy="282" rx="36" ry="10" fill="#664400" opacity="0.4" transform="rotate(8,532,282)"/>
+
+  <!-- 목표 궤도 (우주선 안착 궤도) -->
+  <circle cx="512" cy="260" r="120" fill="none" stroke="#FFB800" stroke-width="2.5" opacity="0.55" stroke-dasharray="14 8"/>
+
+  <!-- 발사 지점 (하단) -->
+  <circle cx="512" cy="810" r="14" fill="#FFEE88" opacity="0.8" filter="url(#goldGlow)"/>
+  <circle cx="512" cy="810" r="26" fill="none" stroke="#FFEE88" stroke-width="2.5" opacity="0.5"/>
+  <circle cx="512" cy="810" r="40" fill="none" stroke="#FFEE88" stroke-width="1.5" opacity="0.25" stroke-dasharray="6 8"/>
+
+  <!-- 비행 경로 (S자형 곡선 — 두 행성 중력 이용) -->
+  <!-- 발사 → 행성 A 스윙바이 → 행성 B 스윙바이 → 목표 궤도 -->
+  <path d="M 512 796 Q 460 720 380 650 Q 295 575 300 490
+           Q 306 412 370 370 Q 460 320 512 300
+           Q 560 282 580 268"
+        fill="none" stroke="#FFD700" stroke-width="3.5" stroke-dasharray="16 10" opacity="0.75"/>
+
+  <!-- 행성 A 근처 스윙바이 효과 (곡선 강조) -->
+  <path d="M 300 490 Q 310 440 370 370" fill="none" stroke="#FFD700" stroke-width="5"
+        opacity="0.4" stroke-linecap="round"/>
+
+  <!-- 행성 B 근처 효과 -->
+  <path d="M 512 300 Q 548 278 580 268" fill="none" stroke="#FFD700" stroke-width="5"
+        opacity="0.4" stroke-linecap="round"/>
+
+  <!-- 경로 화살표 (목표 행성 향하는 방향) -->
+  <path d="M 560 272 L 582 260 L 574 284" fill="none" stroke="#FFD700" stroke-width="3.5"
+        stroke-linecap="round" stroke-linejoin="round" opacity="0.85"/>
+
+  <!-- LAYER 3: 우주선 (목표 궤도 위 — 레벨 클리어 순간) -->
+  <!-- 우주선은 목표 행성 궤도 위 (약 120px 거리, 우상단) -->
+  <g transform="translate(618, 190) rotate(80)" filter="url(#brightGlow)">
+    <!-- 우주선 동체 -->
+    <ellipse cx="0" cy="0" rx="15" ry="30" fill="url(#probeGlow05)"/>
+    <!-- 노즐 -->
+    <path d="M -7.5 18 L 0 35 L 7.5 18 Z" fill="#FFDD88"/>
+    <!-- 엔진 화염 (클리어 후 감속) -->
+    <path d="M -6 33 Q 0 50 6 33" fill="#FFB800" opacity="0.85"/>
+    <path d="M -3.5 33 Q 0 44 3.5 33" fill="#FFFFFF" opacity="0.6"/>
+    <!-- 날개 -->
+    <path d="M -15 5 L -30 22 L -11 17 Z" fill="#FFEEAA"/>
+    <path d="M 15 5 L 30 22 L 11 17 Z" fill="#FFEEAA"/>
+    <!-- 창문 -->
+    <circle cx="0" cy="-10" r="8" fill="#FFB800" opacity="0.9"/>
+    <circle cx="0" cy="-10" r="4" fill="#FFFFFF" opacity="0.7"/>
+    <!-- 안테나 (신호 발신) -->
+    <line x1="0" y1="-30" x2="0" y2="-46" stroke="#FFDD88" stroke-width="2.5"/>
+    <circle cx="0" cy="-48" r="4.5" fill="#FFB800"/>
+  </g>
+
+  <!-- 클리어 이펙트 — 행성 주위 빛 파동 -->
+  <circle cx="512" cy="260" r="140" fill="none" stroke="#FFD700" stroke-width="2" opacity="0.35" stroke-dasharray="4 8"/>
+  <circle cx="512" cy="260" r="165" fill="none" stroke="#FFB800" stroke-width="1.5" opacity="0.2" stroke-dasharray="3 10"/>
+
+  <!-- 클리어 스파크 (작은 별들) -->
+  <g transform="translate(630, 160)" opacity="0.8" filter="url(#goldGlow)">
+    <path d="M0,-10 L2.5,-2.5 L10,0 L2.5,2.5 L0,10 L-2.5,2.5 L-10,0 L-2.5,-2.5 Z" fill="#FFD700"/>
+  </g>
+  <g transform="translate(580, 140)" opacity="0.65">
+    <path d="M0,-7 L1.8,-1.8 L7,0 L1.8,1.8 L0,7 L-1.8,1.8 L-7,0 L-1.8,-1.8 Z" fill="#FFFFFF"/>
+  </g>
+  <g transform="translate(656, 215)" opacity="0.6">
+    <path d="M0,-6 L1.5,-1.5 L6,0 L1.5,1.5 L0,6 L-1.5,1.5 L-6,0 L-1.5,-1.5 Z" fill="#FFE566"/>
+  </g>
+
+  <!-- 행성 A 중력 장 (희미) -->
+  <circle cx="310" cy="490" r="90" fill="none" stroke="#6699FF" stroke-width="1.5" opacity="0.2" stroke-dasharray="6 10"/>
+  <!-- 행성 B 중력 장 (희미) -->
+  <circle cx="680" cy="560" r="82" fill="none" stroke="#FF9955" stroke-width="1.5" opacity="0.2" stroke-dasharray="6 10"/>
+
+  <!-- 레벨 번호 표시 (UI 요소 - 게임성 강조) -->
+  <rect x="870" y="855" width="90" height="35" rx="8" fill="#1A1A00" stroke="#FFB800" stroke-width="2" opacity="0.75"/>
+  <text x="915" y="878" font-family="'Segoe UI', Arial, sans-serif" font-size="20" font-weight="bold"
+        fill="#FFB800" text-anchor="middle" opacity="0.9">CLEAR</text>
+</svg>

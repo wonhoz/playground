@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_01 | Literal / 중앙 심볼 | EXIF 태그→파일명 변환 화살표 -->
+  <!-- 컨셉: 사진 카드 위에 EXIF 데이터 읽기 → 새 파일명 출력 -->
+  <!-- 색조: 딥 네이비 배경 + 골든 옐로 강조 -->
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="160" fill="#0D1B2A"/>
+
+  <!-- 사진 프레임 (좌측) -->
+  <rect x="120" y="220" width="320" height="260" rx="18" fill="#1A3A5C" stroke="#2E6CA6" stroke-width="8"/>
+  <!-- 사진 내부 - 풍경 실루엣 -->
+  <rect x="120" y="360" width="320" height="120" rx="0" fill="#1A3A5C"/>
+  <ellipse cx="260" cy="340" rx="60" ry="50" fill="#1E4D7A"/>
+  <path d="M120 400 Q170 350 220 380 Q270 310 320 360 Q370 300 440 370 L440 480 L120 480 Z" fill="#162D45"/>
+  <!-- 하늘 부분 -->
+  <rect x="120" y="220" width="320" height="140" rx="12" fill="#1E4D7A"/>
+  <!-- 태양 -->
+  <circle cx="340" cy="275" r="28" fill="#F4C542"/>
+  <!-- 사진 프레임 상단 노치 (카메라 느낌) -->
+  <rect x="200" y="210" width="70" height="22" rx="8" fill="#2E6CA6"/>
+
+  <!-- EXIF 태그 말풍선 (좌측 사진 위) -->
+  <rect x="130" y="490" width="300" height="90" rx="12" fill="#F4C542"/>
+  <path d="M230 580 L255 610 L280 580Z" fill="#F4C542"/>
+  <!-- EXIF 텍스트 -->
+  <text x="280" y="530" font-family="Consolas,monospace" font-size="22" font-weight="bold" fill="#0D1B2A" text-anchor="middle">EXIF</text>
+  <text x="280" y="556" font-family="Consolas,monospace" font-size="16" fill="#0D1B2A" text-anchor="middle">2024:03:15 09:42:11</text>
+
+  <!-- 변환 화살표 (중앙) -->
+  <g transform="translate(512,350)">
+    <!-- 화살표 몸통 -->
+    <rect x="-30" y="-18" width="60" height="36" rx="8" fill="#E85D04"/>
+    <!-- 화살표 머리 -->
+    <polygon points="30,-30 70,0 30,30" fill="#E85D04"/>
+    <!-- 화살표 꼬리 -->
+    <rect x="-70" y="-18" width="40" height="36" rx="4" fill="#E85D04"/>
+  </g>
+
+  <!-- 새 파일명 카드 (우측) -->
+  <rect x="588" y="220" width="316" height="260" rx="18" fill="#1A2E1A" stroke="#3DB05A" stroke-width="8"/>
+  <!-- 파일 아이콘 느낌 상단 귀 접힘 -->
+  <polygon points="820,220 904,220 904,268 820,268" fill="#1A2E1A"/>
+  <polygon points="820,220 904,268 820,268" fill="#276836"/>
+  <!-- 파일명 텍스트 라인들 -->
+  <rect x="610" y="268" width="200" height="16" rx="4" fill="#3DB05A" opacity="0.6"/>
+  <rect x="610" y="296" width="260" height="16" rx="4" fill="#3DB05A" opacity="0.8"/>
+  <!-- 메인 파일명 텍스트 -->
+  <text x="746" y="358" font-family="Consolas,monospace" font-size="19" font-weight="bold" fill="#7EE8A2" text-anchor="middle">20240315_094211</text>
+  <text x="746" y="384" font-family="Consolas,monospace" font-size="17" fill="#3DB05A" text-anchor="middle">_IMG_001.jpg</text>
+  <!-- 체크 마크 -->
+  <circle cx="870" cy="430" r="26" fill="#3DB05A"/>
+  <path d="M856 430 L866 442 L886 418" stroke="white" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- 하단 "복수 파일" 표시 - 여러 파일 변환 암시 -->
+  <rect x="140" y="650" width="744" height="8" rx="4" fill="#2E6CA6" opacity="0.5"/>
+  <!-- 작은 파일 아이콘들 -->
+  <rect x="140" y="680" width="52" height="66" rx="6" fill="#1A3A5C" stroke="#2E6CA6" stroke-width="4"/>
+  <polygon points="168,680 192,680 192,700 168,700" fill="#1A3A5C"/>
+  <polygon points="168,680 192,700 168,700" fill="#2E6CA6"/>
+
+  <rect x="210" y="680" width="52" height="66" rx="6" fill="#1A3A5C" stroke="#2E6CA6" stroke-width="4"/>
+  <polygon points="238,680 262,680 262,700 238,700" fill="#1A3A5C"/>
+  <polygon points="238,680 262,700 238,700" fill="#2E6CA6"/>
+
+  <rect x="280" y="680" width="52" height="66" rx="6" fill="#1A3A5C" stroke="#2E6CA6" stroke-width="4"/>
+  <polygon points="308,680 332,680 332,700 308,700" fill="#1A3A5C"/>
+  <polygon points="308,680 332,700 308,700" fill="#2E6CA6"/>
+
+  <!-- 큰 화살표 아래 방향 (배치 흐름) -->
+  <text x="430" y="726" font-family="Arial" font-size="40" fill="#E85D04" text-anchor="middle">⟶</text>
+
+  <rect x="530" y="680" width="52" height="66" rx="6" fill="#1A2E1A" stroke="#3DB05A" stroke-width="4"/>
+  <polygon points="558,680 582,680 582,700 558,700" fill="#1A2E1A"/>
+  <polygon points="558,680 582,700 558,700" fill="#3DB05A"/>
+
+  <rect x="600" y="680" width="52" height="66" rx="6" fill="#1A2E1A" stroke="#3DB05A" stroke-width="4"/>
+  <polygon points="628,680 652,680 652,700 628,700" fill="#1A2E1A"/>
+  <polygon points="628,680 652,700 628,700" fill="#3DB05A"/>
+
+  <rect x="670" y="680" width="52" height="66" rx="6" fill="#1A2E1A" stroke="#3DB05A" stroke-width="4"/>
+  <polygon points="698,680 722,680 722,700 698,700" fill="#1A2E1A"/>
+  <polygon points="698,680 722,700 698,700" fill="#3DB05A"/>
+
+  <rect x="740" y="680" width="52" height="66" rx="6" fill="#1A2E1A" stroke="#3DB05A" stroke-width="4"/>
+  <polygon points="768,680 792,680 792,700 768,700" fill="#1A2E1A"/>
+  <polygon points="768,680 792,700 768,700" fill="#3DB05A"/>
+
+  <rect x="810" y="680" width="52" height="66" rx="6" fill="#1A2E1A" stroke="#3DB05A" stroke-width="4"/>
+  <polygon points="838,680 862,680 862,700 838,700" fill="#1A2E1A"/>
+  <polygon points="838,680 862,700 838,700" fill="#3DB05A"/>
+</svg>

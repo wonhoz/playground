@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg04" cx="50%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#2A1010"/>
+      <stop offset="100%" stop-color="#150808"/>
+    </radialGradient>
+    <filter id="glow04">
+      <feGaussianBlur stdDeviation="12" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="softglow04">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="180" fill="url(#bg04)"/>
+
+  <!-- 손 실루엣 (마우스 잡는 손 은유) -->
+  <!-- 손바닥 -->
+  <ellipse cx="512" cy="620" rx="160" ry="190" fill="#3A1A14" stroke="#FF6B4A" stroke-width="8"/>
+  <!-- 검지 -->
+  <rect x="450" y="340" width="64" height="220" rx="32" fill="#3A1A14" stroke="#FF6B4A" stroke-width="8"/>
+  <!-- 중지 -->
+  <rect x="530" y="310" width="64" height="250" rx="32" fill="#3A1A14" stroke="#FF6B4A" stroke-width="8"/>
+  <!-- 약지 -->
+  <rect x="610" y="350" width="56" height="210" rx="28" fill="#3A1A14" stroke="#FF6B4A" stroke-width="8"/>
+  <!-- 엄지 -->
+  <ellipse cx="380" cy="540" rx="45" ry="75" fill="#3A1A14" stroke="#FF6B4A" stroke-width="8" transform="rotate(-20 380 540)"/>
+
+  <!-- 검지 위 제스처 화살표 (오른쪽 스와이프) -->
+  <path d="M 340 220 Q 512 150 684 220" fill="none" stroke="#FF9070" stroke-width="16" stroke-linecap="round" filter="url(#glow04)"/>
+  <polyline points="644,180 690,218 654,258" fill="none" stroke="#FF9070" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow04)"/>
+
+  <!-- 스와이프 흔적 (속도감) -->
+  <line x1="310" y1="210" x2="360" y2="210" stroke="#FF6B4A" stroke-width="6" stroke-linecap="round" opacity="0.6"/>
+  <line x1="300" y1="228" x2="358" y2="228" stroke="#FF6B4A" stroke-width="4" stroke-linecap="round" opacity="0.4"/>
+  <line x1="314" y1="246" x2="362" y2="246" stroke="#FF6B4A" stroke-width="3" stroke-linecap="round" opacity="0.25"/>
+
+  <!-- 동작 레이블 -->
+  <rect x="392" y="820" width="240" height="50" rx="10" fill="#80280A" opacity="0.9"/>
+  <text x="512" y="854" font-family="sans-serif" font-size="26" font-weight="bold" fill="#FFAA90" text-anchor="middle">SWIPE →</text>
+</svg>

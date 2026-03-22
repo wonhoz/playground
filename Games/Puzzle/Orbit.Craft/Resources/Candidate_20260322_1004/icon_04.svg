@@ -1,0 +1,132 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- LAYER 1: 배경 (딥 블루, 중력 렌즈 메타포) -->
+  <defs>
+    <radialGradient id="bg04" cx="55%" cy="45%" r="60%">
+      <stop offset="0%" stop-color="#060A1E"/>
+      <stop offset="100%" stop-color="#020408"/>
+    </radialGradient>
+    <radialGradient id="massivePlanet04" cx="42%" cy="36%" r="60%">
+      <stop offset="0%" stop-color="#CC44CC"/>
+      <stop offset="50%" stop-color="#880088"/>
+      <stop offset="100%" stop-color="#2A002A"/>
+    </radialGradient>
+    <radialGradient id="probe04glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FF88FF"/>
+      <stop offset="100%" stop-color="#AA00AA"/>
+    </radialGradient>
+    <filter id="magentaGlow">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="warpGlow">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="180" fill="url(#bg04)"/>
+
+  <!-- 별들 -->
+  <circle cx="225" cy="205" r="2" fill="#FFFFFF" opacity="0.5"/>
+  <circle cx="370" cy="170" r="1.5" fill="#FFFFFF" opacity="0.35"/>
+  <circle cx="765" cy="205" r="2" fill="#FF88FF" opacity="0.4"/>
+  <circle cx="865" cy="290" r="1.8" fill="#FFFFFF" opacity="0.35"/>
+  <circle cx="150" cy="415" r="1.5" fill="#FFFFFF" opacity="0.4"/>
+  <circle cx="905" cy="685" r="2" fill="#FF88FF" opacity="0.4"/>
+  <circle cx="825" cy="825" r="1.5" fill="#FFFFFF" opacity="0.3"/>
+  <circle cx="290" cy="850" r="1.8" fill="#FFFFFF" opacity="0.35"/>
+  <circle cx="172" cy="765" r="1.5" fill="#FFFFFF" opacity="0.3"/>
+  <circle cx="445" cy="885" r="1.5" fill="#FF88FF" opacity="0.35"/>
+  <circle cx="615" cy="182" r="1.5" fill="#FFFFFF" opacity="0.3"/>
+  <circle cx="938" cy="455" r="1.2" fill="#FFFFFF" opacity="0.25"/>
+  <circle cx="98" cy="555" r="1.8" fill="#FFFFFF" opacity="0.3"/>
+
+  <!-- LAYER 2: 공간 뒤틀림 격자 (중력 렌즈 메타포) -->
+  <!-- 격자 — 행성 중심에서 구부러지는 선들 -->
+  <!-- 수평 격자선들 (위에서 아래로) -->
+  <path d="M 210 300 Q 370 295 512 290 Q 654 285 814 300"
+        fill="none" stroke="#6633CC" stroke-width="1.5" opacity="0.45"/>
+  <path d="M 210 380 Q 365 365 512 355 Q 659 345 814 380"
+        fill="none" stroke="#6633CC" stroke-width="1.5" opacity="0.5"/>
+  <path d="M 210 450 Q 360 425 512 412 Q 664 399 814 450"
+        fill="none" stroke="#9944DD" stroke-width="1.8" opacity="0.55"/>
+  <path d="M 210 512 Q 355 480 512 470 Q 669 460 814 512"
+        fill="none" stroke="#BB55EE" stroke-width="2" opacity="0.6"/>
+  <path d="M 210 574 Q 360 559 512 554 Q 664 549 814 574"
+        fill="none" stroke="#9944DD" stroke-width="1.8" opacity="0.55"/>
+  <path d="M 210 644 Q 365 639 512 645 Q 659 651 814 644"
+        fill="none" stroke="#6633CC" stroke-width="1.5" opacity="0.5"/>
+  <path d="M 210 724 Q 370 729 512 738 Q 654 747 814 724"
+        fill="none" stroke="#6633CC" stroke-width="1.5" opacity="0.45"/>
+
+  <!-- 수직 격자선들 -->
+  <path d="M 300 210 Q 295 370 290 512 Q 285 654 300 814"
+        fill="none" stroke="#6633CC" stroke-width="1.5" opacity="0.45"/>
+  <path d="M 380 210 Q 365 365 355 512 Q 345 659 380 814"
+        fill="none" stroke="#6633CC" stroke-width="1.5" opacity="0.5"/>
+  <path d="M 450 210 Q 425 360 412 512 Q 399 664 450 814"
+        fill="none" stroke="#9944DD" stroke-width="1.8" opacity="0.55"/>
+  <path d="M 512 210 Q 480 355 470 512 Q 460 669 512 814"
+        fill="none" stroke="#BB55EE" stroke-width="2" opacity=" 0.6"/>
+  <path d="M 574 210 Q 559 360 554 512 Q 549 664 574 814"
+        fill="none" stroke="#9944DD" stroke-width="1.8" opacity="0.55"/>
+  <path d="M 644 210 Q 639 365 645 512 Q 651 659 644 814"
+        fill="none" stroke="#6633CC" stroke-width="1.5" opacity="0.5"/>
+  <path d="M 724 210 Q 729 370 738 512 Q 747 654 724 814"
+        fill="none" stroke="#6633CC" stroke-width="1.5" opacity="0.45"/>
+
+  <!-- 거대 행성 (공간 뒤틀림 중심) -->
+  <circle cx="512" cy="512" r="110" fill="url(#massivePlanet04)" filter="url(#magentaGlow)"/>
+  <!-- 행성 링 (경사진) -->
+  <ellipse cx="512" cy="512" rx="165" ry="38" fill="none"
+           stroke="#FF88FF" stroke-width="6" opacity="0.65" transform="rotate(-25,512,512)"/>
+  <ellipse cx="512" cy="512" rx="165" ry="38" fill="none"
+           stroke="#CC44CC" stroke-width="3" opacity="0.4" transform="rotate(-25,512,512)"/>
+  <!-- 행성 표면 -->
+  <ellipse cx="492" cy="488" rx="65" ry="20" fill="#FF44FF" opacity="0.3" transform="rotate(-15,492,488)"/>
+  <ellipse cx="535" cy="540" rx="45" ry="13" fill="#440044" opacity="0.45" transform="rotate(10,535,540)"/>
+  <!-- 행성 중심 광채 -->
+  <circle cx="490" cy="488" r="22" fill="#FF99FF" opacity="0.2"/>
+
+  <!-- 외부 중력 경계 (흔들리는 링) -->
+  <circle cx="512" cy="512" r="160" fill="none" stroke="#8800AA" stroke-width="2" opacity="0.3" stroke-dasharray="12 8"/>
+  <circle cx="512" cy="512" r="220" fill="none" stroke="#6600AA" stroke-width="1.5" opacity="0.2" stroke-dasharray="8 12"/>
+
+  <!-- LAYER 3: 우주선 (중력 경로 따라 이동 중) -->
+  <!-- 중력에 의해 휘어지는 경로 -->
+  <path d="M 240 760 Q 310 650 380 580 Q 440 520 480 480"
+        fill="none" stroke="#FF66FF" stroke-width="3" stroke-dasharray="14 8" opacity="0.6"
+        filter="url(#warpGlow)"/>
+
+  <!-- 우주선 (경로 위, 행성에 접근 중) -->
+  <g transform="translate(318, 618) rotate(-45)" filter="url(#warpGlow)">
+    <ellipse cx="0" cy="0" rx="13" ry="26" fill="#FFCCFF"/>
+    <path d="M -6.5 16 L 0 30 L 6.5 16 Z" fill="#DD88DD"/>
+    <!-- 엔진 화염 -->
+    <path d="M -6 28 Q 0 46 6 28" fill="#FF44FF" opacity="0.9"/>
+    <path d="M -3.5 28 Q 0 40 3.5 28" fill="#FFFFFF" opacity="0.7"/>
+    <!-- 날개 -->
+    <path d="M -13 5 L -28 20 L -10 15 Z" fill="#FFAAFF"/>
+    <path d="M 13 5 L 28 20 L 10 15 Z" fill="#FFAAFF"/>
+    <!-- 창문 -->
+    <circle cx="0" cy="-9" r="7" fill="#CC44CC" opacity="0.9"/>
+    <circle cx="0" cy="-9" r="3.5" fill="#FF99FF" opacity="0.6"/>
+  </g>
+
+  <!-- 속도 트레일 -->
+  <path d="M 240 760 Q 265 730 290 700" fill="none" stroke="#FF88FF" stroke-width="5" opacity="0.35" stroke-linecap="round"/>
+  <path d="M 240 760 Q 250 740 262 720" fill="none" stroke="#FFFFFF" stroke-width="2.5" opacity="0.2" stroke-linecap="round"/>
+
+  <!-- 발사 지점 -->
+  <circle cx="240" cy="760" r="8" fill="#FF44FF" opacity="0.7" filter="url(#magentaGlow)"/>
+  <circle cx="240" cy="760" r="16" fill="none" stroke="#FF44FF" stroke-width="2" opacity="0.4"/>
+
+  <!-- 별 포인트 -->
+  <g transform="translate(800, 250)" opacity="0.45">
+    <path d="M0,-10 L2.5,-2.5 L10,0 L2.5,2.5 L0,10 L-2.5,2.5 L-10,0 L-2.5,-2.5 Z" fill="#FF88FF"/>
+  </g>
+  <g transform="translate(220, 380)" opacity="0.35">
+    <path d="M0,-8 L2,-2 L8,0 L2,2 L0,8 L-2,2 L-8,0 L-2,-2 Z" fill="#DD66DD"/>
+  </g>
+</svg>

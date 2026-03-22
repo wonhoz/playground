@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0A0E2A"/>
+      <stop offset="100%" stop-color="#1A0030"/>
+    </linearGradient>
+    <linearGradient id="photoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF6B6B"/>
+      <stop offset="30%" stop-color="#FFD93D"/>
+      <stop offset="60%" stop-color="#6BCB77"/>
+      <stop offset="100%" stop-color="#4D96FF"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="160" fill="url(#bg3)"/>
+
+  <!-- 왼쪽: 컬러 사진 (BEFORE) -->
+  <rect x="80" y="200" width="360" height="280" rx="12" fill="url(#photoGrad)" opacity="0.9"/>
+  <!-- 사진 내 간단한 얼굴 형태 -->
+  <circle cx="260" cy="300" r="70" fill="#FFE0B0" opacity="0.85"/>
+  <circle cx="240" cy="285" r="10" fill="#554433" opacity="0.9"/>
+  <circle cx="280" cy="285" r="10" fill="#554433" opacity="0.9"/>
+  <path d="M245 315 Q260 330 275 315" stroke="#995533" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <!-- 사진 테두리 -->
+  <rect x="80" y="200" width="360" height="280" rx="12" fill="none" stroke="#8899FF" stroke-width="3" opacity="0.8"/>
+  <!-- BEFORE 라벨 -->
+  <text x="260" y="185" font-family="Consolas,monospace" font-size="26" fill="#8899FF" text-anchor="middle" opacity="0.9">PHOTO</text>
+
+  <!-- 변환 화살표 -->
+  <text x="512" y="360" font-family="Consolas,monospace" font-size="52" fill="#CC44FF" text-anchor="middle">→</text>
+  <text x="512" y="410" font-family="Consolas,monospace" font-size="22" fill="#AA22DD" text-anchor="middle" opacity="0.8">convert</text>
+
+  <!-- 오른쪽: ASCII 아트 결과 (AFTER) -->
+  <rect x="584" y="200" width="360" height="280" rx="12" fill="#0D0020"/>
+  <!-- ASCII 문자들로 구성된 얼굴 -->
+  <text x="596" y="228" font-family="Consolas,monospace" font-size="14" fill="#CC44FF" opacity="0.5">. . . . @ @ @ @ @ . . . . . .</text>
+  <text x="596" y="246" font-family="Consolas,monospace" font-size="14" fill="#CC44FF" opacity="0.7">. . @ @ @ @ @ @ @ @ @ . . . .</text>
+  <text x="596" y="264" font-family="Consolas,monospace" font-size="14" fill="#DD55FF" opacity="0.8">. @ @ @ @ @ @ @ @ @ @ @ . . .</text>
+  <text x="596" y="282" font-family="Consolas,monospace" font-size="14" fill="#EE66FF" opacity="0.9">. @ # # . @ @ @ . # # @ . . .</text>
+  <text x="596" y="300" font-family="Consolas,monospace" font-size="14" fill="#FF77FF">@ # @ . @ @ @ @ @ . @ # @ . .</text>
+  <text x="596" y="318" font-family="Consolas,monospace" font-size="14" fill="#FF77FF">@ @ @ @ @ @ @ @ @ @ @ @ @ . .</text>
+  <text x="596" y="336" font-family="Consolas,monospace" font-size="14" fill="#EE66FF" opacity="0.9">@ @ @ : ; : @ @ : ; : @ @ . .</text>
+  <text x="596" y="354" font-family="Consolas,monospace" font-size="14" fill="#DD55FF" opacity="0.8">@ @ @ @ ; @ @ @ @ ; @ @ @ . .</text>
+  <text x="596" y="372" font-family="Consolas,monospace" font-size="14" fill="#CC44FF" opacity="0.7">. @ @ @ # # # # # # @ @ @ . .</text>
+  <text x="596" y="390" font-family="Consolas,monospace" font-size="14" fill="#BB33EE" opacity="0.6">. . @ @ @ @ @ @ @ @ @ @ . . .</text>
+  <text x="596" y="408" font-family="Consolas,monospace" font-size="14" fill="#AA22DD" opacity="0.5">. . . @ @ @ @ @ @ @ @ . . . .</text>
+  <text x="596" y="426" font-family="Consolas,monospace" font-size="14" fill="#991ACC" opacity="0.4">. . . . @ @ @ @ @ . . . . . .</text>
+  <text x="596" y="444" font-family="Consolas,monospace" font-size="14" fill="#881199" opacity="0.3">. . . . . @ @ . . . . . . . .</text>
+  <!-- 오른쪽 테두리 -->
+  <rect x="584" y="200" width="360" height="280" rx="12" fill="none" stroke="#CC44FF" stroke-width="3" opacity="0.8"/>
+  <!-- AFTER 라벨 -->
+  <text x="764" y="185" font-family="Consolas,monospace" font-size="26" fill="#CC44FF" text-anchor="middle" opacity="0.9">ASCII ART</text>
+
+  <!-- 하단 캐릭터 팔레트 표시 -->
+  <rect x="200" y="560" width="624" height="90" rx="10" fill="#1A0030" opacity="0.8"/>
+  <text x="512" y="598" font-family="Consolas,monospace" font-size="28" fill="#CC44FF" text-anchor="middle" opacity="0.9">@ # % * ; : , .</text>
+  <text x="512" y="635" font-family="Consolas,monospace" font-size="20" fill="#9922BB" text-anchor="middle" opacity="0.7">ASCII  /  숫자  /  한글  /  블록</text>
+
+  <!-- 타이틀 -->
+  <text x="512" y="750" font-family="Consolas,monospace" font-size="34" fill="#CC44FF" text-anchor="middle" font-weight="bold">Char.Art</text>
+  <text x="512" y="790" font-family="Consolas,monospace" font-size="20" fill="#9922BB" text-anchor="middle" opacity="0.7">IMAGE → TEXT ART CONVERTER</text>
+</svg>

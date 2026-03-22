@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_06 | Metaphor | 실루엣·캐릭터 | 모루 위 QR 코드 제작 (Forge=단조) | 앰버 + 브라운 -->
+
+  <defs>
+    <linearGradient id="bgGrad06" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1C0F00"/>
+      <stop offset="100%" stop-color="#2A1500"/>
+    </linearGradient>
+    <linearGradient id="anvilGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#8B4513"/>
+      <stop offset="100%" stop-color="#5D2E0C"/>
+    </linearGradient>
+    <linearGradient id="qrGrad06" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFD740"/>
+      <stop offset="100%" stop-color="#FFA000"/>
+    </linearGradient>
+    <filter id="spark">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="180" fill="url(#bgGrad06)"/>
+
+  <!-- Layer 2: 모루(Anvil) 실루엣 -->
+  <!-- 모루 상판 -->
+  <rect x="220" y="560" width="584" height="120" rx="24" fill="url(#anvilGrad)"/>
+  <!-- 모루 목 -->
+  <rect x="350" y="680" width="200" height="60" rx="12" fill="#5D2E0C"/>
+  <!-- 모루 받침 -->
+  <rect x="290" y="740" width="320" height="80" rx="16" fill="#4A2409"/>
+  <!-- 모루 뿔(좌측) -->
+  <path d="M220 580 L140 600 L220 620Z" fill="#6B3410"/>
+
+  <!-- Layer 3: QR 코드 (모루 위) -->
+  <g fill="url(#qrGrad06)">
+    <!-- 좌상단 파인더 -->
+    <rect x="278" y="350" width="144" height="144" rx="12"/>
+    <rect x="296" y="368" width="108" height="108" rx="7" fill="#1C0F00"/>
+    <rect x="316" y="388" width="68"  height="68"  rx="4" fill="#FFD740"/>
+
+    <!-- 우상단 파인더 -->
+    <rect x="602" y="350" width="144" height="144" rx="12"/>
+    <rect x="620" y="368" width="108" height="108" rx="7" fill="#1C0F00"/>
+    <rect x="640" y="388" width="68"  height="68"  rx="4" fill="#FFD740"/>
+
+    <!-- 좌하단 파인더 -->
+    <rect x="278" y="490" width="100" height="100" rx="10"/>
+    <rect x="294" y="506" width="68"  height="68"  rx="5" fill="#1C0F00"/>
+    <rect x="312" y="524" width="32"  height="32"  rx="3" fill="#FFD740"/>
+
+    <!-- 데이터 모듈 -->
+    <rect x="438" y="358" width="26" height="26" rx="3"/>
+    <rect x="476" y="358" width="26" height="26" rx="3"/>
+    <rect x="514" y="358" width="26" height="26" rx="3"/>
+    <rect x="552" y="358" width="26" height="26" rx="3"/>
+    <rect x="438" y="396" width="26" height="26" rx="3"/>
+    <rect x="514" y="396" width="26" height="26" rx="3"/>
+    <rect x="552" y="396" width="26" height="26" rx="3"/>
+    <rect x="438" y="434" width="26" height="26" rx="3"/>
+    <rect x="476" y="434" width="26" height="26" rx="3"/>
+    <rect x="514" y="434" width="26" height="26" rx="3"/>
+    <rect x="438" y="472" width="26" height="26" rx="3"/>
+    <rect x="552" y="472" width="26" height="26" rx="3"/>
+    <!-- 하단 중앙 -->
+    <rect x="396" y="502" width="26" height="26" rx="3"/>
+    <rect x="476" y="502" width="26" height="26" rx="3"/>
+    <rect x="552" y="502" width="26" height="26" rx="3"/>
+    <rect x="396" y="540" width="26" height="26" rx="3"/>
+    <rect x="514" y="540" width="26" height="26" rx="3"/>
+  </g>
+
+  <!-- 불꽃 스파크 (단조 느낌) -->
+  <g filter="url(#spark)">
+    <circle cx="650" cy="320" r="12" fill="#FFD740"/>
+    <circle cx="700" cy="280" r="8"  fill="#FFA000"/>
+    <circle cx="730" cy="340" r="6"  fill="#FFD740"/>
+    <circle cx="680" cy="250" r="5"  fill="#FF6D00"/>
+    <circle cx="750" cy="300" r="10" fill="#FFEA00"/>
+    <circle cx="760" cy="260" r="7"  fill="#FFD740"/>
+  </g>
+</svg>

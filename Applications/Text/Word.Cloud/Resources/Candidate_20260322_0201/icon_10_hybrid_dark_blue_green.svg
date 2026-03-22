@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- 다크블루그린 — 화면 안 워드클라우드 완성 장면, 공간·장면 패턴 -->
+  <defs>
+    <linearGradient id="bg10" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#042A2A"/>
+      <stop offset="100%" stop-color="#011515"/>
+    </linearGradient>
+    <linearGradient id="screenGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#063A3A"/>
+      <stop offset="100%" stop-color="#031E1E"/>
+    </linearGradient>
+    <linearGradient id="cloudBG10" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#00C8A8"/>
+      <stop offset="100%" stop-color="#008870"/>
+    </linearGradient>
+    <linearGradient id="screenBezel" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0A6060"/>
+      <stop offset="100%" stop-color="#052A2A"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="120" fill="url(#bg10)"/>
+
+  <!-- 모니터/화면 베젤 -->
+  <rect x="160" y="180" width="704" height="520" rx="22" fill="url(#screenBezel)"/>
+  <!-- 화면 내부 -->
+  <rect x="178" y="198" width="668" height="484" rx="14" fill="url(#screenGrad)"/>
+
+  <!-- 화면 안 워드클라우드 구름 -->
+  <g fill="url(#cloudBG10)" opacity="0.85">
+    <circle cx="512" cy="395" r="155"/>
+    <circle cx="370" cy="433" r="108"/>
+    <circle cx="655" cy="423" r="116"/>
+    <circle cx="440" cy="340" r="88"/>
+    <circle cx="592" cy="335" r="95"/>
+  </g>
+
+  <!-- 구름 안 단어들 (화면 속 워드클라우드) -->
+  <text x="512" y="380" font-family="Consolas, monospace" font-size="72" font-weight="900" fill="#011515" text-anchor="middle">CLOUD</text>
+  <text x="405" y="425" font-family="Consolas, monospace" font-size="32" font-weight="700" fill="#021F1F" text-anchor="middle">WORD</text>
+  <text x="622" y="418" font-family="Consolas, monospace" font-size="28" font-weight="700" fill="#021F1F" text-anchor="middle">TEXT</text>
+  <text x="350" y="458" font-family="Consolas, monospace" font-size="18" font-weight="600" fill="#042A2A" text-anchor="middle">hello</text>
+  <text x="500" y="462" font-family="Consolas, monospace" font-size="16" font-weight="500" fill="#042A2A" text-anchor="middle">love</text>
+  <text x="650" y="455" font-family="Consolas, monospace" font-size="18" font-weight="500" fill="#042A2A" text-anchor="middle">world</text>
+  <text x="420" y="345" font-family="Consolas, monospace" font-size="13" font-weight="400" fill="#063A3A" text-anchor="middle">sky</text>
+  <text x="600" y="342" font-family="Consolas, monospace" font-size="12" font-weight="400" fill="#063A3A" text-anchor="middle">big</text>
+
+  <!-- 화면 하단 상태바 -->
+  <rect x="178" y="640" width="668" height="42" rx="0" fill="#052030" opacity="0.8"/>
+  <text x="210" y="666" font-family="Consolas, monospace" font-size="16" fill="#00C8A8" text-anchor="start">word count: 247 &gt; generating cloud...</text>
+
+  <!-- 모니터 스탠드 -->
+  <rect x="470" y="700" width="84" height="60" rx="6" fill="#0A5050" opacity="0.9"/>
+  <rect x="390" y="755" width="244" height="22" rx="10" fill="#0A6060" opacity="0.9"/>
+
+  <!-- 화면 주변 떠다니는 단어들 (UI 밖으로 넘치는 효과) -->
+  <text x="100" y="300" font-family="Arial, sans-serif" font-size="26" font-weight="700" fill="#00C8A8" text-anchor="middle" opacity="0.7" transform="rotate(-15 100 300)">data</text>
+  <text x="935" y="320" font-family="Arial, sans-serif" font-size="22" font-weight="600" fill="#00B898" text-anchor="middle" opacity="0.65" transform="rotate(12 935 320)">art</text>
+  <text x="90" y="600" font-family="Arial, sans-serif" font-size="20" font-weight="600" fill="#00A888" text-anchor="middle" opacity="0.6" transform="rotate(8 90 600)">tag</text>
+  <text x="940" y="590" font-family="Arial, sans-serif" font-size="18" font-weight="600" fill="#009878" text-anchor="middle" opacity="0.55" transform="rotate(-10 940 590)">key</text>
+  <text x="280" y="145" font-family="Arial, sans-serif" font-size="18" font-weight="500" fill="#00B898" text-anchor="middle" opacity="0.5">map</text>
+  <text x="740" y="140" font-family="Arial, sans-serif" font-size="16" font-weight="500" fill="#00A888" text-anchor="middle" opacity="0.45">hot</text>
+
+  <!-- 화면 테두리 글로우 -->
+  <rect x="176" y="196" width="672" height="488" rx="16" fill="none" stroke="#00C8A8" stroke-width="2" opacity="0.3"/>
+</svg>

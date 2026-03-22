@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <clipPath id="bg-clip-10">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+    <linearGradient id="bg-grad-10" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#6B4226"/>
+      <stop offset="100%" stop-color="#3D1F0A"/>
+    </linearGradient>
+    <linearGradient id="photo-grad-10" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#D4A574"/>
+      <stop offset="100%" stop-color="#B8864E"/>
+    </linearGradient>
+    <linearGradient id="pencil-grad-10" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#F5DEB3"/>
+      <stop offset="100%" stop-color="#DEB887"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 배경 (따뜻한 세피아) -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg-grad-10)"/>
+
+  <!-- 텍스처 오버레이 (종이 느낌) -->
+  <rect width="1024" height="1024" rx="190" fill="#8B5E3C" opacity="0.1"/>
+
+  <!-- 큰 사진 프레임 (중앙 왼쪽) -->
+  <rect x="80" y="160" width="440" height="380" rx="8" fill="#F5E6C8" stroke="#8B6040" stroke-width="6"/>
+  <!-- 사진 내용 (세피아 톤 풍경) -->
+  <rect x="100" y="180" width="400" height="300" rx="4" fill="#C8A060"/>
+  <!-- 산 실루엣 -->
+  <polygon points="100,440 200,300 280,380 340,280 420,360 500,260 500,440" fill="#A07840"/>
+  <!-- 하늘 -->
+  <rect x="100" y="180" width="400" height="80" rx="4" fill="#D4AA70"/>
+  <!-- 태양 -->
+  <circle cx="380" cy="220" r="30" fill="#F0C040"/>
+  <!-- 사진 아래 파일명 (OLD) -->
+  <rect x="80" y="548" width="440" height="64" rx="8" fill="#2A1008" stroke="#6B4226" stroke-width="2"/>
+  <text x="300" y="588" text-anchor="middle" font-family="'Courier New', monospace" font-size="32" fill="#C8A060">IMG_0001.jpg</text>
+
+  <!-- 연필/펜 (대각선 배치 - 이름 변경 상징) -->
+  <!-- 연필 몸체 -->
+  <rect x="460" y="220" width="50" height="380" rx="12" fill="url(#pencil-grad-10)"
+        transform="rotate(-35 512 512)"/>
+  <!-- 연필 끝 (지우개) -->
+  <rect x="460" y="220" width="50" height="50" rx="12" fill="#FF9999"
+        transform="rotate(-35 512 512)"/>
+  <rect x="460" y="262" width="50" height="16" fill="#C0A0A0"
+        transform="rotate(-35 512 512)"/>
+  <!-- 연필 팁 -->
+  <polygon points="460,600 510,600 485,650" fill="#4A2800"
+           transform="rotate(-35 512 512)"/>
+  <polygon points="470,590 500,590 485,620" fill="#F5DEB3"
+           transform="rotate(-35 512 512)"/>
+
+  <!-- 변환 효과선 -->
+  <path d="M 520 520 Q 580 480 640 480" stroke="#C8A060" stroke-width="4" fill="none"
+        stroke-dasharray="12,8" opacity="0.8"/>
+
+  <!-- 오른쪽: 변환된 파일명들 (깔끔한 카드들) -->
+  <rect x="580" y="220" width="360" height="86" rx="14" fill="#3D1F0A" stroke="#A07040" stroke-width="2"/>
+  <text x="600" y="254" font-family="'Courier New', monospace" font-size="26" fill="#D4A574" font-weight="700">2024-07-15</text>
+  <text x="600" y="290" font-family="'Courier New', monospace" font-size="26" fill="#C8906A">_summer.jpg</text>
+
+  <rect x="580" y="330" width="360" height="86" rx="14" fill="#3D1F0A" stroke="#A07040" stroke-width="2"/>
+  <text x="600" y="364" font-family="'Courier New', monospace" font-size="26" fill="#D4A574" font-weight="700">2024-07-16</text>
+  <text x="600" y="400" font-family="'Courier New', monospace" font-size="26" fill="#C8906A">_mountain.jpg</text>
+
+  <rect x="580" y="440" width="360" height="86" rx="14" fill="#3D1F0A" stroke="#A07040" stroke-width="2"/>
+  <text x="600" y="474" font-family="'Courier New', monospace" font-size="26" fill="#D4A574" font-weight="700">2024-07-17</text>
+  <text x="600" y="510" font-family="'Courier New', monospace" font-size="26" fill="#C8906A">_evening.mp4</text>
+
+  <!-- 체크 표시들 -->
+  <circle cx="958" cy="263" r="18" fill="#6B4226" stroke="#C8A060" stroke-width="2"/>
+  <path d="M 950 263 L 956 272 L 968 252" stroke="#F0C040" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="958" cy="373" r="18" fill="#6B4226" stroke="#C8A060" stroke-width="2"/>
+  <path d="M 950 373 L 956 382 L 968 362" stroke="#F0C040" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="958" cy="483" r="18" fill="#6B4226" stroke="#C8A060" stroke-width="2"/>
+  <path d="M 950 483 L 956 492 L 968 472" stroke="#F0C040" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- 하단: EXIF 데이터 흐름 표시 -->
+  <rect x="80" y="700" width="864" height="80" rx="16" fill="#2A1008" stroke="#8B6040" stroke-width="2"/>
+  <!-- EXIF 태그들 -->
+  <rect x="108" y="718" width="120" height="44" rx="22" fill="#6B4226"/>
+  <text x="168" y="746" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-size="22" fill="#F0C040" font-weight="700">DATE</text>
+  <rect x="248" y="718" width="100" height="44" rx="22" fill="#6B4226"/>
+  <text x="298" y="746" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-size="22" fill="#F0C040" font-weight="700">GPS</text>
+  <rect x="368" y="718" width="130" height="44" rx="22" fill="#6B4226"/>
+  <text x="433" y="746" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-size="22" fill="#F0C040" font-weight="700">CAMERA</text>
+  <!-- 화살표 -->
+  <path d="M 514 730 L 560 730 L 560 718 L 590 740 L 560 762 L 560 750 L 514 750 Z"
+        fill="#F0C040" stroke="#C8A040" stroke-width="2" stroke-linejoin="round"/>
+  <!-- 파일명 -->
+  <text x="616" y="750" font-family="'Courier New', monospace" font-size="28" fill="#D4A574" font-weight="700">2024-07-15_summer.jpg</text>
+
+  <!-- 하단 레이블 -->
+  <rect x="80" y="840" width="864" height="80" rx="16" fill="#3D1F0A" stroke="#8B6040" stroke-width="1"/>
+  <text x="512" y="892" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-size="36" font-weight="700" fill="#F0C040">Photo &amp; Video Organizer</text>
+</svg>

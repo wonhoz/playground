@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- 선셋오렌지 — 단어 빈도 크기 차이 (큰 단어 + 작은 단어) 강조, 중앙심볼 패턴 -->
+  <defs>
+    <radialGradient id="bg03" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#FF8C42"/>
+      <stop offset="100%" stop-color="#C0392B"/>
+    </radialGradient>
+    <linearGradient id="sunGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFD700"/>
+      <stop offset="100%" stop-color="#FF6600"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="120" fill="url(#bg03)"/>
+
+  <!-- 구름 실루엣 (흰색 계열 구름) -->
+  <g fill="#FFEDD5" opacity="0.9">
+    <circle cx="512" cy="430" r="235"/>
+    <circle cx="330" cy="490" r="165"/>
+    <circle cx="695" cy="475" r="178"/>
+    <circle cx="430" cy="365" r="130"/>
+    <circle cx="610" cy="355" r="145"/>
+  </g>
+
+  <!-- 빈도에 따른 크기 다양성 표현: 가장 큰 단어 -->
+  <text x="512" y="430" font-family="Impact, Arial Black, sans-serif" font-size="130" font-weight="900" fill="#C0392B" text-anchor="middle" opacity="0.95">CLOUD</text>
+
+  <!-- 중간 크기 단어 -->
+  <text x="350" y="500" font-family="Impact, sans-serif" font-size="58" font-weight="900" fill="#E05A20" text-anchor="middle">WORD</text>
+  <text x="680" y="495" font-family="Impact, sans-serif" font-size="50" font-weight="900" fill="#D44000" text-anchor="middle">TEXT</text>
+
+  <!-- 작은 단어들 -->
+  <text x="280" y="548" font-family="Arial, sans-serif" font-size="30" font-weight="700" fill="#B03A00" text-anchor="middle">hello</text>
+  <text x="445" y="555" font-family="Arial, sans-serif" font-size="26" font-weight="700" fill="#CC4400" text-anchor="middle">love</text>
+  <text x="590" y="548" font-family="Arial, sans-serif" font-size="28" font-weight="700" fill="#BB3800" text-anchor="middle">world</text>
+  <text x="730" y="540" font-family="Arial, sans-serif" font-size="24" font-weight="600" fill="#C04010" text-anchor="middle">big</text>
+
+  <!-- 더 작은 단어들 -->
+  <text x="330" y="580" font-family="Arial, sans-serif" font-size="18" font-weight="600" fill="#CC5500" text-anchor="middle">data</text>
+  <text x="480" y="588" font-family="Arial, sans-serif" font-size="17" font-weight="500" fill="#BB4400" text-anchor="middle">sky</text>
+  <text x="630" y="580" font-family="Arial, sans-serif" font-size="18" font-weight="500" fill="#CC4422" text-anchor="middle">art</text>
+  <text x="760" y="568" font-family="Arial, sans-serif" font-size="16" font-weight="500" fill="#BB3300" text-anchor="middle">tag</text>
+
+  <!-- 작은 점들 (빈도 작은 단어들을 점으로 표현) -->
+  <text x="370" y="370" font-family="Arial, sans-serif" font-size="13" font-weight="400" fill="#CC6644" text-anchor="middle">small</text>
+  <text x="660" y="378" font-family="Arial, sans-serif" font-size="12" font-weight="400" fill="#BB5533" text-anchor="middle">map</text>
+  <text x="415" y="385" font-family="Arial, sans-serif" font-size="12" font-weight="400" fill="#DD6600" text-anchor="middle">key</text>
+  <text x="560" y="380" font-family="Arial, sans-serif" font-size="13" font-weight="400" fill="#CC5500" text-anchor="middle">hot</text>
+</svg>

@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QR.Forge — Icon Candidates (20260322_0202)</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #111118;
+      color: #E0E0E0;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      min-height: 100vh;
+      padding: 32px 24px 48px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    header h1 {
+      font-size: 32px;
+      font-weight: 800;
+      color: #FFFFFF;
+      letter-spacing: -0.5px;
+    }
+
+    header p {
+      margin-top: 8px;
+      font-size: 14px;
+      color: #888888;
+      letter-spacing: 0.5px;
+    }
+
+    header .meta {
+      margin-top: 6px;
+      font-size: 13px;
+      color: #555566;
+    }
+
+    /* 5열 2행 그리드 */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 20px;
+      max-width: 1400px;
+      margin: 0 auto 56px;
+    }
+
+    .card {
+      background: #1A1A2A;
+      border: 1px solid #2A2A3A;
+      border-radius: 14px;
+      padding: 20px 16px 18px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+      cursor: default;
+    }
+
+    .card:hover {
+      transform: scale(1.06);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+      border-color: #444466;
+      z-index: 10;
+      position: relative;
+    }
+
+    .card-icon {
+      width: 160px;
+      height: 160px;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+      background: #222233;
+      flex-shrink: 0;
+    }
+
+    .card-icon img {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .card-info {
+      width: 100%;
+      text-align: center;
+    }
+
+    .card-filename {
+      font-size: 11px;
+      color: #666688;
+      font-family: 'Consolas', monospace;
+      word-break: break-all;
+      line-height: 1.4;
+      margin-bottom: 6px;
+    }
+
+    .badge {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 6px;
+    }
+
+    .badge-literal  { background: #1A3A6A; color: #6AB0FF; }
+    .badge-metaphor { background: #2A1A4A; color: #AA88FF; }
+    .badge-hybrid   { background: #1A3A2A; color: #66CC88; }
+
+    .card-concept {
+      font-size: 12px;
+      color: #AAAACC;
+      line-height: 1.5;
+      font-weight: 500;
+    }
+
+    .palette {
+      display: flex;
+      gap: 5px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 4px;
+    }
+
+    .swatch {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(255,255,255,0.15);
+      flex-shrink: 0;
+    }
+
+    /* 크기별 미리보기 섹션 */
+    .sizes-section {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .sizes-section h2 {
+      font-size: 20px;
+      font-weight: 700;
+      color: #CCCCDD;
+      margin-bottom: 24px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #2A2A3A;
+    }
+
+    .sizes-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    .size-row {
+      background: #1A1A28;
+      border: 1px solid #252535;
+      border-radius: 12px;
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .size-row-label {
+      font-size: 13px;
+      color: #666688;
+      font-family: 'Consolas', monospace;
+      min-width: 160px;
+    }
+
+    .size-items {
+      display: flex;
+      align-items: flex-end;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .size-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .size-item img {
+      border-radius: 8px;
+      border: 1px solid #2A2A3A;
+      background: #222233;
+      display: block;
+    }
+
+    .size-item span {
+      font-size: 11px;
+      color: #555566;
+      font-family: 'Consolas', monospace;
+    }
+
+    .section-divider {
+      border: none;
+      border-top: 1px solid #1E1E2E;
+      margin: 40px 0;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>QR.Forge — Icon Candidates</h1>
+  <p>QR 코드를 쉽게 생성할 수 있다는 것을 한 눈에 뚜렷하게</p>
+  <div class="meta">Candidate_20260322_0202 &nbsp;|&nbsp; 10 variants &nbsp;|&nbsp; literal 3 / metaphor 4 / hybrid 3</div>
+</header>
+
+<div class="grid">
+
+  <!-- 01 -->
+  <div class="card">
+    <div class="card-icon">
+      <img src="icon_01_literal_classic.svg" alt="icon 01">
+    </div>
+    <div class="card-info">
+      <div class="card-filename">icon_01_literal_classic.svg</div>
+      <span class="badge badge-literal">literal</span>
+      <div class="card-concept">클래식 흑백 QR<br>파인더 패턴 3개 강조<br>중앙심볼 구성</div>
+      <div class="palette">
+        <div class="swatch" style="background:#F8F8F8;" title="#F8F8F8"></div>
+        <div class="swatch" style="background:#E8E8E8;" title="#E8E8E8"></div>
+        <div class="swatch" style="background:#1A1A1A;" title="#1A1A1A"></div>
+        <div class="swatch" style="background:#FFFFFF;" title="#FFFFFF"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 02 -->
+  <div class="card">
+    <div class="card-icon">
+      <img src="icon_02_literal_deepblue.svg" alt="icon 02">
+    </div>
+    <div class="card-info">
+      <div class="card-filename">icon_02_literal_deepblue.svg</div>
+      <span class="badge badge-literal">literal</span>
+      <div class="card-concept">딥블루 QR 코드<br>파란 데이터 모듈<br>앱 이름 텍스트 포함</div>
+      <div class="palette">
+        <div class="swatch" style="background:#0D1B4B;" title="#0D1B4B"></div>
+        <div class="swatch" style="background:#1A3080;" title="#1A3080"></div>
+        <div class="swatch" style="background:#4FC3F7;" title="#4FC3F7"></div>
+        <div class="swatch" style="background:#F0F4FF;" title="#F0F4FF"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 03 -->
+  <div class="card">
+    <div class="card-icon">
+      <img src="icon_03_literal_vividgreen.svg" alt="icon 03">
+    </div>
+    <div class="card-info">
+      <div class="card-filename">icon_03_literal_vividgreen.svg</div>
+      <span class="badge badge-literal">literal</span>
+      <div class="card-concept">비비드그린 생성 과정<br>URL → 화살표 → QR<br>공간·장면 구성</div>
+      <div class="palette">
+        <div class="swatch" style="background:#0A2A0A;" title="#0A2A0A"></div>
+        <div class="swatch" style="background:#2ECC40;" title="#2ECC40"></div>
+        <div class="swatch" style="background:#0F3A0F;" title="#0F3A0F"></div>
+        <div class="swatch" style="background:#F6FFF6;" title="#F6FFF6"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 04 -->
+  <div class="card">
+    <div class="card-icon">
+      <img src="icon_04_metaphor_forge.svg" alt="icon 04">
+    </div>
+    <div class="card-info">
+      <div class="card-filename">icon_04_metaphor_forge.svg</div>
+      <span class="badge badge-metaphor">metaphor</span>
+      <div class="card-concept">코랄오렌지 망치+QR<br>Forge = 만들다<br>불꽃 충격 이펙트</div>
+      <div class="palette">
+        <div class="swatch" style="background:#2A1200;" title="#2A1200"></div>
+        <div class="swatch" style="background:#FF8C00;" title="#FF8C00"></div>
+        <div class="swatch" style="background:#FF4500;" title="#FF4500"></div>
+        <div class="swatch" style="background:#FFCC00;" title="#FFCC00"></div>
+        <div class="swatch" style="background:#8B4513;" title="#8B4513"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 05 -->
+  <div class="card">
+    <div class="card-icon">
+      <img src="icon_05_metaphor_scanline.svg" alt="icon 05">
+    </div>
+    <div class="card-info">
+      <div class="card-filename">icon_05_metaphor_scanline.svg</div>
+      <span class="badge badge-metaphor">metaphor</span>
+      <div class="card-concept">퍼플 스캔 레이저<br>스캔 가능한 QR 표현<br>기하학추상 구성</div>
+      <div class="palette">
+        <div class="swatch" style="background:#1A0030;" title="#1A0030"></div>
+        <div class="swatch" style="background:#9B00FF;" title="#9B00FF"></div>
+        <div class="swatch" style="background:#CC00FF;" title="#CC00FF"></div>
+        <div class="swatch" style="background:#FFFFFF;" title="#FFFFFF"></div>
+        <div class="swatch" style="background:#5500AA;" title="#5500AA"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 06 -->
+  <div class="card">
+    <div class="card-icon">
+      <img src="icon_06_metaphor_coral.svg" alt="icon 06">
+    </div>
+    <div class="card-info">
+      <div class="card-filename">icon_06_metaphor_coral.svg</div>
+      <span class="badge badge-metaphor">metaphor</span>
+      <div class="card-concept">코랄오렌지 배경<br>링크체인 → QR 변환<br>레이어드 구성</div>
+      <div class="palette">
+        <div class="swatch" style="background:#FF6B35;" title="#FF6B35"></div>
+        <div class="swatch" style="background:#E84545;" title="#E84545"></div>
+        <div class="swatch" style="background:#CC3300;" title="#CC3300"></div>
+        <div class="swatch" style="background:#FFF5F0;" title="#FFF5F0"></div>
+        <div class="swatch" style="background:#FFFFFF;" title="#FFFFFF"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 07 -->
+  <div class="card">
+    <div class="card-icon">
+      <img src="icon_07_hybrid_golden.svg" alt="icon 07">
+    </div>
+    <div class="card-info">
+      <div class="card-filename">icon_07_hybrid_golden.svg</div>
+      <span class="badge badge-hybrid">hybrid</span>
+      <div class="card-concept">골든 코너 마커 강조<br>3개 파인더 비비드 표현<br>기하학추상 구성</div>
+      <div class="palette">
+        <div class="swatch" style="background:#1C1400;" title="#1C1400"></div>
+        <div class="swatch" style="background:#FFD700;" title="#FFD700"></div>
+        <div class="swatch" style="background:#FFA500;" title="#FFA500"></div>
+        <div class="swatch" style="background:#FFED4A;" title="#FFED4A"></div>
+        <div class="swatch" style="background:#FFF8DC;" title="#FFF8DC"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 08 -->
+  <div class="card">
+    <div class="card-icon">
+      <img src="icon_08_hybrid_darkteal.svg" alt="icon 08">
+    </div>
+    <div class="card-info">
+      <div class="card-filename">icon_08_hybrid_darkteal.svg</div>
+      <span class="badge badge-hybrid">hybrid</span>
+      <div class="card-concept">다크틸 QR + 스캔 화살표<br>대각선·동적 구성<br>SCAN 사이드 레이블</div>
+      <div class="palette">
+        <div class="swatch" style="background:#002828;" title="#002828"></div>
+        <div class="swatch" style="background:#00BCD4;" title="#00BCD4"></div>
+        <div class="swatch" style="background:#00E5FF;" title="#00E5FF"></div>
+        <div class="swatch" style="background:#E0FFFF;" title="#E0FFFF"></div>
+        <div class="swatch" style="background:#006064;" title="#006064"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 09 -->
+  <div class="card">
+    <div class="card-icon">
+      <img src="icon_09_metaphor_redblack.svg" alt="icon 09">
+    </div>
+    <div class="card-info">
+      <div class="card-filename">icon_09_metaphor_redblack.svg</div>
+      <span class="badge badge-metaphor">metaphor</span>
+      <div class="card-concept">레드블랙 QR + 로고 삽입<br>중앙 "F" 로고 레이어드<br>로고 임베딩 기능 표현</div>
+      <div class="palette">
+        <div class="swatch" style="background:#1A0000;" title="#1A0000"></div>
+        <div class="swatch" style="background:#FF1744;" title="#FF1744"></div>
+        <div class="swatch" style="background:#B71C1C;" title="#B71C1C"></div>
+        <div class="swatch" style="background:#FFFFFF;" title="#FFFFFF"></div>
+        <div class="swatch" style="background:#C62828;" title="#C62828"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 10 -->
+  <div class="card">
+    <div class="card-icon">
+      <img src="icon_10_hybrid_mint.svg" alt="icon 10">
+    </div>
+    <div class="card-info">
+      <div class="card-filename">icon_10_hybrid_mint.svg</div>
+      <span class="badge badge-hybrid">hybrid</span>
+      <div class="card-concept">민트 스마트폰 장면<br>폰 화면 안에 QR 코드<br>공간·장면 구성</div>
+      <div class="palette">
+        <div class="swatch" style="background:#E0FFF8;" title="#E0FFF8"></div>
+        <div class="swatch" style="background:#26A69A;" title="#26A69A"></div>
+        <div class="swatch" style="background:#00695C;" title="#00695C"></div>
+        <div class="swatch" style="background:#004D40;" title="#004D40"></div>
+        <div class="swatch" style="background:#F5FFFC;" title="#F5FFFC"></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<hr class="section-divider">
+
+<!-- 크기별 미리보기 -->
+<div class="sizes-section">
+  <h2>크기별 미리보기</h2>
+  <div class="sizes-grid">
+
+    <div class="size-row">
+      <div class="size-row-label">icon_01_literal_classic</div>
+      <div class="size-items">
+        <div class="size-item"><img src="icon_01_literal_classic.svg" width="256" height="256"><span>256px</span></div>
+        <div class="size-item"><img src="icon_01_literal_classic.svg" width="64" height="64"><span>64px</span></div>
+        <div class="size-item"><img src="icon_01_literal_classic.svg" width="32" height="32"><span>32px</span></div>
+        <div class="size-item"><img src="icon_01_literal_classic.svg" width="16" height="16"><span>16px</span></div>
+      </div>
+    </div>
+
+    <div class="size-row">
+      <div class="size-row-label">icon_02_literal_deepblue</div>
+      <div class="size-items">
+        <div class="size-item"><img src="icon_02_literal_deepblue.svg" width="256" height="256"><span>256px</span></div>
+        <div class="size-item"><img src="icon_02_literal_deepblue.svg" width="64" height="64"><span>64px</span></div>
+        <div class="size-item"><img src="icon_02_literal_deepblue.svg" width="32" height="32"><span>32px</span></div>
+        <div class="size-item"><img src="icon_02_literal_deepblue.svg" width="16" height="16"><span>16px</span></div>
+      </div>
+    </div>
+
+    <div class="size-row">
+      <div class="size-row-label">icon_03_literal_vividgreen</div>
+      <div class="size-items">
+        <div class="size-item"><img src="icon_03_literal_vividgreen.svg" width="256" height="256"><span>256px</span></div>
+        <div class="size-item"><img src="icon_03_literal_vividgreen.svg" width="64" height="64"><span>64px</span></div>
+        <div class="size-item"><img src="icon_03_literal_vividgreen.svg" width="32" height="32"><span>32px</span></div>
+        <div class="size-item"><img src="icon_03_literal_vividgreen.svg" width="16" height="16"><span>16px</span></div>
+      </div>
+    </div>
+
+    <div class="size-row">
+      <div class="size-row-label">icon_04_metaphor_forge</div>
+      <div class="size-items">
+        <div class="size-item"><img src="icon_04_metaphor_forge.svg" width="256" height="256"><span>256px</span></div>
+        <div class="size-item"><img src="icon_04_metaphor_forge.svg" width="64" height="64"><span>64px</span></div>
+        <div class="size-item"><img src="icon_04_metaphor_forge.svg" width="32" height="32"><span>32px</span></div>
+        <div class="size-item"><img src="icon_04_metaphor_forge.svg" width="16" height="16"><span>16px</span></div>
+      </div>
+    </div>
+
+    <div class="size-row">
+      <div class="size-row-label">icon_05_metaphor_scanline</div>
+      <div class="size-items">
+        <div class="size-item"><img src="icon_05_metaphor_scanline.svg" width="256" height="256"><span>256px</span></div>
+        <div class="size-item"><img src="icon_05_metaphor_scanline.svg" width="64" height="64"><span>64px</span></div>
+        <div class="size-item"><img src="icon_05_metaphor_scanline.svg" width="32" height="32"><span>32px</span></div>
+        <div class="size-item"><img src="icon_05_metaphor_scanline.svg" width="16" height="16"><span>16px</span></div>
+      </div>
+    </div>
+
+    <div class="size-row">
+      <div class="size-row-label">icon_06_metaphor_coral</div>
+      <div class="size-items">
+        <div class="size-item"><img src="icon_06_metaphor_coral.svg" width="256" height="256"><span>256px</span></div>
+        <div class="size-item"><img src="icon_06_metaphor_coral.svg" width="64" height="64"><span>64px</span></div>
+        <div class="size-item"><img src="icon_06_metaphor_coral.svg" width="32" height="32"><span>32px</span></div>
+        <div class="size-item"><img src="icon_06_metaphor_coral.svg" width="16" height="16"><span>16px</span></div>
+      </div>
+    </div>
+
+    <div class="size-row">
+      <div class="size-row-label">icon_07_hybrid_golden</div>
+      <div class="size-items">
+        <div class="size-item"><img src="icon_07_hybrid_golden.svg" width="256" height="256"><span>256px</span></div>
+        <div class="size-item"><img src="icon_07_hybrid_golden.svg" width="64" height="64"><span>64px</span></div>
+        <div class="size-item"><img src="icon_07_hybrid_golden.svg" width="32" height="32"><span>32px</span></div>
+        <div class="size-item"><img src="icon_07_hybrid_golden.svg" width="16" height="16"><span>16px</span></div>
+      </div>
+    </div>
+
+    <div class="size-row">
+      <div class="size-row-label">icon_08_hybrid_darkteal</div>
+      <div class="size-items">
+        <div class="size-item"><img src="icon_08_hybrid_darkteal.svg" width="256" height="256"><span>256px</span></div>
+        <div class="size-item"><img src="icon_08_hybrid_darkteal.svg" width="64" height="64"><span>64px</span></div>
+        <div class="size-item"><img src="icon_08_hybrid_darkteal.svg" width="32" height="32"><span>32px</span></div>
+        <div class="size-item"><img src="icon_08_hybrid_darkteal.svg" width="16" height="16"><span>16px</span></div>
+      </div>
+    </div>
+
+    <div class="size-row">
+      <div class="size-row-label">icon_09_metaphor_redblack</div>
+      <div class="size-items">
+        <div class="size-item"><img src="icon_09_metaphor_redblack.svg" width="256" height="256"><span>256px</span></div>
+        <div class="size-item"><img src="icon_09_metaphor_redblack.svg" width="64" height="64"><span>64px</span></div>
+        <div class="size-item"><img src="icon_09_metaphor_redblack.svg" width="32" height="32"><span>32px</span></div>
+        <div class="size-item"><img src="icon_09_metaphor_redblack.svg" width="16" height="16"><span>16px</span></div>
+      </div>
+    </div>
+
+    <div class="size-row">
+      <div class="size-row-label">icon_10_hybrid_mint</div>
+      <div class="size-items">
+        <div class="size-item"><img src="icon_10_hybrid_mint.svg" width="256" height="256"><span>256px</span></div>
+        <div class="size-item"><img src="icon_10_hybrid_mint.svg" width="64" height="64"><span>64px</span></div>
+        <div class="size-item"><img src="icon_10_hybrid_mint.svg" width="32" height="32"><span>32px</span></div>
+        <div class="size-item"><img src="icon_10_hybrid_mint.svg" width="16" height="16"><span>16px</span></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>

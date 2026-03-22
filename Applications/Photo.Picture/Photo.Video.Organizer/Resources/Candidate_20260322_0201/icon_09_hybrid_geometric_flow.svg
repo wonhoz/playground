@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <clipPath id="bg-clip-09">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+    <linearGradient id="bg-grad-09" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1A1460"/>
+      <stop offset="100%" stop-color="#0D0B3E"/>
+    </linearGradient>
+    <linearGradient id="hex-grad-09" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#3344DD"/>
+      <stop offset="100%" stop-color="#1122AA"/>
+    </linearGradient>
+    <linearGradient id="stream-grad-09" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#4455EE" stop-opacity="0"/>
+      <stop offset="40%" stop-color="#4455EE"/>
+      <stop offset="100%" stop-color="#88AAFF"/>
+    </linearGradient>
+    <filter id="glow-09">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- 배경 (인디고) -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg-grad-09)"/>
+
+  <!-- 배경 격자 -->
+  <line x1="0" y1="256" x2="1024" y2="256" stroke="#2233BB" stroke-width="1" opacity="0.4"/>
+  <line x1="0" y1="512" x2="1024" y2="512" stroke="#2233BB" stroke-width="1" opacity="0.4"/>
+  <line x1="0" y1="768" x2="1024" y2="768" stroke="#2233BB" stroke-width="1" opacity="0.4"/>
+  <line x1="256" y1="0" x2="256" y2="1024" stroke="#2233BB" stroke-width="1" opacity="0.4"/>
+  <line x1="512" y1="0" x2="512" y2="1024" stroke="#2233BB" stroke-width="1" opacity="0.4"/>
+  <line x1="768" y1="0" x2="768" y2="1024" stroke="#2233BB" stroke-width="1" opacity="0.4"/>
+
+  <!-- 왼쪽 소스 헥사곤 (카메라/이미지) -->
+  <polygon points="200,180 280,136 360,180 360,268 280,312 200,268"
+           fill="url(#hex-grad-09)" stroke="#5566FF" stroke-width="4" filter="url(#glow-09)"/>
+  <!-- 카메라 아이콘 내부 -->
+  <rect x="228" y="198" width="104" height="76" rx="10" fill="#1122AA"/>
+  <circle cx="280" cy="236" r="24" fill="#2233CC" stroke="#5566FF" stroke-width="3"/>
+  <circle cx="280" cy="236" r="14" fill="#1122AA"/>
+  <rect x="252" y="204" width="44" height="16" rx="6" fill="#3344CC"/>
+
+  <!-- 왼쪽 소스 헥사곤 2 (동영상) -->
+  <polygon points="200,400 280,356 360,400 360,488 280,532 200,488"
+           fill="#221166" stroke="#4455CC" stroke-width="3" filter="url(#glow-09)"/>
+  <!-- 재생 버튼 -->
+  <polygon points="246,418 246,468 306,444" fill="#4455FF"/>
+
+  <!-- 흐름 라인들 (왼→중앙) -->
+  <path d="M 360 224 Q 440 224 440 340" stroke="url(#stream-grad-09)" stroke-width="4" fill="none"/>
+  <path d="M 360 444 Q 440 444 440 444" stroke="url(#stream-grad-09)" stroke-width="4" fill="none"/>
+
+  <!-- 중앙 변환 노드 (큰 다이아몬드) -->
+  <rect x="392" y="330" width="240" height="240" rx="20" fill="#1122AA" stroke="#6677FF" stroke-width="5"
+        transform="rotate(45 512 450)"/>
+  <!-- 내부 EXIF 레이블 -->
+  <text x="512" y="438" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-size="36" font-weight="900" fill="#88AAFF">EXIF</text>
+  <text x="512" y="478" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-size="26" fill="#6688DD">→ NAME</text>
+
+  <!-- 흐름 라인들 (중앙→오른쪽) -->
+  <path d="M 584 340 Q 640 280 700 280" stroke="#88AAFF" stroke-width="4" fill="none"/>
+  <path d="M 584 450 Q 640 450 700 400" stroke="#88AAFF" stroke-width="4" fill="none"/>
+  <path d="M 584 560 Q 640 600 700 620" stroke="#88AAFF" stroke-width="4" fill="none"/>
+
+  <!-- 오른쪽: 출력 파일명 카드들 -->
+  <rect x="700" y="240" width="280" height="80" rx="14" fill="#1A2480" stroke="#6677FF" stroke-width="2"/>
+  <text x="720" y="272" font-family="'Courier New', monospace" font-size="24" fill="#AABBFF">2024-07-15</text>
+  <text x="720" y="304" font-family="'Courier New', monospace" font-size="24" fill="#AABBFF">_도쿄.jpg</text>
+
+  <rect x="700" y="360" width="280" height="80" rx="14" fill="#1A2480" stroke="#6677FF" stroke-width="2"/>
+  <text x="720" y="392" font-family="'Courier New', monospace" font-size="24" fill="#AABBFF">2024-07-16</text>
+  <text x="720" y="424" font-family="'Courier New', monospace" font-size="24" fill="#AABBFF">_후지산.jpg</text>
+
+  <rect x="700" y="480" width="280" height="80" rx="14" fill="#1A2480" stroke="#6677FF" stroke-width="2"/>
+  <text x="720" y="512" font-family="'Courier New', monospace" font-size="24" fill="#AABBFF">2024-07-17</text>
+  <text x="720" y="544" font-family="'Courier New', monospace" font-size="24" fill="#AABBFF">_교토.mp4</text>
+
+  <!-- 흐름 끝 화살표 -->
+  <polygon points="976,280 940,260 940,300" fill="#88AAFF" filter="url(#glow-09)"/>
+  <polygon points="976,400 940,380 940,420" fill="#88AAFF" filter="url(#glow-09)"/>
+  <polygon points="976,520 940,500 940,540" fill="#88AAFF" filter="url(#glow-09)"/>
+
+  <!-- 하단 바 -->
+  <rect x="80" y="760" width="864" height="80" rx="16" fill="#0D0B3E" stroke="#4455EE" stroke-width="2"/>
+  <text x="512" y="810" text-anchor="middle" font-family="'Segoe UI', Arial, sans-serif" font-size="34" font-weight="700" fill="#88AAFF">Photo &amp; Video → Smart Names</text>
+</svg>

@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg2" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#1A0A2E"/>
+      <stop offset="100%" stop-color="#0A0415"/>
+    </radialGradient>
+    <radialGradient id="ring_glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FF4488" stop-opacity="0.0"/>
+      <stop offset="60%" stop-color="#FF4488" stop-opacity="0.15"/>
+      <stop offset="80%" stop-color="#FF6600" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#FF6600" stop-opacity="0.0"/>
+    </radialGradient>
+    <filter id="glow2">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="softblur">
+      <feGaussianBlur stdDeviation="8"/>
+    </filter>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg2)"/>
+
+  <!-- 별들 -->
+  <circle cx="215" cy="215" r="2" fill="#FFDDAA" opacity="0.6"/>
+  <circle cx="360" cy="190" r="1.5" fill="#FFFFFF" opacity="0.5"/>
+  <circle cx="660" cy="200" r="2" fill="#FFDDAA" opacity="0.7"/>
+  <circle cx="810" cy="215" r="1.5" fill="#FFFFFF" opacity="0.5"/>
+  <circle cx="210" cy="810" r="2" fill="#FFDDAA" opacity="0.6"/>
+  <circle cx="800" cy="800" r="1.5" fill="#FFFFFF" opacity="0.5"/>
+  <circle cx="400" cy="220" r="1.5" fill="#FFAADD" opacity="0.5"/>
+  <circle cx="750" cy="350" r="2" fill="#FFFFFF" opacity="0.6"/>
+  <circle cx="200" cy="500" r="1.5" fill="#FFDDAA" opacity="0.5"/>
+  <circle cx="830" cy="550" r="2" fill="#FFAADD" opacity="0.6"/>
+  <circle cx="450" cy="820" r="1.5" fill="#FFFFFF" opacity="0.5"/>
+  <circle cx="620" cy="800" r="2" fill="#FFDDAA" opacity="0.6"/>
+
+  <!-- 메인 오브젝트 레이어 -->
+
+  <!-- 탄막 원형 링들 (동심원 패턴) -->
+  <!-- 외곽 링 -->
+  <circle cx="512" cy="512" r="310" fill="none" stroke="#FF6600" stroke-width="2.5" stroke-dasharray="18 12" opacity="0.5"/>
+  <!-- 중간 링 -->
+  <circle cx="512" cy="512" r="240" fill="none" stroke="#FF4488" stroke-width="2" stroke-dasharray="14 10" opacity="0.6"/>
+  <!-- 내부 링 -->
+  <circle cx="512" cy="512" r="170" fill="none" stroke="#FF6600" stroke-width="2" stroke-dasharray="10 8" opacity="0.7"/>
+  <!-- 위험 구역 링 (가장 안쪽) -->
+  <circle cx="512" cy="512" r="100" fill="none" stroke="#FF4488" stroke-width="3" stroke-dasharray="8 6" opacity="0.8"/>
+
+  <!-- 링 글로우 -->
+  <circle cx="512" cy="512" r="240" fill="url(#ring_glow)"/>
+
+  <!-- 총알들 — 외곽 링 위 (원형 배치) -->
+  <!-- 12시 -->
+  <circle cx="512" cy="202" r="13" fill="#FF6600" filter="url(#glow2)"/>
+  <!-- 1시 -->
+  <circle cx="667" cy="247" r="11" fill="#FF5500" filter="url(#glow2)"/>
+  <!-- 2시 -->
+  <circle cx="777" cy="357" r="12" fill="#FF4400" filter="url(#glow2)"/>
+  <!-- 3시 -->
+  <circle cx="822" cy="512" r="13" fill="#FF6600" filter="url(#glow2)"/>
+  <!-- 4시 -->
+  <circle cx="777" cy="667" r="11" fill="#FF5500" filter="url(#glow2)"/>
+  <!-- 5시 -->
+  <circle cx="667" cy="777" r="12" fill="#FF4400" filter="url(#glow2)"/>
+  <!-- 6시 -->
+  <circle cx="512" cy="822" r="13" fill="#FF6600" filter="url(#glow2)"/>
+  <!-- 7시 -->
+  <circle cx="357" cy="777" r="11" fill="#FF5500" filter="url(#glow2)"/>
+  <!-- 8시 -->
+  <circle cx="247" cy="667" r="12" fill="#FF4400" filter="url(#glow2)"/>
+  <!-- 9시 -->
+  <circle cx="202" cy="512" r="13" fill="#FF6600" filter="url(#glow2)"/>
+  <!-- 10시 -->
+  <circle cx="247" cy="357" r="11" fill="#FF5500" filter="url(#glow2)"/>
+  <!-- 11시 -->
+  <circle cx="357" cy="247" r="12" fill="#FF4400" filter="url(#glow2)"/>
+
+  <!-- 중간 링 위 총알 (다이아몬드 형태) -->
+  <rect x="498" y="260" width="28" height="28" rx="4" fill="#FF4488" transform="rotate(45 512 274)" filter="url(#glow2)"/>
+  <rect x="718" y="356" width="24" height="24" rx="4" fill="#FF6600" transform="rotate(45 730 368)" filter="url(#glow2)"/>
+  <rect x="718" y="624" width="24" height="24" rx="4" fill="#FF4488" transform="rotate(45 730 636)" filter="url(#glow2)"/>
+  <rect x="498" y="720" width="28" height="28" rx="4" fill="#FF6600" transform="rotate(45 512 734)" filter="url(#glow2)"/>
+  <rect x="278" y="624" width="24" height="24" rx="4" fill="#FF4488" transform="rotate(45 290 636)" filter="url(#glow2)"/>
+  <rect x="278" y="356" width="24" height="24" rx="4" fill="#FF6600" transform="rotate(45 290 368)" filter="url(#glow2)"/>
+
+  <!-- 디테일 레이어 -->
+
+  <!-- 좁은 생존 공간 강조 (안쪽 글로우) -->
+  <circle cx="512" cy="512" r="88" fill="none" stroke="#FFFFFF" stroke-width="1.5" opacity="0.2"/>
+
+  <!-- 중앙 비행기 -->
+  <polygon points="512,456 550,566 512,546 474,566" fill="#FFFFFF" filter="url(#glow2)"/>
+  <!-- 날개 -->
+  <polygon points="474,566 450,592 512,546" fill="#DDBBFF"/>
+  <polygon points="550,566 574,592 512,546" fill="#DDBBFF"/>
+  <!-- 엔진 글로우 -->
+  <ellipse cx="512" cy="568" rx="10" ry="16" fill="#FF4488" opacity="0.7" filter="url(#softblur)"/>
+  <ellipse cx="512" cy="565" rx="4" ry="6" fill="#FFFFFF" opacity="0.95"/>
+  <!-- 조종석 -->
+  <ellipse cx="512" cy="487" rx="7" ry="10" fill="#FFAADD" opacity="0.65"/>
+
+  <!-- 화살표 위협 표시 (안쪽으로 향하는) -->
+  <!-- 위에서 아래로 -->
+  <polygon points="512,400 520,422 504,422" fill="#FF6600" opacity="0.7"/>
+  <!-- 아래서 위로 -->
+  <polygon points="512,624 520,602 504,602" fill="#FF6600" opacity="0.7"/>
+  <!-- 왼쪽에서 오른쪽으로 -->
+  <polygon points="400,512 422,504 422,520" fill="#FF4488" opacity="0.7"/>
+  <!-- 오른쪽에서 왼쪽으로 -->
+  <polygon points="624,512 602,504 602,520" fill="#FF4488" opacity="0.7"/>
+</svg>

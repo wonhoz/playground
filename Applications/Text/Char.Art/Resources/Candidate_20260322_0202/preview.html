@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Char.Art — Icon Candidates (20260322_0202)</title>
+<style>
+  :root {
+    --bg:       #0D0D0D;
+    --surface:  #141414;
+    --card:     #1A1A1A;
+    --border:   #2A2A2A;
+    --text:     #E0E0E0;
+    --muted:    #666666;
+    --accent:   #00FF88;
+    --green:    #00CC55;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Consolas', 'Courier New', monospace;
+    min-height: 100vh;
+    padding: 40px 24px;
+  }
+
+  /* ─── 헤더 ─────────────────────────────────────── */
+  header {
+    text-align: center;
+    margin-bottom: 48px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  header h1 {
+    font-size: 2.4rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: #FFFFFF;
+    margin-bottom: 10px;
+  }
+
+  header h1 span {
+    color: var(--accent);
+  }
+
+  header .subtitle {
+    font-size: 0.95rem;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+
+  header .timestamp {
+    font-size: 0.8rem;
+    color: #444;
+  }
+
+  .concept-line {
+    display: inline-block;
+    margin-top: 16px;
+    padding: 8px 24px;
+    border: 1px solid #333;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    color: #999;
+    background: #111;
+    letter-spacing: 0.04em;
+  }
+
+  /* ─── 그리드 ────────────────────────────────────── */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 24px;
+    max-width: 1400px;
+    margin: 0 auto 60px;
+  }
+
+  /* ─── 카드 ──────────────────────────────────────── */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    cursor: pointer;
+  }
+
+  .card:hover {
+    transform: translateY(-6px) scale(1.03);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.6);
+    border-color: #444;
+  }
+
+  .icon-wrap {
+    background: #111;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .icon-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .card-info {
+    padding: 14px 16px;
+  }
+
+  .card-filename {
+    font-size: 0.7rem;
+    color: var(--muted);
+    margin-bottom: 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .card-badges {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+  }
+
+  .badge {
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .badge-literal   { background: #1A3A1A; color: #66FF88; border: 1px solid #2A5A2A; }
+  .badge-metaphor  { background: #2A1A3A; color: #BB88FF; border: 1px solid #4A2A6A; }
+  .badge-hybrid    { background: #3A2A1A; color: #FFAA55; border: 1px solid #6A4A2A; }
+
+  .badge-terminal  { background: #0D200D; color: #00FF88; border: 1px solid #1A4A1A; }
+  .badge-amber     { background: #201500; color: #FFAA00; border: 1px solid #4A3000; }
+  .badge-navy      { background: #001030; color: #6699FF; border: 1px solid #002060; }
+  .badge-purple    { background: #1A002A; color: #CC66FF; border: 1px solid #3A005A; }
+  .badge-red       { background: #200008; color: #FF4455; border: 1px solid #500015; }
+  .badge-cyan      { background: #001A20; color: #00CCFF; border: 1px solid #003040; }
+  .badge-mono      { background: #1A1A1A; color: #CCCCCC; border: 1px solid #3A3A3A; }
+  .badge-golden    { background: #1A1400; color: #FFCC00; border: 1px solid #3A2A00; }
+  .badge-emerald   { background: #001A0A; color: #00FF88; border: 1px solid #003A18; }
+  .badge-neon-pink { background: #1A0018; color: #FF44DD; border: 1px solid #3A0035; }
+
+  .card-concept {
+    font-size: 0.78rem;
+    color: #AAAAAA;
+    line-height: 1.5;
+    margin-bottom: 10px;
+  }
+
+  .card-palette {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+  }
+
+  .palette-swatch {
+    width: 16px;
+    height: 16px;
+    border-radius: 3px;
+    border: 1px solid rgba(255,255,255,0.1);
+    flex-shrink: 0;
+  }
+
+  /* ─── 크기 미리보기 ─────────────────────────────── */
+  .size-preview-section {
+    max-width: 1400px;
+    margin: 0 auto 60px;
+    padding: 32px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+  }
+
+  .size-preview-section h2 {
+    font-size: 1.1rem;
+    color: #888;
+    margin-bottom: 28px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 14px;
+  }
+
+  .size-preview-grid {
+    display: flex;
+    gap: 40px;
+    align-items: flex-end;
+    flex-wrap: wrap;
+  }
+
+  .size-item {
+    text-align: center;
+  }
+
+  .size-item img {
+    display: block;
+    border: 1px solid var(--border);
+    background: #111;
+    border-radius: 6px;
+  }
+
+  .size-label {
+    font-size: 0.7rem;
+    color: var(--muted);
+    margin-top: 8px;
+  }
+
+  .size-selector {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 28px;
+  }
+
+  .size-btn {
+    padding: 6px 16px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: #111;
+    color: #888;
+    font-family: inherit;
+    font-size: 0.78rem;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .size-btn.active,
+  .size-btn:hover {
+    border-color: var(--green);
+    color: var(--green);
+    background: #0D1A0D;
+  }
+
+  /* ─── 푸터 ──────────────────────────────────────── */
+  footer {
+    text-align: center;
+    padding: 24px;
+    color: var(--muted);
+    font-size: 0.75rem;
+    border-top: 1px solid var(--border);
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  /* ─── 모달 ──────────────────────────────────────── */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(4px);
+  }
+
+  .modal-overlay.open {
+    display: flex;
+  }
+
+  .modal-box {
+    background: #1A1A1A;
+    border: 1px solid #333;
+    border-radius: 16px;
+    padding: 32px;
+    max-width: 600px;
+    width: 90%;
+    text-align: center;
+    position: relative;
+  }
+
+  .modal-box img {
+    width: 300px;
+    height: 300px;
+    object-fit: contain;
+    margin-bottom: 20px;
+    background: #111;
+    border-radius: 8px;
+    border: 1px solid #333;
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 16px;
+    right: 20px;
+    background: none;
+    border: none;
+    color: #888;
+    font-size: 1.4rem;
+    cursor: pointer;
+    font-family: inherit;
+  }
+
+  .modal-close:hover { color: #fff; }
+
+  .modal-title {
+    font-size: 1rem;
+    color: #CCCCCC;
+    margin-bottom: 8px;
+  }
+
+  .modal-meta {
+    font-size: 0.78rem;
+    color: #666;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Char.<span>Art</span> &mdash; Icon Candidates</h1>
+  <p class="subtitle">사진과 그림을 ASCII/문자 아트로 변환하는 도구</p>
+  <p class="timestamp">Generated: 2026-03-22 02:02 KST &nbsp;|&nbsp; Candidate_20260322_0202</p>
+  <div class="concept-line">
+    "사진/그림 &rarr; 문자(@, #, *, 숫자, 한글)들만으로 표현" &nbsp;&mdash;&nbsp; 한 눈에 파악되는 아이콘
+  </div>
+</header>
+
+<div class="grid" id="iconGrid">
+
+  <!-- 01 -->
+  <div class="card" onclick="openModal('icon_01_literal_terminal_face.svg', '터미널 그린 얼굴', '01')">
+    <div class="icon-wrap">
+      <img src="icon_01_literal_terminal_face.svg" alt="Terminal Green Face" loading="lazy"/>
+    </div>
+    <div class="card-info">
+      <div class="card-filename">icon_01_literal_terminal_face.svg</div>
+      <div class="card-badges">
+        <span class="badge badge-literal">Literal</span>
+        <span class="badge badge-terminal">Terminal Green</span>
+      </div>
+      <div class="card-concept">얼굴 실루엣 전체가 @, #, *, : 문자들로만 구성. 눈·코·입 영역도 밀도 차로 표현. 중앙 심볼 패턴.</div>
+      <div class="card-palette">
+        <div class="palette-swatch" style="background:#00FF77" title="#00FF77"></div>
+        <div class="palette-swatch" style="background:#00CC55" title="#00CC55"></div>
+        <div class="palette-swatch" style="background:#AAFFCC" title="#AAFFCC"></div>
+        <div class="palette-swatch" style="background:#050E07" title="#050E07"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 02 -->
+  <div class="card" onclick="openModal('icon_02_literal_retro_mountain.svg', '레트로 앰버 산', '02')">
+    <div class="icon-wrap">
+      <img src="icon_02_literal_retro_mountain.svg" alt="Retro Amber Mountain" loading="lazy"/>
+    </div>
+    <div class="card-info">
+      <div class="card-filename">icon_02_literal_retro_mountain.svg</div>
+      <div class="card-badges">
+        <span class="badge badge-literal">Literal</span>
+        <span class="badge badge-amber">Retro Amber</span>
+      </div>
+      <div class="card-concept">산 실루엣이 /, \, @, #, % 문자로만 구성. 꼭대기 ^ 에서 아래 평지까지 문자 밀도 그라디언트. 실루엣 패턴.</div>
+      <div class="card-palette">
+        <div class="palette-swatch" style="background:#FFCC00" title="#FFCC00"></div>
+        <div class="palette-swatch" style="background:#FF8800" title="#FF8800"></div>
+        <div class="palette-swatch" style="background:#FF5500" title="#FF5500"></div>
+        <div class="palette-swatch" style="background:#0E0800" title="#0E0800"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 03 -->
+  <div class="card" onclick="openModal('icon_03_metaphor_before_after.svg', '비비드 퍼플 변환', '03')">
+    <div class="icon-wrap">
+      <img src="icon_03_metaphor_before_after.svg" alt="Before After Conversion" loading="lazy"/>
+    </div>
+    <div class="card-info">
+      <div class="card-filename">icon_03_metaphor_before_after.svg</div>
+      <div class="card-badges">
+        <span class="badge badge-metaphor">Metaphor</span>
+        <span class="badge badge-purple">Vivid Purple</span>
+      </div>
+      <div class="card-concept">PHOTO → ASCII ART 변환 전/후 비교. 컬러 사진과 문자 격자 결과물을 나란히. 공간·장면 패턴.</div>
+      <div class="card-palette">
+        <div class="palette-swatch" style="background:#CC44FF" title="#CC44FF"></div>
+        <div class="palette-swatch" style="background:#8899FF" title="#8899FF"></div>
+        <div class="palette-swatch" style="background:#FFD93D" title="#FFD93D"></div>
+        <div class="palette-swatch" style="background:#0A0E2A" title="#0A0E2A"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 04 -->
+  <div class="card" onclick="openModal('icon_04_metaphor_char_grid.svg', '사이안 블루 고양이', '04')">
+    <div class="icon-wrap">
+      <img src="icon_04_metaphor_char_grid.svg" alt="Cyan Blue Cat Grid" loading="lazy"/>
+    </div>
+    <div class="card-info">
+      <div class="card-filename">icon_04_metaphor_char_grid.svg</div>
+      <div class="card-badges">
+        <span class="badge badge-metaphor">Metaphor</span>
+        <span class="badge badge-cyan">Cyan Blue</span>
+      </div>
+      <div class="card-concept">고양이 실루엣이 @, #, 0, w, |, ~ 문자들로만 구성된 격자. 눈·귀·꼬리도 문자로. 기하학 추상 패턴.</div>
+      <div class="card-palette">
+        <div class="palette-swatch" style="background:#00DDFF" title="#00DDFF"></div>
+        <div class="palette-swatch" style="background:#00AAFF" title="#00AAFF"></div>
+        <div class="palette-swatch" style="background:#CCFFFF" title="#CCFFFF"></div>
+        <div class="palette-swatch" style="background:#001122" title="#001122"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 05 -->
+  <div class="card" onclick="openModal('icon_05_hybrid_pixel_to_char.svg', '레드 블랙 픽셀 변환', '05')">
+    <div class="icon-wrap">
+      <img src="icon_05_hybrid_pixel_to_char.svg" alt="Red Black Pixel to Char" loading="lazy"/>
+    </div>
+    <div class="card-info">
+      <div class="card-filename">icon_05_hybrid_pixel_to_char.svg</div>
+      <div class="card-badges">
+        <span class="badge badge-hybrid">Hybrid</span>
+        <span class="badge badge-red">Red Black</span>
+      </div>
+      <div class="card-concept">하트 픽셀 이미지가 → 같은 형태의 문자(@, #, %, S, *) 하트로 변환. 대각선·동적 패턴.</div>
+      <div class="card-palette">
+        <div class="palette-swatch" style="background:#FF0022" title="#FF0022"></div>
+        <div class="palette-swatch" style="background:#FF9999" title="#FF9999"></div>
+        <div class="palette-swatch" style="background:#FF4455" title="#FF4455"></div>
+        <div class="palette-swatch" style="background:#1A0000" title="#1A0000"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 06 -->
+  <div class="card" onclick="openModal('icon_06_metaphor_abstract_density.svg', '비비드 퍼플 밀도 맵', '06')">
+    <div class="icon-wrap">
+      <img src="icon_06_metaphor_abstract_density.svg" alt="Density Mapping Abstract" loading="lazy"/>
+    </div>
+    <div class="card-info">
+      <div class="card-filename">icon_06_metaphor_abstract_density.svg</div>
+      <div class="card-badges">
+        <span class="badge badge-metaphor">Metaphor</span>
+        <span class="badge badge-purple">Vivid Purple</span>
+      </div>
+      <div class="card-concept">중앙 @에서 바깥으로 #→%→*→. 문자 밀도 동심원. 픽셀 밝기 → 문자 밀도 매핑 원리 시각화. 기하학추상 패턴.</div>
+      <div class="card-palette">
+        <div class="palette-swatch" style="background:#FF00FF" title="#FF00FF"></div>
+        <div class="palette-swatch" style="background:#CC00CC" title="#CC00CC"></div>
+        <div class="palette-swatch" style="background:#550055" title="#550055"></div>
+        <div class="palette-swatch" style="background:#050010" title="#050010"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 07 -->
+  <div class="card" onclick="openModal('icon_07_hybrid_image_file_chars.svg', '모노크롬 파일 변환', '07')">
+    <div class="icon-wrap">
+      <img src="icon_07_hybrid_image_file_chars.svg" alt="Monochrome File Conversion" loading="lazy"/>
+    </div>
+    <div class="card-info">
+      <div class="card-filename">icon_07_hybrid_image_file_chars.svg</div>
+      <div class="card-badges">
+        <span class="badge badge-hybrid">Hybrid</span>
+        <span class="badge badge-mono">Monochrome</span>
+      </div>
+      <div class="card-concept">photo.jpg 파일 아이콘 → char-art.txt 파일 아이콘. 내부에 실제 ASCII 아트 내용이 담긴 레이어드 패턴.</div>
+      <div class="card-palette">
+        <div class="palette-swatch" style="background:#FFFFFF" title="#FFFFFF"></div>
+        <div class="palette-swatch" style="background:#888888" title="#888888"></div>
+        <div class="palette-swatch" style="background:#FF6B35" title="#FF6B35"></div>
+        <div class="palette-swatch" style="background:#111111" title="#111111"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 08 -->
+  <div class="card" onclick="openModal('icon_08_literal_number_portrait.svg', '골든 숫자 초상화', '08')">
+    <div class="icon-wrap">
+      <img src="icon_08_literal_number_portrait.svg" alt="Golden Number Portrait" loading="lazy"/>
+    </div>
+    <div class="card-info">
+      <div class="card-filename">icon_08_literal_number_portrait.svg</div>
+      <div class="card-badges">
+        <span class="badge badge-literal">Literal</span>
+        <span class="badge badge-golden">Golden</span>
+      </div>
+      <div class="card-concept">얼굴 실루엣 전체가 9, 8, 7, 6, 5, 4, 3, 2, 1, . 숫자로만 구성. 눈 부분은 흰색 1로 대비. 중앙심볼 패턴.</div>
+      <div class="card-palette">
+        <div class="palette-swatch" style="background:#FFB800" title="#FFB800"></div>
+        <div class="palette-swatch" style="background:#FFCC00" title="#FFCC00"></div>
+        <div class="palette-swatch" style="background:#FFFFFF" title="#FFFFFF"></div>
+        <div class="palette-swatch" style="background:#1A1400" title="#1A1400"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 09 -->
+  <div class="card" onclick="openModal('icon_09_metaphor_diagonal_scan.svg', '에메랄드 스캔 변환', '09')">
+    <div class="icon-wrap">
+      <img src="icon_09_metaphor_diagonal_scan.svg" alt="Emerald Scan Convert" loading="lazy"/>
+    </div>
+    <div class="card-info">
+      <div class="card-filename">icon_09_metaphor_diagonal_scan.svg</div>
+      <div class="card-badges">
+        <span class="badge badge-metaphor">Metaphor</span>
+        <span class="badge badge-emerald">Emerald</span>
+      </div>
+      <div class="card-concept">컬러 픽셀 격자와 ASCII 문자 격자 나란히. 스캔 라인이 진행 중인 모습. 변환 중(58%) 프로그레스 바. 공간·장면 패턴.</div>
+      <div class="card-palette">
+        <div class="palette-swatch" style="background:#00FF88" title="#00FF88"></div>
+        <div class="palette-swatch" style="background:#6BCB77" title="#6BCB77"></div>
+        <div class="palette-swatch" style="background:#FF6B35" title="#FF6B35"></div>
+        <div class="palette-swatch" style="background:#001A0A" title="#001A0A"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 10 -->
+  <div class="card" onclick="openModal('icon_10_hybrid_neon_symbol.svg', '네온 핑크 @ 심볼', '10')">
+    <div class="icon-wrap">
+      <img src="icon_10_hybrid_neon_symbol.svg" alt="Neon Pink At Symbol" loading="lazy"/>
+    </div>
+    <div class="card-info">
+      <div class="card-filename">icon_10_hybrid_neon_symbol.svg</div>
+      <div class="card-badges">
+        <span class="badge badge-hybrid">Hybrid</span>
+        <span class="badge badge-neon-pink">Neon Pink</span>
+      </div>
+      <div class="card-concept">거대한 네온 @ 심볼이 중앙을 채움. 주변에 #, %, *, ;, :, , 문자들이 궤도 배치. Char.Art 핵심 문자 직접 전시. 중앙심볼 패턴.</div>
+      <div class="card-palette">
+        <div class="palette-swatch" style="background:#FF00CC" title="#FF00CC"></div>
+        <div class="palette-swatch" style="background:#FF88EE" title="#FF88EE"></div>
+        <div class="palette-swatch" style="background:#FFBBFF" title="#FFBBFF"></div>
+        <div class="palette-swatch" style="background:#0D001A" title="#0D001A"></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- 크기별 미리보기 -->
+<section class="size-preview-section">
+  <h2>Size Preview</h2>
+  <div class="size-selector">
+    <button class="size-btn active" onclick="selectPreviewIcon('icon_01_literal_terminal_face.svg', this)">01 Terminal</button>
+    <button class="size-btn" onclick="selectPreviewIcon('icon_02_literal_retro_mountain.svg', this)">02 Mountain</button>
+    <button class="size-btn" onclick="selectPreviewIcon('icon_03_metaphor_before_after.svg', this)">03 Before/After</button>
+    <button class="size-btn" onclick="selectPreviewIcon('icon_04_metaphor_char_grid.svg', this)">04 Cat Grid</button>
+    <button class="size-btn" onclick="selectPreviewIcon('icon_05_hybrid_pixel_to_char.svg', this)">05 Pixel→Char</button>
+    <button class="size-btn" onclick="selectPreviewIcon('icon_06_metaphor_abstract_density.svg', this)">06 Density</button>
+    <button class="size-btn" onclick="selectPreviewIcon('icon_07_hybrid_image_file_chars.svg', this)">07 File Convert</button>
+    <button class="size-btn" onclick="selectPreviewIcon('icon_08_literal_number_portrait.svg', this)">08 Numbers</button>
+    <button class="size-btn" onclick="selectPreviewIcon('icon_09_metaphor_diagonal_scan.svg', this)">09 Scan</button>
+    <button class="size-btn" onclick="selectPreviewIcon('icon_10_hybrid_neon_symbol.svg', this)">10 Neon @</button>
+  </div>
+  <div class="size-preview-grid" id="sizePreviewGrid">
+    <div class="size-item">
+      <img id="prev256" src="icon_01_literal_terminal_face.svg" width="256" height="256" alt="256px"/>
+      <div class="size-label">256px</div>
+    </div>
+    <div class="size-item">
+      <img id="prev64" src="icon_01_literal_terminal_face.svg" width="64" height="64" alt="64px"/>
+      <div class="size-label">64px</div>
+    </div>
+    <div class="size-item">
+      <img id="prev32" src="icon_01_literal_terminal_face.svg" width="32" height="32" alt="32px"/>
+      <div class="size-label">32px</div>
+    </div>
+    <div class="size-item">
+      <img id="prev16" src="icon_01_literal_terminal_face.svg" width="16" height="16" alt="16px"/>
+      <div class="size-label">16px</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  Char.Art &mdash; ASCII Art Converter &nbsp;|&nbsp; Candidate_20260322_0202 &nbsp;|&nbsp; 10 icons &nbsp;|&nbsp; literal×3 / metaphor×4 / hybrid×3
+</footer>
+
+<!-- 모달 -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <img id="modalImg" src="" alt=""/>
+    <div class="modal-title" id="modalTitle"></div>
+    <div class="modal-meta" id="modalMeta"></div>
+  </div>
+</div>
+
+<script>
+function openModal(file, title, num) {
+  document.getElementById('modalImg').src = file;
+  document.getElementById('modalTitle').textContent = '#' + num + ' — ' + title;
+  document.getElementById('modalMeta').textContent = file;
+  document.getElementById('modalOverlay').classList.add('open');
+}
+
+function closeModal(e) {
+  if (!e || e.target === document.getElementById('modalOverlay')) {
+    document.getElementById('modalOverlay').classList.remove('open');
+  }
+}
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeModal();
+});
+
+function selectPreviewIcon(file, btn) {
+  ['prev256','prev64','prev32','prev16'].forEach(function(id) {
+    document.getElementById(id).src = file;
+  });
+  document.querySelectorAll('.size-btn').forEach(function(b) { b.classList.remove('active'); });
+  btn.classList.add('active');
+}
+</script>
+
+</body>
+</html>

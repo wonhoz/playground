@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_02: Literal / 대각선·동적 / 탄막 폭풍 속 우주선 실루엣 / 주황-금색 -->
+  <defs>
+    <linearGradient id="bg02" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A0A00"/>
+      <stop offset="100%" stop-color="#0D0500"/>
+    </linearGradient>
+    <linearGradient id="ship02" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFD700"/>
+      <stop offset="100%" stop-color="#FF8C00"/>
+    </linearGradient>
+    <filter id="glow02">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="160" fill="url(#bg02)"/>
+
+  <!-- 배경 별들 -->
+  <circle cx="210" cy="200" r="2" fill="#FFF8E0" opacity="0.5"/>
+  <circle cx="420" cy="160" r="3" fill="#FFF8E0" opacity="0.4"/>
+  <circle cx="720" cy="220" r="2" fill="#FFF8E0" opacity="0.6"/>
+  <circle cx="870" cy="300" r="2" fill="#FFF8E0" opacity="0.4"/>
+  <circle cx="160" cy="500" r="3" fill="#FFF8E0" opacity="0.5"/>
+  <circle cx="880" cy="600" r="2" fill="#FFF8E0" opacity="0.3"/>
+  <circle cx="300" cy="820" r="2" fill="#FFF8E0" opacity="0.4"/>
+  <circle cx="780" cy="860" r="3" fill="#FFF8E0" opacity="0.5"/>
+
+  <!-- 대각선 탄막들 — 오른쪽 위에서 왼쪽 아래 방향 -->
+  <!-- 1열 -->
+  <ellipse cx="700" cy="220" rx="10" ry="24" transform="rotate(-45 700 220)" fill="#FF4500" opacity="0.9"/>
+  <ellipse cx="780" cy="180" rx="10" ry="24" transform="rotate(-45 780 180)" fill="#FF6600" opacity="0.85"/>
+  <ellipse cx="850" cy="240" rx="10" ry="24" transform="rotate(-45 850 240)" fill="#FF4500" opacity="0.9"/>
+
+  <!-- 2열 -->
+  <ellipse cx="640" cy="320" rx="10" ry="24" transform="rotate(-45 640 320)" fill="#FF6600" opacity="0.85"/>
+  <ellipse cx="730" cy="360" rx="10" ry="24" transform="rotate(-45 730 360)" fill="#FF4500" opacity="0.9"/>
+  <ellipse cx="820" cy="310" rx="10" ry="24" transform="rotate(-45 820 310)" fill="#FF6600" opacity="0.85"/>
+
+  <!-- 3열 (우주선 주변) -->
+  <ellipse cx="600" cy="440" rx="10" ry="24" transform="rotate(-45 600 440)" fill="#FFAA00" opacity="0.9"/>
+  <ellipse cx="680" cy="480" rx="10" ry="24" transform="rotate(-45 680 480)" fill="#FF4500" opacity="0.9"/>
+  <ellipse cx="760" cy="420" rx="10" ry="24" transform="rotate(-45 760 420)" fill="#FF6600" opacity="0.85"/>
+  <ellipse cx="840" cy="460" rx="10" ry="24" transform="rotate(-45 840 460)" fill="#FF4500" opacity="0.9"/>
+
+  <!-- 4열 -->
+  <ellipse cx="540" cy="560" rx="10" ry="24" transform="rotate(-45 540 560)" fill="#FF6600" opacity="0.85"/>
+  <ellipse cx="640" cy="580" rx="10" ry="24" transform="rotate(-45 640 580)" fill="#FF4500" opacity="0.9"/>
+  <ellipse cx="730" cy="540" rx="10" ry="24" transform="rotate(-45 730 540)" fill="#FFAA00" opacity="0.85"/>
+  <ellipse cx="830" cy="590" rx="10" ry="24" transform="rotate(-45 830 590)" fill="#FF4500" opacity="0.9"/>
+
+  <!-- 5열 -->
+  <ellipse cx="480" cy="670" rx="10" ry="24" transform="rotate(-45 480 670)" fill="#FF4500" opacity="0.85"/>
+  <ellipse cx="580" cy="700" rx="10" ry="24" transform="rotate(-45 580 700)" fill="#FF6600" opacity="0.9"/>
+  <ellipse cx="680" cy="650" rx="10" ry="24" transform="rotate(-45 680 650)" fill="#FF4500" opacity="0.85"/>
+  <ellipse cx="770" cy="690" rx="10" ry="24" transform="rotate(-45 770 690)" fill="#FFAA00" opacity="0.9"/>
+
+  <!-- 6열 -->
+  <ellipse cx="420" cy="780" rx="10" ry="24" transform="rotate(-45 420 780)" fill="#FF6600" opacity="0.85"/>
+  <ellipse cx="520" cy="810" rx="10" ry="24" transform="rotate(-45 520 810)" fill="#FF4500" opacity="0.9"/>
+  <ellipse cx="620" cy="770" rx="10" ry="24" transform="rotate(-45 620 770)" fill="#FF6600" opacity="0.85"/>
+  <ellipse cx="720" cy="800" rx="10" ry="24" transform="rotate(-45 720 800)" fill="#FF4500" opacity="0.9"/>
+
+  <!-- 우주선 — 탄막 사이 좁은 공간에 위치 -->
+  <!-- 선체 메인 -->
+  <path d="M430 480 L390 580 L430 558 L470 558 L510 580 L470 480 Z" fill="url(#ship02)" filter="url(#glow02)"/>
+  <!-- 날개 좌 -->
+  <path d="M390 580 L340 630 L390 610 L430 590 Z" fill="#CC6600"/>
+  <!-- 날개 우 -->
+  <path d="M510 580 L560 630 L510 610 L470 590 Z" fill="#CC6600"/>
+  <!-- 조종석 -->
+  <ellipse cx="450" cy="515" rx="16" ry="22" fill="#FFE080" opacity="0.9"/>
+  <!-- 엔진 불꽃 -->
+  <ellipse cx="415" cy="572" rx="9" ry="16" fill="#FF6600" opacity="0.8"/>
+  <ellipse cx="490" cy="572" rx="9" ry="16" fill="#FF6600" opacity="0.8"/>
+  <ellipse cx="415" cy="580" rx="5" ry="22" fill="#FFCC00" opacity="0.6"/>
+  <ellipse cx="490" cy="580" rx="5" ry="22" fill="#FFCC00" opacity="0.6"/>
+
+  <!-- 속도감 — 모션 라인 -->
+  <line x1="240" y1="460" x2="360" y2="460" stroke="#FF8C00" stroke-width="2" opacity="0.3"/>
+  <line x1="220" y1="500" x2="360" y2="500" stroke="#FF8C00" stroke-width="2" opacity="0.2"/>
+  <line x1="260" y1="540" x2="360" y2="540" stroke="#FF8C00" stroke-width="2" opacity="0.3"/>
+</svg>

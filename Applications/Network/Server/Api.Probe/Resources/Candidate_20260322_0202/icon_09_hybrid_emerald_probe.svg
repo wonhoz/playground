@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- 배경: 에메랄드 딥 -->
+  <rect width="1024" height="1024" rx="180" fill="#022C22"/>
+  <rect x="24" y="24" width="976" height="976" rx="160" fill="#064E3B"/>
+
+  <!-- 탐침 (probe) 도형 — 화학 탐침 스타일 -->
+  <!-- 탐침 손잡이 (상단) -->
+  <rect x="462" y="80" width="100" height="260" rx="20" fill="#059669"/>
+  <rect x="474" y="92" width="76" height="236" rx="16" fill="#10B981"/>
+  <!-- 탐침 나사선 디테일 -->
+  <line x1="462" y1="150" x2="562" y2="150" stroke="#047857" stroke-width="3"/>
+  <line x1="462" y1="180" x2="562" y2="180" stroke="#047857" stroke-width="3"/>
+  <line x1="462" y1="210" x2="562" y2="210" stroke="#047857" stroke-width="3"/>
+  <line x1="462" y1="240" x2="562" y2="240" stroke="#047857" stroke-width="3"/>
+  <line x1="462" y1="270" x2="562" y2="270" stroke="#047857" stroke-width="3"/>
+
+  <!-- 탐침 끝 (아래쪽 뾰족한 부분) -->
+  <path d="M462,340 L562,340 L542,580 L512,620 L482,580 Z" fill="#10B981"/>
+  <path d="M474,340 L550,340 L532,570 L512,606 L492,570 Z" fill="#34D399"/>
+  <!-- 탐침 전도 부분 -->
+  <ellipse cx="512" cy="580" rx="30" ry="14" fill="#6EE7B7"/>
+  <circle cx="512" cy="620" r="12" fill="#A7F3D0"/>
+
+  <!-- 서버 박스 (탐침이 접촉하는 대상) -->
+  <rect x="200" y="660" width="624" height="240" rx="20" fill="#022C22"/>
+  <rect x="212" y="672" width="600" height="216" rx="16" fill="#065F46"/>
+
+  <!-- 서버 스택 표시 -->
+  <rect x="228" y="690" width="568" height="36" rx="6" fill="#022C22"/>
+  <rect x="228" y="734" width="568" height="36" rx="6" fill="#022C22"/>
+  <rect x="228" y="778" width="568" height="36" rx="6" fill="#022C22"/>
+
+  <!-- LED 표시 -->
+  <circle cx="778" cy="708" r="8" fill="#34D399"/>
+  <circle cx="778" cy="752" r="8" fill="#34D399"/>
+  <circle cx="778" cy="796" r="8" fill="#F59E0B"/>
+
+  <!-- 탐침 접촉 후 응답 데이터 -->
+  <text x="248" y="714" font-family="'Courier New', monospace" font-size="22" fill="#34D399" dominant-baseline="middle">GET /api/health</text>
+  <text x="248" y="758" font-family="'Courier New', monospace" font-size="22" fill="#6EE7B7" dominant-baseline="middle">  → <tspan fill="#4ADE80" font-weight="900">200 OK</tspan>  {"status":"healthy"}</text>
+  <text x="248" y="802" font-family="'Courier New', monospace" font-size="22" fill="#6EE7B7" dominant-baseline="middle">  → Elapsed: <tspan fill="#FCD34D">42ms</tspan></text>
+
+  <!-- 전기 에너지 이펙트 (탐침 → 서버) -->
+  <path d="M512,630 Q480,645 490,660" stroke="#A7F3D0" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.7"/>
+  <path d="M512,632 Q530,648 522,662" stroke="#6EE7B7" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.5"/>
+
+  <!-- 왼쪽 상태 표시판 -->
+  <rect x="80" y="390" width="160" height="200" rx="12" fill="#022C22" opacity="0.9"/>
+  <text x="160" y="430" font-family="'Segoe UI', Arial, sans-serif" font-size="20" fill="#34D399" text-anchor="middle" dominant-baseline="middle">STATUS</text>
+  <line x1="88" y1="450" x2="232" y2="450" stroke="#047857" stroke-width="1"/>
+  <text x="100" y="478" font-family="'Courier New', monospace" font-size="18" fill="#4ADE80">■ 200</text>
+  <text x="100" y="508" font-family="'Courier New', monospace" font-size="18" fill="#FBBF24">■ 301</text>
+  <text x="100" y="538" font-family="'Courier New', monospace" font-size="18" fill="#EF4444">■ 404</text>
+  <text x="100" y="568" font-family="'Courier New', monospace" font-size="18" fill="#DC2626">■ 500</text>
+
+  <!-- 오른쪽 메서드 표시판 -->
+  <rect x="784" y="390" width="160" height="200" rx="12" fill="#022C22" opacity="0.9"/>
+  <text x="864" y="430" font-family="'Segoe UI', Arial, sans-serif" font-size="20" fill="#34D399" text-anchor="middle" dominant-baseline="middle">METHOD</text>
+  <line x1="792" y1="450" x2="936" y2="450" stroke="#047857" stroke-width="1"/>
+  <text x="804" y="478" font-family="'Courier New', monospace" font-size="18" fill="#14B8A6">GET</text>
+  <text x="804" y="508" font-family="'Courier New', monospace" font-size="18" fill="#22C55E">POST</text>
+  <text x="804" y="538" font-family="'Courier New', monospace" font-size="18" fill="#F59E0B">PUT</text>
+  <text x="804" y="568" font-family="'Courier New', monospace" font-size="18" fill="#EF4444">DELETE</text>
+
+  <!-- 앱 이름 -->
+  <text x="512" y="936" font-family="'Segoe UI', Arial, sans-serif" font-size="52" font-weight="900" fill="#34D399" text-anchor="middle" dominant-baseline="middle">Api.Probe</text>
+</svg>

@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!--
+    icon_03 [metaphor] — 깨어있는 눈
+    컨셉: 완전히 뜨인 눈 = 잠들지 않음 = away 전환 없음
+    연결고리: 시스템이 항상 깨어있어 Slack away로 빠지지 않도록 지킨다
+    패턴: 실루엣/캐릭터
+    색상: 다크 인디고(#1E1B4B→#0F0A2E) + 보라 홍채 + 초록 빛 테두리
+  -->
+  <defs>
+    <radialGradient id="bg03" cx="50%" cy="50%" r="65%">
+      <stop offset="0%" stop-color="#2E1B5B"/>
+      <stop offset="100%" stop-color="#0F0A2E"/>
+    </radialGradient>
+    <radialGradient id="iris03" cx="38%" cy="32%" r="62%">
+      <stop offset="0%" stop-color="#A78BFA"/>
+      <stop offset="55%" stop-color="#7C3AED"/>
+      <stop offset="100%" stop-color="#4C1D95"/>
+    </radialGradient>
+    <radialGradient id="eyeGlow03" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#22C55E" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#22C55E" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glow03">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Layer 1: 다크 인디고 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg03)"/>
+  <!-- 은은한 초록 후광 -->
+  <ellipse cx="512" cy="512" rx="440" ry="260" fill="url(#eyeGlow03)"/>
+
+  <!-- Layer 2: 눈 흰자 (아몬드 형태) -->
+  <path d="M 130 512
+           Q 320 262 512 242
+           Q 704 262 894 512
+           Q 704 762 512 782
+           Q 320 762 130 512 Z"
+        fill="white"/>
+
+  <!-- 홍채 -->
+  <circle cx="512" cy="512" r="178" fill="url(#iris03)"/>
+  <!-- 동공 -->
+  <circle cx="512" cy="512" r="96" fill="#0F0A2E"/>
+  <!-- 하이라이트 1 (큰 것) -->
+  <circle cx="572" cy="458" r="40" fill="white" opacity="0.82"/>
+  <!-- 하이라이트 2 (작은 것) -->
+  <circle cx="470" cy="490" r="18" fill="white" opacity="0.45"/>
+
+  <!-- Layer 3: 눈 테두리 초록 빛 + 속눈썹 라인 -->
+  <!-- 위 눈꺼풀 선 -->
+  <path d="M 130 512 Q 320 262 512 242 Q 704 262 894 512"
+        fill="none" stroke="#22C55E" stroke-width="16"
+        stroke-linecap="round" opacity="0.75" filter="url(#glow03)"/>
+  <!-- 아래 눈꺼풀 선 -->
+  <path d="M 130 512 Q 320 762 512 782 Q 704 762 894 512"
+        fill="none" stroke="#22C55E" stroke-width="10"
+        stroke-linecap="round" opacity="0.45"/>
+</svg>

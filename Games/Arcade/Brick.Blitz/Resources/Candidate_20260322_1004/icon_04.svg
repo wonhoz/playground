@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_04 | metaphor | 번개(BLITZ) 심볼 — 아케이드 레트로 에너지 -->
+  <!-- 배경: 선셋 오렌지-퍼플 그라디언트 -->
+  <defs>
+    <linearGradient id="bgGrad4" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#2D0B4E"/>
+      <stop offset="50%" stop-color="#4A1B6E"/>
+      <stop offset="100%" stop-color="#1A0830"/>
+    </linearGradient>
+    <radialGradient id="boltGlow" cx="50%" cy="50%" r="55%">
+      <stop offset="0%" stop-color="#FFE500" stop-opacity="0.5"/>
+      <stop offset="70%" stop-color="#FF8C00" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#2D0B4E" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glowBolt">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="softGlow">
+      <feGaussianBlur stdDeviation="16"/>
+    </filter>
+  </defs>
+
+  <rect width="1024" height="1024" rx="180" fill="url(#bgGrad4)"/>
+  <rect width="1024" height="1024" rx="180" fill="url(#boltGlow)"/>
+
+  <!-- 별/스파크 배경 -->
+  <circle cx="220" cy="240" r="3" fill="#FFFFFF" opacity="0.5"/>
+  <circle cx="800" cy="210" r="2" fill="#FFE500" opacity="0.4"/>
+  <circle cx="180" cy="650" r="2.5" fill="#FFFFFF" opacity="0.35"/>
+  <circle cx="840" cy="720" r="2" fill="#FFE500" opacity="0.4"/>
+  <circle cx="750" cy="300" r="2" fill="#FFFFFF" opacity="0.3"/>
+  <circle cx="270" cy="780" r="2" fill="#FFFFFF" opacity="0.3"/>
+
+  <!-- 방사형 에너지 라인 -->
+  <line x1="512" y1="512" x2="300" y2="250" stroke="#FFE500" stroke-width="2" opacity="0.15"/>
+  <line x1="512" y1="512" x2="724" y2="250" stroke="#FFE500" stroke-width="2" opacity="0.15"/>
+  <line x1="512" y1="512" x2="210" y2="512" stroke="#FFE500" stroke-width="2" opacity="0.12"/>
+  <line x1="512" y1="512" x2="814" y2="512" stroke="#FFE500" stroke-width="2" opacity="0.12"/>
+  <line x1="512" y1="512" x2="300" y2="774" stroke="#FFE500" stroke-width="2" opacity="0.15"/>
+  <line x1="512" y1="512" x2="724" y2="774" stroke="#FFE500" stroke-width="2" opacity="0.15"/>
+
+  <!-- 번개 글로우 (뒤) -->
+  <polygon points="560,210 480,510 545,510 462,820 620,450 548,450 630,210" fill="#FFE500" opacity="0.25" filter="url(#softGlow)"/>
+
+  <!-- 번개 심볼 (메인) — 두껍고 강렬한 형태 -->
+  <polygon points="565,215 472,505 540,505 455,815 628,448 552,448 638,215"
+           fill="#FFE500" filter="url(#glowBolt)"/>
+  <!-- 번개 내부 하이라이트 -->
+  <polygon points="555,240 480,490 534,490 465,770 600,465 540,465 608,240"
+           fill="#FFF176" opacity="0.6"/>
+  <!-- 번개 최내부 흰색 코어 -->
+  <polygon points="547,280 490,475 528,475 474,730 582,480 530,480 580,280"
+           fill="#FFFFFF" opacity="0.35"/>
+
+  <!-- 벽돌 미니 그리드 (번개 배경에 희미하게) -->
+  <rect x="218" y="820" width="80" height="35" rx="4" fill="#FF4757" opacity="0.6"/>
+  <rect x="308" y="820" width="80" height="35" rx="4" fill="#FF7F00" opacity="0.6"/>
+  <rect x="398" y="820" width="80" height="35" rx="4" fill="#FFD700" opacity="0.6"/>
+  <rect x="488" y="820" width="80" height="35" rx="4" fill="#2ED573" opacity="0.6"/>
+  <rect x="578" y="820" width="80" height="35" rx="4" fill="#5B8CFF" opacity="0.6"/>
+  <rect x="668" y="820" width="80" height="35" rx="4" fill="#FF4757" opacity="0.55"/>
+  <rect x="758" y="820" width="48" height="35" rx="4" fill="#FF7F00" opacity="0.5"/>
+
+  <!-- "BLITZ" 텍스트 상단 -->
+  <text x="512" y="188" text-anchor="middle" font-family="'Arial Black', sans-serif" font-size="72" font-weight="900" letter-spacing="8" fill="#FFE500" opacity="0.9" filter="url(#glowBolt)">BLITZ</text>
+
+  <!-- 파워업 아이템 아이콘 (좌하단) -->
+  <circle cx="248" cy="748" r="36" fill="#FF4757" opacity="0.85"/>
+  <text x="248" y="756" text-anchor="middle" font-family="'Arial Black', sans-serif" font-size="30" font-weight="900" fill="#FFFFFF">+</text>
+
+  <!-- 에너지 파티클 -->
+  <circle cx="390" cy="370" r="8" fill="#FFE500" opacity="0.8"/>
+  <circle cx="640" cy="330" r="6" fill="#FF8C00" opacity="0.7"/>
+  <circle cx="350" cy="620" r="7" fill="#FFE500" opacity="0.65"/>
+  <circle cx="680" cy="660" r="5" fill="#FFFFFF" opacity="0.6"/>
+</svg>

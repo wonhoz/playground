@@ -1,0 +1,189 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg5" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1A0030"/>
+      <stop offset="100%" stop-color="#0D0020"/>
+    </linearGradient>
+    <linearGradient id="scanLine" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#CC00FF" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#CC00FF" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#CC00FF" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="cornerGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#9B00FF"/>
+      <stop offset="100%" stop-color="#CC44FF"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="150" fill="url(#bg5)"/>
+
+  <!-- 별빛 효과 -->
+  <circle cx="100" cy="80" r="2" fill="#CC00FF" opacity="0.5"/>
+  <circle cx="900" cy="120" r="3" fill="#AA00FF" opacity="0.4"/>
+  <circle cx="200" cy="900" r="2" fill="#DD44FF" opacity="0.6"/>
+  <circle cx="850" cy="950" r="2" fill="#BB00FF" opacity="0.5"/>
+  <circle cx="950" cy="500" r="3" fill="#CC00FF" opacity="0.3"/>
+  <circle cx="60" cy="600" r="2" fill="#AA44FF" opacity="0.4"/>
+
+  <!-- QR 코드 외곽 스캐너 프레임 (코너만 표시) -->
+  <!-- 좌상 스캐너 코너 -->
+  <path d="M 170 170 L 170 280 M 170 170 L 280 170" stroke="#CC00FF" stroke-width="8" stroke-linecap="round" fill="none"/>
+  <!-- 우상 스캐너 코너 -->
+  <path d="M 854 170 L 854 280 M 854 170 L 744 170" stroke="#CC00FF" stroke-width="8" stroke-linecap="round" fill="none"/>
+  <!-- 좌하 스캐너 코너 -->
+  <path d="M 170 854 L 170 744 M 170 854 L 280 854" stroke="#CC00FF" stroke-width="8" stroke-linecap="round" fill="none"/>
+  <!-- 우하 스캐너 코너 -->
+  <path d="M 854 854 L 854 744 M 854 854 L 744 854" stroke="#CC00FF" stroke-width="8" stroke-linecap="round" fill="none"/>
+
+  <!-- QR 코드 본체 -->
+  <rect x="200" y="200" width="624" height="624" rx="16" fill="#FFFFFF" opacity="0.95"/>
+
+  <!-- 좌상 코너 파인더 -->
+  <rect x="226" y="226" width="158" height="158" rx="12" fill="url(#cornerGrad)"/>
+  <rect x="244" y="244" width="122" height="122" rx="8" fill="#FFFFFF"/>
+  <rect x="262" y="262" width="86" height="86" rx="5" fill="url(#cornerGrad)"/>
+
+  <!-- 우상 코너 파인더 -->
+  <rect x="640" y="226" width="158" height="158" rx="12" fill="url(#cornerGrad)"/>
+  <rect x="658" y="244" width="122" height="122" rx="8" fill="#FFFFFF"/>
+  <rect x="676" y="262" width="86" height="86" rx="5" fill="url(#cornerGrad)"/>
+
+  <!-- 좌하 코너 파인더 -->
+  <rect x="226" y="640" width="158" height="158" rx="12" fill="url(#cornerGrad)"/>
+  <rect x="244" y="658" width="122" height="122" rx="8" fill="#FFFFFF"/>
+  <rect x="262" y="676" width="86" height="86" rx="5" fill="url(#cornerGrad)"/>
+
+  <!-- 타이밍 패턴 -->
+  <rect x="408" y="260" width="20" height="20" rx="3" fill="#7B00CC"/>
+  <rect x="452" y="260" width="20" height="20" rx="3" fill="#7B00CC"/>
+  <rect x="496" y="260" width="20" height="20" rx="3" fill="#7B00CC"/>
+  <rect x="540" y="260" width="20" height="20" rx="3" fill="#7B00CC"/>
+  <rect x="584" y="260" width="20" height="20" rx="3" fill="#7B00CC"/>
+  <rect x="628" y="260" width="20" height="20" rx="3" fill="#7B00CC"/>
+
+  <rect x="262" y="408" width="20" height="20" rx="3" fill="#7B00CC"/>
+  <rect x="262" y="452" width="20" height="20" rx="3" fill="#7B00CC"/>
+  <rect x="262" y="496" width="20" height="20" rx="3" fill="#7B00CC"/>
+  <rect x="262" y="540" width="20" height="20" rx="3" fill="#7B00CC"/>
+  <rect x="262" y="584" width="20" height="20" rx="3" fill="#7B00CC"/>
+  <rect x="262" y="628" width="20" height="20" rx="3" fill="#7B00CC"/>
+
+  <!-- 데이터 모듈 -->
+  <rect x="408" y="408" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="428" y="408" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="468" y="408" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="508" y="408" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="548" y="408" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="588" y="408" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="628" y="408" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="668" y="408" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="708" y="408" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="748" y="408" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="428" y="428" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="488" y="428" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="548" y="428" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="628" y="428" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="708" y="428" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="408" y="448" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="468" y="448" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="508" y="448" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="568" y="448" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="648" y="448" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="688" y="448" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="748" y="448" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="428" y="468" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="488" y="468" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="528" y="468" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="568" y="468" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="608" y="468" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="668" y="468" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="728" y="468" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="408" y="488" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="448" y="488" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="508" y="488" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="568" y="488" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="648" y="488" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="708" y="488" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="748" y="488" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="428" y="508" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="468" y="508" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="548" y="508" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="588" y="508" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="628" y="508" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="688" y="508" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="728" y="508" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="408" y="528" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="488" y="528" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="528" y="528" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="608" y="528" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="668" y="528" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="748" y="528" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="428" y="548" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="508" y="548" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="548" y="548" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="588" y="548" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="648" y="548" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="708" y="548" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="408" y="568" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="448" y="568" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="508" y="568" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="568" y="568" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="628" y="568" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="688" y="568" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="748" y="568" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="428" y="588" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="468" y="588" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="548" y="588" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="588" y="588" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="648" y="588" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="728" y="588" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="408" y="608" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="488" y="608" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="528" y="608" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="568" y="608" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="628" y="608" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="708" y="608" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="748" y="608" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="428" y="628" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="468" y="628" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="508" y="628" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="568" y="628" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="648" y="628" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="688" y="628" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="748" y="628" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="408" y="648" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="448" y="648" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="508" y="648" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="588" y="648" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="628" y="648" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="708" y="648" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="428" y="668" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="488" y="668" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="528" y="668" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="608" y="668" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="668" y="668" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="728" y="668" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="748" y="668" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="408" y="688" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="468" y="688" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="508" y="688" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="568" y="688" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="628" y="688" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="688" y="688" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="748" y="688" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="428" y="708" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="508" y="708" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="548" y="708" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="628" y="708" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="668" y="708" width="16" height="16" rx="2" fill="#5500AA"/>
+  <rect x="728" y="708" width="16" height="16" rx="2" fill="#5500AA"/>
+
+  <!-- 스캔 라인 (가로 레이저) -->
+  <rect x="180" y="490" width="664" height="44" rx="0" fill="url(#scanLine)" opacity="0.85"/>
+  <!-- 스캔 라인 하이라이트 -->
+  <rect x="180" y="510" width="664" height="4" rx="2" fill="#CC00FF" opacity="0.95"/>
+  <!-- 좌우 빛 번짐 -->
+  <circle cx="180" cy="512" r="20" fill="#CC00FF" opacity="0.3"/>
+  <circle cx="844" cy="512" r="20" fill="#CC00FF" opacity="0.3"/>
+</svg>

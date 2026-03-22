@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- 배경: 비비드 레드/다크 -->
+  <rect width="1024" height="1024" rx="180" fill="#1A0A0A"/>
+  <rect x="24" y="24" width="976" height="976" rx="160" fill="#2D1010"/>
+
+  <!-- 플라스크 몸체 (테스트 비커 실루엣) -->
+  <!-- 플라스크 목 부분 -->
+  <rect x="420" y="120" width="184" height="240" rx="12" fill="#4A1010"/>
+  <rect x="434" y="134" width="156" height="216" rx="8" fill="#6B1515"/>
+
+  <!-- 플라스크 몸통 -->
+  <path d="M340,360 Q260,480 200,640 Q160,760 200,830 Q260,900 512,900 Q764,900 824,830 Q864,760 824,640 Q762,480 684,360 Z" fill="#4A1010"/>
+  <path d="M360,360 Q280,480 220,640 Q185,755 220,820 Q280,885 512,885 Q744,885 804,820 Q839,755 804,640 Q724,480 664,360 Z" fill="#7B1F1F"/>
+
+  <!-- 플라스크 안 액체 (활성화된 API 응답) -->
+  <clipPath id="flaskClip">
+    <path d="M360,360 Q280,480 220,640 Q185,755 220,820 Q280,885 512,885 Q744,885 804,820 Q839,755 804,640 Q724,480 664,360 Z"/>
+  </clipPath>
+
+  <!-- 액체 레이어 -->
+  <ellipse cx="512" cy="750" rx="280" ry="130" fill="#DC2626" clip-path="url(#flaskClip)"/>
+  <ellipse cx="512" cy="700" rx="270" ry="120" fill="#EF4444" clip-path="url(#flaskClip)" opacity="0.8"/>
+
+  <!-- 버블 -->
+  <circle cx="420" cy="720" r="18" fill="#F87171" clip-path="url(#flaskClip)" opacity="0.7"/>
+  <circle cx="580" cy="680" r="12" fill="#F87171" clip-path="url(#flaskClip)" opacity="0.6"/>
+  <circle cx="480" cy="760" r="10" fill="#FECACA" clip-path="url(#flaskClip)" opacity="0.5"/>
+
+  <!-- 플라스크 안 텍스트: HTTP 코드 -->
+  <text x="512" y="720" font-family="'Segoe UI', Arial, sans-serif" font-size="72" font-weight="900" fill="#FFFFFF" text-anchor="middle" dominant-baseline="middle" opacity="0.95">200</text>
+  <text x="512" y="790" font-family="'Segoe UI', Arial, sans-serif" font-size="30" font-weight="700" fill="#FCA5A5" text-anchor="middle" dominant-baseline="middle">OK</text>
+
+  <!-- 플라스크 목 안 텍스트: GET -->
+  <text x="512" y="248" font-family="'Segoe UI', Arial, sans-serif" font-size="34" font-weight="900" fill="#FCA5A5" text-anchor="middle" dominant-baseline="middle">GET</text>
+
+  <!-- 플라스크 테두리 -->
+  <path d="M420,120 L420,360 Q340,480 280,640 Q245,755 280,820 Q340,885 512,885 Q684,885 744,820 Q779,755 744,640 Q684,480 604,360 L604,120 Z" fill="none" stroke="#EF4444" stroke-width="4"/>
+
+  <!-- URL 화살표 (왼쪽에서 진입) -->
+  <line x1="80" y1="248" x2="408" y2="248" stroke="#F87171" stroke-width="5" stroke-linecap="round" stroke-dasharray="12,6"/>
+  <polyline points="388,228 412,248 388,268" stroke="#F87171" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <text x="80" y="228" font-family="'Courier New', monospace" font-size="18" fill="#F87171" opacity="0.8">/api/test</text>
+
+  <!-- 응답 화살표 (오른쪽으로 출력) -->
+  <line x1="616" y1="248" x2="900" y2="248" stroke="#34D399" stroke-width="5" stroke-linecap="round" stroke-dasharray="12,6"/>
+  <polyline points="876,228 900,248 876,268" stroke="#34D399" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <text x="700" y="228" font-family="'Courier New', monospace" font-size="18" fill="#34D399" opacity="0.8">{"ok":true}</text>
+
+  <!-- 상단 로고 영역 -->
+  <text x="512" y="68" font-family="'Segoe UI', Arial, sans-serif" font-size="38" font-weight="900" fill="#EF4444" text-anchor="middle" dominant-baseline="middle" letter-spacing="6">API PROBE</text>
+</svg>

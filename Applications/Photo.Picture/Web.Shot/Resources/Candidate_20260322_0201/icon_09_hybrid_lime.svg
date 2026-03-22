@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- 배경: 라임그린 다크 -->
+  <rect width="1024" height="1024" rx="180" fill="#041008"/>
+
+  <!-- 실루엣 패턴: 브라우저 + 카메라 실루엣이 합쳐진 형태 -->
+
+  <!-- 외곽 카메라 실루엣 (크게) -->
+  <rect x="100" y="300" width="824" height="520" rx="40" fill="#082018"/>
+  <rect x="100" y="300" width="824" height="520" rx="40" fill="none" stroke="#84CC16" stroke-width="8"/>
+
+  <!-- 카메라 상단 돌출부 (뷰파인더 = URL바 영역) -->
+  <rect x="300" y="230" width="340" height="90" rx="24" fill="#082018" stroke="#84CC16" stroke-width="8"/>
+
+  <!-- 셔터 버튼 (우측) -->
+  <circle cx="800" cy="265" r="50" fill="#084010" stroke="#84CC16" stroke-width="8"/>
+  <circle cx="800" cy="265" r="34" fill="#65A30D"/>
+  <circle cx="800" cy="265" r="20" fill="#84CC16"/>
+
+  <!-- 내부: 브라우저 창 실루엣 -->
+  <rect x="140" y="340" width="744" height="440" rx="16" fill="#041008"/>
+  <rect x="140" y="340" width="744" height="440" rx="16" fill="none" stroke="#65A30D" stroke-width="4"/>
+
+  <!-- URL 바 영역 (뷰파인더 안쪽) -->
+  <rect x="320" y="248" width="300" height="54" rx="16" fill="#041008"/>
+  <text x="470" y="282" font-family="monospace" font-size="18" fill="#84CC16" text-anchor="middle">https://</text>
+
+  <!-- 브라우저 타이틀바 -->
+  <rect x="140" y="340" width="744" height="56" rx="16" fill="#082018"/>
+  <rect x="140" y="368" width="744" height="28" fill="#082018"/>
+  <circle cx="166" cy="368" r="9" fill="#84CC16" opacity="0.6"/>
+  <circle cx="190" cy="368" r="9" fill="#A3E635" opacity="0.6"/>
+  <circle cx="214" cy="368" r="9" fill="#BEF264" opacity="0.6"/>
+  <rect x="230" y="352" width="460" height="28" rx="14" fill="#041008"/>
+  <text x="460" y="372" font-family="monospace" font-size="14" fill="#65A30D" text-anchor="middle">https://target-website.com</text>
+
+  <!-- 웹 페이지 전체 콘텐츠 -->
+  <rect x="158" y="416" width="708" height="340" rx="8" fill="#041008" clip-path="url(#page-clip)"/>
+  <!-- 긴 페이지 스크롤 표현 -->
+  <rect x="168" y="428" width="688" height="100" rx="6" fill="#061808"/>
+  <rect x="168" y="428" width="688" height="100" rx="6" fill="none" stroke="#1A4010" stroke-width="2"/>
+  <rect x="180" y="440" width="320" height="22" rx="6" fill="#0A2808"/>
+  <rect x="180" y="470" width="580" height="10" rx="3" fill="#082010"/>
+  <rect x="180" y="488" width="540" height="10" rx="3" fill="#082010"/>
+  <rect x="180" y="506" width="560" height="10" rx="3" fill="#082010"/>
+
+  <rect x="168" y="542" width="688" height="80" rx="6" fill="#061808"/>
+  <rect x="168" y="542" width="688" height="80" rx="6" fill="none" stroke="#1A4010" stroke-width="2"/>
+  <rect x="180" y="554" width="280" height="18" rx="5" fill="#0A2808"/>
+  <rect x="180" y="580" width="600" height="10" rx="3" fill="#082010"/>
+  <rect x="180" y="596" width="560" height="10" rx="3" fill="#082010"/>
+
+  <rect x="168" y="636" width="688" height="80" rx="6" fill="#061808"/>
+  <rect x="168" y="636" width="688" height="80" rx="6" fill="none" stroke="#1A4010" stroke-width="2"/>
+  <rect x="180" y="648" width="240" height="18" rx="5" fill="#0A2808"/>
+  <rect x="180" y="674" width="580" height="10" rx="3" fill="#082010"/>
+  <rect x="180" y="690" width="560" height="10" rx="3" fill="#082010"/>
+
+  <rect x="168" y="726" width="688" height="22" rx="4" fill="#0A2808"/>
+
+  <!-- 포커스 링 (렌즈 초점 효과) -->
+  <rect x="140" y="340" width="744" height="440" rx="16" fill="none" stroke="#84CC16" stroke-width="3" stroke-dasharray="20,10" opacity="0.4"/>
+
+  <!-- 캡처 완료 체크마크 (우하단) -->
+  <circle cx="820" cy="700" r="72" fill="#082018" stroke="#84CC16" stroke-width="8"/>
+  <path d="M788,700 L808,722 L852,676" fill="none" stroke="#84CC16" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <defs>
+    <clipPath id="page-clip">
+      <rect x="158" y="416" width="708" height="340" rx="8"/>
+    </clipPath>
+  </defs>
+</svg>

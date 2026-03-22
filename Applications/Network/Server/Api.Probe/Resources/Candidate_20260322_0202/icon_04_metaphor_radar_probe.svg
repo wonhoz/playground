@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- 배경: 사이안/다크 -->
+  <rect width="1024" height="1024" rx="180" fill="#0C1A2E"/>
+  <rect x="24" y="24" width="976" height="976" rx="160" fill="#0E2340"/>
+
+  <!-- 레이더 동심원 -->
+  <circle cx="512" cy="520" r="340" fill="none" stroke="#0E4D6E" stroke-width="2"/>
+  <circle cx="512" cy="520" r="255" fill="none" stroke="#0E4D6E" stroke-width="2"/>
+  <circle cx="512" cy="520" r="170" fill="none" stroke="#0E4D6E" stroke-width="2"/>
+  <circle cx="512" cy="520" r="85" fill="none" stroke="#0E4D6E" stroke-width="2"/>
+
+  <!-- 레이더 십자선 -->
+  <line x1="172" y1="520" x2="852" y2="520" stroke="#0E4D6E" stroke-width="1.5"/>
+  <line x1="512" y1="180" x2="512" y2="860" stroke="#0E4D6E" stroke-width="1.5"/>
+  <line x1="272" y1="280" x2="752" y2="760" stroke="#0E4D6E" stroke-width="1"/>
+  <line x1="752" y1="280" x2="272" y2="760" stroke="#0E4D6E" stroke-width="1"/>
+
+  <!-- 레이더 스윕 섹터 (녹색 glow) -->
+  <path d="M512,520 L512,180 A340,340 0 0,1 812,620 Z" fill="#00FF88" opacity="0.06"/>
+  <path d="M512,520 L512,180 A340,340 0 0,1 712,240 Z" fill="#00FF88" opacity="0.12"/>
+
+  <!-- 레이더 스윕 라인 -->
+  <line x1="512" y1="520" x2="780" y2="230" stroke="#00FF88" stroke-width="3" stroke-linecap="round" opacity="0.8"/>
+
+  <!-- 서버 탐지 블립 (API endpoint들) -->
+  <circle cx="680" cy="340" r="10" fill="#00FF88" opacity="0.9"/>
+  <circle cx="680" cy="340" r="20" fill="none" stroke="#00FF88" stroke-width="2" opacity="0.5"/>
+
+  <circle cx="380" cy="420" r="8" fill="#06B6D4" opacity="0.9"/>
+  <circle cx="380" cy="420" r="16" fill="none" stroke="#06B6D4" stroke-width="2" opacity="0.5"/>
+
+  <circle cx="600" cy="640" r="8" fill="#F59E0B" opacity="0.9"/>
+  <circle cx="600" cy="640" r="16" fill="none" stroke="#F59E0B" stroke-width="2" opacity="0.5"/>
+
+  <circle cx="350" cy="650" r="6" fill="#EF4444" opacity="0.8"/>
+
+  <!-- 블립 라벨 -->
+  <text x="696" y="330" font-family="'Courier New', monospace" font-size="18" fill="#00FF88" opacity="0.9">200</text>
+  <text x="350" y="412" font-family="'Courier New', monospace" font-size="18" fill="#06B6D4" opacity="0.9">201</text>
+  <text x="616" y="636" font-family="'Courier New', monospace" font-size="18" fill="#F59E0B" opacity="0.9">404</text>
+  <text x="320" y="645" font-family="'Courier New', monospace" font-size="18" fill="#EF4444" opacity="0.9">500</text>
+
+  <!-- 중앙 원점 -->
+  <circle cx="512" cy="520" r="10" fill="#00FF88"/>
+  <circle cx="512" cy="520" r="5" fill="#FFFFFF"/>
+
+  <!-- 상단 제목 -->
+  <text x="512" y="120" font-family="'Segoe UI', Arial, sans-serif" font-size="56" font-weight="900" fill="#06B6D4" text-anchor="middle" dominant-baseline="middle" letter-spacing="4">API PROBE</text>
+  <text x="512" y="170" font-family="'Courier New', monospace" font-size="22" fill="#0E4D6E" text-anchor="middle" dominant-baseline="middle">REST API TESTING TOOL</text>
+
+  <!-- 하단 상태 표시 -->
+  <rect x="312" y="870" width="400" height="44" rx="8" fill="#0A2840"/>
+  <text x="512" y="893" font-family="'Courier New', monospace" font-size="20" fill="#00FF88" text-anchor="middle" dominant-baseline="middle">SCANNING... 4 ENDPOINTS</text>
+</svg>

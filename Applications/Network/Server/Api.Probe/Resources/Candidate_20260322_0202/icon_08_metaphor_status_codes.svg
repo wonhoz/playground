@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- 배경: 다크 슬레이트 -->
+  <rect width="1024" height="1024" rx="180" fill="#0F1117"/>
+  <rect x="24" y="24" width="976" height="976" rx="160" fill="#1A1F2E"/>
+
+  <!-- 배경 그리드 (코드 에디터 분위기) -->
+  <line x1="80" y1="150" x2="80" y2="874" stroke="#1F2537" stroke-width="1"/>
+  <line x1="120" y1="150" x2="120" y2="874" stroke="#1F2537" stroke-width="1"/>
+
+  <!-- 줄 번호 -->
+  <text x="94" y="210" font-family="'Courier New', monospace" font-size="18" fill="#374151" text-anchor="end">1</text>
+  <text x="94" y="288" font-family="'Courier New', monospace" font-size="18" fill="#374151" text-anchor="end">2</text>
+  <text x="94" y="366" font-family="'Courier New', monospace" font-size="18" fill="#374151" text-anchor="end">3</text>
+  <text x="94" y="444" font-family="'Courier New', monospace" font-size="18" fill="#374151" text-anchor="end">4</text>
+  <text x="94" y="522" font-family="'Courier New', monospace" font-size="18" fill="#374151" text-anchor="end">5</text>
+  <text x="94" y="600" font-family="'Courier New', monospace" font-size="18" fill="#374151" text-anchor="end">6</text>
+  <text x="94" y="678" font-family="'Courier New', monospace" font-size="18" fill="#374151" text-anchor="end">7</text>
+  <text x="94" y="756" font-family="'Courier New', monospace" font-size="18" fill="#374151" text-anchor="end">8</text>
+
+  <!-- 코드 본문 -->
+  <!-- 200 OK 줄 (하이라이트) -->
+  <rect x="120" y="186" width="880" height="60" rx="4" fill="#1A3A20"/>
+  <text x="136" y="210" font-family="'Courier New', monospace" font-size="30" fill="#4ADE80" dominant-baseline="middle">
+    <tspan fill="#22C55E" font-weight="900">200</tspan>
+    <tspan fill="#86EFAC"> OK</tspan>
+    <tspan fill="#4B5563" font-size="22">  // Success</tspan>
+  </text>
+
+  <text x="136" y="288" font-family="'Courier New', monospace" font-size="28" fill="#67E8F9" dominant-baseline="middle">
+    <tspan fill="#38BDF8">201</tspan>
+    <tspan fill="#7DD3FC"> Created</tspan>
+    <tspan fill="#4B5563" font-size="22">  // Resource created</tspan>
+  </text>
+
+  <text x="136" y="366" font-family="'Courier New', monospace" font-size="28" fill="#FCD34D" dominant-baseline="middle">
+    <tspan fill="#F59E0B">301</tspan>
+    <tspan fill="#FDE68A"> Moved</tspan>
+    <tspan fill="#4B5563" font-size="22">  // Redirect</tspan>
+  </text>
+
+  <!-- 400 줄 -->
+  <rect x="120" y="420" width="880" height="60" rx="4" fill="#3A1A1A" opacity="0.6"/>
+  <text x="136" y="444" font-family="'Courier New', monospace" font-size="28" fill="#FCA5A5" dominant-baseline="middle">
+    <tspan fill="#EF4444" font-weight="900">400</tspan>
+    <tspan fill="#FCA5A5"> Bad Request</tspan>
+    <tspan fill="#4B5563" font-size="22">  // Invalid input</tspan>
+  </text>
+
+  <text x="136" y="522" font-family="'Courier New', monospace" font-size="28" fill="#FCA5A5" dominant-baseline="middle">
+    <tspan fill="#EF4444" font-weight="900">401</tspan>
+    <tspan fill="#FCA5A5"> Unauthorized</tspan>
+    <tspan fill="#4B5563" font-size="22">  // Auth required</tspan>
+  </text>
+
+  <!-- 404 줄 (하이라이트) -->
+  <rect x="120" y="576" width="880" height="60" rx="4" fill="#3A1A1A"/>
+  <text x="136" y="600" font-family="'Courier New', monospace" font-size="28" fill="#FCA5A5" dominant-baseline="middle">
+    <tspan fill="#DC2626" font-weight="900">404</tspan>
+    <tspan fill="#FCA5A5"> Not Found</tspan>
+    <tspan fill="#4B5563" font-size="22">  // Resource missing</tspan>
+  </text>
+
+  <!-- 500 줄 (강조) -->
+  <rect x="120" y="654" width="880" height="60" rx="4" fill="#3D0F0F"/>
+  <text x="136" y="678" font-family="'Courier New', monospace" font-size="28" fill="#F87171" dominant-baseline="middle">
+    <tspan fill="#B91C1C" font-weight="900">500</tspan>
+    <tspan fill="#F87171"> Internal Error</tspan>
+    <tspan fill="#4B5563" font-size="22">  // Server crash</tspan>
+  </text>
+
+  <text x="136" y="756" font-family="'Courier New', monospace" font-size="28" fill="#A78BFA" dominant-baseline="middle">
+    <tspan fill="#7C3AED">503</tspan>
+    <tspan fill="#A78BFA"> Unavailable</tspan>
+    <tspan fill="#4B5563" font-size="22">  // Service down</tspan>
+  </text>
+
+  <!-- 상단 타이틀 바 -->
+  <rect x="80" y="80" width="864" height="80" rx="10" fill="#111827"/>
+  <circle cx="120" cy="120" r="12" fill="#EF4444"/>
+  <circle cx="154" cy="120" r="12" fill="#F59E0B"/>
+  <circle cx="188" cy="120" r="12" fill="#22C55E"/>
+  <text x="512" y="120" font-family="'Segoe UI', Arial, sans-serif" font-size="28" fill="#6B7280" text-anchor="middle" dominant-baseline="middle">Api.Probe — HTTP Status Reference</text>
+
+  <!-- 하단 구분선 -->
+  <line x1="80" y1="830" x2="944" y2="830" stroke="#1F2937" stroke-width="2"/>
+  <text x="512" y="870" font-family="'Courier New', monospace" font-size="22" fill="#374151" text-anchor="middle" dominant-baseline="middle">REST API TESTING TOOL</text>
+</svg>

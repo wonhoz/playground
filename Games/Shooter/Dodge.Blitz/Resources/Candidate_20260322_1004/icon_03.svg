@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg3" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#1C1400"/>
+      <stop offset="100%" stop-color="#0A0800"/>
+    </radialGradient>
+    <linearGradient id="gold_grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFE566"/>
+      <stop offset="50%" stop-color="#FFAA00"/>
+      <stop offset="100%" stop-color="#FF6600"/>
+    </linearGradient>
+    <filter id="glow3">
+      <feGaussianBlur stdDeviation="5" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="text_glow">
+      <feGaussianBlur stdDeviation="10" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="blur3">
+      <feGaussianBlur stdDeviation="12"/>
+    </filter>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg3)"/>
+
+  <!-- 앰버 글로우 배경 -->
+  <ellipse cx="512" cy="512" rx="300" ry="300" fill="#FFAA00" opacity="0.06" filter="url(#blur3)"/>
+
+  <!-- 별들 -->
+  <circle cx="220" cy="220" r="2" fill="#FFEE88" opacity="0.6"/>
+  <circle cx="380" cy="200" r="1.5" fill="#FFFFFF" opacity="0.5"/>
+  <circle cx="640" cy="210" r="2" fill="#FFEE88" opacity="0.7"/>
+  <circle cx="800" cy="225" r="1.5" fill="#FFFFFF" opacity="0.5"/>
+  <circle cx="215" cy="800" r="2" fill="#FFEE88" opacity="0.6"/>
+  <circle cx="800" cy="790" r="1.5" fill="#FFFFFF" opacity="0.5"/>
+  <circle cx="210" cy="450" r="1.5" fill="#FFCC44" opacity="0.5"/>
+  <circle cx="820" cy="480" r="2" fill="#FFCC44" opacity="0.6"/>
+  <circle cx="480" cy="820" r="1.5" fill="#FFFFFF" opacity="0.5"/>
+  <circle cx="620" cy="810" r="2" fill="#FFEE88" opacity="0.6"/>
+
+  <!-- 메인 오브젝트 레이어 -->
+
+  <!-- 총알 프레임 (8방향 총알이 경계 형성) -->
+  <!-- 위쪽 총알 열 -->
+  <circle cx="370" cy="240" r="14" fill="#FFAA00" filter="url(#glow3)"/>
+  <circle cx="440" cy="220" r="11" fill="#FF8800" opacity="0.8"/>
+  <circle cx="512" cy="212" r="16" fill="#FFD700" filter="url(#glow3)"/>
+  <circle cx="584" cy="220" r="11" fill="#FF8800" opacity="0.8"/>
+  <circle cx="654" cy="240" r="14" fill="#FFAA00" filter="url(#glow3)"/>
+
+  <!-- 아래쪽 총알 열 -->
+  <circle cx="370" cy="784" r="14" fill="#FFAA00" filter="url(#glow3)"/>
+  <circle cx="440" cy="804" r="11" fill="#FF8800" opacity="0.8"/>
+  <circle cx="512" cy="812" r="16" fill="#FFD700" filter="url(#glow3)"/>
+  <circle cx="584" cy="804" r="11" fill="#FF8800" opacity="0.8"/>
+  <circle cx="654" cy="784" r="14" fill="#FFAA00" filter="url(#glow3)"/>
+
+  <!-- 왼쪽 총알 열 -->
+  <circle cx="220" cy="380" r="14" fill="#FFAA00" filter="url(#glow3)"/>
+  <circle cx="212" cy="456" r="11" fill="#FF8800" opacity="0.8"/>
+  <circle cx="208" cy="512" r="16" fill="#FFD700" filter="url(#glow3)"/>
+  <circle cx="212" cy="568" r="11" fill="#FF8800" opacity="0.8"/>
+  <circle cx="220" cy="644" r="14" fill="#FFAA00" filter="url(#glow3)"/>
+
+  <!-- 오른쪽 총알 열 -->
+  <circle cx="804" cy="380" r="14" fill="#FFAA00" filter="url(#glow3)"/>
+  <circle cx="812" cy="456" r="11" fill="#FF8800" opacity="0.8"/>
+  <circle cx="816" cy="512" r="16" fill="#FFD700" filter="url(#glow3)"/>
+  <circle cx="812" cy="568" r="11" fill="#FF8800" opacity="0.8"/>
+  <circle cx="804" cy="644" r="14" fill="#FFAA00" filter="url(#glow3)"/>
+
+  <!-- 모서리 총알들 -->
+  <circle cx="290" cy="290" r="13" fill="#FF6600" filter="url(#glow3)"/>
+  <circle cx="734" cy="290" r="13" fill="#FF6600" filter="url(#glow3)"/>
+  <circle cx="290" cy="734" r="13" fill="#FF6600" filter="url(#glow3)"/>
+  <circle cx="734" cy="734" r="13" fill="#FF6600" filter="url(#glow3)"/>
+
+  <!-- 디테일 레이어 -->
+
+  <!-- 생존 시간 숫자 텍스트 (중앙) -->
+  <!-- "SURVIVED" 라벨 -->
+  <text x="512" y="460" text-anchor="middle" font-family="'Courier New', monospace" font-size="44" font-weight="bold" fill="#FFEE88" opacity="0.55" letter-spacing="6">SURVIVED</text>
+
+  <!-- 큰 숫자 (생존 시간) -->
+  <text x="512" y="580" text-anchor="middle" font-family="'Courier New', monospace" font-size="148" font-weight="bold" fill="url(#gold_grad)" filter="url(#text_glow)" letter-spacing="-4">9.7s</text>
+
+  <!-- 하단 라벨 -->
+  <text x="512" y="632" text-anchor="middle" font-family="'Courier New', monospace" font-size="36" font-weight="bold" fill="#FF8800" opacity="0.65" letter-spacing="8">NEW BEST</text>
+
+  <!-- 중앙 비행기 (작게, 숫자 위에) -->
+  <polygon points="512,382 524,414 512,408 500,414" fill="#FFFFFF" opacity="0.95" filter="url(#glow3)"/>
+  <polygon points="500,414 490,424 512,408" fill="#FFDDAA" opacity="0.8"/>
+  <polygon points="524,414 534,424 512,408" fill="#FFDDAA" opacity="0.8"/>
+  <ellipse cx="512" cy="415" rx="4" ry="5" fill="#FFD700" opacity="0.8"/>
+</svg>

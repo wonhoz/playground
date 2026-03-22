@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Api.Probe — Icon Candidates (20260322_0202)</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #0F0F14;
+      color: #E0E0E0;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      min-height: 100vh;
+      padding: 32px 24px;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 28px;
+      font-weight: 900;
+      color: #FF6C37;
+      margin-bottom: 6px;
+      letter-spacing: 2px;
+    }
+
+    .subtitle {
+      text-align: center;
+      font-size: 14px;
+      color: #555;
+      margin-bottom: 36px;
+      font-family: 'Courier New', monospace;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 20px;
+      max-width: 1400px;
+      margin: 0 auto 48px;
+    }
+
+    .card {
+      background: #1A1A24;
+      border: 1px solid #2A2A38;
+      border-radius: 14px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+      cursor: pointer;
+    }
+
+    .card:hover {
+      transform: scale(1.06);
+      border-color: #FF6C37;
+      box-shadow: 0 8px 32px rgba(255, 108, 55, 0.22);
+    }
+
+    .icon-wrap {
+      width: 200px;
+      height: 200px;
+      border-radius: 10px;
+      overflow: hidden;
+      background: #111;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .icon-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .filename {
+      font-family: 'Courier New', monospace;
+      font-size: 11px;
+      color: #666;
+      text-align: center;
+      word-break: break-all;
+      line-height: 1.4;
+    }
+
+    .badge-row {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 2px 9px;
+      border-radius: 99px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .badge.literal  { background: #2A1A0A; color: #F59E0B; border: 1px solid #78350F; }
+    .badge.metaphor { background: #0A1A2A; color: #60A5FA; border: 1px solid #1E3A5F; }
+    .badge.hybrid   { background: #1A0A2A; color: #A78BFA; border: 1px solid #3B1F6B; }
+
+    .concept {
+      font-size: 12px;
+      color: #888;
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    .palette {
+      display: flex;
+      gap: 4px;
+      justify-content: center;
+    }
+
+    .swatch {
+      width: 18px;
+      height: 18px;
+      border-radius: 4px;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    /* ── 크기별 미리보기 섹션 ── */
+    .size-section {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .size-section h2 {
+      font-size: 18px;
+      font-weight: 700;
+      color: #888;
+      margin-bottom: 24px;
+      text-align: center;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .size-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .size-card {
+      background: #1A1A24;
+      border: 1px solid #2A2A38;
+      border-radius: 12px;
+      padding: 14px;
+      text-align: center;
+    }
+
+    .size-card .label {
+      font-size: 12px;
+      color: #555;
+      margin-bottom: 10px;
+      font-family: 'Courier New', monospace;
+    }
+
+    .size-row {
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .size-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .size-item span {
+      font-size: 10px;
+      color: #444;
+      font-family: 'Courier New', monospace;
+    }
+
+    .size-item img {
+      image-rendering: pixelated;
+    }
+
+    hr.divider {
+      border: none;
+      border-top: 1px solid #1F1F2A;
+      margin: 40px 0;
+      max-width: 1400px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Api.Probe — Icon Candidates</h1>
+<p class="subtitle">Candidate_20260322_0202 &nbsp;|&nbsp; REST API Testing Tool &nbsp;|&nbsp; 10 candidates</p>
+
+<div class="grid">
+
+  <!-- 01 -->
+  <div class="card">
+    <div class="icon-wrap">
+      <img src="icon_01_literal_get200.svg" alt="icon 01"/>
+    </div>
+    <div class="filename">icon_01_literal_get200.svg</div>
+    <div class="badge-row">
+      <span class="badge literal">Literal</span>
+    </div>
+    <div class="concept">GET 메서드 + URL 바 + 200 OK<br>JSON 응답 + 체크마크</div>
+    <div class="palette">
+      <div class="swatch" style="background:#FF6C37" title="Postman Orange"></div>
+      <div class="swatch" style="background:#1A1A1A" title="Dark BG"></div>
+      <div class="swatch" style="background:#14B8A6" title="Teal GET"></div>
+      <div class="swatch" style="background:#147820" title="200 Green"></div>
+      <div class="swatch" style="background:#22C55E" title="Check Green"></div>
+    </div>
+  </div>
+
+  <!-- 02 -->
+  <div class="card">
+    <div class="icon-wrap">
+      <img src="icon_02_literal_methods.svg" alt="icon 02"/>
+    </div>
+    <div class="filename">icon_02_literal_methods.svg</div>
+    <div class="badge-row">
+      <span class="badge literal">Literal</span>
+    </div>
+    <div class="concept">4개 HTTP 메서드 배지 + API<br>200/404/500 응답 코드 표시</div>
+    <div class="palette">
+      <div class="swatch" style="background:#0F172A" title="Deep Navy"></div>
+      <div class="swatch" style="background:#14B8A6" title="GET Teal"></div>
+      <div class="swatch" style="background:#22C55E" title="POST Green"></div>
+      <div class="swatch" style="background:#F59E0B" title="PUT Amber"></div>
+      <div class="swatch" style="background:#EF4444" title="DELETE Red"></div>
+    </div>
+  </div>
+
+  <!-- 03 -->
+  <div class="card">
+    <div class="icon-wrap">
+      <img src="icon_03_literal_postman_style.svg" alt="icon 03"/>
+    </div>
+    <div class="filename">icon_03_literal_postman_style.svg</div>
+    <div class="badge-row">
+      <span class="badge literal">Literal</span>
+    </div>
+    <div class="concept">Postman 스타일 UI 전체 화면<br>URL바 + JSON 응답 + 200 OK</div>
+    <div class="palette">
+      <div class="swatch" style="background:#064E3B" title="Deep Green"></div>
+      <div class="swatch" style="background:#059669" title="Emerald"></div>
+      <div class="swatch" style="background:#022C22" title="Dark BG"></div>
+      <div class="swatch" style="background:#6EE7B7" title="Mint Text"></div>
+      <div class="swatch" style="background:#FCD34D" title="JSON Yellow"></div>
+    </div>
+  </div>
+
+  <!-- 04 -->
+  <div class="card">
+    <div class="icon-wrap">
+      <img src="icon_04_metaphor_radar_probe.svg" alt="icon 04"/>
+    </div>
+    <div class="filename">icon_04_metaphor_radar_probe.svg</div>
+    <div class="badge-row">
+      <span class="badge metaphor">Metaphor</span>
+    </div>
+    <div class="concept">레이더/탐지 → API 엔드포인트 스캔<br>HTTP 코드 블립 표시</div>
+    <div class="palette">
+      <div class="swatch" style="background:#0C1A2E" title="Dark Navy"></div>
+      <div class="swatch" style="background:#00FF88" title="Radar Green"></div>
+      <div class="swatch" style="background:#06B6D4" title="Cyan"></div>
+      <div class="swatch" style="background:#F59E0B" title="Amber"></div>
+      <div class="swatch" style="background:#EF4444" title="Red"></div>
+    </div>
+  </div>
+
+  <!-- 05 -->
+  <div class="card">
+    <div class="icon-wrap">
+      <img src="icon_05_metaphor_flask_network.svg" alt="icon 05"/>
+    </div>
+    <div class="filename">icon_05_metaphor_flask_network.svg</div>
+    <div class="badge-row">
+      <span class="badge metaphor">Metaphor</span>
+    </div>
+    <div class="concept">실험 플라스크 = API 테스트 비커<br>GET → 200 OK 반응 결과</div>
+    <div class="palette">
+      <div class="swatch" style="background:#1A0A0A" title="Dark Red BG"></div>
+      <div class="swatch" style="background:#DC2626" title="Vivid Red"></div>
+      <div class="swatch" style="background:#EF4444" title="Red Flask"></div>
+      <div class="swatch" style="background:#34D399" title="Response Green"></div>
+      <div class="swatch" style="background:#FFFFFF" title="White 200"></div>
+    </div>
+  </div>
+
+  <!-- 06 -->
+  <div class="card">
+    <div class="icon-wrap">
+      <img src="icon_06_metaphor_request_flow.svg" alt="icon 06"/>
+    </div>
+    <div class="filename">icon_06_metaphor_request_flow.svg</div>
+    <div class="badge-row">
+      <span class="badge metaphor">Metaphor</span>
+    </div>
+    <div class="concept">클라이언트 → 서버 요청/응답 흐름<br>POST 201 CREATED</div>
+    <div class="palette">
+      <div class="swatch" style="background:#1E1030" title="Deep Purple"></div>
+      <div class="swatch" style="background:#A78BFA" title="Purple"></div>
+      <div class="swatch" style="background:#7C3AED" title="Violet"></div>
+      <div class="swatch" style="background:#22C55E" title="Response Green"></div>
+      <div class="swatch" style="background:#1E4D80" title="Server Blue"></div>
+    </div>
+  </div>
+
+  <!-- 07 -->
+  <div class="card">
+    <div class="icon-wrap">
+      <img src="icon_07_hybrid_json_check.svg" alt="icon 07"/>
+    </div>
+    <div class="filename">icon_07_hybrid_json_check.svg</div>
+    <div class="badge-row">
+      <span class="badge hybrid">Hybrid</span>
+    </div>
+    <div class="concept">JSON { } 배경 + 거대 체크마크<br>200 OK 배지 / 골든 테마</div>
+    <div class="palette">
+      <div class="swatch" style="background:#1C1206" title="Dark Gold BG"></div>
+      <div class="swatch" style="background:#F59E0B" title="Golden"></div>
+      <div class="swatch" style="background:#FCD34D" title="Amber"></div>
+      <div class="swatch" style="background:#4ADE80" title="Check Green"></div>
+      <div class="swatch" style="background:#EF4444" title="404 Red"></div>
+    </div>
+  </div>
+
+  <!-- 08 -->
+  <div class="card">
+    <div class="icon-wrap">
+      <img src="icon_08_metaphor_status_codes.svg" alt="icon 08"/>
+    </div>
+    <div class="filename">icon_08_metaphor_status_codes.svg</div>
+    <div class="badge-row">
+      <span class="badge metaphor">Metaphor</span>
+    </div>
+    <div class="concept">코드 에디터 스타일<br>HTTP 상태 코드 전체 목록 표시</div>
+    <div class="palette">
+      <div class="swatch" style="background:#0F1117" title="Dark Slate"></div>
+      <div class="swatch" style="background:#4ADE80" title="200 Green"></div>
+      <div class="swatch" style="background:#38BDF8" title="201 Blue"></div>
+      <div class="swatch" style="background:#EF4444" title="404 Red"></div>
+      <div class="swatch" style="background:#B91C1C" title="500 Crimson"></div>
+    </div>
+  </div>
+
+  <!-- 09 -->
+  <div class="card">
+    <div class="icon-wrap">
+      <img src="icon_09_hybrid_emerald_probe.svg" alt="icon 09"/>
+    </div>
+    <div class="filename">icon_09_hybrid_emerald_probe.svg</div>
+    <div class="badge-row">
+      <span class="badge hybrid">Hybrid</span>
+    </div>
+    <div class="concept">탐침 도구 실루엣 → 서버 접촉<br>에메랄드 + 메서드/상태 패널</div>
+    <div class="palette">
+      <div class="swatch" style="background:#022C22" title="Deep Emerald"></div>
+      <div class="swatch" style="background:#10B981" title="Emerald"></div>
+      <div class="swatch" style="background:#34D399" title="Light Emerald"></div>
+      <div class="swatch" style="background:#FCD34D" title="Elapsed Yellow"></div>
+      <div class="swatch" style="background:#EF4444" title="500 Red"></div>
+    </div>
+  </div>
+
+  <!-- 10 -->
+  <div class="card">
+    <div class="icon-wrap">
+      <img src="icon_10_hybrid_mint_geometric.svg" alt="icon 10"/>
+    </div>
+    <div class="filename">icon_10_hybrid_mint_geometric.svg</div>
+    <div class="badge-row">
+      <span class="badge hybrid">Hybrid</span>
+    </div>
+    <div class="concept">밝은 민트 UI — 실제 앱 스크린샷 스타일<br>JSON 응답 + 메서드 컬러 닷</div>
+    <div class="palette">
+      <div class="swatch" style="background:#ECFDF5" title="Mint White"></div>
+      <div class="swatch" style="background:#10B981" title="Emerald"></div>
+      <div class="swatch" style="background:#059669" title="Dark Green"></div>
+      <div class="swatch" style="background:#DCFCE7" title="Light Mint"></div>
+      <div class="swatch" style="background:#15803D" title="Forest Green"></div>
+    </div>
+  </div>
+
+</div>
+
+<hr class="divider"/>
+
+<!-- ── 크기별 미리보기 ── -->
+<div class="size-section">
+  <h2>크기별 미리보기</h2>
+  <div class="size-grid" id="sizeGrid">
+    <!-- JS로 생성 -->
+  </div>
+</div>
+
+<script>
+  const icons = [
+    { file: "icon_01_literal_get200.svg",        label: "01 GET+200" },
+    { file: "icon_02_literal_methods.svg",        label: "02 Methods" },
+    { file: "icon_03_literal_postman_style.svg",  label: "03 Postman" },
+    { file: "icon_04_metaphor_radar_probe.svg",   label: "04 Radar" },
+    { file: "icon_05_metaphor_flask_network.svg", label: "05 Flask" },
+    { file: "icon_06_metaphor_request_flow.svg",  label: "06 Flow" },
+    { file: "icon_07_hybrid_json_check.svg",      label: "07 JSON✓" },
+    { file: "icon_08_metaphor_status_codes.svg",  label: "08 Codes" },
+    { file: "icon_09_hybrid_emerald_probe.svg",   label: "09 Probe" },
+    { file: "icon_10_hybrid_mint_geometric.svg",  label: "10 Mint" },
+  ];
+
+  const sizes = [256, 64, 32, 16];
+  const grid = document.getElementById("sizeGrid");
+
+  icons.forEach(icon => {
+    const card = document.createElement("div");
+    card.className = "size-card";
+    card.innerHTML = `<div class="label">${icon.label}</div>`;
+
+    const row = document.createElement("div");
+    row.className = "size-row";
+
+    sizes.forEach(sz => {
+      const item = document.createElement("div");
+      item.className = "size-item";
+
+      const img = document.createElement("img");
+      img.src = icon.file;
+      img.width = sz;
+      img.height = sz;
+      img.style.borderRadius = Math.round(sz * 0.16) + "px";
+
+      const lbl = document.createElement("span");
+      lbl.textContent = sz + "px";
+
+      item.appendChild(img);
+      item.appendChild(lbl);
+      row.appendChild(item);
+    });
+
+    card.appendChild(row);
+    grid.appendChild(card);
+  });
+</script>
+
+</body>
+</html>

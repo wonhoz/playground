@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Photo.Video.Organizer — Icon Candidates 2026-03-22</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: #F7F4EF;
+      color: #1A1A1A;
+      padding: 40px 32px;
+      min-height: 100vh;
+    }
+
+    .page-header {
+      margin-bottom: 40px;
+      border-bottom: 2px solid #DDD7CE;
+      padding-bottom: 24px;
+    }
+    .page-header h1 {
+      font-size: 26px;
+      font-weight: 700;
+      color: #1A1A1A;
+      margin-bottom: 6px;
+      letter-spacing: -0.5px;
+    }
+    .page-header .meta {
+      font-size: 13px;
+      color: #888;
+      line-height: 1.6;
+    }
+    .page-header .domain-desc {
+      margin-top: 10px;
+      font-size: 14px;
+      color: #444;
+      background: #EEE8DE;
+      border-left: 3px solid #C0392B;
+      padding: 8px 14px;
+      border-radius: 0 6px 6px 0;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 24px;
+      margin-bottom: 60px;
+    }
+
+    .card {
+      background: #FFFFFF;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04);
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+      cursor: default;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 28px rgba(0,0,0,0.14), 0 2px 6px rgba(0,0,0,0.06);
+    }
+
+    .icon-wrap {
+      width: 100%;
+      aspect-ratio: 1;
+      background: #2A2A2A;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+    .icon-wrap img {
+      width: 160px;
+      height: 160px;
+      object-fit: contain;
+    }
+
+    /* 카드별 배경색 변주 */
+    .card:nth-child(1) .icon-wrap { background: #0D1B2A; }
+    .card:nth-child(2) .icon-wrap { background: #EDE8F8; }
+    .card:nth-child(3) .icon-wrap { background: #050508; }
+    .card:nth-child(4) .icon-wrap { background: #0A0F0C; }
+    .card:nth-child(5) .icon-wrap { background: #C94520; }
+    .card:nth-child(6) .icon-wrap { background: #F0EBE0; }
+    .card:nth-child(7) .icon-wrap { background: #E4F7EC; }
+    .card:nth-child(8) .icon-wrap { background: #120220; }
+    .card:nth-child(9) .icon-wrap { background: #F5F0E8; }
+    .card:nth-child(10) .icon-wrap { background: #D6EEF9; }
+
+    .card-body {
+      padding: 14px 14px 16px;
+    }
+
+    .card-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #1A1A1A;
+      margin-bottom: 6px;
+      font-family: 'Consolas', monospace;
+    }
+
+    .badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-bottom: 8px;
+    }
+    .badge {
+      font-size: 10px;
+      font-weight: 600;
+      padding: 2px 7px;
+      border-radius: 10px;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+    }
+    .badge-literal   { background: #FEF3C7; color: #92400E; }
+    .badge-metaphor  { background: #EDE9FE; color: #5B21B6; }
+    .badge-hybrid    { background: #D1FAE5; color: #065F46; }
+    .badge-pattern   { background: #F3F4F6; color: #374151; }
+
+    .concept {
+      font-size: 12px;
+      color: #555;
+      line-height: 1.5;
+      margin-bottom: 10px;
+    }
+
+    .palette {
+      display: flex;
+      gap: 5px;
+      flex-wrap: wrap;
+    }
+    .swatch {
+      width: 20px;
+      height: 20px;
+      border-radius: 5px;
+      border: 1px solid rgba(0,0,0,0.1);
+      flex-shrink: 0;
+      title: attr(title);
+    }
+
+    /* ── 크기별 미리보기 ── */
+    .size-preview-section {
+      margin-top: 0;
+    }
+    .size-preview-section h2 {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1A1A1A;
+      margin-bottom: 4px;
+    }
+    .size-preview-section .sub {
+      font-size: 13px;
+      color: #888;
+      margin-bottom: 24px;
+    }
+
+    .size-tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    .size-tab {
+      font-size: 12px;
+      padding: 5px 12px;
+      border: 1.5px solid #DDD;
+      border-radius: 20px;
+      cursor: pointer;
+      background: white;
+      color: #555;
+      transition: all 0.15s;
+      user-select: none;
+    }
+    .size-tab.active, .size-tab:hover {
+      background: #1A1A1A;
+      color: white;
+      border-color: #1A1A1A;
+    }
+
+    .size-grid {
+      display: grid;
+      grid-template-columns: repeat(10, 1fr);
+      gap: 16px;
+    }
+    .size-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+    .size-card .size-wrap {
+      background: #2A2A2A;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6px;
+    }
+    .size-card .size-label {
+      font-size: 11px;
+      color: #888;
+      font-family: monospace;
+    }
+
+    /* 크기별 wrap 크기 */
+    .size-wrap-256 { width: 268px; height: 268px; }
+    .size-wrap-64  { width:  76px; height:  76px; }
+    .size-wrap-32  { width:  44px; height:  44px; }
+    .size-wrap-16  { width:  28px; height:  28px; }
+
+    .size-section-block {
+      margin-bottom: 36px;
+    }
+    .size-section-block h3 {
+      font-size: 14px;
+      font-weight: 600;
+      color: #555;
+      margin-bottom: 12px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid #EEE;
+    }
+
+    /* 배경 토글 버튼 */
+    .bg-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+    .bg-btn {
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 14px;
+      border: 1.5px solid #DDD;
+      cursor: pointer;
+      background: white;
+      transition: all 0.12s;
+    }
+    .bg-btn:hover { border-color: #888; }
+
+    footer {
+      margin-top: 48px;
+      padding-top: 20px;
+      border-top: 1px solid #DDD7CE;
+      font-size: 12px;
+      color: #AAA;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+<div class="page-header">
+  <h1>Photo.Video.Organizer — Icon Candidates</h1>
+  <div class="meta">
+    Generated: 2026-03-22 &nbsp;·&nbsp; Candidate Set: 0208 &nbsp;·&nbsp; Count: 10
+  </div>
+  <div class="domain-desc">
+    <strong>도메인:</strong> 사진/동영상 파일의 EXIF(DateTimeOriginal) · QuickTime 메타데이터를 읽어
+    파일명을 촬영 날짜 기반(yyyyMMdd_HHmmss)으로 일괄 변경하는 WPF 앱.
+    지원 포맷: .jpg/.heic/.cr2/.nef/.arw/.dng + .mp4/.mov/.m4v 등
+  </div>
+</div>
+
+<!-- 메인 그리드 -->
+<div class="grid">
+
+  <!-- icon_01 -->
+  <div class="card">
+    <div class="icon-wrap">
+      <img src="icon_01.svg" alt="icon_01" width="160" height="160">
+    </div>
+    <div class="card-body">
+      <div class="card-title">icon_01.svg</div>
+      <div class="badges">
+        <span class="badge badge-literal">Literal</span>
+        <span class="badge badge-pattern">중앙 심볼</span>
+      </div>
+      <div class="concept">EXIF 태그 말풍선 + 변환 화살표 + 날짜 파일명 카드. 좌(원본)→우(결과) 흐름.</div>
+      <div class="palette">
+        <div class="swatch" style="background:#0D1B2A" title="#0D1B2A"></div>
+        <div class="swatch" style="background:#F4C542" title="#F4C542"></div>
+        <div class="swatch" style="background:#E85D04" title="#E85D04"></div>
+        <div class="swatch" style="background:#3DB05A" title="#3DB05A"></div>
+        <div class="swatch" style="background:#2E6CA6" title="#2E6CA6"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- icon_02 -->
+  <div class="card">
+    <div class="icon-wrap">
+      <img src="icon_02.svg" alt="icon_02" width="160" height="160">
+    </div>
+    <div class="card-body">
+      <div class="card-title">icon_02.svg</div>
+      <div class="badges">
+        <span class="badge badge-literal">Literal</span>
+        <span class="badge badge-pattern">레이어드</span>
+      </div>
+      <div class="concept">쌓인 미디어 파일 스택 + EXIF 태그 → 날짜별 폴더/파일명 정렬 출력.</div>
+      <div class="palette">
+        <div class="swatch" style="background:#F0EAFB" title="#F0EAFB"></div>
+        <div class="swatch" style="background:#7E57C2" title="#7E57C2"></div>
+        <div class="swatch" style="background:#5E35B1" title="#5E35B1"></div>
+        <div class="swatch" style="background:#FF6D00" title="#FF6D00"></div>
+        <div class="swatch" style="background:#FFB300" title="#FFB300"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- icon_03 -->
+  <div class="card">
+    <div class="icon-wrap">
+      <img src="icon_03.svg" alt="icon_03" width="160" height="160">
+    </div>
+    <div class="card-body">
+      <div class="card-title">icon_03.svg</div>
+      <div class="badges">
+        <span class="badge badge-metaphor">Metaphor</span>
+        <span class="badge badge-pattern">대각선·동적</span>
+      </div>
+      <div class="concept">카메라 렌즈에서 EXIF 필드(날짜/제조사/GPS)가 광선처럼 방출돼 파일명으로 수렴.</div>
+      <div class="palette">
+        <div class="swatch" style="background:#0A0A0F" title="#0A0A0F"></div>
+        <div class="swatch" style="background:#00E5FF" title="#00E5FF"></div>
+        <div class="swatch" style="background:#FF1E78" title="#FF1E78"></div>
+        <div class="swatch" style="background:#FFD600" title="#FFD600"></div>
+        <div class="swatch" style="background:#39FF14" title="#39FF14"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- icon_04 -->
+  <div class="card">
+    <div class="icon-wrap">
+      <img src="icon_04.svg" alt="icon_04" width="160" height="160">
+    </div>
+    <div class="card-body">
+      <div class="card-title">icon_04.svg</div>
+      <div class="badges">
+        <span class="badge badge-metaphor">Metaphor</span>
+        <span class="badge badge-pattern">기하학 추상</span>
+      </div>
+      <div class="concept">반도체 칩 메타포 — EXIF 데이터를 입력 받아 날짜 파일명을 출력하는 처리 회로.</div>
+      <div class="palette">
+        <div class="swatch" style="background:#111A14" title="#111A14"></div>
+        <div class="swatch" style="background:#2ECC71" title="#2ECC71"></div>
+        <div class="swatch" style="background:#27AE60" title="#27AE60"></div>
+        <div class="swatch" style="background:#F59E0B" title="#F59E0B"></div>
+        <div class="swatch" style="background:#FCD34D" title="#FCD34D"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- icon_05 -->
+  <div class="card">
+    <div class="icon-wrap">
+      <img src="icon_05.svg" alt="icon_05" width="160" height="160">
+    </div>
+    <div class="card-body">
+      <div class="card-title">icon_05.svg</div>
+      <div class="badges">
+        <span class="badge badge-hybrid">Hybrid</span>
+        <span class="badge badge-pattern">실루엣·캐릭터</span>
+      </div>
+      <div class="concept">카메라 실루엣 안에 EXIF 코드 텍스트 채움 + 하단 원본→날짜명 변환 예시.</div>
+      <div class="palette">
+        <div class="swatch" style="background:#FF6B35" title="#FF6B35"></div>
+        <div class="swatch" style="background:#FFFFFF" title="#FFFFFF"></div>
+        <div class="swatch" style="background:#C0392B" title="#C0392B"></div>
+        <div class="swatch" style="background:#4A1500" title="#4A1500"></div>
+        <div class="swatch" style="background:#FF9966" title="#FF9966"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- icon_06 -->
+  <div class="card">
+    <div class="icon-wrap">
+      <img src="icon_06.svg" alt="icon_06" width="160" height="160">
+    </div>
+    <div class="card-body">
+      <div class="card-title">icon_06.svg</div>
+      <div class="badges">
+        <span class="badge badge-metaphor">Metaphor</span>
+        <span class="badge badge-pattern">공간·장면</span>
+      </div>
+      <div class="concept">클래식 인화 사진 위에 날짜 스탬프(도장) 찍힘 + 우측 리네임 로그 패널.</div>
+      <div class="palette">
+        <div class="swatch" style="background:#F5F0E8" title="#F5F0E8"></div>
+        <div class="swatch" style="background:#FFFFFF" title="#FFFFFF"></div>
+        <div class="swatch" style="background:#C0392B" title="#C0392B"></div>
+        <div class="swatch" style="background:#1A2A6C" title="#1A2A6C"></div>
+        <div class="swatch" style="background:#4FC3F7" title="#4FC3F7"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- icon_07 -->
+  <div class="card">
+    <div class="icon-wrap">
+      <img src="icon_07.svg" alt="icon_07" width="160" height="160">
+    </div>
+    <div class="card-body">
+      <div class="card-title">icon_07.svg</div>
+      <div class="badges">
+        <span class="badge badge-literal">Literal</span>
+        <span class="badge badge-pattern">레이어드</span>
+      </div>
+      <div class="concept">컨베이어벨트 위 파일들이 EXIF 기어를 통과해 날짜 파일명으로 변환. 진행률 표시.</div>
+      <div class="palette">
+        <div class="swatch" style="background:#E8FAF2" title="#E8FAF2"></div>
+        <div class="swatch" style="background:#0D5A46" title="#0D5A46"></div>
+        <div class="swatch" style="background:#1DB887" title="#1DB887"></div>
+        <div class="swatch" style="background:#7FFFD4" title="#7FFFD4"></div>
+        <div class="swatch" style="background:#F39C12" title="#F39C12"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- icon_08 -->
+  <div class="card">
+    <div class="icon-wrap">
+      <img src="icon_08.svg" alt="icon_08" width="160" height="160">
+    </div>
+    <div class="card-body">
+      <div class="card-title">icon_08.svg</div>
+      <div class="badges">
+        <span class="badge badge-hybrid">Hybrid</span>
+        <span class="badge badge-pattern">중앙 심볼</span>
+      </div>
+      <div class="concept">달력(특정 날짜 강조) + 사진 미리보기 + 번개 처리 → 파일명 리스트. 골드 연결선.</div>
+      <div class="palette">
+        <div class="swatch" style="background:#1A0533" title="#1A0533"></div>
+        <div class="swatch" style="background:#7C3AED" title="#7C3AED"></div>
+        <div class="swatch" style="background:#F59E0B" title="#F59E0B"></div>
+        <div class="swatch" style="background:#4ADE80" title="#4ADE80"></div>
+        <div class="swatch" style="background:#C4B5FD" title="#C4B5FD"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- icon_09 -->
+  <div class="card">
+    <div class="icon-wrap">
+      <img src="icon_09.svg" alt="icon_09" width="160" height="160">
+    </div>
+    <div class="card-body">
+      <div class="card-title">icon_09.svg</div>
+      <div class="badges">
+        <span class="badge badge-metaphor">Metaphor</span>
+        <span class="badge badge-pattern">기하학 추상</span>
+      </div>
+      <div class="concept">가격표(태그) 형태 안에 EXIF 날짜 → 화살표로 연결돼 파일에 날짜명이 부착되는 메타포.</div>
+      <div class="palette">
+        <div class="swatch" style="background:#FBF5EC" title="#FBF5EC"></div>
+        <div class="swatch" style="background:#8B1A1A" title="#8B1A1A"></div>
+        <div class="swatch" style="background:#C0392B" title="#C0392B"></div>
+        <div class="swatch" style="background:#00897B" title="#00897B"></div>
+        <div class="swatch" style="background:#FFD580" title="#FFD580"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- icon_10 -->
+  <div class="card">
+    <div class="icon-wrap">
+      <img src="icon_10.svg" alt="icon_10" width="160" height="160">
+    </div>
+    <div class="card-body">
+      <div class="card-title">icon_10.svg</div>
+      <div class="badges">
+        <span class="badge badge-hybrid">Hybrid</span>
+        <span class="badge badge-pattern">대각선·동적</span>
+      </div>
+      <div class="concept">파일들이 대각선으로 날아가며 번개 EXIF 처리 후 체크된 날짜 파일명으로 변환. 속도감.</div>
+      <div class="palette">
+        <div class="swatch" style="background:#E3F2FD" title="#E3F2FD"></div>
+        <div class="swatch" style="background:#1565C0" title="#1565C0"></div>
+        <div class="swatch" style="background:#66BB6A" title="#66BB6A"></div>
+        <div class="swatch" style="background:#FFD600" title="#FFD600"></div>
+        <div class="swatch" style="background:#90CAF9" title="#90CAF9"></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- 크기별 미리보기 -->
+<div class="size-preview-section">
+  <h2>크기별 미리보기</h2>
+  <p class="sub">각 아이콘이 실제 사용 크기(256 / 64 / 32 / 16px)에서 어떻게 보이는지 확인.</p>
+
+  <div id="sizeSections">
+
+    <!-- 256px -->
+    <div class="size-section-block">
+      <h3>256 × 256 px</h3>
+      <div style="display:flex; gap:20px; flex-wrap:wrap;">
+        <script>
+          // 스크립트로 동적 생성
+        </script>
+      </div>
+      <div style="display:flex; gap:20px; flex-wrap:wrap;" id="row256"></div>
+    </div>
+
+    <!-- 64px -->
+    <div class="size-section-block">
+      <h3>64 × 64 px</h3>
+      <div style="display:flex; gap:16px; flex-wrap:wrap;" id="row64"></div>
+    </div>
+
+    <!-- 32px -->
+    <div class="size-section-block">
+      <h3>32 × 32 px</h3>
+      <div style="display:flex; gap:12px; flex-wrap:wrap;" id="row32"></div>
+    </div>
+
+    <!-- 16px -->
+    <div class="size-section-block">
+      <h3>16 × 16 px</h3>
+      <div style="display:flex; gap:10px; flex-wrap:wrap;" id="row16"></div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  Photo.Video.Organizer — Icon Candidate Set 20260322_0208 &nbsp;·&nbsp;
+  Domain: EXIF/QuickTime metadata → batch rename by capture date &nbsp;·&nbsp;
+  viewBox 1024×1024 · fill-based SVG
+</footer>
+
+<script>
+  const icons = [
+    { file: 'icon_01.svg', bg: '#0D1B2A' },
+    { file: 'icon_02.svg', bg: '#EDE8F8' },
+    { file: 'icon_03.svg', bg: '#050508' },
+    { file: 'icon_04.svg', bg: '#0A0F0C' },
+    { file: 'icon_05.svg', bg: '#C94520' },
+    { file: 'icon_06.svg', bg: '#F0EBE0' },
+    { file: 'icon_07.svg', bg: '#E4F7EC' },
+    { file: 'icon_08.svg', bg: '#120220' },
+    { file: 'icon_09.svg', bg: '#F5F0E8' },
+    { file: 'icon_10.svg', bg: '#D6EEF9' },
+  ];
+
+  const sizes = [
+    { id: 'row256', px: 256, pad: 12 },
+    { id: 'row64',  px: 64,  pad: 6  },
+    { id: 'row32',  px: 32,  pad: 4  },
+    { id: 'row16',  px: 16,  pad: 3  },
+  ];
+
+  sizes.forEach(({ id, px, pad }) => {
+    const row = document.getElementById(id);
+    icons.forEach(({ file, bg }) => {
+      const wrap = document.createElement('div');
+      wrap.style.cssText = `
+        background:${bg};
+        border-radius:${Math.round(px * 0.14)}px;
+        width:${px + pad*2}px; height:${px + pad*2}px;
+        display:flex; align-items:center; justify-content:center;
+        flex-shrink:0;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.18);
+      `;
+      const img = document.createElement('img');
+      img.src = file;
+      img.width = px;
+      img.height = px;
+      img.style.display = 'block';
+      img.alt = file;
+      wrap.appendChild(img);
+      row.appendChild(wrap);
+    });
+  });
+</script>
+
+</body>
+</html>

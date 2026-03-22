@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_06: Hybrid / 실루엣·캐릭터 / "BLITZ" 텍스트 + 번개 + 총알 / 노랑-전기 -->
+  <defs>
+    <linearGradient id="bg06" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0A0A00"/>
+      <stop offset="100%" stop-color="#1A1400"/>
+    </linearGradient>
+    <linearGradient id="lightning06" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="40%" stop-color="#FFFF00"/>
+      <stop offset="100%" stop-color="#FFD700"/>
+    </linearGradient>
+    <filter id="glow06">
+      <feGaussianBlur stdDeviation="8"/>
+    </filter>
+    <filter id="glow06sm">
+      <feGaussianBlur stdDeviation="3"/>
+    </filter>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="160" fill="url(#bg06)"/>
+
+  <!-- 배경 전기 효과 -->
+  <rect width="1024" height="1024" rx="160" fill="#FFFF00" opacity="0.03"/>
+
+  <!-- 별들 -->
+  <circle cx="220" cy="220" r="2" fill="#FFFF88" opacity="0.5"/>
+  <circle cx="800" cy="180" r="3" fill="#FFFF88" opacity="0.4"/>
+  <circle cx="160" cy="500" r="2" fill="#FFFF88" opacity="0.5"/>
+  <circle cx="880" cy="750" r="2" fill="#FFFF88" opacity="0.4"/>
+  <circle cx="320" cy="840" r="3" fill="#FFFF88" opacity="0.5"/>
+
+  <!-- 번개 볼트 (메인 비주얼) — 큰 번개 -->
+  <path d="M590 200 L460 500 L540 500 L400 820 L560 520 L480 520 Z" fill="url(#lightning06)" filter="url(#glow06)" opacity="0.3"/>
+  <path d="M590 200 L460 500 L540 500 L400 820 L560 520 L480 520 Z" fill="url(#lightning06)"/>
+
+  <!-- 번개 주변 전기 스파크 -->
+  <path d="M530 280 L570 320 L545 320 L580 380 L550 340 L572 340 Z" fill="#FFFFFF" opacity="0.7"/>
+  <path d="M480 420 L440 380 L460 380 L430 330 L455 365 L440 365 Z" fill="#FFFFFF" opacity="0.6"/>
+
+  <!-- BLITZ 텍스트 (번개 뒤에 배치) -->
+  <text x="512" y="540" font-family="Arial Black, Arial" font-weight="900" font-size="130" fill="#FFD700" text-anchor="middle" opacity="0.15" letter-spacing="-4">BLITZ</text>
+  <text x="514" y="536" font-family="Arial Black, Arial" font-weight="900" font-size="130" fill="none" stroke="#FFD700" stroke-width="2" text-anchor="middle" opacity="0.3" letter-spacing="-4">BLITZ</text>
+
+  <!-- 총알들 — 번개 주변으로 날아오는 -->
+  <!-- 위에서 아래로 -->
+  <ellipse cx="340" cy="250" rx="10" ry="22" fill="#FF8800" opacity="0.9"/>
+  <ellipse cx="280" cy="350" rx="10" ry="22" fill="#FFAA00" opacity="0.85"/>
+  <ellipse cx="230" cy="460" rx="10" ry="22" fill="#FF8800" opacity="0.9"/>
+  <ellipse cx="200" cy="570" rx="10" ry="22" fill="#FFAA00" opacity="0.85"/>
+  <!-- 오른쪽에서 -->
+  <ellipse cx="750" cy="320" rx="22" ry="10" fill="#FF8800" opacity="0.9"/>
+  <ellipse cx="800" cy="440" rx="22" ry="10" fill="#FFAA00" opacity="0.85"/>
+  <ellipse cx="820" cy="560" rx="22" ry="10" fill="#FF8800" opacity="0.9"/>
+  <ellipse cx="790" cy="680" rx="22" ry="10" fill="#FFAA00" opacity="0.85"/>
+  <!-- 위 대각 -->
+  <ellipse cx="700" cy="220" rx="14" ry="22" transform="rotate(-30 700 220)" fill="#FFCC00" opacity="0.85"/>
+  <ellipse cx="770" cy="270" rx="14" ry="22" transform="rotate(-30 770 270)" fill="#FF8800" opacity="0.9"/>
+
+  <!-- 충격파 원형 (번개 파워) -->
+  <circle cx="512" cy="512" r="200" fill="none" stroke="#FFD700" stroke-width="3" opacity="0.2"/>
+  <circle cx="512" cy="512" r="260" fill="none" stroke="#FFD700" stroke-width="2" opacity="0.1"/>
+  <circle cx="512" cy="512" r="320" fill="none" stroke="#FFD700" stroke-width="1" opacity="0.08"/>
+
+  <!-- DODGE 하단 -->
+  <text x="512" y="880" font-family="Arial Black, Arial" font-weight="900" font-size="72" fill="#FFD700" text-anchor="middle" opacity="0.8" letter-spacing="6">DODGE</text>
+</svg>

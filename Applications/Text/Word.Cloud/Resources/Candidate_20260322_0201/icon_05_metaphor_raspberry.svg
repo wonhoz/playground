@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- 라즈베리 — 단어들이 중심으로 모여 구름을 이루는 모습, 대각선·동적 패턴 -->
+  <defs>
+    <radialGradient id="bg05" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#5A0828"/>
+      <stop offset="100%" stop-color="#2D0212"/>
+    </radialGradient>
+    <radialGradient id="cloudCore" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FF6B8A"/>
+      <stop offset="60%" stop-color="#E91E63"/>
+      <stop offset="100%" stop-color="#C2185B" stop-opacity="0.7"/>
+    </radialGradient>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="120" fill="url(#bg05)"/>
+
+  <!-- 중심 구름 (단어들이 모여서 형성) -->
+  <g fill="url(#cloudCore)" opacity="0.85">
+    <circle cx="512" cy="480" r="180"/>
+    <circle cx="360" cy="510" r="120"/>
+    <circle cx="665" cy="500" r="130"/>
+    <circle cx="450" cy="420" r="100"/>
+    <circle cx="580" cy="415" r="110"/>
+  </g>
+
+  <!-- 구름 중앙 핵심 단어 -->
+  <text x="512" y="470" font-family="Arial Black, sans-serif" font-size="100" font-weight="900" fill="#2D0212" text-anchor="middle" opacity="0.9">WORD</text>
+
+  <!-- 구름 안 단어들 -->
+  <text x="385" y="520" font-family="Arial, sans-serif" font-size="38" font-weight="700" fill="#3A0215" text-anchor="middle">cloud</text>
+  <text x="640" y="513" font-family="Arial, sans-serif" font-size="34" font-weight="700" fill="#3A0215" text-anchor="middle">text</text>
+
+  <!-- 외부에서 날아오는 단어들 (동적 화살표 포함) -->
+  <!-- 왼쪽 위 -->
+  <text x="165" y="250" font-family="Arial, sans-serif" font-size="36" font-weight="700" fill="#FF6B8A" text-anchor="middle" transform="rotate(-25 165 250)">hello</text>
+  <path d="M 200 270 Q 280 340 340 390" stroke="#FF6B8A" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.7"/>
+  <polygon points="338,388 355,375 352,395" fill="#FF6B8A" opacity="0.7"/>
+
+  <!-- 오른쪽 위 -->
+  <text x="860" y="245" font-family="Arial, sans-serif" font-size="32" font-weight="700" fill="#FF8FAA" text-anchor="middle" transform="rotate(20 860 245)">love</text>
+  <path d="M 825 268 Q 745 335 690 390" stroke="#FF8FAA" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.7"/>
+  <polygon points="692,388 675,375 678,395" fill="#FF8FAA" opacity="0.7"/>
+
+  <!-- 왼쪽 아래 -->
+  <text x="160" y="760" font-family="Arial, sans-serif" font-size="28" font-weight="600" fill="#F06292" text-anchor="middle" transform="rotate(30 160 760)">world</text>
+  <path d="M 205 735 Q 290 660 345 595" stroke="#F06292" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.7"/>
+  <polygon points="347,593 330,580 327,600" fill="#F06292" opacity="0.7"/>
+
+  <!-- 오른쪽 아래 -->
+  <text x="865" y="755" font-family="Arial, sans-serif" font-size="28" font-weight="600" fill="#EC407A" text-anchor="middle" transform="rotate(-28 865 755)">sky</text>
+  <path d="M 820 728 Q 735 658 682 596" stroke="#EC407A" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.7"/>
+  <polygon points="684,594 667,581 664,601" fill="#EC407A" opacity="0.7"/>
+
+  <!-- 위쪽 중앙 -->
+  <text x="512" y="160" font-family="Arial, sans-serif" font-size="30" font-weight="700" fill="#FF80A0" text-anchor="middle">data</text>
+  <path d="M 512 185 L 512 395" stroke="#FF80A0" stroke-width="4" stroke-linecap="round" opacity="0.6"/>
+  <polygon points="498,393 512,412 526,393" fill="#FF80A0" opacity="0.6"/>
+
+  <!-- 아래쪽 중앙 -->
+  <text x="512" y="870" font-family="Arial, sans-serif" font-size="28" font-weight="700" fill="#E879A0" text-anchor="middle">big</text>
+  <path d="M 512 845 L 512 635" stroke="#E879A0" stroke-width="4" stroke-linecap="round" opacity="0.6"/>
+  <polygon points="498,637 512,618 526,637" fill="#E879A0" opacity="0.6"/>
+
+  <!-- 추가 작은 단어들 -->
+  <text x="270" y="430" font-family="Arial, sans-serif" font-size="18" font-weight="500" fill="#FF6B8A" text-anchor="middle" opacity="0.6">art</text>
+  <text x="760" y="420" font-family="Arial, sans-serif" font-size="18" font-weight="500" fill="#FF6B8A" text-anchor="middle" opacity="0.6">tag</text>
+  <text x="270" y="600" font-family="Arial, sans-serif" font-size="16" font-weight="500" fill="#E879A0" text-anchor="middle" opacity="0.5">key</text>
+  <text x="755" y="605" font-family="Arial, sans-serif" font-size="16" font-weight="500" fill="#E879A0" text-anchor="middle" opacity="0.5">map</text>
+</svg>

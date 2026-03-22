@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_02: literal — 퀴즈 선택지 버튼(A/B/C/D) + 태극기 미니 -->
+  <defs>
+    <linearGradient id="bg2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A1A2E"/>
+      <stop offset="100%" stop-color="#16213E"/>
+    </linearGradient>
+    <linearGradient id="btnA" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#43A047"/>
+      <stop offset="100%" stop-color="#2E7D32"/>
+    </linearGradient>
+    <linearGradient id="btnB" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1E88E5"/>
+      <stop offset="100%" stop-color="#1565C0"/>
+    </linearGradient>
+    <linearGradient id="btnC" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FB8C00"/>
+      <stop offset="100%" stop-color="#E65100"/>
+    </linearGradient>
+    <linearGradient id="btnD" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#E53935"/>
+      <stop offset="100%" stop-color="#B71C1C"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1024" height="1024" rx="180" fill="url(#bg2)"/>
+
+  <!-- Top: mini Taegukgi (Korean flag) -->
+  <!-- Flag body -->
+  <rect x="312" y="190" width="400" height="240" rx="12" fill="#FFFFFF"/>
+  <!-- Taeguk circle — simplified 2-color yin-yang style -->
+  <circle cx="512" cy="310" r="65" fill="#C62828"/>
+  <clipPath id="clipTop2">
+    <rect x="447" y="245" width="130" height="65"/>
+  </clipPath>
+  <circle cx="512" cy="310" r="65" fill="#1565C0" clip-path="url(#clipTop2)"/>
+  <!-- Small yin/yang divider arc approximation -->
+  <circle cx="512" cy="277" r="32" fill="#C62828"/>
+  <circle cx="512" cy="343" r="32" fill="#1565C0"/>
+  <!-- Black trigrams (simplified bars) left side -->
+  <rect x="345" y="258" width="56" height="8" rx="3" fill="#1A1A2E"/>
+  <rect x="345" y="275" width="56" height="8" rx="3" fill="#1A1A2E"/>
+  <rect x="345" y="292" width="24" height="8" rx="3" fill="#1A1A2E"/>
+  <rect x="383" y="292" width="18" height="8" rx="3" fill="#1A1A2E"/>
+  <rect x="345" y="343" width="56" height="8" rx="3" fill="#1A1A2E"/>
+  <rect x="345" y="360" width="24" height="8" rx="3" fill="#1A1A2E"/>
+  <rect x="383" y="360" width="18" height="8" rx="3" fill="#1A1A2E"/>
+  <!-- Right trigrams -->
+  <rect x="623" y="258" width="56" height="8" rx="3" fill="#1A1A2E"/>
+  <rect x="623" y="275" width="24" height="8" rx="3" fill="#1A1A2E"/>
+  <rect x="657" y="275" width="22" height="8" rx="3" fill="#1A1A2E"/>
+  <rect x="623" y="343" width="56" height="8" rx="3" fill="#1A1A2E"/>
+  <rect x="623" y="360" width="56" height="8" rx="3" fill="#1A1A2E"/>
+  <rect x="623" y="377" width="56" height="8" rx="3" fill="#1A1A2E"/>
+
+  <!-- Quiz buttons 2x2 grid -->
+  <!-- A button -->
+  <rect x="212" y="490" width="270" height="100" rx="16" fill="url(#btnA)"/>
+  <text x="347" y="558" font-family="Arial Black, sans-serif" font-size="58" font-weight="900"
+        fill="#FFFFFF" text-anchor="middle">A</text>
+  <!-- B button -->
+  <rect x="542" y="490" width="270" height="100" rx="16" fill="url(#btnB)"/>
+  <text x="677" y="558" font-family="Arial Black, sans-serif" font-size="58" font-weight="900"
+        fill="#FFFFFF" text-anchor="middle">B</text>
+  <!-- C button -->
+  <rect x="212" y="618" width="270" height="100" rx="16" fill="url(#btnC)"/>
+  <text x="347" y="686" font-family="Arial Black, sans-serif" font-size="58" font-weight="900"
+        fill="#FFFFFF" text-anchor="middle">C</text>
+  <!-- D button -->
+  <rect x="542" y="618" width="270" height="100" rx="16" fill="url(#btnD)"/>
+  <text x="677" y="686" font-family="Arial Black, sans-serif" font-size="58" font-weight="900"
+        fill="#FFFFFF" text-anchor="middle">D</text>
+
+  <!-- Bottom label -->
+  <rect x="312" y="760" width="400" height="56" rx="12" fill="#FFFFFF11"/>
+  <text x="512" y="800" font-family="Arial, sans-serif" font-size="36" font-weight="700"
+        fill="#FFFFFF" text-anchor="middle">FLAG QUIZ</text>
+</svg>

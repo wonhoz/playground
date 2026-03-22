@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_04 | Hybrid | 대각선·동적 | 사진 이미지가 오른쪽으로 텍스트 스트림으로 흘러나오는 모습 -->
+  <!-- 색조: 에메랄드 그린 + 다크 배경 -->
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="128" fill="#001A0D"/>
+
+  <defs>
+    <linearGradient id="streamGrad04" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00FF88" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#00FF88" stop-opacity="0"/>
+    </linearGradient>
+    <clipPath id="leftHalf04">
+      <rect x="200" y="220" width="290" height="580"/>
+    </clipPath>
+  </defs>
+
+  <!-- 왼쪽: 사진 프레임 (산 + 하늘) -->
+  <rect x="200" y="220" width="290" height="580" rx="20" fill="#0A2A1A" stroke="#00CC66" stroke-width="5"/>
+  <!-- 하늘 그라디언트 -->
+  <rect x="200" y="220" width="290" height="200" rx="20" fill="#1A3A6A"/>
+  <rect x="200" y="360" width="290" height="60" fill="#1A3A6A"/>
+  <!-- 구름 -->
+  <ellipse cx="295" cy="295" rx="55" ry="25" fill="white" opacity="0.7"/>
+  <ellipse cx="360" cy="310" rx="40" ry="20" fill="white" opacity="0.5"/>
+  <!-- 태양 -->
+  <circle cx="435" cy="265" r="38" fill="#FFD700"/>
+  <!-- 산 -->
+  <polygon points="200,800 310,450 400,550 455,470 490,800" fill="#1A4A1A"/>
+  <!-- 나무들 -->
+  <polygon points="240,800 260,730 280,800" fill="#0D3A0D"/>
+  <polygon points="420,800 445,740 470,800" fill="#0D3A0D"/>
+  <!-- 이미지 테두리 -->
+  <rect x="200" y="220" width="290" height="580" rx="20" fill="none" stroke="#00FF88" stroke-width="5"/>
+
+  <!-- 중간: 변환 화살표 + "→" 기호 -->
+  <text x="510" y="530" font-family="Courier New, monospace" font-size="52" fill="#00FF88" text-anchor="middle">→</text>
+
+  <!-- 오른쪽: ASCII 텍스트 스트림 -->
+  <g font-family="Courier New, monospace" font-size="12.5" fill="#00FF88">
+    <text x="545" y="260">::::::::::::::::::::@@@@@@::::</text>
+    <text x="545" y="278">:::::::::::::::::::@@@@@@@@@::</text>
+    <text x="545" y="296">:::::::::::::::::@@@@@@@@@@@@:</text>
+    <text x="545" y="314">:::::::::::::::@@@@@@@@@@@@@@:</text>
+    <text x="545" y="332">::::@@@:::::##@@@@@@@@@@@@@@::</text>
+    <text x="545" y="350">::::@@@@@::@@@@@@@@@@@@@@@::::</text>
+    <text x="545" y="368">::::@@@@@@@@@@@@@@@@@@@:::::::</text>
+    <text x="545" y="386">:::::@@@@@@@@@@@@@@@@:::::::::</text>
+    <text x="545" y="404">:::::::@@@@@@@@@@@@:::::::::::</text>
+    <text x="545" y="422">:::::::::::@@@@:::::::::::@@::</text>
+    <text x="545" y="440">:::::::::::::@@:::::::::::@@@:</text>
+    <text x="545" y="458">..:::::::::::#@#:::::::::@@@::</text>
+    <text x="545" y="476">...:::::::::::##::::::::@@@:::</text>
+    <text x="545" y="494">#..::::::::::::#:::::::@@@::::</text>
+    <text x="545" y="512">##.:::::::::::::#:::::@@@:::::</text>
+    <text x="545" y="530">###::::::::::::::::::@@@::::::</text>
+    <text x="545" y="548">####:::::::::::::::@@@::::::::</text>
+    <text x="545" y="566">####@@::::::::::::@@@:::::::::</text>
+    <text x="545" y="584">#####@@@:::::::::@@@:::::####:</text>
+    <text x="545" y="602">######@@@@@:::::@@@:::#######:</text>
+    <text x="545" y="620">#######@@@@@@@@@@@@::#########</text>
+    <text x="545" y="638">########@@@@@@@@@@::#@#########</text>
+    <text x="545" y="656">##########@@@@@@:#:############</text>
+    <text x="545" y="674">###########@@@@################</text>
+    <text x="545" y="692">############@##################</text>
+    <text x="545" y="710">###################################</text>
+    <text x="545" y="728">###################################</text>
+    <text x="545" y="746">###################################</text>
+    <text x="545" y="764">###################################</text>
+  </g>
+
+  <!-- 스트림 오른쪽 페이드 아웃 그라디언트 오버레이 -->
+  <rect x="545" y="240" width="279" height="544" fill="url(#streamGrad04)" opacity="0.0"/>
+  <defs>
+    <linearGradient id="fadeRight04" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="60%" stop-color="#001A0D" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#001A0D" stop-opacity="1"/>
+    </linearGradient>
+  </defs>
+  <rect x="545" y="240" width="279" height="544" fill="url(#fadeRight04)"/>
+</svg>

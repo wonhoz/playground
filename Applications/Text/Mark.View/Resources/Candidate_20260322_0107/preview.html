@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>Mark.View — 아이콘 후보 (2026-03-22)</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #13111C;
+    color: #E4E4F0;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    min-height: 100vh;
+    padding: 48px 32px;
+  }
+  .header { text-align: center; margin-bottom: 48px; }
+  .header h1 { font-size: 28px; font-weight: 700; color: #F5F3FF; margin-bottom: 8px; }
+  .header .subtitle { font-size: 14px; color: #6B6B8A; }
+  .header .concept {
+    margin-top: 14px; display: inline-block;
+    background: #1E1B2E; border: 1px solid #3A3A5C;
+    border-radius: 8px; padding: 10px 22px;
+    font-size: 13px; color: #9D9DC8;
+  }
+  .header .concept strong { color: #89b4fa; }
+
+  .grid {
+    display: grid; grid-template-columns: repeat(5, 1fr);
+    gap: 24px; max-width: 1120px; margin: 0 auto 52px;
+  }
+  .card {
+    background: #1E1B2E; border: 1px solid #3A3A5C;
+    border-radius: 16px; overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .card:hover {
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 20px 48px rgba(0,0,0,0.65);
+  }
+  .icon-wrap {
+    display: flex; align-items: center;
+    justify-content: center; padding: 28px;
+  }
+  .icon-wrap img {
+    width: 160px; height: 160px;
+    border-radius: 32px; image-rendering: crisp-edges;
+  }
+  .card-info { padding: 16px 16px 20px; }
+  .card-label {
+    font-size: 13px; font-weight: 700; color: #F5F3FF;
+    margin-bottom: 5px; display: flex; align-items: center; gap: 6px;
+  }
+  .type-badge {
+    font-size: 10px; font-weight: 600;
+    padding: 2px 7px; border-radius: 4px; letter-spacing: 0.5px;
+  }
+  .type-literal  { background: #1E3A5F; color: #89b4fa; }
+  .type-metaphor { background: #2D1B69; color: #cba6f7; }
+  .type-hybrid   { background: #1A3A2A; color: #a6e3a1; }
+
+  .card-concept { font-size: 12px; color: #9D9DC8; line-height: 1.5; margin-bottom: 8px; }
+  .card-link { font-size: 11px; color: #6B6B8A; font-style: italic; }
+  .palette { display: flex; gap: 5px; margin-top: 10px; flex-wrap: wrap; }
+  .swatch {
+    width: 22px; height: 22px; border-radius: 5px;
+    border: 1px solid rgba(255,255,255,0.12);
+    cursor: default; transition: transform 0.15s;
+  }
+  .swatch:hover { transform: scale(1.3); }
+
+  .size-preview { max-width: 1120px; margin: 0 auto; }
+  .size-preview h2 { font-size: 16px; color: #6B6B8A; margin-bottom: 20px; font-weight: 500; }
+  .size-grid { display: flex; flex-wrap: wrap; gap: 28px; }
+  .size-set {
+    background: #1E1B2E; border: 1px solid #3A3A5C;
+    border-radius: 12px; padding: 20px 24px;
+    display: flex; flex-direction: column; align-items: center; gap: 12px;
+  }
+  .size-set > span { font-size: 11px; color: #6B6B8A; }
+  .size-row { display: flex; align-items: flex-end; gap: 14px; }
+  .size-item { display: flex; flex-direction: column; align-items: center; gap: 5px; }
+  .size-item span { font-size: 10px; color: #4A4A6A; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Mark.View — 아이콘 후보</h1>
+  <div class="subtitle">생성일: 2026-03-22 &nbsp;|&nbsp; 5개 후보</div>
+  <div class="concept">
+    <strong>핵심 의미:</strong> Markdown 파일을 한 눈에 딱 들어와서 읽기 쉽도록 아름답게 시각화
+  </div>
+</div>
+
+<div class="grid">
+
+  <!-- icon_01 -->
+  <div class="card">
+    <div class="icon-wrap" style="background:#181825;">
+      <img src="icon_01.svg" alt="icon_01">
+    </div>
+    <div class="card-info">
+      <div class="card-label">icon_01 <span class="type-badge type-literal">Literal</span></div>
+      <div class="card-concept">"# Hello" raw → 아름다운 헤딩 before/after</div>
+      <div class="card-link">Markdown 기호가 사라지고 렌더링 결과가 나타남</div>
+      <div class="palette">
+        <div class="swatch" style="background:#1e1e2e" title="배경"></div>
+        <div class="swatch" style="background:#4a4a6a" title="raw text"></div>
+        <div class="swatch" style="background:#cba6f7" title="화살표 보라"></div>
+        <div class="swatch" style="background:#89b4fa" title="헤딩 파랑"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- icon_02 -->
+  <div class="card">
+    <div class="icon-wrap" style="background:#1e1b4b;">
+      <img src="icon_02.svg" alt="icon_02">
+    </div>
+    <div class="card-info">
+      <div class="card-label">icon_02 <span class="type-badge type-literal">Literal</span></div>
+      <div class="card-concept">앱 UI 미니어처 (렌더링된 Markdown 화면)</div>
+      <div class="card-link">열었을 때 실제로 보게 될 화면 = 앱의 핵심 가치</div>
+      <div class="palette">
+        <div class="swatch" style="background:#1e1e2e" title="창 배경"></div>
+        <div class="swatch" style="background:#89b4fa" title="H1 파랑"></div>
+        <div class="swatch" style="background:#cba6f7" title="H2 보라"></div>
+        <div class="swatch" style="background:#fab387" title="코드 오렌지"></div>
+        <div class="swatch" style="background:#a6e3a1" title="코드 그린"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- icon_03 -->
+  <div class="card">
+    <div class="icon-wrap" style="background:#0F0A2E;">
+      <img src="icon_03.svg" alt="icon_03">
+    </div>
+    <div class="card-info">
+      <div class="card-label">icon_03 <span class="type-badge type-metaphor">Metaphor</span></div>
+      <div class="card-concept">큰 # 기호에서 황금빛 방사광</div>
+      <div class="card-link"># = Markdown의 언어, 방사광 = 시각화의 아름다움</div>
+      <div class="palette">
+        <div class="swatch" style="background:#1E1B4B" title="딥 인디고"></div>
+        <div class="swatch" style="background:#2D1B69" title="미드 퍼플"></div>
+        <div class="swatch" style="background:#FFFFFF" title="# 흰색"></div>
+        <div class="swatch" style="background:#FFD700" title="골든 빛"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- icon_04 -->
+  <div class="card">
+    <div class="icon-wrap" style="background:#D1FAE5;">
+      <img src="icon_04.svg" alt="icon_04">
+    </div>
+    <div class="card-info">
+      <div class="card-label">icon_04 <span class="type-badge type-metaphor">Metaphor</span></div>
+      <div class="card-concept">Markdown 기호 배지들이 중앙 문서를 구성</div>
+      <div class="card-link">#·**·>·` 기호들 = 문서의 재료, 뷰어가 조합함</div>
+      <div class="palette">
+        <div class="swatch" style="background:#ECFDF5" title="민트 배경"></div>
+        <div class="swatch" style="background:#3B82F6" title="# 파랑"></div>
+        <div class="swatch" style="background:#8B5CF6" title="** 보라"></div>
+        <div class="swatch" style="background:#F97316" title="> 오렌지"></div>
+        <div class="swatch" style="background:#10B981" title="` 에메랄드"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- icon_05 -->
+  <div class="card">
+    <div class="icon-wrap" style="background:#2e3440;">
+      <img src="icon_05.svg" alt="icon_05">
+    </div>
+    <div class="card-info">
+      <div class="card-label">icon_05 <span class="type-badge type-hybrid">Hybrid</span></div>
+      <div class="card-concept"># 워터마크 + 렌더링 줄들 + 테마 팔레트 6종</div>
+      <div class="card-link">Markdown 원료 + 렌더링 결과 + 6종 테마 선택</div>
+      <div class="palette">
+        <div class="swatch" style="background:#2e3440" title="Nord 배경"></div>
+        <div class="swatch" style="background:#88c0d0" title="H1 틸"></div>
+        <div class="swatch" style="background:#81a1c1" title="H2 파랑"></div>
+        <div class="swatch" style="background:#d08770" title="코드 오렌지"></div>
+        <div class="swatch" style="background:#ff79c6" title="Dracula 핑크"></div>
+        <div class="swatch" style="background:#f4ecd8" title="Sepia 크림"></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- 크기별 미리보기 -->
+<div class="size-preview">
+  <h2>크기별 미리보기</h2>
+  <div class="size-grid">
+
+    <div class="size-set">
+      <span>icon_01</span>
+      <div class="size-row">
+        <div class="size-item"><img src="icon_01.svg" width="256" height="256" style="border-radius:48px;"><span>256px</span></div>
+        <div class="size-item"><img src="icon_01.svg" width="64" height="64" style="border-radius:12px;"><span>64px</span></div>
+        <div class="size-item"><img src="icon_01.svg" width="32" height="32" style="border-radius:6px;"><span>32px</span></div>
+        <div class="size-item"><img src="icon_01.svg" width="16" height="16" style="border-radius:3px;"><span>16px</span></div>
+      </div>
+    </div>
+
+    <div class="size-set">
+      <span>icon_02</span>
+      <div class="size-row">
+        <div class="size-item"><img src="icon_02.svg" width="256" height="256" style="border-radius:48px;"><span>256px</span></div>
+        <div class="size-item"><img src="icon_02.svg" width="64" height="64" style="border-radius:12px;"><span>64px</span></div>
+        <div class="size-item"><img src="icon_02.svg" width="32" height="32" style="border-radius:6px;"><span>32px</span></div>
+        <div class="size-item"><img src="icon_02.svg" width="16" height="16" style="border-radius:3px;"><span>16px</span></div>
+      </div>
+    </div>
+
+    <div class="size-set">
+      <span>icon_03</span>
+      <div class="size-row">
+        <div class="size-item"><img src="icon_03.svg" width="256" height="256" style="border-radius:48px;"><span>256px</span></div>
+        <div class="size-item"><img src="icon_03.svg" width="64" height="64" style="border-radius:12px;"><span>64px</span></div>
+        <div class="size-item"><img src="icon_03.svg" width="32" height="32" style="border-radius:6px;"><span>32px</span></div>
+        <div class="size-item"><img src="icon_03.svg" width="16" height="16" style="border-radius:3px;"><span>16px</span></div>
+      </div>
+    </div>
+
+    <div class="size-set">
+      <span>icon_04</span>
+      <div class="size-row">
+        <div class="size-item"><img src="icon_04.svg" width="256" height="256" style="border-radius:48px;"><span>256px</span></div>
+        <div class="size-item"><img src="icon_04.svg" width="64" height="64" style="border-radius:12px;"><span>64px</span></div>
+        <div class="size-item"><img src="icon_04.svg" width="32" height="32" style="border-radius:6px;"><span>32px</span></div>
+        <div class="size-item"><img src="icon_04.svg" width="16" height="16" style="border-radius:3px;"><span>16px</span></div>
+      </div>
+    </div>
+
+    <div class="size-set">
+      <span>icon_05</span>
+      <div class="size-row">
+        <div class="size-item"><img src="icon_05.svg" width="256" height="256" style="border-radius:48px;"><span>256px</span></div>
+        <div class="size-item"><img src="icon_05.svg" width="64" height="64" style="border-radius:12px;"><span>64px</span></div>
+        <div class="size-item"><img src="icon_05.svg" width="32" height="32" style="border-radius:6px;"><span>32px</span></div>
+        <div class="size-item"><img src="icon_05.svg" width="16" height="16" style="border-radius:3px;"><span>16px</span></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>

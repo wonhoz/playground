@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_06: Metaphor / 레이어드 / Fan 편향 메카닉 — 탄막 소용돌이 + 시안 팬 -->
+  <!-- 배경: 딥 틸 -->
+  <rect width="1024" height="1024" rx="160" fill="#041E20"/>
+
+  <!-- 배경 방사형 그라디언트 -->
+  <radialGradient id="g06teal" cx="50%" cy="50%" r="50%">
+    <stop offset="0%" stop-color="#0A4A50" stop-opacity="0.7"/>
+    <stop offset="100%" stop-color="#041E20" stop-opacity="0"/>
+  </radialGradient>
+  <rect width="1024" height="1024" rx="160" fill="url(#g06teal)"/>
+
+  <!-- 탄막 소용돌이 (나선형 패턴) -->
+  <g opacity="0.7">
+    <!-- 바깥 고리 탄막 -->
+    <circle cx="512" cy="240" r="12" fill="#FF3333" stroke="#FF6666" stroke-width="2.5"/>
+    <circle cx="672" cy="300" r="10" fill="#FF4444" stroke="#FF7777" stroke-width="2"/>
+    <circle cx="760" cy="440" r="12" fill="#FF3333" stroke="#FF6666" stroke-width="2.5"/>
+    <circle cx="740" cy="600" r="10" fill="#FF4444" stroke="#FF7777" stroke-width="2"/>
+    <circle cx="620" cy="730" r="12" fill="#FF3333" stroke="#FF6666" stroke-width="2.5"/>
+    <circle cx="440" cy="760" r="10" fill="#FF4444" stroke="#FF7777" stroke-width="2"/>
+    <circle cx="290" cy="680" r="12" fill="#FF3333" stroke="#FF6666" stroke-width="2.5"/>
+    <circle cx="240" cy="530" r="10" fill="#FF4444" stroke="#FF7777" stroke-width="2"/>
+    <circle cx="290" cy="370" r="12" fill="#FF3333" stroke="#FF6666" stroke-width="2.5"/>
+    <circle cx="400" cy="260" r="10" fill="#FF4444" stroke="#FF7777" stroke-width="2"/>
+  </g>
+
+  <!-- 편향된 탄막들 (소용돌이 바깥으로) -->
+  <g opacity="0.5">
+    <circle cx="530" cy="195" r="8" fill="#FF8888"/>
+    <circle cx="710" cy="265" r="7" fill="#FF8888"/>
+    <circle cx="800" cy="420" r="8" fill="#FF8888"/>
+  </g>
+
+  <!-- Fan 구조물 (중앙, 대형) -->
+  <circle cx="512" cy="512" r="120" fill="#041E20" stroke="#00CED1" stroke-width="6"/>
+  <circle cx="512" cy="512" r="90" fill="#062830"/>
+
+  <!-- 팬 블레이드 (4방향) -->
+  <g transform="translate(512, 512)">
+    <ellipse cx="0" cy="-55" rx="18" ry="55" fill="#00CED1" opacity="0.9" transform="rotate(15)"/>
+    <ellipse cx="0" cy="-55" rx="18" ry="55" fill="#00CED1" opacity="0.9" transform="rotate(105)"/>
+    <ellipse cx="0" cy="-55" rx="18" ry="55" fill="#00CED1" opacity="0.9" transform="rotate(195)"/>
+    <ellipse cx="0" cy="-55" rx="18" ry="55" fill="#00CED1" opacity="0.9" transform="rotate(285)"/>
+    <!-- 허브 -->
+    <circle cx="0" cy="0" r="22" fill="#00FFFF" stroke="#041E20" stroke-width="4"/>
+    <circle cx="0" cy="0" r="10" fill="#041E20"/>
+  </g>
+
+  <!-- 바람 효과 (탄막 편향) -->
+  <g stroke="#00CED1" stroke-width="2.5" fill="none" opacity="0.4">
+    <path d="M410 412 Q360 380 310 400"/>
+    <path d="M430 440 Q370 430 320 460"/>
+    <path d="M410 500 Q350 510 300 490"/>
+    <path d="M614 412 Q664 380 714 400"/>
+    <path d="M594 440 Q654 430 704 460"/>
+    <path d="M614 500 Q674 510 724 490"/>
+  </g>
+
+  <!-- 팬 회전 감지선 -->
+  <circle cx="512" cy="512" r="145" fill="none" stroke="#00CED1" stroke-width="2" stroke-dasharray="10,8" opacity="0.3"/>
+
+  <!-- 플레이어 (핑크, 우하단) -->
+  <circle cx="700" cy="740" r="32" fill="#FF6EB4" stroke="#FFB3D9" stroke-width="4"/>
+  <circle cx="700" cy="740" r="14" fill="#FFD6EC"/>
+
+  <!-- 자원 픽업 -->
+  <polygon points="340,740 358,765 340,790 322,765" fill="#FFD700" stroke="#FFA500" stroke-width="2.5"/>
+
+  <!-- FAN 레이블 -->
+  <text x="512" y="888" text-anchor="middle" font-family="Arial Black, sans-serif" font-size="48" font-weight="900" fill="#00CED1" opacity="0.85" letter-spacing="6">DEFLECT</text>
+</svg>

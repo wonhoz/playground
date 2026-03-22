@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_01 | literal | 벽돌 그리드 + 공 + 패들 — 정면 게임 장면 -->
+  <!-- 배경: 딥 네이비 블루 -->
+  <rect width="1024" height="1024" rx="180" fill="#0D1B3E"/>
+
+  <!-- 배경 그라디언트 광택 -->
+  <defs>
+    <radialGradient id="bg1" cx="50%" cy="30%" r="60%">
+      <stop offset="0%" stop-color="#1A3A6E" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#0D1B3E" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="ballGlow1" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="60%" stop-color="#A8D8FF"/>
+      <stop offset="100%" stop-color="#5BB8FF" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="180" fill="url(#bg1)"/>
+
+  <!-- 별 파티클 -->
+  <circle cx="200" cy="200" r="3" fill="#FFFFFF" opacity="0.4"/>
+  <circle cx="820" cy="180" r="2" fill="#FFFFFF" opacity="0.3"/>
+  <circle cx="150" cy="750" r="2.5" fill="#FFFFFF" opacity="0.35"/>
+  <circle cx="870" cy="800" r="2" fill="#FFFFFF" opacity="0.3"/>
+
+  <!-- 벽돌 그리드 — 5열 4행 (일부 파괴됨) -->
+  <!-- Row 1 (top) — 빨간 벽돌 -->
+  <rect x="218" y="210" width="106" height="50" rx="6" fill="#FF4757"/>
+  <rect x="337" y="210" width="106" height="50" rx="6" fill="#FF4757"/>
+  <!-- 3번 파괴됨 -->
+  <rect x="456" y="210" width="106" height="50" rx="6" fill="#FF4757" opacity="0.25"/>
+  <rect x="575" y="210" width="106" height="50" rx="6" fill="#FF4757"/>
+  <rect x="694" y="210" width="106" height="50" rx="6" fill="#FF4757"/>
+
+  <!-- Row 2 — 주황 벽돌 -->
+  <rect x="218" y="275" width="106" height="50" rx="6" fill="#FF7F00"/>
+  <!-- 2번 파괴됨 -->
+  <rect x="337" y="275" width="106" height="50" rx="6" fill="#FF7F00" opacity="0.25"/>
+  <rect x="456" y="275" width="106" height="50" rx="6" fill="#FF7F00"/>
+  <rect x="575" y="275" width="106" height="50" rx="6" fill="#FF7F00"/>
+  <rect x="694" y="275" width="106" height="50" rx="6" fill="#FF7F00"/>
+
+  <!-- Row 3 — 노란 벽돌 -->
+  <rect x="218" y="340" width="106" height="50" rx="6" fill="#FFD700"/>
+  <rect x="337" y="340" width="106" height="50" rx="6" fill="#FFD700"/>
+  <rect x="456" y="340" width="106" height="50" rx="6" fill="#FFD700"/>
+  <!-- 4번 파괴됨 -->
+  <rect x="575" y="340" width="106" height="50" rx="6" fill="#FFD700" opacity="0.25"/>
+  <rect x="694" y="340" width="106" height="50" rx="6" fill="#FFD700"/>
+
+  <!-- Row 4 — 초록 벽돌 -->
+  <rect x="218" y="405" width="106" height="50" rx="6" fill="#2ED573"/>
+  <rect x="337" y="405" width="106" height="50" rx="6" fill="#2ED573"/>
+  <rect x="456" y="405" width="106" height="50" rx="6" fill="#2ED573"/>
+  <rect x="575" y="405" width="106" height="50" rx="6" fill="#2ED573"/>
+  <!-- 5번 파괴됨 -->
+  <rect x="694" y="405" width="106" height="50" rx="6" fill="#2ED573" opacity="0.25"/>
+
+  <!-- 벽돌 광택 하이라이트 -->
+  <rect x="220" y="212" width="100" height="14" rx="3" fill="#FFFFFF" opacity="0.2"/>
+  <rect x="339" y="212" width="100" height="14" rx="3" fill="#FFFFFF" opacity="0.2"/>
+  <rect x="577" y="212" width="100" height="14" rx="3" fill="#FFFFFF" opacity="0.2"/>
+  <rect x="696" y="212" width="100" height="14" rx="3" fill="#FFFFFF" opacity="0.2"/>
+
+  <!-- 공 궤적 점선 -->
+  <circle cx="516" cy="590" r="5" fill="#A8D8FF" opacity="0.5"/>
+  <circle cx="510" cy="555" r="4" fill="#A8D8FF" opacity="0.4"/>
+  <circle cx="504" cy="522" r="3" fill="#A8D8FF" opacity="0.3"/>
+  <circle cx="498" cy="492" r="2.5" fill="#A8D8FF" opacity="0.25"/>
+  <circle cx="493" cy="464" r="2" fill="#A8D8FF" opacity="0.2"/>
+
+  <!-- 공 -->
+  <circle cx="522" cy="628" r="32" fill="url(#ballGlow1)"/>
+  <circle cx="522" cy="628" r="28" fill="#FFFFFF"/>
+  <circle cx="512" cy="618" r="9" fill="#FFFFFF" opacity="0.6"/>
+
+  <!-- 패들 -->
+  <rect x="340" y="760" width="344" height="52" rx="26" fill="#5B8CFF"/>
+  <rect x="350" y="764" width="300" height="18" rx="9" fill="#FFFFFF" opacity="0.25"/>
+  <!-- 패들 엔드 캡 광택 -->
+  <circle cx="366" cy="786" r="18" fill="#7AA8FF" opacity="0.5"/>
+  <circle cx="658" cy="786" r="18" fill="#7AA8FF" opacity="0.5"/>
+
+  <!-- 충돌 파티클 (파괴된 벽돌 위치) -->
+  <polygon points="456,220 462,208 468,220 462,232" fill="#FF6B35" opacity="0.8"/>
+  <circle cx="475" cy="205" r="5" fill="#FFD700" opacity="0.7"/>
+  <circle cx="450" cy="198" r="4" fill="#FF4757" opacity="0.6"/>
+  <polygon points="694,415 700,403 706,415 700,427" fill="#34C760" opacity="0.8"/>
+</svg>

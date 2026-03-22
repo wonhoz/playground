@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_01 | Literal | 중앙 심볼 | 인물 실루엣이 @#*.문자로 채워진 모습 -->
+  <!-- 색조: 딥 네이비 배경 + 시안 문자 -->
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="128" fill="#0D1B2A"/>
+
+  <!-- 사람 실루엣 — 문자들로 채워진 느낌: clip path로 실루엣 안에 텍스트 격자 -->
+  <defs>
+    <clipPath id="personClip01">
+      <!-- 머리 -->
+      <circle cx="512" cy="270" r="110"/>
+      <!-- 몸통 -->
+      <ellipse cx="512" cy="530" rx="140" ry="190"/>
+      <!-- 왼팔 -->
+      <rect x="330" y="400" width="70" height="180" rx="35"/>
+      <!-- 오른팔 -->
+      <rect x="624" y="400" width="70" height="180" rx="35"/>
+      <!-- 왼다리 -->
+      <rect x="400" y="700" width="75" height="180" rx="37"/>
+      <!-- 오른다리 -->
+      <rect x="549" y="700" width="75" height="180" rx="37"/>
+    </clipPath>
+  </defs>
+
+  <!-- 실루엣 배경 (살짝 어두운 블루) -->
+  <circle cx="512" cy="270" r="110" fill="#0A3060"/>
+  <ellipse cx="512" cy="530" rx="140" ry="190" fill="#0A3060"/>
+  <rect x="330" y="400" width="70" height="180" rx="35" fill="#0A3060"/>
+  <rect x="624" y="400" width="70" height="180" rx="35" fill="#0A3060"/>
+  <rect x="400" y="700" width="75" height="180" rx="37" fill="#0A3060"/>
+  <rect x="549" y="700" width="75" height="180" rx="37" fill="#0A3060"/>
+
+  <!-- 실루엣 안을 채우는 ASCII 문자 격자 (시안) -->
+  <g clip-path="url(#personClip01)" font-family="Courier New, monospace" font-size="22" fill="#00E5FF" opacity="0.95">
+    <!-- 머리 영역 -->
+    <text x="418" y="215">@  #  @  *  @</text>
+    <text x="406" y="240">*  .  @  #  *  .</text>
+    <text x="400" y="265">#  @  .  *  @  #  *</text>
+    <text x="406" y="290">@  *  #  .  @  *  .</text>
+    <text x="418" y="315">*  @  #  @  *  @</text>
+    <text x="430" y="340">.  #  *  .  #</text>
+    <!-- 몸통 영역 -->
+    <text x="394" y="380">@  #  *  .  @  #  *  .</text>
+    <text x="386" y="405">#  .  @  *  #  .  @  *  #</text>
+    <text x="382" y="430">*  @  #  .  *  @  #  .  *  @</text>
+    <text x="382" y="455">.  #  *  @  .  #  *  @  .  #</text>
+    <text x="382" y="480">@  .  #  *  @  .  #  *  @  .</text>
+    <text x="382" y="505">#  @  *  .  #  @  *  .  #  @</text>
+    <text x="382" y="530">*  #  .  @  *  #  .  @  *  #</text>
+    <text x="382" y="555">.  *  @  #  .  *  @  #  .  *</text>
+    <text x="386" y="580">@  .  #  *  @  .  #  *  @</text>
+    <text x="390" y="605">#  @  *  .  #  @  *  .  #</text>
+    <text x="398" y="630">*  #  .  @  *  #  .  @</text>
+    <text x="406" y="655">.  *  @  #  .  *  @  .</text>
+    <text x="414" y="680">@  .  #  *  @  .  #</text>
+    <!-- 다리 영역 -->
+    <text x="398" y="720">*  @  .  #  *  @</text>
+    <text x="398" y="745">#  *  @  .  #  *</text>
+    <text x="398" y="770">.  #  *  @  .  #</text>
+    <text x="398" y="795">@  .  #  *  @  .</text>
+    <text x="398" y="820">*  @  .  #  *  @</text>
+    <text x="398" y="845">#  *  @  .  #  *</text>
+    <text x="398" y="870">.  #  *  @  .  #</text>
+  </g>
+
+  <!-- 실루엣 외곽선 (글로우) -->
+  <circle cx="512" cy="270" r="110" fill="none" stroke="#00E5FF" stroke-width="3" opacity="0.5"/>
+  <ellipse cx="512" cy="530" rx="140" ry="190" fill="none" stroke="#00E5FF" stroke-width="3" opacity="0.5"/>
+</svg>

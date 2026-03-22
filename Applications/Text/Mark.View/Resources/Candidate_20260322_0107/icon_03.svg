@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!--
+    icon_03 [metaphor] — 큰 # 기호에서 황금빛 방사광
+    컨셉: Markdown의 핵심 기호 # 에서 빛이 퍼져나와 아름다운 문서가 탄생하는 순간
+    연결고리: # = Markdown의 언어, 방사광 = 그 기호가 시각화되어 아름다움으로 변환됨
+    패턴: 중앙 심볼
+    색상: 딥 인디고(#1E1B4B→#0F0A2E) + 골든 방사광 + 흰 # 기호
+  -->
+  <defs>
+    <radialGradient id="bg03" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#2D1B69"/>
+      <stop offset="100%" stop-color="#0F0A2E"/>
+    </radialGradient>
+    <radialGradient id="glow03" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFD700" stop-opacity="0.55"/>
+      <stop offset="50%" stop-color="#F59E0B" stop-opacity="0.20"/>
+      <stop offset="100%" stop-color="#D97706" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="hashGlow">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="rayGlow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Layer 1: 딥 인디고 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg03)"/>
+
+  <!-- 중앙 황금 발광 원 -->
+  <circle cx="512" cy="512" r="320" fill="url(#glow03)"/>
+
+  <!-- Layer 2: 8방향 방사선 -->
+  <g stroke="#FFD700" stroke-linecap="round" filter="url(#rayGlow)">
+    <!-- 위 -->
+    <line x1="512" y1="460" x2="512" y2="210" stroke-width="6" opacity="0.45"/>
+    <!-- 우상 -->
+    <line x1="548" y1="476" x2="730" y2="294" stroke-width="5" opacity="0.38"/>
+    <!-- 오른쪽 -->
+    <line x1="564" y1="512" x2="814" y2="512" stroke-width="6" opacity="0.40"/>
+    <!-- 우하 -->
+    <line x1="548" y1="548" x2="730" y2="730" stroke-width="5" opacity="0.35"/>
+    <!-- 아래 -->
+    <line x1="512" y1="564" x2="512" y2="814" stroke-width="6" opacity="0.40"/>
+    <!-- 좌하 -->
+    <line x1="476" y1="548" x2="294" y2="730" stroke-width="5" opacity="0.32"/>
+    <!-- 왼쪽 -->
+    <line x1="460" y1="512" x2="210" y2="512" stroke-width="6" opacity="0.38"/>
+    <!-- 좌상 -->
+    <line x1="476" y1="476" x2="294" y2="294" stroke-width="5" opacity="0.35"/>
+  </g>
+
+  <!-- Layer 2: # 기호 (굵게 직접 path로) -->
+  <!-- 세로선 1 (왼쪽): x=435~475, y=290~730 -->
+  <rect x="435" y="290" width="42" height="440" rx="21"
+        fill="white" filter="url(#hashGlow)"/>
+  <!-- 세로선 2 (오른쪽): x=547~587, y=290~730 -->
+  <rect x="547" y="290" width="42" height="440" rx="21"
+        fill="white" filter="url(#hashGlow)"/>
+  <!-- 가로선 1 (위): x=370~654, y=390~430 -->
+  <rect x="370" y="388" width="284" height="42" rx="21"
+        fill="white" filter="url(#hashGlow)"/>
+  <!-- 가로선 2 (아래): x=370~654, y=554~594 -->
+  <rect x="370" y="554" width="284" height="42" rx="21"
+        fill="white" filter="url(#hashGlow)"/>
+
+  <!-- Layer 3: # 기호 황금 하이라이트 (위 모서리) -->
+  <rect x="435" y="290" width="42" height="140" rx="21"
+        fill="#FFD700" opacity="0.45"/>
+  <rect x="547" y="290" width="42" height="100" rx="21"
+        fill="#FFD700" opacity="0.40"/>
+  <rect x="370" y="388" width="120" height="42" rx="21"
+        fill="#FFD700" opacity="0.40"/>
+</svg>

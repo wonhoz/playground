@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!--
+    icon_02 [literal] — AWAY 금지 표시
+    컨셉: "AWAY" 텍스트 위에 빨간 금지 사인 = 자리 비움 상태 방지
+    연결고리: 금지 표시 대상이 "AWAY" 텍스트 = 이 앱이 away 전환을 막는다
+    패턴: 공간/장면
+    색상: 크림(#FFFBEB→#FDE68A) + 황갈(#92400E) + 빨강(#DC2626)
+  -->
+  <defs>
+    <radialGradient id="bg02" cx="50%" cy="45%" r="65%">
+      <stop offset="0%" stop-color="#FFFBEB"/>
+      <stop offset="100%" stop-color="#FDE68A"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Layer 1: 밝은 크림 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg02)"/>
+
+  <!-- Layer 2: AWAY 텍스트 (가운데, 황갈색) -->
+  <text x="512" y="572"
+        font-family="Arial Black, Arial, sans-serif"
+        font-size="196" font-weight="900"
+        fill="#92400E" text-anchor="middle"
+        letter-spacing="-4">AWAY</text>
+
+  <!-- Layer 3: 빨간 금지 표시 (원 + 대각선) -->
+  <!-- 금지 원 -->
+  <circle cx="512" cy="488" r="308"
+          fill="none" stroke="#DC2626" stroke-width="72"/>
+  <!-- 대각선 (왼쪽 위 → 오른쪽 아래) -->
+  <line x1="294" y1="270" x2="730" y2="706"
+        stroke="#DC2626" stroke-width="72" stroke-linecap="round"/>
+</svg>

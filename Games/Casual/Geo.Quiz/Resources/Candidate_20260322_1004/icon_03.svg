@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_03: metaphor — 지구본 + 국기 핀들 -->
+  <defs>
+    <radialGradient id="bg3" cx="50%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#E8F5E9"/>
+      <stop offset="100%" stop-color="#A5D6A7"/>
+    </radialGradient>
+    <radialGradient id="globe3" cx="38%" cy="35%" r="60%">
+      <stop offset="0%" stop-color="#64B5F6"/>
+      <stop offset="60%" stop-color="#1976D2"/>
+      <stop offset="100%" stop-color="#0D47A1"/>
+    </radialGradient>
+    <radialGradient id="globeShine" cx="35%" cy="30%" r="35%">
+      <stop offset="0%" stop-color="#FFFFFF55"/>
+      <stop offset="100%" stop-color="#FFFFFF00"/>
+    </radialGradient>
+    <clipPath id="globeClip">
+      <circle cx="490" cy="510" r="240"/>
+    </clipPath>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1024" height="1024" rx="180" fill="url(#bg3)"/>
+
+  <!-- Globe body -->
+  <circle cx="490" cy="510" r="240" fill="url(#globe3)"/>
+
+  <!-- Land masses (simplified green blobs) -->
+  <g clip-path="url(#globeClip)">
+    <!-- Europe/Africa -->
+    <ellipse cx="490" cy="470" rx="55" ry="90" fill="#388E3C" opacity="0.85"/>
+    <!-- Americas -->
+    <ellipse cx="360" cy="500" rx="45" ry="110" fill="#388E3C" opacity="0.85"/>
+    <!-- Asia -->
+    <ellipse cx="590" cy="430" rx="90" ry="60" fill="#388E3C" opacity="0.85"/>
+    <!-- Australia -->
+    <ellipse cx="620" cy="580" rx="45" ry="32" fill="#388E3C" opacity="0.85"/>
+    <!-- Latitude lines -->
+    <ellipse cx="490" cy="510" rx="240" ry="60" fill="none" stroke="#1565C0" stroke-width="2" opacity="0.4"/>
+    <ellipse cx="490" cy="510" rx="240" ry="120" fill="none" stroke="#1565C0" stroke-width="2" opacity="0.3"/>
+    <!-- Longitude lines -->
+    <ellipse cx="490" cy="510" rx="60" ry="240" fill="none" stroke="#1565C0" stroke-width="2" opacity="0.3"/>
+    <ellipse cx="490" cy="510" rx="120" ry="240" fill="none" stroke="#1565C0" stroke-width="2" opacity="0.25"/>
+  </g>
+
+  <!-- Globe shine -->
+  <circle cx="490" cy="510" r="240" fill="url(#globeShine)"/>
+  <!-- Globe outline -->
+  <circle cx="490" cy="510" r="240" fill="none" stroke="#FFFFFF" stroke-width="6"/>
+
+  <!-- Flag pin 1: Japan (top right of globe) — red circle on white -->
+  <!-- Pin stem -->
+  <line x1="660" y1="330" x2="720" y2="260" stroke="#555" stroke-width="6"/>
+  <!-- Flag mini: white rect + red dot -->
+  <rect x="720" y="210" width="90" height="60" rx="6" fill="#FFFFFF" stroke="#CCC" stroke-width="2"/>
+  <circle cx="765" cy="240" r="18" fill="#E53935"/>
+  <!-- Pin circle at base -->
+  <circle cx="660" cy="332" r="9" fill="#E53935"/>
+
+  <!-- Flag pin 2: France (left of globe) — tricolor blue/white/red -->
+  <line x1="340" y1="440" x2="255" y2="370" stroke="#555" stroke-width="6"/>
+  <rect x="210" y="318" width="90" height="60" rx="6" fill="#FFFFFF" stroke="#CCC" stroke-width="2"/>
+  <rect x="210" y="318" width="30" height="60" rx="6" fill="#1565C0"/>
+  <rect x="270" y="318" width="30" height="60" rx="6" fill="#E53935"/>
+  <circle cx="340" cy="442" r="9" fill="#1565C0"/>
+
+  <!-- Flag pin 3: Brazil-ish (bottom) — green + yellow diamond + blue dot -->
+  <line x1="520" y1="730" x2="570" y2="810" stroke="#555" stroke-width="6"/>
+  <rect x="520" y="812" width="90" height="60" rx="6" fill="#2E7D32" stroke="#CCC" stroke-width="2"/>
+  <!-- yellow diamond -->
+  <polygon points="565,820 600,842 565,864 530,842" fill="#FDD835"/>
+  <!-- blue circle -->
+  <circle cx="565" cy="842" r="14" fill="#1565C0"/>
+  <circle cx="520" cy="730" r="9" fill="#2E7D32"/>
+
+  <!-- Question mark accent top-left -->
+  <text x="248" y="310" font-family="Arial Black, sans-serif" font-size="180" font-weight="900"
+        fill="#2E7D3244" text-anchor="middle">?</text>
+  <text x="244" y="306" font-family="Arial Black, sans-serif" font-size="180" font-weight="900"
+        fill="#1B5E20" text-anchor="middle">?</text>
+</svg>

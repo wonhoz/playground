@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!--
+    icon_04 [metaphor] — Markdown 기호 배지들이 중앙 문서를 구성
+    컨셉: #, **, >, ` 등 Markdown 기호들이 모여 아름다운 문서가 완성됨
+    연결고리: Markdown 문법 기호들 = 문서의 재료이고, 뷰어는 그것을 아름다운 문서로 조합함
+    패턴: 레이어드 (기호 배지 + 중앙 문서)
+    색상: 민트-에메랄드 배경(#ECFDF5) + 컬러풀한 배지 + 흰 문서
+  -->
+  <defs>
+    <linearGradient id="bg04" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ECFDF5"/>
+      <stop offset="100%" stop-color="#A7F3D0"/>
+    </linearGradient>
+    <filter id="docShadow04">
+      <feDropShadow dx="0" dy="8" stdDeviation="16"
+                    flood-color="#065F46" flood-opacity="0.18"/>
+    </filter>
+    <filter id="badgeShadow04">
+      <feDropShadow dx="0" dy="4" stdDeviation="8"
+                    flood-color="#000" flood-opacity="0.18"/>
+    </filter>
+  </defs>
+
+  <!-- Layer 1: 민트 그라데이션 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg04)"/>
+
+  <!-- Layer 2: 중앙 문서 (흰 카드) -->
+  <rect x="312" y="196" width="400" height="632" rx="20"
+        fill="white" filter="url(#docShadow04)"/>
+  <!-- 문서 안 내용 줄들 -->
+  <!-- H1 헤딩 -->
+  <rect x="340" y="232" width="280" height="22" rx="5" fill="#3B82F6" opacity="0.85"/>
+  <!-- 구분선 -->
+  <rect x="340" y="266" width="340" height="3" rx="2" fill="#3B82F6" opacity="0.25"/>
+  <!-- 본문 줄들 -->
+  <rect x="340" y="286" width="330" height="12" rx="3" fill="#D1D5DB"/>
+  <rect x="340" y="310" width="300" height="12" rx="3" fill="#D1D5DB"/>
+  <rect x="340" y="334" width="340" height="12" rx="3" fill="#D1D5DB"/>
+  <!-- 코드 블록 -->
+  <rect x="340" y="366" width="340" height="64" rx="8" fill="#F3F4F6"/>
+  <rect x="356" y="380" width="200" height="10" rx="3" fill="#F97316" opacity="0.8"/>
+  <rect x="356" y="402" width="140" height="10" rx="3" fill="#8B5CF6" opacity="0.7"/>
+  <!-- 인용구 -->
+  <rect x="340" y="450" width="340" height="48" rx="6" fill="#EFF6FF"/>
+  <rect x="340" y="450" width="6" height="48" rx="0" fill="#3B82F6"/>
+  <rect x="356" y="465" width="220" height="10" rx="3" fill="#93C5FD"/>
+  <!-- 목록 -->
+  <circle cx="352" cy="524" r="5" fill="#10B981"/>
+  <rect x="364" y="518" width="220" height="12" rx="3" fill="#D1D5DB"/>
+  <circle cx="352" cy="552" r="5" fill="#10B981"/>
+  <rect x="364" y="546" width="180" height="12" rx="3" fill="#D1D5DB"/>
+  <!-- 하단 본문 -->
+  <rect x="340" y="580" width="320" height="12" rx="3" fill="#D1D5DB"/>
+  <rect x="340" y="604" width="280" height="12" rx="3" fill="#D1D5DB"/>
+  <rect x="340" y="628" width="340" height="12" rx="3" fill="#D1D5DB"/>
+  <rect x="340" y="652" width="260" height="12" rx="3" fill="#D1D5DB"/>
+  <rect x="340" y="688" width="300" height="12" rx="3" fill="#D1D5DB"/>
+  <rect x="340" y="712" width="240" height="12" rx="3" fill="#D1D5DB"/>
+  <rect x="340" y="752" width="200" height="10" rx="3" fill="#D1D5DB" opacity="0.5"/>
+  <rect x="340" y="776" width="160" height="10" rx="3" fill="#D1D5DB" opacity="0.4"/>
+
+  <!-- Layer 3: Markdown 기호 배지 (문서 주변에 부유) -->
+
+  <!-- # 배지 (좌상) -->
+  <g filter="url(#badgeShadow04)">
+    <circle cx="228" cy="268" r="74" fill="#3B82F6"/>
+    <text x="228" y="294"
+          font-family="Arial Black, Arial, sans-serif"
+          font-size="62" font-weight="900"
+          fill="white" text-anchor="middle">#</text>
+  </g>
+
+  <!-- ** 배지 (우상) -->
+  <g filter="url(#badgeShadow04)">
+    <circle cx="796" cy="268" r="74" fill="#8B5CF6"/>
+    <text x="796" y="290"
+          font-family="Consolas, monospace"
+          font-size="52" font-weight="700"
+          fill="white" text-anchor="middle">**</text>
+  </g>
+
+  <!-- > 배지 (좌중) -->
+  <g filter="url(#badgeShadow04)">
+    <circle cx="204" cy="580" r="66" fill="#F97316"/>
+    <text x="204" y="604"
+          font-family="Arial Black, Arial, sans-serif"
+          font-size="66" font-weight="900"
+          fill="white" text-anchor="middle">&gt;</text>
+  </g>
+
+  <!-- ` 배지 (우중) -->
+  <g filter="url(#badgeShadow04)">
+    <circle cx="820" cy="580" r="66" fill="#10B981"/>
+    <text x="820" y="604"
+          font-family="Consolas, monospace"
+          font-size="62" font-weight="700"
+          fill="white" text-anchor="middle">`</text>
+  </g>
+
+  <!-- --- 배지 (좌하, 작게) -->
+  <g filter="url(#badgeShadow04)">
+    <circle cx="272" cy="836" r="54" fill="#EF4444"/>
+    <text x="272" y="854"
+          font-family="Consolas, monospace"
+          font-size="44" font-weight="700"
+          fill="white" text-anchor="middle">---</text>
+  </g>
+
+  <!-- - 목록 배지 (우하) -->
+  <g filter="url(#badgeShadow04)">
+    <circle cx="752" cy="836" r="54" fill="#D97706"/>
+    <text x="752" y="858"
+          font-family="Arial Black, Arial, sans-serif"
+          font-size="52" font-weight="900"
+          fill="white" text-anchor="middle">-</text>
+  </g>
+</svg>

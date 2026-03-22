@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- 배경: 다크그린 -->
+  <rect width="1024" height="1024" rx="180" fill="#051A0A"/>
+
+  <!-- 공간·장면 패턴: URL이 이미지 파일로 변환되는 흐름 -->
+
+  <!-- URL 문자열 (좌측 상단에서 흘러내려옴) -->
+  <rect x="80" y="160" width="420" height="60" rx="30" fill="#0A3018"/>
+  <rect x="80" y="160" width="420" height="60" rx="30" fill="none" stroke="#22C55E" stroke-width="5"/>
+  <text x="100" y="200" font-family="monospace" font-size="22" fill="#22C55E">https://example.com/page</text>
+
+  <!-- 흐름 화살표 (아래로) -->
+  <line x1="290" y1="224" x2="290" y2="310" stroke="#16A34A" stroke-width="6" stroke-linecap="round" stroke-dasharray="12,8"/>
+  <polygon points="274,302 290,328 306,302" fill="#16A34A"/>
+
+  <!-- 처리 엔진 (중앙 원형) -->
+  <circle cx="512" cy="460" r="150" fill="#0A3018" stroke="#22C55E" stroke-width="8"/>
+  <!-- 톱니바퀴 효과 (원 주변 요소) -->
+  <g transform="translate(512,460)">
+    <rect x="-20" y="-130" width="40" height="30" rx="6" fill="#22C55E"/>
+    <rect x="-20" y="100" width="40" height="30" rx="6" fill="#22C55E"/>
+    <rect x="-130" y="-20" width="30" height="40" rx="6" fill="#22C55E"/>
+    <rect x="100" y="-20" width="30" height="40" rx="6" fill="#22C55E"/>
+    <rect x="-100" y="-100" width="26" height="26" rx="4" fill="#16A34A"/>
+    <rect x="74" y="-100" width="26" height="26" rx="4" fill="#16A34A"/>
+    <rect x="-100" y="74" width="26" height="26" rx="4" fill="#16A34A"/>
+    <rect x="74" y="74" width="26" height="26" rx="4" fill="#16A34A"/>
+  </g>
+  <!-- 엔진 내부: WebView2 + 캡처 아이콘 -->
+  <text x="512" y="440" font-family="monospace" font-size="26" font-weight="bold" fill="#22C55E" text-anchor="middle">CDP</text>
+  <text x="512" y="472" font-family="monospace" font-size="18" fill="#16A34A" text-anchor="middle">WebView2</text>
+  <!-- 카메라 아이콘 (작게) -->
+  <rect x="462" y="482" width="100" height="66" rx="10" fill="#0A3018" stroke="#22C55E" stroke-width="4"/>
+  <circle cx="512" cy="515" r="20" fill="none" stroke="#22C55E" stroke-width="4"/>
+  <circle cx="512" cy="515" r="10" fill="#22C55E"/>
+  <rect x="488" y="483" width="48" height="14" rx="5" fill="#0A3018" stroke="#22C55E" stroke-width="3"/>
+
+  <!-- 흐름 화살표 (아래로) -->
+  <line x1="512" y1="614" x2="512" y2="700" stroke="#16A34A" stroke-width="6" stroke-linecap="round" stroke-dasharray="12,8"/>
+  <polygon points="496,692 512,718 528,692" fill="#16A34A"/>
+
+  <!-- 출력 이미지 파일 (하단) -->
+  <rect x="300" y="720" width="424" height="160" rx="16" fill="#0A3018"/>
+  <rect x="300" y="720" width="424" height="160" rx="16" fill="none" stroke="#4ADE80" stroke-width="6"/>
+  <!-- 썸네일 이미지 -->
+  <rect x="320" y="740" width="140" height="120" rx="8" fill="#051A0A"/>
+  <rect x="320" y="740" width="140" height="120" rx="8" fill="none" stroke="#22C55E" stroke-width="3"/>
+  <circle cx="365" cy="775" r="18" fill="#FEBC2E"/>
+  <polygon points="320,860 370,800 420,840 460,800 460,860" fill="#0F4020"/>
+  <!-- 파일 정보 -->
+  <text x="480" y="780" font-family="monospace" font-size="18" fill="#4ADE80">20260322_example.png</text>
+  <text x="480" y="808" font-family="monospace" font-size="15" fill="#16A34A">1280 x 4200 px</text>
+  <rect x="480" y="820" width="80" height="28" rx="8" fill="#16A34A"/>
+  <text x="520" y="840" font-family="monospace" font-size="14" font-weight="bold" fill="white" text-anchor="middle">PNG</text>
+</svg>

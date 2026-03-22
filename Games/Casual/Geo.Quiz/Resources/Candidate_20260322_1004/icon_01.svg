@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: Background — vivid sky blue gradient -->
+  <defs>
+    <radialGradient id="bg1" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#4FC3F7"/>
+      <stop offset="100%" stop-color="#0277BD"/>
+    </radialGradient>
+    <radialGradient id="sun1" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FF5252"/>
+      <stop offset="100%" stop-color="#C62828"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Background rounded rect -->
+  <rect width="1024" height="1024" rx="180" fill="url(#bg1)"/>
+
+  <!-- Layer 2: Main object — Japanese flag (日の丸) simplified -->
+  <!-- Flag body: white rectangle -->
+  <rect x="212" y="300" width="600" height="380" rx="18" fill="#FFFFFF"/>
+  <!-- Red circle (Hinomaru) -->
+  <circle cx="512" cy="490" r="120" fill="url(#sun1)"/>
+
+  <!-- Layer 3: Detail — large question mark overlaid bottom-right -->
+  <!-- Question mark shadow -->
+  <text x="623" y="760" font-family="Arial Black, sans-serif" font-size="320" font-weight="900"
+        fill="#00000033" text-anchor="middle">?</text>
+  <!-- Question mark main -->
+  <text x="618" y="752" font-family="Arial Black, sans-serif" font-size="320" font-weight="900"
+        fill="#FFD600" text-anchor="middle">?</text>
+
+  <!-- Small globe icon top-left accent -->
+  <circle cx="248" cy="248" r="50" fill="none" stroke="#FFFFFF" stroke-width="6" opacity="0.7"/>
+  <ellipse cx="248" cy="248" rx="50" ry="20" fill="none" stroke="#FFFFFF" stroke-width="5" opacity="0.7"/>
+  <line x1="248" y1="198" x2="248" y2="298" stroke="#FFFFFF" stroke-width="5" opacity="0.7"/>
+</svg>

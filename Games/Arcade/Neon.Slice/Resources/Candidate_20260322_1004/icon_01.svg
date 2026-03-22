@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_01 | literal | 중앙 심볼 | 슬라이스되는 오각형 + 칼날 궤적 | 네온 시안/퍼플 -->
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="180" fill="#0D0D1A"/>
+  <rect width="1024" height="1024" rx="180" fill="url(#bg01)"/>
+
+  <defs>
+    <radialGradient id="bg01" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#1A0A2E"/>
+      <stop offset="100%" stop-color="#0D0D1A"/>
+    </radialGradient>
+    <filter id="glow01" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glowStrong01" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="14" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- 오각형 왼쪽 절반 (슬라이스된) -->
+  <polygon points="512,220 330,340 370,555 512,555 512,220"
+    fill="#00FFCC" opacity="0.9" filter="url(#glow01)"/>
+
+  <!-- 오각형 오른쪽 절반 (분리된, 살짝 이동) -->
+  <polygon points="512,220 694,340 654,555 512,555 512,220"
+    fill="#CC00FF" opacity="0.9" filter="url(#glow01)"
+    transform="translate(28, 22) rotate(6, 512, 387)"/>
+
+  <!-- 슬라이스 궤적 — 대각선 날카로운 선 -->
+  <line x1="240" y1="680" x2="800" y2="200"
+    stroke="#FFFFFF" stroke-width="6" stroke-linecap="round"
+    opacity="0.95" filter="url(#glowStrong01)"/>
+  <line x1="240" y1="680" x2="800" y2="200"
+    stroke="#00FFEE" stroke-width="2" stroke-linecap="round" opacity="1"/>
+
+  <!-- 슬라이스 잔상 선들 -->
+  <line x1="220" y1="700" x2="780" y2="220"
+    stroke="#00FFCC" stroke-width="2" stroke-linecap="round" opacity="0.3"/>
+  <line x1="260" y1="660" x2="820" y2="180"
+    stroke="#AA00EE" stroke-width="2" stroke-linecap="round" opacity="0.2"/>
+
+  <!-- 파편 조각들 -->
+  <polygon points="370,590 395,620 345,615" fill="#00FFCC" opacity="0.7" filter="url(#glow01)"/>
+  <polygon points="660,580 680,610 640,608" fill="#CC00FF" opacity="0.6" filter="url(#glow01)"/>
+  <circle cx="310" cy="640" r="8" fill="#00FFCC" opacity="0.5" filter="url(#glow01)"/>
+  <circle cx="720" cy="600" r="6" fill="#FF00AA" opacity="0.6" filter="url(#glow01)"/>
+  <polygon points="440,615 460,640 420,638" fill="#FFFFFF" opacity="0.4"/>
+  <circle cx="580" cy="625" r="5" fill="#CC00FF" opacity="0.5"/>
+
+  <!-- 슬라이스 끝점 스파크 -->
+  <circle cx="800" cy="200" r="12" fill="#FFFFFF" opacity="0.9" filter="url(#glowStrong01)"/>
+  <circle cx="800" cy="200" r="5" fill="#00FFEE" opacity="1"/>
+
+  <!-- 하단 "SLICE" 텍스트 -->
+  <text x="512" y="800" text-anchor="middle" font-family="Arial Black, sans-serif"
+    font-size="72" font-weight="900" letter-spacing="18"
+    fill="#00FFCC" opacity="0.85" filter="url(#glow01)">SLICE</text>
+</svg>

@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!--
+    icon_02 [literal] — 앱 UI 미니어처 (렌더링된 Markdown 화면)
+    컨셉: 앱을 열었을 때 실제로 보게 될 렌더링된 Markdown 화면을 그대로 아이콘에 담음
+    연결고리: H1 헤딩·코드블록·인용구가 아름답게 표시된 화면 = 이 앱의 핵심 가치
+    패턴: 공간/장면
+    색상: 파랑-퍼플 외부 + Catppuccin 다크 내부 (#1e1e2e)
+  -->
+  <defs>
+    <linearGradient id="bg02" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4338CA"/>
+      <stop offset="100%" stop-color="#1e1b4b"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Layer 1: 외부 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg02)"/>
+
+  <!-- Layer 2: 앱 창 -->
+  <rect x="100" y="108" width="824" height="808" rx="16" fill="#1e1e2e"/>
+
+  <!-- 탭바 배경 -->
+  <rect x="100" y="108" width="824" height="52" rx="16" fill="#181825"/>
+  <rect x="100" y="136" width="824" height="24" fill="#181825"/>
+
+  <!-- 활성 탭 -->
+  <rect x="122" y="118" width="148" height="32" rx="6" fill="#2a2a3d"/>
+  <rect x="122" y="146" width="148" height="4" rx="2" fill="#89b4fa"/>
+  <!-- 탭 텍스트 줄 표현 -->
+  <rect x="134" y="130" width="96" height="10" rx="3" fill="#89b4fa" opacity="0.7"/>
+
+  <!-- 비활성 탭 -->
+  <rect x="278" y="118" width="120" height="32" rx="6" fill="transparent"/>
+  <rect x="286" y="130" width="80" height="10" rx="3" fill="#4a4a6a" opacity="0.6"/>
+
+  <!-- 본문 영역 시작 y=165 -->
+
+  <!-- H1 헤딩 (파랑, 굵은 줄) -->
+  <rect x="122" y="180" width="480" height="26" rx="5" fill="#89b4fa"/>
+  <!-- H1 구분선 -->
+  <rect x="122" y="216" width="760" height="3" rx="2" fill="#89b4fa" opacity="0.28"/>
+
+  <!-- 본문 줄 1~3 -->
+  <rect x="122" y="236" width="680" height="15" rx="3" fill="#45457a" opacity="0.8"/>
+  <rect x="122" y="264" width="620" height="15" rx="3" fill="#45457a" opacity="0.8"/>
+  <rect x="122" y="292" width="700" height="15" rx="3" fill="#45457a" opacity="0.8"/>
+
+  <!-- H2 헤딩 (보라) -->
+  <rect x="122" y="330" width="340" height="20" rx="4" fill="#cba6f7" opacity="0.9"/>
+
+  <!-- 본문 줄 4 -->
+  <rect x="122" y="368" width="640" height="15" rx="3" fill="#45457a" opacity="0.8"/>
+
+  <!-- 코드 블록 -->
+  <rect x="122" y="400" width="760" height="88" rx="10" fill="#181825"/>
+  <!-- 코드 블록 내부 줄들 -->
+  <rect x="146" y="418" width="380" height="13" rx="3" fill="#fab387" opacity="0.85"/>
+  <rect x="146" y="444" width="260" height="13" rx="3" fill="#cba6f7" opacity="0.75"/>
+  <rect x="146" y="470" width="320" height="13" rx="3" fill="#a6e3a1" opacity="0.65"/>
+
+  <!-- 인용구 -->
+  <rect x="122" y="508" width="760" height="56" rx="8" fill="#2a2a3d"/>
+  <!-- 인용구 왼쪽 보더 -->
+  <rect x="122" y="508" width="7" height="56" rx="0" fill="#89b4fa"/>
+  <!-- 인용구 텍스트 줄 -->
+  <rect x="142" y="524" width="400" height="13" rx="3" fill="#888aa8" opacity="0.8"/>
+  <rect x="142" y="548" width="260" height="10" rx="3" fill="#888aa8" opacity="0.5"/>
+
+  <!-- 본문 줄 5~6 -->
+  <rect x="122" y="584" width="660" height="15" rx="3" fill="#45457a" opacity="0.7"/>
+  <rect x="122" y="612" width="580" height="15" rx="3" fill="#45457a" opacity="0.7"/>
+
+  <!-- 목록 항목들 (Layer 3) -->
+  <circle cx="134" cy="652" r="5" fill="#89b4fa" opacity="0.7"/>
+  <rect x="148" y="644" width="300" height="14" rx="3" fill="#45457a" opacity="0.6"/>
+  <circle cx="134" cy="682" r="5" fill="#cba6f7" opacity="0.7"/>
+  <rect x="148" y="674" width="240" height="14" rx="3" fill="#45457a" opacity="0.6"/>
+
+  <!-- 상태바 -->
+  <rect x="100" y="876" width="824" height="40" rx="8" fill="#181825"/>
+  <rect x="122" y="888" width="180" height="12" rx="3" fill="#45457a" opacity="0.7"/>
+  <rect x="700" y="888" width="80" height="12" rx="3" fill="#45457a" opacity="0.5"/>
+  <rect x="800" y="888" width="60" height="12" rx="3" fill="#45457a" opacity="0.5"/>
+</svg>

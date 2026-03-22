@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hue.Flow — Icon Candidates (2026-03-22 10:04)</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #13131f;
+      color: #e0e0e0;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      padding: 40px 32px 60px;
+    }
+
+    /* ─── Header ─── */
+    header { margin-bottom: 36px; }
+    header h1 { font-size: 28px; font-weight: 700; color: #89B4FA; letter-spacing: .03em; }
+    header p  { font-size: 13px; color: #888; margin-top: 6px; }
+
+    /* ─── Palette reference ─── */
+    .palette-ref {
+      display: flex; gap: 10px; margin-bottom: 40px; flex-wrap: wrap;
+    }
+    .swatch {
+      display: flex; flex-direction: column; align-items: center; gap: 5px;
+    }
+    .swatch-dot {
+      width: 36px; height: 36px; border-radius: 50%;
+      box-shadow: 0 2px 8px #0006;
+    }
+    .swatch span {
+      font-size: 10px; color: #aaa; font-family: monospace;
+    }
+
+    /* ─── Main grid ─── */
+    .grid-row {
+      display: flex; gap: 24px; flex-wrap: wrap;
+      margin-bottom: 48px;
+    }
+
+    .card {
+      background: #1e1e2e;
+      border: 1px solid #2a2a3e;
+      border-radius: 16px;
+      padding: 20px;
+      width: 210px;
+      display: flex; flex-direction: column; gap: 12px;
+    }
+    .card-img {
+      width: 160px; height: 160px;
+      margin: 0 auto;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #0d0d1a;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .card-img img { width: 160px; height: 160px; }
+
+    .badges { display: flex; gap: 6px; flex-wrap: wrap; }
+    .badge {
+      font-size: 10px; font-weight: 700; padding: 3px 9px; border-radius: 20px;
+      letter-spacing: .04em; text-transform: uppercase;
+    }
+    .badge-literal  { background: #2a4a8f; color: #89B4FA; }
+    .badge-metaphor { background: #4a2a5a; color: #CBA6F7; }
+    .badge-hybrid   { background: #2a5a3a; color: #A6E3A1; }
+
+    .card-title { font-size: 13px; font-weight: 700; color: #e0e0e0; }
+    .card-desc  { font-size: 11px; color: #888; line-height: 1.55; }
+
+    /* per-card palette swatches */
+    .card-palette { display: flex; gap: 5px; flex-wrap: wrap; }
+    .cp-dot { width: 16px; height: 16px; border-radius: 50%; }
+
+    /* ─── Size preview ─── */
+    .section-title {
+      font-size: 16px; font-weight: 700; color: #CBA6F7;
+      margin-bottom: 18px; padding-bottom: 8px;
+      border-bottom: 1px solid #2a2a3e;
+    }
+
+    .size-grid {
+      display: flex; gap: 32px; flex-wrap: wrap; margin-bottom: 12px;
+    }
+    .size-row {
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+    }
+    .size-label { font-size: 11px; color: #666; }
+    .icon-group {
+      display: flex; gap: 14px; flex-wrap: wrap; align-items: flex-end; margin-bottom: 32px;
+    }
+    .icon-item {
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+    }
+    .icon-item img { display: block; border-radius: 4px; image-rendering: pixelated; }
+    .icon-item span { font-size: 10px; color: #555; font-family: monospace; }
+
+    .size-section { margin-bottom: 40px; }
+    .size-section h3 { font-size: 13px; font-weight: 600; color: #888; margin-bottom: 10px; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Hue.Flow — Icon Candidates</h1>
+  <p>세션: 2026-03-22 10:04 &nbsp;|&nbsp; 5개 후보 &nbsp;|&nbsp; literal×2 / metaphor×2 / hybrid×1</p>
+</header>
+
+<!-- Palette reference -->
+<div class="palette-ref">
+  <div class="swatch"><div class="swatch-dot" style="background:#F38BA8"></div><span>#F38BA8</span><span>코랄레드</span></div>
+  <div class="swatch"><div class="swatch-dot" style="background:#89B4FA"></div><span>#89B4FA</span><span>퍼리윙클블루</span></div>
+  <div class="swatch"><div class="swatch-dot" style="background:#A6E3A1"></div><span>#A6E3A1</span><span>민트그린</span></div>
+  <div class="swatch"><div class="swatch-dot" style="background:#FAB387"></div><span>#FAB387</span><span>피치오렌지</span></div>
+  <div class="swatch"><div class="swatch-dot" style="background:#CBA6F7"></div><span>#CBA6F7</span><span>모브퍼플</span></div>
+  <div class="swatch"><div class="swatch-dot" style="background:#89DCEB"></div><span>#89DCEB</span><span>스카이틸</span></div>
+</div>
+
+<!-- Main 5-card row -->
+<div class="grid-row">
+
+  <!-- icon_01 -->
+  <div class="card">
+    <div class="card-img"><img src="icon_01.svg" alt="icon 01"/></div>
+    <div class="badges">
+      <span class="badge badge-literal">Literal</span>
+    </div>
+    <div class="card-title">01 — 격자 플러드 진행</div>
+    <div class="card-desc">
+      다크 배경 위 10×10 타일 격자. 좌상단에서 퍼리윙클블루가 영역을 잠식하며 나머지는 여전히 혼합색. 플러드필 진행 상태를 그대로 재현.
+    </div>
+    <div class="card-palette">
+      <div class="cp-dot" style="background:#89B4FA"></div>
+      <div class="cp-dot" style="background:#CBA6F7"></div>
+      <div class="cp-dot" style="background:#F38BA8"></div>
+      <div class="cp-dot" style="background:#A6E3A1"></div>
+      <div class="cp-dot" style="background:#FAB387"></div>
+      <div class="cp-dot" style="background:#89DCEB"></div>
+    </div>
+  </div>
+
+  <!-- icon_02 -->
+  <div class="card">
+    <div class="card-img"><img src="icon_02.svg" alt="icon 02"/></div>
+    <div class="badges">
+      <span class="badge badge-literal">Literal</span>
+    </div>
+    <div class="card-title">02 — UI 레이아웃 + "30"</div>
+    <div class="card-desc">
+      밝은 크림 배경. 좌=혼합 격자→화살표→우=민트 단색. 상단에 "30" 카운터 칩, 하단에 6색 팔레트 버튼 바. 실제 게임 UI를 아이콘으로 압축.
+    </div>
+    <div class="card-palette">
+      <div class="cp-dot" style="background:#A6E3A1"></div>
+      <div class="cp-dot" style="background:#FAB387"></div>
+      <div class="cp-dot" style="background:#CBA6F7"></div>
+      <div class="cp-dot" style="background:#F38BA8"></div>
+      <div class="cp-dot" style="background:#89B4FA"></div>
+      <div class="cp-dot" style="background:#89DCEB"></div>
+    </div>
+  </div>
+
+  <!-- icon_03 -->
+  <div class="card">
+    <div class="card-img"><img src="icon_03.svg" alt="icon 03"/></div>
+    <div class="badges">
+      <span class="badge badge-metaphor">Metaphor</span>
+    </div>
+    <div class="card-title">03 — 방울 낙하 파문</div>
+    <div class="card-desc">
+      다크 배경에 좌상단 물방울에서 동심원 파문이 퍼져나감. 퍼리윙클→모브→코랄→피치 그라디언트 물결. 우하단엔 혼합색 타일 잔재.
+    </div>
+    <div class="card-palette">
+      <div class="cp-dot" style="background:#89B4FA"></div>
+      <div class="cp-dot" style="background:#CBA6F7"></div>
+      <div class="cp-dot" style="background:#F38BA8"></div>
+      <div class="cp-dot" style="background:#FAB387"></div>
+      <div class="cp-dot" style="background:#A6E3A1"></div>
+      <div class="cp-dot" style="background:#89DCEB"></div>
+    </div>
+  </div>
+
+  <!-- icon_04 -->
+  <div class="card">
+    <div class="card-img"><img src="icon_04.svg" alt="icon 04"/></div>
+    <div class="badges">
+      <span class="badge badge-metaphor">Metaphor</span>
+    </div>
+    <div class="card-title">04 — 6색 파이 + 중앙 "30"</div>
+    <div class="card-desc">
+      따뜻한 크림 배경. 6개 파스텔 웨지가 중앙으로 흘러들어 합쳐지는 추상 파이. 중심 다크 원에 "30" 카운터. 색 선택이 중앙으로 수렴하는 메타포.
+    </div>
+    <div class="card-palette">
+      <div class="cp-dot" style="background:#F38BA8"></div>
+      <div class="cp-dot" style="background:#89B4FA"></div>
+      <div class="cp-dot" style="background:#A6E3A1"></div>
+      <div class="cp-dot" style="background:#FAB387"></div>
+      <div class="cp-dot" style="background:#CBA6F7"></div>
+      <div class="cp-dot" style="background:#89DCEB"></div>
+    </div>
+  </div>
+
+  <!-- icon_05 -->
+  <div class="card">
+    <div class="card-img"><img src="icon_05.svg" alt="icon 05"/></div>
+    <div class="badges">
+      <span class="badge badge-hybrid">Hybrid</span>
+    </div>
+    <div class="card-title">05 — 격자+파문+팔레트 통합</div>
+    <div class="card-desc">
+      민트 밝은 배경. 8×8 격자의 좌상단이 민트/틸 그라디언트로 채워지며 파문 선 발산. 우측 세로 6색 팔레트 점 + "30" 배지. 게임의 세 요소 동시 표현.
+    </div>
+    <div class="card-palette">
+      <div class="cp-dot" style="background:#A6E3A1"></div>
+      <div class="cp-dot" style="background:#89DCEB"></div>
+      <div class="cp-dot" style="background:#CBA6F7"></div>
+      <div class="cp-dot" style="background:#F38BA8"></div>
+      <div class="cp-dot" style="background:#FAB387"></div>
+      <div class="cp-dot" style="background:#89B4FA"></div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Size previews -->
+<div class="section-title">크기별 미리보기</div>
+
+<div class="size-section">
+  <h3>256 px</h3>
+  <div class="icon-group">
+    <div class="icon-item"><img src="icon_01.svg" width="256" height="256"/><span>01</span></div>
+    <div class="icon-item"><img src="icon_02.svg" width="256" height="256"/><span>02</span></div>
+    <div class="icon-item"><img src="icon_03.svg" width="256" height="256"/><span>03</span></div>
+    <div class="icon-item"><img src="icon_04.svg" width="256" height="256"/><span>04</span></div>
+    <div class="icon-item"><img src="icon_05.svg" width="256" height="256"/><span>05</span></div>
+  </div>
+</div>
+
+<div class="size-section">
+  <h3>64 px</h3>
+  <div class="icon-group">
+    <div class="icon-item"><img src="icon_01.svg" width="64" height="64"/><span>01</span></div>
+    <div class="icon-item"><img src="icon_02.svg" width="64" height="64"/><span>02</span></div>
+    <div class="icon-item"><img src="icon_03.svg" width="64" height="64"/><span>03</span></div>
+    <div class="icon-item"><img src="icon_04.svg" width="64" height="64"/><span>04</span></div>
+    <div class="icon-item"><img src="icon_05.svg" width="64" height="64"/><span>05</span></div>
+  </div>
+</div>
+
+<div class="size-section">
+  <h3>32 px</h3>
+  <div class="icon-group">
+    <div class="icon-item"><img src="icon_01.svg" width="32" height="32"/><span>01</span></div>
+    <div class="icon-item"><img src="icon_02.svg" width="32" height="32"/><span>02</span></div>
+    <div class="icon-item"><img src="icon_03.svg" width="32" height="32"/><span>03</span></div>
+    <div class="icon-item"><img src="icon_04.svg" width="32" height="32"/><span>04</span></div>
+    <div class="icon-item"><img src="icon_05.svg" width="32" height="32"/><span>05</span></div>
+  </div>
+</div>
+
+<div class="size-section">
+  <h3>16 px</h3>
+  <div class="icon-group">
+    <div class="icon-item"><img src="icon_01.svg" width="16" height="16"/><span>01</span></div>
+    <div class="icon-item"><img src="icon_02.svg" width="16" height="16"/><span>02</span></div>
+    <div class="icon-item"><img src="icon_03.svg" width="16" height="16"/><span>03</span></div>
+    <div class="icon-item"><img src="icon_04.svg" width="16" height="16"/><span>04</span></div>
+    <div class="icon-item"><img src="icon_05.svg" width="16" height="16"/><span>05</span></div>
+  </div>
+</div>
+
+</body>
+</html>

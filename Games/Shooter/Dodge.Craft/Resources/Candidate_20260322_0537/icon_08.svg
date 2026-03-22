@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_08: Literal / 레이어드 / 4가지 구조물 쇼케이스 + 중앙 플레이어 -->
+  <!-- 배경: 미드나잇 블루 -->
+  <rect width="1024" height="1024" rx="160" fill="#0A0A1F"/>
+
+  <!-- 4분할 배경 -->
+  <rect x="210" y="210" width="290" height="290" rx="12" fill="#0F0F2E" stroke="#1A1A4A" stroke-width="2"/>
+  <rect x="524" y="210" width="290" height="290" rx="12" fill="#0F1F0F" stroke="#1A3A1A" stroke-width="2"/>
+  <rect x="210" y="524" width="290" height="290" rx="12" fill="#0F1E0A" stroke="#1A3010" stroke-width="2"/>
+  <rect x="524" y="524" width="290" height="290" rx="12" fill="#1F0E00" stroke="#3A1A00" stroke-width="2"/>
+
+  <!-- === Wall 구역 (좌상) === -->
+  <text x="355" y="270" text-anchor="middle" font-family="Arial Black, sans-serif" font-size="28" font-weight="900" fill="#4A9EFF" opacity="0.8">WALL</text>
+  <!-- 벽 블록들 -->
+  <rect x="275" y="285" width="56" height="56" rx="6" fill="#1E4FD8" stroke="#4A9EFF" stroke-width="3"/>
+  <rect x="335" y="285" width="56" height="56" rx="6" fill="#1E4FD8" stroke="#4A9EFF" stroke-width="3"/>
+  <rect x="395" y="285" width="56" height="56" rx="6" fill="#1E4FD8" stroke="#4A9EFF" stroke-width="3"/>
+  <rect x="275" y="345" width="56" height="56" rx="6" fill="#1E4FD8" stroke="#4A9EFF" stroke-width="3"/>
+  <rect x="335" y="345" width="56" height="56" rx="6" fill="#2550E0" stroke="#4A9EFF" stroke-width="3"/>
+  <rect x="395" y="345" width="56" height="56" rx="6" fill="#1E4FD8" stroke="#4A9EFF" stroke-width="3"/>
+  <rect x="275" y="405" width="176" height="56" rx="6" fill="#1E4FD8" stroke="#4A9EFF" stroke-width="3"/>
+  <!-- 탄막 벽에 충돌 -->
+  <circle cx="260" cy="355" r="10" fill="#FF3333" stroke="#FF6666" stroke-width="2.5"/>
+
+  <!-- === Mirror 구역 (우상) === -->
+  <text x="669" y="270" text-anchor="middle" font-family="Arial Black, sans-serif" font-size="28" font-weight="900" fill="#7FFF7F" opacity="0.8">MIRROR</text>
+  <!-- 거울 대각선 -->
+  <rect x="615" y="285" width="26" height="190" rx="10" fill="#2ECC40" stroke="#7FFF7F" stroke-width="4" transform="rotate(-45 628 380)"/>
+  <!-- 입사 탄막 -->
+  <circle cx="580" cy="310" r="10" fill="#FF3333" stroke="#FF6666" stroke-width="2.5"/>
+  <line x1="565" y1="300" x2="578" y2="308" stroke="#FF3333" stroke-width="2" stroke-dasharray="4,3" opacity="0.6"/>
+  <!-- 반사 탄막 -->
+  <circle cx="700" cy="295" r="10" fill="#FF3333" stroke="#FF6666" stroke-width="2.5"/>
+  <line x1="650" y1="350" x2="692" y2="300" stroke="#FF3333" stroke-width="2" stroke-dasharray="4,3" opacity="0.6"/>
+  <!-- 반사 광 -->
+  <circle cx="645" cy="355" r="22" fill="none" stroke="#7FFF7F" stroke-width="3" opacity="0.5"/>
+
+  <!-- === Fan 구역 (좌하) === -->
+  <text x="355" y="584" text-anchor="middle" font-family="Arial Black, sans-serif" font-size="28" font-weight="900" fill="#00CED1" opacity="0.8">FAN</text>
+  <!-- 팬 -->
+  <g transform="translate(355, 680)">
+    <circle cx="0" cy="0" r="78" fill="#062830" stroke="#00CED1" stroke-width="4"/>
+    <ellipse cx="0" cy="-45" rx="14" ry="45" fill="#00CED1" opacity="0.9" transform="rotate(20)"/>
+    <ellipse cx="0" cy="-45" rx="14" ry="45" fill="#00CED1" opacity="0.9" transform="rotate(140)"/>
+    <ellipse cx="0" cy="-45" rx="14" ry="45" fill="#00CED1" opacity="0.9" transform="rotate(260)"/>
+    <circle cx="0" cy="0" r="16" fill="#00FFFF" stroke="#062830" stroke-width="3"/>
+    <circle cx="0" cy="0" r="7" fill="#041E20"/>
+  </g>
+  <!-- 편향되는 탄막 -->
+  <circle cx="260" cy="650" r="9" fill="#FF3333" opacity="0.7"/>
+  <circle cx="280" cy="680" r="9" fill="#FF4444" opacity="0.6"/>
+  <!-- 편향 후 -->
+  <circle cx="310" cy="760" r="9" fill="#FF3333" opacity="0.5"/>
+  <circle cx="290" cy="780" r="7" fill="#FF4444" opacity="0.4"/>
+
+  <!-- === Bomb 구역 (우하) === -->
+  <text x="669" y="584" text-anchor="middle" font-family="Arial Black, sans-serif" font-size="28" font-weight="900" fill="#FF6600" opacity="0.8">BOMB</text>
+  <!-- Bomb -->
+  <circle cx="669" cy="680" r="72" fill="#4A1A00" stroke="#FF6600" stroke-width="5"/>
+  <circle cx="669" cy="680" r="52" fill="#8B2500"/>
+  <circle cx="669" cy="680" r="34" fill="#FF4500" opacity="0.9"/>
+  <rect x="663" y="607" width="12" height="22" rx="4" fill="#8B4513"/>
+  <circle cx="675" cy="606" r="6" fill="#FFD700"/>
+  <!-- 폭발 파편 -->
+  <g stroke="#FF6600" stroke-width="3" fill="none" opacity="0.7">
+    <line x1="669" y1="600" x2="669" y2="588"/>
+    <line x1="710" y1="621" x2="720" y2="611"/>
+    <line x1="741" y1="680" x2="755" y2="680"/>
+    <line x1="710" y1="739" x2="720" y2="749"/>
+    <line x1="628" y1="621" x2="618" y2="611"/>
+    <line x1="597" y1="680" x2="583" y2="680"/>
+  </g>
+
+  <!-- 중앙 플레이어 -->
+  <circle cx="512" cy="512" r="44" fill="#FF6EB4" stroke="#FFB3D9" stroke-width="5"/>
+  <circle cx="512" cy="512" r="20" fill="#FFD6EC"/>
+  <!-- 중앙 십자 구분선 -->
+  <line x1="512" y1="235" x2="512" y2="789" stroke="#222244" stroke-width="4"/>
+  <line x1="235" y1="512" x2="789" y2="512" stroke="#222244" stroke-width="4"/>
+</svg>

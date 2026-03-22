@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_08 | Metaphor | 대각선·동적 | 텍스트 문자들이 대각선으로 모여 별/스타 형태를 이룸 -->
+  <!-- 색조: 딥 버건디/마룬 배경 + 황금색 문자 -->
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="128" fill="#1A0010"/>
+
+  <defs>
+    <radialGradient id="starGlow08" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFD700" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#FFD700" stop-opacity="0"/>
+    </radialGradient>
+    <!-- 별 클립 -->
+    <clipPath id="starClip08">
+      <polygon points="
+        512,190
+        568,380 768,380
+        610,500
+        668,690
+        512,580
+        356,690
+        414,500
+        256,380
+        456,380
+      "/>
+    </clipPath>
+  </defs>
+
+  <!-- 별 배경 글로우 -->
+  <circle cx="512" cy="512" r="350" fill="url(#starGlow08)"/>
+
+  <!-- 별 실루엣 배경 -->
+  <polygon points="512,190 568,380 768,380 610,500 668,690 512,580 356,690 414,500 256,380 456,380"
+    fill="#2A0020"/>
+
+  <!-- 별 안을 채우는 ASCII 문자 -->
+  <g clip-path="url(#starClip08)" font-family="Courier New, monospace" font-size="16" fill="#FFD700">
+    <!-- 윗 꼭짓점 -->
+    <text x="490" y="220">@ # *</text>
+    <text x="478" y="238">* . @ # *</text>
+    <text x="464" y="256"># @ * . @ # *</text>
+    <text x="452" y="274">. # * @ . # * @</text>
+    <text x="440" y="292">@ . # * @ . # * @ .</text>
+    <text x="428" y="310">* @ . # * @ . # * @ .</text>
+
+    <!-- 중간 가로 띠 -->
+    <text x="260" y="395">@ # * . @ # * . @ # * . @ # * . @ # * . @ # * . @</text>
+    <text x="260" y="413">. @ * # . @ * # . @ * # . @ * # . @ * # . @ * # .</text>
+    <text x="260" y="431">* . @ # * . @ # * . @ # * . @ # * . @ # * . @ # *</text>
+    <text x="260" y="449"># * . @ # * . @ # * . @ # * . @ # * . @ # * . @ #</text>
+    <text x="260" y="467">@ # * . @ # * . @ # * . @ # * . @ # * . @ # * . @</text>
+
+    <!-- 중앙 부분 -->
+    <text x="408" y="488">@ # * . @ # * . @ # * .</text>
+    <text x="400" y="506"># . @ * # . @ * # . @ * #</text>
+    <text x="396" y="524">* @ # . * @ # . * @ # . *</text>
+    <text x="396" y="542">. # * @ . # * @ . # * @ .</text>
+    <text x="400" y="560">@ . # * @ . # * @ . # * @</text>
+
+    <!-- 아래 양쪽 꼭짓점 -->
+    <text x="360" y="590">* # . @ * # . @ * #</text>
+    <text x="368" y="608">@ * # . @ * # . @</text>
+    <text x="376" y="626">. @ * # . @ * #</text>
+    <text x="384" y="644"># . @ * # . @</text>
+    <text x="392" y="662">* # . @ * #</text>
+    <text x="400" y="680">@ * # . @</text>
+
+    <text x="584" y="590">* # . @ * # . @ * #</text>
+    <text x="576" y="608">@ * # . @ * # . @</text>
+    <text x="568" y="626">. @ * # . @ * #</text>
+    <text x="560" y="644"># . @ * # . @</text>
+    <text x="552" y="662">* # . @ * #</text>
+    <text x="544" y="680">@ * # . @</text>
+  </g>
+
+  <!-- 별 외곽선 -->
+  <polygon points="512,190 568,380 768,380 610,500 668,690 512,580 356,690 414,500 256,380 456,380"
+    fill="none" stroke="#FFD700" stroke-width="5" opacity="0.8"/>
+
+  <!-- 중앙 심볼 -->
+  <text x="512" y="525" font-family="Courier New, monospace" font-size="36" fill="#FFF8C0" text-anchor="middle" font-weight="bold">*</text>
+</svg>

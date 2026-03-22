@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg04" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#08152C"/>
+      <stop offset="100%" stop-color="#040A18"/>
+    </linearGradient>
+    <linearGradient id="laserGrad04" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FF4444"/>
+      <stop offset="50%" stop-color="#FF0000"/>
+      <stop offset="100%" stop-color="#FF4444"/>
+    </linearGradient>
+    <clipPath id="frame04">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg04)"/>
+
+  <g clip-path="url(#frame04)">
+    <!-- Layer 2: Colorful brick rows (7 cols) -->
+    <!-- Row 1 - Red/Pink (top) -->
+    <rect x="82" y="140" width="116" height="50" rx="8" fill="#FF2D55"/>
+    <rect x="208" y="140" width="116" height="50" rx="8" fill="#FF4D70"/>
+    <!-- Center col 3 (512-58 to 512+58): destroyed by laser - show broken bits -->
+    <rect x="444" y="140" width="50" height="24" rx="5" fill="#FF2D55" opacity="0.6" transform="rotate(-12 469 152) translate(-15,-8)"/>
+    <rect x="464" y="152" width="44" height="20" rx="5" fill="#FF2D55" opacity="0.5" transform="rotate(8 486 162) translate(10,5)"/>
+    <rect x="654" y="140" width="116" height="50" rx="8" fill="#FF2D55"/>
+    <rect x="780" y="140" width="116" height="50" rx="8" fill="#FF4D70"/>
+    <rect x="82" y="140" width="116" height="14" rx="7" fill="white" opacity="0.15"/>
+    <rect x="208" y="140" width="116" height="14" rx="7" fill="white" opacity="0.12"/>
+    <rect x="654" y="140" width="116" height="14" rx="7" fill="white" opacity="0.15"/>
+    <rect x="780" y="140" width="116" height="14" rx="7" fill="white" opacity="0.12"/>
+
+    <!-- Row 2 - Orange -->
+    <rect x="82" y="202" width="116" height="50" rx="8" fill="#FF9500"/>
+    <rect x="208" y="202" width="116" height="50" rx="8" fill="#FFAA22"/>
+    <!-- Laser gap -->
+    <rect x="440" y="202" width="54" height="22" rx="5" fill="#FF9500" opacity="0.55" transform="rotate(10 467 213) translate(-10,-5)"/>
+    <rect x="654" y="202" width="116" height="50" rx="8" fill="#FF9500"/>
+    <rect x="780" y="202" width="116" height="50" rx="8" fill="#FFAA22"/>
+    <rect x="82" y="202" width="116" height="14" rx="7" fill="white" opacity="0.12"/>
+    <rect x="208" y="202" width="116" height="14" rx="7" fill="white" opacity="0.10"/>
+    <rect x="654" y="202" width="116" height="14" rx="7" fill="white" opacity="0.12"/>
+    <rect x="780" y="202" width="116" height="14" rx="7" fill="white" opacity="0.10"/>
+
+    <!-- Row 3 - Yellow -->
+    <rect x="82" y="264" width="116" height="50" rx="8" fill="#FFD700"/>
+    <rect x="208" y="264" width="116" height="50" rx="8" fill="#FFE033"/>
+    <!-- Laser gap -->
+    <rect x="654" y="264" width="116" height="50" rx="8" fill="#FFD700"/>
+    <rect x="780" y="264" width="116" height="50" rx="8" fill="#FFE033"/>
+    <rect x="82" y="264" width="116" height="14" rx="7" fill="white" opacity="0.13"/>
+    <rect x="654" y="264" width="116" height="14" rx="7" fill="white" opacity="0.13"/>
+
+    <!-- Row 4 - Lime -->
+    <rect x="82" y="326" width="116" height="50" rx="8" fill="#4CD964"/>
+    <rect x="208" y="326" width="116" height="50" rx="8" fill="#66EE80"/>
+    <!-- Laser gap (full destruction) -->
+    <rect x="654" y="326" width="116" height="50" rx="8" fill="#4CD964"/>
+    <rect x="780" y="326" width="116" height="50" rx="8" fill="#66EE80"/>
+
+    <!-- Row 5 - Cyan -->
+    <rect x="82" y="388" width="116" height="50" rx="8" fill="#5AC8FA"/>
+    <rect x="208" y="388" width="116" height="50" rx="8" fill="#44AAEE"/>
+    <rect x="334" y="388" width="116" height="50" rx="8" fill="#5AC8FA"/>
+    <!-- Laser gap col 4 (512) -->
+    <rect x="654" y="388" width="116" height="50" rx="8" fill="#44AAEE"/>
+    <rect x="780" y="388" width="116" height="50" rx="8" fill="#5AC8FA"/>
+    <rect x="908" y="388" width="34" height="50" rx="8" fill="#44AAEE"/>
+
+    <!-- Layer 3: Laser beam (red, vertical, cutting through bricks at x=512) -->
+    <!-- Outer glow red -->
+    <rect x="488" y="140" width="48" height="740" fill="#FF0000" opacity="0.08"/>
+    <rect x="498" y="140" width="28" height="740" fill="#FF2222" opacity="0.18"/>
+    <!-- Core laser (narrow bright) -->
+    <rect x="507" y="140" width="10" height="740" fill="#FF6666" rx="5"/>
+    <!-- Laser center bright line -->
+    <rect x="510" y="140" width="4" height="740" fill="white" rx="2" opacity="0.9"/>
+
+    <!-- Laser impact sparks (at each brick row) -->
+    <circle cx="512" cy="165" r="14" fill="#FF4444" opacity="0.9"/>
+    <circle cx="512" cy="227" r="12" fill="#FF4444" opacity="0.85"/>
+    <circle cx="512" cy="289" r="12" fill="#FF4444" opacity="0.8"/>
+    <circle cx="512" cy="351" r="11" fill="#FF4444" opacity="0.75"/>
+    <circle cx="512" cy="413" r="10" fill="#FF4444" opacity="0.7"/>
+
+    <!-- Ball - left side -->
+    <circle cx="240" cy="620" r="44" fill="white"/>
+    <ellipse cx="228" cy="608" rx="17" ry="11" fill="white" opacity="0.6"/>
+
+    <!-- Paddle with laser emitters at bottom -->
+    <rect x="280" y="870" width="464" height="50" rx="25" fill="#334488"/>
+    <rect x="280" y="870" width="464" height="18" rx="18" fill="white" opacity="0.15"/>
+    <!-- Left laser emitter -->
+    <circle cx="320" cy="870" r="14" fill="#FF4444"/>
+    <circle cx="320" cy="870" r="8" fill="#FF8888"/>
+    <!-- Right laser emitter -->
+    <circle cx="704" cy="870" r="14" fill="#FF4444"/>
+    <circle cx="704" cy="870" r="8" fill="#FF8888"/>
+  </g>
+</svg>

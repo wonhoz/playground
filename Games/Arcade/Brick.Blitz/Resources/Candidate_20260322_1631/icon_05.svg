@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg05" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0A2020"/>
+      <stop offset="100%" stop-color="#041414"/>
+    </linearGradient>
+    <radialGradient id="ball05" cx="40%" cy="35%" r="55%">
+      <stop offset="0%" stop-color="white"/>
+      <stop offset="100%" stop-color="#AAEEDD"/>
+    </radialGradient>
+    <clipPath id="frame05">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg05)"/>
+
+  <g clip-path="url(#frame05)">
+    <!-- Layer 2: Brick rows (top, some missing to show progress) -->
+    <!-- Row 1 - Partially destroyed -->
+    <rect x="82" y="130" width="106" height="46" rx="8" fill="#FF2D55"/>
+    <!-- Gap at pos 2 (brick destroyed) -->
+    <rect x="304" y="130" width="106" height="46" rx="8" fill="#FF2D55"/>
+    <!-- Gap at pos 4 -->
+    <rect x="526" y="130" width="106" height="46" rx="8" fill="#FF2D55"/>
+    <rect x="636" y="130" width="106" height="46" rx="8" fill="#FF4D70"/>
+    <!-- Gap at pos 7 -->
+    <rect x="856" y="130" width="86" height="46" rx="8" fill="#FF2D55"/>
+    <rect x="82" y="130" width="106" height="13" rx="6" fill="white" opacity="0.15"/>
+    <rect x="304" y="130" width="106" height="13" rx="6" fill="white" opacity="0.15"/>
+    <rect x="526" y="130" width="106" height="13" rx="6" fill="white" opacity="0.15"/>
+    <rect x="636" y="130" width="106" height="13" rx="6" fill="white" opacity="0.12"/>
+
+    <!-- Row 2 - More complete -->
+    <rect x="82" y="186" width="106" height="46" rx="8" fill="#FF9500"/>
+    <rect x="192" y="186" width="106" height="46" rx="8" fill="#FFAA22"/>
+    <rect x="302" y="186" width="106" height="46" rx="8" fill="#FF9500"/>
+    <!-- Gap at pos 4 -->
+    <rect x="522" y="186" width="106" height="46" rx="8" fill="#FF9500"/>
+    <rect x="632" y="186" width="106" height="46" rx="8" fill="#FFAA22"/>
+    <rect x="742" y="186" width="106" height="46" rx="8" fill="#FF9500"/>
+    <rect x="852" y="186" width="90" height="46" rx="8" fill="#FFAA22"/>
+    <rect x="82" y="186" width="106" height="13" rx="6" fill="white" opacity="0.12"/>
+    <rect x="192" y="186" width="106" height="13" rx="6" fill="white" opacity="0.10"/>
+    <rect x="302" y="186" width="106" height="13" rx="6" fill="white" opacity="0.12"/>
+    <rect x="522" y="186" width="106" height="13" rx="6" fill="white" opacity="0.12"/>
+    <rect x="632" y="186" width="106" height="13" rx="6" fill="white" opacity="0.10"/>
+    <rect x="742" y="186" width="106" height="13" rx="6" fill="white" opacity="0.12"/>
+
+    <!-- Row 3 - Full -->
+    <rect x="82" y="242" width="106" height="46" rx="8" fill="#FFD700"/>
+    <rect x="192" y="242" width="106" height="46" rx="8" fill="#FFE033"/>
+    <rect x="302" y="242" width="106" height="46" rx="8" fill="#FFD700"/>
+    <rect x="412" y="242" width="106" height="46" rx="8" fill="#FFE033"/>
+    <rect x="522" y="242" width="106" height="46" rx="8" fill="#FFD700"/>
+    <rect x="632" y="242" width="106" height="46" rx="8" fill="#FFE033"/>
+    <rect x="742" y="242" width="106" height="46" rx="8" fill="#FFD700"/>
+    <rect x="852" y="242" width="90" height="46" rx="8" fill="#FFE033"/>
+    <rect x="82" y="242" width="106" height="13" rx="6" fill="white" opacity="0.13"/>
+    <rect x="412" y="242" width="106" height="13" rx="6" fill="white" opacity="0.13"/>
+    <rect x="632" y="242" width="106" height="13" rx="6" fill="white" opacity="0.10"/>
+
+    <!-- Row 4 - Full -->
+    <rect x="82" y="298" width="106" height="46" rx="8" fill="#4CD964"/>
+    <rect x="192" y="298" width="106" height="46" rx="8" fill="#66EE80"/>
+    <rect x="302" y="298" width="106" height="46" rx="8" fill="#4CD964"/>
+    <rect x="412" y="298" width="106" height="46" rx="8" fill="#66EE80"/>
+    <rect x="522" y="298" width="106" height="46" rx="8" fill="#4CD964"/>
+    <rect x="632" y="298" width="106" height="46" rx="8" fill="#66EE80"/>
+    <rect x="742" y="298" width="106" height="46" rx="8" fill="#4CD964"/>
+    <rect x="852" y="298" width="90" height="46" rx="8" fill="#66EE80"/>
+
+    <!-- V-shape ball trajectory -->
+    <!-- Left leg of V (coming from bottom-left, hitting left wall, going up to bricks) -->
+    <!-- Glow -->
+    <polyline points="210,870 82,555 380,165" fill="none" stroke="#00FFAA" stroke-width="50" stroke-linecap="round" stroke-linejoin="round" opacity="0.08"/>
+    <polyline points="210,870 82,555 380,165" fill="none" stroke="#00FFAA" stroke-width="26" stroke-linecap="round" stroke-linejoin="round" opacity="0.25"/>
+    <!-- Core -->
+    <polyline points="210,870 82,555 380,165" fill="none" stroke="#44FFCC" stroke-width="11" stroke-linecap="round" stroke-linejoin="round" opacity="0.85"/>
+
+    <!-- Ball at current position (left wall bounce point) -->
+    <circle cx="82" cy="555" r="45" fill="url(#ball05)"/>
+    <ellipse cx="70" cy="543" rx="17" ry="11" fill="white" opacity="0.55"/>
+
+    <!-- Layer 3: Paddle at bottom (centered) -->
+    <rect x="282" y="875" width="460" height="50" rx="25" fill="#00AAAA"/>
+    <rect x="282" y="875" width="460" height="18" rx="18" fill="white" opacity="0.2"/>
+
+    <!-- Bounce spark at left wall -->
+    <circle cx="82" cy="555" r="22" fill="#AAFFEE" opacity="0.5"/>
+    <line x1="62" y1="535" x2="45" y2="518" stroke="#AAFFEE" stroke-width="7" stroke-linecap="round" opacity="0.7"/>
+    <line x1="62" y1="555" x2="42" y2="555" stroke="#AAFFEE" stroke-width="7" stroke-linecap="round" opacity="0.7"/>
+    <line x1="62" y1="575" x2="45" y2="592" stroke="#AAFFEE" stroke-width="7" stroke-linecap="round" opacity="0.7"/>
+  </g>
+</svg>

@@ -1,56 +1,52 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!--
+    icon_01 [literal] — Raw Markdown → 아름다운 헤딩 before/after
+    컨셉: "# Hello" raw text가 화살표 후 큰 파란 헤딩 "Hello"로 변신
+    연결고리: Markdown 기호(#)가 제거되고 아름답게 렌더링된 결과물이 나타남을 직접 표현
+    패턴: 대각선/동적
+    색상: Catppuccin Mocha 다크(#1e1e2e) + 파랑(#89b4fa) + 보라(#cba6f7)
+  -->
   <defs>
-    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#92400E"/>
-      <stop offset="100%" stop-color="#D97706"/>
+    <linearGradient id="bg01" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#24273a"/>
+      <stop offset="100%" stop-color="#1e1e2e"/>
     </linearGradient>
-    <linearGradient id="doc" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#FFFBEB"/>
-      <stop offset="100%" stop-color="#FEF3C7"/>
-    </linearGradient>
-    <linearGradient id="pen" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#1F2937"/>
-      <stop offset="100%" stop-color="#374151"/>
-    </linearGradient>
+    <filter id="headingGlow01">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
   </defs>
-  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
-  <!-- Document -->
-  <rect x="90" y="70" width="240" height="310" rx="12" fill="url(#doc)" stroke="#F59E0B" stroke-width="3"/>
-  <!-- Dog-ear corner -->
-  <polygon points="290,70 330,70 330,110" fill="#F59E0B" opacity="0.5"/>
-  <polygon points="290,70 290,110 330,110" fill="#FEF3C7"/>
-  <!-- Document lines - heading -->
-  <rect x="115" y="100" width="160" height="16" rx="4" fill="#92400E" opacity="0.6"/>
-  <rect x="115" y="126" width="190" height="10" rx="4" fill="#D97706" opacity="0.2"/>
-  <!-- MD syntax colored lines -->
-  <rect x="115" y="148" width="12" height="10" rx="2" fill="#D97706" opacity="0.8"/>
-  <rect x="132" y="148" width="130" height="10" rx="3" fill="#92400E" opacity="0.5"/>
-  <rect x="115" y="168" width="10" height="8" rx="2" fill="#D97706"/>
-  <rect x="130" y="168" width="10" height="8" rx="2" fill="#D97706"/>
-  <rect x="145" y="168" width="120" height="8" rx="3" fill="#92400E" opacity="0.45"/>
-  <rect x="115" y="188" width="180" height="8" rx="3" fill="#92400E" opacity="0.3"/>
-  <rect x="115" y="204" width="155" height="8" rx="3" fill="#92400E" opacity="0.3"/>
-  <rect x="115" y="220" width="170" height="8" rx="3" fill="#92400E" opacity="0.3"/>
-  <!-- Code block area -->
-  <rect x="115" y="240" width="200" height="60" rx="6" fill="#FEF9C3"/>
-  <rect x="125" y="252" width="100" height="7" rx="2" fill="#D97706" opacity="0.7"/>
-  <rect x="125" y="268" width="150" height="7" rx="2" fill="#92400E" opacity="0.5"/>
-  <rect x="125" y="284" width="80" height="7" rx="2" fill="#D97706" opacity="0.6"/>
-  <!-- Remaining lines -->
-  <rect x="115" y="316" width="180" height="8" rx="3" fill="#92400E" opacity="0.3"/>
-  <rect x="115" y="332" width="140" height="8" rx="3" fill="#92400E" opacity="0.25"/>
-  <!-- Pen/stylus diagonal -->
-  <g transform="rotate(-35 350 300)">
-    <rect x="310" y="180" width="22" height="200" rx="5" fill="url(#pen)"/>
-    <rect x="310" y="180" width="22" height="30" rx="5" fill="#F59E0B"/>
-    <polygon points="310,380 332,380 321,415" fill="#D97706"/>
-    <circle cx="321" cy="416" r="4" fill="#1F2937"/>
-    <!-- Pen clip -->
-    <rect x="328" y="185" width="6" height="120" rx="3" fill="#6B7280"/>
-  </g>
-  <!-- Sparkle near pen tip -->
-  <circle cx="330" cy="430" r="4" fill="#FCD34D" opacity="0.9"/>
-  <line x1="330" y1="420" x2="330" y2="415" stroke="#FCD34D" stroke-width="2"/>
-  <line x1="340" y1="430" x2="345" y2="430" stroke="#FCD34D" stroke-width="2"/>
-  <line x1="337" y1="423" x2="341" y2="419" stroke="#FCD34D" stroke-width="2"/>
+
+  <!-- Layer 1: 다크 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg01)"/>
+
+  <!-- Layer 2: Before — raw Markdown (희미한 회색) -->
+  <!-- `# Hello` 텍스트 (왼쪽 상단) -->
+  <text x="186" y="360"
+        font-family="Consolas, 'Cascadia Code', monospace"
+        font-size="88" font-weight="400"
+        fill="#4a4a6a" text-anchor="start"># Hello</text>
+  <!-- raw 느낌: 희미한 네모 커서 -->
+  <rect x="186" y="280" width="6" height="100" rx="3" fill="#4a4a6a" opacity="0.5"/>
+
+  <!-- 변환 화살표 (중앙) -->
+  <text x="512" y="544"
+        font-family="Arial Black, Arial, sans-serif"
+        font-size="130" font-weight="900"
+        fill="#cba6f7" text-anchor="middle">→</text>
+
+  <!-- Layer 2: After — 렌더링된 헤딩 (오른쪽 하단, 파랗고 크게) -->
+  <text x="840" y="706"
+        font-family="'Segoe UI', Arial, sans-serif"
+        font-size="164" font-weight="700"
+        fill="#89b4fa" text-anchor="end"
+        filter="url(#headingGlow01)">Hello</text>
+  <!-- 헤딩 구분선 (H1 스타일) -->
+  <line x1="510" y1="730" x2="840" y2="730"
+        stroke="#89b4fa" stroke-width="6" opacity="0.45" stroke-linecap="round"/>
+
+  <!-- Layer 3: 서브 — 다른 Markdown 기호들 희미하게 (배경 느낌) -->
+  <text x="186" y="820"
+        font-family="Consolas, monospace"
+        font-size="48" fill="#2e2e4e" text-anchor="start">**bold**  `code`  &gt; quote</text>
 </svg>

@@ -1,0 +1,36 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Orbit.Craft | 아인슈타인 공간 왜곡 격자 | 기하학 | #020A1A -->
+  <defs>
+    <radialGradient id="massGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FCD34D"/>
+      <stop offset="60%" stop-color="#F59E0B"/>
+      <stop offset="100%" stop-color="#D97706" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="160" fill="#020A1A"/>
+  <!-- Layer 2: Spacetime grid warped by central mass -->
+  <!-- Horizontal grid lines (warped toward center) -->
+  <path d="M 160 260 Q 300 310 512 320 Q 724 310 864 260" fill="none" stroke="#1E3A5F" stroke-width="2"/>
+  <path d="M 160 360 Q 300 380 512 390 Q 724 380 864 360" fill="none" stroke="#1E4A6F" stroke-width="2"/>
+  <path d="M 160 440 Q 280 460 512 470 Q 744 460 864 440" fill="none" stroke="#204E74" stroke-width="2.5"/>
+  <path d="M 160 512 Q 260 544 512 554 Q 764 544 864 512" fill="none" stroke="#205878" stroke-width="3"/>
+  <path d="M 160 584 Q 280 564 512 554 Q 744 564 864 584" fill="none" stroke="#204E74" stroke-width="2.5"/>
+  <path d="M 160 664 Q 300 644 512 634 Q 724 644 864 664" fill="none" stroke="#1E4A6F" stroke-width="2"/>
+  <path d="M 160 764 Q 300 714 512 704 Q 724 714 864 764" fill="none" stroke="#1E3A5F" stroke-width="2"/>
+  <!-- Vertical grid lines (warped) -->
+  <path d="M 280 160 Q 310 300 320 512 Q 310 724 280 864" fill="none" stroke="#1E3A5F" stroke-width="2"/>
+  <path d="M 380 160 Q 400 300 408 512 Q 400 724 380 864" fill="none" stroke="#1E4A6F" stroke-width="2"/>
+  <path d="M 460 160 Q 474 280 480 512 Q 474 744 460 864" fill="none" stroke="#204E74" stroke-width="2.5"/>
+  <path d="M 512 160 Q 536 260 544 512 Q 536 764 512 864" fill="none" stroke="#205878" stroke-width="3"/>
+  <path d="M 564 160 Q 554 280 548 512 Q 554 744 564 864" fill="none" stroke="#204E74" stroke-width="2.5"/>
+  <path d="M 644 160 Q 628 300 624 512 Q 628 724 644 864" fill="none" stroke="#1E4A6F" stroke-width="2"/>
+  <path d="M 744 160 Q 714 300 704 512 Q 714 724 744 864" fill="none" stroke="#1E3A5F" stroke-width="2"/>
+  <!-- Central massive object (planet/star) -->
+  <circle cx="512" cy="512" r="80" fill="url(#massGrad)"/>
+  <!-- Layer 3: Small probe on orbital path -->
+  <ellipse cx="512" cy="512" rx="200" ry="60" fill="none" stroke="#00FFCC" stroke-width="3" stroke-dasharray="12,6" opacity="0.7"/>
+  <polygon points="712,512 700,504 700,520" fill="#00FFCC" opacity="0.9"/>
+  <!-- Probe dot -->
+  <circle cx="706" cy="512" r="10" fill="#00FFCC"/>
+</svg>

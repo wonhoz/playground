@@ -1,0 +1,43 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Orbit.Craft | 위성 안테나 — 우주 신호 수신 | 중앙심볼 | #001A10 -->
+  <defs>
+    <radialGradient id="signalGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#4ADE80" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#4ADE80" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="antennaGlow">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="160" fill="#001A10"/>
+  <!-- Stars -->
+  <circle cx="200" cy="200" r="2" fill="white" opacity="0.4"/>
+  <circle cx="800" cy="180" r="1.5" fill="white" opacity="0.3"/>
+  <circle cx="860" cy="600" r="2" fill="white" opacity="0.4"/>
+  <circle cx="160" cy="700" r="1.5" fill="white" opacity="0.3"/>
+  <!-- Layer 2: Satellite dish -->
+  <!-- Dish base/mount -->
+  <rect x="468" y="720" width="88" height="120" rx="8" fill="#1A3A2A" stroke="#2D5A3A" stroke-width="3"/>
+  <rect x="420" y="830" width="184" height="24" rx="6" fill="#1A3A2A" stroke="#2D5A3A" stroke-width="3"/>
+  <!-- Dish support arm -->
+  <line x1="512" y1="720" x2="400" y2="560" stroke="#2D5A3A" stroke-width="12" stroke-linecap="round"/>
+  <!-- Dish bowl (parabola shape) -->
+  <path d="M260 460 Q340 320 512 300 Q684 320 764 460" fill="#1A3A2A" stroke="#4ADE80" stroke-width="5"/>
+  <path d="M280 456 Q360 330 512 318 Q664 330 744 456" fill="#2D5A3A"/>
+  <!-- Dish center feed horn -->
+  <line x1="512" y1="310" x2="450" y2="416" stroke="#4ADE80" stroke-width="6" stroke-linecap="round"/>
+  <circle cx="450" cy="420" r="18" fill="#065F46" stroke="#4ADE80" stroke-width="4"/>
+  <!-- Layer 3: Incoming signal waves from satellite -->
+  <!-- Small satellite in sky -->
+  <rect x="740" y="200" width="60" height="30" rx="6" fill="#1E3A5F" stroke="#60A5FA" stroke-width="3"/>
+  <line x1="700" y1="215" x2="740" y2="215" stroke="#60A5FA" stroke-width="4" stroke-linecap="round"/>
+  <line x1="800" y1="215" x2="840" y2="215" stroke="#60A5FA" stroke-width="4" stroke-linecap="round"/>
+  <!-- Signal arcs from satellite to dish -->
+  <path d="M760 230 Q640 300 450 420" fill="none" stroke="#4ADE80" stroke-width="3" stroke-dasharray="10,6" opacity="0.8" filter="url(#antennaGlow)"/>
+  <path d="M762 246 Q644 324 450 436" fill="none" stroke="#22C55E" stroke-width="2" stroke-dasharray="8,6" opacity="0.5"/>
+  <path d="M758 214 Q636 276 450 404" fill="none" stroke="#86EFAC" stroke-width="2" stroke-dasharray="8,6" opacity="0.4"/>
+  <!-- Signal reception glow -->
+  <circle cx="450" cy="420" r="50" fill="url(#signalGrad)"/>
+</svg>

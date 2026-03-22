@@ -1,0 +1,66 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Orbit.Craft | 성운 + 탐사선 — 신비로운 우주 탐사 | 공간/장면 | #060210 -->
+  <defs>
+    <radialGradient id="nebula8" cx="60%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#4A0088" stop-opacity="0.6"/>
+      <stop offset="40%" stop-color="#2A0050" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#060210" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="nebula8b" cx="30%" cy="70%" r="50%">
+      <stop offset="0%" stop-color="#0044AA" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#060210" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="starFilter8">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="160" fill="#060210"/>
+  <!-- Nebula glow clouds -->
+  <ellipse cx="600" cy="400" rx="350" ry="280" fill="url(#nebula8)" opacity="0.8"/>
+  <ellipse cx="350" cy="650" rx="280" ry="240" fill="url(#nebula8b)" opacity="0.7"/>
+  <!-- Star field -->
+  <circle cx="200" cy="180" r="2.5" fill="white" opacity="0.9" filter="url(#starFilter8)"/>
+  <circle cx="780" cy="200" r="2" fill="white" opacity="0.8"/>
+  <circle cx="850" cy="450" r="1.5" fill="white" opacity="0.7"/>
+  <circle cx="160" cy="600" r="2" fill="white" opacity="0.8"/>
+  <circle cx="900" cy="700" r="2.5" fill="white" opacity="0.9" filter="url(#starFilter8)"/>
+  <circle cx="350" cy="200" r="1.5" fill="white" opacity="0.6"/>
+  <circle cx="700" cy="780" r="2" fill="white" opacity="0.7"/>
+  <circle cx="420" cy="850" r="1.5" fill="#FFDDAA" opacity="0.6"/>
+  <circle cx="880" cy="300" r="2" fill="white" opacity="0.6"/>
+  <!-- Bright nebula stars -->
+  <circle cx="640" cy="320" r="4" fill="#FFD700" opacity="0.9" filter="url(#starFilter8)"/>
+  <circle cx="580" cy="480" r="3.5" fill="#AAEEFF" opacity="0.8" filter="url(#starFilter8)"/>
+  <circle cx="700" cy="400" r="3" fill="#FFD700" opacity="0.7" filter="url(#starFilter8)"/>
+  <circle cx="520" cy="350" r="3" fill="white" opacity="0.9" filter="url(#starFilter8)"/>
+  <!-- Layer 2: Nebula detail (gas cloud shapes) -->
+  <ellipse cx="620" cy="380" rx="140" ry="80" fill="#6600AA" opacity="0.3"/>
+  <ellipse cx="580" cy="440" rx="100" ry="60" fill="#4400AA" opacity="0.25"/>
+  <ellipse cx="360" cy="640" rx="120" ry="70" fill="#0044CC" opacity="0.25"/>
+  <!-- Gas filaments -->
+  <path d="M 500 300 Q 600 360 700 320 Q 750 350 780 400" stroke="#8844CC" stroke-width="3" fill="none" opacity="0.4"/>
+  <path d="M 450 480 Q 550 520 650 500 Q 700 520 740 560" stroke="#4466BB" stroke-width="2" fill="none" opacity="0.3"/>
+  <!-- Spacecraft approaching the nebula -->
+  <!-- Main body -->
+  <path d="M 280 680 L 340 656 L 380 680 L 340 704 Z" fill="#CCCCDD" stroke="#8888AA" stroke-width="3"/>
+  <!-- Nose cone -->
+  <polygon points="380,680 420,670 420,690" fill="#EEEEEE"/>
+  <!-- Engine bells -->
+  <ellipse cx="285" cy="672" rx="8" ry="14" fill="#888899"/>
+  <ellipse cx="285" cy="688" rx="8" ry="14" fill="#888899"/>
+  <!-- Engine glow (thrust) -->
+  <path d="M 278 658 Q 240 680 278 702" stroke="#4488FF" stroke-width="6" fill="none" stroke-linecap="round" opacity="0.8"/>
+  <path d="M 278 662 Q 248 680 278 698" stroke="#AACCFF" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.6"/>
+  <!-- Solar panels -->
+  <rect x="308" y="640" width="50" height="12" rx="2" fill="#1144AA" stroke="#4488FF" stroke-width="1"/>
+  <rect x="308" y="708" width="50" height="12" rx="2" fill="#1144AA" stroke="#4488FF" stroke-width="1"/>
+  <!-- Spacecraft heading toward nebula (flight path) -->
+  <path d="M 420 680 Q 500 640 570 600 Q 620 570 660 540" stroke="#4488FF" stroke-width="3" fill="none" stroke-dasharray="12,8" opacity="0.5"/>
+  <!-- Layer 3: Mission data overlay -->
+  <rect x="160" y="800" width="320" height="80" rx="10" fill="#060210" stroke="#7C3AED" stroke-width="2" opacity="0.9"/>
+  <text x="320" y="828" font-family="monospace" font-size="13" fill="#A855F7" text-anchor="middle">탐사선: ORBIT-7</text>
+  <text x="320" y="850" font-family="monospace" font-size="12" fill="#8888CC" text-anchor="middle">목표: NGC-7293 성운</text>
+  <text x="320" y="866" font-family="monospace" font-size="11" fill="#6666AA" text-anchor="middle">거리: 650 광년</text>
+</svg>

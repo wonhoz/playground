@@ -1,0 +1,51 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Orbit.Craft | 달 위상 변화 — 궤도 위치 | 레이어드 | #0A0414 -->
+  <defs>
+    <radialGradient id="moonGrad1" cx="40%" cy="35%" r="60%">
+      <stop offset="0%" stop-color="#F5F5DC"/>
+      <stop offset="100%" stop-color="#A0A070"/>
+    </radialGradient>
+    <radialGradient id="moonGrad2" cx="40%" cy="35%" r="60%">
+      <stop offset="0%" stop-color="#C8C890"/>
+      <stop offset="100%" stop-color="#606040"/>
+    </radialGradient>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="160" fill="#0A0414"/>
+  <!-- Stars -->
+  <circle cx="200" cy="180" r="1.5" fill="white" opacity="0.5"/>
+  <circle cx="820" cy="200" r="2" fill="white" opacity="0.4"/>
+  <circle cx="160" cy="700" r="1.5" fill="white" opacity="0.5"/>
+  <circle cx="860" cy="600" r="2" fill="white" opacity="0.4"/>
+  <circle cx="700" cy="160" r="1.5" fill="white" opacity="0.3"/>
+  <!-- Layer 2: Moon phase progression (8 phases) -->
+  <!-- New Moon -->
+  <circle cx="164" cy="512" r="50" fill="#1A1428"/>
+  <circle cx="164" cy="512" r="50" fill="none" stroke="#4A3880" stroke-width="2"/>
+  <!-- Waxing Crescent -->
+  <circle cx="278" cy="512" r="50" fill="#1A1428" stroke="#4A3880" stroke-width="2"/>
+  <path d="M278,462 Q318,512 278,562 Q300,512 278,462" fill="#F5F5DC"/>
+  <!-- First Quarter -->
+  <circle cx="392" cy="512" r="50" fill="#1A1428" stroke="#4A3880" stroke-width="2"/>
+  <path d="M392,462 A50,50 0 0,1 392,562 Z" fill="#F5F5DC"/>
+  <!-- Waxing Gibbous -->
+  <circle cx="506" cy="512" r="50" fill="url(#moonGrad1)" stroke="#4A3880" stroke-width="2"/>
+  <path d="M506,462 Q466,512 506,562 Q496,512 506,462" fill="#1A1428"/>
+  <!-- Full Moon (highlighted) -->
+  <circle cx="620" cy="512" r="60" fill="url(#moonGrad1)" stroke="#FCD34D" stroke-width="4"/>
+  <circle cx="620" cy="512" r="60" fill="none" stroke="#FBBF24" stroke-width="2" opacity="0.4"/>
+  <!-- Moon craters -->
+  <circle cx="600" cy="496" r="8" fill="#909060" opacity="0.5"/>
+  <circle cx="636" cy="524" r="6" fill="#909060" opacity="0.4"/>
+  <!-- Waning Gibbous -->
+  <circle cx="754" cy="512" r="50" fill="url(#moonGrad2)" stroke="#4A3880" stroke-width="2"/>
+  <path d="M754,462 Q794,512 754,562 Q764,512 754,462" fill="#1A1428"/>
+  <!-- Last Quarter -->
+  <circle cx="868" cy="512" r="50" fill="#1A1428" stroke="#4A3880" stroke-width="2"/>
+  <path d="M868,462 A50,50 0 0,0 868,562 Z" fill="#C0C080"/>
+  <!-- Layer 3: Orbit path below phases -->
+  <ellipse cx="512" cy="512" rx="360" ry="50" fill="none" stroke="#3730A3" stroke-width="2" stroke-dasharray="12,6" opacity="0.4"/>
+  <!-- Phase labels -->
+  <text x="512" y="760" font-family="Arial,sans-serif" font-size="22" fill="#818CF8" text-anchor="middle" opacity="0.7">달 위상 변화</text>
+  <text x="620" y="590" font-family="Arial,sans-serif" font-size="16" fill="#FCD34D" text-anchor="middle" opacity="0.8">보름달</text>
+</svg>

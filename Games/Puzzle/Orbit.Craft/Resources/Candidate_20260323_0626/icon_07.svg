@@ -1,0 +1,55 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Orbit.Craft | 중력 새총 궤적 — 행성 중력 이용한 궤도 조작 | 공간/장면 | #020814 -->
+  <defs>
+    <radialGradient id="spaceBg7" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#060C20"/>
+      <stop offset="100%" stop-color="#020814"/>
+    </radialGradient>
+    <filter id="orbitGlow7">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="160" fill="url(#spaceBg7)"/>
+  <!-- Stars -->
+  <circle cx="200" cy="200" r="2" fill="white" opacity="0.7"/>
+  <circle cx="780" cy="180" r="1.5" fill="white" opacity="0.6"/>
+  <circle cx="850" cy="600" r="2" fill="white" opacity="0.5"/>
+  <circle cx="160" cy="720" r="1.5" fill="white" opacity="0.6"/>
+  <circle cx="600" cy="230" r="2" fill="white" opacity="0.4"/>
+  <circle cx="300" cy="800" r="1.5" fill="white" opacity="0.5"/>
+  <circle cx="920" cy="400" r="2" fill="white" opacity="0.6"/>
+  <!-- Layer 2: Planets and gravity slingshot path -->
+  <!-- Large planet (gravity source) -->
+  <circle cx="680" cy="560" r="110" fill="#552200" stroke="#884400" stroke-width="5"/>
+  <!-- Planet surface detail -->
+  <ellipse cx="640" cy="530" rx="50" ry="25" fill="#663300" opacity="0.7"/>
+  <ellipse cx="710" cy="580" rx="40" ry="20" fill="#663300" opacity="0.6"/>
+  <!-- Planet ring -->
+  <ellipse cx="680" cy="560" rx="160" ry="40" fill="none" stroke="#AA6620" stroke-width="6" opacity="0.5"/>
+  <!-- Small planet (destination) -->
+  <circle cx="240" cy="300" r="40" fill="#1144AA" stroke="#2266CC" stroke-width="4"/>
+  <circle cx="220" cy="285" r="12" fill="#2255BB" opacity="0.7"/>
+  <!-- Spacecraft starting position -->
+  <circle cx="280" cy="760" r="14" fill="#22D3EE" stroke="#88EEFF" stroke-width="3" filter="url(#orbitGlow7)"/>
+  <!-- Gravity slingshot trajectory arc (the key mechanic) -->
+  <!-- Approach path -->
+  <path d="M 280 760 Q 500 700 620 580" stroke="#60A5FA" stroke-width="4" fill="none" stroke-dasharray="12,8" opacity="0.6"/>
+  <!-- Gravity curve around planet -->
+  <path d="M 620 580 Q 650 440 680 420 Q 740 400 760 450 Q 790 510 760 570 Q 730 630 680 650 Q 600 660 540 600" stroke="#60A5FA" stroke-width="5" fill="none" opacity="0.8"/>
+  <!-- Slingshot exit trajectory (toward small planet) -->
+  <path d="M 540 600 Q 460 560 380 460 Q 320 380 268 316" stroke="#4ADE80" stroke-width="5" fill="none" opacity="0.9" filter="url(#orbitGlow7)"/>
+  <!-- Trajectory arrow at end -->
+  <circle cx="268" cy="316" r="8" fill="#4ADE80" filter="url(#orbitGlow7)"/>
+  <!-- Velocity vector arrows along path -->
+  <polygon points="560,598 548,580 574,580" fill="#60A5FA" opacity="0.7"/>
+  <polygon points="440,530 428,514 452,514" fill="#4ADE80" opacity="0.8" transform="rotate(30 440 522)"/>
+  <!-- Gravity field visualization (concentric ellipses) -->
+  <ellipse cx="680" cy="560" rx="180" ry="180" fill="none" stroke="#884400" stroke-width="1" stroke-dasharray="6,6" opacity="0.3"/>
+  <ellipse cx="680" cy="560" rx="220" ry="220" fill="none" stroke="#884400" stroke-width="1" stroke-dasharray="6,6" opacity="0.2"/>
+  <!-- Layer 3: Delta-V indicator -->
+  <rect x="200" y="840" width="200" height="56" rx="8" fill="#060C20" stroke="#60A5FA" stroke-width="2"/>
+  <text x="300" y="864" font-family="monospace" font-size="13" fill="#60A5FA" text-anchor="middle">ΔV 절약</text>
+  <text x="300" y="884" font-family="monospace" font-size="14" fill="#22D3EE" text-anchor="middle" font-weight="bold">-2,340 m/s</text>
+</svg>

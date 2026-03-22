@@ -1,0 +1,36 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Orbit.Craft | 블랙홀 와류 — 강한 중력 중심 | 대각선/동적 | #000000 -->
+  <defs>
+    <radialGradient id="blackhole" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#000000"/>
+      <stop offset="40%" stop-color="#000000"/>
+      <stop offset="70%" stop-color="#1A0A2E"/>
+      <stop offset="100%" stop-color="#2D0A5E"/>
+    </radialGradient>
+    <filter id="bhGlow">
+      <feGaussianBlur stdDeviation="14" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="160" fill="#000008"/>
+  <!-- Layer 2: Black hole event horizon + accretion disk -->
+  <!-- Accretion disk (elliptical ring around black hole) -->
+  <ellipse cx="512" cy="512" r="280" ry="80" fill="none" stroke="#A855F7" stroke-width="18" opacity="0.3" filter="url(#bhGlow)"/>
+  <ellipse cx="512" cy="512" r="240" ry="65" fill="none" stroke="#7C3AED" stroke-width="12" opacity="0.5" filter="url(#bhGlow)"/>
+  <ellipse cx="512" cy="512" r="200" ry="52" fill="none" stroke="#9333EA" stroke-width="8" opacity="0.7" filter="url(#bhGlow)"/>
+  <!-- Hot gas ring close to event horizon -->
+  <ellipse cx="512" cy="512" r="160" ry="40" fill="none" stroke="#F0ABFC" stroke-width="6" opacity="0.9" filter="url(#bhGlow)"/>
+  <!-- Black hole event horizon -->
+  <circle cx="512" cy="512" r="110" fill="url(#blackhole)"/>
+  <circle cx="512" cy="512" r="110" fill="none" stroke="#7C3AED" stroke-width="4" opacity="0.8" filter="url(#bhGlow)"/>
+  <!-- Gravitational lensing arc (light bending) -->
+  <path d="M290 390 Q512 300 734 390" fill="none" stroke="#C4B5FD" stroke-width="3" opacity="0.4"/>
+  <path d="M270 630 Q512 720 754 630" fill="none" stroke="#C4B5FD" stroke-width="3" opacity="0.4"/>
+  <!-- Probe being pulled in (spiral path) -->
+  <path d="M840 300 Q760 350 720 420 Q700 480 680 490 Q660 500 650 510" fill="none" stroke="#00FFCC" stroke-width="5" stroke-linecap="round" stroke-dasharray="12,5" filter="url(#bhGlow)"/>
+  <!-- Probe head -->
+  <circle cx="650" cy="510" r="12" fill="#00FFCC" filter="url(#bhGlow)"/>
+  <!-- Layer 3: WARNING label -->
+  <text x="512" y="840" font-family="Arial,sans-serif" font-size="26" fill="#A855F7" text-anchor="middle" opacity="0.8" filter="url(#bhGlow)">⚠ 중력 위험 구역</text>
+</svg>

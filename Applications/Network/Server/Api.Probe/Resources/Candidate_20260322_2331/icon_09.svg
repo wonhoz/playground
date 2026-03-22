@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg09" x1="0" y1="0" x2="0.5" y2="1">
+      <stop offset="0%" stop-color="#1E0A3C"/>
+      <stop offset="100%" stop-color="#0D0518"/>
+    </linearGradient>
+    <linearGradient id="bolt09" x1="0" y1="0" x2="0.2" y2="1">
+      <stop offset="0%" stop-color="#FDE68A"/>
+      <stop offset="60%" stop-color="#F59E0B"/>
+      <stop offset="100%" stop-color="#D97706"/>
+    </linearGradient>
+    <filter id="glow09" x="-40%" y="-30%" width="180%" height="160%">
+      <feGaussianBlur stdDeviation="20" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Layer 1: Midnight purple background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg09)"/>
+  <!-- Stars/dots -->
+  <circle cx="180" cy="200" r="3" fill="#A78BFA" opacity="0.4"/>
+  <circle cx="820" cy="180" r="2" fill="#A78BFA" opacity="0.3"/>
+  <circle cx="900" cy="400" r="3" fill="#C4B5FD" opacity="0.3"/>
+  <circle cx="140" cy="700" r="2" fill="#A78BFA" opacity="0.25"/>
+  <circle cx="880" cy="780" r="3" fill="#C4B5FD" opacity="0.3"/>
+  <circle cx="350" cy="900" r="2" fill="#A78BFA" opacity="0.2"/>
+  <circle cx="700" cy="870" r="2" fill="#A78BFA" opacity="0.25"/>
+
+  <!-- Layer 2: Gold lightning bolt (left-center) -->
+  <g filter="url(#glow09)">
+    <polygon points="520,120 310,500 460,500 390,880 640,420 485,420"
+             fill="url(#bolt09)"
+             stroke="#FDE68A" stroke-width="6" stroke-linejoin="round"/>
+  </g>
+
+  <!-- Layer 3: JSON {} braces (right side, large) -->
+  <!-- Opening brace -->
+  <text x="580" y="460" font-family="'Consolas','Courier New',monospace" font-size="420" font-weight="bold"
+        fill="none" stroke="#A78BFA" stroke-width="18" opacity="0.7">{</text>
+  <!-- Closing brace (bottom right) -->
+  <text x="720" y="920" font-family="'Consolas','Courier New',monospace" font-size="240" font-weight="bold"
+        fill="none" stroke="#C4B5FD" stroke-width="12" opacity="0.5">}</text>
+
+  <!-- Small dot between braces (JSON property hint) -->
+  <circle cx="800" cy="540" r="14" fill="#F59E0B" opacity="0.6"/>
+  <circle cx="800" cy="600" r="10" fill="#F59E0B" opacity="0.4"/>
+  <circle cx="800" cy="650" r="8" fill="#F59E0B" opacity="0.3"/>
+</svg>

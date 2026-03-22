@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg05" x1="0" y1="0" x2="0.5" y2="1">
+      <stop offset="0%" stop-color="#0F1F40"/>
+      <stop offset="100%" stop-color="#060D1F"/>
+    </linearGradient>
+    <linearGradient id="bolt05" x1="0" y1="0" x2="0.2" y2="1">
+      <stop offset="0%" stop-color="#67E8F9"/>
+      <stop offset="60%" stop-color="#22D3EE"/>
+      <stop offset="100%" stop-color="#0891B2"/>
+    </linearGradient>
+    <filter id="glow05" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="22" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="outerGlow05" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="40" result="blur"/>
+      <feMerge><feMergeNode in="blur"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg05)"/>
+
+  <!-- Outer glow halo -->
+  <polygon points="580,120 360,520 510,520 440,900 700,420 540,420" fill="#22D3EE" opacity="0.12" filter="url(#outerGlow05)"/>
+
+  <!-- Horizontal speed lines -->
+  <line x1="100" y1="350" x2="340" y2="350" stroke="#22D3EE" stroke-width="8" stroke-linecap="round" opacity="0.15"/>
+  <line x1="80" y1="510" x2="300" y2="510" stroke="#22D3EE" stroke-width="5" stroke-linecap="round" opacity="0.12"/>
+  <line x1="100" y1="670" x2="340" y2="670" stroke="#22D3EE" stroke-width="8" stroke-linecap="round" opacity="0.15"/>
+
+  <!-- Layer 2: Bold Lightning bolt (center) -->
+  <g filter="url(#glow05)">
+    <polygon points="580,120 360,520 510,520 440,900 700,420 540,420"
+             fill="url(#bolt05)"
+             stroke="#A5F3FC" stroke-width="8" stroke-linejoin="round"/>
+  </g>
+
+  <!-- Layer 3: Inner bright core -->
+  <polygon points="567,200 420,490 510,490 460,820 660,450 555,450"
+           fill="white" opacity="0.35"/>
+
+  <!-- Small arrow hint at bottom pointing right -->
+  <polygon points="740,760 820,800 740,840" fill="#22D3EE" opacity="0.7"/>
+  <line x1="660" y1="800" x2="745" y2="800" stroke="#22D3EE" stroke-width="14" stroke-linecap="round" opacity="0.7"/>
+</svg>

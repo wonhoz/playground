@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg10" x1="0" y1="0" x2="0.6" y2="1">
+      <stop offset="0%" stop-color="#064E3B"/>
+      <stop offset="100%" stop-color="#022C22"/>
+    </linearGradient>
+    <linearGradient id="arrow10" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#34D399"/>
+      <stop offset="100%" stop-color="#10B981"/>
+    </linearGradient>
+    <linearGradient id="check10" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#A7F3D0"/>
+      <stop offset="100%" stop-color="#6EE7B7"/>
+    </linearGradient>
+    <filter id="glow10" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="16" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Layer 1: Emerald background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg10)"/>
+  <!-- Subtle radial glow center -->
+  <circle cx="512" cy="512" r="380" fill="#10B981" opacity="0.05"/>
+
+  <!-- Layer 2: Large send/play arrow (left side, pointing right) -->
+  <g filter="url(#glow10)">
+    <!-- Arrow shaft -->
+    <rect x="140" y="462" width="480" height="100" rx="50" fill="url(#arrow10)"/>
+    <!-- Arrowhead -->
+    <polygon points="580,340 820,512 580,684" fill="url(#arrow10)"/>
+  </g>
+
+  <!-- Diagonal divider line -->
+  <line x1="540" y1="200" x2="780" y2="800" stroke="#34D399" stroke-width="3" opacity="0.15" stroke-linecap="round"/>
+
+  <!-- Layer 3: Check mark (right side, response success) -->
+  <g filter="url(#glow10)">
+    <!-- Circle backdrop -->
+    <circle cx="730" cy="340" r="140" fill="#065F46" opacity="0.8"/>
+    <circle cx="730" cy="340" r="140" fill="none" stroke="#34D399" stroke-width="8"/>
+    <!-- Check mark -->
+    <polyline points="650,340 710,400 820,270"
+              fill="none" stroke="url(#check10)"
+              stroke-width="48" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <!-- Status code 200 below check -->
+  <rect x="590" y="530" width="280" height="80" rx="14" fill="#065F46"/>
+  <rect x="590" y="530" width="280" height="80" rx="14" fill="none" stroke="#34D399" stroke-width="4"/>
+  <text x="730" y="590" font-family="'Consolas','Courier New',monospace" font-size="54" font-weight="bold"
+        fill="#6EE7B7" text-anchor="middle">200 OK</text>
+
+  <!-- Small elapsed time hint -->
+  <text x="730" y="680" font-family="'Consolas','Courier New',monospace" font-size="36"
+        fill="#34D399" text-anchor="middle" opacity="0.55">42 ms</text>
+</svg>

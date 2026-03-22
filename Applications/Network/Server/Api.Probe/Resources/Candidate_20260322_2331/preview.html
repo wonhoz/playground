@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"/>
+<title>Api.Probe — Icon Candidates (2026-03-22)</title>
+<style>
+  :root {
+    --bg: #0A0B14;
+    --card: #12131F;
+    --border: #1E1F32;
+    --text: #E0E0F0;
+    --dim: #6B7280;
+    --accent: #F59E0B;
+    --accent2: #22D3EE;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Segoe UI', 'Consolas', sans-serif;
+    padding: 40px 32px 60px;
+    min-height: 100vh;
+  }
+  header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+  header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+  }
+  header p {
+    color: var(--dim);
+    font-size: 14px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 28px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .card {
+    background: var(--card);
+    border: 1.5px solid var(--border);
+    border-radius: 16px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+  }
+  .card:hover {
+    transform: scale(1.06) translateY(-4px);
+    border-color: var(--accent);
+    box-shadow: 0 8px 40px rgba(245,158,11,0.15);
+  }
+  .icon-wrap {
+    width: 180px;
+    height: 180px;
+    border-radius: 36px;
+    overflow: hidden;
+    background: #1A1B28;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .icon-wrap img {
+    width: 180px;
+    height: 180px;
+    display: block;
+  }
+  .info { width: 100%; }
+  .badge-row {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+  }
+  .num {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--dim);
+    background: #1E1F32;
+    border-radius: 6px;
+    padding: 2px 8px;
+    letter-spacing: 1px;
+  }
+  .type-badge {
+    font-size: 11px;
+    font-weight: 600;
+    border-radius: 6px;
+    padding: 2px 10px;
+    letter-spacing: 0.5px;
+  }
+  .literal  { background: #1C3D5A; color: #60A5FA; }
+  .metaphor { background: #3B1C5A; color: #C084FC; }
+  .hybrid   { background: #1C3B27; color: #4ADE80; }
+  .title {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+  .concept {
+    font-size: 12px;
+    color: var(--dim);
+    line-height: 1.5;
+  }
+  .palette {
+    display: flex;
+    gap: 6px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+  }
+  .swatch {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(255,255,255,0.12);
+    cursor: default;
+  }
+  .pattern {
+    font-size: 11px;
+    color: #4B5563;
+    margin-top: 4px;
+    font-style: italic;
+  }
+  footer {
+    text-align: center;
+    margin-top: 60px;
+    color: #374151;
+    font-size: 12px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>⚡ Api.Probe — Icon Candidates</h1>
+  <p>생성일: 2026-03-22 23:31 &nbsp;|&nbsp; Candidate_20260322_2331 &nbsp;|&nbsp; 총 10개</p>
+  <p style="margin-top:6px; color:#4B5563;">REST API 테스트 도구 · 로켓/번개 추상화 테마</p>
+</header>
+
+<div class="grid">
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_01.svg" alt="icon_01"/></div>
+    <div class="info">
+      <div class="badge-row">
+        <span class="num">01</span>
+        <span class="type-badge literal">literal</span>
+      </div>
+      <div class="title">HTTP 메서드 배지 스택</div>
+      <div class="concept">GET/POST/DEL 색상 배지 3개 — 앱을 열면 보게 되는 사이드바 그 자체</div>
+      <div class="pattern">구성: 레이어드 | 배경: 다크네이비</div>
+      <div class="palette">
+        <div class="swatch" style="background:#1A1B2E" title="#1A1B2E"></div>
+        <div class="swatch" style="background:#14B8A6" title="#14B8A6 GET"></div>
+        <div class="swatch" style="background:#22C55E" title="#22C55E POST"></div>
+        <div class="swatch" style="background:#EF4444" title="#EF4444 DEL"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_02.svg" alt="icon_02"/></div>
+    <div class="info">
+      <div class="badge-row">
+        <span class="num">02</span>
+        <span class="type-badge literal">literal</span>
+      </div>
+      <div class="title">번개 + 200 OK 뱃지</div>
+      <div class="concept">요청이 날아가는 순간(번개) + 성공 응답(200) — 전송&확인의 핵심 루프</div>
+      <div class="pattern">구성: 중앙심볼 | 배경: 다크퍼플</div>
+      <div class="palette">
+        <div class="swatch" style="background:#2D1B4E" title="#2D1B4E"></div>
+        <div class="swatch" style="background:#FDE047" title="#FDE047 번개"></div>
+        <div class="swatch" style="background:#22C55E" title="#22C55E 200OK"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_03.svg" alt="icon_03"/></div>
+    <div class="info">
+      <div class="badge-row">
+        <span class="num">03</span>
+        <span class="type-badge literal">literal</span>
+      </div>
+      <div class="title">curl 터미널 코드뷰</div>
+      <div class="concept">$ curl -X GET / HTTP 200 OK — 개발자가 실제로 보는 화면을 아이콘으로</div>
+      <div class="pattern">구성: 기하학추상 | 배경: 다크그린</div>
+      <div class="palette">
+        <div class="swatch" style="background:#0D1F12" title="#0D1F12"></div>
+        <div class="swatch" style="background:#4ADE80" title="#4ADE80 프롬프트"></div>
+        <div class="swatch" style="background:#60A5FA" title="#60A5FA 플래그"></div>
+        <div class="swatch" style="background:#FDE047" title="#FDE047 URL"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_04.svg" alt="icon_04"/></div>
+    <div class="info">
+      <div class="badge-row">
+        <span class="num">04</span>
+        <span class="type-badge metaphor">metaphor</span>
+      </div>
+      <div class="title">로켓 발사</div>
+      <div class="concept">API 요청이 서버를 향해 발사되는 느낌 — 단순 HTTP보다 빠르고 강력하다</div>
+      <div class="pattern">구성: 대각선/동적 | 배경: 딥스페이스</div>
+      <div class="palette">
+        <div class="swatch" style="background:#0A0E1A" title="#0A0E1A"></div>
+        <div class="swatch" style="background:#E0E0E0" title="#E0E0E0 로켓"></div>
+        <div class="swatch" style="background:#F97316" title="#F97316 불꽃"></div>
+        <div class="swatch" style="background:#60A5FA" title="#60A5FA 창문"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_05.svg" alt="icon_05"/></div>
+    <div class="info">
+      <div class="badge-row">
+        <span class="num">05</span>
+        <span class="type-badge metaphor">metaphor</span>
+      </div>
+      <div class="title">번개 화살표 (빠른 응답)</div>
+      <div class="concept">API 응답 속도를 시각화 — 번개처럼 빠른 request/response 사이클</div>
+      <div class="pattern">구성: 중앙심볼 | 배경: 일렉트릭블루</div>
+      <div class="palette">
+        <div class="swatch" style="background:#0F1F40" title="#0F1F40"></div>
+        <div class="swatch" style="background:#67E8F9" title="#67E8F9 번개"></div>
+        <div class="swatch" style="background:#22D3EE" title="#22D3EE 시안"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_06.svg" alt="icon_06"/></div>
+    <div class="info">
+      <div class="badge-row">
+        <span class="num">06</span>
+        <span class="type-badge metaphor">metaphor</span>
+      </div>
+      <div class="title">레이더 파문 (Probe)</div>
+      <div class="concept">Probe = 탐색/조사 — 레이더가 서버 엔드포인트를 탐지하는 장면</div>
+      <div class="pattern">구성: 공간/장면 | 배경: 딥틸</div>
+      <div class="palette">
+        <div class="swatch" style="background:#0B2D36" title="#0B2D36"></div>
+        <div class="swatch" style="background:#14B8A6" title="#14B8A6 레이더"></div>
+        <div class="swatch" style="background:#5EEAD4" title="#5EEAD4 블립"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_07.svg" alt="icon_07"/></div>
+    <div class="info">
+      <div class="badge-row">
+        <span class="num">07</span>
+        <span class="type-badge metaphor">metaphor</span>
+      </div>
+      <div class="title">종이비행기 (요청 전달)</div>
+      <div class="concept">HTTP 요청을 보내는 행위 = 편지를 날리는 것 — 가볍고 직관적인 은유</div>
+      <div class="pattern">구성: 실루엣/캐릭터 | 배경: 스카이블루</div>
+      <div class="palette">
+        <div class="swatch" style="background:#BAE6FD" title="#BAE6FD"></div>
+        <div class="swatch" style="background:#38BDF8" title="#38BDF8 하늘"></div>
+        <div class="swatch" style="background:#FFFFFF" title="#FFFFFF 비행기"></div>
+        <div class="swatch" style="background:#E0F2FE" title="#E0F2FE 접힘"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_08.svg" alt="icon_08"/></div>
+    <div class="info">
+      <div class="badge-row">
+        <span class="num">08</span>
+        <span class="type-badge hybrid">hybrid</span>
+      </div>
+      <div class="title">로켓 + HTTP 메서드 텍스트</div>
+      <div class="concept">발사(로켓) + 실제 메서드명(POST/GET/PUT) — 추상+리터럴의 조합</div>
+      <div class="pattern">구성: 레이어드 | 배경: 코랄오렌지</div>
+      <div class="palette">
+        <div class="swatch" style="background:#FF6B35" title="#FF6B35"></div>
+        <div class="swatch" style="background:#FFFFFF" title="#FFFFFF 로켓"></div>
+        <div class="swatch" style="background:#FEF08A" title="#FEF08A POST"></div>
+        <div class="swatch" style="background:#FED7AA" title="#FED7AA 날개"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_09.svg" alt="icon_09"/></div>
+    <div class="info">
+      <div class="badge-row">
+        <span class="num">09</span>
+        <span class="type-badge hybrid">hybrid</span>
+      </div>
+      <div class="title">번개 + {} JSON 중괄호</div>
+      <div class="concept">빠른 요청(번개) + JSON 응답({}) — API 테스트의 입출력을 동시에</div>
+      <div class="pattern">구성: 기하학추상 | 배경: 미드나잇퍼플</div>
+      <div class="palette">
+        <div class="swatch" style="background:#1E0A3C" title="#1E0A3C"></div>
+        <div class="swatch" style="background:#F59E0B" title="#F59E0B 번개"></div>
+        <div class="swatch" style="background:#A78BFA" title="#A78BFA {}"></div>
+        <div class="swatch" style="background:#FDE68A" title="#FDE68A 번개코어"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_10.svg" alt="icon_10"/></div>
+    <div class="info">
+      <div class="badge-row">
+        <span class="num">10</span>
+        <span class="type-badge hybrid">hybrid</span>
+      </div>
+      <div class="title">▶ 전송 + ✓ 응답 성공</div>
+      <div class="concept">Send 버튼(▶) → 200 OK 체크마크 — API 테스트의 핵심 동작과 결과</div>
+      <div class="pattern">구성: 대각선/동적 | 배경: 에메랄드그린</div>
+      <div class="palette">
+        <div class="swatch" style="background:#064E3B" title="#064E3B"></div>
+        <div class="swatch" style="background:#34D399" title="#34D399 화살표"></div>
+        <div class="swatch" style="background:#A7F3D0" title="#A7F3D0 체크"></div>
+        <div class="swatch" style="background:#6EE7B7" title="#6EE7B7 200OK"></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p>Api.Probe · Candidate_20260322_2331 · 10 icons · 각 아이콘 hover 시 확대</p>
+</footer>
+
+</body>
+</html>

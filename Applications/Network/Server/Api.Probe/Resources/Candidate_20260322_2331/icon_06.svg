@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg06" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0B2D36"/>
+      <stop offset="100%" stop-color="#061820"/>
+    </linearGradient>
+    <radialGradient id="radar06" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#14B8A6" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#14B8A6" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg06)"/>
+  <!-- Grid lines (subtle) -->
+  <line x1="512" y1="100" x2="512" y2="924" stroke="#14B8A6" stroke-width="2" opacity="0.08"/>
+  <line x1="100" y1="512" x2="924" y2="512" stroke="#14B8A6" stroke-width="2" opacity="0.08"/>
+  <line x1="200" y1="200" x2="824" y2="824" stroke="#14B8A6" stroke-width="2" opacity="0.05"/>
+  <line x1="824" y1="200" x2="200" y2="824" stroke="#14B8A6" stroke-width="2" opacity="0.05"/>
+
+  <!-- Layer 2: Radar concentric rings -->
+  <circle cx="512" cy="512" r="380" fill="none" stroke="#14B8A6" stroke-width="3" opacity="0.18"/>
+  <circle cx="512" cy="512" r="290" fill="none" stroke="#14B8A6" stroke-width="3" opacity="0.28"/>
+  <circle cx="512" cy="512" r="200" fill="none" stroke="#14B8A6" stroke-width="4" opacity="0.38"/>
+  <circle cx="512" cy="512" r="110" fill="none" stroke="#14B8A6" stroke-width="4" opacity="0.55"/>
+
+  <!-- Radar sweep sector (active quarter) -->
+  <path d="M512,512 L512,132 A380,380 0 0,1 892,512 Z" fill="#14B8A6" opacity="0.07"/>
+  <path d="M512,512 L892,512" stroke="#14B8A6" stroke-width="3" opacity="0.4"/>
+  <path d="M512,512 L512,132" stroke="#14B8A6" stroke-width="3" opacity="0.25"/>
+  <!-- Sweep edge glow -->
+  <path d="M512,512 L892,512 A380,380 0 0,0 512,132 Z" fill="none" stroke="#5EEAD4" stroke-width="2" opacity="0.4"/>
+
+  <!-- Detected blips -->
+  <circle cx="680" cy="340" r="12" fill="#5EEAD4" opacity="0.9"/>
+  <circle cx="680" cy="340" r="22" fill="none" stroke="#5EEAD4" stroke-width="3" opacity="0.5"/>
+  <circle cx="720" cy="480" r="8" fill="#2DD4BF" opacity="0.7"/>
+  <circle cx="600" cy="300" r="6" fill="#5EEAD4" opacity="0.5"/>
+
+  <!-- Layer 3: Center crosshair -->
+  <circle cx="512" cy="512" r="20" fill="#14B8A6"/>
+  <circle cx="512" cy="512" r="10" fill="#F0FDFA"/>
+  <line x1="490" y1="512" x2="450" y2="512" stroke="#14B8A6" stroke-width="3" opacity="0.7"/>
+  <line x1="534" y1="512" x2="574" y2="512" stroke="#14B8A6" stroke-width="3" opacity="0.7"/>
+  <line x1="512" y1="490" x2="512" y2="450" stroke="#14B8A6" stroke-width="3" opacity="0.7"/>
+  <line x1="512" y1="534" x2="512" y2="574" stroke="#14B8A6" stroke-width="3" opacity="0.7"/>
+
+  <!-- "PROBE" label -->
+  <text x="512" y="870" font-family="'Consolas','Courier New',monospace" font-size="54" font-weight="bold" fill="#14B8A6" text-anchor="middle" opacity="0.7" letter-spacing="10">PROBE</text>
+</svg>

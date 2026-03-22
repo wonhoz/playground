@@ -723,6 +723,57 @@
                                         </StackPanel>
                                     </Border>
 
+                                    <!-- 상세 목록 토글 버튼 -->
+                                    <Button x:Name="ToggleDetailButton"
+                                            Visibility="Collapsed"
+                                            Click="ToggleDetail_Click"
+                                            HorizontalAlignment="Stretch"
+                                            Padding="0,7"
+                                            Cursor="Hand"
+                                            BorderThickness="1"
+                                            BorderBrush="#404040"
+                                            Background="#252525"
+                                            Margin="0,0,0,6">
+                                        <Button.Template>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border x:Name="bd"
+                                                        Background="{TemplateBinding Background}"
+                                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                                        CornerRadius="6"
+                                                        Padding="{TemplateBinding Padding}">
+                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                </Border>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter TargetName="bd" Property="Background" Value="#333333"/>
+                                                        <Setter TargetName="bd" Property="BorderBrush" Value="#FFC107"/>
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Button.Template>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock x:Name="ToggleDetailArrow" Text="▶" FontSize="9" Foreground="#9E9E9E" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                                            <TextBlock x:Name="ToggleDetailText" Text="상세 목록 보기" FontSize="11" Foreground="#9E9E9E" VerticalAlignment="Center"/>
+                                        </StackPanel>
+                                    </Button>
+
+                                    <!-- 상세 목록 (토글) -->
+                                    <ListBox x:Name="DetailListBox"
+                                             Visibility="Collapsed"
+                                             Style="{StaticResource DarkListBoxStyle}"
+                                             MaxHeight="160"
+                                             Margin="0,0,0,6">
+                                        <ListBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal" Margin="2,1">
+                                                    <TextBlock Text="{Binding StatusIcon}" FontSize="10" VerticalAlignment="Center" Margin="0,0,5,0"/>
+                                                    <TextBlock Text="{Binding FileName}" FontSize="10" Foreground="{Binding StatusColor}" TextTrimming="CharacterEllipsis" MaxWidth="200" VerticalAlignment="Center"/>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </ListBox.ItemTemplate>
+                                    </ListBox>
+
                                     <!-- 로그 보기 버튼 (로그 저장 시에만 표시) -->
                                     <Button x:Name="OpenLogButton"
                                             Visibility="Collapsed"

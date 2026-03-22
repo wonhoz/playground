@@ -350,6 +350,9 @@ namespace Photo.Video.Organizer
             ResultErrorText.Text = $"▸ 오류  {result.ErrorCount}개";
             ResultErrorText.Visibility = result.ErrorCount > 0 ? Visibility.Visible : Visibility.Collapsed;
 
+            // 상세 목록
+            PopulateDetailList(result);
+
             // 로그 보기 버튼
             _lastLogFilePath = result.LogFilePath;
             if (result.LogFilePath != null)
@@ -399,6 +402,43 @@ namespace Photo.Video.Organizer
                     });
                 }
                 catch { }
+            }
+        }
+
+        private bool _detailExpanded = false;
+
+        private void ToggleDetail_Click(object sender, RoutedEventArgs e)
+        {
+            _detailExpanded = !_detailExpanded;
+            DetailListBox.Visibility = _detailExpanded ? Visibility.Visible : Visibility.Collapsed;
+            ToggleDetailArrow.Text = _detailExpanded ? "▼" : "▶";
+            ToggleDetailText.Text = _detailExpanded ? "상세 목록 접기" : "상세 목록 보기";
+        }
+
+        private void PopulateDetailList(FileOrganizer.OrganizeSummary result)
+        {
+            var items = result.Results
+                .Where(r => !r.Success)
+                .Select(r =>
+                {
+                    string icon, color;
+                    if (r.IsSkippedAsDuplicate)       { icon = "◈"; color = "#64B5F6"; }
+                    else if (r.ErrorMessage?.Contains("건너뜀") == true) { icon = "◇"; color = "#FFC107"; }
+                    else                               { icon = "✕"; color = "#EF5350"; }
+                    return new { StatusIcon = icon, FileName = Path.GetFileName(r.SourcePath), StatusColor = new System.Windows.Media.SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString(color)) };
+                })
+                .ToList();
+
+            DetailListBox.ItemsSource = items;
+
+            var hasNonSuccess = items.Count > 0;
+            ToggleDetailButton.Visibility = hasNonSuccess ? Visibility.Visible : Visibility.Collapsed;
+            if (hasNonSuccess)
+            {
+                _detailExpanded = false;
+                DetailListBox.Visibility = Visibility.Collapsed;
+                ToggleDetailArrow.Text = "▶";
+                ToggleDetailText.Text = $"상세 목록 보기  ({items.Count}개)";
             }
         }
 

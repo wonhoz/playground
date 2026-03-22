@@ -163,18 +163,18 @@ namespace Photo.Video.Organizer.Services
 
                 Directory.CreateDirectory(destinationFolder);
 
-                // SHA256 해시 기반 중복 파일 감지 (이미 동일 내용의 파일이 대상 폴더에 있으면 건너뜀)
-                if (Directory.Exists(destinationFolder))
+                // SHA256 해시 기반 중복 파일 감지 (크기 다른 파일은 해시 계산 건너뜀)
+                long sourceSize = new FileInfo(sourcePath).Length;
+                string? sourceHash = null;
+                foreach (var existingFile in Directory.GetFiles(destinationFolder))
                 {
-                    var sourceHash = ComputeFileHash(sourcePath);
-                    foreach (var existingFile in Directory.GetFiles(destinationFolder))
+                    if (new FileInfo(existingFile).Length != sourceSize) continue;
+                    sourceHash ??= ComputeFileHash(sourcePath);
+                    if (ComputeFileHash(existingFile) == sourceHash)
                     {
-                        if (ComputeFileHash(existingFile) == sourceHash)
-                        {
-                            result.IsSkippedAsDuplicate = true;
-                            result.ErrorMessage = $"동일한 파일이 이미 존재합니다 (건너뜀): {Path.GetFileName(existingFile)}";
-                            return result;
-                        }
+                        result.IsSkippedAsDuplicate = true;
+                        result.ErrorMessage = $"동일한 파일이 이미 존재합니다 (건너뜀): {Path.GetFileName(existingFile)}";
+                        return result;
                     }
                 }
 

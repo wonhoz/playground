@@ -171,14 +171,6 @@ namespace Photo.Video.Organizer
             UpdateStartButton();
         }
 
-        private void AddFileIfNotExists(string filePath)
-        {
-            if (!_selectedFiles.Contains(filePath))
-            {
-                _selectedFiles.Add(filePath);
-            }
-        }
-
         private void ClearFiles_Click(object sender, RoutedEventArgs e)
         {
             _selectedFiles.Clear();
@@ -238,6 +230,7 @@ namespace Photo.Video.Organizer
 
         private void FolderStructureCombo_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
+            if (!IsLoaded) return;
             var selectedItem = FolderStructureCombo.SelectedItem as System.Windows.Controls.ComboBoxItem;
             var tag = selectedItem?.Tag?.ToString();
             if (CustomPatternPanel != null)

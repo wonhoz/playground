@@ -202,8 +202,17 @@
                                FontFamily="Consolas"/>
                 </StackPanel>
 
-                <Button Grid.Column="1" x:Name="SelectRegionBtn" Content="영역 선택"
-                        Style="{StaticResource GrayBtn}" Click="SelectRegion_Click"/>
+                <StackPanel Grid.Column="1" Orientation="Vertical" VerticalAlignment="Center">
+                    <Button x:Name="SelectRegionBtn" Content="▣ 영역 선택"
+                            Style="{StaticResource GrayBtn}" Padding="10,5" Margin="0,0,0,4"
+                            Click="SelectRegion_Click"/>
+                    <Button x:Name="FullScreenBtn" Content="⬜ 전체 화면"
+                            Style="{StaticResource GrayBtn}" Padding="10,5" Margin="0,0,0,4"
+                            Click="SelectFullScreen_Click"/>
+                    <Button x:Name="LastRegionBtn" Content="↩ 이전 영역"
+                            Style="{StaticResource GrayBtn}" Padding="10,5"
+                            IsEnabled="False" Click="UseLastRegion_Click"/>
+                </StackPanel>
             </Grid>
         </Border>
 

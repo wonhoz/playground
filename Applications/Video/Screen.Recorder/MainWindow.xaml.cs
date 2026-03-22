@@ -24,8 +24,9 @@ public partial class MainWindow : Window
     private bool _regionSelected;
     private bool _ffmpegAvailable;
 
-    private enum RecordState { Idle, Recording, Paused }
+    private enum RecordState { Idle, Countdown, Recording, Paused }
     private RecordState _state = RecordState.Idle;
+    private CancellationTokenSource? _countdownCts;
 
     private static SolidColorBrush ColorBrush(string hex) =>
         new((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString(hex)!);
@@ -80,6 +81,8 @@ public partial class MainWindow : Window
             RegionInfoText.Text = $"X:{_selectedRegion.X}  Y:{_selectedRegion.Y}  |  {_selectedRegion.Width} × {_selectedRegion.Height}";
             RecordBtn.IsEnabled = true;
         }
+
+        LastRegionBtn.IsEnabled = _settings.LastRegionWidth > 0;
 
         CheckFfmpeg();
     }
@@ -216,6 +219,21 @@ public partial class MainWindow : Window
         }
     }
 
+    private void SetRegion(Int32Rect region)
+    {
+        _selectedRegion = region;
+        _regionSelected = true;
+        RegionInfoText.Text = $"X:{region.X}  Y:{region.Y}  |  {region.Width} × {region.Height}";
+        RecordBtn.IsEnabled = true;
+        LastRegionBtn.IsEnabled = true;
+
+        _settings.LastRegionX = region.X;
+        _settings.LastRegionY = region.Y;
+        _settings.LastRegionWidth = region.Width;
+        _settings.LastRegionHeight = region.Height;
+        _settings.Save();
+    }
+
     private void SelectRegion_Click(object sender, RoutedEventArgs e)
     {
         Hide();
@@ -228,19 +246,25 @@ public partial class MainWindow : Window
             Show();
 
             if (result == true && selector.RegionSelected)
-            {
-                _selectedRegion = selector.SelectedRegion;
-                _regionSelected = true;
-                RegionInfoText.Text = $"X:{_selectedRegion.X}  Y:{_selectedRegion.Y}  |  {_selectedRegion.Width} × {_selectedRegion.Height}";
-                RecordBtn.IsEnabled = true;
-
-                _settings.LastRegionX = _selectedRegion.X;
-                _settings.LastRegionY = _selectedRegion.Y;
-                _settings.LastRegionWidth = _selectedRegion.Width;
-                _settings.LastRegionHeight = _selectedRegion.Height;
-                _settings.Save();
-            }
+                SetRegion(selector.SelectedRegion);
         });
+    }
+
+    private void SelectFullScreen_Click(object sender, RoutedEventArgs e)
+    {
+        var dpi = System.Windows.Media.VisualTreeHelper.GetDpi(this);
+        var physW = (int)(SystemParameters.PrimaryScreenWidth * dpi.DpiScaleX);
+        var physH = (int)(SystemParameters.PrimaryScreenHeight * dpi.DpiScaleY);
+        physW = physW % 2 == 0 ? physW : physW - 1;
+        physH = physH % 2 == 0 ? physH : physH - 1;
+        SetRegion(new Int32Rect(0, 0, physW, physH));
+    }
+
+    private void UseLastRegion_Click(object sender, RoutedEventArgs e)
+    {
+        SetRegion(new Int32Rect(
+            _settings.LastRegionX, _settings.LastRegionY,
+            _settings.LastRegionWidth, _settings.LastRegionHeight));
     }
 
     private void FormatCombo_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
@@ -304,7 +328,6 @@ public partial class MainWindow : Window
     {
         if (_state == RecordState.Idle)
         {
-            // MP4 선택인데 FFmpeg 없으면 경고
             if (!IsGifFormat() && !_ffmpegAvailable)
             {
                 System.Windows.MessageBox.Show(
@@ -313,7 +336,30 @@ public partial class MainWindow : Window
                 return;
             }
 
+            _countdownCts = new CancellationTokenSource();
+            SetState(RecordState.Countdown);
+
+            try
+            {
+                for (var i = 3; i >= 1; i--)
+                {
+                    StatusText.Text = $"{i}초 후 녹화 시작";
+                    TimerText.Text = $"0{i}";
+                    StatusDot.Fill = ColorBrush(i == 1 ? "#E74C3C" : "#F39C12");
+                    await Task.Delay(1000, _countdownCts.Token);
+                }
+            }
+            catch (TaskCanceledException)
+            {
+                SetState(RecordState.Idle);
+                return;
+            }
+
             await StartRecordingAsync();
+        }
+        else if (_state == RecordState.Countdown)
+        {
+            _countdownCts?.Cancel();
         }
     }
 
@@ -402,6 +448,8 @@ public partial class MainWindow : Window
                 PauseBtn.Visibility = Visibility.Collapsed;
                 StopBtn.Visibility = Visibility.Collapsed;
                 SelectRegionBtn.IsEnabled = true;
+                FullScreenBtn.IsEnabled = true;
+                LastRegionBtn.IsEnabled = _settings.LastRegionWidth > 0;
                 FormatCombo.IsEnabled = true;
                 FpsCombo.IsEnabled = true;
                 StatusText.Text = "대기 중";
@@ -411,12 +459,28 @@ public partial class MainWindow : Window
                 TimerText.Text = "00:00";
                 break;
 
+            case RecordState.Countdown:
+                RecordBtn.Content = "✕ 취소";
+                RecordBtn.IsEnabled = true;
+                RecordBtn.Visibility = Visibility.Visible;
+                PauseBtn.Visibility = Visibility.Collapsed;
+                StopBtn.Visibility = Visibility.Collapsed;
+                SelectRegionBtn.IsEnabled = false;
+                FullScreenBtn.IsEnabled = false;
+                LastRegionBtn.IsEnabled = false;
+                FormatCombo.IsEnabled = false;
+                FpsCombo.IsEnabled = false;
+                StatusDot.Fill = ColorBrush("#F39C12");
+                break;
+
             case RecordState.Recording:
                 RecordBtn.Visibility = Visibility.Collapsed;
                 PauseBtn.Content = "⏸";
                 PauseBtn.Visibility = Visibility.Visible;
                 StopBtn.Visibility = Visibility.Visible;
                 SelectRegionBtn.IsEnabled = false;
+                FullScreenBtn.IsEnabled = false;
+                LastRegionBtn.IsEnabled = false;
                 FormatCombo.IsEnabled = false;
                 FpsCombo.IsEnabled = false;
                 StatusText.Text = "녹화 중";

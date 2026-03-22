@@ -1,7 +1,7 @@
 # Avoid — 유사 개념 그룹 (중복 주의)
 
 > 브레인스토밍 시 아래 그룹 내 변형 아이디어는 **이미 제안된 것으로 간주**한다.
-> 마지막 갱신: 2026-03-21 (31차)
+> 마지막 갱신: 2026-03-22 (32차)
 
 ---
 
@@ -218,3 +218,23 @@
 | **타워/스택 퍼즐** | Tower.Hoist (하노이 탑 N기둥+색상 제약 최적화) ≠ Tower.Guard ✅ (타워 디펜스 웨이브) ≠ Wobble.Stack (소프트바디 타워 쌓기) ≠ Stack.Crash ✅ (파괴 샌드박스) |
 | **주사위 전략 게임** | Dice.Keep (야추 조합 로그라이크) ≠ Card.Solo (솔리테어 카드 컬렉션) ≠ Neon.Card (덱빌딩 로그라이크) ≠ Rogue.Tile (턴제 던전 로그라이크) |
 | **커버리지 최적화 퍼즐** | Antenna.Grid (신호 탑 반경 배치, 간섭 최소) ≠ Tower.Guard ✅ (타워 배치 적 방어) ≠ Laser.Net (레이저 빔 반사 타겟) ≠ Light.Cast (단색 빔 집중) |
+| **바코드 생성** | Barcode.Forge (1D/2D 산업 표준: Code-128·EAN-13·DataMatrix·PDF417 등) ≠ QR.Forge ✅ (QR 코드 전용) ≠ Badge.Forge ✅ (SVG shields.io 스타일 배지) |
+| **URL 분석 / 구성** | URL.Forge (URL 빌더·파서·인스펙터, cURL 코드 생성) ≠ Api.Probe ✅ (HTTP 요청 전송) ≠ Hook.Lab (Webhook 수신 인스펙터) ≠ WHOIS.Cast (도메인 WHOIS/DNS 조회) |
+| **D-day 카운트다운** | Event.Count (멀티 이벤트, 트레이 아이콘 숫자 렌더링) ≠ Rush.Clock (단일 출발 타이머) ≠ Sleep.Cast (스마트 절전 스케줄러) ≠ Sched.Cast ✅ (Task Scheduler GUI) |
+| **색상 이름 검색** | Color.Name (HEX→CSS/Pantone/X11 최근접 색상명 ΔE2000 검색) ≠ Color.Drop (단일 화면 피커) ≠ Color.Space (색공간 수학) ≠ Palette.Cast (팔레트 수집) ≠ Access.Check (WCAG 대비율) |
+| **화면 격자 오버레이** | Screen.Grid (8px 그리드·황금비·컬럼 디자인 QA 오버레이) ≠ Pixel.Tape (화면 픽셀 줄자) ≠ Cursor.Lens (발표용 스포트라이트 줌) ≠ Pixel.Scope (픽셀 돋보기+좌표+색상) |
+| **패키지 업데이트 모니터** | Pkg.Monitor (NuGet/npm/pip 버전 업데이트+CVE 트레이 알림) ≠ Dep.Graph (전이 의존성 그래프) ≠ Pack.Cast (패키지 설치 GUI) ≠ Stub.Forge (클라이언트 코드 생성) |
+| **AI 대화 기록 관리** | Chat.Archive (Claude/GPT 내보내기 아카이브·검색·태그) ≠ Prompt.Forge ✅ (프롬프트 템플릿 라이브러리) ≠ Diff.Prompt ✅ (프롬프트 A/B 비교) ≠ LLM.Bench (로컬 GGUF 실행기) |
+| **NTP / 시간 동기화** | NTP.Watch (드리프트 측정·히스토리·임계값 알림) ≠ Zone.Watch (세계시계 트레이) ≠ Boot.Map ✅ (부팅 성능 타임라인) ≠ Sched.Cast ✅ (작업 스케줄러) |
+| **이메일 개발 테스트** | SMTP.Test (내장 SMTP 수신 서버, HTML 미리보기, MIME 분석) ≠ Mock.Server ✅ (HTTP REST 모킹) ≠ Hook.Lab (Webhook 인스펙터) ≠ Api.Probe ✅ (API 테스터) |
+| **픽셀 돋보기 / 확대경** | Pixel.Scope (배율+좌표+색상 HEX 실시간, 거리 측정) ≠ Pixel.Tape (픽셀 줄자) ≠ Cursor.Lens (발표용 스포트라이트) ≠ Screen.Grid (격자 오버레이) |
+| **슬라이딩 퍼즐 (타일 이동)** | Slide.Maze (사진 기반 15-퍼즐, A* 힌트) ≠ Ice.Slide (얼음 물리 슬라이딩) ≠ Block.Shift (행/열 루프 슬라이드) ≠ Neon.Push (소코반+색상+레이저) |
+| **알고리즘 시각화 게임** | Algo.Race (A*/BFS/Dijkstra 미로 경주) ≠ Grid.Hack (Logo 터틀 로봇 프로그래밍) ≠ Asm.Quest (어셈블리 목표값 달성) ≠ Path.Grid (경로 최적화 vs AI 장애물) |
+| **코드 해독 추론 (Mastermind)** | Code.Break (이모지/아이콘 심볼 Mastermind, 미니맥스 솔버) ≠ Cipher.Quest ✅ (역사적 암호 해독) ≠ Escape.Key ✅ (암호 해독 방탈출 체인) ≠ Logic.Zebra (아인슈타인 소거 퍼즐) |
+| **미니 골프 / 퍼팅 물리** | Mini.Golf (탑다운 2D 장애물 코스 물리, 레벨 에디터) ≠ Golf.Cast ✅ (실제 골프 필드 스포츠) ≠ Tilt.Ball (기울이기 공 유도) ≠ Pool.Break (2D 당구 물리) ≠ Arc.Blast (포물선 탄도) |
+| **숫자 논리 퍼즐 (합산 제약)** | Kakuro.Cast (행·열 합산 힌트+1-9 중복 금지) ≠ Sudoku.Cast (행·열·박스 중복 금지) ≠ Number.Storm (행/열 슬라이드 합산 2048 변형) ≠ Sky.Scraper (시야 제약 건물 높이 배치) |
+| **타일 제거 솔리테어** | Mah.Jong (마작 솔리테어 쌍 제거) ≠ Card.Solo (트럼프 솔리테어) ≠ Peg.Solo (말뚝 솔리테어) ≠ Pixel.Cross (노노그램) |
+| **색칠 / 번호 페인팅 게임** | Grid.Paint (페인트-바이-넘버, 사용자 이미지 변환) ≠ Pixel.Cross (노노그램: 줄 힌트로 채우기) ≠ Color.Blitz (스트룹 색상 매칭) ≠ Hue.Flow ✅ (파이프 색 연결) |
+| **시야 제약 논리 퍼즐** | Sky.Scraper (4방향 외곽 시야 힌트+스도쿠 제약 건물 배치) ≠ Sudoku.Cast (스도쿠) ≠ Kakuro.Cast (합산 십자말) ≠ Logic.Zebra (아인슈타인 소거) |
+| **공간 방향 추론 퍼즐** | Pirate.Map (방향·거리 단서 조합으로 격자 위 위치 추론) ≠ Logic.Zebra (표 소거 추론) ≠ Sky.Scraper (시야 제약 배치) ≠ Echo.Hunt (소나 핑 탐색) |
+| **해전 / 함선 전략** | Fleet.Strike (배틀십 확률 밀도 맵 AI, 로컬 2P) ≠ Hex.Storm (헥사 마이크로 RTS) ≠ Tower.Guard ✅ (타워 디펜스) ≠ Astro.Mine (소행성+중력 슈터) |

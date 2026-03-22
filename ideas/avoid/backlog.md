@@ -2,7 +2,7 @@
 
 > 이름만 기재. 상세 내용은 각 차수 idea 파일 참조.
 > ★N차 = 해당 차수 브레인스토밍에서 처음 제안됨
-> 마지막 갱신: 2026-03-21 (31차)
+> 마지막 갱신: 2026-03-22 (32차)
 
 ---
 
@@ -182,6 +182,16 @@
 | `Cron.Eye` | Task Scheduler + 서비스 실행 이력 일별·주별·월별 캘린더 타임라인 히트맵 분석기 ★30차 |
 | `Patch.Forge` | 바이너리 XDelta3/BSDiff 패치 생성·적용기 (두 EXE 비교→델타 파일, 해시 검증) ★31차 |
 | `Ratio.Forge` | 디자이너 수치 계산기 (황금비·√2·8pt 그리드·픽셀↔rem·타이포 모듈라 스케일) ★31차 |
+| `Barcode.Forge` | Code-128·EAN-13·UPC-A·DataMatrix·PDF417 등 1D/2D 산업 표준 바코드 올인원 생성기 (ZXing.Net, 배치 CSV, SVG/PNG 내보내기) ★32차 |
+| `URL.Forge` | URL 빌더·파서·인스펙터 — scheme/host/path/query/fragment 시각적 분해·편집, cURL/fetch 코드 스니펫 자동 생성 ★32차 |
+| `Color.Name` | 색상 이름 사전 — 헥스/RGB 입력 또는 화면 픽킹 → CSS/X11/Pantone/RAL 3만+ DB 최근접 색상명 검색 ★32차 |
+| `Screen.Grid` | 화면 격자 오버레이 디자인 QA 도구 — 8px 그리드·황금비·컬럼 그리드·안전영역 반투명 오버레이, 전역 단축키 토글 ★32차 |
+| `Pkg.Monitor` | NuGet/npm/pip/Cargo 패키지 최신 버전 업데이트·CVE 보안 취약점 트레이 알림 (GitHub Advisory DB 연동) ★32차 |
+| `Chat.Archive` | Claude·ChatGPT 대화 내보내기 로컬 아카이브 — 풀텍스트 검색·태그·북마크·PDF 내보내기 ★32차 |
+| `NTP.Watch` | 시스템 시계 NTP 드리프트 실시간 측정·히스토리 그래프·임계값 Toast 알림 트레이 진단기 ★32차 |
+| `SMTP.Test` | 내장 SMTP 서버로 이메일 발송 테스트 — HTML 미리보기·헤더 분석·MIME 트리·릴레이 (Mailtrap 오프라인 대체) ★32차 |
+| `Pixel.Scope` | 픽셀 단위 돋보기+좌표+색상 실시간 확대경 — 1x~16x 배율, 거리 측정, 색상 HEX 복사 (UI QA 전용) ★32차 |
+| `Event.Count` | 멀티 이벤트 D-day 카운트다운 트레이 — 여러 마감일·기념일 동시 추적, 트레이 아이콘에 남은 일수 동적 렌더링 ★32차 |
 
 ### Apps — Network / Security / Privacy
 
@@ -543,3 +553,13 @@
 | `Choir.Run` | Rhythm/Runner | 3레인 독립 캐릭터 달리기 + 동시 입력 화음 형성 시 특수 능력 발동 리듬 러너 ★30차 |
 | `Fog.Sculpt` | Puzzle/Exploration | 방향·강도 바람 카드 배치로 안개를 밀어내 숨겨진 지형·보물 노출 탐험 퍼즐 ★30차 |
 | `Retro.Cast` | Puzzle/Art | CRT 신호 왜곡(노이즈·스캔라인·고스팅) 슬라이더 조절로 픽셀 아트 원본 복원 퍼즐 ★30차 |
+| `Slide.Maze` | Puzzle/Casual | 사진 기반 15-퍼즐 슬라이딩 (사용자 이미지 업로드, A* 힌트, 3×3~8×8 크기) ★32차 |
+| `Algo.Race` | Educational/Casual | A*/BFS/Dijkstra/DFS 알고리즘 미로 동시 경주 시각화 레이싱 교육 게임 ★32차 |
+| `Code.Break` | Puzzle/Logic | Mastermind 코드 해독 이모지/아이콘 심볼 버전, 미니맥스 솔버 힌트, 턴제 대결 모드 ★32차 |
+| `Mini.Golf` | Sports/Arcade/Physics | 물리 기반 미니 골프 18홀 장애물 코스, 재질별 마찰·경사, 레벨 에디터 ★32차 |
+| `Kakuro.Cast` | Puzzle/Logic | 행·열 합산 힌트로 1~9 중복 없이 채우기 카쿠로 숫자 십자말 (자동 생성, 백트래킹 솔버) ★32차 |
+| `Mah.Jong` | Casual/Classic | 145 타일 쌍 제거 마작 솔리테어, 15종 배치 패턴, 솔버·셔플 힌트 ★32차 |
+| `Grid.Paint` | Casual/Creative | 번호별 색칠로 숨겨진 그림 완성 페인트-바이-넘버, 사용자 이미지 k-Means 변환 ★32차 |
+| `Sky.Scraper` | Puzzle/Logic | 4방향 외곽 시야 숫자 힌트로 건물 높이 배치 스카이스크래퍼 퍼즐 (AC-3 솔버) ★32차 |
+| `Pirate.Map` | Puzzle/Adventure | 방향·거리 단서 조합으로 격자 지도 위 보물 위치 추론하는 공간 논리 퍼즐 ★32차 |
+| `Fleet.Strike` | Strategy/Classic | 확률 밀도 맵 AI와 함선 격침 배틀십, AI 전략 히트맵 시각화, 로컬 2P 모드 ★32차 |

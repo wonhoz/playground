@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg05" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#4C1D95"/>
+      <stop offset="100%" stop-color="#6D28D9"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Layer 1: Background — rich violet -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg05)"/>
+
+  <!-- Layer 2: Circular conversion flow — formats orbiting a center cycle arrow -->
+  <!-- Large circular arc (rotation symbol, ~300° arc) -->
+  <!-- Arc from top-right going counter-clockwise almost full circle -->
+  <path d="M 762,252 A 310,310 0 1,0 762,772"
+        fill="none" stroke="white" stroke-width="52" stroke-linecap="round" opacity="0.85"/>
+  <!-- Arrow head at arc end (pointing downward at bottom-right) -->
+  <path d="M 728,790 L 794,790 L 762,850"
+        fill="white" opacity="0.85"/>
+
+  <!-- Layer 3: Format labels at 4 compass positions on the orbit -->
+  <!-- Top — SVG -->
+  <rect x="406" y="112" width="212" height="78" rx="18" fill="#06B6D4"/>
+  <text x="512" y="165" text-anchor="middle"
+        font-family="'Segoe UI',Arial,sans-serif" font-size="50" font-weight="800" fill="white">SVG</text>
+
+  <!-- Right — ICO -->
+  <rect x="798" y="474" width="114" height="78" rx="16" fill="#F59E0B"/>
+  <text x="855" y="527" text-anchor="middle"
+        font-family="'Segoe UI',Arial,sans-serif" font-size="44" font-weight="800" fill="white">ICO</text>
+
+  <!-- Bottom — JPG -->
+  <rect x="406" y="834" width="212" height="78" rx="18" fill="#22C55E"/>
+  <text x="512" y="887" text-anchor="middle"
+        font-family="'Segoe UI',Arial,sans-serif" font-size="50" font-weight="800" fill="white">JPG</text>
+
+  <!-- Left — PNG -->
+  <rect x="112" y="474" width="114" height="78" rx="16" fill="#3B82F6"/>
+  <text x="169" y="527" text-anchor="middle"
+        font-family="'Segoe UI',Arial,sans-serif" font-size="44" font-weight="800" fill="white">PNG</text>
+
+  <!-- Center: conversion core symbol (small circle + ↔ arrows) -->
+  <circle cx="512" cy="512" r="74" fill="white" opacity="0.18"/>
+  <circle cx="512" cy="512" r="56" fill="white" opacity="0.15"/>
+  <!-- Bidirectional arrow (↔) in center -->
+  <line x1="460" y1="512" x2="564" y2="512" stroke="white" stroke-width="20" stroke-linecap="round" opacity="0.9"/>
+  <path d="M 476,490 L 450,512 L 476,534" fill="none" stroke="white" stroke-width="20" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
+  <path d="M 548,490 L 574,512 L 548,534" fill="none" stroke="white" stroke-width="20" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
+</svg>

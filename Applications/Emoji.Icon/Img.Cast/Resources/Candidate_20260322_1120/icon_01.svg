@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg01" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0F172A"/>
+      <stop offset="100%" stop-color="#1E293B"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Layer 1: Background — dark slate -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg01)"/>
+
+  <!-- Layer 2: Source format badges (left column) -->
+  <!-- SVG -->
+  <rect x="104" y="212" width="236" height="80" rx="18" fill="#0891B2"/>
+  <text x="222" y="266" text-anchor="middle"
+        font-family="'Segoe UI',Arial,sans-serif" font-size="50" font-weight="800" fill="white">SVG</text>
+  <!-- PNG -->
+  <rect x="104" y="320" width="236" height="80" rx="18" fill="#2563EB"/>
+  <text x="222" y="374" text-anchor="middle"
+        font-family="'Segoe UI',Arial,sans-serif" font-size="50" font-weight="800" fill="white">PNG</text>
+  <!-- JPG -->
+  <rect x="104" y="428" width="236" height="80" rx="18" fill="#16A34A"/>
+  <text x="222" y="482" text-anchor="middle"
+        font-family="'Segoe UI',Arial,sans-serif" font-size="50" font-weight="800" fill="white">JPG</text>
+  <!-- BMP -->
+  <rect x="104" y="536" width="236" height="80" rx="18" fill="#DC2626" opacity="0.9"/>
+  <text x="222" y="590" text-anchor="middle"
+        font-family="'Segoe UI',Arial,sans-serif" font-size="50" font-weight="800" fill="white">BMP</text>
+
+  <!-- Layer 3: Arrow → (center) + ICO output (right) -->
+  <!-- Arrow shaft -->
+  <rect x="380" y="482" width="184" height="36" rx="18" fill="white" opacity="0.9"/>
+  <!-- Arrow head -->
+  <path d="M542,430 L634,500 L542,570"
+        fill="none" stroke="white" stroke-width="54" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- ICO output badge (large, prominent amber) -->
+  <rect x="664" y="340" width="256" height="220" rx="32" fill="#D97706"/>
+  <!-- inner highlight -->
+  <rect x="680" y="356" width="224" height="188" rx="22" fill="#FCD34D" opacity="0.2"/>
+  <text x="792" y="467" text-anchor="middle"
+        font-family="'Segoe UI',Arial,sans-serif" font-size="84" font-weight="900" fill="white">ICO</text>
+
+  <!-- Multi-size size indicator below ICO (suggests multi-res output) -->
+  <rect x="678" y="584" width="58" height="58" rx="10" fill="#D97706" opacity="0.8"/>
+  <rect x="752" y="592" width="44" height="44" rx="8" fill="#D97706" opacity="0.6"/>
+  <rect x="812" y="600" width="32" height="32" rx="6" fill="#D97706" opacity="0.4"/>
+  <rect x="862" y="606" width="22" height="22" rx="5" fill="#D97706" opacity="0.25"/>
+</svg>

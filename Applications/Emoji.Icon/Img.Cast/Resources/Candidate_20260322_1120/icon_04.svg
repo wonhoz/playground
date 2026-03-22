@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg04" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#7F1D1D"/>
+      <stop offset="100%" stop-color="#991B1B"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Layer 1: Background — deep crimson -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg04)"/>
+
+  <!-- Layer 2: Hub-and-spoke — format labels pointing to center ICO -->
+  <!-- Spoke lines (from each label center toward ICO hub) -->
+  <line x1="312" y1="270" x2="420" y2="420" stroke="white" stroke-width="12" opacity="0.4" stroke-linecap="round"/>
+  <line x1="712" y1="270" x2="604" y2="420" stroke="white" stroke-width="12" opacity="0.4" stroke-linecap="round"/>
+  <line x1="312" y1="754" x2="420" y2="604" stroke="white" stroke-width="12" opacity="0.4" stroke-linecap="round"/>
+  <line x1="712" y1="754" x2="604" y2="604" stroke="white" stroke-width="12" opacity="0.4" stroke-linecap="round"/>
+
+  <!-- Arrow heads pointing toward ICO hub -->
+  <path d="M420,420 L412,398 L438,408" fill="white" opacity="0.5"/>
+  <path d="M604,420 L612,398 L586,408" fill="white" opacity="0.5"/>
+  <path d="M420,604 L412,626 L438,616" fill="white" opacity="0.5"/>
+  <path d="M604,604 L612,626 L586,616" fill="white" opacity="0.5"/>
+
+  <!-- Format badges at spoke tips -->
+  <!-- SVG (top-left) -->
+  <rect x="186" y="218" width="192" height="78" rx="16" fill="#06B6D4"/>
+  <text x="282" y="271" text-anchor="middle"
+        font-family="'Segoe UI',Arial,sans-serif" font-size="48" font-weight="800" fill="white">SVG</text>
+  <!-- PNG (top-right) -->
+  <rect x="646" y="218" width="192" height="78" rx="16" fill="#3B82F6"/>
+  <text x="742" y="271" text-anchor="middle"
+        font-family="'Segoe UI',Arial,sans-serif" font-size="48" font-weight="800" fill="white">PNG</text>
+  <!-- JPG (bottom-left) -->
+  <rect x="186" y="728" width="192" height="78" rx="16" fill="#22C55E"/>
+  <text x="282" y="781" text-anchor="middle"
+        font-family="'Segoe UI',Arial,sans-serif" font-size="48" font-weight="800" fill="white">JPG</text>
+  <!-- BMP (bottom-right) -->
+  <rect x="646" y="728" width="192" height="78" rx="16" fill="#FB923C"/>
+  <text x="742" y="781" text-anchor="middle"
+        font-family="'Segoe UI',Arial,sans-serif" font-size="48" font-weight="800" fill="white">BMP</text>
+
+  <!-- Layer 3: Central ICO hub -->
+  <!-- Outer glow ring -->
+  <circle cx="512" cy="512" r="176" fill="white" opacity="0.15"/>
+  <!-- Main ICO hub -->
+  <circle cx="512" cy="512" r="152" fill="white"/>
+  <text x="512" y="540" text-anchor="middle"
+        font-family="'Segoe UI',Arial,sans-serif" font-size="84" font-weight="900" fill="#7F1D1D">ICO</text>
+</svg>

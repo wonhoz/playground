@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg03" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#064E3B"/>
+      <stop offset="100%" stop-color="#065F46"/>
+    </linearGradient>
+    <clipPath id="c03">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+
+  <!-- Layer 1: Background — emerald green -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg03)"/>
+
+  <!-- Layer 2: 4 source format blocks at corners, converging inward -->
+  <!-- SVG (top-left) -->
+  <rect x="110" y="140" width="196" height="84" rx="16" fill="#06B6D4"/>
+  <text x="208" y="197" text-anchor="middle"
+        font-family="'Segoe UI',Arial,sans-serif" font-size="50" font-weight="800" fill="white">SVG</text>
+  <!-- PNG (top-right) -->
+  <rect x="718" y="140" width="196" height="84" rx="16" fill="#3B82F6"/>
+  <text x="816" y="197" text-anchor="middle"
+        font-family="'Segoe UI',Arial,sans-serif" font-size="50" font-weight="800" fill="white">PNG</text>
+  <!-- JPG (bottom-left) -->
+  <rect x="110" y="800" width="196" height="84" rx="16" fill="#22C55E"/>
+  <text x="208" y="857" text-anchor="middle"
+        font-family="'Segoe UI',Arial,sans-serif" font-size="50" font-weight="800" fill="white">JPG</text>
+  <!-- BMP (bottom-right) -->
+  <rect x="718" y="800" width="196" height="84" rx="16" fill="#F87171"/>
+  <text x="816" y="857" text-anchor="middle"
+        font-family="'Segoe UI',Arial,sans-serif" font-size="50" font-weight="800" fill="white">BMP</text>
+
+  <!-- Converging lines (each format → center) -->
+  <line x1="306" y1="182" x2="512" y2="512" stroke="white" stroke-width="8" opacity="0.35" stroke-linecap="round"/>
+  <line x1="718" y1="182" x2="512" y2="512" stroke="white" stroke-width="8" opacity="0.35" stroke-linecap="round"/>
+  <line x1="306" y1="842" x2="512" y2="512" stroke="white" stroke-width="8" opacity="0.35" stroke-linecap="round"/>
+  <line x1="718" y1="842" x2="512" y2="512" stroke="white" stroke-width="8" opacity="0.35" stroke-linecap="round"/>
+
+  <!-- Layer 3: Central ICO output badge -->
+  <circle cx="512" cy="512" r="148" fill="white" opacity="0.12"/>
+  <rect x="384" y="436" width="256" height="152" rx="28" fill="white"/>
+  <text x="512" y="527" text-anchor="middle"
+        font-family="'Segoe UI',Arial,sans-serif" font-size="78" font-weight="900" fill="#064E3B">ICO</text>
+</svg>

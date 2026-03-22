@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg02" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#100E18"/>
+      <stop offset="100%" stop-color="#0E1008"/>
+    </linearGradient>
+    <clipPath id="frame02">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg02)"/>
+  <g clip-path="url(#frame02)">
+    <!-- Layer 2: Simulation canvas (pixel grid showing materials) -->
+    <!-- Canvas area: 80,100 to 944,680 = 864x580 -->
+    <rect x="80" y="100" width="864" height="580" rx="8" fill="#0A0A10"/>
+    <rect x="80" y="100" width="864" height="580" rx="8" fill="none" stroke="#333" stroke-width="2"/>
+
+    <!-- Simulated scene (pixel particles) -->
+    <!-- Stone wall (left-center, gray pixels) -->
+    <rect x="240" y="400" width="80" height="280" fill="#555"/>
+    <rect x="240" y="400" width="80" height="280" fill="none" stroke="#777" stroke-width="1"/>
+
+    <!-- Sand pile (right of stone, golden) -->
+    <rect x="320" y="480" width="160" height="200" rx="2" fill="#D4A020"/>
+    <rect x="340" y="440" width="120" height="50" rx="2" fill="#E0B030"/>
+    <rect x="360" y="410" width="80" height="40" rx="2" fill="#ECC040"/>
+
+    <!-- Falling sand stream -->
+    <rect x="384" y="100" width="10" height="20" rx="2" fill="#ECC040" opacity="0.9"/>
+    <rect x="384" y="130" width="10" height="20" rx="2" fill="#E0B030" opacity="0.8"/>
+    <rect x="384" y="160" width="10" height="20" rx="2" fill="#ECC040" opacity="0.9"/>
+    <rect x="384" y="190" width="10" height="20" rx="2" fill="#E0B030" opacity="0.75"/>
+    <rect x="384" y="220" width="10" height="20" rx="2" fill="#ECC040" opacity="0.8"/>
+    <rect x="384" y="250" width="10" height="20" rx="2" fill="#E0B030" opacity="0.7"/>
+    <rect x="384" y="280" width="10" height="20" rx="2" fill="#ECC040" opacity="0.75"/>
+    <rect x="384" y="310" width="10" height="20" rx="2" fill="#E0B030" opacity="0.65"/>
+    <rect x="384" y="340" width="10" height="20" rx="2" fill="#ECC040" opacity="0.6"/>
+    <rect x="384" y="370" width="10" height="20" rx="2" fill="#E0B030" opacity="0.5"/>
+    <rect x="384" y="400" width="10" height="20" rx="2" fill="#ECC040" opacity="0.4"/>
+
+    <!-- Water pool (right side) -->
+    <rect x="640" y="580" width="224" height="100" rx="2" fill="#2055BB" opacity="0.85"/>
+    <rect x="640" y="580" width="224" height="22" rx="2" fill="#4488EE" opacity="0.5"/>
+
+    <!-- Fire (right-center) -->
+    <ellipse cx="780" cy="470" rx="45" ry="70" fill="#FF5500" opacity="0.9"/>
+    <ellipse cx="780" cy="455" rx="28" ry="52" fill="#FF9900" opacity="0.9"/>
+    <ellipse cx="780" cy="438" rx="15" ry="35" fill="#FFDD00" opacity="0.9"/>
+    <!-- Wood below fire -->
+    <rect x="740" y="570" width="80" height="30" rx="4" fill="#6A3810"/>
+
+    <!-- Plant/vegetation (scattered) -->
+    <ellipse cx="160" cy="640" rx="40" ry="20" fill="#2A7A20"/>
+    <ellipse cx="180" cy="620" rx="20" ry="28" fill="#3A9030"/>
+    <ellipse cx="150" cy="610" rx="16" ry="24" fill="#2A7A20"/>
+
+    <!-- Ice block -->
+    <rect x="540" y="440" width="80" height="80" rx="6" fill="#B0E8FF" opacity="0.7"/>
+    <rect x="540" y="440" width="80" height="80" rx="6" fill="none" stroke="#88CCFF" stroke-width="2"/>
+
+    <!-- Canvas border highlight -->
+    <rect x="80" y="100" width="864" height="580" rx="8" fill="none" stroke="#E0B030" stroke-width="3" opacity="0.5"/>
+
+    <!-- Layer 3: Material palette (bottom) -->
+    <!-- 12 material buttons in 2 rows of 6 -->
+    <rect x="80" y="716" width="864" height="128" rx="12" fill="#181420"/>
+    <rect x="80" y="716" width="864" height="128" rx="12" fill="none" stroke="#333" stroke-width="2"/>
+
+    <!-- Row 1: Sand, Water, Fire, Oil, Steam, Stone -->
+    <!-- Sand (active) -->
+    <rect x="96" y="728" width="130" height="50" rx="10" fill="#332200"/>
+    <rect x="96" y="728" width="130" height="50" rx="10" fill="none" stroke="#ECC040" stroke-width="3"/>
+    <text x="161" y="759" font-family="'Segoe UI',Arial" font-size="28" font-weight="700" fill="#ECC040" text-anchor="middle">🟡 모래</text>
+
+    <rect x="238" y="728" width="130" height="50" rx="10" fill="#181828"/>
+    <text x="303" y="759" font-family="'Segoe UI',Arial" font-size="28" fill="#4488EE" text-anchor="middle">💧 물</text>
+
+    <rect x="380" y="728" width="130" height="50" rx="10" fill="#181828"/>
+    <text x="445" y="759" font-family="'Segoe UI',Arial" font-size="28" fill="#FF6A00" text-anchor="middle">🔥 불</text>
+
+    <rect x="522" y="728" width="130" height="50" rx="10" fill="#181828"/>
+    <text x="587" y="759" font-family="'Segoe UI',Arial" font-size="28" fill="#8B5020" text-anchor="middle">🟤 기름</text>
+
+    <rect x="664" y="728" width="130" height="50" rx="10" fill="#181828"/>
+    <text x="729" y="759" font-family="'Segoe UI',Arial" font-size="28" fill="#AADDFF" text-anchor="middle">💨 증기</text>
+
+    <rect x="806" y="728" width="128" height="50" rx="10" fill="#181828"/>
+    <text x="870" y="759" font-family="'Segoe UI',Arial" font-size="28" fill="#888" text-anchor="middle">🪨 돌</text>
+
+    <!-- Row 2: Wood, Ice, Seed, Plant, Acid, Ash -->
+    <rect x="96" y="784" width="130" height="50" rx="10" fill="#181828"/>
+    <text x="161" y="815" font-family="'Segoe UI',Arial" font-size="28" fill="#8B4010" text-anchor="middle">🪵 나무</text>
+
+    <rect x="238" y="784" width="130" height="50" rx="10" fill="#181828"/>
+    <text x="303" y="815" font-family="'Segoe UI',Arial" font-size="28" fill="#88DDFF" text-anchor="middle">🧊 얼음</text>
+
+    <rect x="380" y="784" width="130" height="50" rx="10" fill="#181828"/>
+    <text x="445" y="815" font-family="'Segoe UI',Arial" font-size="28" fill="#A8D860" text-anchor="middle">🌱 씨앗</text>
+
+    <rect x="522" y="784" width="130" height="50" rx="10" fill="#181828"/>
+    <text x="587" y="815" font-family="'Segoe UI',Arial" font-size="28" fill="#3A9030" text-anchor="middle">🌿 식물</text>
+
+    <rect x="664" y="784" width="130" height="50" rx="10" fill="#181828"/>
+    <text x="729" y="815" font-family="'Segoe UI',Arial" font-size="28" fill="#AAFF44" text-anchor="middle">🧪 산</text>
+
+    <rect x="806" y="784" width="128" height="50" rx="10" fill="#181828"/>
+    <text x="870" y="815" font-family="'Segoe UI',Arial" font-size="28" fill="#666" text-anchor="middle">⬛ 재</text>
+  </g>
+</svg>

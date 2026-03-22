@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg03" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0A0806"/>
+      <stop offset="100%" stop-color="#201808"/>
+    </linearGradient>
+    <linearGradient id="sandStream03" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#F8D060" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#C89020" stop-opacity="0.6"/>
+    </linearGradient>
+    <clipPath id="frame03">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <!-- Layer 1: Dark warm background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg03)"/>
+  <g clip-path="url(#frame03)">
+    <!-- Layer 2: Multiple sand streams falling from top -->
+    <!-- Left stream -->
+    <rect x="180" y="100" width="28" height="580" rx="14" fill="url(#sandStream03)" opacity="0.85"/>
+    <!-- Left stream particles (scattered) -->
+    <circle cx="194" cy="130" r="9" fill="#F8D060" opacity="0.9"/>
+    <circle cx="188" cy="175" r="7" fill="#F0C040" opacity="0.8"/>
+    <circle cx="200" cy="220" r="10" fill="#F8D060" opacity="0.85"/>
+    <circle cx="186" cy="268" r="8" fill="#EEB830" opacity="0.75"/>
+    <circle cx="198" cy="316" r="9" fill="#F8D060" opacity="0.8"/>
+    <circle cx="190" cy="364" r="7" fill="#F0C040" opacity="0.7"/>
+    <circle cx="202" cy="412" r="10" fill="#F8D060" opacity="0.75"/>
+
+    <!-- Center stream (thicker, main visual) -->
+    <rect x="480" y="80" width="48" height="600" rx="24" fill="url(#sandStream03)" opacity="0.9"/>
+    <!-- Center particles (larger) -->
+    <circle cx="504" cy="110" r="14" fill="#F8D060" opacity="0.95"/>
+    <circle cx="498" cy="160" r="12" fill="#F0C040" opacity="0.9"/>
+    <circle cx="512" cy="208" r="14" fill="#F8D060" opacity="0.9"/>
+    <circle cx="496" cy="258" r="13" fill="#EEB830" opacity="0.85"/>
+    <circle cx="510" cy="308" r="14" fill="#F8D060" opacity="0.85"/>
+    <circle cx="500" cy="358" r="12" fill="#F0C040" opacity="0.8"/>
+    <circle cx="508" cy="406" r="13" fill="#F8D060" opacity="0.8"/>
+    <circle cx="498" cy="454" r="11" fill="#EEB830" opacity="0.7"/>
+    <circle cx="512" cy="502" r="14" fill="#F8D060" opacity="0.65"/>
+    <circle cx="502" cy="552" r="12" fill="#F0C040" opacity="0.55"/>
+    <circle cx="506" cy="602" r="10" fill="#EEB830" opacity="0.4"/>
+
+    <!-- Right stream -->
+    <rect x="810" y="100" width="28" height="580" rx="14" fill="url(#sandStream03)" opacity="0.8"/>
+    <circle cx="824" cy="135" r="8" fill="#F8D060" opacity="0.85"/>
+    <circle cx="818" cy="182" r="10" fill="#F0C040" opacity="0.8"/>
+    <circle cx="830" cy="230" r="8" fill="#F8D060" opacity="0.8"/>
+    <circle cx="820" cy="278" r="9" fill="#EEB830" opacity="0.72"/>
+    <circle cx="826" cy="326" r="8" fill="#F8D060" opacity="0.7"/>
+
+    <!-- Scattered individual particles (falling) -->
+    <circle cx="280" cy="200" r="7" fill="#F8D060" opacity="0.7"/>
+    <circle cx="310" cy="280" r="6" fill="#EEB830" opacity="0.65"/>
+    <circle cx="260" cy="350" r="7" fill="#F0C040" opacity="0.6"/>
+    <circle cx="370" cy="180" r="6" fill="#F8D060" opacity="0.65"/>
+    <circle cx="640" cy="210" r="7" fill="#F8D060" opacity="0.7"/>
+    <circle cx="680" cy="290" r="6" fill="#EEB830" opacity="0.6"/>
+    <circle cx="720" cy="350" r="8" fill="#F0C040" opacity="0.65"/>
+    <circle cx="600" cy="160" r="6" fill="#F8D060" opacity="0.6"/>
+
+    <!-- Sand pile at bottom (accumulated) -->
+    <ellipse cx="504" cy="895" rx="320" ry="80" fill="#C89020" opacity="0.9"/>
+    <ellipse cx="504" cy="872" rx="220" ry="58" fill="#D4A030" opacity="0.9"/>
+    <ellipse cx="504" cy="854" rx="140" ry="38" fill="#E0B040" opacity="0.9"/>
+    <ellipse cx="504" cy="842" rx="80" ry="22" fill="#ECC050" opacity="0.9"/>
+
+    <!-- Secondary piles at left/right streams -->
+    <ellipse cx="194" cy="890" rx="100" ry="38" fill="#C89020" opacity="0.8"/>
+    <ellipse cx="824" cy="890" rx="90" ry="34" fill="#C89020" opacity="0.8"/>
+
+    <!-- Layer 3: "Sand.Fall" floating title + gravity arrow -->
+    <!-- Gravity symbol (downward arrow) -->
+    <line x1="504" y1="60" x2="504" y2="80" stroke="#F8D060" stroke-width="6" stroke-linecap="round" opacity="0.6"/>
+    <polygon points="504,80 494,62 514,62" fill="#F8D060" opacity="0.6"/>
+
+    <!-- Sparkling particles at top (new sand spawning) -->
+    <circle cx="194" cy="98" r="12" fill="#F8D060"/>
+    <circle cx="504" cy="78" r="16" fill="#F8D060"/>
+    <circle cx="824" cy="98" r="12" fill="#F8D060"/>
+    <circle cx="194" cy="98" r="20" fill="#F8D060" opacity="0.3"/>
+    <circle cx="504" cy="78" r="26" fill="#F8D060" opacity="0.25"/>
+    <circle cx="824" cy="98" r="20" fill="#F8D060" opacity="0.3"/>
+
+    <!-- Title text at bottom -->
+    <text x="512" y="990" font-family="'Segoe UI',Arial" font-size="52" font-weight="900" fill="#C89020" text-anchor="middle" opacity="0.8">SAND · FALL</text>
+  </g>
+</svg>

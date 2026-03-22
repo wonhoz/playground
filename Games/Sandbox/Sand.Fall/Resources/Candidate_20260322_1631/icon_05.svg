@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg05" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1A1000"/>
+      <stop offset="100%" stop-color="#2C1C04"/>
+    </linearGradient>
+    <radialGradient id="sandGlow05" cx="50%" cy="100%" r="60%">
+      <stop offset="0%" stop-color="#E0A820" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#E0A820" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="frame05">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg05)"/>
+  <g clip-path="url(#frame05)">
+    <!-- Layer 2: Large hourglass / sand timer shape — central metaphor -->
+    <!-- Hourglass outer frame -->
+    <polygon points="152,120 872,120 592,512 872,904 152,904 432,512" fill="none" stroke="#C89020" stroke-width="8" stroke-linejoin="round"/>
+    <!-- Hourglass upper fill (sand remaining) -->
+    <polygon points="172,140 850,140 560,512 464,512" fill="#E0A820" opacity="0.85"/>
+    <!-- Upper sand gradient top -->
+    <rect x="172" y="140" width="678" height="40" fill="#F0C040" opacity="0.5"/>
+    <!-- Upper sand surface (wavy) -->
+    <path d="M172,200 Q350,190 512,198 Q680,188 850,200" fill="#C89020" stroke="#D4A030" stroke-width="3"/>
+    <!-- Sand line (still going down through narrow) -->
+    <rect x="498" y="490" width="28" height="45" rx="14" fill="#F0C040" opacity="0.9"/>
+
+    <!-- Hourglass lower accumulation (sand piled) -->
+    <polygon points="172,886 850,886 564,512 460,512" fill="#7A5010" opacity="0.5"/>
+    <!-- Sand pile in lower half -->
+    <ellipse cx="512" cy="886" rx="310" ry="55" fill="#C89020" opacity="0.88"/>
+    <ellipse cx="512" cy="858" rx="200" ry="38" fill="#D4A030" opacity="0.85"/>
+    <ellipse cx="512" cy="836" rx="110" ry="22" fill="#E0B040" opacity="0.85"/>
+    <ellipse cx="512" cy="822" rx="50" ry="10" fill="#ECC050" opacity="0.85"/>
+
+    <!-- Sand stream through narrow (bottom of upper) -->
+    <rect x="504" y="500" width="16" height="100" rx="8" fill="#F8D060" opacity="0.9"/>
+    <!-- Scattered particles in lower area -->
+    <circle cx="460" cy="650" r="6" fill="#ECC050" opacity="0.7"/>
+    <circle cx="540" cy="680" r="5" fill="#E0B040" opacity="0.65"/>
+    <circle cx="490" cy="720" r="6" fill="#ECC050" opacity="0.6"/>
+    <circle cx="530" cy="750" r="5" fill="#D4A030" opacity="0.55"/>
+    <circle cx="480" cy="780" r="4" fill="#ECC050" opacity="0.5"/>
+    <circle cx="548" cy="800" r="5" fill="#E0B040" opacity="0.5"/>
+    <circle cx="465" cy="810" r="4" fill="#ECC050" opacity="0.45"/>
+    <circle cx="560" cy="820" r="4" fill="#D4A030" opacity="0.4"/>
+
+    <!-- Glow at base -->
+    <rect x="80" y="800" width="864" height="200" fill="url(#sandGlow05)"/>
+
+    <!-- Layer 3: Material icons floating around hourglass -->
+    <!-- Fire (upper right area) -->
+    <ellipse cx="870" cy="350" rx="28" ry="44" fill="#FF5500" opacity="0.85"/>
+    <ellipse cx="870" cy="338" rx="18" ry="33" fill="#FF9900" opacity="0.85"/>
+    <ellipse cx="870" cy="325" rx="10" ry="22" fill="#FFD800" opacity="0.85"/>
+    <!-- Water drop (lower left) -->
+    <ellipse cx="160" cy="700" rx="22" ry="28" fill="#2A6ACC" opacity="0.85"/>
+    <ellipse cx="154" cy="693" rx="8" ry="6" fill="white" opacity="0.25"/>
+    <!-- Stone (upper left) -->
+    <ellipse cx="165" cy="340" rx="34" ry="28" fill="#666" opacity="0.8"/>
+    <ellipse cx="157" cy="333" rx="13" ry="10" fill="#888" opacity="0.4"/>
+    <!-- Plant (lower right) -->
+    <ellipse cx="858" cy="720" rx="22" ry="28" fill="#2A8020" opacity="0.85"/>
+    <ellipse cx="858" cy="706" rx="14" ry="18" fill="#3A9A2A" opacity="0.75"/>
+
+    <!-- Title at top -->
+    <text x="512" y="80" font-family="'Segoe UI',Arial" font-size="62" font-weight="900" fill="#C89020" text-anchor="middle" opacity="0.85">SAND · FALL</text>
+    <text x="512" y="120" font-family="'Segoe UI',Arial" font-size="0" fill="none"/>
+  </g>
+</svg>

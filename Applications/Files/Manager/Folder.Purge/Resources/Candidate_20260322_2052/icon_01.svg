@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg01" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FF6B35"/>
+      <stop offset="100%" stop-color="#FFAB00"/>
+    </linearGradient>
+    <linearGradient id="fld01" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFE05A"/>
+      <stop offset="100%" stop-color="#F59300"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg01)"/>
+
+  <!-- Layer 2: Golden folder -->
+  <!-- Folder body -->
+  <rect x="108" y="378" width="770" height="400" rx="55" fill="url(#fld01)"/>
+  <!-- Folder tab -->
+  <rect x="108" y="282" width="268" height="118" rx="38" fill="#FFE58A"/>
+  <!-- Folder depth shadow stripe -->
+  <rect x="108" y="378" width="770" height="36" fill="#7A4800" opacity="0.22"/>
+
+  <!-- Layer 3: Broom sweeping diagonal (bottom-right → upper-left) + dust -->
+  <!-- Broom handle -->
+  <line x1="862" y1="858" x2="398" y2="432"
+        stroke="white" stroke-width="66" stroke-linecap="round"/>
+  <!-- Broom head block (rotated to match ~-42deg handle angle) -->
+  <rect x="296" y="384" width="204" height="92" rx="26"
+        fill="white" transform="rotate(-42 398 430)"/>
+  <!-- Bristle lines fanning from head toward lower-left -->
+  <line x1="338" y1="472" x2="196" y2="582"
+        stroke="white" stroke-width="50" stroke-linecap="round" opacity="0.88"/>
+  <line x1="364" y1="502" x2="232" y2="624"
+        stroke="white" stroke-width="44" stroke-linecap="round" opacity="0.82"/>
+  <line x1="390" y1="528" x2="262" y2="648"
+        stroke="white" stroke-width="38" stroke-linecap="round" opacity="0.75"/>
+  <!-- Dust particles flying left off the broom -->
+  <circle cx="182" cy="444" r="29" fill="white" opacity="0.68"/>
+  <circle cx="146" cy="508" r="21" fill="white" opacity="0.52"/>
+  <circle cx="208" cy="412" r="18" fill="white" opacity="0.62"/>
+  <circle cx="160" cy="476" r="14" fill="white" opacity="0.46"/>
+  <circle cx="132" cy="448" r="10" fill="white" opacity="0.40"/>
+</svg>

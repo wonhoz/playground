@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg03" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#E0F7EE"/>
+      <stop offset="100%" stop-color="#A8E6C8"/>
+    </linearGradient>
+    <radialGradient id="vortex03" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#6A1B9A"/>
+      <stop offset="55%" stop-color="#7B1FA2" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#4A148C" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg03)"/>
+
+  <!-- Vortex ambient glow -->
+  <circle cx="512" cy="512" r="290" fill="url(#vortex03)" opacity="0.5"/>
+
+  <!-- Layer 2: 4 small folders around center + arrows pointing inward -->
+
+  <!-- TOP folder (orange-gold) -->
+  <rect x="432" y="136" width="160" height="128" rx="16" fill="#FFB300"/>
+  <rect x="432" y="114" width="88" height="38" rx="12" fill="#FFD740"/>
+  <!-- Arrow top → center -->
+  <line x1="512" y1="264" x2="512" y2="386"
+        stroke="#6A1B9A" stroke-width="24" stroke-linecap="round" opacity="0.72"/>
+  <polygon points="512,414 483,372 541,372" fill="#6A1B9A" opacity="0.72"/>
+
+  <!-- BOTTOM folder (cyan) -->
+  <rect x="432" y="758" width="160" height="128" rx="16" fill="#00BCD4"/>
+  <rect x="432" y="736" width="88" height="38" rx="12" fill="#4DD0E1"/>
+  <!-- Arrow bottom → center -->
+  <line x1="512" y1="758" x2="512" y2="636"
+        stroke="#6A1B9A" stroke-width="24" stroke-linecap="round" opacity="0.72"/>
+  <polygon points="512,610 483,652 541,652" fill="#6A1B9A" opacity="0.72"/>
+
+  <!-- LEFT folder (coral) -->
+  <rect x="116" y="450" width="158" height="124" rx="16" fill="#FF5722"/>
+  <rect x="116" y="428" width="88" height="36" rx="12" fill="#FF8A65"/>
+  <!-- Arrow left → center -->
+  <line x1="274" y1="512" x2="390" y2="512"
+        stroke="#6A1B9A" stroke-width="24" stroke-linecap="round" opacity="0.72"/>
+  <polygon points="418,512 376,483 376,541" fill="#6A1B9A" opacity="0.72"/>
+
+  <!-- RIGHT folder (green) -->
+  <rect x="750" y="450" width="158" height="124" rx="16" fill="#43A047"/>
+  <rect x="750" y="428" width="88" height="36" rx="12" fill="#81C784"/>
+  <!-- Arrow right → center -->
+  <line x1="750" y1="512" x2="634" y2="512"
+        stroke="#6A1B9A" stroke-width="24" stroke-linecap="round" opacity="0.72"/>
+  <polygon points="606,512 648,483 648,541" fill="#6A1B9A" opacity="0.72"/>
+
+  <!-- Layer 3: Central vortex core -->
+  <circle cx="512" cy="512" r="108" fill="#6A1B9A"/>
+  <circle cx="512" cy="512" r="72" fill="#AB47BC"/>
+  <!-- Swirl arcs inside vortex -->
+  <path d="M 512 408 A 104 104 0 0 1 616 512"
+        stroke="white" stroke-width="18" fill="none" stroke-linecap="round" opacity="0.82"/>
+  <path d="M 616 512 A 104 104 0 0 1 512 616"
+        stroke="white" stroke-width="14" fill="none" stroke-linecap="round" opacity="0.66"/>
+  <path d="M 512 616 A 104 104 0 0 1 426 546"
+        stroke="white" stroke-width="10" fill="none" stroke-linecap="round" opacity="0.50"/>
+  <!-- Vortex center dot -->
+  <circle cx="512" cy="512" r="32" fill="white" opacity="0.90"/>
+</svg>

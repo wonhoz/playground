@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"/>
+<title>Folder.Purge — Icon Candidates 20260322_2052</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #0E1120;
+    color: #C8CCEE;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    padding: 40px 24px 60px;
+    min-height: 100vh;
+  }
+
+  header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+  header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #E8ECFF;
+    letter-spacing: 1px;
+  }
+  header p {
+    margin-top: 8px;
+    font-size: 14px;
+    color: #6870A8;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+    gap: 32px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .card {
+    background: #181B34;
+    border: 1px solid #2A2E52;
+    border-radius: 18px;
+    padding: 28px 24px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.18s ease, border-color 0.18s ease;
+  }
+  .card:hover {
+    transform: scale(1.05);
+    border-color: #5C63A8;
+  }
+
+  .icon-wrap {
+    width: 200px;
+    height: 200px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .icon-wrap img {
+    width: 200px;
+    height: 200px;
+    border-radius: 36px;
+    object-fit: contain;
+    transition: width 0.18s, height 0.18s;
+    filter: drop-shadow(0 6px 18px rgba(0,0,0,0.6));
+  }
+  .card:hover .icon-wrap img {
+    width: 220px;
+    height: 220px;
+  }
+
+  .tag-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 12px;
+  }
+  .tag {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 99px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  .tag.literal   { background: #1A3A5C; color: #5CB8FF; }
+  .tag.metaphor  { background: #2E1A3A; color: #C07AFF; }
+  .tag.hybrid    { background: #1A3028; color: #5FD6A8; }
+  .tag.pattern   { background: #2A2814; color: #D4C060; }
+
+  .card-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #E0E4FF;
+    text-align: center;
+    margin-bottom: 6px;
+  }
+  .card-desc {
+    font-size: 13px;
+    color: #7A80B0;
+    text-align: center;
+    line-height: 1.55;
+    margin-bottom: 14px;
+  }
+
+  .palette {
+    display: flex;
+    gap: 7px;
+    align-items: center;
+    justify-content: center;
+  }
+  .swatch {
+    width: 22px;
+    height: 22px;
+    border-radius: 6px;
+    border: 1px solid rgba(255,255,255,0.12);
+    title: '';
+  }
+  .palette-label {
+    font-size: 11px;
+    color: #505480;
+    margin-left: 4px;
+  }
+
+  .filename {
+    margin-top: 12px;
+    font-size: 11px;
+    color: #40456A;
+    font-family: 'Courier New', monospace;
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>Folder.Purge — 아이콘 후보</h1>
+  <p>빈 폴더·빈 파일·VS 빌드 아티팩트(bin/obj)를 탐지해서 한 번에 정리하는 WPF 앱 &nbsp;|&nbsp; 2026-03-22 20:52</p>
+</header>
+
+<div class="grid">
+
+  <!-- icon_01 -->
+  <div class="card">
+    <div class="icon-wrap">
+      <img src="icon_01.svg" alt="icon_01"/>
+    </div>
+    <div class="tag-row">
+      <span class="tag literal">literal</span>
+      <span class="tag pattern">대각선/동적</span>
+    </div>
+    <div class="card-title">폴더 + 빗자루 청소</div>
+    <div class="card-desc">
+      빗자루로 폴더를 쓸어내는 장면.<br>
+      빗자루 = Purge(정화/청소)를 직관적으로 표현
+    </div>
+    <div class="palette">
+      <div class="swatch" style="background:#FF6B35" title="배경 오렌지"></div>
+      <div class="swatch" style="background:#FFAB00" title="배경 앰버"></div>
+      <div class="swatch" style="background:#FFE05A" title="폴더 골드"></div>
+      <div class="swatch" style="background:#F59300" title="폴더 다크골드"></div>
+      <div class="swatch" style="background:#FFFFFF" title="빗자루 흰색"></div>
+    </div>
+    <div class="filename">icon_01.svg</div>
+  </div>
+
+  <!-- icon_02 -->
+  <div class="card">
+    <div class="icon-wrap">
+      <img src="icon_02.svg" alt="icon_02"/>
+    </div>
+    <div class="tag-row">
+      <span class="tag metaphor">metaphor</span>
+      <span class="tag pattern">중앙심볼</span>
+    </div>
+    <div class="card-title">bin / obj → X</div>
+    <div class="card-desc">
+      VS 빌드 폴더명을 직접 텍스트로 표시하고<br>
+      굵은 빨간 X로 삭제를 선언
+    </div>
+    <div class="palette">
+      <div class="swatch" style="background:#1A2744" title="배경 네이비"></div>
+      <div class="swatch" style="background:#0F1B38" title="배경 딥네이비"></div>
+      <div class="swatch" style="background:#4A5F90" title="텍스트 블루그레이"></div>
+      <div class="swatch" style="background:#B71C1C" title="X 다크레드"></div>
+      <div class="swatch" style="background:#FF1744" title="X 브라이트레드"></div>
+    </div>
+    <div class="filename">icon_02.svg</div>
+  </div>
+
+  <!-- icon_03 -->
+  <div class="card">
+    <div class="icon-wrap">
+      <img src="icon_03.svg" alt="icon_03"/>
+    </div>
+    <div class="tag-row">
+      <span class="tag hybrid">hybrid</span>
+      <span class="tag pattern">공간/장면</span>
+    </div>
+    <div class="card-title">4폴더 → 소용돌이</div>
+    <div class="card-desc">
+      4방향의 폴더들이 중앙 보라 소용돌이로 빨려 들어감.<br>
+      여러 폴더를 한꺼번에 흡수/제거하는 앱의 역할
+    </div>
+    <div class="palette">
+      <div class="swatch" style="background:#E0F7EE" title="배경 민트"></div>
+      <div class="swatch" style="background:#A8E6C8" title="배경 그린"></div>
+      <div class="swatch" style="background:#FFB300" title="폴더 오렌지"></div>
+      <div class="swatch" style="background:#FF5722" title="폴더 코랄"></div>
+      <div class="swatch" style="background:#6A1B9A" title="소용돌이 퍼플"></div>
+    </div>
+    <div class="filename">icon_03.svg</div>
+  </div>
+
+  <!-- icon_04 -->
+  <div class="card">
+    <div class="icon-wrap">
+      <img src="icon_04.svg" alt="icon_04"/>
+    </div>
+    <div class="tag-row">
+      <span class="tag literal">literal</span>
+      <span class="tag pattern">레이어드</span>
+    </div>
+    <div class="card-title">열린 빈 폴더</div>
+    <div class="card-desc">
+      폴더를 열었더니 내부가 완전히 텅 빔.<br>
+      Empty Folder 상태를 직접 시각화
+    </div>
+    <div class="palette">
+      <div class="swatch" style="background:#FFFDE7" title="배경 크림"></div>
+      <div class="swatch" style="background:#FFC107" title="폴더 앰버"></div>
+      <div class="swatch" style="background:#E65100" title="폴더 다크오렌지"></div>
+      <div class="swatch" style="background:#FAFAFA" title="내부 흰색"></div>
+      <div class="swatch" style="background:#C8C8C8" title="빈 상태 그레이"></div>
+    </div>
+    <div class="filename">icon_04.svg</div>
+  </div>
+
+  <!-- icon_05 -->
+  <div class="card">
+    <div class="icon-wrap">
+      <img src="icon_05.svg" alt="icon_05"/>
+    </div>
+    <div class="tag-row">
+      <span class="tag metaphor">metaphor</span>
+      <span class="tag pattern">기하학 추상</span>
+    </div>
+    <div class="card-title">폴더 + EMPTY 배지</div>
+    <div class="card-desc">
+      스캔 결과 레이블처럼 폴더에 EMPTY 배지가 붙어있고<br>
+      돋보기가 탐지를 암시
+    </div>
+    <div class="palette">
+      <div class="swatch" style="background:#29B6F6" title="배경 스카이블루"></div>
+      <div class="swatch" style="background:#0277BD" title="배경 딥블루"></div>
+      <div class="swatch" style="background:#FFF59D" title="폴더 레몬"></div>
+      <div class="swatch" style="background:#EF5350" title="배지 레드"></div>
+      <div class="swatch" style="background:#FFFFFF" title="텍스트/돋보기 흰색"></div>
+    </div>
+    <div class="filename">icon_05.svg</div>
+  </div>
+
+  <!-- icon_06 -->
+  <div class="card">
+    <div class="icon-wrap">
+      <img src="icon_06.svg" alt="icon_06"/>
+    </div>
+    <div class="tag-row">
+      <span class="tag hybrid">hybrid</span>
+      <span class="tag pattern">레이어드</span>
+    </div>
+    <div class="card-title">체크리스트 + DELETE</div>
+    <div class="card-desc">
+      앱의 실제 UI(스캔 결과 목록 + 삭제 버튼)를 직접 표현.<br>
+      앱을 열면 보게 될 화면의 미리보기
+    </div>
+    <div class="palette">
+      <div class="swatch" style="background:#1A1B2E" title="배경 인디고"></div>
+      <div class="swatch" style="background:#272A50" title="패널 다크블루"></div>
+      <div class="swatch" style="background:#4CAF50" title="체크박스 그린"></div>
+      <div class="swatch" style="background:#7A7EAA" title="경로 블루그레이"></div>
+      <div class="swatch" style="background:#EF5350" title="버튼 레드"></div>
+    </div>
+    <div class="filename">icon_06.svg</div>
+  </div>
+
+</div>
+
+<footer style="text-align:center;margin-top:52px;font-size:12px;color:#353868;">
+  Folder.Purge — Resources/Candidate_20260322_2052 &nbsp;|&nbsp; Generated by Claude Code
+</footer>
+</body>
+</html>

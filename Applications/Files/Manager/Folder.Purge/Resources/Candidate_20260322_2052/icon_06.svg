@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg06" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0%" stop-color="#1A1B2E"/>
+      <stop offset="100%" stop-color="#252850"/>
+    </linearGradient>
+    <linearGradient id="del06" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#EF5350"/>
+      <stop offset="100%" stop-color="#B71C1C"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg06)"/>
+
+  <!-- UI Panel -->
+  <rect x="142" y="162" width="740" height="670" rx="44" fill="#272A50" opacity="0.92"/>
+
+  <!-- Panel header bar -->
+  <rect x="142" y="162" width="740" height="72" rx="44" fill="#33376A"/>
+  <rect x="142" y="198" width="740" height="36" fill="#33376A"/>
+  <!-- Header title -->
+  <text x="512" y="212"
+        font-family="Arial, sans-serif" font-size="38" font-weight="700"
+        text-anchor="middle" fill="#C0C4E8">Folder.Purge</text>
+
+  <!-- Layer 2: Scan result rows (checkbox + folder icon + path text) -->
+
+  <!-- Row 1 — checked (green) -->
+  <rect x="168" y="252" width="688" height="66" rx="12" fill="#303468" opacity="0.85"/>
+  <!-- Checkbox -->
+  <rect x="192" y="268" width="40" height="40" rx="8" fill="#4CAF50"/>
+  <path d="M 200 288 L 210 300 L 228 275"
+        stroke="white" stroke-width="7" fill="none"
+        stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Small folder icon -->
+  <rect x="254" y="276" width="40" height="28" rx="5" fill="#FFB300"/>
+  <rect x="254" y="268" width="22" height="14" rx="4" fill="#FFD740"/>
+  <!-- Path placeholder lines -->
+  <rect x="312" y="272" width="360" height="14" rx="5" fill="#7A7EAA" opacity="0.72"/>
+  <rect x="312" y="292" width="220" height="10" rx="4" fill="#565A8A" opacity="0.55"/>
+
+  <!-- Row 2 — checked -->
+  <rect x="168" y="326" width="688" height="66" rx="12" fill="#2D3064" opacity="0.75"/>
+  <rect x="192" y="342" width="40" height="40" rx="8" fill="#4CAF50"/>
+  <path d="M 200 362 L 210 374 L 228 349"
+        stroke="white" stroke-width="7" fill="none"
+        stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="254" y="350" width="40" height="28" rx="5" fill="#FF7043"/>
+  <rect x="254" y="342" width="22" height="14" rx="4" fill="#FF8A65"/>
+  <rect x="312" y="346" width="410" height="14" rx="5" fill="#7A7EAA" opacity="0.72"/>
+  <rect x="312" y="366" width="260" height="10" rx="4" fill="#565A8A" opacity="0.55"/>
+
+  <!-- Row 3 — checked -->
+  <rect x="168" y="400" width="688" height="66" rx="12" fill="#303468" opacity="0.85"/>
+  <rect x="192" y="416" width="40" height="40" rx="8" fill="#4CAF50"/>
+  <path d="M 200 436 L 210 448 L 228 423"
+        stroke="white" stroke-width="7" fill="none"
+        stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="254" y="424" width="40" height="28" rx="5" fill="#26C6DA"/>
+  <rect x="254" y="416" width="22" height="14" rx="4" fill="#4DD0E1"/>
+  <rect x="312" y="420" width="300" height="14" rx="5" fill="#7A7EAA" opacity="0.72"/>
+  <rect x="312" y="440" width="185" height="10" rx="4" fill="#565A8A" opacity="0.55"/>
+
+  <!-- Row 4 — unchecked (dimmed) -->
+  <rect x="168" y="474" width="688" height="66" rx="12" fill="#262950" opacity="0.65"/>
+  <rect x="192" y="490" width="40" height="40" rx="8" fill="none" stroke="#484C7A" stroke-width="4"/>
+  <rect x="254" y="498" width="40" height="28" rx="5" fill="#888" opacity="0.45"/>
+  <rect x="254" y="490" width="22" height="14" rx="4" fill="#999" opacity="0.38"/>
+  <rect x="312" y="494" width="240" height="14" rx="5" fill="#484C7A" opacity="0.52"/>
+  <rect x="312" y="514" width="155" height="10" rx="4" fill="#3A3D68" opacity="0.45"/>
+
+  <!-- Stats bar -->
+  <rect x="168" y="557" width="688" height="48" rx="10" fill="#232548" opacity="0.80"/>
+  <text x="198" y="589"
+        font-family="Arial, sans-serif" font-size="28" fill="#B0B4E0">3 selected</text>
+  <text x="840" y="589"
+        font-family="Arial, sans-serif" font-size="28"
+        fill="#7A7EAA" text-anchor="end">1.2 MB</text>
+
+  <!-- Layer 3: DELETE button (bold red pill) -->
+  <!-- Button shadow -->
+  <rect x="228" y="644" width="568" height="145" rx="72" fill="#7A0000" opacity="0.45"/>
+  <!-- Button -->
+  <rect x="218" y="630" width="588" height="145" rx="72" fill="url(#del06)"/>
+  <!-- Button label -->
+  <text x="512" y="726"
+        font-family="Arial Black, Impact, sans-serif"
+        font-size="82" font-weight="900"
+        text-anchor="middle" fill="white" letter-spacing="2">DELETE</text>
+</svg>

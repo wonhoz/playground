@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg04" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFFDE7"/>
+      <stop offset="100%" stop-color="#FFF0C0"/>
+    </linearGradient>
+    <linearGradient id="fld04" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFC107"/>
+      <stop offset="100%" stop-color="#E65100"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg04)"/>
+
+  <!-- Layer 2: Open folder -->
+  <!-- Folder shadow / rear layer -->
+  <rect x="136" y="320" width="752" height="450" rx="55" fill="#FFD54F" opacity="0.55"/>
+  <!-- Folder front body -->
+  <rect x="150" y="358" width="724" height="428" rx="52" fill="url(#fld04)"/>
+  <!-- Folder tab (left side) -->
+  <path d="M 150 358 L 150 322 Q 150 300 172 300 L 398 300 Q 420 300 430 322 L 448 358 Z"
+        fill="#FFD740"/>
+  <!-- Folder top shadow stripe -->
+  <rect x="150" y="358" width="724" height="38" fill="#7A3000" opacity="0.18" rx="0"/>
+
+  <!-- White interior (open folder contents area) -->
+  <rect x="190" y="395" width="644" height="358" rx="35" fill="#FAFAFA"/>
+
+  <!-- Interior: empty state indicator - ghost dotted lines (like empty file list) -->
+  <line x1="250" y1="470" x2="770" y2="470"
+        stroke="#DCDCDC" stroke-width="7" stroke-dasharray="24,18"/>
+  <line x1="250" y1="518" x2="680" y2="518"
+        stroke="#DCDCDC" stroke-width="7" stroke-dasharray="24,18"/>
+  <line x1="250" y1="566" x2="720" y2="566"
+        stroke="#DCDCDC" stroke-width="7" stroke-dasharray="24,18"/>
+
+  <!-- Layer 3: Central "nothing here" circle with empty symbol -->
+  <circle cx="512" cy="622" r="90" fill="#F0F0F0" stroke="#E0E0E0" stroke-width="5"/>
+  <!-- Empty circle / void symbol inside -->
+  <circle cx="512" cy="622" r="54" fill="none" stroke="#C8C8C8" stroke-width="9"/>
+  <!-- Diagonal slash through circle (empty/null symbol) -->
+  <line x1="474" y1="584" x2="550" y2="660"
+        stroke="#C8C8C8" stroke-width="9" stroke-linecap="round"/>
+</svg>

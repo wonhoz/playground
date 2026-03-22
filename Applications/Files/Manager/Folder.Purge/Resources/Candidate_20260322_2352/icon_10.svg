@@ -1,0 +1,46 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="150" fill="#D1FAE5"/>
+  <!-- Layer 2: Folder tree -->
+  <!-- Root folder -->
+  <rect x="390" y="160" width="180" height="100" rx="12" fill="#14532D"/>
+  <rect x="390" y="140" width="90" height="36" rx="8" fill="#14532D"/>
+  <text x="480" y="218" font-family="Arial,sans-serif" font-size="20" fill="#86EFAC" text-anchor="middle">root/</text>
+  <!-- Tree lines from root -->
+  <line x1="480" y1="260" x2="480" y2="320" stroke="#166534" stroke-width="8" stroke-linecap="round"/>
+  <line x1="260" y1="320" x2="700" y2="320" stroke="#166534" stroke-width="8" stroke-linecap="round"/>
+  <!-- Left branch line -->
+  <line x1="260" y1="320" x2="260" y2="380" stroke="#166534" stroke-width="8" stroke-linecap="round"/>
+  <!-- Center branch line -->
+  <line x1="480" y1="320" x2="480" y2="380" stroke="#166534" stroke-width="8" stroke-linecap="round"/>
+  <!-- Right branch line (to empty folder) -->
+  <line x1="700" y1="320" x2="700" y2="380" stroke="#EF4444" stroke-width="8" stroke-linecap="round" stroke-dasharray="16,8"/>
+  <!-- Left sub-folder (normal) -->
+  <rect x="175" y="380" width="160" height="100" rx="12" fill="#166534"/>
+  <rect x="175" y="362" width="80" height="30" rx="7" fill="#166534"/>
+  <text x="255" y="436" font-family="Arial,sans-serif" font-size="18" fill="#86EFAC" text-anchor="middle">src/</text>
+  <!-- Center sub-folder (normal) -->
+  <rect x="396" y="380" width="160" height="100" rx="12" fill="#166534"/>
+  <rect x="396" y="362" width="80" height="30" rx="7" fill="#166534"/>
+  <text x="476" y="436" font-family="Arial,sans-serif" font-size="18" fill="#86EFAC" text-anchor="middle">docs/</text>
+  <!-- Right sub-folder (EMPTY - being cut) -->
+  <rect x="618" y="380" width="160" height="100" rx="12" fill="#FCA5A5" stroke="#EF4444" stroke-width="4" stroke-dasharray="14,7"/>
+  <rect x="618" y="362" width="80" height="30" rx="7" fill="#FCA5A5"/>
+  <text x="698" y="436" font-family="Arial,sans-serif" font-size="16" fill="#DC2626" text-anchor="middle">empty/</text>
+  <!-- Layer 3: Scissors cutting the right branch -->
+  <!-- Scissors body (simplified) -->
+  <g transform="rotate(-35 700 340)">
+    <!-- Blade 1 -->
+    <path d="M 660 290 Q 720 320 750 360" stroke="#16A34A" stroke-width="18" fill="none" stroke-linecap="round"/>
+    <!-- Blade 2 -->
+    <path d="M 660 390 Q 720 360 750 320" stroke="#16A34A" stroke-width="18" fill="none" stroke-linecap="round"/>
+    <!-- Pivot circle -->
+    <circle cx="710" cy="340" r="18" fill="#16A34A"/>
+    <!-- Handles -->
+    <ellipse cx="640" cy="275" rx="22" ry="32" fill="none" stroke="#16A34A" stroke-width="14"/>
+    <ellipse cx="640" cy="405" rx="22" ry="32" fill="none" stroke="#16A34A" stroke-width="14"/>
+  </g>
+  <!-- Red X on empty folder -->
+  <line x1="634" y1="390" x2="762" y2="474" stroke="#EF4444" stroke-width="18" stroke-linecap="round" opacity="0.8"/>
+  <line x1="762" y1="390" x2="634" y2="474" stroke="#EF4444" stroke-width="18" stroke-linecap="round" opacity="0.8"/>
+</svg>

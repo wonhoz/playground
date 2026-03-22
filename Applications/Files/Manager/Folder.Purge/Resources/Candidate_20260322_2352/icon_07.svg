@@ -1,0 +1,34 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="torchBeam" cx="30%" cy="60%" r="80%">
+      <stop offset="0%" stop-color="#FEF08A" stop-opacity="0.7"/>
+      <stop offset="60%" stop-color="#FDE047" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#FDE047" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="150" fill="#0C0A1A"/>
+  <!-- Stars in background -->
+  <circle cx="180" cy="200" r="4" fill="white" opacity="0.4"/>
+  <circle cx="350" cy="150" r="3" fill="white" opacity="0.3"/>
+  <circle cx="700" cy="180" r="4" fill="white" opacity="0.35"/>
+  <circle cx="850" cy="300" r="3" fill="white" opacity="0.3"/>
+  <circle cx="120" cy="450" r="3" fill="white" opacity="0.3"/>
+  <!-- Layer 2: Flashlight beam (cone of light) -->
+  <path d="M 200 640 L 700 300 L 950 620 Z" fill="url(#torchBeam)"/>
+  <!-- Flashlight body -->
+  <rect x="100" y="600" width="200" height="80" rx="24" fill="#374151"/>
+  <rect x="88" y="617" width="30" height="46" rx="8" fill="#4B5563"/>
+  <!-- Flashlight lens -->
+  <circle cx="295" cy="640" r="46" fill="#D97706"/>
+  <circle cx="295" cy="640" r="36" fill="#FEF08A"/>
+  <circle cx="282" cy="628" r="12" fill="white" opacity="0.6"/>
+  <!-- Layer 3: Folder revealed in beam -->
+  <rect x="600" y="320" width="240" height="170" rx="16" fill="rgba(255,255,255,0.18)" stroke="rgba(255,255,255,0.5)" stroke-width="4"/>
+  <rect x="600" y="278" width="120" height="54" rx="12" fill="rgba(255,255,255,0.18)" stroke="rgba(255,255,255,0.5)" stroke-width="4"/>
+  <!-- Empty folder interior hint -->
+  <text x="720" y="430" font-family="Arial,sans-serif" font-size="20" fill="rgba(255,255,255,0.6)" text-anchor="middle">비어있음</text>
+  <!-- More faint folders in darkness -->
+  <rect x="350" y="500" width="120" height="80" rx="8" fill="rgba(255,255,255,0.06)"/>
+  <rect x="760" y="530" width="100" height="70" rx="8" fill="rgba(255,255,255,0.06)"/>
+</svg>

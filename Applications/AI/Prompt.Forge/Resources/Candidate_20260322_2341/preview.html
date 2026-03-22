@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"/>
+<title>Prompt.Forge — Icon Candidates (2026-03-22)</title>
+<style>
+  :root {
+    --bg: #0C0905;
+    --card: #181008;
+    --border: #2A1C0A;
+    --text: #F5F0E8;
+    --dim: #8B7355;
+    --accent: #F59E0B;
+    --accent2: #10B981;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Segoe UI', 'Consolas', sans-serif;
+    padding: 40px 32px 60px;
+    min-height: 100vh;
+  }
+  header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+  header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+  }
+  header p { color: var(--dim); font-size: 14px; }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 28px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .card {
+    background: var(--card);
+    border: 1.5px solid var(--border);
+    border-radius: 16px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+  }
+  .card:hover {
+    transform: scale(1.06) translateY(-4px);
+    border-color: var(--accent);
+    box-shadow: 0 8px 40px rgba(245,158,11,0.18);
+  }
+  .icon-wrap {
+    width: 180px;
+    height: 180px;
+    border-radius: 36px;
+    overflow: hidden;
+    background: #1A1208;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .icon-wrap img { width: 180px; height: 180px; display: block; }
+  .info { width: 100%; }
+  .badge-row {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+  }
+  .num {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--dim);
+    background: #2A1C0A;
+    border-radius: 6px;
+    padding: 2px 8px;
+    letter-spacing: 1px;
+  }
+  .type-badge {
+    font-size: 11px;
+    font-weight: 600;
+    border-radius: 6px;
+    padding: 2px 10px;
+    letter-spacing: 0.5px;
+  }
+  .literal  { background: #1C2A14; color: #86EFAC; }
+  .metaphor { background: #3B2214; color: #FBB474; }
+  .hybrid   { background: #1C1440; color: #A5B4FC; }
+  .title {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+  .concept { font-size: 12px; color: var(--dim); line-height: 1.5; }
+  .palette {
+    display: flex;
+    gap: 6px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+  }
+  .swatch {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(255,255,255,0.12);
+  }
+  .pattern { font-size: 11px; color: #4B3A24; margin-top: 4px; font-style: italic; }
+  footer {
+    text-align: center;
+    margin-top: 60px;
+    color: #3A2C1A;
+    font-size: 12px;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>✨ Prompt.Forge — Icon Candidates</h1>
+  <p>생성일: 2026-03-22 23:41 &nbsp;|&nbsp; Candidate_20260322_2341 &nbsp;|&nbsp; 총 10개</p>
+  <p style="margin-top:6px; color:#6B5030;">요리사 레시피 / 엘릭서 / 꺼내 쓰는 지침서 테마</p>
+</header>
+
+<div class="grid">
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_01.svg" alt="icon_01"/></div>
+    <div class="info">
+      <div class="badge-row"><span class="num">01</span><span class="type-badge literal">literal</span></div>
+      <div class="title">레시피 카드 스택</div>
+      <div class="concept">겹쳐진 3장의 카드 + {{변수}} 텍스트 — 프롬프트 컬렉션 그 자체</div>
+      <div class="pattern">구성: 레이어드 | 배경: 크림/아이보리</div>
+      <div class="palette">
+        <div class="swatch" style="background:#FEF3C7"></div>
+        <div class="swatch" style="background:#D97706"></div>
+        <div class="swatch" style="background:#92400E"></div>
+        <div class="swatch" style="background:#EF4444"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_02.svg" alt="icon_02"/></div>
+    <div class="info">
+      <div class="badge-row"><span class="num">02</span><span class="type-badge literal">literal</span></div>
+      <div class="title">펼쳐진 레시피북 + 목차</div>
+      <div class="concept">왼쪽 INDEX / 오른쪽 {{template}} — 열어서 꺼내는 레시피북</div>
+      <div class="pattern">구성: 중앙심볼 | 배경: 다크앰버</div>
+      <div class="palette">
+        <div class="swatch" style="background:#78350F"></div>
+        <div class="swatch" style="background:#B45309"></div>
+        <div class="swatch" style="background:#FFFBF0"></div>
+        <div class="swatch" style="background:#EF4444"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_03.svg" alt="icon_03"/></div>
+    <div class="info">
+      <div class="badge-row"><span class="num">03</span><span class="type-badge literal">literal</span></div>
+      <div class="title">셰프 모자 + AI 별빛</div>
+      <div class="concept">셰프(프롬프트 전문가)의 모자 속 AI 신경망 — 레시피를 만드는 전문가</div>
+      <div class="pattern">구성: 기하학추상 | 배경: 번트오렌지</div>
+      <div class="palette">
+        <div class="swatch" style="background:#EA580C"></div>
+        <div class="swatch" style="background:#FFFFFF"></div>
+        <div class="swatch" style="background:#F97316"></div>
+        <div class="swatch" style="background:#FEF08A"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_04.svg" alt="icon_04"/></div>
+    <div class="info">
+      <div class="badge-row"><span class="num">04</span><span class="type-badge metaphor">metaphor</span></div>
+      <div class="title">마법 플라스크 (엘릭서)</div>
+      <div class="concept">신비로운 엘릭서 = 최고의 프롬프트 — 꺼내면 AI가 완벽하게 반응</div>
+      <div class="pattern">구성: 중앙심볼 | 배경: 딥퍼플</div>
+      <div class="palette">
+        <div class="swatch" style="background:#2E1065"></div>
+        <div class="swatch" style="background:#7C3AED"></div>
+        <div class="swatch" style="background:#34D399"></div>
+        <div class="swatch" style="background:#C4B5FD"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_05.svg" alt="icon_05"/></div>
+    <div class="info">
+      <div class="badge-row"><span class="num">05</span><span class="type-badge metaphor">metaphor</span></div>
+      <div class="title">열린 보석함 (프롬프트 보물창고)</div>
+      <div class="concept">열었을 때 황금빛이 쏟아지는 보석함 — "필요할 때 꺼내 쓴다"의 정수</div>
+      <div class="pattern">구성: 공간/장면 | 배경: 다크벨벳</div>
+      <div class="palette">
+        <div class="swatch" style="background:#1C0A00"></div>
+        <div class="swatch" style="background:#78350F"></div>
+        <div class="swatch" style="background:#D97706"></div>
+        <div class="swatch" style="background:#FEF08A"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_06.svg" alt="icon_06"/></div>
+    <div class="info">
+      <div class="badge-row"><span class="num">06</span><span class="type-badge metaphor">metaphor</span></div>
+      <div class="title">금빛 두루마리 (고대 지식)</div>
+      <div class="concept">펼쳐진 두루마리의 {{template}} — 검증된 고대 지식을 담은 레시피</div>
+      <div class="pattern">구성: 실루엣/캐릭터 | 배경: 인디고밤하늘</div>
+      <div class="palette">
+        <div class="swatch" style="background:#1E1B4B"></div>
+        <div class="swatch" style="background:#D97706"></div>
+        <div class="swatch" style="background:#FFFBF0"></div>
+        <div class="swatch" style="background:#FDE68A"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_07.svg" alt="icon_07"/></div>
+    <div class="info">
+      <div class="badge-row"><span class="num">07</span><span class="type-badge metaphor">metaphor</span></div>
+      <div class="title">마법사 냄비 (레시피 조합)</div>
+      <div class="concept">냄비 속에서 레시피 카드들이 조합되는 장면 — 프롬프트 재료를 끓이는 마법</div>
+      <div class="pattern">구성: 공간/장면 | 배경: 적갈색</div>
+      <div class="palette">
+        <div class="swatch" style="background:#7C2D12"></div>
+        <div class="swatch" style="background:#374151"></div>
+        <div class="swatch" style="background:#10B981"></div>
+        <div class="swatch" style="background:#FEF3C7"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_08.svg" alt="icon_08"/></div>
+    <div class="info">
+      <div class="badge-row"><span class="num">08</span><span class="type-badge hybrid">hybrid</span></div>
+      <div class="title">마법 책 + 별빛 + {{}}</div>
+      <div class="concept">펼쳐진 마법서에 빛나는 {{변수}} — 라이브러리+템플릿 기능 동시 표현</div>
+      <div class="pattern">구성: 레이어드 | 배경: 인디고다크</div>
+      <div class="palette">
+        <div class="swatch" style="background:#1E1B4B"></div>
+        <div class="swatch" style="background:#7C3AED"></div>
+        <div class="swatch" style="background:#F59E0B"></div>
+        <div class="swatch" style="background:#10B981"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_09.svg" alt="icon_09"/></div>
+    <div class="info">
+      <div class="badge-row"><span class="num">09</span><span class="type-badge hybrid">hybrid</span></div>
+      <div class="title">플라스크 속 레시피 라인</div>
+      <div class="concept">엘릭서 플라스크 안에 {{template}} 라인이 가득 — 엘릭서=프롬프트</div>
+      <div class="pattern">구성: 기하학추상 | 배경: 민트크림</div>
+      <div class="palette">
+        <div class="swatch" style="background:#D1FAE5"></div>
+        <div class="swatch" style="background:#10B981"></div>
+        <div class="swatch" style="background:#059669"></div>
+        <div class="swatch" style="background:#FFFBF0"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_10.svg" alt="icon_10"/></div>
+    <div class="info">
+      <div class="badge-row"><span class="num">10</span><span class="type-badge hybrid">hybrid</span></div>
+      <div class="title">황금 열쇠 + 두루마리</div>
+      <div class="concept">열쇠로 두루마리를 여는 순간 — "필요할 때 꺼내 쓴다"는 느낌 그 자체</div>
+      <div class="pattern">구성: 대각선/동적 | 배경: 딥다크골드</div>
+      <div class="palette">
+        <div class="swatch" style="background:#1C0A00"></div>
+        <div class="swatch" style="background:#F59E0B"></div>
+        <div class="swatch" style="background:#D97706"></div>
+        <div class="swatch" style="background:#FFFBF0"></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p>Prompt.Forge · Candidate_20260322_2341 · 10 icons · hover 시 확대</p>
+</footer>
+
+</body>
+</html>

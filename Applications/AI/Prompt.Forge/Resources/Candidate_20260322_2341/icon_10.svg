@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg10" x1="0" y1="0" x2="0.5" y2="1">
+      <stop offset="0%" stop-color="#1C0A00"/>
+      <stop offset="100%" stop-color="#0D0500"/>
+    </linearGradient>
+    <linearGradient id="key10" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#FDE68A"/>
+      <stop offset="50%" stop-color="#F59E0B"/>
+      <stop offset="100%" stop-color="#D97706"/>
+    </linearGradient>
+    <linearGradient id="scroll10body" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFFBF0"/>
+      <stop offset="100%" stop-color="#FEF3C7"/>
+    </linearGradient>
+    <filter id="glow10" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="16" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="keyGlow10" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="22" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Layer 1: Deep dark background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg10)"/>
+  <!-- Ambient gold glow -->
+  <ellipse cx="512" cy="512" rx="360" ry="320" fill="#D97706" opacity="0.07"/>
+  <!-- Stars -->
+  <circle cx="180" cy="200" r="3" fill="#FDE68A" opacity="0.4"/>
+  <circle cx="840" cy="180" r="2" fill="#FDE68A" opacity="0.35"/>
+  <circle cx="900" cy="400" r="2" fill="#FDE68A" opacity="0.3"/>
+  <circle cx="140" cy="700" r="3" fill="#FDE68A" opacity="0.3"/>
+  <circle cx="870" cy="760" r="2" fill="#FDE68A" opacity="0.35"/>
+
+  <!-- Layer 2: Scroll (partially unrolled, diagonal) -->
+  <g filter="url(#glow10)" opacity="0.9">
+    <!-- Left roll end (curl) -->
+    <ellipse cx="260" cy="620" rx="50" ry="280" fill="#B45309"/>
+    <ellipse cx="268" cy="620" rx="32" ry="270" fill="#92400E"/>
+    <ellipse cx="274" cy="620" rx="16" ry="258" fill="#FEF3C7"/>
+
+    <!-- Scroll body -->
+    <rect x="270" y="340" width="500" height="560" fill="url(#scroll10body)"/>
+
+    <!-- Right roll end (curl, partially rolled = being unrolled) -->
+    <ellipse cx="770" cy="520" rx="50" ry="180" fill="#B45309"/>
+    <ellipse cx="762" cy="520" rx="32" ry="172" fill="#92400E"/>
+    <ellipse cx="756" cy="520" rx="16" ry="162" fill="#FEF3C7"/>
+
+    <!-- Scroll top/bottom edge -->
+    <ellipse cx="520" cy="340" rx="250" ry="32" fill="#D97706"/>
+    <ellipse cx="520" cy="900" rx="250" ry="32" fill="#D97706"/>
+  </g>
+
+  <!-- Scroll content -->
+  <text x="306" y="418" font-family="'Segoe UI',sans-serif" font-size="26" font-weight="bold" fill="#92400E">Prompt Template</text>
+  <line x1="294" y1="430" x2="750" y2="430" stroke="#D97706" stroke-width="2" opacity="0.35"/>
+
+  <text x="308" y="478" font-family="'Consolas',monospace" font-size="30" fill="#92400E" font-weight="bold">{{role}}</text>
+  <line x1="294" y1="492" x2="730" y2="492" stroke="#FDE68A" stroke-width="1.5"/>
+  <text x="308" y="540" font-family="'Consolas',monospace" font-size="30" fill="#B45309" font-weight="bold">{{task}}</text>
+  <line x1="294" y1="554" x2="730" y2="554" stroke="#FDE68A" stroke-width="1.5"/>
+  <text x="308" y="602" font-family="'Consolas',monospace" font-size="24" fill="#92400E">{{context}}</text>
+  <line x1="294" y1="616" x2="720" y2="616" stroke="#FDE68A" stroke-width="1.5"/>
+
+  <line x1="294" y1="660" x2="700" y2="660" stroke="#E5E7EB" stroke-width="1.5" opacity="0.5"/>
+  <line x1="294" y1="694" x2="690" y2="694" stroke="#E5E7EB" stroke-width="1.5" opacity="0.4"/>
+  <line x1="294" y1="728" x2="710" y2="728" stroke="#E5E7EB" stroke-width="1.5" opacity="0.4"/>
+
+  <!-- Layer 3: Golden key (diagonal, unlocking the scroll) -->
+  <g filter="url(#keyGlow10)">
+    <!-- Key shaft -->
+    <line x1="300" y1="260" x2="680" y2="200" stroke="url(#key10)" stroke-width="28" stroke-linecap="round"/>
+    <!-- Key bow (ring) -->
+    <circle cx="286" cy="262" r="72" fill="none" stroke="url(#key10)" stroke-width="28"/>
+    <circle cx="286" cy="262" r="38" fill="url(#key10)" opacity="0.5"/>
+    <!-- Key teeth -->
+    <line x1="580" y1="210" x2="565" y2="246" stroke="url(#key10)" stroke-width="20" stroke-linecap="round"/>
+    <line x1="620" y1="203" x2="605" y2="240" stroke="url(#key10)" stroke-width="18" stroke-linecap="round"/>
+    <line x1="660" y1="197" x2="645" y2="232" stroke="url(#key10)" stroke-width="16" stroke-linecap="round"/>
+  </g>
+
+  <!-- Sparkles at key tip (unlocking moment) -->
+  <g filter="url(#glow10)">
+    <circle cx="695" cy="196" r="12" fill="#FEF08A" opacity="0.9"/>
+    <circle cx="715" cy="180" r="7" fill="#FDE68A" opacity="0.7"/>
+    <circle cx="720" cy="212" r="6" fill="#F59E0B" opacity="0.6"/>
+    <circle cx="670" cy="175" r="5" fill="#FEF08A" opacity="0.6"/>
+  </g>
+</svg>

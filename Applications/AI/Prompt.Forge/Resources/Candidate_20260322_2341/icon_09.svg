@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg09" x1="0" y1="0" x2="0.4" y2="1">
+      <stop offset="0%" stop-color="#F0FDF4"/>
+      <stop offset="100%" stop-color="#D1FAE5"/>
+    </linearGradient>
+    <linearGradient id="flask09body" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#A7F3D0" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#6EE7B7" stop-opacity="0.5"/>
+    </linearGradient>
+    <linearGradient id="liquid09" x1="0" y1="0" x2="0.1" y2="1">
+      <stop offset="0%" stop-color="#10B981"/>
+      <stop offset="100%" stop-color="#059669"/>
+    </linearGradient>
+    <filter id="shadow09">
+      <feDropShadow dx="4" dy="8" stdDeviation="12" flood-color="#065F46" flood-opacity="0.2"/>
+    </filter>
+    <clipPath id="flaskBody09">
+      <path d="M390,220 L390,480 L180,760 Q162,800 192,818 L832,818 Q862,800 844,760 L634,480 L634,220 Z"/>
+    </clipPath>
+  </defs>
+
+  <!-- Layer 1: Mint/cream background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg09)"/>
+  <!-- Subtle dot pattern -->
+  <circle cx="200" cy="200" r="4" fill="#10B981" opacity="0.08"/>
+  <circle cx="820" cy="180" r="3" fill="#10B981" opacity="0.07"/>
+  <circle cx="880" cy="820" r="5" fill="#10B981" opacity="0.06"/>
+  <circle cx="150" cy="820" r="4" fill="#10B981" opacity="0.07"/>
+  <circle cx="512" cy="100" r="3" fill="#10B981" opacity="0.06"/>
+  <circle cx="512" cy="930" r="3" fill="#10B981" opacity="0.06"/>
+
+  <!-- Layer 2: Erlenmeyer flask (conical flask) -->
+  <g filter="url(#shadow09)">
+    <!-- Flask glass body -->
+    <path d="M390,220 L390,480 L180,760 Q162,800 192,818 L832,818 Q862,800 844,760 L634,480 L634,220 Z"
+          fill="url(#flask09body)" stroke="#059669" stroke-width="8" stroke-linejoin="round"/>
+
+    <!-- Liquid fill -->
+    <rect x="140" y="600" width="744" height="270" fill="url(#liquid09)" clip-path="url(#flaskBody09)"/>
+
+    <!-- Liquid surface wave -->
+    <path d="M188,602 Q340,582 512,600 Q684,618 840,600"
+          fill="none" stroke="#6EE7B7" stroke-width="5" stroke-linecap="round" opacity="0.9"/>
+
+    <!-- Flask neck -->
+    <rect x="390" y="160" width="244" height="72" rx="8" fill="#A7F3D0" stroke="#059669" stroke-width="6"/>
+    <!-- Stopper -->
+    <rect x="418" y="128" width="188" height="46" rx="10" fill="#6EE7B7" stroke="#059669" stroke-width="4"/>
+    <rect x="440" y="116" width="144" height="26" rx="6" fill="#34D399"/>
+  </g>
+
+  <!-- Layer 3: Recipe lines inside flask (visible through glass) -->
+  <!-- Cream recipe card overlay inside flask upper section -->
+  <g clip-path="url(#flaskBody09)">
+    <rect x="350" y="240" width="324" height="330" rx="8" fill="rgba(255,251,240,0.75)"/>
+    <text x="370" y="292" font-family="'Consolas',monospace" font-size="28" fill="#065F46" font-weight="bold">{{role}}</text>
+    <line x1="360" y1="304" x2="660" y2="304" stroke="#059669" stroke-width="2" opacity="0.4"/>
+    <text x="370" y="346" font-family="'Consolas',monospace" font-size="28" fill="#065F46" font-weight="bold">{{task}}</text>
+    <line x1="360" y1="358" x2="660" y2="358" stroke="#059669" stroke-width="2" opacity="0.4"/>
+    <text x="370" y="400" font-family="'Consolas',monospace" font-size="28" fill="#065F46" font-weight="bold">{{format}}</text>
+    <line x1="360" y1="412" x2="660" y2="412" stroke="#059669" stroke-width="2" opacity="0.4"/>
+    <text x="370" y="452" font-family="'Consolas',monospace" font-size="22" fill="#6B7280">output: ...</text>
+    <line x1="360" y1="464" x2="660" y2="464" stroke="#D1D5DB" stroke-width="1.5" opacity="0.5"/>
+    <line x1="360" y1="494" x2="640" y2="494" stroke="#D1D5DB" stroke-width="1.5" opacity="0.4"/>
+    <line x1="360" y1="522" x2="650" y2="522" stroke="#D1D5DB" stroke-width="1.5" opacity="0.4"/>
+  </g>
+
+  <!-- Bubbles in liquid -->
+  <circle cx="360" cy="700" r="16" fill="#A7F3D0" opacity="0.6" clip-path="url(#flaskBody09)"/>
+  <circle cx="500" cy="660" r="10" fill="#D1FAE5" opacity="0.5" clip-path="url(#flaskBody09)"/>
+  <circle cx="650" cy="710" r="14" fill="#A7F3D0" opacity="0.55" clip-path="url(#flaskBody09)"/>
+
+  <!-- Star sparkles outside flask -->
+  <circle cx="170" cy="500" r="8" fill="#059669" opacity="0.4"/>
+  <circle cx="850" cy="540" r="8" fill="#059669" opacity="0.4"/>
+  <circle cx="860" cy="480" r="5" fill="#34D399" opacity="0.5"/>
+  <circle cx="160" cy="560" r="5" fill="#34D399" opacity="0.5"/>
+</svg>

@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg08" x1="0" y1="0" x2="0.4" y2="1">
+      <stop offset="0%" stop-color="#1E1B4B"/>
+      <stop offset="100%" stop-color="#0D0820"/>
+    </linearGradient>
+    <linearGradient id="book08" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#312E81"/>
+      <stop offset="100%" stop-color="#1E1B4B"/>
+    </linearGradient>
+    <linearGradient id="pages08" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFFBF0"/>
+      <stop offset="100%" stop-color="#FEF3C7"/>
+    </linearGradient>
+    <filter id="glow08" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="20" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="softGlow08">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Layer 1: Deep indigo background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg08)"/>
+  <!-- Stars / particles -->
+  <circle cx="180" cy="180" r="3" fill="#FDE68A" opacity="0.5"/>
+  <circle cx="840" cy="160" r="2" fill="white" opacity="0.4"/>
+  <circle cx="900" cy="320" r="3" fill="#A78BFA" opacity="0.5"/>
+  <circle cx="140" cy="500" r="2" fill="white" opacity="0.35"/>
+  <circle cx="880" cy="620" r="3" fill="#FDE68A" opacity="0.45"/>
+  <circle cx="160" cy="760" r="2" fill="#A78BFA" opacity="0.4"/>
+  <circle cx="840" cy="840" r="3" fill="white" opacity="0.35"/>
+  <circle cx="440" cy="130" r="2" fill="#FDE68A" opacity="0.5"/>
+  <circle cx="620" cy="110" r="3" fill="white" opacity="0.4"/>
+
+  <!-- Layer 2: Open magic book (angled, slightly 3D) -->
+  <!-- Book shadow / glow base -->
+  <g filter="url(#glow08)" opacity="0.4">
+    <ellipse cx="512" cy="700" rx="320" ry="50" fill="#7C3AED"/>
+  </g>
+
+  <!-- Book cover (back) -->
+  <rect x="200" y="280" width="320" height="440" rx="14" fill="#1E1B4B" stroke="#4338CA" stroke-width="5" transform="rotate(-4 360 500)"/>
+  <!-- Book cover (front) -->
+  <rect x="504" y="280" width="320" height="440" rx="14" fill="url(#book08)" stroke="#6D28D9" stroke-width="5" transform="rotate(4 664 500)"/>
+
+  <!-- Pages (left) -->
+  <rect x="210" y="290" width="300" height="420" rx="10" fill="url(#pages08)" transform="rotate(-4 360 500)"/>
+  <!-- Pages (right) -->
+  <rect x="514" y="290" width="300" height="420" rx="10" fill="url(#pages08)" transform="rotate(4 664 500)"/>
+
+  <!-- Left page content -->
+  <g transform="rotate(-4 360 500)">
+    <text x="228" y="348" font-family="'Segoe UI',sans-serif" font-size="22" font-weight="bold" fill="#7C3AED">Prompts</text>
+    <line x1="220" y1="358" x2="500" y2="358" stroke="#A78BFA" stroke-width="1.5" opacity="0.5"/>
+    <text x="228" y="394" font-family="'Segoe UI',sans-serif" font-size="18" fill="#4B5563">▸ Code Review</text>
+    <text x="228" y="424" font-family="'Segoe UI',sans-serif" font-size="18" fill="#4B5563">▸ Writing Help</text>
+    <text x="228" y="454" font-family="'Segoe UI',sans-serif" font-size="18" fill="#7C3AED" font-weight="bold">▸ Analysis</text>
+    <text x="228" y="484" font-family="'Segoe UI',sans-serif" font-size="18" fill="#4B5563">▸ Summarize</text>
+    <text x="228" y="514" font-family="'Segoe UI',sans-serif" font-size="18" fill="#4B5563">▸ Translate</text>
+    <text x="228" y="544" font-family="'Segoe UI',sans-serif" font-size="18" fill="#4B5563">▸ Debug</text>
+    <line x1="220" y1="580" x2="500" y2="580" stroke="#D1D5DB" stroke-width="1" opacity="0.5"/>
+    <line x1="220" y1="606" x2="490" y2="606" stroke="#D1D5DB" stroke-width="1" opacity="0.4"/>
+  </g>
+
+  <!-- Right page content (template with {{}} highlighted) -->
+  <g transform="rotate(4 664 500)">
+    <text x="524" y="348" font-family="'Segoe UI',sans-serif" font-size="22" font-weight="bold" fill="#7C3AED">Template</text>
+    <line x1="516" y1="358" x2="800" y2="358" stroke="#A78BFA" stroke-width="1.5" opacity="0.5"/>
+    <text x="524" y="398" font-family="'Segoe UI',sans-serif" font-size="18" fill="#6B7280">Act as a</text>
+  </g>
+
+  <!-- Layer 3: Glowing {{}} on right page -->
+  <g filter="url(#glow08)">
+    <text x="524" y="448" font-family="'Consolas',monospace" font-size="46" font-weight="bold" fill="#F59E0B" transform="rotate(4 664 500)">{{role}}</text>
+    <text x="524" y="510" font-family="'Consolas',monospace" font-size="38" fill="#10B981" transform="rotate(4 664 500)">{{task}}</text>
+    <text x="524" y="564" font-family="'Consolas',monospace" font-size="32" fill="#60A5FA" transform="rotate(4 664 500)">{{format}}</text>
+  </g>
+
+  <!-- Floating sparkles / magic particles -->
+  <g filter="url(#softGlow08)">
+    <circle cx="512" cy="250" r="14" fill="#FDE68A" opacity="0.8"/>
+    <circle cx="460" cy="220" r="8" fill="#F59E0B" opacity="0.6"/>
+    <circle cx="564" cy="225" r="7" fill="#10B981" opacity="0.6"/>
+    <circle cx="400" cy="240" r="5" fill="#A78BFA" opacity="0.5"/>
+    <circle cx="620" cy="240" r="5" fill="#60A5FA" opacity="0.5"/>
+    <!-- Spine glow -->
+    <rect x="498" y="280" width="28" height="440" rx="8" fill="#7C3AED" opacity="0.6"/>
+  </g>
+</svg>

@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg02" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#78350F"/>
+      <stop offset="100%" stop-color="#451A03"/>
+    </linearGradient>
+    <linearGradient id="page02" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFFBF0"/>
+      <stop offset="100%" stop-color="#FEF3C7"/>
+    </linearGradient>
+    <filter id="shadow02">
+      <feDropShadow dx="4" dy="8" stdDeviation="14" flood-color="#000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <!-- Layer 1: Dark amber-brown background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg02)"/>
+  <!-- Decorative corner ornaments -->
+  <circle cx="190" cy="190" r="60" fill="#D97706" opacity="0.12"/>
+  <circle cx="834" cy="190" r="60" fill="#D97706" opacity="0.12"/>
+  <circle cx="190" cy="834" r="60" fill="#D97706" opacity="0.12"/>
+  <circle cx="834" cy="834" r="60" fill="#D97706" opacity="0.12"/>
+
+  <!-- Layer 2: Open book (two pages) -->
+  <g filter="url(#shadow02)">
+    <!-- Book cover / spine -->
+    <rect x="160" y="230" width="704" height="560" rx="12" fill="#B45309"/>
+    <!-- Spine -->
+    <rect x="488" y="230" width="48" height="560" fill="#92400E"/>
+
+    <!-- Left page -->
+    <rect x="168" y="238" width="312" height="544" rx="6" fill="url(#page02)"/>
+    <!-- Left page lines (index) -->
+    <line x1="196" y1="290" x2="464" y2="290" stroke="#D97706" stroke-width="2" opacity="0.4"/>
+    <line x1="196" y1="320" x2="440" y2="320" stroke="#E5E7EB" stroke-width="2" opacity="0.5"/>
+    <line x1="196" y1="348" x2="455" y2="348" stroke="#E5E7EB" stroke-width="2" opacity="0.5"/>
+    <line x1="196" y1="376" x2="435" y2="376" stroke="#E5E7EB" stroke-width="2" opacity="0.5"/>
+    <line x1="196" y1="404" x2="460" y2="404" stroke="#E5E7EB" stroke-width="2" opacity="0.5"/>
+    <line x1="196" y1="432" x2="442" y2="432" stroke="#E5E7EB" stroke-width="2" opacity="0.5"/>
+    <line x1="196" y1="460" x2="450" y2="460" stroke="#E5E7EB" stroke-width="2" opacity="0.5"/>
+    <line x1="196" y1="488" x2="438" y2="488" stroke="#E5E7EB" stroke-width="2" opacity="0.5"/>
+    <line x1="196" y1="516" x2="448" y2="516" stroke="#E5E7EB" stroke-width="2" opacity="0.5"/>
+    <line x1="196" y1="544" x2="436" y2="544" stroke="#E5E7EB" stroke-width="2" opacity="0.5"/>
+    <line x1="196" y1="572" x2="452" y2="572" stroke="#E5E7EB" stroke-width="2" opacity="0.5"/>
+
+    <!-- Left page header -->
+    <text x="196" y="278" font-family="'Segoe UI',sans-serif" font-size="26" font-weight="bold" fill="#B45309">INDEX</text>
+    <!-- numbered list dots -->
+    <circle cx="208" cy="333" r="5" fill="#D97706" opacity="0.6"/>
+    <circle cx="208" cy="361" r="5" fill="#D97706" opacity="0.6"/>
+    <circle cx="208" cy="389" r="5" fill="#D97706" opacity="0.6"/>
+    <circle cx="208" cy="417" r="5" fill="#D97706" opacity="0.6"/>
+    <circle cx="208" cy="445" r="5" fill="#D97706" opacity="0.6"/>
+
+    <!-- Right page -->
+    <rect x="544" y="238" width="312" height="544" rx="6" fill="url(#page02)"/>
+    <!-- Right page header -->
+    <text x="570" y="278" font-family="'Segoe UI',sans-serif" font-size="24" font-weight="bold" fill="#B45309">PROMPT</text>
+
+    <!-- Prompt template content -->
+    <text x="570" y="328" font-family="'Consolas',monospace" font-size="26" fill="#92400E" font-weight="bold">{{role}}</text>
+    <text x="570" y="366" font-family="'Segoe UI',sans-serif" font-size="20" fill="#6B7280">You are a...</text>
+    <line x1="570" y1="380" x2="840" y2="380" stroke="#FDE68A" stroke-width="1.5"/>
+
+    <text x="570" y="420" font-family="'Consolas',monospace" font-size="26" fill="#92400E" font-weight="bold">{{task}}</text>
+    <text x="570" y="456" font-family="'Segoe UI',sans-serif" font-size="20" fill="#6B7280">Please help me...</text>
+    <line x1="570" y1="470" x2="840" y2="470" stroke="#FDE68A" stroke-width="1.5"/>
+
+    <text x="570" y="510" font-family="'Consolas',monospace" font-size="26" fill="#92400E" font-weight="bold">{{format}}</text>
+    <text x="570" y="546" font-family="'Segoe UI',sans-serif" font-size="20" fill="#6B7280">Output as...</text>
+    <line x1="570" y1="560" x2="840" y2="560" stroke="#FDE68A" stroke-width="1.5"/>
+  </g>
+
+  <!-- Layer 3: Bookmark ribbon -->
+  <polygon points="840,230 870,230 870,340 855,320 840,340" fill="#EF4444"/>
+</svg>

@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg06" x1="0" y1="0" x2="0.2" y2="1">
+      <stop offset="0%" stop-color="#1E1B4B"/>
+      <stop offset="100%" stop-color="#0D0B2A"/>
+    </linearGradient>
+    <linearGradient id="scroll06" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFFBF0"/>
+      <stop offset="100%" stop-color="#FEF3C7"/>
+    </linearGradient>
+    <linearGradient id="scrollEdge06" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#D97706"/>
+      <stop offset="100%" stop-color="#B45309"/>
+    </linearGradient>
+    <filter id="glow06" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="18" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Layer 1: Indigo night sky background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg06)"/>
+  <!-- Stars -->
+  <circle cx="160" cy="160" r="3" fill="white" opacity="0.6"/>
+  <circle cx="840" cy="140" r="2" fill="white" opacity="0.5"/>
+  <circle cx="900" cy="300" r="3" fill="#C4B5FD" opacity="0.6"/>
+  <circle cx="140" cy="400" r="2" fill="white" opacity="0.4"/>
+  <circle cx="880" cy="500" r="2" fill="#A78BFA" opacity="0.5"/>
+  <circle cx="200" cy="700" r="3" fill="white" opacity="0.4"/>
+  <circle cx="860" cy="800" r="2" fill="#C4B5FD" opacity="0.5"/>
+  <circle cx="350" cy="120" r="2" fill="white" opacity="0.45"/>
+  <circle cx="700" cy="100" r="3" fill="#FDE68A" opacity="0.5"/>
+  <circle cx="100" cy="850" r="2" fill="white" opacity="0.35"/>
+  <circle cx="920" cy="640" r="3" fill="white" opacity="0.4"/>
+
+  <!-- Milky way arc (subtle) -->
+  <path d="M100,900 Q350,600 700,400 Q800,350 950,200"
+        fill="none" stroke="#A78BFA" stroke-width="80" stroke-linecap="round" opacity="0.06"/>
+
+  <!-- Layer 2: Unrolled scroll -->
+  <!-- Left curl -->
+  <ellipse cx="210" cy="512" rx="60" ry="340" fill="url(#scrollEdge06)"/>
+  <ellipse cx="220" cy="512" rx="42" ry="330" fill="#B45309"/>
+  <ellipse cx="226" cy="512" rx="24" ry="318" fill="#FFFBF0"/>
+
+  <!-- Right curl -->
+  <ellipse cx="814" cy="512" rx="60" ry="340" fill="url(#scrollEdge06)"/>
+  <ellipse cx="804" cy="512" rx="42" ry="330" fill="#B45309"/>
+  <ellipse cx="798" cy="512" rx="24" ry="318" fill="#FFFBF0"/>
+
+  <!-- Main scroll body -->
+  <rect x="222" y="172" width="580" height="680" fill="url(#scroll06)"/>
+  <!-- Scroll top/bottom edge rolls -->
+  <ellipse cx="512" cy="172" rx="290" ry="36" fill="url(#scrollEdge06)"/>
+  <ellipse cx="512" cy="852" rx="290" ry="36" fill="url(#scrollEdge06)"/>
+
+  <!-- Scroll content lines -->
+  <line x1="272" y1="256" x2="752" y2="256" stroke="#D97706" stroke-width="2" opacity="0.3"/>
+
+  <!-- Title -->
+  <text x="512" y="316" font-family="'Segoe UI',sans-serif" font-size="36" font-weight="bold" fill="#92400E" text-anchor="middle">Prompt Library</text>
+  <line x1="272" y1="330" x2="752" y2="330" stroke="#D97706" stroke-width="2" opacity="0.35"/>
+
+  <!-- Content lines with glow text -->
+  <text x="290" y="390" font-family="'Consolas',monospace" font-size="32" fill="#92400E" font-weight="bold">I. {{role}}</text>
+  <text x="290" y="450" font-family="'Consolas',monospace" font-size="32" fill="#B45309" font-weight="bold">II. {{task}}</text>
+  <text x="290" y="510" font-family="'Consolas',monospace" font-size="32" fill="#92400E" font-weight="bold">III. {{format}}</text>
+  <text x="290" y="570" font-family="'Consolas',monospace" font-size="32" fill="#B45309" font-weight="bold">IV. {{tone}}</text>
+
+  <line x1="272" y1="590" x2="752" y2="590" stroke="#D97706" stroke-width="1.5" opacity="0.25"/>
+  <line x1="272" y1="640" x2="680" y2="640" stroke="#E5E7EB" stroke-width="1.5" opacity="0.4"/>
+  <line x1="272" y1="670" x2="720" y2="670" stroke="#E5E7EB" stroke-width="1.5" opacity="0.4"/>
+  <line x1="272" y1="700" x2="700" y2="700" stroke="#E5E7EB" stroke-width="1.5" opacity="0.4"/>
+
+  <!-- Layer 3: Gold sparkles radiating from scroll -->
+  <g filter="url(#glow06)">
+    <circle cx="200" cy="340" r="8" fill="#FDE68A" opacity="0.8"/>
+    <circle cx="180" cy="460" r="6" fill="#F59E0B" opacity="0.6"/>
+    <circle cx="840" cy="380" r="8" fill="#FDE68A" opacity="0.8"/>
+    <circle cx="856" cy="500" r="6" fill="#F59E0B" opacity="0.6"/>
+    <circle cx="512" cy="140" r="10" fill="#FDE68A" opacity="0.7"/>
+    <circle cx="420" cy="130" r="6" fill="#F59E0B" opacity="0.5"/>
+    <circle cx="604" cy="130" r="6" fill="#F59E0B" opacity="0.5"/>
+  </g>
+</svg>

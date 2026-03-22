@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg04" x1="0" y1="0" x2="0.4" y2="1">
+      <stop offset="0%" stop-color="#2E1065"/>
+      <stop offset="100%" stop-color="#0F0320"/>
+    </linearGradient>
+    <linearGradient id="flask04" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#4B1D96" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#2E1065" stop-opacity="0.4"/>
+    </linearGradient>
+    <linearGradient id="liquid04" x1="0" y1="0" x2="0.2" y2="1">
+      <stop offset="0%" stop-color="#34D399"/>
+      <stop offset="50%" stop-color="#10B981"/>
+      <stop offset="100%" stop-color="#059669"/>
+    </linearGradient>
+    <filter id="glow04outer" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="28" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glow04inner" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="14" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <clipPath id="flaskClip">
+      <!-- Flask shape clip for liquid fill -->
+      <path d="M430,260 L430,500 L220,780 Q200,820 230,840 L794,840 Q824,820 804,780 L594,500 L594,260 Z"/>
+    </clipPath>
+  </defs>
+
+  <!-- Layer 1: Deep purple-black background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg04)"/>
+  <!-- Stars -->
+  <circle cx="180" cy="200" r="3" fill="#C4B5FD" opacity="0.5"/>
+  <circle cx="820" cy="160" r="2" fill="#A78BFA" opacity="0.4"/>
+  <circle cx="880" cy="380" r="3" fill="#C4B5FD" opacity="0.35"/>
+  <circle cx="160" cy="650" r="2" fill="#A78BFA" opacity="0.3"/>
+  <circle cx="870" cy="720" r="3" fill="#C4B5FD" opacity="0.4"/>
+  <circle cx="280" cy="860" r="2" fill="#A78BFA" opacity="0.25"/>
+  <circle cx="720" cy="180" r="2" fill="white" opacity="0.4"/>
+  <circle cx="350" cy="150" r="3" fill="white" opacity="0.35"/>
+
+  <!-- Layer 2: Flask/potion bottle shape -->
+  <!-- Flask glass body -->
+  <path d="M430,260 L430,500 L220,780 Q200,820 230,840 L794,840 Q824,820 804,780 L594,500 L594,260 Z"
+        fill="url(#flask04)" stroke="#7C3AED" stroke-width="8" stroke-linejoin="round"/>
+
+  <!-- Liquid fill (emerald glow elixir) -->
+  <g filter="url(#glow04outer)">
+    <clipPath id="flaskClip2">
+      <path d="M430,260 L430,500 L220,780 Q200,820 230,840 L794,840 Q824,820 804,780 L594,500 L594,260 Z"/>
+    </clipPath>
+    <rect x="160" y="580" width="704" height="320" fill="url(#liquid04)" clip-path="url(#flaskClip2)"/>
+    <!-- Bubbles in liquid -->
+    <circle cx="380" cy="720" r="18" fill="#6EE7B7" opacity="0.5" clip-path="url(#flaskClip2)"/>
+    <circle cx="500" cy="660" r="12" fill="#A7F3D0" opacity="0.4" clip-path="url(#flaskClip2)"/>
+    <circle cx="640" cy="730" r="16" fill="#6EE7B7" opacity="0.45" clip-path="url(#flaskClip2)"/>
+    <circle cx="560" cy="780" r="10" fill="#A7F3D0" opacity="0.35" clip-path="url(#flaskClip2)"/>
+  </g>
+
+  <!-- Liquid surface wave -->
+  <path d="M235,582 Q340,560 440,582 Q540,604 640,582 Q740,560 800,582"
+        fill="none" stroke="#34D399" stroke-width="5" stroke-linecap="round" opacity="0.8"/>
+
+  <!-- Flask neck -->
+  <rect x="430" y="200" width="164" height="72" rx="8" fill="#4B1D96" stroke="#7C3AED" stroke-width="6"/>
+  <!-- Flask stopper/cork -->
+  <rect x="450" y="168" width="124" height="48" rx="10" fill="#C4B5FD"/>
+  <rect x="468" y="156" width="88" height="24" rx="6" fill="#A78BFA"/>
+
+  <!-- Layer 3: Sparkle particles around flask -->
+  <g filter="url(#glow04inner)">
+    <circle cx="200" cy="680" r="10" fill="#34D399" opacity="0.7"/>
+    <circle cx="188" cy="730" r="6" fill="#6EE7B7" opacity="0.5"/>
+    <circle cx="830" cy="660" r="10" fill="#34D399" opacity="0.7"/>
+    <circle cx="848" cy="710" r="6" fill="#6EE7B7" opacity="0.5"/>
+  </g>
+
+  <!-- Glow emanating from liquid -->
+  <g filter="url(#glow04outer)" opacity="0.5">
+    <ellipse cx="512" cy="720" rx="200" ry="80" fill="#10B981"/>
+  </g>
+
+  <!-- Magic particles above flask -->
+  <circle cx="420" cy="300" r="6" fill="#C4B5FD" opacity="0.6"/>
+  <circle cx="600" cy="280" r="5" fill="#A78BFA" opacity="0.5"/>
+  <circle cx="460" cy="230" r="4" fill="#34D399" opacity="0.6"/>
+  <circle cx="560" cy="220" r="3" fill="#34D399" opacity="0.5"/>
+</svg>

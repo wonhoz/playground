@@ -1,0 +1,39 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Neon.Slice | 파이 차트 조각 — 슬라이싱으로 분리된 파이 | 레이어드 | #001400 -->
+  <defs>
+    <filter id="neonGlow6">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="160" fill="#001400"/>
+  <!-- Layer 2: Pie chart slices being cut apart -->
+  <!-- Whole circle base (shadow) -->
+  <circle cx="512" cy="480" r="220" fill="#001A00" opacity="0.5"/>
+  <!-- Slice 1: pulled out top-left (green) -->
+  <path d="M 512 480 L 320 320 A 220 220 0 0 1 512 260 Z" fill="#00FF44" opacity="0.85" filter="url(#neonGlow6)" transform="translate(-30,-30)"/>
+  <path d="M 512 480 L 320 320 A 220 220 0 0 1 512 260 Z" fill="none" stroke="#88FF88" stroke-width="3" filter="url(#neonGlow6)" transform="translate(-30,-30)"/>
+  <!-- Slice 2: top (cyan) -->
+  <path d="M 512 480 L 512 260 A 220 220 0 0 1 704 320 Z" fill="#00FFFF" opacity="0.85" filter="url(#neonGlow6)" transform="translate(0,-20)"/>
+  <path d="M 512 480 L 512 260 A 220 220 0 0 1 704 320 Z" fill="none" stroke="#88FFFF" stroke-width="3" filter="url(#neonGlow6)" transform="translate(0,-20)"/>
+  <!-- Slice 3: right (yellow) - partially pulled -->
+  <path d="M 512 480 L 704 320 A 220 220 0 0 1 732 700 Z" fill="#FFFF00" opacity="0.85" filter="url(#neonGlow6)" transform="translate(25,0)"/>
+  <path d="M 512 480 L 704 320 A 220 220 0 0 1 732 700 Z" fill="none" stroke="#FFFF88" stroke-width="3" filter="url(#neonGlow6)" transform="translate(25,0)"/>
+  <!-- Slice 4: bottom-right (pink) -->
+  <path d="M 512 480 L 732 700 A 220 220 0 0 1 512 700 Z" fill="#FF44FF" opacity="0.85" filter="url(#neonGlow6)" transform="translate(15,20)"/>
+  <!-- Slice 5: bottom (orange) -->
+  <path d="M 512 480 L 512 700 A 220 220 0 0 1 292 700 Z" fill="#FF8800" opacity="0.85" filter="url(#neonGlow6)"/>
+  <!-- Slice 6: left (blue) -->
+  <path d="M 512 480 L 292 700 A 220 220 0 0 1 320 320 Z" fill="#4488FF" opacity="0.85" filter="url(#neonGlow6)" transform="translate(-20,10)"/>
+  <!-- Slice separation glow lines -->
+  <line x1="512" y1="480" x2="292" y2="248" stroke="#00FF44" stroke-width="3" opacity="0.6" filter="url(#neonGlow6)"/>
+  <line x1="512" y1="480" x2="732" y2="248" stroke="#00FFFF" stroke-width="3" opacity="0.6" filter="url(#neonGlow6)"/>
+  <line x1="512" y1="480" x2="760" y2="512" stroke="#FFFF00" stroke-width="3" opacity="0.6" filter="url(#neonGlow6)"/>
+  <!-- Layer 3: Score labels on slices -->
+  <text x="432" y="356" font-family="monospace" font-size="18" fill="white" font-weight="bold" transform="translate(-30,-30)" filter="url(#neonGlow6)">×3</text>
+  <text x="580" y="356" font-family="monospace" font-size="18" fill="white" font-weight="bold" transform="translate(0,-20)" filter="url(#neonGlow6)">×2</text>
+  <text x="656" y="480" font-family="monospace" font-size="18" fill="white" font-weight="bold" transform="translate(25,0)" filter="url(#neonGlow6)">×4</text>
+  <!-- Combo text -->
+  <text x="512" y="780" font-family="monospace" font-size="28" fill="#00FF44" text-anchor="middle" font-weight="bold" filter="url(#neonGlow6)">COMBO SLICE!</text>
+</svg>

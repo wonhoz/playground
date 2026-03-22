@@ -1,0 +1,35 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Neon.Slice | 스피드 라인 + 도형들 — 빠른 슬라이스 | 대각선/동적 | #000A10 -->
+  <defs>
+    <filter id="speedGlow">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="160" fill="#000A10"/>
+  <!-- Layer 2: Speed lines from right, shapes flying from right to left -->
+  <!-- Speed lines (horizontal streaks) -->
+  <line x1="700" y1="280" x2="864" y2="280" stroke="#22D3EE" stroke-width="3" opacity="0.5"/>
+  <line x1="680" y1="320" x2="864" y2="320" stroke="#22D3EE" stroke-width="2" opacity="0.4"/>
+  <line x1="720" y1="360" x2="864" y2="360" stroke="#06B6D4" stroke-width="2" opacity="0.35"/>
+  <line x1="710" y1="500" x2="864" y2="500" stroke="#22D3EE" stroke-width="3" opacity="0.5"/>
+  <line x1="700" y1="540" x2="864" y2="540" stroke="#22D3EE" stroke-width="2" opacity="0.4"/>
+  <line x1="720" y1="700" x2="864" y2="700" stroke="#06B6D4" stroke-width="3" opacity="0.5"/>
+  <line x1="690" y1="740" x2="864" y2="740" stroke="#22D3EE" stroke-width="2" opacity="0.4"/>
+  <!-- Shapes flying in (moving left) with motion blur -->
+  <!-- Triangle -->
+  <polygon points="580,220 660,360 500,360" fill="#F59E0B" stroke="#FCD34D" stroke-width="4" filter="url(#speedGlow)"/>
+  <polygon points="460,220 540,360 380,360" fill="#F59E0B" opacity="0.4"/>
+  <polygon points="350,220 430,360 270,360" fill="#F59E0B" opacity="0.15"/>
+  <!-- Circle -->
+  <circle cx="540" cy="540" r="70" fill="#EF4444" stroke="#F87171" stroke-width="4" filter="url(#speedGlow)"/>
+  <circle cx="400" cy="540" r="70" fill="#EF4444" opacity="0.35"/>
+  <circle cx="260" cy="540" r="70" fill="#EF4444" opacity="0.12"/>
+  <!-- Star (pentagon star) -->
+  <polygon points="600,680 616,730 664,730 626,758 640,808 600,780 560,808 574,758 536,730 584,730" fill="#C084FC" stroke="#E879F9" stroke-width="3" filter="url(#speedGlow)"/>
+  <polygon points="480,680 496,730 544,730 506,758 520,808 480,780 440,808 454,758 416,730 464,730" fill="#C084FC" opacity="0.35"/>
+  <!-- Layer 3: Slice action indicator -->
+  <line x1="160" y1="200" x2="700" y2="820" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" filter="url(#speedGlow)" opacity="0.9"/>
+  <line x1="160" y1="200" x2="700" y2="820" stroke="#22D3EE" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+</svg>

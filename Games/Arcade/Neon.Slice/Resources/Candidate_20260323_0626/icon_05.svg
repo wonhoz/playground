@@ -1,0 +1,45 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Neon.Slice | 손가락 제스처 + 슬라이스 흔적 | 실루엣/캐릭터 | #140014 -->
+  <defs>
+    <filter id="neonGlow5">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <linearGradient id="sliceTrail5" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF00FF" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#FF00FF" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#00FFFF" stop-opacity="0.5"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="160" fill="#140014"/>
+  <!-- Layer 2: Finger silhouette swiping -->
+  <!-- Hand/finger silhouette -->
+  <path d="M 380 700 Q 360 650 370 580 L 380 480 Q 382 450 400 448 Q 420 446 424 470 L 428 520
+           Q 432 490 450 488 Q 470 486 472 510 L 474 550
+           Q 478 525 496 524 Q 514 523 515 548 L 516 580
+           Q 520 560 538 560 Q 556 560 556 585 L 554 680
+           Q 552 720 530 740 L 420 750 Q 396 748 380 700 Z"
+        fill="#E8C0B0" stroke="#FF80FF" stroke-width="3"/>
+  <!-- Finger pointing direction indicator -->
+  <line x1="424" y1="460" x2="424" y2="360" stroke="#FF00FF" stroke-width="3" stroke-dasharray="6,4" opacity="0.6"/>
+  <!-- Slice trail - sweeping arc -->
+  <path d="M 200 600 Q 400 200 800 350" stroke="url(#sliceTrail5)" stroke-width="12" fill="none" stroke-linecap="round" filter="url(#neonGlow5)"/>
+  <!-- Slice sparkles along trail -->
+  <circle cx="280" cy="490" r="8" fill="#FF00FF" opacity="0.9" filter="url(#neonGlow5)"/>
+  <circle cx="400" cy="340" r="6" fill="#FFFF00" opacity="0.8" filter="url(#neonGlow5)"/>
+  <circle cx="540" cy="270" r="10" fill="#00FFFF" opacity="0.9" filter="url(#neonGlow5)"/>
+  <circle cx="670" cy="300" r="7" fill="#FF00FF" opacity="0.7" filter="url(#neonGlow5)"/>
+  <circle cx="760" cy="348" r="5" fill="#FFFF00" opacity="0.8" filter="url(#neonGlow5)"/>
+  <!-- Sliced shape (hexagon cut in half) -->
+  <polygon points="700,420 760,460 760,540 700,580 640,540 640,460" fill="none" stroke="#00FFFF" stroke-width="4" filter="url(#neonGlow5)" opacity="0.7"/>
+  <!-- Slice line through hexagon -->
+  <line x1="620" y1="430" x2="780" y2="530" stroke="#FF00FF" stroke-width="6" stroke-linecap="round" filter="url(#neonGlow5)"/>
+  <!-- Split halves separating -->
+  <polygon points="700,415 758,454 756,458 698,418" fill="#FF00FF" opacity="0.6" filter="url(#neonGlow5)"/>
+  <!-- Layer 3: Swipe direction arrows -->
+  <path d="M 160 560 Q 200 400 320 300" stroke="#FF00FF" stroke-width="4" fill="none" stroke-dasharray="10,6" opacity="0.5"/>
+  <polygon points="315,286 340,310 290,318" fill="#FF00FF" opacity="0.7"/>
+  <!-- Score popup -->
+  <text x="720" y="430" font-family="monospace" font-size="28" fill="#FFFF00" font-weight="bold" filter="url(#neonGlow5)" opacity="0.9">+50</text>
+</svg>

@@ -1,0 +1,58 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Neon.Slice | 갈라진 다이아몬드 — 완벽한 슬라이스의 순간 | 중앙심볼 | #001A28 -->
+  <defs>
+    <filter id="diamondGlow7">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <linearGradient id="diamLeft7" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#88DDFF"/>
+      <stop offset="100%" stop-color="#0088CC"/>
+    </linearGradient>
+    <linearGradient id="diamRight7" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#AAEEFF"/>
+      <stop offset="100%" stop-color="#0066AA"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="160" fill="#001A28"/>
+  <!-- Background sparkle dots -->
+  <circle cx="200" cy="200" r="3" fill="#22D3EE" opacity="0.4"/>
+  <circle cx="820" cy="250" r="2" fill="#22D3EE" opacity="0.3"/>
+  <circle cx="180" cy="780" r="2" fill="#60A5FA" opacity="0.4"/>
+  <circle cx="840" cy="740" r="3" fill="#22D3EE" opacity="0.3"/>
+  <!-- Layer 2: Diamond split into two halves separating -->
+  <!-- Left half (flying left) -->
+  <g transform="translate(-40, -20)">
+    <polygon points="512,240 380,480 512,600" fill="url(#diamLeft7)" filter="url(#diamondGlow7)" opacity="0.9"/>
+    <polygon points="512,240 512,600 380,480" fill="#005599" opacity="0.4"/>
+    <!-- Internal facet lines -->
+    <line x1="512" y1="240" x2="380" y2="480" stroke="#AAEEFF" stroke-width="2" opacity="0.6"/>
+    <line x1="512" y1="600" x2="380" y2="480" stroke="#88DDFF" stroke-width="2" opacity="0.5"/>
+  </g>
+  <!-- Right half (flying right) -->
+  <g transform="translate(40, 20)">
+    <polygon points="512,240 644,480 512,600" fill="url(#diamRight7)" filter="url(#diamondGlow7)" opacity="0.9"/>
+    <polygon points="512,240 512,600 644,480" fill="#0055AA" opacity="0.4"/>
+    <line x1="512" y1="240" x2="644" y2="480" stroke="#CCEEFF" stroke-width="2" opacity="0.6"/>
+    <line x1="512" y1="600" x2="644" y2="480" stroke="#AADDFF" stroke-width="2" opacity="0.5"/>
+  </g>
+  <!-- Slice line (perfect cut) -->
+  <line x1="420" y1="220" x2="604" y2="622" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" filter="url(#diamondGlow7)" opacity="0.9"/>
+  <!-- Slice sparkle burst at cut point center -->
+  <circle cx="512" cy="420" r="20" fill="white" opacity="0.8" filter="url(#diamondGlow7)"/>
+  <line x1="512" y1="380" x2="512" y2="340" stroke="white" stroke-width="3" opacity="0.6"/>
+  <line x1="536" y1="396" x2="564" y2="374" stroke="white" stroke-width="3" opacity="0.6"/>
+  <line x1="548" y1="420" x2="580" y2="420" stroke="white" stroke-width="3" opacity="0.6"/>
+  <line x1="488" y1="396" x2="460" y2="374" stroke="white" stroke-width="3" opacity="0.6"/>
+  <line x1="476" y1="420" x2="444" y2="420" stroke="white" stroke-width="3" opacity="0.6"/>
+  <!-- Light refraction rays from diamond -->
+  <line x1="470" y1="280" x2="380" y2="200" stroke="#22D3EE" stroke-width="3" opacity="0.5" filter="url(#diamondGlow7)"/>
+  <line x1="554" y1="280" x2="640" y2="200" stroke="#60A5FA" stroke-width="3" opacity="0.5" filter="url(#diamondGlow7)"/>
+  <line x1="380" y1="480" x2="280" y2="500" stroke="#22D3EE" stroke-width="3" opacity="0.4" filter="url(#diamondGlow7)"/>
+  <line x1="640" y1="500" x2="740" y2="480" stroke="#60A5FA" stroke-width="3" opacity="0.4" filter="url(#diamondGlow7)"/>
+  <!-- Layer 3: Score popup -->
+  <rect x="360" y="700" width="304" height="60" rx="12" fill="#001A28" stroke="#22D3EE" stroke-width="3"/>
+  <text x="512" y="726" font-family="monospace" font-size="16" fill="#22D3EE" text-anchor="middle">PERFECT CUT!</text>
+  <text x="512" y="750" font-family="monospace" font-size="18" fill="#FFFF00" text-anchor="middle" font-weight="bold">+300 pts</text>
+</svg>

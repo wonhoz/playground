@@ -1,0 +1,32 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Neon.Slice | 레이저 격자로 도형 슬라이싱 | 기하학 | #020214 -->
+  <defs>
+    <filter id="laserGlow">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="160" fill="#020214"/>
+  <!-- Layer 2: Grid of shapes being sliced by laser -->
+  <!-- Pentagon (sliced diagonally) -->
+  <polygon points="512,200 630,278 588,414 436,414 394,278" fill="#1A0A2A" stroke="#C084FC" stroke-width="4" opacity="0.8"/>
+  <!-- Diagonal laser cut line through pentagon -->
+  <line x1="360" y1="250" x2="660" y2="380" stroke="#FF00FF" stroke-width="6" stroke-linecap="round" filter="url(#laserGlow)" opacity="0.9"/>
+  <!-- Top half of pentagon (cut off, floating) -->
+  <polygon points="512,200 630,278 600,310 424,310 394,278" fill="#2A0A3A" stroke="#E879F9" stroke-width="3" opacity="0.7" transform="translate(-8,-10)"/>
+  <!-- Square shape on left (another cut shape) -->
+  <rect x="200" y="500" width="180" height="180" rx="8" fill="#1A1A2A" stroke="#818CF8" stroke-width="4" opacity="0.8"/>
+  <line x1="160" y1="540" x2="420" y2="720" stroke="#7C3AED" stroke-width="5" stroke-linecap="round" filter="url(#laserGlow)" opacity="0.8"/>
+  <!-- Circle on right (being sliced) -->
+  <circle cx="720" cy="600" r="130" fill="#0A1A0A" stroke="#4ADE80" stroke-width="4" opacity="0.8"/>
+  <line x1="580" y1="550" x2="860" y2="650" stroke="#00FF88" stroke-width="5" stroke-linecap="round" filter="url(#laserGlow)" opacity="0.8"/>
+  <!-- Layer 3: Slice particles / sparks -->
+  <circle cx="510" cy="316" r="5" fill="#FF00FF" opacity="0.9"/>
+  <circle cx="530" cy="308" r="4" fill="#FF00FF" opacity="0.7"/>
+  <circle cx="495" cy="326" r="3" fill="#F0ABFC" opacity="0.8"/>
+  <circle cx="714" cy="600" r="5" fill="#00FF88" opacity="0.9"/>
+  <circle cx="730" cy="592" r="4" fill="#4ADE80" opacity="0.7"/>
+  <!-- Score combo hint -->
+  <text x="512" y="840" font-family="Arial,sans-serif" font-size="28" fill="#C084FC" text-anchor="middle" opacity="0.7">COMBO ×3</text>
+</svg>

@@ -365,7 +365,10 @@
                      Text="파일을 열어주세요"
                      FontSize="11"
                      Foreground="{StaticResource TextDimBrush}"
-                     VerticalAlignment="Center"/>
+                     VerticalAlignment="Center"
+                     Cursor="Hand"
+                     ToolTip="클릭하여 파일 위치 열기"
+                     MouseLeftButtonDown="StatusPath_MouseLeftButtonDown"/>
         </StackPanel>
         <StackPanel Grid.Column="1" Orientation="Horizontal">
           <TextBlock x:Name="StatusWords"

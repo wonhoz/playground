@@ -519,6 +519,18 @@ public partial class MainWindow : Window
 
     // ── 상태바 ──────────────────────────────────────────────────────────
 
+    private void StatusPath_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+    {
+        if (_activeIndex < 0 || _activeIndex >= _docs.Count) return;
+        var doc = _docs[_activeIndex];
+        if (doc.IsNew || !File.Exists(doc.FilePath)) return;
+        try
+        {
+            System.Diagnostics.Process.Start("explorer.exe", $"/select,\"{doc.FilePath}\"");
+        }
+        catch { }
+    }
+
     private void UpdateStatusBar(MarkDocument doc)
     {
         StatusPath.Text = doc.IsNew ? "새 문서 (저장되지 않음)" : doc.FilePath;

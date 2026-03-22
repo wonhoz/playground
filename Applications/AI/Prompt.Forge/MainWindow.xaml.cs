@@ -132,7 +132,47 @@ public partial class MainWindow : Window
 
     void LstItems_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        if (!IsLoaded) return;
+        if (!IsLoaded || _refreshing) return;
+
+        // 다른 항목 선택 전 편집 내용 자동 저장
+        if (e.RemovedItems.Count > 0 && e.RemovedItems[0] is PromptItem prev)
+        {
+            var next = e.AddedItems.Count > 0 ? e.AddedItems[0] as PromptItem : null;
+            AutoSave(prev, next);
+            return; // AutoSave 내에서 LoadSelected 호출
+        }
+
+        LoadSelected();
+    }
+
+    void AutoSave(PromptItem prev, PromptItem? next)
+    {
+        var newTitle   = TxtTitle.Text.Trim();
+        var newContent = TxtContent.Text;
+        var newTags    = TxtTags.Text.Trim();
+        var newService = TxtService.Text.Trim();
+        var newNotes   = TxtNotes.Text.Trim();
+
+        bool changed = newTitle   != prev.Title   ||
+                       newContent != prev.Content  ||
+                       newTags    != prev.Tags     ||
+                       newService != prev.Service  ||
+                       newNotes   != prev.Notes;
+
+        if (changed)
+        {
+            ApplyEditToModel(prev);
+            _refreshing = true;
+            try
+            {
+                _vm.Save(prev);
+                // Refresh 후 사용자가 선택한 next로 재설정
+                if (next != null)
+                    _vm.Selected = _vm.Items.FirstOrDefault(x => x.Id == next.Id);
+            }
+            finally { _refreshing = false; }
+        }
+
         LoadSelected();
     }
 

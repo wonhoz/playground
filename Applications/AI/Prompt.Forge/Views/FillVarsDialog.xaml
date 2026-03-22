@@ -22,12 +22,18 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="TextBox">
-                        <Border Background="{TemplateBinding Background}"
+                        <Border x:Name="border"
+                                Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 CornerRadius="4">
                             <ScrollViewer x:Name="PART_ContentHost" Margin="{TemplateBinding Padding}"/>
                         </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsFocused" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="#7C3AED"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -84,7 +90,7 @@
         <StackPanel x:Name="VarPanel"/>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20,0,0">
             <Button Content="취소" Style="{StaticResource GhostBtn}" Margin="0,0,8,0" Click="Cancel_Click"/>
-            <Button Content="복사 &amp; 닫기" Style="{StaticResource AccentBtn}" Click="Ok_Click"/>
+            <Button Content="복사 &amp; 닫기" Style="{StaticResource AccentBtn}" Click="Ok_Click" IsDefault="True"/>
         </StackPanel>
     </StackPanel>
 </Window>

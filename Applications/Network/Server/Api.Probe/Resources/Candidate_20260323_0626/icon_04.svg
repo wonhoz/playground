@@ -1,0 +1,33 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Api.Probe | 우체통 — 요청 보내고 응답 받기 | 공간/장면 | #FFF0F0 -->
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="160" fill="#FFF0F0"/>
+  <!-- Layer 2: Mailbox with HTTP envelopes -->
+  <!-- Post (stand) -->
+  <rect x="472" y="640" width="80" height="200" rx="8" fill="#374151"/>
+  <rect x="440" y="830" width="144" height="24" rx="6" fill="#1F2937"/>
+  <!-- Mailbox body -->
+  <rect x="280" y="380" width="464" height="280" rx="20" fill="#DC2626" stroke="#991B1B" stroke-width="5"/>
+  <!-- Mailbox dome top -->
+  <path d="M280 440 Q280 380 512 380 Q744 380 744 440" fill="#B91C1C"/>
+  <!-- Mail slot -->
+  <rect x="340" y="560" width="344" height="24" rx="4" fill="#991B1B"/>
+  <!-- Flag (mail waiting indicator - up) -->
+  <line x1="720" y1="390" x2="720" y2="300" stroke="#374151" stroke-width="8" stroke-linecap="round"/>
+  <polygon points="720,300 780,320 720,340" fill="#FCD34D"/>
+  <!-- Envelopes (requests) going into slot -->
+  <!-- Envelope 1 (GET) -->
+  <rect x="360" y="490" width="110" height="74" rx="6" fill="#DBEAFE" stroke="#3B82F6" stroke-width="3" transform="rotate(-10 415 527)"/>
+  <text x="415" y="530" font-family="Arial,sans-serif" font-size="16" fill="#1D4ED8" text-anchor="middle" font-weight="bold" transform="rotate(-10 415 527)">GET</text>
+  <!-- Envelope 2 (POST) -->
+  <rect x="490" y="510" width="110" height="74" rx="6" fill="#DCFCE7" stroke="#16A34A" stroke-width="3" transform="rotate(5 545 547)"/>
+  <text x="545" y="550" font-family="Arial,sans-serif" font-size="16" fill="#15803D" text-anchor="middle" font-weight="bold" transform="rotate(5 545 547)">POST</text>
+  <!-- Response letter coming back -->
+  <rect x="760" y="500" width="120" height="90" rx="8" fill="#FEF3C7" stroke="#D97706" stroke-width="3"/>
+  <text x="820" y="538" font-family="Arial,sans-serif" font-size="14" fill="#92400E" text-anchor="middle" font-weight="bold">200 OK</text>
+  <text x="820" y="558" font-family="monospace" font-size="11" fill="#A16207" text-anchor="middle">{"ok":true}</text>
+  <line x1="744" y1="540" x2="770" y2="540" stroke="#D97706" stroke-width="4" stroke-linecap="round"/>
+  <polygon points="760,532 780,540 760,548" fill="#D97706"/>
+  <!-- Layer 3: Mailbox address label -->
+  <text x="512" y="470" font-family="monospace" font-size="14" fill="#FCA5A5" text-anchor="middle">api.example.com</text>
+</svg>

@@ -1,0 +1,36 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Api.Probe | 신호 파동 — HTTP 요청/응답 파동 | 기하학 | #0A0028 -->
+  <defs>
+    <filter id="waveGlow">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="160" fill="#0A0028"/>
+  <!-- Layer 2: Signal waves showing request/response cycle -->
+  <!-- Client node (left) -->
+  <rect x="160" y="440" width="140" height="140" rx="18" fill="#1A0A40" stroke="#7C3AED" stroke-width="4"/>
+  <text x="230" y="514" font-family="Arial,sans-serif" font-size="16" fill="#A78BFA" text-anchor="middle" font-weight="bold">Client</text>
+  <!-- Server node (right) -->
+  <rect x="724" y="440" width="140" height="140" rx="18" fill="#0A1A0A" stroke="#4ADE80" stroke-width="4"/>
+  <text x="794" y="514" font-family="Arial,sans-serif" font-size="16" fill="#4ADE80" text-anchor="middle" font-weight="bold">Server</text>
+  <!-- Request waves (client → server) -->
+  <path d="M310 490 Q390 450 470 490 Q550 530 630 490 Q690 460 724 480" fill="none" stroke="#7C3AED" stroke-width="5" stroke-linecap="round" filter="url(#waveGlow)"/>
+  <!-- Arrow -->
+  <polygon points="722,472 744,480 722,488" fill="#7C3AED" filter="url(#waveGlow)"/>
+  <!-- Request label -->
+  <text x="512" y="444" font-family="monospace" font-size="16" fill="#A78BFA" text-anchor="middle">GET /api/data</text>
+  <!-- Response waves (server → client) -->
+  <path d="M724 540 Q670 580 610 540 Q530 500 450 540 Q370 580 310 540" fill="none" stroke="#4ADE80" stroke-width="5" stroke-linecap="round" filter="url(#waveGlow)"/>
+  <!-- Arrow -->
+  <polygon points="312,548 290,540 312,532" fill="#4ADE80" filter="url(#waveGlow)"/>
+  <!-- Response label -->
+  <text x="512" y="600" font-family="monospace" font-size="16" fill="#4ADE80" text-anchor="middle">200 OK · 42ms</text>
+  <!-- Layer 3: Latency pulse rings around midpoint -->
+  <circle cx="512" cy="512" r="30" fill="none" stroke="#60A5FA" stroke-width="3" opacity="0.8" filter="url(#waveGlow)"/>
+  <circle cx="512" cy="512" r="56" fill="none" stroke="#3B82F6" stroke-width="2" opacity="0.5"/>
+  <circle cx="512" cy="512" r="82" fill="none" stroke="#1D4ED8" stroke-width="1.5" opacity="0.3"/>
+  <!-- Center dot -->
+  <circle cx="512" cy="512" r="10" fill="#60A5FA" filter="url(#waveGlow)"/>
+</svg>

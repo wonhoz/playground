@@ -1,0 +1,57 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Api.Probe | 200 OK 초록 — API 성공 응답의 직관적 표현 | 기하학 | #0A1A00 -->
+  <defs>
+    <radialGradient id="okGlow8" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#22C55E" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#0A1A00" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="greenGlow8">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="160" fill="#0A1A00"/>
+  <rect width="1024" height="1024" rx="160" fill="url(#okGlow8)"/>
+  <!-- Layer 2: HTTP response terminal style -->
+  <!-- Terminal frame -->
+  <rect x="160" y="200" width="704" height="560" rx="12" fill="#0D1A0D" stroke="#166534" stroke-width="4"/>
+  <!-- Terminal title bar -->
+  <rect x="160" y="200" width="704" height="44" rx="12" fill="#1A2E1A"/>
+  <rect x="160" y="224" width="704" height="20" fill="#1A2E1A"/>
+  <!-- Terminal buttons -->
+  <circle cx="196" cy="222" r="8" fill="#FF5F57"/>
+  <circle cx="220" cy="222" r="8" fill="#FEBC2E"/>
+  <circle cx="244" cy="222" r="8" fill="#28C840"/>
+  <text x="430" y="228" font-family="monospace" font-size="13" fill="#4ADE80" text-anchor="middle">api-probe — curl GET /api/health</text>
+  <!-- Terminal content: HTTP response -->
+  <text x="186" y="280" font-family="monospace" font-size="14" fill="#666666">$ curl -i https://api.example.com/health</text>
+  <text x="186" y="308" font-family="monospace" font-size="14" fill="#4ADE80">HTTP/2 </text>
+  <text x="278" y="308" font-family="monospace" font-size="28" fill="#00FF66" font-weight="bold" filter="url(#greenGlow8)">200</text>
+  <text x="382" y="308" font-family="monospace" font-size="14" fill="#4ADE80"> OK</text>
+  <text x="186" y="340" font-family="monospace" font-size="13" fill="#555555">content-type: application/json</text>
+  <text x="186" y="362" font-family="monospace" font-size="13" fill="#555555">x-response-time: 42ms</text>
+  <text x="186" y="384" font-family="monospace" font-size="13" fill="#555555">cache-control: no-cache</text>
+  <text x="186" y="406" font-family="monospace" font-size="13" fill="#555555">date: Mon, 23 Mar 2026 06:26:00 GMT</text>
+  <line x1="186" y1="420" x2="840" y2="420" stroke="#1A3A1A" stroke-width="1"/>
+  <!-- JSON response body -->
+  <text x="186" y="450" font-family="monospace" font-size="14" fill="#4ADE80">{</text>
+  <text x="206" y="472" font-family="monospace" font-size="14" fill="#86EFAC">  "status": </text>
+  <text x="326" y="472" font-family="monospace" font-size="14" fill="#FCD34D">"healthy"</text>
+  <text x="436" y="472" font-family="monospace" font-size="14" fill="#4ADE80">,</text>
+  <text x="206" y="494" font-family="monospace" font-size="14" fill="#86EFAC">  "uptime": </text>
+  <text x="326" y="494" font-family="monospace" font-size="14" fill="#FCD34D">99.98</text>
+  <text x="386" y="494" font-family="monospace" font-size="14" fill="#4ADE80">,</text>
+  <text x="206" y="516" font-family="monospace" font-size="14" fill="#86EFAC">  "latency": </text>
+  <text x="336" y="516" font-family="monospace" font-size="14" fill="#FCD34D">"42ms"</text>
+  <text x="414" y="516" font-family="monospace" font-size="14" fill="#4ADE80">,</text>
+  <text x="206" y="538" font-family="monospace" font-size="14" fill="#86EFAC">  "version": </text>
+  <text x="336" y="538" font-family="monospace" font-size="14" fill="#FCD34D">"v2.4.1"</text>
+  <text x="186" y="558" font-family="monospace" font-size="14" fill="#4ADE80">}</text>
+  <!-- Cursor -->
+  <rect x="186" y="578" width="10" height="18" fill="#4ADE80" opacity="0.8"/>
+  <!-- Layer 3: Status badge overlay -->
+  <rect x="580" y="670" width="260" height="70" rx="12" fill="#166534" stroke="#4ADE80" stroke-width="4" filter="url(#greenGlow8)"/>
+  <text x="710" y="697" font-family="monospace" font-size="20" fill="white" text-anchor="middle" font-weight="bold">✓ 200 OK</text>
+  <text x="710" y="724" font-family="monospace" font-size="14" fill="#BBF7D0" text-anchor="middle">latency: 42ms</text>
+</svg>

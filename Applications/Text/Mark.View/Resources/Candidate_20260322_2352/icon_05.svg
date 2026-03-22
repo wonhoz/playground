@@ -1,0 +1,32 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="prismLight" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#EF4444"/>
+      <stop offset="17%" stop-color="#F97316"/>
+      <stop offset="33%" stop-color="#EAB308"/>
+      <stop offset="50%" stop-color="#22C55E"/>
+      <stop offset="67%" stop-color="#3B82F6"/>
+      <stop offset="83%" stop-color="#8B5CF6"/>
+      <stop offset="100%" stop-color="#EC4899"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="150" fill="#134E4A"/>
+  <!-- Layer 2: Prism triangle -->
+  <polygon points="380,220 640,220 510,560" fill="rgba(255,255,255,0.18)" stroke="rgba(255,255,255,0.85)" stroke-width="14"/>
+  <!-- Prism highlight face -->
+  <polygon points="380,220 510,560 380,220" fill="rgba(255,255,255,0.07)"/>
+  <!-- Input ray (markdown text) -->
+  <text x="170" y="380" font-family="Consolas,monospace" font-size="24" fill="#5EEAD4"># Title</text>
+  <text x="170" y="415" font-family="Consolas,monospace" font-size="22" fill="#5EEAD4">**bold**</text>
+  <line x1="338" y1="390" x2="395" y2="345" stroke="#5EEAD4" stroke-width="8" stroke-linecap="round" opacity="0.7"/>
+  <!-- Output rainbow rays -->
+  <line x1="510" y1="560" x2="650" y2="620" stroke="#EF4444" stroke-width="10" stroke-linecap="round" opacity="0.85"/>
+  <line x1="510" y1="560" x2="660" y2="660" stroke="#F97316" stroke-width="9" stroke-linecap="round" opacity="0.8"/>
+  <line x1="510" y1="560" x2="640" y2="710" stroke="#EAB308" stroke-width="9" stroke-linecap="round" opacity="0.8"/>
+  <line x1="510" y1="560" x2="590" y2="760" stroke="#22C55E" stroke-width="8" stroke-linecap="round" opacity="0.8"/>
+  <line x1="510" y1="560" x2="530" y2="790" stroke="#3B82F6" stroke-width="8" stroke-linecap="round" opacity="0.8"/>
+  <!-- Layer 3: Rainbow band near output -->
+  <rect x="630" y="590" width="200" height="30" rx="8" fill="url(#prismLight)" opacity="0.85"/>
+  <text x="730" y="613" font-family="Arial,sans-serif" font-size="16" fill="white" text-anchor="middle" font-weight="bold">HTML</text>
+</svg>

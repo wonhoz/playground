@@ -1,0 +1,46 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <clipPath id="leftClip"><rect x="0" y="0" width="512" height="1024"/></clipPath>
+    <clipPath id="rightClip"><rect x="512" y="0" width="512" height="1024"/></clipPath>
+  </defs>
+  <!-- Layer 1: Split background -->
+  <rect x="0" y="0" width="512" height="1024" rx="0" fill="#0F172A"/>
+  <rect x="512" y="0" width="512" height="1024" rx="0" fill="#F8FAFC"/>
+  <!-- Rounded corners on overall shape -->
+  <rect width="1024" height="1024" rx="150" fill="none" stroke="#1E293B" stroke-width="0"/>
+  <!-- Background mask for rounded rect -->
+  <path d="M150,0 L874,0 Q1024,0 1024,150 L1024,874 Q1024,1024 874,1024 L150,1024 Q0,1024 0,874 L0,150 Q0,0 150,0 Z" fill="none"/>
+  <!-- Layer 2: Document card spanning both halves -->
+  <!-- Dark half document content -->
+  <rect x="175" y="250" width="300" height="460" rx="16" fill="#1E293B" clip-path="url(#leftClip)"/>
+  <rect x="175" y="250" width="300" height="460" rx="16" fill="#F8FAFC" clip-path="url(#rightClip)"/>
+  <rect x="175" y="250" width="300" height="460" rx="16" fill="none" stroke="#334155" stroke-width="3" clip-path="url(#leftClip)"/>
+  <rect x="175" y="250" width="300" height="460" rx="16" fill="none" stroke="#E2E8F0" stroke-width="3" clip-path="url(#rightClip)"/>
+  <!-- Dark content -->
+  <rect x="200" y="290" width="180" height="20" rx="5" fill="#60A5FA" clip-path="url(#leftClip)"/>
+  <rect x="200" y="324" width="240" height="12" rx="3" fill="#475569" clip-path="url(#leftClip)"/>
+  <rect x="200" y="346" width="200" height="12" rx="3" fill="#475569" clip-path="url(#leftClip)"/>
+  <rect x="200" y="380" width="100" height="12" rx="3" fill="#334155" clip-path="url(#leftClip)"/>
+  <rect x="200" y="402" width="240" height="50" rx="6" fill="#0F172A" clip-path="url(#leftClip)"/>
+  <rect x="200" y="466" width="160" height="12" rx="3" fill="#475569" clip-path="url(#leftClip)"/>
+  <!-- Light content -->
+  <rect x="200" y="290" width="180" height="20" rx="5" fill="#1E40AF" clip-path="url(#rightClip)"/>
+  <rect x="200" y="324" width="240" height="12" rx="3" fill="#D1D5DB" clip-path="url(#rightClip)"/>
+  <rect x="200" y="346" width="200" height="12" rx="3" fill="#D1D5DB" clip-path="url(#rightClip)"/>
+  <rect x="200" y="380" width="100" height="12" rx="3" fill="#E5E7EB" clip-path="url(#rightClip)"/>
+  <rect x="200" y="402" width="240" height="50" rx="6" fill="#F1F5F9" clip-path="url(#rightClip)"/>
+  <rect x="200" y="466" width="160" height="12" rx="3" fill="#D1D5DB" clip-path="url(#rightClip)"/>
+  <!-- Center divider line -->
+  <line x1="512" y1="220" x2="512" y2="740" stroke="#64748B" stroke-width="4" stroke-dasharray="12,8" opacity="0.6"/>
+  <!-- Layer 3: Labels -->
+  <text x="260" y="800" font-family="Arial,sans-serif" font-size="26" fill="#94A3B8" text-anchor="middle">🌙 Dark</text>
+  <text x="764" y="800" font-family="Arial,sans-serif" font-size="26" fill="#64748B" text-anchor="middle">☀️ Light</text>
+  <!-- Right side document (offset) -->
+  <rect x="549" y="270" width="290" height="440" rx="16" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="3"/>
+  <rect x="573" y="306" width="170" height="20" rx="5" fill="#1E40AF"/>
+  <rect x="573" y="340" width="230" height="12" rx="3" fill="#D1D5DB"/>
+  <rect x="573" y="362" width="190" height="12" rx="3" fill="#D1D5DB"/>
+  <rect x="573" y="396" width="96" height="12" rx="3" fill="#E5E7EB"/>
+  <rect x="573" y="416" width="230" height="48" rx="6" fill="#F1F5F9"/>
+  <rect x="573" y="478" width="150" height="12" rx="3" fill="#D1D5DB"/>
+</svg>

@@ -1,0 +1,137 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg02" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#1A1040"/>
+      <stop offset="100%" stop-color="#080820"/>
+    </radialGradient>
+    <clipPath id="frame02">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+    <!-- Individual flag clips -->
+    <clipPath id="f1"><rect x="80" y="148" width="200" height="130" rx="8"/></clipPath>
+    <clipPath id="f2"><rect x="300" y="148" width="200" height="130" rx="8"/></clipPath>
+    <clipPath id="f3"><rect x="520" y="148" width="200" height="130" rx="8"/></clipPath>
+    <clipPath id="f4"><rect x="740" y="148" width="200" height="130" rx="8"/></clipPath>
+    <clipPath id="f5"><rect x="80" y="300" width="200" height="130" rx="8"/></clipPath>
+    <clipPath id="f6"><rect x="300" y="300" width="200" height="130" rx="8"/></clipPath>
+    <clipPath id="f8"><rect x="740" y="300" width="200" height="130" rx="8"/></clipPath>
+    <clipPath id="f9"><rect x="80" y="452" width="200" height="130" rx="8"/></clipPath>
+    <clipPath id="f10"><rect x="300" y="452" width="200" height="130" rx="8"/></clipPath>
+    <clipPath id="f11"><rect x="520" y="452" width="200" height="130" rx="8"/></clipPath>
+    <clipPath id="f12"><rect x="740" y="452" width="200" height="130" rx="8"/></clipPath>
+  </defs>
+
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg02)"/>
+
+  <g clip-path="url(#frame02)">
+    <!-- Layer 2: Grid of flags (3 rows x 4 cols, center replaced by ?) -->
+
+    <!-- Row 1 flags -->
+    <!-- France (blue/white/red vertical tricolor) -->
+    <rect x="80" y="148" width="200" height="130" rx="8" fill="#ED2939" clip-path="url(#f1)"/>
+    <rect x="80" y="148" width="134" height="130" fill="#FFFFFF" clip-path="url(#f1)"/>
+    <rect x="80" y="148" width="67" height="130" fill="#002395" clip-path="url(#f1)"/>
+    <rect x="80" y="148" width="200" height="130" rx="8" fill="none" stroke="#333" stroke-width="2"/>
+
+    <!-- Germany (black/red/gold horizontal) -->
+    <rect x="300" y="148" width="200" height="130" rx="8" fill="#FFCE00" clip-path="url(#f2)"/>
+    <rect x="300" y="148" width="200" height="87" fill="#DD0000" clip-path="url(#f2)"/>
+    <rect x="300" y="148" width="200" height="43" fill="#000000" clip-path="url(#f2)"/>
+    <rect x="300" y="148" width="200" height="130" rx="8" fill="none" stroke="#333" stroke-width="2"/>
+
+    <!-- Italy (green/white/red vertical) -->
+    <rect x="520" y="148" width="200" height="130" rx="8" fill="#CE2B37" clip-path="url(#f3)"/>
+    <rect x="520" y="148" width="134" height="130" fill="#FFFFFF" clip-path="url(#f3)"/>
+    <rect x="520" y="148" width="67" height="130" fill="#009246" clip-path="url(#f3)"/>
+    <rect x="520" y="148" width="200" height="130" rx="8" fill="none" stroke="#333" stroke-width="2"/>
+
+    <!-- Brazil (green + yellow diamond) -->
+    <rect x="740" y="148" width="200" height="130" rx="8" fill="#009C3B" clip-path="url(#f4)"/>
+    <polygon points="840,158 944,213 840,268 736,213" fill="#FEDF00" clip-path="url(#f4)"/>
+    <circle cx="840" cy="213" r="36" fill="#002776" clip-path="url(#f4)"/>
+    <rect x="740" y="148" width="200" height="130" rx="8" fill="none" stroke="#333" stroke-width="2"/>
+
+    <!-- Row 2 flags -->
+    <!-- Netherlands (red/white/blue horizontal) -->
+    <rect x="80" y="300" width="200" height="130" rx="8" fill="#21468B" clip-path="url(#f5)"/>
+    <rect x="80" y="300" width="200" height="87" fill="#FFFFFF" clip-path="url(#f5)"/>
+    <rect x="80" y="300" width="200" height="43" fill="#AE1C28" clip-path="url(#f5)"/>
+    <rect x="80" y="300" width="200" height="130" rx="8" fill="none" stroke="#333" stroke-width="2"/>
+
+    <!-- Sweden (blue + yellow cross) -->
+    <rect x="300" y="300" width="200" height="130" rx="8" fill="#006AA7" clip-path="url(#f6)"/>
+    <rect x="378" y="300" width="44" height="130" fill="#FECC02" clip-path="url(#f6)"/>
+    <rect x="300" y="352" width="200" height="44" fill="#FECC02" clip-path="url(#f6)"/>
+    <rect x="300" y="300" width="200" height="130" rx="8" fill="none" stroke="#333" stroke-width="2"/>
+
+    <!-- CENTER: "?" tile -->
+    <rect x="520" y="300" width="200" height="130" rx="8" fill="#1E1A50"/>
+    <rect x="520" y="300" width="200" height="130" rx="8" fill="none" stroke="#5C6BC0" stroke-width="3"/>
+    <text x="620" y="383" font-family="'Segoe UI', Arial" font-size="80" font-weight="900" fill="#7C8BF0" text-anchor="middle">?</text>
+
+    <!-- Canada (white + red sides + maple leaf) -->
+    <rect x="740" y="300" width="200" height="130" rx="8" fill="#FFFFFF" clip-path="url(#f8)"/>
+    <rect x="740" y="300" width="50" height="130" fill="#FF0000" clip-path="url(#f8)"/>
+    <rect x="890" y="300" width="50" height="130" fill="#FF0000" clip-path="url(#f8)"/>
+    <!-- Simplified maple leaf shape -->
+    <polygon points="840,325 855,350 880,345 862,365 870,392 840,375 810,392 818,365 800,345 825,350" fill="#FF0000" clip-path="url(#f8)"/>
+    <rect x="740" y="300" width="200" height="130" rx="8" fill="none" stroke="#333" stroke-width="2"/>
+
+    <!-- Row 3 flags -->
+    <!-- Australia (blue + union jack + stars) -->
+    <rect x="80" y="452" width="200" height="130" rx="8" fill="#00008B" clip-path="url(#f9)"/>
+    <!-- Simplified union jack -->
+    <line x1="80" y1="452" x2="180" y2="517" stroke="white" stroke-width="12" clip-path="url(#f9)"/>
+    <line x1="80" y1="582" x2="180" y2="517" stroke="white" stroke-width="12" clip-path="url(#f9)"/>
+    <rect x="80" y="452" width="100" height="130" fill="none"/>
+    <circle cx="155" cy="540" r="9" fill="white" clip-path="url(#f9)"/>
+    <circle cx="175" cy="525" r="7" fill="white" clip-path="url(#f9)"/>
+    <circle cx="165" cy="555" r="7" fill="white" clip-path="url(#f9)"/>
+    <rect x="80" y="452" width="200" height="130" rx="8" fill="none" stroke="#333" stroke-width="2"/>
+
+    <!-- Norway (red + blue/white cross) -->
+    <rect x="300" y="452" width="200" height="130" rx="8" fill="#EF2B2D" clip-path="url(#f10)"/>
+    <rect x="366" y="452" width="52" height="130" fill="#FFFFFF" clip-path="url(#f10)"/>
+    <rect x="300" y="505" width="200" height="42" fill="#FFFFFF" clip-path="url(#f10)"/>
+    <rect x="374" y="452" width="36" height="130" fill="#002868" clip-path="url(#f10)"/>
+    <rect x="300" y="513" width="200" height="26" fill="#002868" clip-path="url(#f10)"/>
+    <rect x="300" y="452" width="200" height="130" rx="8" fill="none" stroke="#333" stroke-width="2"/>
+
+    <!-- Spain (red/yellow/red + shield) -->
+    <rect x="520" y="452" width="200" height="130" rx="8" fill="#AA151B" clip-path="url(#f11)"/>
+    <rect x="520" y="478" width="200" height="78" fill="#F1BF00" clip-path="url(#f11)"/>
+    <rect x="520" y="452" width="200" height="130" rx="8" fill="none" stroke="#333" stroke-width="2"/>
+
+    <!-- South Korea (white + red/blue yin-yang) -->
+    <rect x="740" y="452" width="200" height="130" rx="8" fill="#FFFFFF" clip-path="url(#f12)"/>
+    <!-- Simplified yin-yang circle -->
+    <circle cx="840" cy="517" r="38" fill="#CD2E3A" clip-path="url(#f12)"/>
+    <path d="M840,479 A19,19 0 0 1 840,517 A19,19 0 0 0 840,555 A38,38 0 0 1 840,479Z" fill="#003478" clip-path="url(#f12)"/>
+    <rect x="740" y="452" width="200" height="130" rx="8" fill="none" stroke="#333" stroke-width="2"/>
+
+    <!-- Layer 3: Title text -->
+    <text x="512" y="680" font-family="'Segoe UI', Arial" font-size="58" font-weight="900" fill="#7C8BF0" text-anchor="middle">FLAG QUIZ</text>
+    <text x="512" y="740" font-family="'Segoe UI', Arial" font-size="36" font-weight="600" fill="#555" text-anchor="middle">어느 나라의 국기일까?</text>
+
+    <!-- Answer choice buttons (compact) -->
+    <rect x="120" y="780" width="188" height="58" rx="12" fill="#1A1A3A"/>
+    <rect x="120" y="780" width="188" height="58" rx="12" fill="none" stroke="#333" stroke-width="2"/>
+    <text x="214" y="817" font-family="'Segoe UI', Arial" font-size="26" fill="#888" text-anchor="middle">Sweden</text>
+
+    <rect x="322" y="780" width="188" height="58" rx="12" fill="#1A1A3A"/>
+    <rect x="322" y="780" width="188" height="58" rx="12" fill="none" stroke="#333" stroke-width="2"/>
+    <text x="416" y="817" font-family="'Segoe UI', Arial" font-size="26" fill="#888" text-anchor="middle">Norway</text>
+
+    <rect x="514" y="780" width="188" height="58" rx="12" fill="#1A3A1A"/>
+    <rect x="514" y="780" width="188" height="58" rx="12" fill="none" stroke="#4CD964" stroke-width="2"/>
+    <text x="608" y="817" font-family="'Segoe UI', Arial" font-size="26" fill="#4CD964" font-weight="700" text-anchor="middle">Finland ✓</text>
+
+    <rect x="716" y="780" width="188" height="58" rx="12" fill="#1A1A3A"/>
+    <rect x="716" y="780" width="188" height="58" rx="12" fill="none" stroke="#333" stroke-width="2"/>
+    <text x="810" y="817" font-family="'Segoe UI', Arial" font-size="26" fill="#888" text-anchor="middle">Denmark</text>
+
+    <!-- Grade indicator -->
+    <text x="512" y="930" font-family="'Segoe UI', Arial" font-size="68" font-weight="900" fill="#FFD700" text-anchor="middle" opacity="0.9">🏆 A</text>
+  </g>
+</svg>

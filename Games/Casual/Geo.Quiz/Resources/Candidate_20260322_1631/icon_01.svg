@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg01" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0A1228"/>
+      <stop offset="100%" stop-color="#060C1C"/>
+    </linearGradient>
+    <clipPath id="frame01">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+    <clipPath id="flagClip01">
+      <rect x="172" y="145" width="680" height="430" rx="14"/>
+    </clipPath>
+  </defs>
+
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg01)"/>
+
+  <g clip-path="url(#frame01)">
+    <!-- Layer 2: Flag display (Japan flag for clarity) -->
+    <!-- Flag frame/shadow -->
+    <rect x="168" y="141" width="688" height="438" rx="16" fill="#000" opacity="0.4"/>
+    <!-- Flag background (white) -->
+    <rect x="172" y="145" width="680" height="430" rx="14" fill="white" clip-path="url(#flagClip01)"/>
+    <!-- Japan red circle -->
+    <circle cx="512" cy="360" r="148" fill="#BC002D" clip-path="url(#flagClip01)"/>
+    <!-- Flag border -->
+    <rect x="172" y="145" width="680" height="430" rx="14" fill="none" stroke="#444" stroke-width="3"/>
+
+    <!-- "?" Question mark below flag -->
+    <text x="512" y="640" font-family="'Segoe UI', Arial" font-size="70" font-weight="900" fill="#5C6BC0" text-anchor="middle" opacity="0.9">어느 나라?</text>
+
+    <!-- Layer 3: 4 choice buttons -->
+    <!-- Button 1 (correct - highlighted green) -->
+    <rect x="140" y="682" width="318" height="76" rx="14" fill="#1A4A2A"/>
+    <rect x="140" y="682" width="318" height="76" rx="14" fill="none" stroke="#4CD964" stroke-width="3"/>
+    <text x="299" y="728" font-family="'Segoe UI', Arial" font-size="34" font-weight="700" fill="#4CD964" text-anchor="middle">🇯🇵  Japan</text>
+
+    <!-- Button 2 -->
+    <rect x="566" y="682" width="318" height="76" rx="14" fill="#1A1A2E"/>
+    <rect x="566" y="682" width="318" height="76" rx="14" fill="none" stroke="#333" stroke-width="2"/>
+    <text x="725" y="728" font-family="'Segoe UI', Arial" font-size="34" font-weight="700" fill="#888" text-anchor="middle">China</text>
+
+    <!-- Button 3 -->
+    <rect x="140" y="776" width="318" height="76" rx="14" fill="#1A1A2E"/>
+    <rect x="140" y="776" width="318" height="76" rx="14" fill="none" stroke="#333" stroke-width="2"/>
+    <text x="299" y="822" font-family="'Segoe UI', Arial" font-size="34" font-weight="700" fill="#888" text-anchor="middle">S.Korea</text>
+
+    <!-- Button 4 -->
+    <rect x="566" y="776" width="318" height="76" rx="14" fill="#1A1A2E"/>
+    <rect x="566" y="776" width="318" height="76" rx="14" fill="none" stroke="#333" stroke-width="2"/>
+    <text x="725" y="822" font-family="'Segoe UI', Arial" font-size="34" font-weight="700" fill="#888" text-anchor="middle">Mongolia</text>
+
+    <!-- Correct checkmark on button 1 -->
+    <circle cx="425" cy="720" r="22" fill="#4CD964"/>
+    <text x="425" y="730" font-family="'Segoe UI', Arial" font-size="26" font-weight="900" fill="white" text-anchor="middle">✓</text>
+
+    <!-- Score label -->
+    <text x="512" y="925" font-family="'Segoe UI', Arial" font-size="42" font-weight="900" fill="#FFD700" text-anchor="middle" opacity="0.9">🏆  SCORE: 8/10</text>
+  </g>
+</svg>

@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg05" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A2A10"/>
+      <stop offset="100%" stop-color="#0A140A"/>
+    </linearGradient>
+    <radialGradient id="checkGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#4CD964" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#4CD964" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="frame05">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+    <clipPath id="flagClip05">
+      <rect x="140" y="200" width="530" height="340" rx="14"/>
+    </clipPath>
+  </defs>
+
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg05)"/>
+
+  <g clip-path="url(#frame05)">
+    <!-- Layer 2: Large flag (South Korea) -->
+    <!-- Flag background (white) -->
+    <rect x="140" y="200" width="530" height="340" rx="14" fill="white" clip-path="url(#flagClip05)"/>
+    <!-- Yin-yang (taeguk) - red upper, blue lower -->
+    <circle cx="405" cy="370" r="105" fill="#CD2E3A" clip-path="url(#flagClip05)"/>
+    <path d="M405,265 A105,105 0 0 1 405,475 A52.5,52.5 0 0 0 405,370 A52.5,52.5 0 0 1 405,265Z" fill="#003478" clip-path="url(#flagClip05)"/>
+    <circle cx="405" cy="317" r="52" fill="#CD2E3A" clip-path="url(#flagClip05)"/>
+    <circle cx="405" cy="423" r="52" fill="#003478" clip-path="url(#flagClip05)"/>
+    <!-- Trigrams (simplified horizontal bars - upper left) -->
+    <line x1="210" y1="270" x2="270" y2="270" stroke="#000" stroke-width="9" stroke-linecap="round" clip-path="url(#flagClip05)"/>
+    <line x1="210" y1="288" x2="270" y2="288" stroke="#000" stroke-width="9" stroke-linecap="round" clip-path="url(#flagClip05)"/>
+    <line x1="210" y1="306" x2="270" y2="306" stroke="#000" stroke-width="9" stroke-linecap="round" clip-path="url(#flagClip05)"/>
+    <!-- Trigrams upper right -->
+    <line x1="536" y1="270" x2="596" y2="270" stroke="#000" stroke-width="9" stroke-linecap="round" clip-path="url(#flagClip05)"/>
+    <line x1="536" y1="288" x2="560" y2="288" stroke="#000" stroke-width="9" stroke-linecap="round" clip-path="url(#flagClip05)"/>
+    <line x1="572" y1="288" x2="596" y2="288" stroke="#000" stroke-width="9" stroke-linecap="round" clip-path="url(#flagClip05)"/>
+    <line x1="536" y1="306" x2="596" y2="306" stroke="#000" stroke-width="9" stroke-linecap="round" clip-path="url(#flagClip05)"/>
+    <!-- Trigrams lower left -->
+    <line x1="210" y1="432" x2="270" y2="432" stroke="#000" stroke-width="9" stroke-linecap="round" clip-path="url(#flagClip05)"/>
+    <line x1="210" y1="450" x2="234" y2="450" stroke="#000" stroke-width="9" stroke-linecap="round" clip-path="url(#flagClip05)"/>
+    <line x1="246" y1="450" x2="270" y2="450" stroke="#000" stroke-width="9" stroke-linecap="round" clip-path="url(#flagClip05)"/>
+    <line x1="210" y1="468" x2="270" y2="468" stroke="#000" stroke-width="9" stroke-linecap="round" clip-path="url(#flagClip05)"/>
+    <!-- Flag border -->
+    <rect x="140" y="200" width="530" height="340" rx="14" fill="none" stroke="#AAAAAA" stroke-width="3"/>
+
+    <!-- Correct answer label below flag -->
+    <text x="405" y="618" font-family="'Segoe UI', Arial" font-size="44" font-weight="700" fill="#4CD964" text-anchor="middle">✓ South Korea</text>
+
+    <!-- Layer 3: Checkmark + glow (right side overlay) -->
+    <!-- Glow background -->
+    <circle cx="790" cy="380" r="200" fill="url(#checkGlow)"/>
+    <!-- Circle -->
+    <circle cx="790" cy="380" r="155" fill="#1A3A1A"/>
+    <circle cx="790" cy="380" r="155" fill="none" stroke="#4CD964" stroke-width="10"/>
+    <!-- Big checkmark -->
+    <polyline points="700,378 762,445 880,312" fill="none" stroke="#4CD964" stroke-width="28" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <!-- Grade badge (top right) -->
+    <circle cx="880" cy="188" r="82" fill="#2A2000"/>
+    <circle cx="880" cy="188" r="82" fill="none" stroke="#FFD700" stroke-width="6"/>
+    <text x="880" y="175" font-family="'Segoe UI', Arial" font-size="30" font-weight="700" fill="#FFD700" text-anchor="middle">등급</text>
+    <text x="880" y="225" font-family="'Segoe UI', Arial" font-size="68" font-weight="900" fill="#FFD700" text-anchor="middle">A</text>
+
+    <!-- Score bar at bottom -->
+    <rect x="140" y="700" width="744" height="56" rx="14" fill="#1A1A1A"/>
+    <rect x="140" y="700" width="558" height="56" rx="14" fill="#4CD964" opacity="0.85"/>
+    <text x="512" y="738" font-family="'Segoe UI', Arial" font-size="30" font-weight="700" fill="white" text-anchor="middle" opacity="0.9">정답: 18 / 20</text>
+
+    <!-- Small country name cards (bottom) -->
+    <rect x="140" y="790" width="172" height="54" rx="10" fill="#1A1A2A"/>
+    <text x="226" y="824" font-family="'Segoe UI', Arial" font-size="24" fill="#666" text-anchor="middle">Germany</text>
+
+    <rect x="326" y="790" width="172" height="54" rx="10" fill="#1A1A2A"/>
+    <text x="412" y="824" font-family="'Segoe UI', Arial" font-size="24" fill="#666" text-anchor="middle">Japan</text>
+
+    <rect x="512" y="790" width="172" height="54" rx="10" fill="#1A3A1A"/>
+    <rect x="512" y="790" width="172" height="54" rx="10" fill="none" stroke="#4CD964" stroke-width="2"/>
+    <text x="598" y="824" font-family="'Segoe UI', Arial" font-size="24" fill="#4CD964" font-weight="700" text-anchor="middle">S.Korea ✓</text>
+
+    <rect x="698" y="790" width="186" height="54" rx="10" fill="#1A1A2A"/>
+    <text x="791" y="824" font-family="'Segoe UI', Arial" font-size="24" fill="#666" text-anchor="middle">Mongolia</text>
+  </g>
+</svg>

@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg03" cx="50%" cy="45%" r="65%">
+      <stop offset="0%" stop-color="#0D1E48"/>
+      <stop offset="100%" stop-color="#060E28"/>
+    </radialGradient>
+    <radialGradient id="globe03" cx="38%" cy="30%" r="62%">
+      <stop offset="0%" stop-color="#2A6EBB"/>
+      <stop offset="50%" stop-color="#1A5099"/>
+      <stop offset="100%" stop-color="#0D2A55"/>
+    </radialGradient>
+    <radialGradient id="glow03" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFD700" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#FFD700" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="frame03">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+    <clipPath id="globeClip03">
+      <circle cx="512" cy="480" r="295"/>
+    </clipPath>
+  </defs>
+
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg03)"/>
+
+  <g clip-path="url(#frame03)">
+    <!-- Layer 2: Globe -->
+    <circle cx="512" cy="480" r="295" fill="url(#globe03)"/>
+
+    <!-- Continents (simplified green landmasses) -->
+    <!-- North America -->
+    <ellipse cx="360" cy="380" rx="90" ry="110" fill="#2A8A44" opacity="0.85" clip-path="url(#globeClip03)"/>
+    <ellipse cx="345" cy="440" rx="55" ry="70" fill="#2A8A44" opacity="0.85" clip-path="url(#globeClip03)"/>
+
+    <!-- Europe/Africa (center-right) -->
+    <ellipse cx="510" cy="360" rx="60" ry="80" fill="#2A8A44" opacity="0.85" clip-path="url(#globeClip03)"/>
+    <ellipse cx="520" cy="470" rx="68" ry="100" fill="#2A8A44" opacity="0.82" clip-path="url(#globeClip03)"/>
+
+    <!-- Asia (right) -->
+    <ellipse cx="660" cy="360" rx="95" ry="85" fill="#2A8A44" opacity="0.85" clip-path="url(#globeClip03)"/>
+    <ellipse cx="680" cy="430" rx="65" ry="60" fill="#2A8A44" opacity="0.80" clip-path="url(#globeClip03)"/>
+
+    <!-- South America -->
+    <ellipse cx="390" cy="560" rx="55" ry="80" fill="#2A8A44" opacity="0.80" clip-path="url(#globeClip03)"/>
+
+    <!-- Latitude lines -->
+    <ellipse cx="512" cy="480" rx="295" ry="60" fill="none" stroke="#AACCFF" stroke-width="2" opacity="0.25" clip-path="url(#globeClip03)"/>
+    <ellipse cx="512" cy="480" rx="295" ry="130" fill="none" stroke="#AACCFF" stroke-width="2" opacity="0.18" clip-path="url(#globeClip03)"/>
+    <!-- Longitude line -->
+    <line x1="512" y1="185" x2="512" y2="775" stroke="#AACCFF" stroke-width="2" opacity="0.18" clip-path="url(#globeClip03)"/>
+    <line x1="217" y1="480" x2="807" y2="480" stroke="#AACCFF" stroke-width="2" opacity="0.18" clip-path="url(#globeClip03)"/>
+
+    <!-- Globe shine -->
+    <ellipse cx="430" cy="365" rx="80" ry="55" fill="white" opacity="0.10"/>
+
+    <!-- Globe outline -->
+    <circle cx="512" cy="480" r="295" fill="none" stroke="#4488CC" stroke-width="6"/>
+
+    <!-- Flag pin (upper right of globe - marks a country) -->
+    <!-- Pin pole -->
+    <line x1="668" y1="295" x2="668" y2="210" stroke="#FFD700" stroke-width="8" stroke-linecap="round"/>
+    <!-- Flag on pin (simplified France-style: tricolor) -->
+    <rect x="668" y="188" width="64" height="42" rx="4" fill="#ED2939"/>
+    <rect x="668" y="188" width="43" height="42" fill="#FFFFFF"/>
+    <rect x="668" y="188" width="21" height="42" fill="#002395"/>
+    <!-- Pin head (circle at bottom) -->
+    <circle cx="668" cy="298" r="10" fill="#FFD700"/>
+
+    <!-- Glow around pin location -->
+    <circle cx="668" cy="295" r="38" fill="url(#glow03)"/>
+
+    <!-- Question mark (large, below globe) -->
+    <text x="512" y="860" font-family="'Segoe UI', Arial" font-size="130" font-weight="900" fill="#5C7FD0" text-anchor="middle" opacity="0.85">?</text>
+
+    <!-- Layer 3: Decorative stars around globe -->
+    <circle cx="242" cy="248" r="5" fill="white" opacity="0.55"/>
+    <circle cx="780" cy="260" r="4" fill="white" opacity="0.45"/>
+    <circle cx="200" cy="650" r="4" fill="white" opacity="0.45"/>
+    <circle cx="820" cy="680" r="5" fill="white" opacity="0.5"/>
+    <circle cx="310" cy="730" r="3" fill="white" opacity="0.35"/>
+    <circle cx="740" cy="740" r="3" fill="white" opacity="0.35"/>
+
+    <!-- Geo.Quiz text top -->
+    <text x="512" y="148" font-family="'Segoe UI', Arial" font-size="54" font-weight="900" fill="#4488CC" text-anchor="middle" opacity="0.9">GEO QUIZ</text>
+  </g>
+</svg>

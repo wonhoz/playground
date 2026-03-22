@@ -1,54 +1,32 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
-  <!-- Layer 1: 밝은 연노랑 배경 -->
-  <rect width="1024" height="1024" rx="190" fill="#FFFDE7"/>
+  <defs>
+    <linearGradient id="bg02" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1976D2"/>
+      <stop offset="100%" stop-color="#0D47A1"/>
+    </linearGradient>
+    <!-- Clip person to canvas -->
+    <clipPath id="cp02">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
 
-  <!-- Layer 2: 모니터 본체 -->
-  <!-- 스탠드 받침 -->
-  <rect x="420" y="830" width="184" height="30" rx="10" fill="#B0BEC5"/>
-  <rect x="380" y="856" width="264" height="26" rx="10" fill="#90A4AE"/>
-  <!-- 스탠드 기둥 -->
-  <rect x="484" y="750" width="56" height="90" rx="8" fill="#B0BEC5"/>
+  <!-- Layer 1: Background — vibrant blue -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg02)"/>
 
-  <!-- 모니터 외곽 베젤 -->
-  <rect x="140" y="200" width="744" height="560" rx="32" fill="#CFD8DC"/>
-  <rect x="140" y="200" width="744" height="560" rx="32" fill="none" stroke="#90A4AE" stroke-width="12"/>
+  <!-- Layer 2: Person avatar silhouette (white) -->
+  <!-- Head -->
+  <circle cx="438" cy="298" r="158" fill="white" clip-path="url(#cp02)"/>
+  <!-- Neck connector -->
+  <rect x="378" y="420" width="120" height="110" fill="white" clip-path="url(#cp02)"/>
+  <!-- Body / shoulders -->
+  <path d="M130,800 Q130,495 438,495 Q746,495 746,800 Z" fill="white" clip-path="url(#cp02)"/>
 
-  <!-- 모니터 화면 -->
-  <rect x="172" y="230" width="680" height="500" rx="18" fill="#1A2744"/>
-
-  <!-- 화면 내용: 코드라인들 (어두운 화면) -->
-  <rect x="210" y="280" width="220" height="16" rx="5" fill="#42A5F5" opacity="0.7"/>
-  <rect x="210" y="310" width="180" height="14" rx="5" fill="#81C784" opacity="0.5"/>
-  <rect x="210" y="336" width="260" height="14" rx="5" fill="#81C784" opacity="0.4"/>
-  <rect x="210" y="362" width="140" height="14" rx="5" fill="#42A5F5" opacity="0.35"/>
-  <rect x="210" y="390" width="200" height="14" rx="5" fill="#EF9A9A" opacity="0.45"/>
-  <rect x="210" y="418" width="170" height="14" rx="5" fill="#81C784" opacity="0.3"/>
-
-  <!-- 화면 오른쪽: 커서 깜빡임 -->
-  <rect x="210" y="455" width="20" height="26" rx="3" fill="#81C784" opacity="0.9"/>
-
-  <!-- 상태 표시줄 (하단) -->
-  <rect x="172" y="688" width="680" height="42" rx="0 0 18 18" fill="#0D1B35"/>
-  <!-- 상태줄 초록 활성 뱃지 -->
-  <circle cx="220" cy="709" r="12" fill="#00E676"/>
-  <rect x="242" y="701" width="80" height="16" rx="5" fill="#2E7D32" opacity="0.8"/>
-
-  <!-- Layer 3: BRB 포스트잇 (화면 우상단에 붙은) -->
-  <!-- 포스트잇 그림자 -->
-  <rect x="582" y="238" width="210" height="160" rx="6" fill="#C8A800" opacity="0.25"/>
-  <!-- 포스트잇 본체 -->
-  <rect x="578" y="234" width="210" height="160" rx="6" fill="#FFD600"/>
-  <!-- 포스트잇 접힌 모서리 -->
-  <polygon points="788,234 788,270 752,234" fill="#C8A800" opacity="0.4"/>
-  <!-- 포스트잇 라인들 (글씨 대신) -->
-  <rect x="604" y="274" width="120" height="14" rx="5" fill="#A37A00" opacity="0.7"/>
-  <rect x="604" y="302" width="90" height="12" rx="5" fill="#A37A00" opacity="0.5"/>
-  <rect x="604" y="326" width="110" height="12" rx="5" fill="#A37A00" opacity="0.4"/>
-  <rect x="604" y="350" width="70" height="12" rx="5" fill="#A37A00" opacity="0.35"/>
-
-  <!-- 활성 초록 배지 (화면 밖 우하단, "활성" 강조) -->
-  <circle cx="790" cy="720" r="52" fill="#00C853"/>
-  <circle cx="790" cy="720" r="52" fill="none" stroke="#FFFFFF" stroke-width="10"/>
-  <!-- 체크 표시 (초록 배지 안에) -->
-  <polyline points="766,720 784,740 818,700" fill="none" stroke="white" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Layer 3: Large green ACTIVE badge (bottom-right of avatar) -->
+  <!-- White border ring -->
+  <circle cx="716" cy="656" r="178" fill="white"/>
+  <!-- Green fill -->
+  <circle cx="716" cy="656" r="150" fill="#43D97B"/>
+  <!-- White checkmark inside badge -->
+  <polyline points="644,656 700,712 796,604" fill="none"
+            stroke="white" stroke-width="50" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>

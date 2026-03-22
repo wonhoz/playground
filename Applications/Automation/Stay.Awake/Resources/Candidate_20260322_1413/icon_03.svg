@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <!-- 짙은 초록 배경 -->
+    <linearGradient id="bg03" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#052E16"/>
+      <stop offset="100%" stop-color="#064E3B"/>
+    </linearGradient>
+    <!-- Active 상태 도트 그라데이션 -->
+    <radialGradient id="dot03" cx="38%" cy="32%" r="58%">
+      <stop offset="0%" stop-color="#4ADE80"/>
+      <stop offset="50%" stop-color="#22C55E"/>
+      <stop offset="100%" stop-color="#16A34A"/>
+    </radialGradient>
+    <!-- 자물쇠 그라데이션 -->
+    <linearGradient id="lock03" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#E2E8F0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Layer 1: 짙은 초록 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg03)"/>
+
+  <!-- 배경 링 장식 (미세한 원형 패턴) -->
+  <circle cx="512" cy="430" r="420" fill="none" stroke="#16A34A" stroke-width="8" opacity="0.2"/>
+  <circle cx="512" cy="430" r="340" fill="none" stroke="#16A34A" stroke-width="10" opacity="0.15"/>
+
+  <!-- Layer 2: 큰 초록 상태 원 — Online Active 도트 -->
+  <circle cx="512" cy="430" r="300" fill="url(#dot03)"/>
+  <!-- 내부 하이라이트 (빛 반사) -->
+  <ellipse cx="430" cy="350" rx="110" ry="90" fill="#86EFAC" opacity="0.28"/>
+
+  <!-- Layer 3: 흰색 자물쇠 아이콘 — 상태를 잠금 (고정) -->
+  <!-- 자물쇠 몸통 (둥근 사각형) -->
+  <rect x="382" y="430" width="260" height="220" rx="36" fill="url(#lock03)"/>
+  <!-- 자물쇠 고리 (반원) -->
+  <path d="M 414 432 L 414 340 Q 414 258 512 258 Q 610 258 610 340 L 610 432"
+        fill="none" stroke="white" stroke-width="58" stroke-linecap="round"/>
+  <!-- 자물쇠 열쇠 구멍 -->
+  <circle cx="512" cy="526" r="34" fill="#16A34A"/>
+  <rect x="494" y="526" width="36" height="54" rx="10" fill="#16A34A"/>
+
+  <!-- 하단 "LOCKED" 텍스트 라벨 -->
+  <rect x="300" y="790" width="424" height="76" rx="38" fill="#16A34A" opacity="0.85"/>
+  <text x="512" y="843" text-anchor="middle"
+        font-family="'Segoe UI',Arial,sans-serif"
+        font-size="46" font-weight="700" fill="white" letter-spacing="4">ACTIVE</text>
+</svg>

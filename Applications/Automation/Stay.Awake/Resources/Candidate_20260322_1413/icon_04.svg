@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <!-- 밤하늘 배경 -->
+    <linearGradient id="bg04" x1="0" y1="0" x2="0.4" y2="1">
+      <stop offset="0%" stop-color="#0F0820"/>
+      <stop offset="60%" stop-color="#1B1040"/>
+      <stop offset="100%" stop-color="#0D1B2A"/>
+    </linearGradient>
+    <!-- 금색 방패 그라데이션 -->
+    <linearGradient id="shield04" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FCD34D"/>
+      <stop offset="50%" stop-color="#F59E0B"/>
+      <stop offset="100%" stop-color="#B45309"/>
+    </linearGradient>
+    <!-- 방패 내부 -->
+    <linearGradient id="shieldInner04" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FDE68A"/>
+      <stop offset="100%" stop-color="#D97706"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Layer 1: 밤하늘 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg04)"/>
+
+  <!-- 별 장식 -->
+  <circle cx="180" cy="200" r="7" fill="white" opacity="0.7"/>
+  <circle cx="840" cy="160" r="5" fill="white" opacity="0.6"/>
+  <circle cx="890" cy="340" r="8" fill="white" opacity="0.5"/>
+  <circle cx="130" cy="680" r="6" fill="white" opacity="0.5"/>
+  <circle cx="780" cy="860" r="5" fill="white" opacity="0.4"/>
+  <circle cx="920" cy="760" r="4" fill="white" opacity="0.4"/>
+  <circle cx="290" cy="860" r="5" fill="white" opacity="0.3"/>
+
+  <!-- Layer 2: 노란 초승달 (Slack/Discord 자리비움 아이콘 — 적) -->
+  <!-- 달 큰 원 -->
+  <circle cx="560" cy="370" r="240" fill="#FAA61A"/>
+  <!-- 배경색으로 초승달 모양 -->
+  <circle cx="640" cy="296" r="196" fill="#0F0820"/>
+
+  <!-- 달 위 ZZZ (잠든 상태 암시) -->
+  <text x="784" y="230" font-family="'Segoe UI',Arial,sans-serif"
+        font-size="96" font-weight="900" fill="#FAA61A" opacity="0.55">z</text>
+  <text x="840" y="148" font-family="'Segoe UI',Arial,sans-serif"
+        font-size="72" font-weight="900" fill="#FAA61A" opacity="0.35">z</text>
+
+  <!-- Layer 3: 금색 방패 — 달(자리비움)을 가로막음 -->
+  <path d="M 512 520 L 748 600 L 748 770 Q 748 880 512 940 Q 276 880 276 770 L 276 600 Z"
+        fill="url(#shield04)"/>
+  <!-- 방패 내부 영역 -->
+  <path d="M 512 558 L 710 626 L 710 770 Q 710 862 512 912 Q 314 862 314 770 L 314 626 Z"
+        fill="url(#shieldInner04)" opacity="0.6"/>
+  <!-- 방패 위 체크 표시 (보호 완료) -->
+  <polyline points="382,758 478,848 648,696"
+            fill="none" stroke="white" stroke-width="60" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

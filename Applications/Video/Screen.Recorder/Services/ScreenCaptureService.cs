@@ -75,14 +75,18 @@ public sealed class ScreenCaptureService : IDisposable
 
     private void CaptureLoop(CancellationToken ct)
     {
-        var interval = TimeSpan.FromMilliseconds(1000.0 / _fps);
+        var intervalMs = 1000.0 / _fps;
         var frameIndex = 0;
+        var sw = System.Diagnostics.Stopwatch.StartNew();
+        var nextFrameMs = 0.0;
 
         while (!ct.IsCancellationRequested)
         {
             if (_paused)
             {
                 Thread.Sleep(50);
+                // 일시정지 동안 경과 시간을 다음 프레임 기준에서 제외
+                nextFrameMs = sw.Elapsed.TotalMilliseconds + intervalMs;
                 continue;
             }
 
@@ -91,8 +95,10 @@ public sealed class ScreenCaptureService : IDisposable
             _framePaths.Add(framePath);
             frameIndex++;
 
-            // 프레임 간격 유지
-            Thread.Sleep(interval);
+            nextFrameMs += intervalMs;
+            var waitMs = nextFrameMs - sw.Elapsed.TotalMilliseconds;
+            if (waitMs > 1)
+                Thread.Sleep((int)waitMs);
         }
     }
 

@@ -227,7 +227,8 @@
                 <TextBlock Grid.Row="0" Grid.Column="0" Text="출력 형식"
                            FontSize="13" Foreground="{StaticResource TextSec}" VerticalAlignment="Center"/>
                 <ComboBox Grid.Row="0" Grid.Column="1" x:Name="FormatCombo"
-                          SelectedIndex="0" Margin="0,0,0,8">
+                          SelectedIndex="0" Margin="0,0,0,8"
+                          SelectionChanged="FormatCombo_SelectionChanged">
                     <ComboBoxItem Content="MP4 (동영상)"/>
                     <ComboBoxItem Content="GIF (이미지)"/>
                 </ComboBox>
@@ -236,7 +237,8 @@
                 <TextBlock Grid.Row="1" Grid.Column="0" Text="FPS"
                            FontSize="13" Foreground="{StaticResource TextSec}" VerticalAlignment="Center"/>
                 <ComboBox Grid.Row="1" Grid.Column="1" x:Name="FpsCombo"
-                          SelectedIndex="1" Margin="0,0,0,8">
+                          SelectedIndex="1" Margin="0,0,0,8"
+                          SelectionChanged="FpsCombo_SelectionChanged">
                     <ComboBoxItem Content="10 fps"/>
                     <ComboBoxItem Content="15 fps"/>
                     <ComboBoxItem Content="24 fps"/>

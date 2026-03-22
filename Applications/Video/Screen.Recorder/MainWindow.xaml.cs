@@ -16,7 +16,7 @@ public partial class MainWindow : Window
     [DllImport("dwmapi.dll", PreserveSig = true)]
     private static extern int DwmSetWindowAttribute(nint hwnd, int attr, ref int value, int size);
 
-    private readonly RecordingSettings _settings = RecordingSettings.CreateDefault();
+    private readonly RecordingSettings _settings = RecordingSettings.Load();
     private ScreenCaptureService? _captureService;
     private readonly DispatcherTimer _timer;
     private readonly Stopwatch _stopwatch = new();
@@ -37,6 +37,28 @@ public partial class MainWindow : Window
 
         OutputFolderText.Text = _settings.OutputFolder;
 
+        // 저장된 FPS 복원
+        FpsCombo.SelectedIndex = _settings.FrameRate switch
+        {
+            10 => 0,
+            15 => 1,
+            24 => 2,
+            30 => 3,
+            _ => 1
+        };
+
+        // 저장된 포맷 복원
+        FormatCombo.SelectedIndex = _settings.OutputFormat == "gif" ? 1 : 0;
+
+        // 저장된 영역 복원
+        if (_settings.LastRegionWidth > 0 && _settings.LastRegionHeight > 0)
+        {
+            _selectedRegion = new Int32Rect(
+                _settings.LastRegionX, _settings.LastRegionY,
+                _settings.LastRegionWidth, _settings.LastRegionHeight);
+            _regionSelected = true;
+        }
+
         _timer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(100) };
         _timer.Tick += (_, _) =>
         {
@@ -50,6 +72,13 @@ public partial class MainWindow : Window
         {
             int value = 1;
             DwmSetWindowAttribute(source.Handle, 20, ref value, sizeof(int));
+        }
+
+        // 복원된 영역 정보 표시
+        if (_regionSelected)
+        {
+            RegionInfoText.Text = $"X:{_selectedRegion.X}  Y:{_selectedRegion.Y}  |  {_selectedRegion.Width} × {_selectedRegion.Height}";
+            RecordBtn.IsEnabled = true;
         }
 
         CheckFfmpeg();
@@ -204,8 +233,34 @@ public partial class MainWindow : Window
                 _regionSelected = true;
                 RegionInfoText.Text = $"X:{_selectedRegion.X}  Y:{_selectedRegion.Y}  |  {_selectedRegion.Width} × {_selectedRegion.Height}";
                 RecordBtn.IsEnabled = true;
+
+                _settings.LastRegionX = _selectedRegion.X;
+                _settings.LastRegionY = _selectedRegion.Y;
+                _settings.LastRegionWidth = _selectedRegion.Width;
+                _settings.LastRegionHeight = _selectedRegion.Height;
+                _settings.Save();
             }
         });
+    }
+
+    private void FormatCombo_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+    {
+        if (!IsLoaded) return;
+
+        if (IsGifFormat())
+        {
+            // GIF는 FFmpeg 없이도 가능 → 경고 패널 숨김
+            FfmpegPanel.Visibility = Visibility.Collapsed;
+        }
+        else
+        {
+            // MP4로 전환 시 FFmpeg 상태 다시 반영
+            if (!_ffmpegAvailable)
+                FfmpegPanel.Visibility = Visibility.Visible;
+        }
+
+        _settings.OutputFormat = IsGifFormat() ? "gif" : "mp4";
+        _settings.Save();
     }
 
     private void BrowseFolder_Click(object sender, RoutedEventArgs e)
@@ -220,7 +275,15 @@ public partial class MainWindow : Window
         {
             _settings.OutputFolder = dialog.FolderName;
             OutputFolderText.Text = dialog.FolderName;
+            _settings.Save();
         }
+    }
+
+    private void FpsCombo_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+    {
+        if (!IsLoaded) return;
+        _settings.FrameRate = GetSelectedFps();
+        _settings.Save();
     }
 
     private int GetSelectedFps()
@@ -369,6 +432,23 @@ public partial class MainWindow : Window
                 _stopwatch.Stop();
                 break;
         }
+    }
+
+    protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
+    {
+        if (_state is RecordState.Recording or RecordState.Paused)
+        {
+            var result = System.Windows.MessageBox.Show(
+                "녹화가 진행 중입니다. 창을 닫으면 현재 녹화 내용이 저장되지 않습니다.\n\n정말 종료하시겠습니까?",
+                "Screen.Recorder", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+            if (result == MessageBoxResult.No)
+            {
+                e.Cancel = true;
+                return;
+            }
+        }
+        base.OnClosing(e);
     }
 
     protected override void OnClosed(EventArgs e)

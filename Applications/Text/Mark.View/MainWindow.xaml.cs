@@ -28,6 +28,7 @@ public partial class MainWindow : Window
     private DispatcherTimer? _previewTimer;
     private string _currentTheme = "dark";
     private double _pendingScrollY = 0;
+    private bool _webViewReady = false;
 
     public MainWindow()
     {
@@ -101,6 +102,7 @@ public partial class MainWindow : Window
         Viewer.CoreWebView2.Settings.IsStatusBarEnabled = false;
         Viewer.CoreWebView2.Settings.AreDefaultContextMenusEnabled = false;
         Viewer.CoreWebView2.NavigationCompleted += OnNavigationCompleted;
+        _webViewReady = true;
         HideLoading();
     }
 
@@ -151,7 +153,7 @@ public partial class MainWindow : Window
                 })()
             ");
             // JSON 파싱
-            Dispatcher.Invoke(() => PopulateToc(json));
+            PopulateToc(json);
         }
         catch { }
     }
@@ -392,6 +394,7 @@ public partial class MainWindow : Window
 
     private async void RenderPreview(bool saveScroll = false)
     {
+        if (!_webViewReady) return;
         if (_activeIndex < 0 || _activeIndex >= _docs.Count) return;
         if (saveScroll)
             _pendingScrollY = await GetScrollYAsync();
@@ -551,7 +554,8 @@ public partial class MainWindow : Window
         var doc = _docs[_activeIndex];
         if (!doc.IsNew && File.Exists(doc.FilePath))
         {
-            doc.Content = File.ReadAllText(doc.FilePath);
+            await ShowLoadingAsync("파일 다시 읽기 중...");
+            doc.Content = await Task.Run(() => File.ReadAllText(doc.FilePath));
             doc.IsModified = false;
             LoadDocumentToUI(doc);
             UpdateTabTitle(_activeIndex);
@@ -559,7 +563,7 @@ public partial class MainWindow : Window
         else RenderPreview();
     }
 
-    private void BtnExportHtml_Click(object sender, RoutedEventArgs e)
+    private async void BtnExportHtml_Click(object sender, RoutedEventArgs e)
     {
         if (_activeIndex < 0) return;
         var doc = _docs[_activeIndex];
@@ -572,8 +576,15 @@ public partial class MainWindow : Window
         if (doc.Directory != null) dlg.InitialDirectory = doc.Directory;
         if (dlg.ShowDialog() != true) return;
 
-        var html = _renderer.RenderToHtml(doc.Content, doc.FilePath);
-        File.WriteAllText(dlg.FileName, html, new UTF8Encoding(true));
+        await ShowLoadingAsync("HTML 내보내기 중...");
+        var content = doc.Content;
+        var filePath = doc.IsNew ? null : doc.FilePath;
+        await Task.Run(() =>
+        {
+            var html = _renderer.RenderToHtml(content, filePath);
+            File.WriteAllText(dlg.FileName, html, new UTF8Encoding(true));
+        });
+        HideLoading();
         MessageBox.Show($"HTML 내보내기 완료:\n{dlg.FileName}", "완료",
             MessageBoxButton.OK, MessageBoxImage.Information);
     }

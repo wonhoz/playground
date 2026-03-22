@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 배경 — 다크 슬레이트 -->
+  <defs>
+    <linearGradient id="bg02" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#141E2E"/>
+      <stop offset="100%" stop-color="#0D1520"/>
+    </linearGradient>
+    <linearGradient id="cyan02" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00D4FF"/>
+      <stop offset="100%" stop-color="#00A8CC"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg02)"/>
+
+  <!-- Layer 2: 왼쪽 — raw markdown (투박한 기호들) -->
+  <!-- ## raw 헤더 -->
+  <text x="80" y="300" font-family="'Cascadia Code','Consolas',monospace" font-size="52" font-weight="bold"
+        fill="#556070">##</text>
+  <text x="200" y="300" font-family="'Cascadia Code','Consolas',monospace" font-size="52"
+        fill="#667788"> Title</text>
+  <!-- **bold** raw -->
+  <text x="80" y="370" font-family="'Cascadia Code','Consolas',monospace" font-size="44"
+        fill="#445566">**bold**</text>
+  <!-- - list item raw -->
+  <text x="80" y="435" font-family="'Cascadia Code','Consolas',monospace" font-size="44"
+        fill="#445566">- item one</text>
+  <text x="80" y="490" font-family="'Cascadia Code','Consolas',monospace" font-size="44"
+        fill="#445566">- item two</text>
+  <!-- > blockquote raw -->
+  <text x="80" y="548" font-family="'Cascadia Code','Consolas',monospace" font-size="44"
+        fill="#445566">&gt; note</text>
+  <!-- `code` raw -->
+  <text x="80" y="606" font-family="'Cascadia Code','Consolas',monospace" font-size="44"
+        fill="#445566">`code`</text>
+
+  <!-- 대각선 변환 화살표 (시안) -->
+  <path d="M470 512 L580 512" stroke="url(#cyan02)" stroke-width="32" stroke-linecap="round"/>
+  <path d="M555 472 L600 512 L555 552" stroke="url(#cyan02)" stroke-width="32"
+        stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+
+  <!-- Layer 3: 오른쪽 — 렌더링된 문서 (깔끔한 타이포) -->
+  <!-- H2 제목 -->
+  <text x="625" y="300" font-family="'Segoe UI',sans-serif" font-size="60" font-weight="bold"
+        fill="#E8F4FF">Title</text>
+  <line x1="625" y1="315" x2="940" y2="315" stroke="#00D4FF" stroke-width="3" opacity="0.5"/>
+  <!-- Bold text -->
+  <text x="625" y="375" font-family="'Segoe UI',sans-serif" font-size="44" font-weight="bold"
+        fill="#DDEEFF">bold</text>
+  <!-- List items with dot bullets -->
+  <circle cx="635" cy="428" r="7" fill="#00D4FF"/>
+  <text x="655" y="440" font-family="'Segoe UI',sans-serif" font-size="40" fill="#B0C8E0">item one</text>
+  <circle cx="635" cy="478" r="7" fill="#00D4FF"/>
+  <text x="655" y="490" font-family="'Segoe UI',sans-serif" font-size="40" fill="#B0C8E0">item two</text>
+  <!-- Blockquote bar -->
+  <rect x="625" y="510" width="6" height="50" rx="3" fill="#00D4FF" opacity="0.8"/>
+  <text x="645" y="540" font-family="'Segoe UI',sans-serif" font-size="40" fill="#99B8CC"
+        font-style="italic">note</text>
+  <!-- Code block -->
+  <rect x="625" y="575" width="310" height="48" rx="8" fill="#1E3040" opacity="0.9"/>
+  <text x="645" y="606" font-family="'Cascadia Code','Consolas',monospace" font-size="38"
+        fill="#00D4FF">code</text>
+</svg>

@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- 책 속에 Md 로고 + 타이포그래피 조형 — 따뜻한 레드-오렌지 그라데이션 + 흰색 -->
+  <!-- Layer 1: 배경 -->
+  <defs>
+    <linearGradient id="bg08" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#D42B1E"/>
+      <stop offset="50%" stop-color="#E84C15"/>
+      <stop offset="100%" stop-color="#F57022"/>
+    </linearGradient>
+    <linearGradient id="page08" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFFEF8"/>
+      <stop offset="100%" stop-color="#FFF0E0"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg08)"/>
+
+  <!-- Layer 2: 열린 책 실루엣 -->
+  <!-- 왼쪽 페이지 -->
+  <path d="M150 280 Q152 720 180 740 L490 740 Q500 740 500 730 L500 280 Q490 270 450 270 Q300 260 180 270 Z"
+        fill="url(#page08)" opacity="0.95"/>
+  <!-- 왼쪽 페이지 그림자 (중앙 바인딩) -->
+  <path d="M490 280 L490 740" stroke="#DDD0B8" stroke-width="3" opacity="0.5"/>
+
+  <!-- 오른쪽 페이지 -->
+  <path d="M870 280 Q848 720 820 740 L534 740 Q524 740 524 730 L524 280 Q534 270 574 270 Q724 260 844 270 Z"
+        fill="url(#page08)" opacity="0.95"/>
+  <!-- 중앙 바인딩 -->
+  <path d="M490 270 Q512 260 534 270 L534 740 Q512 750 490 740 Z"
+        fill="#C8B890" opacity="0.4"/>
+
+  <!-- Layer 3: 왼쪽 페이지 내용 — raw markdown -->
+  <text x="188" y="348" font-family="'Cascadia Code',monospace" font-size="32" fill="#AA8877">## Title</text>
+  <text x="188" y="392" font-family="'Cascadia Code',monospace" font-size="28" fill="#BB9988">**bold**</text>
+  <text x="188" y="432" font-family="'Cascadia Code',monospace" font-size="28" fill="#CC9980">- item</text>
+  <text x="188" y="470" font-family="'Cascadia Code',monospace" font-size="28" fill="#AA8877">&gt; note</text>
+  <text x="188" y="508" font-family="'Cascadia Code',monospace" font-size="28" fill="#BB9988">`code`</text>
+  <rect x="188" y="530" width="270" height="9" rx="4" fill="#DDC8B0" opacity="0.6"/>
+  <rect x="188" y="554" width="230" height="9" rx="4" fill="#DDC8B0" opacity="0.5"/>
+  <rect x="188" y="578" width="250" height="9" rx="4" fill="#DDC8B0" opacity="0.4"/>
+
+  <!-- 오른쪽 페이지 내용 — 렌더링된 결과 -->
+  <!-- 크고 굵은 "Md" 중앙 -->
+  <text x="706" y="540" font-family="'Segoe UI',sans-serif" font-size="220" font-weight="bold"
+        fill="#E84C15" opacity="0.12" text-anchor="middle">Md</text>
+  <!-- 실제 표시 텍스트 -->
+  <text x="548" y="350" font-family="'Segoe UI',sans-serif" font-size="44" font-weight="bold"
+        fill="#D42B1E">Title</text>
+  <line x1="548" y1="364" x2="842" y2="364" stroke="#E84C15" stroke-width="2.5" opacity="0.4"/>
+
+  <text x="548" y="408" font-family="'Segoe UI',sans-serif" font-size="34" font-weight="bold"
+        fill="#3A2A20">bold</text>
+  <rect x="548" y="428" width="280" height="10" rx="5" fill="#8C6858" opacity="0.4"/>
+  <rect x="548" y="450" width="240" height="10" rx="5" fill="#8C6858" opacity="0.35"/>
+
+  <!-- 리스트 -->
+  <circle cx="558" cy="486" r="5" fill="#E84C15"/>
+  <rect x="574" y="479" width="230" height="10" rx="5" fill="#8C7060" opacity="0.5"/>
+  <circle cx="558" cy="512" r="5" fill="#E84C15"/>
+  <rect x="574" y="505" width="195" height="10" rx="5" fill="#8C7060" opacity="0.4"/>
+
+  <!-- blockquote -->
+  <rect x="548" y="538" width="4" height="46" rx="2" fill="#E84C15" opacity="0.6"/>
+  <rect x="562" y="543" width="260" height="9" rx="4" fill="#AA8870" opacity="0.5"/>
+  <rect x="562" y="564" width="210" height="9" rx="4" fill="#AA8870" opacity="0.4"/>
+
+  <!-- code -->
+  <rect x="548" y="598" width="290" height="42" rx="6" fill="#F5EDE0"/>
+  <text x="564" y="624" font-family="'Cascadia Code',monospace" font-size="28"
+        fill="#D42B1E">render()</text>
+
+  <!-- 책 하단 스파인 그림자 -->
+  <path d="M150 740 Q512 760 870 740 L870 768 Q512 790 150 768 Z" fill="#00000015"/>
+</svg>

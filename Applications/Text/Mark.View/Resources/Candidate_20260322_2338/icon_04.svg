@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 배경 — 딥 네이비 -->
+  <defs>
+    <linearGradient id="bg04" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0B1A3E"/>
+      <stop offset="100%" stop-color="#060E24"/>
+    </linearGradient>
+    <linearGradient id="orange04" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF7E2F"/>
+      <stop offset="100%" stop-color="#FF4A00"/>
+    </linearGradient>
+    <linearGradient id="text04" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#C0D4FF"/>
+    </linearGradient>
+    <radialGradient id="glow04" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FF7E2F" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#FF7E2F" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg04)"/>
+
+  <!-- 백그라운드 글로우 -->
+  <circle cx="512" cy="480" r="350" fill="url(#glow04)"/>
+
+  <!-- Layer 2: 큰 '#' 기호 배경 (희미하게) -->
+  <text x="100" y="680" font-family="'Cascadia Code','Consolas',monospace" font-size="640" font-weight="bold"
+        fill="#0E2060" opacity="1">#</text>
+
+  <!-- Layer 3: 중앙 타이포그래피 결정체 -->
+  <!-- 상단 — raw '#' 아이덴티티 잔재 (작게, 오렌지) -->
+  <text x="512" y="228" font-family="'Cascadia Code','Consolas',monospace" font-size="60" font-weight="bold"
+        fill="url(#orange04)" text-anchor="middle" opacity="0.9">#</text>
+
+  <!-- 메인 변환 결과: 큰 "H1" 타이포 -->
+  <text x="512" y="520" font-family="'Segoe UI',sans-serif" font-size="260" font-weight="bold"
+        fill="url(#text04)" text-anchor="middle" letter-spacing="-8">H1</text>
+
+  <!-- H1 아래 border (오렌지 강조선) -->
+  <rect x="200" y="545" width="624" height="8" rx="4" fill="url(#orange04)" opacity="0.8"/>
+
+  <!-- 하단 — 렌더링된 단락 라인 암시 -->
+  <rect x="240" y="582" width="480" height="12" rx="6" fill="#3A5BAA" opacity="0.6"/>
+  <rect x="240" y="608" width="360" height="12" rx="6" fill="#3A5BAA" opacity="0.4"/>
+  <rect x="240" y="634" width="420" height="12" rx="6" fill="#3A5BAA" opacity="0.4"/>
+
+  <!-- 작은 포인트 별빛 (결정화 암시) -->
+  <circle cx="192" cy="280" r="5" fill="#FF7E2F" opacity="0.7"/>
+  <circle cx="832" cy="340" r="4" fill="#FF7E2F" opacity="0.5"/>
+  <circle cx="168" cy="620" r="3" fill="#5588FF" opacity="0.6"/>
+  <circle cx="856" cy="680" r="5" fill="#5588FF" opacity="0.4"/>
+  <circle cx="290" cy="188" r="4" fill="#FF7E2F" opacity="0.4"/>
+</svg>

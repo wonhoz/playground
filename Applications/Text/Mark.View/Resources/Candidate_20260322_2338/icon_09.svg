@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- `**Bold**` raw → Bold 렌더링 전후 화살표 — 라이트 민트 배경 + 남색 -->
+  <!-- Layer 1: 배경 -->
+  <defs>
+    <linearGradient id="bg09" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E8FBF4"/>
+      <stop offset="100%" stop-color="#D4F5E8"/>
+    </linearGradient>
+    <linearGradient id="indigo09" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3730A3"/>
+      <stop offset="100%" stop-color="#1E1B8A"/>
+    </linearGradient>
+    <linearGradient id="arrow09" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#10B981"/>
+      <stop offset="100%" stop-color="#059669"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg09)"/>
+
+  <!-- Layer 2: 위쪽 — raw markdown 텍스트들 (흐릿하게) -->
+  <!-- raw 텍스트 박스 (왼쪽 위) -->
+  <rect x="100" y="168" width="380" height="290" rx="16" fill="#FFFFFF" opacity="0.7"/>
+  <rect x="100" y="168" width="380" height="290" rx="16" fill="none" stroke="#C4D8CC" stroke-width="2"/>
+  <!-- raw text 내용 -->
+  <text x="124" y="236" font-family="'Cascadia Code','Consolas',monospace" font-size="38" fill="#668877">## Title</text>
+  <text x="124" y="288" font-family="'Cascadia Code','Consolas',monospace" font-size="38" fill="#5A7A6A">**Bold**</text>
+  <text x="124" y="336" font-family="'Cascadia Code','Consolas',monospace" font-size="38" fill="#668877">- item</text>
+  <text x="124" y="384" font-family="'Cascadia Code','Consolas',monospace" font-size="38" fill="#5A7A6A">`code`</text>
+  <text x="124" y="432" font-family="'Cascadia Code','Consolas',monospace" font-size="38" fill="#668877">*ital*</text>
+  <!-- 작은 레이블 -->
+  <text x="124" y="162" font-family="'Segoe UI',sans-serif" font-size="22" fill="#8BAAA0">raw .md</text>
+
+  <!-- 렌더링된 결과 박스 (오른쪽 위) -->
+  <rect x="544" y="168" width="380" height="290" rx="16" fill="#FFFFFF" opacity="0.95"/>
+  <rect x="544" y="168" width="380" height="290" rx="16" fill="none" stroke="#10B981" stroke-width="2.5"/>
+  <!-- 렌더링 내용 -->
+  <text x="568" y="236" font-family="'Segoe UI',sans-serif" font-size="44" font-weight="bold"
+        fill="url(#indigo09)">Title</text>
+  <line x1="568" y1="250" x2="896" y2="250" stroke="#10B981" stroke-width="2.5" opacity="0.4"/>
+  <text x="568" y="296" font-family="'Segoe UI',sans-serif" font-size="40" font-weight="bold"
+        fill="#1A1A3A">Bold</text>
+  <circle cx="580" cy="334" r="6" fill="#10B981"/>
+  <text x="600" y="346" font-family="'Segoe UI',sans-serif" font-size="36" fill="#2A3A4A">item</text>
+  <!-- code -->
+  <rect x="568" y="364" width="200" height="40" rx="6" fill="#EEF4F8"/>
+  <text x="582" y="390" font-family="'Cascadia Code',monospace" font-size="32" fill="#2244AA">code</text>
+  <text x="568" y="444" font-family="'Segoe UI',sans-serif" font-size="36" font-style="italic" fill="#445566">ital</text>
+  <!-- 작은 레이블 -->
+  <text x="568" y="162" font-family="'Segoe UI',sans-serif" font-size="22" fill="#10B981">rendered ✓</text>
+
+  <!-- Layer 3: 중앙 화살표 (변환) -->
+  <path d="M490 308 L544 308" stroke="url(#arrow09)" stroke-width="20" stroke-linecap="round"/>
+  <path d="M524 278 L554 308 L524 338" stroke="url(#arrow09)" stroke-width="20"
+        stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+
+  <!-- 하단 — 큰 변환 시각 요약 -->
+  <!-- raw `**` 기호 -->
+  <text x="120" y="670" font-family="'Cascadia Code',monospace" font-size="140" font-weight="bold"
+        fill="#9ABFB0" opacity="0.6">**</text>
+  <!-- 큰 화살표 -->
+  <path d="M380 640 L640 640" stroke="url(#arrow09)" stroke-width="30" stroke-linecap="round"/>
+  <path d="M605 595 L650 640 L605 685" stroke="url(#arrow09)" stroke-width="30"
+        stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <!-- 렌더링된 Bold -->
+  <text x="670" y="690" font-family="'Segoe UI',sans-serif" font-size="140" font-weight="bold"
+        fill="url(#indigo09)">B</text>
+
+  <!-- 하단 보조 변환 예시들 (작게) -->
+  <text x="120" y="820" font-family="'Cascadia Code',monospace" font-size="32" fill="#8BAAA0"># →</text>
+  <text x="210" y="820" font-family="'Segoe UI',sans-serif" font-size="32" font-weight="bold" fill="#3730A3"> H1</text>
+  <text x="350" y="820" font-family="'Cascadia Code',monospace" font-size="32" fill="#8BAAA0">*x* →</text>
+  <text x="470" y="820" font-family="'Segoe UI',sans-serif" font-size="32" font-style="italic" fill="#3730A3"> x</text>
+  <text x="560" y="820" font-family="'Cascadia Code',monospace" font-size="32" fill="#8BAAA0">` ` →</text>
+  <rect x="660" y="795" width="100" height="34" rx="5" fill="#EEF4F8"/>
+  <text x="668" y="820" font-family="'Cascadia Code',monospace" font-size="28" fill="#2244AA">code</text>
+</svg>

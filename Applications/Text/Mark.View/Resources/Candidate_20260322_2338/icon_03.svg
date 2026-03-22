@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 배경 — 밝은 크림/라이트 -->
+  <defs>
+    <linearGradient id="bg03" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F5F2EB"/>
+      <stop offset="100%" stop-color="#EDE8DD"/>
+    </linearGradient>
+    <filter id="shadow03" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="4" dy="8" stdDeviation="12" flood-color="#00000022"/>
+    </filter>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg03)"/>
+
+  <!-- Layer 2: 문서 페이지 카드 (약간 기울어진) -->
+  <rect x="160" y="140" width="680" height="740" rx="16" fill="#FFFFFF" filter="url(#shadow03)"/>
+
+  <!-- Layer 3: 문서 내용 — 렌더링된 Markdown 미리보기 -->
+  <!-- H1 제목 영역 -->
+  <text x="220" y="240" font-family="'Segoe UI',sans-serif" font-size="68" font-weight="bold"
+        fill="#1A2F5A">Document</text>
+  <line x1="220" y1="258" x2="800" y2="258" stroke="#3B6FCC" stroke-width="4"/>
+
+  <!-- H2 섹션 -->
+  <text x="220" y="318" font-family="'Segoe UI',sans-serif" font-size="42" font-weight="600"
+        fill="#2A4A8A">Overview</text>
+  <line x1="220" y1="330" x2="680" y2="330" stroke="#AABBDD" stroke-width="2"/>
+
+  <!-- 본문 텍스트 라인들 -->
+  <rect x="220" y="352" width="560" height="14" rx="7" fill="#6678AA" opacity="0.5"/>
+  <rect x="220" y="378" width="480" height="14" rx="7" fill="#6678AA" opacity="0.4"/>
+  <rect x="220" y="404" width="520" height="14" rx="7" fill="#6678AA" opacity="0.4"/>
+
+  <!-- 볼드 텍스트 강조 -->
+  <rect x="220" y="440" width="200" height="16" rx="8" fill="#3B6FCC" opacity="0.7"/>
+
+  <!-- 리스트 아이템 (bullet points) -->
+  <circle cx="232" cy="486" r="7" fill="#3B6FCC"/>
+  <rect x="252" y="480" width="320" height="13" rx="6" fill="#445588" opacity="0.5"/>
+  <circle cx="232" cy="516" r="7" fill="#3B6FCC"/>
+  <rect x="252" y="510" width="280" height="13" rx="6" fill="#445588" opacity="0.45"/>
+  <circle cx="232" cy="546" r="7" fill="#3B6FCC"/>
+  <rect x="252" y="540" width="360" height="13" rx="6" fill="#445588" opacity="0.45"/>
+
+  <!-- 코드 블록 -->
+  <rect x="220" y="576" width="560" height="72" rx="8" fill="#E8EEF8"/>
+  <rect x="220" y="576" width="4" height="72" rx="2" fill="#3B6FCC"/>
+  <text x="240" y="608" font-family="'Cascadia Code','Consolas',monospace" font-size="30"
+        fill="#2244AA">const md = markView.render()</text>
+  <text x="240" y="638" font-family="'Cascadia Code','Consolas',monospace" font-size="26"
+        fill="#6680BB">// HTML output</text>
+
+  <!-- blockquote -->
+  <rect x="220" y="670" width="4" height="64" rx="2" fill="#88AADD"/>
+  <rect x="232" y="675" width="490" height="12" rx="6" fill="#AABBDD" opacity="0.7"/>
+  <rect x="232" y="699" width="380" height="12" rx="6" fill="#AABBDD" opacity="0.5"/>
+
+  <!-- "MD" 작은 배지 (우상단) -->
+  <rect x="726" y="160" width="96" height="44" rx="8" fill="#3B6FCC"/>
+  <text x="774" y="190" font-family="'Segoe UI',sans-serif" font-size="26" font-weight="bold"
+        fill="white" text-anchor="middle">.md</text>
+</svg>

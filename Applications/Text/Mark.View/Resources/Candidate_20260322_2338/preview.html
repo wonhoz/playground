@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mark.View — 아이콘 후보 (2026-03-22)</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #0E1B14;
+    font-family: 'Segoe UI', 'Malgun Gothic', sans-serif;
+    color: #D0E8D8;
+    min-height: 100vh;
+    padding: 40px 32px 80px;
+  }
+
+  header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+  header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #A0F0C0;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+  header .meta {
+    font-size: 13px;
+    color: #5A8868;
+  }
+  header .tag {
+    display: inline-block;
+    background: #1A3A28;
+    border: 1px solid #2A5A3A;
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 12px;
+    color: #6ABB88;
+    margin: 4px 4px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 28px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .card {
+    background: #122018;
+    border: 1px solid #1E3828;
+    border-radius: 20px;
+    padding: 28px 24px 24px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    cursor: default;
+  }
+  .card:hover {
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 16px 48px #00000066;
+    border-color: #3A7A52;
+  }
+
+  .icon-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  .icon-wrap img {
+    width: 160px;
+    height: 160px;
+    border-radius: 36px;
+    box-shadow: 0 8px 28px #00000055;
+    transition: width 0.2s, height 0.2s, border-radius 0.2s;
+  }
+  .card:hover .icon-wrap img {
+    width: 200px;
+    height: 200px;
+    border-radius: 44px;
+  }
+
+  .label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #6ABB88;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+  }
+
+  .concept {
+    font-size: 14px;
+    color: #C0D8C8;
+    line-height: 1.6;
+    margin-bottom: 12px;
+  }
+
+  .meta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 10px;
+  }
+  .badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 500;
+  }
+  .badge.type-literal   { background: #1A3A50; color: #60AADD; border: 1px solid #2A5A7A; }
+  .badge.type-metaphor  { background: #2A1A40; color: #AA77FF; border: 1px solid #4A2A80; }
+  .badge.type-hybrid    { background: #1A3020; color: #55CC88; border: 1px solid #2A6040; }
+  .badge.pattern        { background: #1E2820; color: #88AA99; border: 1px solid #2A4030; }
+
+  .palette {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin-top: 8px;
+  }
+  .swatch {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 2px solid #2A4030;
+    flex-shrink: 0;
+  }
+  .palette-label {
+    font-size: 11px;
+    color: #5A8868;
+  }
+
+  .filename {
+    font-family: 'Cascadia Code', 'Consolas', monospace;
+    font-size: 11px;
+    color: #3A6848;
+    margin-top: 12px;
+  }
+
+  hr.divider {
+    border: none;
+    border-top: 1px solid #1A3020;
+    margin: 32px 0;
+  }
+
+  footer {
+    text-align: center;
+    margin-top: 64px;
+    font-size: 12px;
+    color: #2A5838;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Mark.View — 아이콘 후보</h1>
+  <div class="meta">생성일: 2026-03-22 &nbsp;|&nbsp; 총 10개</div>
+  <div style="margin-top:14px;">
+    <span class="tag">Markdown Viewer</span>
+    <span class="tag">raw → rendered</span>
+    <span class="tag">WPF / Markdig</span>
+    <span class="tag">투박한 텍스트 → 깔끔한 visualization</span>
+  </div>
+</header>
+
+<div class="grid">
+
+  <!-- 01 -->
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_01.svg" alt="icon_01"/></div>
+    <div class="label">icon_01</div>
+    <div class="concept">'#' 기호가 골드 H1 제목으로 변환 — raw 기호→렌더링된 타이포 직관 표현</div>
+    <div class="meta-row">
+      <span class="badge type-literal">literal</span>
+      <span class="badge pattern">중앙 심볼</span>
+    </div>
+    <div class="palette">
+      <div class="swatch" style="background:#2D1B69;"></div>
+      <div class="swatch" style="background:#FFD700;"></div>
+      <div class="swatch" style="background:#C8A8FF;"></div>
+      <span class="palette-label">딥 퍼플 + 골드 + 라벤더</span>
+    </div>
+    <div class="filename">icon_01.svg</div>
+  </div>
+
+  <!-- 02 -->
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_02.svg" alt="icon_02"/></div>
+    <div class="label">icon_02</div>
+    <div class="concept">좌측 raw markdown 기호들 → 우측 깔끔한 렌더링 결과 (before/after 분할)</div>
+    <div class="meta-row">
+      <span class="badge type-literal">literal</span>
+      <span class="badge pattern">대각선/동적</span>
+    </div>
+    <div class="palette">
+      <div class="swatch" style="background:#141E2E;"></div>
+      <div class="swatch" style="background:#00D4FF;"></div>
+      <div class="swatch" style="background:#1E3040;"></div>
+      <span class="palette-label">다크 슬레이트 + 시안 + 코드 블록</span>
+    </div>
+    <div class="filename">icon_02.svg</div>
+  </div>
+
+  <!-- 03 -->
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_03.svg" alt="icon_03"/></div>
+    <div class="label">icon_03</div>
+    <div class="concept">렌더링된 문서 페이지 — H1, bold, list, code 블록이 실제로 보이는 뷰어 화면</div>
+    <div class="meta-row">
+      <span class="badge type-literal">literal</span>
+      <span class="badge pattern">레이어드</span>
+    </div>
+    <div class="palette">
+      <div class="swatch" style="background:#F5F2EB;"></div>
+      <div class="swatch" style="background:#3B6FCC;"></div>
+      <div class="swatch" style="background:#1A2F5A;"></div>
+      <span class="palette-label">크림 + 인디고 블루</span>
+    </div>
+    <div class="filename">icon_03.svg</div>
+  </div>
+
+  <!-- 04 -->
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_04.svg" alt="icon_04"/></div>
+    <div class="label">icon_04</div>
+    <div class="concept">'#' 해시 기호가 거대한 'H1' 타이포그래피로 결정화 — 변환의 장엄함</div>
+    <div class="meta-row">
+      <span class="badge type-hybrid">hybrid</span>
+      <span class="badge pattern">기하학 추상</span>
+    </div>
+    <div class="palette">
+      <div class="swatch" style="background:#0B1A3E;"></div>
+      <div class="swatch" style="background:#FF7E2F;"></div>
+      <div class="swatch" style="background:#FFFFFF;"></div>
+      <span class="palette-label">딥 네이비 + 오렌지 + 화이트</span>
+    </div>
+    <div class="filename">icon_04.svg</div>
+  </div>
+
+  <!-- 05 -->
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_05.svg" alt="icon_05"/></div>
+    <div class="label">icon_05</div>
+    <div class="concept">노이즈(기호) → 신호(정제된 문서) 필터: 좌우 분할선을 경계로 카오스↔질서</div>
+    <div class="meta-row">
+      <span class="badge type-metaphor">metaphor</span>
+      <span class="badge pattern">공간/장면</span>
+    </div>
+    <div class="palette">
+      <div class="swatch" style="background:#0F1E35;"></div>
+      <div class="swatch" style="background:#00F5C0;"></div>
+      <div class="swatch" style="background:#E8F4FF;"></div>
+      <span class="palette-label">미드나잇 블루 + 민트 + 라이트</span>
+    </div>
+    <div class="filename">icon_05.svg</div>
+  </div>
+
+  <!-- 06 -->
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_06.svg" alt="icon_06"/></div>
+    <div class="label">icon_06</div>
+    <div class="concept">마법봉으로 흩어진 raw 기호들을 정돈된 문서 카드로 변환 — 마법사 은유</div>
+    <div class="meta-row">
+      <span class="badge type-metaphor">metaphor</span>
+      <span class="badge pattern">레이어드</span>
+    </div>
+    <div class="palette">
+      <div class="swatch" style="background:#0C2920;"></div>
+      <div class="swatch" style="background:#00E88A;"></div>
+      <div class="swatch" style="background:#C084FC;"></div>
+      <span class="palette-label">다크 에메랄드 + 라벤더</span>
+    </div>
+    <div class="filename">icon_06.svg</div>
+  </div>
+
+  <!-- 07 -->
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_07.svg" alt="icon_07"/></div>
+    <div class="label">icon_07</div>
+    <div class="concept">프리즘 은유: 흰 raw 텍스트 빔이 프리즘을 통과해 각 요소별 컬러 출력으로 분산</div>
+    <div class="meta-row">
+      <span class="badge type-metaphor">metaphor</span>
+      <span class="badge pattern">대각선/동적</span>
+    </div>
+    <div class="palette">
+      <div class="swatch" style="background:#0A0A12;"></div>
+      <div class="swatch" style="background:#FF4444;"></div>
+      <div class="swatch" style="background:#00CCFF;"></div>
+      <span class="palette-label">블랙 + 레인보우 스펙트럼</span>
+    </div>
+    <div class="filename">icon_07.svg</div>
+  </div>
+
+  <!-- 08 -->
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_08.svg" alt="icon_08"/></div>
+    <div class="label">icon_08</div>
+    <div class="concept">열린 책: 왼쪽 raw markdown, 오른쪽 렌더링된 결과 — 출판물로의 변환</div>
+    <div class="meta-row">
+      <span class="badge type-hybrid">hybrid</span>
+      <span class="badge pattern">실루엣/캐릭터</span>
+    </div>
+    <div class="palette">
+      <div class="swatch" style="background:#D42B1E;"></div>
+      <div class="swatch" style="background:#F57022;"></div>
+      <div class="swatch" style="background:#FFFEF8;"></div>
+      <span class="palette-label">레드-오렌지 그라데이션 + 크림</span>
+    </div>
+    <div class="filename">icon_08.svg</div>
+  </div>
+
+  <!-- 09 -->
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_09.svg" alt="icon_09"/></div>
+    <div class="label">icon_09</div>
+    <div class="concept">`**Bold**` raw → **Bold** 렌더링 전후 비교 + 큰 화살표 — 변환 원리의 직관적 표현</div>
+    <div class="meta-row">
+      <span class="badge type-hybrid">hybrid</span>
+      <span class="badge pattern">중앙 심볼</span>
+    </div>
+    <div class="palette">
+      <div class="swatch" style="background:#E8FBF4;"></div>
+      <div class="swatch" style="background:#10B981;"></div>
+      <div class="swatch" style="background:#3730A3;"></div>
+      <span class="palette-label">라이트 민트 + 에메랄드 + 인디고</span>
+    </div>
+    <div class="filename">icon_09.svg</div>
+  </div>
+
+  <!-- 10 -->
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_10.svg" alt="icon_10"/></div>
+    <div class="label">icon_10</div>
+    <div class="concept">거친 파도(raw 기호들) → 골드선 경계 → 잔잔한 수면(정돈된 문서) — 정제의 시각화</div>
+    <div class="meta-row">
+      <span class="badge type-metaphor">metaphor</span>
+      <span class="badge pattern">공간/장면</span>
+    </div>
+    <div class="palette">
+      <div class="swatch" style="background:#0A2A2A;"></div>
+      <div class="swatch" style="background:#00B8B8;"></div>
+      <div class="swatch" style="background:#FFD700;"></div>
+      <span class="palette-label">딥 틸 + 시안 + 골드</span>
+    </div>
+    <div class="filename">icon_10.svg</div>
+  </div>
+
+</div>
+
+<hr class="divider">
+
+<footer>
+  Mark.View Icon Candidates — Generated 2026-03-22 &nbsp;|&nbsp;
+  Playground / Applications / Text / Mark.View
+</footer>
+
+</body>
+</html>

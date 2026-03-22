@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 배경 — 딥 퍼플 라운드 사각형 -->
+  <defs>
+    <linearGradient id="bg01" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2D1B69"/>
+      <stop offset="100%" stop-color="#1A0F3C"/>
+    </linearGradient>
+    <linearGradient id="gold01" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFD700"/>
+      <stop offset="100%" stop-color="#FFA500"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg01)"/>
+
+  <!-- Layer 2: 좌측 '#' 기호 (raw markdown) — 보라 계열 흐릿하게 -->
+  <text x="148" y="540" font-family="'Cascadia Code','Consolas',monospace" font-size="320" font-weight="bold"
+        fill="#6B4DB8" opacity="0.85" letter-spacing="-10">#</text>
+
+  <!-- 변환 화살표 — 골드 -->
+  <path d="M530 480 L630 480 L610 450 M630 480 L610 510" stroke="url(#gold01)" stroke-width="28"
+        stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+
+  <!-- Layer 3: 우측 렌더링된 H1 텍스트 (골드) -->
+  <text x="660" y="420" font-family="'Segoe UI',sans-serif" font-size="88" font-weight="bold"
+        fill="url(#gold01)">H1</text>
+  <!-- 아래 가로선 (H1 border-bottom 표현) -->
+  <line x1="660" y1="440" x2="870" y2="440" stroke="#FFD700" stroke-width="6" stroke-linecap="round" opacity="0.7"/>
+  <!-- H1 아래 단락 라인들 (렌더링된 본문 암시) -->
+  <rect x="660" y="468" width="200" height="12" rx="6" fill="#C8A8FF" opacity="0.6"/>
+  <rect x="660" y="492" width="160" height="12" rx="6" fill="#C8A8FF" opacity="0.4"/>
+  <rect x="660" y="516" width="185" height="12" rx="6" fill="#C8A8FF" opacity="0.4"/>
+  <rect x="660" y="540" width="130" height="12" rx="6" fill="#C8A8FF" opacity="0.3"/>
+  <!-- H2 구분선 아래 섹션 -->
+  <line x1="660" y1="576" x2="870" y2="576" stroke="#6B4DB8" stroke-width="3" opacity="0.5"/>
+  <rect x="660" y="594" width="170" height="10" rx="5" fill="#C8A8FF" opacity="0.35"/>
+  <rect x="660" y="614" width="145" height="10" rx="5" fill="#C8A8FF" opacity="0.25"/>
+</svg>

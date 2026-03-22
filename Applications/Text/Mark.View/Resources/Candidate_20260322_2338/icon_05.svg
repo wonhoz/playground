@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 배경 — 미드나잇 블루 -->
+  <defs>
+    <linearGradient id="bg05" x1="0%" y1="30%" x2="100%" y2="70%">
+      <stop offset="0%" stop-color="#0F1E35"/>
+      <stop offset="100%" stop-color="#071524"/>
+    </linearGradient>
+    <linearGradient id="mint05" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00F5C0"/>
+      <stop offset="100%" stop-color="#00C898"/>
+    </linearGradient>
+    <linearGradient id="noise05" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#2A3F58"/>
+      <stop offset="100%" stop-color="#1A2D42"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg05)"/>
+
+  <!-- Layer 2: 왼쪽 '노이즈' 영역 — 흩어진 기호들 -->
+  <!-- 흐릿하고 불규칙한 기호 텍스트들 -->
+  <text x="72" y="240" font-family="'Cascadia Code',monospace" font-size="38" fill="#2E4860" opacity="0.9">## Title</text>
+  <text x="72" y="295" font-family="'Cascadia Code',monospace" font-size="38" fill="#2E4860" opacity="0.7">**bold**</text>
+  <text x="72" y="348" font-family="'Cascadia Code',monospace" font-size="38" fill="#2A4255" opacity="0.8">- item</text>
+  <text x="72" y="400" font-family="'Cascadia Code',monospace" font-size="38" fill="#243850" opacity="0.7">&gt; quote</text>
+  <text x="72" y="452" font-family="'Cascadia Code',monospace" font-size="38" fill="#2E4860" opacity="0.6">`code`</text>
+  <text x="72" y="504" font-family="'Cascadia Code',monospace" font-size="38" fill="#2A4255" opacity="0.8">### Sub</text>
+  <text x="72" y="556" font-family="'Cascadia Code',monospace" font-size="38" fill="#243850" opacity="0.7">*italic*</text>
+  <text x="72" y="608" font-family="'Cascadia Code',monospace" font-size="38" fill="#2E4860" opacity="0.6">---</text>
+  <text x="72" y="660" font-family="'Cascadia Code',monospace" font-size="38" fill="#2A4255" opacity="0.5">![img]</text>
+  <text x="72" y="712" font-family="'Cascadia Code',monospace" font-size="38" fill="#243850" opacity="0.6">[link]()</text>
+  <text x="72" y="764" font-family="'Cascadia Code',monospace" font-size="38" fill="#2E4860" opacity="0.5">| col |</text>
+
+  <!-- 필터/경계선 (세로 민트 라인) -->
+  <line x1="430" y1="140" x2="430" y2="880" stroke="url(#mint05)" stroke-width="4" opacity="0.6"/>
+  <!-- 필터 영역 반원 암시 -->
+  <path d="M430 320 Q530 512 430 700" stroke="url(#mint05)" stroke-width="6" fill="none" opacity="0.4"/>
+
+  <!-- Layer 3: 오른쪽 '신호' 영역 — 정제된 렌더링 -->
+  <!-- 깔끔한 H2 -->
+  <text x="480" y="295" font-family="'Segoe UI',sans-serif" font-size="55" font-weight="bold"
+        fill="#E0F4FF">Title</text>
+  <line x1="480" y1="310" x2="920" y2="310" stroke="#00C898" stroke-width="3" opacity="0.6"/>
+
+  <!-- Bold text -->
+  <text x="480" y="370" font-family="'Segoe UI',sans-serif" font-size="42" font-weight="bold"
+        fill="#B8E8FF">bold</text>
+
+  <!-- List -->
+  <circle cx="492" cy="416" r="7" fill="url(#mint05)"/>
+  <rect x="512" y="408" width="300" height="13" rx="6" fill="#4888AA" opacity="0.7"/>
+  <circle cx="492" cy="452" r="7" fill="url(#mint05)"/>
+  <rect x="512" y="444" width="240" height="13" rx="6" fill="#4888AA" opacity="0.6"/>
+
+  <!-- Blockquote -->
+  <rect x="480" y="482" width="5" height="50" rx="2" fill="url(#mint05)"/>
+  <rect x="498" y="488" width="380" height="11" rx="5" fill="#3A7090" opacity="0.7"/>
+  <rect x="498" y="510" width="300" height="11" rx="5" fill="#3A7090" opacity="0.55"/>
+
+  <!-- Code block -->
+  <rect x="480" y="550" width="410" height="56" rx="8" fill="#112235"/>
+  <text x="500" y="580" font-family="'Cascadia Code',monospace" font-size="32" fill="url(#mint05)">code</text>
+  <text x="500" y="598" font-family="'Cascadia Code',monospace" font-size="24" fill="#3A6080" opacity="0.7">// rendered</text>
+
+  <!-- 이미지 placeholder (작은 그림 아이콘) -->
+  <rect x="480" y="628" width="90" height="64" rx="6" fill="#1A3050"/>
+  <path d="M490 668 L510 648 L530 660 L550 644 L570 668 Z" fill="#2A5878"/>
+  <circle cx="500" cy="648" r="8" fill="#4A8AA8"/>
+
+  <!-- 테이블 -->
+  <rect x="480" y="710" width="400" height="48" rx="4" fill="none" stroke="#2A5070" stroke-width="2"/>
+  <line x1="616" y1="710" x2="616" y2="758" stroke="#2A5070" stroke-width="2"/>
+  <line x1="750" y1="710" x2="750" y2="758" stroke="#2A5070" stroke-width="2"/>
+  <rect x="480" y="710" width="400" height="20" rx="4" fill="#162840"/>
+  <text x="520" y="726" font-family="'Segoe UI',sans-serif" font-size="22" fill="#7AACC8">col</text>
+  <text x="655" y="726" font-family="'Segoe UI',sans-serif" font-size="22" fill="#7AACC8">col</text>
+</svg>

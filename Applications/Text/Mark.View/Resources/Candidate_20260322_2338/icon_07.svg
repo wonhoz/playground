@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- 프리즘: 텍스트 입력 → 컬러 문서 출력 — 블랙 + 레인보우 -->
+  <!-- Layer 1: 배경 — 딥 블랙 -->
+  <defs>
+    <linearGradient id="bg07" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0A0A12"/>
+      <stop offset="100%" stop-color="#050508"/>
+    </linearGradient>
+    <!-- 입력 빔 -->
+    <linearGradient id="beam07" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#AAAACC"/>
+      <stop offset="100%" stop-color="#DDDDFF"/>
+    </linearGradient>
+    <!-- 출력 레인보우 라인들 -->
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg07)"/>
+
+  <!-- Layer 2: 프리즘 삼각형 (중앙) -->
+  <polygon points="512,260 280,700 744,700" fill="#0F1A2E" stroke="#2A3A6A" stroke-width="4"/>
+  <!-- 프리즘 내부 광택 -->
+  <polygon points="512,280 310,680 714,680" fill="none" stroke="#1E2E50" stroke-width="2" opacity="0.5"/>
+  <line x1="512" y1="280" x2="512" y2="680" stroke="#1E3060" stroke-width="1" opacity="0.4"/>
+
+  <!-- Layer 2: 입력 빔 (왼쪽 → 프리즘) — 회색/흰 단일 광선 -->
+  <line x1="100" y1="480" x2="350" y2="480" stroke="#888899" stroke-width="18" stroke-linecap="round"/>
+  <!-- raw text 글자들이 빔에 올라탄 느낌 -->
+  <text x="100" y="462" font-family="'Cascadia Code',monospace" font-size="26" fill="#445566">##</text>
+  <text x="148" y="462" font-family="'Cascadia Code',monospace" font-size="26" fill="#334455"> **</text>
+  <text x="192" y="462" font-family="'Cascadia Code',monospace" font-size="26" fill="#445566">`</text>
+  <text x="100" y="510" font-family="'Cascadia Code',monospace" font-size="24" fill="#334455">- &gt; []</text>
+
+  <!-- Layer 3: 출력 레인보우 빔들 (프리즘 우측) -->
+  <!-- H1 빔 — 빨강 -->
+  <line x1="680" y1="420" x2="920" y2="300" stroke="#FF4444" stroke-width="14" stroke-linecap="round" opacity="0.9"/>
+  <text x="840" y="295" font-family="'Segoe UI',sans-serif" font-size="28" font-weight="bold" fill="#FF6666">H1</text>
+
+  <!-- H2 빔 — 오렌지 -->
+  <line x1="690" y1="450" x2="930" y2="390" stroke="#FF9933" stroke-width="12" stroke-linecap="round" opacity="0.9"/>
+  <text x="848" y="386" font-family="'Segoe UI',sans-serif" font-size="24" font-weight="600" fill="#FFAA44">H2</text>
+
+  <!-- Bold 빔 — 노랑 -->
+  <line x1="700" y1="480" x2="930" y2="470" stroke="#FFD700" stroke-width="11" stroke-linecap="round" opacity="0.9"/>
+  <text x="848" y="467" font-family="'Segoe UI',sans-serif" font-size="22" font-weight="bold" fill="#FFE44D">Bold</text>
+
+  <!-- List 빔 — 그린 -->
+  <line x1="700" y1="508" x2="930" y2="540" stroke="#44DD88" stroke-width="10" stroke-linecap="round" opacity="0.9"/>
+  <text x="848" y="540" font-family="'Segoe UI',sans-serif" font-size="22" fill="#66EE99">• List</text>
+
+  <!-- Code 빔 — 시안 -->
+  <line x1="695" y1="534" x2="930" y2="600" stroke="#00CCFF" stroke-width="10" stroke-linecap="round" opacity="0.9"/>
+  <text x="848" y="598" font-family="'Cascadia Code',monospace" font-size="20" fill="#33DDFF">code</text>
+
+  <!-- Quote 빔 — 블루 -->
+  <line x1="685" y1="558" x2="920" y2="660" stroke="#4466FF" stroke-width="9" stroke-linecap="round" opacity="0.9"/>
+  <text x="840" y="660" font-family="'Segoe UI',sans-serif" font-size="20" font-style="italic" fill="#8899FF">" quote</text>
+
+  <!-- Link 빔 — 바이올렛 -->
+  <line x1="672" y1="578" x2="910" y2="720" stroke="#AA44FF" stroke-width="8" stroke-linecap="round" opacity="0.9"/>
+  <text x="828" y="720" font-family="'Segoe UI',sans-serif" font-size="20" fill="#CC88FF">link</text>
+
+  <!-- 프리즘 상단 꼭짓점 하이라이트 -->
+  <circle cx="512" cy="260" r="12" fill="#FFFFFF" opacity="0.4"/>
+
+  <!-- 하단 "Md" 소문자 배지 -->
+  <text x="512" y="790" font-family="'Segoe UI',sans-serif" font-size="40" font-weight="bold"
+        fill="#AAAACC" text-anchor="middle" opacity="0.5">Md</text>
+</svg>

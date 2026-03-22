@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- 거친 텍스트 파도 → 잔잔한 문서 수면 — 딥 틸 + 골드 -->
+  <!-- Layer 1: 배경 -->
+  <defs>
+    <linearGradient id="bg10" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0A2A2A"/>
+      <stop offset="100%" stop-color="#041818"/>
+    </linearGradient>
+    <linearGradient id="teal10" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00B8B8"/>
+      <stop offset="100%" stop-color="#008080"/>
+    </linearGradient>
+    <linearGradient id="gold10" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FFD700"/>
+      <stop offset="100%" stop-color="#FFA500"/>
+    </linearGradient>
+    <linearGradient id="calmsurface" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#002020"/>
+      <stop offset="100%" stop-color="#001414"/>
+    </linearGradient>
+    <clipPath id="clip10">
+      <rect x="60" y="60" width="904" height="904" rx="170"/>
+    </clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg10)"/>
+
+  <!-- Layer 2: 상단 '거친 파도' — raw markdown 기호들이 파도처럼 -->
+  <!-- 거친 파도 형태 (zigzag 상단 영역) -->
+  <path d="M60 200 Q120 140 200 190 Q280 240 360 160 Q440 80 520 170 Q600 260 680 160 Q760 60 840 150 Q900 210 964 180 L964 420 Q900 380 840 400 Q760 420 680 390 Q600 360 520 400 Q440 440 360 400 Q280 360 200 400 Q140 420 60 400 Z"
+        fill="#0D3535" opacity="0.8"/>
+
+  <!-- raw 기호들이 파도 위에 떠있는 느낌 -->
+  <text x="80" y="220" font-family="'Cascadia Code',monospace" font-size="36" fill="#2A8888" opacity="0.9">## Title</text>
+  <text x="270" y="178" font-family="'Cascadia Code',monospace" font-size="32" fill="#2A8888" opacity="0.7">**bold**</text>
+  <text x="490" y="230" font-family="'Cascadia Code',monospace" font-size="32" fill="#267A7A" opacity="0.8">- item</text>
+  <text x="690" y="185" font-family="'Cascadia Code',monospace" font-size="28" fill="#2A8888" opacity="0.7">`code`</text>
+  <text x="80" y="295" font-family="'Cascadia Code',monospace" font-size="30" fill="#267A7A" opacity="0.6">*ital*</text>
+  <text x="230" y="330" font-family="'Cascadia Code',monospace" font-size="28" fill="#2A8888" opacity="0.7">&gt; note</text>
+  <text x="500" y="310" font-family="'Cascadia Code',monospace" font-size="28" fill="#267A7A" opacity="0.6">---</text>
+  <text x="700" y="300" font-family="'Cascadia Code',monospace" font-size="28" fill="#2A8888" opacity="0.7">[link]</text>
+  <text x="100" y="375" font-family="'Cascadia Code',monospace" font-size="26" fill="#267A7A" opacity="0.5">### sub</text>
+  <text x="420" y="380" font-family="'Cascadia Code',monospace" font-size="26" fill="#2A8888" opacity="0.5">![img]</text>
+  <text x="750" y="375" font-family="'Cascadia Code',monospace" font-size="26" fill="#267A7A" opacity="0.5">| tb |</text>
+
+  <!-- 파도→잔잔한 수면 전환선 (골드 구분선) -->
+  <path d="M80 440 Q512 410 944 440" stroke="url(#gold10)" stroke-width="5" fill="none" opacity="0.8"/>
+  <!-- 반짝임 -->
+  <circle cx="260" cy="434" r="4" fill="#FFD700" opacity="0.7"/>
+  <circle cx="512" cy="422" r="5" fill="#FFD700" opacity="0.9"/>
+  <circle cx="764" cy="434" r="4" fill="#FFD700" opacity="0.7"/>
+
+  <!-- Layer 3: 하단 '잔잔한 수면' — 깔끔한 렌더링된 문서 -->
+  <!-- 잔잔한 수평 파문들 (틸 수평선) -->
+  <line x1="100" y1="490" x2="924" y2="490" stroke="#006060" stroke-width="1.5" opacity="0.3"/>
+  <line x1="100" y1="510" x2="924" y2="510" stroke="#006060" stroke-width="1" opacity="0.2"/>
+
+  <!-- 정돈된 문서 내용 -->
+  <text x="140" y="570" font-family="'Segoe UI',sans-serif" font-size="62" font-weight="bold"
+        fill="url(#teal10)">Title</text>
+  <line x1="140" y1="585" x2="884" y2="585" stroke="url(#gold10)" stroke-width="3" opacity="0.5"/>
+
+  <!-- 단락 텍스트 라인들 (잔잔한 수평선처럼) -->
+  <rect x="140" y="612" width="700" height="14" rx="7" fill="#1A8080" opacity="0.55"/>
+  <rect x="140" y="640" width="580" height="14" rx="7" fill="#1A8080" opacity="0.45"/>
+  <rect x="140" y="668" width="640" height="14" rx="7" fill="#1A8080" opacity="0.45"/>
+
+  <!-- 리스트 (잔잔하게 정렬) -->
+  <circle cx="152" cy="712" r="7" fill="url(#gold10)"/>
+  <rect x="174" y="705" width="460" height="13" rx="6" fill="#208888" opacity="0.6"/>
+  <circle cx="152" cy="744" r="7" fill="url(#gold10)"/>
+  <rect x="174" y="737" width="380" height="13" rx="6" fill="#208888" opacity="0.5"/>
+  <circle cx="152" cy="776" r="7" fill="url(#gold10)"/>
+  <rect x="174" y="769" width="420" height="13" rx="6" fill="#208888" opacity="0.5"/>
+
+  <!-- 코드 블록 (잔잔한 직사각) -->
+  <rect x="140" y="808" width="740" height="72" rx="10" fill="#041E1E"/>
+  <rect x="140" y="808" width="4" height="72" rx="2" fill="url(#teal10)"/>
+  <text x="162" y="840" font-family="'Cascadia Code',monospace" font-size="32"
+        fill="url(#teal10)">markView.render(text)</text>
+  <text x="162" y="866" font-family="'Cascadia Code',monospace" font-size="24"
+        fill="#3A7A7A" opacity="0.6">// → beautiful HTML</text>
+</svg>

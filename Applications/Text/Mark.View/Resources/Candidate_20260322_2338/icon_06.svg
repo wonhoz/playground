@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- 마법 변환: raw 기호들이 정돈된 문서로 — 다크 에메랄드 + 라벤더 -->
+  <!-- Layer 1: 배경 -->
+  <defs>
+    <linearGradient id="bg06" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0C2920"/>
+      <stop offset="100%" stop-color="#061A12"/>
+    </linearGradient>
+    <linearGradient id="emerald06" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00E88A"/>
+      <stop offset="100%" stop-color="#00B86E"/>
+    </linearGradient>
+    <linearGradient id="lavender06" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#C084FC"/>
+      <stop offset="100%" stop-color="#9333EA"/>
+    </linearGradient>
+    <radialGradient id="magic06" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#00E88A" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#00E88A" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg06)"/>
+  <circle cx="512" cy="512" r="400" fill="url(#magic06)"/>
+
+  <!-- Layer 2: 배경에 흩어진 Markdown 기호들 (파티클처럼) -->
+  <text x="88" y="200" font-family="'Cascadia Code',monospace" font-size="56" font-weight="bold"
+        fill="#1A5C40" opacity="0.9">##</text>
+  <text x="820" y="250" font-family="'Cascadia Code',monospace" font-size="48"
+        fill="#1A5C40" opacity="0.7">**</text>
+  <text x="120" y="780" font-family="'Cascadia Code',monospace" font-size="52"
+        fill="#1A5C40" opacity="0.6">---</text>
+  <text x="790" y="800" font-family="'Cascadia Code',monospace" font-size="48"
+        fill="#1A5C40" opacity="0.7">`  `</text>
+  <text x="88" y="500" font-family="'Cascadia Code',monospace" font-size="44"
+        fill="#164A32" opacity="0.8">*</text>
+  <text x="900" y="520" font-family="'Cascadia Code',monospace" font-size="44"
+        fill="#164A32" opacity="0.6">&gt;</text>
+  <text x="160" y="340" font-family="'Cascadia Code',monospace" font-size="36"
+        fill="#1A5C40" opacity="0.5">- -</text>
+  <text x="840" y="450" font-family="'Cascadia Code',monospace" font-size="36"
+        fill="#164A32" opacity="0.5">[]</text>
+
+  <!-- 마법봉 (변환 도구) -->
+  <line x1="320" y1="280" x2="560" y2="520" stroke="url(#emerald06)" stroke-width="16"
+        stroke-linecap="round" opacity="0.9"/>
+  <!-- 봉 끝 별빛 -->
+  <circle cx="320" cy="280" r="18" fill="url(#lavender06)"/>
+  <line x1="320" y1="252" x2="320" y2="308" stroke="url(#lavender06)" stroke-width="6" stroke-linecap="round"/>
+  <line x1="292" y1="280" x2="348" y2="280" stroke="url(#lavender06)" stroke-width="6" stroke-linecap="round"/>
+  <line x1="300" y1="260" x2="340" y2="300" stroke="url(#lavender06)" stroke-width="4" stroke-linecap="round" opacity="0.7"/>
+  <line x1="340" y1="260" x2="300" y2="300" stroke="url(#lavender06)" stroke-width="4" stroke-linecap="round" opacity="0.7"/>
+
+  <!-- Layer 3: 중앙 하단 — 정돈된 문서 카드 -->
+  <rect x="420" y="460" width="480" height="420" rx="20"
+        fill="#0A2018" stroke="#00E88A" stroke-width="2" opacity="0.95"/>
+
+  <!-- 문서 내용 -->
+  <text x="456" y="530" font-family="'Segoe UI',sans-serif" font-size="48" font-weight="bold"
+        fill="#E8FFF4">Overview</text>
+  <line x1="456" y1="545" x2="860" y2="545" stroke="url(#emerald06)" stroke-width="3"/>
+
+  <rect x="456" y="570" width="360" height="12" rx="6" fill="#2A7A58" opacity="0.7"/>
+  <rect x="456" y="596" width="300" height="12" rx="6" fill="#2A7A58" opacity="0.55"/>
+  <rect x="456" y="622" width="330" height="12" rx="6" fill="#2A7A58" opacity="0.55"/>
+
+  <!-- list -->
+  <circle cx="467" cy="660" r="6" fill="url(#emerald06)"/>
+  <rect x="486" y="653" width="260" height="12" rx="6" fill="#3A9A6C" opacity="0.65"/>
+  <circle cx="467" cy="690" r="6" fill="url(#emerald06)"/>
+  <rect x="486" y="683" width="220" height="12" rx="6" fill="#3A9A6C" opacity="0.5"/>
+
+  <!-- code -->
+  <rect x="456" y="718" width="380" height="50" rx="8" fill="#061A10"/>
+  <text x="474" y="748" font-family="'Cascadia Code',monospace" font-size="30"
+        fill="url(#emerald06)">render(markdown)</text>
+
+  <!-- 라벤더 포인트 파티클들 -->
+  <circle cx="700" cy="420" r="5" fill="url(#lavender06)" opacity="0.8"/>
+  <circle cx="760" cy="400" r="3" fill="url(#lavender06)" opacity="0.6"/>
+  <circle cx="640" cy="390" r="4" fill="url(#lavender06)" opacity="0.7"/>
+  <circle cx="810" cy="460" r="3" fill="#00E88A" opacity="0.5"/>
+  <circle cx="580" cy="410" r="2" fill="#00E88A" opacity="0.4"/>
+</svg>

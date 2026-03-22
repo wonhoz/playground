@@ -168,24 +168,24 @@ call :pub "Sky.Drift"             "Games\Arcade\Sky.Drift"                      
 
 :: ── Games / Casual ─────────────────────────────────────────────────
 call :pub "Ear.Train"             "Games\Casual\Ear.Train"                                  "Ear.Train.exe"             "Games\Casual"
-call :pub "Geo.Quiz"              "Games\Casual\Geo.Quiz"                                   "Geo.Quiz.exe"              "Games\Casual"
-call :pub "Morse.Run"             "Games\Casual\Morse.Run"                                  "Morse.Run.exe"             "Games\Casual"
+call :pub "Geo.Quiz"              "Games\Casual\Geo.Quiz"                                   "Geo.Quiz.exe"              "Games\Casual\Geo.Quiz"
+call :pub "Morse.Run"             "Games\Casual\Morse.Run"                                  "Morse.Run.exe"             "Games\Casual\Morse.Run"
 call :pub "Snap.Duel"             "Games\Casual\Snap.Duel"                                  "Snap.Duel.exe"             "Games\Casual"
 
 :: ── Games / Idle ───────────────────────────────────────────────────
-call :pub "Code.Idle"             "Games\Idle\Code.Idle"                                    "Code.Idle.exe"             "Games\Idle"
+call :pub "Code.Idle"             "Games\Idle\Code.Idle"                                    "Code.Idle.exe"             "Games\Idle\Code.Idle"
 
 :: ── Games / Puzzle ─────────────────────────────────────────────────
-call :pub "Bug.Hunt"              "Games\Puzzle\Bug.Hunt"                                   "Bug.Hunt.exe"              "Games\Puzzle"
-call :pub "Cipher.Quest"          "Games\Puzzle\Cipher.Quest"                               "Cipher.Quest.exe"          "Games\Puzzle"
+call :pub "Bug.Hunt"              "Games\Puzzle\Bug.Hunt"                                   "Bug.Hunt.exe"              "Games\Puzzle\Bug.Hunt"
+call :pub "Cipher.Quest"          "Games\Puzzle\Cipher.Quest"                               "Cipher.Quest.exe"          "Games\Puzzle\Cipher.Quest"
 call :pub "Circuit.Break"         "Games\Puzzle\Circuit.Break"                              "Circuit.Break.exe"         "Games\Puzzle"
-call :pub "Crossword.Cast"        "Games\Puzzle\Crossword.Cast"                             "Crossword.Cast.exe"        "Games\Puzzle"
-call :pub "Escape.Key"            "Games\Puzzle\Escape.Key"                                 "Escape.Key.exe"            "Games\Puzzle"
+call :pub "Crossword.Cast"        "Games\Puzzle\Crossword.Cast"                             "Crossword.Cast.exe"        "Games\Puzzle\Crossword.Cast"
+call :pub "Escape.Key"            "Games\Puzzle\Escape.Key"                                 "Escape.Key.exe"            "Games\Puzzle\Escape.Key"
 call :pub "Gravity.Flip"          "Games\Puzzle\Gravity.Flip"                               "Gravity.Flip.exe"          "Games\Puzzle"
 call :pub "Hue.Flow"              "Games\Puzzle\Hue.Flow"                                   "Hue.Flow.exe"              "Games\Puzzle"
 call :pub "Orbit.Craft"           "Games\Puzzle\Orbit.Craft"                                "Orbit.Craft.exe"           "Games\Puzzle\Orbit.Craft"
-call :pub "Orbit.Raid"            "Games\Puzzle\Orbit.Raid"                                 "Orbit.Raid.exe"            "Games\Puzzle"
-call :pub "Persp.Shift"           "Games\Puzzle\Persp.Shift"                                "Persp.Shift.exe"           "Games\Puzzle"
+call :pub "Orbit.Raid"            "Games\Puzzle\Orbit.Raid"                                 "Orbit.Raid.exe"            "Games\Puzzle\Orbit.Raid"
+call :pub "Persp.Shift"           "Games\Puzzle\Persp.Shift"                                "Persp.Shift.exe"           "Games\Puzzle\Persp.Shift"
 
 :: ── Games / Racing ─────────────────────────────────────────────────
 call :pub "Nitro.Drift"           "Games\Racing\Nitro.Drift"                                "Nitro.Drift.exe"           "Games\Racing"
@@ -205,7 +205,7 @@ call :pub "Star.Strike"           "Games\Shooter\Star.Strike"                   
 call :pub "Leaf.Grow"             "Games\Simulation\Leaf.Grow"                              "Leaf.Grow.exe"             "Games\Simulation"
 
 :: ── Games / Sports ─────────────────────────────────────────────────
-call :pub "Golf.Cast"             "Games\Sports\Golf.Cast"                                  "Golf.Cast.exe"             "Games\Sports"
+call :pub "Golf.Cast"             "Games\Sports\Golf.Cast"                                  "Golf.Cast.exe"             "Games\Sports\Golf.Cast"
 
 :: ── Games / Strategy ───────────────────────────────────────────────
 call :pub "Tower.Guard"           "Games\Strategy\Tower.Guard"                              "Tower.Guard.exe"           "Games\Strategy"

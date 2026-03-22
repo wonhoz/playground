@@ -1,0 +1,34 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Folder.Purge | 폴더 저울 — 비어있으면 기울어짐 | 중앙심볼 | #0A2020 -->
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="160" fill="#0A2020"/>
+  <!-- Layer 2: Balance scale comparing empty vs content folders -->
+  <!-- Scale beam (tilted) -->
+  <line x1="512" y1="380" x2="240" y2="500" stroke="#2DD4BF" stroke-width="10" stroke-linecap="round"/>
+  <line x1="512" y1="380" x2="784" y2="440" stroke="#2DD4BF" stroke-width="10" stroke-linecap="round"/>
+  <!-- Center pivot -->
+  <circle cx="512" cy="374" r="24" fill="#0A2020" stroke="#2DD4BF" stroke-width="6"/>
+  <circle cx="512" cy="374" r="10" fill="#2DD4BF"/>
+  <!-- Stand -->
+  <line x1="512" y1="374" x2="512" y2="700" stroke="#134E4A" stroke-width="16" stroke-linecap="round"/>
+  <rect x="380" y="700" width="264" height="28" rx="10" fill="#134E4A"/>
+  <!-- Left pan (heavy - has folders, high up due to tilt) -->
+  <!-- Pan strings -->
+  <line x1="240" y1="500" x2="190" y2="560" stroke="#2DD4BF" stroke-width="4"/>
+  <line x1="240" y1="500" x2="290" y2="560" stroke="#2DD4BF" stroke-width="4"/>
+  <!-- Pan plate -->
+  <ellipse cx="240" cy="560" rx="70" ry="18" fill="#115E59" stroke="#2DD4BF" stroke-width="3"/>
+  <!-- Folders in left pan (content folders - heavy) -->
+  <path d="M190 480 Q196 474 208 474 L208 468 Q208 464 216 464 L262 464 Q270 464 270 468 L270 520 Q270 524 262 524 L198 524 Q190 524 190 520 Z" fill="#FCD34D" opacity="0.9" transform="translate(0, -10)"/>
+  <path d="M210 488 Q216 482 228 482 L228 476 Q228 472 236 472 L282 472 Q290 472 290 476 L290 528 Q290 532 282 532 L218 532 Q210 532 210 528 Z" fill="#60A5FA" opacity="0.8" transform="translate(0, -10)"/>
+  <!-- Right pan (light - empty folders, drooping down) -->
+  <line x1="784" y1="440" x2="734" y2="640" stroke="#2DD4BF" stroke-width="4"/>
+  <line x1="784" y1="440" x2="834" y2="640" stroke="#2DD4BF" stroke-width="4"/>
+  <ellipse cx="784" cy="640" rx="70" ry="18" fill="#115E59" stroke="#2DD4BF" stroke-width="3"/>
+  <!-- Empty folder outline only (light) -->
+  <path d="M748 560 Q754 554 766 554 L766 548 Q766 544 774 544 L820 544 Q828 544 828 548 L828 600 Q828 604 820 604 L756 604 Q748 604 748 600 Z" fill="none" stroke="#2DD4BF" stroke-width="3" opacity="0.7"/>
+  <text x="788" y="580" font-family="Arial,sans-serif" font-size="14" fill="#2DD4BF" text-anchor="middle" opacity="0.8">empty</text>
+  <!-- Layer 3: Labels -->
+  <text x="240" y="760" font-family="Arial,sans-serif" font-size="18" fill="#2DD4BF" text-anchor="middle">보존</text>
+  <text x="784" y="760" font-family="Arial,sans-serif" font-size="18" fill="#EF4444" text-anchor="middle">삭제</text>
+</svg>

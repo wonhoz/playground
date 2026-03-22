@@ -1,0 +1,58 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Folder.Purge | 전기 충격기 — 정크 파일에 전격을 가하는 정리 | 기하학 | #0A001A -->
+  <defs>
+    <filter id="zapGlow8">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="160" fill="#0A001A"/>
+  <!-- Layer 2: Electric bolt and file targets -->
+  <!-- Taser/electric gun (top left) -->
+  <!-- Gun body -->
+  <rect x="180" y="220" width="200" height="80" rx="10" fill="#1A0A30" stroke="#7C3AED" stroke-width="4"/>
+  <text x="280" y="267" font-family="Arial,sans-serif" font-size="14" fill="#A855F7" text-anchor="middle" font-weight="bold">PURGE GUN</text>
+  <!-- Gun barrel -->
+  <rect x="380" y="248" width="80" height="24" rx="4" fill="#2A1A40" stroke="#7C3AED" stroke-width="3"/>
+  <!-- Grip handle -->
+  <rect x="220" y="300" width="60" height="80" rx="8" fill="#1A0A30" stroke="#5B21B6" stroke-width="3"/>
+  <!-- Energy charge dots on gun -->
+  <circle cx="220" cy="250" r="8" fill="#A855F7" opacity="0.8"/>
+  <circle cx="245" cy="250" r="8" fill="#A855F7" opacity="0.8"/>
+  <circle cx="270" cy="250" r="8" fill="#A855F7" opacity="0.8"/>
+  <!-- Lightning bolt from gun -->
+  <path d="M 460 260 L 500 240 L 480 290 L 540 265 L 510 320 L 580 290 L 545 360 L 640 320 L 600 400" stroke="#FFFF00" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round" filter="url(#zapGlow8)"/>
+  <!-- Secondary arc bolts -->
+  <path d="M 510 295 L 555 310 L 530 350" stroke="#FFFF00" stroke-width="4" fill="none" opacity="0.6" filter="url(#zapGlow8)"/>
+  <path d="M 545 360 L 590 380 L 570 420" stroke="#FFFFFF" stroke-width="3" fill="none" opacity="0.5" filter="url(#zapGlow8)"/>
+  <!-- Target file icons being zapped -->
+  <!-- File 1: being hit (exploding) -->
+  <rect x="580" y="340" width="90" height="110" rx="6" fill="#2A0050" stroke="#FF00FF" stroke-width="3"/>
+  <polygon points="620,340 670,340 670,364 642,364" fill="#1A0030"/>
+  <polygon points="620,340 670,364 642,364" fill="#FF00FF"/>
+  <text x="625" y="412" font-family="monospace" font-size="11" fill="#FF88FF">junk.tmp</text>
+  <text x="625" y="432" font-family="monospace" font-size="11" fill="#FF66FF">2.4 GB</text>
+  <!-- Explosion effect on file 1 -->
+  <circle cx="625" cy="395" r="30" fill="#FFFF00" opacity="0.3" filter="url(#zapGlow8)"/>
+  <circle cx="625" cy="395" r="20" fill="white" opacity="0.2" filter="url(#zapGlow8)"/>
+  <!-- File 2: queued (will be next) -->
+  <rect x="720" y="460" width="90" height="110" rx="6" fill="#2A1A00" stroke="#FF8800" stroke-width="2" opacity="0.8"/>
+  <polygon points="760,460 810,460 810,484 782,484" fill="#1A0C00"/>
+  <polygon points="760,460 810,484 782,484" fill="#FF8800"/>
+  <text x="765" y="532" font-family="monospace" font-size="11" fill="#FFAA44">dup(3).mp4</text>
+  <text x="765" y="552" font-family="monospace" font-size="11" fill="#FF8822">4.1 GB</text>
+  <!-- File 3: queued -->
+  <rect x="620" y="580" width="90" height="110" rx="6" fill="#2A1A00" stroke="#FF8800" stroke-width="2" opacity="0.7"/>
+  <polygon points="660,580 710,580 710,604 682,604" fill="#1A0C00"/>
+  <polygon points="660,580 710,604 682,604" fill="#FF6600"/>
+  <text x="665" y="652" font-family="monospace" font-size="11" fill="#FFAA44">cache.db</text>
+  <text x="665" y="672" font-family="monospace" font-size="11" fill="#FF8822">1.8 GB</text>
+  <!-- Ashes/deleted files indicator -->
+  <text x="440" y="560" font-family="monospace" font-size="26" fill="#444444" text-anchor="middle" opacity="0.6">✕</text>
+  <text x="340" y="620" font-family="monospace" font-size="20" fill="#444444" text-anchor="middle" opacity="0.5">✕</text>
+  <!-- Layer 3: Delete counter -->
+  <rect x="180" y="780" width="300" height="56" rx="10" fill="#14002A" stroke="#7C3AED" stroke-width="3"/>
+  <text x="330" y="805" font-family="monospace" font-size="13" fill="#A855F7" text-anchor="middle">⚡ 정리 중...</text>
+  <text x="330" y="824" font-family="monospace" font-size="14" fill="#FFFF00" text-anchor="middle" font-weight="bold">-8.3 GB 삭제</text>
+</svg>

@@ -1,0 +1,44 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Folder.Purge | 깨끗한 HDD — 정리 후 결과 | 대각선/동적 | #001828 -->
+  <defs>
+    <radialGradient id="hddGrad" cx="50%" cy="40%" r="65%">
+      <stop offset="0%" stop-color="#1E4A6A"/>
+      <stop offset="100%" stop-color="#0C2A3A"/>
+    </radialGradient>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="160" fill="#001828"/>
+  <!-- Layer 2: HDD with clean storage visualization -->
+  <!-- HDD enclosure -->
+  <rect x="200" y="340" width="624" height="344" rx="24" fill="url(#hddGrad)" stroke="#22D3EE" stroke-width="5"/>
+  <!-- HDD platter circle (centered) -->
+  <circle cx="512" cy="512" r="140" fill="#0A2030" stroke="#22D3EE" stroke-width="4"/>
+  <circle cx="512" cy="512" r="110" fill="#061820" stroke="#0891B2" stroke-width="2"/>
+  <circle cx="512" cy="512" r="80" fill="#041018" stroke="#0891B2" stroke-width="1.5"/>
+  <circle cx="512" cy="512" r="20" fill="#22D3EE"/>
+  <!-- Arm -->
+  <line x1="512" y1="412" x2="640" y2="380" stroke="#3A5A6A" stroke-width="12" stroke-linecap="round"/>
+  <circle cx="640" cy="376" r="16" fill="#22D3EE" opacity="0.8"/>
+  <!-- Layer 3: Storage usage - almost empty = CLEAN -->
+  <!-- Storage bar (bottom of HDD) -->
+  <rect x="240" y="648" width="544" height="24" rx="8" fill="#0A2030"/>
+  <!-- Very small used portion (clean) -->
+  <rect x="240" y="648" width="54" height="24" rx="8" fill="#22D3EE"/>
+  <text x="512" y="704" font-family="Arial,sans-serif" font-size="20" fill="#22D3EE" text-anchor="middle">10% 사용 · 90% 정리 완료</text>
+  <!-- Before/after comparison -->
+  <!-- Before (left, messy) -->
+  <rect x="200" y="780" width="200" height="100" rx="8" fill="#1A0A00" stroke="#EF4444" stroke-width="2"/>
+  <text x="300" y="818" font-family="Arial,sans-serif" font-size="14" fill="#F87171" text-anchor="middle">정리 전</text>
+  <rect x="214" y="830" width="172" height="14" rx="3" fill="#EF4444" opacity="0.8"/>
+  <text x="300" y="856" font-family="monospace" font-size="11" fill="#9CA3AF" text-anchor="middle">85% 사용</text>
+  <!-- Arrow -->
+  <polygon points="418,828 418,812 450,820" fill="#4ADE80"/>
+  <!-- After (right, clean) -->
+  <rect x="456" y="780" width="200" height="100" rx="8" fill="#001828" stroke="#4ADE80" stroke-width="2"/>
+  <text x="556" y="818" font-family="Arial,sans-serif" font-size="14" fill="#4ADE80" text-anchor="middle">정리 후</text>
+  <rect x="470" y="830" width="26" height="14" rx="3" fill="#22D3EE" opacity="0.8"/>
+  <text x="556" y="856" font-family="monospace" font-size="11" fill="#9CA3AF" text-anchor="middle">10% 사용</text>
+  <!-- Big checkmark -->
+  <circle cx="760" cy="830" r="40" fill="#16A34A"/>
+  <text x="760" y="844" font-family="Arial,sans-serif" font-size="32" fill="white" text-anchor="middle">✓</text>
+</svg>

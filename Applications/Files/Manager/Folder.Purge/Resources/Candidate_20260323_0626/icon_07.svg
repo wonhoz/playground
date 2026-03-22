@@ -1,0 +1,88 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Folder.Purge | 개미 군집 이동 — 불필요 파일을 운반하는 개미들 | 공간/장면 | #2A1400 -->
+  <defs>
+    <radialGradient id="groundGrad7" cx="50%" cy="80%" r="60%">
+      <stop offset="0%" stop-color="#3A2000"/>
+      <stop offset="100%" stop-color="#2A1400"/>
+    </radialGradient>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="160" fill="url(#groundGrad7)"/>
+  <!-- Layer 2: Ground surface and ant trails -->
+  <!-- Ground -->
+  <rect x="0" y="680" width="1024" height="344" rx="0" fill="#3A2000"/>
+  <rect x="0" y="680" width="1024" height="20" rx="0" fill="#4A2E08"/>
+  <!-- Ant trail (pheromone path) -->
+  <path d="M 820 680 Q 700 600 600 650 Q 500 700 400 640 Q 300 580 240 620 Q 180 660 170 680" stroke="#6A4A10" stroke-width="4" fill="none" stroke-dasharray="12,8"/>
+  <!-- Trash bin/disposal at left -->
+  <rect x="160" y="540" width="120" height="150" rx="8" fill="#2A1A00" stroke="#8A5020" stroke-width="4"/>
+  <rect x="148" y="530" width="144" height="24" rx="4" fill="#3A2A08" stroke="#8A5020" stroke-width="3"/>
+  <!-- Trash lid open -->
+  <rect x="148" y="500" width="100" height="36" rx="6" fill="#3A2A08" stroke="#8A5020" stroke-width="3" transform="rotate(-30 148 520)"/>
+  <!-- Trash bin content markers -->
+  <text x="220" y="620" font-family="monospace" font-size="12" fill="#6A4A10" text-anchor="middle">🗑 Temp</text>
+  <!-- Individual ant silhouettes (6-legged, carrying file icons) -->
+  <!-- Ant 1: carrying folder icon -->
+  <g transform="translate(320, 624)">
+    <!-- Body segments -->
+    <ellipse cx="0" cy="0" rx="8" ry="5" fill="#1A0800"/>
+    <ellipse cx="14" cy="-2" rx="10" ry="7" fill="#2A1000"/>
+    <ellipse cx="28" cy="2" rx="6" ry="4" fill="#1A0800"/>
+    <!-- Legs -->
+    <line x1="-2" y1="0" x2="-12" y2="12" stroke="#1A0800" stroke-width="2"/>
+    <line x1="2" y1="0" x2="-4" y2="12" stroke="#1A0800" stroke-width="2"/>
+    <line x1="10" y1="-2" x2="6" y2="14" stroke="#1A0800" stroke-width="2"/>
+    <line x1="14" y1="-2" x2="14" y2="14" stroke="#1A0800" stroke-width="2"/>
+    <line x1="20" y1="-2" x2="26" y2="12" stroke="#1A0800" stroke-width="2"/>
+    <line x1="24" y1="0" x2="32" y2="12" stroke="#1A0800" stroke-width="2"/>
+    <!-- Antennae -->
+    <line x1="28" y1="-2" x2="38" y2="-14" stroke="#1A0800" stroke-width="2"/>
+    <line x1="28" y1="-2" x2="42" y2="-8" stroke="#1A0800" stroke-width="2"/>
+    <!-- File being carried (folder) -->
+    <rect x="2" y="-24" width="26" height="18" rx="2" fill="#FFAA22" stroke="#CC7700" stroke-width="1"/>
+    <rect x="2" y="-28" width="10" height="6" rx="2" fill="#FFAA22"/>
+    <text x="15" y="-12" font-family="monospace" font-size="7" fill="#6A3A00" text-anchor="middle">TMP</text>
+  </g>
+  <!-- Ant 2: larger, carrying heavier file -->
+  <g transform="translate(520, 618)">
+    <ellipse cx="0" cy="0" rx="9" ry="6" fill="#1A0800"/>
+    <ellipse cx="16" cy="-3" rx="12" ry="8" fill="#2A1000"/>
+    <ellipse cx="32" cy="2" rx="7" ry="5" fill="#1A0800"/>
+    <line x1="-2" y1="0" x2="-14" y2="14" stroke="#1A0800" stroke-width="2"/>
+    <line x1="2" y1="0" x2="-2" y2="14" stroke="#1A0800" stroke-width="2"/>
+    <line x1="12" y1="-3" x2="8" y2="15" stroke="#1A0800" stroke-width="2"/>
+    <line x1="16" y1="-3" x2="16" y2="15" stroke="#1A0800" stroke-width="2"/>
+    <line x1="22" y1="-3" x2="28" y2="14" stroke="#1A0800" stroke-width="2"/>
+    <line x1="26" y1="0" x2="36" y2="14" stroke="#1A0800" stroke-width="2"/>
+    <line x1="32" y1="-3" x2="44" y2="-18" stroke="#1A0800" stroke-width="2"/>
+    <line x1="32" y1="-3" x2="48" y2="-10" stroke="#1A0800" stroke-width="2"/>
+    <!-- Heavy file (duplicate files) -->
+    <rect x="-2" y="-32" width="22" height="28" rx="2" fill="#88AAFF" stroke="#4466CC" stroke-width="1"/>
+    <rect x="4" y="-36" width="22" height="28" rx="2" fill="#88AAFF" stroke="#4466CC" stroke-width="1"/>
+    <text x="15" y="-20" font-family="monospace" font-size="6" fill="#1A2A8A" text-anchor="middle">copy</text>
+    <text x="15" y="-10" font-family="monospace" font-size="5" fill="#1A2A8A" text-anchor="middle">(2)</text>
+  </g>
+  <!-- Ant 3: small, returning for more -->
+  <g transform="translate(700, 650) scale(-1, 1)">
+    <ellipse cx="0" cy="0" rx="7" ry="4" fill="#1A0800"/>
+    <ellipse cx="12" cy="-2" rx="9" ry="6" fill="#2A1000"/>
+    <ellipse cx="24" cy="2" rx="5" ry="3" fill="#1A0800"/>
+    <line x1="-1" y1="0" x2="-10" y2="10" stroke="#1A0800" stroke-width="2"/>
+    <line x1="1" y1="0" x2="-3" y2="10" stroke="#1A0800" stroke-width="2"/>
+    <line x1="8" y1="-2" x2="5" y2="11" stroke="#1A0800" stroke-width="2"/>
+    <line x1="12" y1="-2" x2="12" y2="11" stroke="#1A0800" stroke-width="2"/>
+    <line x1="18" y1="-2" x2="22" y2="10" stroke="#1A0800" stroke-width="2"/>
+    <line x1="22" y1="0" x2="28" y2="10" stroke="#1A0800" stroke-width="2"/>
+    <line x1="24" y1="-2" x2="34" y2="-12" stroke="#1A0800" stroke-width="2"/>
+    <line x1="24" y1="-2" x2="38" y2="-7" stroke="#1A0800" stroke-width="2"/>
+  </g>
+  <!-- Source folder (right side) with messy files piling up -->
+  <rect x="760" y="480" width="140" height="100" rx="8" fill="#3A1A00" stroke="#AA5520" stroke-width="4"/>
+  <rect x="760" y="468" width="60" height="16" rx="4" fill="#AA5520"/>
+  <text x="830" y="535" font-family="Arial,sans-serif" font-size="14" fill="#FF8844" text-anchor="middle" font-weight="bold">Downloads</text>
+  <text x="830" y="560" font-family="monospace" font-size="11" fill="#CC5520" text-anchor="middle">847 files</text>
+  <!-- Layer 3: Progress stats -->
+  <rect x="280" y="760" width="464" height="60" rx="10" fill="#1A0C00" stroke="#8A5020" stroke-width="2"/>
+  <text x="512" y="789" font-family="Arial,sans-serif" font-size="14" fill="#FFAA44" text-anchor="middle">🐜 개미 군집 정리 중...</text>
+  <text x="512" y="808" font-family="monospace" font-size="12" fill="#AA6A20" text-anchor="middle">392 / 847 파일 처리 완료</text>
+</svg>

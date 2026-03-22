@@ -1,0 +1,31 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Folder.Purge | 폴더 X-레이 스캔 | 기하학 | #0A0A1A -->
+  <defs>
+    <filter id="xrayGlow">
+      <feGaussianBlur stdDeviation="12" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="160" fill="#0A0A1A"/>
+  <!-- Layer 2: X-ray folder (transparent, showing empty inside) -->
+  <!-- Folder outline (glowing X-ray style) -->
+  <path d="M220 340 L220 320 Q220 300 240 300 L420 300 L460 260 L780 260 Q800 260 800 280 L800 340 Z" fill="none" stroke="#22D3EE" stroke-width="4" opacity="0.7" filter="url(#xrayGlow)"/>
+  <rect x="220" y="340" width="580" height="400" rx="12" fill="#050514" stroke="#22D3EE" stroke-width="4" opacity="0.8" filter="url(#xrayGlow)"/>
+  <!-- Folder interior scan lines (X-ray effect) -->
+  <line x1="240" y1="380" x2="780" y2="380" stroke="#22D3EE" stroke-width="1" opacity="0.15"/>
+  <line x1="240" y1="420" x2="780" y2="420" stroke="#22D3EE" stroke-width="1" opacity="0.15"/>
+  <line x1="240" y1="460" x2="780" y2="460" stroke="#22D3EE" stroke-width="1" opacity="0.15"/>
+  <line x1="240" y1="500" x2="780" y2="500" stroke="#22D3EE" stroke-width="1" opacity="0.15"/>
+  <line x1="240" y1="540" x2="780" y2="540" stroke="#22D3EE" stroke-width="1" opacity="0.15"/>
+  <line x1="240" y1="580" x2="780" y2="580" stroke="#22D3EE" stroke-width="1" opacity="0.15"/>
+  <line x1="240" y1="620" x2="780" y2="620" stroke="#22D3EE" stroke-width="1" opacity="0.15"/>
+  <!-- Empty label in center -->
+  <text x="512" y="530" font-family="Arial,sans-serif" font-size="52" fill="#22D3EE" text-anchor="middle" font-weight="bold" opacity="0.6" filter="url(#xrayGlow)">EMPTY</text>
+  <!-- Layer 3: Scan beam effect -->
+  <rect x="220" y="430" width="580" height="30" fill="#22D3EE" opacity="0.08"/>
+  <!-- X-ray cross badge -->
+  <circle cx="790" cy="280" r="42" fill="#0A0A1A" stroke="#22D3EE" stroke-width="3"/>
+  <line x1="790" y1="256" x2="790" y2="304" stroke="#22D3EE" stroke-width="8" stroke-linecap="round" filter="url(#xrayGlow)"/>
+  <line x1="766" y1="280" x2="814" y2="280" stroke="#22D3EE" stroke-width="8" stroke-linecap="round" filter="url(#xrayGlow)"/>
+</svg>

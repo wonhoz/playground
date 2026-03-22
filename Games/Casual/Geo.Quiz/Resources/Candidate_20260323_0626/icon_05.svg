@@ -1,0 +1,66 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Geo.Quiz | 지도 핀 모음 — 여러 나라 위치 학습 | 레이어드 | #00100A -->
+  <defs>
+    <radialGradient id="pinGlow5" cx="50%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#00FF88" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#001A0E" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="160" fill="#00100A"/>
+  <rect width="1024" height="1024" rx="160" fill="url(#pinGlow5)"/>
+  <!-- Layer 2: Map grid base -->
+  <!-- Latitude lines -->
+  <line x1="160" y1="340" x2="864" y2="340" stroke="#00442A" stroke-width="1" opacity="0.6"/>
+  <line x1="160" y1="440" x2="864" y2="440" stroke="#00442A" stroke-width="1" opacity="0.6"/>
+  <line x1="160" y1="540" x2="864" y2="540" stroke="#00442A" stroke-width="1" opacity="0.6"/>
+  <line x1="160" y1="640" x2="864" y2="640" stroke="#00442A" stroke-width="1" opacity="0.6"/>
+  <line x1="160" y1="740" x2="864" y2="740" stroke="#00442A" stroke-width="1" opacity="0.6"/>
+  <!-- Longitude lines -->
+  <line x1="260" y1="280" x2="260" y2="800" stroke="#00442A" stroke-width="1" opacity="0.6"/>
+  <line x1="390" y1="280" x2="390" y2="800" stroke="#00442A" stroke-width="1" opacity="0.6"/>
+  <line x1="512" y1="280" x2="512" y2="800" stroke="#00442A" stroke-width="1" opacity="0.6"/>
+  <line x1="640" y1="280" x2="640" y2="800" stroke="#00442A" stroke-width="1" opacity="0.6"/>
+  <line x1="770" y1="280" x2="770" y2="800" stroke="#00442A" stroke-width="1" opacity="0.6"/>
+  <!-- Continent outlines (simplified) -->
+  <!-- Europe/Asia region -->
+  <path d="M 380 340 Q 420 330 500 340 Q 560 348 620 360 Q 660 370 700 355 Q 720 360 750 370 Q 770 385 760 400 Q 740 410 720 420 Q 700 425 680 420 Q 650 425 640 440 Q 600 445 570 440 Q 540 450 520 445 Q 480 440 460 430 Q 430 420 410 410 Q 385 400 380 380 Z" fill="#0D4A2A" stroke="#1A6A3A" stroke-width="2" opacity="0.8"/>
+  <!-- Americas region -->
+  <path d="M 230 360 Q 260 350 290 360 Q 310 375 300 400 Q 295 420 280 430 Q 260 440 250 460 Q 240 500 250 540 Q 255 570 245 590 Q 230 610 235 640 Q 240 660 230 680 Q 218 700 225 720 Q 215 730 220 760 Q 200 755 195 730 Q 190 700 200 670 Q 195 640 200 610 Q 192 580 195 550 Q 190 520 195 490 Q 188 460 195 430 Q 200 400 215 380 Z" fill="#0D4A2A" stroke="#1A6A3A" stroke-width="2" opacity="0.8"/>
+  <!-- Layer 3: Location pins with country labels -->
+  <!-- Pin 1: Korea (correct answer pin - green) -->
+  <ellipse cx="700" cy="400" rx="10" ry="5" fill="#004A28" opacity="0.5"/>
+  <path d="M 700 400 Q 684 376 700 356 Q 716 376 700 400 Z" fill="#00FF88" stroke="#88FFCC" stroke-width="2"/>
+  <circle cx="700" cy="356" r="14" fill="#00FF88" stroke="#88FFCC" stroke-width="2"/>
+  <text x="700" y="362" font-family="Arial,sans-serif" font-size="12" fill="#001A0E" text-anchor="middle" font-weight="bold">KR</text>
+  <rect x="660" y="328" width="80" height="24" rx="4" fill="#00FF88" opacity="0.9"/>
+  <text x="700" y="344" font-family="Arial,sans-serif" font-size="12" fill="#001A0E" text-anchor="middle" font-weight="bold">한국 ✓</text>
+  <!-- Pin 2: France (yellow) -->
+  <ellipse cx="480" cy="380" rx="10" ry="5" fill="#2A2A00" opacity="0.5"/>
+  <path d="M 480 380 Q 464 356 480 336 Q 496 356 480 380 Z" fill="#FFD700" stroke="#FFE860" stroke-width="2"/>
+  <circle cx="480" cy="336" r="14" fill="#FFD700" stroke="#FFE860" stroke-width="2"/>
+  <text x="480" y="342" font-family="Arial,sans-serif" font-size="12" fill="#1A1A00" text-anchor="middle" font-weight="bold">FR</text>
+  <!-- Pin 3: Brazil (blue) -->
+  <ellipse cx="295" cy="600" rx="10" ry="5" fill="#00002A" opacity="0.5"/>
+  <path d="M 295 600 Q 279 576 295 556 Q 311 576 295 600 Z" fill="#4488FF" stroke="#88BBFF" stroke-width="2"/>
+  <circle cx="295" cy="556" r="14" fill="#4488FF" stroke="#88BBFF" stroke-width="2"/>
+  <text x="295" y="562" font-family="Arial,sans-serif" font-size="12" fill="#FFFFFF" text-anchor="middle" font-weight="bold">BR</text>
+  <!-- Pin 4: Egypt (orange) -->
+  <ellipse cx="570" cy="420" rx="10" ry="5" fill="#2A1000" opacity="0.5"/>
+  <path d="M 570 420 Q 554 396 570 376 Q 586 396 570 420 Z" fill="#FF8800" stroke="#FFAA44" stroke-width="2"/>
+  <circle cx="570" cy="376" r="14" fill="#FF8800" stroke="#FFAA44" stroke-width="2"/>
+  <text x="570" y="382" font-family="Arial,sans-serif" font-size="12" fill="#FFFFFF" text-anchor="middle" font-weight="bold">EG</text>
+  <!-- Pin 5: Canada (red) -->
+  <ellipse cx="240" cy="370" rx="10" ry="5" fill="#2A0000" opacity="0.5"/>
+  <path d="M 240 370 Q 224 346 240 326 Q 256 346 240 370 Z" fill="#FF4444" stroke="#FF8888" stroke-width="2"/>
+  <circle cx="240" cy="326" r="14" fill="#FF4444" stroke="#FF8888" stroke-width="2"/>
+  <text x="240" y="332" font-family="Arial,sans-serif" font-size="12" fill="#FFFFFF" text-anchor="middle" font-weight="bold">CA</text>
+  <!-- Pin 6: Japan (pink) -->
+  <ellipse cx="760" cy="370" rx="10" ry="5" fill="#2A002A" opacity="0.5"/>
+  <path d="M 760 370 Q 744 346 760 326 Q 776 346 760 370 Z" fill="#FF88CC" stroke="#FFBBDD" stroke-width="2"/>
+  <circle cx="760" cy="326" r="14" fill="#FF88CC" stroke="#FFBBDD" stroke-width="2"/>
+  <text x="760" y="332" font-family="Arial,sans-serif" font-size="12" fill="#4A0028" text-anchor="middle" font-weight="bold">JP</text>
+  <!-- Question prompt at bottom -->
+  <rect x="260" y="790" width="504" height="60" rx="8" fill="#003A20" stroke="#00FF88" stroke-width="2"/>
+  <text x="512" y="826" font-family="Arial,sans-serif" font-size="18" fill="#00FF88" text-anchor="middle" font-weight="bold">이 핀의 위치는?</text>
+</svg>

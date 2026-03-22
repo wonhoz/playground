@@ -449,6 +449,17 @@ public partial class MainWindow : Window
         "#004D40", "#00695C", "#00796B", "#26A69A",
     ];
 
+    // 파일용: 폴더 팔레트와 동일한 색조, 채도만 낮춤
+    private static Color DesaturateForFile(Color c)
+    {
+        double gray = 0.299 * c.R + 0.587 * c.G + 0.114 * c.B;
+        const double factor = 0.30; // 원색 비율 (낮을수록 더 회색)
+        return Color.FromRgb(
+            (byte)(c.R * factor + gray * (1 - factor)),
+            (byte)(c.G * factor + gray * (1 - factor)),
+            (byte)(c.B * factor + gray * (1 - factor)));
+    }
+
     private void RenderTreeMap(List<DiskItem> items, double x, double y, double w, double h, long totalSize, int colorOffset)
     {
         if (items.Count == 0 || w < 4 || h < 4) return;
@@ -496,14 +507,18 @@ public partial class MainWindow : Window
         {
             if (rect.Width < 2 || rect.Height < 2) continue;
 
-            var color = (Color)ColorConverter.ConvertFromString(MapColors[ci % MapColors.Length]);
+            var baseColor = (Color)ColorConverter.ConvertFromString(MapColors[ci % MapColors.Length]);
             ci++;
+
+            // 폴더: 비비드 컬러 / 파일: 채도 낮은 회색 계열
+            var color = item.IsDirectory ? baseColor : DesaturateForFile(baseColor);
+            double opacity = item.IsDirectory ? 0.85 : 0.75;
 
             var border = new Border
             {
                 Width = rect.Width - 1,
                 Height = rect.Height - 1,
-                Background = new SolidColorBrush(color) { Opacity = 0.85 },
+                Background = new SolidColorBrush(color) { Opacity = opacity },
                 BorderBrush = new SolidColorBrush(Color.FromArgb(60, 0, 0, 0)),
                 BorderThickness = new Thickness(0.5),
                 CornerRadius = new CornerRadius(1),
@@ -514,10 +529,15 @@ public partial class MainWindow : Window
 
             if (rect.Width > 40 && rect.Height > 20)
             {
+                // 파일은 텍스트를 약간 흐리게 처리해 폴더와 명확히 구분
+                var textColor = item.IsDirectory
+                    ? Brushes.White
+                    : new SolidColorBrush(Color.FromArgb(200, 220, 220, 220));
+
                 var tb = new TextBlock
                 {
                     Text = item.Name,
-                    Foreground = Brushes.White,
+                    Foreground = textColor,
                     FontSize = Math.Max(9, Math.Min(13, rect.Width / 10)),
                     TextTrimming = TextTrimming.CharacterEllipsis,
                     Margin = new Thickness(3, 2, 3, 0),

@@ -31,7 +31,8 @@ public partial class App : WinApplication
         {
             Renderer        = new DarkMenuRenderer(),
             AutoSize        = true,
-            ShowImageMargin = false,
+            ShowImageMargin = true,
+            ShowCheckMargin = true,
             Font            = new Font("Segoe UI", 9.5f),
             BackColor       = System.Drawing.Color.FromArgb(0x25, 0x25, 0x35),
             ForeColor       = System.Drawing.Color.FromArgb(0xCD, 0xD6, 0xF4),

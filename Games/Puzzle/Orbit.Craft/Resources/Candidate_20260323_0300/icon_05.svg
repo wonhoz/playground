@@ -1,0 +1,51 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Orbit.Craft | 태양계 미니 시뮬레이션 | 공간/장면 | #030310 -->
+  <defs>
+    <radialGradient id="sunCore" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFF9C4"/>
+      <stop offset="40%" stop-color="#FFD600"/>
+      <stop offset="100%" stop-color="#F57F17" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="p1" cx="35%" cy="30%" r="65%">
+      <stop offset="0%" stop-color="#64B5F6"/>
+      <stop offset="100%" stop-color="#0D47A1"/>
+    </radialGradient>
+    <radialGradient id="p2" cx="40%" cy="35%" r="60%">
+      <stop offset="0%" stop-color="#A5D6A7"/>
+      <stop offset="100%" stop-color="#1B5E20"/>
+    </radialGradient>
+    <radialGradient id="p3" cx="40%" cy="35%" r="60%">
+      <stop offset="0%" stop-color="#EF9A9A"/>
+      <stop offset="100%" stop-color="#B71C1C"/>
+    </radialGradient>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="160" fill="#030310"/>
+  <!-- Stars -->
+  <circle cx="160" cy="200" r="1.5" fill="white" opacity="0.5"/>
+  <circle cx="450" cy="160" r="1" fill="white" opacity="0.4"/>
+  <circle cx="850" cy="200" r="2" fill="white" opacity="0.6"/>
+  <circle cx="900" cy="500" r="1.5" fill="white" opacity="0.4"/>
+  <circle cx="180" cy="700" r="2" fill="white" opacity="0.5"/>
+  <circle cx="800" cy="820" r="1" fill="white" opacity="0.4"/>
+  <!-- Layer 2: Orbit paths -->
+  <circle cx="512" cy="512" r="160" fill="none" stroke="#1A237E" stroke-width="1.5" stroke-dasharray="14,8" opacity="0.5"/>
+  <circle cx="512" cy="512" r="260" fill="none" stroke="#1565C0" stroke-width="1.5" stroke-dasharray="14,8" opacity="0.4"/>
+  <circle cx="512" cy="512" r="350" fill="none" stroke="#1976D2" stroke-width="1.5" stroke-dasharray="14,8" opacity="0.3"/>
+  <!-- Sun -->
+  <circle cx="512" cy="512" r="70" fill="url(#sunCore)"/>
+  <!-- Planet 1 (inner) -->
+  <circle cx="672" cy="512" r="24" fill="url(#p1)"/>
+  <!-- Planet 2 (mid) -->
+  <circle cx="260" cy="490" r="34" fill="url(#p2)"/>
+  <!-- Planet 3 with ring (outer) -->
+  <circle cx="512" cy="860" r="40" fill="url(#p3)"/>
+  <ellipse cx="512" cy="860" rx="65" ry="16" fill="none" stroke="#EF9A9A" stroke-width="4" opacity="0.6"/>
+  <!-- Layer 3: Probe (player controlled) -->
+  <!-- Probe trajectory to planet 1 -->
+  <path d="M620 400 Q660 450 672 512" fill="none" stroke="#00FFCC" stroke-width="4" stroke-linecap="round" stroke-dasharray="10,6" opacity="0.7"/>
+  <polygon points="622,395 640,404 624,417" fill="#00FFCC" opacity="0.9"/>
+  <!-- Target highlight -->
+  <circle cx="672" cy="512" r="36" fill="none" stroke="#4ADE80" stroke-width="3" stroke-dasharray="8,5" opacity="0.8"/>
+  <text x="672" y="480" font-family="Arial,sans-serif" font-size="14" fill="#4ADE80" text-anchor="middle">목표</text>
+</svg>

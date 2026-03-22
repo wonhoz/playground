@@ -1,0 +1,43 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Orbit.Craft | 행성+중력파 | 중앙심볼 | #0A0A2E -->
+  <defs>
+    <radialGradient id="planetGrad2" cx="35%" cy="30%" r="65%">
+      <stop offset="0%" stop-color="#93C5FD"/>
+      <stop offset="60%" stop-color="#1D4ED8"/>
+      <stop offset="100%" stop-color="#0F172A"/>
+    </radialGradient>
+    <radialGradient id="moonGrad" cx="40%" cy="35%" r="60%">
+      <stop offset="0%" stop-color="#D1D5DB"/>
+      <stop offset="100%" stop-color="#6B7280"/>
+    </radialGradient>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="160" fill="#0A0A2E"/>
+  <!-- Stars -->
+  <circle cx="180" cy="240" r="2" fill="white" opacity="0.5"/>
+  <circle cx="780" cy="200" r="1.5" fill="white" opacity="0.4"/>
+  <circle cx="850" cy="680" r="2" fill="white" opacity="0.6"/>
+  <circle cx="160" cy="780" r="1.5" fill="white" opacity="0.4"/>
+  <circle cx="920" cy="350" r="2" fill="white" opacity="0.5"/>
+  <!-- Layer 2: Gravity rings (concentric dashed ellipses) -->
+  <ellipse cx="512" cy="512" rx="360" ry="200" fill="none" stroke="#3B82F6" stroke-width="2" stroke-dasharray="24,12" opacity="0.3"/>
+  <ellipse cx="512" cy="512" rx="280" ry="155" fill="none" stroke="#60A5FA" stroke-width="2" stroke-dasharray="18,10" opacity="0.25"/>
+  <ellipse cx="512" cy="512" rx="200" ry="110" fill="none" stroke="#93C5FD" stroke-width="1.5" stroke-dasharray="12,8" opacity="0.2"/>
+  <!-- Planet (main) -->
+  <circle cx="512" cy="512" r="160" fill="url(#planetGrad2)"/>
+  <!-- Planet rings -->
+  <ellipse cx="512" cy="512" rx="220" ry="55" fill="none" stroke="#60A5FA" stroke-width="8" opacity="0.5"/>
+  <!-- Moon on orbit -->
+  <circle cx="760" cy="400" r="36" fill="url(#moonGrad)"/>
+  <!-- Probe approaching -->
+  <polygon points="860,300 900,320 860,340 840,320" fill="#00FFCC" opacity="0.9"/>
+  <!-- Probe trail -->
+  <path d="M860 320 Q800 360 760 400" fill="none" stroke="#00FFCC" stroke-width="3" stroke-dasharray="10,6" opacity="0.6"/>
+  <!-- Layer 3: Gravity vectors -->
+  <line x1="860" y1="320" x2="760" y2="380" stroke="#F59E0B" stroke-width="3" opacity="0.5"/>
+  <circle cx="830" cy="338" r="5" fill="#F59E0B" opacity="0.7"/>
+  <circle cx="800" cy="356" r="5" fill="#F59E0B" opacity="0.5"/>
+  <circle cx="775" cy="370" r="5" fill="#F59E0B" opacity="0.4"/>
+  <!-- Distance label -->
+  <text x="512" y="780" font-family="Consolas,monospace" font-size="22" fill="#60A5FA" text-anchor="middle" opacity="0.7">중력 궤도 계산</text>
+</svg>

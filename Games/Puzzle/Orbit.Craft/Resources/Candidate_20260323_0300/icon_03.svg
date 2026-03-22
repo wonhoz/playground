@@ -1,0 +1,40 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Orbit.Craft | 슬링샷 궤적+목표 행성 | 공간/장면 | #081020 -->
+  <defs>
+    <filter id="target">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="160" fill="#081020"/>
+  <!-- Stars -->
+  <circle cx="200" cy="200" r="2" fill="white" opacity="0.5"/>
+  <circle cx="600" cy="180" r="1.5" fill="white" opacity="0.4"/>
+  <circle cx="850" cy="240" r="2" fill="white" opacity="0.6"/>
+  <circle cx="900" cy="600" r="1.5" fill="white" opacity="0.4"/>
+  <circle cx="160" cy="800" r="2" fill="white" opacity="0.5"/>
+  <!-- Layer 2: Source planet (large, gravity assist) -->
+  <circle cx="260" cy="760" r="140" fill="#7C3AED" stroke="#A855F7" stroke-width="5"/>
+  <!-- Surface detail -->
+  <circle cx="240" cy="720" r="30" fill="#6D28D9" opacity="0.6"/>
+  <circle cx="300" cy="760" r="20" fill="#5B21B6" opacity="0.5"/>
+  <!-- Orbit arc around source planet (slingshot) -->
+  <path d="M180 620 Q140 500 200 380 Q260 260 380 240" fill="none" stroke="#7C3AED" stroke-width="2" stroke-dasharray="14,8" opacity="0.4"/>
+  <!-- Trajectory after slingshot -->
+  <path d="M380 240 Q560 200 720 300 Q840 380 840 520" fill="none" stroke="#00FFCC" stroke-width="5" stroke-linecap="round" filter="url(#target)"/>
+  <!-- Probe on trajectory -->
+  <polygon points="374,254 360,226 400,234" fill="#00FFCC" filter="url(#target)"/>
+  <!-- Target planet -->
+  <circle cx="840" cy="520" r="80" fill="#F59E0B" stroke="#FDE68A" stroke-width="4"/>
+  <!-- Target rings -->
+  <ellipse cx="840" cy="520" rx="110" ry="28" fill="none" stroke="#FDE68A" stroke-width="3" opacity="0.6"/>
+  <!-- Target marker -->
+  <circle cx="840" cy="520" r="95" fill="none" stroke="#4ADE80" stroke-width="3" stroke-dasharray="10,7" filter="url(#target)"/>
+  <!-- Layer 3: Velocity vector -->
+  <line x1="374" y1="240" x2="460" y2="214" stroke="#F59E0B" stroke-width="3" stroke-dasharray="6,4" opacity="0.7"/>
+  <polygon points="456,207 476,214 456,221" fill="#F59E0B" opacity="0.7"/>
+  <!-- Puzzle level label -->
+  <rect x="300" y="900" width="200" height="40" rx="10" fill="#1A1A3A"/>
+  <text x="400" y="927" font-family="Arial,sans-serif" font-size="18" fill="#A855F7" text-anchor="middle">Level 7</text>
+</svg>

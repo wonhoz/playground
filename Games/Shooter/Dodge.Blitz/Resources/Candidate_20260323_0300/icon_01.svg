@@ -1,0 +1,50 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Dodge.Blitz | 다이아몬드 플레이어+탄막 회피 | 대각선/동적 | #030318 -->
+  <defs>
+    <filter id="neonGlow">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="bulletGlow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="160" fill="#030318"/>
+  <!-- Stars background -->
+  <circle cx="200" cy="200" r="1.5" fill="white" opacity="0.4"/>
+  <circle cx="450" cy="150" r="1" fill="white" opacity="0.3"/>
+  <circle cx="700" cy="180" r="2" fill="white" opacity="0.5"/>
+  <circle cx="850" cy="300" r="1.5" fill="white" opacity="0.4"/>
+  <circle cx="150" cy="700" r="1" fill="white" opacity="0.3"/>
+  <circle cx="900" cy="650" r="2" fill="white" opacity="0.4"/>
+  <!-- Layer 2: Bullet barrage (many incoming bullets) -->
+  <!-- Left side bullets -->
+  <circle cx="180" cy="340" r="12" fill="#EF4444" filter="url(#bulletGlow)"/>
+  <circle cx="160" cy="420" r="10" fill="#F97316" filter="url(#bulletGlow)"/>
+  <circle cx="190" cy="500" r="14" fill="#EF4444" filter="url(#bulletGlow)"/>
+  <circle cx="170" cy="580" r="11" fill="#DC2626" filter="url(#bulletGlow)"/>
+  <circle cx="200" cy="660" r="12" fill="#F97316" filter="url(#bulletGlow)"/>
+  <!-- Top bullets -->
+  <circle cx="340" cy="180" r="12" fill="#EF4444" filter="url(#bulletGlow)"/>
+  <circle cx="460" cy="160" r="10" fill="#DC2626" filter="url(#bulletGlow)"/>
+  <circle cx="580" cy="175" r="13" fill="#F97316" filter="url(#bulletGlow)"/>
+  <circle cx="700" cy="185" r="11" fill="#EF4444" filter="url(#bulletGlow)"/>
+  <!-- Right side bullets -->
+  <circle cx="820" cy="360" r="12" fill="#DC2626" filter="url(#bulletGlow)"/>
+  <circle cx="840" cy="460" r="10" fill="#EF4444" filter="url(#bulletGlow)"/>
+  <circle cx="810" cy="560" r="13" fill="#F97316" filter="url(#bulletGlow)"/>
+  <!-- Bullet trails (motion lines) -->
+  <line x1="170" y1="340" x2="220" y2="340" stroke="#EF4444" stroke-width="3" opacity="0.4"/>
+  <line x1="150" y1="420" x2="200" y2="420" stroke="#F97316" stroke-width="3" opacity="0.3"/>
+  <line x1="820" y1="360" x2="770" y2="360" stroke="#DC2626" stroke-width="3" opacity="0.4"/>
+  <!-- Player (diamond shape, neon cyan, center) -->
+  <polygon points="512,440 572,512 512,584 452,512" fill="#00FFCC" stroke="#00E5CC" stroke-width="4"
+    filter="url(#neonGlow)"/>
+  <!-- Invincibility glow ring -->
+  <circle cx="512" cy="512" r="90" fill="none" stroke="#00FFCC" stroke-width="3" opacity="0.3"/>
+  <!-- Layer 3: Score + lives -->
+  <text x="512" y="820" font-family="Consolas,monospace" font-size="30" fill="#00FFCC" text-anchor="middle" filter="url(#bulletGlow)">♦ ♦ ♦</text>
+  <text x="512" y="860" font-family="Arial,sans-serif" font-size="22" fill="#475569" text-anchor="middle">DODGE!</text>
+</svg>

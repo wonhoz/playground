@@ -1,0 +1,35 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Dodge.Blitz | 스코어 폭발 | 기하학 | #1A0020 -->
+  <defs>
+    <filter id="scoreGlow">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="160" fill="#0D0020"/>
+  <!-- Layer 2: Explosion burst rays -->
+  <!-- Long rays -->
+  <line x1="512" y1="512" x2="512" y2="200" stroke="#FF00FF" stroke-width="6" opacity="0.6" filter="url(#scoreGlow)"/>
+  <line x1="512" y1="512" x2="772" y2="252" stroke="#FF00CC" stroke-width="5" opacity="0.5"/>
+  <line x1="512" y1="512" x2="824" y2="512" stroke="#CC00FF" stroke-width="6" opacity="0.6" filter="url(#scoreGlow)"/>
+  <line x1="512" y1="512" x2="772" y2="772" stroke="#FF00FF" stroke-width="5" opacity="0.5"/>
+  <line x1="512" y1="512" x2="512" y2="824" stroke="#FF00CC" stroke-width="6" opacity="0.6" filter="url(#scoreGlow)"/>
+  <line x1="512" y1="512" x2="252" y2="772" stroke="#CC00FF" stroke-width="5" opacity="0.5"/>
+  <line x1="512" y1="512" x2="200" y2="512" stroke="#FF00FF" stroke-width="6" opacity="0.6" filter="url(#scoreGlow)"/>
+  <line x1="512" y1="512" x2="252" y2="252" stroke="#FF00CC" stroke-width="5" opacity="0.5"/>
+  <!-- Short rays (45° offsets) -->
+  <line x1="512" y1="512" x2="678" y2="218" stroke="#FF88FF" stroke-width="4" opacity="0.4"/>
+  <line x1="512" y1="512" x2="806" y2="346" stroke="#FF88FF" stroke-width="4" opacity="0.4"/>
+  <line x1="512" y1="512" x2="806" y2="678" stroke="#FF88FF" stroke-width="4" opacity="0.4"/>
+  <line x1="512" y1="512" x2="678" y2="806" stroke="#FF88FF" stroke-width="4" opacity="0.4"/>
+  <line x1="512" y1="512" x2="346" y2="806" stroke="#FF88FF" stroke-width="4" opacity="0.4"/>
+  <line x1="512" y1="512" x2="218" y2="678" stroke="#FF88FF" stroke-width="4" opacity="0.4"/>
+  <line x1="512" y1="512" x2="218" y2="346" stroke="#FF88FF" stroke-width="4" opacity="0.4"/>
+  <line x1="512" y1="512" x2="346" y2="218" stroke="#FF88FF" stroke-width="4" opacity="0.4"/>
+  <!-- Layer 3: Score text at center -->
+  <circle cx="512" cy="512" r="140" fill="#1A0028"/>
+  <circle cx="512" cy="512" r="128" fill="none" stroke="#FF00FF" stroke-width="4" opacity="0.6" filter="url(#scoreGlow)"/>
+  <text x="512" y="478" font-family="Consolas,monospace" font-size="28" fill="#CC99FF" text-anchor="middle">SCORE</text>
+  <text x="512" y="554" font-family="Arial,sans-serif" font-size="64" fill="#FF00FF" text-anchor="middle" font-weight="bold" filter="url(#scoreGlow)">9999</text>
+</svg>

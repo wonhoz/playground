@@ -1,0 +1,35 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Dodge.Blitz | 번개 회피 궤적 | 대각선/동적 | #0A0A1A -->
+  <defs>
+    <filter id="boltGlow">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="trailGlow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="160" fill="#0A0A1A"/>
+  <!-- Layer 2: Lightning bolt (danger zone) -->
+  <polygon points="560,160 480,480 560,480 440,840 620,480 520,480 620,160" fill="#FFD700" filter="url(#boltGlow)"/>
+  <!-- Layer 3: Player dodge path (arc around lightning) -->
+  <!-- Path curve avoiding the bolt -->
+  <path d="M200 500 Q240 320 340 260 Q440 200 480 280 Q520 360 560 340 Q640 300 720 400 Q780 480 760 600 Q740 700 800 780" fill="none" stroke="#00FFCC" stroke-width="6" stroke-linecap="round" filter="url(#trailGlow)"/>
+  <!-- Player diamond at end of path -->
+  <polygon points="800,750 840,780 800,810 760,780" fill="#00FFCC" filter="url(#boltGlow)"/>
+  <!-- Trail fade dots -->
+  <circle cx="220" cy="498" r="8" fill="#00FFCC" opacity="0.3"/>
+  <circle cx="300" cy="410" r="7" fill="#00FFCC" opacity="0.4"/>
+  <circle cx="390" cy="310" r="8" fill="#00FFCC" opacity="0.5"/>
+  <circle cx="480" cy="282" r="7" fill="#00FFCC" opacity="0.6"/>
+  <circle cx="580" cy="330" r="8" fill="#00FFCC" opacity="0.7"/>
+  <circle cx="670" cy="380" r="7" fill="#00FFCC" opacity="0.75"/>
+  <circle cx="730" cy="460" r="8" fill="#00FFCC" opacity="0.8"/>
+  <circle cx="760" cy="560" r="7" fill="#00FFCC" opacity="0.85"/>
+  <circle cx="780" cy="660" r="8" fill="#00FFCC" opacity="0.9"/>
+  <!-- Warning indicator near bolt -->
+  <circle cx="512" cy="500" r="60" fill="none" stroke="#EF4444" stroke-width="4" stroke-dasharray="12,8" opacity="0.5"/>
+  <text x="512" y="870" font-family="Arial,sans-serif" font-size="28" fill="#FFD700" text-anchor="middle" filter="url(#trailGlow)">DODGE!</text>
+</svg>

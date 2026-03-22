@@ -1,0 +1,37 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Dodge.Blitz | 무적 깜빡임 다이아몬드 | 중앙심볼 | #001820 -->
+  <defs>
+    <filter id="invGlow">
+      <feGaussianBlur stdDeviation="16" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="softInv">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="160" fill="#001820"/>
+  <!-- Layer 2: Large invincible player (semi-transparent blink state) -->
+  <!-- Outer glow ring (invincibility) -->
+  <circle cx="512" cy="512" r="220" fill="none" stroke="#00FFCC" stroke-width="6" opacity="0.3" filter="url(#invGlow)"/>
+  <circle cx="512" cy="512" r="180" fill="none" stroke="#00FFCC" stroke-width="4" opacity="0.5" filter="url(#softInv)"/>
+  <circle cx="512" cy="512" r="140" fill="none" stroke="#00FFCC" stroke-width="3" opacity="0.7"/>
+  <!-- Player diamond (partially transparent = blink) -->
+  <polygon points="512,360 652,512 512,664 372,512" fill="#00FFCC" opacity="0.35" filter="url(#invGlow)"/>
+  <polygon points="512,360 652,512 512,664 372,512" fill="none" stroke="#00FFCC" stroke-width="8" opacity="0.9" filter="url(#invGlow)"/>
+  <!-- Inner shine -->
+  <polygon points="512,400 612,512 512,624 412,512" fill="none" stroke="#80FFEE" stroke-width="3" opacity="0.4"/>
+  <!-- Blink rings (rippling out) -->
+  <circle cx="512" cy="512" r="250" fill="none" stroke="#00FFCC" stroke-width="2" opacity="0.15"/>
+  <circle cx="512" cy="512" r="300" fill="none" stroke="#00FFCC" stroke-width="1.5" opacity="0.1"/>
+  <!-- Layer 3: Hit flash indicator -->
+  <text x="512" y="820" font-family="Arial,sans-serif" font-size="26" fill="#00FFCC" text-anchor="middle" filter="url(#softInv)">무적 0.4s</text>
+  <!-- Damage absorbed notification (faded) -->
+  <text x="512" y="220" font-family="Arial,sans-serif" font-size="36" fill="#EF4444" text-anchor="middle" opacity="0.5">피격!</text>
+  <!-- Flicker lines -->
+  <line x1="430" y1="380" x2="460" y2="420" stroke="#00FFCC" stroke-width="3" opacity="0.4" stroke-linecap="round"/>
+  <line x1="590" y1="375" x2="558" y2="416" stroke="#00FFCC" stroke-width="3" opacity="0.4" stroke-linecap="round"/>
+  <line x1="420" y1="622" x2="452" y2="585" stroke="#00FFCC" stroke-width="3" opacity="0.3" stroke-linecap="round"/>
+  <line x1="600" y1="620" x2="566" y2="582" stroke="#00FFCC" stroke-width="3" opacity="0.3" stroke-linecap="round"/>
+</svg>

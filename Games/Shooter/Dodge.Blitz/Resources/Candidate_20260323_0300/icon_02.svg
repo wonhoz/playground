@@ -1,0 +1,46 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Dodge.Blitz | 네온 총알 소나기 회피 | 공간/장면 | #050520 -->
+  <defs>
+    <filter id="redGlow">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="cyanGlow2">
+      <feGaussianBlur stdDeviation="12" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="160" fill="#050520"/>
+  <!-- Layer 2: Dense bullet pattern (top) -->
+  <!-- Row of bullets raining down -->
+  <circle cx="200" cy="200" r="14" fill="#EF4444" filter="url(#redGlow)"/>
+  <circle cx="280" cy="240" r="12" fill="#DC2626" filter="url(#redGlow)"/>
+  <circle cx="360" cy="200" r="14" fill="#EF4444" filter="url(#redGlow)"/>
+  <circle cx="440" cy="230" r="12" fill="#F87171" filter="url(#redGlow)"/>
+  <circle cx="520" cy="200" r="14" fill="#DC2626" filter="url(#redGlow)"/>
+  <circle cx="600" cy="220" r="13" fill="#EF4444" filter="url(#redGlow)"/>
+  <circle cx="680" cy="200" r="14" fill="#DC2626" filter="url(#redGlow)"/>
+  <circle cx="760" cy="235" r="12" fill="#F87171" filter="url(#redGlow)"/>
+  <circle cx="840" cy="200" r="14" fill="#EF4444" filter="url(#redGlow)"/>
+  <!-- Row 2 -->
+  <circle cx="240" cy="320" r="12" fill="#EF4444" filter="url(#redGlow)"/>
+  <circle cx="400" cy="340" r="13" fill="#DC2626" filter="url(#redGlow)"/>
+  <circle cx="560" cy="310" r="14" fill="#F87171" filter="url(#redGlow)"/>
+  <circle cx="720" cy="330" r="12" fill="#EF4444" filter="url(#redGlow)"/>
+  <circle cx="880" cy="320" r="13" fill="#DC2626" filter="url(#redGlow)"/>
+  <!-- Trail lines -->
+  <line x1="200" y1="180" x2="200" y2="220" stroke="#EF4444" stroke-width="4" opacity="0.4"/>
+  <line x1="360" y1="180" x2="360" y2="220" stroke="#EF4444" stroke-width="4" opacity="0.4"/>
+  <line x1="520" y1="180" x2="520" y2="220" stroke="#EF4444" stroke-width="4" opacity="0.4"/>
+  <line x1="680" y1="180" x2="680" y2="220" stroke="#EF4444" stroke-width="4" opacity="0.4"/>
+  <!-- Layer 3: Player dodging (bottom center, moved to side) -->
+  <!-- Safe zone path (arc) -->
+  <path d="M300 680 Q512 520 720 680" fill="none" stroke="#00FFCC" stroke-width="4" stroke-dasharray="16,10" opacity="0.4"/>
+  <!-- Player at safe spot -->
+  <polygon points="512,680 552,720 512,760 472,720" fill="#00FFCC" filter="url(#cyanGlow2)"/>
+  <!-- Safe glow around player -->
+  <circle cx="512" cy="720" r="70" fill="none" stroke="#00FFCC" stroke-width="3" opacity="0.3"/>
+  <!-- Score display -->
+  <text x="512" y="880" font-family="Consolas,monospace" font-size="36" fill="#00FFCC" text-anchor="middle" filter="url(#cyanGlow2)">SCORE: 9999</text>
+</svg>

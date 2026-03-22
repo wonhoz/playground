@@ -1,39 +1,58 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
   <defs>
-    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#F5F5F5"/>
-      <stop offset="100%" stop-color="#E0E0E0"/>
+    <linearGradient id="bg09" x1="20%" y1="0%" x2="80%" y2="100%">
+      <stop offset="0%" stop-color="#0E1E2C"/>
+      <stop offset="100%" stop-color="#060E18"/>
     </linearGradient>
-    <linearGradient id="swipeAccent" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#6200EA"/>
-      <stop offset="100%" stop-color="#B388FF"/>
+    <linearGradient id="mouse09" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#B8D8F0"/>
+      <stop offset="100%" stop-color="#6A9EC0"/>
     </linearGradient>
-    <filter id="minGlow">
-      <feGaussianBlur stdDeviation="3" result="b"/>
-      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    <filter id="glow09">
+      <feGaussianBlur stdDeviation="9" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="softer09">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
   </defs>
-  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
-  <!-- Mouse body - clean minimal -->
-  <rect x="186" y="130" width="140" height="200" rx="70" fill="#FFFFFF" stroke="#DDDDDD" stroke-width="4"/>
-  <!-- Left button glow -->
-  <path d="M186,200 Q186,130 256,130 L256,230 Q186,230 186,200 Z" fill="#6200EA" opacity="0.08"/>
-  <!-- Scroll wheel -->
-  <rect x="240" y="168" width="32" height="56" rx="16" fill="#EEEEEE" stroke="#CCCCCC" stroke-width="2"/>
-  <!-- Divider line -->
-  <line x1="256" y1="130" x2="256" y2="230" stroke="#DDDDDD" stroke-width="2"/>
-  <!-- Clean swipe arrow right -->
-  <line x1="186" y1="400" x2="380" y2="400" stroke="url(#swipeAccent)" stroke-width="10" stroke-linecap="round" filter="url(#minGlow)"/>
-  <polygon points="380,400 354,384 354,416" fill="#6200EA" filter="url(#minGlow)"/>
-  <!-- Ghost trail of swipe -->
-  <line x1="186" y1="420" x2="330" y2="420" stroke="#B388FF" stroke-width="6" stroke-linecap="round" opacity="0.5"/>
-  <line x1="186" y1="436" x2="280" y2="436" stroke="#B388FF" stroke-width="4" stroke-linecap="round" opacity="0.3"/>
-  <!-- Quick stats dots -->
-  <circle cx="100" cy="130" r="12" fill="#6200EA" opacity="0.8"/>
-  <circle cx="100" cy="165" r="10" fill="#9C27B0" opacity="0.7"/>
-  <circle cx="100" cy="196" r="8" fill="#BA68C8" opacity="0.5"/>
-  <circle cx="100" cy="222" r="6" fill="#CE93D8" opacity="0.3"/>
-  <!-- Label -->
-  <text x="256" y="95" font-family="sans-serif" font-size="24" fill="#6200EA" text-anchor="middle" font-weight="bold">Mouse.Flick</text>
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="180" fill="url(#bg09)"/>
+
+  <!-- 마우스 (크게, 왼쪽 배치) -->
+  <rect x="140" y="280" width="280" height="400" rx="140" fill="url(#mouse09)" stroke="#D0E8F8" stroke-width="10"/>
+  <!-- 좌우 버튼 분할 -->
+  <line x1="280" y1="280" x2="280" y2="480" stroke="#8AB8D8" stroke-width="9"/>
+  <!-- 스크롤휠 -->
+  <rect x="260" y="320" width="40" height="110" rx="20" fill="#2A4860"/>
+  <!-- 우클릭 버튼 강조 (ice blue glow) -->
+  <path d="M 280 280 Q 420 280 420 380 L 420 480 L 280 480 Z" fill="#A0D0F0" opacity="0.5"/>
+  <text x="355" y="400" font-family="sans-serif" font-size="28" font-weight="bold" fill="#FFFFFF" text-anchor="middle" opacity="0.9">R</text>
+
+  <!-- 제스처 궤적 화살표: 오른쪽으로 길게 (스와이프) -->
+  <path d="M 420 490 Q 560 490 660 390 Q 760 290 820 290" fill="none" stroke="#A0D8F0" stroke-width="20" stroke-linecap="round" filter="url(#glow09)"/>
+
+  <!-- 이동 속도 잔상 -->
+  <path d="M 420 490 Q 560 490 660 390 Q 760 290 820 290" fill="none" stroke="#A0D8F0" stroke-width="40" stroke-linecap="round" opacity="0.12"/>
+
+  <!-- 끝점 화살표 -->
+  <polyline points="772,256 826,288 796,336" fill="none" stroke="#A0D8F0" stroke-width="20" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow09)"/>
+
+  <!-- 동작 변환 플로우 -->
+  <!-- 제스처 박스 -->
+  <rect x="420" y="600" width="180" height="62" rx="12" fill="#0A2840" stroke="#6AACD0" stroke-width="3"/>
+  <text x="510" y="638" font-family="monospace" font-size="32" font-weight="bold" fill="#A0D8F0" text-anchor="middle">RU</text>
+
+  <!-- 화살표 -->
+  <path d="M 610 631 L 660 631" fill="none" stroke="#5090B0" stroke-width="8" stroke-linecap="round"/>
+  <polyline points="644,612 664,631 644,650" fill="none" stroke="#5090B0" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- 동작 박스 -->
+  <rect x="668" y="600" width="220" height="62" rx="12" fill="#0A2840" stroke="#6AACD0" stroke-width="3"/>
+  <text x="778" y="638" font-family="monospace" font-size="26" font-weight="bold" fill="#C8E8FF" text-anchor="middle">Ctrl+T</text>
+
+  <!-- 부제목 -->
+  <text x="512" y="860" font-family="sans-serif" font-size="26" fill="#6AACD0" text-anchor="middle">Gesture → Action</text>
 </svg>

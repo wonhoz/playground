@@ -1,43 +1,59 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
   <defs>
-    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#0E1621"/>
-      <stop offset="100%" stop-color="#1A2235"/>
+    <linearGradient id="bg05" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#141820"/>
+      <stop offset="100%" stop-color="#0A0E14"/>
     </linearGradient>
-    <linearGradient id="arrow" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#00C9FF"/>
-      <stop offset="100%" stop-color="#92FE9D"/>
+    <linearGradient id="mouse05" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#4A5568"/>
+      <stop offset="100%" stop-color="#2D3748"/>
     </linearGradient>
-    <filter id="swipeGlow">
-      <feGaussianBlur stdDeviation="4" result="b"/>
-      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    <filter id="glow05">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
   </defs>
-  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
-  <!-- Mouse body -->
-  <rect x="196" y="100" width="120" height="180" rx="60" fill="#1E2E42" stroke="#2A3D5A" stroke-width="4"/>
-  <line x1="256" y1="100" x2="256" y2="190" stroke="#2A3D5A" stroke-width="3"/>
-  <!-- Scroll wheel -->
-  <rect x="244" y="150" width="24" height="40" rx="12" fill="#3A5A7A" opacity="0.8"/>
-  <!-- Left click highlight -->
-  <path d="M196,160 Q196,100 256,100 L256,190 Q196,190 196,160 Z" fill="#00C9FF" opacity="0.15"/>
-  <!-- Flick gesture arc -->
-  <path d="M290,320 Q350,280 420,260" fill="none" stroke="url(#arrow)" stroke-width="6" stroke-linecap="round" filter="url(#swipeGlow)"/>
-  <polygon points="420,248 440,268 416,272" fill="#92FE9D" filter="url(#swipeGlow)"/>
-  <!-- Gesture trail -->
-  <circle cx="295" cy="318" r="5" fill="#00C9FF" opacity="0.8"/>
-  <circle cx="320" cy="305" r="4" fill="#00C9FF" opacity="0.6"/>
-  <circle cx="345" cy="294" r="3" fill="#00C9FF" opacity="0.4"/>
-  <circle cx="370" cy="284" r="2" fill="#00C9FF" opacity="0.2"/>
-  <!-- Right swipe gesture -->
-  <path d="M80,360 Q130,330 200,340" fill="none" stroke="#FF6B9D" stroke-width="5" stroke-linecap="round" filter="url(#swipeGlow)"/>
-  <polygon points="200,328 218,342 196,352" fill="#FF6B9D" filter="url(#swipeGlow)"/>
-  <!-- Click ripple -->
-  <circle cx="380" cy="380" r="30" fill="none" stroke="#92FE9D" stroke-width="3" opacity="0.6"/>
-  <circle cx="380" cy="380" r="20" fill="none" stroke="#92FE9D" stroke-width="3" opacity="0.4"/>
-  <circle cx="380" cy="380" r="10" fill="#92FE9D" opacity="0.3"/>
-  <!-- Up flick -->
-  <path d="M140,420 Q120,360 130,300" fill="none" stroke="#FFC107" stroke-width="5" stroke-linecap="round" filter="url(#swipeGlow)"/>
-  <polygon points="118,300 132,280 142,302" fill="#FFC107" filter="url(#swipeGlow)"/>
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="180" fill="url(#bg05)"/>
+
+  <!-- 마우스 본체 (중앙심볼) -->
+  <rect x="382" y="180" width="260" height="380" rx="130" fill="url(#mouse05)" stroke="#718096" stroke-width="12"/>
+  <!-- 마우스 좌우 버튼 분할선 -->
+  <line x1="512" y1="180" x2="512" y2="360" stroke="#9AA5B4" stroke-width="8"/>
+  <!-- 스크롤휠 -->
+  <rect x="494" y="220" width="36" height="100" rx="18" fill="#9AA5B4"/>
+  <!-- 우클릭 버튼 하이라이트 (제스처 트리거) -->
+  <path d="M 512 180 Q 642 180 642 280 L 642 360 L 512 360 Z" fill="#A0AEC0" opacity="0.6" rx="0"/>
+
+  <!-- 오른쪽 버튼 위에 "우클릭" 표시 -->
+  <text x="577" y="285" font-family="sans-serif" font-size="22" fill="#E2E8F0" text-anchor="middle" opacity="0.9">R</text>
+
+  <!-- 4방향 화살표 (제스처 방향) -->
+  <!-- 오른쪽 화살표 -->
+  <path d="M 700 512 L 830 512" fill="none" stroke="#63B3ED" stroke-width="16" stroke-linecap="round" filter="url(#glow05)"/>
+  <polyline points="795,477 835,512 795,547" fill="none" stroke="#63B3ED" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow05)"/>
+  <!-- 왼쪽 화살표 -->
+  <path d="M 324 512 L 194 512" fill="none" stroke="#63B3ED" stroke-width="16" stroke-linecap="round" filter="url(#glow05)"/>
+  <polyline points="229,477 189,512 229,547" fill="none" stroke="#63B3ED" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow05)"/>
+  <!-- 위쪽 화살표 -->
+  <path d="M 512 176 L 512 90" fill="none" stroke="#68D391" stroke-width="16" stroke-linecap="round" filter="url(#glow05)"/>
+  <polyline points="477,120 512,82 547,120" fill="none" stroke="#68D391" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow05)"/>
+  <!-- 아래쪽 화살표 -->
+  <path d="M 512 564 L 512 650" fill="none" stroke="#68D391" stroke-width="16" stroke-linecap="round" filter="url(#glow05)"/>
+  <polyline points="477,618 512,658 547,618" fill="none" stroke="#68D391" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow05)"/>
+
+  <!-- 하단: 연결되는 앱 동작 아이콘들 -->
+  <!-- 이전 탭 -->
+  <rect x="160" y="720" width="160" height="120" rx="16" fill="#1A2030" stroke="#4A5568" stroke-width="4"/>
+  <text x="240" y="768" font-family="monospace" font-size="20" fill="#9AA5B4" text-anchor="middle">Tab-1</text>
+  <text x="240" y="800" font-family="monospace" font-size="28" font-weight="bold" fill="#63B3ED" text-anchor="middle">←</text>
+  <!-- 닫기 -->
+  <rect x="432" y="720" width="160" height="120" rx="16" fill="#1A2030" stroke="#4A5568" stroke-width="4"/>
+  <text x="512" y="768" font-family="monospace" font-size="20" fill="#9AA5B4" text-anchor="middle">Close</text>
+  <text x="512" y="802" font-family="monospace" font-size="32" font-weight="bold" fill="#FC8181" text-anchor="middle">×</text>
+  <!-- 다음 탭 -->
+  <rect x="704" y="720" width="160" height="120" rx="16" fill="#1A2030" stroke="#4A5568" stroke-width="4"/>
+  <text x="784" y="768" font-family="monospace" font-size="20" fill="#9AA5B4" text-anchor="middle">Tab+1</text>
+  <text x="784" y="800" font-family="monospace" font-size="28" font-weight="bold" fill="#63B3ED" text-anchor="middle">→</text>
 </svg>

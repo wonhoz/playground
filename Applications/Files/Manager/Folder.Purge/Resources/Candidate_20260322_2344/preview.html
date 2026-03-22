@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>Folder.Purge — Icon Candidates</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #1C1A14;
+    color: #E8DFC0;
+    font-family: 'Segoe UI', sans-serif;
+    padding: 40px;
+  }
+  h1 {
+    font-size: 22px;
+    font-weight: 600;
+    color: #F2C84B;
+    margin-bottom: 6px;
+    letter-spacing: 0.5px;
+  }
+  .subtitle {
+    font-size: 13px;
+    color: #9A8E6A;
+    margin-bottom: 36px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 28px;
+    max-width: 1100px;
+  }
+  .card {
+    background: #252218;
+    border: 1px solid #3A3420;
+    border-radius: 14px;
+    padding: 22px 16px 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+    cursor: default;
+  }
+  .card:hover {
+    transform: scale(1.07);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+    border-color: #F2C84B;
+  }
+  .icon-wrap {
+    width: 140px;
+    height: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  .icon-wrap img {
+    width: 140px;
+    height: 140px;
+    object-fit: contain;
+  }
+  .card-info {
+    width: 100%;
+    text-align: center;
+  }
+  .card-num {
+    font-size: 11px;
+    color: #F2C84B;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+  }
+  .card-concept {
+    font-size: 12px;
+    color: #C8B870;
+    line-height: 1.5;
+  }
+  .card-type {
+    display: inline-block;
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    margin-top: 6px;
+    font-weight: 600;
+  }
+  .type-literal  { background: #2A4A1A; color: #6EE840; }
+  .type-metaphor { background: #1A3A4A; color: #40C8EE; }
+  .type-hybrid   { background: #3A2A1A; color: #EE9840; }
+  .palette {
+    display: flex;
+    gap: 5px;
+    margin-top: 8px;
+    justify-content: center;
+  }
+  .swatch {
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+    border: 1px solid rgba(255,255,255,0.15);
+  }
+</style>
+</head>
+<body>
+
+<h1>Folder.Purge — 아이콘 후보 10종</h1>
+<p class="subtitle">불필요한 폴더들을 깔끔하게 정리한다는 의미를 simple하고 명확하게 전달 · 2026-03-22</p>
+
+<div class="grid">
+
+  <div class="card">
+    <div class="icon-wrap">
+      <img src="icon_01.svg" alt="icon_01">
+    </div>
+    <div class="card-info">
+      <div class="card-num">icon_01</div>
+      <div class="card-concept">폴더 + 빨간 X<br>삭제 직접 표현</div>
+      <span class="card-type type-literal">literal</span>
+      <div class="palette">
+        <div class="swatch" style="background:#FF8C42;" title="주황 배경"></div>
+        <div class="swatch" style="background:#E8462A;" title="딥 레드"></div>
+        <div class="swatch" style="background:#FFFFFF;" title="흰 폴더"></div>
+        <div class="swatch" style="background:#D42B1E;" title="빨간 X"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap">
+      <img src="icon_02.svg" alt="icon_02">
+    </div>
+    <div class="card-info">
+      <div class="card-num">icon_02</div>
+      <div class="card-concept">빗자루로 폴더<br>쓸어내기</div>
+      <span class="card-type type-metaphor">metaphor</span>
+      <div class="palette">
+        <div class="swatch" style="background:#1B3A2D;" title="짙은 민트 배경"></div>
+        <div class="swatch" style="background:#5EFFA0;" title="민트 빗자루"></div>
+        <div class="swatch" style="background:#FFD166;" title="노란 폴더"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap">
+      <img src="icon_03.svg" alt="icon_03">
+    </div>
+    <div class="card-info">
+      <div class="card-num">icon_03</div>
+      <div class="card-concept">지우개로 폴더<br>지워나가는 중</div>
+      <span class="card-type type-metaphor">metaphor</span>
+      <div class="palette">
+        <div class="swatch" style="background:#FFF8F0;" title="크림 배경"></div>
+        <div class="swatch" style="background:#FF6B6B;" title="산호 지우개"></div>
+        <div class="swatch" style="background:#FFD166;" title="노란 폴더"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap">
+      <img src="icon_04.svg" alt="icon_04">
+    </div>
+    <div class="card-info">
+      <div class="card-num">icon_04</div>
+      <div class="card-concept">스캔 결과 리스트 UI<br>X/체크 표시</div>
+      <span class="card-type type-literal">literal</span>
+      <div class="palette">
+        <div class="swatch" style="background:#0D1B2A;" title="다크 네이비"></div>
+        <div class="swatch" style="background:#4A90D9;" title="파란 폴더"></div>
+        <div class="swatch" style="background:#FF3B30;" title="빨간 X"></div>
+        <div class="swatch" style="background:#E8462A;" title="삭제 버튼"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap">
+      <img src="icon_05.svg" alt="icon_05">
+    </div>
+    <div class="card-info">
+      <div class="card-num">icon_05</div>
+      <div class="card-concept">폴더들이 소용돌이로<br>빨려 사라짐</div>
+      <span class="card-type type-metaphor">metaphor</span>
+      <div class="palette">
+        <div class="swatch" style="background:#0A2A2E;" title="다크 청록 배경"></div>
+        <div class="swatch" style="background:#00D4CC;" title="청록 소용돌이"></div>
+        <div class="swatch" style="background:#FFD166;" title="노란 폴더"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap">
+      <img src="icon_06.svg" alt="icon_06">
+    </div>
+    <div class="card-info">
+      <div class="card-num">icon_06</div>
+      <div class="card-concept">솔리드 폴더 vs 유령 폴더<br>정리 전후 대비</div>
+      <span class="card-type type-hybrid">hybrid</span>
+      <div class="palette">
+        <div class="swatch" style="background:#B8E4F9;" title="파스텔 하늘 배경"></div>
+        <div class="swatch" style="background:#3A7BD5;" title="솔리드 파란 폴더"></div>
+        <div class="swatch" style="background:rgba(30,80,180,0.25);" title="유령 폴더"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap">
+      <img src="icon_07.svg" alt="icon_07">
+    </div>
+    <div class="card-info">
+      <div class="card-num">icon_07</div>
+      <div class="card-concept">가위로 폴더<br>잘라내기</div>
+      <span class="card-type type-metaphor">metaphor</span>
+      <div class="palette">
+        <div class="swatch" style="background:#FFFFFF;" title="흰 배경"></div>
+        <div class="swatch" style="background:#E8392A;" title="빨간 가위"></div>
+        <div class="swatch" style="background:#FFD166;" title="노란 폴더"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap">
+      <img src="icon_08.svg" alt="icon_08">
+    </div>
+    <div class="card-info">
+      <div class="card-num">icon_08</div>
+      <div class="card-concept">폴더 → 쓰레기통<br>직접 연결</div>
+      <span class="card-type type-literal">literal</span>
+      <div class="palette">
+        <div class="swatch" style="background:#6C3FC5;" title="비비드 보라 배경"></div>
+        <div class="swatch" style="background:#FFFFFF;" title="흰 폴더"></div>
+        <div class="swatch" style="background:#FFD11A;" title="노란 쓰레기통"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap">
+      <img src="icon_09.svg" alt="icon_09">
+    </div>
+    <div class="card-info">
+      <div class="card-num">icon_09</div>
+      <div class="card-concept">Before → After<br>폴더가 사라지는 과정</div>
+      <span class="card-type type-hybrid">hybrid</span>
+      <div class="palette">
+        <div class="swatch" style="background:#0A1F0F;" title="다크 그린 배경"></div>
+        <div class="swatch" style="background:#C8A830;" title="앰버 폴더"></div>
+        <div class="swatch" style="background:#2ECC71;" title="초록 체크/화살표"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap">
+      <img src="icon_10.svg" alt="icon_10">
+    </div>
+    <div class="card-info">
+      <div class="card-num">icon_10</div>
+      <div class="card-concept">먼지 낀 폴더를<br>행주로 닦아내기</div>
+      <span class="card-type type-hybrid">hybrid</span>
+      <div class="palette">
+        <div class="swatch" style="background:#FFF5D6;" title="크림 배경"></div>
+        <div class="swatch" style="background:#E8A020;" title="앰버 폴더"></div>
+        <div class="swatch" style="background:#FFFFFF;" title="흰 행주"></div>
+        <div class="swatch" style="background:#8B6020;" title="먼지"></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

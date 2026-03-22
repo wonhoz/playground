@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 배경 - 다크 그린 -->
+  <defs>
+    <linearGradient id="bg09" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0A1F0F"/>
+      <stop offset="100%" stop-color="#061408"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg09)"/>
+
+  <!-- Layer 2: 정리 전 폴더들 (3개, 왼쪽, 솔리드) -->
+  <!-- 폴더 A -->
+  <g transform="translate(210, 340)">
+    <rect x="0" y="0" width="170" height="120" rx="12" fill="#C8A830"/>
+    <path d="M0 0 L0 -36 Q0 -48 12 -48 L60 -48 Q76 -48 82 -34 L92 0 Z" fill="#B89020"/>
+  </g>
+  <!-- 폴더 B -->
+  <g transform="translate(210, 510)">
+    <rect x="0" y="0" width="170" height="120" rx="12" fill="#C8A830"/>
+    <path d="M0 0 L0 -36 Q0 -48 12 -48 L60 -48 Q76 -48 82 -34 L92 0 Z" fill="#B89020"/>
+  </g>
+  <!-- 폴더 C -->
+  <g transform="translate(210, 680)">
+    <rect x="0" y="0" width="170" height="120" rx="12" fill="#C8A830"/>
+    <path d="M0 0 L0 -36 Q0 -48 12 -48 L60 -48 Q76 -48 82 -34 L92 0 Z" fill="#B89020"/>
+  </g>
+
+  <!-- 중앙 화살표 (정리 진행 방향) -->
+  <line x1="420" y1="512" x2="580" y2="512" stroke="#2ECC71" stroke-width="14" stroke-linecap="round"/>
+  <path d="M556 482 L586 512 L556 542" fill="none" stroke="#2ECC71" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Layer 3: 정리 후 폴더들 (오른쪽, 투명/사라짐) -->
+  <!-- 사라진 폴더 A (겨우 보임) -->
+  <g transform="translate(640, 340)" opacity="0.12">
+    <rect x="0" y="0" width="170" height="120" rx="12" fill="#C8A830"/>
+    <path d="M0 0 L0 -36 Q0 -48 12 -48 L60 -48 Q76 -48 82 -34 L92 0 Z" fill="#B89020"/>
+  </g>
+  <!-- 사라진 폴더 B (윤곽선만) -->
+  <g transform="translate(640, 510)">
+    <rect x="0" y="0" width="170" height="120" rx="12" fill="none" stroke="#2ECC71" stroke-width="3" stroke-dasharray="14,8" opacity="0.35"/>
+  </g>
+  <!-- 사라진 폴더 C (완전히 사라짐 - 체크만) -->
+  <g transform="translate(640, 680)">
+    <circle cx="85" cy="60" r="48" fill="#2ECC71" opacity="0.8"/>
+    <path d="M62 60 L78 78 L108 44" fill="none" stroke="white" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <!-- 왼쪽 상단 라벨 -->
+  <text x="295" y="295" font-family="Arial, sans-serif" font-size="28" fill="#C8A830" text-anchor="middle" opacity="0.7">Before</text>
+  <!-- 오른쪽 상단 라벨 -->
+  <text x="725" y="295" font-family="Arial, sans-serif" font-size="28" fill="#2ECC71" text-anchor="middle" opacity="0.7">After</text>
+</svg>

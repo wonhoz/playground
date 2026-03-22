@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 배경 - 짙은 숲 민트 -->
+  <defs>
+    <linearGradient id="bg02" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1B3A2D"/>
+      <stop offset="100%" stop-color="#0D2218"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg02)"/>
+
+  <!-- Layer 2: 빗자루 (왼쪽에서 오른쪽으로 쓸어냄) -->
+  <!-- 빗자루 손잡이 -->
+  <line x1="180" y1="820" x2="600" y2="350" stroke="#5EFFA0" stroke-width="44" stroke-linecap="round"/>
+  <!-- 빗자루 머리 - 부채꼴 모양 -->
+  <path d="M560 370 L480 500 L540 510 L620 390 Z" fill="#5EFFA0"/>
+  <path d="M600 350 L500 490 L560 500 L660 370 Z" fill="#7EFFB5"/>
+  <path d="M640 335 L540 475 L600 485 L700 355 Z" fill="#5EFFA0"/>
+  <path d="M680 325 L580 465 L640 475 L740 340 Z" fill="#3EEF8A"/>
+
+  <!-- Layer 3: 폴더들이 오른쪽으로 날아가는 모습 -->
+  <!-- 폴더 1 (작게) -->
+  <g transform="translate(620, 220) rotate(15)">
+    <rect x="-55" y="-35" width="110" height="75" rx="8" fill="#FFD166" opacity="0.9"/>
+    <path d="M-55 -35 L-55 -60 Q-55 -70 -45 -70 L-15 -70 Q0 -70 5 -60 L15 -35 Z" fill="#FFD166" opacity="0.9"/>
+  </g>
+  <!-- 폴더 2 (중간) -->
+  <g transform="translate(760, 310) rotate(25)">
+    <rect x="-45" y="-30" width="90" height="62" rx="7" fill="#FFD166" opacity="0.7"/>
+    <path d="M-45 -30 L-45 -50 Q-45 -58 -37 -58 L-12 -58 Q0 -58 5 -48 L12 -30 Z" fill="#FFD166" opacity="0.7"/>
+  </g>
+  <!-- 폴더 3 (작게) -->
+  <g transform="translate(840, 180) rotate(-10)">
+    <rect x="-35" y="-22" width="70" height="48" rx="6" fill="#FFD166" opacity="0.5"/>
+    <path d="M-35 -22 L-35 -38 Q-35 -45 -28 -45 L-8 -45 Q2 -45 6 -37 L10 -22 Z" fill="#FFD166" opacity="0.5"/>
+  </g>
+
+  <!-- 속도감 선들 -->
+  <line x1="640" y1="250" x2="750" y2="240" stroke="#5EFFA0" stroke-width="5" stroke-linecap="round" opacity="0.5"/>
+  <line x1="680" y1="290" x2="810" y2="275" stroke="#5EFFA0" stroke-width="4" stroke-linecap="round" opacity="0.4"/>
+  <line x1="700" y1="200" x2="820" y2="185" stroke="#5EFFA0" stroke-width="3" stroke-linecap="round" opacity="0.3"/>
+</svg>

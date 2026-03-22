@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 배경 - 밝은 크림/아이보리 -->
+  <defs>
+    <linearGradient id="bg03" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFF8F0"/>
+      <stop offset="100%" stop-color="#FFE8D6"/>
+    </linearGradient>
+    <linearGradient id="eraser03" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FF6B6B"/>
+      <stop offset="100%" stop-color="#E84848"/>
+    </linearGradient>
+    <clipPath id="eraseClip">
+      <!-- 오른쪽 절반만 폴더 보이게 (지우개가 지우는 중 표현) -->
+      <rect x="550" y="200" width="400" height="600"/>
+    </clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg03)"/>
+
+  <!-- Layer 2: 폴더 (오른쪽 절반만 보임 - 지워지는 중) -->
+  <!-- 폴더 전체 형태 (클립으로 오른쪽만 표시) -->
+  <g clip-path="url(#eraseClip)">
+    <rect x="200" y="390" width="580" height="380" rx="25" fill="#FFD166"/>
+    <path d="M200 390 L200 340 Q200 315 220 315 L370 315 Q400 315 415 340 L440 390 Z" fill="#FFC933"/>
+  </g>
+
+  <!-- 폴더 윤곽선 (점선으로 지워진 부분 표시) -->
+  <rect x="200" y="390" width="580" height="380" rx="25" fill="none" stroke="#D4B080" stroke-width="4" stroke-dasharray="18,12"/>
+  <path d="M200 390 L200 340 Q200 315 220 315 L370 315 Q400 315 415 340 L440 390 Z" fill="none" stroke="#D4B080" stroke-width="4" stroke-dasharray="18,12"/>
+
+  <!-- 지워진 영역 - 희미한 흔적 (지우개 마찰 흔적) -->
+  <rect x="210" y="395" width="330" height="60" rx="5" fill="#E8D0B0" opacity="0.3"/>
+  <rect x="210" y="475" width="280" height="50" rx="5" fill="#E8D0B0" opacity="0.2"/>
+
+  <!-- Layer 3: 지우개 (대각선으로 배치) -->
+  <g transform="translate(440, 500) rotate(-35)">
+    <!-- 지우개 몸통 -->
+    <rect x="-200" y="-35" width="260" height="70" rx="10" fill="url(#eraser03)"/>
+    <!-- 지우개 금속 밴드 -->
+    <rect x="50" y="-35" width="25" height="70" fill="#B8B8B8"/>
+    <!-- 지우개 끝 (종이) -->
+    <rect x="75" y="-35" width="80" height="70" rx="4" fill="#F0EDE8"/>
+    <!-- 지우개 마찰면 (하단) -->
+    <rect x="-200" y="28" width="260" height="14" rx="4" fill="#CC3333" opacity="0.6"/>
+    <!-- 지우개 하이라이트 -->
+    <rect x="-190" y="-28" width="200" height="12" rx="4" fill="rgba(255,255,255,0.35)"/>
+  </g>
+</svg>

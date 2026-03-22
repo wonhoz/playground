@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 배경 - 비비드 보라 -->
+  <defs>
+    <linearGradient id="bg08" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#6C3FC5"/>
+      <stop offset="100%" stop-color="#4A1A9A"/>
+    </linearGradient>
+    <linearGradient id="folder08" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#EDE8FF"/>
+    </linearGradient>
+    <linearGradient id="bin08" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFE566"/>
+      <stop offset="100%" stop-color="#FFD11A"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg08)"/>
+
+  <!-- Layer 2: 폴더 + 쓰레기통 복합 오브젝트 -->
+  <!-- 폴더 상단 부분 (작게, 위쪽) -->
+  <rect x="280" y="220" width="460" height="300" rx="22" fill="url(#folder08)"/>
+  <path d="M280 220 L280 178 Q280 158 298 158 L420 158 Q446 158 458 178 L476 220 Z" fill="url(#folder08)"/>
+
+  <!-- 폴더 안에 화살표 아래 (넣는 동작) -->
+  <line x1="512" y1="280" x2="512" y2="390" stroke="#8A6BC0" stroke-width="28" stroke-linecap="round"/>
+  <path d="M460 370 L512 430 L564 370" fill="none" stroke="#8A6BC0" stroke-width="28" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- 연결선 -->
+  <rect x="492" y="460" width="40" height="60" fill="rgba(255,255,255,0.5)"/>
+
+  <!-- 쓰레기통 (아래) -->
+  <!-- 쓰레기통 뚜껑 -->
+  <rect x="290" y="520" width="440" height="36" rx="10" fill="url(#bin08)"/>
+  <!-- 뚜껑 손잡이 -->
+  <rect x="456" y="498" width="112" height="28" rx="10" fill="url(#bin08)"/>
+  <!-- 쓰레기통 몸통 -->
+  <path d="M318 556 L338 780 Q340 800 360 800 L664 800 Q684 800 686 780 L706 556 Z" fill="url(#bin08)"/>
+  <!-- 쓰레기통 세로 줄 -->
+  <line x1="440" y1="580" x2="448" y2="776" stroke="#C8A200" stroke-width="10" stroke-linecap="round"/>
+  <line x1="512" y1="580" x2="512" y2="776" stroke="#C8A200" stroke-width="10" stroke-linecap="round"/>
+  <line x1="584" y1="580" x2="576" y2="776" stroke="#C8A200" stroke-width="10" stroke-linecap="round"/>
+  <!-- 쓰레기통 하이라이트 -->
+  <path d="M318 556 L338 700 L350 700 L330 556 Z" fill="rgba(255,255,255,0.2)"/>
+
+  <!-- Layer 3: 폴더 + 쓰레기통 연결 강조 (보라 발광) -->
+  <rect x="480" y="456" width="64" height="70" rx="6" fill="#8A6BC0" opacity="0.6"/>
+</svg>

@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 배경 - 파스텔 하늘색 -->
+  <defs>
+    <linearGradient id="bg06" x1="0" y1="0" x2="0.3" y2="1">
+      <stop offset="0%" stop-color="#B8E4F9"/>
+      <stop offset="100%" stop-color="#7EC8E3"/>
+    </linearGradient>
+    <linearGradient id="folder06solid" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3A7BD5"/>
+      <stop offset="100%" stop-color="#2560BC"/>
+    </linearGradient>
+    <linearGradient id="folder06ghost" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="rgba(30,80,180,0.25)"/>
+      <stop offset="100%" stop-color="rgba(20,60,150,0.18)"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg06)"/>
+
+  <!-- Layer 2: 유령 폴더들 (투명 - 이미 정리된 것들) -->
+  <!-- 유령 폴더 왼쪽 -->
+  <rect x="140" y="400" width="280" height="200" rx="20" fill="url(#folder06ghost)" stroke="rgba(30,80,180,0.3)" stroke-width="3" stroke-dasharray="15,10"/>
+  <path d="M140 400 L140 360 Q140 342 158 342 L230 342 Q252 342 264 360 L278 400 Z" fill="rgba(30,80,180,0.2)" stroke="rgba(30,80,180,0.3)" stroke-width="3" stroke-dasharray="15,10"/>
+
+  <!-- 유령 폴더 오른쪽 -->
+  <rect x="600" y="380" width="260" height="185" rx="18" fill="url(#folder06ghost)" stroke="rgba(30,80,180,0.25)" stroke-width="3" stroke-dasharray="15,10"/>
+  <path d="M600 380 L600 344 Q600 328 616 328 L680 328 Q700 328 710 344 L724 380 Z" fill="rgba(30,80,180,0.18)" stroke="rgba(30,80,180,0.25)" stroke-width="3" stroke-dasharray="15,10"/>
+
+  <!-- 빈 공간 강조 - 중앙 안쪽에 빈 박스 -->
+  <rect x="165" y="425" width="228" height="148" rx="10" fill="rgba(255,255,255,0.2)" stroke="rgba(30,80,180,0.2)" stroke-width="2"/>
+  <!-- 빈 표시 -->
+  <text x="280" y="509" font-family="Arial, sans-serif" font-size="36" font-weight="bold" fill="rgba(30,80,180,0.4)" text-anchor="middle">empty</text>
+
+  <!-- Layer 3: 솔리드 폴더 (아직 남아있는 것) 중앙 크게 -->
+  <rect x="310" y="480" width="400" height="270" rx="22" fill="url(#folder06solid)"/>
+  <path d="M310 480 L310 428 Q310 408 328 408 L430 408 Q456 408 468 428 L490 480 Z" fill="#4A8AE8"/>
+
+  <!-- 폴더 내부 빈 상태 표현 -->
+  <rect x="340" y="520" width="340" height="190" rx="10" fill="rgba(0,0,0,0.15)"/>
+  <!-- 빈 폴더 내부 아이콘 -->
+  <circle cx="510" cy="600" r="42" fill="rgba(255,255,255,0.12)"/>
+  <text x="510" y="615" font-family="Arial, sans-serif" font-size="52" text-anchor="middle" fill="rgba(255,255,255,0.5)">∅</text>
+
+  <!-- 폴더 하이라이트 -->
+  <rect x="310" y="480" width="400" height="40" rx="22" fill="rgba(255,255,255,0.12)"/>
+</svg>

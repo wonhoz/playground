@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 배경 - 다크 청록 -->
+  <defs>
+    <linearGradient id="bg05" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0A2A2E"/>
+      <stop offset="100%" stop-color="#041518"/>
+    </linearGradient>
+    <radialGradient id="vortex05" cx="50%" cy="55%" r="45%">
+      <stop offset="0%" stop-color="#00D4CC" stop-opacity="0.9"/>
+      <stop offset="40%" stop-color="#0099A0" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#004A50" stop-opacity="0.0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg05)"/>
+
+  <!-- Layer 2: 소용돌이 추상 표현 -->
+  <!-- 소용돌이 호들 -->
+  <path d="M512 560 Q630 430 700 520 Q770 610 650 680 Q530 750 430 650 Q330 550 420 430 Q510 310 650 360 Q790 410 800 550" fill="none" stroke="#00D4CC" stroke-width="18" stroke-linecap="round" opacity="0.8"/>
+  <path d="M512 560 Q600 470 660 530 Q720 590 650 640 Q580 690 510 640 Q440 590 480 510" fill="none" stroke="#00FFD4" stroke-width="12" stroke-linecap="round" opacity="0.6"/>
+  <path d="M512 560 Q560 520 590 555 Q620 590 595 615 Q570 640 540 618" fill="none" stroke="#80FFE8" stroke-width="8" stroke-linecap="round" opacity="0.5"/>
+
+  <!-- 소용돌이 중심 -->
+  <circle cx="512" cy="560" r="28" fill="#00D4CC"/>
+  <circle cx="512" cy="560" r="14" fill="#004A50"/>
+
+  <!-- Layer 3: 폴더들이 소용돌이로 빨려 들어가는 모습 -->
+  <!-- 폴더 1 (멀리 - 크게) -->
+  <g transform="translate(280, 310) rotate(-20) scale(1.0)" opacity="0.85">
+    <rect x="-55" y="-35" width="110" height="75" rx="8" fill="#FFD166"/>
+    <path d="M-55 -35 L-55 -60 Q-55 -68 -46 -68 L-16 -68 Q-2 -68 4 -58 L14 -35 Z" fill="#FFC933"/>
+  </g>
+  <!-- 폴더 2 (중간 거리) -->
+  <g transform="translate(750, 310) rotate(25) scale(0.82)" opacity="0.7">
+    <rect x="-50" y="-32" width="100" height="68" rx="7" fill="#FFD166"/>
+    <path d="M-50 -32 L-50 -54 Q-50 -61 -42 -61 L-14 -61 Q0 -61 5 -51 L12 -32 Z" fill="#FFC933"/>
+  </g>
+  <!-- 폴더 3 (가까이 - 작게, 빨려들어가는 중) -->
+  <g transform="translate(390, 490) rotate(45) scale(0.55)" opacity="0.55">
+    <rect x="-45" y="-28" width="90" height="60" rx="6" fill="#FFD166"/>
+    <path d="M-45 -28 L-45 -48 Q-45 -55 -38 -55 L-12 -55 Q0 -55 4 -46 L10 -28 Z" fill="#FFC933"/>
+  </g>
+  <!-- 폴더 4 (가장 가까이 - 매우 작게) -->
+  <g transform="translate(580, 500) rotate(120) scale(0.32)" opacity="0.35">
+    <rect x="-40" y="-25" width="80" height="55" rx="5" fill="#FFD166"/>
+    <path d="M-40 -25 L-40 -42 Q-40 -48 -33 -48 L-10 -48 Q0 -48 4 -40 L9 -25 Z" fill="#FFC933"/>
+  </g>
+
+  <!-- 소용돌이 글로우 -->
+  <circle cx="512" cy="560" r="80" fill="url(#vortex05)"/>
+</svg>

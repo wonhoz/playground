@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 배경 - 다크 네이비 -->
+  <defs>
+    <linearGradient id="bg04" x1="0" y1="0" x2="0.5" y2="1">
+      <stop offset="0%" stop-color="#0D1B2A"/>
+      <stop offset="100%" stop-color="#152338"/>
+    </linearGradient>
+    <linearGradient id="panel04" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1E2F42"/>
+      <stop offset="100%" stop-color="#172435"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg04)"/>
+
+  <!-- Layer 2: 스캔 결과 리스트 UI 패널 -->
+  <rect x="150" y="200" width="720" height="620" rx="16" fill="url(#panel04)" stroke="#2A4060" stroke-width="2"/>
+
+  <!-- 헤더 -->
+  <rect x="150" y="200" width="720" height="52" rx="16" fill="#1A3050"/>
+  <rect x="150" y="236" width="720" height="16" fill="#1A3050"/>
+  <circle cx="192" cy="226" r="10" fill="#FF5F57"/>
+  <circle cx="226" cy="226" r="10" fill="#FFBD2E"/>
+  <circle cx="260" cy="226" r="10" fill="#28C840"/>
+  <!-- 타이틀바 텍스트 -->
+  <rect x="360" y="218" width="180" height="16" rx="4" fill="#2A4060"/>
+
+  <!-- 리스트 항목들 -->
+  <!-- 항목 1: 빈 폴더 - 삭제 대상 (빨간 X) -->
+  <rect x="168" y="272" width="684" height="56" rx="8" fill="#1E2F42"/>
+  <!-- 폴더 아이콘 -->
+  <rect x="188" y="286" width="36" height="26" rx="4" fill="#4A90D9" opacity="0.7"/>
+  <path d="M188 286 L188 280 Q188 276 192 276 L206 276 Q212 276 215 280 L220 286 Z" fill="#4A90D9" opacity="0.7"/>
+  <!-- 폴더명 텍스트 시뮬 -->
+  <rect x="238" y="289" width="200" height="10" rx="3" fill="#5A7A9A"/>
+  <rect x="238" y="305" width="130" height="8" rx="3" fill="#3A5A7A" opacity="0.6"/>
+  <!-- 삭제 표시 (빨간 X) -->
+  <circle cx="800" cy="300" r="18" fill="#FF3B30"/>
+  <line x1="791" y1="291" x2="809" y2="309" stroke="white" stroke-width="4" stroke-linecap="round"/>
+  <line x1="809" y1="291" x2="791" y2="309" stroke="white" stroke-width="4" stroke-linecap="round"/>
+
+  <!-- 항목 2: VS bin 폴더 - 삭제 대상 (빨간 X) -->
+  <rect x="168" y="338" width="684" height="56" rx="8" fill="#251E30"/>
+  <rect x="188" y="352" width="36" height="26" rx="4" fill="#9B59B6" opacity="0.7"/>
+  <path d="M188 352 L188 346 Q188 342 192 342 L206 342 Q212 342 215 346 L220 352 Z" fill="#9B59B6" opacity="0.7"/>
+  <rect x="238" y="355" width="160" height="10" rx="3" fill="#7A5A9A"/>
+  <rect x="238" y="371" width="100" height="8" rx="3" fill="#5A3A7A" opacity="0.6"/>
+  <circle cx="800" cy="366" r="18" fill="#FF3B30"/>
+  <line x1="791" y1="357" x2="809" y2="375" stroke="white" stroke-width="4" stroke-linecap="round"/>
+  <line x1="809" y1="357" x2="791" y2="375" stroke="white" stroke-width="4" stroke-linecap="round"/>
+
+  <!-- 항목 3: obj 폴더 - 삭제 대상 (빨간 X) -->
+  <rect x="168" y="404" width="684" height="56" rx="8" fill="#1E2F42"/>
+  <rect x="188" y="418" width="36" height="26" rx="4" fill="#9B59B6" opacity="0.7"/>
+  <path d="M188 418 L188 412 Q188 408 192 408 L206 408 Q212 408 215 412 L220 418 Z" fill="#9B59B6" opacity="0.7"/>
+  <rect x="238" y="421" width="180" height="10" rx="3" fill="#5A7A9A"/>
+  <rect x="238" y="437" width="120" height="8" rx="3" fill="#3A5A7A" opacity="0.6"/>
+  <circle cx="800" cy="432" r="18" fill="#FF3B30"/>
+  <line x1="791" y1="423" x2="809" y2="441" stroke="white" stroke-width="4" stroke-linecap="round"/>
+  <line x1="809" y1="423" x2="791" y2="441" stroke="white" stroke-width="4" stroke-linecap="round"/>
+
+  <!-- 항목 4: 정상 폴더 - 체크 (초록) -->
+  <rect x="168" y="470" width="684" height="56" rx="8" fill="#1E2F42"/>
+  <rect x="188" y="484" width="36" height="26" rx="4" fill="#27AE60" opacity="0.7"/>
+  <path d="M188 484 L188 478 Q188 474 192 474 L206 474 Q212 474 215 478 L220 484 Z" fill="#27AE60" opacity="0.7"/>
+  <rect x="238" y="487" width="220" height="10" rx="3" fill="#5A7A9A"/>
+  <rect x="238" y="503" width="150" height="8" rx="3" fill="#3A5A7A" opacity="0.6"/>
+  <circle cx="800" cy="498" r="18" fill="#2ECC71"/>
+  <path d="M789 498 L797 507 L812 490" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+
+  <!-- Layer 3: 하단 삭제 버튼 강조 -->
+  <rect x="168" y="720" width="684" height="68" rx="12" fill="#E8462A"/>
+  <rect x="340" y="740" width="344" height="16" rx="5" fill="rgba(255,255,255,0.8)"/>
+  <!-- 버튼 하이라이트 -->
+  <rect x="168" y="720" width="684" height="28" rx="12" fill="rgba(255,255,255,0.08)"/>
+</svg>

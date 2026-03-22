@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 배경 - 흰색/연한 그레이 -->
+  <defs>
+    <linearGradient id="bg07" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#F5F2EE"/>
+    </linearGradient>
+    <linearGradient id="scissorBody" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#E8392A"/>
+      <stop offset="100%" stop-color="#C02018"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg07)"/>
+
+  <!-- Layer 2: 폴더 (중앙, 잘리는 중) -->
+  <!-- 폴더 아래쪽 절반 -->
+  <g clip-path="url(#clipBottom07)">
+    <rect x="212" y="360" width="600" height="380" rx="24" fill="#FFD166"/>
+    <path d="M212 360 L212 312 Q212 290 232 290 L378 290 Q406 290 420 312 L442 360 Z" fill="#FFC933"/>
+  </g>
+  <defs>
+    <clipPath id="clipBottom07">
+      <rect x="0" y="512" width="1024" height="512"/>
+    </clipPath>
+    <clipPath id="clipTop07">
+      <rect x="0" y="0" width="1024" height="512"/>
+    </clipPath>
+  </defs>
+
+  <!-- 폴더 위쪽 절반 (약간 위로 떨어지는 느낌) -->
+  <g clip-path="url(#clipTop07)" transform="translate(0, -18)">
+    <rect x="212" y="360" width="600" height="380" rx="24" fill="#FFD166"/>
+    <path d="M212 360 L212 312 Q212 290 232 290 L378 290 Q406 290 420 312 L442 360 Z" fill="#FFC933"/>
+  </g>
+
+  <!-- 절단선 표시 -->
+  <line x1="180" y1="512" x2="844" y2="512" stroke="#FF6B6B" stroke-width="3" stroke-dasharray="20,12"/>
+
+  <!-- Layer 3: 가위 (수평, 절단 위치에) -->
+  <!-- 가위 날 1 (위) -->
+  <g transform="translate(512, 512) rotate(-15)">
+    <!-- 날 -->
+    <path d="M-320 -16 Q-200 -20 -80 -12 L60 0 L-80 12 Q-200 20 -320 16 Z" fill="url(#scissorBody)"/>
+    <!-- 날 끝 날카롭게 -->
+    <path d="M60 0 L-80 -12 L-80 12 Z" fill="#C02018"/>
+    <!-- 손잡이 링 -->
+    <circle cx="-300" cy="0" r="38" fill="none" stroke="url(#scissorBody)" stroke-width="20"/>
+    <!-- 날 하이라이트 -->
+    <path d="M-320 -16 Q-200 -20 -80 -12 L-80 -4 Q-200 -8 -320 -6 Z" fill="rgba(255,255,255,0.3)"/>
+  </g>
+  <!-- 가위 날 2 (아래) -->
+  <g transform="translate(512, 512) rotate(15)">
+    <path d="M-320 -16 Q-200 -20 -80 -12 L60 0 L-80 12 Q-200 20 -320 16 Z" fill="url(#scissorBody)"/>
+    <path d="M60 0 L-80 -12 L-80 12 Z" fill="#C02018"/>
+    <circle cx="-300" cy="0" r="38" fill="none" stroke="url(#scissorBody)" stroke-width="20"/>
+    <path d="M-320 -16 Q-200 -20 -80 -12 L-80 -4 Q-200 -8 -320 -6 Z" fill="rgba(255,255,255,0.3)"/>
+  </g>
+
+  <!-- 가위 피벗 점 -->
+  <circle cx="512" cy="512" r="16" fill="#8B0000"/>
+  <circle cx="512" cy="512" r="8" fill="#C02018"/>
+</svg>

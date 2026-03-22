@@ -1,0 +1,43 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Neon.Slice | 아이스 슬로모션 (Ice 아이템) | 레이어드 | #001433 -->
+  <defs>
+    <radialGradient id="iceGrad" cx="45%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#E0F7FA"/>
+      <stop offset="50%" stop-color="#81D4FA"/>
+      <stop offset="100%" stop-color="#0288D1"/>
+    </radialGradient>
+    <filter id="iceGlow">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="160" fill="#001433"/>
+  <!-- Frost/ice overlay on background -->
+  <rect width="1024" height="1024" rx="160" fill="none" stroke="#4FC3F7" stroke-width="3" opacity="0.2"/>
+  <!-- Layer 2: Large ice crystal hexagon -->
+  <!-- Main hexagon -->
+  <polygon points="512,180 700,290 700,510 512,620 324,510 324,290" fill="url(#iceGrad)" opacity="0.8" filter="url(#iceGlow)"/>
+  <!-- Inner hexagon -->
+  <polygon points="512,240 650,320 650,480 512,560 374,480 374,320" fill="none" stroke="white" stroke-width="3" opacity="0.5"/>
+  <!-- Ice crystal spikes -->
+  <line x1="512" y1="180" x2="512" y2="130" stroke="#81D4FA" stroke-width="5" stroke-linecap="round" filter="url(#iceGlow)"/>
+  <line x1="700" y1="290" x2="746" y2="264" stroke="#81D4FA" stroke-width="5" stroke-linecap="round" filter="url(#iceGlow)"/>
+  <line x1="700" y1="510" x2="746" y2="536" stroke="#81D4FA" stroke-width="5" stroke-linecap="round" filter="url(#iceGlow)"/>
+  <line x1="512" y1="620" x2="512" y2="670" stroke="#81D4FA" stroke-width="5" stroke-linecap="round" filter="url(#iceGlow)"/>
+  <line x1="324" y1="510" x2="278" y2="536" stroke="#81D4FA" stroke-width="5" stroke-linecap="round" filter="url(#iceGlow)"/>
+  <line x1="324" y1="290" x2="278" y2="264" stroke="#81D4FA" stroke-width="5" stroke-linecap="round" filter="url(#iceGlow)"/>
+  <!-- Inner crystal lines -->
+  <line x1="512" y1="180" x2="512" y2="620" stroke="white" stroke-width="2" opacity="0.25"/>
+  <line x1="324" y1="290" x2="700" y2="510" stroke="white" stroke-width="2" opacity="0.25"/>
+  <line x1="700" y1="290" x2="324" y2="510" stroke="white" stroke-width="2" opacity="0.25"/>
+  <!-- Layer 3: Slow-motion indicator -->
+  <!-- Slowed shapes (frozen mid-air) -->
+  <circle cx="200" cy="300" r="40" fill="#0288D1" opacity="0.5" filter="url(#iceGlow)"/>
+  <circle cx="820" cy="350" r="32" fill="#0288D1" opacity="0.4" filter="url(#iceGlow)"/>
+  <polygon points="180,580 230,680 130,680" fill="#0288D1" opacity="0.4"/>
+  <!-- Timer bar (slow) -->
+  <rect x="200" y="780" width="624" height="24" rx="12" fill="#01579B" opacity="0.6"/>
+  <rect x="200" y="780" width="200" height="24" rx="12" fill="#81D4FA"/>
+  <text x="512" y="840" font-family="Arial,sans-serif" font-size="24" fill="#81D4FA" text-anchor="middle" filter="url(#iceGlow)">❄ SLOW  3s</text>
+</svg>

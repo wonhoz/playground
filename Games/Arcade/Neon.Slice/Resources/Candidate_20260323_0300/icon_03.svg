@@ -1,0 +1,46 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Neon.Slice | 검 광선 + 단면 | 중앙심볼 | #000428 -->
+  <defs>
+    <linearGradient id="bladeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00FFFF"/>
+      <stop offset="50%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#00BFFF"/>
+    </linearGradient>
+    <filter id="bladeGlow">
+      <feGaussianBlur stdDeviation="15" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="softGlow">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="160" fill="#000428"/>
+  <!-- Background glow -->
+  <radialGradient id="bgGlow" cx="50%" cy="50%" r="50%">
+    <stop offset="0%" stop-color="#001A40" stop-opacity="1"/>
+    <stop offset="100%" stop-color="#000428" stop-opacity="1"/>
+  </radialGradient>
+  <!-- Layer 2: Sword/blade (diagonal) -->
+  <!-- Blade body -->
+  <rect x="220" y="180" width="20" height="620" rx="4" fill="url(#bladeGrad)" transform="rotate(45 512 512)" filter="url(#bladeGlow)"/>
+  <!-- Blade edge glow line -->
+  <line x1="220" y1="780" x2="820" y2="180" stroke="#00FFFF" stroke-width="4" stroke-linecap="round" filter="url(#bladeGlow)"/>
+  <!-- Handle -->
+  <rect x="470" y="660" width="80" height="180" rx="12" fill="#B45309" stroke="#D97706" stroke-width="4"/>
+  <!-- Guard (crossguard) -->
+  <rect x="360" y="700" width="304" height="30" rx="10" fill="#9CA3AF" stroke="#D1D5DB" stroke-width="3"/>
+  <!-- Layer 3: Slice impact at center -->
+  <!-- Burst/impact rings -->
+  <circle cx="512" cy="440" r="60" fill="none" stroke="#00FFFF" stroke-width="5" filter="url(#softGlow)" opacity="0.8"/>
+  <circle cx="512" cy="440" r="100" fill="none" stroke="#00BFFF" stroke-width="3" opacity="0.4"/>
+  <circle cx="512" cy="440" r="140" fill="none" stroke="#0080FF" stroke-width="2" opacity="0.25"/>
+  <!-- Flash point -->
+  <circle cx="512" cy="440" r="24" fill="white" filter="url(#bladeGlow)"/>
+  <!-- Light rays -->
+  <line x1="512" y1="440" x2="440" y2="330" stroke="white" stroke-width="4" opacity="0.6" stroke-linecap="round"/>
+  <line x1="512" y1="440" x2="600" y2="340" stroke="white" stroke-width="3" opacity="0.5" stroke-linecap="round"/>
+  <line x1="512" y1="440" x2="430" y2="520" stroke="white" stroke-width="3" opacity="0.4" stroke-linecap="round"/>
+  <line x1="512" y1="440" x2="610" y2="510" stroke="white" stroke-width="3" opacity="0.4" stroke-linecap="round"/>
+</svg>

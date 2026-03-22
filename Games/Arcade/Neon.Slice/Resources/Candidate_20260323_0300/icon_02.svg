@@ -1,0 +1,40 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Neon.Slice | 폭발 파티클+도형들 콤보 | 기하학/추상 | #100010 -->
+  <defs>
+    <filter id="glow1">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glow2">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="160" fill="#100010"/>
+  <!-- Layer 2: Multiple neon shapes -->
+  <!-- Circle -->
+  <circle cx="300" cy="340" r="100" fill="#FF1493" stroke="#FF69B4" stroke-width="5" filter="url(#glow2)" opacity="0.9"/>
+  <!-- Triangle -->
+  <polygon points="680,220 800,440 560,440" fill="#00FF41" stroke="#39FF14" stroke-width="5" filter="url(#glow2)" opacity="0.85"/>
+  <!-- Square (rotated 45) -->
+  <rect x="400" y="500" width="120" height="120" rx="8" fill="#FFD700" stroke="#FFF200" stroke-width="5"
+    filter="url(#glow2)" opacity="0.9" transform="rotate(15 460 560)"/>
+  <!-- Pentagon (approximate) -->
+  <polygon points="180,600 240,540 310,540 360,600 270,660" fill="#00BFFF" stroke="#87CEFA" stroke-width="5" filter="url(#glow2)" opacity="0.8"/>
+  <!-- Layer 3: Explosion particles from center -->
+  <circle cx="512" cy="512" r="30" fill="white" filter="url(#glow1)"/>
+  <!-- Particle rays -->
+  <line x1="512" y1="512" x2="420" y2="340" stroke="#FF1493" stroke-width="6" stroke-linecap="round" opacity="0.7"/>
+  <line x1="512" y1="512" x2="680" y2="360" stroke="#00FF41" stroke-width="6" stroke-linecap="round" opacity="0.7"/>
+  <line x1="512" y1="512" x2="740" y2="580" stroke="#FFD700" stroke-width="6" stroke-linecap="round" opacity="0.7"/>
+  <line x1="512" y1="512" x2="340" y2="660" stroke="#00BFFF" stroke-width="6" stroke-linecap="round" opacity="0.7"/>
+  <line x1="512" y1="512" x2="580" y2="720" stroke="#FF6B35" stroke-width="5" stroke-linecap="round" opacity="0.6"/>
+  <!-- Small dots along rays -->
+  <circle cx="456" cy="426" r="8" fill="#FF1493" filter="url(#glow2)"/>
+  <circle cx="596" cy="436" r="7" fill="#00FF41" filter="url(#glow2)"/>
+  <circle cx="626" cy="546" r="8" fill="#FFD700" filter="url(#glow2)"/>
+  <circle cx="426" cy="586" r="7" fill="#00BFFF" filter="url(#glow2)"/>
+  <!-- Combo text -->
+  <text x="512" y="820" font-family="Arial,sans-serif" font-size="44" fill="#FFD700" text-anchor="middle" font-weight="bold" filter="url(#glow2)">COMBO x4!</text>
+</svg>

@@ -1,0 +1,37 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Neon.Slice | 네온 별 슬라이스 자국 | 대각선/동적 | #0A0A14 -->
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="160" fill="#0A0A14"/>
+  <!-- Layer 2: Neon star shape -->
+  <polygon points="512,180 572,360 760,360 614,468 672,648 512,540 352,648 410,468 264,360 452,360"
+    fill="#7C3AED" stroke="#A855F7" stroke-width="6"
+    filter="url(#glowPurple)"/>
+  <defs>
+    <filter id="glowPurple" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="12" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glowCyan">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- Slice cut line (diagonal) -->
+  <line x1="200" y1="300" x2="820" y2="700" stroke="#00FFFF" stroke-width="6" stroke-linecap="round"
+    filter="url(#glowCyan)" opacity="0.9"/>
+  <!-- Slice trail particles -->
+  <circle cx="280" cy="356" r="8" fill="#00FFFF" opacity="0.7" filter="url(#glowCyan)"/>
+  <circle cx="380" cy="416" r="6" fill="#00E5FF" opacity="0.6"/>
+  <circle cx="480" cy="476" r="5" fill="#00FFFF" opacity="0.5"/>
+  <circle cx="600" cy="540" r="7" fill="#00E5FF" opacity="0.6"/>
+  <circle cx="720" cy="610" r="5" fill="#00FFFF" opacity="0.4"/>
+  <!-- Layer 3: Slice halves separating -->
+  <!-- Top half drifting up-right -->
+  <polygon points="512,180 572,360 680,360 614,420"
+    fill="#A855F7" opacity="0.6" transform="translate(40,-30)"/>
+  <!-- Bottom half drifting down-left -->
+  <polygon points="400,400 512,540 352,648"
+    fill="#7C3AED" opacity="0.5" transform="translate(-30,30)"/>
+  <!-- Score +10 bonus -->
+  <text x="760" y="280" font-family="Arial,sans-serif" font-size="40" fill="#F59E0B" font-weight="bold" filter="url(#glowPurple)">+10</text>
+</svg>

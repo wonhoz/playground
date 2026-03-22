@@ -15,7 +15,7 @@ public sealed class TrayApp : ApplicationContext
     {
         _config = AppConfig.Load();
 
-        _menu = new ContextMenuStrip { Renderer = new DarkMenuRenderer() };
+        _menu = new ContextMenuStrip { Renderer = new DarkMenuRenderer(), ShowImageMargin = false, ShowCheckMargin = false };
 
         _tray = new NotifyIcon
         {

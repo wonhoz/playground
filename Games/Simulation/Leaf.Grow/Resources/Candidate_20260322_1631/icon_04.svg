@@ -1,0 +1,125 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg04lg" x1="0%" y1="100%" x2="50%" y2="0%">
+      <stop offset="0%" stop-color="#020C08"/>
+      <stop offset="100%" stop-color="#041410"/>
+    </linearGradient>
+    <radialGradient id="rootGlow04" cx="50%" cy="92%" r="40%">
+      <stop offset="0%" stop-color="#00DDAA" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#00DDAA" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="tipGlow04" cx="50%" cy="40%" r="50%">
+      <stop offset="0%" stop-color="#80FFD8" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#80FFD8" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="frame04lg">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg04lg)"/>
+  <g clip-path="url(#frame04lg)">
+
+    <!-- Root glow -->
+    <ellipse cx="512" cy="920" rx="240" ry="80" fill="url(#rootGlow04)"/>
+    <!-- Tip canopy glow -->
+    <circle cx="512" cy="400" r="320" fill="url(#tipGlow04)"/>
+
+    <!-- ===== FRACTAL BRANCH GEOMETRY (abstract, teal/cyan) ===== -->
+    <!-- Trunk: (512, 900) → (512, 700) -->
+    <line x1="512" y1="900" x2="512" y2="700" stroke="#00AA88" stroke-width="9" stroke-linecap="round" opacity="0.95"/>
+
+    <!-- Level 1: two main branches -->
+    <!-- L (-115°): (512,700) → (458,597) -->
+    <line x1="512" y1="700" x2="458" y2="597" stroke="#00BBAA" stroke-width="6.5" stroke-linecap="round" opacity="0.95"/>
+    <!-- R (-65°): (512,700) → (566,597) -->
+    <line x1="512" y1="700" x2="566" y2="597" stroke="#00BBAA" stroke-width="6.5" stroke-linecap="round" opacity="0.95"/>
+
+    <!-- Level 2 -->
+    <!-- LL (-140°): (458,597) → (404,549) -->
+    <line x1="458" y1="597" x2="404" y2="549" stroke="#00CCBB" stroke-width="4.5" stroke-linecap="round" opacity="0.9"/>
+    <!-- LR (-90°): (458,597) → (458,523) -->
+    <line x1="458" y1="597" x2="458" y2="523" stroke="#00CCBB" stroke-width="4.5" stroke-linecap="round" opacity="0.9"/>
+    <!-- RL (-90°): (566,597) → (566,523) -->
+    <line x1="566" y1="597" x2="566" y2="523" stroke="#00CCBB" stroke-width="4.5" stroke-linecap="round" opacity="0.9"/>
+    <!-- RR (-40°): (566,597) → (620,549) -->
+    <line x1="566" y1="597" x2="620" y2="549" stroke="#00CCBB" stroke-width="4.5" stroke-linecap="round" opacity="0.9"/>
+
+    <!-- Level 3 -->
+    <!-- LLL(-165°): (404,549) → (348,535) -->
+    <line x1="404" y1="549" x2="348" y2="535" stroke="#00DDCC" stroke-width="2.8" stroke-linecap="round" opacity="0.85"/>
+    <!-- LLR(-115°): (404,549) → (379,494) -->
+    <line x1="404" y1="549" x2="379" y2="494" stroke="#00DDCC" stroke-width="2.8" stroke-linecap="round" opacity="0.85"/>
+    <!-- LRL(-115°): (458,523) → (433,468) -->
+    <line x1="458" y1="523" x2="433" y2="468" stroke="#00DDCC" stroke-width="2.8" stroke-linecap="round" opacity="0.85"/>
+    <!-- LRR(-65°): (458,523) → (483,468) -->
+    <line x1="458" y1="523" x2="483" y2="468" stroke="#00DDCC" stroke-width="2.8" stroke-linecap="round" opacity="0.85"/>
+    <!-- RLL(-115°): (566,523) → (541,468) -->
+    <line x1="566" y1="523" x2="541" y2="468" stroke="#00DDCC" stroke-width="2.8" stroke-linecap="round" opacity="0.85"/>
+    <!-- RLR(-65°): (566,523) → (591,468) -->
+    <line x1="566" y1="523" x2="591" y2="468" stroke="#00DDCC" stroke-width="2.8" stroke-linecap="round" opacity="0.85"/>
+    <!-- RRL(-65°): (620,549) → (645,494) -->
+    <line x1="620" y1="549" x2="645" y2="494" stroke="#00DDCC" stroke-width="2.8" stroke-linecap="round" opacity="0.85"/>
+    <!-- RRR(-15°): (620,549) → (676,535) -->
+    <line x1="620" y1="549" x2="676" y2="535" stroke="#00DDCC" stroke-width="2.8" stroke-linecap="round" opacity="0.85"/>
+
+    <!-- Level 4: fine tips -->
+    <!-- From LLL(348,535): -->
+    <line x1="348" y1="535" x2="318" y2="504" stroke="#40EED8" stroke-width="1.5" stroke-linecap="round" opacity="0.8"/>
+    <line x1="348" y1="535" x2="340" y2="500" stroke="#40EED8" stroke-width="1.5" stroke-linecap="round" opacity="0.8"/>
+    <!-- From LLR(379,494): -->
+    <line x1="379" y1="494" x2="355" y2="460" stroke="#40EED8" stroke-width="1.5" stroke-linecap="round" opacity="0.8"/>
+    <line x1="379" y1="494" x2="380" y2="455" stroke="#40EED8" stroke-width="1.5" stroke-linecap="round" opacity="0.8"/>
+    <!-- From LRL(433,468): -->
+    <line x1="433" y1="468" x2="412" y2="434" stroke="#40EED8" stroke-width="1.5" stroke-linecap="round" opacity="0.8"/>
+    <line x1="433" y1="468" x2="436" y2="430" stroke="#40EED8" stroke-width="1.5" stroke-linecap="round" opacity="0.8"/>
+    <!-- From LRR(483,468): -->
+    <line x1="483" y1="468" x2="463" y2="432" stroke="#40EED8" stroke-width="1.5" stroke-linecap="round" opacity="0.8"/>
+    <line x1="483" y1="468" x2="490" y2="428" stroke="#40EED8" stroke-width="1.5" stroke-linecap="round" opacity="0.8"/>
+    <!-- From RLL(541,468): -->
+    <line x1="541" y1="468" x2="533" y2="428" stroke="#40EED8" stroke-width="1.5" stroke-linecap="round" opacity="0.8"/>
+    <line x1="541" y1="468" x2="558" y2="432" stroke="#40EED8" stroke-width="1.5" stroke-linecap="round" opacity="0.8"/>
+    <!-- From RLR(591,468): -->
+    <line x1="591" y1="468" x2="587" y2="428" stroke="#40EED8" stroke-width="1.5" stroke-linecap="round" opacity="0.8"/>
+    <line x1="591" y1="468" x2="612" y2="434" stroke="#40EED8" stroke-width="1.5" stroke-linecap="round" opacity="0.8"/>
+    <!-- From RRL(645,494): -->
+    <line x1="645" y1="494" x2="643" y2="455" stroke="#40EED8" stroke-width="1.5" stroke-linecap="round" opacity="0.8"/>
+    <line x1="645" y1="494" x2="668" y2="460" stroke="#40EED8" stroke-width="1.5" stroke-linecap="round" opacity="0.8"/>
+    <!-- From RRR(676,535): -->
+    <line x1="676" y1="535" x2="683" y2="500" stroke="#40EED8" stroke-width="1.5" stroke-linecap="round" opacity="0.8"/>
+    <line x1="676" y1="535" x2="706" y2="504" stroke="#40EED8" stroke-width="1.5" stroke-linecap="round" opacity="0.8"/>
+
+    <!-- Glowing tip dots (bioluminescent) -->
+    <circle cx="318" cy="500" r="5" fill="#80FFD8" opacity="0.9"/>
+    <circle cx="338" cy="497" r="5" fill="#60EEC8" opacity="0.85"/>
+    <circle cx="353" cy="456" r="5" fill="#80FFD8" opacity="0.9"/>
+    <circle cx="378" cy="452" r="5" fill="#60EEC8" opacity="0.85"/>
+    <circle cx="410" cy="430" r="5" fill="#80FFD8" opacity="0.9"/>
+    <circle cx="434" cy="426" r="5" fill="#60EEC8" opacity="0.85"/>
+    <circle cx="461" cy="428" r="5" fill="#80FFD8" opacity="0.9"/>
+    <circle cx="488" cy="424" r="5" fill="#60EEC8" opacity="0.85"/>
+    <circle cx="531" cy="424" r="5" fill="#80FFD8" opacity="0.9"/>
+    <circle cx="556" cy="428" r="5" fill="#60EEC8" opacity="0.85"/>
+    <circle cx="585" cy="424" r="5" fill="#80FFD8" opacity="0.9"/>
+    <circle cx="610" cy="430" r="5" fill="#60EEC8" opacity="0.85"/>
+    <circle cx="641" cy="452" r="5" fill="#80FFD8" opacity="0.9"/>
+    <circle cx="666" cy="456" r="5" fill="#60EEC8" opacity="0.85"/>
+    <circle cx="681" cy="497" r="5" fill="#80FFD8" opacity="0.9"/>
+    <circle cx="705" cy="500" r="5" fill="#60EEC8" opacity="0.85"/>
+
+    <!-- Environment indicators (Sun / Water / Nutrients) — bottom panels -->
+    <rect x="140" y="916" width="220" height="44" rx="10" fill="#040E0C" stroke="#006644" stroke-width="1"/>
+    <text x="170" y="935" font-family="'Segoe UI',Arial" font-size="17" fill="#888" opacity="0.8">☀ 햇빛</text>
+    <rect x="165" y="940" width="175" height="8" rx="4" fill="#0A2020"/>
+    <rect x="165" y="940" width="140" height="8" rx="4" fill="#FFCC00" opacity="0.85"/>
+
+    <rect x="402" y="916" width="220" height="44" rx="10" fill="#040E0C" stroke="#006644" stroke-width="1"/>
+    <text x="432" y="935" font-family="'Segoe UI',Arial" font-size="17" fill="#888" opacity="0.8">💧 물</text>
+    <rect x="427" y="940" width="175" height="8" rx="4" fill="#0A2020"/>
+    <rect x="427" y="940" width="110" height="8" rx="4" fill="#4488EE" opacity="0.85"/>
+
+    <rect x="664" y="916" width="220" height="44" rx="10" fill="#040E0C" stroke="#006644" stroke-width="1"/>
+    <text x="694" y="935" font-family="'Segoe UI',Arial" font-size="17" fill="#888" opacity="0.8">🌱 양분</text>
+    <rect x="689" y="940" width="175" height="8" rx="4" fill="#0A2020"/>
+    <rect x="689" y="940" width="150" height="8" rx="4" fill="#3AC95A" opacity="0.85"/>
+  </g>
+</svg>

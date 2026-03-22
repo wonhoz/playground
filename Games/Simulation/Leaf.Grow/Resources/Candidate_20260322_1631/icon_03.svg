@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg03lg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A0E00"/>
+      <stop offset="100%" stop-color="#100800"/>
+    </linearGradient>
+    <radialGradient id="centerGlow03" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFD060" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#FFD060" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="frame03lg">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg03lg)"/>
+  <g clip-path="url(#frame03lg)">
+
+    <!-- Background glow -->
+    <circle cx="512" cy="512" r="380" fill="url(#centerGlow03)"/>
+
+    <!-- ===== L-SYSTEM GRAMMAR DISPLAY ===== -->
+    <!-- Main rule: F → F[+F]F[-F]F -->
+    <!-- Large header rule -->
+    <text x="512" y="220" font-family="'Courier New',monospace" font-size="80" font-weight="900" fill="#FFD060" text-anchor="middle" opacity="0.95" letter-spacing="4">F</text>
+    <text x="512" y="300" font-family="'Courier New',monospace" font-size="52" font-weight="700" fill="#E09020" text-anchor="middle" opacity="0.8" letter-spacing="2">↓</text>
+    <text x="512" y="390" font-family="'Courier New',monospace" font-size="52" font-weight="900" fill="#FFD060" text-anchor="middle" opacity="0.9" letter-spacing="3">F[+F]F[-F]F</text>
+
+    <!-- Rule explanation: colored tokens -->
+    <!-- F = forward (draw branch) -->
+    <rect x="180" y="430" width="80" height="40" rx="8" fill="#3A2000" stroke="#8B5020" stroke-width="1"/>
+    <text x="220" y="457" font-family="'Courier New',monospace" font-size="28" font-weight="900" fill="#C08050" text-anchor="middle">F</text>
+    <text x="220" y="495" font-family="'Segoe UI',Arial" font-size="16" fill="#7A5030" text-anchor="middle">전진</text>
+
+    <!-- [ = push state -->
+    <rect x="290" y="430" width="80" height="40" rx="8" fill="#002800" stroke="#204A20" stroke-width="1"/>
+    <text x="330" y="457" font-family="'Courier New',monospace" font-size="32" font-weight="900" fill="#50CC50" text-anchor="middle">[</text>
+    <text x="330" y="495" font-family="'Segoe UI',Arial" font-size="16" fill="#407040" text-anchor="middle">분기</text>
+
+    <!-- + = rotate left -->
+    <rect x="400" y="430" width="80" height="40" rx="8" fill="#280000" stroke="#5A2020" stroke-width="1"/>
+    <text x="440" y="457" font-family="'Courier New',monospace" font-size="32" font-weight="900" fill="#DD6040" text-anchor="middle">+</text>
+    <text x="440" y="495" font-family="'Segoe UI',Arial" font-size="16" fill="#7A4040" text-anchor="middle">-25°</text>
+
+    <!-- F again -->
+    <rect x="510" y="430" width="80" height="40" rx="8" fill="#3A2000" stroke="#8B5020" stroke-width="1"/>
+    <text x="550" y="457" font-family="'Courier New',monospace" font-size="28" font-weight="900" fill="#C08050" text-anchor="middle">F</text>
+    <text x="550" y="495" font-family="'Segoe UI',Arial" font-size="16" fill="#7A5030" text-anchor="middle">전진</text>
+
+    <!-- ] = pop state -->
+    <rect x="620" y="430" width="80" height="40" rx="8" fill="#002800" stroke="#204A20" stroke-width="1"/>
+    <text x="660" y="457" font-family="'Courier New',monospace" font-size="32" font-weight="900" fill="#50CC50" text-anchor="middle">]</text>
+    <text x="660" y="495" font-family="'Segoe UI',Arial" font-size="16" fill="#407040" text-anchor="middle">복귀</text>
+
+    <!-- - = rotate right -->
+    <rect x="730" y="430" width="80" height="40" rx="8" fill="#280000" stroke="#5A2020" stroke-width="1"/>
+    <text x="770" y="457" font-family="'Courier New',monospace" font-size="32" font-weight="900" fill="#DD6040" text-anchor="middle">-</text>
+    <text x="770" y="495" font-family="'Segoe UI',Arial" font-size="16" fill="#7A4040" text-anchor="middle">+25°</text>
+
+    <!-- ===== Abstract branch diagram showing the rule ===== -->
+    <!-- Main stem pointing up from center -->
+    <line x1="512" y1="940" x2="512" y2="760" stroke="#8B5020" stroke-width="8" stroke-linecap="round"/>
+    <!-- F = forward segment -->
+    <line x1="512" y1="760" x2="512" y2="640" stroke="#C08050" stroke-width="6" stroke-linecap="round"/>
+    <!-- [ + F ] = left branch -->
+    <line x1="512" y1="700" x2="440" y2="600" stroke="#50CC50" stroke-width="4" stroke-linecap="round"/>
+    <!-- angle arc -25° -->
+    <path d="M 512 700 A 50 50 0 0 0 467 657" fill="none" stroke="#DD6040" stroke-width="2" stroke-dasharray="6,4" opacity="0.7"/>
+    <text x="455" y="652" font-family="'Segoe UI',Arial" font-size="18" fill="#DD6040" opacity="0.85">-25°</text>
+    <!-- [ - F ] = right branch -->
+    <line x1="512" y1="700" x2="584" y2="600" stroke="#50CC50" stroke-width="4" stroke-linecap="round"/>
+    <!-- angle arc +25° -->
+    <path d="M 512 700 A 50 50 0 0 1 557 657" fill="none" stroke="#DD6040" stroke-width="2" stroke-dasharray="6,4" opacity="0.7"/>
+    <text x="558" y="652" font-family="'Segoe UI',Arial" font-size="18" fill="#DD6040" opacity="0.85">+25°</text>
+    <!-- F forward at end -->
+    <line x1="512" y1="640" x2="512" y2="560" stroke="#C08050" stroke-width="5" stroke-linecap="round"/>
+    <!-- Leaf endpoints -->
+    <ellipse cx="440" cy="593" rx="16" ry="11" fill="#3AC95A" opacity="0.85"/>
+    <ellipse cx="584" cy="593" rx="16" ry="11" fill="#3AC95A" opacity="0.85"/>
+    <ellipse cx="512" cy="554" rx="16" ry="11" fill="#50DD70" opacity="0.85"/>
+    <circle cx="440" cy="590" r="6" fill="#FFA0D0" opacity="0.9"/>
+    <circle cx="584" cy="590" r="6" fill="#FFA0D0" opacity="0.9"/>
+
+    <!-- Title label -->
+    <text x="512" y="136" font-family="'Segoe UI',Arial" font-size="28" font-weight="700" fill="#7A5020" text-anchor="middle" opacity="0.8" letter-spacing="3">L-SYSTEM  규칙</text>
+  </g>
+</svg>

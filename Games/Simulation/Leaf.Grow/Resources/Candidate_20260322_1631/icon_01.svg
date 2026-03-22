@@ -1,0 +1,143 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg01lg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#040C04"/>
+      <stop offset="100%" stop-color="#0A1808"/>
+    </linearGradient>
+    <radialGradient id="treeGlow01" cx="50%" cy="85%" r="50%">
+      <stop offset="0%" stop-color="#3AC95A" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#3AC95A" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="frame01lg">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg01lg)"/>
+  <g clip-path="url(#frame01lg)">
+
+    <!-- Background glow under tree -->
+    <ellipse cx="512" cy="900" rx="280" ry="60" fill="url(#treeGlow01)"/>
+
+    <!-- Ground line -->
+    <line x1="300" y1="895" x2="724" y2="895" stroke="#1A3A10" stroke-width="3" opacity="0.6"/>
+
+    <!-- ===================== L-SYSTEM TREE (iteration 4) ===================== -->
+    <!-- TRUNK: (512,880) → (512,710) -->
+    <line x1="512" y1="880" x2="512" y2="710" stroke="#7A4010" stroke-width="8" stroke-linecap="round"/>
+
+    <!-- Level 1 branches from (512,710) -->
+    <!-- L: direction -115° → end (462,602) -->
+    <line x1="512" y1="710" x2="462" y2="602" stroke="#8B5020" stroke-width="5" stroke-linecap="round"/>
+    <!-- R: direction -65° → end (562,602) -->
+    <line x1="512" y1="710" x2="562" y2="602" stroke="#8B5020" stroke-width="5" stroke-linecap="round"/>
+
+    <!-- Level 2 branches (from L=462,602) -->
+    <!-- LL: direction -140° → end (402,552) -->
+    <line x1="462" y1="602" x2="402" y2="552" stroke="#9A6030" stroke-width="3.5" stroke-linecap="round"/>
+    <!-- LR: direction -90° → end (462,524) -->
+    <line x1="462" y1="602" x2="462" y2="524" stroke="#9A6030" stroke-width="3.5" stroke-linecap="round"/>
+    <!-- Level 2 branches (from R=562,602) -->
+    <!-- RL: direction -90° → end (562,524) -->
+    <line x1="562" y1="602" x2="562" y2="524" stroke="#9A6030" stroke-width="3.5" stroke-linecap="round"/>
+    <!-- RR: direction -40° → end (622,552) -->
+    <line x1="562" y1="602" x2="622" y2="552" stroke="#9A6030" stroke-width="3.5" stroke-linecap="round"/>
+
+    <!-- Level 3 branches -->
+    <!-- From LL(402,552) at -140°: -->
+    <!-- LLL: -165° → (348,538) -->
+    <line x1="402" y1="552" x2="348" y2="540" stroke="#AA7040" stroke-width="2" stroke-linecap="round"/>
+    <!-- LLR: -115° → (378,494) -->
+    <line x1="402" y1="552" x2="378" y2="494" stroke="#AA7040" stroke-width="2" stroke-linecap="round"/>
+    <!-- From LR(462,524) at -90°: -->
+    <!-- LRL: -115° → (436,472) -->
+    <line x1="462" y1="524" x2="436" y2="472" stroke="#AA7040" stroke-width="2" stroke-linecap="round"/>
+    <!-- LRR: -65° → (490,472) -->
+    <line x1="462" y1="524" x2="490" y2="472" stroke="#AA7040" stroke-width="2" stroke-linecap="round"/>
+    <!-- From RL(562,524) at -90°: -->
+    <!-- RLL: -115° → (536,472) -->
+    <line x1="562" y1="524" x2="536" y2="472" stroke="#AA7040" stroke-width="2" stroke-linecap="round"/>
+    <!-- RLR: -65° → (590,472) -->
+    <line x1="562" y1="524" x2="590" y2="472" stroke="#AA7040" stroke-width="2" stroke-linecap="round"/>
+    <!-- From RR(622,552) at -40°: -->
+    <!-- RRL: -65° → (648,494) -->
+    <line x1="622" y1="552" x2="648" y2="494" stroke="#AA7040" stroke-width="2" stroke-linecap="round"/>
+    <!-- RRR: -15° → (676,540) -->
+    <line x1="622" y1="552" x2="676" y2="540" stroke="#AA7040" stroke-width="2" stroke-linecap="round"/>
+
+    <!-- Level 4 small twigs (leaf-bearing) -->
+    <!-- From LLL(348,540): -->
+    <line x1="348" y1="540" x2="322" y2="514" stroke="#C08850" stroke-width="1.2" stroke-linecap="round"/>
+    <line x1="348" y1="540" x2="340" y2="506" stroke="#C08850" stroke-width="1.2" stroke-linecap="round"/>
+    <!-- From LLR(378,494): -->
+    <line x1="378" y1="494" x2="354" y2="462" stroke="#C08850" stroke-width="1.2" stroke-linecap="round"/>
+    <line x1="378" y1="494" x2="382" y2="458" stroke="#C08850" stroke-width="1.2" stroke-linecap="round"/>
+    <!-- From LRL(436,472): -->
+    <line x1="436" y1="472" x2="414" y2="442" stroke="#C08850" stroke-width="1.2" stroke-linecap="round"/>
+    <line x1="436" y1="472" x2="440" y2="438" stroke="#C08850" stroke-width="1.2" stroke-linecap="round"/>
+    <!-- From LRR(490,472): -->
+    <line x1="490" y1="472" x2="468" y2="440" stroke="#C08850" stroke-width="1.2" stroke-linecap="round"/>
+    <line x1="490" y1="472" x2="498" y2="436" stroke="#C08850" stroke-width="1.2" stroke-linecap="round"/>
+    <!-- From RLL(536,472): -->
+    <line x1="536" y1="472" x2="526" y2="436" stroke="#C08850" stroke-width="1.2" stroke-linecap="round"/>
+    <line x1="536" y1="472" x2="556" y2="440" stroke="#C08850" stroke-width="1.2" stroke-linecap="round"/>
+    <!-- From RLR(590,472): -->
+    <line x1="590" y1="472" x2="584" y2="436" stroke="#C08850" stroke-width="1.2" stroke-linecap="round"/>
+    <line x1="590" y1="472" x2="610" y2="442" stroke="#C08850" stroke-width="1.2" stroke-linecap="round"/>
+    <!-- From RRL(648,494): -->
+    <line x1="648" y1="494" x2="642" y2="458" stroke="#C08850" stroke-width="1.2" stroke-linecap="round"/>
+    <line x1="648" y1="494" x2="670" y2="462" stroke="#C08850" stroke-width="1.2" stroke-linecap="round"/>
+    <!-- From RRR(676,540): -->
+    <line x1="676" y1="540" x2="684" y2="506" stroke="#C08850" stroke-width="1.2" stroke-linecap="round"/>
+    <line x1="676" y1="540" x2="702" y2="514" stroke="#C08850" stroke-width="1.2" stroke-linecap="round"/>
+
+    <!-- ===================== LEAF CLUSTERS at tips ===================== -->
+    <!-- LLL area -->
+    <ellipse cx="322" cy="508" rx="18" ry="12" fill="#3AC95A" opacity="0.85" transform="rotate(-20 322 508)"/>
+    <ellipse cx="336" cy="500" rx="15" ry="10" fill="#50DD70" opacity="0.75"/>
+    <!-- LLR area -->
+    <ellipse cx="350" cy="456" rx="18" ry="12" fill="#3AC95A" opacity="0.85" transform="rotate(-10 350 456)"/>
+    <ellipse cx="368" cy="450" rx="15" ry="10" fill="#50DD70" opacity="0.75"/>
+    <!-- LRL area -->
+    <ellipse cx="412" cy="436" rx="18" ry="12" fill="#3AC95A" opacity="0.85"/>
+    <ellipse cx="428" cy="428" rx="15" ry="10" fill="#50DD70" opacity="0.75"/>
+    <!-- LRR area -->
+    <ellipse cx="464" cy="430" rx="18" ry="12" fill="#3AC95A" opacity="0.85"/>
+    <ellipse cx="482" cy="422" rx="15" ry="10" fill="#50DD70" opacity="0.75"/>
+    <!-- RLL area -->
+    <ellipse cx="522" cy="428" rx="18" ry="12" fill="#3AC95A" opacity="0.85"/>
+    <ellipse cx="542" cy="430" rx="15" ry="10" fill="#50DD70" opacity="0.75"/>
+    <!-- RLR area -->
+    <ellipse cx="582" cy="430" rx="18" ry="12" fill="#3AC95A" opacity="0.85"/>
+    <ellipse cx="600" cy="436" rx="15" ry="10" fill="#50DD70" opacity="0.75"/>
+    <!-- RRL area -->
+    <ellipse cx="642" cy="450" rx="18" ry="12" fill="#3AC95A" opacity="0.85" transform="rotate(10 642 450)"/>
+    <ellipse cx="660" cy="456" rx="15" ry="10" fill="#50DD70" opacity="0.75"/>
+    <!-- RRR area -->
+    <ellipse cx="690" cy="500" rx="18" ry="12" fill="#3AC95A" opacity="0.85" transform="rotate(20 690 500)"/>
+    <ellipse cx="676" cy="508" rx="15" ry="10" fill="#50DD70" opacity="0.75"/>
+
+    <!-- Flower dots at branch tips -->
+    <circle cx="338" cy="497" r="7" fill="#FFA0D0" opacity="0.9"/>
+    <circle cx="438" cy="425" r="7" fill="#FFA0D0" opacity="0.9"/>
+    <circle cx="494" cy="420" r="7" fill="#FFD0E8" opacity="0.85"/>
+    <circle cx="530" cy="424" r="7" fill="#FFA0D0" opacity="0.9"/>
+    <circle cx="606" cy="430" r="6" fill="#FFD0E8" opacity="0.85"/>
+    <circle cx="668" cy="450" r="7" fill="#FFA0D0" opacity="0.9"/>
+
+    <!-- ===================== HUD (top panel) ===================== -->
+    <rect x="140" y="80" width="744" height="62" rx="12" fill="#0A1A08" opacity="0.9"/>
+    <rect x="140" y="80" width="744" height="62" rx="12" fill="none" stroke="#3AC95A" stroke-width="2" opacity="0.5"/>
+    <!-- Iteration -->
+    <text x="200" y="120" font-family="'Segoe UI',Arial" font-size="28" font-weight="700" fill="#88DD88" opacity="0.9">반복: 4 / 5</text>
+    <!-- Branch/Leaf/Flower counts -->
+    <text x="430" y="120" font-family="'Segoe UI',Arial" font-size="24" fill="#7A6040" opacity="0.9">가지</text>
+    <text x="500" y="120" font-family="'Segoe UI',Arial" font-size="24" font-weight="700" fill="#C08850" opacity="0.9">28</text>
+    <text x="560" y="120" font-family="'Segoe UI',Arial" font-size="24" fill="#3A8830" opacity="0.9">잎</text>
+    <text x="598" y="120" font-family="'Segoe UI',Arial" font-size="24" font-weight="700" fill="#3AC95A" opacity="0.9">16</text>
+    <text x="658" y="120" font-family="'Segoe UI',Arial" font-size="24" fill="#AA6080" opacity="0.9">꽃</text>
+    <text x="698" y="120" font-family="'Segoe UI',Arial" font-size="24" font-weight="700" fill="#FFA0D0" opacity="0.9">6</text>
+
+    <!-- Bottom label -->
+    <text x="512" y="968" font-family="'Segoe UI',Arial" font-size="34" font-weight="700" fill="#3AC95A" text-anchor="middle" opacity="0.6">LEAF · GROW</text>
+  </g>
+</svg>

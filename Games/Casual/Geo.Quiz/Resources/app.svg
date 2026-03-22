@@ -1,57 +1,55 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_04: metaphor — 물음표 국기 (깃대에 ? 기호가 그려진 국기) -->
   <defs>
-    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#e8f5e9"/>
-      <stop offset="100%" stop-color="#c8e6c9"/>
+    <linearGradient id="bg4" x1="0%" y1="0%" x2="60%" y2="100%">
+      <stop offset="0%" stop-color="#FF6F00"/>
+      <stop offset="100%" stop-color="#E65100"/>
     </linearGradient>
-    <linearGradient id="mapGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#a5d6a7"/>
-      <stop offset="100%" stop-color="#81c784"/>
+    <linearGradient id="flagBody4" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FFF8E1"/>
+      <stop offset="100%" stop-color="#FFF3CD"/>
     </linearGradient>
-    <linearGradient id="pinGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#ff5252"/>
-      <stop offset="100%" stop-color="#d50000"/>
-    </linearGradient>
-    <linearGradient id="oceanGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#64b5f6"/>
-      <stop offset="100%" stop-color="#1565c0"/>
-    </linearGradient>
+    <filter id="shadow4">
+      <feDropShadow dx="6" dy="8" stdDeviation="10" flood-color="#00000044"/>
+    </filter>
   </defs>
-  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
-  <!-- Map background -->
-  <rect x="50" y="80" width="412" height="310" rx="14" fill="url(#oceanGrad)" opacity="0.7"/>
-  <!-- Land masses on map -->
-  <ellipse cx="180" cy="200" rx="90" ry="60" fill="url(#mapGrad)"/>
-  <ellipse cx="300" cy="210" rx="70" ry="50" fill="url(#mapGrad)"/>
-  <ellipse cx="390" cy="240" rx="55" ry="40" fill="url(#mapGrad)"/>
-  <ellipse cx="120" cy="280" rx="50" ry="35" fill="url(#mapGrad)"/>
-  <ellipse cx="250" cy="290" rx="45" ry="30" fill="url(#mapGrad)"/>
-  <ellipse cx="350" cy="310" rx="40" ry="28" fill="url(#mapGrad)"/>
-  <!-- Grid lines on map -->
-  <line x1="50" y1="160" x2="462" y2="160" stroke="white" stroke-width="1" opacity="0.2"/>
-  <line x1="50" y1="235" x2="462" y2="235" stroke="white" stroke-width="1" opacity="0.2"/>
-  <line x1="50" y1="310" x2="462" y2="310" stroke="white" stroke-width="1" opacity="0.2"/>
-  <line x1="152" y1="80" x2="152" y2="390" stroke="white" stroke-width="1" opacity="0.2"/>
-  <line x1="256" y1="80" x2="256" y2="390" stroke="white" stroke-width="1" opacity="0.2"/>
-  <line x1="360" y1="80" x2="360" y2="390" stroke="white" stroke-width="1" opacity="0.2"/>
-  <!-- Location pins -->
-  <path d="M200,190 Q180,155 180,135 A22,22 0 0,1 222,135 Q222,155 200,190 Z" fill="url(#pinGrad)"/>
-  <circle cx="200" cy="135" r="11" fill="white"/>
-  <path d="M310,200 Q290,165 290,145 A22,22 0 0,1 332,145 Q332,165 310,200 Z" fill="#ff9100"/>
-  <circle cx="310" cy="145" r="11" fill="white"/>
-  <path d="M370,230 Q355,200 355,184 A17,17 0 0,1 387,184 Q387,200 370,230 Z" fill="#7c4dff"/>
-  <circle cx="370" cy="184" r="9" fill="white"/>
-  <!-- Question marks at some pins -->
-  <text x="200" y="140" font-family="Arial" font-size="14" font-weight="bold" fill="#d50000" text-anchor="middle">?</text>
-  <text x="310" y="150" font-family="Arial" font-size="14" font-weight="bold" fill="#e65100" text-anchor="middle">?</text>
-  <!-- Compass rose -->
-  <circle cx="440" cy="100" r="28" fill="white" opacity="0.85"/>
-  <text x="440" y="92" font-family="Arial" font-size="12" font-weight="bold" fill="#1565c0" text-anchor="middle">N</text>
-  <text x="440" y="116" font-family="Arial" font-size="12" font-weight="bold" fill="#1565c0" text-anchor="middle">S</text>
-  <text x="452" y="105" font-family="Arial" font-size="12" font-weight="bold" fill="#1565c0" text-anchor="middle">E</text>
-  <text x="428" y="105" font-family="Arial" font-size="12" font-weight="bold" fill="#1565c0" text-anchor="middle">W</text>
-  <circle cx="440" cy="100" r="3" fill="#1565c0"/>
-  <!-- Title banner -->
-  <rect x="50" y="410" width="412" height="60" rx="12" fill="#2e7d32"/>
-  <text x="256" y="450" font-family="Arial" font-size="30" font-weight="900" fill="#ffee58" text-anchor="middle">GEO.QUIZ</text>
+
+  <!-- Background -->
+  <rect width="1024" height="1024" rx="180" fill="url(#bg4)"/>
+
+  <!-- Decorative dots pattern -->
+  <circle cx="220" cy="220" r="18" fill="#FFFFFF18"/>
+  <circle cx="320" cy="180" r="12" fill="#FFFFFF12"/>
+  <circle cx="800" cy="240" r="22" fill="#FFFFFF15"/>
+  <circle cx="860" cy="780" r="16" fill="#FFFFFF12"/>
+  <circle cx="180" cy="820" r="20" fill="#FFFFFF15"/>
+  <circle cx="780" cy="860" r="14" fill="#FFFFFF10"/>
+
+  <!-- Flagpole -->
+  <rect x="248" y="220" width="28" height="600" rx="10" fill="#8D6E63" filter="url(#shadow4)"/>
+  <!-- Pole top ball -->
+  <circle cx="262" cy="214" r="22" fill="#FFCA28"/>
+
+  <!-- Flag body (waving: trapezoidal shape using polygon) -->
+  <polygon points="276,240 820,270 820,570 276,540"
+           fill="url(#flagBody4)" filter="url(#shadow4)"/>
+
+  <!-- Horizontal stripe accents on flag (subtle) -->
+  <polygon points="276,320 820,348 820,378 276,350" fill="#FFE08220" opacity="0.5"/>
+  <polygon points="276,432 820,460 820,490 276,462" fill="#FFE08220" opacity="0.5"/>
+
+  <!-- Giant "?" on the flag -->
+  <text x="555" y="510" font-family="Arial Black, sans-serif" font-size="320" font-weight="900"
+        fill="#FF6F0022" text-anchor="middle">?</text>
+  <text x="550" y="504" font-family="Arial Black, sans-serif" font-size="320" font-weight="900"
+        fill="#E65100CC" text-anchor="middle">?</text>
+
+  <!-- Bottom text bar -->
+  <rect x="230" y="720" width="564" height="72" rx="16" fill="#FFFFFF22"/>
+  <text x="512" y="773" font-family="Arial Black, sans-serif" font-size="44" font-weight="900"
+        fill="#FFFFFF" text-anchor="middle">WHICH FLAG?</text>
+
+  <!-- Small stars scattered -->
+  <text x="790" y="680" font-family="Arial, sans-serif" font-size="40" fill="#FFD600" text-anchor="middle">★</text>
+  <text x="740" y="750" font-family="Arial, sans-serif" font-size="28" fill="#FFD600" text-anchor="middle">★</text>
 </svg>

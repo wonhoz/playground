@@ -1,67 +1,61 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_01 | literal | 중앙 심볼 | 슬라이스되는 오각형 + 칼날 궤적 | 네온 시안/퍼플 -->
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="180" fill="#0D0D1A"/>
+  <rect width="1024" height="1024" rx="180" fill="url(#bg01)"/>
+
   <defs>
-    <clipPath id="n3-clip">
-      <rect width="1024" height="1024" rx="190"/>
-    </clipPath>
+    <radialGradient id="bg01" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#1A0A2E"/>
+      <stop offset="100%" stop-color="#0D0D1A"/>
+    </radialGradient>
+    <filter id="glow01" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glowStrong01" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="14" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
   </defs>
-  <g clip-path="url(#n3-clip)">
-    <!-- Background -->
-    <rect width="1024" height="1024" fill="#050A0F"/>
-    <!-- Grid -->
-    <g stroke="#00CFFF" stroke-width="0.6" opacity="0.06">
-      <line x1="0" y1="128" x2="1024" y2="128"/>
-      <line x1="0" y1="256" x2="1024" y2="256"/>
-      <line x1="0" y1="384" x2="1024" y2="384"/>
-      <line x1="0" y1="512" x2="1024" y2="512"/>
-      <line x1="0" y1="640" x2="1024" y2="640"/>
-      <line x1="0" y1="768" x2="1024" y2="768"/>
-      <line x1="0" y1="896" x2="1024" y2="896"/>
-      <line x1="128" y1="0" x2="128" y2="1024"/>
-      <line x1="256" y1="0" x2="256" y2="1024"/>
-      <line x1="384" y1="0" x2="384" y2="1024"/>
-      <line x1="512" y1="0" x2="512" y2="1024"/>
-      <line x1="640" y1="0" x2="640" y2="1024"/>
-      <line x1="768" y1="0" x2="768" y2="1024"/>
-      <line x1="896" y1="0" x2="896" y2="1024"/>
-    </g>
 
-    <!-- Motion arc lines (shapes rising from bottom) -->
-    <line x1="280" y1="900" x2="280" y2="520" stroke="#39FF14" stroke-width="2" stroke-linecap="round" opacity="0.20" stroke-dasharray="6 12"/>
-    <line x1="512" y1="900" x2="512" y2="380" stroke="#FF2D78" stroke-width="2" stroke-linecap="round" opacity="0.20" stroke-dasharray="6 12"/>
-    <line x1="744" y1="900" x2="744" y2="460" stroke="#00FFFF" stroke-width="2" stroke-linecap="round" opacity="0.20" stroke-dasharray="6 12"/>
+  <!-- 오각형 왼쪽 절반 (슬라이스된) -->
+  <polygon points="512,220 330,340 370,555 512,555 512,220"
+    fill="#00FFCC" opacity="0.9" filter="url(#glow01)"/>
 
-    <!-- Shape 1: Pentagon (left, green, rising) -->
-    <polygon points="280,420 318,393 304,349 256,349 242,393"
-             fill="#0A2208" stroke="#39FF14" stroke-width="7" opacity="0.95"/>
-    <circle cx="280" cy="390" rx="70" ry="70" r="70" fill="#39FF14" opacity="0.08"/>
+  <!-- 오각형 오른쪽 절반 (분리된, 살짝 이동) -->
+  <polygon points="512,220 694,340 654,555 512,555 512,220"
+    fill="#CC00FF" opacity="0.9" filter="url(#glow01)"
+    transform="translate(28, 22) rotate(6, 512, 387)"/>
 
-    <!-- Shape 2: Circle (center, pink, highest) -->
-    <circle cx="512" cy="340" r="86" fill="#1A000D" stroke="#FF2D78" stroke-width="7" opacity="0.95"/>
-    <!-- Glow ring -->
-    <circle cx="512" cy="340" r="110" fill="none" stroke="#FF2D78" stroke-width="3" opacity="0.22"/>
-    <!-- Highlight -->
-    <ellipse cx="480" cy="305" rx="34" ry="22" fill="#FF2D78" opacity="0.15"/>
+  <!-- 슬라이스 궤적 — 대각선 날카로운 선 -->
+  <line x1="240" y1="680" x2="800" y2="200"
+    stroke="#FFFFFF" stroke-width="6" stroke-linecap="round"
+    opacity="0.95" filter="url(#glowStrong01)"/>
+  <line x1="240" y1="680" x2="800" y2="200"
+    stroke="#00FFEE" stroke-width="2" stroke-linecap="round" opacity="1"/>
 
-    <!-- Shape 3: Square (right, cyan, mid) -->
-    <rect x="690" y="390" width="108" height="108" rx="14"
-          fill="#001820" stroke="#00FFFF" stroke-width="7" opacity="0.95"
-          transform="rotate(20 744 444)"/>
-    <circle cx="744" cy="444" r="80" fill="#00FFFF" opacity="0.08"/>
+  <!-- 슬라이스 잔상 선들 -->
+  <line x1="220" y1="700" x2="780" y2="220"
+    stroke="#00FFCC" stroke-width="2" stroke-linecap="round" opacity="0.3"/>
+  <line x1="260" y1="660" x2="820" y2="180"
+    stroke="#AA00EE" stroke-width="2" stroke-linecap="round" opacity="0.2"/>
 
-    <!-- Shape 4: Star (far right accent, yellow) — smaller, lower -->
-    <polygon points="840,620 851,643 876,643 856,659 862,684 840,668 818,684 824,659 804,643 829,643"
-             fill="#181000" stroke="#FFE600" stroke-width="6" opacity="0.85"/>
+  <!-- 파편 조각들 -->
+  <polygon points="370,590 395,620 345,615" fill="#00FFCC" opacity="0.7" filter="url(#glow01)"/>
+  <polygon points="660,580 680,610 640,608" fill="#CC00FF" opacity="0.6" filter="url(#glow01)"/>
+  <circle cx="310" cy="640" r="8" fill="#00FFCC" opacity="0.5" filter="url(#glow01)"/>
+  <circle cx="720" cy="600" r="6" fill="#FF00AA" opacity="0.6" filter="url(#glow01)"/>
+  <polygon points="440,615 460,640 420,638" fill="#FFFFFF" opacity="0.4"/>
+  <circle cx="580" cy="625" r="5" fill="#CC00FF" opacity="0.5"/>
 
-    <!-- Shape 5: Triangle (far left, orange, lower) -->
-    <polygon points="200,640 248,548 152,548"
-             fill="#1A0800" stroke="#FF6B00" stroke-width="7" opacity="0.90"/>
+  <!-- 슬라이스 끝점 스파크 -->
+  <circle cx="800" cy="200" r="12" fill="#FFFFFF" opacity="0.9" filter="url(#glowStrong01)"/>
+  <circle cx="800" cy="200" r="5" fill="#00FFEE" opacity="1"/>
 
-    <!-- Slice trail across center -->
-    <line x1="160" y1="600" x2="864" y2="260"
-          stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" opacity="0.55"/>
-
-    <!-- Cursor dot -->
-    <circle cx="864" cy="260" r="12" fill="#FFFFFF" opacity="0.85"/>
-    <circle cx="864" cy="260" r="24" fill="none" stroke="#00FFFF" stroke-width="3" opacity="0.50"/>
-  </g>
+  <!-- 하단 "SLICE" 텍스트 -->
+  <text x="512" y="800" text-anchor="middle" font-family="Arial Black, sans-serif"
+    font-size="72" font-weight="900" letter-spacing="18"
+    fill="#00FFCC" opacity="0.85" filter="url(#glow01)">SLICE</text>
 </svg>

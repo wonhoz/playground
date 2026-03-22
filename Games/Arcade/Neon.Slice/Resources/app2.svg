@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <clipPath id="n3-clip">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <g clip-path="url(#n3-clip)">
+    <!-- Background -->
+    <rect width="1024" height="1024" fill="#050A0F"/>
+    <!-- Grid -->
+    <g stroke="#00CFFF" stroke-width="0.6" opacity="0.06">
+      <line x1="0" y1="128" x2="1024" y2="128"/>
+      <line x1="0" y1="256" x2="1024" y2="256"/>
+      <line x1="0" y1="384" x2="1024" y2="384"/>
+      <line x1="0" y1="512" x2="1024" y2="512"/>
+      <line x1="0" y1="640" x2="1024" y2="640"/>
+      <line x1="0" y1="768" x2="1024" y2="768"/>
+      <line x1="0" y1="896" x2="1024" y2="896"/>
+      <line x1="128" y1="0" x2="128" y2="1024"/>
+      <line x1="256" y1="0" x2="256" y2="1024"/>
+      <line x1="384" y1="0" x2="384" y2="1024"/>
+      <line x1="512" y1="0" x2="512" y2="1024"/>
+      <line x1="640" y1="0" x2="640" y2="1024"/>
+      <line x1="768" y1="0" x2="768" y2="1024"/>
+      <line x1="896" y1="0" x2="896" y2="1024"/>
+    </g>
+
+    <!-- Motion arc lines (shapes rising from bottom) -->
+    <line x1="280" y1="900" x2="280" y2="520" stroke="#39FF14" stroke-width="2" stroke-linecap="round" opacity="0.20" stroke-dasharray="6 12"/>
+    <line x1="512" y1="900" x2="512" y2="380" stroke="#FF2D78" stroke-width="2" stroke-linecap="round" opacity="0.20" stroke-dasharray="6 12"/>
+    <line x1="744" y1="900" x2="744" y2="460" stroke="#00FFFF" stroke-width="2" stroke-linecap="round" opacity="0.20" stroke-dasharray="6 12"/>
+
+    <!-- Shape 1: Pentagon (left, green, rising) -->
+    <polygon points="280,420 318,393 304,349 256,349 242,393"
+             fill="#0A2208" stroke="#39FF14" stroke-width="7" opacity="0.95"/>
+    <circle cx="280" cy="390" rx="70" ry="70" r="70" fill="#39FF14" opacity="0.08"/>
+
+    <!-- Shape 2: Circle (center, pink, highest) -->
+    <circle cx="512" cy="340" r="86" fill="#1A000D" stroke="#FF2D78" stroke-width="7" opacity="0.95"/>
+    <!-- Glow ring -->
+    <circle cx="512" cy="340" r="110" fill="none" stroke="#FF2D78" stroke-width="3" opacity="0.22"/>
+    <!-- Highlight -->
+    <ellipse cx="480" cy="305" rx="34" ry="22" fill="#FF2D78" opacity="0.15"/>
+
+    <!-- Shape 3: Square (right, cyan, mid) -->
+    <rect x="690" y="390" width="108" height="108" rx="14"
+          fill="#001820" stroke="#00FFFF" stroke-width="7" opacity="0.95"
+          transform="rotate(20 744 444)"/>
+    <circle cx="744" cy="444" r="80" fill="#00FFFF" opacity="0.08"/>
+
+    <!-- Shape 4: Star (far right accent, yellow) — smaller, lower -->
+    <polygon points="840,620 851,643 876,643 856,659 862,684 840,668 818,684 824,659 804,643 829,643"
+             fill="#181000" stroke="#FFE600" stroke-width="6" opacity="0.85"/>
+
+    <!-- Shape 5: Triangle (far left, orange, lower) -->
+    <polygon points="200,640 248,548 152,548"
+             fill="#1A0800" stroke="#FF6B00" stroke-width="7" opacity="0.90"/>
+
+    <!-- Slice trail across center -->
+    <line x1="160" y1="600" x2="864" y2="260"
+          stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" opacity="0.55"/>
+
+    <!-- Cursor dot -->
+    <circle cx="864" cy="260" r="12" fill="#FFFFFF" opacity="0.85"/>
+    <circle cx="864" cy="260" r="24" fill="none" stroke="#00FFFF" stroke-width="3" opacity="0.50"/>
+  </g>
+</svg>

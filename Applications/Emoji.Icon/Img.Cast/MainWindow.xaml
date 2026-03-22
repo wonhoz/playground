@@ -10,6 +10,7 @@
         Drop="Window_Drop"
         DragEnter="Window_DragEnter"
         DragOver="Window_DragOver"
+        DragLeave="Window_DragLeave"
         Loaded="Window_Loaded">
 
   <Window.Resources>
@@ -21,8 +22,8 @@
     <SolidColorBrush x:Key="BorderBrush"    Color="#3A3A48"/>
     <SolidColorBrush x:Key="TextBrush"      Color="#E0E0E0"/>
     <SolidColorBrush x:Key="SubTextBrush"   Color="#888899"/>
-    <SolidColorBrush x:Key="AccentBrush"    Color="#6E8EFA"/>
-    <SolidColorBrush x:Key="AccentDimBrush" Color="#3A4A8A"/>
+    <SolidColorBrush x:Key="AccentBrush"    Color="#FF7043"/>
+    <SolidColorBrush x:Key="AccentDimBrush" Color="#7A3020"/>
     <SolidColorBrush x:Key="DangerBrush"    Color="#FA6E6E"/>
 
     <!-- ── ComboBox ControlTemplate ── -->
@@ -314,7 +315,7 @@
                      Foreground="{StaticResource SubTextBrush}"
                      FontSize="11"
                      Margin="0,0,0,5"/>
-          <ComboBox x:Name="CbInput" SelectionChanged="CbInput_SelectionChanged">
+          <ComboBox x:Name="CbInput">
             <ComboBoxItem Content="자동 감지 (전체)" Tag="All" IsSelected="True"/>
             <ComboBoxItem Content="SVG"  Tag="SVG"/>
             <ComboBoxItem Content="PNG"  Tag="PNG"/>

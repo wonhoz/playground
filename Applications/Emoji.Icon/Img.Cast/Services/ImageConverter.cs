@@ -102,13 +102,16 @@ public static class ImageConverter
 
         string dest = BuildDestPath(src, outExt, overwrite);
 
-        using SKBitmap src_bmp = LoadAsBitmap(src, ext, output == OutputFormat.ICO ? IcoSizes[^1] : 0);
+        if (output == OutputFormat.ICO)
+        {
+            SaveIco(src, ext, dest);
+            return;
+        }
+
+        using SKBitmap src_bmp = LoadAsBitmap(src, ext, 0);
 
         switch (output)
         {
-            case OutputFormat.ICO:
-                SaveIco(src, ext, dest);
-                break;
             case OutputFormat.PNG:
                 SaveEncoded(src_bmp, dest, SKEncodedImageFormat.Png, 100);
                 break;
@@ -215,7 +218,7 @@ public static class ImageConverter
     {
         using var img  = SKImage.FromBitmap(bmp);
         using var data = img.Encode(fmt, quality);
-        using var fs   = File.OpenWrite(dest);
+        using var fs   = File.Open(dest, FileMode.Create);
         data.SaveTo(fs);
     }
 

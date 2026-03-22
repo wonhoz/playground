@@ -37,10 +37,19 @@ public partial class MainWindow : Window
         e.Handled = true;
     }
 
+    void Window_DragLeave(object sender, DragEventArgs e)
+    {
+        AnimateDropZone(false);
+    }
+
     async void Window_Drop(object sender, DragEventArgs e)
     {
         AnimateDropZone(false);
-        if (_converting) return;
+        if (_converting)
+        {
+            SetStatus("변환 중입니다. 완료 후 다시 드롭하세요.");
+            return;
+        }
         if (e.Data.GetData(DataFormats.FileDrop) is not string[] dropped || dropped.Length == 0) return;
 
         var filter = GetInputFilter();
@@ -58,7 +67,7 @@ public partial class MainWindow : Window
 
     void AnimateDropZone(bool hover)
     {
-        var target = hover ? Color.FromRgb(0x6E, 0x8E, 0xFA) : Color.FromRgb(0x3A, 0x3A, 0x48);
+        var target = hover ? Color.FromRgb(0xFF, 0x70, 0x43) : Color.FromRgb(0x3A, 0x3A, 0x48);
         var anim   = new ColorAnimation(target, TimeSpan.FromMilliseconds(150));
         DropBorderBrush.BeginAnimation(SolidColorBrush.ColorProperty, anim);
     }
@@ -96,11 +105,17 @@ public partial class MainWindow : Window
             _converting = false;
             _cts?.Dispose();
             _cts = null;
-            PBar.Value = 100;
         }
 
         if (result is not null)
+        {
+            PBar.Value = 100;
             ShowResult(result);
+        }
+        else
+        {
+            ResetDropZone();
+        }
     }
 
     // ─── 결과 다이얼로그 ─────────────────────────────────────────────────────
@@ -131,7 +146,7 @@ public partial class MainWindow : Window
         FileSummary.Visibility = Visibility.Visible;
 
         TbFileCount.Text = files.Length.ToString();
-        TbFileLabel.Text = files.Length == 1 ? "개 파일 처리 예정" : "개 파일 처리 예정";
+        TbFileLabel.Text = "개 파일 처리 예정";
         TbFileSample.Text = files.Length <= 3
             ? string.Join("\n", files.Select(Path.GetFileName))
             : string.Join("\n", files.Take(2).Select(Path.GetFileName)) + $"\n...외 {files.Length - 2}개";
@@ -173,8 +188,6 @@ public partial class MainWindow : Window
     }
 
     // ─── 이벤트 ──────────────────────────────────────────────────────────────
-    void CbInput_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e) { }
-
     void CbOutput_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
     {
         if (!IsLoaded) return;

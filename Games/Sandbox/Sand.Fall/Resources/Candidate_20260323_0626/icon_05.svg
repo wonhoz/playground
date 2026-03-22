@@ -1,0 +1,70 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Sand.Fall | 기름+불 폭발 — 연소 반응 시뮬레이션 | 공간/장면 | #1A0000 -->
+  <defs>
+    <radialGradient id="fireCore5" cx="50%" cy="60%" r="50%">
+      <stop offset="0%" stop-color="#FFFF00"/>
+      <stop offset="40%" stop-color="#FF8800"/>
+      <stop offset="100%" stop-color="#FF0000" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="fireBlur5">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="160" fill="#1A0000"/>
+  <!-- Pixel grid for sandbox feel -->
+  <line x1="200" y1="200" x2="200" y2="800" stroke="#330000" stroke-width="1" opacity="0.4"/>
+  <line x1="260" y1="200" x2="260" y2="800" stroke="#330000" stroke-width="1" opacity="0.4"/>
+  <line x1="320" y1="200" x2="320" y2="800" stroke="#330000" stroke-width="1" opacity="0.4"/>
+  <line x1="380" y1="200" x2="380" y2="800" stroke="#330000" stroke-width="1" opacity="0.4"/>
+  <line x1="440" y1="200" x2="440" y2="800" stroke="#330000" stroke-width="1" opacity="0.4"/>
+  <line x1="500" y1="200" x2="500" y2="800" stroke="#330000" stroke-width="1" opacity="0.4"/>
+  <line x1="560" y1="200" x2="560" y2="800" stroke="#330000" stroke-width="1" opacity="0.4"/>
+  <line x1="620" y1="200" x2="620" y2="800" stroke="#330000" stroke-width="1" opacity="0.4"/>
+  <line x1="680" y1="200" x2="680" y2="800" stroke="#330000" stroke-width="1" opacity="0.4"/>
+  <line x1="740" y1="200" x2="740" y2="800" stroke="#330000" stroke-width="1" opacity="0.4"/>
+  <line x1="800" y1="200" x2="800" y2="800" stroke="#330000" stroke-width="1" opacity="0.4"/>
+  <line x1="200" y1="260" x2="800" y2="260" stroke="#330000" stroke-width="1" opacity="0.4"/>
+  <line x1="200" y1="320" x2="800" y2="320" stroke="#330000" stroke-width="1" opacity="0.4"/>
+  <line x1="200" y1="380" x2="800" y2="380" stroke="#330000" stroke-width="1" opacity="0.4"/>
+  <line x1="200" y1="440" x2="800" y2="440" stroke="#330000" stroke-width="1" opacity="0.4"/>
+  <line x1="200" y1="500" x2="800" y2="500" stroke="#330000" stroke-width="1" opacity="0.4"/>
+  <line x1="200" y1="560" x2="800" y2="560" stroke="#330000" stroke-width="1" opacity="0.4"/>
+  <line x1="200" y1="620" x2="800" y2="620" stroke="#330000" stroke-width="1" opacity="0.4"/>
+  <line x1="200" y1="680" x2="800" y2="680" stroke="#330000" stroke-width="1" opacity="0.4"/>
+  <line x1="200" y1="740" x2="800" y2="740" stroke="#330000" stroke-width="1" opacity="0.4"/>
+  <!-- Layer 2: Oil pool (dark liquid at bottom) -->
+  <ellipse cx="512" cy="760" rx="280" ry="50" fill="#1A1400" stroke="#3A3000" stroke-width="2"/>
+  <!-- Oil pixels falling down -->
+  <rect x="440" y="680" width="16" height="16" fill="#2A2000" rx="2"/>
+  <rect x="500" y="660" width="16" height="16" fill="#2A2000" rx="2"/>
+  <rect x="560" y="700" width="16" height="16" fill="#2A2000" rx="2"/>
+  <rect x="520" y="620" width="16" height="16" fill="#2A2000" rx="2"/>
+  <rect x="480" y="640" width="16" height="16" fill="#2A2000" rx="2"/>
+  <!-- Fire explosion erupting from oil pool -->
+  <!-- Main fire body -->
+  <ellipse cx="512" cy="620" rx="160" ry="80" fill="url(#fireCore5)" opacity="0.9" filter="url(#fireBlur5)"/>
+  <!-- Flame tongues -->
+  <path d="M 430 650 Q 420 580 450 520 Q 460 560 455 600 Q 470 540 490 480 Q 500 540 495 590 Q 512 500 512 420 Q 525 500 520 580 Q 535 530 550 480 Q 548 550 545 600 Q 560 550 575 510 Q 565 565 560 610 Q 585 560 600 530 Q 590 590 575 650 Z" fill="#FF6600" opacity="0.8" filter="url(#fireBlur5)"/>
+  <!-- Bright yellow center -->
+  <ellipse cx="512" cy="580" rx="80" ry="50" fill="#FFDD00" opacity="0.7" filter="url(#fireBlur5)"/>
+  <!-- White hot core -->
+  <ellipse cx="512" cy="600" rx="40" ry="30" fill="white" opacity="0.5" filter="url(#fireBlur5)"/>
+  <!-- Embers flying up -->
+  <circle cx="420" cy="460" r="6" fill="#FF8800" opacity="0.9" filter="url(#fireBlur5)"/>
+  <circle cx="480" cy="380" r="4" fill="#FFCC00" opacity="0.8" filter="url(#fireBlur5)"/>
+  <circle cx="550" cy="340" r="5" fill="#FF6600" opacity="0.9" filter="url(#fireBlur5)"/>
+  <circle cx="620" cy="430" r="4" fill="#FF8800" opacity="0.7" filter="url(#fireBlur5)"/>
+  <circle cx="360" cy="500" r="5" fill="#FFCC00" opacity="0.8" filter="url(#fireBlur5)"/>
+  <circle cx="660" cy="480" r="6" fill="#FF4400" opacity="0.9" filter="url(#fireBlur5)"/>
+  <circle cx="512" cy="310" r="5" fill="#FF8800" opacity="0.7" filter="url(#fireBlur5)"/>
+  <!-- Layer 3: Material labels -->
+  <rect x="650" y="720" width="130" height="32" rx="6" fill="#2A1400" stroke="#FF8800" stroke-width="2"/>
+  <text x="715" y="741" font-family="monospace" font-size="14" fill="#FF8800" text-anchor="middle">🔥 OIL+FIRE</text>
+  <!-- Smoke pixels rising -->
+  <rect x="460" y="280" width="12" height="12" fill="#333333" rx="2" opacity="0.6"/>
+  <rect x="510" y="250" width="12" height="12" fill="#444444" rx="2" opacity="0.5"/>
+  <rect x="560" y="270" width="12" height="12" fill="#333333" rx="2" opacity="0.4"/>
+  <rect x="490" y="220" width="12" height="12" fill="#222222" rx="2" opacity="0.3"/>
+</svg>

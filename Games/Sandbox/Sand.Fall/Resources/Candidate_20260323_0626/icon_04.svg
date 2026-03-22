@@ -1,0 +1,50 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Sand.Fall | 얼음 결정 — 물이 얼음으로 변하는 순간 | 중앙심볼 | #001428 -->
+  <defs>
+    <filter id="iceGlow">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="160" fill="#001428"/>
+  <!-- Layer 2: Large ice crystal (hexagonal) -->
+  <!-- Main hexagon -->
+  <polygon points="512,200 680,300 680,500 512,600 344,500 344,300" fill="#0C3A54" stroke="#7DD3FC" stroke-width="6" filter="url(#iceGlow)"/>
+  <!-- Inner hexagon -->
+  <polygon points="512,256 636,326 636,466 512,536 388,466 388,326" fill="#052040" stroke="#BAE6FD" stroke-width="3"/>
+  <!-- Crystal axes (6 directions) -->
+  <line x1="512" y1="200" x2="512" y2="600" stroke="#7DD3FC" stroke-width="3" opacity="0.5"/>
+  <line x1="344" y1="300" x2="680" y2="500" stroke="#7DD3FC" stroke-width="3" opacity="0.5"/>
+  <line x1="680" y1="300" x2="344" y2="500" stroke="#7DD3FC" stroke-width="3" opacity="0.5"/>
+  <!-- Crystal branches extending outward -->
+  <line x1="512" y1="200" x2="512" y2="140" stroke="#BAE6FD" stroke-width="4" stroke-linecap="round" filter="url(#iceGlow)"/>
+  <line x1="512" y1="170" x2="484" y2="152" stroke="#BAE6FD" stroke-width="2" stroke-linecap="round"/>
+  <line x1="512" y1="170" x2="540" y2="152" stroke="#BAE6FD" stroke-width="2" stroke-linecap="round"/>
+  <line x1="512" y1="154" x2="496" y2="144" stroke="#93C5FD" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="512" y1="154" x2="528" y2="144" stroke="#93C5FD" stroke-width="1.5" stroke-linecap="round"/>
+  <!-- Branch at 60° -->
+  <line x1="680" y1="300" x2="728" y2="272" stroke="#BAE6FD" stroke-width="4" stroke-linecap="round" filter="url(#iceGlow)"/>
+  <line x1="704" y1="286" x2="722" y2="270" stroke="#BAE6FD" stroke-width="2" stroke-linecap="round"/>
+  <line x1="704" y1="286" x2="720" y2="302" stroke="#BAE6FD" stroke-width="2" stroke-linecap="round"/>
+  <!-- Branch at 120° -->
+  <line x1="680" y1="500" x2="728" y2="528" stroke="#BAE6FD" stroke-width="4" stroke-linecap="round" filter="url(#iceGlow)"/>
+  <line x1="704" y1="514" x2="722" y2="530" stroke="#BAE6FD" stroke-width="2" stroke-linecap="round"/>
+  <line x1="704" y1="514" x2="720" y2="498" stroke="#BAE6FD" stroke-width="2" stroke-linecap="round"/>
+  <!-- Bottom -->
+  <line x1="512" y1="600" x2="512" y2="660" stroke="#BAE6FD" stroke-width="4" stroke-linecap="round" filter="url(#iceGlow)"/>
+  <line x1="512" y1="630" x2="484" y2="648" stroke="#BAE6FD" stroke-width="2" stroke-linecap="round"/>
+  <line x1="512" y1="630" x2="540" y2="648" stroke="#BAE6FD" stroke-width="2" stroke-linecap="round"/>
+  <!-- Left branches -->
+  <line x1="344" y1="500" x2="296" y2="528" stroke="#BAE6FD" stroke-width="4" stroke-linecap="round" filter="url(#iceGlow)"/>
+  <line x1="344" y1="300" x2="296" y2="272" stroke="#BAE6FD" stroke-width="4" stroke-linecap="round" filter="url(#iceGlow)"/>
+  <!-- Center snowflake dot -->
+  <circle cx="512" cy="400" r="20" fill="#BAE6FD" filter="url(#iceGlow)"/>
+  <!-- Layer 3: Freeze indicator -->
+  <text x="512" y="780" font-family="Arial,sans-serif" font-size="24" fill="#7DD3FC" text-anchor="middle" opacity="0.8">Water → Ice</text>
+  <!-- Freeze particles around hex -->
+  <circle cx="300" cy="240" r="4" fill="#7DD3FC" opacity="0.6"/>
+  <circle cx="724" cy="240" r="4" fill="#7DD3FC" opacity="0.5"/>
+  <circle cx="300" cy="560" r="4" fill="#93C5FD" opacity="0.5"/>
+  <circle cx="724" cy="560" r="4" fill="#7DD3FC" opacity="0.6"/>
+</svg>

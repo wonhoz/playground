@@ -1,0 +1,66 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Sand.Fall | 모래시계 — 시간 제한 내 모래 시뮬레이션 | 레이어드 | #1A1408 -->
+  <defs>
+    <radialGradient id="sandGlow6" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFD700" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#1A1408" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="topBulb">
+      <ellipse cx="512" cy="340" rx="180" ry="150"/>
+    </clipPath>
+    <clipPath id="botBulb">
+      <ellipse cx="512" cy="680" rx="180" ry="150"/>
+    </clipPath>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="160" fill="#1A1408"/>
+  <rect width="1024" height="1024" rx="160" fill="url(#sandGlow6)"/>
+  <!-- Layer 2: Hourglass structure -->
+  <!-- Hourglass frame (outer) -->
+  <path d="M 300 200 L 724 200 L 724 230 L 560 490 L 724 750 L 724 780 L 300 780 L 300 750 L 464 490 L 300 230 Z" fill="#2A2010" stroke="#6A5020" stroke-width="6" stroke-linejoin="round"/>
+  <!-- Top cap -->
+  <rect x="290" y="192" width="444" height="50" rx="8" fill="#4A3A18" stroke="#8A7030" stroke-width="4"/>
+  <!-- Bottom cap -->
+  <rect x="290" y="738" width="444" height="50" rx="8" fill="#4A3A18" stroke="#8A7030" stroke-width="4"/>
+  <!-- Bolt details on caps -->
+  <circle cx="320" cy="217" r="6" fill="#8A7030"/>
+  <circle cx="704" cy="217" r="6" fill="#8A7030"/>
+  <circle cx="320" cy="763" r="6" fill="#8A7030"/>
+  <circle cx="704" cy="763" r="6" fill="#8A7030"/>
+  <!-- Top bulb - sand remaining (about 30%) -->
+  <!-- Top sand pile (small, almost empty) -->
+  <path d="M 300 440 L 720 440 L 560 490 L 464 490 Z" fill="#C8A820" opacity="0.3"/>
+  <!-- Actual sand level in top (low) -->
+  <ellipse cx="512" cy="400" rx="90" ry="30" fill="#C8A820" opacity="0.6"/>
+  <path d="M 422 400 L 602 400 L 560 490 L 464 490 Z" fill="#C8A820" opacity="0.7"/>
+  <!-- Top sand surface texture (pixel dots) -->
+  <rect x="438" y="392" width="8" height="8" fill="#E8C840" rx="1" opacity="0.8"/>
+  <rect x="452" y="388" width="8" height="8" fill="#D8B830" rx="1" opacity="0.8"/>
+  <rect x="466" y="392" width="8" height="8" fill="#E8C840" rx="1" opacity="0.8"/>
+  <rect x="480" y="386" width="8" height="8" fill="#C8A820" rx="1" opacity="0.8"/>
+  <rect x="494" y="390" width="8" height="8" fill="#E8C840" rx="1" opacity="0.8"/>
+  <rect x="508" y="384" width="8" height="8" fill="#D8B830" rx="1" opacity="0.8"/>
+  <rect x="522" y="389" width="8" height="8" fill="#E8C840" rx="1" opacity="0.8"/>
+  <rect x="536" y="393" width="8" height="8" fill="#C8A820" rx="1" opacity="0.8"/>
+  <rect x="550" y="387" width="8" height="8" fill="#D8B830" rx="1" opacity="0.8"/>
+  <!-- Falling sand stream through neck -->
+  <rect x="508" y="490" width="8" height="10" fill="#E8C840" rx="2" opacity="0.9"/>
+  <rect x="510" y="504" width="6" height="8" fill="#FFD700" rx="2" opacity="0.7"/>
+  <rect x="511" y="516" width="5" height="7" fill="#E8C840" rx="2" opacity="0.5"/>
+  <!-- Bottom bulb - sand accumulated (about 70%) -->
+  <path d="M 464 490 L 560 490 L 724 750 L 300 750 Z" fill="#B09010" opacity="0.6"/>
+  <!-- Bottom sand pile (large, mostly full) -->
+  <path d="M 464 490 L 560 490 L 680 690 L 344 690 Z" fill="#C8A820" opacity="0.8"/>
+  <ellipse cx="512" cy="690" rx="168" ry="24" fill="#D8B830" opacity="0.9"/>
+  <!-- Bottom sand pixel texture -->
+  <rect x="380" y="660" width="8" height="8" fill="#E8C840" rx="1"/>
+  <rect x="420" y="652" width="8" height="8" fill="#D8B830" rx="1"/>
+  <rect x="460" y="648" width="8" height="8" fill="#E8C840" rx="1"/>
+  <rect x="500" y="644" width="8" height="8" fill="#C8A820" rx="1"/>
+  <rect x="540" y="648" width="8" height="8" fill="#D8B830" rx="1"/>
+  <rect x="580" y="652" width="8" height="8" fill="#E8C840" rx="1"/>
+  <rect x="620" y="660" width="8" height="8" fill="#C8A820" rx="1"/>
+  <!-- Layer 3: Timer display -->
+  <rect x="360" y="810" width="304" height="50" rx="8" fill="#2A2010" stroke="#6A5020" stroke-width="2"/>
+  <text x="512" y="843" font-family="monospace" font-size="22" fill="#FFD700" text-anchor="middle" font-weight="bold">00:28</text>
+</svg>

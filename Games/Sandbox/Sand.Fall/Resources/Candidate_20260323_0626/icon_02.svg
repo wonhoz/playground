@@ -1,0 +1,37 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Sand.Fall | 산성 녹이기 반응 | 기하학 | #1A0A00 -->
+  <defs>
+    <filter id="acidGlow">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="160" fill="#1A0A00"/>
+  <!-- Layer 2: Stone block being dissolved by acid -->
+  <!-- Stone block (partially melted) -->
+  <rect x="260" y="360" width="504" height="280" rx="12" fill="#4B5563"/>
+  <!-- Stone texture -->
+  <line x1="260" y1="430" x2="764" y2="430" stroke="#374151" stroke-width="2"/>
+  <line x1="260" y1="500" x2="764" y2="500" stroke="#374151" stroke-width="2"/>
+  <line x1="260" y1="570" x2="764" y2="570" stroke="#374151" stroke-width="2"/>
+  <line x1="380" y1="360" x2="380" y2="640" stroke="#374151" stroke-width="2"/>
+  <line x1="512" y1="360" x2="512" y2="640" stroke="#374151" stroke-width="2"/>
+  <line x1="644" y1="360" x2="644" y2="640" stroke="#374151" stroke-width="2"/>
+  <!-- Acid eating through top of stone (jagged dissolve effect) -->
+  <path d="M260 360 Q290 340 320 360 Q350 340 380 360 Q410 335 440 358 Q470 335 500 358 Q530 340 560 360 Q590 338 620 360 Q650 338 680 358 Q710 340 740 360 Q752 355 764 360 L764 280 L260 280 Z" fill="#7BCF1A" filter="url(#acidGlow)" opacity="0.85"/>
+  <!-- Acid label -->
+  <text x="512" y="340" font-family="Arial,sans-serif" font-size="28" fill="#A3E635" text-anchor="middle" font-weight="bold" filter="url(#acidGlow)">Acid</text>
+  <!-- Dissolving particles -->
+  <circle cx="340" cy="365" r="8" fill="#A3E635" opacity="0.7" filter="url(#acidGlow)"/>
+  <circle cx="450" cy="358" r="6" fill="#84CC16" opacity="0.8"/>
+  <circle cx="580" cy="362" r="9" fill="#A3E635" opacity="0.6" filter="url(#acidGlow)"/>
+  <circle cx="680" cy="360" r="7" fill="#65A30D" opacity="0.7"/>
+  <!-- Dripping acid down the stone -->
+  <ellipse cx="340" cy="440" rx="18" ry="10" fill="#7BCF1A" opacity="0.5"/>
+  <ellipse cx="520" cy="480" rx="14" ry="8" fill="#A3E635" opacity="0.4"/>
+  <ellipse cx="680" cy="460" rx="16" ry="9" fill="#7BCF1A" opacity="0.5"/>
+  <!-- Layer 3: Stone label + reaction label -->
+  <text x="512" y="600" font-family="Arial,sans-serif" font-size="24" fill="#9CA3AF" text-anchor="middle">Stone</text>
+  <text x="512" y="780" font-family="Arial,sans-serif" font-size="22" fill="#7BCF1A" text-anchor="middle" opacity="0.8">Acid + Stone → Dissolve</text>
+</svg>

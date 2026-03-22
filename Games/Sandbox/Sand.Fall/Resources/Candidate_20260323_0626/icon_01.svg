@@ -1,0 +1,42 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Sand.Fall | 씨앗 → 식물 성장 시뮬레이션 | 공간/장면 | #0A1A00 -->
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="160" fill="#0A1A00"/>
+  <!-- Layer 2: Growth stages (seed → sprout → plant) -->
+  <!-- Ground -->
+  <rect x="160" y="720" width="704" height="120" rx="8" fill="#2D1A00"/>
+  <!-- Dirt texture -->
+  <circle cx="220" cy="750" r="8" fill="#3A2200" opacity="0.6"/>
+  <circle cx="380" cy="745" r="6" fill="#3A2200" opacity="0.5"/>
+  <circle cx="600" cy="752" r="7" fill="#3A2200" opacity="0.6"/>
+  <circle cx="780" cy="748" r="9" fill="#3A2200" opacity="0.5"/>
+  <!-- Stage 1: Seed (left) -->
+  <ellipse cx="252" cy="710" rx="20" ry="14" fill="#8B4513"/>
+  <text x="252" y="800" font-family="Arial,sans-serif" font-size="18" fill="#6B4226" text-anchor="middle">씨앗</text>
+  <!-- Stage 2: Sprout -->
+  <line x1="420" y1="720" x2="420" y2="600" stroke="#4ADE80" stroke-width="8" stroke-linecap="round"/>
+  <path d="M420 640 Q390 600 350 590" fill="none" stroke="#4ADE80" stroke-width="6" stroke-linecap="round"/>
+  <ellipse cx="342" cy="588" rx="22" ry="14" fill="#22C55E" transform="rotate(-20 342 588)"/>
+  <text x="420" y="800" font-family="Arial,sans-serif" font-size="18" fill="#4ADE80" text-anchor="middle">발아</text>
+  <!-- Stage 3: Young plant -->
+  <line x1="600" y1="720" x2="600" y2="540" stroke="#16A34A" stroke-width="10" stroke-linecap="round"/>
+  <path d="M600 640 Q570 600 530 595" fill="none" stroke="#16A34A" stroke-width="7" stroke-linecap="round"/>
+  <ellipse cx="524" cy="593" rx="28" ry="18" fill="#22C55E" transform="rotate(-15 524 593)"/>
+  <path d="M600 590 Q630 550 670 545" fill="none" stroke="#16A34A" stroke-width="7" stroke-linecap="round"/>
+  <ellipse cx="676" cy="543" rx="28" ry="18" fill="#4ADE80" transform="rotate(10 676 543)"/>
+  <text x="600" y="800" font-family="Arial,sans-serif" font-size="18" fill="#22C55E" text-anchor="middle">성장</text>
+  <!-- Stage 4: Full plant with flower -->
+  <line x1="780" y1="720" x2="780" y2="440" stroke="#15803D" stroke-width="12" stroke-linecap="round"/>
+  <path d="M780 640 Q740 600 700 592" fill="none" stroke="#15803D" stroke-width="8" stroke-linecap="round"/>
+  <ellipse cx="694" cy="590" rx="34" ry="20" fill="#16A34A" transform="rotate(-10 694 590)"/>
+  <path d="M780 570 Q820 530 860 522" fill="none" stroke="#15803D" stroke-width="8" stroke-linecap="round"/>
+  <ellipse cx="866" cy="520" rx="34" ry="20" fill="#4ADE80" transform="rotate(5 866 520)"/>
+  <!-- Flower at top -->
+  <circle cx="780" cy="430" r="34" fill="#FCA5C0"/>
+  <circle cx="780" cy="430" r="18" fill="#FCD34D"/>
+  <text x="780" y="800" font-family="Arial,sans-serif" font-size="18" fill="#4ADE80" text-anchor="middle">개화</text>
+  <!-- Layer 3: Progress arrows -->
+  <text x="336" y="680" font-family="Arial,sans-serif" font-size="24" fill="#4ADE80" text-anchor="middle">→</text>
+  <text x="510" y="680" font-family="Arial,sans-serif" font-size="24" fill="#4ADE80" text-anchor="middle">→</text>
+  <text x="690" y="680" font-family="Arial,sans-serif" font-size="24" fill="#4ADE80" text-anchor="middle">→</text>
+</svg>

@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg04" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0E7490"/>
+      <stop offset="100%" stop-color="#0C4A6E"/>
+    </linearGradient>
+    <clipPath id="c04">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+
+  <!-- Layer 1: Background — deep teal -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg04)"/>
+
+  <!-- Layer 2: Monitor frame (white) -->
+  <!-- Monitor bezel -->
+  <rect x="148" y="148" width="728" height="544" rx="24" fill="white"/>
+  <!-- Screen glass (dark teal) -->
+  <rect x="172" y="172" width="680" height="496" rx="14" fill="#083344"/>
+  <!-- Monitor neck -->
+  <rect x="472" y="692" width="80" height="88" rx="8" fill="white" clip-path="url(#c04)"/>
+  <!-- Monitor base -->
+  <rect x="346" y="780" width="332" height="52" rx="16" fill="white" clip-path="url(#c04)"/>
+
+  <!-- Layer 3: Screen content — chat app with Active status -->
+  <!-- Status bar (top of screen) -->
+  <rect x="172" y="172" width="680" height="56" rx="14" fill="#0A4456"/>
+  <!-- App name area -->
+  <rect x="192" y="188" width="160" height="24" rx="6" fill="#0E7490" opacity="0.8"/>
+  <!-- Active green dot in status bar -->
+  <circle cx="760" cy="200" r="16" fill="#22C55E"/>
+  <!-- Pulse ring around dot -->
+  <circle cx="760" cy="200" r="28" fill="none" stroke="#22C55E" stroke-width="5" opacity="0.5"/>
+
+  <!-- Chat content area -->
+  <!-- User 1 (online — green avatar) -->
+  <circle cx="210" cy="318" r="30" fill="#22C55E"/>
+  <!-- Active indicator on avatar -->
+  <circle cx="232" cy="340" r="12" fill="#22C55E" stroke="#083344" stroke-width="4"/>
+  <!-- Message bubble 1 -->
+  <rect x="254" y="296" width="340" height="46" rx="14" fill="#0E7490" opacity="0.8"/>
+  <rect x="254" y="296" width="340" height="46" rx="14" fill="white" opacity="0.12"/>
+
+  <!-- User 2 (online — blue avatar) -->
+  <circle cx="810" cy="406" r="30" fill="#3B82F6"/>
+  <circle cx="810" cy="406" r="12" fill="#22C55E" stroke="#083344" stroke-width="3" cx="788" cy="428"/>
+  <!-- Message bubble 2 (right-aligned) -->
+  <rect x="478" y="384" width="312" height="46" rx="14" fill="#22C55E" opacity="0.7"/>
+
+  <!-- User 3 (online — green avatar) -->
+  <circle cx="210" cy="506" r="30" fill="#22C55E"/>
+  <circle cx="232" cy="528" r="12" fill="#22C55E" stroke="#083344" stroke-width="4"/>
+  <!-- Message bubble 3 -->
+  <rect x="254" y="484" width="280" height="46" rx="14" fill="#0E7490" opacity="0.8"/>
+  <rect x="254" y="484" width="280" height="46" rx="14" fill="white" opacity="0.1"/>
+
+  <!-- "● Active" label overlay in bottom-right corner of screen -->
+  <rect x="576" y="590" width="260" height="50" rx="14" fill="#15803D" opacity="0.9"/>
+  <circle cx="600" cy="615" r="10" fill="#86EFAC"/>
+  <rect x="622" y="606" width="188" height="18" rx="5" fill="white" opacity="0.8"/>
+</svg>

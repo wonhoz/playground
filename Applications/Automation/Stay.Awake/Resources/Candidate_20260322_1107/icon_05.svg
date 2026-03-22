@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg05" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FF8F00"/>
+      <stop offset="100%" stop-color="#E65100"/>
+    </linearGradient>
+    <radialGradient id="iris05" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#5E1289"/>
+      <stop offset="100%" stop-color="#4A148C"/>
+    </radialGradient>
+    <!-- Clip eye shape -->
+    <clipPath id="eyeClip">
+      <path d="M80,512 Q512,140 944,512 Q512,884 80,512 Z"/>
+    </clipPath>
+  </defs>
+
+  <!-- Layer 1: Background — vivid amber orange -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg05)"/>
+
+  <!-- Layer 2: Eye shape — "Always Awake" (白目) -->
+  <!-- Sclera (white of eye) -->
+  <path d="M80,512 Q512,140 944,512 Q512,884 80,512 Z" fill="white"/>
+
+  <!-- Iris (purple circle) -->
+  <circle cx="512" cy="512" r="220" fill="url(#iris05)"/>
+
+  <!-- Pupil (dark center) -->
+  <circle cx="512" cy="512" r="100" fill="#1A0030"/>
+
+  <!-- Layer 3: Slack # hash in iris (white, clearly visible) -->
+  <!-- Horizontal bars of # -->
+  <rect x="390" y="474" width="244" height="42" rx="21" fill="white" opacity="0.95"/>
+  <rect x="390" y="548" width="244" height="42" rx="21" fill="white" opacity="0.95"/>
+  <!-- Vertical bars of # -->
+  <rect x="436" y="422" width="42" height="200" rx="21" fill="white" opacity="0.95"/>
+  <rect x="548" y="422" width="42" height="200" rx="21" fill="white" opacity="0.95"/>
+
+  <!-- Eyelid top/bottom highlights (depth) -->
+  <path d="M80,512 Q512,140 944,512"
+        fill="none" stroke="white" stroke-width="22" stroke-linecap="round" opacity="0.3"/>
+
+  <!-- Catchlight (reflection spark) -->
+  <circle cx="604" cy="430" r="36" fill="white" opacity="0.7"/>
+</svg>

@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg03" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0D1B3E"/>
+      <stop offset="100%" stop-color="#1A1A5E"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Layer 1: Background — deep night navy -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg03)"/>
+
+  <!-- Layer 2: Yellow crescent moon (Away / sleeping symbol) -->
+  <!-- Full circle for moon base -->
+  <circle cx="430" cy="430" r="240" fill="#FDD835"/>
+  <!-- Cutout circle to create crescent shape -->
+  <circle cx="560" cy="355" r="212" fill="#0D1B3E"/>
+  <!-- Extra dark fill to blend cutout with background gradient -->
+  <circle cx="560" cy="355" r="212" fill="#1A1A5E" opacity="0.6"/>
+
+  <!-- Small stars for "Away / sleeping" atmosphere -->
+  <circle cx="720" cy="200" r="18" fill="#FFF9C4"/>
+  <circle cx="800" cy="320" r="12" fill="#FFF9C4" opacity="0.7"/>
+  <circle cx="160" cy="250" r="14" fill="#FFF9C4" opacity="0.6"/>
+
+  <!-- Layer 3: Red prohibition sign (NO Away!) -->
+  <!-- Red circle outline -->
+  <circle cx="512" cy="512" r="330" fill="none" stroke="#F44336" stroke-width="88" stroke-linecap="round"/>
+  <!-- Red diagonal slash (upper-right to lower-left) -->
+  <line x1="745" y1="278" x2="278" y2="745"
+        stroke="#F44336" stroke-width="88" stroke-linecap="round"/>
+</svg>

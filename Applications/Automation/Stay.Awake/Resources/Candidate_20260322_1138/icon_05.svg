@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg05" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#064E3B"/>
+      <stop offset="100%" stop-color="#065F46"/>
+    </linearGradient>
+    <radialGradient id="dot05" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#86EFAC"/>
+      <stop offset="100%" stop-color="#22C55E"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Layer 1: Background — deep emerald -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg05)"/>
+
+  <!-- Layer 2: Circular loop arrow (auto-refresh / periodic signal) -->
+  <!-- Large arc ~300° counter-clockwise -->
+  <path d="M 778,258 A 318,318 0 1,0 778,766"
+        fill="none" stroke="white" stroke-width="62" stroke-linecap="round" opacity="0.92"/>
+  <!-- Arrowhead at arc end (pointing downward) -->
+  <path d="M 720,764 L 800,840 L 842,744"
+        fill="none" stroke="white" stroke-width="56"
+        stroke-linecap="round" stroke-linejoin="round" opacity="0.92"/>
+
+  <!-- Layer 3: Central green Active signal dot -->
+  <!-- Outer white ring (badge border) -->
+  <circle cx="512" cy="512" r="136" fill="white"/>
+  <!-- Green active dot -->
+  <circle cx="512" cy="512" r="112" fill="url(#dot05)"/>
+  <!-- Inner bright highlight -->
+  <circle cx="484" cy="484" r="50" fill="white" opacity="0.35"/>
+</svg>

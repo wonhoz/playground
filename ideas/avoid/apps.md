@@ -26,7 +26,7 @@
 | `Clipboard.Stacker` | Productivity | 클립보드 스택 관리 |
 | `Code.Snap` | Productivity | 오프라인 코드 스크린샷 미화 도구 |
 | `QR.Forge` | Productivity | 오프라인 QR 코드 생성기 (로고 삽입, 배치) |
-| `Screen.Recorder` | Productivity | 화면 녹화 도구 |
+| `Screen.Recorder` | Video | 화면 녹화 도구 (영역 선택, MP4 출력) (2026-03-22) |
 | `Word.Cloud` | Productivity | 오프라인 워드클라우드 생성기 |
 | `Env.Guard` | System | Windows 환경변수 GUI 관리자 + 스냅샷/롤백 |
 | `Sys.Clean` | System | CCleaner 유사 - 시스템 청소, 레지스트리, 시작프로그램 |

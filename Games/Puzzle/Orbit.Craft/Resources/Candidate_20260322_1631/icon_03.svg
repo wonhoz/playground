@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg03" cx="50%" cy="50%" r="65%">
+      <stop offset="0%" stop-color="#080A20"/>
+      <stop offset="100%" stop-color="#020408"/>
+    </radialGradient>
+    <radialGradient id="centralStar03" cx="35%" cy="30%" r="60%">
+      <stop offset="0%" stop-color="#FFEEAA"/>
+      <stop offset="100%" stop-color="#BB7700"/>
+    </radialGradient>
+    <radialGradient id="starGlow03" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFD060" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#FFD060" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="frame03">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+
+  <!-- Layer 1: Deep space background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg03)"/>
+
+  <g clip-path="url(#frame03)">
+    <!-- Stars (distant) -->
+    <circle cx="200" cy="200" r="1.5" fill="white" opacity="0.5"/>
+    <circle cx="820" cy="180" r="2" fill="white" opacity="0.6"/>
+    <circle cx="140" cy="650" r="1.5" fill="white" opacity="0.4"/>
+    <circle cx="900" cy="750" r="2" fill="white" opacity="0.5"/>
+    <circle cx="500" cy="100" r="1.5" fill="white" opacity="0.4"/>
+    <circle cx="380" cy="920" r="2" fill="white" opacity="0.5"/>
+
+    <!-- Layer 2: Concentric orbital rings (centered at 512,512) -->
+    <!-- Orbit 6 (outermost) - faint blue -->
+    <ellipse cx="512" cy="512" rx="430" ry="400" fill="none" stroke="#336688" stroke-width="3" opacity="0.4"/>
+    <!-- Orbit 5 - slightly brighter -->
+    <ellipse cx="512" cy="512" rx="360" ry="335" fill="none" stroke="#4488AA" stroke-width="4" opacity="0.5"/>
+    <!-- Orbit 4 - blue -->
+    <ellipse cx="512" cy="512" rx="290" ry="270" fill="none" stroke="#5599BB" stroke-width="5" opacity="0.6"/>
+    <!-- Orbit 3 - teal-blue -->
+    <ellipse cx="512" cy="512" rx="220" ry="205" fill="none" stroke="#4488CC" stroke-width="6" opacity="0.7"/>
+    <!-- Orbit 2 - cyan -->
+    <ellipse cx="512" cy="512" rx="150" ry="140" fill="none" stroke="#22BBAA" stroke-width="7" opacity="0.75"/>
+    <!-- Orbit 1 (innermost) - bright cyan/target -->
+    <ellipse cx="512" cy="512" rx="90" ry="84" fill="none" stroke="#00FFC0" stroke-width="8" opacity="0.85"/>
+
+    <!-- Planets on their orbits -->
+    <!-- Orbit 1 planet (target) - at right of inner orbit -->
+    <circle cx="602" cy="512" r="22" fill="#00FFC0" opacity="0.9"/>
+    <circle cx="602" cy="512" r="32" fill="none" stroke="#00FFC0" stroke-width="3" opacity="0.4"/>
+
+    <!-- Orbit 2 planet (blue) - at top -->
+    <circle cx="512" cy="372" r="28" fill="#5AC8FA"/>
+    <ellipse cx="502" cy="363" rx="11" ry="7" fill="white" opacity="0.3"/>
+
+    <!-- Orbit 3 planet (purple) - lower right -->
+    <circle cx="710" cy="600" r="32" fill="#9A6AC0"/>
+    <ellipse cx="699" cy="590" rx="12" ry="8" fill="white" opacity="0.25"/>
+
+    <!-- Orbit 4 planet (blue) - upper left -->
+    <circle cx="240" cy="370" r="36" fill="#4488CC"/>
+    <ellipse cx="229" cy="359" rx="14" ry="9" fill="white" opacity="0.22"/>
+
+    <!-- Probe (gold triangle) on orbit 2 -->
+    <polygon points="512,355 502,380 522,380" fill="#FFF0A0"/>
+
+    <!-- Central star (gold) -->
+    <circle cx="512" cy="512" r="62" fill="url(#starGlow03)"/>
+    <circle cx="512" cy="512" r="44" fill="url(#centralStar03)"/>
+    <ellipse cx="500" cy="500" rx="17" ry="11" fill="white" opacity="0.35"/>
+
+    <!-- Layer 3: Orbital period markers (tick marks on outermost ring) -->
+    <line x1="512" y1="108" x2="512" y2="122" stroke="#336688" stroke-width="3" opacity="0.6"/>
+    <line x1="942" y1="512" x2="928" y2="512" stroke="#336688" stroke-width="3" opacity="0.6"/>
+    <line x1="512" y1="916" x2="512" y2="902" stroke="#336688" stroke-width="3" opacity="0.6"/>
+    <line x1="82" y1="512" x2="96" y2="512" stroke="#336688" stroke-width="3" opacity="0.6"/>
+
+    <!-- Title -->
+    <text x="512" y="980" font-family="'Segoe UI',Arial" font-size="48" font-weight="900" fill="#1A3A5A" text-anchor="middle" opacity="0.8">ORBIT · CRAFT</text>
+  </g>
+</svg>

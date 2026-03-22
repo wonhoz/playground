@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg05" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#06101A"/>
+      <stop offset="100%" stop-color="#020608"/>
+    </radialGradient>
+    <radialGradient id="target05" cx="35%" cy="30%" r="60%">
+      <stop offset="0%" stop-color="#80FFDC"/>
+      <stop offset="100%" stop-color="#00885A"/>
+    </radialGradient>
+    <radialGradient id="targetGlow05" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#00FFC0" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#00FFC0" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="planet05" cx="40%" cy="35%" r="60%">
+      <stop offset="0%" stop-color="#7AAAEE"/>
+      <stop offset="100%" stop-color="#225588"/>
+    </radialGradient>
+    <clipPath id="frame05">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+
+  <!-- Layer 1: Deep space -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg05)"/>
+
+  <g clip-path="url(#frame05)">
+    <!-- Stars -->
+    <circle cx="180" cy="170" r="2" fill="white" opacity="0.6"/>
+    <circle cx="850" cy="200" r="1.5" fill="white" opacity="0.5"/>
+    <circle cx="130" cy="700" r="2" fill="white" opacity="0.5"/>
+    <circle cx="900" cy="800" r="1.5" fill="white" opacity="0.6"/>
+    <circle cx="700" cy="100" r="2" fill="white" opacity="0.6"/>
+    <circle cx="300" cy="900" r="1.5" fill="white" opacity="0.4"/>
+
+    <!-- Layer 2: Central composition — target planet with probe in orbit -->
+    <!-- Small planet (blue) — upper left -->
+    <circle cx="240" cy="280" r="50" fill="url(#planet05)"/>
+    <ellipse cx="228" cy="268" rx="18" ry="12" fill="white" opacity="0.2"/>
+
+    <!-- Target planet (large, cyan) — center -->
+    <!-- Glow -->
+    <circle cx="512" cy="460" r="50" fill="url(#targetGlow05)"/>
+    <circle cx="512" cy="460" r="130" fill="url(#targetGlow05)" opacity="0.4"/>
+    <!-- Planet body -->
+    <circle cx="512" cy="460" r="118" fill="url(#target05)"/>
+    <!-- Surface details -->
+    <ellipse cx="490" cy="438" rx="42" ry="28" fill="white" opacity="0.2"/>
+    <!-- Surface continent shapes -->
+    <ellipse cx="540" cy="490" rx="25" ry="18" fill="#00AA70" opacity="0.4"/>
+    <ellipse cx="480" cy="495" rx="18" ry="12" fill="#00AA70" opacity="0.35"/>
+
+    <!-- Full circular orbit path (golden) -->
+    <ellipse cx="512" cy="460" rx="285" ry="220" fill="none" stroke="#FFD060" stroke-width="5" opacity="0.75"/>
+
+    <!-- Probe (small gold triangle) in orbit — multiple positions showing movement -->
+    <!-- Position A (right side) -->
+    <polygon points="797,460 782,490 812,490" fill="#FFF0A0" transform="rotate(90 797 475)"/>
+    <!-- Trail arc -->
+    <path d="M797,460 A285,220 0 0 0 512,240" fill="none" stroke="#FFD060" stroke-width="6" stroke-linecap="round" opacity="0.75"/>
+
+    <!-- Success burst at probe -->
+    <circle cx="797" cy="460" r="22" fill="#FFD060" opacity="0.35"/>
+
+    <!-- Layer 3: Success overlay (center bottom) -->
+    <rect x="280" y="660" width="464" height="80" rx="18" fill="#002218"/>
+    <rect x="280" y="660" width="464" height="80" rx="18" fill="none" stroke="#00FFC0" stroke-width="4"/>
+    <text x="512" y="697" font-family="'Segoe UI',Arial" font-size="34" font-weight="700" fill="#00FFC0" text-anchor="middle">✓ 궤도 진입 성공!</text>
+    <text x="512" y="728" font-family="'Segoe UI',Arial" font-size="26" fill="#00AA80" text-anchor="middle">목표 행성 공전 완료</text>
+
+    <!-- Level complete badge -->
+    <circle cx="870" cy="838" r="88" fill="#001A14"/>
+    <circle cx="870" cy="838" r="88" fill="none" stroke="#00FFC0" stroke-width="6"/>
+    <text x="870" y="828" font-family="'Segoe UI',Arial" font-size="30" font-weight="700" fill="#00FFC0" text-anchor="middle">LEVEL</text>
+    <text x="870" y="872" font-family="'Segoe UI',Arial" font-size="56" font-weight="900" fill="#00FFC0" text-anchor="middle">3</text>
+
+    <!-- Score/time -->
+    <rect x="80" y="820" width="320" height="80" rx="14" fill="#001A14"/>
+    <text x="240" y="853" font-family="'Segoe UI',Arial" font-size="28" fill="#44AA88" text-anchor="middle">CLEAR!</text>
+    <text x="240" y="885" font-family="'Segoe UI',Arial" font-size="28" fill="#FFD060" font-weight="700" text-anchor="middle">시도: 2회</text>
+  </g>
+</svg>

@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg01" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#080818"/>
+      <stop offset="100%" stop-color="#020208"/>
+    </radialGradient>
+    <radialGradient id="targetGlow01" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#00FFC0" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#00FFC0" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="planet01" cx="40%" cy="35%" r="60%">
+      <stop offset="0%" stop-color="#80DDFF"/>
+      <stop offset="100%" stop-color="#2A6A8A"/>
+    </radialGradient>
+    <radialGradient id="target01" cx="35%" cy="30%" r="60%">
+      <stop offset="0%" stop-color="#80FFDC"/>
+      <stop offset="100%" stop-color="#00AA80"/>
+    </radialGradient>
+    <radialGradient id="star01" cx="35%" cy="30%" r="60%">
+      <stop offset="0%" stop-color="#FFEEAA"/>
+      <stop offset="100%" stop-color="#CC8800"/>
+    </radialGradient>
+    <clipPath id="frame01">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+
+  <!-- Layer 1: Deep space background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg01)"/>
+
+  <g clip-path="url(#frame01)">
+    <!-- Stars -->
+    <circle cx="180" cy="150" r="2" fill="white" opacity="0.7"/>
+    <circle cx="320" cy="80" r="1.5" fill="white" opacity="0.5"/>
+    <circle cx="750" cy="120" r="2" fill="white" opacity="0.6"/>
+    <circle cx="880" cy="200" r="1.5" fill="white" opacity="0.5"/>
+    <circle cx="140" cy="440" r="2" fill="white" opacity="0.6"/>
+    <circle cx="900" cy="480" r="1.5" fill="white" opacity="0.4"/>
+    <circle cx="200" cy="800" r="2" fill="white" opacity="0.6"/>
+    <circle cx="850" cy="820" r="1.5" fill="white" opacity="0.5"/>
+    <circle cx="420" cy="900" r="2" fill="white" opacity="0.4"/>
+    <circle cx="620" cy="140" r="1.5" fill="white" opacity="0.6"/>
+    <circle cx="500" cy="50" r="2" fill="white" opacity="0.5"/>
+    <circle cx="960" cy="650" r="2" fill="white" opacity="0.6"/>
+
+    <!-- Layer 2: Central target planet (cyan) -->
+    <circle cx="512" cy="450" r="30" fill="url(#targetGlow01)"/>
+    <circle cx="512" cy="450" r="100" fill="url(#targetGlow01)" opacity="0.4"/>
+    <circle cx="512" cy="450" r="88" fill="url(#target01)"/>
+    <ellipse cx="490" cy="428" rx="32" ry="22" fill="white" opacity="0.22"/>
+
+    <!-- Orbital path (ellipse around target planet) -->
+    <ellipse cx="512" cy="450" rx="270" ry="210" fill="none" stroke="#FFD060" stroke-width="4" stroke-dasharray="16,12" opacity="0.7"/>
+
+    <!-- Probe (small triangle spaceship) on the orbit -->
+    <!-- Position on orbit: top-right area ~angle 45° -->
+    <!-- At angle 45°: x=512+270*cos(45°)=512+191=703, y=450-210*sin(45°)=450-148=302 -->
+    <polygon points="703,288 692,318 714,318" fill="#FFF0A0" transform="rotate(-45 703 303)"/>
+    <!-- Probe glow -->
+    <circle cx="703" cy="303" r="14" fill="#FFD060" opacity="0.5"/>
+
+    <!-- Probe trail (arc along the orbit) -->
+    <path d="M 512,240 A 270,210 0 0 1 703,303" fill="none" stroke="#FFD060" stroke-width="5" stroke-linecap="round" opacity="0.6"/>
+
+    <!-- Other planet (blue, upper left) -->
+    <circle cx="230" cy="260" r="52" fill="url(#planet01)"/>
+    <ellipse cx="216" cy="244" rx="20" ry="13" fill="white" opacity="0.2"/>
+
+    <!-- Small planet (blue, lower right) -->
+    <circle cx="800" cy="720" r="40" fill="url(#planet01)"/>
+    <ellipse cx="790" cy="710" rx="14" ry="9" fill="white" opacity="0.18"/>
+
+    <!-- Central star (bottom, source of gravity) -->
+    <circle cx="200" cy="750" r="62" fill="url(#star01)"/>
+    <ellipse cx="183" cy="733" rx="23" ry="15" fill="white" opacity="0.3"/>
+    <!-- Star glow -->
+    <circle cx="200" cy="750" r="90" fill="#FFD060" opacity="0.08"/>
+
+    <!-- Layer 3: Orbit success indicator -->
+    <!-- Green checkmark circle around orbit -->
+    <ellipse cx="512" cy="450" rx="270" ry="210" fill="none" stroke="#00FFC0" stroke-width="3" opacity="0.3"/>
+
+    <!-- "ORBIT!" label -->
+    <rect x="360" y="618" width="304" height="58" rx="14" fill="#003322"/>
+    <rect x="360" y="618" width="304" height="58" rx="14" fill="none" stroke="#00FFC0" stroke-width="3"/>
+    <text x="512" y="658" font-family="'Segoe UI',Arial" font-size="38" font-weight="900" fill="#00FFC0" text-anchor="middle">✓ ORBIT!</text>
+  </g>
+</svg>

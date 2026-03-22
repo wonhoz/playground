@@ -1,61 +1,77 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
-  <!-- icon_01 | literal | 중앙 심볼 | 슬라이스되는 오각형 + 칼날 궤적 | 네온 시안/퍼플 -->
-
-  <!-- 배경 -->
-  <rect width="1024" height="1024" rx="180" fill="#0D0D1A"/>
-  <rect width="1024" height="1024" rx="180" fill="url(#bg01)"/>
-
   <defs>
-    <radialGradient id="bg01" cx="50%" cy="50%" r="60%">
-      <stop offset="0%" stop-color="#1A0A2E"/>
-      <stop offset="100%" stop-color="#0D0D1A"/>
+    <radialGradient id="bg02" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#2A0E52"/>
+      <stop offset="100%" stop-color="#0E0420"/>
     </radialGradient>
-    <filter id="glow01" x="-30%" y="-30%" width="160%" height="160%">
-      <feGaussianBlur stdDeviation="8" result="blur"/>
-      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
-    <filter id="glowStrong01" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="14" result="blur"/>
-      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
+    <radialGradient id="bomb02" cx="35%" cy="30%" r="60%">
+      <stop offset="0%" stop-color="#333"/>
+      <stop offset="100%" stop-color="#080808"/>
+    </radialGradient>
+    <clipPath id="frame02">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+    <!-- Pentagon upper-left half clip -->
+    <clipPath id="pentUpper02">
+      <rect x="0" y="0" width="1024" height="495"/>
+    </clipPath>
+    <!-- Pentagon lower-right half clip -->
+    <clipPath id="pentLower02">
+      <rect x="0" y="505" width="1024" height="519"/>
+    </clipPath>
   </defs>
 
-  <!-- 오각형 왼쪽 절반 (슬라이스된) -->
-  <polygon points="512,220 330,340 370,555 512,555 512,220"
-    fill="#00FFCC" opacity="0.9" filter="url(#glow01)"/>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg02)"/>
 
-  <!-- 오각형 오른쪽 절반 (분리된, 살짝 이동) -->
-  <polygon points="512,220 694,340 654,555 512,555 512,220"
-    fill="#CC00FF" opacity="0.9" filter="url(#glow01)"
-    transform="translate(28, 22) rotate(6, 512, 387)"/>
+  <g clip-path="url(#frame02)">
+    <!-- Layer 2: Sliced pentagon (two halves separating at the cut) -->
+    <!-- Upper half - shifted slightly up-left -->
+    <g transform="translate(-18, -22)" clip-path="url(#pentUpper02)">
+      <polygon points="512,248 680,372 616,560 408,560 344,372" fill="#AAFF44" opacity="0.95"/>
+    </g>
+    <!-- Lower half - shifted slightly down-right -->
+    <g transform="translate(18, 22)" clip-path="url(#pentLower02)">
+      <polygon points="512,248 680,372 616,560 408,560 344,372" fill="#88EE22" opacity="0.95"/>
+    </g>
 
-  <!-- 슬라이스 궤적 — 대각선 날카로운 선 -->
-  <line x1="240" y1="680" x2="800" y2="200"
-    stroke="#FFFFFF" stroke-width="6" stroke-linecap="round"
-    opacity="0.95" filter="url(#glowStrong01)"/>
-  <line x1="240" y1="680" x2="800" y2="200"
-    stroke="#00FFEE" stroke-width="2" stroke-linecap="round" opacity="1"/>
+    <!-- Small floating shapes - cyan circle -->
+    <circle cx="220" cy="300" r="72" fill="#00CFFF" opacity="0.85"/>
+    <!-- Small triangle - lower right area -->
+    <polygon points="820,640 920,640 870,740" fill="#FF66AA" opacity="0.9"/>
+    <!-- Small square - upper right -->
+    <rect x="790" y="210" width="80" height="80" rx="8" fill="#FF8C00" opacity="0.85" transform="rotate(20 830 250)"/>
 
-  <!-- 슬라이스 잔상 선들 -->
-  <line x1="220" y1="700" x2="780" y2="220"
-    stroke="#00FFCC" stroke-width="2" stroke-linecap="round" opacity="0.3"/>
-  <line x1="260" y1="660" x2="820" y2="180"
-    stroke="#AA00EE" stroke-width="2" stroke-linecap="round" opacity="0.2"/>
+    <!-- Sparkle particles at the cut point -->
+    <!-- Left sparkles -->
+    <circle cx="380" cy="500" r="10" fill="#CCFF44"/>
+    <circle cx="355" cy="475" r="7" fill="#AAFF44" opacity="0.7"/>
+    <circle cx="335" cy="510" r="5" fill="white" opacity="0.6"/>
+    <!-- Right sparkles -->
+    <circle cx="648" cy="508" r="10" fill="#CCFF44"/>
+    <circle cx="672" cy="483" r="7" fill="#AAFF44" opacity="0.7"/>
+    <circle cx="690" cy="518" r="5" fill="white" opacity="0.6"/>
+    <!-- Center sparkles -->
+    <circle cx="512" cy="494" r="14" fill="white" opacity="0.5"/>
+    <circle cx="490" cy="500" r="8" fill="#DDFF88" opacity="0.4"/>
+    <circle cx="534" cy="500" r="8" fill="#DDFF88" opacity="0.4"/>
 
-  <!-- 파편 조각들 -->
-  <polygon points="370,590 395,620 345,615" fill="#00FFCC" opacity="0.7" filter="url(#glow01)"/>
-  <polygon points="660,580 680,610 640,608" fill="#CC00FF" opacity="0.6" filter="url(#glow01)"/>
-  <circle cx="310" cy="640" r="8" fill="#00FFCC" opacity="0.5" filter="url(#glow01)"/>
-  <circle cx="720" cy="600" r="6" fill="#FF00AA" opacity="0.6" filter="url(#glow01)"/>
-  <polygon points="440,615 460,640 420,638" fill="#FFFFFF" opacity="0.4"/>
-  <circle cx="580" cy="625" r="5" fill="#CC00FF" opacity="0.5"/>
+    <!-- Bomb - lower left (avoid!) -->
+    <circle cx="215" cy="805" r="76" fill="url(#bomb02)"/>
+    <ellipse cx="196" cy="783" rx="18" ry="13" fill="white" opacity="0.12"/>
+    <path d="M215,729 Q242,700 258,675" stroke="#666" stroke-width="12" fill="none" stroke-linecap="round"/>
+    <ellipse cx="263" cy="667" rx="11" ry="16" fill="#FF6A00" transform="rotate(-25 263 667)"/>
+    <ellipse cx="263" cy="667" rx="6" ry="9" fill="#FFE040" transform="rotate(-25 263 667)"/>
 
-  <!-- 슬라이스 끝점 스파크 -->
-  <circle cx="800" cy="200" r="12" fill="#FFFFFF" opacity="0.9" filter="url(#glowStrong01)"/>
-  <circle cx="800" cy="200" r="5" fill="#00FFEE" opacity="1"/>
-
-  <!-- 하단 "SLICE" 텍스트 -->
-  <text x="512" y="800" text-anchor="middle" font-family="Arial Black, sans-serif"
-    font-size="72" font-weight="900" letter-spacing="18"
-    fill="#00FFCC" opacity="0.85" filter="url(#glow01)">SLICE</text>
+    <!-- Layer 3: Slash line (lime green, sharp and bold) -->
+    <!-- Outer glow -->
+    <line x1="160" y1="728" x2="864" y2="268" stroke="#AAFF44" stroke-width="55" stroke-linecap="round" opacity="0.15"/>
+    <!-- Inner glow -->
+    <line x1="160" y1="728" x2="864" y2="268" stroke="#BBFF55" stroke-width="28" stroke-linecap="round" opacity="0.38"/>
+    <!-- White core -->
+    <line x1="160" y1="728" x2="864" y2="268" stroke="white" stroke-width="12" stroke-linecap="round"/>
+    <!-- Trail -->
+    <line x1="175" y1="760" x2="880" y2="300" stroke="#AAFF44" stroke-width="4" stroke-linecap="round" opacity="0.5"/>
+    <line x1="145" y1="696" x2="848" y2="236" stroke="#AAFF44" stroke-width="4" stroke-linecap="round" opacity="0.38"/>
+  </g>
 </svg>

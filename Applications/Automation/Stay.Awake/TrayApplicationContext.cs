@@ -94,8 +94,8 @@ namespace StayAwake
             var menu = new ContextMenuStrip
             {
                 Renderer = new DarkMenuRenderer(),
-                ShowImageMargin = false,
-                ShowCheckMargin = false,
+                ShowImageMargin = true,
+                ShowCheckMargin = true,
                 BackColor = Color.FromArgb(32, 32, 32),
                 ForeColor = Color.FromArgb(240, 240, 240)
             };

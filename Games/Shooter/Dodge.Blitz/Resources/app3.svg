@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0A0A0A"/>
+      <stop offset="100%" stop-color="#1A0A00"/>
+    </linearGradient>
+    <linearGradient id="boltGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FDE68A"/>
+      <stop offset="100%" stop-color="#F59E0B"/>
+    </linearGradient>
+    <radialGradient id="boltGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#F59E0B" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#F59E0B" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="shipGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#60A5FA"/>
+      <stop offset="100%" stop-color="#1D4ED8"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Background lightning bolts (bullets) -->
+  <ellipse cx="256" cy="256" rx="120" ry="120" fill="url(#boltGlow)"/>
+  <!-- Lightning bolt center -->
+  <polygon points="275,80 230,270 265,270 240,430 310,220 270,220 300,80" fill="url(#boltGrad)" stroke="#FEF3C7" stroke-width="2"/>
+  <!-- Bullet streaks -->
+  <line x1="80" y1="150" x2="200" y2="200" stroke="#EF4444" stroke-width="4" stroke-linecap="round" opacity="0.8"/>
+  <circle cx="80" cy="150" r="8" fill="#EF4444" opacity="0.9"/>
+  <line x1="80" y1="300" x2="210" y2="310" stroke="#EF4444" stroke-width="4" stroke-linecap="round" opacity="0.8"/>
+  <circle cx="80" cy="300" r="8" fill="#EF4444" opacity="0.9"/>
+  <line x1="430" y1="200" x2="320" y2="240" stroke="#EF4444" stroke-width="4" stroke-linecap="round" opacity="0.8"/>
+  <circle cx="430" cy="200" r="8" fill="#EF4444" opacity="0.9"/>
+  <line x1="430" y1="350" x2="310" y2="320" stroke="#EF4444" stroke-width="4" stroke-linecap="round" opacity="0.8"/>
+  <circle cx="430" cy="350" r="8" fill="#EF4444" opacity="0.9"/>
+  <line x1="200" y1="80" x2="240" y2="180" stroke="#EF4444" stroke-width="3" stroke-linecap="round" opacity="0.6"/>
+  <circle cx="200" cy="80" r="7" fill="#EF4444" opacity="0.7"/>
+  <!-- Player ship -->
+  <polygon points="256,370 226,430 256,410 286,430" fill="url(#shipGrad)" stroke="#93C5FD" stroke-width="2"/>
+  <!-- Ship engine glow -->
+  <ellipse cx="256" cy="435" rx="15" ry="8" fill="#FDE68A" opacity="0.7"/>
+  <!-- Score text -->
+  <text x="256" y="480" font-family="monospace" font-size="14" fill="#F59E0B" text-anchor="middle">DODGE BLITZ</text>
+</svg>

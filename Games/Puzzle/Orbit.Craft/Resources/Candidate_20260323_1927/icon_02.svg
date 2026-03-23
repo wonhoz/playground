@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg02" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#4C1D95"/>
+      <stop offset="100%" stop-color="#2E1065"/>
+    </radialGradient>
+    <radialGradient id="glow02" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="185" fill="url(#bg02)"/>
+  <!-- 별 -->
+  <circle cx="230" cy="220" r="3" fill="white" opacity="0.5"/>
+  <circle cx="780" cy="250" r="4" fill="white" opacity="0.6"/>
+  <circle cx="200" cy="750" r="3" fill="white" opacity="0.4"/>
+  <circle cx="830" cy="780" r="2" fill="white" opacity="0.5"/>
+  <circle cx="600" cy="180" r="3" fill="white" opacity="0.4"/>
+  <circle cx="180" cy="550" r="2" fill="white" opacity="0.5"/>
+  <!-- 흰 타원 궤도 -->
+  <ellipse cx="490" cy="520" rx="290" ry="195" fill="none" stroke="white" stroke-width="14" opacity="0.95"/>
+  <!-- 궤도 내부 광채 -->
+  <ellipse cx="490" cy="520" rx="290" ry="195" fill="none" stroke="white" stroke-width="6" opacity="0.3"/>
+  <!-- 작은 행성/별 (궤도 중심) -->
+  <circle cx="490" cy="520" r="55" fill="#A78BFA" stroke="#C4B5FD" stroke-width="10"/>
+  <circle cx="475" cy="505" r="40" fill="#8B5CF6" opacity="0.7"/>
+  <!-- 주황 로켓 (궤도 오른쪽) -->
+  <g transform="translate(775,430) rotate(35)">
+    <!-- 로켓 본체 -->
+    <ellipse cx="0" cy="0" rx="30" ry="55" fill="#FB923C" stroke="#FFFFFF" stroke-width="8"/>
+    <!-- 로켓 헤드 -->
+    <path d="M -30,0 Q 0,-80 30,0" fill="#F97316" stroke="#FFFFFF" stroke-width="7"/>
+    <!-- 날개 왼 -->
+    <path d="M -30,30 L -60,80 L -10,55" fill="#FDBA74" stroke="#FFFFFF" stroke-width="6"/>
+    <!-- 날개 오른 -->
+    <path d="M 30,30 L 60,80 L 10,55" fill="#FDBA74" stroke="#FFFFFF" stroke-width="6"/>
+    <!-- 불꽃 -->
+    <ellipse cx="0" cy="75" rx="18" ry="30" fill="#FDE047" opacity="0.9"/>
+    <ellipse cx="0" cy="85" rx="10" ry="20" fill="white" opacity="0.7"/>
+  </g>
+  <!-- 속도 선들 -->
+  <line x1="720" y1="380" x2="680" y2="365" stroke="white" stroke-width="6" opacity="0.5" stroke-linecap="round"/>
+  <line x1="730" y1="400" x2="688" y2="392" stroke="white" stroke-width="5" opacity="0.4" stroke-linecap="round"/>
+  <line x1="718" y1="420" x2="675" y2="420" stroke="white" stroke-width="4" opacity="0.3" stroke-linecap="round"/>
+</svg>

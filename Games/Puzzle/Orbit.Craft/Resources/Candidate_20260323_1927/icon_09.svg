@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg09" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#BE185D"/>
+      <stop offset="100%" stop-color="#831843"/>
+    </radialGradient>
+    <filter id="glow09">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="185" fill="url(#bg09)"/>
+  <!-- 별 -->
+  <circle cx="230" cy="220" r="4" fill="#FDE68A" opacity="0.7"/>
+  <circle cx="790" cy="200" r="3" fill="#FDE68A" opacity="0.6"/>
+  <circle cx="200" cy="790" r="4" fill="white" opacity="0.5"/>
+  <circle cx="830" cy="800" r="3" fill="white" opacity="0.4"/>
+  <circle cx="170" cy="450" r="2" fill="white" opacity="0.4"/>
+  <circle cx="870" cy="450" r="2" fill="white" opacity="0.4"/>
+  <!-- 완성된 타원 궤도 (초록, 실선) -->
+  <ellipse cx="512" cy="512" rx="285" ry="195" fill="none" stroke="#22C55E" stroke-width="16" filter="url(#glow09)"/>
+  <!-- 궤도 강조 외곽 -->
+  <ellipse cx="512" cy="512" rx="285" ry="195" fill="none" stroke="#4ADE80" stroke-width="8" opacity="0.4"/>
+  <!-- 체크포인트 마크들 (궤도 주요 지점) -->
+  <circle cx="797" cy="512" r="16" fill="#22C55E" stroke="white" stroke-width="6"/>
+  <circle cx="227" cy="512" r="16" fill="#22C55E" stroke="white" stroke-width="6"/>
+  <circle cx="512" cy="317" r="16" fill="#22C55E" stroke="white" stroke-width="6"/>
+  <circle cx="512" cy="707" r="16" fill="#22C55E" stroke="white" stroke-width="6"/>
+  <!-- 탐사선 (상단 오른쪽) -->
+  <g transform="translate(720,350) rotate(-45)">
+    <ellipse cx="0" cy="0" rx="32" ry="16" fill="#F9FAFB" stroke="#FFFFFF" stroke-width="8"/>
+    <rect x="-10" y="-26" width="20" height="26" rx="10" fill="#BAE6FD" stroke="#FFFFFF" stroke-width="7"/>
+    <rect x="-42" y="-5" width="25" height="10" rx="5" fill="#7DD3FC" stroke="#FFFFFF" stroke-width="5"/>
+    <rect x="17" y="-5" width="25" height="10" rx="5" fill="#7DD3FC" stroke="#FFFFFF" stroke-width="5"/>
+    <!-- 엔진 불꽃 -->
+    <ellipse cx="0" cy="24" rx="12" ry="20" fill="#FDE047" opacity="0.9"/>
+    <ellipse cx="0" cy="30" rx="7" ry="13" fill="white" opacity="0.8"/>
+  </g>
+  <!-- 큰 별★ (오른쪽 위) -->
+  <path d="M 820,260 L 838,305 L 887,305 L 849,332 L 863,377 L 820,350 L 777,377 L 791,332 L 753,305 L 802,305 Z" fill="#FDE047" stroke="#F59E0B" stroke-width="7" filter="url(#glow09)"/>
+  <!-- 중앙 행성 (작게) -->
+  <circle cx="512" cy="512" r="45" fill="#EC4899" stroke="#F9A8D4" stroke-width="10"/>
+  <circle cx="500" cy="500" r="32" fill="#BE185D" opacity="0.8"/>
+  <!-- 완료 텍스트 효과 (밝은 빛) -->
+  <circle cx="512" cy="512" r="280" fill="none" stroke="#22C55E" stroke-width="4" opacity="0.15"/>
+</svg>

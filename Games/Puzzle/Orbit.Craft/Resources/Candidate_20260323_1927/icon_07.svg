@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg07" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#2D2B6F"/>
+      <stop offset="100%" stop-color="#1E1B4B"/>
+    </radialGradient>
+    <radialGradient id="planet07" cx="40%" cy="35%" r="50%">
+      <stop offset="0%" stop-color="#FDE68A"/>
+      <stop offset="50%" stop-color="#FBBF24"/>
+      <stop offset="100%" stop-color="#B45309"/>
+    </radialGradient>
+    <filter id="glow07">
+      <feGaussianBlur stdDeviation="15" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="185" fill="url(#bg07)"/>
+  <!-- 동심원 중력장 파문 (노란 점선, 바깥에서 안으로) -->
+  <circle cx="512" cy="512" r="380" fill="none" stroke="#FDE047" stroke-width="6" opacity="0.2" stroke-dasharray="25 20"/>
+  <circle cx="512" cy="512" r="320" fill="none" stroke="#FDE047" stroke-width="7" opacity="0.3" stroke-dasharray="22 18"/>
+  <circle cx="512" cy="512" r="260" fill="none" stroke="#FDE047" stroke-width="8" opacity="0.4" stroke-dasharray="20 16"/>
+  <circle cx="512" cy="512" r="200" fill="none" stroke="#FDE047" stroke-width="9" opacity="0.5" stroke-dasharray="18 14"/>
+  <circle cx="512" cy="512" r="150" fill="none" stroke="#FDE047" stroke-width="11" opacity="0.65" stroke-dasharray="15 12"/>
+  <circle cx="512" cy="512" r="105" fill="none" stroke="#FDE047" stroke-width="12" opacity="0.75" stroke-dasharray="12 10"/>
+  <!-- 행성 (중앙) -->
+  <circle cx="512" cy="512" r="80" fill="url(#planet07)" filter="url(#glow07)"/>
+  <!-- 행성 디테일 -->
+  <ellipse cx="495" cy="495" rx="58" ry="25" fill="none" stroke="#FDE68A" stroke-width="8" opacity="0.5"/>
+  <!-- 별들 (배경) -->
+  <circle cx="230" cy="220" r="4" fill="white" opacity="0.4"/>
+  <circle cx="790" cy="230" r="3" fill="white" opacity="0.4"/>
+  <circle cx="200" cy="790" r="4" fill="white" opacity="0.3"/>
+  <circle cx="830" cy="800" r="3" fill="white" opacity="0.4"/>
+  <!-- 중력 방향 화살표들 -->
+  <path d="M 512,310 L 512,350" stroke="#FDE047" stroke-width="10" stroke-linecap="round" opacity="0.7"/>
+  <polygon points="512,348 500,328 524,328" fill="#FDE047" opacity="0.7"/>
+  <path d="M 512,714 L 512,674" stroke="#FDE047" stroke-width="10" stroke-linecap="round" opacity="0.7"/>
+  <polygon points="512,676 500,696 524,696" fill="#FDE047" opacity="0.7"/>
+  <path d="M 310,512 L 350,512" stroke="#FDE047" stroke-width="10" stroke-linecap="round" opacity="0.7"/>
+  <polygon points="348,512 328,500 328,524" fill="#FDE047" opacity="0.7"/>
+  <path d="M 714,512 L 674,512" stroke="#FDE047" stroke-width="10" stroke-linecap="round" opacity="0.7"/>
+  <polygon points="676,512 696,500 696,524" fill="#FDE047" opacity="0.7"/>
+</svg>

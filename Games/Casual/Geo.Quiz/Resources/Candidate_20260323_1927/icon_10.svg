@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg_g10" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0D9488"/>
+      <stop offset="100%" style="stop-color:#134E4A"/>
+    </linearGradient>
+    <radialGradient id="earth10" cx="42%" cy="38%" r="58%">
+      <stop offset="0%" style="stop-color:#7DD3FC"/>
+      <stop offset="100%" style="stop-color:#0284C7"/>
+    </radialGradient>
+  </defs>
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="185" fill="url(#bg_g10)"/>
+
+  <!-- 지구 원형 -->
+  <circle cx="512" cy="420" r="220" fill="url(#earth10)" stroke="white" stroke-width="10"/>
+
+  <!-- 대륙 윤곽 -->
+  <path d="M 360 360 L 420 340 L 465 360 L 475 400 L 448 430 L 400 435 L 362 415 Z"
+        fill="#22C55E" opacity="0.9"/>
+  <path d="M 490 340 L 540 325 L 575 345 L 572 385 L 548 405 L 510 400 L 487 370 Z"
+        fill="#22C55E" opacity="0.9"/>
+  <path d="M 510 420 L 560 405 L 595 430 L 595 475 L 570 500 L 535 500 L 510 475 Z"
+        fill="#22C55E" opacity="0.9"/>
+  <path d="M 370 430 L 415 415 L 440 440 L 440 490 L 415 515 L 380 510 L 360 480 Z"
+        fill="#22C55E" opacity="0.9"/>
+  <!-- 위도선 -->
+  <ellipse cx="512" cy="420" rx="220" ry="46" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="4"/>
+  <ellipse cx="512" cy="420" rx="220" ry="96" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="3"/>
+
+  <!-- 하단 결과 패널 -->
+  <rect x="215" y="680" width="594" height="180" rx="28" fill="white"/>
+
+  <!-- 초록 체크 ✓ -->
+  <circle cx="310" cy="770" r="64" fill="#22C55E"/>
+  <text x="310" y="798" font-family="Arial Black" font-size="76" font-weight="900" text-anchor="middle" fill="white">✓</text>
+
+  <!-- 점수 "100" -->
+  <text x="570" y="808" font-family="Arial Black" font-size="130" font-weight="900" text-anchor="middle" fill="#0D9488">100</text>
+
+  <!-- 점수 라벨 -->
+  <text x="570" y="845" font-family="Arial" font-size="34" text-anchor="middle" fill="#9CA3AF">PERFECT!</text>
+
+  <!-- 별들 (상단) -->
+  <text x="310" y="240" font-family="Arial" font-size="60" text-anchor="middle" fill="#FDE047" opacity="0.8">★</text>
+  <text x="512" y="220" font-family="Arial" font-size="60" text-anchor="middle" fill="#FDE047">★</text>
+  <text x="714" y="240" font-family="Arial" font-size="60" text-anchor="middle" fill="#FDE047" opacity="0.8">★</text>
+</svg>

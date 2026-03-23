@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg_g1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2563EB"/>
+      <stop offset="100%" style="stop-color:#1D4ED8"/>
+    </linearGradient>
+    <radialGradient id="earth1" cx="45%" cy="40%" r="55%">
+      <stop offset="0%" style="stop-color:#60A5FA"/>
+      <stop offset="100%" style="stop-color:#1D4ED8"/>
+    </radialGradient>
+  </defs>
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="185" fill="url(#bg_g1)"/>
+
+  <!-- 지구 원형 -->
+  <circle cx="440" cy="540" r="270" fill="url(#earth1)" stroke="white" stroke-width="10"/>
+
+  <!-- 대륙 윤곽 (녹색) -->
+  <!-- 북아메리카 -->
+  <path d="M 270 390 L 320 370 L 380 380 L 400 420 L 380 460 L 340 480 L 300 470 L 270 440 Z"
+        fill="#22C55E" opacity="0.9"/>
+  <!-- 유럽/아프리카 -->
+  <path d="M 430 390 L 470 380 L 490 400 L 480 440 L 460 470 L 440 500 L 420 520 L 410 550 L 420 590 L 410 620 L 390 600 L 380 560 L 390 520 L 400 480 L 410 440 L 420 410 Z"
+        fill="#22C55E" opacity="0.9"/>
+  <!-- 아시아 -->
+  <path d="M 500 400 L 570 380 L 620 390 L 650 420 L 640 450 L 600 460 L 560 450 L 520 460 L 490 440 Z"
+        fill="#22C55E" opacity="0.9"/>
+  <!-- 남아메리카 -->
+  <path d="M 310 510 L 350 500 L 370 530 L 360 580 L 340 610 L 310 600 L 290 570 L 295 540 Z"
+        fill="#22C55E" opacity="0.9"/>
+  <!-- 오세아니아 -->
+  <path d="M 580 510 L 630 500 L 650 520 L 640 545 L 610 550 L 580 540 Z"
+        fill="#22C55E" opacity="0.9"/>
+
+  <!-- 위도선 -->
+  <ellipse cx="440" cy="540" rx="270" ry="60" fill="none" stroke="rgba(255,255,255,0.25)" stroke-width="4"/>
+  <ellipse cx="440" cy="540" rx="270" ry="130" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="3"/>
+  <!-- 경도선 -->
+  <line x1="440" y1="270" x2="440" y2="810" stroke="rgba(255,255,255,0.2)" stroke-width="3"/>
+
+  <!-- 큰 노란 "?" 기호 (오른쪽 상단) -->
+  <circle cx="730" cy="310" r="130" fill="#FDE047" stroke="white" stroke-width="10"/>
+  <text x="730" y="370" font-family="Arial Black" font-size="160" font-weight="900" text-anchor="middle" fill="#1E3A5F">?</text>
+</svg>

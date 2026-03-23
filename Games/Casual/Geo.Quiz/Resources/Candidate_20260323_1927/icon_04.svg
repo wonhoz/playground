@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg_g4" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#EA580C"/>
+      <stop offset="100%" style="stop-color:#C2410C"/>
+    </linearGradient>
+    <radialGradient id="earth4" cx="40%" cy="38%" r="60%">
+      <stop offset="0%" style="stop-color:#93C5FD"/>
+      <stop offset="100%" style="stop-color:#1D4ED8"/>
+    </radialGradient>
+  </defs>
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="185" fill="url(#bg_g4)"/>
+
+  <!-- 지구 원형 -->
+  <circle cx="420" cy="560" r="230" fill="url(#earth4)" stroke="white" stroke-width="10"/>
+  <!-- 대륙 -->
+  <path d="M 270 490 L 340 470 L 390 490 L 400 530 L 370 560 L 320 565 L 275 545 Z" fill="#22C55E" opacity="0.9"/>
+  <path d="M 420 470 L 460 460 L 490 480 L 490 530 L 460 550 L 430 540 L 415 510 Z" fill="#22C55E" opacity="0.9"/>
+  <path d="M 440 560 L 480 545 L 510 570 L 510 610 L 490 635 L 460 635 L 440 615 Z" fill="#22C55E" opacity="0.9"/>
+  <ellipse cx="420" cy="560" rx="230" ry="50" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="4"/>
+
+  <!-- 말풍선 (오른쪽 상단) -->
+  <rect x="510" y="215" width="310" height="155" rx="24" fill="white" stroke="#FED7AA" stroke-width="6"/>
+  <!-- 말풍선 꼬리 -->
+  <polygon points="530,370 570,370 545,415" fill="white"/>
+
+  <!-- "PARIS?" 텍스트 -->
+  <text x="665" y="315" font-family="Arial Black" font-size="72" font-weight="900" text-anchor="middle" fill="#EA580C">PARIS</text>
+  <text x="665" y="355" font-family="Arial Black" font-size="48" font-weight="900" text-anchor="middle" fill="#9CA3AF">수도는?</text>
+</svg>

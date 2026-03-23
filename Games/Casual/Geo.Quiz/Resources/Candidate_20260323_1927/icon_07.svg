@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg_g7" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#BE185D"/>
+      <stop offset="100%" style="stop-color:#831843"/>
+    </linearGradient>
+    <radialGradient id="mapGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#3B82F6"/>
+      <stop offset="100%" style="stop-color:#1D4ED8"/>
+    </radialGradient>
+  </defs>
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="185" fill="url(#bg_g7)"/>
+
+  <!-- 돋보기 -->
+  <!-- 원 테두리 (두껍게) -->
+  <circle cx="460" cy="460" r="230" fill="white" stroke="white" stroke-width="10"/>
+  <!-- 손잡이 -->
+  <line x1="630" y1="630" x2="800" y2="800" stroke="white" stroke-width="65" stroke-linecap="round"/>
+
+  <!-- 돋보기 안 지도 -->
+  <clipPath id="magClip">
+    <circle cx="460" cy="460" r="220"/>
+  </clipPath>
+  <circle cx="460" cy="460" r="220" fill="url(#mapGrad)"/>
+  <!-- 대륙들 (돋보기 안) -->
+  <g clip-path="url(#magClip)">
+    <!-- 북아메리카 -->
+    <path d="M 290 350 L 355 330 L 400 355 L 415 400 L 390 435 L 345 445 L 300 430 L 275 390 Z"
+          fill="#22C55E" opacity="0.9"/>
+    <!-- 유럽 -->
+    <path d="M 440 330 L 490 315 L 520 335 L 515 375 L 490 390 L 460 380 L 438 355 Z"
+          fill="#22C55E" opacity="0.9"/>
+    <!-- 아프리카 -->
+    <path d="M 445 400 L 495 385 L 530 410 L 540 460 L 525 510 L 500 535 L 470 535 L 445 505 L 435 450 Z"
+          fill="#22C55E" opacity="0.9"/>
+    <!-- 아시아 -->
+    <path d="M 530 330 L 620 310 L 660 330 L 660 375 L 620 395 L 575 390 L 540 370 Z"
+          fill="#22C55E" opacity="0.9"/>
+    <!-- 위도선 -->
+    <ellipse cx="460" cy="460" rx="220" ry="48" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="3"/>
+  </g>
+  <!-- 돋보기 테두리 링 -->
+  <circle cx="460" cy="460" r="220" fill="none" stroke="white" stroke-width="18"/>
+
+  <!-- 핀 (돋보기 안) -->
+  <circle cx="510" cy="400" r="30" fill="#DC2626" stroke="white" stroke-width="5"/>
+  <line x1="510" y1="430" x2="510" y2="480" stroke="#DC2626" stroke-width="10" stroke-linecap="round"/>
+</svg>

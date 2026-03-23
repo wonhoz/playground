@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg_g6" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0EA5E9"/>
+      <stop offset="100%" style="stop-color:#0284C7"/>
+    </linearGradient>
+  </defs>
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="185" fill="url(#bg_g6)"/>
+
+  <!-- 비행기 궤적 점선 (지구 한 바퀴) -->
+  <ellipse cx="512" cy="512" rx="310" ry="200" fill="none"
+           stroke="rgba(255,255,255,0.5)" stroke-width="10"
+           stroke-dasharray="28,18"/>
+
+  <!-- 비행기 실루엣 (우측 상단) -->
+  <g transform="translate(680, 310) rotate(-25)">
+    <!-- 동체 -->
+    <ellipse cx="0" cy="0" rx="110" ry="28" fill="white"/>
+    <!-- 앞코 -->
+    <path d="M 80 0 L 130 0 L 100 -10 Z" fill="white"/>
+    <!-- 주날개 -->
+    <path d="M -20 -28 L 30 -90 L 55 -90 L 20 -28 Z" fill="white"/>
+    <path d="M -20 28 L 30 90 L 55 90 L 20 28 Z" fill="white"/>
+    <!-- 꼬리날개 -->
+    <path d="M -90 -28 L -70 -60 L -55 -60 L -75 -28 Z" fill="white"/>
+    <path d="M -90 28 L -70 55 L -55 55 L -75 28 Z" fill="white"/>
+    <!-- 창문들 -->
+    <circle cx="30" cy="-10" r="9" fill="#38BDF8"/>
+    <circle cx="10" cy="-10" r="9" fill="#38BDF8"/>
+    <circle cx="-10" cy="-10" r="9" fill="#38BDF8"/>
+    <circle cx="-30" cy="-10" r="9" fill="#38BDF8"/>
+  </g>
+
+  <!-- 궤적 출발점 표시 -->
+  <circle cx="512" cy="312" r="18" fill="#FDE047" stroke="white" stroke-width="6"/>
+  <circle cx="822" cy="512" r="14" fill="rgba(255,255,255,0.6)"/>
+  <circle cx="512" cy="712" r="14" fill="rgba(255,255,255,0.6)"/>
+  <circle cx="202" cy="512" r="14" fill="rgba(255,255,255,0.6)"/>
+
+  <!-- 지구 중앙 작게 -->
+  <circle cx="512" cy="512" r="80" fill="#1D4ED8" stroke="rgba(255,255,255,0.4)" stroke-width="6"/>
+  <path d="M 455 490 L 490 475 L 520 490 L 530 515 L 510 535 L 475 530 Z" fill="#22C55E" opacity="0.8"/>
+  <ellipse cx="512" cy="512" rx="80" ry="18" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="3"/>
+</svg>

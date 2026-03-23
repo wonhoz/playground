@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg06" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E1B4B"/>
+      <stop offset="100%" stop-color="#0F0D2E"/>
+    </linearGradient>
+    <filter id="neonGlow06">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- Background -->
+  <rect width="1024" height="1024" rx="185" fill="url(#bg06)"/>
+  <!-- Large yellow hexagon -->
+  <polygon points="512,220 672,310 672,490 512,580 352,490 352,310" fill="#FFE600" stroke="#FFFF80" stroke-width="16" stroke-linejoin="round" filter="url(#neonGlow06)"/>
+  <!-- Slice gap (diagonal cut through hexagon) -->
+  <polygon points="300,280 724,280 740,310 316,310" fill="#0F0D2E"/>
+  <!-- Slice line on hexagon -->
+  <line x1="290" y1="295" x2="734" y2="295" stroke="white" stroke-width="16" stroke-linecap="round" filter="url(#neonGlow06)"/>
+  <line x1="290" y1="295" x2="734" y2="295" stroke="#E0E0FF" stroke-width="7" stroke-linecap="round"/>
+  <!-- Particle sparks at slice -->
+  <circle cx="340" cy="295" r="16" fill="white" filter="url(#neonGlow06)"/>
+  <circle cx="430" cy="285" r="10" fill="#FFE600" opacity="0.9" filter="url(#neonGlow06)"/>
+  <circle cx="512" cy="295" r="18" fill="white" filter="url(#neonGlow06)"/>
+  <circle cx="600" cy="285" r="10" fill="#FFE600" opacity="0.9" filter="url(#neonGlow06)"/>
+  <circle cx="690" cy="295" r="16" fill="white" filter="url(#neonGlow06)"/>
+  <!-- Sparks flying off -->
+  <line x1="512" y1="295" x2="490" y2="240" stroke="#FFE600" stroke-width="8" stroke-linecap="round"/>
+  <line x1="512" y1="295" x2="540" y2="240" stroke="#FFE600" stroke-width="8" stroke-linecap="round"/>
+  <line x1="512" y1="295" x2="512" y2="230" stroke="white" stroke-width="8" stroke-linecap="round"/>
+  <line x1="430" y1="285" x2="410" y2="230" stroke="#FFFF80" stroke-width="6" stroke-linecap="round"/>
+  <line x1="600" y1="285" x2="620" y2="230" stroke="#FFFF80" stroke-width="6" stroke-linecap="round"/>
+  <!-- Bottom label -->
+  <text x="512" y="840" font-family="Arial Black, sans-serif" font-size="80" font-weight="900" fill="#FFE600" text-anchor="middle" filter="url(#neonGlow06)">SLICE!</text>
+</svg>

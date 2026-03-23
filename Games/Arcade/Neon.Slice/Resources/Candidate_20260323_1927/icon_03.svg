@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg03" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F0F24"/>
+      <stop offset="100%" stop-color="#060612"/>
+    </linearGradient>
+    <filter id="neonGlow03">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- Background -->
+  <rect width="1024" height="1024" rx="185" fill="url(#bg03)"/>
+  <!-- 4 neon shapes -->
+  <!-- Pink circle (top-left) -->
+  <circle cx="310" cy="360" r="130" fill="#FF2D78" stroke="#FF80B0" stroke-width="12" filter="url(#neonGlow03)" opacity="0.9"/>
+  <!-- Cyan hexagon (top-right) -->
+  <polygon points="714,240 790,280 790,360 714,400 638,360 638,280" fill="#00FFFF" stroke="#80FFFF" stroke-width="12" filter="url(#neonGlow03)" opacity="0.9"/>
+  <!-- Yellow triangle (bottom-left) -->
+  <polygon points="310,580 200,780 420,780" fill="#FFE600" stroke="#FFFF80" stroke-width="12" filter="url(#neonGlow03)" opacity="0.9"/>
+  <!-- Purple square (bottom-right) -->
+  <rect x="590" y="570" width="240" height="240" rx="16" fill="#A855F7" stroke="#D080FF" stroke-width="12" filter="url(#neonGlow03)" opacity="0.9"/>
+  <!-- White mouse trail (curved slash across) -->
+  <path d="M 230 800 Q 512 400 800 210" stroke="white" stroke-width="16" fill="none" stroke-linecap="round" opacity="0.9" filter="url(#neonGlow03)"/>
+  <path d="M 230 800 Q 512 400 800 210" stroke="rgba(255,255,255,0.4)" stroke-width="40" fill="none" stroke-linecap="round"/>
+  <!-- Trail particles -->
+  <circle cx="310" cy="690" r="10" fill="white" opacity="0.7"/>
+  <circle cx="420" cy="580" r="8" fill="white" opacity="0.6"/>
+  <circle cx="512" cy="490" r="10" fill="white" opacity="0.8"/>
+  <circle cx="620" cy="390" r="8" fill="white" opacity="0.6"/>
+  <circle cx="720" cy="300" r="10" fill="white" opacity="0.7"/>
+</svg>

@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg04" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4C1D95"/>
+      <stop offset="100%" stop-color="#2D0F6B"/>
+    </linearGradient>
+    <filter id="neonGlow04">
+      <feGaussianBlur stdDeviation="12" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <linearGradient id="laserGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00FFFF" stop-opacity="0.4"/>
+      <stop offset="30%" stop-color="#00FFFF"/>
+      <stop offset="70%" stop-color="#00FFFF"/>
+      <stop offset="100%" stop-color="#00FFFF" stop-opacity="0.4"/>
+    </linearGradient>
+  </defs>
+  <!-- Background -->
+  <rect width="1024" height="1024" rx="185" fill="url(#bg04)"/>
+  <!-- Yellow shape being cut -->
+  <rect x="300" y="350" width="424" height="320" rx="20" fill="#FFE600" stroke="#FFFF80" stroke-width="12"/>
+  <!-- Laser beam (horizontal, thick, cyan, glowing) -->
+  <rect x="150" y="492" width="724" height="40" rx="20" fill="url(#laserGrad)" filter="url(#neonGlow04)"/>
+  <rect x="150" y="502" width="724" height="20" rx="10" fill="#00FFFF"/>
+  <!-- Cut effect: slice gap in yellow shape -->
+  <rect x="300" y="502" width="424" height="18" rx="0" fill="#2D0F6B"/>
+  <!-- Energy particles at cut point -->
+  <circle cx="300" cy="512" r="18" fill="#00FFFF" filter="url(#neonGlow04)"/>
+  <circle cx="724" cy="512" r="18" fill="#00FFFF" filter="url(#neonGlow04)"/>
+  <circle cx="420" cy="500" r="10" fill="white" opacity="0.8"/>
+  <circle cx="512" cy="512" r="14" fill="white" filter="url(#neonGlow04)"/>
+  <circle cx="620" cy="500" r="10" fill="white" opacity="0.8"/>
+  <!-- Laser source glow on left -->
+  <ellipse cx="150" cy="512" rx="40" ry="60" fill="#00FFFF" opacity="0.4" filter="url(#neonGlow04)"/>
+  <!-- Laser exit glow on right -->
+  <ellipse cx="874" cy="512" rx="40" ry="60" fill="#00FFFF" opacity="0.4" filter="url(#neonGlow04)"/>
+  <!-- Label -->
+  <text x="512" y="870" font-family="Arial Black, sans-serif" font-size="64" font-weight="900" fill="#00FFFF" text-anchor="middle" filter="url(#neonGlow04)">LASER</text>
+</svg>

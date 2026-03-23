@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg01" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A0A2E"/>
+      <stop offset="100%" stop-color="#0D0D1A"/>
+    </linearGradient>
+    <filter id="glow01">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- Background -->
+  <rect width="1024" height="1024" rx="185" fill="url(#bg01)"/>
+  <!-- Hot pink large circle - left half -->
+  <path d="M 512 220 A 290 290 0 0 0 512 800 Z" fill="#FF2D78"/>
+  <!-- Hot pink large circle - right half (slightly offset to show slice) -->
+  <path d="M 512 220 A 290 290 0 0 1 512 800 Z" fill="#CC1A58"/>
+  <!-- Full circle (main) -->
+  <circle cx="512" cy="510" r="290" fill="#FF2D78" stroke="#FF6BA8" stroke-width="10"/>
+  <!-- Slice gap overlay -->
+  <polygon points="320,180 704,840 720,820 336,160" fill="#0D0D1A"/>
+  <!-- Glowing slice line -->
+  <line x1="330" y1="185" x2="710" y2="835" stroke="white" stroke-width="14" stroke-linecap="round" filter="url(#glow01)"/>
+  <line x1="330" y1="185" x2="710" y2="835" stroke="#E0E0FF" stroke-width="6" stroke-linecap="round"/>
+  <!-- Particle sparks along slice -->
+  <circle cx="380" cy="260" r="12" fill="white" opacity="0.9" filter="url(#glow01)"/>
+  <circle cx="440" cy="360" r="9" fill="#FF80D0" opacity="0.9"/>
+  <circle cx="510" cy="468" r="14" fill="white" opacity="0.8" filter="url(#glow01)"/>
+  <circle cx="580" cy="578" r="9" fill="#FF80D0" opacity="0.9"/>
+  <circle cx="650" cy="680" r="12" fill="white" opacity="0.9" filter="url(#glow01)"/>
+  <!-- Half circle pieces drifting apart -->
+  <circle cx="400" cy="490" r="12" fill="#FF80D0" opacity="0.5"/>
+  <circle cx="620" cy="530" r="12" fill="#FF80D0" opacity="0.5"/>
+</svg>

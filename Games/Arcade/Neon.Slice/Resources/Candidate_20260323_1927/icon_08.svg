@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg08" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7F1D1D"/>
+      <stop offset="100%" stop-color="#450A0A"/>
+    </linearGradient>
+    <radialGradient id="fireGrad" cx="50%" cy="60%" r="60%">
+      <stop offset="0%" stop-color="#FEF08A"/>
+      <stop offset="40%" stop-color="#F97316"/>
+      <stop offset="100%" stop-color="#7F1D1D" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="fireGlow08">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- Background -->
+  <rect width="1024" height="1024" rx="185" fill="url(#bg08)"/>
+  <!-- Fire effect (large) -->
+  <ellipse cx="512" cy="620" rx="280" ry="200" fill="url(#fireGrad)" filter="url(#fireGlow08)"/>
+  <!-- Flame tongues -->
+  <path d="M 400 750 Q 380 600 440 520 Q 460 620 430 680 Q 480 580 500 440 Q 540 580 510 680 Q 560 540 580 440 Q 600 580 570 680 Q 610 600 640 520 Q 660 620 624 750 Z" fill="#F97316" opacity="0.9"/>
+  <path d="M 420 750 Q 420 620 460 520 Q 480 600 460 680 Q 500 560 512 440 Q 524 560 540 680 Q 560 600 580 520 Q 600 620 600 750 Z" fill="#FEF08A" opacity="0.8"/>
+  <!-- Bright center -->
+  <ellipse cx="512" cy="650" rx="120" ry="80" fill="#FFF8DC" opacity="0.6"/>
+  <!-- White diagonal slice line through fire -->
+  <line x1="250" y1="750" x2="774" y2="380" stroke="white" stroke-width="18" stroke-linecap="round" filter="url(#fireGlow08)"/>
+  <line x1="250" y1="750" x2="774" y2="380" stroke="rgba(255,255,255,0.5)" stroke-width="40" stroke-linecap="round"/>
+  <line x1="250" y1="750" x2="774" y2="380" stroke="white" stroke-width="10" stroke-linecap="round"/>
+  <!-- Slice spark particles -->
+  <circle cx="360" cy="680" r="14" fill="white" filter="url(#fireGlow08)"/>
+  <circle cx="440" cy="620" r="10" fill="white" opacity="0.8"/>
+  <circle cx="512" cy="566" r="14" fill="white" filter="url(#fireGlow08)"/>
+  <circle cx="600" cy="500" r="10" fill="white" opacity="0.8"/>
+  <circle cx="690" cy="432" r="14" fill="white" filter="url(#fireGlow08)"/>
+</svg>

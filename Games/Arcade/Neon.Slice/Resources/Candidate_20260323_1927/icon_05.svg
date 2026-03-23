@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg05" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#EA580C"/>
+      <stop offset="100%" stop-color="#9A3412"/>
+    </linearGradient>
+    <filter id="neonGlow05">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- Background -->
+  <rect width="1024" height="1024" rx="185" fill="url(#bg05)"/>
+  <!-- Big "x3" combo text -->
+  <text x="512" y="560" font-family="Arial Black, sans-serif" font-size="320" font-weight="900" fill="white" text-anchor="middle" opacity="0.97">x3</text>
+  <!-- Glow effect on text -->
+  <text x="512" y="560" font-family="Arial Black, sans-serif" font-size="320" font-weight="900" fill="white" text-anchor="middle" opacity="0.2" filter="url(#neonGlow05)">x3</text>
+  <!-- Small neon shapes at bottom -->
+  <!-- Pink circle -->
+  <circle cx="320" cy="810" r="68" fill="#FF2D78" stroke="#FF80B0" stroke-width="10" filter="url(#neonGlow05)"/>
+  <!-- Cyan hexagon -->
+  <polygon points="512,752 554,774 554,818 512,840 470,818 470,774" fill="#00FFFF" stroke="#80FFFF" stroke-width="10" filter="url(#neonGlow05)"/>
+  <!-- Yellow triangle -->
+  <polygon points="700,752 640,860 760,860" fill="#FFE600" stroke="#FFFF80" stroke-width="10" filter="url(#neonGlow05)"/>
+  <!-- Combo label -->
+  <text x="512" y="240" font-family="Arial Black, sans-serif" font-size="72" font-weight="900" fill="white" text-anchor="middle">COMBO!</text>
+</svg>

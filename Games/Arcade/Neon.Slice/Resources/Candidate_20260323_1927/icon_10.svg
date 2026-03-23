@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg10" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#BE185D"/>
+      <stop offset="100%" stop-color="#831843"/>
+    </linearGradient>
+    <filter id="neonGlow10">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- Background -->
+  <rect width="1024" height="1024" rx="185" fill="url(#bg10)"/>
+  <!-- SLICE text -->
+  <text x="512" y="620" font-family="Arial Black, sans-serif" font-size="200" font-weight="900" fill="white" text-anchor="middle" letter-spacing="-4">SLICE</text>
+  <!-- Glow on text -->
+  <text x="512" y="620" font-family="Arial Black, sans-serif" font-size="200" font-weight="900" fill="white" text-anchor="middle" letter-spacing="-4" opacity="0.25" filter="url(#neonGlow10)">SLICE</text>
+  <!-- Diagonal slice mark across text -->
+  <line x1="190" y1="370" x2="840" y2="720" stroke="white" stroke-width="20" stroke-linecap="round" filter="url(#neonGlow10)"/>
+  <line x1="190" y1="370" x2="840" y2="720" stroke="rgba(255,255,255,0.4)" stroke-width="50" stroke-linecap="round"/>
+  <line x1="190" y1="370" x2="840" y2="720" stroke="white" stroke-width="12" stroke-linecap="round"/>
+  <!-- Slice particles along line -->
+  <circle cx="250" cy="405" r="14" fill="white" filter="url(#neonGlow10)"/>
+  <circle cx="360" cy="455" r="10" fill="white" opacity="0.8"/>
+  <circle cx="470" cy="512" r="16" fill="white" filter="url(#neonGlow10)"/>
+  <circle cx="580" cy="568" r="10" fill="white" opacity="0.8"/>
+  <circle cx="700" cy="635" r="14" fill="white" filter="url(#neonGlow10)"/>
+  <circle cx="800" cy="694" r="10" fill="white" opacity="0.8"/>
+  <!-- Sparks off slice -->
+  <line x1="470" y1="512" x2="450" y2="468" stroke="white" stroke-width="7" stroke-linecap="round"/>
+  <line x1="470" y1="512" x2="510" y2="476" stroke="white" stroke-width="7" stroke-linecap="round"/>
+  <line x1="470" y1="512" x2="494" y2="550" stroke="white" stroke-width="7" stroke-linecap="round"/>
+  <!-- Top label -->
+  <text x="512" y="290" font-family="Arial Black, sans-serif" font-size="70" font-weight="900" fill="white" text-anchor="middle" opacity="0.9">NEON</text>
+  <!-- Bottom label -->
+  <text x="512" y="860" font-family="Arial Black, sans-serif" font-size="52" font-weight="900" fill="rgba(255,255,255,0.7)" text-anchor="middle">ARCADE</text>
+</svg>

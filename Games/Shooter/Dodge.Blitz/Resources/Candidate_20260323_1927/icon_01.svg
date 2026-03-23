@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg01" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0D1B4B"/>
+      <stop offset="100%" stop-color="#0A0E2A"/>
+    </linearGradient>
+    <radialGradient id="engineGlow" cx="50%" cy="100%" r="60%">
+      <stop offset="0%" stop-color="#00FFFF" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#0A0E2A" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <!-- Background -->
+  <rect width="1024" height="1024" rx="185" fill="url(#bg01)"/>
+  <!-- Engine glow -->
+  <ellipse cx="512" cy="720" rx="160" ry="100" fill="url(#engineGlow)"/>
+  <!-- Cyan spaceship (center, triangle shape) -->
+  <polygon points="512,260 380,680 512,620 644,680" fill="#00FFFF" stroke="#80FFFF" stroke-width="14" stroke-linejoin="round"/>
+  <!-- Ship cockpit -->
+  <ellipse cx="512" cy="440" rx="55" ry="75" fill="#80FFFF" opacity="0.8"/>
+  <!-- Engine flames -->
+  <polygon points="450,680 512,780 574,680" fill="#FF6B00" opacity="0.9"/>
+  <polygon points="470,680 512,760 554,680" fill="#FFD700"/>
+  <!-- Red bullets around ship -->
+  <circle cx="240" cy="300" r="38" fill="#EF4444" stroke="white" stroke-width="6"/>
+  <circle cx="780" cy="280" r="38" fill="#EF4444" stroke="white" stroke-width="6"/>
+  <circle cx="180" cy="500" r="38" fill="#EF4444" stroke="white" stroke-width="6"/>
+  <circle cx="840" cy="480" r="38" fill="#EF4444" stroke="white" stroke-width="6"/>
+  <circle cx="260" cy="700" r="38" fill="#EF4444" stroke="white" stroke-width="6"/>
+  <circle cx="770" cy="690" r="38" fill="#EF4444" stroke="white" stroke-width="6"/>
+  <circle cx="370" cy="220" r="30" fill="#EF4444" stroke="white" stroke-width="6"/>
+  <circle cx="660" cy="220" r="30" fill="#EF4444" stroke="white" stroke-width="6"/>
+  <!-- Speed lines -->
+  <line x1="200" y1="200" x2="160" y2="160" stroke="rgba(255,255,255,0.3)" stroke-width="8" stroke-linecap="round"/>
+  <line x1="820" y1="200" x2="860" y2="160" stroke="rgba(255,255,255,0.3)" stroke-width="8" stroke-linecap="round"/>
+</svg>

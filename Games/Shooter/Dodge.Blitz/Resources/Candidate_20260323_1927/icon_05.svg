@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg05" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#EC4899"/>
+      <stop offset="100%" stop-color="#BE185D"/>
+    </linearGradient>
+    <linearGradient id="flameGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#60A5FA"/>
+      <stop offset="100%" stop-color="#1D4ED8"/>
+    </linearGradient>
+  </defs>
+  <!-- Background -->
+  <rect width="1024" height="1024" rx="185" fill="url(#bg05)"/>
+  <!-- White spaceship silhouette (center) -->
+  <!-- Main body -->
+  <polygon points="512,240 400,620 512,560 624,620" fill="white" stroke="rgba(255,255,255,0.5)" stroke-width="8" stroke-linejoin="round"/>
+  <!-- Wings -->
+  <polygon points="400,620 280,720 370,650 400,620" fill="rgba(255,255,255,0.85)"/>
+  <polygon points="624,620 744,720 654,650 624,620" fill="rgba(255,255,255,0.85)"/>
+  <!-- Cockpit -->
+  <ellipse cx="512" cy="430" rx="48" ry="66" fill="#F9A8D4"/>
+  <!-- Engine flames (blue) -->
+  <polygon points="460,560 512,700 564,560" fill="url(#flameGrad)" opacity="0.9"/>
+  <polygon points="476,560 512,670 548,560" fill="#93C5FD"/>
+  <!-- Wing tip accents -->
+  <circle cx="280" cy="720" r="20" fill="#F9A8D4"/>
+  <circle cx="744" cy="720" r="20" fill="#F9A8D4"/>
+  <!-- Side thrusters -->
+  <rect x="340" y="540" width="50" height="24" rx="12" fill="rgba(255,255,255,0.6)"/>
+  <rect x="634" y="540" width="50" height="24" rx="12" fill="rgba(255,255,255,0.6)"/>
+</svg>

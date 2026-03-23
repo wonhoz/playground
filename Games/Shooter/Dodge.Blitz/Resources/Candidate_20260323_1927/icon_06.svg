@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg06" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#EA580C"/>
+      <stop offset="100%" stop-color="#9A3412"/>
+    </linearGradient>
+    <radialGradient id="explodeGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FEF08A"/>
+      <stop offset="40%" stop-color="#FBBF24"/>
+      <stop offset="100%" stop-color="#EA580C" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <!-- Background -->
+  <rect width="1024" height="1024" rx="185" fill="url(#bg06)"/>
+  <!-- Explosion rays -->
+  <line x1="512" y1="512" x2="512" y2="240" stroke="#FEF08A" stroke-width="36" stroke-linecap="round" opacity="0.8"/>
+  <line x1="512" y1="512" x2="512" y2="784" stroke="#FEF08A" stroke-width="36" stroke-linecap="round" opacity="0.8"/>
+  <line x1="512" y1="512" x2="240" y2="512" stroke="#FEF08A" stroke-width="36" stroke-linecap="round" opacity="0.8"/>
+  <line x1="512" y1="512" x2="784" y2="512" stroke="#FEF08A" stroke-width="36" stroke-linecap="round" opacity="0.8"/>
+  <line x1="512" y1="512" x2="320" y2="320" stroke="#FEF08A" stroke-width="28" stroke-linecap="round" opacity="0.6"/>
+  <line x1="512" y1="512" x2="704" y2="320" stroke="#FEF08A" stroke-width="28" stroke-linecap="round" opacity="0.6"/>
+  <line x1="512" y1="512" x2="320" y2="704" stroke="#FEF08A" stroke-width="28" stroke-linecap="round" opacity="0.6"/>
+  <line x1="512" y1="512" x2="704" y2="704" stroke="#FEF08A" stroke-width="28" stroke-linecap="round" opacity="0.6"/>
+  <!-- Explosion circle -->
+  <circle cx="512" cy="512" r="220" fill="url(#explodeGrad)"/>
+  <!-- Spaceship in center of explosion -->
+  <polygon points="512,400 440,580 512,550 584,580" fill="white" stroke="rgba(255,255,255,0.5)" stroke-width="8" stroke-linejoin="round"/>
+  <!-- Stars around explosion -->
+  <polygon points="230,240 238,264 264,264 244,280 252,304 230,288 208,304 216,280 196,264 222,264" fill="white"/>
+  <polygon points="790,240 798,264 824,264 804,280 812,304 790,288 768,304 776,280 756,264 782,264" fill="white"/>
+  <polygon points="230,780 238,804 264,804 244,820 252,844 230,828 208,844 216,820 196,804 222,804" fill="white"/>
+  <polygon points="790,780 798,804 824,804 804,820 812,844 790,828 768,844 776,820 756,804 782,804" fill="white"/>
+</svg>

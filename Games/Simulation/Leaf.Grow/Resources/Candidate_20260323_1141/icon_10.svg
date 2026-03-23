@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: Background - 밝은 민트 -->
+  <rect width="1024" height="1024" rx="180" fill="#E0F7FA"/>
+  <!-- Layer 2: 계절 순환 원형 다이어그램 -->
+  <!-- 4분할 원 (계절) -->
+  <!-- 봄 (우상, 초록) -->
+  <path d="M512,512 L512,172 A340,340 0 0 1 852,512 Z" fill="#A5D6A7"/>
+  <!-- 여름 (우하, 진초록) -->
+  <path d="M512,512 L852,512 A340,340 0 0 1 512,852 Z" fill="#66BB6A"/>
+  <!-- 가을 (좌하, 오렌지) -->
+  <path d="M512,512 L512,852 A340,340 0 0 1 172,512 Z" fill="#FF8F00"/>
+  <!-- 겨울 (좌상, 파란) -->
+  <path d="M512,512 L172,512 A340,340 0 0 1 512,172 Z" fill="#90CAF9"/>
+  <!-- 원 경계 -->
+  <circle cx="512" cy="512" r="340" fill="none" stroke="white" stroke-width="8"/>
+  <!-- 분할선 -->
+  <line x1="512" y1="172" x2="512" y2="852" stroke="white" stroke-width="6"/>
+  <line x1="172" y1="512" x2="852" y2="512" stroke="white" stroke-width="6"/>
+  <!-- 계절 심볼들 -->
+  <!-- 봄: 꽃 -->
+  <circle cx="680" cy="340" r="36" fill="#FF4081"/>
+  <circle cx="680" cy="340" r="20" fill="#FFFF00"/>
+  <!-- 여름: 태양 -->
+  <circle cx="680" cy="680" r="36" fill="#FFCC02"/>
+  <line x1="680" y1="628" x2="680" y2="608" stroke="#FFCC02" stroke-width="8" stroke-linecap="round"/>
+  <line x1="732" y1="680" x2="752" y2="680" stroke="#FFCC02" stroke-width="8" stroke-linecap="round"/>
+  <!-- 가을: 잎 -->
+  <ellipse cx="344" cy="680" rx="40" ry="28" fill="#E64A19" transform="rotate(-30,344,680)"/>
+  <!-- 겨울: 눈 -->
+  <text x="344" y="360" font-family="Arial" font-size="52" fill="white" text-anchor="middle">❄</text>
+  <!-- 중앙 나무 -->
+  <circle cx="512" cy="512" r="70" fill="white"/>
+  <circle cx="512" cy="512" r="60" fill="#4CAF50"/>
+  <text x="512" y="532" font-family="Arial Black,Arial" font-size="40" font-weight="900" fill="white" text-anchor="middle">🌱</text>
+  <!-- Layer 3: 타이틀 -->
+  <text x="512" y="920" font-family="Arial Black,Arial" font-size="76" font-weight="900" fill="#2E7D32" text-anchor="middle">LEAF.GROW</text>
+</svg>

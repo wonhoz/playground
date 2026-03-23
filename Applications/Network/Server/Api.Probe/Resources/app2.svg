@@ -1,30 +1,17 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
-  <!-- 배경: Postman 오렌지 계열 -->
-  <rect width="1024" height="1024" rx="180" fill="#FF6C37"/>
-  <rect x="40" y="40" width="944" height="944" rx="150" fill="#FF8555"/>
-
-  <!-- 메인 오브젝트: URL 바 + GET 메서드 박스 -->
-  <!-- URL 입력바 -->
-  <rect x="120" y="260" width="784" height="100" rx="14" fill="#1A1A1A" opacity="0.85"/>
-  <!-- GET 메서드 배지 -->
-  <rect x="132" y="272" width="130" height="76" rx="10" fill="#14B8A6"/>
-  <text x="197" y="326" font-family="'Segoe UI', Arial, sans-serif" font-size="36" font-weight="900" fill="#FFFFFF" text-anchor="middle" dominant-baseline="middle">GET</text>
-  <!-- URL 텍스트 -->
-  <text x="420" y="314" font-family="'Segoe UI', Arial, monospace" font-size="26" fill="#AAAAAA" dominant-baseline="middle">/api/users/1</text>
-
-  <!-- 응답 박스 -->
-  <rect x="120" y="400" width="784" height="320" rx="14" fill="#1A1A1A" opacity="0.85"/>
-  <!-- 상태 코드 배지 200 OK -->
-  <rect x="136" y="416" width="170" height="52" rx="8" fill="#147820"/>
-  <text x="221" y="443" font-family="'Segoe UI', Arial, sans-serif" font-size="30" font-weight="900" fill="#FFFFFF" text-anchor="middle" dominant-baseline="middle">200 OK</text>
-
-  <!-- JSON 응답 텍스트 -->
-  <text x="148" y="498" font-family="'Courier New', monospace" font-size="22" fill="#22C55E">{"id": 1,</text>
-  <text x="148" y="528" font-family="'Courier New', monospace" font-size="22" fill="#A78BFA">  "name": "Alice",</text>
-  <text x="148" y="558" font-family="'Courier New', monospace" font-size="22" fill="#F59E0B">  "status": "active"</text>
-  <text x="148" y="588" font-family="'Courier New', monospace" font-size="22" fill="#22C55E">}</text>
-
-  <!-- 체크 아이콘 -->
-  <circle cx="862" cy="442" r="26" fill="#22C55E" opacity="0.9"/>
-  <polyline points="848,442 858,454 878,430" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="180" fill="#212121"/>
+  <!-- Layer 2: 4 method badges in 2x2 -->
+  <!-- GET (green) -->
+  <rect x="140" y="220" width="320" height="200" rx="20" fill="#4CAF50"/>
+  <text x="300" y="338" font-family="Arial" font-size="80" font-weight="900" fill="white" text-anchor="middle">GET</text>
+  <!-- POST (blue) -->
+  <rect x="564" y="220" width="320" height="200" rx="20" fill="#2196F3"/>
+  <text x="724" y="338" font-family="Arial" font-size="72" font-weight="900" fill="white" text-anchor="middle">POST</text>
+  <!-- PUT (orange) -->
+  <rect x="140" y="604" width="320" height="200" rx="20" fill="#FF9800"/>
+  <text x="300" y="722" font-family="Arial" font-size="80" font-weight="900" fill="white" text-anchor="middle">PUT</text>
+  <!-- DELETE (red) -->
+  <rect x="564" y="604" width="320" height="200" rx="20" fill="#F44336"/>
+  <text x="724" y="710" font-family="Arial" font-size="56" font-weight="900" fill="white" text-anchor="middle">DELETE</text>
 </svg>

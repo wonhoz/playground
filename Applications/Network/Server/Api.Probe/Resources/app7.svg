@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg03" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0D1F12"/>
+      <stop offset="100%" stop-color="#051009"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg03)"/>
+
+  <!-- Layer 2: Terminal window frame -->
+  <rect x="130" y="180" width="764" height="664" rx="24" fill="#0F2417" stroke="#1A3D22" stroke-width="4"/>
+  <!-- Title bar -->
+  <rect x="130" y="180" width="764" height="60" rx="24" fill="#172E1E"/>
+  <rect x="130" y="210" width="764" height="30" fill="#172E1E"/>
+  <!-- window dots -->
+  <circle cx="192" cy="210" r="12" fill="#EF4444" opacity="0.8"/>
+  <circle cx="234" cy="210" r="12" fill="#F59E0B" opacity="0.8"/>
+  <circle cx="276" cy="210" r="12" fill="#22C55E" opacity="0.8"/>
+
+  <!-- Layer 3: Code lines -->
+  <!-- prompt line -->
+  <text x="165" y="320" font-family="'Consolas','Courier New',monospace" font-size="52" fill="#4ADE80" font-weight="bold">$</text>
+  <text x="215" y="320" font-family="'Consolas','Courier New',monospace" font-size="52" fill="#E0E0E0"> curl \</text>
+
+  <!-- method + url -->
+  <text x="165" y="390" font-family="'Consolas','Courier New',monospace" font-size="44" fill="#60A5FA">  -X <tspan fill="#34D399">GET</tspan></text>
+
+  <!-- url line -->
+  <text x="165" y="455" font-family="'Consolas','Courier New',monospace" font-size="38" fill="#FDE047">  /api/v1/data</text>
+
+  <!-- response line -->
+  <text x="165" y="535" font-family="'Consolas','Courier New',monospace" font-size="42" fill="#6B7280">───────────────</text>
+  <text x="165" y="595" font-family="'Consolas','Courier New',monospace" font-size="46" fill="#4ADE80">HTTP </text>
+  <text x="330" y="595" font-family="'Consolas','Courier New',monospace" font-size="46" fill="#22C55E" font-weight="bold">200 OK</text>
+
+  <!-- json preview -->
+  <text x="165" y="655" font-family="'Consolas','Courier New',monospace" font-size="42" fill="#94A3B8">{"status":"ok"}</text>
+
+  <!-- cursor blink -->
+  <rect x="165" y="710" width="28" height="52" rx="3" fill="#4ADE80" opacity="0.85"/>
+</svg>

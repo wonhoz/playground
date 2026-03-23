@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg04" x1="0" y1="0" x2="0.4" y2="1">
+      <stop offset="0%" stop-color="#0A0E1A"/>
+      <stop offset="100%" stop-color="#0D1530"/>
+    </linearGradient>
+    <linearGradient id="flame04" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FEF08A"/>
+      <stop offset="40%" stop-color="#F97316"/>
+      <stop offset="100%" stop-color="#EF4444" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="rocket04" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#E0E0E0"/>
+      <stop offset="100%" stop-color="#A0A0C0"/>
+    </linearGradient>
+    <filter id="glow04">
+      <feGaussianBlur stdDeviation="12" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Layer 1: Deep space background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg04)"/>
+  <!-- Stars -->
+  <circle cx="160" cy="200" r="3" fill="white" opacity="0.6"/>
+  <circle cx="300" cy="140" r="2" fill="white" opacity="0.5"/>
+  <circle cx="500" cy="180" r="4" fill="white" opacity="0.7"/>
+  <circle cx="700" cy="130" r="2" fill="white" opacity="0.4"/>
+  <circle cx="850" cy="220" r="3" fill="white" opacity="0.6"/>
+  <circle cx="180" cy="380" r="2" fill="white" opacity="0.3"/>
+  <circle cx="780" cy="360" r="2" fill="white" opacity="0.5"/>
+  <circle cx="920" cy="480" r="3" fill="white" opacity="0.4"/>
+  <circle cx="240" cy="600" r="2" fill="white" opacity="0.3"/>
+  <circle cx="900" cy="700" r="2" fill="white" opacity="0.4"/>
+  <circle cx="140" cy="820" r="3" fill="white" opacity="0.5"/>
+  <circle cx="620" cy="160" r="2" fill="white" opacity="0.6"/>
+  <circle cx="440" cy="890" r="2" fill="white" opacity="0.3"/>
+
+  <!-- Speed lines (motion trail) -->
+  <line x1="380" y1="750" x2="100" y2="960" stroke="#F97316" stroke-width="6" stroke-linecap="round" opacity="0.3"/>
+  <line x1="410" y1="720" x2="140" y2="900" stroke="#FEF08A" stroke-width="3" stroke-linecap="round" opacity="0.2"/>
+  <line x1="450" y1="700" x2="200" y2="870" stroke="#F97316" stroke-width="4" stroke-linecap="round" opacity="0.25"/>
+
+  <!-- Layer 2: Rocket body (angled ~45deg, bottom-left to top-right) -->
+  <g transform="translate(512,512) rotate(-45) translate(-512,-512)">
+    <!-- Rocket body -->
+    <ellipse cx="512" cy="480" rx="90" ry="220" fill="url(#rocket04)"/>
+    <!-- Rocket nose cone -->
+    <ellipse cx="512" cy="265" rx="90" ry="80" fill="#C0C0D8"/>
+    <path d="M422,310 Q512,160 602,310 Z" fill="#D0D0E8"/>
+    <!-- Window -->
+    <circle cx="512" cy="440" r="42" fill="#60A5FA" opacity="0.9"/>
+    <circle cx="512" cy="440" r="42" fill="none" stroke="#93C5FD" stroke-width="6"/>
+    <circle cx="498" cy="428" r="12" fill="white" opacity="0.5"/>
+    <!-- Fins -->
+    <polygon points="422,620 370,720 422,680" fill="#A0A0C0"/>
+    <polygon points="602,620 654,720 602,680" fill="#A0A0C0"/>
+  </g>
+
+  <!-- Layer 3: Flame (glow effect) -->
+  <g filter="url(#glow04)">
+    <g transform="translate(512,512) rotate(-45) translate(-512,-512)">
+      <ellipse cx="512" cy="740" rx="55" ry="120" fill="url(#flame04)"/>
+      <ellipse cx="512" cy="740" rx="28" ry="70" fill="#FEF08A" opacity="0.8"/>
+    </g>
+  </g>
+</svg>

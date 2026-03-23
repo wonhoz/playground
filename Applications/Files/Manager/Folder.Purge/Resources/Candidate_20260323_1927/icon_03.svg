@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg_fp3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0EA5E9"/>
+      <stop offset="100%" style="stop-color:#0284C7"/>
+    </linearGradient>
+  </defs>
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="185" fill="url(#bg_fp3)"/>
+  <!-- 쓰레기통 (아래) -->
+  <rect x="360" y="680" width="304" height="180" rx="20" fill="white"/>
+  <!-- 쓰레기통 뚜껑 -->
+  <rect x="330" y="644" width="364" height="48" rx="16" fill="white"/>
+  <!-- 쓰레기통 핸들 -->
+  <rect x="448" y="610" width="128" height="44" rx="18" fill="none" stroke="white" stroke-width="18"/>
+  <!-- 쓰레기통 선 -->
+  <line x1="448" y1="700" x2="440" y2="840" stroke="#BAE6FD" stroke-width="14" stroke-linecap="round"/>
+  <line x1="512" y1="700" x2="512" y2="844" stroke="#BAE6FD" stroke-width="14" stroke-linecap="round"/>
+  <line x1="576" y1="700" x2="584" y2="840" stroke="#BAE6FD" stroke-width="14" stroke-linecap="round"/>
+  <!-- 폴더 1 (왼쪽, 이동 중) -->
+  <g transform="translate(-30, -20)">
+    <path d="M 260 400 L 260 376 Q 260 352 284 352 L 370 352 Q 394 352 402 376 L 414 400 Z" fill="#FCD34D"/>
+    <rect x="230" y="400" width="250" height="180" rx="18" fill="#FCD34D"/>
+  </g>
+  <!-- 폴더 2 (오른쪽, 이동 중) -->
+  <g transform="translate(30, -10)">
+    <path d="M 560 380 L 560 356 Q 560 332 584 332 L 666 332 Q 690 332 698 356 L 710 380 Z" fill="#FDE68A"/>
+    <rect x="530" y="380" width="240" height="170" rx="18" fill="#FDE68A"/>
+  </g>
+  <!-- 화살표 1 (왼쪽 폴더 → 쓰레기통) -->
+  <path d="M 310 590 Q 320 660 410 660" fill="none" stroke="white" stroke-width="22" stroke-linecap="round"/>
+  <polygon points="398,638 420,664 396,686" fill="white"/>
+  <!-- 화살표 2 (오른쪽 폴더 → 쓰레기통) -->
+  <path d="M 710 560 Q 700 640 620 658" fill="none" stroke="white" stroke-width="22" stroke-linecap="round"/>
+  <polygon points="632,636 616,660 636,682" fill="white"/>
+</svg>

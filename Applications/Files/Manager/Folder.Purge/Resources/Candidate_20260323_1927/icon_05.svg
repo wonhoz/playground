@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="185" fill="#0F172A"/>
+  <!-- 레이더 원형 파문 3개 -->
+  <circle cx="512" cy="512" r="320" fill="none" stroke="#22C55E" stroke-width="28" opacity="0.3"/>
+  <circle cx="512" cy="512" r="220" fill="none" stroke="#22C55E" stroke-width="32" opacity="0.5"/>
+  <circle cx="512" cy="512" r="120" fill="none" stroke="#22C55E" stroke-width="38" opacity="0.75"/>
+  <!-- 레이더 십자선 -->
+  <line x1="512" y1="210" x2="512" y2="814" stroke="#22C55E" stroke-width="6" opacity="0.35" stroke-dasharray="14,10"/>
+  <line x1="210" y1="512" x2="814" y2="512" stroke="#22C55E" stroke-width="6" opacity="0.35" stroke-dasharray="14,10"/>
+  <!-- 레이더 스캔 선 (빛나는) -->
+  <line x1="512" y1="512" x2="700" y2="280" stroke="#4ADE80" stroke-width="16" stroke-linecap="round" opacity="0.8"/>
+  <!-- 중앙 점 -->
+  <circle cx="512" cy="512" r="18" fill="#4ADE80"/>
+  <!-- 빨간 폴더 점들 (발견된 빈 폴더) -->
+  <!-- 폴더 점 1 -->
+  <g transform="translate(620, 340)">
+    <path d="M -28 0 L -28 -8 Q -28 -18 -18 -18 L 8 -18 Q 18 -18 22 -8 L 28 0 Z" fill="#EF4444"/>
+    <rect x="-34" y="0" width="62" height="44" rx="7" fill="#EF4444"/>
+    <circle cx="0" cy="22" r="8" fill="#FCA5A5"/>
+  </g>
+  <!-- 폴더 점 2 -->
+  <g transform="translate(340, 360)">
+    <path d="M -22 0 L -22 -6 Q -22 -14 -14 -14 L 6 -14 Q 14 -14 17 -6 L 22 0 Z" fill="#EF4444"/>
+    <rect x="-26" y="0" width="48" height="34" rx="6" fill="#EF4444"/>
+  </g>
+  <!-- 폴더 점 3 -->
+  <g transform="translate(680, 600)">
+    <path d="M -24 0 L -24 -7 Q -24 -15 -15 -15 L 7 -15 Q 16 -15 20 -7 L 24 0 Z" fill="#EF4444"/>
+    <rect x="-28" y="0" width="52" height="38" rx="6" fill="#EF4444"/>
+  </g>
+  <!-- 폴더 점 4 -->
+  <g transform="translate(380, 650)">
+    <path d="M -20 0 L -20 -6 Q -20 -13 -12 -13 L 6 -13 Q 14 -13 17 -6 L 20 0 Z" fill="#F87171"/>
+    <rect x="-24" y="0" width="44" height="32" rx="6" fill="#F87171"/>
+  </g>
+</svg>

@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: Background - 초록빛 스페이스 -->
+  <rect width="1024" height="1024" rx="180" fill="#001A0A"/>
+  <!-- Layer 2: 충돌 방지 경로 (두 궤도가 겹치지 않게) -->
+  <!-- 궤도 1 (위) -->
+  <path d="M160,380 Q400,200 700,360 Q840,420 880,512" stroke="#69F0AE" stroke-width="8" fill="none" stroke-linecap="round" opacity="0.9"/>
+  <!-- 행성 1 -->
+  <circle cx="520" cy="272" r="44" fill="#69F0AE"/>
+  <circle cx="520" cy="272" r="32" fill="#00C853"/>
+  <!-- 궤도 2 (아래) -->
+  <path d="M160,640 Q400,820 700,660 Q840,600 880,512" stroke="#FF6D00" stroke-width="8" fill="none" stroke-linecap="round" opacity="0.9"/>
+  <!-- 행성 2 -->
+  <circle cx="520" cy="752" r="44" fill="#FF6D00"/>
+  <circle cx="520" cy="752" r="32" fill="#E64A19"/>
+  <!-- 중앙 겹침 경고 아이콘 -->
+  <circle cx="880" cy="512" r="60" fill="#1A0A00"/>
+  <circle cx="880" cy="512" r="52" fill="none" stroke="#FFFF00" stroke-width="8"/>
+  <line x1="880" y1="472" x2="880" y2="520" stroke="#FFFF00" stroke-width="10" stroke-linecap="round"/>
+  <circle cx="880" cy="542" r="6" fill="#FFFF00"/>
+  <!-- 전환점 (두 궤도가 교차하는 지점 - 녹색 체크) -->
+  <circle cx="880" cy="512" r="0" fill="#FFFF00"/>
+  <!-- Layer 3: -->
+  <text x="440" y="900" font-family="Arial Black,Arial" font-size="72" font-weight="900" fill="#69F0AE" text-anchor="middle">ORBIT.CRAFT</text>
+</svg>

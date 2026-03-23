@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: Background - 스페이스 다크 -->
+  <rect width="1024" height="1024" rx="180" fill="#03001A"/>
+  <!-- 별들 -->
+  <circle cx="180" cy="200" r="2" fill="white" opacity="0.6"/>
+  <circle cx="800" cy="180" r="3" fill="white" opacity="0.7"/>
+  <circle cx="150" cy="650" r="2" fill="white" opacity="0.5"/>
+  <circle cx="860" cy="700" r="2" fill="white" opacity="0.6"/>
+  <circle cx="500" cy="120" r="2" fill="white" opacity="0.7"/>
+  <!-- Layer 2: 퍼즐 조각 궤도 (맞추기) -->
+  <!-- 궤도 고리 (절반씩 분리된 퍼즐 형태) -->
+  <!-- 상반부 (점선) -->
+  <path d="M172,512 A340,340 0 0 1 852,512" stroke="#42A5F5" stroke-width="8" fill="none" stroke-dasharray="25,15" opacity="0.6"/>
+  <!-- 하반부 (실선 - 완성된 부분) -->
+  <path d="M852,512 A340,340 0 0 1 172,512" stroke="#42A5F5" stroke-width="8" fill="none" opacity="0.9"/>
+  <!-- 작은 내부 궤도 -->
+  <circle cx="512" cy="512" r="200" fill="none" stroke="#7C4DFF" stroke-width="6" opacity="0.7"/>
+  <!-- 중앙 행성 -->
+  <circle cx="512" cy="512" r="90" fill="#1A237E"/>
+  <circle cx="512" cy="512" r="74" fill="#283593"/>
+  <circle cx="512" cy="512" r="58" fill="#3949AB"/>
+  <!-- 행성 텍스처 -->
+  <ellipse cx="512" cy="512" rx="45" ry="25" fill="none" stroke="#5C6BC0" stroke-width="4" opacity="0.6"/>
+  <!-- 조각 아이콘 (우상단 - 드래그할 궤도 조각) -->
+  <path d="M760,200 A120,120 0 0 1 880,320" stroke="#FF6D00" stroke-width="14" fill="none" stroke-linecap="round"/>
+  <circle cx="760" cy="200" r="14" fill="#FF6D00"/>
+  <circle cx="880" cy="320" r="14" fill="#FF6D00"/>
+  <!-- 화살표 (배치 위치 가이드) -->
+  <line x1="810" y1="320" x2="820" y2="360" stroke="#FF6D00" stroke-width="4" opacity="0.6" stroke-dasharray="8,6"/>
+  <!-- Layer 3: -->
+  <text x="512" y="900" font-family="Arial Black,Arial" font-size="72" font-weight="900" fill="#42A5F5" text-anchor="middle">ORBIT.CRAFT</text>
+</svg>

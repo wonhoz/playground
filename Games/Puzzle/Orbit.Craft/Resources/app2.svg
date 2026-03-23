@@ -1,31 +1,45 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
-  <!-- Layer 1: Background — 우주 -->
-  <rect width="1024" height="1024" rx="190" fill="#010108"/>
+  <defs>
+    <radialGradient id="bg01" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#1A1A3E"/>
+      <stop offset="100%" stop-color="#0A0A1A"/>
+    </radialGradient>
+    <radialGradient id="planet01" cx="40%" cy="35%" r="50%">
+      <stop offset="0%" stop-color="#FFE066"/>
+      <stop offset="60%" stop-color="#FBBF24"/>
+      <stop offset="100%" stop-color="#D97706"/>
+    </radialGradient>
+    <filter id="glow01">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="185" fill="url(#bg01)"/>
   <!-- 별들 -->
-  <circle cx="150" cy="200" r="3" fill="#FFFFFF" opacity="0.8"/>
-  <circle cx="880" cy="150" r="2" fill="#FFFFFF" opacity="0.7"/>
-  <circle cx="200" cy="800" r="3" fill="#FFFFFF" opacity="0.6"/>
-  <circle cx="850" cy="850" r="2" fill="#FFFFFF" opacity="0.8"/>
-  <circle cx="100" cy="500" r="2" fill="#FFFFFF" opacity="0.5"/>
-  <circle cx="920" cy="600" r="3" fill="#FFFFFF" opacity="0.7"/>
-  <circle cx="400" cy="900" r="2" fill="#FFFFFF" opacity="0.6"/>
-  <circle cx="700" cy="100" r="2" fill="#FFFFFF" opacity="0.8"/>
-  <!-- Layer 2: 행성 + 궤도 타원 -->
-  <!-- 궤도 타원 -->
-  <ellipse cx="512" cy="512" rx="380" ry="240" fill="none" stroke="#60A5FA" stroke-width="12" opacity="0.8"/>
-  <!-- 작은 내부 궤도 -->
-  <ellipse cx="512" cy="512" rx="200" ry="130" fill="none" stroke="#3B82F6" stroke-width="6" opacity="0.4"/>
-  <!-- 중심 행성 (태양/행성) -->
-  <circle cx="512" cy="512" r="100" fill="#F59E0B"/>
-  <circle cx="512" cy="512" r="80" fill="#FBBF24"/>
-  <!-- 표면 질감 -->
-  <ellipse cx="490" cy="480" rx="40" ry="25" fill="#F97316" opacity="0.5"/>
-  <!-- 탐사선 (궤도 위) -->
-  <polygon points="892,512 862,492 862,532" fill="#FFFFFF"/>
-  <polygon points="892,512 920,500 920,524" fill="#60A5FA"/>
-  <!-- 탐사선 꼬리 (궤도 경로 따라) -->
-  <path d="M880 512 Q700 380 512 440" fill="none" stroke="#FFFFFF" stroke-width="6" stroke-dasharray="12,8" opacity="0.6"/>
-  <!-- Layer 3: 가이드 화살표 -->
-  <path d="M892 470 Q940 380 960 300" fill="none" stroke="#38BDF8" stroke-width="10" stroke-linecap="round"/>
-  <polygon points="958,314 970,284 940,302" fill="#38BDF8"/>
+  <circle cx="200" cy="180" r="4" fill="white" opacity="0.6"/>
+  <circle cx="820" cy="200" r="3" fill="white" opacity="0.5"/>
+  <circle cx="150" cy="800" r="3" fill="white" opacity="0.4"/>
+  <circle cx="880" cy="820" r="4" fill="white" opacity="0.6"/>
+  <circle cx="750" cy="160" r="2" fill="white" opacity="0.5"/>
+  <circle cx="260" cy="870" r="3" fill="white" opacity="0.4"/>
+  <circle cx="900" cy="500" r="2" fill="white" opacity="0.5"/>
+  <circle cx="120" cy="450" r="3" fill="white" opacity="0.4"/>
+  <!-- 큰 타원 궤도 (시안) -->
+  <ellipse cx="512" cy="512" rx="280" ry="180" fill="none" stroke="#00E5FF" stroke-width="10" opacity="0.9" stroke-dasharray="30 15"/>
+  <!-- 행성 (중앙 노란) -->
+  <circle cx="512" cy="512" r="140" fill="url(#planet01)" filter="url(#glow01)"/>
+  <!-- 행성 표면 디테일 -->
+  <ellipse cx="490" cy="490" rx="110" ry="50" fill="none" stroke="#FDE68A" stroke-width="8" opacity="0.4"/>
+  <ellipse cx="540" cy="550" rx="70" ry="30" fill="none" stroke="#FDE68A" stroke-width="6" opacity="0.3"/>
+  <!-- 탐사선 (궤도 위 오른쪽) -->
+  <g transform="translate(788,430) rotate(-20)">
+    <ellipse cx="0" cy="0" rx="28" ry="14" fill="#E0E0E0" stroke="#FFFFFF" stroke-width="6"/>
+    <rect x="-8" y="-22" width="16" height="22" rx="8" fill="#90CAF9" stroke="#FFFFFF" stroke-width="5"/>
+    <rect x="-36" y="-4" width="22" height="8" rx="4" fill="#64B5F6" stroke="#FFFFFF" stroke-width="4"/>
+    <rect x="14" y="-4" width="22" height="8" rx="4" fill="#64B5F6" stroke="#FFFFFF" stroke-width="4"/>
+  </g>
+  <!-- 궤도 방향 화살표 -->
+  <path d="M 792 355 Q 820 330 800 310" fill="none" stroke="#00E5FF" stroke-width="8" stroke-linecap="round"/>
+  <polygon points="800,310 815,325 785,325" fill="#00E5FF"/>
 </svg>

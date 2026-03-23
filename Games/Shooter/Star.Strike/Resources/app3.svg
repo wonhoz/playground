@@ -1,0 +1,83 @@
+<!-- icon_03 | Metaphor | 공간·장면 | 별(★)이 레이저를 발사하는 장면 — "Star Strike" 이중 의미 -->
+<!-- 색조: 황금 + 딥 인디고 -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg03" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#12102A"/>
+      <stop offset="100%" stop-color="#05040F"/>
+    </radialGradient>
+    <radialGradient id="starGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFD700" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#FFD700" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glow03">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="1024" height="1024" rx="120" fill="url(#bg03)"/>
+
+  <!-- Background small stars -->
+  <circle cx="220" cy="200" r="2" fill="#FFFFFF" opacity="0.5"/>
+  <circle cx="160" cy="350" r="2" fill="#FFFFFF" opacity="0.4"/>
+  <circle cx="290" cy="460" r="2" fill="#FFFFFF" opacity="0.5"/>
+  <circle cx="180" cy="560" r="1.5" fill="#FFFFFF" opacity="0.4"/>
+  <circle cx="840" cy="210" r="2" fill="#FFFFFF" opacity="0.5"/>
+  <circle cx="900" cy="360" r="2" fill="#FFFFFF" opacity="0.4"/>
+  <circle cx="780" cy="480" r="2" fill="#FFFFFF" opacity="0.5"/>
+  <circle cx="860" cy="570" r="1.5" fill="#FFFFFF" opacity="0.4"/>
+  <circle cx="350" cy="750" r="2" fill="#FFFFFF" opacity="0.4"/>
+  <circle cx="670" cy="740" r="2" fill="#FFFFFF" opacity="0.5"/>
+  <circle cx="240" cy="820" r="1.5" fill="#FFFFFF" opacity="0.3"/>
+  <circle cx="790" cy="810" r="1.5" fill="#FFFFFF" opacity="0.3"/>
+
+  <!-- Distant small stars (background) -->
+  <polygon points="280,280 286,298 305,298 291,309 296,328 280,317 264,328 269,309 255,298 274,298" fill="#5555AA" opacity="0.5" transform="scale(0.4) translate(420,420)"/>
+  <polygon points="750,350 754,362 767,362 757,370 761,381 750,374 739,381 743,370 733,362 746,362" fill="#5555AA" opacity="0.4" transform="scale(0.35) translate(790,610)"/>
+
+  <!-- Star glow halo -->
+  <circle cx="512" cy="480" r="200" fill="url(#starGlow)"/>
+
+  <!-- Main star shape (5-pointed, large) -->
+  <polygon points="512,240 558,392 720,392 590,484 636,636 512,544 388,636 434,484 304,392 466,392"
+           fill="#FFD700" filter="url(#glow03)"/>
+  <!-- Star inner highlight -->
+  <polygon points="512,272 548,382 650,382 568,442 598,552 512,492 426,552 456,442 374,382 476,382"
+           fill="#FFF176" opacity="0.5"/>
+  <!-- Star center -->
+  <circle cx="512" cy="464" r="42" fill="#FFFFFF" opacity="0.85"/>
+  <circle cx="512" cy="464" r="26" fill="#FFD700"/>
+
+  <!-- Laser beams from star tips — "striking" outward -->
+  <!-- Top tip beam (straight up) -->
+  <rect x="507" y="170" width="10" height="70" rx="5" fill="#FFD700" opacity="0.9"/>
+  <rect x="509" y="170" width="6" height="70" rx="3" fill="#FFFFFF" opacity="0.6"/>
+
+  <!-- Bottom-right beam -->
+  <line x1="602" y1="590" x2="680" y2="680" stroke="#FFD700" stroke-width="10" stroke-linecap="round" opacity="0.85"/>
+  <line x1="602" y1="590" x2="680" y2="680" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" opacity="0.6"/>
+
+  <!-- Bottom-left beam -->
+  <line x1="422" y1="590" x2="344" y2="680" stroke="#FFD700" stroke-width="10" stroke-linecap="round" opacity="0.85"/>
+  <line x1="422" y1="590" x2="344" y2="680" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" opacity="0.6"/>
+
+  <!-- Right tip beam -->
+  <rect x="685" y="388" width="80" height="10" rx="5" fill="#FFD700" opacity="0.85"/>
+  <rect x="685" y="390" width="80" height="6" rx="3" fill="#FFFFFF" opacity="0.6"/>
+
+  <!-- Left tip beam -->
+  <rect x="259" y="388" width="80" height="10" rx="5" fill="#FFD700" opacity="0.85"/>
+  <rect x="259" y="390" width="80" height="6" rx="3" fill="#FFFFFF" opacity="0.6"/>
+
+  <!-- Hit sparks at beam ends -->
+  <circle cx="512" cy="162" r="18" fill="#FFFFFF" opacity="0.7"/>
+  <circle cx="512" cy="162" r="10" fill="#FFD700"/>
+  <circle cx="688" cy="686" r="16" fill="#FF8C00" opacity="0.8"/>
+  <circle cx="336" cy="686" r="16" fill="#FF8C00" opacity="0.8"/>
+
+  <!-- Title text -->
+  <text x="512" y="800" font-family="'Arial Black', sans-serif" font-size="80" font-weight="900"
+        fill="#FFD700" text-anchor="middle" letter-spacing="4" filter="url(#glow03)">STAR</text>
+  <text x="512" y="880" font-family="'Arial Black', sans-serif" font-size="60" font-weight="900"
+        fill="#FFAA00" text-anchor="middle" letter-spacing="10" opacity="0.85">STRIKE</text>
+</svg>

@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg09" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1F2937"/>
+      <stop offset="100%" stop-color="#111827"/>
+    </linearGradient>
+    <radialGradient id="sparkGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FCD34D"/>
+      <stop offset="60%" stop-color="#F59E0B" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#D97706" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <!-- Background -->
+  <rect width="1024" height="1024" rx="185" fill="url(#bg09)"/>
+  <!-- Glow center -->
+  <ellipse cx="512" cy="480" rx="220" ry="220" fill="url(#sparkGlow)" opacity="0.6"/>
+  <!-- Magic wand stick -->
+  <rect x="280" y="600" width="370" height="36" rx="18" fill="#D97706" transform="rotate(-45, 465, 618)"/>
+  <!-- Wand tip star -->
+  <polygon points="380,280 404,352 480,352 420,396 444,468 380,424 316,468 340,396 280,352 356,352" fill="#FCD34D" stroke="#F59E0B" stroke-width="8" stroke-linejoin="round"/>
+  <!-- Sparks radiating from wand star -->
+  <line x1="380" y1="220" x2="380" y2="180" stroke="#FCD34D" stroke-width="16" stroke-linecap="round"/>
+  <line x1="460" y1="240" x2="500" y2="200" stroke="#FCD34D" stroke-width="14" stroke-linecap="round"/>
+  <line x1="300" y1="240" x2="260" y2="200" stroke="#FCD34D" stroke-width="14" stroke-linecap="round"/>
+  <line x1="480" y1="320" x2="530" y2="300" stroke="#FCD34D" stroke-width="12" stroke-linecap="round"/>
+  <line x1="270" y1="320" x2="220" y2="300" stroke="#FCD34D" stroke-width="12" stroke-linecap="round"/>
+  <!-- Floating small sparks -->
+  <circle cx="580" cy="420" r="18" fill="#FCD34D"/>
+  <circle cx="620" cy="340" r="12" fill="#FCD34D" opacity="0.8"/>
+  <circle cx="560" cy="280" r="10" fill="#FCD34D" opacity="0.6"/>
+  <circle cx="200" cy="400" r="16" fill="#FCD34D" opacity="0.7"/>
+  <circle cx="240" cy="320" r="10" fill="#FCD34D" opacity="0.5"/>
+  <circle cx="680" cy="480" r="20" fill="#F59E0B" opacity="0.8"/>
+  <circle cx="720" cy="560" r="14" fill="#FCD34D" opacity="0.6"/>
+  <circle cx="160" cy="500" r="12" fill="#FCD34D" opacity="0.5"/>
+  <!-- 4-point sparkle details -->
+  <path d="M 580 420 L 580 400 M 580 420 L 600 420 M 580 420 L 580 440 M 580 420 L 560 420" stroke="#FEF08A" stroke-width="8" stroke-linecap="round"/>
+  <!-- Label -->
+  <text x="512" y="860" font-family="Arial Black, sans-serif" font-size="58" font-weight="900" fill="#FCD34D" text-anchor="middle">MAGIC WAND</text>
+</svg>

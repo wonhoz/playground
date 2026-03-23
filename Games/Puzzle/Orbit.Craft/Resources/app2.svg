@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: Background — 우주 -->
+  <rect width="1024" height="1024" rx="190" fill="#010108"/>
+  <!-- 별들 -->
+  <circle cx="150" cy="200" r="3" fill="#FFFFFF" opacity="0.8"/>
+  <circle cx="880" cy="150" r="2" fill="#FFFFFF" opacity="0.7"/>
+  <circle cx="200" cy="800" r="3" fill="#FFFFFF" opacity="0.6"/>
+  <circle cx="850" cy="850" r="2" fill="#FFFFFF" opacity="0.8"/>
+  <circle cx="100" cy="500" r="2" fill="#FFFFFF" opacity="0.5"/>
+  <circle cx="920" cy="600" r="3" fill="#FFFFFF" opacity="0.7"/>
+  <circle cx="400" cy="900" r="2" fill="#FFFFFF" opacity="0.6"/>
+  <circle cx="700" cy="100" r="2" fill="#FFFFFF" opacity="0.8"/>
+  <!-- Layer 2: 행성 + 궤도 타원 -->
+  <!-- 궤도 타원 -->
+  <ellipse cx="512" cy="512" rx="380" ry="240" fill="none" stroke="#60A5FA" stroke-width="12" opacity="0.8"/>
+  <!-- 작은 내부 궤도 -->
+  <ellipse cx="512" cy="512" rx="200" ry="130" fill="none" stroke="#3B82F6" stroke-width="6" opacity="0.4"/>
+  <!-- 중심 행성 (태양/행성) -->
+  <circle cx="512" cy="512" r="100" fill="#F59E0B"/>
+  <circle cx="512" cy="512" r="80" fill="#FBBF24"/>
+  <!-- 표면 질감 -->
+  <ellipse cx="490" cy="480" rx="40" ry="25" fill="#F97316" opacity="0.5"/>
+  <!-- 탐사선 (궤도 위) -->
+  <polygon points="892,512 862,492 862,532" fill="#FFFFFF"/>
+  <polygon points="892,512 920,500 920,524" fill="#60A5FA"/>
+  <!-- 탐사선 꼬리 (궤도 경로 따라) -->
+  <path d="M880 512 Q700 380 512 440" fill="none" stroke="#FFFFFF" stroke-width="6" stroke-dasharray="12,8" opacity="0.6"/>
+  <!-- Layer 3: 가이드 화살표 -->
+  <path d="M892 470 Q940 380 960 300" fill="none" stroke="#38BDF8" stroke-width="10" stroke-linecap="round"/>
+  <polygon points="958,314 970,284 940,302" fill="#38BDF8"/>
+</svg>

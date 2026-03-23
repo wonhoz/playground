@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg06" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1E3A5F"/>
+      <stop offset="100%" style="stop-color:#1E40AF"/>
+    </linearGradient>
+  </defs>
+  <!-- Background -->
+  <rect width="1024" height="1024" rx="185" fill="url(#bg06)"/>
+  <!-- Radar circles -->
+  <circle cx="512" cy="512" r="290" fill="none" stroke="#22C55E" stroke-width="8" opacity="0.35"/>
+  <circle cx="512" cy="512" r="200" fill="none" stroke="#22C55E" stroke-width="12" opacity="0.5"/>
+  <circle cx="512" cy="512" r="110" fill="none" stroke="#22C55E" stroke-width="18" opacity="0.7"/>
+  <!-- Radar scan line -->
+  <line x1="512" y1="512" x2="512" y2="222" stroke="#22C55E" stroke-width="6" opacity="0.6"/>
+  <line x1="512" y1="512" x2="717" y2="307" stroke="#22C55E" stroke-width="6" opacity="0.5"/>
+  <line x1="512" y1="512" x2="722" y2="512" stroke="#22C55E" stroke-width="6" opacity="0.4"/>
+  <!-- Radar sweep sector -->
+  <path d="M 512 512 L 512 222 A 290 290 0 0 1 717 307 Z" fill="#22C55E" opacity="0.15"/>
+  <!-- Center dot -->
+  <circle cx="512" cy="512" r="20" fill="#22C55E"/>
+  <!-- Center checkmark -->
+  <polyline points="445,510 495,560 590,460" fill="none" stroke="#FFFFFF" stroke-width="58" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

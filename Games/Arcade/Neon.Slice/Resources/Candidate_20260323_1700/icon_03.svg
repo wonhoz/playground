@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="190" fill="#050510"/>
+  <!-- Layer 2: 네온 도형들 위로 솟구침 -->
+  <!-- 원 (상단 중앙 - 막 슬라이스됨) -->
+  <defs>
+    <clipPath id="top"><rect x="0" y="0" width="1024" height="512"/></clipPath>
+    <clipPath id="bot"><rect x="0" y="512" width="1024" height="512"/></clipPath>
+  </defs>
+  <circle cx="240" cy="400" r="130" fill="#FF3300" stroke="#FF6B6B" stroke-width="18" opacity="0.9"/>
+  <circle cx="240" cy="400" r="80" fill="none" stroke="#FF9999" stroke-width="8" opacity="0.5"/>
+  <!-- 삼각형 -->
+  <polygon points="512,280 632,500 392,500" fill="#CC9900" stroke="#FFD93D" stroke-width="16"/>
+  <!-- 별 (5각) -->
+  <polygon points="800,350 828,430 912,430 848,478 872,560 800,510 728,560 752,478 688,430 772,430" fill="#004400" stroke="#6BCB77" stroke-width="12"/>
+  <!-- Layer 3: 슬라이스 커트 라인 -->
+  <line x1="80" y1="512" x2="944" y2="512" stroke="#FFFFFF" stroke-width="12" stroke-dasharray="20,10" opacity="0.6"/>
+  <!-- 슬라이스된 조각 (아래 반)) -->
+  <path d="M110,540 L370,540 L240,680 Z" fill="#CC2200" opacity="0.7"/>
+  <!-- 파티클 -->
+  <circle cx="200" cy="520" r="10" fill="#FF6B6B"/>
+  <circle cx="260" cy="510" r="7" fill="#FFAAAA"/>
+  <circle cx="540" cy="520" r="8" fill="#FFD93D"/>
+  <circle cx="590" cy="510" r="6" fill="#FFEEAA"/>
+</svg>

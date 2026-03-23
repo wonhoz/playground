@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="190" fill="#050510"/>
+  <!-- Layer 2: 대각선으로 잘린 네온 원 -->
+  <!-- 왼쪽 반 (마젠타) -->
+  <defs>
+    <clipPath id="left"><polygon points="0,0 512,0 512,1024 0,1024"/></clipPath>
+    <clipPath id="right"><polygon points="512,0 1024,0 1024,1024 512,1024"/></clipPath>
+    <filter id="glow1">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <circle cx="512" cy="512" r="420" fill="#3D0040" clip-path="url(#left)"/>
+  <circle cx="512" cy="512" r="420" fill="none" stroke="#FF00FF" stroke-width="24" clip-path="url(#left)"/>
+  <!-- 오른쪽 반 (시안) -->
+  <circle cx="512" cy="512" r="420" fill="#003B3D" clip-path="url(#right)"/>
+  <circle cx="512" cy="512" r="420" fill="none" stroke="#00FFFF" stroke-width="24" clip-path="url(#right)"/>
+  <!-- 슬라이스 라인 (대각선) -->
+  <line x1="92" y1="92" x2="932" y2="932" stroke="#FFFFFF" stroke-width="20" stroke-linecap="round"/>
+  <!-- 슬라이스 이펙트 파티클 -->
+  <circle cx="300" cy="300" r="12" fill="#FF00FF"/>
+  <circle cx="400" cy="400" r="8" fill="#FF80FF"/>
+  <circle cx="600" cy="600" r="10" fill="#00FFFF"/>
+  <circle cx="720" cy="720" r="7" fill="#80FFFF"/>
+  <!-- Layer 3: 안쪽 글로우 -->
+  <circle cx="512" cy="512" r="300" fill="none" stroke="#FF00FF" stroke-width="8" opacity="0.3" clip-path="url(#left)"/>
+  <circle cx="512" cy="512" r="300" fill="none" stroke="#00FFFF" stroke-width="8" opacity="0.3" clip-path="url(#right)"/>
+</svg>

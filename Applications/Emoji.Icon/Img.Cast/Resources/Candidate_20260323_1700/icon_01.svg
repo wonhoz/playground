@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: Background -->
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0A0A1A"/>
+      <stop offset="100%" stop-color="#1A1030"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg)"/>
+  <!-- Layer 2: 이미지 프레임 (입력) -->
+  <rect x="60" y="180" width="380" height="300" rx="24" fill="#312E81"/>
+  <rect x="60" y="180" width="380" height="300" rx="24" fill="none" stroke="#6366F1" stroke-width="12"/>
+  <!-- 산 모양 이미지 내부 -->
+  <polygon points="120,440 240,300 320,370 360,330 400,440" fill="#4F46E5" clip-path="url(#imgclip)"/>
+  <circle cx="320" cy="260" r="36" fill="#FBBF24"/>
+  <clipPath id="imgclip"><rect x="60" y="180" width="380" height="300" rx="24"/></clipPath>
+  <!-- SVG/PNG 텍스트 -->
+  <text x="250" y="540" font-size="56" fill="#818CF8" text-anchor="middle" font-weight="bold" font-family="Arial">SVG</text>
+  <!-- 큰 화살표 -->
+  <path d="M480 512 L544 512" stroke="#FFFFFF" stroke-width="32" stroke-linecap="round"/>
+  <polygon points="532,492 564,512 532,532" fill="#FFFFFF"/>
+  <!-- ICO 박스 (출력) -->
+  <rect x="580" y="180" width="380" height="300" rx="24" fill="#451A00"/>
+  <rect x="580" y="180" width="380" height="300" rx="24" fill="none" stroke="#F59E0B" stroke-width="12"/>
+  <!-- ICO 내부 — 4개 크기 아이콘 격자 -->
+  <rect x="610" y="210" width="140" height="120" rx="12" fill="#F59E0B" opacity="0.9"/>
+  <rect x="770" y="210" width="70" height="55" rx="8" fill="#FCD34D" opacity="0.8"/>
+  <rect x="770" y="280" width="50" height="40" rx="6" fill="#FDE68A" opacity="0.7"/>
+  <rect x="830" y="280" width="30" height="25" rx="4" fill="#FEF3C7" opacity="0.6"/>
+  <!-- ICO 텍스트 -->
+  <text x="770" y="540" font-size="56" fill="#F59E0B" text-anchor="middle" font-weight="bold" font-family="Arial">.ICO</text>
+  <!-- Layer 3: 포맷 레이블들 하단 -->
+  <rect x="60" y="620" width="100" height="36" rx="18" fill="#6366F1"/>
+  <text x="110" y="646" font-size="22" fill="white" text-anchor="middle">PNG</text>
+  <rect x="176" y="620" width="100" height="36" rx="18" fill="#818CF8"/>
+  <text x="226" y="646" font-size="22" fill="white" text-anchor="middle">BMP</text>
+  <rect x="292" y="620" width="100" height="36" rx="18" fill="#6366F1" opacity="0.7"/>
+  <text x="342" y="646" font-size="22" fill="white" text-anchor="middle">JPG</text>
+</svg>

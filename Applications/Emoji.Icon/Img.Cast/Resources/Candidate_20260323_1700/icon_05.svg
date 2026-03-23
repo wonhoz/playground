@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: Background -->
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0F0A2A"/>
+      <stop offset="100%" stop-color="#1A1448"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg)"/>
+  <!-- Layer 2: 파일 스택 (왼쪽) -->
+  <rect x="80" y="360" width="320" height="400" rx="24" fill="#312E81" opacity="0.6"/>
+  <rect x="110" y="320" width="320" height="400" rx="24" fill="#3730A3" opacity="0.8"/>
+  <rect x="140" y="280" width="320" height="400" rx="24" fill="#4338CA"/>
+  <rect x="140" y="280" width="320" height="400" rx="24" fill="none" stroke="#6366F1" stroke-width="10"/>
+  <!-- 이미지 내부 표현 -->
+  <polygon points="190,620 280,440 340,520 380,480 440,620" fill="#818CF8" clip-path="url(#sc)"/>
+  <circle cx="390" cy="380" r="40" fill="#FBBF24" clip-path="url(#sc)"/>
+  <clipPath id="sc"><rect x="140" y="280" width="320" height="400" rx="24"/></clipPath>
+  <!-- 큰 화살표 -->
+  <path d="M504 512 L600 512" stroke="#C7D2FE" stroke-width="36" stroke-linecap="round"/>
+  <polygon points="586,488 624,512 586,536" fill="#C7D2FE"/>
+  <!-- ICO 출력 격자 (오른쪽 4개 크기) -->
+  <rect x="640" y="200" width="300" height="240" rx="20" fill="#4338CA"/>
+  <rect x="640" y="200" width="300" height="240" rx="20" fill="none" stroke="#818CF8" stroke-width="8"/>
+  <text x="790" y="348" font-size="60" fill="#C7D2FE" text-anchor="middle" font-weight="bold">256</text>
+  <rect x="640" y="464" width="145" height="120" rx="14" fill="#4338CA"/>
+  <text x="712" y="538" font-size="40" fill="#C7D2FE" text-anchor="middle">48</text>
+  <rect x="800" y="464" width="140" height="120" rx="14" fill="#4338CA"/>
+  <text x="870" y="538" font-size="40" fill="#C7D2FE" text-anchor="middle">32</text>
+  <rect x="640" y="600" width="70" height="60" rx="10" fill="#3730A3"/>
+  <text x="675" y="638" font-size="26" fill="#A5B4FC" text-anchor="middle">16</text>
+  <!-- Layer 3: .ICO 배지 -->
+  <rect x="640" y="800" width="300" height="80" rx="20" fill="#6366F1"/>
+  <text x="790" y="858" font-size="50" fill="white" text-anchor="middle" font-weight="bold">.ICO</text>
+</svg>

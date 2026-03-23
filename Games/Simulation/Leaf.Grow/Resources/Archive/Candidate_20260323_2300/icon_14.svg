@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg14" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#14532D"/>
+      <stop offset="100%" stop-color="#052E16"/>
+    </linearGradient>
+    <linearGradient id="sky14" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0C4A6E" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#14532D" stop-opacity="0"/>
+    </linearGradient>
+    <clipPath id="clip14">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg14)"/>
+  <!-- 하늘 그라데이션 -->
+  <rect x="0" y="0" width="1024" height="600" fill="url(#sky14)" clip-path="url(#clip14)"/>
+
+  <!-- 지평선 지면 -->
+  <rect x="0" y="820" width="1024" height="204" fill="#1A3A10" clip-path="url(#clip14)"/>
+  <ellipse cx="512" cy="828" rx="500" ry="28" fill="#22501A" opacity="0.8"/>
+
+  <!-- Layer 2: 씨앗 실루엣 (좌하) -->
+  <ellipse cx="200" cy="800" rx="28" ry="20" fill="#FDE68A" opacity="0.85"/>
+
+  <!-- 성장 진행 점선 화살표 -->
+  <path d="M 220 790 Q 350 700 512 400" stroke="#FDE68A" stroke-width="5" fill="none" stroke-dasharray="14 10" stroke-linecap="round" opacity="0.5"/>
+
+  <!-- Layer 2: 거대 나무 실루엣 -->
+  <!-- 줄기 -->
+  <rect x="482" y="380" width="60" height="450" rx="15" fill="#FDE68A" opacity="0.9"/>
+  <!-- 큰 가지들 -->
+  <path d="M 512 560 Q 380 520 300 480" stroke="#FDE68A" stroke-width="32" fill="none" stroke-linecap="round" opacity="0.9"/>
+  <path d="M 512 560 Q 644 520 724 480" stroke="#FDE68A" stroke-width="32" fill="none" stroke-linecap="round" opacity="0.9"/>
+  <path d="M 512 460 Q 400 420 340 375" stroke="#FDE68A" stroke-width="24" fill="none" stroke-linecap="round" opacity="0.85"/>
+  <path d="M 512 460 Q 624 420 684 375" stroke="#FDE68A" stroke-width="24" fill="none" stroke-linecap="round" opacity="0.85"/>
+  <path d="M 512 370 Q 435 330 390 290" stroke="#FDE68A" stroke-width="18" fill="none" stroke-linecap="round" opacity="0.8"/>
+  <path d="M 512 370 Q 589 330 634 290" stroke="#FDE68A" stroke-width="18" fill="none" stroke-linecap="round" opacity="0.8"/>
+  <!-- 잔가지 -->
+  <path d="M 300 480 Q 260 455 230 430" stroke="#FDE68A" stroke-width="14" fill="none" stroke-linecap="round" opacity="0.75"/>
+  <path d="M 300 480 Q 275 500 248 510" stroke="#FDE68A" stroke-width="12" fill="none" stroke-linecap="round" opacity="0.7"/>
+  <path d="M 724 480 Q 764 455 794 430" stroke="#FDE68A" stroke-width="14" fill="none" stroke-linecap="round" opacity="0.75"/>
+  <path d="M 724 480 Q 749 500 776 510" stroke="#FDE68A" stroke-width="12" fill="none" stroke-linecap="round" opacity="0.7"/>
+  <path d="M 340 375 Q 310 345 285 318" stroke="#FDE68A" stroke-width="12" fill="none" stroke-linecap="round" opacity="0.7"/>
+  <path d="M 684 375 Q 714 345 739 318" stroke="#FDE68A" stroke-width="12" fill="none" stroke-linecap="round" opacity="0.7"/>
+  <path d="M 390 290 Q 365 262 350 240" stroke="#FDE68A" stroke-width="10" fill="none" stroke-linecap="round" opacity="0.65"/>
+  <path d="M 634 290 Q 659 262 674 240" stroke="#FDE68A" stroke-width="10" fill="none" stroke-linecap="round" opacity="0.65"/>
+  <!-- 최상단 줄기 끝 -->
+  <path d="M 512 380 L 512 280" stroke="#FDE68A" stroke-width="14" fill="none" stroke-linecap="round" opacity="0.8"/>
+  <path d="M 512 300 Q 485 270 470 248" stroke="#FDE68A" stroke-width="9" fill="none" stroke-linecap="round" opacity="0.65"/>
+  <path d="M 512 300 Q 539 270 554 248" stroke="#FDE68A" stroke-width="9" fill="none" stroke-linecap="round" opacity="0.65"/>
+
+  <!-- Layer 3: 흰 별/빛 포인트 -->
+  <circle cx="512" cy="235" r="18" fill="#FFFFFF" opacity="0.9"/>
+  <line x1="512" y1="205" x2="512" y2="192" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" opacity="0.7"/>
+  <line x1="540" y1="213" x2="550" y2="203" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" opacity="0.7"/>
+  <line x1="484" y1="213" x2="474" y2="203" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" opacity="0.7"/>
+  <!-- 달 -->
+  <path d="M 800 180 Q 760 200 760 235 Q 760 270 800 290 Q 740 285 730 235 Q 720 185 800 180 Z" fill="#FFFFFF" opacity="0.7"/>
+</svg>

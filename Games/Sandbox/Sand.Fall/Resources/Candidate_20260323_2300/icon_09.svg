@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg09" cx="50%" cy="60%" r="55%">
+      <stop offset="0%" stop-color="#991B1B"/>
+      <stop offset="100%" stop-color="#7F1D1D"/>
+    </radialGradient>
+    <radialGradient id="crater09" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FDE68A"/>
+      <stop offset="40%" stop-color="#F97316"/>
+      <stop offset="100%" stop-color="#DC2626"/>
+    </radialGradient>
+    <linearGradient id="lava09" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F97316"/>
+      <stop offset="100%" stop-color="#DC2626"/>
+    </linearGradient>
+    <clipPath id="clip09">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg09)"/>
+  <g clip-path="url(#clip09)">
+    <!-- Layer 2: 화산 산체 -->
+    <path d="M512 220 L200 780 L824 780 Z" fill="#57180B" stroke="#7F1D1D" stroke-width="10"/>
+    <!-- 화산 측면 그라데이션 (어두운 면) -->
+    <path d="M512 220 L200 780 L512 780 Z" fill="#4A1506" opacity="0.6"/>
+    <!-- 분화구 -->
+    <ellipse cx="512" cy="270" rx="110" ry="50" fill="url(#crater09)"/>
+    <ellipse cx="512" cy="265" rx="70" ry="30" fill="#FDE68A" opacity="0.80"/>
+    <ellipse cx="512" cy="260" rx="40" ry="16" fill="#FFFFFF" opacity="0.60"/>
+    <!-- Layer 3: 용암 흐름 -->
+    <!-- 왼쪽 용암 흐름 -->
+    <path d="M460 290 Q420 380 390 480 Q360 580 340 680 Q360 620 400 560 Q420 500 430 420 Q440 360 460 290 Z"
+          fill="url(#lava09)" opacity="0.85"/>
+    <!-- 오른쪽 용암 흐름 -->
+    <path d="M564 295 Q610 400 640 500 Q670 600 690 700 Q660 630 620 550 Q600 480 590 400 Q580 350 564 295 Z"
+          fill="url(#lava09)" opacity="0.80"/>
+    <!-- 중앙 용암 흐름 -->
+    <path d="M490 310 Q480 420 470 520 Q460 620 480 720 Q500 640 510 540 Q520 440 490 310 Z"
+          fill="#F97316" opacity="0.75"/>
+    <!-- 용암 입자들 -->
+    <circle cx="400" cy="480" r="18" fill="#FDE68A" opacity="0.85"/>
+    <circle cx="380" cy="560" r="14" fill="#F97316" opacity="0.80"/>
+    <circle cx="360" cy="640" r="10" fill="#FDE68A" opacity="0.70"/>
+    <circle cx="420" cy="420" r="12" fill="#FDE68A" opacity="0.75"/>
+    <circle cx="640" cy="460" r="16" fill="#FDE68A" opacity="0.85"/>
+    <circle cx="660" cy="540" r="12" fill="#F97316" opacity="0.80"/>
+    <circle cx="680" cy="620" r="9" fill="#FDE68A" opacity="0.70"/>
+    <!-- 하단 지면 용암 -->
+    <rect x="200" y="780" width="624" height="60" rx="8" fill="#DC2626" opacity="0.70"/>
+    <path d="M200 780 Q350 760 512 780 Q674 800 824 780 L824 840 Q674 840 512 840 Q350 840 200 840 Z"
+          fill="#F97316" opacity="0.50"/>
+    <!-- 분출 파티클 -->
+    <circle cx="490" cy="210" r="14" fill="#FDE68A" opacity="0.80"/>
+    <circle cx="530" cy="200" r="10" fill="#F97316" opacity="0.75"/>
+    <circle cx="470" cy="180" r="8" fill="#FDE68A" opacity="0.65"/>
+    <circle cx="550" cy="170" r="7" fill="#FBBF24" opacity="0.60"/>
+    <circle cx="512" cy="160" r="10" fill="#FFFFFF" opacity="0.50"/>
+  </g>
+</svg>

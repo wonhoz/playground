@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <clipPath id="clip"><rect width="1024" height="1024" rx="190"/></clipPath>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#7E22CE"/>
+      <stop offset="100%" stop-color="#4C1D95"/>
+    </linearGradient>
+    <linearGradient id="arrow" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#FDE68A"/>
+      <stop offset="100%" stop-color="#F59E0B"/>
+    </linearGradient>
+  </defs>
+  <g clip-path="url(#clip)">
+    <rect width="1024" height="1024" rx="190" fill="url(#bg)"/>
+    <!-- SVG 뱃지 (좌측) -->
+    <rect x="100" y="310" width="340" height="220" rx="28" fill="#FFFFFF" opacity="0.15"/>
+    <rect x="100" y="310" width="340" height="220" rx="28" fill="none" stroke="#FFFFFF" stroke-width="12"/>
+    <text x="270" y="450" text-anchor="middle" font-weight="bold" font-family="system-ui, sans-serif" font-size="90" fill="#FFFFFF">SVG</text>
+    <!-- ICO 뱃지 (우측) -->
+    <rect x="584" y="310" width="340" height="220" rx="28" fill="#FFFFFF" opacity="0.15"/>
+    <rect x="584" y="310" width="340" height="220" rx="28" fill="none" stroke="#FFFFFF" stroke-width="12"/>
+    <text x="754" y="450" text-anchor="middle" font-weight="bold" font-family="system-ui, sans-serif" font-size="90" fill="#FFFFFF">ICO</text>
+    <!-- 변환 화살표 -->
+    <path d="M 460 480 L 564 480" stroke="url(#arrow)" stroke-width="52" stroke-linecap="round"/>
+    <polygon points="564,450 610,480 564,510" fill="#FDE68A"/>
+    <!-- 작은 사이즈 라벨들 -->
+    <text x="620" y="620" font-family="system-ui, sans-serif" font-size="44" fill="#FDE68A" font-weight="bold">16 32 48 256</text>
+    <!-- 아래 태그 -->
+    <rect x="312" y="660" width="400" height="72" rx="36" fill="#FDE68A" opacity="0.18"/>
+    <text x="512" y="708" text-anchor="middle" font-family="system-ui, sans-serif" font-size="46" fill="#FDE68A" font-weight="bold">Convert</text>
+  </g>
+</svg>

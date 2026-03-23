@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg06" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#451A03"/>
+      <stop offset="100%" stop-color="#1A0A00"/>
+    </linearGradient>
+    <linearGradient id="soil06" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#78350F"/>
+      <stop offset="100%" stop-color="#3D1F00"/>
+    </linearGradient>
+    <linearGradient id="tree06" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#16A34A"/>
+      <stop offset="100%" stop-color="#86EFAC"/>
+    </linearGradient>
+    <clipPath id="clip06">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg06)"/>
+
+  <!-- 지면 구분선 -->
+  <line x1="100" y1="560" x2="924" y2="560" stroke="#5C3010" stroke-width="6" stroke-dasharray="16 8" opacity="0.6"/>
+
+  <!-- Layer 2: 지하 단면 -->
+  <rect x="100" y="560" width="824" height="390" rx="10" fill="url(#soil06)" opacity="0.9" clip-path="url(#clip06)"/>
+
+  <!-- 뿌리 시스템 -->
+  <!-- 주뿌리 -->
+  <path d="M 512 560 L 512 750" stroke="#FDE68A" stroke-width="22" fill="none" stroke-linecap="round"/>
+  <!-- 측뿌리 -->
+  <path d="M 512 620 Q 440 660 380 680" stroke="#FDE68A" stroke-width="14" fill="none" stroke-linecap="round"/>
+  <path d="M 512 650 Q 580 690 640 710" stroke="#FDE68A" stroke-width="14" fill="none" stroke-linecap="round"/>
+  <path d="M 512 690 Q 430 720 360 740" stroke="#FDE68A" stroke-width="12" fill="none" stroke-linecap="round"/>
+  <path d="M 512 700 Q 590 735 660 755" stroke="#FDE68A" stroke-width="12" fill="none" stroke-linecap="round"/>
+  <path d="M 512 730 Q 450 760 400 790" stroke="#FDE68A" stroke-width="10" fill="none" stroke-linecap="round"/>
+  <path d="M 512 730 Q 570 762 620 790" stroke="#FDE68A" stroke-width="10" fill="none" stroke-linecap="round"/>
+  <!-- 잔뿌리 -->
+  <path d="M 380 680 Q 330 710 295 730" stroke="#FDE68A" stroke-width="7" fill="none" stroke-linecap="round" opacity="0.7"/>
+  <path d="M 640 710 Q 690 740 720 760" stroke="#FDE68A" stroke-width="7" fill="none" stroke-linecap="round" opacity="0.7"/>
+  <path d="M 360 740 Q 310 775 280 800" stroke="#FDE68A" stroke-width="6" fill="none" stroke-linecap="round" opacity="0.6"/>
+  <path d="M 660 755 Q 710 785 740 810" stroke="#FDE68A" stroke-width="6" fill="none" stroke-linecap="round" opacity="0.6"/>
+  <path d="M 512 750 Q 470 790 440 820" stroke="#FDE68A" stroke-width="8" fill="none" stroke-linecap="round" opacity="0.7"/>
+  <path d="M 512 750 Q 555 790 585 820" stroke="#FDE68A" stroke-width="8" fill="none" stroke-linecap="round" opacity="0.7"/>
+
+  <!-- 흙 속 작은 돌 -->
+  <ellipse cx="320" cy="630" rx="18" ry="12" fill="#5C3010" opacity="0.6"/>
+  <ellipse cx="700" cy="680" rx="14" ry="9" fill="#5C3010" opacity="0.6"/>
+  <ellipse cx="460" cy="780" rx="12" ry="8" fill="#5C3010" opacity="0.5"/>
+
+  <!-- Layer 2: 지상 — 나무 줄기 -->
+  <path d="M 512 560 L 512 240" stroke="#7C3B1A" stroke-width="48" fill="none" stroke-linecap="round"/>
+  <!-- 나무 수관 -->
+  <circle cx="512" cy="200" r="140" fill="url(#tree06)" opacity="0.95"/>
+  <circle cx="400" cy="260" r="100" fill="url(#tree06)" opacity="0.85"/>
+  <circle cx="624" cy="260" r="100" fill="url(#tree06)" opacity="0.85"/>
+  <circle cx="512" cy="130" r="90" fill="#86EFAC" opacity="0.8"/>
+</svg>

@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg05" cx="50%" cy="50%" r="55%">
+      <stop offset="0%" stop-color="#CA8A04"/>
+      <stop offset="100%" stop-color="#B45309"/>
+    </radialGradient>
+    <radialGradient id="compassFace05" cx="40%" cy="35%" r="60%">
+      <stop offset="0%" stop-color="#FEF3C7"/>
+      <stop offset="100%" stop-color="#FDE68A"/>
+    </radialGradient>
+    <clipPath id="clip05">
+      <rect x="0" y="0" width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg05)"/>
+
+  <!-- 나침반 외곽 링 -->
+  <circle cx="512" cy="512" r="360" fill="#92400E" stroke="#FDE68A" stroke-width="22"/>
+  <circle cx="512" cy="512" r="310" fill="url(#compassFace05)" stroke="#D97706" stroke-width="12"/>
+
+  <!-- 눈금선 -->
+  <g stroke="#B45309" stroke-width="8" opacity="0.5">
+    <line x1="512" y1="212" x2="512" y2="250"/>
+    <line x1="512" y1="774" x2="512" y2="812"/>
+    <line x1="212" y1="512" x2="250" y2="512"/>
+    <line x1="774" y1="512" x2="812" y2="512"/>
+    <!-- 대각선 눈금 -->
+    <line x1="730" y1="294" x2="710" y2="320"/>
+    <line x1="294" y1="294" x2="314" y2="320"/>
+    <line x1="730" y1="730" x2="710" y2="704"/>
+    <line x1="294" y1="730" x2="314" y2="704"/>
+  </g>
+
+  <!-- 방위 텍스트 -->
+  <text x="512" y="295" font-family="Arial Black, sans-serif" font-size="88" font-weight="900"
+        text-anchor="middle" fill="#B45309">N</text>
+  <text x="512" y="775" font-family="Arial Black, sans-serif" font-size="72" font-weight="900"
+        text-anchor="middle" fill="#92400E">S</text>
+  <text x="820" y="540" font-family="Arial Black, sans-serif" font-size="72" font-weight="900"
+        text-anchor="middle" fill="#92400E">E</text>
+  <text x="204" y="540" font-family="Arial Black, sans-serif" font-size="72" font-weight="900"
+        text-anchor="middle" fill="#92400E">W</text>
+
+  <!-- 나침반 바늘 — 북쪽(빨강) -->
+  <polygon points="512,230 530,510 512,490 494,510" fill="#EF4444"/>
+  <!-- 나침반 바늘 — 남쪽(흰색) -->
+  <polygon points="512,794 530,514 512,534 494,514" fill="#FFFFFF" opacity="0.9"/>
+
+  <!-- 중앙 원 -->
+  <circle cx="512" cy="512" r="28" fill="#B45309" stroke="#FDE68A" stroke-width="10"/>
+  <circle cx="512" cy="512" r="12" fill="#FDE68A"/>
+</svg>

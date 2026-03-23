@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg10" cx="50%" cy="40%" r="65%">
+      <stop offset="0%" stop-color="#2D3748"/>
+      <stop offset="100%" stop-color="#1F2937"/>
+    </radialGradient>
+    <radialGradient id="planet10" cx="35%" cy="30%" r="65%">
+      <stop offset="0%" stop-color="#93C5FD"/>
+      <stop offset="100%" stop-color="#1D4ED8"/>
+    </radialGradient>
+    <clipPath id="clip10">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg10)"/>
+  <g clip-path="url(#clip10)">
+    <!-- 별 -->
+    <circle cx="160" cy="180" r="3" fill="#FFFFFF" opacity="0.6"/>
+    <circle cx="820" cy="200" r="2" fill="#FFFFFF" opacity="0.5"/>
+    <circle cx="190" cy="840" r="2" fill="#FFFFFF" opacity="0.5"/>
+    <circle cx="840" cy="830" r="3" fill="#FFFFFF" opacity="0.6"/>
+    <circle cx="500" cy="140" r="2" fill="#FFFFFF" opacity="0.4"/>
+    <circle cx="900" cy="500" r="2" fill="#FFFFFF" opacity="0.4"/>
+    <circle cx="130" cy="600" r="3" fill="#FFFFFF" opacity="0.5"/>
+    <!-- Layer 2: 궤도 원 -->
+    <circle cx="512" cy="550" r="280" fill="none" stroke="#60A5FA" stroke-width="10" opacity="0.35"/>
+    <circle cx="512" cy="550" r="200" fill="none" stroke="#60A5FA" stroke-width="8" opacity="0.25"/>
+    <!-- Layer 2: 우주인 캐릭터 실루엣 -->
+    <!-- 헬멧 -->
+    <circle cx="512" cy="340" r="90" fill="#4B5563"/>
+    <!-- 헬멧 바이저 -->
+    <ellipse cx="512" cy="335" rx="60" ry="50" fill="#60A5FA" opacity="0.8"/>
+    <!-- 바이저 반사 -->
+    <ellipse cx="495" cy="318" rx="22" ry="18" fill="#BFDBFE" opacity="0.6" transform="rotate(-20 495 318)"/>
+    <!-- 몸통 -->
+    <rect x="432" y="420" width="160" height="130" rx="20" fill="#374151"/>
+    <!-- 어깨 패드 -->
+    <ellipse cx="420" cy="445" rx="38" ry="28" fill="#4B5563"/>
+    <ellipse cx="604" cy="445" rx="38" ry="28" fill="#4B5563"/>
+    <!-- 배낭 (산소통) -->
+    <rect x="470" y="430" width="80" height="60" rx="10" fill="#6B7280"/>
+    <!-- 제어판 -->
+    <rect x="472" y="448" width="80" height="48" rx="8" fill="#1F2937"/>
+    <circle cx="492" cy="464" r="8" fill="#FDE68A"/>
+    <circle cx="514" cy="464" r="8" fill="#60A5FA"/>
+    <circle cx="536" cy="464" r="8" fill="#34D399"/>
+    <rect x="486" y="479" width="52" height="8" rx="4" fill="#374151"/>
+    <!-- 팔 -->
+    <path d="M 432 445 Q 380 480 360 540" fill="none" stroke="#374151" stroke-width="32" stroke-linecap="round"/>
+    <circle cx="352" cy="555" r="22" fill="#4B5563"/>
+    <path d="M 604 445 Q 656 480 676 540" fill="none" stroke="#374151" stroke-width="32" stroke-linecap="round"/>
+    <circle cx="684" cy="555" r="22" fill="#4B5563"/>
+    <!-- 다리 -->
+    <path d="M 470 548 Q 460 620 455 680" fill="none" stroke="#374151" stroke-width="35" stroke-linecap="round"/>
+    <path d="M 554 548 Q 564 620 569 680" fill="none" stroke="#374151" stroke-width="35" stroke-linecap="round"/>
+    <!-- 부츠 -->
+    <ellipse cx="452" cy="690" rx="32" ry="22" fill="#4B5563"/>
+    <ellipse cx="572" cy="690" rx="32" ry="22" fill="#4B5563"/>
+    <!-- Layer 3: 궤도 위 행성 -->
+    <circle cx="512" cy="270" r="50" fill="url(#planet10)"/>
+    <!-- 별 장식 -->
+    <path d="M 800 760 L 810 785 L 835 795 L 810 805 L 800 830 L 790 805 L 765 795 L 790 785 Z" fill="#FDE68A" opacity="0.9"/>
+    <path d="M 200 280 L 208 298 L 226 306 L 208 314 L 200 332 L 192 314 L 174 306 L 192 298 Z" fill="#FDE68A" opacity="0.7"/>
+  </g>
+</svg>

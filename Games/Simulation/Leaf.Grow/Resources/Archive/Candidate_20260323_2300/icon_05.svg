@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg05" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#78350F"/>
+      <stop offset="100%" stop-color="#1C0A00"/>
+    </linearGradient>
+    <radialGradient id="sun05" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FEF3C7"/>
+      <stop offset="60%" stop-color="#FDE68A"/>
+      <stop offset="100%" stop-color="#F59E0B"/>
+    </radialGradient>
+    <linearGradient id="leaf05" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#16A34A"/>
+      <stop offset="100%" stop-color="#A7F3D0"/>
+    </linearGradient>
+    <clipPath id="clip05">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg05)"/>
+  <!-- 대기 글로우 -->
+  <ellipse cx="512" cy="350" rx="400" ry="280" fill="#92400E" opacity="0.3"/>
+
+  <!-- Layer 2: 태양 -->
+  <circle cx="512" cy="320" r="140" fill="url(#sun05)"/>
+  <!-- 태양 광선 -->
+  <line x1="512" y1="150" x2="512" y2="110" stroke="#FDE68A" stroke-width="18" stroke-linecap="round"/>
+  <line x1="620" y1="185" x2="647" y2="152" stroke="#FDE68A" stroke-width="18" stroke-linecap="round"/>
+  <line x1="680" y1="280" x2="718" y2="268" stroke="#FDE68A" stroke-width="18" stroke-linecap="round"/>
+  <line x1="680" y1="385" x2="718" y2="397" stroke="#FDE68A" stroke-width="18" stroke-linecap="round"/>
+  <line x1="620" y1="458" x2="648" y2="490" stroke="#FDE68A" stroke-width="18" stroke-linecap="round"/>
+  <line x1="404" y1="185" x2="377" y2="152" stroke="#FDE68A" stroke-width="18" stroke-linecap="round"/>
+  <line x1="344" y1="280" x2="306" y2="268" stroke="#FDE68A" stroke-width="18" stroke-linecap="round"/>
+  <line x1="344" y1="385" x2="306" y2="397" stroke="#FDE68A" stroke-width="18" stroke-linecap="round"/>
+  <line x1="404" y1="458" x2="376" y2="490" stroke="#FDE68A" stroke-width="18" stroke-linecap="round"/>
+
+  <!-- 광합성 화살표 (빛→잎) -->
+  <path d="M 512 470 L 512 550" stroke="#FDE68A" stroke-width="10" stroke-dasharray="12 8" stroke-linecap="round" fill="none" opacity="0.7"/>
+  <polygon points="495,540 512,575 529,540" fill="#FDE68A" opacity="0.7"/>
+
+  <!-- Layer 2: 식물 -->
+  <path d="M 512 870 L 512 590" stroke="#22C55E" stroke-width="32" fill="none" stroke-linecap="round"/>
+  <!-- 잎사귀 왼쪽 -->
+  <path d="M 507 700 Q 360 640 310 540 Q 410 565 507 670" fill="url(#leaf05)" stroke="#16A34A" stroke-width="10"/>
+  <!-- 잎사귀 오른쪽 -->
+  <path d="M 517 660 Q 665 595 720 495 Q 618 522 517 630" fill="url(#leaf05)" stroke="#16A34A" stroke-width="10"/>
+  <!-- 작은 새잎 -->
+  <path d="M 512 610 Q 435 575 415 520 Q 468 538 512 580" fill="#A7F3D0" stroke="#22C55E" stroke-width="8"/>
+
+  <!-- 흙 -->
+  <rect x="0" y="850" width="1024" height="174" fill="#2D1500" clip-path="url(#clip05)"/>
+  <ellipse cx="512" cy="860" rx="300" ry="30" fill="#3D2000" opacity="0.8"/>
+</svg>

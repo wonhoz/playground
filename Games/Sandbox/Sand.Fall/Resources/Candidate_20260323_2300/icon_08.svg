@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg08" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#B45309"/>
+      <stop offset="100%" stop-color="#92400E"/>
+    </linearGradient>
+    <linearGradient id="sky08" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#7DD3FC" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#7DD3FC" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="sand08" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FDE68A"/>
+      <stop offset="100%" stop-color="#D97706"/>
+    </linearGradient>
+    <clipPath id="clip08">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg08)"/>
+  <g clip-path="url(#clip08)">
+    <!-- 하늘 그라데이션 -->
+    <rect width="1024" height="600" rx="0" fill="url(#sky08)"/>
+    <!-- Layer 2: 모래성 구조 -->
+    <!-- 성 기초 지면 -->
+    <rect x="150" y="720" width="724" height="160" rx="12" fill="#D97706" opacity="0.90"/>
+    <!-- 성 기초 레이어 -->
+    <rect x="200" y="660" width="624" height="80" rx="8" fill="url(#sand08)" opacity="0.95"/>
+    <!-- 성 중앙 타워 -->
+    <rect x="380" y="400" width="264" height="280" rx="8" fill="url(#sand08)" opacity="0.95"/>
+    <!-- 중앙 타워 총안 (병합구) -->
+    <rect x="380" y="376" width="54" height="44" rx="6" fill="url(#sand08)"/>
+    <rect x="454" y="376" width="54" height="44" rx="6" fill="url(#sand08)"/>
+    <rect x="528" y="376" width="54" height="44" rx="6" fill="url(#sand08)"/>
+    <rect x="602" y="376" width="42" height="44" rx="6" fill="url(#sand08)"/>
+    <!-- 좌측 타워 -->
+    <rect x="240" y="480" width="160" height="200" rx="8" fill="url(#sand08)" opacity="0.90"/>
+    <rect x="240" y="456" width="40" height="42" rx="5" fill="url(#sand08)" opacity="0.90"/>
+    <rect x="290" y="456" width="40" height="42" rx="5" fill="url(#sand08)" opacity="0.90"/>
+    <rect x="340" y="456" width="40" height="42" rx="5" fill="url(#sand08)" opacity="0.90"/>
+    <!-- 우측 타워 -->
+    <rect x="624" y="480" width="160" height="200" rx="8" fill="url(#sand08)" opacity="0.90"/>
+    <rect x="624" y="456" width="40" height="42" rx="5" fill="url(#sand08)" opacity="0.90"/>
+    <rect x="674" y="456" width="40" height="42" rx="5" fill="url(#sand08)" opacity="0.90"/>
+    <rect x="724" y="456" width="40" height="42" rx="5" fill="url(#sand08)" opacity="0.90"/>
+    <!-- 성문 -->
+    <path d="M456 680 L456 560 Q456 530 512 530 Q568 530 568 560 L568 680 Z"
+          fill="#78350F" opacity="0.80"/>
+    <!-- Layer 3: 모래 입자 디테일 -->
+    <circle cx="320" cy="500" r="8" fill="#FDE68A" opacity="0.70"/>
+    <circle cx="700" cy="510" r="8" fill="#FDE68A" opacity="0.70"/>
+    <circle cx="512" cy="430" r="6" fill="#FDE68A" opacity="0.60"/>
+    <!-- 그림자 -->
+    <ellipse cx="512" cy="878" rx="280" ry="30" fill="#78350F" opacity="0.35"/>
+    <!-- 주변 모래 알갱이 -->
+    <circle cx="220" cy="720" r="6" fill="#FDE68A" opacity="0.65"/>
+    <circle cx="800" cy="730" r="7" fill="#FDE68A" opacity="0.60"/>
+    <circle cx="180" cy="760" r="5" fill="#FBBF24" opacity="0.55"/>
+    <circle cx="840" cy="750" r="5" fill="#FBBF24" opacity="0.50"/>
+    <!-- 창문 -->
+    <rect x="430" y="500" width="36" height="48" rx="18" fill="#78350F" opacity="0.60"/>
+    <rect x="560" y="500" width="36" height="48" rx="18" fill="#78350F" opacity="0.60"/>
+    <rect x="280" y="530" width="28" height="40" rx="14" fill="#78350F" opacity="0.50"/>
+    <rect x="660" y="530" width="28" height="40" rx="14" fill="#78350F" opacity="0.50"/>
+  </g>
+</svg>

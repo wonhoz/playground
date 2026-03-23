@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs>
+    <radialGradient id="bg10" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#881337"/>
+      <stop offset="100%" stop-color="#4C0519"/>
+    </radialGradient>
+    <clipPath id="clip10">
+      <rect x="0" y="0" width="1024" height="1024" rx="190"/>
+    </clipPath>
+    <filter id="glow10" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="20" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glow10sm" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <linearGradient id="blade10" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F9A8D4"/>
+      <stop offset="60%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#FDA4AF"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" fill="url(#bg10)" rx="190"/>
+
+  <g clip-path="url(#clip10)">
+    <!-- X 뒤쪽 글로우 (대형) -->
+    <g filter="url(#glow10)" opacity="0.5">
+      <line x1="220" y1="220" x2="800" y2="800" stroke="#F9A8D4" stroke-width="160" stroke-linecap="round"/>
+      <line x1="800" y1="220" x2="220" y2="800" stroke="#F9A8D4" stroke-width="160" stroke-linecap="round"/>
+    </g>
+
+    <!-- X 메인 선 -->
+    <line x1="240" y1="240" x2="782" y2="782" stroke="#F9A8D4" stroke-width="90" stroke-linecap="round"/>
+    <line x1="782" y1="240" x2="240" y2="782" stroke="#F9A8D4" stroke-width="90" stroke-linecap="round"/>
+
+    <!-- X 하이라이트 -->
+    <line x1="240" y1="240" x2="782" y2="782" stroke="#FFFFFF" stroke-width="28" stroke-linecap="round" opacity="0.7"/>
+    <line x1="782" y1="240" x2="240" y2="782" stroke="#FFFFFF" stroke-width="28" stroke-linecap="round" opacity="0.7"/>
+
+    <!-- 칼날 (대각선으로 X를 관통) -->
+    <g filter="url(#glow10sm)">
+      <!-- 칼몸 -->
+      <polygon points="680,160 720,200 360,820 300,810 280,760" fill="url(#blade10)" opacity="0.95"/>
+      <!-- 칼날 엣지 -->
+      <line x1="700" y1="180" x2="340" y2="800" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" opacity="0.8"/>
+      <!-- 손잡이 (가드) -->
+      <rect x="295" y="740" width="130" height="28" rx="8" fill="#F9A8D4" transform="rotate(-52 360 754)"/>
+      <!-- 칼자루 -->
+      <rect x="270" y="780" width="60" height="100" rx="14" fill="#F9A8D4" transform="rotate(-52 300 830)"/>
+    </g>
+
+    <!-- 슬라이스 파편 -->
+    <g filter="url(#glow10sm)" fill="#F9A8D4" opacity="0.85">
+      <circle cx="280" cy="280" r="22"/>
+      <circle cx="760" cy="760" r="22"/>
+      <circle cx="760" cy="270" r="18"/>
+      <circle cx="270" cy="760" r="18"/>
+    </g>
+
+    <!-- GAME OVER 텍스트 -->
+    <text x="512" y="960" font-family="Arial Black, sans-serif" font-size="68" font-weight="900"
+          fill="#F9A8D4" text-anchor="middle" dominant-baseline="auto" opacity="0.9">GAME OVER</text>
+  </g>
+</svg>

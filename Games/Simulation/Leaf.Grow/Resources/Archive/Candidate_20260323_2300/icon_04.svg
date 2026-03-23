@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg04" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0369A1"/>
+      <stop offset="100%" stop-color="#0C1A2E"/>
+    </linearGradient>
+    <linearGradient id="water04" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#7DD3FC"/>
+      <stop offset="100%" stop-color="#0EA5E9"/>
+    </linearGradient>
+    <linearGradient id="plant04" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#16A34A"/>
+      <stop offset="100%" stop-color="#A7F3D0"/>
+    </linearGradient>
+    <clipPath id="clip04">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg04)"/>
+  <!-- 흙 -->
+  <rect x="0" y="750" width="1024" height="274" fill="#3D1F00" opacity="0.85" clip-path="url(#clip04)"/>
+  <!-- 흙 질감 -->
+  <ellipse cx="300" cy="780" rx="60" ry="15" fill="#2D1500" opacity="0.5"/>
+  <ellipse cx="700" cy="795" rx="80" ry="18" fill="#2D1500" opacity="0.5"/>
+
+  <!-- Layer 2: 물뿌리개 -->
+  <rect x="580" y="220" width="220" height="150" rx="30" fill="url(#water04)" stroke="#BAE6FD" stroke-width="12"/>
+  <!-- 물뿌리개 손잡이 -->
+  <path d="M 680 220 Q 720 150 800 160 Q 830 165 830 200" stroke="#7DD3FC" stroke-width="22" fill="none" stroke-linecap="round"/>
+  <!-- 주둥이 -->
+  <path d="M 580 290 Q 450 310 400 330 L 390 370 Q 440 355 580 340 Z" fill="#7DD3FC" stroke="#BAE6FD" stroke-width="8"/>
+
+  <!-- 물방울들 -->
+  <path d="M 340 400 Q 328 420 328 432 Q 328 452 340 460 Q 352 468 364 460 Q 376 452 376 432 Q 376 420 364 400 Q 352 378 340 400 Z" fill="#7DD3FC" opacity="0.9"/>
+  <path d="M 380 450 Q 368 470 368 482 Q 368 502 380 510 Q 392 518 404 510 Q 416 502 416 482 Q 416 470 404 450 Q 392 428 380 450 Z" fill="#BAE6FD" opacity="0.8"/>
+  <path d="M 310 460 Q 298 480 298 492 Q 298 512 310 520 Q 322 528 334 520 Q 346 512 346 492 Q 346 480 334 460 Q 322 438 310 460 Z" fill="#7DD3FC" opacity="0.75"/>
+  <path d="M 355 510 Q 343 530 343 542 Q 343 562 355 570 Q 367 578 379 570 Q 391 562 391 542 Q 391 530 379 510 Q 367 488 355 510 Z" fill="#BAE6FD" opacity="0.85"/>
+  <path d="M 290 530 Q 278 550 278 562 Q 278 582 290 590 Q 302 598 314 590 Q 326 582 326 562 Q 326 550 314 530 Q 302 508 290 530 Z" fill="#7DD3FC" opacity="0.7"/>
+
+  <!-- Layer 2: 식물 -->
+  <!-- 줄기 -->
+  <path d="M 220 750 L 220 480" stroke="url(#plant04)" stroke-width="30" fill="none" stroke-linecap="round"/>
+  <!-- 잎사귀 왼쪽 -->
+  <path d="M 215 580 Q 120 520 100 440 Q 180 460 215 550" fill="#A7F3D0" stroke="#22C55E" stroke-width="8"/>
+  <!-- 잎사귀 오른쪽 -->
+  <path d="M 225 540 Q 330 480 360 395 Q 278 420 225 510" fill="#A7F3D0" stroke="#22C55E" stroke-width="8"/>
+  <!-- 잎사귀 상단 왼쪽 -->
+  <path d="M 215 490 Q 130 440 115 370 Q 185 390 215 460" fill="#4ADE80" stroke="#22C55E" stroke-width="8"/>
+
+  <!-- Layer 3: 물 흡수 효과 -->
+  <circle cx="220" cy="750" r="50" fill="#7DD3FC" opacity="0.3"/>
+  <circle cx="220" cy="750" r="30" fill="#7DD3FC" opacity="0.4"/>
+</svg>

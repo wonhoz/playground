@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sand.Fall — 아이콘 후보 미리보기</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #0F0A05;
+      color: #E8D5B7;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      min-height: 100vh;
+      padding: 40px 24px 60px;
+    }
+
+    /* ── 헤더 ── */
+    .header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .header h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, #FDE68A 0%, #F59E0B 50%, #D97706 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 10px;
+    }
+
+    .header .subtitle {
+      font-size: 1.05rem;
+      color: #A87C4A;
+      margin-bottom: 18px;
+      letter-spacing: 0.01em;
+    }
+
+    .badge {
+      display: inline-block;
+      background: linear-gradient(135deg, #3D1F00, #5C2E00);
+      border: 1px solid #7C4A1A;
+      color: #FDE68A;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      padding: 6px 18px;
+      border-radius: 999px;
+    }
+
+    /* ── 그리드 ── */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 20px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    /* ── 카드 ── */
+    .card {
+      background: linear-gradient(160deg, #1A1006, #120D05);
+      border: 1px solid #3A2510;
+      border-radius: 16px;
+      padding: 24px 16px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+      cursor: default;
+    }
+
+    .card:hover {
+      transform: scale(1.55);
+      border-color: #F59E0B;
+      box-shadow: 0 16px 48px rgba(245, 158, 11, 0.30), 0 4px 16px rgba(0,0,0,0.60);
+      z-index: 10;
+      position: relative;
+    }
+
+    .card img {
+      width: 120px;
+      height: 120px;
+      border-radius: 22px;
+      display: block;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.50);
+    }
+
+    .card-info {
+      width: 100%;
+      text-align: center;
+    }
+
+    .card-filename {
+      font-family: 'Cascadia Code', 'Consolas', monospace;
+      font-size: 0.72rem;
+      color: #7C5A2E;
+      margin-bottom: 5px;
+      letter-spacing: 0.04em;
+    }
+
+    .card-concept {
+      font-size: 0.82rem;
+      color: #C89A56;
+      font-weight: 600;
+      line-height: 1.35;
+      margin-bottom: 10px;
+    }
+
+    /* ── 팔레트 ── */
+    .palette {
+      display: flex;
+      gap: 7px;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .swatch {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.12);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.40);
+      flex-shrink: 0;
+    }
+
+    /* ── 푸터 ── */
+    .footer {
+      text-align: center;
+      margin-top: 56px;
+      font-size: 0.78rem;
+      color: #4A3018;
+      letter-spacing: 0.04em;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <h1>Sand.Fall</h1>
+    <p class="subtitle">모래 낙하 샌드박스 — 입자 물리 시뮬레이션</p>
+    <span class="badge">아이콘 후보 &nbsp;·&nbsp; 2026-03-24 &nbsp;·&nbsp; 15개</span>
+  </div>
+
+  <div class="grid">
+
+    <!-- 01 -->
+    <div class="card">
+      <img src="icon_01.svg" alt="icon_01"/>
+      <div class="card-info">
+        <div class="card-filename">icon_01.svg</div>
+        <div class="card-concept">모래시계 — 모래 떨어지는 장면</div>
+        <div class="palette">
+          <div class="swatch" style="background:#92400E" title="#92400E"></div>
+          <div class="swatch" style="background:#FDE68A" title="#FDE68A"></div>
+          <div class="swatch" style="background:#FFFFFF" title="#FFFFFF"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 02 -->
+    <div class="card">
+      <img src="icon_02.svg" alt="icon_02"/>
+      <div class="card-info">
+        <div class="card-filename">icon_02.svg</div>
+        <div class="card-concept">모래 알갱이들 쏟아지는 장면</div>
+        <div class="palette">
+          <div class="swatch" style="background:#78350F" title="#78350F"></div>
+          <div class="swatch" style="background:#D97706" title="#D97706"></div>
+          <div class="swatch" style="background:#FDE68A" title="#FDE68A"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 03 -->
+    <div class="card">
+      <img src="icon_03.svg" alt="icon_03"/>
+      <div class="card-info">
+        <div class="card-filename">icon_03.svg</div>
+        <div class="card-concept">모래 / 물 / 불 3원소</div>
+        <div class="palette">
+          <div class="swatch" style="background:#0C4A6E" title="#0C4A6E"></div>
+          <div class="swatch" style="background:#22D3EE" title="#22D3EE"></div>
+          <div class="swatch" style="background:#FDE68A" title="#FDE68A"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 04 -->
+    <div class="card">
+      <img src="icon_04.svg" alt="icon_04"/>
+      <div class="card-info">
+        <div class="card-filename">icon_04.svg</div>
+        <div class="card-concept">손가락으로 모래 그리기</div>
+        <div class="palette">
+          <div class="swatch" style="background:#B45309" title="#B45309"></div>
+          <div class="swatch" style="background:#FDE68A" title="#FDE68A"></div>
+          <div class="swatch" style="background:#FFFFFF" title="#FFFFFF"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 05 -->
+    <div class="card">
+      <img src="icon_05.svg" alt="icon_05"/>
+      <div class="card-info">
+        <div class="card-filename">icon_05.svg</div>
+        <div class="card-concept">픽셀 그리드 + 낙하 입자들</div>
+        <div class="palette">
+          <div class="swatch" style="background:#1F2937" title="#1F2937"></div>
+          <div class="swatch" style="background:#D97706" title="#D97706"></div>
+          <div class="swatch" style="background:#A7F3D0" title="#A7F3D0"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 06 -->
+    <div class="card">
+      <img src="icon_06.svg" alt="icon_06"/>
+      <div class="card-info">
+        <div class="card-filename">icon_06.svg</div>
+        <div class="card-concept">불꽃 입자 시뮬레이션</div>
+        <div class="palette">
+          <div class="swatch" style="background:#1C1917" title="#1C1917"></div>
+          <div class="swatch" style="background:#F97316" title="#F97316"></div>
+          <div class="swatch" style="background:#FDE68A" title="#FDE68A"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 07 -->
+    <div class="card">
+      <img src="icon_07.svg" alt="icon_07"/>
+      <div class="card-info">
+        <div class="card-filename">icon_07.svg</div>
+        <div class="card-concept">물방울 + 흐름</div>
+        <div class="palette">
+          <div class="swatch" style="background:#0369A1" title="#0369A1"></div>
+          <div class="swatch" style="background:#7DD3FC" title="#7DD3FC"></div>
+          <div class="swatch" style="background:#FFFFFF" title="#FFFFFF"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 08 -->
+    <div class="card">
+      <img src="icon_08.svg" alt="icon_08"/>
+      <div class="card-info">
+        <div class="card-filename">icon_08.svg</div>
+        <div class="card-concept">모래성 — 모래로 만든 형태</div>
+        <div class="palette">
+          <div class="swatch" style="background:#92400E" title="#92400E"></div>
+          <div class="swatch" style="background:#FBBF24" title="#FBBF24"></div>
+          <div class="swatch" style="background:#FFFFFF" title="#FFFFFF"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 09 -->
+    <div class="card">
+      <img src="icon_09.svg" alt="icon_09"/>
+      <div class="card-info">
+        <div class="card-filename">icon_09.svg</div>
+        <div class="card-concept">화산 + 용암 흐름 입자</div>
+        <div class="palette">
+          <div class="swatch" style="background:#7F1D1D" title="#7F1D1D"></div>
+          <div class="swatch" style="background:#F97316" title="#F97316"></div>
+          <div class="swatch" style="background:#FDE68A" title="#FDE68A"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 10 -->
+    <div class="card">
+      <img src="icon_10.svg" alt="icon_10"/>
+      <div class="card-info">
+        <div class="card-filename">icon_10.svg</div>
+        <div class="card-concept">사막 + 모래 언덕</div>
+        <div class="palette">
+          <div class="swatch" style="background:#451A03" title="#451A03"></div>
+          <div class="swatch" style="background:#D97706" title="#D97706"></div>
+          <div class="swatch" style="background:#FDE68A" title="#FDE68A"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 11 -->
+    <div class="card">
+      <img src="icon_11.svg" alt="icon_11"/>
+      <div class="card-info">
+        <div class="card-filename">icon_11.svg</div>
+        <div class="card-concept">레이어 스택 — 퇴적층</div>
+        <div class="palette">
+          <div class="swatch" style="background:#3F6212" title="#3F6212"></div>
+          <div class="swatch" style="background:#86EFAC" title="#86EFAC"></div>
+          <div class="swatch" style="background:#FDE68A" title="#FDE68A"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 12 -->
+    <div class="card">
+      <img src="icon_12.svg" alt="icon_12"/>
+      <div class="card-info">
+        <div class="card-filename">icon_12.svg</div>
+        <div class="card-concept">마법사 지팡이 + 입자</div>
+        <div class="palette">
+          <div class="swatch" style="background:#4338CA" title="#4338CA"></div>
+          <div class="swatch" style="background:#A5B4FC" title="#A5B4FC"></div>
+          <div class="swatch" style="background:#FDE68A" title="#FDE68A"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 13 -->
+    <div class="card">
+      <img src="icon_13.svg" alt="icon_13"/>
+      <div class="card-info">
+        <div class="card-filename">icon_13.svg</div>
+        <div class="card-concept">시험관 + 화학 반응 입자</div>
+        <div class="palette">
+          <div class="swatch" style="background:#065F46" title="#065F46"></div>
+          <div class="swatch" style="background:#6EE7B7" title="#6EE7B7"></div>
+          <div class="swatch" style="background:#FDE68A" title="#FDE68A"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 14 -->
+    <div class="card">
+      <img src="icon_14.svg" alt="icon_14"/>
+      <div class="card-info">
+        <div class="card-filename">icon_14.svg</div>
+        <div class="card-concept">원자 + 전자 궤도</div>
+        <div class="palette">
+          <div class="swatch" style="background:#0F172A" title="#0F172A"></div>
+          <div class="swatch" style="background:#60A5FA" title="#60A5FA"></div>
+          <div class="swatch" style="background:#F472B6" title="#F472B6"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 15 -->
+    <div class="card">
+      <img src="icon_15.svg" alt="icon_15"/>
+      <div class="card-info">
+        <div class="card-filename">icon_15.svg</div>
+        <div class="card-concept">삽 + 모래</div>
+        <div class="palette">
+          <div class="swatch" style="background:#78350F" title="#78350F"></div>
+          <div class="swatch" style="background:#FBBF24" title="#FBBF24"></div>
+          <div class="swatch" style="background:#FFFFFF" title="#FFFFFF"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    Sand.Fall &nbsp;·&nbsp; Candidate_20260323_2300 &nbsp;·&nbsp; 15 icons
+  </div>
+
+</body>
+</html>

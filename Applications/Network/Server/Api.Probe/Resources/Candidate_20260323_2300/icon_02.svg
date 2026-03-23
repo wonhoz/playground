@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg02" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1E3A8A"/>
+      <stop offset="100%" stop-color="#1E40AF"/>
+    </linearGradient>
+    <clipPath id="clip02"><rect width="1024" height="1024" rx="190"/></clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg02)"/>
+  <g clip-path="url(#clip02)">
+    <!-- Layer 2: 요청 버블 (왼쪽 위) -->
+    <rect x="160" y="220" width="500" height="200" rx="40" fill="#2563EB"/>
+    <polygon points="200,420 160,490 280,420" fill="#2563EB"/>
+    <!-- 요청 버블 텍스트 -->
+    <text x="290" y="305" font-family="'Courier New', monospace" font-weight="700" font-size="44" fill="#FDE68A" text-anchor="middle" dominant-baseline="middle">POST</text>
+    <text x="290" y="365" font-family="'Courier New', monospace" font-size="32" fill="#BFDBFE" text-anchor="middle" dominant-baseline="middle">/api/users</text>
+    <!-- Layer 2: 응답 버블 (오른쪽 아래) -->
+    <rect x="364" y="560" width="500" height="200" rx="40" fill="#1D4ED8"/>
+    <polygon points="824,560 864,490 744,560" fill="#1D4ED8"/>
+    <!-- 응답 버블 텍스트 -->
+    <text x="614" y="645" font-family="'Courier New', monospace" font-weight="700" font-size="44" fill="#60A5FA" text-anchor="middle" dominant-baseline="middle">200 OK</text>
+    <text x="614" y="705" font-family="'Courier New', monospace" font-size="28" fill="#93C5FD" text-anchor="middle" dominant-baseline="middle">{"id": 42}</text>
+    <!-- Layer 3: 화살표 연결 -->
+    <line x1="512" y1="450" x2="512" y2="540" stroke="#60A5FA" stroke-width="14" stroke-linecap="round" stroke-dasharray="20 12"/>
+    <polygon points="512,560 482,510 542,510" fill="#60A5FA"/>
+  </g>
+</svg>

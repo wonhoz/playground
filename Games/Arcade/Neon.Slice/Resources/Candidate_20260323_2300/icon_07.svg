@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs>
+    <radialGradient id="bg07" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#374151"/>
+      <stop offset="100%" stop-color="#1F2937"/>
+    </radialGradient>
+    <clipPath id="clip07">
+      <rect x="0" y="0" width="1024" height="1024" rx="190"/>
+    </clipPath>
+    <filter id="glow07" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="22" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <linearGradient id="trail1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F472B6" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#F472B6" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="trail2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#22D3EE" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#22D3EE" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="trail3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#A78BFA" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#A78BFA" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="trail4" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#86EFAC" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#86EFAC" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="trail5" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FDE68A" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#FDE68A" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="trail6" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FB7185" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#FB7185" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" fill="url(#bg07)" rx="190"/>
+
+  <g clip-path="url(#clip07)">
+    <!-- 레인보우 슬라이스 잔상 궤적들 (대각선/곡선) -->
+    <g filter="url(#glow07)">
+      <!-- 주 궤적 - 핑크 -->
+      <path d="M150,700 Q400,200 880,300" stroke="url(#trail1)" stroke-width="70" fill="none" stroke-linecap="round" opacity="0.9"/>
+      <!-- 보조 궤적 - 시안 -->
+      <path d="M180,730 Q420,230 900,330" stroke="url(#trail2)" stroke-width="45" fill="none" stroke-linecap="round" opacity="0.8"/>
+      <!-- 보조 궤적 - 퍼플 -->
+      <path d="M140,670 Q380,170 860,270" stroke="url(#trail3)" stroke-width="30" fill="none" stroke-linecap="round" opacity="0.7"/>
+    </g>
+
+    <!-- 2번째 궤적 세트 -->
+    <g filter="url(#glow07)">
+      <path d="M120,350 Q500,600 880,700" stroke="url(#trail4)" stroke-width="55" fill="none" stroke-linecap="round" opacity="0.8"/>
+      <path d="M150,380 Q520,630 900,730" stroke="url(#trail5)" stroke-width="35" fill="none" stroke-linecap="round" opacity="0.7"/>
+      <path d="M100,320 Q480,570 860,670" stroke="url(#trail6)" stroke-width="22" fill="none" stroke-linecap="round" opacity="0.6"/>
+    </g>
+
+    <!-- 교차점 (슬라이스 지점) 스파크 -->
+    <g filter="url(#glow07)">
+      <circle cx="512" cy="488" r="55" fill="#FFFFFF" opacity="0.95"/>
+      <circle cx="512" cy="488" r="35" fill="#FFFFFF"/>
+    </g>
+
+    <!-- 주변 파티클 -->
+    <g fill="#FFFFFF" opacity="0.8">
+      <circle cx="300" cy="430" r="10"/>
+      <circle cx="720" cy="360" r="8"/>
+      <circle cx="640" cy="600" r="12"/>
+      <circle cx="380" cy="560" r="7"/>
+    </g>
+    <g fill="#F472B6" opacity="0.9">
+      <circle cx="200" cy="280" r="14"/>
+      <circle cx="830" cy="310" r="11"/>
+    </g>
+    <g fill="#22D3EE" opacity="0.9">
+      <circle cx="750" cy="680" r="13"/>
+      <circle cx="260" cy="650" r="10"/>
+    </g>
+  </g>
+</svg>

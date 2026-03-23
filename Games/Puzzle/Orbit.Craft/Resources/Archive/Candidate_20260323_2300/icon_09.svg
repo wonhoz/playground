@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg09" cx="50%" cy="40%" r="65%">
+      <stop offset="0%" stop-color="#A05E1A"/>
+      <stop offset="100%" stop-color="#78350F"/>
+    </radialGradient>
+    <radialGradient id="planet09" cx="35%" cy="30%" r="65%">
+      <stop offset="0%" stop-color="#FDE68A"/>
+      <stop offset="100%" stop-color="#D97706"/>
+    </radialGradient>
+    <radialGradient id="gear09" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#FCD34D"/>
+      <stop offset="100%" stop-color="#B45309"/>
+    </radialGradient>
+    <clipPath id="clip09">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg09)"/>
+  <g clip-path="url(#clip09)">
+    <!-- 별 -->
+    <circle cx="150" cy="180" r="2" fill="#FFFFFF" opacity="0.4"/>
+    <circle cx="820" cy="200" r="3" fill="#FFFFFF" opacity="0.5"/>
+    <circle cx="180" cy="840" r="2" fill="#FFFFFF" opacity="0.4"/>
+    <circle cx="850" cy="800" r="2" fill="#FFFFFF" opacity="0.5"/>
+    <!-- Layer 2: 부품들 (렌치, 볼트, 연결선) -->
+    <!-- 연결선들 -->
+    <line x1="300" y1="400" x2="450" y2="512" stroke="#F59E0B" stroke-width="10" opacity="0.4" stroke-linecap="round"/>
+    <line x1="724" y1="400" x2="574" y2="512" stroke="#F59E0B" stroke-width="10" opacity="0.4" stroke-linecap="round"/>
+    <line x1="300" y1="624" x2="450" y2="512" stroke="#F59E0B" stroke-width="10" opacity="0.4" stroke-linecap="round"/>
+    <line x1="724" y1="624" x2="574" y2="512" stroke="#F59E0B" stroke-width="10" opacity="0.4" stroke-linecap="round"/>
+    <!-- 부품 1: 기어/톱니 (좌상) -->
+    <circle cx="280" cy="380" r="55" fill="url(#gear09)"/>
+    <circle cx="280" cy="380" r="38" fill="#78350F"/>
+    <circle cx="280" cy="380" r="20" fill="url(#gear09)"/>
+    <!-- 톱니 -->
+    <rect x="272" y="318" width="16" height="22" rx="4" fill="url(#gear09)"/>
+    <rect x="272" y="420" width="16" height="22" rx="4" fill="url(#gear09)"/>
+    <rect x="318" y="372" width="22" height="16" rx="4" fill="url(#gear09)"/>
+    <rect x="220" y="372" width="22" height="16" rx="4" fill="url(#gear09)"/>
+    <!-- 부품 2: 육각 볼트 (우상) -->
+    <polygon points="744,340 774,357 774,391 744,408 714,391 714,357" fill="url(#gear09)"/>
+    <circle cx="744" cy="374" r="18" fill="#78350F"/>
+    <!-- 부품 3: 작은 위성 (좌하) -->
+    <circle cx="280" cy="644" r="38" fill="#F59E0B"/>
+    <ellipse cx="280" cy="644" rx="58" ry="15" fill="none" stroke="#FDE68A" stroke-width="8" opacity="0.7" transform="rotate(-20 280 644)"/>
+    <!-- 부품 4: 소행성 (우하) -->
+    <path d="M 700 620 Q 730 600 760 615 Q 785 632 778 660 Q 770 685 745 692 Q 718 698 700 680 Q 682 662 700 620 Z" fill="#D97706"/>
+    <circle cx="728" cy="645" r="10" fill="#92400E" opacity="0.6"/>
+    <circle cx="748" cy="660" r="7" fill="#92400E" opacity="0.5"/>
+    <!-- Layer 2: 중앙 행성 (조립 완성) -->
+    <circle cx="512" cy="512" r="115" fill="url(#planet09)"/>
+    <!-- 행성 표면 디테일 -->
+    <ellipse cx="488" cy="490" rx="75" ry="25" fill="#D97706" opacity="0.4" transform="rotate(-20 488 490)"/>
+    <!-- 완성 체크 표시 -->
+    <circle cx="512" cy="512" r="118" fill="none" stroke="#FFFFFF" stroke-width="8" opacity="0.4"/>
+    <!-- Layer 3: 공구 렌치 -->
+    <path d="M 580 380 L 600 360 Q 620 340 640 345 L 625 360 L 640 375 Q 645 395 625 400 L 600 400 Z" fill="#FFFFFF" opacity="0.7"/>
+    <line x1="580" y1="380" x2="540" y2="420" stroke="#FFFFFF" stroke-width="12" stroke-linecap="round" opacity="0.7"/>
+  </g>
+</svg>

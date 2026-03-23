@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg06" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#9D174D"/>
+      <stop offset="100%" stop-color="#831843"/>
+    </linearGradient>
+    <linearGradient id="sky06" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1E1B4B" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#4C1D95" stop-opacity="0.4"/>
+    </linearGradient>
+    <clipPath id="clip06">
+      <rect x="0" y="0" width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg06)"/>
+  <rect width="1024" height="1024" rx="190" fill="url(#sky06)"/>
+
+  <!-- 별 장식 -->
+  <g fill="#FDE68A" opacity="0.6">
+    <circle cx="150" cy="180" r="8"/>
+    <circle cx="300" cy="120" r="5"/>
+    <circle cx="700" cy="150" r="7"/>
+    <circle cx="860" cy="200" r="5"/>
+    <circle cx="900" cy="120" r="9"/>
+    <circle cx="80" cy="300" r="4"/>
+  </g>
+
+  <!-- 지평선 -->
+  <rect x="0" y="720" width="1024" height="304" rx="0" fill="#6B0F3A" clip-path="url(#clip06)"/>
+  <rect x="0" y="718" width="1024" height="14" fill="#F472B6" opacity="0.5"/>
+
+  <!-- 에펠탑 실루엣 (중앙) -->
+  <g fill="#F472B6" clip-path="url(#clip06)">
+    <!-- 탑 상단 첨탑 -->
+    <polygon points="512,160 518,300 506,300"/>
+    <!-- 상단 몸체 -->
+    <polygon points="506,300 518,300 534,420 490,420"/>
+    <!-- 1층 아치 -->
+    <polygon points="490,420 534,420 570,520 454,520"/>
+    <!-- 1층 트러스 -->
+    <rect x="458" y="480" width="108" height="16" rx="4"/>
+    <!-- 2층 -->
+    <polygon points="454,520 570,520 610,640 414,640"/>
+    <!-- 2층 트러스 -->
+    <rect x="422" y="600" width="180" height="18" rx="4"/>
+    <!-- 다리 왼쪽 -->
+    <polygon points="414,640 460,640 430,720 380,720"/>
+    <!-- 다리 오른쪽 -->
+    <polygon points="570,640 610,640 644,720 594,720"/>
+    <!-- 기초 왼쪽 -->
+    <rect x="370" y="720" width="68" height="20" rx="4"/>
+    <!-- 기초 오른쪽 -->
+    <rect x="586" y="720" width="68" height="20" rx="4"/>
+  </g>
+
+  <!-- 피사탑 실루엣 (우측) -->
+  <g fill="#F9A8D4" opacity="0.55" clip-path="url(#clip06)">
+    <rect x="720" y="440" width="80" height="280" rx="10"/>
+    <!-- 층 선 -->
+    <rect x="715" y="480" width="90" height="10" rx="4"/>
+    <rect x="715" y="530" width="90" height="10" rx="4"/>
+    <rect x="715" y="580" width="90" height="10" rx="4"/>
+    <rect x="715" y="630" width="90" height="10" rx="4"/>
+    <rect x="715" y="680" width="90" height="10" rx="4"/>
+    <!-- 상단 돔 -->
+    <ellipse cx="760" cy="440" rx="42" ry="22"/>
+    <!-- 꼭대기 -->
+    <rect x="754" y="400" width="12" height="42" rx="4"/>
+  </g>
+
+  <!-- 황금 달 -->
+  <path d="M 200 250 Q 240 220 250 270 Q 220 310 180 290 Q 160 260 200 250 Z" fill="#FDE68A"/>
+
+  <!-- 반사 효과 (지평선 아래) -->
+  <g clip-path="url(#clip06)" opacity="0.2">
+    <polygon points="512,720 518,800 506,800" fill="#F472B6"/>
+    <polygon points="506,800 518,800 524,860 500,860" fill="#F472B6"/>
+  </g>
+</svg>

@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg14" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4D7C0F"/>
+      <stop offset="100%" stop-color="#3F6212"/>
+    </linearGradient>
+    <linearGradient id="rocket14" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#D9F99D"/>
+      <stop offset="100%" stop-color="#86EFAC"/>
+    </linearGradient>
+    <linearGradient id="flame14" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FDE68A"/>
+      <stop offset="100%" stop-color="#F59E0B" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="glow14">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <clipPath id="clip14">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg14)"/>
+  <g clip-path="url(#clip14)">
+    <!-- 속도감 배경 라인들 (대각선) -->
+    <line x1="0" y1="800" x2="600" y2="200" stroke="#86EFAC" stroke-width="2" opacity="0.1"/>
+    <line x1="100" y1="900" x2="700" y2="300" stroke="#86EFAC" stroke-width="2" opacity="0.1"/>
+    <line x1="200" y1="1000" x2="800" y2="400" stroke="#86EFAC" stroke-width="2" opacity="0.1"/>
+    <line x1="300" y1="1024" x2="900" y2="424" stroke="#86EFAC" stroke-width="2" opacity="0.1"/>
+
+    <!-- Layer 2: 로켓 (대각선 비행 - 좌하→우상) -->
+    <g transform="translate(512, 512) rotate(-50)">
+      <!-- 엔진 분사 -->
+      <g filter="url(#glow14)">
+        <ellipse cx="0" cy="190" rx="30" ry="80" fill="url(#flame14)"/>
+        <ellipse cx="0" cy="200" rx="18" ry="50" fill="#FFFFFF" opacity="0.7"/>
+      </g>
+      <!-- 로켓 본체 -->
+      <ellipse cx="0" cy="0" rx="55" ry="130" fill="url(#rocket14)"/>
+      <!-- 로켓 노즈 -->
+      <ellipse cx="0" cy="-130" rx="55" ry="40" fill="#86EFAC"/>
+      <polygon points="0,-170 -55,-130 55,-130" fill="#A3E635"/>
+      <!-- 날개 좌 -->
+      <polygon points="-55,60 -120,140 -55,100" fill="#65A30D"/>
+      <!-- 날개 우 -->
+      <polygon points="55,60 120,140 55,100" fill="#65A30D"/>
+      <!-- 조종창 -->
+      <ellipse cx="0" cy="-50" rx="28" ry="35" fill="#1E3A8A"/>
+      <ellipse cx="0" cy="-50" rx="28" ry="35" fill="none" stroke="#86EFAC" stroke-width="4"/>
+      <!-- 광택 -->
+      <ellipse cx="-20" cy="-80" rx="12" ry="20" fill="#FFFFFF" opacity="0.3"/>
+    </g>
+
+    <!-- 로켓 잔상 궤적 -->
+    <line x1="200" y1="820" x2="450" y2="570" stroke="#86EFAC" stroke-width="8" stroke-linecap="round" opacity="0.3"/>
+    <line x1="220" y1="840" x2="430" y2="590" stroke="#FDE68A" stroke-width="4" stroke-linecap="round" opacity="0.2"/>
+
+    <!-- Layer 3: 총알들 — 양쪽에서 날아오는데 로켓은 사이를 통과 -->
+    <!-- 위쪽 총알 그룹 -->
+    <g filter="url(#glow14)">
+      <ellipse cx="720" cy="240" rx="13" ry="24" fill="#FDE68A" transform="rotate(-50 720 240)"/>
+      <ellipse cx="800" cy="180" rx="13" ry="24" fill="#FDE68A" transform="rotate(-50 800 180)"/>
+      <ellipse cx="840" cy="280" rx="13" ry="24" fill="#FDE68A" transform="rotate(-50 840 280)"/>
+      <ellipse cx="760" cy="340" rx="13" ry="24" fill="#FDE68A" transform="rotate(-50 760 340)"/>
+    </g>
+    <!-- 아래쪽 총알 그룹 -->
+    <g filter="url(#glow14)">
+      <ellipse cx="300" cy="780" rx="13" ry="24" fill="#FDE68A" transform="rotate(-50 300 780)"/>
+      <ellipse cx="220" cy="840" rx="13" ry="24" fill="#FDE68A" transform="rotate(-50 220 840)"/>
+      <ellipse cx="180" cy="740" rx="13" ry="24" fill="#FDE68A" transform="rotate(-50 180 740)"/>
+      <ellipse cx="260" cy="680" rx="13" ry="24" fill="#FDE68A" transform="rotate(-50 260 680)"/>
+    </g>
+    <!-- 통과 경로 화살표 힌트 -->
+    <line x1="350" y1="660" x2="660" y2="360" stroke="#86EFAC" stroke-width="4" stroke-dasharray="16 12" stroke-linecap="round" opacity="0.4"/>
+  </g>
+</svg>

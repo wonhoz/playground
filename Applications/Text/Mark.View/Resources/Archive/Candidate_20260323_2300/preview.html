@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Mark.View — 아이콘 후보</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #0A0F1E;
+    color: #E0E0E0;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    min-height: 100vh;
+    padding: 48px 40px 80px;
+  }
+
+  /* ── Header ── */
+  .header {
+    text-align: center;
+    margin-bottom: 56px;
+  }
+  .header h1 {
+    font-size: 48px;
+    font-weight: 900;
+    letter-spacing: -1px;
+    background: linear-gradient(135deg, #60A5FA 0%, #A78BFA 50%, #F472B6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 12px;
+  }
+  .header p {
+    font-size: 16px;
+    color: #888888;
+    margin-bottom: 20px;
+    line-height: 1.6;
+  }
+  .badge {
+    display: inline-block;
+    background: rgba(96, 165, 250, 0.12);
+    border: 1px solid rgba(96, 165, 250, 0.35);
+    color: #60A5FA;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 6px 18px;
+    border-radius: 999px;
+    letter-spacing: 0.5px;
+  }
+
+  /* ── Grid ── */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 24px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  /* ── Card ── */
+  .card {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    padding: 24px 18px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    cursor: pointer;
+    transition: border-color 0.2s ease, background 0.2s ease;
+  }
+  .card:hover {
+    background: rgba(255, 255, 255, 0.07);
+    border-color: rgba(255, 255, 255, 0.18);
+  }
+
+  /* ── Icon wrapper ── */
+  .icon-wrap {
+    width: 120px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .card:hover .icon-wrap {
+    transform: scale(1.55);
+  }
+  .icon-wrap img {
+    width: 120px;
+    height: 120px;
+    border-radius: 22px;
+    display: block;
+  }
+
+  /* ── Meta ── */
+  .num {
+    font-size: 11px;
+    color: #555;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    align-self: flex-start;
+  }
+  .concept {
+    font-size: 13px;
+    color: #C0C0C0;
+    font-weight: 600;
+    text-align: center;
+    line-height: 1.4;
+  }
+  .filename {
+    font-size: 11px;
+    color: #555;
+    font-family: 'Courier New', monospace;
+  }
+  .palette {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(255,255,255,0.15);
+    flex-shrink: 0;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Mark.View</h1>
+  <p>Markdown 파일 뷰어/렌더러 — .md 파일을 열어 렌더링된 HTML로 보여줌. Raw/Rendered 전환 가능.</p>
+  <span class="badge">아이콘 후보 &middot; 2026-03-24 &middot; 15개</span>
+</div>
+
+<div class="grid">
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_01.svg" alt="icon_01"/></div>
+    <span class="num">#01</span>
+    <span class="concept">큰 # 기호로 H1 헤더 표현</span>
+    <span class="filename">icon_01.svg</span>
+    <div class="palette">
+      <div class="dot" style="background:#1E3A8A;"></div>
+      <div class="dot" style="background:#FFFFFF;"></div>
+      <div class="dot" style="background:#FDE68A;"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_02.svg" alt="icon_02"/></div>
+    <span class="num">#02</span>
+    <span class="concept">Raw/Rendered 분할 화면 (두 패널)</span>
+    <span class="filename">icon_02.svg</span>
+    <div class="palette">
+      <div class="dot" style="background:#065F46;"></div>
+      <div class="dot" style="background:#A7F3D0;"></div>
+      <div class="dot" style="background:#FFFFFF;"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_03.svg" alt="icon_03"/></div>
+    <span class="num">#03</span>
+    <span class="concept">.MD 파일 뱃지 + 눈 아이콘</span>
+    <span class="filename">icon_03.svg</span>
+    <div class="palette">
+      <div class="dot" style="background:#7C3AED;"></div>
+      <div class="dot" style="background:#FFFFFF;"></div>
+      <div class="dot" style="background:#FDE68A;"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_04.svg" alt="icon_04"/></div>
+    <span class="num">#04</span>
+    <span class="concept">펼쳐진 책 + 마크다운 텍스트 흐름</span>
+    <span class="filename">icon_04.svg</span>
+    <div class="palette">
+      <div class="dot" style="background:#B45309;"></div>
+      <div class="dot" style="background:#FDE68A;"></div>
+      <div class="dot" style="background:#FFFFFF;"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_05.svg" alt="icon_05"/></div>
+    <span class="num">#05</span>
+    <span class="concept">계층형 헤더 H1 &gt; H2 &gt; H3 목록</span>
+    <span class="filename">icon_05.svg</span>
+    <div class="palette">
+      <div class="dot" style="background:#0C4A6E;"></div>
+      <div class="dot" style="background:#60A5FA;"></div>
+      <div class="dot" style="background:#FFFFFF;"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_06.svg" alt="icon_06"/></div>
+    <span class="num">#06</span>
+    <span class="concept">눈(Eye) 심볼 — 파일을 바라봄</span>
+    <span class="filename">icon_06.svg</span>
+    <div class="palette">
+      <div class="dot" style="background:#831843;"></div>
+      <div class="dot" style="background:#F472B6;"></div>
+      <div class="dot" style="background:#FDE68A;"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_07.svg" alt="icon_07"/></div>
+    <span class="num">#07</span>
+    <span class="concept">달/해 테마 전환 — 다크/라이트 모드</span>
+    <span class="filename">icon_07.svg</span>
+    <div class="palette">
+      <div class="dot" style="background:#1F2937;"></div>
+      <div class="dot" style="background:#FDE68A;"></div>
+      <div class="dot" style="background:#60A5FA;"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_08.svg" alt="icon_08"/></div>
+    <span class="num">#08</span>
+    <span class="concept">테이블 격자 — MD 테이블 렌더링</span>
+    <span class="filename">icon_08.svg</span>
+    <div class="palette">
+      <div class="dot" style="background:#059669;"></div>
+      <div class="dot" style="background:#FFFFFF;"></div>
+      <div class="dot" style="background:#FDE68A;"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_09.svg" alt="icon_09"/></div>
+    <span class="num">#09</span>
+    <span class="concept">컬러 팔레트 + 텍스트 — syntax highlight</span>
+    <span class="filename">icon_09.svg</span>
+    <div class="palette">
+      <div class="dot" style="background:#DC2626;"></div>
+      <div class="dot" style="background:#FFFFFF;"></div>
+      <div class="dot" style="background:#FDE68A;"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_10.svg" alt="icon_10"/></div>
+    <span class="num">#10</span>
+    <span class="concept">코드블록 ``` 따옴표 + 코드 줄들</span>
+    <span class="filename">icon_10.svg</span>
+    <div class="palette">
+      <div class="dot" style="background:#0369A1;"></div>
+      <div class="dot" style="background:#A7F3D0;"></div>
+      <div class="dot" style="background:#FFFFFF;"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_11.svg" alt="icon_11"/></div>
+    <span class="num">#11</span>
+    <span class="concept">독서하는 사람 실루엣 + 텍스트 줄기</span>
+    <span class="filename">icon_11.svg</span>
+    <div class="palette">
+      <div class="dot" style="background:#92400E;"></div>
+      <div class="dot" style="background:#D97706;"></div>
+      <div class="dot" style="background:#FFFFFF;"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_12.svg" alt="icon_12"/></div>
+    <span class="num">#12</span>
+    <span class="concept">.md &rarr; HTML 변환 화살표 플로우</span>
+    <span class="filename">icon_12.svg</span>
+    <div class="palette">
+      <div class="dot" style="background:#3F6212;"></div>
+      <div class="dot" style="background:#FFFFFF;"></div>
+      <div class="dot" style="background:#FDE68A;"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_13.svg" alt="icon_13"/></div>
+    <span class="num">#13</span>
+    <span class="concept">체크리스트 ✓ 항목들 — MD 체크박스</span>
+    <span class="filename">icon_13.svg</span>
+    <div class="palette">
+      <div class="dot" style="background:#4C0519;"></div>
+      <div class="dot" style="background:#F472B6;"></div>
+      <div class="dot" style="background:#FFFFFF;"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_14.svg" alt="icon_14"/></div>
+    <span class="num">#14</span>
+    <span class="concept">인용구 &gt; 블록 — 큰 따옴표</span>
+    <span class="filename">icon_14.svg</span>
+    <div class="palette">
+      <div class="dot" style="background:#0F172A;"></div>
+      <div class="dot" style="background:#22D3EE;"></div>
+      <div class="dot" style="background:#FDE68A;"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_15.svg" alt="icon_15"/></div>
+    <span class="num">#15</span>
+    <span class="concept">마법 붓 &rarr; 텍스트가 렌더링됨</span>
+    <span class="filename">icon_15.svg</span>
+    <div class="palette">
+      <div class="dot" style="background:#581C87;"></div>
+      <div class="dot" style="background:#C4B5FD;"></div>
+      <div class="dot" style="background:#FDE68A;"></div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

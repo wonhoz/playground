@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg01" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#1E4EC8"/>
+      <stop offset="100%" stop-color="#1E3A8A"/>
+    </radialGradient>
+    <radialGradient id="ocean" cx="50%" cy="40%" r="55%">
+      <stop offset="0%" stop-color="#60A5FA"/>
+      <stop offset="100%" stop-color="#1D4ED8"/>
+    </radialGradient>
+    <clipPath id="globeClip">
+      <circle cx="512" cy="512" r="310"/>
+    </clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg01)"/>
+  <!-- Globe base (ocean) -->
+  <circle cx="512" cy="512" r="310" fill="url(#ocean)"/>
+  <!-- Continents -->
+  <!-- Europe/Africa -->
+  <ellipse cx="490" cy="430" rx="60" ry="80" fill="#22C55E" clip-path="url(#globeClip)"/>
+  <ellipse cx="500" cy="560" rx="55" ry="95" fill="#16A34A" clip-path="url(#globeClip)"/>
+  <!-- Americas -->
+  <ellipse cx="360" cy="420" rx="50" ry="70" fill="#22C55E" clip-path="url(#globeClip)"/>
+  <ellipse cx="370" cy="550" rx="40" ry="65" fill="#16A34A" clip-path="url(#globeClip)"/>
+  <!-- Asia -->
+  <ellipse cx="620" cy="410" rx="80" ry="65" fill="#22C55E" clip-path="url(#globeClip)"/>
+  <ellipse cx="650" cy="520" rx="45" ry="40" fill="#4ADE80" clip-path="url(#globeClip)"/>
+  <!-- Australia -->
+  <ellipse cx="640" cy="600" rx="40" ry="28" fill="#22C55E" clip-path="url(#globeClip)"/>
+  <!-- Globe latitude lines -->
+  <ellipse cx="512" cy="512" r="310" fill="none" stroke="#93C5FD" stroke-width="8" stroke-dasharray="20,15" opacity="0.5"/>
+  <ellipse cx="512" cy="430" rx="310" ry="90" fill="none" stroke="#93C5FD" stroke-width="6" opacity="0.35" clip-path="url(#globeClip)"/>
+  <ellipse cx="512" cy="590" rx="310" ry="90" fill="none" stroke="#93C5FD" stroke-width="6" opacity="0.35" clip-path="url(#globeClip)"/>
+  <!-- Globe longitude lines -->
+  <line x1="512" y1="202" x2="512" y2="822" stroke="#93C5FD" stroke-width="6" opacity="0.35"/>
+  <ellipse cx="512" cy="512" rx="155" ry="310" fill="none" stroke="#93C5FD" stroke-width="6" opacity="0.35" clip-path="url(#globeClip)"/>
+  <!-- Globe outline -->
+  <circle cx="512" cy="512" r="310" fill="none" stroke="#BFDBFE" stroke-width="14"/>
+  <!-- Shine -->
+  <ellipse cx="430" cy="390" rx="70" ry="45" fill="white" opacity="0.18"/>
+</svg>

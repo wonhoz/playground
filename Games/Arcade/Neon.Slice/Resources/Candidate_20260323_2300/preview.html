@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Neon.Slice — 아이콘 후보 Preview</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #080C14;
+      color: #E0E0E0;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      min-height: 100vh;
+      padding: 48px 32px 80px;
+    }
+
+    /* ── 헤더 ── */
+    header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+    header h1 {
+      font-size: 3rem;
+      font-weight: 900;
+      letter-spacing: 4px;
+      background: linear-gradient(135deg, #22D3EE 0%, #F472B6 60%, #FDE68A 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: none;
+      margin-bottom: 10px;
+    }
+    header p {
+      font-size: 1.05rem;
+      color: #888888;
+      margin-bottom: 18px;
+      letter-spacing: 1px;
+    }
+    .badge {
+      display: inline-block;
+      padding: 5px 18px;
+      border-radius: 20px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      color: #22D3EE;
+      border: 1.5px solid #22D3EE44;
+      background: #22D3EE0D;
+    }
+
+    /* ── 그리드 ── */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 28px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    /* ── 카드 ── */
+    .card {
+      background: #0F1624;
+      border: 1px solid #1E2A3A;
+      border-radius: 16px;
+      padding: 28px 18px 22px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+      cursor: default;
+    }
+    .card:hover {
+      transform: scale(1.55);
+      box-shadow: 0 16px 60px #000A, 0 0 32px #22D3EE22;
+      border-color: #22D3EE55;
+      z-index: 10;
+      position: relative;
+    }
+
+    .card img {
+      width: 120px;
+      height: 120px;
+      border-radius: 22px;
+      display: block;
+      object-fit: contain;
+    }
+
+    .card .filename {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #888888;
+      letter-spacing: 1px;
+      font-family: 'Consolas', monospace;
+    }
+
+    .card .concept {
+      font-size: 0.86rem;
+      color: #C0C8D8;
+      text-align: center;
+      line-height: 1.45;
+      min-height: 36px;
+    }
+
+    .palette {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      justify-content: center;
+    }
+    .swatch {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 2px solid #ffffff18;
+      box-shadow: 0 2px 8px #0006;
+      flex-shrink: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Neon.Slice</h1>
+    <p>네온 아케이드 슬라이스 게임</p>
+    <span class="badge">아이콘 후보 &middot; 2026-03-24 &middot; 15개</span>
+  </header>
+
+  <div class="grid">
+
+    <!-- icon_01 -->
+    <div class="card">
+      <img src="icon_01.svg" alt="icon_01"/>
+      <div class="filename">icon_01.svg</div>
+      <div class="concept">네온 칼날 슬라이스 동작</div>
+      <div class="palette">
+        <div class="swatch" style="background:#0F172A;" title="#0F172A"></div>
+        <div class="swatch" style="background:#22D3EE;" title="#22D3EE"></div>
+        <div class="swatch" style="background:#FFFFFF;" title="#FFFFFF"></div>
+      </div>
+    </div>
+
+    <!-- icon_02 -->
+    <div class="card">
+      <img src="icon_02.svg" alt="icon_02"/>
+      <div class="filename">icon_02.svg</div>
+      <div class="concept">과일 잘리는 장면</div>
+      <div class="palette">
+        <div class="swatch" style="background:#065F46;" title="#065F46"></div>
+        <div class="swatch" style="background:#A7F3D0;" title="#A7F3D0"></div>
+        <div class="swatch" style="background:#FFFFFF;" title="#FFFFFF"></div>
+      </div>
+    </div>
+
+    <!-- icon_03 -->
+    <div class="card">
+      <img src="icon_03.svg" alt="icon_03"/>
+      <div class="filename">icon_03.svg</div>
+      <div class="concept">리듬 파동 + 슬라이스</div>
+      <div class="palette">
+        <div class="swatch" style="background:#7C3AED;" title="#7C3AED"></div>
+        <div class="swatch" style="background:#C4B5FD;" title="#C4B5FD"></div>
+        <div class="swatch" style="background:#FDE68A;" title="#FDE68A"></div>
+      </div>
+    </div>
+
+    <!-- icon_04 -->
+    <div class="card">
+      <img src="icon_04.svg" alt="icon_04"/>
+      <div class="filename">icon_04.svg</div>
+      <div class="concept">네온 격자 + 칼</div>
+      <div class="palette">
+        <div class="swatch" style="background:#0C4A6E;" title="#0C4A6E"></div>
+        <div class="swatch" style="background:#60A5FA;" title="#60A5FA"></div>
+        <div class="swatch" style="background:#22D3EE;" title="#22D3EE"></div>
+      </div>
+    </div>
+
+    <!-- icon_05 -->
+    <div class="card">
+      <img src="icon_05.svg" alt="icon_05"/>
+      <div class="filename">icon_05.svg</div>
+      <div class="concept">콤보 숫자 + 이펙트</div>
+      <div class="palette">
+        <div class="swatch" style="background:#831843;" title="#831843"></div>
+        <div class="swatch" style="background:#F472B6;" title="#F472B6"></div>
+        <div class="swatch" style="background:#FDE68A;" title="#FDE68A"></div>
+      </div>
+    </div>
+
+    <!-- icon_06 -->
+    <div class="card">
+      <img src="icon_06.svg" alt="icon_06"/>
+      <div class="filename">icon_06.svg</div>
+      <div class="concept">번개 + 슬라이스 이펙트</div>
+      <div class="palette">
+        <div class="swatch" style="background:#B45309;" title="#B45309"></div>
+        <div class="swatch" style="background:#FDE68A;" title="#FDE68A"></div>
+        <div class="swatch" style="background:#FFFFFF;" title="#FFFFFF"></div>
+      </div>
+    </div>
+
+    <!-- icon_07 -->
+    <div class="card">
+      <img src="icon_07.svg" alt="icon_07"/>
+      <div class="filename">icon_07.svg</div>
+      <div class="concept">레인보우 궤적 — 화려한 슬라이스 잔상</div>
+      <div class="palette">
+        <div class="swatch" style="background:#1F2937;" title="#1F2937"></div>
+        <div class="swatch" style="background:#F472B6;" title="#F472B6"></div>
+        <div class="swatch" style="background:#22D3EE;" title="#22D3EE"></div>
+      </div>
+    </div>
+
+    <!-- icon_08 -->
+    <div class="card">
+      <img src="icon_08.svg" alt="icon_08"/>
+      <div class="filename">icon_08.svg</div>
+      <div class="concept">타이머 + 빠른 슬라이스</div>
+      <div class="palette">
+        <div class="swatch" style="background:#3F6212;" title="#3F6212"></div>
+        <div class="swatch" style="background:#86EFAC;" title="#86EFAC"></div>
+        <div class="swatch" style="background:#FDE68A;" title="#FDE68A"></div>
+      </div>
+    </div>
+
+    <!-- icon_09 -->
+    <div class="card">
+      <img src="icon_09.svg" alt="icon_09"/>
+      <div class="filename">icon_09.svg</div>
+      <div class="concept">스코어보드 + 1등 왕관</div>
+      <div class="palette">
+        <div class="swatch" style="background:#78350F;" title="#78350F"></div>
+        <div class="swatch" style="background:#F59E0B;" title="#F59E0B"></div>
+        <div class="swatch" style="background:#FFFFFF;" title="#FFFFFF"></div>
+      </div>
+    </div>
+
+    <!-- icon_10 -->
+    <div class="card">
+      <img src="icon_10.svg" alt="icon_10"/>
+      <div class="filename">icon_10.svg</div>
+      <div class="concept">게임오버 X 표시 + 칼</div>
+      <div class="palette">
+        <div class="swatch" style="background:#4C0519;" title="#4C0519"></div>
+        <div class="swatch" style="background:#F9A8D4;" title="#F9A8D4"></div>
+        <div class="swatch" style="background:#FFFFFF;" title="#FFFFFF"></div>
+      </div>
+    </div>
+
+    <!-- icon_11 -->
+    <div class="card">
+      <img src="icon_11.svg" alt="icon_11"/>
+      <div class="filename">icon_11.svg</div>
+      <div class="concept">네온 사인 느낌 글로우</div>
+      <div class="palette">
+        <div class="swatch" style="background:#0F172A;" title="#0F172A"></div>
+        <div class="swatch" style="background:#22D3EE;" title="#22D3EE"></div>
+        <div class="swatch" style="background:#F472B6;" title="#F472B6"></div>
+      </div>
+    </div>
+
+    <!-- icon_12 -->
+    <div class="card">
+      <img src="icon_12.svg" alt="icon_12"/>
+      <div class="filename">icon_12.svg</div>
+      <div class="concept">닌자 수리검 슈리켄</div>
+      <div class="palette">
+        <div class="swatch" style="background:#1C1917;" title="#1C1917"></div>
+        <div class="swatch" style="background:#FDE68A;" title="#FDE68A"></div>
+        <div class="swatch" style="background:#FFFFFF;" title="#FFFFFF"></div>
+      </div>
+    </div>
+
+    <!-- icon_13 -->
+    <div class="card">
+      <img src="icon_13.svg" alt="icon_13"/>
+      <div class="filename">icon_13.svg</div>
+      <div class="concept">파티클 이펙트 + 조각들</div>
+      <div class="palette">
+        <div class="swatch" style="background:#0369A1;" title="#0369A1"></div>
+        <div class="swatch" style="background:#7DD3FC;" title="#7DD3FC"></div>
+        <div class="swatch" style="background:#FDE68A;" title="#FDE68A"></div>
+      </div>
+    </div>
+
+    <!-- icon_14 -->
+    <div class="card">
+      <img src="icon_14.svg" alt="icon_14"/>
+      <div class="filename">icon_14.svg</div>
+      <div class="concept">하트 + 목숨 게이지</div>
+      <div class="palette">
+        <div class="swatch" style="background:#9F1239;" title="#9F1239"></div>
+        <div class="swatch" style="background:#FDA4AF;" title="#FDA4AF"></div>
+        <div class="swatch" style="background:#FDE68A;" title="#FDE68A"></div>
+      </div>
+    </div>
+
+    <!-- icon_15 -->
+    <div class="card">
+      <img src="icon_15.svg" alt="icon_15"/>
+      <div class="filename">icon_15.svg</div>
+      <div class="concept">글래디에이터 아레나 + 칼</div>
+      <div class="palette">
+        <div class="swatch" style="background:#1E3A8A;" title="#1E3A8A"></div>
+        <div class="swatch" style="background:#93C5FD;" title="#93C5FD"></div>
+        <div class="swatch" style="background:#FDE68A;" title="#FDE68A"></div>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

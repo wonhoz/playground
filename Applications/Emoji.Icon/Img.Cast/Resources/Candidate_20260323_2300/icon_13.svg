@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg13" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#65A30D"/>
+      <stop offset="100%" stop-color="#3F6212"/>
+    </linearGradient>
+    <clipPath id="clip13"><rect width="1024" height="1024" rx="190"/></clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg13)"/>
+  <g clip-path="url(#clip13)">
+    <!-- 포맷 변환 흐름: SVG → PNG → JPG → ICO -->
+    <!-- SVG 뱃지 -->
+    <rect x="100" y="200" width="180" height="80" rx="14" fill="#7C3AED"/>
+    <text x="190" y="253" text-anchor="middle" font-family="system-ui" font-size="40" font-weight="bold" fill="white">SVG</text>
+    <!-- 화살표 1 -->
+    <line x1="282" y1="240" x2="368" y2="240" stroke="white" stroke-width="14" stroke-linecap="round"/>
+    <polygon points="380,240 358,220 358,260" fill="white"/>
+    <!-- PNG 뱃지 -->
+    <rect x="385" y="200" width="180" height="80" rx="14" fill="#0369A1"/>
+    <text x="475" y="253" text-anchor="middle" font-family="system-ui" font-size="40" font-weight="bold" fill="white">PNG</text>
+    <!-- 화살표 2 -->
+    <line x1="567" y1="240" x2="653" y2="240" stroke="white" stroke-width="14" stroke-linecap="round"/>
+    <polygon points="665,240 643,220 643,260" fill="white"/>
+    <!-- JPG 뱃지 -->
+    <rect x="670" y="200" width="180" height="80" rx="14" fill="#B45309"/>
+    <text x="760" y="253" text-anchor="middle" font-family="system-ui" font-size="40" font-weight="bold" fill="white">JPG</text>
+
+    <!-- 두번째 줄: BMP + 합쳐지는 화살표 → ICO -->
+    <rect x="100" y="380" width="180" height="80" rx="14" fill="#065F46"/>
+    <text x="190" y="433" text-anchor="middle" font-family="system-ui" font-size="40" font-weight="bold" fill="white">BMP</text>
+
+    <!-- 합쳐지는 화살표들 -->
+    <line x1="190" y1="462" x2="190" y2="530" stroke="white" stroke-width="10" stroke-linecap="round"/>
+    <line x1="475" y1="282" x2="475" y2="530" stroke="white" stroke-width="10" stroke-linecap="round"/>
+    <line x1="760" y1="282" x2="760" y2="530" stroke="white" stroke-width="10" stroke-linecap="round"/>
+    <!-- 수평 연결선 -->
+    <line x1="190" y1="530" x2="760" y2="530" stroke="white" stroke-width="10" stroke-linecap="round"/>
+    <!-- 수직 화살표 → ICO -->
+    <line x1="512" y1="530" x2="512" y2="610" stroke="white" stroke-width="14" stroke-linecap="round"/>
+    <polygon points="512,640 490,610 534,610" fill="white"/>
+    <!-- ICO 뱃지 (크게) -->
+    <rect x="352" y="650" width="320" height="100" rx="20" fill="#FDE68A"/>
+    <text x="512" y="720" text-anchor="middle" font-family="system-ui" font-size="56" font-weight="bold" fill="#1F2937">ICO</text>
+    <!-- 하단 -->
+    <text x="512" y="870" font-size="38" font-weight="bold" font-family="system-ui" fill="white" text-anchor="middle">Format Pipeline</text>
+    <text x="512" y="930" font-size="28" font-family="system-ui" fill="#BEF264" text-anchor="middle">Any → ICO</text>
+  </g>
+</svg>

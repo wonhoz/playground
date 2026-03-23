@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg02" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#1A6A9A"/>
+      <stop offset="100%" stop-color="#0C4A6E"/>
+    </radialGradient>
+    <radialGradient id="sun02" cx="40%" cy="35%" r="60%">
+      <stop offset="0%" stop-color="#FEF08A"/>
+      <stop offset="100%" stop-color="#F59E0B"/>
+    </radialGradient>
+    <radialGradient id="p1_02" cx="40%" cy="35%" r="60%">
+      <stop offset="0%" stop-color="#7DD3FC"/>
+      <stop offset="100%" stop-color="#0284C7"/>
+    </radialGradient>
+    <radialGradient id="p2_02" cx="40%" cy="35%" r="60%">
+      <stop offset="0%" stop-color="#86EFAC"/>
+      <stop offset="100%" stop-color="#16A34A"/>
+    </radialGradient>
+    <radialGradient id="p3_02" cx="40%" cy="35%" r="60%">
+      <stop offset="0%" stop-color="#FCA5A5"/>
+      <stop offset="100%" stop-color="#DC2626"/>
+    </radialGradient>
+    <clipPath id="clip02">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg02)"/>
+  <g clip-path="url(#clip02)">
+    <!-- 별 -->
+    <circle cx="160" cy="160" r="3" fill="#FFFFFF" opacity="0.5"/>
+    <circle cx="860" cy="200" r="2" fill="#FFFFFF" opacity="0.6"/>
+    <circle cx="200" cy="850" r="3" fill="#FFFFFF" opacity="0.5"/>
+    <circle cx="820" cy="840" r="2" fill="#FFFFFF" opacity="0.4"/>
+    <circle cx="120" cy="500" r="2" fill="#FFFFFF" opacity="0.5"/>
+    <circle cx="900" cy="600" r="3" fill="#FFFFFF" opacity="0.4"/>
+    <!-- Layer 2: 궤도 원들 -->
+    <circle cx="512" cy="512" r="340" fill="none" stroke="#38BDF8" stroke-width="10" opacity="0.3"/>
+    <circle cx="512" cy="512" r="250" fill="none" stroke="#38BDF8" stroke-width="10" opacity="0.35"/>
+    <circle cx="512" cy="512" r="165" fill="none" stroke="#38BDF8" stroke-width="10" opacity="0.4"/>
+    <!-- Layer 2: 태양 (중앙) -->
+    <circle cx="512" cy="512" r="80" fill="url(#sun02)"/>
+    <!-- 태양 광선 -->
+    <circle cx="512" cy="512" r="95" fill="none" stroke="#FDE68A" stroke-width="8" opacity="0.4"/>
+    <circle cx="512" cy="512" r="110" fill="none" stroke="#FDE68A" stroke-width="4" opacity="0.2"/>
+    <!-- 행성 1 (내부 궤도) -->
+    <circle cx="677" cy="512" r="30" fill="url(#p3_02)"/>
+    <!-- 행성 2 (중간 궤도) -->
+    <circle cx="512" cy="262" r="42" fill="url(#p1_02)"/>
+    <!-- 행성 3 (외부 궤도) -->
+    <circle cx="234" cy="452" r="52" fill="url(#p2_02)"/>
+    <!-- 행성 2 고리 -->
+    <ellipse cx="512" cy="262" rx="62" ry="16" fill="none" stroke="#38BDF8" stroke-width="8" opacity="0.7" transform="rotate(-15 512 262)"/>
+    <!-- Layer 3: 별 장식 -->
+    <path d="M 760 240 L 772 270 L 800 282 L 772 294 L 760 324 L 748 294 L 720 282 L 748 270 Z" fill="#FDE68A" opacity="0.8"/>
+    <path d="M 280 750 L 288 768 L 306 776 L 288 784 L 280 802 L 272 784 L 254 776 L 272 768 Z" fill="#FDE68A" opacity="0.6"/>
+  </g>
+</svg>

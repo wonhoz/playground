@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Api.Probe — 아이콘 후보 미리보기</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #0A0F1E;
+      color: #E0E0E0;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      min-height: 100vh;
+      padding: 48px 32px 80px;
+    }
+
+    /* ── 헤더 ── */
+    header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    header h1 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, #60A5FA 0%, #A78BFA 50%, #34D399 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 12px;
+    }
+
+    header p {
+      font-size: 1.05rem;
+      color: #888888;
+      margin-bottom: 20px;
+    }
+
+    .badge-row {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 5px 16px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+    }
+    .badge-blue   { background: #1E3A8A; color: #93C5FD; border: 1px solid #2563EB; }
+    .badge-purple { background: #2E1065; color: #C4B5FD; border: 1px solid #7C3AED; }
+    .badge-green  { background: #022C22; color: #6EE7B7; border: 1px solid #059669; }
+
+    /* ── 그리드 ── */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 24px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    /* ── 카드 ── */
+    .card {
+      background: #0F1629;
+      border: 1px solid #1E293B;
+      border-radius: 18px;
+      padding: 28px 20px 22px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+      cursor: default;
+    }
+    .card:hover {
+      transform: scale(1.55);
+      box-shadow: 0 24px 60px rgba(0,0,0,0.6);
+      border-color: #3B4D73;
+      z-index: 10;
+      position: relative;
+    }
+
+    .card img {
+      width: 120px;
+      height: 120px;
+      border-radius: 22px;
+      display: block;
+    }
+
+    .card-num {
+      font-size: 0.72rem;
+      color: #4B5563;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .card-filename {
+      font-size: 0.78rem;
+      color: #6B7280;
+      font-family: 'Courier New', monospace;
+    }
+
+    .card-concept {
+      font-size: 0.88rem;
+      color: #CBD5E1;
+      font-weight: 600;
+      text-align: center;
+      line-height: 1.4;
+    }
+
+    /* ── 팔레트 ── */
+    .palette {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+    .swatch {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.15);
+      flex-shrink: 0;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Api.Probe</h1>
+  <p>HTTP API 테스터 — GET/POST/PUT/DELETE 요청·응답 분석</p>
+  <div class="badge-row">
+    <span class="badge badge-blue">아이콘 후보</span>
+    <span class="badge badge-purple">2026-03-24</span>
+    <span class="badge badge-green">15개</span>
+  </div>
+</header>
+
+<div class="grid">
+
+  <!-- 01 -->
+  <div class="card">
+    <img src="icon_01.svg" alt="icon_01"/>
+    <span class="card-num">#01</span>
+    <span class="card-filename">icon_01.svg</span>
+    <span class="card-concept">GET 200 OK 뱃지 + 녹색 체크</span>
+    <div class="palette">
+      <span class="swatch" style="background:#065F46;" title="#065F46"></span>
+      <span class="swatch" style="background:#A7F3D0;" title="#A7F3D0"></span>
+      <span class="swatch" style="background:#FFFFFF;" title="#FFFFFF"></span>
+    </div>
+  </div>
+
+  <!-- 02 -->
+  <div class="card">
+    <img src="icon_02.svg" alt="icon_02"/>
+    <span class="card-num">#02</span>
+    <span class="card-filename">icon_02.svg</span>
+    <span class="card-concept">요청→응답 대화 버블</span>
+    <div class="palette">
+      <span class="swatch" style="background:#1E3A8A;" title="#1E3A8A"></span>
+      <span class="swatch" style="background:#60A5FA;" title="#60A5FA"></span>
+      <span class="swatch" style="background:#FDE68A;" title="#FDE68A"></span>
+    </div>
+  </div>
+
+  <!-- 03 -->
+  <div class="card">
+    <img src="icon_03.svg" alt="icon_03"/>
+    <span class="card-num">#03</span>
+    <span class="card-filename">icon_03.svg</span>
+    <span class="card-concept">POST/GET/PUT/DELETE 4색 메서드 배지</span>
+    <div class="palette">
+      <span class="swatch" style="background:#0F172A;" title="#0F172A"></span>
+      <span class="swatch" style="background:#22D3EE;" title="#22D3EE"></span>
+      <span class="swatch" style="background:#F472B6;" title="#F472B6"></span>
+    </div>
+  </div>
+
+  <!-- 04 -->
+  <div class="card">
+    <img src="icon_04.svg" alt="icon_04"/>
+    <span class="card-num">#04</span>
+    <span class="card-filename">icon_04.svg</span>
+    <span class="card-concept">청진기 + 서버 박스</span>
+    <div class="palette">
+      <span class="swatch" style="background:#7C3AED;" title="#7C3AED"></span>
+      <span class="swatch" style="background:#C4B5FD;" title="#C4B5FD"></span>
+      <span class="swatch" style="background:#FDE68A;" title="#FDE68A"></span>
+    </div>
+  </div>
+
+  <!-- 05 -->
+  <div class="card">
+    <img src="icon_05.svg" alt="icon_05"/>
+    <span class="card-num">#05</span>
+    <span class="card-filename">icon_05.svg</span>
+    <span class="card-concept">JSON { } 창 + 데이터 줄기</span>
+    <div class="palette">
+      <span class="swatch" style="background:#92400E;" title="#92400E"></span>
+      <span class="swatch" style="background:#FDE68A;" title="#FDE68A"></span>
+      <span class="swatch" style="background:#A7F3D0;" title="#A7F3D0"></span>
+    </div>
+  </div>
+
+  <!-- 06 -->
+  <div class="card">
+    <img src="icon_06.svg" alt="icon_06"/>
+    <span class="card-num">#06</span>
+    <span class="card-filename">icon_06.svg</span>
+    <span class="card-concept">레이더 안테나 + 신호 원파</span>
+    <div class="palette">
+      <span class="swatch" style="background:#0C4A6E;" title="#0C4A6E"></span>
+      <span class="swatch" style="background:#22D3EE;" title="#22D3EE"></span>
+      <span class="swatch" style="background:#FFFFFF;" title="#FFFFFF"></span>
+    </div>
+  </div>
+
+  <!-- 07 -->
+  <div class="card">
+    <img src="icon_07.svg" alt="icon_07"/>
+    <span class="card-num">#07</span>
+    <span class="card-filename">icon_07.svg</span>
+    <span class="card-concept">돋보기 + 서버/DB 아이콘</span>
+    <div class="palette">
+      <span class="swatch" style="background:#3F6212;" title="#3F6212"></span>
+      <span class="swatch" style="background:#A7F3D0;" title="#A7F3D0"></span>
+      <span class="swatch" style="background:#FDE68A;" title="#FDE68A"></span>
+    </div>
+  </div>
+
+  <!-- 08 -->
+  <div class="card">
+    <img src="icon_08.svg" alt="icon_08"/>
+    <span class="card-num">#08</span>
+    <span class="card-filename">icon_08.svg</span>
+    <span class="card-concept">URL 입력창 + Send 버튼</span>
+    <div class="palette">
+      <span class="swatch" style="background:#831843;" title="#831843"></span>
+      <span class="swatch" style="background:#F472B6;" title="#F472B6"></span>
+      <span class="swatch" style="background:#FFFFFF;" title="#FFFFFF"></span>
+    </div>
+  </div>
+
+  <!-- 09 -->
+  <div class="card">
+    <img src="icon_09.svg" alt="icon_09"/>
+    <span class="card-num">#09</span>
+    <span class="card-filename">icon_09.svg</span>
+    <span class="card-concept">번개 — 빠른 응답</span>
+    <div class="palette">
+      <span class="swatch" style="background:#B45309;" title="#B45309"></span>
+      <span class="swatch" style="background:#FDE68A;" title="#FDE68A"></span>
+      <span class="swatch" style="background:#FFFFFF;" title="#FFFFFF"></span>
+    </div>
+  </div>
+
+  <!-- 10 -->
+  <div class="card">
+    <img src="icon_10.svg" alt="icon_10"/>
+    <span class="card-num">#10</span>
+    <span class="card-filename">icon_10.svg</span>
+    <span class="card-concept">폴더 + 컬렉션 파일들</span>
+    <div class="palette">
+      <span class="swatch" style="background:#1E3A8A;" title="#1E3A8A"></span>
+      <span class="swatch" style="background:#93C5FD;" title="#93C5FD"></span>
+      <span class="swatch" style="background:#FDE68A;" title="#FDE68A"></span>
+    </div>
+  </div>
+
+  <!-- 11 -->
+  <div class="card">
+    <img src="icon_11.svg" alt="icon_11"/>
+    <span class="card-num">#11</span>
+    <span class="card-filename">icon_11.svg</span>
+    <span class="card-concept">{{ENV}} 환경변수 텍스트 창</span>
+    <div class="palette">
+      <span class="swatch" style="background:#4C0519;" title="#4C0519"></span>
+      <span class="swatch" style="background:#F9A8D4;" title="#F9A8D4"></span>
+      <span class="swatch" style="background:#FDE68A;" title="#FDE68A"></span>
+    </div>
+  </div>
+
+  <!-- 12 -->
+  <div class="card">
+    <img src="icon_12.svg" alt="icon_12"/>
+    <span class="card-num">#12</span>
+    <span class="card-filename">icon_12.svg</span>
+    <span class="card-concept">네트워크 허브 + 연결선들</span>
+    <div class="palette">
+      <span class="swatch" style="background:#0369A1;" title="#0369A1"></span>
+      <span class="swatch" style="background:#BAE6FD;" title="#BAE6FD"></span>
+      <span class="swatch" style="background:#FFFFFF;" title="#FFFFFF"></span>
+    </div>
+  </div>
+
+  <!-- 13 -->
+  <div class="card">
+    <img src="icon_13.svg" alt="icon_13"/>
+    <span class="card-num">#13</span>
+    <span class="card-filename">icon_13.svg</span>
+    <span class="card-concept">타이밍 게이지 — 응답속도</span>
+    <div class="palette">
+      <span class="swatch" style="background:#065F46;" title="#065F46"></span>
+      <span class="swatch" style="background:#6EE7B7;" title="#6EE7B7"></span>
+      <span class="swatch" style="background:#FDE68A;" title="#FDE68A"></span>
+    </div>
+  </div>
+
+  <!-- 14 -->
+  <div class="card">
+    <img src="icon_14.svg" alt="icon_14"/>
+    <span class="card-num">#14</span>
+    <span class="card-filename">icon_14.svg</span>
+    <span class="card-concept">curl 코드 명령어 텍스트</span>
+    <div class="palette">
+      <span class="swatch" style="background:#1F2937;" title="#1F2937"></span>
+      <span class="swatch" style="background:#22D3EE;" title="#22D3EE"></span>
+      <span class="swatch" style="background:#A7F3D0;" title="#A7F3D0"></span>
+    </div>
+  </div>
+
+  <!-- 15 -->
+  <div class="card">
+    <img src="icon_15.svg" alt="icon_15"/>
+    <span class="card-num">#15</span>
+    <span class="card-filename">icon_15.svg</span>
+    <span class="card-concept">로켓 발사 — API 요청 전송</span>
+    <div class="palette">
+      <span class="swatch" style="background:#4338CA;" title="#4338CA"></span>
+      <span class="swatch" style="background:#C7D2FE;" title="#C7D2FE"></span>
+      <span class="swatch" style="background:#FDE68A;" title="#FDE68A"></span>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

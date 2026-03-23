@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg10" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#2563EB"/>
+      <stop offset="100%" stop-color="#1D4ED8"/>
+    </linearGradient>
+    <linearGradient id="saved" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#22C55E"/>
+      <stop offset="100%" stop-color="#16A34A"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg10)"/>
+  <!-- 디스크 게이지 배경 -->
+  <rect x="160" y="420" width="704" height="90" rx="45" fill="white" opacity="0.15"/>
+  <!-- 게이지 채움 (절약 전) -->
+  <rect x="160" y="420" width="704" height="90" rx="45" fill="white" opacity="0.3"/>
+  <!-- 절약된 공간 (초록) -->
+  <rect x="500" y="420" width="364" height="90" rx="45" fill="url(#saved)"/>
+  <!-- 게이지 라벨 -->
+  <text x="512" y="476" font-family="system-ui, sans-serif" font-weight="bold" font-size="52" fill="white" text-anchor="middle" opacity="0.9">2.4 GB Saved!</text>
+
+  <!-- 상단: 정리 전 MB 표시 -->
+  <text x="230" y="370" font-family="system-ui, sans-serif" font-weight="bold" font-size="38" fill="white" opacity="0.6">Before</text>
+  <rect x="160" y="290" width="280" height="56" rx="12" fill="white" opacity="0.15"/>
+  <rect x="160" y="290" width="280" height="56" rx="12" fill="#F87171" opacity="0.5"/>
+  <text x="300" y="330" font-family="system-ui, sans-serif" font-weight="bold" font-size="38" fill="white" text-anchor="middle">12.8 GB</text>
+
+  <!-- 화살표 -->
+  <path d="M460 318 L570 318" stroke="white" stroke-width="22" stroke-linecap="round"/>
+  <path d="M548 296 L572 318 L548 340" stroke="white" stroke-width="22" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+
+  <!-- 정리 후 -->
+  <text x="750" y="370" font-family="system-ui, sans-serif" font-weight="bold" font-size="38" fill="white" opacity="0.6" text-anchor="middle">After</text>
+  <rect x="584" y="290" width="280" height="56" rx="12" fill="#22C55E" opacity="0.5"/>
+  <text x="724" y="330" font-family="system-ui, sans-serif" font-weight="bold" font-size="38" fill="white" text-anchor="middle">10.4 GB</text>
+
+  <!-- 하단: 항목별 절약 -->
+  <rect x="160" y="580" width="200" height="160" rx="20" fill="white" opacity="0.1"/>
+  <text x="260" y="632" font-family="system-ui, sans-serif" font-weight="bold" font-size="30" fill="#F59E0B" text-anchor="middle">bin/obj</text>
+  <text x="260" y="676" font-family="system-ui, sans-serif" font-weight="bold" font-size="40" fill="white" text-anchor="middle">1.8 GB</text>
+  <text x="260" y="718" font-family="system-ui, sans-serif" font-weight="bold" font-size="26" fill="#86EFAC" text-anchor="middle">✓ 정리</text>
+
+  <rect x="412" y="580" width="200" height="160" rx="20" fill="white" opacity="0.1"/>
+  <text x="512" y="632" font-family="system-ui, sans-serif" font-weight="bold" font-size="30" fill="#F472B6" text-anchor="middle">빈 폴더</text>
+  <text x="512" y="676" font-family="system-ui, sans-serif" font-weight="bold" font-size="40" fill="white" text-anchor="middle">247</text>
+  <text x="512" y="718" font-family="system-ui, sans-serif" font-weight="bold" font-size="26" fill="#86EFAC" text-anchor="middle">✓ 정리</text>
+
+  <rect x="664" y="580" width="200" height="160" rx="20" fill="white" opacity="0.1"/>
+  <text x="764" y="632" font-family="system-ui, sans-serif" font-weight="bold" font-size="30" fill="#60A5FA" text-anchor="middle">0 bytes</text>
+  <text x="764" y="676" font-family="system-ui, sans-serif" font-weight="bold" font-size="40" fill="white" text-anchor="middle">83</text>
+  <text x="764" y="718" font-family="system-ui, sans-serif" font-weight="bold" font-size="26" fill="#86EFAC" text-anchor="middle">✓ 정리</text>
+
+  <!-- 하단 총합 -->
+  <rect x="240" y="800" width="544" height="70" rx="18" fill="#22C55E" opacity="0.25"/>
+  <text x="512" y="845" font-family="system-ui, sans-serif" font-weight="bold" font-size="44" fill="#22C55E" text-anchor="middle">총 2.4 GB 절약</text>
+</svg>

@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg11" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4D7C0F"/>
+      <stop offset="100%" stop-color="#3F6212"/>
+    </linearGradient>
+    <clipPath id="clip11">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg11)"/>
+  <g clip-path="url(#clip11)">
+    <!-- Layer 2: 퇴적층 레이어 스택 -->
+    <!-- 레이어 1 — 최상단 (모래 — 황금) -->
+    <rect x="212" y="240" width="600" height="108" rx="16" fill="#FDE68A" opacity="0.95"/>
+    <text x="300" y="306" font-family="monospace" font-size="44" fill="#92400E" font-weight="bold" opacity="0.80">SAND</text>
+    <!-- 레이어 2 — 물 (파랑) -->
+    <rect x="212" y="368" width="600" height="108" rx="16" fill="#7DD3FC" opacity="0.90"/>
+    <text x="300" y="434" font-family="monospace" font-size="44" fill="#0369A1" font-weight="bold" opacity="0.80">WATER</text>
+    <!-- 레이어 3 — 불 (주황) -->
+    <rect x="212" y="496" width="600" height="108" rx="16" fill="#F97316" opacity="0.90"/>
+    <text x="300" y="562" font-family="monospace" font-size="44" fill="#7C2D12" font-weight="bold" opacity="0.80">FIRE</text>
+    <!-- 레이어 4 — 흙/암석 (갈색) -->
+    <rect x="212" y="624" width="600" height="108" rx="16" fill="#92400E" opacity="0.90"/>
+    <text x="300" y="690" font-family="monospace" font-size="44" fill="#FDE68A" font-weight="bold" opacity="0.80">STONE</text>
+    <!-- 레이어 5 — 가스 (민트) -->
+    <rect x="212" y="752" width="600" height="108" rx="16" fill="#86EFAC" opacity="0.85"/>
+    <text x="300" y="818" font-family="monospace" font-size="44" fill="#14532D" font-weight="bold" opacity="0.80">GAS</text>
+    <!-- Layer 3: 레이어 간 입자 흐름 표시 -->
+    <!-- 레이어 경계 입자들 (SAND→WATER) -->
+    <circle cx="860" cy="368" r="10" fill="#FDE68A" opacity="0.85"/>
+    <circle cx="840" cy="388" r="8" fill="#FDE68A" opacity="0.70"/>
+    <circle cx="860" cy="410" r="7" fill="#7DD3FC" opacity="0.65"/>
+    <!-- 레이어 경계 입자들 (WATER→FIRE) -->
+    <circle cx="860" cy="496" r="10" fill="#7DD3FC" opacity="0.80"/>
+    <circle cx="840" cy="516" r="8" fill="#7DD3FC" opacity="0.65"/>
+    <circle cx="860" cy="540" r="7" fill="#F97316" opacity="0.60"/>
+    <!-- 레이어 경계 입자들 (FIRE→STONE) -->
+    <circle cx="860" cy="624" r="10" fill="#F97316" opacity="0.80"/>
+    <circle cx="840" cy="644" r="8" fill="#F97316" opacity="0.65"/>
+    <!-- 스택 왼쪽 depth 선 -->
+    <line x1="212" y1="240" x2="192" y2="260" stroke="#86EFAC" stroke-width="5" opacity="0.50"/>
+    <line x1="192" y1="260" x2="192" y2="880" stroke="#86EFAC" stroke-width="5" opacity="0.40"/>
+    <!-- 레이어 우측 낙하 입자 (시뮬레이션 표시) -->
+    <circle cx="150" cy="290" r="12" fill="#FDE68A" opacity="0.70"/>
+    <circle cx="150" cy="360" r="10" fill="#FDE68A" opacity="0.55"/>
+    <circle cx="150" cy="420" r="8" fill="#7DD3FC" opacity="0.60"/>
+    <circle cx="150" cy="480" r="7" fill="#7DD3FC" opacity="0.50"/>
+  </g>
+</svg>

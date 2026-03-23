@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg10" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#78350F"/>
+      <stop offset="100%" stop-color="#451A03"/>
+    </linearGradient>
+    <linearGradient id="sky10" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#F59E0B" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#F59E0B" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="dune10" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FDE68A"/>
+      <stop offset="100%" stop-color="#D97706"/>
+    </linearGradient>
+    <clipPath id="clip10">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg10)"/>
+  <g clip-path="url(#clip10)">
+    <!-- 하늘 그라데이션 -->
+    <rect width="1024" height="580" fill="url(#sky10)"/>
+    <!-- 태양 -->
+    <circle cx="512" cy="280" r="80" fill="#F59E0B" opacity="0.85"/>
+    <circle cx="512" cy="280" r="60" fill="#FDE68A" opacity="0.70"/>
+    <circle cx="512" cy="280" r="40" fill="#FFFFFF" opacity="0.50"/>
+    <!-- 열기 물결 -->
+    <path d="M320 380 Q370 360 420 380 Q470 400 520 380 Q570 360 620 380 Q670 400 720 380"
+          stroke="#F59E0B" stroke-width="6" fill="none" opacity="0.40"/>
+    <path d="M280 420 Q340 400 400 420 Q460 440 520 420 Q580 400 640 420 Q700 440 760 420"
+          stroke="#FDE68A" stroke-width="5" fill="none" opacity="0.30"/>
+    <!-- Layer 2: 사막 모래 언덕들 -->
+    <!-- 뒤쪽 언덕 (어두움) -->
+    <path d="M0 680 Q200 540 400 580 Q500 600 600 560 Q700 530 824 600 L1024 680 L1024 1024 L0 1024 Z"
+          fill="#92400E" opacity="0.60"/>
+    <!-- 중간 언덕 -->
+    <path d="M0 720 Q150 600 340 640 Q460 660 512 620 Q580 590 700 640 Q820 680 1024 720 L1024 1024 L0 1024 Z"
+          fill="#B45309" opacity="0.70"/>
+    <!-- 앞쪽 메인 언덕 -->
+    <path d="M0 800 Q200 700 380 740 Q480 760 512 720 Q560 690 680 740 Q820 790 1024 800 L1024 1024 L0 1024 Z"
+          fill="url(#dune10)"/>
+    <!-- 가장 앞 지면 -->
+    <rect x="0" y="860" width="1024" height="164" fill="#D97706" opacity="0.90"/>
+    <!-- Layer 3: 모래 입자들 -->
+    <!-- 바람에 날리는 모래 파티클 -->
+    <circle cx="300" cy="640" r="7" fill="#FDE68A" opacity="0.75"/>
+    <circle cx="340" cy="620" r="5" fill="#FDE68A" opacity="0.65"/>
+    <circle cx="380" cy="600" r="6" fill="#FDE68A" opacity="0.60"/>
+    <circle cx="420" cy="590" r="4" fill="#FDE68A" opacity="0.55"/>
+    <circle cx="600" cy="620" r="7" fill="#FDE68A" opacity="0.70"/>
+    <circle cx="650" cy="600" r="5" fill="#FDE68A" opacity="0.60"/>
+    <circle cx="700" cy="580" r="6" fill="#FDE68A" opacity="0.55"/>
+    <circle cx="740" cy="570" r="4" fill="#FDE68A" opacity="0.50"/>
+    <!-- 언덕 능선 하이라이트 -->
+    <path d="M0 800 Q200 700 380 740 Q480 760 512 720 Q560 690 680 740 Q820 790 1024 800"
+          stroke="#FDE68A" stroke-width="8" fill="none" opacity="0.60"/>
+    <!-- 사막 잔물결 (ripple) -->
+    <path d="M200 870 Q280 860 360 870 Q440 880 520 870 Q600 860 680 870"
+          stroke="#FBBF24" stroke-width="5" fill="none" opacity="0.40"/>
+    <path d="M160 900 Q260 890 360 900 Q460 910 560 900 Q660 890 760 900"
+          stroke="#FBBF24" stroke-width="4" fill="none" opacity="0.30"/>
+  </g>
+</svg>

@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs>
+    <radialGradient id="bg15" cx="50%" cy="55%" r="65%">
+      <stop offset="0%" stop-color="#2563EB"/>
+      <stop offset="100%" stop-color="#1E3A8A"/>
+    </radialGradient>
+    <clipPath id="clip15">
+      <rect x="0" y="0" width="1024" height="1024" rx="190"/>
+    </clipPath>
+    <filter id="glow15" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="16" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glow15lg" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="36" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <linearGradient id="arena15" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1E40AF"/>
+      <stop offset="100%" stop-color="#1E3A8A"/>
+    </linearGradient>
+    <linearGradient id="blade15" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="50%" stop-color="#93C5FD"/>
+      <stop offset="100%" stop-color="#FDE68A"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" fill="url(#bg15)" rx="190"/>
+
+  <g clip-path="url(#clip15)">
+    <!-- 아레나 바닥 타원 (원형 경기장) -->
+    <ellipse cx="512" cy="750" rx="420" ry="110" fill="#1E3A8A" stroke="#93C5FD" stroke-width="10" opacity="0.7"/>
+    <ellipse cx="512" cy="750" rx="360" ry="80" fill="none" stroke="#93C5FD" stroke-width="5" opacity="0.4"/>
+
+    <!-- 아레나 기둥들 (좌우) -->
+    <g fill="#1D4ED8" stroke="#93C5FD" stroke-width="8">
+      <rect x="210" y="480" width="56" height="280" rx="12"/>
+      <rect x="758" y="480" width="56" height="280" rx="12"/>
+      <!-- 기둥 장식 -->
+      <rect x="200" y="460" width="76" height="36" rx="8"/>
+      <rect x="748" y="460" width="76" height="36" rx="8"/>
+    </g>
+
+    <!-- 아레나 상단 아치 -->
+    <path d="M220,480 Q512,180 804,480" fill="none" stroke="#93C5FD" stroke-width="22" stroke-linecap="round"/>
+    <path d="M220,480 Q512,180 804,480" fill="none" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" opacity="0.5"/>
+
+    <!-- 관중석 느낌 (점선 빛) -->
+    <g opacity="0.3" fill="#93C5FD">
+      <circle cx="290" cy="560" r="6"/>
+      <circle cx="320" cy="540" r="5"/>
+      <circle cx="350" cy="558" r="6"/>
+      <circle cx="690" cy="540" r="6"/>
+      <circle cx="720" cy="558" r="5"/>
+      <circle cx="740" cy="542" r="6"/>
+    </g>
+
+    <!-- 메인 칼날 (큰 글래디에이터 검) -->
+    <g filter="url(#glow15lg)">
+      <!-- 칼몸 -->
+      <polygon points="512,220 540,280 524,680 500,680 496,280"
+               fill="url(#blade15)"/>
+      <!-- 가드 (크로스가드) -->
+      <rect x="430" y="660" width="164" height="36" rx="10" fill="#FDE68A"/>
+      <!-- 칼자루 -->
+      <rect x="488" y="695" width="48" height="120" rx="14" fill="#93C5FD"/>
+      <!-- 칼자루 끝 -->
+      <circle cx="512" cy="830" r="30" fill="#FDE68A"/>
+    </g>
+
+    <!-- 칼날 하이라이트 -->
+    <polygon points="512,230 520,280 515,670 510,670 508,280" fill="#FFFFFF" opacity="0.5"/>
+
+    <!-- 칼날 빛줄기 (위로 뻗는) -->
+    <g filter="url(#glow15)" opacity="0.7">
+      <line x1="512" y1="220" x2="512" y2="150" stroke="#FFFFFF" stroke-width="16" stroke-linecap="round"/>
+      <line x1="512" y1="220" x2="460" y2="160" stroke="#93C5FD" stroke-width="8" stroke-linecap="round"/>
+      <line x1="512" y1="220" x2="564" y2="160" stroke="#93C5FD" stroke-width="8" stroke-linecap="round"/>
+    </g>
+
+    <!-- 슬라이스 이펙트 (수평 칼날 궤적) -->
+    <g filter="url(#glow15)" opacity="0.8">
+      <line x1="230" y1="490" x2="794" y2="450" stroke="#FDE68A" stroke-width="60" stroke-linecap="round"/>
+      <line x1="230" y1="490" x2="794" y2="450" stroke="#FFFFFF" stroke-width="18" stroke-linecap="round"/>
+    </g>
+
+    <!-- 파티클 -->
+    <g filter="url(#glow15)" fill="#FDE68A">
+      <circle cx="232" cy="490" r="18"/>
+      <circle cx="792" cy="452" r="18"/>
+      <circle cx="340" cy="420" r="10"/>
+      <circle cx="680" cy="400" r="8"/>
+    </g>
+  </g>
+</svg>

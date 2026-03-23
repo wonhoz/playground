@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg02" x1="0" y1="0" x2="0.2" y2="1">
+      <stop offset="0%" stop-color="#065F46"/>
+      <stop offset="100%" stop-color="#047857"/>
+    </linearGradient>
+    <clipPath id="clip02"><rect width="1024" height="1024" rx="190"/></clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg02)"/>
+  <g clip-path="url(#clip02)">
+    <!-- Layer 2: 두 패널 분할 -->
+    <!-- 왼쪽 패널 (Raw) -->
+    <rect x="80" y="200" width="390" height="624" rx="18" fill="#A7F3D0" opacity="0.15"/>
+    <rect x="80" y="200" width="390" height="624" rx="18" fill="none" stroke="#A7F3D0" stroke-width="6"/>
+    <!-- 오른쪽 패널 (Rendered) -->
+    <rect x="554" y="200" width="390" height="624" rx="18" fill="#FFFFFF" opacity="0.12"/>
+    <rect x="554" y="200" width="390" height="624" rx="18" fill="none" stroke="#FFFFFF" stroke-width="6"/>
+    <!-- 구분선 -->
+    <line x1="512" y1="180" x2="512" y2="844" stroke="#FDE68A" stroke-width="6" stroke-dasharray="16,10"/>
+    <!-- Layer 3: 왼쪽 Raw 텍스트 -->
+    <text x="108" y="264" font-family="'Courier New',monospace" font-size="34" fill="#A7F3D0" font-weight="700"># Hello</text>
+    <rect x="108" y="285" width="200" height="8" rx="4" fill="#A7F3D0" opacity="0.5"/>
+    <rect x="108" y="312" width="280" height="8" rx="4" fill="#A7F3D0" opacity="0.4"/>
+    <rect x="108" y="338" width="220" height="8" rx="4" fill="#A7F3D0" opacity="0.3"/>
+    <text x="108" y="392" font-family="'Courier New',monospace" font-size="28" fill="#A7F3D0" opacity="0.8">**bold**</text>
+    <rect x="108" y="412" width="240" height="8" rx="4" fill="#A7F3D0" opacity="0.3"/>
+    <rect x="108" y="438" width="180" height="8" rx="4" fill="#A7F3D0" opacity="0.25"/>
+    <!-- 오른쪽 Rendered -->
+    <text x="582" y="264" font-family="'Segoe UI',Arial,sans-serif" font-size="38" fill="#FFFFFF" font-weight="800">Hello</text>
+    <rect x="582" y="285" width="200" height="8" rx="4" fill="#FFFFFF" opacity="0.5"/>
+    <rect x="582" y="312" width="280" height="8" rx="4" fill="#FFFFFF" opacity="0.4"/>
+    <rect x="582" y="338" width="220" height="8" rx="4" fill="#FFFFFF" opacity="0.3"/>
+    <text x="582" y="392" font-family="'Segoe UI',Arial,sans-serif" font-size="28" fill="#FFFFFF" font-weight="700">bold</text>
+    <rect x="582" y="412" width="240" height="8" rx="4" fill="#FFFFFF" opacity="0.3"/>
+    <rect x="582" y="438" width="180" height="8" rx="4" fill="#FFFFFF" opacity="0.25"/>
+    <!-- 라벨 -->
+    <text x="275" y="780" font-family="'Segoe UI',Arial,sans-serif" font-size="36" fill="#A7F3D0" text-anchor="middle" font-weight="700">RAW</text>
+    <text x="749" y="780" font-family="'Segoe UI',Arial,sans-serif" font-size="36" fill="#FFFFFF" text-anchor="middle" font-weight="700">VIEW</text>
+  </g>
+</svg>

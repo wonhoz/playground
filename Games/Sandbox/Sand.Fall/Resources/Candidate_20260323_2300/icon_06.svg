@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg06" cx="50%" cy="70%" r="60%">
+      <stop offset="0%" stop-color="#292524"/>
+      <stop offset="100%" stop-color="#1C1917"/>
+    </radialGradient>
+    <radialGradient id="glow06" cx="50%" cy="60%" r="40%">
+      <stop offset="0%" stop-color="#F97316" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#F97316" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="flame06a" x1="0%" y1="100%" x2="30%" y2="0%">
+      <stop offset="0%" stop-color="#DC2626"/>
+      <stop offset="50%" stop-color="#F97316"/>
+      <stop offset="100%" stop-color="#FDE68A"/>
+    </linearGradient>
+    <linearGradient id="flame06b" x1="100%" y1="100%" x2="70%" y2="0%">
+      <stop offset="0%" stop-color="#DC2626"/>
+      <stop offset="60%" stop-color="#F97316"/>
+      <stop offset="100%" stop-color="#FBBF24"/>
+    </linearGradient>
+    <clipPath id="clip06">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg06)"/>
+  <g clip-path="url(#clip06)">
+    <!-- 배경 글로우 -->
+    <rect width="1024" height="1024" rx="190" fill="url(#glow06)"/>
+    <!-- Layer 2: 불꽃 시뮬레이션 -->
+    <!-- 가장 바깥 불꽃 (낮고 넓음) -->
+    <path d="M512 820 Q340 780 300 640 Q270 520 350 440 Q300 520 380 480 Q340 420 420 360 Q380 440 460 400 Q440 320 512 260 Q584 320 564 400 Q644 440 604 360 Q684 420 644 480 Q724 520 674 640 Q720 540 724 640 Q784 780 684 820 Z"
+          fill="url(#flame06a)" opacity="0.85"/>
+    <!-- 중간 불꽃 -->
+    <path d="M512 780 Q390 750 370 640 Q350 540 420 480 Q390 540 450 500 Q420 440 480 390 Q456 460 512 420 Q568 460 544 390 Q604 440 574 500 Q634 540 654 640 Q634 750 512 780 Z"
+          fill="url(#flame06b)" opacity="0.90"/>
+    <!-- 내부 밝은 불꽃 -->
+    <path d="M512 740 Q430 710 420 620 Q410 540 460 490 Q440 550 490 520 Q470 460 512 420 Q554 460 534 520 Q584 550 564 490 Q614 540 604 620 Q594 710 512 740 Z"
+          fill="#FBBF24" opacity="0.85"/>
+    <!-- 불꽃 코어 -->
+    <path d="M512 700 Q460 680 455 620 Q450 560 490 530 Q476 580 512 560 Q548 580 534 530 Q574 560 569 620 Q564 680 512 700 Z"
+          fill="#FDE68A" opacity="0.90"/>
+    <!-- Layer 3: 불꽃 입자들 -->
+    <circle cx="420" cy="360" r="16" fill="#F97316" opacity="0.85"/>
+    <circle cx="380" cy="290" r="10" fill="#FDE68A" opacity="0.70"/>
+    <circle cx="360" cy="220" r="7" fill="#F97316" opacity="0.50"/>
+    <circle cx="600" cy="340" r="14" fill="#F97316" opacity="0.80"/>
+    <circle cx="640" cy="270" r="9" fill="#FDE68A" opacity="0.65"/>
+    <circle cx="660" cy="200" r="6" fill="#F97316" opacity="0.45"/>
+    <circle cx="460" cy="300" r="12" fill="#FDE68A" opacity="0.75"/>
+    <circle cx="440" cy="230" r="8" fill="#FBBF24" opacity="0.60"/>
+    <circle cx="560" cy="310" r="11" fill="#FDE68A" opacity="0.70"/>
+    <circle cx="580" cy="240" r="7" fill="#FBBF24" opacity="0.55"/>
+    <circle cx="512" cy="270" r="10" fill="#FFFFFF" opacity="0.50"/>
+    <!-- 불꽃 맨 위 밝은 끝 -->
+    <circle cx="512" cy="265" r="16" fill="#FDE68A" opacity="0.60"/>
+  </g>
+</svg>

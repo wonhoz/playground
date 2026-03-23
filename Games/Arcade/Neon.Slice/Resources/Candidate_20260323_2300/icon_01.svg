@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg01" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#0F0F1F"/>
+      <stop offset="100%" stop-color="#0A0A0F"/>
+    </radialGradient>
+    <radialGradient id="glow01" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#00FFFF" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#00FFFF" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="neon01">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg01)"/>
+  <!-- 글로우 배경 -->
+  <circle cx="512" cy="512" r="280" fill="url(#glow01)"/>
+  <!-- 시안 원 (왼쪽 반) -->
+  <path d="M 512 230 A 282 282 0 0 0 512 794" fill="none" stroke="#00FFFF" stroke-width="56" stroke-linecap="round" filter="url(#neon01)"/>
+  <path d="M 512 230 A 282 282 0 0 0 512 794" fill="none" stroke="#00FFFF" stroke-width="28" stroke-linecap="round"/>
+  <!-- 시안 원 (오른쪽 반) - 약간 이동 -->
+  <path d="M 512 230 A 282 282 0 0 1 512 794" fill="none" stroke="#00CCCC" stroke-width="56" stroke-linecap="round" filter="url(#neon01)" transform="translate(30,0)"/>
+  <path d="M 512 230 A 282 282 0 0 1 512 794" fill="none" stroke="#00FFFF" stroke-width="28" stroke-linecap="round" transform="translate(30,0)"/>
+  <!-- 슬라이스 선 (대각) -->
+  <line x1="280" y1="440" x2="750" y2="580" stroke="white" stroke-width="18" stroke-linecap="round" filter="url(#neon01)"/>
+  <line x1="280" y1="440" x2="750" y2="580" stroke="white" stroke-width="8" stroke-linecap="round"/>
+  <!-- 파티클들 (핑크) -->
+  <circle cx="380" cy="380" r="22" fill="#FF2D78" filter="url(#neon01)"/>
+  <circle cx="380" cy="380" r="12" fill="#FF2D78"/>
+  <circle cx="650" cy="640" r="18" fill="#FF2D78" filter="url(#neon01)"/>
+  <circle cx="650" cy="640" r="10" fill="#FF2D78"/>
+  <circle cx="700" cy="370" r="14" fill="#FFE600" filter="url(#neon01)"/>
+  <circle cx="700" cy="370" r="8" fill="#FFE600"/>
+  <circle cx="320" cy="660" r="16" fill="#00FF14" filter="url(#neon01)"/>
+  <circle cx="320" cy="660" r="8" fill="#00FF14"/>
+</svg>

@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg01" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#7C3AED"/>
+      <stop offset="100%" stop-color="#6B21A8"/>
+    </radialGradient>
+    <linearGradient id="pen01" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FDE68A"/>
+      <stop offset="100%" stop-color="#F59E0B"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg01)"/>
+  <!-- 황금 편집 펜 -->
+  <g transform="translate(512,512)">
+    <!-- 펜 몸통 -->
+    <rect x="-40" y="-260" width="80" height="320" rx="20" fill="url(#pen01)" transform="rotate(-25)"/>
+    <!-- 펜 팁 -->
+    <polygon points="0,0 -35,-60 35,-60" fill="#D97706" transform="rotate(-25) translate(0,60)"/>
+    <!-- 펜 클립 -->
+    <rect x="20" y="-240" width="18" height="200" rx="9" fill="#B45309" transform="rotate(-25)"/>
+    <!-- AI 스파크 방전 1 -->
+    <path d="M80,-80 L130,-120 L110,-80 L160,-110" stroke="#FDE68A" stroke-width="18" stroke-linecap="round" stroke-linejoin="round" fill="none" transform="rotate(15)"/>
+    <!-- AI 스파크 방전 2 -->
+    <path d="M100,20 L155,0 L130,30 L180,15" stroke="#E9D5FF" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" fill="none" transform="rotate(5)"/>
+    <!-- AI 스파크 방전 3 -->
+    <path d="M-110,-60 L-160,-90 L-140,-50 L-185,-70" stroke="#FDE68A" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    <!-- 스파크 점들 -->
+    <circle cx="170" cy="-140" r="20" fill="#FDE68A" opacity="0.9"/>
+    <circle cx="-180" cy="-30" r="14" fill="#E9D5FF" opacity="0.8"/>
+    <circle cx="150" cy="60" r="16" fill="#FDE68A" opacity="0.7"/>
+    <circle cx="-160" cy="80" r="12" fill="#FDE68A" opacity="0.6"/>
+  </g>
+</svg>

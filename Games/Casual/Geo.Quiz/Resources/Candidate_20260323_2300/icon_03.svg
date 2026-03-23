@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg03" cx="50%" cy="45%" r="55%">
+      <stop offset="0%" stop-color="#0E7BB5"/>
+      <stop offset="100%" stop-color="#0369A1"/>
+    </radialGradient>
+    <radialGradient id="globeGrad03" cx="40%" cy="35%" r="60%">
+      <stop offset="0%" stop-color="#BAE6FD"/>
+      <stop offset="60%" stop-color="#7DD3FC"/>
+      <stop offset="100%" stop-color="#0284C7"/>
+    </radialGradient>
+    <clipPath id="clip03">
+      <circle cx="512" cy="512" r="340"/>
+    </clipPath>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg03)"/>
+
+  <!-- 지구본 원형 -->
+  <circle cx="512" cy="512" r="340" fill="url(#globeGrad03)" stroke="#38BDF8" stroke-width="18"/>
+
+  <!-- 위도선 -->
+  <g clip-path="url(#clip03)" fill="none" stroke="#0369A1" stroke-width="10" opacity="0.7">
+    <ellipse cx="512" cy="512" rx="340" ry="110"/>
+    <ellipse cx="512" cy="512" rx="340" ry="220"/>
+    <line x1="172" y1="512" x2="852" y2="512"/>
+    <line x1="172" y1="352" x2="852" y2="352"/>
+    <line x1="172" y1="672" x2="852" y2="672"/>
+  </g>
+
+  <!-- 경도선 -->
+  <g clip-path="url(#clip03)" fill="none" stroke="#0369A1" stroke-width="10" opacity="0.7">
+    <line x1="512" y1="172" x2="512" y2="852"/>
+    <ellipse cx="512" cy="512" rx="170" ry="340"/>
+    <ellipse cx="512" cy="512" rx="295" ry="340"/>
+  </g>
+
+  <!-- 대륙 실루엣 (유라시아·아프리카 느낌) -->
+  <g clip-path="url(#clip03)" fill="#FDE68A" opacity="0.85">
+    <!-- 유럽·아시아 -->
+    <path d="M 350 380 Q 420 340 520 360 Q 620 345 700 380 Q 740 410 720 450 Q 690 480 650 470 Q 600 490 560 475 Q 510 500 470 480 Q 420 490 380 460 Q 340 430 350 380 Z"/>
+    <!-- 아프리카 -->
+    <path d="M 420 490 Q 450 480 490 495 Q 520 510 510 560 Q 500 610 480 640 Q 460 660 440 640 Q 410 610 400 570 Q 390 530 420 490 Z"/>
+    <!-- 아메리카 서쪽 일부 -->
+    <path d="M 240 420 Q 265 400 285 420 Q 300 450 290 490 Q 275 520 255 510 Q 230 490 235 460 Q 238 435 240 420 Z"/>
+  </g>
+
+  <!-- 별 하이라이트 -->
+  <circle cx="380" cy="370" r="18" fill="#FFFFFF" opacity="0.6"/>
+</svg>

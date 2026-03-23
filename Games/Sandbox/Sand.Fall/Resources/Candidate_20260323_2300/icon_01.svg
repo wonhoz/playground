@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg01" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#B45309"/>
+      <stop offset="100%" stop-color="#92400E"/>
+    </radialGradient>
+    <linearGradient id="sand01" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FDE68A"/>
+      <stop offset="100%" stop-color="#F59E0B"/>
+    </linearGradient>
+    <clipPath id="clip01">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg01)"/>
+  <g clip-path="url(#clip01)">
+    <!-- Layer 2: 모래시계 메인 심볼 -->
+    <!-- 상단 삼각형 (위 모래 저장소) -->
+    <path d="M320 200 L704 200 L512 450 Z" fill="url(#sand01)" stroke="#FDE68A" stroke-width="18" stroke-linejoin="round"/>
+    <!-- 하단 삼각형 (아래 모래 저장소) -->
+    <path d="M320 824 L704 824 L512 574 Z" fill="url(#sand01)" stroke="#FDE68A" stroke-width="18" stroke-linejoin="round"/>
+    <!-- 모래시계 외곽 프레임 상단 -->
+    <rect x="300" y="180" width="424" height="36" rx="18" fill="#FFFFFF" opacity="0.9"/>
+    <!-- 모래시계 외곽 프레임 하단 -->
+    <rect x="300" y="808" width="424" height="36" rx="18" fill="#FFFFFF" opacity="0.9"/>
+    <!-- 중앙 잘록한 부분 표시 -->
+    <rect x="490" y="444" width="44" height="136" rx="22" fill="#F59E0B" stroke="#FDE68A" stroke-width="12"/>
+    <!-- Layer 3: 떨어지는 모래 입자들 -->
+    <circle cx="512" cy="520" r="14" fill="#FDE68A" opacity="0.95"/>
+    <circle cx="512" cy="558" r="11" fill="#FDE68A" opacity="0.80"/>
+    <circle cx="512" cy="592" r="8" fill="#FDE68A" opacity="0.60"/>
+    <circle cx="498" cy="616" r="6" fill="#FFFFFF" opacity="0.50"/>
+    <circle cx="526" cy="610" r="5" fill="#FFFFFF" opacity="0.40"/>
+    <!-- 상단 모래 쌓임 표현 -->
+    <ellipse cx="512" cy="440" rx="90" ry="20" fill="#F59E0B" opacity="0.7"/>
+    <!-- 하단 모래 쌓임 표현 -->
+    <ellipse cx="512" cy="620" rx="110" ry="24" fill="#FBBF24" opacity="0.8"/>
+    <ellipse cx="512" cy="644" rx="140" ry="28" fill="#F59E0B" opacity="0.6"/>
+  </g>
+</svg>

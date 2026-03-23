@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg13" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#831843"/>
+      <stop offset="100%" stop-color="#6D1339"/>
+    </linearGradient>
+    <linearGradient id="prog" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#F472B6"/>
+      <stop offset="100%" stop-color="#FDE68A"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg13)"/>
+  <!-- 스캔 UI 창 -->
+  <rect x="130" y="200" width="764" height="600" rx="28" fill="#3D0D20" opacity="0.8"/>
+  <!-- 창 상단 바 -->
+  <rect x="130" y="200" width="764" height="52" rx="28" fill="#5C1230"/>
+  <text x="512" y="236" font-family="system-ui, sans-serif" font-weight="bold" font-size="32" fill="white" text-anchor="middle" opacity="0.9">Folder Purge — 스캔 중...</text>
+  <!-- 진행바 트랙 -->
+  <rect x="180" y="310" width="664" height="48" rx="24" fill="#5C1230"/>
+  <!-- 진행바 채움 (72%) -->
+  <rect x="180" y="310" width="478" height="48" rx="24" fill="url(#prog)"/>
+  <text x="512" y="344" font-family="system-ui, sans-serif" font-weight="bold" font-size="30" fill="white" text-anchor="middle">72%</text>
+  <!-- 발견 항목들 -->
+  <text x="200" y="420" font-family="system-ui, sans-serif" font-weight="bold" font-size="32" fill="#F9A8D4">빈 폴더</text>
+  <text x="700" y="420" font-family="system-ui, sans-serif" font-weight="bold" font-size="48" fill="#FDE68A" text-anchor="end">127</text>
+
+  <text x="200" y="490" font-family="system-ui, sans-serif" font-weight="bold" font-size="32" fill="#F9A8D4">0 bytes 파일</text>
+  <text x="700" y="490" font-family="system-ui, sans-serif" font-weight="bold" font-size="48" fill="#FDE68A" text-anchor="end">43</text>
+
+  <text x="200" y="560" font-family="system-ui, sans-serif" font-weight="bold" font-size="32" fill="#F9A8D4">bin / obj</text>
+  <text x="700" y="560" font-family="system-ui, sans-serif" font-weight="bold" font-size="48" fill="#FDE68A" text-anchor="end">89</text>
+
+  <line x1="180" y1="590" x2="844" y2="590" stroke="#5C1230" stroke-width="2"/>
+
+  <text x="200" y="648" font-family="system-ui, sans-serif" font-weight="bold" font-size="36" fill="white">합계</text>
+  <text x="700" y="648" font-family="system-ui, sans-serif" font-weight="bold" font-size="54" fill="#FDE68A" text-anchor="end">259</text>
+
+  <!-- 현재 경로 -->
+  <rect x="180" y="710" width="664" height="44" rx="12" fill="#5C1230"/>
+  <text x="512" y="740" font-family="monospace" font-size="24" fill="#F9A8D4" text-anchor="middle">C:\Projects\MyApp\bin\Debug\net10...</text>
+</svg>

@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg04" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A0A2E"/>
+      <stop offset="100%" stop-color="#0F0A1E"/>
+    </linearGradient>
+    <linearGradient id="swordGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E0C0FF"/>
+      <stop offset="50%" stop-color="#BF5FFF"/>
+      <stop offset="100%" stop-color="#8020CC"/>
+    </linearGradient>
+    <filter id="neon04">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg04)"/>
+  <!-- 검 빛 글로우 -->
+  <line x1="340" y1="780" x2="720" y2="240" stroke="#BF5FFF" stroke-width="80" stroke-linecap="round" stroke-opacity="0.3" filter="url(#neon04)"/>
+  <!-- 검날 -->
+  <line x1="340" y1="780" x2="720" y2="240" stroke="url(#swordGrad)" stroke-width="36" stroke-linecap="round"/>
+  <!-- 검 가드 -->
+  <line x1="430" y1="660" x2="560" y2="580" stroke="#FFE600" stroke-width="48" stroke-linecap="round" filter="url(#neon04)"/>
+  <line x1="430" y1="660" x2="560" y2="580" stroke="#FFE600" stroke-width="24" stroke-linecap="round"/>
+  <!-- 검 손잡이 -->
+  <line x1="280" y1="820" x2="380" y2="730" stroke="#8B6914" stroke-width="44" stroke-linecap="round"/>
+  <line x1="280" y1="820" x2="380" y2="730" stroke="#D4A820" stroke-width="22" stroke-linecap="round"/>
+  <!-- 검 끝 빛 -->
+  <circle cx="720" cy="240" r="32" fill="#FFE600" filter="url(#neon04)"/>
+  <circle cx="720" cy="240" r="16" fill="white"/>
+  <!-- 빛 방사선 -->
+  <line x1="720" y1="200" x2="720" y2="170" stroke="#FFE600" stroke-width="12" stroke-linecap="round" filter="url(#neon04)"/>
+  <line x1="750" y1="220" x2="775" y2="205" stroke="#FFE600" stroke-width="12" stroke-linecap="round" filter="url(#neon04)"/>
+  <line x1="700" y1="210" x2="680" y2="185" stroke="#FFE600" stroke-width="12" stroke-linecap="round" filter="url(#neon04)"/>
+  <!-- 파티클 -->
+  <circle cx="620" cy="360" r="14" fill="#BF5FFF" filter="url(#neon04)"/>
+  <circle cx="480" cy="500" r="10" fill="#00FFFF" filter="url(#neon04)"/>
+  <circle cx="560" cy="420" r="8" fill="#FF2D78" filter="url(#neon04)"/>
+</svg>

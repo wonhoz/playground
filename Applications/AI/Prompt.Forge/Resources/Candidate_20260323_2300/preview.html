@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prompt.Forge — 아이콘 후보 (2026-03-23)</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #111118;
+    color: #E0E0E0;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    min-height: 100vh;
+    padding: 40px 24px;
+  }
+  header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+  header h1 {
+    font-size: 2.4rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #F59E0B, #FDE68A, #C084FC);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: -0.5px;
+  }
+  header p {
+    margin-top: 10px;
+    color: #888;
+    font-size: 0.95rem;
+  }
+  .badge {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 4px 16px;
+    border-radius: 20px;
+    background: #6B21A8;
+    color: #FDE68A;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 28px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .card {
+    background: #1C1C28;
+    border: 1px solid #2A2A3A;
+    border-radius: 20px;
+    padding: 28px 20px 22px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    cursor: pointer;
+  }
+  .card:hover {
+    transform: scale(1.13);
+    box-shadow: 0 16px 48px rgba(0,0,0,0.6);
+    border-color: #4A4A6A;
+    z-index: 10;
+  }
+  .card img {
+    width: 140px;
+    height: 140px;
+    border-radius: 28px;
+    display: block;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+  }
+  .card-info {
+    text-align: center;
+    width: 100%;
+  }
+  .card-filename {
+    font-size: 0.78rem;
+    color: #666;
+    font-family: 'Cascadia Code', 'Consolas', monospace;
+    margin-bottom: 6px;
+  }
+  .card-concept {
+    font-size: 0.88rem;
+    color: #C4B5FD;
+    font-weight: 600;
+    line-height: 1.4;
+    margin-bottom: 10px;
+  }
+  .palette {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+  }
+  .swatch {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.15);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+  }
+  .card-num {
+    font-size: 0.7rem;
+    color: #444;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>Prompt.Forge</h1>
+  <p>AI 프롬프트 라이브러리 매니저 — 아이콘 후보</p>
+  <span class="badge">Candidate_20260323_2300 · 15개</span>
+</header>
+<div class="grid">
+
+  <div class="card">
+    <img src="icon_01.svg" alt="icon_01">
+    <div class="card-info">
+      <div class="card-filename">icon_01.svg</div>
+      <div class="card-concept">황금 편집 펜 + 보라 AI 스파크 방전</div>
+      <div class="palette">
+        <div class="swatch" style="background:#6B21A8" title="#6B21A8"></div>
+        <div class="swatch" style="background:#F59E0B" title="#F59E0B"></div>
+        <div class="swatch" style="background:#FDE68A" title="#FDE68A"></div>
+      </div>
+    </div>
+    <div class="card-num">#01 · literal · 중앙 심볼</div>
+  </div>
+
+  <div class="card">
+    <img src="icon_02.svg" alt="icon_02">
+    <div class="card-info">
+      <div class="card-filename">icon_02.svg</div>
+      <div class="card-concept">여러 겹 프롬프트 카드 스택 (라이브러리)</div>
+      <div class="palette">
+        <div class="swatch" style="background:#059669" title="#059669"></div>
+        <div class="swatch" style="background:#ffffff" title="#ffffff"></div>
+        <div class="swatch" style="background:#6EE7B7" title="#6EE7B7"></div>
+      </div>
+    </div>
+    <div class="card-num">#02 · literal · 레이어드</div>
+  </div>
+
+  <div class="card">
+    <img src="icon_03.svg" alt="icon_03">
+    <div class="card-info">
+      <div class="card-filename">icon_03.svg</div>
+      <div class="card-concept">{{PROMPT}} 텍스트가 크게 보이는 편집창</div>
+      <div class="palette">
+        <div class="swatch" style="background:#1E3A8A" title="#1E3A8A"></div>
+        <div class="swatch" style="background:#FDE68A" title="#FDE68A"></div>
+        <div class="swatch" style="background:#60A5FA" title="#60A5FA"></div>
+      </div>
+    </div>
+    <div class="card-num">#03 · hybrid · 기하학</div>
+  </div>
+
+  <div class="card">
+    <img src="icon_04.svg" alt="icon_04">
+    <div class="card-info">
+      <div class="card-filename">icon_04.svg</div>
+      <div class="card-concept">마법사 모자 + 별 뿌림 (주문서 = 프롬프트)</div>
+      <div class="palette">
+        <div class="swatch" style="background:#831843" title="#831843"></div>
+        <div class="swatch" style="background:#1F2937" title="#1F2937"></div>
+        <div class="swatch" style="background:#FDE68A" title="#FDE68A"></div>
+      </div>
+    </div>
+    <div class="card-num">#04 · metaphor · 실루엣</div>
+  </div>
+
+  <div class="card">
+    <img src="icon_05.svg" alt="icon_05">
+    <div class="card-info">
+      <div class="card-filename">icon_05.svg</div>
+      <div class="card-concept">파일 색인 카드 서랍장 (라이브러리 캐비닛)</div>
+      <div class="palette">
+        <div class="swatch" style="background:#92400E" title="#92400E"></div>
+        <div class="swatch" style="background:#D97706" title="#D97706"></div>
+        <div class="swatch" style="background:#ffffff" title="#ffffff"></div>
+      </div>
+    </div>
+    <div class="card-num">#05 · literal · 공간/장면</div>
+  </div>
+
+  <div class="card">
+    <img src="icon_06.svg" alt="icon_06">
+    <div class="card-info">
+      <div class="card-filename">icon_06.svg</div>
+      <div class="card-concept">번개 → 텍스트 줄 생성 (AI 생성)</div>
+      <div class="palette">
+        <div class="swatch" style="background:#0369A1" title="#0369A1"></div>
+        <div class="swatch" style="background:#FDE68A" title="#FDE68A"></div>
+        <div class="swatch" style="background:#ffffff" title="#ffffff"></div>
+      </div>
+    </div>
+    <div class="card-num">#06 · metaphor · 대각선/동적</div>
+  </div>
+
+  <div class="card">
+    <img src="icon_07.svg" alt="icon_07">
+    <div class="card-info">
+      <div class="card-filename">icon_07.svg</div>
+      <div class="card-concept">뇌 형태 + 텍스트 방울들 (AI 뇌)</div>
+      <div class="palette">
+        <div class="swatch" style="background:#DB2777" title="#DB2777"></div>
+        <div class="swatch" style="background:#FDE68A" title="#FDE68A"></div>
+        <div class="swatch" style="background:#A7F3D0" title="#A7F3D0"></div>
+      </div>
+    </div>
+    <div class="card-num">#07 · hybrid · 중앙 심볼</div>
+  </div>
+
+  <div class="card">
+    <img src="icon_08.svg" alt="icon_08">
+    <div class="card-info">
+      <div class="card-filename">icon_08.svg</div>
+      <div class="card-concept">#태그1 #태그2 #태그3 클라우드</div>
+      <div class="palette">
+        <div class="swatch" style="background:#65A30D" title="#65A30D"></div>
+        <div class="swatch" style="background:#FDE68A" title="#FDE68A"></div>
+        <div class="swatch" style="background:#BFDBFE" title="#BFDBFE"></div>
+      </div>
+    </div>
+    <div class="card-num">#08 · literal · 기하학</div>
+  </div>
+
+  <div class="card">
+    <img src="icon_09.svg" alt="icon_09">
+    <div class="card-info">
+      <div class="card-filename">icon_09.svg</div>
+      <div class="card-concept">모루(Forge) + 불꽃 텍스트 쇠질</div>
+      <div class="palette">
+        <div class="swatch" style="background:#EA580C" title="#EA580C"></div>
+        <div class="swatch" style="background:#374151" title="#374151"></div>
+        <div class="swatch" style="background:#FDE68A" title="#FDE68A"></div>
+      </div>
+    </div>
+    <div class="card-num">#09 · metaphor · 중앙 심볼</div>
+  </div>
+
+  <div class="card">
+    <img src="icon_10.svg" alt="icon_10">
+    <div class="card-info">
+      <div class="card-filename">icon_10.svg</div>
+      <div class="card-concept">★즐겨찾기 별 + 프롬프트 카드</div>
+      <div class="palette">
+        <div class="swatch" style="background:#0D9488" title="#0D9488"></div>
+        <div class="swatch" style="background:#FDE68A" title="#FDE68A"></div>
+        <div class="swatch" style="background:#ffffff" title="#ffffff"></div>
+      </div>
+    </div>
+    <div class="card-num">#10 · literal · 레이어드</div>
+  </div>
+
+  <div class="card">
+    <img src="icon_11.svg" alt="icon_11">
+    <div class="card-info">
+      <div class="card-filename">icon_11.svg</div>
+      <div class="card-concept">돋보기 안에 프롬프트 텍스트 검색</div>
+      <div class="palette">
+        <div class="swatch" style="background:#2563EB" title="#2563EB"></div>
+        <div class="swatch" style="background:#ffffff" title="#ffffff"></div>
+        <div class="swatch" style="background:#1E3A8A" title="#1E3A8A"></div>
+      </div>
+    </div>
+    <div class="card-num">#11 · hybrid · 공간/장면</div>
+  </div>
+
+  <div class="card">
+    <img src="icon_12.svg" alt="icon_12">
+    <div class="card-info">
+      <div class="card-filename">icon_12.svg</div>
+      <div class="card-concept">깔때기: 많은 텍스트 → 정제 출력</div>
+      <div class="palette">
+        <div class="swatch" style="background:#C026D3" title="#C026D3"></div>
+        <div class="swatch" style="background:#ffffff" title="#ffffff"></div>
+        <div class="swatch" style="background:#FDE68A" title="#FDE68A"></div>
+      </div>
+    </div>
+    <div class="card-num">#12 · metaphor · 기하학 추상</div>
+  </div>
+
+  <div class="card">
+    <img src="icon_13.svg" alt="icon_13">
+    <div class="card-info">
+      <div class="card-filename">icon_13.svg</div>
+      <div class="card-concept">v1→v2→v3 버전 타임라인 노드</div>
+      <div class="palette">
+        <div class="swatch" style="background:#0F172A" title="#0F172A"></div>
+        <div class="swatch" style="background:#818CF8" title="#818CF8"></div>
+        <div class="swatch" style="background:#22D3EE" title="#22D3EE"></div>
+      </div>
+    </div>
+    <div class="card-num">#13 · literal · 대각선/동적</div>
+  </div>
+
+  <div class="card">
+    <img src="icon_14.svg" alt="icon_14">
+    <div class="card-info">
+      <div class="card-filename">icon_14.svg</div>
+      <div class="card-concept">열쇠 + AI 신경망 (프롬프트=AI의 열쇠)</div>
+      <div class="palette">
+        <div class="swatch" style="background:#DC2626" title="#DC2626"></div>
+        <div class="swatch" style="background:#F59E0B" title="#F59E0B"></div>
+        <div class="swatch" style="background:#ffffff" title="#ffffff"></div>
+      </div>
+    </div>
+    <div class="card-num">#14 · hybrid · 중앙 심볼</div>
+  </div>
+
+  <div class="card">
+    <img src="icon_15.svg" alt="icon_15">
+    <div class="card-info">
+      <div class="card-filename">icon_15.svg</div>
+      <div class="card-concept">요리사가 재료(텍스트)로 프롬프트 요리</div>
+      <div class="palette">
+        <div class="swatch" style="background:#D97706" title="#D97706"></div>
+        <div class="swatch" style="background:#1F2937" title="#1F2937"></div>
+        <div class="swatch" style="background:#FDE68A" title="#FDE68A"></div>
+      </div>
+    </div>
+    <div class="card-num">#15 · metaphor · 실루엣</div>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg15" cx="50%" cy="50%" r="55%">
+      <stop offset="0%" stop-color="#92400E"/>
+      <stop offset="100%" stop-color="#78350F"/>
+    </radialGradient>
+    <linearGradient id="shovel15" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E5E7EB"/>
+      <stop offset="100%" stop-color="#9CA3AF"/>
+    </linearGradient>
+    <linearGradient id="blade15" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#D1D5DB"/>
+      <stop offset="100%" stop-color="#6B7280"/>
+    </linearGradient>
+    <clipPath id="clip15">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg15)"/>
+  <g clip-path="url(#clip15)">
+    <!-- Layer 2: 삽 -->
+    <!-- 삽 손잡이 (나무) -->
+    <rect x="480" y="200" width="64" height="480" rx="32" fill="#A16207" stroke="#FBBF24" stroke-width="12"/>
+    <!-- 손잡이 나뭇결 -->
+    <line x1="495" y1="240" x2="529" y2="240" stroke="#92400E" stroke-width="5" opacity="0.50"/>
+    <line x1="495" y1="290" x2="529" y2="290" stroke="#92400E" stroke-width="5" opacity="0.50"/>
+    <line x1="495" y1="340" x2="529" y2="340" stroke="#92400E" stroke-width="5" opacity="0.50"/>
+    <line x1="495" y1="390" x2="529" y2="390" stroke="#92400E" stroke-width="5" opacity="0.50"/>
+    <line x1="495" y1="440" x2="529" y2="440" stroke="#92400E" stroke-width="5" opacity="0.50"/>
+    <!-- 삽 날 연결 부분 -->
+    <rect x="456" y="660" width="112" height="50" rx="14" fill="url(#shovel15)" stroke="#9CA3AF" stroke-width="10"/>
+    <!-- 삽 날 (날카로운 삽) -->
+    <path d="M380 710 L644 710 L644 820 Q644 880 512 880 Q380 880 380 820 Z"
+          fill="url(#blade15)" stroke="#9CA3AF" stroke-width="14"/>
+    <!-- 삽 날 하이라이트 -->
+    <path d="M390 720 L630 720 L630 810 Q630 860 512 860 Q394 860 390 810 Z"
+          fill="#E5E7EB" opacity="0.30"/>
+    <!-- Layer 3: 모래 입자들 (삽에서 쏟아지는) -->
+    <!-- 삽 날 위 모래 -->
+    <ellipse cx="512" cy="700" rx="140" ry="28" fill="#FBBF24" opacity="0.75"/>
+    <ellipse cx="512" cy="690" rx="100" ry="18" fill="#FDE68A" opacity="0.60"/>
+    <!-- 떨어지는 모래 -->
+    <circle cx="400" cy="740" r="16" fill="#FBBF24" opacity="0.85"/>
+    <circle cx="370" cy="800" r="12" fill="#FDE68A" opacity="0.75"/>
+    <circle cx="350" cy="860" r="9" fill="#FBBF24" opacity="0.65"/>
+    <circle cx="420" cy="780" r="10" fill="#FDE68A" opacity="0.70"/>
+    <circle cx="440" cy="840" r="8" fill="#FBBF24" opacity="0.60"/>
+    <circle cx="620" cy="750" r="15" fill="#FBBF24" opacity="0.85"/>
+    <circle cx="650" cy="810" r="11" fill="#FDE68A" opacity="0.75"/>
+    <circle cx="670" cy="870" r="8" fill="#FBBF24" opacity="0.65"/>
+    <circle cx="600" cy="800" r="10" fill="#FDE68A" opacity="0.70"/>
+    <!-- 좌측 위로 튀는 모래 -->
+    <circle cx="320" cy="660" r="12" fill="#FBBF24" opacity="0.70"/>
+    <circle cx="280" cy="620" r="9" fill="#FDE68A" opacity="0.60"/>
+    <circle cx="260" cy="570" r="7" fill="#FBBF24" opacity="0.50"/>
+    <!-- 우측 위로 튀는 모래 -->
+    <circle cx="700" cy="660" r="12" fill="#FBBF24" opacity="0.70"/>
+    <circle cx="740" cy="620" r="9" fill="#FDE68A" opacity="0.60"/>
+    <circle cx="760" cy="570" r="7" fill="#FBBF24" opacity="0.50"/>
+    <!-- 지면 모래 쌓임 -->
+    <ellipse cx="512" cy="920" rx="220" ry="50" fill="#D97706" opacity="0.65"/>
+    <ellipse cx="512" cy="900" rx="160" ry="30" fill="#FBBF24" opacity="0.50"/>
+    <!-- 삽 손잡이 끝 그립 -->
+    <rect x="468" y="196" width="88" height="36" rx="18" fill="#92400E" stroke="#FBBF24" stroke-width="8"/>
+    <rect x="476" y="202" width="72" height="24" rx="12" fill="#FBBF24" opacity="0.40"/>
+  </g>
+</svg>

@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg14" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#6D28D9"/>
+      <stop offset="100%" stop-color="#7C3AED"/>
+    </radialGradient>
+    <radialGradient id="clockFace14" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#1E1035"/>
+      <stop offset="100%" stop-color="#12082A"/>
+    </radialGradient>
+    <radialGradient id="planet14" cx="35%" cy="30%" r="65%">
+      <stop offset="0%" stop-color="#EDE9FE"/>
+      <stop offset="100%" stop-color="#8B5CF6"/>
+    </radialGradient>
+    <clipPath id="clip14">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg14)"/>
+  <g clip-path="url(#clip14)">
+    <!-- 별 -->
+    <circle cx="160" cy="180" r="2" fill="#FFFFFF" opacity="0.5"/>
+    <circle cx="820" cy="200" r="3" fill="#FFFFFF" opacity="0.6"/>
+    <circle cx="180" cy="840" r="2" fill="#FFFFFF" opacity="0.4"/>
+    <circle cx="840" cy="820" r="2" fill="#FFFFFF" opacity="0.5"/>
+    <circle cx="130" cy="500" r="2" fill="#FFFFFF" opacity="0.4"/>
+    <circle cx="900" cy="480" r="2" fill="#FFFFFF" opacity="0.4"/>
+    <!-- Layer 2: 시계 외형 -->
+    <circle cx="512" cy="512" r="300" fill="url(#clockFace14)" stroke="#DDD6FE" stroke-width="18"/>
+    <!-- 시계 눈금 (12개) -->
+    <line x1="512" y1="222" x2="512" y2="252" stroke="#DDD6FE" stroke-width="12" stroke-linecap="round"/>
+    <line x1="662" y1="262" x2="647" y2="288" stroke="#DDD6FE" stroke-width="8" stroke-linecap="round"/>
+    <line x1="772" y1="362" x2="746" y2="377" stroke="#DDD6FE" stroke-width="8" stroke-linecap="round"/>
+    <line x1="812" y1="512" x2="782" y2="512" stroke="#DDD6FE" stroke-width="12" stroke-linecap="round"/>
+    <line x1="772" y1="662" x2="746" y2="647" stroke="#DDD6FE" stroke-width="8" stroke-linecap="round"/>
+    <line x1="662" y1="762" x2="647" y2="736" stroke="#DDD6FE" stroke-width="8" stroke-linecap="round"/>
+    <line x1="512" y1="802" x2="512" y2="772" stroke="#DDD6FE" stroke-width="12" stroke-linecap="round"/>
+    <line x1="362" y1="762" x2="377" y2="736" stroke="#DDD6FE" stroke-width="8" stroke-linecap="round"/>
+    <line x1="252" y1="662" x2="278" y2="647" stroke="#DDD6FE" stroke-width="8" stroke-linecap="round"/>
+    <line x1="212" y1="512" x2="242" y2="512" stroke="#DDD6FE" stroke-width="12" stroke-linecap="round"/>
+    <line x1="252" y1="362" x2="278" y2="377" stroke="#DDD6FE" stroke-width="8" stroke-linecap="round"/>
+    <line x1="362" y1="262" x2="377" y2="288" stroke="#DDD6FE" stroke-width="8" stroke-linecap="round"/>
+    <!-- Layer 2: 궤도 원 (시계 위에) -->
+    <circle cx="512" cy="512" r="230" fill="none" stroke="#FDE68A" stroke-width="10" opacity="0.5" stroke-dasharray="30 15"/>
+    <!-- 시계 바늘 -->
+    <!-- 시침 (10시 방향) -->
+    <line x1="512" y1="512" x2="380" y2="338" stroke="#DDD6FE" stroke-width="20" stroke-linecap="round"/>
+    <!-- 분침 (2시 방향) -->
+    <line x1="512" y1="512" x2="638" y2="302" stroke="#DDD6FE" stroke-width="14" stroke-linecap="round"/>
+    <!-- 초침 (행성 위치 표시) -->
+    <line x1="512" y1="512" x2="742" y2="512" stroke="#FDE68A" stroke-width="8" stroke-linecap="round"/>
+    <!-- 중심 원 -->
+    <circle cx="512" cy="512" r="18" fill="#DDD6FE"/>
+    <circle cx="512" cy="512" r="10" fill="#4C1D95"/>
+    <!-- Layer 2: 궤도 위 행성 -->
+    <circle cx="742" cy="512" r="42" fill="url(#planet14)"/>
+    <!-- 행성 고리 -->
+    <ellipse cx="742" cy="512" rx="60" ry="16" fill="none" stroke="#DDD6FE" stroke-width="7" opacity="0.7" transform="rotate(-20 742 512)"/>
+    <!-- Layer 3: 주기 T 표시 -->
+    <text x="512" y="660" text-anchor="middle" font-family="Arial" font-style="italic" font-size="52" fill="#DDD6FE" opacity="0.7">T</text>
+    <!-- 별 장식 -->
+    <path d="M 780 760 L 790 782 L 812 792 L 790 802 L 780 824 L 770 802 L 748 792 L 770 782 Z" fill="#FDE68A" opacity="0.85"/>
+  </g>
+</svg>

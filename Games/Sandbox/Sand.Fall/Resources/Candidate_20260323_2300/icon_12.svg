@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg12" cx="50%" cy="50%" r="55%">
+      <stop offset="0%" stop-color="#4F46E5"/>
+      <stop offset="100%" stop-color="#4338CA"/>
+    </radialGradient>
+    <radialGradient id="star12" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#FDE68A"/>
+    </radialGradient>
+    <clipPath id="clip12">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg12)"/>
+  <g clip-path="url(#clip12)">
+    <!-- Layer 2: 마법사 지팡이 -->
+    <!-- 지팡이 몸체 -->
+    <rect x="480" y="300" width="64" height="580" rx="32" fill="#A5B4FC" stroke="#C7D2FE" stroke-width="14"/>
+    <!-- 지팡이 끝 별 -->
+    <path d="M512 220 L528 270 L580 270 L538 300 L554 350 L512 320 L470 350 L486 300 L444 270 L496 270 Z"
+          fill="url(#star12)" opacity="0.95"/>
+    <!-- 별 글로우 -->
+    <circle cx="512" cy="285" r="60" fill="#FDE68A" opacity="0.20"/>
+    <circle cx="512" cy="285" r="40" fill="#FDE68A" opacity="0.25"/>
+    <!-- 지팡이 손잡이 보석 -->
+    <circle cx="512" cy="820" r="36" fill="#818CF8" stroke="#A5B4FC" stroke-width="10"/>
+    <circle cx="512" cy="820" r="20" fill="#C7D2FE" opacity="0.80"/>
+    <!-- Layer 3: 마법 입자들 -->
+    <!-- 별 주변 마법 파티클 -->
+    <circle cx="440" cy="240" r="16" fill="#FDE68A" opacity="0.90"/>
+    <circle cx="400" cy="290" r="12" fill="#FDE68A" opacity="0.80"/>
+    <circle cx="380" cy="350" r="10" fill="#A5B4FC" opacity="0.75"/>
+    <circle cx="420" cy="200" r="8" fill="#FDE68A" opacity="0.70"/>
+    <circle cx="584" cy="240" r="14" fill="#FDE68A" opacity="0.90"/>
+    <circle cx="624" cy="295" r="12" fill="#FDE68A" opacity="0.80"/>
+    <circle cx="644" cy="355" r="10" fill="#A5B4FC" opacity="0.75"/>
+    <circle cx="604" cy="200" r="8" fill="#FDE68A" opacity="0.70"/>
+    <!-- 흩뿌려진 모래 입자 (마법 효과) -->
+    <circle cx="350" cy="420" r="14" fill="#FDE68A" opacity="0.70"/>
+    <circle cx="310" cy="490" r="10" fill="#FDE68A" opacity="0.60"/>
+    <circle cx="360" cy="560" r="8" fill="#A5B4FC" opacity="0.55"/>
+    <circle cx="320" cy="630" r="6" fill="#FDE68A" opacity="0.50"/>
+    <circle cx="674" cy="440" r="14" fill="#FDE68A" opacity="0.70"/>
+    <circle cx="714" cy="510" r="10" fill="#FDE68A" opacity="0.60"/>
+    <circle cx="664" cy="580" r="8" fill="#A5B4FC" opacity="0.55"/>
+    <circle cx="704" cy="650" r="6" fill="#FDE68A" opacity="0.50"/>
+    <!-- 마법 궤적 아크 -->
+    <path d="M440 280 Q380 400 360 540 Q340 680 380 780"
+          stroke="#FDE68A" stroke-width="6" fill="none" opacity="0.35" stroke-dasharray="20 15"/>
+    <path d="M584 280 Q644 400 664 540 Q684 680 644 780"
+          stroke="#FDE68A" stroke-width="6" fill="none" opacity="0.35" stroke-dasharray="20 15"/>
+    <!-- 작은 반짝임들 -->
+    <circle cx="460" cy="390" r="5" fill="#FFFFFF" opacity="0.70"/>
+    <circle cx="570" cy="420" r="5" fill="#FFFFFF" opacity="0.65"/>
+    <circle cx="420" cy="480" r="4" fill="#FFFFFF" opacity="0.60"/>
+    <circle cx="610" cy="470" r="4" fill="#FFFFFF" opacity="0.55"/>
+  </g>
+</svg>

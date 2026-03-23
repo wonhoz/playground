@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg12" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#065F46"/>
+      <stop offset="100%" stop-color="#022C22"/>
+    </linearGradient>
+    <linearGradient id="bar12full" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#4ADE80"/>
+      <stop offset="100%" stop-color="#86EFAC"/>
+    </linearGradient>
+    <linearGradient id="bar12water" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38BDF8"/>
+      <stop offset="100%" stop-color="#7DD3FC"/>
+    </linearGradient>
+    <linearGradient id="bar12sun" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FBBF24"/>
+      <stop offset="100%" stop-color="#FDE68A"/>
+    </linearGradient>
+    <clipPath id="clip12">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg12)"/>
+
+  <!-- Layer 2: 식물 (중앙 좌측) -->
+  <!-- 화분 -->
+  <path d="M 180 780 L 220 880 L 360 880 L 400 780 Z" fill="#8B4513" stroke="#A0522D" stroke-width="8"/>
+  <rect x="160" y="760" width="260" height="30" rx="8" fill="#A0522D"/>
+  <rect x="180" y="770" width="220" height="20" rx="4" fill="#8B4513"/>
+  <!-- 흙 -->
+  <ellipse cx="290" cy="762" rx="110" ry="22" fill="#5C3010"/>
+  <!-- 줄기 -->
+  <path d="M 290 762 L 290 500" stroke="#22C55E" stroke-width="24" fill="none" stroke-linecap="round"/>
+  <!-- 잎사귀들 -->
+  <path d="M 286 620 Q 190 570 168 490 Q 240 505 286 590" fill="#4ADE80" stroke="#16A34A" stroke-width="8"/>
+  <path d="M 294 580 Q 395 530 418 448 Q 344 465 294 550" fill="#4ADE80" stroke="#16A34A" stroke-width="8"/>
+  <path d="M 286 530 Q 200 488 182 416 Q 248 430 286 502" fill="#86EFAC" stroke="#22C55E" stroke-width="7"/>
+  <path d="M 294 500 Q 385 456 405 382 Q 338 397 294 472" fill="#86EFAC" stroke="#22C55E" stroke-width="7"/>
+  <!-- 상단 새잎 -->
+  <path d="M 290 510 Q 240 478 228 430 Q 270 443 290 485" fill="#A7F3D0" stroke="#4ADE80" stroke-width="6"/>
+
+  <!-- Layer 2: HP 게이지 패널 -->
+  <!-- 패널 배경 -->
+  <rect x="480" y="220" width="440" height="560" rx="20" fill="#031F14" stroke="#0F5032" stroke-width="4" opacity="0.95"/>
+  <text x="700" y="270" font-family="sans-serif" font-size="34" fill="#6EE7B7" text-anchor="middle" font-weight="bold">PLANT STATUS</text>
+
+  <!-- HP 바: 건강 -->
+  <text x="510" y="340" font-family="sans-serif" font-size="28" fill="#FFFFFF" opacity="0.8">HP</text>
+  <rect x="560" y="315" width="320" height="34" rx="8" fill="#031F14" stroke="#4ADE80" stroke-width="3"/>
+  <rect x="563" y="318" width="270" height="28" rx="6" fill="url(#bar12full)"/>
+  <text x="730" y="340" font-family="sans-serif" font-size="22" fill="#FFFFFF" text-anchor="middle" font-weight="bold">85%</text>
+
+  <!-- 물 바 -->
+  <text x="510" y="415" font-family="sans-serif" font-size="28" fill="#7DD3FC" opacity="0.9">💧</text>
+  <text x="515" y="415" font-family="sans-serif" font-size="22" fill="#BAE6FD">H₂O</text>
+  <rect x="560" y="390" width="320" height="34" rx="8" fill="#031F14" stroke="#38BDF8" stroke-width="3"/>
+  <rect x="563" y="393" width="200" height="28" rx="6" fill="url(#bar12water)"/>
+  <text x="730" y="415" font-family="sans-serif" font-size="22" fill="#FFFFFF" text-anchor="middle">62%</text>
+
+  <!-- 햇빛 바 -->
+  <text x="510" y="490" font-family="sans-serif" font-size="22" fill="#FDE68A">☀ SUN</text>
+  <rect x="560" y="465" width="320" height="34" rx="8" fill="#031F14" stroke="#FBBF24" stroke-width="3"/>
+  <rect x="563" y="468" width="290" height="28" rx="6" fill="url(#bar12sun)"/>
+  <text x="730" y="490" font-family="sans-serif" font-size="22" fill="#FFFFFF" text-anchor="middle">91%</text>
+
+  <!-- 영양분 바 -->
+  <text x="510" y="565" font-family="sans-serif" font-size="22" fill="#A7F3D0">NPK</text>
+  <rect x="560" y="540" width="320" height="34" rx="8" fill="#031F14" stroke="#4ADE80" stroke-width="3"/>
+  <rect x="563" y="543" width="140" height="28" rx="6" fill="#4ADE80" opacity="0.7"/>
+  <text x="730" y="565" font-family="sans-serif" font-size="22" fill="#FFFFFF" text-anchor="middle">43%</text>
+
+  <!-- 성장 단계 -->
+  <text x="510" y="640" font-family="sans-serif" font-size="22" fill="#A7F3D0">LV</text>
+  <text x="700" y="645" font-family="sans-serif" font-size="48" fill="#4ADE80" text-anchor="middle" font-weight="bold">3</text>
+  <text x="700" y="680" font-family="sans-serif" font-size="24" fill="#6EE7B7" text-anchor="middle">줄기 단계</text>
+
+  <!-- 구분선 -->
+  <line x1="500" y1="700" x2="900" y2="700" stroke="#0F5032" stroke-width="2" opacity="0.6"/>
+
+  <!-- 다음 성장까지 -->
+  <text x="700" y="740" font-family="sans-serif" font-size="22" fill="#9CA3AF" text-anchor="middle">다음 단계까지</text>
+  <rect x="560" y="748" width="320" height="16" rx="6" fill="#031F14" stroke="#4ADE80" stroke-width="2"/>
+  <rect x="562" y="750" width="160" height="12" rx="4" fill="#4ADE80" opacity="0.5"/>
+</svg>

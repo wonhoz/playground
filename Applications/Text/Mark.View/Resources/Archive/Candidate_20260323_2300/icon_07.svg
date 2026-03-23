@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg07" x1="0" y1="0" x2="0.4" y2="1">
+      <stop offset="0%" stop-color="#111827"/>
+      <stop offset="100%" stop-color="#1F2937"/>
+    </linearGradient>
+    <radialGradient id="sun07" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FEF08A"/>
+      <stop offset="100%" stop-color="#FDE68A"/>
+    </radialGradient>
+    <clipPath id="clip07"><rect width="1024" height="1024" rx="190"/></clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg07)"/>
+  <g clip-path="url(#clip07)">
+    <!-- Layer 2: 달 (왼쪽 / 다크모드) -->
+    <circle cx="320" cy="430" r="190" fill="#60A5FA" opacity="0.9"/>
+    <!-- 달 모양 크레센트 컷아웃 -->
+    <circle cx="400" cy="370" r="162" fill="#1F2937"/>
+    <!-- 달 별들 -->
+    <circle cx="560" cy="270" r="12" fill="#FDE68A"/>
+    <circle cx="640" cy="310" r="8" fill="#FDE68A" opacity="0.7"/>
+    <circle cx="700" cy="240" r="6" fill="#FDE68A" opacity="0.5"/>
+    <circle cx="580" cy="180" r="5" fill="#FDE68A" opacity="0.4"/>
+    <!-- Layer 2: 해 (오른쪽 / 라이트모드) -->
+    <circle cx="720" cy="620" r="140" fill="url(#sun07)"/>
+    <!-- 해 광선 -->
+    <line x1="720" y1="440" x2="720" y2="400" stroke="#FDE68A" stroke-width="16" stroke-linecap="round"/>
+    <line x1="720" y1="800" x2="720" y2="840" stroke="#FDE68A" stroke-width="16" stroke-linecap="round"/>
+    <line x1="540" y1="620" x2="500" y2="620" stroke="#FDE68A" stroke-width="16" stroke-linecap="round"/>
+    <line x1="900" y1="620" x2="940" y2="620" stroke="#FDE68A" stroke-width="16" stroke-linecap="round"/>
+    <line x1="593" y1="493" x2="565" y2="465" stroke="#FDE68A" stroke-width="14" stroke-linecap="round"/>
+    <line x1="847" y1="493" x2="875" y2="465" stroke="#FDE68A" stroke-width="14" stroke-linecap="round"/>
+    <line x1="593" y1="747" x2="565" y2="775" stroke="#FDE68A" stroke-width="14" stroke-linecap="round"/>
+    <line x1="847" y1="747" x2="875" y2="775" stroke="#FDE68A" stroke-width="14" stroke-linecap="round"/>
+    <!-- Layer 3: 분리선 -->
+    <line x1="512" y1="150" x2="512" y2="874" stroke="#FFFFFF" stroke-width="4" stroke-dasharray="14,10" opacity="0.25"/>
+    <!-- 라벨 -->
+    <text x="256" y="830" font-family="'Segoe UI',Arial,sans-serif" font-size="36" fill="#60A5FA" text-anchor="middle" font-weight="700">DARK</text>
+    <text x="768" y="830" font-family="'Segoe UI',Arial,sans-serif" font-size="36" fill="#FDE68A" text-anchor="middle" font-weight="700">LIGHT</text>
+  </g>
+</svg>

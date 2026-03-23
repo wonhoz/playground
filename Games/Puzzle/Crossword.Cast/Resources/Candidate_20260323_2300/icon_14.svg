@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg14" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4C0519"/>
+      <stop offset="100%" stop-color="#7f1d1d"/>
+    </linearGradient>
+    <linearGradient id="glass14" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#F9A8D4" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#F9A8D4" stop-opacity="0.4"/>
+    </linearGradient>
+    <clipPath id="clip14">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg14)"/>
+  <g clip-path="url(#clip14)">
+    <!-- Layer 2: 모래시계 -->
+    <!-- 상단 유리 (삼각형) -->
+    <path d="M 280 160 L 744 160 L 512 480 Z" fill="url(#glass14)" stroke="#F9A8D4" stroke-width="12" stroke-linejoin="round"/>
+    <!-- 하단 유리 (삼각형) -->
+    <path d="M 280 864 L 744 864 L 512 544 Z" fill="url(#glass14)" stroke="#F9A8D4" stroke-width="12" stroke-linejoin="round"/>
+    <!-- 모래시계 테두리 프레임 (상단바) -->
+    <rect x="250" y="140" width="524" height="40" fill="#F9A8D4" rx="12"/>
+    <!-- 모래시계 테두리 프레임 (하단바) -->
+    <rect x="250" y="844" width="524" height="40" fill="#F9A8D4" rx="12"/>
+    <!-- 상단 모래 (남은 모래) -->
+    <path d="M 330 200 L 694 200 L 512 440 Z" fill="rgba(253,230,138,0.6)"/>
+    <!-- 하단 모래 (쌓인 모래) -->
+    <path d="M 360 824 L 664 824 L 512 600 Z" fill="rgba(253,230,138,0.85)"/>
+    <!-- 목 부분 (좁은 통로) -->
+    <rect x="496" y="478" width="32" height="80" fill="#FDE68A" rx="6"/>
+    <!-- 모래 알갱이 낙하 표현 -->
+    <circle cx="512" cy="490" r="8" fill="#FDE68A" opacity="0.9"/>
+    <circle cx="506" cy="516" r="6" fill="#FDE68A" opacity="0.7"/>
+    <circle cx="518" cy="538" r="5" fill="#FDE68A" opacity="0.5"/>
+    <!-- Layer 3: 격자 셀 (배경 좌우) + 타임어택 텍스트 -->
+    <!-- 좌측 미니 격자 -->
+    <rect x="120" y="400" width="80" height="80" fill="none" stroke="rgba(249,168,212,0.5)" stroke-width="5" rx="8"/>
+    <rect x="210" y="400" width="80" height="80" fill="none" stroke="rgba(249,168,212,0.5)" stroke-width="5" rx="8"/>
+    <rect x="120" y="490" width="80" height="80" fill="none" stroke="rgba(249,168,212,0.5)" stroke-width="5" rx="8"/>
+    <rect x="210" y="490" width="80" height="80" fill="rgba(249,168,212,0.2)" stroke="rgba(249,168,212,0.5)" stroke-width="5" rx="8"/>
+    <text x="160" y="440" font-family="Arial Black, sans-serif" font-size="44" fill="#F9A8D4" text-anchor="middle" dominant-baseline="middle">T</text>
+    <text x="250" y="440" font-family="Arial Black, sans-serif" font-size="44" fill="#F9A8D4" text-anchor="middle" dominant-baseline="middle">I</text>
+    <text x="160" y="530" font-family="Arial Black, sans-serif" font-size="44" fill="#FDE68A" text-anchor="middle" dominant-baseline="middle">M</text>
+    <text x="250" y="530" font-family="Arial Black, sans-serif" font-size="44" fill="#FDE68A" text-anchor="middle" dominant-baseline="middle">E</text>
+    <!-- 우측 미니 격자 -->
+    <rect x="734" y="400" width="80" height="80" fill="none" stroke="rgba(249,168,212,0.5)" stroke-width="5" rx="8"/>
+    <rect x="824" y="400" width="80" height="80" fill="none" stroke="rgba(249,168,212,0.5)" stroke-width="5" rx="8"/>
+    <rect x="734" y="490" width="80" height="80" fill="rgba(249,168,212,0.2)" stroke="rgba(249,168,212,0.5)" stroke-width="5" rx="8"/>
+    <rect x="824" y="490" width="80" height="80" fill="none" stroke="rgba(249,168,212,0.5)" stroke-width="5" rx="8"/>
+    <text x="774" y="440" font-family="Arial Black, sans-serif" font-size="44" fill="#F9A8D4" text-anchor="middle" dominant-baseline="middle">A</text>
+    <text x="864" y="440" font-family="Arial Black, sans-serif" font-size="44" fill="#F9A8D4" text-anchor="middle" dominant-baseline="middle">T</text>
+    <text x="774" y="530" font-family="Arial Black, sans-serif" font-size="44" fill="#FDE68A" text-anchor="middle" dominant-baseline="middle">T</text>
+    <text x="864" y="530" font-family="Arial Black, sans-serif" font-size="44" fill="#FDE68A" text-anchor="middle" dominant-baseline="middle">K</text>
+    <!-- 하단 타이틀 -->
+    <text x="512" y="940" font-family="Arial Black, sans-serif" font-size="60" font-weight="900" fill="#F9A8D4" text-anchor="middle" dominant-baseline="middle">TIME ATTACK</text>
+  </g>
+</svg>

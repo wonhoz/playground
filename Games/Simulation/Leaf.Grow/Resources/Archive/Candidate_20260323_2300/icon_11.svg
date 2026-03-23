@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg11" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3F6212"/>
+      <stop offset="100%" stop-color="#1A2E05"/>
+    </linearGradient>
+    <linearGradient id="snail11" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FDE68A"/>
+      <stop offset="100%" stop-color="#F59E0B"/>
+    </linearGradient>
+    <linearGradient id="leaf11" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#A7F3D0"/>
+      <stop offset="100%" stop-color="#4ADE80"/>
+    </linearGradient>
+    <clipPath id="clip11">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg11)"/>
+  <!-- 잔디 배경 -->
+  <rect x="0" y="780" width="1024" height="244" fill="#365314" opacity="0.8" clip-path="url(#clip11)"/>
+
+  <!-- Layer 2: 큰 잎사귀 (달팽이가 타고 있는) -->
+  <path d="M 140 720 Q 160 500 350 420 Q 540 340 680 400 Q 800 450 820 600 Q 840 720 720 760 Q 540 800 140 720 Z"
+        fill="url(#leaf11)" stroke="#22C55E" stroke-width="12"/>
+  <!-- 잎맥 -->
+  <path d="M 200 700 Q 400 600 680 480" stroke="#FFFFFF" stroke-width="8" fill="none" stroke-linecap="round" opacity="0.4"/>
+  <path d="M 350 750 Q 450 660 600 580" stroke="#FFFFFF" stroke-width="6" fill="none" stroke-linecap="round" opacity="0.35"/>
+  <path d="M 480 760 Q 560 700 650 640" stroke="#FFFFFF" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.3"/>
+
+  <!-- Layer 2: 달팽이 몸체 -->
+  <!-- 달팽이 껍데기 -->
+  <circle cx="560" cy="550" r="110" fill="none" stroke="#F59E0B" stroke-width="22"/>
+  <circle cx="560" cy="550" r="80" fill="none" stroke="#FDE68A" stroke-width="16"/>
+  <circle cx="560" cy="550" r="52" fill="none" stroke="#F59E0B" stroke-width="12"/>
+  <circle cx="560" cy="550" r="26" fill="#FDE68A" stroke="#F59E0B" stroke-width="8"/>
+  <!-- 달팽이 머리와 몸 -->
+  <ellipse cx="380" cy="630" rx="120" ry="60" fill="url(#snail11)" stroke="#D97706" stroke-width="10"/>
+  <circle cx="310" cy="600" r="50" fill="#FDE68A" stroke="#D97706" stroke-width="10"/>
+  <!-- 더듬이 -->
+  <line x1="295" y1="560" x2="275" y2="500" stroke="#F59E0B" stroke-width="10" stroke-linecap="round"/>
+  <circle cx="275" cy="498" r="12" fill="#1A2E05"/>
+  <line x1="325" y1="555" x2="330" y2="490" stroke="#F59E0B" stroke-width="10" stroke-linecap="round"/>
+  <circle cx="330" cy="488" r="12" fill="#1A2E05"/>
+  <!-- 미소 -->
+  <path d="M 295 615 Q 310 630 325 615" stroke="#D97706" stroke-width="8" fill="none" stroke-linecap="round"/>
+
+  <!-- Layer 3: 이슬방울 -->
+  <path d="M 680 480 Q 668 500 668 512 Q 668 530 680 538 Q 692 546 704 538 Q 716 530 716 512 Q 716 500 704 480 Q 692 458 680 480 Z" fill="#BAE6FD" opacity="0.8"/>
+  <path d="M 740 540 Q 728 558 728 568 Q 728 584 740 591 Q 752 598 764 591 Q 776 584 776 568 Q 776 558 764 540 Q 752 520 740 540 Z" fill="#BAE6FD" opacity="0.7"/>
+
+  <!-- SLOW 텍스트 -->
+  <text x="512" y="900" font-family="sans-serif" font-size="52" fill="#FDE68A" text-anchor="middle" font-weight="bold" opacity="0.9">느린 성장의 미학</text>
+</svg>

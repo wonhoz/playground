@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <clipPath id="clip"><rect width="1024" height="1024" rx="190"/></clipPath>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0EA5E9"/>
+      <stop offset="100%" stop-color="#0369A1"/>
+    </linearGradient>
+    <linearGradient id="dropzone" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0.08"/>
+    </linearGradient>
+  </defs>
+  <g clip-path="url(#clip)">
+    <rect width="1024" height="1024" rx="190" fill="url(#bg)"/>
+    <!-- 드롭존 영역 -->
+    <rect x="160" y="300" width="704" height="424" rx="36" fill="url(#dropzone)" stroke="#FFFFFF" stroke-width="14" stroke-dasharray="28 18"/>
+    <!-- 아래쪽 화살표 (드롭 안내) -->
+    <path d="M 512 380 L 512 540" stroke="#FFFFFF" stroke-width="52" stroke-linecap="round"/>
+    <polygon points="440,530 512,620 584,530" fill="#FFFFFF"/>
+    <!-- 날아오는 파일들 (좌측) -->
+    <rect x="60" y="160" width="140" height="175" rx="14" fill="#22D3EE" opacity="0.9"/>
+    <text x="130" y="262" text-anchor="middle" font-weight="bold" font-family="system-ui, sans-serif" font-size="36" fill="#FFFFFF">PNG</text>
+    <!-- 날아오는 파일 화살표 -->
+    <path d="M 200 240 L 330 340" stroke="#FFFFFF" stroke-width="14" stroke-linecap="round" stroke-dasharray="20 10"/>
+    <!-- 우측 파일 -->
+    <rect x="824" y="160" width="140" height="175" rx="14" fill="#6EE7B7" opacity="0.9"/>
+    <text x="894" y="262" text-anchor="middle" font-weight="bold" font-family="system-ui, sans-serif" font-size="36" fill="#1F2937">JPG</text>
+    <path d="M 824 240 L 694 340" stroke="#FFFFFF" stroke-width="14" stroke-linecap="round" stroke-dasharray="20 10"/>
+    <!-- 드롭존 라벨 -->
+    <text x="512" y="780" text-anchor="middle" font-family="system-ui, sans-serif" font-size="52" font-weight="bold" fill="#FFFFFF">Drop &amp; Convert</text>
+  </g>
+</svg>

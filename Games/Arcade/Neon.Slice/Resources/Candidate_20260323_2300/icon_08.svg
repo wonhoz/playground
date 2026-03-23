@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs>
+    <radialGradient id="bg08" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#4D7C0F"/>
+      <stop offset="100%" stop-color="#3F6212"/>
+    </radialGradient>
+    <clipPath id="clip08">
+      <rect x="0" y="0" width="1024" height="1024" rx="190"/>
+    </clipPath>
+    <filter id="glow08" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="16" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <linearGradient id="timerArc" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#86EFAC"/>
+      <stop offset="100%" stop-color="#4ADE80"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" fill="url(#bg08)" rx="190"/>
+
+  <g clip-path="url(#clip08)">
+    <!-- 타이머 원형 외곽 (큰 링) -->
+    <circle cx="512" cy="480" r="300" fill="none" stroke="#86EFAC" stroke-width="28" opacity="0.25"/>
+
+    <!-- 타이머 진행 호 (3/4 채워짐 — 시간 촉박!) -->
+    <g filter="url(#glow08)">
+      <path d="M512,180 A300,300 0 1,1 212,480" fill="none" stroke="url(#timerArc)" stroke-width="60" stroke-linecap="round"/>
+    </g>
+
+    <!-- 타이머 내부 눈금선 -->
+    <g stroke="#86EFAC" stroke-width="8" opacity="0.4">
+      <line x1="512" y1="210" x2="512" y2="240"/>
+      <line x1="512" y1="720" x2="512" y2="750"/>
+      <line x1="222" y1="480" x2="252" y2="480"/>
+      <line x1="772" y1="480" x2="802" y2="480"/>
+    </g>
+
+    <!-- 타이머 중앙 → 슬라이스 칼날 (짧고 빠른 느낌) -->
+    <g filter="url(#glow08)">
+      <!-- 시침 (타이머 핸들) -->
+      <line x1="512" y1="480" x2="512" y2="270" stroke="#FDE68A" stroke-width="22" stroke-linecap="round"/>
+      <!-- 분침 -->
+      <line x1="512" y1="480" x2="680" y2="400" stroke="#86EFAC" stroke-width="16" stroke-linecap="round"/>
+    </g>
+    <!-- 중심 원 -->
+    <circle cx="512" cy="480" r="28" fill="#FDE68A"/>
+    <circle cx="512" cy="480" r="14" fill="#FFFFFF"/>
+
+    <!-- 슬라이스 이펙트 (대각선 궤적) -->
+    <g filter="url(#glow08)">
+      <line x1="300" y1="680" x2="720" y2="300" stroke="#FDE68A" stroke-width="68" stroke-linecap="round" opacity="0.7"/>
+      <line x1="300" y1="680" x2="720" y2="300" stroke="#FFFFFF" stroke-width="24" stroke-linecap="round" opacity="0.9"/>
+    </g>
+
+    <!-- 슬라이스 파편 -->
+    <g fill="#FDE68A" filter="url(#glow08)" opacity="0.9">
+      <circle cx="260" cy="720" r="16"/>
+      <circle cx="760" cy="258" r="16"/>
+      <circle cx="340" cy="620" r="10"/>
+      <circle cx="680" cy="360" r="10"/>
+    </g>
+
+    <!-- 아래 시간 텍스트 느낌 (3자리) -->
+    <rect x="370" y="790" width="284" height="80" rx="18" fill="#86EFAC" opacity="0.15"/>
+    <text x="512" y="848" font-family="monospace" font-size="70" font-weight="bold"
+          fill="#FDE68A" text-anchor="middle" dominant-baseline="auto">0:03</text>
+  </g>
+</svg>

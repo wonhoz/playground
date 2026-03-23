@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg04" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#CA8A04"/>
+      <stop offset="100%" stop-color="#B45309"/>
+    </linearGradient>
+    <linearGradient id="finger04" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FED7AA"/>
+      <stop offset="100%" stop-color="#FDBA74"/>
+    </linearGradient>
+    <clipPath id="clip04">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg04)"/>
+  <g clip-path="url(#clip04)">
+    <!-- Layer 2: 손가락 실루엣 -->
+    <!-- 손 바디 -->
+    <rect x="420" y="540" width="184" height="320" rx="40" fill="url(#finger04)" stroke="#FFFFFF" stroke-width="20"/>
+    <!-- 검지 손가락 -->
+    <rect x="448" y="280" width="84" height="300" rx="42" fill="url(#finger04)" stroke="#FFFFFF" stroke-width="20"/>
+    <!-- 손가락 끝 터치 포인트 강조 -->
+    <circle cx="490" cy="280" r="42" fill="url(#finger04)" stroke="#FFFFFF" stroke-width="20"/>
+    <!-- Layer 3: 모래 그리기 흔적 -->
+    <!-- 손가락 터치 지점에서 모래 쏟아짐 -->
+    <circle cx="490" cy="260" r="24" fill="#FDE68A" opacity="0.95"/>
+    <!-- 그려진 모래 궤적 (곡선 패스) -->
+    <path d="M490 290 Q560 360 620 440 Q680 520 700 620 Q720 700 680 780"
+          stroke="#FDE68A" stroke-width="40" stroke-linecap="round" fill="none" opacity="0.75"/>
+    <path d="M490 290 Q560 360 620 440 Q680 520 700 620 Q720 700 680 780"
+          stroke="#FFFFFF" stroke-width="16" stroke-linecap="round" fill="none" opacity="0.40"/>
+    <!-- 궤적 위 입자들 -->
+    <circle cx="540" cy="340" r="12" fill="#FDE68A" opacity="0.90"/>
+    <circle cx="580" cy="395" r="10" fill="#FBBF24" opacity="0.85"/>
+    <circle cx="625" cy="455" r="11" fill="#FDE68A" opacity="0.80"/>
+    <circle cx="660" cy="520" r="9" fill="#FDE68A" opacity="0.75"/>
+    <circle cx="692" cy="590" r="10" fill="#FBBF24" opacity="0.70"/>
+    <circle cx="700" cy="660" r="9" fill="#FDE68A" opacity="0.65"/>
+    <circle cx="688" cy="730" r="8" fill="#FDE68A" opacity="0.60"/>
+    <!-- 그려진 흔적 옆 작은 파티클 -->
+    <circle cx="555" cy="370" r="6" fill="#FFFFFF" opacity="0.50"/>
+    <circle cx="600" cy="430" r="5" fill="#FFFFFF" opacity="0.45"/>
+    <circle cx="640" cy="490" r="5" fill="#FFFFFF" opacity="0.40"/>
+    <circle cx="672" cy="555" r="4" fill="#FFFFFF" opacity="0.35"/>
+    <!-- 손가락 끝 빛나는 포인트 -->
+    <circle cx="490" cy="260" r="12" fill="#FFFFFF" opacity="0.80"/>
+  </g>
+</svg>

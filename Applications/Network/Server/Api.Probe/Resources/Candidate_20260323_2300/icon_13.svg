@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg13" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#065F46"/>
+      <stop offset="100%" stop-color="#022C22"/>
+    </linearGradient>
+    <clipPath id="clip13"><rect width="1024" height="1024" rx="190"/></clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg13)"/>
+  <g clip-path="url(#clip13)">
+    <!-- Layer 2: 속도 게이지 외곽 -->
+    <path d="M 180 660 A 332 332 0 0 1 844 660" fill="none" stroke="#134E34" stroke-width="80" stroke-linecap="round"/>
+    <!-- 게이지 눈금 배경 레인들 -->
+    <!-- 느림 구간 (빨강) -->
+    <path d="M 180 660 A 332 332 0 0 1 295 380" fill="none" stroke="#EF4444" stroke-width="64" stroke-linecap="round" opacity="0.85"/>
+    <!-- 중간 구간 (노랑) -->
+    <path d="M 295 380 A 332 332 0 0 1 512 328" fill="none" stroke="#FBBF24" stroke-width="64" stroke-linecap="round" opacity="0.85"/>
+    <!-- 빠름 구간 (초록) -->
+    <path d="M 512 328 A 332 332 0 0 1 844 660" fill="none" stroke="#6EE7B7" stroke-width="64" stroke-linecap="round" opacity="0.85"/>
+    <!-- 속도계 눈금 마크들 -->
+    <line x1="180" y1="660" x2="220" y2="660" stroke="#FFFFFF" stroke-width="10" opacity="0.6"/>
+    <line x1="235" y1="438" x2="265" y2="458" stroke="#FFFFFF" stroke-width="10" opacity="0.6"/>
+    <line x1="388" y1="338" x2="400" y2="370" stroke="#FFFFFF" stroke-width="10" opacity="0.6"/>
+    <line x1="512" y1="328" x2="512" y2="362" stroke="#FFFFFF" stroke-width="10" opacity="0.6"/>
+    <line x1="636" y1="338" x2="624" y2="370" stroke="#FFFFFF" stroke-width="10" opacity="0.6"/>
+    <line x1="789" y1="438" x2="759" y2="458" stroke="#FFFFFF" stroke-width="10" opacity="0.6"/>
+    <line x1="844" y1="660" x2="804" y2="660" stroke="#FFFFFF" stroke-width="10" opacity="0.6"/>
+    <!-- 게이지 바늘 (빠름 위치) -->
+    <line x1="512" y1="660" x2="710" y2="410" stroke="#FDE68A" stroke-width="22" stroke-linecap="round"/>
+    <!-- 중심 원 -->
+    <circle cx="512" cy="660" r="52" fill="#034732" stroke="#6EE7B7" stroke-width="14"/>
+    <circle cx="512" cy="660" r="22" fill="#FDE68A"/>
+    <!-- Layer 3: 숫자 레이블 -->
+    <text x="160" y="720" font-family="'Courier New', monospace" font-size="36" fill="#6EE7B7" text-anchor="middle" dominant-baseline="middle">slow</text>
+    <text x="864" y="720" font-family="'Courier New', monospace" font-size="36" fill="#6EE7B7" text-anchor="middle" dominant-baseline="middle">fast</text>
+    <!-- 응답시간 표시 -->
+    <text x="512" y="780" font-family="'Courier New', monospace" font-weight="700" font-size="72" fill="#FDE68A" text-anchor="middle" dominant-baseline="middle">38ms</text>
+  </g>
+</svg>

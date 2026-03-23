@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg09" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#92400E"/>
+      <stop offset="100%" stop-color="#78350F"/>
+    </linearGradient>
+    <linearGradient id="panel09" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1C0A02"/>
+      <stop offset="100%" stop-color="#0D0500"/>
+    </linearGradient>
+    <filter id="glow09">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <clipPath id="clip09">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg09)"/>
+  <g clip-path="url(#clip09)">
+    <!-- Layer 2: 스코어 패널 -->
+    <rect x="120" y="200" width="784" height="620" rx="20" fill="url(#panel09)"/>
+    <!-- 패널 테두리 -->
+    <rect x="120" y="200" width="784" height="620" rx="20" fill="none" stroke="#FDE68A" stroke-width="4" opacity="0.5"/>
+    <!-- 스캔라인 효과 -->
+    <line x1="120" y1="280" x2="904" y2="280" stroke="#FDE68A" stroke-width="1" opacity="0.1"/>
+    <line x1="120" y1="320" x2="904" y2="320" stroke="#FDE68A" stroke-width="1" opacity="0.1"/>
+    <line x1="120" y1="360" x2="904" y2="360" stroke="#FDE68A" stroke-width="1" opacity="0.1"/>
+    <line x1="120" y1="400" x2="904" y2="400" stroke="#FDE68A" stroke-width="1" opacity="0.1"/>
+    <line x1="120" y1="440" x2="904" y2="440" stroke="#FDE68A" stroke-width="1" opacity="0.1"/>
+    <line x1="120" y1="480" x2="904" y2="480" stroke="#FDE68A" stroke-width="1" opacity="0.1"/>
+    <line x1="120" y1="520" x2="904" y2="520" stroke="#FDE68A" stroke-width="1" opacity="0.1"/>
+    <line x1="120" y1="560" x2="904" y2="560" stroke="#FDE68A" stroke-width="1" opacity="0.1"/>
+    <line x1="120" y1="600" x2="904" y2="600" stroke="#FDE68A" stroke-width="1" opacity="0.1"/>
+    <line x1="120" y1="640" x2="904" y2="640" stroke="#FDE68A" stroke-width="1" opacity="0.1"/>
+    <line x1="120" y1="680" x2="904" y2="680" stroke="#FDE68A" stroke-width="1" opacity="0.1"/>
+    <line x1="120" y1="720" x2="904" y2="720" stroke="#FDE68A" stroke-width="1" opacity="0.1"/>
+
+    <!-- Layer 3: 스코어 숫자 + 콤보 텍스트 -->
+    <g filter="url(#glow09)">
+      <!-- SCORE 라벨 -->
+      <text x="512" y="290" font-family="Courier New, monospace" font-size="38" font-weight="bold" text-anchor="middle" fill="#FDE68A" opacity="0.8" letter-spacing="6">SCORE</text>
+      <!-- 메인 스코어 -->
+      <text x="512" y="430" font-family="Courier New, monospace" font-size="110" font-weight="bold" text-anchor="middle" fill="#FDE68A" letter-spacing="-2">98520</text>
+      <!-- 구분선 -->
+      <line x1="180" y1="460" x2="844" y2="460" stroke="#FDE68A" stroke-width="2" opacity="0.4"/>
+      <!-- COMBO 라벨 -->
+      <text x="200" y="540" font-family="Courier New, monospace" font-size="32" font-weight="bold" fill="#FFFFFF" opacity="0.7" letter-spacing="2">COMBO</text>
+      <!-- 콤보 숫자 -->
+      <text x="550" y="545" font-family="Courier New, monospace" font-size="52" font-weight="bold" fill="#FDE68A" letter-spacing="2">×32</text>
+      <!-- HI-SCORE -->
+      <text x="200" y="620" font-family="Courier New, monospace" font-size="28" fill="#FFFFFF" opacity="0.5">HI</text>
+      <text x="290" y="620" font-family="Courier New, monospace" font-size="28" fill="#FDE68A" opacity="0.7">120000</text>
+      <!-- BEST COMBO -->
+      <text x="200" y="670" font-family="Courier New, monospace" font-size="28" fill="#FFFFFF" opacity="0.5">BEST</text>
+      <text x="310" y="670" font-family="Courier New, monospace" font-size="28" fill="#FDE68A" opacity="0.7">×64</text>
+      <!-- WAVE -->
+      <text x="200" y="720" font-family="Courier New, monospace" font-size="28" fill="#FFFFFF" opacity="0.5">WAVE</text>
+      <text x="320" y="720" font-family="Courier New, monospace" font-size="28" fill="#FFFFFF" opacity="0.7">05</text>
+      <!-- 시간 -->
+      <text x="560" y="720" font-family="Courier New, monospace" font-size="28" fill="#FDE68A" opacity="0.7">02:34</text>
+    </g>
+    <!-- 패널 상단 라이트 효과 -->
+    <rect x="160" y="200" width="704" height="4" rx="2" fill="#FDE68A" opacity="0.4"/>
+  </g>
+</svg>

@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg02" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3F6212"/>
+      <stop offset="100%" stop-color="#1A2E05"/>
+    </linearGradient>
+    <clipPath id="clip02">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg02)"/>
+  <!-- 흙 베이스 -->
+  <rect x="0" y="820" width="1024" height="204" fill="#2D1A00" opacity="0.8" clip-path="url(#clip02)"/>
+  <!-- 단계 라벨 배경 -->
+  <text x="136" y="800" font-family="sans-serif" font-size="36" fill="#FDE68A" text-anchor="middle" opacity="0.9">씨앗</text>
+  <text x="352" y="800" font-family="sans-serif" font-size="36" fill="#FDE68A" text-anchor="middle" opacity="0.9">새싹</text>
+  <text x="672" y="800" font-family="sans-serif" font-size="36" fill="#FDE68A" text-anchor="middle" opacity="0.9">줄기</text>
+  <text x="888" y="800" font-family="sans-serif" font-size="36" fill="#FDE68A" text-anchor="middle" opacity="0.9">꽃</text>
+
+  <!-- 성장 단계 1: 씨앗 -->
+  <ellipse cx="136" cy="760" rx="38" ry="26" fill="#A7F3D0" stroke="#65A30D" stroke-width="6"/>
+  <!-- 성장 단계 2: 새싹 -->
+  <line x1="352" y1="760" x2="352" y2="650" stroke="#86EFAC" stroke-width="20" stroke-linecap="round"/>
+  <path d="M 347 690 Q 290 650 278 600 Q 330 615 347 665" fill="#86EFAC"/>
+  <path d="M 357 670 Q 415 630 427 580 Q 373 597 357 647" fill="#86EFAC"/>
+  <!-- 성장 단계 3: 줄기 -->
+  <line x1="672" y1="760" x2="672" y2="540" stroke="#86EFAC" stroke-width="22" stroke-linecap="round"/>
+  <path d="M 665 660 Q 575 610 555 540 Q 630 555 665 635" fill="#86EFAC"/>
+  <path d="M 679 620 Q 765 570 785 500 Q 710 517 679 597" fill="#86EFAC"/>
+  <path d="M 665 580 Q 590 540 575 475 Q 640 490 665 560" fill="#86EFAC"/>
+  <!-- 성장 단계 4: 꽃 -->
+  <line x1="888" y1="760" x2="888" y2="460" stroke="#86EFAC" stroke-width="22" stroke-linecap="round"/>
+  <path d="M 881 620 Q 800 580 782 510 Q 848 525 881 600" fill="#86EFAC"/>
+  <path d="M 895 580 Q 970 540 988 470 Q 922 487 895 562" fill="#86EFAC"/>
+  <!-- 꽃잎 -->
+  <circle cx="888" cy="400" r="45" fill="#FDE68A" opacity="0.95"/>
+  <ellipse cx="848" cy="365" rx="22" ry="36" fill="#FDE68A" opacity="0.8" transform="rotate(-30 848 365)"/>
+  <ellipse cx="928" cy="365" rx="22" ry="36" fill="#FDE68A" opacity="0.8" transform="rotate(30 928 365)"/>
+  <ellipse cx="848" cy="435" rx="22" ry="36" fill="#FDE68A" opacity="0.8" transform="rotate(30 848 435)"/>
+  <ellipse cx="928" cy="435" rx="22" ry="36" fill="#FDE68A" opacity="0.8" transform="rotate(-30 928 435)"/>
+  <ellipse cx="888" cy="350" rx="18" ry="32" fill="#FDE68A" opacity="0.8"/>
+  <ellipse cx="888" cy="450" rx="18" ry="32" fill="#FDE68A" opacity="0.8"/>
+  <circle cx="888" cy="400" r="22" fill="#F59E0B"/>
+
+  <!-- 화살표 연결 -->
+  <line x1="190" y1="720" x2="298" y2="720" stroke="#FDE68A" stroke-width="6" stroke-linecap="round" stroke-dasharray="10 6"/>
+  <polygon points="298,710 316,720 298,730" fill="#FDE68A"/>
+  <line x1="410" y1="720" x2="614" y2="720" stroke="#FDE68A" stroke-width="6" stroke-linecap="round" stroke-dasharray="10 6"/>
+  <polygon points="614,710 632,720 614,730" fill="#FDE68A"/>
+  <line x1="730" y1="720" x2="834" y2="720" stroke="#FDE68A" stroke-width="6" stroke-linecap="round" stroke-dasharray="10 6"/>
+  <polygon points="834,710 852,720 834,730" fill="#FDE68A"/>
+</svg>

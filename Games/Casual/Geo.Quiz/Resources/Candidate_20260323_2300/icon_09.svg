@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg09" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0E4F6E"/>
+      <stop offset="100%" stop-color="#0C4A6E"/>
+    </linearGradient>
+    <radialGradient id="glow09" cx="70%" cy="30%" r="50%">
+      <stop offset="0%" stop-color="#0EA5E9" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#0C4A6E" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="clip09">
+      <rect x="0" y="0" width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg09)"/>
+  <rect width="1024" height="1024" rx="190" fill="url(#glow09)"/>
+
+  <!-- 지도 격자 (배경) -->
+  <g clip-path="url(#clip09)" stroke="#155E75" stroke-width="4" opacity="0.4" fill="none">
+    <line x1="0" y1="256" x2="1024" y2="256"/>
+    <line x1="0" y1="512" x2="1024" y2="512"/>
+    <line x1="0" y1="768" x2="1024" y2="768"/>
+    <line x1="256" y1="0" x2="256" y2="1024"/>
+    <line x1="512" y1="0" x2="512" y2="1024"/>
+    <line x1="768" y1="0" x2="768" y2="1024"/>
+  </g>
+
+  <!-- 비행 경로 점선 -->
+  <path d="M 160 700 Q 300 300 512 240 Q 720 180 860 350"
+        fill="none" stroke="#38BDF8" stroke-width="14"
+        stroke-dasharray="30,20" stroke-linecap="round"/>
+
+  <!-- 출발지 핀 -->
+  <g transform="translate(160, 700)">
+    <circle cx="0" cy="0" r="22" fill="#FDE68A"/>
+    <circle cx="0" cy="0" r="10" fill="#B45309"/>
+  </g>
+  <!-- 출발 도시 레이블 -->
+  <text x="160" y="760" font-family="Arial, sans-serif" font-size="30" text-anchor="middle" fill="#FDE68A">NYC</text>
+
+  <!-- 도착지 핀 -->
+  <g transform="translate(860, 350)">
+    <circle cx="0" cy="0" r="22" fill="#FDE68A"/>
+    <circle cx="0" cy="0" r="10" fill="#B45309"/>
+  </g>
+  <!-- 도착 도시 레이블 -->
+  <text x="860" y="310" font-family="Arial, sans-serif" font-size="30" text-anchor="middle" fill="#FDE68A">TYO</text>
+
+  <!-- 비행기 (경로 중간, 대각선 방향) -->
+  <g transform="translate(512, 340) rotate(-30)">
+    <!-- 동체 -->
+    <ellipse cx="0" cy="0" rx="100" ry="28" fill="#38BDF8"/>
+    <!-- 주익 -->
+    <polygon points="-20,-26 60,-26 40,26 -30,26" fill="#7DD3FC"/>
+    <!-- 꼬리날개 -->
+    <polygon points="-80,-28 -40,-28 -60,0 -95,0" fill="#7DD3FC"/>
+    <polygon points="-80,28 -40,28 -60,0 -95,0" fill="#7DD3FC"/>
+    <!-- 앞유리 -->
+    <ellipse cx="85" cy="0" rx="20" ry="16" fill="#BAE6FD"/>
+  </g>
+
+  <!-- 속도선 -->
+  <g clip-path="url(#clip09)" stroke="#38BDF8" stroke-width="6" stroke-linecap="round" opacity="0.4">
+    <line x1="380" y1="380" x2="280" y2="400"/>
+    <line x1="370" y1="410" x2="270" y2="430"/>
+    <line x1="390" y1="350" x2="300" y2="360"/>
+  </g>
+
+  <!-- 하단 텍스트 -->
+  <text x="512" y="830" font-family="Arial Black, sans-serif" font-size="52" font-weight="900"
+        text-anchor="middle" fill="#38BDF8" letter-spacing="4">GEO QUIZ</text>
+  <text x="512" y="900" font-family="Arial, sans-serif" font-size="34" text-anchor="middle" fill="#7DD3FC">World Explorer</text>
+</svg>

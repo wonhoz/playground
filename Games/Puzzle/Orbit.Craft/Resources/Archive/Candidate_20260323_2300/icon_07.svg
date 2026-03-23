@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg07" cx="50%" cy="40%" r="65%">
+      <stop offset="0%" stop-color="#2C2520"/>
+      <stop offset="100%" stop-color="#1C1917"/>
+    </radialGradient>
+    <radialGradient id="star07" cx="50%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#FEF9C3"/>
+      <stop offset="100%" stop-color="#CA8A04"/>
+    </radialGradient>
+    <clipPath id="clip07">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg07)"/>
+  <g clip-path="url(#clip07)">
+    <!-- 배경 별들 -->
+    <circle cx="160" cy="180" r="2" fill="#FFFFFF" opacity="0.5"/>
+    <circle cx="820" cy="200" r="3" fill="#FFFFFF" opacity="0.6"/>
+    <circle cx="200" cy="840" r="2" fill="#FFFFFF" opacity="0.4"/>
+    <circle cx="840" cy="820" r="2" fill="#FFFFFF" opacity="0.5"/>
+    <circle cx="500" cy="140" r="3" fill="#FFFFFF" opacity="0.5"/>
+    <circle cx="120" cy="500" r="2" fill="#FFFFFF" opacity="0.4"/>
+    <circle cx="900" cy="550" r="2" fill="#FFFFFF" opacity="0.4"/>
+    <!-- Layer 2: 궤도 원들 (3겹) -->
+    <circle cx="512" cy="512" r="330" fill="none" stroke="#FDE68A" stroke-width="8" opacity="0.25"/>
+    <circle cx="512" cy="512" r="250" fill="none" stroke="#FDE68A" stroke-width="10" opacity="0.35"/>
+    <circle cx="512" cy="512" r="170" fill="none" stroke="#FDE68A" stroke-width="12" opacity="0.45"/>
+    <!-- 궤도 위 작은 행성들 -->
+    <circle cx="512" cy="182" r="22" fill="#FFFFFF" opacity="0.85"/>
+    <circle cx="762" cy="512" r="28" fill="#FDE68A" opacity="0.7"/>
+    <circle cx="262" cy="512" r="20" fill="#FFFFFF" opacity="0.6"/>
+    <circle cx="512" cy="262" r="18" fill="#FBBF24" opacity="0.8"/>
+    <circle cx="512" cy="842" r="25" fill="#FFFFFF" opacity="0.5"/>
+    <!-- Layer 2: 중앙 별 ★ -->
+    <path d="M 512 310
+             L 548 418
+             L 660 418
+             L 572 482
+             L 606 592
+             L 512 526
+             L 418 592
+             L 452 482
+             L 364 418
+             L 476 418
+             Z" fill="url(#star07)"/>
+    <!-- 별 광채 -->
+    <path d="M 512 295 L 516 312 L 512 328 L 508 312 Z" fill="#FEF9C3" opacity="0.8"/>
+    <path d="M 627 403 L 615 414 L 600 410 L 612 399 Z" fill="#FEF9C3" opacity="0.8"/>
+    <path d="M 397 403 L 412 399 L 424 410 L 409 414 Z" fill="#FEF9C3" opacity="0.8"/>
+    <!-- Layer 3: 하이라이트 -->
+    <circle cx="488" cy="378" r="18" fill="#FFFFFF" opacity="0.3"/>
+    <!-- 테두리 광채 -->
+    <path d="M 512 310 L 548 418 L 660 418 L 572 482 L 606 592 L 512 526 L 418 592 L 452 482 L 364 418 L 476 418 Z" fill="none" stroke="#FEF9C3" stroke-width="6" opacity="0.4"/>
+  </g>
+</svg>

@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg05" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#0E7F5C"/>
+      <stop offset="100%" stop-color="#065F46"/>
+    </radialGradient>
+    <radialGradient id="planet05" cx="40%" cy="35%" r="60%">
+      <stop offset="0%" stop-color="#A7F3D0"/>
+      <stop offset="100%" stop-color="#059669"/>
+    </radialGradient>
+    <clipPath id="clip05">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg05)"/>
+  <g clip-path="url(#clip05)">
+    <!-- 별 -->
+    <circle cx="160" cy="170" r="3" fill="#FFFFFF" opacity="0.5"/>
+    <circle cx="830" cy="200" r="2" fill="#FFFFFF" opacity="0.5"/>
+    <circle cx="180" cy="840" r="2" fill="#FFFFFF" opacity="0.4"/>
+    <circle cx="840" cy="820" r="3" fill="#FFFFFF" opacity="0.5"/>
+    <circle cx="500" cy="150" r="2" fill="#FFFFFF" opacity="0.4"/>
+    <!-- Layer 2: 궤도 원 -->
+    <circle cx="512" cy="512" r="290" fill="none" stroke="#6EE7B7" stroke-width="10" opacity="0.3"/>
+    <circle cx="512" cy="512" r="210" fill="none" stroke="#6EE7B7" stroke-width="10" opacity="0.25"/>
+    <!-- 퍼즐 조각들 (4조각 십자형) -->
+    <!-- 조각 1 (좌상) -->
+    <path d="M 340 340 L 460 340 Q 460 370 440 380 Q 460 390 460 420 L 340 420 Q 340 390 360 380 Q 340 370 340 340 Z" fill="#6EE7B7" stroke="#065F46" stroke-width="8"/>
+    <!-- 조각 2 (우상) -->
+    <path d="M 564 340 L 684 340 Q 684 370 664 380 Q 684 390 684 420 L 564 420 Q 564 390 584 380 Q 564 370 564 340 Z" fill="#34D399" stroke="#065F46" stroke-width="8"/>
+    <!-- 조각 3 (좌하) -->
+    <path d="M 340 604 L 460 604 Q 460 634 440 644 Q 460 654 460 684 L 340 684 Q 340 654 360 644 Q 340 634 340 604 Z" fill="#34D399" stroke="#065F46" stroke-width="8"/>
+    <!-- 조각 4 (우하, 빠진 조각 → 행성으로 채움) -->
+    <path d="M 564 604 L 684 604 Q 684 634 664 644 Q 684 654 684 684 L 564 684 Q 564 654 584 644 Q 564 634 564 604 Z" fill="#10B981" stroke="#065F46" stroke-width="8" opacity="0.4" stroke-dasharray="15 10"/>
+    <!-- Layer 2: 중앙 행성 (퍼즐을 완성) -->
+    <circle cx="512" cy="512" r="100" fill="url(#planet05)"/>
+    <!-- 행성 표면 -->
+    <ellipse cx="490" cy="495" rx="65" ry="22" fill="#059669" opacity="0.4" transform="rotate(-20 490 495)"/>
+    <!-- Layer 3: 퍼즐 연결 힌트 화살표 -->
+    <path d="M 630 644 Q 660 614 624 604" fill="none" stroke="#FDE68A" stroke-width="8" stroke-linecap="round"/>
+    <polygon points="624,604 618,622 635,616" fill="#FDE68A"/>
+    <!-- 별 장식 -->
+    <path d="M 800 750 L 810 775 L 835 785 L 810 795 L 800 820 L 790 795 L 765 785 L 790 775 Z" fill="#FDE68A" opacity="0.8"/>
+    <path d="M 220 280 L 228 298 L 246 306 L 228 314 L 220 332 L 212 314 L 194 306 L 212 298 Z" fill="#FDE68A" opacity="0.6"/>
+  </g>
+</svg>

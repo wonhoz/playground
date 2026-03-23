@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg15" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#D97706"/>
+      <stop offset="100%" stop-color="#B45309"/>
+    </linearGradient>
+    <linearGradient id="chef15" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#374151"/>
+      <stop offset="100%" stop-color="#1F2937"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg15)"/>
+  <!-- 큰 냄비 -->
+  <ellipse cx="512" cy="720" rx="300" ry="50" fill="#4B5563" opacity="0.8"/>
+  <rect x="212" y="580" width="600" height="145" rx="20" fill="#374151"/>
+  <ellipse cx="512" cy="580" rx="300" ry="48" fill="#4B5563"/>
+  <ellipse cx="512" cy="580" rx="280" ry="40" fill="#1F2937"/>
+  <!-- 냄비 손잡이 -->
+  <rect x="110" y="600" width="104" height="36" rx="18" fill="#6B7280"/>
+  <rect x="810" y="600" width="104" height="36" rx="18" fill="#6B7280"/>
+  <!-- 냄비 안 텍스트 조각들 (재료) -->
+  <text x="350" y="560" font-family="system-ui, monospace, sans-serif" font-weight="bold" font-size="28" fill="#FDE68A" transform="rotate(-15,350,560)">{role}</text>
+  <text x="470" y="548" font-family="system-ui, monospace, sans-serif" font-weight="bold" font-size="24" fill="#A7F3D0" transform="rotate(5,470,548)">[context]</text>
+  <text x="580" y="562" font-family="system-ui, monospace, sans-serif" font-weight="bold" font-size="26" fill="#BFDBFE" transform="rotate(-8,580,562)">{{var}}</text>
+  <!-- 김 모락모락 -->
+  <path d="M380,540 Q390,500 380,460 Q370,420 380,380" stroke="white" stroke-width="14" fill="none" stroke-linecap="round" opacity="0.5"/>
+  <path d="M512,535 Q525,495 512,455 Q499,415 512,375" stroke="white" stroke-width="14" fill="none" stroke-linecap="round" opacity="0.5"/>
+  <path d="M644,540 Q656,500 644,460 Q632,420 644,380" stroke="white" stroke-width="14" fill="none" stroke-linecap="round" opacity="0.5"/>
+  <!-- 요리사 실루엣 (왼쪽) -->
+  <g transform="translate(270,200)" opacity="0.9">
+    <!-- 요리사 모자 -->
+    <ellipse cx="0" cy="-190" rx="55" ry="18" fill="url(#chef15)"/>
+    <rect x="-45" y="-320" width="90" height="134" rx="20" fill="url(#chef15)"/>
+    <ellipse cx="0" cy="-320" rx="50" ry="18" fill="#374151"/>
+    <!-- 머리 -->
+    <circle cx="0" cy="-140" r="60" fill="#1F2937"/>
+    <!-- 몸 -->
+    <path d="M-60,-80 L-80,100 L80,100 L60,-80 Q30,-60 0,-60 Q-30,-60 -60,-80 Z" fill="url(#chef15)"/>
+    <!-- 팔 (뻗은 모습) -->
+    <path d="M-80,0 Q-150,-20 -180,-40" stroke="url(#chef15)" stroke-width="40" fill="none" stroke-linecap="round"/>
+    <path d="M80,0 Q150,60 190,100" stroke="url(#chef15)" stroke-width="40" fill="none" stroke-linecap="round"/>
+    <!-- 손 -->
+    <circle cx="-180" cy="-40" r="28" fill="#1F2937"/>
+    <!-- 국자 (손에서 냄비로) -->
+    <path d="M190,100 Q240,240 270,300" stroke="#6B7280" stroke-width="20" fill="none" stroke-linecap="round"/>
+    <circle cx="270" cy="310" r="40" fill="none" stroke="#6B7280" stroke-width="16"/>
+  </g>
+  <!-- 텍스트 재료들 (공중에 떠있는) -->
+  <text x="820" y="350" font-family="system-ui, monospace, sans-serif" font-weight="bold" font-size="32" fill="#FDE68A" transform="rotate(10,820,350)">task:

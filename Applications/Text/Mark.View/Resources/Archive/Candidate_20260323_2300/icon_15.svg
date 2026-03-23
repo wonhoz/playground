@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg15" x1="0" y1="0" x2="0.3" y2="1">
+      <stop offset="0%" stop-color="#4C1D95"/>
+      <stop offset="100%" stop-color="#581C87"/>
+    </linearGradient>
+    <linearGradient id="brush15" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#C4B5FD"/>
+      <stop offset="100%" stop-color="#A78BFA"/>
+    </linearGradient>
+    <clipPath id="clip15"><rect width="1024" height="1024" rx="190"/></clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg15)"/>
+  <g clip-path="url(#clip15)">
+    <!-- Layer 2: 마법 붓 -->
+    <!-- 붓 몸통 (대각선) -->
+    <!-- 붓대 -->
+    <rect x="480" y="140" width="36" height="320" rx="18" fill="url(#brush15)" transform="rotate(45,498,300)"/>
+    <!-- 붓 손잡이 끝 원 -->
+    <circle cx="680" cy="140" r="24" fill="#FDE68A"/>
+    <!-- 붓 금속 부분 -->
+    <rect x="480" y="320" width="36" height="70" rx="8" fill="#C4B5FD" opacity="0.6" transform="rotate(45,498,355)"/>
+    <!-- 붓 털 부분 -->
+    <ellipse cx="360" cy="460" rx="55" ry="30" fill="#C4B5FD" transform="rotate(45,360,460)"/>
+    <ellipse cx="340" cy="480" rx="60" ry="20" fill="#A78BFA" transform="rotate(45,340,480)"/>
+    <!-- 붓 끝 포인트 -->
+    <polygon points="296,524 308,506 326,522" fill="#E9D5FF" transform="rotate(45,311,515)"/>
+
+    <!-- Layer 3: 마법 효과 — 텍스트가 렌더링됨 -->
+    <!-- 마법 파티클 -->
+    <circle cx="260" cy="420" r="14" fill="#FDE68A"/>
+    <circle cx="220" cy="360" r="8" fill="#FDE68A" opacity="0.7"/>
+    <circle cx="300" cy="360" r="6" fill="#C4B5FD" opacity="0.8"/>
+    <circle cx="180" cy="420" r="5" fill="#FDE68A" opacity="0.5"/>
+    <!-- 별 파티클 -->
+    <g transform="translate(200,290)">
+      <line x1="0" y1="-16" x2="0" y2="16" stroke="#FDE68A" stroke-width="6" stroke-linecap="round"/>
+      <line x1="-16" y1="0" x2="16" y2="0" stroke="#FDE68A" stroke-width="6" stroke-linecap="round"/>
+    </g>
+    <g transform="translate(340,300)">
+      <line x1="0" y1="-12" x2="0" y2="12" stroke="#C4B5FD" stroke-width="5" stroke-linecap="round"/>
+      <line x1="-12" y1="0" x2="12" y2="0" stroke="#C4B5FD" stroke-width="5" stroke-linecap="round"/>
+    </g>
+
+    <!-- 렌더링된 텍스트 출력 (오른쪽 하단) -->
+    <!-- 큰 헤더 줄 -->
+    <rect x="440" y="480" width="444" height="36" rx="10" fill="#FFFFFF" opacity="0.9"/>
+    <!-- 본문 줄들 -->
+    <rect x="440" y="534" width="380" height="20" rx="6" fill="#C4B5FD" opacity="0.7"/>
+    <rect x="440" y="566" width="400" height="20" rx="6" fill="#C4B5FD" opacity="0.6"/>
+    <rect x="440" y="598" width="340" height="20" rx="6" fill="#C4B5FD" opacity="0.55"/>
+    <!-- 굵은 텍스트 강조 -->
+    <rect x="440" y="636" width="140" height="20" rx="6" fill="#FDE68A" opacity="0.8"/>
+    <rect x="592" y="636" width="180" height="20" rx="6" fill="#C4B5FD" opacity="0.5"/>
+    <!-- 인라인 코드 -->
+    <rect x="440" y="674" width="444" height="26" rx="6" fill="#FFFFFF" opacity="0.1"/>
+    <rect x="444" y="676" width="200" height="22" rx="5" fill="#A78BFA" opacity="0.5"/>
+    <rect x="656" y="676" width="220" height="22" rx="5" fill="#C4B5FD" opacity="0.4"/>
+    <!-- 링크 언더라인 -->
+    <rect x="440" y="716" width="160" height="16" rx="5" fill="#FDE68A" opacity="0.7"/>
+    <rect x="440" y="734" width="160" height="4" rx="2" fill="#FDE68A" opacity="0.5"/>
+    <!-- 커서 효과 -->
+    <rect x="612" y="716" width="8" height="26" rx="4" fill="#FFFFFF" opacity="0.8"/>
+
+    <!-- 마법 효과선 (붓 끝 → 텍스트) -->
+    <path d="M310,500 Q380,490 440,500" fill="none" stroke="#FDE68A" stroke-width="4" stroke-dasharray="10,6" opacity="0.5"/>
+  </g>
+</svg>

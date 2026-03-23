@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg03" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2D4E9C"/>
+      <stop offset="100%" stop-color="#1E3A8A"/>
+    </linearGradient>
+    <radialGradient id="planet03" cx="40%" cy="35%" r="60%">
+      <stop offset="0%" stop-color="#BFDBFE"/>
+      <stop offset="100%" stop-color="#3B82F6"/>
+    </radialGradient>
+    <linearGradient id="ship03" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E2E8F0"/>
+      <stop offset="100%" stop-color="#94A3B8"/>
+    </linearGradient>
+    <clipPath id="clip03">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg03)"/>
+  <g clip-path="url(#clip03)">
+    <!-- 별 -->
+    <circle cx="180" cy="180" r="3" fill="#FFFFFF" opacity="0.6"/>
+    <circle cx="400" cy="140" r="2" fill="#FFFFFF" opacity="0.5"/>
+    <circle cx="750" cy="200" r="3" fill="#FFFFFF" opacity="0.7"/>
+    <circle cx="870" cy="350" r="2" fill="#FFFFFF" opacity="0.4"/>
+    <circle cx="130" cy="600" r="2" fill="#FFFFFF" opacity="0.5"/>
+    <circle cx="820" cy="780" r="3" fill="#FFFFFF" opacity="0.5"/>
+    <circle cx="550" cy="900" r="2" fill="#FFFFFF" opacity="0.4"/>
+    <!-- Layer 2: 궤도 선 (대각선 동적) -->
+    <ellipse cx="512" cy="580" rx="350" ry="140" fill="none" stroke="#93C5FD" stroke-width="12" opacity="0.4" transform="rotate(-35 512 580)"/>
+    <!-- 궤도 방향 점선 -->
+    <ellipse cx="512" cy="580" rx="350" ry="140" fill="none" stroke="#93C5FD" stroke-width="6" opacity="0.2" stroke-dasharray="25 18" transform="rotate(-35 512 580)"/>
+    <!-- Layer 2: 행성 (우하단) -->
+    <circle cx="680" cy="680" r="140" fill="url(#planet03)"/>
+    <!-- 행성 표면 -->
+    <ellipse cx="650" cy="660" rx="90" ry="30" fill="#2563EB" opacity="0.4" transform="rotate(-20 650 660)"/>
+    <!-- 우주선 (좌상단, 궤도 위) -->
+    <!-- 우주선 본체 -->
+    <ellipse cx="280" cy="310" rx="55" ry="28" fill="url(#ship03)" transform="rotate(-35 280 310)"/>
+    <!-- 우주선 조종석 -->
+    <ellipse cx="295" cy="295" rx="28" ry="18" fill="#7DD3FC" opacity="0.9" transform="rotate(-35 295 295)"/>
+    <!-- 우주선 날개 -->
+    <path d="M 250 330 L 215 360 L 245 345 Z" fill="#94A3B8" transform="rotate(-35 250 330)"/>
+    <path d="M 265 318 L 230 295 L 258 308 Z" fill="#94A3B8" transform="rotate(-35 265 318)"/>
+    <!-- 엔진 불꽃 -->
+    <path d="M 258 342 Q 235 360 220 380 Q 240 368 248 355 Q 232 372 218 395 Q 242 375 252 360" fill="#F472B6" opacity="0.8" stroke-linecap="round"/>
+    <path d="M 258 342 Q 240 370 230 385" fill="none" stroke="#FDE68A" stroke-width="8" stroke-linecap="round" opacity="0.9"/>
+    <!-- Layer 3: 속도 라인 -->
+    <line x1="200" y1="260" x2="155" y2="220" stroke="#93C5FD" stroke-width="6" opacity="0.5" stroke-linecap="round"/>
+    <line x1="215" y1="245" x2="175" y2="200" stroke="#93C5FD" stroke-width="4" opacity="0.3" stroke-linecap="round"/>
+    <line x1="230" y1="230" x2="195" y2="185" stroke="#93C5FD" stroke-width="3" opacity="0.2" stroke-linecap="round"/>
+    <!-- 별 장식 -->
+    <path d="M 820 180 L 830 205 L 855 215 L 830 225 L 820 250 L 810 225 L 785 215 L 810 205 Z" fill="#FDE68A" opacity="0.8"/>
+  </g>
+</svg>

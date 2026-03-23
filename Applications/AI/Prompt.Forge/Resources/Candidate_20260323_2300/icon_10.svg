@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg10" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0D9488"/>
+      <stop offset="100%" stop-color="#0F766E"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg10)"/>
+  <!-- 즐겨찾기 카드 (배경 카드들) -->
+  <rect x="200" y="380" width="480" height="320" rx="24" fill="#0F766E" opacity="0.6" transform="rotate(6,440,540)"/>
+  <rect x="195" y="370" width="480" height="320" rx="24" fill="#14B8A6" opacity="0.5" transform="rotate(2,435,530)"/>
+  <!-- 메인 카드 -->
+  <rect x="180" y="340" width="490" height="340" rx="24" fill="white"/>
+  <!-- 카드 내용 -->
+  <rect x="215" y="390" width="280" height="22" rx="8" fill="#0D9488"/>
+  <rect x="215" y="426" width="380" height="16" rx="6" fill="#CCFBF1"/>
+  <rect x="215" y="454" width="340" height="16" rx="6" fill="#CCFBF1"/>
+  <rect x="215" y="482" width="360" height="16" rx="6" fill="#CCFBF1"/>
+  <!-- 태그 -->
+  <rect x="215" y="520" width="100" height="26" rx="13" fill="#14B8A6" opacity="0.3"/>
+  <rect x="325" y="520" width="90" height="26" rx="13" fill="#0D9488" opacity="0.25"/>
+  <!-- 거대한 황금 별 (오른쪽 위에 겹쳐서) -->
+  <g transform="translate(680,310)">
+    <!-- 별 배경 글로우 -->
+    <circle cx="0" cy="0" r="160" fill="#FDE68A" opacity="0.15"/>
+    <circle cx="0" cy="0" r="130" fill="#FDE68A" opacity="0.2"/>
+    <!-- 별 -->
+    <path d="M0,-140 L33,-52 L128,-52 L52,4 L80,92 L0,40 L-80,92 L-52,4 L-128,-52 L-33,-52 Z" fill="#F59E0B"/>
+    <!-- 별 하이라이트 -->
+    <path d="M0,-140 L33,-52 L128,-52 L52,4 L80,92 L0,40 L-80,92" fill="#FDE68A" opacity="0.5"/>
+    <!-- 별 반짝임 -->
+    <circle cx="0" cy="0" r="20" fill="white" opacity="0.6"/>
+  </g>
+  <!-- 별 주변 작은 별들 -->
+  <path d="M820,180 L826,196 L843,196 L830,206 L835,222 L820,213 L805,222 L810,206 L797,196 L814,196 Z" fill="#FDE68A" opacity="0.8"/>
+  <path d="M750,160 L754,172 L767,172 L757,179 L761,191 L750,185 L739,191 L743,179 L733,172 L746,172 Z" fill="#FDE68A" opacity="0.6"/>
+  <!-- 하단 즐겨찾기 카운터 -->
+  <rect x="520" y="580" width="300" height="80" rx="20" fill="#0D9488" opacity="0.8"/>
+  <text x="670" y="630" font-family="system-ui, sans-serif" font-weight="bold" font-size="36" text-anchor="middle" fill="white">★ 24개</text>
+</svg>

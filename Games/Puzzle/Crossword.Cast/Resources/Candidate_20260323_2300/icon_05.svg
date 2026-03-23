@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg05" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0C4A6E"/>
+      <stop offset="100%" stop-color="#075985"/>
+    </linearGradient>
+    <clipPath id="clip05">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg05)"/>
+  <g clip-path="url(#clip05)">
+    <!-- Layer 2: 물음표 큰 심볼 -->
+    <!-- 물음표 원호 부분 -->
+    <path d="M 512 220
+             C 620 220, 700 290, 700 390
+             C 700 460, 660 510, 590 545
+             C 560 560, 545 580, 545 610
+             L 545 650"
+          fill="none" stroke="#22D3EE" stroke-width="80" stroke-linecap="round"/>
+    <!-- 물음표 점 -->
+    <circle cx="512" cy="740" r="52" fill="#22D3EE"/>
+    <!-- 격자 셀들 (배경에 흩어진) -->
+    <rect x="120" y="120" width="90" height="90" fill="none" stroke="rgba(34,211,238,0.3)" stroke-width="5" rx="8"/>
+    <rect x="120" y="220" width="90" height="90" fill="none" stroke="rgba(34,211,238,0.3)" stroke-width="5" rx="8"/>
+    <rect x="220" y="120" width="90" height="90" fill="none" stroke="rgba(34,211,238,0.3)" stroke-width="5" rx="8"/>
+    <rect x="814" y="120" width="90" height="90" fill="none" stroke="rgba(34,211,238,0.3)" stroke-width="5" rx="8"/>
+    <rect x="814" y="220" width="90" height="90" fill="none" stroke="rgba(34,211,238,0.3)" stroke-width="5" rx="8"/>
+    <rect x="714" y="120" width="90" height="90" fill="none" stroke="rgba(34,211,238,0.3)" stroke-width="5" rx="8"/>
+    <rect x="120" y="814" width="90" height="90" fill="none" stroke="rgba(34,211,238,0.3)" stroke-width="5" rx="8"/>
+    <rect x="220" y="814" width="90" height="90" fill="none" stroke="rgba(34,211,238,0.3)" stroke-width="5" rx="8"/>
+    <rect x="814" y="814" width="90" height="90" fill="none" stroke="rgba(34,211,238,0.3)" stroke-width="5" rx="8"/>
+    <rect x="714" y="814" width="90" height="90" fill="none" stroke="rgba(34,211,238,0.3)" stroke-width="5" rx="8"/>
+    <!-- Layer 3: 힌트 텍스트 라벨들 -->
+    <text x="155" y="175" font-family="Arial, sans-serif" font-size="36" fill="#FFFFFF" text-anchor="middle" dominant-baseline="middle">?</text>
+    <text x="155" y="265" font-family="Arial, sans-serif" font-size="36" fill="#FFFFFF" text-anchor="middle" dominant-baseline="middle">1</text>
+    <text x="265" y="175" font-family="Arial, sans-serif" font-size="36" fill="#FFFFFF" text-anchor="middle" dominant-baseline="middle">2</text>
+    <text x="849" y="175" font-family="Arial, sans-serif" font-size="36" fill="#FFFFFF" text-anchor="middle" dominant-baseline="middle">3</text>
+    <!-- HINT 레이블 -->
+    <text x="512" y="870" font-family="Arial Black, sans-serif" font-size="64" font-weight="900" fill="#22D3EE" text-anchor="middle" dominant-baseline="middle">HINT</text>
+  </g>
+</svg>

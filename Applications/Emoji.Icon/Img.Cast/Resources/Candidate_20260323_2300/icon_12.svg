@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <clipPath id="clip12"><rect width="1024" height="1024" rx="190"/></clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="#DC2626"/>
+  <g clip-path="url(#clip12)">
+    <!-- RGB 삼각형 (빛의 삼원색 가산 혼합) -->
+    <!-- 배경 어두운 레이어 -->
+    <rect x="0" y="0" width="1024" height="1024" fill="#1A0000" opacity="0.4"/>
+    <!-- R 삼각형 (빨강) -->
+    <polygon points="512,180 240,660 784,660" fill="#EF4444" opacity="0.75"/>
+    <!-- G 삼각형 (초록) - 좌하 -->
+    <polygon points="512,180 140,780 512,660" fill="#22C55E" opacity="0.75"/>
+    <!-- B 삼각형 (파랑) - 우하 -->
+    <polygon points="512,180 512,660 884,780" fill="#3B82F6" opacity="0.75"/>
+    <!-- 중앙 흰색 혼합 영역 -->
+    <polygon points="512,360 380,600 644,600" fill="white" opacity="0.9"/>
+    <!-- 레이블 -->
+    <text x="512" y="312" text-anchor="middle" font-family="system-ui" font-size="56" font-weight="bold" fill="white" opacity="0.9">R</text>
+    <text x="300" y="700" text-anchor="middle" font-family="system-ui" font-size="56" font-weight="bold" fill="white" opacity="0.9">G</text>
+    <text x="726" y="700" text-anchor="middle" font-family="system-ui" font-size="56" font-weight="bold" fill="white" opacity="0.9">B</text>
+    <!-- 중앙 라벨 -->
+    <text x="512" y="520" text-anchor="middle" font-family="system-ui" font-size="32" font-weight="bold" fill="#1A1A1A">RGB</text>
+    <!-- 하단 텍스트 -->
+    <text x="512" y="870" font-size="44" font-weight="bold" font-family="system-ui" fill="white" text-anchor="middle">Color Casting</text>
+    <text x="512" y="930" font-size="28" font-family="system-ui" fill="#FCA5A5" text-anchor="middle">Image Converter</text>
+  </g>
+</svg>

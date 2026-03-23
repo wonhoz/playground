@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg04" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#9333EA"/>
+      <stop offset="100%" stop-color="#7C3AED"/>
+    </radialGradient>
+    <radialGradient id="eyeglow04" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#EDE9FE" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#C4B5FD" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="flash04">
+      <feGaussianBlur stdDeviation="12" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <clipPath id="clip04">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg04)"/>
+  <circle cx="512" cy="420" r="380" fill="url(#eyeglow04)" clip-path="url(#clip04)"/>
+  <g clip-path="url(#clip04)">
+    <!-- Layer 2: 큰 눈 (중앙) -->
+    <!-- 눈 외곽 흰자 -->
+    <ellipse cx="512" cy="480" rx="200" ry="130" fill="#EDE9FE"/>
+    <!-- 눈 홍채 -->
+    <circle cx="512" cy="480" r="95" fill="#7C3AED"/>
+    <!-- 눈 동공 -->
+    <circle cx="512" cy="480" r="55" fill="#1C0A4A"/>
+    <!-- 눈 광택 -->
+    <ellipse cx="545" cy="450" rx="22" ry="16" fill="#FFFFFF" opacity="0.7"/>
+    <ellipse cx="480" cy="510" rx="10" ry="7" fill="#FFFFFF" opacity="0.3"/>
+    <!-- 눈썹 위 라인 -->
+    <path d="M 312 350 Q 512 300 712 350" fill="none" stroke="#C4B5FD" stroke-width="18" stroke-linecap="round"/>
+    <!-- Layer 3: 섬광 / 번개 -->
+    <g filter="url(#flash04)">
+      <!-- 오른쪽 위 번개 -->
+      <polygon points="680,220 640,360 690,340 650,480" fill="#FDE68A"/>
+      <polygon points="680,220 640,360 690,340 650,480" fill="#FFFFFF" opacity="0.4"/>
+      <!-- 왼쪽 위 번개 -->
+      <polygon points="344,220 384,360 334,340 374,480" fill="#FDE68A"/>
+      <polygon points="344,220 384,360 334,340 374,480" fill="#FFFFFF" opacity="0.4"/>
+    </g>
+    <!-- 섬광 작은 별 파티클 -->
+    <polygon points="760,300 770,280 780,300 800,290 780,310 790,330 770,315 750,330 760,310 740,295" fill="#FDE68A" opacity="0.8"/>
+    <polygon points="240,290 248,274 256,290 272,282 256,298 264,314 248,303 232,314 240,298 224,286" fill="#FDE68A" opacity="0.8"/>
+    <!-- 속도감 줄무늬 -->
+    <line x1="150" y1="480" x2="260" y2="480" stroke="#C4B5FD" stroke-width="6" stroke-linecap="round" opacity="0.5"/>
+    <line x1="170" y1="520" x2="240" y2="520" stroke="#C4B5FD" stroke-width="4" stroke-linecap="round" opacity="0.4"/>
+    <line x1="764" y1="480" x2="874" y2="480" stroke="#C4B5FD" stroke-width="6" stroke-linecap="round" opacity="0.5"/>
+    <line x1="784" y1="520" x2="854" y2="520" stroke="#C4B5FD" stroke-width="4" stroke-linecap="round" opacity="0.4"/>
+    <!-- 하단 텍스트 REFLEX -->
+    <text x="512" y="680" font-family="Arial Black, sans-serif" font-size="72" font-weight="900" text-anchor="middle" fill="#C4B5FD" letter-spacing="8">REFLEX</text>
+    <text x="512" y="760" font-family="Arial, sans-serif" font-size="36" text-anchor="middle" fill="#A78BFA" opacity="0.8" letter-spacing="4">DODGE</text>
+  </g>
+</svg>

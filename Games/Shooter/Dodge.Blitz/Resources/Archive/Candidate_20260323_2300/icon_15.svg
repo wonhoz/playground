@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg15" cx="50%" cy="50%" r="55%">
+      <stop offset="0%" stop-color="#292524"/>
+      <stop offset="100%" stop-color="#1C1917"/>
+    </radialGradient>
+    <linearGradient id="gameover15" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FB923C"/>
+      <stop offset="100%" stop-color="#F97316"/>
+    </linearGradient>
+    <filter id="glow15">
+      <feGaussianBlur stdDeviation="12" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <clipPath id="clip15">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg15)"/>
+  <!-- 파편 흔적들 (게임 오버 분위기) -->
+  <g clip-path="url(#clip15)" opacity="0.15">
+    <line x1="100" y1="100" x2="300" y2="200" stroke="#F97316" stroke-width="3"/>
+    <line x1="900" y1="150" x2="700" y2="280" stroke="#F97316" stroke-width="2"/>
+    <line x1="150" y1="900" x2="350" y2="750" stroke="#F97316" stroke-width="3"/>
+    <line x1="870" y1="880" x2="670" y2="720" stroke="#F97316" stroke-width="2"/>
+    <line x1="500" y1="100" x2="600" y2="250" stroke="#F97316" stroke-width="2"/>
+  </g>
+  <g clip-path="url(#clip15)">
+    <!-- Layer 2: GAME OVER 텍스트 메인 -->
+    <g filter="url(#glow15)">
+      <text x="512" y="320" font-family="Arial Black, sans-serif" font-size="100" font-weight="900" text-anchor="middle" fill="url(#gameover15)" letter-spacing="-2">GAME</text>
+      <text x="512" y="440" font-family="Arial Black, sans-serif" font-size="100" font-weight="900" text-anchor="middle" fill="url(#gameover15)" letter-spacing="-2">OVER</text>
+    </g>
+    <!-- 텍스트 테두리 효과 -->
+    <text x="512" y="320" font-family="Arial Black, sans-serif" font-size="100" font-weight="900" text-anchor="middle" fill="none" stroke="#FFFFFF" stroke-width="2" letter-spacing="-2" opacity="0.2">GAME</text>
+    <text x="512" y="440" font-family="Arial Black, sans-serif" font-size="100" font-weight="900" text-anchor="middle" fill="none" stroke="#FFFFFF" stroke-width="2" letter-spacing="-2" opacity="0.2">OVER</text>
+
+    <!-- 구분선 -->
+    <line x1="200" y1="490" x2="824" y2="490" stroke="#F97316" stroke-width="3" opacity="0.5"/>
+
+    <!-- Layer 3: 재도전 화살표 (원형 회전) -->
+    <!-- 원형 화살표 배경 원 -->
+    <circle cx="512" cy="680" r="140" fill="#292524"/>
+    <circle cx="512" cy="680" r="140" fill="none" stroke="#F97316" stroke-width="6" opacity="0.5"/>
+    <!-- 원형 회전 화살표 (약 300도 원호) -->
+    <path d="M 390 620 A 140 140 0 1 1 590 810" fill="none" stroke="#FFFFFF" stroke-width="18" stroke-linecap="round"/>
+    <!-- 화살표 헤드 (원호 끝) -->
+    <polygon points="590,810 610,765 555,790" fill="#FFFFFF"/>
+    <!-- 중심 아이콘 (재시작 버튼) -->
+    <circle cx="512" cy="680" r="50" fill="#F97316"/>
+    <!-- 재시작 삼각형 (play) -->
+    <polygon points="498,658 498,702 540,680" fill="#FFFFFF"/>
+
+    <!-- 스코어 표시 -->
+    <text x="512" y="548" font-family="Courier New, monospace" font-size="30" text-anchor="middle" fill="#FFFFFF" opacity="0.6" letter-spacing="2">SCORE: 45820</text>
+    <!-- RETRY 텍스트 -->
+    <text x="512" y="870" font-family="Arial Black, sans-serif" font-size="44" font-weight="900" text-anchor="middle" fill="#F97316" letter-spacing="6">RETRY?</text>
+    <!-- 파편 파티클 -->
+    <ellipse cx="200" cy="450" rx="8" ry="14" fill="#F97316" opacity="0.6" transform="rotate(30 200 450)"/>
+    <ellipse cx="824" cy="430" rx="8" ry="14" fill="#F97316" opacity="0.6" transform="rotate(-30 824 430)"/>
+    <circle cx="180" cy="520" r="6" fill="#F97316" opacity="0.4"/>
+    <circle cx="844" cy="500" r="6" fill="#F97316" opacity="0.4"/>
+    <circle cx="300" cy="400" r="5" fill="#FFFFFF" opacity="0.3"/>
+    <circle cx="724" cy="380" r="5" fill="#FFFFFF" opacity="0.3"/>
+  </g>
+</svg>

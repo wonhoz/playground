@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg03" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#065F46"/>
+      <stop offset="100%" stop-color="#022C22"/>
+    </linearGradient>
+    <linearGradient id="leaf03" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4ADE80"/>
+      <stop offset="60%" stop-color="#22C55E"/>
+      <stop offset="100%" stop-color="#16A34A"/>
+    </linearGradient>
+    <filter id="glow03">
+      <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <clipPath id="clip03">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg03)"/>
+  <!-- 배경 광택 -->
+  <ellipse cx="512" cy="300" rx="350" ry="200" fill="#065F46" opacity="0.4"/>
+
+  <!-- Layer 2: 나뭇잎 메인 -->
+  <path d="M 512 820 Q 200 650 200 400 Q 200 180 512 160 Q 824 180 824 400 Q 824 650 512 820 Z"
+        fill="url(#leaf03)" stroke="#15803D" stroke-width="14" clip-path="url(#clip03)"/>
+
+  <!-- Layer 3: 잎맥 — 중심 -->
+  <path d="M 512 800 L 512 200" stroke="#FFFFFF" stroke-width="16" fill="none" stroke-linecap="round" opacity="0.6"/>
+  <!-- 잎맥 — 좌측 -->
+  <path d="M 512 400 Q 400 350 320 330" stroke="#FFFFFF" stroke-width="10" fill="none" stroke-linecap="round" opacity="0.5"/>
+  <path d="M 512 480 Q 380 420 290 400" stroke="#FFFFFF" stroke-width="10" fill="none" stroke-linecap="round" opacity="0.5"/>
+  <path d="M 512 560 Q 390 510 310 490" stroke="#FFFFFF" stroke-width="10" fill="none" stroke-linecap="round" opacity="0.5"/>
+  <path d="M 512 640 Q 400 600 330 590" stroke="#FFFFFF" stroke-width="10" fill="none" stroke-linecap="round" opacity="0.5"/>
+  <path d="M 512 320 Q 420 280 360 265" stroke="#FFFFFF" stroke-width="9" fill="none" stroke-linecap="round" opacity="0.45"/>
+  <!-- 잎맥 — 우측 -->
+  <path d="M 512 400 Q 624 350 704 330" stroke="#FFFFFF" stroke-width="10" fill="none" stroke-linecap="round" opacity="0.5"/>
+  <path d="M 512 480 Q 644 420 734 400" stroke="#FFFFFF" stroke-width="10" fill="none" stroke-linecap="round" opacity="0.5"/>
+  <path d="M 512 560 Q 634 510 714 490" stroke="#FFFFFF" stroke-width="10" fill="none" stroke-linecap="round" opacity="0.5"/>
+  <path d="M 512 640 Q 624 600 694 590" stroke="#FFFFFF" stroke-width="10" fill="none" stroke-linecap="round" opacity="0.5"/>
+  <path d="M 512 320 Q 604 280 664 265" stroke="#FFFFFF" stroke-width="9" fill="none" stroke-linecap="round" opacity="0.45"/>
+
+  <!-- 빛 반사 하이라이트 -->
+  <ellipse cx="420" cy="310" rx="80" ry="50" fill="#FFFFFF" opacity="0.12" transform="rotate(-20 420 310)"/>
+</svg>

@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg07" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#BE1245"/>
+      <stop offset="100%" stop-color="#9F1239"/>
+    </linearGradient>
+    <linearGradient id="heart07" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFC2D1"/>
+      <stop offset="100%" stop-color="#FDA4AF"/>
+    </linearGradient>
+    <linearGradient id="bar07full" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FDE68A"/>
+      <stop offset="100%" stop-color="#FCD34D"/>
+    </linearGradient>
+    <clipPath id="clip07">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg07)"/>
+  <g clip-path="url(#clip07)">
+    <!-- Layer 2: 하트 3개 (생명) -->
+    <!-- 하트 1 (좌) -->
+    <path d="M 200 340 C 200 290 160 260 130 280 C 100 300 100 340 130 370 L 200 440 L 270 370 C 300 340 300 300 270 280 C 240 260 200 290 200 340 Z" fill="url(#heart07)"/>
+    <!-- 하트 2 (중앙) -->
+    <path d="M 512 340 C 512 290 472 260 442 280 C 412 300 412 340 442 370 L 512 440 L 582 370 C 612 340 612 300 582 280 C 552 260 512 290 512 340 Z" fill="url(#heart07)"/>
+    <!-- 하트 3 (우) -->
+    <path d="M 824 340 C 824 290 784 260 754 280 C 724 300 724 340 754 370 L 824 440 L 894 370 C 924 340 924 300 894 280 C 864 260 824 290 824 340 Z" fill="url(#heart07)"/>
+    <!-- 하트 광택 -->
+    <ellipse cx="185" cy="315" rx="20" ry="14" fill="#FFFFFF" opacity="0.4"/>
+    <ellipse cx="497" cy="315" rx="20" ry="14" fill="#FFFFFF" opacity="0.4"/>
+    <ellipse cx="809" cy="315" rx="20" ry="14" fill="#FFFFFF" opacity="0.4"/>
+
+    <!-- Layer 3: HP 바 -->
+    <!-- HP 라벨 -->
+    <text x="200" y="545" font-family="Arial Black, sans-serif" font-size="42" font-weight="900" fill="#FDA4AF" letter-spacing="2">HP</text>
+    <!-- HP 바 배경 -->
+    <rect x="310" y="500" width="530" height="52" rx="26" fill="#7F1D1D"/>
+    <!-- HP 바 채움 (80%) -->
+    <rect x="310" y="500" width="424" height="52" rx="26" fill="url(#bar07full)"/>
+    <!-- HP 바 광택 -->
+    <rect x="310" y="500" width="424" height="24" rx="12" fill="#FFFFFF" opacity="0.2"/>
+    <!-- HP 수치 -->
+    <text x="520" y="538" font-family="Arial Black, sans-serif" font-size="32" font-weight="900" text-anchor="middle" fill="#FFFFFF">80 / 100</text>
+
+    <!-- 총알 경고 — 아래 -->
+    <text x="512" y="640" font-family="Arial, sans-serif" font-size="28" text-anchor="middle" fill="#FDA4AF" opacity="0.7">SURVIVE!</text>
+    <!-- 총알들 장식 -->
+    <ellipse cx="250" cy="720" rx="12" ry="22" fill="#FDE68A" opacity="0.7"/>
+    <ellipse cx="310" cy="700" rx="12" ry="22" fill="#FDE68A" opacity="0.6"/>
+    <ellipse cx="370" cy="730" rx="12" ry="22" fill="#FDE68A" opacity="0.5"/>
+    <ellipse cx="654" cy="720" rx="12" ry="22" fill="#FDE68A" opacity="0.7"/>
+    <ellipse cx="714" cy="700" rx="12" ry="22" fill="#FDE68A" opacity="0.6"/>
+    <ellipse cx="774" cy="730" rx="12" ry="22" fill="#FDE68A" opacity="0.5"/>
+    <!-- 위협 화살표들 -->
+    <polygon points="512,820 488,780 536,780" fill="#FDA4AF" opacity="0.6"/>
+    <polygon points="440,840 416,800 464,800" fill="#FDA4AF" opacity="0.5"/>
+    <polygon points="584,840 560,800 608,800" fill="#FDA4AF" opacity="0.5"/>
+  </g>
+</svg>

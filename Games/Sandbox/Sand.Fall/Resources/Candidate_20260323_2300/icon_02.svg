@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg02" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#92400E"/>
+      <stop offset="100%" stop-color="#78350F"/>
+    </linearGradient>
+    <linearGradient id="stream02" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FDE68A"/>
+      <stop offset="100%" stop-color="#D97706"/>
+    </linearGradient>
+    <clipPath id="clip02">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg02)"/>
+  <g clip-path="url(#clip02)">
+    <!-- Layer 2: 쏟아지는 모래 대각선 흐름 -->
+    <!-- 주 흐름 스트림 -->
+    <path d="M220 200 Q280 280 260 400 Q240 520 300 640 Q360 760 320 880"
+          stroke="url(#stream02)" stroke-width="72" stroke-linecap="round" fill="none" opacity="0.9"/>
+    <path d="M400 180 Q460 300 440 440 Q420 560 480 680 Q540 800 500 900"
+          stroke="url(#stream02)" stroke-width="56" stroke-linecap="round" fill="none" opacity="0.75"/>
+    <path d="M580 200 Q640 320 620 460 Q600 580 660 700 Q720 820 680 940"
+          stroke="url(#stream02)" stroke-width="44" stroke-linecap="round" fill="none" opacity="0.60"/>
+    <!-- Layer 3: 모래 알갱이 (입자) 표현 -->
+    <circle cx="240" cy="300" r="18" fill="#FDE68A" opacity="0.95"/>
+    <circle cx="280" cy="380" r="14" fill="#FDE68A" opacity="0.85"/>
+    <circle cx="260" cy="460" r="16" fill="#D97706" opacity="0.90"/>
+    <circle cx="310" cy="540" r="12" fill="#FDE68A" opacity="0.80"/>
+    <circle cx="290" cy="620" r="15" fill="#FDE68A" opacity="0.85"/>
+    <circle cx="430" cy="280" r="16" fill="#D97706" opacity="0.90"/>
+    <circle cx="450" cy="380" r="12" fill="#FDE68A" opacity="0.85"/>
+    <circle cx="440" cy="480" r="14" fill="#FDE68A" opacity="0.75"/>
+    <circle cx="490" cy="560" r="11" fill="#D97706" opacity="0.80"/>
+    <circle cx="510" cy="660" r="13" fill="#FDE68A" opacity="0.70"/>
+    <circle cx="620" cy="320" r="14" fill="#FDE68A" opacity="0.80"/>
+    <circle cx="640" cy="420" r="11" fill="#D97706" opacity="0.75"/>
+    <circle cx="630" cy="520" r="13" fill="#FDE68A" opacity="0.70"/>
+    <circle cx="670" cy="600" r="10" fill="#FDE68A" opacity="0.65"/>
+    <!-- 작은 파티클들 -->
+    <circle cx="350" cy="250" r="8" fill="#FDE68A" opacity="0.60"/>
+    <circle cx="530" cy="340" r="7" fill="#FDE68A" opacity="0.55"/>
+    <circle cx="700" cy="440" r="6" fill="#FDE68A" opacity="0.50"/>
+    <circle cx="370" cy="700" r="9" fill="#FDE68A" opacity="0.55"/>
+    <circle cx="560" cy="780" r="7" fill="#D97706" opacity="0.50"/>
+    <!-- 하단 쌓인 모래 -->
+    <ellipse cx="420" cy="920" rx="180" ry="40" fill="#D97706" opacity="0.7"/>
+    <ellipse cx="420" cy="900" rx="140" ry="28" fill="#FDE68A" opacity="0.5"/>
+  </g>
+</svg>

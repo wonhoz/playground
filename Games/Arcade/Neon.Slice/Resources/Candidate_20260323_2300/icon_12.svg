@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs>
+    <radialGradient id="bg12" cx="50%" cy="50%" r="55%">
+      <stop offset="0%" stop-color="#292524"/>
+      <stop offset="100%" stop-color="#1C1917"/>
+    </radialGradient>
+    <clipPath id="clip12">
+      <rect x="0" y="0" width="1024" height="1024" rx="190"/>
+    </clipPath>
+    <filter id="glow12" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="18" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glow12lg" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="36" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <linearGradient id="shuriken12" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFBEB"/>
+      <stop offset="50%" stop-color="#FDE68A"/>
+      <stop offset="100%" stop-color="#D97706"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" fill="url(#bg12)" rx="190"/>
+
+  <g clip-path="url(#clip12)">
+    <!-- 배경 원형 글로우 -->
+    <circle cx="512" cy="512" r="340" fill="#FDE68A" opacity="0.04"/>
+    <circle cx="512" cy="512" r="260" fill="#FDE68A" opacity="0.06"/>
+
+    <!-- 슈리켄 (수리검) — 4날 별형 -->
+    <!-- 회전 그룹 (45도 틸트) -->
+    <g filter="url(#glow12lg)" transform="rotate(22, 512, 512)">
+      <!-- 날 1 (위) -->
+      <polygon points="512,170 560,512 512,460 464,512" fill="url(#shuriken12)"/>
+      <!-- 날 2 (오른쪽) -->
+      <polygon points="854,512 512,560 564,512 512,464" fill="url(#shuriken12)"/>
+      <!-- 날 3 (아래) -->
+      <polygon points="512,854 464,512 512,564 560,512" fill="url(#shuriken12)"/>
+      <!-- 날 4 (왼쪽) -->
+      <polygon points="170,512 512,464 460,512 512,560" fill="url(#shuriken12)"/>
+    </g>
+
+    <!-- 슈리켄 중앙 원 -->
+    <g filter="url(#glow12)">
+      <circle cx="512" cy="512" r="68" fill="#FDE68A"/>
+      <circle cx="512" cy="512" r="44" fill="#FFFFFF"/>
+      <circle cx="512" cy="512" r="24" fill="#D97706"/>
+    </g>
+
+    <!-- 회전 속도감 (잔상 링) -->
+    <g filter="url(#glow12)" opacity="0.5">
+      <circle cx="512" cy="512" r="310" fill="none" stroke="#FDE68A" stroke-width="6" stroke-dasharray="40 30"/>
+      <circle cx="512" cy="512" r="280" fill="none" stroke="#FDE68A" stroke-width="3" stroke-dasharray="20 40"/>
+    </g>
+
+    <!-- 날끝 빛점 -->
+    <g filter="url(#glow12)" fill="#FFFFFF">
+      <circle cx="512" cy="192" r="18" transform="rotate(22, 512, 512)"/>
+      <circle cx="832" cy="512" r="18" transform="rotate(22, 512, 512)"/>
+      <circle cx="512" cy="832" r="18" transform="rotate(22, 512, 512)"/>
+      <circle cx="192" cy="512" r="18" transform="rotate(22, 512, 512)"/>
+    </g>
+
+    <!-- 슬라이스 궤적 (수평) -->
+    <g filter="url(#glow12)" opacity="0.75">
+      <line x1="190" y1="512" x2="834" y2="512" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" stroke-dasharray="80 40"/>
+    </g>
+  </g>
+</svg>

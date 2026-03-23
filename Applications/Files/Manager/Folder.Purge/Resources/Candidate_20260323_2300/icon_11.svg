@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg11" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1E293B"/>
+      <stop offset="100%" stop-color="#0F172A"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg11)"/>
+  <!-- 폴더 트리 구조 -->
+  <!-- 루트 -->
+  <rect x="80" y="200" width="220" height="110" rx="16" fill="#334155"/>
+  <path d="M80 200 L80 166 Q80 142 104 142 L178 142 Q202 142 214 166 L232 200 Z" fill="#334155"/>
+  <text x="190" y="268" font-family="system-ui, sans-serif" font-weight="bold" font-size="44" fill="white" text-anchor="middle">src</text>
+  <!-- 루트 연결선 -->
+  <line x1="300" y1="255" x2="380" y2="255" stroke="#475569" stroke-width="10"/>
+  <line x1="380" y1="255" x2="380" y2="490" stroke="#475569" stroke-width="10"/>
+  <line x1="380" y1="255" x2="380" y2="255" stroke="#475569" stroke-width="10"/>
+
+  <!-- src 폴더 (초록) -->
+  <rect x="430" y="180" width="200" height="110" rx="16" fill="#15803D"/>
+  <path d="M430 180 L430 146 Q430 122 454 122 L528 122 Q552 122 564 146 L582 180 Z" fill="#15803D"/>
+  <text x="530" y="248" font-family="system-ui, sans-serif" font-weight="bold" font-size="44" fill="white" text-anchor="middle">src</text>
+  <circle cx="700" cy="235" r="30" fill="#22C55E"/>
+  <path d="M685 235 L698 248 L718 222" stroke="white" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+
+  <!-- bin 폴더 (빨강 X) -->
+  <line x1="380" y1="380" x2="430" y2="380" stroke="#475569" stroke-width="10"/>
+  <rect x="430" y="330" width="200" height="100" rx="16" fill="#7F1D1D"/>
+  <path d="M430 330 L430 300 Q430 278 452 278 L522 278 Q544 278 555 300 L572 330 Z" fill="#7F1D1D"/>
+  <text x="530" y="392" font-family="system-ui, sans-serif" font-weight="bold" font-size="44" fill="#FCA5A5" text-anchor="middle">bin</text>
+  <circle cx="700" cy="380" r="30" fill="#DC2626"/>
+  <line x1="686" y1="366" x2="714" y2="394" stroke="white" stroke-width="14" stroke-linecap="round"/>
+  <line x1="714" y1="366" x2="686" y2="394" stroke="white" stroke-width="14" stroke-linecap="round"/>
+
+  <!-- obj 폴더 (빨강 X) -->
+  <line x1="380" y1="490" x2="430" y2="490" stroke="#475569" stroke-width="10"/>
+  <rect x="430" y="440" width="200" height="100" rx="16" fill="#7F1D1D"/>
+  <path d="M430 440 L430 410 Q430 388 452 388 L522 388 Q544 388 555 410 L572 440 Z" fill="#7F1D1D"/>
+  <text x="530" y="502" font-family="system-ui, sans-serif" font-weight="bold" font-size="44" fill="#FCA5A5" text-anchor="middle">obj</text>
+  <circle cx="700" cy="490" r="30" fill="#DC2626"/>
+  <line x1="686" y1="476" x2="714" y2="504" stroke="white" stroke-width="14" stroke-linecap="round"/>
+  <line x1="714" y1="476" x2="686" y2="504" stroke="white" stroke-width="14" stroke-linecap="round"/>
+
+  <!-- 하단 정리 결과 -->
+  <rect x="160" y="690" width="704" height="90" rx="22" fill="#1E3A5F" opacity="0.8"/>
+  <text x="512" y="746" font-family="system-ui, sans-serif" font-weight="bold" font-size="44" fill="#22C55E" text-anchor="middle">bin + obj 삭제 완료</text>
+</svg>

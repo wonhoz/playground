@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg08" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#0E5A8C"/>
+      <stop offset="100%" stop-color="#0369A1"/>
+    </radialGradient>
+    <radialGradient id="planet08" cx="35%" cy="30%" r="65%">
+      <stop offset="0%" stop-color="#BAE6FD"/>
+      <stop offset="100%" stop-color="#0284C7"/>
+    </radialGradient>
+    <clipPath id="clip08">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg08)"/>
+  <g clip-path="url(#clip08)">
+    <!-- 별 -->
+    <circle cx="170" cy="190" r="2" fill="#FFFFFF" opacity="0.5"/>
+    <circle cx="800" cy="170" r="3" fill="#FFFFFF" opacity="0.6"/>
+    <circle cx="180" cy="830" r="2" fill="#FFFFFF" opacity="0.4"/>
+    <circle cx="860" cy="800" r="2" fill="#FFFFFF" opacity="0.5"/>
+    <circle cx="900" cy="400" r="2" fill="#FFFFFF" opacity="0.4"/>
+    <!-- Layer 2: 메인 궤도 타원 -->
+    <ellipse cx="512" cy="512" rx="310" ry="200" fill="none" stroke="#7DD3FC" stroke-width="14" opacity="0.5"/>
+    <!-- 궤도 방향 화살표 (시계방향) -->
+    <!-- 상단 화살표 -->
+    <path d="M 440 320 Q 480 312 520 312" fill="none" stroke="#FDE68A" stroke-width="14" stroke-linecap="round"/>
+    <polygon points="520,312 505,298 522,302" fill="#FDE68A"/>
+    <!-- 우측 화살표 -->
+    <path d="M 720 480 Q 728 510 722 540" fill="none" stroke="#FDE68A" stroke-width="14" stroke-linecap="round"/>
+    <polygon points="722,540 706,528 720,524" fill="#FDE68A"/>
+    <!-- 하단 화살표 -->
+    <path d="M 584 710 Q 545 718 506 718" fill="none" stroke="#FDE68A" stroke-width="14" stroke-linecap="round"/>
+    <polygon points="506,718 521,732 504,728" fill="#FDE68A"/>
+    <!-- 좌측 화살표 -->
+    <path d="M 304 544 Q 296 514 302 484" fill="none" stroke="#FDE68A" stroke-width="14" stroke-linecap="round"/>
+    <polygon points="302,484 318,496 304,500" fill="#FDE68A"/>
+    <!-- Layer 2: 중앙 행성 -->
+    <circle cx="512" cy="512" r="110" fill="url(#planet08)"/>
+    <!-- 행성 표면 디테일 -->
+    <ellipse cx="488" cy="495" rx="70" ry="24" fill="#0369A1" opacity="0.4" transform="rotate(-15 488 495)"/>
+    <ellipse cx="535" cy="540" rx="50" ry="16" fill="#075985" opacity="0.5" transform="rotate(-15 535 540)"/>
+    <!-- 행성 고리 -->
+    <ellipse cx="512" cy="512" rx="155" ry="38" fill="none" stroke="#7DD3FC" stroke-width="12" opacity="0.6" transform="rotate(-15 512 512)"/>
+    <!-- Layer 3: 궤도 위 위성 표시 -->
+    <circle cx="512" cy="312" r="24" fill="#FDE68A" opacity="0.9"/>
+    <!-- 속도 표시 (v 텍스트 느낌) -->
+    <text x="512" y="318" text-anchor="middle" font-family="Arial" font-weight="bold" font-size="22" fill="#1C3D5C">v</text>
+  </g>
+</svg>

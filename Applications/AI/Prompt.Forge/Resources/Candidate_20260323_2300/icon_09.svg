@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg09" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#EA580C"/>
+      <stop offset="100%" stop-color="#C2410C"/>
+    </linearGradient>
+    <linearGradient id="anvil09" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#4B5563"/>
+      <stop offset="100%" stop-color="#374151"/>
+    </linearGradient>
+    <linearGradient id="fire09" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#DC2626"/>
+      <stop offset="40%" stop-color="#F97316"/>
+      <stop offset="100%" stop-color="#FDE68A"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg09)"/>
+  <!-- 모루 (Anvil) 본체 -->
+  <rect x="230" y="580" width="564" height="160" rx="30" fill="url(#anvil09)"/>
+  <!-- 모루 상단 뿔 -->
+  <path d="M350,580 L350,460 Q350,420 390,420 L480,420 Q520,420 520,460 L520,580 Z" fill="url(#anvil09)"/>
+  <!-- 모루 상단 평면 -->
+  <rect x="310" y="420" width="404" height="160" rx="20" fill="#6B7280"/>
+  <!-- 모루 상단 하이라이트 -->
+  <rect x="310" y="420" width="404" height="28" rx="14" fill="#9CA3AF" opacity="0.5"/>
+  <!-- 텍스트 쇠질 (모루 위) - "{" "}">  -->
+  <text x="512" y="540" font-family="system-ui, monospace, sans-serif" font-weight="bold" font-size="110" text-anchor="middle" fill="#FDE68A">{ }</text>
+  <!-- 불꽃들 -->
+  <!-- 불꽃 1 -->
+  <ellipse cx="400" cy="400" rx="40" ry="70" fill="url(#fire09)" opacity="0.9" transform="rotate(-15,400,400)"/>
+  <ellipse cx="400" cy="390" rx="24" ry="50" fill="#FDE68A" opacity="0.7" transform="rotate(-10,400,390)"/>
+  <!-- 불꽃 2 -->
+  <ellipse cx="620" cy="390" rx="36" ry="65" fill="url(#fire09)" opacity="0.9" transform="rotate(10,620,390)"/>
+  <ellipse cx="620" cy="380" rx="22" ry="45" fill="#FDE68A" opacity="0.7" transform="rotate(5,620,380)"/>
+  <!-- 불꽃 3 (중앙) -->
+  <ellipse cx="512" cy="370" rx="45" ry="80" fill="url(#fire09)" opacity="0.8" transform="rotate(-5,512,370)"/>
+  <ellipse cx="512" cy="355" rx="28" ry="55" fill="#FDE68A" opacity="0.6"/>
+  <!-- 불꽃 파티클들 -->
+  <circle cx="320" cy="320" r="10" fill="#FDE68A" opacity="0.8"/>
+  <circle cx="350" cy="270" r="8" fill="#F97316" opacity="0.7"/>
+  <circle cx="700" cy="300" r="10" fill="#FDE68A" opacity="0.8"/>
+  <circle cx="670" cy="250" r="8" fill="#F97316" opacity="0.7"/>
+  <circle cx="460" cy="250" r="12" fill="#FDE68A" opacity="0.6"/>
+  <circle cx="560" cy="240" r="9" fill="#F97316" opacity="0.65"/>
+  <!-- 모루 다리 -->
+  <rect x="340" y="740" width="140" height="80" rx="14" fill="#374151"/>
+  <rect x="544" y="740" width="140" height="80" rx="14" fill="#374151"/>
+  <!-- 모루 받침 -->
+  <rect x="290" y="800" width="444" height="44" rx="14" fill="#1F2937"/>
+</svg>

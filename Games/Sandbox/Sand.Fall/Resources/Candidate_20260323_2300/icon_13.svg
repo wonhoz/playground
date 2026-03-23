@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg13" cx="50%" cy="50%" r="55%">
+      <stop offset="0%" stop-color="#047857"/>
+      <stop offset="100%" stop-color="#065F46"/>
+    </radialGradient>
+    <linearGradient id="tube13" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#A7F3D0" stop-opacity="0.4"/>
+      <stop offset="50%" stop-color="#6EE7B7" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#A7F3D0" stop-opacity="0.4"/>
+    </linearGradient>
+    <linearGradient id="liquid13" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FDE68A" stop-opacity="0.90"/>
+      <stop offset="100%" stop-color="#F59E0B" stop-opacity="0.85"/>
+    </linearGradient>
+    <clipPath id="clip13">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg13)"/>
+  <g clip-path="url(#clip13)">
+    <!-- Layer 2: 시험관 (큰 중앙) -->
+    <!-- 시험관 외곽 -->
+    <rect x="420" y="200" width="184" height="560" rx="92" fill="none" stroke="#6EE7B7" stroke-width="24"/>
+    <!-- 시험관 내부 유리 -->
+    <rect x="432" y="212" width="160" height="536" rx="80" fill="url(#tube13)"/>
+    <!-- 액체 내용물 (아래 60%) -->
+    <path d="M432 548 Q432 748 512 748 Q592 748 592 548 Z" fill="url(#liquid13)"/>
+    <!-- 액체 기포들 -->
+    <circle cx="480" cy="660" r="14" fill="#FDE68A" opacity="0.70"/>
+    <circle cx="540" cy="690" r="10" fill="#FDE68A" opacity="0.60"/>
+    <circle cx="500" cy="720" r="8" fill="#FFFFFF" opacity="0.55"/>
+    <circle cx="560" cy="640" r="9" fill="#FDE68A" opacity="0.65"/>
+    <!-- 시험관 입구 -->
+    <rect x="440" y="192" width="144" height="40" rx="12" fill="#6EE7B7" opacity="0.80"/>
+    <!-- 시험관 마개 -->
+    <rect x="450" y="170" width="124" height="36" rx="10" fill="#A7F3D0" stroke="#6EE7B7" stroke-width="8"/>
+    <!-- Layer 3: 화학 반응 입자들 (시험관 밖으로 나오는 거품) -->
+    <!-- 왼쪽 사이드 소형 시험관 -->
+    <rect x="260" y="380" width="100" height="280" rx="50" fill="none" stroke="#6EE7B7" stroke-width="14"/>
+    <path d="M268 540 Q268 660 310 660 Q352 660 352 540 Z" fill="#7DD3FC" opacity="0.70"/>
+    <rect x="268" y="372" width="84" height="22" rx="7" fill="#6EE7B7" opacity="0.70"/>
+    <!-- 오른쪽 사이드 소형 시험관 -->
+    <rect x="664" y="380" width="100" height="280" rx="50" fill="none" stroke="#6EE7B7" stroke-width="14"/>
+    <path d="M672 520 Q672 660 714 660 Q756 660 756 520 Z" fill="#F97316" opacity="0.70"/>
+    <rect x="672" y="372" width="84" height="22" rx="7" fill="#6EE7B7" opacity="0.70"/>
+    <!-- 반응 파티클 (중앙 시험관 위로 올라오는 거품) -->
+    <circle cx="480" cy="560" r="16" fill="#FDE68A" opacity="0.85"/>
+    <circle cx="545" cy="540" r="12" fill="#6EE7B7" opacity="0.80"/>
+    <circle cx="510" cy="500" r="18" fill="#FDE68A" opacity="0.75"/>
+    <circle cx="470" cy="470" r="13" fill="#A7F3D0" opacity="0.70"/>
+    <circle cx="550" cy="460" r="10" fill="#FDE68A" opacity="0.65"/>
+    <!-- 시험관 외부 반응 -->
+    <circle cx="380" cy="350" r="12" fill="#FDE68A" opacity="0.65"/>
+    <circle cx="350" cy="310" r="9" fill="#6EE7B7" opacity="0.55"/>
+    <circle cx="660" cy="370" r="11" fill="#F97316" opacity="0.60"/>
+    <circle cx="690" cy="330" r="8" fill="#FDE68A" opacity="0.55"/>
+    <!-- 연결 반응선 -->
+    <line x1="360" y1="480" x2="420" y2="480" stroke="#6EE7B7" stroke-width="6" opacity="0.45" stroke-dasharray="12 8"/>
+    <line x1="604" y1="480" x2="664" y2="480" stroke="#6EE7B7" stroke-width="6" opacity="0.45" stroke-dasharray="12 8"/>
+  </g>
+</svg>

@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg01" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#065F46"/>
+      <stop offset="100%" stop-color="#022C22"/>
+    </linearGradient>
+    <linearGradient id="seed01" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#A7F3D0"/>
+      <stop offset="100%" stop-color="#6EE7B7"/>
+    </linearGradient>
+    <linearGradient id="sprout01" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#4ADE80"/>
+      <stop offset="100%" stop-color="#A7F3D0"/>
+    </linearGradient>
+    <clipPath id="clip01">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg01)"/>
+  <!-- 흙 -->
+  <ellipse cx="512" cy="680" rx="280" ry="60" fill="#3D1F00" opacity="0.7" clip-path="url(#clip01)"/>
+  <rect x="232" y="650" width="560" height="120" rx="0" fill="#3D1F00" opacity="0.7" clip-path="url(#clip01)"/>
+  <!-- Layer 2: 씨앗 -->
+  <ellipse cx="512" cy="640" rx="80" ry="55" fill="url(#seed01)" stroke="#065F46" stroke-width="10"/>
+  <!-- 씨앗 줄무늬 -->
+  <path d="M 445 635 Q 512 610 579 635" stroke="#065F46" stroke-width="8" fill="none" stroke-linecap="round"/>
+  <!-- Layer 2: 새싹 줄기 -->
+  <path d="M 512 590 L 512 380" stroke="#4ADE80" stroke-width="28" fill="none" stroke-linecap="round"/>
+  <!-- Layer 3: 잎사귀 왼쪽 -->
+  <path d="M 505 470 Q 390 390 370 300 Q 450 330 505 440" fill="url(#sprout01)" stroke="#22C55E" stroke-width="8"/>
+  <!-- Layer 3: 잎사귀 오른쪽 -->
+  <path d="M 519 430 Q 630 350 660 260 Q 575 295 519 410" fill="url(#sprout01)" stroke="#22C55E" stroke-width="8"/>
+  <!-- Layer 3: 햇살 포인트 -->
+  <circle cx="780" cy="240" r="55" fill="#FDE68A" opacity="0.9"/>
+  <line x1="780" y1="160" x2="780" y2="135" stroke="#FDE68A" stroke-width="12" stroke-linecap="round"/>
+  <line x1="840" y1="180" x2="858" y2="162" stroke="#FDE68A" stroke-width="12" stroke-linecap="round"/>
+  <line x1="860" y1="240" x2="885" y2="240" stroke="#FDE68A" stroke-width="12" stroke-linecap="round"/>
+  <line x1="840" y1="300" x2="858" y2="318" stroke="#FDE68A" stroke-width="12" stroke-linecap="round"/>
+  <line x1="720" y1="180" x2="702" y2="162" stroke="#FDE68A" stroke-width="12" stroke-linecap="round"/>
+  <!-- 물방울 포인트 -->
+  <path d="M 270 300 Q 255 325 255 340 Q 255 365 270 375 Q 285 385 300 375 Q 315 365 315 340 Q 315 325 300 300 Q 285 270 270 300 Z" fill="#7DD3FC" opacity="0.85"/>
+</svg>

@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <clipPath id="clip"><rect width="1024" height="1024" rx="190"/></clipPath>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#7C3AED"/>
+      <stop offset="100%" stop-color="#4C1D95"/>
+    </linearGradient>
+    <linearGradient id="wing1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#DDD6FE"/>
+      <stop offset="100%" stop-color="#A78BFA"/>
+    </linearGradient>
+    <linearGradient id="wing2" x1="1" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#DDD6FE"/>
+      <stop offset="100%" stop-color="#C4B5FD"/>
+    </linearGradient>
+  </defs>
+  <g clip-path="url(#clip)">
+    <rect width="1024" height="1024" rx="190" fill="url(#bg)"/>
+    <!-- 이미지 프레임 (나비가 날아나옴) -->
+    <rect x="200" y="400" width="300" height="240" rx="20" fill="#5B21B6" opacity="0.6"/>
+    <rect x="200" y="400" width="300" height="240" rx="20" fill="none" stroke="#C4B5FD" stroke-width="10"/>
+    <!-- 이미지 내용 (산 + 해) -->
+    <polygon points="210,610 290,490 350,550 400,500 490,610" fill="#A78BFA" opacity="0.6"/>
+    <circle cx="440" cy="440" r="30" fill="#FDE68A" opacity="0.7"/>
+    <!-- 나비 몸체 -->
+    <ellipse cx="600" cy="480" rx="16" ry="50" fill="#6D28D9" stroke="#DDD6FE" stroke-width="6"/>
+    <!-- 나비 위 날개 (좌) -->
+    <path d="M 600 470 Q 470 340 490 460 Q 510 480 600 480" fill="url(#wing1)" opacity="0.92"/>
+    <!-- 나비 위 날개 (우) -->
+    <path d="M 600 470 Q 730 340 710 460 Q 690 480 600 480" fill="url(#wing2)" opacity="0.92"/>
+    <!-- 나비 아래 날개 (좌) -->
+    <path d="M 600 490 Q 480 560 500 510 Q 520 490 600 490" fill="url(#wing1)" opacity="0.8"/>
+    <!-- 나비 아래 날개 (우) -->
+    <path d="M 600 490 Q 720 560 700 510 Q 680 490 600 490" fill="url(#wing2)" opacity="0.8"/>
+    <!-- 날개 무늬 -->
+    <circle cx="550" cy="435" r="20" fill="#FDE68A" opacity="0.6"/>
+    <circle cx="650" cy="435" r="20" fill="#FDE68A" opacity="0.6"/>
+    <!-- 더듬이 -->
+    <line x1="594" y1="435" x2="560" y2="390" stroke="#DDD6FE" stroke-width="6" stroke-linecap="round"/>
+    <circle cx="558" cy="386" r="8" fill="#FDE68A"/>
+    <line x1="606" y1="435" x2="640" y2="390" stroke="#DDD6FE" stroke-width="6" stroke-linecap="round"/>
+    <circle cx="642" cy="386" r="8" fill="#FDE68A"/>
+    <!-- 파티클 -->
+    <circle cx="720" cy="380" r="10" fill="#FDE68A" opacity="0.7"/>
+    <circle cx="760" cy="430" r="7" fill="#FDE68A" opacity="0.5"/>
+    <circle cx="740" cy="340" r="6" fill="#FFFFFF" opacity="0.5"/>
+    <!-- 하단 라벨 -->
+    <text x="512" y="760" text-anchor="middle" font-family="system-ui, sans-serif" font-size="60" font-weight="bold" fill="#DDD6FE">Transform</text>
+  </g>
+</svg>

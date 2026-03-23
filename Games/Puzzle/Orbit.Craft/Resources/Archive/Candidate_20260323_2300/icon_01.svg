@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg01" cx="50%" cy="40%" r="65%">
+      <stop offset="0%" stop-color="#1E3A5F"/>
+      <stop offset="100%" stop-color="#0F172A"/>
+    </radialGradient>
+    <radialGradient id="planet01" cx="40%" cy="35%" r="60%">
+      <stop offset="0%" stop-color="#93C5FD"/>
+      <stop offset="100%" stop-color="#2563EB"/>
+    </radialGradient>
+    <clipPath id="clip01">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg01)"/>
+  <g clip-path="url(#clip01)">
+    <!-- 별 배경 -->
+    <circle cx="150" cy="200" r="3" fill="#FFFFFF" opacity="0.6"/>
+    <circle cx="320" cy="130" r="2" fill="#FFFFFF" opacity="0.5"/>
+    <circle cx="750" cy="180" r="3" fill="#FFFFFF" opacity="0.7"/>
+    <circle cx="880" cy="280" r="2" fill="#FFFFFF" opacity="0.4"/>
+    <circle cx="200" cy="750" r="2" fill="#FFFFFF" opacity="0.5"/>
+    <circle cx="850" cy="800" r="3" fill="#FFFFFF" opacity="0.6"/>
+    <circle cx="600" cy="120" r="2" fill="#FFFFFF" opacity="0.5"/>
+    <circle cx="100" cy="450" r="2" fill="#FFFFFF" opacity="0.4"/>
+    <circle cx="920" cy="500" r="2" fill="#FFFFFF" opacity="0.5"/>
+    <!-- Layer 2: 타원 궤도 링 -->
+    <ellipse cx="512" cy="512" rx="320" ry="130" fill="none" stroke="#60A5FA" stroke-width="14" opacity="0.5" transform="rotate(-20 512 512)"/>
+    <ellipse cx="512" cy="512" rx="240" ry="95" fill="none" stroke="#60A5FA" stroke-width="10" opacity="0.35" transform="rotate(-20 512 512)"/>
+    <!-- 외부 궤도 점선 효과 -->
+    <ellipse cx="512" cy="512" rx="390" ry="155" fill="none" stroke="#60A5FA" stroke-width="6" opacity="0.2" stroke-dasharray="30 20" transform="rotate(-20 512 512)"/>
+    <!-- Layer 2: 메인 행성 -->
+    <circle cx="512" cy="512" r="155" fill="url(#planet01)"/>
+    <!-- 행성 표면 디테일 -->
+    <ellipse cx="480" cy="490" rx="100" ry="35" fill="#3B82F6" opacity="0.4" transform="rotate(-15 480 490)"/>
+    <ellipse cx="530" cy="545" rx="70" ry="22" fill="#1D4ED8" opacity="0.5" transform="rotate(-15 530 545)"/>
+    <!-- Layer 3: 위성 -->
+    <circle cx="800" cy="390" r="38" fill="#FDE68A"/>
+    <circle cx="792" cy="383" r="12" fill="#F59E0B" opacity="0.6"/>
+    <!-- 궤도 위 이동 표시 화살표 -->
+    <path d="M 792 258 Q 830 230 855 255" fill="none" stroke="#60A5FA" stroke-width="10" stroke-linecap="round"/>
+    <polygon points="855,255 845,240 868,242" fill="#60A5FA"/>
+  </g>
+</svg>

@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <clipPath id="clip"><rect width="1024" height="1024" rx="190"/></clipPath>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#EC4899"/>
+      <stop offset="100%" stop-color="#9D174D"/>
+    </linearGradient>
+    <linearGradient id="wand" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#E0E7FF"/>
+    </linearGradient>
+  </defs>
+  <g clip-path="url(#clip)">
+    <rect width="1024" height="1024" rx="190" fill="url(#bg)"/>
+    <!-- 마법 지팡이 몸체 -->
+    <line x1="280" y1="760" x2="680" y2="320" stroke="url(#wand)" stroke-width="60" stroke-linecap="round"/>
+    <!-- 지팡이 끝 별 -->
+    <polygon points="680,260 700,310 754,310 710,342 726,396 680,362 634,396 650,342 606,310 660,310" fill="#FDE68A"/>
+    <!-- 별 파티클들 -->
+    <polygon points="200,300 212,336 250,336 220,358 232,394 200,372 168,394 180,358 150,336 188,336" fill="#FDE68A" opacity="0.9"/>
+    <polygon points="820,580 829,606 856,606 834,622 842,648 820,632 798,648 806,622 784,606 811,606" fill="#FDE68A" opacity="0.8"/>
+    <polygon points="160,560 167,582 190,582 172,595 179,617 160,604 141,617 148,595 130,582 153,582" fill="#FFFFFF" opacity="0.7"/>
+    <polygon points="750,200 757,220 778,220 762,232 768,252 750,240 732,252 738,232 722,220 743,220" fill="#FDE68A" opacity="0.7"/>
+    <!-- 이미지 변환 효과 (오른쪽 하단) -->
+    <rect x="540" y="580" width="280" height="200" rx="18" fill="#FFFFFF" opacity="0.15"/>
+    <rect x="540" y="580" width="280" height="200" rx="18" fill="none" stroke="#FFFFFF" stroke-width="10"/>
+    <!-- 이미지 픽셀 패턴 -->
+    <rect x="560" y="600" width="60" height="60" rx="8" fill="#7C3AED" opacity="0.7"/>
+    <rect x="628" y="600" width="60" height="60" rx="8" fill="#EC4899" opacity="0.7"/>
+    <rect x="560" y="668" width="60" height="60" rx="8" fill="#06B6D4" opacity="0.7"/>
+    <rect x="628" y="668" width="60" height="60" rx="8" fill="#FDE68A" opacity="0.7"/>
+    <text x="730" y="710" text-anchor="middle" font-family="system-ui, sans-serif" font-size="52" font-weight="bold" fill="#FFFFFF">ICO</text>
+    <!-- sparkle dots -->
+    <circle cx="400" cy="450" r="14" fill="#FDE68A" opacity="0.8"/>
+    <circle cx="460" cy="380" r="10" fill="#FFFFFF" opacity="0.6"/>
+    <circle cx="350" cy="550" r="10" fill="#FFFFFF" opacity="0.5"/>
+  </g>
+</svg>

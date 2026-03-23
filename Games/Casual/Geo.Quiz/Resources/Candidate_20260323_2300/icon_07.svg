@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg07" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4D7C0F"/>
+      <stop offset="100%" stop-color="#3F6212"/>
+    </linearGradient>
+    <linearGradient id="board07" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1E3A0A"/>
+      <stop offset="100%" stop-color="#14290A"/>
+    </linearGradient>
+    <clipPath id="clip07">
+      <rect x="0" y="0" width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg07)"/>
+
+  <!-- 점수판 보드 -->
+  <rect x="120" y="160" width="784" height="560" rx="28" fill="url(#board07)" stroke="#86EFAC" stroke-width="14"/>
+  <!-- 보드 상단 바 -->
+  <rect x="120" y="160" width="784" height="72" rx="28" fill="#166534"/>
+  <rect x="120" y="204" width="784" height="28" fill="#166534"/>
+
+  <!-- SCORE 레이블 -->
+  <text x="512" y="218" font-family="Arial Black, sans-serif" font-size="52" font-weight="900"
+        text-anchor="middle" fill="#86EFAC" letter-spacing="8">SCORE</text>
+
+  <!-- 점수 숫자 -->
+  <text x="512" y="380" font-family="Arial Black, sans-serif" font-size="160" font-weight="900"
+        text-anchor="middle" fill="#FDE68A">9,840</text>
+
+  <!-- 구분선 -->
+  <line x1="160" y1="420" x2="864" y2="420" stroke="#166534" stroke-width="6"/>
+
+  <!-- 스트릭 섹션 -->
+  <text x="200" y="490" font-family="Arial, sans-serif" font-size="44" fill="#86EFAC">STREAK</text>
+  <text x="200" y="490" font-family="Arial, sans-serif" font-size="44" fill="#86EFAC">STREAK</text>
+
+  <!-- 스트릭 불꽃 이모지 대체 — 불꽃 모양 -->
+  <g transform="translate(580, 455)">
+    <path d="M 0,-38 Q 20,-18 18,8 Q 26,-4 22,-22 Q 40,-2 32,22 Q 40,14 38,30 Q 36,50 0,52 Q -36,50 -38,30 Q -40,14 -32,22 Q -28,-2 -22,-22 Q -18,-4 -18,8 Q -20,-18 0,-38 Z"
+          fill="#F97316"/>
+    <path d="M 0,-18 Q 10,-4 8,12 Q 14,4 10,16 Q 8,30 0,32 Q -8,30 -10,16 Q -14,4 -8,12 Q -10,-4 0,-18 Z"
+          fill="#FDE68A"/>
+  </g>
+  <text x="640" y="490" font-family="Arial Black, sans-serif" font-size="52" font-weight="900"
+        fill="#FDE68A">×12</text>
+
+  <!-- BEST 레코드 -->
+  <text x="200" y="570" font-family="Arial, sans-serif" font-size="38" fill="#4ADE80" opacity="0.8">BEST  15,200</text>
+
+  <!-- 하단 별점 -->
+  <g fill="#FDE68A">
+    <polygon transform="translate(310,680)" points="0,-32 7,-12 28,-12 12,0 18,20 0,8 -18,20 -12,0 -28,-12 -7,-12"/>
+    <polygon transform="translate(390,680)" points="0,-32 7,-12 28,-12 12,0 18,20 0,8 -18,20 -12,0 -28,-12 -7,-12"/>
+    <polygon transform="translate(470,680)" points="0,-32 7,-12 28,-12 12,0 18,20 0,8 -18,20 -12,0 -28,-12 -7,-12"/>
+    <polygon transform="translate(550,680)" points="0,-32 7,-12 28,-12 12,0 18,20 0,8 -18,20 -12,0 -28,-12 -7,-12"/>
+    <polygon transform="translate(630,680)" points="0,-32 7,-12 28,-12 12,0 18,20 0,8 -18,20 -12,0 -28,-12 -7,-12"/>
+    <polygon transform="translate(710,680)" points="0,-32 7,-12 28,-12 12,0 18,20 0,8 -18,20 -12,0 -28,-12 -7,-12"/>
+  </g>
+
+  <!-- 하단 레이블 -->
+  <text x="512" y="840" font-family="Arial Black, sans-serif" font-size="56" font-weight="900"
+        text-anchor="middle" fill="#86EFAC" letter-spacing="4">GEO QUIZ</text>
+</svg>

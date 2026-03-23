@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Word.Cloud — 아이콘 후보</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #0A1020;
+      color: #E0E0E0;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      min-height: 100vh;
+      padding: 48px 32px 72px;
+    }
+
+    /* ── Header ── */
+    .header {
+      text-align: center;
+      margin-bottom: 52px;
+    }
+    .header h1 {
+      font-size: 2.6rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      color: #F1F5F9;
+      margin-bottom: 10px;
+    }
+    .header h1 span {
+      color: #60A5FA;
+    }
+    .header p {
+      font-size: 1.05rem;
+      color: #94A3B8;
+      margin-bottom: 18px;
+    }
+    .badges {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .badge {
+      background: #1E2940;
+      border: 1px solid #334155;
+      border-radius: 999px;
+      padding: 4px 14px;
+      font-size: 0.8rem;
+      color: #94A3B8;
+      letter-spacing: 0.03em;
+    }
+    .badge.accent {
+      background: #1e3a5f;
+      border-color: #3B82F6;
+      color: #93C5FD;
+    }
+
+    /* ── Grid ── */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 24px;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    /* ── Card ── */
+    .card {
+      background: #111827;
+      border: 1px solid #1F2D42;
+      border-radius: 16px;
+      padding: 24px 16px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      cursor: default;
+    }
+    .card:hover {
+      border-color: #3B82F6;
+      box-shadow: 0 0 0 2px rgba(59,130,246,0.18), 0 8px 32px rgba(0,0,0,0.45);
+    }
+
+    .card-img-wrap {
+      width: 120px;
+      height: 120px;
+      border-radius: 22px;
+      overflow: hidden;
+      transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+      flex-shrink: 0;
+    }
+    .card:hover .card-img-wrap {
+      transform: scale(1.55);
+    }
+    .card-img-wrap img {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .card-filename {
+      font-size: 0.75rem;
+      color: #475569;
+      font-family: 'Consolas', monospace;
+      letter-spacing: 0.02em;
+    }
+
+    .card-concept {
+      font-size: 0.82rem;
+      color: #CBD5E1;
+      text-align: center;
+      line-height: 1.45;
+      min-height: 2.6em;
+    }
+
+    .palette {
+      display: flex;
+      gap: 7px;
+      align-items: center;
+    }
+    .swatch {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.12);
+      flex-shrink: 0;
+    }
+
+    /* ── Number badge ── */
+    .card-num {
+      position: absolute;
+      top: 10px;
+      left: 12px;
+      font-size: 0.7rem;
+      color: #475569;
+      font-family: 'Consolas', monospace;
+    }
+    .card { position: relative; }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <h1><span>Word</span>.Cloud</h1>
+    <p>워드 클라우드 생성기 — 텍스트 빈도 분석 · 시각화</p>
+    <div class="badges">
+      <span class="badge accent">아이콘 후보</span>
+      <span class="badge">2026-03-24</span>
+      <span class="badge">15개</span>
+      <span class="badge">Candidate_20260323_2300</span>
+    </div>
+  </header>
+
+  <main class="grid">
+
+    <div class="card">
+      <span class="card-num">#01</span>
+      <div class="card-img-wrap"><img src="icon_01.svg" alt="icon_01"/></div>
+      <div class="card-filename">icon_01.svg</div>
+      <div class="card-concept">크기 다른 단어들이 구름처럼 모인 구름 형태 (literal)</div>
+      <div class="palette">
+        <div class="swatch" style="background:#1E3A8A"></div>
+        <div class="swatch" style="background:#60A5FA"></div>
+        <div class="swatch" style="background:#FDE68A"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="card-num">#02</span>
+      <div class="card-img-wrap"><img src="icon_02.svg" alt="icon_02"/></div>
+      <div class="card-filename">icon_02.svg</div>
+      <div class="card-concept">"Hello World Love Data" 크기 차등 텍스트 배치 (literal)</div>
+      <div class="palette">
+        <div class="swatch" style="background:#065F46"></div>
+        <div class="swatch" style="background:#A7F3D0"></div>
+        <div class="swatch" style="background:#FFFFFF"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="card-num">#03</span>
+      <div class="card-img-wrap"><img src="icon_03.svg" alt="icon_03"/></div>
+      <div class="card-filename">icon_03.svg</div>
+      <div class="card-concept">구름 안에 ABC 문자들이 가득 (metaphor)</div>
+      <div class="palette">
+        <div class="swatch" style="background:#7C3AED"></div>
+        <div class="swatch" style="background:#C4B5FD"></div>
+        <div class="swatch" style="background:#FDE68A"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="card-num">#04</span>
+      <div class="card-img-wrap"><img src="icon_04.svg" alt="icon_04"/></div>
+      <div class="card-filename">icon_04.svg</div>
+      <div class="card-concept">텍스트 파일 → 워드 클라우드 변환 화살표 (literal)</div>
+      <div class="palette">
+        <div class="swatch" style="background:#B45309"></div>
+        <div class="swatch" style="background:#FDE68A"></div>
+        <div class="swatch" style="background:#FFFFFF"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="card-num">#05</span>
+      <div class="card-img-wrap"><img src="icon_05.svg" alt="icon_05"/></div>
+      <div class="card-filename">icon_05.svg</div>
+      <div class="card-concept">크기 다른 단어들 (LOVE, WORLD, DATA...) 배치 (literal)</div>
+      <div class="palette">
+        <div class="swatch" style="background:#0C4A6E"></div>
+        <div class="swatch" style="background:#22D3EE"></div>
+        <div class="swatch" style="background:#F472B6"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="card-num">#06</span>
+      <div class="card-img-wrap"><img src="icon_06.svg" alt="icon_06"/></div>
+      <div class="card-filename">icon_06.svg</div>
+      <div class="card-concept">말풍선 + 내부 단어들 (metaphor)</div>
+      <div class="palette">
+        <div class="swatch" style="background:#831843"></div>
+        <div class="swatch" style="background:#F9A8D4"></div>
+        <div class="swatch" style="background:#FDE68A"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="card-num">#07</span>
+      <div class="card-img-wrap"><img src="icon_07.svg" alt="icon_07"/></div>
+      <div class="card-filename">icon_07.svg</div>
+      <div class="card-concept">태양 모양의 단어 방사 배치 (metaphor)</div>
+      <div class="palette">
+        <div class="swatch" style="background:#78350F"></div>
+        <div class="swatch" style="background:#FDE68A"></div>
+        <div class="swatch" style="background:#FFFFFF"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="card-num">#08</span>
+      <div class="card-img-wrap"><img src="icon_08.svg" alt="icon_08"/></div>
+      <div class="card-filename">icon_08.svg</div>
+      <div class="card-concept">막대 그래프 → 단어 구름 전환 (hybrid)</div>
+      <div class="palette">
+        <div class="swatch" style="background:#0F172A"></div>
+        <div class="swatch" style="background:#22D3EE"></div>
+        <div class="swatch" style="background:#A7F3D0"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="card-num">#09</span>
+      <div class="card-img-wrap"><img src="icon_09.svg" alt="icon_09"/></div>
+      <div class="card-filename">icon_09.svg</div>
+      <div class="card-concept">무지개 색상의 단어들 흩뿌려짐 (metaphor)</div>
+      <div class="palette">
+        <div class="swatch" style="background:#1F2937"></div>
+        <div class="swatch" style="background:#F472B6"></div>
+        <div class="swatch" style="background:#FDE68A"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="card-num">#10</span>
+      <div class="card-img-wrap"><img src="icon_10.svg" alt="icon_10"/></div>
+      <div class="card-filename">icon_10.svg</div>
+      <div class="card-concept">폰트 사이즈 A → 큰A 대비 (literal)</div>
+      <div class="palette">
+        <div class="swatch" style="background:#3F6212"></div>
+        <div class="swatch" style="background:#86EFAC"></div>
+        <div class="swatch" style="background:#FFFFFF"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="card-num">#11</span>
+      <div class="card-img-wrap"><img src="icon_11.svg" alt="icon_11"/></div>
+      <div class="card-filename">icon_11.svg</div>
+      <div class="card-concept">돋보기로 단어 빈도 분석 (metaphor)</div>
+      <div class="palette">
+        <div class="swatch" style="background:#4338CA"></div>
+        <div class="swatch" style="background:#A5B4FC"></div>
+        <div class="swatch" style="background:#FDE68A"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="card-num">#12</span>
+      <div class="card-img-wrap"><img src="icon_12.svg" alt="icon_12"/></div>
+      <div class="card-filename">icon_12.svg</div>
+      <div class="card-concept">하트 안에 단어들 (metaphor)</div>
+      <div class="palette">
+        <div class="swatch" style="background:#9F1239"></div>
+        <div class="swatch" style="background:#FDA4AF"></div>
+        <div class="swatch" style="background:#FDE68A"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="card-num">#13</span>
+      <div class="card-img-wrap"><img src="icon_13.svg" alt="icon_13"/></div>
+      <div class="card-filename">icon_13.svg</div>
+      <div class="card-concept">격자에 단어들이 채워지는 레이아웃 (literal)</div>
+      <div class="palette">
+        <div class="swatch" style="background:#0369A1"></div>
+        <div class="swatch" style="background:#BAE6FD"></div>
+        <div class="swatch" style="background:#FDE68A"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="card-num">#14</span>
+      <div class="card-img-wrap"><img src="icon_14.svg" alt="icon_14"/></div>
+      <div class="card-filename">icon_14.svg</div>
+      <div class="card-concept">나비 형태 단어 배치 (metaphor)</div>
+      <div class="palette">
+        <div class="swatch" style="background:#6B21A8"></div>
+        <div class="swatch" style="background:#DDD6FE"></div>
+        <div class="swatch" style="background:#FDE68A"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="card-num">#15</span>
+      <div class="card-img-wrap"><img src="icon_15.svg" alt="icon_15"/></div>
+      <div class="card-filename">icon_15.svg</div>
+      <div class="card-concept">색깔 물감 팔레트 + 단어 브러시 (metaphor)</div>
+      <div class="palette">
+        <div class="swatch" style="background:#92400E"></div>
+        <div class="swatch" style="background:#D97706"></div>
+        <div class="swatch" style="background:#FFFFFF"></div>
+      </div>
+    </div>
+
+  </main>
+
+</body>
+</html>

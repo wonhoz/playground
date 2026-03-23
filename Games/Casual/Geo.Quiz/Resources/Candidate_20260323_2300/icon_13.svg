@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg13" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#047857"/>
+      <stop offset="100%" stop-color="#065F46"/>
+    </linearGradient>
+    <clipPath id="clip13">
+      <rect x="0" y="0" width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg13)"/>
+
+  <!-- 지도 배경 (바다) -->
+  <rect x="90" y="140" width="844" height="680" rx="18" fill="#0C4A6E" stroke="#6EE7B7" stroke-width="10"/>
+
+  <!-- 세계 지도 단순화 윤곽 (백지도) -->
+  <!-- 북아메리카 -->
+  <path d="M 130 200 Q 180 190 240 210 Q 280 230 290 280 Q 310 310 300 370 Q 280 420 250 440 Q 220 460 200 430 Q 170 390 160 340 Q 140 290 130 250 Z"
+        fill="#1E3A5F" stroke="#6EE7B7" stroke-width="6"/>
+  <!-- 남아메리카 -->
+  <path d="M 210 480 Q 250 470 280 490 Q 310 520 300 580 Q 290 640 260 680 Q 240 700 220 680 Q 195 650 190 600 Q 180 550 190 510 Z"
+        fill="#1E3A5F" stroke="#6EE7B7" stroke-width="6"/>
+  <!-- 유럽 -->
+  <path d="M 440 180 Q 480 170 510 185 Q 530 200 520 230 Q 510 255 490 260 Q 470 265 455 250 Q 435 230 440 205 Z"
+        fill="#1E3A5F" stroke="#6EE7B7" stroke-width="6"/>
+  <!-- 아프리카 -->
+  <path d="M 445 290 Q 490 275 520 295 Q 550 320 545 390 Q 540 460 510 510 Q 490 540 465 530 Q 435 510 425 460 Q 410 400 420 340 Q 425 305 445 290 Z"
+        fill="#1E3A5F" stroke="#6EE7B7" stroke-width="6"/>
+  <!-- 아시아 -->
+  <path d="M 550 175 Q 650 160 730 185 Q 790 205 800 260 Q 810 310 780 350 Q 750 385 700 390 Q 650 395 610 370 Q 565 345 555 300 Q 540 250 550 210 Z"
+        fill="#1E3A5F" stroke="#6EE7B7" stroke-width="6"/>
+  <!-- 오세아니아 -->
+  <path d="M 700 480 Q 750 470 790 490 Q 820 510 815 560 Q 810 600 780 620 Q 750 635 720 620 Q 690 600 685 560 Q 680 515 700 490 Z"
+        fill="#1E3A5F" stroke="#6EE7B7" stroke-width="6"/>
+
+  <!-- 내가 맞춘 나라들 — 색칠됨 (밝은 색) -->
+  <!-- 유럽 (맞춤 — 밝은 민트) -->
+  <path d="M 440 180 Q 480 170 510 185 Q 530 200 520 230 Q 510 255 490 260 Q 470 265 455 250 Q 435 230 440 205 Z"
+        fill="#6EE7B7" opacity="0.9"/>
+  <!-- 남아메리카 일부 맞춤 -->
+  <path d="M 210 480 Q 250 470 280 490 Q 310 520 300 560 Q 285 590 260 600 Q 235 595 220 570 Q 205 535 210 505 Z"
+        fill="#6EE7B7" opacity="0.9"/>
+  <!-- 아시아 일부 맞춤 -->
+  <path d="M 620 200 Q 680 188 730 210 Q 770 230 765 280 Q 755 320 720 335 Q 685 345 650 325 Q 615 300 618 260 Q 618 225 620 200 Z"
+        fill="#FDE68A" opacity="0.9"/>
+
+  <!-- 체크 마크 (맞춘 나라 위) -->
+  <g fill="none" stroke="#065F46" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
+    <polyline points="462,218 475,232 500,205" transform="translate(10,5)"/>
+    <polyline points="225,520 238,534 265,507" transform="translate(5,2)"/>
+    <polyline points="648,268 661,282 688,255" transform="translate(5,0)"/>
+  </g>
+
+  <!-- 현재 질문 하이라이트 (아프리카 펄스) -->
+  <path d="M 445 290 Q 490 275 520 295 Q 550 320 545 390 Q 540 460 510 510 Q 490 540 465 530 Q 435 510 425 460 Q 410 400 420 340 Q 425 305 445 290 Z"
+        fill="none" stroke="#FDE68A" stroke-width="10" stroke-dasharray="20,10"/>
+
+  <!-- 물음표 (현재 문제) -->
+  <text x="484" y="420" font-family="Arial Black, sans-serif" font-size="80" font-weight="900"
+        text-anchor="middle" fill="#FDE68A">?</text>
+
+  <!-- 상단 진행바 -->
+  <rect x="90" y="90" width="844" height="30" rx="10" fill="#14532D"/>
+  <rect x="90" y="90" width="422" height="30" rx="10" fill="#6EE7B7"/>
+  <!-- 진행 텍스트 -->
+  <text x="512" y="120" font-family="Arial, sans-serif" font-size="26" text-anchor="middle" fill="#065F46">
+    12 / 24
+  </text>
+
+  <!-- 하단 레이블 -->
+  <text x="512" y="890" font-family="Arial Black, sans-serif" font-size="56" font-weight="900"
+        text-anchor="middle" fill="#6EE7B7">MAP QUIZ</text>
+  <text x="512" y="950" font-family="Arial, sans-serif" font-size="34" text-anchor="middle" fill="#34D399">Fill the World!</text>
+</svg>

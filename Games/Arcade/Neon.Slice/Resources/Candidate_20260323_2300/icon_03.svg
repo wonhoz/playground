@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg03" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#0F0F1E"/>
+      <stop offset="100%" stop-color="#0A0A0F"/>
+    </radialGradient>
+    <filter id="neon03">
+      <feGaussianBlur stdDeviation="12" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="neon03soft">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg03)"/>
+  <!-- 슬라이스 궤적 메인 선 -->
+  <path d="M 180 720 Q 400 480 512 512 Q 640 544 820 300" fill="none" stroke="#00FFFF" stroke-width="60" stroke-linecap="round" filter="url(#neon03)"/>
+  <path d="M 180 720 Q 400 480 512 512 Q 640 544 820 300" fill="none" stroke="white" stroke-width="20" stroke-linecap="round"/>
+  <!-- 잔상 레이어 1 -->
+  <path d="M 200 740 Q 410 500 520 530 Q 650 560 830 320" fill="none" stroke="#00FFFF" stroke-width="36" stroke-linecap="round" stroke-opacity="0.6" filter="url(#neon03soft)"/>
+  <!-- 잔상 레이어 2 -->
+  <path d="M 220 760 Q 420 520 530 550 Q 660 578 840 340" fill="none" stroke="#00FFFF" stroke-width="20" stroke-linecap="round" stroke-opacity="0.3"/>
+  <!-- 커서 끝점 원 -->
+  <circle cx="820" cy="300" r="40" fill="none" stroke="#00FFFF" stroke-width="20" filter="url(#neon03)"/>
+  <circle cx="820" cy="300" r="20" fill="#00FFFF" filter="url(#neon03)"/>
+  <!-- 파티클 스파크 -->
+  <circle cx="512" cy="512" r="16" fill="#FF2D78" filter="url(#neon03soft)"/>
+  <circle cx="380" cy="560" r="12" fill="#FFE600" filter="url(#neon03soft)"/>
+  <circle cx="640" cy="450" r="14" fill="#00FF14" filter="url(#neon03soft)"/>
+  <circle cx="300" cy="620" r="10" fill="#BF5FFF" filter="url(#neon03soft)"/>
+  <circle cx="720" cy="380" r="10" fill="#FF6B00" filter="url(#neon03soft)"/>
+  <!-- 시작점 작은 원 -->
+  <circle cx="180" cy="720" r="28" fill="none" stroke="#00FFFF" stroke-width="16" filter="url(#neon03soft)"/>
+</svg>

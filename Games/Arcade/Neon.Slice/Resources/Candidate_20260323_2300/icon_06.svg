@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs>
+    <radialGradient id="bg06" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#D97706"/>
+      <stop offset="100%" stop-color="#B45309"/>
+    </radialGradient>
+    <clipPath id="clip06">
+      <rect x="0" y="0" width="1024" height="1024" rx="190"/>
+    </clipPath>
+    <filter id="glow06" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="18" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glow06lg" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="32" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" fill="url(#bg06)" rx="190"/>
+
+  <g clip-path="url(#clip06)">
+    <!-- 방사형 빛 줄기 -->
+    <line x1="512" y1="512" x2="512" y2="100" stroke="#FDE68A" stroke-width="3" opacity="0.3"/>
+    <line x1="512" y1="512" x2="812" y2="200" stroke="#FDE68A" stroke-width="3" opacity="0.3"/>
+    <line x1="512" y1="512" x2="924" y2="512" stroke="#FDE68A" stroke-width="3" opacity="0.3"/>
+    <line x1="512" y1="512" x2="812" y2="824" stroke="#FDE68A" stroke-width="3" opacity="0.3"/>
+    <line x1="512" y1="512" x2="512" y2="924" stroke="#FDE68A" stroke-width="3" opacity="0.3"/>
+    <line x1="512" y1="512" x2="212" y2="824" stroke="#FDE68A" stroke-width="3" opacity="0.3"/>
+    <line x1="512" y1="512" x2="100" y2="512" stroke="#FDE68A" stroke-width="3" opacity="0.3"/>
+    <line x1="512" y1="512" x2="212" y2="200" stroke="#FDE68A" stroke-width="3" opacity="0.3"/>
+
+    <!-- 번개 메인 (대형) -->
+    <g filter="url(#glow06lg)">
+      <polyline points="580,180 460,520 560,520 420,840"
+                stroke="#FDE68A" stroke-width="80" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.9"/>
+    </g>
+    <!-- 번개 밝은 코어 -->
+    <polyline points="580,180 460,520 560,520 420,840"
+              stroke="#FFFFFF" stroke-width="32" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+
+    <!-- 슬라이스 가로선 (번개를 가로지르는 칼날 궤적) -->
+    <g filter="url(#glow06)">
+      <line x1="220" y1="490" x2="800" y2="530" stroke="#FFFFFF" stroke-width="12" stroke-linecap="round" opacity="0.85"/>
+      <line x1="240" y1="510" x2="780" y2="550" stroke="#FDE68A" stroke-width="6" stroke-linecap="round" opacity="0.7"/>
+    </g>
+
+    <!-- 번개 주변 스파크 -->
+    <g filter="url(#glow06)" fill="#FDE68A">
+      <circle cx="390" cy="340" r="14"/>
+      <circle cx="630" cy="420" r="10"/>
+      <circle cx="350" cy="660" r="12"/>
+      <circle cx="650" cy="700" r="8"/>
+      <circle cx="580" cy="180" r="16"/>
+      <circle cx="420" cy="840" r="16"/>
+    </g>
+
+    <!-- 파편 조각들 -->
+    <g fill="#FFFFFF" opacity="0.6">
+      <polygon points="560,460 580,510 540,510"/>
+      <polygon points="460,540 440,490 480,490"/>
+    </g>
+  </g>
+</svg>

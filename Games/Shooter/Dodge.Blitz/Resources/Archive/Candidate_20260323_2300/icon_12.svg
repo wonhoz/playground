@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg12" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0284C7"/>
+      <stop offset="100%" stop-color="#0369A1"/>
+    </linearGradient>
+    <clipPath id="clip12">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg12)"/>
+  <g clip-path="url(#clip12)">
+    <!-- Layer 2: 그리드 격자 -->
+    <!-- 수직선들 -->
+    <line x1="230" y1="200" x2="230" y2="824" stroke="#7DD3FC" stroke-width="2" opacity="0.4"/>
+    <line x1="371" y1="200" x2="371" y2="824" stroke="#7DD3FC" stroke-width="2" opacity="0.4"/>
+    <line x1="512" y1="200" x2="512" y2="824" stroke="#7DD3FC" stroke-width="2" opacity="0.4"/>
+    <line x1="653" y1="200" x2="653" y2="824" stroke="#7DD3FC" stroke-width="2" opacity="0.4"/>
+    <line x1="794" y1="200" x2="794" y2="824" stroke="#7DD3FC" stroke-width="2" opacity="0.4"/>
+    <!-- 수평선들 -->
+    <line x1="200" y1="230" x2="824" y2="230" stroke="#7DD3FC" stroke-width="2" opacity="0.4"/>
+    <line x1="200" y1="371" x2="824" y2="371" stroke="#7DD3FC" stroke-width="2" opacity="0.4"/>
+    <line x1="200" y1="512" x2="824" y2="512" stroke="#7DD3FC" stroke-width="2" opacity="0.4"/>
+    <line x1="200" y1="653" x2="824" y2="653" stroke="#7DD3FC" stroke-width="2" opacity="0.4"/>
+    <line x1="200" y1="794" x2="824" y2="794" stroke="#7DD3FC" stroke-width="2" opacity="0.4"/>
+    <!-- 그리드 외곽 테두리 -->
+    <rect x="200" y="200" width="624" height="624" rx="8" fill="none" stroke="#7DD3FC" stroke-width="4" opacity="0.6"/>
+
+    <!-- Layer 3: 탄막 패턴 — 격자 위에 배치된 총알들 -->
+    <!-- 핑크 총알 그룹 (집중 패턴) -->
+    <ellipse cx="371" cy="371" rx="16" ry="28" fill="#F472B6"/>
+    <ellipse cx="512" cy="371" rx="16" ry="28" fill="#F472B6"/>
+    <ellipse cx="653" cy="371" rx="16" ry="28" fill="#F472B6"/>
+    <ellipse cx="512" cy="230" rx="16" ry="28" fill="#F472B6"/>
+    <!-- 밝은 파랑 총알 그룹 -->
+    <ellipse cx="230" cy="512" rx="16" ry="28" fill="#7DD3FC"/>
+    <ellipse cx="794" cy="512" rx="16" ry="28" fill="#7DD3FC"/>
+    <ellipse cx="230" cy="653" rx="16" ry="28" fill="#7DD3FC"/>
+    <ellipse cx="794" cy="653" rx="16" ry="28" fill="#7DD3FC"/>
+    <ellipse cx="230" cy="371" rx="16" ry="28" fill="#7DD3FC"/>
+    <ellipse cx="794" cy="371" rx="16" ry="28" fill="#7DD3FC"/>
+    <!-- 하얀 총알 그룹 -->
+    <ellipse cx="371" cy="512" rx="13" ry="22" fill="#FFFFFF" opacity="0.8"/>
+    <ellipse cx="653" cy="512" rx="13" ry="22" fill="#FFFFFF" opacity="0.8"/>
+    <ellipse cx="371" cy="653" rx="13" ry="22" fill="#FFFFFF" opacity="0.8"/>
+    <ellipse cx="653" cy="653" rx="13" ry="22" fill="#FFFFFF" opacity="0.8"/>
+    <ellipse cx="512" cy="794" rx="13" ry="22" fill="#FFFFFF" opacity="0.8"/>
+    <!-- 안전 통로 (빈 셀 강조) -->
+    <!-- 중앙 셀이 비어있음 -->
+    <rect x="441" y="441" width="142" height="142" rx="8" fill="#FFFFFF" opacity="0.05"/>
+    <rect x="441" y="441" width="142" height="142" rx="8" fill="none" stroke="#FDE68A" stroke-width="3" stroke-dasharray="10 8" opacity="0.6"/>
+    <!-- 중앙 플레이어 표시 -->
+    <polygon points="512,475 492,530 532,530" fill="#FDE68A"/>
+    <!-- 총알 광택 -->
+    <ellipse cx="368" cy="361" rx="5" ry="9" fill="#FFFFFF" opacity="0.5"/>
+    <ellipse cx="509" cy="361" rx="5" ry="9" fill="#FFFFFF" opacity="0.5"/>
+    <ellipse cx="650" cy="361" rx="5" ry="9" fill="#FFFFFF" opacity="0.5"/>
+  </g>
+</svg>

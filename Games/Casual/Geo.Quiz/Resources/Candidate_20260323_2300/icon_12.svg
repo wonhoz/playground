@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <clipPath id="clip12">
+      <rect x="0" y="0" width="1024" height="1024" rx="190"/>
+    </clipPath>
+    <clipPath id="innerClip12">
+      <rect x="112" y="112" width="800" height="800" rx="120"/>
+    </clipPath>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="#0F172A"/>
+
+  <!-- 국기 스트라이프 — 세계 주요 국기 색상 조합 -->
+  <!-- 프랑스: 파랑/흰/빨강 -->
+  <rect x="112" y="112" width="267" height="267" rx="0" fill="#002395" clip-path="url(#innerClip12)"/>
+  <rect x="379" y="112" width="133" height="267" fill="#FFFFFF" clip-path="url(#innerClip12)"/>
+  <rect x="512" y="112" width="267" height="267" fill="#ED2939" clip-path="url(#innerClip12)"/>
+  <rect x="779" y="112" width="133" height="267" rx="0" fill="#002395" clip-path="url(#innerClip12)"/>
+
+  <!-- 독일: 검/빨/노 -->
+  <rect x="112" y="379" width="800" height="89" fill="#000000" clip-path="url(#innerClip12)"/>
+  <rect x="112" y="468" width="800" height="89" fill="#DD0000" clip-path="url(#innerClip12)"/>
+  <rect x="112" y="557" width="800" height="89" fill="#FFCE00" clip-path="url(#innerClip12)"/>
+
+  <!-- 이탈리아: 초/흰/빨 -->
+  <rect x="112" y="646" width="267" height="266" rx="0" fill="#009246" clip-path="url(#innerClip12)"/>
+  <rect x="379" y="646" width="266" height="266" fill="#FFFFFF" clip-path="url(#innerClip12)"/>
+  <rect x="645" y="646" width="267" height="266" fill="#CE2B37" clip-path="url(#innerClip12)"/>
+
+  <!-- 외곽 프레임 -->
+  <rect x="112" y="112" width="800" height="800" rx="120" fill="none" stroke="#F472B6" stroke-width="20"/>
+
+  <!-- 중앙 물음표 오버레이 -->
+  <rect x="350" y="330" width="324" height="364" rx="20" fill="#0F172A" opacity="0.85"/>
+  <text x="512" y="590" font-family="Georgia, serif" font-size="280" font-weight="900"
+        text-anchor="middle" fill="#F472B6">?</text>
+
+  <!-- 하단 텍스트 -->
+  <text x="512" y="970" font-family="Arial Black, sans-serif" font-size="44" font-weight="900"
+        text-anchor="middle" fill="#FDE68A" clip-path="url(#clip12)">FLAG QUIZ</text>
+</svg>

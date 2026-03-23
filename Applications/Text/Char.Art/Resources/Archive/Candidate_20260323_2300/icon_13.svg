@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <rect width="1024" height="1024" rx="190" fill="#2563EB"/>
+  <clipPath id="clip"><rect width="1024" height="1024" rx="190"/></clipPath>
+  <g clip-path="url(#clip)">
+    <!-- Title -->
+    <text x="512" y="160" font-size="50" font-weight="bold" font-family="system-ui" fill="white" text-anchor="middle">LUMINANCE</text>
+    <text x="512" y="215" font-size="36" font-weight="bold" font-family="system-ui" fill="#93C5FD" text-anchor="middle">SCALE</text>
+    <!-- Scale bar - dark to light -->
+    <!-- Dark end -->
+    <rect x="120" y="260" width="784" height="120" rx="16" fill="url(#grad)"/>
+    <defs>
+      <linearGradient id="grad" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#0F172A"/>
+        <stop offset="100%" stop-color="#F8FAFC"/>
+      </linearGradient>
+    </defs>
+    <!-- Char labels on scale -->
+    <text x="145" y="340" font-size="52" font-weight="bold" font-family="monospace" fill="#22D3EE">@</text>
+    <text x="258" y="340" font-size="52" font-weight="bold" font-family="monospace" fill="#38BDF8">#</text>
+    <text x="371" y="340" font-size="52" font-weight="bold" font-family="monospace" fill="#7DD3FC">$</text>
+    <text x="484" y="340" font-size="52" font-weight="bold" font-family="monospace" fill="#BAE6FD">%</text>
+    <text x="597" y="340" font-size="52" font-weight="bold" font-family="monospace" fill="#1E3A8A">+</text>
+    <text x="710" y="340" font-size="52" font-weight="bold" font-family="monospace" fill="#1E3A8A">-</text>
+    <text x="823" y="340" font-size="52" font-weight="bold" font-family="monospace" fill="#1E3A8A">.</text>
+    <!-- Labels below -->
+    <text x="145" y="420" font-size="24" font-family="system-ui" fill="#A7F3D0">Dark</text>
+    <text x="840" y="420" font-size="24" font-family="system-ui" fill="#1E3A8A">Light</text>
+    <!-- Example conversion rows -->
+    <rect x="120" y="460" width="784" height="380" rx="16" fill="#1E3A8A" opacity="0.6"/>
+    <text x="150" y="510" font-size="28" font-weight="bold" font-family="system-ui" fill="#FDE68A">Example:</text>
+    <!-- Dark zone -->
+    <rect x="140" y="530" width="220" height="80" rx="8" fill="#0F172A"/>
+    <text x="250" y="582" font-size="38" font-weight="bold" font-family="monospace" fill="#22D3EE" text-anchor="middle">@@@</text>
+    <text x="250" y="630" font-size="22" font-family="system-ui" fill="#93C5FD" text-anchor="middle">Dark px</text>
+    <!-- Mid zone -->
+    <rect x="400" y="530" width="220" height="80" rx="8" fill="#374151"/>
+    <text x="510" y="582" font-size="38" font-weight="bold" font-family="monospace" fill="#A7F3D0" text-anchor="middle">+++</text>
+    <text x="510" y="630" font-size="22" font-family="system-ui" fill="#93C5FD" text-anchor="middle">Mid px</text>
+    <!-- Light zone -->
+    <rect x="660" y="530" width="220" height="80" rx="8" fill="#D1D5DB"/>
+    <text x="770" y="582" font-size="38" font-weight="bold" font-family="monospace" fill="#1E3A8A" text-anchor="middle">...</text>
+    <text x="770" y="630" font-size="22" font-family="system-ui" fill="#93C5FD" text-anchor="middle">Light px</text>
+    <!-- Full scale chars bottom -->
+    <text x="512" y="780" font-size="36" font-weight="bold" font-family="monospace" fill="white" text-anchor="middle">@ # $ % + - . </text>
+    <text x="512" y="870" font-size="28" font-family="system-ui" fill="#93C5FD" text-anchor="middle">0 _______ 255</text>
+  </g>
+</svg>

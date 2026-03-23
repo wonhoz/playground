@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg01" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#1E3A5F"/>
+      <stop offset="100%" stop-color="#0F172A"/>
+    </radialGradient>
+    <radialGradient id="glow01" cx="50%" cy="70%" r="40%">
+      <stop offset="0%" stop-color="#60A5FA" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#60A5FA" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="clip01">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg01)"/>
+  <rect width="1024" height="1024" rx="190" fill="url(#glow01)" clip-path="url(#clip01)"/>
+  <!-- 별빛 -->
+  <circle cx="200" cy="180" r="3" fill="#FFFFFF" opacity="0.6"/>
+  <circle cx="820" cy="150" r="2" fill="#FFFFFF" opacity="0.5"/>
+  <circle cx="700" cy="280" r="2" fill="#FFFFFF" opacity="0.4"/>
+  <circle cx="150" cy="700" r="3" fill="#FFFFFF" opacity="0.5"/>
+  <circle cx="880" cy="600" r="2" fill="#FFFFFF" opacity="0.4"/>
+  <circle cx="350" cy="250" r="2" fill="#FFFFFF" opacity="0.3"/>
+  <circle cx="950" cy="350" r="2" fill="#FFFFFF" opacity="0.5"/>
+  <!-- Layer 2: 우주선 (중앙 하단) -->
+  <g clip-path="url(#clip01)">
+    <!-- 우주선 본체 -->
+    <ellipse cx="512" cy="640" rx="70" ry="110" fill="#60A5FA"/>
+    <!-- 우주선 조종석 -->
+    <ellipse cx="512" cy="580" rx="40" ry="55" fill="#93C5FD"/>
+    <!-- 날개 좌 -->
+    <polygon points="442,680 310,760 380,700" fill="#3B82F6"/>
+    <!-- 날개 우 -->
+    <polygon points="582,680 714,760 644,700" fill="#3B82F6"/>
+    <!-- 엔진 분사 -->
+    <ellipse cx="512" cy="760" rx="30" ry="50" fill="#FDE68A" opacity="0.9"/>
+    <ellipse cx="512" cy="790" rx="18" ry="35" fill="#FFFFFF" opacity="0.7"/>
+    <!-- Layer 3: 쏟아지는 총알들 -->
+    <!-- 총알 열 1 -->
+    <ellipse cx="340" cy="280" rx="12" ry="22" fill="#FDE68A"/>
+    <ellipse cx="340" cy="360" rx="12" ry="22" fill="#FDE68A" opacity="0.8"/>
+    <ellipse cx="340" cy="440" rx="12" ry="22" fill="#FDE68A" opacity="0.6"/>
+    <!-- 총알 열 2 -->
+    <ellipse cx="430" cy="240" rx="12" ry="22" fill="#FDE68A"/>
+    <ellipse cx="430" cy="320" rx="12" ry="22" fill="#FDE68A" opacity="0.8"/>
+    <ellipse cx="430" cy="400" rx="12" ry="22" fill="#FDE68A" opacity="0.6"/>
+    <!-- 총알 열 3 -->
+    <ellipse cx="512" cy="220" rx="12" ry="22" fill="#FDE68A"/>
+    <ellipse cx="512" cy="300" rx="12" ry="22" fill="#FDE68A" opacity="0.8"/>
+    <ellipse cx="512" cy="380" rx="12" ry="22" fill="#FDE68A" opacity="0.6"/>
+    <!-- 총알 열 4 -->
+    <ellipse cx="594" cy="240" rx="12" ry="22" fill="#FDE68A"/>
+    <ellipse cx="594" cy="320" rx="12" ry="22" fill="#FDE68A" opacity="0.8"/>
+    <ellipse cx="594" cy="400" rx="12" ry="22" fill="#FDE68A" opacity="0.6"/>
+    <!-- 총알 열 5 -->
+    <ellipse cx="684" cy="280" rx="12" ry="22" fill="#FDE68A"/>
+    <ellipse cx="684" cy="360" rx="12" ry="22" fill="#FDE68A" opacity="0.8"/>
+    <ellipse cx="684" cy="440" rx="12" ry="22" fill="#FDE68A" opacity="0.6"/>
+    <!-- 총알 광택 -->
+    <ellipse cx="337" cy="273" rx="4" ry="7" fill="#FFFFFF" opacity="0.5"/>
+    <ellipse cx="427" cy="233" rx="4" ry="7" fill="#FFFFFF" opacity="0.5"/>
+    <ellipse cx="509" cy="213" rx="4" ry="7" fill="#FFFFFF" opacity="0.5"/>
+    <ellipse cx="591" cy="233" rx="4" ry="7" fill="#FFFFFF" opacity="0.5"/>
+    <ellipse cx="681" cy="273" rx="4" ry="7" fill="#FFFFFF" opacity="0.5"/>
+  </g>
+</svg>

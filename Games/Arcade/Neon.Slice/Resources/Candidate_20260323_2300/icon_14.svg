@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs>
+    <radialGradient id="bg14" cx="50%" cy="45%" r="60%">
+      <stop offset="0%" stop-color="#BE123C"/>
+      <stop offset="100%" stop-color="#9F1239"/>
+    </radialGradient>
+    <clipPath id="clip14">
+      <rect x="0" y="0" width="1024" height="1024" rx="190"/>
+    </clipPath>
+    <filter id="glow14" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="16" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glow14lg" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="32" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <linearGradient id="heart14full" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FDA4AF"/>
+      <stop offset="100%" stop-color="#F43F5E"/>
+    </linearGradient>
+    <linearGradient id="heart14empty" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#4C0519"/>
+      <stop offset="100%" stop-color="#3B0014"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" fill="url(#bg14)" rx="190"/>
+
+  <g clip-path="url(#clip14)">
+    <!-- 상단 큰 하트 (메인) -->
+    <g filter="url(#glow14lg)">
+      <path d="M512,320 C512,320 340,180 240,260 C140,340 180,460 300,520 L512,700 L724,520 C844,460 884,340 784,260 C684,180 512,320 512,320 Z"
+            fill="url(#heart14full)"/>
+    </g>
+    <!-- 하트 하이라이트 -->
+    <ellipse cx="370" cy="310" rx="70" ry="44" fill="#FFFFFF" opacity="0.25" transform="rotate(-30, 370, 310)"/>
+
+    <!-- 하단 목숨 게이지 바 -->
+    <rect x="210" y="770" width="604" height="80" rx="40" fill="#4C0519" stroke="#FDA4AF" stroke-width="6"/>
+
+    <!-- 게이지 채움 (3/5) — 황금색 -->
+    <rect x="216" y="776" width="362" height="68" rx="37" fill="#FDE68A"/>
+
+    <!-- 게이지 반짝임 -->
+    <rect x="224" y="784" width="200" height="24" rx="16" fill="#FFFFFF" opacity="0.35"/>
+
+    <!-- 작은 하트 목숨 표시 (5개) -->
+    <g filter="url(#glow14)">
+      <!-- 하트 1 (채워짐) -->
+      <path d="M270,730 C270,730 242,710 228,718 C214,726 218,742 228,748 L270,780 L312,748 C322,742 326,726 312,718 C298,710 270,730 270,730 Z"
+            fill="url(#heart14full)" transform="scale(0.85) translate(-60, -55)"/>
+      <!-- 하트 2 (채워짐) -->
+      <path d="M270,730 C270,730 242,710 228,718 C214,726 218,742 228,748 L270,780 L312,748 C322,742 326,726 312,718 C298,710 270,730 270,730 Z"
+            fill="url(#heart14full)" transform="translate(96,0) scale(0.85) translate(-60, -55)"/>
+      <!-- 하트 3 (채워짐) -->
+      <path d="M270,730 C270,730 242,710 228,718 C214,726 218,742 228,748 L270,780 L312,748 C322,742 326,726 312,718 C298,710 270,730 270,730 Z"
+            fill="url(#heart14full)" transform="translate(192,0) scale(0.85) translate(-60, -55)"/>
+      <!-- 하트 4 (빈 것) -->
+      <path d="M270,730 C270,730 242,710 228,718 C214,726 218,742 228,748 L270,780 L312,748 C322,742 326,726 312,718 C298,710 270,730 270,730 Z"
+            fill="url(#heart14empty)" stroke="#FDA4AF" stroke-width="4" transform="translate(288,0) scale(0.85) translate(-60, -55)"/>
+      <!-- 하트 5 (빈 것) -->
+      <path d="M270,730 C270,730 242,710 228,718 C214,726 218,742 228,748 L270,780 L312,748 C322,742 326,726 312,718 C298,710 270,730 270,730 Z"
+            fill="url(#heart14empty)" stroke="#FDA4AF" stroke-width="4" transform="translate(384,0) scale(0.85) translate(-60, -55)"/>
+    </g>
+
+    <!-- 슬라이스 이펙트 (하트를 가로지르는 칼날) -->
+    <g filter="url(#glow14)" opacity="0.8">
+      <line x1="250" y1="560" x2="780" y2="380" stroke="#FDE68A" stroke-width="64" stroke-linecap="round"/>
+      <line x1="250" y1="560" x2="780" y2="380" stroke="#FFFFFF" stroke-width="20" stroke-linecap="round"/>
+    </g>
+
+    <!-- 슬라이스 파편 -->
+    <g filter="url(#glow14)" fill="#FDA4AF">
+      <circle cx="255" cy="558" r="18"/>
+      <circle cx="778" cy="382" r="18"/>
+    </g>
+  </g>
+</svg>

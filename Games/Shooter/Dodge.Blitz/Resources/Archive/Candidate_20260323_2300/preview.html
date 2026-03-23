@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dodge.Blitz — 아이콘 후보 미리보기</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #080C14;
+      color: #E0E0E0;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      min-height: 100vh;
+      padding: 48px 32px 64px;
+    }
+
+    /* ── 헤더 ── */
+    .header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    .header h1 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      color: #F0F6FF;
+      margin-bottom: 10px;
+    }
+    .header h1 span {
+      color: #60A5FA;
+    }
+    .header p {
+      font-size: 1.05rem;
+      color: #888888;
+      margin-bottom: 18px;
+      letter-spacing: 0.02em;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #111827;
+      border: 1px solid #1F2D45;
+      border-radius: 999px;
+      padding: 6px 18px;
+      font-size: 0.82rem;
+      color: #60A5FA;
+      letter-spacing: 0.04em;
+    }
+    .badge span { color: #555E6E; }
+
+    /* ── 그리드 ── */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 24px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    /* ── 카드 ── */
+    .card {
+      background: #0E1420;
+      border: 1px solid #1A2334;
+      border-radius: 16px;
+      padding: 24px 16px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      cursor: pointer;
+    }
+    .card:hover {
+      border-color: #2D4470;
+      box-shadow: 0 0 0 1px #2D4470, 0 8px 32px rgba(96,165,250,0.12);
+    }
+
+    /* ── 아이콘 이미지 ── */
+    .icon-wrap {
+      width: 120px;
+      height: 120px;
+      border-radius: 22px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+      flex-shrink: 0;
+    }
+    .card:hover .icon-wrap {
+      transform: scale(1.55);
+    }
+    .icon-wrap img {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    /* ── 파일명 ── */
+    .filename {
+      font-size: 0.78rem;
+      font-family: 'Cascadia Code', 'Consolas', monospace;
+      color: #4B5A72;
+      letter-spacing: 0.02em;
+    }
+
+    /* ── 컨셉 ── */
+    .concept {
+      font-size: 0.88rem;
+      color: #B0BFCC;
+      text-align: center;
+      line-height: 1.45;
+      min-height: 40px;
+    }
+
+    /* ── 팔레트 ── */
+    .palette {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .swatch {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.1);
+      flex-shrink: 0;
+    }
+
+    /* ── 번호 뱃지 ── */
+    .num {
+      position: absolute;
+      top: 12px;
+      left: 14px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: #3D5070;
+      font-family: 'Cascadia Code', monospace;
+    }
+    .card { position: relative; }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <h1>Dodge<span>.</span>Blitz</h1>
+    <p>탄막 회피 슈팅 게임 &mdash; 반사신경 서바이벌</p>
+    <div class="badge">
+      아이콘 후보
+      <span>·</span>
+      2026-03-24
+      <span>·</span>
+      15개
+    </div>
+  </div>
+
+  <div class="grid">
+
+    <div class="card">
+      <span class="num">01</span>
+      <div class="icon-wrap"><img src="icon_01.svg" alt="icon_01" loading="lazy"></div>
+      <div class="filename">icon_01.svg</div>
+      <div class="concept">우주선 + 총알들 쏟아짐</div>
+      <div class="palette">
+        <div class="swatch" style="background:#0F172A" title="#0F172A"></div>
+        <div class="swatch" style="background:#60A5FA" title="#60A5FA"></div>
+        <div class="swatch" style="background:#FDE68A" title="#FDE68A"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="num">02</span>
+      <div class="icon-wrap"><img src="icon_02.svg" alt="icon_02" loading="lazy"></div>
+      <div class="filename">icon_02.svg</div>
+      <div class="concept">화살표 회피 동작 (대각선)</div>
+      <div class="palette">
+        <div class="swatch" style="background:#1F2937" title="#1F2937"></div>
+        <div class="swatch" style="background:#22D3EE" title="#22D3EE"></div>
+        <div class="swatch" style="background:#F472B6" title="#F472B6"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="num">03</span>
+      <div class="icon-wrap"><img src="icon_03.svg" alt="icon_03" loading="lazy"></div>
+      <div class="filename">icon_03.svg</div>
+      <div class="concept">탄막 원형 패턴 — 총알 시각화</div>
+      <div class="palette">
+        <div class="swatch" style="background:#0C4A6E" title="#0C4A6E"></div>
+        <div class="swatch" style="background:#38BDF8" title="#38BDF8"></div>
+        <div class="swatch" style="background:#FDE68A" title="#FDE68A"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="num">04</span>
+      <div class="icon-wrap"><img src="icon_04.svg" alt="icon_04" loading="lazy"></div>
+      <div class="filename">icon_04.svg</div>
+      <div class="concept">눈 + 번개 섬광 — 빠른 반응</div>
+      <div class="palette">
+        <div class="swatch" style="background:#7C3AED" title="#7C3AED"></div>
+        <div class="swatch" style="background:#C4B5FD" title="#C4B5FD"></div>
+        <div class="swatch" style="background:#FDE68A" title="#FDE68A"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="num">05</span>
+      <div class="icon-wrap"><img src="icon_05.svg" alt="icon_05" loading="lazy"></div>
+      <div class="filename">icon_05.svg</div>
+      <div class="concept">방패 + 총알 충돌 이펙트</div>
+      <div class="palette">
+        <div class="swatch" style="background:#065F46" title="#065F46"></div>
+        <div class="swatch" style="background:#A7F3D0" title="#A7F3D0"></div>
+        <div class="swatch" style="background:#FFFFFF" title="#FFFFFF"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="num">06</span>
+      <div class="icon-wrap"><img src="icon_06.svg" alt="icon_06" loading="lazy"></div>
+      <div class="filename">icon_06.svg</div>
+      <div class="concept">소용돌이 패턴 총알 회피 경로</div>
+      <div class="palette">
+        <div class="swatch" style="background:#831843" title="#831843"></div>
+        <div class="swatch" style="background:#F472B6" title="#F472B6"></div>
+        <div class="swatch" style="background:#FFFFFF" title="#FFFFFF"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="num">07</span>
+      <div class="icon-wrap"><img src="icon_07.svg" alt="icon_07" loading="lazy"></div>
+      <div class="filename">icon_07.svg</div>
+      <div class="concept">생존 하트 ×3 + HP 바</div>
+      <div class="palette">
+        <div class="swatch" style="background:#9F1239" title="#9F1239"></div>
+        <div class="swatch" style="background:#FDA4AF" title="#FDA4AF"></div>
+        <div class="swatch" style="background:#FDE68A" title="#FDE68A"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="num">08</span>
+      <div class="icon-wrap"><img src="icon_08.svg" alt="icon_08" loading="lazy"></div>
+      <div class="filename">icon_08.svg</div>
+      <div class="concept">빗발치는 총알 빗 (대각선)</div>
+      <div class="palette">
+        <div class="swatch" style="background:#0F172A" title="#0F172A"></div>
+        <div class="swatch" style="background:#22D3EE" title="#22D3EE"></div>
+        <div class="swatch" style="background:#60A5FA" title="#60A5FA"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="num">09</span>
+      <div class="icon-wrap"><img src="icon_09.svg" alt="icon_09" loading="lazy"></div>
+      <div class="filename">icon_09.svg</div>
+      <div class="concept">스코어 숫자 + 콤보 패널</div>
+      <div class="palette">
+        <div class="swatch" style="background:#78350F" title="#78350F"></div>
+        <div class="swatch" style="background:#FDE68A" title="#FDE68A"></div>
+        <div class="swatch" style="background:#FFFFFF" title="#FFFFFF"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="num">10</span>
+      <div class="icon-wrap"><img src="icon_10.svg" alt="icon_10" loading="lazy"></div>
+      <div class="filename">icon_10.svg</div>
+      <div class="concept">플레이어 실루엣 회피 자세</div>
+      <div class="palette">
+        <div class="swatch" style="background:#1E3A8A" title="#1E3A8A"></div>
+        <div class="swatch" style="background:#93C5FD" title="#93C5FD"></div>
+        <div class="swatch" style="background:#FDE68A" title="#FDE68A"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="num">11</span>
+      <div class="icon-wrap"><img src="icon_11.svg" alt="icon_11" loading="lazy"></div>
+      <div class="filename">icon_11.svg</div>
+      <div class="concept">위험! 느낌표 + 총알</div>
+      <div class="palette">
+        <div class="swatch" style="background:#B45309" title="#B45309"></div>
+        <div class="swatch" style="background:#FDE68A" title="#FDE68A"></div>
+        <div class="swatch" style="background:#FFFFFF" title="#FFFFFF"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="num">12</span>
+      <div class="icon-wrap"><img src="icon_12.svg" alt="icon_12" loading="lazy"></div>
+      <div class="filename">icon_12.svg</div>
+      <div class="concept">그리드 격자 + 탄막 패턴</div>
+      <div class="palette">
+        <div class="swatch" style="background:#0369A1" title="#0369A1"></div>
+        <div class="swatch" style="background:#7DD3FC" title="#7DD3FC"></div>
+        <div class="swatch" style="background:#F472B6" title="#F472B6"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="num">13</span>
+      <div class="icon-wrap"><img src="icon_13.svg" alt="icon_13" loading="lazy"></div>
+      <div class="filename">icon_13.svg</div>
+      <div class="concept">타이머 + 생존 시간</div>
+      <div class="palette">
+        <div class="swatch" style="background:#4C0519" title="#4C0519"></div>
+        <div class="swatch" style="background:#F9A8D4" title="#F9A8D4"></div>
+        <div class="swatch" style="background:#FDE68A" title="#FDE68A"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="num">14</span>
+      <div class="icon-wrap"><img src="icon_14.svg" alt="icon_14" loading="lazy"></div>
+      <div class="filename">icon_14.svg</div>
+      <div class="concept">로켓 엔진 분사 + 총알 사이 통과</div>
+      <div class="palette">
+        <div class="swatch" style="background:#3F6212" title="#3F6212"></div>
+        <div class="swatch" style="background:#86EFAC" title="#86EFAC"></div>
+        <div class="swatch" style="background:#FDE68A" title="#FDE68A"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="num">15</span>
+      <div class="icon-wrap"><img src="icon_15.svg" alt="icon_15" loading="lazy"></div>
+      <div class="filename">icon_15.svg</div>
+      <div class="concept">게임 오버 + 재도전 화살표</div>
+      <div class="palette">
+        <div class="swatch" style="background:#1C1917" title="#1C1917"></div>
+        <div class="swatch" style="background:#F97316" title="#F97316"></div>
+        <div class="swatch" style="background:#FFFFFF" title="#FFFFFF"></div>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>

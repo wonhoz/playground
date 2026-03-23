@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg04" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#9333EA"/>
+      <stop offset="100%" stop-color="#7C3AED"/>
+    </radialGradient>
+    <clipPath id="clip04">
+      <rect x="0" y="0" width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg04)"/>
+
+  <!-- 배경 장식 — 작은 국기 색상 사각형들 -->
+  <g clip-path="url(#clip04)" opacity="0.15">
+    <rect x="80" y="80" width="120" height="80" rx="8" fill="#EF4444"/>
+    <rect x="220" y="80" width="120" height="80" rx="8" fill="#FFFFFF"/>
+    <rect x="360" y="80" width="120" height="80" rx="8" fill="#3B82F6"/>
+    <rect x="824" y="80" width="120" height="80" rx="8" fill="#22C55E"/>
+    <rect x="80" y="864" width="120" height="80" rx="8" fill="#F59E0B"/>
+    <rect x="824" y="864" width="120" height="80" rx="8" fill="#EF4444"/>
+  </g>
+
+  <!-- 큰 물음표 배경 원 -->
+  <circle cx="512" cy="470" r="310" fill="#6D28D9" opacity="0.6"/>
+
+  <!-- 물음표 ? -->
+  <text x="512" y="580" font-family="Georgia, serif" font-size="480" font-weight="900"
+        text-anchor="middle" fill="#C4B5FD">?</text>
+
+  <!-- 국기 스트라이프 장식 (하단) -->
+  <g clip-path="url(#clip04)">
+    <rect x="150" y="720" width="200" height="55" rx="8" fill="#EF4444"/>
+    <rect x="150" y="720" width="67" height="55" fill="#22C55E" rx="8"/>
+    <rect x="380" y="720" width="200" height="55" rx="8" fill="#3B82F6"/>
+    <rect x="380" y="720" width="67" height="55" fill="#FFFFFF" rx="8"/>
+    <rect x="610" y="720" width="200" height="55" rx="8" fill="#F59E0B"/>
+    <rect x="610" y="720" width="67" height="55" fill="#EF4444" rx="8"/>
+    <rect x="840" y="720" width="34" height="55" fill="#FFFFFF"/>
+  </g>
+
+  <!-- 황금 별 장식 -->
+  <g transform="translate(512, 820)">
+    <polygon points="0,-32 7,-12 28,-12 12,0 18,20 0,8 -18,20 -12,0 -28,-12 -7,-12"
+             fill="#FDE68A"/>
+  </g>
+  <g transform="translate(200, 640)">
+    <polygon points="0,-22 5,-8 20,-8 8,0 13,14 0,6 -13,14 -8,0 -20,-8 -5,-8"
+             fill="#FDE68A" opacity="0.7"/>
+  </g>
+  <g transform="translate(820, 640)">
+    <polygon points="0,-22 5,-8 20,-8 8,0 13,14 0,6 -13,14 -8,0 -20,-8 -5,-8"
+             fill="#FDE68A" opacity="0.7"/>
+  </g>
+</svg>

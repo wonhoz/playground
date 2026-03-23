@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs>
+    <radialGradient id="bg09" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#92400E"/>
+      <stop offset="100%" stop-color="#78350F"/>
+    </radialGradient>
+    <clipPath id="clip09">
+      <rect x="0" y="0" width="1024" height="1024" rx="190"/>
+    </clipPath>
+    <filter id="glow09" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="18" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <linearGradient id="crown09" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FDE68A"/>
+      <stop offset="100%" stop-color="#F59E0B"/>
+    </linearGradient>
+    <linearGradient id="board09" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1C0A00"/>
+      <stop offset="100%" stop-color="#0C0500"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" fill="url(#bg09)" rx="190"/>
+
+  <g clip-path="url(#clip09)">
+    <!-- 빛줄기 배경 -->
+    <g opacity="0.15" stroke="#FDE68A" stroke-width="80">
+      <line x1="512" y1="0" x2="512" y2="1024"/>
+      <line x1="0" y1="512" x2="1024" y2="512"/>
+    </g>
+
+    <!-- 왕관 (대형) -->
+    <g filter="url(#glow09)">
+      <polygon points="200,560 280,340 420,500 512,260 604,500 744,340 824,560"
+               fill="url(#crown09)" stroke="#FFFFFF" stroke-width="18" stroke-linejoin="round"/>
+      <!-- 왕관 베이스 -->
+      <rect x="200" y="556" width="624" height="90" rx="18" fill="#F59E0B"/>
+    </g>
+
+    <!-- 왕관 보석 -->
+    <g filter="url(#glow09)">
+      <circle cx="512" cy="310" r="38" fill="#FFFFFF"/>
+      <circle cx="512" cy="310" r="24" fill="#22D3EE"/>
+      <circle cx="280" cy="370" r="26" fill="#FFFFFF"/>
+      <circle cx="280" cy="370" r="16" fill="#F472B6"/>
+      <circle cx="744" cy="370" r="26" fill="#FFFFFF"/>
+      <circle cx="744" cy="370" r="16" fill="#F472B6"/>
+    </g>
+
+    <!-- 스코어보드 패널 -->
+    <rect x="210" y="680" width="604" height="230" rx="22" fill="url(#board09)" stroke="#F59E0B" stroke-width="6"/>
+
+    <!-- 1등 라인 -->
+    <rect x="230" y="700" width="564" height="62" rx="12" fill="#F59E0B" opacity="0.25"/>
+    <text x="280" y="744" font-family="monospace" font-size="44" font-weight="bold" fill="#FDE68A">1st</text>
+    <text x="570" y="744" font-family="monospace" font-size="44" font-weight="bold" fill="#FFFFFF" text-anchor="end">99,999</text>
+
+    <!-- 2등 라인 -->
+    <text x="280" y="806" font-family="monospace" font-size="38" fill="#D1D5DB">2nd</text>
+    <text x="570" y="806" font-family="monospace" font-size="38" fill="#9CA3AF" text-anchor="end">72,580</text>
+
+    <!-- 3등 라인 -->
+    <text x="280" y="864" font-family="monospace" font-size="38" fill="#D1D5DB">3rd</text>
+    <text x="570" y="864" font-family="monospace" font-size="38" fill="#9CA3AF" text-anchor="end">51,200</text>
+
+    <!-- 왕관 위 별 -->
+    <g filter="url(#glow09)" fill="#FDE68A">
+      <polygon points="512,160 525,195 562,195 533,216 544,252 512,232 480,252 491,216 462,195 499,195" opacity="0.95"/>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg14" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#92400E"/>
+      <stop offset="100%" stop-color="#78350F"/>
+    </radialGradient>
+    <linearGradient id="mapGrad14" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FEF3C7"/>
+      <stop offset="100%" stop-color="#FDE68A"/>
+    </linearGradient>
+    <clipPath id="clip14">
+      <rect x="0" y="0" width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg14)"/>
+
+  <!-- 배경 텍스처 점들 -->
+  <g fill="#92400E" opacity="0.4">
+    <circle cx="150" cy="800" r="60"/>
+    <circle cx="900" cy="200" r="80"/>
+    <circle cx="100" cy="300" r="40"/>
+    <circle cx="950" cy="700" r="50"/>
+  </g>
+
+  <!-- 지도 (구겨진 종이 느낌) -->
+  <g clip-path="url(#clip14)">
+    <rect x="180" y="460" width="580" height="420" rx="12" fill="url(#mapGrad14)"
+          transform="rotate(-8, 470, 670)"/>
+    <!-- 지도 격자 -->
+    <g stroke="#D97706" stroke-width="5" opacity="0.5" transform="rotate(-8, 470, 670)">
+      <line x1="180" y1="560" x2="760" y2="560"/>
+      <line x1="180" y1="650" x2="760" y2="650"/>
+      <line x1="180" y1="740" x2="760" y2="740"/>
+      <line x1="280" y1="460" x2="280" y2="880"/>
+      <line x1="420" y1="460" x2="420" y2="880"/>
+      <line x1="560" y1="460" x2="560" y2="880"/>
+      <line x1="700" y1="460" x2="700" y2="880"/>
+    </g>
+    <!-- 지도 위 경로 -->
+    <path d="M 230 670 Q 340 580 450 620 Q 530 650 600 600 Q 660 560 720 590"
+          fill="none" stroke="#D97706" stroke-width="8" stroke-dasharray="20,12"
+          stroke-linecap="round" transform="rotate(-8, 470, 670)"/>
+    <!-- X 표시 (보물/목적지) -->
+    <g transform="rotate(-8, 470, 670)" stroke="#B45309" stroke-width="14" stroke-linecap="round">
+      <line x1="600" y1="720" x2="640" y2="760"/>
+      <line x1="640" y1="720" x2="600" y2="760"/>
+    </g>
+  </g>
+
+  <!-- 탐험가 모자 -->
+  <g clip-path="url(#clip14)">
+    <!-- 모자 챙 -->
+    <ellipse cx="512" cy="400" rx="280" ry="55" fill="#B45309"/>
+    <!-- 모자 몸체 -->
+    <path d="M 290 400 Q 290 180 512 180 Q 734 180 734 400 Z" fill="#D97706"/>
+    <!-- 모자 밴드 -->
+    <rect x="290" y="330" width="444" height="50" fill="#92400E"/>
+    <!-- 모자 장식 — 깃털 -->
+    <path d="M 680 300 Q 720 200 750 250 Q 730 230 700 280 Q 720 210 690 270 Z"
+          fill="#FFFFFF" opacity="0.9"/>
+    <!-- 모자 하이라이트 -->
+    <ellipse cx="460" cy="240" rx="60" ry="25" fill="#F59E0B" opacity="0.5"
+             transform="rotate(-20, 460, 240)"/>
+  </g>
+
+  <!-- 돋보기 (탐험가 도구) -->
+  <g transform="translate(720, 580)" clip-path="url(#clip14)">
+    <circle cx="0" cy="0" r="90" fill="none" stroke="#FFFFFF" stroke-width="24"/>
+    <circle cx="0" cy="0" r="75" fill="#0C4A6E" opacity="0.7"/>
+    <!-- 렌즈 반사 -->
+    <circle cx="-25" cy="-25" r="20" fill="#FFFFFF" opacity="0.3"/>
+    <!-- 손잡이 -->
+    <line x1="64" y1="64" x2="130" y2="130" stroke="#D97706" stroke-width="28" stroke-linecap="round"/>
+    <!-- 돋보기 안 지도 심볼 -->
+    <text x="0" y="12" font-family="Arial, sans-serif" font-size="48" text-anchor="middle" fill="#FDE68A">?</text>
+  </g>
+
+  <!-- 하단 텍스트 -->
+  <text x="512" y="920" font-family="Arial Black, sans-serif" font-size="60" font-weight="900"
+        text-anchor="middle" fill="#FDE68A" letter-spacing="2">EXPLORER</text>
+</svg>

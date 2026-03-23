@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg12" x1="0%" y1="100%" x2="30%" y2="0%">
+      <stop offset="0%" stop-color="#3F6212"/>
+      <stop offset="100%" stop-color="#4D7C0F"/>
+    </linearGradient>
+    <linearGradient id="rocket12" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#D1D5DB"/>
+      <stop offset="100%" stop-color="#F9FAFB"/>
+    </linearGradient>
+    <radialGradient id="planet12" cx="35%" cy="30%" r="65%">
+      <stop offset="0%" stop-color="#A7F3D0"/>
+      <stop offset="100%" stop-color="#059669"/>
+    </radialGradient>
+    <clipPath id="clip12">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg12)"/>
+  <g clip-path="url(#clip12)">
+    <!-- 별 -->
+    <circle cx="160" cy="190" r="3" fill="#FFFFFF" opacity="0.6"/>
+    <circle cx="800" cy="180" r="2" fill="#FFFFFF" opacity="0.5"/>
+    <circle cx="880" cy="400" r="2" fill="#FFFFFF" opacity="0.5"/>
+    <circle cx="130" cy="700" r="3" fill="#FFFFFF" opacity="0.4"/>
+    <!-- 지구 (우하단) -->
+    <circle cx="760" cy="820" r="200" fill="#1D4ED8" opacity="0.6"/>
+    <ellipse cx="720" cy="800" rx="60" ry="30" fill="#059669" opacity="0.7" transform="rotate(-20 720 800)"/>
+    <ellipse cx="790" cy="840" rx="45" ry="20" fill="#059669" opacity="0.6" transform="rotate(10 790 840)"/>
+    <!-- Layer 2: 탈출 궤도 곡선 -->
+    <path d="M 650 750 Q 580 580 420 380 Q 360 290 310 200" fill="none" stroke="#86EFAC" stroke-width="14" opacity="0.5" stroke-linecap="round"/>
+    <!-- 탈출 속도 표시 (점점 빠르게 — 간격 증가) -->
+    <circle cx="620" cy="700" r="8" fill="#86EFAC" opacity="0.6"/>
+    <circle cx="560" cy="620" r="8" fill="#86EFAC" opacity="0.65"/>
+    <circle cx="495" cy="535" r="8" fill="#86EFAC" opacity="0.7"/>
+    <circle cx="422" cy="448" r="8" fill="#86EFAC" opacity="0.75"/>
+    <circle cx="370" cy="370" r="8" fill="#86EFAC" opacity="0.8"/>
+    <!-- Layer 2: 로켓 (대각선 상승) -->
+    <!-- 로켓 본체 -->
+    <ellipse cx="310" cy="240" rx="35" ry="80" fill="url(#rocket12)" transform="rotate(-50 310 240)"/>
+    <!-- 노즈콘 -->
+    <ellipse cx="268" cy="190" rx="22" ry="38" fill="#EF4444" transform="rotate(-50 268 190)"/>
+    <!-- 날개 좌 -->
+    <path d="M 340 270 L 380 310 L 355 285 Z" fill="#9CA3AF" transform="rotate(-50 350 280)"/>
+    <!-- 날개 우 -->
+    <path d="M 320 252 L 295 295 L 315 268 Z" fill="#9CA3AF" transform="rotate(-50 315 270)"/>
+    <!-- 엔진 불꽃 -->
+    <path d="M 355 285 Q 385 310 395 340" fill="none" stroke="#FDE68A" stroke-width="16" stroke-linecap="round"/>
+    <path d="M 362 290 Q 398 322 412 358" fill="none" stroke="#F97316" stroke-width="10" stroke-linecap="round" opacity="0.7"/>
+    <path d="M 350 282 Q 375 308 382 338" fill="none" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" opacity="0.8"/>
+    <!-- 로켓 창문 -->
+    <circle cx="304" cy="245" r="14" fill="#7DD3FC" transform="rotate(-50 304 245)"/>
+    <!-- Layer 3: 탈출 속도 텍스트/표시 -->
+    <path d="M 700 240 L 712 268 L 740 278 L 712 288 L 700 316 L 688 288 L 660 278 L 688 268 Z" fill="#FDE68A" opacity="0.9"/>
+    <!-- 속도 벡터 -->
+    <line x1="260" y1="185" x2="220" y2="148" stroke="#86EFAC" stroke-width="8" stroke-linecap="round" opacity="0.7"/>
+    <polygon points="220,148 215,165 232,158" fill="#86EFAC" opacity="0.7"/>
+  </g>
+</svg>

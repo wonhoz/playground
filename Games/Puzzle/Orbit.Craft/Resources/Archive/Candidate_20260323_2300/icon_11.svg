@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg11" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#1A6E9C"/>
+      <stop offset="100%" stop-color="#0C4A6E"/>
+    </radialGradient>
+    <radialGradient id="planet11a" cx="35%" cy="30%" r="65%">
+      <stop offset="0%" stop-color="#67E8F9"/>
+      <stop offset="100%" stop-color="#0891B2"/>
+    </radialGradient>
+    <radialGradient id="planet11b" cx="35%" cy="30%" r="65%">
+      <stop offset="0%" stop-color="#A5F3FC"/>
+      <stop offset="100%" stop-color="#06B6D4"/>
+    </radialGradient>
+    <clipPath id="clip11">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg11)"/>
+  <g clip-path="url(#clip11)">
+    <!-- 별 -->
+    <circle cx="160" cy="180" r="2" fill="#FFFFFF" opacity="0.5"/>
+    <circle cx="820" cy="200" r="3" fill="#FFFFFF" opacity="0.6"/>
+    <circle cx="180" cy="840" r="2" fill="#FFFFFF" opacity="0.4"/>
+    <circle cx="840" cy="820" r="2" fill="#FFFFFF" opacity="0.5"/>
+    <!-- Layer 2: 체스판 그리드 (4x4) -->
+    <!-- 격자 배경 -->
+    <rect x="232" y="232" width="560" height="560" rx="12" fill="#083344" opacity="0.8"/>
+    <!-- 체스판 칸들 (8칸 어두운/밝은) -->
+    <rect x="232" y="232" width="140" height="140" rx="0" fill="#0E4A5E" opacity="0.7"/>
+    <rect x="372" y="232" width="140" height="140" fill="#0C3344" opacity="0.7"/>
+    <rect x="512" y="232" width="140" height="140" fill="#0E4A5E" opacity="0.7"/>
+    <rect x="652" y="232" width="140" height="140" fill="#0C3344" opacity="0.7"/>
+    <rect x="232" y="372" width="140" height="140" fill="#0C3344" opacity="0.7"/>
+    <rect x="372" y="372" width="140" height="140" fill="#0E4A5E" opacity="0.7"/>
+    <rect x="512" y="372" width="140" height="140" fill="#0C3344" opacity="0.7"/>
+    <rect x="652" y="372" width="140" height="140" fill="#0E4A5E" opacity="0.7"/>
+    <rect x="232" y="512" width="140" height="140" fill="#0E4A5E" opacity="0.7"/>
+    <rect x="372" y="512" width="140" height="140" fill="#0C3344" opacity="0.7"/>
+    <rect x="512" y="512" width="140" height="140" fill="#0E4A5E" opacity="0.7"/>
+    <rect x="652" y="512" width="140" height="140" fill="#0C3344" opacity="0.7"/>
+    <rect x="232" y="652" width="140" height="140" fill="#0C3344" opacity="0.7"/>
+    <rect x="372" y="652" width="140" height="140" fill="#0E4A5E" opacity="0.7"/>
+    <rect x="512" y="652" width="140" height="140" fill="#0C3344" opacity="0.7"/>
+    <rect x="652" y="652" width="140" height="140" fill="#0E4A5E" opacity="0.7"/>
+    <!-- 격자 테두리 -->
+    <rect x="232" y="232" width="560" height="560" rx="12" fill="none" stroke="#22D3EE" stroke-width="10"/>
+    <line x1="372" y1="232" x2="372" y2="792" stroke="#22D3EE" stroke-width="4" opacity="0.4"/>
+    <line x1="512" y1="232" x2="512" y2="792" stroke="#22D3EE" stroke-width="4" opacity="0.4"/>
+    <line x1="652" y1="232" x2="652" y2="792" stroke="#22D3EE" stroke-width="4" opacity="0.4"/>
+    <line x1="232" y1="372" x2="792" y2="372" stroke="#22D3EE" stroke-width="4" opacity="0.4"/>
+    <line x1="232" y1="512" x2="792" y2="512" stroke="#22D3EE" stroke-width="4" opacity="0.4"/>
+    <line x1="232" y1="652" x2="792" y2="652" stroke="#22D3EE" stroke-width="4" opacity="0.4"/>
+    <!-- Layer 2: 행성들 (체스판 위 배치) -->
+    <!-- 행성 A (302, 302) -->
+    <circle cx="302" cy="302" r="45" fill="url(#planet11a)"/>
+    <!-- 행성 B (582, 442) -->
+    <circle cx="582" cy="442" r="40" fill="url(#planet11b)"/>
+    <ellipse cx="582" cy="442" rx="58" ry="14" fill="none" stroke="#22D3EE" stroke-width="7" opacity="0.7" transform="rotate(-20 582 442)"/>
+    <!-- 행성 C (722, 582) -->
+    <circle cx="722" cy="582" r="38" fill="url(#planet11a)" opacity="0.85"/>
+    <!-- 배치 예정 위치 (점선) -->
+    <circle cx="442" cy="722" r="42" fill="none" stroke="#FFFFFF" stroke-width="6" stroke-dasharray="15 10" opacity="0.5"/>
+    <text x="442" y="730" text-anchor="middle" font-family="Arial" font-weight="bold" font-size="36" fill="#FFFFFF" opacity="0.5">?</text>
+    <!-- Layer 3: 전략 화살표 -->
+    <path d="M 340 340 Q 460 390 538 420" fill="none" stroke="#FDE68A" stroke-width="8" stroke-linecap="round" opacity="0.7"/>
+    <polygon points="538,420 520,408 528,426" fill="#FDE68A" opacity="0.7"/>
+    <path d="M 620 480 Q 672 528 700 560" fill="none" stroke="#FDE68A" stroke-width="8" stroke-linecap="round" opacity="0.7"/>
+    <polygon points="700,560 682,550 692,566" fill="#FDE68A" opacity="0.7"/>
+  </g>
+</svg>

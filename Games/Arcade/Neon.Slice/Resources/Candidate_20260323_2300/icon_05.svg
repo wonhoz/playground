@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg05" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#0D0D18"/>
+      <stop offset="100%" stop-color="#080810"/>
+    </radialGradient>
+    <filter id="neon05">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg05)"/>
+  <!-- 그린 삼각형 -->
+  <polygon points="200,680 340,380 480,680" fill="#00FF14" fill-opacity="0.15" stroke="#00FF14" stroke-width="40" stroke-linejoin="round" filter="url(#neon05)"/>
+  <polygon points="200,680 340,380 480,680" fill="none" stroke="#00FF14" stroke-width="20" stroke-linejoin="round"/>
+  <!-- 퍼플 원 -->
+  <circle cx="700" cy="380" r="160" fill="#BF5FFF" fill-opacity="0.12" stroke="#BF5FFF" stroke-width="40" filter="url(#neon05)"/>
+  <circle cx="700" cy="380" r="160" fill="none" stroke="#BF5FFF" stroke-width="20"/>
+  <!-- 오렌지 사각형 -->
+  <rect x="580" y="570" width="220" height="180" rx="10" fill="#FF6B00" fill-opacity="0.12" stroke="#FF6B00" stroke-width="40" filter="url(#neon05)"/>
+  <rect x="580" y="570" width="220" height="180" rx="10" fill="none" stroke="#FF6B00" stroke-width="20"/>
+  <!-- 핑크 오각형 -->
+  <polygon points="300,300 350,190 440,250 420,360 260,360" fill="#FF2D78" fill-opacity="0.12" stroke="#FF2D78" stroke-width="34" stroke-linejoin="round" filter="url(#neon05)"/>
+  <polygon points="300,300 350,190 440,250 420,360 260,360" fill="none" stroke="#FF2D78" stroke-width="17" stroke-linejoin="round"/>
+  <!-- 슬라이스 획 -->
+  <path d="M 160 560 Q 512 400 860 600" fill="none" stroke="white" stroke-width="52" stroke-linecap="round" filter="url(#neon05)" stroke-opacity="0.7"/>
+  <path d="M 160 560 Q 512 400 860 600" fill="none" stroke="white" stroke-width="18" stroke-linecap="round"/>
+  <!-- 슬라이스 스파크 -->
+  <circle cx="340" cy="500" r="14" fill="#FFE600" filter="url(#neon05)"/>
+  <circle cx="512" cy="450" r="16" fill="#00FFFF" filter="url(#neon05)"/>
+  <circle cx="680" cy="510" r="12" fill="#FF2D78" filter="url(#neon05)"/>
+</svg>

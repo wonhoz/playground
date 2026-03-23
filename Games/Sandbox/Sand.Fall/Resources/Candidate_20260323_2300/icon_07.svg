@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg07" cx="50%" cy="40%" r="55%">
+      <stop offset="0%" stop-color="#0284C7"/>
+      <stop offset="100%" stop-color="#0369A1"/>
+    </radialGradient>
+    <radialGradient id="drop07" cx="40%" cy="35%" r="45%">
+      <stop offset="0%" stop-color="#BAE6FD"/>
+      <stop offset="100%" stop-color="#0EA5E9"/>
+    </radialGradient>
+    <linearGradient id="flow07" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#7DD3FC"/>
+      <stop offset="100%" stop-color="#0284C7"/>
+    </linearGradient>
+    <clipPath id="clip07">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg07)"/>
+  <g clip-path="url(#clip07)">
+    <!-- Layer 2: 큰 물방울 -->
+    <path d="M512 220 Q600 340 640 460 Q680 580 640 660 Q600 760 512 780 Q424 760 384 660 Q344 580 384 460 Q424 340 512 220 Z"
+          fill="url(#drop07)" stroke="#FFFFFF" stroke-width="16"/>
+    <!-- 물방울 하이라이트 -->
+    <ellipse cx="460" cy="380" rx="50" ry="80" fill="#FFFFFF" opacity="0.30" transform="rotate(-20 460 380)"/>
+    <ellipse cx="448" cy="360" rx="22" ry="36" fill="#FFFFFF" opacity="0.45" transform="rotate(-20 448 360)"/>
+    <!-- Layer 3: 흐름 입자들 -->
+    <!-- 물방울 아래 흐름 -->
+    <path d="M512 790 Q480 840 460 900 Q480 870 512 850 Q544 870 564 900 Q544 840 512 790 Z"
+          fill="#7DD3FC" opacity="0.70"/>
+    <!-- 주변 물 입자 -->
+    <circle cx="300" cy="500" r="20" fill="#7DD3FC" opacity="0.80"/>
+    <circle cx="270" cy="580" r="14" fill="#BAE6FD" opacity="0.70"/>
+    <circle cx="310" cy="650" r="10" fill="#7DD3FC" opacity="0.60"/>
+    <circle cx="260" cy="440" r="12" fill="#BAE6FD" opacity="0.65"/>
+    <circle cx="724" cy="480" r="20" fill="#7DD3FC" opacity="0.80"/>
+    <circle cx="754" cy="560" r="14" fill="#BAE6FD" opacity="0.70"/>
+    <circle cx="714" cy="640" r="10" fill="#7DD3FC" opacity="0.60"/>
+    <circle cx="764" cy="420" r="12" fill="#BAE6FD" opacity="0.65"/>
+    <!-- 떨어지는 물방울 -->
+    <circle cx="400" cy="300" r="12" fill="#FFFFFF" opacity="0.55"/>
+    <circle cx="380" cy="360" r="8" fill="#BAE6FD" opacity="0.50"/>
+    <circle cx="620" cy="320" r="10" fill="#FFFFFF" opacity="0.50"/>
+    <circle cx="640" cy="380" r="7" fill="#BAE6FD" opacity="0.45"/>
+    <!-- 파문 효과 -->
+    <ellipse cx="512" cy="880" rx="120" ry="30" fill="none" stroke="#7DD3FC" stroke-width="8" opacity="0.50"/>
+    <ellipse cx="512" cy="880" rx="180" ry="44" fill="none" stroke="#7DD3FC" stroke-width="5" opacity="0.30"/>
+    <ellipse cx="512" cy="880" rx="240" ry="58" fill="none" stroke="#7DD3FC" stroke-width="3" opacity="0.15"/>
+    <!-- 물 표면 풀 -->
+    <ellipse cx="512" cy="880" rx="100" ry="24" fill="#0EA5E9" opacity="0.40"/>
+  </g>
+</svg>

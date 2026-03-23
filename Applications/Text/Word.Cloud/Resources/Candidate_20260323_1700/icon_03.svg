@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="190" fill="#042B1A"/>
+  <!-- Layer 2: 구름 모양 마스크 안에 단어들 -->
+  <defs>
+    <clipPath id="cloud">
+      <path d="M200 700 Q100 700 100 580 Q100 500 160 470 Q140 420 180 380 Q200 280 300 280 Q320 200 420 200 Q460 160 520 160 Q600 160 640 200 Q720 200 760 260 Q840 240 880 300 Q940 300 940 380 Q980 400 980 460 Q980 540 920 560 Q940 600 940 660 Q940 720 880 720 Z"/>
+    </clipPath>
+  </defs>
+  <!-- 구름 배경 -->
+  <path d="M200 700 Q100 700 100 580 Q100 500 160 470 Q140 420 180 380 Q200 280 300 280 Q320 200 420 200 Q460 160 520 160 Q600 160 640 200 Q720 200 760 260 Q840 240 880 300 Q940 300 940 380 Q980 400 980 460 Q980 540 920 560 Q940 600 940 660 Q940 720 880 720 Z" fill="#0A4020"/>
+  <path d="M200 700 Q100 700 100 580 Q100 500 160 470 Q140 420 180 380 Q200 280 300 280 Q320 200 420 200 Q460 160 520 160 Q600 160 640 200 Q720 200 760 260 Q840 240 880 300 Q940 300 940 380 Q980 400 980 460 Q980 540 920 560 Q940 600 940 660 Q940 720 880 720 Z" fill="none" stroke="#22C55E" stroke-width="14"/>
+  <!-- 구름 안 단어들 -->
+  <text x="512" y="380" font-size="110" fill="#FFFFFF" text-anchor="middle" font-weight="bold" font-family="Arial" clip-path="url(#cloud)">word</text>
+  <text x="300" y="490" font-size="70" fill="#86EFAC" text-anchor="middle" font-weight="bold" font-family="Arial" clip-path="url(#cloud)">cloud</text>
+  <text x="750" y="470" font-size="52" fill="#4ADE80" text-anchor="middle" font-family="Arial" clip-path="url(#cloud)">text</text>
+  <text x="200" y="580" font-size="44" fill="#6EE7B7" text-anchor="middle" font-family="Arial" clip-path="url(#cloud)">big</text>
+  <text x="540" y="570" font-size="64" fill="#86EFAC" text-anchor="middle" font-weight="bold" font-family="Arial" clip-path="url(#cloud)">data</text>
+  <text x="840" y="580" font-size="38" fill="#4ADE80" text-anchor="middle" font-family="Arial" clip-path="url(#cloud)">art</text>
+  <!-- Layer 3: 텍스트 입력 → 구름 화살표 -->
+  <rect x="200" y="790" width="260" height="80" rx="16" fill="#166534"/>
+  <text x="330" y="845" font-size="42" fill="#86EFAC" text-anchor="middle" font-family="monospace">텍스트...</text>
+  <path d="M484 830 L540 830" stroke="#22C55E" stroke-width="20" stroke-linecap="round"/>
+  <polygon points="528,810 556,830 528,850" fill="#22C55E"/>
+  <!-- 구름 미니 아이콘 -->
+  <text x="700" y="850" font-size="80" fill="#22C55E" text-anchor="middle">☁</text>
+</svg>

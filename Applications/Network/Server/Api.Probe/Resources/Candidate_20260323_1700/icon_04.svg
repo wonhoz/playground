@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="190" fill="#1C0700"/>
+  <!-- Layer 2: 레이더 원형 (탐침) -->
+  <circle cx="512" cy="512" r="420" fill="none" stroke="#F97316" stroke-width="12" opacity="0.3"/>
+  <circle cx="512" cy="512" r="280" fill="none" stroke="#F97316" stroke-width="10" opacity="0.4"/>
+  <circle cx="512" cy="512" r="140" fill="none" stroke="#F97316" stroke-width="10" opacity="0.5"/>
+  <!-- 십자선 -->
+  <line x1="92" y1="512" x2="932" y2="512" stroke="#F97316" stroke-width="6" opacity="0.3"/>
+  <line x1="512" y1="92" x2="512" y2="932" stroke="#F97316" stroke-width="6" opacity="0.3"/>
+  <!-- 레이더 스윕 섹터 -->
+  <path d="M512 512 L512 92 A420,420 0 0,1 880,280 Z" fill="#F97316" opacity="0.15"/>
+  <!-- 신호 점 (서버 위치들) -->
+  <circle cx="680" cy="240" r="20" fill="#FCD34D"/>
+  <circle cx="680" cy="240" r="36" fill="none" stroke="#FCD34D" stroke-width="8" opacity="0.5"/>
+  <circle cx="350" cy="400" r="14" fill="#FBBF24"/>
+  <circle cx="720" cy="600" r="10" fill="#FDE68A"/>
+  <!-- 중앙 점 (자신) -->
+  <circle cx="512" cy="512" r="28" fill="#FF7A00"/>
+  <circle cx="512" cy="512" r="48" fill="none" stroke="#FF7A00" stroke-width="10" opacity="0.6"/>
+  <!-- Layer 3: API 텍스트 -->
+  <text x="512" y="920" font-size="64" fill="#F97316" text-anchor="middle" font-weight="bold" font-family="Arial">API PROBE</text>
+</svg>

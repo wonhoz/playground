@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="190" fill="#0A0020"/>
+  <!-- Layer 2: 속도선 + 회피 궤적 -->
+  <!-- 집중선 (방사형) -->
+  <line x1="512" y1="512" x2="80" y2="80" stroke="#ffffff" stroke-width="3" opacity="0.15"/>
+  <line x1="512" y1="512" x2="512" y2="80" stroke="#ffffff" stroke-width="3" opacity="0.15"/>
+  <line x1="512" y1="512" x2="944" y2="80" stroke="#ffffff" stroke-width="3" opacity="0.15"/>
+  <line x1="512" y1="512" x2="944" y2="512" stroke="#ffffff" stroke-width="3" opacity="0.15"/>
+  <line x1="512" y1="512" x2="944" y2="944" stroke="#ffffff" stroke-width="3" opacity="0.15"/>
+  <line x1="512" y1="512" x2="512" y2="944" stroke="#ffffff" stroke-width="3" opacity="0.15"/>
+  <line x1="512" y1="512" x2="80" y2="944" stroke="#ffffff" stroke-width="3" opacity="0.15"/>
+  <line x1="512" y1="512" x2="80" y2="512" stroke="#ffffff" stroke-width="3" opacity="0.15"/>
+  <!-- 회피 곡선 궤적 -->
+  <path d="M200,800 Q300,500 512,400 Q700,300 800,150" fill="none" stroke="#00FFCC" stroke-width="8" stroke-dasharray="24,16" opacity="0.7"/>
+  <!-- 총알들 (쫓아오는) -->
+  <circle cx="140" cy="860" r="38" fill="#FF2244"/>
+  <circle cx="220" cy="760" r="34" fill="#FF4466"/>
+  <circle cx="310" cy="650" r="30" fill="#FF2244"/>
+  <circle cx="760" cy="200" r="38" fill="#FF2244"/>
+  <circle cx="860" cy="130" r="34" fill="#FF4466"/>
+  <circle cx="920" cy="400" r="30" fill="#FF2244"/>
+  <!-- Layer 3: 다이아몬드 (이동 중, 위치 오프셋) -->
+  <polygon points="800,80 920,200 800,320 680,200" fill="#00FFCC"/>
+  <!-- 잔상 효과 -->
+  <polygon points="650,200 730,280 650,360 570,280" fill="#00FFCC" opacity="0.3"/>
+  <polygon points="520,310 580,370 520,430 460,370" fill="#00FFCC" opacity="0.15"/>
+</svg>

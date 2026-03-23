@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: Background - 미드나잇 그린 -->
+  <rect width="1024" height="1024" rx="180" fill="#001510"/>
+  <!-- Layer 2: 생존 카운터 + 시간 압박 -->
+  <!-- 원형 타이머 -->
+  <circle cx="512" cy="460" r="280" fill="#0A2A1A"/>
+  <circle cx="512" cy="460" r="280" fill="none" stroke="#1A1A1A" stroke-width="24"/>
+  <!-- 타이머 진행 (60%) -->
+  <circle cx="512" cy="460" r="280" fill="none" stroke="#00FF41" stroke-width="24"
+    stroke-dasharray="1055" stroke-dashoffset="422" transform="rotate(-90,512,460)"/>
+  <!-- 남은 시간 텍스트 -->
+  <text x="512" y="430" font-family="Arial Black,Arial" font-size="48" fill="#888" text-anchor="middle">TIME</text>
+  <text x="512" y="520" font-family="Arial Black,Arial" font-size="140" font-weight="900" fill="#00FF41" text-anchor="middle">15</text>
+  <!-- 생존 점수 -->
+  <text x="512" y="620" font-family="Arial Black,Arial" font-size="48" fill="#69F0AE" text-anchor="middle">SURVIVED</text>
+  <!-- 총알들 (바깥에서 날아오는) -->
+  <rect x="170" y="350" width="16" height="36" rx="5" fill="#FF4081" transform="rotate(60,178,368)"/>
+  <rect x="810" y="280" width="16" height="36" rx="5" fill="#FF4081" transform="rotate(-30,818,298)"/>
+  <rect x="820" y="600" width="16" height="36" rx="5" fill="#FF80AB" transform="rotate(-60,828,618)"/>
+  <rect x="220" y="640" width="16" height="36" rx="5" fill="#FF4081" transform="rotate(40,228,658)"/>
+  <!-- Layer 3: -->
+  <text x="512" y="840" font-family="Arial Black,Arial" font-size="72" font-weight="900" fill="#FF4081" text-anchor="middle">DODGE.BLITZ</text>
+</svg>

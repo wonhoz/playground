@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: Background - 선셋 다크 -->
+  <rect width="1024" height="1024" rx="180" fill="#1A0A20"/>
+  <!-- Layer 2: 우주선 발사 + 탄알 회피 -->
+  <!-- 공격하는 적들 (위) -->
+  <polygon points="200,220 160,280 240,280" fill="#FF4081"/>
+  <polygon points="400,200 360,260 440,260" fill="#FF4081"/>
+  <polygon points="600,220 560,280 640,280" fill="#FF80AB"/>
+  <polygon points="820,200 780,260 860,260" fill="#FF4081"/>
+  <!-- 적들의 총알 -->
+  <rect x="192" y="290" width="16" height="40" rx="5" fill="#FF8A80"/>
+  <rect x="392" y="270" width="16" height="40" rx="5" fill="#FF8A80"/>
+  <rect x="592" y="290" width="16" height="40" rx="5" fill="#FF8A80"/>
+  <rect x="812" y="270" width="16" height="40" rx="5" fill="#FF8A80"/>
+  <!-- 꼬리들 -->
+  <line x1="200" y1="290" x2="200" y2="250" stroke="#FF8A80" stroke-width="5" opacity="0.4"/>
+  <line x1="400" y1="270" x2="400" y2="230" stroke="#FF8A80" stroke-width="5" opacity="0.4"/>
+  <!-- 플레이어 (하단, 좌우로 이동 중) -->
+  <polygon points="512,740 454,820 570,820" fill="#00E5FF"/>
+  <rect x="476" y="768" width="72" height="44" rx="8" fill="#0097A7"/>
+  <!-- 발사 레이저 -->
+  <line x1="512" y1="740" x2="512" y2="360" stroke="#00E5FF" stroke-width="8"/>
+  <line x1="512" y1="740" x2="512" y2="360" stroke="#00E5FF" stroke-width="30" opacity="0.15"/>
+  <!-- 피격 표시 (적 하나 파괴) -->
+  <circle cx="600" cy="250" r="44" fill="#FFFF00" opacity="0.8"/>
+  <text x="600" y="260" font-family="Arial Black,Arial" font-size="36" fill="#1A1A1A" text-anchor="middle" font-weight="bold">HIT!</text>
+  <!-- 이동 경로 (회피) -->
+  <path d="M350,700 Q450,660 512,700 Q574,740 680,680" stroke="#00E5FF" stroke-width="4" fill="none" opacity="0.4" stroke-dasharray="12,8"/>
+  <!-- Layer 3: -->
+  <text x="512" y="920" font-family="Arial Black,Arial" font-size="72" font-weight="900" fill="#FF4081" text-anchor="middle">DODGE.BLITZ</text>
+</svg>

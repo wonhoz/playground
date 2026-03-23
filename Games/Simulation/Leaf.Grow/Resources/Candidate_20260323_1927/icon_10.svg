@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg_lg10" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#064A20"/>
+      <stop offset="100%" stop-color="#052e16"/>
+    </radialGradient>
+    <filter id="glow_lg10">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="185" fill="url(#bg_lg10)"/>
+  <!-- 큰 흰 잎 실루엣 -->
+  <path d="M 512,195 Q 790,285 805,512 Q 790,739 512,829 Q 234,739 219,512 Q 234,285 512,195 Z" fill="white" opacity="0.92"/>
+  <!-- 잎 중앙 줄기 -->
+  <line x1="512" y1="195" x2="512" y2="829" stroke="#166534" stroke-width="16" stroke-linecap="round"/>
+  <!-- 잎 결들 (배경색) -->
+  <path d="M 512,340 Q 420,360 375,428" fill="none" stroke="#166534" stroke-width="10" stroke-linecap="round" opacity="0.5"/>
+  <path d="M 512,420 Q 398,442 355,510" fill="none" stroke="#166534" stroke-width="9" stroke-linecap="round" opacity="0.45"/>
+  <path d="M 512,510 Q 397,528 362,594" fill="none" stroke="#166534" stroke-width="9" stroke-linecap="round" opacity="0.45"/>
+  <path d="M 512,595 Q 412,610 386,674" fill="none" stroke="#166534" stroke-width="8" stroke-linecap="round" opacity="0.4"/>
+  <path d="M 512,675 Q 433,684 418,744" fill="none" stroke="#166534" stroke-width="7" stroke-linecap="round" opacity="0.35"/>
+  <path d="M 512,340 Q 604,360 649,428" fill="none" stroke="#166534" stroke-width="10" stroke-linecap="round" opacity="0.5"/>
+  <path d="M 512,420 Q 626,442 669,510" fill="none" stroke="#166534" stroke-width="9" stroke-linecap="round" opacity="0.45"/>
+  <path d="M 512,510 Q 627,528 662,594" fill="none" stroke="#166534" stroke-width="9" stroke-linecap="round" opacity="0.45"/>
+  <path d="M 512,595 Q 612,610 638,674" fill="none" stroke="#166534" stroke-width="8" stroke-linecap="round" opacity="0.4"/>
+  <path d="M 512,675 Q 591,684 606,744" fill="none" stroke="#166534" stroke-width="7" stroke-linecap="round" opacity="0.35"/>
+  <!-- 피보나치 수열 패턴 (잎 안에) -->
+  <!-- 1 -->
+  <text x="300" y="390" font-family="Georgia, serif" font-size="52" font-weight="bold" fill="#166534" text-anchor="middle" opacity="0.8">1</text>
+  <!-- 1 -->
+  <text x="300" y="460" font-family="Georgia, serif" font-size="52" font-weight="bold" fill="#15803D" text-anchor="middle" opacity="0.8">1</text>
+  <!-- 2 -->
+  <text x="300" y="530" font-family="Georgia, serif" font-size="52" font-weight="bold" fill="#166534" text-anchor="middle" opacity="0.8">2</text>
+  <!-- 3 -->
+  <text x="300" y="600" font-family="Georgia, serif" font-size="52" font-weight="bold" fill="#15803D" text-anchor="middle" opacity="0.8">3</text>
+  <!-- 5 -->
+  <text x="300" y="670" font-family="Georgia, serif" font-size="52" font-weight="bold" fill="#166534" text-anchor="middle" opacity="0.8">5</text>
+  <!-- 8 -->
+  <text x="300" y="740" font-family="Georgia, serif" font-size="52" font-weight="bold" fill="#15803D" text-anchor="middle" opacity="0.75">8</text>
+  <!-- 오른쪽 -->
+  <!-- 13 -->
+  <text x="724" y="390" font-family="Georgia, serif" font-size="52" font-weight="bold" fill="#166534" text-anchor="middle" opacity="0.8">13</text>
+  <!-- 21 -->
+  <text x="724" y="460" font-family="Georgia, serif" font-size="52" font-weight="bold" fill="#15803D" text-anchor="middle" opacity="0.8">21</text>
+  <!-- 34 -->
+  <text x="724" y="530" font-family="Georgia, serif" font-size="52" font-weight="bold" fill="#166534" text-anchor="middle" opacity="0.8">34</text>
+  <!-- 55 -->
+  <text x="724" y="600" font-family="Georgia, serif" font-size="52" font-weight="bold" fill="#15803D" text-anchor="middle" opacity="0.8">55</text>
+  <!-- 89 -->
+  <text x="724" y="670" font-family="Georgia, serif" font-size="52" font-weight="bold" fill="#166534" text-anchor="middle" opacity="0.8">89</text>
+  <!-- 144 -->
+  <text x="724" y="740" font-family="Georgia, serif" font-size="48" font-weight="bold" fill="#15803D" text-anchor="middle" opacity="0.75">144</text>
+  <!-- 중앙 더하기 기호들 -->
+  <text x="512" y="410" font-family="Georgia, serif" font-size="36" font-weight="bold" fill="#16A34A" text-anchor="middle" opacity="0.6">+</text>
+  <text x="512" y="480" font-family="Georgia, serif" font-size="36" font-weight="bold" fill="#16A34A" text-anchor="middle" opacity="0.6">+</text>
+  <text x="512" y="550" font-family="Georgia, serif" font-size="36" font-weight="bold" fill="#16A34A" text-anchor="middle" opacity="0.6">+</text>
+  <text x="512" y="620" font-family="Georgia, serif" font-size="36" font-weight="bold" fill="#16A34A" text-anchor="middle" opacity="0.6">+</text>
+  <text x="512" y="690" font-family="Georgia, serif" font-size="36" font-weight="bold" fill="#16A34A" text-anchor="middle" opacity="0.6">+</text>
+  <!-- Leaf.Grow 텍스트 (상단) -->
+  <text x="512" y="278" font-family="Arial Black, sans-serif" font-size="38" font-weight="900" fill="#166534" text-anchor="middle" opacity="0.7">Fibonacci</text>
+  <!-- 잎 테두리 강조 -->
+  <path d="M 512,195 Q 790,285 805,512 Q 790,739 512,829 Q 234,739 219,512 Q 234,285 512,195 Z" fill="none" stroke="#4ADE80" stroke-width="8" opacity="0.4" filter="url(#glow_lg10)"/>
+</svg>

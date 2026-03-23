@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg_lg08" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#A16207"/>
+      <stop offset="100%" stop-color="#78350F"/>
+    </radialGradient>
+  </defs>
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="185" fill="url(#bg_lg08)"/>
+  <!-- 황금 피보나치 나선 -->
+  <!-- 나선 (피보나치 수열 기반 아크들) -->
+  <!-- 최외곽 아크 (큰 원, 4분의 1) -->
+  <path d="M 512,220 A 292,292 0 0,1 804,512" fill="none" stroke="#FDE047" stroke-width="14" stroke-linecap="round"/>
+  <!-- 두번째 아크 -->
+  <path d="M 804,512 A 180,180 0 0,1 624,692" fill="none" stroke="#FCD34D" stroke-width="12" stroke-linecap="round"/>
+  <!-- 세번째 아크 -->
+  <path d="M 624,692 A 112,112 0 0,1 512,580" fill="none" stroke="#FBBF24" stroke-width="11" stroke-linecap="round"/>
+  <!-- 네번째 아크 -->
+  <path d="M 512,580 A 68,68 0 0,1 444,512" fill="none" stroke="#F59E0B" stroke-width="10" stroke-linecap="round"/>
+  <!-- 다섯번째 아크 -->
+  <path d="M 444,512 A 44,44 0 0,1 488,468" fill="none" stroke="#EAB308" stroke-width="9" stroke-linecap="round"/>
+  <!-- 여섯번째 아크 -->
+  <path d="M 488,468 A 26,26 0 0,1 514,494" fill="none" stroke="#FDE047" stroke-width="8" stroke-linecap="round"/>
+  <!-- 일곱번째 아크 -->
+  <path d="M 514,494 A 16,16 0 0,1 498,510" fill="none" stroke="#FBBF24" stroke-width="7" stroke-linecap="round"/>
+  <!-- 나선 중심 -->
+  <circle cx="505" cy="505" r="12" fill="#FDE047" stroke="#F59E0B" stroke-width="6"/>
+  <!-- 잎들 (나선 위에, 피보나치 위치) -->
+  <!-- 큰 잎 (1번, 상단 왼) -->
+  <ellipse cx="400" cy="290" rx="75" ry="45" fill="#4ADE80" stroke="#22C55E" stroke-width="12" transform="rotate(-45 400 290)"/>
+  <path d="M 400,290 L 512,220" fill="none" stroke="#22C55E" stroke-width="8" opacity="0.5"/>
+  <!-- 큰 잎 (2번, 오른쪽) -->
+  <ellipse cx="740" cy="400" rx="70" ry="42" fill="#22C55E" stroke="#16A34A" stroke-width="12" transform="rotate(20 740 400)"/>
+  <path d="M 740,400 L 804,512" fill="none" stroke="#22C55E" stroke-width="8" opacity="0.5"/>
+  <!-- 중간 잎 (3번) -->
+  <ellipse cx="720" cy="660" rx="58" ry="35" fill="#4ADE80" stroke="#22C55E" stroke-width="10" transform="rotate(60 720 660)"/>
+  <path d="M 720,660 L 624,692" fill="none" stroke="#22C55E" stroke-width="7" opacity="0.5"/>
+  <!-- 중간 잎 (4번) -->
+  <ellipse cx="560" cy="640" rx="48" ry="28" fill="#86EFAC" stroke="#4ADE80" stroke-width="9" transform="rotate(-20 560 640)"/>
+  <!-- 작은 잎들 -->
+  <ellipse cx="425" cy="530" rx="38" ry="22" fill="#22C55E" stroke="#16A34A" stroke-width="8" transform="rotate(40 425 530)"/>
+  <ellipse cx="472" cy="440" rx="30" ry="18" fill="#4ADE80" stroke="#22C55E" stroke-width="7" transform="rotate(-60 472 440)"/>
+  <ellipse cx="510" cy="456" rx="22" ry="14" fill="#86EFAC" stroke="#4ADE80" stroke-width="6" transform="rotate(30 510 456)"/>
+  <!-- 피보나치 수열 숫자 표시 -->
+  <circle cx="512" cy="220" r="22" fill="#F59E0B" stroke="#FDE047" stroke-width="8"/>
+  <text x="512" y="228" font-family="Arial Black, sans-serif" font-size="22" font-weight="900" fill="white" text-anchor="middle">1</text>
+  <circle cx="804" cy="512" r="22" fill="#F59E0B" stroke="#FDE047" stroke-width="8"/>
+  <text x="804" y="520" font-family="Arial Black, sans-serif" font-size="22" font-weight="900" fill="white" text-anchor="middle">2</text>
+  <circle cx="624" cy="692" r="22" fill="#F59E0B" stroke="#FDE047" stroke-width="8"/>
+  <text x="624" y="700" font-family="Arial Black, sans-serif" font-size="22" font-weight="900" fill="white" text-anchor="middle">3</text>
+  <circle cx="512" cy="580" r="20" fill="#F59E0B" stroke="#FDE047" stroke-width="7"/>
+  <text x="512" y="588" font-family="Arial Black, sans-serif" font-size="20" font-weight="900" fill="white" text-anchor="middle">5</text>
+  <circle cx="444" cy="512" r="18" fill="#D97706" stroke="#F59E0B" stroke-width="6"/>
+  <text x="444" y="520" font-family="Arial Black, sans-serif" font-size="18" font-weight="900" fill="white" text-anchor="middle">8</text>
+</svg>

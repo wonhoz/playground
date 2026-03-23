@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg_lg06" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#0D2B0D"/>
+      <stop offset="100%" stop-color="#0A1A0A"/>
+    </radialGradient>
+    <filter id="glow_lg06">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="185" fill="url(#bg_lg06)"/>
+  <!-- 왼쪽 코드 텍스트 (L-시스템 규칙) -->
+  <rect x="220" y="260" width="340" height="500" rx="20" fill="#0F2F0F" stroke="#1A4A1A" stroke-width="8"/>
+  <!-- 코드 라인들 -->
+  <text x="248" y="316" font-family="Courier New, monospace" font-size="32" font-weight="bold" fill="#4ADE80">Axiom:</text>
+  <text x="248" y="358" font-family="Courier New, monospace" font-size="36" font-weight="bold" fill="#86EFAC">  F</text>
+  <text x="248" y="420" font-family="Courier New, monospace" font-size="32" font-weight="bold" fill="#4ADE80">Rules:</text>
+  <text x="248" y="462" font-family="Courier New, monospace" font-size="30" fill="#22C55E">F → FF</text>
+  <text x="248" y="504" font-family="Courier New, monospace" font-size="30" fill="#22C55E">X → F[+X]</text>
+  <text x="248" y="546" font-family="Courier New, monospace" font-size="28" fill="#22C55E">   [-X]FX</text>
+  <text x="248" y="610" font-family="Courier New, monospace" font-size="28" fill="#16A34A">angle: 25°</text>
+  <text x="248" y="652" font-family="Courier New, monospace" font-size="28" fill="#16A34A">iter: 6</text>
+  <text x="248" y="714" font-family="Courier New, monospace" font-size="28" fill="#4ADE80">&#x25BA; generate</text>
+  <!-- 커서 깜빡임 -->
+  <rect x="248" y="724" width="20" height="4" rx="2" fill="#4ADE80" opacity="0.9"/>
+  <!-- 화살표 (중앙) -->
+  <path d="M 578,512 L 658,512" stroke="#4ADE80" stroke-width="18" stroke-linecap="round" filter="url(#glow_lg06)"/>
+  <polygon points="658,512 632,494 632,530" fill="#4ADE80" filter="url(#glow_lg06)"/>
+  <!-- 오른쪽 녹색 나무 -->
+  <!-- 몸통 -->
+  <line x1="778" y1="800" x2="778" y2="600" stroke="#16A34A" stroke-width="26" stroke-linecap="round"/>
+  <!-- 1차 가지 -->
+  <line x1="778" y1="640" x2="690" y2="530" stroke="#16A34A" stroke-width="20" stroke-linecap="round"/>
+  <line x1="778" y1="640" x2="866" y2="530" stroke="#16A34A" stroke-width="20" stroke-linecap="round"/>
+  <!-- 2차 가지 -->
+  <line x1="690" y1="530" x2="635" y2="440" stroke="#22C55E" stroke-width="15" stroke-linecap="round"/>
+  <line x1="690" y1="530" x2="722" y2="430" stroke="#22C55E" stroke-width="14" stroke-linecap="round"/>
+  <line x1="866" y1="530" x2="834" y2="430" stroke="#22C55E" stroke-width="14" stroke-linecap="round"/>
+  <line x1="866" y1="530" x2="921" y2="440" stroke="#22C55E" stroke-width="15" stroke-linecap="round"/>
+  <!-- 3차 가지 -->
+  <line x1="635" y1="440" x2="605" y2="375" stroke="#4ADE80" stroke-width="10" stroke-linecap="round"/>
+  <line x1="635" y1="440" x2="650" y2="368" stroke="#4ADE80" stroke-width="9" stroke-linecap="round"/>
+  <line x1="722" y1="430" x2="705" y2="360" stroke="#4ADE80" stroke-width="10" stroke-linecap="round"/>
+  <line x1="722" y1="430" x2="740" y2="355" stroke="#4ADE80" stroke-width="9" stroke-linecap="round"/>
+  <line x1="834" y1="430" x2="816" y2="355" stroke="#4ADE80" stroke-width="9" stroke-linecap="round"/>
+  <line x1="834" y1="430" x2="852" y2="360" stroke="#4ADE80" stroke-width="10" stroke-linecap="round"/>
+  <line x1="921" y1="440" x2="906" y2="368" stroke="#4ADE80" stroke-width="9" stroke-linecap="round"/>
+  <line x1="921" y1="440" x2="951" y2="375" stroke="#4ADE80" stroke-width="10" stroke-linecap="round"/>
+  <!-- 잎 끝점 원들 -->
+  <circle cx="605" cy="368" r="22" fill="#4ADE80" filter="url(#glow_lg06)"/>
+  <circle cx="652" cy="360" r="20" fill="#86EFAC" filter="url(#glow_lg06)"/>
+  <circle cx="705" cy="352" r="22" fill="#4ADE80" filter="url(#glow_lg06)"/>
+  <circle cx="742" cy="347" r="20" fill="#86EFAC" filter="url(#glow_lg06)"/>
+  <circle cx="778" cy="345" r="24" fill="#22C55E" filter="url(#glow_lg06)"/>
+  <circle cx="814" cy="347" r="20" fill="#86EFAC" filter="url(#glow_lg06)"/>
+  <circle cx="851" cy="352" r="22" fill="#4ADE80" filter="url(#glow_lg06)"/>
+  <circle cx="908" cy="360" r="20" fill="#86EFAC" filter="url(#glow_lg06)"/>
+  <circle cx="953" cy="368" r="22" fill="#4ADE80" filter="url(#glow_lg06)"/>
+</svg>

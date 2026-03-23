@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="190" fill="#030318"/>
+  <!-- 별 -->
+  <circle cx="200" cy="180" r="3" fill="#FFFFFF" opacity="0.6"/>
+  <circle cx="800" cy="200" r="2" fill="#FFFFFF" opacity="0.7"/>
+  <circle cx="150" cy="700" r="2" fill="#FFFFFF" opacity="0.5"/>
+  <circle cx="900" cy="750" r="3" fill="#FFFFFF" opacity="0.6"/>
+  <!-- Layer 2: 발사 지점 + 벡터 화살표 + 궤도 예측선 -->
+  <!-- 발사 지점 (행성) -->
+  <circle cx="200" cy="700" r="80" fill="#4B5563"/>
+  <circle cx="200" cy="700" r="60" fill="#6B7280"/>
+  <!-- 목표 행성 -->
+  <circle cx="800" cy="260" r="70" fill="#1E40AF"/>
+  <circle cx="800" cy="260" r="50" fill="#2563EB"/>
+  <!-- 궤도 예측 곡선 (점선) -->
+  <path d="M250 660 Q400 300 780 290" fill="none" stroke="#38BDF8" stroke-width="14" stroke-dasharray="20,12"/>
+  <!-- 궤도 예측 화살표 -->
+  <polygon points="768,280 800,265 775,310" fill="#38BDF8"/>
+  <!-- 탐사선 (발사 직후) -->
+  <polygon points="265,645 295,620 295,670" fill="#FFFFFF"/>
+  <!-- 발사 벡터 화살표 (방향 선택) -->
+  <path d="M200 700 L310 560" stroke="#FFFFFF" stroke-width="12" stroke-linecap="round"/>
+  <polygon points="302,556 322,540 330,568" fill="#FFFFFF"/>
+  <!-- 탈출 속도 게이지 -->
+  <rect x="80" y="820" width="860" height="60" rx="16" fill="#0A0A30"/>
+  <rect x="80" y="820" width="540" height="60" rx="16" fill="#1D4ED8"/>
+  <text x="512" y="861" font-size="34" fill="#BFDBFE" text-anchor="middle" font-weight="bold">v = 62% escape</text>
+  <!-- Layer 3: 장식 별들 -->
+  <circle cx="512" cy="400" r="8" fill="#FBBF24"/>
+  <circle cx="600" cy="350" r="5" fill="#FDE68A"/>
+  <circle cx="450" cy="500" r="4" fill="#BFDBFE"/>
+</svg>

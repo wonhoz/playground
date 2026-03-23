@@ -1,32 +1,57 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
   <defs>
     <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#0f1923"/>
-      <stop offset="100%" stop-color="#1a2838"/>
+      <stop offset="0%" stop-color="#0a0a0a"/>
+      <stop offset="100%" stop-color="#111"/>
     </linearGradient>
-    <linearGradient id="shieldBlue" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#1e88e5"/>
-      <stop offset="100%" stop-color="#1565c0"/>
+    <linearGradient id="row1" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#424242"/>
+      <stop offset="50%" stop-color="#424242"/>
+      <stop offset="50%" stop-color="#4caf50"/>
+      <stop offset="100%" stop-color="#4caf50"/>
     </linearGradient>
-    <linearGradient id="pencilGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#ffd54f"/>
-      <stop offset="100%" stop-color="#ffb300"/>
+    <linearGradient id="row2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#424242"/>
+      <stop offset="50%" stop-color="#424242"/>
+      <stop offset="50%" stop-color="#2196f3"/>
+      <stop offset="100%" stop-color="#2196f3"/>
+    </linearGradient>
+    <linearGradient id="row3" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#424242"/>
+      <stop offset="50%" stop-color="#424242"/>
+      <stop offset="50%" stop-color="#ff9800"/>
+      <stop offset="100%" stop-color="#ff9800"/>
+    </linearGradient>
+    <linearGradient id="row4" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#424242"/>
+      <stop offset="50%" stop-color="#424242"/>
+      <stop offset="50%" stop-color="#f44336"/>
+      <stop offset="100%" stop-color="#f44336"/>
+    </linearGradient>
+    <linearGradient id="row5" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#424242"/>
+      <stop offset="50%" stop-color="#424242"/>
+      <stop offset="50%" stop-color="#9c27b0"/>
+      <stop offset="100%" stop-color="#9c27b0"/>
     </linearGradient>
   </defs>
   <rect width="512" height="512" rx="80" fill="url(#bg)"/>
-  <!-- Main shield -->
-  <path d="M256 110 L370 158 L370 278 Q370 360 256 405 Q142 360 142 278 L142 158 Z" fill="url(#shieldBlue)"/>
-  <path d="M256 138 L348 178 L348 278 Q348 342 256 380 Q164 342 164 278 L164 178 Z" fill="none" stroke="white" stroke-width="2" opacity="0.3"/>
-  <!-- Star icon on shield -->
-  <polygon points="256,175 266,205 298,205 272,222 282,252 256,235 230,252 240,222 214,205 246,205" fill="white" opacity="0.9"/>
-  <!-- Label/ribbon on shield -->
-  <rect x="172" y="288" width="168" height="42" rx="8" fill="#0d47a1" opacity="0.9"/>
-  <rect x="180" y="300" width="60" height="10" rx="3" fill="white" opacity="0.5"/>
-  <rect x="250" y="300" width="60" height="10" rx="3" fill="#69f0ae" opacity="0.9"/>
-  <!-- Pencil tool overlay -->
-  <g transform="rotate(-35, 380, 130)">
-    <rect x="362" y="88" width="36" height="76" rx="4" fill="url(#pencilGrad)"/>
-    <polygon points="362,164 398,164 380,195" fill="#fff9c4"/>
-    <rect x="362" y="84" width="36" height="10" rx="3" fill="#9e9e9e"/>
-  </g>
+  <!-- A stack of color-coded badges -->
+  <rect x="96" y="130" width="320" height="46" rx="8" fill="url(#row1)"/>
+  <rect x="96" y="188" width="320" height="46" rx="8" fill="url(#row2)"/>
+  <rect x="96" y="246" width="320" height="46" rx="8" fill="url(#row3)"/>
+  <rect x="96" y="304" width="320" height="46" rx="8" fill="url(#row4)"/>
+  <rect x="96" y="362" width="320" height="46" rx="8" fill="url(#row5)"/>
+  <!-- Label text placeholders -->
+  <rect x="110" y="146" width="72" height="12" rx="4" fill="white" opacity="0.5"/>
+  <rect x="110" y="204" width="82" height="12" rx="4" fill="white" opacity="0.5"/>
+  <rect x="110" y="262" width="68" height="12" rx="4" fill="white" opacity="0.5"/>
+  <rect x="110" y="320" width="76" height="12" rx="4" fill="white" opacity="0.5"/>
+  <rect x="110" y="378" width="62" height="12" rx="4" fill="white" opacity="0.5"/>
+  <!-- Value text placeholders -->
+  <rect x="278" y="146" width="72" height="12" rx="4" fill="white" opacity="0.85"/>
+  <rect x="278" y="204" width="65" height="12" rx="4" fill="white" opacity="0.85"/>
+  <rect x="278" y="262" width="78" height="12" rx="4" fill="white" opacity="0.85"/>
+  <rect x="278" y="320" width="70" height="12" rx="4" fill="white" opacity="0.85"/>
+  <rect x="278" y="378" width="60" height="12" rx="4" fill="white" opacity="0.85"/>
 </svg>

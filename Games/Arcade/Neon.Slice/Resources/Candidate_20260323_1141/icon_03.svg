@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2020/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: Background - 매우 다크 -->
+  <rect width="1024" height="1024" rx="180" fill="#020020"/>
+  <!-- Layer 2: 3개의 네온 도형이 대각선으로 잘린 모습 -->
+  <!-- 도형 1: 원 슬라이스 (좌상) -->
+  <clipPath id="cl1"><rect x="120" y="200" width="240" height="280"/></clipPath>
+  <circle cx="240" cy="340" r="130" fill="#FF3D00" clip-path="url(#cl1)"/>
+  <circle cx="240" cy="340" r="130" fill="none" stroke="#FF6D00" stroke-width="8" clip-path="url(#cl1)"/>
+  <!-- 도형 1 아랫쪽 (잘린 후) -->
+  <clipPath id="cl2"><rect x="120" y="480" width="240" height="200"/></clipPath>
+  <circle cx="240" cy="430" r="130" fill="#BF360C" clip-path="url(#cl2)"/>
+  <!-- 잘린 틈새 -->
+  <line x1="110" y1="465" x2="370" y2="395" stroke="#FF6D00" stroke-width="6" opacity="0.8"/>
+  <line x1="110" y1="465" x2="370" y2="395" stroke="#FF6D00" stroke-width="20" opacity="0.2"/>
+  <!-- 도형 2: 사각형 슬라이스 (가운데) -->
+  <rect x="392" y="220" width="240" height="220" rx="16" fill="#7C4DFF"/>
+  <rect x="392" y="460" width="240" height="220" rx="16" fill="#512DA8"/>
+  <!-- 잘린 틈새 -->
+  <line x1="380" y1="444" x2="644" y2="476" stroke="#E040FB" stroke-width="6" opacity="0.8"/>
+  <line x1="380" y1="444" x2="644" y2="476" stroke="#E040FB" stroke-width="20" opacity="0.2"/>
+  <!-- 도형 3: 삼각형 슬라이스 (우) -->
+  <polygon points="664,200 904,200 664,500" fill="#00E5FF"/>
+  <polygon points="664,520 904,220 904,520" fill="#00ACC1"/>
+  <!-- 잘린 틈새 -->
+  <line x1="652" y1="508" x2="916" y2="214" stroke="#00FFFF" stroke-width="6" opacity="0.8"/>
+  <line x1="652" y1="508" x2="916" y2="214" stroke="#00FFFF" stroke-width="20" opacity="0.2"/>
+  <!-- Layer 3: 점수 UI -->
+  <text x="512" y="800" font-family="Arial Black,Arial" font-size="76" font-weight="900" fill="#FF00FF" text-anchor="middle">NEON SLICE</text>
+</svg>

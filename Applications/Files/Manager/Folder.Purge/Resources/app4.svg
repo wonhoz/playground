@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 배경 - 따뜻한 주황 그라데이션 -->
+  <defs>
+    <linearGradient id="bg01" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FF8C42"/>
+      <stop offset="100%" stop-color="#E8462A"/>
+    </linearGradient>
+    <linearGradient id="folder01" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#F0EDE8"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg01)"/>
+
+  <!-- Layer 2: 메인 폴더 오브젝트 -->
+  <!-- 폴더 몸통 -->
+  <rect x="210" y="360" width="600" height="400" rx="30" fill="url(#folder01)"/>
+  <!-- 폴더 탭 -->
+  <path d="M210 360 L210 310 Q210 290 230 290 L400 290 Q430 290 445 310 L470 360 Z" fill="url(#folder01)"/>
+
+  <!-- Layer 3: 빨간 X 표시 (삭제/제거 의미) -->
+  <line x1="340" y1="460" x2="680" y2="700" stroke="#D42B1E" stroke-width="72" stroke-linecap="round"/>
+  <line x1="680" y1="460" x2="340" y2="700" stroke="#D42B1E" stroke-width="72" stroke-linecap="round"/>
+
+  <!-- X 위에 흰색 얇은 선으로 입체감 -->
+  <line x1="340" y1="460" x2="680" y2="700" stroke="rgba(255,255,255,0.25)" stroke-width="24" stroke-linecap="round"/>
+  <line x1="680" y1="460" x2="340" y2="700" stroke="rgba(255,255,255,0.25)" stroke-width="24" stroke-linecap="round"/>
+</svg>

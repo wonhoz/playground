@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg_sf10" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FEF9C3"/>
+      <stop offset="100%" stop-color="#FDE047"/>
+    </linearGradient>
+    <linearGradient id="sand10" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#F59E0B"/>
+      <stop offset="100%" stop-color="#D97706"/>
+    </linearGradient>
+    <linearGradient id="water10" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#0EA5E9"/>
+      <stop offset="100%" stop-color="#38BDF8"/>
+    </linearGradient>
+  </defs>
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="185" fill="url(#bg_sf10)"/>
+  <!-- 태양 (위) -->
+  <circle cx="512" cy="285" r="75" fill="#FBBF24" stroke="#F59E0B" stroke-width="12"/>
+  <!-- 태양 광선 -->
+  <line x1="512" y1="195" x2="512" y2="220" stroke="#F59E0B" stroke-width="14" stroke-linecap="round"/>
+  <line x1="582" y1="215" x2="567" y2="236" stroke="#F59E0B" stroke-width="14" stroke-linecap="round"/>
+  <line x1="615" y1="285" x2="590" y2="285" stroke="#F59E0B" stroke-width="14" stroke-linecap="round"/>
+  <line x1="582" y1="355" x2="567" y2="334" stroke="#F59E0B" stroke-width="14" stroke-linecap="round"/>
+  <line x1="442" y1="215" x2="457" y2="236" stroke="#F59E0B" stroke-width="14" stroke-linecap="round"/>
+  <line x1="409" y1="285" x2="434" y2="285" stroke="#F59E0B" stroke-width="14" stroke-linecap="round"/>
+  <line x1="442" y1="355" x2="457" y2="334" stroke="#F59E0B" stroke-width="14" stroke-linecap="round"/>
+  <!-- 모래 산 (중앙) -->
+  <path d="M 220,760 Q 380,760 512,480 Q 644,760 804,760 Z" fill="url(#sand10)"/>
+  <!-- 모래 산 밝은 면 -->
+  <path d="M 512,480 Q 560,560 600,620 Q 644,700 680,760 L 512,760 Z" fill="#FDE68A" opacity="0.5"/>
+  <!-- 모래 결 -->
+  <path d="M 340,700 Q 420,660 512,540 Q 604,660 684,700" fill="none" stroke="#FDE068" stroke-width="8" opacity="0.4" stroke-linecap="round"/>
+  <path d="M 280,740 Q 390,710 512,600 Q 634,710 744,740" fill="none" stroke="#FDE068" stroke-width="6" opacity="0.3" stroke-linecap="round"/>
+  <!-- 물 흐름 (왼쪽) -->
+  <path d="M 220,760 Q 220,680 260,620 Q 300,560 280,500 Q 290,460 310,430" fill="none" stroke="url(#water10)" stroke-width="35" stroke-linecap="round"/>
+  <!-- 물 흐름 (오른쪽) -->
+  <path d="M 804,760 Q 804,680 764,620 Q 724,560 744,500 Q 734,460 714,430" fill="none" stroke="url(#water10)" stroke-width="35" stroke-linecap="round"/>
+  <!-- 물 웅덩이 (하단 좌우) -->
+  <ellipse cx="230" cy="790" rx="80" ry="30" fill="#0EA5E9" opacity="0.9"/>
+  <ellipse cx="794" cy="790" rx="80" ry="30" fill="#0EA5E9" opacity="0.9"/>
+  <!-- 물 반짝임 -->
+  <ellipse cx="220" cy="785" rx="55" ry="18" fill="#7DD3FC" opacity="0.5"/>
+  <ellipse cx="794" cy="785" rx="55" ry="18" fill="#7DD3FC" opacity="0.5"/>
+  <!-- 모래 입자들 (산에서 흘러내리는) -->
+  <circle cx="450" cy="650" r="10" fill="#F59E0B" opacity="0.8"/>
+  <circle cx="430" cy="680" r="9" fill="#D97706" opacity="0.7"/>
+  <circle cx="570" cy="650" r="10" fill="#F59E0B" opacity="0.8"/>
+  <circle cx="590" cy="680" r="9" fill="#D97706" opacity="0.7"/>
+  <!-- 바닥 선 -->
+  <line x1="220" y1="800" x2="804" y2="800" stroke="#D97706" stroke-width="14" stroke-linecap="round" opacity="0.8"/>
+</svg>

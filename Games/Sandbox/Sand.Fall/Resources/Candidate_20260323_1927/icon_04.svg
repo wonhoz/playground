@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg_sf04" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#5B21B6"/>
+      <stop offset="100%" stop-color="#3B0764"/>
+    </radialGradient>
+    <linearGradient id="flask_inner" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FDE047" stop-opacity="0.6"/>
+      <stop offset="40%" stop-color="#3B82F6" stop-opacity="0.8"/>
+      <stop offset="80%" stop-color="#D97706" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#B45309"/>
+    </linearGradient>
+  </defs>
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="185" fill="url(#bg_sf04)"/>
+  <!-- 별/빛 장식 -->
+  <circle cx="230" cy="220" r="5" fill="#C4B5FD" opacity="0.7"/>
+  <circle cx="800" cy="200" r="4" fill="#C4B5FD" opacity="0.6"/>
+  <circle cx="820" cy="800" r="5" fill="#C4B5FD" opacity="0.5"/>
+  <circle cx="200" cy="780" r="4" fill="#C4B5FD" opacity="0.6"/>
+  <!-- 삼각 플라스크 외형 -->
+  <path d="M 412,220 L 612,220 L 612,380 L 800,760 Q 820,820 780,830 Q 760,840 730,840 L 294,840 Q 264,840 244,830 Q 204,820 224,760 L 412,380 Z" fill="url(#flask_inner)" stroke="white" stroke-width="20" stroke-linejoin="round"/>
+  <!-- 플라스크 넥 부분 -->
+  <rect x="412" y="200" width="200" height="30" rx="15" fill="#DDD6FE" stroke="white" stroke-width="12"/>
+  <!-- 플라스크 입구 -->
+  <rect x="430" y="170" width="164" height="40" rx="20" fill="#A78BFA" stroke="white" stroke-width="10"/>
+  <!-- 내부 레이어 불꽃 (상단) -->
+  <clipPath id="flaskClip">
+    <path d="M 412,220 L 612,220 L 612,380 L 800,760 Q 820,820 780,830 Q 760,840 730,840 L 294,840 Q 264,840 244,830 Q 204,820 224,760 L 412,380 Z"/>
+  </clipPath>
+  <!-- 불꽃 층 -->
+  <g clip-path="url(#flaskClip)">
+    <path d="M 300,500 Q 350,440 400,460 Q 380,400 430,385 Q 460,440 490,415 Q 520,370 560,400 Q 590,430 610,420 Q 650,450 640,490 Q 680,510 665,545 Q 640,505 595,520 Q 570,490 540,510 Q 510,480 480,505 Q 450,488 420,515 Q 385,505 370,535 Z" fill="#FF6B35" opacity="0.9"/>
+    <path d="M 340,540 Q 390,490 440,510 Q 420,465 465,450 Q 500,490 525,470 Q 550,435 580,460 Q 610,485 630,472 Q 660,490 648,520 Q 672,538 658,565 Q 632,528 585,542 Q 560,518 530,536 Q 500,515 468,534 Q 438,520 418,548 Z" fill="#FF9800" opacity="0.8"/>
+    <!-- 물 층 -->
+    <rect x="224" y="600" width="576" height="140" fill="#1D4ED8" opacity="0.85"/>
+    <path d="M 224,600 Q 310,585 400,600 Q 490,615 580,598 Q 670,582 780,600 L 790,610 Q 670,595 580,610 Q 490,625 400,610 Q 310,595 224,610 Z" fill="#38BDF8" opacity="0.9"/>
+    <!-- 모래 층 -->
+    <rect x="224" y="740" width="576" height="100" fill="#D97706" opacity="0.95"/>
+    <path d="M 224,740 Q 350,728 480,740 Q 610,752 750,740 L 750,750 Q 610,762 480,750 Q 350,738 224,750 Z" fill="#F59E0B" opacity="0.8"/>
+    <!-- 입자들 -->
+    <circle cx="450" cy="570" r="10" fill="#FDE047" opacity="0.9"/>
+    <circle cx="490" cy="560" r="8" fill="#FDE047" opacity="0.8"/>
+    <circle cx="530" cy="575" r="9" fill="#FDE047" opacity="0.7"/>
+    <circle cx="560" cy="562" r="7" fill="#FBBF24" opacity="0.8"/>
+  </g>
+  <!-- 플라스크 측면 눈금 -->
+  <line x1="430" y1="450" x2="455" y2="450" stroke="white" stroke-width="8" opacity="0.6"/>
+  <line x1="430" y1="550" x2="455" y2="550" stroke="white" stroke-width="8" opacity="0.6"/>
+  <line x1="430" y1="650" x2="455" y2="650" stroke="white" stroke-width="8" opacity="0.6"/>
+</svg>

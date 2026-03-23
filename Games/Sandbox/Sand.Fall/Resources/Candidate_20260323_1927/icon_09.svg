@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg_sf09" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#A16207"/>
+      <stop offset="100%" stop-color="#78350F"/>
+    </radialGradient>
+    <filter id="glow09sf">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="185" fill="url(#bg_sf09)"/>
+  <!-- 체인 반응: 불꽃 → 연기 → 재 -->
+  <!-- 화살표 배경 라인 -->
+  <line x1="240" y1="512" x2="784" y2="512" stroke="white" stroke-width="8" opacity="0.2"/>
+  <!-- 섹션 1: 불꽃 (왼쪽) -->
+  <!-- 불꽃 기둥 -->
+  <path d="M 240,700 L 390,700 L 390,600 Q 360,550 315,520 Q 340,480 320,450 Q 300,485 305,458 Q 280,495 285,465 Q 260,505 265,478 Q 245,518 240,540 Z" fill="#DC2626" opacity="0.9" filter="url(#glow09sf)"/>
+  <path d="M 255,700 L 375,700 L 375,620 Q 348,578 315,552 Q 336,520 320,494 Q 305,526 310,502 Q 290,534 296,508 L 255,700 Z" fill="#F97316" opacity="0.85"/>
+  <path d="M 278,700 L 352,700 L 352,650 Q 330,620 315,605 Q 328,585 318,568 Q 308,590 313,572 L 278,700 Z" fill="#FDE047" opacity="0.8"/>
+  <!-- 불꽃 라벨 -->
+  <text x="315" y="740" font-family="Arial Black, sans-serif" font-size="36" font-weight="900" fill="white" text-anchor="middle">FIRE</text>
+  <!-- 불꽃 입자들 -->
+  <circle cx="270" cy="430" r="12" fill="#FF9800" opacity="0.7"/>
+  <circle cx="300" cy="400" r="10" fill="#FDE047" opacity="0.8"/>
+  <circle cx="330" cy="390" r="14" fill="#FF6B35" opacity="0.7"/>
+  <circle cx="360" cy="410" r="11" fill="#FF9800" opacity="0.6"/>
+  <!-- 화살표 1 -->
+  <path d="M 408,512 L 458,512" stroke="#FCD34D" stroke-width="16" stroke-linecap="round"/>
+  <polygon points="458,512 436,496 436,528" fill="#FCD34D"/>
+  <!-- 섹션 2: 연기 (중앙) -->
+  <ellipse cx="540" cy="530" rx="65" ry="80" fill="#9CA3AF" opacity="0.8"/>
+  <ellipse cx="530" cy="460" rx="55" ry="65" fill="#D1D5DB" opacity="0.75"/>
+  <ellipse cx="548" cy="400" rx="48" ry="58" fill="#9CA3AF" opacity="0.7"/>
+  <ellipse cx="535" cy="348" rx="40" ry="50" fill="#D1D5DB" opacity="0.65"/>
+  <ellipse cx="548" cy="305" rx="33" ry="42" fill="#9CA3AF" opacity="0.6"/>
+  <ellipse cx="540" cy="270" rx="25" ry="32" fill="#E5E7EB" opacity="0.55"/>
+  <!-- 연기 라벨 -->
+  <text x="540" y="740" font-family="Arial Black, sans-serif" font-size="30" font-weight="900" fill="#D1D5DB" text-anchor="middle">SMOKE</text>
+  <!-- 화살표 2 -->
+  <path d="M 618,512 L 668,512" stroke="#9CA3AF" stroke-width="16" stroke-linecap="round"/>
+  <polygon points="668,512 646,496 646,528" fill="#9CA3AF"/>
+  <!-- 섹션 3: 재 (오른쪽) -->
+  <!-- 재 더미 -->
+  <ellipse cx="750" cy="690" rx="95" ry="35" fill="#374151"/>
+  <path d="M 655,690 Q 680,640 710,650 Q 700,610 720,600 Q 732,625 742,615 Q 750,600 762,610 Q 775,625 770,645 Q 790,635 784,655 Q 770,640 758,650 Q 746,637 730,645 Q 715,635 700,648 Q 685,640 672,660 Q 660,655 655,670 L 655,690 Z" fill="#4B5563"/>
+  <ellipse cx="748" cy="658" rx="70" ry="30" fill="#6B7280" opacity="0.7"/>
+  <!-- 재 입자들 (날림) -->
+  <circle cx="700" cy="580" r="10" fill="#6B7280" opacity="0.7"/>
+  <circle cx="730" cy="555" r="8" fill="#4B5563" opacity="0.8"/>
+  <circle cx="760" cy="570" r="11" fill="#374151" opacity="0.7"/>
+  <circle cx="790" cy="548" r="9" fill="#6B7280" opacity="0.6"/>
+  <circle cx="720" cy="530" r="7" fill="#4B5563" opacity="0.6"/>
+  <!-- 재 라벨 -->
+  <text x="750" y="740" font-family="Arial Black, sans-serif" font-size="36" font-weight="900" fill="#9CA3AF" text-anchor="middle">ASH</text>
+  <!-- 온도 화살표 (아래) -->
+  <path d="M 315,780 Q 530,820 750,780" fill="none" stroke="#FCD34D" stroke-width="8" stroke-linecap="round" stroke-dasharray="15 10" opacity="0.5"/>
+  <text x="512" y="840" font-family="Arial, sans-serif" font-size="26" fill="#FCD34D" text-anchor="middle" opacity="0.7">chain reaction</text>
+</svg>

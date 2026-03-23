@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg_sf05" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#1A1A1A"/>
+      <stop offset="100%" stop-color="#0A0A0A"/>
+    </radialGradient>
+    <filter id="glow05">
+      <feGaussianBlur stdDeviation="12" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="185" fill="url(#bg_sf05)"/>
+  <!-- 중앙 분리선 (흰 점선) -->
+  <line x1="512" y1="220" x2="512" y2="804" stroke="white" stroke-width="6" stroke-dasharray="20 15" opacity="0.4"/>
+  <!-- 왼쪽 물 영역 -->
+  <rect x="220" y="220" width="280" height="584" rx="20" fill="#1D4ED8" opacity="0.15"/>
+  <!-- 물 (파랑, 왼쪽) -->
+  <rect x="228" y="380" width="272" height="424" rx="15" fill="#2563EB" opacity="0.9"/>
+  <!-- 물 표면 물결 -->
+  <path d="M 228,385 Q 280,370 330,385 Q 380,400 430,385 Q 470,375 500,385" fill="none" stroke="#93C5FD" stroke-width="10" stroke-linecap="round"/>
+  <path d="M 228,405 Q 290,392 345,405 Q 400,418 450,405 Q 480,398 500,405" fill="none" stroke="#BAE6FD" stroke-width="7" stroke-linecap="round" opacity="0.6"/>
+  <!-- 물 입자들 (왼쪽 상단에서 낙하) -->
+  <ellipse cx="310" cy="320" rx="18" ry="25" fill="#60A5FA" opacity="0.9"/>
+  <ellipse cx="350" cy="300" rx="15" ry="22" fill="#93C5FD" opacity="0.8"/>
+  <ellipse cx="390" cy="335" rx="14" ry="20" fill="#60A5FA" opacity="0.7"/>
+  <ellipse cx="270" cy="345" rx="12" ry="18" fill="#BAE6FD" opacity="0.8"/>
+  <!-- 오른쪽 불 영역 -->
+  <rect x="524" y="220" width="280" height="584" rx="20" fill="#7C2D12" opacity="0.15"/>
+  <!-- 불 메인 (오른쪽) -->
+  <path d="M 524,804 L 804,804 L 804,620 Q 780,540 720,500 Q 680,460 700,400 Q 650,440 660,380 Q 620,420 630,360 Q 590,410 600,350 Q 560,400 570,330 Q 530,390 540,320 Q 524,380 524,420 Z" fill="#DC2626" opacity="0.95" filter="url(#glow05)"/>
+  <!-- 불꽃 밝은 부분 -->
+  <path d="M 540,804 L 790,804 L 790,660 Q 770,590 710,558 Q 680,530 700,480 Q 660,510 670,460 Q 640,490 650,445 Q 615,480 625,430 Q 600,470 610,415 Q 580,455 590,400 Q 570,445 575,380 Q 555,420 560,360 Q 545,400 545,440 L 540,804 Z" fill="#EF4444" opacity="0.8"/>
+  <path d="M 570,804 L 770,804 L 770,700 Q 750,640 700,610 Q 680,590 695,555 Q 665,575 675,540 Q 648,560 658,525 Q 635,548 645,510 Q 622,540 632,500 Q 610,530 618,488 Q 598,518 605,475 Q 585,505 590,465 Q 572,495 576,455 L 570,804 Z" fill="#F97316" opacity="0.8"/>
+  <!-- 불꽃 코어 -->
+  <path d="M 620,804 L 740,804 L 740,740 Q 720,680 680,660 Q 665,645 673,615 Q 652,633 660,600 Q 640,623 648,585 L 620,804 Z" fill="#FDE047" opacity="0.7"/>
+  <!-- 충돌 지점 (중앙) 흰 증기 -->
+  <ellipse cx="512" cy="500" rx="45" ry="120" fill="white" opacity="0.15" filter="url(#glow05)"/>
+  <ellipse cx="512" cy="480" rx="30" ry="80" fill="white" opacity="0.2"/>
+  <ellipse cx="512" cy="460" rx="20" ry="50" fill="white" opacity="0.25"/>
+  <!-- 증기 입자들 -->
+  <circle cx="480" cy="350" r="16" fill="#E2E8F0" opacity="0.6"/>
+  <circle cx="512" cy="310" r="20" fill="#F8FAFC" opacity="0.5"/>
+  <circle cx="544" cy="330" r="15" fill="#E2E8F0" opacity="0.6"/>
+  <circle cx="498" cy="270" r="14" fill="#F1F5F9" opacity="0.4"/>
+  <circle cx="526" cy="280" r="12" fill="#E2E8F0" opacity="0.4"/>
+</svg>

@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg4" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4C1D95"/>
+      <stop offset="100%" style="stop-color:#7C3AED"/>
+    </linearGradient>
+    <linearGradient id="piece1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFFFFF"/>
+      <stop offset="100%" style="stop-color:#E0E7FF"/>
+    </linearGradient>
+  </defs>
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="185" fill="url(#bg4)"/>
+
+  <!-- 퍼즐 조각 1 (좌상단) -->
+  <path d="M 230 230 L 430 230 L 430 310
+           Q 460 295 460 330 Q 460 365 430 350
+           L 430 430 L 310 430
+           Q 295 460 330 460 Q 365 460 350 430
+           L 230 430 Z"
+        fill="url(#piece1)" stroke="#C4B5FD" stroke-width="8" stroke-linejoin="round"/>
+  <text x="330" y="370" font-family="Arial Black" font-size="110" font-weight="900" text-anchor="middle" fill="#4C1D95">A</text>
+
+  <!-- 퍼즐 조각 2 (우상단) -->
+  <path d="M 490 230 L 790 230 L 790 430
+           L 690 430
+           Q 675 460 710 460 Q 745 460 730 430
+           L 490 430
+           Q 490 350 510 350 Q 530 350 530 330 Q 530 310 510 310 Q 490 310 490 310 Z"
+        fill="#FDE68A" stroke="#F59E0B" stroke-width="8" stroke-linejoin="round"/>
+  <text x="640" y="370" font-family="Arial Black" font-size="110" font-weight="900" text-anchor="middle" fill="#92400E">B</text>
+
+  <!-- 퍼즐 조각 3 (좌하단) -->
+  <path d="M 230 490 L 350 490
+           Q 365 460 330 460 Q 295 460 310 490
+           L 430 490 L 430 790 L 230 790 Z"
+        fill="#A7F3D0" stroke="#059669" stroke-width="8" stroke-linejoin="round"/>
+  <text x="330" y="680" font-family="Arial Black" font-size="110" font-weight="900" text-anchor="middle" fill="#065F46">C</text>
+
+  <!-- 퍼즐 조각 4 (우하단) -->
+  <path d="M 490 490 L 730 490
+           Q 715 460 680 460 Q 645 460 660 490
+           L 790 490 L 790 790 L 490 790
+           Q 490 710 470 710 Q 450 710 450 690 Q 450 670 470 670 Q 490 670 490 590 Z"
+        fill="#FBCFE8" stroke="#EC4899" stroke-width="8" stroke-linejoin="round"/>
+  <text x="640" y="680" font-family="Arial Black" font-size="110" font-weight="900" text-anchor="middle" fill="#9D174D">D</text>
+
+  <!-- 퍼즐 맞춤 강조 빛 효과 -->
+  <circle cx="512" cy="512" r="40" fill="#FDE047" opacity="0.9"/>
+  <circle cx="512" cy="512" r="25" fill="white" opacity="0.95"/>
+</svg>

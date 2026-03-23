@@ -1,34 +1,15 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <defs>
-    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#1a1a2e"/>
-      <stop offset="100%" stop-color="#16213e"/>
-    </linearGradient>
-    <linearGradient id="folder" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#ffca28"/>
-      <stop offset="100%" stop-color="#f57f17"/>
-    </linearGradient>
-    <linearGradient id="broom" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#a5d6a7"/>
-      <stop offset="100%" stop-color="#388e3c"/>
-    </linearGradient>
-  </defs>
-  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
-  <!-- folder body -->
-  <path d="M80 200 L80 390 L420 390 L420 220 L220 220 L190 200 Z" fill="url(#folder)"/>
-  <path d="M80 200 L80 230 L420 230 L420 220 L220 220 L190 200 Z" fill="#f9a825"/>
-  <!-- folder shine -->
-  <ellipse cx="140" cy="215" rx="30" ry="8" fill="white" opacity="0.2" transform="rotate(-5 140 215)"/>
-  <!-- debris particles -->
-  <circle cx="160" cy="340" r="8" fill="#8d6e63" opacity="0.7"/>
-  <circle cx="220" cy="360" r="6" fill="#78909c" opacity="0.6"/>
-  <circle cx="290" cy="350" r="9" fill="#8d6e63" opacity="0.5"/>
-  <rect x="310" y="345" width="20" height="8" rx="3" fill="#90a4ae" opacity="0.5" transform="rotate(15 320 349)"/>
-  <!-- broom -->
-  <line x1="380" y1="130" x2="200" y2="380" stroke="#8d6e63" stroke-width="12" stroke-linecap="round"/>
-  <path d="M175 370 L225 385 L210 415 L155 420 Z" fill="url(#broom)"/>
-  <path d="M175 370 Q190 385 210 380 Q220 390 225 385" fill="#2e7d32" opacity="0.4"/>
-  <!-- sweep lines -->
-  <path d="M145 430 Q200 420 250 430" stroke="#a5d6a7" stroke-width="3" fill="none" opacity="0.5"/>
-  <path d="M130 445 Q200 435 265 445" stroke="#a5d6a7" stroke-width="2" fill="none" opacity="0.3"/>
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="150" fill="#F97316"/>
+  <!-- Layer 2: Folder shape -->
+  <!-- Folder body -->
+  <rect x="180" y="380" width="640" height="420" rx="22" fill="#FEF9C3"/>
+  <!-- Folder tab -->
+  <rect x="180" y="320" width="220" height="80" rx="16" fill="#FEF9C3"/>
+  <!-- Layer 3: X mark -->
+  <!-- X cross lines -->
+  <line x1="320" y1="450" x2="680" y2="730" stroke="#DC2626" stroke-width="72" stroke-linecap="round"/>
+  <line x1="680" y1="450" x2="320" y2="730" stroke="#DC2626" stroke-width="72" stroke-linecap="round"/>
+  <!-- Empty text inside -->
+  <text x="512" y="810" font-family="Arial,sans-serif" font-size="22" fill="#F97316" text-anchor="middle" opacity="0.8">빈 폴더</text>
 </svg>

@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg_ns04" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0C4A6E"/>
+      <stop offset="100%" stop-color="#082F49"/>
+    </linearGradient>
+    <radialGradient id="glowp_ns04" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#F472B6" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#F472B6" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="c_ns04">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <!-- Layer 1: Deep cyan background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg_ns04)"/>
+  <g clip-path="url(#c_ns04)">
+    <!-- Cyberpunk grid lines -->
+    <line x1="0" y1="200" x2="1024" y2="200" stroke="#22D3EE" stroke-width="3" opacity="0.2"/>
+    <line x1="0" y1="400" x2="1024" y2="400" stroke="#22D3EE" stroke-width="3" opacity="0.2"/>
+    <line x1="0" y1="600" x2="1024" y2="600" stroke="#22D3EE" stroke-width="3" opacity="0.2"/>
+    <line x1="0" y1="800" x2="1024" y2="800" stroke="#22D3EE" stroke-width="3" opacity="0.2"/>
+    <line x1="200" y1="0" x2="200" y2="1024" stroke="#22D3EE" stroke-width="3" opacity="0.2"/>
+    <line x1="400" y1="0" x2="400" y2="1024" stroke="#22D3EE" stroke-width="3" opacity="0.2"/>
+    <line x1="600" y1="0" x2="600" y2="1024" stroke="#22D3EE" stroke-width="3" opacity="0.2"/>
+    <line x1="800" y1="0" x2="800" y2="1024" stroke="#22D3EE" stroke-width="3" opacity="0.2"/>
+    <!-- Perspective lines (horizon effect) -->
+    <line x1="512" y1="800" x2="0" y2="1024" stroke="#22D3EE" stroke-width="2" opacity="0.15"/>
+    <line x1="512" y1="800" x2="256" y2="1024" stroke="#22D3EE" stroke-width="2" opacity="0.15"/>
+    <line x1="512" y1="800" x2="768" y2="1024" stroke="#22D3EE" stroke-width="2" opacity="0.15"/>
+    <line x1="512" y1="800" x2="1024" y2="1024" stroke="#22D3EE" stroke-width="2" opacity="0.15"/>
+    <!-- Layer 2: Big neon pink circle (main game element) -->
+    <circle cx="512" cy="420" r="260" fill="url(#glowp_ns04)"/>
+    <circle cx="512" cy="420" r="220" fill="#0C0A20" stroke="#F472B6" stroke-width="18"/>
+    <!-- Inner glow rings -->
+    <circle cx="512" cy="420" r="170" fill="none" stroke="#F472B6" stroke-width="8" opacity="0.6"/>
+    <circle cx="512" cy="420" r="120" fill="none" stroke="#FB7185" stroke-width="6" opacity="0.4"/>
+    <!-- Score text inside -->
+    <text x="512" y="396" font-family="Arial Black" font-size="72" font-weight="900" fill="#F472B6" text-anchor="middle" opacity="0.9">SCORE</text>
+    <text x="512" y="480" font-family="Arial Black" font-size="100" font-weight="900" fill="white" text-anchor="middle">1024</text>
+    <!-- Layer 3: Slice trail across circle -->
+    <line x1="260" y1="220" x2="764" y2="620" stroke="white" stroke-width="14" stroke-linecap="round" opacity="0.9"/>
+    <line x1="260" y1="220" x2="764" y2="620" stroke="white" stroke-width="5" stroke-linecap="round" opacity="0.5"/>
+    <!-- Combo indicator -->
+    <rect x="312" y="720" width="400" height="80" rx="40" fill="#F472B6"/>
+    <text x="512" y="774" font-family="Arial Black" font-size="56" font-weight="900" fill="white" text-anchor="middle">COMBO x5</text>
+  </g>
+</svg>

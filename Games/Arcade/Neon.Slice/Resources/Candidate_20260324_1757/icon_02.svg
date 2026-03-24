@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="glow_ns02" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#4ADE80" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#4ADE80" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="c_ns02">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <!-- Layer 1: Dark background -->
+  <rect width="1024" height="1024" rx="190" fill="#030712"/>
+  <g clip-path="url(#c_ns02)">
+    <!-- Glow aura -->
+    <circle cx="512" cy="512" r="420" fill="url(#glow_ns02)"/>
+    <!-- Layer 2: Slash mark (X shape) -->
+    <!-- Slash 1 -->
+    <line x1="220" y1="220" x2="804" y2="804" stroke="#4ADE80" stroke-width="80" stroke-linecap="round"/>
+    <line x1="220" y1="220" x2="804" y2="804" stroke="#86EFAC" stroke-width="28" stroke-linecap="round"/>
+    <!-- Slash 2 -->
+    <line x1="804" y1="220" x2="220" y2="804" stroke="#4ADE80" stroke-width="80" stroke-linecap="round"/>
+    <line x1="804" y1="220" x2="220" y2="804" stroke="#86EFAC" stroke-width="28" stroke-linecap="round"/>
+    <!-- Layer 3: Explosion particles -->
+    <circle cx="512" cy="512" r="52" fill="#FEF08A"/>
+    <circle cx="512" cy="512" r="32" fill="#FCD34D"/>
+    <!-- Burst dots around center -->
+    <circle cx="512" cy="280" r="26" fill="#4ADE80"/>
+    <circle cx="512" cy="744" r="26" fill="#4ADE80"/>
+    <circle cx="280" cy="512" r="26" fill="#4ADE80"/>
+    <circle cx="744" cy="512" r="26" fill="#4ADE80"/>
+    <circle cx="344" cy="344" r="20" fill="#86EFAC"/>
+    <circle cx="680" cy="344" r="20" fill="#86EFAC"/>
+    <circle cx="344" cy="680" r="20" fill="#86EFAC"/>
+    <circle cx="680" cy="680" r="20" fill="#86EFAC"/>
+    <!-- Small particles -->
+    <circle cx="440" cy="310" r="14" fill="#FCD34D"/>
+    <circle cx="584" cy="310" r="14" fill="#F472B6"/>
+    <circle cx="714" cy="440" r="14" fill="#22D3EE"/>
+    <circle cx="714" cy="584" r="14" fill="#FCD34D"/>
+    <circle cx="440" cy="714" r="14" fill="#F472B6"/>
+    <circle cx="310" cy="440" r="14" fill="#22D3EE"/>
+  </g>
+</svg>

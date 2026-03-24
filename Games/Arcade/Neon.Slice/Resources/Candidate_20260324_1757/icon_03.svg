@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg_ns03" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3B0764"/>
+      <stop offset="100%" stop-color="#1E0535"/>
+    </linearGradient>
+    <clipPath id="c_ns03">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <!-- Layer 1: Deep purple background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg_ns03)"/>
+  <g clip-path="url(#c_ns03)">
+    <!-- Layer 2: Lightning bolt (⚡ shape as path) -->
+    <!-- Lightning bolt path -->
+    <polygon points="580,120 340,540 520,540 444,904 764,424 560,424 660,120" fill="#FDE047"/>
+    <polygon points="580,120 340,540 520,540 444,904 764,424 560,424 660,120" fill="none" stroke="#FEF08A" stroke-width="8"/>
+    <!-- Glow around lightning -->
+    <polygon points="580,120 340,540 520,540 444,904 764,424 560,424 660,120" fill="#FDE047" opacity="0.3" filter="url(#blur03)"/>
+    <!-- Split shape halves (geometric) -->
+    <!-- Left half of a circle (being sliced) -->
+    <path d="M240 420 A160 160 0 0 0 240 740 Z" fill="#A855F7" opacity="0.9"/>
+    <path d="M240 420 A160 160 0 0 0 240 740 Z" fill="none" stroke="#C084FC" stroke-width="12"/>
+    <!-- Right half -->
+    <path d="M240 420 A160 160 0 0 1 240 740 Z" fill="#7C3AED" opacity="0.9"/>
+    <path d="M240 420 A160 160 0 0 1 240 740 Z" fill="none" stroke="#A78BFA" stroke-width="12"/>
+    <!-- Particle burst from split -->
+    <circle cx="240" cy="580" r="16" fill="#E879F9"/>
+    <circle cx="180" cy="540" r="12" fill="#D946EF"/>
+    <circle cx="300" cy="540" r="12" fill="#C026D3"/>
+    <circle cx="180" cy="620" r="10" fill="#E879F9"/>
+    <circle cx="300" cy="620" r="10" fill="#D946EF"/>
+    <!-- Layer 3: Electric glow dots -->
+    <circle cx="560" cy="430" r="28" fill="#FEF08A"/>
+    <circle cx="490" cy="540" r="20" fill="#FDE047"/>
+    <circle cx="444" cy="650" r="16" fill="#FCD34D"/>
+    <circle cx="430" cy="740" r="12" fill="#FEF08A"/>
+  </g>
+</svg>

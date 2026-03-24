@@ -193,9 +193,12 @@ public static class ImageConverter
         if (svg.Picture is null)
             throw new InvalidOperationException("SVG 파싱 실패");
 
-        float srcW = svg.Picture.CullRect.Width;
-        float srcH = svg.Picture.CullRect.Height;
-        if (srcW <= 0 || srcH <= 0) { srcW = size; srcH = size; }
+        var cullRect = svg.Picture.CullRect;
+        float left = cullRect.Left;
+        float top  = cullRect.Top;
+        float srcW = cullRect.Width;
+        float srcH = cullRect.Height;
+        if (srcW <= 0 || srcH <= 0) { left = 0; top = 0; srcW = size; srcH = size; }
 
         // 소형 사이즈는 2x 슈퍼샘플링으로 계단 현상 방지
         int renderSize = size < 64 ? size * 2 : size;
@@ -206,8 +209,9 @@ public static class ImageConverter
             canvas.Clear(SKColors.Transparent);
 
             float scale = Math.Min(renderSize / srcW, renderSize / srcH);
-            float dx = (renderSize - srcW * scale) / 2f;
-            float dy = (renderSize - srcH * scale) / 2f;
+            // CullRect의 Left/Top 오프셋을 translate에 반영해 콘텐츠가 캔버스에 정확히 센터링
+            float dx = (renderSize - srcW * scale) / 2f - left * scale;
+            float dy = (renderSize - srcH * scale) / 2f - top  * scale;
 
             canvas.Translate(dx, dy);
             canvas.Scale(scale);

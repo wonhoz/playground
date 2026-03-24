@@ -25,6 +25,11 @@ internal static class SvgPreprocessor
         @"<feDropShadow([^/]*?)/>",
         RegexOptions.Compiled | RegexOptions.Singleline);
 
+    // <filter ...> — 명시적 x 속성이 없는 filter 태그 검색
+    static readonly Regex FilterTagRegex = new(
+        @"<filter\b([^>]*?)>",
+        RegexOptions.Compiled | RegexOptions.Singleline);
+
     // 특정 속성 추출
     static readonly Regex AttrRegex = new(
         @"(\w[\w-]*)=""([^""]*)""",
@@ -34,9 +39,23 @@ internal static class SvgPreprocessor
     {
         svgText = ConvertHex8AttrColors(svgText);
         svgText = ConvertHex8CssColors(svgText);
+        // feDropShadow 확장 전에 필터 영역을 명시적으로 지정
+        // (기본값 -10%/+120%는 폰트 메트릭에 따라 첫/끝 글자가 클리핑될 수 있음)
+        if (DropShadowRegex.IsMatch(svgText))
+            svgText = EnsureFilterRegion(svgText);
         svgText = ExpandDropShadows(svgText);
         return svgText;
     }
+
+    // feDropShadow를 포함하는 SVG에서 <filter> 요소에 명시적 영역 속성 추가
+    static string EnsureFilterRegion(string svg) =>
+        FilterTagRegex.Replace(svg, m =>
+        {
+            string attrs = m.Groups[1].Value;
+            // 이미 x 속성이 있으면 그대로 유지
+            if (Regex.IsMatch(attrs, @"\bx\s*=")) return m.Value;
+            return $"<filter{attrs} x=\"-25%\" y=\"-25%\" width=\"150%\" height=\"150%\">";
+        });
 
     // ─── attribute 형식: fill="#RRGGBBAA" → fill="#RRGGBB" fill-opacity="X" ──
     static string ConvertHex8AttrColors(string svg) =>

@@ -30,17 +30,57 @@ public partial class MainWindow : Window
     private string _currentTheme = "dark";
     private double _pendingScrollY = 0;
     private bool _webViewReady = false;
+    private FileSystemWatcher? _fileWatcher;
+    private double _editorFontSize = 13;
 
     public MainWindow()
     {
         _settings = AppSettings.Load();
         _currentTheme = _settings.Theme;
+        _editorFontSize = _settings.EditorFontSize;
         InitializeComponent();
+        RestoreWindowBounds();
         ApplySavedTheme();
+        ApplyEditorFontSize();
         InitWebView();
         SetupPreviewTimer();
         SetupAutoSaveTimer();
         RefreshRecentList();
+    }
+
+    private void RestoreWindowBounds()
+    {
+        if (!double.IsNaN(_settings.WindowLeft) && !double.IsNaN(_settings.WindowTop))
+        {
+            Left = _settings.WindowLeft;
+            Top = _settings.WindowTop;
+        }
+        Width = _settings.WindowWidth;
+        Height = _settings.WindowHeight;
+    }
+
+    private void SaveWindowBounds()
+    {
+        if (WindowState == WindowState.Normal)
+        {
+            _settings.WindowLeft = Left;
+            _settings.WindowTop = Top;
+            _settings.WindowWidth = Width;
+            _settings.WindowHeight = Height;
+        }
+    }
+
+    private void ApplyEditorFontSize()
+    {
+        Editor.FontSize = _editorFontSize;
+    }
+
+    private void AdjustEditorFontSize(double delta)
+    {
+        _editorFontSize = Math.Clamp(_editorFontSize + delta, 8, 32);
+        Editor.FontSize = _editorFontSize;
+        _settings.EditorFontSize = _editorFontSize;
+        _settings.Save();
     }
 
     private void ApplySavedTheme()
@@ -100,13 +140,22 @@ public partial class MainWindow : Window
     private async void InitWebView()
     {
         ShowLoading("WebView2 초기화 중...");
-        var env = await CoreWebView2Environment.CreateAsync();
-        await Viewer.EnsureCoreWebView2Async(env);
-        Viewer.CoreWebView2.Settings.IsStatusBarEnabled = false;
-        Viewer.CoreWebView2.Settings.AreDefaultContextMenusEnabled = false;
-        Viewer.CoreWebView2.NavigationCompleted += OnNavigationCompleted;
-        _webViewReady = true;
-        HideLoading();
+        try
+        {
+            var env = await CoreWebView2Environment.CreateAsync();
+            await Viewer.EnsureCoreWebView2Async(env);
+            Viewer.CoreWebView2.Settings.IsStatusBarEnabled = false;
+            Viewer.CoreWebView2.Settings.AreDefaultContextMenusEnabled = false;
+            Viewer.CoreWebView2.NavigationCompleted += OnNavigationCompleted;
+            _webViewReady = true;
+            HideLoading();
+        }
+        catch (Exception ex)
+        {
+            HideLoading();
+            MessageBox.Show($"WebView2 초기화 실패:\n{ex.Message}\n\nMicrosoft Edge WebView2 런타임이 설치되어 있는지 확인하세요.",
+                "초기화 오류", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
     }
 
     private void OnNavigationCompleted(object? sender, CoreWebView2NavigationCompletedEventArgs e)
@@ -150,12 +199,11 @@ public partial class MainWindow : Window
                     var els = document.querySelectorAll('h1,h2,h3,h4,h5,h6');
                     var result = [];
                     els.forEach(function(el) {
-                        result.push(JSON.stringify({level: parseInt(el.tagName[1]), text: el.textContent, id: el.id}));
+                        result.push({level: parseInt(el.tagName[1]), text: el.textContent, id: el.id});
                     });
-                    return '[' + result.join(',') + ']';
+                    return JSON.stringify(result);
                 })()
             ");
-            // JSON 파싱
             PopulateToc(json);
         }
         catch { }
@@ -163,29 +211,33 @@ public partial class MainWindow : Window
 
     private record TocEntry(int Level, string Text, string Id);
 
+    private static readonly System.Text.Json.JsonSerializerOptions _jsonOpts =
+        new() { PropertyNameCaseInsensitive = true };
+
     private void PopulateToc(string json)
     {
         TocList.Items.Clear();
-        json = json.Trim('"');
-        // unescape
-        json = Regex.Unescape(json.Replace("\\\"", "\""));
-        var matches = Regex.Matches(json, @"\{""level"":(\d),""text"":""([^""]*)"",""id"":""([^""]*)""\}");
-        foreach (Match m in matches)
+        try
         {
-            int level = int.Parse(m.Groups[1].Value);
-            string text = m.Groups[2].Value;
-            string id = m.Groups[3].Value;
-            var indent = new string(' ', (level - 1) * 2);
-            var item = new ListBoxItem
+            // ExecuteScriptAsync가 JS 반환값을 JSON 문자열로 래핑 — 먼저 언래핑
+            var inner = System.Text.Json.JsonSerializer.Deserialize<string>(json);
+            if (string.IsNullOrEmpty(inner)) return;
+            var entries = System.Text.Json.JsonSerializer.Deserialize<List<TocEntry>>(inner, _jsonOpts);
+            if (entries == null) return;
+            foreach (var entry in entries)
             {
-                Content = indent + text,
-                Tag = id,
-                Padding = new Thickness(12 + (level - 1) * 8, 4, 8, 4),
-                FontSize = level == 1 ? 13 : level == 2 ? 12 : 11,
-                FontWeight = level <= 2 ? FontWeights.SemiBold : FontWeights.Normal,
-            };
-            TocList.Items.Add(item);
+                var item = new ListBoxItem
+                {
+                    Content = entry.Text,
+                    Tag = entry.Id,
+                    Padding = new Thickness(12 + (entry.Level - 1) * 8, 4, 8, 4),
+                    FontSize = entry.Level == 1 ? 13 : entry.Level == 2 ? 12 : 11,
+                    FontWeight = entry.Level <= 2 ? FontWeights.SemiBold : FontWeights.Normal,
+                };
+                TocList.Items.Add(item);
+            }
         }
+        catch { }
     }
 
     // ── 프리뷰 타이머 ───────────────────────────────────────────────────
@@ -770,6 +822,20 @@ public partial class MainWindow : Window
         { SwitchTo((_activeIndex - 1 + _docs.Count) % _docs.Count); e.Handled = true; }
         else if (e.Key == Key.P && Keyboard.Modifiers == ModifierKeys.Control)
         { BtnExportPdf_Click(this, new RoutedEventArgs()); e.Handled = true; }
+        else if (e.Key == Key.OemPlus && Keyboard.Modifiers == ModifierKeys.Control)
+        { AdjustEditorFontSize(1); e.Handled = true; }
+        else if (e.Key == Key.OemMinus && Keyboard.Modifiers == ModifierKeys.Control)
+        { AdjustEditorFontSize(-1); e.Handled = true; }
+    }
+
+    protected override void OnPreviewMouseWheel(MouseWheelEventArgs e)
+    {
+        base.OnPreviewMouseWheel(e);
+        if (Keyboard.Modifiers == ModifierKeys.Control)
+        {
+            AdjustEditorFontSize(e.Delta > 0 ? 1 : -1);
+            e.Handled = true;
+        }
     }
 
     // ── 드래그 앤 드롭 ───────────────────────────────────────────────────
@@ -799,6 +865,7 @@ public partial class MainWindow : Window
             _settings.AddRecentFile(path);
             _settings.Save();
             RefreshRecentList();
+            SetupFileWatcher(path);
         }
         catch (Exception ex)
         {
@@ -807,6 +874,74 @@ public partial class MainWindow : Window
                 MessageBoxButton.OK, MessageBoxImage.Error);
         }
         // 정상 경로는 RenderPreview → NavigationCompleted 에서 HideLoading 호출
+    }
+
+    // ── 파일 변경 감지 ───────────────────────────────────────────────────
+
+    private void SetupFileWatcher(string filePath)
+    {
+        _fileWatcher?.Dispose();
+        var dir = Path.GetDirectoryName(filePath);
+        if (dir == null) return;
+        _fileWatcher = new FileSystemWatcher(dir, Path.GetFileName(filePath))
+        {
+            NotifyFilter = NotifyFilters.LastWrite | NotifyFilters.Size,
+            EnableRaisingEvents = true,
+        };
+        _fileWatcher.Changed += OnWatchedFileChanged;
+    }
+
+    private DispatcherTimer? _fileChangedDebounce;
+
+    private void OnWatchedFileChanged(object sender, FileSystemEventArgs e)
+    {
+        Dispatcher.Invoke(() =>
+        {
+            _fileChangedDebounce?.Stop();
+            _fileChangedDebounce = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(500) };
+            _fileChangedDebounce.Tick += (_, _) =>
+            {
+                _fileChangedDebounce?.Stop();
+                NotifyFileChanged(e.FullPath);
+            };
+            _fileChangedDebounce.Start();
+        });
+    }
+
+    private void NotifyFileChanged(string path)
+    {
+        var idx = _docs.FindIndex(d => string.Equals(d.FilePath, path, StringComparison.OrdinalIgnoreCase));
+        if (idx < 0) return;
+
+        var doc = _docs[idx];
+        if (doc.IsModified)
+        {
+            var result = MessageBox.Show(
+                $"'{doc.FileName}' 파일이 외부에서 변경되었습니다.\n수정 중인 내용을 버리고 다시 불러오시겠습니까?",
+                "파일 변경 감지",
+                MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result != MessageBoxResult.Yes) return;
+        }
+
+        _ = ReloadDocumentAsync(idx);
+    }
+
+    private async Task ReloadDocumentAsync(int index)
+    {
+        if (index < 0 || index >= _docs.Count) return;
+        var doc = _docs[index];
+        if (doc.IsNew || !File.Exists(doc.FilePath)) return;
+
+        await Task.Delay(100); // 파일 락 해제 대기
+        try
+        {
+            doc.Content = await Task.Run(() => File.ReadAllText(doc.FilePath));
+            doc.IsModified = false;
+            if (index == _activeIndex)
+                LoadDocumentToUI(doc);
+            UpdateTabTitle(index);
+        }
+        catch { }
     }
 
     // ── 최근 파일 ────────────────────────────────────────────────────────
@@ -859,15 +994,32 @@ public partial class MainWindow : Window
     {
         base.OnClosing(e);
         var modified = _docs.Where(d => d.IsModified).ToList();
-        if (modified.Count == 0) return;
+        if (modified.Count == 0)
+        {
+            SaveWindowBounds();
+            _settings.Save();
+            _fileWatcher?.Dispose();
+            return;
+        }
 
         var names = string.Join("\n  • ", modified.Select(d => d.FileName));
         var result = MessageBox.Show(
-            $"저장되지 않은 파일이 있습니다:\n  • {names}\n\n종료하시겠습니까?",
+            $"저장되지 않은 파일이 있습니다:\n  • {names}\n\n저장 후 종료하시겠습니까?",
             "종료 확인",
-            MessageBoxButton.YesNo,
+            MessageBoxButton.YesNoCancel,
             MessageBoxImage.Question);
-        if (result == MessageBoxResult.No)
+        if (result == MessageBoxResult.Cancel)
+        {
             e.Cancel = true;
+            return;
+        }
+        if (result == MessageBoxResult.Yes)
+        {
+            foreach (var doc in modified)
+                SaveDocument(doc);
+        }
+        SaveWindowBounds();
+        _settings.Save();
+        _fileWatcher?.Dispose();
     }
 }

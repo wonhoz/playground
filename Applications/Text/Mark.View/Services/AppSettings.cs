@@ -11,6 +11,11 @@ public class AppSettings
 
     public string Theme { get; set; } = "dark";
     public List<string> RecentFiles { get; set; } = [];
+    public double WindowLeft { get; set; } = double.NaN;
+    public double WindowTop { get; set; } = double.NaN;
+    public double WindowWidth { get; set; } = 1200;
+    public double WindowHeight { get; set; } = 800;
+    public double EditorFontSize { get; set; } = 13;
 
     private const int MaxRecentFiles = 10;
 

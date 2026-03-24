@@ -161,8 +161,8 @@ html { background: var(--bg); color: var(--text); }",
 html { background: var(--bg); color: var(--text); }",
 
         _ => @":root {
-  --bg: #1e1e2e; --surface: #2a2a3d; --border: #3a3a4d;
-  --text: #cdd6f4; --text-dim: #888aa8;
+  --bg: #181e2e; --surface: #1e2840; --border: #2a3654;
+  --text: #cdd6f4; --text-dim: #7a90b8;
   --h1: #89b4fa; --h2: #cba6f7; --h3: #94e2d5; --h4: #a6e3a1;
   --code-bg: #181825; --code-text: #fab387;
   --blockquote-border: #89b4fa; --link: #89dceb;

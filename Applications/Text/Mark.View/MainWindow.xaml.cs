@@ -743,30 +743,73 @@ public partial class MainWindow : Window
 
     private void Editor_KeyDown(object sender, KeyEventArgs e)
     {
-        // Tab 키 처리 (들여쓰기)
-        if (e.Key == Key.Tab)
+        if (e.Key != Key.Tab) return;
+        e.Handled = true;
+
+        bool shift = Keyboard.Modifiers == ModifierKeys.Shift;
+        if (Editor.SelectionLength > 0)
         {
-            e.Handled = true;
-            int caret = Editor.CaretIndex;
-            if (Keyboard.Modifiers == ModifierKeys.Shift)
+            IndentSelection(shift);
+            return;
+        }
+
+        int caret = Editor.CaretIndex;
+        if (shift)
+        {
+            // 역들여쓰기: 캐럿 앞 공백 최대 4개 제거
+            if (caret > 0 && Editor.Text[caret - 1] == ' ')
             {
-                // 역들여쓰기
-                if (caret > 0 && Editor.Text[caret - 1] == ' ')
-                {
-                    int start = caret - 1;
-                    int count = 1;
-                    while (start > 0 && count < 4 && Editor.Text[start - 1] == ' ')
-                    { start--; count++; }
-                    Editor.Text = Editor.Text.Remove(start, count);
-                    Editor.CaretIndex = start;
-                }
+                int start = caret - 1;
+                int count = 1;
+                while (start > 0 && count < 4 && Editor.Text[start - 1] == ' ')
+                { start--; count++; }
+                Editor.Text = Editor.Text.Remove(start, count);
+                Editor.CaretIndex = start;
+            }
+        }
+        else
+        {
+            Editor.Text = Editor.Text.Insert(caret, "    ");
+            Editor.CaretIndex = caret + 4;
+        }
+    }
+
+    private void IndentSelection(bool dedent)
+    {
+        string text = Editor.Text;
+        int selStart = Editor.SelectionStart;
+        int selEnd = selStart + Editor.SelectionLength;
+
+        // 선택 범위를 줄 경계로 확장
+        int lineStart = selStart > 0 ? text.LastIndexOf('\n', selStart - 1) + 1 : 0;
+
+        // selEnd가 줄 시작(\n 직후)이면 그 줄은 제외
+        int lastPos = (selEnd > lineStart && selEnd > 0 && selEnd <= text.Length
+                       && text[selEnd - 1] == '\n') ? selEnd - 1 : selEnd;
+        int lineEnd = lastPos >= text.Length ? text.Length : text.IndexOf('\n', lastPos);
+        if (lineEnd < 0) lineEnd = text.Length;
+        if (lineEnd < lineStart) lineEnd = lineStart;
+
+        string[] lines = text[lineStart..lineEnd].Split('\n');
+        var sb = new StringBuilder();
+        for (int i = 0; i < lines.Length; i++)
+        {
+            if (i > 0) sb.Append('\n');
+            if (dedent)
+            {
+                int spaces = 0;
+                while (spaces < 4 && spaces < lines[i].Length && lines[i][spaces] == ' ')
+                    spaces++;
+                sb.Append(lines[i].AsSpan(spaces));
             }
             else
             {
-                Editor.Text = Editor.Text.Insert(caret, "    ");
-                Editor.CaretIndex = caret + 4;
+                sb.Append("    ").Append(lines[i]);
             }
         }
+
+        Editor.Text = text[..lineStart] + sb + text[lineEnd..];
+        Editor.Select(lineStart, sb.Length);
     }
 
     private void TxtFind_TextChanged(object sender, TextChangedEventArgs e)

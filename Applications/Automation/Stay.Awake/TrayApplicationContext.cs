@@ -436,7 +436,7 @@ namespace StayAwake
                 : "마우스 이동";
 
             var version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
-            var versionStr = version != null ? $"v{version.Major}.{version.Minor}" : "v1.3";
+            var versionStr = version != null ? $"v{version.Major}.{version.Minor}.{version.Build}" : "v1.3.0";
             var message = $@"StayAwake {versionStr}
 
 Slack 자리 비움 상태 방지 도구
@@ -463,6 +463,8 @@ Slack 자리 비움 상태 방지 도구
 [사용법]
 • 더블클릭: 시작/정지 토글
 • 우클릭: 메뉴 열기
+• 트레이 호버: 다음 활동까지 남은 시간 표시
+• 오늘 통계 메뉴: 활성 시간 및 비율 확인
 • 권장 간격: 3~5분
 
 © 2026 SmartCareworks Inc.";

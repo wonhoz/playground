@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg_ic02" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0EA5E9"/>
+      <stop offset="100%" stop-color="#0369A1"/>
+    </linearGradient>
+    <clipPath id="c_ic02">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <!-- Layer 1: Background sky blue -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg_ic02)"/>
+  <g clip-path="url(#c_ic02)">
+    <!-- Layer 2: Stacked format cards -->
+    <!-- Back cards (shadow) -->
+    <rect x="212" y="292" width="600" height="440" rx="44" fill="#0C4A6E" transform="rotate(-6 512 512)"/>
+    <rect x="212" y="292" width="600" height="440" rx="44" fill="#0369A1" transform="rotate(-2 512 512)"/>
+    <!-- Front card -->
+    <rect x="212" y="292" width="600" height="440" rx="44" fill="#FFFFFF"/>
+    <!-- Card content: format icons grid 2x2 -->
+    <!-- SVG (green) -->
+    <rect x="264" y="344" width="220" height="150" rx="28" fill="#DCFCE7"/>
+    <text x="374" y="438" font-family="Arial Black" font-size="80" font-weight="900" fill="#15803D" text-anchor="middle">SVG</text>
+    <!-- PNG (blue) -->
+    <rect x="540" y="344" width="220" height="150" rx="28" fill="#DBEAFE"/>
+    <text x="650" y="438" font-family="Arial Black" font-size="80" font-weight="900" fill="#1D4ED8" text-anchor="middle">PNG</text>
+    <!-- JPG (orange) -->
+    <rect x="264" y="520" width="220" height="150" rx="28" fill="#FEF3C7"/>
+    <text x="374" y="614" font-family="Arial Black" font-size="80" font-weight="900" fill="#D97706" text-anchor="middle">JPG</text>
+    <!-- ICO (purple) -->
+    <rect x="540" y="520" width="220" height="150" rx="28" fill="#F5F3FF"/>
+    <text x="650" y="614" font-family="Arial Black" font-size="80" font-weight="900" fill="#7C3AED" text-anchor="middle">ICO</text>
+    <!-- Layer 3: Convert arrow + sparkle -->
+    <circle cx="760" cy="200" r="80" fill="#FCD34D"/>
+    <path d="M720 200 Q760 160 800 200" stroke="#1E40AF" stroke-width="20" fill="none" stroke-linecap="round"/>
+    <polygon points="795,186 820,208 798,228" fill="#1E40AF"/>
+  </g>
+</svg>

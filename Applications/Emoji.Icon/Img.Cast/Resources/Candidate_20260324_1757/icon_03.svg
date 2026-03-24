@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg_ic03" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#DC2626"/>
+      <stop offset="100%" stop-color="#7C2D12"/>
+    </linearGradient>
+    <radialGradient id="fire03" cx="50%" cy="100%" r="60%">
+      <stop offset="0%" stop-color="#FDE047"/>
+      <stop offset="60%" stop-color="#F97316"/>
+      <stop offset="100%" stop-color="#DC2626"/>
+    </radialGradient>
+    <clipPath id="c_ic03">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <!-- Layer 1: Deep red background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg_ic03)"/>
+  <g clip-path="url(#c_ic03)">
+    <!-- Layer 2: Cauldron/cast pot -->
+    <!-- Cauldron body -->
+    <ellipse cx="512" cy="700" rx="280" ry="180" fill="#1C1917"/>
+    <rect x="232" y="620" width="560" height="160" rx="40" fill="#292524"/>
+    <ellipse cx="512" cy="620" rx="280" ry="60" fill="#44403C"/>
+    <!-- Handles -->
+    <path d="M232 680 Q172 640 192 580 Q212 520 272 580" fill="none" stroke="#57534E" stroke-width="36" stroke-linecap="round"/>
+    <path d="M792 680 Q852 640 832 580 Q812 520 752 580" fill="none" stroke="#57534E" stroke-width="36" stroke-linecap="round"/>
+    <!-- Fire/flames from cauldron -->
+    <ellipse cx="512" cy="580" rx="160" ry="80" fill="url(#fire03)" opacity="0.9"/>
+    <ellipse cx="430" cy="540" rx="80" ry="120" fill="#FDE047" opacity="0.7"/>
+    <ellipse cx="590" cy="540" rx="70" ry="110" fill="#F97316" opacity="0.7"/>
+    <ellipse cx="512" cy="480" rx="60" ry="100" fill="#FCD34D" opacity="0.8"/>
+    <!-- Floating file icons (being cast/transformed) -->
+    <!-- Input: SVG file going in -->
+    <rect x="640" y="320" width="160" height="200" rx="20" fill="#7C3AED" opacity="0.9" transform="rotate(15 720 420)"/>
+    <polygon points="760,320 800,320 800,360" fill="#5B21B6" transform="rotate(15 720 420)"/>
+    <text x="720" y="438" font-family="Arial Black" font-size="52" font-weight="900" fill="white" text-anchor="middle" transform="rotate(15 720 420)">SVG</text>
+    <!-- Output: PNG emerging from flame -->
+    <rect x="224" y="300" width="160" height="200" rx="20" fill="#22C55E" opacity="0.9" transform="rotate(-12 304 400)"/>
+    <polygon points="344,300 384,300 384,340" fill="#15803D" transform="rotate(-12 304 400)"/>
+    <text x="304" y="418" font-family="Arial Black" font-size="52" font-weight="900" fill="white" text-anchor="middle" transform="rotate(-12 304 400)">PNG</text>
+    <!-- Layer 3: Sparkles -->
+    <circle cx="512" cy="350" r="22" fill="#FEF08A"/>
+    <circle cx="450" cy="290" r="16" fill="#FCD34D"/>
+    <circle cx="570" cy="280" r="18" fill="#FEF08A"/>
+    <circle cx="420" cy="320" r="12" fill="#FBBF24"/>
+    <circle cx="600" cy="310" r="14" fill="#FDE68A"/>
+  </g>
+</svg>

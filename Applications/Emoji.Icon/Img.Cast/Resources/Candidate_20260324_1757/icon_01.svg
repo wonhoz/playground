@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg_ic01" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#6D28D9"/>
+      <stop offset="100%" stop-color="#4C1D95"/>
+    </linearGradient>
+    <clipPath id="c_ic01">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg_ic01)"/>
+  <!-- Layer 2: Magic wand + file conversion -->
+  <g clip-path="url(#c_ic01)">
+    <!-- Wand handle (diagonal) -->
+    <line x1="720" y1="220" x2="304" y2="804" stroke="#F59E0B" stroke-width="72" stroke-linecap="round"/>
+    <!-- Wand tip glow -->
+    <circle cx="720" cy="220" r="80" fill="#FDE68A" opacity="0.6"/>
+    <circle cx="720" cy="220" r="52" fill="#FCD34D"/>
+    <!-- Source file (left) -->
+    <rect x="108" y="380" width="200" height="240" rx="24" fill="#A78BFA"/>
+    <text x="162" y="494" font-family="Arial Black" font-size="64" font-weight="900" fill="white" text-anchor="middle">SVG</text>
+    <polygon points="268,380 308,380 308,420" fill="#7C3AED"/>
+    <!-- Arrow -->
+    <path d="M348 512 L520 512" stroke="#E9D5FF" stroke-width="52" stroke-linecap="round"/>
+    <polygon points="510,470 596,512 510,554" fill="#E9D5FF"/>
+    <!-- Output file (right) -->
+    <rect x="616" y="380" width="200" height="240" rx="24" fill="#34D399"/>
+    <text x="670" y="494" font-family="Arial Black" font-size="64" font-weight="900" fill="white" text-anchor="middle">ICO</text>
+    <polygon points="776,380 816,380 816,420" fill="#059669"/>
+    <!-- Layer 3: Sparkles -->
+    <circle cx="500" cy="300" r="26" fill="#FEF08A"/>
+    <circle cx="420" cy="350" r="18" fill="#FCD34D"/>
+    <circle cx="560" cy="260" r="22" fill="#FEF3C7"/>
+    <circle cx="600" cy="340" r="14" fill="#FDE68A"/>
+  </g>
+</svg>

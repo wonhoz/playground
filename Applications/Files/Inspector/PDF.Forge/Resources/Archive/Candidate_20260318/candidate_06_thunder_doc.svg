@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#180a04"/>
+      <stop offset="100%" stop-color="#030508"/>
+    </radialGradient>
+    <linearGradient id="stormCloud" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3d1808"/>
+      <stop offset="100%" stop-color="#1a0a04"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="bolt">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="softglow">
+      <feGaussianBlur stdDeviation="2.5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <rect width="512" height="512" fill="url(#bg)"/>
+
+  <!-- Storm clouds (dark, fiery) -->
+  <ellipse cx="180" cy="100" rx="120" ry="60" fill="url(#stormCloud)" stroke="#F97316" stroke-width="1.5" stroke-opacity="0.4"/>
+  <ellipse cx="330" cy="90" rx="110" ry="55" fill="url(#stormCloud)" stroke="#EF4444" stroke-width="1.5" stroke-opacity="0.35"/>
+  <ellipse cx="256" cy="80" rx="90" ry="50" fill="#2a0e04" stroke="#F97316" stroke-width="1.5" stroke-opacity="0.4"/>
+  <!-- Cloud glow -->
+  <ellipse cx="256" cy="115" rx="220" ry="55" fill="#F97316" fill-opacity="0.04" filter="url(#glow)"/>
+
+  <!-- Lightning bolt (main) -->
+  <path d="M280,60 L240,180 L265,180 L225,310 L252,310 L210,460"
+    fill="#F97316" fill-opacity="0.15" stroke="#F97316" stroke-width="5" stroke-linejoin="round" filter="url(#bolt)" stroke-opacity="0.9"/>
+  <path d="M280,60 L240,180 L265,180 L225,310 L252,310 L210,460"
+    fill="none" stroke="#EF4444" stroke-width="3" stroke-linejoin="round" stroke-opacity="0.8"/>
+  <path d="M280,60 L240,180 L265,180 L225,310 L252,310 L210,460"
+    fill="none" stroke="white" stroke-width="1.5" stroke-linejoin="round" stroke-opacity="0.5"/>
+
+  <!-- Secondary bolt -->
+  <path d="M340,80 L315,175 L335,175 L310,270"
+    fill="none" stroke="#EF4444" stroke-width="3" stroke-linejoin="round" filter="url(#glow)" stroke-opacity="0.7"/>
+  <path d="M340,80 L315,175 L335,175 L310,270"
+    fill="none" stroke="#F97316" stroke-width="1.5" stroke-linejoin="round" stroke-opacity="0.5"/>
+
+  <!-- Document struck by lightning (right side) -->
+  <rect x="310" y="300" width="145" height="180" rx="7" fill="#1e0a04" stroke="#F97316" stroke-width="2.5" stroke-opacity="0.8" filter="url(#softglow)"/>
+  <!-- Doc corner fold -->
+  <polygon points="420,300 455,300 455,335" fill="#120604" stroke="#F97316" stroke-width="1.5" stroke-opacity="0.6"/>
+  <line x1="420" y1="300" x2="455" y2="335" stroke="#F97316" stroke-width="1.5" stroke-opacity="0.6"/>
+  <!-- PDF label on doc -->
+  <rect x="322" y="316" width="50" height="14" rx="7" fill="#F97316" fill-opacity="0.5" filter="url(#softglow)"/>
+  <!-- Doc lines -->
+  <line x1="322" y1="342" x2="442" y2="342" stroke="#F97316" stroke-width="1.5" stroke-opacity="0.5"/>
+  <line x1="322" y1="357" x2="430" y2="357" stroke="#EF4444" stroke-width="1.5" stroke-opacity="0.4"/>
+  <line x1="322" y1="372" x2="442" y2="372" stroke="#F97316" stroke-width="1.5" stroke-opacity="0.5"/>
+  <line x1="322" y1="387" x2="415" y2="387" stroke="#EF4444" stroke-width="1" stroke-opacity="0.35"/>
+  <line x1="322" y1="402" x2="442" y2="402" stroke="#F97316" stroke-width="1.5" stroke-opacity="0.45"/>
+  <line x1="322" y1="417" x2="425" y2="417" stroke="#EF4444" stroke-width="1" stroke-opacity="0.35"/>
+  <line x1="322" y1="432" x2="442" y2="432" stroke="#F97316" stroke-width="1.5" stroke-opacity="0.4"/>
+  <line x1="322" y1="447" x2="410" y2="447" stroke="#EF4444" stroke-width="1" stroke-opacity="0.3"/>
+  <line x1="322" y1="462" x2="442" y2="462" stroke="#F97316" stroke-width="1" stroke-opacity="0.35"/>
+
+  <!-- Lightning strike point on document -->
+  <circle cx="383" cy="300" r="15" fill="#F97316" fill-opacity="0.4" filter="url(#bolt)"/>
+  <circle cx="383" cy="300" r="6" fill="#EF4444" filter="url(#glow)"/>
+  <circle cx="383" cy="300" r="3" fill="white"/>
+
+  <!-- Thunder effect sparks -->
+  <g filter="url(#glow)">
+    <circle cx="350" cy="280" r="4" fill="#F97316"/>
+    <circle cx="370" cy="272" r="3" fill="#EF4444"/>
+    <circle cx="400" cy="275" r="4" fill="#DC2626"/>
+    <circle cx="420" cy="283" r="3" fill="#F97316"/>
+    <circle cx="340" cy="295" r="2.5" fill="#EF4444"/>
+    <circle cx="435" cy="292" r="2.5" fill="#F97316"/>
+  </g>
+
+  <!-- Ground impact glow -->
+  <ellipse cx="210" cy="462" rx="60" ry="15" fill="#F97316" fill-opacity="0.2" filter="url(#bolt)"/>
+</svg>

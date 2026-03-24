@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="40%" r="60%">
+      <stop offset="0%" stop-color="#050c1a"/>
+      <stop offset="100%" stop-color="#030508"/>
+    </radialGradient>
+    <linearGradient id="layer1" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#06B6D4" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#0EA5E9" stop-opacity="0.6"/>
+    </linearGradient>
+    <linearGradient id="layer2" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#0EA5E9" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#3B82F6" stop-opacity="0.5"/>
+    </linearGradient>
+    <linearGradient id="layer3" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#3B82F6" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#06B6D4" stop-opacity="0.4"/>
+    </linearGradient>
+    <linearGradient id="layer4" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#06B6D4" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#0EA5E9" stop-opacity="0.35"/>
+    </linearGradient>
+    <linearGradient id="layer5" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#0EA5E9" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#3B82F6" stop-opacity="0.3"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="softglow">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <rect width="512" height="512" fill="url(#bg)"/>
+
+  <!-- Isometric depth layers (disk layers visualization) -->
+
+  <!-- Layer 5 (bottom/deepest) - smallest, most recessed -->
+  <g transform="translate(0, 70)">
+    <ellipse cx="256" cy="390" rx="155" ry="45" fill="#061825" stroke="#06B6D4" stroke-width="1" stroke-opacity="0.3"/>
+    <rect x="101" y="360" width="310" height="30" fill="#06B6D4" fill-opacity="0.08" stroke="#06B6D4" stroke-width="0.5" stroke-opacity="0.2"/>
+    <!-- Usage bar inside -->
+    <rect x="115" y="367" width="120" height="16" rx="8" fill="url(#layer5)"/>
+  </g>
+
+  <!-- Layer 4 -->
+  <g transform="translate(0, 45)">
+    <ellipse cx="256" cy="360" rx="168" ry="50" fill="#071e2f" stroke="#0EA5E9" stroke-width="1.2" stroke-opacity="0.4"/>
+    <rect x="88" y="328" width="336" height="32" fill="#0EA5E9" fill-opacity="0.07" stroke="#0EA5E9" stroke-width="0.8" stroke-opacity="0.3"/>
+    <rect x="103" y="334" width="180" height="20" rx="10" fill="url(#layer4)"/>
+  </g>
+
+  <!-- Layer 3 -->
+  <g transform="translate(0, 22)">
+    <ellipse cx="256" cy="325" rx="182" ry="55" fill="#082030" stroke="#3B82F6" stroke-width="1.5" stroke-opacity="0.5"/>
+    <rect x="74" y="292" width="364" height="33" fill="#3B82F6" fill-opacity="0.07" stroke="#3B82F6" stroke-width="1" stroke-opacity="0.3"/>
+    <rect x="90" y="297" width="230" height="22" rx="11" fill="url(#layer3)"/>
+  </g>
+
+  <!-- Layer 2 -->
+  <g transform="translate(0, 2)">
+    <ellipse cx="256" cy="286" rx="196" ry="60" fill="#092334" stroke="#0EA5E9" stroke-width="2" stroke-opacity="0.6" filter="url(#softglow)"/>
+    <rect x="60" y="252" width="392" height="34" fill="#0EA5E9" fill-opacity="0.08" stroke="#0EA5E9" stroke-width="1.2" stroke-opacity="0.4"/>
+    <rect x="76" y="258" width="280" height="22" rx="11" fill="url(#layer2)"/>
+    <!-- Label -->
+    <rect x="370" y="260" width="65" height="18" rx="9" fill="#0EA5E9" fill-opacity="0.2" stroke="#0EA5E9" stroke-width="0.8" stroke-opacity="0.5"/>
+  </g>
+
+  <!-- Layer 1 (top) - largest, most prominent -->
+  <ellipse cx="256" cy="240" rx="210" ry="65" fill="#0a2638" stroke="#06B6D4" stroke-width="2.5" stroke-opacity="0.8" filter="url(#glow)"/>
+  <rect x="46" y="205" width="420" height="35" fill="#06B6D4" fill-opacity="0.1" stroke="#06B6D4" stroke-width="1.5" stroke-opacity="0.5"/>
+  <rect x="62" y="210" width="310" height="25" rx="12.5" fill="url(#layer1)" filter="url(#softglow)"/>
+  <!-- Top layer label glow -->
+  <rect x="388" y="212" width="70" height="21" rx="10.5" fill="#06B6D4" fill-opacity="0.25" stroke="#06B6D4" stroke-width="1" stroke-opacity="0.7" filter="url(#softglow)"/>
+
+  <!-- Vertical connectors between layers -->
+  <line x1="46" y1="222" x2="60" y2="260" stroke="#06B6D4" stroke-width="1" stroke-opacity="0.4"/>
+  <line x1="466" y1="222" x2="452" y2="260" stroke="#06B6D4" stroke-width="1" stroke-opacity="0.4"/>
+
+  <!-- Disk icon on top layer -->
+  <circle cx="256" cy="226" r="18" fill="#030f1c" stroke="#06B6D4" stroke-width="2" filter="url(#softglow)"/>
+  <circle cx="256" cy="226" r="12" fill="none" stroke="#0EA5E9" stroke-width="1" stroke-opacity="0.5"/>
+  <circle cx="256" cy="226" r="5" fill="#06B6D4" fill-opacity="0.8"/>
+
+  <!-- Top surface glow -->
+  <ellipse cx="256" cy="175" rx="120" ry="30" fill="#06B6D4" fill-opacity="0.06" filter="url(#glow)"/>
+
+  <!-- Layer depth indicators (left side) -->
+  <text x="25" y="244" font-family="monospace" font-size="9" fill="#06B6D4" fill-opacity="0.7">L1</text>
+  <text x="25" y="290" font-family="monospace" font-size="9" fill="#0EA5E9" fill-opacity="0.6">L2</text>
+  <text x="25" y="324" font-family="monospace" font-size="9" fill="#3B82F6" fill-opacity="0.5">L3</text>
+  <text x="25" y="356" font-family="monospace" font-size="9" fill="#0EA5E9" fill-opacity="0.4">L4</text>
+  <text x="25" y="388" font-family="monospace" font-size="9" fill="#06B6D4" fill-opacity="0.3">L5</text>
+</svg>

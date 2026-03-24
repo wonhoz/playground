@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#150810"/>
+      <stop offset="100%" stop-color="#030508"/>
+    </radialGradient>
+    <linearGradient id="bookCover" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#3d1428"/>
+      <stop offset="50%" stop-color="#2a0a1c"/>
+      <stop offset="100%" stop-color="#1e0614"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="softglow">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="halftone">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="1" result="noise"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.15 0" in="noise"/>
+    </filter>
+  </defs>
+
+  <rect width="512" height="512" fill="url(#bg)"/>
+
+  <!-- Vintage worn effect - texture overlay -->
+  <rect width="512" height="512" fill="url(#bg)" filter="url(#halftone)"/>
+
+  <!-- Book shadow -->
+  <rect x="125" y="85" width="270" height="345" rx="5" fill="#0a0208" fill-opacity="0.6"/>
+
+  <!-- Manga book cover (main) -->
+  <rect x="110" y="70" width="270" height="345" rx="6" fill="url(#bookCover)" stroke="#EC4899" stroke-width="2.5" stroke-opacity="0.7" filter="url(#softglow)"/>
+
+  <!-- Spine -->
+  <rect x="110" y="70" width="28" height="345" rx="3" fill="#1a060e"/>
+  <rect x="116" y="70" width="16" height="345" fill="#EC4899" fill-opacity="0.08"/>
+  <line x1="138" y1="70" x2="138" y2="415" stroke="#EC4899" stroke-width="1.5" stroke-opacity="0.4"/>
+
+  <!-- Spine text (vertical) -->
+  <rect x="119" y="120" width="12" height="70" rx="2" fill="#EC4899" fill-opacity="0.3"/>
+
+  <!-- Cover decorative border (vintage double-line) -->
+  <rect x="148" y="88" width="215" height="310" rx="3" fill="none" stroke="#EC4899" stroke-width="1.5" stroke-opacity="0.6"/>
+  <rect x="154" y="94" width="203" height="298" rx="2" fill="none" stroke="#F472B6" stroke-width="0.8" stroke-opacity="0.4"/>
+
+  <!-- Cover illustration area -->
+  <rect x="160" y="102" width="190" height="160" rx="3" fill="#260818" stroke="#EC4899" stroke-width="1" stroke-opacity="0.4"/>
+
+  <!-- Vintage halftone pattern dots in illustration -->
+  <g fill="#EC4899" fill-opacity="0.15">
+    <circle cx="170" cy="112" r="2.5"/><circle cx="182" cy="112" r="2.5"/><circle cx="194" cy="112" r="2.5"/>
+    <circle cx="176" cy="122" r="2.5"/><circle cx="188" cy="122" r="2.5"/><circle cx="200" cy="122" r="2.5"/>
+    <circle cx="170" cy="132" r="2.5"/><circle cx="182" cy="132" r="2.5"/><circle cx="194" cy="132" r="2.5"/>
+  </g>
+
+  <!-- Cover character (vintage manga face silhouette) -->
+  <ellipse cx="255" cy="170" rx="55" ry="65" fill="#EC4899" fill-opacity="0.15" stroke="#EC4899" stroke-width="2" stroke-opacity="0.5"/>
+  <ellipse cx="255" cy="135" rx="40" ry="45" fill="#F472B6" fill-opacity="0.2" stroke="#F472B6" stroke-width="1.5" stroke-opacity="0.5"/>
+  <!-- Vintage eye marks -->
+  <ellipse cx="238" cy="138" rx="9" ry="11" fill="none" stroke="#EC4899" stroke-width="2" stroke-opacity="0.7"/>
+  <ellipse cx="272" cy="138" rx="9" ry="11" fill="none" stroke="#EC4899" stroke-width="2" stroke-opacity="0.7"/>
+  <circle cx="238" cy="140" r="5" fill="#EC4899" fill-opacity="0.5"/>
+  <circle cx="272" cy="140" r="5" fill="#EC4899" fill-opacity="0.5"/>
+  <!-- Vintage hair lines -->
+  <path d="M215,120 Q220,95 255,90 Q290,95 295,120" fill="#1e0614" stroke="#EC4899" stroke-width="2" stroke-opacity="0.6"/>
+  <line x1="220" y1="110" x2="215" y2="95" stroke="#EC4899" stroke-width="2" stroke-opacity="0.5" stroke-linecap="round"/>
+  <line x1="240" y1="100" x2="238" y2="83" stroke="#EC4899" stroke-width="1.5" stroke-opacity="0.45" stroke-linecap="round"/>
+  <line x1="260" y1="97" x2="260" y2="80" stroke="#EC4899" stroke-width="1.5" stroke-opacity="0.45" stroke-linecap="round"/>
+
+  <!-- Cover title area -->
+  <rect x="160" y="272" width="190" height="34" rx="4" fill="#EC4899" fill-opacity="0.12" stroke="#EC4899" stroke-width="1.5" stroke-opacity="0.6" filter="url(#softglow)"/>
+  <!-- Title text bars -->
+  <rect x="170" y="280" width="170" height="10" rx="5" fill="#EC4899" fill-opacity="0.6"/>
+  <rect x="195" y="295" width="120" height="7" rx="3.5" fill="#F472B6" fill-opacity="0.4"/>
+
+  <!-- Volume number badge -->
+  <circle cx="330" cy="103" r="22" fill="#EC4899" fill-opacity="0.2" stroke="#EC4899" stroke-width="2" stroke-opacity="0.7" filter="url(#softglow)"/>
+  <rect x="320" y="95" width="20" height="4" rx="2" fill="#EC4899" fill-opacity="0.6"/>
+  <rect x="316" y="103" width="28" height="4" rx="2" fill="#F472B6" fill-opacity="0.5"/>
+  <rect x="320" y="111" width="20" height="4" rx="2" fill="#EC4899" fill-opacity="0.6"/>
+
+  <!-- Cover bottom decorative lines -->
+  <rect x="160" y="318" width="190" height="5" rx="2.5" fill="#EC4899" fill-opacity="0.4"/>
+  <rect x="160" y="330" width="190" height="3" rx="1.5" fill="#F472B6" fill-opacity="0.3"/>
+  <rect x="160" y="340" width="190" height="5" rx="2.5" fill="#EC4899" fill-opacity="0.35"/>
+  <rect x="160" y="352" width="190" height="3" rx="1.5" fill="#F472B6" fill-opacity="0.25"/>
+  <rect x="160" y="362" width="190" height="5" rx="2.5" fill="#EC4899" fill-opacity="0.3"/>
+  <rect x="160" y="374" width="130" height="3" rx="1.5" fill="#F472B6" fill-opacity="0.2"/>
+  <rect x="160" y="384" width="190" height="5" rx="2.5" fill="#EC4899" fill-opacity="0.35"/>
+  <rect x="160" y="396" width="160" height="3" rx="1.5" fill="#F472B6" fill-opacity="0.25"/>
+
+  <!-- Corner ornaments -->
+  <path d="M154,94 L154,108 M154,94 L168,94" stroke="#EC4899" stroke-width="2" stroke-opacity="0.7" stroke-linecap="round"/>
+  <path d="M357,94 L357,108 M357,94 L343,94" stroke="#EC4899" stroke-width="2" stroke-opacity="0.7" stroke-linecap="round"/>
+  <path d="M154,392 L154,378 M154,392 L168,392" stroke="#EC4899" stroke-width="2" stroke-opacity="0.7" stroke-linecap="round"/>
+  <path d="M357,392 L357,378 M357,392 L343,392" stroke="#EC4899" stroke-width="2" stroke-opacity="0.7" stroke-linecap="round"/>
+
+  <!-- Worn edges -->
+  <path d="M110,100 Q107,105 110,115" fill="none" stroke="#EC4899" stroke-width="1" stroke-opacity="0.3"/>
+  <path d="M380,390 Q383,395 380,405" fill="none" stroke="#EC4899" stroke-width="1" stroke-opacity="0.3"/>
+
+  <!-- Stars decorating background -->
+  <circle cx="60" cy="100" r="2" fill="#EC4899" fill-opacity="0.3"/>
+  <circle cx="440" cy="80" r="2.5" fill="#F472B6" fill-opacity="0.25"/>
+  <circle cx="70" cy="420" r="2" fill="#EC4899" fill-opacity="0.2"/>
+  <circle cx="450" cy="440" r="2.5" fill="#FB7185" fill-opacity="0.25"/>
+</svg>

@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#130710"/>
+      <stop offset="100%" stop-color="#030508"/>
+    </radialGradient>
+    <radialGradient id="irisGrad" cx="45%" cy="40%" r="55%">
+      <stop offset="0%" stop-color="#F472B6" stop-opacity="0.9"/>
+      <stop offset="35%" stop-color="#EC4899" stop-opacity="0.7"/>
+      <stop offset="75%" stop-color="#9d1868" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#4a0828" stop-opacity="0.4"/>
+    </radialGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="softglow">
+      <feGaussianBlur stdDeviation="2.5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <clipPath id="eyeClip">
+      <path d="M60,256 Q150,110 256,106 Q362,110 452,256 Q362,402 256,406 Q150,402 60,256 Z"/>
+    </clipPath>
+  </defs>
+
+  <rect width="512" height="512" fill="url(#bg)"/>
+
+  <!-- Manga eye outline shape -->
+  <path d="M60,256 Q150,110 256,106 Q362,110 452,256 Q362,402 256,406 Q150,402 60,256 Z"
+    fill="#1a0610" stroke="#EC4899" stroke-width="3" stroke-opacity="0.8" filter="url(#glow)"/>
+
+  <!-- Camera shutter aperture blades inside eye (6 blades) -->
+  <g clip-path="url(#eyeClip)">
+    <path d="M256,256 L256,146 A110,110 0 0,1 351,311 Z" fill="#EC4899" fill-opacity="0.12" stroke="#EC4899" stroke-width="1.5" stroke-opacity="0.6"/>
+    <path d="M256,256 L351,311 A110,110 0 0,1 161,311 Z" fill="#F472B6" fill-opacity="0.1" stroke="#F472B6" stroke-width="1.5" stroke-opacity="0.5"/>
+    <path d="M256,256 L161,311 A110,110 0 0,1 256,146 Z" fill="#FB7185" fill-opacity="0.08" stroke="#FB7185" stroke-width="1.5" stroke-opacity="0.4"/>
+  </g>
+
+  <!-- Iris -->
+  <circle cx="256" cy="256" r="112" fill="url(#irisGrad)" clip-path="url(#eyeClip)"/>
+
+  <!-- Iris fiber pattern -->
+  <g stroke="#F472B6" stroke-width="1" stroke-opacity="0.25" clip-path="url(#eyeClip)">
+    <line x1="256" y1="144" x2="256" y2="256"/>
+    <line x1="312" y1="158" x2="256" y2="256"/>
+    <line x1="352" y1="200" x2="256" y2="256"/>
+    <line x1="368" y1="256" x2="256" y2="256"/>
+    <line x1="352" y1="312" x2="256" y2="256"/>
+    <line x1="312" y1="354" x2="256" y2="256"/>
+    <line x1="256" y1="368" x2="256" y2="256"/>
+    <line x1="200" y1="354" x2="256" y2="256"/>
+    <line x1="160" y1="312" x2="256" y2="256"/>
+    <line x1="144" y1="256" x2="256" y2="256"/>
+    <line x1="160" y1="200" x2="256" y2="256"/>
+    <line x1="200" y1="158" x2="256" y2="256"/>
+  </g>
+
+  <!-- Iris rings -->
+  <circle cx="256" cy="256" r="100" fill="none" stroke="#EC4899" stroke-width="1.5" stroke-opacity="0.5" clip-path="url(#eyeClip)"/>
+  <circle cx="256" cy="256" r="80" fill="none" stroke="#F472B6" stroke-width="1" stroke-opacity="0.4" clip-path="url(#eyeClip)"/>
+
+  <!-- Pupil (manga book/page shape) -->
+  <circle cx="256" cy="256" r="58" fill="#0a0308" clip-path="url(#eyeClip)"/>
+  <circle cx="256" cy="256" r="58" fill="none" stroke="#EC4899" stroke-width="2" stroke-opacity="0.7" clip-path="url(#eyeClip)"/>
+
+  <!-- Mini manga page in pupil -->
+  <rect x="230" y="228" width="52" height="56" rx="4" fill="#12030a" stroke="#EC4899" stroke-width="1.5" stroke-opacity="0.6" clip-path="url(#eyeClip)"/>
+  <line x1="256" y1="228" x2="256" y2="284" stroke="#F472B6" stroke-width="1" stroke-opacity="0.4" clip-path="url(#eyeClip)"/>
+  <line x1="238" y1="240" x2="252" y2="240" stroke="#EC4899" stroke-width="1.5" stroke-opacity="0.5" clip-path="url(#eyeClip)"/>
+  <line x1="238" y1="250" x2="252" y2="250" stroke="#EC4899" stroke-width="1" stroke-opacity="0.4" clip-path="url(#eyeClip)"/>
+  <line x1="260" y1="240" x2="274" y2="240" stroke="#F472B6" stroke-width="1.5" stroke-opacity="0.5" clip-path="url(#eyeClip)"/>
+  <line x1="260" y1="250" x2="274" y2="250" stroke="#F472B6" stroke-width="1" stroke-opacity="0.4" clip-path="url(#eyeClip)"/>
+
+  <!-- Eye highlight -->
+  <ellipse cx="205" cy="195" rx="25" ry="16" fill="white" fill-opacity="0.1" transform="rotate(-25 205 195)"/>
+  <circle cx="212" cy="188" r="8" fill="white" fill-opacity="0.2"/>
+
+  <!-- Eyelash strokes (manga style, dramatic) -->
+  <g stroke="#EC4899" stroke-width="3" stroke-linecap="round" filter="url(#softglow)">
+    <!-- Top lashes -->
+    <line x1="160" y1="165" x2="148" y2="140"/>
+    <line x1="195" y1="140" x2="188" y2="112"/>
+    <line x1="232" y1="124" x2="228" y2="96"/>
+    <line x1="270" y1="120" x2="268" y2="92"/>
+    <line x1="308" y1="126" x2="308" y2="98"/>
+    <line x1="342" y1="142" x2="348" y2="116"/>
+    <line x1="370" y1="168" x2="382" y2="148"/>
+  </g>
+
+  <!-- Manga action lines (speed lines from eye) -->
+  <g stroke="#EC4899" stroke-width="1" stroke-opacity="0.15">
+    <line x1="60" y1="256" x2="0" y2="256"/>
+    <line x1="452" y1="256" x2="512" y2="256"/>
+    <line x1="100" y1="170" x2="50" y2="130"/>
+    <line x1="400" y1="165" x2="460" y2="120"/>
+    <line x1="90" y1="340" x2="40" y2="380"/>
+    <line x1="415" y1="345" x2="470" y2="390"/>
+  </g>
+</svg>

@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#060f0b"/>
+      <stop offset="100%" stop-color="#030508"/>
+    </radialGradient>
+    <linearGradient id="prismFace1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#6EE7B7" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#10B981" stop-opacity="0.2"/>
+    </linearGradient>
+    <linearGradient id="prismFace2" x1="1" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#34D399" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#10B981" stop-opacity="0.15"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="softglow">
+      <feGaussianBlur stdDeviation="2.5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <rect width="512" height="512" fill="url(#bg)"/>
+
+  <!-- Input beam (raw data) -->
+  <rect x="30" y="245" width="140" height="22" fill="#10B981" fill-opacity="0.6" rx="4" filter="url(#glow)"/>
+  <rect x="30" y="245" width="140" height="22" fill="none" stroke="#6EE7B7" stroke-width="1"/>
+
+  <!-- Prism body (triangular) -->
+  <polygon points="170,140 370,256 170,372" fill="url(#prismFace1)" stroke="#10B981" stroke-width="2.5" stroke-opacity="0.8" filter="url(#glow)"/>
+  <polygon points="170,140 370,256 170,372" fill="url(#prismFace2)"/>
+
+  <!-- Prism edges glow -->
+  <line x1="170" y1="140" x2="370" y2="256" stroke="#6EE7B7" stroke-width="1.5" stroke-opacity="0.5"/>
+  <line x1="370" y1="256" x2="170" y2="372" stroke="#6EE7B7" stroke-width="1.5" stroke-opacity="0.5"/>
+
+  <!-- Refracted output beams (decoded hash components) -->
+  <!-- Beam 1 (top) -->
+  <path d="M370,256 L480,160" stroke="#6EE7B7" stroke-width="6" stroke-opacity="0.7" stroke-linecap="round" filter="url(#glow)"/>
+  <path d="M370,256 L480,160" stroke="#a7f3d0" stroke-width="2" stroke-opacity="0.6"/>
+  <!-- Beam 2 -->
+  <path d="M370,256 L490,210" stroke="#34D399" stroke-width="5" stroke-opacity="0.65" stroke-linecap="round" filter="url(#softglow)"/>
+  <path d="M370,256 L490,210" stroke="#a7f3d0" stroke-width="1.5" stroke-opacity="0.5"/>
+  <!-- Beam 3 (center) -->
+  <path d="M370,256 L495,256" stroke="#10B981" stroke-width="7" stroke-opacity="0.8" stroke-linecap="round" filter="url(#glow)"/>
+  <path d="M370,256 L495,256" stroke="#6EE7B7" stroke-width="2" stroke-opacity="0.7"/>
+  <!-- Beam 4 -->
+  <path d="M370,256 L490,302" stroke="#34D399" stroke-width="5" stroke-opacity="0.65" stroke-linecap="round" filter="url(#softglow)"/>
+  <path d="M370,256 L490,302" stroke="#a7f3d0" stroke-width="1.5" stroke-opacity="0.5"/>
+  <!-- Beam 5 (bottom) -->
+  <path d="M370,256 L480,352" stroke="#10B981" stroke-width="6" stroke-opacity="0.6" stroke-linecap="round" filter="url(#glow)"/>
+  <path d="M370,256 L480,352" stroke="#a7f3d0" stroke-width="2" stroke-opacity="0.5"/>
+
+  <!-- Hash verify marks on each beam end -->
+  <circle cx="480" cy="160" r="8" fill="#6EE7B7" fill-opacity="0.8" filter="url(#softglow)"/>
+  <circle cx="490" cy="210" r="7" fill="#34D399" fill-opacity="0.7" filter="url(#softglow)"/>
+  <circle cx="495" cy="256" r="10" fill="#10B981" filter="url(#glow)"/>
+  <circle cx="490" cy="302" r="7" fill="#34D399" fill-opacity="0.7" filter="url(#softglow)"/>
+  <circle cx="480" cy="352" r="8" fill="#6EE7B7" fill-opacity="0.8" filter="url(#softglow)"/>
+
+  <!-- Checkmark on center verify -->
+  <path d="M488,256 L494,262 L504,248" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Inner prism refraction lines -->
+  <line x1="200" y1="256" x2="340" y2="256" stroke="#6EE7B7" stroke-width="0.8" stroke-opacity="0.4" stroke-dasharray="4,4"/>
+  <line x1="220" y1="230" x2="340" y2="256" stroke="#34D399" stroke-width="0.6" stroke-opacity="0.3" stroke-dasharray="3,4"/>
+  <line x1="220" y1="282" x2="340" y2="256" stroke="#34D399" stroke-width="0.6" stroke-opacity="0.3" stroke-dasharray="3,4"/>
+
+  <!-- Decode label -->
+  <rect x="50" y="430" width="160" height="36" rx="8" fill="#061a10" stroke="#10B981" stroke-width="1.5" stroke-opacity="0.5"/>
+  <rect x="64" y="441" width="110" height="14" rx="7" fill="#10B981" fill-opacity="0.5"/>
+  <rect x="64" y="441" width="80" height="14" rx="7" fill="#10B981" fill-opacity="0.3"/>
+</svg>

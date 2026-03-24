@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#050c18"/>
+      <stop offset="100%" stop-color="#030508"/>
+    </radialGradient>
+    <linearGradient id="crystalFace1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#06B6D4" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#0EA5E9" stop-opacity="0.3"/>
+    </linearGradient>
+    <linearGradient id="crystalFace2" x1="1" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3B82F6" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#06B6D4" stop-opacity="0.2"/>
+    </linearGradient>
+    <linearGradient id="crystalFace3" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0%" stop-color="#0EA5E9" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#3B82F6" stop-opacity="0.25"/>
+    </linearGradient>
+    <linearGradient id="innerData" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#06B6D4" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#3B82F6" stop-opacity="0.4"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="crystalglow">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <rect width="512" height="512" fill="url(#bg)"/>
+
+  <!-- Ambient glow -->
+  <circle cx="256" cy="256" r="200" fill="#06B6D4" fill-opacity="0.04"/>
+  <circle cx="256" cy="256" r="150" fill="#0EA5E9" fill-opacity="0.03"/>
+
+  <!-- Crystal outer facets -->
+  <!-- Top facet -->
+  <polygon points="256,60 370,180 256,220 142,180" fill="url(#crystalFace1)" stroke="#06B6D4" stroke-width="1.5" stroke-opacity="0.8"/>
+  <!-- Right facet -->
+  <polygon points="370,180 420,320 256,380 256,220" fill="url(#crystalFace2)" stroke="#0EA5E9" stroke-width="1.5" stroke-opacity="0.7"/>
+  <!-- Left facet -->
+  <polygon points="256,220 256,380 92,320 142,180" fill="url(#crystalFace3)" stroke="#3B82F6" stroke-width="1.5" stroke-opacity="0.7"/>
+  <!-- Bottom tip -->
+  <polygon points="256,380 420,320 256,450 92,320" fill="#0EA5E9" fill-opacity="0.25" stroke="#06B6D4" stroke-width="1.5" stroke-opacity="0.6"/>
+
+  <!-- Crystal inner glow edges -->
+  <polygon points="256,60 370,180 256,220 142,180" fill="none" stroke="#7DD3FC" stroke-width="0.5" stroke-opacity="0.4"/>
+
+  <!-- Inner data lines (holographic storage inside crystal) -->
+  <g opacity="0.6">
+    <line x1="200" y1="220" x2="312" y2="220" stroke="#06B6D4" stroke-width="1" stroke-opacity="0.5"/>
+    <line x1="195" y1="235" x2="317" y2="235" stroke="#0EA5E9" stroke-width="1.5" stroke-opacity="0.7" filter="url(#glow)"/>
+    <line x1="200" y1="250" x2="312" y2="250" stroke="#06B6D4" stroke-width="1" stroke-opacity="0.5"/>
+    <line x1="210" y1="265" x2="302" y2="265" stroke="#3B82F6" stroke-width="1" stroke-opacity="0.6"/>
+    <line x1="215" y1="280" x2="297" y2="280" stroke="#06B6D4" stroke-width="1.5" stroke-opacity="0.7" filter="url(#glow)"/>
+    <line x1="220" y1="295" x2="292" y2="295" stroke="#0EA5E9" stroke-width="1" stroke-opacity="0.5"/>
+    <line x1="228" y1="310" x2="284" y2="310" stroke="#06B6D4" stroke-width="1" stroke-opacity="0.5"/>
+    <line x1="236" y1="325" x2="276" y2="325" stroke="#3B82F6" stroke-width="1" stroke-opacity="0.4"/>
+  </g>
+
+  <!-- Data fill bars (storage usage) -->
+  <rect x="210" y="236" width="60" height="8" rx="4" fill="#06B6D4" fill-opacity="0.8" filter="url(#glow)"/>
+  <rect x="210" y="252" width="45" height="7" rx="3.5" fill="#0EA5E9" fill-opacity="0.7"/>
+  <rect x="210" y="267" width="75" height="7" rx="3.5" fill="#3B82F6" fill-opacity="0.6"/>
+  <rect x="210" y="282" width="35" height="8" rx="4" fill="#06B6D4" fill-opacity="0.9" filter="url(#glow)"/>
+
+  <!-- Apex crystal point glow -->
+  <circle cx="256" cy="60" r="15" fill="#06B6D4" fill-opacity="0.5" filter="url(#crystalglow)"/>
+  <circle cx="256" cy="60" r="5" fill="#7DD3FC"/>
+
+  <!-- Crystal sparkles -->
+  <circle cx="370" cy="180" r="4" fill="#06B6D4" filter="url(#glow)"/>
+  <circle cx="142" cy="180" r="4" fill="#0EA5E9" filter="url(#glow)"/>
+  <circle cx="256" cy="450" r="4" fill="#3B82F6" filter="url(#glow)"/>
+  <circle cx="420" cy="320" r="3" fill="#06B6D4" filter="url(#glow)"/>
+  <circle cx="92" cy="320" r="3" fill="#06B6D4" filter="url(#glow)"/>
+
+  <!-- Small sub-crystals -->
+  <polygon points="400,80 420,110 400,130 380,110" fill="#06B6D4" fill-opacity="0.3" stroke="#06B6D4" stroke-width="1"/>
+  <polygon points="105,390 120,415 105,432 90,415" fill="#3B82F6" fill-opacity="0.3" stroke="#3B82F6" stroke-width="1"/>
+</svg>

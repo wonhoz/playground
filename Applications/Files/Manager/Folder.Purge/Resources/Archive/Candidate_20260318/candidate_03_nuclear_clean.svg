@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#030508"/>
+      <stop offset="100%" style="stop-color:#140000"/>
+    </linearGradient>
+    <radialGradient id="nuclearCore" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#FEE2E2;stop-opacity:1"/>
+      <stop offset="40%" style="stop-color:#F87171;stop-opacity:0.7"/>
+      <stop offset="100%" style="stop-color:#EF4444;stop-opacity:0"/>
+    </radialGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+    <filter id="nucGlow">
+      <feGaussianBlur stdDeviation="12" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- 방사능 심볼 (대형) -->
+  <!-- 외부 원 -->
+  <circle cx="256" cy="256" r="180" fill="none" stroke="#EF4444" stroke-width="3" opacity="0.5"/>
+  <circle cx="256" cy="256" r="165" fill="none" stroke="#DC2626" stroke-width="8" opacity="0.4"/>
+  <!-- 방사능 삼각 섹션들 (60도씩) -->
+  <!-- 섹션 1 (상) -->
+  <path d="M 256,256 L 256,110 A 146,146 0 0,1 382,183 Z" fill="#EF4444" opacity="0.7" filter="url(#glow)"/>
+  <!-- 섹션 2 (우하) -->
+  <path d="M 256,256 L 382,183 A 146,146 0 0,1 382,329 Z" fill="#DC2626" opacity="0.6"/>
+  <!-- 섹션 3 (좌하) -->
+  <path d="M 256,256 L 382,329 A 146,146 0 0,1 256,402 Z" fill="#EF4444" opacity="0.7"/>
+  <!-- 섹션 4 (하) -->
+  <path d="M 256,256 L 256,402 A 146,146 0 0,1 130,329 Z" fill="#DC2626" opacity="0.6"/>
+  <!-- 섹션 5 (좌상) -->
+  <path d="M 256,256 L 130,329 A 146,146 0 0,1 130,183 Z" fill="#EF4444" opacity="0.7"/>
+  <!-- 섹션 6 (상 마저) -->
+  <path d="M 256,256 L 130,183 A 146,146 0 0,1 256,110 Z" fill="#DC2626" opacity="0.6"/>
+  <!-- 내부 원 (빈 공간) -->
+  <circle cx="256" cy="256" r="65" fill="#030508" opacity="0.95"/>
+  <!-- 내부 원 테두리 -->
+  <circle cx="256" cy="256" r="65" fill="none" stroke="#EF4444" stroke-width="3" opacity="0.7"/>
+  <!-- 코어 글로우 -->
+  <circle cx="256" cy="256" r="100" fill="url(#nuclearCore)" filter="url(#nucGlow)"/>
+  <circle cx="256" cy="256" r="40" fill="#EF4444" opacity="0.15" filter="url(#glow)"/>
+  <!-- 핵 -->
+  <circle cx="256" cy="256" r="22" fill="#F87171" opacity="0.9" filter="url(#glow)"/>
+  <circle cx="256" cy="256" r="12" fill="#FEE2E2" opacity="1"/>
+  <!-- 폴더 지워짐 효과 (코어 주변) -->
+  <text x="256" y="261" text-anchor="middle" font-family="Arial" font-size="12" fill="#030508" font-weight="bold">✗</text>
+  <!-- 방사능 경고 마크 추가 (소형) -->
+  <circle cx="256" cy="430" r="14" fill="#EF4444" opacity="0.7"/>
+  <text x="256" y="435" text-anchor="middle" font-family="Arial" font-size="14" fill="#030508" font-weight="bold">!</text>
+</svg>

@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#030508"/>
+      <stop offset="100%" style="stop-color:#120500"/>
+    </linearGradient>
+    <linearGradient id="flameCore" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" style="stop-color:#92400E"/>
+      <stop offset="30%" style="stop-color:#F59E0B"/>
+      <stop offset="70%" style="stop-color:#FBBF24"/>
+      <stop offset="100%" style="stop-color:#FEF3C7"/>
+    </linearGradient>
+    <linearGradient id="wingGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FCD34D;stop-opacity:0.9"/>
+      <stop offset="100%" style="stop-color:#D97706;stop-opacity:0.4"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+    <filter id="fireGlow">
+      <feGaussianBlur stdDeviation="12" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- 불 후광 -->
+  <ellipse cx="256" cy="300" rx="150" ry="120" fill="#F59E0B" opacity="0.06" filter="url(#fireGlow)"/>
+  <!-- 왼쪽 날개 -->
+  <path d="M 256,220 Q 180,180 120,150 Q 90,140 80,160 Q 100,190 140,200 Q 170,208 200,240 Q 220,260 256,280 Z" fill="url(#wingGrad)" opacity="0.8" filter="url(#glow)"/>
+  <path d="M 256,220 Q 170,200 130,230 Q 110,240 115,260 Q 140,265 165,250 Q 200,235 240,260 Z" fill="#FBBF24" opacity="0.5"/>
+  <!-- 오른쪽 날개 -->
+  <path d="M 256,220 Q 332,180 392,150 Q 422,140 432,160 Q 412,190 372,200 Q 342,208 312,240 Q 292,260 256,280 Z" fill="url(#wingGrad)" opacity="0.8" filter="url(#glow)"/>
+  <path d="M 256,220 Q 342,200 382,230 Q 402,240 397,260 Q 372,265 347,250 Q 312,235 272,260 Z" fill="#FBBF24" opacity="0.5"/>
+  <!-- 꼬리 깃털들 -->
+  <path d="M 240,300 Q 220,360 200,420 Q 195,440 210,440 Q 225,430 240,380 Q 250,340 256,300 Z" fill="#F59E0B" opacity="0.7"/>
+  <path d="M 256,300 Q 256,360 256,420 Q 256,440 256,440 Q 258,430 262,380 Q 264,340 256,300 Z" fill="#FBBF24" opacity="0.8"/>
+  <path d="M 272,300 Q 292,360 312,420 Q 318,440 302,440 Q 288,430 272,380 Q 262,340 256,300 Z" fill="#F59E0B" opacity="0.7"/>
+  <!-- 불사조 몸통 -->
+  <ellipse cx="256" cy="260" rx="35" ry="55" fill="url(#flameCore)" opacity="0.9" filter="url(#glow)"/>
+  <!-- 불사조 머리 -->
+  <circle cx="256" cy="195" r="28" fill="#FBBF24" opacity="0.95" filter="url(#glow)"/>
+  <!-- 부리 -->
+  <polygon points="256,190 280,195 256,202" fill="#92400E" opacity="0.9"/>
+  <!-- 눈 -->
+  <circle cx="265" cy="192" r="5" fill="#030508" opacity="0.9"/>
+  <circle cx="266" cy="191" r="2" fill="#FCD34D" opacity="0.8"/>
+  <!-- 볏 -->
+  <polygon points="248,180 256,160 264,180 256,175" fill="#FEF3C7" opacity="0.9" filter="url(#glow)"/>
+  <polygon points="240,185 244,165 252,185 244,180" fill="#FBBF24" opacity="0.7"/>
+  <polygon points="264,185 268,165 276,185 268,180" fill="#FBBF24" opacity="0.7"/>
+  <!-- 파일 아이콘 (파닉스 위) -->
+  <rect x="228" y="242" width="56" height="34" rx="5" fill="#92400E" opacity="0.7"/>
+  <polygon points="228,242 253,242 253,226 284,242" fill="#B45309" opacity="0.65"/>
+  <line x1="236" y1="255" x2="276" y2="255" stroke="#FCD34D" stroke-width="1.5" opacity="0.6"/>
+  <line x1="236" y1="264" x2="262" y2="264" stroke="#FBBF24" stroke-width="1.5" opacity="0.5"/>
+  <!-- 불꽃 파티클 -->
+  <circle cx="200" cy="200" r="5" fill="#F59E0B" opacity="0.7" filter="url(#glow)"/>
+  <circle cx="312" cy="210" r="4" fill="#FBBF24" opacity="0.65" filter="url(#glow)"/>
+  <circle cx="180" cy="280" r="3" fill="#FCD34D" opacity="0.6"/>
+  <circle cx="335" cy="290" r="3" fill="#F59E0B" opacity="0.55"/>
+</svg>

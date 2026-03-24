@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#030508"/>
+      <stop offset="100%" style="stop-color:#08001a"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+    <filter id="starGlow">
+      <feGaussianBlur stdDeviation="7" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- 은하수 배경 -->
+  <ellipse cx="256" cy="256" rx="220" ry="120" fill="#8B5CF6" opacity="0.04"/>
+  <!-- 별자리 경로 연결선 (바로가기 경로) -->
+  <line x1="100" y1="380" x2="160" y2="310" stroke="#8B5CF6" stroke-width="1.5" opacity="0.5"/>
+  <line x1="160" y1="310" x2="220" y2="260" stroke="#A78BFA" stroke-width="2" opacity="0.6"/>
+  <line x1="220" y1="260" x2="256" y2="200" stroke="#C4B5FD" stroke-width="2.5" opacity="0.7" filter="url(#glow)"/>
+  <line x1="256" y1="200" x2="310" y2="155" stroke="#A78BFA" stroke-width="2" opacity="0.6"/>
+  <line x1="310" y1="155" x2="380" y2="120" stroke="#8B5CF6" stroke-width="1.5" opacity="0.5"/>
+  <!-- 분기 경로 -->
+  <line x1="220" y1="260" x2="180" y2="200" stroke="#7C3AED" stroke-width="1.5" opacity="0.4" stroke-dasharray="5,4"/>
+  <line x1="256" y1="200" x2="300" y2="240" stroke="#6D28D9" stroke-width="1.5" opacity="0.35" stroke-dasharray="5,4"/>
+  <!-- 별자리 노드들 (경로 점) -->
+  <circle cx="100" cy="380" r="10" fill="#8B5CF6" opacity="0.85" filter="url(#glow)"/>
+  <circle cx="160" cy="310" r="12" fill="#A78BFA" opacity="0.9" filter="url(#glow)"/>
+  <circle cx="220" cy="260" r="14" fill="#C4B5FD" opacity="0.95" filter="url(#starGlow)"/>
+  <circle cx="256" cy="200" r="18" fill="#A78BFA" opacity="1" filter="url(#starGlow)"/>
+  <circle cx="310" cy="155" r="13" fill="#8B5CF6" opacity="0.9" filter="url(#glow)"/>
+  <circle cx="380" cy="120" r="16" fill="#C4B5FD" opacity="0.95" filter="url(#starGlow)"/>
+  <!-- 별 노드 내 화살표/심볼 -->
+  <text x="256" y="205" text-anchor="middle" font-family="Arial" font-size="12" fill="#030508" font-weight="bold">→</text>
+  <!-- 분기 노드들 -->
+  <circle cx="180" cy="200" r="8" fill="#7C3AED" opacity="0.75" filter="url(#glow)"/>
+  <circle cx="300" cy="240" r="8" fill="#6D28D9" opacity="0.7" filter="url(#glow)"/>
+  <!-- 시작점 라벨 -->
+  <text x="100" y="405" text-anchor="middle" font-family="monospace" font-size="10" fill="#8B5CF6" opacity="0.7">START</text>
+  <!-- 목표점 라벨 -->
+  <text x="380" y="145" text-anchor="middle" font-family="monospace" font-size="10" fill="#C4B5FD" opacity="0.9">LINK</text>
+  <!-- 배경 별들 -->
+  <circle cx="140" cy="140" r="2" fill="#C4B5FD" opacity="0.4"/>
+  <circle cx="420" cy="300" r="1.5" fill="#A78BFA" opacity="0.35"/>
+  <circle cx="90" cy="230" r="1.5" fill="#8B5CF6" opacity="0.4"/>
+  <circle cx="440" cy="200" r="2" fill="#C4B5FD" opacity="0.35"/>
+  <circle cx="350" cy="380" r="1.5" fill="#A78BFA" opacity="0.4"/>
+  <circle cx="470" cy="350" r="1.5" fill="#8B5CF6" opacity="0.3"/>
+  <!-- 빛나는 경로 하이라이트 -->
+  <path d="M 100,380 L 160,310 L 220,260 L 256,200 L 310,155 L 380,120" fill="none" stroke="#C4B5FD" stroke-width="1" opacity="0.3" stroke-dasharray="3,5"/>
+</svg>

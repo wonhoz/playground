@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#030508"/>
+      <stop offset="100%" style="stop-color:#041014"/>
+    </linearGradient>
+    <radialGradient id="nodeGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#67E8F9"/>
+      <stop offset="100%" style="stop-color:#06B6D4"/>
+    </radialGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- 두 파일이 신경망 중앙에서 만남 -->
+  <!-- 왼쪽 파일 -->
+  <rect x="60" y="215" width="80" height="100" rx="7" fill="#06B6D4" opacity="0.8"/>
+  <polygon points="60,215 100,215 100,188 140,215" fill="#22D3EE" opacity="0.75"/>
+  <line x1="75" y1="240" x2="132" y2="240" stroke="#E0F7FA" stroke-width="2" opacity="0.6"/>
+  <line x1="75" y1="255" x2="118" y2="255" stroke="#E0F7FA" stroke-width="2" opacity="0.5"/>
+  <line x1="75" y1="270" x2="125" y2="270" stroke="#E0F7FA" stroke-width="1.5" opacity="0.4"/>
+  <!-- 오른쪽 파일 -->
+  <rect x="372" y="215" width="80" height="100" rx="7" fill="#06B6D4" opacity="0.8"/>
+  <polygon points="372,215 412,215 412,188 452,215" fill="#22D3EE" opacity="0.75"/>
+  <line x1="387" y1="240" x2="444" y2="240" stroke="#E0F7FA" stroke-width="2" opacity="0.6"/>
+  <line x1="387" y1="255" x2="430" y2="255" stroke="#E0F7FA" stroke-width="2" opacity="0.5"/>
+  <line x1="387" y1="270" x2="437" y2="270" stroke="#E0F7FA" stroke-width="1.5" opacity="0.4"/>
+  <!-- 신경망 연결 (파일 → 은닉층 → 비교 노드) -->
+  <!-- 왼쪽 파일 → 은닉 -->
+  <line x1="140" y1="240" x2="200" y2="200" stroke="#06B6D4" stroke-width="1.5" opacity="0.6"/>
+  <line x1="140" y1="256" x2="200" y2="256" stroke="#22D3EE" stroke-width="2" opacity="0.7"/>
+  <line x1="140" y1="272" x2="200" y2="312" stroke="#06B6D4" stroke-width="1.5" opacity="0.6"/>
+  <!-- 오른쪽 파일 → 은닉 -->
+  <line x1="372" y1="240" x2="312" y2="200" stroke="#06B6D4" stroke-width="1.5" opacity="0.6"/>
+  <line x1="372" y1="256" x2="312" y2="256" stroke="#22D3EE" stroke-width="2" opacity="0.7"/>
+  <line x1="372" y1="272" x2="312" y2="312" stroke="#06B6D4" stroke-width="1.5" opacity="0.6"/>
+  <!-- 은닉 → 중앙 비교 -->
+  <line x1="200" y1="200" x2="256" y2="220" stroke="#22D3EE" stroke-width="1.5" opacity="0.7"/>
+  <line x1="200" y1="256" x2="256" y2="256" stroke="#67E8F9" stroke-width="2" opacity="0.8"/>
+  <line x1="200" y1="312" x2="256" y2="292" stroke="#22D3EE" stroke-width="1.5" opacity="0.7"/>
+  <line x1="312" y1="200" x2="256" y2="220" stroke="#22D3EE" stroke-width="1.5" opacity="0.7"/>
+  <line x1="312" y1="256" x2="256" y2="256" stroke="#67E8F9" stroke-width="2" opacity="0.8"/>
+  <line x1="312" y1="312" x2="256" y2="292" stroke="#22D3EE" stroke-width="1.5" opacity="0.7"/>
+  <!-- 은닉 노드들 -->
+  <circle cx="200" cy="200" r="12" fill="url(#nodeGrad)" opacity="0.85" filter="url(#glow)"/>
+  <circle cx="200" cy="256" r="14" fill="url(#nodeGrad)" opacity="0.9" filter="url(#glow)"/>
+  <circle cx="200" cy="312" r="12" fill="url(#nodeGrad)" opacity="0.85" filter="url(#glow)"/>
+  <circle cx="312" cy="200" r="12" fill="url(#nodeGrad)" opacity="0.85" filter="url(#glow)"/>
+  <circle cx="312" cy="256" r="14" fill="url(#nodeGrad)" opacity="0.9" filter="url(#glow)"/>
+  <circle cx="312" cy="312" r="12" fill="url(#nodeGrad)" opacity="0.85" filter="url(#glow)"/>
+  <!-- 중앙 비교 노드 -->
+  <circle cx="256" cy="256" r="30" fill="#06B6D4" opacity="0.9" filter="url(#glow)"/>
+  <circle cx="256" cy="256" r="20" fill="#22D3EE" opacity="1" filter="url(#glow)"/>
+  <text x="256" y="261" text-anchor="middle" font-family="Arial" font-size="13" fill="#030508" font-weight="bold">=?</text>
+  <!-- 출력 (하단) -->
+  <line x1="256" y1="286" x2="256" y2="350" stroke="#67E8F9" stroke-width="2.5" opacity="0.7"/>
+  <rect x="196" y="350" width="120" height="36" rx="10" fill="#06B6D4" opacity="0.8" filter="url(#glow)"/>
+  <text x="256" y="373" text-anchor="middle" font-family="monospace" font-size="12" fill="#030508" font-weight="bold">DUPLICATE</text>
+</svg>

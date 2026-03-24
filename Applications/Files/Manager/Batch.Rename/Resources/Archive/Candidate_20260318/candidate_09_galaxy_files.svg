@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#030508"/>
+      <stop offset="100%" style="stop-color:#050512"/>
+    </linearGradient>
+    <radialGradient id="galaxyCore" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#818CF8;stop-opacity:0.6"/>
+      <stop offset="40%" style="stop-color:#6366F1;stop-opacity:0.2"/>
+      <stop offset="100%" style="stop-color:#6366F1;stop-opacity:0"/>
+    </radialGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+    <filter id="coreGlow">
+      <feGaussianBlur stdDeviation="12" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- 은하 중심부 -->
+  <ellipse cx="256" cy="256" rx="200" ry="200" fill="url(#galaxyCore)" filter="url(#coreGlow)"/>
+  <ellipse cx="256" cy="256" rx="100" ry="100" fill="#6366F1" opacity="0.08"/>
+  <ellipse cx="256" cy="256" rx="40" ry="40" fill="#818CF8" opacity="0.15" filter="url(#glow)"/>
+  <!-- 은하 팔 (나선형) - 파일들이 궤도를 돎 -->
+  <path d="M 256,256 Q 320,180 380,160 Q 430,150 440,180" fill="none" stroke="#818CF8" stroke-width="2" opacity="0.5"/>
+  <path d="M 256,256 Q 200,180 150,170 Q 100,165 90,195" fill="none" stroke="#6366F1" stroke-width="2" opacity="0.5"/>
+  <path d="M 256,256 Q 330,310 370,370 Q 400,420 380,440" fill="none" stroke="#818CF8" stroke-width="2" opacity="0.4"/>
+  <path d="M 256,256 Q 170,310 130,370 Q 100,420 120,440" fill="none" stroke="#6366F1" stroke-width="2" opacity="0.4"/>
+  <!-- 파일 아이콘들 (궤도 위에 배치) -->
+  <!-- 파일 1 (우상단) -->
+  <g transform="translate(370,155) rotate(15)">
+    <rect x="-16" y="-12" width="32" height="24" rx="3" fill="#4F46E5" opacity="0.9"/>
+    <polygon points="-16,-12 -4,-12 -4,-22 16,-12" fill="#6366F1" opacity="0.85"/>
+    <line x1="-8" y1="-2" x2="8" y2="-2" stroke="#A5B4FC" stroke-width="1.5" opacity="0.7"/>
+    <line x1="-8" y1="4" x2="5" y2="4" stroke="#818CF8" stroke-width="1.5" opacity="0.6"/>
+  </g>
+  <!-- 파일 2 (좌상단) -->
+  <g transform="translate(115,175) rotate(-20)">
+    <rect x="-16" y="-12" width="32" height="24" rx="3" fill="#6366F1" opacity="0.9"/>
+    <polygon points="-16,-12 -4,-12 -4,-22 16,-12" fill="#818CF8" opacity="0.85"/>
+    <line x1="-8" y1="-2" x2="8" y2="-2" stroke="#A5B4FC" stroke-width="1.5" opacity="0.7"/>
+  </g>
+  <!-- 파일 3 (우하단) -->
+  <g transform="translate(375,375) rotate(35)">
+    <rect x="-16" y="-12" width="32" height="24" rx="3" fill="#818CF8" opacity="0.85"/>
+    <polygon points="-16,-12 -4,-12 -4,-22 16,-12" fill="#A5B4FC" opacity="0.8"/>
+    <line x1="-8" y1="-2" x2="8" y2="-2" stroke="#C7D2FE" stroke-width="1.5" opacity="0.7"/>
+  </g>
+  <!-- 파일 4 (좌하단) -->
+  <g transform="translate(120,375) rotate(-35)">
+    <rect x="-16" y="-12" width="32" height="24" rx="3" fill="#6366F1" opacity="0.9"/>
+    <polygon points="-16,-12 -4,-12 -4,-22 16,-12" fill="#4F46E5" opacity="0.85"/>
+  </g>
+  <!-- 중심 핵 -->
+  <circle cx="256" cy="256" r="22" fill="#818CF8" opacity="0.9" filter="url(#glow)"/>
+  <circle cx="256" cy="256" r="14" fill="#A5B4FC" opacity="1" filter="url(#glow)"/>
+  <!-- 중심 심볼 (이름 변경) -->
+  <text x="256" y="261" text-anchor="middle" font-family="Arial" font-size="13" fill="#030508" font-weight="bold">Rn</text>
+  <!-- 배경 별들 -->
+  <circle cx="200" cy="120" r="1.5" fill="#A5B4FC" opacity="0.6"/>
+  <circle cx="380" cy="100" r="1" fill="#818CF8" opacity="0.5"/>
+  <circle cx="440" cy="280" r="1.5" fill="#6366F1" opacity="0.6"/>
+  <circle cx="80" cy="350" r="1" fill="#A5B4FC" opacity="0.5"/>
+  <circle cx="300" cy="430" r="1.5" fill="#818CF8" opacity="0.4"/>
+  <circle cx="150" cy="420" r="1" fill="#6366F1" opacity="0.5"/>
+  <circle cx="460" cy="160" r="1.5" fill="#A5B4FC" opacity="0.4"/>
+  <circle cx="70" cy="200" r="1" fill="#818CF8" opacity="0.6"/>
+</svg>

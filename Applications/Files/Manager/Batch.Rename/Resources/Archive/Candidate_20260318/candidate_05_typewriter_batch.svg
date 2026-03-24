@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#030508"/>
+      <stop offset="100%" style="stop-color:#0a0a1c"/>
+    </linearGradient>
+    <linearGradient id="bodyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#2d2d5e"/>
+      <stop offset="100%" style="stop-color:#1a1a3a"/>
+    </linearGradient>
+    <linearGradient id="keyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#818CF8"/>
+      <stop offset="100%" style="stop-color:#6366F1"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- 타자기 본체 -->
+  <rect x="100" y="220" width="312" height="190" rx="15" fill="url(#bodyGrad)" stroke="#6366F1" stroke-width="2" opacity="0.9"/>
+  <!-- 타자기 상단 롤러 -->
+  <rect x="120" y="195" width="272" height="40" rx="8" fill="#1e1e3f" stroke="#818CF8" stroke-width="1.5" opacity="0.9"/>
+  <!-- 롤러 줄 -->
+  <rect x="130" y="200" width="252" height="8" rx="4" fill="#818CF8" opacity="0.3"/>
+  <!-- 종이 -->
+  <rect x="160" y="130" width="192" height="80" rx="4" fill="#0d0d28" stroke="#A5B4FC" stroke-width="1.5" opacity="0.95"/>
+  <!-- 종이 텍스트 (파일명 변환 표현) -->
+  <text x="200" y="158" font-family="monospace" font-size="11" fill="#6366F1" opacity="0.6">file_001</text>
+  <text x="196" y="176" font-family="monospace" font-size="11" fill="#818CF8" opacity="0.5">→</text>
+  <text x="212" y="176" font-family="monospace" font-size="11" fill="#A5B4FC" opacity="0.9">report_01</text>
+  <!-- 커서 -->
+  <rect x="318" y="168" width="2" height="12" fill="#A5B4FC" opacity="0.9" filter="url(#glow)"/>
+  <!-- 키보드 - 위 줄 -->
+  <rect x="130" y="265" width="32" height="28" rx="5" fill="url(#keyGrad)" opacity="0.8"/>
+  <rect x="172" y="265" width="32" height="28" rx="5" fill="url(#keyGrad)" opacity="0.7"/>
+  <rect x="214" y="265" width="32" height="28" rx="5" fill="url(#keyGrad)" opacity="0.8"/>
+  <rect x="256" y="265" width="32" height="28" rx="5" fill="url(#keyGrad)" opacity="0.75"/>
+  <rect x="298" y="265" width="32" height="28" rx="5" fill="url(#keyGrad)" opacity="0.8"/>
+  <rect x="340" y="265" width="42" height="28" rx="5" fill="#6366F1" opacity="0.85"/>
+  <!-- 키보드 - 중간 줄 -->
+  <rect x="145" y="303" width="32" height="28" rx="5" fill="url(#keyGrad)" opacity="0.75"/>
+  <rect x="187" y="303" width="32" height="28" rx="5" fill="url(#keyGrad)" opacity="0.8"/>
+  <rect x="229" y="303" width="32" height="28" rx="5" fill="url(#keyGrad)" opacity="0.7"/>
+  <rect x="271" y="303" width="32" height="28" rx="5" fill="url(#keyGrad)" opacity="0.8"/>
+  <rect x="313" y="303" width="54" height="28" rx="5" fill="#818CF8" opacity="0.85"/>
+  <!-- 키보드 - 아래 줄 -->
+  <rect x="130" y="341" width="252" height="28" rx="5" fill="#4F46E5" opacity="0.7"/>
+  <!-- 스페이스바 라벨 -->
+  <text x="256" y="360" text-anchor="middle" font-family="monospace" font-size="10" fill="#A5B4FC" opacity="0.6">RENAME</text>
+  <!-- 키 레이블 -->
+  <text x="146" y="284" text-anchor="middle" font-family="monospace" font-size="9" fill="#C7D2FE" opacity="0.7">Q</text>
+  <text x="188" y="284" text-anchor="middle" font-family="monospace" font-size="9" fill="#C7D2FE" opacity="0.7">W</text>
+  <text x="230" y="284" text-anchor="middle" font-family="monospace" font-size="9" fill="#C7D2FE" opacity="0.7">E</text>
+  <text x="272" y="284" text-anchor="middle" font-family="monospace" font-size="9" fill="#C7D2FE" opacity="0.7">R</text>
+  <!-- 글로우 장식 -->
+  <circle cx="256" cy="256" r="140" fill="#6366F1" opacity="0.03" filter="url(#glow)"/>
+  <!-- 타자기 다리 -->
+  <rect x="160" y="408" width="20" height="25" rx="4" fill="#1e1e3f" opacity="0.8"/>
+  <rect x="332" y="408" width="20" height="25" rx="4" fill="#1e1e3f" opacity="0.8"/>
+</svg>

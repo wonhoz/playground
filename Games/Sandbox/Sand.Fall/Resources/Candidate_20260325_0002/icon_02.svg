@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="flame02a" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0%" stop-color="#FF5500"/>
+      <stop offset="60%" stop-color="#FF8800"/>
+      <stop offset="100%" stop-color="#FFD700"/>
+    </linearGradient>
+    <linearGradient id="flame02b" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0%" stop-color="#FF3300"/>
+      <stop offset="50%" stop-color="#FF6600"/>
+      <stop offset="100%" stop-color="#FFAA00"/>
+    </linearGradient>
+    <radialGradient id="glow02" cx="50%" cy="70%" r="50%">
+      <stop offset="0%" stop-color="#FF8800" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#FF8800" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="blur02">
+      <feGaussianBlur stdDeviation="12"/>
+    </filter>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="#0D1117"/>
+
+  <!-- 글로우 효과 (배경) -->
+  <ellipse cx="512" cy="680" rx="320" ry="180" fill="#FF5500" opacity="0.15" filter="url(#blur02)"/>
+  <ellipse cx="512" cy="580" rx="200" ry="150" fill="#FF8800" opacity="0.1" filter="url(#blur02)"/>
+
+  <!-- 모래 층 (아래) -->
+  <path d="M190 810 Q280 780 380 795 Q450 805 512 790 Q580 775 680 800 Q760 815 834 795 L834 834 L190 834 Z" fill="#E8C878"/>
+  <path d="M190 834 L834 834 L834 810 Q720 840 600 820 Q512 808 420 825 Q310 840 190 820 Z" fill="#C8A040"/>
+  <!-- 모래 표면 질감 -->
+  <circle cx="250" cy="800" r="8" fill="#D8B860"/>
+  <circle cx="320" cy="795" r="6" fill="#D8B860"/>
+  <circle cx="390" cy="802" r="9" fill="#D8B860"/>
+  <circle cx="460" cy="796" r="7" fill="#D8B860"/>
+  <circle cx="530" cy="800" r="8" fill="#D8B860"/>
+  <circle cx="600" cy="793" r="6" fill="#D8B860"/>
+  <circle cx="670" cy="798" r="9" fill="#D8B860"/>
+  <circle cx="740" cy="802" r="7" fill="#D8B860"/>
+  <circle cx="800" cy="796" r="8" fill="#D8B860"/>
+
+  <!-- 불꽃들 (여러 개) -->
+  <!-- 큰 중앙 불꽃 -->
+  <path d="M512 790 C490 750 460 700 480 640 C490 600 510 580 512 540 C514 580 534 600 544 640 C564 700 534 750 512 790 Z" fill="url(#flame02a)"/>
+  <path d="M512 790 C500 760 478 720 490 670 C497 640 508 625 512 600 C516 625 527 640 534 670 C546 720 524 760 512 790 Z" fill="#FFD700" opacity="0.7"/>
+
+  <!-- 왼쪽 불꽃 -->
+  <path d="M360 790 C342 758 318 718 335 668 C344 638 356 622 360 592 C364 622 376 638 385 668 C402 718 378 758 360 790 Z" fill="url(#flame02b)"/>
+  <path d="M360 790 C350 768 334 738 344 700 C350 678 357 666 360 648 C363 666 370 678 376 700 C386 738 370 768 360 790 Z" fill="#FFAA00" opacity="0.6"/>
+
+  <!-- 오른쪽 불꽃 -->
+  <path d="M664 790 C646 758 622 718 639 668 C648 638 660 622 664 592 C668 622 680 638 689 668 C706 718 682 758 664 790 Z" fill="url(#flame02b)"/>
+  <path d="M664 790 C654 768 638 738 648 700 C654 678 661 666 664 648 C667 666 674 678 680 700 C690 738 674 768 664 790 Z" fill="#FFAA00" opacity="0.6"/>
+
+  <!-- 작은 불꽃들 -->
+  <path d="M260 790 C248 768 234 745 243 720 C248 705 256 697 260 683 C264 697 272 705 277 720 C286 745 272 768 260 790 Z" fill="#FF6600"/>
+  <path d="M780 790 C768 768 754 745 763 720 C768 705 776 697 780 683 C784 697 792 705 797 720 C806 745 792 768 780 790 Z" fill="#FF6600"/>
+
+  <!-- 불꽃 스파크들 -->
+  <circle cx="430" cy="510" r="8" fill="#FFD700" opacity="0.9"/>
+  <circle cx="470" cy="480" r="6" fill="#FFAA00" opacity="0.8"/>
+  <circle cx="512" cy="460" r="10" fill="#FFD700" opacity="0.9"/>
+  <circle cx="555" cy="490" r="6" fill="#FF8800" opacity="0.8"/>
+  <circle cx="595" cy="515" r="8" fill="#FFD700" opacity="0.7"/>
+  <circle cx="350" cy="545" r="6" fill="#FFAA00" opacity="0.7"/>
+  <circle cx="670" cy="550" r="6" fill="#FF8800" opacity="0.7"/>
+  <circle cx="300" cy="620" r="5" fill="#FF6600" opacity="0.6"/>
+  <circle cx="720" cy="625" r="5" fill="#FF6600" opacity="0.6"/>
+  <circle cx="410" cy="560" r="4" fill="#FFD700" opacity="0.8"/>
+  <circle cx="612" cy="560" r="4" fill="#FFD700" opacity="0.8"/>
+
+  <!-- 상단 글로우 하이라이트 -->
+  <ellipse cx="512" cy="470" rx="60" ry="30" fill="#FFD700" opacity="0.2" filter="url(#blur02)"/>
+</svg>

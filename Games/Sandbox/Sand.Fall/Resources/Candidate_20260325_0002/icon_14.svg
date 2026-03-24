@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 배경 (좌=초록, 우=오렌지 대각선 분할) -->
+  <rect width="1024" height="1024" rx="190" fill="#1B5E20"/>
+  <clipPath id="clip14s">
+    <rect width="1024" height="1024" rx="190"/>
+  </clipPath>
+  <g clip-path="url(#clip14s)">
+    <polygon points="512,0 1024,0 1024,1024 512,1024" fill="#BF360C"/>
+  </g>
+  <!-- 대각선 -->
+  <line x1="512" y1="200" x2="512" y2="824" stroke="white" stroke-width="8" opacity="0.4"/>
+  <!-- Layer 2: 4단계 순환 -->
+  <!-- 씨앗 -->
+  <circle cx="310" cy="310" r="80" fill="#AA7040"/>
+  <text x="310" y="325" text-anchor="middle" font-family="Arial" font-size="60">🌱</text>
+  <!-- 식물 -->
+  <circle cx="310" cy="620" r="80" fill="#22A030"/>
+  <text x="310" y="635" text-anchor="middle" font-family="Arial" font-size="60">🌿</text>
+  <!-- 불 -->
+  <circle cx="714" cy="310" r="80" fill="#FF5500"/>
+  <text x="714" y="325" text-anchor="middle" font-family="Arial" font-size="60">🔥</text>
+  <!-- 재 -->
+  <circle cx="714" cy="620" r="80" fill="#504848"/>
+  <text x="714" y="638" text-anchor="middle" font-family="Arial Black" font-size="54" font-weight="900" fill="#C0B8B8">Ash</text>
+  <!-- 화살표들 -->
+  <!-- 씨앗 → 식물 (아래) -->
+  <path d="M310,390 L310,540" fill="none" stroke="#A7FFEB" stroke-width="16"/>
+  <polygon points="310,540 290,510 330,510" fill="#A7FFEB"/>
+  <!-- 식물 → 불 (우로) -->
+  <path d="M390,620 L634,620 Q670,620 670,580 L670,390" fill="none" stroke="#FFD700" stroke-width="16"/>
+  <polygon points="670,390 650,420 690,420" fill="#FFD700"/>
+  <!-- 불 → 재 (아래) -->
+  <path d="M714,390 L714,540" fill="none" stroke="#FF9900" stroke-width="16"/>
+  <polygon points="714,540 694,510 734,510" fill="#FF9900"/>
+  <!-- Layer 3: 레이블 -->
+  <text x="310" y="230" text-anchor="middle" font-family="Arial Black" font-size="62" font-weight="900" fill="white">씨앗</text>
+  <text x="310" y="760" text-anchor="middle" font-family="Arial Black" font-size="62" font-weight="900" fill="white">식물</text>
+  <text x="714" y="230" text-anchor="middle" font-family="Arial Black" font-size="62" font-weight="900" fill="white">불</text>
+  <text x="714" y="760" text-anchor="middle" font-family="Arial Black" font-size="62" font-weight="900" fill="#C0B8B8">재</text>
+</svg>

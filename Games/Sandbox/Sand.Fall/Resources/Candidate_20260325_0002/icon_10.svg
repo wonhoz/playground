@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg10s" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#B3E5FC"/>
+      <stop offset="100%" stop-color="#81D4FA"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg10s)"/>
+  <!-- Layer 2: 물 순환 -->
+  <!-- 구름 (상단) -->
+  <ellipse cx="400" cy="280" rx="120" ry="70" fill="white" opacity="0.95"/>
+  <ellipse cx="340" cy="300" rx="80" ry="60" fill="white"/>
+  <ellipse cx="460" cy="300" rx="80" ry="60" fill="white"/>
+  <!-- 구름 2 -->
+  <ellipse cx="680" cy="260" rx="100" ry="65" fill="white" opacity="0.9"/>
+  <ellipse cx="630" cy="280" rx="70" ry="55" fill="white"/>
+  <ellipse cx="730" cy="280" rx="70" ry="55" fill="white"/>
+  <!-- 비 방울 -->
+  <ellipse cx="340" cy="400" rx="12" ry="18" fill="#3468C8"/>
+  <ellipse cx="380" cy="430" rx="12" ry="18" fill="#3468C8"/>
+  <ellipse cx="420" cy="410" rx="12" ry="18" fill="#3468C8"/>
+  <ellipse cx="360" cy="460" rx="12" ry="18" fill="#3468C8"/>
+  <ellipse cx="650" cy="390" rx="12" ry="18" fill="#3468C8"/>
+  <ellipse cx="690" cy="420" rx="12" ry="18" fill="#3468C8"/>
+  <ellipse cx="720" cy="400" rx="12" ry="18" fill="#3468C8"/>
+  <!-- 바다/물 (하단) -->
+  <path d="M220,640 Q320,600 420,625 Q520,650 620,620 Q720,590 800,615 L800,800 L220,800 Z" fill="#3468C8"/>
+  <path d="M220,640 Q320,610 420,635 Q520,660 620,635 Q720,610 800,630" fill="none" stroke="#60A0E0" stroke-width="8"/>
+  <!-- 증기 화살표 (순환) -->
+  <path d="M780,600 Q840,500 800,380 Q780,300 720,260" fill="none" stroke="#9AAAC0" stroke-width="16" stroke-dasharray="25,15"/>
+  <polygon points="720,240 700,285 745,275" fill="#9AAAC0"/>
+  <!-- Layer 3: 레이블 -->
+  <text x="400" y="230" text-anchor="middle" font-family="Arial Black" font-size="62" font-weight="900" fill="#5D4037">구름</text>
+  <text x="512" y="700" text-anchor="middle" font-family="Arial Black" font-size="62" font-weight="900" fill="white">바다</text>
+  <text x="860" y="440" text-anchor="middle" font-family="Arial Black" font-size="60" font-weight="900" fill="#9AAAC0" transform="rotate(90,860,440)">증기</text>
+</svg>

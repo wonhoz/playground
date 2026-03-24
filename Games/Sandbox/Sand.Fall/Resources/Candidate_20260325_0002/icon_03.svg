@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 배경 (물/모래 분할) -->
+  <rect width="1024" height="1024" rx="190" fill="#3468C8"/>
+  <clipPath id="clip03">
+    <rect width="1024" height="1024" rx="190"/>
+  </clipPath>
+  <g clip-path="url(#clip03)">
+    <rect y="520" width="1024" height="504" fill="#C8A040"/>
+  </g>
+  <!-- Layer 2: 물 층 (상단) -->
+  <path d="M220,480 Q300,440 380,470 Q460,500 540,460 Q620,420 700,450 Q760,470 800,455 L800,340 L220,340 Z" fill="#3D8EE8" opacity="0.9"/>
+  <path d="M220,500 Q310,460 400,490 Q490,520 580,480 Q660,450 740,470 L740,500 Q660,485 580,510 Q490,540 400,510 Q310,480 220,520 Z" fill="#60A8F0" opacity="0.8"/>
+  <!-- 기포 -->
+  <circle cx="360" cy="420" r="20" fill="white" opacity="0.4"/>
+  <circle cx="520" cy="390" r="15" fill="white" opacity="0.3"/>
+  <circle cx="640" cy="430" r="18" fill="white" opacity="0.4"/>
+  <!-- Layer 3: 모래 층 (하단) -->
+  <path d="M220,560 Q310,530 400,555 Q490,580 580,550 Q660,525 740,545 Q780,555 800,545 L800,760 L220,760 Z" fill="#E8C878"/>
+  <path d="M220,620 Q290,600 360,615 Q430,630 500,610 Q570,590 640,605 Q710,620 780,605 L780,660 L220,660 Z" fill="#D4A840"/>
+  <!-- 물결 경계선 -->
+  <path d="M220,532 Q310,510 400,525 Q490,540 580,515 Q660,492 740,510 Q770,518 800,510" fill="none" stroke="#60A8F0" stroke-width="10"/>
+  <!-- 텍스트 레이블 -->
+  <text x="512" y="450" text-anchor="middle" font-family="Arial Black" font-size="72" fill="white" font-weight="900" opacity="0.9">Water</text>
+  <text x="512" y="690" text-anchor="middle" font-family="Arial Black" font-size="72" fill="#5D3A00" font-weight="900">Sand</text>
+</svg>

@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg07" cx="50%" cy="50%" r="55%">
+      <stop offset="0%" stop-color="#0F4C5C"/>
+      <stop offset="100%" stop-color="#062532"/>
+    </radialGradient>
+    <linearGradient id="hexCenter" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38BDF8"/>
+      <stop offset="100%" stop-color="#0EA5E9"/>
+    </linearGradient>
+    <filter id="hexGlow">
+      <feGaussianBlur stdDeviation="12" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="200" fill="url(#bg07)"/>
+  <!-- 중앙 육각형 (메인) -->
+  <polygon points="512,300 644,375 644,525 512,600 380,525 380,375" fill="url(#hexCenter)" filter="url(#hexGlow)"/>
+  <polygon points="512,320 626,390 626,510 512,580 398,510 398,390" fill="#0284C7"/>
+  <!-- 중앙 이미지 아이콘 (산 그림) -->
+  <rect x="420" y="360" width="184" height="148" rx="12" fill="#0C4A6E"/>
+  <rect x="420" y="360" width="184" height="80" rx="12" fill="#0EA5E9" opacity="0.6"/>
+  <polygon points="420,508 490,400 562,508" fill="#22D3EE" opacity="0.8"/>
+  <polygon points="480,508 550,420 620,508" fill="#38BDF8" opacity="0.9"/>
+  <circle cx="566" cy="398" r="22" fill="#FCD34D"/>
+  <!-- 연결선들 (포맷으로 뻗는) -->
+  <line x1="512" y1="300" x2="512" y2="168" stroke="#38BDF8" stroke-width="12" stroke-dasharray="14 8" opacity="0.7"/>
+  <line x1="644" y1="375" x2="776" y2="280" stroke="#F97316" stroke-width="12" stroke-dasharray="14 8" opacity="0.7"/>
+  <line x1="644" y1="525" x2="790" y2="610" stroke="#4ADE80" stroke-width="12" stroke-dasharray="14 8" opacity="0.7"/>
+  <line x1="512" y1="600" x2="512" y2="748" stroke="#A78BFA" stroke-width="12" stroke-dasharray="14 8" opacity="0.7"/>
+  <line x1="380" y1="525" x2="240" y2="610" stroke="#FCD34D" stroke-width="12" stroke-dasharray="14 8" opacity="0.7"/>
+  <line x1="380" y1="375" x2="248" y2="280" stroke="#F472B6" stroke-width="12" stroke-dasharray="14 8" opacity="0.7"/>
+  <!-- 포맷 노드들 (6방향) -->
+  <!-- 위 — SVG -->
+  <circle cx="512" cy="146" r="60" fill="#F97316"/>
+  <text x="512" y="160" font-family="Arial Black" font-weight="900" font-size="32" fill="white" text-anchor="middle">SVG</text>
+  <!-- 오른상 — PNG -->
+  <circle cx="802" cy="258" r="58" fill="#0284C7"/>
+  <text x="802" y="272" font-family="Arial Black" font-weight="900" font-size="32" fill="white" text-anchor="middle">PNG</text>
+  <!-- 오른하 — JPG -->
+  <circle cx="816" cy="632" r="58" fill="#16A34A"/>
+  <text x="816" y="646" font-family="Arial Black" font-weight="900" font-size="32" fill="white" text-anchor="middle">JPG</text>
+  <!-- 아래 — BMP -->
+  <circle cx="512" cy="770" r="58" fill="#7C3AED"/>
+  <text x="512" y="784" font-family="Arial Black" font-weight="900" font-size="32" fill="white" text-anchor="middle">BMP</text>
+  <!-- 왼하 — ICO -->
+  <circle cx="210" cy="632" r="60" fill="#D97706"/>
+  <text x="210" y="646" font-family="Arial Black" font-weight="900" font-size="32" fill="white" text-anchor="middle">ICO</text>
+  <!-- 왼상 — RAW -->
+  <circle cx="224" cy="258" r="56" fill="#BE185D"/>
+  <text x="224" y="272" font-family="Arial Black" font-weight="900" font-size="30" fill="white" text-anchor="middle">RAW</text>
+  <!-- 상단 텍스트 (없음 — 충분히 명확) -->
+</svg>

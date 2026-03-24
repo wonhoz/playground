@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>Img.Cast — Icon Candidates</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #1E0A3C; font-family: 'Segoe UI', sans-serif; color: #E9D5FF; padding: 40px; }
+  h1 { text-align: center; font-size: 2rem; margin-bottom: 8px; color: #C4B5FD; letter-spacing: 2px; }
+  .subtitle { text-align: center; font-size: 0.95rem; color: #A78BFA; margin-bottom: 40px; }
+  .grid { display: flex; flex-wrap: wrap; gap: 32px; justify-content: center; }
+  .card { background: #150828; border: 2px solid #7C3AED; border-radius: 20px; padding: 24px; width: 260px; text-align: center; transition: transform 0.2s, border-color 0.2s; cursor: pointer; }
+  .card:hover { transform: scale(1.08); border-color: #C4B5FD; box-shadow: 0 0 20px #A78BFA44; }
+  .card img { width: 200px; height: 200px; border-radius: 12px; display: block; margin: 0 auto 16px; }
+  .icon-name { font-size: 1.1rem; font-weight: 700; color: #DDD6FE; margin-bottom: 6px; }
+  .concept { font-size: 0.82rem; color: #A78BFA; margin-bottom: 6px; }
+  .palette { display: flex; gap: 6px; justify-content: center; margin-top: 8px; }
+  .swatch { width: 22px; height: 22px; border-radius: 50%; border: 2px solid #4C1D95; }
+  .tag { display: inline-block; font-size: 0.72rem; padding: 2px 8px; border-radius: 8px; margin: 2px; }
+  .literal { background: #1E3A5F; color: #93C5FD; }
+  .metaphor { background: #3B1F00; color: #FDE68A; }
+  .hybrid { background: #1A2B1A; color: #86EFAC; }
+</style>
+</head>
+<body>
+<h1>✨ Img.Cast</h1>
+<p class="subtitle">이미지 포맷 변환기 (SVG·PNG·JPG·BMP·ICO) — 아이콘 후보 7종 (2차)</p>
+<div class="grid">
+  <div class="card">
+    <img src="icon_01.svg" alt="icon_01">
+    <div class="icon-name">icon_01.svg</div>
+    <div class="concept">SVG→ICO 변환 화살표</div>
+    <span class="tag literal">literal</span><span class="tag">대각선/동적</span>
+    <div class="palette">
+      <div class="swatch" style="background:#EA580C"></div>
+      <div class="swatch" style="background:#FFFFFF"></div>
+      <div class="swatch" style="background:#FCD34D"></div>
+    </div>
+  </div>
+  <div class="card">
+    <img src="icon_02.svg" alt="icon_02">
+    <div class="icon-name">icon_02.svg</div>
+    <div class="concept">이미지 프레임 + 포맷 배지</div>
+    <span class="tag literal">literal</span><span class="tag">중앙심볼</span>
+    <div class="palette">
+      <div class="swatch" style="background:#0D9488"></div>
+      <div class="swatch" style="background:#FFFFFF"></div>
+      <div class="swatch" style="background:#F97316"></div>
+    </div>
+  </div>
+  <div class="card">
+    <img src="icon_03.svg" alt="icon_03">
+    <div class="icon-name">icon_03.svg</div>
+    <div class="concept">카메라 렌즈 — 포맷 변환</div>
+    <span class="tag metaphor">metaphor</span><span class="tag">공간/장면</span>
+    <div class="palette">
+      <div class="swatch" style="background:#1E1B4B"></div>
+      <div class="swatch" style="background:#94A3B8"></div>
+      <div class="swatch" style="background:#3B82F6"></div>
+    </div>
+  </div>
+  <div class="card">
+    <img src="icon_04.svg" alt="icon_04">
+    <div class="icon-name">icon_04.svg</div>
+    <div class="concept">프리즘 — 포맷 색분리</div>
+    <span class="tag metaphor">metaphor</span><span class="tag">기하학추상</span>
+    <div class="palette">
+      <div class="swatch" style="background:#3B0764"></div>
+      <div class="swatch" style="background:#F8FAFC"></div>
+      <div class="swatch" style="background:#F87171"></div>
+    </div>
+  </div>
+  <div class="card">
+    <img src="icon_05.svg" alt="icon_05">
+    <div class="icon-name">icon_05.svg</div>
+    <div class="concept">포맷 카드 팬 (5종 카드)</div>
+    <span class="tag metaphor">metaphor</span><span class="tag">레이어드</span>
+    <div class="palette">
+      <div class="swatch" style="background:#FFFBEB"></div>
+      <div class="swatch" style="background:#FCA5A5"></div>
+      <div class="swatch" style="background:#93C5FD"></div>
+    </div>
+  </div>
+  <div class="card">
+    <img src="icon_06.svg" alt="icon_06">
+    <div class="icon-name">icon_06.svg</div>
+    <div class="concept">붓 터치 → 픽셀 변환</div>
+    <span class="tag hybrid">hybrid</span><span class="tag">실루엣/캐릭터</span>
+    <div class="palette">
+      <div class="swatch" style="background:#BE185D"></div>
+      <div class="swatch" style="background:#F5F5F4"></div>
+      <div class="swatch" style="background:#FCD34D"></div>
+    </div>
+  </div>
+  <div class="card">
+    <img src="icon_07.svg" alt="icon_07">
+    <div class="icon-name">icon_07.svg</div>
+    <div class="concept">육각형 변환 허브 (6포맷)</div>
+    <span class="tag hybrid">hybrid</span><span class="tag">기하학추상</span>
+    <div class="palette">
+      <div class="swatch" style="background:#0F4C5C"></div>
+      <div class="swatch" style="background:#38BDF8"></div>
+      <div class="swatch" style="background:#F97316"></div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

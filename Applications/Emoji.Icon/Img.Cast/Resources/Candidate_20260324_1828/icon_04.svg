@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg04" cx="50%" cy="50%" r="55%">
+      <stop offset="0%" stop-color="#3B0764"/>
+      <stop offset="100%" stop-color="#1A0330"/>
+    </radialGradient>
+    <linearGradient id="prismGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#F8FAFC"/>
+      <stop offset="100%" stop-color="#CBD5E1"/>
+    </linearGradient>
+    <filter id="rayGlow">
+      <feGaussianBlur stdDeviation="12" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="200" fill="url(#bg04)"/>
+  <!-- 입사광 (흰 빔) -->
+  <path d="M180 160 L512 510" stroke="white" stroke-width="52" opacity="0.15"/>
+  <path d="M180 160 L512 510" stroke="white" stroke-width="32" opacity="0.3"/>
+  <path d="M180 160 L512 510" stroke="white" stroke-width="16" opacity="0.7" stroke-linecap="round"/>
+  <!-- 프리즘 삼각형 -->
+  <polygon points="512,200 780,680 244,680" fill="url(#prismGrad)" opacity="0.95"/>
+  <polygon points="512,200 780,680 244,680" fill="none" stroke="#A78BFA" stroke-width="8"/>
+  <!-- 프리즘 내부 하이라이트 -->
+  <polygon points="512,230 750,656 274,656" fill="none" stroke="white" stroke-width="3" opacity="0.35"/>
+  <!-- 굴절 후 분리된 포맷 광선 -->
+  <!-- SVG — 빨간 광선 -->
+  <path d="M244 680 L100 820" stroke="#F87171" stroke-width="36" filter="url(#rayGlow)" stroke-linecap="round"/>
+  <path d="M244 680 L100 820" stroke="#FCA5A5" stroke-width="14" stroke-linecap="round"/>
+  <!-- PNG — 오렌지 광선 -->
+  <path d="M320 680 L220 850" stroke="#FB923C" stroke-width="32" filter="url(#rayGlow)" stroke-linecap="round"/>
+  <path d="M320 680 L220 850" stroke="#FDBA74" stroke-width="12" stroke-linecap="round"/>
+  <!-- JPG — 노란 광선 -->
+  <path d="M512 680 L512 880" stroke="#FCD34D" stroke-width="32" filter="url(#rayGlow)" stroke-linecap="round"/>
+  <path d="M512 680 L512 880" stroke="#FDE68A" stroke-width="12" stroke-linecap="round"/>
+  <!-- BMP — 초록 광선 -->
+  <path d="M680 680 L780 850" stroke="#4ADE80" stroke-width="28" filter="url(#rayGlow)" stroke-linecap="round"/>
+  <path d="M680 680 L780 850" stroke="#86EFAC" stroke-width="10" stroke-linecap="round"/>
+  <!-- ICO — 파란 광선 -->
+  <path d="M780 680 L924 820" stroke="#38BDF8" stroke-width="28" filter="url(#rayGlow)" stroke-linecap="round"/>
+  <path d="M780 680 L924 820" stroke="#7DD3FC" stroke-width="10" stroke-linecap="round"/>
+  <!-- 포맷 레이블들 -->
+  <text x="80" y="900" font-family="Arial Black" font-size="28" fill="#FCA5A5" font-weight="900" text-anchor="middle">SVG</text>
+  <text x="208" y="920" font-family="Arial Black" font-size="28" fill="#FDBA74" font-weight="900" text-anchor="middle">PNG</text>
+  <text x="512" y="950" font-family="Arial Black" font-size="28" fill="#FDE68A" font-weight="900" text-anchor="middle">JPG</text>
+  <text x="808" y="920" font-family="Arial Black" font-size="28" fill="#86EFAC" font-weight="900" text-anchor="middle">BMP</text>
+  <text x="940" y="900" font-family="Arial Black" font-size="28" fill="#7DD3FC" font-weight="900" text-anchor="middle">ICO</text>
+</svg>

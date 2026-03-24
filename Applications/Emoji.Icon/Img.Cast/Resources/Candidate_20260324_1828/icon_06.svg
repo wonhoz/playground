@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg06" cx="50%" cy="50%" r="55%">
+      <stop offset="0%" stop-color="#BE185D"/>
+      <stop offset="100%" stop-color="#831843"/>
+    </radialGradient>
+    <filter id="brushGlow">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="200" fill="url(#bg06)"/>
+  <!-- 붓 자루 (대각선 방향) -->
+  <rect x="406" y="148" width="72" height="480" rx="28" fill="#F5F5F4" transform="rotate(-22 512 388)"/>
+  <rect x="416" y="158" width="52" height="460" rx="22" fill="#D6D3D1" transform="rotate(-22 512 388)"/>
+  <!-- 붓 금속 부분 -->
+  <rect x="400" y="560" width="84" height="68" rx="10" fill="#9CA3AF" transform="rotate(-22 512 594)"/>
+  <rect x="406" y="565" width="72" height="58" rx="8" fill="#6B7280" transform="rotate(-22 512 594)"/>
+  <!-- 붓 털 -->
+  <path d="M430 620 Q512 640 560 740 Q540 760 510 750 Q488 730 460 680 Z" fill="#FBBF24" transform="rotate(-22 512 680)"/>
+  <path d="M450 625 Q530 645 565 738 Q545 752 520 742" stroke="#F59E0B" stroke-width="6" fill="none" transform="rotate(-22 512 680)"/>
+  <!-- 붓 끝 점 (픽셀 방사) -->
+  <!-- 변환 지점 -->
+  <circle cx="630" cy="620" r="30" fill="#FCD34D" filter="url(#brushGlow)"/>
+  <!-- 픽셀들이 방사 -->
+  <rect x="670" y="560" width="44" height="44" rx="8" fill="#F97316"/>
+  <rect x="726" y="530" width="36" height="36" rx="6" fill="#FCD34D"/>
+  <rect x="762" y="492" width="28" height="28" rx="5" fill="#4ADE80"/>
+  <rect x="700" y="620" width="38" height="38" rx="7" fill="#38BDF8"/>
+  <rect x="750" y="600" width="30" height="30" rx="5" fill="#A78BFA"/>
+  <rect x="790" y="562" width="24" height="24" rx="4" fill="#F472B6"/>
+  <rect x="720" y="670" width="34" height="34" rx="6" fill="#FB923C"/>
+  <rect x="780" y="648" width="26" height="26" rx="4" fill="#22D3EE"/>
+  <rect x="818" y="614" width="20" height="20" rx="3" fill="#FDE047"/>
+  <!-- 붓이 지나간 자리 (왼쪽) -->
+  <rect x="260" y="460" width="44" height="44" rx="8" fill="#FECDD3" opacity="0.7"/>
+  <rect x="200" y="500" width="36" height="36" rx="6" fill="#FCA5A5" opacity="0.6"/>
+  <rect x="318" y="518" width="30" height="30" rx="5" fill="#FDE68A" opacity="0.6"/>
+  <rect x="230" y="560" width="28" height="28" rx="4" fill="#D9F99D" opacity="0.6"/>
+  <!-- 하단 포맷 태그 -->
+  <text x="512" y="880" font-family="Arial Black" font-weight="900" font-size="48" fill="white" text-anchor="middle" opacity="0.95">Img.Cast</text>
+  <text x="512" y="940" font-family="Arial" font-size="34" fill="#FBCFE8" text-anchor="middle" opacity="0.8">Paint → Format</text>
+</svg>

@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg03" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#1E1B4B"/>
+      <stop offset="100%" stop-color="#0F0C2E"/>
+    </radialGradient>
+    <radialGradient id="lensGrad" cx="40%" cy="35%" r="60%">
+      <stop offset="0%" stop-color="#94A3B8"/>
+      <stop offset="60%" stop-color="#475569"/>
+      <stop offset="100%" stop-color="#1E293B"/>
+    </radialGradient>
+    <radialGradient id="innerLens" cx="35%" cy="32%" r="55%">
+      <stop offset="0%" stop-color="#BFDBFE"/>
+      <stop offset="50%" stop-color="#3B82F6"/>
+      <stop offset="100%" stop-color="#1D4ED8"/>
+    </radialGradient>
+    <filter id="lensGlow">
+      <feGaussianBlur stdDeviation="20" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="200" fill="url(#bg03)"/>
+  <!-- 렌즈 외부 링 -->
+  <circle cx="512" cy="480" r="300" fill="url(#lensGrad)" filter="url(#lensGlow)"/>
+  <circle cx="512" cy="480" r="290" fill="none" stroke="#64748B" stroke-width="20"/>
+  <!-- 렌즈 반사 줄무늬 -->
+  <path d="M280 280 Q512 200 744 280" stroke="#94A3B8" stroke-width="8" fill="none" opacity="0.4"/>
+  <path d="M260 320 Q512 240 764 320" stroke="#94A3B8" stroke-width="5" fill="none" opacity="0.25"/>
+  <!-- 렌즈 내부 (이미지 변환 표현) -->
+  <circle cx="512" cy="480" r="230" fill="url(#innerLens)"/>
+  <!-- 렌즈 안 — 왼쪽 절반 이미지 (픽셀 그리드) -->
+  <clipPath id="leftHalf"><rect x="282" y="250" width="230" height="460"/></clipPath>
+  <rect x="282" y="250" width="230" height="460" fill="#1E3A8A" clip-path="url(#leftHalf)"/>
+  <line x1="282" y1="250" x2="282" y2="710" stroke="#3B82F6" stroke-width="2"/>
+  <line x1="316" y1="250" x2="316" y2="710" stroke="#3B82F6" stroke-width="1.5" opacity="0.5"/>
+  <line x1="350" y1="250" x2="350" y2="710" stroke="#3B82F6" stroke-width="1.5" opacity="0.5"/>
+  <line x1="384" y1="250" x2="384" y2="710" stroke="#3B82F6" stroke-width="1.5" opacity="0.5"/>
+  <line x1="418" y1="250" x2="418" y2="710" stroke="#3B82F6" stroke-width="1.5" opacity="0.5"/>
+  <line x1="282" y1="320" x2="512" y2="320" stroke="#3B82F6" stroke-width="1.5" opacity="0.5"/>
+  <line x1="282" y1="390" x2="512" y2="390" stroke="#3B82F6" stroke-width="1.5" opacity="0.5"/>
+  <line x1="282" y1="460" x2="512" y2="460" stroke="#3B82F6" stroke-width="1.5" opacity="0.5"/>
+  <line x1="282" y1="530" x2="512" y2="530" stroke="#3B82F6" stroke-width="1.5" opacity="0.5"/>
+  <line x1="282" y1="600" x2="512" y2="600" stroke="#3B82F6" stroke-width="1.5" opacity="0.5"/>
+  <!-- 렌즈 안 — 오른쪽 절반 변환 결과 (벡터 느낌) -->
+  <clipPath id="rightHalf"><rect x="512" y="250" width="230" height="460"/></clipPath>
+  <rect x="512" y="250" width="230" height="460" fill="#7C3AED" clip-path="url(#rightHalf)"/>
+  <polygon points="512,350 700,480 512,610" fill="#A78BFA" opacity="0.6"/>
+  <circle cx="620" cy="430" r="50" fill="#C4B5FD" opacity="0.5"/>
+  <!-- 렌즈 중앙 구분선 + 변환 화살표 -->
+  <line x1="512" y1="250" x2="512" y2="710" stroke="#FCD34D" stroke-width="6"/>
+  <polygon points="512,470 540,480 512,490 524,480" fill="#FCD34D"/>
+  <!-- 렌즈 외부 나사/디테일 -->
+  <circle cx="512" cy="480" r="290" fill="none" stroke="#94A3B8" stroke-width="14"/>
+  <circle cx="512" cy="480" r="300" fill="none" stroke="#475569" stroke-width="22"/>
+  <!-- 렌즈 하단 포맷 배지 -->
+  <rect x="320" y="826" width="384" height="64" rx="18" fill="#7C3AED" opacity="0.9"/>
+  <text x="512" y="869" font-family="Arial Black" font-weight="900" font-size="36" fill="white" text-anchor="middle">IMG · CAST</text>
+</svg>

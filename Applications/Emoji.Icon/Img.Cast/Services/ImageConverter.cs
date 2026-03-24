@@ -8,13 +8,14 @@ namespace ImgCast.Services;
 public record ConversionResult(int Success, int Failed, IReadOnlyList<(string File, string Error)> Errors);
 
 public enum OutputFormat { ICO, PNG, JPG, BMP }
-public enum InputFilter  { All, SVG, PNG, JPG, BMP }
+public enum InputFilter  { All, SVG, PNG, JPG, BMP, ICO }
 
 public static class ImageConverter
 {
-    static readonly int[] IcoSizes = [16, 24, 32, 48, 64, 128, 256];
+    static readonly int[] DefaultIcoSizes = [16, 32, 48, 64, 128, 256];
 
-    static readonly string[] SupportedExts = [".svg", ".png", ".jpg", ".jpeg", ".bmp"];
+    static readonly string[] SupportedExts = [".svg", ".png", ".jpg", ".jpeg", ".bmp", ".ico"];
+
 
     // ─── 파일 수집 ───────────────────────────────────────────────────────────
     public static string[] CollectFiles(string[] dropped, InputFilter filter)
@@ -30,8 +31,8 @@ public static class ImageConverter
         }
 
         return filter == InputFilter.All
-            ? [.. files]
-            : [.. files.Where(f => MatchesFilter(f, filter))];
+            ? [.. files.Distinct(StringComparer.OrdinalIgnoreCase)]
+            : [.. files.Where(f => MatchesFilter(f, filter)).Distinct(StringComparer.OrdinalIgnoreCase)];
     }
 
     static bool IsSupported(string path)
@@ -49,6 +50,7 @@ public static class ImageConverter
             InputFilter.PNG => ext == ".png",
             InputFilter.JPG => ext is ".jpg" or ".jpeg",
             InputFilter.BMP => ext == ".bmp",
+            InputFilter.ICO => ext == ".ico",
             _               => true
         };
     }
@@ -59,11 +61,13 @@ public static class ImageConverter
         OutputFormat output,
         bool overwrite,
         int jpgQuality,
+        int[]? icoSizes,
         IProgress<(int Current, int Total, string File)>? progress,
         CancellationToken ct)
     {
         int success = 0, failed = 0;
         var errors = new List<(string, string)>();
+        var sizes  = icoSizes is { Length: > 0 } ? icoSizes : DefaultIcoSizes;
 
         await Task.Run(() =>
         {
@@ -75,7 +79,7 @@ public static class ImageConverter
 
                 try
                 {
-                    ConvertSingle(src, output, overwrite, jpgQuality);
+                    ConvertSingle(src, output, overwrite, jpgQuality, sizes);
                     success++;
                 }
                 catch (Exception ex)
@@ -90,7 +94,7 @@ public static class ImageConverter
     }
 
     // ─── 단일 파일 변환 ──────────────────────────────────────────────────────
-    static void ConvertSingle(string src, OutputFormat output, bool overwrite, int jpgQuality)
+    static void ConvertSingle(string src, OutputFormat output, bool overwrite, int jpgQuality, int[] icoSizes)
     {
         string ext = Path.GetExtension(src).ToLowerInvariant();
         string outExt = output switch
@@ -105,7 +109,7 @@ public static class ImageConverter
 
         if (output == OutputFormat.ICO)
         {
-            SaveIco(src, ext, dest);
+            SaveIco(src, ext, dest, icoSizes);
             return;
         }
 
@@ -137,11 +141,11 @@ public static class ImageConverter
         return Path.Combine(dir, stem + "_converted" + outExt);
     }
 
-    // ─── ICO 저장 (7개 사이즈) ──────────────────────────────────────────────
-    static void SaveIco(string src, string ext, string dest)
+    // ─── ICO 저장 (커스텀 사이즈 지원) ────────────────────────────────────
+    static void SaveIco(string src, string ext, string dest, int[] sizes)
     {
         var images = new List<(int, byte[])>();
-        foreach (int sz in IcoSizes)
+        foreach (int sz in sizes)
         {
             using var bmp = LoadAsBitmap(src, ext, sz);
             images.Add((sz, BitmapToPng(bmp)));
@@ -149,12 +153,13 @@ public static class ImageConverter
         File.WriteAllBytes(dest, IcoEncoder.Encode(images));
     }
 
-    // ─── 이미지 로드 ────────────────────────────────────────────────────────
+    // ─── 이미지 로드 (ICO 포함) ─────────────────────────────────────────────
     static SKBitmap LoadAsBitmap(string path, string ext, int targetSize)
     {
         if (ext == ".svg")
             return LoadSvgAsBitmap(path, targetSize > 0 ? targetSize : 256);
 
+        // ICO / PNG / JPG / BMP — SkiaSharp 기본 디코더로 처리
         using var original = SKBitmap.Decode(path)
             ?? throw new InvalidDataException("이미지 디코드 실패");
 
@@ -167,9 +172,9 @@ public static class ImageConverter
     static SKBitmap LoadSvgAsBitmap(string path, int size)
     {
         // SVG 전처리: 8자리 hex 색상 변환 + feDropShadow 확장
-        string svgText    = File.ReadAllText(path, Encoding.UTF8);
-        string processed  = SvgPreprocessor.Process(svgText);
-        string tempPath   = Path.Combine(Path.GetTempPath(), $"imgcast_{Guid.NewGuid():N}.svg");
+        string svgText   = File.ReadAllText(path, Encoding.UTF8);
+        string processed = SvgPreprocessor.Process(svgText);
+        string tempPath  = Path.Combine(Path.GetTempPath(), $"imgcast_{Guid.NewGuid():N}.svg");
         try
         {
             File.WriteAllText(tempPath, processed, new UTF8Encoding(false));
@@ -212,7 +217,7 @@ public static class ImageConverter
         if (renderSize == size)
             return renderBmp;
 
-        // 2x → target 다운스케일
+        // 2x → target 다운스케일 (SKSamplingOptions 사용)
         var downscaled = renderBmp.Resize(
             new SKImageInfo(size, size, SKColorType.Rgba8888, SKAlphaType.Premul),
             SKFilterQuality.High);
@@ -239,6 +244,20 @@ public static class ImageConverter
         canvas.DrawBitmap(resized, (size - fw) / 2, (size - fh) / 2);
         resized.Dispose();
         return padded;
+    }
+
+    // ─── SVG 미리보기 렌더링 ────────────────────────────────────────────────
+    public static async Task<SKBitmap?> RenderPreviewAsync(string path, int size = 240)
+    {
+        if (!path.EndsWith(".svg", StringComparison.OrdinalIgnoreCase)) return null;
+        try
+        {
+            return await Task.Run(() => LoadSvgAsBitmap(path, size));
+        }
+        catch
+        {
+            return null;
+        }
     }
 
     // ─── 저장 유틸 ───────────────────────────────────────────────────────────

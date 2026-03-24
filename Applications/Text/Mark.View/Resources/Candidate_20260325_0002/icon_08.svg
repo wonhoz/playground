@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg08m" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#E65100"/>
+      <stop offset="100%" stop-color="#FF9800"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg08m)"/>
+  <!-- Layer 2: 안경 -->
+  <!-- 왼쪽 렌즈 -->
+  <circle cx="340" cy="480" r="170" fill="white" opacity="0.95"/>
+  <circle cx="340" cy="480" r="148" fill="#FFF3E0"/>
+  <!-- 왼쪽 렌즈 안: # 기호 -->
+  <text x="340" y="518" text-anchor="middle" font-family="Arial Black" font-size="170" font-weight="900" fill="#E65100">#</text>
+  <!-- 오른쪽 렌즈 -->
+  <circle cx="684" cy="480" r="170" fill="white" opacity="0.95"/>
+  <circle cx="684" cy="480" r="148" fill="#FFF3E0"/>
+  <!-- 오른쪽 렌즈 안: 렌더링 텍스트 -->
+  <text x="684" y="452" text-anchor="middle" font-family="Arial Black" font-size="90" font-weight="900" fill="#1565C0">Title</text>
+  <rect x="614" y="470" width="140" height="8" rx="4" fill="#90CAF9"/>
+  <rect x="614" y="490" width="110" height="7" rx="4" fill="#BBDEFB"/>
+  <rect x="614" y="508" width="130" height="7" rx="4" fill="#BBDEFB"/>
+  <!-- 안경다리 -->
+  <path d="M170,480 Q200,460 230,470 Q270,480 290,480" fill="none" stroke="#BF360C" stroke-width="22" stroke-linecap="round"/>
+  <path d="M734,480 Q754,480 794,470 Q834,460 854,480" fill="none" stroke="#BF360C" stroke-width="22" stroke-linecap="round"/>
+  <!-- 코 부분 -->
+  <path d="M510,460 Q512,500 514,460" fill="none" stroke="#BF360C" stroke-width="18" stroke-linecap="round"/>
+  <!-- 렌즈 테두리 -->
+  <circle cx="340" cy="480" r="170" fill="none" stroke="#BF360C" stroke-width="18"/>
+  <circle cx="684" cy="480" r="170" fill="none" stroke="#BF360C" stroke-width="18"/>
+  <!-- Layer 3: 반사광 -->
+  <ellipse cx="290" cy="420" rx="40" ry="24" fill="white" opacity="0.4" transform="rotate(-30,290,420)"/>
+  <ellipse cx="634" cy="420" rx="40" ry="24" fill="white" opacity="0.4" transform="rotate(-30,634,420)"/>
+</svg>

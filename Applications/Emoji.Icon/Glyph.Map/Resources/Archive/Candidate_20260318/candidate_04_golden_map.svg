@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#030508"/>
+      <stop offset="100%" style="stop-color:#0d0800"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FBBF24"/>
+      <stop offset="100%" style="stop-color:#F59E0B"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- 지도 윤곽 -->
+  <rect x="90" y="140" width="332" height="220" rx="10" fill="url(#gold)" opacity="0.06"/>
+  <rect x="90" y="140" width="332" height="220" rx="10" fill="none" stroke="#FBBF24" stroke-width="3" filter="url(#glow)"/>
+  <!-- 경도/위도 선 -->
+  <line x1="90" y1="250" x2="422" y2="250" stroke="#FBBF24" stroke-width="1" opacity="0.25" stroke-dasharray="8,4"/>
+  <line x1="256" y1="140" x2="256" y2="360" stroke="#FBBF24" stroke-width="1" opacity="0.25" stroke-dasharray="8,4"/>
+  <!-- 핀 마커 -->
+  <circle cx="200" cy="210" r="6" fill="#FBBF24" opacity="0.8" filter="url(#glow)"/>
+  <circle cx="310" cy="290" r="6" fill="#FDE68A" opacity="0.8"/>
+  <circle cx="256" cy="250" r="10" fill="#FBBF24" opacity="0.9" filter="url(#glow)"/>
+  <!-- 중앙 이모지 -->
+  <text x="256" y="258" text-anchor="middle" font-size="14" font-family="Segoe UI Emoji" fill="white" opacity="0.8">📍</text>
+  <!-- 레이블 -->
+  <text x="256" y="430" text-anchor="middle" fill="#FBBF24" font-size="13" font-family="monospace" font-weight="bold" filter="url(#glow)">GOLDEN MAP</text>
+</svg>

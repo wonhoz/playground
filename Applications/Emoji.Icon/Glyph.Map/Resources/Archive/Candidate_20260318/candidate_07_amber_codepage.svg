@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#030508"/>
+      <stop offset="100%" style="stop-color:#0d0800"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- 코드페이지 북 -->
+  <rect x="120" y="110" width="272" height="300" rx="10" fill="#FBBF24" opacity="0.06"/>
+  <rect x="120" y="110" width="272" height="300" rx="10" fill="none" stroke="#FBBF24" stroke-width="3" filter="url(#glow)"/>
+  <!-- 책 척추 -->
+  <line x1="160" y1="110" x2="160" y2="410" stroke="#FBBF24" stroke-width="2" opacity="0.4"/>
+  <!-- 코드 행들 -->
+  <text x="185" y="155" fill="#FBBF24" font-size="11" font-family="monospace" opacity="0.7">U+1F600  😀</text>
+  <text x="185" y="180" fill="#FDE68A" font-size="11" font-family="monospace" opacity="0.6">U+2B50  ⭐</text>
+  <text x="185" y="205" fill="#FBBF24" font-size="11" font-family="monospace" opacity="0.7">U+1F525  🔥</text>
+  <text x="185" y="230" fill="#FDE68A" font-size="11" font-family="monospace" opacity="0.6">U+1F4A5  💥</text>
+  <text x="185" y="255" fill="#FBBF24" font-size="11" font-family="monospace" opacity="0.7">U+1F31F  🌟</text>
+  <text x="185" y="280" fill="#FDE68A" font-size="11" font-family="monospace" opacity="0.6">U+2728  ✨</text>
+  <!-- 레이블 -->
+  <text x="256" y="450" text-anchor="middle" fill="#FBBF24" font-size="13" font-family="monospace" font-weight="bold" filter="url(#glow)">AMBER CODEPAGE</text>
+</svg>

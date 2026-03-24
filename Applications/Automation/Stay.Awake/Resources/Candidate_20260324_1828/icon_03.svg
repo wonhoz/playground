@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg03" cx="30%" cy="35%" r="70%">
+      <stop offset="0%" stop-color="#312E81"/>
+      <stop offset="100%" stop-color="#1E1B4B"/>
+    </radialGradient>
+    <radialGradient id="moonGrad" cx="40%" cy="35%" r="60%">
+      <stop offset="0%" stop-color="#FDE68A"/>
+      <stop offset="100%" stop-color="#F59E0B"/>
+    </radialGradient>
+    <filter id="moonGlow">
+      <feGaussianBlur stdDeviation="16" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="200" fill="url(#bg03)"/>
+  <!-- 별들 -->
+  <circle cx="180" cy="160" r="5" fill="white" opacity="0.8"/>
+  <circle cx="340" cy="120" r="4" fill="white" opacity="0.6"/>
+  <circle cx="820" cy="180" r="4" fill="white" opacity="0.7"/>
+  <circle cx="760" cy="280" r="3" fill="white" opacity="0.5"/>
+  <circle cx="130" cy="450" r="4" fill="white" opacity="0.6"/>
+  <circle cx="890" cy="400" r="5" fill="white" opacity="0.7"/>
+  <circle cx="920" cy="700" r="3" fill="white" opacity="0.5"/>
+  <circle cx="150" cy="780" r="4" fill="white" opacity="0.6"/>
+  <!-- 달 + 눈 (달이 눈을 뜬 형태) -->
+  <!-- 달 몸체 (초승달이 눈 모양처럼) -->
+  <ellipse cx="512" cy="440" rx="280" ry="190" fill="url(#moonGrad)" filter="url(#moonGlow)"/>
+  <!-- 위 눈꺼풀 커브 (달을 눈처럼 만들기) -->
+  <path d="M232 440 Q360 250 512 240 Q664 250 792 440 Z" fill="#312E81"/>
+  <!-- 눈 흰자 (달 안) -->
+  <ellipse cx="512" cy="440" rx="270" ry="183" fill="#FDE68A"/>
+  <!-- 달 눈꺼풀 위쪽 커브 -->
+  <path d="M242 440 Q370 258 512 248 Q654 258 782 440" stroke="#D97706" stroke-width="18" fill="none" stroke-linecap="round"/>
+  <!-- 달 속 홍채 (청록/파랑 → 깨어있음) -->
+  <circle cx="512" cy="440" r="118" fill="#0EA5E9"/>
+  <circle cx="512" cy="440" r="65" fill="#0C4A6E"/>
+  <!-- 동공 하이라이트 -->
+  <circle cx="548" cy="408" r="30" fill="white" opacity="0.8"/>
+  <!-- 눈 테두리 아래 -->
+  <path d="M242 440 Q370 610 512 620 Q654 610 782 440" stroke="#D97706" stroke-width="18" fill="none" stroke-linecap="round"/>
+  <!-- ZZZ 취소 (오른쪽 상단) -->
+  <!-- ZZZ 텍스트 -->
+  <text x="760" y="225" font-family="Arial Black" font-weight="900" font-size="72" fill="#818CF8" opacity="0.6" transform="rotate(-15 760 225)">Z</text>
+  <text x="820" y="175" font-family="Arial Black" font-weight="900" font-size="56" fill="#818CF8" opacity="0.45" transform="rotate(-15 820 175)">z</text>
+  <text x="870" y="135" font-family="Arial Black" font-weight="900" font-size="42" fill="#818CF8" opacity="0.3" transform="rotate(-15 870 135)">z</text>
+  <!-- 취소선 X -->
+  <line x1="720" y1="130" x2="900" y2="240" stroke="#EF4444" stroke-width="20" stroke-linecap="round"/>
+  <line x1="900" y1="130" x2="720" y2="240" stroke="#EF4444" stroke-width="20" stroke-linecap="round"/>
+  <!-- 하단 메시지 -->
+  <text x="512" y="760" font-family="Arial Black" font-weight="900" font-size="54" fill="#C7D2FE" text-anchor="middle">NO SLEEP</text>
+  <text x="512" y="820" font-family="Arial" font-size="38" fill="#818CF8" text-anchor="middle" opacity="0.8">항상 깨어있음</text>
+</svg>

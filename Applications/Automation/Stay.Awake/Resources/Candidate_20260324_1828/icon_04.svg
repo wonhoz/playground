@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg04" cx="40%" cy="40%" r="65%">
+      <stop offset="0%" stop-color="#92400E"/>
+      <stop offset="100%" stop-color="#451A03"/>
+    </radialGradient>
+    <linearGradient id="cupGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFFBEB"/>
+      <stop offset="100%" stop-color="#FEF3C7"/>
+    </linearGradient>
+    <filter id="signalGlow">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="200" fill="url(#bg04)"/>
+  <!-- 커피 머그컵 몸체 -->
+  <rect x="242" y="470" width="380" height="330" rx="28" fill="url(#cupGrad)"/>
+  <!-- 컵 내부 커피 -->
+  <rect x="262" y="490" width="340" height="80" rx="16" fill="#78350F"/>
+  <rect x="262" y="490" width="340" height="60" rx="16" fill="#92400E"/>
+  <!-- 컵 핸들 -->
+  <path d="M622 530 Q780 530 780 650 Q780 770 622 770" stroke="url(#cupGrad)" stroke-width="52" fill="none" stroke-linecap="round"/>
+  <path d="M622 530 Q760 530 760 650 Q760 750 622 770" stroke="#D97706" stroke-width="28" fill="none" stroke-linecap="round" opacity="0.4"/>
+  <!-- 컵 받침대 -->
+  <ellipse cx="432" cy="800" rx="240" ry="28" fill="#F59E0B" opacity="0.7"/>
+  <rect x="302" y="790" width="260" height="20" rx="10" fill="#FBBF24"/>
+  <!-- 커피 김 (물결) -->
+  <path d="M340 440 Q360 400 380 440 Q400 480 420 440 Q440 400 460 440" stroke="#FDE68A" stroke-width="14" fill="none" stroke-linecap="round" opacity="0.7"/>
+  <path d="M400 410 Q420 368 440 410 Q460 452 480 410 Q500 368 520 410" stroke="#FDE68A" stroke-width="12" fill="none" stroke-linecap="round" opacity="0.55"/>
+  <path d="M460 380 Q480 338 500 380 Q520 422 540 380" stroke="#FDE68A" stroke-width="10" fill="none" stroke-linecap="round" opacity="0.4"/>
+  <!-- Active 신호 (초록 WiFi/활성 신호 — 오른쪽) -->
+  <!-- 신호 배경 원 -->
+  <circle cx="760" cy="380" r="145" fill="#064E3B" opacity="0.85" filter="url(#signalGlow)"/>
+  <!-- 신호 링 3개 -->
+  <path d="M680 440 Q760 340 840 440" stroke="#4ADE80" stroke-width="28" fill="none" stroke-linecap="round" filter="url(#signalGlow)"/>
+  <path d="M706 470 Q760 390 814 470" stroke="#4ADE80" stroke-width="24" fill="none" stroke-linecap="round" opacity="0.7"/>
+  <path d="M728 498 Q760 438 792 498" stroke="#4ADE80" stroke-width="20" fill="none" stroke-linecap="round" opacity="0.55"/>
+  <!-- 신호 중심점 -->
+  <circle cx="760" cy="516" r="24" fill="#22C55E" filter="url(#signalGlow)"/>
+  <!-- Active 텍스트 -->
+  <rect x="680" y="565" width="160" height="46" rx="14" fill="#14532D"/>
+  <text x="760" y="598" font-family="Arial Black" font-weight="900" font-size="28" fill="#4ADE80" text-anchor="middle">ACTIVE</text>
+  <!-- 하단 텍스트 -->
+  <text x="432" y="900" font-family="Arial Black" font-weight="900" font-size="50" fill="#FCD34D" text-anchor="middle">Stay Awake</text>
+</svg>

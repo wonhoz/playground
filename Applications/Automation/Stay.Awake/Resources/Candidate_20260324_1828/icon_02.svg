@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg02" cx="30%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#1E3A8A"/>
+      <stop offset="100%" stop-color="#0B1642"/>
+    </radialGradient>
+    <filter id="arrowGlow">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="200" fill="url(#bg02)"/>
+  <!-- 이동 궤적 점선들 (마우스가 움직인 흔적) -->
+  <path d="M512 512 Q420 420 340 340" stroke="#60A5FA" stroke-width="8" fill="none" stroke-dasharray="18 12" opacity="0.5"/>
+  <path d="M512 512 Q600 420 680 340" stroke="#60A5FA" stroke-width="8" fill="none" stroke-dasharray="18 12" opacity="0.5"/>
+  <path d="M512 512 Q420 600 340 680" stroke="#60A5FA" stroke-width="8" fill="none" stroke-dasharray="18 12" opacity="0.5"/>
+  <path d="M512 512 Q600 600 680 680" stroke="#60A5FA" stroke-width="8" fill="none" stroke-dasharray="18 12" opacity="0.5"/>
+  <!-- 위쪽 화살표 (노란) -->
+  <polygon points="512,162 560,240 535,240 535,320 490,320 490,240 464,240" fill="#FCD34D" filter="url(#arrowGlow)"/>
+  <!-- 아래쪽 화살표 (노란) -->
+  <polygon points="512,862 464,784 490,784 490,704 535,704 535,784 560,784" fill="#FCD34D" filter="url(#arrowGlow)"/>
+  <!-- 왼쪽 화살표 (노란) -->
+  <polygon points="162,512 240,464 240,490 320,490 320,535 240,535 240,560" fill="#FCD34D" filter="url(#arrowGlow)"/>
+  <!-- 오른쪽 화살표 (노란) -->
+  <polygon points="862,512 784,560 784,535 704,535 704,490 784,490 784,464" fill="#FCD34D" filter="url(#arrowGlow)"/>
+  <!-- 마우스 커서 (중앙, 흰색 큰 것) -->
+  <!-- 마우스 커서 본체 -->
+  <polygon points="440,380 440,660 500,608 532,692 576,672 544,588 616,588" fill="white" stroke="#DBEAFE" stroke-width="8" stroke-linejoin="round"/>
+  <!-- 마우스 커서 내부 (깊이감) -->
+  <polygon points="462,416 462,620 510,576 542,654 572,640 540,560 600,560" fill="#BFDBFE"/>
+  <!-- 커서 핫스팟 점 -->
+  <circle cx="440" cy="380" r="14" fill="#FCD34D"/>
+</svg>

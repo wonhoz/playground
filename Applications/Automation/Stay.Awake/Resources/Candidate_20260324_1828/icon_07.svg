@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg07" cx="50%" cy="50%" r="55%">
+      <stop offset="0%" stop-color="#052E16"/>
+      <stop offset="100%" stop-color="#022C16"/>
+    </radialGradient>
+    <filter id="ecgGlow">
+      <feGaussianBlur stdDeviation="12" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="dotGlow07">
+      <feGaussianBlur stdDeviation="18" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="200" fill="url(#bg07)"/>
+  <!-- 그리드 라인들 (모니터 효과) -->
+  <line x1="168" y1="300" x2="856" y2="300" stroke="#15803D" stroke-width="1.5" opacity="0.3"/>
+  <line x1="168" y1="400" x2="856" y2="400" stroke="#15803D" stroke-width="1.5" opacity="0.3"/>
+  <line x1="168" y1="500" x2="856" y2="500" stroke="#15803D" stroke-width="1.5" opacity="0.3"/>
+  <line x1="168" y1="600" x2="856" y2="600" stroke="#15803D" stroke-width="1.5" opacity="0.3"/>
+  <line x1="168" y1="700" x2="856" y2="700" stroke="#15803D" stroke-width="1.5" opacity="0.3"/>
+  <line x1="280" y1="250" x2="280" y2="750" stroke="#15803D" stroke-width="1.5" opacity="0.3"/>
+  <line x1="400" y1="250" x2="400" y2="750" stroke="#15803D" stroke-width="1.5" opacity="0.3"/>
+  <line x1="512" y1="250" x2="512" y2="750" stroke="#15803D" stroke-width="1.5" opacity="0.3"/>
+  <line x1="624" y1="250" x2="624" y2="750" stroke="#15803D" stroke-width="1.5" opacity="0.3"/>
+  <line x1="744" y1="250" x2="744" y2="750" stroke="#15803D" stroke-width="1.5" opacity="0.3"/>
+  <!-- ECG 파형 (초록 빛나는 선) -->
+  <!-- 파형: 평탄 → 급상승 → 급하강 → 평탄 → 다시 반복 -->
+  <path d="M168 500 L310 500 L330 500 L350 280 L370 720 L390 500 L450 500 L470 500 L490 310 L510 690 L530 500 L590 500 L610 500 L630 320 L650 680 L670 500 L730 500 L750 500 L770 340 L790 660 L810 500 L856 500"
+        stroke="#22C55E" stroke-width="18" fill="none" stroke-linecap="round" stroke-linejoin="round" filter="url(#ecgGlow)"/>
+  <!-- 파형 내부 밝은 선 -->
+  <path d="M168 500 L310 500 L330 500 L350 280 L370 720 L390 500 L450 500 L470 500 L490 310 L510 690 L530 500 L590 500 L610 500 L630 320 L650 680 L670 500 L730 500 L750 500 L770 340 L790 660 L810 500 L856 500"
+        stroke="#86EFAC" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- 활성 점 (오른쪽 끝) -->
+  <circle cx="856" cy="500" r="55" fill="#16A34A" opacity="0.25" filter="url(#dotGlow07)"/>
+  <circle cx="856" cy="500" r="36" fill="#22C55E"/>
+  <circle cx="856" cy="500" r="22" fill="#4ADE80"/>
+  <circle cx="856" cy="500" r="11" fill="#DCFCE7"/>
+  <!-- 상단 AWAKE 텍스트 -->
+  <text x="512" y="210" font-family="Arial Black" font-weight="900" font-size="72" fill="#22C55E" text-anchor="middle" filter="url(#ecgGlow)">AWAKE</text>
+  <!-- 하단 상태 바 -->
+  <rect x="168" y="790" width="688" height="52" rx="16" fill="#14532D"/>
+  <rect x="176" y="798" width="580" height="36" rx="12" fill="#16A34A"/>
+  <circle cx="196" cy="816" r="12" fill="#4ADE80"/>
+  <text x="520" y="826" font-family="Arial" font-weight="bold" font-size="26" fill="white" text-anchor="middle">시스템 활성 상태 유지 중...</text>
+</svg>

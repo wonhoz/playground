@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#030508"/>
+      <stop offset="100%" style="stop-color:#0d0000"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- 픽셀 스탬프 패턴 -->
+  <!-- 모니터 픽셀들 (붉은 빛 클러스터) -->
+  <rect x="136" y="136" width="20" height="20" rx="2" fill="#EF4444" opacity="0.8" filter="url(#glow)"/>
+  <rect x="158" y="136" width="20" height="20" rx="2" fill="#EF4444" opacity="0.6"/>
+  <rect x="180" y="136" width="20" height="20" rx="2" fill="#EF4444" opacity="0.9" filter="url(#glow)"/>
+  <rect x="136" y="158" width="20" height="20" rx="2" fill="#EF4444" opacity="0.5"/>
+  <rect x="158" y="158" width="20" height="20" rx="2" fill="#EF4444" opacity="0.3"/>
+  <rect x="180" y="158" width="20" height="20" rx="2" fill="#EF4444" opacity="0.7" filter="url(#glow)"/>
+  <!-- REC 텍스트 픽셀 -->
+  <text x="256" y="280" text-anchor="middle" fill="#EF4444" font-size="60" font-family="monospace" font-weight="bold" opacity="0.2">REC</text>
+  <text x="256" y="280" text-anchor="middle" fill="none" stroke="#EF4444" stroke-width="1" font-size="60" font-family="monospace" font-weight="bold" filter="url(#glow)">REC</text>
+  <!-- 녹화 점 -->
+  <circle cx="380" cy="160" r="16" fill="#EF4444" opacity="0.9" filter="url(#glow)"/>
+  <circle cx="380" cy="160" r="10" fill="white" opacity="0.2"/>
+  <!-- 레이블 -->
+  <text x="256" y="420" text-anchor="middle" fill="#EF4444" font-size="13" font-family="monospace" font-weight="bold" filter="url(#glow)">PIXEL STAMP</text>
+</svg>

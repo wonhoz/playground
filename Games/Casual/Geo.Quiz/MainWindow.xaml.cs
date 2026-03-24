@@ -80,19 +80,48 @@ public partial class MainWindow : Window
                  :                                 QuizMode.Continent;
     }
 
+    void CbTimer_Changed(object sender, RoutedEventArgs e)
+    {
+        if (!IsLoaded) return;
+        // TimerMode는 CheckBox.IsChecked 바인딩으로 처리 — 이벤트는 필요 시 추가 처리용
+    }
+
     void LoadFlagImage()
     {
         var q = _vm.CurrentQuestion;
         if (q == null || string.IsNullOrEmpty(q.FlagIsoCode))
         {
-            FlagImage.Visibility = Visibility.Collapsed;
-            FlagImage.Source     = null;
+            FlagImage.Visibility   = Visibility.Collapsed;
+            TbFlagError.Visibility = Visibility.Collapsed;
+            FlagImage.Source       = null;
             return;
         }
 
+        TbFlagError.Visibility = Visibility.Collapsed;
         var uri = new Uri($"https://flagcdn.com/w160/{q.FlagIsoCode.ToLower()}.png");
-        var bmp = new BitmapImage(uri);
-        bmp.DownloadFailed += (_, _) => { FlagImage.Visibility = Visibility.Collapsed; };
+
+        // 캐시된 이미지 확인
+        var cached = FlagCache.GetCached(q.FlagIsoCode);
+        if (cached != null)
+        {
+            FlagImage.Source     = cached;
+            FlagImage.Visibility = Visibility.Visible;
+            return;
+        }
+
+        var bmp = new BitmapImage();
+        bmp.BeginInit();
+        bmp.UriSource   = uri;
+        bmp.CacheOption = BitmapCacheOption.OnLoad;
+        bmp.EndInit();
+
+        bmp.DownloadFailed  += (_, _) =>
+        {
+            FlagImage.Visibility   = Visibility.Collapsed;
+            TbFlagError.Visibility = Visibility.Visible;
+        };
+        bmp.DownloadCompleted += (_, _) => FlagCache.Add(q.FlagIsoCode, bmp);
+
         FlagImage.Source     = bmp;
         FlagImage.Visibility = Visibility.Visible;
     }
@@ -130,9 +159,14 @@ public partial class MainWindow : Window
         TbGrade.Text        = $"{r.Score:F0}점";
         TbGrade.Foreground  = new SolidColorBrush(
             (Color)ColorConverter.ConvertFromString(info.fore ?? "#E0E0E0"));
-        TbScore.Text        = $"{r.Correct}문제 정답 / {r.Total}문제 (등급: {r.Grade})";
+        string newRecord    = _vm.IsNewRecord ? "  🏆 신기록!" : $"  (최고: {_vm.BestScore:F0}점)";
+        TbScore.Text        = $"{r.Correct}문제 정답 / {r.Total}문제 (등급: {r.Grade}){newRecord}";
         TbCorrect.Text      = r.Correct.ToString();
         TbWrong.Text        = r.Wrong.ToString();
+
+        // 오답 노트
+        WrongList.ItemsSource    = r.WrongItems;
+        WrongPanel.Visibility    = r.WrongItems.Count > 0 ? Visibility.Visible : Visibility.Collapsed;
     }
 
     protected override void OnClosed(EventArgs e)

@@ -1,4 +1,6 @@
+using System.Windows.Threading;
 using Geo.Quiz.Data;
+using Geo.Quiz.Services;
 
 namespace Geo.Quiz.ViewModels;
 
@@ -8,14 +10,33 @@ public class MainViewModel : BaseViewModel
     QuizMode _mode = QuizMode.Capital;
     string   _continent = "전체";
     int      _questionCount = 10;
+    bool     _timerMode;
 
     public QuizMode Mode           { get => _mode;           set { Set(ref _mode, value);           StartCmd.Raise(); } }
     public string   Continent      { get => _continent;      set { Set(ref _continent, value);      StartCmd.Raise(); } }
     public int      QuestionCount  { get => _questionCount;  set { Set(ref _questionCount, value);  StartCmd.Raise(); } }
+    public bool     TimerMode      { get => _timerMode;      set { Set(ref _timerMode, value); } }
+
+    // ── 타이머 ───────────────────────────────────────────────────────────────
+    const int TimerSeconds = 15;
+    int _timeLeft;
+    DispatcherTimer? _timer;
+
+    public int  TimeLeft  { get => _timeLeft; private set { Set(ref _timeLeft, value); Notify(nameof(TimerPct)); } }
+    public int  TimerPct  => TimerSeconds == 0 ? 0 : TimeLeft * 100 / TimerSeconds;
 
     public IReadOnlyList<string> Continents { get; } =
-        ["전체", "Asia", "Europe", "Africa", "Americas", "Oceania"];
+        ["전체", "아시아", "유럽", "아프리카", "아메리카", "오세아니아"];
     public IReadOnlyList<int> CountOptions { get; } = [5, 10, 15, 20];
+
+    static readonly Dictionary<string, string> _korToEng = new()
+    {
+        ["아시아"]    = "Asia",
+        ["유럽"]      = "Europe",
+        ["아프리카"]  = "Africa",
+        ["아메리카"]  = "Americas",
+        ["오세아니아"]= "Oceania",
+    };
 
     // ── 퀴즈 화면 ────────────────────────────────────────────────────────────
     QuizScreen _screen = QuizScreen.Start;
@@ -62,6 +83,10 @@ public class MainViewModel : BaseViewModel
     QuizResult? _result;
     public QuizResult? Result { get => _result; private set => Set(ref _result, value); }
 
+    // 최고 기록
+    public int BestScore => RecordService.GetBest(Mode.ToString(), Continent);
+    public bool IsNewRecord { get; private set; }
+
     // ── 커맨드 ───────────────────────────────────────────────────────────────
     public RelayCommand StartCmd   { get; }
     public RelayCommand RestartCmd { get; }
@@ -91,7 +116,8 @@ public class MainViewModel : BaseViewModel
     {
         var all = CountryDb.All;
         if (Continent == "전체") return all;
-        return all.Where(c => c.Continent == Continent).ToList();
+        var eng = _korToEng.TryGetValue(Continent, out var v) ? v : Continent;
+        return all.Where(c => c.Continent == eng).ToList();
     }
 
     void DoStart()
@@ -110,6 +136,7 @@ public class MainViewModel : BaseViewModel
         Result         = null;
         Screen         = QuizScreen.Quiz;
         NotifyQuizProps();
+        StartTimer();
     }
 
     QuizQuestion BuildQuestion(Country subject, List<Country> pool)
@@ -171,7 +198,8 @@ public class MainViewModel : BaseViewModel
         if (Answered || CurrentQuestion == null) return;
         if (idx >= CurrentQuestion.Choices.Count) return;
 
-        SelectedAnswer       = CurrentQuestion.Choices[idx];
+        StopTimer();
+        SelectedAnswer              = CurrentQuestion.Choices[idx];
         _userAnswers[_currentIndex] = SelectedAnswer;
         Answered             = true;
         NextCmd.Raise();
@@ -189,26 +217,73 @@ public class MainViewModel : BaseViewModel
             NextCmd.Raise();
             NotifyQuizProps();
             NotifyChoiceProps();
+            StartTimer();
         }
         else
         {
             // 결과 집계
-            int correct = _questions.Zip(_userAnswers)
-                .Count(t => t.First.CorrectAnswer == t.Second);
-            Result = new QuizResult
+            var pairs   = _questions.Zip(_userAnswers).ToList();
+            int correct = pairs.Count(t => t.First.CorrectAnswer == t.Second);
+            var wrongItems = pairs
+                .Where(t => t.First.CorrectAnswer != t.Second)
+                .Select(t => new WrongItem(
+                    t.First.QuestionText,
+                    t.Second ?? "미선택",
+                    t.First.CorrectAnswer))
+                .ToList();
+
+            var result = new QuizResult
             {
-                Total   = _questions.Count,
-                Correct = correct,
-                Wrong   = _questions.Count - correct,
+                Total      = _questions.Count,
+                Correct    = correct,
+                Wrong      = _questions.Count - correct,
+                WrongItems = wrongItems,
             };
+            IsNewRecord = RecordService.TryUpdate(Mode.ToString(), Continent, (int)result.Score);
+            Result = result;
             Screen = QuizScreen.Result;
         }
     }
 
     void DoRestart()
     {
+        StopTimer();
         Screen = QuizScreen.Start;
         RaiseAll();
+    }
+
+    // ── 타이머 내부 ──────────────────────────────────────────────────────────
+    void StartTimer()
+    {
+        StopTimer();
+        if (!_timerMode) return;
+
+        TimeLeft = TimerSeconds;
+        _timer   = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
+        _timer.Tick += (_, _) =>
+        {
+            TimeLeft--;
+            if (TimeLeft <= 0)
+            {
+                StopTimer();
+                // 시간 초과 → 미선택 오답 처리
+                if (!Answered && CurrentQuestion != null)
+                {
+                    _userAnswers[_currentIndex] = null;
+                    Answered = true;
+                    NextCmd.Raise();
+                    NotifyChoiceProps();
+                }
+            }
+        };
+        _timer.Start();
+    }
+
+    void StopTimer()
+    {
+        _timer?.Stop();
+        _timer = null;
+        TimeLeft = 0;
     }
 
     void NotifyQuizProps()

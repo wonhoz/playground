@@ -32,4 +32,7 @@ public class QuizResult
         >= 60 => "D",
         _     => "F",
     };
+    public List<WrongItem> WrongItems { get; set; } = [];
 }
+
+public record WrongItem(string QuestionText, string UserAnswer, string CorrectAnswer);

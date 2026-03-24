@@ -220,7 +220,7 @@ public static class ImageConverter
         // 2x → target 다운스케일 (SKSamplingOptions 사용)
         var downscaled = renderBmp.Resize(
             new SKImageInfo(size, size, SKColorType.Rgba8888, SKAlphaType.Premul),
-            SKFilterQuality.High);
+            new SKSamplingOptions(SKFilterMode.Linear, SKMipmapMode.Linear));
         renderBmp.Dispose();
         return downscaled ?? throw new InvalidOperationException("SVG 다운스케일 실패");
     }
@@ -231,7 +231,8 @@ public static class ImageConverter
         int fw = (int)(src.Width  * scale);
         int fh = (int)(src.Height * scale);
 
-        var resized = src.Resize(new SKImageInfo(fw, fh, SKColorType.Rgba8888, SKAlphaType.Premul), SKFilterQuality.High)
+        var resized = src.Resize(new SKImageInfo(fw, fh, SKColorType.Rgba8888, SKAlphaType.Premul),
+            new SKSamplingOptions(SKFilterMode.Linear, SKMipmapMode.Linear))
             ?? throw new InvalidOperationException("리사이즈 실패");
 
         if (fw == size && fh == size)

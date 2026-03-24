@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
 using System.Text.Json;
 using ApiProbe.Models;
@@ -32,6 +33,6 @@ public static class CollectionService
                 new JsonSerializerOptions { WriteIndented = true });
             File.WriteAllText(_file, json);
         }
-        catch { }
+        catch (Exception ex) { Debug.WriteLine($"[CollectionService] Save 실패: {ex.Message}"); }
     }
 }

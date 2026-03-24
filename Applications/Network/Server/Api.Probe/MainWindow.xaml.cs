@@ -1,11 +1,15 @@
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Runtime.InteropServices;
+using System.Text.Json;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Threading;
 using ApiProbe.Models;
 using ApiProbe.Services;
+using Microsoft.Win32;
 
 namespace ApiProbe;
 
@@ -23,6 +27,13 @@ public partial class MainWindow : Window
     private bool           _loading;
 
     private List<EnvPreset> _envPresets = [];
+    private DispatcherTimer? _saveTimer;
+
+    private const string RespPlaceholder = "← 요청을 전송하면 응답이 여기에 표시됩니다.";
+
+    private record HistoryEntry(string Summary, string Timestamp, string Body, string Headers);
+    private readonly List<HistoryEntry> _history = [];
+    private const int MaxHistory = 20;
 
     public MainWindow()
     {
@@ -273,6 +284,7 @@ public partial class MainWindow : Window
                 // 우클릭 컨텍스트 메뉴
                 btn.ContextMenu = MakeContextMenu(
                     ("이름 변경", () => { _renamingRequestId = r.Id; RefreshSidebar(); }),
+                    ("복제",      () => DuplicateRequest(colRef, r)),
                     (null, null),
                     ("요청 삭제", () => DeleteRequest(colRef, r))
                 );
@@ -339,6 +351,25 @@ public partial class MainWindow : Window
         RefreshSidebar();
     }
 
+    private void DuplicateRequest(ApiCollection col, ApiRequest src)
+    {
+        var copy = new ApiRequest
+        {
+            Name        = src.Name + " (복사)",
+            Method      = src.Method,
+            Url         = src.Url,
+            Body        = src.Body,
+            ContentType = src.ContentType,
+            Headers     = new System.Collections.ObjectModel.ObservableCollection<HeaderItem>(
+                src.Headers.Select(h => new HeaderItem { Key = h.Key, Value = h.Value, Enabled = h.Enabled }))
+        };
+        var idx = col.Requests.IndexOf(src);
+        col.Requests.Insert(idx + 1, copy);
+        CollectionService.Save(_collections);
+        RefreshSidebar();
+        LoadRequest(copy);
+    }
+
     private void DeleteRequest(ApiCollection col, ApiRequest req)
     {
         if (ReferenceEquals(_activeRequest, req))
@@ -358,6 +389,7 @@ public partial class MainWindow : Window
         TxtBody.Text    = "";
         TxtReqName.Text = "";
         HeaderGrid.DataContext = null;
+        ParamGrid.DataContext  = null;
         _loading = false;
     }
 
@@ -369,15 +401,19 @@ public partial class MainWindow : Window
         _         => m,
     };
 
-    private SolidColorBrush MethodBrush(string m) => m switch
+    private static readonly Dictionary<string, SolidColorBrush> _methodBrushCache = new()
     {
-        "GET"     => new SolidColorBrush(Color.FromRgb(0x14, 0xB8, 0xA6)),
-        "POST"    => new SolidColorBrush(Color.FromRgb(0x22, 0xC5, 0x5E)),
-        "PUT"     => new SolidColorBrush(Color.FromRgb(0xF5, 0x9E, 0x0B)),
-        "PATCH"   => new SolidColorBrush(Color.FromRgb(0xA7, 0x8B, 0xFA)),
-        "DELETE"  => new SolidColorBrush(Color.FromRgb(0xEF, 0x44, 0x44)),
-        _         => (SolidColorBrush)FindResource("FgDimBrush"),
+        ["GET"]    = new SolidColorBrush(Color.FromRgb(0x14, 0xB8, 0xA6)),
+        ["POST"]   = new SolidColorBrush(Color.FromRgb(0x22, 0xC5, 0x5E)),
+        ["PUT"]    = new SolidColorBrush(Color.FromRgb(0xF5, 0x9E, 0x0B)),
+        ["PATCH"]  = new SolidColorBrush(Color.FromRgb(0xA7, 0x8B, 0xFA)),
+        ["DELETE"] = new SolidColorBrush(Color.FromRgb(0xEF, 0x44, 0x44)),
     };
+
+    private SolidColorBrush MethodBrush(string m) =>
+        _methodBrushCache.TryGetValue(m, out var brush)
+            ? brush
+            : (SolidColorBrush)FindResource("FgDimBrush");
 
     private void LoadRequest(ApiRequest req)
     {
@@ -399,6 +435,7 @@ public partial class MainWindow : Window
             ?? CmbContentType.Items[0];
 
         HeaderGrid.DataContext = req;
+        ParamGrid.DataContext  = req;
         _loading = false;
 
         RefreshSidebar();
@@ -439,6 +476,14 @@ public partial class MainWindow : Window
 
         var url = TxtUrl.Text.Trim();
         if (string.IsNullOrEmpty(url)) return;
+
+        // 활성화된 쿼리 파라미터를 URL에 합산
+        var enabledParams = _activeRequest?.Params.Where(p => p.Enabled && !string.IsNullOrWhiteSpace(p.Key)).ToList() ?? [];
+        if (enabledParams.Count > 0)
+        {
+            var qs = string.Join("&", enabledParams.Select(p => $"{Uri.EscapeDataString(p.Key)}={Uri.EscapeDataString(p.Value)}"));
+            url = url.Contains('?') ? $"{url}&{qs}" : $"{url}?{qs}";
+        }
 
         var req = new ApiRequest
         {
@@ -484,6 +529,23 @@ public partial class MainWindow : Window
             _activeRequest.Method = req.Method;
             CollectionService.Save(_collections);
         }
+
+        // 히스토리 기록
+        var entry = new HistoryEntry(
+            Summary:   $"[{result.StatusCode}] {req.Method} {TxtUrl.Text.Trim()}",
+            Timestamp: DateTime.Now.ToString("HH:mm:ss"),
+            Body:      result.Body,
+            Headers:   result.Headers);
+        _history.Insert(0, entry);
+        if (_history.Count > MaxHistory) _history.RemoveAt(_history.Count - 1);
+        LstHistory.ItemsSource = null;
+        LstHistory.ItemsSource = _history;
+    }
+
+    private void HistoryItem_Selected(object s, SelectionChangedEventArgs e)
+    {
+        if (LstHistory.SelectedItem is HistoryEntry entry)
+            TxtHistoryBody.Text = $"// {entry.Summary}  ({entry.Timestamp})\n\n{entry.Body}";
     }
 
     private void TxtUrl_KeyDown(object s, KeyEventArgs e)
@@ -503,22 +565,33 @@ public partial class MainWindow : Window
             Headers     = _activeRequest?.Headers ?? []
         };
         Clipboard.SetText(CurlConverter.Convert(req));
-        MessageBox.Show("cURL 명령어가 클립보드에 복사되었습니다.", "복사 완료",
-            MessageBoxButton.OK, MessageBoxImage.Information);
+
+        if (s is Button btn)
+        {
+            btn.Content = "복사됨!";
+            var t = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1.5) };
+            t.Tick += (_, _) => { t.Stop(); btn.Content = "cURL 복사"; };
+            t.Start();
+        }
     }
 
     private void CopyResponse(object s, RoutedEventArgs e)
     {
-        if (!string.IsNullOrEmpty(TxtRespBody.Text))
-            Clipboard.SetText(TxtRespBody.Text);
+        var text = TxtRespBody.Text;
+        if (!string.IsNullOrEmpty(text) && text != RespPlaceholder)
+            Clipboard.SetText(text);
     }
 
     private void ReqName_Changed(object s, TextChangedEventArgs e)
     {
         if (_loading || _activeRequest is null) return;
         _activeRequest.Name = TxtReqName.Text;
-        CollectionService.Save(_collections);
         RefreshSidebar();
+
+        _saveTimer?.Stop();
+        _saveTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(500) };
+        _saveTimer.Tick += (_, _) => { _saveTimer!.Stop(); CollectionService.Save(_collections); };
+        _saveTimer.Start();
     }
 
     private void ReloadEnvCombo()
@@ -544,6 +617,92 @@ public partial class MainWindow : Window
     {
         if (_activeRequest is null) return;
         _activeRequest.Headers.Add(new HeaderItem { Key = "Authorization", Value = "Bearer " });
+    }
+
+    private void AddParam(object s, RoutedEventArgs e)
+    {
+        if (_activeRequest is null) return;
+        _activeRequest.Params.Add(new QueryParam { Key = "", Value = "" });
+    }
+
+    private void ExportCollection(object s, RoutedEventArgs e)
+    {
+        if (_collections.Count == 0)
+        {
+            MessageBox.Show("내보낼 컬렉션이 없습니다.", "내보내기",
+                MessageBoxButton.OK, MessageBoxImage.Information);
+            return;
+        }
+        var dlg = new SaveFileDialog
+        {
+            Title      = "컬렉션 내보내기",
+            Filter     = "JSON 파일 (*.json)|*.json",
+            FileName   = "api-probe-collections.json",
+            DefaultExt = "json"
+        };
+        if (dlg.ShowDialog() != true) return;
+        try
+        {
+            var json = JsonSerializer.Serialize(_collections,
+                new JsonSerializerOptions { WriteIndented = true });
+            File.WriteAllText(dlg.FileName, json);
+            MessageBox.Show($"컬렉션 {_collections.Count}개를 저장했습니다.", "내보내기 완료",
+                MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"저장 실패: {ex.Message}", "오류",
+                MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+    }
+
+    private void ImportCollection(object s, RoutedEventArgs e)
+    {
+        var dlg = new OpenFileDialog
+        {
+            Title  = "컬렉션 가져오기",
+            Filter = "JSON 파일 (*.json)|*.json"
+        };
+        if (dlg.ShowDialog() != true) return;
+        try
+        {
+            var json    = File.ReadAllText(dlg.FileName);
+            var imported = JsonSerializer.Deserialize<List<ApiCollection>>(json);
+            if (imported is null or { Count: 0 })
+            {
+                MessageBox.Show("유효한 컬렉션 파일이 아닙니다.", "가져오기 실패",
+                    MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+            foreach (var col in imported)
+                _collections.Add(col);
+            CollectionService.Save(_collections);
+            RefreshSidebar();
+            MessageBox.Show($"컬렉션 {imported.Count}개를 가져왔습니다.", "가져오기 완료",
+                MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show($"가져오기 실패: {ex.Message}", "오류",
+                MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+    }
+
+    private void FormatJson(object s, RoutedEventArgs e)
+    {
+        var raw = TxtBody.Text;
+        if (string.IsNullOrWhiteSpace(raw)) return;
+        try
+        {
+            var obj = System.Text.Json.JsonSerializer.Deserialize<object>(raw);
+            TxtBody.Text = System.Text.Json.JsonSerializer.Serialize(
+                obj, new System.Text.Json.JsonSerializerOptions { WriteIndented = true });
+        }
+        catch
+        {
+            MessageBox.Show("유효한 JSON이 아닙니다.", "JSON 파싱 오류",
+                MessageBoxButton.OK, MessageBoxImage.Warning);
+        }
     }
 
     private void SyncActiveRequest()

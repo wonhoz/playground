@@ -143,6 +143,13 @@ public partial class EnvEditorWindow : Window
         Close();
     }
 
+    private void OnClosing(object? sender, System.ComponentModel.CancelEventArgs e)
+    {
+        VarGrid.CommitEdit(DataGridEditingUnit.Row, true);
+        SaveCurrentVars();
+        EnvService.Save(_obsPresets);
+    }
+
     // ── 내부 헬퍼 ─────────────────────────────────────────────────
     private void SaveCurrentVars()
     {

@@ -433,12 +433,24 @@
     </Style>
 
     <Style TargetType="DataGridColumnHeader">
-      <Setter Property="Background"   Value="{StaticResource Bg1Brush}"/>
-      <Setter Property="Foreground"   Value="{StaticResource FgDimBrush}"/>
-      <Setter Property="Padding"      Value="8,6"/>
-      <Setter Property="FontSize"     Value="12"/>
-      <Setter Property="BorderBrush"  Value="{StaticResource BorderBrush2}"/>
+      <Setter Property="Background"      Value="{StaticResource Bg1Brush}"/>
+      <Setter Property="Foreground"      Value="{StaticResource FgDimBrush}"/>
+      <Setter Property="Padding"         Value="8,6"/>
+      <Setter Property="FontSize"        Value="12"/>
+      <Setter Property="BorderBrush"     Value="{StaticResource BorderBrush2}"/>
       <Setter Property="BorderThickness" Value="0,0,0,1"/>
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="DataGridColumnHeader">
+            <Border Background="{TemplateBinding Background}"
+                    BorderBrush="{TemplateBinding BorderBrush}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    Padding="{TemplateBinding Padding}">
+              <ContentPresenter VerticalAlignment="Center"/>
+            </Border>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
     </Style>
 
     <Style TargetType="DataGridRow">

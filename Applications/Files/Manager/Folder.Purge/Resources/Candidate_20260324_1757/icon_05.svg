@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <clipPath id="c_fp05">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <!-- Layer 1: Dark cyberpunk background -->
+  <rect width="1024" height="1024" rx="190" fill="#1A1A2E"/>
+  <g clip-path="url(#c_fp05)">
+    <!-- Subtle grid -->
+    <line x1="0" y1="256" x2="1024" y2="256" stroke="#FCD34D" stroke-width="2" opacity="0.08"/>
+    <line x1="0" y1="512" x2="1024" y2="512" stroke="#FCD34D" stroke-width="2" opacity="0.08"/>
+    <line x1="0" y1="768" x2="1024" y2="768" stroke="#FCD34D" stroke-width="2" opacity="0.08"/>
+    <line x1="256" y1="0" x2="256" y2="1024" stroke="#FCD34D" stroke-width="2" opacity="0.08"/>
+    <line x1="512" y1="0" x2="512" y2="1024" stroke="#FCD34D" stroke-width="2" opacity="0.08"/>
+    <line x1="768" y1="0" x2="768" y2="1024" stroke="#FCD34D" stroke-width="2" opacity="0.08"/>
+    <!-- Layer 2: bin/obj folder grid (2x2) with X marks -->
+    <!-- bin folder (top-left) -->
+    <rect x="132" y="220" width="280" height="220" rx="28" fill="#1E293B" stroke="#334155" stroke-width="8"/>
+    <rect x="132" y="188" width="160" height="44" rx="16" fill="#1E293B" stroke="#334155" stroke-width="8"/>
+    <text x="272" y="340" font-family="Courier New" font-size="52" font-weight="700" fill="#94A3B8" text-anchor="middle">bin</text>
+    <!-- obj folder (top-right) -->
+    <rect x="612" y="220" width="280" height="220" rx="28" fill="#1E293B" stroke="#334155" stroke-width="8"/>
+    <rect x="612" y="188" width="160" height="44" rx="16" fill="#1E293B" stroke="#334155" stroke-width="8"/>
+    <text x="752" y="340" font-family="Courier New" font-size="52" font-weight="700" fill="#94A3B8" text-anchor="middle">obj</text>
+    <!-- X marks on both -->
+    <line x1="172" y1="264" x2="372" y2="416" stroke="#EF4444" stroke-width="28" stroke-linecap="round"/>
+    <line x1="372" y1="264" x2="172" y2="416" stroke="#EF4444" stroke-width="28" stroke-linecap="round"/>
+    <line x1="652" y1="264" x2="852" y2="416" stroke="#EF4444" stroke-width="28" stroke-linecap="round"/>
+    <line x1="852" y1="264" x2="652" y2="416" stroke="#EF4444" stroke-width="28" stroke-linecap="round"/>
+    <!-- Layer 3: Lightning bolt striking through both folders -->
+    <polygon points="560,80 460,520 540,520 440,944 664,460 560,460 620,80" fill="#FDE047"/>
+    <polygon points="560,80 460,520 540,520 440,944 664,460 560,460 620,80" fill="none" stroke="#FEF08A" stroke-width="6"/>
+    <!-- Electric glow -->
+    <circle cx="540" cy="520" r="40" fill="#FEF08A" opacity="0.8"/>
+    <circle cx="540" cy="520" r="24" fill="#FCD34D"/>
+    <!-- Sparkle dots -->
+    <circle cx="400" cy="460" r="16" fill="#FEF08A"/>
+    <circle cx="680" cy="480" r="14" fill="#FCD34D"/>
+    <circle cx="460" cy="380" r="12" fill="#FEF08A"/>
+    <circle cx="640" cy="360" r="10" fill="#FDE047"/>
+  </g>
+</svg>

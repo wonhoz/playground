@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg_fp01" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#38BDF8"/>
+      <stop offset="100%" stop-color="#0284C7"/>
+    </linearGradient>
+    <clipPath id="c_fp01">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg_fp01)"/>
+  <!-- Layer 2: Folder shape -->
+  <g clip-path="url(#c_fp01)">
+    <!-- Folder tab -->
+    <rect x="180" y="330" width="220" height="72" rx="36" fill="#FCD34D"/>
+    <!-- Folder body -->
+    <rect x="180" y="390" width="620" height="420" rx="52" fill="#FBBF24"/>
+    <!-- Inner folder highlight -->
+    <rect x="220" y="430" width="540" height="60" rx="30" fill="#FDE68A"/>
+    <!-- Layer 3: Broom -->
+    <!-- Broom handle -->
+    <line x1="720" y1="240" x2="520" y2="700" stroke="#92400E" stroke-width="52" stroke-linecap="round"/>
+    <!-- Broom head -->
+    <ellipse cx="510" cy="718" rx="100" ry="52" fill="#D97706" transform="rotate(-25 510 718)"/>
+    <ellipse cx="536" cy="740" rx="80" ry="42" fill="#B45309" transform="rotate(-25 536 740)"/>
+    <!-- Sparkles from sweep -->
+    <circle cx="620" cy="640" r="22" fill="#FEF08A"/>
+    <circle cx="560" cy="600" r="16" fill="#FEF08A"/>
+    <circle cx="670" cy="580" r="18" fill="#FEF08A"/>
+  </g>
+</svg>

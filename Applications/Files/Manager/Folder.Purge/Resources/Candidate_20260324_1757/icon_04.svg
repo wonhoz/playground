@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg_fp04" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#F43F5E"/>
+      <stop offset="100%" stop-color="#BE123C"/>
+    </linearGradient>
+    <clipPath id="c_fp04">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <!-- Layer 1: Coral/rose background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg_fp04)"/>
+  <g clip-path="url(#c_fp04)">
+    <!-- Layer 2: Eraser shape (big, white, diagonal) -->
+    <!-- Eraser body -->
+    <rect x="220" y="300" width="640" height="280" rx="36" fill="#FFFFFF" transform="rotate(-8 540 440)"/>
+    <!-- Eraser label stripe -->
+    <rect x="220" y="390" width="640" height="90" rx="0" fill="#FDA4AF" transform="rotate(-8 540 440)"/>
+    <!-- Eraser tip (rubbing edge) -->
+    <rect x="700" y="278" width="160" height="280" rx="36" fill="#FEE2E2" transform="rotate(-8 780 418)"/>
+    <!-- Eraser rubber part marks -->
+    <line x1="740" y1="310" x2="720" y2="560" stroke="#FCA5A5" stroke-width="16" stroke-linecap="round" transform="rotate(-8 730 435)"/>
+    <!-- Layer 3: Folder being erased -->
+    <!-- Semi-erased folder (faded, half gone) -->
+    <!-- Folder ghost (right side, fading) -->
+    <rect x="480" y="600" width="360" height="280" rx="36" fill="#FDA4AF" opacity="0.5"/>
+    <rect x="480" y="556" width="180" height="60" rx="24" fill="#FDA4A5" opacity="0.5"/>
+    <!-- Folder (solid, left side - not yet erased) -->
+    <rect x="180" y="600" width="320" height="280" rx="36" fill="#FCD34D"/>
+    <rect x="180" y="556" width="180" height="60" rx="24" fill="#FBBF24"/>
+    <!-- Eraser crumbs -->
+    <circle cx="420" cy="700" r="12" fill="#FEE2E2"/>
+    <circle cx="460" cy="740" r="10" fill="#FEE2E2"/>
+    <circle cx="480" cy="680" r="8" fill="#FECACA"/>
+    <circle cx="500" cy="720" r="14" fill="#FEE2E2"/>
+    <circle cx="440" cy="760" r="9" fill="#FECACA"/>
+  </g>
+</svg>

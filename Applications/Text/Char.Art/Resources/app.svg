@@ -2,37 +2,34 @@
   <!-- Layer 1: 검정 배경 -->
   <circle cx="512" cy="512" r="512" fill="#0A0A0A"/>
 
-  <!-- Layer 2: 문자 아트 그리드 (얼굴/원형 구성) -->
-  <g font-family="Consolas,monospace" font-size="30">
-    <!-- 상단 (밝음 = 공백/점) -->
-    <text x="160" y="270" fill="#222">. . . . . . . . . . . . . .</text>
-    <text x="160" y="308" fill="#333">. . . @ @ @ @ @ @ . . . .</text>
-    <!-- 중간 (어두움 = 밀한 문자) -->
-    <text x="160" y="346" fill="#555">. . @ # # # # # # @ . . .</text>
-    <text x="160" y="384" fill="#777">. @ # # # # # # # # @ . .</text>
-    <text x="160" y="422">
-      <tspan fill="#999">. @ # </tspan><tspan fill="#CCC">@ </tspan><tspan fill="#999"># # </tspan><tspan fill="#CCC">@ </tspan><tspan fill="#999"># # @ .</tspan>
-    </text>
-    <text x="160" y="460" fill="#888">. @ # # # # # # # # @ . .</text>
-    <text x="160" y="498">
-      <tspan fill="#999">. @ # # </tspan><tspan fill="#EEE">- - - - </tspan><tspan fill="#999"># # @ . .</tspan>
-    </text>
-    <text x="160" y="536" fill="#777">. . @ # # # # # # @ . . .</text>
-    <text x="160" y="574" fill="#555">. . . @ @ @ @ @ @ . . . .</text>
-    <!-- 하단 (다시 밝음) -->
-    <text x="160" y="612" fill="#333">. . . . . . . . . . . . . .</text>
-  </g>
-
-  <!-- Layer 3: 우측 하단 - 원본 이미지 힌트 (컬러 원) -->
-  <circle cx="760" cy="450" r="170" fill="none" stroke="#333" stroke-width="4"/>
-  <circle cx="760" cy="430" r="90" fill="#555"/>
-  <circle cx="720" cy="400" r="15" fill="#AAA"/>
-  <circle cx="800" cy="400" r="15" fill="#AAA"/>
-  <path d="M 710,470 Q 760,510 810,470" stroke="#999" stroke-width="10" fill="none" stroke-linecap="round"/>
+  <!-- Layer 2: 좌측 - 원본 이미지 (컬러 얼굴) -->
+  <circle cx="260" cy="430" r="160" fill="none" stroke="#333" stroke-width="4"/>
+  <circle cx="260" cy="415" r="85" fill="#555"/>
+  <circle cx="220" cy="387" r="14" fill="#AAA"/>
+  <circle cx="300" cy="387" r="14" fill="#AAA"/>
+  <path d="M 205,455 Q 260,498 315,455" stroke="#999" stroke-width="10" fill="none" stroke-linecap="round"/>
 
   <!-- 변환 화살표 -->
-  <path d="M 560,450 L 618,450" stroke="#444" stroke-width="10" stroke-linecap="round"/>
-  <polygon points="610,430 640,450 610,470" fill="#444"/>
+  <path d="M 445,430 L 548,430" stroke="#444" stroke-width="10" stroke-linecap="round"/>
+  <polygon points="538,410 570,430 538,450" fill="#444"/>
+
+  <!-- Layer 3: 우측 - 문자 아트 그리드 (얼굴/원형 구성) -->
+  <g font-family="Consolas,monospace" font-size="22">
+    <text x="595" y="272" fill="#222">. . . . . . . . . . . . . .</text>
+    <text x="595" y="306" fill="#333">. . . @ @ @ @ @ @ . . . .</text>
+    <text x="595" y="340" fill="#555">. . @ # # # # # # @ . . .</text>
+    <text x="595" y="374" fill="#777">. @ # # # # # # # # @ . .</text>
+    <text x="595" y="408">
+      <tspan fill="#999">. @ # </tspan><tspan fill="#CCC">@ </tspan><tspan fill="#999"># # </tspan><tspan fill="#CCC">@ </tspan><tspan fill="#999"># # @ @ . .</tspan>
+    </text>
+    <text x="595" y="442" fill="#888">. @ # # # # # # # # @ . .</text>
+    <text x="595" y="476">
+      <tspan fill="#999">. @ # # </tspan><tspan fill="#EEE">- - - - </tspan><tspan fill="#999"># # @ . .</tspan>
+    </text>
+    <text x="595" y="510" fill="#777">. . @ # # # # # # @ . . .</text>
+    <text x="595" y="544" fill="#555">. . . @ @ @ @ @ @ . . . .</text>
+    <text x="595" y="578" fill="#333">. . . . . . . . . . . . . .</text>
+  </g>
 
   <!-- 하단 레이블 -->
   <text x="512" y="780" text-anchor="middle" font-family="Consolas,monospace" font-size="38" fill="#555">Image → Char Art</text>

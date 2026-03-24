@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Runtime.InteropServices;
 
 namespace DodgeBlitz.Engine;
@@ -27,8 +28,18 @@ public sealed class JoystickManager
         public XInputGamepad Gamepad;
     }
 
+    [StructLayout(LayoutKind.Sequential)]
+    private struct XInputVibration
+    {
+        public ushort LeftMotorSpeed;
+        public ushort RightMotorSpeed;
+    }
+
     [DllImport("xinput1_4.dll", EntryPoint = "XInputGetState")]
     private static extern uint XInputGetState(uint userIndex, out XInputState state);
+
+    [DllImport("xinput1_4.dll", EntryPoint = "XInputSetState")]
+    private static extern uint XInputSetState(uint userIndex, ref XInputVibration vibration);
 
     // 버튼 비트마스크
     private const ushort DpadUp    = 0x0001;
@@ -45,6 +56,8 @@ public sealed class JoystickManager
 
     private bool _available = true;  // false = xinput1_4.dll 없음
     private bool _prevStart, _prevBack;
+    private readonly Stopwatch _rumbleWatch = new();
+    private double _rumbleDuration;
 
     public bool IsConnected { get; private set; }
 
@@ -62,9 +75,40 @@ public sealed class JoystickManager
     public bool StartJustPressed => Start && !_prevStart;
     public bool BackJustPressed  => Back  && !_prevBack;
 
+    /// <summary>피격 등 이벤트 시 컨트롤러 진동. duration초 후 자동 해제.</summary>
+    public void Rumble(double duration = 0.2)
+    {
+        if (!_available || !IsConnected) return;
+        try
+        {
+            var vib = new XInputVibration { LeftMotorSpeed = 32000, RightMotorSpeed = 16000 };
+            XInputSetState(0, ref vib);
+            _rumbleDuration = duration;
+            _rumbleWatch.Restart();
+        }
+        catch { }
+    }
+
+    private void StopRumble()
+    {
+        try
+        {
+            var vib = new XInputVibration { LeftMotorSpeed = 0, RightMotorSpeed = 0 };
+            XInputSetState(0, ref vib);
+        }
+        catch { }
+    }
+
     public void Poll()
     {
         if (!_available) return;
+
+        // 진동 타이머 처리
+        if (_rumbleDuration > 0 && _rumbleWatch.Elapsed.TotalSeconds >= _rumbleDuration)
+        {
+            _rumbleDuration = 0;
+            StopRumble();
+        }
 
         _prevStart = Start;
         _prevBack  = Back;

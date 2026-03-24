@@ -1,3 +1,4 @@
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -14,7 +15,7 @@ public partial class MainWindow : Window
     private const double AreaH = 550;
 
     // ── 상태 ─────────────────────────────────────────────────────────────
-    private enum GameState { Title, Playing, GameOver }
+    private enum GameState { Title, Playing, Paused, GameOver }
     private GameState _state = GameState.Title;
 
     // ── 엔진 ──────────────────────────────────────────────────────────────
@@ -34,13 +35,28 @@ public partial class MainWindow : Window
     private double _spawnTimer;
     private string _prevLevel = "";
 
+    // ── 마일스톤 팝업 ─────────────────────────────────────────────────────
+    private static readonly double[] Milestones = [5, 10, 20, 35, 60, 90, 120];
+    private int    _milestoneIndex;
+    private double _milestoneTimer;
+
+    // ── 세션 기록 히스토리 ─────────────────────────────────────────────────
+    private readonly List<double> _sessionScores = [];
+
     private readonly Random _rng = new();
+
+    // ── 저장 경로 ─────────────────────────────────────────────────────────
+    private static readonly string SavePath = Path.Combine(
+        Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+        "DodgeBlitz", "best.txt");
 
     // ── 생성자 ────────────────────────────────────────────────────────────
     public MainWindow()
     {
         InitializeComponent();
         Loaded += (_, _) => { ApplyDarkTitleBar(); IconGenerator.EnsureIcon(this); };
+
+        _bestTime = LoadBestTime();
 
         InitStars();
         _engine.OnUpdate += OnUpdate;
@@ -84,16 +100,20 @@ public partial class MainWindow : Window
         _bullets.Clear();
         _particles.Clear();
 
-        _survivalTime = 0;
-        _spawnTimer   = 0.5;
-        _prevLevel    = "";
+        _survivalTime  = 0;
+        _spawnTimer    = 0.5;
+        _prevLevel     = "";
+        _milestoneIndex = 0;
+        _milestoneTimer = 0;
+        MilestoneText.Visibility = Visibility.Collapsed;
 
         _player = new Player(AreaW, AreaH);
         GameCanvas.Children.Add(_player.Visual!);
 
-        TitlePanel.Visibility   = Visibility.Collapsed;
+        TitlePanel.Visibility    = Visibility.Collapsed;
         GameOverPanel.Visibility = Visibility.Collapsed;
-        HudPanel.Visibility     = Visibility.Visible;
+        PausePanel.Visibility    = Visibility.Collapsed;
+        HudPanel.Visibility      = Visibility.Visible;
 
         _state = GameState.Playing;
         _input.Reset();
@@ -106,8 +126,15 @@ public partial class MainWindow : Window
     {
         _state = GameState.GameOver;
 
-        if (_survivalTime > _bestTime)
+        bool isNewBest = _survivalTime > _bestTime;
+        if (isNewBest)
+        {
             _bestTime = _survivalTime;
+            SaveBestTime(_bestTime);
+        }
+
+        _sessionScores.Add(_survivalTime);
+        _joystick.Rumble(0.35);
 
         SoundGen.StopBgm();
         SoundGen.Sfx(Sounds.HitSfx);
@@ -120,14 +147,47 @@ public partial class MainWindow : Window
         SpawnParticles(_player.X + _player.Width / 2, _player.Y + _player.Height / 2,
                        24, Color.FromRgb(0, 255, 204));
 
+        MilestoneText.Visibility = Visibility.Collapsed;
+
         FinalTimeText.Text = $"SURVIVED  {_survivalTime:F1}s";
-        FinalBestText.Text = _survivalTime >= _bestTime
+        FinalBestText.Text = isNewBest
             ? $"NEW BEST!  {_bestTime:F1}s"
             : $"BEST  {_bestTime:F1}s";
 
+        // Top 5 히스토리
+        var top5 = _sessionScores.OrderByDescending(s => s).Take(5).ToList();
+        if (top5.Count > 1)
+        {
+            HistoryText.Text = "─ Session Top " + top5.Count + " ─\n"
+                + string.Join("\n", top5.Select((s, i) => $"  {i + 1}. {s:F1}s"));
+        }
+        else
+        {
+            HistoryText.Text = "";
+        }
+
         GameOverPanel.Visibility = Visibility.Visible;
-        HudPanel.Visibility     = Visibility.Collapsed;
+        HudPanel.Visibility      = Visibility.Collapsed;
         UpdateTitleBest();
+    }
+
+    // ── 일시정지 ──────────────────────────────────────────────────────────
+    private void TogglePause()
+    {
+        if (_state == GameState.Playing)
+        {
+            _state = GameState.Paused;
+            _engine.Pause();
+            SoundGen.StopBgm();
+            PausePanel.Visibility = Visibility.Visible;
+        }
+        else if (_state == GameState.Paused)
+        {
+            _state = GameState.Playing;
+            _engine.Resume();
+            SoundGen.PlayBgm(Sounds.Bgm, 0.28);
+            PausePanel.Visibility = Visibility.Collapsed;
+        }
     }
 
     // ── 게임 루프 ─────────────────────────────────────────────────────────
@@ -155,7 +215,7 @@ public partial class MainWindow : Window
     {
         foreach (var s in _stars) s.SyncPosition();
 
-        if (_state is GameState.Playing or GameState.GameOver)
+        if (_state is GameState.Playing or GameState.GameOver or GameState.Paused)
         {
             _player.SyncPosition();
             foreach (var b in _bullets)   b.SyncPosition();
@@ -216,7 +276,30 @@ public partial class MainWindow : Window
             SoundGen.Sfx(Sounds.LevelUpSfx);
         _prevLevel = lv;
 
+        // 마일스톤 팝업 체크
+        if (_milestoneIndex < Milestones.Length && _survivalTime >= Milestones[_milestoneIndex])
+        {
+            ShowMilestone($"{Milestones[_milestoneIndex]:F0}s!");
+            _milestoneIndex++;
+        }
+
+        // 마일스톤 타이머
+        if (_milestoneTimer > 0)
+        {
+            _milestoneTimer -= dt;
+            if (_milestoneTimer <= 0)
+                MilestoneText.Visibility = Visibility.Collapsed;
+        }
+
         UpdateHud();
+    }
+
+    // ── 마일스톤 팝업 ─────────────────────────────────────────────────────
+    private void ShowMilestone(string text)
+    {
+        MilestoneText.Text       = text;
+        MilestoneText.Visibility = Visibility.Visible;
+        _milestoneTimer          = 1.4;
     }
 
     // ── 총알 스폰 ─────────────────────────────────────────────────────────
@@ -265,6 +348,15 @@ public partial class MainWindow : Window
         < 35  => "EXPERT",
         < 60  => "VETERAN",
         _     => "LEGEND"
+    };
+
+    private static Color GetLevelColor(string level) => level switch
+    {
+        "NOVICE"  => Color.FromRgb(0,   255, 204), // 시안
+        "SKILLED" => Color.FromRgb(255, 215,   0), // 황금
+        "EXPERT"  => Color.FromRgb(255, 136,   0), // 주황
+        "VETERAN" => Color.FromRgb(255, 102, 170), // 핑크
+        _         => Color.FromRgb(255,  68,  68)  // 빨강 (LEGEND)
     };
 
     // 추적형 총알 (플레이어 방향 + 오프셋)
@@ -347,9 +439,14 @@ public partial class MainWindow : Window
     // ── HUD ──────────────────────────────────────────────────────────────
     private void UpdateHud()
     {
-        TimeText.Text = $"{_survivalTime:F1}";
-        BestText.Text = $"{Math.Max(_bestTime, _survivalTime):F1}";
-        LevelText.Text = GetLevelName();
+        TimeText.Text  = $"{_survivalTime:F1}";
+        BestText.Text  = $"{Math.Max(_bestTime, _survivalTime):F1}";
+
+        var lv    = GetLevelName();
+        var color = GetLevelColor(lv);
+        LevelText.Text       = lv;
+        LevelText.Foreground = new SolidColorBrush(color);
+        LevelGlow.Color      = color;
     }
 
     private void UpdateTitleBest()
@@ -366,11 +463,22 @@ public partial class MainWindow : Window
         {
             if (_state is GameState.Title or GameState.GameOver)
                 StartGame();
+            else if (_state == GameState.Paused)
+                TogglePause();
+        }
+        else if (e.Key == Key.P)
+        {
+            if (_state is GameState.Playing or GameState.Paused)
+                TogglePause();
         }
         else if (e.Key == Key.Escape)
         {
             if (_state == GameState.Playing)
                 BackToTitle();
+            else if (_state == GameState.Paused)
+                BackToTitle();
+            else
+                Close();
         }
     }
 
@@ -381,6 +489,9 @@ public partial class MainWindow : Window
 
     private void BackToTitle()
     {
+        if (_state == GameState.Paused)
+            _engine.Resume();
+
         SoundGen.StopBgm();
 
         foreach (var b in _bullets)   GameCanvas.Children.Remove(b.Visual);
@@ -391,9 +502,35 @@ public partial class MainWindow : Window
         _particles.Clear();
 
         _state = GameState.Title;
-        HudPanel.Visibility     = Visibility.Collapsed;
+        HudPanel.Visibility      = Visibility.Collapsed;
         GameOverPanel.Visibility = Visibility.Collapsed;
-        TitlePanel.Visibility   = Visibility.Visible;
+        PausePanel.Visibility    = Visibility.Collapsed;
+        MilestoneText.Visibility = Visibility.Collapsed;
+        TitlePanel.Visibility    = Visibility.Visible;
         UpdateTitleBest();
+    }
+
+    // ── 최고 기록 영속화 ──────────────────────────────────────────────────
+    private static double LoadBestTime()
+    {
+        try
+        {
+            if (File.Exists(SavePath) &&
+                double.TryParse(File.ReadAllText(SavePath), System.Globalization.NumberStyles.Any,
+                    System.Globalization.CultureInfo.InvariantCulture, out double v))
+                return v;
+        }
+        catch { }
+        return 0;
+    }
+
+    private static void SaveBestTime(double time)
+    {
+        try
+        {
+            Directory.CreateDirectory(Path.GetDirectoryName(SavePath)!);
+            File.WriteAllText(SavePath, time.ToString(System.Globalization.CultureInfo.InvariantCulture));
+        }
+        catch { }
     }
 }

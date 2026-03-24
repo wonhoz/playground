@@ -46,6 +46,13 @@ sealed class MainViewModel : INotifyPropertyChanged
         set { _favOnly = value; OnPropertyChanged(); Refresh(); }
     }
 
+    string _sortOrder = "updated";
+    public string SortOrder
+    {
+        get => _sortOrder;
+        set { _sortOrder = value; OnPropertyChanged(); Refresh(); }
+    }
+
     // ── 상태 ─────────────────────────────────────────────────────────────────
     string _statusText = "준비";
     public string StatusText { get => _statusText; set { _statusText = value; OnPropertyChanged(); } }
@@ -53,7 +60,15 @@ sealed class MainViewModel : INotifyPropertyChanged
     public MainViewModel(Database db)
     {
         _db = db;
+        db.EnsureUseCountColumn();
         Refresh();
+    }
+
+    public void IncrementUseCount(int id)
+    {
+        _db.IncrementUseCount(id);
+        var item = Items.FirstOrDefault(x => x.Id == id);
+        if (item != null) item.UseCount++;
     }
 
     public void Refresh()
@@ -62,7 +77,8 @@ sealed class MainViewModel : INotifyPropertyChanged
             string.IsNullOrWhiteSpace(_search) ? "" : _search,
             _filterTag,
             _filterService,
-            _favOnly ? true : null);
+            _favOnly ? true : null,
+            _sortOrder);
 
         Items.Clear();
         foreach (var r in results) Items.Add(r);
@@ -102,9 +118,13 @@ sealed class MainViewModel : INotifyPropertyChanged
 
     public void Delete(PromptItem p)
     {
+        var currentIndex = Items.IndexOf(p);
         _db.Delete(p.Id);
         Selected = null;
         Refresh();
+        // 삭제 후 인접 항목 자동 선택
+        if (Items.Count > 0)
+            Selected = Items[Math.Min(currentIndex, Items.Count - 1)];
         StatusText = "삭제 완료";
     }
 

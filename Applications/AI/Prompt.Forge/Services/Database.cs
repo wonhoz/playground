@@ -27,6 +27,7 @@ sealed class Database : IDisposable
                 version     INTEGER NOT NULL DEFAULT 1,
                 notes       TEXT    NOT NULL DEFAULT '',
                 parent_id   INTEGER,
+                use_count   INTEGER NOT NULL DEFAULT 0,
                 created_at  TEXT    NOT NULL DEFAULT (datetime('now')),
                 updated_at  TEXT    NOT NULL DEFAULT (datetime('now'))
             );
@@ -55,7 +56,23 @@ sealed class Database : IDisposable
 
     // ── CRUD ─────────────────────────────────────────────────────────────────
 
-    public List<PromptItem> Search(string query, string? tag, string? service, bool? favOnly)
+    /// <summary>기존 DB에 use_count 컬럼이 없을 경우 추가 (마이그레이션)</summary>
+    public void EnsureUseCountColumn()
+    {
+        try { Execute("ALTER TABLE prompts ADD COLUMN use_count INTEGER NOT NULL DEFAULT 0;"); }
+        catch { /* 이미 존재하면 무시 */ }
+    }
+
+    public void IncrementUseCount(int id)
+    {
+        var cmd = _conn.CreateCommand();
+        cmd.CommandText = "UPDATE prompts SET use_count = use_count + 1 WHERE id = $id";
+        cmd.Parameters.AddWithValue("$id", id);
+        cmd.ExecuteNonQuery();
+    }
+
+    public List<PromptItem> Search(string query, string? tag, string? service, bool? favOnly,
+                                   string sortOrder = "updated")
     {
         var conditions = new List<string>();
         var cmd = _conn.CreateCommand();
@@ -91,7 +108,10 @@ sealed class Database : IDisposable
             ? " AND " + string.Join(" AND ", conditions)
             : "";
 
-        cmd.CommandText = baseTable + where + " ORDER BY p.is_favorite DESC, p.updated_at DESC";
+        var order = sortOrder == "use_count"
+            ? "p.use_count DESC, p.updated_at DESC"
+            : "p.is_favorite DESC, p.updated_at DESC";
+        cmd.CommandText = baseTable + where + $" ORDER BY {order}";
 
         return ReadItems(cmd);
     }
@@ -212,6 +232,7 @@ sealed class Database : IDisposable
                 IsFavorite = r.GetInt32(r.GetOrdinal("is_favorite")) == 1,
                 Version    = r.GetInt32(r.GetOrdinal("version")),
                 Notes      = r.GetString(r.GetOrdinal("notes")),
+                UseCount   = r.IsDBNull(r.GetOrdinal("use_count")) ? 0 : r.GetInt32(r.GetOrdinal("use_count")),
                 ParentId   = r.IsDBNull(r.GetOrdinal("parent_id")) ? null : r.GetInt32(r.GetOrdinal("parent_id")),
                 CreatedAt  = DateTime.Parse(r.GetString(r.GetOrdinal("created_at"))),
                 UpdatedAt  = DateTime.Parse(r.GetString(r.GetOrdinal("updated_at")))

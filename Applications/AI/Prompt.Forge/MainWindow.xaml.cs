@@ -1,5 +1,6 @@
 using System.Runtime.InteropServices;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Interop;
 using Prompt.Forge.Views;
 
@@ -20,6 +21,10 @@ public partial class MainWindow : Window
     const uint MOD_WIN  = 0x0008;
     const uint MOD_SHIFT = 0x0004;
     const uint VK_P     = 0x50;
+
+    static readonly string SettingsPath = Path.Combine(
+        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+        "Prompt.Forge", "settings.txt");
 
     readonly MainViewModel _vm;
     readonly Database      _db;
@@ -51,6 +56,65 @@ public partial class MainWindow : Window
 
         // 필터 콤보 초기화
         RefreshFilterCombos();
+
+        // 마지막 선택 항목 복원 (B4)
+        RestoreLastSelection();
+    }
+
+    // ── 마지막 선택 항목 저장/복원 ─────────────────────────────────────────────
+
+    void SaveLastSelection()
+    {
+        if (_vm.Selected == null) return;
+        try { File.WriteAllText(SettingsPath, _vm.Selected.Id.ToString()); }
+        catch { }
+    }
+
+    void RestoreLastSelection()
+    {
+        try
+        {
+            if (!File.Exists(SettingsPath)) return;
+            if (!int.TryParse(File.ReadAllText(SettingsPath).Trim(), out var lastId)) return;
+            var item = _vm.Items.FirstOrDefault(x => x.Id == lastId);
+            if (item != null)
+            {
+                _vm.Selected = item;
+                LoadSelected();
+            }
+        }
+        catch { }
+    }
+
+    // ── 키보드 단축키 (B1) ────────────────────────────────────────────────────
+
+    protected override void OnPreviewKeyDown(KeyEventArgs e)
+    {
+        base.OnPreviewKeyDown(e);
+        if (!IsLoaded || !_vm.HasSelection) return;
+
+        if (Keyboard.Modifiers == ModifierKeys.Control)
+        {
+            switch (e.Key)
+            {
+                case Key.S:
+                    Save_Click(this, new RoutedEventArgs());
+                    e.Handled = true;
+                    break;
+                case Key.D:
+                    Duplicate_Click(this, new RoutedEventArgs());
+                    e.Handled = true;
+                    break;
+                case Key.Enter:
+                    FillVars_Click(this, new RoutedEventArgs());
+                    e.Handled = true;
+                    break;
+                case Key.H:
+                    ShowHistory_Click(this, new RoutedEventArgs());
+                    e.Handled = true;
+                    break;
+            }
+        }
     }
 
     IntPtr WndProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
@@ -167,6 +231,7 @@ public partial class MainWindow : Window
         }
 
         LoadSelected();
+        SaveLastSelection();
     }
 
     bool IsDirty(PromptItem p) =>
@@ -247,6 +312,7 @@ public partial class MainWindow : Window
         try
         {
             Clipboard.SetText(TxtContent.Text);
+            if (_vm.Selected != null) _vm.IncrementUseCount(_vm.Selected.Id);
             _vm.StatusText = "클립보드에 복사됨";
         }
         catch { }
@@ -255,10 +321,8 @@ public partial class MainWindow : Window
     void FillVars_Click(object sender, RoutedEventArgs e)
     {
         var content = TxtContent.Text;
-        var vars    = Regex.Matches(content, @"\{\{(\w+)\}\}")
-                          .Select(m => m.Groups[1].Value)
-                          .Distinct()
-                          .ToList();
+        var temp    = new PromptItem { Content = content };
+        var vars    = temp.ExtractVariables();
 
         if (vars.Count == 0)
         {
@@ -269,7 +333,10 @@ public partial class MainWindow : Window
 
         var dlg = new FillVarsDialog(content, vars) { Owner = this };
         if (dlg.ShowDialog() == true && dlg.FilledContent != null)
+        {
+            if (_vm.Selected != null) _vm.IncrementUseCount(_vm.Selected.Id);
             _vm.StatusText = "변수 채우기 완료 — 클립보드에 복사됨";
+        }
     }
 
     void Duplicate_Click(object sender, RoutedEventArgs e)
@@ -277,6 +344,24 @@ public partial class MainWindow : Window
         if (_vm.Selected == null) return;
         _vm.Duplicate(_vm.Selected);
         LoadSelected();
+    }
+
+    void ShowHistory_Click(object sender, RoutedEventArgs e)
+    {
+        if (_vm.Selected == null) return;
+        var history = _db.GetVersionHistory(_vm.Selected.Id);
+        var dlg = new VersionHistoryDialog(_vm.Selected, history) { Owner = this };
+        if (dlg.ShowDialog() == true && dlg.RestoredContent != null)
+        {
+            TxtContent.Text = dlg.RestoredContent;
+            _vm.StatusText = "이전 버전 복원됨 — 저장하여 확정하세요";
+        }
+    }
+
+    void Sort_Changed(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+    {
+        if (!IsLoaded || _refreshing) return;
+        _vm.SortOrder = CbSort.SelectedIndex == 1 ? "use_count" : "updated";
     }
 
     void Export_Click(object sender, RoutedEventArgs e)

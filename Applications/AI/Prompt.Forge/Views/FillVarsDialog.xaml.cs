@@ -11,13 +11,15 @@ public partial class FillVarsDialog : Window
 
     readonly List<string>              _varNames;
     readonly Dictionary<string, TextBox> _inputs = [];
+    readonly string                    _templateContent;
 
     public string? FilledContent { get; private set; }
 
     public FillVarsDialog(string templateContent, List<string> varNames)
     {
         InitializeComponent();
-        _varNames = varNames;
+        _varNames        = varNames;
+        _templateContent = templateContent;
 
         Loaded += (_, _) =>
         {
@@ -27,7 +29,6 @@ public partial class FillVarsDialog : Window
         };
 
         BuildInputs(varNames);
-        Tag = templateContent;  // 원본 템플릿 저장
     }
 
     void BuildInputs(List<string> varNames)
@@ -36,14 +37,24 @@ public partial class FillVarsDialog : Window
         {
             VarPanel.Children.Add(new Label { Content = $"{{{{ {name} }}}}" });
             var tb = new TextBox { Tag = name };
+            tb.TextChanged += (_, _) => UpdatePreview();
             _inputs[name] = tb;
             VarPanel.Children.Add(tb);
         }
+        UpdatePreview();
+    }
+
+    void UpdatePreview()
+    {
+        var content = _templateContent;
+        foreach (var (name, tb) in _inputs)
+            content = content.Replace($"{{{{{name}}}}}", string.IsNullOrEmpty(tb.Text) ? $"{{{{{name}}}}}" : tb.Text);
+        TxtPreview.Text = content;
     }
 
     void Ok_Click(object sender, RoutedEventArgs e)
     {
-        var content = (string)Tag;
+        var content = _templateContent;
         foreach (var (name, tb) in _inputs)
             content = content.Replace($"{{{{{name}}}}}", tb.Text);
 

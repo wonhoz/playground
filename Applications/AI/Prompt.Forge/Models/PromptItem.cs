@@ -1,6 +1,6 @@
 namespace Prompt.Forge.Models;
 
-sealed class PromptItem
+public sealed class PromptItem
 {
     public int     Id          { get; set; }
     public string  Title       { get; set; } = "";
@@ -9,6 +9,7 @@ sealed class PromptItem
     public string  Service     { get; set; } = "";  // GPT-4, Claude, Gemini 등
     public bool    IsFavorite  { get; set; }
     public int     Version     { get; set; } = 1;
+    public int     UseCount    { get; set; }
     public string  Notes       { get; set; } = "";
     public DateTime CreatedAt  { get; set; } = DateTime.UtcNow;
     public DateTime UpdatedAt  { get; set; } = DateTime.UtcNow;

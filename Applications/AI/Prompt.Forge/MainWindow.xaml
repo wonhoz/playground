@@ -357,7 +357,13 @@
                     <ComboBox x:Name="CbService" Margin="0,0,0,6"
                               SelectionChanged="Filter_Changed"/>
                     <CheckBox x:Name="ChkFav" Content="즐겨찾기만"
-                              Checked="Filter_Changed" Unchecked="Filter_Changed"/>
+                              Checked="Filter_Changed" Unchecked="Filter_Changed"
+                              Margin="0,0,0,6"/>
+                    <ComboBox x:Name="CbSort" SelectedIndex="0"
+                              SelectionChanged="Sort_Changed">
+                        <ComboBoxItem Content="최근 수정순"/>
+                        <ComboBoxItem Content="자주 사용순"/>
+                    </ComboBox>
                 </StackPanel>
 
                 <!-- 목록 -->
@@ -546,13 +552,15 @@
                 <Border Grid.Row="4" Background="#0F0F1A" Padding="16,8">
                     <Grid>
                         <StackPanel Orientation="Horizontal">
-                            <Button Content="💾  저장" Click="Save_Click"
+                            <Button Content="💾  저장 (Ctrl+S)" Click="Save_Click"
                                     IsEnabled="{Binding HasSelection}" Margin="0,0,8,0"/>
-                            <Button Content="⧉  복제" Click="Duplicate_Click"
+                            <Button Content="⧉  복제 (Ctrl+D)" Click="Duplicate_Click"
                                     IsEnabled="{Binding HasSelection}" Margin="0,0,8,0"/>
-                            <Button Content="📋  버전 저장" Click="SaveVersion_Click"
+                            <Button Content="🕐  버전 저장" Click="SaveVersion_Click"
                                     IsEnabled="{Binding HasSelection}" Margin="0,0,8,0"/>
-                            <Button Content="▶  변수 채우기" Style="{StaticResource AccentBtn}"
+                            <Button Content="📜  히스토리 (Ctrl+H)" Click="ShowHistory_Click"
+                                    IsEnabled="{Binding HasSelection}" Margin="0,0,8,0"/>
+                            <Button Content="▶  변수 채우기 (Ctrl+Enter)" Style="{StaticResource AccentBtn}"
                                     IsEnabled="{Binding HasSelection}" Click="FillVars_Click"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">

@@ -72,7 +72,7 @@ call :pub "Skill.Cast"            "Applications\Development\Inspector\Skill.Cast
 :: ── Applications / Emoji.Icon ──────────────────────────────────────
 call :pub "Glyph.Map"             "Applications\Emoji.Icon\Glyph.Map"                       "Glyph.Map.exe"             "Applications\Emoji.Icon\Glyph.Map"
 call :pub "Icon.Hunt"             "Applications\Emoji.Icon\Icon.Hunt"                       "Icon.Hunt.exe"             "Applications\Emoji.Icon"
-call :pub "Img.Cast"              "Applications\Emoji.Icon\Img.Cast"                        "Img.Cast.exe"              "Applications\Emoji.Icon\Img.Cast"
+call :pub "Img.Cast"              "Applications\Emoji.Icon\Img.Cast"                        "Img.Cast.exe"              "Applications\Emoji.Icon"
 
 :: ── Applications / Files / Inspector ──────────────────────────────
 call :pub "Disk.Lens"             "Applications\Files\Inspector\Disk.Lens"                  "Disk.Lens.exe"             "Applications\Files\Inspector\Disk.Lens"

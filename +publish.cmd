@@ -86,7 +86,7 @@ for %%n in (!SEL!) do (
     if "%%n"=="46"  call :pub "Hue.Flow"               "Games\Puzzle\Hue.Flow"                                   "Hue.Flow.exe"              "Games\Puzzle"
     if "%%n"=="47"  call :pub "Icon.Hunt"              "Applications\Emoji.Icon\Icon.Hunt"                       "Icon.Hunt.exe"             "Applications\Emoji.Icon"
     if "%%n"=="48"  call :pub "Icon.Maker"             "Applications\Tools.Utility\Icon.Maker"                   "Icon.Maker.exe"            "Applications\Tools.Utility\Icon.Maker"
-    if "%%n"=="49"  call :pub "Img.Cast"             "Applications\Emoji.Icon\Img.Cast"                      "Img.Cast.exe"              "Applications\Emoji.Icon\Img.Cast"
+    if "%%n"=="49"  call :pub "Img.Cast"             "Applications\Emoji.Icon\Img.Cast"                      "Img.Cast.exe"              "Applications\Emoji.Icon"
     if "%%n"=="50"  call :pub "Img.Compare"            "Applications\Photo.Picture\Img.Compare"                  "Img.Compare.exe"           "Applications\Photo.Picture\Img.Compare"
     if "%%n"=="51"  call :pub "JSON.Fmt"               "Applications\Tools.Utility\JSON.Fmt"                     "JSON.Fmt.exe"              "Applications\Tools.Utility\JSON.Fmt"
     if "%%n"=="52"  call :pub "JSON.Tree"              "Applications\Development\Inspector\JSON.Tree"             "JSON.Tree.exe"             "Applications\Development\Inspector\JSON.Tree"

@@ -1,3 +1,4 @@
+using System.Media;
 using System.Text;
 using System.Windows.Media;
 
@@ -8,16 +9,23 @@ public partial class MainWindow : Window
     [DllImport("dwmapi.dll")]
     private static extern int DwmSetWindowAttribute(IntPtr hwnd, int attr, ref int attrValue, int attrSize);
 
+    [DllImport("user32.dll")]
+    private static extern bool FlashWindow(IntPtr hwnd, bool bInvert);
+
     private readonly ObservableCollection<string> _targetFolders = [];
+    private readonly ObservableCollection<string> _excludedFolders = [];
     private List<FolderEntry> _scanResults = [];
     private CancellationTokenSource? _cts;
     private bool _isScanning;
+    private AppSettings _settings = new();
 
     public MainWindow()
     {
         InitializeComponent();
-        FolderListBox.ItemsSource = _targetFolders;
-        Loaded += OnLoaded;
+        FolderListBox.ItemsSource  = _targetFolders;
+        ExcludeListBox.ItemsSource = _excludedFolders;
+        Loaded  += OnLoaded;
+        Closing += OnClosing;
     }
 
     private void OnLoaded(object sender, RoutedEventArgs e)
@@ -26,6 +34,34 @@ public partial class MainWindow : Window
         var hwnd = new WindowInteropHelper(this).Handle;
         int dark = 1;
         DwmSetWindowAttribute(hwnd, 20, ref dark, sizeof(int));
+
+        // 설정 복원
+        _settings = AppSettings.Load();
+        foreach (var f in _settings.TargetFolders)
+            if (Directory.Exists(f)) _targetFolders.Add(f);
+        foreach (var ex in _settings.ExcludedFolders)
+            _excludedFolders.Add(ex);
+
+        ChkEmpty.IsChecked      = _settings.ScanEmptyFolders;
+        ChkVsArtifact.IsChecked = _settings.ScanVsArtifacts;
+        ChkEmptyFile.IsChecked  = _settings.ScanEmptyFiles;
+        ChkRecycleBin.IsChecked = _settings.UseRecycleBin;
+        ChkPreview.IsChecked    = _settings.PreviewOnly;
+
+        UpdateDropHint();
+        if (_settings.PreviewOnly) DeleteBtn.Content = "미리보기 실행";
+    }
+
+    private void OnClosing(object? sender, System.ComponentModel.CancelEventArgs e)
+    {
+        _settings.TargetFolders     = [.. _targetFolders];
+        _settings.ExcludedFolders   = [.. _excludedFolders];
+        _settings.ScanEmptyFolders  = ChkEmpty.IsChecked == true;
+        _settings.ScanVsArtifacts   = ChkVsArtifact.IsChecked == true;
+        _settings.ScanEmptyFiles    = ChkEmptyFile.IsChecked == true;
+        _settings.UseRecycleBin     = ChkRecycleBin.IsChecked == true;
+        _settings.PreviewOnly       = ChkPreview.IsChecked == true;
+        _settings.Save();
     }
 
     // ── 드래그 앤 드롭 ──────────────────────────────────────────────────
@@ -91,14 +127,79 @@ public partial class MainWindow : Window
             : Visibility.Collapsed;
     }
 
+    // ── 제외 폴더 편집 ──────────────────────────────────────────────────
+
+    private void AddExclude_Click(object sender, RoutedEventArgs e) => AddExcludeEntry();
+
+    private void ExcludeInput_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+    {
+        if (e.Key == System.Windows.Input.Key.Enter) AddExcludeEntry();
+    }
+
+    private void AddExcludeEntry()
+    {
+        var name = ExcludeInput.Text.Trim();
+        if (string.IsNullOrEmpty(name) || _excludedFolders.Contains(name, StringComparer.OrdinalIgnoreCase))
+            return;
+        _excludedFolders.Add(name);
+        ExcludeInput.Clear();
+    }
+
+    private void RemoveExclude_Click(object sender, RoutedEventArgs e)
+    {
+        if (ExcludeListBox.SelectedItem is string selected)
+            _excludedFolders.Remove(selected);
+    }
+
     // ── 옵션 ────────────────────────────────────────────────────────────
 
     private void RecycleBin_Checked(object sender, RoutedEventArgs e)
     {
         if (!IsLoaded) return;
-        // 휴지통 선택 시 미리보기 강제 해제 불필요
     }
-    private void RecycleBin_Unchecked(object sender, RoutedEventArgs e) { }
+
+    private void Preview_Checked(object sender, RoutedEventArgs e)
+    {
+        if (!IsLoaded) return;
+        DeleteBtn.Content = "미리보기 실행";
+    }
+
+    private void Preview_Unchecked(object sender, RoutedEventArgs e)
+    {
+        if (!IsLoaded) return;
+        DeleteBtn.Content = "삭제";
+    }
+
+    // ── 필터 ────────────────────────────────────────────────────────────
+
+    private void Filter_Changed(object sender, RoutedEventArgs e)
+    {
+        if (!IsLoaded) return;
+        ApplyFilter();
+    }
+
+    private FolderKind? ActiveFilterKind()
+    {
+        if (FilterEmpty.IsChecked == true) return FolderKind.Empty;
+        if (FilterVs.IsChecked    == true) return FolderKind.VsArtifact;
+        if (FilterFile.IsChecked  == true) return FolderKind.EmptyFile;
+        return null; // 전체
+    }
+
+    private void ApplyFilter()
+    {
+        var kind = ActiveFilterKind();
+        var filtered = kind == null
+            ? _scanResults
+            : _scanResults.Where(r => r.Kind == kind).ToList();
+
+        ResultListView.ItemsSource = null;
+        ResultListView.ItemsSource = filtered;
+
+        bool hasItems = filtered.Count > 0;
+        ResultListView.Visibility = hasItems ? Visibility.Visible   : Visibility.Collapsed;
+        EmptyState.Visibility     = hasItems ? Visibility.Collapsed : Visibility.Visible;
+    }
 
     // ── 스캔 ────────────────────────────────────────────────────────────
 
@@ -130,6 +231,14 @@ public partial class MainWindow : Window
 
             _scanResults = await scanner.ScanAsync([.. _targetFolders], prog);
             ShowResults(_scanResults);
+
+            // 스캔 완료 토스트 알림 (창이 비활성 상태일 때)
+            if (!IsActive && _scanResults.Count > 0)
+            {
+                SystemSounds.Asterisk.Play();
+                var hwnd = new WindowInteropHelper(this).Handle;
+                FlashWindow(hwnd, true);
+            }
         }
         catch (OperationCanceledException)
         {
@@ -149,27 +258,26 @@ public partial class MainWindow : Window
         ScanEmptyFiles     = ChkEmptyFile.IsChecked == true,
         UseRecycleBin      = ChkRecycleBin.IsChecked == true,
         PreviewOnly        = ChkPreview.IsChecked == true,
+        ExcludedFolderNames = new HashSet<string>(
+            _excludedFolders, StringComparer.OrdinalIgnoreCase),
     };
 
     private void ShowResults(List<FolderEntry> results)
     {
-        // 같은 List 인스턴스 재할당 시 WPF가 변경 없음으로 판단해 UI 미갱신하는 문제 방지
-        ResultListView.ItemsSource = null;
-        ResultListView.ItemsSource = results;
+        _scanResults = results;
 
         bool hasItems = results.Count > 0;
-        ResultListView.Visibility  = hasItems ? Visibility.Visible   : Visibility.Collapsed;
-        EmptyState.Visibility      = hasItems ? Visibility.Collapsed : Visibility.Visible;
-
         SelectAllBtn.IsEnabled  = hasItems;
         SelectNoneBtn.IsEnabled = hasItems;
         CopyResultBtn.IsEnabled = hasItems;
+        ExportBtn.IsEnabled     = hasItems;
         DeleteBtn.IsEnabled     = hasItems;
 
         StatusText.Text = hasItems
             ? $"{results.Count:N0}개 항목 탐지됨  —  삭제할 항목을 선택하세요."
             : "탐지된 항목이 없습니다.";
 
+        ApplyFilter();
         UpdateStats();
     }
 
@@ -211,6 +319,44 @@ public partial class MainWindow : Window
         sb.AppendLine($"총 {_scanResults.Count:N0}개  /  {FormatSize(_scanResults.Sum(r => r.SizeBytes))}");
         System.Windows.Clipboard.SetText(sb.ToString());
         StatusText.Text = "결과가 클립보드에 복사되었습니다.";
+    }
+
+    // ── 내보내기 ─────────────────────────────────────────────────────────
+
+    private void Export_Click(object sender, RoutedEventArgs e)
+    {
+        if (_scanResults.Count == 0) return;
+
+        var dlg = new Microsoft.Win32.SaveFileDialog
+        {
+            Title      = "결과 내보내기",
+            Filter     = "텍스트 파일 (*.txt)|*.txt|CSV 파일 (*.csv)|*.csv",
+            FileName   = $"FolderPurge_{DateTime.Now:yyyyMMdd_HHmmss}",
+            DefaultExt = ".txt"
+        };
+        if (dlg.ShowDialog() != true) return;
+
+        var ext = Path.GetExtension(dlg.FileName).ToLowerInvariant();
+        var sb  = new StringBuilder();
+
+        if (ext == ".csv")
+        {
+            sb.AppendLine("종류,경로,크기,항목수");
+            foreach (var item in _scanResults)
+                sb.AppendLine($"\"{item.KindBadge}\",\"{item.Path}\",\"{item.SizeText}\",\"{item.ItemCountText}\"");
+        }
+        else
+        {
+            sb.AppendLine($"Folder.Purge 스캔 결과 — {DateTime.Now:yyyy-MM-dd HH:mm:ss}");
+            sb.AppendLine(new string('─', 60));
+            foreach (var item in _scanResults)
+                sb.AppendLine($"[{item.KindBadge}] {item.Path}  ({item.SizeText})");
+            sb.AppendLine(new string('─', 60));
+            sb.AppendLine($"총 {_scanResults.Count:N0}개  /  {FormatSize(_scanResults.Sum(r => r.SizeBytes))}");
+        }
+
+        File.WriteAllText(dlg.FileName, sb.ToString(), Encoding.UTF8);
+        StatusText.Text = $"결과가 저장되었습니다: {Path.GetFileName(dlg.FileName)}";
     }
 
     // ── 삭제 ────────────────────────────────────────────────────────────
@@ -336,6 +482,7 @@ public partial class MainWindow : Window
         SelectAllBtn.IsEnabled     = !scanning && _scanResults.Count > 0;
         SelectNoneBtn.IsEnabled    = !scanning && _scanResults.Count > 0;
         CopyResultBtn.IsEnabled    = !scanning && _scanResults.Count > 0;
+        ExportBtn.IsEnabled        = !scanning && _scanResults.Count > 0;
         ProgressBarPanel.Visibility = scanning ? Visibility.Visible   : Visibility.Collapsed;
         ProgressText.Visibility     = scanning ? Visibility.Visible   : Visibility.Collapsed;
         if (!scanning) ProgressText.Text = string.Empty;

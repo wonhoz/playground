@@ -74,40 +74,5 @@
             </Style.Triggers>
         </Style>
 
-        <!-- ── CheckBox ── -->
-        <Style TargetType="CheckBox">
-            <Setter Property="Foreground" Value="#C0C0D8"/>
-            <Setter Property="FontSize" Value="12"/>
-            <Setter Property="Cursor" Value="Hand"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="CheckBox">
-                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                            <Border x:Name="Bd" Width="15" Height="15" CornerRadius="3"
-                                    Background="#1A1A2E" BorderBrush="#505068" BorderThickness="1.5"
-                                    VerticalAlignment="Center" Margin="0,0,6,0">
-                                <Path x:Name="Mark" Data="M 2 7 L 6 11 L 13 3"
-                                      Stroke="#64C87A" StrokeThickness="2"
-                                      StrokeStartLineCap="Round" StrokeEndLineCap="Round"
-                                      Visibility="Collapsed"/>
-                            </Border>
-                            <ContentPresenter VerticalAlignment="Center"/>
-                        </StackPanel>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsChecked" Value="True">
-                                <Setter TargetName="Mark" Property="Visibility" Value="Visible"/>
-                                <Setter TargetName="Bd" Property="Background" Value="#1E3028"/>
-                                <Setter TargetName="Bd" Property="BorderBrush" Value="#64C87A"/>
-                            </Trigger>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="Bd" Property="BorderBrush" Value="#7070A8"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
     </Application.Resources>
 </Application>

@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg_pf05" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0F766E"/>
+      <stop offset="100%" stop-color="#134E4A"/>
+    </linearGradient>
+    <clipPath id="c_pf05">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <!-- Layer 1: Teal gradient background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg_pf05)"/>
+  <g clip-path="url(#c_pf05)">
+    <!-- Layer 2: Version history timeline + prompt cards -->
+    <!-- Timeline vertical line -->
+    <line x1="200" y1="180" x2="200" y2="840" stroke="#5EEAD4" stroke-width="12" stroke-linecap="round"/>
+    <!-- Version dots on timeline -->
+    <circle cx="200" cy="240" r="32" fill="#FCD34D" stroke="#FBBF24" stroke-width="8"/>
+    <circle cx="200" cy="420" r="32" fill="#FCD34D" stroke="#FBBF24" stroke-width="8"/>
+    <circle cx="200" cy="600" r="32" fill="#FCD34D" stroke="#FBBF24" stroke-width="8"/>
+    <circle cx="200" cy="780" r="28" fill="#99F6E4" stroke="#5EEAD4" stroke-width="6"/>
+    <!-- Version labels -->
+    <text x="200" y="250" font-family="Arial Black" font-size="28" font-weight="900" fill="#1C1917" text-anchor="middle">v3</text>
+    <text x="200" y="430" font-family="Arial Black" font-size="28" font-weight="900" fill="#1C1917" text-anchor="middle">v2</text>
+    <text x="200" y="610" font-family="Arial Black" font-size="28" font-weight="900" fill="#1C1917" text-anchor="middle">v1</text>
+    <!-- Prompt cards for each version -->
+    <!-- v3 (top, active, largest) -->
+    <rect x="276" y="180" width="580" height="180" rx="32" fill="#FFFFFF"/>
+    <rect x="312" y="216" width="420" height="44" rx="22" fill="#0F766E"/>
+    <rect x="312" y="276" width="360" height="28" rx="14" fill="#CCFBF1"/>
+    <rect x="312" y="318" width="390" height="24" rx="12" fill="#CCFBF1"/>
+    <!-- v2 card -->
+    <rect x="276" y="394" width="520" height="160" rx="28" fill="#F0FDF4" opacity="0.85"/>
+    <rect x="308" y="424" width="360" height="36" rx="18" fill="#86EFAC" opacity="0.9"/>
+    <rect x="308" y="472" width="300" height="24" rx="12" fill="#BBF7D0" opacity="0.8"/>
+    <rect x="308" y="508" width="340" height="24" rx="12" fill="#BBF7D0" opacity="0.8"/>
+    <!-- v1 card (faded) -->
+    <rect x="276" y="568" width="460" height="140" rx="24" fill="#E8FFF8" opacity="0.5"/>
+    <rect x="308" y="596" width="300" height="32" rx="16" fill="#5EEAD4" opacity="0.5"/>
+    <rect x="308" y="640" width="260" height="22" rx="11" fill="#99F6E4" opacity="0.4"/>
+    <!-- Layer 3: AI spark badge (top right) -->
+    <circle cx="810" cy="150" r="68" fill="#FCD34D"/>
+    <text x="810" y="120" font-family="Courier New" font-size="38" fill="#78350F" text-anchor="middle">{  }</text>
+    <text x="810" y="168" font-family="Arial Black" font-size="32" font-weight="900" fill="#92400E" text-anchor="middle">AI</text>
+    <!-- Favorite stars next to v3 -->
+    <text x="870" y="300" font-family="Segoe UI" font-size="64" fill="#FCD34D">★</text>
+  </g>
+</svg>

@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <clipPath id="c_mv05">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <!-- Layer 1: Split background (hot pink left / cyan right) -->
+  <rect width="1024" height="1024" rx="190" fill="#DB2777"/>
+  <rect x="512" y="0" width="512" height="1024" rx="0" fill="#0891B2" clip-path="url(#c_mv05)"/>
+  <!-- Clip the split -->
+  <g clip-path="url(#c_mv05)">
+    <!-- Rounded corners overlay to fix the split -->
+    <!-- Left half -->
+    <rect x="0" y="0" width="512" height="1024" fill="#DB2777"/>
+    <!-- Right half -->
+    <rect x="512" y="0" width="512" height="1024" fill="#0891B2"/>
+    <!-- Layer 2: Left panel (raw MD) -->
+    <rect x="60" y="160" width="400" height="700" rx="36" fill="#9D174D"/>
+    <!-- MD text -->
+    <text x="100" y="270" font-family="Courier New" font-size="60" font-weight="700" fill="#FDF2F8"># H1</text>
+    <rect x="100" y="292" width="320" height="26" rx="13" fill="#F9A8D4" opacity="0.6"/>
+    <text x="100" y="380" font-family="Courier New" font-size="46" fill="#FDA4AF">**Bold**</text>
+    <text x="100" y="450" font-family="Courier New" font-size="46" fill="#FDA4AF">*Italic*</text>
+    <text x="100" y="520" font-family="Courier New" font-size="46" fill="#FDA4AF">- List</text>
+    <text x="100" y="590" font-family="Courier New" font-size="46" fill="#FDA4AF">&gt; Quote</text>
+    <rect x="100" y="620" width="280" height="26" rx="13" fill="#F9A8D4" opacity="0.5"/>
+    <rect x="100" y="660" width="240" height="26" rx="13" fill="#F9A8D4" opacity="0.4"/>
+    <!-- Layer 2: Right panel (rendered) -->
+    <rect x="564" y="160" width="400" height="700" rx="36" fill="#0C4A6E"/>
+    <!-- Rendered content -->
+    <rect x="604" y="220" width="320" height="68" rx="16" fill="#075985"/>
+    <text x="764" y="268" font-family="Georgia, serif" font-size="56" font-weight="900" fill="white" text-anchor="middle">H1</text>
+    <rect x="604" y="312" width="280" height="26" rx="13" fill="#0EA5E9" opacity="0.7"/>
+    <!-- Bold text rendered -->
+    <rect x="604" y="368" width="200" height="36" rx="10" fill="#38BDF8"/>
+    <text x="704" y="397" font-family="Arial Black" font-size="34" font-weight="900" fill="#0C4A6E" text-anchor="middle">Bold</text>
+    <!-- Bullet point -->
+    <circle cx="620" cy="480" r="14" fill="#7DD3FC"/>
+    <rect x="650" y="464" width="200" height="28" rx="14" fill="#E0F2FE"/>
+    <!-- Quote block -->
+    <rect x="604" y="524" width="12" height="100" rx="6" fill="#38BDF8"/>
+    <rect x="630" y="534" width="300" height="28" rx="14" fill="#BAE6FD" opacity="0.8"/>
+    <rect x="630" y="574" width="240" height="24" rx="12" fill="#BAE6FD" opacity="0.6"/>
+    <!-- Layer 3: Center divider + arrow -->
+    <rect x="494" y="360" width="36" height="300" rx="18" fill="white" opacity="0.9"/>
+    <polygon points="464,450 560,510 464,570" fill="#FCD34D"/>
+  </g>
+</svg>

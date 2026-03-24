@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#030508"/>
+      <stop offset="100%" stop-color="#080b10"/>
+    </linearGradient>
+    <linearGradient id="film1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2DD4BF" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#0891B2" stop-opacity="0.05"/>
+    </linearGradient>
+    <linearGradient id="diff" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FDE047" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#F59E0B" stop-opacity="0.4"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- 필름스트립 A (상단) -->
+  <rect x="40" y="100" width="432" height="120" rx="8" fill="#080e14" stroke="#2DD4BF" stroke-width="2" opacity="0.9"/>
+  <!-- 필름 구멍들 -->
+  <rect x="52" y="108" width="20" height="28" rx="4" fill="#030508" stroke="#2DD4BF" stroke-width="1" opacity="0.7"/>
+  <rect x="82" y="108" width="20" height="28" rx="4" fill="#030508" stroke="#2DD4BF" stroke-width="1" opacity="0.7"/>
+  <rect x="52" y="184" width="20" height="28" rx="4" fill="#030508" stroke="#2DD4BF" stroke-width="1" opacity="0.7"/>
+  <rect x="82" y="184" width="20" height="28" rx="4" fill="#030508" stroke="#2DD4BF" stroke-width="1" opacity="0.7"/>
+  <!-- 필름 A 프레임들 -->
+  <rect x="112" y="112" width="75" height="96" rx="4" fill="url(#film1)" stroke="#2DD4BF" stroke-width="1" opacity="0.8"/>
+  <rect x="197" y="112" width="75" height="96" rx="4" fill="url(#film1)" stroke="#2DD4BF" stroke-width="1" opacity="0.8"/>
+  <rect x="282" y="112" width="75" height="96" rx="4" fill="#1a3a3a" stroke="#2DD4BF" stroke-width="1.5" filter="url(#glow)" opacity="0.9"/>
+  <rect x="367" y="112" width="75" height="96" rx="4" fill="url(#film1)" stroke="#2DD4BF" stroke-width="1" opacity="0.8"/>
+  <!-- 선택된 프레임 내용 -->
+  <circle cx="320" cy="148" r="20" fill="#1a4a4a" stroke="#2DD4BF" stroke-width="1.5" opacity="0.9"/>
+  <path d="M305,165 Q320,150 335,165" fill="none" stroke="#2DD4BF" stroke-width="2" opacity="0.8"/>
+  <!-- 필름스트립 B (하단) -->
+  <rect x="40" y="292" width="432" height="120" rx="8" fill="#080e14" stroke="#F43F5E" stroke-width="2" opacity="0.9"/>
+  <rect x="52" y="300" width="20" height="28" rx="4" fill="#030508" stroke="#F43F5E" stroke-width="1" opacity="0.7"/>
+  <rect x="82" y="300" width="20" height="28" rx="4" fill="#030508" stroke="#F43F5E" stroke-width="1" opacity="0.7"/>
+  <rect x="52" y="376" width="20" height="28" rx="4" fill="#030508" stroke="#F43F5E" stroke-width="1" opacity="0.7"/>
+  <rect x="82" y="376" width="20" height="28" rx="4" fill="#030508" stroke="#F43F5E" stroke-width="1" opacity="0.7"/>
+  <rect x="112" y="304" width="75" height="96" rx="4" fill="#200a14" stroke="#F43F5E" stroke-width="1" opacity="0.8"/>
+  <rect x="197" y="304" width="75" height="96" rx="4" fill="#200a14" stroke="#F43F5E" stroke-width="1" opacity="0.8"/>
+  <rect x="282" y="304" width="75" height="96" rx="4" fill="#2a1020" stroke="#F43F5E" stroke-width="1.5" filter="url(#glow)" opacity="0.9"/>
+  <rect x="367" y="304" width="75" height="96" rx="4" fill="#200a14" stroke="#F43F5E" stroke-width="1" opacity="0.8"/>
+  <!-- 선택된 프레임 내용 (다름) -->
+  <circle cx="320" cy="340" r="22" fill="#2a1020" stroke="#F43F5E" stroke-width="1.5" opacity="0.9"/>
+  <path d="M305,358 Q320,372 335,358" fill="none" stroke="#F43F5E" stroke-width="2" opacity="0.8"/>
+  <!-- 중앙 DIFF 연결선 -->
+  <rect x="282" y="220" width="75" height="70" rx="4" fill="url(#diff)" opacity="0.3" filter="url(#glow)"/>
+  <text x="320" y="262" text-anchor="middle" font-size="16" font-weight="bold" fill="#FDE047" filter="url(#glow)" opacity="0.95">DIFF</text>
+  <!-- 연결 화살표 -->
+  <path d="M320,208 L320,220" stroke="#FDE047" stroke-width="2" opacity="0.7"/>
+  <path d="M320,290 L320,304" stroke="#FDE047" stroke-width="2" opacity="0.7"/>
+  <!-- 라벨 -->
+  <text x="70" y="95" font-size="11" fill="#2DD4BF" opacity="0.6">STRIP A</text>
+  <text x="70" y="288" font-size="11" fill="#F43F5E" opacity="0.6">STRIP B</text>
+  <!-- 하단 -->
+  <text x="256" y="448" text-anchor="middle" font-size="12" fill="#2DD4BF" opacity="0.5" letter-spacing="3">FILMSTRIP COMPARE</text>
+</svg>

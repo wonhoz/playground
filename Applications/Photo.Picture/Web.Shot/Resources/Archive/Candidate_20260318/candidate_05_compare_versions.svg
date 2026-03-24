@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#030508"/>
+      <stop offset="100%" stop-color="#030a14"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- 버전 비교 스크린샷 -->
+  <!-- 버전 A (구버전) -->
+  <rect x="60" y="80" width="175" height="250" rx="6" fill="#060d16" stroke="#38BDF8" stroke-width="1.5" opacity="0.9"/>
+  <text x="148" y="100" text-anchor="middle" font-size="10" fill="#38BDF8" opacity="0.8" font-weight="bold">v1.0 (Before)</text>
+  <!-- 구버전 내용 -->
+  <rect x="68" y="108" width="159" height="20" rx="3" fill="#0a1a28" opacity="0.8"/>
+  <rect x="76" y="114" width="60" height="8" rx="2" fill="#38BDF8" opacity="0.4"/>
+  <rect x="68" y="134" width="159" height="80" rx="3" fill="#081018" opacity="0.7"/>
+  <rect x="76" y="142" width="143" height="10" rx="2" fill="#1a3a50" opacity="0.6"/>
+  <rect x="76" y="157" width="120" height="8" rx="2" fill="#38BDF8" opacity="0.2"/>
+  <rect x="76" y="169" width="130" height="8" rx="2" fill="#38BDF8" opacity="0.2"/>
+  <rect x="68" y="222" width="75" height="60" rx="4" fill="#0a1828" stroke="#38BDF8" stroke-width="0.8" opacity="0.7"/>
+  <rect x="151" y="222" width="67" height="60" rx="4" fill="#0a1828" stroke="#38BDF8" stroke-width="0.8" opacity="0.7"/>
+  <rect x="68" y="292" width="159" height="20" rx="3" fill="#0a1a28" opacity="0.6"/>
+  <rect x="68" y="317" width="159" height="8" rx="2" fill="#38BDF8" opacity="0.15"/>
+  <!-- 버전 B (신버전) -->
+  <rect x="277" y="80" width="175" height="250" rx="6" fill="#060d16" stroke="#38BDF8" stroke-width="2" filter="url(#glow)" opacity="0.95"/>
+  <text x="365" y="100" text-anchor="middle" font-size="10" fill="#38BDF8" filter="url(#glow)" opacity="0.9" font-weight="bold">v2.0 (After)</text>
+  <!-- 신버전 내용 (다름) -->
+  <rect x="285" y="108" width="159" height="28" rx="3" fill="#0a2030" opacity="0.85"/>
+  <rect x="293" y="116" width="90" height="10" rx="3" fill="#38BDF8" opacity="0.6"/>
+  <rect x="393" y="114" width="40" height="14" rx="4" fill="#38BDF8" opacity="0.4"/>
+  <rect x="285" y="142" width="159" height="90" rx="4" fill="#081828" opacity="0.7"/>
+  <rect x="293" y="150" width="143" height="12" rx="3" fill="#38BDF8" opacity="0.4"/>
+  <rect x="293" y="168" width="130" height="8" rx="2" fill="#38BDF8" opacity="0.25"/>
+  <rect x="293" y="180" width="120" height="8" rx="2" fill="#38BDF8" opacity="0.25"/>
+  <rect x="293" y="195" width="60" height="18" rx="6" fill="#38BDF8" opacity="0.5"/>
+  <!-- 3카드 레이아웃 (v2) -->
+  <rect x="285" y="240" width="46" height="56" rx="4" fill="#0a1828" stroke="#38BDF8" stroke-width="1" opacity="0.8"/>
+  <rect x="337" y="240" width="46" height="56" rx="4" fill="#0a1828" stroke="#38BDF8" stroke-width="1" opacity="0.8"/>
+  <rect x="389" y="240" width="46" height="56" rx="4" fill="#0a1828" stroke="#38BDF8" stroke-width="1" opacity="0.8"/>
+  <rect x="285" y="303" width="150" height="12" rx="3" fill="#38BDF8" opacity="0.3"/>
+  <rect x="285" y="320" width="150" height="8" rx="2" fill="#38BDF8" opacity="0.15"/>
+  <!-- 중앙 DIFF 표시 -->
+  <rect x="238" y="160" width="36" height="100" rx="6" fill="#060d16" stroke="#38BDF8" stroke-width="1.5" opacity="0.9"/>
+  <text x="256" y="186" text-anchor="middle" font-size="9" fill="#38BDF8" opacity="0.8">D</text>
+  <text x="256" y="200" text-anchor="middle" font-size="9" fill="#38BDF8" opacity="0.8">I</text>
+  <text x="256" y="214" text-anchor="middle" font-size="9" fill="#38BDF8" opacity="0.8">F</text>
+  <text x="256" y="228" text-anchor="middle" font-size="9" fill="#38BDF8" opacity="0.8">F</text>
+  <!-- 변경 마크 -->
+  <circle cx="440" cy="108" r="12" fill="#EF4444" opacity="0.2" filter="url(#glow)"/>
+  <text x="440" y="113" text-anchor="middle" font-size="10" fill="#EF4444" opacity="0.8">!</text>
+  <circle cx="440" cy="196" r="12" fill="#4ADE80" opacity="0.2" filter="url(#glow)"/>
+  <text x="440" y="201" text-anchor="middle" font-size="10" fill="#4ADE80" opacity="0.8">+</text>
+  <!-- 하단 -->
+  <rect x="80" y="358" width="352" height="96" rx="8" fill="#060d16" stroke="#38BDF8" stroke-width="1.5" opacity="0.9"/>
+  <text x="256" y="382" text-anchor="middle" font-size="13" font-weight="bold" fill="#38BDF8" filter="url(#glow)" opacity="0.9">VERSION COMPARE</text>
+  <text x="256" y="402" text-anchor="middle" font-size="11" fill="#888" opacity="0.7">웹페이지 버전 비교</text>
+  <rect x="100" y="416" width="90" height="24" rx="5" fill="#EF4444" opacity="0.2"/>
+  <text x="145" y="432" text-anchor="middle" font-size="10" fill="#EF4444" opacity="0.8">3 removed</text>
+  <rect x="212" y="416" width="90" height="24" rx="5" fill="#FDE047" opacity="0.15"/>
+  <text x="257" y="432" text-anchor="middle" font-size="10" fill="#FDE047" opacity="0.8">2 modified</text>
+  <rect x="324" y="416" width="90" height="24" rx="5" fill="#4ADE80" opacity="0.15"/>
+  <text x="369" y="432" text-anchor="middle" font-size="10" fill="#4ADE80" opacity="0.8">5 added</text>
+  <text x="256" y="445" text-anchor="middle" font-size="10" fill="#38BDF8" opacity="0.6">Visual diff detected</text>
+</svg>

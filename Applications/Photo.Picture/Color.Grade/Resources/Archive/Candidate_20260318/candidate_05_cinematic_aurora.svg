@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#030508"/>
+      <stop offset="100%" style="stop-color:#0a0514"/>
+    </linearGradient>
+    <linearGradient id="a1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#FF6B6B;stop-opacity:0.8"/>
+      <stop offset="100%" style="stop-color:#FF6B6B;stop-opacity:0"/>
+    </linearGradient>
+    <linearGradient id="a2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFD166;stop-opacity:0.8"/>
+      <stop offset="100%" style="stop-color:#FFD166;stop-opacity:0"/>
+    </linearGradient>
+    <linearGradient id="a3" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#06D6A0;stop-opacity:0.8"/>
+      <stop offset="100%" style="stop-color:#06D6A0;stop-opacity:0"/>
+    </linearGradient>
+    <linearGradient id="a4" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#118AB2;stop-opacity:0.8"/>
+      <stop offset="100%" style="stop-color:#118AB2;stop-opacity:0"/>
+    </linearGradient>
+    <linearGradient id="a5" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#A78BFA;stop-opacity:0.9"/>
+      <stop offset="100%" style="stop-color:#A78BFA;stop-opacity:0"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- 시네마틱 오로라 기둥들 -->
+  <rect x="90" y="160" width="20" height="260" rx="10" fill="url(#a1)" opacity="0.9" filter="url(#glow)"/>
+  <rect x="122" y="140" width="20" height="280" rx="10" fill="url(#a2)" opacity="0.8" filter="url(#glow)"/>
+  <rect x="154" y="155" width="20" height="265" rx="10" fill="url(#a3)" opacity="0.9" filter="url(#glow)"/>
+  <rect x="186" y="135" width="20" height="285" rx="10" fill="url(#a4)" opacity="0.8" filter="url(#glow)"/>
+  <rect x="218" y="150" width="20" height="270" rx="10" fill="url(#a5)" opacity="1" filter="url(#glow)"/>
+  <rect x="250" y="130" width="20" height="290" rx="10" fill="url(#a1)" opacity="0.9" filter="url(#glow)"/>
+  <rect x="282" y="145" width="20" height="275" rx="10" fill="url(#a2)" opacity="0.9" filter="url(#glow)"/>
+  <rect x="314" y="160" width="20" height="260" rx="10" fill="url(#a3)" opacity="0.8"/>
+  <rect x="346" y="140" width="20" height="280" rx="10" fill="url(#a4)" opacity="0.8" filter="url(#glow)"/>
+  <rect x="378" y="155" width="20" height="265" rx="10" fill="url(#a5)" opacity="0.9" filter="url(#glow)"/>
+  <!-- 지평선 -->
+  <line x1="80" y1="420" x2="432" y2="420" stroke="#A78BFA" stroke-width="2" opacity="0.4"/>
+  <!-- 필름 프레임 -->
+  <rect x="80" y="90" width="352" height="350" rx="6" fill="none" stroke="#A78BFA" stroke-width="1.5" stroke-dasharray="4,4" opacity="0.3"/>
+  <text x="256" y="468" text-anchor="middle" fill="#A78BFA" font-size="12" font-family="monospace" opacity="0.7">CINEMATIC GRADE</text>
+</svg>

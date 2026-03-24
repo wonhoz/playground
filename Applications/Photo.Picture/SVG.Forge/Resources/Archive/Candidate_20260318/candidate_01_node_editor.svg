@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#030508"/>
+      <stop offset="100%" stop-color="#0a0510"/>
+    </linearGradient>
+    <linearGradient id="nodeg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#C084FC" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#7C3AED" stop-opacity="0.2"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- 노드 에디터 스타일 — 연결된 노드들 -->
+  <!-- 연결선 (베지어) -->
+  <path d="M140,180 C200,180 200,260 260,260" fill="none" stroke="#C084FC" stroke-width="2" filter="url(#glow)" opacity="0.7"/>
+  <path d="M140,280 C200,280 200,260 260,260" fill="none" stroke="#C084FC" stroke-width="2" opacity="0.5"/>
+  <path d="M260,260 C320,260 320,180 380,180" fill="none" stroke="#C084FC" stroke-width="2" filter="url(#glow)" opacity="0.7"/>
+  <path d="M260,260 C320,260 320,340 380,340" fill="none" stroke="#A855F7" stroke-width="2" opacity="0.5"/>
+  <path d="M140,380 C200,380 200,340 260,340" fill="none" stroke="#A855F7" stroke-width="2" opacity="0.4"/>
+  <path d="M260,340 C320,340 320,340 380,340" fill="none" stroke="#C084FC" stroke-width="2" opacity="0.6"/>
+  <!-- 노드들 -->
+  <!-- 입력 노드 1 -->
+  <rect x="90" y="158" width="100" height="44" rx="8" fill="url(#nodeg)" stroke="#C084FC" stroke-width="2" filter="url(#glow)" opacity="0.95"/>
+  <circle cx="90" cy="180" r="5" fill="#C084FC" opacity="0.9"/>
+  <rect x="100" y="168" width="70" height="8" rx="3" fill="#C084FC" opacity="0.5"/>
+  <rect x="100" y="180" width="50" height="6" rx="3" fill="#C084FC" opacity="0.3"/>
+  <circle cx="190" cy="180" r="5" fill="#C084FC" opacity="0.9"/>
+  <!-- 입력 노드 2 -->
+  <rect x="90" y="258" width="100" height="44" rx="8" fill="url(#nodeg)" stroke="#C084FC" stroke-width="1.5" opacity="0.85"/>
+  <circle cx="90" cy="280" r="5" fill="#C084FC" opacity="0.9"/>
+  <rect x="100" y="268" width="70" height="8" rx="3" fill="#C084FC" opacity="0.4"/>
+  <rect x="100" y="280" width="55" height="6" rx="3" fill="#C084FC" opacity="0.3"/>
+  <circle cx="190" cy="280" r="5" fill="#C084FC" opacity="0.9"/>
+  <!-- 입력 노드 3 -->
+  <rect x="90" y="358" width="100" height="44" rx="8" fill="url(#nodeg)" stroke="#A855F7" stroke-width="1.5" opacity="0.8"/>
+  <circle cx="90" cy="380" r="5" fill="#A855F7" opacity="0.9"/>
+  <rect x="100" y="368" width="70" height="8" rx="3" fill="#A855F7" opacity="0.4"/>
+  <rect x="100" y="380" width="50" height="6" rx="3" fill="#A855F7" opacity="0.3"/>
+  <circle cx="190" cy="380" r="5" fill="#A855F7" opacity="0.9"/>
+  <!-- 중앙 처리 노드 -->
+  <rect x="206" y="230" width="108" height="60" rx="10" fill="#1a0a2a" stroke="#C084FC" stroke-width="2.5" filter="url(#glow)" opacity="0.95"/>
+  <circle cx="206" cy="260" r="6" fill="#C084FC" opacity="0.9"/>
+  <circle cx="206" cy="280" r="6" fill="#C084FC" opacity="0.9"/>
+  <text x="260" y="258" text-anchor="middle" font-size="11" fill="#C084FC" opacity="0.9" font-weight="bold">Transform</text>
+  <rect x="218" y="266" width="72" height="8" rx="3" fill="#C084FC" opacity="0.3"/>
+  <rect x="218" y="278" width="56" height="6" rx="3" fill="#C084FC" opacity="0.25"/>
+  <circle cx="314" cy="260" r="6" fill="#C084FC" opacity="0.9"/>
+  <circle cx="314" cy="275" r="6" fill="#C084FC" opacity="0.9"/>
+  <!-- 출력 노드 1 -->
+  <rect x="330" y="158" width="100" height="44" rx="8" fill="url(#nodeg)" stroke="#C084FC" stroke-width="1.5" opacity="0.85"/>
+  <circle cx="330" cy="180" r="5" fill="#C084FC" opacity="0.9"/>
+  <rect x="340" y="168" width="70" height="8" rx="3" fill="#C084FC" opacity="0.4"/>
+  <rect x="340" y="180" width="55" height="6" rx="3" fill="#C084FC" opacity="0.3"/>
+  <!-- 출력 노드 2 -->
+  <rect x="330" y="318" width="100" height="44" rx="8" fill="url(#nodeg)" stroke="#A855F7" stroke-width="1.5" opacity="0.8"/>
+  <circle cx="330" cy="340" r="5" fill="#A855F7" opacity="0.9"/>
+  <rect x="340" y="328" width="70" height="8" rx="3" fill="#A855F7" opacity="0.4"/>
+  <rect x="340" y="340" width="45" height="6" rx="3" fill="#A855F7" opacity="0.3"/>
+  <!-- 하단 라벨 -->
+  <rect x="130" y="430" width="252" height="48" rx="10" fill="#0a0514" stroke="#C084FC" stroke-width="1.5" opacity="0.9"/>
+  <text x="256" y="459" text-anchor="middle" font-size="14" font-weight="bold" fill="#C084FC" filter="url(#glow)" opacity="0.9">NODE EDITOR</text>
+</svg>

@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#030508"/>
+      <stop offset="100%" style="stop-color:#0a0514"/>
+    </linearGradient>
+    <linearGradient id="spectrum" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#FF6B6B"/>
+      <stop offset="16%" style="stop-color:#FF8C42"/>
+      <stop offset="33%" style="stop-color:#FFD166"/>
+      <stop offset="50%" style="stop-color:#06D6A0"/>
+      <stop offset="66%" style="stop-color:#118AB2"/>
+      <stop offset="83%" style="stop-color:#A78BFA"/>
+      <stop offset="100%" style="stop-color:#C084FC"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- 스펙트럼 바 -->
+  <rect x="80" y="230" width="352" height="52" rx="26" fill="url(#spectrum)" opacity="0.85" filter="url(#glow)"/>
+  <rect x="80" y="230" width="352" height="52" rx="26" fill="none" stroke="#A78BFA" stroke-width="2"/>
+  <!-- 곡선 흐름 -->
+  <path d="M 80 200 Q 160 160 240 200 Q 320 240 400 200 Q 440 180 432 200" fill="none" stroke="#A78BFA" stroke-width="2" opacity="0.4" stroke-dasharray="6,4"/>
+  <path d="M 80 310 Q 160 350 240 310 Q 320 270 400 310 Q 440 330 432 310" fill="none" stroke="#C084FC" stroke-width="2" opacity="0.4" stroke-dasharray="6,4"/>
+  <!-- 슬라이더 -->
+  <circle cx="256" cy="256" r="16" fill="#A78BFA" opacity="0.9" filter="url(#glow)"/>
+  <circle cx="256" cy="256" r="10" fill="white" opacity="0.7"/>
+  <!-- 색상 샘플 -->
+  <rect x="100" y="360" width="36" height="36" rx="8" fill="#FF6B6B" opacity="0.8"/>
+  <rect x="148" y="360" width="36" height="36" rx="8" fill="#FFD166" opacity="0.8"/>
+  <rect x="196" y="360" width="36" height="36" rx="8" fill="#06D6A0" opacity="0.8"/>
+  <rect x="244" y="360" width="36" height="36" rx="8" fill="#118AB2" opacity="0.8"/>
+  <rect x="292" y="360" width="36" height="36" rx="8" fill="#A78BFA" opacity="0.8"/>
+  <rect x="340" y="360" width="36" height="36" rx="8" fill="#C084FC" opacity="0.8"/>
+  <rect x="388" y="360" width="36" height="36" rx="8" fill="#FF6B6B" opacity="0.8"/>
+  <!-- 색조 커브 -->
+  <path d="M 80 150 Q 150 120 200 140 Q 256 160 310 130 Q 360 110 432 150" fill="none" stroke="#A78BFA" stroke-width="2.5" filter="url(#glow)"/>
+  <text x="256" y="440" text-anchor="middle" fill="#A78BFA" font-size="13" font-family="monospace" opacity="0.8">SPECTRUM FLOW</text>
+</svg>

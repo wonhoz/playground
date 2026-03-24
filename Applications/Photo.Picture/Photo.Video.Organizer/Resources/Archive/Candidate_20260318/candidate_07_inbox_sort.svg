@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#030508"/>
+      <stop offset="100%" stop-color="#040d0a"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- 받은편지함 → 분류 정리 -->
+  <!-- 입력 트레이 (상단) -->
+  <rect x="160" y="60" width="192" height="100" rx="10" fill="#0a2018" stroke="#34D399" stroke-width="2" filter="url(#glow)" opacity="0.9"/>
+  <text x="256" y="88" text-anchor="middle" font-size="12" font-weight="bold" fill="#34D399" opacity="0.9">INBOX</text>
+  <!-- 무더기 파일들 -->
+  <rect x="180" y="94" width="36" height="46" rx="4" fill="#1a3a28" stroke="#34D399" stroke-width="1" opacity="0.8"/>
+  <circle cx="190" cy="106" r="5" fill="#34D399" opacity="0.6"/>
+  <rect x="220" y="94" width="36" height="46" rx="4" fill="#1a3a28" stroke="#34D399" stroke-width="1" opacity="0.75" transform="rotate(5,238,117)"/>
+  <rect x="258" y="94" width="36" height="46" rx="4" fill="#1a3a28" stroke="#34D399" stroke-width="1" opacity="0.7" transform="rotate(-3,276,117)"/>
+  <rect x="296" y="94" width="36" height="46" rx="4" fill="#1a3a28" stroke="#34D399" stroke-width="1" opacity="0.65" transform="rotate(7,314,117)"/>
+  <!-- 분류 화살표 -->
+  <path d="M160,180 L80,260" stroke="#34D399" stroke-width="2" stroke-dasharray="6,4" opacity="0.7"/>
+  <path d="M256,180 L256,240" stroke="#34D399" stroke-width="2.5" stroke-dasharray="6,4" filter="url(#glow)" opacity="0.8"/>
+  <path d="M352,180 L432,260" stroke="#34D399" stroke-width="2" stroke-dasharray="6,4" opacity="0.7"/>
+  <!-- 화살표 끝 -->
+  <polygon points="77,253 83,253 80,260" fill="#34D399" opacity="0.7"/>
+  <polygon points="253,233 259,233 256,240" fill="#34D399" opacity="0.8" filter="url(#glow)"/>
+  <polygon points="429,253 435,253 432,260" fill="#34D399" opacity="0.7"/>
+  <!-- 왼쪽 분류 박스 (날짜별) -->
+  <rect x="40" y="260" width="120" height="110" rx="8" fill="#061510" stroke="#10B981" stroke-width="1.5" opacity="0.85"/>
+  <text x="100" y="282" text-anchor="middle" font-size="11" font-weight="bold" fill="#10B981" opacity="0.9">By Date</text>
+  <rect x="52" y="292" width="96" height="20" rx="4" fill="#0a2018" stroke="#10B981" stroke-width="1" opacity="0.7"/>
+  <text x="100" y="306" text-anchor="middle" font-size="10" fill="#10B981" opacity="0.8">2024-12 (18)</text>
+  <rect x="52" y="316" width="96" height="20" rx="4" fill="#0a2018" stroke="#10B981" stroke-width="1" opacity="0.7"/>
+  <text x="100" y="330" text-anchor="middle" font-size="10" fill="#10B981" opacity="0.8">2025-01 (34)</text>
+  <rect x="52" y="340" width="96" height="20" rx="4" fill="#0a2018" stroke="#10B981" stroke-width="1" opacity="0.7"/>
+  <text x="100" y="354" text-anchor="middle" font-size="10" fill="#10B981" opacity="0.8">2025-02 (22)</text>
+  <!-- 중앙 분류 박스 (종류별) -->
+  <rect x="196" y="240" width="120" height="120" rx="8" fill="#061510" stroke="#34D399" stroke-width="2" filter="url(#glow)" opacity="0.9"/>
+  <text x="256" y="264" text-anchor="middle" font-size="11" font-weight="bold" fill="#34D399" opacity="0.9">By Type</text>
+  <rect x="208" y="274" width="96" height="22" rx="4" fill="#0a2018" stroke="#34D399" stroke-width="1" opacity="0.8"/>
+  <text x="256" y="289" text-anchor="middle" font-size="10" fill="#34D399" opacity="0.9">Photos (127)</text>
+  <rect x="208" y="300" width="96" height="22" rx="4" fill="#0a2018" stroke="#34D399" stroke-width="1" opacity="0.7"/>
+  <text x="256" y="315" text-anchor="middle" font-size="10" fill="#34D399" opacity="0.8">Videos (43)</text>
+  <rect x="208" y="326" width="96" height="22" rx="4" fill="#0a2018" stroke="#34D399" stroke-width="1" opacity="0.7"/>
+  <text x="256" y="341" text-anchor="middle" font-size="10" fill="#34D399" opacity="0.8">RAW (56)</text>
+  <!-- 오른쪽 분류 박스 (이벤트별) -->
+  <rect x="352" y="260" width="120" height="110" rx="8" fill="#061510" stroke="#6EE7B7" stroke-width="1.5" opacity="0.85"/>
+  <text x="412" y="282" text-anchor="middle" font-size="11" font-weight="bold" fill="#6EE7B7" opacity="0.9">By Event</text>
+  <rect x="364" y="292" width="96" height="20" rx="4" fill="#0a2018" stroke="#6EE7B7" stroke-width="1" opacity="0.7"/>
+  <text x="412" y="306" text-anchor="middle" font-size="10" fill="#6EE7B7" opacity="0.8">Travel (24)</text>
+  <rect x="364" y="316" width="96" height="20" rx="4" fill="#0a2018" stroke="#6EE7B7" stroke-width="1" opacity="0.7"/>
+  <text x="412" y="330" text-anchor="middle" font-size="10" fill="#6EE7B7" opacity="0.8">Party (16)</text>
+  <rect x="364" y="340" width="96" height="20" rx="4" fill="#0a2018" stroke="#6EE7B7" stroke-width="1" opacity="0.7"/>
+  <text x="412" y="354" text-anchor="middle" font-size="10" fill="#6EE7B7" opacity="0.8">Daily (38)</text>
+  <!-- 하단 -->
+  <rect x="80" y="400" width="352" height="66" rx="10" fill="#061510" stroke="#34D399" stroke-width="1.5" opacity="0.9"/>
+  <text x="256" y="427" text-anchor="middle" font-size="13" font-weight="bold" fill="#34D399" filter="url(#glow)" opacity="0.9">INBOX SORT</text>
+  <text x="256" y="450" text-anchor="middle" font-size="11" fill="#888" opacity="0.7">자동 분류 정리함</text>
+</svg>

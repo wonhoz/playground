@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- 배경: 초록 -->
+  <rect width="1024" height="1024" rx="190" fill="#1B5E20"/>
+
+  <!-- 연필 실루엣 (대각선 배치) -->
+  <!-- 연필 몸통 -->
+  <rect x="395" y="180" width="110" height="480" rx="14" fill="#FFD600" transform="rotate(-30 512 512)"/>
+  <!-- 연필 끝 (뾰족한 부분) -->
+  <polygon points="520,640 460,640 490,720" fill="#FFB300" transform="rotate(-30 512 512)"/>
+  <polygon points="520,640 490,720 505,720" fill="#FFECB3" transform="rotate(-30 512 512)"/>
+  <!-- 연필 지우개 부분 -->
+  <rect x="395" y="170" width="110" height="55" rx="8" fill="#FF80AB" transform="rotate(-30 512 512)"/>
+  <!-- 연필 금속 링 -->
+  <rect x="395" y="225" width="110" height="20" rx="0" fill="#BDBDBD" transform="rotate(-30 512 512)"/>
+
+  <!-- 연필 끝 아래 격자 셀들 -->
+  <!-- 연필 끝 위치 대략 x=550, y=680 근처 -->
+  <rect x="480" y="680" width="100" height="100" rx="6" fill="white" stroke="#76FF03" stroke-width="5"/>
+  <rect x="580" y="680" width="100" height="100" rx="6" fill="white" stroke="#76FF03" stroke-width="5"/>
+  <rect x="680" y="680" width="100" height="100" rx="6" fill="rgba(255,255,255,0.3)" stroke="#76FF03" stroke-width="3" stroke-dasharray="8,6"/>
+  <rect x="480" y="780" width="100" height="100" rx="6" fill="white" stroke="#76FF03" stroke-width="5"/>
+  <rect x="580" y="780" width="100" height="100" rx="6" fill="rgba(255,255,255,0.3)" stroke="#76FF03" stroke-width="3" stroke-dasharray="8,6"/>
+  <rect x="680" y="780" width="100" height="100" rx="6" fill="rgba(255,255,255,0.15)" stroke="#4CAF50" stroke-width="3" stroke-dasharray="8,6"/>
+
+  <!-- 셀에 "A", "B" 써지는 효과 -->
+  <text x="530" y="758" font-family="Arial Black" font-size="80" font-weight="bold" fill="#1B5E20" text-anchor="middle">A</text>
+  <text x="630" y="758" font-family="Arial Black" font-size="80" font-weight="bold" fill="#1B5E20" text-anchor="middle">B</text>
+  <text x="530" y="858" font-family="Arial Black" font-size="80" font-weight="bold" fill="#2E7D32" text-anchor="middle">C</text>
+
+  <!-- 연필 끝에서 선 나오는 효과 -->
+  <line x1="490" y1="665" x2="510" y2="680" stroke="#FFD600" stroke-width="6" opacity="0.8"/>
+  <line x1="495" y1="655" x2="530" y2="660" stroke="#FFD600" stroke-width="4" opacity="0.5"/>
+
+  <!-- 왼쪽 힌트 번호들 -->
+  <text x="270" y="715" font-family="Arial" font-size="42" fill="#A5D6A7">1.</text>
+  <text x="270" y="815" font-family="Arial" font-size="42" fill="#A5D6A7">2.</text>
+
+  <!-- 상단 타이틀 -->
+  <text x="512" y="180" font-family="Arial Black" font-size="90" font-weight="bold" fill="#76FF03" text-anchor="middle">FILL IN</text>
+</svg>

@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- 배경: 코랄/다크 레드 -->
+  <rect width="1024" height="1024" rx="190" fill="#BF360C"/>
+
+  <!-- 4×3 그리드 (동적으로 채워지는 느낌) -->
+  <!-- 그리드: x=212, y=252, 셀=150px (가로 4, 세로 4) -->
+
+  <!-- 완성된 셀들 (금색) -->
+  <rect x="212" y="252" width="150" height="150" rx="8" fill="#FFD600" stroke="#FF8F00" stroke-width="4"/>
+  <rect x="362" y="252" width="150" height="150" rx="8" fill="#FFD600" stroke="#FF8F00" stroke-width="4"/>
+  <rect x="512" y="252" width="150" height="150" rx="8" fill="#FFD600" stroke="#FF8F00" stroke-width="4"/>
+  <rect x="662" y="252" width="150" height="150" rx="8" fill="#FFD600" stroke="#FF8F00" stroke-width="4"/>
+
+  <!-- 두 번째 행: 일부 완성, 일부 진행 중 -->
+  <rect x="212" y="402" width="150" height="150" rx="8" fill="#FFD600" stroke="#FF8F00" stroke-width="4"/>
+  <rect x="362" y="402" width="150" height="150" rx="8" fill="#FFD600" stroke="#FF8F00" stroke-width="4"/>
+  <rect x="512" y="402" width="150" height="150" rx="8" fill="#FFECB3" stroke="#FF8F00" stroke-width="4"/>
+  <rect x="662" y="402" width="150" height="150" rx="8" fill="#FFECB3" stroke="#FF8F00" stroke-width="4"/>
+
+  <!-- 세 번째 행: 채워지는 중 -->
+  <rect x="212" y="552" width="150" height="150" rx="8" fill="#FFECB3" stroke="#FF8F00" stroke-width="4"/>
+  <rect x="362" y="552" width="150" height="150" rx="8" fill="rgba(255,255,255,0.15)" stroke="#FFAB40" stroke-width="4" stroke-dasharray="12,8"/>
+  <rect x="512" y="552" width="150" height="150" rx="8" fill="rgba(255,255,255,0.1)" stroke="#FFAB40" stroke-width="3" stroke-dasharray="12,8"/>
+  <rect x="662" y="552" width="150" height="150" rx="8" fill="rgba(255,255,255,0.08)" stroke="#FFAB40" stroke-width="3" stroke-dasharray="12,8"/>
+
+  <!-- 네 번째 행: 미완성 -->
+  <rect x="212" y="702" width="150" height="150" rx="8" fill="rgba(255,255,255,0.08)" stroke="#FF8F00" stroke-width="3" stroke-dasharray="12,8"/>
+  <rect x="362" y="702" width="150" height="150" rx="8" fill="rgba(255,255,255,0.06)" stroke="#FF8F00" stroke-width="3" stroke-dasharray="12,8"/>
+  <rect x="512" y="702" width="150" height="150" rx="8" fill="rgba(255,255,255,0.05)" stroke="#FF8F00" stroke-width="3" stroke-dasharray="12,8"/>
+  <!-- 마지막 셀: "!" 느낌표 -->
+  <rect x="662" y="702" width="150" height="150" rx="8" fill="rgba(255,255,255,0.05)" stroke="#FFAB40" stroke-width="3" stroke-dasharray="12,8"/>
+  <text x="737" y="807" font-family="Arial Black" font-size="110" font-weight="bold" fill="rgba(255,255,255,0.3)" text-anchor="middle">!</text>
+
+  <!-- 완성된 셀 알파벳 -->
+  <text x="287" y="362" font-family="Arial Black" font-size="100" font-weight="bold" fill="#BF360C" text-anchor="middle">W</text>
+  <text x="437" y="362" font-family="Arial Black" font-size="100" font-weight="bold" fill="#BF360C" text-anchor="middle">O</text>
+  <text x="587" y="362" font-family="Arial Black" font-size="100" font-weight="bold" fill="#BF360C" text-anchor="middle">R</text>
+  <text x="737" y="362" font-family="Arial Black" font-size="100" font-weight="bold" fill="#BF360C" text-anchor="middle">D</text>
+  <text x="287" y="512" font-family="Arial Black" font-size="100" font-weight="bold" fill="#BF360C" text-anchor="middle">G</text>
+  <text x="437" y="512" font-family="Arial Black" font-size="100" font-weight="bold" fill="#BF360C" text-anchor="middle">A</text>
+  <text x="587" y="512" font-family="Arial Black" font-size="100" font-weight="bold" fill="#E65100" text-anchor="middle">M</text>
+  <text x="737" y="512" font-family="Arial Black" font-size="100" font-weight="bold" fill="#E65100" text-anchor="middle">E</text>
+  <text x="287" y="662" font-family="Arial Black" font-size="100" font-weight="bold" fill="#FF8F00" text-anchor="middle">S</text>
+
+  <!-- 완성된 셀들에 별/스파크 -->
+  <text x="240" y="250" font-family="Arial" font-size="48" fill="#FFFF00">★</text>
+  <text x="378" y="248" font-family="Arial" font-size="42" fill="#FFFF00">✦</text>
+  <text x="760" y="252" font-family="Arial" font-size="52" fill="#FFFF00">★</text>
+
+  <!-- 상단 진행 바 느낌 -->
+  <rect x="212" y="210" width="430" height="28" rx="14" fill="#FFD600"/>
+  <rect x="642" y="210" width="220" height="28" rx="14" fill="rgba(255,255,255,0.2)"/>
+  <text x="512" y="192" font-family="Arial" font-size="44" fill="rgba(255,255,255,0.8)" text-anchor="middle">60% COMPLETE</text>
+</svg>

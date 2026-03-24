@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- 배경: 딥 퍼플 -->
+  <rect width="1024" height="1024" rx="190" fill="#4A148C"/>
+
+  <!-- 뇌 실루엣 (단순화된 형태) -->
+  <path d="M512 170
+    C560 170 610 185 645 220
+    C680 255 690 280 685 315
+    C710 310 740 325 750 355
+    C762 385 750 415 728 432
+    C750 445 762 475 752 505
+    C742 535 715 550 690 548
+    C685 580 670 605 645 618
+    C620 632 590 635 565 628
+    C558 650 545 665 512 670
+    C479 665 466 650 459 628
+    C434 635 404 632 379 618
+    C354 605 339 580 334 548
+    C309 550 282 535 272 505
+    C262 475 274 445 296 432
+    C274 415 262 385 274 355
+    C284 325 314 310 339 315
+    C334 280 344 255 379 220
+    C414 185 464 170 512 170Z"
+    fill="none" stroke="#CE93D8" stroke-width="18" opacity="0.9"/>
+
+  <!-- 내부 격자 패턴 -->
+  <clipPath id="brain-clip">
+    <path d="M512 170
+      C560 170 610 185 645 220
+      C680 255 690 280 685 315
+      C710 310 740 325 750 355
+      C762 385 750 415 728 432
+      C750 445 762 475 752 505
+      C742 535 715 550 690 548
+      C685 580 670 605 645 618
+      C620 632 590 635 565 628
+      C558 650 545 665 512 670
+      C479 665 466 650 459 628
+      C434 635 404 632 379 618
+      C354 605 339 580 334 548
+      C309 550 282 535 272 505
+      C262 475 274 445 296 432
+      C274 415 262 385 274 355
+      C284 325 314 310 339 315
+      C334 280 344 255 379 220
+      C414 185 464 170 512 170Z"/>
+  </clipPath>
+
+  <!-- 격자 선들 (뇌 내부) -->
+  <g clip-path="url(#brain-clip)" opacity="0.5">
+    <line x1="270" y1="320" x2="755" y2="320" stroke="#E040FB" stroke-width="4"/>
+    <line x1="270" y1="420" x2="755" y2="420" stroke="#E040FB" stroke-width="4"/>
+    <line x1="270" y1="520" x2="755" y2="520" stroke="#E040FB" stroke-width="4"/>
+    <line x1="270" y1="620" x2="755" y2="620" stroke="#E040FB" stroke-width="4"/>
+    <line x1="370" y1="180" x2="370" y2="665" stroke="#E040FB" stroke-width="4"/>
+    <line x1="470" y1="175" x2="470" y2="668" stroke="#E040FB" stroke-width="4"/>
+    <line x1="570" y1="175" x2="570" y2="668" stroke="#E040FB" stroke-width="4"/>
+    <line x1="670" y1="185" x2="670" y2="660" stroke="#E040FB" stroke-width="4"/>
+  </g>
+
+  <!-- 알파벳 노드들 (시냅스 느낌) -->
+  <circle cx="420" cy="320" r="32" fill="#FFD600"/>
+  <text x="420" y="335" font-family="Arial Black" font-size="38" font-weight="bold" fill="#4A148C" text-anchor="middle">A</text>
+
+  <circle cx="570" cy="420" r="32" fill="#FF4081"/>
+  <text x="570" y="435" font-family="Arial Black" font-size="38" font-weight="bold" fill="white" text-anchor="middle">B</text>
+
+  <circle cx="470" cy="520" r="32" fill="#00E5FF"/>
+  <text x="470" y="535" font-family="Arial Black" font-size="38" font-weight="bold" fill="#4A148C" text-anchor="middle">C</text>
+
+  <circle cx="640" cy="570" r="32" fill="#76FF03"/>
+  <text x="640" y="585" font-family="Arial Black" font-size="38" font-weight="bold" fill="#4A148C" text-anchor="middle">D</text>
+
+  <circle cx="380" cy="480" r="32" fill="#FF6E40"/>
+  <text x="380" y="495" font-family="Arial Black" font-size="38" font-weight="bold" fill="white" text-anchor="middle">E</text>
+
+  <!-- 노드 연결 시냅스 선들 -->
+  <line x1="420" y1="320" x2="570" y2="420" stroke="#CE93D8" stroke-width="5" opacity="0.7"/>
+  <line x1="570" y1="420" x2="470" y2="520" stroke="#CE93D8" stroke-width="5" opacity="0.7"/>
+  <line x1="470" y1="520" x2="640" y2="570" stroke="#CE93D8" stroke-width="5" opacity="0.7"/>
+  <line x1="380" y1="480" x2="570" y2="420" stroke="#CE93D8" stroke-width="5" opacity="0.7"/>
+  <line x1="380" y1="480" x2="470" y2="520" stroke="#CE93D8" stroke-width="5" opacity="0.7"/>
+
+  <!-- 반짝임 별들 (뇌 주변) -->
+  <text x="200" y="280" font-family="Arial" font-size="70" fill="#FFD600" opacity="0.9">✦</text>
+  <text x="780" y="320" font-family="Arial" font-size="55" fill="#FF4081" opacity="0.9">✦</text>
+  <text x="760" y="580" font-family="Arial" font-size="65" fill="#00E5FF" opacity="0.9">✦</text>
+  <text x="185" y="560" font-family="Arial" font-size="50" fill="#76FF03" opacity="0.9">✦</text>
+
+  <!-- 하단 텍스트 -->
+  <text x="512" y="860" font-family="Arial Black" font-size="88" font-weight="bold" fill="#E040FB" text-anchor="middle">BRAIN</text>
+  <text x="512" y="955" font-family="Arial Black" font-size="60" font-weight="bold" fill="#CE93D8" text-anchor="middle">PUZZLE</text>
+</svg>

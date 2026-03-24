@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- 배경: 남색 -->
+  <rect width="1024" height="1024" rx="190" fill="#1A237E"/>
+
+  <!-- 미로 배경 (3×3 칸, 벽들로 구성) -->
+  <!-- 미로 영역: 212~812, 212~812 -->
+
+  <!-- 미로 외곽 -->
+  <rect x="212" y="212" width="600" height="600" fill="#0D1347" stroke="#7986CB" stroke-width="8"/>
+
+  <!-- 미로 내벽들 (흰색 선) -->
+  <!-- 가로 벽들 -->
+  <line x1="212" y1="412" x2="512" y2="412" stroke="#7986CB" stroke-width="10"/>
+  <line x1="612" y1="412" x2="812" y2="412" stroke="#7986CB" stroke-width="10"/>
+  <line x1="312" y1="612" x2="712" y2="612" stroke="#7986CB" stroke-width="10"/>
+  <line x1="212" y1="612" x2="262" y2="612" stroke="#7986CB" stroke-width="10"/>
+  <!-- 세로 벽들 -->
+  <line x1="412" y1="212" x2="412" y2="512" stroke="#7986CB" stroke-width="10"/>
+  <line x1="612" y1="312" x2="612" y2="612" stroke="#7986CB" stroke-width="10"/>
+  <line x1="512" y1="512" x2="512" y2="812" stroke="#7986CB" stroke-width="10"/>
+
+  <!-- 입구 표시 (상단) -->
+  <text x="512" y="195" font-family="Arial" font-size="48" fill="#76FF03" text-anchor="middle">▼ START</text>
+
+  <!-- 출구 표시 (하단) -->
+  <text x="512" y="858" font-family="Arial" font-size="48" fill="#FF6E40" text-anchor="middle">▼ END</text>
+
+  <!-- 미로 안 단어 힌트들 -->
+  <text x="312" y="330" font-family="Arial Black" font-size="80" font-weight="bold" fill="#FFD600" text-anchor="middle" opacity="0.9">A</text>
+  <text x="712" y="530" font-family="Arial Black" font-size="80" font-weight="bold" fill="#FF80AB" text-anchor="middle" opacity="0.9">B</text>
+  <text x="362" y="730" font-family="Arial Black" font-size="80" font-weight="bold" fill="#80DEEA" text-anchor="middle" opacity="0.9">C</text>
+
+  <!-- 중앙 "?" 글자 -->
+  <text x="512" y="560" font-family="Arial Black" font-size="160" font-weight="bold" fill="white" text-anchor="middle" opacity="0.7">?</text>
+
+  <!-- 미로 경로 힌트 (점선) -->
+  <path d="M512 212 L512 412 L612 412 L612 312 L812 312" fill="none" stroke="#76FF03" stroke-width="5" stroke-dasharray="15,10" opacity="0.5"/>
+</svg>

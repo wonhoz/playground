@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- 배경: 황금 그라디언트 -->
+  <defs>
+    <linearGradient id="goldGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#F57F17"/>
+      <stop offset="100%" stop-color="#FFD600"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#goldGrad)"/>
+
+  <!-- 3×3 격자 (완성 상태) -->
+  <!-- 그리드: x=262, y=262, 셀=167px, 총 500×500 -->
+  <!-- 금색/진한 테두리 -->
+  <rect x="262" y="262" width="500" height="500" rx="10" fill="rgba(255,255,255,0.15)" stroke="#7B3F00" stroke-width="10"/>
+
+  <!-- 내부 격자 선 -->
+  <line x1="262" y1="429" x2="762" y2="429" stroke="#7B3F00" stroke-width="6"/>
+  <line x1="262" y1="596" x2="762" y2="596" stroke="#7B3F00" stroke-width="6"/>
+  <line x1="429" y1="262" x2="429" y2="762" stroke="#7B3F00" stroke-width="6"/>
+  <line x1="596" y1="262" x2="596" y2="762" stroke="#7B3F00" stroke-width="6"/>
+
+  <!-- 모든 셀 채워진 상태 — 알파벳 -->
+  <text x="346" y="388" font-family="Arial Black" font-size="100" font-weight="bold" fill="#4E2700" text-anchor="middle">W</text>
+  <text x="513" y="388" font-family="Arial Black" font-size="100" font-weight="bold" fill="#4E2700" text-anchor="middle">I</text>
+  <text x="679" y="388" font-family="Arial Black" font-size="100" font-weight="bold" fill="#4E2700" text-anchor="middle">N</text>
+  <text x="346" y="555" font-family="Arial Black" font-size="100" font-weight="bold" fill="#4E2700" text-anchor="middle">O</text>
+  <text x="513" y="555" font-family="Arial Black" font-size="100" font-weight="bold" fill="#BF360C" text-anchor="middle">R</text>
+  <text x="679" y="555" font-family="Arial Black" font-size="100" font-weight="bold" fill="#4E2700" text-anchor="middle">D</text>
+  <text x="346" y="722" font-family="Arial Black" font-size="100" font-weight="bold" fill="#4E2700" text-anchor="middle">S</text>
+  <text x="513" y="722" font-family="Arial Black" font-size="100" font-weight="bold" fill="#4E2700" text-anchor="middle">!</text>
+  <text x="679" y="722" font-family="Arial Black" font-size="100" font-weight="bold" fill="#4E2700" text-anchor="middle">★</text>
+
+  <!-- 큰 체크 표시 (오버레이) -->
+  <text x="512" y="600" font-family="Arial" font-size="380" fill="rgba(255,255,255,0.6)" text-anchor="middle">✓</text>
+
+  <!-- 별/스파크 빛나는 효과 -->
+  <text x="195" y="250" font-family="Arial" font-size="80" fill="white" opacity="0.95">★</text>
+  <text x="800" y="230" font-family="Arial" font-size="65" fill="white" opacity="0.95">✦</text>
+  <text x="820" y="800" font-family="Arial" font-size="75" fill="white" opacity="0.9">★</text>
+  <text x="190" y="820" font-family="Arial" font-size="60" fill="white" opacity="0.9">✦</text>
+  <text x="512" y="195" font-family="Arial" font-size="55" fill="white" opacity="0.85">✦ ✦ ✦</text>
+
+  <!-- 하단 "COMPLETE" -->
+  <text x="512" y="920" font-family="Arial Black" font-size="80" font-weight="bold" fill="#4E2700" text-anchor="middle">COMPLETE!</text>
+</svg>

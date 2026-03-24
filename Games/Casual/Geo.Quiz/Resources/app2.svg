@@ -1,55 +1,31 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
-  <!-- icon_04: metaphor — 물음표 국기 (깃대에 ? 기호가 그려진 국기) -->
-  <defs>
-    <linearGradient id="bg4" x1="0%" y1="0%" x2="60%" y2="100%">
-      <stop offset="0%" stop-color="#FF6F00"/>
-      <stop offset="100%" stop-color="#E65100"/>
-    </linearGradient>
-    <linearGradient id="flagBody4" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#FFF8E1"/>
-      <stop offset="100%" stop-color="#FFF3CD"/>
-    </linearGradient>
-    <filter id="shadow4">
-      <feDropShadow dx="6" dy="8" stdDeviation="10" flood-color="#00000044"/>
-    </filter>
-  </defs>
-
   <!-- Background -->
-  <circle cx="512" cy="512" r="512" fill="url(#bg4)"/>
+  <rect width="1024" height="1024" rx="190" fill="#F9A825"/>
 
-  <!-- Decorative dots pattern -->
-  <circle cx="220" cy="220" r="18" fill="#FFFFFF18"/>
-  <circle cx="320" cy="180" r="12" fill="#FFFFFF12"/>
-  <circle cx="800" cy="240" r="22" fill="#FFFFFF15"/>
-  <circle cx="860" cy="780" r="16" fill="#FFFFFF12"/>
-  <circle cx="180" cy="820" r="20" fill="#FFFFFF15"/>
-  <circle cx="780" cy="860" r="14" fill="#FFFFFF10"/>
+  <!-- Flag shadow -->
+  <rect x="222" y="272" width="580" height="360" rx="18" fill="#E65100" opacity="0.35"/>
 
-  <!-- Flagpole -->
-  <rect x="248" y="220" width="28" height="600" rx="10" fill="#8D6E63" filter="url(#shadow4)"/>
-  <!-- Pole top ball -->
-  <circle cx="262" cy="214" r="22" fill="#FFCA28"/>
+  <!-- Flag rectangle -->
+  <rect x="210" y="260" width="580" height="360" rx="14" fill="#FFFFFF" stroke="#5D4037" stroke-width="16"/>
 
-  <!-- Flag body (waving: trapezoidal shape using polygon) -->
-  <polygon points="276,240 820,270 820,570 276,540"
-           fill="url(#flagBody4)" filter="url(#shadow4)"/>
+  <!-- Flag stripes (France-inspired 3 vertical) -->
+  <rect x="210" y="260" width="193" height="360" rx="0" fill="#1565C0"/>
+  <rect x="403" y="260" width="194" height="360" fill="#FFFFFF"/>
+  <rect x="597" y="260" width="193" height="360" rx="0" fill="#C62828"/>
+  <!-- Clip to flag bounds -->
+  <rect x="210" y="260" width="580" height="360" rx="14" fill="none" stroke="#5D4037" stroke-width="16"/>
 
-  <!-- Horizontal stripe accents on flag (subtle) -->
-  <polygon points="276,320 820,348 820,378 276,350" fill="#FFE08220" opacity="0.5"/>
-  <polygon points="276,432 820,460 820,490 276,462" fill="#FFE08220" opacity="0.5"/>
+  <!-- Question mark overlay centered on flag -->
+  <text x="512" y="505" font-size="240" font-family="Arial Black, sans-serif" font-weight="900" text-anchor="middle" fill="#FFD600" stroke="#E65100" stroke-width="14" opacity="0.95">?</text>
 
-  <!-- Giant "?" on the flag -->
-  <text x="555" y="510" font-family="Arial Black, sans-serif" font-size="320" font-weight="900"
-        fill="#FF6F0022" text-anchor="middle">?</text>
-  <text x="550" y="504" font-family="Arial Black, sans-serif" font-size="320" font-weight="900"
-        fill="#E65100CC" text-anchor="middle">?</text>
+  <!-- Bottom text -->
+  <text x="512" y="780" font-size="100" font-family="Arial Black, sans-serif" font-weight="900" text-anchor="middle" fill="#4E342E">나라 맞추기</text>
 
-  <!-- Bottom text bar -->
-  <rect x="230" y="720" width="564" height="72" rx="16" fill="#FFFFFF22"/>
-  <text x="512" y="773" font-family="Arial Black, sans-serif" font-size="44" font-weight="900"
-        fill="#FFFFFF" text-anchor="middle">WHICH FLAG?</text>
-
-  <!-- Small stars scattered -->
-  <text x="790" y="680" font-family="Arial, sans-serif" font-size="40" fill="#FFD600" text-anchor="middle">★</text>
-  <text x="740" y="750" font-family="Arial, sans-serif" font-size="28" fill="#FFD600" text-anchor="middle">★</text>
+  <!-- Small flag icons hint -->
+  <rect x="220" y="840" width="80" height="52" rx="6" fill="#1565C0"/>
+  <rect x="320" y="840" width="80" height="52" rx="6" fill="#C62828"/>
+  <rect x="420" y="840" width="80" height="52" rx="6" fill="#2E7D32"/>
+  <rect x="520" y="840" width="80" height="52" rx="6" fill="#FFD600"/>
+  <rect x="620" y="840" width="80" height="52" rx="6" fill="#6A1B9A"/>
+  <rect x="720" y="840" width="80" height="52" rx="6" fill="#0D47A1"/>
 </svg>

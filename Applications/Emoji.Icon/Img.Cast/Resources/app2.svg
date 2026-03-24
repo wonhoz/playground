@@ -1,20 +1,20 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
-  <!-- Layer 1: Background -->
-  <rect width="1024" height="1024" rx="180" fill="#FF8F00"/>
-  <!-- Layer 2: 2x2 format grid -->
-  <!-- SVG cell -->
-  <rect x="140" y="200" width="320" height="240" rx="16" fill="#0D47A1"/>
-  <text x="300" y="340" font-family="Arial" font-size="72" font-weight="900" fill="white" text-anchor="middle">SVG</text>
-  <!-- PNG cell -->
-  <rect x="564" y="200" width="320" height="240" rx="16" fill="#2E7D32"/>
-  <text x="724" y="340" font-family="Arial" font-size="72" font-weight="900" fill="white" text-anchor="middle">PNG</text>
-  <!-- JPG cell -->
-  <rect x="140" y="580" width="320" height="240" rx="16" fill="#E65100"/>
-  <text x="300" y="720" font-family="Arial" font-size="72" font-weight="900" fill="white" text-anchor="middle">JPG</text>
-  <!-- ICO cell -->
-  <rect x="564" y="580" width="320" height="240" rx="16" fill="#4A148C"/>
-  <text x="724" y="720" font-family="Arial" font-size="72" font-weight="900" fill="white" text-anchor="middle">ICO</text>
-  <!-- Grid lines -->
-  <rect x="140" y="452" width="744" height="16" rx="8" fill="#FF8F00"/>
-  <rect x="464" y="200" width="16" height="620" rx="8" fill="#FF8F00"/>
+  <defs>
+    <linearGradient id="bg01i" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#E65100"/>
+      <stop offset="100%" stop-color="#FF9800"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg01i)"/>
+  <!-- Layer 2: SVG → ICO 텍스트 -->
+  <text x="512" y="420" text-anchor="middle" font-family="Arial Black" font-size="220" font-weight="900" fill="white">SVG</text>
+  <!-- 화살표 -->
+  <path d="M310,490 L714,490" fill="none" stroke="#FFD600" stroke-width="36" stroke-linecap="round"/>
+  <polygon points="724,490 688,462 688,518" fill="#FFD600"/>
+  <text x="512" y="690" text-anchor="middle" font-family="Arial Black" font-size="220" font-weight="900" fill="white">ICO</text>
+  <!-- Layer 3: 스파크들 -->
+  <text x="400" y="510" font-size="52" text-anchor="middle">✦</text>
+  <text x="520" y="490" font-size="44" text-anchor="middle">✨</text>
+  <text x="640" y="505" font-size="48" text-anchor="middle">✦</text>
 </svg>

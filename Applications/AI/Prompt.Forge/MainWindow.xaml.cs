@@ -313,7 +313,8 @@ public partial class MainWindow : Window
         {
             Clipboard.SetText(TxtContent.Text);
             if (_vm.Selected != null) _vm.IncrementUseCount(_vm.Selected.Id);
-            _vm.StatusText = "클립보드에 복사됨";
+            bool dirty = _vm.Selected != null && IsDirty(_vm.Selected);
+            _vm.StatusText = dirty ? "클립보드에 복사됨 ⚠ 미저장 내용 포함" : "클립보드에 복사됨";
         }
         catch { }
     }

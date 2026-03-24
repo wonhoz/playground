@@ -1,8 +1,11 @@
+using System.Windows.Threading;
+
 namespace Prompt.Forge.ViewModels;
 
 sealed class MainViewModel : INotifyPropertyChanged
 {
     readonly Database _db;
+    DispatcherTimer? _searchDebounce;
 
     // ── 목록 ─────────────────────────────────────────────────────────────────
     public ObservableCollection<PromptItem> Items  { get; } = [];
@@ -22,7 +25,19 @@ sealed class MainViewModel : INotifyPropertyChanged
     public string Search
     {
         get => _search;
-        set { _search = value; OnPropertyChanged(); Refresh(); }
+        set
+        {
+            _search = value;
+            OnPropertyChanged();
+            // 300ms 디바운싱 — 타이핑 중 연속 DB 쿼리 방지
+            if (_searchDebounce == null)
+            {
+                _searchDebounce = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(300) };
+                _searchDebounce.Tick += (_, _) => { _searchDebounce.Stop(); Refresh(); };
+            }
+            _searchDebounce.Stop();
+            _searchDebounce.Start();
+        }
     }
 
     string? _filterTag;

@@ -18,7 +18,8 @@ public partial class MainWindow : Window
     private GameEngine? _engine;
     private readonly HighScoreService _scores = new();
     private readonly SoundService     _sound  = new();
-    private GameMode _selectedMode = GameMode.Classic;
+    private GameMode   _selectedMode       = GameMode.Classic;
+    private Difficulty _selectedDifficulty = Difficulty.Normal;
 
     public MainWindow()
     {
@@ -45,6 +46,7 @@ public partial class MainWindow : Window
         GameLayer.MouseUp    += OnGameMouseUp;
 
         UpdateBestScores();
+        SelectDifficulty(Difficulty.Normal);
         SelectMode(GameMode.Classic);
     }
 
@@ -99,6 +101,24 @@ public partial class MainWindow : Window
         _engine?.OnMouseUp();
     }
 
+    // ── 난이도 선택 ───────────────────────────────────────────────────────────
+    private void BtnDifficulty_Click(object sender, RoutedEventArgs e)
+    {
+        if (sender is System.Windows.Controls.Button btn &&
+            Enum.TryParse<Difficulty>(btn.Tag?.ToString(), out var diff))
+        {
+            SelectDifficulty(diff);
+        }
+    }
+
+    private void SelectDifficulty(Difficulty diff)
+    {
+        _selectedDifficulty = diff;
+        BtnEasy.Style   = Application.Current.Resources[diff == Difficulty.Easy   ? "ModeBtnActive" : "ModeBtn"] as System.Windows.Style;
+        BtnNormal.Style = Application.Current.Resources[diff == Difficulty.Normal ? "ModeBtnActive" : "ModeBtn"] as System.Windows.Style;
+        BtnHard.Style   = Application.Current.Resources[diff == Difficulty.Hard   ? "ModeBtnActive" : "ModeBtn"] as System.Windows.Style;
+    }
+
     // ── 모드 선택 ─────────────────────────────────────────────────────────────
     private void BtnMode_Click(object sender, RoutedEventArgs e)
     {
@@ -121,7 +141,7 @@ public partial class MainWindow : Window
         {
             GameMode.Classic    => "목숨 3개 — 도형을 놓칠 때마다 감소, 폭탄 주의!",
             GameMode.TimeAttack => "60초 제한 — 제한 시간 내 최대 점수 획득!",
-            GameMode.Zen        => "30개 슬라이스 — 최대 콤보를 유지하라!",
+            GameMode.Zen        => "30개 도형을 슬라이스하라 — 최대 콤보를 유지하라!",
             _                   => ""
         };
     }
@@ -146,7 +166,7 @@ public partial class MainWindow : Window
 
         // 크기 동기화는 OnRender에서 매 프레임 처리하므로 UpdateLayout/Resize 불필요
         _sound.StartBgm();
-        _engine.StartGame(mode);
+        _engine.StartGame(mode, _selectedDifficulty);
     }
 
     private void UpdateLivesDisplay(GameMode mode)
@@ -210,6 +230,18 @@ public partial class MainWindow : Window
         TxtBestClassic.Text = _scores.GetBest(GameMode.Classic).ToString("N0");
         TxtBestTime.Text    = _scores.GetBest(GameMode.TimeAttack).ToString("N0");
         TxtBestZen.Text     = _scores.GetBest(GameMode.Zen).ToString("N0");
+
+        UpdateTop3Display(GameMode.Classic,    TxtTop2Classic, TxtTop3Classic);
+        UpdateTop3Display(GameMode.TimeAttack, TxtTop2Time,    TxtTop3Time);
+        UpdateTop3Display(GameMode.Zen,        TxtTop2Zen,     TxtTop3Zen);
+    }
+
+    private void UpdateTop3Display(GameMode mode,
+        System.Windows.Controls.TextBlock txt2, System.Windows.Controls.TextBlock txt3)
+    {
+        var top3 = _scores.GetTop3(mode);
+        txt2.Text = top3.Count >= 2 ? $"2  {top3[1]:N0}" : "";
+        txt3.Text = top3.Count >= 3 ? $"3  {top3[2]:N0}" : "";
     }
 
     // ── 게임오버 ─────────────────────────────────────────────────────────────

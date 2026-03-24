@@ -35,7 +35,8 @@ public sealed class GameEngine
     private double _height;
 
     // ── 게임 상태 ──────────────────────────────────────────────────────────
-    public GameMode Mode { get; private set; }
+    public GameMode   Mode       { get; private set; }
+    public Difficulty Difficulty { get; private set; }
     public bool IsRunning { get; private set; }
     public bool IsPaused  { get; private set; }
     private bool _gameOver;
@@ -57,6 +58,10 @@ public sealed class GameEngine
     private bool   _inFever;           // 콤보 피버 여부
     private const double FeverDuration = 1.5;
     private const double IceDuration   = 3.0;
+
+    // ── 폭탄 플래시 ────────────────────────────────────────────────────────
+    private double _bombFlashRemaining; // 남은 폭탄 플래시 시간(초)
+    private const double BombFlashDuration = 0.25;
 
     // ── 게임 오브젝트 ───────────────────────────────────────────────────────
     private readonly List<NeonShape>   _shapes    = [];
@@ -95,6 +100,16 @@ public sealed class GameEngine
 
     private static readonly Random Rng = new();
 
+    // ── 렌더링 캐시 (매 프레임 생성 방지) ────────────────────────────────────
+    private static readonly Pen GridPen =
+        new(new SolidColorBrush(Color.FromArgb(20, 0, 200, 255)), 0.5);
+    private static readonly SolidColorBrush BgBrush =
+        new(Color.FromRgb(10, 10, 15));
+    private static readonly SolidColorBrush CursorCenterBrush =
+        new(Color.FromArgb(230, 200, 255, 255));
+    private static readonly Pen CursorRingPen =
+        new(new SolidColorBrush(Color.FromArgb(180, 0, 255, 255)), 1.5);
+
     // ─────────────────────────────────────────────────────────────────────
     public GameEngine(DrawingVisualHost host)
     {
@@ -108,9 +123,10 @@ public sealed class GameEngine
     }
 
     // ── 게임 시작 ─────────────────────────────────────────────────────────
-    public void StartGame(GameMode mode)
+    public void StartGame(GameMode mode, Difficulty difficulty = Difficulty.Normal)
     {
-        Mode = mode;
+        Mode       = mode;
+        Difficulty = difficulty;
         Score       = 0;
         Combo       = 0;
         MaxCombo    = 0;
@@ -121,10 +137,16 @@ public sealed class GameEngine
         ZenSlicesLeft = ZenTotal;
         _elapsedGame    = 0;
         _spawnTimer     = 0;
-        _spawnInterval  = 1.4;
+        _spawnInterval  = difficulty switch
+        {
+            Difficulty.Easy => 2.0,
+            Difficulty.Hard => 1.0,
+            _               => 1.4,
+        };
         _slowMoRemaining = 0;
         _inFever        = false;
         _gameOver       = false;
+        _bombFlashRemaining = 0;
         _shapes.Clear();
         _particles.Clear();
         _halves.Clear();
@@ -207,6 +229,12 @@ public sealed class GameEngine
     {
         _elapsedGame += realDt;
 
+        if (_bombFlashRemaining > 0)
+        {
+            _bombFlashRemaining -= realDt;
+            if (_bombFlashRemaining < 0) _bombFlashRemaining = 0;
+        }
+
         // 모드별 업데이트
         if (Mode == GameMode.TimeAttack)
         {
@@ -265,13 +293,14 @@ public sealed class GameEngine
     // ── 스폰 ─────────────────────────────────────────────────────────────
     private void SpawnShape()
     {
-        // 특수 도형 출현 확률
+        // 특수 도형 출현 확률 (Easy: 폭탄 절반)
         var roll = Rng.NextDouble();
         ShapeType type;
-        if      (roll < 0.08)  type = ShapeType.Bomb;
-        else if (roll < 0.11)  type = ShapeType.Lightning;
-        else if (roll < 0.14)  type = ShapeType.Ice;
-        else if (roll < 0.18)  type = ShapeType.Star;
+        var bombThreshold = Difficulty == Difficulty.Easy ? 0.04 : 0.08;
+        if      (roll < bombThreshold)           type = ShapeType.Bomb;
+        else if (roll < bombThreshold + 0.03)    type = ShapeType.Lightning;
+        else if (roll < bombThreshold + 0.06)    type = ShapeType.Ice;
+        else if (roll < bombThreshold + 0.10)    type = ShapeType.Star;
         else
         {
             var shapes = new[] { ShapeType.Circle, ShapeType.Triangle, ShapeType.Square, ShapeType.Pentagon };
@@ -285,8 +314,14 @@ public sealed class GameEngine
         var x = _width * (0.15 + Rng.NextDouble() * 0.7);
         var spawnY = _height + radius + 10;
 
-        // 상향 속도 (포물선), 수평 랜덤
-        var vy = -(480 + Rng.NextDouble() * 180); // 음수 = 위쪽
+        // 상향 속도 (난이도별 조정)
+        var vyBase = Difficulty switch
+        {
+            Difficulty.Easy => 420.0,
+            Difficulty.Hard => 540.0,
+            _               => 480.0,
+        };
+        var vy = -(vyBase + Rng.NextDouble() * 180); // 음수 = 위쪽
         var vx = (Rng.NextDouble() - 0.5) * 220;
         var angVel = (Rng.NextDouble() - 0.5) * 160;
 
@@ -355,10 +390,11 @@ public sealed class GameEngine
         switch (shape.Type)
         {
             case ShapeType.Bomb:
-                // 폭탄: 감점 + 콤보 리셋 + Classic 모드 목숨 감소
+                // 폭탄: 감점 + 콤보 리셋 + Classic 모드 목숨 감소 + 적색 플래시
                 Score = Math.Max(0, Score - 15);
                 Combo = 0;
                 if (Mode == GameMode.Classic) Lives--;
+                _bombFlashRemaining = BombFlashDuration;
                 PlaySound?.Invoke(SoundCue.Bomb);
                 SpawnParticles(shape.X, shape.Y, Color.FromRgb(255, 80, 0), 12);
                 StateChanged?.Invoke();
@@ -507,8 +543,7 @@ public sealed class GameEngine
         using var dc = _host.Open();
 
         // 배경
-        dc.DrawRectangle(new SolidColorBrush(Color.FromRgb(10, 10, 15)),
-            null, new Rect(0, 0, _width, _height));
+        dc.DrawRectangle(BgBrush, null, new Rect(0, 0, _width, _height));
 
         // 격자 배경 라인 (사이버펑크 느낌)
         DrawGrid(dc);
@@ -532,18 +567,21 @@ public sealed class GameEngine
         if (_slowMoRemaining > 0)
             DrawSlowMoOverlay(dc);
 
+        // 폭탄 플래시 오버레이
+        if (_bombFlashRemaining > 0)
+            DrawBombFlash(dc);
+
         // 커서 dot (항상 최상위)
         DrawCursor(dc);
     }
 
     private void DrawGrid(DrawingContext dc)
     {
-        var gridPen = new Pen(new SolidColorBrush(Color.FromArgb(20, 0, 200, 255)), 0.5);
         var step = 60.0;
         for (var x = 0.0; x < _width; x += step)
-            dc.DrawLine(gridPen, new Point(x, 0), new Point(x, _height));
+            dc.DrawLine(GridPen, new Point(x, 0), new Point(x, _height));
         for (var y = 0.0; y < _height; y += step)
-            dc.DrawLine(gridPen, new Point(0, y), new Point(_width, y));
+            dc.DrawLine(GridPen, new Point(0, y), new Point(_width, y));
     }
 
     private void DrawTrail(DrawingContext dc)
@@ -649,13 +687,14 @@ public sealed class GameEngine
             _                  => 6
         };
 
-        var geo = BuildPolygon(c, r, sides);
+        var geoGlow = BuildPolygon(c, r * 1.7, sides);
+        var geo     = BuildPolygon(c, r, sides);
 
         // 글로우
         var glowBrush = new RadialGradientBrush(
             Color.FromArgb(70, col.R, col.G, col.B),
             Color.FromArgb(0,  col.R, col.G, col.B));
-        dc.DrawGeometry(glowBrush, null, BuildPolygon(c, r * 1.7, sides));
+        dc.DrawGeometry(glowBrush, null, geoGlow);
 
         // 본체
         var bodyBrush = new LinearGradientBrush(
@@ -743,21 +782,28 @@ public sealed class GameEngine
         dc.DrawRectangle(new SolidColorBrush(col), null, new Rect(0, 0, _width, _height));
     }
 
+    private void DrawBombFlash(DrawingContext dc)
+    {
+        // 폭탄 슬라이스 시 짧은 적색 플래시 (0.25초 동안 페이드 아웃)
+        var ratio = _bombFlashRemaining / BombFlashDuration;
+        var alpha = (byte)(ratio * 80);
+        dc.DrawRectangle(new SolidColorBrush(Color.FromArgb(alpha, 220, 30, 30)),
+            null, new Rect(0, 0, _width, _height));
+    }
+
+    private static readonly RadialGradientBrush CursorGlowBrush =
+        new(Color.FromArgb(60, 0, 255, 255), Color.FromArgb(0, 0, 255, 255));
+
     private void DrawCursor(DrawingContext dc)
     {
         var c = _lastMousePos;
         // 외곽 글로우
-        var glowBrush = new RadialGradientBrush(
-            Color.FromArgb(60, 0, 255, 255),
-            Color.FromArgb(0,  0, 255, 255));
-        dc.DrawEllipse(glowBrush, null, c, 14, 14);
+        dc.DrawEllipse(CursorGlowBrush, null, c, 14, 14);
 
         // 테두리 링
-        var ringPen = new Pen(new SolidColorBrush(Color.FromArgb(180, 0, 255, 255)), 1.5);
-        dc.DrawEllipse(null, ringPen, c, 9, 9);
+        dc.DrawEllipse(null, CursorRingPen, c, 9, 9);
 
         // 중앙 dot
-        dc.DrawEllipse(new SolidColorBrush(Color.FromArgb(230, 200, 255, 255)),
-            null, c, 2.5, 2.5);
+        dc.DrawEllipse(CursorCenterBrush, null, c, 2.5, 2.5);
     }
 }

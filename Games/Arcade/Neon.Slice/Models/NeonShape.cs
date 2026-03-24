@@ -3,6 +3,8 @@ using System.Windows.Media;
 
 namespace NeonSlice.Models;
 
+public enum Difficulty { Easy, Normal, Hard }
+
 public enum ShapeType
 {
     Circle,
@@ -40,7 +42,6 @@ public sealed class NeonShape
     public double AngularVelocity { get; init; } // 도/초
 
     public bool IsSliced { get; set; }
-    public bool IsMissed { get; set; }  // 화면 아래로 사라짐 (목숨 소모)
 
     // 중력 상수 (픽셀/초²)
     public const double Gravity = 420;

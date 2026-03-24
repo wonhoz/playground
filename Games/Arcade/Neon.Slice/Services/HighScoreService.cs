@@ -32,25 +32,27 @@ public sealed class HighScoreService
 
     public bool TryUpdate(GameMode mode, int score)
     {
-        var best = mode switch
-        {
-            GameMode.Classic    => _data.ClassicBest,
-            GameMode.TimeAttack => _data.TimeAttackBest,
-            GameMode.Zen        => _data.ZenBest,
-            _                   => 0
-        };
+        var best = GetBest(mode);
+        var top3 = GetTop3List(mode);
 
-        if (score <= best) return false;
+        // Top 3 업데이트
+        top3.Add(score);
+        top3.Sort((a, b) => b.CompareTo(a));
+        if (top3.Count > 3) top3.RemoveRange(3, top3.Count - 3);
 
-        switch (mode)
+        var isNewBest = score > best;
+        if (isNewBest)
         {
-            case GameMode.Classic:    _data.ClassicBest = score;    break;
-            case GameMode.TimeAttack: _data.TimeAttackBest = score; break;
-            case GameMode.Zen:        _data.ZenBest = score;        break;
+            switch (mode)
+            {
+                case GameMode.Classic:    _data.ClassicBest = score;    break;
+                case GameMode.TimeAttack: _data.TimeAttackBest = score; break;
+                case GameMode.Zen:        _data.ZenBest = score;        break;
+            }
         }
 
         Save();
-        return true;
+        return isNewBest;
     }
 
     public int GetBest(GameMode mode) => mode switch
@@ -59,6 +61,16 @@ public sealed class HighScoreService
         GameMode.TimeAttack => _data.TimeAttackBest,
         GameMode.Zen        => _data.ZenBest,
         _                   => 0
+    };
+
+    public List<int> GetTop3(GameMode mode) => [..GetTop3List(mode)];
+
+    private List<int> GetTop3List(GameMode mode) => mode switch
+    {
+        GameMode.Classic    => _data.ClassicTop3,
+        GameMode.TimeAttack => _data.TimeAttackTop3,
+        GameMode.Zen        => _data.ZenTop3,
+        _                   => []
     };
 
     private void Save()

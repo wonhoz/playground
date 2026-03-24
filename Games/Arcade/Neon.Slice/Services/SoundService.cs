@@ -115,7 +115,8 @@ public sealed class SoundService : IDisposable
 
     private static void PlayPool(MediaPlayer[] pool, ref int idx)
     {
-        var p = pool[idx++ % pool.Length];
+        var p = pool[idx % pool.Length];
+        idx = (idx + 1) % pool.Length;
         p.Stop();
         p.Position = TimeSpan.Zero;
         p.Play();

@@ -107,6 +107,21 @@
                    FontSize="14" FontFamily="Segoe UI"
                    HorizontalAlignment="Center" Margin="0,4,0,32"/>
 
+        <!-- 난이도 선택 -->
+        <TextBlock Text="DIFFICULTY" Foreground="#4A5A6A" FontSize="11"
+                   FontFamily="Segoe UI" HorizontalAlignment="Center" Margin="0,0,0,8"/>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,16">
+          <Button x:Name="BtnEasy" Content="EASY" Width="90" Height="36"
+                  Style="{StaticResource ModeBtn}" Margin="0,0,6,0"
+                  Click="BtnDifficulty_Click" Tag="Easy"/>
+          <Button x:Name="BtnNormal" Content="NORMAL" Width="90" Height="36"
+                  Style="{StaticResource ModeBtn}" Margin="0,0,6,0"
+                  Click="BtnDifficulty_Click" Tag="Normal"/>
+          <Button x:Name="BtnHard" Content="HARD" Width="90" Height="36"
+                  Style="{StaticResource ModeBtn}"
+                  Click="BtnDifficulty_Click" Tag="Hard"/>
+        </StackPanel>
+
         <!-- 모드 선택 -->
         <TextBlock Text="GAME MODE" Foreground="#4A5A6A" FontSize="11"
                    FontFamily="Segoe UI" HorizontalAlignment="Center" Margin="0,0,0,10"/>
@@ -134,31 +149,96 @@
                 Style="{StaticResource MenuBtn}" Padding="0,0,0,0"
                 Click="BtnStart_Click" Margin="0,0,0,24"/>
 
-        <!-- 최고 점수 -->
-        <Border Background="#0D0D1A" CornerRadius="8" Padding="20,12" Margin="0,0,0,0">
+        <!-- 최고 점수 / Top 3 -->
+        <Border Background="#0D0D1A" CornerRadius="8" Padding="20,12" Margin="0,0,0,12">
           <Grid>
             <Grid.ColumnDefinitions>
               <ColumnDefinition Width="*"/>
               <ColumnDefinition Width="*"/>
               <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
+
+            <!-- CLASSIC -->
             <StackPanel Grid.Column="0" HorizontalAlignment="Center">
               <TextBlock Text="CLASSIC" Foreground="#4A5A6A" FontSize="10" FontFamily="Segoe UI" HorizontalAlignment="Center"/>
               <TextBlock x:Name="TxtBestClassic" Text="0" Foreground="#BF5FFF"
                          FontSize="22" FontFamily="Consolas" FontWeight="Bold" HorizontalAlignment="Center"/>
+              <TextBlock x:Name="TxtTop2Classic" Text="" Foreground="#5A3A7A"
+                         FontSize="11" FontFamily="Consolas" HorizontalAlignment="Center"/>
+              <TextBlock x:Name="TxtTop3Classic" Text="" Foreground="#3A2550"
+                         FontSize="11" FontFamily="Consolas" HorizontalAlignment="Center"/>
             </StackPanel>
+
+            <!-- TIME ATTACK -->
             <StackPanel Grid.Column="1" HorizontalAlignment="Center">
               <TextBlock Text="TIME ATTACK" Foreground="#4A5A6A" FontSize="10" FontFamily="Segoe UI" HorizontalAlignment="Center"/>
               <TextBlock x:Name="TxtBestTime" Text="0" Foreground="#BF5FFF"
                          FontSize="22" FontFamily="Consolas" FontWeight="Bold" HorizontalAlignment="Center"/>
+              <TextBlock x:Name="TxtTop2Time" Text="" Foreground="#5A3A7A"
+                         FontSize="11" FontFamily="Consolas" HorizontalAlignment="Center"/>
+              <TextBlock x:Name="TxtTop3Time" Text="" Foreground="#3A2550"
+                         FontSize="11" FontFamily="Consolas" HorizontalAlignment="Center"/>
             </StackPanel>
+
+            <!-- ZEN -->
             <StackPanel Grid.Column="2" HorizontalAlignment="Center">
               <TextBlock Text="ZEN" Foreground="#4A5A6A" FontSize="10" FontFamily="Segoe UI" HorizontalAlignment="Center"/>
               <TextBlock x:Name="TxtBestZen" Text="0" Foreground="#BF5FFF"
                          FontSize="22" FontFamily="Consolas" FontWeight="Bold" HorizontalAlignment="Center"/>
+              <TextBlock x:Name="TxtTop2Zen" Text="" Foreground="#5A3A7A"
+                         FontSize="11" FontFamily="Consolas" HorizontalAlignment="Center"/>
+              <TextBlock x:Name="TxtTop3Zen" Text="" Foreground="#3A2550"
+                         FontSize="11" FontFamily="Consolas" HorizontalAlignment="Center"/>
             </StackPanel>
           </Grid>
         </Border>
+
+        <!-- 특수 도형 범례 -->
+        <Border Background="#0D0D1A" CornerRadius="8" Padding="16,10">
+          <StackPanel>
+            <TextBlock Text="SPECIAL SHAPES" Foreground="#4A5A6A" FontSize="10"
+                       FontFamily="Segoe UI" HorizontalAlignment="Center" Margin="0,0,0,6"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+              <Border Background="#110008" CornerRadius="4" Padding="8,4" Margin="0,0,6,0">
+                <StackPanel Orientation="Horizontal">
+                  <TextBlock Text="💣" FontSize="14" Margin="0,0,5,0" VerticalAlignment="Center"/>
+                  <StackPanel>
+                    <TextBlock Text="BOMB" Foreground="#FF4040" FontSize="9" FontFamily="Segoe UI" FontWeight="Bold"/>
+                    <TextBlock Text="-15점, 목숨↓" Foreground="#6A7080" FontSize="9" FontFamily="Segoe UI"/>
+                  </StackPanel>
+                </StackPanel>
+              </Border>
+              <Border Background="#0A0A00" CornerRadius="4" Padding="8,4" Margin="0,0,6,0">
+                <StackPanel Orientation="Horizontal">
+                  <TextBlock Text="⚡" FontSize="14" Margin="0,0,5,0" VerticalAlignment="Center"/>
+                  <StackPanel>
+                    <TextBlock Text="LIGHTNING" Foreground="#FFE600" FontSize="9" FontFamily="Segoe UI" FontWeight="Bold"/>
+                    <TextBlock Text="전체 클리어" Foreground="#6A7080" FontSize="9" FontFamily="Segoe UI"/>
+                  </StackPanel>
+                </StackPanel>
+              </Border>
+              <Border Background="#000A10" CornerRadius="4" Padding="8,4" Margin="0,0,6,0">
+                <StackPanel Orientation="Horizontal">
+                  <TextBlock Text="❄" FontSize="14" Margin="0,0,5,0" VerticalAlignment="Center"/>
+                  <StackPanel>
+                    <TextBlock Text="ICE" Foreground="#78DCFF" FontSize="9" FontFamily="Segoe UI" FontWeight="Bold"/>
+                    <TextBlock Text="슬로모션 3초" Foreground="#6A7080" FontSize="9" FontFamily="Segoe UI"/>
+                  </StackPanel>
+                </StackPanel>
+              </Border>
+              <Border Background="#0A0A00" CornerRadius="4" Padding="8,4">
+                <StackPanel Orientation="Horizontal">
+                  <TextBlock Text="★" FontSize="14" Foreground="#FFE600" Margin="0,0,5,0" VerticalAlignment="Center"/>
+                  <StackPanel>
+                    <TextBlock Text="STAR" Foreground="#FFE600" FontSize="9" FontFamily="Segoe UI" FontWeight="Bold"/>
+                    <TextBlock Text="+10점 보너스" Foreground="#6A7080" FontSize="9" FontFamily="Segoe UI"/>
+                  </StackPanel>
+                </StackPanel>
+              </Border>
+            </StackPanel>
+          </StackPanel>
+        </Border>
+
       </StackPanel>
     </Grid>
 

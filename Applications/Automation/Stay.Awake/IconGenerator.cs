@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using System.Runtime.InteropServices;
 
 namespace StayAwake
 {
@@ -7,6 +8,9 @@ namespace StayAwake
     /// </summary>
     public static class IconGenerator
     {
+        [DllImport("user32.dll")]
+        private static extern bool DestroyIcon(IntPtr hIcon);
+
         private static readonly string ResourceDir = Path.Combine(AppContext.BaseDirectory, "Resources");
 
         /// <summary>
@@ -20,7 +24,7 @@ namespace StayAwake
                 try
                 {
                     using var bitmap = new Bitmap(path);
-                    return Icon.FromHandle(bitmap.GetHicon());
+                    return IconFromBitmap(bitmap);
                 }
                 catch { }
             }
@@ -38,7 +42,7 @@ namespace StayAwake
                 try
                 {
                     using var bitmap = new Bitmap(path);
-                    return Icon.FromHandle(bitmap.GetHicon());
+                    return IconFromBitmap(bitmap);
                 }
                 catch { }
             }
@@ -50,13 +54,29 @@ namespace StayAwake
         /// </summary>
         private static Icon CreateFallbackIcon(Color color)
         {
-            var bitmap = new Bitmap(16, 16);
+            using var bitmap = new Bitmap(16, 16);
             using var g = Graphics.FromImage(bitmap);
             g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
             g.Clear(Color.Transparent);
             using var brush = new SolidBrush(color);
             g.FillEllipse(brush, 1, 1, 14, 14);
-            return Icon.FromHandle(bitmap.GetHicon());
+            return IconFromBitmap(bitmap);
+        }
+
+        /// <summary>
+        /// Bitmap → Icon 변환 (GetHicon 핸들 즉시 해제하여 메모리 누수 방지)
+        /// </summary>
+        private static Icon IconFromBitmap(Bitmap bitmap)
+        {
+            var hIcon = bitmap.GetHicon();
+            try
+            {
+                return (Icon)Icon.FromHandle(hIcon).Clone();
+            }
+            finally
+            {
+                DestroyIcon(hIcon);
+            }
         }
     }
 }

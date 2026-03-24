@@ -6,7 +6,7 @@ namespace StayAwake
     /// <summary>
     /// 다크 모던 테마 컨텍스트 메뉴 렌더러
     /// </summary>
-    public class DarkMenuRenderer : ToolStripProfessionalRenderer
+    public class DarkMenuRenderer : ToolStripRenderer
     {
         // 다크 테마 컬러
         private static readonly Color BackgroundColor = Color.FromArgb(32, 32, 32);
@@ -18,10 +18,6 @@ namespace StayAwake
         private static readonly Color DisabledTextColor = Color.FromArgb(128, 128, 128);
         private static readonly Color CheckMarkColor = Color.FromArgb(76, 175, 80);  // Green
         private static readonly Color AccentColor = Color.FromArgb(66, 133, 244);    // Blue
-
-        public DarkMenuRenderer() : base(new DarkColorTable())
-        {
-        }
 
         protected override void OnRenderToolStripBackground(ToolStripRenderEventArgs e)
         {
@@ -120,33 +116,4 @@ namespace StayAwake
         }
     }
 
-    /// <summary>
-    /// 다크 테마 컬러 테이블
-    /// </summary>
-    public class DarkColorTable : ProfessionalColorTable
-    {
-        private static readonly Color DarkBg = Color.FromArgb(32, 32, 32);
-        private static readonly Color DarkBorder = Color.FromArgb(60, 60, 60);
-        private static readonly Color DarkSelected = Color.FromArgb(55, 55, 55);
-
-        public override Color ToolStripDropDownBackground => DarkBg;
-        public override Color ImageMarginGradientBegin => DarkBg;
-        public override Color ImageMarginGradientMiddle => DarkBg;
-        public override Color ImageMarginGradientEnd => DarkBg;
-        public override Color MenuBorder => DarkBorder;
-        public override Color MenuItemBorder => Color.Transparent;
-        public override Color MenuItemSelected => DarkSelected;
-        public override Color MenuStripGradientBegin => DarkBg;
-        public override Color MenuStripGradientEnd => DarkBg;
-        public override Color MenuItemSelectedGradientBegin => DarkSelected;
-        public override Color MenuItemSelectedGradientEnd => DarkSelected;
-        public override Color MenuItemPressedGradientBegin => DarkSelected;
-        public override Color MenuItemPressedGradientMiddle => DarkSelected;
-        public override Color MenuItemPressedGradientEnd => DarkSelected;
-        public override Color SeparatorDark => DarkBorder;
-        public override Color SeparatorLight => DarkBorder;
-        public override Color CheckBackground => Color.Transparent;
-        public override Color CheckPressedBackground => Color.Transparent;
-        public override Color CheckSelectedBackground => Color.Transparent;
-    }
 }

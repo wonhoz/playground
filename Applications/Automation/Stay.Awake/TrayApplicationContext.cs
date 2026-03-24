@@ -11,6 +11,7 @@ namespace StayAwake
         private readonly ContextMenuStrip _contextMenu;
         private readonly System.Windows.Forms.Timer _activityTimer;
         private readonly System.Windows.Forms.Timer _scheduleTimer;
+        private readonly System.Windows.Forms.Timer _tooltipTimer;
         private readonly ActivitySimulator _simulator;
         private readonly SlackUiAutomation _slackAutomation;
 
@@ -25,6 +26,7 @@ namespace StayAwake
         private int _intervalMinutes = 3; // 기본 3분 (Slack 10분 타임아웃의 1/3)
         private int _activityCount = 0;
         private DateTime _startTime;
+        private DateTime _lastActivityTime;
         private readonly AppSettings _settings;
 
         // 일일 통계
@@ -33,6 +35,7 @@ namespace StayAwake
         private DateTime _statsDate = DateTime.Today;
         private TimeSpan _todayActiveTime = TimeSpan.Zero;
         private DateTime _sessionRunStart;
+        private DateTime _appStartTime = DateTime.Now;
 
         public TrayApplicationContext()
         {
@@ -70,6 +73,10 @@ namespace StayAwake
             _scheduleTimer = new System.Windows.Forms.Timer { Interval = 60 * 1000 };
             _scheduleTimer.Tick += OnScheduleTimerTick;
             _scheduleTimer.Start();
+
+            // 툴팁 카운트다운 타이머 (1초마다 갱신)
+            _tooltipTimer = new System.Windows.Forms.Timer { Interval = 1000 };
+            _tooltipTimer.Tick += OnTooltipTimerTick;
 
             // 컨텍스트 메뉴 생성
             _contextMenu = CreateContextMenu();
@@ -208,12 +215,14 @@ namespace StayAwake
             {
                 _activityCount = 0;
                 _startTime = DateTime.Now;
+                _lastActivityTime = DateTime.Now;
                 _sessionRunStart = DateTime.Now;
                 _activityTimer.Start();
+                _tooltipTimer.Start();
                 _startStopItem.Text = "⏹ 정지";
                 _startStopItem.ForeColor = Color.FromArgb(234, 67, 53); // Red for stop
                 _trayIcon.Icon = CreateIcon(true);
-                _trayIcon.Text = $"StayAwake - 실행 중 ({_intervalMinutes}분 간격)";
+                UpdateTooltip();
                 UpdateStatus();
 
                 _trayIcon.ShowBalloonTip(1500, "StayAwake",
@@ -223,6 +232,7 @@ namespace StayAwake
             {
                 _todayActiveTime += DateTime.Now - _sessionRunStart;
                 _activityTimer.Stop();
+                _tooltipTimer.Stop();
                 _simulator.AllowSleep(); // 절전 방지 해제
                 _startStopItem.Text = "▶ 시작";
                 _startStopItem.ForeColor = Color.FromArgb(76, 175, 80); // Green for start
@@ -350,6 +360,7 @@ namespace StayAwake
             {
                 _dailySkipCount++;
             }
+            _lastActivityTime = DateTime.Now;
             UpdateStatus(simulated);
         }
 
@@ -375,6 +386,18 @@ namespace StayAwake
             _statusItem.Text = $"상태: 실행 중 ({_activityCount}회{skipInfo}, {elapsed:hh\\:mm\\:ss})";
         }
 
+        private void OnTooltipTimerTick(object? sender, EventArgs e)
+        {
+            if (_isRunning) UpdateTooltip();
+        }
+
+        private void UpdateTooltip()
+        {
+            var nextActivity = _lastActivityTime.AddMinutes(_intervalMinutes) - DateTime.Now;
+            if (nextActivity < TimeSpan.Zero) nextActivity = TimeSpan.Zero;
+            _trayIcon.Text = $"StayAwake - 다음 활동: {(int)nextActivity.TotalMinutes}분 {nextActivity.Seconds:D2}초 후";
+        }
+
         private void ShowStats()
         {
             var activeTime = _isRunning
@@ -383,6 +406,10 @@ namespace StayAwake
 
             var total = _dailySimCount + _dailySkipCount;
             var skipRate = total > 0 ? (double)_dailySkipCount / total * 100 : 0;
+            var totalElapsed = DateTime.Now - _appStartTime;
+            var activeRate = totalElapsed.TotalSeconds > 0
+                ? activeTime.TotalSeconds / totalElapsed.TotalSeconds * 100
+                : 0;
 
             var message = $@"StayAwake 오늘의 통계 ({_statsDate:yyyy-MM-dd})
 
@@ -392,7 +419,8 @@ namespace StayAwake
 • 스킵율: {skipRate:F1}% (직접 사용 중이던 비율)
 
 [활성 시간]
-• 오늘 누적 활성 시간: {activeTime:hh\:mm\:ss}";
+• 오늘 누적 활성 시간: {activeTime:hh\:mm\:ss}
+• 앱 실행 중 활성 비율: {activeRate:F1}% ({activeTime:hh\:mm\:ss} / {totalElapsed:hh\:mm\:ss})";
 
             MessageBox.Show(message, "오늘의 통계", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
@@ -492,6 +520,7 @@ Slack 자리 비움 상태 방지 도구
         {
             _scheduleTimer.Stop();
             _activityTimer.Stop();
+            _tooltipTimer.Stop();
             _simulator.AllowSleep(); // 절전 방지 해제
             _trayIcon.Visible = false;
             Application.Exit();
@@ -511,6 +540,7 @@ Slack 자리 비움 상태 방지 도구
                 _simulator.AllowSleep(); // 절전 방지 해제
                 _scheduleTimer.Dispose();
                 _activityTimer.Dispose();
+                _tooltipTimer.Dispose();
                 _trayIcon.Dispose();
             }
             base.Dispose(disposing);

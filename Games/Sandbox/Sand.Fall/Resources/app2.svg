@@ -1,265 +1,39 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
-  <!-- icon_01 | literal | 픽셀 샌드박스 화면 단면 -->
-  <!-- 컨셉: 실제 게임 화면처럼 각 물질이 컬러 픽셀 타일로 채워진 샌드박스 장면 -->
-  <!-- 배경 -->
-  <rect x="80" y="80" width="864" height="864" rx="160" fill="#0D0D0D"/>
-
-  <!-- 화면 프레임 (게임 윈도우) -->
-  <rect x="160" y="160" width="704" height="704" rx="16" fill="#111518" stroke="#2A3040" stroke-width="6"/>
-
-  <!-- 타이틀바 -->
-  <rect x="160" y="160" width="704" height="52" rx="16" fill="#1A2030"/>
-  <rect x="160" y="188" width="704" height="24" fill="#1A2030"/>
-  <!-- 윈도우 버튼 -->
-  <circle cx="208" cy="186" r="10" fill="#E05555"/>
-  <circle cx="238" cy="186" r="10" fill="#E0A030"/>
-  <circle cx="268" cy="186" r="10" fill="#40B060"/>
-  <!-- 타이틀 텍스트 "SAND.FALL" 픽셀 표현 -->
-  <rect x="360" y="179" width="8" height="14" rx="1" fill="#8090A0"/>
-  <rect x="372" y="179" width="8" height="14" rx="1" fill="#8090A0"/>
-  <rect x="384" y="179" width="8" height="14" rx="1" fill="#8090A0"/>
-  <rect x="396" y="179" width="8" height="14" rx="1" fill="#8090A0"/>
-  <rect x="408" y="179" width="8" height="14" rx="1" fill="#8090A0"/>
-  <rect x="424" y="179" width="8" height="14" rx="1" fill="#5A6878"/>
-  <rect x="436" y="179" width="8" height="14" rx="1" fill="#8090A0"/>
-  <rect x="448" y="179" width="8" height="14" rx="1" fill="#8090A0"/>
-  <rect x="460" y="179" width="8" height="14" rx="1" fill="#8090A0"/>
-  <rect x="472" y="179" width="8" height="14" rx="1" fill="#8090A0"/>
-
-  <!-- 픽셀 그리드 영역: 좌상단 (224,228) ~ 우하단 (800,804) -->
-  <!-- 픽셀 셀 크기 = 32px, 18x18 그리드 -->
-
-  <!-- === 돌 (Stone) 회색 — 좌측 벽 & 바닥 구조 === -->
-  <!-- 좌측 벽 (col 0-1) -->
-  <rect x="224" y="228" width="32" height="32" fill="#6B7280"/><rect x="256" y="228" width="32" height="32" fill="#5A6370"/>
-  <rect x="224" y="260" width="32" height="32" fill="#6B7280"/><rect x="256" y="260" width="32" height="32" fill="#5A6370"/>
-  <rect x="224" y="292" width="32" height="32" fill="#6B7280"/><rect x="256" y="292" width="32" height="32" fill="#5A6370"/>
-  <rect x="224" y="324" width="32" height="32" fill="#6B7280"/><rect x="256" y="324" width="32" height="32" fill="#5A6370"/>
-  <rect x="224" y="356" width="32" height="32" fill="#6B7280"/><rect x="256" y="356" width="32" height="32" fill="#5A6370"/>
-  <rect x="224" y="388" width="32" height="32" fill="#6B7280"/><rect x="256" y="388" width="32" height="32" fill="#5A6370"/>
-  <rect x="224" y="420" width="32" height="32" fill="#6B7280"/><rect x="256" y="420" width="32" height="32" fill="#5A6370"/>
-  <rect x="224" y="452" width="32" height="32" fill="#6B7280"/><rect x="256" y="452" width="32" height="32" fill="#5A6370"/>
-  <rect x="224" y="484" width="32" height="32" fill="#6B7280"/>
-  <rect x="224" y="516" width="32" height="32" fill="#6B7280"/>
-  <rect x="224" y="548" width="32" height="32" fill="#6B7280"/>
-  <rect x="224" y="580" width="32" height="32" fill="#6B7280"/>
-  <rect x="224" y="612" width="32" height="32" fill="#6B7280"/>
-  <rect x="224" y="644" width="32" height="32" fill="#6B7280"/>
-  <rect x="224" y="676" width="32" height="32" fill="#6B7280"/>
-  <rect x="224" y="708" width="32" height="32" fill="#6B7280"/>
-  <rect x="224" y="740" width="32" height="32" fill="#6B7280"/>
-  <rect x="224" y="772" width="32" height="32" fill="#6B7280"/>
-
-  <!-- 우측 벽 (col 17) -->
-  <rect x="768" y="228" width="32" height="32" fill="#6B7280"/>
-  <rect x="768" y="260" width="32" height="32" fill="#6B7280"/>
-  <rect x="768" y="292" width="32" height="32" fill="#6B7280"/>
-  <rect x="768" y="324" width="32" height="32" fill="#6B7280"/>
-  <rect x="768" y="356" width="32" height="32" fill="#6B7280"/>
-  <rect x="768" y="388" width="32" height="32" fill="#6B7280"/>
-  <rect x="768" y="420" width="32" height="32" fill="#6B7280"/>
-  <rect x="768" y="452" width="32" height="32" fill="#6B7280"/>
-  <rect x="768" y="484" width="32" height="32" fill="#6B7280"/>
-  <rect x="768" y="516" width="32" height="32" fill="#6B7280"/>
-  <rect x="768" y="548" width="32" height="32" fill="#6B7280"/>
-  <rect x="768" y="580" width="32" height="32" fill="#6B7280"/>
-  <rect x="768" y="612" width="32" height="32" fill="#6B7280"/>
-  <rect x="768" y="644" width="32" height="32" fill="#6B7280"/>
-  <rect x="768" y="676" width="32" height="32" fill="#6B7280"/>
-  <rect x="768" y="708" width="32" height="32" fill="#6B7280"/>
-  <rect x="768" y="740" width="32" height="32" fill="#6B7280"/>
-  <rect x="768" y="772" width="32" height="32" fill="#6B7280"/>
-
-  <!-- 바닥 (row 17) -->
-  <rect x="256" y="772" width="32" height="32" fill="#6B7280"/>
-  <rect x="288" y="772" width="32" height="32" fill="#6B7280"/>
-  <rect x="320" y="772" width="32" height="32" fill="#6B7280"/>
-  <rect x="352" y="772" width="32" height="32" fill="#6B7280"/>
-  <rect x="384" y="772" width="32" height="32" fill="#6B7280"/>
-  <rect x="416" y="772" width="32" height="32" fill="#6B7280"/>
-  <rect x="448" y="772" width="32" height="32" fill="#6B7280"/>
-  <rect x="480" y="772" width="32" height="32" fill="#6B7280"/>
-  <rect x="512" y="772" width="32" height="32" fill="#6B7280"/>
-  <rect x="544" y="772" width="32" height="32" fill="#6B7280"/>
-  <rect x="576" y="772" width="32" height="32" fill="#6B7280"/>
-  <rect x="608" y="772" width="32" height="32" fill="#6B7280"/>
-  <rect x="640" y="772" width="32" height="32" fill="#6B7280"/>
-  <rect x="672" y="772" width="32" height="32" fill="#6B7280"/>
-  <rect x="704" y="772" width="32" height="32" fill="#6B7280"/>
-  <rect x="736" y="772" width="32" height="32" fill="#6B7280"/>
-
-  <!-- 내부 선반 (중간 돌 블록) -->
-  <rect x="320" y="484" width="32" height="32" fill="#6B7280"/>
-  <rect x="352" y="484" width="32" height="32" fill="#6B7280"/>
-  <rect x="384" y="484" width="32" height="32" fill="#6B7280"/>
-  <rect x="416" y="484" width="32" height="32" fill="#6B7280"/>
-  <rect x="448" y="484" width="32" height="32" fill="#6B7280"/>
-
-  <!-- 오른쪽 선반 -->
-  <rect x="576" y="580" width="32" height="32" fill="#6B7280"/>
-  <rect x="608" y="580" width="32" height="32" fill="#6B7280"/>
-  <rect x="640" y="580" width="32" height="32" fill="#6B7280"/>
-  <rect x="672" y="580" width="32" height="32" fill="#6B7280"/>
-
-  <!-- === 나무 (Wood) 갈색 — 좌상 구역 === -->
-  <rect x="288" y="228" width="32" height="32" fill="#8B5E3C"/>
-  <rect x="320" y="228" width="32" height="32" fill="#9B6E4C"/>
-  <rect x="352" y="228" width="32" height="32" fill="#8B5E3C"/>
-  <rect x="288" y="260" width="32" height="32" fill="#9B6E4C"/>
-  <rect x="320" y="260" width="32" height="32" fill="#8B5E3C"/>
-  <rect x="352" y="260" width="32" height="32" fill="#9B6E4C"/>
-  <rect x="288" y="292" width="32" height="32" fill="#8B5E3C"/>
-  <rect x="320" y="292" width="32" height="32" fill="#9B6E4C"/>
-  <rect x="288" y="324" width="32" height="32" fill="#7A5030"/>
-  <rect x="320" y="324" width="32" height="32" fill="#8B5E3C"/>
-
-  <!-- === 불 (Fire) 빨간/주황 — 나무 위 === -->
-  <rect x="288" y="196" width="32" height="32" fill="#FF4500" opacity="0.9"/>
-  <rect x="320" y="196" width="32" height="32" fill="#FF6020" opacity="0.85"/>
-  <rect x="352" y="196" width="32" height="32" fill="#FF4500" opacity="0.8"/>
-  <!-- 불 타는 나무 top -->
-  <rect x="288" y="228" width="32" height="32" fill="#CC2200" opacity="0.4"/>
-  <rect x="320" y="228" width="32" height="32" fill="#FF4500" opacity="0.3"/>
-  <rect x="352" y="228" width="32" height="32" fill="#CC2200" opacity="0.4"/>
-
-  <!-- 연기 (Ash 연결) 위로 올라가는 픽셀 -->
-  <rect x="296" y="196" width="12" height="12" fill="#888" opacity="0.5"/>
-  <rect x="320" y="180" width="12" height="12" fill="#777" opacity="0.35"/>
-  <rect x="344" y="196" width="12" height="12" fill="#888" opacity="0.45"/>
-  <rect x="308" y="168" width="10" height="10" fill="#666" opacity="0.25"/>
-
-  <!-- === 모래 (Sand) 노랑 — 중앙에서 흘러내림 === -->
-  <!-- 상단 소스 -->
-  <rect x="480" y="228" width="32" height="32" fill="#F9C040"/>
-  <rect x="512" y="228" width="32" height="32" fill="#FFDB58"/>
-  <rect x="544" y="228" width="32" height="32" fill="#F9C040"/>
-  <!-- 흘러내리는 줄기 (waterfall 패턴) -->
-  <rect x="512" y="260" width="32" height="32" fill="#F9C040"/>
-  <rect x="512" y="292" width="32" height="32" fill="#FFDB58"/>
-  <rect x="496" y="324" width="32" height="32" fill="#F9C040"/>
-  <rect x="528" y="324" width="16" height="16" fill="#F9C040"/>
-  <rect x="496" y="356" width="32" height="32" fill="#FFDB58"/>
-  <rect x="480" y="388" width="32" height="32" fill="#F9C040"/>
-  <rect x="512" y="388" width="32" height="32" fill="#F9C040"/>
-  <rect x="480" y="420" width="32" height="32" fill="#FFDB58"/>
-  <rect x="512" y="420" width="32" height="32" fill="#F9C040"/>
-  <rect x="544" y="420" width="16" height="32" fill="#FFDB58"/>
-  <!-- 선반 위 모래 쌓임 -->
-  <rect x="320" y="452" width="32" height="32" fill="#F9C040"/>
-  <rect x="352" y="452" width="32" height="32" fill="#FFDB58"/>
-  <rect x="384" y="452" width="32" height="32" fill="#F9C040"/>
-  <rect x="416" y="452" width="32" height="32" fill="#FFDB58"/>
-  <rect x="448" y="452" width="32" height="32" fill="#F9C040"/>
-  <!-- 바닥 모래 쌓임 -->
-  <rect x="352" y="740" width="32" height="32" fill="#F9C040"/>
-  <rect x="384" y="740" width="32" height="32" fill="#FFDB58"/>
-  <rect x="416" y="740" width="32" height="32" fill="#F9C040"/>
-  <rect x="448" y="740" width="32" height="32" fill="#FFDB58"/>
-  <rect x="480" y="740" width="32" height="32" fill="#F9C040"/>
-  <rect x="512" y="740" width="32" height="32" fill="#FFDB58"/>
-  <rect x="384" y="708" width="32" height="32" fill="#F9C040" opacity="0.9"/>
-  <rect x="416" y="708" width="32" height="32" fill="#FFDB58" opacity="0.85"/>
-  <rect x="448" y="708" width="32" height="32" fill="#F9C040" opacity="0.9"/>
-
-  <!-- === 물 (Water) 파랑 — 우측 구역 === -->
-  <rect x="608" y="228" width="32" height="32" fill="#2196F3"/>
-  <rect x="640" y="228" width="32" height="32" fill="#1E88E5"/>
-  <rect x="672" y="228" width="32" height="32" fill="#2196F3"/>
-  <rect x="608" y="260" width="32" height="32" fill="#42A5F5"/>
-  <rect x="640" y="260" width="32" height="32" fill="#2196F3"/>
-  <rect x="672" y="260" width="32" height="32" fill="#1E88E5"/>
-  <rect x="608" y="292" width="32" height="32" fill="#2196F3"/>
-  <rect x="640" y="292" width="32" height="32" fill="#42A5F5"/>
-  <rect x="672" y="292" width="32" height="32" fill="#2196F3"/>
-  <rect x="608" y="324" width="32" height="32" fill="#1E88E5"/>
-  <rect x="640" y="324" width="32" height="32" fill="#2196F3"/>
-  <rect x="672" y="324" width="32" height="32" fill="#42A5F5"/>
-  <rect x="608" y="356" width="32" height="32" fill="#2196F3"/>
-  <rect x="640" y="356" width="32" height="32" fill="#1E88E5"/>
-  <rect x="608" y="388" width="32" height="32" fill="#42A5F5"/>
-  <rect x="608" y="420" width="32" height="32" fill="#2196F3"/>
-  <!-- 물이 흘러 바닥으로 -->
-  <rect x="608" y="452" width="32" height="32" fill="#2196F3"/>
-  <rect x="608" y="484" width="32" height="32" fill="#42A5F5"/>
-  <rect x="608" y="516" width="32" height="32" fill="#2196F3"/>
-  <!-- 선반 아래로 흘러서 우측 바닥에 고임 -->
-  <rect x="608" y="612" width="32" height="32" fill="#42A5F5"/>
-  <rect x="640" y="612" width="32" height="32" fill="#2196F3"/>
-  <rect x="672" y="612" width="32" height="32" fill="#42A5F5"/>
-  <rect x="704" y="612" width="32" height="32" fill="#2196F3"/>
-  <rect x="608" y="644" width="32" height="32" fill="#2196F3"/>
-  <rect x="640" y="644" width="32" height="32" fill="#42A5F5"/>
-  <rect x="672" y="644" width="32" height="32" fill="#2196F3"/>
-  <rect x="704" y="644" width="32" height="32" fill="#1E88E5"/>
-  <rect x="608" y="676" width="32" height="32" fill="#42A5F5"/>
-  <rect x="640" y="676" width="32" height="32" fill="#2196F3"/>
-  <rect x="672" y="676" width="32" height="32" fill="#42A5F5"/>
-  <rect x="704" y="676" width="32" height="32" fill="#2196F3"/>
-  <rect x="608" y="708" width="32" height="32" fill="#2196F3"/>
-  <rect x="640" y="708" width="32" height="32" fill="#1E88E5"/>
-  <rect x="672" y="708" width="32" height="32" fill="#2196F3"/>
-  <rect x="704" y="708" width="32" height="32" fill="#42A5F5"/>
-  <rect x="608" y="740" width="32" height="32" fill="#42A5F5"/>
-  <rect x="640" y="740" width="32" height="32" fill="#2196F3"/>
-  <rect x="672" y="740" width="32" height="32" fill="#1E88E5"/>
-  <rect x="704" y="740" width="32" height="32" fill="#2196F3"/>
-
-  <!-- === 증기 (Steam) 연보라/흰색 — 물 위 === -->
-  <rect x="640" y="196" width="16" height="16" fill="#B0BEC5" opacity="0.7"/>
-  <rect x="660" y="180" width="14" height="14" fill="#CFD8DC" opacity="0.55"/>
-  <rect x="672" y="196" width="16" height="16" fill="#ECEFF1" opacity="0.5"/>
-  <rect x="650" y="168" width="12" height="12" fill="#B0BEC5" opacity="0.4"/>
-
-  <!-- === 기름 (Oil) 갈색/어두운 주황 — 물 위에 뜸 === -->
-  <rect x="608" y="548" width="32" height="32" fill="#8D5524"/>
-  <rect x="640" y="548" width="32" height="32" fill="#A0632A"/>
-  <rect x="672" y="548" width="32" height="32" fill="#8D5524"/>
-  <rect x="704" y="548" width="32" height="32" fill="#7A4A1E"/>
-
-  <!-- === 산 (Acid) 연두/노란 초록 — 소량 === -->
-  <rect x="480" y="516" width="32" height="32" fill="#76FF03" opacity="0.8"/>
-  <rect x="480" y="548" width="32" height="32" fill="#64DD17" opacity="0.7"/>
-  <rect x="448" y="548" width="32" height="32" fill="#76FF03" opacity="0.65"/>
-
-  <!-- === 씨앗/식물 (Seed/Plant) 초록 — 우하단 === -->
-  <rect x="288" y="740" width="16" height="16" fill="#66BB6A"/>
-  <rect x="308" y="740" width="16" height="16" fill="#81C784"/>
-  <rect x="288" y="724" width="16" height="16" fill="#43A047"/>
-  <rect x="304" y="720" width="12" height="12" fill="#66BB6A"/>
-
-  <!-- 픽셀 그리드 오버레이 (반투명 선) -->
-  <g stroke="#1A1A22" stroke-width="1" opacity="0.35">
-    <line x1="256" y1="228" x2="256" y2="772"/>
-    <line x1="288" y1="228" x2="288" y2="772"/>
-    <line x1="320" y1="228" x2="320" y2="772"/>
-    <line x1="352" y1="228" x2="352" y2="772"/>
-    <line x1="384" y1="228" x2="384" y2="772"/>
-    <line x1="416" y1="228" x2="416" y2="772"/>
-    <line x1="448" y1="228" x2="448" y2="772"/>
-    <line x1="480" y1="228" x2="480" y2="772"/>
-    <line x1="512" y1="228" x2="512" y2="772"/>
-    <line x1="544" y1="228" x2="544" y2="772"/>
-    <line x1="576" y1="228" x2="576" y2="772"/>
-    <line x1="608" y1="228" x2="608" y2="772"/>
-    <line x1="640" y1="228" x2="640" y2="772"/>
-    <line x1="672" y1="228" x2="672" y2="772"/>
-    <line x1="704" y1="228" x2="704" y2="772"/>
-    <line x1="736" y1="228" x2="736" y2="772"/>
-    <line x1="224" y1="260" x2="768" y2="260"/>
-    <line x1="224" y1="292" x2="768" y2="292"/>
-    <line x1="224" y1="324" x2="768" y2="324"/>
-    <line x1="224" y1="356" x2="768" y2="356"/>
-    <line x1="224" y1="388" x2="768" y2="388"/>
-    <line x1="224" y1="420" x2="768" y2="420"/>
-    <line x1="224" y1="452" x2="768" y2="452"/>
-    <line x1="224" y1="484" x2="768" y2="484"/>
-    <line x1="224" y1="516" x2="768" y2="516"/>
-    <line x1="224" y1="548" x2="768" y2="548"/>
-    <line x1="224" y1="580" x2="768" y2="580"/>
-    <line x1="224" y1="612" x2="768" y2="612"/>
-    <line x1="224" y1="644" x2="768" y2="644"/>
-    <line x1="224" y1="676" x2="768" y2="676"/>
-    <line x1="224" y1="708" x2="768" y2="708"/>
-    <line x1="224" y1="740" x2="768" y2="740"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1A0E00"/>
+      <stop offset="100%" stop-color="#3E2000"/>
+    </linearGradient>
+    <linearGradient id="sand" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFD54F"/>
+      <stop offset="100%" stop-color="#FF8F00"/>
+    </linearGradient>
+    <linearGradient id="ground" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#F9A825"/>
+      <stop offset="100%" stop-color="#E65100"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Ground pile -->
+  <ellipse cx="256" cy="430" rx="180" ry="50" fill="url(#ground)" opacity="0.9"/>
+  <!-- Falling sand particles -->
+  <g fill="url(#sand)">
+    <rect x="240" y="100" width="18" height="18" rx="3"/>
+    <rect x="252" y="140" width="14" height="14" rx="2"/>
+    <rect x="236" y="175" width="16" height="16" rx="3"/>
+    <rect x="258" y="215" width="12" height="12" rx="2"/>
+    <rect x="244" y="250" width="18" height="18" rx="3"/>
+    <rect x="260" y="290" width="14" height="14" rx="2"/>
+    <rect x="238" y="325" width="16" height="16" rx="3"/>
+    <!-- Side particles -->
+    <rect x="210" y="200" width="10" height="10" rx="2" opacity="0.7"/>
+    <rect x="290" y="230" width="10" height="10" rx="2" opacity="0.7"/>
+    <rect x="200" y="310" width="12" height="12" rx="2" opacity="0.5"/>
+    <rect x="305" y="290" width="12" height="12" rx="2" opacity="0.5"/>
+    <rect x="185" y="380" width="14" height="14" rx="3" opacity="0.6"/>
+    <rect x="315" y="360" width="14" height="14" rx="3" opacity="0.6"/>
   </g>
+  <!-- Hourglass top opening -->
+  <path d="M 196 90 L 316 90 L 276 130 L 236 130 Z" fill="url(#sand)" opacity="0.5"/>
+  <line x1="196" y1="90" x2="316" y2="90" stroke="url(#sand)" stroke-width="6" stroke-linecap="round"/>
 </svg>

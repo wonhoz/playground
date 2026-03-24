@@ -1,28 +1,27 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
-  <!-- Layer 1: 배경 - 따뜻한 주황 그라데이션 -->
   <defs>
-    <linearGradient id="bg01" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#FF8C42"/>
-      <stop offset="100%" stop-color="#E8462A"/>
+    <linearGradient id="bg7" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0D9488"/>
+      <stop offset="100%" stop-color="#0F766E"/>
     </linearGradient>
-    <linearGradient id="folder01" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#FFFFFF"/>
-      <stop offset="100%" stop-color="#F0EDE8"/>
-    </linearGradient>
+    <radialGradient id="glow7" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FDE68A" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#0D9488" stop-opacity="0"/>
+    </radialGradient>
   </defs>
-  <rect width="1024" height="1024" rx="190" fill="url(#bg01)"/>
-
-  <!-- Layer 2: 메인 폴더 오브젝트 -->
-  <!-- 폴더 몸통 -->
-  <rect x="210" y="360" width="600" height="400" rx="30" fill="url(#folder01)"/>
-  <!-- 폴더 탭 -->
-  <path d="M210 360 L210 310 Q210 290 230 290 L400 290 Q430 290 445 310 L470 360 Z" fill="url(#folder01)"/>
-
-  <!-- Layer 3: 빨간 X 표시 (삭제/제거 의미) -->
-  <line x1="340" y1="460" x2="680" y2="700" stroke="#D42B1E" stroke-width="72" stroke-linecap="round"/>
-  <line x1="680" y1="460" x2="340" y2="700" stroke="#D42B1E" stroke-width="72" stroke-linecap="round"/>
-
-  <!-- X 위에 흰색 얇은 선으로 입체감 -->
-  <line x1="340" y1="460" x2="680" y2="700" stroke="rgba(255,255,255,0.25)" stroke-width="24" stroke-linecap="round"/>
-  <line x1="680" y1="460" x2="340" y2="700" stroke="rgba(255,255,255,0.25)" stroke-width="24" stroke-linecap="round"/>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg7)"/>
+  <circle cx="512" cy="512" r="300" fill="url(#glow7)"/>
+  <!-- 깨끗한 폴더 -->
+  <rect x="232" y="430" width="560" height="350" rx="40" fill="white" opacity="0.95"/>
+  <path d="M232 430 L232 382 Q232 352 262 352 L430 352 Q460 352 478 382 L510 430 Z" fill="white" opacity="0.95"/>
+  <!-- 별 1 (큰) -->
+  <path d="M512 270 L530 325 L590 325 L542 358 L560 413 L512 380 L464 413 L482 358 L434 325 L494 325 Z" fill="#FDE68A"/>
+  <!-- 별 2 (중간 우상) -->
+  <path d="M730 340 L742 375 L780 375 L750 396 L762 431 L730 410 L698 431 L710 396 L680 375 L718 375 Z" fill="#FDE68A" opacity="0.9"/>
+  <!-- 별 3 (작은 좌상) -->
+  <path d="M300 310 L309 336 L338 336 L315 352 L324 378 L300 362 L276 378 L285 352 L262 336 L291 336 Z" fill="#FDE68A" opacity="0.8"/>
+  <!-- 별 4 (소형 우측) -->
+  <path d="M820 460 L827 480 L848 480 L832 492 L839 512 L820 500 L801 512 L808 492 L792 480 L813 480 Z" fill="#FDE68A" opacity="0.7"/>
+  <!-- 별 5 (극소) -->
+  <path d="M200 500 L205 515 L221 515 L209 524 L214 539 L200 530 L186 539 L191 524 L179 515 L195 515 Z" fill="#FDE68A" opacity="0.6"/>
 </svg>

@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg05" cx="50%" cy="50%" r="55%">
+      <stop offset="0%" stop-color="#7C2D12"/>
+      <stop offset="100%" stop-color="#431407"/>
+    </radialGradient>
+    <radialGradient id="aura05" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#22D3EE" stop-opacity="0.6"/>
+      <stop offset="50%" stop-color="#0891B2" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#06B6D4" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="auraGlow">
+      <feGaussianBlur stdDeviation="28" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="200" fill="url(#bg05)"/>
+  <!-- 아우라 외곽 (크게) -->
+  <circle cx="512" cy="512" r="420" fill="url(#aura05)"/>
+  <!-- 아우라 빛 방사선 -->
+  <line x1="512" y1="130" x2="512" y2="92" stroke="#22D3EE" stroke-width="14" stroke-linecap="round" opacity="0.6"/>
+  <line x1="512" y1="894" x2="512" y2="932" stroke="#22D3EE" stroke-width="14" stroke-linecap="round" opacity="0.6"/>
+  <line x1="130" y1="512" x2="92" y2="512" stroke="#22D3EE" stroke-width="14" stroke-linecap="round" opacity="0.6"/>
+  <line x1="894" y1="512" x2="932" y2="512" stroke="#22D3EE" stroke-width="14" stroke-linecap="round" opacity="0.6"/>
+  <line x1="220" y1="220" x2="190" y2="190" stroke="#22D3EE" stroke-width="10" stroke-linecap="round" opacity="0.5"/>
+  <line x1="804" y1="220" x2="834" y2="190" stroke="#22D3EE" stroke-width="10" stroke-linecap="round" opacity="0.5"/>
+  <line x1="220" y1="804" x2="190" y2="834" stroke="#22D3EE" stroke-width="10" stroke-linecap="round" opacity="0.5"/>
+  <line x1="804" y1="804" x2="834" y2="834" stroke="#22D3EE" stroke-width="10" stroke-linecap="round" opacity="0.5"/>
+  <!-- 아우라 내부 링들 -->
+  <circle cx="512" cy="512" r="340" fill="none" stroke="#22D3EE" stroke-width="6" opacity="0.25"/>
+  <circle cx="512" cy="512" r="280" fill="none" stroke="#22D3EE" stroke-width="8" opacity="0.35"/>
+  <circle cx="512" cy="512" r="220" fill="none" stroke="#38BDF8" stroke-width="10" opacity="0.45"/>
+  <!-- 다이아몬드 큰 실루엣 (배경) -->
+  <polygon points="512,240 780,512 512,784 244,512" fill="#0C4A6E" opacity="0.5" filter="url(#auraGlow)"/>
+  <!-- 다이아몬드 메인 -->
+  <polygon points="512,264 756,512 512,760 268,512" fill="#0891B2"/>
+  <polygon points="512,300 718,512 512,724 306,512" fill="#0EA5E9"/>
+  <polygon points="512,340 680,512 512,684 344,512" fill="#22D3EE"/>
+  <polygon points="512,380 640,512 512,644 384,512" fill="#38BDF8"/>
+  <polygon points="512,420 598,512 512,604 426,512" fill="#67E8F9"/>
+  <!-- 다이아몬드 하이라이트 -->
+  <polygon points="512,420 598,512 512,510 460,468" fill="white" opacity="0.45"/>
+  <!-- 다이아몬드 테두리 광선 -->
+  <polygon points="512,264 756,512 512,760 268,512" fill="none" stroke="#A5F3FC" stroke-width="6" opacity="0.6"/>
+</svg>

@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg04" cx="50%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#0F172A"/>
+      <stop offset="100%" stop-color="#020617"/>
+    </radialGradient>
+    <filter id="bulletR">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="playerGlow04">
+      <feGaussianBlur stdDeviation="22" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="200" fill="url(#bg04)"/>
+  <!-- 별 배경 (많이) -->
+  <circle cx="150" cy="120" r="3" fill="white" opacity="0.7"/>
+  <circle cx="280" cy="80" r="2" fill="white" opacity="0.5"/>
+  <circle cx="450" cy="60" r="3" fill="white" opacity="0.6"/>
+  <circle cx="620" cy="90" r="2" fill="white" opacity="0.5"/>
+  <circle cx="780" cy="70" r="3" fill="white" opacity="0.7"/>
+  <circle cx="900" cy="140" r="2" fill="white" opacity="0.5"/>
+  <circle cx="100" cy="300" r="2" fill="white" opacity="0.4"/>
+  <circle cx="950" cy="350" r="2" fill="white" opacity="0.4"/>
+  <circle cx="130" cy="550" r="3" fill="white" opacity="0.5"/>
+  <circle cx="920" cy="500" r="2" fill="white" opacity="0.4"/>
+  <circle cx="60" cy="750" r="2" fill="white" opacity="0.4"/>
+  <circle cx="970" cy="730" r="3" fill="white" opacity="0.5"/>
+  <circle cx="200" cy="920" r="2" fill="white" opacity="0.4"/>
+  <circle cx="820" cy="900" r="2" fill="white" opacity="0.4"/>
+  <!-- 총알 비 (위에서 쏟아짐, 각도 있음) -->
+  <!-- 세로 3줄 × 가로 여러 개 -->
+  <circle cx="200" cy="160" r="34" fill="#EF4444" filter="url(#bulletR)"/>
+  <circle cx="200" cy="310" r="30" fill="#EF4444" opacity="0.7"/>
+  <circle cx="200" cy="440" r="26" fill="#F87171" opacity="0.5"/>
+  <circle cx="380" cy="120" r="36" fill="#EF4444" filter="url(#bulletR)"/>
+  <circle cx="380" cy="280" r="32" fill="#EF4444" opacity="0.75"/>
+  <circle cx="380" cy="420" r="28" fill="#F87171" opacity="0.55"/>
+  <circle cx="640" cy="140" r="34" fill="#EF4444" filter="url(#bulletR)"/>
+  <circle cx="640" cy="290" r="30" fill="#EF4444" opacity="0.7"/>
+  <circle cx="640" cy="430" r="26" fill="#F87171" opacity="0.5"/>
+  <circle cx="820" cy="180" r="36" fill="#EF4444" filter="url(#bulletR)"/>
+  <circle cx="820" cy="330" r="30" fill="#EF4444" opacity="0.7"/>
+  <!-- 아래쪽 플레이어 다이아몬드 -->
+  <!-- 글로우 -->
+  <polygon points="512,600 660,740 512,880 364,740" fill="#0891B2" opacity="0.4" filter="url(#playerGlow04)"/>
+  <!-- 플레이어 -->
+  <polygon points="512,620 648,740 512,860 376,740" fill="#22D3EE"/>
+  <polygon points="512,654 614,740 512,826 410,740" fill="#38BDF8"/>
+  <polygon points="512,688 576,740 512,792 448,740" fill="#7DD3FC"/>
+  <!-- 하이라이트 -->
+  <polygon points="512,688 576,740 512,738 470,710" fill="white" opacity="0.4"/>
+  <!-- 남은 HP 바 같은 효과 (아래) -->
+  <rect x="312" y="915" width="400" height="28" rx="14" fill="#1E293B"/>
+  <rect x="312" y="915" width="280" height="28" rx="14" fill="#22C55E"/>
+</svg>

@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg03" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#1E1B4B"/>
+      <stop offset="100%" stop-color="#0C0A25"/>
+    </radialGradient>
+    <linearGradient id="boltGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FEF08A"/>
+      <stop offset="100%" stop-color="#F59E0B"/>
+    </linearGradient>
+    <filter id="boltGlow">
+      <feGaussianBlur stdDeviation="18" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="bulletGlow">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="200" fill="url(#bg03)"/>
+  <!-- 별들 -->
+  <circle cx="150" cy="140" r="4" fill="white" opacity="0.6"/>
+  <circle cx="880" cy="200" r="4" fill="white" opacity="0.5"/>
+  <circle cx="200" cy="850" r="3" fill="white" opacity="0.5"/>
+  <circle cx="860" cy="820" r="4" fill="white" opacity="0.6"/>
+  <circle cx="300" cy="300" r="3" fill="white" opacity="0.4"/>
+  <circle cx="720" cy="130" r="3" fill="white" opacity="0.4"/>
+  <!-- 왼쪽 총알들 (빨간) -->
+  <circle cx="230" cy="300" r="42" fill="#EF4444" filter="url(#bulletGlow)"/>
+  <circle cx="180" cy="512" r="42" fill="#EF4444" filter="url(#bulletGlow)"/>
+  <circle cx="230" cy="724" r="42" fill="#EF4444" filter="url(#bulletGlow)"/>
+  <!-- 오른쪽 총알들 (빨간) -->
+  <circle cx="794" cy="300" r="42" fill="#EF4444" filter="url(#bulletGlow)"/>
+  <circle cx="844" cy="512" r="42" fill="#EF4444" filter="url(#bulletGlow)"/>
+  <circle cx="794" cy="724" r="42" fill="#EF4444" filter="url(#bulletGlow)"/>
+  <!-- 중앙 번개 (Blitz 상징) — 매우 큰 -->
+  <!-- 번개 외곽 글로우 -->
+  <polygon points="580,140 440,540 540,540 420,880 680,440 560,440" fill="#FEF08A" filter="url(#boltGlow)" opacity="0.5"/>
+  <!-- 번개 메인 -->
+  <polygon points="580,140 440,540 540,540 420,880 680,440 560,440" fill="url(#boltGrad)"/>
+  <!-- 번개 하이라이트 -->
+  <polygon points="568,180 480,490 526,490 454,780 600,480 544,480" fill="white" opacity="0.35"/>
+  <!-- 번개 주변 스파크 -->
+  <line x1="650" y1="250" x2="700" y2="200" stroke="#FEF08A" stroke-width="10" stroke-linecap="round" opacity="0.7"/>
+  <line x1="680" y1="320" x2="740" y2="290" stroke="#FEF08A" stroke-width="8" stroke-linecap="round" opacity="0.6"/>
+  <line x1="660" y1="500" x2="720" y2="480" stroke="#FEF08A" stroke-width="8" stroke-linecap="round" opacity="0.5"/>
+  <line x1="360" y1="680" x2="300" y2="660" stroke="#FEF08A" stroke-width="8" stroke-linecap="round" opacity="0.5"/>
+</svg>

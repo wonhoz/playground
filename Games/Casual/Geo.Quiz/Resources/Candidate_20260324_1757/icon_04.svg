@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg_gq04" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1E3A8A"/>
+      <stop offset="100%" stop-color="#0F2558"/>
+    </linearGradient>
+    <clipPath id="c_gq04">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <!-- Layer 1: Deep sapphire background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg_gq04)"/>
+  <g clip-path="url(#c_gq04)">
+    <!-- Layer 2: Earth/globe -->
+    <!-- Globe outer circle -->
+    <circle cx="512" cy="512" r="360" fill="#1E40AF" stroke="#3B82F6" stroke-width="16"/>
+    <!-- Ocean base -->
+    <circle cx="512" cy="512" r="344" fill="#1D4ED8"/>
+    <!-- Continents (simplified green blobs) -->
+    <!-- North America -->
+    <ellipse cx="340" cy="370" rx="120" ry="110" fill="#22C55E"/>
+    <!-- South America -->
+    <ellipse cx="380" cy="570" rx="80" ry="120" fill="#16A34A"/>
+    <!-- Europe/Africa -->
+    <ellipse cx="590" cy="380" rx="90" ry="130" fill="#22C55E"/>
+    <ellipse cx="600" cy="560" rx="80" ry="100" fill="#15803D"/>
+    <!-- Asia -->
+    <ellipse cx="720" cy="360" rx="110" ry="80" fill="#22C55E"/>
+    <!-- Australia -->
+    <ellipse cx="730" cy="560" rx="70" ry="60" fill="#16A34A"/>
+    <!-- Longitude/latitude lines -->
+    <ellipse cx="512" cy="512" rx="360" ry="100" fill="none" stroke="#60A5FA" stroke-width="6" opacity="0.4"/>
+    <ellipse cx="512" cy="512" rx="360" ry="230" fill="none" stroke="#60A5FA" stroke-width="4" opacity="0.3"/>
+    <line x1="152" y1="512" x2="872" y2="512" stroke="#60A5FA" stroke-width="6" opacity="0.4"/>
+    <line x1="382" y1="154" x2="382" y2="870" stroke="#60A5FA" stroke-width="4" opacity="0.3"/>
+    <line x1="642" y1="154" x2="642" y2="870" stroke="#60A5FA" stroke-width="4" opacity="0.3"/>
+    <!-- Layer 3: Red location pin -->
+    <path d="M512 240 Q392 400 392 470 A120 120 0 1 0 632 470 Q632 400 512 240 Z" fill="#EF4444"/>
+    <circle cx="512" cy="470" r="60" fill="white"/>
+    <circle cx="512" cy="470" r="40" fill="#EF4444"/>
+    <circle cx="512" cy="470" r="20" fill="white"/>
+    <!-- Pin tip glow -->
+    <circle cx="512" cy="238" r="16" fill="#FCA5A5"/>
+  </g>
+</svg>

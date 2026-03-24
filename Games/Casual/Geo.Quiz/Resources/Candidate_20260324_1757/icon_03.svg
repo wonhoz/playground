@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg_gq03" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#F97316"/>
+      <stop offset="100%" stop-color="#C2410C"/>
+    </linearGradient>
+    <clipPath id="c_gq03">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <!-- Layer 1: Warm orange background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg_gq03)"/>
+  <g clip-path="url(#c_gq03)">
+    <!-- Layer 2: Compass -->
+    <!-- Compass outer ring -->
+    <circle cx="512" cy="480" r="300" fill="#FFF7ED" stroke="#F97316" stroke-width="20"/>
+    <circle cx="512" cy="480" r="260" fill="#FFF7ED"/>
+    <!-- Compass cardinal points -->
+    <text x="512" y="254" font-family="Arial Black" font-size="80" font-weight="900" fill="#DC2626" text-anchor="middle">N</text>
+    <text x="512" y="754" font-family="Arial Black" font-size="80" font-weight="900" fill="#374151" text-anchor="middle">S</text>
+    <text x="756" y="504" font-family="Arial Black" font-size="80" font-weight="900" fill="#374151" text-anchor="middle">E</text>
+    <text x="268" y="504" font-family="Arial Black" font-size="80" font-weight="900" fill="#374151" text-anchor="middle">W</text>
+    <!-- Compass needle (red = North, gray = South) -->
+    <polygon points="512,300 492,500 512,520 532,500" fill="#EF4444"/>
+    <polygon points="512,660 492,500 512,520 532,500" fill="#9CA3AF"/>
+    <!-- Compass center dot -->
+    <circle cx="512" cy="480" r="32" fill="#1E293B"/>
+    <circle cx="512" cy="480" r="16" fill="#FBBF24"/>
+    <!-- Layer 3: Location pin -->
+    <!-- Pin shadow -->
+    <ellipse cx="512" cy="960" rx="80" ry="24" fill="#7C2D12" opacity="0.4"/>
+    <!-- Pin body -->
+    <path d="M512 960 Q380 780 380 680 A132 132 0 1 1 644 680 Q644 780 512 960 Z" fill="#EF4444"/>
+    <!-- Pin inner circle -->
+    <circle cx="512" cy="680" r="72" fill="white"/>
+    <circle cx="512" cy="680" r="48" fill="#EF4444"/>
+    <circle cx="512" cy="680" r="24" fill="white"/>
+  </g>
+</svg>

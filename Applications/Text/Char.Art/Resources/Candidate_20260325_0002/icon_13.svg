@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <clipPath id="roundedClip13">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+
+  <!-- Background: split diagonal, clip to rounded rect -->
+  <g clip-path="url(#roundedClip13)">
+    <!-- Left white half -->
+    <rect x="0" y="0" width="1024" height="1024" fill="#F5F5F5"/>
+    <!-- Right dark half (triangle) -->
+    <polygon points="520,0 1024,0 1024,1024 480,1024" fill="#1A1A2E"/>
+  </g>
+
+  <!-- Background rounded border -->
+  <rect width="1024" height="1024" rx="190" fill="none" stroke="none"/>
+
+  <!-- Left side: pixelated mountain (image side) -->
+  <!-- Ground -->
+  <rect x="210" y="640" width="280" height="120" rx="4" fill="#90CAF9"/>
+  <!-- Mountain pixels -->
+  <rect x="270" y="560" width="60" height="80" rx="4" fill="#78909C"/>
+  <rect x="330" y="500" width="60" height="140" rx="4" fill="#90A4AE"/>
+  <rect x="390" y="560" width="60" height="80" rx="4" fill="#78909C"/>
+  <rect x="240" y="600" width="60" height="40" rx="4" fill="#607D8B"/>
+  <rect x="420" y="600" width="60" height="40" rx="4" fill="#607D8B"/>
+  <!-- Sky pixels -->
+  <rect x="210" y="440" width="40" height="40" rx="4" fill="#81D4FA"/>
+  <rect x="260" y="420" width="30" height="30" rx="4" fill="#81D4FA"/>
+  <rect x="420" y="440" width="40" height="40" rx="4" fill="#81D4FA"/>
+  <!-- Snow cap -->
+  <rect x="340" y="480" width="40" height="30" rx="4" fill="white"/>
+  <!-- Sun -->
+  <circle cx="430" cy="470" r="28" fill="#FFD600"/>
+
+  <!-- "BEFORE" label -->
+  <text x="350" y="800" font-family="'Courier New', monospace" font-size="68" font-weight="900"
+        text-anchor="middle" fill="#1A1A2E" opacity="0.75">IMAGE</text>
+
+  <!-- Center diagonal divider (yellow bold line) -->
+  <line x1="480" y1="0" x2="520" y2="1024" stroke="#FFD600" stroke-width="28"/>
+  <!-- Arrow on the divider center -->
+  <text x="500" y="545" font-family="Arial" font-size="95" font-weight="900"
+        text-anchor="middle" fill="#FFD600">→</text>
+
+  <!-- Right side: ASCII mountain (text side) -->
+  <text x="560" y="455" font-family="'Courier New', monospace" font-size="52" font-weight="900"
+        fill="#00FF88">  @  </text>
+  <text x="560" y="515" font-family="'Courier New', monospace" font-size="52" font-weight="900"
+        fill="#00FF88"> @#@ </text>
+  <text x="560" y="575" font-family="'Courier New', monospace" font-size="52" font-weight="900"
+        fill="#00E5B0">@#$#@</text>
+  <text x="560" y="635" font-family="'Courier New', monospace" font-size="52" font-weight="900"
+        fill="rgba(0,255,136,0.7)">##$@$##</text>
+  <text x="560" y="695" font-family="'Courier New', monospace" font-size="52" font-weight="900"
+        fill="rgba(0,255,136,0.5)">.........</text>
+
+  <!-- "AFTER" label -->
+  <text x="790" y="800" font-family="'Courier New', monospace" font-size="68" font-weight="900"
+        text-anchor="middle" fill="rgba(0,255,136,0.85)">ASCII</text>
+</svg>

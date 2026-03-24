@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Char.Art — Icon Candidates</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #1A1A2E;
+      color: #E0E0E0;
+      font-family: 'Segoe UI', 'Courier New', monospace;
+      min-height: 100vh;
+      padding: 48px 32px 64px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 52px;
+    }
+
+    header h1 {
+      font-size: 2.6rem;
+      font-weight: 900;
+      letter-spacing: 0.04em;
+      color: #E0E0E0;
+    }
+
+    header h1 span {
+      color: #00BFA5;
+    }
+
+    header p {
+      margin-top: 10px;
+      font-size: 1.05rem;
+      color: #888888;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 36px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: #16213E;
+      border: 1px solid #333333;
+      border-radius: 16px;
+      padding: 28px 22px 22px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.55);
+    }
+
+    .icon-wrap {
+      width: 256px;
+      height: 256px;
+      transition: width 0.22s ease, height 0.22s ease;
+      cursor: pointer;
+    }
+
+    .card:hover .icon-wrap {
+      width: 320px;
+      height: 320px;
+    }
+
+    .icon-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    .card-info {
+      width: 100%;
+      text-align: center;
+    }
+
+    .filename {
+      font-size: 0.88rem;
+      font-family: 'Courier New', monospace;
+      color: #888888;
+      margin-bottom: 6px;
+    }
+
+    .concept {
+      font-size: 1.0rem;
+      font-weight: 700;
+      color: #E0E0E0;
+      margin-bottom: 12px;
+      line-height: 1.4;
+    }
+
+    .palette {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .swatch {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.18);
+      display: inline-block;
+      title: attr(data-color);
+      cursor: default;
+      transition: transform 0.15s;
+    }
+
+    .swatch:hover {
+      transform: scale(1.25);
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 60px;
+      color: #444;
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Char<span>.</span>Art <span style="color:#888;font-weight:400;font-size:1.8rem;">— Icon Candidates</span></h1>
+  <p>이미지 → ASCII/텍스트 아트 변환 앱 · 후보 세트 Candidate_20260325_0002</p>
+  <p style="color:#555;margin-top:6px;font-size:0.9rem;">Hover: 256px → 320px 확대</p>
+</header>
+
+<div class="grid">
+
+  <!-- icon_01 -->
+  <div class="card">
+    <div class="icon-wrap">
+      <img src="icon_01.svg" alt="icon_01"/>
+    </div>
+    <div class="card-info">
+      <div class="filename">icon_01.svg</div>
+      <div class="concept">Literal · 중앙 @ 심볼<br>주변 ASCII 문자 장식</div>
+      <div class="palette">
+        <span class="swatch" style="background:#00BFA5" title="#00BFA5"></span>
+        <span class="swatch" style="background:#FFFFFF" title="#FFFFFF"></span>
+        <span class="swatch" style="background:#00897B" title="#00897B"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- icon_02 -->
+  <div class="card">
+    <div class="icon-wrap">
+      <img src="icon_02.svg" alt="icon_02"/>
+    </div>
+    <div class="card-info">
+      <div class="filename">icon_02.svg</div>
+      <div class="concept">Literal · 별 실루엣<br>코랄→노랑 그라디언트</div>
+      <div class="palette">
+        <span class="swatch" style="background:#FF6B6B" title="#FF6B6B"></span>
+        <span class="swatch" style="background:#FFE66D" title="#FFE66D"></span>
+        <span class="swatch" style="background:#C0392B" title="#C0392B"></span>
+        <span class="swatch" style="background:#FFFFFF" title="#FFFFFF"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- icon_03 -->
+  <div class="card">
+    <div class="icon-wrap">
+      <img src="icon_03.svg" alt="icon_03"/>
+    </div>
+    <div class="card-info">
+      <div class="filename">icon_03.svg</div>
+      <div class="concept">Literal · 4×4 밀도 격자<br>문자 밀도로 명암 표현 (앱 원리)</div>
+      <div class="palette">
+        <span class="swatch" style="background:#2D1B69" title="#2D1B69"></span>
+        <span class="swatch" style="background:#FFFFFF" title="#FFFFFF"></span>
+        <span class="swatch" style="background:#4A2C9E" title="#4A2C9E"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- icon_04 -->
+  <div class="card">
+    <div class="icon-wrap">
+      <img src="icon_04.svg" alt="icon_04"/>
+    </div>
+    <div class="card-info">
+      <div class="filename">icon_04.svg</div>
+      <div class="concept">Literal · "A"를 #@$* 문자로 채움<br>문자로 문자를 그리는 재귀</div>
+      <div class="palette">
+        <span class="swatch" style="background:#1565C0" title="#1565C0"></span>
+        <span class="swatch" style="background:#FFFFFF" title="#FFFFFF"></span>
+        <span class="swatch" style="background:#0D47A1" title="#0D47A1"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- icon_05 -->
+  <div class="card">
+    <div class="icon-wrap">
+      <img src="icon_05.svg" alt="icon_05"/>
+    </div>
+    <div class="card-info">
+      <div class="filename">icon_05.svg</div>
+      <div class="concept">Literal · 이미지→텍스트 변환 흐름<br>프레임 + 화살표 + ASCII 블록</div>
+      <div class="palette">
+        <span class="swatch" style="background:#FF6F00" title="#FF6F00"></span>
+        <span class="swatch" style="background:#FFFFFF" title="#FFFFFF"></span>
+        <span class="swatch" style="background:#FFE57F" title="#FFE57F"></span>
+        <span class="swatch" style="background:#BF360C" title="#BF360C"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- icon_06 -->
+  <div class="card">
+    <div class="icon-wrap">
+      <img src="icon_06.svg" alt="icon_06"/>
+    </div>
+    <div class="card-info">
+      <div class="filename">icon_06.svg</div>
+      <div class="concept">Metaphor · Matrix Rain 스타일<br>형광 초록 문자 스트림</div>
+      <div class="palette">
+        <span class="swatch" style="background:#0D1421" title="#0D1421"></span>
+        <span class="swatch" style="background:#00FF88" title="#00FF88"></span>
+        <span class="swatch" style="background:#003D1F" title="#003D1F"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- icon_07 -->
+  <div class="card">
+    <div class="icon-wrap">
+      <img src="icon_07.svg" alt="icon_07"/>
+    </div>
+    <div class="card-info">
+      <div class="filename">icon_07.svg</div>
+      <div class="concept">Metaphor · 눈(Eye) 아이콘<br>동공 속 @#$% 문자 · 퍼플 그라디언트</div>
+      <div class="palette">
+        <span class="swatch" style="background:#7C4DFF" title="#7C4DFF"></span>
+        <span class="swatch" style="background:#B388FF" title="#B388FF"></span>
+        <span class="swatch" style="background:#311B92" title="#311B92"></span>
+        <span class="swatch" style="background:#FFD700" title="#FFD700"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- icon_08 -->
+  <div class="card">
+    <div class="icon-wrap">
+      <img src="icon_08.svg" alt="icon_08"/>
+    </div>
+    <div class="card-info">
+      <div class="filename">icon_08.svg</div>
+      <div class="concept">Metaphor · 픽셀↔문자 반반 분할<br>핫핑크 배경 · 좌우 Before/After</div>
+      <div class="palette">
+        <span class="swatch" style="background:#E91E63" title="#E91E63"></span>
+        <span class="swatch" style="background:#FFFFFF" title="#FFFFFF"></span>
+        <span class="swatch" style="background:#FF5252" title="#FF5252"></span>
+        <span class="swatch" style="background:#FFD600" title="#FFD600"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- icon_09 -->
+  <div class="card">
+    <div class="icon-wrap">
+      <img src="icon_09.svg" alt="icon_09"/>
+    </div>
+    <div class="card-info">
+      <div class="filename">icon_09.svg</div>
+      <div class="concept">Metaphor · 붓 끝에서 흘러나오는 문자<br>크림 배경 · 텍스트 아트의 도구성</div>
+      <div class="palette">
+        <span class="swatch" style="background:#FFF8E1" title="#FFF8E1"></span>
+        <span class="swatch" style="background:#3E2723" title="#3E2723"></span>
+        <span class="swatch" style="background:#6D4C41" title="#6D4C41"></span>
+        <span class="swatch" style="background:#8D6E63" title="#8D6E63"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- icon_10 -->
+  <div class="card">
+    <div class="icon-wrap">
+      <img src="icon_10.svg" alt="icon_10"/>
+    </div>
+    <div class="card-info">
+      <div class="filename">icon_10.svg</div>
+      <div class="concept">Metaphor · 문자로 그린 산 풍경<br>ASCII 텍스트 아트 완성작 느낌</div>
+      <div class="palette">
+        <span class="swatch" style="background:#1A1A2E" title="#1A1A2E"></span>
+        <span class="swatch" style="background:#00FF88" title="#00FF88"></span>
+        <span class="swatch" style="background:#FFFFFF" title="#FFFFFF"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- icon_11 -->
+  <div class="card">
+    <div class="icon-wrap">
+      <img src="icon_11.svg" alt="icon_11"/>
+    </div>
+    <div class="card-info">
+      <div name="filename" class="filename">icon_11.svg</div>
+      <div class="concept">Metaphor · 돋보기 렌즈로 픽셀→문자 확대<br>하늘색 그라디언트</div>
+      <div class="palette">
+        <span class="swatch" style="background:#0288D1" title="#0288D1"></span>
+        <span class="swatch" style="background:#40C4FF" title="#40C4FF"></span>
+        <span class="swatch" style="background:#FFFFFF" title="#FFFFFF"></span>
+        <span class="swatch" style="background:#01579B" title="#01579B"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- icon_12 -->
+  <div class="card">
+    <div class="icon-wrap">
+      <img src="icon_12.svg" alt="icon_12"/>
+    </div>
+    <div class="card-info">
+      <div class="filename">icon_12.svg</div>
+      <div class="concept">Hybrid · 카메라 렌즈 동심원<br>렌즈 안 @ 문자 배치 · 청록 포인트</div>
+      <div class="palette">
+        <span class="swatch" style="background:#12121F" title="#12121F"></span>
+        <span class="swatch" style="background:#00E5FF" title="#00E5FF"></span>
+        <span class="swatch" style="background:#FFFFFF" title="#FFFFFF"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- icon_13 -->
+  <div class="card">
+    <div class="icon-wrap">
+      <img src="icon_13.svg" alt="icon_13"/>
+    </div>
+    <div class="card-info">
+      <div class="filename">icon_13.svg</div>
+      <div class="concept">Hybrid · 대각선 Before/After 분할<br>왼=픽셀 산 · 오른=ASCII 산</div>
+      <div class="palette">
+        <span class="swatch" style="background:#F5F5F5" title="#F5F5F5"></span>
+        <span class="swatch" style="background:#1A1A2E" title="#1A1A2E"></span>
+        <span class="swatch" style="background:#FFD600" title="#FFD600"></span>
+        <span class="swatch" style="background:#00FF88" title="#00FF88"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- icon_14 -->
+  <div class="card">
+    <div class="icon-wrap">
+      <img src="icon_14.svg" alt="icon_14"/>
+    </div>
+    <div class="card-info">
+      <div class="filename">icon_14.svg</div>
+      <div class="concept">Hybrid · 하트를 #@$% 문자로 가득 채움<br>딥 레드 · 텍스트 아트의 감성</div>
+      <div class="palette">
+        <span class="swatch" style="background:#B71C1C" title="#B71C1C"></span>
+        <span class="swatch" style="background:#C62828" title="#C62828"></span>
+        <span class="swatch" style="background:#FFFFFF" title="#FFFFFF"></span>
+        <span class="swatch" style="background:#F48FB1" title="#F48FB1"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- icon_15 -->
+  <div class="card">
+    <div class="icon-wrap">
+      <img src="icon_15.svg" alt="icon_15"/>
+    </div>
+    <div class="card-info">
+      <div class="filename">icon_15.svg</div>
+      <div class="concept">Hybrid · 금빛 문자 폭포가 얼굴을 그림<br>다크 네이비 · 텍스트 아트 최종 결과</div>
+      <div class="palette">
+        <span class="swatch" style="background:#0A0E2A" title="#0A0E2A"></span>
+        <span class="swatch" style="background:#FFD700" title="#FFD700"></span>
+        <span class="swatch" style="background:#1A1E3C" title="#1A1E3C"></span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p>Char.Art · Candidate_20260325_0002 · 15개 아이콘 후보 · 2026-03-25</p>
+</footer>
+
+</body>
+</html>

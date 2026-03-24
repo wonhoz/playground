@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <clipPath id="faceClip15">
+      <!-- Face silhouette clip path -->
+      <path d="M512 230
+               C390 230 300 320 300 450
+               C300 540 340 610 400 650
+               C420 700 420 740 400 780
+               C430 770 460 760 480 780
+               C490 790 500 800 512 800
+               C524 800 534 790 544 780
+               C564 760 594 770 624 780
+               C604 740 604 700 624 650
+               C684 610 724 540 724 450
+               C724 320 634 230 512 230 Z"/>
+    </clipPath>
+    <clipPath id="faceMaskOut15">
+      <!-- Inverse: everything OUTSIDE face -->
+    </clipPath>
+  </defs>
+
+  <!-- Background: Dark navy -->
+  <rect width="1024" height="1024" rx="190" fill="#0A0E2A"/>
+
+  <!-- Background subtle grid pattern -->
+  <line x1="210" y1="210" x2="210" y2="814" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+  <line x1="310" y1="210" x2="310" y2="814" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+  <line x1="410" y1="210" x2="410" y2="814" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+  <line x1="510" y1="210" x2="510" y2="814" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+  <line x1="610" y1="210" x2="610" y2="814" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+  <line x1="710" y1="210" x2="710" y2="814" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+  <line x1="810" y1="210" x2="810" y2="814" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+  <line x1="210" y1="310" x2="814" y2="310" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+  <line x1="210" y1="410" x2="814" y2="410" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+  <line x1="210" y1="510" x2="814" y2="510" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+  <line x1="210" y1="610" x2="814" y2="610" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+  <line x1="210" y1="710" x2="814" y2="710" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+
+  <!-- Characters OUTSIDE the face (dim) -->
+  <text x="230" y="295" font-family="'Courier New', monospace" font-size="52" fill="rgba(255,215,0,0.15)" font-weight="700">#@$%#@$%</text>
+  <text x="230" y="360" font-family="'Courier New', monospace" font-size="52" fill="rgba(255,215,0,0.12)" font-weight="700">$%@#$%@#</text>
+  <text x="230" y="425" font-family="'Courier New', monospace" font-size="52" fill="rgba(255,215,0,0.10)" font-weight="700">@#$%@#$%</text>
+  <text x="230" y="490" font-family="'Courier New', monospace" font-size="52" fill="rgba(255,215,0,0.12)" font-weight="700">%#@$%#@$</text>
+  <text x="230" y="555" font-family="'Courier New', monospace" font-size="52" fill="rgba(255,215,0,0.10)" font-weight="700">@$#%@$#%</text>
+  <text x="230" y="620" font-family="'Courier New', monospace" font-size="52" fill="rgba(255,215,0,0.12)" font-weight="700">$@#%$@#%</text>
+  <text x="230" y="685" font-family="'Courier New', monospace" font-size="52" fill="rgba(255,215,0,0.10)" font-weight="700">#%$@#%$@</text>
+  <text x="230" y="750" font-family="'Courier New', monospace" font-size="52" fill="rgba(255,215,0,0.12)" font-weight="700">@#$%@#$%</text>
+
+  <!-- Characters INSIDE face silhouette (bright gold) — clipped to face -->
+  <g clip-path="url(#faceClip15)">
+    <text x="308" y="295" font-family="'Courier New', monospace" font-size="52" fill="#FFD700" font-weight="900">@$#</text>
+    <text x="295" y="360" font-family="'Courier New', monospace" font-size="52" fill="#FFD700" font-weight="900">%@#$</text>
+    <text x="295" y="425" font-family="'Courier New', monospace" font-size="52" fill="#FFD700" font-weight="900">#$@%</text>
+    <text x="298" y="490" font-family="'Courier New', monospace" font-size="52" fill="#FFD700" font-weight="900">$%@#</text>
+    <text x="295" y="555" font-family="'Courier New', monospace" font-size="52" fill="#FFD700" font-weight="900">@#$%</text>
+    <text x="295" y="620" font-family="'Courier New', monospace" font-size="52" fill="#FFD700" font-weight="900">$@#%</text>
+    <text x="298" y="685" font-family="'Courier New', monospace" font-size="52" fill="#FFD700" font-weight="900">#%$@</text>
+    <text x="308" y="750" font-family="'Courier New', monospace" font-size="52" fill="#FFD700" font-weight="900">@#$</text>
+  </g>
+
+  <!-- Face outline only (stroke) -->
+  <path d="M512 230
+           C390 230 300 320 300 450
+           C300 540 340 610 400 650
+           C420 700 420 740 400 780
+           C430 770 460 760 480 780
+           C490 790 500 800 512 800
+           C524 800 534 790 544 780
+           C564 760 594 770 624 780
+           C604 740 604 700 624 650
+           C684 610 724 540 724 450
+           C724 320 634 230 512 230 Z"
+        fill="none" stroke="rgba(255,215,0,0.60)" stroke-width="8"/>
+
+  <!-- Bottom label -->
+  <text x="512" y="890" font-family="'Courier New', monospace" font-size="75" font-weight="900"
+        text-anchor="middle" fill="rgba(255,215,0,0.80)">Char.Art</text>
+</svg>

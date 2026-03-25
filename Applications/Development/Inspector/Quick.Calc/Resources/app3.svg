@@ -1,91 +1,83 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
   <defs>
-    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#0d0d1a"/>
-      <stop offset="100%" stop-color="#1a0533"/>
+    <clipPath id="qc-bg-clip-01">
+      <rect width="1024" height="1024" rx="180"/>
+    </clipPath>
+    <linearGradient id="qc-bg-grad-01" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF6B6B"/>
+      <stop offset="100%" stop-color="#CC3030"/>
     </linearGradient>
-    <linearGradient id="calcBody" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#1e1e3a"/>
-      <stop offset="100%" stop-color="#12122a"/>
+    <linearGradient id="calc-body-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#F0F0F0"/>
     </linearGradient>
-    <filter id="neon">
-      <feGaussianBlur stdDeviation="4" result="blur"/>
-      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
-    <filter id="strongneon">
-      <feGaussianBlur stdDeviation="8" result="blur"/>
-      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
   </defs>
-  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
-  <!-- Calculator body -->
-  <rect x="105" y="80" width="302" height="370" rx="24" fill="url(#calcBody)" stroke="#8E54E9" stroke-width="2.5" filter="url(#neon)"/>
-  <rect x="105" y="80" width="302" height="370" rx="24" fill="none" stroke="#8E54E9" stroke-width="2.5"/>
-
-  <!-- Display screen -->
-  <rect x="128" y="105" width="256" height="85" rx="12" fill="#0a0a1a" stroke="#56CCF2" stroke-width="1.5"/>
-  <rect x="128" y="105" width="256" height="85" rx="12" fill="none" stroke="#56CCF2" stroke-width="1.5" filter="url(#neon)"/>
-  <!-- Display number glow -->
-  <rect x="230" y="120" width="8" height="55" rx="3" fill="#00ff88" filter="url(#neon)"/>
-  <rect x="244" y="120" width="8" height="55" rx="3" fill="#00ff88" filter="url(#neon)"/>
-  <rect x="258" y="120" width="8" height="55" rx="3" fill="#00ff88" filter="url(#neon)"/>
-  <rect x="280" y="134" width="8" height="41" rx="3" fill="#00ff88" filter="url(#neon)"/>
-  <rect x="294" y="120" width="8" height="55" rx="3" fill="#00ff88" filter="url(#neon)"/>
-  <!-- Cursor blink -->
-  <rect x="312" y="120" width="5" height="55" rx="2" fill="#00ff88" opacity="0.6" filter="url(#neon)"/>
-
-  <!-- Button rows -->
-  <!-- Row 1 -->
-  <rect x="128" y="212" width="56" height="44" rx="10" fill="#2a1050" stroke="#ee0979" stroke-width="1.5"/>
-  <rect x="128" y="212" width="56" height="44" rx="10" fill="none" stroke="#ee0979" stroke-width="1.5" filter="url(#neon)"/>
-  <line x1="150" y1="228" x2="164" y2="242" stroke="#ee0979" stroke-width="2.5" filter="url(#neon)"/>
-  <line x1="164" y1="228" x2="150" y2="242" stroke="#ee0979" stroke-width="2.5" filter="url(#neon)"/>
-
-  <rect x="196" y="212" width="56" height="44" rx="10" fill="#2a1050" stroke="#f7971e" stroke-width="1.5"/>
-  <rect x="196" y="212" width="56" height="44" rx="10" fill="none" stroke="#f7971e" stroke-width="1.5" filter="url(#neon)"/>
-  <line x1="216" y1="230" x2="236" y2="230" stroke="#f7971e" stroke-width="2.5" filter="url(#neon)"/>
-  <line x1="226" y1="222" x2="226" y2="246" stroke="#f7971e" stroke-width="2.5" filter="url(#neon)"/>
-
-  <rect x="264" y="212" width="56" height="44" rx="10" fill="#2a1050" stroke="#ffd200" stroke-width="1.5"/>
-  <rect x="264" y="212" width="56" height="44" rx="10" fill="none" stroke="#ffd200" stroke-width="1.5" filter="url(#neon)"/>
-  <line x1="284" y1="230" x2="304" y2="230" stroke="#ffd200" stroke-width="2.5" filter="url(#neon)"/>
-
-  <rect x="332" y="212" width="56" height="44" rx="10" fill="#1a0a30" stroke="#56CCF2" stroke-width="1.5"/>
-  <rect x="332" y="212" width="56" height="44" rx="10" fill="none" stroke="#56CCF2" stroke-width="1.5" filter="url(#neon)"/>
-  <line x1="352" y1="230" x2="372" y2="230" stroke="#56CCF2" stroke-width="2.5" filter="url(#neon)"/>
-  <line x1="362" y1="222" x2="362" y2="246" stroke="#56CCF2" stroke-width="2.5" filter="url(#neon)"/>
-
-  <!-- Number rows -->
-  <!-- Row 2 -->
-  <rect x="128" y="268" width="56" height="44" rx="10" fill="#1a1a35" stroke="#555" stroke-width="1"/>
-  <circle cx="156" cy="290" r="8" fill="#8E54E9" opacity="0.7" filter="url(#neon)"/>
-  <rect x="196" y="268" width="56" height="44" rx="10" fill="#1a1a35" stroke="#555" stroke-width="1"/>
-  <circle cx="224" cy="290" r="8" fill="#8E54E9" opacity="0.7" filter="url(#neon)"/>
-  <rect x="264" y="268" width="56" height="44" rx="10" fill="#1a1a35" stroke="#555" stroke-width="1"/>
-  <circle cx="292" cy="290" r="8" fill="#8E54E9" opacity="0.7" filter="url(#neon)"/>
-  <rect x="332" y="268" width="56" height="88" rx="10" fill="#1a0a30" stroke="#ee0979" stroke-width="1.5"/>
-  <rect x="332" y="268" width="56" height="88" rx="10" fill="none" stroke="#ee0979" stroke-width="1.5" filter="url(#neon)"/>
-  <!-- Divide symbol -->
-  <circle cx="360" cy="303" r="4" fill="#ee0979" filter="url(#neon)"/>
-  <line x1="348" y1="312" x2="372" y2="312" stroke="#ee0979" stroke-width="2.5" filter="url(#neon)"/>
-  <circle cx="360" cy="321" r="4" fill="#ee0979" filter="url(#neon)"/>
-
-  <!-- Row 3 -->
-  <rect x="128" y="324" width="56" height="44" rx="10" fill="#1a1a35" stroke="#555" stroke-width="1"/>
-  <circle cx="156" cy="346" r="8" fill="#56CCF2" opacity="0.7" filter="url(#neon)"/>
-  <rect x="196" y="324" width="56" height="44" rx="10" fill="#1a1a35" stroke="#555" stroke-width="1"/>
-  <circle cx="224" cy="346" r="8" fill="#56CCF2" opacity="0.7" filter="url(#neon)"/>
-  <rect x="264" y="324" width="56" height="44" rx="10" fill="#1a1a35" stroke="#555" stroke-width="1"/>
-  <circle cx="292" cy="346" r="8" fill="#56CCF2" opacity="0.7" filter="url(#neon)"/>
-
-  <!-- Row 4 - equals + zero -->
-  <rect x="128" y="380" width="124" height="44" rx="10" fill="#1a1a35" stroke="#555" stroke-width="1"/>
-  <circle cx="190" cy="402" r="8" fill="#56CCF2" opacity="0.5" filter="url(#neon)"/>
-  <rect x="264" y="380" width="56" height="44" rx="10" fill="#1a1a35" stroke="#555" stroke-width="1"/>
-  <circle cx="292" cy="402" r="8" fill="#56CCF2" opacity="0.7" filter="url(#neon)"/>
-  <!-- Equals button - highlight -->
-  <rect x="332" y="380" width="56" height="44" rx="10" fill="#2a0050" stroke="#00ff88" stroke-width="2"/>
-  <rect x="332" y="380" width="56" height="44" rx="10" fill="none" stroke="#00ff88" stroke-width="2" filter="url(#strongneon)"/>
-  <line x1="348" y1="396" x2="372" y2="396" stroke="#00ff88" stroke-width="2.5" filter="url(#strongneon)"/>
-  <line x1="348" y1="408" x2="372" y2="408" stroke="#00ff88" stroke-width="2.5" filter="url(#strongneon)"/>
+  <!-- 배경 (비비드 코랄) -->
+  <rect width="1024" height="1024" rx="180" fill="url(#qc-bg-grad-01)"/>
+  <g clip-path="url(#qc-bg-clip-01)">
+    <!-- 배경 원형 그라디언트 -->
+    <circle cx="512" cy="512" r="380" fill="#FF8888" opacity="0.25"/>
+    <!-- 계산기 본체 (화이트) -->
+    <rect x="240" y="200" width="544" height="620" rx="36" fill="url(#calc-body-grad)" stroke="#EEEEEE" stroke-width="6"/>
+    <!-- 계산기 디스플레이 -->
+    <rect x="276" y="240" width="472" height="120" rx="16" fill="#1A2A1A" stroke="#333333" stroke-width="4"/>
+    <!-- 디스플레이 숫자 -->
+    <rect x="480" y="268" width="240" height="60" rx="8" fill="#22DD44" opacity="0.9"/>
+    <!-- 디스플레이 작은 표시 -->
+    <rect x="290" y="280" width="140" height="24" rx="5" fill="#2A3A2A" opacity="0.6"/>
+    <!-- 계산기 버튼들 - 4x4 그리드 -->
+    <!-- 행 1: AC, +/-, %, ÷ -->
+    <rect x="276" y="394" width="100" height="76" rx="14" fill="#D0D0D0"/>
+    <rect x="394" y="394" width="100" height="76" rx="14" fill="#D0D0D0"/>
+    <rect x="512" y="394" width="100" height="76" rx="14" fill="#D0D0D0"/>
+    <rect x="630" y="394" width="86" height="76" rx="14" fill="#FF6B6B"/>
+    <!-- 행 2: 7, 8, 9, × -->
+    <rect x="276" y="486" width="100" height="76" rx="14" fill="#F5F5F5"/>
+    <rect x="394" y="486" width="100" height="76" rx="14" fill="#F5F5F5"/>
+    <rect x="512" y="486" width="100" height="76" rx="14" fill="#F5F5F5"/>
+    <rect x="630" y="486" width="86" height="76" rx="14" fill="#FF6B6B"/>
+    <!-- 행 3: 4, 5, 6, - -->
+    <rect x="276" y="578" width="100" height="76" rx="14" fill="#F5F5F5"/>
+    <rect x="394" y="578" width="100" height="76" rx="14" fill="#F5F5F5"/>
+    <rect x="512" y="578" width="100" height="76" rx="14" fill="#F5F5F5"/>
+    <rect x="630" y="578" width="86" height="76" rx="14" fill="#FF6B6B"/>
+    <!-- 행 4: 1, 2, 3, + -->
+    <rect x="276" y="670" width="100" height="76" rx="14" fill="#F5F5F5"/>
+    <rect x="394" y="670" width="100" height="76" rx="14" fill="#F5F5F5"/>
+    <rect x="512" y="670" width="100" height="76" rx="14" fill="#F5F5F5"/>
+    <rect x="630" y="670" width="86" height="76" rx="14" fill="#FF6B6B"/>
+    <!-- 행 5: 0 (와이드), ., = -->
+    <rect x="276" y="762" width="218" height="76" rx="14" fill="#F5F5F5"/>
+    <rect x="512" y="762" width="100" height="76" rx="14" fill="#F5F5F5"/>
+    <rect x="630" y="762" width="86" height="76" rx="14" fill="#CC2020"/>
+    <!-- 버튼 심볼들 (간략화 - 작은 사각형) -->
+    <!-- AC -->
+    <rect x="300" y="420" width="52" height="24" rx="5" fill="#666666" opacity="0.7"/>
+    <!-- 숫자들 점으로 표현 -->
+    <circle cx="326" cy="524" r="12" fill="#333333" opacity="0.5"/>
+    <circle cx="444" cy="524" r="12" fill="#333333" opacity="0.5"/>
+    <circle cx="562" cy="524" r="12" fill="#333333" opacity="0.5"/>
+    <circle cx="326" cy="616" r="12" fill="#333333" opacity="0.5"/>
+    <circle cx="444" cy="616" r="12" fill="#333333" opacity="0.5"/>
+    <circle cx="562" cy="616" r="12" fill="#333333" opacity="0.5"/>
+    <circle cx="326" cy="708" r="12" fill="#333333" opacity="0.5"/>
+    <circle cx="444" cy="708" r="12" fill="#333333" opacity="0.5"/>
+    <circle cx="562" cy="708" r="12" fill="#333333" opacity="0.5"/>
+    <circle cx="385" cy="800" r="12" fill="#333333" opacity="0.5"/>
+    <circle cx="562" cy="800" r="12" fill="#333333" opacity="0.5"/>
+    <!-- = 심볼 -->
+    <rect x="644" y="785" width="58" height="8" rx="4" fill="#FFFFFF"/>
+    <rect x="644" y="801" width="58" height="8" rx="4" fill="#FFFFFF"/>
+    <!-- 연산자 심볼 -->
+    <rect x="644" y="420" width="58" height="8" rx="4" fill="#FFFFFF"/>
+    <rect x="644" y="430" width="8" height="28" rx="4" fill="#FFFFFF"/>
+    <!-- × 심볼 -->
+    <rect x="644" y="510" width="58" height="8" rx="4" fill="#FFFFFF" transform="rotate(45,673,514)"/>
+    <rect x="644" y="510" width="58" height="8" rx="4" fill="#FFFFFF" transform="rotate(-45,673,514)"/>
+    <!-- - 심볼 -->
+    <rect x="644" y="612" width="58" height="8" rx="4" fill="#FFFFFF"/>
+    <!-- + 심볼 -->
+    <rect x="644" y="700" width="58" height="8" rx="4" fill="#FFFFFF"/>
+    <rect x="665" y="679" width="16" height="50" rx="4" fill="#FFFFFF"/>
+  </g>
 </svg>

@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_03: metaphor | 번개 안에 "0xFF" 텍스트 (Win+K 즉시 호출) | 중앙 심볼 | 일렉트릭 퍼플 배경 + 노랑 번개 -->
+  <defs>
+    <linearGradient id="bgElec" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#5E0FA0"/>
+      <stop offset="100%" stop-color="#380070"/>
+    </linearGradient>
+    <linearGradient id="boltGold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFE033"/>
+      <stop offset="100%" stop-color="#FF9900"/>
+    </linearGradient>
+    <filter id="elecGlow">
+      <feGaussianBlur stdDeviation="16" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <clipPath id="boltClip">
+      <!-- 번개 모양 클립 -->
+      <path d="M 570 100 L 310 560 L 490 560 L 420 920 L 720 430 L 530 430 Z"/>
+    </clipPath>
+    <clipPath id="iconClip">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+
+  <!-- Layer 1: 퍼플 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bgElec)"/>
+
+  <!-- 배경 전기 방전 패턴 -->
+  <g clip-path="url(#iconClip)" opacity="0.15">
+    <line x1="200" y1="200" x2="400" y2="350" stroke="#FFE033" stroke-width="3"/>
+    <line x1="400" y1="350" x2="350" y2="500" stroke="#FFE033" stroke-width="2"/>
+    <line x1="800" y1="150" x2="650" y2="300" stroke="#FFE033" stroke-width="3"/>
+    <line x1="650" y1="300" x2="700" y2="450" stroke="#FFE033" stroke-width="2"/>
+    <line x1="150" y1="700" x2="300" y2="600" stroke="#FFE033" stroke-width="2"/>
+    <line x1="850" y1="750" x2="700" y2="650" stroke="#FFE033" stroke-width="2"/>
+  </g>
+
+  <!-- Layer 2: 번개 심볼 -->
+  <path d="M 570 100 L 310 560 L 490 560 L 420 920 L 720 430 L 530 430 Z"
+        fill="url(#boltGold)" filter="url(#elecGlow)"/>
+  <!-- 번개 내부 테두리 (하이라이트) -->
+  <path d="M 570 100 L 310 560 L 490 560 L 420 920 L 720 430 L 530 430 Z"
+        fill="none" stroke="#FFE033" stroke-width="6" opacity="0.5"/>
+
+  <!-- Layer 3: 번개 안에 텍스트 -->
+  <!-- 번개 위쪽: "Win" -->
+  <text x="520" y="350" text-anchor="middle" dominant-baseline="middle"
+        font-family="Consolas, monospace" font-size="58" font-weight="bold" fill="#380070">Win+K</text>
+
+  <!-- 번개 아래쪽: "0xFF" -->
+  <text x="530" y="680" text-anchor="middle" dominant-baseline="middle"
+        font-family="Consolas, monospace" font-size="80" font-weight="bold" fill="#380070">0xFF</text>
+
+  <!-- 상단 작은 레이블 (배경에) -->
+  <text x="512" y="66" text-anchor="middle" dominant-baseline="middle"
+        font-family="Consolas" font-size="38" fill="#B060FF" opacity="0.6">Quick.Calc</text>
+
+  <!-- 하단 DEC/HEX 변환 레이블 -->
+  <text x="512" y="958" text-anchor="middle" dominant-baseline="middle"
+        font-family="Consolas" font-size="38" fill="#B060FF" opacity="0.55">DEC · HEX · BIN</text>
+</svg>

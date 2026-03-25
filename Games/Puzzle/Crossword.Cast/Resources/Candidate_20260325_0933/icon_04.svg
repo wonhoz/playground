@@ -1,0 +1,37 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#E1BEE7"/>
+      <stop offset="100%" stop-color="#9C27B0"/>
+    </linearGradient>
+    <filter id="deep">
+      <feDropShadow dx="8" dy="10" stdDeviation="10" flood-color="#4A148C55"/>
+    </filter>
+    <filter id="mid">
+      <feDropShadow dx="5" dy="7" stdDeviation="7" flood-color="#4A148C44"/>
+    </filter>
+  </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg)"/>
+  <!-- 그림자 레이어드 효과 (뒤에서 앞 순서) -->
+  <!-- 어두운 셀 -->
+  <rect x="412" y="412" width="196" height="196" fill="#4A148C" rx="10"/>
+  <rect x="612" y="412" width="196" height="196" fill="#4A148C" rx="10"/>
+  <rect x="412" y="612" width="196" height="196" fill="#4A148C" rx="10"/>
+  <rect x="612" y="612" width="196" height="196" fill="#4A148C" rx="10"/>
+  <!-- Layer 2: 흰 셀 (두꺼운 그림자로 레이어드 느낌) -->
+  <!-- 교차점 (PEN/PIG) P=(0,0) -->
+  <rect x="212" y="212" width="196" height="196" fill="#F3E5F5" stroke="#7B1FA2" stroke-width="9" rx="10" filter="url(#deep)"/>
+  <rect x="412" y="212" width="196" height="196" fill="white" stroke="#7B1FA2" stroke-width="9" rx="10" filter="url(#deep)"/>
+  <rect x="612" y="212" width="196" height="196" fill="white" stroke="#7B1FA2" stroke-width="9" rx="10" filter="url(#deep)"/>
+  <rect x="212" y="412" width="196" height="196" fill="white" stroke="#7B1FA2" stroke-width="9" rx="10" filter="url(#deep)"/>
+  <rect x="212" y="612" width="196" height="196" fill="white" stroke="#7B1FA2" stroke-width="9" rx="10" filter="url(#deep)"/>
+  <!-- Layer 3: 글자 (PEN 가로 / PIG 세로) -->
+  <text x="312" y="315" text-anchor="middle" dominant-baseline="central" font-family="Arial Black,sans-serif" font-weight="900" font-size="148" fill="#F06292">P</text>
+  <text x="512" y="315" text-anchor="middle" dominant-baseline="central" font-family="Arial Black,sans-serif" font-weight="900" font-size="148" fill="#4A148C">E</text>
+  <text x="712" y="315" text-anchor="middle" dominant-baseline="central" font-family="Arial Black,sans-serif" font-weight="900" font-size="148" fill="#4A148C">N</text>
+  <text x="312" y="515" text-anchor="middle" dominant-baseline="central" font-family="Arial Black,sans-serif" font-weight="900" font-size="148" fill="#4A148C">I</text>
+  <text x="312" y="715" text-anchor="middle" dominant-baseline="central" font-family="Arial Black,sans-serif" font-weight="900" font-size="148" fill="#4A148C">G</text>
+  <!-- 클루 번호 -->
+  <text x="222" y="228" text-anchor="start" dominant-baseline="hanging" font-family="Arial,sans-serif" font-weight="700" font-size="46" fill="#F06292">1</text>
+</svg>

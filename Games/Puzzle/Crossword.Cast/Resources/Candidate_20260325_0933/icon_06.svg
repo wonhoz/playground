@@ -1,0 +1,48 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#4A148C"/>
+      <stop offset="100%" stop-color="#1A0050"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="40%" r="45%">
+      <stop offset="0%" stop-color="#FFF176" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#FFF176" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <!-- Layer 1: 배경 + 빛 효과 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg)"/>
+  <rect width="1024" height="1024" rx="190" fill="url(#glow)"/>
+  <!-- Layer 2: 전구 + 격자 -->
+  <!-- 전구 빛 헤일로 -->
+  <circle cx="512" cy="400" r="240" fill="#FFF59D" opacity="0.2"/>
+  <!-- 전구 본체 -->
+  <ellipse cx="512" cy="390" rx="180" ry="190" fill="#FFF176" stroke="#F9A825" stroke-width="14"/>
+  <!-- 전구 베이스 -->
+  <rect x="448" y="568" width="128" height="22" fill="#BDBDBD" rx="5"/>
+  <rect x="460" y="590" width="104" height="18" fill="#9E9E9E" rx="5"/>
+  <rect x="472" y="608" width="80" height="14" fill="#BDBDBD" rx="5"/>
+  <!-- 전구 필라멘트 -->
+  <path d="M 492 554 Q 485 515 507 485 Q 525 458 512 432" stroke="#E65100" stroke-width="9" fill="none" stroke-linecap="round"/>
+  <!-- 격자 (MAP 가로 / MAN 세로, 전구 안에 배치) -->
+  <!-- 어두운 셀 -->
+  <rect x="462" y="385" width="93" height="93" fill="#4A148C" rx="7"/>
+  <rect x="559" y="385" width="93" height="93" fill="#4A148C" rx="7"/>
+  <rect x="462" y="482" width="93" height="93" fill="#4A148C" rx="7"/>
+  <rect x="559" y="482" width="93" height="93" fill="#4A148C" rx="7"/>
+  <!-- 흰 셀 -->
+  <rect x="365" y="288" width="93" height="93" fill="#E8F5E9" stroke="#4A148C" stroke-width="5" rx="7"/>
+  <rect x="462" y="288" width="93" height="93" fill="white" stroke="#4A148C" stroke-width="5" rx="7"/>
+  <rect x="559" y="288" width="93" height="93" fill="white" stroke="#4A148C" stroke-width="5" rx="7"/>
+  <rect x="365" y="385" width="93" height="93" fill="white" stroke="#4A148C" stroke-width="5" rx="7"/>
+  <rect x="365" y="482" width="93" height="93" fill="white" stroke="#4A148C" stroke-width="5" rx="7"/>
+  <!-- Layer 3: 글자 -->
+  <text x="411" y="334" text-anchor="middle" dominant-baseline="central" font-family="Arial Black,sans-serif" font-weight="900" font-size="76" fill="#6A1B9A">M</text>
+  <text x="508" y="334" text-anchor="middle" dominant-baseline="central" font-family="Arial Black,sans-serif" font-weight="900" font-size="76" fill="#1565C0">A</text>
+  <text x="605" y="334" text-anchor="middle" dominant-baseline="central" font-family="Arial Black,sans-serif" font-weight="900" font-size="76" fill="#6A1B9A">P</text>
+  <text x="411" y="431" text-anchor="middle" dominant-baseline="central" font-family="Arial Black,sans-serif" font-weight="900" font-size="76" fill="#6A1B9A">A</text>
+  <text x="411" y="528" text-anchor="middle" dominant-baseline="central" font-family="Arial Black,sans-serif" font-weight="900" font-size="76" fill="#6A1B9A">N</text>
+  <!-- 전구 위 빛 광선 -->
+  <line x1="512" y1="155" x2="512" y2="110" stroke="#FFD600" stroke-width="18" stroke-linecap="round"/>
+  <line x1="670" y1="215" x2="705" y2="178" stroke="#FFD600" stroke-width="15" stroke-linecap="round"/>
+  <line x1="354" y1="215" x2="319" y2="178" stroke="#FFD600" stroke-width="15" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,37 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FF5252"/>
+      <stop offset="100%" stop-color="#B71C1C"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg)"/>
+  <!-- 가로 ACROSS 화살표 (격자 위) -->
+  <line x1="212" y1="162" x2="788" y2="162" stroke="white" stroke-width="18" stroke-linecap="round"/>
+  <polygon points="788,142 828,162 788,182" fill="white"/>
+  <text x="496" y="155" text-anchor="middle" dominant-baseline="central" font-family="Arial,sans-serif" font-weight="700" font-size="40" fill="white">ACROSS</text>
+  <!-- 세로 DOWN 화살표 (격자 왼쪽) -->
+  <line x1="140" y1="212" x2="140" y2="788" stroke="white" stroke-width="18" stroke-linecap="round"/>
+  <polygon points="120,788 140,828 160,788" fill="white"/>
+  <text x="140" y="496" text-anchor="middle" dominant-baseline="central" font-family="Arial,sans-serif" font-weight="700" font-size="36" fill="white" transform="rotate(-90 140 496)">DOWN</text>
+  <!-- Layer 2: 격자 (FAN 가로 / FIG 세로, 교차점 F=(0,0)) -->
+  <!-- 어두운 셀 -->
+  <rect x="412" y="412" width="196" height="196" fill="#7F0000" rx="10"/>
+  <rect x="612" y="412" width="196" height="196" fill="#7F0000" rx="10"/>
+  <rect x="412" y="612" width="196" height="196" fill="#7F0000" rx="10"/>
+  <rect x="612" y="612" width="196" height="196" fill="#7F0000" rx="10"/>
+  <!-- 교차점 강조 (F) -->
+  <rect x="212" y="212" width="196" height="196" fill="#FFF176" stroke="white" stroke-width="9" rx="10"/>
+  <!-- 흰 셀 -->
+  <rect x="412" y="212" width="196" height="196" fill="white" stroke="white" stroke-width="9" rx="10"/>
+  <rect x="612" y="212" width="196" height="196" fill="white" stroke="white" stroke-width="9" rx="10"/>
+  <rect x="212" y="412" width="196" height="196" fill="white" stroke="white" stroke-width="9" rx="10"/>
+  <rect x="212" y="612" width="196" height="196" fill="white" stroke="white" stroke-width="9" rx="10"/>
+  <!-- Layer 3: 글자 -->
+  <text x="312" y="315" text-anchor="middle" dominant-baseline="central" font-family="Arial Black,sans-serif" font-weight="900" font-size="148" fill="#B71C1C">F</text>
+  <text x="512" y="315" text-anchor="middle" dominant-baseline="central" font-family="Arial Black,sans-serif" font-weight="900" font-size="148" fill="#1565C0">A</text>
+  <text x="712" y="315" text-anchor="middle" dominant-baseline="central" font-family="Arial Black,sans-serif" font-weight="900" font-size="148" fill="#1565C0">N</text>
+  <text x="312" y="515" text-anchor="middle" dominant-baseline="central" font-family="Arial Black,sans-serif" font-weight="900" font-size="148" fill="#1565C0">I</text>
+  <text x="312" y="715" text-anchor="middle" dominant-baseline="central" font-family="Arial Black,sans-serif" font-weight="900" font-size="148" fill="#1565C0">G</text>
+</svg>

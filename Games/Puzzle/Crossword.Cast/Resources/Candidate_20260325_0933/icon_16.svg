@@ -1,0 +1,34 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="sh">
+      <feDropShadow dx="5" dy="7" stdDeviation="8" flood-color="#1565C044"/>
+    </filter>
+  </defs>
+  <!-- Layer 1: 배경 (흰색) -->
+  <rect width="1024" height="1024" rx="190" fill="#F5F5F5"/>
+  <!-- 배경 격자 패턴 장식 (반투명) -->
+  <line x1="100" y1="100" x2="924" y2="100" stroke="#90CAF9" stroke-width="3" opacity="0.5"/>
+  <line x1="100" y1="200" x2="924" y2="200" stroke="#90CAF9" stroke-width="3" opacity="0.5"/>
+  <line x1="100" y1="300" x2="924" y2="300" stroke="#90CAF9" stroke-width="3" opacity="0.5"/>
+  <line x1="100" y1="100" x2="100" y2="924" stroke="#90CAF9" stroke-width="3" opacity="0.5"/>
+  <line x1="200" y1="100" x2="200" y2="924" stroke="#90CAF9" stroke-width="3" opacity="0.5"/>
+  <line x1="300" y1="100" x2="300" y2="924" stroke="#90CAF9" stroke-width="3" opacity="0.5"/>
+  <!-- Layer 2: 격자 (OWL 가로 / ORB 세로, 교차점 O=(0,0)) -->
+  <!-- 어두운 셀 (진한 파랑) -->
+  <rect x="412" y="412" width="196" height="196" fill="#1565C0" rx="10"/>
+  <rect x="612" y="412" width="196" height="196" fill="#1565C0" rx="10"/>
+  <rect x="412" y="612" width="196" height="196" fill="#1565C0" rx="10"/>
+  <rect x="612" y="612" width="196" height="196" fill="#1565C0" rx="10"/>
+  <!-- 흰 셀 -->
+  <rect x="212" y="212" width="196" height="196" fill="#E3F2FD" stroke="#1565C0" stroke-width="12" rx="10" filter="url(#sh)"/>
+  <rect x="412" y="212" width="196" height="196" fill="white" stroke="#1565C0" stroke-width="12" rx="10" filter="url(#sh)"/>
+  <rect x="612" y="212" width="196" height="196" fill="white" stroke="#1565C0" stroke-width="12" rx="10" filter="url(#sh)"/>
+  <rect x="212" y="412" width="196" height="196" fill="white" stroke="#1565C0" stroke-width="12" rx="10" filter="url(#sh)"/>
+  <rect x="212" y="612" width="196" height="196" fill="white" stroke="#1565C0" stroke-width="12" rx="10" filter="url(#sh)"/>
+  <!-- Layer 3: 글자 (OWL 가로 / ORB 세로) -->
+  <text x="312" y="315" text-anchor="middle" dominant-baseline="central" font-family="Arial Black,sans-serif" font-weight="900" font-size="148" fill="#1565C0">O</text>
+  <text x="512" y="315" text-anchor="middle" dominant-baseline="central" font-family="Arial Black,sans-serif" font-weight="900" font-size="148" fill="#C62828">W</text>
+  <text x="712" y="315" text-anchor="middle" dominant-baseline="central" font-family="Arial Black,sans-serif" font-weight="900" font-size="148" fill="#1565C0">L</text>
+  <text x="312" y="515" text-anchor="middle" dominant-baseline="central" font-family="Arial Black,sans-serif" font-weight="900" font-size="148" fill="#C62828">R</text>
+  <text x="312" y="715" text-anchor="middle" dominant-baseline="central" font-family="Arial Black,sans-serif" font-weight="900" font-size="148" fill="#1565C0">B</text>
+</svg>

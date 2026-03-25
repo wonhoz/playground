@@ -1,0 +1,44 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFCCBC"/>
+      <stop offset="100%" stop-color="#FF7043"/>
+    </linearGradient>
+    <filter id="sh">
+      <feDropShadow dx="4" dy="5" stdDeviation="6" flood-color="#00000033"/>
+    </filter>
+  </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg)"/>
+  <!-- Layer 2: 두뇌 실루엣 (배경 장식) -->
+  <!-- 두뇌 왼쪽 반구 -->
+  <ellipse cx="450" cy="480" rx="220" ry="240" fill="#FF8A65" opacity="0.35"/>
+  <!-- 두뇌 오른쪽 반구 -->
+  <ellipse cx="620" cy="490" rx="180" ry="210" fill="#FF8A65" opacity="0.35"/>
+  <!-- 두뇌 중앙 분리선 -->
+  <line x1="530" y1="270" x2="530" y2="700" stroke="#FF7043" stroke-width="10" stroke-dasharray="18 10" opacity="0.5"/>
+  <!-- 두뇌 내부 주름 선 -->
+  <path d="M 320 380 Q 370 350 390 400" stroke="#FF7043" stroke-width="8" fill="none" opacity="0.4"/>
+  <path d="M 330 470 Q 400 440 420 490" stroke="#FF7043" stroke-width="8" fill="none" opacity="0.4"/>
+  <path d="M 310 560 Q 380 530 400 580" stroke="#FF7043" stroke-width="8" fill="none" opacity="0.4"/>
+  <path d="M 590 380 Q 640 350 660 400" stroke="#FF7043" stroke-width="8" fill="none" opacity="0.4"/>
+  <path d="M 580 470 Q 650 440 670 490" stroke="#FF7043" stroke-width="8" fill="none" opacity="0.4"/>
+  <!-- Layer 2: 격자 (WIN 가로 / WAR 세로, 교차점 W=(0,0)) -->
+  <!-- 어두운 셀 -->
+  <rect x="412" y="412" width="196" height="196" fill="#BF360C" rx="10"/>
+  <rect x="612" y="412" width="196" height="196" fill="#BF360C" rx="10"/>
+  <rect x="412" y="612" width="196" height="196" fill="#BF360C" rx="10"/>
+  <rect x="612" y="612" width="196" height="196" fill="#BF360C" rx="10"/>
+  <!-- 흰 셀 -->
+  <rect x="212" y="212" width="196" height="196" fill="#FFF3E0" stroke="#BF360C" stroke-width="9" rx="10" filter="url(#sh)"/>
+  <rect x="412" y="212" width="196" height="196" fill="white" stroke="#BF360C" stroke-width="9" rx="10" filter="url(#sh)"/>
+  <rect x="612" y="212" width="196" height="196" fill="white" stroke="#BF360C" stroke-width="9" rx="10" filter="url(#sh)"/>
+  <rect x="212" y="412" width="196" height="196" fill="white" stroke="#BF360C" stroke-width="9" rx="10" filter="url(#sh)"/>
+  <rect x="212" y="612" width="196" height="196" fill="white" stroke="#BF360C" stroke-width="9" rx="10" filter="url(#sh)"/>
+  <!-- Layer 3: 글자 (WIN 가로 / WAR 세로) -->
+  <text x="312" y="315" text-anchor="middle" dominant-baseline="central" font-family="Arial Black,sans-serif" font-weight="900" font-size="148" fill="#BF360C">W</text>
+  <text x="512" y="315" text-anchor="middle" dominant-baseline="central" font-family="Arial Black,sans-serif" font-weight="900" font-size="148" fill="#1565C0">I</text>
+  <text x="712" y="315" text-anchor="middle" dominant-baseline="central" font-family="Arial Black,sans-serif" font-weight="900" font-size="148" fill="#1565C0">N</text>
+  <text x="312" y="515" text-anchor="middle" dominant-baseline="central" font-family="Arial Black,sans-serif" font-weight="900" font-size="148" fill="#1565C0">A</text>
+  <text x="312" y="715" text-anchor="middle" dominant-baseline="central" font-family="Arial Black,sans-serif" font-weight="900" font-size="148" fill="#1565C0">R</text>
+</svg>

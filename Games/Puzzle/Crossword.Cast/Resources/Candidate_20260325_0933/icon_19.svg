@@ -1,0 +1,40 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#00E676"/>
+      <stop offset="100%" stop-color="#00695C"/>
+    </linearGradient>
+    <filter id="sh">
+      <feDropShadow dx="4" dy="5" stdDeviation="6" flood-color="#00000044"/>
+    </filter>
+  </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg)"/>
+  <!-- 가로 ACROSS 화살표 (굵고 큰) -->
+  <line x1="100" y1="140" x2="820" y2="140" stroke="#C62828" stroke-width="28" stroke-linecap="round"/>
+  <polygon points="820,108 888,140 820,172" fill="#C62828"/>
+  <text x="460" y="90" text-anchor="middle" dominant-baseline="central" font-family="Arial Black,sans-serif" font-weight="900" font-size="50" fill="#212121">ACROSS</text>
+  <!-- 세로 DOWN 화살표 (굵고 큰) -->
+  <line x1="140" y1="180" x2="140" y2="820" stroke="#C62828" stroke-width="28" stroke-linecap="round"/>
+  <polygon points="108,820 140,888 172,820" fill="#C62828"/>
+  <text x="140" y="500" text-anchor="middle" dominant-baseline="central" font-family="Arial Black,sans-serif" font-weight="900" font-size="44" fill="#212121" transform="rotate(-90 140 500)">DOWN</text>
+  <!-- Layer 2: 격자 (FOX 가로 / FIG 세로, 교차점 F=(0,0)) -->
+  <!-- 어두운 셀 -->
+  <rect x="452" y="452" width="196" height="196" fill="#003300" rx="10"/>
+  <rect x="652" y="452" width="196" height="196" fill="#003300" rx="10"/>
+  <rect x="452" y="652" width="196" height="196" fill="#003300" rx="10"/>
+  <rect x="652" y="652" width="196" height="196" fill="#003300" rx="10"/>
+  <!-- 교차점 강조 F=(0,0) -->
+  <rect x="252" y="252" width="196" height="196" fill="#FFFDE7" stroke="#212121" stroke-width="9" rx="10" filter="url(#sh)"/>
+  <!-- 흰 셀 -->
+  <rect x="452" y="252" width="196" height="196" fill="white" stroke="#212121" stroke-width="9" rx="10" filter="url(#sh)"/>
+  <rect x="652" y="252" width="196" height="196" fill="white" stroke="#212121" stroke-width="9" rx="10" filter="url(#sh)"/>
+  <rect x="252" y="452" width="196" height="196" fill="white" stroke="#212121" stroke-width="9" rx="10" filter="url(#sh)"/>
+  <rect x="252" y="652" width="196" height="196" fill="white" stroke="#212121" stroke-width="9" rx="10" filter="url(#sh)"/>
+  <!-- Layer 3: 글자 (FOX 가로 / FIG 세로) -->
+  <text x="352" y="352" text-anchor="middle" dominant-baseline="central" font-family="Arial Black,sans-serif" font-weight="900" font-size="148" fill="#C62828">F</text>
+  <text x="552" y="352" text-anchor="middle" dominant-baseline="central" font-family="Arial Black,sans-serif" font-weight="900" font-size="148" fill="#212121">O</text>
+  <text x="752" y="352" text-anchor="middle" dominant-baseline="central" font-family="Arial Black,sans-serif" font-weight="900" font-size="148" fill="#212121">X</text>
+  <text x="352" y="552" text-anchor="middle" dominant-baseline="central" font-family="Arial Black,sans-serif" font-weight="900" font-size="148" fill="#212121">I</text>
+  <text x="352" y="752" text-anchor="middle" dominant-baseline="central" font-family="Arial Black,sans-serif" font-weight="900" font-size="148" fill="#212121">G</text>
+</svg>

@@ -1,0 +1,35 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFE840"/>
+      <stop offset="100%" stop-color="#FF8F00"/>
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="4" dy="4" stdDeviation="6" flood-color="#00000033"/>
+    </filter>
+  </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg)"/>
+  <!-- Layer 2: 격자 (CAT 가로 / ART 세로, 교차점 A=(0,1)) -->
+  <!-- 어두운 셀 -->
+  <rect x="212" y="412" width="196" height="196" fill="#5D3A00" rx="10"/>
+  <rect x="612" y="412" width="196" height="196" fill="#5D3A00" rx="10"/>
+  <rect x="212" y="612" width="196" height="196" fill="#5D3A00" rx="10"/>
+  <rect x="612" y="612" width="196" height="196" fill="#5D3A00" rx="10"/>
+  <!-- 흰 셀 (row 0: CAT) -->
+  <rect x="212" y="212" width="196" height="196" fill="white" stroke="#1565C0" stroke-width="9" rx="10" filter="url(#shadow)"/>
+  <rect x="412" y="212" width="196" height="196" fill="#E3F2FD" stroke="#D32F2F" stroke-width="9" rx="10" filter="url(#shadow)"/>
+  <rect x="612" y="212" width="196" height="196" fill="white" stroke="#1565C0" stroke-width="9" rx="10" filter="url(#shadow)"/>
+  <!-- 흰 셀 (col 1: ART 나머지) -->
+  <rect x="412" y="412" width="196" height="196" fill="white" stroke="#1565C0" stroke-width="9" rx="10" filter="url(#shadow)"/>
+  <rect x="412" y="612" width="196" height="196" fill="white" stroke="#1565C0" stroke-width="9" rx="10" filter="url(#shadow)"/>
+  <!-- Layer 3: 글자 -->
+  <text x="312" y="315" text-anchor="middle" dominant-baseline="central" font-family="Arial Black,sans-serif" font-weight="900" font-size="148" fill="#1565C0">C</text>
+  <text x="512" y="315" text-anchor="middle" dominant-baseline="central" font-family="Arial Black,sans-serif" font-weight="900" font-size="148" fill="#D32F2F">A</text>
+  <text x="712" y="315" text-anchor="middle" dominant-baseline="central" font-family="Arial Black,sans-serif" font-weight="900" font-size="148" fill="#1565C0">T</text>
+  <text x="512" y="515" text-anchor="middle" dominant-baseline="central" font-family="Arial Black,sans-serif" font-weight="900" font-size="148" fill="#1565C0">R</text>
+  <text x="512" y="715" text-anchor="middle" dominant-baseline="central" font-family="Arial Black,sans-serif" font-weight="900" font-size="148" fill="#1565C0">T</text>
+  <!-- 클루 번호 -->
+  <text x="222" y="228" text-anchor="start" dominant-baseline="hanging" font-family="Arial,sans-serif" font-weight="700" font-size="46" fill="#1565C0">1</text>
+  <text x="422" y="228" text-anchor="start" dominant-baseline="hanging" font-family="Arial,sans-serif" font-weight="700" font-size="46" fill="#D32F2F">2</text>
+</svg>

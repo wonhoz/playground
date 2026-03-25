@@ -1,0 +1,42 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFD54F"/>
+      <stop offset="100%" stop-color="#E65100"/>
+    </linearGradient>
+    <filter id="sh">
+      <feDropShadow dx="4" dy="5" stdDeviation="6" flood-color="#00000044"/>
+    </filter>
+  </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg)"/>
+  <!-- Layer 2: 열쇠 장식 (우측 하단) -->
+  <!-- 열쇠 머리 외원 -->
+  <circle cx="740" cy="760" r="110" fill="none" stroke="#1565C0" stroke-width="30"/>
+  <!-- 열쇠 머리 내원 (구멍) -->
+  <circle cx="740" cy="760" r="48" fill="none" stroke="#1565C0" stroke-width="22"/>
+  <!-- 열쇠 줄기 -->
+  <line x1="740" y1="870" x2="740" y2="980" stroke="#1565C0" stroke-width="30" stroke-linecap="round"/>
+  <!-- 열쇠 이빨 1 -->
+  <rect x="740" y="910" width="48" height="24" fill="#1565C0" rx="6"/>
+  <!-- 열쇠 이빨 2 -->
+  <rect x="740" y="950" width="34" height="22" fill="#1565C0" rx="5"/>
+  <!-- Layer 2: 격자 (CUP 가로 / CAR 세로, 교차점 C=(0,0), 좌상단) -->
+  <!-- 어두운 셀 -->
+  <rect x="252" y="452" width="196" height="196" fill="#BF360C" rx="10"/>
+  <rect x="452" y="452" width="196" height="196" fill="#BF360C" rx="10"/>
+  <rect x="252" y="652" width="196" height="196" fill="#BF360C" rx="10"/>
+  <rect x="452" y="652" width="196" height="196" fill="#BF360C" rx="10"/>
+  <!-- 흰 셀 -->
+  <rect x="52" y="252" width="196" height="196" fill="#FFF8E1" stroke="white" stroke-width="9" rx="10" filter="url(#sh)"/>
+  <rect x="252" y="252" width="196" height="196" fill="white" stroke="white" stroke-width="9" rx="10" filter="url(#sh)"/>
+  <rect x="452" y="252" width="196" height="196" fill="white" stroke="white" stroke-width="9" rx="10" filter="url(#sh)"/>
+  <rect x="52" y="452" width="196" height="196" fill="white" stroke="white" stroke-width="9" rx="10" filter="url(#sh)"/>
+  <rect x="52" y="652" width="196" height="196" fill="white" stroke="white" stroke-width="9" rx="10" filter="url(#sh)"/>
+  <!-- Layer 3: 글자 (CUP 가로 / CAR 세로) -->
+  <text x="152" y="352" text-anchor="middle" dominant-baseline="central" font-family="Arial Black,sans-serif" font-weight="900" font-size="148" fill="#1565C0">C</text>
+  <text x="352" y="352" text-anchor="middle" dominant-baseline="central" font-family="Arial Black,sans-serif" font-weight="900" font-size="148" fill="#BF360C">U</text>
+  <text x="552" y="352" text-anchor="middle" dominant-baseline="central" font-family="Arial Black,sans-serif" font-weight="900" font-size="148" fill="#BF360C">P</text>
+  <text x="152" y="552" text-anchor="middle" dominant-baseline="central" font-family="Arial Black,sans-serif" font-weight="900" font-size="148" fill="#BF360C">A</text>
+  <text x="152" y="752" text-anchor="middle" dominant-baseline="central" font-family="Arial Black,sans-serif" font-weight="900" font-size="148" fill="#BF360C">R</text>
+</svg>

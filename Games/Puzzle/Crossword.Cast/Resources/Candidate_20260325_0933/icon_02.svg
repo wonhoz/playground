@@ -1,0 +1,41 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#00BFA5"/>
+      <stop offset="100%" stop-color="#00695C"/>
+    </linearGradient>
+    <filter id="sh">
+      <feDropShadow dx="3" dy="5" stdDeviation="7" flood-color="#00000044"/>
+    </filter>
+  </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg)"/>
+  <!-- Layer 2: 4x3 격자 (CATS 가로 / ACE 세로, 교차점 A=(0,1)) -->
+  <!-- 셀 150px, x_start=212, y_start=287 -->
+  <!-- 어두운 셀 -->
+  <rect x="212" y="437" width="146" height="146" fill="#004D40" rx="8"/>
+  <rect x="512" y="437" width="146" height="146" fill="#004D40" rx="8"/>
+  <rect x="662" y="437" width="146" height="146" fill="#004D40" rx="8"/>
+  <rect x="212" y="587" width="146" height="146" fill="#004D40" rx="8"/>
+  <rect x="512" y="587" width="146" height="146" fill="#004D40" rx="8"/>
+  <rect x="662" y="587" width="146" height="146" fill="#004D40" rx="8"/>
+  <!-- 흰 셀 (row 0: CATS) -->
+  <rect x="212" y="287" width="146" height="146" fill="white" stroke="#6A1B9A" stroke-width="8" rx="8" filter="url(#sh)"/>
+  <rect x="362" y="287" width="146" height="146" fill="#F3E5F5" stroke="#9C27B0" stroke-width="8" rx="8" filter="url(#sh)"/>
+  <rect x="512" y="287" width="146" height="146" fill="white" stroke="#6A1B9A" stroke-width="8" rx="8" filter="url(#sh)"/>
+  <rect x="662" y="287" width="146" height="146" fill="white" stroke="#6A1B9A" stroke-width="8" rx="8" filter="url(#sh)"/>
+  <!-- 흰 셀 (col 1: ACE 나머지) -->
+  <rect x="362" y="437" width="146" height="146" fill="white" stroke="#6A1B9A" stroke-width="8" rx="8" filter="url(#sh)"/>
+  <rect x="362" y="587" width="146" height="146" fill="white" stroke="#6A1B9A" stroke-width="8" rx="8" filter="url(#sh)"/>
+  <!-- Layer 3: 글자 (CATS 가로) -->
+  <text x="285" y="360" text-anchor="middle" dominant-baseline="central" font-family="Arial Black,sans-serif" font-weight="900" font-size="112" fill="#6A1B9A">C</text>
+  <text x="435" y="360" text-anchor="middle" dominant-baseline="central" font-family="Arial Black,sans-serif" font-weight="900" font-size="112" fill="#D32F2F">A</text>
+  <text x="585" y="360" text-anchor="middle" dominant-baseline="central" font-family="Arial Black,sans-serif" font-weight="900" font-size="112" fill="#6A1B9A">T</text>
+  <text x="735" y="360" text-anchor="middle" dominant-baseline="central" font-family="Arial Black,sans-serif" font-weight="900" font-size="112" fill="#6A1B9A">S</text>
+  <!-- 글자 (ACE 세로) -->
+  <text x="435" y="510" text-anchor="middle" dominant-baseline="central" font-family="Arial Black,sans-serif" font-weight="900" font-size="112" fill="#6A1B9A">C</text>
+  <text x="435" y="660" text-anchor="middle" dominant-baseline="central" font-family="Arial Black,sans-serif" font-weight="900" font-size="112" fill="#6A1B9A">E</text>
+  <!-- 클루 번호 -->
+  <text x="222" y="298" text-anchor="start" dominant-baseline="hanging" font-family="Arial,sans-serif" font-weight="700" font-size="40" fill="#6A1B9A">1</text>
+  <text x="372" y="298" text-anchor="start" dominant-baseline="hanging" font-family="Arial,sans-serif" font-weight="700" font-size="40" fill="#D32F2F">2</text>
+</svg>

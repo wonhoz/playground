@@ -1,0 +1,52 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1A237E"/>
+      <stop offset="100%" stop-color="#0A0A2E"/>
+    </linearGradient>
+    <filter id="sh">
+      <feDropShadow dx="4" dy="5" stdDeviation="6" flood-color="#00000055"/>
+    </filter>
+    <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFD600"/>
+      <stop offset="100%" stop-color="#FF8F00"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg)"/>
+  <!-- Layer 2: 격자 (JOY 가로 / JAR 세로, 교차점 J=(0,0), 상단) -->
+  <!-- 셀 140px, x_start=302, y_start=80 -->
+  <!-- 어두운 셀 -->
+  <rect x="442" y="80" width="136" height="136" fill="#050520" rx="8"/>
+  <rect x="582" y="80" width="136" height="136" fill="#050520" rx="8"/>
+  <rect x="442" y="220" width="136" height="136" fill="#050520" rx="8"/>
+  <rect x="582" y="220" width="136" height="136" fill="#050520" rx="8"/>
+  <rect x="442" y="360" width="136" height="136" fill="#050520" rx="8"/>
+  <rect x="582" y="360" width="136" height="136" fill="#050520" rx="8"/>
+  <!-- 흰 셀 -->
+  <rect x="302" y="80" width="136" height="136" fill="#E8EAF6" stroke="#FFD600" stroke-width="7" rx="8" filter="url(#sh)"/>
+  <rect x="442" y="80" width="136" height="136" fill="white" stroke="#5C6BC0" stroke-width="7" rx="8" filter="url(#sh)"/>
+  <rect x="582" y="80" width="136" height="136" fill="white" stroke="#5C6BC0" stroke-width="7" rx="8" filter="url(#sh)"/>
+  <rect x="302" y="220" width="136" height="136" fill="white" stroke="#5C6BC0" stroke-width="7" rx="8" filter="url(#sh)"/>
+  <rect x="302" y="360" width="136" height="136" fill="white" stroke="#5C6BC0" stroke-width="7" rx="8" filter="url(#sh)"/>
+  <!-- 글자 (JOY 가로 / JAR 세로) -->
+  <text x="370" y="148" text-anchor="middle" dominant-baseline="central" font-family="Arial Black,sans-serif" font-weight="900" font-size="110" fill="#FFD600">J</text>
+  <text x="510" y="148" text-anchor="middle" dominant-baseline="central" font-family="Arial Black,sans-serif" font-weight="900" font-size="110" fill="white">O</text>
+  <text x="650" y="148" text-anchor="middle" dominant-baseline="central" font-family="Arial Black,sans-serif" font-weight="900" font-size="110" fill="white">Y</text>
+  <text x="370" y="288" text-anchor="middle" dominant-baseline="central" font-family="Arial Black,sans-serif" font-weight="900" font-size="110" fill="white">A</text>
+  <text x="370" y="428" text-anchor="middle" dominant-baseline="central" font-family="Arial Black,sans-serif" font-weight="900" font-size="110" fill="white">R</text>
+  <!-- Layer 3: 트로피 (하단) -->
+  <!-- 컵 본체 -->
+  <path d="M 320 560 L 704 560 L 660 780 L 364 780 Z" fill="url(#gold)" rx="10"/>
+  <!-- 핸들 왼쪽 -->
+  <path d="M 320 590 Q 224 640 252 730 Q 268 780 356 786" fill="none" stroke="url(#gold)" stroke-width="36" stroke-linecap="round"/>
+  <!-- 핸들 오른쪽 -->
+  <path d="M 704 590 Q 800 640 772 730 Q 756 780 668 786" fill="none" stroke="url(#gold)" stroke-width="36" stroke-linecap="round"/>
+  <!-- 줄기 -->
+  <rect x="482" y="780" width="60" height="70" fill="#FF8F00"/>
+  <!-- 받침대 -->
+  <rect x="370" y="850" width="284" height="36" fill="url(#gold)" rx="10"/>
+  <rect x="340" y="886" width="344" height="24" fill="#FF8F00" rx="8"/>
+  <!-- 트로피 위 별 -->
+  <polygon points="512,530 524,558 555,558 531,575 540,604 512,588 484,604 493,575 469,558 500,558" fill="white"/>
+</svg>

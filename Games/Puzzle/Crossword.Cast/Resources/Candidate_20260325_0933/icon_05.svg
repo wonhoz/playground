@@ -1,0 +1,47 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFF8E1"/>
+      <stop offset="100%" stop-color="#FFD54F"/>
+    </linearGradient>
+    <filter id="sh">
+      <feDropShadow dx="4" dy="5" stdDeviation="6" flood-color="#00000033"/>
+    </filter>
+  </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg)"/>
+  <!-- 연필 (격자 오른쪽 아래, 45도 기울임) -->
+  <g transform="translate(810,180) rotate(40)">
+    <!-- 지우개 (핑크) -->
+    <rect x="-22" y="-18" width="44" height="26" fill="#FF80AB" rx="6"/>
+    <!-- 금속 밴드 -->
+    <rect x="-22" y="8" width="44" height="12" fill="#9E9E9E"/>
+    <!-- 몸통 (노랑) -->
+    <rect x="-22" y="20" width="44" height="210" fill="#FFEE58" stroke="#F9A825" stroke-width="3"/>
+    <!-- 왼쪽 선 -->
+    <line x1="-6" y1="20" x2="-6" y2="230" stroke="#FFF176" stroke-width="6" stroke-linecap="round"/>
+    <!-- 나무 부분 -->
+    <polygon points="-22,230 22,230 0,285" fill="#8D6E63"/>
+    <!-- 심 (흑연) -->
+    <polygon points="-5,272 5,272 0,288" fill="#424242"/>
+  </g>
+  <!-- Layer 2: 격자 (SUN 가로 / SAP 세로, 교차점 S=(0,0)) -->
+  <!-- 어두운 셀 -->
+  <rect x="412" y="412" width="196" height="196" fill="#795548" rx="10"/>
+  <rect x="612" y="412" width="196" height="196" fill="#795548" rx="10"/>
+  <rect x="412" y="612" width="196" height="196" fill="#795548" rx="10"/>
+  <rect x="612" y="612" width="196" height="196" fill="#795548" rx="10"/>
+  <!-- 교차점 강조 S=(0,0) -->
+  <rect x="212" y="212" width="196" height="196" fill="#FFF9C4" stroke="#5D4037" stroke-width="9" rx="10" filter="url(#sh)"/>
+  <!-- 흰 셀 -->
+  <rect x="412" y="212" width="196" height="196" fill="white" stroke="#5D4037" stroke-width="9" rx="10" filter="url(#sh)"/>
+  <rect x="612" y="212" width="196" height="196" fill="white" stroke="#5D4037" stroke-width="9" rx="10" filter="url(#sh)"/>
+  <rect x="212" y="412" width="196" height="196" fill="white" stroke="#5D4037" stroke-width="9" rx="10" filter="url(#sh)"/>
+  <rect x="212" y="612" width="196" height="196" fill="white" stroke="#5D4037" stroke-width="9" rx="10" filter="url(#sh)"/>
+  <!-- Layer 3: 글자 -->
+  <text x="312" y="315" text-anchor="middle" dominant-baseline="central" font-family="Arial Black,sans-serif" font-weight="900" font-size="148" fill="#F57F17">S</text>
+  <text x="512" y="315" text-anchor="middle" dominant-baseline="central" font-family="Arial Black,sans-serif" font-weight="900" font-size="148" fill="#5D4037">U</text>
+  <text x="712" y="315" text-anchor="middle" dominant-baseline="central" font-family="Arial Black,sans-serif" font-weight="900" font-size="148" fill="#5D4037">N</text>
+  <text x="312" y="515" text-anchor="middle" dominant-baseline="central" font-family="Arial Black,sans-serif" font-weight="900" font-size="148" fill="#5D4037">A</text>
+  <text x="312" y="715" text-anchor="middle" dominant-baseline="central" font-family="Arial Black,sans-serif" font-weight="900" font-size="148" fill="#5D4037">P</text>
+</svg>

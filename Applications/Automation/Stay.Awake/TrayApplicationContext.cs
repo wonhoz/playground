@@ -252,6 +252,14 @@ namespace StayAwake
             _simulator.IdleThresholdSeconds = minutes * 60; // 유휴 임계값을 타이머 간격과 동일하게
             _intervalItem.Text = $"간격: {minutes}분";
 
+            // 실행 중이면 타이머 즉시 리셋 (새 간격이 바로 적용되도록)
+            if (_isRunning)
+            {
+                _activityTimer.Stop();
+                _lastActivityTime = DateTime.Now;
+                _activityTimer.Start();
+            }
+
             // 체크 상태 업데이트
             foreach (ToolStripMenuItem item in _intervalItem.DropDownItems)
             {
@@ -368,6 +376,11 @@ namespace StayAwake
         {
             // UI 차단 방지: SimulateActivity()는 Thread.Sleep(110ms) 포함 → 배경 스레드에서 실행
             bool simulated = await Task.Run(() => _simulator.SimulateActivity());
+            if (simulated)
+                _dailySimCount++;
+            else
+                _dailySkipCount++;
+
             if (_isRunning && simulated)
             {
                 _activityCount++;
@@ -395,7 +408,8 @@ namespace StayAwake
         {
             var nextActivity = _lastActivityTime.AddMinutes(_intervalMinutes) - DateTime.Now;
             if (nextActivity < TimeSpan.Zero) nextActivity = TimeSpan.Zero;
-            _trayIcon.Text = $"StayAwake - 다음 활동: {(int)nextActivity.TotalMinutes}분 {nextActivity.Seconds:D2}초 후";
+            var activeTime = _todayActiveTime + (DateTime.Now - _sessionRunStart);
+            _trayIcon.Text = $"StayAwake - 다음: {(int)nextActivity.TotalMinutes}분 {nextActivity.Seconds:D2}초 후 | {activeTime:hh\\:mm\\:ss} / {_dailySimCount}회";
         }
 
         private void ShowStats()

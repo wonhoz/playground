@@ -213,18 +213,5 @@ namespace StayAwake
             keybd_event(VK_F15, 0, KEYEVENTF_KEYUP, 0); // Key up
         }
 
-        /// <summary>
-        /// Scroll Lock 토글 (두 번 눌러서 원상복구)
-        /// </summary>
-        private void ToggleScrollLock()
-        {
-            // Scroll Lock 누르기
-            keybd_event(VK_SCROLL, 0, 0, 0);
-            keybd_event(VK_SCROLL, 0, KEYEVENTF_KEYUP, 0);
-            Thread.Sleep(10);
-            // 다시 눌러서 원상복구
-            keybd_event(VK_SCROLL, 0, 0, 0);
-            keybd_event(VK_SCROLL, 0, KEYEVENTF_KEYUP, 0);
-        }
     }
 }

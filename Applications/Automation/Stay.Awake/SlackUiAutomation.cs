@@ -83,7 +83,6 @@ namespace StayAwake
             var script = $@"
 $ErrorActionPreference = 'Stop'
 
-# Slack 앱 찾기 (메인 윈도우가 있는 프로세스만)
 $slack = Get-Process slack -ErrorAction SilentlyContinue |
     Where-Object {{ $_.MainWindowHandle -ne [IntPtr]::Zero }} |
     Select-Object -First 1
@@ -99,7 +98,6 @@ Add-Type -Namespace 'SA' -Name 'Win32' -MemberDefinition @'
     [DllImport(""user32.dll"")] public static extern IntPtr GetForegroundWindow();
 '@
 
-# 현재 포커스 창 저장 후 Slack 활성화
 $prev = [SA.Win32]::GetForegroundWindow()
 [SA.Win32]::ShowWindow($slack.MainWindowHandle, 9) | Out-Null
 [SA.Win32]::SetForegroundWindow($slack.MainWindowHandle) | Out-Null
@@ -107,11 +105,9 @@ Start-Sleep -Milliseconds 600
 
 Add-Type -AssemblyName System.Windows.Forms
 
-# ESC로 현재 열린 메뉴/팝업 닫기
 [System.Windows.Forms.SendKeys]::SendWait('{{ESC}}')
 Start-Sleep -Milliseconds 200
 
-# 클립보드로 붙여넣기 (SendKeys는 한글 IME 영향을 받으므로 클립보드 방식 사용)
 $prevClipboard = Get-Clipboard -Raw
 Set-Clipboard -Value '{slashCommand}'
 Start-Sleep -Milliseconds 100
@@ -119,11 +115,9 @@ Start-Sleep -Milliseconds 100
 Start-Sleep -Milliseconds 200
 [System.Windows.Forms.SendKeys]::SendWait('{{ENTER}}')
 
-# 클립보드 원래 내용 복원
 if ($prevClipboard) {{ Set-Clipboard -Value $prevClipboard }} else {{ [System.Windows.Forms.Clipboard]::Clear() }}
 Start-Sleep -Milliseconds 400
 
-# 이전 창으로 포커스 복귀
 [SA.Win32]::SetForegroundWindow($prev) | Out-Null
 
 Write-Output 'SUCCESS'

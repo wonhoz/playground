@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg02dl" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#DBEAFE"/>
+      <stop offset="100%" stop-color="#BAE6FD"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Layer 1: 하늘 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg02dl)"/>
+
+  <!-- Layer 2: 도넛 차트 (5개 섹터) -->
+  <!-- 도넛은 원형 arc로 표현 -->
+  <!-- 섹터 1: 파란 - Windows (40%) 0°→144° -->
+  <path d="M 512,512 L 512,162
+           A 350,350 0 0,1 736,273 Z"
+        fill="#3B82F6"/>
+  <!-- 섹터 2: 보라 - Users (28%) 144°→244.8° -->
+  <path d="M 512,512 L 736,273
+           A 350,350 0 0,1 740,748 Z"
+        fill="#8B5CF6"/>
+  <!-- 섹터 3: 초록 - Programs (16%) 244.8°→302.4° -->
+  <path d="M 512,512 L 740,748
+           A 350,350 0 0,1 512,862 Z"
+        fill="#10B981"/>
+  <!-- 섹터 4: 노랑 - Games (10%) 302.4°→338.4° -->
+  <path d="M 512,512 L 512,862
+           A 350,350 0 0,1 338,748 Z"
+        fill="#F59E0B"/>
+  <!-- 섹터 5: 빨강 - 기타 (6%) 338.4°→360° -->
+  <path d="M 512,512 L 338,748
+           A 350,350 0 0,1 512,162 Z"
+        fill="#EF4444"/>
+
+  <!-- 도넛 구멍 (흰) -->
+  <circle cx="512" cy="512" r="190" fill="white"/>
+
+  <!-- Layer 3: 중앙 HDD 아이콘 -->
+  <!-- HDD 본체 -->
+  <rect x="432" y="450" width="160" height="108" rx="16" fill="#64748B"/>
+  <rect x="450" y="464" width="100" height="80" rx="8" fill="#94A3B8"/>
+  <!-- HDD 원형 디스크 표시 -->
+  <circle cx="540" cy="504" r="26" fill="#CBD5E1" stroke="#64748B" stroke-width="4"/>
+  <circle cx="540" cy="504" r="10" fill="#475569"/>
+  <!-- 연결 핀들 -->
+  <rect x="456" y="550" width="8" height="14" rx="2" fill="#334155"/>
+  <rect x="470" y="550" width="8" height="14" rx="2" fill="#334155"/>
+  <rect x="484" y="550" width="8" height="14" rx="2" fill="#334155"/>
+  <!-- HDD 라벨 -->
+  <text x="512" y="620" text-anchor="middle" font-family="Segoe UI, sans-serif"
+        font-size="36" font-weight="bold" fill="#1E40AF">C:\</text>
+
+  <!-- 범례 (우하단 작게) -->
+  <circle cx="700" cy="830" r="14" fill="#3B82F6"/>
+  <text x="724" y="840" font-family="Segoe UI" font-size="28" fill="#1E3A5F">Windows</text>
+  <circle cx="700" cy="876" r="14" fill="#8B5CF6"/>
+  <text x="724" y="886" font-family="Segoe UI" font-size="28" fill="#1E3A5F">Users</text>
+</svg>

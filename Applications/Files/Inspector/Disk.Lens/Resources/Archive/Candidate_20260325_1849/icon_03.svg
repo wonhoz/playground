@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg03dl" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#EA580C"/>
+      <stop offset="100%" stop-color="#FB923C"/>
+    </linearGradient>
+    <clipPath id="lens03dl">
+      <circle cx="420" cy="430" r="200"/>
+    </clipPath>
+  </defs>
+
+  <!-- Layer 1: 비비드 오렌지 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg03dl)"/>
+
+  <!-- 배경 장식 -->
+  <circle cx="850" cy="180" r="140" fill="rgba(255,255,255,0.08)"/>
+  <circle cx="180" cy="820" r="110" fill="rgba(255,255,255,0.08)"/>
+
+  <!-- Layer 2: 돋보기 -->
+  <!-- 렌즈 테두리 (흰색, 두껍게) -->
+  <circle cx="420" cy="430" r="200" fill="white" stroke="white" stroke-width="8"/>
+  <!-- 렌즈 내부: 미니 트리맵 -->
+  <g clip-path="url(#lens03dl)">
+    <!-- 미니 트리맵 타일들 (3x2 이내) -->
+    <rect x="225" y="238" width="200" height="170" fill="#3B82F6"/>
+    <rect x="431" y="238" width="182" height="170" fill="#8B5CF6"/>
+    <rect x="225" y="414" width="136" height="114" fill="#10B981"/>
+    <rect x="367" y="414" width="132" height="114" fill="#F59E0B"/>
+    <rect x="505" y="414" width="108" height="114" fill="#EF4444"/>
+
+    <!-- 타일 텍스트 -->
+    <text x="325" y="340" text-anchor="middle" font-family="Segoe UI" font-size="28"
+          font-weight="bold" fill="white">Win</text>
+    <text x="322" y="368" text-anchor="middle" font-family="Segoe UI" font-size="22"
+          fill="rgba(255,255,255,0.85)">43 GB</text>
+    <text x="522" y="340" text-anchor="middle" font-family="Segoe UI" font-size="26"
+          font-weight="bold" fill="white">Usr</text>
+    <text x="293" y="480" text-anchor="middle" font-family="Segoe UI" font-size="22"
+          font-weight="bold" fill="white">Prg</text>
+    <text x="433" y="480" text-anchor="middle" font-family="Segoe UI" font-size="22"
+          font-weight="bold" fill="white">Gm</text>
+    <text x="559" y="480" text-anchor="middle" font-family="Segoe UI" font-size="22"
+          font-weight="bold" fill="white">Tmp</text>
+  </g>
+  <!-- 렌즈 테두리 강조 -->
+  <circle cx="420" cy="430" r="200" fill="none" stroke="white" stroke-width="22"/>
+
+  <!-- 손잡이 -->
+  <line x1="580" y1="593" x2="800" y2="820"
+        stroke="white" stroke-width="70" stroke-linecap="round"/>
+  <line x1="580" y1="593" x2="800" y2="820"
+        stroke="#EA580C" stroke-width="50" stroke-linecap="round"/>
+  <!-- 손잡이 끝 장식 -->
+  <circle cx="800" cy="820" r="30" fill="white" opacity="0.4"/>
+
+  <!-- Layer 3: 텍스트 -->
+  <text x="512" y="910" text-anchor="middle" font-family="Segoe UI, sans-serif"
+        font-size="62" font-weight="bold" fill="white">Disk.Lens</text>
+</svg>

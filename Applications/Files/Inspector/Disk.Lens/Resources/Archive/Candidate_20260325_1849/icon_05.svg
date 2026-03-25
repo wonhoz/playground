@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg05dl" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#F59E0B"/>
+      <stop offset="100%" stop-color="#FCD34D"/>
+    </linearGradient>
+    <clipPath id="folderClip">
+      <!-- 폴더 안쪽 클립 -->
+      <rect x="200" y="340" width="624" height="440" rx="20"/>
+    </clipPath>
+  </defs>
+
+  <!-- Layer 1: 따뜻한 노란 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg05dl)"/>
+
+  <!-- Layer 2: 폴더 아이콘 (큰) -->
+  <!-- 폴더 탭 -->
+  <path d="M 200,290 L 360,290 L 400,256 L 824,256 L 824,290" fill="#D97706"/>
+  <!-- 폴더 본체 -->
+  <rect x="180" y="290" width="664" height="480" rx="22" fill="#F97316"/>
+  <!-- 폴더 내부 밝음 -->
+  <rect x="200" y="320" width="624" height="420" rx="14" fill="#FED7AA"/>
+
+  <!-- Layer 3: 폴더 내부 파이차트 -->
+  <!-- 파이차트 (폴더 안에 맞게) -->
+  <!-- 섹터 1: 파랑 (40%) -->
+  <path d="M 512,530 L 512,268
+           A 262,262 0 0,1 698,394 Z"
+        fill="#3B82F6" clip-path="url(#folderClip)"/>
+  <!-- 섹터 2: 보라 (25%) -->
+  <path d="M 512,530 L 698,394
+           A 262,262 0 0,1 718,660 Z"
+        fill="#8B5CF6" clip-path="url(#folderClip)"/>
+  <!-- 섹터 3: 초록 (20%) -->
+  <path d="M 512,530 L 718,660
+           A 262,262 0 0,1 400,762 Z"
+        fill="#10B981" clip-path="url(#folderClip)"/>
+  <!-- 섹터 4: 빨강 (15%) -->
+  <path d="M 512,530 L 400,762
+           A 262,262 0 0,1 512,268 Z"
+        fill="#EF4444" clip-path="url(#folderClip)"/>
+
+  <!-- 파이 중앙 (흰 원) -->
+  <circle cx="512" cy="530" r="106" fill="white"/>
+  <!-- 파이 중앙 텍스트 -->
+  <text x="512" y="520" text-anchor="middle" font-family="Segoe UI, sans-serif"
+        font-size="36" font-weight="bold" fill="#374151">C:\</text>
+  <text x="512" y="558" text-anchor="middle" font-family="Segoe UI, sans-serif"
+        font-size="28" fill="#6B7280">256 GB</text>
+
+  <!-- 하단 텍스트 -->
+  <text x="512" y="880" text-anchor="middle" font-family="Segoe UI, sans-serif"
+        font-size="58" font-weight="bold" fill="white">디스크 분석</text>
+  <text x="512" y="946" text-anchor="middle" font-family="Segoe UI, sans-serif"
+        font-size="36" fill="rgba(255,255,255,0.85)">Disk.Lens</text>
+</svg>

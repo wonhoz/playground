@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs>
+    <linearGradient id="bg01" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#74B9FF"/>
+      <stop offset="100%" stop-color="#0984E3"/>
+    </linearGradient>
+    <clipPath id="clip01">
+      <rect x="0" y="0" width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+
+  <!-- Layer1: 배경 -->
+  <rect x="0" y="0" width="1024" height="1024" rx="190" fill="url(#bg01)"/>
+
+  <g clip-path="url(#clip01)">
+    <!-- Layer2: 카메라 렌즈 + 브라우저 -->
+    <!-- 외곽 렌즈 링 -->
+    <circle cx="512" cy="490" r="300" fill="none" stroke="white" stroke-width="55"/>
+    <!-- 중간 링 -->
+    <circle cx="512" cy="490" r="210" fill="none" stroke="white" stroke-width="35" stroke-opacity="0.7"/>
+    <!-- 내부 원 (흰 배경) -->
+    <circle cx="512" cy="490" r="140" fill="white" fill-opacity="0.9"/>
+
+    <!-- 브라우저 창 미니어처 (흰 원 안에) -->
+    <rect x="378" y="400" width="268" height="188" rx="12" fill="#0984E3"/>
+    <!-- 주소바 -->
+    <rect x="386" y="408" width="252" height="28" rx="8" fill="white" fill-opacity="0.9"/>
+    <!-- 주소바 점들 -->
+    <circle cx="402" cy="422" r="7" fill="#FF5F56"/>
+    <circle cx="422" cy="422" r="7" fill="#FFBD2E"/>
+    <circle cx="442" cy="422" r="7" fill="#27C93F"/>
+    <!-- 컨텐츠 줄들 -->
+    <rect x="386" y="446" width="252" height="12" rx="6" fill="white" fill-opacity="0.5"/>
+    <rect x="386" y="466" width="220" height="10" rx="5" fill="white" fill-opacity="0.4"/>
+    <rect x="386" y="484" width="240" height="10" rx="5" fill="white" fill-opacity="0.4"/>
+    <rect x="386" y="502" width="200" height="10" rx="5" fill="white" fill-opacity="0.3"/>
+    <rect x="386" y="520" width="230" height="10" rx="5" fill="white" fill-opacity="0.3"/>
+    <rect x="386" y="538" width="210" height="10" rx="5" fill="white" fill-opacity="0.2"/>
+
+    <!-- Layer3: 셔터 버튼 (우상단) -->
+    <circle cx="760" cy="255" r="65" fill="#FF5252"/>
+    <circle cx="760" cy="255" r="48" fill="none" stroke="white" stroke-width="10"/>
+    <circle cx="760" cy="255" r="24" fill="white"/>
+
+    <!-- WEB SHOT 배지 -->
+    <rect x="282" y="780" width="460" height="78" rx="39" fill="white" fill-opacity="0.25"/>
+    <text x="512" y="822" font-size="50" fill="white" font-weight="900" text-anchor="middle" dominant-baseline="central" font-family="Arial Black, Arial, sans-serif">WEB SHOT</text>
+  </g>
+</svg>

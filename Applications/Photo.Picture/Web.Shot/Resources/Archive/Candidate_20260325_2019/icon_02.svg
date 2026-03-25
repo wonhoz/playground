@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs>
+    <linearGradient id="bg02" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#55EFC4"/>
+      <stop offset="100%" stop-color="#00B894"/>
+    </linearGradient>
+    <clipPath id="clip02">
+      <rect x="0" y="0" width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+
+  <!-- Layer1: 배경 -->
+  <rect x="0" y="0" width="1024" height="1024" rx="190" fill="url(#bg02)"/>
+
+  <g clip-path="url(#clip02)">
+    <!-- Layer2: URL 입력창 + 파일 아이콘들 -->
+
+    <!-- URL 입력창 카드 -->
+    <rect x="195" y="270" width="634" height="104" rx="52" fill="white"/>
+
+    <!-- 지구본 -->
+    <circle cx="252" cy="322" r="38" fill="#00B894"/>
+    <circle cx="252" cy="322" r="38" fill="none" stroke="white" stroke-width="5"/>
+    <line x1="216" y1="322" x2="288" y2="322" stroke="white" stroke-width="4" stroke-linecap="round"/>
+    <line x1="220" y1="308" x2="284" y2="308" stroke="white" stroke-width="3" stroke-linecap="round" opacity="0.65"/>
+    <line x1="220" y1="336" x2="284" y2="336" stroke="white" stroke-width="3" stroke-linecap="round" opacity="0.65"/>
+    <ellipse cx="252" cy="322" rx="13" ry="38" fill="none" stroke="white" stroke-width="4"/>
+
+    <!-- URL 텍스트 -->
+    <text x="308" y="322" font-size="42" fill="#636E72" font-weight="400" dominant-baseline="central" font-family="Arial, sans-serif">https://example.com</text>
+
+    <!-- 캡처 버튼 -->
+    <rect x="718" y="296" width="96" height="52" rx="26" fill="#0984E3"/>
+    <circle cx="766" cy="322" r="17" fill="white"/>
+
+    <!-- 아래 방향 화살표 -->
+    <line x1="512" y1="400" x2="512" y2="490" stroke="#1A5C3A" stroke-width="65" stroke-linecap="round"/>
+    <polygon points="448,468 512,556 576,468" fill="#1A5C3A"/>
+
+    <!-- PNG 카드 -->
+    <rect x="240" y="580" width="210" height="215" rx="24" fill="white"/>
+    <rect x="260" y="600" width="170" height="128" rx="10" fill="#74B9FF"/>
+    <!-- PNG 썸네일 요소 -->
+    <circle cx="300" cy="635" r="18" fill="#FFD700" fill-opacity="0.9"/>
+    <polygon points="260,710 310,660 355,700 395,650 430,728" fill="#55EFC4" fill-opacity="0.8"/>
+    <text x="345" y="775" font-size="52" fill="#0984E3" font-weight="900" text-anchor="middle" font-family="Arial Black, Arial, sans-serif">PNG</text>
+
+    <!-- PDF 카드 -->
+    <rect x="574" y="580" width="210" height="215" rx="24" fill="white"/>
+    <rect x="594" y="600" width="170" height="128" rx="10" fill="#FF7675"/>
+    <!-- PDF 썸네일 요소들 -->
+    <rect x="610" y="618" width="138" height="10" rx="5" fill="white" fill-opacity="0.7"/>
+    <rect x="610" y="638" width="120" height="10" rx="5" fill="white" fill-opacity="0.6"/>
+    <rect x="610" y="658" width="130" height="10" rx="5" fill="white" fill-opacity="0.5"/>
+    <rect x="610" y="678" width="100" height="10" rx="5" fill="white" fill-opacity="0.4"/>
+    <text x="679" y="775" font-size="52" fill="#D63031" font-weight="900" text-anchor="middle" font-family="Arial Black, Arial, sans-serif">PDF</text>
+
+    <!-- Layer3: 두 카드 사이 "/" 구분자 -->
+    <text x="512" y="690" font-size="90" fill="white" fill-opacity="0.6" text-anchor="middle" dominant-baseline="central" font-family="Arial Black, Arial, sans-serif">/</text>
+  </g>
+</svg>

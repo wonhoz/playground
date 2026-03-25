@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs>
+    <linearGradient id="bg04" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A6B8A"/>
+      <stop offset="100%" stop-color="#48CAE4"/>
+    </linearGradient>
+    <clipPath id="clip04">
+      <rect x="0" y="0" width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+
+  <!-- Layer1: 배경 -->
+  <rect x="0" y="0" width="1024" height="1024" rx="190" fill="url(#bg04)"/>
+
+  <g clip-path="url(#clip04)">
+    <!-- Layer2: 지구본 -->
+    <!-- 지구본 배경 채움 -->
+    <circle cx="512" cy="490" r="280" fill="#48CAE4" fill-opacity="0.25"/>
+    <!-- 지구본 외곽 -->
+    <circle cx="512" cy="490" r="280" fill="none" stroke="white" stroke-width="40"/>
+
+    <!-- 위도선 (가로) -->
+    <ellipse cx="512" cy="490" rx="280" ry="88" fill="none" stroke="white" stroke-width="18" stroke-opacity="0.5"/>
+    <line x1="234" y1="490" x2="790" y2="490" stroke="white" stroke-width="22" stroke-opacity="0.5" stroke-linecap="round"/>
+    <ellipse cx="512" cy="388" rx="210" ry="58" fill="none" stroke="white" stroke-width="14" stroke-opacity="0.4"/>
+    <ellipse cx="512" cy="592" rx="210" ry="58" fill="none" stroke="white" stroke-width="14" stroke-opacity="0.4"/>
+
+    <!-- 경도선 (세로) -->
+    <ellipse cx="512" cy="490" rx="88" ry="280" fill="none" stroke="white" stroke-width="16" stroke-opacity="0.5"/>
+    <ellipse cx="512" cy="490" rx="198" ry="280" fill="none" stroke="white" stroke-width="12" stroke-opacity="0.3"/>
+
+    <!-- 카메라 렌즈 오버레이 -->
+    <circle cx="512" cy="490" r="162" fill="#1A6B8A" fill-opacity="0.88"/>
+    <circle cx="512" cy="490" r="162" fill="none" stroke="#FFD700" stroke-width="24"/>
+    <circle cx="512" cy="490" r="102" fill="none" stroke="#FFD700" stroke-width="16" stroke-opacity="0.7"/>
+    <circle cx="512" cy="490" r="57" fill="#FFD700" fill-opacity="0.92"/>
+    <circle cx="512" cy="490" r="32" fill="#1A6B8A"/>
+    <!-- 렌즈 하이라이트 -->
+    <circle cx="494" cy="472" r="15" fill="white" fill-opacity="0.7"/>
+
+    <!-- Layer3: 상단 카메라 몸체 -->
+    <rect x="428" y="193" width="168" height="82" rx="20" fill="#FFD700"/>
+    <!-- 뷰파인더 삼각형 -->
+    <polygon points="455,210 488,193 488,222" fill="#1A6B8A"/>
+    <!-- 렌즈 마운트 -->
+    <rect x="476" y="193" width="68" height="20" rx="10" fill="#E0A800"/>
+
+    <!-- 하단 URL 바 -->
+    <rect x="220" y="800" width="584" height="54" rx="27" fill="white" fill-opacity="0.2"/>
+    <circle cx="260" cy="827" r="18" fill="#00CEC9"/>
+    <!-- 잠금 아이콘 -->
+    <rect x="251" y="826" width="18" height="14" rx="3" fill="white"/>
+    <path d="M 255 826 Q 255 818 260 818 Q 265 818 265 826" fill="none" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
+    <rect x="294" y="815" width="320" height="24" rx="12" fill="white" fill-opacity="0.5"/>
+
+    <!-- URL 바 텍스트 -->
+    <text x="460" y="827" font-size="24" fill="white" fill-opacity="0.7" dominant-baseline="central" font-family="Arial, sans-serif">https://example.com</text>
+  </g>
+</svg>

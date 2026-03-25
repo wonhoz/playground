@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" width="1024" height="1024">
+  <defs>
+    <linearGradient id="bg05" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F9CA24"/>
+      <stop offset="100%" stop-color="#6AB04C"/>
+    </linearGradient>
+    <clipPath id="clip05">
+      <rect x="0" y="0" width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+
+  <!-- Layer1: 배경 -->
+  <rect x="0" y="0" width="1024" height="1024" rx="190" fill="url(#bg05)"/>
+
+  <g clip-path="url(#clip05)">
+    <!-- Layer2: 셔터 다이어프램 -->
+
+    <!-- 잎사귀 6개 (60도씩) — 외곽 링보다 먼저 그림 -->
+    <ellipse cx="512" cy="336" rx="62" ry="162" fill="#2D3436" transform="rotate(0, 512, 490)"/>
+    <ellipse cx="512" cy="336" rx="62" ry="162" fill="#2D3436" transform="rotate(60, 512, 490)"/>
+    <ellipse cx="512" cy="336" rx="62" ry="162" fill="#2D3436" transform="rotate(120, 512, 490)"/>
+    <ellipse cx="512" cy="336" rx="62" ry="162" fill="#2D3436" transform="rotate(180, 512, 490)"/>
+    <ellipse cx="512" cy="336" rx="62" ry="162" fill="#2D3436" transform="rotate(240, 512, 490)"/>
+    <ellipse cx="512" cy="336" rx="62" ry="162" fill="#2D3436" transform="rotate(300, 512, 490)"/>
+
+    <!-- 외곽 링 -->
+    <circle cx="512" cy="490" r="302" fill="none" stroke="#2D3436" stroke-width="40"/>
+
+    <!-- 중앙 원들 -->
+    <circle cx="512" cy="490" r="97" fill="#F9CA24"/>
+    <circle cx="512" cy="490" r="57" fill="#2D3436"/>
+    <circle cx="512" cy="490" r="30" fill="white"/>
+    <!-- 렌즈 하이라이트 -->
+    <circle cx="498" cy="476" r="11" fill="white" fill-opacity="0.8"/>
+
+    <!-- Layer3: 점선 효과 -->
+    <circle cx="512" cy="490" r="347" fill="none" stroke="#2D3436" stroke-width="16" stroke-dasharray="30 20" stroke-opacity="0.4"/>
+
+    <!-- 하단 배지 -->
+    <rect x="318" y="798" width="388" height="80" rx="40" fill="#2D3436" fill-opacity="0.22"/>
+    <text x="512" y="840" font-size="52" fill="#2D3436" font-weight="900" text-anchor="middle" dominant-baseline="central" font-family="Arial Black, Arial, sans-serif">SHOT</text>
+  </g>
+</svg>

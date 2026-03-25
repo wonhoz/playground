@@ -22,7 +22,7 @@ public class CrosswordGrid : System.Windows.FrameworkElement
     private static readonly SolidColorBrush BrBlock    = new(WpfColor.FromRgb(0x1A, 0x1A, 0x1A));
     private static readonly SolidColorBrush BrEmpty    = new(WpfColor.FromRgb(0xF5, 0xF5, 0xF5));
     private static readonly SolidColorBrush BrWord     = new(WpfColor.FromRgb(0xBB, 0xDE, 0xFB));
-    private static readonly SolidColorBrush BrCursor   = new(WpfColor.FromRgb(0x19, 0x76, 0xD2));
+    private static readonly SolidColorBrush BrCursor   = new(WpfColor.FromRgb(0x02, 0x88, 0xD1));
     private static readonly SolidColorBrush BrOk       = new(WpfColor.FromRgb(0x1B, 0x5E, 0x20));
     private static readonly SolidColorBrush BrLetter   = new(WpfColor.FromRgb(0x1A, 0x1A, 0x1A));
     private static readonly SolidColorBrush BrNumColor = new(WpfColor.FromRgb(0x55, 0x55, 0x55));
@@ -160,6 +160,28 @@ public class CrosswordGrid : System.Windows.FrameworkElement
                 _selAcross = !_selAcross;
             e.Handled = true;
         }
+        else if (e.Key is Key.Left or Key.Right or Key.Up or Key.Down)
+        {
+            int dr = e.Key == Key.Down ? 1 : e.Key == Key.Up ? -1 : 0;
+            int dc = e.Key == Key.Right ? 1 : e.Key == Key.Left ? -1 : 0;
+            int nr = _selRow + dr, nc = _selCol + dc;
+            if (nr >= 0 && nr < N && nc >= 0 && nc < N &&
+                Game.CurrentPuzzle?.Grid[nr, nc] != '#')
+            {
+                _selRow = nr;
+                _selCol = nc;
+                // 방향이 이동과 맞지 않으면 전환
+                bool wantAcross = (dc != 0);
+                if (dr != 0 || dc != 0)
+                {
+                    if (Game.FindWord(_selRow, _selCol, wantAcross) is not null)
+                        _selAcross = wantAcross;
+                    else if (Game.FindWord(_selRow, _selCol, _selAcross) is null)
+                        _selAcross = !_selAcross;
+                }
+            }
+            e.Handled = true;
+        }
 
         InvalidateVisual();
         Changed?.Invoke();
@@ -191,4 +213,12 @@ public class CrosswordGrid : System.Windows.FrameworkElement
 
     public PlacedWord? SelectedWord =>
         _selRow >= 0 ? Game?.FindWord(_selRow, _selCol, _selAcross) : null;
+
+    public void SelectWord(PlacedWord word)
+    {
+        _selRow    = word.Row;
+        _selCol    = word.Col;
+        _selAcross = word.Across;
+        InvalidateVisual();
+    }
 }

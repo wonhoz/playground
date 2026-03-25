@@ -94,7 +94,7 @@ public partial class MainWindow : Window
             : _game.CurrentPuzzle.DownWords.ToList();
         if (idx >= words.Count) return;
 
-        // 격자에서 해당 단어 시작 셀 선택 (직접 호출)
+        _grid.SelectWord(words[idx]);
         _grid.Focus();
     }
 

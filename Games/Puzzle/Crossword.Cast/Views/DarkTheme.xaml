@@ -64,7 +64,7 @@
                                 </Border>
                                 <ControlTemplate.Triggers>
                                     <Trigger Property="IsSelected" Value="True">
-                                        <Setter TargetName="Bd" Property="Background" Value="#1976D2"/>
+                                        <Setter TargetName="Bd" Property="Background" Value="#0288D1"/>
                                     </Trigger>
                                     <Trigger Property="IsMouseOver" Value="True">
                                         <Setter TargetName="Bd" Property="Background" Value="#2A3A4A"/>
@@ -80,6 +80,32 @@
 
     <Style TargetType="TextBlock">
         <Setter Property="Foreground" Value="#E0E0E0"/>
+    </Style>
+
+    <Style TargetType="ScrollBar">
+        <Setter Property="Background" Value="#1A1A2A"/>
+        <Setter Property="Width"      Value="8"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ScrollBar">
+                    <Grid>
+                        <Border Background="#1A1A2A" CornerRadius="4"/>
+                        <Track x:Name="PART_Track" IsDirectionReversed="True">
+                            <Track.Thumb>
+                                <Thumb>
+                                    <Thumb.Template>
+                                        <ControlTemplate TargetType="Thumb">
+                                            <Border Background="#3A3A4A" CornerRadius="4"
+                                                    Margin="1,2"/>
+                                        </ControlTemplate>
+                                    </Thumb.Template>
+                                </Thumb>
+                            </Track.Thumb>
+                        </Track>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 
     <Style TargetType="ScrollViewer">

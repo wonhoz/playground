@@ -47,5 +47,80 @@
       <Setter Property="Foreground" Value="{StaticResource AccentBrush}"/>
     </Style>
 
+    <!-- ComboBox 다크 테마 -->
+    <Style TargetType="ComboBox">
+      <Setter Property="Background"       Value="#21262D"/>
+      <Setter Property="Foreground"       Value="{StaticResource TextBrush}"/>
+      <Setter Property="BorderBrush"      Value="{StaticResource BorderBrush}"/>
+      <Setter Property="BorderThickness"  Value="1"/>
+      <Setter Property="Padding"          Value="6,4"/>
+      <Setter Property="FontSize"         Value="11"/>
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="ComboBox">
+            <Grid>
+              <Border x:Name="bd" Background="{TemplateBinding Background}"
+                      BorderBrush="{TemplateBinding BorderBrush}"
+                      BorderThickness="{TemplateBinding BorderThickness}"
+                      CornerRadius="4">
+                <Grid>
+                  <ContentPresenter x:Name="cp"
+                      Content="{TemplateBinding SelectionBoxItem}"
+                      Margin="{TemplateBinding Padding}"
+                      VerticalAlignment="Center"/>
+                  <TextBlock Text="▾" Foreground="{StaticResource DimBrush}"
+                             FontSize="10" HorizontalAlignment="Right"
+                             VerticalAlignment="Center" Margin="0,0,8,0"/>
+                </Grid>
+              </Border>
+              <Popup x:Name="PART_Popup" AllowsTransparency="True"
+                     IsOpen="{TemplateBinding IsDropDownOpen}"
+                     Placement="Bottom" PopupAnimation="Fade">
+                <Border Background="#21262D" BorderBrush="{StaticResource BorderBrush}"
+                        BorderThickness="1" CornerRadius="4" Margin="0,2,0,0">
+                  <ScrollViewer MaxHeight="200">
+                    <ItemsPresenter/>
+                  </ScrollViewer>
+                </Border>
+              </Popup>
+            </Grid>
+            <ControlTemplate.Triggers>
+              <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="bd" Property="BorderBrush" Value="{StaticResource AccentBrush}"/>
+              </Trigger>
+            </ControlTemplate.Triggers>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+      <Setter Property="ItemContainerStyle">
+        <Setter.Value>
+          <Style TargetType="ComboBoxItem">
+            <Setter Property="Background"  Value="Transparent"/>
+            <Setter Property="Foreground"  Value="{StaticResource TextBrush}"/>
+            <Setter Property="Padding"     Value="8,4"/>
+            <Setter Property="FontSize"    Value="11"/>
+            <Setter Property="Template">
+              <Setter.Value>
+                <ControlTemplate TargetType="ComboBoxItem">
+                  <Border x:Name="ib" Background="{TemplateBinding Background}"
+                          Padding="{TemplateBinding Padding}">
+                    <ContentPresenter/>
+                  </Border>
+                  <ControlTemplate.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                      <Setter TargetName="ib" Property="Background" Value="#30363D"/>
+                    </Trigger>
+                    <Trigger Property="IsSelected" Value="True">
+                      <Setter TargetName="ib" Property="Background" Value="#1F3A4A"/>
+                    </Trigger>
+                  </ControlTemplate.Triggers>
+                </ControlTemplate>
+              </Setter.Value>
+            </Setter>
+          </Style>
+        </Setter.Value>
+      </Setter>
+    </Style>
+
   </Application.Resources>
 </Application>

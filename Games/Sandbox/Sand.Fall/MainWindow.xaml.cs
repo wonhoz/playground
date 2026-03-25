@@ -1,5 +1,8 @@
+using System.IO;
 using System.Runtime.InteropServices;
 using System.Windows.Interop;
+using System.Windows.Media.Imaging;
+using Microsoft.Win32;
 using SandFall.Sim;
 
 namespace SandFall;
@@ -99,12 +102,13 @@ public partial class MainWindow : Window
         _bitmap.AddDirtyRect(new Int32Rect(0, 0, SimGrid.W, SimGrid.H));
         _bitmap.Unlock();
 
-        // FPS 카운터
+        // FPS + 파티클 카운터
         _frameCount++;
         var elapsed = (DateTime.UtcNow - _fpsTimer).TotalSeconds;
         if (elapsed >= 1.0)
         {
             TxtFps.Text = $"FPS: {_frameCount / elapsed:F0}  |  ×{(int)SldSpeed.Value} 속도";
+            TxtParticles.Text = $"파티클: {_grid.ParticleCount:N0}";
             _frameCount = 0;
             _fpsTimer = DateTime.UtcNow;
         }
@@ -129,7 +133,10 @@ public partial class MainWindow : Window
     }
 
     private void SimImage_RightMouseDown(object sender, MouseButtonEventArgs e)
-        => EraseAt(e.GetPosition(SimImage));
+    {
+        Mouse.OverrideCursor = Cursors.No; // 지우기 커서
+        EraseAt(e.GetPosition(SimImage));
+    }
 
     private void DrawAt(Point pos)
     {
@@ -161,10 +168,12 @@ public partial class MainWindow : Window
 
     // ── 팔레트 버튼 생성 ─────────────────────────────────────────────
     private Border? _selectedBtn;
+    private readonly List<Border> _paletteButtons = new();
 
     private void BuildPalette()
     {
         MatPanel.Children.Clear();
+        _paletteButtons.Clear();
 
         foreach (var (mat, emoji, name) in Palette)
         {
@@ -190,25 +199,101 @@ public partial class MainWindow : Window
             };
             btn.Child = tb;
 
-            btn.MouseLeftButtonDown += (s, e) =>
-            {
-                if (_selectedBtn is not null)
-                    _selectedBtn.BorderBrush = new SolidColorBrush(Color.FromRgb(0x30, 0x36, 0x3D));
-                _curMat = (Material)btn.Tag;
-                btn.BorderBrush = new SolidColorBrush(Color.FromRgb(0x4F, 0xC3, 0xF7));
-                _selectedBtn = btn;
-            };
+            btn.MouseLeftButtonDown += (s, e) => SelectPaletteButton(btn);
 
             MatPanel.Children.Add(btn);
+            _paletteButtons.Add(btn);
 
             // 기본 선택: Sand
             if (mat == Material.Sand)
-            {
-                btn.BorderBrush = new SolidColorBrush(Color.FromRgb(0x4F, 0xC3, 0xF7));
-                _selectedBtn = btn;
-            }
+                SelectPaletteButton(btn);
         }
     }
+
+    private void SelectPaletteButton(Border btn)
+    {
+        if (_selectedBtn is not null)
+            _selectedBtn.BorderBrush = new SolidColorBrush(Color.FromRgb(0x30, 0x36, 0x3D));
+        _curMat = (Material)btn.Tag;
+        btn.BorderBrush = new SolidColorBrush(Color.FromRgb(0x4F, 0xC3, 0xF7));
+        _selectedBtn = btn;
+    }
+
+    // ── 키보드 단축키 ────────────────────────────────────────────────
+    private void Window_KeyDown(object sender, KeyEventArgs e)
+    {
+        // Space: 일시정지/재개
+        if (e.Key == Key.Space)
+        {
+            _isPaused = !_isPaused;
+            BtnPause.Content = _isPaused ? "▶ 재개" : "⏸ 일시정지";
+            e.Handled = true;
+            return;
+        }
+
+        // Ctrl+S: 스크린샷 저장
+        if (e.Key == Key.S && (Keyboard.Modifiers & ModifierKeys.Control) != 0)
+        {
+            SaveScreenshot();
+            e.Handled = true;
+            return;
+        }
+
+        // 숫자키 1-9, 0 → 팔레트 선택 (Palette 배열 순서)
+        int idx = e.Key switch
+        {
+            Key.D1 or Key.NumPad1 => 0,
+            Key.D2 or Key.NumPad2 => 1,
+            Key.D3 or Key.NumPad3 => 2,
+            Key.D4 or Key.NumPad4 => 3,
+            Key.D5 or Key.NumPad5 => 4,
+            Key.D6 or Key.NumPad6 => 5,
+            Key.D7 or Key.NumPad7 => 6,
+            Key.D8 or Key.NumPad8 => 7,
+            Key.D9 or Key.NumPad9 => 8,
+            Key.D0 or Key.NumPad0 => 9,
+            _ => -1
+        };
+        if (idx >= 0 && idx < _paletteButtons.Count)
+        {
+            SelectPaletteButton(_paletteButtons[idx]);
+            e.Handled = true;
+        }
+    }
+
+    // ── 스크린샷 저장 ────────────────────────────────────────────────
+    private void SaveScreenshot()
+    {
+        var dlg = new SaveFileDialog
+        {
+            Filter   = "PNG 이미지|*.png",
+            FileName = $"SandFall_{DateTime.Now:yyyyMMdd_HHmmss}.png",
+        };
+        if (dlg.ShowDialog() != true) return;
+
+        var encoder = new PngBitmapEncoder();
+        encoder.Frames.Add(BitmapFrame.Create(_bitmap));
+        using var stream = File.OpenWrite(dlg.FileName);
+        encoder.Save(stream);
+    }
+
+    // ── 해상도 변경 ──────────────────────────────────────────────────
+    private void CmbRes_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (!IsLoaded) return;
+        if (CmbRes.SelectedItem is not ComboBoxItem item) return;
+
+        var parts = ((string)item.Tag).Split(',');
+        int w = int.Parse(parts[0]), h = int.Parse(parts[1]);
+
+        _grid   = new SimGrid(w, h);
+        _bitmap = new WriteableBitmap(w, h, 96, 96, PixelFormats.Bgr32, null);
+        SimImage.Source = _bitmap;
+    }
+
+    // ── 우클릭 커서 복원 ─────────────────────────────────────────────
+    private void SimImage_RightMouseUp(object sender, MouseButtonEventArgs e)
+        => Mouse.OverrideCursor = null;
 
     // ── 제어 버튼 ────────────────────────────────────────────────────
     private void BtnPause_Click(object sender, RoutedEventArgs e)
@@ -234,7 +319,7 @@ public partial class MainWindow : Window
         for (int y = SimGrid.H * 3 / 4; y < SimGrid.H; y++)
         for (int x = 0; x < SimGrid.W; x++)
         {
-            if (_grid.GetType(x, y) == Material.Empty)
+            if (_grid.GetMaterial(x, y) == Material.Empty)
                 _grid.Set(x, y, Material.Water);
         }
     }

@@ -12,16 +12,25 @@ public struct Cell
 /// <summary>Falling Sand 셀룰러 오토마타 그리드</summary>
 public sealed class SimGrid
 {
-    public const int W = 320;
-    public const int H = 200;
+    public static int W { get; private set; } = 320;
+    public static int H { get; private set; } = 200;
 
-    private Cell[]   _cells  = new Cell[W * H];
-    private uint[]   _pixels = new uint[W * H]; // BGRA32 픽셀 버퍼
+    private Cell[]   _cells;
+    private uint[]   _pixels; // BGRA32 픽셀 버퍼
     private Random   _rng    = new();
+
+    public int ParticleCount { get; private set; }
 
     // 불꽃 색상 팔레트 (뜨거운 → 차가운)
     private static readonly uint[] FireColors =
         [0xFFFFFFAA, 0xFFFFDD00, 0xFFFF8800, 0xFFFF4400, 0xFFCC2200, 0xFF881100];
+
+    public SimGrid(int w = 320, int h = 200)
+    {
+        W = w; H = h;
+        _cells  = new Cell[W * H];
+        _pixels = new uint[W * H];
+    }
 
     public ReadOnlySpan<uint> Pixels => _pixels;
 
@@ -30,7 +39,7 @@ public sealed class SimGrid
     private bool InBounds(int x, int y) => (uint)x < W && (uint)y < H;
 
     // ── 셀 접근 ─────────────────────────────────────────────────────
-    public Material GetType(int x, int y) =>
+    public Material GetMaterial(int x, int y) =>
         InBounds(x, y) ? _cells[Idx(x, y)].Type : Material.Stone; // 경계 밖은 Stone 취급
 
     private ref Cell At(int x, int y) => ref _cells[Idx(x, y)];
@@ -82,7 +91,12 @@ public sealed class SimGrid
             }
         }
 
-        // 픽셀 버퍼 갱신
+        // 픽셀 버퍼 갱신 + 파티클 카운트
+        int cnt = 0;
+        for (int i = 0; i < _cells.Length; i++)
+            if (_cells[i].Type != Material.Empty) cnt++;
+        ParticleCount = cnt;
+
         UpdatePixels();
     }
 

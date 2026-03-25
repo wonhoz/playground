@@ -4,7 +4,8 @@
         Title="Sand.Fall" Width="1060" Height="700"
         MinWidth="800" MinHeight="520"
         Background="{StaticResource BgBrush}"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        KeyDown="Window_KeyDown">
 
   <Grid>
     <Grid.ColumnDefinitions>
@@ -23,6 +24,7 @@
              MouseLeftButtonDown="SimImage_MouseDown"
              MouseLeftButtonUp="SimImage_MouseUp"
              MouseRightButtonDown="SimImage_RightMouseDown"
+             MouseRightButtonUp="SimImage_RightMouseUp"
              Cursor="Cross"
              IsHitTestVisible="True"/>
     </Border>
@@ -67,6 +69,17 @@
 
         <Separator Background="{StaticResource BorderBrush}" Margin="0,0,0,10"/>
 
+        <!-- 해상도 프리셋 -->
+        <TextBlock Text="해상도" Foreground="{StaticResource DimBrush}" FontSize="11" Margin="0,0,0,4"/>
+        <ComboBox x:Name="CmbRes" Margin="0,0,0,10"
+                  SelectionChanged="CmbRes_SelectionChanged">
+          <ComboBoxItem Content="160 × 100  (저사양)" Tag="160,100"/>
+          <ComboBoxItem Content="320 × 200  (기본)"  Tag="320,200" IsSelected="True"/>
+          <ComboBoxItem Content="480 × 300  (고해상도)" Tag="480,300"/>
+        </ComboBox>
+
+        <Separator Background="{StaticResource BorderBrush}" Margin="0,0,0,10"/>
+
         <!-- 제어 버튼 -->
         <Button x:Name="BtnPause" Content="⏸ 일시정지" Click="BtnPause_Click" Margin="0,0,0,6"/>
         <Button Content="🗑 전체 지우기" Click="BtnClear_Click" Margin="0,0,0,6"/>
@@ -89,7 +102,9 @@
 
         <!-- 상태바 -->
         <TextBlock x:Name="TxtFps" Foreground="{StaticResource DimBrush}"
-                   FontSize="10" Margin="0,12,0,0"/>
+                   FontSize="10" Margin="0,12,0,2"/>
+        <TextBlock x:Name="TxtParticles" Foreground="{StaticResource DimBrush}"
+                   FontSize="10"/>
       </StackPanel>
     </Border>
   </Grid>

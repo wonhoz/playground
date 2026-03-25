@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_03: metaphor | 열쇠구멍으로 헥스값 빛이 새어나옴 (Peek) | 공간/장면 | 인디고 배경 + 황금 열쇠구멍 + 사이언 빛 -->
+  <defs>
+    <linearGradient id="bgIndigo" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1A1060"/>
+      <stop offset="100%" stop-color="#0D0830"/>
+    </linearGradient>
+    <linearGradient id="glowGrad" x1="0.5" y1="1" x2="0.5" y2="0">
+      <stop offset="0%" stop-color="#00FFFF" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#00FFFF" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="keyGold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFD700"/>
+      <stop offset="100%" stop-color="#FFA000"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="18" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <clipPath id="iconBounds">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+
+  <!-- Layer 1: 짙은 인디고 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bgIndigo)"/>
+
+  <!-- 빛 후광 (열쇠구멍 아래에서 퍼지는 사이언 빛) -->
+  <g clip-path="url(#iconBounds)">
+    <ellipse cx="512" cy="700" rx="340" ry="420" fill="url(#glowGrad)" opacity="0.6"/>
+    <ellipse cx="512" cy="750" rx="200" ry="300" fill="#00FFFF" opacity="0.12"/>
+  </g>
+
+  <!-- Layer 2: 문 실루엣 -->
+  <rect x="230" y="200" width="564" height="720" rx="16" fill="#120C40" stroke="#2A1F80" stroke-width="8"/>
+
+  <!-- 열쇠구멍 모양 (원 + 아래 삼각형 형태) -->
+  <!-- 열쇠구멍 원 부분 -->
+  <circle cx="512" cy="440" r="110" fill="url(#keyGold)"/>
+  <circle cx="512" cy="440" r="70" fill="#0A0620"/>
+  <!-- 빛이 안쪽에서 새어나옴 -->
+  <circle cx="512" cy="440" r="52" fill="#00FFFF" opacity="0.85" filter="url(#glow)"/>
+
+  <!-- 열쇠구멍 하단 슬롯 -->
+  <path d="M 472 540 L 440 680 L 584 680 L 552 540 Z" fill="url(#keyGold)"/>
+  <path d="M 486 545 L 462 668 L 562 668 L 538 545 Z" fill="#0A0620"/>
+  <!-- 슬롯 안 빛 -->
+  <path d="M 492 548 L 470 660 L 554 660 L 532 548 Z" fill="#00FFFF" opacity="0.7" filter="url(#glow)"/>
+
+  <!-- Layer 3: 빛 새어나오는 헥스 텍스트 (열쇠구멍 밖으로) -->
+  <text x="512" y="790" text-anchor="middle" dominant-baseline="middle"
+        font-family="Consolas, monospace" font-size="54" font-weight="bold" fill="#00FFFF" opacity="0.9">FF D8 FF E0</text>
+  <text x="512" y="855" text-anchor="middle" dominant-baseline="middle"
+        font-family="Consolas, monospace" font-size="42" fill="#00CCDD" opacity="0.55">00 10 4A 46 49 46</text>
+
+  <!-- 광선 줄기들 -->
+  <line x1="512" y1="700" x2="200" y2="870" stroke="#00FFFF" stroke-width="3" opacity="0.15"/>
+  <line x1="512" y1="700" x2="824" y2="870" stroke="#00FFFF" stroke-width="3" opacity="0.15"/>
+  <line x1="512" y1="700" x2="512" y2="900" stroke="#00FFFF" stroke-width="4" opacity="0.2"/>
+  <line x1="512" y1="700" x2="300" y2="800" stroke="#00FFFF" stroke-width="2" opacity="0.1"/>
+  <line x1="512" y1="700" x2="724" y2="800" stroke="#00FFFF" stroke-width="2" opacity="0.1"/>
+
+  <!-- 문 나사 장식 -->
+  <circle cx="272" cy="240" r="14" fill="#2A1F80"/>
+  <circle cx="752" cy="240" r="14" fill="#2A1F80"/>
+  <circle cx="272" cy="880" r="14" fill="#2A1F80"/>
+  <circle cx="752" cy="880" r="14" fill="#2A1F80"/>
+</svg>

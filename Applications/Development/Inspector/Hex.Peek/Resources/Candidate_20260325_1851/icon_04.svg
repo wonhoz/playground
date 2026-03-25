@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_04: metaphor | 파일이 헥스로 '해독'되는 장면 - 파일 아이콘 + X선 오버레이 | 레이어드 | 파스텔 핑크 배경 + 라벤더 + 청록 -->
+  <defs>
+    <linearGradient id="bgPink" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFB3D9"/>
+      <stop offset="100%" stop-color="#FF80C0"/>
+    </linearGradient>
+    <linearGradient id="fileBlue" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#9C88FF"/>
+      <stop offset="100%" stop-color="#6C5CE7"/>
+    </linearGradient>
+    <linearGradient id="scanGreen" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#00E5AA" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#00B386" stop-opacity="0.6"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Layer 1: 파스텔 핑크 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bgPink)"/>
+
+  <!-- 배경 물음표들 (해독 전 상태) -->
+  <text x="170" y="340" font-family="Arial" font-size="90" fill="#FF60A8" opacity="0.25">?</text>
+  <text x="820" y="300" font-family="Arial" font-size="70" fill="#FF60A8" opacity="0.2">?</text>
+  <text x="130" y="700" font-family="Arial" font-size="80" fill="#FF60A8" opacity="0.2">?</text>
+  <text x="840" y="750" font-family="Arial" font-size="90" fill="#FF60A8" opacity="0.25">?</text>
+
+  <!-- Layer 2: 파일 아이콘 본체 -->
+  <rect x="250" y="180" width="440" height="580" rx="24" fill="url(#fileBlue)"/>
+  <!-- 파일 귀퉁이 접힘 -->
+  <path d="M 570 180 L 690 300 L 570 300 Z" fill="#4A3AAA"/>
+  <rect x="570" y="180" width="120" height="120" rx="4" fill="#B8ADFF" opacity="0.3"/>
+
+  <!-- 파일 내 가로선 (바이너리 느낌) -->
+  <rect x="290" y="360" width="360" height="18" rx="9" fill="white" opacity="0.25"/>
+  <rect x="290" y="402" width="290" height="18" rx="9" fill="white" opacity="0.2"/>
+  <rect x="290" y="444" width="320" height="18" rx="9" fill="white" opacity="0.2"/>
+  <rect x="290" y="486" width="260" height="18" rx="9" fill="white" opacity="0.15"/>
+  <rect x="290" y="528" width="340" height="18" rx="9" fill="white" opacity="0.15"/>
+  <rect x="290" y="570" width="200" height="18" rx="9" fill="white" opacity="0.1"/>
+  <rect x="290" y="612" width="280" height="18" rx="9" fill="white" opacity="0.1"/>
+
+  <!-- Layer 3: X선 스캔 오버레이 (헥스 해독 빛) -->
+  <!-- 스캔라인 (청록 반투명 줄) -->
+  <rect x="230" y="400" width="500" height="80" rx="4" fill="url(#scanGreen)" opacity="0.8"/>
+
+  <!-- 스캔된 결과 - 헥스값 오버레이 -->
+  <text x="470" y="445" text-anchor="middle" dominant-baseline="middle"
+        font-family="Consolas, monospace" font-size="52" font-weight="bold" fill="white">4A 46 49</text>
+
+  <!-- 오른쪽: 디코드 결과 패널 -->
+  <rect x="730" y="300" width="244" height="380" rx="20" fill="white" opacity="0.92"/>
+  <rect x="730" y="300" width="244" height="56" rx="20" fill="#00C896"/>
+  <rect x="730" y="336" width="244" height="20" fill="#00C896"/>
+  <text x="852" y="330" text-anchor="middle" dominant-baseline="middle"
+        font-family="Consolas" font-size="32" font-weight="bold" fill="white">DECODE</text>
+
+  <text x="760" y="395" dominant-baseline="middle" font-family="Consolas" font-size="28" fill="#444">int8</text>
+  <text x="940" y="395" text-anchor="end" dominant-baseline="middle" font-family="Consolas" font-size="28" font-weight="bold" fill="#6C5CE7">74</text>
+
+  <text x="760" y="440" dominant-baseline="middle" font-family="Consolas" font-size="28" fill="#444">uint16</text>
+  <text x="940" y="440" text-anchor="end" dominant-baseline="middle" font-family="Consolas" font-size="28" font-weight="bold" fill="#E83A8C">18766</text>
+
+  <text x="760" y="485" dominant-baseline="middle" font-family="Consolas" font-size="28" fill="#444">float</text>
+  <text x="940" y="485" text-anchor="end" dominant-baseline="middle" font-family="Consolas" font-size="28" font-weight="bold" fill="#FF7043">1.26e8</text>
+
+  <text x="760" y="530" dominant-baseline="middle" font-family="Consolas" font-size="28" fill="#444">int32</text>
+  <text x="940" y="530" text-anchor="end" dominant-baseline="middle" font-family="Consolas" font-size="28" font-weight="bold" fill="#00B386">1246278</text>
+
+  <text x="760" y="575" dominant-baseline="middle" font-family="Consolas" font-size="28" fill="#444">hex</text>
+  <text x="940" y="575" text-anchor="end" dominant-baseline="middle" font-family="Consolas" font-size="28" font-weight="bold" fill="#3A6AE0">0x4A46</text>
+
+  <!-- 연결선 -->
+  <line x1="730" y1="445" x2="692" y2="445" stroke="#00C896" stroke-width="4" opacity="0.6" stroke-dasharray="8 4"/>
+</svg>

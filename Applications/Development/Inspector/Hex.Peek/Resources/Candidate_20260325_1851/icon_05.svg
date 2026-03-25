@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_05: hybrid | 파일 + 헥스 그리드 오버레이 (4x4 이내) | 대각선/동적 | 산호 배경 + 흰 파일 + 진청 그리드 -->
+  <defs>
+    <linearGradient id="bgCor" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FF6B81"/>
+      <stop offset="100%" stop-color="#EE3050"/>
+    </linearGradient>
+    <linearGradient id="fileW" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#F0F4FF"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Layer 1: 산호 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bgCor)"/>
+
+  <!-- 배경 대각선 동적 장식 -->
+  <line x1="100" y1="0" x2="600" y2="1024" stroke="white" stroke-width="3" opacity="0.08"/>
+  <line x1="350" y1="0" x2="850" y2="1024" stroke="white" stroke-width="2" opacity="0.06"/>
+  <line x1="600" y1="0" x2="1100" y2="1024" stroke="white" stroke-width="2" opacity="0.05"/>
+
+  <!-- Layer 2: 파일 아이콘 (기울어져 동적인 느낌) -->
+  <g transform="rotate(-6, 512, 512)">
+    <rect x="240" y="160" width="440" height="580" rx="20" fill="url(#fileW)"/>
+    <!-- 귀퉁이 접힘 -->
+    <path d="M 560 160 L 680 280 L 560 280 Z" fill="#D0D8F0"/>
+    <rect x="560" y="160" width="120" height="120" rx="4" fill="#E8ECFF"/>
+  </g>
+
+  <!-- Layer 3: 헥스 그리드 (파일 위에 대각선으로 오버레이, 4x4) -->
+  <g transform="rotate(-6, 512, 512)">
+    <!-- 그리드 배경 반투명 -->
+    <rect x="250" y="300" width="420" height="300" rx="10" fill="#1A237E" opacity="0.82"/>
+
+    <!-- 4열 4행 헥스 그리드 -->
+    <!-- 행 1 (밝게 - 선택) -->
+    <rect x="252" y="300" width="418" height="66" rx="10" fill="#283593" opacity="0.9"/>
+    <text x="330" y="334" text-anchor="middle" dominant-baseline="middle" font-family="Consolas" font-size="44" font-weight="bold" fill="#82B1FF">FF</text>
+    <text x="435" y="334" text-anchor="middle" dominant-baseline="middle" font-family="Consolas" font-size="44" font-weight="bold" fill="#FFE082">D8</text>
+    <text x="540" y="334" text-anchor="middle" dominant-baseline="middle" font-family="Consolas" font-size="44" font-weight="bold" fill="#82B1FF">FF</text>
+    <text x="645" y="334" text-anchor="middle" dominant-baseline="middle" font-family="Consolas" font-size="44" font-weight="bold" fill="#80CBC4">E0</text>
+
+    <!-- 행 2 -->
+    <text x="330" y="400" text-anchor="middle" dominant-baseline="middle" font-family="Consolas" font-size="44" fill="#5C6BC0">00</text>
+    <text x="435" y="400" text-anchor="middle" dominant-baseline="middle" font-family="Consolas" font-size="44" fill="#5C6BC0">10</text>
+    <text x="540" y="400" text-anchor="middle" dominant-baseline="middle" font-family="Consolas" font-size="44" fill="#5C6BC0">4A</text>
+    <text x="645" y="400" text-anchor="middle" dominant-baseline="middle" font-family="Consolas" font-size="44" fill="#5C6BC0">46</text>
+
+    <!-- 행 3 -->
+    <text x="330" y="466" text-anchor="middle" dominant-baseline="middle" font-family="Consolas" font-size="44" fill="#3949AB" opacity="0.85">49</text>
+    <text x="435" y="466" text-anchor="middle" dominant-baseline="middle" font-family="Consolas" font-size="44" fill="#3949AB" opacity="0.85">46</text>
+    <text x="540" y="466" text-anchor="middle" dominant-baseline="middle" font-family="Consolas" font-size="44" fill="#3949AB" opacity="0.85">00</text>
+    <text x="645" y="466" text-anchor="middle" dominant-baseline="middle" font-family="Consolas" font-size="44" fill="#3949AB" opacity="0.85">01</text>
+
+    <!-- 행 4 -->
+    <text x="330" y="532" text-anchor="middle" dominant-baseline="middle" font-family="Consolas" font-size="44" fill="#283593" opacity="0.7">3C</text>
+    <text x="435" y="532" text-anchor="middle" dominant-baseline="middle" font-family="Consolas" font-size="44" fill="#283593" opacity="0.7">7F</text>
+    <text x="540" y="532" text-anchor="middle" dominant-baseline="middle" font-family="Consolas" font-size="44" fill="#283593" opacity="0.7">A2</text>
+    <text x="645" y="532" text-anchor="middle" dominant-baseline="middle" font-family="Consolas" font-size="44" fill="#283593" opacity="0.7">B8</text>
+
+    <!-- 그리드 구분선 -->
+    <line x1="382" y1="302" x2="382" y2="598" stroke="#3949AB" stroke-width="2" opacity="0.4"/>
+    <line x1="487" y1="302" x2="487" y2="598" stroke="#3949AB" stroke-width="2" opacity="0.4"/>
+    <line x1="592" y1="302" x2="592" y2="598" stroke="#3949AB" stroke-width="2" opacity="0.4"/>
+    <line x1="252" y1="366" x2="670" y2="366" stroke="#3949AB" stroke-width="2" opacity="0.3"/>
+    <line x1="252" y1="432" x2="670" y2="432" stroke="#3949AB" stroke-width="2" opacity="0.3"/>
+    <line x1="252" y1="498" x2="670" y2="498" stroke="#3949AB" stroke-width="2" opacity="0.3"/>
+  </g>
+
+  <!-- 파일 상단 "JPEG" 레이블 (자동 감지 느낌) -->
+  <rect x="600" y="185" width="170" height="50" rx="12" fill="#FFE082" transform="rotate(-6, 685, 210)"/>
+  <text x="685" y="212" text-anchor="middle" dominant-baseline="middle"
+        font-family="Arial" font-size="32" font-weight="bold" fill="#5D4037" transform="rotate(-6, 685, 212)">JPEG</text>
+</svg>

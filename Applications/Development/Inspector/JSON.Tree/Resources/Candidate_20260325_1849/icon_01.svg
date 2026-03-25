@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg01jt" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1E1B4B"/>
+      <stop offset="100%" stop-color="#4C1D95"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg01jt)"/>
+
+  <!-- Layer 2: 큰 {} 괄호 -->
+  <!-- 왼쪽 { -->
+  <text x="120" y="680" font-family="Consolas, monospace" font-size="640"
+        font-weight="bold" fill="#22D3EE" opacity="0.22">{</text>
+
+  <!-- 실제 { } 텍스트 (크고 선명하게) -->
+  <text x="148" y="595" font-family="Consolas, monospace" font-size="300"
+        font-weight="bold" fill="#67E8F9">{</text>
+  <text x="740" y="595" font-family="Consolas, monospace" font-size="300"
+        font-weight="bold" fill="#67E8F9">}</text>
+
+  <!-- Layer 3: 트리 가지들 (괄호 내부) -->
+  <!-- 루트 노드 -->
+  <circle cx="512" cy="440" r="28" fill="#A78BFA"/>
+
+  <!-- 가지 1 (왼쪽 위) -->
+  <line x1="512" y1="440" x2="340" y2="320" stroke="#C4B5FD" stroke-width="10"
+        stroke-linecap="round"/>
+  <circle cx="330" cy="308" r="22" fill="#818CF8"/>
+  <!-- 가지 1의 자식 -->
+  <line x1="330" y1="308" x2="240" y2="220" stroke="#C4B5FD" stroke-width="8"
+        stroke-linecap="round"/>
+  <circle cx="232" cy="213" r="16" fill="#6366F1"/>
+  <line x1="330" y1="308" x2="340" y2="210" stroke="#C4B5FD" stroke-width="8"
+        stroke-linecap="round"/>
+  <circle cx="344" cy="202" r="16" fill="#6366F1"/>
+
+  <!-- 가지 2 (오른쪽 위) -->
+  <line x1="512" y1="440" x2="684" y2="320" stroke="#C4B5FD" stroke-width="10"
+        stroke-linecap="round"/>
+  <circle cx="694" cy="308" r="22" fill="#818CF8"/>
+  <!-- 가지 2의 자식 -->
+  <line x1="694" y1="308" x2="684" y2="210" stroke="#C4B5FD" stroke-width="8"
+        stroke-linecap="round"/>
+  <circle cx="680" cy="202" r="16" fill="#6366F1"/>
+  <line x1="694" y1="308" x2="784" y2="220" stroke="#C4B5FD" stroke-width="8"
+        stroke-linecap="round"/>
+  <circle cx="792" cy="213" r="16" fill="#6366F1"/>
+
+  <!-- 가지 3 (아래) -->
+  <line x1="512" y1="440" x2="512" y2="550" stroke="#C4B5FD" stroke-width="10"
+        stroke-linecap="round"/>
+  <circle cx="512" cy="562" r="22" fill="#818CF8"/>
+
+  <!-- 하단 텍스트 -->
+  <text x="512" y="860" text-anchor="middle" font-family="Segoe UI, sans-serif"
+        font-size="58" font-weight="bold" fill="#67E8F9">JSON.Tree</text>
+  <text x="512" y="930" text-anchor="middle" font-family="Consolas, monospace"
+        font-size="36" fill="rgba(167,139,250,0.85)">{ } 계층 탐색기</text>
+</svg>

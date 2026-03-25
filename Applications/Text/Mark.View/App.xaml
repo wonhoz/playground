@@ -14,6 +14,7 @@
     <SolidColorBrush x:Key="AccentBrush"   Color="#58A6FF"/>
     <SolidColorBrush x:Key="Accent2Brush"  Color="#79C0FF"/>
     <SolidColorBrush x:Key="HoverBrush"    Color="#1E3060"/>
+    <SolidColorBrush x:Key="PressedBrush"  Color="#4A4A6A"/>
 
     <!-- ── Window ──────────────────────────────────────── -->
     <Style TargetType="Window">
@@ -46,7 +47,7 @@
                 <Setter TargetName="bd" Property="Background" Value="{StaticResource HoverBrush}"/>
               </Trigger>
               <Trigger Property="IsPressed" Value="True">
-                <Setter TargetName="bd" Property="Background" Value="#4A4A6A"/>
+                <Setter TargetName="bd" Property="Background" Value="{StaticResource PressedBrush}"/>
               </Trigger>
               <Trigger Property="IsEnabled" Value="False">
                 <Setter Property="Opacity" Value="0.4"/>
@@ -86,7 +87,7 @@
                 <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
               </Trigger>
               <Trigger Property="IsPressed" Value="True">
-                <Setter TargetName="bd" Property="Background" Value="#4A4A6A"/>
+                <Setter TargetName="bd" Property="Background" Value="{StaticResource PressedBrush}"/>
               </Trigger>
             </ControlTemplate.Triggers>
           </ControlTemplate>
@@ -226,7 +227,7 @@
                   <Thumb>
                     <Thumb.Template>
                       <ControlTemplate TargetType="Thumb">
-                        <Border Background="#444466" CornerRadius="4" Margin="2">
+                        <Border x:Name="ThumbBd" Background="#444466" CornerRadius="4" Margin="2">
                           <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="CommonStates">
                               <VisualState x:Name="Normal"/>
@@ -239,7 +240,6 @@
                               </VisualState>
                             </VisualStateGroup>
                           </VisualStateManager.VisualStateGroups>
-                          <Border x:Name="ThumbBd" Background="#444466" CornerRadius="4"/>
                         </Border>
                       </ControlTemplate>
                     </Thumb.Template>

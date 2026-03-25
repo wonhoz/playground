@@ -11,6 +11,7 @@ public class AppSettings
 
     public string Theme { get; set; } = "dark";
     public List<string> RecentFiles { get; set; } = [];
+    public List<string> OpenFiles { get; set; } = [];
     public double WindowLeft { get; set; } = double.NaN;
     public double WindowTop { get; set; } = double.NaN;
     public double WindowWidth { get; set; } = 1200;

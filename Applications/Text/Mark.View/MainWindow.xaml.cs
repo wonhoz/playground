@@ -30,7 +30,7 @@ public partial class MainWindow : Window
     private string _currentTheme = "dark";
     private double _pendingScrollY = 0;
     private bool _webViewReady = false;
-    private FileSystemWatcher? _fileWatcher;
+    private readonly Dictionary<string, FileSystemWatcher> _fileWatchers = new(StringComparer.OrdinalIgnoreCase);
     private double _editorFontSize = 13;
 
     public MainWindow()
@@ -46,17 +46,40 @@ public partial class MainWindow : Window
         SetupPreviewTimer();
         SetupAutoSaveTimer();
         RefreshRecentList();
+        RestoreSessionAsync();
+    }
+
+    private async void RestoreSessionAsync()
+    {
+        var files = _settings.OpenFiles.Where(File.Exists).ToList();
+        if (files.Count == 0) return;
+        // WebView2 초기화 완료 대기 (최대 3초)
+        for (int i = 0; i < 30 && !_webViewReady; i++)
+            await Task.Delay(100);
+        foreach (var f in files)
+            await OpenFileAsync(f);
     }
 
     private void RestoreWindowBounds()
     {
-        if (!double.IsNaN(_settings.WindowLeft) && !double.IsNaN(_settings.WindowTop))
-        {
-            Left = _settings.WindowLeft;
-            Top = _settings.WindowTop;
-        }
         Width = _settings.WindowWidth;
         Height = _settings.WindowHeight;
+        if (!double.IsNaN(_settings.WindowLeft) && !double.IsNaN(_settings.WindowTop))
+        {
+            // 저장된 위치가 현재 연결된 화면 내에 있는지 확인
+            var virtualScreen = new System.Windows.Rect(
+                SystemParameters.VirtualScreenLeft,
+                SystemParameters.VirtualScreenTop,
+                SystemParameters.VirtualScreenWidth,
+                SystemParameters.VirtualScreenHeight);
+            var titleBarArea = new System.Windows.Rect(
+                _settings.WindowLeft, _settings.WindowTop, Width, 40);
+            if (virtualScreen.IntersectsWith(titleBarArea))
+            {
+                Left = _settings.WindowLeft;
+                Top = _settings.WindowTop;
+            }
+        }
     }
 
     private void SaveWindowBounds()
@@ -75,12 +98,31 @@ public partial class MainWindow : Window
         Editor.FontSize = _editorFontSize;
     }
 
+    private DispatcherTimer? _fontSizeHintTimer;
+
     private void AdjustEditorFontSize(double delta)
     {
         _editorFontSize = Math.Clamp(_editorFontSize + delta, 8, 32);
         Editor.FontSize = _editorFontSize;
         _settings.EditorFontSize = _editorFontSize;
         _settings.Save();
+        ShowFontSizeHint();
+    }
+
+    private void ShowFontSizeHint()
+    {
+        var prev = _activeIndex >= 0 && _activeIndex < _docs.Count
+            ? (_docs[_activeIndex].IsNew ? "새 문서 (저장되지 않음)" : _docs[_activeIndex].FilePath)
+            : "파일을 열어주세요";
+        StatusPath.Text = $"에디터 폰트: {(int)_editorFontSize}px";
+        _fontSizeHintTimer?.Stop();
+        _fontSizeHintTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(2) };
+        _fontSizeHintTimer.Tick += (_, _) =>
+        {
+            _fontSizeHintTimer?.Stop();
+            StatusPath.Text = prev;
+        };
+        _fontSizeHintTimer.Start();
     }
 
     private void ApplySavedTheme()
@@ -455,6 +497,7 @@ public partial class MainWindow : Window
             if (result == MessageBoxResult.Yes) SaveDocument(doc);
         }
 
+        if (!doc.IsNew) RemoveFileWatcher(doc.FilePath);
         TabBar.Children.RemoveAt(index);
         _docs.RemoveAt(index);
         _tabs.RemoveAt(index);
@@ -544,7 +587,11 @@ public partial class MainWindow : Window
             doc.IsModified = false;
             int i = _docs.IndexOf(doc);
             UpdateTabTitle(i);
-            if (i == _activeIndex) Title = $"Mark.View — {doc.TabTitle}";
+            if (i == _activeIndex)
+            {
+                Title = $"Mark.View — {doc.TabTitle}";
+                UpdateStatusBar(doc);
+            }
             return true;
         }
         catch (Exception ex)
@@ -599,9 +646,41 @@ public partial class MainWindow : Window
 
     private void FindInPreview(string keyword)
     {
-        if (string.IsNullOrEmpty(keyword)) return;
-        _ = Viewer.ExecuteScriptAsync(
-            $"window.find({System.Text.Json.JsonSerializer.Serialize(keyword)}, false, false, true)");
+        if (!_webViewReady) return;
+        if (string.IsNullOrEmpty(keyword))
+        {
+            StatusFind.Visibility = Visibility.Collapsed;
+            _ = Viewer.ExecuteScriptAsync("window.getSelection()?.removeAllRanges()");
+            return;
+        }
+        _ = FindInPreviewAsync(keyword);
+    }
+
+    private async Task FindInPreviewAsync(string keyword)
+    {
+        try
+        {
+            var kw = System.Text.Json.JsonSerializer.Serialize(keyword);
+            // 전체 매칭 개수 계산
+            var countJson = await Viewer.ExecuteScriptAsync($@"
+(function() {{
+    var text = document.body.innerText || '';
+    var lower = text.toLowerCase();
+    var target = {kw}.toLowerCase();
+    if (!target) return '0';
+    var count = 0, idx = 0;
+    while ((idx = lower.indexOf(target, idx)) !== -1) {{ count++; idx += target.length; }}
+    return count.toString();
+}})()");
+            if (int.TryParse(countJson.Trim('"'), out var count))
+            {
+                StatusFind.Text = count > 0 ? $"{count}개 일치" : "없음";
+                StatusFind.Visibility = Visibility.Visible;
+            }
+            // 첫 번째 일치 항목으로 이동
+            await Viewer.ExecuteScriptAsync($"window.find({kw}, false, false, true)");
+        }
+        catch { }
     }
 
     // ── 이벤트 핸들러 ────────────────────────────────────────────────────
@@ -763,13 +842,14 @@ public partial class MainWindow : Window
                 int count = 1;
                 while (start > 0 && count < 4 && Editor.Text[start - 1] == ' ')
                 { start--; count++; }
-                Editor.Text = Editor.Text.Remove(start, count);
-                Editor.CaretIndex = start;
+                Editor.Select(start, count);
+                Editor.SelectedText = "";
             }
         }
         else
         {
-            Editor.Text = Editor.Text.Insert(caret, "    ");
+            Editor.Select(caret, 0);
+            Editor.SelectedText = "    ";
             Editor.CaretIndex = caret + 4;
         }
     }
@@ -808,7 +888,8 @@ public partial class MainWindow : Window
             }
         }
 
-        Editor.Text = text[..lineStart] + sb + text[lineEnd..];
+        Editor.Select(lineStart, lineEnd - lineStart);
+        Editor.SelectedText = sb.ToString();
         Editor.Select(lineStart, sb.Length);
     }
 
@@ -874,11 +955,19 @@ public partial class MainWindow : Window
     protected override void OnPreviewMouseWheel(MouseWheelEventArgs e)
     {
         base.OnPreviewMouseWheel(e);
-        if (Keyboard.Modifiers == ModifierKeys.Control)
+        // Ctrl+Wheel: 에디터 영역 위에서만 폰트 크기 조절
+        // WebView2(뷰어) 위에서는 가로채지 않음
+        if (Keyboard.Modifiers == ModifierKeys.Control && IsMouseOverEditor())
         {
             AdjustEditorFontSize(e.Delta > 0 ? 1 : -1);
             e.Handled = true;
         }
+    }
+
+    private bool IsMouseOverEditor()
+    {
+        var pos = Mouse.GetPosition(Editor);
+        return pos.X >= 0 && pos.Y >= 0 && pos.X <= Editor.ActualWidth && pos.Y <= Editor.ActualHeight;
     }
 
     // ── 드래그 앤 드롭 ───────────────────────────────────────────────────
@@ -898,7 +987,9 @@ public partial class MainWindow : Window
             if (File.Exists(f)) OpenFile(f);
     }
 
-    private async void OpenFile(string path)
+    private void OpenFile(string path) => _ = OpenFileAsync(path);
+
+    private async Task OpenFileAsync(string path)
     {
         await ShowLoadingAsync("파일 열기 중...");
         try
@@ -908,7 +999,7 @@ public partial class MainWindow : Window
             _settings.AddRecentFile(path);
             _settings.Save();
             RefreshRecentList();
-            SetupFileWatcher(path);
+            AddFileWatcher(path);
         }
         catch (Exception ex)
         {
@@ -921,17 +1012,27 @@ public partial class MainWindow : Window
 
     // ── 파일 변경 감지 ───────────────────────────────────────────────────
 
-    private void SetupFileWatcher(string filePath)
+    private void AddFileWatcher(string filePath)
     {
-        _fileWatcher?.Dispose();
+        if (_fileWatchers.ContainsKey(filePath)) return;
         var dir = Path.GetDirectoryName(filePath);
         if (dir == null) return;
-        _fileWatcher = new FileSystemWatcher(dir, Path.GetFileName(filePath))
+        var watcher = new FileSystemWatcher(dir, Path.GetFileName(filePath))
         {
             NotifyFilter = NotifyFilters.LastWrite | NotifyFilters.Size,
             EnableRaisingEvents = true,
         };
-        _fileWatcher.Changed += OnWatchedFileChanged;
+        watcher.Changed += OnWatchedFileChanged;
+        _fileWatchers[filePath] = watcher;
+    }
+
+    private void RemoveFileWatcher(string filePath)
+    {
+        if (_fileWatchers.TryGetValue(filePath, out var watcher))
+        {
+            watcher.Dispose();
+            _fileWatchers.Remove(filePath);
+        }
     }
 
     private DispatcherTimer? _fileChangedDebounce;
@@ -1040,8 +1141,10 @@ public partial class MainWindow : Window
         if (modified.Count == 0)
         {
             SaveWindowBounds();
+            SaveSession();
             _settings.Save();
-            _fileWatcher?.Dispose();
+            foreach (var w in _fileWatchers.Values) w.Dispose();
+            _fileWatchers.Clear();
             return;
         }
 
@@ -1062,7 +1165,17 @@ public partial class MainWindow : Window
                 SaveDocument(doc);
         }
         SaveWindowBounds();
+        SaveSession();
         _settings.Save();
-        _fileWatcher?.Dispose();
+        foreach (var w in _fileWatchers.Values) w.Dispose();
+        _fileWatchers.Clear();
+    }
+
+    private void SaveSession()
+    {
+        _settings.OpenFiles = _docs
+            .Where(d => !d.IsNew && File.Exists(d.FilePath))
+            .Select(d => d.FilePath)
+            .ToList();
     }
 }

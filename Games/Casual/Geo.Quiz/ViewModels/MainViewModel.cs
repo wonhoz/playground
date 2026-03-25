@@ -38,6 +38,15 @@ public class MainViewModel : BaseViewModel
         ["오세아니아"]= "Oceania",
     };
 
+    static readonly Dictionary<string, string> _engToKor = new()
+    {
+        ["Asia"]      = "아시아",
+        ["Europe"]    = "유럽",
+        ["Africa"]    = "아프리카",
+        ["Americas"]  = "아메리카",
+        ["Oceania"]   = "오세아니아",
+    };
+
     // ── 퀴즈 화면 ────────────────────────────────────────────────────────────
     QuizScreen _screen = QuizScreen.Start;
     int        _currentIndex;
@@ -166,8 +175,8 @@ public class MainViewModel : BaseViewModel
                 break;
             default: // Continent
                 question    = $"{subject.KorName}은(는) 어느 대륙?";
-                correct     = subject.Continent;
-                var continents = new[] { "Asia","Europe","Africa","Americas","Oceania" };
+                correct     = _engToKor.TryGetValue(subject.Continent, out var kor) ? kor : subject.Continent;
+                var continents = new[] { "아시아","유럽","아프리카","아메리카","오세아니아" };
                 distractors = continents.Where(c => c != correct)
                                         .OrderBy(_ => _rng.Next())
                                         .Take(3)
@@ -273,6 +282,15 @@ public class MainViewModel : BaseViewModel
                     Answered = true;
                     NextCmd.Raise();
                     NotifyChoiceProps();
+
+                    // 1.5초 후 자동으로 다음 문제 진행
+                    var autoNext = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(1500) };
+                    autoNext.Tick += (_, _) =>
+                    {
+                        autoNext.Stop();
+                        if (Answered) DoNext();
+                    };
+                    autoNext.Start();
                 }
             }
         };

@@ -57,8 +57,9 @@ public static class FlagCache
     {
         var img = new BitmapImage();
         img.BeginInit();
-        img.CacheOption  = BitmapCacheOption.OnLoad;
-        img.StreamSource = File.OpenRead(path);
+        img.CacheOption = BitmapCacheOption.OnLoad;
+        using var fs = File.OpenRead(path);
+        img.StreamSource = fs;
         img.EndInit();
         img.Freeze();
         return img;

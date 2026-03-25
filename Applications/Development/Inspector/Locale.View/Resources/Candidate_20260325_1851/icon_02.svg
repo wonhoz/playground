@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_02: literal | 지구 + 언어코드 핀 | 공간/장면 | 선명한 노랑 배경 + 파란 지구 + 핑크/민트 핀 -->
+  <defs>
+    <linearGradient id="bgY" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFE04A"/>
+      <stop offset="100%" stop-color="#FFC107"/>
+    </linearGradient>
+    <linearGradient id="globe" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#4EAAFF"/>
+      <stop offset="100%" stop-color="#1A6EDD"/>
+    </linearGradient>
+    <clipPath id="globeClip">
+      <circle cx="512" cy="530" r="330"/>
+    </clipPath>
+  </defs>
+
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bgY)"/>
+
+  <!-- Layer 2: 지구 본체 -->
+  <circle cx="512" cy="530" r="330" fill="url(#globe)"/>
+  <!-- 위도선 -->
+  <ellipse cx="512" cy="530" rx="330" ry="110" fill="none" stroke="white" stroke-width="8" opacity="0.3" clip-path="url(#globeClip)"/>
+  <line x1="182" y1="530" x2="842" y2="530" stroke="white" stroke-width="8" opacity="0.3"/>
+  <!-- 경도선 (타원) -->
+  <ellipse cx="512" cy="530" rx="165" ry="330" fill="none" stroke="white" stroke-width="8" opacity="0.25"/>
+  <!-- 대륙 간략 블롭 -->
+  <ellipse cx="440" cy="460" rx="90" ry="60" fill="#5AE05A" opacity="0.85"/>
+  <ellipse cx="590" cy="500" rx="65" ry="45" fill="#5AE05A" opacity="0.85"/>
+  <ellipse cx="480" cy="580" rx="50" ry="35" fill="#5AE05A" opacity="0.75"/>
+  <ellipse cx="370" cy="550" rx="35" ry="28" fill="#5AE05A" opacity="0.7"/>
+
+  <!-- Layer 3: 로케일 핀들 -->
+  <!-- 핀 1: en-US (왼쪽 위) -->
+  <circle cx="370" cy="390" r="36" fill="#FF4081" stroke="white" stroke-width="6"/>
+  <rect x="220" y="320" width="190" height="58" rx="14" fill="#FF4081"/>
+  <text x="315" y="357" text-anchor="middle" dominant-baseline="middle"
+        font-family="Consolas, monospace" font-size="38" font-weight="bold" fill="white">en-US</text>
+  <line x1="370" y1="390" x2="315" y2="378" stroke="#FF4081" stroke-width="5"/>
+
+  <!-- 핀 2: ja-JP (오른쪽) -->
+  <circle cx="650" cy="450" r="36" fill="#00BCD4" stroke="white" stroke-width="6"/>
+  <rect x="640" y="350" width="190" height="58" rx="14" fill="#00BCD4"/>
+  <text x="735" y="387" text-anchor="middle" dominant-baseline="middle"
+        font-family="Consolas, monospace" font-size="38" font-weight="bold" fill="white">ja-JP</text>
+  <line x1="650" y1="450" x2="735" y2="408" stroke="#00BCD4" stroke-width="5"/>
+
+  <!-- 핀 3: ko-KR (중하단) -->
+  <circle cx="540" cy="560" r="30" fill="#7C4DFF" stroke="white" stroke-width="5"/>
+  <rect x="560" y="570" width="190" height="52" rx="12" fill="#7C4DFF"/>
+  <text x="655" y="599" text-anchor="middle" dominant-baseline="middle"
+        font-family="Consolas, monospace" font-size="34" font-weight="bold" fill="white">ko-KR</text>
+  <line x1="540" y1="560" x2="560" y2="596" stroke="#7C4DFF" stroke-width="4"/>
+
+  <!-- 핀 4 작은 것 -->
+  <circle cx="420" cy="610" r="20" fill="#FF9800" stroke="white" stroke-width="4"/>
+  <text x="420" y="611" text-anchor="middle" dominant-baseline="middle"
+        font-family="Consolas, monospace" font-size="20" font-weight="bold" fill="white">de</text>
+</svg>

@@ -22,6 +22,11 @@ internal static class SvgPreprocessor
         @"(fill|stroke|flood-color|stop-color)\s*:\s*#([0-9A-Fa-f]{6})([0-9A-Fa-f]{2})",
         RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
+    // dominant-baseline="central" → Svg.Skia 미지원, dy로 보정
+    static readonly Regex DominantBaselineCentralRegex = new(
+        @"dominant-baseline=""central""",
+        RegexOptions.Compiled | RegexOptions.IgnoreCase);
+
     // <feDropShadow ... /> 또는 <feDropShadow ...></feDropShadow>
     static readonly Regex FeDropShadowRegex = new(
         @"<feDropShadow\s+([^>]*?)(?:/>|>\s*</feDropShadow>)",
@@ -37,6 +42,7 @@ internal static class SvgPreprocessor
         svgText = ConvertHex8AttrColors(svgText);
         svgText = ConvertHex8CssColors(svgText);
         svgText = ExpandFeDropShadow(svgText);
+        svgText = FixDominantBaseline(svgText);
         return svgText;
     }
 
@@ -61,6 +67,13 @@ internal static class SvgPreprocessor
             double op   = Math.Round(a / 255.0, 4);
             return $"{attr}:#{rgb}; {GetOpacityAttr(attr)}:{op}";
         });
+
+    // ─── dominant-baseline="central" → dy 보정 ──────────────────────────────
+    // Svg.Skia가 dominant-baseline="central"을 무시해 글자가 위로 올라가는 문제 해결.
+    // dy="0.35em" ≈ 알파벳 베이스라인에서 em 중심까지의 오프셋 (Arial Black 기준 약 0.31em,
+    // 시각적 cap 중심 기준 약 0.35em — 후자가 아이콘 텍스트에 더 자연스럽게 보임)
+    static string FixDominantBaseline(string svg) =>
+        DominantBaselineCentralRegex.Replace(svg, @"dy=""0.35em""");
 
     // ─── feDropShadow → 기본 필터 프리미티브 확장 ──────────────────────────
     // feGaussianBlur + feOffset + feFlood + feComposite + feMerge 조합으로 변환

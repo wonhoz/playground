@@ -1,55 +1,25 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
   <defs>
-    <linearGradient id="bg3c" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#1A0A2E"/>
-      <stop offset="100%" stop-color="#2D1050"/>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0f2027"/>
+      <stop offset="50%" style="stop-color:#203a43"/>
+      <stop offset="100%" style="stop-color:#2c5364"/>
     </linearGradient>
-    <clipPath id="c3c"><rect width="1024" height="1024" rx="190"/></clipPath>
+    <linearGradient id="wave" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#56ccf2"/>
+      <stop offset="100%" style="stop-color:#2f80ed"/>
+    </linearGradient>
   </defs>
-  <rect width="1024" height="1024" rx="190" fill="url(#bg3c)"/>
-  <circle cx="512" cy="512" r="340" fill="#4A0080" opacity="0.12" clip-path="url(#c3c)"/>
-
-  <!-- Layer 2: 텍스트 글자들이 음파로 흩어짐 (대각선/동적) -->
-
-  <!-- 왼쪽: 텍스트 블록 -->
-  <rect x="175" y="355" width="280" height="270" rx="14" fill="#220840" opacity="0.9"/>
-  <rect x="175" y="355" width="280" height="270" rx="14" fill="none" stroke="#5B21B6" stroke-width="3"/>
-  <text x="210" y="406" font-family="Consolas,monospace" font-size="28" fill="#A78BFA">The quick</text>
-  <text x="210" y="444" font-family="Consolas,monospace" font-size="28" fill="#A78BFA">brown fox</text>
-  <text x="210" y="482" font-family="Consolas,monospace" font-size="28" fill="#8B5CF6">jumps over</text>
-  <text x="210" y="520" font-family="Consolas,monospace" font-size="28" fill="#7C3AED">the lazy</text>
-  <text x="210" y="558" font-family="Consolas,monospace" font-size="28" fill="#6D28D9">dog.</text>
-
-  <!-- 중간 → 화살표 변환 -->
-  <path d="M 455,490 L 570,490" stroke="#7C3AED" stroke-width="10" stroke-linecap="round"/>
-  <polygon points="555,472 590,490 555,508" fill="#7C3AED"/>
-
-  <!-- 오른쪽: 음파로 흩어지는 글자들 -->
-  <!-- 첫 파동에서 글자 'T' 'h' 'e' -->
-  <text x="618" y="385" font-family="Consolas,monospace" font-size="32" fill="#DDD6FE" opacity="0.9">T</text>
-  <text x="648" y="340" font-family="Consolas,monospace" font-size="28" fill="#C4B5FD" opacity="0.8">h</text>
-  <text x="692" y="376" font-family="Consolas,monospace" font-size="26" fill="#A78BFA" opacity="0.7">e</text>
-
-  <!-- 두번째 파동 -->
-  <text x="730" y="420" font-family="Consolas,monospace" font-size="24" fill="#8B5CF6" opacity="0.65">q</text>
-  <text x="760" y="370" font-family="Consolas,monospace" font-size="22" fill="#7C3AED" opacity="0.55">u</text>
-  <text x="790" y="450" font-family="Consolas,monospace" font-size="20" fill="#6D28D9" opacity="0.45">i</text>
-
-  <!-- 세번째 파동 (더 흩어짐) -->
-  <text x="624" y="558" font-family="Consolas,monospace" font-size="32" fill="#DDD6FE" opacity="0.9">b</text>
-  <text x="654" y="610" font-family="Consolas,monospace" font-size="28" fill="#C4B5FD" opacity="0.8">r</text>
-  <text x="700" y="565" font-family="Consolas,monospace" font-size="26" fill="#A78BFA" opacity="0.7">o</text>
-
-  <!-- 더 멀리 -->
-  <text x="750" y="530" font-family="Consolas,monospace" font-size="22" fill="#7C3AED" opacity="0.5">w</text>
-  <text x="800" y="600" font-family="Consolas,monospace" font-size="18" fill="#5B21B6" opacity="0.35">n</text>
-
-  <!-- 음파 호들 -->
-  <path d="M 590,400 Q 640,490 590,580" fill="none" stroke="#7C3AED" stroke-width="6" stroke-linecap="round" opacity="0.4"/>
-  <path d="M 640,360 Q 720,490 640,620" fill="none" stroke="#6D28D9" stroke-width="5" stroke-linecap="round" opacity="0.3"/>
-  <path d="M 700,330 Q 810,490 700,660" fill="none" stroke="#5B21B6" stroke-width="4" stroke-linecap="round" opacity="0.2"/>
-
-  <!-- Layer 3: 하단 -->
-  <rect x="250" y="730" width="524" height="54" rx="14" fill="#1A0A2E" opacity="0.9"/>
-  <text x="512" y="764" text-anchor="middle" font-family="Consolas,monospace" font-size="26" fill="#8B5CF6">text becomes sound</text>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Text "T" to "♪" conversion -->
+  <text x="100" y="200" font-family="monospace" font-size="110" fill="white" opacity="0.9" font-weight="bold">T</text>
+  <!-- Arrow -->
+  <line x1="185" y1="165" x2="245" y2="165" stroke="url(#wave)" stroke-width="8" stroke-linecap="round"/>
+  <polygon points="240,150 265,165 240,180" fill="url(#wave)"/>
+  <text x="270" y="200" font-family="serif" font-size="110" fill="url(#wave)" opacity="0.9">♪</text>
+  <!-- Waveform display -->
+  <rect x="60" y="260" width="390" height="90" rx="12" fill="white" opacity="0.05" stroke="url(#wave)" stroke-width="2"/>
+  <polyline points="80,305 100,280 120,330 140,270 160,315 180,295 200,325 220,275 240,310 260,285 280,320 300,275 320,305 340,290 360,315 380,285 400,300 420,305" stroke="url(#wave)" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Label -->
+  <text x="256" y="415" font-family="monospace" font-size="28" text-anchor="middle" fill="white" opacity="0.6">TEXT TO SPEECH</text>
 </svg>

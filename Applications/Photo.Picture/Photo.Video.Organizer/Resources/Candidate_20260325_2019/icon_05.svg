@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg05" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E74C3C"/>
+      <stop offset="100%" stop-color="#F39C12"/>
+    </linearGradient>
+    <clipPath id="clip05">
+      <rect x="0" y="0" width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+
+  <!-- Layer1: 배경 -->
+  <rect x="0" y="0" width="1024" height="1024" rx="190" fill="url(#bg05)"/>
+
+  <g clip-path="url(#clip05)">
+    <!-- Layer2: 시계 원 + 폴더들 -->
+
+    <!-- 시계 외곽 원 (채움) -->
+    <circle cx="512" cy="490" r="290" fill="white" fill-opacity="0.20"/>
+    <!-- 시계 외곽 원 (테두리) -->
+    <circle cx="512" cy="490" r="290" fill="none" stroke="white" stroke-width="42"/>
+
+    <!-- 시계 눈금 4방향 -->
+    <line x1="512" y1="215" x2="512" y2="250" stroke="white" stroke-width="16" stroke-opacity="0.85" stroke-linecap="round"/>
+    <line x1="787" y1="490" x2="752" y2="490" stroke="white" stroke-width="16" stroke-opacity="0.85" stroke-linecap="round"/>
+    <line x1="512" y1="765" x2="512" y2="730" stroke="white" stroke-width="16" stroke-opacity="0.85" stroke-linecap="round"/>
+    <line x1="237" y1="490" x2="272" y2="490" stroke="white" stroke-width="16" stroke-opacity="0.85" stroke-linecap="round"/>
+
+    <!-- 보조 눈금 8방향 -->
+    <line x1="717" y1="285" x2="696" y2="306" stroke="white" stroke-width="10" stroke-opacity="0.5" stroke-linecap="round"/>
+    <line x1="717" y1="695" x2="696" y2="674" stroke="white" stroke-width="10" stroke-opacity="0.5" stroke-linecap="round"/>
+    <line x1="307" y1="285" x2="328" y2="306" stroke="white" stroke-width="10" stroke-opacity="0.5" stroke-linecap="round"/>
+    <line x1="307" y1="695" x2="328" y2="674" stroke="white" stroke-width="10" stroke-opacity="0.5" stroke-linecap="round"/>
+
+    <!-- 시계 바늘: 시침 -->
+    <line x1="512" y1="490" x2="512" y2="332" stroke="white" stroke-width="22" stroke-linecap="round"/>
+    <!-- 시계 바늘: 분침 -->
+    <line x1="512" y1="490" x2="642" y2="422" stroke="white" stroke-width="16" stroke-linecap="round"/>
+    <!-- 중심점 -->
+    <circle cx="512" cy="490" r="18" fill="white"/>
+
+    <!-- 폴더 12시 방향 -->
+    <rect x="462" y="300" width="100" height="72" rx="12" fill="#F9CA24"/>
+    <rect x="462" y="290" width="50" height="22" rx="6" fill="#F9CA24"/>
+
+    <!-- 폴더 3시 방향 -->
+    <rect x="650" y="452" width="100" height="72" rx="12" fill="#F9CA24" fill-opacity="0.88"/>
+    <rect x="650" y="442" width="50" height="22" rx="6" fill="#F9CA24" fill-opacity="0.88"/>
+
+    <!-- 폴더 6시 방향 -->
+    <rect x="462" y="618" width="100" height="72" rx="12" fill="#F9CA24" fill-opacity="0.72"/>
+    <rect x="462" y="608" width="50" height="22" rx="6" fill="#F9CA24" fill-opacity="0.72"/>
+
+    <!-- 폴더 9시 방향 -->
+    <rect x="278" y="452" width="100" height="72" rx="12" fill="#F9CA24" fill-opacity="0.56"/>
+    <rect x="278" y="442" width="50" height="22" rx="6" fill="#F9CA24" fill-opacity="0.56"/>
+
+    <!-- Layer3: 날짜 레이블 -->
+    <text x="512" y="292" font-size="36" fill="white" font-weight="700" text-anchor="middle" font-family="Arial Black, Arial, sans-serif">01</text>
+    <text x="780" y="490" font-size="36" fill="white" font-weight="700" text-anchor="middle" dominant-baseline="central" font-family="Arial Black, Arial, sans-serif">04</text>
+    <text x="512" y="712" font-size="36" fill="white" font-weight="700" text-anchor="middle" font-family="Arial Black, Arial, sans-serif">07</text>
+    <text x="252" y="490" font-size="36" fill="white" font-weight="700" text-anchor="middle" dominant-baseline="central" font-family="Arial Black, Arial, sans-serif">10</text>
+
+    <!-- 하단 ORGANIZER 배지 -->
+    <rect x="270" y="816" width="484" height="76" rx="38" fill="white" fill-opacity="0.22"/>
+    <text x="512" y="854" font-size="44" fill="white" font-weight="900" text-anchor="middle" dominant-baseline="central" font-family="Arial Black, Arial, sans-serif">ORGANIZER</text>
+  </g>
+</svg>

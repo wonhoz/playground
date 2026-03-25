@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg01" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F9CA24"/>
+      <stop offset="100%" stop-color="#F0932B"/>
+    </linearGradient>
+    <clipPath id="clip01">
+      <rect x="0" y="0" width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+
+  <!-- Layer1: 배경 -->
+  <rect x="0" y="0" width="1024" height="1024" rx="190" fill="url(#bg01)"/>
+
+  <!-- Layer2: 달력 메인 오브젝트 -->
+  <g clip-path="url(#clip01)">
+    <!-- 달력 카드 본체 -->
+    <rect x="210" y="240" width="604" height="560" rx="32" fill="white"/>
+
+    <!-- 달력 헤더 -->
+    <rect x="210" y="240" width="604" height="120" rx="32" fill="#F0932B"/>
+    <!-- 헤더 하단 모서리 직각화 -->
+    <rect x="210" y="320" width="604" height="40" fill="#F0932B"/>
+
+    <!-- 달력 고리 2개 -->
+    <rect x="330" y="215" width="44" height="70" rx="22" fill="#2D3436"/>
+    <rect x="650" y="215" width="44" height="70" rx="22" fill="#2D3436"/>
+
+    <!-- 달력 헤더 텍스트 -->
+    <text x="512" y="295" font-size="70" fill="white" font-weight="900" text-anchor="middle" dominant-baseline="central" font-family="Arial Black, Arial, sans-serif">2024</text>
+
+    <!-- 달력 격자 날짜 (3x3) -->
+    <!-- 행1 -->
+    <text x="285" y="430" font-size="64" font-weight="900" font-family="Arial Black, Arial, sans-serif" fill="#636E72" text-anchor="middle" dominant-baseline="central">1</text>
+    <text x="512" y="430" font-size="64" font-weight="900" font-family="Arial Black, Arial, sans-serif" fill="#636E72" text-anchor="middle" dominant-baseline="central">2</text>
+    <text x="740" y="430" font-size="64" font-weight="900" font-family="Arial Black, Arial, sans-serif" fill="#636E72" text-anchor="middle" dominant-baseline="central">3</text>
+    <!-- 행2 -->
+    <text x="285" y="540" font-size="64" font-weight="900" font-family="Arial Black, Arial, sans-serif" fill="#636E72" text-anchor="middle" dominant-baseline="central">4</text>
+    <!-- 중앙 강조 원 + 날짜 -->
+    <circle cx="512" cy="540" r="58" fill="#E84393"/>
+    <text x="512" y="540" font-size="72" fill="white" font-weight="900" text-anchor="middle" dominant-baseline="central" font-family="Arial Black, Arial, sans-serif">5</text>
+    <text x="740" y="540" font-size="64" font-weight="900" font-family="Arial Black, Arial, sans-serif" fill="#636E72" text-anchor="middle" dominant-baseline="central">6</text>
+    <!-- 행3 -->
+    <text x="285" y="650" font-size="64" font-weight="900" font-family="Arial Black, Arial, sans-serif" fill="#636E72" text-anchor="middle" dominant-baseline="central">7</text>
+    <text x="512" y="650" font-size="64" font-weight="900" font-family="Arial Black, Arial, sans-serif" fill="#636E72" text-anchor="middle" dominant-baseline="central">8</text>
+    <text x="740" y="650" font-size="64" font-weight="900" font-family="Arial Black, Arial, sans-serif" fill="#636E72" text-anchor="middle" dominant-baseline="central">9</text>
+
+    <!-- Layer3: 하단 카메라 + 플레이버튼 -->
+    <!-- 카메라 본체 -->
+    <rect x="250" y="800" width="120" height="80" rx="16" fill="#F0932B"/>
+    <!-- 카메라 렌즈 외곽 -->
+    <circle cx="310" cy="840" r="24" fill="#2D3436"/>
+    <!-- 카메라 렌즈 내부 -->
+    <circle cx="310" cy="840" r="14" fill="#636E72"/>
+    <!-- 카메라 셔터 버튼 -->
+    <rect x="345" y="796" width="22" height="16" rx="6" fill="#2D3436"/>
+
+    <!-- 플레이버튼 (동영상) -->
+    <circle cx="620" cy="840" r="50" fill="#6C5CE7"/>
+    <polygon points="604,818 604,862 652,840" fill="white"/>
+  </g>
+</svg>

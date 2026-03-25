@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg02" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#74B9FF"/>
+      <stop offset="100%" stop-color="#55EFC4"/>
+    </linearGradient>
+    <clipPath id="clip02">
+      <rect x="0" y="0" width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+
+  <!-- Layer1: 배경 -->
+  <rect x="0" y="0" width="1024" height="1024" rx="190" fill="url(#bg02)"/>
+
+  <!-- Layer2: 폴더 트리 구조 -->
+  <g clip-path="url(#clip02)">
+    <!-- 최상위 폴더 -->
+    <rect x="220" y="220" width="580" height="100" rx="20" fill="#F0932B"/>
+    <!-- 폴더 탭 -->
+    <rect x="220" y="206" width="160" height="34" rx="12" fill="#F9CA24"/>
+    <!-- 폴더 텍스트 -->
+    <text x="430" y="272" font-size="56" fill="white" font-weight="900" dominant-baseline="central" font-family="Arial Black, Arial, sans-serif">PHOTOS</text>
+
+    <!-- 우측 체크 배지 -->
+    <circle cx="760" cy="272" r="35" fill="#27AE60"/>
+    <path d="M 743 272 L 757 286 L 778 260" fill="none" stroke="white" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <!-- 좌측 수직 연결선 -->
+    <line x1="305" y1="320" x2="305" y2="660" stroke="#2D3436" stroke-width="8" stroke-opacity="0.3"/>
+
+    <!-- 2024 년도 폴더 -->
+    <line x1="305" y1="400" x2="370" y2="400" stroke="#2D3436" stroke-width="8" stroke-opacity="0.3"/>
+    <rect x="370" y="360" width="400" height="80" rx="16" fill="#6C5CE7" fill-opacity="0.9"/>
+    <text x="415" y="400" font-size="52" fill="white" font-weight="900" dominant-baseline="central" font-family="Arial Black, Arial, sans-serif">2024</text>
+
+    <!-- 01 월 폴더 -->
+    <line x1="305" y1="516" x2="370" y2="516" stroke="#2D3436" stroke-width="8" stroke-opacity="0.3"/>
+    <rect x="370" y="476" width="320" height="80" rx="16" fill="#00B894" fill-opacity="0.9"/>
+    <text x="415" y="516" font-size="52" fill="white" font-weight="900" dominant-baseline="central" font-family="Arial Black, Arial, sans-serif">01</text>
+
+    <!-- 01 폴더 옆 작은 사진 미니아이콘들 -->
+    <rect x="706" y="483" width="55" height="45" rx="8" fill="#FFEAA7"/>
+    <rect x="770" y="483" width="55" height="45" rx="8" fill="#74B9FF"/>
+    <rect x="706" y="537" width="55" height="45" rx="8" fill="#FD79A8"/>
+
+    <!-- 02 월 폴더 -->
+    <line x1="305" y1="636" x2="370" y2="636" stroke="#2D3436" stroke-width="8" stroke-opacity="0.3"/>
+    <rect x="370" y="596" width="320" height="80" rx="16" fill="#00B894" fill-opacity="0.7"/>
+    <text x="415" y="636" font-size="52" fill="white" font-weight="900" dominant-baseline="central" font-family="Arial Black, Arial, sans-serif">02</text>
+
+    <!-- 03 월 폴더 (더 흐리게) -->
+    <line x1="305" y1="756" x2="370" y2="756" stroke="#2D3436" stroke-width="8" stroke-opacity="0.2"/>
+    <rect x="370" y="716" width="320" height="80" rx="16" fill="#00B894" fill-opacity="0.5"/>
+    <text x="415" y="756" font-size="52" fill="white" font-weight="700" dominant-baseline="central" font-family="Arial Black, Arial, sans-serif" fill-opacity="0.8">03</text>
+  </g>
+</svg>

@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg04" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00B894"/>
+      <stop offset="100%" stop-color="#55EFC4"/>
+    </linearGradient>
+    <clipPath id="clip04">
+      <rect x="0" y="0" width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+
+  <!-- Layer1: 배경 -->
+  <rect x="0" y="0" width="1024" height="1024" rx="190" fill="url(#bg04)"/>
+
+  <g clip-path="url(#clip04)">
+    <!-- Layer2: 달력 격자 + 폴라로이드 -->
+
+    <!-- 달력 헤더 -->
+    <rect x="210" y="210" width="604" height="60" rx="24" fill="#00897B"/>
+    <text x="512" y="242" font-size="42" fill="white" font-weight="900" text-anchor="middle" dominant-baseline="central" font-family="Arial Black, Arial, sans-serif">2024  January</text>
+
+    <!-- 달력 격자 배경 (3x3) -->
+    <rect x="210" y="268" width="604" height="504" rx="24" fill="white" fill-opacity="0.30"/>
+
+    <!-- 격자 가로선 2개 -->
+    <rect x="210" y="436" width="604" height="5" fill="white" fill-opacity="0.45"/>
+    <rect x="210" y="604" width="604" height="5" fill="white" fill-opacity="0.45"/>
+
+    <!-- 격자 세로선 2개 -->
+    <rect x="412" y="268" width="5" height="504" fill="white" fill-opacity="0.45"/>
+    <rect x="614" y="268" width="5" height="504" fill="white" fill-opacity="0.45"/>
+
+    <!-- 폴라로이드 (0,0) - 노란 -->
+    <rect x="224" y="278" width="168" height="133" rx="8" fill="white"/>
+    <rect x="232" y="286" width="152" height="100" rx="4" fill="#FFEAA7"/>
+    <!-- 산 실루엣 장식 -->
+    <polygon points="244,376 280,338 316,366 352,336 376,376" fill="#F0932B" fill-opacity="0.6"/>
+    <text x="309" y="400" font-size="22" fill="#636E72" text-anchor="middle" font-family="Arial, sans-serif">1.2</text>
+
+    <!-- 폴라로이드 (0,1) - 하늘색 -->
+    <rect x="426" y="278" width="168" height="133" rx="8" fill="white"/>
+    <rect x="434" y="286" width="152" height="100" rx="4" fill="#74B9FF"/>
+    <!-- 구름 장식 -->
+    <circle cx="480" cy="326" r="20" fill="white" fill-opacity="0.6"/>
+    <circle cx="508" cy="316" r="28" fill="white" fill-opacity="0.6"/>
+    <circle cx="538" cy="326" r="20" fill="white" fill-opacity="0.6"/>
+    <text x="511" y="400" font-size="22" fill="#636E72" text-anchor="middle" font-family="Arial, sans-serif">1.5</text>
+
+    <!-- 폴라로이드 (1,0) - 핑크 -->
+    <rect x="224" y="446" width="168" height="133" rx="8" fill="white"/>
+    <rect x="232" y="454" width="152" height="100" rx="4" fill="#FD79A8"/>
+    <!-- 하트 장식 -->
+    <path d="M 309 488 C 309 480 300 474 293 481 C 286 488 309 510 309 510 C 309 510 332 488 325 481 C 318 474 309 480 309 488 Z" fill="white" fill-opacity="0.7"/>
+    <text x="309" y="568" font-size="22" fill="#636E72" text-anchor="middle" font-family="Arial, sans-serif">1.12</text>
+
+    <!-- 폴라로이드 (1,2) - 보라 -->
+    <rect x="628" y="446" width="168" height="133" rx="8" fill="white"/>
+    <rect x="636" y="454" width="152" height="100" rx="4" fill="#A29BFE"/>
+    <!-- 별 장식 -->
+    <polygon points="712,472 718,490 736,490 722,502 728,520 712,508 696,520 702,502 688,490 706,490" fill="white" fill-opacity="0.7"/>
+    <text x="713" y="568" font-size="22" fill="#636E72" text-anchor="middle" font-family="Arial, sans-serif">1.18</text>
+
+    <!-- 폴라로이드 (2,1) - 민트 -->
+    <rect x="426" y="614" width="168" height="133" rx="8" fill="white"/>
+    <rect x="434" y="622" width="152" height="100" rx="4" fill="#55EFC4"/>
+    <!-- 물결 장식 -->
+    <path d="M 444 668 Q 460 656 476 668 Q 492 680 508 668 Q 524 656 540 668 Q 556 680 572 668" fill="none" stroke="white" stroke-width="6" stroke-opacity="0.7"/>
+    <text x="511" y="736" font-size="22" fill="#636E72" text-anchor="middle" font-family="Arial, sans-serif">1.25</text>
+
+    <!-- Layer3: 빈 셀에 + 아이콘 -->
+    <text x="713" y="358" font-size="72" fill="white" fill-opacity="0.40" text-anchor="middle" dominant-baseline="central">+</text>
+    <text x="309" y="698" font-size="72" fill="white" fill-opacity="0.40" text-anchor="middle" dominant-baseline="central">+</text>
+    <text x="713" y="698" font-size="72" fill="white" fill-opacity="0.40" text-anchor="middle" dominant-baseline="central">+</text>
+  </g>
+</svg>

@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg02pw" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1E3A8A"/>
+      <stop offset="100%" stop-color="#2563EB"/>
+    </linearGradient>
+    <linearGradient id="plugG" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FDE68A"/>
+      <stop offset="100%" stop-color="#F59E0B"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Layer 1: 파란 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg02pw)"/>
+  <!-- 배경 원 장식 -->
+  <circle cx="512" cy="512" r="360" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.08)" stroke-width="2"/>
+  <circle cx="512" cy="512" r="280" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.06)" stroke-width="2"/>
+
+  <!-- Layer 2: 전기 플러그 아이콘 (황금색) -->
+  <!-- 플러그 핀 1 (위) -->
+  <rect x="438" y="164" width="60" height="160" rx="14" fill="url(#plugG)"/>
+  <!-- 플러그 핀 2 (아래) -->
+  <rect x="526" y="164" width="60" height="160" rx="14" fill="url(#plugG)"/>
+
+  <!-- 플러그 본체 -->
+  <rect x="370" y="310" width="284" height="200" rx="30" fill="url(#plugG)"/>
+  <!-- 플러그 본체 하이라이트 -->
+  <rect x="390" y="326" width="240" height="80" rx="18" fill="rgba(255,255,255,0.25)"/>
+
+  <!-- 플러그 코드 (와이어) -->
+  <path d="M 512,510 Q 512,600 512,680" stroke="#FCD34D" stroke-width="40" fill="none"
+        stroke-linecap="round"/>
+  <!-- 코드 끝 -->
+  <rect x="452" y="670" width="120" height="40" rx="16" fill="#D97706"/>
+
+  <!-- Layer 3: 포트 번호 텍스트 -->
+  <!-- 번호 뱃지 -->
+  <rect x="310" y="750" width="404" height="96" rx="20" fill="rgba(0,0,0,0.40)"/>
+  <text x="512" y="815" text-anchor="middle" font-family="Consolas, 'Courier New', monospace"
+        font-size="72" font-weight="bold" fill="#67E8F9">8080</text>
+
+  <!-- TCP 라벨 -->
+  <rect x="420" y="862" width="184" height="56" rx="14" fill="rgba(255,255,255,0.12)"/>
+  <text x="512" y="900" text-anchor="middle" font-family="Consolas, monospace"
+        font-size="40" fill="#93C5FD">TCP</text>
+</svg>

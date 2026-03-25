@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <clipPath id="clip03pw">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+
+  <!-- Layer 1: 매우 어두운 배경 (레이더 화면) -->
+  <rect width="1024" height="1024" rx="190" fill="#050A14"/>
+  <!-- 레이더 화면 초록 배경 tint -->
+  <circle cx="512" cy="480" r="350" fill="rgba(0,60,20,0.35)"/>
+
+  <!-- Layer 2: 레이더 원형 그리드 -->
+  <g fill="none" stroke="#00FF41" clip-path="url(#clip03pw)">
+    <circle cx="512" cy="480" r="80"  stroke-width="2" opacity="0.30"/>
+    <circle cx="512" cy="480" r="155" stroke-width="2" opacity="0.30"/>
+    <circle cx="512" cy="480" r="232" stroke-width="2" opacity="0.30"/>
+    <circle cx="512" cy="480" r="310" stroke-width="2" opacity="0.30"/>
+    <!-- 십자 가이드선 -->
+    <line x1="202" y1="480" x2="822" y2="480" stroke-width="1" opacity="0.20"/>
+    <line x1="512" y1="170" x2="512" y2="790" stroke-width="1" opacity="0.20"/>
+    <line x1="293" y1="261" x2="731" y2="699" stroke-width="1" opacity="0.15"/>
+    <line x1="731" y1="261" x2="293" y2="699" stroke-width="1" opacity="0.15"/>
+  </g>
+
+  <!-- 레이더 스캔 섹터 (밝은 초록 부채꼴) -->
+  <path d="M 512,480 L 512,170 A 310,310 0 0,1 770,632 Z"
+        fill="rgba(0,255,65,0.08)" clip-path="url(#clip03pw)"/>
+  <!-- 스캔 라인 -->
+  <line x1="512" y1="480" x2="770" y2="632"
+        stroke="#00FF41" stroke-width="3" opacity="0.85" clip-path="url(#clip03pw)"/>
+
+  <!-- Layer 3: 포트 신호 점들 (발견된 포트) -->
+  <!-- 포트 점 + 라벨 -->
+  <circle cx="612" cy="350" r="14" fill="#00FF41"/>
+  <circle cx="612" cy="350" r="28" fill="none" stroke="#00FF41" stroke-width="3" opacity="0.50"/>
+  <text x="638" y="340" font-family="Consolas, monospace" font-size="28" fill="#00FF41">:80</text>
+
+  <circle cx="680" cy="450" r="16" fill="#00FF41"/>
+  <circle cx="680" cy="450" r="32" fill="none" stroke="#00FF41" stroke-width="3" opacity="0.40"/>
+  <text x="706" y="440" font-family="Consolas, monospace" font-size="28" fill="#00FF41">:443</text>
+
+  <circle cx="400" cy="390" r="12" fill="#22D3EE"/>
+  <text x="350" y="380" font-family="Consolas, monospace" font-size="24" fill="#22D3EE">:3000</text>
+
+  <circle cx="540" cy="580" r="10" fill="#F59E0B"/>
+  <text x="558" y="570" font-family="Consolas, monospace" font-size="24" fill="#F59E0B">:8080</text>
+
+  <circle cx="360" cy="540" r="10" fill="#A78BFA"/>
+  <text x="310" y="558" font-family="Consolas, monospace" font-size="22" fill="#A78BFA">:5353</text>
+
+  <!-- 중앙 점 (스캔 원점) -->
+  <circle cx="512" cy="480" r="10" fill="#00FF41"/>
+  <circle cx="512" cy="480" r="22" fill="none" stroke="#00FF41" stroke-width="4" opacity="0.80"/>
+
+  <!-- 하단 텍스트 -->
+  <text x="512" y="890" text-anchor="middle" font-family="Consolas, monospace"
+        font-size="54" font-weight="bold" fill="#00FF41">PORT SCAN</text>
+  <text x="512" y="950" text-anchor="middle" font-family="Consolas, monospace"
+        font-size="34" fill="rgba(0,255,65,0.60)">127 ports detected</text>
+</svg>

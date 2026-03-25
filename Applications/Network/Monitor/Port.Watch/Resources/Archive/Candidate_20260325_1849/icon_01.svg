@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg01pw" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0F172A"/>
+      <stop offset="100%" stop-color="#1E293B"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Layer 1: 짙은 네이비 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg01pw)"/>
+
+  <!-- 앱 타이틀 바 -->
+  <rect x="140" y="110" width="744" height="52" rx="10" fill="#1E3A5F"/>
+  <text x="512" y="146" text-anchor="middle" font-family="Segoe UI, sans-serif"
+        font-size="30" fill="#93C5FD">Port.Watch — 포트 모니터</text>
+
+  <!-- 컬럼 헤더 -->
+  <rect x="140" y="172" width="744" height="44" rx="6" fill="#1E3A5F"/>
+  <text x="195" y="200" font-family="Segoe UI" font-size="26" fill="#64748B">프로토콜</text>
+  <text x="370" y="200" font-family="Segoe UI" font-size="26" fill="#64748B">포트</text>
+  <text x="500" y="200" font-family="Segoe UI" font-size="26" fill="#64748B">프로세스</text>
+  <text x="760" y="200" font-family="Segoe UI" font-size="26" fill="#64748B">상태</text>
+
+  <!-- Layer 2: 포트 목록 행들 -->
+  <!-- 행 1 -->
+  <rect x="140" y="224" width="744" height="54" rx="0" fill="rgba(56,189,248,0.08)"/>
+  <text x="200" y="258" font-family="Consolas, monospace" font-size="34" fill="#38BDF8">TCP</text>
+  <text x="366" y="258" font-family="Consolas, monospace" font-size="38" font-weight="bold" fill="#67E8F9">80</text>
+  <text x="498" y="258" font-family="Consolas, monospace" font-size="30" fill="#CBD5E1">nginx</text>
+  <text x="756" y="258" font-family="Consolas, monospace" font-size="26" fill="#4ADE80">LISTEN</text>
+
+  <!-- 행 2 -->
+  <rect x="140" y="284" width="744" height="54" rx="0" fill="rgba(0,0,0,0)"/>
+  <text x="200" y="318" font-family="Consolas, monospace" font-size="34" fill="#38BDF8">TCP</text>
+  <text x="338" y="318" font-family="Consolas, monospace" font-size="38" font-weight="bold" fill="#67E8F9">443</text>
+  <text x="498" y="318" font-family="Consolas, monospace" font-size="30" fill="#CBD5E1">nginx</text>
+  <text x="756" y="318" font-family="Consolas, monospace" font-size="26" fill="#4ADE80">LISTEN</text>
+
+  <!-- 행 3 (즐겨찾기) -->
+  <rect x="140" y="344" width="744" height="54" rx="0" fill="rgba(251,191,36,0.10)"/>
+  <text x="156" y="378" font-family="Segoe UI" font-size="28" fill="#FCD34D">★</text>
+  <text x="200" y="378" font-family="Consolas, monospace" font-size="34" fill="#38BDF8">TCP</text>
+  <text x="316" y="378" font-family="Consolas, monospace" font-size="38" font-weight="bold" fill="#FCD34D">3000</text>
+  <text x="498" y="378" font-family="Consolas, monospace" font-size="30" fill="#CBD5E1">node</text>
+  <text x="756" y="378" font-family="Consolas, monospace" font-size="26" fill="#4ADE80">LISTEN</text>
+
+  <!-- 행 4 -->
+  <rect x="140" y="404" width="744" height="54" rx="0" fill="rgba(56,189,248,0.08)"/>
+  <text x="200" y="438" font-family="Consolas, monospace" font-size="34" fill="#A78BFA">UDP</text>
+  <text x="316" y="438" font-family="Consolas, monospace" font-size="38" font-weight="bold" fill="#C4B5FD">5353</text>
+  <text x="498" y="438" font-family="Consolas, monospace" font-size="30" fill="#CBD5E1">svchost</text>
+  <text x="756" y="438" font-family="Consolas, monospace" font-size="26" fill="#94A3B8">—</text>
+
+  <!-- 행 5 -->
+  <rect x="140" y="464" width="744" height="54" rx="0" fill="rgba(0,0,0,0)"/>
+  <text x="200" y="498" font-family="Consolas, monospace" font-size="34" fill="#38BDF8">TCP</text>
+  <text x="316" y="498" font-family="Consolas, monospace" font-size="38" font-weight="bold" fill="#67E8F9">8080</text>
+  <text x="498" y="498" font-family="Consolas, monospace" font-size="30" fill="#CBD5E1">java</text>
+  <text x="736" y="498" font-family="Consolas, monospace" font-size="26" fill="#60A5FA">ESTAB</text>
+
+  <!-- 구분선 -->
+  <line x1="140" y1="524" x2="884" y2="524" stroke="#1E3A5F" stroke-width="2"/>
+
+  <!-- Layer 3: 하단 통계 -->
+  <rect x="140" y="540" width="744" height="84" rx="12" fill="#0F3460"/>
+  <text x="230" y="586" font-family="Segoe UI" font-size="34" fill="#93C5FD">총 127개 포트</text>
+  <text x="230" y="616" font-family="Segoe UI" font-size="28" fill="#64748B">★ 즐겨찾기 3개 · 갱신 18:53</text>
+
+  <!-- 자동갱신 표시 -->
+  <circle cx="810" cy="582" r="34" fill="#22C55E" opacity="0.90"/>
+  <text x="810" y="591" text-anchor="middle" font-family="Segoe UI" font-size="28" fill="white">▶</text>
+</svg>

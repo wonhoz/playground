@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg05pw" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#F97316"/>
+      <stop offset="100%" stop-color="#EC4899"/>
+    </linearGradient>
+    <linearGradient id="teleG" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="white"/>
+      <stop offset="100%" stop-color="#FDE8D8"/>
+    </linearGradient>
+    <clipPath id="clip05pw">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+
+  <!-- Layer 1: 핑크-오렌지 그라데이션 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg05pw)"/>
+  <!-- 배경 별 장식 -->
+  <circle cx="180" cy="200" r="16" fill="rgba(255,255,255,0.3)"/>
+  <circle cx="840" cy="180" r="12" fill="rgba(255,255,255,0.25)"/>
+  <circle cx="200" cy="820" r="10" fill="rgba(255,255,255,0.20)"/>
+  <circle cx="850" cy="830" r="18" fill="rgba(255,255,255,0.25)"/>
+
+  <!-- Layer 2: 망원경 (대각선 배치) -->
+  <!-- 망원경 본체 (큰 원통) -->
+  <rect x="200" y="380" width="480" height="120" rx="40"
+        fill="url(#teleG)" transform="rotate(-30, 440, 440)"/>
+  <!-- 망원경 중간 (조절 링) -->
+  <rect x="400" y="388" width="80" height="104" rx="14"
+        fill="#E5E7EB" transform="rotate(-30, 440, 440)"/>
+  <!-- 망원경 앞 (렌즈부) -->
+  <ellipse cx="620" cy="330" rx="52" ry="70"
+           fill="#D1D5DB" transform="rotate(-30, 620, 330)"/>
+  <ellipse cx="620" cy="330" rx="40" ry="56"
+           fill="#93C5FD" transform="rotate(-30, 620, 330)"/>
+  <!-- 망원경 뒤 (접안부) -->
+  <rect x="180" y="400" width="70" height="80" rx="16"
+        fill="#9CA3AF" transform="rotate(-30, 215, 440)"/>
+
+  <!-- 뷰파인더 원 + 십자선 -->
+  <circle cx="680" cy="260" r="96" fill="rgba(0,0,0,0.6)" stroke="white" stroke-width="8"/>
+  <line x1="584" y1="260" x2="776" y2="260" stroke="rgba(255,255,255,0.6)" stroke-width="3"/>
+  <line x1="680" y1="164" x2="680" y2="356" stroke="rgba(255,255,255,0.6)" stroke-width="3"/>
+  <!-- 뷰파인더 안 포트 번호 -->
+  <text x="680" y="248" text-anchor="middle" font-family="Consolas, monospace"
+        font-size="40" font-weight="bold" fill="#67E8F9">8080</text>
+  <text x="680" y="290" text-anchor="middle" font-family="Consolas, monospace"
+        font-size="26" fill="#A7F3D0">TCP</text>
+
+  <!-- 신호 방출 효과 (망원경 렌즈쪽) -->
+  <path d="M 680,260 Q 780,240 850,220" stroke="#FCD34D" stroke-width="4" fill="none"
+        stroke-dasharray="12,8" opacity="0.8"/>
+  <path d="M 680,260 Q 780,280 860,300" stroke="#FCD34D" stroke-width="4" fill="none"
+        stroke-dasharray="12,8" opacity="0.6"/>
+
+  <!-- Layer 3: 하단 텍스트 -->
+  <text x="512" y="820" text-anchor="middle" font-family="Segoe UI, sans-serif"
+        font-size="66" font-weight="bold" fill="white">Port.Watch</text>
+  <text x="512" y="892" text-anchor="middle" font-family="Segoe UI, sans-serif"
+        font-size="38" fill="rgba(255,255,255,0.85)">포트 감시 · 실시간</text>
+</svg>

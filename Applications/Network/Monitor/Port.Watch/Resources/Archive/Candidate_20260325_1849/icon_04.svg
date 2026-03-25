@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg04pw" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#4C1D95"/>
+      <stop offset="100%" stop-color="#7C3AED"/>
+    </linearGradient>
+    <radialGradient id="irisG" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#1E3A8A"/>
+      <stop offset="100%" stop-color="#0F172A"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Layer 1: 보라 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg04pw)"/>
+  <!-- 배경 광선 장식 -->
+  <circle cx="512" cy="460" r="420" fill="rgba(255,255,255,0.04)"/>
+  <circle cx="512" cy="460" r="320" fill="rgba(255,255,255,0.04)"/>
+
+  <!-- Layer 2: 큰 눈 아이콘 -->
+  <!-- 눈 흰자 -->
+  <path d="M 100,460 Q 512,200 924,460 Q 512,720 100,460 Z" fill="white"/>
+  <!-- 홍채 -->
+  <circle cx="512" cy="460" r="170" fill="url(#irisG)"/>
+  <!-- 홍채 테두리 -->
+  <circle cx="512" cy="460" r="170" fill="none" stroke="#3B82F6" stroke-width="10"/>
+  <!-- 홍채 안쪽 패턴 (네트워크 느낌) -->
+  <circle cx="512" cy="460" r="130" fill="none" stroke="#2563EB" stroke-width="4" opacity="0.6"/>
+  <circle cx="512" cy="460" r="90"  fill="none" stroke="#1D4ED8" stroke-width="4" opacity="0.5"/>
+
+  <!-- "TCP" 텍스트 (홍채 안) -->
+  <text x="512" y="450" text-anchor="middle" font-family="Consolas, monospace"
+        font-size="46" font-weight="bold" fill="#93C5FD">TCP</text>
+  <text x="512" y="492" text-anchor="middle" font-family="Consolas, monospace"
+        font-size="32" fill="#60A5FA">UDP</text>
+
+  <!-- 동공 -->
+  <circle cx="512" cy="460" r="48" fill="#000814"/>
+  <!-- 동공 안 반짝임 -->
+  <circle cx="512" cy="460" r="30" fill="#1D4ED8"/>
+  <circle cx="490" cy="443" r="10" fill="rgba(255,255,255,0.75)"/>
+
+  <!-- 눈꺼풀 강조선 -->
+  <path d="M 100,460 Q 512,200 924,460" fill="none" stroke="#E9D5FF" stroke-width="5" opacity="0.5"/>
+  <path d="M 100,460 Q 512,720 924,460" fill="none" stroke="#7C3AED" stroke-width="5" opacity="0.5"/>
+
+  <!-- Layer 3: 하단 텍스트 -->
+  <text x="512" y="830" text-anchor="middle" font-family="Segoe UI, sans-serif"
+        font-size="66" font-weight="bold" fill="white">감시 중</text>
+  <text x="512" y="900" text-anchor="middle" font-family="Consolas, monospace"
+        font-size="40" fill="#C4B5FD">Port.Watch</text>
+</svg>

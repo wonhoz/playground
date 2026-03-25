@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg02" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF9F43"/>
+      <stop offset="100%" stop-color="#FFEAA7"/>
+    </linearGradient>
+    <clipPath id="bgClip02">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg02)"/>
+
+  <!-- Layer 2: Image card → arrow → text grid card -->
+  <g clip-path="url(#bgClip02)">
+
+    <!-- Left: Image card -->
+    <rect x="195" y="295" width="268" height="268" rx="24" fill="white" filter="drop-shadow(0 4px 12px rgba(0,0,0,0.18))"/>
+    <!-- Photo inner background -->
+    <rect x="211" y="311" width="236" height="236" rx="16" fill="#74B9FF"/>
+    <!-- Mountains -->
+    <polygon points="211,547 325,393 439,547" fill="#00CEC9"/>
+    <polygon points="299,547 389,418 479,547" fill="#55EFC4"/>
+    <!-- Sun -->
+    <circle cx="392" cy="368" r="32" fill="#FFEAA7"/>
+    <circle cx="392" cy="368" r="22" fill="#FDCB6E"/>
+
+    <!-- Center arrow -->
+    <line x1="488" y1="430" x2="570" y2="430" stroke="#2D3436" stroke-width="68" stroke-linecap="round"/>
+    <polygon points="555,392 632,430 555,468" fill="#2D3436"/>
+
+    <!-- Right: Text grid card -->
+    <rect x="600" y="295" width="228" height="268" rx="24" fill="white" filter="drop-shadow(0 4px 12px rgba(0,0,0,0.18))"/>
+    <!-- Grid lines (subtle) -->
+    <line x1="644" y1="311" x2="644" y2="547" stroke="#E0E0E0" stroke-width="1"/>
+    <line x1="688" y1="311" x2="688" y2="547" stroke="#E0E0E0" stroke-width="1"/>
+    <line x1="732" y1="311" x2="732" y2="547" stroke="#E0E0E0" stroke-width="1"/>
+    <line x1="600" y1="355" x2="828" y2="355" stroke="#E0E0E0" stroke-width="1"/>
+    <line x1="600" y1="399" x2="828" y2="399" stroke="#E0E0E0" stroke-width="1"/>
+    <line x1="600" y1="443" x2="828" y2="443" stroke="#E0E0E0" stroke-width="1"/>
+    <line x1="600" y1="487" x2="828" y2="487" stroke="#E0E0E0" stroke-width="1"/>
+
+    <!-- Text characters in grid -->
+    <g font-family="Courier New, monospace" font-weight="700" font-size="36" fill="#2D3436">
+      <text x="616" y="350">@</text>
+      <text x="660" y="350">#</text>
+      <text x="704" y="350">$</text>
+      <text x="748" y="350">%</text>
+
+      <text x="616" y="394">@</text>
+      <text x="660" y="394" fill="#FF9F43">@</text>
+      <text x="704" y="394">#</text>
+      <text x="748" y="394">@</text>
+
+      <text x="616" y="438" fill="#AAAAAA">.</text>
+      <text x="660" y="438">@</text>
+      <text x="704" y="438" fill="#FF9F43">@</text>
+      <text x="748" y="438" fill="#AAAAAA">.</text>
+
+      <text x="616" y="482" fill="#DDDDDD"> </text>
+      <text x="660" y="482" fill="#AAAAAA">.</text>
+      <text x="704" y="482" fill="#AAAAAA">.</text>
+      <text x="748" y="482" fill="#DDDDDD"> </text>
+
+      <text x="616" y="526" fill="#DDDDDD"> </text>
+      <text x="660" y="526" fill="#DDDDDD"> </text>
+      <text x="704" y="526" fill="#BBBBBB">.</text>
+      <text x="748" y="526" fill="#DDDDDD"> </text>
+    </g>
+
+    <!-- Arrow label -->
+    <text x="536" y="503" font-size="40" fill="#2D3436" font-weight="700" text-anchor="middle" font-family="Arial, sans-serif">TEXT</text>
+  </g>
+
+  <!-- Layer 3: Title badge at bottom -->
+  <g clip-path="url(#bgClip02)">
+    <rect x="272" y="740" width="480" height="76" rx="38" fill="white" fill-opacity="0.35"/>
+    <text x="512" y="779" font-size="46" fill="#2D3436" font-weight="900" text-anchor="middle" dominant-baseline="central" font-family="Arial Black, Arial, sans-serif" letter-spacing="3">IMAGE → TEXT</text>
+  </g>
+</svg>

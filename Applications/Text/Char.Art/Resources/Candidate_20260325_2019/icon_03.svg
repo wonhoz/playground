@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg03" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3D5A80"/>
+      <stop offset="100%" stop-color="#9B59B6"/>
+    </linearGradient>
+    <radialGradient id="glow03" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="bgClip03">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg03)"/>
+  <!-- Radial glow overlay -->
+  <rect width="1024" height="1024" rx="190" fill="url(#glow03)"/>
+
+  <!-- Layer 2: Large "@" symbol -->
+  <g clip-path="url(#bgClip03)">
+    <!-- Shadow/depth "@" -->
+    <text x="512" y="520" font-size="680" fill="white" fill-opacity="0.07" font-weight="900" text-anchor="middle" dominant-baseline="central" font-family="Arial Black, Arial, sans-serif">@</text>
+    <!-- Main "@" -->
+    <text x="512" y="512" font-size="510" fill="white" fill-opacity="0.96" font-weight="900" text-anchor="middle" dominant-baseline="central" font-family="Arial Black, Arial, sans-serif">@</text>
+  </g>
+
+  <!-- Layer 3: Circular characters + ART label -->
+  <g clip-path="url(#bgClip03)" font-family="Courier New, monospace" font-weight="700" font-size="62" fill="white" fill-opacity="0.7">
+    <!-- 12 o'clock -->
+    <text x="488" y="232" text-anchor="middle">#</text>
+    <!-- 1 o'clock -->
+    <text x="648" y="274" text-anchor="middle">$</text>
+    <!-- 2 o'clock -->
+    <text x="766" y="378" text-anchor="middle">%</text>
+    <!-- 3 o'clock -->
+    <text x="806" y="524" text-anchor="middle">&amp;</text>
+    <!-- 4 o'clock -->
+    <text x="766" y="666" text-anchor="middle">*</text>
+    <!-- 5 o'clock -->
+    <text x="648" y="770" text-anchor="middle">+</text>
+    <!-- 6 o'clock -->
+    <text x="488" y="810" text-anchor="middle">=</text>
+    <!-- 7 o'clock -->
+    <text x="348" y="770" text-anchor="middle">-</text>
+    <!-- 8 o'clock -->
+    <text x="238" y="666" text-anchor="middle">.</text>
+    <!-- 9 o'clock -->
+    <text x="200" y="524" text-anchor="middle">~</text>
+    <!-- 10 o'clock -->
+    <text x="238" y="378" text-anchor="middle">!</text>
+    <!-- 11 o'clock -->
+    <text x="348" y="274" text-anchor="middle">^</text>
+  </g>
+
+  <!-- "ART" label at bottom -->
+  <g clip-path="url(#bgClip03)">
+    <text x="512" y="822" font-size="82" fill="#FFD700" font-weight="900" text-anchor="middle" font-family="Arial Black, Arial, sans-serif" letter-spacing="14">ART</text>
+  </g>
+</svg>

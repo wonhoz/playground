@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg04" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FD79A8"/>
+      <stop offset="100%" stop-color="#A29BFE"/>
+    </linearGradient>
+    <clipPath id="bgClip04">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+    <clipPath id="starClip04">
+      <path d="M 512,180 L 573,340 L 742,340 L 607,440 L 657,610 L 512,510 L 367,610 L 417,440 L 282,340 L 451,340 Z"/>
+    </clipPath>
+  </defs>
+
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg04)"/>
+
+  <!-- Layer 2: Star silhouette with ASCII chars inside -->
+  <g clip-path="url(#bgClip04)">
+    <!-- Star shape (white fill, golden stroke) -->
+    <path d="M 512,180 L 573,340 L 742,340 L 607,440 L 657,610 L 512,510 L 367,610 L 417,440 L 282,340 L 451,340 Z"
+          fill="white" fill-opacity="0.92" stroke="#FFD700" stroke-width="10" stroke-linejoin="round"/>
+
+    <!-- ASCII characters inside the star (clipped) -->
+    <g clip-path="url(#starClip04)" font-family="Courier New, monospace" font-weight="900">
+      <text x="430" y="378" font-size="82" fill="#FD79A8">@</text>
+      <text x="526" y="378" font-size="82" fill="#A29BFE">#</text>
+      <text x="438" y="460" font-size="82" fill="#FF7675">$</text>
+      <text x="530" y="460" font-size="82" fill="#FDCB6E">%</text>
+      <text x="462" y="540" font-size="74" fill="#6C5CE7">&amp;</text>
+    </g>
+  </g>
+
+  <!-- Layer 3: Star tips sparkle dots + outer glow dots -->
+  <g clip-path="url(#bgClip04)">
+    <!-- Tip sparkles -->
+    <circle cx="512" cy="180" r="18" fill="#FFD700"/>
+    <circle cx="742" cy="340" r="14" fill="#FD79A8"/>
+    <circle cx="657" cy="610" r="16" fill="#A29BFE"/>
+    <circle cx="367" cy="610" r="14" fill="#FFD700"/>
+    <circle cx="282" cy="340" r="16" fill="#FD79A8"/>
+
+    <!-- Extra sparkle lines at tips -->
+    <line x1="512" y1="198" x2="512" y2="212" stroke="#FFD700" stroke-width="6" stroke-linecap="round"/>
+    <line x1="504" y1="180" x2="520" y2="180" stroke="#FFD700" stroke-width="6" stroke-linecap="round"/>
+
+    <line x1="742" y1="358" x2="742" y2="370" stroke="#FD79A8" stroke-width="5" stroke-linecap="round"/>
+    <line x1="735" y1="340" x2="749" y2="340" stroke="#FD79A8" stroke-width="5" stroke-linecap="round"/>
+
+    <!-- Small floating sparkle circles in corners -->
+    <circle cx="210" cy="210" r="10" fill="white" fill-opacity="0.6"/>
+    <circle cx="810" cy="210" r="8" fill="#FFD700" fill-opacity="0.7"/>
+    <circle cx="220" cy="800" r="9" fill="white" fill-opacity="0.5"/>
+    <circle cx="800" cy="800" r="11" fill="#FD79A8" fill-opacity="0.6"/>
+    <circle cx="810" cy="510" r="7" fill="#A29BFE" fill-opacity="0.8"/>
+    <circle cx="210" cy="510" r="8" fill="#FFD700" fill-opacity="0.7"/>
+
+    <!-- Bottom label -->
+    <rect x="330" y="750" width="364" height="76" rx="38" fill="white" fill-opacity="0.28"/>
+    <text x="512" y="790" font-size="48" fill="white" font-weight="900" text-anchor="middle" dominant-baseline="central" font-family="Arial Black, Arial, sans-serif" letter-spacing="5">CHAR ART</text>
+  </g>
+</svg>

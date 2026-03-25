@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Char.Art — Icon Candidates</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #F0FFF4;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 48px 24px 64px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    header h1 {
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: #1a5c45;
+      letter-spacing: 2px;
+      margin-bottom: 8px;
+    }
+
+    header p {
+      font-size: 1rem;
+      color: #4CAF50;
+      font-weight: 500;
+    }
+
+    .icons-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 32px;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    .icon-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: white;
+      border-radius: 20px;
+      padding: 24px 20px 20px;
+      box-shadow: 0 4px 24px rgba(0, 176, 155, 0.13);
+      width: 220px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .icon-card:hover {
+      transform: scale(1.15);
+      box-shadow: 0 12px 40px rgba(0, 176, 155, 0.22);
+    }
+
+    .icon-card img {
+      width: 200px;
+      height: 200px;
+      border-radius: 12px;
+      display: block;
+      margin-bottom: 16px;
+    }
+
+    .icon-filename {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #1a5c45;
+      margin-bottom: 6px;
+      letter-spacing: 0.5px;
+    }
+
+    .icon-concept {
+      font-size: 0.82rem;
+      color: #555;
+      text-align: center;
+      line-height: 1.5;
+      margin-bottom: 14px;
+    }
+
+    .palette {
+      display: flex;
+      gap: 7px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .swatch {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 2px solid rgba(0,0,0,0.08);
+      display: inline-block;
+      title: attr(data-color);
+    }
+
+    footer {
+      margin-top: 56px;
+      font-size: 0.82rem;
+      color: #aaa;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Char.Art — Icon Candidates</h1>
+    <p>이미지를 ASCII 문자 아트로 변환하는 텍스트 아트 생성기</p>
+  </header>
+
+  <div class="icons-row">
+
+    <!-- icon_01 -->
+    <div class="icon-card">
+      <img src="icon_01.svg" alt="icon_01" width="200" height="200">
+      <div class="icon-filename">icon_01.svg</div>
+      <div class="icon-concept">사이안 배경 + ASCII 문자들로 만든 하트 실루엣<br><em>literal · 공간/장면</em></div>
+      <div class="palette">
+        <span class="swatch" style="background:#00CEC9;" title="#00CEC9"></span>
+        <span class="swatch" style="background:#00B894;" title="#00B894"></span>
+        <span class="swatch" style="background:#FFFFFF;" title="#FFFFFF"></span>
+        <span class="swatch" style="background:#FFEAA7;" title="#FFEAA7"></span>
+        <span class="swatch" style="background:#B2F5EA;" title="#B2F5EA"></span>
+      </div>
+    </div>
+
+    <!-- icon_02 -->
+    <div class="icon-card">
+      <img src="icon_02.svg" alt="icon_02" width="200" height="200">
+      <div class="icon-filename">icon_02.svg</div>
+      <div class="icon-concept">오렌지/노란 배경 + 이미지→화살표→텍스트 변환 과정<br><em>literal · 레이어드</em></div>
+      <div class="palette">
+        <span class="swatch" style="background:#FF9F43;" title="#FF9F43"></span>
+        <span class="swatch" style="background:#FFEAA7;" title="#FFEAA7"></span>
+        <span class="swatch" style="background:#74B9FF;" title="#74B9FF"></span>
+        <span class="swatch" style="background:#00CEC9;" title="#00CEC9"></span>
+        <span class="swatch" style="background:#2D3436;" title="#2D3436"></span>
+      </div>
+    </div>
+
+    <!-- icon_03 -->
+    <div class="icon-card">
+      <img src="icon_03.svg" alt="icon_03" width="200" height="200">
+      <div class="icon-concept">네이비/퍼플 배경 + 빛나는 "@" + 주변 문자 원형 배치<br><em>metaphor · 기하학 추상</em></div>
+      <div class="icon-filename">icon_03.svg</div>
+      <div class="palette">
+        <span class="swatch" style="background:#3D5A80;" title="#3D5A80"></span>
+        <span class="swatch" style="background:#9B59B6;" title="#9B59B6"></span>
+        <span class="swatch" style="background:#FFFFFF;" title="#FFFFFF"></span>
+        <span class="swatch" style="background:#FFD700;" title="#FFD700"></span>
+      </div>
+    </div>
+
+    <!-- icon_04 -->
+    <div class="icon-card">
+      <img src="icon_04.svg" alt="icon_04" width="200" height="200">
+      <div class="icon-filename">icon_04.svg</div>
+      <div class="icon-concept">핑크/라벤더 배경 + 별★ 실루엣이 ASCII 문자로 구성<br><em>hybrid · 실루엣/캐릭터</em></div>
+      <div class="palette">
+        <span class="swatch" style="background:#FD79A8;" title="#FD79A8"></span>
+        <span class="swatch" style="background:#A29BFE;" title="#A29BFE"></span>
+        <span class="swatch" style="background:#FFD700;" title="#FFD700"></span>
+        <span class="swatch" style="background:#FDCB6E;" title="#FDCB6E"></span>
+        <span class="swatch" style="background:#6C5CE7;" title="#6C5CE7"></span>
+      </div>
+    </div>
+
+    <!-- icon_05 -->
+    <div class="icon-card">
+      <img src="icon_05.svg" alt="icon_05" width="200" height="200">
+      <div class="icon-filename">icon_05.svg</div>
+      <div class="icon-concept">초록/라임 배경 + 크게 굵은 "A" + ART 배지<br><em>metaphor · 중앙 심볼</em></div>
+      <div class="palette">
+        <span class="swatch" style="background:#00B09B;" title="#00B09B"></span>
+        <span class="swatch" style="background:#96C93D;" title="#96C93D"></span>
+        <span class="swatch" style="background:#FFFFFF;" title="#FFFFFF"></span>
+        <span class="swatch" style="background:#FFD700;" title="#FFD700"></span>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    Char.Art · Candidate_20260325_2019 · 2026-03-25
+  </footer>
+
+</body>
+</html>

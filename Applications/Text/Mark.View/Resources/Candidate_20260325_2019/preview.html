@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mark.View — Icon Candidates</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #FFF8F0;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      padding: 48px 32px;
+      min-height: 100vh;
+    }
+    h1 {
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 900;
+      color: #2D1B69;
+      margin-bottom: 8px;
+      letter-spacing: -0.5px;
+    }
+    .subtitle {
+      text-align: center;
+      font-size: 0.95rem;
+      color: #888;
+      margin-bottom: 48px;
+    }
+    .icons-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 32px;
+      justify-content: center;
+      align-items: flex-start;
+    }
+    .icon-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: white;
+      border-radius: 20px;
+      padding: 28px 24px 24px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.09);
+      width: 220px;
+      transition: transform 0.2s, box-shadow 0.2s;
+      cursor: default;
+    }
+    .icon-card:hover {
+      transform: scale(1.15);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.18);
+    }
+    .icon-card img {
+      width: 200px;
+      height: 200px;
+      border-radius: 12px;
+      display: block;
+    }
+    .icon-filename {
+      margin-top: 16px;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #444;
+      letter-spacing: 0.3px;
+    }
+    .icon-concept {
+      margin-top: 6px;
+      font-size: 0.78rem;
+      color: #777;
+      text-align: center;
+      line-height: 1.5;
+      min-height: 40px;
+    }
+    .palette {
+      display: flex;
+      gap: 6px;
+      margin-top: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .palette-dot {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(0,0,0,0.10);
+      display: inline-block;
+      title: attr(title);
+    }
+  </style>
+</head>
+<body>
+  <h1>Mark.View — Icon Candidates</h1>
+  <p class="subtitle">Candidate_20260325_2019 &nbsp;|&nbsp; 5 icons &nbsp;|&nbsp; Markdown Viewer / Editor</p>
+
+  <div class="icons-row">
+
+    <!-- icon_01 -->
+    <div class="icon-card">
+      <img src="icon_01.svg" width="200" height="200" alt="icon_01"/>
+      <div class="icon-filename">icon_01.svg</div>
+      <div class="icon-concept">보라 그라데이션 배경 + 크게 "#"<br>하단 노란 MD 배지</div>
+      <div class="palette">
+        <span class="palette-dot" style="background:#7B2D8B;" title="#7B2D8B"></span>
+        <span class="palette-dot" style="background:#DA8FE0;" title="#DA8FE0"></span>
+        <span class="palette-dot" style="background:#FFFFFF;" title="#FFFFFF"></span>
+        <span class="palette-dot" style="background:#FFD700;" title="#FFD700"></span>
+        <span class="palette-dot" style="background:#5B1A6B;" title="#5B1A6B"></span>
+      </div>
+    </div>
+
+    <!-- icon_02 -->
+    <div class="icon-card">
+      <img src="icon_02.svg" width="200" height="200" alt="icon_02"/>
+      <div class="icon-filename">icon_02.svg</div>
+      <div class="icon-concept">민트-파랑 배경 + 문서 카드<br>우하단 눈 아이콘</div>
+      <div class="palette">
+        <span class="palette-dot" style="background:#00D4AA;" title="#00D4AA"></span>
+        <span class="palette-dot" style="background:#1A7DC4;" title="#1A7DC4"></span>
+        <span class="palette-dot" style="background:#FFFFFF;" title="#FFFFFF"></span>
+        <span class="palette-dot" style="background:#888888;" title="#888888"></span>
+      </div>
+    </div>
+
+    <!-- icon_03 -->
+    <div class="icon-card">
+      <img src="icon_03.svg" width="200" height="200" alt="icon_03"/>
+      <div class="icon-filename">icon_03.svg</div>
+      <div class="icon-concept">코랄-핫핑크 배경 + 변환 화살표<br>MD 기호 → 렌더링 카드</div>
+      <div class="palette">
+        <span class="palette-dot" style="background:#FF6B35;" title="#FF6B35"></span>
+        <span class="palette-dot" style="background:#FF1744;" title="#FF1744"></span>
+        <span class="palette-dot" style="background:#FFD700;" title="#FFD700"></span>
+        <span class="palette-dot" style="background:#FFFFFF;" title="#FFFFFF"></span>
+      </div>
+    </div>
+
+    <!-- icon_04 -->
+    <div class="icon-card">
+      <img src="icon_04.svg" width="200" height="200" alt="icon_04"/>
+      <div class="icon-filename">icon_04.svg</div>
+      <div class="icon-concept">하늘-연보라 배경 + 좌우 분할 패널<br>좌=MD 편집기, 우=미리보기</div>
+      <div class="palette">
+        <span class="palette-dot" style="background:#74B9FF;" title="#74B9FF"></span>
+        <span class="palette-dot" style="background:#A29BFE;" title="#A29BFE"></span>
+        <span class="palette-dot" style="background:#1E1E2E;" title="#1E1E2E"></span>
+        <span class="palette-dot" style="background:#FAFAFA;" title="#FAFAFA"></span>
+        <span class="palette-dot" style="background:#27AE60;" title="#27AE60"></span>
+      </div>
+    </div>
+
+    <!-- icon_05 -->
+    <div class="icon-card">
+      <img src="icon_05.svg" width="200" height="200" alt="icon_05"/>
+      <div class="icon-filename">icon_05.svg</div>
+      <div class="icon-concept">노랑-오렌지 배경 + 눈 심볼<br>동공 안에 "#" — 마크다운 뷰어</div>
+      <div class="palette">
+        <span class="palette-dot" style="background:#FFF176;" title="#FFF176"></span>
+        <span class="palette-dot" style="background:#FFB300;" title="#FFB300"></span>
+        <span class="palette-dot" style="background:#2C3E50;" title="#2C3E50"></span>
+        <span class="palette-dot" style="background:#1A5276;" title="#1A5276"></span>
+        <span class="palette-dot" style="background:#FF6B35;" title="#FF6B35"></span>
+        <span class="palette-dot" style="background:#FF1744;" title="#FF1744"></span>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

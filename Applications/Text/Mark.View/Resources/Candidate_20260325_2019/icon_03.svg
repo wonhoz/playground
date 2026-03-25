@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg03" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF6B35"/>
+      <stop offset="100%" stop-color="#FF1744"/>
+    </linearGradient>
+    <clipPath id="clip03">
+      <rect x="0" y="0" width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <!-- Layer1: 배경 -->
+  <rect x="0" y="0" width="1024" height="1024" rx="190" fill="url(#bg03)"/>
+  <g clip-path="url(#clip03)">
+    <!-- Layer3 (먼저 배치): 장식 반투명 원형들 -->
+    <circle cx="270" cy="320" r="120" fill="white" fill-opacity="0.07"/>
+    <circle cx="290" cy="600" r="90" fill="white" fill-opacity="0.06"/>
+    <circle cx="350" cy="500" r="60" fill="#FFD700" fill-opacity="0.1"/>
+    <!-- Layer2: 좌측 마크다운 기호들 -->
+    <text x="240" y="350" font-size="200" font-weight="900" font-family="Arial Black, Arial, sans-serif" fill="white">#</text>
+    <text x="240" y="530" font-size="130" font-weight="900" font-family="Arial Black, Arial, sans-serif" fill="#FFD700">**</text>
+    <text x="250" y="690" font-size="120" font-weight="900" font-family="Arial Black, Arial, sans-serif" fill="white" fill-opacity="0.8">[]</text>
+    <!-- 중앙 화살표 몸통 -->
+    <line x1="480" y1="512" x2="630" y2="512" stroke="#FFD700" stroke-width="70" stroke-linecap="round"/>
+    <!-- 화살표 머리 -->
+    <polyline points="590,440 660,512 590,584" fill="none" stroke="#FFD700" stroke-width="70" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- 우측 흰 카드 -->
+    <rect x="660" y="280" width="190" height="480" rx="20" fill="white" fill-opacity="0.9"/>
+    <!-- 카드 안 줄들 -->
+    <rect x="678" y="330" width="154" height="22" rx="11" fill="#FF1744" fill-opacity="0.5"/>
+    <rect x="678" y="390" width="130" height="18" rx="9" fill="#333333" fill-opacity="0.2"/>
+    <rect x="678" y="428" width="150" height="18" rx="9" fill="#333333" fill-opacity="0.2"/>
+    <rect x="678" y="466" width="120" height="18" rx="9" fill="#333333" fill-opacity="0.2"/>
+    <rect x="678" y="530" width="110" height="18" rx="9" fill="#333333" fill-opacity="0.15"/>
+    <rect x="678" y="568" width="140" height="18" rx="9" fill="#333333" fill-opacity="0.15"/>
+  </g>
+</svg>

@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg05" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF176"/>
+      <stop offset="100%" stop-color="#FFB300"/>
+    </linearGradient>
+    <clipPath id="clip05">
+      <rect x="0" y="0" width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <!-- Layer1: 배경 -->
+  <rect x="0" y="0" width="1024" height="1024" rx="190" fill="url(#bg05)"/>
+  <g clip-path="url(#clip05)">
+    <!-- Layer3 (먼저): 배경 장식 점들 -->
+    <circle cx="230" cy="280" r="18" fill="#FF6B35"/>
+    <circle cx="790" cy="280" r="14" fill="#FF1744"/>
+    <circle cx="240" cy="780" r="16" fill="#FF1744"/>
+    <circle cx="780" cy="770" r="20" fill="#FF6B35"/>
+    <!-- 작은 별 장식들 -->
+    <polygon points="260,210 270,238 300,238 277,255 286,283 260,266 234,283 243,255 220,238 250,238" fill="#FF6B35" fill-opacity="0.7"/>
+    <polygon points="760,200 768,224 794,224 773,239 781,263 760,248 739,263 747,239 726,224 752,224" fill="#FF1744" fill-opacity="0.7"/>
+    <!-- Layer2: 눈 흰자 타원 -->
+    <ellipse cx="512" cy="512" rx="380" ry="220" fill="white"/>
+    <!-- 눈 윤곽 -->
+    <ellipse cx="512" cy="512" rx="380" ry="220" fill="none" stroke="#2C3E50" stroke-width="40"/>
+    <!-- 동공 -->
+    <circle cx="512" cy="512" r="160" fill="#2C3E50"/>
+    <!-- 홍채 -->
+    <circle cx="512" cy="512" r="120" fill="#1A5276"/>
+    <!-- 내부 "#" 텍스트 -->
+    <text x="512" y="512" font-size="160" font-weight="900" font-family="Arial Black, Arial, sans-serif" fill="white" text-anchor="middle" dominant-baseline="central">#</text>
+    <!-- 하이라이트 -->
+    <circle cx="450" cy="460" r="40" fill="white" fill-opacity="0.7"/>
+    <!-- 속눈썹 느낌 선들 (상단) -->
+    <line x1="430" y1="295" x2="420" y2="230" stroke="#2C3E50" stroke-width="18" stroke-linecap="round"/>
+    <line x1="512" y1="290" x2="512" y2="222" stroke="#2C3E50" stroke-width="18" stroke-linecap="round"/>
+    <line x1="595" y1="295" x2="605" y2="228" stroke="#2C3E50" stroke-width="18" stroke-linecap="round"/>
+    <!-- 속눈썹 느낌 선들 (하단) -->
+    <line x1="430" y1="730" x2="420" y2="796" stroke="#2C3E50" stroke-width="14" stroke-linecap="round"/>
+    <line x1="512" y1="734" x2="512" y2="802" stroke="#2C3E50" stroke-width="14" stroke-linecap="round"/>
+    <line x1="595" y1="730" x2="605" y2="794" stroke="#2C3E50" stroke-width="14" stroke-linecap="round"/>
+  </g>
+</svg>

@@ -1,37 +1,22 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
   <defs>
-    <linearGradient id="bg2d" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#0A1628"/>
-      <stop offset="100%" stop-color="#0D2146"/>
+    <linearGradient id="bg01" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7B2D8B"/>
+      <stop offset="100%" stop-color="#DA8FE0"/>
     </linearGradient>
-    <clipPath id="c2d"><rect width="1024" height="1024" rx="300"/></clipPath>
+    <clipPath id="clip01">
+      <circle cx="512" cy="512" r="512"/>
+    </clipPath>
   </defs>
-  <rect width="1024" height="1024" rx="300" fill="url(#bg2d)"/>
-  <circle cx="820" cy="820" r="300" fill="#1565C0" opacity="0.15" clip-path="url(#c2d)"/>
-  <circle cx="200" cy="200" r="200" fill="#0D47A1" opacity="0.12" clip-path="url(#c2d)"/>
-
-  <!-- Layer 2: # ## ### 헤더 심볼 스택 (중앙심볼) -->
-  <!-- H1 — 가장 크고 진함 -->
-  <text x="155" y="370" font-family="Consolas,monospace" font-size="120" font-weight="bold" fill="#58A6FF">#</text>
-  <text x="305" y="370" font-family="Segoe UI,sans-serif" font-size="88" font-weight="700" fill="#90CAF9">Heading</text>
-
-  <!-- H2 -->
-  <text x="155" y="490" font-family="Consolas,monospace" font-size="90" font-weight="bold" fill="#1E88E5">##</text>
-  <text x="350" y="490" font-family="Segoe UI,sans-serif" font-size="66" font-weight="700" fill="#64B5F6">Section</text>
-
-  <!-- H3 -->
-  <text x="155" y="594" font-family="Consolas,monospace" font-size="70" font-weight="bold" fill="#1565C0">###</text>
-  <text x="420" y="594" font-family="Segoe UI,sans-serif" font-size="52" font-weight="600" fill="#42A5F5">Topic</text>
-
-  <!-- H4 (더 작게) -->
-  <text x="155" y="672" font-family="Consolas,monospace" font-size="52" font-weight="bold" fill="#0D47A1">####</text>
-  <text x="476" y="672" font-family="Segoe UI,sans-serif" font-size="40" font-weight="600" fill="#2196F3">Detail</text>
-
-  <!-- 가로 구분선들 (렌더링된 H1/H2 아래 보더) -->
-  <line x1="155" y1="382" x2="870" y2="382" stroke="#1E88E5" stroke-width="4" opacity="0.4"/>
-  <line x1="155" y1="503" x2="780" y2="503" stroke="#1565C0" stroke-width="3" opacity="0.3"/>
-
-  <!-- Layer 3: MD 로고 힌트 (오른쪽 하단) -->
-  <rect x="680" y="720" width="180" height="90" rx="14" fill="#0D1B3A" stroke="#1E88E5" stroke-width="3"/>
-  <text x="770" y="770" text-anchor="middle" font-family="Consolas,monospace" font-size="44" font-weight="bold" fill="#58A6FF">M↓</text>
+  <!-- Layer1: 배경 -->
+  <circle cx="512" cy="512" r="512" fill="url(#bg01)"/>
+  <!-- Layer2: 배경 뒤 반투명 큰 "#" 깊이감 + 콘텐츠 요소 (상하 여백 대칭 보정 -38px) -->
+  <g clip-path="url(#clip01)">
+    <text x="512" y="492" font-size="900" font-weight="900" font-family="Arial Black, Arial, sans-serif" fill="white" fill-opacity="0.12" text-anchor="middle" dominant-baseline="central">#</text>
+    <!-- 메인 중앙 "#" -->
+    <text x="512" y="402" font-size="500" font-weight="900" font-family="Arial Black, Arial, sans-serif" fill="white" text-anchor="middle" dominant-baseline="central">#</text>
+    <!-- Layer3: 하단 노란 배지 -->
+    <rect x="330" y="662" width="364" height="110" rx="55" fill="#FFD700"/>
+    <text x="512" y="718" font-size="90" font-weight="900" font-family="Arial Black, Arial, sans-serif" fill="#5B1A6B" text-anchor="middle" dominant-baseline="central">MD</text>
+  </g>
 </svg>

@@ -1,52 +1,37 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
-  <!--
-    icon_01 [literal] — Raw Markdown → 아름다운 헤딩 before/after
-    컨셉: "# Hello" raw text가 화살표 후 큰 파란 헤딩 "Hello"로 변신
-    연결고리: Markdown 기호(#)가 제거되고 아름답게 렌더링된 결과물이 나타남을 직접 표현
-    패턴: 대각선/동적
-    색상: Catppuccin Mocha 다크(#1e1e2e) + 파랑(#89b4fa) + 보라(#cba6f7)
-  -->
   <defs>
-    <linearGradient id="bg01" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#24273a"/>
-      <stop offset="100%" stop-color="#1e1e2e"/>
+    <linearGradient id="bg2d" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0A1628"/>
+      <stop offset="100%" stop-color="#0D2146"/>
     </linearGradient>
-    <filter id="headingGlow01">
-      <feGaussianBlur stdDeviation="8" result="blur"/>
-      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
+    <clipPath id="c2d"><rect width="1024" height="1024" rx="300"/></clipPath>
   </defs>
+  <rect width="1024" height="1024" rx="300" fill="url(#bg2d)"/>
+  <circle cx="820" cy="820" r="300" fill="#1565C0" opacity="0.15" clip-path="url(#c2d)"/>
+  <circle cx="200" cy="200" r="200" fill="#0D47A1" opacity="0.12" clip-path="url(#c2d)"/>
 
-  <!-- Layer 1: 다크 배경 -->
-  <rect width="1024" height="1024" rx="190" fill="url(#bg01)"/>
+  <!-- Layer 2: # ## ### 헤더 심볼 스택 (중앙심볼) -->
+  <!-- H1 — 가장 크고 진함 -->
+  <text x="155" y="370" font-family="Consolas,monospace" font-size="120" font-weight="bold" fill="#58A6FF">#</text>
+  <text x="305" y="370" font-family="Segoe UI,sans-serif" font-size="88" font-weight="700" fill="#90CAF9">Heading</text>
 
-  <!-- Layer 2: Before — raw Markdown (희미한 회색) -->
-  <!-- `# Hello` 텍스트 (왼쪽 상단) -->
-  <text x="186" y="360"
-        font-family="Consolas, 'Cascadia Code', monospace"
-        font-size="88" font-weight="400"
-        fill="#4a4a6a" text-anchor="start"># Hello</text>
-  <!-- raw 느낌: 희미한 네모 커서 -->
-  <rect x="186" y="280" width="6" height="100" rx="3" fill="#4a4a6a" opacity="0.5"/>
+  <!-- H2 -->
+  <text x="155" y="490" font-family="Consolas,monospace" font-size="90" font-weight="bold" fill="#1E88E5">##</text>
+  <text x="350" y="490" font-family="Segoe UI,sans-serif" font-size="66" font-weight="700" fill="#64B5F6">Section</text>
 
-  <!-- 변환 화살표 (중앙) -->
-  <text x="512" y="544"
-        font-family="Arial Black, Arial, sans-serif"
-        font-size="130" font-weight="900"
-        fill="#cba6f7" text-anchor="middle">→</text>
+  <!-- H3 -->
+  <text x="155" y="594" font-family="Consolas,monospace" font-size="70" font-weight="bold" fill="#1565C0">###</text>
+  <text x="420" y="594" font-family="Segoe UI,sans-serif" font-size="52" font-weight="600" fill="#42A5F5">Topic</text>
 
-  <!-- Layer 2: After — 렌더링된 헤딩 (오른쪽 하단, 파랗고 크게) -->
-  <text x="840" y="706"
-        font-family="'Segoe UI', Arial, sans-serif"
-        font-size="164" font-weight="700"
-        fill="#89b4fa" text-anchor="end"
-        filter="url(#headingGlow01)">Hello</text>
-  <!-- 헤딩 구분선 (H1 스타일) -->
-  <line x1="510" y1="730" x2="840" y2="730"
-        stroke="#89b4fa" stroke-width="6" opacity="0.45" stroke-linecap="round"/>
+  <!-- H4 (더 작게) -->
+  <text x="155" y="672" font-family="Consolas,monospace" font-size="52" font-weight="bold" fill="#0D47A1">####</text>
+  <text x="476" y="672" font-family="Segoe UI,sans-serif" font-size="40" font-weight="600" fill="#2196F3">Detail</text>
 
-  <!-- Layer 3: 서브 — 다른 Markdown 기호들 희미하게 (배경 느낌) -->
-  <text x="186" y="820"
-        font-family="Consolas, monospace"
-        font-size="48" fill="#2e2e4e" text-anchor="start">**bold**  `code`  &gt; quote</text>
+  <!-- 가로 구분선들 (렌더링된 H1/H2 아래 보더) -->
+  <line x1="155" y1="382" x2="870" y2="382" stroke="#1E88E5" stroke-width="4" opacity="0.4"/>
+  <line x1="155" y1="503" x2="780" y2="503" stroke="#1565C0" stroke-width="3" opacity="0.3"/>
+
+  <!-- Layer 3: MD 로고 힌트 (오른쪽 하단) -->
+  <rect x="680" y="720" width="180" height="90" rx="14" fill="#0D1B3A" stroke="#1E88E5" stroke-width="3"/>
+  <text x="770" y="770" text-anchor="middle" font-family="Consolas,monospace" font-size="44" font-weight="bold" fill="#58A6FF">M↓</text>
 </svg>

@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg03" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#EA580C"/>
+      <stop offset="100%" stop-color="#FBBF24"/>
+    </linearGradient>
+    <clipPath id="clip03">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg03)"/>
+
+  <!-- Layer 2: 지문 곡선들 (동심 타원/호 - 파일 fingerprint) -->
+  <g clip-path="url(#clip03)" fill="none" stroke="rgba(255,255,255,0.80)" stroke-linecap="round">
+    <!-- 가장 안쪽 -->
+    <ellipse cx="512" cy="490" rx="60" ry="45" stroke-width="18"/>
+    <ellipse cx="512" cy="490" rx="118" ry="95" stroke-width="16"/>
+    <ellipse cx="512" cy="490" rx="178" ry="148" stroke-width="14"/>
+    <ellipse cx="512" cy="490" rx="238" ry="202" stroke-width="14"/>
+    <ellipse cx="512" cy="490" rx="300" ry="256" stroke-width="12"/>
+    <ellipse cx="512" cy="490" rx="362" ry="310" stroke-width="12"/>
+    <ellipse cx="512" cy="490" rx="424" ry="364" stroke-width="10"/>
+    <!-- 지문 특유의 불연속 (끊김 효과) -->
+    <path d="M 512,142 Q 560,130 600,150" stroke-width="10" stroke="rgba(255,255,255,0.4)"/>
+  </g>
+
+  <!-- Layer 3: 중앙 파일 아이콘 (지문의 핵심) -->
+  <rect x="456" y="448" width="114" height="84" rx="10" fill="white" opacity="0.95"/>
+  <path d="M 456,448 L 536,448 L 570,482 L 570,532 L 456,532 Z" fill="white"/>
+  <path d="M 536,448 L 570,482 L 536,482 Z" fill="#FED7AA"/>
+  <!-- 파일 라인 -->
+  <rect x="472" y="494" width="60" height="8" rx="4" fill="#FDBA74"/>
+  <rect x="472" y="510" width="72" height="8" rx="4" fill="#FDBA74"/>
+
+  <!-- 하단 텍스트 -->
+  <text x="512" y="860" text-anchor="middle" font-family="Segoe UI, sans-serif"
+        font-size="62" font-weight="bold" fill="white">파일 지문</text>
+  <text x="512" y="930" text-anchor="middle" font-family="Consolas, monospace"
+        font-size="38" fill="rgba(255,255,255,0.80)">Fingerprint</text>
+</svg>

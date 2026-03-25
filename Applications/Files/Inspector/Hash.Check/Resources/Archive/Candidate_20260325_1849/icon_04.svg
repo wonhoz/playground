@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg04" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1E1B4B"/>
+      <stop offset="100%" stop-color="#4338CA"/>
+    </linearGradient>
+    <linearGradient id="shG04" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FCD34D"/>
+      <stop offset="100%" stop-color="#D97706"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg04)"/>
+
+  <!-- Layer 2: 황금 방패 -->
+  <!-- 방패 그림자/광택 -->
+  <path d="M 512,118 L 750,220 L 750,520 Q 750,720 512,860 Q 274,720 274,520 L 274,220 Z"
+        fill="rgba(252,211,77,0.18)"/>
+  <!-- 방패 본체 -->
+  <path d="M 512,138 L 738,234 L 738,516 Q 738,706 512,840 Q 286,706 286,516 L 286,234 Z"
+        fill="url(#shG04)"/>
+  <!-- 방패 내부 밝은 테두리 -->
+  <path d="M 512,178 L 704,264 L 704,510 Q 704,676 512,796 Q 320,676 320,510 L 320,264 Z"
+        fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="12"/>
+
+  <!-- Layer 3: 체크마크 (방패 안) -->
+  <path d="M 404,500 L 468,570 L 628,390" stroke="white" stroke-width="56"
+        stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+
+  <!-- 상단 별빛 장식 -->
+  <circle cx="230" cy="200" r="14" fill="#FCD34D" opacity="0.7"/>
+  <circle cx="794" cy="200" r="14" fill="#FCD34D" opacity="0.7"/>
+  <circle cx="200" cy="400" r="10" fill="#A5B4FC" opacity="0.7"/>
+  <circle cx="824" cy="400" r="10" fill="#A5B4FC" opacity="0.7"/>
+
+  <!-- 하단 텍스트 -->
+  <text x="512" y="930" text-anchor="middle" font-family="Segoe UI, sans-serif"
+        font-size="56" font-weight="bold" fill="#FCD34D">무결성 보호</text>
+</svg>

@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg05" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#BE185D"/>
+      <stop offset="100%" stop-color="#F472B6"/>
+    </linearGradient>
+    <clipPath id="clip05">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg05)"/>
+
+  <!-- 배경 장식 원 -->
+  <circle cx="820" cy="200" r="160" fill="rgba(255,255,255,0.07)"/>
+  <circle cx="200" cy="820" r="120" fill="rgba(255,255,255,0.07)"/>
+
+  <!-- Layer 2: 돋보기 (대각선 배치) -->
+  <!-- 렌즈 원 -->
+  <circle cx="420" cy="420" r="220" fill="white" opacity="0.95"/>
+  <circle cx="420" cy="420" r="220" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="6"/>
+  <!-- 렌즈 내부 배경 (살짝 어둡게) -->
+  <circle cx="420" cy="420" r="195" fill="#FDF2F8"/>
+  <!-- 렌즈 손잡이 -->
+  <line x1="590" y1="590" x2="780" y2="790"
+        stroke="white" stroke-width="60" stroke-linecap="round"/>
+  <line x1="590" y1="590" x2="780" y2="790"
+        stroke="#EC4899" stroke-width="44" stroke-linecap="round"/>
+
+  <!-- Layer 3: 렌즈 안 해시 텍스트 -->
+  <!-- MD5 라벨 -->
+  <text x="420" y="370" text-anchor="middle" font-family="Consolas, monospace"
+        font-size="68" font-weight="bold" fill="#BE185D">MD5</text>
+  <!-- 해시 숫자들 -->
+  <text x="420" y="440" text-anchor="middle" font-family="Consolas, monospace"
+        font-size="36" fill="#9D174D">5d41402a</text>
+  <text x="420" y="490" text-anchor="middle" font-family="Consolas, monospace"
+        font-size="36" fill="#9D174D">bc4f7e82</text>
+
+  <!-- 렌즈 테두리 강조 -->
+  <circle cx="420" cy="420" r="220" fill="none" stroke="white" stroke-width="20"/>
+
+  <!-- 하단 텍스트 -->
+  <text x="512" y="890" text-anchor="middle" font-family="Segoe UI, sans-serif"
+        font-size="54" font-weight="bold" fill="white">해시 검사</text>
+</svg>

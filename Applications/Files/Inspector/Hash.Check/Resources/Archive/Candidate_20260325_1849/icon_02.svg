@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg02" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#065F46"/>
+      <stop offset="100%" stop-color="#34D399"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg02)"/>
+
+  <!-- Layer 2: 두 해시값 비교 바 -->
+  <!-- 첫 번째 해시 (A) -->
+  <rect x="140" y="200" width="744" height="80" rx="14" fill="rgba(255,255,255,0.15)"/>
+  <text x="512" y="252" text-anchor="middle" font-family="Consolas, monospace"
+        font-size="42" fill="white">a3f8c0d2 e1b5 7f42</text>
+
+  <!-- 두 번째 해시 (B) -->
+  <rect x="140" y="310" width="744" height="80" rx="14" fill="rgba(255,255,255,0.15)"/>
+  <text x="512" y="362" text-anchor="middle" font-family="Consolas, monospace"
+        font-size="42" fill="white">a3f8c0d2 e1b5 7f42</text>
+
+  <!-- 구분선 -->
+  <line x1="200" y1="430" x2="824" y2="430" stroke="rgba(255,255,255,0.3)" stroke-width="3"/>
+
+  <!-- Layer 3: 큰 체크마크 + MATCH 텍스트 -->
+  <!-- 체크 원형 배경 -->
+  <circle cx="512" cy="620" r="140" fill="rgba(255,255,255,0.18)"/>
+  <!-- 체크마크 -->
+  <path d="M 430,620 L 495,690 L 600,550" stroke="#A7F3D0" stroke-width="42"
+        stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+
+  <!-- MATCH 텍스트 -->
+  <text x="512" y="825" text-anchor="middle" font-family="Segoe UI, sans-serif"
+        font-size="80" font-weight="bold" fill="white">MATCH</text>
+  <!-- 작은 부제 -->
+  <text x="512" y="900" text-anchor="middle" font-family="Segoe UI, sans-serif"
+        font-size="38" fill="rgba(255,255,255,0.75)">체크섬 일치 확인</text>
+</svg>

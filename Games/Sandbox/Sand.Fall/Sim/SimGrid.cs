@@ -388,8 +388,12 @@ public sealed class SimGrid
             }
             else if (mat == Material.Steam)
             {
-                uint alpha = (uint)Math.Clamp(_cells[i].Life * 3, 60, 200);
-                color = (alpha << 24) | 0x9AAAC0;
+                // Life에 따라 배경색(#0D1117)으로 CPU 블렌딩 → 증기 페이드 시각화
+                int a = Math.Clamp(_cells[i].Life * 3, 0, 255);
+                int r = (0x9A * a + 0x0D * (255 - a)) / 255;
+                int g = (0xAA * a + 0x11 * (255 - a)) / 255;
+                int b = (0xC0 * a + 0x17 * (255 - a)) / 255;
+                color = (uint)((r << 16) | (g << 8) | b);
             }
             else if (mat == Material.Sand)
             {

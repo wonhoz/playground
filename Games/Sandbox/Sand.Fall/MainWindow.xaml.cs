@@ -124,27 +124,33 @@ public partial class MainWindow : Window
     {
         if (_isDrawing && e.LeftButton == MouseButtonState.Pressed)
             DrawAt(e.GetPosition(SimImage));
+        else if (e.RightButton == MouseButtonState.Pressed)
+            EraseAt(e.GetPosition(SimImage));
     }
 
     private void SimImage_RightMouseDown(object sender, MouseButtonEventArgs e)
-    {
-        // 우클릭: 지우기
-        var pos = e.GetPosition(SimImage);
-        var (gx, gy) = ToGridCoord(pos);
-        int radius = (int)SldBrush.Value;
-        _grid.SetBrush(gx, gy, radius, Material.Empty);
-    }
+        => EraseAt(e.GetPosition(SimImage));
 
     private void DrawAt(Point pos)
     {
         var (gx, gy) = ToGridCoord(pos);
+        if (gx < 0) return;
         int radius = (int)SldBrush.Value;
         _grid.SetBrush(gx, gy, radius, _curMat);
+    }
+
+    private void EraseAt(Point pos)
+    {
+        var (gx, gy) = ToGridCoord(pos);
+        if (gx < 0) return;
+        int radius = (int)SldBrush.Value;
+        _grid.SetBrush(gx, gy, radius, Material.Empty);
     }
 
     private (int gx, int gy) ToGridCoord(Point imagePos)
     {
         // Image의 실제 렌더 크기 → 그리드 좌표 변환
+        if (SimImage.ActualWidth <= 0 || SimImage.ActualHeight <= 0) return (-1, -1);
         double scaleX = SimGrid.W / SimImage.ActualWidth;
         double scaleY = SimGrid.H / SimImage.ActualHeight;
         int gx = (int)(imagePos.X * scaleX);
@@ -189,7 +195,7 @@ public partial class MainWindow : Window
                 if (_selectedBtn is not null)
                     _selectedBtn.BorderBrush = new SolidColorBrush(Color.FromRgb(0x30, 0x36, 0x3D));
                 _curMat = (Material)btn.Tag;
-                btn.BorderBrush = new SolidColorBrush(Color.FromRgb(0xD2, 0x99, 0x22));
+                btn.BorderBrush = new SolidColorBrush(Color.FromRgb(0x4F, 0xC3, 0xF7));
                 _selectedBtn = btn;
             };
 
@@ -198,7 +204,7 @@ public partial class MainWindow : Window
             // 기본 선택: Sand
             if (mat == Material.Sand)
             {
-                btn.BorderBrush = new SolidColorBrush(Color.FromRgb(0xD2, 0x99, 0x22));
+                btn.BorderBrush = new SolidColorBrush(Color.FromRgb(0x4F, 0xC3, 0xF7));
                 _selectedBtn = btn;
             }
         }

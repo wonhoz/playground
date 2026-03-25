@@ -4,7 +4,9 @@ namespace CrosswordCast.Services;
 
 public class GameService
 {
-    private int _seed = 0;
+    private int _seed;
+
+    public int CurrentSeed => _seed;
 
     public Puzzle? CurrentPuzzle { get; private set; }
 
@@ -47,6 +49,20 @@ public class GameService
 
     public PlacedWord? FindWord(int r, int c, bool across) =>
         CurrentPuzzle?.Words.FirstOrDefault(w => w.Across == across && w.Contains(r, c));
+
+    public bool IsWordCompleted(PlacedWord w)
+    {
+        int dr = w.Across ? 0 : 1, dc = w.Across ? 1 : 0;
+        for (int i = 0; i < w.Word.Length; i++)
+            if (_user[w.Row + dr * i, w.Col + dc * i] != w.Word[i]) return false;
+        return true;
+    }
+
+    public (int done, int total) WordProgress()
+    {
+        if (CurrentPuzzle is null) return (0, 0);
+        return (CurrentPuzzle.Words.Count(IsWordCompleted), CurrentPuzzle.Words.Count);
+    }
 
     public void RevealWord(PlacedWord w)
     {

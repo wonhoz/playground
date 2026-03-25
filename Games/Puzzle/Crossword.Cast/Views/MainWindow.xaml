@@ -14,13 +14,17 @@
 
         <!-- 헤더 -->
         <Grid Grid.Row="0" Margin="0,0,0,12">
-            <TextBlock Text="✏ Crossword.Cast" FontSize="20" FontWeight="Bold"
-                       Foreground="#FFEE58" HorizontalAlignment="Left"
-                       VerticalAlignment="Center"/>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button Content="새 퍼즐" Padding="12,6" Click="OnNew"/>
-                <Button Content="정답 확인" Padding="12,6" Click="OnCheck" Margin="8,0,0,0"/>
-                <Button Content="↺ 초기화" Padding="12,6" Click="OnClear" Margin="8,0,0,0"/>
+            <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center">
+                <TextBlock Text="✏ Crossword.Cast" FontSize="20" FontWeight="Bold"
+                           Foreground="#FFEE58"/>
+                <TextBlock x:Name="TxtTimer" Text="00:00" FontSize="12" Foreground="#888888"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+                <Button Content="새 퍼즐"   Padding="12,6" Click="OnNew"/>
+                <Button Content="공개"      Padding="12,6" Click="OnReveal"   Margin="8,0,0,0"/>
+                <Button Content="정답 확인" Padding="12,6" Click="OnCheck"    Margin="8,0,0,0"/>
+                <Button Content="↺ 초기화" Padding="12,6" Click="OnClear"    Margin="8,0,0,0"/>
+                <Button Content="씨드 복사" Padding="12,6" Click="OnCopySeed" Margin="8,0,0,0"/>
             </StackPanel>
         </Grid>
 

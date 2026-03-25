@@ -1,5 +1,6 @@
 using System.Runtime.InteropServices;
 using System.Windows.Interop;
+using System.Windows.Threading;
 using CrosswordCast.Models;
 using CrosswordCast.Services;
 
@@ -13,6 +14,8 @@ public partial class MainWindow : Window
     private readonly GameService    _game;
     private readonly CrosswordGrid  _grid;
     private bool _updatingClue;
+    private DispatcherTimer? _timer;
+    private int _elapsedSeconds;
 
     public MainWindow()
     {
@@ -24,18 +27,23 @@ public partial class MainWindow : Window
         _grid.Changed += OnGridChanged;
         GridBorder.Child = _grid;
 
-        Loaded += (_, _) => { ApplyDarkTitleBar(); NewPuzzle(); };
+        Loaded += async (_, _) => { ApplyDarkTitleBar(); await NewPuzzleAsync(); };
     }
 
     // ── 새 퍼즐 ─────────────────────────────────────────────────────
 
-    private void NewPuzzle()
+    private async Task NewPuzzleAsync()
     {
         TxtStatus.Text = "퍼즐 생성 중...";
-        _game.NewPuzzle();
+        IsEnabled = false;
+
+        await Task.Run(() => _game.NewPuzzle());
+
+        IsEnabled = true;
         _grid.ResetSelection();
         RefreshClues();
-        TxtStatus.Text = "셀을 클릭한 후 알파벳을 입력하세요.  Tab: 방향 전환 / 백스페이스: 지우기";
+        StartTimer();
+        UpdateStatus();
     }
 
     private void RefreshClues()
@@ -45,15 +53,45 @@ public partial class MainWindow : Window
         LstDown.ItemsSource   = _game.CurrentPuzzle.DownWords.Select(w => w.ClueText).ToList();
     }
 
+    // ── 타이머 ───────────────────────────────────────────────────────
+
+    private void StartTimer()
+    {
+        _timer?.Stop();
+        _elapsedSeconds = 0;
+        TxtTimer.Text = "00:00";
+        _timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
+        _timer.Tick += (_, _) =>
+        {
+            _elapsedSeconds++;
+            TxtTimer.Text = $"{_elapsedSeconds / 60:D2}:{_elapsedSeconds % 60:D2}";
+        };
+        _timer.Start();
+    }
+
+    private void StopTimer() => _timer?.Stop();
+
+    // ── 상태 업데이트 ────────────────────────────────────────────────
+
+    private void UpdateStatus()
+    {
+        var (done, total) = _game.WordProgress();
+        TxtStatus.Text = $"단어 {done}/{total} 완성 · 셀 클릭 후 알파벳 입력  Tab: 방향 전환 / 백스페이스: 지우기";
+    }
+
     // ── 게임 이벤트 ──────────────────────────────────────────────────
 
     private void OnGridChanged()
     {
         if (_game.IsCompleted())
         {
-            TxtStatus.Text = "🎉 완성! 정답입니다!";
+            StopTimer();
+            TxtStatus.Text = $"🎉 완성! 정답입니다! ({TxtTimer.Text})";
             return;
         }
+
+        var (done, total) = _game.WordProgress();
+        TxtStatus.Text = $"단어 {done}/{total} 완성 · 셀 클릭 후 알파벳 입력  Tab: 방향 전환 / 백스페이스: 지우기";
 
         // 선택된 단어 힌트 하이라이트
         var sel = _grid.SelectedWord;
@@ -100,25 +138,28 @@ public partial class MainWindow : Window
 
     // ── 버튼 ─────────────────────────────────────────────────────────
 
-    private void OnNew(object sender, RoutedEventArgs e)   => NewPuzzle();
+    private async void OnNew(object sender, RoutedEventArgs e)    => await NewPuzzleAsync();
+
+    private void OnReveal(object sender, RoutedEventArgs e)
+    {
+        var word = _grid.SelectedWord;
+        if (word is null) return;
+        _game.RevealWord(word);
+        _grid.Refresh();
+        OnGridChanged();
+    }
 
     private void OnClear(object sender, RoutedEventArgs e)
     {
         _game.Clear();
         _grid.Refresh();
-        TxtStatus.Text = "초기화했습니다.";
+        var (_, total) = _game.WordProgress();
+        TxtStatus.Text = $"단어 0/{total} 완성 · 초기화했습니다.";
     }
 
     private void OnCheck(object sender, RoutedEventArgs e)
     {
         if (_game.CurrentPuzzle is null) return;
-        int total   = _game.CurrentPuzzle.Words.Sum(w => w.Word.Length);
-        int correct = 0;
-        for (int r = 0; r < Puzzle.N; r++)
-        for (int c = 0; c < Puzzle.N; c++)
-            if (_game.IsCorrect(r, c)) correct++;
-
-        // 중복 셀(교차점) 보정
         var uniqueCells = new HashSet<(int, int)>();
         foreach (var w in _game.CurrentPuzzle.Words)
         {
@@ -126,14 +167,20 @@ public partial class MainWindow : Window
             for (int i = 0; i < w.Word.Length; i++)
                 uniqueCells.Add((w.Row + dr * i, w.Col + dc * i));
         }
-        total = uniqueCells.Count;
-        correct = uniqueCells.Count(pos => _game.IsCorrect(pos.Item1, pos.Item2));
+        int total   = uniqueCells.Count;
+        int correct = uniqueCells.Count(pos => _game.IsCorrect(pos.Item1, pos.Item2));
 
         TxtStatus.Text = _game.IsCompleted()
-            ? "🎉 완성! 정답입니다!"
+            ? $"🎉 완성! 정답입니다! ({TxtTimer.Text})"
             : $"진행률: {correct} / {total} 칸 ({correct * 100 / total}%)";
 
         _grid.Refresh();
+    }
+
+    private void OnCopySeed(object sender, RoutedEventArgs e)
+    {
+        Clipboard.SetText(_game.CurrentSeed.ToString());
+        TxtStatus.Text = $"씨드 복사됨: {_game.CurrentSeed}  (다음 게임에 같은 씨드로 재도전 가능)";
     }
 
     // ── 다크 타이틀바 ────────────────────────────────────────────────

@@ -64,6 +64,14 @@ public class MainViewModel : BaseViewModel
 
     List<QuizQuestion> _questions = [];
     List<string?>      _userAnswers = [];
+    List<bool>         _hintUsed = [];
+
+    // ── 힌트 ────────────────────────────────────────────────────────────────
+    string? _eliminatedChoice;
+    bool    _hintUsedThisQuestion;
+
+    public string? EliminatedChoice { get => _eliminatedChoice; private set => Set(ref _eliminatedChoice, value); }
+    public bool    HintAvailable    => Screen == QuizScreen.Quiz && !Answered && !_hintUsedThisQuestion && CurrentQuestion != null;
 
     public QuizQuestion? CurrentQuestion =>
         _currentIndex < _questions.Count ? _questions[_currentIndex] : null;
@@ -106,19 +114,23 @@ public class MainViewModel : BaseViewModel
     public RelayCommand Choice2Cmd { get; }
     public RelayCommand Choice3Cmd { get; }
 
-    public RelayCommand NextCmd { get; }
+    public RelayCommand NextCmd       { get; }
+    public RelayCommand HintCmd       { get; }
+    public RelayCommand RetryWrongCmd { get; }
 
     static readonly Random _rng = new();
 
     public MainViewModel()
     {
-        StartCmd   = new(DoStart,   () => GetPool().Count >= 4);
-        RestartCmd = new(DoRestart);
-        Choice0Cmd = new(() => SelectAnswer(0), () => Screen == QuizScreen.Quiz && !Answered);
-        Choice1Cmd = new(() => SelectAnswer(1), () => Screen == QuizScreen.Quiz && !Answered);
-        Choice2Cmd = new(() => SelectAnswer(2), () => Screen == QuizScreen.Quiz && !Answered);
-        Choice3Cmd = new(() => SelectAnswer(3), () => Screen == QuizScreen.Quiz && !Answered);
-        NextCmd    = new(DoNext, () => Answered);
+        StartCmd      = new(DoStart,      () => GetPool().Count >= 4);
+        RestartCmd    = new(DoRestart);
+        Choice0Cmd    = new(() => SelectAnswer(0), () => Screen == QuizScreen.Quiz && !Answered);
+        Choice1Cmd    = new(() => SelectAnswer(1), () => Screen == QuizScreen.Quiz && !Answered);
+        Choice2Cmd    = new(() => SelectAnswer(2), () => Screen == QuizScreen.Quiz && !Answered);
+        Choice3Cmd    = new(() => SelectAnswer(3), () => Screen == QuizScreen.Quiz && !Answered);
+        NextCmd       = new(DoNext,       () => Answered);
+        HintCmd       = new(DoHint,       () => HintAvailable);
+        RetryWrongCmd = new(DoRetryWrong, () => Result?.WrongItems.Count > 0);
     }
 
     IReadOnlyList<Country> GetPool()
@@ -138,13 +150,18 @@ public class MainViewModel : BaseViewModel
         var subjects = pool.OrderBy(_ => _rng.Next()).Take(QuestionCount).ToList();
         _questions   = subjects.Select(s => BuildQuestion(s, pool)).ToList();
         _userAnswers = Enumerable.Repeat<string?>(null, _questions.Count).ToList();
+        _hintUsed    = Enumerable.Repeat(false, _questions.Count).ToList();
 
-        _currentIndex = 0;
-        SelectedAnswer = null;
-        Answered       = false;
-        Result         = null;
-        Screen         = QuizScreen.Quiz;
+        _currentIndex         = 0;
+        _hintUsedThisQuestion = false;
+        SelectedAnswer        = null;
+        EliminatedChoice      = null;
+        Answered              = false;
+        Result                = null;
+        Screen                = QuizScreen.Quiz;
         NotifyQuizProps();
+        HintCmd.Raise();
+        Notify(nameof(HintAvailable));
         StartTimer();
     }
 
@@ -202,10 +219,65 @@ public class MainViewModel : BaseViewModel
                      .Where(r => r.Value is >= 0x1F1E6 and <= 0x1F1FF)
                      .Select(r => (char)('A' + r.Value - 0x1F1E6)));
 
+    void DoHint()
+    {
+        if (CurrentQuestion == null || _hintUsedThisQuestion) return;
+
+        var wrongChoices = CurrentQuestion.Choices
+            .Where(c => c != CurrentQuestion.CorrectAnswer && c != _eliminatedChoice)
+            .ToList();
+        if (wrongChoices.Count == 0) return;
+
+        _hintUsedThisQuestion    = true;
+        _hintUsed[_currentIndex] = true;
+        EliminatedChoice         = wrongChoices[_rng.Next(wrongChoices.Count)];
+        HintCmd.Raise();
+        Notify(nameof(HintAvailable));
+        NotifyChoiceProps();
+    }
+
+    void DoRetryWrong()
+    {
+        if (Result == null || Result.WrongItems.Count == 0) return;
+
+        // 오답 문제만 선택지를 재섞어서 재도전
+        var wrongQuestions = _questions
+            .Zip(_userAnswers)
+            .Where(t => t.First.CorrectAnswer != t.Second)
+            .Select(t => new QuizQuestion
+            {
+                Subject       = t.First.Subject,
+                QuestionText  = t.First.QuestionText,
+                FlagIsoCode   = t.First.FlagIsoCode,
+                CorrectAnswer = t.First.CorrectAnswer,
+                Choices       = t.First.Choices.OrderBy(_ => _rng.Next()).ToList(),
+            })
+            .ToList();
+
+        if (wrongQuestions.Count == 0) return;
+
+        _questions   = wrongQuestions;
+        _userAnswers = Enumerable.Repeat<string?>(null, _questions.Count).ToList();
+        _hintUsed    = Enumerable.Repeat(false, _questions.Count).ToList();
+
+        _currentIndex         = 0;
+        _hintUsedThisQuestion = false;
+        SelectedAnswer        = null;
+        EliminatedChoice      = null;
+        Answered              = false;
+        Result                = null;
+        Screen                = QuizScreen.Quiz;
+        NotifyQuizProps();
+        HintCmd.Raise();
+        Notify(nameof(HintAvailable));
+        StartTimer();
+    }
+
     void SelectAnswer(int idx)
     {
         if (Answered || CurrentQuestion == null) return;
         if (idx >= CurrentQuestion.Choices.Count) return;
+        if (CurrentQuestion.Choices[idx] == _eliminatedChoice) return; // 힌트로 제거된 선택지
 
         StopTimer();
         SelectedAnswer              = CurrentQuestion.Choices[idx];
@@ -221,9 +293,13 @@ public class MainViewModel : BaseViewModel
         if (_currentIndex < _questions.Count - 1)
         {
             CurrentIndex++;
-            SelectedAnswer = null;
-            Answered       = false;
+            _hintUsedThisQuestion = false;
+            SelectedAnswer        = null;
+            EliminatedChoice      = null;
+            Answered              = false;
             NextCmd.Raise();
+            HintCmd.Raise();
+            Notify(nameof(HintAvailable));
             NotifyQuizProps();
             NotifyChoiceProps();
             StartTimer();
@@ -246,11 +322,13 @@ public class MainViewModel : BaseViewModel
                 Total      = _questions.Count,
                 Correct    = correct,
                 Wrong      = _questions.Count - correct,
+                HintsUsed  = _hintUsed.Count(h => h),
                 WrongItems = wrongItems,
             };
             IsNewRecord = RecordService.TryUpdate(Mode.ToString(), Continent, (int)result.Score);
             Result = result;
             Screen = QuizScreen.Result;
+            RetryWrongCmd.Raise();
         }
     }
 
@@ -315,10 +393,6 @@ public class MainViewModel : BaseViewModel
     {
         Notify(nameof(SelectedAnswer));
         Notify(nameof(Answered));
-        for (int i = 0; i < 4; i++)
-        {
-            // 선택지 텍스트/색상은 CurrentQuestion에서 읽히므로 갱신
-        }
         Notify(nameof(CurrentQuestion));
     }
 
@@ -328,6 +402,9 @@ public class MainViewModel : BaseViewModel
         Choice0Cmd.Raise(); Choice1Cmd.Raise();
         Choice2Cmd.Raise(); Choice3Cmd.Raise();
         NextCmd.Raise();
+        HintCmd.Raise();
+        RetryWrongCmd.Raise();
         RestartCmd.Raise();
+        Notify(nameof(HintAvailable));
     }
 }

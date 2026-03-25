@@ -20,11 +20,12 @@ public class QuizQuestion
 
 public class QuizResult
 {
-    public int Total    { get; set; }
-    public int Correct  { get; set; }
-    public int Wrong    { get; set; }
-    public double Score => Total == 0 ? 0 : (double)Correct / Total * 100;
-    public string Grade => Score switch
+    public int Total     { get; set; }
+    public int Correct   { get; set; }
+    public int Wrong     { get; set; }
+    public int HintsUsed { get; set; }
+    public double Score  => Total == 0 ? 0 : Math.Max(0, (double)Correct / Total * 100 - HintsUsed * 5);
+    public string Grade  => Score switch
     {
         >= 90 => "A",
         >= 80 => "B",

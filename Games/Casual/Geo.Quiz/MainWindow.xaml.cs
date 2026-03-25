@@ -35,7 +35,8 @@ public partial class MainWindow : Window
         {
             if (e.PropertyName is nameof(_vm.Screen) or
                 nameof(_vm.CurrentQuestion) or
-                nameof(_vm.Answered))
+                nameof(_vm.Answered) or
+                nameof(_vm.EliminatedChoice))
             {
                 UpdateChoiceColors();
                 LoadFlagImage();
@@ -142,6 +143,21 @@ public partial class MainWindow : Window
         for (int i = 0; i < buttons.Length; i++)
         {
             string choice = i < choices.Count ? choices[i] : "";
+
+            // 힌트로 제거된 선택지 — 흐리게 표시하고 클릭 불가
+            bool isEliminated = !string.IsNullOrEmpty(_vm.EliminatedChoice)
+                                && choice == _vm.EliminatedChoice
+                                && !_vm.Answered;
+            if (isEliminated)
+            {
+                buttons[i].Background = new SolidColorBrush(Colors.Transparent);
+                buttons[i].Foreground = new SolidColorBrush(
+                    (Color)ColorConverter.ConvertFromString("#282838"));
+                buttons[i].IsEnabled  = false;
+                continue;
+            }
+
+            buttons[i].IsEnabled  = true;
             buttons[i].Background = new SolidColorBrush(
                 (Color)ColorConverter.ConvertFromString(_vm.GetChoiceBrush(choice)));
             buttons[i].Foreground = new SolidColorBrush(
@@ -160,7 +176,8 @@ public partial class MainWindow : Window
         TbGrade.Foreground  = new SolidColorBrush(
             (Color)ColorConverter.ConvertFromString(info.fore ?? "#E0E0E0"));
         string newRecord    = _vm.IsNewRecord ? "  🏆 신기록!" : $"  (최고: {_vm.BestScore:F0}점)";
-        TbScore.Text        = $"{r.Correct}문제 정답 / {r.Total}문제 (등급: {r.Grade}){newRecord}";
+        string hintNote     = r.HintsUsed > 0 ? $"  💡 힌트 {r.HintsUsed}회 사용 (-{r.HintsUsed * 5}점)" : "";
+        TbScore.Text        = $"{r.Correct}문제 정답 / {r.Total}문제 (등급: {r.Grade}){newRecord}{hintNote}";
         TbCorrect.Text      = r.Correct.ToString();
         TbWrong.Text        = r.Wrong.ToString();
 

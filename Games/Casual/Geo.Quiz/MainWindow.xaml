@@ -409,11 +409,19 @@
                 </ScrollViewer>
             </Border>
 
-            <!-- 다음 버튼 -->
-            <Button Grid.Row="2" Content="다음 ▶" Style="{StaticResource AccBtn}"
-                    Command="{Binding NextCmd}"
-                    FontSize="14" Padding="0,12" HorizontalAlignment="Stretch"
-                    Margin="0,16,0,0"/>
+            <!-- 힌트 + 다음 버튼 -->
+            <Grid Grid.Row="2" Margin="0,16,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" Content="💡 힌트 (-5점)" Style="{StaticResource Btn}"
+                        Command="{Binding HintCmd}"
+                        FontSize="12" Padding="14,12" Margin="0,0,10,0"/>
+                <Button Grid.Column="1" Content="다음 ▶" Style="{StaticResource AccBtn}"
+                        Command="{Binding NextCmd}"
+                        FontSize="14" Padding="0,12"/>
+            </Grid>
         </Grid>
 
         <!-- ══ 결과 화면 ══════════════════════════════════════════════════════ -->
@@ -492,6 +500,10 @@
                     </ItemsControl>
                 </StackPanel>
 
+                <Button Content="📝  오답만 다시 풀기" Style="{StaticResource Btn}"
+                        Command="{Binding RetryWrongCmd}"
+                        FontSize="14" Padding="0,14" HorizontalAlignment="Stretch"
+                        Margin="0,0,0,8"/>
                 <Button Content="🔄  다시 하기" Style="{StaticResource AccBtn}"
                         Command="{Binding RestartCmd}"
                         FontSize="14" Padding="0,14" HorizontalAlignment="Stretch"/>

@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: Background — warm dark brown -->
+  <defs>
+    <linearGradient id="bgRV3" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1E1008"/>
+      <stop offset="100%" stop-color="#120A04"/>
+    </linearGradient>
+    <linearGradient id="keyBodyGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#5A3E1E"/>
+      <stop offset="100%" stop-color="#3A2410"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bgRV3)"/>
+
+  <!-- Layer 2: Giant key shape -->
+  <!-- Key head (circular bow) -->
+  <circle cx="380" cy="420" r="210" fill="url(#keyBodyGrad)" stroke="#00BFA5" stroke-width="14"/>
+  <circle cx="380" cy="420" r="130" fill="#120A04" stroke="#00BFA5" stroke-width="10"/>
+
+  <!-- Key blade -->
+  <rect x="560" y="388" width="340" height="64" rx="12" fill="url(#keyBodyGrad)" stroke="#00BFA5" stroke-width="8"/>
+
+  <!-- Key teeth (cuts) -->
+  <rect x="640" y="452" width="44" height="60" rx="6" fill="url(#keyBodyGrad)" stroke="#00BFA5" stroke-width="6"/>
+  <rect x="720" y="452" width="44" height="80" rx="6" fill="url(#keyBodyGrad)" stroke="#00BFA5" stroke-width="6"/>
+  <rect x="800" y="452" width="44" height="48" rx="6" fill="url(#keyBodyGrad)" stroke="#00BFA5" stroke-width="6"/>
+
+  <!-- Key hole in bow -->
+  <circle cx="380" cy="420" r="40" fill="#1E1008" stroke="#00BFA5" stroke-width="6"/>
+
+  <!-- Layer 3: HKLM text on key head -->
+  <text x="380" y="370" text-anchor="middle" font-family="'Consolas','Courier New',monospace" font-size="30" font-weight="bold" fill="#00E5D3">HKLM</text>
+  <text x="380" y="404" text-anchor="middle" font-family="'Consolas','Courier New',monospace" font-size="22" fill="#00A090">\SOFTWARE</text>
+  <text x="380" y="436" text-anchor="middle" font-family="'Consolas','Courier New',monospace" font-size="20" fill="#008070">\Microsoft</text>
+  <text x="380" y="466" text-anchor="middle" font-family="'Consolas','Courier New',monospace" font-size="18" fill="#006858">\Windows</text>
+
+  <!-- Teal glow aura around key hole -->
+  <circle cx="380" cy="420" r="50" fill="none" stroke="#00E5D3" stroke-width="3" opacity="0.4"/>
+  <circle cx="380" cy="420" r="64" fill="none" stroke="#00E5D3" stroke-width="2" opacity="0.25"/>
+
+  <!-- Bottom text -->
+  <text x="512" y="760" text-anchor="middle" font-family="'Segoe UI',Arial,sans-serif" font-size="46" font-weight="bold" fill="#00BFA5">Reg.Vault</text>
+  <text x="512" y="810" text-anchor="middle" font-family="'Segoe UI',Arial,sans-serif" font-size="28" fill="#5A8A80">Registry Explorer</text>
+</svg>

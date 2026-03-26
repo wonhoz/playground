@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: Background — deep navy blue -->
+  <defs>
+    <linearGradient id="bgRV1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0A1628"/>
+      <stop offset="100%" stop-color="#060E1A"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bgRV1)"/>
+
+  <!-- Layer 2: Registry tree structure -->
+  <!-- Root node -->
+  <rect x="120" y="160" width="280" height="56" rx="10" fill="#1A2A40" stroke="#C8960A" stroke-width="4"/>
+  <text x="136" y="197" font-family="'Consolas','Courier New',monospace" font-size="28" font-weight="bold" fill="#FFD700">HKEY_LOCAL_MACHINE</text>
+
+  <!-- Vertical line from root -->
+  <line x1="152" y1="216" x2="152" y2="380" stroke="#C8960A" stroke-width="4"/>
+
+  <!-- Level 2 node 1 -->
+  <line x1="152" y1="280" x2="196" y2="280" stroke="#C8960A" stroke-width="4"/>
+  <rect x="196" y="256" width="220" height="48" rx="8" fill="#1A2A3A" stroke="#8B6914" stroke-width="3"/>
+  <text x="212" y="286" font-family="'Consolas','Courier New',monospace" font-size="24" fill="#E8B84B">SOFTWARE</text>
+
+  <!-- Level 2 node 2 -->
+  <line x1="152" y1="356" x2="196" y2="356" stroke="#C8960A" stroke-width="4"/>
+  <rect x="196" y="332" width="200" height="48" rx="8" fill="#1A2A3A" stroke="#8B6914" stroke-width="3"/>
+  <text x="212" y="362" font-family="'Consolas','Courier New',monospace" font-size="24" fill="#E8B84B">SYSTEM</text>
+
+  <!-- Level 3 from SOFTWARE -->
+  <line x1="260" y1="304" x2="260" y2="460" stroke="#8B6914" stroke-width="3"/>
+  <line x1="260" y1="400" x2="296" y2="400" stroke="#8B6914" stroke-width="3"/>
+  <rect x="296" y="376" width="280" height="44" rx="7" fill="#0E1E2E" stroke="#5A4008" stroke-width="2"/>
+  <text x="312" y="403" font-family="'Consolas','Courier New',monospace" font-size="21" fill="#C89624">Microsoft</text>
+
+  <line x1="260" y1="460" x2="296" y2="460" stroke="#8B6914" stroke-width="3"/>
+  <rect x="296" y="436" width="280" height="44" rx="7" fill="#0E1E2E" stroke="#5A4008" stroke-width="2"/>
+  <text x="312" y="463" font-family="'Consolas','Courier New',monospace" font-size="21" fill="#C89624">Policies</text>
+
+  <!-- Level 4 child -->
+  <line x1="340" y1="480" x2="340" y2="540" stroke="#5A4008" stroke-width="2"/>
+  <line x1="340" y1="520" x2="376" y2="520" stroke="#5A4008" stroke-width="2"/>
+  <rect x="376" y="498" width="300" height="40" rx="6" fill="#080E18" stroke="#3A2804" stroke-width="2"/>
+  <text x="392" y="522" font-family="'Consolas','Courier New',monospace" font-size="19" fill="#A07820">Windows</text>
+
+  <!-- Value indicators on right side -->
+  <rect x="700" y="200" width="240" height="540" rx="14" fill="#0E1A28" stroke="#2A3A50" stroke-width="3"/>
+  <text x="720" y="240" font-family="'Segoe UI',Arial,sans-serif" font-size="20" fill="#6A8AAA">Name</text>
+  <text x="820" y="240" font-family="'Segoe UI',Arial,sans-serif" font-size="20" fill="#6A8AAA">Type</text>
+
+  <line x1="710" y1="252" x2="930" y2="252" stroke="#2A3A50" stroke-width="2"/>
+
+  <text x="720" y="285" font-family="'Consolas','Courier New',monospace" font-size="18" fill="#88BBEE">(Default)</text>
+  <text x="820" y="285" font-family="'Consolas','Courier New',monospace" font-size="18" fill="#8888AA">REG_SZ</text>
+
+  <text x="720" y="318" font-family="'Consolas','Courier New',monospace" font-size="18" fill="#88BBEE">Version</text>
+  <text x="820" y="318" font-family="'Consolas','Courier New',monospace" font-size="18" fill="#8888AA">REG_DWORD</text>
+
+  <text x="720" y="350" font-family="'Consolas','Courier New',monospace" font-size="18" fill="#88BBEE">Path</text>
+  <text x="820" y="350" font-family="'Consolas','Courier New',monospace" font-size="18" fill="#8888AA">REG_EXPAND_SZ</text>
+
+  <text x="720" y="382" font-family="'Consolas','Courier New',monospace" font-size="18" fill="#88BBEE">Flags</text>
+  <text x="820" y="382" font-family="'Consolas','Courier New',monospace" font-size="18" fill="#8888AA">REG_BINARY</text>
+
+  <!-- Layer 3: Gold vault icon top-right corner -->
+  <circle cx="882" cy="128" r="60" fill="#1A2A0A" stroke="#FFD700" stroke-width="8"/>
+  <text x="854" y="148" font-family="'Segoe UI Emoji',Arial,sans-serif" font-size="54" fill="#FFD700">🔐</text>
+
+  <!-- Bottom label -->
+  <text x="512" y="830" text-anchor="middle" font-family="'Consolas','Courier New',monospace" font-size="48" font-weight="bold" fill="#FFD700">Reg.Vault</text>
+</svg>

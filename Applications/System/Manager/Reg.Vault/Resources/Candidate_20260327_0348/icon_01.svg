@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: Background — bright sky blue -->
+  <rect width="1024" height="1024" rx="190" fill="#4A90E2"/>
+
+  <!-- Layer 2: Registry tree (simple, bold, 2-level) -->
+
+  <!-- Root node: HKEY -->
+  <rect x="282" y="140" width="460" height="130" rx="30" fill="#FFFFFF" stroke="#2C6FBF" stroke-width="12"/>
+  <text x="512" y="222" text-anchor="middle" font-family="'Consolas','Courier New',monospace" font-size="80" font-weight="900" fill="#1A3A7A">HKEY</text>
+
+  <!-- Vertical line down from root -->
+  <line x1="512" y1="270" x2="512" y2="380" stroke="#FFFFFF" stroke-width="14"/>
+
+  <!-- Horizontal branch line -->
+  <line x1="240" y1="380" x2="784" y2="380" stroke="#FFFFFF" stroke-width="14"/>
+
+  <!-- Left vertical down to SOFTWARE -->
+  <line x1="288" y1="380" x2="288" y2="460" stroke="#FFFFFF" stroke-width="14"/>
+  <!-- Right vertical down to SYSTEM -->
+  <line x1="736" y1="380" x2="736" y2="460" stroke="#FFFFFF" stroke-width="14"/>
+
+  <!-- Left node: SOFTWARE -->
+  <rect x="100" y="460" width="376" height="120" rx="24" fill="#FF9F43" stroke="#FFFFFF" stroke-width="12"/>
+  <text x="288" y="532" text-anchor="middle" font-family="'Consolas','Courier New',monospace" font-size="60" font-weight="900" fill="#FFFFFF">SOFTWARE</text>
+
+  <!-- Right node: SYSTEM -->
+  <rect x="548" y="460" width="376" height="120" rx="24" fill="#EE5A24" stroke="#FFFFFF" stroke-width="12"/>
+  <text x="736" y="532" text-anchor="middle" font-family="'Consolas','Courier New',monospace" font-size="68" font-weight="900" fill="#FFFFFF">SYSTEM</text>
+
+  <!-- Left sub-branch: Microsoft -->
+  <line x1="288" y1="580" x2="288" y2="660" stroke="#FFFFFF" stroke-width="12"/>
+  <rect x="140" y="660" width="296" height="100" rx="20" fill="#A29BFE" stroke="#FFFFFF" stroke-width="10"/>
+  <text x="288" y="724" text-anchor="middle" font-family="'Consolas','Courier New',monospace" font-size="52" font-weight="700" fill="#FFFFFF">Microsoft</text>
+
+  <!-- Right sub-branch: ControlSet001 -->
+  <line x1="736" y1="580" x2="736" y2="660" stroke="#FFFFFF" stroke-width="12"/>
+  <rect x="588" y="660" width="296" height="100" rx="20" fill="#55EFC4" stroke="#FFFFFF" stroke-width="10"/>
+  <text x="736" y="724" text-anchor="middle" font-family="'Consolas','Courier New',monospace" font-size="42" font-weight="700" fill="#2D3436">ControlSet</text>
+
+  <!-- Layer 3: Vault badge bottom-center -->
+  <rect x="362" y="820" width="300" height="100" rx="28" fill="#FFFFFF" stroke="#2C6FBF" stroke-width="10"/>
+  <text x="512" y="890" text-anchor="middle" font-family="'Segoe UI',Arial,sans-serif" font-size="54" font-weight="900" fill="#1A3A7A">🔐 Vault</text>
+</svg>

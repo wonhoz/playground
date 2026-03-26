@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>Mem.Lens — Icon Candidates</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #020C08; font-family: 'Segoe UI', sans-serif; color: #E0E0E0; padding: 40px; }
+  h1 { font-size: 28px; color: #2ECC71; margin-bottom: 6px; }
+  .subtitle { font-size: 14px; color: #888; margin-bottom: 40px; }
+  .grid { display: flex; gap: 40px; flex-wrap: wrap; }
+  .card { background: #061A0A; border-radius: 16px; padding: 28px; border: 1px solid #1A3A1A; width: 320px; }
+  .card:hover { border-color: #2ECC71; transform: translateY(-2px); transition: all 0.2s; }
+  .icon-box { display: flex; gap: 16px; align-items: flex-end; margin-bottom: 20px; }
+  .icon-box img { border-radius: 12px; transition: transform 0.2s; cursor: zoom-in; }
+  .icon-box img:hover { transform: scale(2.2); transform-origin: bottom left; position: relative; z-index: 10; }
+  .icon-256 { width: 128px; height: 128px; }
+  .icon-48 { width: 48px; height: 48px; }
+  .icon-16 { width: 16px; height: 16px; }
+  .label { font-size: 18px; font-weight: bold; color: #2ECC71; margin-bottom: 8px; }
+  .concept { font-size: 13px; color: #AACCAA; margin-bottom: 6px; }
+  .palette { display: flex; gap: 6px; margin-top: 10px; }
+  .swatch { width: 24px; height: 24px; border-radius: 6px; border: 1px solid #333; }
+  .tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; margin-right: 4px; }
+  .literal { background: #1A3A1A; color: #88DD88; border: 1px solid #2A6A2A; }
+  .metaphor { background: #1A1A4A; color: #8888FF; border: 1px solid #2A2A8A; }
+  .hybrid { background: #2A1A0A; color: #FFAA44; border: 1px solid #5A3A10; }
+</style>
+</head>
+<body>
+<h1>Mem.Lens</h1>
+<p class="subtitle">프로세스 메모리 분석기 — 메모리 사용량 추적·누수 감지 | Candidate_20260327_0202</p>
+<div class="grid">
+
+  <div class="card">
+    <div class="icon-box">
+      <img class="icon-256" src="icon_01.svg" alt="icon_01">
+      <img class="icon-48" src="icon_01.svg" alt="icon_01 48px">
+      <img class="icon-16" src="icon_01.svg" alt="icon_01 16px">
+    </div>
+    <div class="label">icon_01 <span class="tag literal">literal</span></div>
+    <div class="concept"><b>컨셉:</b> DDR5 RAM 스틱 (전면) + 오른쪽에 돋보기 (WorkingSet/Private/LEAK? 표시)</div>
+    <div class="concept"><b>구성:</b> 중앙 심볼 | <b>연결고리:</b> 앱 핵심 — RAM을 렌즈로 들여다봄</div>
+    <div class="palette">
+      <div class="swatch" style="background:#061A0A" title="배경: 다크 그린블랙"></div>
+      <div class="swatch" style="background:#2ECC71" title="RAM 테두리: 에메랄드"></div>
+      <div class="swatch" style="background:#FFD700" title="금 커넥터"></div>
+      <div class="swatch" style="background:#00FF80" title="LED: 형광 그린"></div>
+      <div class="swatch" style="background:#FF8800" title="누수 경고: 주황"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-box">
+      <img class="icon-256" src="icon_02.svg" alt="icon_02">
+      <img class="icon-48" src="icon_02.svg" alt="icon_02 48px">
+      <img class="icon-16" src="icon_02.svg" alt="icon_02 16px">
+    </div>
+    <div class="label">icon_02 <span class="tag metaphor">metaphor</span></div>
+    <div class="concept"><b>컨셉:</b> 프로세스 메모리 막대 + 막대에서 물방울이 새는 시각화</div>
+    <div class="concept"><b>구성:</b> 대각선/동적 | <b>연결고리:</b> 메모리 "누수" = 실제 물이 새는 것</div>
+    <div class="palette">
+      <div class="swatch" style="background:#041828" title="배경: 딥 오션블루"></div>
+      <div class="swatch" style="background:#0088CC" title="바: 오션 블루"></div>
+      <div class="swatch" style="background:#00CCFF" title="물방울: 시안"></div>
+      <div class="swatch" style="background:#FF6600" title="경고 바: 레드오렌지"></div>
+      <div class="swatch" style="background:#FF4400" title="누수 경고 배지"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-box">
+      <img class="icon-256" src="icon_03.svg" alt="icon_03">
+      <img class="icon-48" src="icon_03.svg" alt="icon_03 48px">
+      <img class="icon-16" src="icon_03.svg" alt="icon_03 16px">
+    </div>
+    <div class="label">icon_03 <span class="tag hybrid">hybrid</span></div>
+    <div class="concept"><b>컨셉:</b> 주황 돋보기 렌즈 안에 메모리 바 차트 + 스파이크 경고</div>
+    <div class="concept"><b>구성:</b> 레이어드 | <b>연결고리:</b> "Lens" = 돋보기, 메모리를 차트로 확대 분석</div>
+    <div class="palette">
+      <div class="swatch" style="background:#2A1200" title="배경: 다크 앰버"></div>
+      <div class="swatch" style="background:#E8700A" title="렌즈 테두리: 주황"></div>
+      <div class="swatch" style="background:#FFF8F0" title="렌즈 내부: 웜 화이트"></div>
+      <div class="swatch" style="background:#2196F3" title="바: 블루"></div>
+      <div class="swatch" style="background:#FF5500" title="스파이크 바: 레드오렌지"></div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

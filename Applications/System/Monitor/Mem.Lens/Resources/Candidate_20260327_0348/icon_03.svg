@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: Background — bright amber/orange -->
+  <rect width="1024" height="1024" rx="190" fill="#FDCB6E"/>
+
+  <!-- Layer 2: Magnifier (large, centered) -->
+  <defs>
+    <clipPath id="lensMem2">
+      <circle cx="446" cy="420" r="280"/>
+    </clipPath>
+  </defs>
+
+  <circle cx="446" cy="420" r="280" fill="#FFFFFF" stroke="#E17055" stroke-width="26"/>
+
+  <g clip-path="url(#lensMem2)">
+    <circle cx="446" cy="420" r="278" fill="#FFF9F0"/>
+
+    <!-- Bar chart inside (4 bars, max rule) -->
+    <!-- Y axis -->
+    <line x1="226" y1="220" x2="226" y2="580" stroke="#CCBBAA" stroke-width="6"/>
+    <line x1="226" y1="580" x2="660" y2="580" stroke="#CCBBAA" stroke-width="6"/>
+
+    <!-- Y axis labels -->
+    <text x="218" y="236" text-anchor="end" font-family="'Segoe UI',Arial,sans-serif" font-size="34" fill="#AA8866">4G</text>
+    <text x="218" y="396" text-anchor="end" font-family="'Segoe UI',Arial,sans-serif" font-size="34" fill="#AA8866">2G</text>
+    <text x="218" y="583" text-anchor="end" font-family="'Segoe UI',Arial,sans-serif" font-size="34" fill="#AA8866">0</text>
+
+    <!-- Bar 1: chrome (tall, yellow) -->
+    <rect x="252" y="308" width="80" height="272" rx="10" fill="#FDCB6E" stroke="#E17055" stroke-width="6"/>
+    <text x="292" y="612" text-anchor="middle" font-family="'Segoe UI',Arial,sans-serif" font-size="26" fill="#7A4800">ch</text>
+
+    <!-- Bar 2: slack (medium, teal) -->
+    <rect x="356" y="388" width="80" height="192" rx="10" fill="#00CEC9" stroke="#00888A" stroke-width="6"/>
+    <text x="396" y="612" text-anchor="middle" font-family="'Segoe UI',Arial,sans-serif" font-size="26" fill="#7A4800">sl</text>
+
+    <!-- Bar 3: suspicious (full+spike, RED) -->
+    <rect x="460" y="252" width="80" height="328" rx="10" fill="#D63031" stroke="#AA1010" stroke-width="6"/>
+    <text x="500" y="612" text-anchor="middle" font-family="'Segoe UI',Arial,sans-serif" font-size="26" fill="#AA0000">⚠</text>
+    <!-- Spike arrow up -->
+    <polygon points="500,222 480,260 520,260" fill="#D63031"/>
+    <text x="500" y="214" text-anchor="middle" font-family="'Segoe UI',Arial,sans-serif" font-size="28" fill="#D63031" font-weight="900">!</text>
+
+    <!-- Bar 4: code (small, blue) -->
+    <rect x="564" y="468" width="80" height="112" rx="10" fill="#74B9FF" stroke="#0984E3" stroke-width="6"/>
+    <text x="604" y="612" text-anchor="middle" font-family="'Segoe UI',Arial,sans-serif" font-size="26" fill="#7A4800">vs</text>
+
+    <!-- Lens glare -->
+    <path d="M310 270 Q336 256 344 294" fill="none" stroke="#FFFFFF" stroke-width="16" stroke-linecap="round" opacity="0.6"/>
+  </g>
+
+  <!-- Lens ring front -->
+  <circle cx="446" cy="420" r="280" fill="none" stroke="#E17055" stroke-width="26"/>
+
+  <!-- Layer 3: Handle -->
+  <line x1="678" y1="650" x2="870" y2="850" stroke="#E17055" stroke-width="48" stroke-linecap="round"/>
+  <line x1="678" y1="650" x2="870" y2="850" stroke="#FDCB6E" stroke-width="26" stroke-linecap="round"/>
+
+  <!-- Mem.Lens label -->
+  <text x="840" y="440" font-family="'Segoe UI',Arial,sans-serif" font-size="52" font-weight="900" fill="#E17055">Mem</text>
+  <text x="840" y="500" font-family="'Segoe UI',Arial,sans-serif" font-size="52" font-weight="900" fill="#E17055">.Lens</text>
+</svg>

@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: Background — bright cerulean blue -->
+  <rect width="1024" height="1024" rx="190" fill="#0984E3"/>
+
+  <!-- Layer 2: 3 big memory bars (horizontal) with process labels -->
+
+  <!-- Bar 3: top — chrome (full, leaking) -->
+  <text x="148" y="220" font-family="'Segoe UI',Arial,sans-serif" font-size="52" font-weight="700" fill="#FFFFFF">chrome.exe</text>
+  <rect x="148" y="236" width="728" height="72" rx="16" fill="#FFFFFF" opacity="0.25"/>
+  <rect x="148" y="236" width="640" height="72" rx="16" fill="#FFEAA7"/>
+  <text x="872" y="284" text-anchor="end" font-family="'Consolas','Courier New',monospace" font-size="44" font-weight="900" fill="#FFFFFF">1.8G</text>
+  <!-- Leak drops (big, simple) -->
+  <ellipse cx="640" cy="336" rx="20" ry="28" fill="#74B9FF"/>
+  <ellipse cx="600" cy="364" rx="16" ry="22" fill="#74B9FF" opacity="0.8"/>
+  <ellipse cx="660" cy="372" rx="13" ry="18" fill="#74B9FF" opacity="0.6"/>
+
+  <!-- Bar 2: middle — slack -->
+  <text x="148" y="448" font-family="'Segoe UI',Arial,sans-serif" font-size="52" font-weight="700" fill="#FFFFFF">slack.exe</text>
+  <rect x="148" y="464" width="728" height="72" rx="16" fill="#FFFFFF" opacity="0.25"/>
+  <rect x="148" y="464" width="440" height="72" rx="16" fill="#A29BFE"/>
+  <text x="872" y="512" text-anchor="end" font-family="'Consolas','Courier New',monospace" font-size="44" font-weight="900" fill="#FFFFFF">620M</text>
+
+  <!-- Bar 1: bottom — suspicious (RED, overflowing) -->
+  <text x="148" y="600" font-family="'Segoe UI',Arial,sans-serif" font-size="52" font-weight="700" fill="#FF7675">⚠ suspicious.exe</text>
+  <rect x="148" y="616" width="728" height="72" rx="16" fill="#FFFFFF" opacity="0.25"/>
+  <rect x="148" y="616" width="728" height="72" rx="16" fill="#D63031"/>
+  <text x="872" y="664" text-anchor="end" font-family="'Consolas','Courier New',monospace" font-size="44" font-weight="900" fill="#FFFFFF">3.2G!</text>
+  <!-- Heavy leak drops from suspicious -->
+  <ellipse cx="680" cy="720" rx="28" ry="36" fill="#74B9FF"/>
+  <ellipse cx="640" cy="756" rx="22" ry="30" fill="#74B9FF" opacity="0.9"/>
+  <ellipse cx="720" cy="764" rx="18" ry="24" fill="#74B9FF" opacity="0.7"/>
+  <ellipse cx="660" cy="792" rx="14" ry="20" fill="#74B9FF" opacity="0.6"/>
+  <ellipse cx="700" cy="808" rx="12" ry="16" fill="#74B9FF" opacity="0.4"/>
+
+  <!-- Layer 3: Total RAM strip at top -->
+  <rect x="148" y="136" width="728" height="46" rx="12" fill="#FFFFFF" opacity="0.2"/>
+  <rect x="148" y="136" width="500" height="46" rx="12" fill="#FFFFFF" opacity="0.5"/>
+  <text x="512" y="166" text-anchor="middle" font-family="'Segoe UI',Arial,sans-serif" font-size="32" font-weight="700" fill="#2D3436">Total: 32 GB  |  Used: 50%</text>
+
+  <!-- LEAK warning badge -->
+  <circle cx="820" cy="820" r="120" fill="#D63031" stroke="#FFFFFF" stroke-width="16"/>
+  <text x="820" y="796" text-anchor="middle" font-family="'Segoe UI',Arial,sans-serif" font-size="56" fill="#FFFFFF">⚠</text>
+  <text x="820" y="856" text-anchor="middle" font-family="'Segoe UI',Arial,sans-serif" font-size="40" font-weight="900" fill="#FFFFFF">LEAK</text>
+</svg>

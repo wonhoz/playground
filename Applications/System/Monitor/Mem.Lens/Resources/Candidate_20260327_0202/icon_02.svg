@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: Background — deep ocean blue -->
+  <defs>
+    <linearGradient id="bgML2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#041828"/>
+      <stop offset="100%" stop-color="#020C18"/>
+    </linearGradient>
+    <linearGradient id="barFull" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#0088CC"/>
+      <stop offset="100%" stop-color="#00CCFF"/>
+    </linearGradient>
+    <linearGradient id="barWarn" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#FF6600"/>
+      <stop offset="100%" stop-color="#FFAA00"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bgML2)"/>
+
+  <!-- Layer 2: Process memory bars with leaking drops -->
+
+  <!-- Process 1: chrome.exe (high, leaking) -->
+  <text x="140" y="218" font-family="'Consolas','Courier New',monospace" font-size="28" fill="#88BBDD">chrome.exe</text>
+  <rect x="140" y="228" width="520" height="44" rx="8" fill="#0A1A2A" stroke="#1A3A5A" stroke-width="3"/>
+  <rect x="140" y="228" width="460" height="44" rx="8" fill="url(#barWarn)"/>
+  <text x="648" y="256" font-family="'Consolas','Courier New',monospace" font-size="24" fill="#FFAA00">1.8 GB</text>
+  <!-- Leak drops from chrome bar -->
+  <ellipse cx="460" cy="288" rx="10" ry="14" fill="#00CCFF" opacity="0.9"/>
+  <ellipse cx="500" cy="302" rx="8" ry="12" fill="#00CCFF" opacity="0.7"/>
+  <ellipse cx="480" cy="320" rx="6" ry="9" fill="#00CCFF" opacity="0.5"/>
+  <ellipse cx="430" cy="310" rx="7" ry="10" fill="#0088CC" opacity="0.4"/>
+
+  <!-- Process 2: slack.exe -->
+  <text x="140" y="360" font-family="'Consolas','Courier New',monospace" font-size="28" fill="#88BBDD">slack.exe</text>
+  <rect x="140" y="370" width="520" height="44" rx="8" fill="#0A1A2A" stroke="#1A3A5A" stroke-width="3"/>
+  <rect x="140" y="370" width="320" height="44" rx="8" fill="url(#barFull)"/>
+  <text x="648" y="398" font-family="'Consolas','Courier New',monospace" font-size="24" fill="#00CCFF">620 MB</text>
+  <!-- Small leak drops -->
+  <ellipse cx="330" cy="428" rx="8" ry="11" fill="#00E5FF" opacity="0.7"/>
+  <ellipse cx="310" cy="444" rx="6" ry="8" fill="#00E5FF" opacity="0.5"/>
+
+  <!-- Process 3: code.exe -->
+  <text x="140" y="502" font-family="'Consolas','Courier New',monospace" font-size="28" fill="#88BBDD">code.exe</text>
+  <rect x="140" y="512" width="520" height="44" rx="8" fill="#0A1A2A" stroke="#1A3A5A" stroke-width="3"/>
+  <rect x="140" y="512" width="260" height="44" rx="8" fill="url(#barFull)"/>
+  <text x="648" y="540" font-family="'Consolas','Courier New',monospace" font-size="24" fill="#00CCFF">510 MB</text>
+
+  <!-- Process 4: suspicious.exe (critical, bright red leak) -->
+  <text x="140" y="644" font-family="'Consolas','Courier New',monospace" font-size="28" fill="#FF6666">suspicious.exe ⚠</text>
+  <rect x="140" y="654" width="520" height="44" rx="8" fill="#1A0A0A" stroke="#6A1A1A" stroke-width="3"/>
+  <rect x="140" y="654" width="500" height="44" rx="8" fill="#CC2200"/>
+  <text x="648" y="682" font-family="'Consolas','Courier New',monospace" font-size="24" fill="#FF4444">3.2 GB</text>
+  <!-- Heavy leak from suspicious bar -->
+  <ellipse cx="480" cy="714" rx="14" ry="18" fill="#00E5FF"/>
+  <ellipse cx="500" cy="734" rx="11" ry="15" fill="#00CCFF" opacity="0.9"/>
+  <ellipse cx="460" cy="748" rx="9" ry="13" fill="#00AADD" opacity="0.7"/>
+  <ellipse cx="520" cy="754" rx="7" ry="10" fill="#0088CC" opacity="0.6"/>
+  <ellipse cx="440" cy="764" rx="8" ry="11" fill="#0066AA" opacity="0.5"/>
+  <ellipse cx="490" cy="774" rx="6" ry="8" fill="#0055AA" opacity="0.4"/>
+
+  <!-- Layer 3: Leak warning badge -->
+  <circle cx="820" cy="300" r="100" fill="#1A0A0A" stroke="#FF4400" stroke-width="10"/>
+  <text x="820" y="280" text-anchor="middle" font-family="'Segoe UI',Arial,sans-serif" font-size="52" fill="#FF4400">⚠</text>
+  <text x="820" y="320" text-anchor="middle" font-family="'Consolas','Courier New',monospace" font-size="24" fill="#FF6600">LEAK</text>
+  <text x="820" y="348" text-anchor="middle" font-family="'Consolas','Courier New',monospace" font-size="20" fill="#CC4400">+2.4MB/s</text>
+
+  <!-- Total memory bar at top -->
+  <text x="512" y="168" text-anchor="middle" font-family="'Segoe UI',Arial,sans-serif" font-size="30" fill="#AABBCC">Total RAM: 32 GB</text>
+  <rect x="140" y="140" width="744" height="20" rx="6" fill="#0A1A2A" stroke="#1A3A5A" stroke-width="2"/>
+  <rect x="140" y="140" width="530" height="20" rx="6" fill="#0066CC" opacity="0.7"/>
+  <rect x="140" y="140" width="220" height="20" rx="6" fill="#FF6600" opacity="0.6"/>
+</svg>

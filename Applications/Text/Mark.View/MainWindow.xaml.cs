@@ -759,22 +759,12 @@ public partial class MainWindow : Window
 
     private void BtnHelp_Click(object sender, RoutedEventArgs e)
     {
-        HelpOverlay.Visibility = Visibility.Visible;
+        ShowHelp();
     }
 
-    private void BtnHelpClose_Click(object sender, RoutedEventArgs e)
+    private void ShowHelp()
     {
-        HelpOverlay.Visibility = Visibility.Collapsed;
-    }
-
-    private void HelpOverlay_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
-    {
-        HelpOverlay.Visibility = Visibility.Collapsed;
-    }
-
-    private void HelpOverlay_StopPropagation(object sender, System.Windows.Input.MouseButtonEventArgs e)
-    {
-        e.Handled = true;
+        new HelpWindow { Owner = this }.ShowDialog();
     }
 
     private void EditorSplitter_DragCompleted(object sender, System.Windows.Controls.Primitives.DragCompletedEventArgs e)
@@ -1031,16 +1021,11 @@ public partial class MainWindow : Window
         else if (e.Key == Key.F11)
         { SetFocusMode(!_isFocusMode); e.Handled = true; }
         else if (e.Key == Key.F1)
-        { HelpOverlay.Visibility = Visibility.Visible; e.Handled = true; }
+        { ShowHelp(); e.Handled = true; }
         else if (e.Key == Key.V && Keyboard.Modifiers == (ModifierKeys.Control | ModifierKeys.Shift))
         { PasteClipboardAsNewTab(); e.Handled = true; }
-        else if (e.Key == Key.Escape)
-        {
-            if (HelpOverlay.Visibility == Visibility.Visible)
-            { HelpOverlay.Visibility = Visibility.Collapsed; e.Handled = true; }
-            else if (!string.IsNullOrEmpty(TxtFind.Text))
-            { TxtFind.Text = ""; e.Handled = true; }
-        }
+        else if (e.Key == Key.Escape && !string.IsNullOrEmpty(TxtFind.Text))
+        { TxtFind.Text = ""; e.Handled = true; }
     }
 
     protected override void OnPreviewMouseWheel(MouseWheelEventArgs e)

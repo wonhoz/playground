@@ -21,10 +21,9 @@ public static class TextArtGenerator
         {
             for (int c = 0; c < cols; c++)
             {
-                float b = invert ? 1f - brightness[r, c] : brightness[r, c];
-                // b=0(검정) → 마지막 문자(공백), b=1(흰색) → 인덱스 0(가장 밀한 문자)
-                // 반전 없을 때: 어두울수록 밀한 문자
-                float mapped = invert ? b : (1f - b);
+                // 반전 없음: 어두울수록 밀한 문자 (1-brightness → 높을수록 어두운 픽셀)
+                // 반전 있음: 밝을수록 밀한 문자 (brightness 그대로)
+                float mapped = invert ? brightness[r, c] : (1f - brightness[r, c]);
                 int idx = Math.Clamp((int)(mapped * orderedChars.Length), 0, orderedChars.Length - 1);
                 sb.Append(orderedChars[idx]);
             }

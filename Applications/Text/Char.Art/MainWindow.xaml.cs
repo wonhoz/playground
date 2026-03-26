@@ -1,3 +1,4 @@
+using System.Text.Json;
 using System.Windows.Media.Animation;
 
 namespace CharArt;
@@ -16,6 +17,14 @@ public partial class MainWindow : Window
     // 디바운스
     private CancellationTokenSource _debounceCts = new();
 
+    // 뷰어 줌 (생성 설정과 독립적인 디스플레이 크기)
+    private double _viewFontSize = 8.0;
+    private const double ViewFontMin = 4.0;
+    private const double ViewFontMax = 24.0;
+
+    // 설정
+    private AppSettings _settings = new();
+
     // 폰트 목록
     private static readonly string[] Fonts = ["Consolas", "Courier New", "굴림체", "맑은 고딕", "D2Coding"];
 
@@ -27,6 +36,7 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
         Loaded += OnLoaded;
+        Closed += OnClosed;
     }
 
     private void OnLoaded(object sender, RoutedEventArgs e)
@@ -36,17 +46,45 @@ public partial class MainWindow : Window
         int dark = 1;
         DwmSetWindowAttribute(hwnd, 20, ref dark, sizeof(int));
 
+        // 설정 로드
+        _settings = AppSettings.Load();
+
         // ComboBox 초기화 (Loaded 이후이므로 이벤트 안전)
         CbCharSet.ItemsSource  = CharSetLibrary.PresetNames;
-        CbCharSet.SelectedIndex = 0;
+        CbFont.ItemsSource     = Fonts;
+        CbFontSize.ItemsSource = FontSizes.Select(f => $"{f}pt").ToList();
 
-        CbFont.ItemsSource  = Fonts;
-        CbFont.SelectedIndex = 0;
+        // 저장된 설정 복원
+        var charSetIdx = Array.IndexOf(CharSetLibrary.PresetNames, _settings.CharSetName);
+        CbCharSet.SelectedIndex = charSetIdx >= 0 ? charSetIdx : 0;
 
-        CbFontSize.ItemsSource  = FontSizes.Select(f => $"{f}pt").ToList();
-        CbFontSize.SelectedIndex = 2; // 8pt
+        var fontIdx = Array.IndexOf(Fonts, _settings.FontFamily);
+        CbFont.SelectedIndex = fontIdx >= 0 ? fontIdx : 0;
+
+        CbFontSize.SelectedIndex = Math.Clamp(_settings.FontSizeIndex, 0, FontSizes.Length - 1);
+
+        SldCols.Value      = Math.Clamp(_settings.Columns, 20, 300);
+        ChkInvert.IsChecked = _settings.Invert;
 
         UpdateColsLabel();
+        RefreshRecentMenu();
+    }
+
+    private void OnClosed(object? sender, EventArgs e)
+    {
+        SaveSettings();
+        _debounceCts.Cancel();
+        _debounceCts.Dispose();
+    }
+
+    private void SaveSettings()
+    {
+        _settings.CharSetName   = CbCharSet.SelectedItem as string ?? "ASCII 기본";
+        _settings.FontFamily    = CbFont.SelectedItem as string ?? "Consolas";
+        _settings.FontSizeIndex = CbFontSize.SelectedIndex;
+        _settings.Columns       = (int)SldCols.Value;
+        _settings.Invert        = ChkInvert.IsChecked == true;
+        _settings.Save();
     }
 
     // ── 이벤트: 이미지 열기 ──────────────────────────────────────────
@@ -55,10 +93,20 @@ public partial class MainWindow : Window
         var dlg = new Microsoft.Win32.OpenFileDialog
         {
             Title  = "이미지 열기",
-            Filter = "이미지 파일|*.png;*.jpg;*.jpeg;*.bmp;*.gif;*.tiff;*.webp|모든 파일|*.*",
+            Filter = "이미지 파일|*.png;*.jpg;*.jpeg;*.bmp;*.gif;*.tiff|모든 파일|*.*",
         };
         if (dlg.ShowDialog() != true) return;
         LoadImage(dlg.FileName);
+    }
+
+    private void BtnRecentDrop_Click(object sender, RoutedEventArgs e)
+    {
+        if (BtnRecentDrop.ContextMenu is { } menu)
+        {
+            menu.PlacementTarget = BtnRecentDrop;
+            menu.Placement = System.Windows.Controls.Primitives.PlacementMode.Bottom;
+            menu.IsOpen = true;
+        }
     }
 
     private void LoadImage(string path)
@@ -67,25 +115,64 @@ public partial class MainWindow : Window
         {
             var bmp = new BitmapImage();
             bmp.BeginInit();
-            bmp.UriSource       = new Uri(path, UriKind.Absolute);
-            bmp.CacheOption     = BitmapCacheOption.OnLoad;
+            bmp.UriSource   = new Uri(path, UriKind.Absolute);
+            bmp.CacheOption = BitmapCacheOption.OnLoad;
             bmp.EndInit();
             bmp.Freeze();
 
             _source = bmp;
 
-            ImgPreview.Source     = bmp;
-            ImgPreview.Visibility = Visibility.Visible;
+            ImgPreview.Source      = bmp;
+            ImgPreview.Visibility  = Visibility.Visible;
             TxtDropHint.Visibility = Visibility.Collapsed;
 
             BtnGenerate.IsEnabled = true;
             SetStatus($"이미지 로드: {Path.GetFileName(path)}  ({bmp.PixelWidth}×{bmp.PixelHeight})");
+
+            // 최근 파일 저장
+            _settings.AddRecentFile(path);
+            RefreshRecentMenu();
 
             ScheduleGenerate();
         }
         catch (Exception ex)
         {
             SetStatus($"이미지 로드 실패: {ex.Message}");
+        }
+    }
+
+    private void RefreshRecentMenu()
+    {
+        if (BtnRecentDrop.ContextMenu is not { } menu) return;
+        menu.Items.Clear();
+
+        if (_settings.RecentFiles.Count == 0)
+        {
+            var empty = new MenuItem
+            {
+                Header     = "최근 파일 없음",
+                IsEnabled  = false,
+                Background = System.Windows.Media.Brushes.Transparent,
+                Foreground = new System.Windows.Media.SolidColorBrush(
+                    (System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#88A8A8")),
+            };
+            menu.Items.Add(empty);
+            return;
+        }
+
+        foreach (var path in _settings.RecentFiles)
+        {
+            var item = new MenuItem
+            {
+                Header     = Path.GetFileName(path),
+                ToolTip    = path,
+                Background = System.Windows.Media.Brushes.Transparent,
+                Foreground = new System.Windows.Media.SolidColorBrush(
+                    (System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#E8E8E0")),
+            };
+            var capturedPath = path;
+            item.Click += (_, _) => LoadImage(capturedPath);
+            menu.Items.Add(item);
         }
     }
 
@@ -106,12 +193,76 @@ public partial class MainWindow : Window
         LoadImage(files[0]);
     }
 
+    // ── 이벤트: 키보드 단축키 ────────────────────────────────────────
+    private void Window_KeyDown(object sender, KeyEventArgs e)
+    {
+        bool ctrl  = Keyboard.Modifiers.HasFlag(ModifierKeys.Control);
+        bool shift = Keyboard.Modifiers.HasFlag(ModifierKeys.Shift);
+
+        if (e.Key == Key.F1) { BtnHelp_Click(sender, e); return; }
+        if (e.Key == Key.F5 && BtnGenerate.IsEnabled) { BtnGenerate_Click(sender, e); return; }
+
+        if (ctrl)
+        {
+            switch (e.Key)
+            {
+                case Key.O:
+                    BtnOpen_Click(sender, e);
+                    e.Handled = true; break;
+                case Key.S when !shift && BtnSave.IsEnabled:
+                    BtnSave_Click(sender, e);
+                    e.Handled = true; break;
+                case Key.S when shift && BtnSavePng.IsEnabled:
+                    BtnSavePng_Click(sender, e);
+                    e.Handled = true; break;
+                case Key.H when shift && BtnSaveHtml.IsEnabled:
+                    BtnSaveHtml_Click(sender, e);
+                    e.Handled = true; break;
+                case Key.C when BtnCopy.IsEnabled:
+                    if (!TxtArt.IsFocused) { BtnCopy_Click(sender, e); e.Handled = true; }
+                    break;
+                case Key.D0:
+                case Key.NumPad0:
+                    ResetViewZoom();
+                    e.Handled = true; break;
+            }
+        }
+    }
+
+    // ── 이벤트: Ctrl+마우스휠 줌 ────────────────────────────────────
+    private void Window_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
+    {
+        if (!Keyboard.Modifiers.HasFlag(ModifierKeys.Control)) return;
+
+        _viewFontSize = e.Delta > 0
+            ? Math.Min(_viewFontSize + 1, ViewFontMax)
+            : Math.Max(_viewFontSize - 1, ViewFontMin);
+
+        TxtArt.FontSize = _viewFontSize;
+        UpdateZoomInfo();
+        e.Handled = true;
+    }
+
+    private void ResetViewZoom()
+    {
+        _viewFontSize = CbFontSize.SelectedIndex >= 0 && CbFontSize.SelectedIndex < FontSizes.Length
+            ? FontSizes[CbFontSize.SelectedIndex]
+            : 8.0;
+        TxtArt.FontSize = _viewFontSize;
+        TxtZoomInfo.Visibility = Visibility.Collapsed;
+    }
+
+    private void UpdateZoomInfo()
+    {
+        TxtZoomInfo.Text       = $"뷰 {_viewFontSize:F0}pt  (Ctrl+0 초기화)";
+        TxtZoomInfo.Visibility = Visibility.Visible;
+    }
+
     // ── 이벤트: 설정 변경 ────────────────────────────────────────────
     private void Setting_Changed(object sender, SelectionChangedEventArgs e)
     {
         if (!IsLoaded) return;
 
-        // 한글/한자 선택 시 굴림체 자동 전환
         var charSetName = CbCharSet.SelectedItem as string ?? "";
         if (CharSetLibrary.IsFullWidth(charSetName))
         {
@@ -119,11 +270,10 @@ public partial class MainWindow : Window
             if (gulimIdx >= 0 && CbFont.SelectedIndex != gulimIdx)
             {
                 CbFont.SelectedIndex = gulimIdx;
-                return; // CbFont.SelectionChanged → 다시 호출됨
+                return;
             }
         }
 
-        // 커스텀 입력 패널 표시
         PanelCustom.Visibility = charSetName == "커스텀"
             ? Visibility.Visible
             : Visibility.Collapsed;
@@ -148,6 +298,12 @@ public partial class MainWindow : Window
         if (!IsLoaded) return;
         UpdateColsLabel();
         ScheduleGenerate();
+    }
+
+    private void PresetCols_Click(object sender, RoutedEventArgs e)
+    {
+        if (sender is Button btn && int.TryParse(btn.Tag as string, out int cols))
+            SldCols.Value = cols;
     }
 
     private void UpdateColsLabel()
@@ -180,18 +336,165 @@ public partial class MainWindow : Window
         }
     }
 
+    private void BtnSavePng_Click(object sender, RoutedEventArgs e)
+    {
+        if (string.IsNullOrEmpty(_currentArt)) return;
+
+        var dlg = new Microsoft.Win32.SaveFileDialog
+        {
+            Title      = "PNG로 저장",
+            Filter     = "PNG 이미지|*.png",
+            DefaultExt = ".png",
+            FileName   = "char-art",
+        };
+        if (dlg.ShowDialog() != true) return;
+
+        try
+        {
+            SetStatus("PNG 렌더링 중...");
+            var config = BuildConfig();
+            SaveAsPng(dlg.FileName, config);
+            SetStatus($"PNG 저장 완료: {dlg.FileName}");
+        }
+        catch (Exception ex)
+        {
+            SetStatus($"PNG 저장 실패: {ex.Message}");
+        }
+    }
+
+    private void SaveAsPng(string filePath, ArtConfig config)
+    {
+        var tb = new TextBlock
+        {
+            Text       = _currentArt,
+            FontFamily = new FontFamily(config.FontFamily),
+            FontSize   = config.FontSize,
+            Foreground = new System.Windows.Media.SolidColorBrush(
+                (System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#E8E8E0")),
+            Background = new System.Windows.Media.SolidColorBrush(
+                (System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString("#1A1A1E")),
+            Padding    = new Thickness(12),
+            TextWrapping = TextWrapping.NoWrap,
+        };
+
+        tb.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
+        tb.Arrange(new Rect(tb.DesiredSize));
+
+        var rtb = new RenderTargetBitmap(
+            (int)Math.Ceiling(tb.ActualWidth),
+            (int)Math.Ceiling(tb.ActualHeight),
+            96, 96, System.Windows.Media.PixelFormats.Pbgra32);
+        rtb.Render(tb);
+
+        var encoder = new PngBitmapEncoder();
+        encoder.Frames.Add(BitmapFrame.Create(rtb));
+        using var fs = File.Create(filePath);
+        encoder.Save(fs);
+    }
+
+    private void BtnSaveHtml_Click(object sender, RoutedEventArgs e)
+    {
+        if (string.IsNullOrEmpty(_currentArt) || _source == null) return;
+
+        var dlg = new Microsoft.Win32.SaveFileDialog
+        {
+            Title      = "컬러 HTML로 저장",
+            Filter     = "HTML 파일|*.html",
+            DefaultExt = ".html",
+            FileName   = "char-art",
+        };
+        if (dlg.ShowDialog() != true) return;
+
+        try
+        {
+            SetStatus("HTML 생성 중...");
+            var config = BuildConfig();
+            var html   = GenerateColorHtml(config);
+            File.WriteAllText(dlg.FileName, html, new System.Text.UTF8Encoding(true));
+            SetStatus($"HTML 저장 완료: {dlg.FileName}");
+        }
+        catch (Exception ex)
+        {
+            SetStatus($"HTML 저장 실패: {ex.Message}");
+        }
+    }
+
+    private string GenerateColorHtml(ArtConfig config)
+    {
+        double charAspect = MeasureCharAspect(config.FontFamily, config.FontSize);
+        if (CharSetLibrary.IsFullWidth(config.CharSetName) && charAspect > 1.3)
+            charAspect = 1.0;
+
+        var brightness = ImageSampler.Sample(_source!, config.Columns, charAspect);
+        int rows = brightness.GetLength(0);
+        int cols = brightness.GetLength(1);
+
+        var colors = ImageSampler.SampleColors(_source!, rows, cols);
+
+        var chars = _orderedChars.Length > 0
+            ? _orderedChars
+            : CharSetLibrary.GetPreset(config.CharSetName) ?? CharSetLibrary.GetPreset("ASCII 기본")!;
+
+        var sb = new StringBuilder();
+        sb.AppendLine("<!DOCTYPE html>");
+        sb.AppendLine("<html><head><meta charset=\"utf-8\">");
+        sb.AppendLine($"<title>Char.Art</title>");
+        sb.AppendLine("<style>");
+        sb.AppendLine($"body{{background:#1A1A1E;margin:0;padding:12px;}}");
+        sb.AppendLine($"pre{{font-family:\"{config.FontFamily}\",Consolas,monospace;font-size:{config.FontSize}px;line-height:1.0;letter-spacing:0;white-space:pre;}}");
+        sb.AppendLine("span{display:inline;}");
+        sb.AppendLine("</style></head><body><pre>");
+
+        for (int r = 0; r < rows; r++)
+        {
+            for (int c = 0; c < cols; c++)
+            {
+                float mapped = config.Invert ? brightness[r, c] : (1f - brightness[r, c]);
+                int idx = Math.Clamp((int)(mapped * chars.Length), 0, chars.Length - 1);
+                char ch = chars[idx];
+
+                var (R, G, B) = colors[r, c];
+                string hex = $"#{R:X2}{G:X2}{B:X2}";
+                string charStr = ch switch { '<' => "&lt;", '>' => "&gt;", '&' => "&amp;", _ => ch.ToString() };
+                sb.Append($"<span style=\"color:{hex}\">{charStr}</span>");
+            }
+            if (r < rows - 1) sb.AppendLine();
+        }
+
+        sb.AppendLine("</pre></body></html>");
+        return sb.ToString();
+    }
+
     private void BtnCopy_Click(object sender, RoutedEventArgs e)
     {
         if (string.IsNullOrEmpty(_currentArt)) return;
-        try { Clipboard.SetText(_currentArt); } catch { }
-        SetStatus("클립보드에 복사했습니다.");
+        try
+        {
+            Clipboard.SetText(_currentArt);
+            SetStatus("클립보드에 복사했습니다.");
+        }
+        catch (Exception ex)
+        {
+            SetStatus($"클립보드 복사 실패: {ex.Message}");
+        }
+    }
+
+    // ── 도움말 ───────────────────────────────────────────────────────
+    private HelpWindow? _helpWindow;
+
+    private void BtnHelp_Click(object sender, RoutedEventArgs e)
+    {
+        if (_helpWindow?.IsVisible == true)
+        {
+            _helpWindow.Activate();
+            return;
+        }
+        _helpWindow = new HelpWindow { Owner = this };
+        _helpWindow.Show();
     }
 
     // ── 생성 버튼 ────────────────────────────────────────────────────
-    private void BtnGenerate_Click(object sender, RoutedEventArgs e)
-    {
-        GenerateNow();
-    }
+    private void BtnGenerate_Click(object sender, RoutedEventArgs e) => GenerateNow();
 
     // ── 디바운스 스케줄러 ────────────────────────────────────────────
     private void ScheduleGenerate()
@@ -199,6 +502,7 @@ public partial class MainWindow : Window
         if (_source == null) return;
 
         _debounceCts.Cancel();
+        _debounceCts.Dispose();
         _debounceCts = new CancellationTokenSource();
         var token = _debounceCts.Token;
 
@@ -216,10 +520,15 @@ public partial class MainWindow : Window
 
         var config = BuildConfig();
 
+        // 커스텀 문자 비어있을 때 피드백
+        if (config.CharSetName == "커스텀" && string.IsNullOrWhiteSpace(config.CustomChars))
+        {
+            SetStatus("커스텀 문자를 입력해주세요. ASCII 기본 문자셋으로 대체합니다.");
+        }
+
         SetBusy(true);
         SetStatus("생성 중...");
 
-        // 동적 문자셋은 UI 스레드에서 계산 후 Task.Run으로 생성
         if (CharSetLibrary.NeedsDynamic(config.CharSetName))
         {
             _orderedChars = CharSetLibrary.ComputeDynamic(
@@ -232,16 +541,14 @@ public partial class MainWindow : Window
                             ?? CharSetLibrary.GetPreset("ASCII 기본")!;
         }
 
-        // charAspect: FormattedText로 현재 폰트 종횡비 측정
         double charAspect = MeasureCharAspect(config.FontFamily, config.FontSize);
 
-        var source    = _source;
-        var chars     = _orderedChars;
-        var cols      = config.Columns;
-        var invert    = config.Invert;
-        var isFullW   = CharSetLibrary.IsFullWidth(config.CharSetName);
+        var source   = _source;
+        var chars    = _orderedChars;
+        var cols     = config.Columns;
+        var invert   = config.Invert;
+        var isFullW  = CharSetLibrary.IsFullWidth(config.CharSetName);
 
-        // 전각 문자는 정사각형에 가까움 → charAspect ≈ 1.0 보정
         if (isFullW && charAspect > 1.3)
             charAspect = 1.0;
 
@@ -253,10 +560,7 @@ public partial class MainWindow : Window
                 var art        = TextArtGenerator.Generate(brightness, chars, invert);
                 return art;
             }
-            catch
-            {
-                return null;
-            }
+            catch { return null; }
         }).ContinueWith(t =>
         {
             var art = t.Result;
@@ -266,14 +570,18 @@ public partial class MainWindow : Window
 
                 TxtArt.Text           = art;
                 TxtArt.FontFamily     = new FontFamily(config.FontFamily);
-                TxtArt.FontSize       = config.FontSize;
+                _viewFontSize         = config.FontSize;
+                TxtArt.FontSize       = _viewFontSize;
+                TxtZoomInfo.Visibility = Visibility.Collapsed;
                 TxtArtHint.Visibility = Visibility.Collapsed;
 
                 int rows = art.Count(c => c == '\n') + 1;
                 SetStatus($"완료  |  {rows} 행 × {cols} 열  |  {chars.Length} 문자  |  종횡비 {charAspect:F2}");
 
-                BtnSave.IsEnabled = true;
-                BtnCopy.IsEnabled = true;
+                BtnSave.IsEnabled     = true;
+                BtnSavePng.IsEnabled  = true;
+                BtnSaveHtml.IsEnabled = true;
+                BtnCopy.IsEnabled     = true;
             }
             else
             {
@@ -293,12 +601,12 @@ public partial class MainWindow : Window
 
         return new ArtConfig
         {
-            CharSetName  = CbCharSet.SelectedItem as string ?? "ASCII 기본",
-            CustomChars  = TxtCustomChars.Text,
-            FontFamily   = CbFont.SelectedItem as string ?? "Consolas",
-            FontSize     = fontSize,
-            Columns      = (int)SldCols.Value,
-            Invert       = ChkInvert.IsChecked == true,
+            CharSetName = CbCharSet.SelectedItem as string ?? "ASCII 기본",
+            CustomChars = TxtCustomChars.Text,
+            FontFamily  = CbFont.SelectedItem as string ?? "Consolas",
+            FontSize    = fontSize,
+            Columns     = (int)SldCols.Value,
+            Invert      = ChkInvert.IsChecked == true,
         };
     }
 
@@ -310,7 +618,7 @@ public partial class MainWindow : Window
             FlowDirection.LeftToRight,
             new Typeface(fontFamily),
             fontSize,
-            Brushes.White,
+            System.Windows.Media.Brushes.White,
             96.0);
 
         double w = ft.Width;
@@ -320,8 +628,12 @@ public partial class MainWindow : Window
 
     private void SetBusy(bool busy)
     {
-        BtnGenerate.IsEnabled = !busy && _source != null;
-        BtnOpen.IsEnabled     = !busy;
+        BtnGenerate.IsEnabled  = !busy && _source != null;
+        BtnOpen.IsEnabled      = !busy;
+        BtnSave.IsEnabled      = !busy && !string.IsNullOrEmpty(_currentArt);
+        BtnSavePng.IsEnabled   = !busy && !string.IsNullOrEmpty(_currentArt);
+        BtnSaveHtml.IsEnabled  = !busy && !string.IsNullOrEmpty(_currentArt);
+        BtnCopy.IsEnabled      = !busy && !string.IsNullOrEmpty(_currentArt);
     }
 
     private void SetStatus(string msg)

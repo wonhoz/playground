@@ -166,11 +166,11 @@ public partial class MainWindow : Window
             FlagImage.Visibility   = Visibility.Collapsed;
             TbFlagError.Visibility = Visibility.Visible;
         };
-        bmp.DownloadCompleted += async (_, _) =>
+        bmp.DownloadCompleted += (_, _) =>
         {
             FlagImage.Source     = bmp;
             FlagImage.Visibility = Visibility.Visible;
-            await Task.Run(() => FlagCache.Add(q.FlagIsoCode, bmp));
+            FlagCache.Add(q.FlagIsoCode, bmp);
         };
 
         FlagImage.Source = bmp;

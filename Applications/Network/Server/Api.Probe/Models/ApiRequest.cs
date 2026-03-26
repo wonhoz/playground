@@ -10,6 +10,7 @@ public class ApiRequest
     public string                         Url         { get; set; } = "";
     public ObservableCollection<HeaderItem>  Headers  { get; set; } = [];
     public ObservableCollection<QueryParam>  Params   { get; set; } = [];
-    public string                         Body        { get; set; } = "";
-    public string                         ContentType { get; set; } = "application/json";
+    public string                         Body           { get; set; } = "";
+    public string                         ContentType    { get; set; } = "application/json";
+    public int                            TimeoutSeconds { get; set; } = 30;
 }

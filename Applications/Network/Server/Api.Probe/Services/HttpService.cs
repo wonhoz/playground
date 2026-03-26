@@ -17,12 +17,21 @@ public static class HttpService
 {
     private static readonly HttpClient _client = new()
     {
-        Timeout = TimeSpan.FromSeconds(30)
+        Timeout = System.Threading.Timeout.InfiniteTimeSpan
     };
 
-    public static async Task<HttpResponse> SendAsync(ApiRequest req, Dictionary<string, string> envVars)
+    public static async Task<HttpResponse> SendAsync(
+        ApiRequest req,
+        Dictionary<string, string> envVars,
+        CancellationToken userCancellationToken = default)
     {
-        var sw = Stopwatch.StartNew();
+        var sw      = Stopwatch.StartNew();
+        var timeout = TimeSpan.FromSeconds(req.TimeoutSeconds > 0 ? req.TimeoutSeconds : 30);
+
+        using var timeoutCts = new System.Threading.CancellationTokenSource(timeout);
+        using var linkedCts  = System.Threading.CancellationTokenSource
+            .CreateLinkedTokenSource(userCancellationToken, timeoutCts.Token);
+
         try
         {
             var url     = ApplyEnv(req.Url, envVars);
@@ -41,7 +50,7 @@ public static class HttpService
                 request.Content = new StringContent(body, Encoding.UTF8, req.ContentType);
             }
 
-            var resp = await _client.SendAsync(request);
+            var resp = await _client.SendAsync(request, linkedCts.Token);
             sw.Stop();
 
             var headerSb = new StringBuilder();
@@ -50,7 +59,7 @@ public static class HttpService
             foreach (var h in resp.Content.Headers)
                 headerSb.AppendLine($"{h.Key}: {string.Join(", ", h.Value)}");
 
-            var rawBody    = await resp.Content.ReadAsStringAsync();
+            var rawBody    = await resp.Content.ReadAsStringAsync(linkedCts.Token);
             var prettyBody = TryPrettyJson(rawBody);
 
             return new HttpResponse(
@@ -60,15 +69,20 @@ public static class HttpService
                 prettyBody,
                 sw.ElapsedMilliseconds);
         }
+        catch (OperationCanceledException) when (userCancellationToken.IsCancellationRequested)
+        {
+            sw.Stop();
+            return new HttpResponse(0, "취소됨", "", "요청이 취소되었습니다.", sw.ElapsedMilliseconds);
+        }
+        catch (OperationCanceledException)
+        {
+            sw.Stop();
+            return new HttpResponse(0, "시간 초과", "", $"요청 시간이 초과되었습니다 ({req.TimeoutSeconds}초).", sw.ElapsedMilliseconds);
+        }
         catch (UriFormatException ex)
         {
             sw.Stop();
             return new HttpResponse(0, "잘못된 URL", "", $"URL 형식 오류: {ex.Message}", sw.ElapsedMilliseconds);
-        }
-        catch (TaskCanceledException)
-        {
-            sw.Stop();
-            return new HttpResponse(0, "시간 초과", "", "요청 시간이 초과되었습니다 (30초).", sw.ElapsedMilliseconds);
         }
         catch (HttpRequestException ex)
         {

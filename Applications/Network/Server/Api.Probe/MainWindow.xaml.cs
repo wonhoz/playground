@@ -2,6 +2,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Text.Json;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -29,11 +30,15 @@ public partial class MainWindow : Window
     private List<EnvPreset> _envPresets = [];
     private DispatcherTimer? _saveTimer;
 
+    private CancellationTokenSource? _cts;
+
     private const string RespPlaceholder = "← 요청을 전송하면 응답이 여기에 표시됩니다.";
 
-    private record HistoryEntry(string Summary, string Timestamp, string Body, string Headers);
     private readonly List<HistoryEntry> _history = [];
-    private const int MaxHistory = 20;
+
+    // ── 검색 상태 ────────────────────────────────────────────────
+    private List<int> _searchMatches = [];
+    private int       _searchIdx     = -1;
 
     public MainWindow()
     {
@@ -63,6 +68,11 @@ public partial class MainWindow : Window
             _collections.Add(demo);
         }
         RefreshSidebar();
+
+        // 히스토리 복원
+        var loaded = HistoryService.Load();
+        _history.AddRange(loaded);
+        LstHistory.ItemsSource = _history;
     }
 
     // ── 사이드바 ─────────────────────────────────────────────────
@@ -164,7 +174,7 @@ public partial class MainWindow : Window
             // 우클릭 컨텍스트 메뉴
             colBorder.ContextMenu = MakeContextMenu(
                 ("이름 변경", () => { _renamingCollectionId = colRef.Id; RefreshSidebar(); }),
-                (null, null), // 구분선
+                (null, null),
                 ("컬렉션 삭제", () => DeleteCollection(colRef))
             );
 
@@ -190,7 +200,6 @@ public partial class MainWindow : Window
                     Margin       = new Thickness(0, 1, 0, 1),
                 };
 
-                // 요청 항목 내부: 메서드 라벨 + 이름
                 var itemGrid = new Grid();
                 itemGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(46) });
                 itemGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
@@ -281,13 +290,30 @@ public partial class MainWindow : Window
                     }
                 };
 
-                // 우클릭 컨텍스트 메뉴
-                btn.ContextMenu = MakeContextMenu(
+                // 우클릭 컨텍스트 메뉴 (이동 서브메뉴 포함)
+                var ctxMenu = MakeContextMenu(
                     ("이름 변경", () => { _renamingRequestId = r.Id; RefreshSidebar(); }),
                     ("복제",      () => DuplicateRequest(colRef, r)),
                     (null, null),
                     ("요청 삭제", () => DeleteRequest(colRef, r))
                 );
+
+                // 다른 컬렉션으로 이동 서브메뉴
+                var otherCols = _collections.Where(c => c.Id != colRef.Id).ToList();
+                if (otherCols.Count > 0)
+                {
+                    var moveParent = new MenuItem { Header = "다른 컬렉션으로 이동 ▶" };
+                    foreach (var tc in otherCols)
+                    {
+                        var target = tc;
+                        var mi = new MenuItem { Header = target.Name };
+                        mi.Click += (_, _) => MoveRequest(colRef, r, target);
+                        moveParent.Items.Add(mi);
+                    }
+                    ctxMenu.Items.Insert(2, moveParent);
+                }
+
+                btn.ContextMenu = ctxMenu;
 
                 reqPanel.Children.Add(btn);
             }
@@ -310,7 +336,6 @@ public partial class MainWindow : Window
     };
 
     // ── 헬퍼: 다크 컨텍스트 메뉴 생성 ───────────────────────────
-    // null 항목은 구분선(Separator)으로 처리
     private ContextMenu MakeContextMenu(params (string? Label, Action? Action)[] items)
     {
         var menu = new ContextMenu();
@@ -330,7 +355,7 @@ public partial class MainWindow : Window
         return menu;
     }
 
-    // ── 삭제 ─────────────────────────────────────────────────────
+    // ── 삭제 / 이동 ──────────────────────────────────────────────
     private void DeleteCollection(ApiCollection col)
     {
         var result = MessageBox.Show(
@@ -355,19 +380,32 @@ public partial class MainWindow : Window
     {
         var copy = new ApiRequest
         {
-            Name        = src.Name + " (복사)",
-            Method      = src.Method,
-            Url         = src.Url,
-            Body        = src.Body,
-            ContentType = src.ContentType,
-            Headers     = new System.Collections.ObjectModel.ObservableCollection<HeaderItem>(
-                src.Headers.Select(h => new HeaderItem { Key = h.Key, Value = h.Value, Enabled = h.Enabled }))
+            Name           = src.Name + " (복사)",
+            Method         = src.Method,
+            Url            = src.Url,
+            Body           = src.Body,
+            ContentType    = src.ContentType,
+            TimeoutSeconds = src.TimeoutSeconds,
+            Headers        = new ObservableCollection<HeaderItem>(
+                src.Headers.Select(h => new HeaderItem { Key = h.Key, Value = h.Value, Enabled = h.Enabled })),
+            Params         = new ObservableCollection<QueryParam>(
+                src.Params.Select(p => new QueryParam { Key = p.Key, Value = p.Value, Enabled = p.Enabled })),
         };
         var idx = col.Requests.IndexOf(src);
         col.Requests.Insert(idx + 1, copy);
         CollectionService.Save(_collections);
         RefreshSidebar();
         LoadRequest(copy);
+    }
+
+    private void MoveRequest(ApiCollection src, ApiRequest req, ApiCollection dst)
+    {
+        var wasActive = ReferenceEquals(_activeRequest, req);
+        src.Requests.Remove(req);
+        dst.Requests.Add(req);
+        if (wasActive) _activeCollection = dst;
+        CollectionService.Save(_collections);
+        RefreshSidebar();
     }
 
     private void DeleteRequest(ApiCollection col, ApiRequest req)
@@ -388,12 +426,13 @@ public partial class MainWindow : Window
         TxtUrl.Text     = "";
         TxtBody.Text    = "";
         TxtReqName.Text = "";
+        TxtTimeout.Text = "30";
         HeaderGrid.DataContext = null;
         ParamGrid.DataContext  = null;
         _loading = false;
     }
 
-    // ── 기타 ─────────────────────────────────────────────────────
+    // ── 기타 헬퍼 ────────────────────────────────────────────────
     private static string MethodLabel(string m) => m switch
     {
         "DELETE"  => "DEL",
@@ -403,7 +442,7 @@ public partial class MainWindow : Window
 
     private static readonly Dictionary<string, SolidColorBrush> _methodBrushCache = new()
     {
-        ["GET"]    = new SolidColorBrush(Color.FromRgb(0x14, 0xB8, 0xA6)),
+        ["GET"]    = new SolidColorBrush(Color.FromRgb(0x22, 0xC5, 0x5E)),
         ["POST"]   = new SolidColorBrush(Color.FromRgb(0x22, 0xC5, 0x5E)),
         ["PUT"]    = new SolidColorBrush(Color.FromRgb(0xF5, 0x9E, 0x0B)),
         ["PATCH"]  = new SolidColorBrush(Color.FromRgb(0xA7, 0x8B, 0xFA)),
@@ -428,6 +467,7 @@ public partial class MainWindow : Window
         TxtUrl.Text     = req.Url;
         TxtBody.Text    = req.Body;
         TxtReqName.Text = req.Name;
+        TxtTimeout.Text = req.TimeoutSeconds.ToString();
 
         CmbContentType.SelectedItem = CmbContentType.Items
             .OfType<ComboBoxItem>()
@@ -469,77 +509,103 @@ public partial class MainWindow : Window
         LoadRequest(req);
     }
 
-    // ── 요청 전송 ─────────────────────────────────────────────────
+    // ── 요청 전송 (취소 지원) ─────────────────────────────────────
     private async void SendRequest(object s, RoutedEventArgs e)
     {
-        SyncActiveRequest();
+        // 전송 중이면 취소
+        if (_cts != null)
+        {
+            _cts.Cancel();
+            return;
+        }
 
+        SyncActiveRequest();
         var url = TxtUrl.Text.Trim();
         if (string.IsNullOrEmpty(url)) return;
 
-        // 활성화된 쿼리 파라미터를 URL에 합산
-        var enabledParams = _activeRequest?.Params.Where(p => p.Enabled && !string.IsNullOrWhiteSpace(p.Key)).ToList() ?? [];
-        if (enabledParams.Count > 0)
+        _cts = new CancellationTokenSource();
+        BtnSend.Content = "취소";
+
+        try
         {
-            var qs = string.Join("&", enabledParams.Select(p => $"{Uri.EscapeDataString(p.Key)}={Uri.EscapeDataString(p.Value)}"));
-            url = url.Contains('?') ? $"{url}&{qs}" : $"{url}?{qs}";
+            // 활성화된 쿼리 파라미터를 URL에 합산
+            var enabledParams = _activeRequest?.Params.Where(p => p.Enabled && !string.IsNullOrWhiteSpace(p.Key)).ToList() ?? [];
+            if (enabledParams.Count > 0)
+            {
+                var qs = string.Join("&", enabledParams.Select(p => $"{Uri.EscapeDataString(p.Key)}={Uri.EscapeDataString(p.Value)}"));
+                url = url.Contains('?') ? $"{url}&{qs}" : $"{url}?{qs}";
+            }
+
+            var req2 = new ApiRequest
+            {
+                Method         = ((ComboBoxItem)CmbMethod.SelectedItem).Content.ToString()!,
+                Url            = url,
+                Body           = TxtBody.Text,
+                ContentType    = ((ComboBoxItem)CmbContentType.SelectedItem).Content.ToString()!,
+                Headers        = _activeRequest?.Headers ?? [],
+                TimeoutSeconds = _activeRequest?.TimeoutSeconds ?? 30,
+            };
+
+            var envIdx  = CmbEnv.SelectedIndex;
+            var envVars = envIdx > 0 && envIdx - 1 < _envPresets.Count
+                ? _envPresets[envIdx - 1].Variables
+                : [];
+
+            TxtRespBody.Text       = "요청 전송 중...";
+            TxtRespHeaders.Text    = "";
+            StatusBadge.Visibility = Visibility.Collapsed;
+            TxtElapsed.Text        = "";
+
+            var result = await HttpService.SendAsync(req2, envVars, _cts.Token);
+
+            TxtRespBody.Text    = result.Body;
+            TxtRespHeaders.Text = result.Headers;
+            TxtElapsed.Text     = $"{result.ElapsedMs} ms";
+
+            StatusBadge.Visibility = Visibility.Visible;
+            TxtStatus.Text = $"{result.StatusCode} {result.StatusText}";
+            StatusBadge.Background = result.StatusCode switch
+            {
+                >= 200 and < 300 => new SolidColorBrush(Color.FromRgb(0x14, 0x78, 0x20)),
+                >= 300 and < 400 => new SolidColorBrush(Color.FromRgb(0x78, 0x5A, 0x00)),
+                >= 400 and < 500 => new SolidColorBrush(Color.FromRgb(0x78, 0x14, 0x14)),
+                >= 500           => new SolidColorBrush(Color.FromRgb(0x60, 0x00, 0x00)),
+                _                => new SolidColorBrush(Color.FromRgb(0x33, 0x33, 0x55))
+            };
+            TxtStatus.Foreground = Brushes.White;
+
+            if (_activeRequest != null)
+            {
+                _activeRequest.Url    = TxtUrl.Text.Trim();
+                _activeRequest.Body   = TxtBody.Text;
+                _activeRequest.Method = req2.Method;
+                CollectionService.Save(_collections);
+            }
+
+            // 히스토리 기록 (영속화)
+            var entry = new HistoryEntry(
+                Summary:   $"[{result.StatusCode}] {req2.Method} {TxtUrl.Text.Trim()}",
+                Timestamp: DateTime.Now.ToString("HH:mm:ss"),
+                Body:      result.Body,
+                Headers:   result.Headers);
+            _history.Insert(0, entry);
+            if (_history.Count > HistoryService.MaxHistory) _history.RemoveAt(_history.Count - 1);
+            LstHistory.ItemsSource = null;
+            LstHistory.ItemsSource = _history;
+            HistoryService.Save(_history);
+
+            // 검색 매치 초기화
+            _searchMatches.Clear();
+            _searchIdx = -1;
+            if (SearchBar.Visibility == Visibility.Visible && !string.IsNullOrEmpty(TxtSearch.Text))
+                RunSearch(TxtSearch.Text);
         }
-
-        var req = new ApiRequest
+        finally
         {
-            Method      = ((ComboBoxItem)CmbMethod.SelectedItem).Content.ToString()!,
-            Url         = url,
-            Body        = TxtBody.Text,
-            ContentType = ((ComboBoxItem)CmbContentType.SelectedItem).Content.ToString()!,
-            Headers     = _activeRequest?.Headers ?? []
-        };
-
-        var envIdx  = CmbEnv.SelectedIndex;
-        var envVars = envIdx > 0 && envIdx - 1 < _envPresets.Count
-            ? _envPresets[envIdx - 1].Variables
-            : [];
-
-        TxtRespBody.Text       = "요청 전송 중...";
-        TxtRespHeaders.Text    = "";
-        StatusBadge.Visibility = Visibility.Collapsed;
-        TxtElapsed.Text        = "";
-
-        var result = await HttpService.SendAsync(req, envVars);
-
-        TxtRespBody.Text    = result.Body;
-        TxtRespHeaders.Text = result.Headers;
-        TxtElapsed.Text     = $"{result.ElapsedMs} ms";
-
-        StatusBadge.Visibility = Visibility.Visible;
-        TxtStatus.Text = $"{result.StatusCode} {result.StatusText}";
-        StatusBadge.Background = result.StatusCode switch
-        {
-            >= 200 and < 300 => new SolidColorBrush(Color.FromRgb(0x14, 0x78, 0x20)),
-            >= 300 and < 400 => new SolidColorBrush(Color.FromRgb(0x78, 0x5A, 0x00)),
-            >= 400 and < 500 => new SolidColorBrush(Color.FromRgb(0x78, 0x14, 0x14)),
-            >= 500           => new SolidColorBrush(Color.FromRgb(0x60, 0x00, 0x00)),
-            _                => new SolidColorBrush(Color.FromRgb(0x33, 0x33, 0x55))
-        };
-        TxtStatus.Foreground = Brushes.White;
-
-        if (_activeRequest != null)
-        {
-            _activeRequest.Url    = url;
-            _activeRequest.Body   = TxtBody.Text;
-            _activeRequest.Method = req.Method;
-            CollectionService.Save(_collections);
+            _cts?.Dispose();
+            _cts = null;
+            BtnSend.Content = "전송";
         }
-
-        // 히스토리 기록
-        var entry = new HistoryEntry(
-            Summary:   $"[{result.StatusCode}] {req.Method} {TxtUrl.Text.Trim()}",
-            Timestamp: DateTime.Now.ToString("HH:mm:ss"),
-            Body:      result.Body,
-            Headers:   result.Headers);
-        _history.Insert(0, entry);
-        if (_history.Count > MaxHistory) _history.RemoveAt(_history.Count - 1);
-        LstHistory.ItemsSource = null;
-        LstHistory.ItemsSource = _history;
     }
 
     private void HistoryItem_Selected(object s, SelectionChangedEventArgs e)
@@ -553,6 +619,153 @@ public partial class MainWindow : Window
         if (e.Key == Key.Enter) SendRequest(s, new RoutedEventArgs());
     }
 
+    // ── 전역 키 핸들러 ────────────────────────────────────────────
+    private void Window_KeyDown(object s, KeyEventArgs e)
+    {
+        // Ctrl+F: 검색 열기
+        if (e.Key == Key.F && Keyboard.Modifiers == ModifierKeys.Control)
+        {
+            SearchOpen(s, e);
+            e.Handled = true;
+            return;
+        }
+
+        // F1: 단축키 도움말
+        if (e.Key == Key.F1)
+        {
+            ShowShortcuts(s, e);
+            e.Handled = true;
+            return;
+        }
+
+        // Escape: 검색 닫기 또는 요청 취소
+        if (e.Key == Key.Escape)
+        {
+            if (SearchBar.Visibility == Visibility.Visible)
+            {
+                SearchClose(s, e);
+                e.Handled = true;
+            }
+            return;
+        }
+
+        // F3: 다음 검색 결과 / Shift+F3: 이전
+        if (e.Key == Key.F3 && SearchBar.Visibility == Visibility.Visible)
+        {
+            if (Keyboard.Modifiers == ModifierKeys.Shift) SearchPrev(s, e);
+            else SearchNext(s, e);
+            e.Handled = true;
+        }
+    }
+
+    // ── 응답 검색 ─────────────────────────────────────────────────
+    private void SearchOpen(object s, RoutedEventArgs e)
+    {
+        SearchBar.Visibility = Visibility.Visible;
+        TxtSearch.Focus();
+        TxtSearch.SelectAll();
+    }
+
+    private void SearchClose(object s, RoutedEventArgs e)
+    {
+        SearchBar.Visibility = Visibility.Collapsed;
+        _searchMatches.Clear();
+        _searchIdx = -1;
+        TxtSearchCount.Text = "";
+    }
+
+    private void SearchBox_TextChanged(object s, TextChangedEventArgs e)
+    {
+        RunSearch(TxtSearch.Text);
+    }
+
+    private void SearchBox_KeyDown(object s, KeyEventArgs e)
+    {
+        if (e.Key == Key.Enter)
+        {
+            if (Keyboard.Modifiers == ModifierKeys.Shift) SearchPrev(s, e);
+            else SearchNext(s, e);
+            e.Handled = true;
+        }
+        else if (e.Key == Key.Escape)
+        {
+            SearchClose(s, e);
+            e.Handled = true;
+        }
+    }
+
+    private void SearchNext(object s, RoutedEventArgs e)
+    {
+        if (_searchMatches.Count == 0) return;
+        _searchIdx = (_searchIdx + 1) % _searchMatches.Count;
+        HighlightMatch(_searchMatches[_searchIdx], TxtSearch.Text.Length);
+        UpdateSearchCount();
+    }
+
+    private void SearchPrev(object s, RoutedEventArgs e)
+    {
+        if (_searchMatches.Count == 0) return;
+        _searchIdx = (_searchIdx - 1 + _searchMatches.Count) % _searchMatches.Count;
+        HighlightMatch(_searchMatches[_searchIdx], TxtSearch.Text.Length);
+        UpdateSearchCount();
+    }
+
+    private void RunSearch(string query)
+    {
+        _searchMatches.Clear();
+        _searchIdx = -1;
+
+        if (string.IsNullOrEmpty(query))
+        {
+            TxtSearchCount.Text = "";
+            return;
+        }
+
+        var text = TxtRespBody.Text;
+        int idx  = 0;
+        while ((idx = text.IndexOf(query, idx, StringComparison.OrdinalIgnoreCase)) >= 0)
+        {
+            _searchMatches.Add(idx);
+            idx += query.Length;
+        }
+
+        if (_searchMatches.Count > 0)
+        {
+            _searchIdx = 0;
+            HighlightMatch(_searchMatches[0], query.Length);
+        }
+        UpdateSearchCount();
+    }
+
+    private void HighlightMatch(int start, int length)
+    {
+        TxtRespBody.Select(start, length);
+        var line = TxtRespBody.GetLineIndexFromCharacterIndex(start);
+        TxtRespBody.ScrollToLine(line);
+    }
+
+    private void UpdateSearchCount()
+    {
+        TxtSearchCount.Text = _searchMatches.Count > 0
+            ? $"{_searchIdx + 1}/{_searchMatches.Count}"
+            : "없음";
+    }
+
+    // ── 단축키 도움말 ─────────────────────────────────────────────
+    private ShortcutsWindow? _shortcutsWindow;
+
+    private void ShowShortcuts(object s, RoutedEventArgs e)
+    {
+        if (_shortcutsWindow is { IsLoaded: true })
+        {
+            _shortcutsWindow.Activate();
+            return;
+        }
+        _shortcutsWindow = new ShortcutsWindow { Owner = this };
+        _shortcutsWindow.Show();
+    }
+
+    // ── cURL / 응답 복사 ─────────────────────────────────────────
     private void CopyCurl(object s, RoutedEventArgs e)
     {
         SyncActiveRequest();
@@ -582,6 +795,7 @@ public partial class MainWindow : Window
             Clipboard.SetText(text);
     }
 
+    // ── 이름 / 타임아웃 변경 ──────────────────────────────────────
     private void ReqName_Changed(object s, TextChangedEventArgs e)
     {
         if (_loading || _activeRequest is null) return;
@@ -594,6 +808,17 @@ public partial class MainWindow : Window
         _saveTimer.Start();
     }
 
+    private void Timeout_Changed(object s, TextChangedEventArgs e)
+    {
+        if (_loading || _activeRequest is null) return;
+        if (int.TryParse(TxtTimeout.Text, out var sec) && sec > 0)
+        {
+            _activeRequest.TimeoutSeconds = sec;
+            CollectionService.Save(_collections);
+        }
+    }
+
+    // ── 환경 변수 ────────────────────────────────────────────────
     private void ReloadEnvCombo()
     {
         var prev = CmbEnv.SelectedIndex;
@@ -613,10 +838,11 @@ public partial class MainWindow : Window
 
     private void CmbEnv_Changed(object s, SelectionChangedEventArgs e) { }
 
+    // ── 헤더 / 파라미터 ───────────────────────────────────────────
     private void AddHeader(object s, RoutedEventArgs e)
     {
         if (_activeRequest is null) return;
-        _activeRequest.Headers.Add(new HeaderItem { Key = "Authorization", Value = "Bearer " });
+        _activeRequest.Headers.Add(new HeaderItem { Key = "", Value = "" });
     }
 
     private void AddParam(object s, RoutedEventArgs e)
@@ -625,6 +851,7 @@ public partial class MainWindow : Window
         _activeRequest.Params.Add(new QueryParam { Key = "", Value = "" });
     }
 
+    // ── 내보내기 / 가져오기 ───────────────────────────────────────
     private void ExportCollection(object s, RoutedEventArgs e)
     {
         if (_collections.Count == 0)
@@ -708,8 +935,9 @@ public partial class MainWindow : Window
     private void SyncActiveRequest()
     {
         if (_activeRequest is null) return;
-        _activeRequest.Method = ((ComboBoxItem)CmbMethod.SelectedItem).Content.ToString()!;
-        _activeRequest.Url    = TxtUrl.Text;
-        _activeRequest.Body   = TxtBody.Text;
+        _activeRequest.Method      = ((ComboBoxItem)CmbMethod.SelectedItem).Content.ToString()!;
+        _activeRequest.Url         = TxtUrl.Text;
+        _activeRequest.Body        = TxtBody.Text;
+        _activeRequest.ContentType = ((ComboBoxItem)CmbContentType.SelectedItem).Content.ToString()!;
     }
 }

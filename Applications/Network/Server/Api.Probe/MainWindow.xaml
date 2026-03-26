@@ -6,6 +6,7 @@
         Background="{StaticResource Bg0Brush}"
         Foreground="{StaticResource FgBrush}"
         WindowStartupLocation="CenterScreen"
+        KeyDown="Window_KeyDown"
         Icon="pack://application:,,,/Resources/app.ico">
   <Grid>
     <Grid.ColumnDefinitions>
@@ -99,6 +100,7 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
           </Grid.ColumnDefinitions>
 
           <ComboBox x:Name="CmbMethod" Grid.Column="0" Margin="0,0,8,0">
@@ -116,12 +118,16 @@
                    Text="https://httpbin.org/get"
                    KeyDown="TxtUrl_KeyDown"/>
 
-          <Button Grid.Column="2" Content="전송" Width="72"
+          <Button x:Name="BtnSend" Grid.Column="2" Content="전송" Width="72"
                   Style="{StaticResource AccentButton}"
                   Click="SendRequest" Margin="0,0,8,0"/>
 
           <Button Grid.Column="3" Content="cURL 복사"
-                  Click="CopyCurl" Padding="8,6"/>
+                  Click="CopyCurl" Padding="8,6" Margin="0,0,8,0"/>
+
+          <Button Grid.Column="4" Content="?" Width="28"
+                  ToolTip="단축키 도움말 (F1)"
+                  Click="ShowShortcuts" Padding="4,6"/>
         </Grid>
       </Border>
 
@@ -223,13 +229,18 @@
           </Grid>
         </TabItem>
 
-        <!-- 요청 이름 탭 -->
-        <TabItem Header="정보">
+        <!-- 요청 이름/설정 탭 -->
+        <TabItem Header="이름">
           <StackPanel Background="{StaticResource Bg1Brush}" Margin="12">
             <TextBlock Text="요청 이름" Foreground="{StaticResource FgDimBrush}"
                        FontSize="12" Margin="0,0,0,4"/>
             <TextBox x:Name="TxtReqName" FontFamily="Segoe UI" FontSize="13"
                      TextChanged="ReqName_Changed"/>
+            <TextBlock Text="타임아웃 (초)" Foreground="{StaticResource FgDimBrush}"
+                       FontSize="12" Margin="0,14,0,4"/>
+            <TextBox x:Name="TxtTimeout" FontFamily="Consolas" FontSize="13"
+                     Text="30" Width="80" HorizontalAlignment="Left"
+                     TextChanged="Timeout_Changed"/>
           </StackPanel>
         </TabItem>
       </TabControl>
@@ -243,6 +254,8 @@
       <Grid Grid.Row="4" Background="{StaticResource Bg0Brush}">
         <Grid.RowDefinitions>
           <RowDefinition Height="Auto"/>
+          <RowDefinition Height="Auto"/>
+          <!-- 검색 바 (Collapsed) -->
           <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
@@ -262,12 +275,43 @@
                        VerticalAlignment="Center"/>
             <Border Width="1" Background="{StaticResource BorderBrush2}" Margin="12,2"/>
             <Button Content="복사" Click="CopyResponse"
-                    Padding="8,4" FontSize="12"/>
+                    Padding="8,4" FontSize="12" Margin="0,0,6,0"/>
+            <Button Content="검색" Click="SearchOpen"
+                    Padding="8,4" FontSize="12" ToolTip="응답 바디 검색 (Ctrl+F)"/>
           </StackPanel>
         </Border>
 
+        <!-- 검색 바 -->
+        <Border x:Name="SearchBar" Grid.Row="1" Visibility="Collapsed"
+                Background="{StaticResource Bg2Brush}"
+                BorderBrush="{StaticResource BorderBrush2}" BorderThickness="0,0,0,1"
+                Padding="10,6">
+          <Grid>
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="*"/>
+              <ColumnDefinition Width="Auto"/>
+              <ColumnDefinition Width="Auto"/>
+              <ColumnDefinition Width="Auto"/>
+              <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBox x:Name="TxtSearch" Grid.Column="0" Margin="0,0,6,0"
+                     FontFamily="Consolas" FontSize="12"
+                     KeyDown="SearchBox_KeyDown"
+                     TextChanged="SearchBox_TextChanged"/>
+            <TextBlock x:Name="TxtSearchCount" Grid.Column="1"
+                       FontSize="11" Foreground="{StaticResource FgDimBrush}"
+                       VerticalAlignment="Center" Margin="0,0,8,0" MinWidth="50"/>
+            <Button Grid.Column="2" Content="↑" Padding="6,4" FontSize="12"
+                    Click="SearchPrev" Margin="0,0,4,0" ToolTip="이전 결과 (Shift+F3)"/>
+            <Button Grid.Column="3" Content="↓" Padding="6,4" FontSize="12"
+                    Click="SearchNext" Margin="0,0,6,0" ToolTip="다음 결과 (F3)"/>
+            <Button Grid.Column="4" Content="×" Padding="6,4" FontSize="12"
+                    Click="SearchClose" ToolTip="검색 닫기 (Esc)"/>
+          </Grid>
+        </Border>
+
         <!-- 응답 탭 -->
-        <TabControl x:Name="RespTabs" Grid.Row="1"
+        <TabControl x:Name="RespTabs" Grid.Row="2"
                     Background="{StaticResource Bg0Brush}" Padding="0">
           <TabControl.Resources>
             <Style TargetType="TabPanel">

@@ -88,16 +88,16 @@ public class FolderScanner
         }
 
         // ── VS 아티팩트 탐지 ──
-        // 현재 폴더의 하위 폴더 중 bin/obj만 있는지 체크
+        // 현재 폴더의 하위 폴더가 bin/obj 등 아티팩트 폴더만 있고,
+        // 파일이 없거나 .user 등 아티팩트 파일 확장자만 있는 경우 VS 아티팩트로 간주
         if (_opts.ScanVsArtifacts)
         {
             bool hasOnlyArtifactDirs = subDirs.Length > 0
                 && subDirs.All(d => _opts.VsArtifactNames.Contains(Path.GetFileName(d)));
-            bool hasNoFiles = files.Length == 0;
+            bool hasOnlyArtifactFiles = files.Length == 0
+                || files.All(f => _opts.VsArtifactFileExtensions.Contains(Path.GetExtension(f)));
 
-            // .csproj, .vbproj 등 프로젝트 파일이 없을 때도 포함
-            // 단, bin/obj만 있고 파일 없으면 VS 아티팩트 폴더로 간주
-            if (hasOnlyArtifactDirs && hasNoFiles && subDirs.Length >= 1)
+            if (hasOnlyArtifactDirs && hasOnlyArtifactFiles && subDirs.Length >= 1)
             {
                 long totalSize = GetDirectorySize(path);
                 int  totalItems = GetItemCount(path);

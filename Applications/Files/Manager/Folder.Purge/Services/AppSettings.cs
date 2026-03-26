@@ -12,6 +12,8 @@ public class AppSettings
     public bool PreviewOnly { get; set; } = false;
     public List<string> ExcludedFolders { get; set; } =
         [".git", ".vs", ".svn", ".hg", "node_modules", "__pycache__"];
+    public List<string> VsArtifactFolderNames { get; set; } = ["bin", "obj"];
+    public List<string> VsArtifactFileExtensions { get; set; } = [".user"];
 
     private static readonly string _path = Path.Combine(
         Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),

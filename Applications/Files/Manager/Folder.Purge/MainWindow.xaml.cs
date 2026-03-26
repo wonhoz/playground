@@ -1,3 +1,5 @@
+using System.ComponentModel;
+using System.Diagnostics;
 using System.Media;
 using System.Text;
 using System.Windows.Media;
@@ -14,18 +16,23 @@ public partial class MainWindow : Window
 
     private readonly ObservableCollection<string> _targetFolders = [];
     private readonly ObservableCollection<string> _excludedFolders = [];
+    private readonly ObservableCollection<string> _artifactFolderNames = [];
     private List<FolderEntry> _scanResults = [];
     private CancellationTokenSource? _cts;
     private bool _isScanning;
     private AppSettings _settings = new();
+    private string? _sortColumn;
+    private ListSortDirection _sortDirection = ListSortDirection.Ascending;
 
     public MainWindow()
     {
         InitializeComponent();
-        FolderListBox.ItemsSource  = _targetFolders;
-        ExcludeListBox.ItemsSource = _excludedFolders;
+        FolderListBox.ItemsSource   = _targetFolders;
+        ExcludeListBox.ItemsSource  = _excludedFolders;
+        ArtifactListBox.ItemsSource = _artifactFolderNames;
         Loaded  += OnLoaded;
         Closing += OnClosing;
+        KeyDown += (_, e) => { if (e.Key == System.Windows.Input.Key.F1) ShowHelp(); };
     }
 
     private void OnLoaded(object sender, RoutedEventArgs e)
@@ -41,6 +48,8 @@ public partial class MainWindow : Window
             if (Directory.Exists(f)) _targetFolders.Add(f);
         foreach (var ex in _settings.ExcludedFolders)
             _excludedFolders.Add(ex);
+        foreach (var a in _settings.VsArtifactFolderNames)
+            _artifactFolderNames.Add(a);
 
         ChkEmpty.IsChecked      = _settings.ScanEmptyFolders;
         ChkVsArtifact.IsChecked = _settings.ScanVsArtifacts;
@@ -54,13 +63,14 @@ public partial class MainWindow : Window
 
     private void OnClosing(object? sender, System.ComponentModel.CancelEventArgs e)
     {
-        _settings.TargetFolders     = [.. _targetFolders];
-        _settings.ExcludedFolders   = [.. _excludedFolders];
-        _settings.ScanEmptyFolders  = ChkEmpty.IsChecked == true;
-        _settings.ScanVsArtifacts   = ChkVsArtifact.IsChecked == true;
-        _settings.ScanEmptyFiles    = ChkEmptyFile.IsChecked == true;
-        _settings.UseRecycleBin     = ChkRecycleBin.IsChecked == true;
-        _settings.PreviewOnly       = ChkPreview.IsChecked == true;
+        _settings.TargetFolders          = [.. _targetFolders];
+        _settings.ExcludedFolders        = [.. _excludedFolders];
+        _settings.VsArtifactFolderNames  = [.. _artifactFolderNames];
+        _settings.ScanEmptyFolders       = ChkEmpty.IsChecked == true;
+        _settings.ScanVsArtifacts        = ChkVsArtifact.IsChecked == true;
+        _settings.ScanEmptyFiles         = ChkEmptyFile.IsChecked == true;
+        _settings.UseRecycleBin          = ChkRecycleBin.IsChecked == true;
+        _settings.PreviewOnly            = ChkPreview.IsChecked == true;
         _settings.Save();
     }
 
@@ -151,12 +161,31 @@ public partial class MainWindow : Window
             _excludedFolders.Remove(selected);
     }
 
-    // ── 옵션 ────────────────────────────────────────────────────────────
+    // ── VS 아티팩트 폴더명 관리 ──────────────────────────────────────────
 
-    private void RecycleBin_Checked(object sender, RoutedEventArgs e)
+    private void AddArtifact_Click(object sender, RoutedEventArgs e) => AddArtifactEntry();
+
+    private void ArtifactInput_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
     {
-        if (!IsLoaded) return;
+        if (e.Key == System.Windows.Input.Key.Enter) AddArtifactEntry();
     }
+
+    private void AddArtifactEntry()
+    {
+        var name = ArtifactInput.Text.Trim();
+        if (string.IsNullOrEmpty(name) || _artifactFolderNames.Contains(name, StringComparer.OrdinalIgnoreCase))
+            return;
+        _artifactFolderNames.Add(name);
+        ArtifactInput.Clear();
+    }
+
+    private void RemoveArtifact_Click(object sender, RoutedEventArgs e)
+    {
+        if (ArtifactListBox.SelectedItem is string selected)
+            _artifactFolderNames.Remove(selected);
+    }
+
+    // ── 옵션 ────────────────────────────────────────────────────────────
 
     private void Preview_Checked(object sender, RoutedEventArgs e)
     {
@@ -260,6 +289,10 @@ public partial class MainWindow : Window
         PreviewOnly        = ChkPreview.IsChecked == true,
         ExcludedFolderNames = new HashSet<string>(
             _excludedFolders, StringComparer.OrdinalIgnoreCase),
+        VsArtifactNames = new HashSet<string>(
+            _artifactFolderNames, StringComparer.OrdinalIgnoreCase),
+        VsArtifactFileExtensions = new HashSet<string>(
+            _settings.VsArtifactFileExtensions, StringComparer.OrdinalIgnoreCase),
     };
 
     private void ShowResults(List<FolderEntry> results)
@@ -269,6 +302,7 @@ public partial class MainWindow : Window
         bool hasItems = results.Count > 0;
         SelectAllBtn.IsEnabled  = hasItems;
         SelectNoneBtn.IsEnabled = hasItems;
+        InvertBtn.IsEnabled     = hasItems;
         CopyResultBtn.IsEnabled = hasItems;
         ExportBtn.IsEnabled     = hasItems;
         DeleteBtn.IsEnabled     = hasItems;
@@ -292,6 +326,12 @@ public partial class MainWindow : Window
     private void SelectNone_Click(object sender, RoutedEventArgs e)
     {
         foreach (var item in _scanResults) item.IsSelected = false;
+        UpdateStats();
+    }
+
+    private void InvertSelection_Click(object sender, RoutedEventArgs e)
+    {
+        foreach (var item in _scanResults) item.IsSelected = !item.IsSelected;
         UpdateStats();
     }
 
@@ -477,12 +517,13 @@ public partial class MainWindow : Window
 
     private void SetScanningState(bool scanning)
     {
-        ScanBtn.IsEnabled          = !scanning;
-        DeleteBtn.IsEnabled        = !scanning && _scanResults.Count > 0;
-        SelectAllBtn.IsEnabled     = !scanning && _scanResults.Count > 0;
-        SelectNoneBtn.IsEnabled    = !scanning && _scanResults.Count > 0;
-        CopyResultBtn.IsEnabled    = !scanning && _scanResults.Count > 0;
-        ExportBtn.IsEnabled        = !scanning && _scanResults.Count > 0;
+        ScanBtn.IsEnabled           = !scanning;
+        DeleteBtn.IsEnabled         = !scanning && _scanResults.Count > 0;
+        SelectAllBtn.IsEnabled      = !scanning && _scanResults.Count > 0;
+        SelectNoneBtn.IsEnabled     = !scanning && _scanResults.Count > 0;
+        InvertBtn.IsEnabled         = !scanning && _scanResults.Count > 0;
+        CopyResultBtn.IsEnabled     = !scanning && _scanResults.Count > 0;
+        ExportBtn.IsEnabled         = !scanning && _scanResults.Count > 0;
         ProgressBarPanel.Visibility = scanning ? Visibility.Visible   : Visibility.Collapsed;
         ProgressText.Visibility     = scanning ? Visibility.Visible   : Visibility.Collapsed;
         if (!scanning) ProgressText.Text = string.Empty;
@@ -501,4 +542,99 @@ public partial class MainWindow : Window
 
     private static string TrimPath(string path, int maxLen) =>
         path.Length <= maxLen ? path : "..." + path[^(maxLen - 3)..];
+
+    // ── 우클릭 컨텍스트 메뉴 ─────────────────────────────────────────────
+
+    private void OpenInExplorer_Click(object sender, RoutedEventArgs e)
+    {
+        if (ResultListView.SelectedItem is not FolderEntry entry) return;
+        var target = Directory.Exists(entry.Path)
+            ? entry.Path
+            : Path.GetDirectoryName(entry.Path) ?? entry.Path;
+        try { Process.Start("explorer.exe", $"\"{target}\""); }
+        catch { /* 탐색기 실행 실패 무시 */ }
+    }
+
+    private void CopyPath_Click(object sender, RoutedEventArgs e)
+    {
+        if (ResultListView.SelectedItem is not FolderEntry entry) return;
+        System.Windows.Clipboard.SetText(entry.Path);
+        StatusText.Text = "경로가 클립보드에 복사되었습니다.";
+    }
+
+    // ── 컬럼 클릭 정렬 ──────────────────────────────────────────────────
+
+    private void ColumnHeader_Click(object sender, RoutedEventArgs e)
+    {
+        if (e.OriginalSource is not GridViewColumnHeader header) return;
+        var tag = header.Column?.Header as string;
+        if (string.IsNullOrEmpty(tag)) return;
+
+        if (_sortColumn == tag)
+            _sortDirection = _sortDirection == ListSortDirection.Ascending
+                ? ListSortDirection.Descending
+                : ListSortDirection.Ascending;
+        else
+        {
+            _sortColumn    = tag;
+            _sortDirection = ListSortDirection.Ascending;
+        }
+
+        _scanResults = (_sortColumn, _sortDirection) switch
+        {
+            ("종류",   ListSortDirection.Ascending)  => [.. _scanResults.OrderBy(r => r.Kind)],
+            ("종류",   ListSortDirection.Descending) => [.. _scanResults.OrderByDescending(r => r.Kind)],
+            ("경로",   ListSortDirection.Ascending)  => [.. _scanResults.OrderBy(r => r.Path)],
+            ("경로",   ListSortDirection.Descending) => [.. _scanResults.OrderByDescending(r => r.Path)],
+            ("크기",   ListSortDirection.Ascending)  => [.. _scanResults.OrderBy(r => r.SizeBytes)],
+            ("크기",   ListSortDirection.Descending) => [.. _scanResults.OrderByDescending(r => r.SizeBytes)],
+            ("항목 수", ListSortDirection.Ascending)  => [.. _scanResults.OrderBy(r => r.ItemCount)],
+            ("항목 수", ListSortDirection.Descending) => [.. _scanResults.OrderByDescending(r => r.ItemCount)],
+            _ => _scanResults
+        };
+
+        ApplyFilter();
+    }
+
+    // ── 도움말 ──────────────────────────────────────────────────────────
+
+    private void Help_Click(object sender, RoutedEventArgs e) => ShowHelp();
+
+    private void ShowHelp()
+    {
+        System.Windows.MessageBox.Show(
+            """
+            ── 단축키 ──────────────────────────────
+            F1          도움말 표시
+            Enter       스캔 시작 (폴더 입력 후)
+            Delete      선택 항목 삭제 확인
+
+            ── 사용 방법 ────────────────────────────
+            1. 폴더 추가
+               · [+ 폴더 추가] 버튼 클릭, 또는
+               · 탐색기에서 폴더를 드래그 앤 드롭
+
+            2. 스캔 옵션 설정
+               · 빈 폴더 / VS 빌드 아티팩트 / 0바이트 파일 선택
+               · VS 아티팩트: bin, obj 폴더와 .user 파일만 남은 폴더 탐지
+
+            3. [스캔 시작] 클릭 → 결과 목록 확인
+
+            4. 삭제할 항목 선택 (체크박스)
+               · 전체 선택 / 선택 해제 / 반전 버튼 사용
+
+            5. [삭제] 클릭
+               · 휴지통으로 이동 (기본, 복구 가능)
+               · 미리보기 모드: 실제 삭제 없이 대상 확인
+
+            ── 팁 ───────────────────────────────────
+            · 결과 목록 우클릭 → 탐색기에서 열기 / 경로 복사
+            · 컬럼 헤더 클릭 → 정렬 (오름/내림차순 토글)
+            · 아티팩트 폴더명 목록에서 bin, obj 외 폴더명 추가 가능
+            · 제외 폴더에 추가 시 스캔 대상에서 제외
+            """,
+            "Folder.Purge 도움말",
+            MessageBoxButton.OK,
+            MessageBoxImage.Information);
+    }
 }

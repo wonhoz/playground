@@ -267,144 +267,191 @@
         <!-- ═══ 왼쪽 패널 ═══ -->
         <Border Grid.Column="0" Background="{StaticResource PanelBrush}"
                 BorderBrush="{StaticResource BorderBrush}" BorderThickness="0,0,1,0">
-            <Grid Margin="12">
+            <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
-                <!-- 헤더 -->
-                <StackPanel Grid.Row="0" Margin="0,0,0,14">
-                    <TextBlock Text="Folder.Purge" FontSize="17" FontWeight="Bold"
-                               Foreground="{StaticResource AccentBrush}"/>
-                    <TextBlock Text="빈 폴더 탐지 및 정리" FontSize="11"
-                               Foreground="{StaticResource TextSecondary}" Margin="0,2,0,0"/>
-                </StackPanel>
+                <!-- 스크롤 가능한 상단 영역 -->
+                <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto">
+                    <StackPanel Margin="12,12,12,0">
 
-                <!-- 폴더 추가/제거 -->
-                <Grid Grid.Row="1" Margin="0,0,0,6">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="6"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
-                    <Button Grid.Column="0" Content="+ 폴더 추가"
-                            Style="{StaticResource GhostButton}"
-                            Click="AddFolder_Click"/>
-                    <Button Grid.Column="2" Content="제거"
-                            Style="{StaticResource GhostButton}"
-                            Click="RemoveFolder_Click" x:Name="RemoveFolderBtn"/>
-                </Grid>
+                        <!-- 헤더 -->
+                        <StackPanel Margin="0,0,0,14">
+                            <TextBlock Text="Folder.Purge" FontSize="17" FontWeight="Bold"
+                                       Foreground="{StaticResource AccentBrush}"/>
+                            <TextBlock Text="빈 폴더 탐지 및 정리" FontSize="11"
+                                       Foreground="{StaticResource TextSecondary}" Margin="0,2,0,0"/>
+                        </StackPanel>
 
-                <!-- 드래그앤드롭 영역 + 폴더 목록 -->
-                <Border Grid.Row="2" x:Name="DropZone"
-                        BorderBrush="#444455" BorderThickness="1" CornerRadius="6"
-                        Background="#1E1E28" Margin="0,0,0,10">
-                    <Grid>
-                        <!-- 힌트 (비어있을 때) -->
-                        <TextBlock x:Name="DropHint"
-                                   Text="폴더를 여기에&#x0a;드래그 앤 드롭"
-                                   HorizontalAlignment="Center" VerticalAlignment="Center"
-                                   TextAlignment="Center" FontSize="12"
-                                   Foreground="#555566" Visibility="Visible"/>
+                        <!-- 폴더 추가/제거 -->
+                        <Grid Margin="0,0,0,6">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="6"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Button Grid.Column="0" Content="+ 폴더 추가"
+                                    Style="{StaticResource GhostButton}"
+                                    Click="AddFolder_Click"/>
+                            <Button Grid.Column="2" Content="제거"
+                                    Style="{StaticResource GhostButton}"
+                                    Click="RemoveFolder_Click" x:Name="RemoveFolderBtn"/>
+                        </Grid>
 
-                        <ListBox x:Name="FolderListBox"
-                                 Background="Transparent" BorderThickness="0"
-                                 Foreground="{StaticResource TextPrimary}" FontSize="11"
-                                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                                 SelectionChanged="FolderList_SelectionChanged">
-                            <ListBox.ItemContainerStyle>
-                                <Style TargetType="ListBoxItem">
-                                    <Setter Property="Padding" Value="6,4"/>
-                                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                                    <Style.Triggers>
-                                        <Trigger Property="IsSelected" Value="True">
-                                            <Setter Property="Background" Value="#2A2A40"/>
-                                        </Trigger>
-                                        <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter Property="Background" Value="#252535"/>
-                                        </Trigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </ListBox.ItemContainerStyle>
-                            <ListBox.ItemTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding}" TextWrapping="Wrap"
-                                               ToolTip="{Binding}" FontSize="10"/>
-                                </DataTemplate>
-                            </ListBox.ItemTemplate>
-                        </ListBox>
-                    </Grid>
-                </Border>
+                        <!-- 드래그앤드롭 영역 + 폴더 목록 -->
+                        <Border x:Name="DropZone" Height="110"
+                                BorderBrush="#444455" BorderThickness="1" CornerRadius="6"
+                                Background="#1E1E28" Margin="0,0,0,10">
+                            <Grid>
+                                <TextBlock x:Name="DropHint"
+                                           Text="폴더를 여기에&#x0a;드래그 앤 드롭"
+                                           HorizontalAlignment="Center" VerticalAlignment="Center"
+                                           TextAlignment="Center" FontSize="12"
+                                           Foreground="#555566" Visibility="Visible"/>
+                                <ListBox x:Name="FolderListBox"
+                                         Background="Transparent" BorderThickness="0"
+                                         Foreground="{StaticResource TextPrimary}" FontSize="11"
+                                         ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                         SelectionChanged="FolderList_SelectionChanged">
+                                    <ListBox.ItemContainerStyle>
+                                        <Style TargetType="ListBoxItem">
+                                            <Setter Property="Padding" Value="6,4"/>
+                                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                            <Style.Triggers>
+                                                <Trigger Property="IsSelected" Value="True">
+                                                    <Setter Property="Background" Value="#2A2A40"/>
+                                                </Trigger>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background" Value="#252535"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </ListBox.ItemContainerStyle>
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding}" TextWrapping="Wrap"
+                                                       ToolTip="{Binding}" FontSize="10"/>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+                            </Grid>
+                        </Border>
 
-                <!-- 스캔 옵션 -->
-                <StackPanel Grid.Row="3" Margin="0,0,0,10">
-                    <TextBlock Text="스캔 대상" FontSize="11" FontWeight="SemiBold"
-                               Foreground="{StaticResource TextSecondary}" Margin="0,0,0,6"/>
-                    <CheckBox x:Name="ChkEmpty"     Content="빈 폴더" IsChecked="True" Margin="0,3"/>
-                    <CheckBox x:Name="ChkVsArtifact" Content="VS 빌드 아티팩트 (bin/obj만)" IsChecked="True" Margin="0,3"/>
-                    <CheckBox x:Name="ChkEmptyFile"  Content="0바이트 빈 파일" Margin="0,3"/>
+                        <!-- 스캔 옵션 -->
+                        <StackPanel Margin="0,0,0,10">
+                            <TextBlock Text="스캔 대상" FontSize="11" FontWeight="SemiBold"
+                                       Foreground="{StaticResource TextSecondary}" Margin="0,0,0,6"/>
+                            <CheckBox x:Name="ChkEmpty"      Content="빈 폴더" IsChecked="True" Margin="0,3"/>
+                            <CheckBox x:Name="ChkVsArtifact" Content="VS 빌드 아티팩트" IsChecked="True" Margin="0,3"
+                                      ToolTip="bin/obj 폴더와 .user 등 아티팩트 파일만 남은 폴더를 탐지합니다."/>
+                            <CheckBox x:Name="ChkEmptyFile"  Content="0바이트 빈 파일" Margin="0,3"/>
 
-                    <TextBlock Text="삭제 방법" FontSize="11" FontWeight="SemiBold"
-                               Foreground="{StaticResource TextSecondary}" Margin="0,10,0,6"/>
-                    <CheckBox x:Name="ChkRecycleBin"  Content="휴지통으로 이동" IsChecked="True" Margin="0,3"
-                              Checked="RecycleBin_Checked"/>
-                    <CheckBox x:Name="ChkPreview"  Content="미리보기 (삭제 안 함)" Margin="0,3"
-                              Checked="Preview_Checked" Unchecked="Preview_Unchecked"/>
-                </StackPanel>
+                            <TextBlock Text="삭제 방법" FontSize="11" FontWeight="SemiBold"
+                                       Foreground="{StaticResource TextSecondary}" Margin="0,10,0,6"/>
+                            <CheckBox x:Name="ChkRecycleBin" Content="휴지통으로 이동" IsChecked="True" Margin="0,3"/>
+                            <CheckBox x:Name="ChkPreview"    Content="미리보기 (삭제 안 함)" Margin="0,3"
+                                      Checked="Preview_Checked" Unchecked="Preview_Unchecked"/>
+                        </StackPanel>
 
-                <!-- 제외 폴더 편집 -->
-                <StackPanel Grid.Row="4" Margin="0,0,0,10">
-                    <TextBlock Text="제외 폴더" FontSize="11" FontWeight="SemiBold"
-                               Foreground="{StaticResource TextSecondary}" Margin="0,0,0,4"/>
-                    <Border Background="#1E1E28" BorderBrush="#333344" BorderThickness="1" CornerRadius="4"
-                            MaxHeight="70" Margin="0,0,0,4">
-                        <ListBox x:Name="ExcludeListBox"
-                                 Background="Transparent" BorderThickness="0"
-                                 Foreground="{StaticResource TextPrimary}" FontSize="10"
-                                 ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                            <ListBox.ItemContainerStyle>
-                                <Style TargetType="ListBoxItem">
-                                    <Setter Property="Padding" Value="4,2"/>
-                                    <Style.Triggers>
-                                        <Trigger Property="IsSelected" Value="True">
-                                            <Setter Property="Background" Value="#2A2A40"/>
-                                        </Trigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </ListBox.ItemContainerStyle>
-                        </ListBox>
-                    </Border>
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="4"/>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="4"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        <TextBox x:Name="ExcludeInput" Grid.Column="0"
-                                 Background="#252530" Foreground="{StaticResource TextPrimary}"
-                                 BorderBrush="#333344" BorderThickness="1"
-                                 Padding="4,3" FontSize="10" CaretBrush="#E0E0E0"
-                                 ToolTip="제외할 폴더명 입력 (예: .cache)"
-                                 KeyDown="ExcludeInput_KeyDown"/>
-                        <Button Grid.Column="2" Content="추가"
-                                Style="{StaticResource GhostButton}" Padding="6,3" FontSize="10"
-                                Click="AddExclude_Click"/>
-                        <Button Grid.Column="4" Content="제거"
-                                Style="{StaticResource GhostButton}" Padding="6,3" FontSize="10"
-                                Click="RemoveExclude_Click"/>
-                    </Grid>
-                </StackPanel>
+                        <!-- 제외 폴더 편집 -->
+                        <StackPanel Margin="0,0,0,10">
+                            <TextBlock Text="제외 폴더" FontSize="11" FontWeight="SemiBold"
+                                       Foreground="{StaticResource TextSecondary}" Margin="0,0,0,4"/>
+                            <Border Background="#1E1E28" BorderBrush="#333344" BorderThickness="1" CornerRadius="4"
+                                    MaxHeight="65" Margin="0,0,0,4">
+                                <ListBox x:Name="ExcludeListBox"
+                                         Background="Transparent" BorderThickness="0"
+                                         Foreground="{StaticResource TextPrimary}" FontSize="10"
+                                         ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                                    <ListBox.ItemContainerStyle>
+                                        <Style TargetType="ListBoxItem">
+                                            <Setter Property="Padding" Value="4,2"/>
+                                            <Style.Triggers>
+                                                <Trigger Property="IsSelected" Value="True">
+                                                    <Setter Property="Background" Value="#2A2A40"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </ListBox.ItemContainerStyle>
+                                </ListBox>
+                            </Border>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="4"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="4"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBox x:Name="ExcludeInput" Grid.Column="0"
+                                         Background="#252530" Foreground="{StaticResource TextPrimary}"
+                                         BorderBrush="#333344" BorderThickness="1"
+                                         Padding="4,3" FontSize="10" CaretBrush="#E0E0E0"
+                                         ToolTip="제외할 폴더명 입력 (예: .cache)"
+                                         KeyDown="ExcludeInput_KeyDown"/>
+                                <Button Grid.Column="2" Content="추가"
+                                        Style="{StaticResource GhostButton}" Padding="6,3" FontSize="10"
+                                        Click="AddExclude_Click"/>
+                                <Button Grid.Column="4" Content="제거"
+                                        Style="{StaticResource GhostButton}" Padding="6,3" FontSize="10"
+                                        Click="RemoveExclude_Click"/>
+                            </Grid>
+                        </StackPanel>
 
-                <!-- 통계 -->
-                <Border Grid.Row="5" Background="#1E1E28" CornerRadius="6" Padding="8,6" Margin="0,0,0,10">
+                        <!-- VS 아티팩트 폴더명 -->
+                        <StackPanel Margin="0,0,0,10">
+                            <TextBlock Text="아티팩트 폴더명" FontSize="11" FontWeight="SemiBold"
+                                       Foreground="{StaticResource TextSecondary}" Margin="0,0,0,4"
+                                       ToolTip="VS 아티팩트로 간주할 폴더명 목록 (예: bin, obj)"/>
+                            <Border Background="#1E1E28" BorderBrush="#333344" BorderThickness="1" CornerRadius="4"
+                                    MaxHeight="55" Margin="0,0,0,4">
+                                <ListBox x:Name="ArtifactListBox"
+                                         Background="Transparent" BorderThickness="0"
+                                         Foreground="{StaticResource TextPrimary}" FontSize="10"
+                                         ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                                    <ListBox.ItemContainerStyle>
+                                        <Style TargetType="ListBoxItem">
+                                            <Setter Property="Padding" Value="4,2"/>
+                                            <Style.Triggers>
+                                                <Trigger Property="IsSelected" Value="True">
+                                                    <Setter Property="Background" Value="#2A2A40"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </ListBox.ItemContainerStyle>
+                                </ListBox>
+                            </Border>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="4"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="4"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBox x:Name="ArtifactInput" Grid.Column="0"
+                                         Background="#252530" Foreground="{StaticResource TextPrimary}"
+                                         BorderBrush="#333344" BorderThickness="1"
+                                         Padding="4,3" FontSize="10" CaretBrush="#E0E0E0"
+                                         ToolTip="아티팩트 폴더명 입력 (예: dist)"
+                                         KeyDown="ArtifactInput_KeyDown"/>
+                                <Button Grid.Column="2" Content="추가"
+                                        Style="{StaticResource GhostButton}" Padding="6,3" FontSize="10"
+                                        Click="AddArtifact_Click"/>
+                                <Button Grid.Column="4" Content="제거"
+                                        Style="{StaticResource GhostButton}" Padding="6,3" FontSize="10"
+                                        Click="RemoveArtifact_Click"/>
+                            </Grid>
+                        </StackPanel>
+
+                    </StackPanel>
+                </ScrollViewer>
+
+                <!-- 통계 (고정) -->
+                <Border Grid.Row="1" Background="#1E1E28" Margin="12,6,12,6" CornerRadius="6" Padding="8,6">
                     <StackPanel>
                         <Grid Margin="0,1">
                             <TextBlock Text="탐지된 항목" FontSize="10" Foreground="{StaticResource TextSecondary}"/>
@@ -424,8 +471,8 @@
                     </StackPanel>
                 </Border>
 
-                <!-- 스캔 버튼 -->
-                <Button Grid.Row="6" x:Name="ScanBtn" Content="스캔 시작"
+                <!-- 스캔 버튼 (고정) -->
+                <Button Grid.Row="2" Margin="12,0,12,12" x:Name="ScanBtn" Content="스캔 시작"
                         Style="{StaticResource ActionButton}" FontSize="13" FontWeight="SemiBold"
                         Padding="12,10" Click="Scan_Click"/>
             </Grid>
@@ -463,6 +510,9 @@
                         <Button x:Name="SelectNoneBtn" Content="선택 해제"
                                 Style="{StaticResource GhostButton}" Margin="0,0,6,0"
                                 Click="SelectNone_Click" IsEnabled="False"/>
+                        <Button x:Name="InvertBtn" Content="반전"
+                                Style="{StaticResource GhostButton}" Margin="0,0,6,0"
+                                Click="InvertSelection_Click" IsEnabled="False"/>
                         <Button x:Name="CopyResultBtn" Content="결과 복사"
                                 Style="{StaticResource GhostButton}" Margin="0,0,6,0"
                                 Click="CopyResult_Click" IsEnabled="False"/>
@@ -472,6 +522,9 @@
                         <Button x:Name="DeleteBtn" Content="삭제"
                                 Style="{StaticResource DangerButton}"
                                 Click="Delete_Click" IsEnabled="False"/>
+                        <Button Content="?" ToolTip="단축키 및 사용 안내 (F1)"
+                                Style="{StaticResource GhostButton}" Margin="10,0,0,0"
+                                Padding="8,4" Click="Help_Click"/>
                     </StackPanel>
                 </Grid>
             </Border>
@@ -516,7 +569,39 @@
                           FontSize="11"
                           ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                           Visibility="Collapsed"
-                          SelectionMode="Extended">
+                          SelectionMode="Extended"
+                          GridViewColumnHeader.Click="ColumnHeader_Click">
+                    <ListView.ContextMenu>
+                        <ContextMenu Background="#2A2A35" BorderBrush="#444455" Foreground="#E0E0E0"
+                                     FontSize="12">
+                            <MenuItem Header="탐색기에서 열기" Click="OpenInExplorer_Click">
+                                <MenuItem.Style>
+                                    <Style TargetType="MenuItem">
+                                        <Setter Property="Background" Value="Transparent"/>
+                                        <Setter Property="Foreground" Value="#E0E0E0"/>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsHighlighted" Value="True">
+                                                <Setter Property="Background" Value="#3A3A50"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </MenuItem.Style>
+                            </MenuItem>
+                            <MenuItem Header="경로 복사" Click="CopyPath_Click">
+                                <MenuItem.Style>
+                                    <Style TargetType="MenuItem">
+                                        <Setter Property="Background" Value="Transparent"/>
+                                        <Setter Property="Foreground" Value="#E0E0E0"/>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsHighlighted" Value="True">
+                                                <Setter Property="Background" Value="#3A3A50"/>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </MenuItem.Style>
+                            </MenuItem>
+                        </ContextMenu>
+                    </ListView.ContextMenu>
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Width="34">

@@ -1,0 +1,53 @@
+<UserControl x:Class="SysClean.Views.HistoryView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Background="#1A1A1A">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- 상단 헤더 -->
+        <Border Grid.Row="0" Background="#1E1E1E" Padding="20,16" BorderBrush="#333" BorderThickness="0,0,0,1">
+            <StackPanel>
+                <TextBlock Text="청소 기록" FontSize="18" FontWeight="Bold" Foreground="#E0E0E0"/>
+                <TextBlock x:Name="TbSubtitle" Text="청소 작업 이력을 확인합니다."
+                           FontSize="12" Foreground="#666" Margin="0,4,0,0"/>
+            </StackPanel>
+        </Border>
+
+        <!-- 기록 목록 -->
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <StackPanel x:Name="HistoryPanel" Margin="20,16">
+
+                <!-- 기록이 없을 때 -->
+                <TextBlock x:Name="TbEmpty"
+                           Text="아직 청소 기록이 없습니다.&#x0a;시스템 청소 탭에서 청소를 실행하면 기록이 여기에 표시됩니다."
+                           Foreground="#444" FontSize="14" TextWrapping="Wrap"
+                           HorizontalAlignment="Center" Margin="0,60,0,0" TextAlignment="Center"
+                           LineHeight="24"/>
+            </StackPanel>
+        </ScrollViewer>
+
+        <!-- 하단 버튼 바 -->
+        <Border Grid.Row="2" Background="#1E1E1E" BorderBrush="#333" BorderThickness="0,1,0,0" Padding="16,10">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock x:Name="TbSummary" Grid.Column="0"
+                           Text="" Foreground="#888" FontSize="12" VerticalAlignment="Center"/>
+
+                <Button Grid.Column="1" x:Name="BtnClear" Content="기록 지우기"
+                        Click="BtnClear_Click"
+                        Padding="12,6" FontSize="12"
+                        Background="#3A1A1A" Foreground="#EF5350" BorderBrush="#EF5350"/>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

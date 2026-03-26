@@ -1,0 +1,162 @@
+<Window x:Class="SysClean.Views.HelpDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="도움말 — Sys.Clean"
+        Width="540" Height="520"
+        Background="#1A1A1A"
+        FontFamily="Segoe UI" FontSize="13"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize"
+        ShowInTaskbar="False">
+
+    <Grid Margin="24,20,24,20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="16"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="16"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- 헤더 -->
+        <StackPanel Grid.Row="0">
+            <TextBlock Text="⌨️  단축키 &amp; 사용법" FontSize="18" FontWeight="Bold" Foreground="#E0E0E0"/>
+            <TextBlock Text="Sys.Clean 주요 기능과 키보드 단축키 안내" FontSize="12" Foreground="#666" Margin="0,4,0,0"/>
+        </StackPanel>
+
+        <!-- 내용 -->
+        <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto">
+            <StackPanel>
+
+                <!-- 시스템 청소 -->
+                <TextBlock Text="🧹  시스템 청소" FontSize="13" FontWeight="SemiBold"
+                           Foreground="#FF6B35" Margin="0,0,0,8"/>
+                <Border Background="#1E1E1E" CornerRadius="6" Padding="14,10" Margin="0,0,0,16">
+                    <StackPanel>
+                        <Grid Margin="0,0,0,6">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="160"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Border Background="#252525" CornerRadius="4" Padding="6,3" HorizontalAlignment="Left">
+                                <TextBlock Text="F5" FontFamily="Consolas" FontSize="12" Foreground="#FF6B35"/>
+                            </Border>
+                            <TextBlock Grid.Column="1" Text="분석 실행 / 취소" Foreground="#C0C0C0" VerticalAlignment="Center"/>
+                        </Grid>
+                        <Grid Margin="0,0,0,6">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="160"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Border Background="#252525" CornerRadius="4" Padding="6,3" HorizontalAlignment="Left">
+                                <TextBlock Text="Delete" FontFamily="Consolas" FontSize="12" Foreground="#FF6B35"/>
+                            </Border>
+                            <TextBlock Grid.Column="1" Text="청소 실행 (분석 완료 후)" Foreground="#C0C0C0" VerticalAlignment="Center"/>
+                        </Grid>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="160"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Border Background="#252525" CornerRadius="4" Padding="6,3" HorizontalAlignment="Left">
+                                <TextBlock Text="Ctrl+A" FontFamily="Consolas" FontSize="12" Foreground="#FF6B35"/>
+                            </Border>
+                            <TextBlock Grid.Column="1" Text="전체 항목 선택 / 해제" Foreground="#C0C0C0" VerticalAlignment="Center"/>
+                        </Grid>
+                    </StackPanel>
+                </Border>
+
+                <!-- 공통 단축키 -->
+                <TextBlock Text="⌨️  공통 단축키" FontSize="13" FontWeight="SemiBold"
+                           Foreground="#FF6B35" Margin="0,0,0,8"/>
+                <Border Background="#1E1E1E" CornerRadius="6" Padding="14,10" Margin="0,0,0,16">
+                    <StackPanel>
+                        <Grid Margin="0,0,0,6">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="160"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Border Background="#252525" CornerRadius="4" Padding="6,3" HorizontalAlignment="Left">
+                                <TextBlock Text="F1" FontFamily="Consolas" FontSize="12" Foreground="#FF6B35"/>
+                            </Border>
+                            <TextBlock Grid.Column="1" Text="이 도움말 열기" Foreground="#C0C0C0" VerticalAlignment="Center"/>
+                        </Grid>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="160"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Border Background="#252525" CornerRadius="4" Padding="6,3" HorizontalAlignment="Left">
+                                <TextBlock Text="Esc" FontFamily="Consolas" FontSize="12" Foreground="#FF6B35"/>
+                            </Border>
+                            <TextBlock Grid.Column="1" Text="이 창 닫기" Foreground="#C0C0C0" VerticalAlignment="Center"/>
+                        </Grid>
+                    </StackPanel>
+                </Border>
+
+                <!-- 탭별 기능 안내 -->
+                <TextBlock Text="📋  탭별 기능" FontSize="13" FontWeight="SemiBold"
+                           Foreground="#FF6B35" Margin="0,0,0,8"/>
+                <Border Background="#1E1E1E" CornerRadius="6" Padding="14,12" Margin="0,0,0,16">
+                    <StackPanel>
+                        <Grid Margin="0,0,0,8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="130"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="🧹  시스템 청소" FontWeight="SemiBold" Foreground="#E0E0E0"/>
+                            <TextBlock Grid.Column="1" Text="임시 파일, 브라우저 캐시, 개발자 캐시 등 불필요한 파일 삭제"
+                                       Foreground="#888" TextWrapping="Wrap"/>
+                        </Grid>
+                        <Grid Margin="0,0,0,8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="130"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="🔧  레지스트리" FontWeight="SemiBold" Foreground="#E0E0E0"/>
+                            <TextBlock Grid.Column="1" Text="존재하지 않는 파일을 참조하는 레지스트리 항목 검색·삭제 (자동 백업)"
+                                       Foreground="#888" TextWrapping="Wrap"/>
+                        </Grid>
+                        <Grid Margin="0,0,0,8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="130"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="🚀  시작 프로그램" FontWeight="SemiBold" Foreground="#E0E0E0"/>
+                            <TextBlock Grid.Column="1" Text="부팅 시 자동 실행 프로그램 관리 (활성화/비활성화/삭제)"
+                                       Foreground="#888" TextWrapping="Wrap"/>
+                        </Grid>
+                        <Grid Margin="0,0,0,8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="130"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="📦  설치된 프로그램" FontWeight="SemiBold" Foreground="#E0E0E0"/>
+                            <TextBlock Grid.Column="1" Text="설치된 소프트웨어 목록 조회·제거"
+                                       Foreground="#888" TextWrapping="Wrap"/>
+                        </Grid>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="130"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="📋  청소 기록" FontWeight="SemiBold" Foreground="#E0E0E0"/>
+                            <TextBlock Grid.Column="1" Text="과거 청소 작업 이력과 해제된 공간 확인"
+                                       Foreground="#888" TextWrapping="Wrap"/>
+                        </Grid>
+                    </StackPanel>
+                </Border>
+
+                <!-- 안전 안내 -->
+                <Border Background="#1E2A1A" CornerRadius="6" Padding="14,10" BorderBrush="#2A4A2A" BorderThickness="1">
+                    <TextBlock Text="✅  레지스트리 수정 시 자동으로 .reg 백업 파일이 생성됩니다.&#x0a;    문제 발생 시 해당 파일을 더블클릭하여 복원하세요."
+                               Foreground="#66BB6A" FontSize="12" TextWrapping="Wrap" LineHeight="22"/>
+                </Border>
+            </StackPanel>
+        </ScrollViewer>
+
+        <!-- 닫기 버튼 -->
+        <Button Grid.Row="4" Content="닫기 (Esc)" Click="BtnClose_Click"
+                HorizontalAlignment="Right" Padding="20,8" FontSize="13"/>
+    </Grid>
+</Window>

@@ -133,12 +133,12 @@ public partial class CleanerView : UserControl
         {
             BtnClean.IsEnabled = true;
             TbResultHeader.Text = $"총 {_targets.Count(t => !t.IsGroup && t.Size > 0)}개 항목 발견 — {CleanTarget.FormatSize(totalCleanable)} 정리 가능";
-            TbResultHeader.Foreground = new SolidColorBrush(Color.FromRgb(0x66, 0xBB, 0x6A));
+            TbResultHeader.Foreground = (Brush)Application.Current.FindResource("BrAccentGreen");
         }
         else
         {
             TbResultHeader.Text = "정리할 파일이 없습니다.";
-            TbResultHeader.Foreground = new SolidColorBrush(Color.FromRgb(0x88, 0x88, 0x88));
+            TbResultHeader.Foreground = (Brush)Application.Current.FindResource("BrFgSec");
         }
 
         TbStatus.Text = "분석 완료";
@@ -294,7 +294,7 @@ public partial class CleanerView : UserControl
         TbStatus.Text = $"청소 완료 — {CleanTarget.FormatSize(totalCleaned)} 해제";
         TbTotalSize.Text = "";
         TbResultHeader.Text = "청소가 완료되었습니다. 다시 분석하려면 분석 버튼을 클릭하세요.";
-        TbResultHeader.Foreground = new SolidColorBrush(Color.FromRgb(0x66, 0xBB, 0x6A));
+        TbResultHeader.Foreground = (Brush)Application.Current.FindResource("BrAccentGreen");
         ResultPanel.Children.Clear();
     }
 

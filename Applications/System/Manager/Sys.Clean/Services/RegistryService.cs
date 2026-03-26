@@ -16,7 +16,7 @@ public class RegistryService
             ct.ThrowIfCancellationRequested();
             ScanUninstallEntries(issues, ct);
 
-            ct.ThrowIfCacheFailed();
+            ct.ThrowIfCancellationRequested();
             ScanSharedDlls(issues, ct);
 
             ct.ThrowIfCancellationRequested();
@@ -139,33 +139,37 @@ public class RegistryService
 
     private static void ScanStartupEntries(List<RegistryIssue> issues, CancellationToken ct)
     {
-        string[] runPaths =
-        [
-            @"SOFTWARE\Microsoft\Windows\CurrentVersion\Run",
-            @"SOFTWARE\WOW6432Node\Microsoft\Windows\CurrentVersion\Run",
-        ];
+        const string runPath = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Run";
 
-        foreach (var path in runPaths)
+        // HKLM — 모든 사용자
+        ct.ThrowIfCancellationRequested();
+        ScanRunKey(issues, Registry.LocalMachine, runPath, "HKLM", ct);
+
+        // HKCU — 현재 사용자
+        ct.ThrowIfCancellationRequested();
+        ScanRunKey(issues, Registry.CurrentUser, runPath, "HKCU", ct);
+    }
+
+    private static void ScanRunKey(List<RegistryIssue> issues, RegistryKey hive,
+        string path, string hiveLabel, CancellationToken ct)
+    {
+        using var key = hive.OpenSubKey(path);
+        if (key == null) return;
+
+        foreach (var valName in key.GetValueNames())
         {
             ct.ThrowIfCancellationRequested();
-            using var key = Registry.LocalMachine.OpenSubKey(path);
-            if (key == null) continue;
-
-            foreach (var valName in key.GetValueNames())
+            var val = key.GetValue(valName)?.ToString() ?? "";
+            var exePath = ExtractExePath(val);
+            if (!string.IsNullOrEmpty(exePath) && !File.Exists(exePath))
             {
-                ct.ThrowIfCancellationRequested();
-                var val = key.GetValue(valName)?.ToString() ?? "";
-                var exePath = ExtractExePath(val);
-                if (!string.IsNullOrEmpty(exePath) && !File.Exists(exePath))
+                issues.Add(new RegistryIssue
                 {
-                    issues.Add(new RegistryIssue
-                    {
-                        Category = "시작 프로그램",
-                        KeyPath = $@"HKLM\{path}",
-                        ValueName = valName,
-                        Description = $"실행 파일 없음: {exePath}"
-                    });
-                }
+                    Category = "시작 프로그램",
+                    KeyPath = $@"{hiveLabel}\{path}",
+                    ValueName = valName,
+                    Description = $"실행 파일 없음: {exePath}"
+                });
             }
         }
     }
@@ -230,7 +234,3 @@ public class RegistryService
     }
 }
 
-internal static class CancellationTokenExtensions
-{
-    public static void ThrowIfCacheFailed(this CancellationToken ct) => ct.ThrowIfCancellationRequested();
-}

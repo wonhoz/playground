@@ -6,7 +6,6 @@ public class StartupService
 {
     private const string HklmRunPath = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Run";
     private const string HkcuRunPath = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Run";
-    private const string HklmDisabledPath = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Run\Disabled";
 
     public List<StartupEntry> GetEntries()
     {

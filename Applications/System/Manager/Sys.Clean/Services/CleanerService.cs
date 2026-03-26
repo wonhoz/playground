@@ -92,6 +92,30 @@ public class CleanerService
                 Category = "browser_cache", CleanerId = "firefox_cache",
                 Paths = FindFirefoxProfilePaths(appData, "cache2")
             },
+            new CleanTarget
+            {
+                Name = "Brave 캐시",
+                Description = "Brave 브라우저 캐시",
+                Category = "browser_cache", CleanerId = "brave_cache",
+                Paths = [Path.Combine(localAppData, @"BraveSoftware\Brave-Browser\User Data\Default\Cache"),
+                         Path.Combine(localAppData, @"BraveSoftware\Brave-Browser\User Data\Default\Code Cache")]
+            },
+            new CleanTarget
+            {
+                Name = "Vivaldi 캐시",
+                Description = "Vivaldi 브라우저 캐시",
+                Category = "browser_cache", CleanerId = "vivaldi_cache",
+                Paths = [Path.Combine(localAppData, @"Vivaldi\User Data\Default\Cache"),
+                         Path.Combine(localAppData, @"Vivaldi\User Data\Default\Code Cache")]
+            },
+            new CleanTarget
+            {
+                Name = "Opera 캐시",
+                Description = "Opera 브라우저 캐시",
+                Category = "browser_cache", CleanerId = "opera_cache",
+                Paths = [Path.Combine(appData, @"Opera Software\Opera Stable\Cache"),
+                         Path.Combine(localAppData, @"Programs\Opera\Cache")]
+            },
 
             // ── 브라우저 기록/쿠키 ──────────────────────────────────────
             new CleanTarget { IsGroup = true, Name = "브라우저 기록 · 쿠키", Category = "browser_history", CleanerId = "grp_history",

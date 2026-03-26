@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: Background — bright sky blue -->
+  <defs>
+    <linearGradient id="bgWS3" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#E8F4FF"/>
+      <stop offset="100%" stop-color="#C8E4FF"/>
+    </linearGradient>
+    <clipPath id="lensClip">
+      <circle cx="460" cy="460" r="270"/>
+    </clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bgWS3)"/>
+
+  <!-- Layer 2: Magnifier lens -->
+  <!-- Lens body (clipped content inside) -->
+  <circle cx="460" cy="460" r="270" fill="#DDEEFF" stroke="#1A3A8A" stroke-width="22"/>
+
+  <!-- Inside the lens: window list -->
+  <g clip-path="url(#lensClip)">
+    <!-- White background panel inside lens -->
+    <circle cx="460" cy="460" r="268" fill="#F0F8FF"/>
+
+    <!-- Window list rows -->
+    <!-- Row 1: selected/highlighted -->
+    <rect x="220" y="290" width="480" height="50" rx="6" fill="#1A3A8A"/>
+    <rect x="235" y="302" width="24" height="16" rx="3" fill="#DDEEFF" stroke="#88AADD" stroke-width="2"/>
+    <text x="270" y="319" font-family="'Segoe UI',Arial,sans-serif" font-size="22" font-weight="bold" fill="#FFFFFF">chrome.exe</text>
+    <text x="560" y="319" font-family="'Consolas','Courier New',monospace" font-size="18" fill="#88BBFF">100%</text>
+
+    <!-- Row 2 -->
+    <rect x="220" y="350" width="480" height="50" rx="6" fill="#E8F0FF"/>
+    <rect x="235" y="362" width="24" height="16" rx="3" fill="#FFFFFF" stroke="#88AADD" stroke-width="2"/>
+    <text x="270" y="379" font-family="'Segoe UI',Arial,sans-serif" font-size="22" fill="#1A2A5A">code.exe</text>
+    <text x="560" y="379" font-family="'Consolas','Courier New',monospace" font-size="18" fill="#3A5A9A">90%</text>
+
+    <!-- Row 3 -->
+    <rect x="220" y="410" width="480" height="50" rx="6" fill="#E8F0FF"/>
+    <rect x="235" y="422" width="24" height="16" rx="3" fill="#FFFFFF" stroke="#88AADD" stroke-width="2"/>
+    <text x="270" y="439" font-family="'Segoe UI',Arial,sans-serif" font-size="22" fill="#1A2A5A">notepad.exe</text>
+    <text x="560" y="439" font-family="'Consolas','Courier New',monospace" font-size="18" fill="#3A5A9A">75%</text>
+
+    <!-- Row 4 (faded) -->
+    <rect x="220" y="470" width="480" height="50" rx="6" fill="#F0F5FF"/>
+    <text x="270" y="499" font-family="'Segoe UI',Arial,sans-serif" font-size="22" fill="#8899AA">explorer.exe</text>
+    <text x="560" y="499" font-family="'Consolas','Courier New',monospace" font-size="18" fill="#AABBCC">100%</text>
+
+    <!-- Row 5 (faded) -->
+    <rect x="220" y="530" width="480" height="50" rx="6" fill="#F5F8FF"/>
+    <text x="270" y="559" font-family="'Segoe UI',Arial,sans-serif" font-size="22" fill="#AABBCC">slack.exe</text>
+    <text x="560" y="559" font-family="'Consolas','Courier New',monospace" font-size="18" fill="#CCDDEE">80%</text>
+
+    <!-- TopMost pin icon next to chrome row -->
+    <circle cx="697" cy="315" r="12" fill="#FF5500"/>
+    <text x="692" y="320" font-family="'Segoe UI',Arial,sans-serif" font-size="16" fill="#FFFFFF">📌</text>
+  </g>
+
+  <!-- Lens border (top layer) -->
+  <circle cx="460" cy="460" r="270" fill="none" stroke="#1A3A8A" stroke-width="22"/>
+
+  <!-- Lens glare -->
+  <path d="M320 280 Q350 270 360 310" fill="none" stroke="white" stroke-width="12" stroke-linecap="round" opacity="0.5"/>
+
+  <!-- Layer 3: Magnifier handle -->
+  <line x1="686" y1="686" x2="860" y2="860" stroke="#1A3A8A" stroke-width="40" stroke-linecap="round"/>
+  <line x1="686" y1="686" x2="860" y2="860" stroke="#3A6ACA" stroke-width="24" stroke-linecap="round"/>
+</svg>

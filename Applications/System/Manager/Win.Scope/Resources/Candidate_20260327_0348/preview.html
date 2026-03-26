@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>Win.Scope — Icon Candidates v2</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #1E2A3A; font-family: 'Segoe UI', sans-serif; color: #E0E0E0; padding: 40px; }
+  h1 { font-size: 28px; color: #74B9FF; margin-bottom: 6px; }
+  .subtitle { font-size: 14px; color: #888; margin-bottom: 8px; }
+  .style-note { font-size: 13px; color: #F9CA24; background: #2D3436; padding: 8px 16px; border-radius: 8px; display: inline-block; margin-bottom: 36px; }
+  .grid { display: flex; gap: 40px; flex-wrap: wrap; }
+  .card { background: #2D3436; border-radius: 16px; padding: 28px; border: 2px solid #3D4A5A; width: 320px; transition: all 0.2s; }
+  .card:hover { border-color: #74B9FF; transform: translateY(-3px); box-shadow: 0 8px 24px #0008; }
+  .icon-box { display: flex; gap: 16px; align-items: flex-end; margin-bottom: 20px; }
+  .icon-box img { border-radius: 14px; transition: transform 0.2s; cursor: zoom-in; box-shadow: 0 4px 12px #0006; }
+  .icon-box img:hover { transform: scale(2.4); transform-origin: bottom left; position: relative; z-index: 10; }
+  .icon-256 { width: 128px; height: 128px; }
+  .icon-48 { width: 48px; height: 48px; }
+  .icon-16 { width: 16px; height: 16px; }
+  .label { font-size: 18px; font-weight: bold; color: #74B9FF; margin-bottom: 8px; }
+  .concept { font-size: 13px; color: #AABBCC; margin-bottom: 6px; }
+  .palette { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
+  .swatch { width: 28px; height: 28px; border-radius: 8px; border: 2px solid #555; cursor: help; }
+  .tag { display: inline-block; padding: 3px 10px; border-radius: 6px; font-size: 12px; margin-right: 4px; font-weight: 700; }
+  .literal { background: #00B894; color: #FFFFFF; }
+  .metaphor { background: #6C5CE7; color: #FFFFFF; }
+  .hybrid { background: #E17055; color: #FFFFFF; }
+</style>
+</head>
+<body>
+<h1>Win.Scope</h1>
+<p class="subtitle">실행 창 관리자 — Z-Order/투명도/TopMost 제어 | Candidate_20260327_0348</p>
+<p class="style-note">✨ 스타일: 밝고 화사, 알록달록 컬러풀, 귀엽고 깔끔, 고대비, 큼직한 요소</p>
+<div class="grid">
+
+  <div class="card">
+    <div class="icon-box">
+      <img class="icon-256" src="icon_01.svg" alt="icon_01">
+      <img class="icon-48" src="icon_01.svg" alt="48px">
+      <img class="icon-16" src="icon_01.svg" alt="16px">
+    </div>
+    <div class="label">icon_01 <span class="tag literal">literal</span></div>
+    <div class="concept"><b>컨셉:</b> 3색 창 레이어 (FD79A8/55EFC4/흰색) + Z순서 인디케이터</div>
+    <div class="concept"><b>연결고리:</b> 앱 핵심 — 창들의 Z-Order 레이어 시각화</div>
+    <div class="palette">
+      <div class="swatch" style="background:#74B9FF" title="배경: 스카이블루"></div>
+      <div class="swatch" style="background:#FD79A8" title="뒷창: 핑크"></div>
+      <div class="swatch" style="background:#55EFC4" title="중간창: 민트"></div>
+      <div class="swatch" style="background:#FFFFFF" title="앞창: 흰색"></div>
+      <div class="swatch" style="background:#6C5CE7" title="앞창 타이틀: 퍼플"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-box">
+      <img class="icon-256" src="icon_02.svg" alt="icon_02">
+      <img class="icon-48" src="icon_02.svg" alt="48px">
+      <img class="icon-16" src="icon_02.svg" alt="16px">
+    </div>
+    <div class="label">icon_02 <span class="tag metaphor">metaphor</span></div>
+    <div class="concept"><b>컨셉:</b> 스코프 조준 십자선 + 중심에 창 — 선명한 흰 선 고대비</div>
+    <div class="concept"><b>연결고리:</b> "Scope" = 조준경, 원하는 창을 정확히 겨냥/제어</div>
+    <div class="palette">
+      <div class="swatch" style="background:#E17055" title="배경: 비비드 오렌지"></div>
+      <div class="swatch" style="background:#FFFFFF" title="십자선: 흰색"></div>
+      <div class="swatch" style="background:#6C5CE7" title="창 타이틀바: 퍼플"></div>
+      <div class="swatch" style="background:#2D3436" title="창 내부: 다크"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-box">
+      <img class="icon-256" src="icon_03.svg" alt="icon_03">
+      <img class="icon-48" src="icon_03.svg" alt="48px">
+      <img class="icon-16" src="icon_03.svg" alt="16px">
+    </div>
+    <div class="label">icon_03 <span class="tag hybrid">hybrid</span></div>
+    <div class="concept"><b>컨셉:</b> 핫핑크 돋보기 렌즈 + 안에 창 목록 3행 + TopMost 핀</div>
+    <div class="concept"><b>연결고리:</b> 렌즈로 실행 창들을 들여다보는 관찰자</div>
+    <div class="palette">
+      <div class="swatch" style="background:#FD79A8" title="배경: 핫핑크"></div>
+      <div class="swatch" style="background:#C0392B" title="렌즈 테두리: 다크 레드"></div>
+      <div class="swatch" style="background:#FFFFFF" title="렌즈 내부: 흰색"></div>
+      <div class="swatch" style="background:#6C5CE7" title="선택 행: 퍼플"></div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>Win.Scope — Icon Candidates</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #050A18; font-family: 'Segoe UI', sans-serif; color: #E0E0E0; padding: 40px; }
+  h1 { font-size: 28px; color: #00E5FF; margin-bottom: 6px; }
+  .subtitle { font-size: 14px; color: #888; margin-bottom: 40px; }
+  .grid { display: flex; gap: 40px; flex-wrap: wrap; }
+  .card { background: #0A1428; border-radius: 16px; padding: 28px; border: 1px solid #1A2A4A; width: 320px; }
+  .card:hover { border-color: #00E5FF; transform: translateY(-2px); transition: all 0.2s; }
+  .icon-box { display: flex; gap: 16px; align-items: flex-end; margin-bottom: 20px; }
+  .icon-box img { border-radius: 12px; transition: transform 0.2s; cursor: zoom-in; }
+  .icon-box img:hover { transform: scale(2.2); transform-origin: bottom left; position: relative; z-index: 10; }
+  .icon-256 { width: 128px; height: 128px; }
+  .icon-48 { width: 48px; height: 48px; }
+  .icon-16 { width: 16px; height: 16px; }
+  .label { font-size: 18px; font-weight: bold; color: #00E5FF; margin-bottom: 8px; }
+  .concept { font-size: 13px; color: #AABBCC; margin-bottom: 6px; }
+  .palette { display: flex; gap: 6px; margin-top: 10px; }
+  .swatch { width: 24px; height: 24px; border-radius: 6px; border: 1px solid #333; }
+  .tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; margin-right: 4px; }
+  .literal { background: #1A3A1A; color: #88DD88; border: 1px solid #2A6A2A; }
+  .metaphor { background: #1A1A4A; color: #8888FF; border: 1px solid #2A2A8A; }
+  .hybrid { background: #2A1A0A; color: #FFAA44; border: 1px solid #5A3A10; }
+</style>
+</head>
+<body>
+<h1>Win.Scope</h1>
+<p class="subtitle">실행 창 관리자 — 모든 창의 투명도/Z-Order/TopMost 실시간 제어 | Candidate_20260327_0202</p>
+<div class="grid">
+
+  <div class="card">
+    <div class="icon-box">
+      <img class="icon-256" src="icon_01.svg" alt="icon_01">
+      <img class="icon-48" src="icon_01.svg" alt="icon_01 48px">
+      <img class="icon-16" src="icon_01.svg" alt="icon_01 16px">
+    </div>
+    <div class="label">icon_01 <span class="tag literal">literal</span></div>
+    <div class="concept"><b>컨셉:</b> 겹쳐진 창 3개 (Z-Order 레이어) + 오른쪽에 Z축 화살표</div>
+    <div class="concept"><b>구성:</b> 레이어드 | <b>연결고리:</b> 앱 기능 그대로 — 창들의 Z-Order 레이어</div>
+    <div class="palette">
+      <div class="swatch" style="background:#1A0A2E" title="배경: 딥 퍼플"></div>
+      <div class="swatch" style="background:#00E5FF" title="앞창: 시안"></div>
+      <div class="swatch" style="background:#3A5A9A" title="중간창: 미드 블루"></div>
+      <div class="swatch" style="background:#4A3A6A" title="뒷창: 다크 퍼플"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-box">
+      <img class="icon-256" src="icon_02.svg" alt="icon_02">
+      <img class="icon-48" src="icon_02.svg" alt="icon_02 48px">
+      <img class="icon-16" src="icon_02.svg" alt="icon_02 16px">
+    </div>
+    <div class="label">icon_02 <span class="tag metaphor">metaphor</span></div>
+    <div class="concept"><b>컨셉:</b> 스코프 조준 십자선 안에 미니 창 — "Win.Scope" 네이밍 직결</div>
+    <div class="concept"><b>구성:</b> 기하학 추상 | <b>연결고리:</b> Scope = 조준경, 특정 창을 정확히 겨냥</div>
+    <div class="palette">
+      <div class="swatch" style="background:#080C08" title="배경: 거의 검정"></div>
+      <div class="swatch" style="background:#00FF41" title="십자선: 형광 녹색"></div>
+      <div class="swatch" style="background:#00CC33" title="보조: 미드 그린"></div>
+      <div class="swatch" style="background:#0A1A0A" title="창 내부: 다크 그린"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-box">
+      <img class="icon-256" src="icon_03.svg" alt="icon_03">
+      <img class="icon-48" src="icon_03.svg" alt="icon_03 48px">
+      <img class="icon-16" src="icon_03.svg" alt="icon_03 16px">
+    </div>
+    <div class="label">icon_03 <span class="tag hybrid">hybrid</span></div>
+    <div class="concept"><b>컨셉:</b> 돋보기 렌즈 안에 창 목록 — TopMost 핀이 표시됨</div>
+    <div class="concept"><b>구성:</b> 중앙 심볼 | <b>연결고리:</b> 렌즈로 숨겨진 창 목록을 들여다보는 행위</div>
+    <div class="palette">
+      <div class="swatch" style="background:#C8E4FF" title="배경: 라이트 스카이블루"></div>
+      <div class="swatch" style="background:#1A3A8A" title="렌즈 테두리: 진파랑"></div>
+      <div class="swatch" style="background:#FFFFFF" title="목록 배경: 흰색"></div>
+      <div class="swatch" style="background:#FF5500" title="TopMost 핀: 레드오렌지"></div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

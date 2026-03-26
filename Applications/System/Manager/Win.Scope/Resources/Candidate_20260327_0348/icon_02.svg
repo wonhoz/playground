@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: Background — bright vivid orange -->
+  <rect width="1024" height="1024" rx="190" fill="#E17055"/>
+
+  <!-- Layer 2: Scope crosshair -->
+
+  <!-- Outer ring -->
+  <circle cx="512" cy="480" r="360" fill="none" stroke="#FFFFFF" stroke-width="28"/>
+  <!-- Middle ring -->
+  <circle cx="512" cy="480" r="240" fill="none" stroke="#FFFFFF" stroke-width="16"/>
+
+  <!-- Crosshair lines (thick, with gap in center) -->
+  <line x1="152" y1="480" x2="360" y2="480" stroke="#FFFFFF" stroke-width="22" stroke-linecap="round"/>
+  <line x1="664" y1="480" x2="872" y2="480" stroke="#FFFFFF" stroke-width="22" stroke-linecap="round"/>
+  <line x1="512" y1="120" x2="512" y2="328" stroke="#FFFFFF" stroke-width="22" stroke-linecap="round"/>
+  <line x1="512" y1="632" x2="512" y2="840" stroke="#FFFFFF" stroke-width="22" stroke-linecap="round"/>
+
+  <!-- Center: mini window (large enough to see at small sizes) -->
+  <rect x="372" y="340" width="280" height="200" rx="18" fill="#2D3436" stroke="#FFFFFF" stroke-width="16"/>
+  <!-- Title bar -->
+  <rect x="372" y="340" width="280" height="52" rx="18" fill="#6C5CE7" stroke="#FFFFFF" stroke-width="16"/>
+  <rect x="372" y="362" width="280" height="30" rx="0" fill="#6C5CE7"/>
+  <!-- Window close buttons (big, visible) -->
+  <circle cx="606" cy="366" r="12" fill="#FF6B6B"/>
+  <circle cx="580" cy="366" r="12" fill="#FFEAA7"/>
+  <circle cx="554" cy="366" r="12" fill="#55EFC4"/>
+  <!-- Window content lines -->
+  <rect x="392" y="408" width="120" height="16" rx="5" fill="#636E72"/>
+  <rect x="392" y="436" width="180" height="16" rx="5" fill="#636E72"/>
+  <rect x="392" y="464" width="100" height="16" rx="5" fill="#636E72"/>
+
+  <!-- Layer 3: HUD readouts at bottom of screen -->
+  <rect x="152" y="880" width="720" height="80" rx="20" fill="#2D3436" opacity="0.85"/>
+  <text x="275" y="928" text-anchor="middle" font-family="'Consolas','Courier New',monospace" font-size="38" font-weight="700" fill="#55EFC4">Z:0</text>
+  <text x="430" y="928" text-anchor="middle" font-family="'Consolas','Courier New',monospace" font-size="38" font-weight="700" fill="#FFEAA7">100%</text>
+  <text x="620" y="928" text-anchor="middle" font-family="'Consolas','Courier New',monospace" font-size="38" font-weight="700" fill="#A29BFE">TOP✓</text>
+
+  <!-- Corner degree markers -->
+  <text x="175" y="168" font-family="'Segoe UI',Arial,sans-serif" font-size="32" fill="#FFFFFF" opacity="0.7">0°</text>
+  <text x="840" y="168" font-family="'Segoe UI',Arial,sans-serif" font-size="32" fill="#FFFFFF" opacity="0.7">90°</text>
+</svg>

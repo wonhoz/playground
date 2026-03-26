@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: Background — hot pink/magenta -->
+  <rect width="1024" height="1024" rx="190" fill="#FD79A8"/>
+
+  <!-- Layer 2: Magnifier (large) -->
+  <defs>
+    <clipPath id="lensWS2">
+      <circle cx="446" cy="430" r="280"/>
+    </clipPath>
+  </defs>
+
+  <!-- Lens background -->
+  <circle cx="446" cy="430" r="280" fill="#FFFFFF" stroke="#C0392B" stroke-width="24"/>
+
+  <!-- Inside lens: window list (3 rows, large text) -->
+  <g clip-path="url(#lensWS2)">
+    <circle cx="446" cy="430" r="278" fill="#FFF5F8"/>
+
+    <!-- Row 1 (selected) -->
+    <rect x="196" y="228" width="500" height="80" rx="14" fill="#6C5CE7"/>
+    <text x="226" y="278" font-family="'Segoe UI',Arial,sans-serif" font-size="44" font-weight="700" fill="#FFFFFF">chrome.exe</text>
+    <rect x="612" y="240" width="74" height="36" rx="10" fill="#A29BFE"/>
+    <text x="649" y="264" text-anchor="middle" font-family="'Segoe UI',Arial,sans-serif" font-size="28" font-weight="700" fill="#FFFFFF">📌</text>
+
+    <!-- Row 2 -->
+    <rect x="196" y="322" width="500" height="80" rx="14" fill="#F0F0FF"/>
+    <text x="226" y="372" font-family="'Segoe UI',Arial,sans-serif" font-size="44" fill="#333">code.exe</text>
+    <rect x="612" y="334" width="74" height="36" rx="10" fill="#DDD"/>
+    <text x="649" y="358" text-anchor="middle" font-family="'Segoe UI',Arial,sans-serif" font-size="28" fill="#888">90%</text>
+
+    <!-- Row 3 -->
+    <rect x="196" y="416" width="500" height="80" rx="14" fill="#F0F0FF"/>
+    <text x="226" y="466" font-family="'Segoe UI',Arial,sans-serif" font-size="44" fill="#333">slack.exe</text>
+    <rect x="612" y="428" width="74" height="36" rx="10" fill="#DDD"/>
+    <text x="649" y="452" text-anchor="middle" font-family="'Segoe UI',Arial,sans-serif" font-size="28" fill="#888">80%</text>
+
+    <!-- Row hint (+more) -->
+    <text x="446" y="540" text-anchor="middle" font-family="'Segoe UI',Arial,sans-serif" font-size="36" fill="#BBAACC">+ 20개 더...</text>
+  </g>
+
+  <!-- Lens ring (front layer) -->
+  <circle cx="446" cy="430" r="280" fill="none" stroke="#C0392B" stroke-width="24"/>
+
+  <!-- Glare on lens -->
+  <path d="M310 270 Q336 256 344 294" fill="none" stroke="#FFFFFF" stroke-width="16" stroke-linecap="round" opacity="0.6"/>
+
+  <!-- Layer 3: Handle -->
+  <line x1="678" y1="660" x2="870" y2="860" stroke="#C0392B" stroke-width="46" stroke-linecap="round"/>
+  <line x1="678" y1="660" x2="870" y2="860" stroke="#FF6B8A" stroke-width="28" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!--
+    icon_02 | Sys.Clean
+    Concept : 도넛 게이지로 디스크 여유공간 시각화 (literal) — "앱 UI에서 바로 보는 디스크 여유공간 회복"
+    Pattern : 기하학 추상
+    Colors  : 딥 보라 배경 + 청록 게이지 + 흰색 텍스트
+  -->
+  <defs>
+    <linearGradient id="i2-bg" x1="0" y1="0" x2="1" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0%" stop-color="#B098FF"/>
+      <stop offset="100%" stop-color="#5C38D8"/>
+    </linearGradient>
+    <linearGradient id="i2-inner" x1="0" y1="0" x2="1" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0%" stop-color="#7050D0"/>
+      <stop offset="100%" stop-color="#4428A8"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#i2-bg)"/>
+
+  <!-- Layer 2: 도넛 게이지 -->
+  <!-- 뒤쪽 트랙 (사용된 공간, 어두운 보라) -->
+  <circle cx="512" cy="512" r="336" fill="none" stroke="#2C1880" stroke-width="128"/>
+  <!-- 여유 공간 (42%, 청록) — 전체원주≈2111, 42%≈887 -->
+  <circle cx="512" cy="512" r="336" fill="none" stroke="#2EEFC8" stroke-width="128"
+          stroke-dasharray="887 1224" stroke-linecap="round"
+          transform="rotate(-90 512 512)"/>
+  <!-- 게이지 위 광택 -->
+  <circle cx="512" cy="512" r="336" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="128"
+          stroke-dasharray="887 1224" stroke-linecap="round"
+          transform="rotate(-90 512 512)"/>
+
+  <!-- Layer 2: 중앙 원 -->
+  <circle cx="512" cy="512" r="222" fill="url(#i2-inner)"/>
+
+  <!-- Layer 3: 중앙 텍스트 -->
+  <!-- 퍼센트 -->
+  <text x="512" y="480" text-anchor="middle"
+        fill="#2EEFC8" font-size="168" font-weight="900"
+        font-family="Arial Black, Arial, sans-serif">42%</text>
+  <!-- FREE 레이블 -->
+  <text x="512" y="568" text-anchor="middle"
+        fill="#C8B8FF" font-size="72" font-weight="700"
+        font-family="Arial, sans-serif">FREE</text>
+
+  <!-- 도넛 바깥 장식 별 -->
+  <polygon points="196,192 212,236 258,236 222,264 236,308 196,282 156,308 170,264 134,236 180,236" fill="#FFDD34" opacity="0.9"/>
+  <polygon points="828,176 840,210 876,210 848,232 858,266 828,246 798,266 808,232 780,210 816,210" fill="white" opacity="0.8"/>
+  <!-- 작은 빛 점 -->
+  <circle cx="188" cy="568" r="16" fill="#2EEFC8" opacity="0.7"/>
+  <circle cx="836" cy="560" r="13" fill="#2EEFC8" opacity="0.6"/>
+  <circle cx="512" cy="142" r="12" fill="white" opacity="0.7"/>
+  <circle cx="512" cy="882" r="12" fill="white" opacity="0.7"/>
+</svg>

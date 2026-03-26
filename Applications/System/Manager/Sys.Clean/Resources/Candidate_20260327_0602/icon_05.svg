@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!--
+    icon_05 | Sys.Clean
+    Concept : "CLEAN" 굵은 텍스트 + 빗자루 (hybrid) — 앱 이름과 기능을 동시에 직접 표현
+    Pattern : 공간/장면
+    Colors  : 라임 그린 배경 + 흰색 텍스트 + 오렌지 빗자루
+  -->
+  <defs>
+    <linearGradient id="i5-bg" x1="0" y1="0" x2="1" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0%" stop-color="#C8F430"/>
+      <stop offset="100%" stop-color="#78CC00"/>
+    </linearGradient>
+    <linearGradient id="i5-broom" x1="0" y1="0" x2="1" y2="0" gradientUnits="objectBoundingBox">
+      <stop offset="0%" stop-color="#FFA030"/>
+      <stop offset="100%" stop-color="#FF6800"/>
+    </linearGradient>
+    <linearGradient id="i5-head" x1="0" y1="0" x2="0" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0%" stop-color="#FFE240"/>
+      <stop offset="100%" stop-color="#FFBA18"/>
+    </linearGradient>
+    <clipPath id="i5-clip">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+    <filter id="i5-shadow">
+      <feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="rgba(40,100,0,0.35)"/>
+    </filter>
+  </defs>
+
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#i5-bg)"/>
+
+  <!-- 배경 장식 원들 (은은한) -->
+  <circle cx="180" cy="200" r="140" fill="rgba(255,255,255,0.12)"/>
+  <circle cx="860" cy="830" r="160" fill="rgba(255,255,255,0.10)"/>
+  <circle cx="820" cy="230" r="100" fill="rgba(255,255,255,0.10)"/>
+
+  <!-- Layer 2: "CLEAN" 텍스트 -->
+  <text x="512" y="406"
+        text-anchor="middle"
+        fill="white"
+        font-size="226"
+        font-weight="900"
+        font-family="Arial Black, Impact, sans-serif"
+        filter="url(#i5-shadow)">CLEAN</text>
+
+  <!-- Layer 2 & 3: 빗자루 (텍스트 아래) -->
+  <g clip-path="url(#i5-clip)">
+    <!-- 손잡이 -->
+    <rect x="486" y="452" width="52" height="258" rx="26" fill="url(#i5-broom)"/>
+    <!-- 손잡이 하이라이트 -->
+    <rect x="496" y="464" width="16" height="240" rx="8" fill="rgba(255,255,255,0.32)"/>
+    <!-- 연결 링 -->
+    <rect x="456" y="692" width="112" height="36" rx="18" fill="#C05808"/>
+    <!-- 빗 헤드 몸통 -->
+    <path d="M 286 714 L 738 714 L 796 856 L 228 856 Z" fill="url(#i5-head)"/>
+    <!-- 빗 헤드 하이라이트 -->
+    <path d="M 286 714 L 738 714 L 772 782 L 252 782 Z" fill="rgba(255,255,255,0.24)"/>
+    <!-- 빗살 (7개) -->
+    <line x1="276" y1="856" x2="244" y2="968" stroke="#B07810" stroke-width="24" stroke-linecap="round"/>
+    <line x1="366" y1="856" x2="346" y2="970" stroke="#B07810" stroke-width="24" stroke-linecap="round"/>
+    <line x1="452" y1="856" x2="442" y2="972" stroke="#B07810" stroke-width="24" stroke-linecap="round"/>
+    <line x1="512" y1="856" x2="512" y2="972" stroke="#B07810" stroke-width="24" stroke-linecap="round"/>
+    <line x1="572" y1="856" x2="582" y2="972" stroke="#B07810" stroke-width="24" stroke-linecap="round"/>
+    <line x1="658" y1="856" x2="678" y2="970" stroke="#B07810" stroke-width="24" stroke-linecap="round"/>
+    <line x1="748" y1="856" x2="780" y2="968" stroke="#B07810" stroke-width="24" stroke-linecap="round"/>
+  </g>
+
+  <!-- Layer 3: 장식 별/반짝이 -->
+  <polygon points="216,258 232,298 274,298 242,322 254,362 216,340 178,362 190,322 158,298 200,298" fill="white" opacity="0.85"/>
+  <polygon points="800,248 812,278 844,278 820,296 830,326 800,310 770,326 780,296 756,278 788,278" fill="white" opacity="0.80"/>
+  <circle cx="188" cy="576" r="18" fill="white" opacity="0.60"/>
+  <circle cx="836" cy="544" r="16" fill="white" opacity="0.55"/>
+  <circle cx="860" cy="400" r="12" fill="white" opacity="0.50"/>
+</svg>

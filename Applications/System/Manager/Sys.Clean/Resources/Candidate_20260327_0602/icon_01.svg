@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!--
+    icon_01 | Sys.Clean
+    Concept : 빗자루가 쓰레기 파티클을 쓸어내는 장면 (literal)
+    Pattern : 대각선/동적
+    Colors  : 민트 배경 + 갈색 손잡이 + 노란 빗 헤드 + 컬러풀 파티클
+  -->
+  <defs>
+    <linearGradient id="i1-bg" x1="0" y1="0" x2="1" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0%" stop-color="#90FCD8"/>
+      <stop offset="100%" stop-color="#1CD998"/>
+    </linearGradient>
+    <linearGradient id="i1-handle" x1="0" y1="0" x2="1" y2="0" gradientUnits="objectBoundingBox">
+      <stop offset="0%" stop-color="#D09040"/>
+      <stop offset="100%" stop-color="#8A5C20"/>
+    </linearGradient>
+    <linearGradient id="i1-head" x1="0" y1="0" x2="0" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0%" stop-color="#FFE840"/>
+      <stop offset="100%" stop-color="#FFB018"/>
+    </linearGradient>
+    <clipPath id="i1-clip">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#i1-bg)"/>
+
+  <!-- Layer 2: 빗자루 (약간 기울임 + 클립) -->
+  <g transform="rotate(-14 512 540)" clip-path="url(#i1-clip)">
+    <!-- 손잡이 -->
+    <rect x="474" y="80" width="76" height="472" rx="38" fill="url(#i1-handle)"/>
+    <!-- 손잡이 하이라이트 -->
+    <rect x="488" y="96" width="26" height="448" rx="13" fill="rgba(255,255,255,0.28)"/>
+    <!-- 빗 헤드 연결 링 -->
+    <rect x="418" y="528" width="188" height="52" rx="26" fill="#8A5C20"/>
+    <!-- 빗 헤드 몸통 -->
+    <path d="M 258 562 L 766 562 L 830 738 L 194 738 Z" fill="url(#i1-head)"/>
+    <!-- 빗 헤드 하이라이트 -->
+    <path d="M 258 562 L 766 562 L 790 628 L 234 628 Z" fill="rgba(255,255,255,0.22)"/>
+    <!-- 빗살 (7개) -->
+    <line x1="246" y1="738" x2="208" y2="888" stroke="#9A6410" stroke-width="28" stroke-linecap="round"/>
+    <line x1="344" y1="738" x2="320" y2="890" stroke="#9A6410" stroke-width="28" stroke-linecap="round"/>
+    <line x1="438" y1="738" x2="426" y2="892" stroke="#9A6410" stroke-width="28" stroke-linecap="round"/>
+    <line x1="512" y1="738" x2="512" y2="892" stroke="#9A6410" stroke-width="28" stroke-linecap="round"/>
+    <line x1="586" y1="738" x2="598" y2="892" stroke="#9A6410" stroke-width="28" stroke-linecap="round"/>
+    <line x1="680" y1="738" x2="704" y2="890" stroke="#9A6410" stroke-width="28" stroke-linecap="round"/>
+    <line x1="778" y1="738" x2="816" y2="888" stroke="#9A6410" stroke-width="28" stroke-linecap="round"/>
+  </g>
+
+  <!-- Layer 3: 먼지/쓰레기 파티클 -->
+  <!-- 파일 사각형들 -->
+  <g transform="rotate(-18 224 260)">
+    <rect x="190" y="220" width="68" height="84" rx="10" fill="#FF6B6B"/>
+    <polygon points="242,220 258,220 258,236" fill="#CC4040"/>
+    <line x1="204" y1="248" x2="244" y2="248" stroke="#FF9898" stroke-width="8" stroke-linecap="round"/>
+    <line x1="204" y1="268" x2="244" y2="268" stroke="#FF9898" stroke-width="8" stroke-linecap="round"/>
+  </g>
+  <g transform="rotate(12 200 420)">
+    <rect x="166" y="380" width="58" height="74" rx="8" fill="#48DBFB"/>
+    <polygon points="208,380 224,380 224,396" fill="#20AACC"/>
+    <line x1="178" y1="408" x2="212" y2="408" stroke="#80EEFF" stroke-width="7" stroke-linecap="round"/>
+    <line x1="178" y1="426" x2="212" y2="426" stroke="#80EEFF" stroke-width="7" stroke-linecap="round"/>
+  </g>
+  <!-- 먼지 원 파티클 -->
+  <circle cx="820" cy="218" r="38" fill="#FECA57"/>
+  <circle cx="860" cy="358" r="26" fill="#FF9FF3"/>
+  <circle cx="826" cy="484" r="20" fill="#FF9F43"/>
+  <!-- 별 파티클 (노란) -->
+  <polygon points="218,148 238,196 288,196 250,224 264,272 218,246 172,272 186,224 148,196 198,196" fill="#FFDD34"/>
+  <!-- 작은 반짝이 -->
+  <circle cx="852" cy="158" r="14" fill="white" opacity="0.9"/>
+  <circle cx="876" cy="430" r="10" fill="white" opacity="0.8"/>
+  <circle cx="790" cy="148" r="9" fill="#FFDD34" opacity="0.9"/>
+</svg>

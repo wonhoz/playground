@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!--
+    icon_03 | Sys.Clean
+    Concept : 청소 완료 체크마크 + 스파클 별 (metaphor) — "정리 후 OK! 상쾌하고 깨끗한 기분"
+    Pattern : 레이어드
+    Colors  : 산호/핑크 배경 + 흰색 체크마크 + 노란/오렌지 별
+  -->
+  <defs>
+    <linearGradient id="i3-bg" x1="0" y1="0" x2="0" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0%" stop-color="#FFB8C8"/>
+      <stop offset="100%" stop-color="#FF6E90"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#i3-bg)"/>
+
+  <!-- Layer 2: 체크마크 그림자 (깊이감) -->
+  <polyline points="180,524 398,766 844,274"
+            fill="none" stroke="rgba(160,0,40,0.22)" stroke-width="114"
+            stroke-linecap="round" stroke-linejoin="round"
+            transform="translate(8,12)"/>
+  <!-- Layer 2: 체크마크 메인 -->
+  <polyline points="180,524 398,766 844,274"
+            fill="none" stroke="white" stroke-width="114"
+            stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- 체크마크 내부 광택 라인 -->
+  <polyline points="180,524 398,766 844,274"
+            fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="32"
+            stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Layer 3: 별 스파클 -->
+  <!-- 큰 별 (노란) — 왼쪽 위 -->
+  <polygon points="196,200 218,258 278,258 230,294 248,352 196,318 144,352 162,294 114,258 174,258"
+           fill="#FFDD34"/>
+  <!-- 중간 별 (흰색) — 오른쪽 위 -->
+  <polygon points="836,184 854,232 904,232 866,260 880,308 836,280 792,308 806,260 768,232 818,232"
+           fill="white"/>
+  <!-- 중간 별 (오렌지) — 오른쪽 -->
+  <polygon points="884,546 898,584 938,584 908,608 918,646 884,622 850,646 860,608 830,584 870,584"
+           fill="#FFA030"/>
+  <!-- 작은 별 (흰색) — 왼쪽 하단 -->
+  <polygon points="178,770 190,804 226,804 198,824 208,858 178,838 148,858 158,824 130,804 166,804"
+           fill="white" opacity="0.9"/>
+  <!-- 미니 별 (노란) — 오른쪽 하단 -->
+  <polygon points="808,780 816,804 842,804 822,820 830,844 808,830 786,844 794,820 774,804 800,804"
+           fill="#FFDD34" opacity="0.85"/>
+  <!-- 반짝이 작은 원들 -->
+  <circle cx="854" cy="340" r="18" fill="white" opacity="0.85"/>
+  <circle cx="800" cy="290" r="12" fill="#FFDD34" opacity="0.9"/>
+  <circle cx="870" cy="266" r="10" fill="white" opacity="0.75"/>
+  <circle cx="200" cy="640" r="14" fill="white" opacity="0.7"/>
+  <circle cx="246" cy="700" r="10" fill="#FFDD34" opacity="0.8"/>
+</svg>

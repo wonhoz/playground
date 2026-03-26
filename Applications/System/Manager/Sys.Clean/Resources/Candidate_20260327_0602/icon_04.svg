@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!--
+    icon_04 | Sys.Clean
+    Concept : 비눗방울 버블 클러스터 (metaphor) — "세탁·세척처럼 캐시와 오염을 거품으로 씻어냄"
+    Pattern : 중앙 심볼
+    Colors  : 하늘색 배경 + 흰색/연한 컬러 반투명 버블
+  -->
+  <defs>
+    <linearGradient id="i4-bg" x1="0" y1="0" x2="0" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0%" stop-color="#A8ECFF"/>
+      <stop offset="100%" stop-color="#30B8F8"/>
+    </linearGradient>
+    <clipPath id="i4-clip">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+    <!-- 버블 필터 (광택) -->
+    <radialGradient id="i4-bubble-big" cx="35%" cy="32%" r="70%">
+      <stop offset="0%" stop-color="rgba(255,255,255,0.70)"/>
+      <stop offset="40%" stop-color="rgba(255,255,255,0.28)"/>
+      <stop offset="100%" stop-color="rgba(255,255,255,0.08)"/>
+    </radialGradient>
+    <radialGradient id="i4-bubble-mid" cx="32%" cy="30%" r="68%">
+      <stop offset="0%" stop-color="rgba(255,255,255,0.65)"/>
+      <stop offset="38%" stop-color="rgba(220,240,255,0.24)"/>
+      <stop offset="100%" stop-color="rgba(200,230,255,0.06)"/>
+    </radialGradient>
+    <radialGradient id="i4-bubble-sm" cx="30%" cy="28%" r="65%">
+      <stop offset="0%" stop-color="rgba(255,255,255,0.72)"/>
+      <stop offset="35%" stop-color="rgba(255,255,255,0.20)"/>
+      <stop offset="100%" stop-color="rgba(255,255,255,0.05)"/>
+    </radialGradient>
+    <radialGradient id="i4-bubble-pink" cx="30%" cy="30%" r="65%">
+      <stop offset="0%" stop-color="rgba(255,220,255,0.75)"/>
+      <stop offset="40%" stop-color="rgba(255,180,255,0.22)"/>
+      <stop offset="100%" stop-color="rgba(240,180,255,0.06)"/>
+    </radialGradient>
+    <radialGradient id="i4-bubble-yellow" cx="32%" cy="28%" r="68%">
+      <stop offset="0%" stop-color="rgba(255,255,200,0.75)"/>
+      <stop offset="40%" stop-color="rgba(255,240,150,0.22)"/>
+      <stop offset="100%" stop-color="rgba(255,235,100,0.06)"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#i4-bg)"/>
+
+  <!-- Layer 2 & 3: 버블 클러스터 -->
+  <g clip-path="url(#i4-clip)">
+
+    <!-- 중간 버블 (왼쪽) — 보라빛 -->
+    <circle cx="282" cy="400" r="172" fill="url(#i4-bubble-pink)" stroke="rgba(255,220,255,0.85)" stroke-width="12"/>
+    <!-- 하이라이트 -->
+    <ellipse cx="228" cy="336" rx="66" ry="42" fill="rgba(255,255,255,0.55)" transform="rotate(-22 228 336)"/>
+
+    <!-- 중간 버블 (오른쪽) — 노란빛 -->
+    <circle cx="762" cy="406" r="162" fill="url(#i4-bubble-yellow)" stroke="rgba(255,250,180,0.85)" stroke-width="12"/>
+    <!-- 하이라이트 -->
+    <ellipse cx="706" cy="342" rx="62" ry="40" fill="rgba(255,255,255,0.55)" transform="rotate(-24 706 342)"/>
+
+    <!-- 큰 버블 (중앙 하단) — 흰색 -->
+    <circle cx="512" cy="590" r="244" fill="url(#i4-bubble-big)" stroke="rgba(255,255,255,0.90)" stroke-width="14"/>
+    <!-- 큰 버블 하이라이트 -->
+    <ellipse cx="430" cy="490" rx="96" ry="62" fill="rgba(255,255,255,0.60)" transform="rotate(-24 430 490)"/>
+
+    <!-- 작은 버블들 -->
+    <circle cx="390" cy="216" r="82" fill="url(#i4-bubble-sm)" stroke="rgba(255,255,255,0.82)" stroke-width="9"/>
+    <ellipse cx="360" cy="184" rx="32" ry="20" fill="rgba(255,255,255,0.60)" transform="rotate(-20 360 184)"/>
+
+    <circle cx="648" cy="212" r="72" fill="url(#i4-bubble-mid)" stroke="rgba(200,240,255,0.82)" stroke-width="9"/>
+    <ellipse cx="616" cy="180" rx="28" ry="18" fill="rgba(255,255,255,0.58)" transform="rotate(-22 616 180)"/>
+
+    <circle cx="178" cy="618" r="94" fill="url(#i4-bubble-sm)" stroke="rgba(255,255,255,0.80)" stroke-width="10"/>
+    <ellipse cx="148" cy="580" rx="36" ry="24" fill="rgba(255,255,255,0.58)" transform="rotate(-20 148 580)"/>
+
+    <circle cx="840" cy="626" r="86" fill="url(#i4-bubble-pink)" stroke="rgba(255,220,255,0.80)" stroke-width="10"/>
+    <ellipse cx="808" cy="590" rx="34" ry="22" fill="rgba(255,255,255,0.58)" transform="rotate(-22 808 590)"/>
+
+    <!-- 미니 버블들 -->
+    <circle cx="512" cy="218" r="64" fill="url(#i4-bubble-yellow)" stroke="rgba(255,255,200,0.78)" stroke-width="8"/>
+    <ellipse cx="486" cy="192" rx="24" ry="16" fill="rgba(255,255,255,0.60)" transform="rotate(-20 486 192)"/>
+
+    <circle cx="142" cy="438" r="46" fill="url(#i4-bubble-sm)" stroke="rgba(255,255,255,0.75)" stroke-width="7"/>
+    <circle cx="882" cy="444" r="42" fill="url(#i4-bubble-mid)" stroke="rgba(200,240,255,0.75)" stroke-width="7"/>
+    <circle cx="378" cy="794" r="50" fill="url(#i4-bubble-pink)" stroke="rgba(255,220,255,0.75)" stroke-width="7"/>
+    <circle cx="646" cy="802" r="46" fill="url(#i4-bubble-yellow)" stroke="rgba(255,250,180,0.75)" stroke-width="7"/>
+  </g>
+</svg>

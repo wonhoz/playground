@@ -3,60 +3,74 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:MarkView"
         Title="단축키 도움말"
-        Width="460" SizeToContent="Height"
+        Width="400" SizeToContent="Height"
         WindowStartupLocation="CenterOwner"
         ResizeMode="NoResize"
         ShowInTaskbar="False">
-  <Border Padding="28,24">
+  <Window.Resources>
+    <!-- 카테고리 헤더 스타일 -->
+    <Style x:Key="CategoryHeader" TargetType="TextBlock">
+      <Setter Property="FontSize"     Value="10"/>
+      <Setter Property="FontWeight"   Value="SemiBold"/>
+      <Setter Property="Foreground"   Value="{StaticResource AccentBrush}"/>
+      <Setter Property="Margin"       Value="0,14,0,6"/>
+    </Style>
+    <!-- 단축키 행 -->
+    <Style x:Key="ShortcutRow" TargetType="Grid">
+      <Setter Property="Margin" Value="0,2"/>
+    </Style>
+  </Window.Resources>
+
+  <Border Padding="24,20">
     <StackPanel>
+
+      <!-- 타이틀 -->
       <Grid Margin="0,0,0,16">
-        <TextBlock Text="단축키 도움말" FontSize="15" FontWeight="SemiBold"
+        <TextBlock Text="단축키 도움말" FontSize="14" FontWeight="Bold"
                    Foreground="{StaticResource TextBrush}"/>
         <Button HorizontalAlignment="Right" Style="{StaticResource IconButton}"
-                IsCancel="True" Padding="6,3">
-          <TextBlock Text="✕" FontSize="12"/>
+                IsCancel="True" Padding="6,3" ToolTip="닫기 (Esc)">
+          <TextBlock Text="✕" FontSize="12" Foreground="{StaticResource TextDimBrush}"/>
         </Button>
       </Grid>
-      <ItemsControl>
-        <ItemsControl.ItemTemplate>
-          <DataTemplate>
-            <Grid Margin="0,3">
-              <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="170"/>
-                <ColumnDefinition Width="*"/>
-              </Grid.ColumnDefinitions>
-              <Border Background="{StaticResource Surface2Brush}" CornerRadius="3"
-                      Padding="8,3" HorizontalAlignment="Left">
-                <TextBlock Text="{Binding Key}" FontFamily="Cascadia Code, Consolas, monospace"
-                           FontSize="11" Foreground="{StaticResource AccentBrush}"/>
-              </Border>
-              <TextBlock Grid.Column="1" Text="{Binding Desc}" FontSize="12"
-                         Foreground="{StaticResource TextBrush}" VerticalAlignment="Center"
-                         Margin="12,0,0,0"/>
-            </Grid>
-          </DataTemplate>
-        </ItemsControl.ItemTemplate>
-        <ItemsControl.Items>
-          <local:ShortcutEntry Key="Ctrl + O"         Desc="파일 열기"/>
-          <local:ShortcutEntry Key="Ctrl + N"         Desc="새 파일"/>
-          <local:ShortcutEntry Key="Ctrl + S"         Desc="저장"/>
-          <local:ShortcutEntry Key="Ctrl + Shift + S" Desc="다른 이름으로 저장"/>
-          <local:ShortcutEntry Key="Ctrl + W"         Desc="탭 닫기"/>
-          <local:ShortcutEntry Key="Ctrl + Tab"       Desc="다음 탭"/>
-          <local:ShortcutEntry Key="Ctrl + E"         Desc="편집 모드 전환"/>
-          <local:ShortcutEntry Key="Ctrl + T"         Desc="목차 패널 토글"/>
-          <local:ShortcutEntry Key="Ctrl + F"         Desc="찾기"/>
-          <local:ShortcutEntry Key="Ctrl + B"         Desc="HTML 내보내기"/>
-          <local:ShortcutEntry Key="Ctrl + P"         Desc="PDF 내보내기"/>
-          <local:ShortcutEntry Key="Ctrl + Shift + V" Desc="클립보드 붙여넣기 미리보기"/>
-          <local:ShortcutEntry Key="F5"               Desc="새로고침"/>
-          <local:ShortcutEntry Key="F11"              Desc="집중 모드 (툴바/상태바 숨김)"/>
-          <local:ShortcutEntry Key="F1"               Desc="단축키 도움말"/>
-          <local:ShortcutEntry Key="Ctrl + +"         Desc="에디터 폰트 크기 증가"/>
-          <local:ShortcutEntry Key="Ctrl + -"         Desc="에디터 폰트 크기 감소"/>
-          <local:ShortcutEntry Key="Esc"              Desc="찾기 초기화 / 도움말 닫기"/>
-        </ItemsControl.Items>
-      </ItemsControl>
+
+      <!-- 파일 -->
+      <TextBlock Text="파일" Style="{StaticResource CategoryHeader}"/>
+      <local:ShortcutRow Key="Ctrl + O"         Desc="파일 열기"/>
+      <local:ShortcutRow Key="Ctrl + N"         Desc="새 파일 (새 탭)"/>
+      <local:ShortcutRow Key="Ctrl + S"         Desc="저장"/>
+      <local:ShortcutRow Key="Ctrl + Shift + S" Desc="다른 이름으로 저장"/>
+      <local:ShortcutRow Key="Ctrl + W"         Desc="현재 탭 닫기"/>
+
+      <!-- 보기 -->
+      <TextBlock Text="보기" Style="{StaticResource CategoryHeader}"/>
+      <local:ShortcutRow Key="Ctrl + E"   Desc="편집 모드 전환"/>
+      <local:ShortcutRow Key="Ctrl + T"   Desc="목차(TOC) 패널 토글"/>
+      <local:ShortcutRow Key="F5"         Desc="현재 파일 새로고침"/>
+      <local:ShortcutRow Key="F11"        Desc="집중 모드 (툴바/상태바 숨김)"/>
+
+      <!-- 탐색 -->
+      <TextBlock Text="탐색" Style="{StaticResource CategoryHeader}"/>
+      <local:ShortcutRow Key="Ctrl + Tab"       Desc="다음 탭"/>
+      <local:ShortcutRow Key="Ctrl + Shift+Tab" Desc="이전 탭"/>
+      <local:ShortcutRow Key="Ctrl + F"         Desc="찾기"/>
+
+      <!-- 내보내기 -->
+      <TextBlock Text="내보내기" Style="{StaticResource CategoryHeader}"/>
+      <local:ShortcutRow Key="Ctrl + B" Desc="HTML로 내보내기"/>
+      <local:ShortcutRow Key="Ctrl + P" Desc="PDF로 내보내기"/>
+
+      <!-- 에디터 -->
+      <TextBlock Text="에디터" Style="{StaticResource CategoryHeader}"/>
+      <local:ShortcutRow Key="Ctrl + +"         Desc="폰트 크기 증가"/>
+      <local:ShortcutRow Key="Ctrl + -"         Desc="폰트 크기 감소"/>
+      <local:ShortcutRow Key="Ctrl + Shift + V" Desc="클립보드 내용 새 탭으로 열기"/>
+
+      <!-- 기타 -->
+      <TextBlock Text="기타" Style="{StaticResource CategoryHeader}"/>
+      <local:ShortcutRow Key="F1"  Desc="단축키 도움말"/>
+      <local:ShortcutRow Key="Esc" Desc="찾기 초기화"/>
+
     </StackPanel>
   </Border>
 </Window>

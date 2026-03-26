@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>Hotkey.Map — Icon Candidates</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #1A1A2E; font-family: 'Segoe UI', sans-serif; color: #E0E0E0; padding: 40px; }
+  h1 { font-size: 28px; color: #FFE066; margin-bottom: 6px; }
+  .subtitle { font-size: 14px; color: #888; margin-bottom: 40px; }
+  .grid { display: flex; gap: 40px; flex-wrap: wrap; }
+  .card { background: #16213E; border-radius: 16px; padding: 28px; border: 1px solid #2A3A5A; width: 320px; }
+  .card:hover { border-color: #FFE066; transform: translateY(-2px); transition: all 0.2s; }
+  .icon-box { display: flex; gap: 16px; align-items: flex-end; margin-bottom: 20px; }
+  .icon-box img { border-radius: 12px; transition: transform 0.2s; cursor: zoom-in; }
+  .icon-box img:hover { transform: scale(2.2); transform-origin: bottom left; position: relative; z-index: 10; }
+  .icon-256 { width: 128px; height: 128px; }
+  .icon-48 { width: 48px; height: 48px; }
+  .icon-16 { width: 16px; height: 16px; }
+  .label { font-size: 18px; font-weight: bold; color: #FFE066; margin-bottom: 8px; }
+  .concept { font-size: 13px; color: #AABBCC; margin-bottom: 6px; }
+  .palette { display: flex; gap: 6px; margin-top: 10px; }
+  .swatch { width: 24px; height: 24px; border-radius: 6px; border: 1px solid #333; }
+  .tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; margin-right: 4px; }
+  .literal { background: #1A3A1A; color: #88DD88; border: 1px solid #2A6A2A; }
+  .metaphor { background: #1A1A4A; color: #8888FF; border: 1px solid #2A2A8A; }
+  .hybrid { background: #2A1A0A; color: #FFAA44; border: 1px solid #5A3A10; }
+</style>
+</head>
+<body>
+<h1>Hotkey.Map</h1>
+<p class="subtitle">단축키 충돌 스캐너 — 키보드 전체를 시각 지도로 점유/가능/예약 상태 색상 표시 | Candidate_20260327_0202</p>
+<div class="grid">
+
+  <div class="card">
+    <div class="icon-box">
+      <img class="icon-256" src="icon_01.svg" alt="icon_01">
+      <img class="icon-48" src="icon_01.svg" alt="icon_01 48px">
+      <img class="icon-16" src="icon_01.svg" alt="icon_01 16px">
+    </div>
+    <div class="label">icon_01 <span class="tag literal">literal</span></div>
+    <div class="concept"><b>컨셉:</b> 미니 키보드 다이어그램 + 색상 코딩된 키 (초록=가능, 파랑=점유, 빨강=예약)</div>
+    <div class="concept"><b>구성:</b> 레이어드 | <b>연결고리:</b> 앱 UI 그대로 — 키보드 지도가 아이콘</div>
+    <div class="palette">
+      <div class="swatch" style="background:#0D1B2A" title="배경: 딥 네이비"></div>
+      <div class="swatch" style="background:#2ECC71" title="사용가능: 초록"></div>
+      <div class="swatch" style="background:#3D5A80" title="점유: 파랑"></div>
+      <div class="swatch" style="background:#EF5350" title="예약: 빨강"></div>
+      <div class="swatch" style="background:#2A2A40" title="수식키: 퍼플 다크"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-box">
+      <img class="icon-256" src="icon_02.svg" alt="icon_02">
+      <img class="icon-48" src="icon_02.svg" alt="icon_02 48px">
+      <img class="icon-16" src="icon_02.svg" alt="icon_02 16px">
+    </div>
+    <div class="label">icon_02 <span class="tag metaphor">metaphor</span></div>
+    <div class="concept"><b>컨셉:</b> "Ctrl+?" — 물음표 자리에 돋보기, 어떤 키가 비었는지 찾는 행위</div>
+    <div class="concept"><b>구성:</b> 기하학 추상 | <b>연결고리:</b> 단축키 조합 입력 → 가능 여부 확인</div>
+    <div class="palette">
+      <div class="swatch" style="background:#2D1B69" title="배경: 딥 퍼플"></div>
+      <div class="swatch" style="background:#FFE066" title="텍스트: 노란"></div>
+      <div class="swatch" style="background:#FF9F1C" title="물음표: 주황"></div>
+      <div class="swatch" style="background:#2ECC71" title="Free 태그"></div>
+      <div class="swatch" style="background:#EF5350" title="Sys 태그"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-box">
+      <img class="icon-256" src="icon_03.svg" alt="icon_03">
+      <img class="icon-48" src="icon_03.svg" alt="icon_03 48px">
+      <img class="icon-16" src="icon_03.svg" alt="icon_03 16px">
+    </div>
+    <div class="label">icon_03 <span class="tag hybrid">hybrid</span></div>
+    <div class="concept"><b>컨셉:</b> 격자 지도 + 위치핀 — 키들이 지도(Map)이고 점유된 키에 핀이 꽂힘</div>
+    <div class="concept"><b>구성:</b> 공간/장면 | <b>연결고리:</b> 앱 이름 "Map" = 지도, 키보드가 지형</div>
+    <div class="palette">
+      <div class="swatch" style="background:#2C1A0A" title="배경: 황토 다크"></div>
+      <div class="swatch" style="background:#E8A030" title="제목: 앰버"></div>
+      <div class="swatch" style="background:#00E5FF" title="핀: 시안"></div>
+      <div class="swatch" style="background:#FF6B35" title="핀: 주황"></div>
+      <div class="swatch" style="background:#EF5350" title="핀: 빨강"></div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

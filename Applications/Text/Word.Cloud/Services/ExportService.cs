@@ -14,7 +14,7 @@ public static class ExportService
         };
         if (dlg.ShowDialog() != true) return;
 
-        using var stream = File.OpenWrite(dlg.FileName);
+        using var stream = File.Create(dlg.FileName);
         bitmap.Encode(stream, SKEncodedImageFormat.Png, 100);
     }
 
@@ -36,7 +36,7 @@ public static class ExportService
         c.Clear(bgColor);
         c.DrawBitmap(bitmap, 0, 0);
 
-        using var stream = File.OpenWrite(dlg.FileName);
+        using var stream = File.Create(dlg.FileName);
         composite.Encode(stream, SKEncodedImageFormat.Jpeg, 95);
     }
 

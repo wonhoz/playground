@@ -84,9 +84,9 @@ public static class ColorTheme
     {
         if (themeIndex == 7) // Random
             return new SKColor(
-                (byte)_rng.Next(80, 256),
-                (byte)_rng.Next(80, 256),
-                (byte)_rng.Next(80, 256));
+                (byte)_rng.Next(120, 256),
+                (byte)_rng.Next(120, 256),
+                (byte)_rng.Next(120, 256));
 
         var palette = GetPalette(themeIndex);
         if (palette.Length == 0) return SKColors.White;

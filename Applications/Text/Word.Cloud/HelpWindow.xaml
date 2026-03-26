@@ -1,0 +1,135 @@
+<Window x:Class="WordCloud.HelpWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="단축키 도움말 — Word.Cloud"
+        Width="420" Height="380"
+        ResizeMode="NoResize"
+        Background="#131320"
+        WindowStartupLocation="CenterOwner"
+        KeyDown="Window_KeyDown">
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="12"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="12"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- 제목 -->
+        <TextBlock Grid.Row="0" Text="⌨ 단축키 도움말"
+                   Foreground="#E91E63" FontSize="14" FontWeight="SemiBold"/>
+
+        <!-- 단축키 목록 -->
+        <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto">
+            <StackPanel>
+
+                <!-- 생성 -->
+                <TextBlock Text="생성" Foreground="#E91E63" FontSize="11"
+                           FontWeight="SemiBold" Margin="0,0,0,6"/>
+                <Grid Margin="0,0,0,4">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="130"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Border Background="#1A1A28" BorderBrush="#2A2A3A" BorderThickness="1"
+                            CornerRadius="3" Padding="6,3" HorizontalAlignment="Left">
+                        <TextBlock Text="F5" Foreground="#E0E0E0" FontFamily="Consolas" FontSize="12"/>
+                    </Border>
+                    <TextBlock Grid.Column="1" Text="워드클라우드 생성" Foreground="#C0C0C8"
+                               FontSize="12" VerticalAlignment="Center"/>
+                </Grid>
+                <Grid Margin="0,0,0,12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="130"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Border Background="#1A1A28" BorderBrush="#2A2A3A" BorderThickness="1"
+                            CornerRadius="3" Padding="6,3" HorizontalAlignment="Left">
+                        <TextBlock Text="Esc" Foreground="#E0E0E0" FontFamily="Consolas" FontSize="12"/>
+                    </Border>
+                    <TextBlock Grid.Column="1" Text="생성 취소" Foreground="#C0C0C8"
+                               FontSize="12" VerticalAlignment="Center"/>
+                </Grid>
+
+                <!-- 파일 -->
+                <TextBlock Text="파일" Foreground="#E91E63" FontSize="11"
+                           FontWeight="SemiBold" Margin="0,0,0,6"/>
+                <Grid Margin="0,0,0,4">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="130"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Border Background="#1A1A28" BorderBrush="#2A2A3A" BorderThickness="1"
+                            CornerRadius="3" Padding="6,3" HorizontalAlignment="Left">
+                        <TextBlock Text="Ctrl + O" Foreground="#E0E0E0" FontFamily="Consolas" FontSize="12"/>
+                    </Border>
+                    <TextBlock Grid.Column="1" Text="텍스트 파일 불러오기" Foreground="#C0C0C8"
+                               FontSize="12" VerticalAlignment="Center"/>
+                </Grid>
+                <Grid Margin="0,0,0,12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="130"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Border Background="#1A1A28" BorderBrush="#2A2A3A" BorderThickness="1"
+                            CornerRadius="3" Padding="6,3" HorizontalAlignment="Left">
+                        <TextBlock Text="Ctrl + S" Foreground="#E0E0E0" FontFamily="Consolas" FontSize="12"/>
+                    </Border>
+                    <TextBlock Grid.Column="1" Text="PNG로 저장" Foreground="#C0C0C8"
+                               FontSize="12" VerticalAlignment="Center"/>
+                </Grid>
+
+                <!-- 편집 -->
+                <TextBlock Text="편집" Foreground="#E91E63" FontSize="11"
+                           FontWeight="SemiBold" Margin="0,0,0,6"/>
+                <Grid Margin="0,0,0,4">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="130"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Border Background="#1A1A28" BorderBrush="#2A2A3A" BorderThickness="1"
+                            CornerRadius="3" Padding="6,3" HorizontalAlignment="Left">
+                        <TextBlock Text="Ctrl + V" Foreground="#E0E0E0" FontFamily="Consolas" FontSize="12"/>
+                    </Border>
+                    <TextBlock Grid.Column="1" Text="텍스트 입력창에 붙여넣기" Foreground="#C0C0C8"
+                               FontSize="12" VerticalAlignment="Center"/>
+                </Grid>
+                <Grid Margin="0,0,0,12">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="130"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Border Background="#1A1A28" BorderBrush="#2A2A3A" BorderThickness="1"
+                            CornerRadius="3" Padding="6,3" HorizontalAlignment="Left">
+                        <TextBlock Text="Enter" Foreground="#E0E0E0" FontFamily="Consolas" FontSize="12"/>
+                    </Border>
+                    <TextBlock Grid.Column="1" Text="불용어 입력 후 추가" Foreground="#C0C0C8"
+                               FontSize="12" VerticalAlignment="Center"/>
+                </Grid>
+
+                <!-- 도움말 -->
+                <TextBlock Text="기타" Foreground="#E91E63" FontSize="11"
+                           FontWeight="SemiBold" Margin="0,0,0,6"/>
+                <Grid Margin="0,0,0,4">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="130"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Border Background="#1A1A28" BorderBrush="#2A2A3A" BorderThickness="1"
+                            CornerRadius="3" Padding="6,3" HorizontalAlignment="Left">
+                        <TextBlock Text="F1" Foreground="#E0E0E0" FontFamily="Consolas" FontSize="12"/>
+                    </Border>
+                    <TextBlock Grid.Column="1" Text="이 도움말 창 열기" Foreground="#C0C0C8"
+                               FontSize="12" VerticalAlignment="Center"/>
+                </Grid>
+
+            </StackPanel>
+        </ScrollViewer>
+
+        <!-- 닫기 버튼 -->
+        <Button Grid.Row="4" Content="닫기 (Esc)" HorizontalAlignment="Right"
+                Padding="20,7" Click="BtnClose_Click"/>
+    </Grid>
+</Window>

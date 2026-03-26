@@ -1,4 +1,5 @@
 using System.Windows.Forms;
+using System.Text.Json;
 using WpfColor = System.Windows.Media.Color;
 using WpfCursors = System.Windows.Input.Cursors;
 
@@ -13,6 +14,12 @@ public partial class MainWindow : Window
     private readonly HashSet<string> _userStopWords = [];
     private SKBitmap? _currentBitmap;
     private Sdcb.WordClouds.WordCloud? _currentWordCloud;
+    private CancellationTokenSource? _cts;
+    private (int w, int h) _exportResolution = (-1, -1);
+
+    private static readonly string SettingsPath = Path.Combine(
+        Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+        "WordCloud", "settings.json");
 
     public MainWindow()
     {
@@ -25,19 +32,16 @@ public partial class MainWindow : Window
             DwmSetWindowAttribute(handle, 20, ref v, sizeof(int));
         };
 
-        Loaded += OnLoaded;
+        Loaded   += OnLoaded;
+        Closed   += (_, _) => SaveSettings();
         SizeChanged += (_, _) => SkPreview.InvalidateVisual();
     }
 
     private void OnLoaded(object sender, RoutedEventArgs e)
     {
         LoadFonts();
-        CbShape.SelectedIndex       = 0;
-        CbOrientation.SelectedIndex = 2;
-        CbFont.SelectedIndex        = 0;
-        SliderMaxWords.Value        = 100;
-        SliderMinFreq.Value         = 2;
         BuildThemeButtons();
+        LoadSettings();
         UpdateBgColorDisplay();
     }
 
@@ -53,7 +57,6 @@ public partial class MainWindow : Window
         };
         foreach (var f in fonts)
             CbFont.Items.Add(f);
-        CbFont.SelectedIndex = 0;
     }
 
     // ─────────────────────────────────────────────────────────────
@@ -80,6 +83,93 @@ public partial class MainWindow : Window
             };
             PanelThemes.Children.Add(btn);
         }
+    }
+
+    // ─────────────────────────────────────────────────────────────
+    //  설정 저장/복원
+    // ─────────────────────────────────────────────────────────────
+    private void SaveSettings()
+    {
+        try
+        {
+            Directory.CreateDirectory(Path.GetDirectoryName(SettingsPath)!);
+            var s = new AppSettings
+            {
+                ShapeIndex       = CbShape.SelectedIndex,
+                OrientationIndex = CbOrientation.SelectedIndex,
+                FontName         = _config.FontName,
+                MaxWords         = _config.MaxWords,
+                MinFreq          = _config.MinFreq,
+                ThemeIndex       = _config.ThemeIndex,
+                BgColorHex       = $"#{_config.BgColor.Red:X2}{_config.BgColor.Green:X2}{_config.BgColor.Blue:X2}",
+                ResolutionIndex  = CbResolution.SelectedIndex,
+            };
+            File.WriteAllText(SettingsPath, JsonSerializer.Serialize(s));
+        }
+        catch { }
+    }
+
+    private void LoadSettings()
+    {
+        try
+        {
+            if (!File.Exists(SettingsPath))
+            {
+                ApplyDefaultSettings();
+                return;
+            }
+            var s = JsonSerializer.Deserialize<AppSettings>(File.ReadAllText(SettingsPath));
+            if (s == null) { ApplyDefaultSettings(); return; }
+
+            CbShape.SelectedIndex       = Math.Clamp(s.ShapeIndex, 0, 6);
+            CbOrientation.SelectedIndex = Math.Clamp(s.OrientationIndex, 0, 3);
+            CbResolution.SelectedIndex  = Math.Clamp(s.ResolutionIndex, 0, 3);
+            SliderMaxWords.Value        = Math.Clamp(s.MaxWords, 10, 500);
+            SliderMinFreq.Value         = Math.Clamp(s.MinFreq, 1, 20);
+
+            var fontIdx = CbFont.Items.IndexOf(s.FontName);
+            if (fontIdx >= 0)
+                CbFont.SelectedIndex = fontIdx;
+            else
+            {
+                CbFont.Text = s.FontName;
+                _config.FontName = s.FontName;
+            }
+
+            _config.ThemeIndex = Math.Clamp(s.ThemeIndex, 0, ColorTheme.Names.Length - 1);
+            if (PanelThemes.Children[_config.ThemeIndex] is System.Windows.Controls.RadioButton rb)
+                rb.IsChecked = true;
+
+            if (TryParseHexColor(s.BgColorHex, out var bgColor))
+                _config.BgColor = bgColor;
+        }
+        catch
+        {
+            ApplyDefaultSettings();
+        }
+    }
+
+    private void ApplyDefaultSettings()
+    {
+        CbShape.SelectedIndex       = 0;
+        CbOrientation.SelectedIndex = 2;
+        CbFont.SelectedIndex        = 0;
+        CbResolution.SelectedIndex  = 3;
+        SliderMaxWords.Value        = 100;
+        SliderMinFreq.Value         = 2;
+    }
+
+    private static bool TryParseHexColor(string? hex, out SKColor color)
+    {
+        color = new SKColor(0x0D, 0x0D, 0x16);
+        if (string.IsNullOrWhiteSpace(hex)) return false;
+        hex = hex.TrimStart('#');
+        if (hex.Length != 6) return false;
+        if (!byte.TryParse(hex[0..2], System.Globalization.NumberStyles.HexNumber, null, out var r)) return false;
+        if (!byte.TryParse(hex[2..4], System.Globalization.NumberStyles.HexNumber, null, out var g)) return false;
+        if (!byte.TryParse(hex[4..6], System.Globalization.NumberStyles.HexNumber, null, out var b)) return false;
+        color = new SKColor(r, g, b);
+        return true;
     }
 
     // ─────────────────────────────────────────────────────────────
@@ -117,6 +207,26 @@ public partial class MainWindow : Window
         if (!IsLoaded) return;
         if (CbFont.SelectedItem is string fontName)
             _config.FontName = fontName;
+    }
+
+    private void CbFont_LostFocus(object sender, RoutedEventArgs e)
+    {
+        if (!IsLoaded) return;
+        var text = CbFont.Text.Trim();
+        if (!string.IsNullOrEmpty(text))
+            _config.FontName = text;
+    }
+
+    private void CbResolution_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (!IsLoaded) return;
+        _exportResolution = CbResolution.SelectedIndex switch
+        {
+            0 => (1920, 1080),
+            1 => (2560, 1600),
+            2 => (3840, 2160),
+            _ => (-1, -1),
+        };
     }
 
     private void SliderMaxWords_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
@@ -161,6 +271,30 @@ public partial class MainWindow : Window
     private void BtnClear_Click(object sender, RoutedEventArgs e) => TxtInput.Clear();
 
     // ─────────────────────────────────────────────────────────────
+    //  단어 빈도 미리보기
+    // ─────────────────────────────────────────────────────────────
+    private void BtnPreviewWords_Click(object sender, RoutedEventArgs e)
+    {
+        var text = TxtInput.Text;
+        if (string.IsNullOrWhiteSpace(text))
+        {
+            TxtStatus.Text = "텍스트를 먼저 입력하세요.";
+            return;
+        }
+
+        var freq = TextAnalysisService.Analyze(text, 200, _config.MinFreq, _userStopWords);
+        var items = freq.OrderByDescending(kv => kv.Value)
+                        .Take(10)
+                        .Select(kv => new WordFreqItem(kv.Key, kv.Value))
+                        .ToList();
+
+        LstFreqPreview.ItemsSource = items;
+        TxtStatus.Text = items.Count == 0
+            ? "표시할 단어가 없습니다. 최소 빈도를 낮춰보세요."
+            : $"상위 {items.Count}개 단어";
+    }
+
+    // ─────────────────────────────────────────────────────────────
     //  불용어 관리
     // ─────────────────────────────────────────────────────────────
     private void TxtStopWord_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
@@ -183,8 +317,8 @@ public partial class MainWindow : Window
     {
         var chip = new Border
         {
-            Background      = new SolidColorBrush(WpfColor.FromRgb(0x06, 0x20, 0x30)),
-            BorderBrush     = new SolidColorBrush(WpfColor.FromRgb(0x06, 0xB6, 0xD4)),
+            Background      = new SolidColorBrush(WpfColor.FromRgb(0x2D, 0x0A, 0x18)),
+            BorderBrush     = new SolidColorBrush(WpfColor.FromRgb(0xE9, 0x1E, 0x63)),
             BorderThickness = new Thickness(1),
             CornerRadius    = new CornerRadius(10),
             Margin          = new Thickness(0, 0, 4, 4),
@@ -233,7 +367,7 @@ public partial class MainWindow : Window
     }
 
     // ─────────────────────────────────────────────────────────────
-    //  워드클라우드 생성
+    //  워드클라우드 생성 / 취소
     // ─────────────────────────────────────────────────────────────
     private async void BtnGenerate_Click(object sender, RoutedEventArgs e)
     {
@@ -244,7 +378,11 @@ public partial class MainWindow : Window
             return;
         }
 
+        _cts = new CancellationTokenSource();
+        var token = _cts.Token;
+
         BtnGenerate.IsEnabled       = false;
+        BtnCancel.Visibility        = Visibility.Visible;
         PrgGenerate.IsIndeterminate = true;
         TxtStatus.Text = "분석 중...";
 
@@ -261,27 +399,34 @@ public partial class MainWindow : Window
                 BgColor     = _config.BgColor,
             };
 
-            // 모니터 물리 해상도 이상으로 생성
-            var (exportW, exportH) = CloudGeneratorService.GetExportSize();
+            var (exportW, exportH) = GetExportSize();
 
-            var (bitmap, wc) = await Task.Run(() =>
+            var freq = await Task.Run(() =>
+                TextAnalysisService.Analyze(text, cfg.MaxWords, cfg.MinFreq, _userStopWords), token);
+
+            token.ThrowIfCancellationRequested();
+
+            if (freq.Count == 0)
             {
-                var freq = TextAnalysisService.Analyze(
-                    text, cfg.MaxWords, cfg.MinFreq, _userStopWords);
-                if (freq.Count == 0) return ((SKBitmap?)null, (Sdcb.WordClouds.WordCloud?)null);
+                TxtStatus.Text = "단어가 부족합니다. 최소 빈도를 낮춰보세요.";
+                return;
+            }
 
-                return CloudGeneratorService.GenerateAsync(freq, cfg, exportW, exportH)
-                    .GetAwaiter().GetResult();
-            });
+            TxtStatus.Text = "생성 중...";
+            var (bitmap, wc) = await CloudGeneratorService.GenerateAsync(freq, cfg, exportW, exportH);
+
+            token.ThrowIfCancellationRequested();
 
             _currentBitmap?.Dispose();
             _currentBitmap    = bitmap;
             _currentWordCloud = wc;
             SkPreview.InvalidateVisual();
 
-            TxtStatus.Text = bitmap == null
-                ? "단어가 부족합니다. 최소 빈도를 낮춰보세요."
-                : $"생성 완료 ({exportW}×{exportH})";
+            TxtStatus.Text = $"생성 완료 ({exportW}×{exportH})";
+        }
+        catch (OperationCanceledException)
+        {
+            TxtStatus.Text = "생성이 취소되었습니다.";
         }
         catch (Exception ex)
         {
@@ -289,18 +434,27 @@ public partial class MainWindow : Window
         }
         finally
         {
+            _cts?.Dispose();
+            _cts = null;
             PrgGenerate.IsIndeterminate = false;
             BtnGenerate.IsEnabled       = true;
+            BtnCancel.Visibility        = Visibility.Collapsed;
         }
     }
 
+    private void BtnCancel_Click(object sender, RoutedEventArgs e) => _cts?.Cancel();
+
+    private (int w, int h) GetExportSize()
+        => _exportResolution is (-1, -1)
+            ? CloudGeneratorService.GetExportSize()
+            : _exportResolution;
+
     // ─────────────────────────────────────────────────────────────
-    //  SKElement 렌더링 (미리보기: BgColor 배경 합성)
+    //  SKElement 렌더링 (미리보기)
     // ─────────────────────────────────────────────────────────────
     private void SkPreview_PaintSurface(object sender, SKPaintSurfaceEventArgs e)
     {
         var canvas = e.Surface.Canvas;
-        // 미리보기 배경: 사용자가 선택한 BgColor
         canvas.Clear(_config.BgColor);
 
         if (_currentBitmap == null || _currentBitmap.IsNull) return;
@@ -370,4 +524,65 @@ public partial class MainWindow : Window
     private void ShowError(Exception ex)
         => System.Windows.MessageBox.Show($"오류:\n{ex.Message}", "오류",
                MessageBoxButton.OK, MessageBoxImage.Error);
+
+    // ─────────────────────────────────────────────────────────────
+    //  단축키
+    // ─────────────────────────────────────────────────────────────
+    private void Window_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+    {
+        var ctrl = (e.KeyboardDevice.Modifiers & System.Windows.Input.ModifierKeys.Control) != 0;
+
+        switch (e.Key)
+        {
+            case Key.F1:
+                ShowHelp();
+                e.Handled = true;
+                break;
+            case Key.F5:
+                if (BtnGenerate.IsEnabled)
+                    BtnGenerate_Click(sender, new RoutedEventArgs());
+                e.Handled = true;
+                break;
+            case Key.Escape:
+                _cts?.Cancel();
+                e.Handled = true;
+                break;
+            case Key.O when ctrl:
+                BtnLoadFile_Click(sender, new RoutedEventArgs());
+                e.Handled = true;
+                break;
+            case Key.S when ctrl:
+                BtnSavePng_Click(sender, new RoutedEventArgs());
+                e.Handled = true;
+                break;
+        }
+    }
+
+    private void BtnHelp_Click(object sender, RoutedEventArgs e) => ShowHelp();
+
+    private void ShowHelp()
+    {
+        var help = new HelpWindow { Owner = this };
+        help.ShowDialog();
+    }
 }
+
+// ─────────────────────────────────────────────────────────────
+//  설정 모델
+// ─────────────────────────────────────────────────────────────
+public class AppSettings
+{
+    public int    ShapeIndex       { get; set; } = 0;
+    public int    OrientationIndex { get; set; } = 2;
+    public string FontName         { get; set; } = "맑은 고딕";
+    public int    MaxWords         { get; set; } = 100;
+    public int    MinFreq          { get; set; } = 2;
+    public int    ThemeIndex       { get; set; } = 0;
+    public string BgColorHex       { get; set; } = "#0D0D16";
+    public int    ResolutionIndex  { get; set; } = 3;
+}
+
+// ─────────────────────────────────────────────────────────────
+//  단어 빈도 아이템
+// ─────────────────────────────────────────────────────────────
+public record WordFreqItem(string Word, int Count);

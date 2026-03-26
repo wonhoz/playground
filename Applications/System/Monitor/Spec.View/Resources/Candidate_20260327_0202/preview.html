@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>Spec.View — Icon Candidates</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #0A0002; font-family: 'Segoe UI', sans-serif; color: #E0E0E0; padding: 40px; }
+  h1 { font-size: 28px; color: #FFD700; margin-bottom: 6px; }
+  .subtitle { font-size: 14px; color: #888; margin-bottom: 40px; }
+  .grid { display: flex; gap: 40px; flex-wrap: wrap; }
+  .card { background: #150208; border-radius: 16px; padding: 28px; border: 1px solid #3A1008; width: 320px; }
+  .card:hover { border-color: #FFD700; transform: translateY(-2px); transition: all 0.2s; }
+  .icon-box { display: flex; gap: 16px; align-items: flex-end; margin-bottom: 20px; }
+  .icon-box img { border-radius: 12px; transition: transform 0.2s; cursor: zoom-in; }
+  .icon-box img:hover { transform: scale(2.2); transform-origin: bottom left; position: relative; z-index: 10; }
+  .icon-256 { width: 128px; height: 128px; }
+  .icon-48 { width: 48px; height: 48px; }
+  .icon-16 { width: 16px; height: 16px; }
+  .label { font-size: 18px; font-weight: bold; color: #FFD700; margin-bottom: 8px; }
+  .concept { font-size: 13px; color: #CCAA88; margin-bottom: 6px; }
+  .palette { display: flex; gap: 6px; margin-top: 10px; }
+  .swatch { width: 24px; height: 24px; border-radius: 6px; border: 1px solid #333; }
+  .tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; margin-right: 4px; }
+  .literal { background: #1A3A1A; color: #88DD88; border: 1px solid #2A6A2A; }
+  .metaphor { background: #1A1A4A; color: #8888FF; border: 1px solid #2A2A8A; }
+  .hybrid { background: #2A1A0A; color: #FFAA44; border: 1px solid #5A3A10; }
+</style>
+</head>
+<body>
+<h1>Spec.View</h1>
+<p class="subtitle">하드웨어 스펙 뷰어 — CPU/GPU/RAM/보드/스토리지/네트워크 수집·표시 | Candidate_20260327_0202</p>
+<div class="grid">
+
+  <div class="card">
+    <div class="icon-box">
+      <img class="icon-256" src="icon_01.svg" alt="icon_01">
+      <img class="icon-48" src="icon_01.svg" alt="icon_01 48px">
+      <img class="icon-16" src="icon_01.svg" alt="icon_01 16px">
+    </div>
+    <div class="label">icon_01 <span class="tag literal">literal</span></div>
+    <div class="concept"><b>컨셉:</b> CPU 칩 (핀 포함) + 4방향에 GPU/RAM/SSD/OS 태그 연결선</div>
+    <div class="concept"><b>구성:</b> 중앙 심볼 | <b>연결고리:</b> CPU가 중심 = 하드웨어 생태계의 중심 스펙</div>
+    <div class="palette">
+      <div class="swatch" style="background:#050A18" title="배경: 거의 검정 그리드"></div>
+      <div class="swatch" style="background:#1E90FF" title="CPU 패키지: 도저블루"></div>
+      <div class="swatch" style="background:#FFD700" title="핀: 골드"></div>
+      <div class="swatch" style="background:#9C27B0" title="GPU 태그: 퍼플"></div>
+      <div class="swatch" style="background:#4CAF50" title="RAM 태그: 그린"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-box">
+      <img class="icon-256" src="icon_02.svg" alt="icon_02">
+      <img class="icon-48" src="icon_02.svg" alt="icon_02 48px">
+      <img class="icon-16" src="icon_02.svg" alt="icon_02 16px">
+    </div>
+    <div class="label">icon_02 <span class="tag metaphor">metaphor</span></div>
+    <div class="concept"><b>컨셉:</b> 청진기 + 청진판에 회로 패턴 (PC 진단 = 의사) + 오른쪽 스펙 카드</div>
+    <div class="concept"><b>구성:</b> 실루엣/캐릭터 | <b>연결고리:</b> PC의 "건강 진단" = 스펙 확인, 의사처럼 스캔</div>
+    <div class="palette">
+      <div class="swatch" style="background:#C8E4FF" title="배경: 라이트 스카이블루"></div>
+      <div class="swatch" style="background:#1565C0" title="청진기: 다크 블루"></div>
+      <div class="swatch" style="background:#00BCD4" title="회로 패턴: 시안"></div>
+      <div class="swatch" style="background:#FFFFFF" title="스펙 카드: 화이트"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-box">
+      <img class="icon-256" src="icon_03.svg" alt="icon_03">
+      <img class="icon-48" src="icon_03.svg" alt="icon_03 48px">
+      <img class="icon-16" src="icon_03.svg" alt="icon_03 16px">
+    </div>
+    <div class="label">icon_03 <span class="tag hybrid">hybrid</span></div>
+    <div class="concept"><b>컨셉:</b> 스펙 카드 (CPU/GPU/RAM/SSD/OS 행) + 배경에 금색 회로 트레이스</div>
+    <div class="concept"><b>구성:</b> 기하학 추상 | <b>연결고리:</b> 앱이 보여주는 것 = 스펙 시트, 회로기판 배경</div>
+    <div class="palette">
+      <div class="swatch" style="background:#1A0508" title="배경: 딥 크림슨"></div>
+      <div class="swatch" style="background:#4A3000" title="회로 트레이스: 다크 골드"></div>
+      <div class="swatch" style="background:#8B0000" title="카드 헤더: 다크 레드"></div>
+      <div class="swatch" style="background:#FFD700" title="골드 포인트"></div>
+      <div class="swatch" style="background:#FFEECC" title="텍스트: 웜 화이트"></div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

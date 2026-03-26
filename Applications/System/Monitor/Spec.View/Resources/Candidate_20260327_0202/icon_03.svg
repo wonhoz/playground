@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: Background — deep crimson red -->
+  <defs>
+    <linearGradient id="bgSV3" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1A0508"/>
+      <stop offset="100%" stop-color="#0E0204"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bgSV3)"/>
+
+  <!-- Circuit board traces (gold, background layer) -->
+  <!-- Horizontal traces -->
+  <line x1="140" y1="300" x2="400" y2="300" stroke="#4A3000" stroke-width="4"/>
+  <line x1="140" y1="350" x2="300" y2="350" stroke="#4A3000" stroke-width="3"/>
+  <line x1="660" y1="300" x2="884" y2="300" stroke="#4A3000" stroke-width="4"/>
+  <line x1="700" y1="420" x2="884" y2="420" stroke="#4A3000" stroke-width="3"/>
+  <line x1="140" y1="700" x2="380" y2="700" stroke="#4A3000" stroke-width="4"/>
+  <line x1="140" y1="750" x2="300" y2="750" stroke="#4A3000" stroke-width="3"/>
+  <line x1="680" y1="680" x2="884" y2="680" stroke="#4A3000" stroke-width="4"/>
+  <line x1="720" y1="750" x2="884" y2="750" stroke="#4A3000" stroke-width="3"/>
+  <!-- Vertical traces -->
+  <line x1="200" y1="140" x2="200" y2="400" stroke="#4A3000" stroke-width="4"/>
+  <line x1="300" y1="140" x2="300" y2="360" stroke="#4A3000" stroke-width="3"/>
+  <line x1="800" y1="140" x2="800" y2="440" stroke="#4A3000" stroke-width="4"/>
+  <line x1="200" y1="620" x2="200" y2="884" stroke="#4A3000" stroke-width="4"/>
+  <line x1="800" y1="640" x2="800" y2="884" stroke="#4A3000" stroke-width="4"/>
+  <!-- Trace vias (small circles) -->
+  <circle cx="200" cy="300" r="8" fill="#5A3800"/>
+  <circle cx="300" cy="350" r="6" fill="#5A3800"/>
+  <circle cx="800" cy="300" r="8" fill="#5A3800"/>
+  <circle cx="800" cy="420" r="6" fill="#5A3800"/>
+  <circle cx="200" cy="700" r="8" fill="#5A3800"/>
+  <circle cx="800" cy="680" r="8" fill="#5A3800"/>
+
+  <!-- Layer 2: Spec card (main object) -->
+  <rect x="180" y="200" width="664" height="620" rx="20" fill="#1A0808" stroke="#CC9900" stroke-width="8"/>
+
+  <!-- Card header bar -->
+  <rect x="180" y="200" width="664" height="64" rx="20" fill="#8B0000"/>
+  <rect x="180" y="228" width="664" height="36" rx="0" fill="#8B0000"/>
+  <text x="512" y="242" text-anchor="middle" font-family="'Segoe UI',Arial,sans-serif" font-size="32" font-weight="bold" fill="#FFD700">Hardware Specification</text>
+
+  <!-- Divider -->
+  <line x1="198" y1="274" x2="836" y2="274" stroke="#CC9900" stroke-width="3" opacity="0.7"/>
+
+  <!-- Spec rows -->
+  <!-- CPU row -->
+  <rect x="198" y="284" width="640" height="54" rx="4" fill="#220A0A"/>
+  <rect x="198" y="284" width="120" height="54" rx="4" fill="#3A0808"/>
+  <text x="258" y="316" text-anchor="middle" font-family="'Segoe UI',Arial,sans-serif" font-size="22" font-weight="bold" fill="#FFD700">CPU</text>
+  <text x="360" y="312" font-family="'Consolas','Courier New',monospace" font-size="20" fill="#FFEECC">Intel Core i9-14900K</text>
+  <text x="360" y="332" font-family="'Consolas','Courier New',monospace" font-size="16" fill="#AA8844">24C/32T  5.6 GHz  125W TDP</text>
+
+  <!-- GPU row -->
+  <rect x="198" y="342" width="640" height="54" rx="4" fill="#1A0808"/>
+  <rect x="198" y="342" width="120" height="54" rx="4" fill="#2A0808"/>
+  <text x="258" y="374" text-anchor="middle" font-family="'Segoe UI',Arial,sans-serif" font-size="22" font-weight="bold" fill="#CC8800">GPU</text>
+  <text x="360" y="370" font-family="'Consolas','Courier New',monospace" font-size="20" fill="#FFEECC">NVIDIA RTX 4080 16GB</text>
+  <text x="360" y="390" font-family="'Consolas','Courier New',monospace" font-size="16" fill="#AA8844">VRAM: 16 GB  TDP: 320W</text>
+
+  <!-- RAM row -->
+  <rect x="198" y="400" width="640" height="54" rx="4" fill="#220A0A"/>
+  <rect x="198" y="400" width="120" height="54" rx="4" fill="#3A0808"/>
+  <text x="258" y="432" text-anchor="middle" font-family="'Segoe UI',Arial,sans-serif" font-size="22" font-weight="bold" fill="#FFD700">RAM</text>
+  <text x="360" y="428" font-family="'Consolas','Courier New',monospace" font-size="20" fill="#FFEECC">DDR5 32 GB (2×16)</text>
+  <text x="360" y="448" font-family="'Consolas','Courier New',monospace" font-size="16" fill="#AA8844">6400 MHz  CL32-38-38</text>
+
+  <!-- Board row -->
+  <rect x="198" y="458" width="640" height="54" rx="4" fill="#1A0808"/>
+  <rect x="198" y="458" width="120" height="54" rx="4" fill="#2A0808"/>
+  <text x="258" y="490" text-anchor="middle" font-family="'Segoe UI',Arial,sans-serif" font-size="22" font-weight="bold" fill="#CC8800">Board</text>
+  <text x="360" y="486" font-family="'Consolas','Courier New',monospace" font-size="20" fill="#FFEECC">ASUS ROG Maximus Z790</text>
+  <text x="360" y="506" font-family="'Consolas','Courier New',monospace" font-size="16" fill="#AA8844">LGA1700  PCIe 5.0  WiFi7</text>
+
+  <!-- Storage row -->
+  <rect x="198" y="516" width="640" height="54" rx="4" fill="#220A0A"/>
+  <rect x="198" y="516" width="120" height="54" rx="4" fill="#3A0808"/>
+  <text x="258" y="548" text-anchor="middle" font-family="'Segoe UI',Arial,sans-serif" font-size="22" font-weight="bold" fill="#FFD700">SSD</text>
+  <text x="360" y="544" font-family="'Consolas','Courier New',monospace" font-size="20" fill="#FFEECC">Samsung 990 Pro 2TB</text>
+  <text x="360" y="564" font-family="'Consolas','Courier New',monospace" font-size="16" fill="#AA8844">NVMe PCIe 4.0  7450/6900</text>
+
+  <!-- OS row -->
+  <rect x="198" y="574" width="640" height="54" rx="4" fill="#1A0808"/>
+  <rect x="198" y="574" width="120" height="54" rx="4" fill="#2A0808"/>
+  <text x="258" y="606" text-anchor="middle" font-family="'Segoe UI',Arial,sans-serif" font-size="22" font-weight="bold" fill="#CC8800">OS</text>
+  <text x="360" y="602" font-family="'Consolas','Courier New',monospace" font-size="20" fill="#FFEECC">Windows 11 Pro 24H2</text>
+  <text x="360" y="622" font-family="'Consolas','Courier New',monospace" font-size="16" fill="#AA8844">Build 26100  x64</text>
+
+  <!-- Card footer divider -->
+  <line x1="198" y1="636" x2="836" y2="636" stroke="#CC9900" stroke-width="2" opacity="0.5"/>
+
+  <!-- Layer 3: Gold circuit decorations (corner accents) -->
+  <circle cx="198" cy="284" r="6" fill="#FFD700"/>
+  <circle cx="838" cy="284" r="6" fill="#FFD700"/>
+  <circle cx="198" cy="628" r="6" fill="#FFD700"/>
+  <circle cx="838" cy="628" r="6" fill="#FFD700"/>
+
+  <!-- Bottom export badge -->
+  <rect x="360" y="650" width="304" height="44" rx="12" fill="#3A0808" stroke="#CC9900" stroke-width="4"/>
+  <text x="512" y="678" text-anchor="middle" font-family="'Segoe UI',Arial,sans-serif" font-size="24" fill="#FFD700">📋 Export Report</text>
+</svg>

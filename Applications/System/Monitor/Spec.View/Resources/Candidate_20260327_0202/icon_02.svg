@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: Background — bright sky blue gradient -->
+  <defs>
+    <linearGradient id="bgSV2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#E8F4FF"/>
+      <stop offset="100%" stop-color="#B8D8F8"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bgSV2)"/>
+
+  <!-- Layer 2: Stethoscope shape (metaphor: PC doctor/diagnosis) -->
+
+  <!-- Stethoscope tube (curved path) -->
+  <path d="M420 260 Q420 160 520 160 Q620 160 620 260 L620 480 Q620 580 520 580"
+        fill="none" stroke="#1565C0" stroke-width="28" stroke-linecap="round"/>
+
+  <!-- Earpieces (top) -->
+  <circle cx="420" cy="260" r="28" fill="#1565C0"/>
+  <circle cx="620" cy="260" r="28" fill="#1565C0"/>
+  <!-- Ear tips -->
+  <circle cx="400" cy="240" r="18" fill="#1976D2"/>
+  <circle cx="640" cy="240" r="18" fill="#1976D2"/>
+
+  <!-- Chest piece (large circle at bottom) -->
+  <circle cx="520" cy="660" r="100" fill="#1565C0" stroke="#0D47A1" stroke-width="10"/>
+  <circle cx="520" cy="660" r="70" fill="#0D47A1"/>
+
+  <!-- Inside chest piece: circuit board pattern (PC diagnosis) -->
+  <!-- Horizontal traces -->
+  <line x1="465" y1="645" x2="575" y2="645" stroke="#00BCD4" stroke-width="4"/>
+  <line x1="465" y1="660" x2="575" y2="660" stroke="#00BCD4" stroke-width="3"/>
+  <line x1="465" y1="675" x2="575" y2="675" stroke="#00BCD4" stroke-width="4"/>
+  <!-- Vertical traces -->
+  <line x1="490" y1="625" x2="490" y2="695" stroke="#00BCD4" stroke-width="3"/>
+  <line x1="520" y1="620" x2="520" y2="700" stroke="#00BCD4" stroke-width="4"/>
+  <line x1="550" y1="625" x2="550" y2="695" stroke="#00BCD4" stroke-width="3"/>
+  <!-- Small component squares -->
+  <rect x="508" y="640" width="24" height="20" rx="3" fill="#00E5FF" opacity="0.8"/>
+  <rect x="480" y="650" width="18" height="16" rx="2" fill="#80DEEA" opacity="0.7"/>
+  <rect x="536" y="650" width="18" height="16" rx="2" fill="#80DEEA" opacity="0.7"/>
+
+  <!-- Layer 3: Spec info card on right side -->
+  <rect x="660" y="300" width="240" height="380" rx="16" fill="#FFFFFF" stroke="#1565C0" stroke-width="5"/>
+  <!-- Card header -->
+  <rect x="660" y="300" width="240" height="44" rx="16" fill="#1565C0"/>
+  <rect x="660" y="320" width="240" height="24" rx="0" fill="#1565C0"/>
+  <text x="780" y="328" text-anchor="middle" font-family="'Segoe UI',Arial,sans-serif" font-size="22" font-weight="bold" fill="#FFFFFF">Spec.View</text>
+
+  <!-- Spec rows -->
+  <text x="676" y="374" font-family="'Consolas','Courier New',monospace" font-size="17" fill="#888888">CPU</text>
+  <text x="720" y="374" font-family="'Consolas','Courier New',monospace" font-size="17" fill="#1565C0">Intel i9</text>
+
+  <line x1="670" y1="382" x2="888" y2="382" stroke="#E0EEFF" stroke-width="1.5"/>
+
+  <text x="676" y="404" font-family="'Consolas','Courier New',monospace" font-size="17" fill="#888888">GPU</text>
+  <text x="720" y="404" font-family="'Consolas','Courier New',monospace" font-size="17" fill="#1565C0">RTX 4080</text>
+
+  <line x1="670" y1="412" x2="888" y2="412" stroke="#E0EEFF" stroke-width="1.5"/>
+
+  <text x="676" y="434" font-family="'Consolas','Courier New',monospace" font-size="17" fill="#888888">RAM</text>
+  <text x="720" y="434" font-family="'Consolas','Courier New',monospace" font-size="17" fill="#1565C0">32 GB</text>
+
+  <line x1="670" y1="442" x2="888" y2="442" stroke="#E0EEFF" stroke-width="1.5"/>
+
+  <text x="676" y="464" font-family="'Consolas','Courier New',monospace" font-size="17" fill="#888888">SSD</text>
+  <text x="720" y="464" font-family="'Consolas','Courier New',monospace" font-size="17" fill="#1565C0">2 TB NVMe</text>
+
+  <line x1="670" y1="472" x2="888" y2="472" stroke="#E0EEFF" stroke-width="1.5"/>
+
+  <text x="676" y="494" font-family="'Consolas','Courier New',monospace" font-size="17" fill="#888888">OS</text>
+  <text x="720" y="494" font-family="'Consolas','Courier New',monospace" font-size="17" fill="#1565C0">Win 11</text>
+
+  <line x1="670" y1="502" x2="888" y2="502" stroke="#E0EEFF" stroke-width="1.5"/>
+
+  <text x="676" y="524" font-family="'Consolas','Courier New',monospace" font-size="17" fill="#888888">Board</text>
+  <text x="720" y="524" font-family="'Consolas','Courier New',monospace" font-size="17" fill="#1565C0">ASUS ROG</text>
+
+  <line x1="670" y1="532" x2="888" y2="532" stroke="#E0EEFF" stroke-width="1.5"/>
+
+  <text x="676" y="554" font-family="'Consolas','Courier New',monospace" font-size="17" fill="#888888">Net</text>
+  <text x="720" y="554" font-family="'Consolas','Courier New',monospace" font-size="17" fill="#1565C0">2.5 GbE</text>
+
+  <!-- Export button at bottom of card -->
+  <rect x="680" y="642" width="200" height="34" rx="8" fill="#E3F2FD" stroke="#1565C0" stroke-width="3"/>
+  <text x="780" y="664" text-anchor="middle" font-family="'Segoe UI',Arial,sans-serif" font-size="18" fill="#1565C0">📋 Export</text>
+</svg>

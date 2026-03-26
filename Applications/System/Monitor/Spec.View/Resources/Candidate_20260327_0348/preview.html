@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>Spec.View — Icon Candidates v2</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #1E2A3A; font-family: 'Segoe UI', sans-serif; color: #E0E0E0; padding: 40px; }
+  h1 { font-size: 28px; color: #6C5CE7; margin-bottom: 6px; }
+  .subtitle { font-size: 14px; color: #888; margin-bottom: 8px; }
+  .style-note { font-size: 13px; color: #F9CA24; background: #2D3436; padding: 8px 16px; border-radius: 8px; display: inline-block; margin-bottom: 36px; }
+  .grid { display: flex; gap: 40px; flex-wrap: wrap; }
+  .card { background: #2D3436; border-radius: 16px; padding: 28px; border: 2px solid #3D4A5A; width: 320px; transition: all 0.2s; }
+  .card:hover { border-color: #6C5CE7; transform: translateY(-3px); box-shadow: 0 8px 24px #0008; }
+  .icon-box { display: flex; gap: 16px; align-items: flex-end; margin-bottom: 20px; }
+  .icon-box img { border-radius: 14px; transition: transform 0.2s; cursor: zoom-in; box-shadow: 0 4px 12px #0006; }
+  .icon-box img:hover { transform: scale(2.4); transform-origin: bottom left; position: relative; z-index: 10; }
+  .icon-256 { width: 128px; height: 128px; }
+  .icon-48 { width: 48px; height: 48px; }
+  .icon-16 { width: 16px; height: 16px; }
+  .label { font-size: 18px; font-weight: bold; color: #6C5CE7; margin-bottom: 8px; }
+  .concept { font-size: 13px; color: #AABBCC; margin-bottom: 6px; }
+  .palette { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
+  .swatch { width: 28px; height: 28px; border-radius: 8px; border: 2px solid #555; cursor: help; }
+  .tag { display: inline-block; padding: 3px 10px; border-radius: 6px; font-size: 12px; margin-right: 4px; font-weight: 700; }
+  .literal { background: #00B894; color: #FFFFFF; }
+  .metaphor { background: #6C5CE7; color: #FFFFFF; }
+  .hybrid { background: #E17055; color: #FFFFFF; }
+</style>
+</head>
+<body>
+<h1>Spec.View</h1>
+<p class="subtitle">하드웨어 스펙 뷰어 — CPU/GPU/RAM/SSD/NET | Candidate_20260327_0348</p>
+<p class="style-note">✨ 스타일: 밝고 화사, 알록달록 컬러풀, 귀엽고 깔끔, 고대비, 큼직한 요소</p>
+<div class="grid">
+
+  <div class="card">
+    <div class="icon-box">
+      <img class="icon-256" src="icon_01.svg" alt="icon_01">
+      <img class="icon-48" src="icon_01.svg" alt="48px">
+      <img class="icon-16" src="icon_01.svg" alt="16px">
+    </div>
+    <div class="label">icon_01 <span class="tag literal">literal</span></div>
+    <div class="concept"><b>컨셉:</b> CPU 칩 2×2 다이 + 4방향 GPU/RAM/SSD/WIN 컬러 태그</div>
+    <div class="concept"><b>연결고리:</b> CPU = 하드웨어 생태계의 중심, 각 컴포넌트가 연결됨</div>
+    <div class="palette">
+      <div class="swatch" style="background:#6C5CE7" title="배경: 인디고 바이올렛"></div>
+      <div class="swatch" style="background:#74B9FF" title="CPU 다이: 블루"></div>
+      <div class="swatch" style="background:#F9CA24" title="핀: 골드"></div>
+      <div class="swatch" style="background:#A29BFE" title="GPU 태그: 라벤더"></div>
+      <div class="swatch" style="background:#55EFC4" title="RAM 태그: 민트"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-box">
+      <img class="icon-256" src="icon_02.svg" alt="icon_02">
+      <img class="icon-48" src="icon_02.svg" alt="48px">
+      <img class="icon-16" src="icon_02.svg" alt="16px">
+    </div>
+    <div class="label">icon_02 <span class="tag metaphor">metaphor</span></div>
+    <div class="concept"><b>컨셉:</b> 청진기 (U자 + 원형 청진판) + 청진판에 3×3 PCB 도트 그리드</div>
+    <div class="concept"><b>연결고리:</b> "PC 의사 진단" = 하드웨어 스펙 스캔/체크업</div>
+    <div class="palette">
+      <div class="swatch" style="background:#00CEC9" title="배경: 시안 틸"></div>
+      <div class="swatch" style="background:#2D3436" title="청진기: 다크 네이비"></div>
+      <div class="swatch" style="background:#55EFC4" title="PCB 도트 1열: 민트"></div>
+      <div class="swatch" style="background:#FFEAA7" title="PCB 도트 2열: 옐로"></div>
+      <div class="swatch" style="background:#FD79A8" title="PCB 도트 3열: 핑크"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-box">
+      <img class="icon-256" src="icon_03.svg" alt="icon_03">
+      <img class="icon-48" src="icon_03.svg" alt="48px">
+      <img class="icon-16" src="icon_03.svg" alt="16px">
+    </div>
+    <div class="label">icon_03 <span class="tag hybrid">hybrid</span></div>
+    <div class="concept"><b>컨셉:</b> 클립보드 + 5행 스펙 리스트 (CPU/GPU/RAM/SSD/NET 컬러 행)</div>
+    <div class="concept"><b>연결고리:</b> 앱 결과물 그대로 — 스펙 시트/리포트 카드</div>
+    <div class="palette">
+      <div class="swatch" style="background:#00B894" title="배경: 라임 그린"></div>
+      <div class="swatch" style="background:#FFFFFF" title="카드 몸체: 흰색"></div>
+      <div class="swatch" style="background:#E17055" title="CPU 행: 오렌지"></div>
+      <div class="swatch" style="background:#6C5CE7" title="GPU 행: 퍼플"></div>
+      <div class="swatch" style="background:#F9CA24" title="SSD 행: 골드"></div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

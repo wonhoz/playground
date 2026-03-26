@@ -15,6 +15,8 @@ namespace StayAwake
         private readonly ActivitySimulator _simulator;
         private readonly SlackUiAutomation _slackAutomation;
 
+        private Font? _menuFont;
+
         private ToolStripMenuItem _startStopItem = null!;
         private ToolStripMenuItem _intervalItem = null!;
         private ToolStripMenuItem _distanceItem = null!;
@@ -108,13 +110,13 @@ namespace StayAwake
             };
 
             // 폰트 설정
-            var menuFont = new Font("Segoe UI", 9.5f, FontStyle.Regular);
-            menu.Font = menuFont;
+            _menuFont = new Font("Segoe UI", 9.5f, FontStyle.Regular);
+            menu.Font = _menuFont;
 
             // 시작/정지
             _startStopItem = new ToolStripMenuItem("▶ 시작", null, (s, e) => ToggleRunning())
             {
-                Font = new Font(menuFont, FontStyle.Bold),
+                Font = new Font(_menuFont, FontStyle.Bold),
                 ForeColor = Color.FromArgb(76, 175, 80) // Green for start
             };
             menu.Items.Add(_startStopItem);
@@ -188,6 +190,7 @@ namespace StayAwake
                 Checked = _settings.SlackAutoStatusEnabled
             };
             slackItem.DropDownItems.Add(_slackAutoStatusItem);
+            slackItem.DropDownItems.Add(new ToolStripMenuItem("시간 설정...", null, (s, e) => OpenSlackSettings()));
             slackItem.DropDownItems.Add(new ToolStripSeparator());
             slackItem.DropDownItems.Add(new ToolStripMenuItem("지금 활성으로 변경", null, async (s, e) => await SetSlackActiveNowAsync()));
             slackItem.DropDownItems.Add(new ToolStripMenuItem("지금 자리비움으로 변경", null, async (s, e) => await SetSlackAwayNowAsync()));
@@ -436,7 +439,7 @@ namespace StayAwake
 • 오늘 누적 활성 시간: {activeTime:hh\:mm\:ss}
 • 앱 실행 중 활성 비율: {activeRate:F1}% ({activeTime:hh\:mm\:ss} / {totalElapsed:hh\:mm\:ss})";
 
-            MessageBox.Show(message, "오늘의 통계", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            DarkInfoDialog.Show("오늘의 통계", message, 420, 280);
         }
 
         private void ShowAbout()
@@ -479,11 +482,12 @@ Slack 자리 비움 상태 방지 도구
 • 우클릭: 메뉴 열기
 • 트레이 호버: 다음 활동까지 남은 시간 표시
 • 오늘 통계 메뉴: 활성 시간 및 비율 확인
+• Slack → 시간 설정: 출퇴근 시간 변경 (기본 08:55 / 18:55)
 • 권장 간격: 3~5분
 
 © 2026 SmartCareworks Inc.";
 
-            MessageBox.Show(message, "StayAwake 정보", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            DarkInfoDialog.Show("StayAwake 정보", message, 480, 440);
         }
 
         private async void OnScheduleTimerTick(object? sender, EventArgs e)
@@ -502,6 +506,28 @@ Slack 자리 비움 상태 방지 도구
                 _trayIcon.ShowBalloonTip(2500, "StayAwake",
                     $"Slack 상태 변경 실패: {result.ErrorMessage}", ToolTipIcon.Warning);
             }
+        }
+
+        private void OpenSlackSettings()
+        {
+            using var form = new SlackSettingsForm(
+                _slackAutomation.WorkStartHour,
+                _slackAutomation.WorkStartMinute,
+                _slackAutomation.WorkEndHour,
+                _slackAutomation.WorkEndMinute);
+
+            if (form.ShowDialog() != DialogResult.OK) return;
+
+            _slackAutomation.WorkStartHour = form.WorkStartHour;
+            _slackAutomation.WorkStartMinute = form.WorkStartMinute;
+            _slackAutomation.WorkEndHour = form.WorkEndHour;
+            _slackAutomation.WorkEndMinute = form.WorkEndMinute;
+
+            _settings.WorkStartHour = form.WorkStartHour;
+            _settings.WorkStartMinute = form.WorkStartMinute;
+            _settings.WorkEndHour = form.WorkEndHour;
+            _settings.WorkEndMinute = form.WorkEndMinute;
+            _settings.Save();
         }
 
         private void ToggleSlackAutoStatus()
@@ -558,6 +584,8 @@ Slack 자리 비움 상태 방지 도구
                 _activityTimer.Dispose();
                 _tooltipTimer.Dispose();
                 _trayIcon.Dispose();
+                _contextMenu.Dispose();
+                _menuFont?.Dispose();
             }
             base.Dispose(disposing);
         }

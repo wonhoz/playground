@@ -1,4 +1,6 @@
 using System.ComponentModel;
+using System.Reflection;
+using System.Runtime.InteropServices;
 
 namespace StayAwake
 {
@@ -16,6 +18,42 @@ namespace StayAwake
         private readonly SlackUiAutomation _slackAutomation;
 
         private Font? _menuFont;
+
+        #region Shell_NotifyIcon P/Invoke — NIIF_USER 커스텀 아이콘 풍선 알림
+
+        // cbSize = 976 (x64) 기준 — guidItem + hBalloonIcon 포함 확장 구조체
+        [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
+        private struct NIDATA
+        {
+            public int    cbSize;
+            public IntPtr hWnd;
+            public int    uID;
+            public int    uFlags;
+            public int    uCallbackMessage;
+            public IntPtr hIcon;
+            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 128)]
+            public string szTip;
+            public int    dwState;
+            public int    dwStateMask;
+            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 256)]
+            public string szInfo;
+            public int    uTimeout;
+            [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 64)]
+            public string szInfoTitle;
+            public int    dwInfoFlags;
+            public Guid   guidItem;
+            public IntPtr hBalloonIcon;
+        }
+
+        [DllImport("shell32.dll", CharSet = CharSet.Unicode)]
+        private static extern bool Shell_NotifyIcon(uint msg, ref NIDATA data);
+
+        private const uint NIM_MODIFY      = 0x00000001;
+        private const int  NIF_INFO        = 0x00000010;
+        private const int  NIIF_USER       = 0x00000004;
+        private const int  NIIF_LARGE_ICON = 0x00000020;
+
+        #endregion
 
         private ToolStripMenuItem _startStopItem = null!;
         private ToolStripMenuItem _intervalItem = null!;
@@ -228,8 +266,8 @@ namespace StayAwake
                 UpdateTooltip();
                 UpdateStatus();
 
-                _trayIcon.ShowBalloonTip(1500, "StayAwake",
-                    $"활동 시뮬레이션 시작됨 ({_intervalMinutes}분 간격, {_simulator.MoveDistance}px)", ToolTipIcon.Info);
+                ShowBalloonTip(1500, "StayAwake",
+                    $"활동 시뮬레이션 시작됨 ({_intervalMinutes}분 간격, {_simulator.MoveDistance}px)");
             }
             else
             {
@@ -243,8 +281,7 @@ namespace StayAwake
                 _trayIcon.Text = "StayAwake - 정지됨";
                 _statusItem.Text = "상태: 정지됨";
 
-                _trayIcon.ShowBalloonTip(1500, "StayAwake",
-                    "활동 시뮬레이션 정지됨", ToolTipIcon.Info);
+                ShowBalloonTip(1500, "StayAwake", "활동 시뮬레이션 정지됨");
             }
         }
 
@@ -392,7 +429,7 @@ namespace StayAwake
             var message = simulated
                 ? $"활동 시뮬레이션 실행됨 ({_simulator.MoveDistance}px 이동)"
                 : "사용자 활동 감지됨 - 시뮬레이션 건너뜀";
-            _trayIcon.ShowBalloonTip(1000, "StayAwake", message, ToolTipIcon.Info);
+            ShowBalloonTip(1000, "StayAwake", message);
         }
 
         private void UpdateStatus(bool? lastSimulated = null)
@@ -498,13 +535,13 @@ Slack 자리 비움 상태 방지 도구
             if (result.Success)
             {
                 var label = result.Status == "active" ? "활성" : "자리 비움";
-                _trayIcon.ShowBalloonTip(2000, "StayAwake",
-                    $"Slack 상태를 '{label}'으로 변경했습니다.", ToolTipIcon.Info);
+                ShowBalloonTip(2000, "StayAwake",
+                    $"Slack 상태를 '{label}'으로 변경했습니다.");
             }
             else
             {
-                _trayIcon.ShowBalloonTip(2500, "StayAwake",
-                    $"Slack 상태 변경 실패: {result.ErrorMessage}", ToolTipIcon.Warning);
+                ShowBalloonTip(2500, "StayAwake",
+                    $"Slack 상태 변경 실패: {result.ErrorMessage}");
             }
         }
 
@@ -539,23 +576,75 @@ Slack 자리 비움 상태 방지 도구
             var msg = _slackAutomation.IsEnabled
                 ? $"Slack 자동 상태 변경 활성화\n({_slackAutomation.WorkStartHour:D2}:{_slackAutomation.WorkStartMinute:D2} 활성, {_slackAutomation.WorkEndHour:D2}:{_slackAutomation.WorkEndMinute:D2} 자리비움)\nSlack 앱이 실행 중이어야 합니다."
                 : "Slack 자동 상태 변경 비활성화";
-            _trayIcon.ShowBalloonTip(2000, "StayAwake", msg, ToolTipIcon.Info);
+            ShowBalloonTip(2000, "StayAwake", msg);
         }
 
         private async Task SetSlackActiveNowAsync()
         {
             var result = await _slackAutomation.SetActiveAsync();
-            _trayIcon.ShowBalloonTip(1500, "StayAwake",
-                result.Success ? "Slack 상태를 '활성'으로 변경했습니다." : $"실패: {result.ErrorMessage}",
-                result.Success ? ToolTipIcon.Info : ToolTipIcon.Warning);
+            ShowBalloonTip(1500, "StayAwake",
+                result.Success ? "Slack 상태를 '활성'으로 변경했습니다." : $"실패: {result.ErrorMessage}");
         }
 
         private async Task SetSlackAwayNowAsync()
         {
             var result = await _slackAutomation.SetAwayAsync();
-            _trayIcon.ShowBalloonTip(1500, "StayAwake",
-                result.Success ? "Slack 상태를 '자리비움'으로 변경했습니다." : $"실패: {result.ErrorMessage}",
-                result.Success ? ToolTipIcon.Info : ToolTipIcon.Warning);
+            ShowBalloonTip(1500, "StayAwake",
+                result.Success ? "Slack 상태를 '자리비움'으로 변경했습니다." : $"실패: {result.ErrorMessage}");
+        }
+
+        /// <summary>
+        /// running.png/stopped.png 아이콘을 풍선 알림 본문에 표시.
+        /// Shell_NotifyIcon NIIF_USER 실패 시 아이콘 없음(None)으로 폴백.
+        /// </summary>
+        private void ShowBalloonTip(int timeout, string title, string message)
+        {
+            using var icon = _isRunning ? IconGenerator.LoadRunningIcon() : IconGenerator.LoadStoppedIcon();
+            if (!TryShowBalloonWithIcon(timeout, title, message, icon))
+                _trayIcon.ShowBalloonTip(timeout, title, message, ToolTipIcon.None);
+        }
+
+        private bool TryShowBalloonWithIcon(int timeout, string title, string message, Icon icon)
+        {
+            try
+            {
+                // NotifyIcon 내부 hidden window 핸들 획득 (리플렉션)
+                var wf = typeof(NotifyIcon).GetField("_window", BindingFlags.NonPublic | BindingFlags.Instance)
+                       ?? typeof(NotifyIcon).GetField("window",  BindingFlags.NonPublic | BindingFlags.Instance);
+                var window = wf?.GetValue(_trayIcon);
+                if (window == null) return false;
+
+                var hwnd = (IntPtr)(window.GetType()
+                    .GetProperty("Handle", BindingFlags.Public | BindingFlags.Instance)
+                    ?.GetValue(window) ?? IntPtr.Zero);
+                if (hwnd == IntPtr.Zero) return false;
+
+                // NotifyIcon 내부 ID 획득
+                var idF = typeof(NotifyIcon).GetField("_id", BindingFlags.NonPublic | BindingFlags.Instance)
+                        ?? typeof(NotifyIcon).GetField("id",  BindingFlags.NonPublic | BindingFlags.Instance);
+                var id = (int)(idF?.GetValue(_trayIcon) ?? 0);
+
+                var data = new NIDATA
+                {
+                    cbSize       = Marshal.SizeOf<NIDATA>(),
+                    hWnd         = hwnd,
+                    uID          = id,
+                    uFlags       = NIF_INFO,
+                    szTip        = string.Empty,
+                    szInfo       = message ?? string.Empty,
+                    uTimeout     = timeout,
+                    szInfoTitle  = title ?? string.Empty,
+                    dwInfoFlags  = NIIF_USER | NIIF_LARGE_ICON,
+                    guidItem     = Guid.Empty,
+                    hBalloonIcon = icon.Handle
+                };
+
+                return Shell_NotifyIcon(NIM_MODIFY, ref data);
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         private void ExitApplication()

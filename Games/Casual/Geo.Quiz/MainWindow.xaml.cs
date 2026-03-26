@@ -41,7 +41,6 @@ public partial class MainWindow : Window
                 UpdateChoiceColors();
                 LoadFlagImage();
 
-                // 정답/오답 효과음
                 if (e.PropertyName == nameof(_vm.Answered) && _vm.Answered && _vm.CurrentQuestion != null)
                 {
                     bool isCorrect = _vm.SelectedAnswer == _vm.CurrentQuestion.CorrectAnswer;
@@ -52,6 +51,8 @@ public partial class MainWindow : Window
                 if (_vm.Screen == QuizScreen.Result) ShowResult();
             }
         };
+
+        KeyDown += OnWindowKeyDown;
     }
 
     void ApplyDarkTitleBar()
@@ -61,30 +62,72 @@ public partial class MainWindow : Window
         DwmSetWindowAttribute(hwnd, 20, ref val, sizeof(int));
     }
 
-    // ── 화면 전환용 Binding 보조 속성 ──────────────────────────────────────
-    // XAML BoolVis 사용을 위해 VM에 별도 bool 프로퍼티 추가 대신 code-behind에서 패널 직접 제어
-    // → VM PropertyChanged 구독으로 Visibility 갱신
+    // ── 키보드 단축키 ─────────────────────────────────────────────────────────
+    void OnWindowKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+    {
+        if (_vm.IsQuizScreen)
+        {
+            switch (e.Key)
+            {
+                case System.Windows.Input.Key.D1 or System.Windows.Input.Key.NumPad1:
+                    if (_vm.Choice0Cmd.CanExecute(null)) { _vm.Choice0Cmd.Execute(null); UpdateChoiceColors(); }
+                    break;
+                case System.Windows.Input.Key.D2 or System.Windows.Input.Key.NumPad2:
+                    if (_vm.Choice1Cmd.CanExecute(null)) { _vm.Choice1Cmd.Execute(null); UpdateChoiceColors(); }
+                    break;
+                case System.Windows.Input.Key.D3 or System.Windows.Input.Key.NumPad3:
+                    if (_vm.Choice2Cmd.CanExecute(null)) { _vm.Choice2Cmd.Execute(null); UpdateChoiceColors(); }
+                    break;
+                case System.Windows.Input.Key.D4 or System.Windows.Input.Key.NumPad4:
+                    if (_vm.Choice3Cmd.CanExecute(null)) { _vm.Choice3Cmd.Execute(null); UpdateChoiceColors(); }
+                    break;
+                case System.Windows.Input.Key.Enter or System.Windows.Input.Key.Space:
+                    if (_vm.NextCmd.CanExecute(null)) _vm.NextCmd.Execute(null);
+                    e.Handled = true;
+                    break;
+                case System.Windows.Input.Key.H:
+                    if (_vm.HintCmd.CanExecute(null)) _vm.HintCmd.Execute(null);
+                    break;
+                case System.Windows.Input.Key.P or System.Windows.Input.Key.Escape:
+                    if (_vm.PauseCmd.CanExecute(null)) _vm.PauseCmd.Execute(null);
+                    break;
+            }
+        }
+        else if (_vm.IsStartScreen)
+        {
+            if (e.Key == System.Windows.Input.Key.F1)
+                HelpPopup.IsOpen = !HelpPopup.IsOpen;
+        }
+
+        if (e.Key == System.Windows.Input.Key.F1)
+            HelpPopup.IsOpen = !HelpPopup.IsOpen;
+    }
 
     void BtnMute_Click(object sender, RoutedEventArgs e)
     {
-        _audio.Muted   = !_audio.Muted;
+        _audio.Muted    = !_audio.Muted;
         BtnMute.Content = _audio.Muted ? "🔇" : "🔊";
         if (!_audio.Muted) _audio.PlayBg();
         else               _audio.PauseBg();
     }
 
+    void BtnHelp_Click(object sender, RoutedEventArgs e)
+    {
+        HelpPopup.IsOpen = !HelpPopup.IsOpen;
+    }
+
     void Mode_Checked(object sender, RoutedEventArgs e)
     {
         if (!IsLoaded) return;
-        _vm.Mode = RbCapital.IsChecked == true   ? QuizMode.Capital
-                 : RbFlag.IsChecked    == true   ? QuizMode.Flag
-                 :                                 QuizMode.Continent;
+        _vm.Mode = RbCapital.IsChecked == true ? QuizMode.Capital
+                 : RbFlag.IsChecked    == true ? QuizMode.Flag
+                 :                               QuizMode.Continent;
     }
 
     void CbTimer_Changed(object sender, RoutedEventArgs e)
     {
         if (!IsLoaded) return;
-        // TimerMode는 CheckBox.IsChecked 바인딩으로 처리 — 이벤트는 필요 시 추가 처리용
+        // TimerMode는 CheckBox.IsChecked 바인딩으로 처리됨
     }
 
     void LoadFlagImage()
@@ -99,9 +142,10 @@ public partial class MainWindow : Window
         }
 
         TbFlagError.Visibility = Visibility.Collapsed;
-        var uri = new Uri($"https://flagcdn.com/w160/{q.FlagIsoCode.ToLower()}.png");
+        // 새 문제로 전환 시 이전 이미지 즉시 숨김 (깜빡임 방지)
+        FlagImage.Visibility   = Visibility.Collapsed;
+        FlagImage.Source       = null;
 
-        // 캐시된 이미지 확인
         var cached = FlagCache.GetCached(q.FlagIsoCode);
         if (cached != null)
         {
@@ -110,6 +154,7 @@ public partial class MainWindow : Window
             return;
         }
 
+        var uri = new Uri($"https://flagcdn.com/w160/{q.FlagIsoCode.ToLower()}.png");
         var bmp = new BitmapImage();
         bmp.BeginInit();
         bmp.UriSource   = uri;
@@ -121,15 +166,18 @@ public partial class MainWindow : Window
             FlagImage.Visibility   = Visibility.Collapsed;
             TbFlagError.Visibility = Visibility.Visible;
         };
-        bmp.DownloadCompleted += (_, _) => FlagCache.Add(q.FlagIsoCode, bmp);
+        bmp.DownloadCompleted += async (_, _) =>
+        {
+            FlagImage.Source     = bmp;
+            FlagImage.Visibility = Visibility.Visible;
+            await Task.Run(() => FlagCache.Add(q.FlagIsoCode, bmp));
+        };
 
-        FlagImage.Source     = bmp;
-        FlagImage.Visibility = Visibility.Visible;
+        FlagImage.Source = bmp;
     }
 
     void Choice_Click(object sender, RoutedEventArgs e)
     {
-        // 선택지 색상 즉시 갱신
         UpdateChoiceColors();
     }
 
@@ -144,7 +192,6 @@ public partial class MainWindow : Window
         {
             string choice = i < choices.Count ? choices[i] : "";
 
-            // 힌트로 제거된 선택지 — 흐리게 표시하고 클릭 불가
             bool isEliminated = !string.IsNullOrEmpty(_vm.EliminatedChoice)
                                 && choice == _vm.EliminatedChoice
                                 && !_vm.Answered;
@@ -171,19 +218,18 @@ public partial class MainWindow : Window
         var r = _vm.Result;
 
         var info = GradeInfo.FirstOrDefault(g => g.grade == r.Grade);
-        TbGradeEmoji.Text   = info.emoji ?? "📊";
-        TbGrade.Text        = $"{r.Score:F0}점";
-        TbGrade.Foreground  = new SolidColorBrush(
+        TbGradeEmoji.Text  = info.emoji ?? "📊";
+        TbGrade.Text       = $"{r.Score:F0}점";
+        TbGrade.Foreground = new SolidColorBrush(
             (Color)ColorConverter.ConvertFromString(info.fore ?? "#E0E0E0"));
-        string newRecord    = _vm.IsNewRecord ? "  🏆 신기록!" : $"  (최고: {_vm.BestScore:F0}점)";
-        string hintNote     = r.HintsUsed > 0 ? $"  💡 힌트 {r.HintsUsed}회 사용 (-{r.HintsUsed * 5}점)" : "";
-        TbScore.Text        = $"{r.Correct}문제 정답 / {r.Total}문제 (등급: {r.Grade}){newRecord}{hintNote}";
-        TbCorrect.Text      = r.Correct.ToString();
-        TbWrong.Text        = r.Wrong.ToString();
+        string newRecord = _vm.IsNewRecord ? "  🏆 신기록!" : $"  (최고: {_vm.BestScore:F0}점)";
+        string hintNote  = r.HintsUsed > 0 ? $"  💡 힌트 {r.HintsUsed}회 사용 (-{r.HintsUsed * 5}점)" : "";
+        TbScore.Text  = $"{r.Correct}문제 정답 / {r.Total}문제 (등급: {r.Grade}){newRecord}{hintNote}";
+        TbCorrect.Text = r.Correct.ToString();
+        TbWrong.Text   = r.Wrong.ToString();
 
-        // 오답 노트
-        WrongList.ItemsSource    = r.WrongItems;
-        WrongPanel.Visibility    = r.WrongItems.Count > 0 ? Visibility.Visible : Visibility.Collapsed;
+        WrongList.ItemsSource = r.WrongItems;
+        WrongPanel.Visibility = r.WrongItems.Count > 0 ? Visibility.Visible : Visibility.Collapsed;
     }
 
     protected override void OnClosed(EventArgs e)

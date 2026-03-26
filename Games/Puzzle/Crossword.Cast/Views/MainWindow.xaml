@@ -25,6 +25,11 @@
                 <Button Content="정답 확인" Padding="12,6" Click="OnCheck"    Margin="8,0,0,0"/>
                 <Button Content="↺ 초기화" Padding="12,6" Click="OnClear"    Margin="8,0,0,0"/>
                 <Button Content="씨드 복사" Padding="12,6" Click="OnCopySeed" Margin="8,0,0,0"/>
+                <TextBox x:Name="TxtSeedInput" Width="90" Height="28" Padding="6,0"
+                         FontSize="11" Margin="12,0,0,0"
+                         ToolTip="씨드 번호를 입력하고 재도전 버튼을 누르세요"/>
+                <Button Content="재도전"  Padding="10,6" Click="OnReplay"  Margin="4,0,0,0"/>
+                <Button Content="도움말"  Padding="10,6" Click="OnHelpOpen" Margin="8,0,0,0"/>
             </StackPanel>
         </Grid>
 
@@ -64,5 +69,102 @@
                    Text="새 퍼즐 버튼을 눌러 시작하세요."
                    FontSize="11" Foreground="#888"
                    HorizontalAlignment="Center" Margin="0,8,0,0"/>
+
+        <!-- 도움말 오버레이 -->
+        <Grid x:Name="HelpOverlay" Grid.Row="0" Grid.RowSpan="3"
+              Background="#BB000000" Visibility="Collapsed"
+              MouseDown="OnHelpClose">
+            <Border Background="#1E2A3A" BorderBrush="#039BE5" BorderThickness="1"
+                    CornerRadius="8" Padding="28,20" MaxWidth="440"
+                    HorizontalAlignment="Center" VerticalAlignment="Center"
+                    MouseDown="OnHelpCardClick">
+                <StackPanel>
+                    <DockPanel Margin="0,0,0,16">
+                        <TextBlock Text="⌨ 단축키 도움말" FontSize="15" FontWeight="Bold"
+                                   Foreground="#FFEE58" DockPanel.Dock="Left"
+                                   VerticalAlignment="Center"/>
+                        <TextBlock Text="✕" FontSize="14" Foreground="#888888"
+                                   HorizontalAlignment="Right" Cursor="Hand"
+                                   MouseDown="OnHelpClose" VerticalAlignment="Center"/>
+                    </DockPanel>
+
+                    <!-- 게임 단축키 -->
+                    <TextBlock Text="게임" FontSize="11" Foreground="#039BE5"
+                               FontWeight="Bold" Margin="0,0,0,6"/>
+                    <DockPanel Margin="0,0,0,5">
+                        <Border Background="#253545" CornerRadius="4" Padding="7,3"
+                                MinWidth="120" DockPanel.Dock="Left" Margin="0,0,12,0">
+                            <TextBlock Text="Ctrl + N" Foreground="#A0C4D8"
+                                       FontFamily="Consolas" FontSize="11"/>
+                        </Border>
+                        <TextBlock Text="새 퍼즐 생성" Foreground="#E0E0E0" VerticalAlignment="Center"/>
+                    </DockPanel>
+                    <DockPanel Margin="0,0,0,5">
+                        <Border Background="#253545" CornerRadius="4" Padding="7,3"
+                                MinWidth="120" DockPanel.Dock="Left" Margin="0,0,12,0">
+                            <TextBlock Text="Ctrl + R" Foreground="#A0C4D8"
+                                       FontFamily="Consolas" FontSize="11"/>
+                        </Border>
+                        <TextBlock Text="씨드로 재도전 (씨드 입력 필요)" Foreground="#E0E0E0" VerticalAlignment="Center"/>
+                    </DockPanel>
+                    <DockPanel Margin="0,0,0,5">
+                        <Border Background="#253545" CornerRadius="4" Padding="7,3"
+                                MinWidth="120" DockPanel.Dock="Left" Margin="0,0,12,0">
+                            <TextBlock Text="Ctrl + Space" Foreground="#A0C4D8"
+                                       FontFamily="Consolas" FontSize="11"/>
+                        </Border>
+                        <TextBlock Text="선택 단어 공개" Foreground="#E0E0E0" VerticalAlignment="Center"/>
+                    </DockPanel>
+
+                    <!-- 입력 단축키 -->
+                    <TextBlock Text="입력" FontSize="11" Foreground="#039BE5"
+                               FontWeight="Bold" Margin="0,14,0,6"/>
+                    <DockPanel Margin="0,0,0,5">
+                        <Border Background="#253545" CornerRadius="4" Padding="7,3"
+                                MinWidth="120" DockPanel.Dock="Left" Margin="0,0,12,0">
+                            <TextBlock Text="A – Z" Foreground="#A0C4D8"
+                                       FontFamily="Consolas" FontSize="11"/>
+                        </Border>
+                        <TextBlock Text="글자 입력 → 자동으로 다음 칸 이동" Foreground="#E0E0E0" VerticalAlignment="Center"/>
+                    </DockPanel>
+                    <DockPanel Margin="0,0,0,5">
+                        <Border Background="#253545" CornerRadius="4" Padding="7,3"
+                                MinWidth="120" DockPanel.Dock="Left" Margin="0,0,12,0">
+                            <TextBlock Text="Tab" Foreground="#A0C4D8"
+                                       FontFamily="Consolas" FontSize="11"/>
+                        </Border>
+                        <TextBlock Text="가로 ↔ 세로 방향 전환" Foreground="#E0E0E0" VerticalAlignment="Center"/>
+                    </DockPanel>
+                    <DockPanel Margin="0,0,0,5">
+                        <Border Background="#253545" CornerRadius="4" Padding="7,3"
+                                MinWidth="120" DockPanel.Dock="Left" Margin="0,0,12,0">
+                            <TextBlock Text="←↑↓→" Foreground="#A0C4D8"
+                                       FontFamily="Consolas" FontSize="11"/>
+                        </Border>
+                        <TextBlock Text="셀 이동" Foreground="#E0E0E0" VerticalAlignment="Center"/>
+                    </DockPanel>
+                    <DockPanel Margin="0,0,0,5">
+                        <Border Background="#253545" CornerRadius="4" Padding="7,3"
+                                MinWidth="120" DockPanel.Dock="Left" Margin="0,0,12,0">
+                            <TextBlock Text="Backspace" Foreground="#A0C4D8"
+                                       FontFamily="Consolas" FontSize="11"/>
+                        </Border>
+                        <TextBlock Text="글자 지우기 (빈 칸이면 이전 칸 이동)" Foreground="#E0E0E0" VerticalAlignment="Center"/>
+                    </DockPanel>
+                    <DockPanel Margin="0,0,0,5">
+                        <Border Background="#253545" CornerRadius="4" Padding="7,3"
+                                MinWidth="120" DockPanel.Dock="Left" Margin="0,0,12,0">
+                            <TextBlock Text="Delete" Foreground="#A0C4D8"
+                                       FontFamily="Consolas" FontSize="11"/>
+                        </Border>
+                        <TextBlock Text="현재 셀 글자만 삭제" Foreground="#E0E0E0" VerticalAlignment="Center"/>
+                    </DockPanel>
+
+                    <TextBlock Text="Esc 또는 배경 클릭으로 닫기" FontSize="10"
+                               Foreground="#666666" Margin="0,14,0,0"
+                               HorizontalAlignment="Center"/>
+                </StackPanel>
+            </Border>
+        </Grid>
     </Grid>
 </Window>

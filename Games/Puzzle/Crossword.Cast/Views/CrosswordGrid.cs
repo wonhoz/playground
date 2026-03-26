@@ -11,7 +11,8 @@ public class CrosswordGrid : System.Windows.FrameworkElement
     private const int    N    = Puzzle.N;
     private const double Cell = 36;
 
-    public GameService?  Game      { get; set; }
+    public GameService?  Game       { get; set; }
+    public bool          ShowErrors { get; set; } = false;
     public event Action? Changed;
 
     private int  _selRow = -1, _selCol = -1;
@@ -22,8 +23,9 @@ public class CrosswordGrid : System.Windows.FrameworkElement
     private static readonly SolidColorBrush BrBlock    = new(WpfColor.FromRgb(0x1A, 0x1A, 0x1A));
     private static readonly SolidColorBrush BrEmpty    = new(WpfColor.FromRgb(0xF5, 0xF5, 0xF5));
     private static readonly SolidColorBrush BrWord     = new(WpfColor.FromRgb(0xBB, 0xDE, 0xFB));
-    private static readonly SolidColorBrush BrCursor   = new(WpfColor.FromRgb(0x02, 0x88, 0xD1));
+    private static readonly SolidColorBrush BrCursor   = new(WpfColor.FromRgb(0x03, 0x9B, 0xE5));
     private static readonly SolidColorBrush BrOk       = new(WpfColor.FromRgb(0x1B, 0x5E, 0x20));
+    private static readonly SolidColorBrush BrError    = new(WpfColor.FromRgb(0xC6, 0x28, 0x28));
     private static readonly SolidColorBrush BrLetter   = new(WpfColor.FromRgb(0x1A, 0x1A, 0x1A));
     private static readonly SolidColorBrush BrNumColor = new(WpfColor.FromRgb(0x55, 0x55, 0x55));
     private static readonly Pen             PenBorder  = new(new SolidColorBrush(WpfColor.FromRgb(0xCC, 0xCC, 0xCC)), 0.5);
@@ -85,7 +87,9 @@ public class CrosswordGrid : System.Windows.FrameworkElement
             char ch = Game.GetUserCell(r, c);
             if (ch != '\0')
             {
-                var brush = Game.IsCorrect(r, c) ? BrOk : BrLetter;
+                var brush = Game.IsCorrect(r, c) ? BrOk
+                          : ShowErrors           ? BrError
+                          : BrLetter;
                 var ft    = MakeText(ch.ToString(), 18, brush, TfBold);
                 dc.DrawText(ft, new Point(
                     c * Cell + (Cell - ft.Width)  / 2,
@@ -133,15 +137,22 @@ public class CrosswordGrid : System.Windows.FrameworkElement
     {
         if (Game is null || _selRow < 0) return;
 
-        if (e.Key is >= Key.A and <= Key.Z)
+        if (e.Key is >= Key.A and <= Key.Z && Keyboard.Modifiers == ModifierKeys.None)
         {
+            ShowErrors = false;
             char ch = (char)('A' + (e.Key - Key.A));
             Game.SetUserCell(_selRow, _selCol, ch);
+
+            int prevRow = _selRow, prevCol = _selCol;
             MoveCursor(forward: true);
+            if (_selRow == prevRow && _selCol == prevCol)
+                AdvanceToNextWord();
+
             e.Handled = true;
         }
         else if (e.Key == Key.Back)
         {
+            ShowErrors = false;
             if (Game.GetUserCell(_selRow, _selCol) != '\0')
                 Game.SetUserCell(_selRow, _selCol, '\0');
             else
@@ -150,6 +161,7 @@ public class CrosswordGrid : System.Windows.FrameworkElement
         }
         else if (e.Key == Key.Delete)
         {
+            ShowErrors = false;
             Game.SetUserCell(_selRow, _selCol, '\0');
             e.Handled = true;
         }
@@ -199,6 +211,37 @@ public class CrosswordGrid : System.Windows.FrameworkElement
             _selRow = nr;
             _selCol = nc;
         }
+    }
+
+    private void AdvanceToNextWord()
+    {
+        if (Game?.CurrentPuzzle is null) return;
+
+        var allWords = (_selAcross
+            ? Game.CurrentPuzzle.AcrossWords
+            : Game.CurrentPuzzle.DownWords).ToList();
+
+        var currentWord = Game.FindWord(_selRow, _selCol, _selAcross);
+        int idx         = currentWord is null ? -1 : allWords.IndexOf(currentWord);
+
+        for (int i = 1; i <= allWords.Count; i++)
+        {
+            var next = allWords[(idx + i) % allWords.Count];
+            int dr   = next.Across ? 0 : 1, dc = next.Across ? 1 : 0;
+            // 첫 번째 빈 칸 탐색
+            for (int j = 0; j < next.Word.Length; j++)
+            {
+                int nr = next.Row + dr * j, nc = next.Col + dc * j;
+                if (Game.GetUserCell(nr, nc) == '\0')
+                {
+                    _selRow    = nr;
+                    _selCol    = nc;
+                    _selAcross = next.Across;
+                    return;
+                }
+            }
+        }
+        // 모든 단어가 채워진 경우 → 현재 위치 유지
     }
 
     // ── 공개 API ─────────────────────────────────────────────────────

@@ -70,4 +70,16 @@ public class GameService
         for (int i = 0; i < w.Word.Length; i++)
             _user[w.Row + dr * i, w.Col + dc * i] = w.Word[i];
     }
+
+    public char[,] GetUserGrid()
+    {
+        var copy = new char[Puzzle.N, Puzzle.N];
+        Array.Copy(_user, copy, _user.Length);
+        return copy;
+    }
+
+    public void SetUserGrid(char[,] grid)
+    {
+        Array.Copy(grid, _user, grid.Length);
+    }
 }

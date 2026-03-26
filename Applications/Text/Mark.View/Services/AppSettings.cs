@@ -17,6 +17,10 @@ public class AppSettings
     public double WindowWidth { get; set; } = 1200;
     public double WindowHeight { get; set; } = 800;
     public double EditorFontSize { get; set; } = 13;
+    public bool IsEditMode { get; set; } = false;
+    public bool IsTocVisible { get; set; } = false;
+    public double TocWidth { get; set; } = 220;
+    public double EditorSplitRatio { get; set; } = 0.5;
 
     private const int MaxRecentFiles = 10;
 

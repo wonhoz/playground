@@ -12,11 +12,6 @@ public class MarkdownRenderer
         _pipeline = new MarkdownPipelineBuilder()
             .UseAdvancedExtensions()
             .UseAutoIdentifiers(AutoIdentifierOptions.GitHub)
-            .UseTaskLists()
-            .UseGridTables()
-            .UsePipeTables()
-            .UseEmphasisExtras()
-            .UseGenericAttributes()
             .Build();
     }
 
@@ -33,11 +28,16 @@ public class MarkdownRenderer
             : "";
 
         var css = GetThemeCss(theme);
+        var hlCss = (theme == "light" || theme == "sepia")
+            ? "atom-one-light" : "atom-one-dark";
 
         return "<!DOCTYPE html><html><head><meta charset='utf-8'>" + baseTag
             + "<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css'>"
+            + $"<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/highlight.js@11/dist/styles/{hlCss}.min.css'>"
             + "<style>" + GetCommonCss() + css + "</style>"
             + "</head><body>" + body
+            + "<script src='https://cdn.jsdelivr.net/npm/highlight.js@11/dist/highlight.min.js'></script>"
+            + "<script>hljs.highlightAll();</script>"
             + "<script defer src='https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js'></script>"
             + "<script defer src='https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js'"
             + " onload=\"renderMathInElement(document.body,{delimiters:["
@@ -80,7 +80,7 @@ pre {
   overflow-x: auto;
   margin: 1em 0;
 }
-pre code { background: none; color: var(--text); padding: 0; font-size: 0.9em; }
+pre code { background: none; padding: 0; font-size: 0.9em; }
 blockquote {
   border-left: 4px solid var(--blockquote-border);
   background: var(--surface);

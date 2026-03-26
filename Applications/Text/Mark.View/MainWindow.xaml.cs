@@ -24,12 +24,14 @@ public partial class MainWindow : Window
     private int _activeIndex = -1;
     private bool _isEditMode;
     private bool _isTocVisible;
+    private bool _isFocusMode;
     private bool _suppressEditorChange;
     private DispatcherTimer? _previewTimer;
     private DispatcherTimer? _autoSaveTimer;
     private string _currentTheme = "dark";
     private double _pendingScrollY = 0;
     private bool _webViewReady = false;
+    private readonly TaskCompletionSource _webViewReadyTcs = new();
     private readonly Dictionary<string, FileSystemWatcher> _fileWatchers = new(StringComparer.OrdinalIgnoreCase);
     private double _editorFontSize = 13;
 
@@ -46,6 +48,7 @@ public partial class MainWindow : Window
         SetupPreviewTimer();
         SetupAutoSaveTimer();
         RefreshRecentList();
+        RestoreUiState();
         RestoreSessionAsync();
     }
 
@@ -53,9 +56,8 @@ public partial class MainWindow : Window
     {
         var files = _settings.OpenFiles.Where(File.Exists).ToList();
         if (files.Count == 0) return;
-        // WebView2 초기화 완료 대기 (최대 3초)
-        for (int i = 0; i < 30 && !_webViewReady; i++)
-            await Task.Delay(100);
+        // WebView2 초기화 완료 이벤트 대기 (최대 3초)
+        await Task.WhenAny(_webViewReadyTcs.Task, Task.Delay(3000));
         foreach (var f in files)
             await OpenFileAsync(f);
     }
@@ -190,6 +192,7 @@ public partial class MainWindow : Window
             Viewer.CoreWebView2.Settings.AreDefaultContextMenusEnabled = false;
             Viewer.CoreWebView2.NavigationCompleted += OnNavigationCompleted;
             _webViewReady = true;
+            _webViewReadyTcs.TrySetResult();
             HideLoading();
         }
         catch (Exception ex)
@@ -325,10 +328,12 @@ public partial class MainWindow : Window
             }
         });
 
-        var prev = StatusPath.Text;
-        StatusPath.Text = $"자동 저장 완료 ({modified.Count}개)";
+        var savedPath = StatusPath.Text;
+        var autoMsg = $"자동 저장 완료 ({modified.Count}개)";
+        StatusPath.Text = autoMsg;
         await Task.Delay(2000);
-        if (StatusPath.Text.StartsWith("자동 저장")) StatusPath.Text = prev;
+        // 다른 핸들러가 텍스트를 변경하지 않은 경우에만 복원
+        if (StatusPath.Text == autoMsg) StatusPath.Text = savedPath;
     }
 
     // ── 탭 관리 ─────────────────────────────────────────────────────────
@@ -544,6 +549,14 @@ public partial class MainWindow : Window
         // HideLoading은 OnNavigationCompleted에서 호출됨
     }
 
+    // ── UI 상태 복원 ────────────────────────────────────────────────────
+
+    private void RestoreUiState()
+    {
+        if (_settings.IsEditMode) SetEditMode(true);
+        if (_settings.IsTocVisible) SetTocVisible(true);
+    }
+
     // ── 편집 모드 ────────────────────────────────────────────────────────
 
     private void SetEditMode(bool editMode)
@@ -551,7 +564,9 @@ public partial class MainWindow : Window
         _isEditMode = editMode;
         if (editMode)
         {
-            EditorColumn.Width = new GridLength(1, GridUnitType.Star);
+            var ratio = Math.Clamp(_settings.EditorSplitRatio, 0.2, 0.8);
+            EditorColumn.Width = new GridLength(ratio, GridUnitType.Star);
+            ViewerColumn.Width = new GridLength(1 - ratio, GridUnitType.Star);
             SplitterColumn.Width = new GridLength(4);
             TxtEditIcon.Foreground = (SolidColorBrush)FindResource("AccentBrush");
             StatusMode.Text = "편집";
@@ -563,6 +578,8 @@ public partial class MainWindow : Window
             TxtEditIcon.Foreground = (SolidColorBrush)FindResource("TextDimBrush");
             StatusMode.Text = "뷰";
         }
+        _settings.IsEditMode = editMode;
+        _settings.Save();
     }
 
     // ── TOC ─────────────────────────────────────────────────────────────
@@ -572,8 +589,25 @@ public partial class MainWindow : Window
         _isTocVisible = visible;
         TocPanel.Visibility = visible ? Visibility.Visible : Visibility.Collapsed;
         TocSplitter.Visibility = visible ? Visibility.Visible : Visibility.Collapsed;
-        if (!visible) TocColumn.Width = new GridLength(0);
-        else TocColumn.Width = new GridLength(220);
+        if (!visible)
+        {
+            var w = TocColumn.ActualWidth > 0 ? TocColumn.ActualWidth : TocColumn.Width.Value;
+            if (w > 0) _settings.TocWidth = w;
+            TocColumn.Width = new GridLength(0);
+        }
+        else
+            TocColumn.Width = new GridLength(_settings.TocWidth);
+        _settings.IsTocVisible = visible;
+        _settings.Save();
+    }
+
+    // ── 집중 모드 ────────────────────────────────────────────────────────
+
+    private void SetFocusMode(bool focus)
+    {
+        _isFocusMode = focus;
+        ToolbarBorder.Visibility = focus ? Visibility.Collapsed : Visibility.Visible;
+        StatusBarBorder.Visibility = focus ? Visibility.Collapsed : Visibility.Visible;
     }
 
     // ── 파일 작업 ────────────────────────────────────────────────────────
@@ -716,6 +750,50 @@ public partial class MainWindow : Window
     private void BtnToc_Click(object sender, RoutedEventArgs e)
     {
         SetTocVisible(!_isTocVisible);
+    }
+
+    private void BtnFocus_Click(object sender, RoutedEventArgs e)
+    {
+        SetFocusMode(!_isFocusMode);
+    }
+
+    private void BtnHelp_Click(object sender, RoutedEventArgs e)
+    {
+        HelpOverlay.Visibility = Visibility.Visible;
+    }
+
+    private void BtnHelpClose_Click(object sender, RoutedEventArgs e)
+    {
+        HelpOverlay.Visibility = Visibility.Collapsed;
+    }
+
+    private void HelpOverlay_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+    {
+        HelpOverlay.Visibility = Visibility.Collapsed;
+    }
+
+    private void HelpOverlay_StopPropagation(object sender, System.Windows.Input.MouseButtonEventArgs e)
+    {
+        e.Handled = true;
+    }
+
+    private void EditorSplitter_DragCompleted(object sender, System.Windows.Controls.Primitives.DragCompletedEventArgs e)
+    {
+        var total = EditorColumn.ActualWidth + ViewerColumn.ActualWidth;
+        if (total > 0)
+        {
+            _settings.EditorSplitRatio = EditorColumn.ActualWidth / total;
+            _settings.Save();
+        }
+    }
+
+    private void TocSplitter_DragCompleted(object sender, System.Windows.Controls.Primitives.DragCompletedEventArgs e)
+    {
+        if (TocColumn.ActualWidth > 0)
+        {
+            _settings.TocWidth = TocColumn.ActualWidth;
+            _settings.Save();
+        }
     }
 
     private void CmbTheme_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -950,6 +1028,19 @@ public partial class MainWindow : Window
         { AdjustEditorFontSize(1); e.Handled = true; }
         else if (e.Key == Key.OemMinus && Keyboard.Modifiers == ModifierKeys.Control)
         { AdjustEditorFontSize(-1); e.Handled = true; }
+        else if (e.Key == Key.F11)
+        { SetFocusMode(!_isFocusMode); e.Handled = true; }
+        else if (e.Key == Key.F1)
+        { HelpOverlay.Visibility = Visibility.Visible; e.Handled = true; }
+        else if (e.Key == Key.V && Keyboard.Modifiers == (ModifierKeys.Control | ModifierKeys.Shift))
+        { PasteClipboardAsNewTab(); e.Handled = true; }
+        else if (e.Key == Key.Escape)
+        {
+            if (HelpOverlay.Visibility == Visibility.Visible)
+            { HelpOverlay.Visibility = Visibility.Collapsed; e.Handled = true; }
+            else if (!string.IsNullOrEmpty(TxtFind.Text))
+            { TxtFind.Text = ""; e.Handled = true; }
+        }
     }
 
     protected override void OnPreviewMouseWheel(MouseWheelEventArgs e)
@@ -962,6 +1053,15 @@ public partial class MainWindow : Window
             AdjustEditorFontSize(e.Delta > 0 ? 1 : -1);
             e.Handled = true;
         }
+    }
+
+    private void PasteClipboardAsNewTab()
+    {
+        var text = Clipboard.GetText();
+        if (string.IsNullOrEmpty(text)) return;
+        var doc = new MarkDocument { Content = text };
+        OpenDocument(doc);
+        if (!_isEditMode) SetEditMode(true);
     }
 
     private bool IsMouseOverEditor()

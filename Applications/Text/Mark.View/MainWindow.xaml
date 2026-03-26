@@ -2,6 +2,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:wv2="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
+        xmlns:local="clr-namespace:MarkView"
         Title="Mark.View"
         Width="1200" Height="800"
         MinWidth="600" MinHeight="400"
@@ -35,7 +36,7 @@
     </Grid.RowDefinitions>
 
     <!-- ══ 툴바 ══════════════════════════════════════════ -->
-    <Border Grid.Row="0"
+    <Border x:Name="ToolbarBorder" Grid.Row="0"
             Background="{StaticResource SurfaceBrush}"
             BorderBrush="{StaticResource BorderBrush}"
             BorderThickness="0,0,0,1">
@@ -50,10 +51,10 @@
         <Border x:Name="LoadingBarTrack" Grid.Row="1" ClipToBounds="True" Visibility="Collapsed">
           <Border.Background>
             <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
-              <GradientStop Color="#2058A6FF" Offset="0"/>
-              <GradientStop Color="#58A6FF"   Offset="0.4"/>
-              <GradientStop Color="#79C0FF"   Offset="0.6"/>
-              <GradientStop Color="#2079C0FF" Offset="1"/>
+              <GradientStop Color="#20A78BFA" Offset="0"/>
+              <GradientStop Color="#A78BFA"   Offset="0.4"/>
+              <GradientStop Color="#C4B5FD"   Offset="0.6"/>
+              <GradientStop Color="#20C4B5FD" Offset="1"/>
             </LinearGradientBrush>
           </Border.Background>
           <!-- 내부: 반짝이는 흰색 하이라이트 오버레이 -->
@@ -125,6 +126,12 @@
                   ToolTip="새로고침 (F5)" Padding="8,5">
             <TextBlock Text="&#x21BB;" FontSize="14"/>
           </Button>
+          <Separator Width="1" Height="20" Margin="4,0" Background="{StaticResource BorderBrush}"/>
+          <!-- 집중 모드 -->
+          <Button x:Name="BtnFocus" Style="{StaticResource IconButton}" Click="BtnFocus_Click"
+                  ToolTip="집중 모드 (F11)" Padding="8,5">
+            <TextBlock Text="&#x26F6;" FontSize="14"/>
+          </Button>
         </StackPanel>
 
         <!-- 가운데: 앱 제목 (진짜 중앙) -->
@@ -149,6 +156,12 @@
             <ComboBoxItem Content="Sepia" Tag="sepia"/>
             <ComboBoxItem Content="라이트" Tag="light"/>
           </ComboBox>
+          <Separator Width="1" Height="20" Margin="0,0,6,0" Background="{StaticResource BorderBrush}"/>
+          <!-- 단축키 도움말 -->
+          <Button Style="{StaticResource IconButton}" Click="BtnHelp_Click"
+                  ToolTip="단축키 도움말 (F1)" Margin="0,0,6,0" Padding="8,5">
+            <TextBlock Text="?" FontSize="13" FontWeight="SemiBold"/>
+          </Button>
           <TextBox x:Name="TxtFind" Width="180"
                    ToolTip="찾기 (Ctrl+F)"
                    TextChanged="TxtFind_TextChanged"
@@ -229,7 +242,8 @@
       <GridSplitter x:Name="TocSplitter"
                     Grid.Column="1"
                     Width="4" HorizontalAlignment="Stretch"
-                    Visibility="Collapsed"/>
+                    Visibility="Collapsed"
+                    DragCompleted="TocSplitter_DragCompleted"/>
 
       <!-- 탭 + 편집/뷰 영역 -->
       <Grid Grid.Column="2">
@@ -313,7 +327,7 @@
           <Grid.ColumnDefinitions>
             <ColumnDefinition x:Name="EditorColumn" Width="0" MinWidth="0"/>
             <ColumnDefinition x:Name="SplitterColumn" Width="0"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition x:Name="ViewerColumn" Width="*"/>
           </Grid.ColumnDefinitions>
 
           <!-- 편집기 -->
@@ -327,21 +341,22 @@
                      TextWrapping="Wrap"
                      VerticalScrollBarVisibility="Auto"
                      HorizontalScrollBarVisibility="Auto"
-                     Background="#141A28"
-                     Foreground="#CDD6F4"
+                     Background="#16112A"
+                     Foreground="#E2D9F3"
                      BorderThickness="0"
                      Padding="16"
                      FontFamily="Cascadia Code, Consolas, monospace"
                      FontSize="13"
-                     CaretBrush="#58A6FF"
-                     SelectionBrush="#58A6FF"
+                     CaretBrush="#A78BFA"
+                     SelectionBrush="#A78BFA"
                      TextChanged="Editor_TextChanged"
                      KeyDown="Editor_KeyDown"/>
           </Border>
 
           <GridSplitter x:Name="EditorSplitter"
                         Grid.Column="1"
-                        Width="4" HorizontalAlignment="Stretch"/>
+                        Width="4" HorizontalAlignment="Stretch"
+                        DragCompleted="EditorSplitter_DragCompleted"/>
 
           <!-- 뷰어 (WebView2) -->
           <wv2:WebView2 x:Name="Viewer"
@@ -351,7 +366,7 @@
     </Grid>
 
     <!-- ══ 상태바 ═════════════════════════════════════════ -->
-    <Border Grid.Row="2"
+    <Border x:Name="StatusBarBorder" Grid.Row="2"
             Background="{StaticResource SurfaceBrush}"
             BorderBrush="{StaticResource BorderBrush}"
             BorderThickness="0,1,0,0"
@@ -395,5 +410,68 @@
         </StackPanel>
       </Grid>
     </Border>
+    <!-- ══ 단축키 도움말 오버레이 ════════════════════════ -->
+    <Grid x:Name="HelpOverlay" Grid.Row="0" Grid.RowSpan="3"
+          Visibility="Collapsed" Background="#BB000000"
+          MouseLeftButtonDown="HelpOverlay_MouseLeftButtonDown">
+      <Border Background="{StaticResource SurfaceBrush}"
+              BorderBrush="{StaticResource BorderBrush}"
+              BorderThickness="1" CornerRadius="8"
+              Padding="28,22" MaxWidth="480"
+              VerticalAlignment="Center" HorizontalAlignment="Center"
+              MouseLeftButtonDown="HelpOverlay_StopPropagation">
+        <StackPanel>
+          <Grid Margin="0,0,0,16">
+            <TextBlock Text="단축키 도움말" FontSize="15" FontWeight="SemiBold"
+                       Foreground="{StaticResource TextBrush}"/>
+            <Button HorizontalAlignment="Right" Style="{StaticResource IconButton}"
+                    Click="BtnHelpClose_Click" Padding="6,3">
+              <TextBlock Text="✕" FontSize="12"/>
+            </Button>
+          </Grid>
+          <ItemsControl>
+            <ItemsControl.ItemTemplate>
+              <DataTemplate>
+                <Grid Margin="0,3">
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="160"/>
+                    <ColumnDefinition Width="*"/>
+                  </Grid.ColumnDefinitions>
+                  <Border Background="{StaticResource Surface2Brush}" CornerRadius="3"
+                          Padding="8,3" HorizontalAlignment="Left">
+                    <TextBlock Text="{Binding Key}" FontFamily="Cascadia Code, Consolas, monospace"
+                               FontSize="11" Foreground="{StaticResource AccentBrush}"/>
+                  </Border>
+                  <TextBlock Grid.Column="1" Text="{Binding Desc}" FontSize="12"
+                             Foreground="{StaticResource TextBrush}" VerticalAlignment="Center"
+                             Margin="12,0,0,0"/>
+                </Grid>
+              </DataTemplate>
+            </ItemsControl.ItemTemplate>
+            <ItemsControl.Items>
+              <local:ShortcutEntry Key="Ctrl + O"       Desc="파일 열기"/>
+              <local:ShortcutEntry Key="Ctrl + N"       Desc="새 파일"/>
+              <local:ShortcutEntry Key="Ctrl + S"       Desc="저장"/>
+              <local:ShortcutEntry Key="Ctrl + Shift+S" Desc="다른 이름으로 저장"/>
+              <local:ShortcutEntry Key="Ctrl + W"       Desc="탭 닫기"/>
+              <local:ShortcutEntry Key="Ctrl + Tab"     Desc="다음 탭"/>
+              <local:ShortcutEntry Key="Ctrl + E"       Desc="편집 모드 전환"/>
+              <local:ShortcutEntry Key="Ctrl + T"       Desc="목차 패널 토글"/>
+              <local:ShortcutEntry Key="Ctrl + F"       Desc="찾기"/>
+              <local:ShortcutEntry Key="Ctrl + B"       Desc="HTML 내보내기"/>
+              <local:ShortcutEntry Key="Ctrl + P"       Desc="PDF 내보내기"/>
+              <local:ShortcutEntry Key="Ctrl + Shift+V" Desc="클립보드 붙여넣기 미리보기"/>
+              <local:ShortcutEntry Key="F5"             Desc="새로고침"/>
+              <local:ShortcutEntry Key="F11"            Desc="집중 모드 (툴바/상태바 숨김)"/>
+              <local:ShortcutEntry Key="F1"             Desc="단축키 도움말"/>
+              <local:ShortcutEntry Key="Ctrl + +"       Desc="에디터 폰트 크기 증가"/>
+              <local:ShortcutEntry Key="Ctrl + -"       Desc="에디터 폰트 크기 감소"/>
+              <local:ShortcutEntry Key="Esc"            Desc="찾기 초기화 / 도움말 닫기"/>
+            </ItemsControl.Items>
+          </ItemsControl>
+        </StackPanel>
+      </Border>
+    </Grid>
+
   </Grid>
 </Window>

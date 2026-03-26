@@ -68,11 +68,11 @@ namespace StayAwake
             };
             btnOk.FlatAppearance.BorderColor = BorderColor;
             btnOk.FlatAppearance.BorderSize = 1;
-            btnOk.Location = new Point(width - btnOk.Width - 20, height - btnOk.Height - 42);
+            btnOk.Location = new Point(width - btnOk.Width - 35, height - btnOk.Height - 72);
 
             AcceptButton = btnOk;
-            Controls.Add(textBox);
             Controls.Add(btnOk);
+            Controls.Add(textBox);
         }
     }
 }

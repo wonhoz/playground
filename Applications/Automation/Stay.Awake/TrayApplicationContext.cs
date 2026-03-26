@@ -439,7 +439,7 @@ namespace StayAwake
 • 오늘 누적 활성 시간: {activeTime:hh\:mm\:ss}
 • 앱 실행 중 활성 비율: {activeRate:F1}% ({activeTime:hh\:mm\:ss} / {totalElapsed:hh\:mm\:ss})";
 
-            DarkInfoDialog.Show("오늘의 통계", message, 420, 280);
+            DarkInfoDialog.Show("오늘의 통계", message, 570, 460);
         }
 
         private void ShowAbout()
@@ -485,9 +485,9 @@ Slack 자리 비움 상태 방지 도구
 • Slack → 시간 설정: 출퇴근 시간 변경 (기본 08:55 / 18:55)
 • 권장 간격: 3~5분
 
-© 2026 SmartCareworks Inc.";
+© 2026 https://github.com/wonhoz";
 
-            DarkInfoDialog.Show("StayAwake 정보", message, 480, 440);
+            DarkInfoDialog.Show("StayAwake 정보", message, 750, 1070);
         }
 
         private async void OnScheduleTimerTick(object? sender, EventArgs e)

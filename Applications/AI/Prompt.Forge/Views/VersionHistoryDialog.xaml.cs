@@ -1,5 +1,6 @@
 using System.Runtime.InteropServices;
 using System.Windows.Interop;
+using Prompt.Forge.Services;
 
 namespace Prompt.Forge.Views;
 
@@ -12,9 +13,12 @@ public partial class VersionHistoryDialog : Window
 
     record VersionEntry(int Id, string VersionLabel, string DateLabel, string Content);
 
-    public VersionHistoryDialog(PromptItem current, List<PromptItem> history)
+    Database? _db;
+
+    internal VersionHistoryDialog(PromptItem current, List<PromptItem> history, Database? db = null)
     {
         InitializeComponent();
+        _db = db;
 
         Loaded += (_, _) =>
         {
@@ -53,6 +57,7 @@ public partial class VersionHistoryDialog : Window
         {
             TxtPreview.Text = entry.Content;
             BtnRestore.IsEnabled = true;
+            BtnDeleteVersion.IsEnabled = _db != null;
         }
     }
 
@@ -61,6 +66,24 @@ public partial class VersionHistoryDialog : Window
         if (LstVersions.SelectedItem is not VersionEntry entry) return;
         RestoredContent = entry.Content;
         DialogResult = true;
+    }
+
+    void DeleteVersion_Click(object sender, RoutedEventArgs e)
+    {
+        if (LstVersions.SelectedItem is not VersionEntry entry || _db == null) return;
+        var r = MessageBox.Show($"v{entry.VersionLabel} 버전을 삭제하시겠습니까?",
+            "버전 삭제", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+        if (r != MessageBoxResult.Yes) return;
+        _db.DeleteHistoryItem(entry.Id);
+        var items = (LstVersions.ItemsSource as System.Collections.Generic.List<VersionEntry>)?.ToList() ?? [];
+        items.RemoveAll(x => x.Id == entry.Id);
+        LstVersions.ItemsSource = null;
+        LstVersions.ItemsSource = items;
+        TxtPreview.Text = "";
+        BtnRestore.IsEnabled = false;
+        BtnDeleteVersion.IsEnabled = false;
+        if (items.Count == 0)
+            TxtEmptyMsg.Visibility = System.Windows.Visibility.Visible;
     }
 
     void Close_Click(object sender, RoutedEventArgs e) => DialogResult = false;

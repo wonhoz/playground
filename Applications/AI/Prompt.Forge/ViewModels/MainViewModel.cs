@@ -75,7 +75,6 @@ sealed class MainViewModel : INotifyPropertyChanged
     public MainViewModel(Database db)
     {
         _db = db;
-        db.EnsureUseCountColumn();
         Refresh();
     }
 

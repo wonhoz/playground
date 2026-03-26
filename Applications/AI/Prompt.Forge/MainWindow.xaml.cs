@@ -41,6 +41,7 @@ public partial class MainWindow : Window
 
         Loaded   += OnLoaded;
         Closing  += OnClosing;
+        TxtContent.TextChanged += TxtContent_TextChanged;
     }
 
     void OnLoaded(object s, RoutedEventArgs e)
@@ -262,6 +263,34 @@ public partial class MainWindow : Window
         BtnFav.Content  = p.IsFavorite ? "★" : "☆";
     }
 
+    // ── 에디터 이벤트 ─────────────────────────────────────────────────────────
+
+    void TagLabel_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
+    {
+        if (sender is not TextBlock tb || string.IsNullOrWhiteSpace(tb.Text)) return;
+        // 태그가 여러 개면 첫 번째 태그로 필터링
+        var firstTag = tb.Text.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
+                              .FirstOrDefault();
+        if (firstTag == null) return;
+        e.Handled = true;
+        var idx = _vm.Tags.IndexOf(firstTag);
+        if (idx >= 0) CbTag.SelectedIndex = idx;
+    }
+
+    void TxtContent_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        if (!IsLoaded) return;
+        var temp = new PromptItem { Content = TxtContent.Text };
+        var vars = temp.ExtractVariables();
+        if (vars.Count == 0)
+        {
+            _vm.StatusText = $"총 {_vm.Items.Count:N0}개";
+            return;
+        }
+        var hint = string.Join(", ", vars.Select(v => $"{{{{{v}}}}}"));
+        _vm.StatusText = $"변수 {vars.Count}개: {hint}";
+    }
+
     // ── 버튼 핸들러 ───────────────────────────────────────────────────────────
 
     void NewPrompt_Click(object sender, RoutedEventArgs e)
@@ -315,8 +344,25 @@ public partial class MainWindow : Window
             if (_vm.Selected != null) _vm.IncrementUseCount(_vm.Selected.Id);
             bool dirty = _vm.Selected != null && IsDirty(_vm.Selected);
             _vm.StatusText = dirty ? "클립보드에 복사됨 ⚠ 미저장 내용 포함" : "클립보드에 복사됨";
+
+            // 복사 버튼 일시 피드백
+            if (sender is Button btn)
+            {
+                var original = btn.Content;
+                btn.Content = "✓ 복사됨";
+                btn.IsEnabled = false;
+                var timer = new System.Windows.Threading.DispatcherTimer
+                    { Interval = TimeSpan.FromSeconds(1) };
+                timer.Tick += (_, _) =>
+                {
+                    timer.Stop();
+                    btn.Content = original;
+                    btn.IsEnabled = _vm.HasSelection;
+                };
+                timer.Start();
+            }
         }
-        catch { }
+        catch { _vm.StatusText = "클립보드 복사 실패"; }
     }
 
     void FillVars_Click(object sender, RoutedEventArgs e)
@@ -351,7 +397,7 @@ public partial class MainWindow : Window
     {
         if (_vm.Selected == null) return;
         var history = _db.GetVersionHistory(_vm.Selected.Id);
-        var dlg = new VersionHistoryDialog(_vm.Selected, history) { Owner = this };
+        var dlg = new VersionHistoryDialog(_vm.Selected, history, _db) { Owner = this };
         if (dlg.ShowDialog() == true && dlg.RestoredContent != null)
         {
             TxtContent.Text = dlg.RestoredContent;
@@ -363,6 +409,28 @@ public partial class MainWindow : Window
     {
         if (!IsLoaded || _refreshing) return;
         _vm.SortOrder = CbSort.SelectedIndex == 1 ? "use_count" : "updated";
+    }
+
+    void Help_Click(object sender, RoutedEventArgs e)
+    {
+        MessageBox.Show(
+            "──────────────────────────────\n" +
+            "  Prompt.Forge 단축키 안내\n" +
+            "──────────────────────────────\n\n" +
+            "Ctrl+S         저장\n" +
+            "Ctrl+D         복제\n" +
+            "Ctrl+Enter     변수 채우기\n" +
+            "Ctrl+H         버전 히스토리\n\n" +
+            "Win+Shift+P    창 표시/숨기기\n\n" +
+            "──────────────────────────────\n" +
+            "  사용 팁\n" +
+            "──────────────────────────────\n\n" +
+            "• {{변수명}} 형식으로 변수 삽입\n" +
+            "• 태그 클릭 → 해당 태그 필터링\n" +
+            "• ★ 클릭 → 즐겨찾기 토글\n" +
+            "• '버전 저장' → 히스토리에 현재 버전 보관",
+            "도움말 — Prompt.Forge",
+            MessageBoxButton.OK, MessageBoxImage.Information);
     }
 
     void Export_Click(object sender, RoutedEventArgs e)

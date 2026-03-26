@@ -12,6 +12,7 @@ sealed class Database : IDisposable
         _conn = new SqliteConnection($"Data Source={path}");
         _conn.Open();
         Migrate();
+        EnsureMigrations();
     }
 
     void Migrate()
@@ -56,11 +57,11 @@ sealed class Database : IDisposable
 
     // ── CRUD ─────────────────────────────────────────────────────────────────
 
-    /// <summary>기존 DB에 use_count 컬럼이 없을 경우 추가 (마이그레이션)</summary>
-    public void EnsureUseCountColumn()
+    /// 기존 DB 호환성을 위한 컬럼 추가 마이그레이션 (실패 시 이미 존재하는 것으로 간주)
+    void EnsureMigrations()
     {
         try { Execute("ALTER TABLE prompts ADD COLUMN use_count INTEGER NOT NULL DEFAULT 0;"); }
-        catch { /* 이미 존재하면 무시 */ }
+        catch { }
     }
 
     public void IncrementUseCount(int id)
@@ -93,8 +94,8 @@ sealed class Database : IDisposable
 
         if (!string.IsNullOrWhiteSpace(tag))
         {
-            conditions.Add("p.tags LIKE $tag");
-            cmd.Parameters.AddWithValue("$tag", $"%{tag}%");
+            conditions.Add("(',' || p.tags || ',') LIKE $tag");
+            cmd.Parameters.AddWithValue("$tag", $"%,{tag},%");
         }
         if (!string.IsNullOrWhiteSpace(service))
         {
@@ -165,10 +166,18 @@ sealed class Database : IDisposable
         cmd.ExecuteNonQuery();
     }
 
+    public void DeleteHistoryItem(int historyId)
+    {
+        var cmd = _conn.CreateCommand();
+        cmd.CommandText = "DELETE FROM prompts WHERE id = $id AND parent_id IS NOT NULL";
+        cmd.Parameters.AddWithValue("$id", historyId);
+        cmd.ExecuteNonQuery();
+    }
+
     public void ToggleFavorite(int id)
     {
         var cmd = _conn.CreateCommand();
-        cmd.CommandText = "UPDATE prompts SET is_favorite = NOT is_favorite, updated_at = datetime('now') WHERE id = $id";
+        cmd.CommandText = "UPDATE prompts SET is_favorite = NOT is_favorite WHERE id = $id";
         cmd.Parameters.AddWithValue("$id", id);
         cmd.ExecuteNonQuery();
     }

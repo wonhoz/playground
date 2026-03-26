@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: Background — bright sky blue -->
+  <rect width="1024" height="1024" rx="190" fill="#74B9FF"/>
+
+  <!-- Layer 2: Gamepad outline (large) + settings UI inside -->
+
+  <!-- Gamepad outer shape (white) -->
+  <rect x="100" y="280" width="824" height="480" rx="120" fill="#FFFFFF" stroke="#2D3436" stroke-width="18"/>
+  <!-- Left grip -->
+  <ellipse cx="196" cy="710" rx="120" ry="96" fill="#FFFFFF" stroke="#2D3436" stroke-width="18"/>
+  <!-- Right grip -->
+  <ellipse cx="828" cy="710" rx="120" ry="96" fill="#FFFFFF" stroke="#2D3436" stroke-width="18"/>
+
+  <!-- ─── Left zone: Deadzone circle visual ─── -->
+  <!-- Outer boundary circle -->
+  <circle cx="278" cy="490" r="140" fill="#DFE6E9" stroke="#2D3436" stroke-width="10"/>
+  <!-- Deadzone inner circle (colored) -->
+  <circle cx="278" cy="490" r="56" fill="#FFEAA7" stroke="#E17055" stroke-width="10"/>
+  <text x="278" y="490" text-anchor="middle" font-family="'Segoe UI',Arial,sans-serif" font-size="30" font-weight="700" fill="#E17055" dominant-baseline="middle">15%</text>
+  <!-- Active zone arc indicator -->
+  <circle cx="278" cy="490" r="100" fill="none" stroke="#00B894" stroke-width="12" stroke-dasharray="410 220" stroke-dashoffset="-110"/>
+
+  <!-- Stick position dot -->
+  <circle cx="310" cy="460" r="18" fill="#6C5CE7" stroke="#FFFFFF" stroke-width="6"/>
+
+  <!-- "Dead Zone" label -->
+  <text x="278" y="646" text-anchor="middle" font-family="'Segoe UI',Arial,sans-serif" font-size="32" font-weight="700" fill="#636E72">Dead Zone</text>
+
+  <!-- ─── Center: Sensitivity sliders ─── -->
+  <!-- L-Stick slider -->
+  <text x="512" y="368" text-anchor="middle" font-family="'Segoe UI',Arial,sans-serif" font-size="30" fill="#636E72">L-Stick 감도</text>
+  <rect x="400" y="382" width="224" height="22" rx="11" fill="#DFE6E9"/>
+  <rect x="400" y="382" width="168" height="22" rx="11" fill="#6C5CE7"/>
+  <circle cx="568" cy="393" r="18" fill="#FFFFFF" stroke="#6C5CE7" stroke-width="8"/>
+  <text x="598" y="400" font-family="'Consolas','Courier New',monospace" font-size="28" font-weight="700" fill="#6C5CE7">1.5×</text>
+
+  <!-- R-Stick slider -->
+  <text x="512" y="450" text-anchor="middle" font-family="'Segoe UI',Arial,sans-serif" font-size="30" fill="#636E72">R-Stick 감도</text>
+  <rect x="400" y="464" width="224" height="22" rx="11" fill="#DFE6E9"/>
+  <rect x="400" y="464" width="112" height="22" rx="11" fill="#A29BFE"/>
+  <circle cx="512" cy="475" r="18" fill="#FFFFFF" stroke="#A29BFE" stroke-width="8"/>
+  <text x="542" y="482" font-family="'Consolas','Courier New',monospace" font-size="28" font-weight="700" fill="#A29BFE">1.0×</text>
+
+  <!-- Trigger slider -->
+  <text x="512" y="536" text-anchor="middle" font-family="'Segoe UI',Arial,sans-serif" font-size="30" fill="#636E72">트리거 임계값</text>
+  <rect x="400" y="550" width="224" height="22" rx="11" fill="#DFE6E9"/>
+  <rect x="400" y="550" width="22" height="22" rx="11" fill="#E17055"/>
+  <circle cx="422" cy="561" r="18" fill="#FFFFFF" stroke="#E17055" stroke-width="8"/>
+  <text x="452" y="568" font-family="'Consolas','Courier New',monospace" font-size="28" font-weight="700" fill="#E17055">5%</text>
+
+  <!-- ─── Right: ABXY buttons with mapping labels ─── -->
+  <!-- Y -->
+  <circle cx="746" cy="390" r="46" fill="#FFEAA7" stroke="#2D3436" stroke-width="10"/>
+  <text x="746" y="405" text-anchor="middle" font-family="'Segoe UI',Arial,sans-serif" font-size="48" font-weight="900" fill="#2D3436">Y</text>
+  <!-- X -->
+  <circle cx="640" cy="490" r="46" fill="#74B9FF" stroke="#2D3436" stroke-width="10"/>
+  <text x="640" y="505" text-anchor="middle" font-family="'Segoe UI',Arial,sans-serif" font-size="48" font-weight="900" fill="#FFFFFF">X</text>
+  <!-- B -->
+  <circle cx="850" cy="490" r="46" fill="#FF6B6B" stroke="#2D3436" stroke-width="10"/>
+  <text x="850" y="505" text-anchor="middle" font-family="'Segoe UI',Arial,sans-serif" font-size="48" font-weight="900" fill="#FFFFFF">B</text>
+  <!-- A -->
+  <circle cx="746" cy="590" r="46" fill="#00B894" stroke="#2D3436" stroke-width="10"/>
+  <text x="746" y="605" text-anchor="middle" font-family="'Segoe UI',Arial,sans-serif" font-size="48" font-weight="900" fill="#FFFFFF">A</text>
+
+  <!-- Layer 3: ViGEm virtual output badge -->
+  <rect x="352" y="826" width="320" height="64" rx="22" fill="#6C5CE7" stroke="#FFFFFF" stroke-width="8"/>
+  <text x="512" y="868" text-anchor="middle" font-family="'Segoe UI',Arial,sans-serif" font-size="36" font-weight="700" fill="#FFFFFF">ViGEm ✓ 가상출력</text>
+</svg>

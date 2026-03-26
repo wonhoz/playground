@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>Pad.Forge — Icon Candidates</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #1E2A3A; font-family: 'Segoe UI', sans-serif; color: #E0E0E0; padding: 40px; }
+  h1 { font-size: 28px; color: #A29BFE; margin-bottom: 6px; }
+  .subtitle { font-size: 14px; color: #888; margin-bottom: 8px; }
+  .profile { font-size: 13px; color: #AABBCC; background: #2D3436; padding: 10px 18px; border-radius: 10px; margin-bottom: 8px; line-height: 1.8; max-width: 900px; }
+  .style-note { font-size: 13px; color: #F9CA24; background: #2D3436; padding: 8px 16px; border-radius: 8px; display: inline-block; margin-bottom: 36px; }
+  .grid { display: flex; gap: 36px; flex-wrap: wrap; }
+  .card { background: #2D3436; border-radius: 16px; padding: 28px; border: 2px solid #3D4A5A; width: 300px; transition: all 0.2s; }
+  .card:hover { border-color: #A29BFE; transform: translateY(-3px); box-shadow: 0 8px 24px #0008; }
+  .icon-box { display: flex; gap: 14px; align-items: flex-end; margin-bottom: 20px; }
+  .icon-box img { border-radius: 14px; transition: transform 0.2s; cursor: zoom-in; box-shadow: 0 4px 12px #0006; }
+  .icon-box img:hover { transform: scale(2.5); transform-origin: bottom left; position: relative; z-index: 10; }
+  .icon-256 { width: 128px; height: 128px; }
+  .icon-48 { width: 48px; height: 48px; }
+  .icon-16 { width: 16px; height: 16px; }
+  .label { font-size: 17px; font-weight: bold; color: #A29BFE; margin-bottom: 8px; }
+  .concept { font-size: 12px; color: #AABBCC; margin-bottom: 6px; line-height: 1.5; }
+  .palette { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
+  .swatch { width: 26px; height: 26px; border-radius: 8px; border: 2px solid #555; cursor: help; }
+  .tag { display: inline-block; padding: 3px 10px; border-radius: 6px; font-size: 11px; margin-right: 4px; font-weight: 700; }
+  .literal  { background: #00B894; color: #FFF; }
+  .metaphor { background: #E17055; color: #FFF; }
+  .hybrid   { background: #6C5CE7; color: #FFF; }
+  .anchor { font-size: 11px; color: #888; margin-top: 4px; }
+</style>
+</head>
+<body>
+<h1>Pad.Forge</h1>
+<p class="subtitle">게임패드 커스터마이징 매니저 | Candidate_20260327_0600</p>
+
+<div class="profile">
+  <b>앱 요약:</b> XInput + HID 컨트롤러 통합 · 버튼 리매핑 (홀드 동작 포함) · 프로파일 관리 (앱별 자동 전환) · 데드존/감도 설정 · ViGEm 가상 Xbox360 출력 · 트레이 앱<br>
+  <b>도메인:</b> 게임패드 · 버튼매핑 · 리매핑 · 프로파일 · XInput · ViGEm · 커스터마이징<br>
+  <b>사용자 안도:</b> 패드를 내 손에 맞게 완전히 재창조 ("Forge" = 단조/鍛造)
+</div>
+<p class="style-note">✨ 스타일: 밝고 화사, 알록달록, 귀엽고 깔끔, 고대비, 큼직한 요소 | 5개 생성</p>
+
+<div class="grid">
+
+  <div class="card">
+    <div class="icon-box">
+      <img class="icon-256" src="icon_01.svg" alt="icon_01">
+      <img class="icon-48" src="icon_01.svg" alt="48px">
+      <img class="icon-16" src="icon_01.svg" alt="16px">
+    </div>
+    <div class="label">icon_01 <span class="tag literal">literal</span></div>
+    <div class="concept"><b>컨셉:</b> 게임패드 전면뷰 — A(초록)/B(빨강)/X(파랑)/Y(노랑) 컬러 버튼 + 스틱 2개</div>
+    <div class="concept"><b>연결고리:</b> 앱 UI 그대로 — 게임패드가 주인공</div>
+    <p class="anchor">도메인 앵커: 게임패드 아이콘만 봐도 즉시 연상</p>
+    <div class="palette">
+      <div class="swatch" style="background:#6C5CE7" title="배경: 비비드 퍼플"></div>
+      <div class="swatch" style="background:#FFFFFF" title="패드 몸체: 흰색"></div>
+      <div class="swatch" style="background:#FF6B6B" title="B: 레드코랄"></div>
+      <div class="swatch" style="background:#00B894" title="A: 에메랄드"></div>
+      <div class="swatch" style="background:#74B9FF" title="X: 스카이블루"></div>
+      <div class="swatch" style="background:#FFEAA7" title="Y: 파스텔옐로"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-box">
+      <img class="icon-256" src="icon_02.svg" alt="icon_02">
+      <img class="icon-48" src="icon_02.svg" alt="48px">
+      <img class="icon-16" src="icon_02.svg" alt="16px">
+    </div>
+    <div class="label">icon_02 <span class="tag literal">literal</span></div>
+    <div class="concept"><b>컨셉:</b> "X → B" 리매핑 화살표 — 기존 버튼과 변환 버튼이 크게 대비</div>
+    <div class="concept"><b>연결고리:</b> 버튼 리매핑이 핵심 기능 — 매핑 행위를 직접 시각화</div>
+    <p class="anchor">도메인 앵커: X/B 버튼 + 화살표 = 즉시 리매핑 연상</p>
+    <div class="palette">
+      <div class="swatch" style="background:#E17055" title="배경: 비비드 오렌지"></div>
+      <div class="swatch" style="background:#74B9FF" title="X 버튼: 블루"></div>
+      <div class="swatch" style="background:#FF6B6B" title="B 버튼: 레드"></div>
+      <div class="swatch" style="background:#FFFFFF" title="화살표: 흰색"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-box">
+      <img class="icon-256" src="icon_03.svg" alt="icon_03">
+      <img class="icon-48" src="icon_03.svg" alt="48px">
+      <img class="icon-16" src="icon_03.svg" alt="16px">
+    </div>
+    <div class="label">icon_03 <span class="tag metaphor">metaphor</span></div>
+    <div class="concept"><b>컨셉:</b> 망치(Forge)로 게임패드를 두드려 커스텀 — 불꽃 스파크</div>
+    <div class="concept"><b>연결고리:</b> "Forge" = 단조(鍛造), 패드를 직접 만들어내는 장인 이미지</div>
+    <p class="anchor">도메인 앵커: 패드 실루엣 + 망치 = 게임패드 커스터마이징 장인</p>
+    <div class="palette">
+      <div class="swatch" style="background:#FD79A8" title="배경: 핫핑크"></div>
+      <div class="swatch" style="background:#FFFFFF" title="패드: 흰색"></div>
+      <div class="swatch" style="background:#F9CA24" title="망치 머리: 골드"></div>
+      <div class="swatch" style="background:#E67E22" title="망치 자루: 오렌지"></div>
+      <div class="swatch" style="background:#FFEAA7" title="불꽃 스파크: 옐로"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-box">
+      <img class="icon-256" src="icon_04.svg" alt="icon_04">
+      <img class="icon-48" src="icon_04.svg" alt="48px">
+      <img class="icon-16" src="icon_04.svg" alt="16px">
+    </div>
+    <div class="label">icon_04 <span class="tag metaphor">metaphor</span></div>
+    <div class="concept"><b>컨셉:</b> 프로파일 카드 덱 3장 — sekiro(활성)/steam/default, 매핑 행 표시</div>
+    <div class="concept"><b>연결고리:</b> 프로파일 관리가 핵심 — 앱별 자동 전환이 카드로 시각화</div>
+    <p class="anchor">도메인 앵커: 게임 이름+매핑 행 → 게임패드 프로파일 즉시 연상</p>
+    <div class="palette">
+      <div class="swatch" style="background:#00B894" title="배경: 에메랄드 그린"></div>
+      <div class="swatch" style="background:#F9CA24" title="앞 카드: 골드 옐로"></div>
+      <div class="swatch" style="background:#A29BFE" title="중간 카드: 라벤더"></div>
+      <div class="swatch" style="background:#55EFC4" title="뒷 카드: 민트"></div>
+      <div class="swatch" style="background:#FF6B6B" title="X→B 태그: 레드"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-box">
+      <img class="icon-256" src="icon_05.svg" alt="icon_05">
+      <img class="icon-48" src="icon_05.svg" alt="48px">
+      <img class="icon-16" src="icon_05.svg" alt="16px">
+    </div>
+    <div class="label">icon_05 <span class="tag hybrid">hybrid</span></div>
+    <div class="concept"><b>컨셉:</b> 패드 외형 안에 설정 UI — 좌측 데드존 원형 + 중앙 감도 슬라이더 + 우측 ABXY</div>
+    <div class="concept"><b>연결고리:</b> 패드를 열면 데드존/감도 설정 화면이 보임 — 앱 UI를 아이콘으로</div>
+    <p class="anchor">도메인 앵커: 패드 형태 + 슬라이더/원형 설정 = 컨트롤러 튜닝 앱</p>
+    <div class="palette">
+      <div class="swatch" style="background:#74B9FF" title="배경: 스카이블루"></div>
+      <div class="swatch" style="background:#FFFFFF" title="패드 몸체: 흰색"></div>
+      <div class="swatch" style="background:#FFEAA7" title="데드존: 옐로"></div>
+      <div class="swatch" style="background:#00B894" title="활성존 호: 에메랄드"></div>
+      <div class="swatch" style="background:#6C5CE7" title="슬라이더/ViGEm: 퍼플"></div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

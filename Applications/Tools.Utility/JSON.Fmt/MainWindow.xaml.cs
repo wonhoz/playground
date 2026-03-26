@@ -9,6 +9,7 @@ using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
 using JsonFmt.Services;
+using Microsoft.Win32;
 
 namespace JsonFmt;
 
@@ -18,6 +19,7 @@ public partial class MainWindow : Window
     private static extern int DwmSetWindowAttribute(IntPtr hwnd, int attr, ref int val, int size);
 
     private string _lastFormatted = string.Empty;
+    private string _searchTerm = string.Empty;
 
     public MainWindow()
     {
@@ -29,7 +31,19 @@ public partial class MainWindow : Window
         var helper = new WindowInteropHelper(this);
         int val = 1;
         DwmSetWindowAttribute(helper.Handle, 20, ref val, sizeof(int));
+
+        var settings = SettingsService.Load();
+        Width = settings.Width;
+        Height = settings.Height;
+        if (!double.IsNaN(settings.Left)) Left = settings.Left;
+        if (!double.IsNaN(settings.Top)) Top = settings.Top;
+
         StatusBar.Text = "JSON을 붙여넣거나 입력하세요.";
+    }
+
+    private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+    {
+        SettingsService.Save(new WindowSettings { Width = Width, Height = Height, Left = Left, Top = Top });
     }
 
     // ─── 툴바 버튼 ─────────────────────────────────────────────
@@ -54,6 +68,7 @@ public partial class MainWindow : Window
         if (err != null) { ShowError(err); return; }
         var minified = JsonSerializer.Serialize(doc);
         SetOutputRaw(minified);
+        StatsBar.Text = $"1줄 · {minified.Length}자";
         SetStatus($"축소 완료 — {minified.Length} 바이트");
     }
 
@@ -66,6 +81,17 @@ public partial class MainWindow : Window
         }
     }
 
+    private void BtnSave_Click(object sender, RoutedEventArgs e)
+    {
+        if (string.IsNullOrEmpty(_lastFormatted)) return;
+        var dlg = new SaveFileDialog { Filter = "JSON 파일|*.json|모든 파일|*.*", DefaultExt = "json" };
+        if (dlg.ShowDialog() == true)
+        {
+            File.WriteAllText(dlg.FileName, _lastFormatted, Encoding.UTF8);
+            SetStatus($"저장 완료: {Path.GetFileName(dlg.FileName)}");
+        }
+    }
+
     private void BtnClear_Click(object sender, RoutedEventArgs e)
     {
         InputBox.Text = string.Empty;
@@ -73,6 +99,28 @@ public partial class MainWindow : Window
         HideError();
         SetStatus("지워졌습니다.");
         BtnCopy.IsEnabled = false;
+        BtnSave.IsEnabled = false;
+    }
+
+    private void BtnHelp_Click(object sender, RoutedEventArgs e)
+    {
+        MessageBox.Show(
+            "단축키\n\n" +
+            "  Ctrl+Enter    포맷 (Pretty Print)\n" +
+            "  Ctrl+V        붙여넣기 후 자동 포맷\n" +
+            "  드래그앤드롭  JSON 파일 열기\n\n" +
+            "버튼 기능\n\n" +
+            "  📋 붙여넣기    클립보드에서 JSON 가져오기 + 포맷\n" +
+            "  ✨ 포맷        Pretty Print JSON 변환\n" +
+            "  🗜 축소        Minified 한 줄 JSON 변환\n" +
+            "  📄 복사        출력 JSON 클립보드 복사\n" +
+            "  💾 저장        출력 JSON 파일로 저장\n" +
+            "  🗑 지우기      입출력 초기화\n" +
+            "  🔤 키 정렬     오브젝트 키 알파벳순 재정렬\n" +
+            "  🔧 Lenient    주석·trailing comma·단일따옴표 자동 수정\n\n" +
+            "검색\n\n" +
+            "  검색 박스에 키 또는 값 입력 → 출력에서 일치 항목 황금색 하이라이트",
+            "JSON.Fmt 도움말", MessageBoxButton.OK, MessageBoxImage.Information);
     }
 
     private void BtnSortKeys_Click(object sender, RoutedEventArgs e)
@@ -93,8 +141,8 @@ public partial class MainWindow : Window
         var normalized = JsonNormalizer.Normalize(InputBox.Text);
         if (normalized == InputBox.Text) { SetStatus("수정할 내용이 없습니다."); return; }
         InputBox.Text = normalized;
-        SetStatus("Lenient 수정 적용됨 (주석·trailing comma·따옴표)");
         FormatInput(normalized);
+        SetStatus("✅ Lenient 수정 적용됨 (주석·trailing comma·따옴표)");
     }
 
     // ─── 입력 이벤트 ─────────────────────────────────────────────
@@ -103,6 +151,34 @@ public partial class MainWindow : Window
     {
         if (!IsLoaded) return;
         ValidateInput(InputBox.Text);
+    }
+
+    private void SearchBox_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+    {
+        if (!IsLoaded) return;
+        _searchTerm = SearchBox.Text.Trim();
+        if (string.IsNullOrEmpty(_lastFormatted)) return;
+        SetOutputHighlighted(_lastFormatted);
+        if (!string.IsNullOrEmpty(_searchTerm))
+        {
+            var count = CountMatches(_lastFormatted, _searchTerm);
+            SetStatus(count > 0 ? $"🔍 {count}개 일치" : "🔍 일치 없음");
+        }
+        else
+        {
+            SetStatus("✅ 유효한 JSON");
+        }
+    }
+
+    private static int CountMatches(string text, string term)
+    {
+        int count = 0, index = 0;
+        while ((index = text.IndexOf(term, index, StringComparison.OrdinalIgnoreCase)) >= 0)
+        {
+            count++;
+            index++;
+        }
+        return count;
     }
 
     private void InputBox_PreviewKeyDown(object sender, KeyEventArgs e)
@@ -134,7 +210,7 @@ public partial class MainWindow : Window
         if (files.Length == 0) return;
         try
         {
-            var text = File.ReadAllText(files[0], Encoding.UTF8);
+            var text = ReadAllTextDetectEncoding(files[0]);
             InputBox.Text = text;
             FormatInput(text);
         }
@@ -142,6 +218,19 @@ public partial class MainWindow : Window
         {
             SetStatus($"파일 읽기 오류: {ex.Message}", error: true);
         }
+    }
+
+    private static string ReadAllTextDetectEncoding(string path)
+    {
+        var bytes = File.ReadAllBytes(path);
+        if (bytes.Length >= 3 && bytes[0] == 0xEF && bytes[1] == 0xBB && bytes[2] == 0xBF)
+            return Encoding.UTF8.GetString(bytes, 3, bytes.Length - 3);     // UTF-8 BOM
+        if (bytes.Length >= 2 && bytes[0] == 0xFF && bytes[1] == 0xFE)
+            return Encoding.Unicode.GetString(bytes, 2, bytes.Length - 2);  // UTF-16 LE
+        if (bytes.Length >= 2 && bytes[0] == 0xFE && bytes[1] == 0xFF)
+            return Encoding.BigEndianUnicode.GetString(bytes, 2, bytes.Length - 2); // UTF-16 BE
+        try { return Encoding.UTF8.GetString(bytes); }
+        catch { return Encoding.Default.GetString(bytes); }
     }
 
     // ─── 핵심 로직 ─────────────────────────────────────────────
@@ -175,6 +264,7 @@ public partial class MainWindow : Window
         _lastFormatted = pretty;
         SetOutputHighlighted(pretty);
         BtnCopy.IsEnabled = true;
+        BtnSave.IsEnabled = true;
 
         var lines = pretty.Count(c => c == '\n') + 1;
         StatsBar.Text = $"{lines}줄 · {pretty.Length}자";
@@ -209,8 +299,7 @@ public partial class MainWindow : Window
                 AllowTrailingCommas = true,
                 CommentHandling = JsonCommentHandling.Skip
             };
-            using var doc = JsonDocument.Parse(text, docOpts);
-            var node = JsonNode.Parse(doc.RootElement.GetRawText());
+            var node = JsonNode.Parse(text, null, docOpts);
             return (node, null);
         }
         catch (JsonException ex)
@@ -251,6 +340,7 @@ public partial class MainWindow : Window
     private static readonly SolidColorBrush BrushNull     = new(Color.FromRgb(0x88, 0x88, 0xAA));
     private static readonly SolidColorBrush BrushPunct    = new(Color.FromRgb(0x66, 0x66, 0x88));
     private static readonly SolidColorBrush BrushDefault  = new(Color.FromRgb(0xE0, 0xE0, 0xE0));
+    private static readonly SolidColorBrush BrushHighlight = new(Color.FromArgb(0x60, 0xE6, 0xB8, 0x00));
 
     private enum TokKind { Key, String, Number, Bool, Null, Punct, Whitespace, Other }
 
@@ -274,6 +364,11 @@ public partial class MainWindow : Window
                     _                 => BrushDefault
                 }
             };
+            if (!string.IsNullOrEmpty(_searchTerm) &&
+                tok.Contains(_searchTerm, StringComparison.OrdinalIgnoreCase))
+            {
+                run.Background = BrushHighlight;
+            }
             paragraph.Inlines.Add(run);
         }
         OutputDoc.Blocks.Add(paragraph);
@@ -284,6 +379,7 @@ public partial class MainWindow : Window
         OutputDoc.Blocks.Clear();
         _lastFormatted = text;
         BtnCopy.IsEnabled = true;
+        BtnSave.IsEnabled = true;
         OutputDoc.Blocks.Add(new Paragraph(new Run(text))
         {
             Margin = new Thickness(0),
@@ -384,6 +480,7 @@ public partial class MainWindow : Window
         _lastFormatted = string.Empty;
         StatsBar.Text = "";
         BtnCopy.IsEnabled = false;
+        BtnSave.IsEnabled = false;
     }
 
     private void ShowError(JsonException ex)

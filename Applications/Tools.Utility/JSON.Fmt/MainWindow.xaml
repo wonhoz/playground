@@ -2,14 +2,14 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="JSON.Fmt" Height="640" Width="1000"
-        Background="#0F0F1E" Foreground="#E0E0E0"
+        Background="#1A1A2E" Foreground="#E0E0E0"
         AllowDrop="True" Drop="Window_Drop" DragEnter="Window_DragEnter"
-        Loaded="Window_Loaded">
+        Loaded="Window_Loaded" Closing="Window_Closing">
     <Window.Resources>
         <Style TargetType="Button">
-            <Setter Property="Background" Value="#252538"/>
+            <Setter Property="Background" Value="#252530"/>
             <Setter Property="Foreground" Value="#E0E0E0"/>
-            <Setter Property="BorderBrush" Value="#444466"/>
+            <Setter Property="BorderBrush" Value="#7a6420"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="Padding" Value="10,4"/>
             <Setter Property="Cursor" Value="Hand"/>
@@ -24,7 +24,8 @@
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="#353555"/>
+                                <Setter Property="Background" Value="#353525"/>
+                                <Setter Property="BorderBrush" Value="#e6b800"/>
                             </Trigger>
                             <Trigger Property="IsEnabled" Value="False">
                                 <Setter Property="Opacity" Value="0.4"/>
@@ -34,10 +35,20 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <Style x:Key="SearchBoxStyle" TargetType="TextBox">
+            <Setter Property="Background" Value="#13132A"/>
+            <Setter Property="Foreground" Value="#E0E0E0"/>
+            <Setter Property="BorderBrush" Value="#5a4a18"/>
+            <Setter Property="CaretBrush" Value="#E0E0E0"/>
+            <Setter Property="FontFamily" Value="Consolas"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Padding" Value="6,3"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
         <Style TargetType="TextBox">
             <Setter Property="Background" Value="#13132A"/>
             <Setter Property="Foreground" Value="#E0E0E0"/>
-            <Setter Property="BorderBrush" Value="#333355"/>
+            <Setter Property="BorderBrush" Value="#5a4a18"/>
             <Setter Property="CaretBrush" Value="#E0E0E0"/>
             <Setter Property="FontFamily" Value="Consolas"/>
             <Setter Property="FontSize" Value="13"/>
@@ -68,10 +79,17 @@
             <Button x:Name="BtnFormat" Click="BtnFormat_Click" Margin="0,0,6,0">✨ 포맷</Button>
             <Button x:Name="BtnMinify" Click="BtnMinify_Click" Margin="0,0,6,0">🗜 축소</Button>
             <Button x:Name="BtnCopy" Click="BtnCopy_Click" Margin="0,0,6,0" IsEnabled="False">📄 복사</Button>
+            <Button x:Name="BtnSave" Click="BtnSave_Click" Margin="0,0,6,0" IsEnabled="False">💾 저장</Button>
             <Button x:Name="BtnClear" Click="BtnClear_Click" Margin="0,0,6,0">🗑 지우기</Button>
-            <Rectangle Width="1" Fill="#333355" Margin="4,8"/>
+            <Rectangle Width="1" Fill="#5a4a18" Margin="4,8"/>
             <Button x:Name="BtnSortKeys" Click="BtnSortKeys_Click" Margin="6,0,6,0">🔤 키 정렬</Button>
             <Button x:Name="BtnFix" Click="BtnFix_Click" Margin="0,0,6,0" ToolTip="주석·trailing comma·단일따옴표 자동 수정">🔧 Lenient 수정</Button>
+            <Rectangle Width="1" Fill="#5a4a18" Margin="4,8"/>
+            <TextBox x:Name="SearchBox" Style="{StaticResource SearchBoxStyle}"
+                     Width="160" Margin="6,0,4,0"
+                     TextChanged="SearchBox_TextChanged"
+                     ToolTip="키/값 검색 (Enter 확인)"/>
+            <Button x:Name="BtnHelp" Click="BtnHelp_Click" Margin="0,0,10,0" ToolTip="단축키 및 도움말">❓</Button>
         </StackPanel>
 
         <!-- ─── 메인 (입력 / 출력) ─── -->
@@ -83,15 +101,15 @@
             </Grid.ColumnDefinitions>
 
             <!-- 입력 패널 -->
-            <Border Grid.Column="0" BorderBrush="#333355" BorderThickness="1" CornerRadius="6">
+            <Border Grid.Column="0" BorderBrush="#5a4a18" BorderThickness="1" CornerRadius="6">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="28"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <Border Grid.Row="0" Background="#1A1A30" CornerRadius="6,6,0,0">
+                    <Border Grid.Row="0" Background="#1A1A2A" CornerRadius="6,6,0,0">
                         <TextBlock Text="입력" Margin="10,0" VerticalAlignment="Center"
-                                   FontSize="11" Foreground="#7777AA"/>
+                                   FontSize="11" Foreground="#a08840"/>
                     </Border>
                     <TextBox x:Name="InputBox" Grid.Row="1"
                              BorderThickness="0"
@@ -101,22 +119,18 @@
             </Border>
 
             <!-- 분리선 -->
-            <GridSplitter Grid.Column="1" Width="6" Background="#333355" HorizontalAlignment="Stretch"/>
+            <GridSplitter Grid.Column="1" Width="6" Background="#5a4a18" HorizontalAlignment="Stretch"/>
 
             <!-- 출력 패널 -->
-            <Border Grid.Column="2" BorderBrush="#333355" BorderThickness="1" CornerRadius="6">
+            <Border Grid.Column="2" BorderBrush="#5a4a18" BorderThickness="1" CornerRadius="6">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="28"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <Border Grid.Row="0" Background="#1A1A30" CornerRadius="6,6,0,0">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="출력" Margin="10,0,0,0" VerticalAlignment="Center"
-                                       FontSize="11" Foreground="#7777AA"/>
-                            <TextBlock x:Name="OutputLabel" Text="" Margin="8,0,0,0" VerticalAlignment="Center"
-                                       FontSize="11" Foreground="#555577"/>
-                        </StackPanel>
+                    <Border Grid.Row="0" Background="#1A1A2A" CornerRadius="6,6,0,0">
+                        <TextBlock Text="출력" Margin="10,0,0,0" VerticalAlignment="Center"
+                                   FontSize="11" Foreground="#a08840"/>
                     </Border>
                     <RichTextBox x:Name="OutputBox" Grid.Row="1"
                                  BorderThickness="0"

@@ -89,8 +89,10 @@ public partial class MainWindow : Window
     void Window_DragEnter(object sender, DragEventArgs e)
     {
         if (!e.Data.GetDataPresent(DataFormats.FileDrop)) { e.Effects = DragDropEffects.None; return; }
-        e.Effects = DragDropEffects.Copy;
-        AnimateDropZone(true);
+        var dropped = e.Data.GetData(DataFormats.FileDrop) as string[];
+        bool hasSupported = dropped is { Length: > 0 } && ImageConverter.CollectFiles(dropped, GetInputFilter()).Length > 0;
+        e.Effects = hasSupported ? DragDropEffects.Copy : DragDropEffects.None;
+        if (hasSupported) AnimateDropZone(true);
     }
 
     void Window_DragOver(object sender, DragEventArgs e)
@@ -126,10 +128,11 @@ public partial class MainWindow : Window
         BtnOpenFolder.Visibility = Visibility.Collapsed;
         _lastOutputDir = Path.GetDirectoryName(files[0]);
 
-        // SVG 단일 파일이면 미리보기 표시 후 변환
-        var svgFiles = files.Where(f => f.EndsWith(".svg", StringComparison.OrdinalIgnoreCase)).ToArray();
-        if (svgFiles.Length == 1 && files.Length == 1)
-            await ShowSvgPreviewAsync(svgFiles[0]);
+        // 단일 파일이면 포맷별 미리보기 표시
+        if (files.Length == 1 && files[0].EndsWith(".svg", StringComparison.OrdinalIgnoreCase))
+            await ShowSvgPreviewAsync(files[0]);
+        else if (files.Length == 1 && files[0].EndsWith(".ico", StringComparison.OrdinalIgnoreCase))
+            await ShowIcoPreviewAsync(files[0]);
         else
             ShowFileSummary(files);
 
@@ -169,21 +172,18 @@ public partial class MainWindow : Window
         {
             result = await ImageConverter.ConvertAsync(files, output, overwrite, quality, icoSizes, progress, _cts.Token);
         }
-        catch (OperationCanceledException)
-        {
-            SetStatus("변환이 취소되었습니다");
-        }
         finally
         {
             _converting = false;
             BtnCancel.Visibility = Visibility.Collapsed;
+            BtnCancel.IsEnabled = true;
             _cts?.Dispose();
             _cts = null;
         }
 
         if (result is not null)
         {
-            PBar.Value = 100;
+            PBar.Value = result.Cancelled ? PBar.Value : 100;
             ShowResult(result);
         }
         else
@@ -195,6 +195,15 @@ public partial class MainWindow : Window
     // ─── 결과 표시 ───────────────────────────────────────────────────────────
     void ShowResult(ConversionResult result)
     {
+        if (result.Cancelled)
+        {
+            SetStatus($"변환이 취소되었습니다 — 완료 {result.Success}개 / 실패 {result.Failed}개");
+            if (result.Success > 0 && _lastOutputDir is not null)
+                BtnOpenFolder.Visibility = Visibility.Visible;
+            ResetDropZone();
+            return;
+        }
+
         string msg = $"✅ 성공: {result.Success}개\n❌ 실패: {result.Failed}개";
 
         if (result.Errors.Count > 0)
@@ -214,6 +223,23 @@ public partial class MainWindow : Window
             result.Failed == 0 ? MessageBoxImage.Information : MessageBoxImage.Warning);
 
         ResetDropZone();
+    }
+
+    // ─── ICO 미리보기 ────────────────────────────────────────────────────────
+    async Task ShowIcoPreviewAsync(string icoPath)
+    {
+        SetStatus("미리보기 렌더링 중…");
+        using var bitmap = await ImageConverter.RenderIcoPreviewAsync(icoPath, 240);
+        if (bitmap is null) { ShowFileSummary([icoPath]); return; }
+
+        SvgPreviewImage.Source = BitmapToImageSource(bitmap);
+        TbSvgFileName.Text = Path.GetFileName(icoPath);
+        TbSvgSubInfo.Text  = "ICO 미리보기 · 1개 파일";
+
+        DropHint.Visibility        = Visibility.Collapsed;
+        FileSummary.Visibility     = Visibility.Collapsed;
+        SvgPreviewPanel.Visibility = Visibility.Visible;
+        SetStatus("파일을 드롭하면 자동으로 변환을 시작합니다");
     }
 
     // ─── SVG 미리보기 ────────────────────────────────────────────────────────
@@ -277,6 +303,38 @@ public partial class MainWindow : Window
     {
         _cts?.Cancel();
         BtnCancel.IsEnabled = false;
+        SetStatus("취소 중…");
+    }
+
+    void BtnHelp_Click(object sender, RoutedEventArgs e)
+    {
+        HelpPopup.IsOpen = !HelpPopup.IsOpen;
+    }
+
+    void Window_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+    {
+        if (e.Key == System.Windows.Input.Key.Escape && _converting)
+        {
+            BtnCancel_Click(this, new RoutedEventArgs());
+            e.Handled = true;
+        }
+    }
+
+    void ChkIco_Unchecked(object sender, RoutedEventArgs e)
+    {
+        if (!IsLoaded) return;
+        bool anyChecked = ChkIco16.IsChecked == true || ChkIco32.IsChecked == true ||
+                          ChkIco48.IsChecked == true || ChkIco64.IsChecked == true ||
+                          ChkIco128.IsChecked == true || ChkIco256.IsChecked == true;
+        if (!anyChecked)
+            SetStatus("모든 사이즈가 해제됨 — 변환 시 기본 사이즈 전체 사용 (16·32·48·64·128·256)");
+    }
+
+    void ChkIco_Checked(object sender, RoutedEventArgs e)
+    {
+        if (!IsLoaded) return;
+        if (TbStatus.Text.StartsWith("모든 사이즈가 해제됨"))
+            SetStatus("파일을 드롭하면 자동으로 변환을 시작합니다");
     }
 
     void BtnOpenFolder_Click(object sender, RoutedEventArgs e)

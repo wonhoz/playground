@@ -5,7 +5,7 @@ using Svg.Skia;
 
 namespace ImgCast.Services;
 
-public record ConversionResult(int Success, int Failed, IReadOnlyList<(string File, string Error)> Errors);
+public record ConversionResult(int Success, int Failed, IReadOnlyList<(string File, string Error)> Errors, bool Cancelled = false);
 
 public enum OutputFormat { ICO, PNG, JPG, BMP }
 public enum InputFilter  { All, SVG, PNG, JPG, BMP, ICO }
@@ -68,12 +68,13 @@ public static class ImageConverter
         int success = 0, failed = 0;
         var errors = new List<(string, string)>();
         var sizes  = icoSizes is { Length: > 0 } ? icoSizes : DefaultIcoSizes;
+        bool cancelled = false;
 
         await Task.Run(() =>
         {
             for (int i = 0; i < files.Length; i++)
             {
-                ct.ThrowIfCancellationRequested();
+                if (ct.IsCancellationRequested) { cancelled = true; break; }
                 string src = files[i];
                 progress?.Report((i + 1, files.Length, Path.GetFileName(src)));
 
@@ -88,9 +89,9 @@ public static class ImageConverter
                     errors.Add((src, ex.Message));
                 }
             }
-        }, ct);
+        }, CancellationToken.None);
 
-        return new ConversionResult(success, failed, errors);
+        return new ConversionResult(success, failed, errors, cancelled);
     }
 
     // ─── 단일 파일 변환 ──────────────────────────────────────────────────────
@@ -249,6 +250,22 @@ public static class ImageConverter
         canvas.DrawBitmap(resized, (size - fw) / 2, (size - fh) / 2);
         resized.Dispose();
         return padded;
+    }
+
+    // ─── ICO 미리보기 렌더링 ────────────────────────────────────────────────
+    public static async Task<SKBitmap?> RenderIcoPreviewAsync(string path, int size = 240)
+    {
+        if (!path.EndsWith(".ico", StringComparison.OrdinalIgnoreCase)) return null;
+        try
+        {
+            return await Task.Run(() =>
+            {
+                using var original = SKBitmap.Decode(path);
+                if (original is null) return null;
+                return ResizeFit(original, size);
+            });
+        }
+        catch { return null; }
     }
 
     // ─── SVG 미리보기 렌더링 ────────────────────────────────────────────────

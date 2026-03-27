@@ -24,7 +24,7 @@
                 <TextBlock Text="LEVEL " FontSize="13" FontWeight="Bold"
                            Foreground="#333355" FontFamily="Consolas" VerticalAlignment="Center"/>
                 <TextBlock x:Name="LevelNumText" Text="1" FontSize="13" FontWeight="Bold"
-                           Foreground="#FFD060" FontFamily="Consolas" VerticalAlignment="Center"/>
+                           Foreground="#5EEAD4" FontFamily="Consolas" VerticalAlignment="Center"/>
                 <TextBlock x:Name="LevelNameText" Text="" FontSize="11"
                            Foreground="#333355" FontFamily="Consolas"
                            VerticalAlignment="Center" Margin="8,0,0,0"/>
@@ -33,10 +33,12 @@
             <Border Grid.Column="1" Background="#0A0A1A" CornerRadius="4"
                     Padding="14,4" HorizontalAlignment="Center">
                 <TextBlock x:Name="ModeText" Text="[ AIM ]" FontSize="13" FontWeight="Bold"
-                           Foreground="#FFD060" FontFamily="Consolas" HorizontalAlignment="Center"/>
+                           Foreground="#5EEAD4" FontFamily="Consolas" HorizontalAlignment="Center"/>
             </Border>
 
             <StackPanel Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right">
+                <TextBlock x:Name="LaunchText" FontSize="11"
+                           Foreground="#5EEAD4" FontFamily="Consolas" TextAlignment="Right"/>
                 <TextBlock x:Name="SpeedText" FontSize="11"
                            Foreground="#555577" FontFamily="Consolas" TextAlignment="Right"/>
                 <TextBlock x:Name="OrbitText" FontSize="11"
@@ -52,27 +54,54 @@
         <!-- ── 타이틀 ─────────────────────────────────── -->
         <StackPanel x:Name="TitlePanel" VerticalAlignment="Center" HorizontalAlignment="Center">
             <TextBlock Text="ORBIT.CRAFT" FontSize="50" FontWeight="Bold"
-                       Foreground="#FFD060" HorizontalAlignment="Center" FontFamily="Consolas">
+                       Foreground="#5EEAD4" HorizontalAlignment="Center" FontFamily="Consolas">
                 <TextBlock.Effect>
-                    <DropShadowEffect Color="#FFD060" BlurRadius="30" ShadowDepth="0"/>
+                    <DropShadowEffect Color="#5EEAD4" BlurRadius="30" ShadowDepth="0"/>
                 </TextBlock.Effect>
             </TextBlock>
             <TextBlock Text="N체 중력 궤도 시뮬레이션 퍼즐" FontSize="13" Foreground="#222244"
                        HorizontalAlignment="Center" Margin="0,6,0,0" FontFamily="Consolas"/>
 
-            <TextBlock Text="[ ENTER TO START ]" FontSize="16" Foreground="#C0A040"
+            <TextBlock Text="[ ENTER → 레벨 선택 ]" FontSize="16" Foreground="#2DD4BF"
                        HorizontalAlignment="Center" Margin="0,36,0,0" FontFamily="Consolas">
                 <TextBlock.Effect>
-                    <DropShadowEffect Color="#C0A040" BlurRadius="12" ShadowDepth="0"/>
+                    <DropShadowEffect Color="#2DD4BF" BlurRadius="12" ShadowDepth="0"/>
                 </TextBlock.Effect>
             </TextBlock>
-            <TextBlock FontSize="11" Foreground="#222244" HorizontalAlignment="Center"
-                       Margin="0,24,0,0" FontFamily="Consolas" TextAlignment="Center">
-                <Run Text="마우스 이동  —  발사 방향·속도 조준"/>
-                <LineBreak/>
-                <Run Text="SPACE  —  발사/리셋    R  —  조준 초기화    ESC  —  타이틀"/>
+
+            <!-- 조준 감도 슬라이더 -->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,22,0,0">
+                <TextBlock Text="조준 감도 " FontSize="11" Foreground="#333355"
+                           FontFamily="Consolas" VerticalAlignment="Center"/>
+                <Slider x:Name="SpeedSlider" Minimum="0.3" Maximum="3.0" Value="1.0"
+                        Width="130" VerticalAlignment="Center"
+                        ValueChanged="SpeedSlider_ValueChanged"/>
+                <TextBlock x:Name="SpeedSliderLabel" Text=" ×1.0" FontSize="11"
+                           Foreground="#5EEAD4" FontFamily="Consolas" VerticalAlignment="Center"/>
+            </StackPanel>
+
+            <TextBlock FontSize="10" Foreground="#1A1A33" HorizontalAlignment="Center"
+                       Margin="0,14,0,0" FontFamily="Consolas" TextAlignment="Center">
+                <Run Text="마우스 조준  SPACE 발사  R 초기화  ESC 타이틀  H 도움말"/>
             </TextBlock>
         </StackPanel>
+
+        <!-- ── 레벨 셀렉트 ──────────────────────────── -->
+        <Border x:Name="LevelSelectOverlay" Background="#DD000008" Visibility="Collapsed">
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                <TextBlock Text="[ LEVEL SELECT ]" FontSize="22" FontWeight="Bold"
+                           Foreground="#5EEAD4" HorizontalAlignment="Center"
+                           FontFamily="Consolas" Margin="0,0,0,18">
+                    <TextBlock.Effect>
+                        <DropShadowEffect Color="#5EEAD4" BlurRadius="16" ShadowDepth="0"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <StackPanel x:Name="LevelListPanel" HorizontalAlignment="Center"/>
+                <TextBlock Text="↑ ↓  선택     ENTER  시작     ESC  뒤로" FontSize="11"
+                           Foreground="#222244" HorizontalAlignment="Center"
+                           FontFamily="Consolas" Margin="0,18,0,0"/>
+            </StackPanel>
+        </Border>
 
         <!-- ── 결과 오버레이 ─────────────────────────── -->
         <Border x:Name="ResultOverlay" Background="#CC000008" Visibility="Collapsed">
@@ -80,14 +109,46 @@
                 <TextBlock x:Name="ResultTitle" Text="" FontSize="40" FontWeight="Bold"
                            HorizontalAlignment="Center" FontFamily="Consolas">
                     <TextBlock.Effect>
-                        <DropShadowEffect x:Name="ResultGlow" Color="#FFD060" BlurRadius="26" ShadowDepth="0"/>
+                        <DropShadowEffect x:Name="ResultGlow" Color="#5EEAD4" BlurRadius="26" ShadowDepth="0"/>
                     </TextBlock.Effect>
                 </TextBlock>
-                <TextBlock x:Name="ResultSub" Text="" FontSize="14"
+                <TextBlock x:Name="StarsText" Text="" FontSize="26"
                            Foreground="#FFD060" HorizontalAlignment="Center"
-                           Margin="0,12,0,0" FontFamily="Consolas" TextAlignment="Center"/>
+                           Margin="0,6,0,0" FontFamily="Consolas"/>
+                <TextBlock x:Name="ResultSub" Text="" FontSize="14"
+                           Foreground="#5EEAD4" HorizontalAlignment="Center"
+                           Margin="0,8,0,0" FontFamily="Consolas" TextAlignment="Center"/>
                 <TextBlock x:Name="ResultAction" Text="" FontSize="13" Foreground="#333355"
                            HorizontalAlignment="Center" Margin="0,28,0,0" FontFamily="Consolas"/>
+            </StackPanel>
+        </Border>
+
+        <!-- ── 도움말 오버레이 ───────────────────────── -->
+        <Border x:Name="HelpOverlay" Background="#EE000008" Visibility="Collapsed">
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                <TextBlock Text="[ 조작법 ]" FontSize="20" FontWeight="Bold"
+                           Foreground="#5EEAD4" HorizontalAlignment="Center"
+                           FontFamily="Consolas" Margin="0,0,0,18">
+                    <TextBlock.Effect>
+                        <DropShadowEffect Color="#5EEAD4" BlurRadius="14" ShadowDepth="0"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <TextBlock FontSize="13" FontFamily="Consolas"
+                           TextAlignment="Left" LineHeight="24">
+                    <Run Foreground="#666688" Text="마우스 이동    "/><Run Foreground="#E0E0E0" Text="발사 방향·속도 조준"/><LineBreak/>
+                    <Run Foreground="#666688" Text="SPACE         "/><Run Foreground="#E0E0E0" Text="발사 / 시뮬레이션 재시작"/><LineBreak/>
+                    <Run Foreground="#666688" Text="R             "/><Run Foreground="#E0E0E0" Text="조준 초기화 / 현재 레벨 재도전"/><LineBreak/>
+                    <Run Foreground="#666688" Text="ENTER         "/><Run Foreground="#E0E0E0" Text="다음 레벨 / 레벨 선택 확인"/><LineBreak/>
+                    <Run Foreground="#666688" Text="↑ ↓          "/><Run Foreground="#E0E0E0" Text="레벨 선택 이동"/><LineBreak/>
+                    <Run Foreground="#666688" Text="ESC           "/><Run Foreground="#E0E0E0" Text="타이틀로 돌아가기"/><LineBreak/>
+                    <Run Foreground="#666688" Text="H             "/><Run Foreground="#E0E0E0" Text="이 도움말 표시 / 닫기"/>
+                </TextBlock>
+                <TextBlock FontSize="11" Foreground="#222244" HorizontalAlignment="Center"
+                           FontFamily="Consolas" Margin="0,20,0,0">
+                    <Run Text="별점  ★★★ 1발  ★★☆ 2발  ★☆☆ 3발  ☆☆☆ 4발+"/>
+                </TextBlock>
+                <TextBlock Text="[ H 또는 ESC — 닫기 ]" FontSize="11" Foreground="#1A1A33"
+                           HorizontalAlignment="Center" FontFamily="Consolas" Margin="0,16,0,0"/>
             </StackPanel>
         </Border>
     </Grid>

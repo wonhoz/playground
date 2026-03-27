@@ -7,6 +7,7 @@ public class Probe
     public double Vx, Vy;
     public double Speed => Math.Sqrt(Vx*Vx + Vy*Vy);
 
+    public const int MaxTrail = 600;
     public readonly List<(double X, double Y)> Trail = [];
 
     public void Reset(double x, double y, double vx, double vy)

@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF0F3"/>
+      <stop offset="100%" stop-color="#FECDD3"/>
+    </linearGradient>
+    <linearGradient id="scan" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#F43F5E" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#F43F5E" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#F43F5E" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <!-- Background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg2)"/>
+  <!-- Computer/system being scanned -->
+  <rect x="230" y="250" width="564" height="380" rx="20" fill="#1E293B"/>
+  <rect x="260" y="280" width="504" height="320" rx="10" fill="#334155"/>
+  <!-- Screen content (hardware specs) -->
+  <text x="512" y="350" font-family="Consolas,monospace" font-size="36" fill="#60A5FA" text-anchor="middle">CPU: i9-14900K</text>
+  <text x="512" y="400" font-family="Consolas,monospace" font-size="36" fill="#34D399" text-anchor="middle">RAM: 64 GB DDR5</text>
+  <text x="512" y="450" font-family="Consolas,monospace" font-size="36" fill="#A78BFA" text-anchor="middle">GPU: RTX 4090</text>
+  <text x="512" y="500" font-family="Consolas,monospace" font-size="36" fill="#FCD34D" text-anchor="middle">Disk: 2 TB NVMe</text>
+  <!-- Scan line -->
+  <rect x="230" y="340" width="564" height="60" rx="0" fill="url(#scan)"/>
+  <!-- Monitor stand -->
+  <rect x="462" y="630" width="100" height="80" rx="4" fill="#475569"/>
+  <rect x="362" y="710" width="300" height="28" rx="8" fill="#475569"/>
+  <!-- Scan lines on sides -->
+  <line x1="170" y1="300" x2="230" y2="350" stroke="#F43F5E" stroke-width="10" stroke-linecap="round"/>
+  <line x1="170" y1="380" x2="230" y2="420" stroke="#F43F5E" stroke-width="10" stroke-linecap="round"/>
+  <line x1="170" y1="460" x2="230" y2="480" stroke="#F43F5E" stroke-width="10" stroke-linecap="round"/>
+  <line x1="854" y1="300" x2="794" y2="350" stroke="#F43F5E" stroke-width="10" stroke-linecap="round"/>
+  <line x1="854" y1="380" x2="794" y2="420" stroke="#F43F5E" stroke-width="10" stroke-linecap="round"/>
+  <line x1="854" y1="460" x2="794" y2="480" stroke="#F43F5E" stroke-width="10" stroke-linecap="round"/>
+  <!-- Label -->
+  <text x="512" y="860" font-family="Arial,sans-serif" font-size="60" fill="#BE123C" font-weight="bold" text-anchor="middle">Spec Scanner</text>
+</svg>

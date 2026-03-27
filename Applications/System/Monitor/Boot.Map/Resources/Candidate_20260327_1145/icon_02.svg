@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF7ED"/>
+      <stop offset="100%" stop-color="#FFEDD5"/>
+    </linearGradient>
+    <linearGradient id="rocket" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#DC2626"/>
+      <stop offset="100%" stop-color="#FBBF24"/>
+    </linearGradient>
+    <linearGradient id="flame" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FBBF24"/>
+      <stop offset="100%" stop-color="#EF4444" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <!-- Background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg2)"/>
+  <!-- Rocket -->
+  <!-- Body -->
+  <ellipse cx="512" cy="440" rx="100" ry="220" fill="url(#rocket)"/>
+  <!-- Nose -->
+  <path d="M412,300 Q512,140 612,300 Z" fill="#FCD34D"/>
+  <!-- Windows -->
+  <circle cx="512" cy="380" r="50" fill="#DBEAFE"/>
+  <circle cx="512" cy="380" r="36" fill="#93C5FD"/>
+  <!-- Fins -->
+  <path d="M412,580 L320,700 L412,660 Z" fill="#F59E0B"/>
+  <path d="M612,580 L704,700 L612,660 Z" fill="#F59E0B"/>
+  <!-- Flame trail -->
+  <ellipse cx="512" cy="720" rx="70" ry="140" fill="url(#flame)"/>
+  <ellipse cx="480" cy="760" rx="30" ry="80" fill="#FBBF24" opacity="0.7"/>
+  <ellipse cx="545" cy="750" rx="28" ry="70" fill="#FCD34D" opacity="0.6"/>
+  <!-- Speed lines -->
+  <line x1="200" y1="500" x2="320" y2="500" stroke="#FBBF24" stroke-width="12" stroke-linecap="round"/>
+  <line x1="170" y1="560" x2="290" y2="560" stroke="#FCD34D" stroke-width="8" stroke-linecap="round"/>
+  <line x1="710" y1="500" x2="830" y2="500" stroke="#FBBF24" stroke-width="12" stroke-linecap="round"/>
+  <line x1="730" y1="560" x2="850" y2="560" stroke="#FCD34D" stroke-width="8" stroke-linecap="round"/>
+  <!-- Label -->
+  <text x="512" y="920" font-family="Arial,sans-serif" font-size="60" fill="#C2410C" font-weight="bold" text-anchor="middle">Boot Launch</text>
+</svg>

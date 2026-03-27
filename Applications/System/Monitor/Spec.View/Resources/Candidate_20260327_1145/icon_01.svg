@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ECFEFF"/>
+      <stop offset="100%" stop-color="#A5F3FC"/>
+    </linearGradient>
+    <linearGradient id="gauge" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#22C55E"/>
+      <stop offset="60%" stop-color="#F59E0B"/>
+      <stop offset="100%" stop-color="#EF4444"/>
+    </linearGradient>
+  </defs>
+  <!-- Background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg1)"/>
+  <!-- Temperature gauge (arc) -->
+  <path d="M200,650 A312,312 0 0,1 824,650" fill="none" stroke="#E2E8F0" stroke-width="48"/>
+  <path d="M200,650 A312,312 0 0,1 824,650" fill="none" stroke="url(#gauge)" stroke-width="48" stroke-linecap="round" stroke-dasharray="850,200"/>
+  <!-- Gauge needle -->
+  <line x1="512" y1="650" x2="670" y2="360" stroke="#1E293B" stroke-width="16" stroke-linecap="round"/>
+  <circle cx="512" cy="650" r="30" fill="#1E293B"/>
+  <circle cx="512" cy="650" r="16" fill="#FFFFFF"/>
+  <!-- Temperature reading -->
+  <text x="512" y="586" font-family="Arial,sans-serif" font-size="120" fill="#0E7490" font-weight="bold" text-anchor="middle">72°C</text>
+  <!-- Gauge labels -->
+  <text x="180" y="700" font-family="Arial,sans-serif" font-size="36" fill="#22C55E" text-anchor="middle">0°</text>
+  <text x="844" y="700" font-family="Arial,sans-serif" font-size="36" fill="#EF4444" text-anchor="middle">100°</text>
+  <!-- Spec info below -->
+  <text x="512" y="790" font-family="Arial,sans-serif" font-size="40" fill="#0E7490" text-anchor="middle">CPU Temp  ·  Real-time</text>
+  <text x="512" y="870" font-family="Arial,sans-serif" font-size="60" fill="#155E75" font-weight="bold" text-anchor="middle">Spec View</text>
+</svg>

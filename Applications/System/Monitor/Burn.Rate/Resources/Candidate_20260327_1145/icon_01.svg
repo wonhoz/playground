@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F0FDF4"/>
+      <stop offset="100%" stop-color="#86EFAC"/>
+    </linearGradient>
+    <linearGradient id="bat" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#16A34A"/>
+      <stop offset="72%" stop-color="#22C55E"/>
+      <stop offset="72%" stop-color="#E5E7EB"/>
+      <stop offset="100%" stop-color="#E5E7EB"/>
+    </linearGradient>
+  </defs>
+  <!-- Background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg1)"/>
+  <!-- Battery body -->
+  <rect x="220" y="280" width="580" height="340" rx="28" fill="#E5E7EB" stroke="#22C55E" stroke-width="10"/>
+  <!-- Battery cap -->
+  <rect x="800" y="370" width="60" height="160" rx="14" fill="#9CA3AF"/>
+  <!-- Battery fill (72%) -->
+  <rect x="238" y="298" width="418" height="304" rx="18" fill="#22C55E"/>
+  <!-- Charge indicator -->
+  <text x="512" y="480" font-family="Arial,sans-serif" font-size="140" fill="#FFFFFF" font-weight="bold" text-anchor="middle">72%</text>
+  <!-- Charging bolt -->
+  <polygon points="540,220 490,310 530,310 480,400 600,290 555,290" fill="#FCD34D" stroke="#F59E0B" stroke-width="8" stroke-linejoin="round"/>
+  <!-- Health bar below -->
+  <text x="220" y="700" font-family="Arial,sans-serif" font-size="40" fill="#15803D">Health:</text>
+  <rect x="360" y="668" width="400" height="40" rx="10" fill="#D1FAE5"/>
+  <rect x="360" y="668" width="348" height="40" rx="10" fill="#4ADE80"/>
+  <text x="730" y="700" font-family="Arial,sans-serif" font-size="40" fill="#15803D" font-weight="bold">87%</text>
+  <!-- Label -->
+  <text x="512" y="820" font-family="Arial,sans-serif" font-size="60" fill="#15803D" font-weight="bold" text-anchor="middle">Burn Rate</text>
+</svg>

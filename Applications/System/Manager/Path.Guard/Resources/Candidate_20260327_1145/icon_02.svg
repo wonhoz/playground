@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E0F2FE"/>
+      <stop offset="100%" stop-color="#BAE6FD"/>
+    </linearGradient>
+    <linearGradient id="road" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#94A3B8"/>
+      <stop offset="100%" stop-color="#64748B"/>
+    </linearGradient>
+  </defs>
+  <!-- Background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg2)"/>
+  <!-- Road path -->
+  <path d="M160,820 Q300,700 512,512 Q680,350 840,200" fill="none" stroke="url(#road)" stroke-width="100" stroke-linecap="round"/>
+  <!-- Road dashes -->
+  <path d="M160,820 Q300,700 512,512 Q680,350 840,200" fill="none" stroke="#FFFFFF" stroke-width="14" stroke-linecap="round" stroke-dasharray="60,40"/>
+  <!-- Shield at end of road -->
+  <path d="M784,148 L892,192 L892,290 Q892,360 784,400 Q676,360 676,290 L676,192 Z" fill="#0284C7"/>
+  <path d="M784,172 L872,210 L872,286 Q872,344 784,378 Q696,344 696,286 L696,210 Z" fill="#38BDF8"/>
+  <!-- Check on shield -->
+  <polyline points="730,286 764,320 840,238" fill="none" stroke="#FFFFFF" stroke-width="24" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- PATH label on road -->
+  <text x="400" y="650" font-family="Consolas,monospace" font-size="72" fill="#FFFFFF" font-weight="bold" transform="rotate(-40,400,650)">PATH</text>
+</svg>

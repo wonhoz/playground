@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF7ED"/>
+      <stop offset="100%" stop-color="#FED7AA"/>
+    </linearGradient>
+    <linearGradient id="flame2" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#EF4444"/>
+      <stop offset="50%" stop-color="#F59E0B"/>
+      <stop offset="100%" stop-color="#FCD34D"/>
+    </linearGradient>
+  </defs>
+  <!-- Background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg2)"/>
+  <!-- Battery outline with flame -->
+  <!-- Battery -->
+  <rect x="160" y="380" width="480" height="260" rx="24" fill="#FED7AA" stroke="#F59E0B" stroke-width="12"/>
+  <rect x="640" y="452" width="50" height="116" rx="12" fill="#F59E0B"/>
+  <!-- Battery charge low (20%) -->
+  <rect x="178" y="398" width="96" height="224" rx="14" fill="#EF4444"/>
+  <text x="412" y="530" font-family="Arial,sans-serif" font-size="110" fill="#B45309" font-weight="bold" text-anchor="middle">20%</text>
+  <!-- Flame above battery (burning/discharge) -->
+  <path d="M490,380 Q520,320 512,260 Q540,300 560,260 Q570,220 590,240 Q600,180 640,220 Q620,300 630,340 Q600,380 570,380 Q540,380 490,380Z" fill="url(#flame2)"/>
+  <!-- Small flames -->
+  <path d="M340,380 Q355,340 350,300 Q365,330 380,300 Q375,360 360,380Z" fill="url(#flame2)"/>
+  <path d="M220,380 Q238,344 232,308 Q248,334 262,308 Q258,362 240,380Z" fill="url(#flame2)"/>
+  <!-- Discharge rate -->
+  <text x="512" y="730" font-family="Arial,sans-serif" font-size="54" fill="#C2410C" font-weight="bold" text-anchor="middle">-8.5 W/h</text>
+  <!-- Label -->
+  <text x="512" y="860" font-family="Arial,sans-serif" font-size="60" fill="#9A3412" font-weight="bold" text-anchor="middle">Burn Rate</text>
+</svg>

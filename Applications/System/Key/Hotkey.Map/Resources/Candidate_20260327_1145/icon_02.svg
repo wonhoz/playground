@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFD43B"/>
+      <stop offset="100%" stop-color="#FFB300"/>
+    </linearGradient>
+    <filter id="shadow2">
+      <feDropShadow dx="0" dy="8" stdDeviation="16" flood-color="#00000030"/>
+    </filter>
+  </defs>
+  <!-- Background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg2)"/>
+  <!-- Traffic light housing -->
+  <rect x="362" y="160" width="300" height="660" rx="60" fill="#333333" filter="url(#shadow2)"/>
+  <!-- Red circle (OCCUPIED) -->
+  <circle cx="512" cy="300" r="105" fill="#F44336"/>
+  <circle cx="512" cy="300" r="80" fill="#FF7043" opacity="0.6"/>
+  <!-- Yellow circle (SYSTEM RESERVED) -->
+  <circle cx="512" cy="490" r="105" fill="#FF9800"/>
+  <circle cx="512" cy="490" r="80" fill="#FFB74D" opacity="0.6"/>
+  <!-- Green circle (FREE) -->
+  <circle cx="512" cy="680" r="105" fill="#4CAF50"/>
+  <circle cx="512" cy="680" r="80" fill="#66BB6A" opacity="0.6"/>
+  <!-- Labels -->
+  <text x="512" y="866" font-family="Arial,sans-serif" font-size="50" fill="#5D4037" font-weight="bold" text-anchor="middle">OCCUPIED · SYS · FREE</text>
+</svg>

@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF0F3"/>
+      <stop offset="100%" stop-color="#FECDD3"/>
+    </linearGradient>
+  </defs>
+  <!-- Background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg3)"/>
+  <!-- Discharge graph (descending curve) -->
+  <!-- Grid lines -->
+  <line x1="175" y1="250" x2="175" y2="700" stroke="#FECDD3" stroke-width="4"/>
+  <line x1="175" y1="700" x2="850" y2="700" stroke="#FECDD3" stroke-width="4"/>
+  <line x1="175" y1="450" x2="850" y2="450" stroke="#FCA5A5" stroke-width="3" stroke-dasharray="20,12"/>
+  <!-- Y labels -->
+  <text x="155" y="258" font-family="Arial,sans-serif" font-size="36" fill="#BE123C" text-anchor="end">100%</text>
+  <text x="155" y="458" font-family="Arial,sans-serif" font-size="36" fill="#BE123C" text-anchor="end">50%</text>
+  <text x="155" y="708" font-family="Arial,sans-serif" font-size="36" fill="#BE123C" text-anchor="end">0%</text>
+  <!-- Discharge curve -->
+  <polyline points="175,260 280,340 380,420 480,510 560,600 660,670 760,695 850,700" fill="none" stroke="#F43F5E" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Area under curve -->
+  <path d="M175,260 C280,340 380,420 480,510 C560,600 660,670 760,695 L850,700 L175,700 Z" fill="#FB7185" opacity="0.2"/>
+  <!-- Battery icons at points -->
+  <text x="175" y="244" font-family="Arial,sans-serif" font-size="44" fill="#22C55E">🔋</text>
+  <text x="815" y="684" font-family="Arial,sans-serif" font-size="44" fill="#EF4444">🪫</text>
+  <!-- Current point -->
+  <circle cx="560" cy="600" r="22" fill="#F43F5E" stroke="#FFFFFF" stroke-width="8"/>
+  <text x="570" y="576" font-family="Arial,sans-serif" font-size="36" fill="#BE123C">42%</text>
+  <!-- Label -->
+  <text x="512" y="840" font-family="Arial,sans-serif" font-size="60" fill="#BE123C" font-weight="bold" text-anchor="middle">Discharge Graph</text>
+</svg>

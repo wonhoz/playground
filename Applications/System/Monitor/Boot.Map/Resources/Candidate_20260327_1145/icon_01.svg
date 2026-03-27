@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#EDE9FE"/>
+      <stop offset="100%" stop-color="#C4B5FD"/>
+    </linearGradient>
+  </defs>
+  <!-- Background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg1)"/>
+  <!-- Boot phase bar chart -->
+  <!-- Y axis label -->
+  <text x="185" y="246" font-family="Arial,sans-serif" font-size="34" fill="#6D28D9" font-weight="bold">Boot Time</text>
+  <!-- Bars (phases) -->
+  <!-- Firmware -->
+  <rect x="185" y="300" width="130" height="440" rx="10" fill="#7C3AED"/>
+  <text x="250" y="282" font-family="Arial,sans-serif" font-size="28" fill="#6D28D9" text-anchor="middle">FW</text>
+  <text x="250" y="760" font-family="Arial,sans-serif" font-size="28" fill="#FFFFFF" font-weight="bold" text-anchor="middle">2.1s</text>
+  <!-- Kernel -->
+  <rect x="335" y="400" width="130" height="340" rx="10" fill="#A855F7"/>
+  <text x="400" y="382" font-family="Arial,sans-serif" font-size="28" fill="#7C3AED" text-anchor="middle">Kernel</text>
+  <text x="400" y="756" font-family="Arial,sans-serif" font-size="28" fill="#FFFFFF" font-weight="bold" text-anchor="middle">1.6s</text>
+  <!-- Driver -->
+  <rect x="485" y="450" width="130" height="290" rx="10" fill="#C084FC"/>
+  <text x="550" y="432" font-family="Arial,sans-serif" font-size="28" fill="#7C3AED" text-anchor="middle">Driver</text>
+  <text x="550" y="756" font-family="Arial,sans-serif" font-size="28" fill="#FFFFFF" font-weight="bold" text-anchor="middle">1.4s</text>
+  <!-- Services -->
+  <rect x="635" y="360" width="130" height="380" rx="10" fill="#DDD6FE"/>
+  <text x="700" y="342" font-family="Arial,sans-serif" font-size="28" fill="#7C3AED" text-anchor="middle">Svc</text>
+  <text x="700" y="756" font-family="Arial,sans-serif" font-size="28" fill="#6D28D9" font-weight="bold" text-anchor="middle">1.8s</text>
+  <!-- Explorer -->
+  <rect x="785" y="510" width="130" height="230" rx="10" fill="#F3E8FF"/>
+  <text x="850" y="492" font-family="Arial,sans-serif" font-size="28" fill="#7C3AED" text-anchor="middle">Shell</text>
+  <text x="850" y="756" font-family="Arial,sans-serif" font-size="28" fill="#6D28D9" font-weight="bold" text-anchor="middle">1.1s</text>
+  <!-- Base line -->
+  <line x1="175" y1="750" x2="930" y2="750" stroke="#7C3AED" stroke-width="6"/>
+  <!-- Total label -->
+  <text x="512" y="870" font-family="Arial,sans-serif" font-size="56" fill="#5B21B6" font-weight="bold" text-anchor="middle">Boot Map</text>
+  <text x="512" y="936" font-family="Arial,sans-serif" font-size="44" fill="#8B5CF6" text-anchor="middle">Total: 8.0s</text>
+</svg>

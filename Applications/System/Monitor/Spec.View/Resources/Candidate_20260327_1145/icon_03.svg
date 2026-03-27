@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F5F3FF"/>
+      <stop offset="100%" stop-color="#DDD6FE"/>
+    </linearGradient>
+  </defs>
+  <!-- Background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg3)"/>
+  <!-- Real-time monitor charts (multi-metric) -->
+  <!-- Chart panel -->
+  <rect x="165" y="185" width="694" height="560" rx="22" fill="#1E1B4B"/>
+  <!-- Title bar -->
+  <rect x="165" y="185" width="694" height="56" rx="22" fill="#312E81"/>
+  <rect x="165" y="213" width="694" height="28" rx="0" fill="#312E81"/>
+  <text x="512" y="222" font-family="Arial,sans-serif" font-size="38" fill="#C7D2FE" text-anchor="middle">Live Monitor</text>
+  <!-- CPU % line -->
+  <polyline points="195,430 240,390 280,420 320,380 360,360 400,400 440,340 480,380 520,360 560,390 600,350 640,380 680,340 720,370 760,350 840,340"
+    fill="none" stroke="#818CF8" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Temperature line -->
+  <polyline points="195,530 240,520 280,510 320,525 360,515 400,520 440,510 480,515 520,525 560,510 600,520 640,508 680,518 720,508 760,514 840,505"
+    fill="none" stroke="#F43F5E" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Legend -->
+  <rect x="200" y="640" width="28" height="14" rx="4" fill="#818CF8"/>
+  <text x="240" y="654" font-family="Arial,sans-serif" font-size="32" fill="#C7D2FE">CPU %</text>
+  <rect x="380" y="640" width="28" height="14" rx="4" fill="#F43F5E"/>
+  <text x="420" y="654" font-family="Arial,sans-serif" font-size="32" fill="#FCA5A5">Temp</text>
+  <!-- Snapshot button -->
+  <rect x="600" y="628" width="240" height="54" rx="16" fill="#4338CA"/>
+  <text x="720" y="663" font-family="Arial,sans-serif" font-size="36" fill="#C7D2FE" text-anchor="middle">📸 Snapshot</text>
+  <!-- Current values -->
+  <text x="512" y="840" font-family="Arial,sans-serif" font-size="52" fill="#7C3AED" font-weight="bold" text-anchor="middle">CPU 67%  ·  72°C</text>
+</svg>

@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ECFEFF"/>
+      <stop offset="100%" stop-color="#A5F3FC"/>
+    </linearGradient>
+  </defs>
+  <!-- Background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg2)"/>
+  <!-- Lens circle (big) -->
+  <circle cx="450" cy="430" r="260" fill="none" stroke="#0891B2" stroke-width="36"/>
+  <circle cx="450" cy="430" r="220" fill="#CFFAFE" opacity="0.7"/>
+  <!-- Memory waveform inside lens -->
+  <polyline points="230,430 270,370 310,450 350,330 390,480 430,380 470,440 510,340 550,460 590,390 630,430"
+    fill="none" stroke="#0891B2" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Leak drop outside lens (detected) -->
+  <!-- Handle -->
+  <line x1="656" y1="636" x2="800" y2="780" stroke="#0E7490" stroke-width="38" stroke-linecap="round"/>
+  <!-- Leak detection badge -->
+  <circle cx="820" cy="800" r="80" fill="#F43F5E"/>
+  <text x="820" y="822" font-family="Arial,sans-serif" font-size="64" fill="#FFFFFF" font-weight="bold" text-anchor="middle">!</text>
+  <!-- Leak drop -->
+  <path d="M820,200 Q860,280 860,340 Q860,400 820,400 Q780,400 780,340 Q780,280 820,200Z" fill="#06B6D4"/>
+  <text x="820" y="330" font-family="Arial,sans-serif" font-size="36" fill="#FFFFFF" text-anchor="middle">LEAK</text>
+  <!-- Label -->
+  <text x="512" y="940" font-family="Arial,sans-serif" font-size="60" fill="#0E7490" font-weight="bold" text-anchor="middle">Mem Lens</text>
+</svg>

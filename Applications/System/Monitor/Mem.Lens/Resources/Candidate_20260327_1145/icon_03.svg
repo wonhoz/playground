@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFFBEB"/>
+      <stop offset="100%" stop-color="#FEF3C7"/>
+    </linearGradient>
+  </defs>
+  <!-- Background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg3)"/>
+  <!-- Process memory timeline chart -->
+  <!-- Chart area -->
+  <rect x="175" y="185" width="674" height="500" rx="18" fill="#FFFFFF" stroke="#FCD34D" stroke-width="6"/>
+  <!-- Grid -->
+  <line x1="200" y1="335" x2="824" y2="335" stroke="#FEF3C7" stroke-width="3"/>
+  <line x1="200" y1="435" x2="824" y2="435" stroke="#FEF3C7" stroke-width="3"/>
+  <line x1="200" y1="535" x2="824" y2="535" stroke="#FEF3C7" stroke-width="3"/>
+  <line x1="200" y1="635" x2="824" y2="635" stroke="#FEF3C7" stroke-width="3"/>
+  <!-- Y labels -->
+  <text x="188" y="240" font-family="Arial,sans-serif" font-size="30" fill="#B45309" text-anchor="end">4 GB</text>
+  <text x="188" y="340" font-family="Arial,sans-serif" font-size="30" fill="#B45309" text-anchor="end">3 GB</text>
+  <text x="188" y="440" font-family="Arial,sans-serif" font-size="30" fill="#B45309" text-anchor="end">2 GB</text>
+  <text x="188" y="540" font-family="Arial,sans-serif" font-size="30" fill="#B45309" text-anchor="end">1 GB</text>
+  <!-- Process lines -->
+  <!-- Chrome (growing leak) -->
+  <polyline points="210,540 290,520 370,490 450,450 530,400 610,350 690,290 770,240" fill="none" stroke="#EF4444" stroke-width="14" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Stable process -->
+  <polyline points="210,560 290,562 370,558 450,564 530,560 610,558 690,562 770,560" fill="none" stroke="#22C55E" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Another process -->
+  <polyline points="210,620 290,610 370,615 450,600 530,608 610,602 690,610 770,605" fill="none" stroke="#3B82F6" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Leak warning arrow -->
+  <polygon points="790,216 810,240 770,240" fill="#EF4444"/>
+  <text x="830" y="240" font-family="Arial,sans-serif" font-size="36" fill="#EF4444">↑ LEAK</text>
+  <!-- Legend -->
+  <rect x="200" y="714" width="26" height="16" rx="4" fill="#EF4444"/>
+  <text x="236" y="728" font-family="Arial,sans-serif" font-size="32" fill="#374151">chrome.exe</text>
+  <rect x="430" y="714" width="26" height="16" rx="4" fill="#22C55E"/>
+  <text x="466" y="728" font-family="Arial,sans-serif" font-size="32" fill="#374151">explorer.exe</text>
+  <!-- Label -->
+  <text x="512" y="870" font-family="Arial,sans-serif" font-size="60" fill="#B45309" font-weight="bold" text-anchor="middle">Memory Timeline</text>
+</svg>

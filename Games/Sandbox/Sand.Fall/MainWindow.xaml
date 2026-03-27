@@ -25,6 +25,7 @@
              MouseLeftButtonUp="SimImage_MouseUp"
              MouseRightButtonDown="SimImage_RightMouseDown"
              MouseRightButtonUp="SimImage_RightMouseUp"
+             MouseWheel="SimImage_MouseWheel"
              Cursor="Cross"
              IsHitTestVisible="True"/>
     </Border>
@@ -97,8 +98,16 @@
           <Run>🔥 불 + 얼음 → 물</Run><LineBreak/>
           <Run>🌱 씨앗 + 물 → 식물</Run><LineBreak/>
           <Run>🧪 산 + 돌   → 용해</Run><LineBreak/>
-          <Run>❄️ 얼음 → 물 동결</Run>
+          <Run>❄️ 얼음 → 물 동결</Run><LineBreak/>
+          <Run>💣 화약 + 불 → 폭발</Run>
         </TextBlock>
+
+        <Separator Background="{StaticResource BorderBrush}" Margin="0,10,0,10"/>
+
+        <!-- 저장/불러오기 -->
+        <Button Content="💾 저장 (Ctrl+S)" Click="BtnSave_Click" Margin="0,0,0,6"/>
+        <Button Content="📂 불러오기 (Ctrl+O)" Click="BtnLoad_Click" Margin="0,0,0,6"/>
+        <Button Content="❓ 도움말 (F1)" Click="BtnHelp_Click" Margin="0,0,0,6"/>
 
         <!-- 상태바 -->
         <TextBlock x:Name="TxtFps" Foreground="{StaticResource DimBrush}"

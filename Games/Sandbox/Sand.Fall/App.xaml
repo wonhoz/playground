@@ -44,7 +44,81 @@
 
     <!-- 슬라이더 -->
     <Style TargetType="Slider">
-      <Setter Property="Foreground" Value="{StaticResource AccentBrush}"/>
+      <Setter Property="Foreground"          Value="{StaticResource AccentBrush}"/>
+      <Setter Property="Background"          Value="Transparent"/>
+      <Setter Property="Focusable"           Value="False"/>
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="Slider">
+            <Grid>
+              <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+              </Grid.RowDefinitions>
+              <Track x:Name="PART_Track">
+                <Track.DecreaseRepeatButton>
+                  <RepeatButton Command="Slider.DecreaseLarge" Focusable="False">
+                    <RepeatButton.Style>
+                      <Style TargetType="RepeatButton">
+                        <Setter Property="OverridesDefaultStyle" Value="True"/>
+                        <Setter Property="Background" Value="{StaticResource AccentBrush}"/>
+                        <Setter Property="Height" Value="4"/>
+                        <Setter Property="Template">
+                          <Setter.Value>
+                            <ControlTemplate TargetType="RepeatButton">
+                              <Border Background="{TemplateBinding Background}" CornerRadius="2"/>
+                            </ControlTemplate>
+                          </Setter.Value>
+                        </Setter>
+                      </Style>
+                    </RepeatButton.Style>
+                  </RepeatButton>
+                </Track.DecreaseRepeatButton>
+                <Track.IncreaseRepeatButton>
+                  <RepeatButton Command="Slider.IncreaseLarge" Focusable="False">
+                    <RepeatButton.Style>
+                      <Style TargetType="RepeatButton">
+                        <Setter Property="OverridesDefaultStyle" Value="True"/>
+                        <Setter Property="Background" Value="{StaticResource BorderBrush}"/>
+                        <Setter Property="Height" Value="4"/>
+                        <Setter Property="Template">
+                          <Setter.Value>
+                            <ControlTemplate TargetType="RepeatButton">
+                              <Border Background="{TemplateBinding Background}" CornerRadius="2"/>
+                            </ControlTemplate>
+                          </Setter.Value>
+                        </Setter>
+                      </Style>
+                    </RepeatButton.Style>
+                  </RepeatButton>
+                </Track.IncreaseRepeatButton>
+                <Track.Thumb>
+                  <Thumb x:Name="thumb" Focusable="False" Width="14" Height="14">
+                    <Thumb.Style>
+                      <Style TargetType="Thumb">
+                        <Setter Property="OverridesDefaultStyle" Value="True"/>
+                        <Setter Property="Template">
+                          <Setter.Value>
+                            <ControlTemplate TargetType="Thumb">
+                              <Ellipse x:Name="el" Width="14" Height="14"
+                                       Fill="{StaticResource AccentBrush}"
+                                       Stroke="{StaticResource BorderBrush}" StrokeThickness="1"/>
+                              <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                  <Setter TargetName="el" Property="Fill" Value="White"/>
+                                </Trigger>
+                              </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                          </Setter.Value>
+                        </Setter>
+                      </Style>
+                    </Thumb.Style>
+                  </Thumb>
+                </Track.Thumb>
+              </Track>
+            </Grid>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
     </Style>
 
     <!-- ComboBox 다크 테마 -->

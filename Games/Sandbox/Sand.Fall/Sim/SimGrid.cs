@@ -91,12 +91,7 @@ public sealed class SimGrid
             }
         }
 
-        // 픽셀 버퍼 갱신 + 파티클 카운트
-        int cnt = 0;
-        for (int i = 0; i < _cells.Length; i++)
-            if (_cells[i].Type != Material.Empty) cnt++;
-        ParticleCount = cnt;
-
+        // 픽셀 버퍼 갱신 + 파티클 카운트 (단일 패스)
         UpdatePixels();
     }
 
@@ -116,7 +111,8 @@ public sealed class SimGrid
             case Material.Acid:  UpdateAcid(x, y, idx);  break;
             case Material.Ice:   UpdateIce(x, y, idx);   break;
             case Material.Plant: UpdatePlant(x, y, idx); break;
-            case Material.Ash:   UpdateAsh(x, y, idx);   break;
+            case Material.Ash:        UpdateAsh(x, y, idx);        break;
+            case Material.Gunpowder:  UpdateGunpowder(x, y, idx);  break;
         }
     }
 
@@ -338,8 +334,7 @@ public sealed class SimGrid
                 var nb = At(nx, ny).Type;
                 if (nb != Material.Empty && nb != Material.Acid && nb != Material.Water)
                 {
-                    At(nx, ny).Type    = Material.Empty;
-                    _cells[idx].Life   = Math.Max((byte)1, (byte)(_cells[idx].Life - 1));
+                    At(nx, ny).Type     = Material.Empty;
                     _cells[idx].Updated = true;
                     // 산 자체도 일정 확률로 소비
                     if (_rng.Next(3) == 0) _cells[idx].Type = Material.Empty;
@@ -375,12 +370,40 @@ public sealed class SimGrid
         }
     }
 
+    // ── 화약 ─────────────────────────────────────────────────────────
+    private void UpdateGunpowder(int x, int y, int idx)
+    {
+        // 인접 불 감지 → 폭발
+        for (int dy = -1; dy <= 1; dy++)
+        for (int dx = -1; dx <= 1; dx++)
+        {
+            if (!IsType(x + dx, y + dy, Material.Fire)) continue;
+
+            // 반경 내 불 생성 (폭발)
+            const int ExplosionRadius = 10;
+            for (int ey = -ExplosionRadius; ey <= ExplosionRadius; ey++)
+            for (int ex = -ExplosionRadius; ex <= ExplosionRadius; ex++)
+            {
+                if (ex * ex + ey * ey > ExplosionRadius * ExplosionRadius) continue;
+                int nx = x + ex, ny = y + ey;
+                if (InBounds(nx, ny) && _rng.Next(3) != 0)
+                    Set(nx, ny, Material.Fire);
+            }
+            return;
+        }
+
+        // 폭발 없으면 Powder처럼 낙하
+        UpdatePowder(x, y, idx);
+    }
+
     // ── 픽셀 렌더링 ──────────────────────────────────────────────────
     private void UpdatePixels()
     {
+        int cnt = 0;
         for (int i = 0; i < _cells.Length; i++)
         {
             var mat = _cells[i].Type;
+            if (mat != Material.Empty) cnt++;
             uint color = MaterialDef.BaseColor[(int)mat];
 
             // 물질별 색상 변화
@@ -389,7 +412,6 @@ public sealed class SimGrid
                 // 수명에 따라 색상 변화 (뜨거울수록 밝음)
                 int life = _cells[i].Life;
                 int ci = Math.Clamp(FireColors.Length - 1 - (life * FireColors.Length / 80), 0, FireColors.Length - 1);
-                color = FireColors[ci];
                 // 약간의 노이즈
                 if (_rng.Next(3) == 0)
                     ci = Math.Clamp(ci + _rng.Next(-1, 2), 0, FireColors.Length - 1);
@@ -422,6 +444,7 @@ public sealed class SimGrid
 
             _pixels[i] = color;
         }
+        ParticleCount = cnt;
     }
 
     /// <summary>그리드 전체 초기화</summary>
@@ -429,5 +452,41 @@ public sealed class SimGrid
     {
         Array.Clear(_cells, 0, _cells.Length);
         Array.Clear(_pixels, 0, _pixels.Length);
+    }
+
+    // ── 저장 / 불러오기 ──────────────────────────────────────────────
+    private const uint SaveMagic = 0x53414E44; // "SAND"
+
+    /// <summary>현재 그리드 상태를 스트림에 저장</summary>
+    public void Save(System.IO.Stream stream)
+    {
+        using var bw = new System.IO.BinaryWriter(stream, System.Text.Encoding.UTF8, leaveOpen: true);
+        bw.Write(SaveMagic);
+        bw.Write(W);
+        bw.Write(H);
+        for (int i = 0; i < _cells.Length; i++)
+        {
+            bw.Write((byte)_cells[i].Type);
+            bw.Write(_cells[i].Life);
+            bw.Write(_cells[i].Heat);
+        }
+    }
+
+    /// <summary>스트림에서 그리드 상태 복원. 성공 시 true.</summary>
+    public bool Load(System.IO.Stream stream)
+    {
+        using var br = new System.IO.BinaryReader(stream, System.Text.Encoding.UTF8, leaveOpen: true);
+        if (br.ReadUInt32() != SaveMagic) return false;
+        int w = br.ReadInt32(), h = br.ReadInt32();
+        if (w != W || h != H) return false;
+
+        for (int i = 0; i < _cells.Length; i++)
+        {
+            _cells[i].Type    = (Material)br.ReadByte();
+            _cells[i].Life    = br.ReadByte();
+            _cells[i].Heat    = br.ReadByte();
+            _cells[i].Updated = false;
+        }
+        return true;
     }
 }

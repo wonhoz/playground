@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
+         xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
+         xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
+         xmlns:desktop4="http://schemas.microsoft.com/appx/manifest/desktop/windows10/4"
+         xmlns:com="http://schemas.microsoft.com/appx/manifest/com/windows10"
+         IgnorableNamespaces="rescap desktop4 com uap">
+
+  <Identity Name="SmartCareworks.ClaudeCode.ContextMenu"
+            Publisher="CN=SmartCareworks Inc., O=SmartCareworks Inc., L=Jung District, S=Seoul, C=KR"
+            Version="1.0.0.0"
+            ProcessorArchitecture="x64"/>
+
+  <Properties>
+    <DisplayName>Claude Code Context Menu</DisplayName>
+    <PublisherDisplayName>SmartCareworks Inc.</PublisherDisplayName>
+    <Description>Claude Code Shell Extension for Windows Explorer</Description>
+    <Logo>logo.png</Logo>
+  </Properties>
+
+  <Dependencies>
+    <TargetDeviceFamily Name="Windows.Desktop" MinVersion="10.0.17763.0" MaxVersionTested="10.0.26100.0"/>
+  </Dependencies>
+
+  <Resources>
+    <Resource Language="ko-KR"/>
+  </Resources>
+
+  <Capabilities>
+    <rescap:Capability Name="runFullTrust"/>
+  </Capabilities>
+
+  <Applications>
+    <Application Id="App" Executable="placeholder.exe" EntryPoint="Windows.FullTrustApplication">
+      <uap:VisualElements DisplayName="Claude Code Context Menu"
+                           Description="Claude Code Shell Extension"
+                           BackgroundColor="transparent"
+                           Square150x150Logo="logo.png"
+                           Square44x44Logo="logo44.png"/>
+      <Extensions>
+
+        <!-- COM 서버 등록 -->
+        <com:Extension Category="windows.comServer">
+          <com:ComServer>
+            <com:InProcessServer>
+              <com:Path>Claude.Shell.Native.dll</com:Path>
+              <com:Class Id="{261B2913-8ABA-420B-9280-0061626EDA5A}" ThreadingModel="apartment"/>
+            </com:InProcessServer>
+          </com:ComServer>
+        </com:Extension>
+
+        <!-- Windows 11 새 컨텍스트 메뉴 등록 -->
+        <desktop4:Extension Category="windows.fileExplorerContextMenus">
+          <desktop4:FileExplorerContextMenus>
+            <desktop4:ItemType Type="Directory">
+              <desktop4:Verb Id="ClaudeCode" Clsid="{261B2913-8ABA-420B-9280-0061626EDA5A}"/>
+            </desktop4:ItemType>
+            <desktop4:ItemType Type="Directory\Background">
+              <desktop4:Verb Id="ClaudeCode" Clsid="{261B2913-8ABA-420B-9280-0061626EDA5A}"/>
+            </desktop4:ItemType>
+          </desktop4:FileExplorerContextMenus>
+        </desktop4:Extension>
+
+      </Extensions>
+    </Application>
+  </Applications>
+
+</Package>

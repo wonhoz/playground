@@ -32,27 +32,45 @@ public sealed class HighScoreService
 
     public bool TryUpdate(GameMode mode, int score)
     {
-        var best = GetBest(mode);
-        var top3 = GetTop3List(mode);
+        var best  = GetBest(mode);
+        var top3  = GetTop3List(mode);
+        var dates = GetTop3DateList(mode);
+        var today = DateTime.Now.ToString("yyyy-MM-dd");
 
-        // Top 3 업데이트
-        top3.Add(score);
-        top3.Sort((a, b) => b.CompareTo(a));
-        if (top3.Count > 3) top3.RemoveRange(3, top3.Count - 3);
+        // Top 3 업데이트 (점수·날짜 동기화)
+        var combined = top3.Zip(dates.Concat(Enumerable.Repeat("", 3)))
+                           .Select(x => (score: x.First, date: x.Second))
+                           .Append((score, today))
+                           .OrderByDescending(x => x.score)
+                           .Take(3)
+                           .ToList();
+
+        top3.Clear();
+        dates.Clear();
+        foreach (var (s, d) in combined) { top3.Add(s); dates.Add(d); }
 
         var isNewBest = score > best;
         if (isNewBest)
         {
             switch (mode)
             {
-                case GameMode.Classic:    _data.ClassicBest = score;    break;
+                case GameMode.Classic:    _data.ClassicBest    = score; break;
                 case GameMode.TimeAttack: _data.TimeAttackBest = score; break;
-                case GameMode.Zen:        _data.ZenBest = score;        break;
+                case GameMode.Zen:        _data.ZenBest        = score; break;
             }
         }
 
         Save();
         return isNewBest;
+    }
+
+    public void SaveSettings(string mode, string difficulty, double width, double height)
+    {
+        _data.LastMode       = mode;
+        _data.LastDifficulty = difficulty;
+        _data.WindowWidth    = width;
+        _data.WindowHeight   = height;
+        Save();
     }
 
     public int GetBest(GameMode mode) => mode switch
@@ -63,13 +81,22 @@ public sealed class HighScoreService
         _                   => 0
     };
 
-    public List<int> GetTop3(GameMode mode) => [..GetTop3List(mode)];
+    public List<int>    GetTop3(GameMode mode)      => [..GetTop3List(mode)];
+    public List<string> GetTop3Dates(GameMode mode) => [..GetTop3DateList(mode)];
 
     private List<int> GetTop3List(GameMode mode) => mode switch
     {
         GameMode.Classic    => _data.ClassicTop3,
         GameMode.TimeAttack => _data.TimeAttackTop3,
         GameMode.Zen        => _data.ZenTop3,
+        _                   => []
+    };
+
+    private List<string> GetTop3DateList(GameMode mode) => mode switch
+    {
+        GameMode.Classic    => _data.ClassicTop3Dates,
+        GameMode.TimeAttack => _data.TimeAttackTop3Dates,
+        GameMode.Zen        => _data.ZenTop3Dates,
         _                   => []
     };
 

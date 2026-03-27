@@ -21,13 +21,15 @@ public partial class MainWindow : Window
     private GameMode   _selectedMode       = GameMode.Classic;
     private Difficulty _selectedDifficulty = Difficulty.Normal;
 
+    private static readonly SolidColorBrush ZenLivesBrush = new(Color.FromRgb(74, 222, 128));
+
     public MainWindow()
     {
         InitializeComponent();
         _scores.Load();
 
-        Loaded += OnLoaded;
-        KeyDown += OnKeyDown;
+        Loaded      += OnLoaded;
+        KeyDown     += OnKeyDown;
         SizeChanged += OnSizeChanged;
         CompositionTarget.Rendering += OnRendering;
         Closed += (_, _) => _sound.Dispose();
@@ -40,19 +42,30 @@ public partial class MainWindow : Window
         var dark = 1;
         DwmSetWindowAttribute(hwnd, 20, ref dark, sizeof(int));
 
-        // 마우스 이벤트 (슬라이스 중 여부와 무관하게 항상 위치 추적)
+        // 마우스 이벤트
         GameLayer.MouseMove  += OnGameMouseMove;
         GameLayer.MouseDown  += OnGameMouseDown;
         GameLayer.MouseUp    += OnGameMouseUp;
 
+        // 창 크기 복원
+        var d = _scores.Data;
+        if (d.WindowWidth >= 700)  Width  = d.WindowWidth;
+        if (d.WindowHeight >= 520) Height = d.WindowHeight;
+
+        // 마지막 선택 모드·난이도 복원
+        var lastDiff = Enum.TryParse<Difficulty>(d.LastDifficulty, out var diff) ? diff : Difficulty.Normal;
+        var lastMode = Enum.TryParse<GameMode>(d.LastMode, out var mode)         ? mode : GameMode.Classic;
+
         UpdateBestScores();
-        SelectDifficulty(Difficulty.Normal);
-        SelectMode(GameMode.Classic);
+        SelectDifficulty(lastDiff);
+        SelectMode(lastMode);
     }
 
     private void OnSizeChanged(object sender, SizeChangedEventArgs e)
     {
-        // 엔진이 매 프레임 _host.ActualWidth/Height를 직접 읽으므로 별도 Resize 불필요
+        // 창 크기 자동 저장 (게임 중 아닐 때만, 최소화 제외)
+        if (WindowState == WindowState.Normal && MenuLayer.Visibility == Visibility.Visible)
+            _scores.SaveSettings(_selectedMode.ToString(), _selectedDifficulty.ToString(), ActualWidth, ActualHeight);
     }
 
     // ── 렌더링 루프 ────────────────────────────────────────────────────────────
@@ -64,7 +77,21 @@ public partial class MainWindow : Window
     // ── 키보드 ────────────────────────────────────────────────────────────────
     private void OnKeyDown(object sender, KeyEventArgs e)
     {
+        // F1 — 도움말 토글 (게임 화면 제외, 메뉴/게임오버/일시정지에서 모두 동작)
+        if (e.Key == Key.F1)
+        {
+            ToggleHelp();
+            return;
+        }
+
         if (e.Key != Key.Escape) return;
+
+        // ESC — 도움말 닫기 우선
+        if (HelpLayer.Visibility == Visibility.Visible)
+        {
+            HelpLayer.Visibility = Visibility.Collapsed;
+            return;
+        }
 
         if (GameLayer.Visibility == Visibility.Visible &&
             _engine is { IsRunning: true })
@@ -82,10 +109,28 @@ public partial class MainWindow : Window
         }
     }
 
+    private void ToggleHelp()
+    {
+        if (HelpLayer.Visibility == Visibility.Visible)
+        {
+            HelpLayer.Visibility = Visibility.Collapsed;
+        }
+        else
+        {
+            // 게임 중이면 일시정지
+            if (GameLayer.Visibility == Visibility.Visible &&
+                _engine is { IsRunning: true, IsPaused: false })
+            {
+                _engine.Pause();
+                PauseLayer.Visibility = Visibility.Visible;
+            }
+            HelpLayer.Visibility = Visibility.Visible;
+        }
+    }
+
     // ── 마우스 (게임 레이어) ─────────────────────────────────────────────────
     private void OnGameMouseMove(object sender, MouseEventArgs e)
     {
-        // 일시정지/게임오버 중에도 커서 위치는 항상 엔진에 전달 (커서 dot 렌더용)
         var pos = e.GetPosition(GameCanvas);
         _engine?.OnMouseMove(pos);
     }
@@ -108,6 +153,7 @@ public partial class MainWindow : Window
             Enum.TryParse<Difficulty>(btn.Tag?.ToString(), out var diff))
         {
             SelectDifficulty(diff);
+            _scores.SaveSettings(_selectedMode.ToString(), diff.ToString(), ActualWidth, ActualHeight);
         }
     }
 
@@ -126,6 +172,7 @@ public partial class MainWindow : Window
             Enum.TryParse<GameMode>(btn.Tag?.ToString(), out var mode))
         {
             SelectMode(mode);
+            _scores.SaveSettings(mode.ToString(), _selectedDifficulty.ToString(), ActualWidth, ActualHeight);
         }
     }
 
@@ -158,13 +205,14 @@ public partial class MainWindow : Window
 
         UpdateBestForMode(mode);
         UpdateLivesDisplay(mode);
+        TxtFever.Visibility = Visibility.Collapsed;
 
+        HelpLayer.Visibility     = Visibility.Collapsed;
         MenuLayer.Visibility     = Visibility.Collapsed;
         GameOverLayer.Visibility = Visibility.Collapsed;
         PauseLayer.Visibility    = Visibility.Collapsed;
         GameLayer.Visibility     = Visibility.Visible;
 
-        // 크기 동기화는 OnRender에서 매 프레임 처리하므로 UpdateLayout/Resize 불필요
         _sound.StartBgm();
         _engine.StartGame(mode, _selectedDifficulty);
     }
@@ -188,7 +236,7 @@ public partial class MainWindow : Window
             case GameMode.Zen:
                 TxtLivesLabel.Text = "LEFT";
                 TxtLives.Text = "30";
-                TxtLives.Foreground = new SolidColorBrush(Color.FromRgb(57, 255, 20));
+                TxtLives.Foreground = ZenLivesBrush;
                 PanelLives.Visibility = Visibility.Visible;
                 break;
         }
@@ -203,6 +251,9 @@ public partial class MainWindow : Window
             TxtScore.Text  = _engine.Score.ToString("N0");
             TxtCombo.Text  = $"×{_engine.Combo}";
             TxtSliced.Text = _engine.Sliced.ToString();
+
+            // 피버 표시
+            TxtFever.Visibility = _engine.IsFever ? Visibility.Visible : Visibility.Collapsed;
 
             switch (_engine.Mode)
             {
@@ -239,9 +290,15 @@ public partial class MainWindow : Window
     private void UpdateTop3Display(GameMode mode,
         System.Windows.Controls.TextBlock txt2, System.Windows.Controls.TextBlock txt3)
     {
-        var top3 = _scores.GetTop3(mode);
-        txt2.Text = top3.Count >= 2 ? $"2  {top3[1]:N0}" : "";
-        txt3.Text = top3.Count >= 3 ? $"3  {top3[2]:N0}" : "";
+        var top3  = _scores.GetTop3(mode);
+        var dates = _scores.GetTop3Dates(mode);
+
+        txt2.Text = top3.Count >= 2
+            ? $"2  {top3[1]:N0}{(dates.Count >= 2 && !string.IsNullOrEmpty(dates[1]) ? $"  {dates[1]}" : "")}"
+            : "";
+        txt3.Text = top3.Count >= 3
+            ? $"3  {top3[2]:N0}{(dates.Count >= 3 && !string.IsNullOrEmpty(dates[2]) ? $"  {dates[2]}" : "")}"
+            : "";
     }
 
     // ── 게임오버 ─────────────────────────────────────────────────────────────
@@ -255,6 +312,13 @@ public partial class MainWindow : Window
             TxtGoCombo.Text  = $"×{result.MaxCombo}";
             TxtGoSliced.Text = result.Sliced.ToString();
             TxtGoMissed.Text = result.Missed.ToString();
+            TxtFever.Visibility = Visibility.Collapsed;
+
+            var total = result.Sliced + result.Missed;
+            TxtGoAccuracy.Text = total > 0
+                ? $"{result.Sliced * 100.0 / total:F1}%"
+                : "—";
+
             TxtGoNewBest.Visibility = isNewBest ? Visibility.Visible : Visibility.Collapsed;
             TxtGameOverTitle.Text = result.Mode == GameMode.Zen ? "ZEN COMPLETE" : "GAME OVER";
 
@@ -274,6 +338,7 @@ public partial class MainWindow : Window
     {
         _engine?.Pause();
         _sound.StopBgm();
+        HelpLayer.Visibility     = Visibility.Collapsed;
         PauseLayer.Visibility    = Visibility.Collapsed;
         GameOverLayer.Visibility = Visibility.Collapsed;
         GameLayer.Visibility     = Visibility.Collapsed;
@@ -286,4 +351,7 @@ public partial class MainWindow : Window
         _engine?.Resume();
         PauseLayer.Visibility = Visibility.Collapsed;
     }
+
+    private void BtnHowToPlay_Click(object sender, RoutedEventArgs e) => ToggleHelp();
+    private void BtnHelpClose_Click(object sender, RoutedEventArgs e)  => HelpLayer.Visibility = Visibility.Collapsed;
 }

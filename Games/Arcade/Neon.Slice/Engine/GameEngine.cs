@@ -39,6 +39,7 @@ public sealed class GameEngine
     public Difficulty Difficulty { get; private set; }
     public bool IsRunning { get; private set; }
     public bool IsPaused  { get; private set; }
+    public bool IsFever   => _inFever;
     private bool _gameOver;
 
     public int  Score     { get; private set; }
@@ -71,6 +72,7 @@ public sealed class GameEngine
     // ── 스폰 ───────────────────────────────────────────────────────────────
     private double _spawnTimer;
     private double _spawnInterval = 1.4;   // 초 (난이도와 함께 감소)
+    private double _spawnIntervalBase = 1.4; // 난이도별 기준 간격
     private double _elapsedGame;
 
     // ── 마우스 궤적 ────────────────────────────────────────────────────────
@@ -92,7 +94,7 @@ public sealed class GameEngine
     [
         Color.FromRgb(0,   255, 255), // 시안
         Color.FromRgb(255, 45,  120), // 핑크
-        Color.FromRgb(57,  255, 20),  // 그린
+        Color.FromRgb(74,  222, 128), // 그린
         Color.FromRgb(191, 95,  255), // 퍼플
         Color.FromRgb(255, 107, 0),   // 오렌지
         Color.FromRgb(255, 230, 0),   // 옐로
@@ -109,6 +111,57 @@ public sealed class GameEngine
         new(Color.FromArgb(230, 200, 255, 255));
     private static readonly Pen CursorRingPen =
         new(new SolidColorBrush(Color.FromArgb(180, 0, 255, 255)), 1.5);
+    // 슬라이스 궤적 펜 캐시 (TrailMaxLen-1 개, 인덱스 0=맨 끝/가장 가늘고 투명)
+    private static readonly Pen[] TrailPens = Enumerable.Range(1, TrailMaxLen - 1)
+        .Select(i => { var p = new Pen(Brushes.White, 2.5 - i * 0.3); p.Freeze(); return p; })
+        .ToArray();
+
+    // DrawShape 브러시·펜 캐시 (Color 키 — NeonPalette 6가지 → 소량)
+    private static readonly Dictionary<(Color col, byte a1), RadialGradientBrush> _radialGlowCache  = new();
+    private static readonly Dictionary<Color, RadialGradientBrush>                _circleBodyCache  = new();
+    private static readonly Dictionary<Color, LinearGradientBrush>                _polyBodyCache    = new();
+    private static readonly Dictionary<Color, Pen>                                _borderPenCache   = new();
+    private static readonly Dictionary<Color, Pen>                                _lightningPenCache = new();
+
+    private static RadialGradientBrush GetRadialGlow(Color col, byte outerAlpha)
+    {
+        var key = (col, outerAlpha);
+        if (_radialGlowCache.TryGetValue(key, out var b)) return b;
+        b = new RadialGradientBrush(Color.FromArgb(outerAlpha, col.R, col.G, col.B),
+                                    Color.FromArgb(0, col.R, col.G, col.B));
+        b.Freeze();
+        return _radialGlowCache[key] = b;
+    }
+    private static RadialGradientBrush GetCircleBody(Color col)
+    {
+        if (_circleBodyCache.TryGetValue(col, out var b)) return b;
+        b = new RadialGradientBrush(Color.FromArgb(200, col.R, col.G, col.B),
+                                    Color.FromArgb(80, (byte)(col.R / 2), (byte)(col.G / 2), (byte)(col.B / 2)));
+        b.Freeze();
+        return _circleBodyCache[col] = b;
+    }
+    private static LinearGradientBrush GetPolyBody(Color col)
+    {
+        if (_polyBodyCache.TryGetValue(col, out var b)) return b;
+        b = new LinearGradientBrush(Color.FromArgb(180, col.R, col.G, col.B),
+                                    Color.FromArgb(60, (byte)(col.R / 2), (byte)(col.G / 2), (byte)(col.B / 2)), 90);
+        b.Freeze();
+        return _polyBodyCache[col] = b;
+    }
+    private static Pen GetBorderPen(Color col)
+    {
+        if (_borderPenCache.TryGetValue(col, out var p)) return p;
+        p = new Pen(new SolidColorBrush(Color.FromArgb(255, col.R, col.G, col.B)), 2);
+        p.Freeze();
+        return _borderPenCache[col] = p;
+    }
+    private static Pen GetLightningPen(Color col)
+    {
+        if (_lightningPenCache.TryGetValue(col, out var p)) return p;
+        p = new Pen(new SolidColorBrush(Color.FromArgb(255, col.R, col.G, col.B)), 2.5);
+        p.Freeze();
+        return _lightningPenCache[col] = p;
+    }
 
     // ─────────────────────────────────────────────────────────────────────
     public GameEngine(DrawingVisualHost host)
@@ -137,7 +190,7 @@ public sealed class GameEngine
         ZenSlicesLeft = ZenTotal;
         _elapsedGame    = 0;
         _spawnTimer     = 0;
-        _spawnInterval  = difficulty switch
+        _spawnInterval = _spawnIntervalBase = difficulty switch
         {
             Difficulty.Easy => 2.0,
             Difficulty.Hard => 1.0,
@@ -248,8 +301,9 @@ public sealed class GameEngine
         {
             SpawnShape();
             _spawnTimer = _spawnInterval * (0.85 + Rng.NextDouble() * 0.3);
-            // 난이도 증가 (최소 0.55초)
-            _spawnInterval = Math.Max(0.55, 1.4 - _elapsedGame * 0.012);
+            // 난이도 증가 — 난이도별 기준에서 감소, 최솟값도 난이도별로 차등
+            var minInterval = _spawnIntervalBase switch { >= 1.8 => 0.80, <= 1.1 => 0.40, _ => 0.55 };
+            _spawnInterval = Math.Max(minInterval, _spawnIntervalBase - _elapsedGame * 0.012);
         }
 
         // 도형 업데이트
@@ -590,9 +644,10 @@ public sealed class GameEngine
         var pts = _trail.ToArray();
         for (var i = 1; i < pts.Length; i++)
         {
-            var alpha = (byte)(80 + (i * 170 / pts.Length));
-            var pen = new Pen(new SolidColorBrush(Color.FromArgb(alpha, 255, 255, 255)), 2.5 - i * 0.3);
-            dc.DrawLine(pen, pts[i - 1], pts[i]);
+            var opacity = (80 + (i * 170 / pts.Length)) / 255.0;
+            dc.PushOpacity(opacity);
+            dc.DrawLine(TrailPens[i - 1], pts[i - 1], pts[i]);
+            dc.Pop();
         }
     }
 
@@ -627,18 +682,8 @@ public sealed class GameEngine
 
     private static void DrawGlowCircle(DrawingContext dc, Point c, double r, Color col, bool bomb)
     {
-        // 외곽 글로우
-        var glowBrush = new RadialGradientBrush(
-            Color.FromArgb(80, col.R, col.G, col.B),
-            Color.FromArgb(0, col.R, col.G, col.B));
-        dc.DrawEllipse(glowBrush, null, c, r * 1.8, r * 1.8);
-
-        // 본체
-        var bodyBrush = new RadialGradientBrush(
-            Color.FromArgb(200, col.R, col.G, col.B),
-            Color.FromArgb(80, (byte)(col.R / 2), (byte)(col.G / 2), (byte)(col.B / 2)));
-        var borderPen = new Pen(new SolidColorBrush(Color.FromArgb(255, col.R, col.G, col.B)), 2);
-        dc.DrawEllipse(bodyBrush, borderPen, c, r, r);
+        dc.DrawEllipse(GetRadialGlow(col, 80), null, c, r * 1.8, r * 1.8);
+        dc.DrawEllipse(GetCircleBody(col), GetBorderPen(col), c, r, r);
     }
 
     private static void DrawBomb(DrawingContext dc, Point c, double r)
@@ -664,16 +709,10 @@ public sealed class GameEngine
 
     private static void DrawLightningShape(DrawingContext dc, Point c, double r, Color col)
     {
-        var pen = new Pen(new SolidColorBrush(Color.FromArgb(255, col.R, col.G, col.B)), 2.5);
-        var glowBrush = new RadialGradientBrush(
-            Color.FromArgb(90, col.R, col.G, col.B),
-            Color.FromArgb(0, col.R, col.G, col.B));
-        dc.DrawEllipse(glowBrush, null, c, r * 1.8, r * 1.8);
-
-        // 번개 모양 (⚡)
+        dc.DrawEllipse(GetRadialGlow(col, 90), null, c, r * 1.8, r * 1.8);
         var ft = new FormattedText("⚡", System.Globalization.CultureInfo.CurrentCulture,
             FlowDirection.LeftToRight, new Typeface("Segoe UI Emoji"), r * 1.3,
-            new SolidColorBrush(Color.FromArgb(255, col.R, col.G, col.B)), 1.0);
+            GetLightningPen(col).Brush, 1.0);
         dc.DrawText(ft, new Point(c.X - ft.Width / 2, c.Y - ft.Height / 2));
     }
 
@@ -690,19 +729,8 @@ public sealed class GameEngine
         var geoGlow = BuildPolygon(c, r * 1.7, sides);
         var geo     = BuildPolygon(c, r, sides);
 
-        // 글로우
-        var glowBrush = new RadialGradientBrush(
-            Color.FromArgb(70, col.R, col.G, col.B),
-            Color.FromArgb(0,  col.R, col.G, col.B));
-        dc.DrawGeometry(glowBrush, null, geoGlow);
-
-        // 본체
-        var bodyBrush = new LinearGradientBrush(
-            Color.FromArgb(180, col.R, col.G, col.B),
-            Color.FromArgb(60, (byte)(col.R / 2), (byte)(col.G / 2), (byte)(col.B / 2)),
-            90);
-        var borderPen = new Pen(new SolidColorBrush(Color.FromArgb(255, col.R, col.G, col.B)), 2);
-        dc.DrawGeometry(bodyBrush, borderPen, geo);
+        dc.DrawGeometry(GetRadialGlow(col, 70), null, geoGlow);
+        dc.DrawGeometry(GetPolyBody(col), GetBorderPen(col), geo);
     }
 
     private static PathGeometry BuildPolygon(Point center, double radius, int sides)

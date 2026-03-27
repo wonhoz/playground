@@ -47,7 +47,7 @@
           <StackPanel Margin="0,0,32,0">
             <TextBlock Text="SLICED" Foreground="#6A7080" FontSize="10"
                        FontFamily="Segoe UI"/>
-            <TextBlock x:Name="TxtSliced" Text="0" Foreground="#39FF14"
+            <TextBlock x:Name="TxtSliced" Text="0" Foreground="#4ADE80"
                        FontSize="26" FontFamily="Consolas" FontWeight="Bold"/>
           </StackPanel>
 
@@ -66,11 +66,20 @@
             <TextBlock x:Name="TxtBest" Text="0" Foreground="#BF5FFF"
                        FontSize="26" FontFamily="Consolas" FontWeight="Bold"/>
           </StackPanel>
+
+          <!-- 피버 표시 -->
+          <TextBlock x:Name="TxtFever" Text="🔥 FEVER" Visibility="Collapsed"
+                     Foreground="#FF6B00" FontSize="20" FontFamily="Segoe UI"
+                     FontWeight="Bold" VerticalAlignment="Center" Margin="24,0,0,0">
+            <TextBlock.Effect>
+              <DropShadowEffect Color="#FF6B00" ShadowDepth="0" BlurRadius="14" Opacity="0.9"/>
+            </TextBlock.Effect>
+          </TextBlock>
         </StackPanel>
       </Grid>
 
-      <!-- ESC 힌트 -->
-      <TextBlock Text="ESC  일시정지" Foreground="#2A3A4A" FontSize="11"
+      <!-- ESC / F1 힌트 -->
+      <TextBlock Text="ESC 일시정지  ·  F1 도움말" Foreground="#2A3A4A" FontSize="11"
                  FontFamily="Segoe UI" VerticalAlignment="Bottom"
                  HorizontalAlignment="Right" Margin="0,0,12,8"/>
     </Grid>
@@ -239,7 +248,75 @@
           </StackPanel>
         </Border>
 
+        <!-- HOW TO PLAY 버튼 -->
+        <Button Content="❓  HOW TO PLAY" Width="200" Height="36"
+                Style="{StaticResource ModeBtn}" Margin="0,10,0,0"
+                Click="BtnHowToPlay_Click"/>
+
       </StackPanel>
+    </Grid>
+
+    <!-- ══════════════════════════════════════════════════════════════ -->
+    <!-- 도움말 오버레이                                                 -->
+    <!-- ══════════════════════════════════════════════════════════════ -->
+    <Grid x:Name="HelpLayer" Visibility="Collapsed">
+      <Grid.Background>
+        <SolidColorBrush Color="#EE000000"/>
+      </Grid.Background>
+      <Border Background="#0D0D1A" BorderBrush="#1E2A3A" BorderThickness="1"
+              CornerRadius="12" Padding="36,28"
+              VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="380">
+        <StackPanel>
+          <TextBlock Text="HOW TO PLAY" Foreground="#00FFFF" FontSize="24"
+                     FontFamily="Consolas" FontWeight="Bold" HorizontalAlignment="Center"
+                     Margin="0,0,0,20">
+            <TextBlock.Effect>
+              <DropShadowEffect Color="#00FFFF" ShadowDepth="0" BlurRadius="16" Opacity="0.8"/>
+            </TextBlock.Effect>
+          </TextBlock>
+
+          <!-- 조작법 -->
+          <TextBlock Text="🎮  조작" Foreground="#4A5A6A" FontSize="11"
+                     FontFamily="Segoe UI" FontWeight="Bold" Margin="0,0,0,6"/>
+          <Grid Margin="0,0,0,16">
+            <Grid.ColumnDefinitions><ColumnDefinition Width="140"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+            <Grid.RowDefinitions><RowDefinition/><RowDefinition/><RowDefinition/></Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="마우스 드래그" Foreground="#E8EAF0" FontSize="13" FontFamily="Segoe UI" Margin="0,3"/>
+            <TextBlock Grid.Row="0" Grid.Column="1" Text="도형 슬라이스" Foreground="#6A7080" FontSize="13" FontFamily="Segoe UI" Margin="0,3"/>
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="ESC" Foreground="#E8EAF0" FontSize="13" FontFamily="Consolas" FontWeight="Bold" Margin="0,3"/>
+            <TextBlock Grid.Row="1" Grid.Column="1" Text="일시정지 / 재개" Foreground="#6A7080" FontSize="13" FontFamily="Segoe UI" Margin="0,3"/>
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="F1" Foreground="#E8EAF0" FontSize="13" FontFamily="Consolas" FontWeight="Bold" Margin="0,3"/>
+            <TextBlock Grid.Row="2" Grid.Column="1" Text="도움말 열기 / 닫기" Foreground="#6A7080" FontSize="13" FontFamily="Segoe UI" Margin="0,3"/>
+          </Grid>
+
+          <!-- 특수 도형 -->
+          <TextBlock Text="✨  특수 도형" Foreground="#4A5A6A" FontSize="11"
+                     FontFamily="Segoe UI" FontWeight="Bold" Margin="0,0,0,6"/>
+          <Grid Margin="0,0,0,16">
+            <Grid.ColumnDefinitions><ColumnDefinition Width="36"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+            <Grid.RowDefinitions><RowDefinition/><RowDefinition/><RowDefinition/><RowDefinition/></Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="💣" FontSize="15" Margin="0,3"/>
+            <TextBlock Grid.Row="0" Grid.Column="1" Text="BOMB — 슬라이스 시 -15점·목숨↓, 무시하면 안전" Foreground="#6A7080" FontSize="12" FontFamily="Segoe UI" TextWrapping="Wrap" Margin="0,3"/>
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="⚡" FontSize="15" Margin="0,3"/>
+            <TextBlock Grid.Row="1" Grid.Column="1" Text="LIGHTNING — 화면 내 모든 도형 클리어" Foreground="#6A7080" FontSize="12" FontFamily="Segoe UI" Margin="0,3"/>
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="❄" FontSize="15" Margin="0,3"/>
+            <TextBlock Grid.Row="2" Grid.Column="1" Text="ICE — 슬로모션 3초 (슬라이스 찬스!)" Foreground="#6A7080" FontSize="12" FontFamily="Segoe UI" Margin="0,3"/>
+            <TextBlock Grid.Row="3" Grid.Column="0" Text="★" FontSize="15" Foreground="#FFE600" Margin="0,3"/>
+            <TextBlock Grid.Row="3" Grid.Column="1" Text="STAR — 슬라이스 시 +10점 보너스" Foreground="#6A7080" FontSize="12" FontFamily="Segoe UI" Margin="0,3"/>
+          </Grid>
+
+          <!-- 피버 -->
+          <TextBlock Text="🔥  콤보 &amp; 피버" Foreground="#4A5A6A" FontSize="11"
+                     FontFamily="Segoe UI" FontWeight="Bold" Margin="0,0,0,6"/>
+          <TextBlock Foreground="#6A7080" FontSize="12" FontFamily="Segoe UI"
+                     TextWrapping="Wrap" Margin="0,0,0,20"
+                     Text="연속 슬라이스로 콤보가 쌓이면 피버 모드 발동! 피버 중 슬라이스는 슬로모션 + 점수 보너스."/>
+
+          <Button Content="닫기" Width="160" Height="40"
+                  Style="{StaticResource MenuBtn}" HorizontalAlignment="Center"
+                  Click="BtnHelpClose_Click"/>
+        </StackPanel>
+      </Border>
     </Grid>
 
     <!-- ══════════════════════════════════════════════════════════════ -->
@@ -292,6 +369,7 @@
               <RowDefinition/>
               <RowDefinition/>
               <RowDefinition/>
+              <RowDefinition/>
             </Grid.RowDefinitions>
 
             <StackPanel Grid.Row="0" Grid.Column="0" Margin="0,0,20,12">
@@ -306,7 +384,7 @@
             </StackPanel>
             <StackPanel Grid.Row="1" Grid.Column="0" Margin="0,0,20,12">
               <TextBlock Text="SLICED" Foreground="#4A5A6A" FontSize="11" FontFamily="Segoe UI"/>
-              <TextBlock x:Name="TxtGoSliced" Text="0" Foreground="#39FF14"
+              <TextBlock x:Name="TxtGoSliced" Text="0" Foreground="#4ADE80"
                          FontSize="32" FontFamily="Consolas" FontWeight="Bold"/>
             </StackPanel>
             <StackPanel Grid.Row="1" Grid.Column="1" Margin="0,0,0,12">
@@ -314,7 +392,14 @@
               <TextBlock x:Name="TxtGoMissed" Text="0" Foreground="#BF5FFF"
                          FontSize="32" FontFamily="Consolas" FontWeight="Bold"/>
             </StackPanel>
-            <StackPanel Grid.Row="2" Grid.ColumnSpan="2">
+            <StackPanel Grid.Row="2" Grid.ColumnSpan="2" Margin="0,0,0,10">
+              <TextBlock Text="ACCURACY" Foreground="#4A5A6A" FontSize="11" FontFamily="Segoe UI"
+                         HorizontalAlignment="Center"/>
+              <TextBlock x:Name="TxtGoAccuracy" Text="—" Foreground="#FFE600"
+                         FontSize="28" FontFamily="Consolas" FontWeight="Bold"
+                         HorizontalAlignment="Center"/>
+            </StackPanel>
+            <StackPanel Grid.Row="3" Grid.ColumnSpan="2">
               <TextBlock x:Name="TxtGoNewBest" Text="🏆 NEW BEST!" Foreground="#FFE600"
                          FontSize="16" FontFamily="Segoe UI" FontWeight="Bold"
                          HorizontalAlignment="Center" Visibility="Collapsed">

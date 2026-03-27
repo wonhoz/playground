@@ -7,6 +7,14 @@ public class GrowthService
 
     public event Action? GrowthUpdated;
 
+    // 마지막으로 알려진 캔버스 크기 (RebuildAt에서 갱신)
+    private double _canvasW = 0;
+    private double _canvasH = 0;
+
+    // 성장 히스토리 (뒤로 가기용 스냅샷)
+    private readonly Stack<(int Iteration, string LString)> _history = new();
+    public bool CanStepBack => _history.Count > 0;
+
     public GrowthService()
     {
         State = new GrowthState
@@ -21,6 +29,7 @@ public class GrowthService
     // ── 종 선택 ───────────────────────────────────────────────────
     public void SelectSpecies(PlantSpecies species)
     {
+        _history.Clear();
         State = new GrowthState
         {
             Species   = species,
@@ -38,6 +47,7 @@ public class GrowthService
     public void GrowOne()
     {
         if (State.IsFullyGrown) return;
+        _history.Push((State.Iteration, State.LString));
         State.LString = LSystemEngine.Expand(
             State.LString, State.Species.Rules, 1);
         State.Iteration++;
@@ -50,6 +60,7 @@ public class GrowthService
     {
         int remaining = State.Species.MaxIter - State.Iteration;
         if (remaining <= 0) return;
+        _history.Push((State.Iteration, State.LString));
         State.LString = LSystemEngine.Expand(
             State.LString, State.Species.Rules, remaining);
         State.Iteration = State.Species.MaxIter;
@@ -60,6 +71,7 @@ public class GrowthService
     // ── 초기화 ───────────────────────────────────────────────────
     public void Reset()
     {
+        _history.Clear();
         State.Iteration = 0;
         State.LString   = State.Species.Axiom;
         Rebuild();
@@ -79,26 +91,35 @@ public class GrowthService
     // ── 렌더 세그먼트 재빌드 ──────────────────────────────────────
     private void Rebuild()
     {
-        // 캔버스 크기는 렌더 시 외부에서 전달하므로 기본값 사용
+        // 캔버스 크기가 알려진 경우 사용, 아직 모를 때는 기본값
+        double originX = _canvasW > 0 ? _canvasW / 2 : 400;
+        double originY = _canvasH > 0 ? _canvasH * 0.92 : 520;
         State.Segments = LSystemEngine.Render(
             State.Species,
             State.LString,
-            originX    : 400,
-            originY    : 520,
+            originX    : originX,
+            originY    : originY,
             baseLength : State.Species.Length,
             growthRate : State.GrowthRate);
     }
 
-    // 외부에서 캔버스 크기 알고 재빌드
+    // 외부에서 캔버스 크기를 갱신하고 재빌드
     public void RebuildAt(double canvasW, double canvasH)
     {
-        State.Segments = LSystemEngine.Render(
-            State.Species,
-            State.LString,
-            originX    : canvasW / 2,
-            originY    : canvasH * 0.92,
-            baseLength : State.Species.Length,
-            growthRate : State.GrowthRate);
+        _canvasW = canvasW;
+        _canvasH = canvasH;
+        Rebuild();
+        GrowthUpdated?.Invoke();
+    }
+
+    // ── 한 단계 뒤로 ─────────────────────────────────────────────
+    public void StepBack()
+    {
+        if (_history.Count == 0) return;
+        var (iter, lstr) = _history.Pop();
+        State.Iteration = iter;
+        State.LString   = lstr;
+        Rebuild();
         GrowthUpdated?.Invoke();
     }
 }

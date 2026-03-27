@@ -28,6 +28,10 @@
                                VerticalAlignment="Center" Margin="12,0,0,0"/>
                 </StackPanel>
                 <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                    <Button Content="💾" Width="38" Height="36" BorderThickness="0"
+                            Background="Transparent" Click="SaveBtn_Click" ToolTip="이미지 저장 (S)"/>
+                    <Button Content="❓" Width="38" Height="36" BorderThickness="0"
+                            Background="Transparent" Click="HelpBtn_Click" ToolTip="도움말 (F1)"/>
                     <Button Content="─" Width="38" Height="36" BorderThickness="0"
                             Background="Transparent" Click="MinBtn_Click"/>
                     <Button Content="✕" Width="38" Height="36" BorderThickness="0"
@@ -138,107 +142,258 @@
             <Border Grid.Column="2" Background="#080F08"
                     BorderBrush="{StaticResource BorderBrush}" BorderThickness="1,0,0,0"
                     Padding="12,14">
-                <StackPanel>
-                    <!-- 환경 설정 -->
-                    <TextBlock Text="환경" Foreground="{StaticResource Fg2Brush}"
-                               FontSize="11" Margin="0,0,0,10"/>
+                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                    <StackPanel>
+                        <!-- 환경 설정 -->
+                        <TextBlock Text="환경" Foreground="{StaticResource Fg2Brush}"
+                                   FontSize="11" Margin="0,0,0,10"/>
 
-                    <!-- 햇빛 -->
-                    <StackPanel Margin="0,0,0,12">
-                        <DockPanel Margin="0,0,0,4">
-                            <TextBlock Text="☀ 햇빛" Foreground="{StaticResource SunBrush}"
-                                       FontSize="12" DockPanel.Dock="Left"/>
-                            <TextBlock x:Name="TxtSun" Text="50%"
-                                       Foreground="{StaticResource Fg2Brush}" FontSize="11"
-                                       HorizontalAlignment="Right"/>
-                        </DockPanel>
-                        <Slider x:Name="SliderSun" Minimum="0" Maximum="1" Value="0.5"
-                                Tag="{StaticResource SunBrush}"
-                                ValueChanged="EnvSlider_Changed"/>
-                    </StackPanel>
-
-                    <!-- 물 -->
-                    <StackPanel Margin="0,0,0,12">
-                        <DockPanel Margin="0,0,0,4">
-                            <TextBlock Text="💧 수분" Foreground="{StaticResource WaterBrush}"
-                                       FontSize="12" DockPanel.Dock="Left"/>
-                            <TextBlock x:Name="TxtWater" Text="50%"
-                                       Foreground="{StaticResource Fg2Brush}" FontSize="11"
-                                       HorizontalAlignment="Right"/>
-                        </DockPanel>
-                        <Slider x:Name="SliderWater" Minimum="0" Maximum="1" Value="0.5"
-                                Tag="{StaticResource WaterBrush}"
-                                ValueChanged="EnvSlider_Changed"/>
-                    </StackPanel>
-
-                    <!-- 영양분 -->
-                    <StackPanel Margin="0,0,0,16">
-                        <DockPanel Margin="0,0,0,4">
-                            <TextBlock Text="🌱 영양분" Foreground="{StaticResource NutBrush}"
-                                       FontSize="12" DockPanel.Dock="Left"/>
-                            <TextBlock x:Name="TxtNutrients" Text="50%"
-                                       Foreground="{StaticResource Fg2Brush}" FontSize="11"
-                                       HorizontalAlignment="Right"/>
-                        </DockPanel>
-                        <Slider x:Name="SliderNutrients" Minimum="0" Maximum="1" Value="0.5"
-                                Tag="{StaticResource NutBrush}"
-                                ValueChanged="EnvSlider_Changed"/>
-                    </StackPanel>
-
-                    <!-- 성장률 표시 -->
-                    <Border Background="#0F1A0F" BorderBrush="{StaticResource BorderBrush}"
-                            BorderThickness="1" CornerRadius="6" Padding="10,8" Margin="0,0,0,16">
-                        <StackPanel>
-                            <TextBlock Text="성장률" Foreground="{StaticResource Fg2Brush}" FontSize="11"/>
-                            <Border Height="6" Background="#1A2E1A" CornerRadius="3" Margin="0,4,0,2">
-                                <Border x:Name="GrowthRateBar" HorizontalAlignment="Left"
-                                        Height="6" CornerRadius="3"
-                                        Background="{StaticResource AccentBrush}" Width="0"/>
-                            </Border>
-                            <TextBlock x:Name="TxtGrowthRate" Text="50%"
-                                       Foreground="{StaticResource AccentBrush}"
-                                       FontSize="12" FontWeight="SemiBold"/>
+                        <!-- 햇빛 -->
+                        <StackPanel Margin="0,0,0,0">
+                            <DockPanel Margin="0,0,0,4">
+                                <TextBlock Text="☀ 햇빛" Foreground="{StaticResource SunBrush}"
+                                           FontSize="12" DockPanel.Dock="Left"/>
+                                <TextBlock x:Name="TxtSun" Text="50%"
+                                           Foreground="{StaticResource Fg2Brush}" FontSize="11"
+                                           HorizontalAlignment="Right"/>
+                            </DockPanel>
+                            <Slider x:Name="SliderSun" Minimum="0" Maximum="1" Value="0.5"
+                                    Tag="{StaticResource SunBrush}"
+                                    ValueChanged="EnvSlider_Changed"/>
+                            <!-- 퍼즐 범위 시각화 -->
+                            <Grid x:Name="PuzzleSunRangeGrid" Height="4" Margin="0,3,0,1" Visibility="Collapsed">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition x:Name="PuzzleSunColLeft"  Width="0*"/>
+                                    <ColumnDefinition x:Name="PuzzleSunColRange" Width="1*"/>
+                                    <ColumnDefinition x:Name="PuzzleSunColRight" Width="0*"/>
+                                </Grid.ColumnDefinitions>
+                                <Border Grid.Column="0" Background="#1A2E1A"/>
+                                <Border x:Name="PuzzleSunRangeBar" Grid.Column="1" CornerRadius="2"/>
+                                <Border Grid.Column="2" Background="#1A2E1A"/>
+                            </Grid>
+                            <TextBlock x:Name="PuzzleSunHint" Text="" FontSize="10"
+                                       Margin="0,1,0,8" Visibility="Collapsed"/>
                         </StackPanel>
-                    </Border>
 
-                    <!-- 성장 제어 버튼 -->
-                    <TextBlock Text="성장 제어" Foreground="{StaticResource Fg2Brush}"
-                               FontSize="11" Margin="0,0,0,8"/>
-
-                    <Button Content="🌱 한 단계 성장" Margin="0,0,0,6"
-                            Click="GrowOneBtn_Click"/>
-                    <Button Content="🌳 완전 성장" Margin="0,0,0,6"
-                            Background="{StaticResource AccentBrush}"
-                            Foreground="#060F06" FontWeight="SemiBold"
-                            Click="GrowFullBtn_Click"/>
-                    <Button Content="↺ 초기화" Margin="0,0,0,16"
-                            Click="ResetBtn_Click"/>
-
-                    <!-- 통계 -->
-                    <Border Background="#0F1A0F" BorderBrush="{StaticResource BorderBrush}"
-                            BorderThickness="1" CornerRadius="6" Padding="10,8">
-                        <StackPanel>
-                            <TextBlock Text="통계" Foreground="{StaticResource Fg2Brush}"
-                                       FontSize="11" Margin="0,0,0,6"/>
-                            <StackPanel Orientation="Horizontal" Margin="0,0,0,3">
-                                <TextBlock Text="가지 수: " Foreground="{StaticResource Fg2Brush}" FontSize="11"/>
-                                <TextBlock x:Name="TxtBranches" Text="0"
-                                           Foreground="{StaticResource FgBrush}" FontSize="11"/>
-                            </StackPanel>
-                            <StackPanel Orientation="Horizontal" Margin="0,0,0,3">
-                                <TextBlock Text="잎 수: " Foreground="{StaticResource Fg2Brush}" FontSize="11"/>
-                                <TextBlock x:Name="TxtLeaves" Text="0"
-                                           Foreground="{StaticResource AccentBrush}" FontSize="11"/>
-                            </StackPanel>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="꽃 수: " Foreground="{StaticResource Fg2Brush}" FontSize="11"/>
-                                <TextBlock x:Name="TxtFlowers" Text="0"
-                                           Foreground="#FFA0D0" FontSize="11"/>
-                            </StackPanel>
+                        <!-- 물 -->
+                        <StackPanel Margin="0,0,0,0">
+                            <DockPanel Margin="0,0,0,4">
+                                <TextBlock Text="💧 수분" Foreground="{StaticResource WaterBrush}"
+                                           FontSize="12" DockPanel.Dock="Left"/>
+                                <TextBlock x:Name="TxtWater" Text="50%"
+                                           Foreground="{StaticResource Fg2Brush}" FontSize="11"
+                                           HorizontalAlignment="Right"/>
+                            </DockPanel>
+                            <Slider x:Name="SliderWater" Minimum="0" Maximum="1" Value="0.5"
+                                    Tag="{StaticResource WaterBrush}"
+                                    ValueChanged="EnvSlider_Changed"/>
+                            <!-- 퍼즐 범위 시각화 -->
+                            <Grid x:Name="PuzzleWaterRangeGrid" Height="4" Margin="0,3,0,1" Visibility="Collapsed">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition x:Name="PuzzleWaterColLeft"  Width="0*"/>
+                                    <ColumnDefinition x:Name="PuzzleWaterColRange" Width="1*"/>
+                                    <ColumnDefinition x:Name="PuzzleWaterColRight" Width="0*"/>
+                                </Grid.ColumnDefinitions>
+                                <Border Grid.Column="0" Background="#1A2E1A"/>
+                                <Border x:Name="PuzzleWaterRangeBar" Grid.Column="1" CornerRadius="2"/>
+                                <Border Grid.Column="2" Background="#1A2E1A"/>
+                            </Grid>
+                            <TextBlock x:Name="PuzzleWaterHint" Text="" FontSize="10"
+                                       Margin="0,1,0,8" Visibility="Collapsed"/>
                         </StackPanel>
-                    </Border>
-                </StackPanel>
+
+                        <!-- 영양분 -->
+                        <StackPanel Margin="0,0,0,0">
+                            <DockPanel Margin="0,0,0,4">
+                                <TextBlock Text="🌱 영양분" Foreground="{StaticResource NutBrush}"
+                                           FontSize="12" DockPanel.Dock="Left"/>
+                                <TextBlock x:Name="TxtNutrients" Text="50%"
+                                           Foreground="{StaticResource Fg2Brush}" FontSize="11"
+                                           HorizontalAlignment="Right"/>
+                            </DockPanel>
+                            <Slider x:Name="SliderNutrients" Minimum="0" Maximum="1" Value="0.5"
+                                    Tag="{StaticResource NutBrush}"
+                                    ValueChanged="EnvSlider_Changed"/>
+                            <!-- 퍼즐 범위 시각화 (영양분은 조건 없음 → 성장 단계 힌트) -->
+                            <Grid x:Name="PuzzleNutRangeGrid" Height="4" Margin="0,3,0,1" Visibility="Collapsed">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition x:Name="PuzzleNutColLeft"  Width="0*"/>
+                                    <ColumnDefinition x:Name="PuzzleNutColRange" Width="1*"/>
+                                    <ColumnDefinition x:Name="PuzzleNutColRight" Width="0*"/>
+                                </Grid.ColumnDefinitions>
+                                <Border Grid.Column="0" Background="#1A2E1A"/>
+                                <Border x:Name="PuzzleNutRangeBar" Grid.Column="1" CornerRadius="2"/>
+                                <Border Grid.Column="2" Background="#1A2E1A"/>
+                            </Grid>
+                            <TextBlock x:Name="PuzzleNutHint" Text="" FontSize="10"
+                                       Margin="0,1,0,10" Visibility="Collapsed"/>
+                        </StackPanel>
+
+                        <!-- 빠른 환경 프리셋 -->
+                        <TextBlock Text="빠른 설정" Foreground="{StaticResource Fg2Brush}"
+                                   FontSize="11" Margin="0,0,0,6"/>
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,12">
+                            <Button Content="🌸" Padding="9,5" Margin="0,0,3,0"
+                                    Click="PresetSpring_Click" ToolTip="봄 (☀60% 💧70%)"/>
+                            <Button Content="☀" Padding="9,5" Margin="0,0,3,0"
+                                    Click="PresetSummer_Click" ToolTip="여름 (☀90% 💧40%)"/>
+                            <Button Content="🍂" Padding="9,5" Margin="0,0,3,0"
+                                    Click="PresetAutumn_Click" ToolTip="가을 (☀30% 💧30%)"/>
+                            <Button Content="❄" Padding="9,5"
+                                    Click="PresetWinter_Click" ToolTip="겨울 (☀10% 💧10%)"/>
+                        </StackPanel>
+
+                        <!-- 성장률 표시 -->
+                        <Border Background="#0F1A0F" BorderBrush="{StaticResource BorderBrush}"
+                                BorderThickness="1" CornerRadius="6" Padding="10,8" Margin="0,0,0,12">
+                            <StackPanel>
+                                <TextBlock Text="성장률" Foreground="{StaticResource Fg2Brush}" FontSize="11"/>
+                                <Border Height="6" Background="#1A2E1A" CornerRadius="3" Margin="0,4,0,2">
+                                    <Border x:Name="GrowthRateBar" HorizontalAlignment="Left"
+                                            Height="6" CornerRadius="3"
+                                            Background="{StaticResource AccentBrush}" Width="0"/>
+                                </Border>
+                                <TextBlock x:Name="TxtGrowthRate" Text="50%"
+                                           Foreground="{StaticResource AccentBrush}"
+                                           FontSize="12" FontWeight="SemiBold"/>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- 성장 제어 버튼 -->
+                        <TextBlock Text="성장 제어" Foreground="{StaticResource Fg2Brush}"
+                                   FontSize="11" Margin="0,0,0,8"/>
+
+                        <Button x:Name="GrowOneBtn" Content="🌱 한 단계 성장" Margin="0,0,0,4"
+                                Click="GrowOneBtn_Click"/>
+                        <Button x:Name="GrowFullBtn" Content="🌳 완전 성장" Margin="0,0,0,4"
+                                Background="{StaticResource AccentBrush}"
+                                Foreground="#060F06" FontWeight="SemiBold"
+                                Click="GrowFullBtn_Click"/>
+                        <Button x:Name="StepBackBtn" Content="◀ 한 단계 뒤로" Margin="0,0,0,4"
+                                Click="StepBackBtn_Click"/>
+                        <Button Content="↺ 초기화" Margin="0,0,0,6"
+                                Click="ResetBtn_Click"/>
+                        <Button x:Name="AutoGrowBtn" Content="▶ 자동 성장" Margin="0,0,0,14"
+                                Click="AutoGrowBtn_Click"/>
+
+                        <!-- 통계 -->
+                        <Border Background="#0F1A0F" BorderBrush="{StaticResource BorderBrush}"
+                                BorderThickness="1" CornerRadius="6" Padding="10,8">
+                            <StackPanel>
+                                <TextBlock Text="통계" Foreground="{StaticResource Fg2Brush}"
+                                           FontSize="11" Margin="0,0,0,6"/>
+                                <StackPanel Orientation="Horizontal" Margin="0,0,0,3">
+                                    <TextBlock Text="가지 수: " Foreground="{StaticResource Fg2Brush}" FontSize="11"/>
+                                    <TextBlock x:Name="TxtBranches" Text="0"
+                                               Foreground="{StaticResource FgBrush}" FontSize="11"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Margin="0,0,0,3">
+                                    <TextBlock Text="잎 수: " Foreground="{StaticResource Fg2Brush}" FontSize="11"/>
+                                    <TextBlock x:Name="TxtLeaves" Text="0"
+                                               Foreground="{StaticResource AccentBrush}" FontSize="11"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="꽃 수: " Foreground="{StaticResource Fg2Brush}" FontSize="11"/>
+                                    <TextBlock x:Name="TxtFlowers" Text="0"
+                                               Foreground="#FFA0D0" FontSize="11"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </ScrollViewer>
             </Border>
         </Grid>
+
+        <!-- 도움말 오버레이 (Grid.RowSpan="2" → 타이틀바 포함 전체 덮음) -->
+        <Border x:Name="HelpPanel" Grid.RowSpan="2" Visibility="Collapsed"
+                Background="#D0060F06" Panel.ZIndex="30"
+                MouseLeftButtonDown="HelpPanel_MouseDown">
+            <Border Background="#121E12" BorderBrush="{StaticResource BorderBrush}"
+                    BorderThickness="1" CornerRadius="10" Padding="28,22"
+                    MaxWidth="480"
+                    VerticalAlignment="Center" HorizontalAlignment="Center"
+                    MouseLeftButtonDown="HelpInner_MouseDown">
+                <StackPanel>
+                    <DockPanel Margin="0,0,0,16">
+                        <TextBlock Text="❓ 도움말 — Leaf.Grow" FontSize="15" FontWeight="SemiBold"
+                                   DockPanel.Dock="Left" VerticalAlignment="Center"/>
+                        <Button Content="✕" Width="28" Height="28"
+                                HorizontalAlignment="Right" DockPanel.Dock="Right"
+                                Background="Transparent" BorderThickness="0"
+                                Click="HelpCloseBtn_Click"/>
+                    </DockPanel>
+
+                    <TextBlock Text="🌱 게임 방법" FontSize="12" FontWeight="SemiBold"
+                               Foreground="{StaticResource AccentBrush}" Margin="0,0,0,6"/>
+                    <TextBlock TextWrapping="Wrap" FontSize="11" Margin="0,0,0,12"
+                               Foreground="{StaticResource FgBrush}"
+                               Text="햇빛·수분·영양분 슬라이더로 식물의 환경을 조절하고, 성장 버튼으로 단계별로 식물을 키우세요. 식물마다 최적 환경이 다르며 성장률이 높을수록 더 크고 풍성하게 자랍니다."/>
+
+                    <TextBlock Text="🧩 퍼즐 모드" FontSize="12" FontWeight="SemiBold"
+                               Foreground="{StaticResource AccentBrush}" Margin="0,0,0,6"/>
+                    <TextBlock TextWrapping="Wrap" FontSize="11" Margin="0,0,0,16"
+                               Foreground="{StaticResource FgBrush}"
+                               Text="지정된 식물을 올바른 환경 조건에서 목표 단계까지 키우는 미션입니다. 슬라이더 아래의 녹색 범위 막대와 ✅/❌ 힌트로 현재 상태를 확인하세요."/>
+
+                    <TextBlock Text="⌨ 단축키" FontSize="12" FontWeight="SemiBold"
+                               Foreground="{StaticResource AccentBrush}" Margin="0,0,0,10"/>
+                    <Grid Margin="0,0,0,20">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="14"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Border Grid.Row="0" Grid.Column="0" Background="#1A2E1A" CornerRadius="3" Padding="8,2" Margin="0,0,0,5">
+                            <TextBlock Text="Space" FontSize="11" Foreground="{StaticResource FgBrush}"/>
+                        </Border>
+                        <TextBlock Grid.Row="0" Grid.Column="2" Text="한 단계 성장" FontSize="11" VerticalAlignment="Center" Margin="0,0,0,5"/>
+
+                        <Border Grid.Row="1" Grid.Column="0" Background="#1A2E1A" CornerRadius="3" Padding="8,2" Margin="0,0,0,5">
+                            <TextBlock Text="F" FontSize="11" Foreground="{StaticResource FgBrush}"/>
+                        </Border>
+                        <TextBlock Grid.Row="1" Grid.Column="2" Text="완전 성장" FontSize="11" VerticalAlignment="Center" Margin="0,0,0,5"/>
+
+                        <Border Grid.Row="2" Grid.Column="0" Background="#1A2E1A" CornerRadius="3" Padding="8,2" Margin="0,0,0,5">
+                            <TextBlock Text="Z" FontSize="11" Foreground="{StaticResource FgBrush}"/>
+                        </Border>
+                        <TextBlock Grid.Row="2" Grid.Column="2" Text="한 단계 뒤로" FontSize="11" VerticalAlignment="Center" Margin="0,0,0,5"/>
+
+                        <Border Grid.Row="3" Grid.Column="0" Background="#1A2E1A" CornerRadius="3" Padding="8,2" Margin="0,0,0,5">
+                            <TextBlock Text="R" FontSize="11" Foreground="{StaticResource FgBrush}"/>
+                        </Border>
+                        <TextBlock Grid.Row="3" Grid.Column="2" Text="초기화" FontSize="11" VerticalAlignment="Center" Margin="0,0,0,5"/>
+
+                        <Border Grid.Row="4" Grid.Column="0" Background="#1A2E1A" CornerRadius="3" Padding="8,2" Margin="0,0,0,5">
+                            <TextBlock Text="A" FontSize="11" Foreground="{StaticResource FgBrush}"/>
+                        </Border>
+                        <TextBlock Grid.Row="4" Grid.Column="2" Text="자동 성장 토글" FontSize="11" VerticalAlignment="Center" Margin="0,0,0,5"/>
+
+                        <Border Grid.Row="5" Grid.Column="0" Background="#1A2E1A" CornerRadius="3" Padding="8,2" Margin="0,0,0,5">
+                            <TextBlock Text="S" FontSize="11" Foreground="{StaticResource FgBrush}"/>
+                        </Border>
+                        <TextBlock Grid.Row="5" Grid.Column="2" Text="이미지 저장 (PNG)" FontSize="11" VerticalAlignment="Center" Margin="0,0,0,5"/>
+
+                        <Border Grid.Row="6" Grid.Column="0" Background="#1A2E1A" CornerRadius="3" Padding="8,2">
+                            <TextBlock Text="F1" FontSize="11" Foreground="{StaticResource FgBrush}"/>
+                        </Border>
+                        <TextBlock Grid.Row="6" Grid.Column="2" Text="도움말 열기/닫기" FontSize="11" VerticalAlignment="Center"/>
+                    </Grid>
+
+                    <Button Content="닫기" Width="100" HorizontalAlignment="Center"
+                            Background="{StaticResource AccentBrush}"
+                            Foreground="#060F06" FontWeight="SemiBold"
+                            Click="HelpCloseBtn_Click"/>
+                </StackPanel>
+            </Border>
+        </Border>
     </Grid>
 </Window>

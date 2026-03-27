@@ -119,11 +119,17 @@ namespace Claude.Shell
         // Claude 아이콘 소스 파일 탐색 (exe → ico 순서)
         private static string FindClaudeIconSource()
         {
+            string userProfile = Environment.GetFolderPath(Environment.SpecialFolder.UserProfile);
             string local = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+
             string[] candidates = {
+                // scoop / volta / mise 등 .local\bin 설치
+                Path.Combine(userProfile, ".local", "bin", "claude.exe"),
+                // Anthropic 공식 데스크톱 앱
                 Path.Combine(local, "AnthropicClaude", "claude.exe"),
-                Path.Combine(local, "Programs",        "claude", "claude.exe"),
-                Path.Combine(local, "Programs",        "Claude", "Claude.exe"),
+                // 일반 Programs 설치
+                Path.Combine(local, "Programs", "claude", "claude.exe"),
+                Path.Combine(local, "Programs", "Claude", "Claude.exe"),
             };
             foreach (string p in candidates) if (File.Exists(p)) return p;
 

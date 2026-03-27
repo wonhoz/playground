@@ -1,55 +1,104 @@
 using System;
 using System.Runtime.InteropServices;
+using System.Text;
 
 namespace Claude.Shell
 {
-    public static class SIGDN    { public const uint FILESYSPATH = 0x80058000; }
-    public static class ECF      { public const uint DEFAULT = 0; public const uint HASSUBCOMMANDS = 1; }
-    public static class ECS      { public const uint ENABLED = 0; }
-    public static class HR       { public const int S_OK = 0; public const int S_FALSE = 1; public const int E_NOTIMPL = unchecked((int)0x80004001); }
-
-    [ComImport, InterfaceType(ComInterfaceType.InterfaceIsIUnknown), Guid("43826d1e-e718-42ee-bc55-a1e261c37bfe")]
-    public interface IShellItem
+    // ── HRESULT ──────────────────────────────────────────────────────────────
+    internal static class HR
     {
-        void BindToHandler(IntPtr pbc, ref Guid bhid, ref Guid riid, out IntPtr ppvOut);
-        void GetParent(out IShellItem ppsi);
-        void GetDisplayName(uint sigdnName, [MarshalAs(UnmanagedType.LPWStr)] out string ppszName);
-        void GetAttributes(uint sfgaoMask, out uint psfgaoAttribs);
-        void Compare(IShellItem psi, uint hint, out int piOrder);
+        public const int S_OK      = 0;
+        public const int S_FALSE   = 1;
+        public const int E_NOTIMPL = unchecked((int)0x80004001);
+        public const int E_FAIL    = unchecked((int)0x80004005);
     }
 
-    [ComImport, InterfaceType(ComInterfaceType.InterfaceIsIUnknown), Guid("b63ea76d-1f85-456f-a19c-48159efa858b")]
-    public interface IShellItemArray
+    // ── Win32 메뉴 상수 ───────────────────────────────────────────────────────
+    internal static class MF
     {
-        void BindToHandler(IntPtr pbc, ref Guid bhid, ref Guid riid, out IntPtr ppvOut);
-        void GetPropertyStore(int flags, ref Guid riid, out IntPtr ppv);
-        void GetPropertyDescriptionList(IntPtr keyType, ref Guid riid, out IntPtr ppv);
-        void GetAttributes(uint dwAttribFlags, uint sfgaoMask, out uint psfgaoAttribs);
-        void GetCount(out uint pdwNumItems);
-        void GetItemAt(uint dwIndex, out IShellItem ppsi);
-        void EnumItems(out IntPtr ppenumShellItems);
+        public const uint BYPOSITION = 0x00000400;
+        public const uint POPUP      = 0x00000010;
+        public const uint STRING     = 0x00000000;
+        public const uint SEPARATOR  = 0x00000800;
     }
 
-    [ComImport, InterfaceType(ComInterfaceType.InterfaceIsIUnknown), Guid("a88826f8-2ea9-4d00-8af1-27a3b6e47a00")]
-    public interface IEnumExplorerCommand
+    // ── Win32 API ─────────────────────────────────────────────────────────────
+    internal static class NativeMethods
     {
-        [PreserveSig] int Next(uint celt, out IExplorerCommand pUICommand, out uint pceltFetched);
-        [PreserveSig] int Skip(uint celt);
-        [PreserveSig] int Reset();
-        [PreserveSig] int Clone(out IEnumExplorerCommand ppenum);
+        [DllImport("user32.dll")] public static extern IntPtr CreatePopupMenu();
+        [DllImport("user32.dll")] public static extern bool   DestroyMenu(IntPtr hMenu);
+        [DllImport("user32.dll", CharSet = CharSet.Unicode)]
+        public static extern bool InsertMenuW(IntPtr hMenu, uint uPosition, uint uFlags, UIntPtr uIDNewItem, string lpNewItem);
+
+        [DllImport("shell32.dll", CharSet = CharSet.Unicode)]
+        public static extern bool SHGetPathFromIDListW(IntPtr pidl, StringBuilder pszPath);
     }
 
-    // vtable 순서 (IUnknown 이후): GetTitle, GetIcon, GetToolTip, GetCanonicalName, GetState, Invoke, GetFlags, EnumSubCommands
-    [ComImport, InterfaceType(ComInterfaceType.InterfaceIsIUnknown), Guid("a08ce4d0-fa25-44ab-b57c-c7240667d1a1")]
-    public interface IExplorerCommand
+    // ── CMINVOKECOMMANDINFO (InvokeCommand 파라미터) ──────────────────────────
+    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
+    internal struct CMINVOKECOMMANDINFO
     {
-        [PreserveSig] int GetTitle(IShellItemArray psiItemArray, [MarshalAs(UnmanagedType.LPWStr)] out string ppszName);
-        [PreserveSig] int GetIcon(IShellItemArray psiItemArray, [MarshalAs(UnmanagedType.LPWStr)] out string ppszIcon);
-        [PreserveSig] int GetToolTip(IShellItemArray psiItemArray, [MarshalAs(UnmanagedType.LPWStr)] out string ppszInfotip);
-        [PreserveSig] int GetCanonicalName(out Guid pguidCommandName);
-        [PreserveSig] int GetState(IShellItemArray psiItemArray, bool fOkToBeSlow, out uint pCmdState);
-        [PreserveSig] int Invoke(IShellItemArray psiItemArray, IntPtr pbc);
-        [PreserveSig] int GetFlags(out uint pFlags);
-        [PreserveSig] int EnumSubCommands(out IEnumExplorerCommand ppEnum);
+        public uint   cbSize;
+        public uint   fMask;
+        public IntPtr hwnd;
+        public IntPtr lpVerb;
+        public IntPtr lpParameters;
+        public IntPtr lpDirectory;
+        public int    nShow;
+        public uint   dwHotKey;
+        public IntPtr hIcon;
+    }
+
+    // ── OLE 구조체 ────────────────────────────────────────────────────────────
+    [StructLayout(LayoutKind.Sequential)]
+    public struct FORMATETC
+    {
+        public short  cfFormat;
+        public IntPtr ptd;
+        public uint   dwAspect;
+        public int    lindex;
+        public uint   tymed;
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    public struct STGMEDIUM
+    {
+        public uint   tymed;
+        public IntPtr unionmember;
+        public IntPtr pUnkForRelease;
+    }
+
+    // ── IDataObject (OLE) ────────────────────────────────────────────────────
+    [ComImport, InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+    [Guid("0000010E-0000-0000-C000-000000000046")]
+    public interface IDataObject
+    {
+        void GetData(ref FORMATETC pformatetcIn, out STGMEDIUM pmedium);
+        void GetDataHere(ref FORMATETC pformatetc, ref STGMEDIUM pmedium);
+        [PreserveSig] int QueryGetData(ref FORMATETC pformatetc);
+        [PreserveSig] int GetCanonicalFormatEtc(ref FORMATETC pformatectIn, out FORMATETC pformatetcOut);
+        void SetData(ref FORMATETC pformatetc, ref STGMEDIUM pmedium, bool fRelease);
+        [PreserveSig] int EnumFormatEtc(uint dwDirection, out IntPtr ppenumFormatEtc);
+        [PreserveSig] int DAdvise(ref FORMATETC pformatetc, uint advf, IntPtr pAdvSink, out uint pdwConnection);
+        void DUnadvise(uint dwConnection);
+        [PreserveSig] int EnumDAdvise(out IntPtr ppenumAdvise);
+    }
+
+    // ── IShellExtInit ─────────────────────────────────────────────────────────
+    [ComImport, InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+    [Guid("000214E8-0000-0000-C000-000000000046")]
+    public interface IShellExtInit
+    {
+        void Initialize(IntPtr pidlFolder, IDataObject pdtobj, IntPtr hkeyProgID);
+    }
+
+    // ── IContextMenu ──────────────────────────────────────────────────────────
+    [ComImport, InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+    [Guid("000214E4-0000-0000-C000-000000000046")]
+    public interface IContextMenu
+    {
+        [PreserveSig] int QueryContextMenu(IntPtr hmenu, uint indexMenu, uint idCmdFirst, uint idCmdLast, uint uFlags);
+        [PreserveSig] int InvokeCommand(IntPtr pici);
+        [PreserveSig] int GetCommandString(UIntPtr idCmd, uint uType, IntPtr pReserved, IntPtr pszName, uint cchMax);
     }
 }

@@ -88,10 +88,14 @@
                        Margin="0,18,0,0" FontFamily="Consolas" TextAlignment="Center">
                 <Run Text="WASD / Arrow Keys  ·  Left Stick / D-Pad  move"/>
                 <LineBreak/>
-                <Run Text="P  pause  ·  ESC  quit"/>
+                <Run Text="P  pause  ·  ESC  quit  ·  H  how to play"/>
                 <LineBreak/>
                 <Run Text="Dodge all bullets — survive as long as possible"/>
             </TextBlock>
+
+            <TextBlock x:Name="JoystickStatusText" Text="" FontSize="11"
+                       Foreground="#4488AA" HorizontalAlignment="Center"
+                       Margin="0,10,0,0" FontFamily="Consolas"/>
         </StackPanel>
 
         <!-- Game Over Screen -->
@@ -131,6 +135,86 @@
                     <LineBreak/>
                     <Run Text="[ ESC  Back to Title ]" FontSize="12" Foreground="#555566"/>
                 </TextBlock>
+            </StackPanel>
+        </Border>
+
+        <!-- How To Play Overlay -->
+        <Border x:Name="HelpPanel" Background="#EE05050F" Visibility="Collapsed">
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="340">
+                <TextBlock Text="HOW TO PLAY" FontSize="26" FontWeight="Bold"
+                           Foreground="#00FFCC" HorizontalAlignment="Center" FontFamily="Consolas">
+                    <TextBlock.Effect>
+                        <DropShadowEffect Color="#00FFCC" BlurRadius="14" ShadowDepth="0"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+
+                <TextBlock FontSize="11" Foreground="#3A3A4A" HorizontalAlignment="Center"
+                           Margin="0,6,0,0" FontFamily="Consolas"
+                           Text="────────────────────────────"/>
+
+                <!-- 조작 -->
+                <TextBlock Text="MOVEMENT" FontSize="12" FontWeight="Bold"
+                           Foreground="#888888" HorizontalAlignment="Center"
+                           Margin="0,10,0,4" FontFamily="Consolas"/>
+                <TextBlock FontSize="12" Foreground="#CCCCCC" HorizontalAlignment="Center"
+                           FontFamily="Consolas" TextAlignment="Center">
+                    <Run Text="WASD  /  Arrow Keys"/>
+                    <LineBreak/>
+                    <Run Text="Left Stick  /  D-Pad" Foreground="#A0A0CC"/>
+                </TextBlock>
+
+                <TextBlock FontSize="11" Foreground="#3A3A4A" HorizontalAlignment="Center"
+                           Margin="0,10,0,0" FontFamily="Consolas"
+                           Text="────────────────────────────"/>
+
+                <!-- 레벨 -->
+                <TextBlock Text="LEVELS" FontSize="12" FontWeight="Bold"
+                           Foreground="#888888" HorizontalAlignment="Center"
+                           Margin="0,10,0,6" FontFamily="Consolas"/>
+                <TextBlock FontSize="12" FontFamily="Consolas" HorizontalAlignment="Center" TextAlignment="Center">
+                    <Run Text="NOVICE " Foreground="#888888"/><Run Text="0 – 10s" Foreground="#555566"/>
+                    <LineBreak/>
+                    <Run Text="SKILLED" Foreground="#66AAFF"/><Run Text="  10 – 20s" Foreground="#555566"/>
+                    <LineBreak/>
+                    <Run Text="EXPERT " Foreground="#FF9900"/><Run Text="20 – 35s" Foreground="#555566"/>
+                    <LineBreak/>
+                    <Run Text="LEGEND " Foreground="#FF4444"/><Run Text="35s +" Foreground="#555566"/>
+                </TextBlock>
+
+                <TextBlock FontSize="11" Foreground="#3A3A4A" HorizontalAlignment="Center"
+                           Margin="0,10,0,0" FontFamily="Consolas"
+                           Text="────────────────────────────"/>
+
+                <!-- 총알 패턴 -->
+                <TextBlock Text="BULLET PATTERNS" FontSize="12" FontWeight="Bold"
+                           Foreground="#888888" HorizontalAlignment="Center"
+                           Margin="0,10,0,6" FontFamily="Consolas"/>
+                <TextBlock FontSize="12" FontFamily="Consolas" HorizontalAlignment="Center" TextAlignment="Center">
+                    <Run Text="Phase 1 " Foreground="#555566"/><Run Text="Straight (4-way)" Foreground="#AAAAAA"/>
+                    <LineBreak/>
+                    <Run Text="Phase 2 " Foreground="#555566"/><Run Text="+ Spread 3-way" Foreground="#AAAAAA"/>
+                    <LineBreak/>
+                    <Run Text="Phase 3 " Foreground="#555566"/><Run Text="+ Diagonal" Foreground="#AAAAAA"/>
+                    <LineBreak/>
+                    <Run Text="Phase 4 " Foreground="#555566"/><Run Text="+ Spread 5-way" Foreground="#AAAAAA"/>
+                    <LineBreak/>
+                    <Run Text="Phase 5 " Foreground="#555566"/><Run Text="+ Fast straight" Foreground="#AAAAAA"/>
+                </TextBlock>
+
+                <TextBlock FontSize="11" Foreground="#3A3A4A" HorizontalAlignment="Center"
+                           Margin="0,10,0,0" FontFamily="Consolas"
+                           Text="────────────────────────────"/>
+
+                <!-- 단축키 -->
+                <TextBlock FontSize="12" FontFamily="Consolas" HorizontalAlignment="Center"
+                           TextAlignment="Center" Margin="0,10,0,0">
+                    <Run Text="P" Foreground="#00FFCC"/><Run Text=" Pause  " Foreground="#666666"/>
+                    <Run Text="ESC" Foreground="#00FFCC"/><Run Text=" Quit  " Foreground="#666666"/>
+                    <Run Text="M" Foreground="#00FFCC"/><Run Text=" Mute" Foreground="#666666"/>
+                </TextBlock>
+
+                <TextBlock Text="[ H / ESC  Close ]" FontSize="12" Foreground="#555566"
+                           HorizontalAlignment="Center" Margin="0,20,0,0" FontFamily="Consolas"/>
             </StackPanel>
         </Border>
     </Grid>

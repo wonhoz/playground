@@ -24,7 +24,7 @@ public partial class MainWindow : Window
     private readonly JoystickManager  _joystick = new();
 
     // ── 엔티티 ────────────────────────────────────────────────────────────
-    private Player             _player  = null!;
+    private Player?            _player;
     private readonly List<Bullet>   _bullets   = [];
     private readonly List<Particle> _particles = [];
     private readonly List<Star>     _stars     = [];
@@ -45,6 +45,9 @@ public partial class MainWindow : Window
 
     private readonly Random _rng = new();
 
+    // ── UI 상태 ─────────────────────────────────────────────────────────
+    private bool _joystickConnected;
+
     // ── 저장 경로 ─────────────────────────────────────────────────────────
     private static readonly string SavePath = Path.Combine(
         Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
@@ -57,6 +60,9 @@ public partial class MainWindow : Window
         Loaded += (_, _) => { ApplyDarkTitleBar(); IconGenerator.EnsureIcon(this); };
 
         _bestTime = LoadBestTime();
+
+        // Sounds 정적 초기화를 백그라운드에서 미리 수행 (첫 StartGame 시 UI 스레드 블로킹 방지)
+        Task.Run(() => _ = Sounds.Bgm);
 
         InitStars();
         _engine.OnUpdate += OnUpdate;
@@ -144,7 +150,7 @@ public partial class MainWindow : Window
             { try { Dispatcher.InvokeAsync(() => SoundGen.Sfx(Sounds.GameOverSfx)); } catch { } });
 
         // 파티클 폭발
-        SpawnParticles(_player.X + _player.Width / 2, _player.Y + _player.Height / 2,
+        SpawnParticles(_player!.X + _player.Width / 2, _player.Y + _player.Height / 2,
                        24, Color.FromRgb(0, 255, 204));
 
         MilestoneText.Visibility = Visibility.Collapsed;
@@ -178,14 +184,14 @@ public partial class MainWindow : Window
         {
             _state = GameState.Paused;
             _engine.Pause();
-            SoundGen.StopBgm();
+            SoundGen.PauseBgm();
             PausePanel.Visibility = Visibility.Visible;
         }
         else if (_state == GameState.Paused)
         {
             _state = GameState.Playing;
             _engine.Resume();
-            SoundGen.PlayBgm(Sounds.Bgm, 0.28);
+            SoundGen.ResumeBgm();
             PausePanel.Visibility = Visibility.Collapsed;
         }
     }
@@ -205,6 +211,13 @@ public partial class MainWindow : Window
         if (_joystick.BackJustPressed  && _state == GameState.Playing)
             BackToTitle();
 
+        // 조이스틱 연결 상태 변경 시 UI 업데이트
+        if (_joystick.IsConnected != _joystickConnected)
+        {
+            _joystickConnected = _joystick.IsConnected;
+            JoystickStatusText.Text = _joystickConnected ? "🎮  Controller Connected" : "";
+        }
+
         foreach (var s in _stars) s.Update(dt);
 
         if (_state == GameState.Playing)
@@ -217,7 +230,7 @@ public partial class MainWindow : Window
 
         if (_state is GameState.Playing or GameState.GameOver or GameState.Paused)
         {
-            _player.SyncPosition();
+            _player?.SyncPosition();
             foreach (var b in _bullets)   b.SyncPosition();
             foreach (var p in _particles) p.SyncPosition();
         }
@@ -225,6 +238,8 @@ public partial class MainWindow : Window
 
     private void UpdateGame(double dt)
     {
+        if (_player is null) return;
+
         _survivalTime += dt;
 
         // 플레이어 이동 + 무적 타이머
@@ -330,12 +345,17 @@ public partial class MainWindow : Window
         }
     }
 
+    private static readonly int[] _patternsNovice   = [0];
+    private static readonly int[] _patternsSkilled  = [0, 0, 2];
+    private static readonly int[] _patternsExpert   = [0, 1, 2, 3];
+    private static readonly int[] _patternsLegend   = [0, 1, 2, 3, 4];
+
     private int[] GetActivePatterns() => _survivalTime switch
     {
-        < 10  => [0],
-        < 20  => [0, 0, 2],
-        < 35  => [0, 1, 2, 3],
-        _     => [0, 1, 2, 3, 4]
+        < 10  => _patternsNovice,
+        < 20  => _patternsSkilled,
+        < 35  => _patternsExpert,
+        _     => _patternsLegend
     };
 
     private double GetSpawnInterval() => Math.Max(0.16, 1.3 - _survivalTime * 0.014);
@@ -363,7 +383,7 @@ public partial class MainWindow : Window
     private void SpawnTracking(double speed, Color color)
     {
         var (sx, sy) = RandomEdgePoint();
-        double px = _player.X + _player.Width  / 2;
+        double px = _player!.X + _player.Width  / 2;
         double py = _player.Y + _player.Height / 2;
 
         // 시간이 지날수록 더 정확하게
@@ -378,7 +398,7 @@ public partial class MainWindow : Window
     private void SpawnSpread(double speed, int count, double spreadDeg, Color color)
     {
         var (sx, sy) = RandomEdgePoint();
-        double px = _player.X + _player.Width  / 2;
+        double px = _player!.X + _player.Width  / 2;
         double py = _player.Y + _player.Height / 2;
 
         double baseAngle = Math.Atan2(py - sy, px - sx);
@@ -461,7 +481,9 @@ public partial class MainWindow : Window
 
         if (e.Key == Key.Enter)
         {
-            if (_state is GameState.Title or GameState.GameOver)
+            if (HelpPanel.Visibility == Visibility.Visible)
+                HelpPanel.Visibility = Visibility.Collapsed;
+            else if (_state is GameState.Title or GameState.GameOver)
                 StartGame();
             else if (_state == GameState.Paused)
                 TogglePause();
@@ -471,9 +493,21 @@ public partial class MainWindow : Window
             if (_state is GameState.Playing or GameState.Paused)
                 TogglePause();
         }
+        else if (e.Key == Key.H)
+        {
+            if (_state == GameState.Title || HelpPanel.Visibility == Visibility.Visible)
+                HelpPanel.Visibility = HelpPanel.Visibility == Visibility.Visible
+                    ? Visibility.Collapsed : Visibility.Visible;
+        }
+        else if (e.Key == Key.M)
+        {
+            SoundGen.ToggleMute();
+        }
         else if (e.Key == Key.Escape)
         {
-            if (_state == GameState.Playing)
+            if (HelpPanel.Visibility == Visibility.Visible)
+                HelpPanel.Visibility = Visibility.Collapsed;
+            else if (_state == GameState.Playing)
                 BackToTitle();
             else if (_state == GameState.Paused)
                 BackToTitle();
@@ -485,6 +519,13 @@ public partial class MainWindow : Window
     private void Window_KeyUp(object sender, KeyEventArgs e)
     {
         _input.KeyUp(e.Key);
+    }
+
+    protected override void OnClosed(EventArgs e)
+    {
+        base.OnClosed(e);
+        _engine.Stop();
+        SoundGen.StopBgm();
     }
 
     private void BackToTitle()

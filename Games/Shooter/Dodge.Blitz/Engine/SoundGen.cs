@@ -111,24 +111,21 @@ public static class SoundGen
 
     // ── 재생 ─────────────────────────────────────
 
-    public static void Sfx(byte[] wav)
-    {
-        var p = new SoundPlayer(new MemoryStream(wav));
-        p.Play();
-    }
-
     private static MediaPlayer? _bgm;
     private static string? _bgmFile;
+    private static double _bgmVolume = 0.35;
+    public  static bool   IsMuted { get; private set; }
 
     public static void PlayBgm(byte[] wav, double volume = 0.35)
     {
         StopBgm();
+        _bgmVolume = volume;
         _bgmFile = Path.Combine(Path.GetTempPath(), $"bgm_{Guid.NewGuid():N}.wav");
         try { File.WriteAllBytes(_bgmFile, wav); }
         catch { _bgmFile = null; return; }
         _bgm = new MediaPlayer();
         _bgm.Open(new Uri(_bgmFile));
-        _bgm.Volume = volume;
+        _bgm.Volume = IsMuted ? 0 : _bgmVolume;
         var player = _bgm;
         _bgm.MediaEnded += (_, _) => { player.Position = TimeSpan.Zero; player.Play(); };
         _bgm.Play();
@@ -138,6 +135,22 @@ public static class SoundGen
     {
         if (_bgm != null) { _bgm.Stop(); _bgm.Close(); _bgm = null; }
         if (_bgmFile != null) { try { File.Delete(_bgmFile); } catch { } _bgmFile = null; }
+    }
+
+    public static void PauseBgm() => _bgm?.Pause();
+    public static void ResumeBgm() => _bgm?.Play();
+
+    public static void ToggleMute()
+    {
+        IsMuted = !IsMuted;
+        if (_bgm != null) _bgm.Volume = IsMuted ? 0 : _bgmVolume;
+    }
+
+    public static void Sfx(byte[] wav)
+    {
+        if (IsMuted) return;
+        var p = new SoundPlayer(new MemoryStream(wav));
+        p.Play();
     }
 
     // ── 음표 주파수 ──────────────────────────────

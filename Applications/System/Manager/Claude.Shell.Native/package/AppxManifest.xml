@@ -4,7 +4,8 @@
          xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
          xmlns:desktop4="http://schemas.microsoft.com/appx/manifest/desktop/windows10/4"
          xmlns:com="http://schemas.microsoft.com/appx/manifest/com/windows10"
-         IgnorableNamespaces="rescap desktop4 com uap">
+         xmlns:com2="http://schemas.microsoft.com/appx/manifest/com/windows10/2"
+         IgnorableNamespaces="rescap desktop4 com com2 uap">
 
   <Identity Name="SmartCareworks.ClaudeCode.ContextMenu"
             Publisher="CN=SmartCareworks Inc., O=SmartCareworks Inc., L=Jung District, S=Seoul, C=KR"
@@ -39,15 +40,15 @@
                            Square44x44Logo="logo44.png"/>
       <Extensions>
 
-        <!-- COM 서버 등록 -->
-        <com:Extension Category="windows.comServer">
-          <com:ComServer>
-            <com:InProcessServer>
-              <com:Path>Claude.Shell.Native.dll</com:Path>
-              <com:Class Id="{261B2913-8ABA-420B-9280-0061626EDA5A}" ThreadingModel="apartment"/>
-            </com:InProcessServer>
-          </com:ComServer>
-        </com:Extension>
+        <!-- COM 서버 등록 (InProcessServer = com2 네임스페이스) -->
+        <com2:Extension Category="windows.comServer">
+          <com2:ComServer>
+            <com2:InProcessServer>
+              <com2:Path>Claude.Shell.Native.dll</com2:Path>
+              <com2:Class Id="{261B2913-8ABA-420B-9280-0061626EDA5A}" ThreadingModel="apartment"/>
+            </com2:InProcessServer>
+          </com2:ComServer>
+        </com2:Extension>
 
         <!-- Windows 11 새 컨텍스트 메뉴 등록 -->
         <desktop4:Extension Category="windows.fileExplorerContextMenus">

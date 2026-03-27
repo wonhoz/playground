@@ -74,6 +74,8 @@
 | `Tray.Stats` | System | CPU/RAM/GPU/디스크/네트워크 통합 성능 트레이 모니터 | ✅ |
 | `Win.Scope` | System | 실행 창 Z-order·투명도·클릭통과 실시간 조작 인스펙터 ★27차 | ✅ |
 | `Burn.Rate` | System/Monitor | 배터리 소모율 실시간 분석·잔량 예측 트레이 모니터 | ✅ |
+| `Claude.Shell` | System/Manager | Windows 11 새 컨텍스트 메뉴용 COM 쉘 확장 (IContextMenu + shellex) | ✅ |
+| `Claude.Shell.Native` | System/Manager | 네이티브 C++ COM DLL 컨텍스트 메뉴 익스텐션 | ✅ |
 | `Ctx.Menu` | System/Manager | Windows 탐색기 우클릭 컨텍스트 메뉴 항목 편집기 | ✅ |
 | `Ext.Boss` | System/Manager | 파일 확장자 ↔ 앱 연결 일괄 편집·백업 관리자 | ✅ |
 | `Mem.Lens` | System/Monitor | 프로세스별 메모리 상세 분석기 (Working Set·히트맵) | ✅ |

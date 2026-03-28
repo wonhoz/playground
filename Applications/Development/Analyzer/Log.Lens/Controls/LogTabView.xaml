@@ -18,7 +18,8 @@
                 <TextBox x:Name="TxtFilter" Width="200" Height="27" Margin="0,0,8,0"
                          VerticalContentAlignment="Center"
                          TextChanged="TxtFilter_TextChanged"
-                         ToolTip="키워드 또는 정규식 입력"/>
+                         KeyDown="TxtFilter_KeyDown"
+                         ToolTip="키워드 또는 정규식 입력 (↑↓: 히스토리, Enter: 즉시 적용)"/>
 
                 <CheckBox x:Name="ChkRegex"   Content="정규식"   Margin="0,0,8,0"
                           Checked="FilterOptionChanged" Unchecked="FilterOptionChanged"/>
@@ -53,6 +54,22 @@
                         Style="{StaticResource SecondaryBtn}"
                         Click="BtnClear_Click"
                         ToolTip="현재 탭 로그 지우기"/>
+
+                <!-- 구분선 -->
+                <Border Width="1" Margin="8,3,8,3" Background="#2A2A3A" VerticalAlignment="Stretch"/>
+
+                <!-- 이전/다음 결과 탐색 -->
+                <Button x:Name="BtnPrev" Content="▲" Height="27" Width="27"
+                        Style="{StaticResource SecondaryBtn}"
+                        Click="BtnPrev_Click"
+                        ToolTip="이전 결과 (Shift+F3)"/>
+                <TextBlock x:Name="TxtNavIndex"
+                           Foreground="#555565" FontSize="11"
+                           VerticalAlignment="Center" Margin="5,0"/>
+                <Button x:Name="BtnNext" Content="▼" Height="27" Width="27"
+                        Style="{StaticResource SecondaryBtn}"
+                        Click="BtnNext_Click"
+                        ToolTip="다음 결과 (F3)"/>
             </WrapPanel>
         </Border>
 

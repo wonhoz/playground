@@ -1,3 +1,7 @@
+using System.Linq;
+using System.Text;
+using System.Windows.Threading;
+
 namespace LogLens.Controls;
 
 public partial class LogTabView : UserControl, IDisposable
@@ -27,17 +31,21 @@ public partial class LogTabView : UserControl, IDisposable
     private int    _maxLines = 50_000;
     private int    _lineCounter;
 
-    private System.Windows.Threading.DispatcherTimer? _filterTimer;
+    private DispatcherTimer? _filterTimer;
+
+    // ── 필터 히스토리 ────────────────────────────────────────────────
+    private readonly List<string> _filterHistory = new();
+    private int _historyIndex = -1;
+
+    // ── 검색 탐색 ─────────────────────────────────────────────────
+    private int _navIndex = -1;
 
     public LogTabView()
     {
         InitializeComponent();
         LstLog.ItemsSource = _visible;
 
-        _filterTimer = new System.Windows.Threading.DispatcherTimer
-        {
-            Interval = TimeSpan.FromMilliseconds(300),
-        };
+        _filterTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(300) };
         _filterTimer.Tick += (_, _) =>
         {
             _filterTimer!.Stop();
@@ -46,7 +54,7 @@ public partial class LogTabView : UserControl, IDisposable
     }
 
     // ── 초기화 ──────────────────────────────────────────────────────
-    public void Initialize(string filePath, int maxLines)
+    public void Initialize(string filePath, int maxLines, Encoding? encoding = null)
     {
         _filePath = filePath;
         _maxLines = maxLines;
@@ -57,7 +65,7 @@ public partial class LogTabView : UserControl, IDisposable
         {
             try
             {
-                var svc          = new LogWatcherService(filePath);
+                var svc          = new LogWatcherService(filePath, encoding);
                 var initialLines = svc.ReadInitialAndStart(maxLines);
 
                 // ── UI 차단 방지: 로그 파싱을 배경 스레드에서 수행 ──
@@ -89,7 +97,16 @@ public partial class LogTabView : UserControl, IDisposable
                     AutoScrollIfEnabled();
                 });
             }
-            catch { }
+            catch (Exception ex)
+            {
+                Dispatcher.Invoke(() =>
+                {
+                    TxtLineCount.Text = $"오류: {ex.Message}";
+                    EllStatus.Fill = new SolidColorBrush(Color.FromRgb(0xFF, 0x6B, 0x6B));
+                    TxtWatchStatus.Text = "읽기 실패";
+                    TxtWatchStatus.Foreground = new SolidColorBrush(Color.FromRgb(0xFF, 0x6B, 0x6B));
+                });
+            }
         });
     }
 
@@ -98,6 +115,31 @@ public partial class LogTabView : UserControl, IDisposable
     {
         TxtFilter.Focus();
         TxtFilter.SelectAll();
+    }
+
+    /// <summary>MainWindow의 Ctrl+C 단축키 지원 — 선택 줄 클립보드 복사</summary>
+    public void CopySelectedLines()
+    {
+        var items = LstLog.SelectedItems.Cast<LogLine>().ToList();
+        if (items.Count == 0) return;
+        var text = string.Join(Environment.NewLine, items.Select(l => l.Raw));
+        try { Clipboard.SetText(text); } catch { }
+    }
+
+    /// <summary>F3 / Shift+F3 검색 결과 탐색</summary>
+    public void NavigateMatch(bool forward)
+    {
+        if (_visible.Count == 0) return;
+
+        if (forward)
+            _navIndex = _navIndex < _visible.Count - 1 ? _navIndex + 1 : 0;
+        else
+            _navIndex = _navIndex > 0 ? _navIndex - 1 : _visible.Count - 1;
+
+        var item = _visible[_navIndex];
+        LstLog.SelectedItem = item;
+        LstLog.ScrollIntoView(item);
+        UpdateNavLabel();
     }
 
     // ── 새 줄 수신 ──────────────────────────────────────────────────
@@ -127,9 +169,10 @@ public partial class LogTabView : UserControl, IDisposable
             if (_all.Count >= _maxLines && _maxLines > 0)
             {
                 var toRemove = Math.Max(1, _maxLines / 10);
+                var removed  = _all.GetRange(0, toRemove);
                 _all.RemoveRange(0, toRemove);
-                for (var i = 0; i < toRemove && _visible.Count > 0; i++)
-                    _visible.RemoveAt(0);
+                foreach (var r in removed)
+                    _visible.Remove(r);
             }
 
             var line = LogParserService.Parse(++_lineCounter, raw);
@@ -207,9 +250,11 @@ public partial class LogTabView : UserControl, IDisposable
         var filter    = TxtFilter.Text.Trim();
         var isExclude = ChkExclude.IsChecked == true;
         HighlightPattern = isExclude ? "" : filter;
-        UseRegexHL       = ChkRegex.IsChecked   == true;
-        CaseSensitiveHL  = ChkCase.IsChecked    == true;
+        UseRegexHL       = ChkRegex.IsChecked == true;
+        CaseSensitiveHL  = ChkCase.IsChecked  == true;
 
+        _navIndex = -1;
+        UpdateNavLabel();
         UpdateLineCount();
     }
 
@@ -223,6 +268,13 @@ public partial class LogTabView : UserControl, IDisposable
             : $"{shown:N0} / {total:N0} 줄 (필터 적용)";
     }
 
+    private void UpdateNavLabel()
+    {
+        TxtNavIndex.Text = _navIndex >= 0 && _visible.Count > 0
+            ? $"{_navIndex + 1}/{_visible.Count}"
+            : "";
+    }
+
     private void AutoScrollIfEnabled()
     {
         if (ChkAutoScroll.IsChecked != true || _visible.Count == 0) return;
@@ -233,8 +285,55 @@ public partial class LogTabView : UserControl, IDisposable
     private void TxtFilter_TextChanged(object sender, TextChangedEventArgs e)
     {
         if (!IsLoaded) return;
+        _historyIndex = -1; // 직접 입력 시 히스토리 위치 초기화
         _filterTimer?.Stop();
         _filterTimer?.Start();
+    }
+
+    private void TxtFilter_KeyDown(object sender, KeyEventArgs e)
+    {
+        if (!IsLoaded) return;
+
+        if (e.Key == Key.Enter)
+        {
+            // 히스토리 저장 후 즉시 필터 적용
+            var text = TxtFilter.Text.Trim();
+            if (!string.IsNullOrEmpty(text))
+            {
+                _filterHistory.Remove(text);
+                _filterHistory.Insert(0, text);
+                if (_filterHistory.Count > 20) _filterHistory.RemoveAt(20);
+            }
+            _historyIndex = -1;
+            _filterTimer?.Stop();
+            RebuildVisible();
+            e.Handled = true;
+        }
+        else if (e.Key == Key.Up)
+        {
+            // 이전 히스토리
+            if (_filterHistory.Count == 0) return;
+            _historyIndex = Math.Min(_historyIndex + 1, _filterHistory.Count - 1);
+            TxtFilter.Text = _filterHistory[_historyIndex];
+            TxtFilter.CaretIndex = TxtFilter.Text.Length;
+            e.Handled = true;
+        }
+        else if (e.Key == Key.Down)
+        {
+            // 다음 히스토리 (더 최신 → 빈 문자열)
+            if (_historyIndex > 0)
+            {
+                _historyIndex--;
+                TxtFilter.Text = _filterHistory[_historyIndex];
+            }
+            else
+            {
+                _historyIndex = -1;
+                TxtFilter.Text = "";
+            }
+            TxtFilter.CaretIndex = TxtFilter.Text.Length;
+            e.Handled = true;
+        }
     }
 
     private void FilterOptionChanged(object sender, RoutedEventArgs e)
@@ -254,8 +353,13 @@ public partial class LogTabView : UserControl, IDisposable
         _all.Clear();
         _visible.Clear();
         _lineCounter = 0;
+        _navIndex    = -1;
+        UpdateNavLabel();
         UpdateLineCount();
     }
+
+    private void BtnPrev_Click(object sender, RoutedEventArgs e) => NavigateMatch(false);
+    private void BtnNext_Click(object sender, RoutedEventArgs e) => NavigateMatch(true);
 
     // ── IDisposable ──────────────────────────────────────────────
     public void Dispose()

@@ -1,3 +1,5 @@
+using System.Text;
+
 namespace LogLens.Services;
 
 /// <summary>파일을 tail -f 방식으로 감시하며 새 줄을 이벤트로 전달</summary>
@@ -5,15 +7,20 @@ public sealed class LogWatcherService : IDisposable
 {
     public event Action<IReadOnlyList<string>>? LinesReceived;
 
-    private readonly string _filePath;
+    private readonly string   _filePath;
+    private readonly Encoding _encoding;
+    private readonly bool     _detectBom;
     private long               _position;
     private FileSystemWatcher? _watcher;
     private readonly object    _lock = new();
     private bool               _disposed;
 
-    public LogWatcherService(string filePath)
+    /// <param name="encoding">null = BOM 자동 감지 (기본값)</param>
+    public LogWatcherService(string filePath, Encoding? encoding = null)
     {
-        _filePath = filePath;
+        _filePath  = filePath;
+        _encoding  = encoding ?? Encoding.UTF8;
+        _detectBom = encoding is null;
     }
 
     /// <summary>초기 전체 로드 후 watcher 시작. 마지막 maxLines 줄 반환.</summary>
@@ -24,7 +31,8 @@ public sealed class LogWatcherService : IDisposable
         using (var fs = new FileStream(
             _filePath, FileMode.Open, FileAccess.Read,
             FileShare.ReadWrite | FileShare.Delete))
-        using (var sr = new StreamReader(fs, detectEncodingFromByteOrderMarks: true))
+        using (var sr = new StreamReader(fs, _encoding,
+            detectEncodingFromByteOrderMarks: _detectBom))
         {
             string? line;
             while ((line = sr.ReadLine()) != null)
@@ -77,8 +85,8 @@ public sealed class LogWatcherService : IDisposable
 
             fs.Seek(_position, SeekOrigin.Begin);
 
-            using var sr = new StreamReader(fs,
-                detectEncodingFromByteOrderMarks: _position == 0,
+            using var sr = new StreamReader(fs, _encoding,
+                detectEncodingFromByteOrderMarks: _detectBom && _position == 0,
                 leaveOpen: true);
 
             var newLines = new List<string>();

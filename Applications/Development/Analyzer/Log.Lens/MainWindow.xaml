@@ -38,7 +38,7 @@
                 <!-- 최대 줄 수 -->
                 <TextBlock Text="최대 줄 수:" Foreground="#888898" FontSize="12"
                            VerticalAlignment="Center" Margin="0,0,8,0"/>
-                <ComboBox x:Name="CbMaxLines" Width="120" Height="30"
+                <ComboBox x:Name="CbMaxLines" Width="120" Height="30" Margin="0,0,20,0"
                           SelectedIndex="1"
                           ToolTip="탭당 메모리에 유지할 최대 줄 수">
                     <ComboBoxItem Tag="10000">10,000 줄</ComboBoxItem>
@@ -46,6 +46,25 @@
                     <ComboBoxItem Tag="100000">100,000 줄</ComboBoxItem>
                     <ComboBoxItem Tag="0">무제한</ComboBoxItem>
                 </ComboBox>
+
+                <!-- 인코딩 -->
+                <TextBlock Text="인코딩:" Foreground="#888898" FontSize="12"
+                           VerticalAlignment="Center" Margin="0,0,8,0"/>
+                <ComboBox x:Name="CbEncoding" Width="110" Height="30" Margin="0,0,20,0"
+                          SelectedIndex="0"
+                          ToolTip="파일 인코딩 선택 (새로 열리는 파일에 적용)">
+                    <ComboBoxItem Tag="">자동 감지</ComboBoxItem>
+                    <ComboBoxItem Tag="utf-8">UTF-8</ComboBoxItem>
+                    <ComboBoxItem Tag="euc-kr">EUC-KR</ComboBoxItem>
+                    <ComboBoxItem Tag="shift-jis">Shift-JIS</ComboBoxItem>
+                    <ComboBoxItem Tag="utf-16">UTF-16</ComboBoxItem>
+                </ComboBox>
+
+                <!-- 도움말 -->
+                <Button Content="?" Click="BtnHelp_Click"
+                        Width="30" Height="30"
+                        Style="{StaticResource SecondaryBtn}"
+                        ToolTip="단축키 도움말"/>
             </StackPanel>
         </Border>
 

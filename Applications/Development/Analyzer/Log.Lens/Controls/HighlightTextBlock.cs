@@ -63,6 +63,14 @@ public class HighlightTextBlock : FrameworkElement
     private static readonly SolidColorBrush _hlBg;
     private static readonly SolidColorBrush _hlFg;
 
+    // ── 정규식 캐시 (UI 스레드 전용) ─────────────────────────────
+    private static Regex?        _cachedRx;
+    private static string?       _cachedRxPattern;
+    private static RegexOptions  _cachedRxOpts;
+
+    // ── DIP 캐시 ──────────────────────────────────────────────────
+    private double _cachedDip = double.NaN;
+
     private Typeface _typeface = new("Consolas");
 
     static HighlightTextBlock()
@@ -138,11 +146,15 @@ public class HighlightTextBlock : FrameworkElement
 
     private double GetDip()
     {
+        if (!double.IsNaN(_cachedDip)) return _cachedDip;
         try
         {
             var src = PresentationSource.FromVisual(this);
             if (src?.CompositionTarget != null)
-                return src.CompositionTarget.TransformToDevice.M11;
+            {
+                _cachedDip = src.CompositionTarget.TransformToDevice.M11;
+                return _cachedDip;
+            }
         }
         catch { }
         return 1.0;
@@ -157,7 +169,13 @@ public class HighlightTextBlock : FrameworkElement
             try
             {
                 var opts = caseSensitive ? RegexOptions.None : RegexOptions.IgnoreCase;
-                rx = new Regex(pattern, opts);
+                if (_cachedRx == null || _cachedRxPattern != pattern || _cachedRxOpts != opts)
+                {
+                    _cachedRxPattern = pattern;
+                    _cachedRxOpts    = opts;
+                    _cachedRx        = new Regex(pattern, opts);
+                }
+                rx = _cachedRx;
             }
             catch { yield break; }
 

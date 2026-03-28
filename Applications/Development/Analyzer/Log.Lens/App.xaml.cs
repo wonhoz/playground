@@ -1,5 +1,13 @@
-﻿using System.Windows;
+using System.Text;
+using System.Windows;
 
 namespace LogLens;
 
-public partial class App : Application;
+public partial class App : Application
+{
+    protected override void OnStartup(StartupEventArgs e)
+    {
+        Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+        base.OnStartup(e);
+    }
+}

@@ -84,10 +84,10 @@ STDMETHODIMP ClaudeContextMenu::QueryContextMenu(HMENU hmenu, UINT indexMenu, UI
     InsertMenuW(m_hSubMenu, 0, MF_BYPOSITION | MF_STRING, idCmdFirst + CMD_NORMAL,
                 L"Claude Code \xC5F4\xAE30");
     InsertMenuW(m_hSubMenu, 1, MF_BYPOSITION | MF_STRING, idCmdFirst + CMD_DANGEROUS,
-                L"Claude Code \xC5F4\xAE30 (\xAD8C\xD55C \xAC74\xB108\xB871)");
+                L"Claude Code \xC5F4\xAE30 (\xAD8C\xD55C \xAC74\xB108\xB4B4)");
     InsertMenuW(hmenu, indexMenu, MF_BYPOSITION | MF_POPUP,
                 reinterpret_cast<UINT_PTR>(m_hSubMenu),
-                L"Claude Code\xC5D0\xC11C \xC5F4\xAE30");
+                L"Claude Code \xC5F4\xAE30");
 
     HBITMAP hbmp = GetOrCreateIconBitmap();
     if (hbmp)
@@ -126,8 +126,8 @@ STDMETHODIMP ClaudeContextMenu::GetCommandString(UINT_PTR, UINT, UINT*, CHAR*, U
 STDMETHODIMP ClaudeContextMenu::GetTitle(IShellItemArray*, LPWSTR* ppszName)
 {
     const wchar_t* title = m_dangerous
-        ? L"Claude Code \xC5F4\xAE30 (\xAD8C\xD55C \xAC74\xB108\xB871)"
-        : L"Claude Code\xC5D0\xC11C \xC5F4\xAE30";
+        ? L"Claude Code \xC5F4\xAE30 (\xAD8C\xD55C \xAC74\xB108\xB4B4)"
+        : L"Claude Code \xC5F4\xAE30";
     SIZE_T cb = (wcslen(title) + 1) * sizeof(WCHAR);
     *ppszName = static_cast<LPWSTR>(CoTaskMemAlloc(cb));
     if (!*ppszName) return E_OUTOFMEMORY;

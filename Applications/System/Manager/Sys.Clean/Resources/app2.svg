@@ -1,49 +1,55 @@
-<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!--
+    icon_02 | Sys.Clean
+    Concept : 도넛 게이지로 디스크 여유공간 시각화 (literal) — "앱 UI에서 바로 보는 디스크 여유공간 회복"
+    Pattern : 기하학 추상
+    Colors  : 딥 보라 배경 + 청록 게이지 + 흰색 텍스트
+  -->
   <defs>
-    <clipPath id="clip02">
-      <rect width="1024" height="1024" rx="190"/>
-    </clipPath>
-    <linearGradient id="bgCyan" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#CFFAFE"/>
-      <stop offset="100%" stop-color="#A5F3FC"/>
+    <linearGradient id="i2-bg" x1="0" y1="0" x2="1" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0%" stop-color="#B098FF"/>
+      <stop offset="100%" stop-color="#5C38D8"/>
+    </linearGradient>
+    <linearGradient id="i2-inner" x1="0" y1="0" x2="1" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0%" stop-color="#7050D0"/>
+      <stop offset="100%" stop-color="#4428A8"/>
     </linearGradient>
   </defs>
 
-  <!-- Layer 1: Background – light cyan -->
-  <rect width="1024" height="1024" rx="190" fill="url(#bgCyan)"/>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#i2-bg)"/>
 
-  <g clip-path="url(#clip02)">
-    <!-- Layer 2: Disk usage ring (donut chart) -->
-    <!-- Outer circle (background) -->
-    <circle cx="512" cy="480" r="300" fill="#FFFFFF" opacity="0.7"/>
-    <circle cx="512" cy="480" r="300" fill="none" stroke="#E0FAFC" stroke-width="70"/>
+  <!-- Layer 2: 도넛 게이지 -->
+  <!-- 뒤쪽 트랙 (사용된 공간, 어두운 보라) -->
+  <circle cx="512" cy="512" r="336" fill="none" stroke="#2C1880" stroke-width="128"/>
+  <!-- 여유 공간 (42%, 청록) — 전체원주≈2111, 42%≈887 -->
+  <circle cx="512" cy="512" r="336" fill="none" stroke="#2EEFC8" stroke-width="128"
+          stroke-dasharray="887 1224" stroke-linecap="round"
+          transform="rotate(-90 512 512)"/>
+  <!-- 게이지 위 광택 -->
+  <circle cx="512" cy="512" r="336" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="128"
+          stroke-dasharray="887 1224" stroke-linecap="round"
+          transform="rotate(-90 512 512)"/>
 
-    <!-- BEFORE: Used portion (red/orange ~75%) -->
-    <circle cx="512" cy="480" r="300" fill="none" stroke="#F87171" stroke-width="70"
-            stroke-dasharray="1414 472"
-            stroke-dashoffset="0"
-            transform="rotate(-90 512 480)"/>
+  <!-- Layer 2: 중앙 원 -->
+  <circle cx="512" cy="512" r="222" fill="url(#i2-inner)"/>
 
-    <!-- AFTER: Clean portion (green ~25%) -->
-    <circle cx="512" cy="480" r="300" fill="none" stroke="#22C55E" stroke-width="70"
-            stroke-dasharray="471 1415"
-            stroke-dashoffset="-1413"
-            transform="rotate(-90 512 480)"/>
+  <!-- Layer 3: 중앙 텍스트 -->
+  <!-- 퍼센트 -->
+  <text x="512" y="480" text-anchor="middle"
+        fill="#2EEFC8" font-size="168" font-weight="900"
+        font-family="Arial Black, Arial, sans-serif">42%</text>
+  <!-- FREE 레이블 -->
+  <text x="512" y="568" text-anchor="middle"
+        fill="#C8B8FF" font-size="72" font-weight="700"
+        font-family="Arial, sans-serif">FREE</text>
 
-    <!-- Inner hole -->
-    <circle cx="512" cy="480" r="200" fill="url(#bgCyan)"/>
-
-    <!-- Layer 3: Center text - before/after -->
-    <text x="512" y="450" text-anchor="middle" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="#0E7490">Clean</text>
-    <text x="512" y="510" text-anchor="middle" font-family="Arial, sans-serif" font-size="36" fill="#0E7490">25% free</text>
-
-    <!-- Legend bottom -->
-    <rect x="220" y="840" width="32" height="32" rx="6" fill="#F87171"/>
-    <text x="264" y="866" font-family="Arial, sans-serif" font-size="30" fill="#0E7490">Junk</text>
-    <rect x="450" y="840" width="32" height="32" rx="6" fill="#22C55E"/>
-    <text x="494" y="866" font-family="Arial, sans-serif" font-size="30" fill="#0E7490">Clean</text>
-
-    <!-- Arrow down (cleaning action) -->
-    <path d="M660,800 L720,800 L720,760 L760,820 L720,880 L720,840 L660,840 Z" fill="#06B6D4" opacity="0.7"/>
-  </g>
+  <!-- 도넛 바깥 장식 별 -->
+  <polygon points="196,192 212,236 258,236 222,264 236,308 196,282 156,308 170,264 134,236 180,236" fill="#FFDD34" opacity="0.9"/>
+  <polygon points="828,176 840,210 876,210 848,232 858,266 828,246 798,266 808,232 780,210 816,210" fill="white" opacity="0.8"/>
+  <!-- 작은 빛 점 -->
+  <circle cx="188" cy="568" r="16" fill="#2EEFC8" opacity="0.7"/>
+  <circle cx="836" cy="560" r="13" fill="#2EEFC8" opacity="0.6"/>
+  <circle cx="512" cy="142" r="12" fill="white" opacity="0.7"/>
+  <circle cx="512" cy="882" r="12" fill="white" opacity="0.7"/>
 </svg>

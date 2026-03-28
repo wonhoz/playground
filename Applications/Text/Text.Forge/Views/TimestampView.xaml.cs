@@ -105,20 +105,13 @@ public partial class TimestampView : UserControl
 
     private static string GetRelativeTime(DateTime utc)
     {
-        var diff = DateTime.UtcNow - utc;
+        var diff    = DateTime.UtcNow - utc;
+        var abs     = diff.Duration();
+        var suffix  = diff.TotalSeconds < 0 ? "후" : "전";
 
-        if (Math.Abs(diff.TotalSeconds) < 60)
-            return $"{(diff.TotalSeconds < 0 ? "+" : "-")}{Math.Abs((int)diff.TotalSeconds)}초";
-
-        if (Math.Abs(diff.TotalMinutes) < 60)
-            return $"{(diff.TotalMinutes < 0 ? "+" : "")}{(int)diff.TotalMinutes}분 전";
-
-        if (Math.Abs(diff.TotalHours) < 24)
-            return $"{(diff.TotalHours < 0 ? "+" : "")}{(int)diff.TotalHours}시간 전";
-
-        if (Math.Abs(diff.TotalDays) < 30)
-            return $"{(diff.TotalDays < 0 ? "+" : "")}{(int)diff.TotalDays}일 전";
-
-        return $"{(int)diff.TotalDays}일 전";
+        if (abs.TotalSeconds < 60)  return $"{(int)abs.TotalSeconds}초 {suffix}";
+        if (abs.TotalMinutes < 60)  return $"{(int)abs.TotalMinutes}분 {suffix}";
+        if (abs.TotalHours   < 24)  return $"{(int)abs.TotalHours}시간 {suffix}";
+        return $"{(int)abs.TotalDays}일 {suffix}";
     }
 }

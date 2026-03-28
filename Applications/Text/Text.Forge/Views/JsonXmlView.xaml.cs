@@ -100,7 +100,56 @@ public partial class JsonXmlView : UserControl
 
     private void JsonToXml_Click(object sender, RoutedEventArgs e)
     {
-        ShowStatus("JSON → XML 변환은 추후 지원 예정", "#888888");
+        var input = InputBox.Text.Trim();
+        if (string.IsNullOrEmpty(input)) return;
+
+        try
+        {
+            using var doc = JsonDocument.Parse(input);
+            var sb = new StringBuilder();
+            var settings = new XmlWriterSettings { Indent = true, IndentChars = "  ", OmitXmlDeclaration = false };
+            using (var writer = XmlWriter.Create(sb, settings))
+            {
+                writer.WriteStartDocument();
+                writer.WriteStartElement("root");
+                WriteJsonToXml(writer, doc.RootElement);
+                writer.WriteEndElement();
+                writer.WriteEndDocument();
+            }
+            OutputBox.Text = sb.ToString();
+            ShowStatus("✓ JSON → XML 변환 완료", "#81C784");
+        }
+        catch (Exception ex)
+        {
+            ShowStatus($"✕ JSON 파싱 오류: {ex.Message}", "#EF9A9A");
+        }
+    }
+
+    private static void WriteJsonToXml(XmlWriter w, JsonElement el)
+    {
+        switch (el.ValueKind)
+        {
+            case JsonValueKind.Object:
+                foreach (var p in el.EnumerateObject())
+                {
+                    var name = XmlConvert.EncodeName(p.Name);
+                    w.WriteStartElement(name);
+                    WriteJsonToXml(w, p.Value);
+                    w.WriteEndElement();
+                }
+                break;
+            case JsonValueKind.Array:
+                foreach (var item in el.EnumerateArray())
+                {
+                    w.WriteStartElement("item");
+                    WriteJsonToXml(w, item);
+                    w.WriteEndElement();
+                }
+                break;
+            default:
+                w.WriteString(el.ToString());
+                break;
+        }
     }
 
     private void Swap_Click(object sender, RoutedEventArgs e)

@@ -116,10 +116,26 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
-                    <TextBox Grid.Column="0" x:Name="DateInputBox"
-                             Style="{StaticResource InputBox}"
-                             TextChanged="Date_TextChanged"
-                             />
+                    <Grid Grid.Column="0">
+                        <TextBox x:Name="DateInputBox"
+                                 Style="{StaticResource InputBox}"
+                                 TextChanged="Date_TextChanged"/>
+                        <TextBlock Text="예) 2024-03-28 09:00:00" IsHitTestVisible="False"
+                                   FontFamily="Consolas" FontSize="12"
+                                   Foreground="#444466" Margin="10,0,0,0"
+                                   VerticalAlignment="Center">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Text, ElementName=DateInputBox}" Value="">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </Grid>
                     <Button Grid.Column="1" Content="변환" Style="{StaticResource GrayBtn}"
                             Click="DateConvert_Click" Margin="8,0,0,0"/>
                 </Grid>

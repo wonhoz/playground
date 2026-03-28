@@ -1,6 +1,10 @@
+using System.IO;
+using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Text.Json;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Interop;
 using TextForge.Views;
 
@@ -20,10 +24,15 @@ public partial class MainWindow : Window
     private readonly CaseView       _caseConv  = new();
     private readonly GeneratorView  _generator = new();
 
+    private static readonly string SettingsPath =
+        Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+                     "TextForge", "settings.json");
+
     public MainWindow()
     {
         InitializeComponent();
         Loaded += OnLoaded;
+        KeyDown += OnKeyDown;
     }
 
     private void OnLoaded(object sender, RoutedEventArgs e)
@@ -35,8 +44,12 @@ public partial class MainWindow : Window
             DwmSetWindowAttribute(source.Handle, 20, ref value, sizeof(int));
         }
 
-        // 첫 번째 탭 선택 (JSON/XML)
-        ToolNav.SelectedIndex = 0;
+        // 버전 표시
+        var ver = Assembly.GetExecutingAssembly().GetName().Version;
+        VersionText.Text = ver is not null ? $"v{ver.Major}.{ver.Minor}.{ver.Build}" : "v2.0.0";
+
+        // 마지막 탭 복원
+        ToolNav.SelectedIndex = LoadLastTab();
     }
 
     private void ToolNav_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -53,5 +66,62 @@ public partial class MainWindow : Window
             7 => _generator,
             _ => _jsonXml
         };
+        SaveLastTab(ToolNav.SelectedIndex);
+    }
+
+    private void OnKeyDown(object sender, KeyEventArgs e)
+    {
+        if (e.KeyboardDevice.Modifiers == ModifierKeys.Control
+            && e.Key >= Key.D1 && e.Key <= Key.D8)
+        {
+            ToolNav.SelectedIndex = e.Key - Key.D1;
+            e.Handled = true;
+            return;
+        }
+        if (e.Key == Key.F1)
+        {
+            ToggleHelp();
+            e.Handled = true;
+        }
+        if (e.Key == Key.Escape && HelpOverlay.Visibility == Visibility.Visible)
+        {
+            HelpOverlay.Visibility = Visibility.Collapsed;
+            e.Handled = true;
+        }
+    }
+
+    private void HelpBtn_Click(object sender, RoutedEventArgs e) => ToggleHelp();
+    private void HelpClose_Click(object sender, RoutedEventArgs e)
+        => HelpOverlay.Visibility = Visibility.Collapsed;
+
+    private void ToggleHelp()
+    {
+        HelpOverlay.Visibility = HelpOverlay.Visibility == Visibility.Visible
+            ? Visibility.Collapsed
+            : Visibility.Visible;
+    }
+
+    // ── 설정 저장/복원 ──────────────────────────────────────────
+
+    private static int LoadLastTab()
+    {
+        try
+        {
+            if (!File.Exists(SettingsPath)) return 0;
+            var json = File.ReadAllText(SettingsPath);
+            using var doc = JsonDocument.Parse(json);
+            return doc.RootElement.TryGetProperty("lastTab", out var val) ? val.GetInt32() : 0;
+        }
+        catch { return 0; }
+    }
+
+    private static void SaveLastTab(int index)
+    {
+        try
+        {
+            Directory.CreateDirectory(Path.GetDirectoryName(SettingsPath)!);
+            File.WriteAllText(SettingsPath, $"{{\"lastTab\":{index}}}");
+        }
+        catch { }
     }
 }

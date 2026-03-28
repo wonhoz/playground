@@ -28,10 +28,10 @@ public partial class GeneratorView : UserControl
         => UlidBox.Text = CryptoService.GenerateUlid();
 
     private void CopyUuid_Click(object sender, RoutedEventArgs e)
-        => Copy(UuidBox.Text);
+        => Copy(UuidBox.Text, "UUID");
 
     private void CopyUlid_Click(object sender, RoutedEventArgs e)
-        => Copy(UlidBox.Text);
+        => Copy(UlidBox.Text, "ULID");
 
     // ── 비밀번호 생성기 ──────────────────────────────────────────
     private void PwOptions_Changed(object sender, RoutedEventArgs e)
@@ -50,7 +50,7 @@ public partial class GeneratorView : UserControl
 
     private void GenPw_Click(object sender, RoutedEventArgs e) => GenPwInternal();
 
-    private void CopyPw_Click(object sender, RoutedEventArgs e) => Copy(PwResultBox.Text);
+    private void CopyPw_Click(object sender, RoutedEventArgs e) => Copy(PwResultBox.Text, "비밀번호");
 
     private void GenPwInternal()
     {
@@ -81,9 +81,14 @@ public partial class GeneratorView : UserControl
     }
 
     // ── 유틸 ─────────────────────────────────────────────────────
-    private static void Copy(string text)
+    private void Copy(string text, string label)
     {
         if (!string.IsNullOrEmpty(text))
+        {
             Clipboard.SetText(text);
+            StatusText.Text = $"✓ {label} 클립보드에 복사됨";
+            StatusText.Foreground = new System.Windows.Media.SolidColorBrush(
+                System.Windows.Media.Color.FromRgb(0x81, 0xC7, 0x84));
+        }
     }
 }

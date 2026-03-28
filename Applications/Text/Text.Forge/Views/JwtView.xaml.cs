@@ -2,11 +2,19 @@ using System.Text;
 using System.Text.Json;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace TextForge.Views;
 
 public partial class JwtView : UserControl
 {
+    private static readonly TimeZoneInfo KstZone = GetKstZone();
+    private static TimeZoneInfo GetKstZone()
+    {
+        try { return TimeZoneInfo.FindSystemTimeZoneById("Korea Standard Time"); }
+        catch { return TimeZoneInfo.Utc; }
+    }
+
     public JwtView() => InitializeComponent();
 
     private void Token_TextChanged(object sender, TextChangedEventArgs e)
@@ -91,12 +99,24 @@ public partial class JwtView : UserControl
 
             using var doc = JsonDocument.Parse(json);
 
-            ExpLabel.Text = doc.RootElement.TryGetProperty("exp", out var exp)
-                ? $"exp : {DateTimeOffset.FromUnixTimeSeconds(exp.GetInt64()):yyyy-MM-dd HH:mm:ss (KST+9)}"
-                : "exp : (없음)";
+            if (doc.RootElement.TryGetProperty("exp", out var exp))
+            {
+                var expUtc     = DateTimeOffset.FromUnixTimeSeconds(exp.GetInt64()).UtcDateTime;
+                var expKst     = TimeZoneInfo.ConvertTimeFromUtc(expUtc, KstZone);
+                bool isExpired = expUtc < DateTime.UtcNow;
+                ExpLabel.Text  = $"exp : {expKst:yyyy-MM-dd HH:mm:ss} KST  {(isExpired ? "⚠ 만료됨" : "✓ 유효")}";
+                ExpLabel.Foreground = new SolidColorBrush(isExpired
+                    ? Color.FromRgb(0xEF, 0x9A, 0x9A)
+                    : Color.FromRgb(0x81, 0xC7, 0x84));
+            }
+            else
+            {
+                ExpLabel.Text       = "exp : (없음)";
+                ExpLabel.Foreground = new SolidColorBrush(Color.FromRgb(0x88, 0x88, 0x88));
+            }
 
             IatLabel.Text = doc.RootElement.TryGetProperty("iat", out var iat)
-                ? $"iat : {DateTimeOffset.FromUnixTimeSeconds(iat.GetInt64()):yyyy-MM-dd HH:mm:ss}"
+                ? $"iat : {TimeZoneInfo.ConvertTimeFromUtc(DateTimeOffset.FromUnixTimeSeconds(iat.GetInt64()).UtcDateTime, KstZone):yyyy-MM-dd HH:mm:ss} KST"
                 : "iat : (없음)";
         }
         catch

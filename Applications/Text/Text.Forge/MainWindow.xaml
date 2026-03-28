@@ -159,10 +159,36 @@
                 </ListBoxItem>
             </ListBox>
 
-            <!-- 하단 버전 -->
-            <TextBlock Grid.Row="2" Text="v2.0.0" FontSize="10"
-                       Foreground="#333355" Margin="16,8,16,12"
-                       HorizontalAlignment="Left"/>
+            <!-- 하단: 버전 + 도움말 버튼 -->
+            <Grid Grid.Row="2" Margin="12,4,12,10">
+                <TextBlock x:Name="VersionText" FontSize="10"
+                           Foreground="#333355" VerticalAlignment="Center"
+                           HorizontalAlignment="Left"/>
+                <Button x:Name="HelpBtn" Content="?" FontSize="11" FontWeight="Bold"
+                        HorizontalAlignment="Right" VerticalAlignment="Center"
+                        Width="22" Height="22" Padding="0"
+                        Foreground="#444466" Background="Transparent" BorderThickness="1"
+                        BorderBrush="#333355" Cursor="Hand"
+                        ToolTip="단축키 도움말"
+                        Click="HelpBtn_Click">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="Bd" Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    CornerRadius="11">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="Bd" Property="Background" Value="#252538"/>
+                                    <Setter TargetName="Bd" Property="BorderBrush" Value="#555577"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </Grid>
         </Grid>
 
         <!-- 구분선 -->
@@ -170,5 +196,92 @@
 
         <!-- ═══ 컨텐츠 영역 ═══ -->
         <ContentControl Grid.Column="2" x:Name="ContentArea"/>
+
+        <!-- ═══ 도움말 오버레이 ═══ -->
+        <Grid x:Name="HelpOverlay" Grid.ColumnSpan="3"
+              Visibility="Collapsed" Background="#CC000000">
+            <Border Background="#1E1E32" BorderBrush="#333355" BorderThickness="1"
+                    CornerRadius="8" Padding="28,24"
+                    MaxWidth="480" MaxHeight="500"
+                    HorizontalAlignment="Center" VerticalAlignment="Center">
+                <StackPanel>
+                    <Grid Margin="0,0,0,16">
+                        <TextBlock Text="단축키 도움말" FontSize="16" FontWeight="Bold"
+                                   Foreground="#FFA000"/>
+                        <Button Content="✕" HorizontalAlignment="Right"
+                                Background="Transparent" BorderThickness="0"
+                                Foreground="#888888" FontSize="14" Cursor="Hand"
+                                Click="HelpClose_Click">
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <TextBlock x:Name="T" Text="{TemplateBinding Content}"
+                                               Foreground="{TemplateBinding Foreground}"
+                                               FontSize="{TemplateBinding FontSize}"/>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter TargetName="T" Property="Foreground" Value="#E0E0E0"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+                    </Grid>
+
+                    <!-- 탭 전환 -->
+                    <TextBlock Text="탭 전환" FontSize="11" FontWeight="Bold"
+                               Foreground="#666688" Margin="0,0,0,8"/>
+                    <Grid Margin="0,0,0,16">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="120"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0" Grid.Column="0" Text="Ctrl+1" FontFamily="Consolas" Foreground="#FFA000" FontSize="12"/>
+                        <TextBlock Grid.Row="0" Grid.Column="1" Text="JSON / XML" Foreground="#AAAAAA" FontSize="12"/>
+                        <TextBlock Grid.Row="1" Grid.Column="0" Text="Ctrl+2" FontFamily="Consolas" Foreground="#4FC3F7" FontSize="12" Margin="0,4,0,0"/>
+                        <TextBlock Grid.Row="1" Grid.Column="1" Text="Encoding" Foreground="#AAAAAA" FontSize="12" Margin="0,4,0,0"/>
+                        <TextBlock Grid.Row="2" Grid.Column="0" Text="Ctrl+3" FontFamily="Consolas" Foreground="#CE93D8" FontSize="12" Margin="0,4,0,0"/>
+                        <TextBlock Grid.Row="2" Grid.Column="1" Text="Hash" Foreground="#AAAAAA" FontSize="12" Margin="0,4,0,0"/>
+                        <TextBlock Grid.Row="3" Grid.Column="0" Text="Ctrl+4" FontFamily="Consolas" Foreground="#FFB74D" FontSize="12" Margin="0,4,0,0"/>
+                        <TextBlock Grid.Row="3" Grid.Column="1" Text="JWT Decode" Foreground="#AAAAAA" FontSize="12" Margin="0,4,0,0"/>
+                        <TextBlock Grid.Row="4" Grid.Column="0" Text="Ctrl+5" FontFamily="Consolas" Foreground="#EF9A9A" FontSize="12" Margin="0,4,0,0"/>
+                        <TextBlock Grid.Row="4" Grid.Column="1" Text="Regex" Foreground="#AAAAAA" FontSize="12" Margin="0,4,0,0"/>
+                        <TextBlock Grid.Row="5" Grid.Column="0" Text="Ctrl+6" FontFamily="Consolas" Foreground="#80DEEA" FontSize="12" Margin="0,4,0,0"/>
+                        <TextBlock Grid.Row="5" Grid.Column="1" Text="Timestamp" Foreground="#AAAAAA" FontSize="12" Margin="0,4,0,0"/>
+                        <TextBlock Grid.Row="6" Grid.Column="0" Text="Ctrl+7" FontFamily="Consolas" Foreground="#80DEEA" FontSize="12" Margin="0,4,0,0"/>
+                        <TextBlock Grid.Row="6" Grid.Column="1" Text="Case Convert" Foreground="#AAAAAA" FontSize="12" Margin="0,4,0,0"/>
+                        <TextBlock Grid.Row="7" Grid.Column="0" Text="Ctrl+8" FontFamily="Consolas" Foreground="#A5D6A7" FontSize="12" Margin="0,4,0,0"/>
+                        <TextBlock Grid.Row="7" Grid.Column="1" Text="Generator" Foreground="#AAAAAA" FontSize="12" Margin="0,4,0,0"/>
+                    </Grid>
+
+                    <!-- 일반 -->
+                    <TextBlock Text="일반" FontSize="11" FontWeight="Bold"
+                               Foreground="#666688" Margin="0,0,0,8"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="120"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0" Grid.Column="0" Text="F1" FontFamily="Consolas" Foreground="#FFA000" FontSize="12"/>
+                        <TextBlock Grid.Row="0" Grid.Column="1" Text="도움말 열기/닫기" Foreground="#AAAAAA" FontSize="12"/>
+                        <TextBlock Grid.Row="1" Grid.Column="0" Text="Esc" FontFamily="Consolas" Foreground="#FFA000" FontSize="12" Margin="0,4,0,0"/>
+                        <TextBlock Grid.Row="1" Grid.Column="1" Text="도움말 닫기" Foreground="#AAAAAA" FontSize="12" Margin="0,4,0,0"/>
+                    </Grid>
+                </StackPanel>
+            </Border>
+        </Grid>
     </Grid>
 </Window>

@@ -139,6 +139,26 @@ public partial class RegexView : UserControl
         TestInput.TextChanged += TestInput_TextChanged;
     }
 
+    private void MatchList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        CopyMatchBtn.Visibility = MatchList.SelectedItem != null
+            ? System.Windows.Visibility.Visible
+            : System.Windows.Visibility.Collapsed;
+    }
+
+    private void CopyMatch_Click(object sender, RoutedEventArgs e)
+    {
+        if (MatchList.SelectedItem is string item && !string.IsNullOrEmpty(item))
+        {
+            // "[  0:  5]  matched_text" 형식에서 실제 매치값만 추출
+            var idx = item.IndexOf(']');
+            var value = idx >= 0 && idx + 2 < item.Length ? item[(idx + 2)..].TrimStart() : item;
+            Clipboard.SetText(value);
+            StatusText.Text = "✓ 복사됨";
+            StatusText.Foreground = new SolidColorBrush(Color.FromRgb(0x81, 0xC7, 0x84));
+        }
+    }
+
     private static string Truncate(string s, int maxLen)
         => s.Length <= maxLen ? s : s[..maxLen] + "…";
 }

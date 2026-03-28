@@ -9,7 +9,7 @@
 
   <Identity Name="SmartCareworks.ClaudeCode.ContextMenu"
             Publisher="CN=SmartCareworks Inc., O=SmartCareworks Inc., L=Jung District, S=Seoul, C=KR"
-            Version="2.1.0.0"
+            Version="2.2.0.0"
             ProcessorArchitecture="x64"/>
 
   <Properties>
@@ -44,10 +44,12 @@
         <desktop4:Extension Category="windows.fileExplorerContextMenus" EntryPoint="Windows.FullTrustApplication">
           <desktop4:FileExplorerContextMenus>
             <desktop5:ItemType Type="Directory">
-              <desktop5:Verb Id="ClaudeCode" Clsid="261B2913-8ABA-420B-9280-0061626EDA5A"/>
+              <desktop5:Verb Id="ClaudeCode"          Clsid="261B2913-8ABA-420B-9280-0061626EDA5A"/>
+              <desktop5:Verb Id="ClaudeCodeDangerous" Clsid="261B2913-8ABA-420B-9280-0061626EDA5B"/>
             </desktop5:ItemType>
             <desktop5:ItemType Type="Directory\Background">
-              <desktop5:Verb Id="ClaudeCode" Clsid="261B2913-8ABA-420B-9280-0061626EDA5A"/>
+              <desktop5:Verb Id="ClaudeCode"          Clsid="261B2913-8ABA-420B-9280-0061626EDA5A"/>
+              <desktop5:Verb Id="ClaudeCodeDangerous" Clsid="261B2913-8ABA-420B-9280-0061626EDA5B"/>
             </desktop5:ItemType>
           </desktop4:FileExplorerContextMenus>
         </desktop4:Extension>
@@ -58,6 +60,9 @@
             <com:SurrogateServer AppId="261B2913-8ABA-420B-9280-0061626EDA5A"
                                  DisplayName="Claude Code Context Menu">
               <com:Class Id="261B2913-8ABA-420B-9280-0061626EDA5A"
+                         Path="Claude.Shell.Native.dll"
+                         ThreadingModel="STA"/>
+              <com:Class Id="261B2913-8ABA-420B-9280-0061626EDA5B"
                          Path="Claude.Shell.Native.dll"
                          ThreadingModel="STA"/>
             </com:SurrogateServer>

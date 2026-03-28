@@ -13,8 +13,8 @@ static const UINT MIIM_BITMAP_  = 0x80;
 HBITMAP ClaudeContextMenu::s_hBitmap    = nullptr;
 bool    ClaudeContextMenu::s_iconLoaded = false;
 
-ClaudeContextMenu::ClaudeContextMenu()
-    : m_cRef(1), m_hSubMenu(nullptr)
+ClaudeContextMenu::ClaudeContextMenu(bool dangerous)
+    : m_cRef(1), m_dangerous(dangerous), m_hSubMenu(nullptr)
 {
     InterlockedIncrement(&g_cDllRef);
 }
@@ -75,7 +75,7 @@ STDMETHODIMP ClaudeContextMenu::Initialize(PCIDLIST_ABSOLUTE pidlFolder, IDataOb
     return S_OK;
 }
 
-// ── IContextMenu ──────────────────────────────────────────────────────────────
+// ── IContextMenu (구 컨텍스트 — Normal 인스턴스에서 서브메뉴 2개 제공) ──────
 STDMETHODIMP ClaudeContextMenu::QueryContextMenu(HMENU hmenu, UINT indexMenu, UINT idCmdFirst, UINT, UINT uFlags)
 {
     if ((uFlags & 0x000F) == CMF_DEFAULTONLY) return MAKE_HRESULT(SEVERITY_SUCCESS, 0, 0);
@@ -122,12 +122,12 @@ STDMETHODIMP ClaudeContextMenu::InvokeCommand(LPCMINVOKECOMMANDINFO pici)
 STDMETHODIMP ClaudeContextMenu::GetCommandString(UINT_PTR, UINT, UINT*, CHAR*, UINT)
     { return E_NOTIMPL; }
 
-// ── IExplorerCommand (신 컨텍스트 메뉴) ───────────────────────────────────────
-// SurrogateServer(dllhost) 환경에서 IEnumExplorerCommand 마샬링이 크래시를 유발.
-// ECF_DEFAULT + Invoke 직접 실행으로 단일 항목 사용.
+// ── IExplorerCommand (신 컨텍스트 메뉴 — ECF_DEFAULT, m_dangerous 로 분기) ──
 STDMETHODIMP ClaudeContextMenu::GetTitle(IShellItemArray*, LPWSTR* ppszName)
 {
-    const wchar_t* title = L"Claude Code\xC5D0\xC11C \xC5F4\xAE30";
+    const wchar_t* title = m_dangerous
+        ? L"Claude Code \xC5F4\xAE30 (\xAD8C\xD55C \xAC74\xB108\xB871)"
+        : L"Claude Code\xC5D0\xC11C \xC5F4\xAE30";
     SIZE_T cb = (wcslen(title) + 1) * sizeof(WCHAR);
     *ppszName = static_cast<LPWSTR>(CoTaskMemAlloc(cb));
     if (!*ppszName) return E_OUTOFMEMORY;
@@ -147,13 +147,14 @@ STDMETHODIMP ClaudeContextMenu::GetIcon(IShellItemArray*, LPWSTR* ppszIcon)
 STDMETHODIMP ClaudeContextMenu::GetToolTip(IShellItemArray*, LPWSTR* ppszTip)
     { *ppszTip = nullptr; return S_FALSE; }
 STDMETHODIMP ClaudeContextMenu::GetCanonicalName(GUID* pguid)
-    { *pguid = CLSID_ClaudeContextMenu; return S_OK; }
+{
+    *pguid = m_dangerous ? CLSID_ClaudeContextMenuDangerous : CLSID_ClaudeContextMenu;
+    return S_OK;
+}
 STDMETHODIMP ClaudeContextMenu::GetState(IShellItemArray*, BOOL, EXPCMDSTATE* pState)
     { *pState = ECS_ENABLED; return S_OK; }
 STDMETHODIMP ClaudeContextMenu::Invoke(IShellItemArray* psia, IBindCtx*)
 {
-    // SurrogateServer 환경: m_folderPath(IShellExtInit)는 비어 있으므로
-    // IShellItemArray에서 경로 추출
     std::wstring folder;
     if (psia)
     {
@@ -171,11 +172,13 @@ STDMETHODIMP ClaudeContextMenu::Invoke(IShellItemArray* psia, IBindCtx*)
     }
     if (folder.empty()) folder = m_folderPath;
 
+    const wchar_t* claudeArg = m_dangerous
+        ? L"claude --dangerously-skip-permissions" : L"claude";
     WCHAR args[MAX_PATH * 2 + 64] = {};
     if (folder.empty())
-        swprintf_s(args, L"/k claude");
+        swprintf_s(args, L"/k %s", claudeArg);
     else
-        swprintf_s(args, L"/k cd /d \"%s\" && claude", folder.c_str());
+        swprintf_s(args, L"/k cd /d \"%s\" && %s", folder.c_str(), claudeArg);
 
     SHELLEXECUTEINFOW sei = {};
     sei.cbSize = sizeof(sei); sei.lpVerb = L"open";
@@ -184,14 +187,9 @@ STDMETHODIMP ClaudeContextMenu::Invoke(IShellItemArray* psia, IBindCtx*)
     return S_OK;
 }
 STDMETHODIMP ClaudeContextMenu::GetFlags(EXPCMDFLAGS* pFlags)
-    { *pFlags = ECF_HASSUBCOMMANDS; return S_OK; }
+    { *pFlags = ECF_DEFAULT; return S_OK; }
 STDMETHODIMP ClaudeContextMenu::EnumSubCommands(IEnumExplorerCommand** ppEnum)
-{
-    auto* p = new (std::nothrow) ClaudeEnumSubCommands();
-    if (!p) return E_OUTOFMEMORY;
-    *ppEnum = p;
-    return S_OK;
-}
+    { *ppEnum = nullptr; return E_NOTIMPL; }
 
 // ── 아이콘 비트맵 ─────────────────────────────────────────────────────────────
 HBITMAP ClaudeContextMenu::GetOrCreateIconBitmap()

@@ -5,7 +5,10 @@
 #include <shobjidl.h>
 #include <string>
 
+// CLSID_Normal   = {261B2913-8ABA-420B-9280-0061626EDA5A}  구/신 컨텍스트 공통
+// CLSID_Dangerous= {261B2913-8ABA-420B-9280-0061626EDA5B}  신 컨텍스트 두 번째 항목
 extern const CLSID CLSID_ClaudeContextMenu;
+extern const CLSID CLSID_ClaudeContextMenuDangerous;
 extern HINSTANCE   g_hInst;
 extern long        g_cDllRef;
 
@@ -15,7 +18,7 @@ std::wstring FindClaudeIconSource();
 class ClaudeContextMenu : public IShellExtInit, public IContextMenu, public IExplorerCommand
 {
 public:
-    ClaudeContextMenu();
+    explicit ClaudeContextMenu(bool dangerous = false);
     ~ClaudeContextMenu();
 
     // IUnknown
@@ -26,12 +29,12 @@ public:
     // IShellExtInit
     STDMETHODIMP Initialize(PCIDLIST_ABSOLUTE pidlFolder, IDataObject* pdtobj, HKEY) override;
 
-    // IContextMenu (구 컨텍스트 메뉴)
+    // IContextMenu (구 컨텍스트 메뉴 — Normal 인스턴스에서 서브메뉴 2개 제공)
     STDMETHODIMP QueryContextMenu(HMENU hmenu, UINT indexMenu, UINT idCmdFirst, UINT idCmdLast, UINT uFlags) override;
     STDMETHODIMP InvokeCommand(LPCMINVOKECOMMANDINFO pici) override;
     STDMETHODIMP GetCommandString(UINT_PTR idCmd, UINT uType, UINT*, CHAR*, UINT) override;
 
-    // IExplorerCommand (신 컨텍스트 메뉴 — 부모 노드)
+    // IExplorerCommand (신 컨텍스트 메뉴 — ECF_DEFAULT, 서브메뉴 없음)
     STDMETHODIMP GetTitle(IShellItemArray*, LPWSTR* ppszName) override;
     STDMETHODIMP GetIcon(IShellItemArray*, LPWSTR* ppszIcon) override;
     STDMETHODIMP GetToolTip(IShellItemArray*, LPWSTR* ppszTip) override;
@@ -43,6 +46,7 @@ public:
 
 private:
     long          m_cRef;
+    bool          m_dangerous;   // true = --dangerously-skip-permissions
     std::wstring  m_folderPath;
     HMENU         m_hSubMenu;
 

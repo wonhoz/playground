@@ -378,7 +378,8 @@ namespace StayAwake
         private async void SimulateNow()
         {
             // UI 차단 방지: SimulateActivity()는 Thread.Sleep(110ms) 포함 → 배경 스레드에서 실행
-            bool simulated = await Task.Run(() => _simulator.SimulateActivity());
+            // 수동 실행이므로 메뉴 클릭에 의한 사용자 활동 감지를 무시하고 강제 실행
+            bool simulated = await Task.Run(() => _simulator.SimulateActivity(forceSimulate: true));
             if (simulated)
                 _dailySimCount++;
             else

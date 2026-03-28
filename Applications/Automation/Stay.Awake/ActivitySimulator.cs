@@ -103,8 +103,9 @@ namespace StayAwake
         /// <summary>
         /// 활동 시뮬레이션 실행
         /// </summary>
+        /// <param name="forceSimulate">true이면 사용자 활동 여부와 무관하게 강제 실행</param>
         /// <returns>실제로 시뮬레이션이 실행되면 true, 사용자 활동으로 인해 건너뛰면 false</returns>
-        public bool SimulateActivity()
+        public bool SimulateActivity(bool forceSimulate = false)
         {
             try
             {
@@ -115,7 +116,8 @@ namespace StayAwake
                 }
 
                 // 사용자가 최근에 활동 중이면 마우스/키보드 시뮬레이션 건너뛰기
-                if (SkipIfUserActive && IsUserRecentlyActive())
+                // (강제 실행 시에는 건너뛰기 로직 무시)
+                if (!forceSimulate && SkipIfUserActive && IsUserRecentlyActive())
                 {
                     return false;
                 }

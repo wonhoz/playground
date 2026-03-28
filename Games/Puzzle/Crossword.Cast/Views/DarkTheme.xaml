@@ -17,7 +17,8 @@
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="1" CornerRadius="4"
                             Padding="{TemplateBinding Padding}">
-                        <ScrollViewer x:Name="PART_ContentHost" Focusable="False" Margin="0"/>
+                        <ScrollViewer x:Name="PART_ContentHost" Focusable="False" Margin="0"
+                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsFocused" Value="True">

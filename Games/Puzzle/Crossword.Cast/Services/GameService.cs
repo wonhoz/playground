@@ -14,7 +14,7 @@ public class GameService
 
     public void NewPuzzle(int? seed = null)
     {
-        _seed         = seed ?? (int)DateTime.Now.Ticks;
+        _seed         = seed ?? (int)(DateTime.Now.Ticks & 0x7FFFFFFF);
         CurrentPuzzle = PuzzleGenerator.Generate(_seed);
         _user         = new char[Puzzle.N, Puzzle.N];
     }

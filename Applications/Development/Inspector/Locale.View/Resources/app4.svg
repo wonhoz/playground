@@ -1,97 +1,50 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
   <defs>
-    <linearGradient id="bg_lv02" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#E8F4FD"/>
-      <stop offset="60%" stop-color="#B3D9F5"/>
-      <stop offset="100%" stop-color="#7BBCE8"/>
-    </linearGradient>
-    <linearGradient id="sky" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#87CEEB"/>
-      <stop offset="100%" stop-color="#B0E0FF"/>
-    </linearGradient>
-    <linearGradient id="ground" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#90EE90"/>
-      <stop offset="100%" stop-color="#228B22"/>
-    </linearGradient>
-    <filter id="shadow_lv02">
-      <feDropShadow dx="2" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.2"/>
-    </filter>
+    <clipPath id="lv2-clip">
+      <rect width="1024" height="1024" rx="180"/>
+    </clipPath>
+    <radialGradient id="lv2-bg" cx="50%" cy="50%" r="65%">
+      <stop offset="0%" stop-color="#C87800"/>
+      <stop offset="100%" stop-color="#7A4200"/>
+    </radialGradient>
   </defs>
+  <g clip-path="url(#lv2-clip)">
+    <!-- Background: Deep Amber -->
+    <rect width="1024" height="1024" fill="url(#lv2-bg)"/>
+    <!-- Subtle radial overlay -->
+    <circle cx="512" cy="512" r="380" fill="#A06000" opacity="0.25"/>
 
-  <!-- Layer 1: 배경 -->
-  <rect width="1024" height="1024" rx="190" fill="url(#bg_lv02)"/>
-  <!-- 구름들 -->
-  <ellipse cx="250" cy="240" rx="90" ry="40" fill="#FFFFFF" fill-opacity="0.8"/>
-  <ellipse cx="190" cy="230" rx="60" ry="36" fill="#FFFFFF" fill-opacity="0.8"/>
-  <ellipse cx="320" cy="235" rx="70" ry="32" fill="#FFFFFF" fill-opacity="0.7"/>
-  <ellipse cx="760" cy="260" rx="80" ry="36" fill="#FFFFFF" fill-opacity="0.7"/>
-  <ellipse cx="820" cy="250" rx="55" ry="30" fill="#FFFFFF" fill-opacity="0.7"/>
-  <!-- 지평선 -->
-  <rect x="0" y="720" width="1024" height="304" rx="0" fill="url(#ground)"/>
-  <rect x="0" y="718" width="1024" height="16" fill="#5CB85C" fill-opacity="0.6"/>
+    <!-- Currency symbols flowing diagonally (white, large) -->
+    <g font-family="Arial, sans-serif" font-weight="bold" fill="#FFFFFF">
+      <!-- $ Dollar -->
+      <text x="220" y="350" font-size="160" opacity="0.95">$</text>
+      <!-- ¥ Yen -->
+      <text x="440" y="280" font-size="140" opacity="0.9">¥</text>
+      <!-- € Euro -->
+      <text x="660" y="360" font-size="150" opacity="0.88">€</text>
+      <!-- ₩ Won -->
+      <text x="240" y="560" font-size="130" opacity="0.82">₩</text>
+      <!-- £ Pound -->
+      <text x="500" y="520" font-size="140" opacity="0.85">£</text>
+      <!-- ₹ Rupee -->
+      <text x="720" y="560" font-size="120" opacity="0.75">₹</text>
+      <!-- ₿ Bitcoin (smaller accent) -->
+      <text x="320" y="740" font-size="100" opacity="0.65">₿</text>
+      <!-- ₺ Lira -->
+      <text x="580" y="720" font-size="100" opacity="0.60">₺</text>
+      <!-- CHF accent -->
+      <text x="730" y="720" font-size="80" opacity="0.50">Fr</text>
+    </g>
 
-  <!-- Layer 2: 국기들 (5개) -->
-  <!-- 국기 폴 -->
-  <line x1="210" y1="380" x2="210" y2="720" stroke="#8B6914" stroke-width="14" stroke-linecap="round"/>
-  <line x1="370" y1="350" x2="370" y2="720" stroke="#8B6914" stroke-width="14" stroke-linecap="round"/>
-  <line x1="530" y1="330" x2="530" y2="720" stroke="#8B6914" stroke-width="14" stroke-linecap="round"/>
-  <line x1="690" y1="350" x2="690" y2="720" stroke="#8B6914" stroke-width="14" stroke-linecap="round"/>
-  <line x1="850" y1="380" x2="850" y2="720" stroke="#8B6914" stroke-width="14" stroke-linecap="round"/>
+    <!-- Flowing motion lines (diagonal streaks) -->
+    <g stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" opacity="0.15">
+      <line x1="200" y1="200" x2="824" y2="824"/>
+      <line x1="180" y1="280" x2="700" y2="800"/>
+      <line x1="300" y1="180" x2="900" y2="780"/>
+    </g>
 
-  <!-- 국기 1: 일본 (흰+빨간점) -->
-  <rect x="210" y="300" width="140" height="95" rx="4" fill="#FFFFFF" filter="url(#shadow_lv02)"/>
-  <circle cx="280" cy="347" r="30" fill="#BC002D"/>
-
-  <!-- 국기 2: 독일 (3색) -->
-  <rect x="370" y="272" width="140" height="90" rx="4" fill="#000000" filter="url(#shadow_lv02)"/>
-  <rect x="370" y="302" width="140" height="30" fill="#DD0000"/>
-  <rect x="370" y="332" width="140" height="30" fill="#FFCE00"/>
-
-  <!-- 국기 3: 미국 (성조기 단순화) -->
-  <rect x="530" y="252" width="140" height="90" rx="4" fill="#B22234" filter="url(#shadow_lv02)"/>
-  <rect x="530" y="268" width="140" height="12" fill="#FFFFFF"/>
-  <rect x="530" y="292" width="140" height="12" fill="#FFFFFF"/>
-  <rect x="530" y="316" width="140" height="12" fill="#FFFFFF"/>
-  <rect x="530" y="252" width="58" height="54" fill="#3C3B6E"/>
-  <!-- 별들 (간략화) -->
-  <circle cx="546" cy="264" r="4" fill="#FFFFFF"/>
-  <circle cx="564" cy="264" r="4" fill="#FFFFFF"/>
-  <circle cx="582" cy="264" r="4" fill="#FFFFFF"/>
-  <circle cx="546" cy="278" r="4" fill="#FFFFFF"/>
-  <circle cx="564" cy="278" r="4" fill="#FFFFFF"/>
-  <circle cx="582" cy="278" r="4" fill="#FFFFFF"/>
-  <circle cx="546" cy="292" r="4" fill="#FFFFFF"/>
-  <circle cx="564" cy="292" r="4" fill="#FFFFFF"/>
-  <circle cx="582" cy="292" r="4" fill="#FFFFFF"/>
-
-  <!-- 국기 4: 프랑스 (3색 수직) -->
-  <rect x="690" y="272" width="140" height="90" rx="4" fill="#ED2939" filter="url(#shadow_lv02)"/>
-  <rect x="690" y="272" width="47" height="90" fill="#002395"/>
-  <rect x="737" y="272" width="46" height="90" fill="#FFFFFF"/>
-
-  <!-- 국기 5: 한국 -->
-  <rect x="850" y="300" width="140" height="92" rx="4" fill="#FFFFFF" filter="url(#shadow_lv02)"/>
-  <!-- 태극문양 -->
-  <circle cx="920" cy="346" r="28" fill="none" stroke="#CD2E3A" stroke-width="2"/>
-  <path d="M 892 346 A 14 14 0 0 1 920 346 A 14 14 0 0 0 948 346" fill="#CD2E3A"/>
-  <path d="M 892 346 A 14 14 0 0 0 920 346 A 14 14 0 0 1 948 346" fill="#003478"/>
-  <!-- 괘 (간략) -->
-  <line x1="900" y1="320" x2="940" y2="320" stroke="#000000" stroke-width="4"/>
-  <line x1="900" y1="370" x2="940" y2="370" stroke="#000000" stroke-width="4"/>
-
-  <!-- Layer 3: 국가명/로케일 라벨 -->
-  <rect x="186" y="734" width="94" height="26" rx="8" fill="#1565C0" fill-opacity="0.8"/>
-  <text x="233" y="752" font-size="16" text-anchor="middle" fill="#FFFFFF" font-family="sans-serif">ja-JP</text>
-
-  <rect x="346" y="734" width="94" height="26" rx="8" fill="#1565C0" fill-opacity="0.8"/>
-  <text x="393" y="752" font-size="16" text-anchor="middle" fill="#FFFFFF" font-family="sans-serif">de-DE</text>
-
-  <rect x="506" y="734" width="94" height="26" rx="8" fill="#1565C0" fill-opacity="0.8"/>
-  <text x="553" y="752" font-size="16" text-anchor="middle" fill="#FFFFFF" font-family="sans-serif">en-US</text>
-
-  <rect x="666" y="734" width="94" height="26" rx="8" fill="#1565C0" fill-opacity="0.8"/>
-  <text x="713" y="752" font-size="16" text-anchor="middle" fill="#FFFFFF" font-family="sans-serif">fr-FR</text>
-
-  <rect x="826" y="734" width="94" height="26" rx="8" fill="#1565C0" fill-opacity="0.8"/>
-  <text x="873" y="752" font-size="16" text-anchor="middle" fill="#FFFFFF" font-family="sans-serif">ko-KR</text>
+    <!-- Corner accents -->
+    <circle cx="820" cy="220" r="22" fill="#7A4200" opacity="0.5"/>
+    <circle cx="210" cy="800" r="28" fill="#7A4200" opacity="0.4"/>
+  </g>
 </svg>

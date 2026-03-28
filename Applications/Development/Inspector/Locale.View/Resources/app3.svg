@@ -1,50 +1,42 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_03: metaphor | 통화 기호 + 날짜 텍스트 조각들이 무지개 줄무늬 위에 | 기하학 추상 | 비비드 무지개 배경 -->
   <defs>
-    <clipPath id="lv2-clip">
-      <rect width="1024" height="1024" rx="180"/>
+    <clipPath id="roundClip">
+      <rect width="1024" height="1024" rx="190"/>
     </clipPath>
-    <radialGradient id="lv2-bg" cx="50%" cy="50%" r="65%">
-      <stop offset="0%" stop-color="#C87800"/>
-      <stop offset="100%" stop-color="#7A4200"/>
-    </radialGradient>
   </defs>
-  <g clip-path="url(#lv2-clip)">
-    <!-- Background: Deep Amber -->
-    <rect width="1024" height="1024" fill="url(#lv2-bg)"/>
-    <!-- Subtle radial overlay -->
-    <circle cx="512" cy="512" r="380" fill="#A06000" opacity="0.25"/>
 
-    <!-- Currency symbols flowing diagonally (white, large) -->
-    <g font-family="Arial, sans-serif" font-weight="bold" fill="#FFFFFF">
-      <!-- $ Dollar -->
-      <text x="220" y="350" font-size="160" opacity="0.95">$</text>
-      <!-- ¥ Yen -->
-      <text x="440" y="280" font-size="140" opacity="0.9">¥</text>
-      <!-- € Euro -->
-      <text x="660" y="360" font-size="150" opacity="0.88">€</text>
-      <!-- ₩ Won -->
-      <text x="240" y="560" font-size="130" opacity="0.82">₩</text>
-      <!-- £ Pound -->
-      <text x="500" y="520" font-size="140" opacity="0.85">£</text>
-      <!-- ₹ Rupee -->
-      <text x="720" y="560" font-size="120" opacity="0.75">₹</text>
-      <!-- ₿ Bitcoin (smaller accent) -->
-      <text x="320" y="740" font-size="100" opacity="0.65">₿</text>
-      <!-- ₺ Lira -->
-      <text x="580" y="720" font-size="100" opacity="0.60">₺</text>
-      <!-- CHF accent -->
-      <text x="730" y="720" font-size="80" opacity="0.50">Fr</text>
-    </g>
-
-    <!-- Flowing motion lines (diagonal streaks) -->
-    <g stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" opacity="0.15">
-      <line x1="200" y1="200" x2="824" y2="824"/>
-      <line x1="180" y1="280" x2="700" y2="800"/>
-      <line x1="300" y1="180" x2="900" y2="780"/>
-    </g>
-
-    <!-- Corner accents -->
-    <circle cx="820" cy="220" r="22" fill="#7A4200" opacity="0.5"/>
-    <circle cx="210" cy="800" r="28" fill="#7A4200" opacity="0.4"/>
+  <!-- Layer 1: 무지개 스트라이프 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="#FF6B6B"/>
+  <g clip-path="url(#roundClip)">
+    <rect x="0" y="0" width="1024" height="175" fill="#FF6B6B"/>
+    <rect x="0" y="175" width="1024" height="174" fill="#FF9F43"/>
+    <rect x="0" y="349" width="1024" height="174" fill="#F7D060"/>
+    <rect x="0" y="523" width="1024" height="174" fill="#48C774"/>
+    <rect x="0" y="697" width="1024" height="327" fill="#3A9BDC"/>
   </g>
+
+  <!-- Layer 2: 흰 카드 메인 -->
+  <rect x="140" y="170" width="744" height="560" rx="32" fill="white" opacity="0.92"/>
+
+  <!-- Layer 3: 통화 기호들 4개 큰 -->
+  <text x="260" y="420" text-anchor="middle" dominant-baseline="middle"
+        font-family="Arial, sans-serif" font-size="230" font-weight="bold" fill="#FF6B6B">$</text>
+  <text x="512" y="420" text-anchor="middle" dominant-baseline="middle"
+        font-family="Arial, sans-serif" font-size="230" font-weight="bold" fill="#FF9F43">€</text>
+  <text x="764" y="420" text-anchor="middle" dominant-baseline="middle"
+        font-family="Arial, sans-serif" font-size="230" font-weight="bold" fill="#48C774">¥</text>
+
+  <!-- 하단 작은 날짜 포맷 힌트 -->
+  <rect x="160" y="620" width="290" height="52" rx="10" fill="#F0F4FF"/>
+  <text x="305" y="650" text-anchor="middle" dominant-baseline="middle"
+        font-family="Consolas, monospace" font-size="34" fill="#2A6AE8" font-weight="bold">03/25/26</text>
+
+  <rect x="480" y="620" width="280" height="52" rx="10" fill="#FFF0F8"/>
+  <text x="620" y="650" text-anchor="middle" dominant-baseline="middle"
+        font-family="Consolas, monospace" font-size="34" fill="#E83A8C" font-weight="bold">25.03.26</text>
+
+  <!-- 상단 소제목 -->
+  <text x="512" y="230" text-anchor="middle" dominant-baseline="middle"
+        font-family="Arial, sans-serif" font-size="42" font-weight="bold" fill="#888888" letter-spacing="8">LOCALE</text>
 </svg>

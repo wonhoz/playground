@@ -1,49 +1,62 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
-  <!-- icon_01: literal | 언어 코드 태그 뱃지들 쌓기 | 중앙 심볼 | 민트 배경 + 파랑 태그 + 핑크 포인트 -->
-  <!-- Layer 1: 배경 -->
-  <rect width="1024" height="1024" rx="240" fill="url(#bg1)"/>
   <defs>
-    <linearGradient id="bg1" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#A8EDDA"/>
-      <stop offset="100%" stop-color="#6DD5C0"/>
-    </linearGradient>
-    <linearGradient id="tag1" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#2A6AE8"/>
-      <stop offset="100%" stop-color="#1A4FBF"/>
-    </linearGradient>
-    <linearGradient id="tag2" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#E83A8C"/>
-      <stop offset="100%" stop-color="#BF1A6A"/>
-    </linearGradient>
-    <linearGradient id="tag3" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#F5A623"/>
-      <stop offset="100%" stop-color="#D4860A"/>
+    <linearGradient id="lbg2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#EDE7F6"/>
+      <stop offset="100%" stop-color="#9C27B0"/>
     </linearGradient>
   </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#lbg2)"/>
+  <!-- Layer 2: 뱃지들 -->
 
-  <!-- Layer 2: 메인 - 코드 태그 뱃지들 -->
-  <!-- 상단 태그: en-US -->
-  <rect x="192" y="190" width="640" height="148" rx="24" fill="url(#tag1)"/>
-  <!-- 중간 태그: ja-JP -->
-  <rect x="192" y="368" width="640" height="148" rx="24" fill="url(#tag2)"/>
-  <!-- 하단 태그: ko-KR -->
-  <rect x="192" y="546" width="640" height="148" rx="24" fill="url(#tag3)"/>
+  <!-- en-US 뱃지 (파랑) -->
+  <rect x="112" y="220" width="800" height="156" rx="36" fill="#1565C0"/>
+  <rect x="112" y="220" width="136" height="156" rx="36" fill="#0D47A1"/>
+  <!-- 미국 국기 - 수직 가운데 정렬 (badge center y=298, flag h=72 → top y=262) -->
+  <!-- 빨간 배경 (7개 빨간 줄무늬) -->
+  <rect x="124" y="262" width="112" height="72" rx="5" fill="#B22234"/>
+  <!-- 흰색 줄무늬 6개 (13줄무늬 = 빨강7 + 흰6, 각 높이 72/13≈5.54px) -->
+  <rect x="124" y="267.5" width="112" height="5.5" fill="white"/>
+  <rect x="124" y="278.5" width="112" height="5.5" fill="white"/>
+  <rect x="124" y="289.5" width="112" height="5.5" fill="white"/>
+  <rect x="124" y="300.5" width="112" height="5.5" fill="white"/>
+  <rect x="124" y="311.5" width="112" height="5.5" fill="white"/>
+  <rect x="124" y="322.5" width="112" height="5.5" fill="white"/>
+  <!-- 칸톤: 좌상단 파란 사각형 (7줄무늬 높이≈39px, 너비 플래그 폭의 40%≈45px) -->
+  <rect x="124" y="262" width="46" height="39" rx="3" fill="#3C3B6E"/>
+  <!-- 별 점들: 3-2-3 교차 배열 (칸톤 124~170, y 262~301) -->
+  <circle cx="133" cy="271" r="3.2" fill="white"/>
+  <circle cx="147" cy="271" r="3.2" fill="white"/>
+  <circle cx="161" cy="271" r="3.2" fill="white"/>
+  <circle cx="140" cy="282" r="3.2" fill="white"/>
+  <circle cx="154" cy="282" r="3.2" fill="white"/>
+  <circle cx="133" cy="293" r="3.2" fill="white"/>
+  <circle cx="147" cy="293" r="3.2" fill="white"/>
+  <circle cx="161" cy="293" r="3.2" fill="white"/>
+  <text x="270" y="312" font-family="'Courier New', monospace" font-size="96" fill="white" font-weight="bold">en-US</text>
 
-  <!-- Layer 3: 텍스트 디테일 -->
-  <text x="512" y="291" text-anchor="middle" dominant-baseline="middle"
-        font-family="Consolas, monospace" font-size="92" font-weight="bold" fill="white" letter-spacing="2">en-US</text>
-  <text x="512" y="469" text-anchor="middle" dominant-baseline="middle"
-        font-family="Consolas, monospace" font-size="92" font-weight="bold" fill="white" letter-spacing="2">ja-JP</text>
-  <text x="512" y="647" text-anchor="middle" dominant-baseline="middle"
-        font-family="Consolas, monospace" font-size="92" font-weight="bold" fill="white" letter-spacing="2">ko-KR</text>
+  <!-- ja-JP 뱃지 (빨강) -->
+  <rect x="112" y="428" width="800" height="156" rx="36" fill="#C62828"/>
+  <rect x="112" y="428" width="136" height="156" rx="36" fill="#B71C1C"/>
+  <!-- 일본 국기: 흰색 배경 + 빨간 원 -->
+  <circle cx="180" cy="506" r="52" fill="white"/>
+  <circle cx="180" cy="506" r="32" fill="#C62828"/>
+  <text x="270" y="520" font-family="'Courier New', monospace" font-size="96" fill="white" font-weight="bold">ja-JP</text>
 
-  <!-- 작은 dot 장식 -->
-  <circle cx="220" cy="264" r="12" fill="white" opacity="0.4"/>
-  <circle cx="220" cy="442" r="12" fill="white" opacity="0.4"/>
-  <circle cx="220" cy="620" r="12" fill="white" opacity="0.4"/>
+  <!-- ko-KR 뱃지 (초록) -->
+  <rect x="112" y="636" width="800" height="156" rx="36" fill="#1B5E20"/>
+  <rect x="112" y="636" width="136" height="156" rx="36" fill="#2E7D32"/>
+  <!-- 태극문양: 정확한 S자 yin-yang (위=빨강/양, 아래=파랑/음) -->
+  <!-- R=46, r=23 (반지름의 절반). 중심 (180,714), 좌끝=(134,714), 우끝=(226,714) -->
+  <!-- 흰색 외곽 테두리 -->
+  <circle cx="180" cy="714" r="52" fill="white"/>
+  <!-- 태극 S자 (30도 시계방향 회전) -->
+  <g transform="rotate(30, 180, 714)">
+    <circle cx="180" cy="714" r="46" fill="#003478"/>
+    <path d="M 134,714 A 46,46 0 0,1 226,714 A 23,23 0 0,0 180,714 A 23,23 0 0,1 134,714 Z" fill="#CD2E3A"/>
+  </g>
+  <text x="270" y="728" font-family="'Courier New', monospace" font-size="96" fill="white" font-weight="bold">ko-KR</text>
 
-  <!-- 하단 소형 지시선 장식 -->
-  <rect x="240" y="736" width="200" height="14" rx="7" fill="#1A7A5E" opacity="0.5"/>
-  <rect x="460" y="736" width="140" height="14" rx="7" fill="#1A7A5E" opacity="0.35"/>
-  <rect x="620" y="736" width="160" height="14" rx="7" fill="#1A7A5E" opacity="0.25"/>
+  <!-- Layer 3: 제목 레이블 -->
+  <text x="512" y="856" font-family="Arial" font-size="68" fill="white" text-anchor="middle" font-weight="bold" opacity="0.9">CultureInfo</text>
 </svg>

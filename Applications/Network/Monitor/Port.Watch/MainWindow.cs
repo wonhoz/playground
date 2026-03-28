@@ -23,32 +23,39 @@ public sealed class MainWindow : Form
     private readonly TextBox      _searchBox;
     private readonly Label        _statusLabel;
     private readonly Button       _btnRefresh;
+    private readonly Button       _btnInterval;
+    private readonly Button       _btnHelp;
     private readonly CheckBox     _chkAuto;
     private readonly CheckBox     _chkFavOnly;
     private readonly System.Windows.Forms.Timer _autoTimer;
+
+    private static readonly int[] _intervals  = [3, 5, 10, 30];
+    private int                    _intervalIdx = 1;  // 기본 5초
 
     private List<PortEntry> _allEntries   = [];
     private HashSet<int>    _prevOccupied = [];
     private Panel?          _sbCorner;
     private bool            _fixingCorner;
+    private bool            _initialized;
 
     public MainWindow()
     {
         Text = "Port.Watch \u2014 포트 & 프로세스 모니터";
         Size = new Size(1120, 700);
         MinimumSize = new Size(820, 520);
-        BackColor = Color.FromArgb(18, 18, 28);
-        ForeColor = Color.FromArgb(220, 220, 230);
+        BackColor = Color.FromArgb(16, 22, 16);
+        ForeColor = Color.FromArgb(215, 235, 218);
         Font = new Font("Segoe UI", 9.5f);
         StartPosition = FormStartPosition.CenterScreen;
-        Icon = CreateAppIcon();
+        var icoPath = Path.Combine(AppContext.BaseDirectory, "Resources", "app.ico");
+        Icon = File.Exists(icoPath) ? new Icon(icoPath) : CreateAppIcon();
 
         // ── 상단 툴바 ────────────────────────────────────────────
         var toolbar = new Panel
         {
             Dock = DockStyle.Top,
             Height = 54,
-            BackColor = Color.FromArgb(22, 22, 34),
+            BackColor = Color.FromArgb(18, 26, 18),
             Padding = new Padding(12, 10, 12, 10)
         };
 
@@ -67,8 +74,8 @@ public sealed class MainWindow : Form
         {
             PlaceholderText = "포트 번호 또는 프로세스 이름...",
             Dock = DockStyle.Fill,
-            BackColor = Color.FromArgb(30, 30, 46),
-            ForeColor = Color.FromArgb(220, 220, 230),
+            BackColor = Color.FromArgb(22, 34, 22),
+            ForeColor = Color.FromArgb(215, 235, 218),
             BorderStyle = BorderStyle.None,
             Font = new Font("Segoe UI", 9.5f)
         };
@@ -78,7 +85,7 @@ public sealed class MainWindow : Form
         {
             Location = new Point(44, (54 - txH - 2) / 2),  // 툴바 내 수직 중앙 정렬
             Size = new Size(302, txH + 2),  // 정확한 높이: 내부 텍스트 + 위아래 1px 보더
-            BackColor = Color.FromArgb(54, 54, 76),
+            BackColor = Color.FromArgb(44, 68, 44),
             Padding = new Padding(1)
         };
         searchBorder.Controls.Add(_searchBox);
@@ -86,24 +93,41 @@ public sealed class MainWindow : Form
         _btnRefresh = MakeButton("↺  새로고침", new Point(364, 12), 108);
         _btnRefresh.Click += async (_, _) => await RefreshAsync();
 
-        _chkAuto = MakeToggle("⏱ 자동 갱신", new Point(480, 12), 120);
+        _chkAuto = MakeToggle("⏱ 자동 갱신", new Point(480, 12), 116);
         _chkAuto.CheckedChanged += (_, _) =>
         {
+            if (!_initialized) return;
             _autoTimer!.Enabled = _chkAuto.Checked;
             _chkAuto.Text = _chkAuto.Checked ? "⏱ 자동 갱신 ●" : "⏱ 자동 갱신";
         };
 
-        _chkFavOnly = MakeToggle("★ 즐겨찾기만", new Point(608, 12), 118);
-        _chkFavOnly.CheckedChanged += (_, _) => ApplyFilter();
+        _btnInterval = MakeButton($"{_intervals[_intervalIdx]}s", new Point(604, 12), 44);
+        _btnInterval.Click += (_, _) =>
+        {
+            _intervalIdx = (_intervalIdx + 1) % _intervals.Length;
+            _autoTimer.Interval = _intervals[_intervalIdx] * 1000;
+            _btnInterval.Text = $"{_intervals[_intervalIdx]}s";
+        };
 
-        toolbar.Controls.AddRange([lblIcon, searchBorder, _btnRefresh, _chkAuto, _chkFavOnly]);
+        _chkFavOnly = MakeToggle("★ 즐겨찾기만", new Point(656, 12), 116);
+        _chkFavOnly.CheckedChanged += (_, _) =>
+        {
+            if (!_initialized) return;
+            ApplyFilter();
+        };
+
+        _btnHelp = MakeButton("?", new Point(780, 12), 34);
+        _btnHelp.ForeColor = Color.FromArgb(130, 200, 155);
+        _btnHelp.Click += (_, _) => ShowHelp();
+
+        toolbar.Controls.AddRange([lblIcon, searchBorder, _btnRefresh, _chkAuto, _btnInterval, _chkFavOnly, _btnHelp]);
 
         // ── DataGridView ─────────────────────────────────────────
         _grid = new DataGridView
         {
             Dock = DockStyle.Fill,
-            BackgroundColor = Color.FromArgb(16, 16, 26),
-            GridColor = Color.FromArgb(36, 36, 52),
+            BackgroundColor = Color.FromArgb(14, 22, 14),
+            GridColor = Color.FromArgb(28, 46, 28),
             BorderStyle = BorderStyle.None,
             CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal,
             SelectionMode = DataGridViewSelectionMode.FullRowSelect,
@@ -122,23 +146,23 @@ public sealed class MainWindow : Form
         };
 
         var cellStyle = _grid.DefaultCellStyle;
-        cellStyle.BackColor = Color.FromArgb(20, 20, 32);
-        cellStyle.ForeColor = Color.FromArgb(218, 218, 230);
-        cellStyle.SelectionBackColor = Color.FromArgb(38, 78, 140);
+        cellStyle.BackColor = Color.FromArgb(16, 24, 16);
+        cellStyle.ForeColor = Color.FromArgb(212, 232, 216);
+        cellStyle.SelectionBackColor = Color.FromArgb(26, 76, 44);
         cellStyle.SelectionForeColor = Color.White;
         cellStyle.Padding = new Padding(6, 0, 4, 0);
 
         var altStyle = _grid.AlternatingRowsDefaultCellStyle;
-        altStyle.BackColor = Color.FromArgb(24, 24, 38);
-        altStyle.ForeColor = Color.FromArgb(218, 218, 230);
-        altStyle.SelectionBackColor = Color.FromArgb(38, 78, 140);
+        altStyle.BackColor = Color.FromArgb(20, 30, 20);
+        altStyle.ForeColor = Color.FromArgb(212, 232, 216);
+        altStyle.SelectionBackColor = Color.FromArgb(26, 76, 44);
         altStyle.SelectionForeColor = Color.White;
 
         var hdrStyle = _grid.ColumnHeadersDefaultCellStyle;
-        hdrStyle.BackColor = Color.FromArgb(26, 26, 42);
-        hdrStyle.ForeColor = Color.FromArgb(155, 155, 190);
+        hdrStyle.BackColor = Color.FromArgb(20, 32, 20);
+        hdrStyle.ForeColor = Color.FromArgb(120, 180, 135);
         hdrStyle.Font = new Font("Segoe UI", 9f, FontStyle.Bold);
-        hdrStyle.SelectionBackColor = Color.FromArgb(26, 26, 42);
+        hdrStyle.SelectionBackColor = Color.FromArgb(20, 32, 20);
         hdrStyle.Padding = new Padding(6, 0, 4, 0);
         _grid.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
 
@@ -157,27 +181,42 @@ public sealed class MainWindow : Form
         var miKill   = new ToolStripMenuItem("⛔  프로세스 종료");
         var miPort   = new ToolStripMenuItem("📋  포트 번호 복사");
         var miPath   = new ToolStripMenuItem("📋  경로 복사");
+        var miOpen   = new ToolStripMenuItem("📂  파일 탐색기로 열기");
         var miFav    = new ToolStripMenuItem("★  즐겨찾기 토글");
         miKill.Click  += KillSelected;
         miPort.Click  += (_, _) => CopyCell("port");
         miPath.Click  += (_, _) => CopyCell("path");
+        miOpen.Click  += (_, _) =>
+        {
+            if (_grid.SelectedRows.Count > 0 && _grid.SelectedRows[0].Tag is PortEntry oe)
+                OpenInExplorer(oe.ProcessPath);
+        };
         miFav.Click   += ToggleFavorite;
-        ctx.Items.AddRange([miKill, new ToolStripSeparator(), miPort, miPath, new ToolStripSeparator(), miFav]);
+        ctx.Items.AddRange([miKill, new ToolStripSeparator(), miPort, miPath, miOpen, new ToolStripSeparator(), miFav]);
         _grid.ContextMenuStrip = ctx;
-        _grid.CellDoubleClick += (_, e) => { if (e.RowIndex >= 0) CopyCell("path"); };
+        _grid.KeyDown += (_, e) =>
+        {
+            if (e.Control && e.KeyCode == Keys.C) { CopyCell("path"); e.Handled = true; }
+        };
+        _grid.CellDoubleClick += (_, e) =>
+        {
+            if (e.RowIndex < 0) return;
+            if (_grid.Rows[e.RowIndex].Tag is PortEntry entry && !string.IsNullOrEmpty(entry.ProcessPath))
+                OpenInExplorer(entry.ProcessPath);
+        };
 
         // ── 상태바 ──────────────────────────────────────────────
         var statusBar = new Panel
         {
             Dock = DockStyle.Bottom,
             Height = 32,
-            BackColor = Color.FromArgb(20, 20, 34)
+            BackColor = Color.FromArgb(16, 26, 16)
         };
 
         _statusLabel = new Label
         {
             Text = "로딩 중...",
-            ForeColor = Color.FromArgb(110, 110, 140),
+            ForeColor = Color.FromArgb(90, 140, 100),
             Font = new Font("Segoe UI", 9f),
             TextAlign = ContentAlignment.MiddleLeft,
             Dock = DockStyle.Fill,
@@ -190,13 +229,13 @@ public sealed class MainWindow : Form
             FlatStyle = FlatStyle.Flat,
             Font = new Font("Segoe UI", 9f),
             ForeColor = Color.FromArgb(220, 90, 80),
-            BackColor = Color.FromArgb(20, 20, 34),
+            BackColor = Color.FromArgb(16, 26, 16),
             Dock = DockStyle.Right,
             Width = 150,
             Cursor = Cursors.Hand
         };
-        btnKill.FlatAppearance.BorderColor = Color.FromArgb(55, 55, 75);
-        btnKill.FlatAppearance.MouseOverBackColor = Color.FromArgb(40, 40, 56);
+        btnKill.FlatAppearance.BorderColor = Color.FromArgb(44, 68, 44);
+        btnKill.FlatAppearance.MouseOverBackColor = Color.FromArgb(30, 48, 30);
         btnKill.Click += KillSelected;
 
         // _statusLabel(index 0) → Fill, btnKill(index 1) → Right
@@ -204,13 +243,16 @@ public sealed class MainWindow : Form
         statusBar.Controls.AddRange([_statusLabel, btnKill]);
 
         // ── 자동 갱신 타이머 ─────────────────────────────────────
-        _autoTimer = new System.Windows.Forms.Timer { Interval = 5000 };
+        _autoTimer = new System.Windows.Forms.Timer { Interval = _intervals[_intervalIdx] * 1000 };
         _autoTimer.Tick += async (_, _) => await RefreshAsync();
 
         // WinForms docking: 역순(back→front)으로 처리 → Fill(_grid)이 index 0(front)이어야 나머지 후 채움
         Resize += (_, _) => { ApplyGridDarkScrollbars(); FixScrollbarCorner(); };
         _grid.Layout += (_, _) => FixScrollbarCorner();
+        FormClosing += (_, _) => SaveWindowState();
         Controls.AddRange([_grid, statusBar, toolbar]);
+        RestoreWindowState();
+        _initialized = true;
         _ = RefreshAsync();
     }
 
@@ -267,13 +309,34 @@ public sealed class MainWindow : Form
             .ToHashSet();
 
         var freed = _prevOccupied.Except(nowOccupied).ToList();
-        foreach (var port in freed)
-            BeginInvoke(() => MessageBox.Show(
-                $"포트 {port} 이(가) 해제되었습니다!",
-                "Port.Watch — 포트 해제 알림",
-                MessageBoxButtons.OK, MessageBoxIcon.Information));
+        if (freed.Count > 0)
+        {
+            var ports = string.Join(", ", freed.Select(p => $":{p}"));
+            BeginInvoke(() => ShowNotice($"⚠ 즐겨찾기 포트 해제됨 — {ports}", 5000));
+        }
 
         _prevOccupied = nowOccupied;
+    }
+
+    // 상태바에 일시 알림 표시 후 ms 경과 시 원래 상태 복원
+    private System.Windows.Forms.Timer? _noticeTimer;
+    private void ShowNotice(string message, int durationMs)
+    {
+        _statusLabel.ForeColor = Color.FromArgb(220, 170, 60);
+        _statusLabel.Text = message;
+
+        _noticeTimer?.Stop();
+        _noticeTimer?.Dispose();
+        _noticeTimer = new System.Windows.Forms.Timer { Interval = durationMs };
+        _noticeTimer.Tick += (_, _) =>
+        {
+            _noticeTimer.Stop();
+            _noticeTimer.Dispose();
+            _noticeTimer = null;
+            _statusLabel.ForeColor = Color.FromArgb(90, 140, 100);
+            ApplyFilter();  // 상태 텍스트 복원
+        };
+        _noticeTimer.Start();
     }
 
     private void ApplyFilter()
@@ -288,7 +351,8 @@ public sealed class MainWindow : Form
                 e.LocalPort.ToString().Contains(search) ||
                 e.ProcessName.ToLower().Contains(search) ||
                 e.Protocol.ToLower().Contains(search) ||
-                e.State.ToLower().Contains(search));
+                e.State.ToLower().Contains(search) ||
+                e.RemoteAddr.ToLower().Contains(search));
 
         var list = rows.ToList();
 
@@ -331,8 +395,12 @@ public sealed class MainWindow : Form
         }
 
         _grid.ResumeLayout();
+        var tcpCount  = list.Count(e => e.Protocol == "TCP");
+        var udpCount  = list.Count(e => e.Protocol == "UDP");
+        var procCount = list.Select(e => e.Pid).Distinct().Count(p => p > 0);
+        _statusLabel.ForeColor = Color.FromArgb(90, 140, 100);
         _statusLabel.Text =
-            $"총 {list.Count}개 항목  |  즐겨찾기 {list.Count(e => e.IsFavorite)}개  |  마지막 갱신: {DateTime.Now:HH:mm:ss}";
+            $"총 {list.Count}개  |  TCP {tcpCount} · UDP {udpCount}  |  프로세스 {procCount}개  |  즐겨찾기 {list.Count(e => e.IsFavorite)}개  |  {DateTime.Now:HH:mm:ss}";
 
         // 데이터 로드 후 스크롤바 다크 테마 재적용
         ApplyGridDarkScrollbars();
@@ -381,6 +449,93 @@ public sealed class MainWindow : Form
         ApplyFilter();
     }
 
+    // ── 파일 탐색기로 열기 ───────────────────────────────────────
+    private static void OpenInExplorer(string path)
+    {
+        if (string.IsNullOrEmpty(path)) return;
+        try
+        {
+            if (File.Exists(path))
+                Process.Start("explorer.exe", $"/select,\"{path}\"");
+            else if (Directory.Exists(path))
+                Process.Start("explorer.exe", $"\"{path}\"");
+        }
+        catch { }
+    }
+
+    // ── 도움말 팝업 ──────────────────────────────────────────────
+    private void ShowHelp()
+    {
+        var help = """
+            Port.Watch — 사용 방법
+
+            ── 기본 조작 ──────────────────
+            Ctrl+C          선택 행 경로 복사
+            더블 클릭       파일 탐색기로 위치 열기
+
+            ── 툴바 ────────────────────────
+            새로고침        포트 목록 수동 갱신
+            자동 갱신       켜면 자동 주기 갱신
+            3s / 5s / 10s / 30s  갱신 간격 순환 선택
+            즐겨찾기만      즐겨찾기 포트만 표시
+
+            ── 검색 ────────────────────────
+            포트 번호, 프로세스명, 프로토콜,
+            상태, 원격 주소로 실시간 필터링
+
+            ── 우클릭 메뉴 ─────────────────
+            프로세스 종료   선택 프로세스 Kill
+            포트 번호 복사  클립보드에 포트 복사
+            경로 복사       실행 파일 경로 복사
+            파일 탐색기     실행 위치 탐색기 열기
+            즐겨찾기 토글   즐겨찾기 추가/제거
+
+            ── 즐겨찾기 포트 해제 알림 ─────
+            즐겨찾기 포트가 닫히면 상태바에
+            5초간 알림 표시
+            """;
+        MessageBox.Show(help, "Port.Watch 도움말", MessageBoxButtons.OK, MessageBoxIcon.Information);
+    }
+
+    // ── 창 크기/위치 영속성 ──────────────────────────────────────
+    private static readonly string _settingsPath = Path.Combine(
+        Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+        "PortWatch", "settings.json");
+
+    private record WindowBounds(int X, int Y, int Width, int Height);
+
+    private void SaveWindowState()
+    {
+        if (WindowState == FormWindowState.Minimized) return;
+        try
+        {
+            Directory.CreateDirectory(Path.GetDirectoryName(_settingsPath)!);
+            System.IO.File.WriteAllText(_settingsPath,
+                System.Text.Json.JsonSerializer.Serialize(new WindowBounds(Left, Top, Width, Height)));
+        }
+        catch { }
+    }
+
+    private void RestoreWindowState()
+    {
+        try
+        {
+            if (!System.IO.File.Exists(_settingsPath)) return;
+            var s = System.Text.Json.JsonSerializer.Deserialize<WindowBounds>(
+                System.IO.File.ReadAllText(_settingsPath));
+            if (s is null) return;
+            var screen = Screen.GetWorkingArea(new System.Drawing.Point(s.X, s.Y));
+            if (s.Width  >= MinimumSize.Width && s.Height >= MinimumSize.Height
+                && s.X   >= screen.Left - 200  && s.Y    >= screen.Top - 100
+                && s.X   <= screen.Right - 100)
+            {
+                StartPosition = FormStartPosition.Manual;
+                SetBounds(s.X, s.Y, s.Width, s.Height);
+            }
+        }
+        catch { }
+    }
+
     // ── UI 팩토리 ─────────────────────────────────────────────────
     private static Button MakeButton(string text, Point loc, int width)
     {
@@ -388,12 +543,12 @@ public sealed class MainWindow : Form
         {
             Text = text, Location = loc, Size = new Size(width, 30),
             FlatStyle = FlatStyle.Flat,
-            BackColor = Color.FromArgb(36, 36, 56),
-            ForeColor = Color.FromArgb(200, 200, 222),
+            BackColor = Color.FromArgb(24, 40, 24),
+            ForeColor = Color.FromArgb(190, 225, 198),
             Font = new Font("Segoe UI", 9.5f), Cursor = Cursors.Hand
         };
-        btn.FlatAppearance.BorderColor = Color.FromArgb(54, 54, 76);
-        btn.FlatAppearance.MouseOverBackColor = Color.FromArgb(52, 52, 74);
+        btn.FlatAppearance.BorderColor = Color.FromArgb(44, 72, 46);
+        btn.FlatAppearance.MouseOverBackColor = Color.FromArgb(36, 58, 36);
         return btn;
     }
 
@@ -403,15 +558,15 @@ public sealed class MainWindow : Form
         {
             Text = text, Location = loc, Size = new Size(width, 30),
             Appearance = Appearance.Button, FlatStyle = FlatStyle.Flat,
-            BackColor = Color.FromArgb(36, 36, 56),
-            ForeColor = Color.FromArgb(170, 170, 200),
+            BackColor = Color.FromArgb(24, 40, 24),
+            ForeColor = Color.FromArgb(155, 200, 165),
             Font = new Font("Segoe UI", 9.5f),
             TextAlign = ContentAlignment.MiddleCenter,
             Cursor = Cursors.Hand
         };
-        chk.FlatAppearance.CheckedBackColor = Color.FromArgb(24, 74, 50);
-        chk.FlatAppearance.BorderColor = Color.FromArgb(54, 54, 76);
-        chk.FlatAppearance.MouseOverBackColor = Color.FromArgb(52, 52, 74);
+        chk.FlatAppearance.CheckedBackColor = Color.FromArgb(20, 74, 40);
+        chk.FlatAppearance.BorderColor = Color.FromArgb(44, 72, 46);
+        chk.FlatAppearance.MouseOverBackColor = Color.FromArgb(36, 58, 36);
         return chk;
     }
 
@@ -421,19 +576,19 @@ public sealed class MainWindow : Form
         var bmp = new Bitmap(32, 32);
         using var g = Graphics.FromImage(bmp);
         g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-        g.Clear(Color.FromArgb(16, 16, 28));
+        g.Clear(Color.FromArgb(10, 22, 10));
 
         // 소켓 모양: 두 핀
-        using var pinBrush = new SolidBrush(Color.FromArgb(100, 210, 255));
+        using var pinBrush = new SolidBrush(Color.FromArgb(0, 210, 120));
         g.FillRectangle(pinBrush, 8, 5, 5, 12);
         g.FillRectangle(pinBrush, 19, 5, 5, 12);
 
         // 소켓 본체
-        using var bodyBrush = new SolidBrush(Color.FromArgb(70, 140, 220));
+        using var bodyBrush = new SolidBrush(Color.FromArgb(0, 160, 80));
         g.FillRoundedRect(bodyBrush, new RectangleF(4, 14, 24, 14), 4);
 
-        // 신호선 (녹색 펄스)
-        using var dotBrush = new SolidBrush(Color.FromArgb(80, 220, 140));
+        // 신호선 (에메랄드 펄스)
+        using var dotBrush = new SolidBrush(Color.FromArgb(0, 230, 118));
         g.FillEllipse(dotBrush, 13, 18, 6, 6);
 
         return Icon.FromHandle(bmp.GetHicon());
@@ -478,7 +633,7 @@ public sealed class MainWindow : Form
             {
                 if (_sbCorner == null)
                 {
-                    _sbCorner = new Panel { BackColor = Color.FromArgb(20, 20, 32), BorderStyle = BorderStyle.None };
+                    _sbCorner = new Panel { BackColor = Color.FromArgb(16, 24, 16), BorderStyle = BorderStyle.None };
                     _grid.Controls.Add(_sbCorner);
                 }
                 _sbCorner.Bounds  = new Rectangle(vSb.Left, hSb.Top, vSb.Width, hSb.Height);
@@ -495,7 +650,11 @@ public sealed class MainWindow : Form
 
     protected override void Dispose(bool disposing)
     {
-        if (disposing) _autoTimer.Dispose();
+        if (disposing)
+        {
+            _autoTimer.Dispose();
+            _noticeTimer?.Dispose();
+        }
         base.Dispose(disposing);
     }
 }

@@ -1,43 +1,45 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#212121"/>
-      <stop offset="100%" stop-color="#37474f"/>
-    </linearGradient>
-    <radialGradient id="gearGlow" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#00e5ff" stop-opacity="0.3"/>
-      <stop offset="100%" stop-color="#00e5ff" stop-opacity="0"/>
-    </radialGradient>
-    <linearGradient id="gearGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#00e5ff"/>
-      <stop offset="100%" stop-color="#0097a7"/>
-    </linearGradient>
-    <linearGradient id="fileGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#546e7a"/>
-      <stop offset="100%" stop-color="#37474f"/>
-    </linearGradient>
+    <clipPath id="clip02">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
   </defs>
-  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
-  <!-- Gear glow -->
-  <circle cx="290" cy="290" r="160" fill="url(#gearGlow)"/>
-  <!-- File -->
-  <rect x="90" y="120" width="200" height="260" rx="10" fill="url(#fileGrad)"/>
-  <polygon points="250,120 290,160 250,160" fill="#263238"/>
-  <polygon points="250,120 290,120 290,160" fill="#78909c"/>
-  <rect x="115" y="200" width="150" height="10" rx="5" fill="#00e5ff" opacity="0.5"/>
-  <rect x="115" y="225" width="120" height="10" rx="5" fill="#00e5ff" opacity="0.4"/>
-  <rect x="115" y="250" width="135" height="10" rx="5" fill="#00e5ff" opacity="0.3"/>
-  <!-- Gear body -->
-  <circle cx="310" cy="310" r="100" fill="url(#gearGrad)" opacity="0.9"/>
-  <circle cx="310" cy="310" r="60" fill="#212121"/>
-  <circle cx="310" cy="310" r="25" fill="url(#gearGrad)"/>
-  <!-- Gear teeth -->
-  <rect x="295" y="195" width="30" height="35" rx="5" fill="url(#gearGrad)"/>
-  <rect x="295" y="390" width="30" height="35" rx="5" fill="url(#gearGrad)"/>
-  <rect x="195" y="295" width="35" height="30" rx="5" fill="url(#gearGrad)"/>
-  <rect x="390" y="295" width="35" height="30" rx="5" fill="url(#gearGrad)"/>
-  <rect x="228" y="228" width="28" height="28" rx="5" fill="url(#gearGrad)" transform="rotate(45 242 242)"/>
-  <rect x="366" y="228" width="28" height="28" rx="5" fill="url(#gearGrad)" transform="rotate(45 380 242)"/>
-  <rect x="228" y="366" width="28" height="28" rx="5" fill="url(#gearGrad)" transform="rotate(45 242 380)"/>
-  <rect x="366" y="366" width="28" height="28" rx="5" fill="url(#gearGrad)" transform="rotate(45 380 380)"/>
+
+  <!-- Layer 1: Background – warm cream -->
+  <rect width="1024" height="1024" rx="190" fill="#FFF8DC"/>
+
+  <g clip-path="url(#clip02)">
+    <!-- Layer 2: File icon (folded corner) -->
+    <!-- File body -->
+    <path d="M240,180 L680,180 L800,300 L800,840 L240,840 Z" fill="#2756B8"/>
+    <!-- Fold corner -->
+    <path d="M680,180 L680,300 L800,300 Z" fill="#1A3F8A"/>
+    <!-- File inner area -->
+    <rect x="280" y="380" width="440" height="360" rx="10" fill="#1A3F8A"/>
+
+    <!-- Layer 3: .EXT label on file -->
+    <rect x="270" y="220" width="310" height="92" rx="16" fill="#FF7D00"/>
+    <text x="296" y="291" font-family="'Courier New', Courier, monospace" font-size="60" font-weight="bold" fill="#FFFFFF">.EXT</text>
+
+    <!-- Lines representing content -->
+    <rect x="306" y="416" width="350" height="20" rx="8" fill="#2756B8" opacity="0.5"/>
+    <rect x="306" y="462" width="280" height="20" rx="8" fill="#2756B8" opacity="0.4"/>
+    <rect x="306" y="508" width="320" height="20" rx="8" fill="#2756B8" opacity="0.4"/>
+
+    <!-- Status icons row -->
+    <circle cx="338" cy="606" r="36" fill="#0E4A1E"/>
+    <!-- Check -->
+    <path d="M316,606 L330,624 L362,586" stroke="#50E080" stroke-width="10" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <circle cx="462" cy="606" r="36" fill="#4A0E0E"/>
+    <!-- X -->
+    <path d="M442,586 L482,626 M482,586 L442,626" stroke="#FF5555" stroke-width="10" fill="none" stroke-linecap="round"/>
+
+    <circle cx="586" cy="606" r="36" fill="#333B45"/>
+    <!-- Minus -->
+    <path d="M564,606 L608,606" stroke="#8899AA" stroke-width="10" fill="none" stroke-linecap="round"/>
+
+    <!-- Small "Ext.Boss" wordmark at bottom -->
+    <text x="340" y="800" font-family="Arial, Helvetica, sans-serif" font-size="36" font-weight="bold" fill="#2756B8" opacity="0.7">Ext.Boss</text>
+  </g>
 </svg>

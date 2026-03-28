@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- 배경: 밝은 주황 파스텔 -->
+  <defs>
+    <linearGradient id="bg_sc05" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF3E0"/>
+      <stop offset="100%" stop-color="#FFAB40"/>
+    </linearGradient>
+    <linearGradient id="cGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF8F00"/>
+      <stop offset="100%" stop-color="#E65100"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="120" fill="url(#bg_sc05)"/>
+
+  <!-- 큰 "C" 형태 — Claude 느낌, 굵은 원호 -->
+  <path d="M820,512 A340,340 0 1,0 820,513" fill="none" stroke="url(#cGrad)" stroke-width="110" stroke-linecap="round"/>
+  <!-- C 안쪽 하이라이트 -->
+  <path d="M800,512 A280,280 0 1,0 800,513" fill="none" stroke="#FFCC80" stroke-width="30" stroke-linecap="round" opacity="0.5"/>
+
+  <!-- C 내부 — 목록 아이콘 (≡) -->
+  <rect x="350" y="380" width="260" height="40" rx="10" fill="#1565C0"/>
+  <rect x="350" y="440" width="220" height="40" rx="10" fill="#1976D2"/>
+  <rect x="350" y="500" width="240" height="40" rx="10" fill="#1565C0"/>
+  <rect x="350" y="560" width="200" height="40" rx="10" fill="#1976D2"/>
+  <rect x="350" y="620" width="230" height="40" rx="10" fill="#1565C0"/>
+
+  <!-- 목록 왼쪽 점들 -->
+  <circle cx="328" cy="400" r="12" fill="#FF6D00"/>
+  <circle cx="328" cy="460" r="12" fill="#FFB300"/>
+  <circle cx="328" cy="520" r="12" fill="#4CAF50"/>
+  <circle cx="328" cy="580" r="12" fill="#29B6F6"/>
+  <circle cx="328" cy="640" r="12" fill="#CE93D8"/>
+
+  <!-- 주변 작은 별들 -->
+  <g transform="translate(170, 200)">
+    <polygon points="0,-20 5,-6 20,-6 8,4 12,18 0,10 -12,18 -8,4 -20,-6 -5,-6" fill="#FFB300"/>
+  </g>
+  <g transform="translate(840, 180)">
+    <polygon points="0,-16 4,-5 16,-5 7,3 10,14 0,8 -10,14 -7,3 -16,-5 -4,-5" fill="#FF7043"/>
+  </g>
+  <g transform="translate(880, 780)">
+    <polygon points="0,-22 6,-7 22,-7 9,4 14,20 0,11 -14,20 -9,4 -22,-7 -6,-7" fill="#1565C0"/>
+  </g>
+  <g transform="translate(140, 820)">
+    <polygon points="0,-18 5,-5 18,-5 7,4 10,16 0,9 -10,16 -7,4 -18,-5 -5,-5" fill="#4CAF50"/>
+  </g>
+  <g transform="translate(200, 500)">
+    <polygon points="0,-14 4,-4 14,-4 6,3 8,12 0,7 -8,12 -6,3 -14,-4 -4,-4" fill="#EA80FC"/>
+  </g>
+
+  <!-- 하단 "Skill.Cast" 텍스트 -->
+  <rect x="280" y="860" width="464" height="76" rx="20" fill="#E65100"/>
+  <text x="512" y="912" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="44" font-weight="900" fill="white">Skill.Cast</text>
+
+  <!-- "Claude Code" 소제목 -->
+  <text x="512" y="160" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="36" fill="#BF360C" font-weight="bold">Claude Code Explorer</text>
+</svg>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Signal.Flow — Icon Candidates</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #2A3A4A;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    color: #E0E0E0;
+    min-height: 100vh;
+    padding: 40px 20px;
+  }
+  .header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+  .header h1 {
+    font-size: 36px;
+    font-weight: 900;
+    color: #80DEEA;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+  }
+  .header p {
+    font-size: 16px;
+    color: #90A4AE;
+  }
+  .grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 36px;
+    justify-content: center;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .card {
+    background: #1E2D3A;
+    border-radius: 18px;
+    padding: 28px 24px 24px;
+    width: 260px;
+    text-align: center;
+    border: 1px solid #37474F;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 40px rgba(0,188,212,0.25);
+    border-color: #00BCD4;
+  }
+  .icon-wrap {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto 18px;
+    transition: width 0.25s, height 0.25s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .card:hover .icon-wrap {
+    width: 260px;
+    height: 260px;
+  }
+  .icon-wrap img {
+    width: 100%;
+    height: 100%;
+    border-radius: 14px;
+  }
+  .filename {
+    font-size: 14px;
+    font-weight: 700;
+    color: #80DEEA;
+    margin-bottom: 8px;
+    font-family: 'Consolas', monospace;
+  }
+  .concept {
+    font-size: 13px;
+    color: #B0BEC5;
+    line-height: 1.5;
+    margin-bottom: 14px;
+    min-height: 40px;
+  }
+  .palette {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .swatch {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.2);
+    title: attr(data-color);
+  }
+  .badge {
+    display: inline-block;
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+  .literal { background: #1565C0; color: #90CAF9; }
+  .metaphor { background: #4A148C; color: #CE93D8; }
+  .hybrid { background: #006064; color: #80DEEA; }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>Signal.Flow</h1>
+  <p>SignalR + SSE 실시간 이벤트 흐름 테스트 도구 — 아이콘 후보 5종</p>
+</div>
+<div class="grid">
+
+  <div class="card">
+    <div class="icon-wrap">
+      <img src="icon_01.svg" alt="icon_01">
+    </div>
+    <div class="filename">icon_01.svg</div>
+    <span class="badge literal">literal</span>
+    <div class="concept">서버↔클라이언트 양방향 화살표 + 실시간 이벤트 파형</div>
+    <div class="palette">
+      <div class="swatch" style="background:#E3F2FD" title="#E3F2FD"></div>
+      <div class="swatch" style="background:#1565C0" title="#1565C0"></div>
+      <div class="swatch" style="background:#FFFFFF" title="#FFFFFF"></div>
+      <div class="swatch" style="background:#00E5FF" title="#00E5FF"></div>
+      <div class="swatch" style="background:#FFD600" title="#FFD600"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap">
+      <img src="icon_02.svg" alt="icon_02">
+    </div>
+    <div class="filename">icon_02.svg</div>
+    <span class="badge literal">literal</span>
+    <div class="concept">이벤트 스트림 피드 — notify / update / warning 컬러 레이블</div>
+    <div class="palette">
+      <div class="swatch" style="background:#FFF3E0" title="#FFF3E0"></div>
+      <div class="swatch" style="background:#E65100" title="#E65100"></div>
+      <div class="swatch" style="background:#4CAF50" title="#4CAF50"></div>
+      <div class="swatch" style="background:#FFC107" title="#FFC107"></div>
+      <div class="swatch" style="background:#F44336" title="#F44336"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap">
+      <img src="icon_03.svg" alt="icon_03">
+    </div>
+    <div class="filename">icon_03.svg</div>
+    <span class="badge metaphor">metaphor</span>
+    <div class="concept">라디오 전파 동심원 발산 — 실시간 신호가 퍼지는 모습</div>
+    <div class="palette">
+      <div class="swatch" style="background:#E8F5E9" title="#E8F5E9"></div>
+      <div class="swatch" style="background:#43A047" title="#43A047"></div>
+      <div class="swatch" style="background:#69FF47" title="#69FF47"></div>
+      <div class="swatch" style="background:#FFFFFF" title="#FFFFFF"></div>
+      <div class="swatch" style="background:#F44336" title="#F44336"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap">
+      <img src="icon_04.svg" alt="icon_04">
+    </div>
+    <div class="filename">icon_04.svg</div>
+    <span class="badge metaphor">metaphor</span>
+    <div class="concept">S자 경로를 흐르는 데이터 입자들 — 이벤트 "Flow" 은유</div>
+    <div class="palette">
+      <div class="swatch" style="background:#1A0533" title="#1A0533"></div>
+      <div class="swatch" style="background:#EA80FC" title="#EA80FC"></div>
+      <div class="swatch" style="background:#7C4DFF" title="#7C4DFF"></div>
+      <div class="swatch" style="background:#00E5FF" title="#00E5FF"></div>
+      <div class="swatch" style="background:#FFFFFF" title="#FFFFFF"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap">
+      <img src="icon_05.svg" alt="icon_05">
+    </div>
+    <div class="filename">icon_05.svg</div>
+    <span class="badge hybrid">hybrid</span>
+    <div class="concept">서버 아이콘 + 신호 파형 + SSE / WS 기술 뱃지</div>
+    <div class="palette">
+      <div class="swatch" style="background:#E0F7FA" title="#E0F7FA"></div>
+      <div class="swatch" style="background:#00BCD4" title="#00BCD4"></div>
+      <div class="swatch" style="background:#1E88E5" title="#1E88E5"></div>
+      <div class="swatch" style="background:#FF6D00" title="#FF6D00"></div>
+      <div class="swatch" style="background:#1565C0" title="#1565C0"></div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg05" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#E0F7FA"/>
+      <stop offset="100%" style="stop-color:#26C6DA"/>
+    </linearGradient>
+    <linearGradient id="paneGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFFFFF" stop-opacity="0.95"/>
+      <stop offset="100%" style="stop-color:#E0F7FA" stop-opacity="0.85"/>
+    </linearGradient>
+    <filter id="shadow05">
+      <feDropShadow dx="0" dy="10" stdDeviation="18" flood-color="#00838F" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" fill="url(#bg05)" rx="120"/>
+
+  <!-- Layer 2: Windows logo style 4-pane frame -->
+  <g filter="url(#shadow05)">
+    <!-- Top-left pane -->
+    <rect x="148" y="148" width="320" height="320" rx="24" fill="url(#paneGrad)" stroke="#00BCD4" stroke-width="16"/>
+    <!-- Top-right pane -->
+    <rect x="556" y="148" width="320" height="320" rx="24" fill="url(#paneGrad)" stroke="#00BCD4" stroke-width="16"/>
+    <!-- Bottom-left pane -->
+    <rect x="148" y="556" width="320" height="320" rx="24" fill="url(#paneGrad)" stroke="#00BCD4" stroke-width="16"/>
+    <!-- Bottom-right pane -->
+    <rect x="556" y="556" width="320" height="320" rx="24" fill="url(#paneGrad)" stroke="#00BCD4" stroke-width="16"/>
+  </g>
+
+  <!-- Layer 3: Mini waveforms / graphs inside each pane -->
+  <!-- Top-left: spike waveform (System errors) -->
+  <polyline points="168,288 220,288 250,240 270,336 290,288 348,288 378,250 398,288 448,288"
+    fill="none" stroke="#7B1FA2" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="308" y="430" font-family="Arial,sans-serif" font-size="44" font-weight="bold" fill="#00838F" text-anchor="middle">SYS</text>
+
+  <!-- Top-right: bar chart (Application) -->
+  <rect x="590" y="360" width="40" height="88" rx="8" fill="#F44336"/>
+  <rect x="646" y="300" width="40" height="148" rx="8" fill="#FF9800"/>
+  <rect x="702" y="330" width="40" height="118" rx="8" fill="#4CAF50"/>
+  <rect x="758" y="260" width="40" height="188" rx="8" fill="#2196F3"/>
+  <rect x="814" y="318" width="40" height="130" rx="8" fill="#9C27B0"/>
+  <text x="716" y="430" font-family="Arial,sans-serif" font-size="44" font-weight="bold" fill="#00838F" text-anchor="middle">APP</text>
+
+  <!-- Bottom-left: activity line (Security) -->
+  <polyline points="168,650 230,690 290,630 350,680 410,620 448,660"
+    fill="none" stroke="#F57C00" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="290" cy="630" r="16" fill="#F57C00"/>
+  <circle cx="410" cy="620" r="16" fill="#F57C00"/>
+  <text x="308" y="836" font-family="Arial,sans-serif" font-size="44" font-weight="bold" fill="#00838F" text-anchor="middle">SEC</text>
+
+  <!-- Bottom-right: pulse dot + "LIVE" -->
+  <circle cx="716" cy="686" r="68" fill="rgba(0,188,212,0.25)" stroke="#00BCD4" stroke-width="14"/>
+  <circle cx="716" cy="686" r="38" fill="#00BCD4"/>
+  <circle cx="716" cy="686" r="18" fill="white"/>
+  <text x="716" y="836" font-family="Arial,sans-serif" font-size="56" font-weight="bold" fill="#E53935" text-anchor="middle">LIVE</text>
+</svg>

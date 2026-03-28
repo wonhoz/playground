@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg_lm04" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#004D40"/>
+      <stop offset="100%" stop-color="#00897B"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Layer 1: Background (dark teal - unavoidable per spec) -->
+  <rect width="1024" height="1024" fill="url(#bg_lm04)" rx="120"/>
+
+  <!-- Layer 2: 4 vivid cables from left side, twisting and merging -->
+  <!-- Cable 1: Orange -->
+  <path d="M100,240 C280,240 360,340 460,440 C520,500 520,520 512,530"
+    fill="none" stroke="#FF6B00" stroke-width="52" stroke-linecap="round"/>
+  <!-- Cable 2: Yellow -->
+  <path d="M100,380 C280,380 360,420 450,470 C510,510 514,524 512,530"
+    fill="none" stroke="#FFD600" stroke-width="52" stroke-linecap="round"/>
+  <!-- Cable 3: Pink/Magenta -->
+  <path d="M100,620 C280,620 360,580 450,555 C510,530 514,526 512,530"
+    fill="none" stroke="#FF1493" stroke-width="52" stroke-linecap="round"/>
+  <!-- Cable 4: Mint -->
+  <path d="M100,760 C280,760 360,660 460,570 C516,536 516,528 512,530"
+    fill="none" stroke="#00FFD1" stroke-width="52" stroke-linecap="round"/>
+
+  <!-- Merge/twist node -->
+  <circle cx="512" cy="530" r="54" fill="#004D40" stroke="white" stroke-width="20"/>
+  <circle cx="512" cy="530" r="30" fill="white"/>
+
+  <!-- Layer 3: Single white unified cable going right -->
+  <path d="M512,530 C600,530 720,530 900,530"
+    fill="none" stroke="white" stroke-width="80" stroke-linecap="round"/>
+
+  <!-- Cable end connector -->
+  <rect x="900" y="480" width="60" height="100" rx="14" fill="#E0F2F1"/>
+
+  <!-- Cable highlights (vivid, semi-transparent sheen) -->
+  <path d="M100,240 C280,240 360,340 460,440 C520,500 520,520 512,530"
+    fill="none" stroke="white" stroke-width="16" stroke-linecap="round" opacity="0.25"/>
+  <path d="M100,380 C280,380 360,420 450,470 C510,510 514,524 512,530"
+    fill="none" stroke="white" stroke-width="16" stroke-linecap="round" opacity="0.25"/>
+  <path d="M100,620 C280,620 360,580 450,555 C510,530 514,526 512,530"
+    fill="none" stroke="white" stroke-width="16" stroke-linecap="round" opacity="0.25"/>
+  <path d="M100,760 C280,760 360,660 460,570 C516,536 516,528 512,530"
+    fill="none" stroke="white" stroke-width="16" stroke-linecap="round" opacity="0.25"/>
+
+  <!-- Cable end dots on left -->
+  <circle cx="100" cy="240" r="30" fill="#FF6B00" stroke="white" stroke-width="10"/>
+  <circle cx="100" cy="380" r="30" fill="#FFD600" stroke="white" stroke-width="10"/>
+  <circle cx="100" cy="620" r="30" fill="#FF1493" stroke="white" stroke-width="10"/>
+  <circle cx="100" cy="760" r="30" fill="#00FFD1" stroke="white" stroke-width="10"/>
+</svg>

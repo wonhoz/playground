@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg04" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#E0F7FA"/>
+      <stop offset="100%" style="stop-color:#00BCD4"/>
+    </linearGradient>
+    <linearGradient id="xrayGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFFFFF" stop-opacity="0.92"/>
+      <stop offset="100%" style="stop-color:#E0F7FA" stop-opacity="0.7"/>
+    </linearGradient>
+    <linearGradient id="innerGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#00BCD4" stop-opacity="0.18"/>
+      <stop offset="100%" style="stop-color:#006064" stop-opacity="0.35"/>
+    </linearGradient>
+    <filter id="shadow04">
+      <feDropShadow dx="0" dy="14" stdDeviation="22" flood-color="#006064" flood-opacity="0.45"/>
+    </filter>
+    <filter id="xrayBlur">
+      <feGaussianBlur stdDeviation="3"/>
+    </filter>
+  </defs>
+
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" fill="url(#bg04)" rx="120"/>
+
+  <!-- X-ray scan lines (atmosphere) -->
+  <rect x="0" y="200" width="1024" height="3" fill="rgba(0,188,212,0.18)" rx="120"/>
+  <rect x="0" y="350" width="1024" height="3" fill="rgba(0,188,212,0.18)"/>
+  <rect x="0" y="500" width="1024" height="3" fill="rgba(0,188,212,0.18)"/>
+  <rect x="0" y="650" width="1024" height="3" fill="rgba(0,188,212,0.18)"/>
+  <rect x="0" y="800" width="1024" height="3" fill="rgba(0,188,212,0.18)"/>
+
+  <!-- Layer 2: File silhouette (outer) -->
+  <g filter="url(#shadow04)">
+    <path d="M220 160 L660 160 L800 300 L800 900 L220 900 Z" fill="url(#xrayGrad)" stroke="#0097A7" stroke-width="20"/>
+    <!-- Dog-ear -->
+    <polygon points="660,160 800,300 660,300" fill="rgba(0,151,167,0.45)"/>
+    <line x1="660" y1="160" x2="660" y2="300" stroke="#0097A7" stroke-width="12"/>
+    <line x1="660" y1="300" x2="800" y2="300" stroke="#0097A7" stroke-width="12"/>
+  </g>
+
+  <!-- Layer 3: X-ray interior (hex values, ghostly) -->
+  <rect x="240" y="340" width="540" height="520" rx="16" fill="url(#innerGrad)"/>
+
+  <!-- Hex values inside (X-ray skeleton look) -->
+  <text x="268" y="440" font-family="monospace" font-size="52" fill="#006064" opacity="0.7">4D 5A 90 00</text>
+  <text x="268" y="510" font-family="monospace" font-size="52" fill="#00838F" opacity="0.6">03 00 00 00</text>
+  <text x="268" y="580" font-family="monospace" font-size="52" fill="#006064" opacity="0.5">04 00 00 00</text>
+  <text x="268" y="650" font-family="monospace" font-size="52" fill="#00838F" opacity="0.45">FF FF 00 00</text>
+  <text x="268" y="720" font-family="monospace" font-size="52" fill="#006064" opacity="0.4">B8 00 00 00</text>
+
+  <!-- Highlighted skeleton row -->
+  <rect x="252" y="750" width="520" height="64" rx="12" fill="rgba(0,188,212,0.3)"/>
+  <text x="268" y="790" font-family="monospace" font-size="52" fill="#006064" font-weight="bold">00 00 00 00</text>
+
+  <!-- X-ray corner label -->
+  <rect x="560" y="180" width="140" height="52" rx="12" fill="rgba(0,131,143,0.65)"/>
+  <text x="630" y="210" font-family="Arial,sans-serif" font-size="36" fill="white" text-anchor="middle" dominant-baseline="middle" font-weight="bold">X-RAY</text>
+</svg>

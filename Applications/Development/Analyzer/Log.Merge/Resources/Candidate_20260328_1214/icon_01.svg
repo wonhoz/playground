@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg_lm01" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#FFF8E1"/>
+      <stop offset="100%" stop-color="#FFF3E0"/>
+    </linearGradient>
+    <filter id="sh_lm01">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#00000028"/>
+    </filter>
+  </defs>
+
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" fill="url(#bg_lm01)" rx="120"/>
+
+  <!-- Layer 2: 4 colored streams converging to one -->
+  <!-- Stream 1: Orange -->
+  <path d="M100,200 C300,200 400,480 512,520" fill="none" stroke="#FF6B35" stroke-width="52" stroke-linecap="round"/>
+  <!-- Stream 2: Cyan -->
+  <path d="M100,380 C280,380 400,490 512,520" fill="none" stroke="#00BCD4" stroke-width="52" stroke-linecap="round"/>
+  <!-- Stream 3: Pink -->
+  <path d="M100,620 C280,620 400,555 512,520" fill="none" stroke="#E91E8C" stroke-width="52" stroke-linecap="round"/>
+  <!-- Stream 4: Purple -->
+  <path d="M100,800 C300,800 400,560 512,520" fill="none" stroke="#9C27B0" stroke-width="52" stroke-linecap="round"/>
+
+  <!-- Merge node -->
+  <circle cx="512" cy="520" r="46" fill="#1A237E" stroke="white" stroke-width="16" filter="url(#sh_lm01)"/>
+
+  <!-- Layer 3: Single merged thick line going right -->
+  <path d="M512,520 C620,520 820,520 920,520" fill="none" stroke="#1A237E" stroke-width="80" stroke-linecap="round" filter="url(#sh_lm01)"/>
+
+  <!-- Small stream dots (source labels) -->
+  <circle cx="100" cy="200" r="30" fill="#FF6B35" stroke="white" stroke-width="12"/>
+  <circle cx="100" cy="380" r="30" fill="#00BCD4" stroke="white" stroke-width="12"/>
+  <circle cx="100" cy="620" r="30" fill="#E91E8C" stroke="white" stroke-width="12"/>
+  <circle cx="100" cy="800" r="30" fill="#9C27B0" stroke="white" stroke-width="12"/>
+
+  <!-- Merged line end arrow -->
+  <polygon points="900,480 940,520 900,560" fill="white" opacity="0.8"/>
+</svg>

@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- 배경: 따뜻한 오렌지-노랑 -->
+  <defs>
+    <linearGradient id="bg_dg02" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF8E1"/>
+      <stop offset="100%" stop-color="#F57F17"/>
+    </linearGradient>
+    <linearGradient id="boxGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FF8F00"/>
+      <stop offset="100%" stop-color="#E65100"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="120" fill="url(#bg_dg02)"/>
+
+  <!-- 계층 1: 루트 패키지 (상단 중앙) -->
+  <rect x="362" y="140" width="300" height="120" rx="16" fill="url(#boxGrad)" stroke="white" stroke-width="10"/>
+  <!-- 박스 상단 탭 -->
+  <rect x="382" y="124" width="80" height="28" rx="6" fill="#FF8F00"/>
+  <text x="512" y="192" text-anchor="middle" font-family="Consolas, monospace" font-size="36" font-weight="bold" fill="white">MyApp</text>
+  <text x="512" y="228" text-anchor="middle" font-family="Consolas, monospace" font-size="24" fill="#FFE082">v2.1.0</text>
+
+  <!-- 화살표: 루트 → 좌측 dep -->
+  <path d="M440,260 L280,380" fill="none" stroke="#1565C0" stroke-width="14" stroke-linecap="round"/>
+  <polygon points="280,380 300,350 310,380" fill="#1565C0"/>
+  <!-- 화살표: 루트 → 우측 dep -->
+  <path d="M584,260 L744,380" fill="none" stroke="#1565C0" stroke-width="14" stroke-linecap="round"/>
+  <polygon points="744,380 724,350 754,370" fill="#1565C0"/>
+  <!-- 화살표: 루트 → 중앙 dep -->
+  <path d="M512,260 L512,380" fill="none" stroke="#1565C0" stroke-width="14" stroke-linecap="round"/>
+  <polygon points="512,380 498,352 526,352" fill="#1565C0"/>
+
+  <!-- 계층 2: 의존성들 (중간) -->
+  <!-- 좌측 dep -->
+  <rect x="140" y="380" width="260" height="110" rx="14" fill="#FF8F00" stroke="white" stroke-width="8"/>
+  <rect x="152" y="366" width="70" height="24" rx="5" fill="#FF8F00"/>
+  <text x="270" y="428" text-anchor="middle" font-family="Consolas, monospace" font-size="30" font-weight="bold" fill="white">Newtonsoft</text>
+  <text x="270" y="464" text-anchor="middle" font-family="Consolas, monospace" font-size="22" fill="#FFE082">v13.0.3</text>
+
+  <!-- 중앙 dep -->
+  <rect x="380" y="380" width="264" height="110" rx="14" fill="#F57F17" stroke="white" stroke-width="8"/>
+  <rect x="394" y="366" width="70" height="24" rx="5" fill="#F57F17"/>
+  <text x="512" y="428" text-anchor="middle" font-family="Consolas, monospace" font-size="30" font-weight="bold" fill="white">Serilog</text>
+  <text x="512" y="464" text-anchor="middle" font-family="Consolas, monospace" font-size="22" fill="#FFE082">v3.1.1</text>
+
+  <!-- 우측 dep -->
+  <rect x="624" y="380" width="260" height="110" rx="14" fill="#FF8F00" stroke="white" stroke-width="8"/>
+  <rect x="636" y="366" width="70" height="24" rx="5" fill="#FF8F00"/>
+  <text x="754" y="428" text-anchor="middle" font-family="Consolas, monospace" font-size="30" font-weight="bold" fill="white">MediatR</text>
+  <text x="754" y="464" text-anchor="middle" font-family="Consolas, monospace" font-size="22" fill="#FFE082">v12.0.0</text>
+
+  <!-- 화살표들: 계층 2 → 계층 3 -->
+  <path d="M270,490 L220,606" fill="none" stroke="#1565C0" stroke-width="10" stroke-linecap="round"/>
+  <polygon points="220,606 238,578 250,604" fill="#1565C0"/>
+  <path d="M270,490 L400,606" fill="none" stroke="#1565C0" stroke-width="10" stroke-linecap="round"/>
+  <polygon points="400,606 382,578 408,594" fill="#1565C0"/>
+
+  <path d="M754,490 L660,606" fill="none" stroke="#1565C0" stroke-width="10" stroke-linecap="round"/>
+  <polygon points="660,606 674,578 686,604" fill="#1565C0"/>
+  <path d="M754,490 L820,606" fill="none" stroke="#1565C0" stroke-width="10" stroke-linecap="round"/>
+  <polygon points="820,606 808,578 832,596" fill="#1565C0"/>
+
+  <!-- 계층 3: 하위 의존성 (작게) -->
+  <rect x="148" y="606" width="164" height="82" rx="12" fill="#FFA000" stroke="white" stroke-width="6"/>
+  <text x="230" y="642" text-anchor="middle" font-family="Consolas, monospace" font-size="22" font-weight="bold" fill="white">System.Text</text>
+  <text x="230" y="668" text-anchor="middle" font-family="Consolas, monospace" font-size="18" fill="#FFE082">.Json</text>
+
+  <rect x="330" y="606" width="164" height="82" rx="12" fill="#FFA000" stroke="white" stroke-width="6"/>
+  <text x="412" y="642" text-anchor="middle" font-family="Consolas, monospace" font-size="22" font-weight="bold" fill="white">Microsoft</text>
+  <text x="412" y="668" text-anchor="middle" font-family="Consolas, monospace" font-size="18" fill="#FFE082">.Ext v8</text>
+
+  <rect x="576" y="606" width="164" height="82" rx="12" fill="#FFA000" stroke="white" stroke-width="6"/>
+  <text x="658" y="642" text-anchor="middle" font-family="Consolas, monospace" font-size="22" font-weight="bold" fill="white">MediatR</text>
+  <text x="658" y="668" text-anchor="middle" font-family="Consolas, monospace" font-size="18" fill="#FFE082">.Contracts</text>
+
+  <rect x="746" y="606" width="164" height="82" rx="12" fill="#FFA000" stroke="white" stroke-width="6"/>
+  <text x="828" y="642" text-anchor="middle" font-family="Consolas, monospace" font-size="22" font-weight="bold" fill="white">System</text>
+  <text x="828" y="668" text-anchor="middle" font-family="Consolas, monospace" font-size="18" fill="#FFE082">.Runtime</text>
+
+  <!-- 하단 타이틀 -->
+  <rect x="260" y="780" width="504" height="72" rx="18" fill="#E65100" stroke="white" stroke-width="6"/>
+  <text x="512" y="828" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="40" font-weight="900" fill="white">Dep.Graph</text>
+
+  <!-- NuGet 아이콘 힌트 -->
+  <circle cx="900" cy="880" r="50" fill="#004880"/>
+  <text x="900" y="896" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="900" fill="white">Nu</text>
+</svg>

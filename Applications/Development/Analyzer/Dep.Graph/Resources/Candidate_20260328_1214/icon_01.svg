@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- 배경: 밝은 파랑 그라데이션 -->
+  <defs>
+    <linearGradient id="bg_dg01" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E3F2FD"/>
+      <stop offset="100%" stop-color="#1976D2"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="120" fill="url(#bg_dg01)"/>
+
+  <!-- 엣지(연결선)들 — 노드 사이 -->
+  <!-- 중앙 → 우상 -->
+  <line x1="512" y1="420" x2="740" y2="240" stroke="#FFD600" stroke-width="16" stroke-linecap="round" opacity="0.9"/>
+  <!-- 중앙 → 우하 -->
+  <line x1="512" y1="512" x2="760" y2="620" stroke="#00E5FF" stroke-width="16" stroke-linecap="round" opacity="0.9"/>
+  <!-- 중앙 → 좌상 -->
+  <line x1="512" y1="440" x2="264" y2="260" stroke="#FFD600" stroke-width="16" stroke-linecap="round" opacity="0.9"/>
+  <!-- 중앙 → 좌하 -->
+  <line x1="490" y1="532" x2="250" y2="680" stroke="#00E5FF" stroke-width="16" stroke-linecap="round" opacity="0.9"/>
+  <!-- 중앙 → 하단 -->
+  <line x1="512" y1="560" x2="512" y2="780" stroke="#A5D6A7" stroke-width="16" stroke-linecap="round" opacity="0.9"/>
+
+  <!-- 서브 엣지들 -->
+  <!-- 우상 → 우측 중간 -->
+  <line x1="740" y1="240" x2="880" y2="440" stroke="#FFD600" stroke-width="10" stroke-linecap="round" opacity="0.6"/>
+  <!-- 좌상 → 좌측 중간 -->
+  <line x1="264" y1="260" x2="140" y2="460" stroke="#FFD600" stroke-width="10" stroke-linecap="round" opacity="0.6"/>
+  <!-- 우하 → 우하 끝 -->
+  <line x1="760" y1="620" x2="860" y2="760" stroke="#80DEEA" stroke-width="10" stroke-linecap="round" opacity="0.6"/>
+  <!-- 하단 → 하좌 -->
+  <line x1="512" y1="780" x2="380" y2="880" stroke="#A5D6A7" stroke-width="10" stroke-linecap="round" opacity="0.6"/>
+
+  <!-- 서브 노드들 (작은 원) -->
+  <circle cx="740" cy="240" r="44" fill="#FFD600" stroke="white" stroke-width="12"/>
+  <circle cx="760" cy="620" r="44" fill="#00E5FF" stroke="white" stroke-width="12"/>
+  <circle cx="264" cy="260" r="44" fill="#FFD600" stroke="white" stroke-width="12"/>
+  <circle cx="250" cy="680" r="44" fill="#00E5FF" stroke="white" stroke-width="12"/>
+  <circle cx="512" cy="780" r="44" fill="#A5D6A7" stroke="white" stroke-width="12"/>
+
+  <!-- 말단 노드들 (아주 작은) -->
+  <circle cx="880" cy="440" r="28" fill="#FFF176" stroke="white" stroke-width="8"/>
+  <circle cx="140" cy="460" r="28" fill="#FFF176" stroke="white" stroke-width="8"/>
+  <circle cx="860" cy="760" r="28" fill="#80DEEA" stroke="white" stroke-width="8"/>
+  <circle cx="380" cy="880" r="28" fill="#C8E6C9" stroke="white" stroke-width="8"/>
+
+  <!-- 중앙 메인 노드 (가장 크게) -->
+  <circle cx="512" cy="490" r="88" fill="#0D47A1" stroke="white" stroke-width="16"/>
+  <circle cx="512" cy="490" r="60" fill="#1565C0"/>
+  <circle cx="512" cy="490" r="32" fill="white"/>
+  <circle cx="512" cy="490" r="16" fill="#42A5F5"/>
+
+  <!-- 상단 레이블 -->
+  <text x="512" y="112" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="52" font-weight="900" fill="#0D47A1" opacity="0.9">Dep.Graph</text>
+  <text x="512" y="162" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="30" fill="#1976D2" opacity="0.8">Dependency Visualization</text>
+</svg>

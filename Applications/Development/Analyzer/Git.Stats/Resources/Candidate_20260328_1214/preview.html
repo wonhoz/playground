@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Git.Stats — Icon Candidates</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #2A2D3A;
+    color: #E0E0E0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    padding: 40px 20px;
+    min-height: 100vh;
+  }
+  h1 {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #87CEEB;
+    letter-spacing: 1px;
+  }
+  .subtitle {
+    text-align: center;
+    font-size: 0.95rem;
+    color: #888;
+    margin-bottom: 48px;
+  }
+  .grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px;
+    justify-content: center;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .card {
+    background: #333647;
+    border-radius: 16px;
+    padding: 28px 24px 20px;
+    width: 240px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 4px 20px #00000040;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 36px #00000060;
+  }
+  .icon-wrap {
+    width: 200px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: width 0.25s, height 0.25s;
+    overflow: visible;
+  }
+  .card:hover .icon-wrap {
+    width: 260px;
+    height: 260px;
+  }
+  .icon-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 12px;
+  }
+  .filename {
+    margin-top: 16px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #87CEEB;
+    letter-spacing: 0.5px;
+  }
+  .concept {
+    margin-top: 6px;
+    font-size: 0.78rem;
+    color: #AAAAAA;
+    text-align: center;
+    line-height: 1.5;
+  }
+  .palette {
+    display: flex;
+    gap: 8px;
+    margin-top: 14px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .swatch {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 2px solid #ffffff22;
+    display: inline-block;
+    title: attr(title);
+  }
+</style>
+</head>
+<body>
+<h1>Git.Stats</h1>
+<p class="subtitle">Git 저장소 커밋 통계 / 기여자 / 핫파일 시각화 — Icon Candidates (2026-03-28)</p>
+
+<div class="grid">
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_01.svg" alt="icon_01"/></div>
+    <div class="filename">icon_01.svg</div>
+    <div class="concept">막대 차트 + git fork 심볼 결합<br/>(literal · 중앙 심볼)</div>
+    <div class="palette">
+      <span class="swatch" style="background:#87CEEB" title="#87CEEB"></span>
+      <span class="swatch" style="background:#4A90D9" title="#4A90D9"></span>
+      <span class="swatch" style="background:#FFFFFF" title="#FFFFFF"></span>
+      <span class="swatch" style="background:#FFD700" title="#FFD700"></span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_02.svg" alt="icon_02"/></div>
+    <div class="filename">icon_02.svg</div>
+    <div class="concept">커밋 히스토리 타임라인 도트<br/>+ 기여자 숫자 카운터 (literal · 대각선)</div>
+    <div class="palette">
+      <span class="swatch" style="background:#2D1B69" title="#2D1B69"></span>
+      <span class="swatch" style="background:#6B3FA0" title="#6B3FA0"></span>
+      <span class="swatch" style="background:#4DD8CC" title="#4DD8CC"></span>
+      <span class="swatch" style="background:#C084FC" title="#C084FC"></span>
+      <span class="swatch" style="background:#FFFFFF" title="#FFFFFF"></span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_03.svg" alt="icon_03"/></div>
+    <div class="filename">icon_03.svg</div>
+    <div class="concept">git 브랜치 = 나무 가지<br/>오렌지 커밋 열매 (metaphor · 실루엣)</div>
+    <div class="palette">
+      <span class="swatch" style="background:#E8F5E9" title="#E8F5E9"></span>
+      <span class="swatch" style="background:#C8E6C9" title="#C8E6C9"></span>
+      <span class="swatch" style="background:#2E7D32" title="#2E7D32"></span>
+      <span class="swatch" style="background:#FF6D00" title="#FF6D00"></span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_04.svg" alt="icon_04"/></div>
+    <div class="filename">icon_04.svg</div>
+    <div class="concept">돋보기 렌즈 안에 커밋 그래프<br/>(metaphor · 공간/장면)</div>
+    <div class="palette">
+      <span class="swatch" style="background:#FF8C42" title="#FF8C42"></span>
+      <span class="swatch" style="background:#FFD166" title="#FFD166"></span>
+      <span class="swatch" style="background:#FFFFFF" title="#FFFFFF"></span>
+      <span class="swatch" style="background:#4A90D9" title="#4A90D9"></span>
+      <span class="swatch" style="background:#FF6B35" title="#FF6B35"></span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_05.svg" alt="icon_05"/></div>
+    <div class="filename">icon_05.svg</div>
+    <div class="concept">별점 + 막대차트 레이어드<br/>"TOP" 텍스트 (hybrid · 레이어드)</div>
+    <div class="palette">
+      <span class="swatch" style="background:#FFE066" title="#FFE066"></span>
+      <span class="swatch" style="background:#FF6B9D" title="#FF6B9D"></span>
+      <span class="swatch" style="background:#FFFFFF" title="#FFFFFF"></span>
+      <span class="swatch" style="background:#7C3AED" title="#7C3AED"></span>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

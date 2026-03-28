@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg01" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#E8F4FD"/>
+      <stop offset="100%" style="stop-color:#90CAF9"/>
+    </linearGradient>
+    <linearGradient id="boxGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#BBDEFB" stop-opacity="0.7"/>
+      <stop offset="100%" style="stop-color:#42A5F5" stop-opacity="0.45"/>
+    </linearGradient>
+    <filter id="shadow01">
+      <feDropShadow dx="0" dy="10" stdDeviation="18" flood-color="#1565C0" flood-opacity="0.3"/>
+    </filter>
+    <filter id="exeShadow">
+      <feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="#BF360C" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" fill="url(#bg01)" rx="120"/>
+
+  <!-- Layer 2: Glass sandbox box -->
+  <g filter="url(#shadow01)">
+    <!-- Box back face (slight 3D) -->
+    <rect x="210" y="190" width="580" height="540" rx="32" fill="rgba(255,255,255,0.35)" stroke="#64B5F6" stroke-width="8" stroke-dasharray="20,12"/>
+    <!-- Box main face -->
+    <rect x="180" y="220" width="580" height="540" rx="32" fill="url(#boxGrad)" stroke="#1E88E5" stroke-width="20"/>
+  </g>
+
+  <!-- Corner bolts -->
+  <circle cx="220" cy="260" r="14" fill="#1E88E5" opacity="0.7"/>
+  <circle cx="720" cy="260" r="14" fill="#1E88E5" opacity="0.7"/>
+  <circle cx="220" cy="720" r="14" fill="#1E88E5" opacity="0.7"/>
+  <circle cx="720" cy="720" r="14" fill="#1E88E5" opacity="0.7"/>
+
+  <!-- Layer 3: EXE icon inside box -->
+  <g filter="url(#exeShadow)">
+    <!-- EXE file card -->
+    <rect x="340" y="370" width="260" height="220" rx="20" fill="#FF7043"/>
+    <!-- Dog-ear -->
+    <polygon points="540,370 600,430 540,430" fill="#BF360C"/>
+    <!-- .EXE text -->
+    <text x="470" y="510" font-family="Arial,sans-serif" font-size="72" font-weight="bold" fill="white" text-anchor="middle" dominant-baseline="middle">.EXE</text>
+  </g>
+
+  <!-- Running arrows -->
+  <path d="M618 460 L700 490 L618 520" fill="none" stroke="#FF7043" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M640 490 L740 490" stroke="#FF7043" stroke-width="22" stroke-linecap="round"/>
+
+  <!-- "SANDBOX" label below box -->
+  <rect x="260" y="800" width="440" height="76" rx="38" fill="rgba(30,136,229,0.85)"/>
+  <text x="480" y="843" font-family="Arial,sans-serif" font-size="58" font-weight="bold" fill="white" text-anchor="middle" dominant-baseline="middle">SANDBOX</text>
+</svg>

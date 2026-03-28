@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- 배경: 밝은 초록 그라데이션 -->
+  <defs>
+    <linearGradient id="bg03" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E8F5E9"/>
+      <stop offset="100%" stop-color="#43A047"/>
+    </linearGradient>
+    <radialGradient id="glow03" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#B9F6CA" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#00C853" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="120" fill="url(#bg03)"/>
+
+  <!-- 글로우 효과 -->
+  <circle cx="512" cy="512" r="460" fill="url(#glow03)"/>
+
+  <!-- 동심원 호들 — 신호 발산 -->
+  <!-- 가장 큰 호 -->
+  <path d="M512,512 m-380,0 a380,380 0 0,1 760,0" fill="none" stroke="#00C853" stroke-width="28" stroke-linecap="round" opacity="0.25"/>
+  <path d="M512,512 m-380,0 a380,380 0 0,0 760,0" fill="none" stroke="#00C853" stroke-width="28" stroke-linecap="round" opacity="0.18"/>
+
+  <path d="M512,512 m-300,0 a300,300 0 0,1 600,0" fill="none" stroke="#00E676" stroke-width="32" stroke-linecap="round" opacity="0.4"/>
+  <path d="M512,512 m-300,0 a300,300 0 0,0 600,0" fill="none" stroke="#00E676" stroke-width="32" stroke-linecap="round" opacity="0.3"/>
+
+  <path d="M512,512 m-220,0 a220,220 0 0,1 440,0" fill="none" stroke="#69FF47" stroke-width="38" stroke-linecap="round" opacity="0.55"/>
+  <path d="M512,512 m-220,0 a220,220 0 0,0 440,0" fill="none" stroke="#69FF47" stroke-width="38" stroke-linecap="round" opacity="0.4"/>
+
+  <path d="M512,512 m-148,0 a148,148 0 0,1 296,0" fill="none" stroke="#B9F6CA" stroke-width="44" stroke-linecap="round" opacity="0.7"/>
+  <path d="M512,512 m-148,0 a148,148 0 0,0 296,0" fill="none" stroke="#B9F6CA" stroke-width="44" stroke-linecap="round" opacity="0.55"/>
+
+  <path d="M512,512 m-84,0 a84,84 0 0,1 168,0" fill="none" stroke="white" stroke-width="50" stroke-linecap="round" opacity="0.85"/>
+  <path d="M512,512 m-84,0 a84,84 0 0,0 168,0" fill="none" stroke="white" stroke-width="50" stroke-linecap="round" opacity="0.7"/>
+
+  <!-- 수직 기준선 (안테나) -->
+  <line x1="512" y1="200" x2="512" y2="512" stroke="white" stroke-width="20" stroke-linecap="round"/>
+
+  <!-- 중앙 발신점 -->
+  <circle cx="512" cy="512" r="52" fill="#1B5E20" stroke="#69FF47" stroke-width="14"/>
+  <circle cx="512" cy="512" r="30" fill="white"/>
+  <circle cx="512" cy="512" r="14" fill="#00C853"/>
+
+  <!-- 신호 강도 바 (우측 하단) -->
+  <rect x="700" y="720" width="30" height="60" rx="6" fill="#69FF47" opacity="0.9"/>
+  <rect x="744" y="700" width="30" height="80" rx="6" fill="#69FF47" opacity="0.9"/>
+  <rect x="788" y="676" width="30" height="104" rx="6" fill="#69FF47"/>
+  <rect x="832" y="648" width="30" height="132" rx="6" fill="#00C853"/>
+  <rect x="876" y="616" width="30" height="164" rx="6" fill="#00C853"/>
+
+  <!-- "LIVE" 뱃지 -->
+  <rect x="720" y="880" width="160" height="56" rx="28" fill="#F44336"/>
+  <circle cx="748" cy="908" r="12" fill="white"/>
+  <text x="848" y="920" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="38" font-weight="900" fill="white">LIVE</text>
+</svg>

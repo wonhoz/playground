@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg03" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1A0533"/>
+      <stop offset="100%" style="stop-color:#4A1070"/>
+    </linearGradient>
+    <filter id="neonGlow">
+      <feGaussianBlur stdDeviation="7" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="hexGlow">
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Layer 1: Dark background (neon허용) -->
+  <rect width="1024" height="1024" fill="url(#bg03)" rx="120"/>
+
+  <!-- Grid overlay -->
+  <line x1="490" y1="100" x2="490" y2="924" stroke="rgba(123,47,190,0.25)" stroke-width="3"/>
+  <line x1="100" y1="512" x2="924" y2="512" stroke="rgba(123,47,190,0.25)" stroke-width="3"/>
+
+  <!-- Layer 2: Binary stream (left side) -->
+  <text x="80" y="220" font-family="monospace" font-size="52" fill="#39FF14" filter="url(#neonGlow)" opacity="0.9">0</text>
+  <text x="80" y="290" font-family="monospace" font-size="52" fill="#39FF14" filter="url(#neonGlow)" opacity="0.75">1</text>
+  <text x="80" y="360" font-family="monospace" font-size="52" fill="#39FF14" filter="url(#neonGlow)" opacity="0.9">1</text>
+  <text x="80" y="430" font-family="monospace" font-size="52" fill="#39FF14" filter="url(#neonGlow)" opacity="0.7">0</text>
+  <text x="80" y="500" font-family="monospace" font-size="52" fill="#39FF14" filter="url(#neonGlow)" opacity="0.95">1</text>
+  <text x="80" y="570" font-family="monospace" font-size="52" fill="#39FF14" filter="url(#neonGlow)" opacity="0.8">0</text>
+  <text x="80" y="640" font-family="monospace" font-size="52" fill="#39FF14" filter="url(#neonGlow)" opacity="0.9">0</text>
+  <text x="80" y="710" font-family="monospace" font-size="52" fill="#39FF14" filter="url(#neonGlow)" opacity="0.7">1</text>
+  <text x="80" y="780" font-family="monospace" font-size="52" fill="#39FF14" filter="url(#neonGlow)" opacity="0.85">1</text>
+
+  <text x="144" y="220" font-family="monospace" font-size="52" fill="#39FF14" filter="url(#neonGlow)" opacity="0.8">1</text>
+  <text x="144" y="290" font-family="monospace" font-size="52" fill="#39FF14" filter="url(#neonGlow)" opacity="0.9">0</text>
+  <text x="144" y="360" font-family="monospace" font-size="52" fill="#39FF14" filter="url(#neonGlow)" opacity="0.7">0</text>
+  <text x="144" y="430" font-family="monospace" font-size="52" fill="#39FF14" filter="url(#neonGlow)" opacity="0.95">1</text>
+  <text x="144" y="500" font-family="monospace" font-size="52" fill="#39FF14" filter="url(#neonGlow)" opacity="0.75">1</text>
+  <text x="144" y="570" font-family="monospace" font-size="52" fill="#39FF14" filter="url(#neonGlow)" opacity="0.9">0</text>
+  <text x="144" y="640" font-family="monospace" font-size="52" fill="#39FF14" filter="url(#neonGlow)" opacity="0.8">1</text>
+  <text x="144" y="710" font-family="monospace" font-size="52" fill="#39FF14" filter="url(#neonGlow)" opacity="0.7">0</text>
+  <text x="144" y="780" font-family="monospace" font-size="52" fill="#39FF14" filter="url(#neonGlow)" opacity="0.9">1</text>
+
+  <!-- Arrow: binary → hex -->
+  <path d="M240 490 L400 490" fill="none" stroke="#CE93D8" stroke-width="20" stroke-linecap="round"/>
+  <polygon points="390,465 440,490 390,515" fill="#CE93D8"/>
+
+  <!-- Layer 3: Hex values (right side) -->
+  <text x="470" y="260" font-family="monospace" font-size="88" font-weight="bold" fill="#CE93D8" filter="url(#hexGlow)">FF</text>
+  <text x="470" y="380" font-family="monospace" font-size="88" font-weight="bold" fill="#BA68C8" filter="url(#hexGlow)">4A</text>
+  <text x="470" y="500" font-family="monospace" font-size="88" font-weight="bold" fill="#AB47BC" filter="url(#hexGlow)">0D</text>
+  <text x="470" y="620" font-family="monospace" font-size="88" font-weight="bold" fill="#9C27B0" filter="url(#hexGlow)">B8</text>
+  <text x="470" y="740" font-family="monospace" font-size="88" font-weight="bold" fill="#8E24AA" filter="url(#hexGlow)">3C</text>
+
+  <!-- Hex suffix labels -->
+  <text x="680" y="260" font-family="monospace" font-size="42" fill="rgba(206,147,216,0.6)" dominant-baseline="middle">h</text>
+  <text x="680" y="380" font-family="monospace" font-size="42" fill="rgba(206,147,216,0.6)" dominant-baseline="middle">h</text>
+  <text x="680" y="500" font-family="monospace" font-size="42" fill="rgba(206,147,216,0.6)" dominant-baseline="middle">h</text>
+  <text x="680" y="620" font-family="monospace" font-size="42" fill="rgba(206,147,216,0.6)" dominant-baseline="middle">h</text>
+  <text x="680" y="740" font-family="monospace" font-size="42" fill="rgba(206,147,216,0.6)" dominant-baseline="middle">h</text>
+
+  <!-- Bottom label -->
+  <text x="512" y="900" font-family="monospace" font-size="64" font-weight="bold" fill="#E1BEE7" text-anchor="middle" filter="url(#neonGlow)">BIN → HEX</text>
+</svg>

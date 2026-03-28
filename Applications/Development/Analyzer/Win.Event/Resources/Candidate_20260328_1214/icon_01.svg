@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Background: bright blue gradient -->
+  <defs>
+    <linearGradient id="bg01" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#E3F2FD"/>
+      <stop offset="100%" style="stop-color:#1976D2"/>
+    </linearGradient>
+    <linearGradient id="shieldGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFFFFF"/>
+      <stop offset="100%" style="stop-color:#E8EAF6"/>
+    </linearGradient>
+    <filter id="shadow01">
+      <feDropShadow dx="0" dy="8" stdDeviation="16" flood-color="#0D47A1" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" fill="url(#bg01)" rx="120"/>
+
+  <!-- Layer 2: Shield -->
+  <g filter="url(#shadow01)">
+    <path d="M512 160 L720 240 L720 500 Q720 660 512 780 Q304 660 304 500 L304 240 Z"
+          fill="url(#shieldGrad)" stroke="#1565C0" stroke-width="18" stroke-linejoin="round"/>
+  </g>
+
+  <!-- Layer 3: Exclamation mark in shield -->
+  <rect x="487" y="310" width="50" height="230" rx="25" fill="#FFC107"/>
+  <circle cx="512" cy="618" r="30" fill="#FFC107"/>
+
+  <!-- Log lines below shield -->
+  <rect x="340" y="820" width="140" height="22" rx="11" fill="rgba(255,255,255,0.75)"/>
+  <rect x="340" y="858" width="110" height="22" rx="11" fill="rgba(255,255,255,0.55)"/>
+  <rect x="340" y="896" width="125" height="22" rx="11" fill="rgba(255,255,255,0.4)"/>
+
+  <rect x="504" y="820" width="180" height="22" rx="11" fill="rgba(255,255,255,0.75)"/>
+  <rect x="504" y="858" width="150" height="22" rx="11" fill="rgba(255,255,255,0.55)"/>
+  <rect x="504" y="896" width="165" height="22" rx="11" fill="rgba(255,255,255,0.4)"/>
+</svg>

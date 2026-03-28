@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- 배경: 밝은 파랑 그라데이션 -->
+  <defs>
+    <linearGradient id="bg01" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E3F2FD"/>
+      <stop offset="100%" stop-color="#1565C0"/>
+    </linearGradient>
+    <linearGradient id="waveGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00E5FF"/>
+      <stop offset="50%" stop-color="#18FFFF"/>
+      <stop offset="100%" stop-color="#00BCD4"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="120" fill="url(#bg01)"/>
+
+  <!-- 서버 박스 (좌측) -->
+  <rect x="100" y="360" width="220" height="304" rx="18" fill="#1976D2" stroke="white" stroke-width="12"/>
+  <!-- 서버 슬롯 라인들 -->
+  <rect x="128" y="396" width="164" height="32" rx="8" fill="#42A5F5" stroke="white" stroke-width="6"/>
+  <rect x="128" y="452" width="164" height="32" rx="8" fill="#42A5F5" stroke="white" stroke-width="6"/>
+  <rect x="128" y="508" width="164" height="32" rx="8" fill="#42A5F5" stroke="white" stroke-width="6"/>
+  <!-- 서버 LED -->
+  <circle cx="172" cy="588" r="12" fill="#69FF47"/>
+  <circle cx="212" cy="588" r="12" fill="#69FF47"/>
+  <circle cx="252" cy="588" r="12" fill="#FFD600"/>
+  <!-- 서버 라벨 -->
+  <rect x="128" y="616" width="164" height="28" rx="6" fill="#0D47A1"/>
+  <rect x="140" y="622" width="60" height="16" rx="4" fill="#90CAF9"/>
+  <rect x="212" y="622" width="60" height="16" rx="4" fill="#90CAF9"/>
+
+  <!-- 클라이언트 박스 (우측) — 모니터 -->
+  <rect x="704" y="360" width="220" height="220" rx="18" fill="#1976D2" stroke="white" stroke-width="12"/>
+  <rect x="724" y="380" width="180" height="140" rx="8" fill="#0A1929"/>
+  <!-- 모니터 화면 내용 -->
+  <rect x="736" y="392" width="100" height="10" rx="4" fill="#42A5F5"/>
+  <rect x="736" y="412" width="140" height="8" rx="4" fill="#90CAF9" opacity="0.7"/>
+  <rect x="736" y="428" width="120" height="8" rx="4" fill="#90CAF9" opacity="0.7"/>
+  <rect x="736" y="448" width="80" height="8" rx="4" fill="#69FF47" opacity="0.9"/>
+  <rect x="736" y="464" width="110" height="8" rx="4" fill="#90CAF9" opacity="0.7"/>
+  <rect x="736" y="480" width="130" height="8" rx="4" fill="#00E5FF" opacity="0.8"/>
+  <rect x="736" y="496" width="90" height="8" rx="4" fill="#FFD600" opacity="0.8"/>
+  <!-- 모니터 스탠드 -->
+  <rect x="794" y="580" width="36" height="40" rx="4" fill="#1976D2" stroke="white" stroke-width="8"/>
+  <rect x="760" y="612" width="104" height="16" rx="8" fill="#1565C0" stroke="white" stroke-width="6"/>
+
+  <!-- 양방향 화살표 -->
+  <!-- 위쪽 화살표: 서버 → 클라이언트 -->
+  <line x1="330" y1="460" x2="694" y2="430" stroke="white" stroke-width="14" stroke-linecap="round"/>
+  <polygon points="694,430 658,410 668,450" fill="white"/>
+  <!-- 아래쪽 화살표: 클라이언트 → 서버 -->
+  <line x1="694" y1="530" x2="330" y2="560" stroke="#FFD600" stroke-width="14" stroke-linecap="round"/>
+  <polygon points="330,560 366,540 356,580" fill="#FFD600"/>
+
+  <!-- 파형 (화살표 위) -->
+  <path d="M370,435 Q390,405 410,435 Q430,465 450,435 Q470,405 490,435 Q510,465 530,435 Q550,405 570,435 Q590,465 610,435 Q630,405 650,435"
+        fill="none" stroke="url(#waveGrad)" stroke-width="14" stroke-linecap="round"/>
+
+  <!-- 파형 (아래 화살표 위) -->
+  <path d="M370,545 Q390,515 410,545 Q430,575 450,545 Q470,515 490,545 Q510,575 530,545 Q550,515 570,545 Q590,575 610,545 Q630,515 650,545"
+        fill="none" stroke="#FFD600" stroke-width="10" stroke-linecap="round" opacity="0.8"/>
+
+  <!-- 상단 타이틀 영역 -->
+  <rect x="330" y="200" width="364" height="72" rx="18" fill="#0D47A1" opacity="0.85"/>
+  <text x="512" y="248" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="44" font-weight="bold" fill="white">Signal.Flow</text>
+
+  <!-- 하단 레이블 -->
+  <text x="210" y="700" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="36" font-weight="bold" fill="white">SERVER</text>
+  <text x="814" y="700" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="36" font-weight="bold" fill="white">CLIENT</text>
+
+  <!-- 중앙 연결 노드 -->
+  <circle cx="512" cy="492" r="28" fill="#00E5FF" stroke="white" stroke-width="10"/>
+  <circle cx="512" cy="492" r="14" fill="white"/>
+</svg>

@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg_lm03" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#B3E5FC"/>
+      <stop offset="100%" stop-color="#0288D1"/>
+    </linearGradient>
+    <linearGradient id="river_a" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#29B6F6"/>
+      <stop offset="100%" stop-color="#0277BD"/>
+    </linearGradient>
+    <linearGradient id="river_b" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#00E5FF"/>
+      <stop offset="100%" stop-color="#00ACC1"/>
+    </linearGradient>
+    <linearGradient id="river_c" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#81D4FA"/>
+      <stop offset="100%" stop-color="#039BE5"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Layer 1: Background (sky) -->
+  <rect width="1024" height="1024" fill="url(#bg_lm03)" rx="120"/>
+
+  <!-- Layer 2: Three river tributaries converging -->
+  <!-- River A (left) -->
+  <path d="M160,130 C180,300 260,500 420,680" fill="none" stroke="url(#river_a)" stroke-width="80" stroke-linecap="round"/>
+  <!-- River B (center) -->
+  <path d="M512,100 C512,300 512,480 512,680" fill="none" stroke="url(#river_b)" stroke-width="80" stroke-linecap="round"/>
+  <!-- River C (right) -->
+  <path d="M864,130 C840,300 760,500 600,680" fill="none" stroke="url(#river_c)" stroke-width="80" stroke-linecap="round"/>
+
+  <!-- Confluence zone (blending area) -->
+  <ellipse cx="512" cy="700" rx="240" ry="80" fill="#0277BD" opacity="0.6"/>
+
+  <!-- Layer 3: Main merged river -->
+  <path d="M420,680 Q512,760 512,760 Q512,760 600,680 Q560,760 512,800 Q464,760 420,680"
+    fill="#01579B" opacity="0.8"/>
+  <path d="M512,760 C512,820 512,880 512,950" fill="none" stroke="#01579B" stroke-width="120" stroke-linecap="round"/>
+
+  <!-- White foam/ripple marks -->
+  <ellipse cx="512" cy="700" rx="100" ry="30" fill="white" opacity="0.3"/>
+  <ellipse cx="512" cy="830" rx="80" ry="22" fill="white" opacity="0.25"/>
+
+  <!-- Source ripples at top -->
+  <ellipse cx="160" cy="130" rx="50" ry="30" fill="white" opacity="0.35"/>
+  <ellipse cx="512" cy="100" rx="50" ry="24" fill="white" opacity="0.35"/>
+  <ellipse cx="864" cy="130" rx="50" ry="30" fill="white" opacity="0.35"/>
+
+  <!-- Small clouds/foam at source -->
+  <circle cx="160" cy="130" r="38" fill="white" opacity="0.4"/>
+  <circle cx="512" cy="100" r="38" fill="white" opacity="0.4"/>
+  <circle cx="864" cy="130" r="38" fill="white" opacity="0.4"/>
+</svg>

@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg_ll04" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#7B2FBE"/>
+      <stop offset="100%" stop-color="#C77DFF"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" fill="url(#bg_ll04)" rx="120"/>
+
+  <!-- Layer 2: Eye shape (white) -->
+  <!-- Eye outline: two arcs forming eye shape -->
+  <path d="M140,512 Q512,140 884,512 Q512,884 140,512 Z"
+    fill="white" opacity="0.96"/>
+  <!-- Pupil area (purple, creates the iris) -->
+  <circle cx="512" cy="512" r="200" fill="#7B2FBE"/>
+  <!-- Iris ring -->
+  <circle cx="512" cy="512" r="200" fill="none" stroke="#C77DFF" stroke-width="24" opacity="0.6"/>
+
+  <!-- Layer 3: Horizontal log lines inside pupil -->
+  <line x1="360" y1="460" x2="660" y2="460" stroke="#87CEEB" stroke-width="20" stroke-linecap="round"/>
+  <line x1="340" y1="512" x2="680" y2="512" stroke="#87CEEB" stroke-width="20" stroke-linecap="round"/>
+  <line x1="360" y1="564" x2="660" y2="564" stroke="#87CEEB" stroke-width="20" stroke-linecap="round"/>
+
+  <!-- Center dot (pupil) -->
+  <circle cx="512" cy="512" r="50" fill="#E0D7FF"/>
+
+  <!-- Log lines flowing below the eye -->
+  <line x1="200" y1="660" x2="824" y2="660" stroke="white" stroke-width="16" stroke-linecap="round" opacity="0.5"/>
+  <line x1="240" y1="720" x2="784" y2="720" stroke="white" stroke-width="14" stroke-linecap="round" opacity="0.4"/>
+  <line x1="280" y1="780" x2="744" y2="780" stroke="white" stroke-width="12" stroke-linecap="round" opacity="0.3"/>
+  <line x1="320" y1="838" x2="704" y2="838" stroke="white" stroke-width="10" stroke-linecap="round" opacity="0.2"/>
+
+  <!-- Color accent dots in eye corners (left/right) -->
+  <circle cx="160" cy="512" r="20" fill="#87CEEB" opacity="0.8"/>
+  <circle cx="864" cy="512" r="20" fill="#87CEEB" opacity="0.8"/>
+</svg>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Log.Lens — Icon Candidates</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #1A2530;
+    color: #E0E0E0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    padding: 40px 20px;
+    min-height: 100vh;
+  }
+  h1 {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #80DEEA;
+    letter-spacing: 1px;
+  }
+  .subtitle {
+    text-align: center;
+    font-size: 0.95rem;
+    color: #888;
+    margin-bottom: 48px;
+  }
+  .grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px;
+    justify-content: center;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .card {
+    background: #263040;
+    border-radius: 16px;
+    padding: 28px 24px 20px;
+    width: 240px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 4px 20px #00000050;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 36px #00000070;
+  }
+  .icon-wrap {
+    width: 200px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: width 0.25s, height 0.25s;
+    overflow: visible;
+  }
+  .card:hover .icon-wrap {
+    width: 260px;
+    height: 260px;
+  }
+  .icon-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 12px;
+  }
+  .filename {
+    margin-top: 16px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #80DEEA;
+    letter-spacing: 0.5px;
+  }
+  .concept {
+    margin-top: 6px;
+    font-size: 0.78rem;
+    color: #AAAAAA;
+    text-align: center;
+    line-height: 1.5;
+  }
+  .palette {
+    display: flex;
+    gap: 8px;
+    margin-top: 14px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .swatch {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 2px solid #ffffff22;
+    display: inline-block;
+  }
+</style>
+</head>
+<body>
+<h1>Log.Lens</h1>
+<p class="subtitle">로그 파일 멀티탭 뷰어 — 검색/필터 — Icon Candidates (2026-03-28)</p>
+
+<div class="grid">
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_01.svg" alt="icon_01"/></div>
+    <div class="filename">icon_01.svg</div>
+    <div class="concept">[INFO]/[WARN]/[ERROR] 로그 줄<br/>컬러 레벨 뷰어 (literal · 중앙 심볼)</div>
+    <div class="palette">
+      <span class="swatch" style="background:#E3F2FD"></span>
+      <span class="swatch" style="background:#1565C0"></span>
+      <span class="swatch" style="background:#4CAF50"></span>
+      <span class="swatch" style="background:#FF9800"></span>
+      <span class="swatch" style="background:#F44336"></span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_02.svg" alt="icon_02"/></div>
+    <div class="filename">icon_02.svg</div>
+    <div class="concept">탭 달린 뷰어 창 + 검색바<br/>(literal · 레이어드)</div>
+    <div class="palette">
+      <span class="swatch" style="background:#E0F7FA"></span>
+      <span class="swatch" style="background:#00ACC1"></span>
+      <span class="swatch" style="background:#B2EBF2"></span>
+      <span class="swatch" style="background:#FFFFFF"></span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_03.svg" alt="icon_03"/></div>
+    <div class="filename">icon_03.svg</div>
+    <div class="concept">렌즈로 텍스트 스트림 확대<br/>"Lens" 직접 묘사 (metaphor · 장면)</div>
+    <div class="palette">
+      <span class="swatch" style="background:#FFFDE7"></span>
+      <span class="swatch" style="background:#FFF176"></span>
+      <span class="swatch" style="background:#00695C"></span>
+      <span class="swatch" style="background:#F97316"></span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_04.svg" alt="icon_04"/></div>
+    <div class="filename">icon_04.svg</div>
+    <div class="concept">눈(eye) + 흘러내리는 로그 라인<br/>"보다" 은유 (metaphor · 기하학)</div>
+    <div class="palette">
+      <span class="swatch" style="background:#7B2FBE"></span>
+      <span class="swatch" style="background:#C77DFF"></span>
+      <span class="swatch" style="background:#FFFFFF"></span>
+      <span class="swatch" style="background:#87CEEB"></span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_05.svg" alt="icon_05"/></div>
+    <div class="filename">icon_05.svg</div>
+    <div class="concept">필터 깔때기 + "LOG" 텍스트<br/>필터링 핵심 기능 (hybrid · 동적)</div>
+    <div class="palette">
+      <span class="swatch" style="background:#F8BBD9"></span>
+      <span class="swatch" style="background:#CE93D8"></span>
+      <span class="swatch" style="background:#4A148C"></span>
+      <span class="swatch" style="background:#FFFFFF"></span>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg03" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFCDD2"/>
+      <stop offset="100%" style="stop-color:#EF5350"/>
+    </linearGradient>
+    <linearGradient id="waveGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#B71C1C"/>
+      <stop offset="50%" style="stop-color:#D32F2F"/>
+      <stop offset="100%" style="stop-color:#B71C1C"/>
+    </linearGradient>
+    <filter id="glow03">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" fill="url(#bg03)" rx="120"/>
+
+  <!-- Layer 2: ECG waveform panel -->
+  <rect x="80" y="340" width="864" height="344" rx="28" fill="rgba(255,255,255,0.18)"/>
+
+  <!-- Grid lines -->
+  <line x1="80" y1="512" x2="944" y2="512" stroke="rgba(255,255,255,0.3)" stroke-width="3" stroke-dasharray="16,12"/>
+  <line x1="80" y1="420" x2="944" y2="420" stroke="rgba(255,255,255,0.15)" stroke-width="2" stroke-dasharray="8,16"/>
+  <line x1="80" y1="604" x2="944" y2="604" stroke="rgba(255,255,255,0.15)" stroke-width="2" stroke-dasharray="8,16"/>
+  <line x1="296" y1="340" x2="296" y2="684" stroke="rgba(255,255,255,0.15)" stroke-width="2" stroke-dasharray="8,16"/>
+  <line x1="512" y1="340" x2="512" y2="684" stroke="rgba(255,255,255,0.15)" stroke-width="2" stroke-dasharray="8,16"/>
+  <line x1="728" y1="340" x2="728" y2="684" stroke="rgba(255,255,255,0.15)" stroke-width="2" stroke-dasharray="8,16"/>
+
+  <!-- Layer 3: ECG waveform path -->
+  <!-- Flat → small bump → sharp spike up → sharp spike down → flat → repeat -->
+  <polyline
+    points="80,512 200,512 240,512 260,480 280,512 320,512 360,380 390,650 415,512 440,512 480,512 520,480 540,512 580,512 620,380 650,650 675,512 700,512 740,512 780,480 800,512 840,512 944,512"
+    fill="none" stroke="url(#waveGrad)" stroke-width="22" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Highlight dot at spike peak -->
+  <circle cx="360" cy="380" r="20" fill="white" filter="url(#glow03)"/>
+  <circle cx="620" cy="380" r="20" fill="white" filter="url(#glow03)"/>
+
+  <!-- Monitor frame top corners -->
+  <rect x="80" y="200" width="864" height="56" rx="28" fill="rgba(180,0,0,0.45)"/>
+  <circle cx="128" cy="228" r="16" fill="#FF8A80"/>
+  <circle cx="176" cy="228" r="16" fill="#FFD740"/>
+  <circle cx="224" cy="228" r="16" fill="#69F0AE"/>
+  <text x="512" y="242" font-family="Arial,sans-serif" font-size="26" fill="rgba(255,255,255,0.9)" text-anchor="middle" dominant-baseline="middle" font-weight="bold">LIVE MONITOR</text>
+
+  <!-- Bottom label -->
+  <text x="512" y="790" font-family="Arial,sans-serif" font-size="68" font-weight="bold" fill="rgba(255,255,255,0.9)" text-anchor="middle">SYSTEM HEALTH</text>
+</svg>

@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg_ll03" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFFDE7"/>
+      <stop offset="100%" stop-color="#FFF176"/>
+    </linearGradient>
+    <clipPath id="lens_clip03">
+      <circle cx="480" cy="460" r="270"/>
+    </clipPath>
+  </defs>
+
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" fill="url(#bg_ll03)" rx="120"/>
+
+  <!-- Layer 2: Magnifying glass -->
+  <!-- Outer glow ring -->
+  <circle cx="480" cy="460" r="310" fill="#00838F" opacity="0.15"/>
+  <!-- Lens fill -->
+  <circle cx="480" cy="460" r="270" fill="white" opacity="0.98"/>
+  <!-- Lens border (thick, dark teal) -->
+  <circle cx="480" cy="460" r="270" fill="none" stroke="#00695C" stroke-width="64"/>
+
+  <!-- Layer 3: Enlarged text lines inside lens (orange/teal) -->
+  <g clip-path="url(#lens_clip03)">
+    <!-- Simulated log text lines, slightly enlarged/zoomed look -->
+    <rect x="260" y="298" width="90" height="36" rx="8" fill="#4CAF50"/>
+    <text x="305" y="325" font-family="monospace, Arial" font-size="30" font-weight="700"
+      text-anchor="middle" fill="white">INFO</text>
+    <rect x="368" y="304" width="320" height="24" rx="6" fill="#F97316" opacity="0.6"/>
+
+    <rect x="260" y="360" width="100" height="36" rx="8" fill="#FF9800"/>
+    <text x="310" y="387" font-family="monospace, Arial" font-size="30" font-weight="700"
+      text-anchor="middle" fill="white">WARN</text>
+    <rect x="378" y="366" width="260" height="24" rx="6" fill="#F97316" opacity="0.6"/>
+
+    <rect x="260" y="422" width="110" height="36" rx="8" fill="#EF4444"/>
+    <text x="315" y="449" font-family="monospace, Arial" font-size="30" font-weight="700"
+      text-anchor="middle" fill="white">ERROR</text>
+    <rect x="388" y="428" width="200" height="24" rx="6" fill="#F97316" opacity="0.6"/>
+
+    <rect x="260" y="484" width="90" height="36" rx="8" fill="#4CAF50"/>
+    <text x="305" y="511" font-family="monospace, Arial" font-size="30" font-weight="700"
+      text-anchor="middle" fill="white">INFO</text>
+    <rect x="368" y="490" width="340" height="24" rx="6" fill="#F97316" opacity="0.6"/>
+
+    <rect x="260" y="546" width="110" height="36" rx="8" fill="#EF4444"/>
+    <text x="315" y="573" font-family="monospace, Arial" font-size="30" font-weight="700"
+      text-anchor="middle" fill="white">ERROR</text>
+    <rect x="388" y="552" width="180" height="24" rx="6" fill="#F97316" opacity="0.6"/>
+
+    <!-- Highlight stripe (search result) -->
+    <rect x="240" y="412" width="480" height="58" rx="6" fill="#FFEB3B" opacity="0.35"/>
+  </g>
+
+  <!-- Handle -->
+  <line x1="700" y1="690" x2="870" y2="860"
+    stroke="#00695C" stroke-width="80" stroke-linecap="round"/>
+  <line x1="700" y1="690" x2="870" y2="860"
+    stroke="#00897B" stroke-width="52" stroke-linecap="round"/>
+</svg>

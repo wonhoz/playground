@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg04" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFF9C4"/>
+      <stop offset="100%" style="stop-color:#FBC02D"/>
+    </linearGradient>
+    <linearGradient id="bellGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#FF8F00"/>
+      <stop offset="100%" style="stop-color:#E65100"/>
+    </linearGradient>
+    <filter id="shadow04">
+      <feDropShadow dx="0" dy="12" stdDeviation="20" flood-color="#BF360C" flood-opacity="0.4"/>
+    </filter>
+    <filter id="glow04">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" fill="url(#bg04)" rx="120"/>
+
+  <!-- Sparkles top -->
+  <polygon points="512,100 524,130 556,130 530,148 540,180 512,162 484,180 494,148 468,130 500,130" fill="#FFE57F" opacity="0.9"/>
+  <polygon points="300,140 308,160 330,160 312,172 319,194 300,182 281,194 288,172 270,160 292,160" fill="#FFCC02" opacity="0.7"/>
+  <polygon points="724,140 732,160 754,160 736,172 743,194 724,182 705,194 712,172 694,160 716,160" fill="#FFCC02" opacity="0.7"/>
+
+  <!-- Layer 2: Bell -->
+  <g filter="url(#shadow04)">
+    <!-- Bell body -->
+    <path d="M512 240 C400 240 310 340 310 480 L310 640 L714 640 L714 480 C714 340 624 240 512 240 Z"
+          fill="url(#bellGrad)" stroke="#BF360C" stroke-width="14"/>
+    <!-- Bell top mount -->
+    <rect x="488" y="180" width="48" height="80" rx="24" fill="#FF8F00" stroke="#BF360C" stroke-width="10"/>
+    <circle cx="512" cy="175" r="28" fill="#FF8F00" stroke="#BF360C" stroke-width="10"/>
+    <!-- Bell clapper -->
+    <rect x="498" y="620" width="28" height="70" rx="14" fill="#BF360C"/>
+    <circle cx="512" cy="712" r="32" fill="#BF360C"/>
+    <!-- Bell bottom rim -->
+    <ellipse cx="512" cy="640" rx="202" ry="36" fill="#E65100" stroke="#BF360C" stroke-width="10"/>
+  </g>
+
+  <!-- Layer 3: Vibration lines -->
+  <path d="M240 360 Q190 480 240 600" fill="none" stroke="#E53935" stroke-width="28" stroke-linecap="round" opacity="0.9" filter="url(#glow04)"/>
+  <path d="M180 300 Q110 480 180 660" fill="none" stroke="#EF5350" stroke-width="20" stroke-linecap="round" opacity="0.65"/>
+  <path d="M784 360 Q834 480 784 600" fill="none" stroke="#E53935" stroke-width="28" stroke-linecap="round" opacity="0.9" filter="url(#glow04)"/>
+  <path d="M844 300 Q914 480 844 660" fill="none" stroke="#EF5350" stroke-width="20" stroke-linecap="round" opacity="0.65"/>
+
+  <!-- Alert text -->
+  <rect x="290" y="780" width="444" height="90" rx="45" fill="rgba(191,54,12,0.85)"/>
+  <text x="512" y="833" font-family="Arial,sans-serif" font-size="72" font-weight="bold" fill="white" text-anchor="middle" dominant-baseline="middle">ALERT</text>
+</svg>

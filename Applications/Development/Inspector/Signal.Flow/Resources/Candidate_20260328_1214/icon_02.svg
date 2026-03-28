@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- 배경: 따뜻한 오렌지 그라데이션 -->
+  <defs>
+    <linearGradient id="bg02" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF3E0"/>
+      <stop offset="100%" stop-color="#E65100"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="120" fill="url(#bg02)"/>
+
+  <!-- 메인 피드 패널 -->
+  <rect x="140" y="180" width="744" height="664" rx="24" fill="white" opacity="0.95" stroke="#FF8C00" stroke-width="8"/>
+
+  <!-- 패널 헤더 -->
+  <rect x="140" y="180" width="744" height="72" rx="24" fill="#E65100"/>
+  <rect x="140" y="216" width="744" height="36" fill="#E65100"/>
+  <circle cx="190" cy="216" r="14" fill="#FF6D00"/>
+  <circle cx="234" cy="216" r="14" fill="#FFB300"/>
+  <circle cx="278" cy="216" r="14" fill="#69FF47"/>
+  <text x="430" y="228" text-anchor="middle" font-family="Segoe UI Mono, Consolas, monospace" font-size="32" font-weight="bold" fill="white">Event Stream</text>
+
+  <!-- 이벤트 항목 1: notify (초록) -->
+  <rect x="170" y="288" width="684" height="84" rx="12" fill="#F1F8E9"/>
+  <circle cx="218" cy="330" r="20" fill="#4CAF50"/>
+  <text x="258" y="322" font-family="Segoe UI Mono, Consolas, monospace" font-size="30" font-weight="bold" fill="#2E7D32">notify</text>
+  <text x="258" y="356" font-family="Segoe UI Mono, Consolas, monospace" font-size="24" fill="#558B2F">user.connected { id: "client-01" }</text>
+  <text x="792" y="334" text-anchor="end" font-family="Segoe UI Mono, Consolas, monospace" font-size="22" fill="#9E9E9E">12:14:05</text>
+
+  <!-- 이벤트 항목 2: update (노랑) -->
+  <rect x="170" y="390" width="684" height="84" rx="12" fill="#FFFDE7"/>
+  <circle cx="218" cy="432" r="20" fill="#FFC107"/>
+  <text x="258" y="424" font-family="Segoe UI Mono, Consolas, monospace" font-size="30" font-weight="bold" fill="#F57F17">update</text>
+  <text x="258" y="458" font-family="Segoe UI Mono, Consolas, monospace" font-size="24" fill="#F9A825">data.push { count: 42, delta: +3 }</text>
+  <text x="792" y="436" text-anchor="end" font-family="Segoe UI Mono, Consolas, monospace" font-size="22" fill="#9E9E9E">12:14:06</text>
+
+  <!-- 이벤트 항목 3: warning (빨강) -->
+  <rect x="170" y="492" width="684" height="84" rx="12" fill="#FFF3E0"/>
+  <circle cx="218" cy="534" r="20" fill="#F44336"/>
+  <text x="258" y="526" font-family="Segoe UI Mono, Consolas, monospace" font-size="30" font-weight="bold" fill="#B71C1C">warning</text>
+  <text x="258" y="560" font-family="Segoe UI Mono, Consolas, monospace" font-size="24" fill="#D32F2F">timeout { client: "02", retry: 3 }</text>
+  <text x="792" y="538" text-anchor="end" font-family="Segoe UI Mono, Consolas, monospace" font-size="22" fill="#9E9E9E">12:14:07</text>
+
+  <!-- 이벤트 항목 4: notify (초록) -->
+  <rect x="170" y="594" width="684" height="84" rx="12" fill="#F1F8E9" opacity="0.85"/>
+  <circle cx="218" cy="636" r="20" fill="#4CAF50"/>
+  <text x="258" y="628" font-family="Segoe UI Mono, Consolas, monospace" font-size="30" font-weight="bold" fill="#2E7D32">notify</text>
+  <text x="258" y="662" font-family="Segoe UI Mono, Consolas, monospace" font-size="24" fill="#558B2F">sse.subscribe { channel: "main" }</text>
+  <text x="792" y="640" text-anchor="end" font-family="Segoe UI Mono, Consolas, monospace" font-size="22" fill="#9E9E9E">12:14:08</text>
+
+  <!-- 이벤트 항목 5: update (파랑) -->
+  <rect x="170" y="696" width="684" height="84" rx="12" fill="#E3F2FD" opacity="0.7"/>
+  <circle cx="218" cy="738" r="20" fill="#2196F3"/>
+  <text x="258" y="730" font-family="Segoe UI Mono, Consolas, monospace" font-size="30" font-weight="bold" fill="#0D47A1">update</text>
+  <text x="258" y="764" font-family="Segoe UI Mono, Consolas, monospace" font-size="24" fill="#1565C0">heartbeat { ping: 18ms }</text>
+  <text x="792" y="742" text-anchor="end" font-family="Segoe UI Mono, Consolas, monospace" font-size="22" fill="#9E9E9E">12:14:09</text>
+
+  <!-- 커서 깜빡임 표시 (마지막 줄) -->
+  <rect x="170" y="798" width="40" height="36" rx="4" fill="#FF6D00" opacity="0.7"/>
+</svg>

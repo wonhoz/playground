@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg01" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#E8F5E9"/>
+      <stop offset="100%" style="stop-color:#4CAF50"/>
+    </linearGradient>
+    <linearGradient id="panelGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1B5E20"/>
+      <stop offset="100%" style="stop-color:#2E7D32"/>
+    </linearGradient>
+    <filter id="shadow01">
+      <feDropShadow dx="0" dy="12" stdDeviation="20" flood-color="#1B5E20" flood-opacity="0.45"/>
+    </filter>
+  </defs>
+
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" fill="url(#bg01)" rx="120"/>
+
+  <!-- Layer 2: Dark terminal panel -->
+  <g filter="url(#shadow01)">
+    <rect x="100" y="140" width="824" height="700" rx="28" fill="url(#panelGrad)"/>
+  </g>
+
+  <!-- Terminal header bar -->
+  <rect x="100" y="140" width="824" height="56" rx="28" fill="#388E3C"/>
+  <rect x="100" y="167" width="824" height="29" fill="#388E3C"/>
+  <circle cx="148" cy="168" r="14" fill="#EF5350"/>
+  <circle cx="194" cy="168" r="14" fill="#FFB300"/>
+  <circle cx="240" cy="168" r="14" fill="#66BB6A"/>
+  <text x="512" y="175" font-family="monospace" font-size="28" fill="rgba(255,255,255,0.7)" text-anchor="middle" dominant-baseline="middle">Hex.Peek</text>
+
+  <!-- Layer 3: Hex grid — 3 rows × 4 cols -->
+  <!-- Row 1 -->
+  <text x="148" y="300" font-family="monospace" font-size="86" font-weight="bold" fill="rgba(255,255,255,0.6)">FF</text>
+  <text x="362" y="300" font-family="monospace" font-size="86" font-weight="bold" fill="rgba(255,255,255,0.6)">4A</text>
+  <text x="576" y="300" font-family="monospace" font-size="86" font-weight="bold" fill="rgba(255,255,255,0.6)">0D</text>
+  <text x="790" y="300" font-family="monospace" font-size="86" font-weight="bold" fill="rgba(255,255,255,0.6)">2C</text>
+
+  <!-- Row 2 — highlighted -->
+  <rect x="120" y="315" width="784" height="108" rx="16" fill="rgba(255,235,59,0.28)"/>
+  <text x="148" y="400" font-family="monospace" font-size="86" font-weight="bold" fill="#FFEE58">50</text>
+  <text x="362" y="400" font-family="monospace" font-size="86" font-weight="bold" fill="#FFEE58">45</text>
+  <text x="576" y="400" font-family="monospace" font-size="86" font-weight="bold" fill="#FFEE58">00</text>
+  <text x="790" y="400" font-family="monospace" font-size="86" font-weight="bold" fill="#FFEE58">00</text>
+
+  <!-- Row 3 -->
+  <text x="148" y="500" font-family="monospace" font-size="86" font-weight="bold" fill="rgba(255,255,255,0.6)">B8</text>
+  <text x="362" y="500" font-family="monospace" font-size="86" font-weight="bold" fill="rgba(255,255,255,0.6)">1C</text>
+  <text x="576" y="500" font-family="monospace" font-size="86" font-weight="bold" fill="rgba(255,255,255,0.6)">6F</text>
+  <text x="790" y="500" font-family="monospace" font-size="86" font-weight="bold" fill="rgba(255,255,255,0.6)">3A</text>
+
+  <!-- Row 4 -->
+  <text x="148" y="600" font-family="monospace" font-size="86" font-weight="bold" fill="rgba(255,255,255,0.38)">A3</text>
+  <text x="362" y="600" font-family="monospace" font-size="86" font-weight="bold" fill="rgba(255,255,255,0.38)">7E</text>
+  <text x="576" y="600" font-family="monospace" font-size="86" font-weight="bold" fill="rgba(255,255,255,0.38)">C1</text>
+  <text x="790" y="600" font-family="monospace" font-size="86" font-weight="bold" fill="rgba(255,255,255,0.38)">D4</text>
+
+  <!-- ASCII sidebar -->
+  <rect x="100" y="640" width="824" height="200" rx="0" fill="rgba(0,0,0,0.25)"/>
+  <rect x="100" y="640" width="824" height="200" rx="28" fill="rgba(0,0,0,0.25)"/>
+  <rect x="100" y="640" width="824" height="28" fill="rgba(0,0,0,0.25)"/>
+  <text x="148" y="720" font-family="monospace" font-size="68" fill="#80CBC4">PE..</text>
+  <text x="148" y="800" font-family="monospace" font-size="40" fill="rgba(128,203,196,0.55)">ASCII view</text>
+</svg>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>App.Temp — Icon Candidates</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #3B3428;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      padding: 40px 30px 60px;
+      color: #E8ECF0;
+    }
+    h1 {
+      text-align: center;
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+      letter-spacing: 0.04em;
+      color: #FFCC80;
+    }
+    .subtitle {
+      text-align: center;
+      font-size: 1rem;
+      color: #A1887F;
+      margin-bottom: 44px;
+    }
+    .grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 36px;
+      justify-content: center;
+    }
+    .card {
+      background: #2A2218;
+      border-radius: 16px;
+      padding: 28px 24px 22px;
+      width: 260px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      border: 1.5px solid #4E3B26;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .card:hover {
+      box-shadow: 0 8px 36px rgba(255,152,0,0.35);
+      transform: translateY(-4px);
+    }
+    .icon-wrap {
+      width: 200px;
+      height: 200px;
+      transition: width 0.25s, height 0.25s;
+      cursor: pointer;
+    }
+    .card:hover .icon-wrap {
+      width: 260px;
+      height: 260px;
+    }
+    .icon-wrap img {
+      width: 100%;
+      height: 100%;
+      border-radius: 10px;
+    }
+    .filename {
+      margin-top: 16px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #FFB74D;
+      letter-spacing: 0.03em;
+    }
+    .concept {
+      margin-top: 6px;
+      font-size: 0.82rem;
+      color: #BCAAA4;
+      text-align: center;
+      line-height: 1.45;
+      min-height: 40px;
+    }
+    .palette {
+      display: flex;
+      gap: 8px;
+      margin-top: 14px;
+    }
+    .swatch {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.15);
+    }
+  </style>
+</head>
+<body>
+  <h1>App.Temp</h1>
+  <p class="subtitle">EXE 실행 중 파일시스템/레지스트리 변경 실시간 추적 샌드박스 분석 도구 — 아이콘 후보 2026-03-28</p>
+  <div class="grid">
+
+    <div class="card">
+      <div class="icon-wrap"><img src="icon_01.svg" alt="icon_01"></div>
+      <div class="filename">icon_01.svg</div>
+      <div class="concept">유리 박스 안 EXE 실행 장면<br>샌드박스 격리 직접 묘사 (literal)</div>
+      <div class="palette">
+        <div class="swatch" style="background:#E8F4FD" title="#E8F4FD"></div>
+        <div class="swatch" style="background:#42A5F5" title="#42A5F5"></div>
+        <div class="swatch" style="background:#FF7043" title="#FF7043"></div>
+        <div class="swatch" style="background:#1E88E5" title="#1E88E5"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="icon-wrap"><img src="icon_02.svg" alt="icon_02"></div>
+      <div class="filename">icon_02.svg</div>
+      <div class="concept">파일/레지스트리 변경 목록<br>+/~/- 뱃지로 변화 구분 (literal)</div>
+      <div class="palette">
+        <div class="swatch" style="background:#FFF8E1" title="#FFF8E1"></div>
+        <div class="swatch" style="background:#FF8F00" title="#FF8F00"></div>
+        <div class="swatch" style="background:#43A047" title="#43A047"></div>
+        <div class="swatch" style="background:#E53935" title="#E53935"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="icon-wrap"><img src="icon_03.svg" alt="icon_03"></div>
+      <div class="filename">icon_03.svg</div>
+      <div class="concept">현미경으로 EXE 관찰<br>앱 내부 동작 세밀 검사 (metaphor)</div>
+      <div class="palette">
+        <div class="swatch" style="background:#E8F5E9" title="#E8F5E9"></div>
+        <div class="swatch" style="background:#004D40" title="#004D40"></div>
+        <div class="swatch" style="background:#FFB300" title="#FFB300"></div>
+        <div class="swatch" style="background:#E65100" title="#E65100"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="icon-wrap"><img src="icon_04.svg" alt="icon_04"></div>
+      <div class="filename">icon_04.svg</div>
+      <div class="concept">거품 속에 갇힌 앱 아이콘<br>샌드박스 = 격리된 거품 (metaphor)</div>
+      <div class="palette">
+        <div class="swatch" style="background:#E3F2FD" title="#E3F2FD"></div>
+        <div class="swatch" style="background:#90CAF9" title="#90CAF9"></div>
+        <div class="swatch" style="background:#FF7043" title="#FF7043"></div>
+        <div class="swatch" style="background:#1E88E5" title="#1E88E5"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="icon-wrap"><img src="icon_05.svg" alt="icon_05"></div>
+      <div class="filename">icon_05.svg</div>
+      <div class="concept">레이더 동심원 + 중앙 EXE<br>실행 중 변화 감지 레이더 (hybrid)</div>
+      <div class="palette">
+        <div class="swatch" style="background:#FFF3E0" title="#FFF3E0"></div>
+        <div class="swatch" style="background:#FFCC80" title="#FFCC80"></div>
+        <div class="swatch" style="background:#FF5722" title="#FF5722"></div>
+        <div class="swatch" style="background:#FF9800" title="#FF9800"></div>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

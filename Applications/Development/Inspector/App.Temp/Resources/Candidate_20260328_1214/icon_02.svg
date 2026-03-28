@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg02" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFF8E1"/>
+      <stop offset="100%" style="stop-color:#FFE0B2"/>
+    </linearGradient>
+    <filter id="shadow02">
+      <feDropShadow dx="0" dy="8" stdDeviation="14" flood-color="#E65100" flood-opacity="0.28"/>
+    </filter>
+  </defs>
+
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" fill="url(#bg02)" rx="120"/>
+
+  <!-- Layer 2: List panel -->
+  <g filter="url(#shadow02)">
+    <rect x="120" y="160" width="784" height="704" rx="32" fill="white" stroke="#FFB74D" stroke-width="12"/>
+  </g>
+
+  <!-- Panel header -->
+  <rect x="120" y="160" width="784" height="90" rx="0" fill="#FF8F00"/>
+  <rect x="120" y="160" width="784" height="90" rx="32" fill="#FF8F00"/>
+  <rect x="120" y="205" width="784" height="45" fill="#FF8F00"/>
+  <text x="512" y="213" font-family="Arial,sans-serif" font-size="52" font-weight="bold" fill="white" text-anchor="middle" dominant-baseline="middle">Change Monitor</text>
+
+  <!-- Row 1: File added -->
+  <rect x="148" y="292" width="728" height="88" rx="16" fill="#E8F5E9"/>
+  <!-- File icon -->
+  <rect x="172" y="306" width="52" height="62" rx="8" fill="#66BB6A"/>
+  <polygon points="200,306 224,306 224,326 200,306" fill="#43A047"/>
+  <text x="198" y="341" font-family="monospace" font-size="18" fill="white" text-anchor="middle">TMP</text>
+  <!-- Path text -->
+  <text x="248" y="330" font-family="monospace" font-size="32" fill="#37474F" dominant-baseline="middle">C:\Temp\setup_7f2a.tmp</text>
+  <text x="248" y="365" font-family="monospace" font-size="26" fill="#78909C" dominant-baseline="middle">File Created</text>
+  <!-- + badge -->
+  <rect x="800" y="310" width="60" height="60" rx="30" fill="#43A047"/>
+  <text x="830" y="343" font-family="Arial,sans-serif" font-size="46" font-weight="bold" fill="white" text-anchor="middle" dominant-baseline="middle">+</text>
+
+  <!-- Row 2: Registry modified -->
+  <rect x="148" y="400" width="728" height="88" rx="16" fill="#FFF8E1"/>
+  <!-- Gear icon -->
+  <circle cx="198" cy="444" r="32" fill="#FF8F00"/>
+  <circle cx="198" cy="444" r="16" fill="#FFF8E1"/>
+  <text x="248" y="428" font-family="monospace" font-size="32" fill="#37474F" dominant-baseline="middle">HKCU\Software\Example</text>
+  <text x="248" y="466" font-family="monospace" font-size="26" fill="#78909C" dominant-baseline="middle">Registry Modified</text>
+  <!-- ~ badge -->
+  <rect x="800" y="418" width="60" height="60" rx="30" fill="#FFA000"/>
+  <text x="830" y="451" font-family="Arial,sans-serif" font-size="46" font-weight="bold" fill="white" text-anchor="middle" dominant-baseline="middle">~</text>
+
+  <!-- Row 3: File deleted -->
+  <rect x="148" y="508" width="728" height="88" rx="16" fill="#FFEBEE"/>
+  <rect x="172" y="520" width="52" height="62" rx="8" fill="#EF5350"/>
+  <polygon points="200,520 224,520 224,540 200,520" fill="#C62828"/>
+  <text x="198" y="555" font-family="monospace" font-size="18" fill="white" text-anchor="middle">EXE</text>
+  <text x="248" y="536" font-family="monospace" font-size="32" fill="#37474F" dominant-baseline="middle">C:\Temp\uninstall.exe</text>
+  <text x="248" y="572" font-family="monospace" font-size="26" fill="#78909C" dominant-baseline="middle">File Deleted</text>
+  <rect x="800" y="526" width="60" height="60" rx="30" fill="#E53935"/>
+  <text x="830" y="559" font-family="Arial,sans-serif" font-size="46" font-weight="bold" fill="white" text-anchor="middle" dominant-baseline="middle">-</text>
+
+  <!-- Row 4: Registry added -->
+  <rect x="148" y="616" width="728" height="88" rx="16" fill="#E8F5E9"/>
+  <circle cx="198" cy="660" r="32" fill="#66BB6A"/>
+  <circle cx="198" cy="660" r="16" fill="#E8F5E9"/>
+  <text x="248" y="644" font-family="monospace" font-size="32" fill="#37474F" dominant-baseline="middle">HKLM\Run\AppTemp</text>
+  <text x="248" y="682" font-family="monospace" font-size="26" fill="#78909C" dominant-baseline="middle">Registry Created</text>
+  <rect x="800" y="634" width="60" height="60" rx="30" fill="#43A047"/>
+  <text x="830" y="667" font-family="Arial,sans-serif" font-size="46" font-weight="bold" fill="white" text-anchor="middle" dominant-baseline="middle">+</text>
+
+  <!-- Row 5: File modified -->
+  <rect x="148" y="724" width="728" height="88" rx="16" fill="#FFF8E1"/>
+  <rect x="172" y="736" width="52" height="62" rx="8" fill="#FFA726"/>
+  <polygon points="200,736 224,736 224,756 200,736" fill="#E65100"/>
+  <text x="198" y="771" font-family="monospace" font-size="18" fill="white" text-anchor="middle">INI</text>
+  <text x="248" y="752" font-family="monospace" font-size="32" fill="#37474F" dominant-baseline="middle">C:\Temp\config.ini</text>
+  <text x="248" y="788" font-family="monospace" font-size="26" fill="#78909C" dominant-baseline="middle">File Modified</text>
+  <rect x="800" y="742" width="60" height="60" rx="30" fill="#FFA000"/>
+  <text x="830" y="775" font-family="Arial,sans-serif" font-size="46" font-weight="bold" fill="white" text-anchor="middle" dominant-baseline="middle">~</text>
+</svg>

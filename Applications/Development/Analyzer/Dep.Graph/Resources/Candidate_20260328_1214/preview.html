@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dep.Graph — Icon Candidates</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #1A2A1E;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    color: #E0E0E0;
+    min-height: 100vh;
+    padding: 40px 20px;
+  }
+  .header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+  .header h1 {
+    font-size: 36px;
+    font-weight: 900;
+    color: #80CBC4;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+  }
+  .header p {
+    font-size: 16px;
+    color: #80A090;
+  }
+  .grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 36px;
+    justify-content: center;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .card {
+    background: #112016;
+    border-radius: 18px;
+    padding: 28px 24px 24px;
+    width: 260px;
+    text-align: center;
+    border: 1px solid #2E5030;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 40px rgba(0,172,193,0.25);
+    border-color: #00ACC1;
+  }
+  .icon-wrap {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto 18px;
+    transition: width 0.25s, height 0.25s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .card:hover .icon-wrap {
+    width: 260px;
+    height: 260px;
+  }
+  .icon-wrap img {
+    width: 100%;
+    height: 100%;
+    border-radius: 14px;
+  }
+  .filename {
+    font-size: 14px;
+    font-weight: 700;
+    color: #80CBC4;
+    margin-bottom: 8px;
+    font-family: 'Consolas', monospace;
+  }
+  .concept {
+    font-size: 13px;
+    color: #90A8A0;
+    line-height: 1.5;
+    margin-bottom: 14px;
+    min-height: 40px;
+  }
+  .palette {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .swatch {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.2);
+  }
+  .badge {
+    display: inline-block;
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+  .literal { background: #1565C0; color: #90CAF9; }
+  .metaphor { background: #4A148C; color: #CE93D8; }
+  .hybrid { background: #004D40; color: #80CBC4; }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>Dep.Graph</h1>
+  <p>NuGet / npm / pip 패키지 의존성 그래프 시각화 도구 — 아이콘 후보 5종</p>
+</div>
+<div class="grid">
+
+  <div class="card">
+    <div class="icon-wrap">
+      <img src="icon_01.svg" alt="icon_01">
+    </div>
+    <div class="filename">icon_01.svg</div>
+    <span class="badge literal">literal</span>
+    <div class="concept">노드-엣지 그래프 구조 — 중앙 메인 노드에서 퍼지는 연결망</div>
+    <div class="palette">
+      <div class="swatch" style="background:#E3F2FD"></div>
+      <div class="swatch" style="background:#1976D2"></div>
+      <div class="swatch" style="background:#0D47A1"></div>
+      <div class="swatch" style="background:#FFD600"></div>
+      <div class="swatch" style="background:#00E5FF"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap">
+      <img src="icon_02.svg" alt="icon_02">
+    </div>
+    <div class="filename">icon_02.svg</div>
+    <span class="badge literal">literal</span>
+    <div class="concept">계층형 패키지 박스 + 의존 화살표 — 트리 구조 직접 묘사</div>
+    <div class="palette">
+      <div class="swatch" style="background:#FFF8E1"></div>
+      <div class="swatch" style="background:#F57F17"></div>
+      <div class="swatch" style="background:#FF8F00"></div>
+      <div class="swatch" style="background:#1565C0"></div>
+      <div class="swatch" style="background:#004880"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap">
+      <img src="icon_03.svg" alt="icon_03">
+    </div>
+    <div class="filename">icon_03.svg</div>
+    <span class="badge metaphor">metaphor</span>
+    <div class="concept">거미줄 패턴 — 복잡한 의존성이 얽히고설킨 구조 은유</div>
+    <div class="palette">
+      <div class="swatch" style="background:#F3E5F5"></div>
+      <div class="swatch" style="background:#AB47BC"></div>
+      <div class="swatch" style="background:#CE93D8"></div>
+      <div class="swatch" style="background:#4A148C"></div>
+      <div class="swatch" style="background:#E040FB"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap">
+      <img src="icon_04.svg" alt="icon_04">
+    </div>
+    <div class="filename">icon_04.svg</div>
+    <span class="badge metaphor">metaphor</span>
+    <div class="concept">나무 + 뿌리 시스템 — 패키지(잎)와 의존성(뿌리)의 대칭 구조</div>
+    <div class="palette">
+      <div class="swatch" style="background:#EFEBE9"></div>
+      <div class="swatch" style="background:#A1887F"></div>
+      <div class="swatch" style="background:#4E342E"></div>
+      <div class="swatch" style="background:#2E7D32"></div>
+      <div class="swatch" style="background:#66BB6A"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap">
+      <img src="icon_05.svg" alt="icon_05">
+    </div>
+    <div class="filename">icon_05.svg</div>
+    <span class="badge hybrid">hybrid</span>
+    <div class="concept">npm / NuGet / pip 뱃지 + 연결 그래프 — 지원 생태계 직접 표시</div>
+    <div class="palette">
+      <div class="swatch" style="background:#E0F7FA"></div>
+      <div class="swatch" style="background:#00ACC1"></div>
+      <div class="swatch" style="background:#CC3534"></div>
+      <div class="swatch" style="background:#004880"></div>
+      <div class="swatch" style="background:#3572A5"></div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hex.Peek — Icon Candidates</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #1E2A1E;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      padding: 40px 30px 60px;
+      color: #E8ECF0;
+    }
+    h1 {
+      text-align: center;
+      font-size: 2.2rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+      letter-spacing: 0.04em;
+      color: #A5D6A7;
+    }
+    .subtitle {
+      text-align: center;
+      font-size: 1rem;
+      color: #81C784;
+      margin-bottom: 44px;
+      opacity: 0.75;
+    }
+    .grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 36px;
+      justify-content: center;
+    }
+    .card {
+      background: #142014;
+      border-radius: 16px;
+      padding: 28px 24px 22px;
+      width: 260px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      border: 1.5px solid #2E4A2E;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .card:hover {
+      box-shadow: 0 8px 36px rgba(76,175,80,0.35);
+      transform: translateY(-4px);
+    }
+    .icon-wrap {
+      width: 200px;
+      height: 200px;
+      transition: width 0.25s, height 0.25s;
+      cursor: pointer;
+    }
+    .card:hover .icon-wrap {
+      width: 260px;
+      height: 260px;
+    }
+    .icon-wrap img {
+      width: 100%;
+      height: 100%;
+      border-radius: 10px;
+    }
+    .filename {
+      margin-top: 16px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #81C784;
+      letter-spacing: 0.03em;
+    }
+    .concept {
+      margin-top: 6px;
+      font-size: 0.82rem;
+      color: #A5D6A7;
+      text-align: center;
+      line-height: 1.45;
+      min-height: 40px;
+      opacity: 0.8;
+    }
+    .palette {
+      display: flex;
+      gap: 8px;
+      margin-top: 14px;
+    }
+    .swatch {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.15);
+    }
+  </style>
+</head>
+<body>
+  <h1>Hex.Peek</h1>
+  <p class="subtitle">파일을 16진수(hex) 형식으로 보는 바이너리 뷰어 — 구조체 파싱 및 검색 포함 — 아이콘 후보 2026-03-28</p>
+  <div class="grid">
+
+    <div class="card">
+      <div class="icon-wrap"><img src="icon_01.svg" alt="icon_01"></div>
+      <div class="filename">icon_01.svg</div>
+      <div class="concept">16진수 텍스트 그리드 + 하이라이트<br>hex 덤프 직접 묘사 (literal)</div>
+      <div class="palette">
+        <div class="swatch" style="background:#1B5E20" title="#1B5E20"></div>
+        <div class="swatch" style="background:#4CAF50" title="#4CAF50"></div>
+        <div class="swatch" style="background:#FFEE58" title="#FFEE58"></div>
+        <div class="swatch" style="background:#80CBC4" title="#80CBC4"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="icon-wrap"><img src="icon_02.svg" alt="icon_02"></div>
+      <div class="filename">icon_02.svg</div>
+      <div class="concept">돋보기 + 0xFF 텍스트<br>Peek = 들여다보기 + hex (literal)</div>
+      <div class="palette">
+        <div class="swatch" style="background:#E3F2FD" title="#E3F2FD"></div>
+        <div class="swatch" style="background:#42A5F5" title="#42A5F5"></div>
+        <div class="swatch" style="background:#FFFFFF" title="#FFFFFF"></div>
+        <div class="swatch" style="background:#1565C0" title="#1565C0"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="icon-wrap"><img src="icon_03.svg" alt="icon_03"></div>
+      <div class="filename">icon_03.svg</div>
+      <div class="concept">네온 바이너리 → hex 변환 흐름<br>매트릭스 스타일 데이터 해석 (metaphor)</div>
+      <div class="palette">
+        <div class="swatch" style="background:#1A0533" title="#1A0533"></div>
+        <div class="swatch" style="background:#39FF14" title="#39FF14"></div>
+        <div class="swatch" style="background:#CE93D8" title="#CE93D8"></div>
+        <div class="swatch" style="background:#9C27B0" title="#9C27B0"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="icon-wrap"><img src="icon_04.svg" alt="icon_04"></div>
+      <div class="filename">icon_04.svg</div>
+      <div class="concept">X레이처럼 파일 내부가 보이는 장면<br>바이너리 꿰뚫어 보기 (metaphor)</div>
+      <div class="palette">
+        <div class="swatch" style="background:#E0F7FA" title="#E0F7FA"></div>
+        <div class="swatch" style="background:#00BCD4" title="#00BCD4"></div>
+        <div class="swatch" style="background:#006064" title="#006064"></div>
+        <div class="swatch" style="background:#00838F" title="#00838F"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="icon-wrap"><img src="icon_05.svg" alt="icon_05"></div>
+      <div class="filename">icon_05.svg</div>
+      <div class="concept">파일 아이콘 안에 hex + ASCII 컬럼<br>파일을 hex로 표시하는 앱 (hybrid)</div>
+      <div class="palette">
+        <div class="swatch" style="background:#FFF8E1" title="#FFF8E1"></div>
+        <div class="swatch" style="background:#FFB300" title="#FFB300"></div>
+        <div class="swatch" style="background:#FF8F00" title="#FF8F00"></div>
+        <div class="swatch" style="background:#BF360C" title="#BF360C"></div>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

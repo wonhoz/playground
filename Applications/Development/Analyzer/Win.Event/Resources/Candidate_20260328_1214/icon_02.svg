@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg02" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#EDE7F6"/>
+      <stop offset="100%" style="stop-color:#B39DDB"/>
+    </linearGradient>
+    <filter id="shadow02">
+      <feDropShadow dx="0" dy="10" stdDeviation="18" flood-color="#4527A0" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" fill="url(#bg02)" rx="120"/>
+
+  <!-- Layer 2: Three badge rows — vertical layout -->
+  <!-- Info badge (green) -->
+  <g filter="url(#shadow02)">
+    <rect x="220" y="155" width="584" height="188" rx="94" fill="#43A047"/>
+  </g>
+  <!-- Warning badge (yellow) -->
+  <g filter="url(#shadow02)">
+    <rect x="220" y="418" width="584" height="188" rx="94" fill="#FDD835"/>
+  </g>
+  <!-- Error badge (red) -->
+  <g filter="url(#shadow02)">
+    <rect x="220" y="681" width="584" height="188" rx="94" fill="#E53935"/>
+  </g>
+
+  <!-- Layer 3: Symbols on badges -->
+  <!-- Info (i) -->
+  <circle cx="320" cy="249" r="52" fill="rgba(255,255,255,0.3)"/>
+  <rect x="305" y="220" width="30" height="70" rx="15" fill="white"/>
+  <circle cx="320" cy="205" r="16" fill="white"/>
+  <!-- Info label -->
+  <text x="420" y="270" font-family="Arial,sans-serif" font-size="90" font-weight="bold" fill="white" dominant-baseline="middle">Information</text>
+
+  <!-- Warning (!) -->
+  <circle cx="320" cy="512" r="52" fill="rgba(255,255,255,0.3)"/>
+  <rect x="305" y="468" width="30" height="66" rx="15" fill="#5D4037"/>
+  <circle cx="320" cy="552" r="14" fill="#5D4037"/>
+  <!-- Warning label -->
+  <text x="420" y="533" font-family="Arial,sans-serif" font-size="90" font-weight="bold" fill="#5D4037" dominant-baseline="middle">Warning</text>
+
+  <!-- Error (x) -->
+  <circle cx="320" cy="775" r="52" fill="rgba(255,255,255,0.3)"/>
+  <line x1="295" y1="750" x2="345" y2="800" stroke="white" stroke-width="22" stroke-linecap="round"/>
+  <line x1="345" y1="750" x2="295" y2="800" stroke="white" stroke-width="22" stroke-linecap="round"/>
+  <!-- Error label -->
+  <text x="420" y="796" font-family="Arial,sans-serif" font-size="90" font-weight="bold" fill="white" dominant-baseline="middle">Error</text>
+</svg>

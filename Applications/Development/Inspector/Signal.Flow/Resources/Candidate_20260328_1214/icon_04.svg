@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- 배경: 진보라 -->
+  <defs>
+    <linearGradient id="bg04" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A0533"/>
+      <stop offset="100%" stop-color="#4A148C"/>
+    </linearGradient>
+    <linearGradient id="pathGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#EA80FC"/>
+      <stop offset="40%" stop-color="#E040FB"/>
+      <stop offset="70%" stop-color="#AA00FF"/>
+      <stop offset="100%" stop-color="#7C4DFF"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="120" fill="url(#bg04)"/>
+
+  <!-- 흐르는 S자 경로 -->
+  <path d="M160,300 C300,300 300,512 512,512 C724,512 724,724 864,724"
+        fill="none" stroke="url(#pathGrad)" stroke-width="18" stroke-linecap="round" opacity="0.5"/>
+  <path d="M160,300 C300,300 300,512 512,512 C724,512 724,724 864,724"
+        fill="none" stroke="white" stroke-width="6" stroke-linecap="round" stroke-dasharray="20 30" opacity="0.6"/>
+
+  <!-- 입자들 — S자 경로 위 (이벤트 파티클) -->
+  <!-- 경로 시작 부분 -->
+  <circle cx="160" cy="300" r="22" fill="#EA80FC"/>
+  <circle cx="160" cy="300" r="12" fill="white"/>
+
+  <circle cx="220" cy="310" r="16" fill="#FF80AB"/>
+  <circle cx="280" cy="340" r="20" fill="#FF4081"/>
+  <circle cx="330" cy="380" r="14" fill="#F48FB1"/>
+  <circle cx="370" cy="420" r="18" fill="#EA80FC"/>
+
+  <!-- 경로 중간 -->
+  <circle cx="420" cy="460" r="24" fill="#CE93D8"/>
+  <circle cx="420" cy="460" r="12" fill="white"/>
+
+  <circle cx="465" cy="492" r="16" fill="#B39DDB"/>
+  <circle cx="512" cy="512" r="28" fill="#7C4DFF"/>
+  <circle cx="512" cy="512" r="14" fill="#EA80FC"/>
+
+  <circle cx="560" cy="532" r="18" fill="#7986CB"/>
+  <circle cx="605" cy="556" r="14" fill="#80DEEA"/>
+
+  <!-- 경로 끝 부분 -->
+  <circle cx="650" cy="584" r="20" fill="#26C6DA"/>
+  <circle cx="695" cy="616" r="16" fill="#00E5FF"/>
+  <circle cx="738" cy="648" r="22" fill="#00B0FF"/>
+  <circle cx="780" cy="676" r="18" fill="#40C4FF"/>
+  <circle cx="820" cy="700" r="14" fill="#80D8FF"/>
+
+  <circle cx="864" cy="724" r="26" fill="#00E5FF"/>
+  <circle cx="864" cy="724" r="14" fill="white"/>
+
+  <!-- 흩어진 작은 파티클들 (배경) -->
+  <circle cx="150" cy="180" r="8" fill="#EA80FC" opacity="0.5"/>
+  <circle cx="250" cy="150" r="6" fill="#FF80AB" opacity="0.4"/>
+  <circle cx="800" cy="200" r="8" fill="#00E5FF" opacity="0.4"/>
+  <circle cx="880" cy="300" r="6" fill="#80D8FF" opacity="0.5"/>
+  <circle cx="100" cy="500" r="7" fill="#CE93D8" opacity="0.4"/>
+  <circle cx="920" cy="600" r="9" fill="#26C6DA" opacity="0.5"/>
+  <circle cx="200" cy="800" r="7" fill="#F48FB1" opacity="0.4"/>
+  <circle cx="750" cy="880" r="8" fill="#00E5FF" opacity="0.5"/>
+  <circle cx="450" cy="200" r="6" fill="#B39DDB" opacity="0.4"/>
+  <circle cx="600" cy="300" r="8" fill="#CE93D8" opacity="0.35"/>
+  <circle cx="350" cy="700" r="7" fill="#7986CB" opacity="0.4"/>
+
+  <!-- "FLOW" 텍스트 -->
+  <text x="512" y="900" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="80" font-weight="900"
+        fill="none" stroke="#EA80FC" stroke-width="3" opacity="0.6">FLOW</text>
+  <text x="512" y="900" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="80" font-weight="900"
+        fill="url(#pathGrad)" opacity="0.85">FLOW</text>
+
+  <!-- 상단 레이블 -->
+  <text x="512" y="120" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="48" font-weight="bold" fill="#EA80FC" opacity="0.9">Event Particles</text>
+</svg>

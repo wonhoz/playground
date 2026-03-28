@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Background: bright sky blue gradient -->
+  <defs>
+    <linearGradient id="bg01" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#87CEEB"/>
+      <stop offset="100%" stop-color="#4A90D9"/>
+    </linearGradient>
+    <filter id="shadow01">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#00000033"/>
+    </filter>
+  </defs>
+
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" fill="url(#bg01)" rx="120"/>
+
+  <!-- Layer 2: Bar chart (3 bars, white) -->
+  <rect x="160" y="600" width="130" height="240" fill="white" rx="16" opacity="0.95" filter="url(#shadow01)"/>
+  <rect x="340" y="450" width="130" height="390" fill="white" rx="16" opacity="0.95" filter="url(#shadow01)"/>
+  <rect x="520" y="310" width="130" height="530" fill="white" rx="16" opacity="0.95" filter="url(#shadow01)"/>
+
+  <!-- Bar chart baseline -->
+  <line x1="120" y1="850" x2="700" y2="850" stroke="white" stroke-width="14" stroke-linecap="round" opacity="0.7"/>
+
+  <!-- Layer 3: Git fork symbol (top right area) - yellow/gold -->
+  <!-- Three circles (nodes) -->
+  <circle cx="780" cy="200" r="45" fill="#FFD700" stroke="white" stroke-width="18" filter="url(#shadow01)"/>
+  <circle cx="680" cy="360" r="38" fill="#FFD700" stroke="white" stroke-width="16"/>
+  <circle cx="880" cy="360" r="38" fill="#FFD700" stroke="white" stroke-width="16"/>
+  <!-- Fork lines -->
+  <line x1="780" y1="244" x2="680" y2="322" stroke="#FFD700" stroke-width="22" stroke-linecap="round"/>
+  <line x1="780" y1="244" x2="880" y2="322" stroke="#FFD700" stroke-width="22" stroke-linecap="round"/>
+
+  <!-- Small sparkle dots -->
+  <circle cx="750" cy="130" r="16" fill="white" opacity="0.6"/>
+  <circle cx="850" cy="150" r="10" fill="white" opacity="0.4"/>
+</svg>

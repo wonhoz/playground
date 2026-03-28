@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg05" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFF3E0"/>
+      <stop offset="100%" style="stop-color:#FFCC80"/>
+    </linearGradient>
+    <radialGradient id="radarGrad1" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#FF5722" stop-opacity="0.6"/>
+      <stop offset="100%" style="stop-color:#FF5722" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="radarGrad2" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#FF9800" stop-opacity="0.5"/>
+      <stop offset="100%" style="stop-color:#FF9800" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="radarGrad3" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#FFC107" stop-opacity="0.4"/>
+      <stop offset="100%" style="stop-color:#FFC107" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="shadow05">
+      <feDropShadow dx="0" dy="8" stdDeviation="16" flood-color="#E65100" flood-opacity="0.35"/>
+    </filter>
+    <filter id="glow05">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" fill="url(#bg05)" rx="120"/>
+
+  <!-- Layer 2: Radar rings -->
+  <g filter="url(#shadow05)">
+    <!-- Outer ring -->
+    <circle cx="512" cy="490" r="340" fill="url(#radarGrad3)" stroke="#FFC107" stroke-width="18"/>
+    <!-- Middle ring -->
+    <circle cx="512" cy="490" r="230" fill="url(#radarGrad2)" stroke="#FF9800" stroke-width="20"/>
+    <!-- Inner ring -->
+    <circle cx="512" cy="490" r="128" fill="url(#radarGrad1)" stroke="#FF5722" stroke-width="22"/>
+  </g>
+
+  <!-- Crosshair lines -->
+  <line x1="512" y1="150" x2="512" y2="830" stroke="rgba(230,81,0,0.3)" stroke-width="6" stroke-dasharray="18,14"/>
+  <line x1="172" y1="490" x2="852" y2="490" stroke="rgba(230,81,0,0.3)" stroke-width="6" stroke-dasharray="18,14"/>
+
+  <!-- Radar sweep line -->
+  <line x1="512" y1="490" x2="770" y2="260" stroke="#FF5722" stroke-width="14" stroke-linecap="round" opacity="0.7"/>
+
+  <!-- Layer 3: EXE text at center -->
+  <circle cx="512" cy="490" r="72" fill="white" filter="url(#glow05)"/>
+  <text x="512" y="492" font-family="Arial,sans-serif" font-size="52" font-weight="bold" fill="#E65100" text-anchor="middle" dominant-baseline="middle">EXE</text>
+
+  <!-- Detection blips -->
+  <circle cx="680" cy="330" r="18" fill="#FF1744" filter="url(#glow05)" opacity="0.85"/>
+  <circle cx="340" cy="620" r="13" fill="#FF9100" filter="url(#glow05)" opacity="0.7"/>
+  <circle cx="720" cy="620" r="10" fill="#FFEA00" opacity="0.65"/>
+
+  <!-- DETECT label -->
+  <rect x="300" y="840" width="424" height="76" rx="38" fill="rgba(230,81,0,0.87)"/>
+  <text x="512" y="882" font-family="Arial,sans-serif" font-size="58" font-weight="bold" fill="white" text-anchor="middle" dominant-baseline="middle">DETECT</text>
+</svg>

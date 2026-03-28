@@ -54,6 +54,17 @@
           </desktop4:FileExplorerContextMenus>
         </desktop4:Extension>
 
+        <!-- COM SurrogateServer: dllhost.exe loads DLL (ECF_DEFAULT, no sub-commands) -->
+        <com:Extension Category="windows.comServer" EntryPoint="Windows.FullTrustApplication">
+          <com:ComServer>
+            <com:SurrogateServer AppId="261B2913-8ABA-420B-9280-0061626EDA5A"
+                                 DisplayName="Claude Code Context Menu">
+              <com:Class Id="261B2913-8ABA-420B-9280-0061626EDA5A"
+                         Path="Claude.Shell.Native.dll"
+                         ThreadingModel="STA"/>
+            </com:SurrogateServer>
+          </com:ComServer>
+        </com:Extension>
 
       </Extensions>
     </Application>

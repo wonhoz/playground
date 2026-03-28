@@ -122,7 +122,9 @@ STDMETHODIMP ClaudeContextMenu::InvokeCommand(LPCMINVOKECOMMANDINFO pici)
 STDMETHODIMP ClaudeContextMenu::GetCommandString(UINT_PTR, UINT, UINT*, CHAR*, UINT)
     { return E_NOTIMPL; }
 
-// ── IExplorerCommand (신 컨텍스트 메뉴 — 부모) ────────────────────────────────
+// ── IExplorerCommand (신 컨텍스트 메뉴) ───────────────────────────────────────
+// SurrogateServer(dllhost) 환경에서 IEnumExplorerCommand 마샬링이 크래시를 유발.
+// ECF_DEFAULT + Invoke 직접 실행으로 단일 항목 사용.
 STDMETHODIMP ClaudeContextMenu::GetTitle(IShellItemArray*, LPWSTR* ppszName)
 {
     const wchar_t* title = L"Claude Code\xC5D0\xC11C \xC5F4\xAE30";
@@ -148,17 +150,43 @@ STDMETHODIMP ClaudeContextMenu::GetCanonicalName(GUID* pguid)
     { *pguid = CLSID_ClaudeContextMenu; return S_OK; }
 STDMETHODIMP ClaudeContextMenu::GetState(IShellItemArray*, BOOL, EXPCMDSTATE* pState)
     { *pState = ECS_ENABLED; return S_OK; }
-STDMETHODIMP ClaudeContextMenu::Invoke(IShellItemArray*, IBindCtx*)
-    { return S_OK; }
-STDMETHODIMP ClaudeContextMenu::GetFlags(EXPCMDFLAGS* pFlags)
-    { *pFlags = ECF_HASSUBCOMMANDS; return S_OK; }
-STDMETHODIMP ClaudeContextMenu::EnumSubCommands(IEnumExplorerCommand** ppEnum)
+STDMETHODIMP ClaudeContextMenu::Invoke(IShellItemArray* psia, IBindCtx*)
 {
-    auto* p = new (std::nothrow) ClaudeEnumSubCommands();
-    if (!p) return E_OUTOFMEMORY;
-    *ppEnum = p;
+    // SurrogateServer 환경: m_folderPath(IShellExtInit)는 비어 있으므로
+    // IShellItemArray에서 경로 추출
+    std::wstring folder;
+    if (psia)
+    {
+        IShellItem* psi = nullptr;
+        if (SUCCEEDED(psia->GetItemAt(0, &psi)) && psi)
+        {
+            LPWSTR pszPath = nullptr;
+            if (SUCCEEDED(psi->GetDisplayName(SIGDN_FILESYSPATH, &pszPath)) && pszPath)
+            {
+                folder = pszPath;
+                CoTaskMemFree(pszPath);
+            }
+            psi->Release();
+        }
+    }
+    if (folder.empty()) folder = m_folderPath;
+
+    WCHAR args[MAX_PATH * 2 + 64] = {};
+    if (folder.empty())
+        swprintf_s(args, L"/k claude");
+    else
+        swprintf_s(args, L"/k cd /d \"%s\" && claude", folder.c_str());
+
+    SHELLEXECUTEINFOW sei = {};
+    sei.cbSize = sizeof(sei); sei.lpVerb = L"open";
+    sei.lpFile = L"cmd.exe"; sei.lpParameters = args; sei.nShow = SW_SHOWNORMAL;
+    ShellExecuteExW(&sei);
     return S_OK;
 }
+STDMETHODIMP ClaudeContextMenu::GetFlags(EXPCMDFLAGS* pFlags)
+    { *pFlags = ECF_DEFAULT; return S_OK; }
+STDMETHODIMP ClaudeContextMenu::EnumSubCommands(IEnumExplorerCommand** ppEnum)
+    { *ppEnum = nullptr; return E_NOTIMPL; }
 
 // ── 아이콘 비트맵 ─────────────────────────────────────────────────────────────
 HBITMAP ClaudeContextMenu::GetOrCreateIconBitmap()

@@ -8,6 +8,61 @@
         KeyDown="Window_KeyDown"
         MouseMove="Window_MouseMove"
         Focusable="True">
+    <Window.Resources>
+        <Style TargetType="Slider">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Slider">
+                        <Border Background="Transparent" SnapsToDevicePixels="True" Height="20">
+                            <Grid>
+                                <Border Height="3" VerticalAlignment="Center"
+                                        Background="#3D3D6B" CornerRadius="2" Margin="7,0"/>
+                                <Track x:Name="PART_Track">
+                                    <Track.DecreaseRepeatButton>
+                                        <RepeatButton Command="Slider.DecreaseLarge" Focusable="False">
+                                            <RepeatButton.Template>
+                                                <ControlTemplate TargetType="RepeatButton">
+                                                    <Border Height="3" VerticalAlignment="Center"
+                                                            Background="#5EEAD4" CornerRadius="2"/>
+                                                </ControlTemplate>
+                                            </RepeatButton.Template>
+                                        </RepeatButton>
+                                    </Track.DecreaseRepeatButton>
+                                    <Track.IncreaseRepeatButton>
+                                        <RepeatButton Command="Slider.IncreaseLarge" Focusable="False">
+                                            <RepeatButton.Template>
+                                                <ControlTemplate TargetType="RepeatButton">
+                                                    <Border Background="Transparent" Height="3"/>
+                                                </ControlTemplate>
+                                            </RepeatButton.Template>
+                                        </RepeatButton>
+                                    </Track.IncreaseRepeatButton>
+                                    <Track.Thumb>
+                                        <Thumb Width="13" Height="13">
+                                            <Thumb.Template>
+                                                <ControlTemplate TargetType="Thumb">
+                                                    <Ellipse x:Name="ThumbCircle" Width="13" Height="13"
+                                                             Fill="#5EEAD4"/>
+                                                    <ControlTemplate.Triggers>
+                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                            <Setter TargetName="ThumbCircle" Property="Fill" Value="#7FF8E8"/>
+                                                        </Trigger>
+                                                        <Trigger Property="IsDragging" Value="True">
+                                                            <Setter TargetName="ThumbCircle" Property="Fill" Value="#7FF8E8"/>
+                                                        </Trigger>
+                                                    </ControlTemplate.Triggers>
+                                                </ControlTemplate>
+                                            </Thumb.Template>
+                                        </Thumb>
+                                    </Track.Thumb>
+                                </Track>
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
     <Grid>
         <!-- 게임 Canvas -->
         <Canvas x:Name="GameCanvas" Background="#04040E" ClipToBounds="True"/>
@@ -22,11 +77,11 @@
 
             <StackPanel Grid.Column="0" Orientation="Horizontal" VerticalAlignment="Center">
                 <TextBlock Text="LEVEL " FontSize="13" FontWeight="Bold"
-                           Foreground="#333355" FontFamily="Consolas" VerticalAlignment="Center"/>
+                           Foreground="#666699" FontFamily="Consolas" VerticalAlignment="Center"/>
                 <TextBlock x:Name="LevelNumText" Text="1" FontSize="13" FontWeight="Bold"
                            Foreground="#5EEAD4" FontFamily="Consolas" VerticalAlignment="Center"/>
                 <TextBlock x:Name="LevelNameText" Text="" FontSize="11"
-                           Foreground="#333355" FontFamily="Consolas"
+                           Foreground="#666699" FontFamily="Consolas"
                            VerticalAlignment="Center" Margin="8,0,0,0"/>
             </StackPanel>
 
@@ -40,16 +95,16 @@
                 <TextBlock x:Name="LaunchText" FontSize="11"
                            Foreground="#5EEAD4" FontFamily="Consolas" TextAlignment="Right"/>
                 <TextBlock x:Name="SpeedText" FontSize="11"
-                           Foreground="#555577" FontFamily="Consolas" TextAlignment="Right"/>
+                           Foreground="#8888BB" FontFamily="Consolas" TextAlignment="Right"/>
                 <TextBlock x:Name="OrbitText" FontSize="11"
-                           Foreground="#555577" FontFamily="Consolas" TextAlignment="Right"/>
+                           Foreground="#8888BB" FontFamily="Consolas" TextAlignment="Right"/>
             </StackPanel>
         </Grid>
 
         <!-- ── 하단 힌트 ─────────────────────────────── -->
         <TextBlock x:Name="HintBar" VerticalAlignment="Bottom" HorizontalAlignment="Center"
                    Margin="0,0,0,8" FontSize="11" FontFamily="Consolas"
-                   Foreground="#1A1A33" Visibility="Collapsed"/>
+                   Foreground="#3D3D6B" Visibility="Collapsed"/>
 
         <!-- ── 타이틀 ─────────────────────────────────── -->
         <StackPanel x:Name="TitlePanel" VerticalAlignment="Center" HorizontalAlignment="Center">
@@ -59,7 +114,7 @@
                     <DropShadowEffect Color="#5EEAD4" BlurRadius="30" ShadowDepth="0"/>
                 </TextBlock.Effect>
             </TextBlock>
-            <TextBlock Text="N체 중력 궤도 시뮬레이션 퍼즐" FontSize="13" Foreground="#222244"
+            <TextBlock Text="N체 중력 궤도 시뮬레이션 퍼즐" FontSize="13" Foreground="#4A4A80"
                        HorizontalAlignment="Center" Margin="0,6,0,0" FontFamily="Consolas"/>
 
             <TextBlock Text="[ ENTER → 레벨 선택 ]" FontSize="16" Foreground="#2DD4BF"
@@ -71,7 +126,7 @@
 
             <!-- 조준 감도 슬라이더 -->
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,22,0,0">
-                <TextBlock Text="조준 감도 " FontSize="11" Foreground="#333355"
+                <TextBlock Text="조준 감도 " FontSize="11" Foreground="#666699"
                            FontFamily="Consolas" VerticalAlignment="Center"/>
                 <Slider x:Name="SpeedSlider" Minimum="0.3" Maximum="3.0" Value="1.0"
                         Width="130" VerticalAlignment="Center"
@@ -80,7 +135,7 @@
                            Foreground="#5EEAD4" FontFamily="Consolas" VerticalAlignment="Center"/>
             </StackPanel>
 
-            <TextBlock FontSize="10" Foreground="#1A1A33" HorizontalAlignment="Center"
+            <TextBlock FontSize="10" Foreground="#3D3D6B" HorizontalAlignment="Center"
                        Margin="0,14,0,0" FontFamily="Consolas" TextAlignment="Center">
                 <Run Text="마우스 조준  SPACE 발사  R 초기화  ESC 타이틀  H 도움말"/>
             </TextBlock>
@@ -98,7 +153,7 @@
                 </TextBlock>
                 <StackPanel x:Name="LevelListPanel" HorizontalAlignment="Center"/>
                 <TextBlock Text="↑ ↓  선택     ENTER  시작     ESC  뒤로" FontSize="11"
-                           Foreground="#222244" HorizontalAlignment="Center"
+                           Foreground="#4A4A80" HorizontalAlignment="Center"
                            FontFamily="Consolas" Margin="0,18,0,0"/>
             </StackPanel>
         </Border>
@@ -118,7 +173,7 @@
                 <TextBlock x:Name="ResultSub" Text="" FontSize="14"
                            Foreground="#5EEAD4" HorizontalAlignment="Center"
                            Margin="0,8,0,0" FontFamily="Consolas" TextAlignment="Center"/>
-                <TextBlock x:Name="ResultAction" Text="" FontSize="13" Foreground="#333355"
+                <TextBlock x:Name="ResultAction" Text="" FontSize="13" Foreground="#666699"
                            HorizontalAlignment="Center" Margin="0,28,0,0" FontFamily="Consolas"/>
             </StackPanel>
         </Border>
@@ -143,11 +198,11 @@
                     <Run Foreground="#666688" Text="ESC           "/><Run Foreground="#E0E0E0" Text="타이틀로 돌아가기"/><LineBreak/>
                     <Run Foreground="#666688" Text="H             "/><Run Foreground="#E0E0E0" Text="이 도움말 표시 / 닫기"/>
                 </TextBlock>
-                <TextBlock FontSize="11" Foreground="#222244" HorizontalAlignment="Center"
+                <TextBlock FontSize="11" Foreground="#4A4A80" HorizontalAlignment="Center"
                            FontFamily="Consolas" Margin="0,20,0,0">
                     <Run Text="별점  ★★★ 1발  ★★☆ 2발  ★☆☆ 3발  ☆☆☆ 4발+"/>
                 </TextBlock>
-                <TextBlock Text="[ H 또는 ESC — 닫기 ]" FontSize="11" Foreground="#1A1A33"
+                <TextBlock Text="[ H 또는 ESC — 닫기 ]" FontSize="11" Foreground="#3D3D6B"
                            HorizontalAlignment="Center" FontFamily="Consolas" Margin="0,16,0,0"/>
             </StackPanel>
         </Border>

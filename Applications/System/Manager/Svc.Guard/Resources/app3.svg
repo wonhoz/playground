@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A2B5A"/>
+      <stop offset="100%" stop-color="#0D47A1"/>
+    </linearGradient>
+    <linearGradient id="shield" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#42A5F5"/>
+      <stop offset="100%" stop-color="#1565C0"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Shield -->
+  <path d="M256 80 L380 130 L380 260 Q380 360 256 430 Q132 360 132 260 L132 130 Z" fill="url(#shield)" filter="url(#glow)"/>
+  <!-- Gear overlay -->
+  <circle cx="256" cy="255" r="55" fill="none" stroke="#E3F2FD" stroke-width="8"/>
+  <circle cx="256" cy="255" r="30" fill="#1565C0"/>
+  <!-- Gear teeth -->
+  <g fill="#E3F2FD">
+    <rect x="248" y="185" width="16" height="22" rx="4"/>
+    <rect x="248" y="303" width="16" height="22" rx="4"/>
+    <rect x="185" y="248" width="22" height="16" rx="4"/>
+    <rect x="303" y="248" width="22" height="16" rx="4"/>
+    <rect x="198" y="198" width="16" height="16" rx="4" transform="rotate(45 206 206)"/>
+    <rect x="298" y="198" width="16" height="16" rx="4" transform="rotate(45 306 206)"/>
+    <rect x="198" y="298" width="16" height="16" rx="4" transform="rotate(45 206 306)"/>
+    <rect x="298" y="298" width="16" height="16" rx="4" transform="rotate(45 306 306)"/>
+  </g>
+  <!-- Check mark -->
+  <path d="M230 255 L248 273 L285 236" fill="none" stroke="#90CAF9" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

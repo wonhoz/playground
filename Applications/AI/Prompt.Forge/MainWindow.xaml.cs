@@ -268,7 +268,8 @@ public partial class MainWindow : Window
     void TagLabel_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
     {
         if (sender is not TextBlock tb || string.IsNullOrWhiteSpace(tb.Text)) return;
-        // 태그가 여러 개면 첫 번째 태그로 필터링
+        // Ctrl+클릭일 때만 태그 필터 적용 (일반 클릭은 항목 선택만)
+        if (Keyboard.Modifiers != ModifierKeys.Control) return;
         var firstTag = tb.Text.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
                               .FirstOrDefault();
         if (firstTag == null) return;

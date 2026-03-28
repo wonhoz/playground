@@ -245,8 +245,8 @@ function RefreshList {
         $a = $allApps[$i]
         if (-not $f -or $a.Name.ToLower().Contains($f) -or $a.Cat.ToLower().Contains($f)) {
             $line = "{0,3}. {1,-26}{2}" -f $a.N, $a.Name, $a.Cat
-            $clb.Items.Add($line, $checkedArr[$i]) | Out-Null
             $visibleIdx.Add($i) | Out-Null
+            $clb.Items.Add($line, $checkedArr[$i]) | Out-Null
         }
     }
     $clb.EndUpdate()

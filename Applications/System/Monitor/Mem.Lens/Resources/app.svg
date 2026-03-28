@@ -1,48 +1,45 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <defs>
-    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#1C0A00"/>
-      <stop offset="100%" stop-color="#431407"/>
-    </linearGradient>
-    <linearGradient id="gaugeGreen" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#22C55E"/>
-      <stop offset="100%" stop-color="#84CC16"/>
-    </linearGradient>
-    <linearGradient id="gaugeOrange" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#F97316"/>
-      <stop offset="100%" stop-color="#EF4444"/>
-    </linearGradient>
-  </defs>
-  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
-  <!-- Gauge arc background -->
-  <path d="M 80 340 A 176 176 0 0 1 432 340" fill="none" stroke="#292524" stroke-width="36" stroke-linecap="round"/>
-  <!-- Gauge fill (72%) -->
-  <path d="M 80 340 A 176 176 0 0 1 432 340" fill="none" stroke="#374151" stroke-width="36" stroke-linecap="round"/>
-  <!-- Green zone (0-60%) -->
-  <path d="M 80 340 A 176 176 0 0 1 291 134" fill="none" stroke="url(#gaugeGreen)" stroke-width="36" stroke-linecap="round"/>
-  <!-- Orange zone (60-72%) -->
-  <path d="M 291 134 A 176 176 0 0 1 366 152" fill="none" stroke="url(#gaugeOrange)" stroke-width="36" stroke-linecap="round"/>
-  <!-- Tick marks -->
-  <g stroke="#6B7280" stroke-width="2" stroke-linecap="round">
-    <line x1="80" y1="340" x2="100" y2="340"/>
-    <line x1="432" y1="340" x2="412" y2="340"/>
-    <line x1="256" y1="164" x2="256" y2="184"/>
-  </g>
-  <!-- Needle -->
-  <line x1="256" y1="340" x2="350" y2="165" stroke="#F97316" stroke-width="6" stroke-linecap="round"/>
-  <circle cx="256" cy="340" r="16" fill="#F97316"/>
-  <circle cx="256" cy="340" r="8" fill="#1C0A00"/>
-  <!-- Center value display -->
-  <text x="256" y="290" font-family="Arial" font-size="52" fill="white" text-anchor="middle" font-weight="bold">72%</text>
-  <text x="256" y="320" font-family="Arial" font-size="16" fill="#9CA3AF" text-anchor="middle">MEMORY USED</text>
-  <!-- Labels -->
-  <text x="66" y="376" font-family="Arial" font-size="14" fill="#6B7280" text-anchor="middle">0</text>
-  <text x="446" y="376" font-family="Arial" font-size="14" fill="#6B7280" text-anchor="middle">100</text>
-  <!-- Bottom stats -->
-  <rect x="100" y="395" width="140" height="48" rx="8" fill="#292524" opacity="0.7"/>
-  <text x="170" y="415" font-family="Arial" font-size="12" fill="#9CA3AF" text-anchor="middle">USED</text>
-  <text x="170" y="434" font-family="Arial" font-size="16" fill="#F97316" text-anchor="middle" font-weight="bold">23.0 GB</text>
-  <rect x="272" y="395" width="140" height="48" rx="8" fill="#292524" opacity="0.7"/>
-  <text x="342" y="415" font-family="Arial" font-size="12" fill="#9CA3AF" text-anchor="middle">FREE</text>
-  <text x="342" y="434" font-family="Arial" font-size="16" fill="#22C55E" text-anchor="middle" font-weight="bold">9.0 GB</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: Background — bright emerald green -->
+  <rect width="1024" height="1024" rx="250" fill="#00B894"/>
+
+  <!-- Layer 2: RAM stick (large, simple, centered-left) -->
+  <!-- PCB board — thick green rectangle -->
+  <rect x="152" y="220" width="500" height="580" rx="24" fill="#27AE60" stroke="#FFFFFF" stroke-width="18"/>
+
+  <!-- Gold connector strip at bottom -->
+  <rect x="168" y="700" width="468" height="80" rx="12" fill="#F9CA24" stroke="#FFFFFF" stroke-width="12"/>
+
+  <!-- Gold contacts (4 big pins) -->
+  <rect x="192" y="716" width="72" height="48" rx="8" fill="#E17055"/>
+  <rect x="296" y="716" width="72" height="48" rx="8" fill="#E17055"/>
+  <rect x="400" y="716" width="72" height="48" rx="8" fill="#E17055"/>
+  <rect x="504" y="716" width="80" height="48" rx="8" fill="#E17055"/>
+
+  <!-- 2 memory chips on PCB (large, simple) -->
+  <rect x="186" y="268" width="200" height="180" rx="16" fill="#1A6634" stroke="#FFFFFF" stroke-width="10"/>
+  <text x="286" y="365" text-anchor="middle" font-family="'Consolas','Courier New',monospace" font-size="58" font-weight="900" fill="#FFEAA7">DDR5</text>
+
+  <rect x="416" y="268" width="200" height="180" rx="16" fill="#1A6634" stroke="#FFFFFF" stroke-width="10"/>
+  <text x="516" y="365" text-anchor="middle" font-family="'Consolas','Courier New',monospace" font-size="58" font-weight="900" fill="#FFEAA7">32GB</text>
+
+  <!-- LED bar at top of RAM -->
+  <rect x="168" y="226" width="468" height="20" rx="6" fill="#55EFC4"/>
+
+  <!-- Layer 3: Magnifier overlapping RAM (right side) -->
+  <circle cx="762" cy="440" r="200" fill="none" stroke="#FFFFFF" stroke-width="22"/>
+  <circle cx="762" cy="440" r="177" fill="#2D3436" opacity="0.88"/>
+
+  <!-- Inside magnifier: zoom readout -->
+  <text x="762" y="380" text-anchor="middle" font-family="'Consolas','Courier New',monospace" font-size="34" fill="#55EFC4">WorkingSet</text>
+  <!-- Big progress bar -->
+  <rect x="662" y="396" width="200" height="32" rx="8" fill="#3D5A3D"/>
+  <rect x="662" y="396" width="156" height="32" rx="8" fill="#2ECC71"/>
+  <text x="762" y="470" text-anchor="middle" font-family="'Segoe UI',Arial,sans-serif" font-size="56" font-weight="900" fill="#FFFFFF">78%</text>
+
+  <!-- Leak warning -->
+  <text x="762" y="532" text-anchor="middle" font-family="'Segoe UI',Arial,sans-serif" font-size="40" fill="#FF7675">⚠ LEAK</text>
+  <text x="762" y="578" text-anchor="middle" font-family="'Consolas','Courier New',monospace" font-size="34" fill="#FDCB6E">+2.4MB/s</text>
+
+  <!-- Handle -->
+  <line x1="916" y1="595" x2="974" y2="670" stroke="#FFFFFF" stroke-width="26" stroke-linecap="round"/>
 </svg>

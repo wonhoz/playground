@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: Background — dark green-black -->
+  <defs>
+    <linearGradient id="bgML1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#061A0A"/>
+      <stop offset="100%" stop-color="#020C04"/>
+    </linearGradient>
+    <linearGradient id="ramBody" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1A4A1A"/>
+      <stop offset="100%" stop-color="#0C2A0C"/>
+    </linearGradient>
+    <linearGradient id="ramPcb" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2A5A1A"/>
+      <stop offset="100%" stop-color="#1A3A0A"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bgML1)"/>
+
+  <!-- Layer 2: RAM stick (large, centered-left) -->
+  <!-- PCB board -->
+  <rect x="140" y="280" width="560" height="320" rx="10" fill="url(#ramPcb)" stroke="#2ECC71" stroke-width="8"/>
+
+  <!-- Gold connector fingers at bottom -->
+  <rect x="155" y="540" width="530" height="55" rx="4" fill="#1A1A0A" stroke="#C8A800" stroke-width="4"/>
+  <!-- Connector gold contacts -->
+  <rect x="170" y="548" width="24" height="39" rx="3" fill="#FFD700"/>
+  <rect x="208" y="548" width="24" height="39" rx="3" fill="#FFD700"/>
+  <rect x="246" y="548" width="24" height="39" rx="3" fill="#FFD700"/>
+  <rect x="284" y="548" width="24" height="39" rx="3" fill="#FFD700"/>
+  <rect x="322" y="548" width="24" height="39" rx="3" fill="#FFD700"/>
+  <rect x="360" y="548" width="24" height="39" rx="3" fill="#FFD700"/>
+  <rect x="398" y="548" width="24" height="39" rx="3" fill="#FFD700"/>
+  <rect x="436" y="548" width="24" height="39" rx="3" fill="#FFD700"/>
+  <rect x="474" y="548" width="24" height="39" rx="3" fill="#FFD700"/>
+  <rect x="512" y="548" width="24" height="39" rx="3" fill="#FFD700"/>
+  <rect x="550" y="548" width="24" height="39" rx="3" fill="#FFD700"/>
+  <rect x="588" y="548" width="24" height="39" rx="3" fill="#FFD700"/>
+  <rect x="626" y="548" width="24" height="39" rx="3" fill="#FFD700"/>
+
+  <!-- Memory chips on PCB (4 chips) -->
+  <rect x="165" y="300" width="100" height="80" rx="6" fill="#0A1A0A" stroke="#1A4A1A" stroke-width="3"/>
+  <text x="215" y="347" text-anchor="middle" font-family="'Consolas','Courier New',monospace" font-size="14" fill="#2ECC71">SK</text>
+  <text x="215" y="362" text-anchor="middle" font-family="'Consolas','Courier New',monospace" font-size="14" fill="#1A8A3A">HYNIX</text>
+
+  <rect x="285" y="300" width="100" height="80" rx="6" fill="#0A1A0A" stroke="#1A4A1A" stroke-width="3"/>
+  <text x="335" y="347" text-anchor="middle" font-family="'Consolas','Courier New',monospace" font-size="14" fill="#2ECC71">DDR5</text>
+  <text x="335" y="362" text-anchor="middle" font-family="'Consolas','Courier New',monospace" font-size="14" fill="#1A8A3A">32GB</text>
+
+  <rect x="405" y="300" width="100" height="80" rx="6" fill="#0A1A0A" stroke="#1A4A1A" stroke-width="3"/>
+  <text x="455" y="347" text-anchor="middle" font-family="'Consolas','Courier New',monospace" font-size="14" fill="#2ECC71">6400</text>
+  <text x="455" y="362" text-anchor="middle" font-family="'Consolas','Courier New',monospace" font-size="14" fill="#1A8A3A">MHz</text>
+
+  <rect x="525" y="300" width="100" height="80" rx="6" fill="#0A1A0A" stroke="#1A4A1A" stroke-width="3"/>
+  <text x="575" y="347" text-anchor="middle" font-family="'Consolas','Courier New',monospace" font-size="14" fill="#2ECC71">CL</text>
+  <text x="575" y="362" text-anchor="middle" font-family="'Consolas','Courier New',monospace" font-size="14" fill="#1A8A3A">32-38</text>
+
+  <!-- Light green LED strip at top of RAM -->
+  <rect x="150" y="286" width="540" height="10" rx="4" fill="#00FF80" opacity="0.6"/>
+
+  <!-- Layer 3: Magnifier over RAM -->
+  <circle cx="780" cy="380" r="170" fill="none" stroke="#88FF88" stroke-width="18"/>
+  <!-- Lens interior glow -->
+  <circle cx="780" cy="380" r="148" fill="#0A2A0A" opacity="0.8"/>
+
+  <!-- Inside lens: zoomed memory breakdown -->
+  <text x="780" y="330" text-anchor="middle" font-family="'Consolas','Courier New',monospace" font-size="22" fill="#00FF80">Working Set</text>
+  <rect x="680" y="342" width="200" height="24" rx="4" fill="#1A3A1A"/>
+  <rect x="680" y="342" width="156" height="24" rx="4" fill="#2ECC71" opacity="0.8"/>
+  <text x="780" y="359" text-anchor="middle" font-family="'Consolas','Courier New',monospace" font-size="16" fill="#FFFFFF">78%</text>
+
+  <text x="780" y="385" text-anchor="middle" font-family="'Consolas','Courier New',monospace" font-size="22" fill="#88FFAA">Private</text>
+  <rect x="680" y="396" width="200" height="24" rx="4" fill="#1A3A1A"/>
+  <rect x="680" y="396" width="120" height="24" rx="4" fill="#00AA44" opacity="0.8"/>
+  <text x="780" y="413" text-anchor="middle" font-family="'Consolas','Courier New',monospace" font-size="16" fill="#FFFFFF">60%</text>
+
+  <text x="780" y="438" text-anchor="middle" font-family="'Consolas','Courier New',monospace" font-size="22" fill="#EEFF88">⚠ LEAK?</text>
+  <text x="780" y="462" text-anchor="middle" font-family="'Consolas','Courier New',monospace" font-size="18" fill="#FF8800">+2.4MB/min</text>
+
+  <!-- Magnifier handle -->
+  <line x1="904" y1="510" x2="960" y2="580" stroke="#88FF88" stroke-width="20" stroke-linecap="round"/>
+
+  <!-- App label -->
+  <text x="512" y="760" text-anchor="middle" font-family="'Segoe UI',Arial,sans-serif" font-size="44" font-weight="bold" fill="#2ECC71">Mem.Lens</text>
+</svg>

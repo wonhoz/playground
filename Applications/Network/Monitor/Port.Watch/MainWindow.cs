@@ -27,7 +27,7 @@ public sealed class MainWindow : Form
     private readonly Button       _btnHelp;
     private readonly CheckBox     _chkAuto;
     private readonly CheckBox     _chkFavOnly;
-    private readonly System.Windows.Forms.Timer _autoTimer;
+    private readonly System.Windows.Forms.Timer _autoTimer = new();
 
     private static readonly int[] _intervals  = [3, 5, 10, 30];
     private int                    _intervalIdx = 1;  // 기본 5초
@@ -243,7 +243,7 @@ public sealed class MainWindow : Form
         statusBar.Controls.AddRange([_statusLabel, btnKill]);
 
         // ── 자동 갱신 타이머 ─────────────────────────────────────
-        _autoTimer = new System.Windows.Forms.Timer { Interval = _intervals[_intervalIdx] * 1000 };
+        _autoTimer.Interval = _intervals[_intervalIdx] * 1000;
         _autoTimer.Tick += async (_, _) => await RefreshAsync();
 
         // WinForms docking: 역순(back→front)으로 처리 → Fill(_grid)이 index 0(front)이어야 나머지 후 채움

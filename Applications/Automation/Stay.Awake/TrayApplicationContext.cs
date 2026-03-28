@@ -32,6 +32,7 @@ namespace StayAwake
         private readonly AppSettings _settings;
 
         // 일일 통계
+        private DailyStats _dailyStats;
         private int _dailySimCount = 0;
         private int _dailySkipCount = 0;
         private DateTime _statsDate = DateTime.Today;
@@ -43,6 +44,13 @@ namespace StayAwake
         {
             // 저장된 설정 로드
             _settings = AppSettings.Load();
+
+            // 오늘 통계 로드 (앱 재시작 후에도 이어서 누적)
+            _dailyStats = DailyStats.Load();
+            _dailySimCount = _dailyStats.SimCount;
+            _dailySkipCount = _dailyStats.SkipCount;
+            _todayActiveTime = _dailyStats.ActiveTime;
+            _statsDate = _dailyStats.Date.Date;
 
             _simulator = new ActivitySimulator
             {
@@ -242,6 +250,7 @@ namespace StayAwake
                 _trayIcon.Icon = CreateIcon(false);
                 _trayIcon.Text = "StayAwake - 정지됨";
                 _statusItem.Text = "상태: 정지됨";
+                SaveDailyStats(); // 정지 시 활성 시간 포함 저장
 
                 _trayIcon.ShowBalloonTip(1500, "StayAwake",
                     "활동 시뮬레이션 정지됨", ToolTipIcon.Info);
@@ -358,6 +367,7 @@ namespace StayAwake
                 _dailySimCount = 0;
                 _dailySkipCount = 0;
                 _statsDate = DateTime.Today;
+                _dailyStats = new DailyStats();
             }
 
             // UI 차단 방지: SimulateActivity()는 Thread.Sleep(110ms) 포함 → 배경 스레드에서 실행
@@ -373,6 +383,7 @@ namespace StayAwake
             }
             _lastActivityTime = DateTime.Now;
             UpdateStatus(simulated);
+            SaveDailyStats();
         }
 
         private async void SimulateNow()
@@ -390,6 +401,7 @@ namespace StayAwake
                 _activityCount++;
                 UpdateStatus(simulated);
             }
+            SaveDailyStats();
             var message = simulated
                 ? $"활동 시뮬레이션 실행됨 ({_simulator.MoveDistance}px 이동)"
                 : "사용자 활동 감지됨 - 시뮬레이션 건너뜀";
@@ -401,6 +413,18 @@ namespace StayAwake
             var elapsed = DateTime.Now - _startTime;
             var skipInfo = lastSimulated == false ? " (건너뜀)" : "";
             _statusItem.Text = $"상태: 실행 중 ({_activityCount}회{skipInfo}, {elapsed:hh\\:mm\\:ss})";
+        }
+
+        private void SaveDailyStats()
+        {
+            var currentActiveTime = _isRunning
+                ? _todayActiveTime + (DateTime.Now - _sessionRunStart)
+                : _todayActiveTime;
+            _dailyStats.Date = DateTime.Today;
+            _dailyStats.SimCount = _dailySimCount;
+            _dailyStats.SkipCount = _dailySkipCount;
+            _dailyStats.ActiveTime = currentActiveTime;
+            _dailyStats.Save();
         }
 
         private void OnTooltipTimerTick(object? sender, EventArgs e)
@@ -561,6 +585,9 @@ Slack 자리 비움 상태 방지 도구
 
         private void ExitApplication()
         {
+            if (_isRunning)
+                _todayActiveTime += DateTime.Now - _sessionRunStart;
+            SaveDailyStats(); // 종료 시 최종 통계 저장
             _scheduleTimer.Stop();
             _activityTimer.Stop();
             _tooltipTimer.Stop();

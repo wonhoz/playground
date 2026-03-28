@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg4" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFF176"/>
+      <stop offset="100%" stop-color="#FFFDE7"/>
+    </linearGradient>
+    <linearGradient id="hubGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FF8F00"/>
+      <stop offset="100%" stop-color="#F57F17"/>
+    </linearGradient>
+    <filter id="sh4" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="6" stdDeviation="12" flood-color="#00000030"/>
+    </filter>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg4)"/>
+
+  <!-- 연결선들 (중앙에서 각 노드로) -->
+  <!-- SVG: 우측 (732, 512) -->
+  <line x1="652" y1="512" x2="732" y2="512" stroke="#FFB300" stroke-width="14"/>
+  <!-- PNG: 우상 (580, 303) -->
+  <line x1="608" y1="393" x2="580" y2="303" stroke="#FFB300" stroke-width="14"/>
+  <!-- ICO: 좌상 (334, 383) -->
+  <line x1="415" y1="409" x2="334" y2="383" stroke="#FFB300" stroke-width="14"/>
+  <!-- JPG: 좌하 (334, 641) -->
+  <line x1="415" y1="615" x2="334" y2="641" stroke="#FFB300" stroke-width="14"/>
+  <!-- BMP: 우하 (580, 721) -->
+  <line x1="608" y1="631" x2="580" y2="721" stroke="#FFB300" stroke-width="14"/>
+
+  <!-- 중앙 허브 원 -->
+  <circle cx="512" cy="512" r="148" fill="url(#hubGrad)" filter="url(#sh4)"/>
+  <circle cx="512" cy="512" r="120" fill="none" stroke="#FFE082" stroke-width="10"/>
+  <!-- 중앙 순환 화살표 (텍스트로 표현) -->
+  <text x="512" y="490" text-anchor="middle" fill="white" font-size="80" font-weight="bold" font-family="Arial, sans-serif">IMG</text>
+  <text x="512" y="570" text-anchor="middle" fill="#FFF9C4" font-size="54" font-weight="bold" font-family="Arial, sans-serif">CAST</text>
+
+  <!-- 노드: SVG (우측, 732, 512) -->
+  <circle cx="782" cy="512" r="82" fill="#FF7043" filter="url(#sh4)"/>
+  <text x="782" y="532" text-anchor="middle" fill="white" font-size="52" font-weight="bold" font-family="Arial, sans-serif">SVG</text>
+
+  <!-- 노드: PNG (우상, 580, 303) -->
+  <circle cx="580" cy="250" r="82" fill="#7E57C2" filter="url(#sh4)"/>
+  <text x="580" y="270" text-anchor="middle" fill="white" font-size="52" font-weight="bold" font-family="Arial, sans-serif">PNG</text>
+
+  <!-- 노드: ICO (좌상, 334, 383) -->
+  <circle cx="282" cy="330" r="82" fill="#1565C0" filter="url(#sh4)"/>
+  <text x="282" y="350" text-anchor="middle" fill="white" font-size="52" font-weight="bold" font-family="Arial, sans-serif">ICO</text>
+
+  <!-- 노드: JPG (좌하, 334, 641) -->
+  <circle cx="282" cy="694" r="82" fill="#2E7D32" filter="url(#sh4)"/>
+  <text x="282" y="714" text-anchor="middle" fill="white" font-size="52" font-weight="bold" font-family="Arial, sans-serif">JPG</text>
+
+  <!-- 노드: BMP (우하, 580, 721) -->
+  <circle cx="580" cy="774" r="82" fill="#00838F" filter="url(#sh4)"/>
+  <text x="580" y="794" text-anchor="middle" fill="white" font-size="52" font-weight="bold" font-family="Arial, sans-serif">BMP</text>
+</svg>

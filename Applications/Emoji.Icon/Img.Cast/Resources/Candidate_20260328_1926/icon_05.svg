@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg5" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#EDE7F6"/>
+      <stop offset="100%" stop-color="#F3E5F5"/>
+    </linearGradient>
+    <linearGradient id="arrowGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#7B1FA2"/>
+      <stop offset="100%" stop-color="#FF6F00"/>
+    </linearGradient>
+    <linearGradient id="starGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFCA28"/>
+      <stop offset="100%" stop-color="#FF8F00"/>
+    </linearGradient>
+    <filter id="sh5" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="14" flood-color="#00000030"/>
+    </filter>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg5)"/>
+
+  <!-- 왼쪽 레이블 -->
+  <text x="220" y="348" text-anchor="middle" fill="#7B1FA2" font-size="44" font-weight="bold" font-family="Arial, sans-serif">PIXEL</text>
+
+  <!-- 픽셀 격자 (6×6, 42px 각, 4px 간격) -->
+  <!-- row 0 -->
+  <rect x="84"  y="370" width="42" height="42" rx="6" fill="#CE93D8" opacity="0.5"/>
+  <rect x="130" y="370" width="42" height="42" rx="6" fill="#EC407A"/>
+  <rect x="176" y="370" width="42" height="42" rx="6" fill="#FFEE58"/>
+  <rect x="222" y="370" width="42" height="42" rx="6" fill="#5C6BC0"/>
+  <rect x="268" y="370" width="42" height="42" rx="6" fill="#EC407A"/>
+  <rect x="314" y="370" width="42" height="42" rx="6" fill="#CE93D8" opacity="0.5"/>
+  <!-- row 1 -->
+  <rect x="84"  y="416" width="42" height="42" rx="6" fill="#5C6BC0"/>
+  <rect x="130" y="416" width="42" height="42" rx="6" fill="#FFEE58"/>
+  <rect x="176" y="416" width="42" height="42" rx="6" fill="#7B1FA2"/>
+  <rect x="222" y="416" width="42" height="42" rx="6" fill="#FFEE58"/>
+  <rect x="268" y="416" width="42" height="42" rx="6" fill="#5C6BC0"/>
+  <rect x="314" y="416" width="42" height="42" rx="6" fill="#EC407A"/>
+  <!-- row 2 -->
+  <rect x="84"  y="462" width="42" height="42" rx="6" fill="#FFEE58"/>
+  <rect x="130" y="462" width="42" height="42" rx="6" fill="#7B1FA2"/>
+  <rect x="176" y="462" width="42" height="42" rx="6" fill="#FFEE58"/>
+  <rect x="222" y="462" width="42" height="42" rx="6" fill="#7B1FA2"/>
+  <rect x="268" y="462" width="42" height="42" rx="6" fill="#FFEE58"/>
+  <rect x="314" y="462" width="42" height="42" rx="6" fill="#5C6BC0"/>
+  <!-- row 3 -->
+  <rect x="84"  y="508" width="42" height="42" rx="6" fill="#5C6BC0"/>
+  <rect x="130" y="508" width="42" height="42" rx="6" fill="#FFEE58"/>
+  <rect x="176" y="508" width="42" height="42" rx="6" fill="#7B1FA2"/>
+  <rect x="222" y="508" width="42" height="42" rx="6" fill="#FFEE58"/>
+  <rect x="268" y="508" width="42" height="42" rx="6" fill="#5C6BC0"/>
+  <rect x="314" y="508" width="42" height="42" rx="6" fill="#EC407A"/>
+  <!-- row 4 -->
+  <rect x="84"  y="554" width="42" height="42" rx="6" fill="#EC407A"/>
+  <rect x="130" y="554" width="42" height="42" rx="6" fill="#5C6BC0"/>
+  <rect x="176" y="554" width="42" height="42" rx="6" fill="#FFEE58"/>
+  <rect x="222" y="554" width="42" height="42" rx="6" fill="#5C6BC0"/>
+  <rect x="268" y="554" width="42" height="42" rx="6" fill="#EC407A"/>
+  <rect x="314" y="554" width="42" height="42" rx="6" fill="#CE93D8" opacity="0.5"/>
+  <!-- row 5 -->
+  <rect x="84"  y="600" width="42" height="42" rx="6" fill="#CE93D8" opacity="0.5"/>
+  <rect x="130" y="600" width="42" height="42" rx="6" fill="#EC407A"/>
+  <rect x="176" y="600" width="42" height="42" rx="6" fill="#5C6BC0"/>
+  <rect x="222" y="600" width="42" height="42" rx="6" fill="#EC407A"/>
+  <rect x="268" y="600" width="42" height="42" rx="6" fill="#CE93D8" opacity="0.5"/>
+  <rect x="314" y="600" width="42" height="42" rx="6" fill="#CE93D8" opacity="0.3"/>
+
+  <!-- 변환 화살표 (중앙) -->
+  <path d="M390,452 L560,452 L560,380 L640,512 L560,644 L560,572 L390,572 Z" fill="url(#arrowGrad)" filter="url(#sh5)"/>
+  <!-- 화살표 광택 -->
+  <path d="M390,452 L560,452 L560,410 L608,452 Z" fill="white" opacity="0.25"/>
+
+  <!-- 오른쪽: 벡터 별 (매끄러운) -->
+  <!-- 5각별 cx=800, cy=512, r_outer=175, r_inner=70 -->
+  <!-- 바깥 꼭짓점 (각도 -90도부터 72도 간격) -->
+  <!-- k0: -90° → (800, 337) -->
+  <!-- k0.5: -54° → (800+70*cos(-54°), 512+70*sin(-54°)) = (800+41, 512-57) = (841, 455) -->
+  <!-- k1: -18° → (800+175*cos(-18°), 512+175*sin(-18°)) = (800+166, 512-54) = (966, 458) -->
+  <!-- k1.5: 18° → (800+70*cos(18°), 512+70*sin(18°)) = (800+67, 512+22) = (867, 534) -->
+  <!-- k2: 54° → (800+175*cos(54°), 512+175*sin(54°)) = (800+103, 512+141) = (903, 653) -->
+  <!-- k2.5: 90° → (800, 512+70) = (800, 582) -->
+  <!-- k3: 126° → (800-103, 653) = (697, 653) -->
+  <!-- k3.5: 162° → (800-67, 534) = (733, 534) -->
+  <!-- k4: 198° → (800-166, 458) = (634, 458) -->
+  <!-- k4.5: 234° → (800-41, 455) = (759, 455) -->
+  <path d="M800,337 L841,455 L966,458 L867,534 L903,653 L800,582 L697,653 L733,534 L634,458 L759,455 Z"
+        fill="url(#starGrad)" filter="url(#sh5)"/>
+  <!-- 별 광택 -->
+  <path d="M800,337 L841,455 L966,458 L867,490 L800,370 Z" fill="white" opacity="0.3"/>
+
+  <!-- 오른쪽 레이블 -->
+  <text x="800" y="348" text-anchor="middle" fill="#FF8F00" font-size="44" font-weight="bold" font-family="Arial, sans-serif">VECTOR</text>
+
+  <!-- 하단: .svg 레이블 -->
+  <rect x="660" y="730" width="280" height="58" rx="29" fill="#FF8F00" opacity="0.9"/>
+  <text x="800" y="771" text-anchor="middle" fill="white" font-size="42" font-weight="bold" font-family="Arial, sans-serif">.svg  .ico</text>
+</svg>

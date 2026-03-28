@@ -184,9 +184,14 @@ STDMETHODIMP ClaudeContextMenu::Invoke(IShellItemArray* psia, IBindCtx*)
     return S_OK;
 }
 STDMETHODIMP ClaudeContextMenu::GetFlags(EXPCMDFLAGS* pFlags)
-    { *pFlags = ECF_DEFAULT; return S_OK; }
+    { *pFlags = ECF_HASSUBCOMMANDS; return S_OK; }
 STDMETHODIMP ClaudeContextMenu::EnumSubCommands(IEnumExplorerCommand** ppEnum)
-    { *ppEnum = nullptr; return E_NOTIMPL; }
+{
+    auto* p = new (std::nothrow) ClaudeEnumSubCommands();
+    if (!p) return E_OUTOFMEMORY;
+    *ppEnum = p;
+    return S_OK;
+}
 
 // ── 아이콘 비트맵 ─────────────────────────────────────────────────────────────
 HBITMAP ClaudeContextMenu::GetOrCreateIconBitmap()

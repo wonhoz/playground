@@ -1,34 +1,74 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <defs>
-    <radialGradient id="bg" cx="50%" cy="50%" r="70%">
-      <stop offset="0%" style="stop-color:#0a1a2a"/>
-      <stop offset="100%" style="stop-color:#040d14"/>
-    </radialGradient>
-  </defs>
-  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
-  <!-- Central hexagon -->
-  <polygon points="256,80 360,138 360,254 256,312 152,254 152,138" fill="none" stroke="#00e5ff" stroke-width="3" opacity="0.4"/>
-  <polygon points="256,110 336,155 336,245 256,290 176,245 176,155" fill="none" stroke="#00e5ff" stroke-width="2" opacity="0.3"/>
-  <!-- Stats radar lines -->
-  <line x1="256" y1="196" x2="256" y2="80" stroke="#2196f3" stroke-width="2" opacity="0.6"/>
-  <line x1="256" y1="196" x2="360" y2="138" stroke="#4caf50" stroke-width="2" opacity="0.6"/>
-  <line x1="256" y1="196" x2="360" y2="254" stroke="#ff9800" stroke-width="2" opacity="0.6"/>
-  <line x1="256" y1="196" x2="256" y2="312" stroke="#f44336" stroke-width="2" opacity="0.6"/>
-  <line x1="256" y1="196" x2="152" y2="254" stroke="#9c27b0" stroke-width="2" opacity="0.6"/>
-  <line x1="256" y1="196" x2="152" y2="138" stroke="#00bcd4" stroke-width="2" opacity="0.6"/>
-  <!-- Data polygon -->
-  <polygon points="256,120 330,158 335,234 256,278 177,240 170,158" fill="#2196f3" opacity="0.15" stroke="#2196f3" stroke-width="2"/>
-  <!-- Corner labels -->
-  <text x="256" y="74" text-anchor="middle" fill="#2196f3" font-size="14" font-family="monospace">CPU</text>
-  <text x="372" y="140" fill="#4caf50" font-size="14" font-family="monospace">RAM</text>
-  <text x="372" y="260" fill="#ff9800" font-size="14" font-family="monospace">GPU</text>
-  <text x="256" y="330" text-anchor="middle" fill="#f44336" font-size="14" font-family="monospace">DSK</text>
-  <text x="80" y="260" fill="#9c27b0" font-size="14" font-family="monospace">NET</text>
-  <text x="80" y="140" fill="#00bcd4" font-size="14" font-family="monospace">TMP</text>
-  <!-- Bottom info bar -->
-  <rect x="80" y="380" width="352" height="48" rx="12" fill="#0d1f2d" stroke="#0288d1" stroke-width="1"/>
-  <rect x="96" y="394" width="200" height="10" rx="4" fill="#0288d1" opacity="0.5"/>
-  <rect x="96" y="412" width="160" height="8" rx="4" fill="#0288d1" opacity="0.3"/>
-  <circle cx="380" cy="404" r="20" fill="#0288d1" opacity="0.2" stroke="#0288d1" stroke-width="2"/>
-  <text x="380" y="410" text-anchor="middle" fill="#4fc3f7" font-size="14" font-weight="bold">i</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: Background — bright indigo violet -->
+  <rect width="1024" height="1024" rx="190" fill="#6C5CE7"/>
+
+  <!-- Layer 2: CPU chip (large, simple, 2x2 inner cells) -->
+  <!-- CPU package outer -->
+  <rect x="272" y="272" width="480" height="480" rx="28" fill="#2D3436" stroke="#FFFFFF" stroke-width="18"/>
+
+  <!-- CPU die inner (2×2 grid — max rule satisfied) -->
+  <rect x="320" y="320" width="384" height="384" rx="16" fill="#353B48" stroke="#74B9FF" stroke-width="14"/>
+  <!-- 2×2 grid dividers -->
+  <line x1="512" y1="320" x2="512" y2="704" stroke="#74B9FF" stroke-width="8" opacity="0.7"/>
+  <line x1="320" y1="512" x2="704" y2="512" stroke="#74B9FF" stroke-width="8" opacity="0.7"/>
+  <!-- Die labels (large, bold) -->
+  <text x="416" y="434" text-anchor="middle" font-family="'Consolas','Courier New',monospace" font-size="52" font-weight="900" fill="#74B9FF">CPU</text>
+  <text x="608" y="434" text-anchor="middle" font-family="'Consolas','Courier New',monospace" font-size="52" font-weight="900" fill="#A29BFE">LLC</text>
+  <text x="416" y="626" text-anchor="middle" font-family="'Consolas','Courier New',monospace" font-size="42" font-weight="900" fill="#55EFC4">iGPU</text>
+  <text x="608" y="626" text-anchor="middle" font-family="'Consolas','Courier New',monospace" font-size="42" font-weight="900" fill="#FFEAA7">I/O</text>
+
+  <!-- CPU pins (8 per side, large) -->
+  <!-- Left side -->
+  <rect x="232" y="310" width="40" height="26" rx="5" fill="#F9CA24"/>
+  <rect x="232" y="352" width="40" height="26" rx="5" fill="#F9CA24"/>
+  <rect x="232" y="394" width="40" height="26" rx="5" fill="#F9CA24"/>
+  <rect x="232" y="436" width="40" height="26" rx="5" fill="#F9CA24"/>
+  <rect x="232" y="478" width="40" height="26" rx="5" fill="#F9CA24"/>
+  <rect x="232" y="520" width="40" height="26" rx="5" fill="#F9CA24"/>
+  <rect x="232" y="562" width="40" height="26" rx="5" fill="#F9CA24"/>
+  <rect x="232" y="604" width="40" height="26" rx="5" fill="#F9CA24"/>
+  <!-- Right side -->
+  <rect x="752" y="310" width="40" height="26" rx="5" fill="#F9CA24"/>
+  <rect x="752" y="352" width="40" height="26" rx="5" fill="#F9CA24"/>
+  <rect x="752" y="394" width="40" height="26" rx="5" fill="#F9CA24"/>
+  <rect x="752" y="436" width="40" height="26" rx="5" fill="#F9CA24"/>
+  <rect x="752" y="478" width="40" height="26" rx="5" fill="#F9CA24"/>
+  <rect x="752" y="520" width="40" height="26" rx="5" fill="#F9CA24"/>
+  <rect x="752" y="562" width="40" height="26" rx="5" fill="#F9CA24"/>
+  <rect x="752" y="604" width="40" height="26" rx="5" fill="#F9CA24"/>
+  <!-- Top side -->
+  <rect x="310" y="232" width="26" height="40" rx="5" fill="#F9CA24"/>
+  <rect x="352" y="232" width="26" height="40" rx="5" fill="#F9CA24"/>
+  <rect x="394" y="232" width="26" height="40" rx="5" fill="#F9CA24"/>
+  <rect x="436" y="232" width="26" height="40" rx="5" fill="#F9CA24"/>
+  <rect x="478" y="232" width="26" height="40" rx="5" fill="#F9CA24"/>
+  <rect x="520" y="232" width="26" height="40" rx="5" fill="#F9CA24"/>
+  <rect x="562" y="232" width="26" height="40" rx="5" fill="#F9CA24"/>
+  <rect x="604" y="232" width="26" height="40" rx="5" fill="#F9CA24"/>
+  <!-- Bottom side -->
+  <rect x="310" y="752" width="26" height="40" rx="5" fill="#F9CA24"/>
+  <rect x="352" y="752" width="26" height="40" rx="5" fill="#F9CA24"/>
+  <rect x="394" y="752" width="26" height="40" rx="5" fill="#F9CA24"/>
+  <rect x="436" y="752" width="26" height="40" rx="5" fill="#F9CA24"/>
+  <rect x="478" y="752" width="26" height="40" rx="5" fill="#F9CA24"/>
+  <rect x="520" y="752" width="26" height="40" rx="5" fill="#F9CA24"/>
+  <rect x="562" y="752" width="26" height="40" rx="5" fill="#F9CA24"/>
+  <rect x="604" y="752" width="26" height="40" rx="5" fill="#F9CA24"/>
+
+  <!-- Layer 3: 4 spec tags (corners) -->
+  <!-- GPU — top right -->
+  <rect x="758" y="148" width="182" height="60" rx="16" fill="#A29BFE" stroke="#FFFFFF" stroke-width="8"/>
+  <text x="849" y="190" text-anchor="middle" font-family="'Segoe UI',Arial,sans-serif" font-size="38" font-weight="900" fill="#FFFFFF">GPU</text>
+
+  <!-- RAM — right center -->
+  <rect x="800" y="492" width="182" height="60" rx="16" fill="#55EFC4" stroke="#FFFFFF" stroke-width="8"/>
+  <text x="891" y="534" text-anchor="middle" font-family="'Segoe UI',Arial,sans-serif" font-size="38" font-weight="900" fill="#2D3436">RAM</text>
+
+  <!-- SSD — bottom right -->
+  <rect x="758" y="820" width="182" height="60" rx="16" fill="#FFEAA7" stroke="#FFFFFF" stroke-width="8"/>
+  <text x="849" y="862" text-anchor="middle" font-family="'Segoe UI',Arial,sans-serif" font-size="38" font-weight="900" fill="#2D3436">SSD</text>
+
+  <!-- OS — top left -->
+  <rect x="84" y="148" width="182" height="60" rx="16" fill="#FD79A8" stroke="#FFFFFF" stroke-width="8"/>
+  <text x="175" y="190" text-anchor="middle" font-family="'Segoe UI',Arial,sans-serif" font-size="38" font-weight="900" fill="#FFFFFF">WIN</text>
 </svg>

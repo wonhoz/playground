@@ -33,8 +33,7 @@ public partial class ScanView : UserControl
     private void LoadAdapters()
     {
         var adapters = NetworkService.GetActiveAdapters();
-        CbAdapter.ItemsSource   = adapters;
-        CbAdapter.DisplayMemberPath = "Name";
+        CbAdapter.ItemsSource = adapters;
         if (adapters.Count > 0)
             CbAdapter.SelectedIndex = 0;
     }

@@ -38,7 +38,13 @@
                 <TextBlock Grid.Column="0" Text="어댑터" FontSize="11"
                            Foreground="#888899" VerticalAlignment="Center"/>
                 <ComboBox Grid.Column="2" x:Name="CbAdapter" Width="200" Height="28"
-                          SelectionChanged="CbAdapter_SelectionChanged"/>
+                          SelectionChanged="CbAdapter_SelectionChanged">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
 
                 <!-- 범위 (CIDR) -->
                 <TextBlock Grid.Column="4" x:Name="TxtSubnet" FontSize="11"

@@ -42,7 +42,7 @@ public sealed class MainWindow : Form
     {
         Text = "Port.Watch \u2014 포트 & 프로세스 모니터";
         Size = new Size(1120, 700);
-        MinimumSize = new Size(820, 520);
+        MinimumSize = new Size(940, 520);
         BackColor = Color.FromArgb(16, 22, 16);
         ForeColor = Color.FromArgb(215, 235, 218);
         Font = new Font("Segoe UI", 9.5f);
@@ -54,7 +54,7 @@ public sealed class MainWindow : Form
         var toolbar = new Panel
         {
             Dock = DockStyle.Top,
-            Height = 54,
+            Height = 62,
             BackColor = Color.FromArgb(18, 26, 18),
             Padding = new Padding(12, 10, 12, 10)
         };
@@ -83,17 +83,17 @@ public sealed class MainWindow : Form
         var txH = _searchBox.PreferredHeight;  // 폰트 기반 자연 높이
         var searchBorder = new Panel
         {
-            Location = new Point(44, (54 - txH - 2) / 2),  // 툴바 내 수직 중앙 정렬
-            Size = new Size(302, txH + 2),  // 정확한 높이: 내부 텍스트 + 위아래 1px 보더
+            Location = new Point(44, (62 - txH - 2) / 2),  // 툴바 내 수직 중앙 정렬
+            Size = new Size(252, txH + 2),  // 정확한 높이: 내부 텍스트 + 위아래 1px 보더
             BackColor = Color.FromArgb(44, 68, 44),
             Padding = new Padding(1)
         };
         searchBorder.Controls.Add(_searchBox);
 
-        _btnRefresh = MakeButton("↺  새로고침", new Point(364, 12), 108);
+        _btnRefresh = MakeButton("↺  새로고침", new Point(308, 15), 148);
         _btnRefresh.Click += async (_, _) => await RefreshAsync();
 
-        _chkAuto = MakeToggle("⏱ 자동 갱신", new Point(480, 12), 116);
+        _chkAuto = MakeToggle("⏱ 자동 갱신", new Point(460, 15), 162);
         _chkAuto.CheckedChanged += (_, _) =>
         {
             if (!_initialized) return;
@@ -101,7 +101,7 @@ public sealed class MainWindow : Form
             _chkAuto.Text = _chkAuto.Checked ? "⏱ 자동 갱신 ●" : "⏱ 자동 갱신";
         };
 
-        _btnInterval = MakeButton($"{_intervals[_intervalIdx]}s", new Point(604, 12), 44);
+        _btnInterval = MakeButton($"{_intervals[_intervalIdx]}s", new Point(636, 15), 50);
         _btnInterval.Click += (_, _) =>
         {
             _intervalIdx = (_intervalIdx + 1) % _intervals.Length;
@@ -109,18 +109,34 @@ public sealed class MainWindow : Form
             _btnInterval.Text = $"{_intervals[_intervalIdx]}s";
         };
 
-        _chkFavOnly = MakeToggle("★ 즐겨찾기만", new Point(656, 12), 116);
+        _chkFavOnly = MakeToggle("★ 즐겨찾기만", new Point(690, 15), 160);
         _chkFavOnly.CheckedChanged += (_, _) =>
         {
             if (!_initialized) return;
             ApplyFilter();
         };
 
-        _btnHelp = MakeButton("?", new Point(780, 12), 34);
+        _btnHelp = MakeButton("?", new Point(854, 15), 40);
         _btnHelp.ForeColor = Color.FromArgb(130, 200, 155);
         _btnHelp.Click += (_, _) => ShowHelp();
 
         toolbar.Controls.AddRange([lblIcon, searchBorder, _btnRefresh, _chkAuto, _btnInterval, _chkFavOnly, _btnHelp]);
+
+        // 검색창 가변 폭: 창 리사이즈 시 버튼은 오른쪽 고정, 검색창이 남은 공간을 채움
+        void UpdateToolbarLayout()
+        {
+            const int rightMargin = 12, gap = 6;
+            var right = toolbar.ClientSize.Width - rightMargin;
+            _btnHelp.Left     = right - _btnHelp.Width;    right = _btnHelp.Left     - gap;
+            _chkFavOnly.Left  = right - _chkFavOnly.Width; right = _chkFavOnly.Left  - gap;
+            _btnInterval.Left = right - _btnInterval.Width; right = _btnInterval.Left - gap;
+            _chkAuto.Left     = right - _chkAuto.Width;    right = _chkAuto.Left     - gap;
+            _btnRefresh.Left  = right - _btnRefresh.Width;  right = _btnRefresh.Left  - 8;
+            if (right > searchBorder.Left + 60)  // 최소 검색창 폭 60px
+                searchBorder.Width = right - searchBorder.Left;
+        }
+        toolbar.SizeChanged += (_, _) => UpdateToolbarLayout();
+        UpdateToolbarLayout();
 
         // ── DataGridView ─────────────────────────────────────────
         _grid = new DataGridView
@@ -231,7 +247,7 @@ public sealed class MainWindow : Form
             ForeColor = Color.FromArgb(220, 90, 80),
             BackColor = Color.FromArgb(16, 26, 16),
             Dock = DockStyle.Right,
-            Width = 150,
+            Width = 220,
             Cursor = Cursors.Hand
         };
         btnKill.FlatAppearance.BorderColor = Color.FromArgb(44, 68, 44);
@@ -541,7 +557,7 @@ public sealed class MainWindow : Form
     {
         var btn = new Button
         {
-            Text = text, Location = loc, Size = new Size(width, 30),
+            Text = text, Location = loc, Size = new Size(width, 32),
             FlatStyle = FlatStyle.Flat,
             BackColor = Color.FromArgb(24, 40, 24),
             ForeColor = Color.FromArgb(190, 225, 198),
@@ -556,7 +572,7 @@ public sealed class MainWindow : Form
     {
         var chk = new CheckBox
         {
-            Text = text, Location = loc, Size = new Size(width, 30),
+            Text = text, Location = loc, Size = new Size(width, 32),
             Appearance = Appearance.Button, FlatStyle = FlatStyle.Flat,
             BackColor = Color.FromArgb(24, 40, 24),
             ForeColor = Color.FromArgb(155, 200, 165),

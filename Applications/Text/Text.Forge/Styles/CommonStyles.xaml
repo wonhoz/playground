@@ -155,6 +155,32 @@
         <Setter Property="Margin"          Value="0,0,16,0"/>
         <Setter Property="Cursor"          Value="Hand"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="RadioButton">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <Grid Width="16" Height="16" VerticalAlignment="Center" Margin="0,0,7,0">
+                            <Ellipse x:Name="OuterCircle" Width="16" Height="16"
+                                     Fill="#22223A" Stroke="#2E2E50" StrokeThickness="1.5"/>
+                            <Ellipse x:Name="InnerDot" Width="8" Height="8"
+                                     Fill="#FFA000" Visibility="Collapsed"/>
+                        </Grid>
+                        <ContentPresenter VerticalAlignment="Center"
+                                          RecognizesAccessKey="True"/>
+                    </StackPanel>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="InnerDot"    Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="OuterCircle" Property="Stroke"     Value="#FFA000"/>
+                            <Setter TargetName="OuterCircle" Property="Fill"       Value="#1A1200"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="OuterCircle" Property="Stroke" Value="#FFA000"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 
     <!-- CheckBox 스타일 -->
@@ -164,6 +190,36 @@
         <Setter Property="Margin"      Value="0,0,16,0"/>
         <Setter Property="Cursor"      Value="Hand"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="CheckBox">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <Border x:Name="CheckBorder" Width="16" Height="16" CornerRadius="3"
+                                Background="#22223A" BorderBrush="#2E2E50" BorderThickness="1.5"
+                                VerticalAlignment="Center" Margin="0,0,7,0">
+                            <Path x:Name="CheckMark"
+                                  Data="M 2.5 8 L 6 11.5 L 13.5 4"
+                                  Stroke="#FFA000" StrokeThickness="1.8"
+                                  StrokeStartLineCap="Round" StrokeEndLineCap="Round"
+                                  StrokeLineJoin="Round"
+                                  Visibility="Collapsed"/>
+                        </Border>
+                        <ContentPresenter VerticalAlignment="Center"
+                                          RecognizesAccessKey="True"/>
+                    </StackPanel>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="CheckMark"   Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="CheckBorder" Property="BorderBrush" Value="#FFA000"/>
+                            <Setter TargetName="CheckBorder" Property="Background"  Value="#1A1200"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="CheckBorder" Property="BorderBrush" Value="#FFA000"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 
     <!-- 패널 보더 -->

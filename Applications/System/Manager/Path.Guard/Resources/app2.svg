@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F0FDF4"/>
+      <stop offset="100%" stop-color="#BBF7D0"/>
+    </linearGradient>
+  </defs>
+  <!-- Background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg1)"/>
+  <!-- Path list panel -->
+  <rect x="150" y="190" width="724" height="560" rx="28" fill="#FFFFFF" stroke="#4ADE80" stroke-width="8"/>
+  <!-- Header -->
+  <rect x="150" y="190" width="724" height="72" rx="28" fill="#16A34A"/>
+  <rect x="150" y="234" width="724" height="28" rx="0" fill="#16A34A"/>
+  <text x="512" y="240" font-family="Consolas,monospace" font-size="48" fill="#FFFFFF" font-weight="bold" text-anchor="middle">$env:PATH</text>
+  <!-- Path entries -->
+  <!-- Entry 1 - valid (green check) -->
+  <rect x="178" y="292" width="668" height="70" rx="10" fill="#F0FDF4"/>
+  <text x="210" y="336" font-family="Consolas,monospace" font-size="40" fill="#15803D">C:\Windows\System32</text>
+  <circle cx="816" cy="327" r="24" fill="#22C55E"/>
+  <text x="816" y="337" font-family="Arial,sans-serif" font-size="28" fill="#FFFFFF" font-weight="bold" text-anchor="middle">✓</text>
+  <!-- Entry 2 - valid -->
+  <rect x="178" y="374" width="668" height="70" rx="10" fill="#F0FDF4"/>
+  <text x="210" y="418" font-family="Consolas,monospace" font-size="40" fill="#15803D">C:\Program Files\Git\bin</text>
+  <circle cx="816" cy="409" r="24" fill="#22C55E"/>
+  <text x="816" y="419" font-family="Arial,sans-serif" font-size="28" fill="#FFFFFF" font-weight="bold" text-anchor="middle">✓</text>
+  <!-- Entry 3 - broken (red X) -->
+  <rect x="178" y="456" width="668" height="70" rx="10" fill="#FFF1F2"/>
+  <text x="210" y="500" font-family="Consolas,monospace" font-size="40" fill="#DC2626">C:\OldApp\bin</text>
+  <circle cx="816" cy="491" r="24" fill="#EF4444"/>
+  <text x="816" y="501" font-family="Arial,sans-serif" font-size="28" fill="#FFFFFF" font-weight="bold" text-anchor="middle">✗</text>
+  <!-- Entry 4 - valid -->
+  <rect x="178" y="538" width="668" height="70" rx="10" fill="#F0FDF4"/>
+  <text x="210" y="582" font-family="Consolas,monospace" font-size="40" fill="#15803D">C:\Users\admin\.local\bin</text>
+  <circle cx="816" cy="573" r="24" fill="#22C55E"/>
+  <text x="816" y="583" font-family="Arial,sans-serif" font-size="28" fill="#FFFFFF" font-weight="bold" text-anchor="middle">✓</text>
+  <!-- Entry 5 - broken -->
+  <rect x="178" y="620" width="668" height="70" rx="10" fill="#FFF1F2"/>
+  <text x="210" y="664" font-family="Consolas,monospace" font-size="40" fill="#DC2626">D:\missing\tools</text>
+  <circle cx="816" cy="655" r="24" fill="#EF4444"/>
+  <text x="816" y="665" font-family="Arial,sans-serif" font-size="28" fill="#FFFFFF" font-weight="bold" text-anchor="middle">✗</text>
+  <!-- Summary -->
+  <text x="512" y="860" font-family="Arial,sans-serif" font-size="52" fill="#15803D" font-weight="bold" text-anchor="middle">Path Guard</text>
+</svg>

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>Locale.View — Icon Candidates</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #1A2634;
+    font-family: 'Segoe UI', sans-serif;
+    color: #F5F5F5;
+    padding: 48px 32px;
+    min-height: 100vh;
+  }
+  h1 {
+    text-align: center;
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #4FC3F7;
+    letter-spacing: 2px;
+  }
+  .subtitle {
+    text-align: center;
+    font-size: 15px;
+    color: #90A4AE;
+    margin-bottom: 48px;
+  }
+  .grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    justify-content: center;
+  }
+  .card {
+    background: #263545;
+    border-radius: 20px;
+    padding: 28px 24px 24px;
+    width: 260px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 6px 32px rgba(0,0,0,0.5);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 48px rgba(0,0,0,0.7);
+  }
+  .icon-wrap {
+    width: 200px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: width 0.2s, height 0.2s;
+    overflow: visible;
+  }
+  .card:hover .icon-wrap {
+    width: 260px;
+    height: 260px;
+  }
+  .icon-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: all 0.2s;
+  }
+  .filename {
+    margin-top: 18px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #4FC3F7;
+    letter-spacing: 1px;
+  }
+  .concept {
+    margin-top: 8px;
+    font-size: 13px;
+    color: #B0BEC5;
+    text-align: center;
+    line-height: 1.5;
+    min-height: 40px;
+  }
+  .type-badge {
+    margin-top: 10px;
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+  .literal  { background: #1565C0; color: #E3F2FD; }
+  .metaphor { background: #2E7D32; color: #E8F5E9; }
+  .hybrid   { background: #6A1B9A; color: #F3E5F5; }
+  .palette {
+    display: flex;
+    gap: 8px;
+    margin-top: 14px;
+  }
+  .swatch {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.15);
+  }
+</style>
+</head>
+<body>
+<h1>Locale.View</h1>
+<p class="subtitle">CultureInfo 로케일 탐색기 — 날짜/숫자 포맷 검색 &amp; 비교 (Candidate_20260328_1214)</p>
+<div class="grid">
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_01.svg" alt="icon_01"/></div>
+    <div class="filename">icon_01.svg</div>
+    <div class="concept">지구본 + 날짜 포맷 텍스트<br>세계 각 지역의 날짜 포맷 표시</div>
+    <span class="type-badge literal">literal</span>
+    <div class="palette">
+      <div class="swatch" style="background:#87CEEB" title="#87CEEB"></div>
+      <div class="swatch" style="background:#0288D1" title="#0288D1"></div>
+      <div class="swatch" style="background:#66BB6A" title="#66BB6A"></div>
+      <div class="swatch" style="background:#FFFFFF" title="#FFFFFF"></div>
+      <div class="swatch" style="background:#FF8A65" title="#FF8A65"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_02.svg" alt="icon_02"/></div>
+    <div class="filename">icon_02.svg</div>
+    <div class="concept">로케일 코드 뱃지들<br>en-US / ja-JP / ko-KR</div>
+    <span class="type-badge literal">literal</span>
+    <div class="palette">
+      <div class="swatch" style="background:#EDE7F6" title="#EDE7F6"></div>
+      <div class="swatch" style="background:#1565C0" title="#1565C0"></div>
+      <div class="swatch" style="background:#C62828" title="#C62828"></div>
+      <div class="swatch" style="background:#1B5E20" title="#1B5E20"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_03.svg" alt="icon_03"/></div>
+    <div class="filename">icon_03.svg</div>
+    <div class="concept">세계 지도 + 언어 핀<br>로케일 = 세계의 각 지역</div>
+    <span class="type-badge metaphor">metaphor</span>
+    <div class="palette">
+      <div class="swatch" style="background:#E0F7FA" title="#E0F7FA"></div>
+      <div class="swatch" style="background:#00ACC1" title="#00ACC1"></div>
+      <div class="swatch" style="background:#E53935" title="#E53935"></div>
+      <div class="swatch" style="background:#FFD600" title="#FFD600"></div>
+      <div class="swatch" style="background:#43A047" title="#43A047"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_04.svg" alt="icon_04"/></div>
+    <div class="filename">icon_04.svg</div>
+    <div class="concept">달력 + 다국어 숫자 표기<br>날짜 포맷 = 달력, 다국어 지원</div>
+    <span class="type-badge metaphor">metaphor</span>
+    <div class="palette">
+      <div class="swatch" style="background:#FFF3E0" title="#FFF3E0"></div>
+      <div class="swatch" style="background:#E53935" title="#E53935"></div>
+      <div class="swatch" style="background:#1E88E5" title="#1E88E5"></div>
+      <div class="swatch" style="background:#43A047" title="#43A047"></div>
+      <div class="swatch" style="background:#FF7043" title="#FF7043"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_05.svg" alt="icon_05"/></div>
+    <div class="filename">icon_05.svg</div>
+    <div class="concept">지구 + 로케일 정보 카드<br>지구촌 문화 정보 탐색기</div>
+    <span class="type-badge hybrid">hybrid</span>
+    <div class="palette">
+      <div class="swatch" style="background:#E8F5E9" title="#E8F5E9"></div>
+      <div class="swatch" style="background:#388E3C" title="#388E3C"></div>
+      <div class="swatch" style="background:#E53935" title="#E53935"></div>
+      <div class="swatch" style="background:#1565C0" title="#1565C0"></div>
+      <div class="swatch" style="background:#7B1FA2" title="#7B1FA2"></div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

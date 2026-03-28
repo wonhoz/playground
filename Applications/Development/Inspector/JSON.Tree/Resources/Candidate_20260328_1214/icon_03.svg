@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F1F8E9"/>
+      <stop offset="100%" stop-color="#AED581"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg3)"/>
+  <!-- Layer 2: 나무 줄기와 가지 -->
+  <g stroke="#4E342E" stroke-linecap="round" fill="none">
+    <!-- 메인 줄기 -->
+    <line x1="512" y1="820" x2="512" y2="540" stroke-width="64"/>
+    <!-- 1차 가지 왼쪽 -->
+    <line x1="512" y1="560" x2="310" y2="420" stroke-width="48"/>
+    <!-- 1차 가지 오른쪽 -->
+    <line x1="512" y1="560" x2="714" y2="420" stroke-width="48"/>
+    <!-- 2차 가지 왼쪽-왼쪽 -->
+    <line x1="310" y1="420" x2="210" y2="300" stroke-width="36"/>
+    <!-- 2차 가지 왼쪽-오른쪽 -->
+    <line x1="310" y1="420" x2="400" y2="290" stroke-width="36"/>
+    <!-- 2차 가지 오른쪽-왼쪽 -->
+    <line x1="714" y1="420" x2="624" y2="290" stroke-width="36"/>
+    <!-- 2차 가지 오른쪽-오른쪽 -->
+    <line x1="714" y1="420" x2="814" y2="300" stroke-width="36"/>
+  </g>
+  <!-- 뿌리 -->
+  <g stroke="#6D4C41" stroke-linecap="round" fill="none">
+    <line x1="512" y1="820" x2="420" y2="900" stroke-width="36"/>
+    <line x1="512" y1="820" x2="604" y2="900" stroke-width="36"/>
+    <line x1="420" y1="900" x2="360" y2="950" stroke-width="24"/>
+    <line x1="604" y1="900" x2="664" y2="950" stroke-width="24"/>
+  </g>
+  <!-- Layer 3: 잎(노드) — 초록 원형 -->
+  <circle cx="210" cy="270" r="72" fill="#66BB6A"/>
+  <circle cx="400" cy="260" r="68" fill="#43A047"/>
+  <circle cx="624" cy="260" r="68" fill="#81C784"/>
+  <circle cx="814" cy="270" r="72" fill="#388E3C"/>
+  <!-- JSON { } 심볼을 잎에 -->
+  <text x="210" y="284" font-family="monospace" font-size="72" fill="white" text-anchor="middle" font-weight="bold">{ }</text>
+  <text x="400" y="278" font-family="monospace" font-size="64" fill="white" text-anchor="middle" font-weight="bold">[ ]</text>
+  <text x="624" y="278" font-family="monospace" font-size="64" fill="white" text-anchor="middle" font-weight="bold">{ }</text>
+  <text x="814" y="284" font-family="monospace" font-size="72" fill="white" text-anchor="middle" font-weight="bold">[ ]</text>
+  <!-- 중간 노드 -->
+  <circle cx="310" cy="420" r="44" fill="#FFA726"/>
+  <circle cx="714" cy="420" r="44" fill="#FF7043"/>
+  <!-- 루트 노드 -->
+  <circle cx="512" cy="540" r="56" fill="#FDD835"/>
+  <text x="512" y="558" font-family="monospace" font-size="52" fill="#3E2723" text-anchor="middle" font-weight="bold">root</text>
+</svg>

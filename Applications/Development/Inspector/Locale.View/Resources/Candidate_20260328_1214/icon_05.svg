@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="lbg5" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E8F5E9"/>
+      <stop offset="100%" stop-color="#66BB6A"/>
+    </linearGradient>
+    <radialGradient id="globe5" cx="45%" cy="40%">
+      <stop offset="0%" stop-color="#A5D6A7"/>
+      <stop offset="100%" stop-color="#2E7D32"/>
+    </radialGradient>
+  </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#lbg5)"/>
+  <!-- Layer 2: 지구 -->
+  <circle cx="320" cy="480" r="220" fill="url(#globe5)" stroke="white" stroke-width="12"/>
+  <!-- 대륙 간략 -->
+  <ellipse cx="290" cy="420" rx="60" ry="80" fill="#81C784" opacity="0.9"/>
+  <ellipse cx="370" cy="480" rx="70" ry="55" fill="#A5D6A7" opacity="0.9"/>
+  <ellipse cx="260" cy="520" rx="40" ry="60" fill="#66BB6A" opacity="0.9"/>
+  <!-- 경선/위선 -->
+  <g stroke="white" stroke-width="4" fill="none" opacity="0.35">
+    <ellipse cx="320" cy="480" rx="220" ry="80"/>
+    <line x1="320" y1="260" x2="320" y2="700"/>
+    <line x1="140" y1="380" x2="540" y2="380"/>
+  </g>
+  <!-- Layer 3: 로케일 정보 카드 -->
+  <rect x="520" y="190" width="414" height="640" rx="28" fill="white" opacity="0.97"/>
+  <!-- 카드 헤더 -->
+  <rect x="520" y="190" width="414" height="70" rx="28" fill="#388E3C"/>
+  <text x="727" y="240" font-family="Arial" font-size="52" fill="white" text-anchor="middle" font-weight="bold">locale</text>
+  <!-- 로케일 코드 -->
+  <text x="548" y="318" font-family="'Courier New'" font-size="46" fill="#1B5E20" font-weight="bold">ko-KR</text>
+  <line x1="536" y1="332" x2="916" y2="332" stroke="#E0E0E0" stroke-width="2"/>
+  <!-- 날짜 포맷 -->
+  <text x="548" y="378" font-family="Arial" font-size="38" fill="#757575">Date</text>
+  <text x="548" y="424" font-family="'Courier New'" font-size="44" fill="#E53935" font-weight="bold">2026. 3. 28.</text>
+  <line x1="536" y1="440" x2="916" y2="440" stroke="#E0E0E0" stroke-width="2"/>
+  <!-- 숫자 포맷 -->
+  <text x="548" y="488" font-family="Arial" font-size="38" fill="#757575">Number</text>
+  <text x="548" y="534" font-family="'Courier New'" font-size="44" fill="#1565C0" font-weight="bold">1,234,567</text>
+  <line x1="536" y1="550" x2="916" y2="550" stroke="#E0E0E0" stroke-width="2"/>
+  <!-- 시간 포맷 -->
+  <text x="548" y="598" font-family="Arial" font-size="38" fill="#757575">Time</text>
+  <text x="548" y="644" font-family="'Courier New'" font-size="44" fill="#FF7043" font-weight="bold">오후 3:45</text>
+  <line x1="536" y1="660" x2="916" y2="660" stroke="#E0E0E0" stroke-width="2"/>
+  <!-- 통화 -->
+  <text x="548" y="708" font-family="Arial" font-size="38" fill="#757575">Currency</text>
+  <text x="548" y="754" font-family="'Courier New'" font-size="44" fill="#7B1FA2" font-weight="bold">₩ 5,000</text>
+  <!-- 연결 선 -->
+  <line x1="540" y1="480" x2="520" y2="480" stroke="#388E3C" stroke-width="5"/>
+</svg>

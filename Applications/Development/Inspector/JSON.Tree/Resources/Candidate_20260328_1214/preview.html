@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>JSON.Tree — Icon Candidates</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #2D2416;
+    font-family: 'Segoe UI', sans-serif;
+    color: #F5F5F5;
+    padding: 48px 32px;
+    min-height: 100vh;
+  }
+  h1 {
+    text-align: center;
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #FDD835;
+    letter-spacing: 2px;
+  }
+  .subtitle {
+    text-align: center;
+    font-size: 15px;
+    color: #BCAAA4;
+    margin-bottom: 48px;
+  }
+  .grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    justify-content: center;
+  }
+  .card {
+    background: #3E2723;
+    border-radius: 20px;
+    padding: 28px 24px 24px;
+    width: 260px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 6px 32px rgba(0,0,0,0.5);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 48px rgba(0,0,0,0.7);
+  }
+  .icon-wrap {
+    width: 200px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: width 0.2s, height 0.2s;
+    overflow: visible;
+  }
+  .card:hover .icon-wrap {
+    width: 260px;
+    height: 260px;
+  }
+  .icon-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: all 0.2s;
+  }
+  .filename {
+    margin-top: 18px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #FDD835;
+    letter-spacing: 1px;
+  }
+  .concept {
+    margin-top: 8px;
+    font-size: 13px;
+    color: #D7CCC8;
+    text-align: center;
+    line-height: 1.5;
+    min-height: 40px;
+  }
+  .type-badge {
+    margin-top: 10px;
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+  .literal  { background: #1565C0; color: #E3F2FD; }
+  .metaphor { background: #2E7D32; color: #E8F5E9; }
+  .hybrid   { background: #6A1B9A; color: #F3E5F5; }
+  .palette {
+    display: flex;
+    gap: 8px;
+    margin-top: 14px;
+  }
+  .swatch {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.15);
+  }
+</style>
+</head>
+<body>
+<h1>JSON.Tree</h1>
+<p class="subtitle">JSON/YAML/TOML 트리 시각화 &amp; diff 비교 — 아이콘 후보 (Candidate_20260328_1214)</p>
+<div class="grid">
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_01.svg" alt="icon_01"/></div>
+    <div class="filename">icon_01.svg</div>
+    <div class="concept">{ } 중괄호 + 트리 연결선<br>JSON의 상징 × 구조 시각화</div>
+    <span class="type-badge literal">literal</span>
+    <div class="palette">
+      <div class="swatch" style="background:#FFF9C4" title="#FFF9C4"></div>
+      <div class="swatch" style="background:#FDD835" title="#FDD835"></div>
+      <div class="swatch" style="background:#4E342E" title="#4E342E"></div>
+      <div class="swatch" style="background:#FF6F00" title="#FF6F00"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_02.svg" alt="icon_02"/></div>
+    <div class="filename">icon_02.svg</div>
+    <div class="concept">들여쓰기 키-값 트리 뷰<br>앱을 열면 보이는 실제 화면</div>
+    <span class="type-badge literal">literal</span>
+    <div class="palette">
+      <div class="swatch" style="background:#E3F2FD" title="#E3F2FD"></div>
+      <div class="swatch" style="background:#1565C0" title="#1565C0"></div>
+      <div class="swatch" style="background:#FFD54F" title="#FFD54F"></div>
+      <div class="swatch" style="background:#A5D6A7" title="#A5D6A7"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_03.svg" alt="icon_03"/></div>
+    <div class="filename">icon_03.svg</div>
+    <div class="concept">가지 뻗는 실제 나무<br>tree view = 나무 구조</div>
+    <span class="type-badge metaphor">metaphor</span>
+    <div class="palette">
+      <div class="swatch" style="background:#F1F8E9" title="#F1F8E9"></div>
+      <div class="swatch" style="background:#AED581" title="#AED581"></div>
+      <div class="swatch" style="background:#4E342E" title="#4E342E"></div>
+      <div class="swatch" style="background:#66BB6A" title="#66BB6A"></div>
+      <div class="swatch" style="background:#FDD835" title="#FDD835"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_04.svg" alt="icon_04"/></div>
+    <div class="filename">icon_04.svg</div>
+    <div class="concept">A vs B diff 비교 화살표<br>두 파일 변경점 비교</div>
+    <span class="type-badge metaphor">metaphor</span>
+    <div class="palette">
+      <div class="swatch" style="background:#FCE4EC" title="#FCE4EC"></div>
+      <div class="swatch" style="background:#1565C0" title="#1565C0"></div>
+      <div class="swatch" style="background:#B71C1C" title="#B71C1C"></div>
+      <div class="swatch" style="background:#FFFFFF" title="#FFFFFF"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_05.svg" alt="icon_05"/></div>
+    <div class="filename">icon_05.svg</div>
+    <div class="concept">{JSON} 텍스트 + 트리선<br>JSON 파일 + 트리 뷰어 결합</div>
+    <span class="type-badge hybrid">hybrid</span>
+    <div class="palette">
+      <div class="swatch" style="background:#FFF3E0" title="#FFF3E0"></div>
+      <div class="swatch" style="background:#FFB74D" title="#FFB74D"></div>
+      <div class="swatch" style="background:#E65100" title="#E65100"></div>
+      <div class="swatch" style="background:#7B1FA2" title="#7B1FA2"></div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E3F2FD"/>
+      <stop offset="100%" stop-color="#42A5F5"/>
+    </linearGradient>
+    <clipPath id="clip2">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg2)"/>
+  <!-- Layer 2: 코드 에디터 패널 -->
+  <rect x="120" y="160" width="784" height="704" rx="24" fill="#1565C0" opacity="0.85"/>
+  <rect x="120" y="160" width="784" height="64" rx="24" fill="#0D47A1"/>
+  <!-- 창 버튼 -->
+  <circle cx="172" cy="192" r="14" fill="#EF5350"/>
+  <circle cx="216" cy="192" r="14" fill="#FFA726"/>
+  <circle cx="260" cy="192" r="14" fill="#66BB6A"/>
+  <!-- Layer 3: 트리 텍스트 줄들 (들여쓰기) -->
+  <!-- 1레벨: root -->
+  <rect x="168" y="268" width="200" height="36" rx="6" fill="#FFD54F"/>
+  <text x="178" y="294" font-family="monospace" font-size="88" fill="#FFD54F" font-weight="bold">&#123;</text>
+  <!-- 2레벨: key1 -->
+  <rect x="230" y="326" width="360" height="36" rx="6" fill="none"/>
+  <text x="230" y="352" font-family="monospace" font-size="72" fill="#81D4FA">"name"</text>
+  <text x="480" y="352" font-family="monospace" font-size="72" fill="#FFFFFF">:</text>
+  <text x="510" y="352" font-family="monospace" font-size="72" fill="#A5D6A7">"Alice"</text>
+  <!-- 2레벨: key2 -->
+  <text x="230" y="442" font-family="monospace" font-size="72" fill="#81D4FA">"age"</text>
+  <text x="420" y="442" font-family="monospace" font-size="72" fill="#FFFFFF">:</text>
+  <text x="452" y="442" font-family="monospace" font-size="72" fill="#FFD54F">30</text>
+  <!-- 2레벨: 중첩 -->
+  <text x="230" y="532" font-family="monospace" font-size="72" fill="#81D4FA">"addr"</text>
+  <text x="470" y="532" font-family="monospace" font-size="72" fill="#FFFFFF">: &#123;</text>
+  <!-- 3레벨 -->
+  <text x="300" y="622" font-family="monospace" font-size="72" fill="#CE93D8">"city"</text>
+  <text x="532" y="622" font-family="monospace" font-size="72" fill="#FFFFFF">:</text>
+  <text x="562" y="622" font-family="monospace" font-size="72" fill="#A5D6A7">"Seoul"</text>
+  <!-- 닫기 -->
+  <text x="300" y="712" font-family="monospace" font-size="72" fill="#FFFFFF">&#125;</text>
+  <text x="168" y="790" font-family="monospace" font-size="72" fill="#FFD54F">&#125;</text>
+  <!-- 들여쓰기 가이드선 -->
+  <line x1="222" y1="306" x2="222" y2="730" stroke="#42A5F5" stroke-width="3" stroke-dasharray="6,4" opacity="0.6"/>
+  <line x1="292" y1="512" x2="292" y2="718" stroke="#42A5F5" stroke-width="3" stroke-dasharray="6,4" opacity="0.6"/>
+</svg>

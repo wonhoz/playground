@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>Quick.Calc — Icon Candidates</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #1C2B1C;
+    font-family: 'Segoe UI', sans-serif;
+    color: #F5F5F5;
+    padding: 48px 32px;
+    min-height: 100vh;
+  }
+  h1 {
+    text-align: center;
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #CCFF90;
+    letter-spacing: 2px;
+  }
+  .subtitle {
+    text-align: center;
+    font-size: 15px;
+    color: #A5D6A7;
+    margin-bottom: 48px;
+  }
+  .grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    justify-content: center;
+  }
+  .card {
+    background: #2E3F2E;
+    border-radius: 20px;
+    padding: 28px 24px 24px;
+    width: 260px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 6px 32px rgba(0,0,0,0.5);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 48px rgba(0,0,0,0.7);
+  }
+  .icon-wrap {
+    width: 200px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: width 0.2s, height 0.2s;
+    overflow: visible;
+  }
+  .card:hover .icon-wrap {
+    width: 260px;
+    height: 260px;
+  }
+  .icon-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: all 0.2s;
+  }
+  .filename {
+    margin-top: 18px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #CCFF90;
+    letter-spacing: 1px;
+  }
+  .concept {
+    margin-top: 8px;
+    font-size: 13px;
+    color: #A5D6A7;
+    text-align: center;
+    line-height: 1.5;
+    min-height: 40px;
+  }
+  .type-badge {
+    margin-top: 10px;
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+  .literal  { background: #1565C0; color: #E3F2FD; }
+  .metaphor { background: #4A148C; color: #E1BEE7; }
+  .hybrid   { background: #BF360C; color: #FBE9E7; }
+  .palette {
+    display: flex;
+    gap: 8px;
+    margin-top: 14px;
+  }
+  .swatch {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.15);
+  }
+</style>
+</head>
+<body>
+<h1>Quick.Calc</h1>
+<p class="subtitle">Win+K 전역 단축키로 즉시 열리는 트레이 상주 계산기 (Candidate_20260328_1214)</p>
+<div class="grid">
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_01.svg" alt="icon_01"/></div>
+    <div class="filename">icon_01.svg</div>
+    <div class="concept">계산기 버튼 그리드<br>계산기 자체의 직접 묘사</div>
+    <span class="type-badge literal">literal</span>
+    <div class="palette">
+      <div class="swatch" style="background:#E3F2FD" title="#E3F2FD"></div>
+      <div class="swatch" style="background:#1565C0" title="#1565C0"></div>
+      <div class="swatch" style="background:#FFFFFF" title="#FFFFFF"></div>
+      <div class="swatch" style="background:#42A5F5" title="#42A5F5"></div>
+      <div class="swatch" style="background:#FF8F00" title="#FF8F00"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_02.svg" alt="icon_02"/></div>
+    <div class="filename">icon_02.svg</div>
+    <div class="concept">수식 입력 바 (2+2=4)<br>계산기의 핵심 기능 — 수식 입력</div>
+    <span class="type-badge literal">literal</span>
+    <div class="palette">
+      <div class="swatch" style="background:#FFF9C4" title="#FFF9C4"></div>
+      <div class="swatch" style="background:#F9A825" title="#F9A825"></div>
+      <div class="swatch" style="background:#FFFFFF" title="#FFFFFF"></div>
+      <div class="swatch" style="background:#E65100" title="#E65100"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_03.svg" alt="icon_03"/></div>
+    <div class="filename">icon_03.svg</div>
+    <div class="concept">번개 + 연산 기호<br>"Quick" = 번개처럼 빠른 계산기</div>
+    <span class="type-badge metaphor">metaphor</span>
+    <div class="palette">
+      <div class="swatch" style="background:#1A237E" title="#1A237E"></div>
+      <div class="swatch" style="background:#3F51B5" title="#3F51B5"></div>
+      <div class="swatch" style="background:#FFD600" title="#FFD600"></div>
+      <div class="swatch" style="background:#E8EAF6" title="#E8EAF6"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_04.svg" alt="icon_04"/></div>
+    <div class="filename">icon_04.svg</div>
+    <div class="concept">Win 키 + K 키 조합<br>Win+K 단축키가 앱을 여는 트리거</div>
+    <span class="type-badge metaphor">metaphor</span>
+    <div class="palette">
+      <div class="swatch" style="background:#E0F7FA" title="#E0F7FA"></div>
+      <div class="swatch" style="background:#1976D2" title="#1976D2"></div>
+      <div class="swatch" style="background:#0097A7" title="#0097A7"></div>
+      <div class="swatch" style="background:#006064" title="#006064"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_05.svg" alt="icon_05"/></div>
+    <div class="filename">icon_05.svg</div>
+    <div class="concept">팝업 창 + Win+K 단축키<br>단축키로 즉시 팝업되는 계산기</div>
+    <span class="type-badge hybrid">hybrid</span>
+    <div class="palette">
+      <div class="swatch" style="background:#F1F8E9" title="#F1F8E9"></div>
+      <div class="swatch" style="background:#43A047" title="#43A047"></div>
+      <div class="swatch" style="background:#FFFFFF" title="#FFFFFF"></div>
+      <div class="swatch" style="background:#1565C0" title="#1565C0"></div>
+      <div class="swatch" style="background:#CCFF90" title="#CCFF90"></div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

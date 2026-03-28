@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg5" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF3E0"/>
+      <stop offset="100%" stop-color="#FFB74D"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg5)"/>
+  <!-- Layer 2: 배경 트리 선들 (보라, 대각선으로 뻗음) -->
+  <g stroke="#7B1FA2" stroke-linecap="round" fill="none" opacity="0.35">
+    <line x1="512" y1="100" x2="512" y2="960" stroke-width="14"/>
+    <line x1="512" y1="280" x2="200" y2="480" stroke-width="10"/>
+    <line x1="512" y1="280" x2="824" y2="480" stroke-width="10"/>
+    <line x1="200" y1="480" x2="140" y2="680" stroke-width="8"/>
+    <line x1="200" y1="480" x2="340" y2="680" stroke-width="8"/>
+    <line x1="824" y1="480" x2="684" y2="680" stroke-width="8"/>
+    <line x1="824" y1="480" x2="884" y2="680" stroke-width="8"/>
+    <!-- 추가 대각선 -->
+    <line x1="140" y1="680" x2="100" y2="820" stroke-width="6"/>
+    <line x1="340" y1="680" x2="300" y2="820" stroke-width="6"/>
+    <line x1="340" y1="680" x2="400" y2="820" stroke-width="6"/>
+    <line x1="684" y1="680" x2="640" y2="820" stroke-width="6"/>
+    <line x1="884" y1="680" x2="920" y2="820" stroke-width="6"/>
+  </g>
+  <!-- 보라 노드 원들 -->
+  <g fill="#9C27B0" opacity="0.45">
+    <circle cx="512" cy="280" r="18"/>
+    <circle cx="200" cy="480" r="14"/>
+    <circle cx="824" cy="480" r="14"/>
+    <circle cx="140" cy="680" r="11"/>
+    <circle cx="340" cy="680" r="11"/>
+    <circle cx="684" cy="680" r="11"/>
+    <circle cx="884" cy="680" r="11"/>
+  </g>
+  <!-- Layer 3: 전면 {JSON} 텍스트 (크고 굵게) -->
+  <!-- 중괄호 - 짙은 주황/갈색 -->
+  <text x="130" y="580" font-family="Georgia, 'Times New Roman', serif" font-size="320" font-weight="900" fill="#E65100" opacity="0.95">{</text>
+  <text x="760" y="580" font-family="Georgia, 'Times New Roman', serif" font-size="320" font-weight="900" fill="#E65100" opacity="0.95">}</text>
+  <!-- JSON 텍스트 -->
+  <text x="512" y="570" font-family="Arial Black, Arial" font-size="192" font-weight="900" fill="white" text-anchor="middle" dominant-baseline="middle" letter-spacing="-4">JSON</text>
+  <!-- 보라 밑줄 강조 -->
+  <rect x="270" y="600" width="484" height="16" rx="8" fill="#7B1FA2" opacity="0.7"/>
+</svg>

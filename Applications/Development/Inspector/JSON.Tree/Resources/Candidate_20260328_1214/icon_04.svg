@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg4" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FCE4EC"/>
+      <stop offset="100%" stop-color="#F48FB1"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg4)"/>
+  <!-- Layer 2: A 파일 (파랑 컬럼) -->
+  <rect x="100" y="200" width="320" height="620" rx="24" fill="#1565C0"/>
+  <!-- A 헤더 -->
+  <rect x="100" y="200" width="320" height="80" rx="24" fill="#0D47A1"/>
+  <text x="260" y="254" font-family="Arial" font-size="80" fill="white" text-anchor="middle" font-weight="bold">A</text>
+  <!-- A 파일 줄들 -->
+  <rect x="128" y="308" width="264" height="28" rx="8" fill="#42A5F5" opacity="0.9"/>
+  <rect x="128" y="356" width="220" height="28" rx="8" fill="#42A5F5" opacity="0.9"/>
+  <rect x="128" y="404" width="264" height="28" rx="8" fill="#EF5350" opacity="0.8"/>
+  <rect x="128" y="452" width="180" height="28" rx="8" fill="#42A5F5" opacity="0.9"/>
+  <rect x="128" y="500" width="264" height="28" rx="8" fill="#EF5350" opacity="0.8"/>
+  <rect x="128" y="548" width="240" height="28" rx="8" fill="#42A5F5" opacity="0.9"/>
+  <rect x="128" y="596" width="200" height="28" rx="8" fill="#42A5F5" opacity="0.9"/>
+  <rect x="128" y="644" width="264" height="28" rx="8" fill="#EF5350" opacity="0.8"/>
+  <rect x="128" y="692" width="180" height="28" rx="8" fill="#42A5F5" opacity="0.9"/>
+  <!-- 삭제 표시 (빨간 줄) -->
+  <line x1="128" y1="418" x2="392" y2="418" stroke="#FF5252" stroke-width="6"/>
+  <line x1="128" y1="514" x2="392" y2="514" stroke="#FF5252" stroke-width="6"/>
+  <line x1="128" y1="658" x2="392" y2="658" stroke="#FF5252" stroke-width="6"/>
+
+  <!-- Layer 2: B 파일 (빨강 컬럼) -->
+  <rect x="604" y="200" width="320" height="620" rx="24" fill="#B71C1C"/>
+  <!-- B 헤더 -->
+  <rect x="604" y="200" width="320" height="80" rx="24" fill="#7F0000"/>
+  <text x="764" y="254" font-family="Arial" font-size="80" fill="white" text-anchor="middle" font-weight="bold">B</text>
+  <!-- B 파일 줄들 -->
+  <rect x="632" y="308" width="264" height="28" rx="8" fill="#EF9A9A" opacity="0.9"/>
+  <rect x="632" y="356" width="220" height="28" rx="8" fill="#EF9A9A" opacity="0.9"/>
+  <rect x="632" y="404" width="264" height="28" rx="8" fill="#A5D6A7" opacity="0.9"/>
+  <rect x="632" y="452" width="180" height="28" rx="8" fill="#EF9A9A" opacity="0.9"/>
+  <rect x="632" y="500" width="264" height="28" rx="8" fill="#A5D6A7" opacity="0.9"/>
+  <rect x="632" y="548" width="240" height="28" rx="8" fill="#EF9A9A" opacity="0.9"/>
+  <rect x="632" y="596" width="200" height="28" rx="8" fill="#EF9A9A" opacity="0.9"/>
+  <rect x="632" y="644" width="264" height="28" rx="8" fill="#A5D6A7" opacity="0.9"/>
+  <rect x="632" y="692" width="180" height="28" rx="8" fill="#EF9A9A" opacity="0.9"/>
+  <!-- 추가 표시 (초록) -->
+  <text x="624" y="430" font-family="Arial" font-size="36" fill="#66BB6A" font-weight="bold">+</text>
+  <text x="624" y="526" font-family="Arial" font-size="36" fill="#66BB6A" font-weight="bold">+</text>
+  <text x="624" y="666" font-family="Arial" font-size="36" fill="#66BB6A" font-weight="bold">+</text>
+
+  <!-- Layer 3: 중앙 양방향 화살표 -->
+  <g fill="white" stroke="none">
+    <!-- 왼쪽 화살표 -->
+    <polygon points="440,490 500,450 500,480 560,480 560,500 500,500 500,530" fill="white"/>
+    <!-- 오른쪽 화살표 -->
+    <polygon points="584,540 524,580 524,550 464,550 464,530 524,530 524,500" fill="white"/>
+  </g>
+  <!-- diff 텍스트 -->
+  <text x="512" y="430" font-family="Arial" font-size="56" fill="#880E4F" text-anchor="middle" font-weight="bold">diff</text>
+</svg>

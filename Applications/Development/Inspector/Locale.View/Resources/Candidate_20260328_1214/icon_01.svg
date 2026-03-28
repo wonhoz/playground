@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="lbg1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#87CEEB"/>
+      <stop offset="100%" stop-color="#0288D1"/>
+    </linearGradient>
+    <radialGradient id="globe1" cx="42%" cy="38%">
+      <stop offset="0%" stop-color="#4FC3F7"/>
+      <stop offset="100%" stop-color="#01579B"/>
+    </radialGradient>
+  </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#lbg1)"/>
+  <!-- Layer 2: 지구 -->
+  <circle cx="420" cy="470" r="260" fill="url(#globe1)" stroke="white" stroke-width="16"/>
+  <!-- 대륙 실루엣 (단순화) -->
+  <!-- 유럽/아프리카 -->
+  <ellipse cx="410" cy="400" rx="60" ry="90" fill="#66BB6A" opacity="0.85"/>
+  <ellipse cx="420" cy="540" rx="55" ry="80" fill="#4CAF50" opacity="0.85"/>
+  <!-- 아메리카 -->
+  <ellipse cx="310" cy="420" rx="48" ry="100" fill="#81C784" opacity="0.85"/>
+  <!-- 아시아 -->
+  <ellipse cx="530" cy="380" rx="80" ry="65" fill="#A5D6A7" opacity="0.85"/>
+  <!-- 위선/경선 -->
+  <g stroke="white" stroke-width="5" fill="none" opacity="0.4">
+    <ellipse cx="420" cy="470" rx="260" ry="100"/>
+    <ellipse cx="420" cy="470" rx="260" ry="180"/>
+    <line x1="420" y1="210" x2="420" y2="730"/>
+    <line x1="210" y1="340" x2="630" y2="340"/>
+    <line x1="175" y1="470" x2="680" y2="470"/>
+  </g>
+  <!-- Layer 3: 날짜 포맷 텍스트 카드 -->
+  <rect x="530" y="280" width="380" height="180" rx="20" fill="white" opacity="0.95"/>
+  <text x="720" y="350" font-family="'Courier New', monospace" font-size="56" fill="#01579B" text-anchor="middle" font-weight="bold">2026/03/28</text>
+  <rect x="548" y="376" width="344" height="4" rx="2" fill="#B0BEC5"/>
+  <text x="720" y="436" font-family="'Courier New', monospace" font-size="52" fill="#FF8A65" text-anchor="middle" font-weight="bold">28.03.2026</text>
+  <!-- 텍스트 카드 2 -->
+  <rect x="530" y="490" width="380" height="100" rx="20" fill="#FFF9C4" opacity="0.95"/>
+  <text x="720" y="554" font-family="'Courier New', monospace" font-size="52" fill="#F57F17" text-anchor="middle" font-weight="bold">03/28/2026</text>
+</svg>

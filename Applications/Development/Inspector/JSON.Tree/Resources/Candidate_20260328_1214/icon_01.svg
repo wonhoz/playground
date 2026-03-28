@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF9C4"/>
+      <stop offset="100%" stop-color="#FDD835"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg1)"/>
+  <!-- Layer 2: 중괄호 메인 -->
+  <text x="512" y="420" font-family="Georgia, serif" font-size="520" font-weight="900" fill="#3E2723" text-anchor="middle" dominant-baseline="middle">{</text>
+  <text x="512" y="420" font-family="Georgia, serif" font-size="520" font-weight="900" fill="#3E2723" text-anchor="middle" dominant-baseline="middle">}</text>
+  <!-- 실제로 { } 두 글자를 나란히 -->
+  <text x="310" y="430" font-family="Georgia, serif" font-size="480" font-weight="900" fill="#4E342E" text-anchor="middle" dominant-baseline="middle">{</text>
+  <text x="714" y="430" font-family="Georgia, serif" font-size="480" font-weight="900" fill="#4E342E" text-anchor="middle" dominant-baseline="middle">}</text>
+  <!-- Layer 3: 트리 연결선 (오렌지) -->
+  <g stroke="#FF6F00" stroke-width="22" stroke-linecap="round" fill="none">
+    <!-- 수직 중앙선 -->
+    <line x1="512" y1="580" x2="512" y2="750"/>
+    <!-- 수평 분기 -->
+    <line x1="512" y1="650" x2="360" y2="650"/>
+    <line x1="512" y1="650" x2="664" y2="650"/>
+    <!-- 왼쪽 노드 -->
+    <line x1="360" y1="650" x2="360" y2="730"/>
+    <!-- 오른쪽 노드 -->
+    <line x1="664" y1="650" x2="664" y2="730"/>
+  </g>
+  <!-- 노드 원 -->
+  <circle cx="512" cy="570" r="26" fill="#FF6F00"/>
+  <circle cx="360" cy="750" r="22" fill="#FFA000"/>
+  <circle cx="512" cy="760" r="22" fill="#FFA000"/>
+  <circle cx="664" cy="750" r="22" fill="#FFA000"/>
+</svg>

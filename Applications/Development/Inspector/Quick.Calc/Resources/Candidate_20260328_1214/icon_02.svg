@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="qbg2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF9C4"/>
+      <stop offset="100%" stop-color="#F9A825"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#qbg2)"/>
+  <!-- Layer 2: 입력창 카드들 (레이어드) -->
+  <!-- 뒤 카드 (살짝 어긋남) -->
+  <rect x="145" y="310" width="740" height="200" rx="36" fill="#E65100" opacity="0.4"/>
+  <!-- 중간 카드 -->
+  <rect x="130" y="290" width="740" height="200" rx="36" fill="#EF6C00" opacity="0.55"/>
+  <!-- 메인 입력 카드 -->
+  <rect x="112" y="260" width="800" height="220" rx="36" fill="white" opacity="0.97"/>
+  <!-- 수식 텍스트 -->
+  <text x="560" y="400" font-family="'Courier New', monospace" font-size="140" fill="#3E2723" text-anchor="middle" font-weight="bold">2 + 2</text>
+  <!-- 결과 카드 -->
+  <rect x="112" y="530" width="800" height="220" rx="36" fill="#FFF8E1" opacity="0.97"/>
+  <!-- = 기호 -->
+  <text x="180" y="666" font-family="'Courier New', monospace" font-size="130" fill="#F57F17" font-weight="bold">=</text>
+  <!-- 결과값 -->
+  <text x="780" y="670" font-family="'Courier New', monospace" font-size="160" fill="#E65100" text-anchor="end" font-weight="900">4</text>
+  <!-- Layer 3: 커서 + 하이라이트 -->
+  <rect x="696" y="300" width="8" height="130" rx="4" fill="#E65100" opacity="0.8">
+    <animate attributeName="opacity" values="0.8;0.1;0.8" dur="1.2s" repeatCount="indefinite"/>
+  </rect>
+  <!-- 작은 연산 힌트 -->
+  <text x="512" y="820" font-family="Arial" font-size="64" fill="#BF360C" text-anchor="middle" font-weight="bold" opacity="0.7">Quick Calc</text>
+</svg>

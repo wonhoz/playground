@@ -1,66 +1,26 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
   <defs>
-    <linearGradient id="bg6" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#FFFFFF"/>
-      <stop offset="100%" stop-color="#F0F4FF"/>
+    <linearGradient id="bg1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ECFDF5"/>
+      <stop offset="100%" stop-color="#A7F3D0"/>
     </linearGradient>
-    <linearGradient id="bar_grad" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#4A3AFF"/>
-      <stop offset="100%" stop-color="#7B68EE"/>
-    </linearGradient>
-    <linearGradient id="bar_grad2" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#00C864"/>
-      <stop offset="100%" stop-color="#00A850"/>
-    </linearGradient>
-    <filter id="shadow6">
-      <feDropShadow dx="0" dy="4" stdDeviation="10" flood-color="#3A2AEE" flood-opacity="0.15"/>
-    </filter>
   </defs>
-
-  <!-- Background: clean white -->
-  <rect width="1024" height="1024" rx="190" fill="url(#bg6)"/>
-
-  <!-- App title -->
-  <text x="512" y="210" text-anchor="middle" font-family="Consolas,monospace" font-size="36" fill="#9090C0" letter-spacing="4">KEY.TEST</text>
-
-  <!-- Main counter display -->
-  <rect x="100" y="260" width="824" height="280" rx="20" fill="white" stroke="#E0E4F0" stroke-width="2" filter="url(#shadow6)"/>
-
+  <!-- Background -->
+  <circle cx="512" cy="512" r="512" fill="url(#bg1)"/>
+  <!-- Keyboard key big -->
+  <rect x="200" y="180" width="340" height="280" rx="32" fill="#10B981"/>
+  <rect x="220" y="200" width="300" height="240" rx="24" fill="#34D399"/>
+  <text x="370" y="360" font-family="Arial,sans-serif" font-size="120" fill="#FFFFFF" font-weight="bold" text-anchor="middle">F5</text>
+  <!-- Waveform / pulse signal -->
+  <!-- base line -->
+  <line x1="190" y1="590" x2="834" y2="590" stroke="#10B981" stroke-width="6"/>
+  <!-- key DOWN pulse -->
+  <polyline points="190,590 340,590 340,480 410,480 410,590 580,590 580,460 670,460 670,590 834,590"
+    fill="none" stroke="#059669" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- DOWN/UP labels -->
+  <text x="375" y="445" font-family="Arial,sans-serif" font-size="38" fill="#047857" font-weight="bold" text-anchor="middle">▼</text>
+  <text x="625" y="430" font-family="Arial,sans-serif" font-size="38" fill="#047857" font-weight="bold" text-anchor="middle">▲</text>
   <!-- Label -->
-  <text x="512" y="322" text-anchor="middle" font-family="Consolas,monospace" font-size="28" fill="#9090B0" letter-spacing="2">KEYS TESTED</text>
-
-  <!-- Big number -->
-  <text x="390" y="460" text-anchor="end" font-family="Consolas,monospace" font-size="160" font-weight="bold" fill="#3A2AEE">37</text>
-  <text x="430" y="460" text-anchor="middle" font-family="Consolas,monospace" font-size="100" fill="#C0C4D8">/</text>
-  <text x="510" y="460" text-anchor="start" font-family="Consolas,monospace" font-size="100" fill="#9090B0">104</text>
-
-  <!-- Progress bar background -->
-  <rect x="130" y="490" width="764" height="32" rx="16" fill="#ECEEF8"/>
-  <!-- Progress bar fill (37/104 ≈ 35.6%) -->
-  <rect x="130" y="490" width="272" height="32" rx="16" fill="url(#bar_grad)"/>
-
-  <!-- Stats grid -->
-  <rect x="100" y="580" width="248" height="160" rx="16" fill="white" stroke="#E0E4F0" stroke-width="2"/>
-  <text x="224" y="630" text-anchor="middle" font-family="Consolas,monospace" font-size="22" fill="#9090B0">Total Presses</text>
-  <text x="224" y="698" text-anchor="middle" font-family="Consolas,monospace" font-size="60" font-weight="bold" fill="#4A4A6A">286</text>
-
-  <rect x="388" y="580" width="248" height="160" rx="16" fill="white" stroke="#E0E4F0" stroke-width="2"/>
-  <text x="512" y="630" text-anchor="middle" font-family="Consolas,monospace" font-size="22" fill="#9090B0">Max Simultaneous</text>
-  <text x="512" y="698" text-anchor="middle" font-family="Consolas,monospace" font-size="60" font-weight="bold" fill="#4A4A6A">6</text>
-
-  <!-- Issues: 0 (green) -->
-  <rect x="676" y="580" width="248" height="160" rx="16" fill="white" stroke="#00C864" stroke-width="2"/>
-  <text x="800" y="630" text-anchor="middle" font-family="Consolas,monospace" font-size="22" fill="#9090B0">Issues</text>
-  <text x="800" y="698" text-anchor="middle" font-family="Consolas,monospace" font-size="60" font-weight="bold" fill="#00C864">0</text>
-
-  <!-- Key categories progress -->
-  <text x="130" y="800" font-family="Consolas,monospace" font-size="22" fill="#8080A0">Alpha</text>
-  <rect x="130" y="812" width="600" height="16" rx="8" fill="#ECEEF8"/>
-  <rect x="130" y="812" width="480" height="16" rx="8" fill="url(#bar_grad)"/>
-  <text x="744" y="826" font-family="Consolas,monospace" font-size="22" fill="#6868A0">24/26</text>
-
-  <text x="130" y="860" font-family="Consolas,monospace" font-size="22" fill="#8080A0">Digits</text>
-  <rect x="130" y="872" width="600" height="16" rx="8" fill="#ECEEF8"/>
-  <rect x="130" y="872" width="120" height="16" rx="8" fill="url(#bar_grad2)"/>
-  <text x="744" y="886" font-family="Consolas,monospace" font-size="22" fill="#6868A0">2/10</text>
+  <text x="512" y="760" font-family="Arial,sans-serif" font-size="60" fill="#065F46" font-weight="bold" text-anchor="middle">Key Test</text>
+  <text x="512" y="830" font-family="Arial,sans-serif" font-size="44" fill="#6EE7B7" text-anchor="middle">입력 진단</text>
 </svg>

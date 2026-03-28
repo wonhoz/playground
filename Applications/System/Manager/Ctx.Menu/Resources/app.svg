@@ -1,26 +1,27 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
   <defs>
-    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#0f2a5c"/>
-      <stop offset="100%" stop-color="#1d4ed8"/>
+    <linearGradient id="bg1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F0FDF4"/>
+      <stop offset="100%" stop-color="#BBF7D0"/>
     </linearGradient>
   </defs>
-  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
-  <!-- right-click cursor -->
-  <path d="M180 140 L180 290 L220 250 L250 330 L278 318 L248 238 L300 238 Z" fill="#ffffff" opacity="0.95"/>
-  <!-- context menu popup -->
-  <rect x="260" y="200" width="180" height="170" rx="10" fill="#1e3a8a" stroke="#60a5fa" stroke-width="2"/>
-  <!-- menu items -->
-  <rect x="274" y="218" width="152" height="24" rx="4" fill="#3b82f6" opacity="0.8"/>
-  <rect x="274" y="250" width="152" height="24" rx="4" fill="transparent"/>
-  <rect x="274" y="282" width="152" height="24" rx="4" fill="transparent"/>
-  <rect x="274" y="314" width="152" height="24" rx="4" fill="transparent"/>
-  <line x1="274" y1="346" x2="426" y2="346" stroke="#60a5fa" stroke-width="1" opacity="0.4"/>
-  <!-- text lines -->
-  <rect x="286" y="224" width="80" height="12" rx="3" fill="#93c5fd"/>
-  <rect x="286" y="256" width="100" height="10" rx="3" fill="#dbeafe" opacity="0.5"/>
-  <rect x="286" y="288" width="90" height="10" rx="3" fill="#dbeafe" opacity="0.5"/>
-  <rect x="286" y="320" width="70" height="10" rx="3" fill="#dbeafe" opacity="0.5"/>
-  <!-- submenu arrow -->
-  <polygon points="414,288 414,298 424,293" fill="#93c5fd"/>
+  <!-- Background -->
+  <circle cx="512" cy="512" r="512" fill="url(#bg1)"/>
+  <!-- Mouse cursor -->
+  <polygon points="220,200 220,600 310,510 390,700 450,675 370,480 510,480" fill="#16A34A" stroke="#FFFFFF" stroke-width="14" stroke-linejoin="round"/>
+  <!-- Context menu popup -->
+  <rect x="400" y="320" width="420" height="460" rx="16" fill="#FFFFFF" stroke="#86EFAC" stroke-width="6"/>
+  <!-- Menu items -->
+  <rect x="418" y="355" width="384" height="58" rx="8" fill="#DCFCE7"/>
+  <text x="450" y="395" font-family="Arial,sans-serif" font-size="44" fill="#15803D">✓ Open</text>
+  <line x1="418" y1="428" x2="802" y2="428" stroke="#D1FAE5" stroke-width="3"/>
+  <text x="450" y="482" font-family="Arial,sans-serif" font-size="44" fill="#374151">  Edit</text>
+  <text x="450" y="546" font-family="Arial,sans-serif" font-size="44" fill="#374151">  Copy path</text>
+  <line x1="418" y1="566" x2="802" y2="566" stroke="#D1FAE5" stroke-width="3"/>
+  <rect x="418" y="580" width="384" height="58" rx="8" fill="#FEE2E2"/>
+  <text x="450" y="620" font-family="Arial,sans-serif" font-size="44" fill="#DC2626">✗ Delete</text>
+  <text x="450" y="680" font-family="Arial,sans-serif" font-size="44" fill="#374151">  Properties</text>
+  <text x="450" y="740" font-family="Arial,sans-serif" font-size="44" fill="#9CA3AF">  Send to ▶</text>
+  <!-- Label -->
+  <text x="512" y="880" font-family="Arial,sans-serif" font-size="54" fill="#15803D" font-weight="bold" text-anchor="middle">Ctx Menu</text>
 </svg>

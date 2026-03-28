@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_03: metaphor | 파수꾼 감시탑 — 포트를 지키는 은유 | 실루엣/캐릭터 | 노랑+파랑+빨강 -->
+  <defs>
+    <linearGradient id="bg3" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFF9C4"/>
+      <stop offset="100%" stop-color="#FFE082"/>
+    </linearGradient>
+    <linearGradient id="tower" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1565C0"/>
+      <stop offset="100%" stop-color="#0D47A1"/>
+    </linearGradient>
+    <filter id="sh3" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#1565C0" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg3)"/>
+
+  <!-- Layer 2: Watch tower structure -->
+  <!-- Base platform -->
+  <rect x="300" y="820" width="424" height="60" rx="16" fill="#0D47A1" filter="url(#sh3)"/>
+  <!-- Tower legs (left & right) -->
+  <rect x="320" y="580" width="80" height="260" rx="10" fill="url(#tower)" filter="url(#sh3)"/>
+  <rect x="624" y="580" width="80" height="260" rx="10" fill="url(#tower)" filter="url(#sh3)"/>
+  <!-- Cross brace -->
+  <line x1="320" y1="680" x2="704" y2="620" stroke="#1565C0" stroke-width="20" stroke-linecap="round"/>
+  <line x1="320" y1="620" x2="704" y2="680" stroke="#1565C0" stroke-width="20" stroke-linecap="round"/>
+  <!-- Tower cabin -->
+  <rect x="260" y="420" width="504" height="200" rx="24" fill="url(#tower)" filter="url(#sh3)"/>
+  <!-- Cabin windows -->
+  <rect x="300" y="456" width="100" height="80" rx="10" fill="#90CAF9"/>
+  <rect x="620" y="456" width="100" height="80" rx="10" fill="#90CAF9"/>
+  <!-- Observation roof -->
+  <polygon points="512,300 180,420 844,420" fill="#1976D2" filter="url(#sh3)"/>
+
+  <!-- Layer 3: Alert/spotlight from tower + port numbers -->
+  <!-- Spotlight beam -->
+  <path d="M512,380 L200,900 L824,900 Z" fill="#FFD740" opacity="0.2"/>
+  <path d="M512,380 L300,900 L724,900 Z" fill="#FFD740" opacity="0.15"/>
+
+  <!-- Alert light on top -->
+  <circle cx="512" cy="300" r="44" fill="#E53935" filter="url(#sh3)"/>
+  <circle cx="512" cy="300" r="62" fill="#E53935" opacity="0.3"/>
+
+  <!-- Port numbers floating in beam -->
+  <text x="340" y="760" font-family="Consolas, monospace" font-size="52" font-weight="bold"
+        fill="#0D47A1" text-anchor="middle" opacity="0.7">:80</text>
+  <text x="512" y="820" font-family="Consolas, monospace" font-size="52" font-weight="bold"
+        fill="#0D47A1" text-anchor="middle" opacity="0.8">:8080</text>
+  <text x="684" y="760" font-family="Consolas, monospace" font-size="52" font-weight="bold"
+        fill="#0D47A1" text-anchor="middle" opacity="0.7">:443</text>
+</svg>

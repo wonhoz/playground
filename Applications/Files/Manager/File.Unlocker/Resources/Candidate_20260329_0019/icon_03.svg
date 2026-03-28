@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_03: metaphor | 열쇠 + 자물쇠 열리는 순간 | 중앙 심볼 | 황금+파랑+초록 -->
+  <defs>
+    <linearGradient id="bg3" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFFDE7"/>
+      <stop offset="100%" stop-color="#FFD54F"/>
+    </linearGradient>
+    <linearGradient id="key" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#FFD700"/>
+      <stop offset="100%" stop-color="#FFA000"/>
+    </linearGradient>
+    <filter id="sh3" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#E65100" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg3)"/>
+
+  <!-- Layer 2: Padlock (open) -->
+  <!-- Lock body -->
+  <rect x="320" y="480" width="384" height="340" rx="40" fill="#1565C0" filter="url(#sh3)"/>
+  <!-- Shackle (open - shifted left) -->
+  <path d="M380,480 C380,300 260,260 260,380" fill="none" stroke="#0D47A1" stroke-width="60"
+        stroke-linecap="round" filter="url(#sh3)"/>
+  <!-- Keyhole -->
+  <circle cx="512" cy="630" r="52" fill="#0D47A1"/>
+  <rect x="494" y="670" width="36" height="60" rx="14" fill="#0D47A1"/>
+
+  <!-- Layer 3: Golden key (diagonal, inserting) -->
+  <g transform="rotate(45, 700, 350)" filter="url(#sh3)">
+    <!-- Key shaft -->
+    <rect x="530" y="320" width="280" height="36" rx="18" fill="url(#key)"/>
+    <!-- Key head (circle) -->
+    <circle cx="530" cy="338" r="72" fill="url(#key)"/>
+    <circle cx="530" cy="338" r="44" fill="#FFF9C4"/>
+    <!-- Key teeth -->
+    <rect x="700" y="356" width="30" height="30" rx="6" fill="url(#key)"/>
+    <rect x="740" y="356" width="24" height="22" rx="5" fill="url(#key)"/>
+    <rect x="770" y="356" width="28" height="26" rx="6" fill="url(#key)"/>
+  </g>
+
+  <!-- Sparkles (unlock moment) -->
+  <circle cx="740" cy="220" r="22" fill="#FFD740" filter="url(#sh3)"/>
+  <circle cx="790" cy="180" r="14" fill="#FFD740" opacity="0.8"/>
+  <circle cx="820" cy="230" r="16" fill="#FFFFFF" opacity="0.8"/>
+  <!-- Green check (unlocked!) -->
+  <circle cx="760" cy="820" r="80" fill="#43A047" filter="url(#sh3)"/>
+  <text x="760" y="820" font-family="Arial, sans-serif" font-size="96" fill="white"
+        text-anchor="middle" dominant-baseline="middle">✓</text>
+</svg>

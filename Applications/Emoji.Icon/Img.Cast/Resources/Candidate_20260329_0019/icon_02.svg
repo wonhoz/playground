@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_02: literal | 파일들이 드롭존으로 날아드는 장면 | 공간/장면 | 민트+파랑+노랑 -->
+  <!-- Layer 1: Background -->
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="0.5" y2="1">
+      <stop offset="0%" stop-color="#B2FFEC"/>
+      <stop offset="100%" stop-color="#4DD0B4"/>
+    </linearGradient>
+    <filter id="sh2" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="5" stdDeviation="7" flood-color="#006655" flood-opacity="0.2"/>
+    </filter>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg2)"/>
+
+  <!-- Layer 2: Drop zone (target box) at center-bottom -->
+  <rect x="280" y="600" width="464" height="300" rx="32" fill="#FFF176" stroke="#F9A825" stroke-width="10" filter="url(#sh2)"/>
+  <!-- Down arrow inside drop zone -->
+  <text x="512" y="780" font-family="Arial, sans-serif" font-size="120" font-weight="900"
+        fill="#F57F17" text-anchor="middle" dominant-baseline="middle">↓</text>
+
+  <!-- Layer 3: Flying file icons with motion lines -->
+  <!-- File 1: top-left, SVG label -->
+  <g transform="rotate(-15, 220, 320)" filter="url(#sh2)">
+    <rect x="155" y="210" width="160" height="200" rx="14" fill="#1565C0"/>
+    <rect x="155" y="210" width="160" height="60" rx="14" fill="#1976D2"/>
+    <text x="235" y="355" font-family="Arial Black, sans-serif" font-size="54" font-weight="900"
+          fill="white" text-anchor="middle">SVG</text>
+  </g>
+  <!-- Motion lines file 1 -->
+  <line x1="280" y1="360" x2="340" y2="420" stroke="#1565C0" stroke-width="8" stroke-linecap="round" opacity="0.5"/>
+  <line x1="260" y1="380" x2="310" y2="440" stroke="#1565C0" stroke-width="5" stroke-linecap="round" opacity="0.3"/>
+
+  <!-- File 2: top-right, PNG label -->
+  <g transform="rotate(12, 730, 280)" filter="url(#sh2)">
+    <rect x="655" y="165" width="160" height="200" rx="14" fill="#E53935"/>
+    <rect x="655" y="165" width="160" height="60" rx="14" fill="#F44336"/>
+    <text x="735" y="310" font-family="Arial Black, sans-serif" font-size="54" font-weight="900"
+          fill="white" text-anchor="middle">PNG</text>
+  </g>
+  <!-- Motion lines file 2 -->
+  <line x1="710" y1="380" x2="660" y2="450" stroke="#E53935" stroke-width="8" stroke-linecap="round" opacity="0.5"/>
+  <line x1="730" y1="400" x2="680" y2="460" stroke="#E53935" stroke-width="5" stroke-linecap="round" opacity="0.3"/>
+
+  <!-- File 3: top-center, JPG label -->
+  <g transform="rotate(5, 490, 180)" filter="url(#sh2)">
+    <rect x="415" y="110" width="160" height="200" rx="14" fill="#7B1FA2"/>
+    <rect x="415" y="110" width="160" height="60" rx="14" fill="#9C27B0"/>
+    <text x="495" y="255" font-family="Arial Black, sans-serif" font-size="54" font-weight="900"
+          fill="white" text-anchor="middle">JPG</text>
+  </g>
+  <!-- Motion line file 3 -->
+  <line x1="495" y1="330" x2="495" y2="400" stroke="#7B1FA2" stroke-width="8" stroke-linecap="round" opacity="0.5"/>
+</svg>

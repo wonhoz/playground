@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_02: literal | 폴더 스캔 진행 상태 — 프로그레스 바 + 발견 중복 수 | 레이어드 | 민트+초록+주황 -->
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#E0F2F1"/>
+      <stop offset="100%" stop-color="#B2DFDB"/>
+    </linearGradient>
+    <filter id="sh2" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#004D40" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg2)"/>
+
+  <!-- Scanning animation: folders with magnifier -->
+  <!-- Folder stack (left) -->
+  <rect x="110" y="260" width="180" height="140" rx="14" fill="#26A69A" filter="url(#sh2)"/>
+  <rect x="110" y="240" width="90" height="30" rx="10" fill="#26A69A"/>
+  <rect x="130" y="290" width="140" height="12" rx="6" fill="white" opacity="0.6"/>
+  <rect x="130" y="316" width="110" height="12" rx="6" fill="white" opacity="0.6"/>
+  <rect x="130" y="342" width="130" height="12" rx="6" fill="white" opacity="0.6"/>
+
+  <rect x="140" y="290" width="180" height="140" rx="14" fill="#00897B" filter="url(#sh2)" opacity="0.9"/>
+  <rect x="140" y="270" width="90" height="30" rx="10" fill="#00897B"/>
+
+  <rect x="170" y="320" width="180" height="140" rx="14" fill="#00796B" filter="url(#sh2)" opacity="0.8"/>
+  <rect x="170" y="300" width="90" height="30" rx="10" fill="#00796B"/>
+
+  <!-- Magnifier scanning across -->
+  <circle cx="560" cy="400" r="120" fill="none" stroke="#FF6F00" stroke-width="24" filter="url(#sh2)"/>
+  <circle cx="560" cy="400" r="90" fill="white" opacity="0.2"/>
+  <line x1="644" y1="484" x2="740" y2="580" stroke="#FF6F00" stroke-width="28" stroke-linecap="round"/>
+  <!-- Scan lines inside magnifier -->
+  <line x1="480" y1="360" x2="640" y2="360" stroke="#FF6F00" stroke-width="8" opacity="0.6"/>
+  <line x1="480" y1="390" x2="640" y2="390" stroke="#FF6F00" stroke-width="8" opacity="0.4"/>
+  <line x1="480" y1="420" x2="600" y2="420" stroke="#FF6F00" stroke-width="8" opacity="0.6"/>
+  <line x1="480" y1="450" x2="620" y2="450" stroke="#FF6F00" stroke-width="8" opacity="0.3"/>
+
+  <!-- Found: duplicate pair (right) -->
+  <!-- Two identical files overlapping -->
+  <rect x="780" y="240" width="140" height="170" rx="14" fill="#E53935" filter="url(#sh2)"/>
+  <polygon points="872,240 920,288 872,288" fill="#EF9A9A"/>
+  <rect x="820" y="280" width="140" height="170" rx="14" fill="#E53935" filter="url(#sh2)" opacity="0.9"/>
+  <polygon points="912,280 960,328 912,328" fill="#EF9A9A"/>
+  <!-- = sign (same!) -->
+  <rect x="840" y="446" width="80" height="16" rx="8" fill="#FF1744"/>
+  <rect x="840" y="470" width="80" height="16" rx="8" fill="#FF1744"/>
+
+  <!-- Progress bar -->
+  <rect x="100" y="600" width="824" height="56" rx="28" fill="white" filter="url(#sh2)"/>
+  <rect x="108" y="608" width="560" height="40" rx="20" fill="#26A69A"/>
+  <text x="388" y="628" font-family="Arial Black, sans-serif" font-size="22" fill="white"
+        text-anchor="middle" dominant-baseline="middle">스캔 중... 68%</text>
+
+  <!-- Stats cards -->
+  <rect x="100" y="686" width="260" height="100" rx="14" fill="white" filter="url(#sh2)"/>
+  <text x="230" y="720" font-family="Arial Black, sans-serif" font-size="40" fill="#E53935"
+        text-anchor="middle">5</text>
+  <text x="230" y="760" font-family="Arial, sans-serif" font-size="20" fill="#546E7A"
+        text-anchor="middle">중복 그룹</text>
+
+  <rect x="390" y="686" width="260" height="100" rx="14" fill="white" filter="url(#sh2)"/>
+  <text x="520" y="720" font-family="Arial Black, sans-serif" font-size="40" fill="#FF6F00"
+        text-anchor="middle">1.2 GB</text>
+  <text x="520" y="760" font-family="Arial, sans-serif" font-size="20" fill="#546E7A"
+        text-anchor="middle">절약 가능</text>
+
+  <rect x="680" y="686" width="244" height="100" rx="14" fill="white" filter="url(#sh2)"/>
+  <text x="802" y="720" font-family="Arial Black, sans-serif" font-size="40" fill="#26A69A"
+        text-anchor="middle">4,821</text>
+  <text x="802" y="760" font-family="Arial, sans-serif" font-size="20" fill="#546E7A"
+        text-anchor="middle">파일 검사됨</text>
+
+  <!-- Current file being scanned -->
+  <rect x="100" y="816" width="824" height="46" rx="14" fill="#E0F2F1" filter="url(#sh2)"/>
+  <text x="512" y="839" font-family="Consolas, monospace" font-size="18" fill="#004D40"
+        text-anchor="middle" dominant-baseline="middle">현재: C:\Users\Photos\IMG_20250101_0042.jpg</text>
+</svg>

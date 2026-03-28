@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_06: hybrid | "ICON" 레터링 + 돋보기 오버레이 | 중앙 심볼 | 라임+보라+주황 -->
+  <defs>
+    <linearGradient id="bg6" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#F9FBE7"/>
+      <stop offset="100%" stop-color="#C5E1A5"/>
+    </linearGradient>
+    <filter id="sh6" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="7" stdDeviation="9" flood-color="#33691E" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg6)"/>
+
+  <!-- Layer 2: "ICON" text large (background) -->
+  <text x="512" y="430" font-family="Arial Black, sans-serif" font-size="260" font-weight="900"
+        fill="#7E57C2" text-anchor="middle" dominant-baseline="middle" opacity="0.15">ICON</text>
+  <!-- Solid ICON text -->
+  <text x="512" y="430" font-family="Arial Black, sans-serif" font-size="220" font-weight="900"
+        fill="#7E57C2" text-anchor="middle" dominant-baseline="middle" filter="url(#sh6)">ICON</text>
+
+  <!-- "HUNT" subtitle -->
+  <text x="512" y="650" font-family="Arial Black, sans-serif" font-size="120" font-weight="900"
+        fill="#558B2F" text-anchor="middle" dominant-baseline="middle" filter="url(#sh6)">HUNT</text>
+
+  <!-- Layer 3: Large magnifying glass overlaid (bottom-right) -->
+  <g filter="url(#sh6)">
+    <circle cx="700" cy="680" r="180" fill="none" stroke="#FF6D00" stroke-width="52"/>
+    <!-- Lens glass tint -->
+    <circle cx="700" cy="680" r="128" fill="#FF6D00" opacity="0.12"/>
+    <!-- Handle -->
+    <line x1="826" y1="806" x2="950" y2="930" stroke="#FF6D00" stroke-width="60" stroke-linecap="round"/>
+  </g>
+  <!-- Highlight on lens -->
+  <circle cx="640" cy="618" r="36" fill="white" opacity="0.5"/>
+</svg>

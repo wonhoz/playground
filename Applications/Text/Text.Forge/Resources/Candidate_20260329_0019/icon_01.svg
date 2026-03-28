@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_01: literal | JSON {} 코드 + 텍스트 탭 UI | 공간/장면 | 하늘+코드+주황 -->
+  <defs>
+    <linearGradient id="bg1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#E3F2FD"/>
+      <stop offset="100%" stop-color="#90CAF9"/>
+    </linearGradient>
+    <filter id="sh1" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="5" stdDeviation="7" flood-color="#1565C0" flood-opacity="0.2"/>
+    </filter>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg1)"/>
+
+  <!-- Layer 2: App window / editor panel -->
+  <rect x="80" y="80" width="864" height="864" rx="28" fill="white" filter="url(#sh1)"/>
+
+  <!-- Tab bar -->
+  <rect x="80" y="80" width="864" height="90" rx="28" fill="#1565C0"/>
+  <rect x="80" y="140" width="864" height="30" rx="0" fill="#1565C0"/>
+  <!-- Active tab: JSON -->
+  <rect x="100" y="88" width="160" height="82" rx="14" fill="#42A5F5"/>
+  <text x="180" y="129" font-family="Arial Black, sans-serif" font-size="36" font-weight="900"
+        fill="white" text-anchor="middle" dominant-baseline="middle">JSON</text>
+  <!-- Other tabs -->
+  <rect x="278" y="94" width="130" height="70" rx="10" fill="#1976D2" opacity="0.7"/>
+  <text x="343" y="129" font-family="Arial, sans-serif" font-size="28" fill="white"
+        text-anchor="middle" dominant-baseline="middle">Hash</text>
+  <rect x="422" y="94" width="110" height="70" rx="10" fill="#1976D2" opacity="0.7"/>
+  <text x="477" y="129" font-family="Arial, sans-serif" font-size="26" fill="white"
+        text-anchor="middle" dominant-baseline="middle">JWT</text>
+  <rect x="546" y="94" width="120" height="70" rx="10" fill="#1976D2" opacity="0.7"/>
+  <text x="606" y="129" font-family="Arial, sans-serif" font-size="26" fill="white"
+        text-anchor="middle" dominant-baseline="middle">Regex</text>
+
+  <!-- Layer 3: JSON code content -->
+  <!-- { key: value } style text lines -->
+  <text x="140" y="250" font-family="Consolas, monospace" font-size="54" fill="#FF6D00" font-weight="bold">{</text>
+  <text x="200" y="340" font-family="Consolas, monospace" font-size="40" fill="#7B1FA2">"name"</text>
+  <text x="430" y="340" font-family="Consolas, monospace" font-size="40" fill="#555">:</text>
+  <text x="460" y="340" font-family="Consolas, monospace" font-size="40" fill="#2E7D32">"TextForge"</text>
+  <text x="200" y="420" font-family="Consolas, monospace" font-size="40" fill="#7B1FA2">"tools"</text>
+  <text x="380" y="420" font-family="Consolas, monospace" font-size="40" fill="#555">:</text>
+  <text x="410" y="420" font-family="Consolas, monospace" font-size="40" fill="#1565C0">8</text>
+  <text x="200" y="500" font-family="Consolas, monospace" font-size="40" fill="#7B1FA2">"hash"</text>
+  <text x="370" y="500" font-family="Consolas, monospace" font-size="40" fill="#555">:</text>
+  <text x="400" y="500" font-family="Consolas, monospace" font-size="40" fill="#2E7D32">"SHA256"</text>
+  <text x="200" y="580" font-family="Consolas, monospace" font-size="40" fill="#7B1FA2">"regex"</text>
+  <text x="380" y="580" font-family="Consolas, monospace" font-size="40" fill="#555">:</text>
+  <text x="410" y="580" font-family="Consolas, monospace" font-size="40" fill="#E53935">"/\w+/g"</text>
+  <text x="140" y="660" font-family="Consolas, monospace" font-size="54" fill="#FF6D00" font-weight="bold">}</text>
+
+  <!-- Blinking cursor -->
+  <rect x="570" y="620" width="8" height="52" rx="4" fill="#1565C0" opacity="0.8"/>
+</svg>

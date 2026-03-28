@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_06: hybrid | 카메라 + URL 주소창 결합 — Web.Shot 브랜드 | 중앙 심볼 | 라임+파랑+황금 -->
+  <defs>
+    <linearGradient id="bg6" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#F9FBE7"/>
+      <stop offset="100%" stop-color="#DCE775"/>
+    </linearGradient>
+    <filter id="sh6" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="7" stdDeviation="9" flood-color="#33691E" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg6)"/>
+
+  <!-- Camera body (large, centered) -->
+  <rect x="160" y="340" width="704" height="440" rx="40" fill="#1B5E20" filter="url(#sh6)"/>
+  <!-- Camera top (viewfinder hump) -->
+  <rect x="360" y="290" width="200" height="80" rx="20" fill="#1B5E20"/>
+  <!-- Shutter button -->
+  <circle cx="800" cy="430" r="44" fill="#F9A825" filter="url(#sh6)"/>
+  <circle cx="800" cy="430" r="32" fill="#FFD740"/>
+
+  <!-- Lens (large circle on left of camera body) -->
+  <circle cx="420" cy="560" r="160" fill="#0D47A1" filter="url(#sh6)"/>
+  <circle cx="420" cy="560" r="138" fill="#1565C0"/>
+  <circle cx="420" cy="560" r="110" fill="#0D47A1"/>
+  <circle cx="420" cy="560" r="85" fill="#42A5F5"/>
+  <circle cx="420" cy="560" r="55" fill="#E3F2FD"/>
+  <circle cx="400" cy="540" r="18" fill="white" opacity="0.5"/>
+
+  <!-- URL bar embedded in camera (right side) -->
+  <rect x="600" y="490" width="240" height="50" rx="25" fill="white" opacity="0.95"/>
+  <text x="615" y="507" font-family="Consolas, monospace" font-size="14" fill="#546E7A">https://</text>
+  <text x="615" y="525" font-family="Consolas, monospace" font-size="16" fill="#1B5E20">example.com</text>
+
+  <!-- PNG/PDF output chips (below camera) -->
+  <rect x="590" y="558" width="100" height="36" rx="12" fill="#FF6F00" filter="url(#sh6)"/>
+  <text x="640" y="576" font-family="Arial Black, sans-serif" font-size="19" fill="white"
+        text-anchor="middle" dominant-baseline="middle">PNG</text>
+  <rect x="710" y="558" width="100" height="36" rx="12" fill="#C62828" filter="url(#sh6)"/>
+  <text x="760" y="576" font-family="Arial Black, sans-serif" font-size="19" fill="white"
+        text-anchor="middle" dominant-baseline="middle">PDF</text>
+
+  <!-- Flash symbol -->
+  <path d="M740,310 L780,310 L756,360 L792,360 L722,450 L748,388 L710,388 Z"
+        fill="#FFD740" filter="url(#sh6)" opacity="0.9"/>
+
+  <!-- Capture spark lines -->
+  <line x1="200" y1="280" x2="230" y2="250" stroke="#F9A825" stroke-width="10" stroke-linecap="round" opacity="0.7"/>
+  <line x1="160" y1="310" x2="118" y2="280" stroke="#F9A825" stroke-width="8" stroke-linecap="round" opacity="0.5"/>
+  <line x1="200" y1="330" x2="156" y2="350" stroke="#F9A825" stroke-width="8" stroke-linecap="round" opacity="0.5"/>
+
+  <!-- Bottom label -->
+  <rect x="220" y="840" width="584" height="76" rx="24" fill="white" filter="url(#sh6)"/>
+  <text x="512" y="878" font-family="Arial Black, sans-serif" font-size="42" fill="#1B5E20"
+        text-anchor="middle" dominant-baseline="middle">Web.Shot</text>
+</svg>

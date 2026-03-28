@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_03: metaphor | 황금별 부각 — 수많은 별 중 하나가 빛나는 | 기하학 추상 | 라벤더+황금+흰별 -->
+  <defs>
+    <linearGradient id="bg3" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#EDE7F6"/>
+      <stop offset="100%" stop-color="#B39DDB"/>
+    </linearGradient>
+    <filter id="glow3" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="18" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="sh3" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#4A148C" flood-opacity="0.2"/>
+    </filter>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg3)"/>
+
+  <!-- Layer 2: Many small white stars (background) -->
+  <g opacity="0.5">
+    <!-- Small stars scattered -->
+    <polygon points="150,150 156,168 175,168 161,178 167,197 150,186 133,197 139,178 125,168 144,168" fill="white" transform="scale(0.5) translate(150,150)"/>
+    <circle cx="200" cy="180" r="8" fill="white"/>
+    <circle cx="320" cy="130" r="6" fill="white"/>
+    <circle cx="700" cy="160" r="9" fill="white"/>
+    <circle cx="820" cy="200" r="7" fill="white"/>
+    <circle cx="880" cy="130" r="5" fill="white"/>
+    <circle cx="150" cy="400" r="7" fill="white"/>
+    <circle cx="100" cy="600" r="6" fill="white"/>
+    <circle cx="200" cy="700" r="8" fill="white"/>
+    <circle cx="900" cy="350" r="7" fill="white"/>
+    <circle cx="950" cy="500" r="5" fill="white"/>
+    <circle cx="880" cy="700" r="9" fill="white"/>
+    <circle cx="800" cy="820" r="6" fill="white"/>
+    <circle cx="350" cy="850" r="7" fill="white"/>
+    <circle cx="150" cy="850" r="8" fill="white"/>
+    <circle cx="450" cy="130" r="6" fill="white"/>
+    <circle cx="580" cy="100" r="5" fill="white"/>
+    <!-- Medium stars -->
+    <polygon points="250,300 259,328 288,328 266,345 275,373 250,356 225,373 234,345 212,328 241,328" fill="white" opacity="0.6"/>
+    <polygon points="780,280 789,308 818,308 796,325 805,353 780,336 755,353 764,325 742,308 771,308" fill="white" opacity="0.6"/>
+    <polygon points="170,650 177,670 198,670 181,682 188,702 170,690 152,702 159,682 142,670 163,670" fill="white" opacity="0.5"/>
+    <polygon points="870,600 877,620 898,620 881,632 888,652 870,640 852,652 859,632 842,620 863,620" fill="white" opacity="0.5"/>
+    <polygon points="400,780 407,800 428,800 411,812 418,832 400,820 382,832 389,812 372,800 393,800" fill="white" opacity="0.5"/>
+    <polygon points="650,820 657,840 678,840 661,852 668,872 650,860 632,872 639,852 622,840 643,840" fill="white" opacity="0.5"/>
+  </g>
+
+  <!-- Layer 3: BIG golden star (center, found!) -->
+  <g filter="url(#glow3)">
+    <polygon points="512,200 548,326 682,326 577,404 614,530 512,452 410,530 447,404 342,326 476,326"
+             fill="#FFD700"/>
+    <!-- Inner highlight -->
+    <polygon points="512,240 538,316 620,316 554,364 579,440 512,392 445,440 470,364 404,316 486,316"
+             fill="#FFF176" opacity="0.6"/>
+  </g>
+  <!-- Sparkle rays around the big star -->
+  <line x1="512" y1="140" x2="512" y2="100" stroke="#FFD700" stroke-width="12" stroke-linecap="round" opacity="0.8"/>
+  <line x1="682" y1="200" x2="712" y2="170" stroke="#FFD700" stroke-width="12" stroke-linecap="round" opacity="0.8"/>
+  <line x1="342" y1="200" x2="312" y2="170" stroke="#FFD700" stroke-width="12" stroke-linecap="round" opacity="0.8"/>
+
+  <!-- Small magnifier hint (bottom-right) -->
+  <g transform="translate(730, 700)" filter="url(#sh3)">
+    <circle cx="80" cy="80" r="72" fill="none" stroke="#7E57C2" stroke-width="28"/>
+    <line x1="130" y1="130" x2="200" y2="200" stroke="#7E57C2" stroke-width="28" stroke-linecap="round"/>
+  </g>
+</svg>

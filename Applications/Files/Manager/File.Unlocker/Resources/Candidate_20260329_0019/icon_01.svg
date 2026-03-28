@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_01: literal | 잠긴 파일 + 프로세스 목록 + 해제 버튼 | 공간/장면 | 민트+빨강락+초록해제 -->
+  <defs>
+    <linearGradient id="bg1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#E0FFF8"/>
+      <stop offset="100%" stop-color="#80CBC4"/>
+    </linearGradient>
+    <filter id="sh1" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="5" stdDeviation="7" flood-color="#004D40" flood-opacity="0.2"/>
+    </filter>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg1)"/>
+
+  <!-- Panel -->
+  <rect x="60" y="80" width="904" height="864" rx="24" fill="white" filter="url(#sh1)"/>
+  <rect x="60" y="80" width="904" height="76" rx="24" fill="#00695C"/>
+  <rect x="60" y="128" width="904" height="28" fill="#00695C"/>
+  <text x="512" y="116" font-family="Arial Black, sans-serif" font-size="34" fill="white"
+        text-anchor="middle" dominant-baseline="middle">File.Unlocker</text>
+
+  <!-- Locked file display -->
+  <rect x="90" y="168" width="844" height="120" rx="16" fill="#FFEBEE" filter="url(#sh1)"/>
+  <!-- Lock icon -->
+  <rect x="110" y="190" width="60" height="44" rx="8" fill="#E53935"/>
+  <path d="M115,210 C115,195 165,195 165,210" fill="none" stroke="#E53935" stroke-width="12" stroke-linecap="round"/>
+  <text x="200" y="218" font-family="Arial, sans-serif" font-size="28" fill="#B71C1C"
+        dominant-baseline="middle">🔒</text>
+  <text x="240" y="212" font-family="Arial, sans-serif" font-size="30" fill="#37474F"
+        dominant-baseline="middle">report_final.docx</text>
+  <text x="240" y="252" font-family="Consolas, monospace" font-size="24" fill="#90A4AE"
+        dominant-baseline="middle">C:\Users\Admin\Documents\report_final.docx</text>
+
+  <!-- Locking processes list -->
+  <text x="90" y="340" font-family="Arial Black, sans-serif" font-size="28" fill="#546E7A"
+        dominant-baseline="middle">잠금 중인 프로세스:</text>
+
+  <!-- Process row 1 -->
+  <rect x="90" y="360" width="844" height="70" rx="10" fill="#F5F5F5"/>
+  <text x="110" y="395" font-family="Consolas, monospace" font-size="32" fill="#37474F"
+        dominant-baseline="middle">WINWORD.EXE</text>
+  <text x="450" y="395" font-family="Consolas, monospace" font-size="28" fill="#9E9E9E"
+        dominant-baseline="middle">PID: 12432</text>
+  <rect x="730" y="370" width="190" height="48" rx="14" fill="#E53935" filter="url(#sh1)"/>
+  <text x="825" y="394" font-family="Arial Black, sans-serif" font-size="26" fill="white"
+        text-anchor="middle" dominant-baseline="middle">종료</text>
+
+  <!-- Process row 2 -->
+  <rect x="90" y="446" width="844" height="70" rx="10" fill="#F5F5F5"/>
+  <text x="110" y="481" font-family="Consolas, monospace" font-size="32" fill="#37474F"
+        dominant-baseline="middle">OneDrive.exe</text>
+  <text x="450" y="481" font-family="Consolas, monospace" font-size="28" fill="#9E9E9E"
+        dominant-baseline="middle">PID: 8820</text>
+  <rect x="730" y="456" width="190" height="48" rx="14" fill="#E53935" filter="url(#sh1)"/>
+  <text x="825" y="480" font-family="Arial Black, sans-serif" font-size="26" fill="white"
+        text-anchor="middle" dominant-baseline="middle">종료</text>
+
+  <!-- Unlock all button -->
+  <rect x="90" y="580" width="844" height="90" rx="22" fill="#43A047" filter="url(#sh1)"/>
+  <text x="512" y="625" font-family="Arial Black, sans-serif" font-size="44" fill="white"
+        text-anchor="middle" dominant-baseline="middle">🔓  모두 잠금 해제</text>
+
+  <!-- Success state preview -->
+  <rect x="90" y="700" width="844" height="100" rx="16" fill="#E8F5E9" filter="url(#sh1)"/>
+  <circle cx="150" cy="750" r="36" fill="#43A047"/>
+  <text x="150" y="750" font-family="Arial, sans-serif" font-size="44" fill="white"
+        text-anchor="middle" dominant-baseline="middle">✓</text>
+  <text x="210" y="740" font-family="Arial Black, sans-serif" font-size="34" fill="#2E7D32"
+        dominant-baseline="middle">잠금 해제 완료!</text>
+  <text x="210" y="778" font-family="Arial, sans-serif" font-size="26" fill="#43A047"
+        dominant-baseline="middle">파일에 접근할 수 있습니다</text>
+</svg>

@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_06: hybrid | [ERR] 텍스트 + 돋보기 | 중앙 심볼 | 코랄+흰ERR+청록 -->
+  <defs>
+    <linearGradient id="bg6" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFCCBC"/>
+      <stop offset="100%" stop-color="#FF7043"/>
+    </linearGradient>
+    <filter id="sh6" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="7" stdDeviation="9" flood-color="#BF360C" flood-opacity="0.3"/>
+    </filter>
+    <clipPath id="lens6">
+      <circle cx="460" cy="460" r="290"/>
+    </clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg6)"/>
+
+  <!-- Layer 2: Magnifier glass with log content -->
+  <circle cx="460" cy="460" r="300" fill="white" filter="url(#sh6)"/>
+  <circle cx="460" cy="460" r="290" fill="#FFF3E0"/>
+
+  <!-- Log lines inside lens -->
+  <g clip-path="url(#lens6)" font-family="Consolas, monospace">
+    <!-- INFO line -->
+    <rect x="182" y="280" width="556" height="52" rx="6" fill="#E8F5E9"/>
+    <text x="200" y="306" font-size="32" fill="#37474F" dominant-baseline="middle">[INFO] starting...</text>
+
+    <!-- Highlighted ERROR line (big, centered) -->
+    <rect x="172" y="346" width="576" height="68" rx="8" fill="#FFCDD2"/>
+    <rect x="172" y="346" width="12" height="68" rx="6" fill="#E53935"/>
+    <text x="200" y="380" font-size="40" font-weight="bold" fill="#B71C1C" dominant-baseline="middle">[ERROR] crash</text>
+
+    <!-- WARN line -->
+    <rect x="182" y="428" width="556" height="52" rx="6" fill="#FFFDE7"/>
+    <text x="200" y="454" font-size="32" fill="#37474F" dominant-baseline="middle">[WARN] timeout</text>
+
+    <!-- INFO line -->
+    <rect x="182" y="494" width="556" height="52" rx="6" fill="#E8F5E9"/>
+    <text x="200" y="520" font-size="32" fill="#37474F" dominant-baseline="middle">[INFO] retry ok</text>
+
+    <rect x="182" y="558" width="556" height="45" rx="6" fill="#F5F5F5" opacity="0.7"/>
+    <rect x="182" y="616" width="556" height="45" rx="6" fill="#F5F5F5" opacity="0.4"/>
+  </g>
+
+  <!-- Lens ring -->
+  <circle cx="460" cy="460" r="290" fill="none" stroke="#00838F" stroke-width="44" filter="url(#sh6)"/>
+  <!-- Lens shine -->
+  <circle cx="372" cy="374" r="58" fill="white" opacity="0.28"/>
+
+  <!-- Layer 3: Handle -->
+  <line x1="690" y1="690" x2="940" y2="940" stroke="#00838F" stroke-width="60" stroke-linecap="round" filter="url(#sh6)"/>
+
+  <!-- ERR label badge (outside, top-right) -->
+  <rect x="680" y="80" width="210" height="86" rx="22" fill="#E53935" filter="url(#sh6)"/>
+  <text x="785" y="123" font-family="Arial Black, sans-serif" font-size="52" font-weight="900"
+        fill="white" text-anchor="middle" dominant-baseline="middle">ERR</text>
+</svg>

@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_05: metaphor | 스크롤 웹페이지가 접혀서 PDF/PNG 파일이 되는 — 물리적 변환 은유 | 대각선/동적 | 코랄+흰+빨강 -->
+  <defs>
+    <linearGradient id="bg5" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFEBEE"/>
+      <stop offset="100%" stop-color="#EF9A9A"/>
+    </linearGradient>
+    <filter id="sh5" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="6" stdDeviation="9" flood-color="#B71C1C" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg5)"/>
+
+  <!-- Long web page strip (left, tall and narrow) -->
+  <rect x="80" y="80" width="280" height="860" rx="14" fill="white" filter="url(#sh5)"/>
+  <!-- Mini browser chrome -->
+  <rect x="80" y="80" width="280" height="50" rx="14" fill="#E53935"/>
+  <rect x="80" y="112" width="280" height="18" fill="#E53935"/>
+  <rect x="98" y="90" width="200" height="24" rx="10" fill="white" opacity="0.8"/>
+  <!-- Content rows -->
+  <rect x="98" y="148" width="244" height="14" rx="5" fill="#EF9A9A" opacity="0.7"/>
+  <rect x="98" y="174" width="220" height="14" rx="5" fill="#EF9A9A" opacity="0.5"/>
+  <rect x="98" y="200" width="244" height="60" rx="8" fill="#FFCDD2" opacity="0.6"/>
+  <rect x="98" y="274" width="220" height="14" rx="5" fill="#EF9A9A" opacity="0.7"/>
+  <rect x="98" y="300" width="244" height="14" rx="5" fill="#EF9A9A" opacity="0.5"/>
+  <rect x="98" y="326" width="244" height="60" rx="8" fill="#FFCDD2" opacity="0.4"/>
+  <rect x="98" y="400" width="220" height="14" rx="5" fill="#EF9A9A" opacity="0.6"/>
+  <rect x="98" y="426" width="244" height="14" rx="5" fill="#EF9A9A" opacity="0.4"/>
+  <rect x="98" y="452" width="244" height="60" rx="8" fill="#FFCDD2" opacity="0.5"/>
+  <rect x="98" y="526" width="200" height="14" rx="5" fill="#EF9A9A" opacity="0.5"/>
+  <rect x="98" y="552" width="240" height="60" rx="8" fill="#FFCDD2" opacity="0.3"/>
+  <rect x="98" y="626" width="224" height="14" rx="5" fill="#EF9A9A" opacity="0.5"/>
+  <rect x="98" y="652" width="244" height="60" rx="8" fill="#FFCDD2" opacity="0.3"/>
+  <rect x="98" y="726" width="200" height="14" rx="5" fill="#EF9A9A" opacity="0.4"/>
+  <rect x="98" y="752" width="244" height="80" rx="8" fill="#FFCDD2" opacity="0.3"/>
+  <rect x="98" y="846" width="224" height="14" rx="5" fill="#EF9A9A" opacity="0.4"/>
+
+  <!-- Folding/curling effect: paper fold arrows -->
+  <path d="M360,500 C440,400 500,350 540,400" fill="none" stroke="#E53935" stroke-width="16"
+        stroke-linecap="round"/>
+  <path d="M360,500 C440,600 500,650 540,600" fill="none" stroke="#E53935" stroke-width="16"
+        stroke-linecap="round"/>
+  <!-- Fold arrows -->
+  <polygon points="540,400 560,370 570,420" fill="#E53935"/>
+  <polygon points="540,600 570,580 560,630" fill="#E53935"/>
+
+  <!-- Compressed/output file (right) -->
+  <rect x="580" y="340" width="360" height="340" rx="22" fill="#C62828" filter="url(#sh5)"/>
+  <polygon points="884,340 940,396 884,396" fill="#EF9A9A"/>
+
+  <!-- File content (compressed page preview) -->
+  <rect x="608" y="416" width="300" height="12" rx="5" fill="white" opacity="0.5"/>
+  <rect x="608" y="440" width="300" height="50" rx="8" fill="#EF9A9A" opacity="0.4"/>
+  <rect x="608" y="502" width="280" height="12" rx="5" fill="white" opacity="0.4"/>
+  <rect x="608" y="526" width="300" height="50" rx="8" fill="#EF9A9A" opacity="0.3"/>
+  <rect x="608" y="588" width="260" height="12" rx="5" fill="white" opacity="0.4"/>
+  <rect x="608" y="612" width="300" height="30" rx="8" fill="#EF9A9A" opacity="0.3"/>
+
+  <!-- PNG + PDF badges -->
+  <rect x="590" y="360" width="90" height="34" rx="12" fill="#FF6F00"/>
+  <text x="635" y="377" font-family="Arial Black, sans-serif" font-size="19" fill="white"
+        text-anchor="middle" dominant-baseline="middle">PNG</text>
+
+  <!-- Size comparison -->
+  <rect x="580" y="720" width="360" height="90" rx="18" fill="white" filter="url(#sh5)"/>
+  <text x="760" y="748" font-family="Arial, sans-serif" font-size="20" fill="#C62828"
+        text-anchor="middle">전체 페이지 완벽 캡처</text>
+  <text x="760" y="778" font-family="Arial Black, sans-serif" font-size="24" fill="#E53935"
+        text-anchor="middle">3840 × 12480 px</text>
+</svg>

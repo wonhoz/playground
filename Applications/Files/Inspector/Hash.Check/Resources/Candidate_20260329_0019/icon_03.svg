@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_03: metaphor | 지문 — 파일의 고유 식별자 은유 | 중앙 심볼 | 하늘+파랑+초록 -->
+  <defs>
+    <linearGradient id="bg3" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#E3F2FD"/>
+      <stop offset="100%" stop-color="#90CAF9"/>
+    </linearGradient>
+    <filter id="sh3" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#1565C0" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg3)"/>
+
+  <!-- Layer 2: Fingerprint (concentric loops) -->
+  <!-- Outer rings (fingerprint ridges) -->
+  <g fill="none" stroke="#1565C0" stroke-linecap="round">
+    <path d="M512,150 C740,150 880,310 880,512 C880,714 740,874 512,874 C284,874 144,714 144,512 C144,310 284,150 512,150Z"
+          stroke-width="28" opacity="0.25"/>
+    <path d="M512,210 C710,210 830,350 830,512 C830,674 710,814 512,814 C314,814 194,674 194,512 C194,350 314,210 512,210Z"
+          stroke-width="28" opacity="0.35"/>
+    <path d="M512,270 C685,270 780,385 780,512 C780,639 685,754 512,754 C339,754 244,639 244,512 C244,385 339,270 512,270Z"
+          stroke-width="28" opacity="0.45"/>
+    <path d="M512,330 C660,330 730,420 730,512 C730,604 660,694 512,694 C364,694 294,604 294,512 C294,420 364,330 512,330Z"
+          stroke-width="28" opacity="0.6"/>
+    <path d="M512,390 C634,390 680,454 680,512 C680,570 634,634 512,634 C390,634 344,570 344,512 C344,454 390,390 512,390Z"
+          stroke-width="28" opacity="0.75"/>
+    <!-- Inner loops -->
+    <path d="M512,450 C573,450 630,475 630,512 C630,549 573,574 512,574 C451,574 394,549 394,512 C394,475 451,450 512,450Z"
+          stroke-width="28" opacity="0.9"/>
+    <!-- Center dot -->
+  </g>
+  <circle cx="512" cy="512" r="30" fill="#1565C0" filter="url(#sh3)"/>
+
+  <!-- Layer 3: Checkmark overlay (verification success) -->
+  <circle cx="760" cy="780" r="100" fill="#43A047" filter="url(#sh3)"/>
+  <circle cx="760" cy="780" r="84" fill="white" opacity="0.15"/>
+  <text x="760" y="780" font-family="Arial, sans-serif" font-size="120" fill="white"
+        text-anchor="middle" dominant-baseline="middle">✓</text>
+
+  <!-- Hash label bottom -->
+  <rect x="200" y="880" width="624" height="64" rx="20" fill="white" opacity="0.8" filter="url(#sh3)"/>
+  <text x="512" y="912" font-family="Consolas, monospace" font-size="36" fill="#1565C0"
+        text-anchor="middle" dominant-baseline="middle">a4f2b8... verified</text>
+</svg>

@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_04: metaphor | 레이더 스캔 + 빨간 에러 점 탐지 | 기하학 추상 | 라임+초록레이더+빨강 -->
+  <defs>
+    <linearGradient id="bg4" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#F1F8E9"/>
+      <stop offset="100%" stop-color="#CCFF90"/>
+    </linearGradient>
+    <filter id="sh4" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="5" stdDeviation="7" flood-color="#33691E" flood-opacity="0.2"/>
+    </filter>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg4)"/>
+
+  <!-- Layer 2: Radar circles -->
+  <circle cx="512" cy="512" r="390" fill="none" stroke="#43A047" stroke-width="10" opacity="0.4" filter="url(#sh4)"/>
+  <circle cx="512" cy="512" r="290" fill="none" stroke="#43A047" stroke-width="12" opacity="0.6"/>
+  <circle cx="512" cy="512" r="190" fill="none" stroke="#43A047" stroke-width="14" opacity="0.8"/>
+  <circle cx="512" cy="512" r="90" fill="none" stroke="#43A047" stroke-width="16"/>
+
+  <!-- Crosshair lines -->
+  <line x1="512" y1="100" x2="512" y2="924" stroke="#43A047" stroke-width="4" opacity="0.4"/>
+  <line x1="100" y1="512" x2="924" y2="512" stroke="#43A047" stroke-width="4" opacity="0.4"/>
+  <line x1="220" y1="220" x2="804" y2="804" stroke="#43A047" stroke-width="3" opacity="0.25"/>
+  <line x1="804" y1="220" x2="220" y2="804" stroke="#43A047" stroke-width="3" opacity="0.25"/>
+
+  <!-- Radar sweep (pie slice) -->
+  <path d="M512,512 L512,122 A390,390 0 0,1 902,512 Z" fill="#66BB6A" opacity="0.18"/>
+  <line x1="512" y1="512" x2="902" y2="512" stroke="#66BB6A" stroke-width="6" opacity="0.5"/>
+
+  <!-- Center dot -->
+  <circle cx="512" cy="512" r="18" fill="#2E7D32" filter="url(#sh4)"/>
+
+  <!-- Layer 3: Error blips (red dots on radar) -->
+  <!-- Main error blip (large, bright) -->
+  <circle cx="680" cy="320" r="32" fill="#E53935" filter="url(#sh4)"/>
+  <circle cx="680" cy="320" r="52" fill="#E53935" opacity="0.25"/>
+  <circle cx="680" cy="320" r="72" fill="#E53935" opacity="0.1"/>
+  <!-- Error label -->
+  <rect x="620" y="230" width="150" height="44" rx="10" fill="#E53935" filter="url(#sh4)"/>
+  <text x="695" y="252" font-family="Arial Black, sans-serif" font-size="28" fill="white"
+        text-anchor="middle" dominant-baseline="middle">ERROR</text>
+
+  <!-- Small error blip 2 -->
+  <circle cx="340" cy="680" r="18" fill="#FF7043" filter="url(#sh4)"/>
+  <circle cx="340" cy="680" r="30" fill="#FF7043" opacity="0.25"/>
+
+  <!-- WARN blip -->
+  <circle cx="720" cy="680" r="14" fill="#FFC107" filter="url(#sh4)"/>
+  <circle cx="350" cy="350" r="10" fill="#FFC107" opacity="0.7"/>
+</svg>

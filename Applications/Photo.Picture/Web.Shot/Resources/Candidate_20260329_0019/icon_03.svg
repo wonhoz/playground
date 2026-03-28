@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_03: metaphor | 카메라 셔터 렌즈 안에 웹페이지 — 찍는 순간 | 중앙 심볼 | 파랑+청록+흰 -->
+  <defs>
+    <linearGradient id="bg3" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#E8EAF6"/>
+      <stop offset="100%" stop-color="#9FA8DA"/>
+    </linearGradient>
+    <linearGradient id="lens" cx="50%" cy="50%" r="50%" fx="40%" fy="40%"
+                    gradientUnits="objectBoundingBox">
+      <stop offset="0%" stop-color="#B3E5FC"/>
+      <stop offset="100%" stop-color="#0288D1"/>
+    </linearGradient>
+    <filter id="sh3" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="10" stdDeviation="14" flood-color="#1A237E" flood-opacity="0.4"/>
+    </filter>
+    <clipPath id="lensClip">
+      <circle cx="512" cy="480" r="300"/>
+    </clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg3)"/>
+
+  <!-- Camera body -->
+  <rect x="140" y="310" width="744" height="480" rx="40" fill="#1A237E" filter="url(#sh3)"/>
+  <!-- Camera top bump (viewfinder) -->
+  <rect x="340" y="270" width="200" height="80" rx="20" fill="#1A237E"/>
+  <!-- Shutter button -->
+  <circle cx="800" cy="430" r="38" fill="#E53935" filter="url(#sh3)"/>
+  <circle cx="800" cy="430" r="28" fill="#FF5252"/>
+  <!-- Flash -->
+  <rect x="160" y="340" width="80" height="50" rx="12" fill="#FFD740"/>
+  <!-- Camera mode wheel -->
+  <circle cx="200" cy="690" r="34" fill="#37474F"/>
+  <text x="200" y="690" font-family="Arial, sans-serif" font-size="26" fill="white"
+        text-anchor="middle" dominant-baseline="middle">M</text>
+
+  <!-- Lens ring -->
+  <circle cx="512" cy="480" r="310" fill="#0D47A1" filter="url(#sh3)"/>
+  <circle cx="512" cy="480" r="290" fill="#1565C0"/>
+  <circle cx="512" cy="480" r="270" fill="#0D47A1"/>
+  <circle cx="512" cy="480" r="250" fill="#1976D2"/>
+
+  <!-- Lens glass (shows web page inside) -->
+  <circle cx="512" cy="480" r="220" fill="#E3F2FD"/>
+  <!-- Web page inside lens -->
+  <g clip-path="url(#lensClip)">
+    <!-- Browser chrome tiny -->
+    <rect x="292" y="280" width="440" height="36" fill="#1565C0"/>
+    <rect x="310" y="290" width="340" height="16" rx="6" fill="white" opacity="0.8"/>
+    <!-- Page content -->
+    <rect x="292" y="316" width="440" height="14" fill="#90CAF9" opacity="0.7"/>
+    <rect x="292" y="338" width="440" height="70" fill="#BBDEFB" opacity="0.5"/>
+    <rect x="292" y="418" width="440" height="10" fill="#90CAF9" opacity="0.5"/>
+    <rect x="292" y="436" width="380" height="10" fill="#90CAF9" opacity="0.4"/>
+    <rect x="292" y="454" width="440" height="70" fill="#BBDEFB" opacity="0.4"/>
+    <rect x="292" y="534" width="440" height="10" fill="#90CAF9" opacity="0.5"/>
+    <rect x="292" y="554" width="400" height="10" fill="#90CAF9" opacity="0.4"/>
+    <rect x="292" y="572" width="440" height="70" fill="#BBDEFB" opacity="0.3"/>
+    <rect x="292" y="652" width="440" height="10" fill="#90CAF9" opacity="0.4"/>
+  </g>
+
+  <!-- Lens reflection highlights -->
+  <circle cx="440" cy="400" r="50" fill="white" opacity="0.12"/>
+  <circle cx="420" cy="390" r="22" fill="white" opacity="0.25"/>
+
+  <!-- Lens outer ring detail -->
+  <circle cx="512" cy="480" r="226" fill="none" stroke="#FFD740" stroke-width="4" opacity="0.6"/>
+
+  <!-- Flash effect indicator -->
+  <path d="M490,240 L530,240 L510,290 L545,290 L480,380 L500,320 L462,320 Z"
+        fill="#FFD740" opacity="0.8" filter="url(#sh3)"/>
+
+  <!-- Bottom label -->
+  <rect x="270" y="844" width="484" height="70" rx="35" fill="white" filter="url(#sh3)"/>
+  <text x="512" y="879" font-family="Arial Black, sans-serif" font-size="36" fill="#1A237E"
+        text-anchor="middle" dominant-baseline="middle">Web.Shot</text>
+</svg>

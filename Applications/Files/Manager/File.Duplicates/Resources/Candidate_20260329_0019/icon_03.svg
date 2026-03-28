@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_03: metaphor | 쌍둥이 파일 — 복제/클론 은유 (거울상 두 파일) | 중앙 심볼 | 보라+분홍+흰 -->
+  <defs>
+    <linearGradient id="bg3" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#F3E5F5"/>
+      <stop offset="100%" stop-color="#CE93D8"/>
+    </linearGradient>
+    <filter id="sh3" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#4A148C" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg3)"/>
+
+  <!-- Mirror line (center vertical) -->
+  <line x1="512" y1="130" x2="512" y2="840" stroke="#7B1FA2" stroke-width="6"
+        stroke-dasharray="20,12" opacity="0.6"/>
+
+  <!-- Left file (original) -->
+  <rect x="140" y="240" width="240" height="300" rx="18" fill="#7B1FA2" filter="url(#sh3)"/>
+  <polygon points="328,240 380,292 328,292" fill="#CE93D8"/>
+  <!-- File lines -->
+  <rect x="168" y="320" width="180" height="16" rx="8" fill="white" opacity="0.8"/>
+  <rect x="168" y="350" width="150" height="16" rx="8" fill="white" opacity="0.6"/>
+  <rect x="168" y="380" width="168" height="16" rx="8" fill="white" opacity="0.8"/>
+  <rect x="168" y="410" width="130" height="16" rx="8" fill="white" opacity="0.5"/>
+  <rect x="168" y="440" width="160" height="16" rx="8" fill="white" opacity="0.7"/>
+  <!-- Hash badge -->
+  <rect x="148" y="480" width="220" height="36" rx="10" fill="#6A1B9A"/>
+  <text x="258" y="498" font-family="Consolas, monospace" font-size="16" fill="#CE93D8"
+        text-anchor="middle" dominant-baseline="middle">a3f8b2c1d4e5f609</text>
+
+  <!-- Right file (duplicate — mirrored) -->
+  <rect x="644" y="240" width="240" height="300" rx="18" fill="#E91E63" filter="url(#sh3)"/>
+  <polygon points="644,240 692,292 644,292" fill="#F48FB1"/>
+  <!-- File lines (mirrored) -->
+  <rect x="656" y="320" width="180" height="16" rx="8" fill="white" opacity="0.8"/>
+  <rect x="684" y="350" width="150" height="16" rx="8" fill="white" opacity="0.6"/>
+  <rect x="660" y="380" width="168" height="16" rx="8" fill="white" opacity="0.8"/>
+  <rect x="702" y="410" width="130" height="16" rx="8" fill="white" opacity="0.5"/>
+  <rect x="668" y="440" width="160" height="16" rx="8" fill="white" opacity="0.7"/>
+  <!-- Hash badge (same!) -->
+  <rect x="656" y="480" width="220" height="36" rx="10" fill="#AD1457"/>
+  <text x="766" y="498" font-family="Consolas, monospace" font-size="16" fill="#F48FB1"
+        text-anchor="middle" dominant-baseline="middle">a3f8b2c1d4e5f609</text>
+
+  <!-- Equals sign between them -->
+  <rect x="452" y="360" width="120" height="20" rx="10" fill="#FFD740" filter="url(#sh3)"/>
+  <rect x="452" y="394" width="120" height="20" rx="10" fill="#FFD740" filter="url(#sh3)"/>
+
+  <!-- Twin labels -->
+  <text x="260" y="210" font-family="Arial Black, sans-serif" font-size="30" fill="#7B1FA2"
+        text-anchor="middle">원본</text>
+  <text x="764" y="210" font-family="Arial Black, sans-serif" font-size="30" fill="#E91E63"
+        text-anchor="middle">복제본</text>
+
+  <!-- Delete one badge -->
+  <circle cx="512" cy="640" r="64" fill="#E53935" filter="url(#sh3)"/>
+  <rect x="476" y="626" width="72" height="12" rx="6" fill="white"/>
+  <rect x="476" y="648" width="72" height="12" rx="6" fill="white"/>
+  <text x="512" y="700" font-family="Arial, sans-serif" font-size="22" fill="#E53935"
+        text-anchor="middle">하나 삭제</text>
+
+  <!-- Bottom banner -->
+  <rect x="200" y="770" width="624" height="70" rx="35" fill="white" filter="url(#sh3)"/>
+  <text x="512" y="805" font-family="Arial Black, sans-serif" font-size="38" fill="#7B1FA2"
+        text-anchor="middle" dominant-baseline="middle">중복 탐지</text>
+</svg>

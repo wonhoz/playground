@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_06: hybrid | QR 패턴 + 대장간 망치 — QR.Forge 브랜드 결합 | 중앙 심볼 | 라임+파랑+주황 -->
+  <defs>
+    <linearGradient id="bg6" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#F9FBE7"/>
+      <stop offset="100%" stop-color="#DCE775"/>
+    </linearGradient>
+    <linearGradient id="hammer6" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFD700"/>
+      <stop offset="100%" stop-color="#F57F17"/>
+    </linearGradient>
+    <filter id="sh6" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="7" stdDeviation="9" flood-color="#33691E" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg6)"/>
+
+  <!-- QR code base (large, center) -->
+  <rect x="190" y="160" width="644" height="644" rx="18" fill="white" filter="url(#sh6)"/>
+
+  <!-- QR Finder patterns (colored blue) -->
+  <!-- TL -->
+  <rect x="214" y="184" width="144" height="144" rx="10" fill="#1565C0"/>
+  <rect x="230" y="200" width="112" height="112" rx="6" fill="white"/>
+  <rect x="246" y="216" width="80" height="80" rx="4" fill="#1565C0"/>
+  <!-- TR -->
+  <rect x="666" y="184" width="144" height="144" rx="10" fill="#1565C0"/>
+  <rect x="682" y="200" width="112" height="112" rx="6" fill="white"/>
+  <rect x="698" y="216" width="80" height="80" rx="4" fill="#1565C0"/>
+  <!-- BL -->
+  <rect x="214" y="636" width="144" height="144" rx="10" fill="#1565C0"/>
+  <rect x="230" y="652" width="112" height="112" rx="6" fill="white"/>
+  <rect x="246" y="668" width="80" height="80" rx="4" fill="#1565C0"/>
+
+  <!-- Data modules (lime/green colored) -->
+  <rect x="380" y="184" width="258" height="16" rx="4" fill="#33691E" opacity="0.8"/>
+  <rect x="380" y="208" width="16" height="16" rx="3" fill="#33691E"/>
+  <rect x="404" y="208" width="16" height="16" rx="3" fill="#33691E"/>
+  <rect x="436" y="208" width="16" height="16" rx="3" fill="#33691E"/>
+  <rect x="468" y="208" width="16" height="16" rx="3" fill="#33691E"/>
+  <rect x="500" y="208" width="16" height="16" rx="3" fill="#33691E"/>
+  <rect x="536" y="208" width="16" height="16" rx="3" fill="#33691E"/>
+  <rect x="380" y="232" width="40" height="16" rx="4" fill="#33691E"/>
+  <rect x="460" y="232" width="40" height="16" rx="4" fill="#33691E"/>
+  <rect x="540" y="232" width="40" height="16" rx="4" fill="#33691E"/>
+  <rect x="380" y="256" width="258" height="258" rx="6" fill="#F9FBE7"/>
+  <rect x="214" y="378" width="144" height="230" rx="6" fill="#F9FBE7"/>
+  <rect x="666" y="378" width="144" height="390" rx="6" fill="#F9FBE7"/>
+
+  <!-- QR data area patterns -->
+  <rect x="214" y="378" width="40" height="16" rx="3" fill="#33691E"/>
+  <rect x="262" y="378" width="16" height="16" rx="3" fill="#33691E"/>
+  <rect x="294" y="378" width="40" height="16" rx="3" fill="#33691E"/>
+  <rect x="214" y="402" width="16" height="16" rx="3" fill="#33691E"/>
+  <rect x="246" y="402" width="40" height="16" rx="3" fill="#33691E"/>
+  <rect x="302" y="402" width="16" height="16" rx="3" fill="#33691E"/>
+  <rect x="666" y="378" width="16" height="16" rx="3" fill="#33691E"/>
+  <rect x="698" y="378" width="16" height="16" rx="3" fill="#33691E"/>
+  <rect x="730" y="378" width="40" height="16" rx="3" fill="#33691E"/>
+  <rect x="666" y="400" width="40" height="16" rx="3" fill="#33691E"/>
+  <rect x="730" y="400" width="16" height="16" rx="3" fill="#33691E"/>
+
+  <!-- Hammer overlaid (top-right, large) -->
+  <g transform="rotate(-40, 700, 350)">
+    <!-- Hammer head -->
+    <rect x="600" y="180" width="180" height="90" rx="16" fill="url(#hammer6)" filter="url(#sh6)"/>
+    <rect x="600" y="196" width="180" height="24" rx="0" fill="#FFD700" opacity="0.3"/>
+    <!-- Handle -->
+    <rect x="668" y="264" width="36" height="200" rx="16" fill="#6D4C41" filter="url(#sh6)"/>
+    <rect x="676" y="264" width="20" height="200" rx="10" fill="#8D6E63"/>
+  </g>
+
+  <!-- Sparks at QR center (impact) -->
+  <circle cx="512" cy="512" r="16" fill="#FF6F00" opacity="0.9"/>
+  <line x1="512" y1="470" x2="492" y2="448" stroke="#FF6F00" stroke-width="7" stroke-linecap="round" opacity="0.7"/>
+  <line x1="512" y1="470" x2="536" y2="446" stroke="#FFD700" stroke-width="7" stroke-linecap="round" opacity="0.7"/>
+  <line x1="548" y1="512" x2="572" y2="500" stroke="#FF6F00" stroke-width="5" stroke-linecap="round" opacity="0.6"/>
+
+  <!-- Bottom label -->
+  <rect x="190" y="852" width="644" height="76" rx="24" fill="#1565C0" filter="url(#sh6)"/>
+  <text x="512" y="890" font-family="Arial Black, sans-serif" font-size="42" fill="white"
+        text-anchor="middle" dominant-baseline="middle">QR.Forge</text>
+</svg>

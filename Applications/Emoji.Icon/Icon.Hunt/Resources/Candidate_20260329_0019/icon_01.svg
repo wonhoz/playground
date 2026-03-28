@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_01: literal | 돋보기 + 아이콘 격자 배경 | 레이어드 | 하늘+흰격자+빨강돋보기 -->
+  <defs>
+    <linearGradient id="bg1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#E3F2FD"/>
+      <stop offset="100%" stop-color="#64B5F6"/>
+    </linearGradient>
+    <filter id="sh1" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#1565C0" flood-opacity="0.25"/>
+    </filter>
+    <clipPath id="clip1">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
+  </defs>
+  <!-- Layer 1 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg1)"/>
+
+  <!-- Layer 2: Icon grid (small icon placeholders) -->
+  <g clip-path="url(#clip1)" opacity="0.85">
+    <!-- Row 1 -->
+    <rect x="80"  y="80"  width="130" height="130" rx="20" fill="white" opacity="0.7"/>
+    <!-- Home icon -->
+    <polygon points="145,110 185,150 185,200 105,200 105,150" fill="#42A5F5"/>
+    <rect x="130" y="165" width="30" height="35" rx="4" fill="#1565C0"/>
+
+    <rect x="250" y="80"  width="130" height="130" rx="20" fill="white" opacity="0.7"/>
+    <!-- Heart icon -->
+    <path d="M315,120 C315,110 300,100 290,115 C280,100 265,110 265,120 C265,135 315,165 315,165 C315,165 365,135 365,120 C365,110 350,100 340,115 C330,100 315,110 315,120Z" fill="#EF5350"/>
+
+    <rect x="420" y="80"  width="130" height="130" rx="20" fill="white" opacity="0.7"/>
+    <!-- Star icon -->
+    <polygon points="485,95 498,135 540,135 508,158 520,198 485,175 450,198 462,158 430,135 472,135" fill="#FFD740"/>
+
+    <rect x="590" y="80"  width="130" height="130" rx="20" fill="white" opacity="0.7"/>
+    <!-- Settings gear (simplified circle) -->
+    <circle cx="655" cy="145" r="35" fill="none" stroke="#78909C" stroke-width="16"/>
+    <circle cx="655" cy="145" r="16" fill="#78909C"/>
+
+    <rect x="760" y="80"  width="130" height="130" rx="20" fill="white" opacity="0.7"/>
+    <!-- Lightning -->
+    <polygon points="820,95 795,150 820,150 800,205 840,140 812,140" fill="#FFCA28"/>
+
+    <!-- Row 2 -->
+    <rect x="80"  y="250" width="130" height="130" rx="20" fill="white" opacity="0.7"/>
+    <rect x="100" y="270" width="90" height="70" rx="8" fill="#66BB6A"/>
+    <rect x="115" y="295" width="60" height="10" rx="4" fill="white"/>
+    <rect x="115" y="315" width="40" height="10" rx="4" fill="white"/>
+
+    <rect x="250" y="250" width="130" height="130" rx="20" fill="white" opacity="0.7"/>
+    <circle cx="315" cy="315" r="45" fill="none" stroke="#AB47BC" stroke-width="14"/>
+    <line x1="285" y1="285" x2="345" y2="345" stroke="#AB47BC" stroke-width="14" stroke-linecap="round"/>
+
+    <rect x="420" y="250" width="130" height="130" rx="20" fill="white" opacity="0.7"/>
+    <rect x="440" y="270" width="90" height="90" rx="10" fill="#26A69A"/>
+    <polygon points="485,280 495,310 475,310" fill="white"/>
+
+    <rect x="590" y="250" width="130" height="130" rx="20" fill="white" opacity="0.7"/>
+    <!-- Bell -->
+    <path d="M655,265 C655,265 615,280 615,330 L695,330 C695,280 655,265 655,265Z" fill="#FFA726"/>
+    <circle cx="655" cy="345" r="12" fill="#FFA726"/>
+
+    <rect x="760" y="250" width="130" height="130" rx="20" fill="white" opacity="0.7"/>
+    <!-- User -->
+    <circle cx="825" cy="295" r="25" fill="#5C6BC0"/>
+    <path d="M785,380 C785,355 795,340 825,340 C855,340 865,355 865,380" fill="#5C6BC0"/>
+  </g>
+
+  <!-- Layer 3: Large red magnifying glass (center) -->
+  <g filter="url(#sh1)">
+    <circle cx="470" cy="540" r="220" fill="none" stroke="#E53935" stroke-width="60"/>
+    <circle cx="470" cy="540" r="165" fill="white" opacity="0.15"/>
+    <line x1="625" y1="695" x2="870" y2="880" stroke="#E53935" stroke-width="72" stroke-linecap="round"/>
+  </g>
+  <!-- Sparkle on lens -->
+  <circle cx="390" cy="460" r="28" fill="white" opacity="0.6"/>
+</svg>

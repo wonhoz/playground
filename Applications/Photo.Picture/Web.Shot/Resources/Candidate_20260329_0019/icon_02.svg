@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_02: literal | 긴 웹페이지 → 하나의 PNG 파일로 저장 (before/after) | 레이어드 | 민트+초록+흰 -->
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#E0F2F1"/>
+      <stop offset="100%" stop-color="#B2DFDB"/>
+    </linearGradient>
+    <filter id="sh2" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#004D40" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg2)"/>
+
+  <!-- Left: Long scrolling web page -->
+  <rect x="90" y="120" width="310" height="720" rx="14" fill="white" filter="url(#sh2)"/>
+  <!-- Browser top -->
+  <rect x="90" y="120" width="310" height="50" rx="14" fill="#00897B"/>
+  <rect x="90" y="152" width="310" height="18" fill="#00897B"/>
+  <rect x="110" y="133" width="240" height="22" rx="10" fill="white" opacity="0.9"/>
+  <!-- Page content strips -->
+  <rect x="106" y="184" width="278" height="20" rx="6" fill="#B2DFDB"/>
+  <rect x="106" y="216" width="240" height="12" rx="4" fill="#CFD8DC" opacity="0.7"/>
+  <rect x="106" y="240" width="260" height="12" rx="4" fill="#CFD8DC" opacity="0.5"/>
+  <rect x="106" y="270" width="278" height="80" rx="8" fill="#80CBC4" opacity="0.5"/>
+  <rect x="106" y="368" width="240" height="12" rx="4" fill="#CFD8DC" opacity="0.7"/>
+  <rect x="106" y="392" width="260" height="12" rx="4" fill="#CFD8DC" opacity="0.5"/>
+  <rect x="106" y="416" width="200" height="12" rx="4" fill="#CFD8DC" opacity="0.7"/>
+  <rect x="106" y="448" width="278" height="100" rx="8" fill="#80CBC4" opacity="0.3"/>
+  <rect x="106" y="562" width="240" height="12" rx="4" fill="#CFD8DC" opacity="0.7"/>
+  <rect x="106" y="586" width="220" height="12" rx="4" fill="#CFD8DC" opacity="0.5"/>
+  <rect x="106" y="616" width="278" height="80" rx="8" fill="#80CBC4" opacity="0.3"/>
+  <rect x="106" y="712" width="240" height="12" rx="4" fill="#CFD8DC" opacity="0.5"/>
+  <rect x="106" y="736" width="260" height="12" rx="4" fill="#CFD8DC" opacity="0.4"/>
+
+  <!-- Scroll indicator -->
+  <rect x="382" y="170" width="12" height="680" rx="6" fill="#CFD8DC"/>
+  <rect x="382" y="200" width="12" height="200" rx="6" fill="#00897B"/>
+
+  <!-- Label: 전체 페이지 -->
+  <text x="245" y="870" font-family="Arial, sans-serif" font-size="22" fill="#004D40"
+        text-anchor="middle">전체 페이지 (스크롤)</text>
+
+  <!-- Arrow -->
+  <rect x="420" y="480" width="120" height="44" rx="22" fill="#00897B" filter="url(#sh2)"/>
+  <polygon points="540,456 620,502 540,548" fill="#00897B" filter="url(#sh2)"/>
+
+  <!-- Right: Saved PNG result -->
+  <rect x="630" y="260" width="320" height="420" rx="18" fill="#00695C" filter="url(#sh2)"/>
+  <polygon points="892,260 950,318 892,318" fill="#80CBC4"/>
+  <!-- File content preview (compressed page) -->
+  <rect x="654" y="338" width="272" height="18" rx="6" fill="white" opacity="0.4"/>
+  <rect x="654" y="366" width="240" height="100" rx="8" fill="#80CBC4" opacity="0.4"/>
+  <rect x="654" y="476" width="272" height="14" rx="5" fill="white" opacity="0.3"/>
+  <rect x="654" y="500" width="240" height="14" rx="5" fill="white" opacity="0.2"/>
+  <rect x="654" y="524" width="260" height="70" rx="8" fill="#80CBC4" opacity="0.3"/>
+  <rect x="654" y="604" width="272" height="14" rx="5" fill="white" opacity="0.3"/>
+  <rect x="654" y="628" width="220" height="14" rx="5" fill="white" opacity="0.2"/>
+
+  <!-- PNG badge -->
+  <rect x="640" y="700" width="140" height="48" rx="14" fill="#FF6F00" filter="url(#sh2)"/>
+  <text x="710" y="724" font-family="Arial Black, sans-serif" font-size="26" fill="white"
+        text-anchor="middle" dominant-baseline="middle">PNG</text>
+
+  <!-- File size label -->
+  <text x="790" y="730" font-family="Arial, sans-serif" font-size="20" fill="#00695C">2.4 MB</text>
+
+  <!-- Title -->
+  <text x="512" y="944" font-family="Arial Black, sans-serif" font-size="32" fill="#004D40"
+        text-anchor="middle">Web.Shot — 전체 페이지 캡처</text>
+</svg>

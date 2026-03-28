@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>JSON.Tree — Icon Candidates</title>
+<style>
+  body { margin: 0; background: #1A2010; font-family: 'Segoe UI', sans-serif; padding: 40px; }
+  h1 { color: #AED581; text-align: center; font-size: 28px; margin-bottom: 6px; }
+  p.sub { color: #888; text-align: center; margin-bottom: 40px; font-size: 14px; }
+  .grid { display: flex; flex-wrap: wrap; gap: 32px; justify-content: center; }
+  .card {
+    background: #243016; border-radius: 18px; padding: 28px;
+    text-align: center; width: 260px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: 1px solid #3A4A20;
+  }
+  .card:hover { transform: scale(1.08); box-shadow: 0 12px 40px rgba(174,213,129,0.25); }
+  .card img { width: 160px; height: 160px; border-radius: 12px; }
+  .card .name { color: #E0E0E0; font-size: 15px; font-weight: 600; margin-top: 14px; }
+  .card .type { margin-top: 4px; font-size: 12px; padding: 3px 10px; border-radius: 20px; display: inline-block; }
+  .literal  { background: #1565C0; color: #fff; }
+  .metaphor { background: #7B1FA2; color: #fff; }
+  .hybrid   { background: #2E7D32; color: #fff; }
+  .card .concept { color: #9E9E9E; font-size: 12px; margin-top: 8px; line-height: 1.5; }
+  .palette { display: flex; gap: 6px; justify-content: center; margin-top: 10px; }
+  .swatch { width: 22px; height: 22px; border-radius: 50%; border: 2px solid #444; }
+</style>
+</head>
+<body>
+<h1>JSON.Tree</h1>
+<p class="sub">JSON·YAML·TOML 트리 뷰어 + A/B 비교(diff) — Candidate_20260329_0019</p>
+<div class="grid">
+  <div class="card">
+    <img src="icon_01.svg" alt="icon_01">
+    <div class="name">icon_01</div>
+    <span class="type literal">literal</span>
+    <div class="concept">JSON 들여쓰기 트리 코드<br>에디터 UI 직접 표현</div>
+    <div class="palette">
+      <div class="swatch" style="background:#FFF9C4" title="아이보리 배경"></div>
+      <div class="swatch" style="background:#1565C0" title="파랑 키"></div>
+      <div class="swatch" style="background:#FF6D00" title="주황 괄호"></div>
+    </div>
+  </div>
+  <div class="card">
+    <img src="icon_02.svg" alt="icon_02">
+    <div class="name">icon_02</div>
+    <span class="type literal">literal</span>
+    <div class="concept">A/B 두 패널 비교(diff)<br>빨강 삭제 + 초록 추가</div>
+    <div class="palette">
+      <div class="swatch" style="background:#80DEEA" title="민트 배경"></div>
+      <div class="swatch" style="background:#FFCDD2" title="빨강 삭제줄"></div>
+      <div class="swatch" style="background:#C8E6C9" title="초록 추가줄"></div>
+    </div>
+  </div>
+  <div class="card">
+    <img src="icon_03.svg" alt="icon_03">
+    <div class="name">icon_03</div>
+    <span class="type metaphor">metaphor</span>
+    <div class="concept">실제 나무 — 가지와 잎이<br>JSON 계층 구조의 은유</div>
+    <div class="palette">
+      <div class="swatch" style="background:#4FC3F7" title="하늘 배경"></div>
+      <div class="swatch" style="background:#388E3C" title="초록 나무"></div>
+      <div class="swatch" style="background:#FFD740" title="노랑 잎"></div>
+    </div>
+  </div>
+  <div class="card">
+    <img src="icon_04.svg" alt="icon_04">
+    <div class="name">icon_04</div>
+    <span class="type metaphor">metaphor</span>
+    <div class="concept">방사형 노드 다이어그램<br>— 루트에서 자식이 퍼지는</div>
+    <div class="palette">
+      <div class="swatch" style="background:#9575CD" title="보라 배경"></div>
+      <div class="swatch" style="background:#FFFFFF" title="흰 노드"></div>
+      <div class="swatch" style="background:#FFD740" title="노랑 연결선"></div>
+    </div>
+  </div>
+  <div class="card">
+    <img src="icon_05.svg" alt="icon_05">
+    <div class="name">icon_05</div>
+    <span class="type metaphor">metaphor</span>
+    <div class="concept">돋보기 렌즈 내부에<br>JSON 구조가 보이는 X선 은유</div>
+    <div class="palette">
+      <div class="swatch" style="background:#FFECB3" title="노랑 배경"></div>
+      <div class="swatch" style="background:#00838F" title="청록 프레임"></div>
+      <div class="swatch" style="background:#B2EBF2" title="민트 렌즈"></div>
+    </div>
+  </div>
+  <div class="card">
+    <img src="icon_06.svg" alt="icon_06">
+    <div class="name">icon_06</div>
+    <span class="type hybrid">hybrid</span>
+    <div class="concept">{} 괄호 + 나뭇가지 라인<br>결합 — 데이터 트리 hybrid</div>
+    <div class="palette">
+      <div class="swatch" style="background:#DCEDC8" title="라임 배경"></div>
+      <div class="swatch" style="background:#2E7D32" title="초록 괄호"></div>
+      <div class="swatch" style="background:#FF6D00" title="주황 가지"></div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

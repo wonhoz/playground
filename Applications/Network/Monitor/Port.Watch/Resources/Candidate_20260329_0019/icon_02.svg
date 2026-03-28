@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_02: literal | ":8080 OPEN" 포트 상태 표시 | 중앙 심볼 | 파랑+흰+초록 -->
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#E3F2FD"/>
+      <stop offset="100%" stop-color="#64B5F6"/>
+    </linearGradient>
+    <filter id="sh2" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="7" stdDeviation="9" flood-color="#1565C0" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg2)"/>
+
+  <!-- Layer 2: Main port display card -->
+  <rect x="100" y="160" width="824" height="460" rx="40" fill="white" filter="url(#sh2)"/>
+
+  <!-- Port number (big) -->
+  <text x="512" y="320" font-family="Arial Black, sans-serif" font-size="200" font-weight="900"
+        fill="#1565C0" text-anchor="middle" dominant-baseline="middle">:8080</text>
+
+  <!-- LISTEN badge -->
+  <rect x="270" y="390" width="220" height="74" rx="37" fill="#43A047" filter="url(#sh2)"/>
+  <text x="380" y="427" font-family="Arial Black, sans-serif" font-size="38" font-weight="900"
+        fill="white" text-anchor="middle" dominant-baseline="middle">OPEN</text>
+
+  <!-- TCP badge -->
+  <rect x="534" y="390" width="180" height="74" rx="37" fill="#1565C0" filter="url(#sh2)"/>
+  <text x="624" y="427" font-family="Arial Black, sans-serif" font-size="38" font-weight="900"
+        fill="white" text-anchor="middle" dominant-baseline="middle">TCP</text>
+
+  <!-- Layer 3: Process info + live indicator -->
+  <!-- Process row -->
+  <rect x="100" y="650" width="824" height="100" rx="24" fill="white" filter="url(#sh2)"/>
+  <text x="200" y="700" font-family="Consolas, monospace" font-size="44" fill="#1565C0"
+        dominant-baseline="middle">node.exe</text>
+  <text x="650" y="700" font-family="Consolas, monospace" font-size="36" fill="#546E7A"
+        dominant-baseline="middle">PID: 4128</text>
+
+  <!-- Live pulsing dot -->
+  <circle cx="512" cy="840" r="44" fill="#43A047" opacity="0.2" filter="url(#sh2)"/>
+  <circle cx="512" cy="840" r="30" fill="#43A047" opacity="0.4"/>
+  <circle cx="512" cy="840" r="18" fill="#43A047" filter="url(#sh2)"/>
+  <!-- LIVE label -->
+  <text x="570" y="840" font-family="Arial Black, sans-serif" font-size="44" font-weight="900"
+        fill="#2E7D32" dominant-baseline="middle">LIVE</text>
+</svg>

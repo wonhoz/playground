@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_01: literal | PATH 환경변수 목록 UI — Ok/Broken/Disabled 상태 색상 | 공간/장면 | 하늘+파랑+초록+빨강 -->
+  <defs>
+    <linearGradient id="bg1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#E3F2FD"/>
+      <stop offset="100%" stop-color="#BBDEFB"/>
+    </linearGradient>
+    <filter id="sh1" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="5" stdDeviation="7" flood-color="#1565C0" flood-opacity="0.2"/>
+    </filter>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg1)"/>
+
+  <!-- Main window frame -->
+  <rect x="80" y="100" width="864" height="824" rx="20" fill="white" filter="url(#sh1)"/>
+  <!-- Title bar -->
+  <rect x="80" y="100" width="864" height="64" rx="20" fill="#1565C0"/>
+  <rect x="80" y="140" width="864" height="24" fill="#1565C0"/>
+  <text x="512" y="134" font-family="Arial Black, sans-serif" font-size="28" fill="white"
+        text-anchor="middle" dominant-baseline="middle">PATH Guard — 환경 변수 편집기</text>
+
+  <!-- Tab bar: System / User -->
+  <rect x="104" y="188" width="180" height="40" rx="8" fill="#1565C0"/>
+  <text x="194" y="208" font-family="Arial, sans-serif" font-size="22" fill="white"
+        text-anchor="middle" dominant-baseline="middle">System</text>
+  <rect x="292" y="188" width="160" height="40" rx="8" fill="#E3F2FD"/>
+  <text x="372" y="208" font-family="Arial, sans-serif" font-size="22" fill="#1565C0"
+        text-anchor="middle" dominant-baseline="middle">User</text>
+
+  <!-- Column header -->
+  <rect x="104" y="236" width="836" height="36" fill="#E3F2FD"/>
+  <text x="160" y="254" font-family="Arial, sans-serif" font-size="18" fill="#546E7A"
+        dominant-baseline="middle">상태</text>
+  <text x="270" y="254" font-family="Arial, sans-serif" font-size="18" fill="#546E7A"
+        dominant-baseline="middle">경로</text>
+  <text x="820" y="254" font-family="Arial, sans-serif" font-size="18" fill="#546E7A"
+        dominant-baseline="middle" text-anchor="middle">범위</text>
+
+  <!-- Row 1: OK -->
+  <rect x="104" y="272" width="836" height="56" fill="#F1F8E9"/>
+  <circle cx="152" cy="300" r="14" fill="#43A047"/>
+  <text x="152" y="300" font-family="Arial, sans-serif" font-size="16" fill="white"
+        text-anchor="middle" dominant-baseline="middle">✓</text>
+  <text x="200" y="300" font-family="Consolas, monospace" font-size="19" fill="#212121"
+        dominant-baseline="middle">C:\Windows\System32</text>
+  <rect x="790" y="285" width="110" height="28" rx="8" fill="#1565C0"/>
+  <text x="845" y="299" font-family="Arial, sans-serif" font-size="15" fill="white"
+        text-anchor="middle" dominant-baseline="middle">System</text>
+
+  <!-- Row 2: OK -->
+  <rect x="104" y="328" width="836" height="56" fill="white"/>
+  <circle cx="152" cy="356" r="14" fill="#43A047"/>
+  <text x="152" y="356" font-family="Arial, sans-serif" font-size="16" fill="white"
+        text-anchor="middle" dominant-baseline="middle">✓</text>
+  <text x="200" y="356" font-family="Consolas, monospace" font-size="19" fill="#212121"
+        dominant-baseline="middle">C:\Program Files\Git\bin</text>
+  <rect x="790" y="341" width="110" height="28" rx="8" fill="#1565C0"/>
+  <text x="845" y="355" font-family="Arial, sans-serif" font-size="15" fill="white"
+        text-anchor="middle" dominant-baseline="middle">System</text>
+
+  <!-- Row 3: BROKEN -->
+  <rect x="104" y="384" width="836" height="56" fill="#FFEBEE"/>
+  <circle cx="152" cy="412" r="14" fill="#E53935"/>
+  <text x="152" y="412" font-family="Arial, sans-serif" font-size="18" fill="white"
+        text-anchor="middle" dominant-baseline="middle">✕</text>
+  <text x="200" y="412" font-family="Consolas, monospace" font-size="19" fill="#B71C1C"
+        dominant-baseline="middle">C:\Tools\OldSDK\bin</text>
+  <rect x="790" y="397" width="110" height="28" rx="8" fill="#E53935"/>
+  <text x="845" y="411" font-family="Arial, sans-serif" font-size="15" fill="white"
+        text-anchor="middle" dominant-baseline="middle">System</text>
+
+  <!-- Row 4: OK -->
+  <rect x="104" y="440" width="836" height="56" fill="#F1F8E9"/>
+  <circle cx="152" cy="468" r="14" fill="#43A047"/>
+  <text x="152" y="468" font-family="Arial, sans-serif" font-size="16" fill="white"
+        text-anchor="middle" dominant-baseline="middle">✓</text>
+  <text x="200" y="468" font-family="Consolas, monospace" font-size="19" fill="#212121"
+        dominant-baseline="middle">%USERPROFILE%\AppData\Local\Programs</text>
+  <rect x="790" y="453" width="80" height="28" rx="8" fill="#43A047"/>
+  <text x="830" y="467" font-family="Arial, sans-serif" font-size="15" fill="white"
+        text-anchor="middle" dominant-baseline="middle">User</text>
+
+  <!-- Row 5: DISABLED -->
+  <rect x="104" y="496" width="836" height="56" fill="#FAFAFA"/>
+  <circle cx="152" cy="524" r="14" fill="#90A4AE"/>
+  <text x="152" y="524" font-family="Arial, sans-serif" font-size="14" fill="white"
+        text-anchor="middle" dominant-baseline="middle">—</text>
+  <text x="200" y="524" font-family="Consolas, monospace" font-size="19" fill="#90A4AE"
+        dominant-baseline="middle">C:\Python312\Scripts</text>
+  <rect x="790" y="509" width="80" height="28" rx="8" fill="#90A4AE"/>
+  <text x="830" y="523" font-family="Arial, sans-serif" font-size="15" fill="white"
+        text-anchor="middle" dominant-baseline="middle">User</text>
+
+  <!-- Row 6: DUPLICATE -->
+  <rect x="104" y="552" width="836" height="56" fill="#FFF8E1"/>
+  <circle cx="152" cy="580" r="14" fill="#F9A825"/>
+  <text x="152" y="580" font-family="Arial, sans-serif" font-size="14" fill="white"
+        text-anchor="middle" dominant-baseline="middle">⚠</text>
+  <text x="200" y="580" font-family="Consolas, monospace" font-size="19" fill="#F57F17"
+        dominant-baseline="middle">C:\Windows\System32  (중복)</text>
+  <rect x="790" y="565" width="110" height="28" rx="8" fill="#F9A825"/>
+  <text x="845" y="579" font-family="Arial, sans-serif" font-size="15" fill="white"
+        text-anchor="middle" dominant-baseline="middle">System</text>
+
+  <!-- Status bar -->
+  <rect x="80" y="876" width="864" height="48" rx="12" fill="#E3F2FD" filter="url(#sh1)"/>
+  <circle cx="130" cy="900" r="10" fill="#43A047"/>
+  <text x="160" y="900" font-family="Arial, sans-serif" font-size="18" fill="#1565C0"
+        dominant-baseline="middle">총 24개 항목 — 정상 20 · 깨짐 2 · 비활성 2</text>
+</svg>

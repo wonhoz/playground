@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_03: metaphor | 실제 나무 — 가지=데이터 구조 | 실루엣/캐릭터 | 하늘+초록나무 -->
+  <defs>
+    <linearGradient id="bg3" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#B3E5FC"/>
+      <stop offset="100%" stop-color="#4FC3F7"/>
+    </linearGradient>
+    <filter id="sh3" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#01579B" flood-opacity="0.25"/>
+    </filter>
+    <!-- Ground gradient -->
+    <linearGradient id="ground" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#8BC34A"/>
+      <stop offset="100%" stop-color="#558B2F"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg3)"/>
+
+  <!-- Ground -->
+  <ellipse cx="512" cy="900" rx="340" ry="60" fill="url(#ground)" filter="url(#sh3)"/>
+
+  <!-- Layer 2: Tree trunk -->
+  <rect x="470" y="680" width="84" height="220" rx="30" fill="#6D4C41" filter="url(#sh3)"/>
+  <!-- Roots -->
+  <path d="M490,890 Q430,870 390,900" fill="none" stroke="#6D4C41" stroke-width="20" stroke-linecap="round"/>
+  <path d="M534,890 Q590,870 630,900" fill="none" stroke="#6D4C41" stroke-width="20" stroke-linecap="round"/>
+
+  <!-- Layer 3: Tree canopy (with {} [] labels on branches) -->
+  <!-- Large bottom foliage -->
+  <circle cx="512" cy="540" r="230" fill="#388E3C" filter="url(#sh3)"/>
+  <!-- Left branch clump -->
+  <circle cx="300" cy="460" r="160" fill="#43A047" filter="url(#sh3)"/>
+  <!-- Right branch clump -->
+  <circle cx="720" cy="460" r="160" fill="#43A047" filter="url(#sh3)"/>
+  <!-- Top clump -->
+  <circle cx="512" cy="300" r="160" fill="#66BB6A" filter="url(#sh3)"/>
+  <!-- Small accent circles -->
+  <circle cx="390" cy="350" r="80" fill="#81C784"/>
+  <circle cx="640" cy="350" r="80" fill="#81C784"/>
+
+  <!-- JSON labels on foliage nodes -->
+  <!-- Root: {} -->
+  <circle cx="512" cy="300" r="60" fill="white" opacity="0.9" filter="url(#sh3)"/>
+  <text x="512" y="300" font-family="Arial Black, sans-serif" font-size="48" font-weight="900"
+        fill="#1B5E20" text-anchor="middle" dominant-baseline="middle">{ }</text>
+
+  <!-- Left: [] -->
+  <circle cx="290" cy="440" r="52" fill="white" opacity="0.9" filter="url(#sh3)"/>
+  <text x="290" y="440" font-family="Arial Black, sans-serif" font-size="44" font-weight="900"
+        fill="#0D47A1" text-anchor="middle" dominant-baseline="middle">[ ]</text>
+
+  <!-- Right: {} -->
+  <circle cx="730" cy="440" r="52" fill="white" opacity="0.9" filter="url(#sh3)"/>
+  <text x="730" y="440" font-family="Arial Black, sans-serif" font-size="44" font-weight="900"
+        fill="#B71C1C" text-anchor="middle" dominant-baseline="middle">{ }</text>
+
+  <!-- Leaves: string dots -->
+  <circle cx="190" cy="360" r="24" fill="#FFD740"/>
+  <circle cx="240" cy="300" r="18" fill="#FFD740" opacity="0.8"/>
+  <circle cx="780" cy="360" r="24" fill="#FFD740"/>
+  <circle cx="740" cy="295" r="18" fill="#FFD740" opacity="0.8"/>
+  <circle cx="450" cy="190" r="20" fill="#FFD740" opacity="0.9"/>
+  <circle cx="570" cy="185" r="18" fill="#FFD740" opacity="0.9"/>
+</svg>

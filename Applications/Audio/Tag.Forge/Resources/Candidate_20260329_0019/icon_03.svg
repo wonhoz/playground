@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_03: metaphor | 대장간 망치 + 음표 모루 — 태그를 단조하는 Forge | 중앙 심볼 | 보라+황금+흰 -->
+  <defs>
+    <linearGradient id="bg3" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#F3E5F5"/>
+      <stop offset="100%" stop-color="#CE93D8"/>
+    </linearGradient>
+    <linearGradient id="hammer" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFD700"/>
+      <stop offset="100%" stop-color="#FFA000"/>
+    </linearGradient>
+    <filter id="sh3" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#4A148C" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg3)"/>
+
+  <!-- Anvil / Musical note as anvil base -->
+  <!-- Anvil body -->
+  <rect x="260" y="620" width="504" height="160" rx="20" fill="#4527A0" filter="url(#sh3)"/>
+  <!-- Anvil top flat surface -->
+  <rect x="220" y="560" width="584" height="80" rx="16" fill="#512DA8" filter="url(#sh3)"/>
+  <!-- Anvil horn (left) -->
+  <path d="M220,600 C140,600 100,580 80,560 L220,560 Z" fill="#4527A0"/>
+
+  <!-- Musical note symbol on anvil surface -->
+  <circle cx="512" cy="598" r="36" fill="#FFD740"/>
+  <!-- Note stem -->
+  <rect x="542" y="520" width="16" height="80" rx="8" fill="#FFD740"/>
+  <!-- Note flag -->
+  <path d="M558,520 C620,540 630,570 558,580" fill="none" stroke="#FFD740" stroke-width="14"
+        stroke-linecap="round"/>
+
+  <!-- Hammer (large, tilted, coming down) -->
+  <g transform="rotate(-30, 512, 400)">
+    <!-- Hammer head -->
+    <rect x="380" y="200" width="240" height="120" rx="20" fill="url(#hammer)" filter="url(#sh3)"/>
+    <!-- Hammer sides details -->
+    <rect x="380" y="216" width="240" height="30" rx="0" fill="#FFD740" opacity="0.4"/>
+    <!-- Hammer handle -->
+    <rect x="490" y="316" width="44" height="260" rx="20" fill="#6D4C41" filter="url(#sh3)"/>
+    <rect x="498" y="316" width="28" height="260" rx="14" fill="#8D6E63"/>
+  </g>
+
+  <!-- Spark effects around impact point -->
+  <circle cx="512" cy="580" r="14" fill="#FFD740" opacity="0.9"/>
+  <line x1="512" y1="540" x2="490" y2="510" stroke="#FFD740" stroke-width="8" stroke-linecap="round" opacity="0.8"/>
+  <line x1="512" y1="540" x2="540" y2="508" stroke="#FFD740" stroke-width="8" stroke-linecap="round" opacity="0.8"/>
+  <line x1="540" y1="555" x2="580" y2="540" stroke="#FF6D00" stroke-width="6" stroke-linecap="round" opacity="0.7"/>
+  <line x1="484" y1="555" x2="444" y2="540" stroke="#FF6D00" stroke-width="6" stroke-linecap="round" opacity="0.7"/>
+
+  <!-- Tag labels floating off (product of forging) -->
+  <rect x="660" y="420" width="200" height="60" rx="12" fill="white" filter="url(#sh3)" opacity="0.9"/>
+  <text x="760" y="442" font-family="Arial, sans-serif" font-size="16" fill="#4527A0"
+        text-anchor="middle">TITLE: Song Name</text>
+  <text x="760" y="464" font-family="Arial, sans-serif" font-size="14" fill="#7E57C2"
+        text-anchor="middle">ARTIST: Band</text>
+
+  <rect x="660" y="500" width="200" height="60" rx="12" fill="white" filter="url(#sh3)" opacity="0.9"/>
+  <text x="760" y="522" font-family="Arial, sans-serif" font-size="16" fill="#4527A0"
+        text-anchor="middle">ALBUM: Vol.1</text>
+  <text x="760" y="544" font-family="Arial, sans-serif" font-size="14" fill="#7E57C2"
+        text-anchor="middle">YEAR: 2024</text>
+
+  <!-- Fire/glow under hammer -->
+  <ellipse cx="512" cy="785" rx="200" ry="30" fill="#FF6D00" opacity="0.3"/>
+
+  <!-- Bottom label -->
+  <rect x="240" y="830" width="544" height="76" rx="24" fill="white" filter="url(#sh3)"/>
+  <text x="512" y="868" font-family="Arial Black, sans-serif" font-size="42" fill="#4527A0"
+        text-anchor="middle" dominant-baseline="middle">Tag.Forge</text>
+</svg>

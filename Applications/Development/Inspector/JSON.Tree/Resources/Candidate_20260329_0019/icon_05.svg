@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_05: metaphor | 돋보기 내부에 JSON 구조 — X선처럼 들여다보기 | 중앙 심볼 | 연노랑+청록+파랑 -->
+  <defs>
+    <linearGradient id="bg5" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFF9E6"/>
+      <stop offset="100%" stop-color="#FFECB3"/>
+    </linearGradient>
+    <linearGradient id="lens" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#E0F7FA"/>
+      <stop offset="100%" stop-color="#B2EBF2"/>
+    </linearGradient>
+    <filter id="sh5" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="7" stdDeviation="9" flood-color="#006064" flood-opacity="0.25"/>
+    </filter>
+    <clipPath id="lens-clip">
+      <circle cx="440" cy="440" r="280"/>
+    </clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg5)"/>
+
+  <!-- Layer 2: Magnifier lens -->
+  <circle cx="440" cy="440" r="290" fill="white" filter="url(#sh5)"/>
+  <circle cx="440" cy="440" r="280" fill="url(#lens)"/>
+
+  <!-- JSON tree inside lens -->
+  <g clip-path="url(#lens-clip)" font-family="Consolas, monospace">
+    <!-- Root -->
+    <text x="200" y="270" font-size="44" fill="#FF6D00" font-weight="bold">{</text>
+    <!-- Line 1 -->
+    <line x1="225" y1="295" x2="225" y2="500" stroke="#B0BEC5" stroke-width="3"/>
+    <text x="255" y="340" font-size="36" fill="#1565C0">"name":</text>
+    <text x="500" y="340" font-size="36" fill="#2E7D32">"data"</text>
+    <!-- Line 2 -->
+    <text x="255" y="410" font-size="36" fill="#1565C0">"count":</text>
+    <text x="520" y="410" font-size="36" fill="#7B1FA2">128</text>
+    <!-- Line 3: array -->
+    <text x="255" y="480" font-size="36" fill="#1565C0">"items":</text>
+    <text x="505" y="480" font-size="36" fill="#E53935">[...]</text>
+    <!-- Close -->
+    <text x="200" y="540" font-size="44" fill="#FF6D00" font-weight="bold">}</text>
+  </g>
+
+  <!-- Lens frame (ring) -->
+  <circle cx="440" cy="440" r="280" fill="none" stroke="#00838F" stroke-width="44" filter="url(#sh5)"/>
+  <!-- Lens shine -->
+  <circle cx="360" cy="355" r="50" fill="white" opacity="0.3"/>
+
+  <!-- Layer 3: Handle -->
+  <line x1="668" y1="668" x2="900" y2="900" stroke="#00838F" stroke-width="60" stroke-linecap="round" filter="url(#sh5)"/>
+
+  <!-- Small braces floating outside -->
+  <text x="750" y="200" font-family="Arial Black, sans-serif" font-size="80" fill="#00838F" opacity="0.3">{ }</text>
+  <text x="820" y="340" font-family="Arial Black, sans-serif" font-size="60" fill="#00838F" opacity="0.2">[ ]</text>
+</svg>

@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_01: literal | 중복 파일 그룹 스캔 결과 UI — 파일명·크기·경로 | 공간/장면 | 파랑+주황+초록 -->
+  <defs>
+    <linearGradient id="bg1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#E3F2FD"/>
+      <stop offset="100%" stop-color="#BBDEFB"/>
+    </linearGradient>
+    <filter id="sh1" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="5" stdDeviation="7" flood-color="#1565C0" flood-opacity="0.2"/>
+    </filter>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg1)"/>
+
+  <!-- Window frame -->
+  <rect x="70" y="110" width="884" height="800" rx="20" fill="white" filter="url(#sh1)"/>
+  <!-- Title bar -->
+  <rect x="70" y="110" width="884" height="62" rx="20" fill="#1565C0"/>
+  <rect x="70" y="148" width="884" height="24" fill="#1565C0"/>
+  <text x="512" y="142" font-family="Arial Black, sans-serif" font-size="26" fill="white"
+        text-anchor="middle" dominant-baseline="middle">File.Duplicates — 중복 파일 탐색기</text>
+
+  <!-- Scan info bar -->
+  <rect x="94" y="192" width="836" height="44" fill="#E3F2FD" rx="8"/>
+  <text x="514" y="214" font-family="Arial, sans-serif" font-size="20" fill="#1565C0"
+        text-anchor="middle" dominant-baseline="middle">발견: 중복 그룹 3개 · 낭비 공간 847 MB</text>
+
+  <!-- Group 1 header -->
+  <rect x="94" y="254" width="836" height="40" rx="8" fill="#FF6F00"/>
+  <text x="130" y="274" font-family="Arial Black, sans-serif" font-size="20" fill="white"
+        dominant-baseline="middle">그룹 1 — 2개 파일 · SHA256 일치 · 각 12.4 MB</text>
+
+  <!-- Group 1 files -->
+  <rect x="110" y="294" width="820" height="44" fill="#FFF8E1"/>
+  <text x="140" y="316" font-family="Consolas, monospace" font-size="18" fill="#E65100"
+        dominant-baseline="middle">📄  C:\Users\admin\Documents\report_final.pdf</text>
+  <rect x="110" y="338" width="820" height="44" fill="#FFF3E0"/>
+  <text x="140" y="360" font-family="Consolas, monospace" font-size="18" fill="#E65100"
+        dominant-baseline="middle">📄  C:\Users\admin\Downloads\report_final.pdf</text>
+  <rect x="870" y="302" width="44" height="72" fill="none"/>
+  <circle cx="892" cy="316" r="16" fill="#E53935"/>
+  <text x="892" y="316" font-family="Arial, sans-serif" font-size="18" fill="white"
+        text-anchor="middle" dominant-baseline="middle">✕</text>
+  <circle cx="892" cy="360" r="16" fill="#E53935"/>
+  <text x="892" y="360" font-family="Arial, sans-serif" font-size="18" fill="white"
+        text-anchor="middle" dominant-baseline="middle">✕</text>
+
+  <!-- Group 2 header -->
+  <rect x="94" y="400" width="836" height="40" rx="8" fill="#6A1B9A"/>
+  <text x="130" y="420" font-family="Arial Black, sans-serif" font-size="20" fill="white"
+        dominant-baseline="middle">그룹 2 — 3개 파일 · 이미지 유사도 98% · 각 4.2 MB</text>
+
+  <!-- Group 2 files -->
+  <rect x="110" y="440" width="820" height="44" fill="#F3E5F5"/>
+  <text x="140" y="462" font-family="Consolas, monospace" font-size="18" fill="#4A148C"
+        dominant-baseline="middle">🖼  C:\Photos\vacation_001.jpg</text>
+  <rect x="110" y="484" width="820" height="44" fill="#EDE7F6"/>
+  <text x="140" y="506" font-family="Consolas, monospace" font-size="18" fill="#4A148C"
+        dominant-baseline="middle">🖼  C:\Backup\Photos\vacation_001.jpg</text>
+  <rect x="110" y="528" width="820" height="44" fill="#F3E5F5"/>
+  <text x="140" y="550" font-family="Consolas, monospace" font-size="18" fill="#4A148C"
+        dominant-baseline="middle">🖼  D:\Archive\vacation_001_copy.jpg</text>
+
+  <!-- Group 3 header -->
+  <rect x="94" y="590" width="836" height="40" rx="8" fill="#2E7D32"/>
+  <text x="130" y="610" font-family="Arial Black, sans-serif" font-size="20" fill="white"
+        dominant-baseline="middle">그룹 3 — 2개 파일 · SHA256 일치 · 각 234 MB</text>
+
+  <!-- Group 3 files -->
+  <rect x="110" y="630" width="820" height="44" fill="#E8F5E9"/>
+  <text x="140" y="652" font-family="Consolas, monospace" font-size="18" fill="#1B5E20"
+        dominant-baseline="middle">🎬  D:\Movies\movie_backup.mkv</text>
+  <rect x="110" y="674" width="820" height="44" fill="#F1F8E9"/>
+  <text x="140" y="696" font-family="Consolas, monospace" font-size="18" fill="#1B5E20"
+        dominant-baseline="middle">🎬  E:\Old\movie_backup.mkv</text>
+
+  <!-- Bottom action bar -->
+  <rect x="70" y="856" width="884" height="54" rx="14" fill="#E3F2FD" filter="url(#sh1)"/>
+  <rect x="350" y="866" width="200" height="34" rx="10" fill="#E53935" filter="url(#sh1)"/>
+  <text x="450" y="883" font-family="Arial Black, sans-serif" font-size="18" fill="white"
+        text-anchor="middle" dominant-baseline="middle">선택 삭제</text>
+  <rect x="580" y="866" width="220" height="34" rx="10" fill="#1565C0" filter="url(#sh1)"/>
+  <text x="690" y="883" font-family="Arial Black, sans-serif" font-size="18" fill="white"
+        text-anchor="middle" dominant-baseline="middle">휴지통으로</text>
+</svg>

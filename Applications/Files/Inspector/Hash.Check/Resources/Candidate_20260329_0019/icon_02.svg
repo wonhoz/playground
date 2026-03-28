@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_02: literal | 파일 → 해시 계산 흐름 | 레이어드 | 민트+파랑+보라 -->
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#E0F7FA"/>
+      <stop offset="100%" stop-color="#80DEEA"/>
+    </linearGradient>
+    <filter id="sh2" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#006064" flood-opacity="0.2"/>
+    </filter>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg2)"/>
+
+  <!-- Layer 2: File input card -->
+  <rect x="80" y="180" width="260" height="320" rx="24" fill="white" filter="url(#sh2)"/>
+  <!-- Dog-ear -->
+  <polygon points="280,180 340,240 280,240" fill="#E3F2FD"/>
+  <!-- File lines -->
+  <rect x="110" y="280" width="200" height="14" rx="7" fill="#BBDEFB"/>
+  <rect x="110" y="310" width="160" height="14" rx="7" fill="#BBDEFB"/>
+  <rect x="110" y="340" width="180" height="14" rx="7" fill="#BBDEFB"/>
+  <rect x="110" y="370" width="140" height="14" rx="7" fill="#BBDEFB"/>
+  <text x="210" y="450" font-family="Arial Black, sans-serif" font-size="30" fill="#1565C0"
+        text-anchor="middle" dominant-baseline="middle">FILE</text>
+
+  <!-- Arrow right -->
+  <rect x="370" y="318" width="140" height="44" rx="22" fill="#1565C0" filter="url(#sh2)"/>
+  <polygon points="510,280 580,340 510,400" fill="#1565C0" filter="url(#sh2)"/>
+
+  <!-- Hash function box -->
+  <rect x="580" y="160" width="300" height="360" rx="28" fill="#7B1FA2" filter="url(#sh2)"/>
+  <!-- Hash function label -->
+  <text x="730" y="260" font-family="Arial Black, sans-serif" font-size="44" fill="white"
+        text-anchor="middle" dominant-baseline="middle">SHA</text>
+  <text x="730" y="320" font-family="Arial Black, sans-serif" font-size="44" fill="white"
+        text-anchor="middle" dominant-baseline="middle">256</text>
+  <!-- Processing dots -->
+  <circle cx="680" cy="400" r="14" fill="#CE93D8"/>
+  <circle cx="730" cy="400" r="14" fill="#E1BEE7"/>
+  <circle cx="780" cy="400" r="14" fill="#F3E5F5"/>
+
+  <!-- Output arrow down -->
+  <rect x="706" y="540" width="44" height="120" rx="22" fill="#1565C0" filter="url(#sh2)"/>
+  <polygon points="640,660 730,740 820,660" fill="#1565C0" filter="url(#sh2)"/>
+
+  <!-- Layer 3: Hash output box -->
+  <rect x="80" y="750" width="864" height="160" rx="24" fill="white" filter="url(#sh2)"/>
+  <text x="110" y="810" font-family="Arial, sans-serif" font-size="26" fill="#546E7A"
+        dominant-baseline="middle">SHA256:</text>
+  <text x="110" y="860" font-family="Consolas, monospace" font-size="30" fill="#1565C0"
+        dominant-baseline="middle">a4f2b8c1e9d3f7a2... 8e9d</text>
+  <!-- Copy button -->
+  <rect x="820" y="780" width="110" height="56" rx="16" fill="#1565C0"/>
+  <text x="875" y="808" font-family="Arial, sans-serif" font-size="24" fill="white"
+        text-anchor="middle" dominant-baseline="middle">복사</text>
+  <!-- Verified badge -->
+  <circle cx="956" cy="808" r="22" fill="#43A047"/>
+  <text x="956" y="808" font-family="Arial, sans-serif" font-size="26" fill="white"
+        text-anchor="middle" dominant-baseline="middle">✓</text>
+</svg>

@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_06: hybrid | 포맷 2x2 그리드 + 순환 변환 화살표 | 중앙 심볼+레이어드 | 라임+파랑+핑크 -->
+  <!-- Layer 1: Background -->
+  <defs>
+    <linearGradient id="bg6" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#F0FFF0"/>
+      <stop offset="100%" stop-color="#A5D6A7"/>
+    </linearGradient>
+    <filter id="sh6" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="5" stdDeviation="7" flood-color="#1B5E20" flood-opacity="0.2"/>
+    </filter>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg6)"/>
+
+  <!-- Layer 2: 2x2 format grid cards -->
+  <!-- PNG - top-left, blue -->
+  <rect x="110" y="140" width="340" height="300" rx="28" fill="#1565C0" filter="url(#sh6)"/>
+  <text x="280" y="300" font-family="Arial Black, sans-serif" font-size="110" font-weight="900"
+        fill="white" text-anchor="middle" dominant-baseline="middle">PNG</text>
+
+  <!-- SVG - top-right, pink/magenta -->
+  <rect x="574" y="140" width="340" height="300" rx="28" fill="#EC407A" filter="url(#sh6)"/>
+  <text x="744" y="300" font-family="Arial Black, sans-serif" font-size="110" font-weight="900"
+        fill="white" text-anchor="middle" dominant-baseline="middle">SVG</text>
+
+  <!-- JPG - bottom-left, orange -->
+  <rect x="110" y="584" width="340" height="300" rx="28" fill="#FF7043" filter="url(#sh6)"/>
+  <text x="280" y="744" font-family="Arial Black, sans-serif" font-size="110" font-weight="900"
+        fill="white" text-anchor="middle" dominant-baseline="middle">JPG</text>
+
+  <!-- ICO - bottom-right, purple -->
+  <rect x="574" y="584" width="340" height="300" rx="28" fill="#7E57C2" filter="url(#sh6)"/>
+  <text x="744" y="744" font-family="Arial Black, sans-serif" font-size="110" font-weight="900"
+        fill="white" text-anchor="middle" dominant-baseline="middle">ICO</text>
+
+  <!-- Layer 3: Center cycle arrow (circular arrows) -->
+  <!-- Circular arrows (clockwise) -->
+  <g transform="translate(512,512)" filter="url(#sh6)">
+    <!-- Circle arc top-right -->
+    <path d="M0,-90 A90,90 0 0,1 90,0" stroke="white" stroke-width="28" fill="none" stroke-linecap="round"/>
+    <!-- Arrow head at end of top-right arc -->
+    <polygon points="90,0 60,-30 110,-15" fill="white"/>
+
+    <!-- Circle arc bottom-right -->
+    <path d="M90,0 A90,90 0 0,1 0,90" stroke="white" stroke-width="28" fill="none" stroke-linecap="round"/>
+    <polygon points="0,90 30,60 15,110" fill="white"/>
+
+    <!-- Circle arc bottom-left -->
+    <path d="M0,90 A90,90 0 0,1 -90,0" stroke="white" stroke-width="28" fill="none" stroke-linecap="round"/>
+    <polygon points="-90,0 -60,30 -110,15" fill="white"/>
+
+    <!-- Circle arc top-left -->
+    <path d="M-90,0 A90,90 0 0,1 0,-90" stroke="white" stroke-width="28" fill="none" stroke-linecap="round"/>
+    <polygon points="0,-90 -30,-60 -15,-110" fill="white"/>
+  </g>
+</svg>

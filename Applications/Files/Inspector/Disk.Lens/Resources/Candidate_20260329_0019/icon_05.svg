@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_05: metaphor | 탑처럼 쌓인 파일들 — 디스크 가득 참 | 레이어드 | 라임+초록+노랑 -->
+  <defs>
+    <linearGradient id="bg5" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#F9FBE7"/>
+      <stop offset="100%" stop-color="#C5E1A5"/>
+    </linearGradient>
+    <filter id="sh5" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#33691E" flood-opacity="0.2"/>
+    </filter>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg5)"/>
+
+  <!-- Layer 2: Stacked file/folder blocks (tower of data) -->
+  <!-- Base disk -->
+  <rect x="160" y="860" width="704" height="60" rx="18" fill="#37474F" filter="url(#sh5)"/>
+  <!-- Capacity fill indicator on base -->
+  <rect x="170" y="868" width="560" height="44" rx="12" fill="#FF7043"/>
+  <text x="450" y="890" font-family="Arial Black, sans-serif" font-size="28" fill="white"
+        dominant-baseline="middle">86% 사용</text>
+
+  <!-- Stack of folder blocks (bottom to top, getting smaller) -->
+  <!-- Bottom: Videos (largest, purple) -->
+  <rect x="200" y="730" width="624" height="100" rx="18" fill="#7B1FA2" filter="url(#sh5)"/>
+  <text x="512" y="780" font-family="Arial Black, sans-serif" font-size="44" fill="white"
+        text-anchor="middle" dominant-baseline="middle">📁 Videos — 86.5 GB</text>
+
+  <!-- Documents (blue) -->
+  <rect x="220" y="620" width="584" height="96" rx="18" fill="#1565C0" filter="url(#sh5)"/>
+  <text x="512" y="668" font-family="Arial Black, sans-serif" font-size="40" fill="white"
+        text-anchor="middle" dominant-baseline="middle">📁 Documents — 42.3 GB</text>
+
+  <!-- Downloads (orange) -->
+  <rect x="240" y="520" width="544" height="90" rx="18" fill="#FF7043" filter="url(#sh5)"/>
+  <text x="512" y="565" font-family="Arial Black, sans-serif" font-size="38" fill="white"
+        text-anchor="middle" dominant-baseline="middle">📁 Downloads — 28.1 GB</text>
+
+  <!-- AppData (green) -->
+  <rect x="270" y="430" width="484" height="82" rx="18" fill="#43A047" filter="url(#sh5)"/>
+  <text x="512" y="471" font-family="Arial Black, sans-serif" font-size="36" fill="white"
+        text-anchor="middle" dominant-baseline="middle">📁 AppData — 15.2 GB</text>
+
+  <!-- Pictures (teal) -->
+  <rect x="300" y="352" width="424" height="74" rx="18" fill="#00838F" filter="url(#sh5)"/>
+  <text x="512" y="389" font-family="Arial Black, sans-serif" font-size="32" fill="white"
+        text-anchor="middle" dominant-baseline="middle">📁 Pictures — 9.8 GB</text>
+
+  <!-- Desktop (light) -->
+  <rect x="340" y="286" width="344" height="62" rx="18" fill="#78909C" filter="url(#sh5)"/>
+  <text x="512" y="317" font-family="Arial Black, sans-serif" font-size="28" fill="white"
+        text-anchor="middle" dominant-baseline="middle">📁 Desktop — 3.1 GB</text>
+
+  <!-- Layer 3: Critical warning sign at top -->
+  <polygon points="512,120 420,240 604,240" fill="#E53935" filter="url(#sh5)"/>
+  <text x="512" y="218" font-family="Arial Black, sans-serif" font-size="66" fill="white"
+        text-anchor="middle" dominant-baseline="middle">!</text>
+</svg>

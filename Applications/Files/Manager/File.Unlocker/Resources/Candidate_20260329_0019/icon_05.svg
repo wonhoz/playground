@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_05: metaphor | 체인/족쇄가 끊기는 — 잠금 해제 은유 | 대각선/동적 | 빨강+흰+초록 -->
+  <defs>
+    <linearGradient id="bg5" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFEBEE"/>
+      <stop offset="100%" stop-color="#EF9A9A"/>
+    </linearGradient>
+    <filter id="sh5" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="7" stdDeviation="9" flood-color="#B71C1C" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg5)"/>
+
+  <!-- Layer 2: Chain links (left side, still connected) -->
+  <!-- Link 1 -->
+  <rect x="80" y="440" width="130" height="84" rx="42" fill="none" stroke="#546E7A" stroke-width="24"/>
+  <!-- Link 2 -->
+  <rect x="160" y="500" width="84" height="130" rx="42" fill="none" stroke="#546E7A" stroke-width="24" transform="rotate(90, 202, 565)"/>
+  <!-- Link 3 -->
+  <rect x="234" y="440" width="130" height="84" rx="42" fill="none" stroke="#546E7A" stroke-width="24"/>
+  <!-- Link 4 -->
+  <rect x="314" y="500" width="84" height="130" rx="42" fill="none" stroke="#546E7A" stroke-width="24" transform="rotate(90, 356, 565)"/>
+
+  <!-- Break point (center burst) -->
+  <!-- Explosion at break point -->
+  <circle cx="512" cy="512" r="80" fill="#E53935" filter="url(#sh5)"/>
+  <circle cx="512" cy="512" r="60" fill="#FFCDD2"/>
+  <!-- Break lines -->
+  <line x1="460" y1="460" x2="420" y2="420" stroke="#E53935" stroke-width="14" stroke-linecap="round"/>
+  <line x1="564" y1="460" x2="604" y2="420" stroke="#E53935" stroke-width="14" stroke-linecap="round"/>
+  <line x1="460" y1="564" x2="420" y2="604" stroke="#E53935" stroke-width="14" stroke-linecap="round"/>
+  <line x1="564" y1="564" x2="604" y2="604" stroke="#E53935" stroke-width="14" stroke-linecap="round"/>
+  <!-- Cut mark -->
+  <line x1="470" y1="512" x2="554" y2="512" stroke="white" stroke-width="10" stroke-dasharray="20,12"/>
+
+  <!-- Right side: chain links (broken free) -->
+  <!-- Link 5 - moving away, green tint -->
+  <rect x="560" y="430" width="130" height="84" rx="42" fill="none" stroke="#43A047" stroke-width="24"
+        transform="rotate(15, 625, 472)"/>
+  <!-- Link 6 -->
+  <rect x="650" y="490" width="84" height="130" rx="42" fill="none" stroke="#43A047" stroke-width="24"
+        transform="rotate(25, 692, 555)"/>
+  <!-- Link 7 -->
+  <rect x="730" y="380" width="130" height="84" rx="42" fill="none" stroke="#66BB6A" stroke-width="24"
+        transform="rotate(30, 795, 422)"/>
+
+  <!-- Layer 3: File freed (top right) + checkmark -->
+  <g filter="url(#sh5)">
+    <rect x="740" y="100" width="180" height="220" rx="16" fill="white"/>
+    <polygon points="860,100 920,160 860,160" fill="#AED581"/>
+    <!-- File lines -->
+    <rect x="768" y="188" width="116" height="12" rx="6" fill="#C5E1A5"/>
+    <rect x="768" y="212" width="90" height="12" rx="6" fill="#C5E1A5"/>
+    <rect x="768" y="236" width="106" height="12" rx="6" fill="#C5E1A5"/>
+  </g>
+  <!-- Success check on file -->
+  <circle cx="920" cy="320" r="52" fill="#43A047" filter="url(#sh5)"/>
+  <text x="920" y="320" font-family="Arial, sans-serif" font-size="62" fill="white"
+        text-anchor="middle" dominant-baseline="middle">✓</text>
+</svg>

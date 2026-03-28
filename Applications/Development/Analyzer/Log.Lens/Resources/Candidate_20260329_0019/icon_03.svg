@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_03: metaphor | 돋보기(Lens) + 로그 텍스트 | 중앙 심볼 | 하늘+청록돋보기+빨강 -->
+  <defs>
+    <linearGradient id="bg3" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#E0F7FA"/>
+      <stop offset="100%" stop-color="#80DEEA"/>
+    </linearGradient>
+    <filter id="sh3" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="7" stdDeviation="9" flood-color="#006064" flood-opacity="0.25"/>
+    </filter>
+    <clipPath id="lens3">
+      <circle cx="430" cy="430" r="280"/>
+    </clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg3)"/>
+
+  <!-- Layer 2: Lens background -->
+  <circle cx="430" cy="430" r="290" fill="white" filter="url(#sh3)"/>
+  <circle cx="430" cy="430" r="280" fill="#FAFAFA"/>
+
+  <!-- Log lines inside lens -->
+  <g clip-path="url(#lens3)" font-family="Consolas, monospace">
+    <!-- INFO line -->
+    <rect x="162" y="230" width="536" height="46" rx="4" fill="#E8F5E9"/>
+    <text x="178" y="253" font-size="30" fill="#546E7A" dominant-baseline="middle">09:00 </text>
+    <rect x="270" y="237" width="84" height="32" rx="6" fill="#43A047"/>
+    <text x="312" y="253" font-size="22" fill="white" text-anchor="middle" dominant-baseline="middle">INFO</text>
+    <text x="365" y="253" font-size="28" fill="#37474F" dominant-baseline="middle"> OK response</text>
+
+    <!-- WARN line -->
+    <rect x="162" y="290" width="536" height="46" rx="4" fill="#FFFDE7"/>
+    <text x="178" y="313" font-size="30" fill="#546E7A" dominant-baseline="middle">09:01 </text>
+    <rect x="270" y="297" width="88" height="32" rx="6" fill="#FFC107"/>
+    <text x="314" y="313" font-size="22" fill="white" text-anchor="middle" dominant-baseline="middle">WARN</text>
+    <text x="368" y="313" font-size="28" fill="#37474F" dominant-baseline="middle"> slow query</text>
+
+    <!-- ERROR line (highlighted, in focus) -->
+    <rect x="152" y="350" width="556" height="54" rx="6" fill="#FFCDD2"/>
+    <rect x="152" y="350" width="8" height="54" rx="4" fill="#E53935"/>
+    <text x="170" y="377" font-size="30" fill="#546E7A" dominant-baseline="middle">09:02 </text>
+    <rect x="268" y="357" width="100" height="36" rx="6" fill="#E53935"/>
+    <text x="318" y="377" font-size="22" fill="white" text-anchor="middle" dominant-baseline="middle">ERROR</text>
+    <text x="378" y="377" font-size="28" fill="#B71C1C" dominant-baseline="middle"> NullRef!</text>
+
+    <!-- INFO line -->
+    <rect x="162" y="418" width="536" height="46" rx="4" fill="#E8F5E9"/>
+    <text x="178" y="441" font-size="30" fill="#546E7A" dominant-baseline="middle">09:03 </text>
+    <rect x="270" y="425" width="84" height="32" rx="6" fill="#43A047"/>
+    <text x="312" y="441" font-size="22" fill="white" text-anchor="middle" dominant-baseline="middle">INFO</text>
+    <text x="365" y="441" font-size="28" fill="#37474F" dominant-baseline="middle"> reconnected</text>
+
+    <!-- Fade line -->
+    <rect x="162" y="478" width="536" height="40" rx="4" fill="#F5F5F5" opacity="0.7"/>
+    <rect x="162" y="530" width="536" height="40" rx="4" fill="#F5F5F5" opacity="0.4"/>
+  </g>
+
+  <!-- Lens ring -->
+  <circle cx="430" cy="430" r="280" fill="none" stroke="#00838F" stroke-width="44" filter="url(#sh3)"/>
+  <!-- Lens shine -->
+  <circle cx="348" cy="348" r="55" fill="white" opacity="0.28"/>
+
+  <!-- Layer 3: Handle -->
+  <line x1="655" y1="655" x2="900" y2="900" stroke="#00838F" stroke-width="60" stroke-linecap="round" filter="url(#sh3)"/>
+</svg>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>Icon.Hunt — Icon Candidates</title>
+<style>
+  body { margin: 0; background: #1E1A2E; font-family: 'Segoe UI', sans-serif; padding: 40px; }
+  h1 { color: #CE93D8; text-align: center; font-size: 28px; margin-bottom: 6px; }
+  p.sub { color: #888; text-align: center; margin-bottom: 40px; font-size: 14px; }
+  .grid { display: flex; flex-wrap: wrap; gap: 32px; justify-content: center; }
+  .card {
+    background: #2A2240; border-radius: 18px; padding: 28px;
+    text-align: center; width: 260px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: 1px solid #3A2E5A;
+  }
+  .card:hover { transform: scale(1.08); box-shadow: 0 12px 40px rgba(206,147,216,0.25); }
+  .card img { width: 160px; height: 160px; border-radius: 12px; }
+  .card .name { color: #E0E0E0; font-size: 15px; font-weight: 600; margin-top: 14px; }
+  .card .type { margin-top: 4px; font-size: 12px; padding: 3px 10px; border-radius: 20px; display: inline-block; }
+  .literal  { background: #1565C0; color: #fff; }
+  .metaphor { background: #7B1FA2; color: #fff; }
+  .hybrid   { background: #2E7D32; color: #fff; }
+  .card .concept { color: #9E9E9E; font-size: 12px; margin-top: 8px; line-height: 1.5; }
+  .palette { display: flex; gap: 6px; justify-content: center; margin-top: 10px; }
+  .swatch { width: 22px; height: 22px; border-radius: 50%; border: 2px solid #444; }
+</style>
+</head>
+<body>
+<h1>Icon.Hunt</h1>
+<p class="sub">Iconify SVG 아이콘 검색·즐겨찾기·관리 — Candidate_20260329_0019</p>
+<div class="grid">
+  <div class="card">
+    <img src="icon_01.svg" alt="icon_01">
+    <div class="name">icon_01</div>
+    <span class="type literal">literal</span>
+    <div class="concept">돋보기 + 아이콘 격자<br>(집·하트·별·설정 등)</div>
+    <div class="palette">
+      <div class="swatch" style="background:#64B5F6" title="하늘 배경"></div>
+      <div class="swatch" style="background:#FFFFFF" title="흰 카드"></div>
+      <div class="swatch" style="background:#E53935" title="빨강 돋보기"></div>
+    </div>
+  </div>
+  <div class="card">
+    <img src="icon_02.svg" alt="icon_02">
+    <div class="name">icon_02</div>
+    <span class="type literal">literal</span>
+    <div class="concept">검색창("ICON") + 결과<br>아이콘 카드 목록 장면</div>
+    <div class="palette">
+      <div class="swatch" style="background:#80CBC4" title="민트 배경"></div>
+      <div class="swatch" style="background:#1565C0" title="파랑 검색창"></div>
+      <div class="swatch" style="background:#FFD740" title="노랑 별"></div>
+    </div>
+  </div>
+  <div class="card">
+    <img src="icon_03.svg" alt="icon_03">
+    <div class="name">icon_03</div>
+    <span class="type metaphor">metaphor</span>
+    <div class="concept">수많은 별 중 황금 대형 별<br>부각 — 아이콘 사냥 성공 은유</div>
+    <div class="palette">
+      <div class="swatch" style="background:#B39DDB" title="라벤더 배경"></div>
+      <div class="swatch" style="background:#FFD700" title="황금 별"></div>
+      <div class="swatch" style="background:#7E57C2" title="보라 돋보기"></div>
+    </div>
+  </div>
+  <div class="card">
+    <img src="icon_04.svg" alt="icon_04">
+    <div class="name">icon_04</div>
+    <span class="type metaphor">metaphor</span>
+    <div class="concept">나침반 — 아이콘을 정확히<br>찾아가는 탐색 은유</div>
+    <div class="palette">
+      <div class="swatch" style="background:#FF8A65" title="산호 배경"></div>
+      <div class="swatch" style="background:#FFFFFF" title="흰 나침반"></div>
+      <div class="swatch" style="background:#E53935" title="빨강 바늘"></div>
+    </div>
+  </div>
+  <div class="card">
+    <img src="icon_05.svg" alt="icon_05">
+    <div class="name">icon_05</div>
+    <span class="type metaphor">metaphor</span>
+    <div class="concept">말굽 자석 — 아이콘들을<br>끌어당기는 사냥 은유</div>
+    <div class="palette">
+      <div class="swatch" style="background:#FFEE58" title="노랑 배경"></div>
+      <div class="swatch" style="background:#E53935" title="빨강 자석(S)"></div>
+      <div class="swatch" style="background:#1565C0" title="파랑 자석(N)"></div>
+    </div>
+  </div>
+  <div class="card">
+    <img src="icon_06.svg" alt="icon_06">
+    <div class="name">icon_06</div>
+    <span class="type hybrid">hybrid</span>
+    <div class="concept">"ICON HUNT" 레터링<br>+ 주황 돋보기 오버레이</div>
+    <div class="palette">
+      <div class="swatch" style="background:#C5E1A5" title="라임 배경"></div>
+      <div class="swatch" style="background:#7E57C2" title="보라 텍스트"></div>
+      <div class="swatch" style="background:#FF6D00" title="주황 돋보기"></div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

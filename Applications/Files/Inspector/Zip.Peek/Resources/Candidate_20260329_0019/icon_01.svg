@@ -1,0 +1,123 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_01: literal | ZIP 파일 열면 나타나는 파일 트리 UI — 폴더/파일/크기/압축률 | 공간/장면 | 하늘+파랑+주황 -->
+  <defs>
+    <linearGradient id="bg1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#E3F2FD"/>
+      <stop offset="100%" stop-color="#BBDEFB"/>
+    </linearGradient>
+    <filter id="sh1" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="5" stdDeviation="7" flood-color="#1565C0" flood-opacity="0.2"/>
+    </filter>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg1)"/>
+
+  <!-- Main window -->
+  <rect x="70" y="100" width="884" height="820" rx="20" fill="white" filter="url(#sh1)"/>
+  <!-- Title bar -->
+  <rect x="70" y="100" width="884" height="60" rx="20" fill="#1565C0"/>
+  <rect x="70" y="136" width="884" height="24" fill="#1565C0"/>
+  <text x="512" y="131" font-family="Arial Black, sans-serif" font-size="26" fill="white"
+        text-anchor="middle" dominant-baseline="middle">Zip.Peek — archive.zip</text>
+
+  <!-- Column headers -->
+  <rect x="86" y="180" width="852" height="36" fill="#E3F2FD" rx="6"/>
+  <text x="120" y="198" font-family="Arial, sans-serif" font-size="16" fill="#546E7A"
+        dominant-baseline="middle">이름</text>
+  <text x="640" y="198" font-family="Arial, sans-serif" font-size="16" fill="#546E7A"
+        dominant-baseline="middle">크기</text>
+  <text x="740" y="198" font-family="Arial, sans-serif" font-size="16" fill="#546E7A"
+        dominant-baseline="middle">압축 후</text>
+  <text x="860" y="198" font-family="Arial, sans-serif" font-size="16" fill="#546E7A"
+        dominant-baseline="middle">절감</text>
+
+  <!-- Tree rows -->
+  <!-- Root folder -->
+  <rect x="86" y="220" width="852" height="46" fill="#EFF8FF" rx="4"/>
+  <text x="110" y="243" font-family="Arial, sans-serif" font-size="22" fill="#1565C0"
+        dominant-baseline="middle">📁</text>
+  <text x="140" y="243" font-family="Arial Black, sans-serif" font-size="18" fill="#1565C0"
+        dominant-baseline="middle">📦  archive.zip</text>
+  <text x="632" y="243" font-family="Consolas, monospace" font-size="18" fill="#546E7A"
+        dominant-baseline="middle">48.3 MB</text>
+  <text x="732" y="243" font-family="Consolas, monospace" font-size="18" fill="#546E7A"
+        dominant-baseline="middle">12.1 MB</text>
+  <text x="852" y="243" font-family="Consolas, monospace" font-size="18" fill="#43A047"
+        dominant-baseline="middle">75%</text>
+
+  <!-- Subfolder: src -->
+  <rect x="86" y="268" width="852" height="44" rx="4"/>
+  <text x="148" y="290" font-family="Arial, sans-serif" font-size="20" fill="#FF6F00"
+        dominant-baseline="middle">📁  src/</text>
+  <text x="632" y="290" font-family="Consolas, monospace" font-size="18" fill="#546E7A"
+        dominant-baseline="middle">22.1 MB</text>
+  <text x="732" y="290" font-family="Consolas, monospace" font-size="18" fill="#546E7A"
+        dominant-baseline="middle">5.8 MB</text>
+  <text x="852" y="290" font-family="Consolas, monospace" font-size="18" fill="#43A047"
+        dominant-baseline="middle">74%</text>
+
+  <!-- Source files -->
+  <rect x="86" y="314" width="852" height="40" fill="#FAFAFA" rx="4"/>
+  <text x="188" y="334" font-family="Arial, sans-serif" font-size="18" fill="#546E7A"
+        dominant-baseline="middle">📝  main.cs</text>
+  <text x="632" y="334" font-family="Consolas, monospace" font-size="18" fill="#546E7A"
+        dominant-baseline="middle">14.2 KB</text>
+  <text x="732" y="334" font-family="Consolas, monospace" font-size="18" fill="#546E7A"
+        dominant-baseline="middle">3.1 KB</text>
+  <text x="852" y="334" font-family="Consolas, monospace" font-size="18" fill="#43A047"
+        dominant-baseline="middle">78%</text>
+
+  <rect x="86" y="356" width="852" height="40" rx="4"/>
+  <text x="188" y="376" font-family="Arial, sans-serif" font-size="18" fill="#546E7A"
+        dominant-baseline="middle">📝  App.xaml.cs</text>
+  <text x="632" y="376" font-family="Consolas, monospace" font-size="18" fill="#546E7A"
+        dominant-baseline="middle">8.6 KB</text>
+
+  <!-- Subfolder: Resources (selected) -->
+  <rect x="86" y="398" width="852" height="44" fill="#E3F2FD" rx="4"/>
+  <text x="148" y="420" font-family="Arial, sans-serif" font-size="20" fill="#FF6F00"
+        dominant-baseline="middle">📁  Resources/ ▼</text>
+  <text x="632" y="420" font-family="Consolas, monospace" font-size="18" fill="#546E7A"
+        dominant-baseline="middle">18.4 MB</text>
+
+  <!-- Images inside -->
+  <rect x="86" y="444" width="852" height="40" fill="#FFFDE7" rx="4"/>
+  <text x="228" y="464" font-family="Arial, sans-serif" font-size="18" fill="#546E7A"
+        dominant-baseline="middle">🖼  banner.png</text>
+  <text x="632" y="464" font-family="Consolas, monospace" font-size="18" fill="#546E7A"
+        dominant-baseline="middle">5.2 MB</text>
+  <text x="732" y="464" font-family="Consolas, monospace" font-size="18" fill="#546E7A"
+        dominant-baseline="middle">4.8 MB</text>
+  <text x="852" y="464" font-family="Consolas, monospace" font-size="18" fill="#F9A825"
+        dominant-baseline="middle">8%</text>
+
+  <rect x="86" y="486" width="852" height="40" rx="4"/>
+  <text x="228" y="506" font-family="Arial, sans-serif" font-size="18" fill="#546E7A"
+        dominant-baseline="middle">🖼  icon.ico</text>
+  <text x="632" y="506" font-family="Consolas, monospace" font-size="18" fill="#546E7A"
+        dominant-baseline="middle">256 KB</text>
+
+  <!-- More rows (faded) -->
+  <rect x="86" y="528" width="852" height="40" fill="#FAFAFA" rx="4"/>
+  <text x="148" y="548" font-family="Arial, sans-serif" font-size="18" fill="#546E7A"
+        dominant-baseline="middle">📄  README.md</text>
+  <text x="632" y="548" font-family="Consolas, monospace" font-size="18" fill="#546E7A"
+        dominant-baseline="middle">4.8 KB</text>
+  <text x="852" y="548" font-family="Consolas, monospace" font-size="18" fill="#43A047"
+        dominant-baseline="middle">82%</text>
+
+  <rect x="86" y="570" width="852" height="40" rx="4"/>
+  <text x="148" y="590" font-family="Arial, sans-serif" font-size="18" fill="#546E7A"
+        dominant-baseline="middle">📕  manual.pdf</text>
+  <text x="632" y="590" font-family="Consolas, monospace" font-size="18" fill="#546E7A"
+        dominant-baseline="middle">2.1 MB</text>
+
+  <!-- Search bar at bottom -->
+  <rect x="86" y="628" width="500" height="44" rx="16" fill="#F5F5F5" filter="url(#sh1)"/>
+  <text x="116" y="650" font-family="Arial, sans-serif" font-size="20" fill="#90A4AE"
+        dominant-baseline="middle">🔍 파일 검색...</text>
+
+  <!-- Status bar -->
+  <rect x="86" y="692" width="852" height="44" rx="12" fill="#E3F2FD" filter="url(#sh1)"/>
+  <text x="512" y="714" font-family="Arial, sans-serif" font-size="18" fill="#1565C0"
+        text-anchor="middle" dominant-baseline="middle">총 127개 항목 · 원본 48.3 MB → 압축 12.1 MB (75% 절감)</text>
+</svg>

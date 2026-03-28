@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_01: literal | [INFO]·[WARN]·[ERROR] 로그 라인 컬러 코딩 | 공간/장면 | 흰패널+초록+노랑+빨강 -->
+  <defs>
+    <linearGradient id="bg1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ECEFF1"/>
+      <stop offset="100%" stop-color="#CFD8DC"/>
+    </linearGradient>
+    <filter id="sh1" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="5" stdDeviation="7" flood-color="#455A64" flood-opacity="0.2"/>
+    </filter>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg1)"/>
+
+  <!-- Layer 2: Log viewer panel -->
+  <rect x="60" y="80" width="904" height="864" rx="24" fill="white" filter="url(#sh1)"/>
+  <!-- Title bar -->
+  <rect x="60" y="80" width="904" height="72" rx="24" fill="#37474F"/>
+  <rect x="60" y="126" width="904" height="26" fill="#37474F"/>
+  <text x="512" y="116" font-family="Arial, sans-serif" font-size="32" fill="#90A4AE"
+        text-anchor="middle" dominant-baseline="middle">application.log</text>
+
+  <!-- Layer 3: Log lines -->
+  <!-- INFO line -->
+  <rect x="72" y="178" width="880" height="68" rx="6" fill="#E8F5E9"/>
+  <rect x="72" y="178" width="8" height="68" rx="4" fill="#43A047"/>
+  <text x="96" y="212" font-family="Consolas, monospace" font-size="36" fill="#546E7A"
+        dominant-baseline="middle">09:00:01</text>
+  <rect x="288" y="190" width="118" height="44" rx="8" fill="#43A047"/>
+  <text x="347" y="212" font-family="Arial Black, sans-serif" font-size="30" fill="white"
+        text-anchor="middle" dominant-baseline="middle">INFO</text>
+  <text x="420" y="212" font-family="Consolas, monospace" font-size="34" fill="#37474F"
+        dominant-baseline="middle">  Server started on :8080</text>
+
+  <!-- INFO line 2 -->
+  <rect x="72" y="258" width="880" height="68" rx="6" fill="#E8F5E9"/>
+  <rect x="72" y="258" width="8" height="68" rx="4" fill="#43A047"/>
+  <text x="96" y="292" font-family="Consolas, monospace" font-size="36" fill="#546E7A"
+        dominant-baseline="middle">09:00:04</text>
+  <rect x="288" y="270" width="118" height="44" rx="8" fill="#43A047"/>
+  <text x="347" y="292" font-family="Arial Black, sans-serif" font-size="30" fill="white"
+        text-anchor="middle" dominant-baseline="middle">INFO</text>
+  <text x="420" y="292" font-family="Consolas, monospace" font-size="34" fill="#37474F"
+        dominant-baseline="middle">  Request /api/users 200</text>
+
+  <!-- WARN line -->
+  <rect x="72" y="338" width="880" height="68" rx="6" fill="#FFFDE7"/>
+  <rect x="72" y="338" width="8" height="68" rx="4" fill="#FFC107"/>
+  <text x="96" y="372" font-family="Consolas, monospace" font-size="36" fill="#546E7A"
+        dominant-baseline="middle">09:00:12</text>
+  <rect x="288" y="350" width="120" height="44" rx="8" fill="#FFC107"/>
+  <text x="348" y="372" font-family="Arial Black, sans-serif" font-size="30" fill="white"
+        text-anchor="middle" dominant-baseline="middle">WARN</text>
+  <text x="422" y="372" font-family="Consolas, monospace" font-size="34" fill="#37474F"
+        dominant-baseline="middle">  Slow query: 2.4s</text>
+
+  <!-- ERROR line (highlighted) -->
+  <rect x="72" y="418" width="880" height="68" rx="6" fill="#FFEBEE"/>
+  <rect x="72" y="418" width="8" height="68" rx="4" fill="#E53935"/>
+  <text x="96" y="452" font-family="Consolas, monospace" font-size="36" fill="#546E7A"
+        dominant-baseline="middle">09:00:19</text>
+  <rect x="288" y="430" width="132" height="44" rx="8" fill="#E53935"/>
+  <text x="354" y="452" font-family="Arial Black, sans-serif" font-size="30" fill="white"
+        text-anchor="middle" dominant-baseline="middle">ERROR</text>
+  <text x="434" y="452" font-family="Consolas, monospace" font-size="34" fill="#B71C1C"
+        dominant-baseline="middle">  NullRef in UserService</text>
+
+  <!-- ERROR line 2 -->
+  <rect x="72" y="498" width="880" height="68" rx="6" fill="#FFEBEE"/>
+  <rect x="72" y="498" width="8" height="68" rx="4" fill="#E53935"/>
+  <text x="96" y="532" font-family="Consolas, monospace" font-size="36" fill="#546E7A"
+        dominant-baseline="middle">09:00:19</text>
+  <rect x="288" y="510" width="132" height="44" rx="8" fill="#E53935"/>
+  <text x="354" y="532" font-family="Arial Black, sans-serif" font-size="30" fill="white"
+        text-anchor="middle" dominant-baseline="middle">ERROR</text>
+  <text x="434" y="532" font-family="Consolas, monospace" font-size="34" fill="#B71C1C"
+        dominant-baseline="middle">  at UserService.Get()</text>
+
+  <!-- INFO line -->
+  <rect x="72" y="578" width="880" height="68" rx="6" fill="#E8F5E9"/>
+  <rect x="72" y="578" width="8" height="68" rx="4" fill="#43A047"/>
+  <text x="96" y="612" font-family="Consolas, monospace" font-size="36" fill="#546E7A"
+        dominant-baseline="middle">09:00:21</text>
+  <rect x="288" y="590" width="118" height="44" rx="8" fill="#43A047"/>
+  <text x="347" y="612" font-family="Arial Black, sans-serif" font-size="30" fill="white"
+        text-anchor="middle" dominant-baseline="middle">INFO</text>
+  <text x="420" y="612" font-family="Consolas, monospace" font-size="34" fill="#37474F"
+        dominant-baseline="middle">  Retrying connection...</text>
+
+  <!-- Fading lines -->
+  <rect x="72" y="658" width="880" height="56" rx="6" fill="#F5F5F5" opacity="0.8"/>
+  <rect x="72" y="726" width="880" height="56" rx="6" fill="#F5F5F5" opacity="0.5"/>
+  <rect x="72" y="794" width="880" height="56" rx="6" fill="#F5F5F5" opacity="0.3"/>
+  <rect x="72" y="862" width="880" height="56" rx="6" fill="#F5F5F5" opacity="0.15"/>
+</svg>

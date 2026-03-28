@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_05: metaphor | 자석 — 원하는 아이콘을 끌어당기는 자석 은유 | 대각선/동적 | 노랑+빨강+파랑 -->
+  <defs>
+    <linearGradient id="bg5" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFFDE7"/>
+      <stop offset="100%" stop-color="#FFEE58"/>
+    </linearGradient>
+    <filter id="sh5" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#F57F17" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg5)"/>
+
+  <!-- Layer 2: Horseshoe magnet (U-shape, large) -->
+  <!-- Left arm -->
+  <rect x="220" y="200" width="130" height="450" rx="65" fill="#E53935" filter="url(#sh5)"/>
+  <!-- Right arm -->
+  <rect x="674" y="200" width="130" height="450" rx="65" fill="#1565C0" filter="url(#sh5)"/>
+  <!-- Top connecting arc -->
+  <path d="M285,200 Q512,80 739,200" fill="none" stroke="#333333" stroke-width="130"
+        stroke-linecap="round" filter="url(#sh5)"/>
+  <!-- Pole tips (left=red, right=blue) -->
+  <rect x="220" y="580" width="130" height="80" rx="20" fill="#B71C1C"/>
+  <rect x="674" y="580" width="130" height="80" rx="20" fill="#0D47A1"/>
+  <!-- S and N labels -->
+  <text x="285" y="635" font-family="Arial Black, sans-serif" font-size="64" font-weight="900"
+        fill="white" text-anchor="middle" dominant-baseline="middle">S</text>
+  <text x="739" y="635" font-family="Arial Black, sans-serif" font-size="64" font-weight="900"
+        fill="white" text-anchor="middle" dominant-baseline="middle">N</text>
+
+  <!-- Layer 3: Small icon cards flying toward magnet tips -->
+  <!-- Heart flying to left (red) -->
+  <g transform="rotate(20, 145, 720)" filter="url(#sh5)">
+    <rect x="85" y="685" width="120" height="120" rx="16" fill="white"/>
+    <path d="M145,710 C145,703 133,697 126,706 C119,697 107,703 107,710 C107,720 145,742 145,742 C145,742 183,720 183,710 C183,703 171,697 164,706 C157,697 145,703 145,710Z" fill="#EF5350"/>
+  </g>
+  <!-- Motion line to left tip -->
+  <line x1="200" y1="720" x2="250" y2="660" stroke="#E53935" stroke-width="8" stroke-linecap="round"
+        stroke-dasharray="18,12" opacity="0.6"/>
+
+  <!-- Star flying to right (blue) -->
+  <g transform="rotate(-15, 870, 720)" filter="url(#sh5)">
+    <rect x="810" y="685" width="120" height="120" rx="16" fill="white"/>
+    <polygon points="870,700 880,727 910,727 887,744 896,771 870,754 844,771 853,744 830,727 860,727"
+             fill="#FFD740"/>
+  </g>
+  <!-- Motion line to right tip -->
+  <line x1="820" y1="720" x2="775" y2="660" stroke="#1565C0" stroke-width="8" stroke-linecap="round"
+        stroke-dasharray="18,12" opacity="0.6"/>
+
+  <!-- Small floating icons around -->
+  <circle cx="390" cy="820" r="30" fill="white" filter="url(#sh5)" opacity="0.8"/>
+  <text x="390" y="820" font-family="Arial, sans-serif" font-size="30"
+        text-anchor="middle" dominant-baseline="middle">☁</text>
+  <circle cx="634" cy="820" r="30" fill="white" filter="url(#sh5)" opacity="0.8"/>
+  <text x="634" y="820" font-family="Arial, sans-serif" font-size="30"
+        text-anchor="middle" dominant-baseline="middle">🔔</text>
+</svg>

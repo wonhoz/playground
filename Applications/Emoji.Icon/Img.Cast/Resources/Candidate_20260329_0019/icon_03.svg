@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_03: metaphor | 주조 틀(mold) — 다양한 형태가 하나의 완성형으로 | 기하학 추상 | 황금+빨강+파랑 -->
+  <!-- Layer 1: Background -->
+  <defs>
+    <linearGradient id="bg3" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFF8E1"/>
+      <stop offset="100%" stop-color="#FFE082"/>
+    </linearGradient>
+    <linearGradient id="mold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FF6F00"/>
+      <stop offset="100%" stop-color="#E65100"/>
+    </linearGradient>
+    <filter id="sh3" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#A05000" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg3)"/>
+
+  <!-- Layer 2: Central mold/funnel shape -->
+  <!-- Input shapes (top): different forms going in -->
+  <!-- Circle (PNG) -->
+  <circle cx="220" cy="200" r="90" fill="#E53935" filter="url(#sh3)" opacity="0.9"/>
+  <!-- Triangle (SVG) -->
+  <polygon points="512,110 642,310 382,310" fill="#1E88E5" filter="url(#sh3)" opacity="0.9"/>
+  <!-- Square (BMP) -->
+  <rect x="720" y="120" width="170" height="170" rx="16" fill="#43A047" filter="url(#sh3)" opacity="0.9"/>
+
+  <!-- Funnel/mold body -->
+  <path d="M140,340 L884,340 L680,600 L344,600 Z" fill="url(#mold)" filter="url(#sh3)"/>
+  <!-- Funnel neck -->
+  <rect x="344" y="600" width="336" height="80" rx="12" fill="#BF360C" filter="url(#sh3)"/>
+
+  <!-- Layer 3: Output — perfect ICO file icon -->
+  <rect x="360" y="710" width="304" height="220" rx="24" fill="white" filter="url(#sh3)"/>
+  <!-- Dog-ear fold -->
+  <polygon points="604,710 664,770 604,770" fill="#FFD54F"/>
+  <!-- ICO text -->
+  <text x="500" y="845" font-family="Arial Black, sans-serif" font-size="100" font-weight="900"
+        fill="#E65100" text-anchor="middle" dominant-baseline="middle">ICO</text>
+  <!-- Stars/sparkles -->
+  <circle cx="300" cy="720" r="20" fill="#FFD740"/>
+  <circle cx="260" cy="760" r="13" fill="#FFD740" opacity="0.7"/>
+  <circle cx="740" cy="730" r="20" fill="#FFD740"/>
+  <circle cx="780" cy="770" r="13" fill="#FFD740" opacity="0.7"/>
+</svg>

@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_06: hybrid | 🔓 잠금해제 + 파일 아이콘 | 중앙 심볼 | 코랄+금+흰 -->
+  <defs>
+    <linearGradient id="bg6" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFCCBC"/>
+      <stop offset="100%" stop-color="#FF8A65"/>
+    </linearGradient>
+    <filter id="sh6" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="7" stdDeviation="9" flood-color="#BF360C" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg6)"/>
+
+  <!-- Layer 2: Large open padlock -->
+  <!-- Lock body -->
+  <rect x="240" y="420" width="544" height="440" rx="50" fill="white" filter="url(#sh6)"/>
+  <!-- Shackle (open - raised left arm) -->
+  <path d="M310,420 C310,200 280,180 280,280" fill="none" stroke="white" stroke-width="70"
+        stroke-linecap="round" filter="url(#sh6)"/>
+  <path d="M650,420 L650,280 C650,200 310,200 310,280" fill="none" stroke="white" stroke-width="70"
+        stroke-linecap="round" filter="url(#sh6)" opacity="0.3"/>
+  <!-- Keyhole -->
+  <circle cx="512" cy="600" r="64" fill="#FF6D00"/>
+  <rect x="492" y="652" width="40" height="68" rx="16" fill="#FF6D00"/>
+
+  <!-- Layer 3: File icon + Gold checkmark (hybrid element) -->
+  <!-- Mini file (left, dark) -->
+  <rect x="110" y="300" width="160" height="200" rx="14" fill="white" opacity="0.8" filter="url(#sh6)"/>
+  <polygon points="218,300 270,352 218,352" fill="#FFCCBC"/>
+  <!-- Lock badge on mini file -->
+  <circle cx="160" cy="440" r="30" fill="#E53935"/>
+  <text x="160" y="440" font-family="Arial, sans-serif" font-size="34" fill="white"
+        text-anchor="middle" dominant-baseline="middle">🔒</text>
+
+  <!-- Arrow to right -->
+  <text x="285" y="400" font-family="Arial, sans-serif" font-size="72" fill="white"
+        text-anchor="middle" dominant-baseline="middle">→</text>
+
+  <!-- Gold checkmark (right, unlocked) -->
+  <circle cx="820" cy="380" r="100" fill="#FFD700" filter="url(#sh6)"/>
+  <circle cx="820" cy="380" r="80" fill="#FFF9C4" opacity="0.5"/>
+  <text x="820" y="380" font-family="Arial, sans-serif" font-size="120" fill="white"
+        text-anchor="middle" dominant-baseline="middle">🔓</text>
+
+  <!-- UNLOCK text badge -->
+  <rect x="260" y="900" width="504" height="80" rx="24" fill="white" opacity="0.9" filter="url(#sh6)"/>
+  <text x="512" y="940" font-family="Arial Black, sans-serif" font-size="48" fill="#E65100"
+        text-anchor="middle" dominant-baseline="middle">UNLOCK</text>
+</svg>

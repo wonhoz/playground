@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_04: metaphor | 프리즘 — 하나의 포맷이 들어가 다양한 포맷으로 분리 | 대각선/동적 | 보라+무지개 -->
+  <!-- Layer 1: Background -->
+  <defs>
+    <linearGradient id="bg4" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#EDE7F6"/>
+      <stop offset="100%" stop-color="#CE93D8"/>
+    </linearGradient>
+    <filter id="sh4" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#6A1B9A" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg4)"/>
+
+  <!-- Layer 2: Prism triangle (center) -->
+  <polygon points="512,200 760,760 264,760" fill="#7E57C2" filter="url(#sh4)" opacity="0.92"/>
+  <!-- Prism highlight edge -->
+  <line x1="512" y1="200" x2="760" y2="760" stroke="white" stroke-width="8" opacity="0.4"/>
+
+  <!-- Input: white beam from left -->
+  <rect x="80" y="470" width="200" height="60" rx="30" fill="white" opacity="0.9" filter="url(#sh4)"/>
+  <!-- SVG label on input beam -->
+  <text x="180" y="500" font-family="Arial Black, sans-serif" font-size="44" font-weight="900"
+        fill="#5E35B1" text-anchor="middle" dominant-baseline="middle">SVG</text>
+
+  <!-- Layer 3: Rainbow output beams (right side of prism) -->
+  <!-- PNG - red -->
+  <g filter="url(#sh4)">
+    <path d="M760,520 L930,380" stroke="#F44336" stroke-width="28" stroke-linecap="round" fill="none"/>
+    <rect x="850" y="300" width="130" height="56" rx="12" fill="#F44336"/>
+    <text x="915" y="328" font-family="Arial Black, sans-serif" font-size="38" font-weight="900"
+          fill="white" text-anchor="middle" dominant-baseline="middle">PNG</text>
+  </g>
+  <!-- ICO - orange -->
+  <g filter="url(#sh4)">
+    <path d="M760,600 L940,600" stroke="#FF7043" stroke-width="28" stroke-linecap="round" fill="none"/>
+    <rect x="850" y="560" width="130" height="56" rx="12" fill="#FF7043"/>
+    <text x="915" y="588" font-family="Arial Black, sans-serif" font-size="38" font-weight="900"
+          fill="white" text-anchor="middle" dominant-baseline="middle">ICO</text>
+  </g>
+  <!-- JPG - green -->
+  <g filter="url(#sh4)">
+    <path d="M760,680 L930,790" stroke="#43A047" stroke-width="28" stroke-linecap="round" fill="none"/>
+    <rect x="850" y="770" width="130" height="56" rx="12" fill="#43A047"/>
+    <text x="915" y="798" font-family="Arial Black, sans-serif" font-size="38" font-weight="900"
+          fill="white" text-anchor="middle" dominant-baseline="middle">JPG</text>
+  </g>
+  <!-- BMP - blue -->
+  <g filter="url(#sh4)">
+    <path d="M760,460 L930,340" stroke="#1E88E5" stroke-width="20" stroke-linecap="round" fill="none" opacity="0.7"/>
+    <rect x="855" y="255" width="130" height="56" rx="12" fill="#1E88E5" opacity="0.85"/>
+    <text x="920" y="283" font-family="Arial Black, sans-serif" font-size="38" font-weight="900"
+          fill="white" text-anchor="middle" dominant-baseline="middle">BMP</text>
+  </g>
+
+  <!-- Sparkle at prism vertex -->
+  <circle cx="512" cy="200" r="22" fill="#FFD740"/>
+</svg>

@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_05: metaphor | 탐조등 — 에러를 비추는 빛 | 대각선/동적 | 연파랑+노랑빛+빨강타겟 -->
+  <defs>
+    <linearGradient id="bg5" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#E1F5FE"/>
+      <stop offset="100%" stop-color="#81D4FA"/>
+    </linearGradient>
+    <linearGradient id="beam" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFD740" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#FFD740" stop-opacity="0.1"/>
+    </linearGradient>
+    <filter id="sh5" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#0277BD" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg5)"/>
+
+  <!-- Layer 2: Spotlight beam -->
+  <path d="M200,150 L720,900 L560,900 Z" fill="url(#beam)" opacity="0.7"/>
+  <!-- Wider outer glow -->
+  <path d="M200,150 L780,900 L500,900 Z" fill="#FFD740" opacity="0.12"/>
+
+  <!-- Spotlight lamp (top) -->
+  <g filter="url(#sh5)">
+    <!-- Lamp housing -->
+    <ellipse cx="200" cy="160" rx="90" ry="70" fill="#546E7A"/>
+    <!-- Reflector -->
+    <ellipse cx="200" cy="165" rx="65" ry="50" fill="#B0BEC5"/>
+    <!-- Bulb -->
+    <circle cx="200" cy="165" r="28" fill="#FFD740"/>
+    <!-- Glow ring -->
+    <circle cx="200" cy="165" r="42" fill="none" stroke="#FFD740" stroke-width="8" opacity="0.5"/>
+    <!-- Mount arm -->
+    <rect x="170" y="90" width="60" height="40" rx="10" fill="#37474F"/>
+  </g>
+
+  <!-- Layer 3: Error target (illuminated by beam) -->
+  <!-- Log text in beam light -->
+  <g opacity="0.9">
+    <rect x="440" y="700" width="360" height="56" rx="8" fill="#FFCDD2" filter="url(#sh5)"/>
+    <rect x="440" y="700" width="8" height="56" rx="4" fill="#E53935"/>
+    <text x="460" y="728" font-family="Consolas, monospace" font-size="30" fill="#B71C1C"
+          dominant-baseline="middle">[ERROR] crash!</text>
+  </g>
+  <!-- Highlighted ring around error -->
+  <ellipse cx="620" cy="728" rx="200" ry="48" fill="none" stroke="#E53935" stroke-width="6"
+           stroke-dasharray="24,14" opacity="0.7"/>
+
+  <!-- Beam boundary lines (spotlight edges) -->
+  <line x1="200" y1="150" x2="720" y2="900" stroke="#FFD740" stroke-width="4" opacity="0.5"/>
+  <line x1="200" y1="150" x2="560" y2="900" stroke="#FFD740" stroke-width="4" opacity="0.5"/>
+
+  <!-- Log lines in darkness (above beam, semi-visible) -->
+  <rect x="550" y="200" width="360" height="46" rx="6" fill="white" opacity="0.2"/>
+  <rect x="500" y="260" width="400" height="46" rx="6" fill="white" opacity="0.15"/>
+  <rect x="520" y="320" width="380" height="46" rx="6" fill="white" opacity="0.1"/>
+</svg>

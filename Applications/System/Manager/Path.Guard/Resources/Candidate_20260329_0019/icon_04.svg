@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_04: metaphor | 도로 갈림길 표지판 — PATH(경로)의 이중 의미 | 기하학 추상 | 라임+노랑+파랑 -->
+  <defs>
+    <linearGradient id="bg4" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#F9FBE7"/>
+      <stop offset="100%" stop-color="#DCE775"/>
+    </linearGradient>
+    <filter id="sh4" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="6" stdDeviation="9" flood-color="#33691E" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg4)"/>
+
+  <!-- Road / path lines -->
+  <!-- Main trunk road going down -->
+  <rect x="480" y="400" width="64" height="440" rx="8" fill="#78909C" opacity="0.8"/>
+  <!-- Left branch -->
+  <path d="M512,560 L220,340" fill="none" stroke="#78909C" stroke-width="48" stroke-linecap="round" opacity="0.8"/>
+  <!-- Right branch -->
+  <path d="M512,560 L804,340" fill="none" stroke="#78909C" stroke-width="48" stroke-linecap="round" opacity="0.8"/>
+
+  <!-- Sign: left branch — System PATH -->
+  <rect x="80" y="200" width="300" height="110" rx="14" fill="#1565C0" filter="url(#sh4)"/>
+  <!-- Pentagon arrow pointing right -->
+  <polygon points="380,222 420,255 380,288" fill="#1565C0"/>
+  <text x="230" y="248" font-family="Arial Black, sans-serif" font-size="26" fill="white"
+        text-anchor="middle" dominant-baseline="middle">System</text>
+  <text x="230" y="278" font-family="Consolas, monospace" font-size="18" fill="#90CAF9"
+        text-anchor="middle" dominant-baseline="middle">C:\Windows\...</text>
+
+  <!-- Sign: right branch — User PATH -->
+  <rect x="644" y="200" width="300" height="110" rx="14" fill="#43A047" filter="url(#sh4)"/>
+  <!-- Pentagon arrow pointing left -->
+  <polygon points="644,222 604,255 644,288" fill="#43A047"/>
+  <text x="794" y="248" font-family="Arial Black, sans-serif" font-size="26" fill="white"
+        text-anchor="middle" dominant-baseline="middle">User</text>
+  <text x="794" y="278" font-family="Consolas, monospace" font-size="18" fill="#A5D6A7"
+        text-anchor="middle" dominant-baseline="middle">%USERPROFILE%...</text>
+
+  <!-- Folder icons at branch ends -->
+  <!-- Left folder -->
+  <rect x="120" y="340" width="80" height="60" rx="8" fill="#1E88E5" filter="url(#sh4)"/>
+  <rect x="120" y="328" width="40" height="20" rx="6" fill="#1E88E5"/>
+  <!-- Right folder -->
+  <rect x="824" y="340" width="80" height="60" rx="8" fill="#2E7D32" filter="url(#sh4)"/>
+  <rect x="824" y="328" width="40" height="20" rx="6" fill="#2E7D32"/>
+
+  <!-- Bottom: ground base + pole -->
+  <rect x="500" y="820" width="24" height="60" fill="#546E7A"/>
+  <ellipse cx="512" cy="880" rx="100" ry="22" fill="#455A64" opacity="0.5"/>
+
+  <!-- Center junction: round intersection -->
+  <circle cx="512" cy="560" r="52" fill="#FFD740" filter="url(#sh4)"/>
+  <circle cx="512" cy="560" r="36" fill="white"/>
+  <text x="512" y="560" font-family="Arial Black, sans-serif" font-size="30" fill="#F57F17"
+        text-anchor="middle" dominant-baseline="middle">ENV</text>
+
+  <!-- Broken path marker (bottom-left — Broken entry) -->
+  <circle cx="200" cy="720" r="34" fill="#E53935" filter="url(#sh4)"/>
+  <text x="200" y="720" font-family="Arial, sans-serif" font-size="34" fill="white"
+        text-anchor="middle" dominant-baseline="middle">✕</text>
+  <text x="200" y="770" font-family="Arial, sans-serif" font-size="18" fill="#C62828"
+        text-anchor="middle">경로 없음</text>
+
+  <!-- OK marker (bottom-right) -->
+  <circle cx="824" cy="720" r="34" fill="#43A047" filter="url(#sh4)"/>
+  <text x="824" y="720" font-family="Arial, sans-serif" font-size="34" fill="white"
+        text-anchor="middle" dominant-baseline="middle">✓</text>
+  <text x="824" y="770" font-family="Arial, sans-serif" font-size="18" fill="#1B5E20"
+        text-anchor="middle">정상</text>
+</svg>

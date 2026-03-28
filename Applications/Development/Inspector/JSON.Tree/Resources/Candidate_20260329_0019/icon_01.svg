@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_01: literal | JSON 들여쓰기 트리 코드 UI | 공간/장면 | 아이보리+파랑+초록 -->
+  <defs>
+    <linearGradient id="bg1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFFDE7"/>
+      <stop offset="100%" stop-color="#FFF9C4"/>
+    </linearGradient>
+    <filter id="sh1" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="5" stdDeviation="6" flood-color="#F57F17" flood-opacity="0.15"/>
+    </filter>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg1)"/>
+
+  <!-- Layer 2: Code panel -->
+  <rect x="80" y="100" width="864" height="824" rx="24" fill="white" filter="url(#sh1)"/>
+  <!-- Title bar -->
+  <rect x="80" y="100" width="864" height="70" rx="24" fill="#1565C0"/>
+  <rect x="80" y="140" width="864" height="30" fill="#1565C0"/>
+  <circle cx="126" cy="135" r="14" fill="#EF5350"/>
+  <circle cx="170" cy="135" r="14" fill="#FFD740"/>
+  <circle cx="214" cy="135" r="14" fill="#66BB6A"/>
+  <text x="500" y="141" font-family="Arial, sans-serif" font-size="30" fill="white"
+        text-anchor="middle" dominant-baseline="middle">data.json</text>
+
+  <!-- Layer 3: JSON tree lines -->
+  <!-- Root object -->
+  <text x="130" y="250" font-family="Consolas, monospace" font-size="52" fill="#FF6D00">▼ {</text>
+
+  <!-- Level 1: name key -->
+  <line x1="166" y1="275" x2="166" y2="720" stroke="#BDBDBD" stroke-width="3"/>
+  <text x="200" y="340" font-family="Consolas, monospace" font-size="44" fill="#1565C0">▼ "user":</text>
+  <text x="590" y="340" font-family="Consolas, monospace" font-size="44" fill="#777">{</text>
+
+  <!-- Level 2 -->
+  <line x1="236" y1="365" x2="236" y2="560" stroke="#BDBDBD" stroke-width="3"/>
+  <text x="270" y="430" font-family="Consolas, monospace" font-size="40" fill="#1565C0">"name":</text>
+  <text x="570" y="430" font-family="Consolas, monospace" font-size="40" fill="#2E7D32">"Alice"</text>
+
+  <text x="270" y="510" font-family="Consolas, monospace" font-size="40" fill="#1565C0">"age":</text>
+  <text x="540" y="510" font-family="Consolas, monospace" font-size="40" fill="#7B1FA2">32</text>
+
+  <text x="200" y="590" font-family="Consolas, monospace" font-size="44" fill="#777">}</text>
+
+  <!-- Level 1: items array -->
+  <text x="200" y="670" font-family="Consolas, monospace" font-size="44" fill="#1565C0">▼ "tags":</text>
+  <text x="590" y="670" font-family="Consolas, monospace" font-size="44" fill="#E53935">[</text>
+
+  <line x1="236" y1="695" x2="236" y2="770" stroke="#BDBDBD" stroke-width="3"/>
+  <text x="270" y="750" font-family="Consolas, monospace" font-size="40" fill="#2E7D32">"dev", "json"</text>
+  <text x="200" y="820" font-family="Consolas, monospace" font-size="44" fill="#E53935">]</text>
+
+  <text x="130" y="890" font-family="Consolas, monospace" font-size="52" fill="#FF6D00">}</text>
+</svg>

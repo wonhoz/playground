@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_03: metaphor | 대형 QR 코드가 중앙에 크게 — QR 코드 자체가 아이덴티티 | 중앙 심볼 | 파랑+흰+검정 -->
+  <defs>
+    <linearGradient id="bg3" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#E3F2FD"/>
+      <stop offset="100%" stop-color="#90CAF9"/>
+    </linearGradient>
+    <filter id="sh3" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#1A237E" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg3)"/>
+
+  <!-- QR Code container (white square) -->
+  <rect x="160" y="140" width="704" height="704" rx="20" fill="white" filter="url(#sh3)"/>
+
+  <!-- QR modules: position detection patterns -->
+  <!-- Top-left finder pattern -->
+  <rect x="192" y="172" width="168" height="168" rx="10" fill="#0D47A1"/>
+  <rect x="212" y="192" width="128" height="128" rx="6" fill="white"/>
+  <rect x="232" y="212" width="88" height="88" rx="4" fill="#0D47A1"/>
+
+  <!-- Top-right finder pattern -->
+  <rect x="664" y="172" width="168" height="168" rx="10" fill="#0D47A1"/>
+  <rect x="684" y="192" width="128" height="128" rx="6" fill="white"/>
+  <rect x="704" y="212" width="88" height="88" rx="4" fill="#0D47A1"/>
+
+  <!-- Bottom-left finder pattern -->
+  <rect x="192" y="644" width="168" height="168" rx="10" fill="#0D47A1"/>
+  <rect x="212" y="664" width="128" height="128" rx="6" fill="white"/>
+  <rect x="232" y="684" width="88" height="88" rx="4" fill="#0D47A1"/>
+
+  <!-- Timing patterns (horizontal/vertical lines of alternating modules) -->
+  <rect x="360" y="172" width="20" height="20" rx="3" fill="#0D47A1"/>
+  <rect x="400" y="172" width="20" height="20" rx="3" fill="#0D47A1"/>
+  <rect x="440" y="172" width="20" height="20" rx="3" fill="#0D47A1"/>
+  <rect x="480" y="172" width="20" height="20" rx="3" fill="#0D47A1"/>
+  <rect x="520" y="172" width="20" height="20" rx="3" fill="#0D47A1"/>
+  <rect x="560" y="172" width="20" height="20" rx="3" fill="#0D47A1"/>
+  <rect x="600" y="172" width="20" height="20" rx="3" fill="#0D47A1"/>
+  <rect x="172" y="360" width="20" height="20" rx="3" fill="#0D47A1"/>
+  <rect x="172" y="400" width="20" height="20" rx="3" fill="#0D47A1"/>
+  <rect x="172" y="440" width="20" height="20" rx="3" fill="#0D47A1"/>
+  <rect x="172" y="480" width="20" height="20" rx="3" fill="#0D47A1"/>
+  <rect x="172" y="520" width="20" height="20" rx="3" fill="#0D47A1"/>
+  <rect x="172" y="560" width="20" height="20" rx="3" fill="#0D47A1"/>
+  <rect x="172" y="600" width="20" height="20" rx="3" fill="#0D47A1"/>
+
+  <!-- Data modules: rows of colored squares (representative) -->
+  <rect x="360" y="360" width="304" height="304" rx="8" fill="#F5F5F5"/>
+  <!-- Center logo area (25% of QR size) -->
+  <rect x="432" y="432" width="160" height="160" rx="14" fill="white" filter="url(#sh3)"/>
+  <!-- Forge logo in center -->
+  <text x="512" y="512" font-family="Arial Black, sans-serif" font-size="80" fill="#0D47A1"
+        text-anchor="middle" dominant-baseline="middle">QR</text>
+
+  <!-- Random data modules around logo -->
+  <rect x="368" y="368" width="16" height="16" rx="2" fill="#0D47A1"/>
+  <rect x="392" y="368" width="16" height="16" rx="2" fill="#0D47A1"/>
+  <rect x="440" y="368" width="16" height="16" rx="2" fill="#0D47A1"/>
+  <rect x="480" y="368" width="16" height="16" rx="2" fill="#0D47A1"/>
+  <rect x="368" y="392" width="16" height="16" rx="2" fill="#0D47A1"/>
+  <rect x="416" y="392" width="16" height="16" rx="2" fill="#0D47A1"/>
+  <rect x="368" y="416" width="16" height="16" rx="2" fill="#0D47A1"/>
+  <rect x="384" y="416" width="16" height="16" rx="2" fill="#0D47A1"/>
+  <rect x="608" y="368" width="16" height="16" rx="2" fill="#0D47A1"/>
+  <rect x="632" y="368" width="16" height="16" rx="2" fill="#0D47A1"/>
+  <rect x="608" y="392" width="16" height="16" rx="2" fill="#0D47A1"/>
+  <rect x="648" y="392" width="16" height="16" rx="2" fill="#0D47A1"/>
+  <rect x="368" y="608" width="16" height="16" rx="2" fill="#0D47A1"/>
+  <rect x="400" y="608" width="16" height="16" rx="2" fill="#0D47A1"/>
+  <rect x="432" y="608" width="16" height="16" rx="2" fill="#0D47A1"/>
+  <rect x="608" y="608" width="16" height="16" rx="2" fill="#0D47A1"/>
+  <rect x="632" y="608" width="16" height="16" rx="2" fill="#0D47A1"/>
+
+  <!-- Bottom label -->
+  <rect x="220" y="892" width="584" height="76" rx="24" fill="#0D47A1" filter="url(#sh3)"/>
+  <text x="512" y="930" font-family="Arial Black, sans-serif" font-size="42" fill="white"
+        text-anchor="middle" dominant-baseline="middle">QR.Forge</text>
+</svg>

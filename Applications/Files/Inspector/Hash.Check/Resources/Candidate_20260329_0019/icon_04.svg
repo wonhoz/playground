@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_04: metaphor | DNA 나선 — 데이터 지문/식별 은유 | 대각선/동적 | 보라+초록+노랑 -->
+  <defs>
+    <linearGradient id="bg4" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#EDE7F6"/>
+      <stop offset="100%" stop-color="#B39DDB"/>
+    </linearGradient>
+    <filter id="sh4" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="5" stdDeviation="7" flood-color="#4A148C" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg4)"/>
+
+  <!-- Layer 2: DNA double helix -->
+  <!-- Left strand (sinusoidal, purple) -->
+  <path d="M350,100 C280,180 440,260 350,340 C260,420 440,500 350,580 C260,660 440,740 350,820 C280,880 440,940 350,1000"
+        fill="none" stroke="#7E57C2" stroke-width="20" stroke-linecap="round" filter="url(#sh4)"/>
+  <!-- Right strand (sinusoidal, green, offset) -->
+  <path d="M674,100 C740,180 580,260 674,340 C760,420 580,500 674,580 C760,660 580,740 674,820 C740,880 580,940 674,1000"
+        fill="none" stroke="#43A047" stroke-width="20" stroke-linecap="round" filter="url(#sh4)"/>
+
+  <!-- Layer 3: Cross rungs (base pairs) with hash chars -->
+  <g font-family="Consolas, monospace" font-size="28" font-weight="bold">
+    <!-- Rung at y=200 -->
+    <line x1="350" y1="220" x2="674" y2="220" stroke="#FFD740" stroke-width="12" stroke-linecap="round"/>
+    <text x="512" y="208" fill="#E65100" text-anchor="middle" dominant-baseline="middle">A4F2</text>
+
+    <!-- Rung at y=340 -->
+    <line x1="350" y1="340" x2="674" y2="340" stroke="#FFD740" stroke-width="12" stroke-linecap="round"/>
+    <text x="512" y="328" fill="#E65100" text-anchor="middle" dominant-baseline="middle">B8C1</text>
+
+    <!-- Rung at y=460 -->
+    <line x1="350" y1="460" x2="674" y2="460" stroke="#FFD740" stroke-width="12" stroke-linecap="round"/>
+    <text x="512" y="448" fill="#E65100" text-anchor="middle" dominant-baseline="middle">E9D3</text>
+
+    <!-- Rung at y=580 -->
+    <line x1="350" y1="580" x2="674" y2="580" stroke="#FFD740" stroke-width="12" stroke-linecap="round"/>
+    <text x="512" y="568" fill="#E65100" text-anchor="middle" dominant-baseline="middle">F7A2</text>
+
+    <!-- Rung at y=700 -->
+    <line x1="350" y1="700" x2="674" y2="700" stroke="#FFD740" stroke-width="12" stroke-linecap="round"/>
+    <text x="512" y="688" fill="#E65100" text-anchor="middle" dominant-baseline="middle">1B4C</text>
+
+    <!-- Rung at y=820 -->
+    <line x1="350" y1="820" x2="674" y2="820" stroke="#FFD740" stroke-width="12" stroke-linecap="round"/>
+    <text x="512" y="808" fill="#E65100" text-anchor="middle" dominant-baseline="middle">8E9D</text>
+  </g>
+
+  <!-- SHA256 label badge -->
+  <rect x="730" y="120" width="200" height="72" rx="20" fill="#7E57C2" filter="url(#sh4)"/>
+  <text x="830" y="156" font-family="Arial Black, sans-serif" font-size="34" fill="white"
+        text-anchor="middle" dominant-baseline="middle">SHA256</text>
+</svg>

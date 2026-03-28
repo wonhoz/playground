@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_06: hybrid | 막대 그래프 + 돋보기 | 대각선/동적 | 코랄+파랑+흰 -->
+  <defs>
+    <linearGradient id="bg6" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFCCBC"/>
+      <stop offset="100%" stop-color="#FF8A65"/>
+    </linearGradient>
+    <filter id="sh6" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#BF360C" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg6)"/>
+
+  <!-- Layer 2: Bar chart (background) -->
+  <!-- Chart floor -->
+  <line x1="100" y1="820" x2="924" y2="820" stroke="white" stroke-width="8" opacity="0.6"/>
+  <line x1="100" y1="820" x2="100" y2="100" stroke="white" stroke-width="8" opacity="0.6"/>
+
+  <!-- Bars -->
+  <rect x="140" y="340" width="120" height="480" rx="16" fill="#7B1FA2" filter="url(#sh6)"/>
+  <rect x="290" y="480" width="120" height="340" rx="16" fill="#1565C0" filter="url(#sh6)"/>
+  <rect x="440" y="560" width="120" height="260" rx="16" fill="#FF7043" filter="url(#sh6)"/>
+  <rect x="590" y="680" width="120" height="140" rx="16" fill="#43A047" filter="url(#sh6)"/>
+  <rect x="740" y="740" width="120" height="80" rx="16" fill="#00838F" filter="url(#sh6)"/>
+  <rect x="860" y="800" width="40" height="20" rx="6" fill="#90A4AE" opacity="0.5"/>
+
+  <!-- Bar labels -->
+  <text x="200" y="850" font-family="Arial, sans-serif" font-size="24" fill="white"
+        text-anchor="middle" dominant-baseline="middle">Vid</text>
+  <text x="350" y="850" font-family="Arial, sans-serif" font-size="24" fill="white"
+        text-anchor="middle" dominant-baseline="middle">Doc</text>
+  <text x="500" y="850" font-family="Arial, sans-serif" font-size="24" fill="white"
+        text-anchor="middle" dominant-baseline="middle">DL</text>
+  <text x="650" y="850" font-family="Arial, sans-serif" font-size="24" fill="white"
+        text-anchor="middle" dominant-baseline="middle">App</text>
+  <text x="800" y="850" font-family="Arial, sans-serif" font-size="24" fill="white"
+        text-anchor="middle" dominant-baseline="middle">Pic</text>
+
+  <!-- Layer 3: Magnifying glass (overlaid, large) -->
+  <g filter="url(#sh6)">
+    <circle cx="540" cy="440" r="220" fill="none" stroke="white" stroke-width="48"/>
+    <!-- Glass tint -->
+    <circle cx="540" cy="440" r="172" fill="white" opacity="0.15"/>
+    <!-- Shine -->
+    <circle cx="470" cy="370" r="42" fill="white" opacity="0.3"/>
+    <!-- Handle -->
+    <line x1="704" y1="604" x2="880" y2="780" stroke="white" stroke-width="52" stroke-linecap="round"/>
+  </g>
+</svg>

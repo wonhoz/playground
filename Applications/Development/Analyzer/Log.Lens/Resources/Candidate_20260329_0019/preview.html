@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>Log.Lens — Icon Candidates</title>
+<style>
+  body { margin: 0; background: #1A1E14; font-family: 'Segoe UI', sans-serif; padding: 40px; }
+  h1 { color: #A5D6A7; text-align: center; font-size: 28px; margin-bottom: 6px; }
+  p.sub { color: #888; text-align: center; margin-bottom: 40px; font-size: 14px; }
+  .grid { display: flex; flex-wrap: wrap; gap: 32px; justify-content: center; }
+  .card {
+    background: #222C1C; border-radius: 18px; padding: 28px;
+    text-align: center; width: 260px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: 1px solid #344A24;
+  }
+  .card:hover { transform: scale(1.08); box-shadow: 0 12px 40px rgba(165,214,167,0.2); }
+  .card img { width: 160px; height: 160px; border-radius: 12px; }
+  .card .name { color: #E0E0E0; font-size: 15px; font-weight: 600; margin-top: 14px; }
+  .card .type { margin-top: 4px; font-size: 12px; padding: 3px 10px; border-radius: 20px; display: inline-block; }
+  .literal  { background: #1565C0; color: #fff; }
+  .metaphor { background: #7B1FA2; color: #fff; }
+  .hybrid   { background: #2E7D32; color: #fff; }
+  .card .concept { color: #9E9E9E; font-size: 12px; margin-top: 8px; line-height: 1.5; }
+  .palette { display: flex; gap: 6px; justify-content: center; margin-top: 10px; }
+  .swatch { width: 22px; height: 22px; border-radius: 50%; border: 2px solid #444; }
+</style>
+</head>
+<body>
+<h1>Log.Lens</h1>
+<p class="sub">로그 파일 다중 탭 뷰어 — [ERROR]/[WARN]/[INFO] 색상 하이라이트 + 필터 — Candidate_20260329_0019</p>
+<div class="grid">
+  <div class="card">
+    <img src="icon_01.svg" alt="icon_01">
+    <div class="name">icon_01</div>
+    <span class="type literal">literal</span>
+    <div class="concept">[INFO]·[WARN]·[ERROR] 로그 라인<br>컬러 코딩 직접 표현</div>
+    <div class="palette">
+      <div class="swatch" style="background:#CFD8DC" title="회색 배경"></div>
+      <div class="swatch" style="background:#43A047" title="초록 INFO"></div>
+      <div class="swatch" style="background:#E53935" title="빨강 ERROR"></div>
+    </div>
+  </div>
+  <div class="card">
+    <img src="icon_02.svg" alt="icon_02">
+    <div class="name">icon_02</div>
+    <span class="type literal">literal</span>
+    <div class="concept">탭 UI + 에러 필터 + INFO/WARN/ERROR<br>통계 바 직접 표현</div>
+    <div class="palette">
+      <div class="swatch" style="background:#BBDEFB" title="하늘 배경"></div>
+      <div class="swatch" style="background:#1565C0" title="파랑 탭"></div>
+      <div class="swatch" style="background:#E53935" title="빨강 에러배지"></div>
+    </div>
+  </div>
+  <div class="card">
+    <img src="icon_03.svg" alt="icon_03">
+    <div class="name">icon_03</div>
+    <span class="type metaphor">metaphor</span>
+    <div class="concept">돋보기(Lens) 안에 로그 라인<br>— ERROR가 부각된 X선 은유</div>
+    <div class="palette">
+      <div class="swatch" style="background:#80DEEA" title="민트 배경"></div>
+      <div class="swatch" style="background:#00838F" title="청록 프레임"></div>
+      <div class="swatch" style="background:#E53935" title="빨강 에러"></div>
+    </div>
+  </div>
+  <div class="card">
+    <img src="icon_04.svg" alt="icon_04">
+    <div class="name">icon_04</div>
+    <span class="type metaphor">metaphor</span>
+    <div class="concept">레이더 스캔 — 빨간 에러 블립이<br>감지되는 탐지 은유</div>
+    <div class="palette">
+      <div class="swatch" style="background:#CCFF90" title="라임 배경"></div>
+      <div class="swatch" style="background:#43A047" title="초록 레이더"></div>
+      <div class="swatch" style="background:#E53935" title="빨강 에러 블립"></div>
+    </div>
+  </div>
+  <div class="card">
+    <img src="icon_05.svg" alt="icon_05">
+    <div class="name">icon_05</div>
+    <span class="type metaphor">metaphor</span>
+    <div class="concept">탐조등 빛이 어두운 로그 속<br>[ERROR]를 비추는 은유</div>
+    <div class="palette">
+      <div class="swatch" style="background:#81D4FA" title="하늘 배경"></div>
+      <div class="swatch" style="background:#FFD740" title="노랑 빛"></div>
+      <div class="swatch" style="background:#E53935" title="빨강 에러 타겟"></div>
+    </div>
+  </div>
+  <div class="card">
+    <img src="icon_06.svg" alt="icon_06">
+    <div class="name">icon_06</div>
+    <span class="type hybrid">hybrid</span>
+    <div class="concept">돋보기 렌즈 + ERR 배지<br>— 에러 탐색 hybrid</div>
+    <div class="palette">
+      <div class="swatch" style="background:#FF7043" title="코랄 배경"></div>
+      <div class="swatch" style="background:#00838F" title="청록 렌즈"></div>
+      <div class="swatch" style="background:#E53935" title="빨강 ERR배지"></div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

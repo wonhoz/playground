@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_06: hybrid | :PORT 숫자 + 레이더 원 | 기하학 추상 | 민트+초록+주황 -->
+  <defs>
+    <linearGradient id="bg6" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#E0FFF8"/>
+      <stop offset="100%" stop-color="#B2DFDB"/>
+    </linearGradient>
+    <filter id="sh6" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="5" stdDeviation="7" flood-color="#004D40" flood-opacity="0.2"/>
+    </filter>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg6)"/>
+
+  <!-- Layer 2: Radar rings -->
+  <circle cx="512" cy="512" r="360" fill="none" stroke="#26A69A" stroke-width="10" opacity="0.3"/>
+  <circle cx="512" cy="512" r="265" fill="none" stroke="#26A69A" stroke-width="14" opacity="0.5"/>
+  <circle cx="512" cy="512" r="170" fill="none" stroke="#26A69A" stroke-width="18" opacity="0.7"/>
+  <circle cx="512" cy="512" r="75" fill="none" stroke="#26A69A" stroke-width="20"/>
+  <!-- Cross hairs -->
+  <line x1="512" y1="140" x2="512" y2="884" stroke="#26A69A" stroke-width="4" opacity="0.3"/>
+  <line x1="140" y1="512" x2="884" y2="512" stroke="#26A69A" stroke-width="4" opacity="0.3"/>
+
+  <!-- Layer 3: Port text labels on rings -->
+  <!-- Center: :80 -->
+  <circle cx="512" cy="512" r="58" fill="#00695C" filter="url(#sh6)"/>
+  <text x="512" y="512" font-family="Consolas, monospace" font-size="38" font-weight="bold"
+        fill="white" text-anchor="middle" dominant-baseline="middle">:80</text>
+
+  <!-- Middle ring: :443 and :8080 -->
+  <rect x="360" y="326" width="170" height="60" rx="14" fill="#00897B" filter="url(#sh6)"/>
+  <text x="445" y="356" font-family="Consolas, monospace" font-size="34" font-weight="bold"
+        fill="white" text-anchor="middle" dominant-baseline="middle">:443</text>
+
+  <rect x="494" y="678" width="200" height="60" rx="14" fill="#00897B" filter="url(#sh6)"/>
+  <text x="594" y="708" font-family="Consolas, monospace" font-size="34" font-weight="bold"
+        fill="white" text-anchor="middle" dominant-baseline="middle">:5432</text>
+
+  <!-- Outer ring: :8080 and others -->
+  <rect x="130" y="474" width="210" height="60" rx="14" fill="#FF6D00" filter="url(#sh6)"/>
+  <text x="235" y="504" font-family="Consolas, monospace" font-size="34" font-weight="bold"
+        fill="white" text-anchor="middle" dominant-baseline="middle">:8080</text>
+
+  <rect x="684" y="474" width="210" height="60" rx="14" fill="#FF6D00" filter="url(#sh6)"/>
+  <text x="789" y="504" font-family="Consolas, monospace" font-size="34" font-weight="bold"
+        fill="white" text-anchor="middle" dominant-baseline="middle">:3306</text>
+
+  <!-- Active blip -->
+  <circle cx="680" cy="340" r="20" fill="#FF6D00" filter="url(#sh6)"/>
+  <circle cx="680" cy="340" r="36" fill="#FF6D00" opacity="0.25"/>
+
+  <!-- Radar sweep line -->
+  <line x1="512" y1="512" x2="748" y2="276" stroke="#26A69A" stroke-width="8" opacity="0.6"/>
+</svg>

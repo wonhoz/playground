@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>Img.Cast — Icon Candidates</title>
+<style>
+  body { margin: 0; background: #1A1F2E; font-family: 'Segoe UI', sans-serif; padding: 40px; }
+  h1 { color: #42C8F5; text-align: center; font-size: 28px; margin-bottom: 6px; }
+  p.sub { color: #888; text-align: center; margin-bottom: 40px; font-size: 14px; }
+  .grid { display: flex; flex-wrap: wrap; gap: 32px; justify-content: center; }
+  .card {
+    background: #252A3A; border-radius: 18px; padding: 28px;
+    text-align: center; width: 260px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: 1px solid #2E3450;
+  }
+  .card:hover { transform: scale(1.08); box-shadow: 0 12px 40px rgba(66,200,245,0.2); }
+  .card img { width: 160px; height: 160px; border-radius: 12px; }
+  .card .name { color: #E0E0E0; font-size: 15px; font-weight: 600; margin-top: 14px; }
+  .card .type { margin-top: 4px; font-size: 12px; padding: 3px 10px; border-radius: 20px; display: inline-block; }
+  .literal  { background: #1565C0; color: #fff; }
+  .metaphor { background: #7B1FA2; color: #fff; }
+  .hybrid   { background: #2E7D32; color: #fff; }
+  .card .concept { color: #9E9E9E; font-size: 12px; margin-top: 8px; line-height: 1.5; }
+  .palette { display: flex; gap: 6px; justify-content: center; margin-top: 10px; }
+  .swatch { width: 22px; height: 22px; border-radius: 50%; border: 2px solid #333; }
+</style>
+</head>
+<body>
+<h1>Img.Cast</h1>
+<p class="sub">이미지 포맷 변환기 (SVG·PNG·JPG·BMP·ICO) — Candidate_20260329_0019</p>
+<div class="grid">
+  <div class="card">
+    <img src="icon_01.svg" alt="icon_01">
+    <div class="name">icon_01</div>
+    <span class="type literal">literal</span>
+    <div class="concept">포맷 카드 스택(SVG·PNG·ICO)<br>+ 주황 변환 화살표</div>
+    <div class="palette">
+      <div class="swatch" style="background:#42C8F5" title="하늘색 배경"></div>
+      <div class="swatch" style="background:#AB47BC" title="보라 카드"></div>
+      <div class="swatch" style="background:#FF6D00" title="주황 화살표"></div>
+    </div>
+  </div>
+  <div class="card">
+    <img src="icon_02.svg" alt="icon_02">
+    <div class="name">icon_02</div>
+    <span class="type literal">literal</span>
+    <div class="concept">파일들이 드롭존으로<br>날아드는 드래그&드롭 장면</div>
+    <div class="palette">
+      <div class="swatch" style="background:#4DD0B4" title="민트 배경"></div>
+      <div class="swatch" style="background:#1565C0" title="파랑 파일"></div>
+      <div class="swatch" style="background:#FFF176" title="노랑 드롭존"></div>
+    </div>
+  </div>
+  <div class="card">
+    <img src="icon_03.svg" alt="icon_03">
+    <div class="name">icon_03</div>
+    <span class="type metaphor">metaphor</span>
+    <div class="concept">주조 틀(mold) — 다양한 형태가<br>하나의 ICO로 완성되는 은유</div>
+    <div class="palette">
+      <div class="swatch" style="background:#FFE082" title="황금 배경"></div>
+      <div class="swatch" style="background:#FF6F00" title="주황 틀"></div>
+      <div class="swatch" style="background:#1E88E5" title="파랑 삼각형"></div>
+    </div>
+  </div>
+  <div class="card">
+    <img src="icon_04.svg" alt="icon_04">
+    <div class="name">icon_04</div>
+    <span class="type metaphor">metaphor</span>
+    <div class="concept">프리즘 — SVG 하나가 들어가<br>PNG·ICO·JPG·BMP로 분리</div>
+    <div class="palette">
+      <div class="swatch" style="background:#CE93D8" title="보라 배경"></div>
+      <div class="swatch" style="background:#7E57C2" title="프리즘"></div>
+      <div class="swatch" style="background:#F44336" title="빨강 출력"></div>
+    </div>
+  </div>
+  <div class="card">
+    <img src="icon_05.svg" alt="icon_05">
+    <div class="name">icon_05</div>
+    <span class="type metaphor">metaphor</span>
+    <div class="concept">마법 지팡이 — SVG가<br>순식간에 ICO로 변신하는 마법</div>
+    <div class="palette">
+      <div class="swatch" style="background:#FF7043" title="코랄 배경"></div>
+      <div class="swatch" style="background:#9C27B0" title="보라 지팡이"></div>
+      <div class="swatch" style="background:#FFD700" title="금색 별·ICO"></div>
+    </div>
+  </div>
+  <div class="card">
+    <img src="icon_06.svg" alt="icon_06">
+    <div class="name">icon_06</div>
+    <span class="type hybrid">hybrid</span>
+    <div class="concept">PNG·SVG·JPG·ICO 2×2 그리드<br>+ 중앙 순환 변환 화살표</div>
+    <div class="palette">
+      <div class="swatch" style="background:#A5D6A7" title="라임 배경"></div>
+      <div class="swatch" style="background:#1565C0" title="파랑 PNG"></div>
+      <div class="swatch" style="background:#EC407A" title="핑크 SVG"></div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

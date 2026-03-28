@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>Text.Forge — Icon Candidates</title>
+<style>
+  body { margin: 0; background: #1A2010; font-family: 'Segoe UI', sans-serif; padding: 40px; }
+  h1 { color: #AED581; text-align: center; font-size: 28px; margin-bottom: 6px; }
+  p.sub { color: #888; text-align: center; margin-bottom: 40px; font-size: 14px; }
+  .grid { display: flex; flex-wrap: wrap; gap: 32px; justify-content: center; }
+  .card {
+    background: #243016; border-radius: 18px; padding: 28px;
+    text-align: center; width: 260px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: 1px solid #3A4A20;
+  }
+  .card:hover { transform: scale(1.08); box-shadow: 0 12px 40px rgba(174,213,129,0.25); }
+  .card img { width: 160px; height: 160px; border-radius: 12px; }
+  .card .name { color: #E0E0E0; font-size: 15px; font-weight: 600; margin-top: 14px; }
+  .card .type { margin-top: 4px; font-size: 12px; padding: 3px 10px; border-radius: 20px; display: inline-block; }
+  .literal  { background: #1565C0; color: #fff; }
+  .metaphor { background: #7B1FA2; color: #fff; }
+  .hybrid   { background: #2E7D32; color: #fff; }
+  .card .concept { color: #9E9E9E; font-size: 12px; margin-top: 8px; line-height: 1.5; }
+  .palette { display: flex; gap: 6px; justify-content: center; margin-top: 10px; }
+  .swatch { width: 22px; height: 22px; border-radius: 50%; border: 2px solid #444; }
+</style>
+</head>
+<body>
+<h1>Text.Forge</h1>
+<p class="sub">8가지 텍스트 처리 도구 (JSON·인코딩·해시·JWT·정규식·타임스탬프·케이스·생성기) — Candidate_20260329_0019</p>
+<div class="grid">
+  <div class="card">
+    <img src="icon_01.svg" alt="icon_01">
+    <div class="name">icon_01</div>
+    <span class="type literal">literal</span>
+    <div class="concept">JSON 코드 편집창<br>+ 탭 UI 직접 표현</div>
+    <div class="palette">
+      <div class="swatch" style="background:#90CAF9" title="하늘 배경"></div>
+      <div class="swatch" style="background:#1565C0" title="파랑 탭"></div>
+      <div class="swatch" style="background:#FF6D00" title="주황 괄호"></div>
+    </div>
+  </div>
+  <div class="card">
+    <img src="icon_02.svg" alt="icon_02">
+    <div class="name">icon_02</div>
+    <span class="type literal">literal</span>
+    <div class="concept">8가지 도구 레이블 그리드<br>(JSON·Hash·JWT 등)</div>
+    <div class="palette">
+      <div class="swatch" style="background:#FFCC80" title="오렌지 배경"></div>
+      <div class="swatch" style="background:#1565C0" title="파랑 JSON"></div>
+      <div class="swatch" style="background:#E53935" title="빨강 Hash"></div>
+    </div>
+  </div>
+  <div class="card">
+    <img src="icon_03.svg" alt="icon_03">
+    <div class="name">icon_03</div>
+    <span class="type metaphor">metaphor</span>
+    <div class="concept">대장간 망치 + T{} 모루<br>텍스트를 단조하는 Forge 은유</div>
+    <div class="palette">
+      <div class="swatch" style="background:#FFD54F" title="황금 배경"></div>
+      <div class="swatch" style="background:#E53935" title="빨강 망치"></div>
+      <div class="swatch" style="background:#546E7A" title="다크 모루"></div>
+    </div>
+  </div>
+  <div class="card">
+    <img src="icon_04.svg" alt="icon_04">
+    <div class="name">icon_04</div>
+    <span class="type metaphor">metaphor</span>
+    <div class="concept">스위스 아미 나이프<br>— 도구 블레이드에 JSON·Hash·Regex</div>
+    <div class="palette">
+      <div class="swatch" style="background:#EF9A9A" title="분홍 배경"></div>
+      <div class="swatch" style="background:#C62828" title="빨강 손잡이"></div>
+      <div class="swatch" style="background:#ECEFF1" title="실버 블레이드"></div>
+    </div>
+  </div>
+  <div class="card">
+    <img src="icon_05.svg" alt="icon_05">
+    <div class="name">icon_05</div>
+    <span class="type metaphor">metaphor</span>
+    <div class="concept">연금술 플라스크<br>— ABC가 {} 로 변환되는 은유</div>
+    <div class="palette">
+      <div class="swatch" style="background:#CE93D8" title="보라 배경"></div>
+      <div class="swatch" style="background:#2E7D32" title="초록 플라스크"></div>
+      <div class="swatch" style="background:#FFD740" title="노랑 스파크"></div>
+    </div>
+  </div>
+  <div class="card">
+    <img src="icon_06.svg" alt="icon_06">
+    <div class="name">icon_06</div>
+    <span class="type hybrid">hybrid</span>
+    <div class="concept">&lt;T&gt; 타입 레터링<br>+ 주황 망치 (텍스트 단조)</div>
+    <div class="palette">
+      <div class="swatch" style="background:#AED581" title="라임 배경"></div>
+      <div class="swatch" style="background:#1565C0" title="파랑 T"></div>
+      <div class="swatch" style="background:#FF6D00" title="주황 망치"></div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

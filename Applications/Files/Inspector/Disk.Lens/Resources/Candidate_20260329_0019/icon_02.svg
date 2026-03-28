@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_02: literal | 도넛 파이 차트 (디스크 사용량) | 기하학 추상 | 민트+빨강+파랑 -->
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#E0FFF8"/>
+      <stop offset="100%" stop-color="#80CBC4"/>
+    </linearGradient>
+    <filter id="sh2" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#004D40" flood-opacity="0.2"/>
+    </filter>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg2)"/>
+
+  <!-- Layer 2: Donut chart -->
+  <!-- Base circle (gray - free space) -->
+  <circle cx="512" cy="480" r="300" fill="#ECEFF1" filter="url(#sh2)"/>
+
+  <!-- Pie segments (stroked arcs for donut) -->
+  <!-- Videos: 47% - purple (large segment, top-right) -->
+  <path d="M512,480 L512,180 A300,300 0 0,1 805,630 Z" fill="#7B1FA2" filter="url(#sh2)"/>
+  <!-- Documents: 23% - blue -->
+  <path d="M512,480 L805,630 A300,300 0 0,1 330,750 Z" fill="#1565C0" filter="url(#sh2)"/>
+  <!-- Downloads: 15% - orange -->
+  <path d="M512,480 L330,750 A300,300 0 0,1 220,390 Z" fill="#FF7043" filter="url(#sh2)"/>
+  <!-- AppData: 8% - green -->
+  <path d="M512,480 L220,390 A300,300 0 0,1 370,212 Z" fill="#43A047" filter="url(#sh2)"/>
+  <!-- Other: 7% - teal -->
+  <path d="M512,480 L370,212 A300,300 0 0,1 512,180 Z" fill="#00838F" filter="url(#sh2)"/>
+
+  <!-- Donut hole -->
+  <circle cx="512" cy="480" r="160" fill="white"/>
+  <!-- Center text -->
+  <text x="512" y="465" font-family="Arial Black, sans-serif" font-size="72" font-weight="900"
+        fill="#37474F" text-anchor="middle" dominant-baseline="middle">36%</text>
+  <text x="512" y="525" font-family="Arial, sans-serif" font-size="34" fill="#78909C"
+        text-anchor="middle" dominant-baseline="middle">사용</text>
+
+  <!-- Layer 3: Legend -->
+  <circle cx="110" cy="800" r="18" fill="#7B1FA2"/>
+  <text x="140" y="800" font-family="Arial, sans-serif" font-size="32" fill="#37474F"
+        dominant-baseline="middle">Videos 47%</text>
+
+  <circle cx="420" cy="800" r="18" fill="#1565C0"/>
+  <text x="450" y="800" font-family="Arial, sans-serif" font-size="32" fill="#37474F"
+        dominant-baseline="middle">Docs 23%</text>
+
+  <circle cx="700" cy="800" r="18" fill="#FF7043"/>
+  <text x="730" y="800" font-family="Arial, sans-serif" font-size="32" fill="#37474F"
+        dominant-baseline="middle">DL 15%</text>
+
+  <circle cx="110" cy="870" r="18" fill="#43A047"/>
+  <text x="140" y="870" font-family="Arial, sans-serif" font-size="32" fill="#37474F"
+        dominant-baseline="middle">AppData 8%</text>
+
+  <circle cx="420" cy="870" r="18" fill="#00838F"/>
+  <text x="450" y="870" font-family="Arial, sans-serif" font-size="32" fill="#37474F"
+        dominant-baseline="middle">Other 7%</text>
+</svg>

@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_04: metaphor | 나침반 — 정확한 아이콘 탐색 은유 | 중앙 심볼 | 산호+흰+빨강바늘 -->
+  <defs>
+    <linearGradient id="bg4" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFCCBC"/>
+      <stop offset="100%" stop-color="#FF8A65"/>
+    </linearGradient>
+    <linearGradient id="compass" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#F5F5F5"/>
+    </linearGradient>
+    <filter id="sh4" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#BF360C" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg4)"/>
+
+  <!-- Layer 2: Compass circle -->
+  <circle cx="512" cy="512" r="340" fill="url(#compass)" filter="url(#sh4)"/>
+  <circle cx="512" cy="512" r="300" fill="none" stroke="#FFCCBC" stroke-width="20"/>
+
+  <!-- Cardinal directions -->
+  <text x="512" y="220" font-family="Arial Black, sans-serif" font-size="72" font-weight="900"
+        fill="#E53935" text-anchor="middle" dominant-baseline="middle">N</text>
+  <text x="512" y="820" font-family="Arial Black, sans-serif" font-size="60" font-weight="900"
+        fill="#546E7A" text-anchor="middle" dominant-baseline="middle">S</text>
+  <text x="210" y="524" font-family="Arial Black, sans-serif" font-size="60" font-weight="900"
+        fill="#546E7A" text-anchor="middle" dominant-baseline="middle">W</text>
+  <text x="814" y="524" font-family="Arial Black, sans-serif" font-size="60" font-weight="900"
+        fill="#546E7A" text-anchor="middle" dominant-baseline="middle">E</text>
+
+  <!-- Tick marks -->
+  <g stroke="#BDBDBD" stroke-width="6" opacity="0.7">
+    <line x1="512" y1="178" x2="512" y2="210"/>
+    <line x1="512" y1="814" x2="512" y2="846"/>
+    <line x1="178" y1="512" x2="210" y2="512"/>
+    <line x1="814" y1="512" x2="846" y2="512"/>
+  </g>
+
+  <!-- Layer 3: Compass needle (pointing to NE - "found!") -->
+  <!-- North needle (red) -->
+  <polygon points="512,300 496,512 512,490 528,512" fill="#E53935" filter="url(#sh4)"/>
+  <!-- South needle (dark) -->
+  <polygon points="512,724 496,512 512,534 528,512" fill="#546E7A"/>
+  <!-- Center dot -->
+  <circle cx="512" cy="512" r="24" fill="#37474F" filter="url(#sh4)"/>
+  <circle cx="512" cy="512" r="12" fill="#E53935"/>
+
+  <!-- Small icon symbols at compass tips (icons being hunted) -->
+  <circle cx="512" cy="255" r="28" fill="#E53935" opacity="0.2"/>
+  <!-- Magnifier at top (hunt target) -->
+  <circle cx="512" cy="248" r="18" fill="none" stroke="#E53935" stroke-width="7"/>
+  <line x1="524" y1="260" x2="535" y2="271" stroke="#E53935" stroke-width="7" stroke-linecap="round"/>
+</svg>

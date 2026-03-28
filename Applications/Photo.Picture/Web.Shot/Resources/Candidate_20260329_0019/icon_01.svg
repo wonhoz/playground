@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_01: literal | 브라우저 UI + URL 입력 + 스크린샷 결과 PNG | 공간/장면 | 하늘+파랑+주황 -->
+  <defs>
+    <linearGradient id="bg1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#E3F2FD"/>
+      <stop offset="100%" stop-color="#BBDEFB"/>
+    </linearGradient>
+    <filter id="sh1" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="5" stdDeviation="7" flood-color="#1565C0" flood-opacity="0.2"/>
+    </filter>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg1)"/>
+
+  <!-- Browser window (main) -->
+  <rect x="80" y="110" width="864" height="620" rx="18" fill="white" filter="url(#sh1)"/>
+  <!-- Browser chrome -->
+  <rect x="80" y="110" width="864" height="64" rx="18" fill="#1565C0"/>
+  <rect x="80" y="148" width="864" height="26" fill="#1565C0"/>
+  <!-- Traffic lights -->
+  <circle cx="130" cy="142" r="12" fill="#FF5F57"/>
+  <circle cx="162" cy="142" r="12" fill="#FEBC2E"/>
+  <circle cx="194" cy="142" r="12" fill="#28C840"/>
+  <!-- URL bar -->
+  <rect x="220" y="126" width="640" height="32" rx="14" fill="white" opacity="0.9"/>
+  <text x="540" y="142" font-family="Consolas, monospace" font-size="18" fill="#1565C0"
+        text-anchor="middle" dominant-baseline="middle">https://example.com/very-long-page</text>
+
+  <!-- Web page content (simulated) -->
+  <!-- Header -->
+  <rect x="100" y="192" width="824" height="80" fill="#1565C0" opacity="0.1"/>
+  <rect x="120" y="210" width="300" height="24" rx="8" fill="#1565C0" opacity="0.4"/>
+  <!-- Content lines -->
+  <rect x="120" y="296" width="784" height="18" rx="6" fill="#90A4AE" opacity="0.7"/>
+  <rect x="120" y="326" width="700" height="18" rx="6" fill="#90A4AE" opacity="0.5"/>
+  <rect x="120" y="356" width="750" height="18" rx="6" fill="#90A4AE" opacity="0.7"/>
+  <!-- Image placeholder -->
+  <rect x="120" y="390" width="360" height="200" rx="10" fill="#BBDEFB" opacity="0.8"/>
+  <text x="300" y="490" font-family="Arial, sans-serif" font-size="36" fill="#1565C0"
+        text-anchor="middle" dominant-baseline="middle">🖼</text>
+  <!-- More content -->
+  <rect x="500" y="400" width="404" height="16" rx="6" fill="#90A4AE" opacity="0.6"/>
+  <rect x="500" y="428" width="370" height="16" rx="6" fill="#90A4AE" opacity="0.5"/>
+  <rect x="500" y="456" width="390" height="16" rx="6" fill="#90A4AE" opacity="0.6"/>
+  <rect x="500" y="484" width="340" height="16" rx="6" fill="#90A4AE" opacity="0.4"/>
+  <rect x="120" y="600" width="784" height="16" rx="6" fill="#90A4AE" opacity="0.5"/>
+  <rect x="120" y="628" width="650" height="16" rx="6" fill="#90A4AE" opacity="0.4"/>
+  <rect x="120" y="656" width="720" height="16" rx="6" fill="#90A4AE" opacity="0.5"/>
+
+  <!-- Capture button -->
+  <rect x="300" y="758" width="200" height="56" rx="16" fill="#FF6F00" filter="url(#sh1)"/>
+  <text x="400" y="786" font-family="Arial Black, sans-serif" font-size="24" fill="white"
+        text-anchor="middle" dominant-baseline="middle">📷 캡처</text>
+
+  <!-- Result PNG file (right) -->
+  <rect x="630" y="750" width="240" height="170" rx="16" fill="#1565C0" filter="url(#sh1)"/>
+  <polygon points="826,750 870,794 826,794" fill="#90CAF9"/>
+  <text x="750" y="840" font-family="Arial Black, sans-serif" font-size="22" fill="white"
+        text-anchor="middle">example.com.png</text>
+  <text x="750" y="872" font-family="Arial, sans-serif" font-size="18" fill="#90CAF9"
+        text-anchor="middle">3,840 × 9,120 px</text>
+
+  <!-- Arrow -->
+  <polygon points="572,790 620,820 572,850" fill="#FF6F00"/>
+</svg>

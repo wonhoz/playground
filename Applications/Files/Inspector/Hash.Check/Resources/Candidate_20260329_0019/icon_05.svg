@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_05: metaphor | 인감/도장 — 무결성 확인 은유 | 중앙 심볼 | 빨강+흰+금 -->
+  <defs>
+    <linearGradient id="bg5" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFEBEE"/>
+      <stop offset="100%" stop-color="#EF9A9A"/>
+    </linearGradient>
+    <linearGradient id="stamp" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#E53935"/>
+      <stop offset="100%" stop-color="#B71C1C"/>
+    </linearGradient>
+    <filter id="sh5" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#B71C1C" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg5)"/>
+
+  <!-- Layer 2: Stamp ink pad -->
+  <ellipse cx="512" cy="800" rx="320" ry="70" fill="#B71C1C" opacity="0.3"/>
+  <ellipse cx="512" cy="800" rx="280" ry="56" fill="#E53935" opacity="0.4"/>
+
+  <!-- Stamp body (handle) -->
+  <rect x="440" y="160" width="144" height="120" rx="24" fill="url(#stamp)" filter="url(#sh5)"/>
+  <rect x="400" y="270" width="224" height="60" rx="16" fill="#C62828" filter="url(#sh5)"/>
+
+  <!-- Stamp face plate -->
+  <rect x="340" y="320" width="344" height="300" rx="20" fill="url(#stamp)" filter="url(#sh5)"/>
+
+  <!-- Stamp text on face -->
+  <text x="512" y="430" font-family="Arial Black, sans-serif" font-size="80" font-weight="900"
+        fill="#FFD740" text-anchor="middle" dominant-baseline="middle">✓</text>
+  <text x="512" y="510" font-family="Arial Black, sans-serif" font-size="38" font-weight="900"
+        fill="white" text-anchor="middle" dominant-baseline="middle">VERIFIED</text>
+  <text x="512" y="565" font-family="Consolas, monospace" font-size="28" fill="#FFCDD2"
+        text-anchor="middle" dominant-baseline="middle">SHA-256</text>
+
+  <!-- Stamp mark on surface (ink impression, tilted) -->
+  <g transform="rotate(-8, 512, 750)" filter="url(#sh5)" opacity="0.85">
+    <rect x="290" y="670" width="444" height="180" rx="16" fill="#E53935" opacity="0.8"/>
+    <text x="512" y="745" font-family="Arial Black, sans-serif" font-size="68" font-weight="900"
+          fill="#FFD740" text-anchor="middle" dominant-baseline="middle">✓ VERIFIED</text>
+    <text x="512" y="805" font-family="Consolas, monospace" font-size="26" fill="white"
+          text-anchor="middle" dominant-baseline="middle">a4f2b8c1...</text>
+  </g>
+
+  <!-- Layer 3: Sparkles -->
+  <circle cx="240" cy="680" r="20" fill="#FFD740" filter="url(#sh5)"/>
+  <circle cx="200" cy="720" r="13" fill="#FFD740" opacity="0.7"/>
+  <circle cx="800" cy="690" r="20" fill="#FFD740" filter="url(#sh5)"/>
+  <circle cx="840" cy="730" r="13" fill="#FFD740" opacity="0.7"/>
+</svg>

@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_03: metaphor | 돋보기(Peek) 안에 ZIP 내부 파일 트리 보임 | 중앙 심볼 | 보라+파랑+흰 -->
+  <defs>
+    <linearGradient id="bg3" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#EDE7F6"/>
+      <stop offset="100%" stop-color="#CE93D8"/>
+    </linearGradient>
+    <filter id="sh3" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#4A148C" flood-opacity="0.4"/>
+    </filter>
+    <clipPath id="lensClip3">
+      <circle cx="460" cy="440" r="290"/>
+    </clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg3)"/>
+
+  <!-- Magnifier outer ring -->
+  <circle cx="460" cy="440" r="300" fill="#4527A0" filter="url(#sh3)"/>
+  <circle cx="460" cy="440" r="280" fill="#512DA8"/>
+  <circle cx="460" cy="440" r="260" fill="#5E35B1"/>
+
+  <!-- Magnifier glass / lens interior -->
+  <circle cx="460" cy="440" r="238" fill="#F3E5F5"/>
+
+  <!-- Content inside lens: file tree -->
+  <g clip-path="url(#lensClip3)">
+    <!-- ZIP file root -->
+    <rect x="230" y="200" width="460" height="40" fill="#7B1FA2" rx="8"/>
+    <text x="256" y="220" font-family="Arial, sans-serif" font-size="20" fill="white"
+          dominant-baseline="middle">📦  archive.zip</text>
+
+    <!-- Folder: src -->
+    <rect x="254" y="248" width="436" height="36" fill="#E8EAF6" rx="6"/>
+    <text x="278" y="266" font-family="Arial, sans-serif" font-size="18" fill="#4527A0"
+          dominant-baseline="middle">📁  src/</text>
+
+    <!-- Files in src -->
+    <rect x="278" y="290" width="412" height="30" fill="white" rx="4"/>
+    <text x="302" y="305" font-family="Arial, sans-serif" font-size="16" fill="#546E7A"
+          dominant-baseline="middle">📝  main.cs  · 14.2 KB</text>
+
+    <rect x="278" y="324" width="412" height="30" fill="#F9F9F9" rx="4"/>
+    <text x="302" y="339" font-family="Arial, sans-serif" font-size="16" fill="#546E7A"
+          dominant-baseline="middle">📝  App.xaml  · 8.6 KB</text>
+
+    <!-- Folder: Resources -->
+    <rect x="254" y="360" width="436" height="36" fill="#E8EAF6" rx="6"/>
+    <text x="278" y="378" font-family="Arial, sans-serif" font-size="18" fill="#4527A0"
+          dominant-baseline="middle">📁  Resources/  ▼</text>
+
+    <rect x="278" y="402" width="412" height="30" fill="white" rx="4"/>
+    <text x="302" y="417" font-family="Arial, sans-serif" font-size="16" fill="#546E7A"
+          dominant-baseline="middle">🖼  banner.png  · 5.2 MB</text>
+
+    <rect x="278" y="436" width="412" height="30" fill="#F9F9F9" rx="4"/>
+    <text x="302" y="451" font-family="Arial, sans-serif" font-size="16" fill="#546E7A"
+          dominant-baseline="middle">🖼  icon.ico  · 256 KB</text>
+
+    <!-- More files -->
+    <rect x="254" y="472" width="436" height="30" fill="white" rx="4"/>
+    <text x="278" y="487" font-family="Arial, sans-serif" font-size="16" fill="#546E7A"
+          dominant-baseline="middle">📄  README.md  · 4.8 KB</text>
+
+    <rect x="254" y="506" width="436" height="30" fill="#F9F9F9" rx="4"/>
+    <text x="278" y="521" font-family="Arial, sans-serif" font-size="16" fill="#546E7A"
+          dominant-baseline="middle">📕  manual.pdf  · 2.1 MB</text>
+
+    <!-- Stats bar -->
+    <rect x="230" y="544" width="460" height="36" fill="#7B1FA2" rx="8"/>
+    <text x="460" y="562" font-family="Arial, sans-serif" font-size="15" fill="white"
+          text-anchor="middle" dominant-baseline="middle">127 files · 48.3 MB → 12.1 MB (75%)</text>
+
+    <!-- Lens highlight -->
+    <circle cx="360" cy="330" r="60" fill="white" opacity="0.1"/>
+    <circle cx="350" cy="320" r="28" fill="white" opacity="0.2"/>
+  </g>
+
+  <!-- Magnifier handle -->
+  <line x1="688" y1="668" x2="870" y2="850" stroke="#4527A0" stroke-width="52" stroke-linecap="round"
+        filter="url(#sh3)"/>
+  <line x1="688" y1="668" x2="870" y2="850" stroke="#7E57C2" stroke-width="36" stroke-linecap="round"/>
+
+  <!-- ZIP badge on top-right -->
+  <circle cx="760" cy="200" r="70" fill="#FF6F00" filter="url(#sh3)"/>
+  <text x="760" y="200" font-family="Arial Black, sans-serif" font-size="42" fill="white"
+        text-anchor="middle" dominant-baseline="middle">ZIP</text>
+
+  <!-- Format chips around -->
+  <rect x="730" y="300" width="80" height="28" rx="10" fill="#1E88E5"/>
+  <text x="770" y="314" font-family="Arial Black, sans-serif" font-size="14" fill="white"
+        text-anchor="middle" dominant-baseline="middle">7Z</text>
+  <rect x="730" y="338" width="80" height="28" rx="10" fill="#E53935"/>
+  <text x="770" y="352" font-family="Arial Black, sans-serif" font-size="14" fill="white"
+        text-anchor="middle" dominant-baseline="middle">RAR</text>
+  <rect x="730" y="376" width="80" height="28" rx="10" fill="#43A047"/>
+  <text x="770" y="390" font-family="Arial Black, sans-serif" font-size="14" fill="white"
+        text-anchor="middle" dominant-baseline="middle">TAR</text>
+</svg>

@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_05: metaphor | 연금술 플라스크 — 텍스트가 변환되는 | 중앙 심볼 | 보라+초록+노랑 -->
+  <defs>
+    <linearGradient id="bg5" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#EDE7F6"/>
+      <stop offset="100%" stop-color="#CE93D8"/>
+    </linearGradient>
+    <linearGradient id="flask" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#A5D6A7"/>
+      <stop offset="100%" stop-color="#2E7D32"/>
+    </linearGradient>
+    <linearGradient id="liquid" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#76FF03"/>
+      <stop offset="100%" stop-color="#00C853"/>
+    </linearGradient>
+    <filter id="sh5" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#4A148C" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg5)"/>
+
+  <!-- Layer 2: Flask body -->
+  <!-- Neck -->
+  <rect x="420" y="120" width="184" height="200" rx="30" fill="#B39DDB" filter="url(#sh5)"/>
+  <!-- Stopper -->
+  <rect x="440" y="100" width="144" height="50" rx="20" fill="#7E57C2"/>
+  <!-- Flask round body -->
+  <circle cx="512" cy="660" r="280" fill="url(#flask)" filter="url(#sh5)"/>
+  <!-- Liquid inside -->
+  <clipPath id="flask-clip">
+    <circle cx="512" cy="660" r="268"/>
+  </clipPath>
+  <rect x="244" y="640" width="536" height="310" fill="url(#liquid)" clip-path="url(#flask-clip)"/>
+  <!-- Bubbles -->
+  <circle cx="420" cy="700" r="28" fill="white" opacity="0.4"/>
+  <circle cx="560" cy="750" r="18" fill="white" opacity="0.3"/>
+  <circle cx="490" cy="800" r="12" fill="white" opacity="0.4"/>
+  <circle cx="600" cy="690" r="22" fill="white" opacity="0.3"/>
+
+  <!-- Layer 3: Text symbols in flask (before/after transformation) -->
+  <!-- Input text (top of flask) -->
+  <text x="512" y="250" font-family="Consolas, monospace" font-size="72" font-weight="bold"
+        fill="#4A148C" text-anchor="middle" dominant-baseline="middle">ABC</text>
+  <!-- Arrow down -->
+  <text x="512" y="420" font-family="Arial, sans-serif" font-size="80" fill="#7E57C2"
+        text-anchor="middle" dominant-baseline="middle">↓</text>
+  <!-- Output text (liquid) -->
+  <text x="512" y="660" font-family="Consolas, monospace" font-size="60" font-weight="bold"
+        fill="white" text-anchor="middle" dominant-baseline="middle" clip-path="url(#flask-clip)">{}</text>
+  <!-- Sparkles around flask -->
+  <circle cx="210" cy="550" r="20" fill="#FFD740" filter="url(#sh5)"/>
+  <circle cx="180" cy="600" r="13" fill="#FFD740" opacity="0.7"/>
+  <circle cx="820" cy="560" r="20" fill="#FFD740" filter="url(#sh5)"/>
+  <circle cx="840" cy="610" r="13" fill="#FFD740" opacity="0.7"/>
+  <!-- Smoke/steam -->
+  <path d="M450,120 Q430,80 450,50 Q470,20 450,0" fill="none" stroke="#CE93D8"
+        stroke-width="12" stroke-linecap="round" opacity="0.5"/>
+  <path d="M512,110 Q492,65 512,35 Q532,5 512,-15" fill="none" stroke="#CE93D8"
+        stroke-width="12" stroke-linecap="round" opacity="0.5"/>
+  <path d="M574,120 Q594,80 574,50 Q554,20 574,0" fill="none" stroke="#CE93D8"
+        stroke-width="12" stroke-linecap="round" opacity="0.5"/>
+</svg>

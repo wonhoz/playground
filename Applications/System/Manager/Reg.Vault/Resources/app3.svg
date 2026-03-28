@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: Background — dark steel grey -->
+  <defs>
+    <radialGradient id="bgRV2" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#2A2A2A"/>
+      <stop offset="100%" stop-color="#111111"/>
+    </radialGradient>
+    <linearGradient id="vaultGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#4A4A4A"/>
+      <stop offset="100%" stop-color="#2A2A2A"/>
+    </linearGradient>
+    <linearGradient id="doorGrad" x1="0" y1="0" x2="0.5" y2="1">
+      <stop offset="0%" stop-color="#5A5A5A"/>
+      <stop offset="100%" stop-color="#333333"/>
+    </linearGradient>
+    <linearGradient id="goldRing" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFD700"/>
+      <stop offset="100%" stop-color="#B8860B"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bgRV2)"/>
+
+  <!-- Layer 2: Vault door (main object) -->
+  <!-- Vault body -->
+  <rect x="160" y="200" width="620" height="640" rx="30" fill="url(#vaultGrad)" stroke="#666666" stroke-width="10"/>
+
+  <!-- Door frame (inner) -->
+  <rect x="200" y="240" width="540" height="560" rx="20" fill="url(#doorGrad)" stroke="#888888" stroke-width="6"/>
+
+  <!-- Bolt circles (4 corners) -->
+  <circle cx="240" cy="280" r="24" fill="#444444" stroke="url(#goldRing)" stroke-width="6"/>
+  <circle cx="700" cy="280" r="24" fill="#444444" stroke="url(#goldRing)" stroke-width="6"/>
+  <circle cx="240" cy="760" r="24" fill="#444444" stroke="url(#goldRing)" stroke-width="6"/>
+  <circle cx="700" cy="760" r="24" fill="#444444" stroke="url(#goldRing)" stroke-width="6"/>
+
+  <!-- Central combination wheel -->
+  <circle cx="470" cy="490" r="160" fill="#2A2A2A" stroke="url(#goldRing)" stroke-width="14"/>
+  <circle cx="470" cy="490" r="120" fill="#1A1A1A" stroke="#888888" stroke-width="6"/>
+
+  <!-- Wheel tick marks -->
+  <line x1="470" y1="340" x2="470" y2="360" stroke="#FFD700" stroke-width="6" stroke-linecap="round"/>
+  <line x1="470" y1="620" x2="470" y2="640" stroke="#FFD700" stroke-width="6" stroke-linecap="round"/>
+  <line x1="320" y1="490" x2="340" y2="490" stroke="#FFD700" stroke-width="6" stroke-linecap="round"/>
+  <line x1="600" y1="490" x2="620" y2="490" stroke="#FFD700" stroke-width="6" stroke-linecap="round"/>
+  <line x1="576" y1="384" x2="591" y2="399" stroke="#B8860B" stroke-width="4" stroke-linecap="round"/>
+  <line x1="364" y1="384" x2="349" y2="399" stroke="#B8860B" stroke-width="4" stroke-linecap="round"/>
+  <line x1="576" y1="596" x2="591" y2="581" stroke="#B8860B" stroke-width="4" stroke-linecap="round"/>
+  <line x1="364" y1="596" x2="349" y2="581" stroke="#B8860B" stroke-width="4" stroke-linecap="round"/>
+
+  <!-- Combination pointer line -->
+  <line x1="470" y1="490" x2="560" y2="415" stroke="#FFD700" stroke-width="8" stroke-linecap="round"/>
+
+  <!-- Layer 3: HKEY text inside wheel -->
+  <text x="470" y="476" text-anchor="middle" font-family="'Consolas','Courier New',monospace" font-size="28" font-weight="bold" fill="#FFD700">HKEY</text>
+  <text x="470" y="510" text-anchor="middle" font-family="'Consolas','Courier New',monospace" font-size="22" fill="#B8860B">LOCAL</text>
+
+  <!-- Handle bar right side -->
+  <rect x="820" y="420" width="44" height="140" rx="22" fill="#666666" stroke="url(#goldRing)" stroke-width="6"/>
+</svg>

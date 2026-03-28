@@ -1,62 +1,29 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
-  <!-- icon_01: literal | 계산기 버튼 그리드 (4x3, 0-F 헥스 숫자들) | 기하학 추상 | 비비드 오렌지 배경 + 흰 버튼 + 파란 텍스트 -->
   <defs>
-    <linearGradient id="bgOr" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#FF8C00"/>
-      <stop offset="100%" stop-color="#FF5500"/>
+    <linearGradient id="qbg3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A237E"/>
+      <stop offset="100%" stop-color="#3F51B5"/>
     </linearGradient>
-    <linearGradient id="btnBlue" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#2979FF"/>
-      <stop offset="100%" stop-color="#1A5FCC"/>
+    <linearGradient id="bolt3" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FFD600"/>
+      <stop offset="100%" stop-color="#FF8F00"/>
     </linearGradient>
   </defs>
-
-  <!-- Layer 1: 오렌지 배경 -->
-  <rect width="1024" height="1024" rx="190" fill="url(#bgOr)"/>
-
-  <!-- Layer 2: 계산기 버튼 그리드 (4열 3행 = 12개 버튼) -->
-  <!-- 행 1 -->
-  <rect x="100" y="190" width="180" height="170" rx="22" fill="white"/>
-  <rect x="308" y="190" width="180" height="170" rx="22" fill="white"/>
-  <rect x="516" y="190" width="180" height="170" rx="22" fill="white"/>
-  <rect x="724" y="190" width="200" height="170" rx="22" fill="url(#btnBlue)"/>
-
-  <!-- 행 2 -->
-  <rect x="100" y="390" width="180" height="170" rx="22" fill="white"/>
-  <rect x="308" y="390" width="180" height="170" rx="22" fill="white"/>
-  <rect x="516" y="390" width="180" height="170" rx="22" fill="white"/>
-  <rect x="724" y="390" width="200" height="170" rx="22" fill="url(#btnBlue)"/>
-
-  <!-- 행 3 -->
-  <rect x="100" y="590" width="180" height="170" rx="22" fill="white"/>
-  <rect x="308" y="590" width="180" height="170" rx="22" fill="white"/>
-  <rect x="516" y="590" width="180" height="170" rx="22" fill="white"/>
-  <rect x="724" y="590" width="200" height="170" rx="22" fill="url(#btnBlue)"/>
-
-  <!-- 행 4 (와이드 버튼 두 개) -->
-  <rect x="100" y="790" width="388" height="44" rx="14" fill="white" opacity="0.6"/>
-  <rect x="516" y="790" width="408" height="44" rx="14" fill="white" opacity="0.6"/>
-
-  <!-- Layer 3: 텍스트 (숫자/문자들) -->
-  <!-- 행 1 -->
-  <text x="190" y="278" text-anchor="middle" dominant-baseline="middle" font-family="Consolas" font-size="80" font-weight="bold" fill="#1A4FBF">7</text>
-  <text x="398" y="278" text-anchor="middle" dominant-baseline="middle" font-family="Consolas" font-size="80" font-weight="bold" fill="#1A4FBF">8</text>
-  <text x="606" y="278" text-anchor="middle" dominant-baseline="middle" font-family="Consolas" font-size="80" font-weight="bold" fill="#1A4FBF">9</text>
-  <text x="824" y="278" text-anchor="middle" dominant-baseline="middle" font-family="Consolas" font-size="80" font-weight="bold" fill="white">A</text>
-
-  <!-- 행 2 -->
-  <text x="190" y="478" text-anchor="middle" dominant-baseline="middle" font-family="Consolas" font-size="80" font-weight="bold" fill="#1A4FBF">4</text>
-  <text x="398" y="478" text-anchor="middle" dominant-baseline="middle" font-family="Consolas" font-size="80" font-weight="bold" fill="#1A4FBF">5</text>
-  <text x="606" y="478" text-anchor="middle" dominant-baseline="middle" font-family="Consolas" font-size="80" font-weight="bold" fill="#1A4FBF">6</text>
-  <text x="824" y="478" text-anchor="middle" dominant-baseline="middle" font-family="Consolas" font-size="80" font-weight="bold" fill="white">B</text>
-
-  <!-- 행 3 -->
-  <text x="190" y="678" text-anchor="middle" dominant-baseline="middle" font-family="Consolas" font-size="80" font-weight="bold" fill="#1A4FBF">1</text>
-  <text x="398" y="678" text-anchor="middle" dominant-baseline="middle" font-family="Consolas" font-size="80" font-weight="bold" fill="#1A4FBF">2</text>
-  <text x="606" y="678" text-anchor="middle" dominant-baseline="middle" font-family="Consolas" font-size="80" font-weight="bold" fill="#1A4FBF">3</text>
-  <text x="824" y="678" text-anchor="middle" dominant-baseline="middle" font-family="Consolas" font-size="80" font-weight="bold" fill="white">C</text>
-
-  <!-- 행 4 레이블 -->
-  <text x="294" y="814" text-anchor="middle" dominant-baseline="middle" font-family="Consolas" font-size="30" fill="#FF5500">DEC · HEX</text>
-  <text x="720" y="814" text-anchor="middle" dominant-baseline="middle" font-family="Consolas" font-size="30" fill="#FF5500">OCT · BIN</text>
+  <!-- Layer 1: 배경 (어두운 파랑 — 번개를 돋보이게) -->
+  <rect width="1024" height="1024" rx="190" fill="url(#qbg3)"/>
+  <!-- 배경 빛번짐 효과 -->
+  <circle cx="512" cy="512" r="350" fill="#3949AB" opacity="0.3"/>
+  <!-- Layer 2: 번개 실루엣 (대각선) -->
+  <polygon points="600,110 380,530 510,530 424,920 780,420 610,420 760,110" fill="url(#bolt3)" stroke="#FFD600" stroke-width="8" stroke-linejoin="round"/>
+  <!-- Layer 3: 연산 기호들 (번개 주변) -->
+  <!-- + 기호 (좌상) -->
+  <text x="180" y="320" font-family="Arial Black" font-size="130" fill="#E8EAF6" text-anchor="middle" font-weight="900" opacity="0.9">+</text>
+  <!-- × 기호 (우상) -->
+  <text x="860" y="300" font-family="Arial Black" font-size="110" fill="#BBDEFB" text-anchor="middle" font-weight="900" opacity="0.8">×</text>
+  <!-- - 기호 (좌하) -->
+  <text x="170" y="760" font-family="Arial Black" font-size="140" fill="#C5CAE9" text-anchor="middle" font-weight="900" opacity="0.8">-</text>
+  <!-- = 기호 (우하) -->
+  <text x="870" y="770" font-family="Arial Black" font-size="120" fill="#E8EAF6" text-anchor="middle" font-weight="900" opacity="0.9">=</text>
+  <!-- 번개 하이라이트 (내부 흰색 광선) -->
+  <polygon points="590,170 430,500 528,500 462,840 700,470 558,470 690,170" fill="white" opacity="0.25"/>
 </svg>

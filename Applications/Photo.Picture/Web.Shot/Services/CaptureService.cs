@@ -20,32 +20,36 @@ public class CaptureService
     {
         Directory.CreateDirectory(settings.OutputFolder);
 
-        // 뷰포트 너비 조정
         await SetViewportWidthAsync(settings.ViewportWidth);
-
-        // 페이지 네비게이션 + 로드 대기
         await NavigateAndWaitAsync(settings.Url, settings.DelayMs);
 
-        // CDP: 전체 페이지 캡처
-        var cdpParams = new
+        try
         {
-            format              = "png",
-            captureBeyondViewport = true,
-            fromSurface         = true
-        };
-        var paramsJson = JsonSerializer.Serialize(cdpParams);
-        var resultJson = await _webView.CoreWebView2.CallDevToolsProtocolMethodAsync(
-            "Page.captureScreenshot", paramsJson);
+            var cdpParams = new
+            {
+                format              = "png",
+                captureBeyondViewport = true,
+                fromSurface         = true
+            };
+            var paramsJson = JsonSerializer.Serialize(cdpParams);
+            var resultJson = await _webView.CoreWebView2.CallDevToolsProtocolMethodAsync(
+                "Page.captureScreenshot", paramsJson);
 
-        using var result = JsonDocument.Parse(resultJson);
-        var base64 = result.RootElement.GetProperty("data").GetString()
-                     ?? throw new InvalidOperationException("캡처 데이터 없음");
+            using var result = JsonDocument.Parse(resultJson);
+            var base64 = result.RootElement.GetProperty("data").GetString()
+                         ?? throw new InvalidOperationException("캡처 데이터 없음");
 
-        var bytes    = Convert.FromBase64String(base64);
-        var fileName = BuildFileName(settings.Url, "png");
-        var filePath = Path.Combine(settings.OutputFolder, fileName);
-        await File.WriteAllBytesAsync(filePath, bytes);
-        return filePath;
+            var bytes    = Convert.FromBase64String(base64);
+            var fileName = BuildFileName(settings.Url, "png");
+            var filePath = Path.Combine(settings.OutputFolder, fileName);
+            await File.WriteAllBytesAsync(filePath, bytes);
+            return filePath;
+        }
+        finally
+        {
+            // 캡처 후 viewport 고정 해제 → 미리보기가 창 크기에 맞게 복원됨
+            await ClearViewportOverrideAsync();
+        }
     }
 
     /// <summary>전체 페이지 PDF 저장. 반환값: 저장된 파일 경로</summary>
@@ -59,15 +63,28 @@ public class CaptureService
         var fileName = BuildFileName(settings.Url, "pdf");
         var filePath = Path.Combine(settings.OutputFolder, fileName);
 
-        var pdfSettings = _webView.CoreWebView2.Environment.CreatePrintSettings();
-        pdfSettings.ShouldPrintBackgrounds    = true;
-        pdfSettings.ShouldPrintSelectionOnly  = false;
+        try
+        {
+            var pdfSettings = _webView.CoreWebView2.Environment.CreatePrintSettings();
+            pdfSettings.ShouldPrintBackgrounds   = true;
+            pdfSettings.ShouldPrintSelectionOnly = false;
 
-        await _webView.CoreWebView2.PrintToPdfAsync(filePath, pdfSettings);
-        return filePath;
+            await _webView.CoreWebView2.PrintToPdfAsync(filePath, pdfSettings);
+            return filePath;
+        }
+        finally
+        {
+            await ClearViewportOverrideAsync();
+        }
     }
 
     // ── 내부 헬퍼 ────────────────────────────────────────────────────────
+
+    private async Task ClearViewportOverrideAsync()
+    {
+        await _webView.CoreWebView2.CallDevToolsProtocolMethodAsync(
+            "Emulation.clearDeviceMetricsOverride", "{}");
+    }
 
     private async Task SetViewportWidthAsync(int width)
     {

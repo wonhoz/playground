@@ -45,6 +45,13 @@ public partial class MainWindow : Window
 
     // ── 설정 로드/저장 ───────────────────────────────────────────────────
 
+    // 경로 TextBox 끝부분(폴더명)이 보이도록 캐럿을 끝으로 이동
+    private void SetFolderPath(string path)
+    {
+        TxtOutputFolder.Text       = path;
+        TxtOutputFolder.CaretIndex = path.Length;
+    }
+
     private void LoadSettings()
     {
         var s = _settings.Current;
@@ -72,7 +79,7 @@ public partial class MainWindow : Window
 
         ChkPdf.IsChecked         = s.CapturePdf;
         ChkHidePreview.IsChecked = s.HidePreview;
-        TxtOutputFolder.Text     = s.OutputFolder;
+        SetFolderPath(s.OutputFolder);
     }
 
     private void SaveSettings()
@@ -296,7 +303,7 @@ public partial class MainWindow : Window
             InitialDirectory = TxtOutputFolder.Text
         };
         if (dlg.ShowDialog() != true) return;
-        TxtOutputFolder.Text = dlg.FolderName;
+        SetFolderPath(dlg.FolderName);
         _settings.Current.OutputFolder = dlg.FolderName;
         _settings.Save();
     }

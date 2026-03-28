@@ -149,7 +149,8 @@
         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
           <TextBlock Text="저장 폴더:" Foreground="{StaticResource TextDimBrush}"
                      VerticalAlignment="Center" Margin="0,0,6,0"/>
-          <TextBox x:Name="TxtOutputFolder" Width="220" Height="28"
+          <TextBox x:Name="TxtOutputFolder"
+                   MinWidth="160" MaxWidth="320"
                    IsReadOnly="True" Cursor="Arrow"
                    ToolTip="{Binding Text, RelativeSource={RelativeSource Self}}"/>
           <Button x:Name="BtnChangeFolder" Content="변경"

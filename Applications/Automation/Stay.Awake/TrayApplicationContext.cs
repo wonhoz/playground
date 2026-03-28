@@ -38,7 +38,6 @@ namespace StayAwake
         private DateTime _statsDate = DateTime.Today;
         private TimeSpan _todayActiveTime = TimeSpan.Zero;
         private DateTime _sessionRunStart;
-        private DateTime _appStartTime = DateTime.Now;
 
         public TrayApplicationContext()
         {
@@ -448,9 +447,9 @@ namespace StayAwake
 
             var total = _dailySimCount + _dailySkipCount;
             var skipRate = total > 0 ? (double)_dailySkipCount / total * 100 : 0;
-            var totalElapsed = DateTime.Now - _appStartTime;
-            var activeRate = totalElapsed.TotalSeconds > 0
-                ? activeTime.TotalSeconds / totalElapsed.TotalSeconds * 100
+            var todayElapsed = DateTime.Now - DateTime.Today; // 오늘 0시부터 지금까지
+            var activeRate = todayElapsed.TotalSeconds > 0
+                ? activeTime.TotalSeconds / todayElapsed.TotalSeconds * 100
                 : 0;
 
             var message = $@"StayAwake 오늘의 통계 ({_statsDate:yyyy-MM-dd})
@@ -462,7 +461,7 @@ namespace StayAwake
 
 [활성 시간]
 • 오늘 누적 활성 시간: {activeTime:hh\:mm\:ss}
-• 앱 실행 중 활성 비율: {activeRate:F1}% ({activeTime:hh\:mm\:ss} / {totalElapsed:hh\:mm\:ss})";
+• 오늘 활성 비율: {activeRate:F1}% ({activeTime:hh\:mm\:ss} / {todayElapsed:hh\:mm\:ss})";
 
             DarkInfoDialog.Show("오늘의 통계", message, 570, 460);
         }

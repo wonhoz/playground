@@ -86,15 +86,25 @@ public class CaptureService
     private async Task NavigateAndWaitAsync(string url, int delayMs)
     {
         var tcs = new TaskCompletionSource<bool>();
-        void OnLoaded(object? s, CoreWebView2NavigationCompletedEventArgs e)
+        void OnCompleted(object? s, CoreWebView2NavigationCompletedEventArgs e)
         {
-            _webView.CoreWebView2.NavigationCompleted -= OnLoaded;
-            tcs.TrySetResult(true);
+            _webView.CoreWebView2.NavigationCompleted -= OnCompleted;
+            if (!e.IsSuccess)
+                tcs.TrySetException(new InvalidOperationException($"페이지 로드 실패 ({e.WebErrorStatus})"));
+            else
+                tcs.TrySetResult(true);
         }
-        _webView.CoreWebView2.NavigationCompleted += OnLoaded;
+        _webView.CoreWebView2.NavigationCompleted += OnCompleted;
         _webView.CoreWebView2.Navigate(url);
-        await tcs.Task;
-        // 추가 렌더링 대기
+
+        // 30초 타임아웃
+        var timeout = Task.Delay(30_000);
+        if (await Task.WhenAny(tcs.Task, timeout) == timeout)
+        {
+            _webView.CoreWebView2.NavigationCompleted -= OnCompleted;
+            throw new TimeoutException("페이지 로드 타임아웃 (30초 초과)");
+        }
+        await tcs.Task; // 예외 전파
         await Task.Delay(delayMs);
     }
 

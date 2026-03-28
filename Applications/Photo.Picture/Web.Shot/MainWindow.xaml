@@ -30,6 +30,8 @@
           <ColumnDefinition Width="Auto"/>
           <ColumnDefinition Width="Auto"/>
           <ColumnDefinition Width="Auto"/>
+          <ColumnDefinition Width="Auto"/>
+          <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
 
         <!-- 앱 이름 -->
@@ -51,32 +53,46 @@
                      VerticalAlignment="Center" Margin="10,0,0,0"/>
         </Grid>
 
+        <!-- 클립보드 붙여넣기 -->
+        <Button Grid.Column="2" x:Name="BtnPaste"
+                Content="📋" Height="32" Width="36"
+                Margin="8,0,0,0"
+                Click="BtnPaste_Click"
+                ToolTip="클립보드 URL 붙여넣기"/>
+
         <!-- 캡처 버튼 -->
-        <Button Grid.Column="2" x:Name="BtnCapture"
+        <Button Grid.Column="3" x:Name="BtnCapture"
                 Content="📷 캡처" Height="32" MinWidth="80"
-                Margin="8,0,0,0" Style="{StaticResource AccentButton}"
+                Margin="6,0,0,0" Style="{StaticResource AccentButton}"
                 Click="BtnCapture_Click"/>
 
         <!-- 배치 캡처 버튼 -->
-        <Button Grid.Column="3" x:Name="BtnBatch"
-                Content="📋 배치" Height="32" MinWidth="70"
+        <Button Grid.Column="4" x:Name="BtnBatch"
+                Content="⚡ 배치" Height="32" MinWidth="70"
                 Margin="6,0,0,0"
                 Click="BtnBatch_Click"
                 ToolTip="TXT 파일에서 URL 목록을 읽어 일괄 캡처"/>
 
         <!-- 출력 폴더 열기 -->
-        <Button Grid.Column="4" x:Name="BtnOpenFolder"
+        <Button Grid.Column="5" x:Name="BtnOpenFolder"
                 Content="📁" Height="32" Width="36"
                 Margin="6,0,0,0"
                 Click="BtnOpenFolder_Click"
                 ToolTip="캡처 저장 폴더 열기"/>
 
         <!-- 히스토리 패널 토글 -->
-        <Button Grid.Column="5" x:Name="BtnHistory"
+        <Button Grid.Column="6" x:Name="BtnHistory"
                 Content="🕐" Height="32" Width="36"
                 Margin="6,0,0,0"
                 Click="BtnHistory_Click"
                 ToolTip="히스토리 패널 토글"/>
+
+        <!-- 도움말 -->
+        <Button Grid.Column="7" x:Name="BtnHelp"
+                Content="?" Height="32" Width="32"
+                Margin="6,0,0,0"
+                Click="BtnHelp_Click"
+                ToolTip="단축키 및 사용법 (F1)"/>
       </Grid>
     </Border>
 
@@ -125,9 +141,22 @@
 
         <!-- 미리보기 숨기기 -->
         <CheckBox x:Name="ChkHidePreview" Content="미리보기 숨기기"
-                  VerticalAlignment="Center"
+                  VerticalAlignment="Center" Margin="0,0,16,0"
                   Checked="ChkHidePreview_Changed"
                   Unchecked="ChkHidePreview_Changed"/>
+
+        <!-- 출력 폴더 -->
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+          <TextBlock Text="저장 폴더:" Foreground="{StaticResource TextDimBrush}"
+                     VerticalAlignment="Center" Margin="0,0,6,0"/>
+          <TextBox x:Name="TxtOutputFolder" Width="220" Height="28"
+                   IsReadOnly="True" Cursor="Arrow"
+                   ToolTip="{Binding Text, RelativeSource={RelativeSource Self}}"/>
+          <Button x:Name="BtnChangeFolder" Content="변경"
+                  Height="28" Padding="8,3" Margin="4,0,0,0"
+                  Click="BtnChangeFolder_Click"
+                  ToolTip="캡처 저장 폴더 변경"/>
+        </StackPanel>
       </WrapPanel>
     </Border>
 
@@ -193,6 +222,7 @@
         <Grid>
           <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
           </Grid.RowDefinitions>
@@ -215,8 +245,19 @@
             </Grid>
           </Border>
 
+          <!-- 캡처 이미지 미리보기 -->
+          <Border Grid.Row="1" x:Name="PreviewPanel"
+                  Visibility="Collapsed"
+                  BorderBrush="{StaticResource BorderBrush}"
+                  BorderThickness="0,0,0,1"
+                  Background="{StaticResource Surface2Brush}"
+                  Height="140">
+            <Image x:Name="ImgPreview"
+                   Stretch="Uniform" Margin="4"/>
+          </Border>
+
           <!-- 히스토리 목록 -->
-          <ListBox Grid.Row="1" x:Name="LstHistory"
+          <ListBox Grid.Row="2" x:Name="LstHistory"
                    BorderThickness="0"
                    ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                    SelectionChanged="LstHistory_SelectionChanged">
@@ -252,7 +293,7 @@
           </ListBox>
 
           <!-- 히스토리 항목 액션 -->
-          <Border Grid.Row="2"
+          <Border Grid.Row="3"
                   BorderBrush="{StaticResource BorderBrush}"
                   BorderThickness="0,1,0,0"
                   Padding="8">

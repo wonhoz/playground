@@ -8,6 +8,9 @@ public class BatchService
     private readonly CaptureService  _capture;
     private readonly HistoryService  _history;
     private bool _cancelled;
+    private readonly List<string> _failedUrls = new();
+
+    public IReadOnlyList<string> FailedUrls => _failedUrls;
 
     public event Action<int, int, string>? Progress;   // (current, total, url)
     public event Action<string, Exception>? ItemFailed; // (url, error)
@@ -22,6 +25,7 @@ public class BatchService
     public async Task<int> RunAsync(string urlListFile, CaptureSettings baseSettings)
     {
         _cancelled = false;
+        _failedUrls.Clear();
         var urls = ReadUrlsFromFile(urlListFile);
         int success = 0;
 
@@ -67,6 +71,7 @@ public class BatchService
             }
             catch (Exception ex)
             {
+                _failedUrls.Add(url);
                 ItemFailed?.Invoke(url, ex);
             }
         }

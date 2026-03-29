@@ -36,7 +36,13 @@ namespace StayAwake
                     var json = File.ReadAllText(_statsPath);
                     var stats = JsonSerializer.Deserialize<DailyStats>(json);
                     if (stats != null && stats.Date.Date == DateTime.Today)
+                    {
+                        // 활성 시간이 오늘 경과 시간을 초과할 수 없음 (이중 계산 등 비정상 누적 방지)
+                        var maxSeconds = (long)(DateTime.Now - DateTime.Today).TotalSeconds;
+                        if (stats.ActiveSeconds > maxSeconds)
+                            stats.ActiveSeconds = maxSeconds;
                         return stats;
+                    }
                 }
             }
             catch { /* 읽기 실패 시 새 통계 시작 */ }

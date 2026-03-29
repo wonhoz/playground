@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Background: deep navy gradient -->
+  <defs>
+    <linearGradient id="bg1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0D1B2A"/>
+      <stop offset="100%" stop-color="#1A2F4A"/>
+    </linearGradient>
+    <linearGradient id="shieldGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#4FC3F7"/>
+      <stop offset="60%" stop-color="#0288D1"/>
+      <stop offset="100%" stop-color="#01579B"/>
+    </linearGradient>
+    <linearGradient id="gloss" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="glow1">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1024" height="1024" rx="250" fill="url(#bg1)"/>
+
+  <!-- Shield body -->
+  <path d="M512 130 L760 240 L760 500 Q760 700 512 890 Q264 700 264 500 L264 240 Z"
+        fill="url(#shieldGrad)" filter="url(#glow1)"/>
+
+  <!-- Shield gloss overlay -->
+  <path d="M512 130 L760 240 L760 420 Q760 500 680 570 L512 130 Z"
+        fill="url(#gloss)"/>
+
+  <!-- Shield border -->
+  <path d="M512 130 L760 240 L760 500 Q760 700 512 890 Q264 700 264 500 L264 240 Z"
+        fill="none" stroke="#81D4FA" stroke-width="14" opacity="0.7"/>
+
+  <!-- PATH text inside shield -->
+  <text x="512" y="490" font-family="'Consolas','Courier New',monospace" font-size="170"
+        font-weight="700" fill="#FFFFFF" text-anchor="middle" dominant-baseline="middle"
+        letter-spacing="-4">PATH</text>
+
+  <!-- Checkmark below text -->
+  <path d="M420 560 L490 630 L620 510" fill="none" stroke="#A5F3A0" stroke-width="52"
+        stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Corner dots decoration -->
+  <circle cx="200" cy="200" r="18" fill="#4FC3F7" opacity="0.4"/>
+  <circle cx="824" cy="200" r="18" fill="#4FC3F7" opacity="0.4"/>
+  <circle cx="200" cy="824" r="10" fill="#4FC3F7" opacity="0.2"/>
+  <circle cx="824" cy="824" r="10" fill="#4FC3F7" opacity="0.2"/>
+</svg>

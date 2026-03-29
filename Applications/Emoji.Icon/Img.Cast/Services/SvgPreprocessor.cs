@@ -181,7 +181,7 @@ internal static class SvgPreprocessor
     {
         svg = DominantBaselineCentralRegex.Replace(svg, @"dy=""0.35em""");
         svg = DominantBaselineMiddleRegex .Replace(svg, @"dy=""0.35em""");
-        svg = DominantBaselineHangingRegex.Replace(svg, @"dy=""-0.7em""");
+        svg = DominantBaselineHangingRegex.Replace(svg, @"dy=""0.72em""");
         return svg;
     }
 

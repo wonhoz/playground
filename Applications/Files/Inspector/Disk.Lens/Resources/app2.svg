@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_03: metaphor | 돋보기(Lens) + 하드 드라이브 — X선처럼 들여다보기 | 중앙 심볼 | 하늘+청록+파랑 -->
+  <defs>
+    <linearGradient id="bg3" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#E3F2FD"/>
+      <stop offset="100%" stop-color="#90CAF9"/>
+    </linearGradient>
+    <filter id="sh3" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="7" stdDeviation="9" flood-color="#1565C0" flood-opacity="0.25"/>
+    </filter>
+    <clipPath id="lens3">
+      <circle cx="440" cy="440" r="280"/>
+    </clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="250" fill="url(#bg3)"/>
+
+  <!-- Layer 2: Lens -->
+  <circle cx="440" cy="440" r="290" fill="white" filter="url(#sh3)"/>
+  <circle cx="440" cy="440" r="280" fill="#F0F8FF"/>
+
+  <!-- Hard drive inside lens -->
+  <g clip-path="url(#lens3)">
+    <!-- Drive body -->
+    <rect x="220" y="290" width="440" height="300" rx="28" fill="#546E7A" filter="url(#sh3)"/>
+    <!-- Drive surface (silver) -->
+    <rect x="240" y="310" width="400" height="260" rx="20" fill="#90A4AE"/>
+    <!-- Platter circles -->
+    <circle cx="440" cy="440" r="110" fill="#B0BEC5"/>
+    <circle cx="440" cy="440" r="75" fill="#CFD8DC"/>
+    <circle cx="440" cy="440" r="40" fill="#90A4AE"/>
+    <circle cx="440" cy="440" r="18" fill="#546E7A"/>
+    <!-- Read arm -->
+    <rect x="440" y="320" width="16" height="130" rx="8" fill="#FF7043" transform="rotate(40, 440, 440)"/>
+    <circle cx="440" cy="320" r="12" fill="#FF7043" transform="rotate(40, 440, 440)"/>
+    <!-- Capacity bar (mini) -->
+    <rect x="255" y="530" width="370" height="24" rx="8" fill="#455A64"/>
+    <rect x="255" y="530" width="200" height="24" rx="8" fill="#1565C0"/>
+  </g>
+
+  <!-- Lens ring -->
+  <circle cx="440" cy="440" r="280" fill="none" stroke="#0288D1" stroke-width="44" filter="url(#sh3)"/>
+  <!-- Shine -->
+  <circle cx="360" cy="358" r="52" fill="white" opacity="0.28"/>
+
+  <!-- Handle -->
+  <line x1="660" y1="660" x2="900" y2="900" stroke="#0288D1" stroke-width="60" stroke-linecap="round" filter="url(#sh3)"/>
+
+  <!-- Layer 3: Size badge -->
+  <rect x="640" y="120" width="280" height="90" rx="24" fill="#1565C0" filter="url(#sh3)"/>
+  <text x="780" y="165" font-family="Arial Black, sans-serif" font-size="48" font-weight="900"
+        fill="white" text-anchor="middle" dominant-baseline="middle">500 GB</text>
+</svg>

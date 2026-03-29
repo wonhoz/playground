@@ -1,19 +1,46 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
   <defs>
-    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#1565C0"/>
-      <stop offset="100%" stop-color="#0D47A1"/>
+    <linearGradient id="bg5" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#C7D2FE"/>
+      <stop offset="100%" stop-color="#6366F1"/>
     </linearGradient>
-    <linearGradient id="glass" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#42A5F5"/>
-      <stop offset="100%" stop-color="#1E88E5"/>
-    </linearGradient>
+    <clipPath id="circle-clip">
+      <circle cx="512" cy="512" r="512"/>
+    </clipPath>
   </defs>
-  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
-  <!-- 돋보기 원 -->
-  <circle cx="210" cy="210" r="110" fill="none" stroke="url(#glass)" stroke-width="32"/>
-  <!-- 손잡이 -->
-  <line x1="292" y1="292" x2="400" y2="400" stroke="#90CAF9" stroke-width="36" stroke-linecap="round"/>
-  <!-- 이모지 심볼 -->
-  <text x="210" y="228" font-size="80" text-anchor="middle" fill="#E3F2FD" font-family="Segoe UI Emoji">😀</text>
+  <!-- Layer 1: Background -->
+  <circle cx="512" cy="512" r="512" fill="url(#bg5)"/>
+  <!-- Layer 2 + 3 + Title: scaled to ~90% of circle, clipped -->
+  <g clip-path="url(#circle-clip)" transform="translate(512,512) scale(1.6) translate(-520,-426)">
+    <!-- Hex grid pattern representing icon collection -->
+    <!-- Row 1 hexagons -->
+    <polygon points="310,216 370,216 400,268 370,320 310,320 280,268" fill="white" opacity="0.85"/>
+    <text x="340" y="285" font-size="68" text-anchor="middle">😀</text>
+    <polygon points="430,216 490,216 520,268 490,320 430,320 400,268" fill="white" opacity="0.85"/>
+    <text x="460" y="285" font-size="68" text-anchor="middle">🌟</text>
+    <polygon points="550,216 610,216 640,268 610,320 550,320 520,268" fill="white" opacity="0.85"/>
+    <text x="580" y="285" font-size="68" text-anchor="middle">🔥</text>
+    <polygon points="670,216 730,216 760,268 730,320 670,320 640,268" fill="white" opacity="0.85"/>
+    <text x="700" y="285" font-size="68" text-anchor="middle">💎</text>
+    <!-- Row 2 offset -->
+    <polygon points="370,330 430,330 460,382 430,434 370,434 340,382" fill="white" opacity="0.85"/>
+    <text x="400" y="399" font-size="68" text-anchor="middle">🎯</text>
+    <polygon points="490,330 550,330 580,382 550,434 490,434 460,382" fill="white" opacity="0.85"/>
+    <text x="520" y="399" font-size="68" text-anchor="middle">🚀</text>
+    <polygon points="610,330 670,330 700,382 670,434 610,434 580,382" fill="white" opacity="0.85"/>
+    <text x="640" y="399" font-size="68" text-anchor="middle">🎨</text>
+    <!-- Row 3 -->
+    <polygon points="310,444 370,444 400,496 370,548 310,548 280,496" fill="white" opacity="0.7"/>
+    <text x="340" y="513" font-size="68" text-anchor="middle" opacity="0.8">⚡</text>
+    <polygon points="430,444 490,444 520,496 490,548 430,548 400,496" fill="white" opacity="0.7"/>
+    <text x="460" y="513" font-size="68" text-anchor="middle" opacity="0.8">🦋</text>
+    <polygon points="550,444 610,444 640,496 610,548 550,548 520,496" fill="white" opacity="0.7"/>
+    <text x="580" y="513" font-size="68" text-anchor="middle" opacity="0.8">🍀</text>
+    <polygon points="670,444 730,444 760,496 730,548 670,548 640,496" fill="white" opacity="0.7"/>
+    <text x="700" y="513" font-size="68" text-anchor="middle" opacity="0.8">🌈</text>
+    <!-- Search circle highlight on one hex -->
+    <polygon points="490,330 550,330 580,382 550,434 490,434 460,382" fill="none" stroke="#FDE047" stroke-width="16"/>
+    <!-- Title -->
+    <text x="512" y="635" font-family="Arial" font-size="80" fill="white" text-anchor="middle" font-weight="bold">Icon Hunt</text>
+  </g>
 </svg>

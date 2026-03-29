@@ -175,11 +175,14 @@ public static class ImageConverter
         // SVG 전처리: 8자리 hex 색상 변환 + feDropShadow 확장
         string svgText   = File.ReadAllText(path, Encoding.UTF8);
         string processed = SvgPreprocessor.Process(svgText);
+        // viewBox 파싱: CullRect은 feDropShadow 등 필터 확장 시 콘텐츠 bounds로 계산되어
+        // 배경이 제외되면 Left > 0 → dx 음수 → 왼쪽 클리핑 발생. viewBox로 우회.
+        var (vbW, vbH) = ParseSvgViewBox(svgText);
         string tempPath  = Path.Combine(Path.GetTempPath(), $"imgcast_{Guid.NewGuid():N}.svg");
         try
         {
             File.WriteAllText(tempPath, processed, new UTF8Encoding(false));
-            return RenderSvg(tempPath, size);
+            return RenderSvg(tempPath, size, vbW, vbH);
         }
         finally
         {
@@ -187,18 +190,43 @@ public static class ImageConverter
         }
     }
 
-    static SKBitmap RenderSvg(string path, int size)
+    // SVG viewBox="x y w h" 에서 w, h 추출
+    static (float W, float H) ParseSvgViewBox(string svgText)
+    {
+        var m = System.Text.RegularExpressions.Regex.Match(svgText,
+            @"viewBox\s*=\s*""[^\s""]+\s+[^\s""]+\s+([0-9.]+)\s+([0-9.]+)""",
+            System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+        if (m.Success
+            && float.TryParse(m.Groups[1].Value, System.Globalization.NumberStyles.Float,
+                               System.Globalization.CultureInfo.InvariantCulture, out float w)
+            && float.TryParse(m.Groups[2].Value, System.Globalization.NumberStyles.Float,
+                               System.Globalization.CultureInfo.InvariantCulture, out float h))
+            return (w, h);
+        return (0, 0);
+    }
+
+    static SKBitmap RenderSvg(string path, int size, float vbW = 0, float vbH = 0)
     {
         var svg = new SKSvg();
         svg.Load(path);
         if (svg.Picture is null)
             throw new InvalidOperationException("SVG 파싱 실패");
 
-        var cullRect = svg.Picture.CullRect;
-        float left = cullRect.Left;
-        float top  = cullRect.Top;
-        float srcW = cullRect.Width;
-        float srcH = cullRect.Height;
+        // viewBox 기준 크기 우선 사용. 없으면 CullRect fallback (Left/Top 오프셋 보정 포함)
+        float srcW, srcH, left = 0, top = 0;
+        if (vbW > 0 && vbH > 0)
+        {
+            srcW = vbW;
+            srcH = vbH;
+        }
+        else
+        {
+            var cullRect = svg.Picture.CullRect;
+            left = cullRect.Left;
+            top  = cullRect.Top;
+            srcW = cullRect.Width;
+            srcH = cullRect.Height;
+        }
         if (srcW <= 0 || srcH <= 0) { left = 0; top = 0; srcW = size; srcH = size; }
 
         // 소형 사이즈는 2x 슈퍼샘플링으로 계단 현상 방지
@@ -210,7 +238,6 @@ public static class ImageConverter
             canvas.Clear(SKColors.Transparent);
 
             float scale = Math.Min(renderSize / srcW, renderSize / srcH);
-            // CullRect의 Left/Top 오프셋을 translate에 반영해 콘텐츠가 캔버스에 정확히 센터링
             float dx = (renderSize - srcW * scale) / 2f - left * scale;
             float dy = (renderSize - srcH * scale) / 2f - top  * scale;
 

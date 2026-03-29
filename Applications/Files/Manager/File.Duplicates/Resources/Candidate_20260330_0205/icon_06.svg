@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg6" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#4A148C"/>
+      <stop offset="100%" stop-color="#6A1B9A"/>
+    </linearGradient>
+    <linearGradient id="file6a" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#CE93D8"/>
+      <stop offset="100%" stop-color="#AB47BC"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: 딥 퍼플 배경 -->
+  <rect width="1024" height="1024" rx="196" fill="url(#bg6)"/>
+
+  <!-- Layer 2: 파일 스택 + 스캔 효과 (대각선 동적) -->
+  <!-- 그림자 파일들 (뒤) -->
+  <rect x="180" y="280" width="280" height="340" rx="16" fill="#7B1FA2" stroke="#CE93D8" stroke-width="3" opacity="0.5" transform="rotate(-8 320 450)"/>
+  <rect x="180" y="280" width="280" height="340" rx="16" fill="#7B1FA2" stroke="#CE93D8" stroke-width="3" opacity="0.7" transform="rotate(-4 320 450)"/>
+  <!-- 메인 파일 (앞) -->
+  <rect x="180" y="280" width="280" height="340" rx="16" fill="url(#file6a)" stroke="white" stroke-width="5"/>
+  <polygon points="390,280 460,350 460,350 390,350" fill="#6A1B9A"/>
+  <rect x="390" y="280" width="70" height="70" rx="8" fill="#6A1B9A"/>
+  <text x="320" y="490" font-family="'Courier New',monospace" font-size="26" fill="white" text-anchor="middle" dominant-baseline="middle">file.jpg</text>
+
+  <!-- 스캔 빔 (대각선 방향) -->
+  <line x1="460" y1="430" x2="700" y2="380" stroke="#E040FB" stroke-width="12" stroke-linecap="round" opacity="0.9"/>
+  <line x1="460" y1="480" x2="700" y2="430" stroke="#E040FB" stroke-width="8" stroke-linecap="round" opacity="0.6"/>
+  <line x1="460" y1="530" x2="700" y2="480" stroke="#E040FB" stroke-width="5" stroke-linecap="round" opacity="0.4"/>
+
+  <!-- 오른쪽 결과 — 중복 발견 + 삭제 -->
+  <rect x="560" y="300" width="360" height="200" rx="18" fill="#1A0030" stroke="#E040FB" stroke-width="4"/>
+  <text x="740" y="368" font-family="'Segoe UI',Arial,sans-serif" font-size="28" fill="#E040FB" text-anchor="middle" dominant-baseline="middle">Duplicate found!</text>
+  <rect x="600" y="400" width="280" height="56" rx="12" fill="#D32F2F"/>
+  <text x="740" y="430" font-family="'Segoe UI',Arial,sans-serif" font-weight="700" font-size="28" fill="white" text-anchor="middle" dominant-baseline="middle">🗑 Remove copy</text>
+
+  <!-- Layer 3: 디스크 절약 배지 -->
+  <rect x="180" y="730" width="664" height="90" rx="22" fill="#E040FB" opacity="0.85"/>
+  <text x="512" y="778" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="40" fill="white" text-anchor="middle" dominant-baseline="middle">1.2 GB freed</text>
+</svg>

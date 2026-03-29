@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg4" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#F1F8E9"/>
+      <stop offset="100%" stop-color="#DCEDC8"/>
+    </linearGradient>
+    <linearGradient id="seal" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFD740"/>
+      <stop offset="100%" stop-color="#FF8F00"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: 밝은 초록 배경 -->
+  <rect width="1024" height="1024" rx="200" fill="url(#bg4)"/>
+
+  <!-- Layer 2: 인증 도장 (seal) -->
+  <!-- 외각 톱니 -->
+  <polygon points="512,120 560,160 620,140 650,192 710,186 726,248 784,256 784,318 838,340 822,402 870,438 838,496 876,542 830,582 852,640 798,666 802,726 746,736 732,796 674,790 644,844 584,822 540,864 512,834 484,864 440,822 380,844 350,790 292,796 278,736 222,726 226,666 172,640 194,582 148,542 186,496 154,438 202,402 186,340 240,318 240,256 298,248 314,186 374,192 404,140 464,160" fill="url(#seal)"/>
+  <!-- 내부 원 -->
+  <circle cx="512" cy="492" r="280" fill="white" opacity="0.95"/>
+  <circle cx="512" cy="492" r="260" fill="none" stroke="#FF8F00" stroke-width="8"/>
+
+  <!-- 도장 내용: 체크마크 + 해시 텍스트 -->
+  <!-- 큰 체크 -->
+  <path d="M360 492 L460 592 L664 380" stroke="#2E7D32" stroke-width="50" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <!-- VERIFIED 텍스트 -->
+  <text x="512" y="668" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="46" fill="#1B5E20" text-anchor="middle" dominant-baseline="middle">VERIFIED</text>
+  <!-- SHA256 배지 -->
+  <rect x="376" y="700" width="272" height="48" rx="12" fill="#2E7D32"/>
+  <text x="512" y="726" font-family="'Segoe UI',Arial,sans-serif" font-weight="700" font-size="30" fill="white" text-anchor="middle" dominant-baseline="middle">SHA-256</text>
+
+  <!-- Layer 3: 파일 아이콘 (상단) -->
+  <rect x="440" y="280" width="144" height="170" rx="14" fill="#43A047" opacity="0.9"/>
+  <polygon points="536,280 584,328 584,328 536,328" fill="#1B5E20"/>
+  <rect x="536" y="280" width="48" height="48" rx="6" fill="#2E7D32"/>
+  <text x="512" y="406" font-family="'Segoe UI',Arial,sans-serif" font-size="28" fill="white" text-anchor="middle" dominant-baseline="middle">file.zip</text>
+</svg>

@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#E3F2FD"/>
+      <stop offset="100%" stop-color="#BBDEFB"/>
+    </linearGradient>
+    <linearGradient id="usedBar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#EF5350"/>
+      <stop offset="72%" stop-color="#EF5350"/>
+      <stop offset="72%" stop-color="#E8F5E9"/>
+      <stop offset="100%" stop-color="#E8F5E9"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: 하늘 배경 -->
+  <rect width="1024" height="1024" rx="200" fill="url(#bg2)"/>
+
+  <!-- Layer 2: 디스크 용량 게이지 -->
+  <!-- 디스크 C: -->
+  <text x="100" y="180" font-family="'Segoe UI',Arial,sans-serif" font-weight="700" font-size="48" fill="#1565C0">C:\</text>
+  <rect x="100" y="200" width="824" height="70" rx="16" fill="#E3F2FD" stroke="#90CAF9" stroke-width="4"/>
+  <rect x="100" y="200" width="594" height="70" rx="16" fill="#EF5350"/>
+  <text x="200" y="243" font-family="'Segoe UI',Arial,sans-serif" font-weight="700" font-size="36" fill="white" dominant-baseline="middle">213 GB used</text>
+  <text x="786" y="243" font-family="'Segoe UI',Arial,sans-serif" font-size="34" fill="#1565C0" dominant-baseline="middle" text-anchor="end">83 GB free</text>
+
+  <!-- 디스크 D: -->
+  <text x="100" y="340" font-family="'Segoe UI',Arial,sans-serif" font-weight="700" font-size="48" fill="#388E3C">D:\</text>
+  <rect x="100" y="360" width="824" height="70" rx="16" fill="#E8F5E9" stroke="#A5D6A7" stroke-width="4"/>
+  <rect x="100" y="360" width="300" height="70" rx="16" fill="#43A047"/>
+  <text x="200" y="403" font-family="'Segoe UI',Arial,sans-serif" font-weight="700" font-size="36" fill="white" dominant-baseline="middle">480 GB used</text>
+  <text x="906" y="403" font-family="'Segoe UI',Arial,sans-serif" font-size="34" fill="#388E3C" dominant-baseline="middle" text-anchor="end">1.1 TB free</text>
+
+  <!-- 파일 트리 (하단) -->
+  <rect x="100" y="480" width="824" height="320" rx="20" fill="white" opacity="0.7"/>
+  <!-- 트리 항목들 -->
+  <text x="130" y="540" font-family="'Segoe UI',Arial,sans-serif" font-size="34" fill="#1565C0">📁 Users/</text>
+  <rect x="130" y="550" width="500" height="12" rx="4" fill="#EF5350" opacity="0.7"/>
+  <text x="660" y="540" font-family="'Segoe UI',Arial,sans-serif" font-size="32" fill="#D32F2F">98 GB</text>
+  <text x="160" y="610" font-family="'Segoe UI',Arial,sans-serif" font-size="32" fill="#388E3C">📁 Videos/</text>
+  <rect x="160" y="620" width="340" height="10" rx="4" fill="#66BB6A" opacity="0.7"/>
+  <text x="660" y="610" font-family="'Segoe UI',Arial,sans-serif" font-size="30" fill="#388E3C">85 GB</text>
+  <text x="160" y="670" font-family="'Segoe UI',Arial,sans-serif" font-size="32" fill="#FF8F00">📁 Games/</text>
+  <rect x="160" y="680" width="210" height="10" rx="4" fill="#FFA726" opacity="0.7"/>
+  <text x="660" y="670" font-family="'Segoe UI',Arial,sans-serif" font-size="30" fill="#FF8F00">52 GB</text>
+  <text x="160" y="730" font-family="'Segoe UI',Arial,sans-serif" font-size="32" fill="#7B1FA2">📁 Docs/</text>
+  <rect x="160" y="740" width="120" height="10" rx="4" fill="#AB47BC" opacity="0.7"/>
+  <text x="660" y="730" font-family="'Segoe UI',Arial,sans-serif" font-size="30" fill="#7B1FA2">30 GB</text>
+
+  <!-- Layer 3: Disk.Lens 타이틀 -->
+  <rect x="100" y="840" width="824" height="76" rx="20" fill="#1565C0"/>
+  <text x="512" y="880" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="48" fill="white" text-anchor="middle" dominant-baseline="middle">Disk.Lens</text>
+</svg>

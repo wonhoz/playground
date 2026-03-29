@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg3" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFF8E1"/>
+      <stop offset="100%" stop-color="#FFE082"/>
+    </linearGradient>
+    <linearGradient id="box3" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#F57F17"/>
+      <stop offset="100%" stop-color="#E65100"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: 황금 배경 -->
+  <rect width="1024" height="1024" rx="196" fill="url(#bg3)"/>
+
+  <!-- Layer 2: 돋보기 + ZIP 상자 (Peek) -->
+  <!-- ZIP 박스 (상자) -->
+  <rect x="180" y="300" width="480" height="440" rx="24" fill="url(#box3)" stroke="white" stroke-width="8"/>
+  <!-- 상자 뚜껑 (열림) -->
+  <rect x="160" y="240" width="520" height="80" rx="16" fill="#FF8F00" stroke="white" stroke-width="6" transform="rotate(-15 420 280)"/>
+  <!-- 상자 내용 표시 (파일들) -->
+  <text x="170" y="450" font-family="'Segoe UI Emoji',Arial,sans-serif" font-size="36" fill="#FFF3E0">📄 main.cs</text>
+  <text x="170" y="506" font-family="'Segoe UI Emoji',Arial,sans-serif" font-size="34" fill="#FFF3E0">📁 src/</text>
+  <text x="170" y="558" font-family="'Segoe UI Emoji',Arial,sans-serif" font-size="34" fill="#FFF3E0">📄 README.md</text>
+  <text x="170" y="608" font-family="'Segoe UI Emoji',Arial,sans-serif" font-size="32" fill="#FFF3E0">📄 ...</text>
+  <!-- ZIP 텍스트 -->
+  <text x="660" y="400" font-family="'Courier New',monospace" font-weight="900" font-size="56" fill="#E65100" text-anchor="middle" transform="rotate(-30 660 400)">ZIP</text>
+
+  <!-- Layer 3: 돋보기 (Peek) — 크게 -->
+  <circle cx="720" cy="620" r="180" fill="none" stroke="#1565C0" stroke-width="24"/>
+  <circle cx="720" cy="620" r="140" fill="#E3F2FD" opacity="0.3"/>
+  <!-- 손잡이 -->
+  <line x1="850" y1="750" x2="940" y2="840" stroke="#1565C0" stroke-width="36" stroke-linecap="round"/>
+  <!-- 렌즈 내 + 기호 (확대) -->
+  <line x1="680" y1="620" x2="760" y2="620" stroke="#1565C0" stroke-width="14" stroke-linecap="round"/>
+  <line x1="720" y1="580" x2="720" y2="660" stroke="#1565C0" stroke-width="14" stroke-linecap="round"/>
+</svg>

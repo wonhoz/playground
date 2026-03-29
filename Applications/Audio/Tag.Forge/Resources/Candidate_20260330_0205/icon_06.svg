@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg6" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0A2A0A"/>
+      <stop offset="100%" stop-color="#1B3A1B"/>
+    </linearGradient>
+    <linearGradient id="card6" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1B5E20"/>
+      <stop offset="100%" stop-color="#2E7D32"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: 다크 그린 배경 -->
+  <rect width="1024" height="1024" rx="196" fill="url(#bg6)"/>
+
+  <!-- Layer 2: MP3 파일 카드 + 태그 정보 -->
+  <rect x="100" y="160" width="824" height="560" rx="24" fill="url(#card6)" opacity="0.9"/>
+  <!-- 파일 아이콘 + 이름 -->
+  <rect x="140" y="200" width="100" height="120" rx="12" fill="#1B5E20" stroke="#69F0AE" stroke-width="4"/>
+  <polygon points="220,200 240,220 240,220 220,220" fill="#0A3A0A"/>
+  <rect x="220" y="200" width="20" height="20" rx="3" fill="#0A3A0A"/>
+  <text x="190" y="298" font-family="'Courier New',monospace" font-size="22" fill="#69F0AE" text-anchor="middle" dominant-baseline="middle">MP3</text>
+  <text x="310" y="234" font-family="'Courier New',monospace" font-size="26" fill="#A5D6A7" dominant-baseline="middle">song.mp3</text>
+
+  <!-- 태그 항목들 (오른쪽) -->
+  <!-- Title 태그 -->
+  <rect x="140" y="360" width="160" height="48" rx="10" fill="#FFD740" opacity="0.9"/>
+  <text x="220" y="386" font-family="'Segoe UI',Arial,sans-serif" font-size="22" fill="#1A1A1A" text-anchor="middle" dominant-baseline="middle">Title</text>
+  <text x="330" y="386" font-family="'Courier New',monospace" font-size="26" fill="#FFD740" dominant-baseline="middle">Lose Yourself</text>
+
+  <!-- Artist 태그 -->
+  <rect x="140" y="426" width="160" height="48" rx="10" fill="#00E676" opacity="0.8"/>
+  <text x="220" y="452" font-family="'Segoe UI',Arial,sans-serif" font-size="22" fill="#1A1A1A" text-anchor="middle" dominant-baseline="middle">Artist</text>
+  <text x="330" y="452" font-family="'Courier New',monospace" font-size="26" fill="#69F0AE" dominant-baseline="middle">Eminem</text>
+
+  <!-- Album 태그 -->
+  <rect x="140" y="492" width="160" height="48" rx="10" fill="#42A5F5" opacity="0.8"/>
+  <text x="220" y="518" font-family="'Segoe UI',Arial,sans-serif" font-size="22" fill="#1A1A1A" text-anchor="middle" dominant-baseline="middle">Album</text>
+  <text x="330" y="518" font-family="'Courier New',monospace" font-size="26" fill="#90CAF9" dominant-baseline="middle">8 Mile Soundtrack</text>
+
+  <!-- Genre / Year 태그 -->
+  <rect x="140" y="558" width="160" height="48" rx="10" fill="#CE93D8" opacity="0.8"/>
+  <text x="220" y="584" font-family="'Segoe UI',Arial,sans-serif" font-size="22" fill="#1A1A1A" text-anchor="middle" dominant-baseline="middle">Genre</text>
+  <text x="330" y="584" font-family="'Courier New',monospace" font-size="26" fill="#CE93D8" dominant-baseline="middle">Hip-Hop · 2002</text>
+
+  <!-- Layer 3: 음표 + 저장 배지 -->
+  <text x="900" y="350" font-family="'Segoe UI Emoji',Arial,sans-serif" font-size="100" fill="#FFD740" text-anchor="middle" opacity="0.8">♫</text>
+  <rect x="200" y="820" width="624" height="74" rx="20" fill="#FFD740"/>
+  <text x="512" y="858" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="36" fill="#1A1A1A" text-anchor="middle" dominant-baseline="middle">💾  Tags Saved</text>
+</svg>

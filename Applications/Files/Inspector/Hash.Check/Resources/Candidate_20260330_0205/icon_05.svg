@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg5" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ECEFF1"/>
+      <stop offset="100%" stop-color="#CFD8DC"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: 밝은 회색 배경 -->
+  <rect width="1024" height="1024" rx="200" fill="url(#bg5)"/>
+
+  <!-- Layer 2: 2개 해시 비교 패널 -->
+  <!-- 파일 해시 (좌) -->
+  <rect x="60" y="160" width="440" height="640" rx="24" fill="#1B5E20" opacity="0.9"/>
+  <text x="280" y="220" font-family="'Segoe UI',Arial,sans-serif" font-weight="700" font-size="36" fill="white" text-anchor="middle" dominant-baseline="middle">File Hash</text>
+  <!-- SHA256 값 -->
+  <rect x="90" y="254" width="380" height="52" rx="12" fill="#2E7D32"/>
+  <text x="280" y="282" font-family="'Courier New',monospace" font-size="26" fill="#CCFF90" text-anchor="middle" dominant-baseline="middle">SHA256</text>
+  <text x="280" y="340" font-family="'Courier New',monospace" font-size="22" fill="#A5D6A7" text-anchor="middle">e3b0c44298fc...</text>
+  <text x="280" y="376" font-family="'Courier New',monospace" font-size="22" fill="#A5D6A7" text-anchor="middle">...4b9a3fb79b6f</text>
+
+  <!-- 파일 정보 -->
+  <text x="280" y="440" font-family="'Segoe UI',Arial,sans-serif" font-size="28" fill="#C8E6C9" text-anchor="middle">📄 setup.exe</text>
+  <text x="280" y="480" font-family="'Segoe UI',Arial,sans-serif" font-size="26" fill="#81C784" text-anchor="middle">145.2 MB</text>
+
+  <!-- 기대 해시 (우) -->
+  <rect x="524" y="160" width="440" height="640" rx="24" fill="#1565C0" opacity="0.9"/>
+  <text x="744" y="220" font-family="'Segoe UI',Arial,sans-serif" font-weight="700" font-size="36" fill="white" text-anchor="middle" dominant-baseline="middle">Expected</text>
+  <!-- 붙여넣기 해시 -->
+  <rect x="554" y="254" width="380" height="52" rx="12" fill="#0D47A1"/>
+  <text x="744" y="282" font-family="'Courier New',monospace" font-size="26" fill="#90CAF9" text-anchor="middle" dominant-baseline="middle">SHA256</text>
+  <text x="744" y="340" font-family="'Courier New',monospace" font-size="22" fill="#BBDEFB" text-anchor="middle">e3b0c44298fc...</text>
+  <text x="744" y="376" font-family="'Courier New',monospace" font-size="22" fill="#BBDEFB" text-anchor="middle">...4b9a3fb79b6f</text>
+  <text x="744" y="440" font-family="'Segoe UI',Arial,sans-serif" font-size="28" fill="#90CAF9" text-anchor="middle">official site</text>
+
+  <!-- Layer 3: 비교 결과 (중앙) -->
+  <rect x="280" y="840" width="464" height="100" rx="24" fill="#2E7D32"/>
+  <text x="512" y="880" font-family="'Segoe UI Emoji',Arial,sans-serif" font-size="48" text-anchor="middle" dominant-baseline="middle">✅ MATCH</text>
+</svg>

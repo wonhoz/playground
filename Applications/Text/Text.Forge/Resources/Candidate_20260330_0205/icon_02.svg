@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1B5E20"/>
+      <stop offset="100%" stop-color="#2E7D32"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: 다크그린 배경 -->
+  <rect width="1024" height="1024" rx="200" fill="url(#bg2)"/>
+
+  <!-- Layer 2: 코드 터미널 느낌 -->
+  <!-- 터미널 창 배경 -->
+  <rect x="80" y="120" width="864" height="784" rx="24" fill="#0A2010" opacity="0.8"/>
+  <!-- 터미널 헤더 -->
+  <rect x="80" y="120" width="864" height="58" rx="24" fill="#1B5E20"/>
+  <!-- 닫기/최소화/최대화 버튼 -->
+  <circle cx="130" cy="149" r="16" fill="#EF5350"/>
+  <circle cx="176" cy="149" r="16" fill="#FFC107"/>
+  <circle cx="222" cy="149" r="16" fill="#66BB6A"/>
+
+  <!-- 코드 줄들 -->
+  <!-- 줄 1 — JSON -->
+  <text x="110" y="240" font-family="'Courier New',monospace" font-size="44" fill="#69F0AE">{"key":</text>
+  <text x="378" y="240" font-family="'Courier New',monospace" font-size="44" fill="#FFD54F"> "value"}</text>
+  <!-- 줄 2 — 해시 -->
+  <text x="110" y="312" font-family="'Courier New',monospace" font-size="38" fill="#80DEEA">SHA256:</text>
+  <text x="110" y="358" font-family="'Courier New',monospace" font-size="34" fill="#CCFF90">a3f8b2c...</text>
+  <!-- 줄 3 — 정규식 -->
+  <text x="110" y="430" font-family="'Courier New',monospace" font-size="44" fill="#FF8A80">/^[\w]+$/</text>
+  <!-- 줄 4 — Base64 -->
+  <text x="110" y="500" font-family="'Courier New',monospace" font-size="38" fill="#CE93D8">Base64:</text>
+  <text x="110" y="546" font-family="'Courier New',monospace" font-size="34" fill="#F8BBD0">VGV4dEZvcmdl</text>
+  <!-- 줄 5 — JWT -->
+  <text x="110" y="618" font-family="'Courier New',monospace" font-size="36" fill="#FF7043">eyJhbGci...</text>
+  <!-- 커서 깜빡임 -->
+  <rect x="110" y="680" width="8" height="52" rx="2" fill="#69F0AE" opacity="0.9"/>
+
+  <!-- Layer 3: 앱 이름 배지 -->
+  <rect x="560" y="680" width="360" height="80" rx="18" fill="#2E7D32"/>
+  <text x="740" y="722" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="50" fill="white" text-anchor="middle" dominant-baseline="middle">TextForge</text>
+</svg>

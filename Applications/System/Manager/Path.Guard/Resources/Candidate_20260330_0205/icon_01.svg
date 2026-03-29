@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0D1B2A"/>
+      <stop offset="100%" stop-color="#1A2A3A"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: 다크 배경 -->
+  <rect width="1024" height="1024" rx="200" fill="url(#bg1)"/>
+
+  <!-- Layer 2: PATH 목록 -->
+  <!-- 헤더 -->
+  <rect x="80" y="120" width="864" height="62" rx="14" fill="#0A1A2A"/>
+  <text x="120" y="154" font-family="'Segoe UI',Arial,sans-serif" font-size="30" fill="#546E7A" dominant-baseline="middle">PATH</text>
+  <rect x="660" y="130" width="100" height="42" rx="10" fill="#1565C0"/>
+  <text x="710" y="154" font-family="'Segoe UI',Arial,sans-serif" font-size="26" fill="white" text-anchor="middle" dominant-baseline="middle">SYS</text>
+  <rect x="776" y="130" width="100" height="42" rx="10" fill="#388E3C"/>
+  <text x="826" y="154" font-family="'Segoe UI',Arial,sans-serif" font-size="26" fill="white" text-anchor="middle" dominant-baseline="middle">USR</text>
+
+  <!-- 경로 항목들 -->
+  <!-- 정상 1 -->
+  <rect x="80" y="198" width="864" height="62" rx="10" fill="#0D2A0D" opacity="0.8"/>
+  <rect x="80" y="198" width="8" height="62" rx="4" fill="#00E676"/>
+  <text x="110" y="230" font-family="'Courier New',monospace" font-size="28" fill="#A5D6A7" dominant-baseline="middle">C:\Windows\system32</text>
+  <text x="900" y="230" font-family="'Segoe UI',Arial,sans-serif" font-size="24" fill="#546E7A" dominant-baseline="middle" text-anchor="end">SYS</text>
+
+  <!-- 정상 2 -->
+  <rect x="80" y="274" width="864" height="62" rx="10" fill="#0D2A0D" opacity="0.7"/>
+  <rect x="80" y="274" width="8" height="62" rx="4" fill="#00E676"/>
+  <text x="110" y="306" font-family="'Courier New',monospace" font-size="28" fill="#A5D6A7" dominant-baseline="middle">C:\Program Files\Git\bin</text>
+  <text x="900" y="306" font-family="'Segoe UI',Arial,sans-serif" font-size="24" fill="#546E7A" dominant-baseline="middle" text-anchor="end">USR</text>
+
+  <!-- 깨진 경로 1 (경고) -->
+  <rect x="78" y="348" width="868" height="70" rx="12" fill="#2A0D0D" opacity="0.9"/>
+  <rect x="80" y="350" width="8" height="66" rx="4" fill="#EF5350"/>
+  <text x="110" y="380" font-family="'Courier New',monospace" font-size="28" fill="#EF9A9A" dominant-baseline="middle">C:\tools\old_sdk\bin</text>
+  <rect x="850" y="360" width="88" height="38" rx="10" fill="#D32F2F"/>
+  <text x="894" y="381" font-family="'Segoe UI',Arial,sans-serif" font-size="22" fill="white" text-anchor="middle" dominant-baseline="middle">✗ Missing</text>
+
+  <!-- 정상 3 -->
+  <rect x="80" y="432" width="864" height="62" rx="10" fill="#0D2A0D" opacity="0.6"/>
+  <rect x="80" y="432" width="8" height="62" rx="4" fill="#00E676"/>
+  <text x="110" y="464" font-family="'Courier New',monospace" font-size="28" fill="#A5D6A7" dominant-baseline="middle">C:\Users\user\AppData\Local</text>
+
+  <!-- 깨진 경로 2 -->
+  <rect x="78" y="508" width="868" height="70" rx="12" fill="#2A0D0D" opacity="0.8"/>
+  <rect x="80" y="510" width="8" height="66" rx="4" fill="#EF5350"/>
+  <text x="110" y="540" font-family="'Courier New',monospace" font-size="28" fill="#EF9A9A" dominant-baseline="middle">D:\deleted\some\path</text>
+  <rect x="850" y="520" width="88" height="38" rx="10" fill="#D32F2F"/>
+  <text x="894" y="541" font-family="'Segoe UI',Arial,sans-serif" font-size="22" fill="white" text-anchor="middle" dominant-baseline="middle">✗ Missing</text>
+
+  <!-- Layer 3: 요약 배지 -->
+  <rect x="80" y="840" width="864" height="84" rx="22" fill="#0D47A1"/>
+  <text x="300" y="882" font-family="'Segoe UI',Arial,sans-serif" font-size="34" fill="#90CAF9" text-anchor="middle" dominant-baseline="middle">18 paths</text>
+  <text x="512" y="882" font-family="'Segoe UI',Arial,sans-serif" font-size="34" fill="#546E7A" text-anchor="middle" dominant-baseline="middle">•</text>
+  <text x="700" y="882" font-family="'Segoe UI',Arial,sans-serif" font-size="34" fill="#EF5350" text-anchor="middle" dominant-baseline="middle">2 broken ⚠</text>
+</svg>

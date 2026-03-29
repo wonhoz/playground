@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg6" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#F1F8E9"/>
+      <stop offset="100%" stop-color="#DCEDC8"/>
+    </linearGradient>
+    <linearGradient id="arrow6" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#FF5722"/>
+      <stop offset="100%" stop-color="#FF9800"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Layer 1: 라임-그린 배경 -->
+  <rect width="1024" height="1024" rx="200" fill="url(#bg6)"/>
+
+  <!-- Layer 2: 입력 이미지 패널 (왼쪽) -->
+  <rect x="80" y="200" width="360" height="360" rx="24" fill="white" stroke="#8BC34A" stroke-width="10"/>
+  <!-- 이미지 프리뷰 — 산과 하늘 -->
+  <rect x="90" y="210" width="340" height="200" rx="12" fill="#B3E5FC"/>
+  <circle cx="320" cy="280" r="52" fill="#FFEE58"/>
+  <polygon points="90,410 220,270 350,410" fill="#81C784"/>
+  <polygon points="220,410 310,310 400,410" fill="#4CAF50"/>
+  <!-- 파일 타입 배지 -->
+  <rect x="90" y="460" width="120" height="50" rx="10" fill="#8BC34A"/>
+  <text x="150" y="493" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="36" fill="white" text-anchor="middle" dominant-baseline="middle">SVG</text>
+
+  <!-- Layer 3: 중앙 변환 화살표 (대각선/동적) -->
+  <path d="M480 430 L580 430 L580 400 L660 512 L580 624 L580 594 L480 594 L480 430 Z" fill="url(#arrow6)"/>
+
+  <!-- 출력 패널 (오른쪽) -->
+  <rect x="684" y="200" width="260" height="360" rx="24" fill="white" stroke="#FF7043" stroke-width="10"/>
+  <!-- ICO 멀티사이즈 그리드 -->
+  <text x="814" y="270" font-family="'Segoe UI',Arial,sans-serif" font-weight="800" font-size="42" fill="#E64A19" text-anchor="middle" dominant-baseline="middle">ICO</text>
+  <!-- 4개 크기 블록 -->
+  <rect x="710" y="296" width="90" height="90" rx="12" fill="#FF7043"/>
+  <text x="755" y="343" font-family="'Segoe UI',Arial,sans-serif" font-weight="700" font-size="28" fill="white" text-anchor="middle" dominant-baseline="middle">256</text>
+  <rect x="818" y="296" width="90" height="90" rx="12" fill="#FF8A65"/>
+  <text x="863" y="343" font-family="'Segoe UI',Arial,sans-serif" font-weight="700" font-size="28" fill="white" text-anchor="middle" dominant-baseline="middle">128</text>
+  <rect x="710" y="404" width="90" height="90" rx="12" fill="#FFAB91"/>
+  <text x="755" y="451" font-family="'Segoe UI',Arial,sans-serif" font-weight="700" font-size="28" fill="#BF360C" text-anchor="middle" dominant-baseline="middle">48</text>
+  <rect x="818" y="404" width="90" height="90" rx="12" fill="#FFCCBC"/>
+  <text x="863" y="451" font-family="'Segoe UI',Arial,sans-serif" font-weight="700" font-size="28" fill="#BF360C" text-anchor="middle" dominant-baseline="middle">32</text>
+
+  <!-- 하단 배치 힌트: 파일들 쌓인 모습 -->
+  <rect x="180" y="700" width="664" height="90" rx="18" fill="#C5E1A5" stroke="#8BC34A" stroke-width="6"/>
+  <text x="512" y="748" font-family="'Segoe UI',Arial,sans-serif" font-weight="700" font-size="44" fill="#33691E" text-anchor="middle" dominant-baseline="middle">Drop files to convert</text>
+</svg>

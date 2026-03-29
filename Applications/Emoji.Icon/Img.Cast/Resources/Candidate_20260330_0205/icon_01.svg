@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 배경 -->
+  <rect width="1024" height="1024" rx="200" fill="#E0FAF5"/>
+  <rect width="1024" height="1024" rx="200" fill="url(#bgGrad)"/>
+  <defs>
+    <linearGradient id="bgGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#B2F0E8"/>
+      <stop offset="100%" stop-color="#7ADFD0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Layer 2: 포맷 레이블 박스들 -->
+  <!-- SVG 레이블 (왼쪽) -->
+  <rect x="80" y="300" width="300" height="160" rx="28" fill="#00BFA5"/>
+  <text x="230" y="400" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="90" fill="white" text-anchor="middle" dominant-baseline="middle">SVG</text>
+
+  <!-- ICO 레이블 (오른쪽) -->
+  <rect x="644" y="300" width="300" height="160" rx="28" fill="#0077C2"/>
+  <text x="794" y="400" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="90" fill="white" text-anchor="middle" dominant-baseline="middle">ICO</text>
+
+  <!-- 추가 포맷 (아래) -->
+  <rect x="180" y="560" width="200" height="110" rx="20" fill="#26A69A" opacity="0.7"/>
+  <text x="280" y="625" font-family="'Segoe UI',Arial,sans-serif" font-weight="800" font-size="62" fill="white" text-anchor="middle" dominant-baseline="middle">PNG</text>
+
+  <rect x="644" y="560" width="200" height="110" rx="20" fill="#1565C0" opacity="0.7"/>
+  <text x="744" y="625" font-family="'Segoe UI',Arial,sans-serif" font-weight="800" font-size="62" fill="white" text-anchor="middle" dominant-baseline="middle">JPG</text>
+
+  <!-- Layer 3: 변환 화살표 -->
+  <g stroke="#FF6B00" stroke-width="18" stroke-linecap="round" fill="none">
+    <line x1="400" y1="375" x2="614" y2="375"/>
+    <polyline points="580,345 620,375 580,405"/>
+  </g>
+  <!-- 작은 화살표 (아래) -->
+  <g stroke="#FF8F00" stroke-width="12" stroke-linecap="round" fill="none" opacity="0.7">
+    <line x1="400" y1="615" x2="614" y2="615"/>
+    <polyline points="586,593 616,615 586,637"/>
+  </g>
+</svg>

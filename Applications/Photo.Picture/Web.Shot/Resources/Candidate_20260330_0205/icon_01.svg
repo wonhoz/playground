@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0D1B2A"/>
+      <stop offset="100%" stop-color="#1A2A3A"/>
+    </linearGradient>
+    <linearGradient id="btn1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FF6F00"/>
+      <stop offset="100%" stop-color="#E65100"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: 다크 배경 -->
+  <rect width="1024" height="1024" rx="196" fill="url(#bg1)"/>
+
+  <!-- Layer 2: 브라우저 창 UI -->
+  <rect x="80" y="140" width="864" height="600" rx="22" fill="#1E2A3A" stroke="#2A4A6A" stroke-width="4"/>
+  <!-- 브라우저 헤더 -->
+  <rect x="80" y="140" width="864" height="60" rx="22" fill="#0A1A2A"/>
+  <circle cx="130" cy="170" r="12" fill="#EF5350"/>
+  <circle cx="168" cy="170" r="12" fill="#FFD740"/>
+  <circle cx="206" cy="170" r="12" fill="#4CAF50"/>
+  <!-- URL 바 -->
+  <rect x="240" y="148" width="540" height="44" rx="14" fill="#263238"/>
+  <text x="510" y="172" font-family="'Courier New',monospace" font-size="24" fill="#78909C" text-anchor="middle" dominant-baseline="middle">https://example.com</text>
+
+  <!-- 웹 콘텐츠 미리보기 -->
+  <rect x="110" y="220" width="804" height="44" rx="8" fill="#1A3A5A" opacity="0.8"/>
+  <rect x="110" y="276" width="600" height="24" rx="5" fill="#2A4A6A" opacity="0.6"/>
+  <rect x="110" y="312" width="500" height="24" rx="5" fill="#2A4A6A" opacity="0.5"/>
+  <rect x="110" y="348" width="560" height="24" rx="5" fill="#2A4A6A" opacity="0.4"/>
+  <!-- 이미지 블록 -->
+  <rect x="110" y="390" width="380" height="200" rx="10" fill="#1565C0" opacity="0.5"/>
+  <text x="300" y="492" font-family="'Segoe UI',Arial,sans-serif" font-size="28" fill="#42A5F5" text-anchor="middle" dominant-baseline="middle">[ image ]</text>
+  <!-- 텍스트 블록 -->
+  <rect x="510" y="390" width="400" height="28" rx="5" fill="#2A4A6A" opacity="0.5"/>
+  <rect x="510" y="432" width="340" height="28" rx="5" fill="#2A4A6A" opacity="0.4"/>
+  <rect x="510" y="474" width="360" height="28" rx="5" fill="#2A4A6A" opacity="0.3"/>
+
+  <!-- Layer 3: 캡처 버튼 + 카메라 아이콘 -->
+  <rect x="260" y="790" width="504" height="84" rx="22" fill="url(#btn1)"/>
+  <text x="512" y="834" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="40" fill="white" text-anchor="middle" dominant-baseline="middle">📷  Capture</text>
+  <!-- 플래시 효과 -->
+  <circle cx="880" cy="200" r="52" fill="#FFD740" opacity="0.3"/>
+  <circle cx="880" cy="200" r="36" fill="#FFD740" opacity="0.6"/>
+  <text x="880" y="200" font-family="'Segoe UI Emoji',Arial,sans-serif" font-size="42" text-anchor="middle" dominant-baseline="middle">📷</text>
+</svg>

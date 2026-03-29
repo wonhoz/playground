@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg4" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#E8EAF6"/>
+      <stop offset="100%" stop-color="#9FA8DA"/>
+    </linearGradient>
+    <linearGradient id="gem1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FF6B6B"/>
+      <stop offset="100%" stop-color="#C62828"/>
+    </linearGradient>
+    <linearGradient id="gem2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#69F0AE"/>
+      <stop offset="100%" stop-color="#00695C"/>
+    </linearGradient>
+    <linearGradient id="gem3" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#40C4FF"/>
+      <stop offset="100%" stop-color="#0277BD"/>
+    </linearGradient>
+    <linearGradient id="dirt" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#D7CCC8"/>
+      <stop offset="100%" stop-color="#8D6E63"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: 연보라 배경 -->
+  <rect width="1024" height="1024" rx="200" fill="url(#bg4)"/>
+
+  <!-- Layer 2: 지층/채굴 장면 -->
+  <!-- 땅 배경 -->
+  <path d="M50 600 Q200 560 400 580 Q600 600 800 570 Q900 555 974 580 L974 974 L50 974 Z" fill="url(#dirt)"/>
+  <!-- 지하 어두운 층 -->
+  <path d="M50 720 Q300 700 512 720 Q700 740 974 700 L974 974 L50 974 Z" fill="#5D4037" opacity="0.6"/>
+
+  <!-- 보석들 (채굴 중인 아이콘들) -->
+  <!-- 루비 (큰, 중앙) — 이미 발굴된 아이콘 -->
+  <polygon points="512,440 580,520 512,620 444,520" fill="url(#gem1)" stroke="#FFCDD2" stroke-width="6"/>
+  <polygon points="512,440 580,520 512,490" fill="#FF8A80" opacity="0.5"/>
+  <!-- 에메랄드 (왼쪽, 땅 위) -->
+  <polygon points="240,500 290,560 240,620 190,560" fill="url(#gem2)" stroke="#B2DFDB" stroke-width="5"/>
+  <polygon points="240,500 290,560 240,530" fill="#A7FFEB" opacity="0.5"/>
+  <!-- 사파이어 (오른쪽) -->
+  <polygon points="760,460 810,530 760,600 710,530" fill="url(#gem3)" stroke="#B3E5FC" stroke-width="5"/>
+  <polygon points="760,460 810,530 760,490" fill="#80D8FF" opacity="0.5"/>
+
+  <!-- 곡괭이 (발굴 도구) -->
+  <g transform="translate(580 180) rotate(45)">
+    <rect x="-14" y="-180" width="28" height="200" rx="10" fill="#795548"/>
+    <path d="M-14,-180 Q0,-240 50,-200 L30,-160 Z" fill="#B0BEC5"/>
+    <path d="M14,-180 Q0,-240 -50,-200 L-30,-160 Z" fill="#90A4AE"/>
+  </g>
+
+  <!-- Layer 3: 반짝이 효과 -->
+  <text x="512" y="380" font-family="'Segoe UI Emoji',Arial,sans-serif" font-size="60" text-anchor="middle">✨</text>
+  <circle cx="400" cy="420" r="12" fill="#FFD740" opacity="0.8"/>
+  <circle cx="640" cy="400" r="10" fill="#FFEE58" opacity="0.7"/>
+  <circle cx="512" cy="350" r="8" fill="white" opacity="0.9"/>
+  <!-- 발굴 레이블 -->
+  <rect x="308" y="760" width="408" height="82" rx="18" fill="#3949AB" opacity="0.85"/>
+  <text x="512" y="802" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="50" fill="white" text-anchor="middle" dominant-baseline="middle">ICON HUNT</text>
+</svg>

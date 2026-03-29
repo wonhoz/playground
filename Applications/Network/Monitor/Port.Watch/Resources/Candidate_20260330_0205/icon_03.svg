@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg3" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0D2A4A"/>
+      <stop offset="100%" stop-color="#0A1A30"/>
+    </linearGradient>
+    <linearGradient id="door" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#5D4037"/>
+      <stop offset="100%" stop-color="#4E342E"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: 어두운 네이비 배경 -->
+  <rect width="1024" height="1024" rx="200" fill="url(#bg3)"/>
+
+  <!-- Layer 2: 포트 = 문 -->
+  <!-- 문 프레임 -->
+  <rect x="312" y="200" width="400" height="580" rx="20" fill="#37474F"/>
+  <!-- 문 패널 -->
+  <rect x="332" y="220" width="360" height="540" rx="14" fill="url(#door)"/>
+  <!-- 문 패널 장식 -->
+  <rect x="352" y="240" width="150" height="200" rx="8" fill="#6D4C41"/>
+  <rect x="522" y="240" width="150" height="200" rx="8" fill="#6D4C41"/>
+  <rect x="352" y="460" width="320" height="160" rx="8" fill="#6D4C41"/>
+  <!-- 문손잡이 -->
+  <circle cx="682" cy="510" r="22" fill="#FFD740"/>
+  <circle cx="682" cy="510" r="14" fill="#FF8F00"/>
+
+  <!-- 포트 번호 패찰 -->
+  <rect x="362" y="660" width="300" height="80" rx="14" fill="#0D47A1"/>
+  <text x="512" y="702" font-family="'Courier New',monospace" font-weight="900" font-size="54" fill="white" text-anchor="middle" dominant-baseline="middle">:8080</text>
+
+  <!-- Layer 3: 문지기 실루엣 (오른쪽) -->
+  <!-- 머리 -->
+  <circle cx="800" cy="400" r="60" fill="#00ACC1"/>
+  <!-- 모자 (경비 모자) -->
+  <rect x="752" y="352" width="96" height="28" rx="8" fill="#006064"/>
+  <rect x="730" y="336" width="140" height="22" rx="4" fill="#00838F"/>
+  <!-- 몸 -->
+  <ellipse cx="800" cy="540" rx="70" ry="100" fill="#00ACC1"/>
+  <!-- 방패 -->
+  <path d="M800 460 Q840 480 840 530 Q840 570 800 590 Q760 570 760 530 Q760 480 800 460 Z" fill="#FFD740"/>
+  <text x="800" y="535" font-family="'Courier New',monospace" font-size="26" fill="#E65100" text-anchor="middle" dominant-baseline="middle">✓</text>
+  <!-- 팔 (뻗은 자세) -->
+  <line x1="730" y1="500" x2="620" y2="510" stroke="#00ACC1" stroke-width="30" stroke-linecap="round"/>
+  <line x1="870" y1="500" x2="944" y2="480" stroke="#00ACC1" stroke-width="30" stroke-linecap="round"/>
+
+  <!-- STOP 손 -->
+  <circle cx="600" cy="510" r="36" fill="#00ACC1"/>
+  <text x="600" y="510" font-family="'Segoe UI',Arial,sans-serif" font-size="40" fill="white" text-anchor="middle" dominant-baseline="middle">✋</text>
+
+  <!-- 감시 텍스트 -->
+  <rect x="310" y="860" width="404" height="66" rx="16" fill="#006064" opacity="0.8"/>
+  <text x="512" y="895" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="42" fill="#00E5FF" text-anchor="middle" dominant-baseline="middle">PORT WATCH</text>
+</svg>

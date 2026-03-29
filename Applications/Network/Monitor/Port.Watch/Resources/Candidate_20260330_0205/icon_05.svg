@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg5" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0A2040"/>
+      <stop offset="50%" stop-color="#1565C0"/>
+      <stop offset="100%" stop-color="#004D80"/>
+    </linearGradient>
+    <linearGradient id="lighthouse" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ECEFF1"/>
+      <stop offset="100%" stop-color="#B0BEC5"/>
+    </linearGradient>
+    <radialGradient id="beam" cx="50%" cy="0%" r="100%">
+      <stop offset="0%" stop-color="#FFD740" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#FFD740" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <!-- Layer 1: 해질녘 바다 -->
+  <rect width="1024" height="1024" rx="200" fill="url(#bg5)"/>
+  <!-- 파도 -->
+  <path d="M50 780 Q200 740 350 780 Q500 820 650 780 Q800 740 974 780 L974 1024 L50 1024 Z" fill="#0D47A1" opacity="0.6"/>
+  <path d="M50 860 Q250 820 450 860 Q650 900 850 860 Q900 848 974 860 L974 1024 L50 1024 Z" fill="#01579B" opacity="0.8"/>
+
+  <!-- Layer 2: 등대 -->
+  <!-- 등대 탑 -->
+  <rect x="440" y="280" width="144" height="500" rx="20" fill="url(#lighthouse)"/>
+  <!-- 줄무늬 장식 -->
+  <rect x="440" y="380" width="144" height="40" rx="0" fill="#EF5350" opacity="0.8"/>
+  <rect x="440" y="500" width="144" height="40" rx="0" fill="#EF5350" opacity="0.8"/>
+  <rect x="440" y="620" width="144" height="40" rx="0" fill="#EF5350" opacity="0.8"/>
+  <!-- 등대 꼭대기 (돔) -->
+  <rect x="420" y="220" width="184" height="70" rx="14" fill="#546E7A"/>
+  <ellipse cx="512" cy="220" rx="92" ry="36" fill="#455A64"/>
+  <!-- 전구 -->
+  <circle cx="512" cy="230" r="50" fill="#FFD740" opacity="0.95"/>
+  <circle cx="512" cy="230" r="34" fill="white" opacity="0.7"/>
+  <!-- 빛 기둥 -->
+  <path d="M512 180 L300 80 L724 80 Z" fill="url(#beam)" opacity="0.7"/>
+  <path d="M512 180 L100 400 L512 260 Z" fill="#FFD740" opacity="0.12"/>
+  <path d="M512 180 L924 400 L512 260 Z" fill="#FFD740" opacity="0.12"/>
+  <!-- 등대 문 -->
+  <rect x="478" y="680" width="68" height="100" rx="14" fill="#546E7A"/>
+
+  <!-- Layer 3: 포트 번호 플로팅 -->
+  <rect x="100" y="400" width="160" height="56" rx="14" fill="#00695C" opacity="0.9"/>
+  <text x="180" y="430" font-family="'Courier New',monospace" font-weight="900" font-size="36" fill="#A5D6A7" text-anchor="middle" dominant-baseline="middle">:80</text>
+  <rect x="760" y="360" width="176" height="56" rx="14" fill="#1565C0" opacity="0.9"/>
+  <text x="848" y="390" font-family="'Courier New',monospace" font-weight="900" font-size="36" fill="#90CAF9" text-anchor="middle" dominant-baseline="middle">:443</text>
+  <rect x="120" y="600" width="176" height="56" rx="14" fill="#D32F2F" opacity="0.85"/>
+  <text x="208" y="630" font-family="'Courier New',monospace" font-weight="900" font-size="36" fill="#FF8A80" text-anchor="middle" dominant-baseline="middle">:8080</text>
+</svg>

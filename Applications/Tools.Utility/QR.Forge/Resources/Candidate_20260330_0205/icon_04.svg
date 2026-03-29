@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg4" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#E65100"/>
+      <stop offset="100%" stop-color="#BF360C"/>
+    </linearGradient>
+    <linearGradient id="anvil4" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#546E7A"/>
+      <stop offset="100%" stop-color="#263238"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: 오렌지-레드 배경 -->
+  <rect width="1024" height="1024" rx="196" fill="url(#bg4)"/>
+  <!-- 열기 효과 -->
+  <ellipse cx="512" cy="950" rx="380" ry="90" fill="#FF8F00" opacity="0.25"/>
+
+  <!-- Layer 2: 모루 + QR 모듈 단조 -->
+  <!-- 모루 받침 -->
+  <rect x="240" y="720" width="544" height="72" rx="12" fill="url(#anvil4)"/>
+  <rect x="370" y="660" width="280" height="68" rx="0" fill="#546E7A"/>
+  <!-- 모루 상판 -->
+  <rect x="200" y="590" width="624" height="80" rx="16" fill="url(#anvil4)"/>
+
+  <!-- 모루 위 QR 모듈들 (단조 중) -->
+  <rect x="290" y="520" width="50" height="50" rx="6" fill="white" opacity="0.9"/>
+  <rect x="356" y="520" width="50" height="50" rx="6" fill="white" opacity="0.85"/>
+  <rect x="422" y="510" width="50" height="50" rx="6" fill="white" opacity="0.9"/>
+  <rect x="488" y="520" width="50" height="50" rx="6" fill="white" opacity="0.8"/>
+  <rect x="554" y="510" width="50" height="50" rx="6" fill="white" opacity="0.85"/>
+  <rect x="620" y="520" width="50" height="50" rx="6" fill="white" opacity="0.9"/>
+  <rect x="686" y="520" width="50" height="50" rx="6" fill="white" opacity="0.8"/>
+
+  <!-- 망치 (대각선) -->
+  <g transform="rotate(-40 520 340)">
+    <rect x="488" y="160" width="56" height="280" rx="12" fill="#8D6E63"/>
+    <rect x="416" y="120" width="200" height="90" rx="14" fill="#4E342E"/>
+  </g>
+
+  <!-- 불꽃 파티클 -->
+  <circle cx="340" cy="490" r="16" fill="#FFD740" opacity="0.9"/>
+  <circle cx="610" cy="480" r="12" fill="#FF8F00" opacity="0.8"/>
+  <circle cx="440" cy="460" r="10" fill="#FFD740" opacity="0.7"/>
+  <circle cx="680" cy="470" r="14" fill="#FF6F00" opacity="0.8"/>
+  <circle cx="510" cy="440" r="8" fill="#FFD740" opacity="0.9"/>
+
+  <!-- Layer 3: 배지 -->
+  <rect x="240" y="840" width="544" height="68" rx="18" fill="#FF8F00" opacity="0.9"/>
+  <text x="512" y="876" font-family="'Segoe UI',Arial,sans-serif" font-weight="700" font-size="34" fill="white" text-anchor="middle" dominant-baseline="middle">Forge Your QR</text>
+</svg>

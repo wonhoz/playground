@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1A1A2E"/>
+      <stop offset="100%" stop-color="#16213E"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: 다크 배경 (로그 터미널) -->
+  <rect width="1024" height="1024" rx="200" fill="url(#bg1)"/>
+
+  <!-- Layer 2: 로그 라인들 -->
+  <!-- INFO 라인 -->
+  <rect x="80" y="140" width="120" height="60" rx="10" fill="#1565C0"/>
+  <text x="140" y="173" font-family="'Courier New',monospace" font-weight="700" font-size="34" fill="white" text-anchor="middle" dominant-baseline="middle">INFO</text>
+  <text x="230" y="173" font-family="'Courier New',monospace" font-size="32" fill="#90CAF9" dominant-baseline="middle"> Server started on :8080</text>
+
+  <!-- DEBUG 라인 -->
+  <rect x="80" y="220" width="128" height="60" rx="10" fill="#388E3C"/>
+  <text x="144" y="253" font-family="'Courier New',monospace" font-weight="700" font-size="34" fill="white" text-anchor="middle" dominant-baseline="middle">DEBUG</text>
+  <text x="240" y="253" font-family="'Courier New',monospace" font-size="32" fill="#A5D6A7" dominant-baseline="middle"> Loading config...</text>
+
+  <!-- WARN 라인 -->
+  <rect x="80" y="300" width="120" height="60" rx="10" fill="#F57F17"/>
+  <text x="140" y="333" font-family="'Courier New',monospace" font-weight="700" font-size="34" fill="white" text-anchor="middle" dominant-baseline="middle">WARN</text>
+  <text x="230" y="333" font-family="'Courier New',monospace" font-size="32" fill="#FFD54F" dominant-baseline="middle"> Memory 85% used</text>
+
+  <!-- ERROR 라인 (큰, 강조) -->
+  <rect x="68" y="388" width="888" height="74" rx="14" fill="#B71C1C" opacity="0.7"/>
+  <rect x="80" y="394" width="128" height="60" rx="10" fill="#D32F2F"/>
+  <text x="144" y="427" font-family="'Courier New',monospace" font-weight="700" font-size="34" fill="white" text-anchor="middle" dominant-baseline="middle">ERROR</text>
+  <text x="240" y="427" font-family="'Courier New',monospace" font-size="32" fill="#FF8A80" dominant-baseline="middle"> NullReference: line 42</text>
+
+  <!-- INFO 라인 -->
+  <rect x="80" y="484" width="120" height="60" rx="10" fill="#1565C0"/>
+  <text x="140" y="517" font-family="'Courier New',monospace" font-weight="700" font-size="34" fill="white" text-anchor="middle" dominant-baseline="middle">INFO</text>
+  <text x="230" y="517" font-family="'Courier New',monospace" font-size="32" fill="#90CAF9" dominant-baseline="middle"> Reconnecting...</text>
+
+  <!-- FATAL 라인 -->
+  <rect x="80" y="564" width="120" height="60" rx="10" fill="#880E4F"/>
+  <text x="140" y="597" font-family="'Courier New',monospace" font-weight="700" font-size="34" fill="white" text-anchor="middle" dominant-baseline="middle">FATAL</text>
+  <text x="230" y="597" font-family="'Courier New',monospace" font-size="32" fill="#F48FB1" dominant-baseline="middle"> Connection failed</text>
+
+  <!-- Layer 3: 하단 필터 바 -->
+  <rect x="80" y="800" width="864" height="76" rx="18" fill="#263238" opacity="0.9"/>
+  <text x="160" y="840" font-family="'Segoe UI',Arial,sans-serif" font-size="32" fill="#78909C" dominant-baseline="middle">🔍 Filter...</text>
+  <!-- 레벨 버튼들 -->
+  <rect x="560" y="816" width="88" height="44" rx="10" fill="#D32F2F"/>
+  <text x="604" y="840" font-family="'Segoe UI',Arial,sans-serif" font-size="26" fill="white" text-anchor="middle" dominant-baseline="middle">ERR</text>
+  <rect x="660" y="816" width="88" height="44" rx="10" fill="#F57F17"/>
+  <text x="704" y="840" font-family="'Segoe UI',Arial,sans-serif" font-size="26" fill="white" text-anchor="middle" dominant-baseline="middle">WRN</text>
+  <rect x="760" y="816" width="88" height="44" rx="10" fill="#388E3C"/>
+  <text x="804" y="840" font-family="'Segoe UI',Arial,sans-serif" font-size="26" fill="white" text-anchor="middle" dominant-baseline="middle">INF</text>
+</svg>

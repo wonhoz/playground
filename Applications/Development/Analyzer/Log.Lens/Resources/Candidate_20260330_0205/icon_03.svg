@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg3" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFFDE7"/>
+      <stop offset="100%" stop-color="#FFF176"/>
+    </linearGradient>
+    <linearGradient id="lensFrame" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1565C0"/>
+      <stop offset="100%" stop-color="#0D47A1"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: 노랑 배경 -->
+  <rect width="1024" height="1024" rx="200" fill="url(#bg3)"/>
+
+  <!-- Layer 2: 렌즈 안 로그 텍스트 -->
+  <circle cx="450" cy="460" r="300" fill="#0D1117" opacity="0.95"/>
+  <!-- 로그 텍스트 내용 (렌즈 안) -->
+  <text x="220" y="310" font-family="'Courier New',monospace" font-size="34" fill="#1565C0" dominant-baseline="middle">[INFO]</text>
+  <text x="390" y="310" font-family="'Courier New',monospace" font-size="30" fill="#90CAF9" dominant-baseline="middle"> startup ok</text>
+
+  <rect x="218" y="346" width="460" height="44" rx="8" fill="#B71C1C" opacity="0.3"/>
+  <text x="220" y="370" font-family="'Courier New',monospace" font-size="34" fill="#EF5350" dominant-baseline="middle">[ERR]</text>
+  <text x="380" y="370" font-family="'Courier New',monospace" font-size="30" fill="#FF8A80" dominant-baseline="middle"> connection</text>
+
+  <text x="220" y="430" font-family="'Courier New',monospace" font-size="34" fill="#F57F17" dominant-baseline="middle">[WRN]</text>
+  <text x="390" y="430" font-family="'Courier New',monospace" font-size="30" fill="#FFD54F" dominant-baseline="middle"> mem 90%</text>
+
+  <text x="220" y="490" font-family="'Courier New',monospace" font-size="34" fill="#388E3C" dominant-baseline="middle">[DBG]</text>
+  <text x="390" y="490" font-family="'Courier New',monospace" font-size="30" fill="#A5D6A7" dominant-baseline="middle"> retry #3</text>
+
+  <text x="220" y="550" font-family="'Courier New',monospace" font-size="34" fill="#1565C0" dominant-baseline="middle">[INFO]</text>
+  <text x="390" y="550" font-family="'Courier New',monospace" font-size="30" fill="#90CAF9" dominant-baseline="middle"> done</text>
+
+  <!-- 돋보기 테두리 -->
+  <circle cx="450" cy="460" r="300" fill="none" stroke="url(#lensFrame)" stroke-width="42"/>
+  <!-- 손잡이 -->
+  <line x1="692" y1="702" x2="910" y2="920" stroke="#0D47A1" stroke-width="60" stroke-linecap="round"/>
+  <!-- 렌즈 반사 -->
+  <path d="M310 290 Q290 340 292 400" stroke="white" stroke-width="16" stroke-linecap="round" fill="none" opacity="0.2"/>
+
+  <!-- Layer 3: 타이틀 배지 -->
+  <rect x="548" y="180" width="284" height="68" rx="18" fill="#1565C0"/>
+  <text x="690" y="216" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="44" fill="white" text-anchor="middle" dominant-baseline="middle">Log.Lens</text>
+</svg>

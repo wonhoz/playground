@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg5" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0D1B2A"/>
+      <stop offset="100%" stop-color="#1B2A4A"/>
+    </linearGradient>
+    <radialGradient id="radar" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#00E5FF" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#00E5FF" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <!-- Layer 1: 네이비 배경 -->
+  <rect width="1024" height="1024" rx="200" fill="url(#bg5)"/>
+
+  <!-- Layer 2: 레이더 파문 -->
+  <circle cx="512" cy="512" r="420" fill="none" stroke="#00E5FF" stroke-width="4" opacity="0.25"/>
+  <circle cx="512" cy="512" r="320" fill="none" stroke="#00E5FF" stroke-width="4" opacity="0.35"/>
+  <circle cx="512" cy="512" r="220" fill="none" stroke="#00E5FF" stroke-width="5" opacity="0.5"/>
+  <circle cx="512" cy="512" r="120" fill="none" stroke="#00E5FF" stroke-width="6" opacity="0.7"/>
+  <!-- 레이더 십자선 -->
+  <line x1="512" y1="90" x2="512" y2="930" stroke="#00E5FF" stroke-width="2" opacity="0.3"/>
+  <line x1="90" y1="512" x2="930" y2="512" stroke="#00E5FF" stroke-width="2" opacity="0.3"/>
+  <!-- 레이더 스캔 섹터 -->
+  <path d="M512 512 L512 132 A380 380 0 0 1 780 340 Z" fill="#00E5FF" opacity="0.12"/>
+  <!-- 중앙 점 -->
+  <circle cx="512" cy="512" r="24" fill="#00E5FF"/>
+  <circle cx="512" cy="512" r="12" fill="white"/>
+
+  <!-- Layer 3: 탐지된 아이콘 블립들 -->
+  <!-- 블립 1 (발견됨 — 밝게) -->
+  <circle cx="680" cy="320" r="22" fill="#FFD740"/>
+  <polygon points="680,298 694,322 680,322 666,322" fill="#FF8F00" opacity="0.8"/>
+  <!-- 블립 2 -->
+  <circle cx="360" cy="280" r="16" fill="#69F0AE" opacity="0.9"/>
+  <circle cx="740" cy="620" r="14" fill="#FF80AB" opacity="0.8"/>
+  <circle cx="300" cy="600" r="12" fill="#80D8FF" opacity="0.7"/>
+  <circle cx="620" cy="780" r="10" fill="#FFD740" opacity="0.6"/>
+  <circle cx="420" cy="720" r="10" fill="#A5D6A7" opacity="0.6"/>
+
+  <!-- 타깃 아이콘 (발견된 아이콘) — 고강도 블립 -->
+  <circle cx="680" cy="320" r="42" fill="none" stroke="#FFD740" stroke-width="6" opacity="0.7">
+    <animate attributeName="r" values="42;58;42" dur="2s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.7;0.2;0.7" dur="2s" repeatCount="indefinite"/>
+  </circle>
+</svg>

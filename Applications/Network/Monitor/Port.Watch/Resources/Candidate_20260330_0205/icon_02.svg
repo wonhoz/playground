@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#E3F2FD"/>
+      <stop offset="100%" stop-color="#90CAF9"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: 하늘 배경 -->
+  <rect width="1024" height="1024" rx="200" fill="url(#bg2)"/>
+
+  <!-- Layer 2: 네트워크 인터페이스 다이어그램 -->
+  <!-- 컴퓨터 (중앙) -->
+  <rect x="362" y="360" width="300" height="220" rx="20" fill="#1565C0"/>
+  <rect x="382" y="380" width="260" height="160" rx="12" fill="#0D47A1"/>
+  <!-- 화면 내 포트 표시 -->
+  <text x="512" y="430" font-family="'Courier New',monospace" font-size="34" fill="#90CAF9" text-anchor="middle">:80 ✓</text>
+  <text x="512" y="475" font-family="'Courier New',monospace" font-size="34" fill="#EF5350" text-anchor="middle">:3000 ✓</text>
+  <text x="512" y="520" font-family="'Courier New',monospace" font-size="34" fill="#FFD740" text-anchor="middle">:8080 ✓</text>
+  <!-- 컴퓨터 받침대 -->
+  <rect x="440" y="578" width="144" height="30" rx="6" fill="#0D47A1"/>
+  <rect x="400" y="604" width="224" height="24" rx="8" fill="#0D47A1"/>
+
+  <!-- 연결된 노드들 -->
+  <!-- 왼쪽 위: 포트 80 -->
+  <line x1="362" y1="420" x2="220" y2="300" stroke="#1E88E5" stroke-width="10" stroke-dasharray="16 8"/>
+  <circle cx="190" cy="276" r="70" fill="#1976D2"/>
+  <text x="190" y="262" font-family="'Courier New',monospace" font-weight="900" font-size="38" fill="white" text-anchor="middle">:80</text>
+  <text x="190" y="300" font-family="'Courier New',monospace" font-size="28" fill="#BBDEFB" text-anchor="middle">HTTP</text>
+
+  <!-- 오른쪽 위: 포트 443 -->
+  <line x1="662" y1="420" x2="804" y2="300" stroke="#42A5F5" stroke-width="10" stroke-dasharray="16 8"/>
+  <circle cx="834" cy="276" r="70" fill="#0288D1"/>
+  <text x="834" y="262" font-family="'Courier New',monospace" font-weight="900" font-size="36" fill="white" text-anchor="middle">:443</text>
+  <text x="834" y="300" font-family="'Courier New',monospace" font-size="28" fill="#B3E5FC" text-anchor="middle">HTTPS</text>
+
+  <!-- 아래: 포트 3306 -->
+  <line x1="512" y1="580" x2="512" y2="730" stroke="#7E57C2" stroke-width="10" stroke-dasharray="16 8"/>
+  <circle cx="512" cy="796" r="70" fill="#512DA8"/>
+  <text x="512" y="782" font-family="'Courier New',monospace" font-weight="900" font-size="36" fill="white" text-anchor="middle">:3306</text>
+  <text x="512" y="820" font-family="'Courier New',monospace" font-size="28" fill="#EDE7F6" text-anchor="middle">MySQL</text>
+
+  <!-- Layer 3: 감시 눈 배지 -->
+  <circle cx="860" cy="820" r="88" fill="#FF8F00"/>
+  <ellipse cx="860" cy="820" rx="50" ry="34" fill="white"/>
+  <circle cx="860" cy="820" r="20" fill="#E65100"/>
+  <text x="860" y="818" font-family="'Segoe UI',Arial,sans-serif" font-size="16" fill="white" text-anchor="middle" dominant-baseline="middle">●</text>
+</svg>

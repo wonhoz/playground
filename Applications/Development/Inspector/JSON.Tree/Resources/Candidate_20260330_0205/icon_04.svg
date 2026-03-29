@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg4" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#E0F7FA"/>
+      <stop offset="100%" stop-color="#4DD0E1"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: 청록 배경 -->
+  <rect width="1024" height="1024" rx="200" fill="url(#bg4)"/>
+
+  <!-- Layer 2: 그래프/마인드맵 트리 -->
+  <!-- 루트 노드 (중앙) -->
+  <circle cx="512" cy="300" r="80" fill="#006064"/>
+  <text x="512" y="300" font-family="'Courier New',monospace" font-weight="900" font-size="52" fill="#E0F7FA" text-anchor="middle" dominant-baseline="middle">{}</text>
+
+  <!-- 연결선 — 루트에서 2단계 -->
+  <line x1="440" y1="360" x2="260" y2="520" stroke="#00838F" stroke-width="10"/>
+  <line x1="512" y1="380" x2="512" y2="540" stroke="#00838F" stroke-width="10"/>
+  <line x1="584" y1="360" x2="764" y2="520" stroke="#00838F" stroke-width="10"/>
+
+  <!-- 2단계 노드들 -->
+  <circle cx="260" cy="560" r="62" fill="#00838F"/>
+  <text x="260" y="560" font-family="'Courier New',monospace" font-size="36" fill="white" text-anchor="middle" dominant-baseline="middle">"str"</text>
+
+  <circle cx="512" cy="580" r="62" fill="#00838F"/>
+  <text x="512" y="580" font-family="'Courier New',monospace" font-size="36" fill="white" text-anchor="middle" dominant-baseline="middle">[ ]</text>
+
+  <circle cx="764" cy="560" r="62" fill="#00838F"/>
+  <text x="764" y="560" font-family="'Courier New',monospace" font-size="36" fill="white" text-anchor="middle" dominant-baseline="middle">42</text>
+
+  <!-- 연결선 — 2단계에서 3단계 -->
+  <line x1="210" y1="612" x2="150" y2="740" stroke="#26C6DA" stroke-width="8" opacity="0.8"/>
+  <line x1="308" y1="614" x2="350" y2="740" stroke="#26C6DA" stroke-width="8" opacity="0.8"/>
+  <line x1="462" y1="636" x2="430" y2="760" stroke="#26C6DA" stroke-width="8" opacity="0.8"/>
+  <line x1="562" y1="636" x2="600" y2="760" stroke="#26C6DA" stroke-width="8" opacity="0.8"/>
+  <line x1="740" y1="614" x2="700" y2="740" stroke="#26C6DA" stroke-width="8" opacity="0.8"/>
+
+  <!-- 3단계 노드들 (작은) -->
+  <circle cx="150" cy="770" r="44" fill="#26C6DA" opacity="0.9"/>
+  <text x="150" y="770" font-family="'Courier New',monospace" font-size="26" fill="white" text-anchor="middle" dominant-baseline="middle">true</text>
+
+  <circle cx="350" cy="770" r="44" fill="#26C6DA" opacity="0.9"/>
+  <text x="350" y="770" font-family="'Courier New',monospace" font-size="26" fill="white" text-anchor="middle" dominant-baseline="middle">null</text>
+
+  <circle cx="430" cy="780" r="44" fill="#26C6DA" opacity="0.9"/>
+  <text x="430" y="780" font-family="'Courier New',monospace" font-size="22" fill="white" text-anchor="middle" dominant-baseline="middle">"a"</text>
+
+  <circle cx="600" cy="780" r="44" fill="#26C6DA" opacity="0.9"/>
+  <text x="600" y="780" font-family="'Courier New',monospace" font-size="22" fill="white" text-anchor="middle" dominant-baseline="middle">"b"</text>
+
+  <circle cx="700" cy="770" r="44" fill="#26C6DA" opacity="0.9"/>
+  <text x="700" y="770" font-family="'Courier New',monospace" font-size="26" fill="white" text-anchor="middle" dominant-baseline="middle">0.7</text>
+
+  <!-- Layer 3: YAML/TOML 배지 -->
+  <rect x="640" y="130" width="120" height="48" rx="14" fill="#FF8F00" opacity="0.85"/>
+  <text x="700" y="156" font-family="'Segoe UI',Arial,sans-serif" font-weight="800" font-size="30" fill="white" text-anchor="middle" dominant-baseline="middle">YAML</text>
+  <rect x="780" y="140" width="120" height="48" rx="14" fill="#7B1FA2" opacity="0.85"/>
+  <text x="840" y="166" font-family="'Segoe UI',Arial,sans-serif" font-weight="800" font-size="30" fill="white" text-anchor="middle" dominant-baseline="middle">TOML</text>
+</svg>

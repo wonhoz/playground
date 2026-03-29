@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg6" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1B5E20"/>
+      <stop offset="100%" stop-color="#2E7D32"/>
+    </linearGradient>
+    <linearGradient id="zip6" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#F57F17"/>
+      <stop offset="100%" stop-color="#E65100"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: 그린 배경 -->
+  <rect width="1024" height="1024" rx="196" fill="url(#bg6)"/>
+
+  <!-- Layer 2: ZIP 아이콘 + 파일 트리 레이어드 -->
+  <!-- ZIP 파일 아이콘 (큰) -->
+  <rect x="100" y="180" width="400" height="500" rx="24" fill="url(#zip6)" stroke="white" stroke-width="6"/>
+  <polygon points="420,180 500,260 500,260 420,260" fill="#BF360C"/>
+  <rect x="420" y="180" width="80" height="80" rx="10" fill="#BF360C"/>
+  <!-- ZIP 지퍼 라인 -->
+  <rect x="210" y="310" width="180" height="20" rx="6" fill="white" opacity="0.3"/>
+  <rect x="210" y="346" width="180" height="20" rx="6" fill="white" opacity="0.25"/>
+  <rect x="210" y="382" width="180" height="20" rx="6" fill="white" opacity="0.2"/>
+  <!-- ZIP 텍스트 -->
+  <text x="300" y="490" font-family="'Courier New',monospace" font-weight="900" font-size="64" fill="white" text-anchor="middle" dominant-baseline="middle">ZIP</text>
+  <text x="300" y="580" font-family="'Courier New',monospace" font-size="26" fill="#FFE0B2" text-anchor="middle" dominant-baseline="middle">archive.zip</text>
+
+  <!-- 파일 트리 (오른쪽, 레이어드) -->
+  <rect x="440" y="240" width="500" height="440" rx="20" fill="#0A2A0A" opacity="0.92" stroke="#69F0AE" stroke-width="4"/>
+  <text x="470" y="292" font-family="'Segoe UI Emoji',Arial,sans-serif" font-size="26" fill="#FFD740" dominant-baseline="middle">📂 src/</text>
+  <text x="490" y="334" font-family="'Courier New',monospace" font-size="22" fill="#69F0AE" dominant-baseline="middle">main.cs   12 KB</text>
+  <text x="490" y="372" font-family="'Courier New',monospace" font-size="22" fill="#69F0AE" dominant-baseline="middle">utils.cs    8 KB</text>
+  <text x="470" y="416" font-family="'Segoe UI Emoji',Arial,sans-serif" font-size="26" fill="#FFD740" dominant-baseline="middle">📁 docs/</text>
+  <text x="490" y="458" font-family="'Courier New',monospace" font-size="22" fill="#A5D6A7" dominant-baseline="middle">README.md</text>
+  <text x="470" y="502" font-family="'Courier New',monospace" font-size="22" fill="#CE93D8" dominant-baseline="middle">Playground.sln</text>
+  <text x="470" y="540" font-family="'Courier New',monospace" font-size="22" fill="#80CBC4" dominant-baseline="middle">build.cmd</text>
+
+  <!-- Layer 3: 돋보기 오버레이 (우하단) -->
+  <circle cx="830" cy="760" r="120" fill="none" stroke="#69F0AE" stroke-width="16"/>
+  <circle cx="830" cy="760" r="80" fill="#E8F5E9" opacity="0.15"/>
+  <line x1="918" y1="848" x2="970" y2="900" stroke="#69F0AE" stroke-width="24" stroke-linecap="round"/>
+
+  <!-- 하단 배지 -->
+  <rect x="160" y="870" width="560" height="68" rx="18" fill="#FFD740"/>
+  <text x="440" y="906" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="32" fill="#1A1A1A" text-anchor="middle" dominant-baseline="middle">No Extract Needed</text>
+</svg>

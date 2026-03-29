@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg4" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0A1628"/>
+      <stop offset="100%" stop-color="#0D2040"/>
+    </linearGradient>
+    <radialGradient id="radarGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#00E5FF" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#00E5FF" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <!-- Layer 1: 네이비 배경 -->
+  <rect width="1024" height="1024" rx="200" fill="url(#bg4)"/>
+
+  <!-- Layer 2: 레이더 화면 -->
+  <!-- 외곽 원들 -->
+  <circle cx="512" cy="512" r="420" fill="none" stroke="#00BCD4" stroke-width="3" opacity="0.2"/>
+  <circle cx="512" cy="512" r="320" fill="none" stroke="#00BCD4" stroke-width="3" opacity="0.3"/>
+  <circle cx="512" cy="512" r="220" fill="none" stroke="#00BCD4" stroke-width="4" opacity="0.45"/>
+  <circle cx="512" cy="512" r="120" fill="none" stroke="#00BCD4" stroke-width="4" opacity="0.6"/>
+  <!-- 십자선 -->
+  <line x1="512" y1="80" x2="512" y2="940" stroke="#00BCD4" stroke-width="2" opacity="0.25"/>
+  <line x1="80" y1="512" x2="940" y2="512" stroke="#00BCD4" stroke-width="2" opacity="0.25"/>
+  <!-- 스캔 섹터 (빛나는) -->
+  <path d="M512 512 L512 132 A380 380 0 0 1 810 660 Z" fill="#00E5FF" opacity="0.10"/>
+  <path d="M512 512 L512 132 A380 380 0 0 1 700 810 Z" fill="#00E5FF" opacity="0.06"/>
+  <!-- 중심 점 -->
+  <circle cx="512" cy="512" r="20" fill="#00E5FF"/>
+  <circle cx="512" cy="512" r="10" fill="white"/>
+
+  <!-- Layer 3: 탐지된 포트 블립들 -->
+  <!-- 포트 :80 블립 -->
+  <circle cx="680" cy="320" r="18" fill="#00E676"/>
+  <rect x="700" y="298" width="120" height="42" rx="10" fill="#1B5E20" opacity="0.9"/>
+  <text x="760" y="321" font-family="'Courier New',monospace" font-size="26" fill="#A5D6A7" text-anchor="middle" dominant-baseline="middle">:80</text>
+  <!-- 포트 :443 블립 -->
+  <circle cx="340" cy="280" r="16" fill="#00BCD4"/>
+  <rect x="356" y="260" width="130" height="40" rx="10" fill="#006064" opacity="0.9"/>
+  <text x="421" y="281" font-family="'Courier New',monospace" font-size="26" fill="#80DEEA" text-anchor="middle" dominant-baseline="middle">:443</text>
+  <!-- 포트 :3306 블립 -->
+  <circle cx="750" cy="640" r="14" fill="#FFD740"/>
+  <rect x="768" y="622" width="144" height="40" rx="10" fill="#F57F17" opacity="0.8"/>
+  <text x="840" y="643" font-family="'Courier New',monospace" font-size="26" fill="white" text-anchor="middle" dominant-baseline="middle">:3306</text>
+  <!-- 포트 :8080 블립 — 경고 (빨강) -->
+  <circle cx="300" cy="640" r="22" fill="#EF5350"/>
+  <rect x="138" y="622" width="144" height="40" rx="10" fill="#B71C1C" opacity="0.9"/>
+  <text x="210" y="643" font-family="'Courier New',monospace" font-size="26" fill="white" text-anchor="middle" dominant-baseline="middle">:8080</text>
+  <!-- 경고 파문 -->
+  <circle cx="300" cy="640" r="40" fill="none" stroke="#EF5350" stroke-width="6" opacity="0.6"/>
+
+  <!-- TCP/UDP 레이블 (상단) -->
+  <rect x="320" y="90" width="100" height="46" rx="12" fill="#006064" opacity="0.9"/>
+  <text x="370" y="115" font-family="'Segoe UI',Arial,sans-serif" font-weight="800" font-size="30" fill="#00E5FF" text-anchor="middle" dominant-baseline="middle">TCP</text>
+  <rect x="440" y="90" width="100" height="46" rx="12" fill="#F57F17" opacity="0.9"/>
+  <text x="490" y="115" font-family="'Segoe UI',Arial,sans-serif" font-weight="800" font-size="30" fill="white" text-anchor="middle" dominant-baseline="middle">UDP</text>
+</svg>

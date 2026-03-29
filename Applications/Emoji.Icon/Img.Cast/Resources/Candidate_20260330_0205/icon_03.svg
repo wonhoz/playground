@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg3" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FF8A65"/>
+      <stop offset="100%" stop-color="#E64A19"/>
+    </linearGradient>
+    <linearGradient id="molten" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFD54F"/>
+      <stop offset="100%" stop-color="#FFB300"/>
+    </linearGradient>
+    <linearGradient id="crucible" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#BCAAA4"/>
+      <stop offset="100%" stop-color="#795548"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Layer 1: 오렌지-레드 배경 -->
+  <rect width="1024" height="1024" rx="200" fill="url(#bg3)"/>
+
+  <!-- Layer 2: 도가니 (crucible) -->
+  <!-- 도가니 몸체 -->
+  <path d="M280 450 L280 720 Q280 800 400 800 L624 800 Q744 800 744 720 L744 450 Z" fill="url(#crucible)" stroke="#4E342E" stroke-width="10"/>
+  <!-- 도가니 핸들 -->
+  <rect x="200" y="430" width="120" height="40" rx="20" fill="#5D4037"/>
+  <rect x="704" y="430" width="120" height="40" rx="20" fill="#5D4037"/>
+  <!-- 용융 금속 (황금빛) -->
+  <ellipse cx="512" cy="460" rx="220" ry="50" fill="url(#molten)"/>
+  <!-- 거품/파문 -->
+  <ellipse cx="450" cy="455" rx="40" ry="18" fill="#FFE082" opacity="0.8"/>
+  <ellipse cx="560" cy="460" rx="30" ry="14" fill="#FFE082" opacity="0.6"/>
+  <ellipse cx="490" cy="448" rx="22" ry="10" fill="#FFFDE7" opacity="0.7"/>
+
+  <!-- 입력: 위에서 녹아드는 포맷 레이블들 -->
+  <!-- SVG 조각 -->
+  <g transform="translate(170 250) rotate(-15)">
+    <rect x="0" y="0" width="150" height="80" rx="14" fill="#26C6DA" opacity="0.9"/>
+    <text x="75" y="52" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="52" fill="white" text-anchor="middle" dominant-baseline="middle">SVG</text>
+  </g>
+  <!-- PNG 조각 -->
+  <g transform="translate(430 180) rotate(5)">
+    <rect x="0" y="0" width="150" height="80" rx="14" fill="#66BB6A" opacity="0.9"/>
+    <text x="75" y="52" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="52" fill="white" text-anchor="middle" dominant-baseline="middle">PNG</text>
+  </g>
+  <!-- JPG 조각 -->
+  <g transform="translate(670 240) rotate(12)">
+    <rect x="0" y="0" width="150" height="80" rx="14" fill="#AB47BC" opacity="0.9"/>
+    <text x="75" y="52" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="52" fill="white" text-anchor="middle" dominant-baseline="middle">JPG</text>
+  </g>
+
+  <!-- Layer 3: 출력 — 도가니 아래로 흘러나오는 ICO -->
+  <path d="M440 800 L440 880 L584 880 L584 800" fill="#FFA000" opacity="0.9"/>
+  <rect x="390" y="860" width="244" height="100" rx="22" fill="#FFB300"/>
+  <text x="512" y="912" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="72" fill="#3E2723" text-anchor="middle" dominant-baseline="middle">ICO</text>
+
+  <!-- 열기(불꽃) 파티클 -->
+  <circle cx="360" cy="400" r="14" fill="#FFEB3B" opacity="0.7"/>
+  <circle cx="670" cy="380" r="10" fill="#FF8F00" opacity="0.6"/>
+  <circle cx="510" cy="370" r="8" fill="#FFCC02" opacity="0.5"/>
+</svg>

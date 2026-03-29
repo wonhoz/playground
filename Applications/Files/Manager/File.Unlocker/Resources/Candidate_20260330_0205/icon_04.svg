@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg4" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#E0F7FA"/>
+      <stop offset="100%" stop-color="#80DEEA"/>
+    </linearGradient>
+    <linearGradient id="keyGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#FFD740"/>
+      <stop offset="100%" stop-color="#FF8F00"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: 청록 배경 -->
+  <rect width="1024" height="1024" rx="200" fill="url(#bg4)"/>
+
+  <!-- Layer 2: 큰 열쇠 (중앙) -->
+  <!-- 열쇠 손잡이 (원형) -->
+  <circle cx="360" cy="420" r="200" fill="url(#keyGrad)" stroke="#E65100" stroke-width="16"/>
+  <circle cx="360" cy="420" r="120" fill="#E0F7FA"/>
+  <circle cx="360" cy="420" r="80" fill="url(#keyGrad)" opacity="0.5"/>
+  <!-- 열쇠 날 -->
+  <rect x="536" y="396" width="360" height="48" rx="14" fill="url(#keyGrad)"/>
+  <!-- 열쇠 요철 -->
+  <rect x="720" y="444" width="44" height="64" rx="8" fill="#FF8F00"/>
+  <rect x="790" y="444" width="34" height="50" rx="6" fill="#FF8F00"/>
+  <rect x="848" y="444" width="30" height="40" rx="6" fill="#FF8F00"/>
+
+  <!-- 열쇠 그림자/하이라이트 -->
+  <circle cx="360" cy="400" r="200" fill="none" stroke="white" stroke-width="10" opacity="0.3"/>
+
+  <!-- Layer 3: 잠금 해제 효과 -->
+  <!-- 자물쇠 (오른쪽 작게, 열린 상태) -->
+  <rect x="720" y="580" width="220" height="200" rx="20" fill="#2E7D32" opacity="0.9"/>
+  <rect x="760" y="570" width="140" height="40" rx="20" fill="none" stroke="#A5D6A7" stroke-width="14" stroke-dasharray="80 60"/>
+  <circle cx="830" cy="668" r="28" fill="#A5D6A7"/>
+  <rect x="818" y="668" width="24" height="50" rx="8" fill="#1B5E20"/>
+
+  <!-- 해방 효과 파티클 -->
+  <circle cx="620" cy="300" r="20" fill="#FFD740" opacity="0.8"/>
+  <circle cx="700" cy="240" r="14" fill="#FF8F00" opacity="0.7"/>
+  <line x1="640" y1="260" x2="680" y2="200" stroke="#FF8F00" stroke-width="8" stroke-linecap="round" opacity="0.6"/>
+  <circle cx="760" cy="300" r="10" fill="#FFEE58" opacity="0.6"/>
+</svg>

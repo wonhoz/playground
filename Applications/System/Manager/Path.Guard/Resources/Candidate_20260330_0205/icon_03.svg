@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg3" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#E3F2FD"/>
+      <stop offset="60%" stop-color="#81D4FA"/>
+      <stop offset="100%" stop-color="#4FC3F7"/>
+    </linearGradient>
+    <linearGradient id="road" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#546E7A"/>
+      <stop offset="100%" stop-color="#263238"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: 하늘 + 도로 배경 -->
+  <rect width="1024" height="1024" rx="200" fill="url(#bg3)"/>
+  <!-- 도로 -->
+  <rect x="0" y="680" width="1024" height="344" rx="0" fill="url(#road)"/>
+  <rect x="200" y="680" width="1024" height="344" rx="0" fill="url(#road)" opacity="0.6"/>
+  <!-- 도로 중앙선 -->
+  <line x1="512" y1="680" x2="512" y2="1024" stroke="#FFD740" stroke-width="12" stroke-dasharray="40 30"/>
+  <!-- 도로 가장자리 선 -->
+  <line x1="200" y1="680" x2="200" y2="1024" stroke="white" stroke-width="8" opacity="0.5"/>
+  <line x1="820" y1="680" x2="820" y2="1024" stroke="white" stroke-width="8" opacity="0.5"/>
+
+  <!-- Layer 2: 도로 표지판 (PATH) -->
+  <!-- 표지판 기둥 -->
+  <rect x="490" y="560" width="44" height="220" rx="8" fill="#607D8B"/>
+  <!-- 표지판 메인 (파란 직사각형) -->
+  <rect x="200" y="360" width="624" height="220" rx="16" fill="#1565C0" stroke="white" stroke-width="10"/>
+  <!-- 표지판 내용 -->
+  <text x="512" y="430" font-family="'Courier New',monospace" font-weight="900" font-size="68" fill="white" text-anchor="middle" dominant-baseline="middle">%PATH%</text>
+  <text x="512" y="520" font-family="'Courier New',monospace" font-size="38" fill="#BBDEFB" text-anchor="middle" dominant-baseline="middle">18 entries →</text>
+
+  <!-- 작은 경고 표지판 (깨진 경로) -->
+  <polygon points="760,260 820,360 700,360" fill="#FF8F00" stroke="white" stroke-width="8"/>
+  <text x="760" y="328" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="44" fill="white" text-anchor="middle" dominant-baseline="middle">!</text>
+  <text x="760" y="400" font-family="'Segoe UI',Arial,sans-serif" font-size="24" fill="#FF8F00" text-anchor="middle">2 broken</text>
+
+  <!-- Layer 3: 체크 표지판 (정상) -->
+  <circle cx="260" cy="300" r="70" fill="#2E7D32" stroke="white" stroke-width="8"/>
+  <text x="260" y="300" font-family="'Segoe UI Emoji',Arial,sans-serif" font-size="60" text-anchor="middle" dominant-baseline="middle">✓</text>
+  <text x="260" y="390" font-family="'Segoe UI',Arial,sans-serif" font-size="24" fill="#2E7D32" text-anchor="middle">16 ok</text>
+</svg>

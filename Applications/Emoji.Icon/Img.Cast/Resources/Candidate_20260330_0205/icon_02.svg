@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 밝은 노랑 배경 -->
+  <rect width="1024" height="1024" rx="200" fill="url(#bg2)"/>
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFF9C4"/>
+      <stop offset="100%" stop-color="#FFF176"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Layer 2: 입력 파일들 (왼쪽 상단 스택) -->
+  <!-- 파일 3 (맨 뒤) -->
+  <g transform="translate(60,140) rotate(-12,180,260)">
+    <rect x="80" y="150" width="200" height="250" rx="18" fill="#42A5F5" opacity="0.5"/>
+    <polygon points="240,150 280,190 280,190 240,190" fill="#1565C0" opacity="0.5"/>
+    <rect x="240" y="150" width="40" height="40" rx="4" fill="#1565C0" opacity="0.5"/>
+  </g>
+  <!-- 파일 2 (중간) -->
+  <g transform="translate(80,120) rotate(-5,180,260)">
+    <rect x="80" y="150" width="200" height="250" rx="18" fill="#66BB6A" opacity="0.7"/>
+    <polygon points="240,150 280,190 280,190 240,190" fill="#2E7D32" opacity="0.7"/>
+    <rect x="240" y="150" width="40" height="40" rx="4" fill="#2E7D32" opacity="0.7"/>
+  </g>
+  <!-- 파일 1 (맨 앞) -->
+  <rect x="140" y="150" width="220" height="280" rx="18" fill="#5C6BC0"/>
+  <polygon points="310,150 360,200 360,200 310,200" fill="#283593"/>
+  <rect x="310" y="150" width="50" height="50" rx="4" fill="#283593"/>
+  <text x="250" y="320" font-family="'Segoe UI',Arial,sans-serif" font-weight="800" font-size="70" fill="white" text-anchor="middle" dominant-baseline="middle">IMG</text>
+
+  <!-- 큰 화살표 (중앙) -->
+  <g fill="#E91E63">
+    <path d="M480 440 L480 560 L560 560 L512 640 L464 560 L544 560 L544 440 Z" opacity="0.9"/>
+  </g>
+
+  <!-- 출력 파일들 (오른쪽 하단 스택) -->
+  <!-- ICO -->
+  <rect x="630" y="600" width="180" height="220" rx="18" fill="#FF7043"/>
+  <text x="720" y="700" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="72" fill="white" text-anchor="middle" dominant-baseline="middle">ICO</text>
+  <!-- PNG (뒤) -->
+  <rect x="680" y="580" width="180" height="220" rx="18" fill="#26C6DA" opacity="0.7" transform="rotate(10, 770, 690)"/>
+  <text x="770" y="680" font-family="'Segoe UI',Arial,sans-serif" font-weight="800" font-size="62" fill="white" text-anchor="middle" dominant-baseline="middle" transform="rotate(10, 770, 690)">PNG</text>
+
+  <!-- Layer 3: 드롭 힌트 화살표 (파일 위) -->
+  <g stroke="#FFC107" stroke-width="12" stroke-linecap="round" fill="none">
+    <line x1="250" y1="100" x2="250" y2="150"/>
+    <polyline points="222,130 250,155 278,130"/>
+  </g>
+</svg>

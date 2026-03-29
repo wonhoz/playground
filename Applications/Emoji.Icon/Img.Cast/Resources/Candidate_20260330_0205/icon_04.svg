@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg4" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#CE93D8"/>
+      <stop offset="100%" stop-color="#7B1FA2"/>
+    </linearGradient>
+    <linearGradient id="wand" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#E1BEE7"/>
+    </linearGradient>
+    <radialGradient id="star" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFD740"/>
+      <stop offset="100%" stop-color="#FF6F00"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Layer 1: 보라-핑크 배경 -->
+  <rect width="1024" height="1024" rx="200" fill="url(#bg4)"/>
+
+  <!-- Layer 2: 마법 지팡이 -->
+  <line x1="240" y1="780" x2="740" y2="260" stroke="url(#wand)" stroke-width="52" stroke-linecap="round"/>
+  <!-- 지팡이 끝 별 -->
+  <g transform="translate(740 260)">
+    <polygon points="0,-80 18,-30 72,-30 28,8 46,62 0,28 -46,62 -28,8 -72,-30 -18,-30" fill="url(#star)"/>
+    <polygon points="0,-56 12,-22 50,-22 20,6 32,44 0,20 -32,44 -20,6 -50,-22 -12,-22" fill="#FFEE58" opacity="0.7"/>
+  </g>
+
+  <!-- 변환 전 이미지 (왼쪽 위) — SVG 프레임 -->
+  <rect x="100" y="160" width="240" height="200" rx="20" fill="#F8BBD0" stroke="#F06292" stroke-width="8"/>
+  <!-- 이미지 내 산/태양 간단 그림 -->
+  <circle cx="220" cy="230" r="38" fill="#FFCA28"/>
+  <polygon points="130,350 220,230 310,350" fill="#81C784"/>
+  <text x="220" y="388" font-family="'Segoe UI',Arial,sans-serif" font-weight="700" font-size="44" fill="#C2185B" text-anchor="middle" dominant-baseline="middle">SVG</text>
+
+  <!-- 변환 후 이미지 (오른쪽 아래) — ICO 프레임 -->
+  <rect x="680" y="620" width="240" height="200" rx="20" fill="#B3E5FC" stroke="#0288D1" stroke-width="8"/>
+  <!-- ICO 그리드 미리보기 -->
+  <rect x="710" y="650" width="60" height="60" rx="8" fill="#0288D1"/>
+  <rect x="780" y="650" width="60" height="60" rx="8" fill="#29B6F6"/>
+  <rect x="710" y="720" width="60" height="60" rx="8" fill="#29B6F6"/>
+  <rect x="780" y="720" width="60" height="60" rx="8" fill="#4FC3F7"/>
+  <text x="868" y="700" font-family="'Segoe UI',Arial,sans-serif" font-weight="700" font-size="42" fill="#01579B" text-anchor="middle" dominant-baseline="middle">ICO</text>
+
+  <!-- Layer 3: 마법 파티클 스파클 -->
+  <!-- 큰 별 -->
+  <polygon points="512,440 524,470 558,470 530,488 542,520 512,500 482,520 494,488 466,470 500,470" fill="#FFD740" opacity="0.9"/>
+  <!-- 작은 별들 -->
+  <polygon points="380,520 387,540 408,540 392,552 398,572 380,558 362,572 368,552 352,540 373,540" fill="#FF80AB" opacity="0.85"/>
+  <polygon points="620,380 626,396 644,396 630,406 636,422 620,411 604,422 610,406 596,396 614,396" fill="#80DEEA" opacity="0.85"/>
+  <circle cx="450" cy="620" r="16" fill="#FFEE58" opacity="0.7"/>
+  <circle cx="580" cy="360" r="12" fill="#A5D6A7" opacity="0.7"/>
+  <circle cx="350" cy="440" r="10" fill="#FF8A80" opacity="0.6"/>
+</svg>

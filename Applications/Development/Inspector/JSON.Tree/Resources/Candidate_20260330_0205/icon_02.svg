@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#E3F2FD"/>
+      <stop offset="100%" stop-color="#90CAF9"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: 하늘 배경 -->
+  <rect width="1024" height="1024" rx="200" fill="url(#bg2)"/>
+
+  <!-- Layer 2: 좌우 비교 패널 -->
+  <!-- A 패널 (왼쪽) -->
+  <rect x="60" y="140" width="400" height="744" rx="20" fill="#1565C0" opacity="0.9"/>
+  <rect x="60" y="140" width="400" height="60" rx="20" fill="#0D47A1"/>
+  <text x="260" y="174" font-family="'Segoe UI',Arial,sans-serif" font-weight="700" font-size="40" fill="white" text-anchor="middle" dominant-baseline="middle">A.json</text>
+  <!-- A 트리 라인들 -->
+  <text x="90" y="260" font-family="'Courier New',monospace" font-size="32" fill="#E3F2FD">{"ver": "1.0"</text>
+  <text x="90" y="320" font-family="'Courier New',monospace" font-size="32" fill="#FFEB3B"> "name": "old"</text>
+  <text x="90" y="380" font-family="'Courier New',monospace" font-size="32" fill="#EF9A9A"> "items": [1,2]</text>
+  <text x="90" y="440" font-family="'Courier New',monospace" font-size="32" fill="#E3F2FD"> "flag": true</text>
+  <text x="90" y="500" font-family="'Courier New',monospace" font-size="32" fill="#E3F2FD">}</text>
+  <!-- 삭제 라인 (빨강) -->
+  <rect x="68" y="360" width="384" height="48" rx="8" fill="#D32F2F" opacity="0.35"/>
+
+  <!-- B 패널 (오른쪽) -->
+  <rect x="564" y="140" width="400" height="744" rx="20" fill="#00796B" opacity="0.9"/>
+  <rect x="564" y="140" width="400" height="60" rx="20" fill="#004D40"/>
+  <text x="764" y="174" font-family="'Segoe UI',Arial,sans-serif" font-weight="700" font-size="40" fill="white" text-anchor="middle" dominant-baseline="middle">B.json</text>
+  <!-- B 트리 라인들 -->
+  <text x="590" y="260" font-family="'Courier New',monospace" font-size="32" fill="#E0F2F1">{"ver": "2.0"</text>
+  <text x="590" y="320" font-family="'Courier New',monospace" font-size="32" fill="#FFEB3B"> "name": "new"</text>
+  <text x="590" y="380" font-family="'Courier New',monospace" font-size="32" fill="#E0F2F1"> "items": [1,2,3]</text>
+  <text x="590" y="440" font-family="'Courier New',monospace" font-size="32" fill="#E0F2F1"> "flag": true</text>
+  <text x="590" y="500" font-family="'Courier New',monospace" font-size="32" fill="#A5D6A7"> "extra": "new"</text>
+  <text x="590" y="560" font-family="'Courier New',monospace" font-size="32" fill="#E0F2F1">}</text>
+  <!-- 추가 라인 (초록) -->
+  <rect x="572" y="480" width="384" height="48" rx="8" fill="#2E7D32" opacity="0.4"/>
+
+  <!-- Layer 3: 중앙 비교 표시 -->
+  <!-- diff 화살표 -->
+  <circle cx="512" cy="512" r="60" fill="#FF8F00"/>
+  <text x="512" y="512" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="52" fill="white" text-anchor="middle" dominant-baseline="middle">⇄</text>
+  <!-- 변경 배지 -->
+  <rect x="394" y="200" width="236" height="52" rx="14" fill="#FF8F00"/>
+  <text x="512" y="228" font-family="'Segoe UI',Arial,sans-serif" font-weight="800" font-size="34" fill="white" text-anchor="middle" dominant-baseline="middle">3 changes</text>
+</svg>

@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg5" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#006064"/>
+      <stop offset="100%" stop-color="#00838F"/>
+    </linearGradient>
+    <linearGradient id="scope5" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#80DEEA"/>
+      <stop offset="100%" stop-color="#26C6DA"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: 딥 청록 배경 -->
+  <rect width="1024" height="1024" rx="196" fill="url(#bg5)"/>
+  <!-- 물결 효과 -->
+  <ellipse cx="512" cy="900" rx="500" ry="120" fill="#004D40" opacity="0.4"/>
+  <ellipse cx="512" cy="960" rx="400" ry="80" fill="#004D40" opacity="0.3"/>
+
+  <!-- Layer 2: 잠망경 (Peek = 몰래 보기) — 대각선 배치 -->
+  <!-- 잠망경 몸통 -->
+  <rect x="340" y="200" width="80" height="500" rx="20" fill="url(#scope5)" stroke="white" stroke-width="6"/>
+  <!-- 잠망경 상단 꺾임 -->
+  <rect x="340" y="180" width="280" height="80" rx="20" fill="url(#scope5)" stroke="white" stroke-width="6"/>
+  <!-- 상단 렌즈 -->
+  <circle cx="580" cy="220" r="52" fill="#006064" stroke="white" stroke-width="8"/>
+  <circle cx="580" cy="220" r="34" fill="#00ACC1"/>
+  <circle cx="580" cy="220" r="16" fill="white" opacity="0.8"/>
+  <!-- 하단 관측 구멍 -->
+  <rect x="330" y="680" width="100" height="60" rx="16" fill="#006064" stroke="white" stroke-width="6"/>
+
+  <!-- 관측 대상 (파일 트리가 보임) -->
+  <rect x="480" y="300" width="440" height="380" rx="18" fill="#00251A" opacity="0.95" stroke="#26C6DA" stroke-width="4"/>
+  <text x="510" y="352" font-family="'Segoe UI Emoji',Arial,sans-serif" font-size="26" fill="#80DEEA" dominant-baseline="middle">📦 archive.zip</text>
+  <text x="530" y="402" font-family="'Segoe UI Emoji',Arial,sans-serif" font-size="24" fill="#69F0AE" dominant-baseline="middle">📂 src/</text>
+  <text x="550" y="444" font-family="'Courier New',monospace" font-size="22" fill="#80CBC4" dominant-baseline="middle">  main.cs</text>
+  <text x="550" y="484" font-family="'Courier New',monospace" font-size="22" fill="#80CBC4" dominant-baseline="middle">  utils.cs</text>
+  <text x="530" y="524" font-family="'Segoe UI Emoji',Arial,sans-serif" font-size="24" fill="#FFD740" dominant-baseline="middle">📄 README.md</text>
+  <!-- 시야선 (잠망경에서 박스로) -->
+  <line x1="480" y1="490" x2="430" y2="490" stroke="#26C6DA" stroke-width="6" stroke-dasharray="12 6" opacity="0.7"/>
+
+  <!-- Layer 3: 하단 배지 -->
+  <rect x="200" y="840" width="624" height="72" rx="20" fill="#00695C" opacity="0.9"/>
+  <text x="512" y="878" font-family="'Segoe UI',Arial,sans-serif" font-weight="700" font-size="34" fill="#E0F2F1" text-anchor="middle" dominant-baseline="middle">Peek Without Extracting</text>
+</svg>

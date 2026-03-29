@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg5" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#EDE7F6"/>
+      <stop offset="100%" stop-color="#7E57C2"/>
+    </linearGradient>
+    <linearGradient id="flask" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#E8EAF6"/>
+      <stop offset="100%" stop-color="#9FA8DA"/>
+    </linearGradient>
+    <linearGradient id="liquid" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFD740"/>
+      <stop offset="100%" stop-color="#FF8F00"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: 보라 배경 -->
+  <rect width="1024" height="1024" rx="200" fill="url(#bg5)"/>
+
+  <!-- Layer 2: 연금술 플라스크 -->
+  <!-- 플라스크 몸체 -->
+  <path d="M360 300 L360 500 Q360 580 280 680 Q220 760 220 820 Q220 880 280 880 L744 880 Q804 880 804 820 Q804 760 744 680 Q664 580 664 500 L664 300 Z" fill="url(#flask)" stroke="#7E57C2" stroke-width="12"/>
+  <!-- 플라스크 넥 -->
+  <rect x="380" y="200" width="264" height="110" rx="20" fill="#E8EAF6" stroke="#7E57C2" stroke-width="10"/>
+  <!-- 마개 -->
+  <rect x="400" y="160" width="224" height="52" rx="18" fill="#9575CD"/>
+
+  <!-- 황금 액체 (내부 변환 중인 텍스트) -->
+  <path d="M360 580 Q360 580 280 680 Q220 760 220 820 Q220 870 280 880 L744 880 Q804 880 804 820 Q804 760 744 680 Q664 580 664 580 Z" fill="url(#liquid)" opacity="0.85"/>
+  <!-- 액체 표면 파문 -->
+  <ellipse cx="512" cy="580" rx="130" ry="24" fill="#FFE082" opacity="0.7"/>
+
+  <!-- 입력 텍스트 (위) — 플라스크 안 -->
+  <text x="512" y="420" font-family="'Courier New',monospace" font-weight="700" font-size="44" fill="#5E35B1" text-anchor="middle" dominant-baseline="middle">text</text>
+
+  <!-- 출력 심볼 (하단 액체 안) -->
+  <text x="400" y="780" font-family="'Courier New',monospace" font-weight="900" font-size="44" fill="#4E342E">{}</text>
+  <text x="560" y="780" font-family="'Courier New',monospace" font-weight="900" font-size="44" fill="#4E342E">##</text>
+
+  <!-- Layer 3: 거품 파티클 -->
+  <circle cx="440" cy="520" r="18" fill="#E1BEE7" opacity="0.8"/>
+  <circle cx="560" cy="500" r="14" fill="#CE93D8" opacity="0.7"/>
+  <circle cx="490" cy="480" r="10" fill="#F3E5F5" opacity="0.6"/>
+  <!-- 플라스크 빛 반사 -->
+  <path d="M400 300 Q400 500 400 500" stroke="white" stroke-width="12" stroke-linecap="round" fill="none" opacity="0.35"/>
+</svg>

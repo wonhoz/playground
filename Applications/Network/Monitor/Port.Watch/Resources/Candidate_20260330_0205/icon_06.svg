@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg6" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#E3F2FD"/>
+      <stop offset="100%" stop-color="#B3E5FC"/>
+    </linearGradient>
+    <linearGradient id="arrow6" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FF6F00"/>
+      <stop offset="100%" stop-color="#FF8F00"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: 하늘 배경 -->
+  <rect width="1024" height="1024" rx="200" fill="url(#bg6)"/>
+
+  <!-- Layer 2: 네트워크 그래프 노드들 -->
+  <!-- 중앙 서버 노드 -->
+  <rect x="384" y="384" width="256" height="256" rx="36" fill="#1565C0"/>
+  <text x="512" y="490" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="44" fill="white" text-anchor="middle" dominant-baseline="middle">HOST</text>
+  <text x="512" y="544" font-family="'Courier New',monospace" font-size="36" fill="#90CAF9" text-anchor="middle" dominant-baseline="middle">0.0.0.0</text>
+
+  <!-- 대각선 패킷 흐름들 -->
+  <!-- 좌상 → 중앙 -->
+  <line x1="200" y1="200" x2="390" y2="390" stroke="#0288D1" stroke-width="12" stroke-dasharray="20 10" stroke-linecap="round"/>
+  <polygon points="200,200 240,180 220,240" fill="url(#arrow6)"/>
+  <circle cx="180" cy="180" r="62" fill="#0288D1"/>
+  <text x="180" y="167" font-family="'Courier New',monospace" font-weight="700" font-size="30" fill="white" text-anchor="middle" dominant-baseline="middle">:80</text>
+  <text x="180" y="200" font-family="'Courier New',monospace" font-size="24" fill="#B3E5FC" text-anchor="middle">TCP</text>
+
+  <!-- 우상 → 중앙 -->
+  <line x1="820" y1="200" x2="634" y2="390" stroke="#0097A7" stroke-width="12" stroke-dasharray="20 10" stroke-linecap="round"/>
+  <polygon points="820,200 800,240 780,188" fill="url(#arrow6)"/>
+  <circle cx="840" cy="180" r="62" fill="#00838F"/>
+  <text x="840" y="167" font-family="'Courier New',monospace" font-weight="700" font-size="26" fill="white" text-anchor="middle" dominant-baseline="middle">:443</text>
+  <text x="840" y="200" font-family="'Courier New',monospace" font-size="24" fill="#B2EBF2" text-anchor="middle">TCP</text>
+
+  <!-- 좌하 → 중앙 -->
+  <line x1="200" y1="820" x2="390" y2="634" stroke="#7B1FA2" stroke-width="10" stroke-dasharray="16 8" stroke-linecap="round"/>
+  <circle cx="180" cy="840" r="62" fill="#7B1FA2"/>
+  <text x="180" y="827" font-family="'Courier New',monospace" font-weight="700" font-size="26" fill="white" text-anchor="middle" dominant-baseline="middle">:3306</text>
+  <text x="180" y="860" font-family="'Courier New',monospace" font-size="22" fill="#E1BEE7" text-anchor="middle">UDP</text>
+
+  <!-- 우하 → 중앙 (경고) -->
+  <line x1="820" y1="820" x2="634" y2="634" stroke="#D32F2F" stroke-width="10" stroke-dasharray="16 8" stroke-linecap="round"/>
+  <circle cx="840" cy="840" r="62" fill="#D32F2F"/>
+  <text x="840" y="827" font-family="'Courier New',monospace" font-weight="700" font-size="26" fill="white" text-anchor="middle" dominant-baseline="middle">:8080</text>
+  <text x="840" y="860" font-family="'Courier New',monospace" font-size="22" fill="#FFCDD2" text-anchor="middle">TCP</text>
+
+  <!-- Layer 3: 모니터링 활성 표시 -->
+  <circle cx="640" cy="384" r="28" fill="#00E676"/>
+  <circle cx="640" cy="384" r="18" fill="white"/>
+  <circle cx="640" cy="384" r="10" fill="#00C853"/>
+</svg>

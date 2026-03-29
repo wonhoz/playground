@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg3" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#E0F7FA"/>
+      <stop offset="60%" stop-color="#80DEEA"/>
+      <stop offset="100%" stop-color="#26C6DA"/>
+    </linearGradient>
+    <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#B2EBF2"/>
+      <stop offset="100%" stop-color="#4DD0E1"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: 하늘 청록 배경 -->
+  <rect width="1024" height="1024" rx="200" fill="url(#bg3)"/>
+
+  <!-- 도로/도시 기반 -->
+  <rect x="50" y="750" width="924" height="200" rx="0" fill="#37474F"/>
+
+  <!-- Layer 2: 건물들 (파일/폴더 크기 = 건물 높이) -->
+  <!-- Videos (가장 큰 — 빨강) -->
+  <rect x="100" y="320" width="180" height="430" rx="10" fill="#EF5350"/>
+  <rect x="100" y="320" width="180" height="30" rx="8" fill="#FF8A80" opacity="0.7"/>
+  <text x="190" y="550" font-family="'Segoe UI',Arial,sans-serif" font-weight="700" font-size="32" fill="white" text-anchor="middle" transform="rotate(-90, 190, 550)">Videos 85G</text>
+  <!-- 창문들 -->
+  <rect x="118" y="350" width="40" height="30" rx="4" fill="#FFEE58" opacity="0.8"/>
+  <rect x="174" y="350" width="40" height="30" rx="4" fill="#FFEE58" opacity="0.8"/>
+  <rect x="118" y="400" width="40" height="30" rx="4" fill="#FFEE58" opacity="0.6"/>
+  <rect x="174" y="400" width="40" height="30" rx="4" fill="white" opacity="0.4"/>
+
+  <!-- Games (두 번째) -->
+  <rect x="310" y="420" width="160" height="330" rx="10" fill="#42A5F5"/>
+  <rect x="310" y="420" width="160" height="28" rx="8" fill="#90CAF9" opacity="0.6"/>
+  <text x="390" y="600" font-family="'Segoe UI',Arial,sans-serif" font-weight="700" font-size="30" fill="white" text-anchor="middle" transform="rotate(-90, 390, 600)">Games 52G</text>
+
+  <!-- Docs (중간) -->
+  <rect x="510" y="520" width="130" height="230" rx="10" fill="#66BB6A"/>
+  <text x="575" y="650" font-family="'Segoe UI',Arial,sans-serif" font-weight="700" font-size="28" fill="white" text-anchor="middle" transform="rotate(-90, 575, 650)">Docs 30G</text>
+
+  <!-- Music (작은) -->
+  <rect x="680" y="600" width="100" height="150" rx="10" fill="#AB47BC"/>
+  <text x="730" y="680" font-family="'Segoe UI',Arial,sans-serif" font-weight="700" font-size="26" fill="white" text-anchor="middle" transform="rotate(-90, 730, 680)">Music</text>
+
+  <!-- Others (가장 작은) -->
+  <rect x="820" y="660" width="80" height="90" rx="8" fill="#78909C"/>
+  <text x="860" y="708" font-family="'Segoe UI',Arial,sans-serif" font-size="22" fill="white" text-anchor="middle" dominant-baseline="middle">Other</text>
+
+  <!-- Layer 3: 탑뷰 관측 아이콘 -->
+  <circle cx="800" cy="280" r="110" fill="white" opacity="0.85"/>
+  <!-- 탑뷰 트리맵 미니 -->
+  <rect x="720" y="200" width="60" height="60" rx="8" fill="#EF5350"/>
+  <rect x="790" y="200" width="40" height="60" rx="8" fill="#42A5F5"/>
+  <rect x="720" y="270" width="46" height="40" rx="6" fill="#66BB6A"/>
+  <rect x="776" y="270" width="54" height="40" rx="6" fill="#AB47BC"/>
+  <circle cx="800" cy="280" r="110" fill="none" stroke="#0097A7" stroke-width="14"/>
+</svg>

@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg5" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#E8F5E9"/>
+      <stop offset="60%" stop-color="#A5D6A7"/>
+      <stop offset="100%" stop-color="#66BB6A"/>
+    </linearGradient>
+    <linearGradient id="path5" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1565C0"/>
+      <stop offset="100%" stop-color="#42A5F5"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: 지도 배경 (녹지/공간) -->
+  <rect width="1024" height="1024" rx="196" fill="url(#bg5)"/>
+  <!-- 지도 격자선 -->
+  <line x1="0" y1="256" x2="1024" y2="256" stroke="#81C784" stroke-width="2" opacity="0.5"/>
+  <line x1="0" y1="512" x2="1024" y2="512" stroke="#81C784" stroke-width="2" opacity="0.5"/>
+  <line x1="0" y1="768" x2="1024" y2="768" stroke="#81C784" stroke-width="2" opacity="0.5"/>
+  <line x1="256" y1="0" x2="256" y2="1024" stroke="#81C784" stroke-width="2" opacity="0.5"/>
+  <line x1="512" y1="0" x2="512" y2="1024" stroke="#81C784" stroke-width="2" opacity="0.5"/>
+  <line x1="768" y1="0" x2="768" y2="1024" stroke="#81C784" stroke-width="2" opacity="0.5"/>
+
+  <!-- Layer 2: 경로 선 (PATH) -->
+  <!-- 굽이치는 경로 -->
+  <path d="M160 820 L240 680 L340 580 L460 520 L512 480 L620 400 L720 340 L820 240" stroke="url(#path5)" stroke-width="28" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <!-- 경로 위 점들 (경유지) -->
+  <circle cx="240" cy="680" r="22" fill="#1565C0" stroke="white" stroke-width="6"/>
+  <circle cx="460" cy="520" r="22" fill="#1565C0" stroke="white" stroke-width="6"/>
+  <circle cx="620" cy="400" r="22" fill="#1565C0" stroke="white" stroke-width="6"/>
+
+  <!-- Layer 3: 시작 핀 + 끝 핀 -->
+  <!-- 시작점 (빨간 경고 핀) -->
+  <ellipse cx="160" cy="860" rx="32" ry="12" fill="#B71C1C" opacity="0.5"/>
+  <path d="M160 820 Q130 780 130 750 Q130 710 160 700 Q190 710 190 750 Q190 780 160 820Z" fill="#EF5350"/>
+  <circle cx="160" cy="748" r="20" fill="white" opacity="0.9"/>
+  <text x="160" y="748" font-family="'Segoe UI',Arial,sans-serif" font-size="22" fill="#EF5350" text-anchor="middle" dominant-baseline="middle">!</text>
+
+  <!-- 끝점 (초록 체크 핀) -->
+  <ellipse cx="820" cy="280" rx="32" ry="12" fill="#1B5E20" opacity="0.5"/>
+  <path d="M820 240 Q790 200 790 170 Q790 130 820 120 Q850 130 850 170 Q850 200 820 240Z" fill="#2E7D32"/>
+  <circle cx="820" cy="168" r="20" fill="white" opacity="0.9"/>
+  <text x="820" y="168" font-family="'Segoe UI Emoji',Arial,sans-serif" font-size="22" fill="#2E7D32" text-anchor="middle" dominant-baseline="middle">✓</text>
+
+  <!-- PATH 라벨 배지 -->
+  <rect x="340" y="610" width="220" height="64" rx="16" fill="#1565C0" stroke="white" stroke-width="4"/>
+  <text x="450" y="643" font-family="'Courier New',monospace" font-weight="900" font-size="38" fill="white" text-anchor="middle" dominant-baseline="middle">PATH</text>
+</svg>

@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg4" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0D1B3E"/>
+      <stop offset="100%" stop-color="#1A2A6C"/>
+    </linearGradient>
+    <linearGradient id="shield4" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFD740"/>
+      <stop offset="100%" stop-color="#FF8F00"/>
+    </linearGradient>
+    <linearGradient id="inner4" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1565C0"/>
+      <stop offset="100%" stop-color="#0D47A1"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: 딥 블루 배경 + 육각 격자 패턴 -->
+  <rect width="1024" height="1024" rx="196" fill="url(#bg4)"/>
+  <!-- 배경 기하학 패턴 -->
+  <circle cx="512" cy="512" r="420" fill="none" stroke="#1E3A6E" stroke-width="2" opacity="0.6"/>
+  <circle cx="512" cy="512" r="320" fill="none" stroke="#1E3A6E" stroke-width="2" opacity="0.4"/>
+  <circle cx="512" cy="512" r="200" fill="none" stroke="#1E3A6E" stroke-width="2" opacity="0.3"/>
+
+  <!-- Layer 2: 방패 (Guard 심볼) -->
+  <path d="M512 160 L760 280 L760 540 Q760 720 512 860 Q264 720 264 540 L264 280 Z" fill="url(#shield4)" opacity="0.95"/>
+  <!-- 방패 안쪽 -->
+  <path d="M512 220 L710 322 L710 530 Q710 680 512 800 Q314 680 314 530 L314 322 Z" fill="url(#inner4)"/>
+
+  <!-- Layer 3: 방패 내부 PATH 텍스트 -->
+  <text x="512" y="420" font-family="'Courier New',monospace" font-weight="900" font-size="72" fill="#FFD740" text-anchor="middle" dominant-baseline="middle">PATH</text>
+  <!-- 체크 아이콘 -->
+  <circle cx="512" cy="550" r="72" fill="#2E7D32" stroke="#00E676" stroke-width="6"/>
+  <text x="512" y="550" font-family="'Segoe UI Emoji',Arial,sans-serif" font-size="68" fill="white" text-anchor="middle" dominant-baseline="middle">✓</text>
+  <!-- 별 장식 (방패 상단 양쪽) -->
+  <circle cx="390" cy="310" r="12" fill="#FFD740" opacity="0.8"/>
+  <circle cx="634" cy="310" r="12" fill="#FFD740" opacity="0.8"/>
+</svg>

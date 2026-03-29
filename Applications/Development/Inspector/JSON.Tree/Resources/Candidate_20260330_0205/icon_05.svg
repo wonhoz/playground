@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg5" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFFDE7"/>
+      <stop offset="100%" stop-color="#FFF176"/>
+    </linearGradient>
+    <linearGradient id="lensColor" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1565C0"/>
+      <stop offset="100%" stop-color="#0D47A1"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: 노랑 배경 -->
+  <rect width="1024" height="1024" rx="200" fill="url(#bg5)"/>
+
+  <!-- Layer 2: 돋보기 안 JSON 트리 -->
+  <!-- 돋보기 원 내부 (흰 배경) -->
+  <circle cx="440" cy="460" r="300" fill="white" opacity="0.95"/>
+  <!-- JSON 트리 (렌즈 안) -->
+  <text x="210" y="320" font-family="'Courier New',monospace" font-size="38" fill="#1A237E">{</text>
+  <text x="240" y="380" font-family="'Courier New',monospace" font-size="34" fill="#2E7D32">  "type":</text>
+  <text x="450" y="380" font-family="'Courier New',monospace" font-size="34" fill="#FF8F00"> "tree"</text>
+  <text x="240" y="430" font-family="'Courier New',monospace" font-size="34" fill="#2E7D32">  "depth":</text>
+  <text x="472" y="430" font-family="'Courier New',monospace" font-size="34" fill="#1565C0"> 3</text>
+  <text x="240" y="480" font-family="'Courier New',monospace" font-size="34" fill="#2E7D32">  "nodes":</text>
+  <text x="472" y="480" font-family="'Courier New',monospace" font-size="34" fill="#7B1FA2"> [...]</text>
+  <text x="210" y="540" font-family="'Courier New',monospace" font-size="38" fill="#1A237E">}</text>
+  <!-- 하이라이트 줄 -->
+  <rect x="210" y="406" width="460" height="44" rx="8" fill="#1565C0" opacity="0.12"/>
+
+  <!-- 돋보기 테두리 -->
+  <circle cx="440" cy="460" r="300" fill="none" stroke="url(#lensColor)" stroke-width="40"/>
+  <!-- 손잡이 -->
+  <line x1="680" y1="700" x2="900" y2="920" stroke="#0D47A1" stroke-width="60" stroke-linecap="round"/>
+
+  <!-- Layer 3: 포맷 배지들 (오른쪽 상단) -->
+  <rect x="680" y="120" width="130" height="52" rx="14" fill="#43A047"/>
+  <text x="745" y="148" font-family="'Segoe UI',Arial,sans-serif" font-weight="800" font-size="34" fill="white" text-anchor="middle" dominant-baseline="middle">JSON</text>
+  <rect x="826" y="120" width="130" height="52" rx="14" fill="#FF8F00"/>
+  <text x="891" y="148" font-family="'Segoe UI',Arial,sans-serif" font-weight="800" font-size="34" fill="white" text-anchor="middle" dominant-baseline="middle">YAML</text>
+  <rect x="680" y="188" width="130" height="52" rx="14" fill="#7B1FA2"/>
+  <text x="745" y="216" font-family="'Segoe UI',Arial,sans-serif" font-weight="800" font-size="34" fill="white" text-anchor="middle" dominant-baseline="middle">TOML</text>
+</svg>

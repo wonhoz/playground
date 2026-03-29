@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg6" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#E3F2FD"/>
+      <stop offset="100%" stop-color="#90CAF9"/>
+    </linearGradient>
+    <linearGradient id="lockOpen" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FF8F00"/>
+      <stop offset="100%" stop-color="#E65100"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: 하늘 배경 -->
+  <rect width="1024" height="1024" rx="200" fill="url(#bg6)"/>
+
+  <!-- Layer 2: 파일 아이콘 (큰) -->
+  <rect x="160" y="200" width="460" height="560" rx="24" fill="#1565C0"/>
+  <polygon points="520,200 620,300 620,300 520,300" fill="#0D47A1"/>
+  <rect x="520" y="200" width="100" height="100" rx="10" fill="#0D47A1"/>
+  <!-- 파일 라인들 (내용 미리보기) -->
+  <rect x="220" y="380" width="300" height="24" rx="6" fill="#42A5F5" opacity="0.6"/>
+  <rect x="220" y="424" width="260" height="24" rx="6" fill="#42A5F5" opacity="0.5"/>
+  <rect x="220" y="468" width="280" height="24" rx="6" fill="#42A5F5" opacity="0.4"/>
+  <text x="390" y="576" font-family="'Segoe UI',Arial,sans-serif" font-size="28" fill="#BBDEFB" text-anchor="middle">document.pdf</text>
+
+  <!-- Layer 3: 열린 자물쇠 (대각선 동적) -->
+  <!-- 자물쇠 몸체 -->
+  <rect x="540" y="580" width="340" height="280" rx="30" fill="url(#lockOpen)"/>
+  <rect x="540" y="580" width="340" height="70" rx="30" fill="#FFD740" opacity="0.4"/>
+  <!-- 열쇠 구멍 -->
+  <circle cx="710" cy="700" r="38" fill="#E65100"/>
+  <rect x="692" y="700" width="36" height="68" rx="10" fill="#E65100"/>
+  <!-- 고리 (오른쪽으로 열려 있음 — 해제 상태) -->
+  <path d="M590 580 Q590 360 710 360 Q830 360 830 500" stroke="#FF8F00" stroke-width="56" stroke-linecap="round" fill="none"/>
+  <path d="M590 580 Q590 360 710 360 Q830 360 830 500" stroke="#FFD740" stroke-width="24" stroke-linecap="round" fill="none" opacity="0.4"/>
+
+  <!-- 해방 화살표/효과 -->
+  <line x1="620" y1="200" x2="620" y2="130" stroke="#FF8F00" stroke-width="16" stroke-linecap="round"/>
+  <polygon points="620,110 590,150 650,150" fill="#FF8F00"/>
+  <!-- ✓ 배지 -->
+  <circle cx="870" cy="260" r="72" fill="#2E7D32"/>
+  <text x="870" y="260" font-family="'Segoe UI Emoji',Arial,sans-serif" font-size="60" text-anchor="middle" dominant-baseline="middle">✓</text>
+</svg>

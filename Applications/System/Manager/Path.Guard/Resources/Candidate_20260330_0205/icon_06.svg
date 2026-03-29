@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg6" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFF8E1"/>
+      <stop offset="100%" stop-color="#FFE082"/>
+    </linearGradient>
+    <linearGradient id="card6" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1A2A3A"/>
+      <stop offset="100%" stop-color="#0D1B2A"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: 밝은 황금빛 배경 -->
+  <rect width="1024" height="1024" rx="196" fill="url(#bg6)"/>
+
+  <!-- Layer 2: 터미널 카드 (경로 표시 UI) -->
+  <rect x="80" y="180" width="864" height="580" rx="24" fill="url(#card6)"/>
+  <!-- 터미널 헤더 -->
+  <rect x="80" y="180" width="864" height="56" rx="24" fill="#0A1520"/>
+  <circle cx="136" cy="208" r="12" fill="#EF5350"/>
+  <circle cx="178" cy="208" r="12" fill="#FFD740"/>
+  <circle cx="220" cy="208" r="12" fill="#4CAF50"/>
+  <text x="512" y="210" font-family="'Segoe UI',Arial,sans-serif" font-size="24" fill="#546E7A" text-anchor="middle" dominant-baseline="middle">Path.Guard — PATH Editor</text>
+
+  <!-- 경로 라인들 -->
+  <text x="130" y="300" font-family="'Courier New',monospace" font-size="32" fill="#00E676" dominant-baseline="middle">$  C:\Windows\system32</text>
+  <text x="130" y="356" font-family="'Courier New',monospace" font-size="32" fill="#00E676" dominant-baseline="middle">$  C:\Program Files\Git\bin</text>
+  <!-- 깨진 경로 (주황 경고) -->
+  <text x="130" y="412" font-family="'Courier New',monospace" font-size="32" fill="#FF8F00" dominant-baseline="middle">⚠  C:\old\deleted\path</text>
+  <text x="130" y="468" font-family="'Courier New',monospace" font-size="32" fill="#00E676" dominant-baseline="middle">$  C:\Users\admin\bin</text>
+  <!-- 커서 라인 -->
+  <text x="130" y="524" font-family="'Courier New',monospace" font-size="32" fill="#42A5F5" dominant-baseline="middle">▶  _</text>
+  <rect x="175" y="510" width="14" height="36" rx="2" fill="#42A5F5" opacity="0.9">
+    <animate attributeName="opacity" values="0.9;0.2;0.9" dur="1s" repeatCount="indefinite"/>
+  </rect>
+
+  <!-- Layer 3: 방패 배지 (Guard) + 통계 -->
+  <circle cx="820" cy="340" r="100" fill="#FF6F00" stroke="#FFD740" stroke-width="8"/>
+  <path d="M820 270 L875 300 L875 360 Q875 410 820 440 Q765 410 765 360 L765 300 Z" fill="white" opacity="0.95"/>
+  <text x="820" y="365" font-family="'Courier New',monospace" font-weight="900" font-size="36" fill="#FF6F00" text-anchor="middle" dominant-baseline="middle">G</text>
+
+  <!-- 하단 통계 바 -->
+  <rect x="80" y="790" width="864" height="80" rx="20" fill="#FF6F00" opacity="0.9"/>
+  <text x="280" y="831" font-family="'Segoe UI',Arial,sans-serif" font-size="34" fill="white" text-anchor="middle" dominant-baseline="middle">18 entries</text>
+  <text x="512" y="831" font-family="'Segoe UI',Arial,sans-serif" font-size="34" fill="#FFE082" text-anchor="middle" dominant-baseline="middle">|</text>
+  <text x="740" y="831" font-family="'Segoe UI',Arial,sans-serif" font-size="34" fill="#FFCDD2" text-anchor="middle" dominant-baseline="middle">1 broken ⚠</text>
+</svg>

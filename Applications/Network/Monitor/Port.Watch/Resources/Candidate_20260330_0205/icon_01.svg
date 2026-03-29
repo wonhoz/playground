@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0D1B2A"/>
+      <stop offset="100%" stop-color="#1B2A4A"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: 다크 네이비 배경 -->
+  <rect width="1024" height="1024" rx="200" fill="url(#bg1)"/>
+
+  <!-- Layer 2: 포트 목록 -->
+  <!-- 헤더 -->
+  <rect x="80" y="130" width="864" height="66" rx="14" fill="#0A2040"/>
+  <text x="120" y="165" font-family="'Segoe UI',Arial,sans-serif" font-size="34" fill="#546E7A" dominant-baseline="middle">Proto</text>
+  <text x="300" y="165" font-family="'Segoe UI',Arial,sans-serif" font-size="34" fill="#546E7A" dominant-baseline="middle">Port</text>
+  <text x="500" y="165" font-family="'Segoe UI',Arial,sans-serif" font-size="34" fill="#546E7A" dominant-baseline="middle">State</text>
+  <text x="700" y="165" font-family="'Segoe UI',Arial,sans-serif" font-size="34" fill="#546E7A" dominant-baseline="middle">Process</text>
+
+  <!-- 포트 항목 1 — LISTEN -->
+  <rect x="80" y="214" width="864" height="66" rx="10" fill="#0D2A1A" opacity="0.8"/>
+  <rect x="80" y="214" width="6" height="66" rx="3" fill="#00E676"/>
+  <text x="120" y="249" font-family="'Courier New',monospace" font-size="32" fill="#00BCD4" dominant-baseline="middle">TCP</text>
+  <text x="300" y="249" font-family="'Courier New',monospace" font-size="34" fill="#E0E0E0" dominant-baseline="middle">:8080</text>
+  <rect x="494" y="224" width="140" height="42" rx="10" fill="#00695C"/>
+  <text x="564" y="247" font-family="'Courier New',monospace" font-size="28" fill="white" text-anchor="middle" dominant-baseline="middle">LISTEN</text>
+  <text x="700" y="249" font-family="'Courier New',monospace" font-size="30" fill="#A5D6A7" dominant-baseline="middle">nginx</text>
+
+  <!-- 포트 항목 2 — ESTABLISHED -->
+  <rect x="80" y="294" width="864" height="66" rx="10" fill="#0D1E2A" opacity="0.8"/>
+  <rect x="80" y="294" width="6" height="66" rx="3" fill="#00BCD4"/>
+  <text x="120" y="329" font-family="'Courier New',monospace" font-size="32" fill="#00BCD4" dominant-baseline="middle">TCP</text>
+  <text x="300" y="329" font-family="'Courier New',monospace" font-size="34" fill="#E0E0E0" dominant-baseline="middle">:443</text>
+  <rect x="486" y="304" width="180" height="42" rx="10" fill="#1565C0"/>
+  <text x="576" y="327" font-family="'Courier New',monospace" font-size="24" fill="white" text-anchor="middle" dominant-baseline="middle">ESTAB</text>
+  <text x="700" y="329" font-family="'Courier New',monospace" font-size="30" fill="#90CAF9" dominant-baseline="middle">chrome</text>
+
+  <!-- 포트 항목 3 — UDP -->
+  <rect x="80" y="374" width="864" height="66" rx="10" fill="#1A1A0D" opacity="0.7"/>
+  <rect x="80" y="374" width="6" height="66" rx="3" fill="#FFD740"/>
+  <text x="120" y="409" font-family="'Courier New',monospace" font-size="32" fill="#FFD740" dominant-baseline="middle">UDP</text>
+  <text x="300" y="409" font-family="'Courier New',monospace" font-size="34" fill="#E0E0E0" dominant-baseline="middle">:53</text>
+  <text x="500" y="409" font-family="'Courier New',monospace" font-size="30" fill="#FFD740" dominant-baseline="middle">—</text>
+  <text x="700" y="409" font-family="'Courier New',monospace" font-size="30" fill="#FFF59D" dominant-baseline="middle">svchost</text>
+
+  <!-- 포트 항목 4 — CLOSE_WAIT -->
+  <rect x="80" y="454" width="864" height="66" rx="10" fill="#2A0D0D" opacity="0.7"/>
+  <rect x="80" y="454" width="6" height="66" rx="3" fill="#EF5350"/>
+  <text x="120" y="489" font-family="'Courier New',monospace" font-size="32" fill="#00BCD4" dominant-baseline="middle">TCP</text>
+  <text x="300" y="489" font-family="'Courier New',monospace" font-size="34" fill="#E0E0E0" dominant-baseline="middle">:3306</text>
+  <rect x="480" y="464" width="200" height="42" rx="10" fill="#880E4F"/>
+  <text x="580" y="487" font-family="'Courier New',monospace" font-size="24" fill="white" text-anchor="middle" dominant-baseline="middle">CL_WAIT</text>
+  <text x="700" y="489" font-family="'Courier New',monospace" font-size="30" fill="#F48FB1" dominant-baseline="middle">mysqld</text>
+
+  <!-- Layer 3: 새로고침 버튼 + 카운트 -->
+  <rect x="80" y="800" width="864" height="76" rx="18" fill="#0D2040"/>
+  <text x="200" y="840" font-family="'Segoe UI',Arial,sans-serif" font-size="34" fill="#546E7A" dominant-baseline="middle">↻ Refresh</text>
+  <rect x="640" y="814" width="268" height="48" rx="12" fill="#00695C"/>
+  <text x="774" y="840" font-family="'Segoe UI',Arial,sans-serif" font-weight="700" font-size="32" fill="white" text-anchor="middle" dominant-baseline="middle">147 ports</text>
+</svg>

@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FCE4EC"/>
+      <stop offset="100%" stop-color="#F8BBD0"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: 핑크-빨강 배경 -->
+  <rect width="1024" height="1024" rx="200" fill="url(#bg2)"/>
+
+  <!-- Layer 2: 잠긴 파일 → 해제 파일 레이어드 -->
+  <!-- BEFORE: 잠긴 파일 (왼쪽) -->
+  <rect x="80" y="200" width="360" height="500" rx="24" fill="#C62828" opacity="0.9"/>
+  <rect x="80" y="200" width="360" height="70" rx="24" fill="#B71C1C"/>
+  <text x="260" y="236" font-family="'Segoe UI',Arial,sans-serif" font-weight="700" font-size="34" fill="white" text-anchor="middle" dominant-baseline="middle">LOCKED</text>
+  <!-- 파일 아이콘 (잠긴 상태) -->
+  <rect x="160" y="310" width="200" height="240" rx="16" fill="#D32F2F"/>
+  <polygon points="310,310 360,360 360,360 310,360" fill="#B71C1C"/>
+  <rect x="310" y="310" width="50" height="50" rx="6" fill="#B71C1C"/>
+  <!-- 빨간 자물쇠 -->
+  <rect x="200" y="420" width="120" height="94" rx="16" fill="#880E4F"/>
+  <rect x="215" y="400" width="90" height="50" rx="45" fill="none" stroke="#FFCDD2" stroke-width="14"/>
+  <circle cx="260" cy="465" r="16" fill="#FF80AB"/>
+
+  <!-- 큰 화살표 (중앙) -->
+  <path d="M472 440 L572 440 L572 406 L640 512 L572 618 L572 584 L472 584 Z" fill="#FF8F00"/>
+
+  <!-- AFTER: 잠금 해제 파일 (오른쪽) -->
+  <rect x="584" y="200" width="360" height="500" rx="24" fill="#1B5E20" opacity="0.9"/>
+  <rect x="584" y="200" width="360" height="70" rx="24" fill="#388E3C"/>
+  <text x="764" y="236" font-family="'Segoe UI',Arial,sans-serif" font-weight="700" font-size="34" fill="white" text-anchor="middle" dominant-baseline="middle">UNLOCKED</text>
+  <!-- 파일 아이콘 (해제 상태) -->
+  <rect x="664" y="310" width="200" height="240" rx="16" fill="#2E7D32"/>
+  <polygon points="814,310 864,360 864,360 814,360" fill="#1B5E20"/>
+  <rect x="814" y="310" width="50" height="50" rx="6" fill="#1B5E20"/>
+  <!-- 열린 자물쇠 -->
+  <rect x="704" y="420" width="120" height="94" rx="16" fill="#388E3C"/>
+  <rect x="719" y="400" width="90" height="50" rx="45" fill="none" stroke="#C8E6C9" stroke-width="14" stroke-dasharray="100 30"/>
+  <circle cx="764" cy="465" r="16" fill="#A5D6A7"/>
+
+  <!-- Layer 3: 파일명 -->
+  <text x="260" y="760" font-family="'Segoe UI',Arial,sans-serif" font-size="26" fill="#FFCDD2" text-anchor="middle">report.docx</text>
+  <text x="764" y="760" font-family="'Segoe UI',Arial,sans-serif" font-size="26" fill="#C8E6C9" text-anchor="middle">report.docx</text>
+</svg>

@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0D2010"/>
+      <stop offset="100%" stop-color="#1A3A20"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: 다크 그린 배경 -->
+  <rect width="1024" height="1024" rx="200" fill="url(#bg1)"/>
+
+  <!-- Layer 2: 파일 + 해시값 표시 -->
+  <!-- 파일 아이콘 -->
+  <rect x="80" y="130" width="200" height="260" rx="16" fill="#1B5E20"/>
+  <polygon points="230,130 280,180 280,180 230,180" fill="#2E7D32"/>
+  <rect x="230" y="130" width="50" height="50" rx="6" fill="#388E3C"/>
+  <text x="180" y="220" font-family="'Segoe UI',Arial,sans-serif" font-weight="700" font-size="44" fill="#A5D6A7" text-anchor="middle">file.zip</text>
+  <text x="180" y="268" font-family="'Segoe UI',Arial,sans-serif" font-size="30" fill="#81C784" text-anchor="middle">2.4 MB</text>
+
+  <!-- 해시 결과들 -->
+  <!-- MD5 -->
+  <rect x="310" y="140" width="628" height="68" rx="14" fill="#1A2A1A"/>
+  <text x="338" y="162" font-family="'Courier New',monospace" font-size="28" fill="#4CAF50" dominant-baseline="middle">MD5:</text>
+  <text x="408" y="162" font-family="'Courier New',monospace" font-size="26" fill="#A5D6A7" dominant-baseline="middle">d41d8cd98f00b204e980</text>
+
+  <!-- SHA1 -->
+  <rect x="310" y="224" width="628" height="68" rx="14" fill="#1A2A1A" opacity="0.9"/>
+  <text x="338" y="246" font-family="'Courier New',monospace" font-size="28" fill="#26A69A" dominant-baseline="middle">SHA1:</text>
+  <text x="432" y="246" font-family="'Courier New',monospace" font-size="26" fill="#80CBC4" dominant-baseline="middle">da39a3ee5e6b4b0d3255</text>
+
+  <!-- SHA256 (강조) -->
+  <rect x="298" y="308" width="652" height="80" rx="14" fill="#0D3A0D"/>
+  <rect x="310" y="308" width="640" height="80" rx="12" fill="#1B5E20" opacity="0.9"/>
+  <text x="338" y="330" font-family="'Courier New',monospace" font-size="28" fill="#69F0AE" dominant-baseline="middle">SHA256:</text>
+  <text x="455" y="330" font-family="'Courier New',monospace" font-size="24" fill="#CCFF90" dominant-baseline="middle">e3b0c44298fc1c149afb</text>
+  <text x="455" y="368" font-family="'Courier New',monospace" font-size="24" fill="#CCFF90" dominant-baseline="middle">...4b9a3fb79b6f2e3fd77</text>
+
+  <!-- SHA512 -->
+  <rect x="310" y="404" width="628" height="68" rx="14" fill="#1A2A1A" opacity="0.8"/>
+  <text x="338" y="426" font-family="'Courier New',monospace" font-size="28" fill="#81C784" dominant-baseline="middle">SHA512:</text>
+  <text x="462" y="426" font-family="'Courier New',monospace" font-size="24" fill="#C8E6C9" dominant-baseline="middle">cf83e1357eefb8bdf154...</text>
+
+  <!-- Layer 3: 검증 결과 (하단) -->
+  <rect x="80" y="680" width="864" height="100" rx="22" fill="#2E7D32"/>
+  <text x="200" y="732" font-family="'Segoe UI Emoji',Arial,sans-serif" font-size="52" text-anchor="middle" dominant-baseline="middle">✅</text>
+  <text x="560" y="718" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="44" fill="white" text-anchor="middle" dominant-baseline="middle">Match!</text>
+  <text x="560" y="764" font-family="'Segoe UI',Arial,sans-serif" font-size="30" fill="#C8E6C9" text-anchor="middle" dominant-baseline="middle">SHA256 verified</text>
+</svg>

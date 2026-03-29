@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#E8EAF6"/>
+      <stop offset="100%" stop-color="#C5CAE9"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: 연보라 배경 -->
+  <rect width="1024" height="1024" rx="196" fill="url(#bg2)"/>
+
+  <!-- Layer 2: 두 파일 나란히 (SAME) -->
+  <!-- 왼쪽 파일 -->
+  <rect x="90" y="200" width="360" height="460" rx="20" fill="#3949AB" stroke="#7986CB" stroke-width="6"/>
+  <polygon points="370,200 450,280 450,280 370,280" fill="#283593"/>
+  <rect x="370" y="200" width="80" height="80" rx="8" fill="#283593"/>
+  <!-- 파일 내용 줄 -->
+  <rect x="130" y="340" width="250" height="18" rx="4" fill="#5C6BC0" opacity="0.7"/>
+  <rect x="130" y="376" width="210" height="18" rx="4" fill="#5C6BC0" opacity="0.6"/>
+  <rect x="130" y="412" width="230" height="18" rx="4" fill="#5C6BC0" opacity="0.5"/>
+  <rect x="130" y="448" width="180" height="18" rx="4" fill="#5C6BC0" opacity="0.4"/>
+  <text x="270" y="570" font-family="'Courier New',monospace" font-size="26" fill="#9FA8DA" text-anchor="middle">a3f5...c2e1</text>
+
+  <!-- 오른쪽 파일 (동일) -->
+  <rect x="574" y="200" width="360" height="460" rx="20" fill="#3949AB" stroke="#7986CB" stroke-width="6"/>
+  <polygon points="854,200 934,280 934,280 854,280" fill="#283593"/>
+  <rect x="854" y="200" width="80" height="80" rx="8" fill="#283593"/>
+  <!-- 파일 내용 줄 -->
+  <rect x="614" y="340" width="250" height="18" rx="4" fill="#5C6BC0" opacity="0.7"/>
+  <rect x="614" y="376" width="210" height="18" rx="4" fill="#5C6BC0" opacity="0.6"/>
+  <rect x="614" y="412" width="230" height="18" rx="4" fill="#5C6BC0" opacity="0.5"/>
+  <rect x="614" y="448" width="180" height="18" rx="4" fill="#5C6BC0" opacity="0.4"/>
+  <text x="754" y="570" font-family="'Courier New',monospace" font-size="26" fill="#9FA8DA" text-anchor="middle">a3f5...c2e1</text>
+
+  <!-- Layer 3: 가운데 SAME 배지 + 연결선 -->
+  <line x1="450" y1="430" x2="574" y2="430" stroke="#E91E63" stroke-width="8" stroke-dasharray="12 8"/>
+  <rect x="430" y="390" width="164" height="80" rx="20" fill="#E91E63"/>
+  <text x="512" y="432" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="40" fill="white" text-anchor="middle" dominant-baseline="middle">SAME</text>
+
+  <!-- 하단 삭제 버튼 -->
+  <rect x="300" y="720" width="424" height="72" rx="18" fill="#D32F2F"/>
+  <text x="512" y="758" font-family="'Segoe UI',Arial,sans-serif" font-weight="700" font-size="36" fill="white" text-anchor="middle" dominant-baseline="middle">🗑 Remove Duplicates</text>
+</svg>

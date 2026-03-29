@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg3" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#4A148C"/>
+      <stop offset="100%" stop-color="#6A1B9A"/>
+    </linearGradient>
+    <linearGradient id="stamp3" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFD740"/>
+      <stop offset="100%" stop-color="#FF8F00"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: 딥 퍼플 배경 -->
+  <rect width="1024" height="1024" rx="196" fill="url(#bg3)"/>
+
+  <!-- Layer 2: 도장/봉인 프레임 -->
+  <!-- 외곽 도장 테두리 -->
+  <circle cx="512" cy="460" r="340" fill="none" stroke="#FFD740" stroke-width="16" stroke-dasharray="40 20"/>
+  <circle cx="512" cy="460" r="300" fill="none" stroke="#FFD740" stroke-width="6" opacity="0.5"/>
+
+  <!-- QR 패턴 (도장 내부) -->
+  <rect x="320" y="280" width="380" height="380" rx="10" fill="white" opacity="0.95"/>
+  <!-- QR 파인더 좌상 -->
+  <rect x="334" y="294" width="100" height="100" rx="6" fill="#4A148C"/>
+  <rect x="350" y="310" width="68" height="68" rx="4" fill="white"/>
+  <rect x="368" y="328" width="32" height="32" rx="2" fill="#4A148C"/>
+  <!-- QR 파인더 우상 -->
+  <rect x="566" y="294" width="100" height="100" rx="6" fill="#4A148C"/>
+  <rect x="582" y="310" width="68" height="68" rx="4" fill="white"/>
+  <rect x="600" y="328" width="32" height="32" rx="2" fill="#4A148C"/>
+  <!-- QR 파인더 좌하 -->
+  <rect x="334" y="526" width="100" height="100" rx="6" fill="#4A148C"/>
+  <rect x="350" y="542" width="68" height="68" rx="4" fill="white"/>
+  <rect x="368" y="560" width="32" height="32" rx="2" fill="#4A148C"/>
+  <!-- 데이터 도트 -->
+  <rect x="460" y="294" width="28" height="28" rx="4" fill="#6A1B9A"/>
+  <rect x="500" y="294" width="28" height="28" rx="4" fill="#6A1B9A"/>
+  <rect x="540" y="294" width="28" height="28" rx="4" fill="#6A1B9A"/>
+  <rect x="460" y="334" width="28" height="28" rx="4" fill="#6A1B9A"/>
+  <rect x="500" y="374" width="28" height="28" rx="4" fill="#6A1B9A"/>
+  <rect x="460" y="414" width="28" height="28" rx="4" fill="#6A1B9A"/>
+  <rect x="540" y="374" width="28" height="28" rx="4" fill="#6A1B9A"/>
+  <rect x="460" y="526" width="28" height="28" rx="4" fill="#6A1B9A"/>
+  <rect x="500" y="526" width="28" height="28" rx="4" fill="#6A1B9A"/>
+  <rect x="540" y="526" width="28" height="28" rx="4" fill="#6A1B9A"/>
+  <rect x="566" y="454" width="28" height="28" rx="4" fill="#6A1B9A"/>
+  <rect x="606" y="454" width="28" height="28" rx="4" fill="#6A1B9A"/>
+  <rect x="566" y="494" width="28" height="28" rx="4" fill="#6A1B9A"/>
+  <rect x="606" y="494" width="28" height="28" rx="4" fill="#6A1B9A"/>
+
+  <!-- Layer 3: 도장 텍스트 (원형) + 손잡이 -->
+  <text x="512" y="188" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="32" fill="#FFD740" text-anchor="middle" dominant-baseline="middle">QR · FORGE · 2026</text>
+  <!-- 도장 손잡이 -->
+  <rect x="472" y="780" width="80" height="120" rx="16" fill="url(#stamp3)"/>
+  <rect x="390" y="880" width="244" height="50" rx="12" fill="#FF8F00"/>
+</svg>

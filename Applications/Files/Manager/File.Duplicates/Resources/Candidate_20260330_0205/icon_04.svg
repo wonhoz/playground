@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg4" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0%" stop-color="#1B5E20"/>
+      <stop offset="100%" stop-color="#004D40"/>
+    </linearGradient>
+    <linearGradient id="scan4" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#00E676"/>
+      <stop offset="100%" stop-color="#00BFA5"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: 다크 그린 배경 + 스캔 패턴 -->
+  <rect width="1024" height="1024" rx="196" fill="url(#bg4)"/>
+  <!-- 스캔 라인 패턴 -->
+  <line x1="0" y1="200" x2="1024" y2="200" stroke="#00E676" stroke-width="1" opacity="0.15"/>
+  <line x1="0" y1="350" x2="1024" y2="350" stroke="#00E676" stroke-width="1" opacity="0.15"/>
+  <line x1="0" y1="500" x2="1024" y2="500" stroke="#00E676" stroke-width="1" opacity="0.15"/>
+  <line x1="0" y1="650" x2="1024" y2="650" stroke="#00E676" stroke-width="1" opacity="0.15"/>
+  <line x1="0" y1="800" x2="1024" y2="800" stroke="#00E676" stroke-width="1" opacity="0.15"/>
+
+  <!-- Layer 2: 해시 스캔 구조 (SHA256 체인) -->
+  <!-- 왼쪽 파일 노드 -->
+  <rect x="80" y="300" width="280" height="180" rx="18" fill="#0A2A1A" stroke="#00E676" stroke-width="4"/>
+  <text x="220" y="375" font-family="'Courier New',monospace" font-size="28" fill="#00E676" text-anchor="middle" dominant-baseline="middle">file_A.zip</text>
+  <text x="220" y="430" font-family="'Courier New',monospace" font-size="22" fill="#69F0AE" text-anchor="middle" dominant-baseline="middle">128 MB</text>
+
+  <!-- 오른쪽 파일 노드 -->
+  <rect x="664" y="300" width="280" height="180" rx="18" fill="#0A2A1A" stroke="#00E676" stroke-width="4"/>
+  <text x="804" y="375" font-family="'Courier New',monospace" font-size="28" fill="#00E676" text-anchor="middle" dominant-baseline="middle">backup.zip</text>
+  <text x="804" y="430" font-family="'Courier New',monospace" font-size="22" fill="#69F0AE" text-anchor="middle" dominant-baseline="middle">128 MB</text>
+
+  <!-- 중앙 SHA256 연결 -->
+  <line x1="360" y1="390" x2="460" y2="390" stroke="url(#scan4)" stroke-width="8" stroke-dasharray="16 8"/>
+  <line x1="564" y1="390" x2="664" y2="390" stroke="url(#scan4)" stroke-width="8" stroke-dasharray="16 8"/>
+
+  <!-- SHA256 해시 박스 -->
+  <rect x="460" y="330" width="220" height="120" rx="14" fill="#004D30" stroke="#00BFA5" stroke-width="4"/>
+  <text x="570" y="378" font-family="'Courier New',monospace" font-size="22" fill="#80CBC4" text-anchor="middle" dominant-baseline="middle">SHA256</text>
+  <text x="570" y="416" font-family="'Courier New',monospace" font-size="20" fill="#00BFA5" text-anchor="middle" dominant-baseline="middle">a3f5c2e1</text>
+
+  <!-- Layer 3: MATCH 결과 + 크기 절약 -->
+  <rect x="200" y="600" width="624" height="90" rx="22" fill="#00695C"/>
+  <text x="512" y="648" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="42" fill="#E0F2F1" text-anchor="middle" dominant-baseline="middle">MATCH — 128 MB saved</text>
+
+  <!-- 체크 배지 -->
+  <circle cx="512" cy="820" r="80" fill="#00E676" stroke="white" stroke-width="8"/>
+  <text x="512" y="820" font-family="'Segoe UI Emoji',Arial,sans-serif" font-size="80" text-anchor="middle" dominant-baseline="middle">✓</text>
+</svg>

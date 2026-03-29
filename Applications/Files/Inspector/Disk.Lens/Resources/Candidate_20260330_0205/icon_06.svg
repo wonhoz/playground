@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg6" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#E8F5E9"/>
+      <stop offset="100%" stop-color="#C8E6C9"/>
+    </linearGradient>
+    <linearGradient id="hddBody" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#607D8B"/>
+      <stop offset="100%" stop-color="#37474F"/>
+    </linearGradient>
+    <linearGradient id="arrows" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#FF6F00"/>
+      <stop offset="100%" stop-color="#FF8F00"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: 밝은 초록 배경 -->
+  <rect width="1024" height="1024" rx="200" fill="url(#bg6)"/>
+
+  <!-- Layer 2: HDD 디스크 (원형 — 하드 플래터) -->
+  <circle cx="512" cy="512" r="340" fill="url(#hddBody)" stroke="#546E7A" stroke-width="16"/>
+  <!-- 플래터 선들 -->
+  <circle cx="512" cy="512" r="280" fill="none" stroke="#455A64" stroke-width="6"/>
+  <circle cx="512" cy="512" r="220" fill="none" stroke="#455A64" stroke-width="5"/>
+  <circle cx="512" cy="512" r="160" fill="none" stroke="#546E7A" stroke-width="5"/>
+  <circle cx="512" cy="512" r="100" fill="none" stroke="#607D8B" stroke-width="4"/>
+  <!-- 중앙 스핀들 -->
+  <circle cx="512" cy="512" r="44" fill="#78909C"/>
+  <circle cx="512" cy="512" r="26" fill="#B0BEC5"/>
+
+  <!-- 트리맵 오버레이 (투명하게) -->
+  <!-- 섹터별 색상 분할 -->
+  <path d="M512 512 L512 172 A340 340 0 0 1 806 706 Z" fill="#EF5350" opacity="0.45"/>
+  <path d="M512 512 L806 706 A340 340 0 0 1 280 820 Z" fill="#42A5F5" opacity="0.45"/>
+  <path d="M512 512 L280 820 A340 340 0 0 1 172 420 Z" fill="#66BB6A" opacity="0.45"/>
+  <path d="M512 512 L172 420 A340 340 0 0 1 512 172 Z" fill="#AB47BC" opacity="0.45"/>
+
+  <!-- Layer 3: 읽기/쓰기 헤드 (대각선 동적) -->
+  <!-- 헤드 암 -->
+  <line x1="512" y1="512" x2="780" y2="240" stroke="url(#arrows)" stroke-width="20" stroke-linecap="round"/>
+  <!-- 헤드 -->
+  <rect x="756" y="212" width="58" height="58" rx="10" fill="#FF8F00" transform="rotate(45, 785, 241)"/>
+  <!-- 크기 레이블 (헤드 위) -->
+  <rect x="720" y="130" width="180" height="60" rx="14" fill="#E65100"/>
+  <text x="810" y="162" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="38" fill="white" text-anchor="middle" dominant-baseline="middle">213 GB</text>
+</svg>

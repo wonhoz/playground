@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg3" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FCE4EC"/>
+      <stop offset="100%" stop-color="#F8BBD0"/>
+    </linearGradient>
+    <linearGradient id="tag3" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#E91E63"/>
+      <stop offset="100%" stop-color="#AD1457"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: 핑크 배경 -->
+  <rect width="1024" height="1024" rx="196" fill="url(#bg3)"/>
+
+  <!-- Layer 2: 가격표 태그 (Tag) — 중앙 심볼 -->
+  <!-- 태그 끈 -->
+  <line x1="512" y1="160" x2="512" y2="240" stroke="#AD1457" stroke-width="10" stroke-linecap="round"/>
+  <circle cx="512" cy="155" r="18" fill="#AD1457"/>
+  <!-- 태그 몸체 -->
+  <path d="M300 240 L724 240 L724 700 Q724 740 684 740 L340 740 Q300 740 300 700 Z" fill="url(#tag3)" stroke="white" stroke-width="8"/>
+  <!-- 태그 구멍 -->
+  <circle cx="512" cy="288" r="28" fill="white"/>
+
+  <!-- 태그 내용 — ID3 필드들 -->
+  <text x="512" y="382" font-family="'Courier New',monospace" font-weight="900" font-size="36" fill="white" text-anchor="middle" dominant-baseline="middle">♪ Title</text>
+  <rect x="340" y="404" width="344" height="4" rx="2" fill="#F48FB1" opacity="0.6"/>
+  <text x="512" y="462" font-family="'Segoe UI',Arial,sans-serif" font-size="28" fill="#FFCDD2" text-anchor="middle" dominant-baseline="middle">Artist</text>
+  <text x="512" y="516" font-family="'Segoe UI',Arial,sans-serif" font-size="28" fill="#FFCDD2" text-anchor="middle" dominant-baseline="middle">Album</text>
+  <text x="512" y="570" font-family="'Segoe UI',Arial,sans-serif" font-size="26" fill="#F48FB1" text-anchor="middle" dominant-baseline="middle">Genre · Year</text>
+
+  <!-- Layer 3: 음표 장식들 -->
+  <text x="180" y="340" font-family="'Segoe UI Emoji',Arial,sans-serif" font-size="72" fill="#F48FB1" text-anchor="middle" opacity="0.7">♩</text>
+  <text x="840" y="440" font-family="'Segoe UI Emoji',Arial,sans-serif" font-size="72" fill="#F48FB1" text-anchor="middle" opacity="0.7">♫</text>
+  <text x="200" y="600" font-family="'Segoe UI Emoji',Arial,sans-serif" font-size="56" fill="#F48FB1" text-anchor="middle" opacity="0.5">♪</text>
+  <!-- forge 모루 (하단) -->
+  <rect x="300" y="820" width="424" height="40" rx="10" fill="#AD1457" opacity="0.7"/>
+  <rect x="240" y="856" width="544" height="60" rx="8" fill="#880E4F" opacity="0.8"/>
+  <text x="512" y="888" font-family="'Segoe UI',Arial,sans-serif" font-weight="700" font-size="30" fill="#F48FB1" text-anchor="middle" dominant-baseline="middle">Tag.Forge</text>
+</svg>

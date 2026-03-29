@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0D1B2A"/>
+      <stop offset="100%" stop-color="#1A2A3A"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: 다크 배경 -->
+  <rect width="1024" height="1024" rx="196" fill="url(#bg2)"/>
+
+  <!-- Layer 2: QR 타입 탭 UI -->
+  <!-- 탭 헤더 -->
+  <rect x="80" y="140" width="200" height="54" rx="12" fill="#1565C0"/>
+  <text x="180" y="169" font-family="'Segoe UI',Arial,sans-serif" font-size="26" fill="white" text-anchor="middle" dominant-baseline="middle">🔗 URL</text>
+  <rect x="290" y="140" width="200" height="54" rx="12" fill="#263238"/>
+  <text x="390" y="169" font-family="'Segoe UI',Arial,sans-serif" font-size="26" fill="#78909C" text-anchor="middle" dominant-baseline="middle">📶 WiFi</text>
+  <rect x="500" y="140" width="220" height="54" rx="12" fill="#263238"/>
+  <text x="610" y="169" font-family="'Segoe UI',Arial,sans-serif" font-size="26" fill="#78909C" text-anchor="middle" dominant-baseline="middle">👤 VCard</text>
+  <rect x="730" y="140" width="210" height="54" rx="12" fill="#263238"/>
+  <text x="835" y="169" font-family="'Segoe UI',Arial,sans-serif" font-size="26" fill="#78909C" text-anchor="middle" dominant-baseline="middle">✏ Text</text>
+
+  <!-- URL 입력 폼 -->
+  <rect x="80" y="214" width="500" height="400" rx="16" fill="#1E2A3A"/>
+  <text x="120" y="260" font-family="'Segoe UI',Arial,sans-serif" font-size="24" fill="#546E7A" dominant-baseline="middle">URL</text>
+  <rect x="120" y="278" width="420" height="50" rx="10" fill="#263238"/>
+  <text x="140" y="305" font-family="'Courier New',monospace" font-size="24" fill="#42A5F5" dominant-baseline="middle">https://example.com</text>
+
+  <!-- 색상 설정 -->
+  <text x="120" y="368" font-family="'Segoe UI',Arial,sans-serif" font-size="22" fill="#546E7A" dominant-baseline="middle">Foreground</text>
+  <rect x="260" y="350" width="40" height="40" rx="6" fill="#1A1A1A" stroke="#546E7A" stroke-width="2"/>
+  <text x="120" y="428" font-family="'Segoe UI',Arial,sans-serif" font-size="22" fill="#546E7A" dominant-baseline="middle">Background</text>
+  <rect x="260" y="410" width="40" height="40" rx="6" fill="white" stroke="#546E7A" stroke-width="2"/>
+
+  <!-- 생성 버튼 -->
+  <rect x="120" y="530" width="360" height="56" rx="14" fill="#1565C0"/>
+  <text x="300" y="560" font-family="'Segoe UI',Arial,sans-serif" font-weight="700" font-size="28" fill="white" text-anchor="middle" dominant-baseline="middle">Generate QR</text>
+
+  <!-- Layer 3: QR 미리보기 (오른쪽) -->
+  <rect x="620" y="214" width="324" height="400" rx="16" fill="#1E2A3A"/>
+  <!-- 미니 QR 패턴 -->
+  <rect x="680" y="264" width="200" height="200" rx="8" fill="white"/>
+  <!-- QR 파인더 좌상 -->
+  <rect x="692" y="276" width="60" height="60" rx="4" fill="#1A1A1A"/>
+  <rect x="700" y="284" width="44" height="44" rx="2" fill="white"/>
+  <rect x="710" y="294" width="24" height="24" rx="2" fill="#1A1A1A"/>
+  <!-- QR 파인더 우상 -->
+  <rect x="808" y="276" width="60" height="60" rx="4" fill="#1A1A1A"/>
+  <rect x="816" y="284" width="44" height="44" rx="2" fill="white"/>
+  <rect x="826" y="294" width="24" height="24" rx="2" fill="#1A1A1A"/>
+  <!-- QR 파인더 좌하 -->
+  <rect x="692" y="392" width="60" height="60" rx="4" fill="#1A1A1A"/>
+  <rect x="700" y="400" width="44" height="44" rx="2" fill="white"/>
+  <rect x="710" y="410" width="24" height="24" rx="2" fill="#1A1A1A"/>
+  <!-- 데이터 도트들 -->
+  <rect x="772" y="276" width="16" height="16" rx="2" fill="#1A1A1A"/>
+  <rect x="796" y="276" width="16" height="16" rx="2" fill="#1A1A1A"/>
+  <rect x="772" y="300" width="16" height="16" rx="2" fill="#1A1A1A"/>
+  <rect x="796" y="324" width="16" height="16" rx="2" fill="#1A1A1A"/>
+  <rect x="772" y="348" width="16" height="16" rx="2" fill="#1A1A1A"/>
+  <rect x="796" y="372" width="16" height="16" rx="2" fill="#1A1A1A"/>
+  <rect x="772" y="392" width="16" height="16" rx="2" fill="#1A1A1A"/>
+  <rect x="808" y="348" width="16" height="16" rx="2" fill="#1A1A1A"/>
+  <rect x="832" y="372" width="16" height="16" rx="2" fill="#1A1A1A"/>
+  <rect x="808" y="392" width="16" height="16" rx="2" fill="#1A1A1A"/>
+
+  <!-- 저장 버튼 -->
+  <rect x="640" y="502" width="284" height="52" rx="14" fill="#2E7D32"/>
+  <text x="782" y="530" font-family="'Segoe UI',Arial,sans-serif" font-weight="700" font-size="26" fill="white" text-anchor="middle" dominant-baseline="middle">💾 Save PNG</text>
+
+  <!-- 하단 배지 -->
+  <rect x="80" y="820" width="864" height="74" rx="20" fill="#1565C0" opacity="0.8"/>
+  <text x="512" y="858" font-family="'Segoe UI',Arial,sans-serif" font-size="30" fill="#E3F2FD" text-anchor="middle" dominant-baseline="middle">URL  ·  WiFi  ·  VCard  ·  Text  →  PNG / PDF / SVG</text>
+</svg>

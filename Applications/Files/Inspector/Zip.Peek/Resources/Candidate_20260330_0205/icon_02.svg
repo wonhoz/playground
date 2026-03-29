@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#E0F2F1"/>
+      <stop offset="100%" stop-color="#B2DFDB"/>
+    </linearGradient>
+    <linearGradient id="bar2" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#00897B"/>
+      <stop offset="100%" stop-color="#00BFA5"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: 민트 배경 -->
+  <rect width="1024" height="1024" rx="196" fill="url(#bg2)"/>
+
+  <!-- Layer 2: 압축률 패널 -->
+  <rect x="80" y="140" width="864" height="620" rx="22" fill="#004D40" opacity="0.9"/>
+  <!-- 헤더 -->
+  <rect x="80" y="140" width="864" height="60" rx="22" fill="#00251A"/>
+  <text x="200" y="172" font-family="'Courier New',monospace" font-size="30" fill="#80CBC4" dominant-baseline="middle">archive.7z  —  Compression View</text>
+
+  <!-- 파일 압축률 바 차트 -->
+  <!-- 파일 1 -->
+  <text x="110" y="252" font-family="'Courier New',monospace" font-size="24" fill="#80CBC4" dominant-baseline="middle">video.mp4</text>
+  <rect x="380" y="234" width="500" height="30" rx="8" fill="#004D40"/>
+  <rect x="380" y="234" width="80" height="30" rx="8" fill="url(#bar2)" opacity="0.6"/>
+  <text x="890" y="252" font-family="'Courier New',monospace" font-size="22" fill="#546E7A" dominant-baseline="middle" text-anchor="end">16%</text>
+
+  <!-- 파일 2 -->
+  <text x="110" y="312" font-family="'Courier New',monospace" font-size="24" fill="#80CBC4" dominant-baseline="middle">code.zip</text>
+  <rect x="380" y="294" width="500" height="30" rx="8" fill="#004D40"/>
+  <rect x="380" y="294" width="375" height="30" rx="8" fill="url(#bar2)"/>
+  <text x="890" y="312" font-family="'Courier New',monospace" font-size="22" fill="#69F0AE" dominant-baseline="middle" text-anchor="end">75%</text>
+
+  <!-- 파일 3 -->
+  <text x="110" y="372" font-family="'Courier New',monospace" font-size="24" fill="#80CBC4" dominant-baseline="middle">docs.pdf</text>
+  <rect x="380" y="354" width="500" height="30" rx="8" fill="#004D40"/>
+  <rect x="380" y="354" width="280" height="30" rx="8" fill="url(#bar2)" opacity="0.85"/>
+  <text x="890" y="372" font-family="'Courier New',monospace" font-size="22" fill="#80CBC4" dominant-baseline="middle" text-anchor="end">56%</text>
+
+  <!-- 파일 4 -->
+  <text x="110" y="432" font-family="'Courier New',monospace" font-size="24" fill="#80CBC4" dominant-baseline="middle">image.png</text>
+  <rect x="380" y="414" width="500" height="30" rx="8" fill="#004D40"/>
+  <rect x="380" y="414" width="125" height="30" rx="8" fill="url(#bar2)" opacity="0.65"/>
+  <text x="890" y="432" font-family="'Courier New',monospace" font-size="22" fill="#546E7A" dominant-baseline="middle" text-anchor="end">25%</text>
+
+  <!-- 파일 5 -->
+  <text x="110" y="492" font-family="'Courier New',monospace" font-size="24" fill="#80CBC4" dominant-baseline="middle">data.csv</text>
+  <rect x="380" y="474" width="500" height="30" rx="8" fill="#004D40"/>
+  <rect x="380" y="474" width="450" height="30" rx="8" fill="url(#bar2)"/>
+  <text x="890" y="492" font-family="'Courier New',monospace" font-size="22" fill="#69F0AE" dominant-baseline="middle" text-anchor="end">90%</text>
+
+  <!-- 파일 6 -->
+  <text x="110" y="552" font-family="'Courier New',monospace" font-size="24" fill="#80CBC4" dominant-baseline="middle">binary.exe</text>
+  <rect x="380" y="534" width="500" height="30" rx="8" fill="#004D40"/>
+  <rect x="380" y="534" width="200" height="30" rx="8" fill="url(#bar2)" opacity="0.7"/>
+  <text x="890" y="552" font-family="'Courier New',monospace" font-size="22" fill="#546E7A" dominant-baseline="middle" text-anchor="end">40%</text>
+
+  <!-- Layer 3: 전체 통계 -->
+  <rect x="80" y="820" width="864" height="80" rx="22" fill="#00695C"/>
+  <text x="512" y="862" font-family="'Segoe UI',Arial,sans-serif" font-size="32" fill="#E0F2F1" text-anchor="middle" dominant-baseline="middle">Total: 284 MB → 118 MB  (58% saved)</text>
+</svg>

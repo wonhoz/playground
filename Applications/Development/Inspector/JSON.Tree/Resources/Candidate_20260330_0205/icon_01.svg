@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#E8F5E9"/>
+      <stop offset="100%" stop-color="#A5D6A7"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: 밝은 초록 배경 -->
+  <rect width="1024" height="1024" rx="200" fill="url(#bg1)"/>
+
+  <!-- Layer 2: JSON 트리 구조 -->
+  <!-- 루트 노드 -->
+  <rect x="80" y="120" width="220" height="68" rx="14" fill="#2E7D32"/>
+  <text x="130" y="156" font-family="'Courier New',monospace" font-weight="700" font-size="40" fill="white" dominant-baseline="middle">{  }</text>
+
+  <!-- 수직 연결선 -->
+  <line x1="190" y1="188" x2="190" y2="720" stroke="#388E3C" stroke-width="5"/>
+
+  <!-- 1단계 노드들 -->
+  <!-- "name": "JSON" -->
+  <line x1="190" y1="300" x2="290" y2="300" stroke="#388E3C" stroke-width="5"/>
+  <rect x="290" y="270" width="460" height="60" rx="12" fill="#43A047"/>
+  <text x="320" y="302" font-family="'Courier New',monospace" font-size="36" fill="#E8F5E9" dominant-baseline="middle">"name":</text>
+  <text x="530" y="302" font-family="'Courier New',monospace" font-size="36" fill="#FFF59D" dominant-baseline="middle">"Tree"</text>
+
+  <!-- "data": [...] -->
+  <line x1="190" y1="430" x2="290" y2="430" stroke="#388E3C" stroke-width="5"/>
+  <rect x="290" y="400" width="280" height="60" rx="12" fill="#1B5E20"/>
+  <text x="320" y="432" font-family="'Courier New',monospace" font-size="36" fill="#A5D6A7" dominant-baseline="middle">"items":</text>
+  <text x="545" y="432" font-family="'Courier New',monospace" font-size="36" fill="#FFD54F" dominant-baseline="middle">[...]</text>
+
+  <!-- 2단계 (들여쓰기) -->
+  <line x1="370" y1="460" x2="370" y2="590" stroke="#388E3C" stroke-width="4" opacity="0.7"/>
+  <line x1="370" y1="510" x2="450" y2="510" stroke="#388E3C" stroke-width="4" opacity="0.7"/>
+  <rect x="450" y="486" width="380" height="50" rx="10" fill="#66BB6A" opacity="0.85"/>
+  <text x="474" y="512" font-family="'Courier New',monospace" font-size="32" fill="white" dominant-baseline="middle">"alpha": 42</text>
+  <line x1="370" y1="570" x2="450" y2="570" stroke="#388E3C" stroke-width="4" opacity="0.7"/>
+  <rect x="450" y="546" width="380" height="50" rx="10" fill="#66BB6A" opacity="0.85"/>
+  <text x="474" y="572" font-family="'Courier New',monospace" font-size="32" fill="white" dominant-baseline="middle">"beta": true</text>
+
+  <!-- "count": 7 -->
+  <line x1="190" y1="660" x2="290" y2="660" stroke="#388E3C" stroke-width="5"/>
+  <rect x="290" y="630" width="320" height="60" rx="12" fill="#43A047"/>
+  <text x="320" y="662" font-family="'Courier New',monospace" font-size="36" fill="#CCFF90" dominant-baseline="middle">"count": 7</text>
+
+  <!-- Layer 3: 접기/펼치기 화살표 -->
+  <text x="254" y="435" font-family="'Segoe UI',Arial" font-size="36" fill="#FFD740">▶</text>
+  <text x="254" y="304" font-family="'Segoe UI',Arial" font-size="36" fill="#FFD740">▶</text>
+</svg>

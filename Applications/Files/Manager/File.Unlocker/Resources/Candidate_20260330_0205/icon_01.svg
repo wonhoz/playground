@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg1" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1A1A2E"/>
+      <stop offset="100%" stop-color="#2A1A1A"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: 다크 배경 -->
+  <rect width="1024" height="1024" rx="200" fill="url(#bg1)"/>
+
+  <!-- Layer 2: 파일 아이콘 + 자물쇠 -->
+  <!-- 파일 -->
+  <rect x="140" y="220" width="220" height="280" rx="16" fill="#37474F"/>
+  <polygon points="300,220 360,280 360,280 300,280" fill="#263238"/>
+  <rect x="300" y="220" width="60" height="60" rx="8" fill="#455A64"/>
+  <!-- 파일 위 잠금 아이콘 (빨강) -->
+  <circle cx="250" cy="180" r="60" fill="#D32F2F"/>
+  <rect x="220" y="170" width="60" height="46" rx="8" fill="#B71C1C"/>
+  <rect x="225" y="160" width="50" height="30" rx="25" fill="none" stroke="#EF5350" stroke-width="12"/>
+  <!-- 잠금 표시 -->
+  <text x="250" y="186" font-family="'Segoe UI Emoji',Arial,sans-serif" font-size="48" text-anchor="middle">🔒</text>
+
+  <!-- 잠금 프로세스 목록 (오른쪽) -->
+  <!-- 헤더 -->
+  <rect x="410" y="160" width="534" height="54" rx="12" fill="#263238"/>
+  <text x="440" y="189" font-family="'Segoe UI',Arial,sans-serif" font-size="30" fill="#546E7A" dominant-baseline="middle">Locking processes</text>
+
+  <!-- 프로세스 1 -->
+  <rect x="410" y="228" width="534" height="62" rx="10" fill="#2A1A1A" opacity="0.9"/>
+  <rect x="410" y="228" width="6" height="62" rx="3" fill="#EF5350"/>
+  <text x="440" y="262" font-family="'Segoe UI',Arial,sans-serif" font-size="30" fill="#EF9A9A" dominant-baseline="middle">explorer.exe</text>
+  <text x="770" y="262" font-family="'Segoe UI',Arial,sans-serif" font-size="26" fill="#546E7A" dominant-baseline="middle">PID: 1042</text>
+
+  <!-- 프로세스 2 -->
+  <rect x="410" y="302" width="534" height="62" rx="10" fill="#2A1A1A" opacity="0.8"/>
+  <rect x="410" y="302" width="6" height="62" rx="3" fill="#FF7043"/>
+  <text x="440" y="336" font-family="'Segoe UI',Arial,sans-serif" font-size="30" fill="#FFAB91" dominant-baseline="middle">chrome.exe</text>
+  <text x="770" y="336" font-family="'Segoe UI',Arial,sans-serif" font-size="26" fill="#546E7A" dominant-baseline="middle">PID: 3488</text>
+
+  <!-- 프로세스 3 -->
+  <rect x="410" y="376" width="534" height="62" rx="10" fill="#2A1A1A" opacity="0.7"/>
+  <rect x="410" y="376" width="6" height="62" rx="3" fill="#FF8F00"/>
+  <text x="440" y="410" font-family="'Segoe UI',Arial,sans-serif" font-size="30" fill="#FFD54F" dominant-baseline="middle">vscode.exe</text>
+  <text x="770" y="410" font-family="'Segoe UI',Arial,sans-serif" font-size="26" fill="#546E7A" dominant-baseline="middle">PID: 7720</text>
+
+  <!-- Layer 3: Unlock 버튼 -->
+  <rect x="140" y="800" width="808" height="90" rx="22" fill="#2E7D32"/>
+  <text x="260" y="847" font-family="'Segoe UI Emoji',Arial,sans-serif" font-size="50" text-anchor="middle" dominant-baseline="middle">🔓</text>
+  <text x="560" y="845" font-family="'Segoe UI',Arial,sans-serif" font-weight="900" font-size="48" fill="white" text-anchor="middle" dominant-baseline="middle">Unlock All</text>
+</svg>

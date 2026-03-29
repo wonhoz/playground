@@ -2,7 +2,7 @@
 
 > ★N차 = 해당 차수 브레인스토밍에서 처음 제안됨
 > 상태: ✅ 구현 완료 | 📌 채택 결정 (미구현) | 🗃️ 아카이브
-> 마지막 갱신: 2026-03-27 (v4 정합성 보완)
+> 마지막 갱신: 2026-03-29 (v5 중복·레거시 상태 수정)
 
 ---
 
@@ -31,7 +31,6 @@
 | `OAuth.Peek` | Dev/Inspector | JWT 디코더 + JWK 서명 검증 + OIDC Discovery + OAuth2 플로 다이어그램 ★28차 | 🗃️ |
 | `Log.Lens` | Dev/Tools | 로그 파일 분석 뷰어 | ✅ |
 | `Mock.Server` | Dev/Tools | 로컬 Mock HTTP 서버 (GUI 라우트 정의) | ✅ |
-| `Text.Forge` | Dev/Tools | 해시·인코딩 올인원 (MD5/SHA/Base64/JWT/UUID) | ✅ |
 | `Drive.Bench` | Dev/Tools | 디스크 벤치마크 (순차/랜덤 R/W, IOPS, S.M.A.R.T) ★29차 | ✅ |
 | `Glyph.Map` | Dev/Tools | 유니코드 12만+ 문자 오프라인 탐색·복사·즐겨찾기 | ✅ |
 | `Icon.Hunt` | Dev/Tools | 30만+ 오픈소스 아이콘 라이브러리 탐색기 | ✅ |
@@ -67,7 +66,7 @@
 | `Hotkey.Map` | System | 전역 단축키 충돌 감지 + AHK 내보내기 ★24차 | ✅ |
 | `Key.Map` | System | 앱별 단축키 키보드 다이어그램 시각화 + PDF 치트시트 | ✅ |
 | `Key.Test` | System | 하드웨어 키보드 키 입력 테스트 도구 | ✅ |
-| `Layout.Forge` | System | 키보드 키 재배치 프로파일 에디터 | ✅ |
+| `Layout.Forge` | System | 키보드 키 재배치 프로파일 에디터 | 🗃️ |
 | `Pad.Forge` | System | 게임패드 XInput/DInput 버튼 매핑 GUI | ✅ |
 | `Sched.Cast` | System | Windows Task Scheduler GUI 대체 | ✅ |
 | `Sys.Clean` | System | CCleaner 유사 - 시스템 청소, 레지스트리, 시작프로그램 | ✅ |
@@ -93,7 +92,7 @@
 | `Word.Cloud` | Text | 오프라인 워드클라우드 생성기 | ✅ |
 | `Badge.Forge` | Tools.Utility | 오프라인 shields.io 스타일 SVG/PNG 배지 생성기 ★24차 | ✅ |
 | `Clipboard.Stacker` | Tools.Utility | 클립보드 스택 관리 | ✅ |
-| `Code.Snap` | Tools.Utility | 오프라인 코드 스크린샷 미화 도구 | ✅ |
+| `Code.Snap` | Tools.Utility | 오프라인 코드 스크린샷 미화 도구 | 🗃️ |
 | `Dict.Cast` | Tools.Utility | Win+Shift+D 팝업 단어 검색·번역 트레이 앱 | ✅ |
 | `Icon.Maker` | Tools.Utility | SVG/PNG→ICO 멀티사이즈 변환 + WriteableBitmap 픽셀 그리드 에디터 ★25차 | ✅ |
 | `JSON.Fmt` | Tools.Utility | JSON 붙여넣기 즉시 beautify + 구문 강조 + 오류 줄/열 진단 + Lenient 파싱 ★26차 | ✅ |

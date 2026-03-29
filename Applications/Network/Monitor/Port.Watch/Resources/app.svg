@@ -1,42 +1,46 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_02: literal | ":8080 OPEN" 포트 상태 표시 | 중앙 심볼 | 파랑+흰+초록 -->
   <defs>
-    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#001200"/>
-      <stop offset="100%" stop-color="#001E00"/>
+    <linearGradient id="bg2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#E3F2FD"/>
+      <stop offset="100%" stop-color="#64B5F6"/>
     </linearGradient>
-    <linearGradient id="emerald" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#00E676"/>
-      <stop offset="100%" stop-color="#00A854"/>
-    </linearGradient>
-    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#00E676" stop-opacity="0.2"/>
-      <stop offset="100%" stop-color="#00E676" stop-opacity="0"/>
-    </radialGradient>
+    <filter id="sh2" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="7" stdDeviation="9" flood-color="#1565C0" flood-opacity="0.25"/>
+    </filter>
   </defs>
-  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
-  <!-- Shield -->
-  <path d="M256 70 L386 126 L386 260 Q386 368 256 424 Q126 368 126 260 L126 126 Z" fill="url(#emerald)" opacity="0.1" stroke="#00E676" stroke-width="3"/>
-  <path d="M256 98 L364 148 L364 256 Q364 352 256 400 Q148 352 148 256 L148 148 Z" fill="#001200" stroke="#00A854" stroke-width="1.5"/>
-  <!-- Network connections inside shield -->
-  <!-- Center server -->
-  <rect x="232" y="232" width="48" height="48" rx="6" fill="#002400" stroke="#00E676" stroke-width="2"/>
-  <rect x="240" y="240" width="32" height="8" rx="2" fill="#00E676" opacity="0.6"/>
-  <rect x="240" y="252" width="32" height="8" rx="2" fill="#00A854" opacity="0.6"/>
-  <rect x="240" y="264" width="32" height="8" rx="2" fill="#00E676" opacity="0.6"/>
-  <!-- Connected ports -->
-  <circle cx="192" cy="176" r="18" fill="#002400" stroke="#00E676" stroke-width="2"/>
-  <text x="192" y="181" text-anchor="middle" font-family="Consolas" font-size="10" fill="#00E676">:80</text>
-  <circle cx="320" cy="176" r="18" fill="#002400" stroke="#00E676" stroke-width="2"/>
-  <text x="320" y="181" text-anchor="middle" font-family="Consolas" font-size="9" fill="#00E676">:443</text>
-  <circle cx="178" cy="300" r="18" fill="#002400" stroke="#00A854" stroke-width="2"/>
-  <text x="178" y="305" text-anchor="middle" font-family="Consolas" font-size="10" fill="#00A854">:22</text>
-  <circle cx="334" cy="300" r="18" fill="#002400" stroke="#00A854" stroke-width="2"/>
-  <text x="334" y="305" text-anchor="middle" font-family="Consolas" font-size="8" fill="#00A854">:3306</text>
-  <!-- Connection lines -->
-  <line x1="202" y1="188" x2="236" y2="242" stroke="#00E676" stroke-width="1.5" opacity="0.5"/>
-  <line x1="310" y1="188" x2="276" y2="242" stroke="#00E676" stroke-width="1.5" opacity="0.5"/>
-  <line x1="190" y1="308" x2="236" y2="268" stroke="#00A854" stroke-width="1.5" opacity="0.5"/>
-  <line x1="322" y1="308" x2="276" y2="268" stroke="#00A854" stroke-width="1.5" opacity="0.5"/>
-  <!-- Glow -->
-  <circle cx="256" cy="256" r="100" fill="url(#glow)"/>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg2)"/>
+
+  <!-- Layer 2: Main port display card -->
+  <rect x="100" y="160" width="824" height="460" rx="40" fill="white" filter="url(#sh2)"/>
+
+  <!-- Port number (big) -->
+  <text x="512" y="320" font-family="Arial Black, sans-serif" font-size="200" font-weight="900"
+        fill="#1565C0" text-anchor="middle" dominant-baseline="middle">:8080</text>
+
+  <!-- LISTEN badge -->
+  <rect x="270" y="390" width="220" height="74" rx="37" fill="#43A047" filter="url(#sh2)"/>
+  <text x="380" y="427" font-family="Arial Black, sans-serif" font-size="38" font-weight="900"
+        fill="white" text-anchor="middle" dominant-baseline="middle">OPEN</text>
+
+  <!-- TCP badge -->
+  <rect x="534" y="390" width="180" height="74" rx="37" fill="#1565C0" filter="url(#sh2)"/>
+  <text x="624" y="427" font-family="Arial Black, sans-serif" font-size="38" font-weight="900"
+        fill="white" text-anchor="middle" dominant-baseline="middle">TCP</text>
+
+  <!-- Layer 3: Process info + live indicator -->
+  <!-- Process row -->
+  <rect x="100" y="650" width="824" height="100" rx="24" fill="white" filter="url(#sh2)"/>
+  <text x="200" y="700" font-family="Consolas, monospace" font-size="44" fill="#1565C0"
+        dominant-baseline="middle">node.exe</text>
+  <text x="650" y="700" font-family="Consolas, monospace" font-size="36" fill="#546E7A"
+        dominant-baseline="middle">PID: 4128</text>
+
+  <!-- Live pulsing dot -->
+  <circle cx="512" cy="840" r="44" fill="#43A047" opacity="0.2" filter="url(#sh2)"/>
+  <circle cx="512" cy="840" r="30" fill="#43A047" opacity="0.4"/>
+  <circle cx="512" cy="840" r="18" fill="#43A047" filter="url(#sh2)"/>
+  <!-- LIVE label -->
+  <text x="570" y="840" font-family="Arial Black, sans-serif" font-size="44" font-weight="900"
+        fill="#2E7D32" dominant-baseline="middle">LIVE</text>
 </svg>

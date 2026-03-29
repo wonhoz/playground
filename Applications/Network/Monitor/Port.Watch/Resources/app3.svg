@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#001A1A"/>
+      <stop offset="100%" stop-color="#003333"/>
+    </linearGradient>
+    <linearGradient id="tower" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4DD0E1"/>
+      <stop offset="100%" stop-color="#00838F"/>
+    </linearGradient>
+    <radialGradient id="beam" cx="50%" cy="0%" r="100%">
+      <stop offset="0%" stop-color="#FFEB3B" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#FFEB3B" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
+  <!-- Ocean / sea floor -->
+  <rect x="60" y="380" width="392" height="72" rx="8" fill="#001E20"/>
+  <path d="M60 380 Q150 370 256 380 Q362 390 452 380" fill="none" stroke="#4DD0E1" stroke-width="2" opacity="0.5"/>
+  <!-- Light beam sectors -->
+  <path d="M256 160 L80 380 L140 380 Z" fill="url(#beam)" opacity="0.2"/>
+  <path d="M256 160 L140 380 L220 380 Z" fill="url(#beam)" opacity="0.3"/>
+  <path d="M256 160 L372 380 L432 380 Z" fill="url(#beam)" opacity="0.2"/>
+  <path d="M256 160 L292 380 L372 380 Z" fill="url(#beam)" opacity="0.3"/>
+  <!-- Lighthouse tower -->
+  <polygon points="230,380 282,380 270,160 242,160" fill="url(#tower)"/>
+  <!-- Horizontal stripes on tower -->
+  <rect x="234" y="240" width="44" height="14" fill="#FFEB3B" opacity="0.3"/>
+  <rect x="234" y="300" width="44" height="14" fill="#FFEB3B" opacity="0.3"/>
+  <rect x="234" y="340" width="44" height="14" fill="#FFEB3B" opacity="0.3"/>
+  <!-- Lantern room -->
+  <rect x="230" y="130" width="52" height="30" rx="6" fill="#004D5A" stroke="#4DD0E1" stroke-width="2"/>
+  <circle cx="256" cy="145" r="14" fill="#FFEB3B" opacity="0.9"/>
+  <!-- Gallery/balcony -->
+  <rect x="224" y="160" width="64" height="8" rx="4" fill="#00838F"/>
+  <!-- Port watch indicators around lighthouse -->
+  <circle cx="130" cy="340" r="12" fill="#001E20" stroke="#4DD0E1" stroke-width="2"/>
+  <text x="130" y="344" text-anchor="middle" font-family="Consolas" font-size="9" fill="#4DD0E1">80</text>
+  <circle cx="382" cy="340" r="12" fill="#001E20" stroke="#4DD0E1" stroke-width="2"/>
+  <text x="382" y="344" text-anchor="middle" font-family="Consolas" font-size="8" fill="#4DD0E1">443</text>
+  <circle cx="96" cy="280" r="12" fill="#001E20" stroke="#00838F" stroke-width="2"/>
+  <text x="96" y="284" text-anchor="middle" font-family="Consolas" font-size="9" fill="#00838F">22</text>
+  <circle cx="416" cy="280" r="12" fill="#001E20" stroke="#00838F" stroke-width="2"/>
+  <text x="416" y="284" text-anchor="middle" font-family="Consolas" font-size="8" fill="#00838F">8080</text>
+</svg>

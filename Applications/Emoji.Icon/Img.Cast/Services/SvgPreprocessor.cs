@@ -7,8 +7,8 @@ namespace ImgCast.Services;
 /// - CSS Color Level 4 8자리 hex (#RRGGBBAA) → 6자리 + *-opacity 분리
 ///   (attribute 형식 및 CSS style="" 내부 형식 모두 처리)
 /// - dominant-baseline → dy 오프셋 보정 (Svg.Skia 미지원값)
-/// - feDropShadow → SVG 1.1 동등 필터 프리미티브로 변환
-///   (Skia 엔진이 feDropShadow 단축형을 미지원하여 필터 그룹 전체가 렌더링 안 되는 문제 해결)
+/// - feDropShadow: flood-color + flood-opacity → rgba() 통합
+///   (Svg.Skia 3.x는 feDropShadow 네이티브 지원, 단 별도 flood-opacity는 미처리)
 /// </summary>
 internal static class SvgPreprocessor
 {
@@ -40,43 +40,76 @@ internal static class SvgPreprocessor
         @"<feDropShadow([^>]*?)/>",
         RegexOptions.Compiled | RegexOptions.IgnoreCase | RegexOptions.Singleline);
 
+    static readonly Regex FloodOpacityAttrRegex = new(
+        @"\s*flood-opacity=""([^""]*)""",
+        RegexOptions.Compiled | RegexOptions.IgnoreCase);
+
     // 속성값 추출용
     static readonly Regex AttrValueRegex = new(
         @"(\w[\w-]*)=""([^""]*)""",
         RegexOptions.Compiled);
 
-    static int _shadowCounter = 0;
-
     public static string Process(string svgText)
     {
-        svgText = ExpandFeDropShadow(svgText);
+        svgText = MergeFeDropShadowOpacity(svgText);
         svgText = ConvertHex8AttrColors(svgText);
         svgText = ConvertHex8CssColors(svgText);
         svgText = FixDominantBaseline(svgText);
         return svgText;
     }
 
-    // ─── feDropShadow → SVG 1.1 동등 필터 프리미티브 ──────────────────────────
-    // Skia 엔진은 feDropShadow(SVG FE Level 2 단축형)를 미지원.
-    // feGaussianBlur + feOffset + feFlood + feComposite + feMerge 조합으로 전개.
-    static string ExpandFeDropShadow(string svg) =>
+    // ─── feDropShadow: flood-color + flood-opacity → rgba() 통합 ─────────────
+    // Svg.Skia 3.x는 feDropShadow를 네이티브 지원하지만 별도 flood-opacity 속성을
+    // 처리하지 못해 그림자 색이 잘못 적용됨. flood-color="rgba(r,g,b,a)" 형식으로 통합.
+    static string MergeFeDropShadowOpacity(string svg) =>
         FeDropShadowRegex.Replace(svg, m =>
         {
-            var attrs = ParseAttrs(m.Groups[1].Value);
-            string dx = attrs.GetValueOrDefault("dx", "2");
-            string dy = attrs.GetValueOrDefault("dy", "2");
-            string sd = attrs.GetValueOrDefault("stdDeviation", "4");
-            string fc = attrs.GetValueOrDefault("flood-color", "black");
-            string fo = attrs.GetValueOrDefault("flood-opacity", "1");
+            var attrStr = m.Groups[1].Value;
+            var attrs   = ParseAttrs(attrStr);
 
-            int n = System.Threading.Interlocked.Increment(ref _shadowCounter);
-            return
-                $"""<feGaussianBlur in="SourceAlpha" stdDeviation="{sd}" result="blur{n}"/>""" +
-                $"""<feOffset in="blur{n}" dx="{dx}" dy="{dy}" result="offset{n}"/>""" +
-                $"""<feFlood flood-color="{fc}" flood-opacity="{fo}" result="flood{n}"/>""" +
-                $"""<feComposite in="flood{n}" in2="offset{n}" operator="in" result="shadow{n}"/>""" +
-                $"""<feMerge><feMergeNode in="shadow{n}"/><feMergeNode in="SourceGraphic"/></feMerge>""";
+            if (!attrs.TryGetValue("flood-color",   out string? fc) ||
+                !attrs.TryGetValue("flood-opacity",  out string? fo))
+                return m.Value; // 별도 flood-opacity 없으면 변환 불필요
+
+            string? rgba = TryHexToRgba(fc, fo);
+            if (rgba == null) return m.Value;
+
+            // flood-color 값 교체 후 flood-opacity 속성 제거
+            string newAttrs = Regex.Replace(attrStr,
+                @"flood-color=""[^""]*""", $@"flood-color=""{rgba}""",
+                RegexOptions.IgnoreCase);
+            newAttrs = FloodOpacityAttrRegex.Replace(newAttrs, "");
+
+            return $"<feDropShadow{newAttrs}/>";
         });
+
+    static string? TryHexToRgba(string colorHex, string opacityStr)
+    {
+        if (!float.TryParse(opacityStr,
+                System.Globalization.NumberStyles.Float,
+                System.Globalization.CultureInfo.InvariantCulture,
+                out float opacity))
+            return null;
+
+        colorHex = colorHex.TrimStart('#');
+        int r, g, b;
+        if (colorHex.Length == 6)
+        {
+            r = Convert.ToInt32(colorHex[0..2], 16);
+            g = Convert.ToInt32(colorHex[2..4], 16);
+            b = Convert.ToInt32(colorHex[4..6], 16);
+        }
+        else if (colorHex.Length == 3)
+        {
+            r = Convert.ToInt32(new string(colorHex[0], 2), 16);
+            g = Convert.ToInt32(new string(colorHex[1], 2), 16);
+            b = Convert.ToInt32(new string(colorHex[2], 2), 16);
+        }
+        else return null;
+
+        string opStr = opacity.ToString(System.Globalization.CultureInfo.InvariantCulture);
+        return $"rgba({r},{g},{b},{opStr})";
+    }
 
     static Dictionary<string, string> ParseAttrs(string attrString)
     {

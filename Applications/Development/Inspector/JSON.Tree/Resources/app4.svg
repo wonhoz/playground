@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: Background -->
+  <defs>
+    <radialGradient id="bg1" cx="50%" cy="45%" r="60%">
+      <stop offset="0%" stop-color="#FFF3C4"/>
+      <stop offset="100%" stop-color="#F5A623"/>
+    </radialGradient>
+    <filter id="shadow1">
+      <feDropShadow dx="0" dy="6" stdDeviation="12" flood-color="#000000" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+  <rect width="1024" height="1024" rx="180" fill="url(#bg1)"/>
+
+  <!-- Layer 2: Tree branch lines -->
+  <g stroke="#C47A00" stroke-width="22" stroke-linecap="round" fill="none" opacity="0.5">
+    <!-- Vertical trunk -->
+    <line x1="512" y1="300" x2="512" y2="580"/>
+    <!-- Branch left -->
+    <line x1="512" y1="450" x2="320" y2="620"/>
+    <!-- Branch right -->
+    <line x1="512" y1="450" x2="704" y2="620"/>
+    <!-- Sub-branch left-left -->
+    <line x1="320" y1="620" x2="240" y2="740"/>
+    <!-- Sub-branch left-right -->
+    <line x1="320" y1="620" x2="400" y2="740"/>
+    <!-- Sub-branch right -->
+    <line x1="704" y1="620" x2="704" y2="740"/>
+  </g>
+
+  <!-- Node dots -->
+  <circle cx="512" cy="300" r="28" fill="#E8920A" opacity="0.7"/>
+  <circle cx="320" cy="620" r="22" fill="#E8920A" opacity="0.6"/>
+  <circle cx="704" cy="620" r="22" fill="#E8920A" opacity="0.6"/>
+  <circle cx="240" cy="740" r="16" fill="#E8920A" opacity="0.5"/>
+  <circle cx="400" cy="740" r="16" fill="#E8920A" opacity="0.5"/>
+  <circle cx="704" cy="740" r="16" fill="#E8920A" opacity="0.5"/>
+
+  <!-- Layer 3: Main symbol { } -->
+  <g filter="url(#shadow1)">
+    <text x="512" y="540" text-anchor="middle" dominant-baseline="middle"
+          font-family="'Courier New', monospace" font-size="320" font-weight="900"
+          fill="#3A2000" letter-spacing="-20">{}</text>
+  </g>
+</svg>

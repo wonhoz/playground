@@ -172,17 +172,14 @@ public static class ImageConverter
 
     static SKBitmap LoadSvgAsBitmap(string path, int size)
     {
-        // SVG 전처리: 8자리 hex 색상 변환 + feDropShadow 확장
-        string svgText   = File.ReadAllText(path, Encoding.UTF8);
+        // SVG 전처리: 8자리 hex 색상 변환 + feDropShadow 확장 + dominant-baseline 보정
+        string svgText  = File.ReadAllText(path, Encoding.UTF8);
         string processed = SvgPreprocessor.Process(svgText);
-        // viewBox 파싱: CullRect은 feDropShadow 등 필터 확장 시 콘텐츠 bounds로 계산되어
-        // 배경이 제외되면 Left > 0 → dx 음수 → 왼쪽 클리핑 발생. viewBox로 우회.
-        var (vbW, vbH) = ParseSvgViewBox(svgText);
         string tempPath  = Path.Combine(Path.GetTempPath(), $"imgcast_{Guid.NewGuid():N}.svg");
         try
         {
             File.WriteAllText(tempPath, processed, new UTF8Encoding(false));
-            return RenderSvg(tempPath, size, vbW, vbH);
+            return RenderSvg(tempPath, size);
         }
         finally
         {
@@ -190,53 +187,43 @@ public static class ImageConverter
         }
     }
 
-    // SVG viewBox="x y w h" 에서 w, h 추출
-    static (float W, float H) ParseSvgViewBox(string svgText)
-    {
-        var m = System.Text.RegularExpressions.Regex.Match(svgText,
-            @"viewBox\s*=\s*""[^\s""]+\s+[^\s""]+\s+([0-9.]+)\s+([0-9.]+)""",
-            System.Text.RegularExpressions.RegexOptions.IgnoreCase);
-        if (m.Success
-            && float.TryParse(m.Groups[1].Value, System.Globalization.NumberStyles.Float,
-                               System.Globalization.CultureInfo.InvariantCulture, out float w)
-            && float.TryParse(m.Groups[2].Value, System.Globalization.NumberStyles.Float,
-                               System.Globalization.CultureInfo.InvariantCulture, out float h))
-            return (w, h);
-        return (0, 0);
-    }
-
-    static SKBitmap RenderSvg(string path, int size, float vbW = 0, float vbH = 0)
+    static SKBitmap RenderSvg(string path, int size)
     {
         var svg = new SKSvg();
         svg.Load(path);
         if (svg.Picture is null)
             throw new InvalidOperationException("SVG 파싱 실패");
 
-        float nativeW = vbW > 0 ? vbW : svg.Picture.CullRect.Width;
-        float nativeH = vbH > 0 ? vbH : svg.Picture.CullRect.Height;
-        if (nativeW <= 0 || nativeH <= 0) { nativeW = size; nativeH = size; }
+        float srcW = svg.Picture.CullRect.Width;
+        float srcH = svg.Picture.CullRect.Height;
+        if (srcW <= 0 || srcH <= 0) { srcW = size; srcH = size; }
 
-        int iW = (int)MathF.Ceiling(nativeW);
-        int iH = (int)MathF.Ceiling(nativeH);
+        // 소형 사이즈는 2x 슈퍼샘플링으로 계단 현상 방지
+        int renderSize = size < 64 ? size * 2 : size;
 
-        // native 크기 캔버스에 스케일/오프셋 없이 그대로 렌더링
-        // → CullRect·필터 확장으로 인한 좌표 오프셋 문제 완전 회피
-        var nativeBmp = new SKBitmap(new SKImageInfo(iW, iH, SKColorType.Rgba8888, SKAlphaType.Premul));
-        using (var canvas = new SKCanvas(nativeBmp))
+        var renderBmp = new SKBitmap(new SKImageInfo(renderSize, renderSize, SKColorType.Rgba8888, SKAlphaType.Premul));
+        using (var canvas = new SKCanvas(renderBmp))
         {
             canvas.Clear(SKColors.Transparent);
+
+            float scale = Math.Min(renderSize / srcW, renderSize / srcH);
+            float dx = (renderSize - srcW * scale) / 2f;
+            float dy = (renderSize - srcH * scale) / 2f;
+
+            canvas.Translate(dx, dy);
+            canvas.Scale(scale);
             canvas.DrawPicture(svg.Picture);
         }
 
-        if (iW == size && iH == size)
-            return nativeBmp;
+        if (renderSize == size)
+            return renderBmp;
 
-        // target size로 다운스케일
-        var resized = nativeBmp.Resize(
+        // 2x → target 다운스케일
+        var downscaled = renderBmp.Resize(
             new SKImageInfo(size, size, SKColorType.Rgba8888, SKAlphaType.Premul),
             new SKSamplingOptions(SKFilterMode.Linear, SKMipmapMode.Linear));
-        nativeBmp.Dispose();
-        return resized ?? throw new InvalidOperationException("SVG 다운스케일 실패");
+        renderBmp.Dispose();
+        return downscaled ?? throw new InvalidOperationException("SVG 다운스케일 실패");
     }
 
     static SKBitmap ResizeFit(SKBitmap src, int size)

@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.Text.RegularExpressions;
 
 namespace ImgCast.Services;
@@ -5,10 +6,10 @@ namespace ImgCast.Services;
 /// <summary>
 /// Svg.Skia 미지원 SVG 기능을 로드 전에 호환 형식으로 변환.
 /// - CSS Color Level 4 8자리 hex (#RRGGBBAA) → 6자리 + *-opacity 분리
-///   (attribute 형식 및 CSS style="" 내부 형식 모두 처리)
 /// - feDropShadow → feGaussianBlur+feOffset+feFlood+feComposite+feMerge 확장
-///   (필터 내 result ID는 고정명 사용 — SVG 스펙상 filter 요소별로 스코프됨)
-/// - dominant-baseline → dy 오프셋 보정 (Svg.Skia 미지원값)
+/// - dominant-baseline → dy 오프셋 보정
+/// - &lt;defs&gt; 전방 참조 방지 — SVG 최상단으로 이동
+/// - 필터 영역 → filterUnits="userSpaceOnUse" + 캔버스 전체 커버 (텍스트 앵커점 OBB 오계산 방지)
 /// </summary>
 internal static class SvgPreprocessor
 {
@@ -27,7 +28,7 @@ internal static class SvgPreprocessor
         @"<feDropShadow([^/]*?)/>",
         RegexOptions.Compiled | RegexOptions.Singleline);
 
-    // dominant-baseline → Svg.Skia 미지원값, dy로 보정
+    // dominant-baseline
     static readonly Regex DominantBaselineCentralRegex = new(
         @"dominant-baseline=""central""",
         RegexOptions.Compiled | RegexOptions.IgnoreCase);
@@ -40,6 +41,36 @@ internal static class SvgPreprocessor
         @"dominant-baseline=""hanging""",
         RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
+    // <defs>...</defs> 블록 전체
+    static readonly Regex DefsBlockRegex = new(
+        @"<defs\b[^>]*>[\s\S]*?</defs>",
+        RegexOptions.Compiled | RegexOptions.IgnoreCase);
+
+    // <defs>...</defs> 내부 캡처용
+    static readonly Regex DefsContentRegex = new(
+        @"<defs\b[^>]*>([\s\S]*?)</defs>",
+        RegexOptions.Compiled | RegexOptions.IgnoreCase);
+
+    // <svg ...> 오프닝 태그
+    static readonly Regex SvgOpenTagRegex = new(
+        @"<svg\b[^>]*>",
+        RegexOptions.Compiled | RegexOptions.Singleline);
+
+    // <filter ...> 오프닝 태그
+    static readonly Regex FilterTagRegex = new(
+        @"<filter\b([^>]*?)>",
+        RegexOptions.Compiled | RegexOptions.Singleline);
+
+    // filter 태그 내 영역/단위 속성 (제거 대상)
+    static readonly Regex FilterRegionAttrRegex = new(
+        @"\s*(x|y|width|height|filterUnits)\s*=\s*""[^""]*""",
+        RegexOptions.Compiled | RegexOptions.IgnoreCase);
+
+    // viewBox 파싱
+    static readonly Regex ViewBoxRegex = new(
+        @"viewBox\s*=\s*""[^\s""]+\s+[^\s""]+\s+([0-9.]+)\s+([0-9.]+)""",
+        RegexOptions.Compiled | RegexOptions.IgnoreCase);
+
     // 속성값 추출용
     static readonly Regex AttrRegex = new(
         @"(\w[\w-]*)=""([^""]*)""",
@@ -47,6 +78,9 @@ internal static class SvgPreprocessor
 
     public static string Process(string svgText)
     {
+        var (vbW, vbH) = ParseViewBox(svgText);
+        svgText = EnsureDefsFirst(svgText);
+        svgText = EnsureFiltersUserSpaceOnUse(svgText, vbW, vbH);
         svgText = ConvertHex8AttrColors(svgText);
         svgText = ConvertHex8CssColors(svgText);
         svgText = ExpandDropShadows(svgText);
@@ -54,9 +88,42 @@ internal static class SvgPreprocessor
         return svgText;
     }
 
+    // ─── <defs> 전방 참조 방지 — SVG 최상단으로 이동 ──────────────────────────
+    // locale.view.2 등: fill="url(#bg1)" 사용 후 <defs>에 bg1 정의 → Svg.Skia 렌더링 실패
+    // 모든 <defs> 내용을 하나로 합쳐 <svg> 오프닝 태그 바로 뒤에 삽입.
+    static string EnsureDefsFirst(string svg)
+    {
+        var contents = new List<string>();
+        DefsContentRegex.Replace(svg, m => { contents.Add(m.Groups[1].Value); return ""; });
+        if (contents.Count == 0) return svg;
+
+        string withoutDefs = DefsBlockRegex.Replace(svg, "");
+        string merged = $"<defs>{string.Concat(contents)}</defs>";
+        return SvgOpenTagRegex.Replace(withoutDefs, m => m.Value + merged, 1);
+    }
+
+    // ─── 필터 영역 → filterUnits="userSpaceOnUse" + 캔버스 전체 커버 ────────────
+    // text-anchor="middle" 텍스트에 필터 적용 시 Svg.Skia가 objectBoundingBox를
+    // 앵커점 기준 0폭으로 계산 → 필터 출력 영역이 0 → 콘텐츠 클리핑/누락.
+    // userSpaceOnUse + 캔버스 전체 + 여유 margin으로 확실히 커버.
+    static string EnsureFiltersUserSpaceOnUse(string svg, float vbW, float vbH)
+    {
+        if (vbW <= 0 || vbH <= 0) return svg;
+        const float margin = 200f;
+        string x = (-margin).ToString("F0", CultureInfo.InvariantCulture);
+        string y = (-margin).ToString("F0", CultureInfo.InvariantCulture);
+        string w = (vbW + 2 * margin).ToString("F0", CultureInfo.InvariantCulture);
+        string h = (vbH + 2 * margin).ToString("F0", CultureInfo.InvariantCulture);
+
+        return FilterTagRegex.Replace(svg, m =>
+        {
+            // 기존 영역/단위 속성 제거 후 userSpaceOnUse + 전체 캔버스 커버 적용
+            string cleaned = FilterRegionAttrRegex.Replace(m.Groups[1].Value, "");
+            return $"<filter{cleaned} filterUnits=\"userSpaceOnUse\" x=\"{x}\" y=\"{y}\" width=\"{w}\" height=\"{h}\">";
+        });
+    }
+
     // ─── feDropShadow → SVG 1.1 동등 필터 프리미티브 ──────────────────────────
-    // result ID는 고정명(ds_blur 등) 사용. SVG 스펙상 filter 요소 내부로 스코프되므로
-    // 서로 다른 filter 요소에서 동일 ID를 사용해도 충돌 없음.
     static string ExpandDropShadows(string svg) =>
         DropShadowRegex.Replace(svg, m =>
         {
@@ -89,7 +156,7 @@ internal static class SvgPreprocessor
             return $"{attr}=\"#{rgb}\" {GetOpacityAttr(attr)}=\"{op}\"";
         });
 
-    // ─── CSS 형식: fill:#RRGGBBAA → fill:#RRGGBB; fill-opacity:X ─────────
+    // ─── CSS 형식: fill:#RRGGBBAA → fill:#RRGGBB; fill-opacity:X ─────────────
     static string ConvertHex8CssColors(string svg) =>
         Hex8CssRegex.Replace(svg, m =>
         {
@@ -110,16 +177,22 @@ internal static class SvgPreprocessor
     };
 
     // ─── dominant-baseline → dy 보정 ────────────────────────────────────────
-    // Svg.Skia가 dominant-baseline을 지원하지 않아 텍스트 수직 위치가 틀어지는 문제 해결.
-    // text-anchor="middle"과 함께 쓰이는 경우를 대상으로 dy="0.35em" 오프셋 추가.
     static string FixDominantBaseline(string svg)
     {
-        // central / middle → 중앙 정렬 (em 기준 0.35 오프셋이 시각적으로 가장 근사)
         svg = DominantBaselineCentralRegex.Replace(svg, @"dy=""0.35em""");
         svg = DominantBaselineMiddleRegex .Replace(svg, @"dy=""0.35em""");
-        // hanging → 상단 정렬 (-0.7em 근사)
         svg = DominantBaselineHangingRegex.Replace(svg, @"dy=""-0.7em""");
         return svg;
+    }
+
+    static (float W, float H) ParseViewBox(string svg)
+    {
+        var m = ViewBoxRegex.Match(svg);
+        if (m.Success
+            && float.TryParse(m.Groups[1].Value, NumberStyles.Float, CultureInfo.InvariantCulture, out float w)
+            && float.TryParse(m.Groups[2].Value, NumberStyles.Float, CultureInfo.InvariantCulture, out float h))
+            return (w, h);
+        return (0, 0);
     }
 
     static Dictionary<string, string> ParseAttrs(string attrText)

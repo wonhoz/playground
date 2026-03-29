@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Background: warm coral gradient -->
+  <defs>
+    <linearGradient id="bg1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FF6B47"/>
+      <stop offset="100%" stop-color="#FF9A5C"/>
+    </linearGradient>
+    <linearGradient id="file1grad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFF5F0"/>
+      <stop offset="100%" stop-color="#FFD6C0"/>
+    </linearGradient>
+    <linearGradient id="file2grad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFEDE5"/>
+      <stop offset="100%" stop-color="#FFC09A"/>
+    </linearGradient>
+    <filter id="shadow1" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#C0391B" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <!-- Background rounded rect -->
+  <rect width="1024" height="1024" rx="200" fill="url(#bg1)"/>
+
+  <!-- File card 1 (left/back) -->
+  <g filter="url(#shadow1)" transform="translate(-30, -20)">
+    <rect x="220" y="230" width="340" height="420" rx="28" fill="url(#file1grad)" stroke="#FF7A52" stroke-width="8"/>
+    <!-- Folded corner -->
+    <path d="M490 230 L560 300 L490 300 Z" fill="#FFA07A" opacity="0.6"/>
+    <rect x="490" y="230" width="70" height="70" rx="4" fill="#FFD0B0" opacity="0.8"/>
+    <!-- File lines -->
+    <rect x="260" y="340" width="220" height="22" rx="11" fill="#FF8C5A" opacity="0.5"/>
+    <rect x="260" y="390" width="180" height="22" rx="11" fill="#FF8C5A" opacity="0.4"/>
+    <rect x="260" y="440" width="200" height="22" rx="11" fill="#FF8C5A" opacity="0.4"/>
+    <rect x="260" y="490" width="160" height="22" rx="11" fill="#FF8C5A" opacity="0.3"/>
+  </g>
+
+  <!-- File card 2 (right/front) -->
+  <g transform="translate(80, 40)">
+    <rect x="220" y="230" width="340" height="420" rx="28" fill="url(#file2grad)" stroke="#FF6030" stroke-width="8"/>
+    <!-- Folded corner -->
+    <path d="M490 230 L560 300 L490 300 Z" fill="#FF8050" opacity="0.7"/>
+    <rect x="490" y="230" width="70" height="70" rx="4" fill="#FFB890" opacity="0.9"/>
+    <!-- File lines -->
+    <rect x="260" y="340" width="220" height="22" rx="11" fill="#FF6030" opacity="0.5"/>
+    <rect x="260" y="390" width="180" height="22" rx="11" fill="#FF6030" opacity="0.4"/>
+    <rect x="260" y="440" width="200" height="22" rx="11" fill="#FF6030" opacity="0.4"/>
+    <rect x="260" y="490" width="160" height="22" rx="11" fill="#FF6030" opacity="0.3"/>
+  </g>
+
+  <!-- "= =" equals sign in between -->
+  <text x="512" y="590" text-anchor="middle" font-family="Arial Black, sans-serif" font-size="120" font-weight="900" fill="#7B1A00" opacity="0.25">=</text>
+
+  <!-- Check circle at bottom center -->
+  <circle cx="512" cy="798" r="110" fill="#FF4010" stroke="#FFF" stroke-width="12"/>
+  <circle cx="512" cy="798" r="110" fill="none" stroke="#FFDDCC" stroke-width="6" opacity="0.5"/>
+  <!-- Checkmark -->
+  <polyline points="458,800 498,842 568,756" fill="none" stroke="#FFFFFF" stroke-width="52" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

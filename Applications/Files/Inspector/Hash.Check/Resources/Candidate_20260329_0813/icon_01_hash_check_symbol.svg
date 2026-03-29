@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: Background -->
+  <defs>
+    <linearGradient id="bg1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F2957"/>
+      <stop offset="100%" stop-color="#1A1A6E"/>
+    </linearGradient>
+    <linearGradient id="hash_grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38BDF8"/>
+      <stop offset="100%" stop-color="#06B6D4"/>
+    </linearGradient>
+    <linearGradient id="check_grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4ADE80"/>
+      <stop offset="100%" stop-color="#22C55E"/>
+    </linearGradient>
+    <filter id="glow1">
+      <feGaussianBlur stdDeviation="12" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="1024" height="1024" rx="180" fill="url(#bg1)"/>
+
+  <!-- Layer 2: Main # symbol -->
+  <!-- Horizontal bars of # -->
+  <rect x="240" y="370" width="544" height="72" rx="36" fill="url(#hash_grad)" filter="url(#glow1)"/>
+  <rect x="240" y="582" width="544" height="72" rx="36" fill="url(#hash_grad)" filter="url(#glow1)"/>
+  <!-- Vertical bars of # -->
+  <rect x="340" y="260" width="72" height="504" rx="36" fill="url(#hash_grad)" filter="url(#glow1)"/>
+  <rect x="612" y="260" width="72" height="504" rx="36" fill="url(#hash_grad)" filter="url(#glow1)"/>
+
+  <!-- Layer 3: Check overlay (bottom-right) -->
+  <circle cx="742" cy="742" r="160" fill="#0F2957" stroke="#22C55E" stroke-width="16"/>
+  <circle cx="742" cy="742" r="148" fill="#153D1A"/>
+  <!-- Check mark path -->
+  <polyline points="662,742 718,798 832,672" fill="none" stroke="url(#check_grad)" stroke-width="64" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow1)"/>
+</svg>

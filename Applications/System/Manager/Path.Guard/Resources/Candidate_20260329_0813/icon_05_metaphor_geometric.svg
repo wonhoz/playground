@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg5" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#DCFCE7"/>
+      <stop offset="100%" stop-color="#16A34A"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg5)"/>
+  <!-- Layer 2: Geometric path route with nodes - like a filesystem path map -->
+  <!-- Path nodes and connections forming C:\A\B\C pattern -->
+  <!-- Root node -->
+  <circle cx="182" cy="512" r="72" fill="white" opacity="0.95"/>
+  <text x="182" y="530" font-family="monospace" font-size="52" fill="#16A34A" text-anchor="middle" font-weight="bold">C:\</text>
+  <!-- Connection segments -->
+  <rect x="254" y="498" width="130" height="28" rx="8" fill="white" opacity="0.7"/>
+  <!-- Node 2 -->
+  <circle cx="452" cy="512" r="62" fill="white" opacity="0.9"/>
+  <text x="452" y="530" font-family="monospace" font-size="46" fill="#16A34A" text-anchor="middle">bin</text>
+  <!-- Connection -->
+  <rect x="514" y="498" width="120" height="28" rx="8" fill="white" opacity="0.7"/>
+  <!-- Node 3 -->
+  <circle cx="692" cy="512" r="62" fill="white" opacity="0.9"/>
+  <text x="692" y="530" font-family="monospace" font-size="46" fill="#16A34A" text-anchor="middle">git</text>
+  <!-- Connection -->
+  <rect x="754" y="498" width="90" height="28" rx="8" fill="white" opacity="0.7"/>
+  <!-- End node with lock/shield -->
+  <circle cx="892" cy="512" r="52" fill="#16A34A"/>
+  <path d="M 892 478 L 892 502 Q 892 530 912 540 Q 892 550 872 540 Q 892 530 892 502 Z" fill="white" opacity="0.5"/>
+  <polyline points="872,512 887,530 916,494" stroke="white" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <!-- Second path branch below -->
+  <circle cx="182" cy="700" r="60" fill="white" opacity="0.75"/>
+  <text x="182" y="718" font-family="monospace" font-size="44" fill="#16A34A" text-anchor="middle" font-weight="bold">C:\</text>
+  <rect x="242" y="686" width="120" height="28" rx="8" fill="white" opacity="0.5"/>
+  <circle cx="420" cy="700" r="52" fill="white" opacity="0.65"/>
+  <text x="420" y="718" font-family="monospace" font-size="40" fill="#6B7280" text-anchor="middle">old</text>
+  <!-- Cross out duplicate/bad path -->
+  <line x1="376" y1="656" x2="464" y2="744" stroke="#EF4444" stroke-width="20" stroke-linecap="round" opacity="0.7"/>
+  <line x1="464" y1="656" x2="376" y2="744" stroke="#EF4444" stroke-width="20" stroke-linecap="round" opacity="0.7"/>
+  <!-- Layer 3: Title at top -->
+  <text x="512" y="310" font-family="Arial" font-size="88" fill="white" text-anchor="middle" font-weight="bold">PATH</text>
+  <text x="512" y="390" font-family="Arial" font-size="60" fill="white" text-anchor="middle" opacity="0.8">Guard</text>
+</svg>

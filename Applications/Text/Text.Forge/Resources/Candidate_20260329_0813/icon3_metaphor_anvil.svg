@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: Background - warm forge glow -->
+  <defs>
+    <radialGradient id="bg3" cx="50%" cy="70%" r="65%">
+      <stop offset="0%" stop-color="#2A1500"/>
+      <stop offset="60%" stop-color="#1A0D00"/>
+      <stop offset="100%" stop-color="#0D0700"/>
+    </radialGradient>
+    <radialGradient id="heat_glow" cx="50%" cy="80%" r="45%">
+      <stop offset="0%" stop-color="#FF6D00" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#FF6D00" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="hot_glow">
+      <feDropShadow dx="0" dy="0" stdDeviation="16" flood-color="#FF8C00" flood-opacity="0.9"/>
+    </filter>
+    <filter id="spark_glow">
+      <feDropShadow dx="0" dy="0" stdDeviation="8" flood-color="#FFD54F" flood-opacity="1.0"/>
+    </filter>
+    <filter id="text_emboss">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#FF4500" flood-opacity="0.8"/>
+    </filter>
+  </defs>
+  <rect width="1024" height="1024" rx="180" fill="url(#bg3)"/>
+  <rect width="1024" height="1024" rx="180" fill="url(#heat_glow)"/>
+
+  <!-- Layer 2: Main Object - Anvil silhouette -->
+  <!-- Anvil body - main block -->
+  <rect x="240" y="500" width="544" height="200" rx="16" fill="#3A3A3A"/>
+  <!-- Anvil body shade -->
+  <rect x="240" y="500" width="544" height="60" rx="16" fill="#555555"/>
+  <!-- Anvil top face (work surface) -->
+  <rect x="200" y="430" width="624" height="90" rx="14" fill="#4A4A4A"/>
+  <!-- Anvil top highlight -->
+  <rect x="200" y="430" width="624" height="36" rx="14" fill="#666666"/>
+  <!-- Anvil horn (left pointed part) -->
+  <polygon points="200,430 200,520 130,495" fill="#3A3A3A"/>
+  <!-- Anvil step/bick detail right side -->
+  <rect x="744" y="480" width="80" height="40" rx="8" fill="#333333"/>
+
+  <!-- Anvil base stand -->
+  <rect x="330" y="700" width="364" height="48" rx="8" fill="#2A2A2A"/>
+  <rect x="298" y="742" width="428" height="28" rx="8" fill="#222222"/>
+
+  <!-- Layer 3: Detail - glowing text characters struck into hot metal -->
+  <!-- Main hot text on anvil work surface -->
+  <text x="258" y="500" font-family="Consolas, monospace" font-size="90" font-weight="bold"
+        fill="#FF8C00" filter="url(#hot_glow)">{Tx}</text>
+
+  <!-- Sparks flying from impact -->
+  <!-- Large sparks -->
+  <circle cx="348" cy="390" r="16" fill="#FFD54F" filter="url(#spark_glow)"/>
+  <circle cx="510" cy="360" r="12" fill="#FFA000" filter="url(#spark_glow)"/>
+  <circle cx="680" cy="375" r="18" fill="#FFD54F" filter="url(#spark_glow)"/>
+  <circle cx="260" cy="350" r="10" fill="#FF8C00" filter="url(#spark_glow)"/>
+  <circle cx="760" cy="350" r="14" fill="#FFD54F" filter="url(#spark_glow)"/>
+  <!-- Medium sparks -->
+  <circle cx="300" cy="300" r="8" fill="#FFE082" opacity="0.9"/>
+  <circle cx="420" cy="280" r="6" fill="#FFA000" opacity="0.8"/>
+  <circle cx="600" cy="290" r="9" fill="#FFD54F" opacity="0.85"/>
+  <circle cx="730" cy="280" r="7" fill="#FF8C00" opacity="0.7"/>
+  <circle cx="820" cy="310" r="5" fill="#FFE082" opacity="0.75"/>
+  <!-- Small trace sparks (streak lines) -->
+  <line x1="348" y1="390" x2="318" y2="340" stroke="#FFD54F" stroke-width="4" opacity="0.7"/>
+  <line x1="510" y1="360" x2="480" y2="300" stroke="#FFA000" stroke-width="3" opacity="0.65"/>
+  <line x1="680" y1="375" x2="710" y2="320" stroke="#FFD54F" stroke-width="4" opacity="0.7"/>
+  <line x1="260" y1="350" x2="232" y2="295" stroke="#FF8C00" stroke-width="3" opacity="0.6"/>
+  <line x1="760" y1="350" x2="795" y2="295" stroke="#FFD54F" stroke-width="3" opacity="0.65"/>
+
+  <!-- Floating code symbols above (text being forged) -->
+  <text x="178" y="240" font-family="Consolas, monospace" font-size="56" font-weight="bold"
+        fill="#4FC3F7" opacity="0.6">&lt;/&gt;</text>
+  <text x="740" y="240" font-family="Consolas, monospace" font-size="56" font-weight="bold"
+        fill="#CE93D8" opacity="0.6">#hash</text>
+  <text x="430" y="200" font-family="Consolas, monospace" font-size="48" font-weight="bold"
+        fill="#80DEEA" opacity="0.5">.*</text>
+</svg>

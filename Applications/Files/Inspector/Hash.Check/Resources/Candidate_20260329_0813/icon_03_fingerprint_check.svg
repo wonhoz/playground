@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: Background -->
+  <defs>
+    <radialGradient id="bg3" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#FEF3C7"/>
+      <stop offset="100%" stop-color="#F59E0B"/>
+    </radialGradient>
+    <linearGradient id="fp_grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#92400E"/>
+      <stop offset="100%" stop-color="#B45309"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="180" fill="url(#bg3)"/>
+
+  <!-- Layer 2: Fingerprint arcs (metaphor for unique identity / hash) -->
+  <!-- Innermost arc -->
+  <path d="M 420 512 Q 420 420 512 420 Q 604 420 604 512" fill="none"
+        stroke="url(#fp_grad)" stroke-width="60" stroke-linecap="round" opacity="0.9"/>
+  <!-- Ring 2 -->
+  <path d="M 360 560 Q 344 440 420 360 Q 512 280 620 340 Q 710 400 700 512 Q 700 600 640 660"
+        fill="none" stroke="url(#fp_grad)" stroke-width="56" stroke-linecap="round" opacity="0.85"/>
+  <!-- Ring 3 -->
+  <path d="M 280 580 Q 265 420 360 316 Q 460 210 590 224 Q 740 240 800 380 Q 850 500 810 640 Q 776 740 700 800"
+        fill="none" stroke="url(#fp_grad)" stroke-width="52" stroke-linecap="round" opacity="0.8"/>
+  <!-- Ring 4 -->
+  <path d="M 200 560 Q 190 360 300 236 Q 420 100 600 116 Q 800 130 880 300 Q 940 440 910 600 Q 880 740 790 840"
+        fill="none" stroke="url(#fp_grad)" stroke-width="48" stroke-linecap="round" opacity="0.75"/>
+
+  <!-- Layer 3: Check badge overlay -->
+  <circle cx="720" cy="720" r="170" fill="#FFFBEB" stroke="#F59E0B" stroke-width="16"/>
+  <circle cx="720" cy="720" r="148" fill="#FEF3C7"/>
+  <polyline points="638,718 692,772 816,640" fill="none" stroke="#059669" stroke-width="72"
+            stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

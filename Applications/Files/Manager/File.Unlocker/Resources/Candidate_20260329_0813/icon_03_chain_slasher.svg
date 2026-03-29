@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- BG: 퍼플·딥 바이올렛 -->
+  <defs>
+    <radialGradient id="bg3" cx="40%" cy="40%" r="65%">
+      <stop offset="0%" stop-color="#2A1A4A"/>
+      <stop offset="100%" stop-color="#0E0A1E"/>
+    </radialGradient>
+    <linearGradient id="bladeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E8E8FF"/>
+      <stop offset="40%" stop-color="#B0B8FF"/>
+      <stop offset="100%" stop-color="#6060CC"/>
+    </linearGradient>
+    <linearGradient id="handleGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#FF7043"/>
+      <stop offset="100%" stop-color="#BF360C"/>
+    </linearGradient>
+    <linearGradient id="chainBreak" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FF9500"/>
+      <stop offset="50%" stop-color="#FFD740"/>
+      <stop offset="100%" stop-color="#FF9500"/>
+    </linearGradient>
+    <filter id="bladeShadow">
+      <feDropShadow dx="3" dy="6" stdDeviation="10" flood-color="#8A2BE2" flood-opacity="0.7"/>
+    </filter>
+    <filter id="sparkGlow">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="180" fill="url(#bg3)"/>
+  <!-- 배경 빛 -->
+  <ellipse cx="420" cy="400" rx="360" ry="300" fill="#3A1A6A" opacity="0.3"/>
+
+  <!-- 체인 링크들 (가로) -->
+  <g opacity="0.85">
+    <ellipse cx="160" cy="560" rx="50" ry="28" fill="none" stroke="url(#chainBreak)" stroke-width="20" transform="rotate(-20 160 560)"/>
+    <ellipse cx="240" cy="580" rx="50" ry="28" fill="none" stroke="url(#chainBreak)" stroke-width="20" transform="rotate(-20 240 580)"/>
+    <ellipse cx="320" cy="565" rx="50" ry="28" fill="none" stroke="url(#chainBreak)" stroke-width="20" transform="rotate(-20 320 565)"/>
+    <!-- 오른쪽 떨어지는 체인 -->
+    <ellipse cx="680" cy="620" rx="50" ry="28" fill="none" stroke="#FF9500" stroke-width="20" transform="rotate(10 680 620)" opacity="0.7"/>
+    <ellipse cx="760" cy="660" rx="50" ry="28" fill="none" stroke="#FF9500" stroke-width="20" transform="rotate(15 760 660)" opacity="0.5"/>
+    <ellipse cx="840" cy="700" rx="50" ry="28" fill="none" stroke="#FF9500" stroke-width="20" transform="rotate(20 840 700)" opacity="0.35"/>
+  </g>
+
+  <!-- 칼 / 도끼 (대각선으로 내려치는 동작) -->
+  <g transform="translate(320, 160) rotate(45)" filter="url(#bladeShadow)">
+    <!-- 칼날 -->
+    <polygon points="0,-30 60,20 55,380 -10,360 -55,20" fill="url(#bladeGrad)"/>
+    <!-- 날 반사 광택 -->
+    <polygon points="5,-20 30,10 28,300 5,290" fill="white" opacity="0.25"/>
+    <!-- 가드 -->
+    <rect x="-70" y="350" width="185" height="40" rx="10" fill="#7B5EA7"/>
+    <!-- 손잡이 -->
+    <rect x="-22" y="388" width="100" height="140" rx="18" fill="url(#handleGrad)"/>
+    <!-- 손잡이 감기 -->
+    <line x1="-22" y1="420" x2="78" y2="420" stroke="#FF7043" stroke-width="6" opacity="0.5"/>
+    <line x1="-22" y1="450" x2="78" y2="450" stroke="#FF7043" stroke-width="6" opacity="0.5"/>
+    <line x1="-22" y1="480" x2="78" y2="480" stroke="#FF7043" stroke-width="6" opacity="0.5"/>
+    <!-- 손잡이 끝 -->
+    <ellipse cx="28" cy="528" rx="40" ry="22" fill="#BF360C"/>
+  </g>
+
+  <!-- 불꽃/스파크 (충격점) -->
+  <g transform="translate(510, 540)" filter="url(#sparkGlow)">
+    <line x1="0" y1="0" x2="55" y2="-65" stroke="#FFD740" stroke-width="10" stroke-linecap="round"/>
+    <line x1="0" y1="0" x2="-60" y2="-40" stroke="#FF9500" stroke-width="8" stroke-linecap="round"/>
+    <line x1="0" y1="0" x2="70" y2="20" stroke="#FFD740" stroke-width="7" stroke-linecap="round"/>
+    <line x1="0" y1="0" x2="-30" y2="60" stroke="#FF6B6B" stroke-width="8" stroke-linecap="round"/>
+    <line x1="0" y1="0" x2="30" y2="70" stroke="#FF9500" stroke-width="6" stroke-linecap="round"/>
+    <circle cx="0" cy="0" r="22" fill="#FFFFFF" opacity="0.8"/>
+    <circle cx="55" cy="-65" r="9" fill="#FFD740"/>
+    <circle cx="-60" cy="-40" r="7" fill="#FF9500"/>
+    <circle cx="70" cy="20" r="8" fill="#FFD740"/>
+    <circle cx="-30" cy="60" r="6" fill="#FF6B6B"/>
+  </g>
+
+  <!-- KILL 텍스트 (하단) -->
+  <text x="512" y="870" font-family="Arial Black, Arial" font-size="110" font-weight="900"
+        fill="#9B59B6" text-anchor="middle" opacity="0.7">KILL</text>
+  <text x="512" y="870" font-family="Arial Black, Arial" font-size="110" font-weight="900"
+        fill="none" stroke="#D070FF" stroke-width="2" text-anchor="middle" opacity="0.9">KILL</text>
+</svg>

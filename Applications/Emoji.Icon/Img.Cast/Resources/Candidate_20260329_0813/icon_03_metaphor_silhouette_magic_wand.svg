@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg3" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1A0A2E"/>
+      <stop offset="100%" stop-color="#0D1A35"/>
+    </linearGradient>
+    <linearGradient id="wandGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#CE93D8"/>
+      <stop offset="100%" stop-color="#7C4DFF"/>
+    </linearGradient>
+    <linearGradient id="sparkGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#FFD740"/>
+      <stop offset="100%" stop-color="#FF7043"/>
+    </linearGradient>
+    <filter id="glow3a">
+      <feDropShadow dx="0" dy="0" stdDeviation="24" flood-color="#CE93D8" flood-opacity="0.8"/>
+    </filter>
+    <filter id="glow3b">
+      <feDropShadow dx="0" dy="0" stdDeviation="20" flood-color="#FFD740" flood-opacity="0.9"/>
+    </filter>
+  </defs>
+  <rect width="1024" height="1024" rx="180" fill="url(#bg3)"/>
+
+  <!-- Layer 2: Image frame (before, top-left) -->
+  <rect x="100" y="140" width="310" height="250" rx="20" fill="#1A2440" stroke="#4FC3F7" stroke-width="7"/>
+  <!-- Landscape scene inside -->
+  <rect x="116" y="156" width="278" height="218" rx="12" fill="#112030"/>
+  <ellipse cx="200" cy="260" rx="50" ry="40" fill="#FF8A65" opacity="0.8"/>
+  <path d="M 116 310 Q 180 260 255 300 Q 320 340 394 290 L 394 374 L 116 374 Z" fill="#2E7D32" opacity="0.7"/>
+  <!-- Label -->
+  <text x="255" y="430" font-family="'Segoe UI', Arial, sans-serif" font-size="52" font-weight="700"
+        fill="#4FC3F7" text-anchor="middle">PNG</text>
+
+  <!-- Layer 2: Magic wand diagonal -->
+  <line x1="380" y1="450" x2="680" y2="600" stroke="url(#wandGrad)" stroke-width="28" stroke-linecap="round" filter="url(#glow3a)"/>
+  <!-- Wand tip star -->
+  <polygon points="360,435 372,420 384,435 369,445" fill="#FFD740" filter="url(#glow3b)"/>
+  <polygon points="360,435 345,423 360,411 375,423" fill="#FFD740" filter="url(#glow3b)" opacity="0.7"/>
+
+  <!-- Layer 3: Sparkles along wand path -->
+  <circle cx="430" cy="480" r="10" fill="#FFD740" filter="url(#glow3b)" opacity="0.9"/>
+  <circle cx="490" cy="510" r="7" fill="#FF7043" filter="url(#glow3b)" opacity="0.8"/>
+  <circle cx="560" cy="545" r="12" fill="#CE93D8" opacity="0.8"/>
+  <circle cx="620" cy="575" r="8" fill="#FFD740" opacity="0.7"/>
+
+  <!-- Layer 2: ICO output frame (bottom-right) -->
+  <rect x="610" y="620" width="310" height="250" rx="20" fill="#2A1808" stroke="#FFD740" stroke-width="7" filter="url(#glow3b)"/>
+  <!-- ICO grid preview inside -->
+  <rect x="628" y="638" width="274" height="214" rx="12" fill="#1A1000"/>
+  <!-- ICO size tiles -->
+  <rect x="645" y="655" width="60" height="60" rx="8" fill="#FF7043" opacity="0.9"/>
+  <text x="675" y="695" font-family="'Segoe UI', Arial, sans-serif" font-size="28" font-weight="800"
+        fill="white" text-anchor="middle">16</text>
+  <rect x="720" y="655" width="80" height="80" rx="8" fill="#FF8A65" opacity="0.85"/>
+  <text x="760" y="705" font-family="'Segoe UI', Arial, sans-serif" font-size="32" font-weight="800"
+        fill="white" text-anchor="middle">32</text>
+  <rect x="815" y="655" width="66" height="66" rx="8" fill="#FFA040" opacity="0.8"/>
+  <text x="848" y="698" font-family="'Segoe UI', Arial, sans-serif" font-size="24" font-weight="800"
+        fill="white" text-anchor="middle">48</text>
+  <!-- Large 256 tile -->
+  <rect x="645" y="730" width="236" height="106" rx="10" fill="#7C4DFF" opacity="0.7"/>
+  <text x="763" y="798" font-family="'Segoe UI', Arial, sans-serif" font-size="56" font-weight="900"
+        fill="white" text-anchor="middle">256</text>
+  <!-- Label -->
+  <text x="765" y="910" font-family="'Segoe UI', Arial, sans-serif" font-size="52" font-weight="700"
+        fill="#FFD740" text-anchor="middle">ICO</text>
+</svg>

@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg6" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0%" stop-color="#FCE7F3"/>
+      <stop offset="100%" stop-color="#EC4899"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg6)"/>
+  <!-- Layer 2: Diagonal unlock bolt - lock being struck open by a key -->
+  <!-- File at bottom-left -->
+  <rect x="130" y="590" width="220" height="280" rx="20" fill="white" opacity="0.85"/>
+  <polygon points="290,590 350,590 350,650" fill="#EC4899" opacity="0.4"/>
+  <rect x="195" y="718" width="90" height="80" rx="14" fill="#EF4444"/>
+  <path d="M 212 726 L 212 706 Q 212 684 240 684 Q 268 684 268 706 L 268 726" fill="none" stroke="#EF4444" stroke-width="18" stroke-linecap="round"/>
+  <!-- Diagonal key flying from top-right -->
+  <g transform="rotate(-45, 730, 280)">
+    <rect x="660" y="252" width="140" height="56" rx="28" fill="#FBBF24"/>
+    <circle cx="800" cy="280" r="46" fill="none" stroke="#FBBF24" stroke-width="20"/>
+    <circle cx="800" cy="280" r="22" fill="#FBBF24"/>
+  </g>
+  <!-- Impact sparks at lock position -->
+  <circle cx="360" cy="610" r="24" fill="#FDE047"/>
+  <circle cx="320" cy="570" r="16" fill="#FDE047" opacity="0.7"/>
+  <circle cx="400" cy="575" r="12" fill="#FDE047" opacity="0.5"/>
+  <circle cx="380" cy="640" r="10" fill="white"/>
+  <!-- Diagonal motion path of key -->
+  <path d="M 730 280 Q 560 430 380 620" stroke="white" stroke-width="8" stroke-dasharray="22,12" fill="none" opacity="0.45"/>
+  <!-- Layer 3: Lock popping open -->
+  <path d="M 212 726 L 212 680 Q 212 650 240 650 Q 268 650 268 680" fill="none" stroke="#4ADE80" stroke-width="18" stroke-linecap="round" opacity="0.7"/>
+  <text x="512" y="930" font-family="Arial" font-size="74" fill="white" text-anchor="middle" font-weight="bold">Unlocked</text>
+</svg>

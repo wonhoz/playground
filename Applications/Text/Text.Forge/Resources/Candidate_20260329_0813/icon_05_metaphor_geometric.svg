@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg5" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#F0ABFC"/>
+      <stop offset="100%" stop-color="#818CF8"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg5)"/>
+  <!-- Layer 2: Text manipulation as geometric pattern - letters being reshaped -->
+  <!-- Central gear/cog representing text transformation engine -->
+  <g transform="translate(512,512)">
+    <!-- Octagon gear -->
+    <polygon points="0,-230 163,-163 230,0 163,163 0,230 -163,163 -230,0 -163,-163" fill="white" opacity="0.9"/>
+    <polygon points="0,-170 120,-120 170,0 120,120 0,170 -120,120 -170,0 -120,-120" fill="#818CF8"/>
+    <!-- Text inside gear -->
+    <text x="0" y="25" font-family="monospace" font-size="110" fill="white" text-anchor="middle" font-weight="bold">Tx</text>
+  </g>
+  <!-- Layer 3: Text symbols orbiting the gear -->
+  <!-- Top: regex -->
+  <circle cx="512" cy="230" r="52" fill="white" opacity="0.8"/>
+  <text x="512" y="251" font-family="monospace" font-size="55" fill="#F0ABFC" text-anchor="middle" font-weight="bold">.*</text>
+  <!-- Right: replace arrow -->
+  <circle cx="790" cy="512" r="52" fill="white" opacity="0.8"/>
+  <text x="790" y="530" font-family="monospace" font-size="46" fill="#818CF8" text-anchor="middle" font-weight="bold">→</text>
+  <!-- Bottom: newline -->
+  <circle cx="512" cy="794" r="52" fill="white" opacity="0.8"/>
+  <text x="512" y="813" font-family="monospace" font-size="50" fill="#F0ABFC" text-anchor="middle" font-weight="bold">\n</text>
+  <!-- Left: uppercase -->
+  <circle cx="234" cy="512" r="52" fill="white" opacity="0.8"/>
+  <text x="234" y="532" font-family="monospace" font-size="55" fill="#818CF8" text-anchor="middle" font-weight="bold">Aa</text>
+  <!-- Connector lines -->
+  <line x1="512" y1="282" x2="512" y2="342" stroke="white" stroke-width="14" stroke-linecap="round" opacity="0.5"/>
+  <line x1="738" y1="512" x2="682" y2="512" stroke="white" stroke-width="14" stroke-linecap="round" opacity="0.5"/>
+  <line x1="512" y1="682" x2="512" y2="742" stroke="white" stroke-width="14" stroke-linecap="round" opacity="0.5"/>
+  <line x1="286" y1="512" x2="342" y2="512" stroke="white" stroke-width="14" stroke-linecap="round" opacity="0.5"/>
+</svg>

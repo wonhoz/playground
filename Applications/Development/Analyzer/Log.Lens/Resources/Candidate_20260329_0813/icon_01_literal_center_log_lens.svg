@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- 배경: 딥 네이비 그라디언트 -->
+  <defs>
+    <radialGradient id="bg01" cx="50%" cy="45%" r="60%">
+      <stop offset="0%" stop-color="#1A2550"/>
+      <stop offset="100%" stop-color="#0A0E24"/>
+    </radialGradient>
+    <radialGradient id="lensGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#00E5FF" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#00E5FF" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="lensClip">
+      <circle cx="430" cy="420" r="240"/>
+    </clipPath>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="180" fill="url(#bg01)"/>
+
+  <!-- 렌즈 글로우 -->
+  <circle cx="430" cy="420" r="290" fill="url(#lensGlow)"/>
+
+  <!-- 렌즈 테두리 (외곽 링) -->
+  <circle cx="430" cy="420" r="242" fill="none" stroke="#0A0E24" stroke-width="68"/>
+  <circle cx="430" cy="420" r="242" fill="none" stroke="#00C8FF" stroke-width="62"/>
+
+  <!-- 렌즈 내부 배경 -->
+  <circle cx="430" cy="420" r="200" fill="#101830"/>
+
+  <!-- 렌즈 내부 로그 라인들 (색상 레벨 표현) -->
+  <!-- FATAL -->
+  <rect x="270" y="330" width="320" height="22" rx="4" fill="#FF4747" opacity="0.9" clip-path="url(#lensClip)"/>
+  <!-- ERROR -->
+  <rect x="270" y="362" width="260" height="22" rx="4" fill="#FF6B6B" opacity="0.8" clip-path="url(#lensClip)"/>
+  <!-- WARN -->
+  <rect x="270" y="394" width="290" height="22" rx="4" fill="#FFD93D" opacity="0.9" clip-path="url(#lensClip)"/>
+  <!-- INFO -->
+  <rect x="270" y="426" width="240" height="22" rx="4" fill="#00C8FF" opacity="0.9" clip-path="url(#lensClip)"/>
+  <!-- DEBUG -->
+  <rect x="270" y="458" width="270" height="22" rx="4" fill="#6EA8FE" opacity="0.8" clip-path="url(#lensClip)"/>
+
+  <!-- 돋보기 손잡이 -->
+  <line x1="615" y1="607" x2="760" y2="760" stroke="#00C8FF" stroke-width="68" stroke-linecap="round"/>
+  <line x1="615" y1="607" x2="760" y2="760" stroke="#7DE8FF" stroke-width="28" stroke-linecap="round"/>
+
+  <!-- LOG 텍스트 (렌즈 아래) -->
+  <text x="512" y="750" font-family="Consolas, monospace" font-weight="700" font-size="110"
+        text-anchor="middle" fill="#00C8FF" letter-spacing="8">LOG</text>
+  <text x="512" y="750" font-family="Consolas, monospace" font-weight="700" font-size="110"
+        text-anchor="middle" fill="none" stroke="#0060AA" stroke-width="2" letter-spacing="8">LOG</text>
+
+  <!-- .Lens 서브텍스트 -->
+  <text x="512" y="830" font-family="Segoe UI, sans-serif" font-weight="400" font-size="60"
+        text-anchor="middle" fill="#4A9FCC" letter-spacing="4">.Lens</text>
+
+  <!-- 렌즈 하이라이트 (상단 반사) -->
+  <ellipse cx="370" cy="310" rx="80" ry="45" fill="white" opacity="0.07"/>
+</svg>

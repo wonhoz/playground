@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: Background -->
+  <defs>
+    <radialGradient id="bg3" cx="50%" cy="60%" r="55%">
+      <stop offset="0%" stop-color="#2A1800"/>
+      <stop offset="100%" stop-color="#100800"/>
+    </radialGradient>
+    <radialGradient id="hub3glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FF9500" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#FF9500" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="wire3" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FFB340" stop-opacity="0.3"/>
+      <stop offset="50%" stop-color="#FFB340" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#FFB340" stop-opacity="0.3"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="180" fill="url(#bg3)"/>
+
+  <!-- 글로우 -->
+  <circle cx="512" cy="512" r="420" fill="url(#hub3glow)"/>
+
+  <!-- Layer 2: Main Object — 중앙 허브에서 뻗어나가는 신호선들 -->
+  <!-- 방사 라인들 (8방향) -->
+  <line x1="512" y1="512" x2="512" y2="160" stroke="#FF9500" stroke-width="10" opacity="0.6"/>
+  <line x1="512" y1="512" x2="760" y2="264" stroke="#FF9500" stroke-width="10" opacity="0.6"/>
+  <line x1="512" y1="512" x2="864" y2="512" stroke="#FF9500" stroke-width="10" opacity="0.6"/>
+  <line x1="512" y1="512" x2="760" y2="760" stroke="#FF9500" stroke-width="10" opacity="0.6"/>
+  <line x1="512" y1="512" x2="512" y2="864" stroke="#FF9500" stroke-width="10" opacity="0.6"/>
+  <line x1="512" y1="512" x2="264" y2="760" stroke="#FF9500" stroke-width="10" opacity="0.6"/>
+  <line x1="512" y1="512" x2="160" y2="512" stroke="#FF9500" stroke-width="10" opacity="0.6"/>
+  <line x1="512" y1="512" x2="264" y2="264" stroke="#FF9500" stroke-width="10" opacity="0.6"/>
+
+  <!-- 노드 원들 (끝점) -->
+  <circle cx="512" cy="160" r="38" fill="#FF9500" opacity="0.85"/>
+  <circle cx="760" cy="264" r="38" fill="#FF9500" opacity="0.85"/>
+  <circle cx="864" cy="512" r="38" fill="#FF9500" opacity="0.85"/>
+  <circle cx="760" cy="760" r="38" fill="#FF9500" opacity="0.85"/>
+  <circle cx="512" cy="864" r="38" fill="#FF9500" opacity="0.85"/>
+  <circle cx="264" cy="760" r="38" fill="#FF9500" opacity="0.85"/>
+  <circle cx="160" cy="512" r="38" fill="#FF9500" opacity="0.85"/>
+  <circle cx="264" cy="264" r="38" fill="#FF9500" opacity="0.85"/>
+
+  <!-- 노드 번호 (포트) -->
+  <text x="512" y="148" font-family="Consolas, monospace" font-size="34" font-weight="700"
+        fill="#FFC940" text-anchor="middle" dominant-baseline="central">443</text>
+  <text x="864" y="500" font-family="Consolas, monospace" font-size="34" font-weight="700"
+        fill="#FFC940" text-anchor="middle" dominant-baseline="central">80</text>
+  <text x="160" y="500" font-family="Consolas, monospace" font-size="34" font-weight="700"
+        fill="#FFC940" text-anchor="middle" dominant-baseline="central">22</text>
+  <text x="512" y="876" font-family="Consolas, monospace" font-size="34" font-weight="700"
+        fill="#FFC940" text-anchor="middle" dominant-baseline="central">3306</text>
+
+  <!-- 중앙 허브 -->
+  <circle cx="512" cy="512" r="110" fill="#1A0C00" stroke="#FF9500" stroke-width="14"/>
+  <circle cx="512" cy="512" r="72" fill="#FF9500" opacity="0.15"/>
+
+  <!-- Layer 3: Detail — 중앙 돋보기 아이콘 -->
+  <circle cx="495" cy="495" r="50" fill="none" stroke="#FFD080" stroke-width="22"/>
+  <line x1="534" y1="534" x2="580" y2="580" stroke="#FFD080" stroke-width="22" stroke-linecap="round"/>
+</svg>

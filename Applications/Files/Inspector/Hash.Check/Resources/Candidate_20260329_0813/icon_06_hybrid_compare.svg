@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg6" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FEF3C7"/>
+      <stop offset="100%" stop-color="#F59E0B"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg6)"/>
+  <!-- Layer 2: Two hash strings being compared -->
+  <!-- File A hash -->
+  <rect x="132" y="240" width="760" height="100" rx="20" fill="white" opacity="0.92"/>
+  <text x="172" y="308" font-family="monospace" font-size="56" fill="#1D4ED8" font-weight="bold">A:</text>
+  <text x="240" y="308" font-family="monospace" font-size="56" fill="#374151">a3f2e8d1b9c4</text>
+  <!-- VS separator -->
+  <rect x="440" y="380" width="144" height="90" rx="20" fill="#F59E0B"/>
+  <text x="512" y="444" font-family="Arial" font-size="68" fill="white" text-anchor="middle" font-weight="bold">VS</text>
+  <!-- File B hash -->
+  <rect x="132" y="510" width="760" height="100" rx="20" fill="white" opacity="0.92"/>
+  <text x="172" y="578" font-family="monospace" font-size="56" fill="#DC2626" font-weight="bold">B:</text>
+  <text x="240" y="578" font-family="monospace" font-size="56" fill="#374151">a3f2e8d1b9c4</text>
+  <!-- Match result - large checkmark -->
+  <circle cx="512" cy="756" r="120" fill="white" opacity="0.95"/>
+  <polyline points="438,756 490,820 596,680" stroke="#059669" stroke-width="48" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  <!-- Layer 3: MATCH label -->
+  <text x="512" y="932" font-family="Arial" font-size="82" fill="#059669" text-anchor="middle" font-weight="bold">MATCH</text>
+</svg>

@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Background: purple-magenta gradient, diagonal/dynamic concept -->
+  <defs>
+    <linearGradient id="bg3" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1A0030"/>
+      <stop offset="100%" stop-color="#2D0050"/>
+    </linearGradient>
+    <linearGradient id="flowGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#CE93D8"/>
+      <stop offset="40%" stop-color="#9C27B0"/>
+      <stop offset="100%" stop-color="#E040FB"/>
+    </linearGradient>
+    <linearGradient id="shieldSmall" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#F8BBD9"/>
+      <stop offset="100%" stop-color="#E91E63"/>
+    </linearGradient>
+    <linearGradient id="arrowGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#80DEEA"/>
+      <stop offset="100%" stop-color="#00BCD4"/>
+    </linearGradient>
+    <filter id="glow3">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1024" height="1024" rx="160" fill="url(#bg3)"/>
+
+  <!-- Flowing path lines (diagonal dynamic) -->
+  <!-- Line 1 - broken (red-dashed style) -->
+  <line x1="100" y1="280" x2="560" y2="280" stroke="#FF5252" stroke-width="32" stroke-linecap="round"
+        stroke-dasharray="60 30"/>
+  <!-- Line 2 - ok (green) -->
+  <line x1="100" y1="400" x2="700" y2="400" stroke="#69F0AE" stroke-width="32" stroke-linecap="round"/>
+  <!-- Line 3 - ok -->
+  <line x1="100" y1="520" x2="600" y2="520" stroke="#69F0AE" stroke-width="32" stroke-linecap="round"/>
+  <!-- Line 4 - duplicate (amber) -->
+  <line x1="100" y1="640" x2="650" y2="640" stroke="#FFD740" stroke-width="32" stroke-linecap="round"
+        stroke-dasharray="40 20"/>
+
+  <!-- Status dots on left -->
+  <circle cx="100" cy="280" r="26" fill="#FF5252"/>
+  <circle cx="100" cy="400" r="26" fill="#69F0AE"/>
+  <circle cx="100" cy="520" r="26" fill="#69F0AE"/>
+  <circle cx="100" cy="640" r="26" fill="#FFD740"/>
+
+  <!-- Arrow pointing right into shield -->
+  <path d="M680 470 L800 512 L680 554" fill="url(#arrowGrad)" filter="url(#glow3)"/>
+  <line x1="700" y1="512" x2="810" y2="512" stroke="url(#arrowGrad)" stroke-width="36" stroke-linecap="round"/>
+
+  <!-- Shield (right side, guarding) -->
+  <path d="M840 330 L960 380 L960 550 Q960 680 840 760 Q720 680 720 550 L720 380 Z"
+        fill="url(#shieldSmall)" filter="url(#glow3)"/>
+  <path d="M840 330 L960 380 L960 550 Q960 680 840 760 Q720 680 720 550 L720 380 Z"
+        fill="none" stroke="#F48FB1" stroke-width="10" opacity="0.8"/>
+  <!-- Lock icon in shield -->
+  <rect x="806" y="520" width="68" height="58" rx="10" fill="#FFFFFF" opacity="0.9"/>
+  <path d="M820 520 L820 492 Q820 460 840 460 Q860 460 860 492 L860 520" fill="none"
+        stroke="#FFFFFF" stroke-width="18" stroke-linecap="round"/>
+  <circle cx="840" cy="548" r="12" fill="#E91E63"/>
+
+  <!-- Warning label on broken line -->
+  <text x="600" y="272" font-family="'Segoe UI','Arial',sans-serif" font-size="88"
+        font-weight="700" fill="#FF5252" text-anchor="middle">!</text>
+</svg>

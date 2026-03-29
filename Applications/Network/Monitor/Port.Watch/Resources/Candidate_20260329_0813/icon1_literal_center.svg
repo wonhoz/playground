@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: Background -->
+  <defs>
+    <radialGradient id="bg1" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#0D2A2A"/>
+      <stop offset="100%" stop-color="#051414"/>
+    </radialGradient>
+    <radialGradient id="glow1" cx="50%" cy="48%" r="42%">
+      <stop offset="0%" stop-color="#00FFD4" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#00FFD4" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="f1" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="18" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+  <rect width="1024" height="1024" rx="180" fill="url(#bg1)"/>
+  <rect width="1024" height="1024" rx="180" fill="url(#glow1)"/>
+
+  <!-- Layer 2: Main Object — 망원경/눈 모양 렌즈 링 -->
+  <!-- 외부 링 -->
+  <circle cx="512" cy="480" r="300" fill="none" stroke="#00E5B8" stroke-width="64" opacity="0.95"/>
+  <!-- 내부 링 -->
+  <circle cx="512" cy="480" r="200" fill="none" stroke="#00B894" stroke-width="44" opacity="0.85"/>
+  <!-- 중심 채움 -->
+  <circle cx="512" cy="480" r="120" fill="#00FFD4" opacity="0.12"/>
+  <circle cx="512" cy="480" r="70" fill="#00E5B8" opacity="0.9"/>
+
+  <!-- 십자 조준선 -->
+  <line x1="512" y1="130" x2="512" y2="310" stroke="#00FFD4" stroke-width="44" stroke-linecap="round"/>
+  <line x1="512" y1="650" x2="512" y2="830" stroke="#00FFD4" stroke-width="44" stroke-linecap="round"/>
+  <line x1="162" y1="480" x2="342" y2="480" stroke="#00FFD4" stroke-width="44" stroke-linecap="round"/>
+  <line x1="682" y1="480" x2="862" y2="480" stroke="#00FFD4" stroke-width="44" stroke-linecap="round"/>
+
+  <!-- Layer 3: Detail — 포트 번호 "80" 텍스트 -->
+  <text x="512" y="920" font-family="'Segoe UI', 'Arial Black', sans-serif"
+        font-size="110" font-weight="900" fill="#00E5B8"
+        text-anchor="middle" letter-spacing="-2">PORT</text>
+  <text x="512" y="480" font-family="'Segoe UI', 'Arial Black', sans-serif"
+        font-size="96" font-weight="900" fill="#FFFFFF"
+        text-anchor="middle" dominant-baseline="central">80</text>
+</svg>

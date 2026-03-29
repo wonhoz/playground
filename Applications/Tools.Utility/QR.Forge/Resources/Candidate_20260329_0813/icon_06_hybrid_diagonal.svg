@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg6" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#C7D2FE"/>
+      <stop offset="100%" stop-color="#4338CA"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg6)"/>
+  <!-- Layer 2: Text/URL flowing diagonally into QR code forge -->
+  <!-- Input text at top-left -->
+  <rect x="130" y="200" width="480" height="84" rx="18" fill="white" opacity="0.9"/>
+  <text x="160" y="256" font-family="monospace" font-size="52" fill="#4338CA">https://example.com</text>
+  <!-- Diagonal forge arrow -->
+  <path d="M 400 290 Q 530 400 620 500" stroke="white" stroke-width="22" stroke-linecap="round" fill="none"/>
+  <polygon points="620,500 592,474 614,468" fill="white"/>
+  <!-- Forge hammer icon at the bend -->
+  <circle cx="510" cy="395" r="56" fill="#4338CA" stroke="white" stroke-width="12"/>
+  <text x="510" y="421" font-size="64" text-anchor="middle">⚒️</text>
+  <!-- QR output at bottom-right -->
+  <rect x="590" y="490" width="300" height="300" rx="20" fill="white" opacity="0.95"/>
+  <!-- QR corners in output -->
+  <rect x="612" y="512" width="76" height="76" rx="8" fill="#4338CA"/>
+  <rect x="626" y="526" width="48" height="48" rx="4" fill="white"/>
+  <rect x="638" y="538" width="24" height="24" fill="#4338CA"/>
+  <rect x="802" y="512" width="76" height="76" rx="8" fill="#4338CA"/>
+  <rect x="816" y="526" width="48" height="48" rx="4" fill="white"/>
+  <rect x="828" y="538" width="24" height="24" fill="#4338CA"/>
+  <rect x="612" y="702" width="76" height="76" rx="8" fill="#4338CA"/>
+  <rect x="626" y="716" width="48" height="48" rx="4" fill="white"/>
+  <rect x="638" y="728" width="24" height="24" fill="#4338CA"/>
+  <!-- QR cells -->
+  <rect x="706" y="512" width="20" height="20" fill="#4338CA"/>
+  <rect x="706" y="542" width="20" height="20" fill="#4338CA"/>
+  <rect x="706" y="702" width="20" height="20" fill="#4338CA"/>
+  <rect x="706" y="732" width="20" height="20" fill="#4338CA"/>
+  <!-- Layer 3: PDF export badge -->
+  <rect x="130" y="820" width="340" height="80" rx="20" fill="white" opacity="0.85"/>
+  <text x="175" y="875" font-family="Arial" font-size="50" fill="#4338CA" font-weight="bold">📄 PDF export</text>
+</svg>

@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg6" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0%" stop-color="#FEF9C3"/>
+      <stop offset="100%" stop-color="#84CC16"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg6)"/>
+  <!-- Layer 2: URL → screenshot capture motion diagonal -->
+  <!-- URL ribbon at top-left -->
+  <rect x="130" y="230" width="540" height="100" rx="24" fill="white" opacity="0.9"/>
+  <text x="160" y="298" font-family="monospace" font-size="58" fill="#4B5563">https://web.io</text>
+  <!-- Diagonal capture arrow -->
+  <path d="M 540 330 Q 680 430 740 580" stroke="#65A30D" stroke-width="24" stroke-linecap="round" fill="none"/>
+  <polygon points="740,580 720,548 752,554" fill="#65A30D"/>
+  <!-- Screenshot result at bottom-right -->
+  <rect x="540" y="580" width="360" height="240" rx="20" fill="white" opacity="0.95"/>
+  <!-- Screenshot content preview -->
+  <rect x="560" y="600" width="320" height="36" rx="8" fill="#84CC16" opacity="0.6"/>
+  <rect x="560" y="648" width="320" height="22" rx="6" fill="#D1D5DB"/>
+  <rect x="560" y="680" width="240" height="22" rx="6" fill="#D1D5DB"/>
+  <!-- Camera icon top-right of screenshot -->
+  <circle cx="880" cy="600" r="56" fill="#84CC16"/>
+  <rect x="852" y="576" width="56" height="40" rx="8" fill="white" opacity="0.9"/>
+  <circle cx="880" cy="596" r="14" fill="#84CC16"/>
+  <rect x="872" y="564" width="16" height="12" rx="4" fill="white" opacity="0.8"/>
+  <!-- Layer 3: dashed motion trail -->
+  <path d="M 200 280 Q 420 380 620 560" stroke="#65A30D" stroke-width="6" stroke-dasharray="18,10" fill="none" opacity="0.35"/>
+  <!-- Timestamp label on screenshot -->
+  <text x="560" y="800" font-family="monospace" font-size="36" fill="#84CC16">2026-03-29 08:13</text>
+</svg>

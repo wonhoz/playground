@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: Background - layered gradient -->
+  <defs>
+    <linearGradient id="bg2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F2027"/>
+      <stop offset="50%" stop-color="#203A43"/>
+      <stop offset="100%" stop-color="#2C5364"/>
+    </linearGradient>
+    <linearGradient id="card_grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1E3050"/>
+      <stop offset="100%" stop-color="#142238"/>
+    </linearGradient>
+    <filter id="card_shadow">
+      <feDropShadow dx="0" dy="8" stdDeviation="18" flood-color="#000000" flood-opacity="0.6"/>
+    </filter>
+    <filter id="line_glow">
+      <feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#4FC3F7" flood-opacity="0.9"/>
+    </filter>
+  </defs>
+  <rect width="1024" height="1024" rx="180" fill="url(#bg2)"/>
+
+  <!-- Layer 2: Main Object - code editor card with 3 colored tabs -->
+  <!-- Card body -->
+  <rect x="148" y="200" width="728" height="620" rx="20"
+        fill="url(#card_grad)" filter="url(#card_shadow)"/>
+  <!-- Tab bar -->
+  <rect x="148" y="200" width="728" height="58" rx="20" fill="#0D1B2A"/>
+  <rect x="148" y="230" width="728" height="28" fill="#0D1B2A"/>
+  <!-- Active tab -->
+  <rect x="172" y="212" width="140" height="34" rx="8" fill="#4FC3F7" opacity="0.2"/>
+  <text x="200" y="234" font-family="Consolas, monospace" font-size="18" fill="#4FC3F7">forge</text>
+  <!-- Inactive tabs -->
+  <rect x="326" y="212" width="100" height="34" rx="8" fill="transparent"/>
+  <text x="346" y="234" font-family="Consolas, monospace" font-size="18" fill="#445566">.json</text>
+  <rect x="440" y="212" width="100" height="34" rx="8" fill="transparent"/>
+  <text x="456" y="234" font-family="Consolas, monospace" font-size="18" fill="#445566">.enc</text>
+
+  <!-- Layer 3: Detail - code lines with syntax colors -->
+  <!-- Line numbers column -->
+  <rect x="148" y="258" width="58" height="562" rx="0" fill="#0A1520"/>
+
+  <!-- Line number text -->
+  <text x="162" y="308" font-family="Consolas, monospace" font-size="26" fill="#334455">1</text>
+  <text x="162" y="358" font-family="Consolas, monospace" font-size="26" fill="#334455">2</text>
+  <text x="162" y="408" font-family="Consolas, monospace" font-size="26" fill="#334455">3</text>
+  <text x="162" y="458" font-family="Consolas, monospace" font-size="26" fill="#334455">4</text>
+  <text x="162" y="508" font-family="Consolas, monospace" font-size="26" fill="#334455">5</text>
+  <text x="162" y="558" font-family="Consolas, monospace" font-size="26" fill="#334455">6</text>
+  <text x="162" y="608" font-family="Consolas, monospace" font-size="26" fill="#334455">7</text>
+  <text x="162" y="658" font-family="Consolas, monospace" font-size="26" fill="#334455">8</text>
+  <text x="162" y="708" font-family="Consolas, monospace" font-size="26" fill="#334455">9</text>
+
+  <!-- Code content lines - syntax highlighted -->
+  <!-- Line 1: JSON keyword -->
+  <text x="230" y="308" font-family="Consolas, monospace" font-size="28" fill="#FFA000" font-weight="bold">{</text>
+  <!-- Line 2: key-value -->
+  <text x="250" y="358" font-family="Consolas, monospace" font-size="28" fill="#CE93D8">"text"</text>
+  <text x="418" y="358" font-family="Consolas, monospace" font-size="28" fill="#E0E0E0">: </text>
+  <text x="460" y="358" font-family="Consolas, monospace" font-size="28" fill="#A5D6A7">"forge"</text>
+  <!-- Line 3: hash -->
+  <text x="250" y="408" font-family="Consolas, monospace" font-size="28" fill="#CE93D8">"hash"</text>
+  <text x="408" y="408" font-family="Consolas, monospace" font-size="28" fill="#E0E0E0">: </text>
+  <text x="450" y="408" font-family="Consolas, monospace" font-size="28" fill="#FFB74D">"#SHA256"</text>
+  <!-- Line 4: enc -->
+  <text x="250" y="458" font-family="Consolas, monospace" font-size="28" fill="#CE93D8">"enc"</text>
+  <text x="380" y="458" font-family="Consolas, monospace" font-size="28" fill="#E0E0E0">: </text>
+  <text x="422" y="458" font-family="Consolas, monospace" font-size="28" fill="#4FC3F7">"base64"</text>
+  <!-- Line 5: regex -->
+  <text x="250" y="508" font-family="Consolas, monospace" font-size="28" fill="#CE93D8">"rx"</text>
+  <text x="330" y="508" font-family="Consolas, monospace" font-size="28" fill="#E0E0E0">: </text>
+  <text x="372" y="508" font-family="Consolas, monospace" font-size="28" fill="#EF9A9A">".*+"</text>
+
+  <!-- Active line highlight -->
+  <rect x="206" y="516" width="640" height="34" rx="4" fill="#4FC3F7" opacity="0.08"/>
+
+  <!-- Line 6: jwt -->
+  <text x="250" y="558" font-family="Consolas, monospace" font-size="28" fill="#CE93D8">"jwt"</text>
+  <text x="332" y="558" font-family="Consolas, monospace" font-size="28" fill="#E0E0E0">: </text>
+  <text x="374" y="558" font-family="Consolas, monospace" font-size="28" fill="#80DEEA">"decode"</text>
+  <!-- Line 7: case -->
+  <text x="250" y="608" font-family="Consolas, monospace" font-size="28" fill="#CE93D8">"case"</text>
+  <text x="370" y="608" font-family="Consolas, monospace" font-size="28" fill="#E0E0E0">: </text>
+  <text x="412" y="608" font-family="Consolas, monospace" font-size="28" fill="#FFCC80">"camelCase"</text>
+  <!-- Line 8: gen -->
+  <text x="250" y="658" font-family="Consolas, monospace" font-size="28" fill="#CE93D8">"gen"</text>
+  <text x="356" y="658" font-family="Consolas, monospace" font-size="28" fill="#E0E0E0">: </text>
+  <text x="398" y="658" font-family="Consolas, monospace" font-size="28" fill="#A5D6A7">"uuid"</text>
+  <!-- Line 9: closing brace -->
+  <text x="230" y="708" font-family="Consolas, monospace" font-size="28" fill="#FFA000" font-weight="bold">}</text>
+
+  <!-- Cursor blink -->
+  <rect x="700" y="518" width="3" height="28" rx="2" fill="#4FC3F7" filter="url(#line_glow)"/>
+</svg>

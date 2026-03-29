@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: Background -->
+  <defs>
+    <linearGradient id="bg2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2D1B69"/>
+      <stop offset="100%" stop-color="#1E1040"/>
+    </linearGradient>
+    <linearGradient id="file_grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#C084FC"/>
+      <stop offset="100%" stop-color="#A855F7"/>
+    </linearGradient>
+    <linearGradient id="fold_grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E9D5FF"/>
+      <stop offset="100%" stop-color="#C084FC"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="180" fill="url(#bg2)"/>
+
+  <!-- Layer 2: File silhouette -->
+  <!-- File body -->
+  <path d="M 220 180 L 220 844 Q 220 868 244 868 L 700 868 Q 724 868 724 844 L 724 316 L 588 180 Z"
+        fill="url(#file_grad)" opacity="0.95"/>
+  <!-- Fold corner -->
+  <path d="M 588 180 L 588 316 L 724 316 Z" fill="url(#fold_grad)" opacity="0.7"/>
+  <!-- Corner line -->
+  <path d="M 588 180 L 724 316" fill="none" stroke="#7C3AED" stroke-width="4"/>
+
+  <!-- Layer 3: Hex text lines on file -->
+  <text x="268" y="436" font-family="Consolas,monospace" font-size="72" font-weight="bold"
+        fill="#F3E8FF" letter-spacing="2" opacity="0.95">MD5</text>
+  <text x="268" y="524" font-family="Consolas,monospace" font-size="48"
+        fill="#D8B4FE" letter-spacing="1" opacity="0.85">a3f7c...</text>
+  <text x="268" y="608" font-family="Consolas,monospace" font-size="72" font-weight="bold"
+        fill="#F3E8FF" letter-spacing="2" opacity="0.95">SHA</text>
+  <text x="268" y="696" font-family="Consolas,monospace" font-size="48"
+        fill="#D8B4FE" letter-spacing="1" opacity="0.85">9e2b1...</text>
+
+  <!-- Check badge bottom right -->
+  <circle cx="750" cy="750" r="140" fill="#2D1B69" stroke="#A855F7" stroke-width="12"/>
+  <circle cx="750" cy="750" r="116" fill="#3B1F5E"/>
+  <polyline points="676,750 726,800 836,676" fill="none" stroke="#C084FC" stroke-width="60"
+            stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

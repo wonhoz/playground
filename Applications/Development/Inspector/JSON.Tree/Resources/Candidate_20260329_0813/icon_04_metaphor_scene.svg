@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: Background -->
+  <defs>
+    <linearGradient id="bg4" x1="0%" y1="0%" x2="60%" y2="100%">
+      <stop offset="0%" stop-color="#1A0536"/>
+      <stop offset="50%" stop-color="#2B1058"/>
+      <stop offset="100%" stop-color="#0D1B4B"/>
+    </linearGradient>
+    <linearGradient id="panelGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2A1F5E" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#1A144A" stop-opacity="0.9"/>
+    </linearGradient>
+    <filter id="glow4">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="1024" height="1024" rx="180" fill="url(#bg4)"/>
+
+  <!-- Star field -->
+  <circle cx="200" cy="150" r="3" fill="#FFFFFF" opacity="0.4"/>
+  <circle cx="820" cy="100" r="2" fill="#FFFFFF" opacity="0.3"/>
+  <circle cx="900" cy="280" r="2.5" fill="#FFFFFF" opacity="0.35"/>
+  <circle cx="100" cy="320" r="2" fill="#FFFFFF" opacity="0.3"/>
+  <circle cx="960" cy="450" r="2" fill="#FFFFFF" opacity="0.25"/>
+  <circle cx="70" cy="600" r="3" fill="#FFFFFF" opacity="0.3"/>
+
+  <!-- Layer 2: 3D perspective panel (JSON viewer scene) -->
+  <!-- Main panel frame -->
+  <rect x="148" y="188" width="728" height="560" rx="20" fill="url(#panelGrad)" stroke="#6C45C8" stroke-width="3"/>
+
+  <!-- Panel title bar -->
+  <rect x="148" y="188" width="728" height="52" rx="20" fill="#3D2882"/>
+  <rect x="148" y="210" width="728" height="30" fill="#3D2882"/>
+  <!-- Traffic lights -->
+  <circle cx="194" cy="214" r="11" fill="#FF5F57"/>
+  <circle cx="228" cy="214" r="11" fill="#FFBD2E"/>
+  <circle cx="262" cy="214" r="11" fill="#28C840"/>
+  <!-- Title -->
+  <text x="512" y="220" text-anchor="middle" dominant-baseline="middle"
+        font-family="'Segoe UI', monospace" font-size="28" font-weight="600"
+        fill="#CCBBFF" opacity="0.9">JSON.Tree Inspector</text>
+
+  <!-- Sidebar: tree nodes -->
+  <rect x="148" y="240" width="230" height="508" rx="0" fill="#1E1535" opacity="0.7"/>
+
+  <!-- Tree node rows in sidebar -->
+  <!-- Root -->
+  <text x="172" y="290" font-family="'Courier New', monospace" font-size="30" fill="#5A7FD6">▼ {} root</text>
+  <!-- Level 1 -->
+  <text x="196" y="342" font-family="'Courier New', monospace" font-size="28" fill="#D69A3A">  ▼ [] items</text>
+  <!-- Level 2 -->
+  <text x="218" y="390" font-family="'Courier New', monospace" font-size="26" fill="#78CC78">    "" name</text>
+  <text x="218" y="432" font-family="'Courier New', monospace" font-size="26" fill="#DD7777">    ## count</text>
+  <text x="218" y="474" font-family="'Courier New', monospace" font-size="26" fill="#CC88DD">    ✓ active</text>
+  <!-- Level 1 continued -->
+  <text x="196" y="524" font-family="'Courier New', monospace" font-size="28" fill="#5A7FD6">  ▶ {} meta</text>
+  <text x="196" y="566" font-family="'Courier New', monospace" font-size="28" fill="#5A7FD6">  ▶ {} config</text>
+  <text x="196" y="610" font-family="'Courier New', monospace" font-size="26" fill="#7799AA">  ∅ version</text>
+
+  <!-- Separator line -->
+  <line x1="378" y1="240" x2="378" y2="748" stroke="#6C45C8" stroke-width="2" opacity="0.5"/>
+
+  <!-- Main content panel: value display -->
+  <rect x="394" y="260" width="466" height="120" rx="10" fill="#241B50" opacity="0.6"/>
+  <text x="420" y="296" font-family="'Courier New', monospace" font-size="26" fill="#AAAACC">Path:</text>
+  <text x="490" y="296" font-family="'Courier New', monospace" font-size="26" fill="#FFE060">$.items[0].name</text>
+  <text x="420" y="334" font-family="'Courier New', monospace" font-size="26" fill="#AAAACC">Type:</text>
+  <text x="490" y="334" font-family="'Courier New', monospace" font-size="26" fill="#78CC78">String</text>
+  <text x="420" y="372" font-family="'Courier New', monospace" font-size="26" fill="#AAAACC">Value:</text>
+  <text x="496" y="372" font-family="'Courier New', monospace" font-size="26" fill="#78CC78">"Alice"</text>
+
+  <!-- Diff section -->
+  <rect x="394" y="404" width="466" height="180" rx="10" fill="#1A2A18" opacity="0.7"/>
+  <text x="420" y="436" font-family="'Segoe UI', sans-serif" font-size="24" fill="#88CC88" opacity="0.8">DIFF: +2 added  -1 removed</text>
+  <rect x="410" y="454" width="434" height="38" rx="6" fill="#00C85028"/>
+  <text x="430" y="476" font-family="'Courier New', monospace" font-size="24" fill="#00E676">+ "version": "2.0"</text>
+  <rect x="410" y="500" width="434" height="38" rx="6" fill="#FF363628"/>
+  <text x="430" y="522" font-family="'Courier New', monospace" font-size="24" fill="#FF5252">- "debug": true</text>
+  <rect x="410" y="546" width="434" height="38" rx="6" fill="#FFB30028"/>
+  <text x="430" y="568" font-family="'Courier New', monospace" font-size="24" fill="#FFD740">~ "count": 5 → 7</text>
+
+  <!-- Layer 3: Glow accent -->
+  <circle cx="512" cy="512" r="480" fill="none" stroke="#7C4DFF" stroke-width="4" opacity="0.06"/>
+</svg>

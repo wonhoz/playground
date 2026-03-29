@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: Background -->
+  <defs>
+    <radialGradient id="bg4" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#001A28"/>
+      <stop offset="100%" stop-color="#000C14"/>
+    </radialGradient>
+    <radialGradient id="scan4" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#00CFFF" stop-opacity="0.20"/>
+      <stop offset="70%" stop-color="#00CFFF" stop-opacity="0.05"/>
+      <stop offset="100%" stop-color="#00CFFF" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="sweep4" x1="50%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00FFEA" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#00FFEA" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="180" fill="url(#bg4)"/>
+  <circle cx="512" cy="512" r="450" fill="url(#scan4)"/>
+
+  <!-- Layer 2: Main Object — 레이더 동심원 스캔 -->
+  <!-- 레이더 링들 -->
+  <circle cx="512" cy="512" r="380" fill="none" stroke="#00CFFF" stroke-width="8" opacity="0.25"/>
+  <circle cx="512" cy="512" r="290" fill="none" stroke="#00CFFF" stroke-width="10" opacity="0.4"/>
+  <circle cx="512" cy="512" r="200" fill="none" stroke="#00CFFF" stroke-width="12" opacity="0.55"/>
+  <circle cx="512" cy="512" r="110" fill="none" stroke="#00CFFF" stroke-width="16" opacity="0.75"/>
+
+  <!-- 그리드 십자선 -->
+  <line x1="132" y1="512" x2="892" y2="512" stroke="#00CFFF" stroke-width="6" opacity="0.3"/>
+  <line x1="512" y1="132" x2="512" y2="892" stroke="#00CFFF" stroke-width="6" opacity="0.3"/>
+
+  <!-- 스윕 라인 (레이더 회전 팔) -->
+  <line x1="512" y1="512" x2="810" y2="214" stroke="url(#sweep4)" stroke-width="40" stroke-linecap="round" opacity="0.8"/>
+  <!-- 스윕 팬 영역 -->
+  <path d="M512,512 L810,214 A380,380 0 0,1 892,512 Z" fill="#00FFEA" opacity="0.07"/>
+
+  <!-- Layer 3: Detail — 포트 핀들 (탐지된 포트 점) -->
+  <!-- 탐지 점 + 포트 번호 -->
+  <circle cx="650" cy="350" r="22" fill="#00FFD0"/>
+  <text x="682" y="338" font-family="Consolas, monospace" font-size="42" font-weight="700"
+        fill="#00FFD0" dominant-baseline="central">:443</text>
+
+  <circle cx="340" cy="430" r="22" fill="#80FFEE"/>
+  <text x="372" y="418" font-family="Consolas, monospace" font-size="42" font-weight="700"
+        fill="#80FFEE" dominant-baseline="central">:80</text>
+
+  <circle cx="600" cy="620" r="22" fill="#00E8F0"/>
+  <text x="632" y="608" font-family="Consolas, monospace" font-size="42" font-weight="700"
+        fill="#00E8F0" dominant-baseline="central">:22</text>
+
+  <!-- 중앙 점 -->
+  <circle cx="512" cy="512" r="28" fill="#00CFFF"/>
+  <circle cx="512" cy="512" r="12" fill="#FFFFFF"/>
+</svg>

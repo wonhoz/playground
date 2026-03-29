@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- BG: 스카이블루 그라디언트 -->
+  <defs>
+    <radialGradient id="bg1" cx="50%" cy="45%" r="60%">
+      <stop offset="0%" stop-color="#1A3A6A"/>
+      <stop offset="100%" stop-color="#0A1A3A"/>
+    </radialGradient>
+    <radialGradient id="glow1" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#5BB8FF" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#5BB8FF" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="lockBody" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#4B9EFF"/>
+      <stop offset="100%" stop-color="#1A5FBF"/>
+    </linearGradient>
+    <linearGradient id="keyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFD740"/>
+      <stop offset="100%" stop-color="#FF9500"/>
+    </linearGradient>
+    <filter id="shadow1">
+      <feDropShadow dx="0" dy="8" stdDeviation="18" flood-color="#000000" flood-opacity="0.5"/>
+    </filter>
+    <filter id="glow1f">
+      <feGaussianBlur stdDeviation="12" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="180" fill="url(#bg1)"/>
+  <ellipse cx="512" cy="480" rx="380" ry="380" fill="url(#glow1)"/>
+
+  <!-- 자물쇠 몸체 (열린 상태 - 고리 오른쪽으로 올라감) -->
+  <g filter="url(#shadow1)">
+    <!-- 자물쇠 본체 -->
+    <rect x="310" y="480" width="320" height="260" rx="28" fill="url(#lockBody)"/>
+    <!-- 열쇠 구멍 -->
+    <circle cx="470" cy="595" r="32" fill="#0A2040"/>
+    <rect x="456" y="595" width="28" height="58" rx="6" fill="#0A2040"/>
+
+    <!-- 자물쇠 고리 (열린 상태 - 오른쪽 위로 분리됨) -->
+    <path d="M380 480 L380 370 Q380 280 460 280 Q540 280 540 370 L540 430"
+          fill="none" stroke="#2A70CF" stroke-width="64" stroke-linecap="round"/>
+    <!-- 고리 끊긴 부분 강조 (오픈) -->
+    <path d="M540 430 L540 480" fill="none" stroke="#5BB8FF" stroke-width="64" stroke-linecap="round" opacity="0.6"/>
+  </g>
+
+  <!-- 열쇠 (오른쪽에서 진입) -->
+  <g transform="translate(580, 390) rotate(-35)" filter="url(#glow1f)">
+    <!-- 열쇠 머리 -->
+    <circle cx="60" cy="0" r="68" fill="url(#keyGrad)" stroke="#FFD740" stroke-width="10"/>
+    <circle cx="60" cy="0" r="38" fill="#0A1A3A"/>
+    <!-- 열쇠 손잡이 -->
+    <rect x="118" y="-18" width="160" height="36" rx="18" fill="url(#keyGrad)"/>
+    <!-- 열쇠 톱니 -->
+    <rect x="220" y="18" width="24" height="30" rx="5" fill="url(#keyGrad)"/>
+    <rect x="256" y="18" width="20" height="22" rx="4" fill="url(#keyGrad)"/>
+  </g>
+
+  <!-- 빛나는 파티클 (해제 성공 효과) -->
+  <circle cx="640" cy="340" r="14" fill="#FFD740" opacity="0.9"/>
+  <circle cx="700" cy="290" r="9" fill="#5BB8FF" opacity="0.8"/>
+  <circle cx="760" cy="360" r="11" fill="#FF9500" opacity="0.7"/>
+  <line x1="640" y1="340" x2="680" y2="310" stroke="#FFD740" stroke-width="4" opacity="0.6"/>
+  <line x1="700" y1="290" x2="730" y2="270" stroke="#5BB8FF" stroke-width="3" opacity="0.5"/>
+</svg>

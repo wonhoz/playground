@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg4" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#EFF6FF"/>
+      <stop offset="100%" stop-color="#1D4ED8"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg4)"/>
+  <!-- Layer 2: App window scene showing ZIP file contents -->
+  <!-- Window frame -->
+  <rect x="130" y="190" width="764" height="580" rx="20" fill="white" opacity="0.93"/>
+  <rect x="130" y="190" width="764" height="52" rx="20" fill="#1E40AF"/>
+  <rect x="130" y="218" width="764" height="24" fill="#1E40AF"/>
+  <text x="512" y="222" font-family="Arial" font-size="22" fill="white" text-anchor="middle">Zip.Peek — archive.zip</text>
+  <!-- Window control dots -->
+  <circle cx="162" cy="216" r="8" fill="#EF4444"/>
+  <circle cx="188" cy="216" r="8" fill="#F59E0B"/>
+  <circle cx="214" cy="216" r="8" fill="#22C55E"/>
+  <!-- Left panel: ZIP file -->
+  <rect x="148" y="260" width="200" height="480" rx="10" fill="#EFF6FF"/>
+  <text x="160" y="292" font-family="Arial" font-size="22" fill="#1E40AF" font-weight="bold">Archives</text>
+  <!-- ZIP file entry -->
+  <rect x="154" y="304" width="188" height="48" rx="8" fill="#1D4ED8"/>
+  <text x="176" y="333" font-family="monospace" font-size="22" fill="white">archive.zip</text>
+  <rect x="154" y="360" width="188" height="40" rx="8" fill="#DBEAFE"/>
+  <text x="176" y="386" font-family="monospace" font-size="20" fill="#374151">backup.zip</text>
+  <rect x="154" y="408" width="188" height="40" rx="8" fill="#DBEAFE"/>
+  <text x="176" y="434" font-family="monospace" font-size="20" fill="#374151">old_files.zip</text>
+  <!-- Right panel: file tree inside ZIP -->
+  <rect x="364" y="260" width="512" height="480" rx="10" fill="#F8FAFC"/>
+  <text x="376" y="292" font-family="Arial" font-size="22" fill="#1E40AF" font-weight="bold">Contents (4 files)</text>
+  <!-- Tree items -->
+  <text x="376" y="336" font-family="monospace" font-size="28" fill="#374151">📄 readme.txt</text>
+  <text x="410" y="376" font-family="monospace" font-size="26" fill="#6B7280">1.2 KB</text>
+  <text x="376" y="422" font-family="monospace" font-size="28" fill="#374151">🖼️ photo.jpg</text>
+  <text x="410" y="462" font-family="monospace" font-size="26" fill="#6B7280">2.8 MB</text>
+  <text x="376" y="508" font-family="monospace" font-size="28" fill="#374151">📊 data.csv</text>
+  <text x="410" y="548" font-family="monospace" font-size="26" fill="#6B7280">45 KB</text>
+  <text x="376" y="594" font-family="monospace" font-size="28" fill="#374151">📁 src/</text>
+  <!-- Layer 3: Status bar -->
+  <rect x="130" y="746" width="764" height="24" rx="0" fill="#1E40AF" opacity="0.15"/>
+  <text x="148" y="762" font-family="Arial" font-size="18" fill="#1E40AF">Total: 3.1 MB · No extraction needed</text>
+</svg>

@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg3" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FDE68A"/>
+      <stop offset="100%" stop-color="#F59E0B"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg3)"/>
+  <!-- Layer 2: Silhouette of a person (musician) editing tags on headphones -->
+  <!-- Headphones silhouette - person wearing headphones at desk -->
+  <!-- Body/torso silhouette -->
+  <ellipse cx="512" cy="820" rx="200" ry="120" fill="#92400E" opacity="0.6"/>
+  <!-- Head -->
+  <circle cx="512" cy="630" r="110" fill="#92400E"/>
+  <!-- Headphones arc -->
+  <path d="M 402 580 Q 402 440 512 440 Q 622 440 622 580" fill="none" stroke="#78350F" stroke-width="36" stroke-linecap="round"/>
+  <!-- Headphone cups -->
+  <rect x="370" y="556" width="64" height="80" rx="20" fill="#78350F"/>
+  <rect x="590" y="556" width="64" height="80" rx="20" fill="#78350F"/>
+  <!-- Musical notes floating - representing audio tags -->
+  <text x="700" y="380" font-size="80" fill="white" opacity="0.85">♪</text>
+  <text x="200" y="420" font-size="60" fill="white" opacity="0.7">♫</text>
+  <text x="760" y="480" font-size="50" fill="white" opacity="0.55">♩</text>
+  <!-- Tag label being edited -->
+  <rect x="360" y="700" width="304" height="80" rx="16" fill="white" opacity="0.9"/>
+  <text x="512" y="752" font-family="monospace" font-size="52" fill="#F59E0B" text-anchor="middle" font-weight="bold">♪ Title</text>
+  <!-- Layer 3: Edit pencil indicator -->
+  <g transform="translate(760, 710) rotate(-45)">
+    <rect x="0" y="0" width="28" height="100" rx="8" fill="#F59E0B"/>
+    <polygon points="0,100 28,100 14,130" fill="#92400E"/>
+  </g>
+</svg>

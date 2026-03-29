@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: Background -->
+  <defs>
+    <linearGradient id="bg4" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ECFEFF"/>
+      <stop offset="100%" stop-color="#BAE6FD"/>
+    </linearGradient>
+    <linearGradient id="ring_grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0891B2"/>
+      <stop offset="100%" stop-color="#0E7490"/>
+    </linearGradient>
+    <linearGradient id="lock_grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#164E63"/>
+      <stop offset="100%" stop-color="#0C4A6E"/>
+    </linearGradient>
+    <filter id="shadow4">
+      <feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="#0891B2" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+  <rect width="1024" height="1024" rx="180" fill="url(#bg4)"/>
+
+  <!-- Layer 2: Outer hex ring with 0-F labels -->
+  <!-- Outer ring circle -->
+  <circle cx="512" cy="470" r="310" fill="none" stroke="url(#ring_grad)" stroke-width="60" opacity="0.9"/>
+  <!-- Inner ring -->
+  <circle cx="512" cy="470" r="230" fill="none" stroke="#22D3EE" stroke-width="28" opacity="0.5"/>
+
+  <!-- Hex digit labels around ring -->
+  <text x="494" y="138" font-family="Consolas,monospace" font-size="80" font-weight="bold"
+        fill="#0E7490" text-anchor="middle">0</text>
+  <text x="704" y="200" font-family="Consolas,monospace" font-size="80" font-weight="bold"
+        fill="#0E7490" text-anchor="middle">4</text>
+  <text x="812" y="436" font-family="Consolas,monospace" font-size="80" font-weight="bold"
+        fill="#0E7490" text-anchor="middle">8</text>
+  <text x="710" y="730" font-family="Consolas,monospace" font-size="80" font-weight="bold"
+        fill="#0E7490" text-anchor="middle">F</text>
+  <text x="294" y="730" font-family="Consolas,monospace" font-size="80" font-weight="bold"
+        fill="#0E7490" text-anchor="middle">A</text>
+  <text x="192" y="440" font-family="Consolas,monospace" font-size="80" font-weight="bold"
+        fill="#0E7490" text-anchor="middle">5</text>
+
+  <!-- Layer 3: Lock icon at center -->
+  <!-- Lock body -->
+  <rect x="432" y="490" width="160" height="130" rx="18" fill="url(#lock_grad)" filter="url(#shadow4)"/>
+  <!-- Lock shackle arc -->
+  <path d="M 452 490 L 452 430 Q 452 370 512 370 Q 572 370 572 430 L 572 490"
+        fill="none" stroke="url(#lock_grad)" stroke-width="60" stroke-linecap="round"/>
+  <!-- Keyhole -->
+  <circle cx="512" cy="548" r="22" fill="#22D3EE"/>
+  <rect x="502" y="560" width="20" height="30" rx="6" fill="#22D3EE"/>
+
+  <!-- Bottom text -->
+  <text x="512" y="920" font-family="Consolas,monospace" font-size="76" font-weight="bold"
+        fill="#0E7490" text-anchor="middle" letter-spacing="4">SHA256</text>
+</svg>

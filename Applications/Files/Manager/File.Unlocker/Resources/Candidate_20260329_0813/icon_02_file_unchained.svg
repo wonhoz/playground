@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- BG: 민트·청록 -->
+  <defs>
+    <linearGradient id="bg2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0D2B2B"/>
+      <stop offset="100%" stop-color="#0A1E1A"/>
+    </linearGradient>
+    <linearGradient id="fileGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#F0F8FF"/>
+      <stop offset="100%" stop-color="#C8E8F0"/>
+    </linearGradient>
+    <linearGradient id="chainGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#FF6B6B"/>
+      <stop offset="100%" stop-color="#FF4444"/>
+    </linearGradient>
+    <filter id="fileShadow">
+      <feDropShadow dx="4" dy="8" stdDeviation="16" flood-color="#000000" flood-opacity="0.6"/>
+    </filter>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="180" fill="url(#bg2)"/>
+  <!-- 배경 격자 패턴 -->
+  <line x1="0" y1="512" x2="1024" y2="512" stroke="#1A3A3A" stroke-width="1" opacity="0.4"/>
+  <line x1="512" y1="0" x2="512" y2="1024" stroke="#1A3A3A" stroke-width="1" opacity="0.4"/>
+  <circle cx="512" cy="512" r="420" fill="none" stroke="#1A3A3A" stroke-width="1" opacity="0.3"/>
+  <circle cx="512" cy="512" r="280" fill="none" stroke="#1A3A3A" stroke-width="1" opacity="0.3"/>
+
+  <!-- 파일 문서 (중앙) -->
+  <g filter="url(#fileShadow)">
+    <!-- 문서 본체 -->
+    <rect x="320" y="200" width="340" height="420" rx="18" fill="url(#fileGrad)"/>
+    <!-- 접힌 모서리 -->
+    <polygon points="560,200 660,200 660,290 560,200" fill="#A0C8D8"/>
+    <polygon points="560,200 560,290 660,290" fill="#B8D8E8"/>
+    <!-- 줄 무늬 (문서 내용 표시) -->
+    <rect x="354" y="320" width="210" height="14" rx="7" fill="#A0B8C0" opacity="0.6"/>
+    <rect x="354" y="350" width="180" height="14" rx="7" fill="#A0B8C0" opacity="0.6"/>
+    <rect x="354" y="380" width="200" height="14" rx="7" fill="#A0B8C0" opacity="0.6"/>
+    <rect x="354" y="410" width="160" height="14" rx="7" fill="#A0B8C0" opacity="0.6"/>
+    <rect x="354" y="440" width="195" height="14" rx="7" fill="#A0B8C0" opacity="0.6"/>
+    <rect x="354" y="470" width="140" height="14" rx="7" fill="#A0B8C0" opacity="0.6"/>
+    <!-- 파일 아이콘 상단 레이블 -->
+    <rect x="354" y="240" width="130" height="22" rx="6" fill="#2DD4BF" opacity="0.8"/>
+    <text x="419" y="257" font-family="Arial" font-size="13" fill="#0D2B2B" text-anchor="middle" font-weight="bold">LOCKED</text>
+  </g>
+
+  <!-- 체인 가로 (가운데 파일 위) -->
+  <!-- 체인 링크들 -->
+  <g opacity="0.95">
+    <!-- 왼쪽 체인 -->
+    <ellipse cx="220" cy="500" rx="46" ry="26" fill="none" stroke="url(#chainGrad)" stroke-width="22" transform="rotate(-30 220 500)"/>
+    <ellipse cx="285" cy="520" rx="46" ry="26" fill="none" stroke="url(#chainGrad)" stroke-width="22" transform="rotate(-30 285 520)"/>
+    <ellipse cx="350" cy="510" rx="46" ry="26" fill="none" stroke="url(#chainGrad)" stroke-width="22" transform="rotate(-30 350 510)"/>
+
+    <!-- 오른쪽 체인 -->
+    <ellipse cx="680" cy="500" rx="46" ry="26" fill="none" stroke="url(#chainGrad)" stroke-width="22" transform="rotate(-30 680 500)"/>
+    <ellipse cx="745" cy="520" rx="46" ry="26" fill="none" stroke="url(#chainGrad)" stroke-width="22" transform="rotate(-30 745 520)"/>
+    <ellipse cx="810" cy="510" rx="46" ry="26" fill="none" stroke="url(#chainGrad)" stroke-width="22" transform="rotate(-30 810 510)"/>
+  </g>
+
+  <!-- 중앙 끊긴 X 표시 (체인 해제) -->
+  <g transform="translate(512, 500)">
+    <!-- 끊김 효과 원 -->
+    <circle cx="0" cy="0" r="58" fill="#1A0A0A" stroke="#FF4444" stroke-width="6"/>
+    <!-- X 표시 -->
+    <line x1="-28" y1="-28" x2="28" y2="28" stroke="#FF6B6B" stroke-width="18" stroke-linecap="round"/>
+    <line x1="28" y1="-28" x2="-28" y2="28" stroke="#FF6B6B" stroke-width="18" stroke-linecap="round"/>
+    <!-- 파티클 -->
+    <circle cx="-60" cy="-40" r="8" fill="#FF9500" opacity="0.9"/>
+    <circle cx="65" cy="-35" r="10" fill="#FFD740" opacity="0.8"/>
+    <circle cx="-50" cy="50" r="7" fill="#FF6B6B" opacity="0.7"/>
+    <circle cx="60" cy="45" r="9" fill="#2DD4BF" opacity="0.8"/>
+  </g>
+
+  <!-- FREE 텍스트 하단 -->
+  <text x="512" y="730" font-family="Arial Black, Arial" font-size="90" font-weight="900"
+        fill="#2DD4BF" text-anchor="middle" opacity="0.9">FREE</text>
+</svg>

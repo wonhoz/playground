@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg5" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#DCFCE7"/>
+      <stop offset="100%" stop-color="#15803D"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg5)"/>
+  <!-- Layer 2: Compression rings — concentric, denser toward center -->
+  <!-- Outer rings (sparse = uncompressed) -->
+  <circle cx="512" cy="512" r="360" fill="none" stroke="white" stroke-width="6" opacity="0.25"/>
+  <circle cx="512" cy="512" r="320" fill="none" stroke="white" stroke-width="8" opacity="0.30"/>
+  <circle cx="512" cy="512" r="280" fill="none" stroke="#86EFAC" stroke-width="10" opacity="0.45"/>
+  <circle cx="512" cy="512" r="240" fill="none" stroke="#86EFAC" stroke-width="14" opacity="0.55"/>
+  <circle cx="512" cy="512" r="196" fill="none" stroke="#4ADE80" stroke-width="18" opacity="0.70"/>
+  <circle cx="512" cy="512" r="152" fill="none" stroke="#22C55E" stroke-width="24" opacity="0.85"/>
+  <!-- Inner core — compressed data -->
+  <circle cx="512" cy="512" r="108" fill="#15803D" stroke="#86EFAC" stroke-width="12"/>
+  <!-- ZIP badge at center -->
+  <text x="512" y="528" font-family="Arial" font-size="68" fill="white" text-anchor="middle" font-weight="bold">ZIP</text>
+  <!-- Compression arrows pointing inward at 4 cardinal points -->
+  <!-- Top arrow -->
+  <polygon points="512,156 492,196 532,196" fill="white" opacity="0.7"/>
+  <!-- Bottom arrow -->
+  <polygon points="512,868 492,828 532,828" fill="white" opacity="0.7"/>
+  <!-- Left arrow -->
+  <polygon points="156,512 196,492 196,532" fill="white" opacity="0.7"/>
+  <!-- Right arrow -->
+  <polygon points="868,512 828,492 828,532" fill="white" opacity="0.7"/>
+  <!-- Layer 3: Small file dots on outer ring (things being compressed) -->
+  <circle cx="512" cy="152" r="20" fill="#FDE68A"/>
+  <circle cx="868" cy="512" r="20" fill="#FDE68A"/>
+  <circle cx="512" cy="872" r="20" fill="#FDE68A"/>
+  <circle cx="152" cy="512" r="20" fill="#FDE68A"/>
+  <!-- Magnifier overlay hint (small) -->
+  <circle cx="790" cy="234" r="68" fill="none" stroke="white" stroke-width="18" opacity="0.8"/>
+  <line x1="836" y1="278" x2="880" y2="324" stroke="white" stroke-width="20" stroke-linecap="round" opacity="0.8"/>
+</svg>

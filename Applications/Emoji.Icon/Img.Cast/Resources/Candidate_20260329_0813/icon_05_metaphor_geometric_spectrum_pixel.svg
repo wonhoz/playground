@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg5" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0A1628"/>
+      <stop offset="100%" stop-color="#14082A"/>
+    </linearGradient>
+    <radialGradient id="discGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%"   stop-color="#FFFFFF" stop-opacity="0.9"/>
+      <stop offset="20%"  stop-color="#FFD740"/>
+      <stop offset="40%"  stop-color="#FF7043"/>
+      <stop offset="60%"  stop-color="#E040FB"/>
+      <stop offset="80%"  stop-color="#40C4FF"/>
+      <stop offset="100%" stop-color="#69F0AE"/>
+    </radialGradient>
+    <filter id="glow5">
+      <feDropShadow dx="0" dy="0" stdDeviation="28" flood-color="#E040FB" flood-opacity="0.6"/>
+    </filter>
+    <filter id="shadow5">
+      <feDropShadow dx="4" dy="4" stdDeviation="10" flood-color="#000" flood-opacity="0.5"/>
+    </filter>
+    <clipPath id="leftHalf">
+      <rect x="0" y="0" width="512" height="1024"/>
+    </clipPath>
+  </defs>
+  <rect width="1024" height="1024" rx="180" fill="url(#bg5)"/>
+
+  <!-- Layer 2: Spectrum disc (left half) -->
+  <circle cx="380" cy="512" r="300" fill="url(#discGrad)" filter="url(#glow5)" clip-path="url(#leftHalf)"/>
+  <!-- Disc center hole -->
+  <circle cx="380" cy="512" r="60" fill="#0A1628"/>
+
+  <!-- Layer 3: Fragmentation arrows pointing right -->
+  <path d="M 560 410 L 660 410 L 660 390 L 710 440 L 660 490 L 660 470 L 560 470 Z"
+        fill="#FFD740" opacity="0.85" filter="url(#shadow5)"/>
+  <path d="M 560 530 L 650 530 L 650 510 L 700 555 L 650 600 L 650 580 L 560 580 Z"
+        fill="#FF7043" opacity="0.8" filter="url(#shadow5)"/>
+
+  <!-- Layer 2: Pixel grid (right half) -->
+  <!-- Row 1 -->
+  <rect x="720" y="280" width="80" height="80" rx="6" fill="#FFD740" filter="url(#shadow5)"/>
+  <rect x="810" y="280" width="80" height="80" rx="6" fill="#FF7043" filter="url(#shadow5)"/>
+  <rect x="900" y="280" width="80" height="80" rx="6" fill="#FF8A65" filter="url(#shadow5)"/>
+  <!-- Row 2 -->
+  <rect x="720" y="370" width="80" height="80" rx="6" fill="#E040FB" filter="url(#shadow5)"/>
+  <rect x="810" y="370" width="80" height="80" rx="6" fill="#CE93D8" filter="url(#shadow5)"/>
+  <rect x="900" y="370" width="80" height="80" rx="6" fill="#40C4FF" filter="url(#shadow5)"/>
+  <!-- Row 3 -->
+  <rect x="720" y="460" width="80" height="80" rx="6" fill="#40C4FF" filter="url(#shadow5)"/>
+  <rect x="810" y="460" width="80" height="80" rx="6" fill="#69F0AE" filter="url(#shadow5)"/>
+  <rect x="900" y="460" width="80" height="80" rx="6" fill="#A5D6A7" filter="url(#shadow5)"/>
+  <!-- Row 4 -->
+  <rect x="720" y="550" width="80" height="80" rx="6" fill="#A5D6A7" filter="url(#shadow5)"/>
+  <rect x="810" y="550" width="80" height="80" rx="6" fill="#FFD740" filter="url(#shadow5)"/>
+  <rect x="900" y="550" width="80" height="80" rx="6" fill="#E040FB" filter="url(#shadow5)"/>
+  <!-- Row 5 -->
+  <rect x="720" y="640" width="80" height="80" rx="6" fill="#FF7043" filter="url(#shadow5)"/>
+  <rect x="810" y="640" width="80" height="80" rx="6" fill="#40C4FF" filter="url(#shadow5)"/>
+  <rect x="900" y="640" width="80" height="80" rx="6" fill="#69F0AE" filter="url(#shadow5)"/>
+
+  <!-- Layer 3: Format label SVG on disc -->
+  <text x="370" y="430" font-family="'Segoe UI', Arial, sans-serif" font-size="80" font-weight="900"
+        fill="#0A1628" text-anchor="middle" dominant-baseline="middle" opacity="0.7">SVG</text>
+
+  <!-- Bottom label -->
+  <text x="512" y="870" font-family="'Segoe UI', Arial, sans-serif" font-size="56" font-weight="700"
+        fill="#888" text-anchor="middle" opacity="0.6">→ pixels</text>
+
+  <!-- Scattered small circles suggesting color samples -->
+  <circle cx="200" cy="700" r="18" fill="#FFD740" opacity="0.5"/>
+  <circle cx="260" cy="740" r="12" fill="#FF7043" opacity="0.5"/>
+  <circle cx="320" cy="710" r="15" fill="#69F0AE" opacity="0.45"/>
+  <circle cx="430" cy="740" r="10" fill="#40C4FF" opacity="0.4"/>
+  <circle cx="500" cy="720" r="14" fill="#E040FB" opacity="0.4"/>
+</svg>

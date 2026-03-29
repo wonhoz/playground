@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg6" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFF7ED"/>
+      <stop offset="100%" stop-color="#EA580C"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg6)"/>
+  <!-- Layer 2: ZIP file with diagonal peek window opening -->
+  <!-- ZIP file body -->
+  <rect x="200" y="300" width="380" height="460" rx="24" fill="white" opacity="0.92"/>
+  <!-- ZIP tab at top -->
+  <rect x="290" y="268" width="110" height="50" rx="10" fill="#EA580C"/>
+  <text x="345" y="302" font-family="Arial" font-size="28" fill="white" text-anchor="middle" font-weight="bold">ZIP</text>
+  <!-- ZIP stripes on file -->
+  <rect x="220" y="380" width="340" height="18" rx="6" fill="#FED7AA"/>
+  <rect x="220" y="416" width="340" height="18" rx="6" fill="#FDBA74"/>
+  <rect x="220" y="452" width="340" height="18" rx="6" fill="#FED7AA"/>
+  <rect x="220" y="488" width="340" height="18" rx="6" fill="#FDBA74"/>
+  <rect x="220" y="524" width="340" height="18" rx="6" fill="#FED7AA"/>
+  <!-- Diagonal "peek" window cut-out opening from top-right of ZIP -->
+  <!-- Shadow of the opening -->
+  <path d="M 460 300 L 820 300 L 820 680 L 460 680 Z" fill="#EA580C" opacity="0.15" rx="20"/>
+  <!-- Peek window frame -->
+  <rect x="470" y="310" width="320" height="350" rx="18" fill="white" opacity="0.95" stroke="#EA580C" stroke-width="8"/>
+  <!-- Peek label -->
+  <text x="630" y="360" font-family="Arial" font-size="28" fill="#EA580C" text-anchor="middle" font-weight="bold">PEEK</text>
+  <!-- Content visible through peek window -->
+  <text x="490" y="408" font-family="monospace" font-size="28" fill="#374151">📄 notes.txt</text>
+  <text x="490" y="450" font-family="monospace" font-size="26" fill="#6B7280">  2.1 KB</text>
+  <text x="490" y="496" font-family="monospace" font-size="28" fill="#374151">🖼️ shot.png</text>
+  <text x="490" y="538" font-family="monospace" font-size="26" fill="#6B7280">  1.4 MB</text>
+  <text x="490" y="584" font-family="monospace" font-size="28" fill="#374151">📊 log.csv</text>
+  <!-- Diagonal arrow from ZIP to peek window -->
+  <path d="M 440 500 Q 456 450 470 430" stroke="#EA580C" stroke-width="14" stroke-linecap="round" fill="none"/>
+  <polygon points="470,430 448,444 462,460" fill="#EA580C"/>
+  <!-- Layer 3: Magnifier in corner of peek window -->
+  <circle cx="762" cy="628" r="42" fill="none" stroke="#EA580C" stroke-width="14"/>
+  <circle cx="762" cy="628" r="26" fill="#FFF7ED" opacity="0.8"/>
+  <line x1="792" y1="658" x2="818" y2="686" stroke="#EA580C" stroke-width="16" stroke-linecap="round"/>
+</svg>

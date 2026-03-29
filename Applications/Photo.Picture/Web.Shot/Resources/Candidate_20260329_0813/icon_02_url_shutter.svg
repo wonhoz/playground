@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- 배경: 민트/라임 그라디언트 -->
+  <defs>
+    <linearGradient id="bg2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F1F8E9"/>
+      <stop offset="100%" stop-color="#DCEDC8"/>
+    </linearGradient>
+    <linearGradient id="bar_grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#33691E"/>
+      <stop offset="100%" stop-color="#558B2F"/>
+    </linearGradient>
+    <linearGradient id="shutter_grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#76FF03"/>
+      <stop offset="100%" stop-color="#64DD17"/>
+    </linearGradient>
+    <filter id="shadow2">
+      <feDropShadow dx="0" dy="10" stdDeviation="20" flood-color="#1B5E20" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="180" fill="url(#bg2)"/>
+
+  <!-- URL 주소창 레이어드 형태 -->
+  <!-- 상단 URL 바 -->
+  <rect x="100" y="310" width="824" height="110" rx="55" fill="url(#bar_grad)" filter="url(#shadow2)"/>
+  <!-- 자물쇠 아이콘 -->
+  <rect x="148" y="346" width="28" height="22" rx="4" fill="#A5D6A7"/>
+  <rect x="153" y="336" width="18" height="16" rx="9" fill="none" stroke="#A5D6A7" stroke-width="6"/>
+  <!-- https:// 텍스트 -->
+  <text x="210" y="382" font-family="monospace" font-size="46" fill="#CCFF90" font-weight="bold">https://</text>
+  <!-- 도메인 텍스트 -->
+  <text x="450" y="382" font-family="monospace" font-size="46" fill="white" font-weight="bold">site.com</text>
+
+  <!-- 하단 URL 바 (그림자) -->
+  <rect x="120" y="445" width="784" height="100" rx="50" fill="#558B2F" opacity="0.4"/>
+
+  <!-- 셔터 버튼 (메인 오브젝트) -->
+  <circle cx="512" cy="640" r="165" fill="#2E7D32" filter="url(#shadow2)"/>
+  <circle cx="512" cy="640" r="145" fill="url(#shutter_grad)"/>
+  <!-- 셔터 내부 링 -->
+  <circle cx="512" cy="640" r="100" fill="none" stroke="#1B5E20" stroke-width="16"/>
+  <circle cx="512" cy="640" r="70" fill="#1B5E20" opacity="0.8"/>
+  <!-- 카메라 심볼 -->
+  <circle cx="512" cy="640" r="40" fill="#CCFF90"/>
+
+  <!-- 셔터 노치 표시 -->
+  <path d="M 512 490 A 150 150 0 0 1 662 640" fill="none" stroke="white" stroke-width="22" stroke-linecap="round" opacity="0.6"/>
+</svg>

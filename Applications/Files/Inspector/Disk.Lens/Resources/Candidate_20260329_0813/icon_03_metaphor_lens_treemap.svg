@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg3" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#2A0A4A"/>
+      <stop offset="100%" stop-color="#160530"/>
+    </linearGradient>
+    <radialGradient id="lensBody" cx="45%" cy="38%" r="58%">
+      <stop offset="0%" stop-color="#7C3FD4"/>
+      <stop offset="100%" stop-color="#3D1580"/>
+    </radialGradient>
+    <clipPath id="lensClip">
+      <circle cx="460" cy="430" r="290"/>
+    </clipPath>
+    <filter id="softGlow">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1024" height="1024" rx="180" fill="#1A0830"/>
+
+  <!-- Lens outer ring glow -->
+  <circle cx="460" cy="430" r="316" fill="none" stroke="#B06AF0" stroke-width="4" stroke-opacity="0.3" filter="url(#softGlow)"/>
+
+  <!-- Lens body (dark glass) -->
+  <circle cx="460" cy="430" r="290" fill="#1E0845"/>
+  <!-- Treemap blocks inside lens -->
+  <g clip-path="url(#lensClip)">
+    <!-- Row 1 -->
+    <rect x="170" y="140" width="200" height="200" rx="0" fill="#FF6B6B"/>
+    <rect x="370" y="140" width="120" height="200" rx="0" fill="#FF9FF3"/>
+    <rect x="490" y="140" width="260" height="200" rx="0" fill="#A29BFE"/>
+    <!-- Row 2 -->
+    <rect x="170" y="340" width="160" height="180" rx="0" fill="#FD79A8"/>
+    <rect x="330" y="340" width="220" height="180" rx="0" fill="#6C5CE7"/>
+    <rect x="550" y="340" width="200" height="180" rx="0" fill="#E17055"/>
+    <!-- Row 3 -->
+    <rect x="170" y="520" width="280" height="200" rx="0" fill="#B8C1CC"/>
+    <rect x="450" y="520" width="140" height="200" rx="0" fill="#74B9FF"/>
+    <rect x="590" y="520" width="160" height="200" rx="0" fill="#55EFC4"/>
+    <!-- Cell borders -->
+    <rect x="170" y="140" width="580" height="580" fill="none" stroke="#1E0845" stroke-width="5"/>
+    <line x1="370" y1="140" x2="370" y2="720" stroke="#1E0845" stroke-width="4"/>
+    <line x1="490" y1="140" x2="490" y2="340" stroke="#1E0845" stroke-width="4"/>
+    <line x1="330" y1="340" x2="330" y2="520" stroke="#1E0845" stroke-width="4"/>
+    <line x1="550" y1="340" x2="550" y2="520" stroke="#1E0845" stroke-width="4"/>
+    <line x1="450" y1="520" x2="450" y2="720" stroke="#1E0845" stroke-width="4"/>
+    <line x1="590" y1="520" x2="590" y2="720" stroke="#1E0845" stroke-width="4"/>
+    <line x1="170" y1="340" x2="750" y2="340" stroke="#1E0845" stroke-width="4"/>
+    <line x1="170" y1="520" x2="750" y2="520" stroke="#1E0845" stroke-width="4"/>
+  </g>
+
+  <!-- Lens rim -->
+  <circle cx="460" cy="430" r="290" fill="none" stroke="#B06AF0" stroke-width="30"/>
+  <!-- Lens shine -->
+  <ellipse cx="380" cy="310" rx="80" ry="44" fill="#FFFFFF" fill-opacity="0.14" transform="rotate(-25,380,310)"/>
+
+  <!-- Handle -->
+  <line x1="694" y1="664" x2="870" y2="840" stroke="#7C3FD4" stroke-width="70" stroke-linecap="round"/>
+  <line x1="694" y1="664" x2="870" y2="840" stroke="#B06AF0" stroke-width="40" stroke-linecap="round"/>
+  <!-- Handle grip lines -->
+  <line x1="738" y1="708" x2="780" y2="750" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" stroke-opacity="0.4"/>
+  <line x1="760" y1="730" x2="802" y2="772" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" stroke-opacity="0.4"/>
+</svg>

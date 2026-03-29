@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg5" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0%" stop-color="#FB923C"/>
+      <stop offset="100%" stop-color="#FBBF24"/>
+    </linearGradient>
+    <linearGradient id="barFull" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#EF4444"/>
+      <stop offset="100%" stop-color="#DC2626"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg5)"/>
+  <!-- Layer 2: Disk filling up - diagonal bars showing space consumption -->
+  <!-- Disk outline -->
+  <ellipse cx="512" cy="470" rx="310" ry="230" fill="white" opacity="0.15"/>
+  <ellipse cx="512" cy="470" rx="310" ry="230" fill="none" stroke="white" stroke-width="30" opacity="0.6"/>
+  <!-- Fill bars inside disk showing usage - getting fuller diagonally -->
+  <ellipse cx="512" cy="470" rx="240" ry="170" fill="#EF4444" opacity="0.7"/>
+  <ellipse cx="512" cy="470" rx="180" ry="120" fill="#FBBF24" opacity="0.8"/>
+  <ellipse cx="512" cy="470" rx="100" ry="60" fill="white" opacity="0.9"/>
+  <!-- Usage percentage -->
+  <text x="512" y="495" font-family="Arial" font-size="88" fill="#EF4444" text-anchor="middle" font-weight="bold">87%</text>
+  <!-- Warning arrow pointing up diagonally -->
+  <path d="M 700 700 L 820 540" stroke="white" stroke-width="24" stroke-linecap="round"/>
+  <polygon points="820,540 780,570 800,600" fill="white"/>
+  <!-- Small disk icon at arrow origin -->
+  <rect x="640" y="720" width="120" height="80" rx="16" fill="white" opacity="0.8"/>
+  <text x="700" y="775" font-family="monospace" font-size="52" fill="#FB923C" text-anchor="middle">HDD</text>
+  <!-- Layer 3: exclamation warning -->
+  <circle cx="840" cy="480" r="52" fill="white"/>
+  <text x="840" y="506" font-family="Arial" font-size="72" fill="#EF4444" text-anchor="middle" font-weight="bold">!</text>
+</svg>

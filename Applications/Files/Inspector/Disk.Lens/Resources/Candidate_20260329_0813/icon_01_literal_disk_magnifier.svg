@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Background: deep teal gradient -->
+  <defs>
+    <radialGradient id="bg1" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#1A4A5E"/>
+      <stop offset="100%" stop-color="#0A2030"/>
+    </radialGradient>
+    <radialGradient id="diskGrad" cx="50%" cy="40%" r="55%">
+      <stop offset="0%" stop-color="#4DD9C0"/>
+      <stop offset="60%" stop-color="#1AADA8"/>
+      <stop offset="100%" stop-color="#0D7A7A"/>
+    </radialGradient>
+    <radialGradient id="lensGrad" cx="40%" cy="35%" r="60%">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#26D7E0" stop-opacity="0.10"/>
+    </radialGradient>
+    <filter id="glow1">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1024" height="1024" rx="180" fill="url(#bg1)"/>
+
+  <!-- Hard disk body -->
+  <rect x="160" y="220" width="580" height="440" rx="50" fill="url(#diskGrad)" filter="url(#glow1)"/>
+  <!-- Disk inner shadow -->
+  <rect x="185" y="245" width="530" height="390" rx="36" fill="none" stroke="#FFFFFF" stroke-opacity="0.18" stroke-width="4"/>
+  <!-- Disk platters (horizontal lines) -->
+  <line x1="200" y1="340" x2="720" y2="340" stroke="#0A5A5A" stroke-width="8" stroke-opacity="0.6"/>
+  <line x1="200" y1="440" x2="720" y2="440" stroke="#0A5A5A" stroke-width="8" stroke-opacity="0.6"/>
+  <line x1="200" y1="540" x2="720" y2="540" stroke="#0A5A5A" stroke-width="8" stroke-opacity="0.6"/>
+  <!-- Disk label area -->
+  <rect x="230" y="270" width="200" height="80" rx="12" fill="#0D7A7A"/>
+  <rect x="248" y="288" width="160" height="14" rx="7" fill="#4DD9C0" fill-opacity="0.7"/>
+  <rect x="248" y="316" width="100" height="14" rx="7" fill="#4DD9C0" fill-opacity="0.4"/>
+  <!-- Connector port -->
+  <rect x="620" y="540" width="100" height="50" rx="8" fill="#0A5A5A"/>
+  <rect x="636" y="552" width="16" height="26" rx="4" fill="#4DD9C0" fill-opacity="0.6"/>
+  <rect x="660" y="552" width="16" height="26" rx="4" fill="#4DD9C0" fill-opacity="0.6"/>
+  <rect x="684" y="552" width="16" height="26" rx="4" fill="#4DD9C0" fill-opacity="0.6"/>
+
+  <!-- Magnifier glass circle -->
+  <circle cx="680" cy="660" r="190" fill="#1A3A50" stroke="#26D7E0" stroke-width="28"/>
+  <circle cx="680" cy="660" r="162" fill="url(#lensGrad)" stroke="#4DD9C0" stroke-width="6" stroke-opacity="0.5"/>
+
+  <!-- Mini treemap inside lens -->
+  <rect x="540" y="530" width="80" height="90" rx="6" fill="#FF6B6B" fill-opacity="0.85"/>
+  <rect x="628" y="530" width="50" height="90" rx="6" fill="#FFD93D" fill-opacity="0.85"/>
+  <rect x="540" y="628" width="60" height="60" rx="6" fill="#6BCB77" fill-opacity="0.85"/>
+  <rect x="608" y="628" width="70" height="60" rx="6" fill="#4D96FF" fill-opacity="0.85"/>
+
+  <!-- Magnifier handle -->
+  <line x1="826" y1="806" x2="920" y2="900" stroke="#26D7E0" stroke-width="62" stroke-linecap="round"/>
+  <line x1="826" y1="806" x2="920" y2="900" stroke="#4DD9C0" stroke-width="36" stroke-linecap="round"/>
+</svg>

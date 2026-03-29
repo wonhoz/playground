@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg4" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1A0800"/>
+      <stop offset="100%" stop-color="#0A0A0A"/>
+    </linearGradient>
+    <linearGradient id="forgeGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FF6D00"/>
+      <stop offset="100%" stop-color="#8B2500"/>
+    </linearGradient>
+    <linearGradient id="moltenGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFD740"/>
+      <stop offset="50%" stop-color="#FF6D00"/>
+      <stop offset="100%" stop-color="#BF360C"/>
+    </linearGradient>
+    <linearGradient id="moldGrad" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0%" stop-color="#37474F"/>
+      <stop offset="100%" stop-color="#607D8B"/>
+    </linearGradient>
+    <filter id="glow4a">
+      <feDropShadow dx="0" dy="0" stdDeviation="30" flood-color="#FF6D00" flood-opacity="0.9"/>
+    </filter>
+    <filter id="glow4b">
+      <feDropShadow dx="0" dy="0" stdDeviation="16" flood-color="#FFD740" flood-opacity="0.8"/>
+    </filter>
+  </defs>
+  <rect width="1024" height="1024" rx="180" fill="url(#bg4)"/>
+
+  <!-- Layer 2: Forge furnace body -->
+  <rect x="280" y="300" width="464" height="380" rx="30" fill="url(#forgeGrad)" stroke="#FF6D00" stroke-width="8" filter="url(#glow4a)"/>
+  <!-- Furnace door opening -->
+  <ellipse cx="512" cy="490" rx="160" ry="140" fill="#1A0400"/>
+  <!-- Molten glow inside -->
+  <ellipse cx="512" cy="530" rx="130" ry="100" fill="#FF6D00" opacity="0.4"/>
+  <ellipse cx="512" cy="560" rx="90" ry="65" fill="#FFD740" opacity="0.35"/>
+
+  <!-- Layer 2: Molten metal pouring stream -->
+  <path d="M 512 680 C 512 680 490 750 485 800 C 481 840 510 860 512 860 C 514 860 543 840 539 800 C 534 750 512 680 512 680 Z"
+        fill="url(#moltenGrad)" filter="url(#glow4b)"/>
+
+  <!-- Layer 3: Mold (ICO shape) at bottom -->
+  <rect x="370" y="840" width="284" height="130" rx="16" fill="url(#moldGrad)" stroke="#90A4AE" stroke-width="6"/>
+  <!-- ICO text in mold -->
+  <text x="512" y="920" font-family="'Segoe UI', Arial, sans-serif" font-size="80" font-weight="900"
+        fill="#FFD740" text-anchor="middle" dominant-baseline="middle" filter="url(#glow4b)">ICO</text>
+
+  <!-- Layer 3: Input format tags being fed into furnace top -->
+  <rect x="300" y="180" width="120" height="60" rx="10" fill="#1A3050" stroke="#4FC3F7" stroke-width="4"/>
+  <text x="360" y="220" font-family="'Segoe UI', Arial, sans-serif" font-size="40" font-weight="800"
+        fill="#4FC3F7" text-anchor="middle" dominant-baseline="middle">SVG</text>
+
+  <rect x="452" y="160" width="120" height="60" rx="10" fill="#1A3020" stroke="#A5D6A7" stroke-width="4"/>
+  <text x="512" y="200" font-family="'Segoe UI', Arial, sans-serif" font-size="40" font-weight="800"
+        fill="#A5D6A7" text-anchor="middle" dominant-baseline="middle">PNG</text>
+
+  <rect x="604" y="180" width="120" height="60" rx="10" fill="#3A1A10" stroke="#FF8A65" stroke-width="4"/>
+  <text x="664" y="220" font-family="'Segoe UI', Arial, sans-serif" font-size="40" font-weight="800"
+        fill="#FF8A65" text-anchor="middle" dominant-baseline="middle">JPG</text>
+
+  <!-- Arrows pointing down into furnace -->
+  <polygon points="360,248 348,290 372,290" fill="#4FC3F7" opacity="0.7"/>
+  <polygon points="512,228 500,270 524,270" fill="#A5D6A7" opacity="0.7"/>
+  <polygon points="664,248 652,290 676,290" fill="#FF8A65" opacity="0.7"/>
+
+  <!-- Layer 3: Furnace rivets/bolts -->
+  <circle cx="310" cy="340" r="12" fill="#90A4AE" opacity="0.7"/>
+  <circle cx="714" cy="340" r="12" fill="#90A4AE" opacity="0.7"/>
+  <circle cx="310" cy="640" r="12" fill="#90A4AE" opacity="0.7"/>
+  <circle cx="714" cy="640" r="12" fill="#90A4AE" opacity="0.7"/>
+
+  <!-- Ember sparks -->
+  <circle cx="440" cy="718" r="6" fill="#FFD740" opacity="0.8" filter="url(#glow4b)"/>
+  <circle cx="580" cy="695" r="8" fill="#FF6D00" opacity="0.9" filter="url(#glow4b)"/>
+  <circle cx="456" cy="755" r="5" fill="#FF7043" opacity="0.7"/>
+  <circle cx="570" cy="740" r="6" fill="#FFD740" opacity="0.6"/>
+</svg>

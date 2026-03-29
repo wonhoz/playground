@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- 배경: 웜 오렌지-앰버 그라디언트 -->
+  <defs>
+    <radialGradient id="bg3" cx="40%" cy="35%" r="70%">
+      <stop offset="0%" stop-color="#FF8C00"/>
+      <stop offset="60%" stop-color="#D44800"/>
+      <stop offset="100%" stop-color="#7A1F00"/>
+    </radialGradient>
+    <linearGradient id="bowGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#F5D020"/>
+      <stop offset="100%" stop-color="#C8860A"/>
+    </linearGradient>
+    <filter id="glow3">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="180" fill="url(#bg3)"/>
+
+  <!-- 달 (밝은 앰버 원) 배경 장식 -->
+  <circle cx="740" cy="250" r="160" fill="#FFD740" fill-opacity="0.25"/>
+  <circle cx="740" cy="250" r="130" fill="#FFD740" fill-opacity="0.20"/>
+
+  <!-- 활 (bow) — 왼쪽에 세로로 -->
+  <!-- 활 곡선 (두꺼운 황금색 원호) -->
+  <path d="M 310 200 Q 190 512 310 824"
+        stroke="url(#bowGrad)" stroke-width="56" fill="none" stroke-linecap="round"/>
+  <!-- 활시위 (얇은 흰색 선) -->
+  <line x1="310" y1="200" x2="310" y2="824" stroke="#FFD740" stroke-width="18" stroke-linecap="round"/>
+
+  <!-- 화살 (대각선, 힘차게 날아가는 방향) -->
+  <!-- 화살 샤프트 -->
+  <line x1="310" y1="512" x2="830" y2="180" stroke="#F5F5F5" stroke-width="26" stroke-linecap="round"/>
+  <!-- 화살촉 (SVG 아이콘 모양 — 아이콘을 겨냥) -->
+  <polygon points="855,164 790,168 816,220" fill="#F5D020"/>
+  <!-- 화살 깃털 -->
+  <path d="M 310 512 L 270 490 L 290 530 Z" fill="#FF4A1A"/>
+  <path d="M 310 512 L 268 534 L 296 508 Z" fill="#FFAD42"/>
+
+  <!-- 목표물: 아이콘 카드 (우상단 — 화살촉 방향) -->
+  <!-- 아이콘 카드 그림자 -->
+  <rect x="780" y="130" width="170" height="170" rx="22" fill="#3A1000" fill-opacity="0.5"/>
+  <!-- 아이콘 카드 -->
+  <rect x="770" y="120" width="170" height="170" rx="22" fill="#FFFFFF"/>
+  <!-- 카드 내부 — 별 아이콘 -->
+  <polygon points="855,148 867,180 902,180 876,200 886,232 855,212 824,232 834,200 808,180 843,180"
+           fill="#FF8C00"/>
+
+  <!-- 과녁 링 (아이콘 카드 뒤에) -->
+  <circle cx="855" cy="205" r="110" fill="none" stroke="#FFD740" stroke-width="12" stroke-dasharray="20 15"/>
+
+  <!-- 타겟 히트 표시 (화살이 꽂힌 느낌) -->
+  <circle cx="855" cy="205" r="22" fill="#FF4A1A" filter="url(#glow3)"/>
+  <circle cx="855" cy="205" r="10" fill="#FFFF80"/>
+
+  <!-- 바닥 지평선 (간략한 배경감) -->
+  <path d="M 60 860 Q 200 820 400 840 Q 600 860 800 830 Q 900 818 964 840 L 964 920 L 60 920 Z"
+        fill="#3A1500" fill-opacity="0.55"/>
+
+  <!-- 왼쪽 하단 "HUNT" 텍스트 -->
+  <text x="120" y="960" font-family="Arial Black, sans-serif" font-size="90" fill="#F5D020"
+        font-weight="bold" letter-spacing="12">HUNT</text>
+</svg>

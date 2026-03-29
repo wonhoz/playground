@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: Background -->
+  <defs>
+    <linearGradient id="bg3" x1="20%" y1="0%" x2="80%" y2="100%">
+      <stop offset="0%" stop-color="#D4F5E9"/>
+      <stop offset="100%" stop-color="#A8E6CF"/>
+    </linearGradient>
+    <filter id="treeshadow">
+      <feDropShadow dx="0" dy="8" stdDeviation="14" flood-color="#00000030"/>
+    </filter>
+  </defs>
+  <rect width="1024" height="1024" rx="180" fill="url(#bg3)"/>
+
+  <!-- Layer 2: Tree silhouette (trunk + branches) -->
+  <g filter="url(#treeshadow)">
+    <!-- Trunk -->
+    <rect x="472" y="620" width="80" height="240" rx="20" fill="#2D7A4F"/>
+
+    <!-- Ground base -->
+    <ellipse cx="512" cy="870" rx="200" ry="32" fill="#2D7A4F" opacity="0.4"/>
+
+    <!-- Main canopy layers -->
+    <!-- Bottom layer (widest) -->
+    <ellipse cx="512" cy="600" rx="310" ry="120" fill="#27AE60"/>
+    <!-- Middle layer -->
+    <ellipse cx="512" cy="480" rx="240" ry="110" fill="#2ECC71"/>
+    <!-- Top layer -->
+    <ellipse cx="512" cy="360" rx="170" ry="100" fill="#58D68D"/>
+    <!-- Crown -->
+    <ellipse cx="512" cy="262" rx="100" ry="80" fill="#82E0AA"/>
+  </g>
+
+  <!-- Layer 3: JSON bracket leaves on branches -->
+  <!-- Left large branch leaf: {} -->
+  <text x="248" y="528" text-anchor="middle" dominant-baseline="middle"
+        font-family="'Courier New', monospace" font-size="90" font-weight="900"
+        fill="#FFFFFF" opacity="0.92">{}</text>
+
+  <!-- Right large branch leaf: [] -->
+  <text x="776" y="528" text-anchor="middle" dominant-baseline="middle"
+        font-family="'Courier New', monospace" font-size="90" font-weight="900"
+        fill="#FFFDE0" opacity="0.92">[]</text>
+
+  <!-- Middle branch left: "" -->
+  <text x="316" y="418" text-anchor="middle" dominant-baseline="middle"
+        font-family="'Courier New', monospace" font-size="74" font-weight="900"
+        fill="#FFE082" opacity="0.88">""</text>
+
+  <!-- Middle branch right: ## -->
+  <text x="708" y="418" text-anchor="middle" dominant-baseline="middle"
+        font-family="'Courier New', monospace" font-size="74" font-weight="900"
+        fill="#FF8A80" opacity="0.88">##</text>
+
+  <!-- Top crown: root {} -->
+  <text x="512" y="268" text-anchor="middle" dominant-baseline="middle"
+        font-family="'Courier New', monospace" font-size="80" font-weight="900"
+        fill="#FFFFFF" opacity="0.95">{$}</text>
+</svg>

@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg6" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0%" stop-color="#FDE68A"/>
+      <stop offset="100%" stop-color="#F97316"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg6)"/>
+  <!-- Layer 2: Diagonal JSON data stream - key:value pairs cascading diagonally -->
+  <!-- Data rows flowing diagonally -->
+  <g opacity="0.9">
+    <!-- Row 1 - top left, angled -->
+    <rect x="150" y="200" width="500" height="82" rx="16" fill="white" opacity="0.95"/>
+    <text x="175" y="258" font-family="monospace" font-size="60" fill="#F97316" font-weight="bold">"name":</text>
+    <text x="400" y="258" font-family="monospace" font-size="60" fill="#1D4ED8">"Alice"</text>
+    <!-- Row 2 - shifted right and down -->
+    <rect x="250" y="340" width="560" height="82" rx="16" fill="white" opacity="0.88"/>
+    <text x="275" y="398" font-family="monospace" font-size="60" fill="#F97316" font-weight="bold">"age":</text>
+    <text x="470" y="398" font-family="monospace" font-size="60" fill="#059669">28</text>
+    <!-- Row 3 - shifted more right and down -->
+    <rect x="350" y="480" width="530" height="82" rx="16" fill="white" opacity="0.80"/>
+    <text x="375" y="538" font-family="monospace" font-size="60" fill="#F97316" font-weight="bold">"city":</text>
+    <text x="560" y="538" font-family="monospace" font-size="60" fill="#1D4ED8">"Seoul"</text>
+    <!-- Row 4 - furthest right -->
+    <rect x="430" y="620" width="470" height="82" rx="16" fill="white" opacity="0.70"/>
+    <text x="455" y="678" font-family="monospace" font-size="60" fill="#F97316" font-weight="bold">"ok":</text>
+    <text x="600" y="678" font-family="monospace" font-size="60" fill="#DC2626">true</text>
+  </g>
+  <!-- Layer 3: Large { } brackets framing, diagonal arrows -->
+  <text x="132" y="800" font-family="monospace" font-size="220" fill="white" opacity="0.35" font-weight="bold">{</text>
+  <text x="760" y="350" font-family="monospace" font-size="220" fill="white" opacity="0.35" font-weight="bold">}</text>
+  <!-- Diagonal motion arrow -->
+  <path d="M 230 820 Q 512 760 800 340" stroke="white" stroke-width="8" stroke-dasharray="20,12" fill="none" opacity="0.4"/>
+</svg>

@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0D9488"/>
+      <stop offset="100%" stop-color="#14B8A6"/>
+    </linearGradient>
+    <linearGradient id="cardGrad2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#F0FDFB"/>
+      <stop offset="100%" stop-color="#CCFBF1"/>
+    </linearGradient>
+    <filter id="shadow2">
+      <feDropShadow dx="0" dy="10" stdDeviation="14" flood-color="#065F57" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1024" height="1024" rx="200" fill="url(#bg2)"/>
+
+  <!-- Decorative hex grid dots -->
+  <circle cx="150" cy="150" r="18" fill="#FFFFFF" opacity="0.12"/>
+  <circle cx="874" cy="150" r="18" fill="#FFFFFF" opacity="0.12"/>
+  <circle cx="150" cy="874" r="18" fill="#FFFFFF" opacity="0.12"/>
+  <circle cx="874" cy="874" r="18" fill="#FFFFFF" opacity="0.12"/>
+  <circle cx="512" cy="110" r="14" fill="#FFFFFF" opacity="0.10"/>
+  <circle cx="512" cy="914" r="14" fill="#FFFFFF" opacity="0.10"/>
+
+  <!-- Main card: hash comparison panel -->
+  <rect x="130" y="190" width="764" height="644" rx="40" fill="url(#cardGrad2)" filter="url(#shadow2)"/>
+
+  <!-- Card header bar -->
+  <rect x="130" y="190" width="764" height="90" rx="40" fill="#0F766E"/>
+  <rect x="130" y="230" width="764" height="50" fill="#0F766E"/>
+  <!-- Header dots -->
+  <circle cx="200" cy="235" r="16" fill="#2DD4BF"/>
+  <circle cx="248" cy="235" r="16" fill="#A7F3D0"/>
+  <circle cx="296" cy="235" r="16" fill="#6EE7B7"/>
+  <!-- Header label -->
+  <text x="512" y="250" text-anchor="middle" font-family="'Courier New', monospace" font-size="52" font-weight="700" fill="#CCFBF1">SHA-256 COMPARE</text>
+
+  <!-- File A label -->
+  <rect x="165" y="310" width="120" height="44" rx="10" fill="#0D9488" opacity="0.8"/>
+  <text x="225" y="342" text-anchor="middle" font-family="Arial, sans-serif" font-size="36" font-weight="700" fill="#FFFFFF">FILE A</text>
+
+  <!-- Hash row 1 -->
+  <rect x="165" y="366" width="694" height="58" rx="10" fill="#E0FDF4" stroke="#2DD4BF" stroke-width="3"/>
+  <text x="200" y="407" font-family="'Courier New', monospace" font-size="34" fill="#065F57" font-weight="600">3A9F • E841 • 72DC • B3F0</text>
+
+  <!-- File B label -->
+  <rect x="165" y="446" width="120" height="44" rx="10" fill="#0F766E" opacity="0.8"/>
+  <text x="225" y="478" text-anchor="middle" font-family="Arial, sans-serif" font-size="36" font-weight="700" fill="#FFFFFF">FILE B</text>
+
+  <!-- Hash row 2 (matching) -->
+  <rect x="165" y="502" width="694" height="58" rx="10" fill="#E0FDF4" stroke="#2DD4BF" stroke-width="3"/>
+  <text x="200" y="543" font-family="'Courier New', monospace" font-size="34" fill="#065F57" font-weight="600">3A9F • E841 • 72DC • B3F0</text>
+
+  <!-- Equals / match indicator -->
+  <rect x="165" y="582" width="694" height="8" rx="4" fill="#2DD4BF" opacity="0.4"/>
+
+  <!-- MATCH badge -->
+  <rect x="336" y="608" width="352" height="84" rx="20" fill="#0D9488"/>
+  <text x="512" y="663" text-anchor="middle" font-family="Arial Black, sans-serif" font-size="52" font-weight="900" fill="#FFFFFF" letter-spacing="4">MATCH</text>
+
+  <!-- Bottom: two mini file icons -->
+  <g>
+    <!-- File 1 mini -->
+    <rect x="212" y="720" width="160" height="80" rx="10" fill="#CCFBF1" stroke="#2DD4BF" stroke-width="4"/>
+    <path d="M340 720 L372 752 L340 752 Z" fill="#5EEAD4" opacity="0.7"/>
+    <rect x="226" y="742" width="100" height="10" rx="5" fill="#0D9488" opacity="0.5"/>
+    <rect x="226" y="760" width="80" height="10" rx="5" fill="#0D9488" opacity="0.4"/>
+  </g>
+  <g>
+    <!-- File 2 mini -->
+    <rect x="652" y="720" width="160" height="80" rx="10" fill="#CCFBF1" stroke="#2DD4BF" stroke-width="4"/>
+    <path d="M780 720 L812 752 L780 752 Z" fill="#5EEAD4" opacity="0.7"/>
+    <rect x="666" y="742" width="100" height="10" rx="5" fill="#0D9488" opacity="0.5"/>
+    <rect x="666" y="760" width="80" height="10" rx="5" fill="#0D9488" opacity="0.4"/>
+  </g>
+  <!-- Arrow between -->
+  <line x1="386" y1="760" x2="638" y2="760" stroke="#2DD4BF" stroke-width="8" stroke-dasharray="16,10"/>
+  <polygon points="638,744 672,760 638,776" fill="#2DD4BF"/>
+</svg>

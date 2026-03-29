@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg5" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#BAE6FD"/>
+      <stop offset="100%" stop-color="#0284C7"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg5)"/>
+  <!-- Layer 2: Network packets flowing diagonally through ports -->
+  <!-- Port "tunnels" - diagonal channels -->
+  <rect x="140" y="200" width="120" height="620" rx="30" fill="white" opacity="0.2"/>
+  <rect x="452" y="160" width="120" height="680" rx="30" fill="white" opacity="0.2"/>
+  <rect x="764" y="200" width="120" height="620" rx="30" fill="white" opacity="0.2"/>
+  <!-- Port labels -->
+  <text x="200" y="890" font-family="monospace" font-size="72" fill="white" text-anchor="middle" font-weight="bold">80</text>
+  <text x="512" y="910" font-family="monospace" font-size="72" fill="white" text-anchor="middle" font-weight="bold">443</text>
+  <text x="824" y="890" font-family="monospace" font-size="72" fill="white" text-anchor="middle" font-weight="bold">22</text>
+  <!-- Diagonal packets (arrows) flying through ports -->
+  <!-- Packet 1 - bright yellow, through port 80 -->
+  <ellipse cx="200" cy="380" rx="52" ry="32" fill="#FDE047" transform="rotate(-30, 200, 380)"/>
+  <ellipse cx="200" cy="540" rx="52" ry="32" fill="#FDE047" opacity="0.7" transform="rotate(-30, 200, 540)"/>
+  <!-- Packet 2 - green, through port 443 -->
+  <ellipse cx="512" cy="320" rx="52" ry="32" fill="#4ADE80" transform="rotate(-25, 512, 320)"/>
+  <ellipse cx="512" cy="500" rx="52" ry="32" fill="#4ADE80" opacity="0.7" transform="rotate(-25, 512, 500)"/>
+  <ellipse cx="512" cy="680" rx="52" ry="32" fill="#4ADE80" opacity="0.45" transform="rotate(-25, 512, 680)"/>
+  <!-- Packet 3 - red (blocked), port 22 -->
+  <ellipse cx="824" cy="420" rx="52" ry="32" fill="#F87171" transform="rotate(-20, 824, 420)"/>
+  <!-- Layer 3: Status indicators -->
+  <circle cx="200" cy="248" r="28" fill="#4ADE80"/>
+  <circle cx="512" cy="228" r="28" fill="#4ADE80"/>
+  <circle cx="824" cy="248" r="28" fill="#F87171"/>
+  <!-- cross for blocked -->
+  <line x1="808" y1="232" x2="840" y2="264" stroke="white" stroke-width="8" stroke-linecap="round"/>
+  <line x1="840" y1="232" x2="808" y2="264" stroke="white" stroke-width="8" stroke-linecap="round"/>
+</svg>

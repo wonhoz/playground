@@ -436,7 +436,7 @@ namespace StayAwake
             var nextActivity = _lastActivityTime.AddMinutes(_intervalMinutes) - DateTime.Now;
             if (nextActivity < TimeSpan.Zero) nextActivity = TimeSpan.Zero;
             var activeTime = _todayActiveTime + (DateTime.Now - _sessionRunStart);
-            _trayIcon.Text = $"StayAwake - 다음: {(int)nextActivity.TotalMinutes}분 {nextActivity.Seconds:D2}초 후 | {activeTime:hh\\:mm\\:ss} / {_dailySimCount}회";
+            _trayIcon.Text = $"StayAwake - 다음: {(int)nextActivity.TotalMinutes}분 {nextActivity.Seconds:D2}초 후 | {(int)activeTime.TotalHours:D2}:{activeTime:mm\\:ss} / {_dailySimCount}회";
         }
 
         private void ShowStats()
@@ -460,8 +460,8 @@ namespace StayAwake
 • 스킵율: {skipRate:F1}% (직접 사용 중이던 비율)
 
 [활성 시간]
-• 오늘 누적 활성 시간: {activeTime:hh\:mm\:ss}
-• 오늘 활성 비율: {activeRate:F1}% ({activeTime:hh\:mm\:ss} / {todayElapsed:hh\:mm\:ss})";
+• 오늘 누적 활성 시간: {(int)activeTime.TotalHours:D2}:{activeTime:mm\:ss}
+• 오늘 활성 비율: {activeRate:F1}% ({(int)activeTime.TotalHours:D2}:{activeTime:mm\:ss} / {(int)todayElapsed.TotalHours:D2}:{todayElapsed:mm\:ss})";
 
             DarkInfoDialog.Show("오늘의 통계", message, 570, 460);
         }
@@ -586,6 +586,7 @@ Slack 자리 비움 상태 방지 도구
         {
             if (_isRunning)
                 _todayActiveTime += DateTime.Now - _sessionRunStart;
+            _isRunning = false; // SaveDailyStats에서 이중 계산 방지
             SaveDailyStats(); // 종료 시 최종 통계 저장
             _scheduleTimer.Stop();
             _activityTimer.Stop();

@@ -212,49 +212,31 @@ public static class ImageConverter
         if (svg.Picture is null)
             throw new InvalidOperationException("SVG 파싱 실패");
 
-        // viewBox 기준 크기 우선 사용. 없으면 CullRect fallback (Left/Top 오프셋 보정 포함)
-        float srcW, srcH, left = 0, top = 0;
-        if (vbW > 0 && vbH > 0)
-        {
-            srcW = vbW;
-            srcH = vbH;
-        }
-        else
-        {
-            var cullRect = svg.Picture.CullRect;
-            left = cullRect.Left;
-            top  = cullRect.Top;
-            srcW = cullRect.Width;
-            srcH = cullRect.Height;
-        }
-        if (srcW <= 0 || srcH <= 0) { left = 0; top = 0; srcW = size; srcH = size; }
+        float nativeW = vbW > 0 ? vbW : svg.Picture.CullRect.Width;
+        float nativeH = vbH > 0 ? vbH : svg.Picture.CullRect.Height;
+        if (nativeW <= 0 || nativeH <= 0) { nativeW = size; nativeH = size; }
 
-        // 소형 사이즈는 2x 슈퍼샘플링으로 계단 현상 방지
-        int renderSize = size < 64 ? size * 2 : size;
+        int iW = (int)MathF.Ceiling(nativeW);
+        int iH = (int)MathF.Ceiling(nativeH);
 
-        var renderBmp = new SKBitmap(new SKImageInfo(renderSize, renderSize, SKColorType.Rgba8888, SKAlphaType.Premul));
-        using (var canvas = new SKCanvas(renderBmp))
+        // native 크기 캔버스에 스케일/오프셋 없이 그대로 렌더링
+        // → CullRect·필터 확장으로 인한 좌표 오프셋 문제 완전 회피
+        var nativeBmp = new SKBitmap(new SKImageInfo(iW, iH, SKColorType.Rgba8888, SKAlphaType.Premul));
+        using (var canvas = new SKCanvas(nativeBmp))
         {
             canvas.Clear(SKColors.Transparent);
-
-            float scale = Math.Min(renderSize / srcW, renderSize / srcH);
-            float dx = (renderSize - srcW * scale) / 2f - left * scale;
-            float dy = (renderSize - srcH * scale) / 2f - top  * scale;
-
-            canvas.Translate(dx, dy);
-            canvas.Scale(scale);
             canvas.DrawPicture(svg.Picture);
         }
 
-        if (renderSize == size)
-            return renderBmp;
+        if (iW == size && iH == size)
+            return nativeBmp;
 
-        // 2x → target 다운스케일 (SKSamplingOptions 사용)
-        var downscaled = renderBmp.Resize(
+        // target size로 다운스케일
+        var resized = nativeBmp.Resize(
             new SKImageInfo(size, size, SKColorType.Rgba8888, SKAlphaType.Premul),
             new SKSamplingOptions(SKFilterMode.Linear, SKMipmapMode.Linear));
-        renderBmp.Dispose();
-        return downscaled ?? throw new InvalidOperationException("SVG 다운스케일 실패");
+        nativeBmp.Dispose();
+        return resized ?? throw new InvalidOperationException("SVG 다운스케일 실패");
     }
 
     static SKBitmap ResizeFit(SKBitmap src, int size)

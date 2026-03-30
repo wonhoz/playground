@@ -147,18 +147,32 @@ public partial class App : Application
     }
 
     // ── 트레이 ────────────────────────────────────────────────────
+    // pack 리소스로 내장된 app.ico를 System.Drawing.Icon으로 변환
+    private static System.Drawing.Icon LoadTrayIcon()
+    {
+        try
+        {
+            var sri = System.Windows.Application.GetResourceStream(
+                new Uri("pack://application:,,,/Resources/app.ico"));
+            if (sri != null)
+            {
+                using var ms = new MemoryStream();
+                sri.Stream.CopyTo(ms);
+                ms.Position = 0;
+                return new System.Drawing.Icon(ms);
+            }
+        }
+        catch { }
+        return SystemIcons.Application;
+    }
+
     private void InitTray()
     {
-        // app.ico — AUMID IconUri와 동일한 파일을 트레이에도 사용 (Content 배포 파일)
-        var icoPath = Path.Combine(AppContext.BaseDirectory, "Resources", "app.ico");
-
         _tray = new NotifyIcon
         {
             Text    = "Clipboard Stacker",
             Visible = true,
-            Icon    = File.Exists(icoPath)
-                        ? new System.Drawing.Icon(icoPath)
-                        : SystemIcons.Application,
+            Icon    = LoadTrayIcon(),
         };
 
         var menu = new ContextMenuStrip { Renderer = new DarkMenuRenderer(), ShowImageMargin = true, ShowCheckMargin = true };

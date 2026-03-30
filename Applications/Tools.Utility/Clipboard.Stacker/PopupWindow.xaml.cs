@@ -1,4 +1,3 @@
-using System.IO;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Controls;
@@ -46,12 +45,10 @@ public partial class PopupWindow : Window
     {
         try
         {
-            var path = Path.Combine(AppContext.BaseDirectory, "Resources", "app.ico");
-            if (File.Exists(path))
-            {
-                using var s = File.OpenRead(path);
-                Icon = BitmapFrame.Create(s, BitmapCreateOptions.None, BitmapCacheOption.OnLoad);
-            }
+            var sri = Application.GetResourceStream(
+                new Uri("pack://application:,,,/Resources/app.ico"));
+            if (sri != null)
+                Icon = BitmapFrame.Create(sri.Stream, BitmapCreateOptions.None, BitmapCacheOption.OnLoad);
         }
         catch { }
     }

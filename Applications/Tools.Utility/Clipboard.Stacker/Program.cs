@@ -1,4 +1,3 @@
-using System.IO;
 using System.Runtime.InteropServices;
 using Microsoft.Win32;
 
@@ -14,7 +13,7 @@ internal static class Program
 
     /// <summary>
     /// AUMID를 레지스트리에 등록하고 프로세스에 적용한다.
-    /// - IconUri를 현재 app.ico 경로로 갱신하여 toast 알림 아이콘을 항상 최신으로 유지
+    /// - IconUri를 exe 경로로 등록 (ApplicationIcon으로 내장된 아이콘을 Windows가 추출)
     /// - SetCurrentProcessExplicitAppUserModelID는 UI 생성 전에 반드시 먼저 호출해야 함
     /// </summary>
     private static void RegisterAumid()
@@ -25,12 +24,11 @@ internal static class Program
             SetCurrentProcessExplicitAppUserModelID(Aumid);
 
             // 레지스트리에 AUMID + 아이콘 경로 등록 (toast 알림 아이콘 소스)
-            var iconPath = Path.Combine(AppContext.BaseDirectory, "Resources", "app.ico");
+            // exe 자체에 ApplicationIcon으로 내장되어 있으므로 exe 경로를 IconUri로 사용
             using var key = Registry.CurrentUser.CreateSubKey(
                 $@"SOFTWARE\Classes\AppUserModelId\{Aumid}");
             key.SetValue("DisplayName", "Clipboard Stacker");
-            if (File.Exists(iconPath))
-                key.SetValue("IconUri", iconPath);
+            key.SetValue("IconUri", Environment.ProcessPath!);
         }
         catch { /* 실패해도 앱 실행은 계속 */ }
     }

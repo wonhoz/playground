@@ -1,1 +1,0 @@
-$dll = 'C:\Users\[사용자명]\AppData\Local\SourceTree\app-3.4.23\SourceTree.Api.UI.Wpf.dll'# 백업Copy-Item $dll "$dll.bak"$b = [System.IO.File]::ReadAllBytes($dll)# Patch 1: BAML ConverterParameter 90->00$b[0x205778] = 0x30# Patch 2: getter always returns true$b[0x119A8] = 0x17  # ldc.i4.1$b[0x119A9] = 0x2A  # ret[System.IO.File]::WriteAllBytes($dll, $b)Write-Host "Done."

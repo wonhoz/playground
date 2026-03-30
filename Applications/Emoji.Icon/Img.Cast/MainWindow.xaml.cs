@@ -15,6 +15,7 @@ public partial class MainWindow : Window
     [DllImport("dwmapi.dll")] static extern int DwmSetWindowAttribute(IntPtr hwnd, int attr, ref int val, int sz);
 
     bool _converting = false;
+    bool _allIcoUnchecked = false;
     CancellationTokenSource? _cts;
     string? _lastOutputDir;
     AppSettings _settings = new();
@@ -133,6 +134,8 @@ public partial class MainWindow : Window
             await ShowSvgPreviewAsync(files[0]);
         else if (files.Length == 1 && files[0].EndsWith(".ico", StringComparison.OrdinalIgnoreCase))
             await ShowIcoPreviewAsync(files[0]);
+        else if (files.Length == 1 && IsBitmapPreviewable(files[0]))
+            await ShowBitmapPreviewAsync(files[0]);
         else
             ShowFileSummary(files);
 
@@ -204,23 +207,25 @@ public partial class MainWindow : Window
             return;
         }
 
-        string msg = $"✅ 성공: {result.Success}개\n❌ 실패: {result.Failed}개";
+        string statusMsg = $"완료 — 성공 {result.Success}개 / 실패 {result.Failed}개";
+        if (result.Skipped > 0) statusMsg += $" / 스킵 {result.Skipped}개 (동일 포맷)";
+        SetStatus(statusMsg);
 
-        if (result.Errors.Count > 0)
-        {
-            msg += "\n\n실패 목록:\n";
-            foreach (var (file, err) in result.Errors)
-                msg += $"• {Path.GetFileName(file)}\n  {err}\n";
-        }
-
-        SetStatus($"완료 — 성공 {result.Success}개 / 실패 {result.Failed}개");
-
-        if (_lastOutputDir is not null)
+        if (result.Success > 0 && _lastOutputDir is not null)
             BtnOpenFolder.Visibility = Visibility.Visible;
 
-        string title = result.Failed == 0 ? "변환 완료" : "변환 완료 (일부 실패)";
-        MessageBox.Show(msg.TrimEnd(), title, MessageBoxButton.OK,
-            result.Failed == 0 ? MessageBoxImage.Information : MessageBoxImage.Warning);
+        if (result.Failed > 0)
+        {
+            string msg = $"✅ 성공: {result.Success}개\n❌ 실패: {result.Failed}개\n\n실패 목록:\n";
+            foreach (var (file, err) in result.Errors)
+                msg += $"• {Path.GetFileName(file)}\n  {err}\n";
+            MessageBox.Show(msg.TrimEnd(), "변환 완료 (일부 실패)", MessageBoxButton.OK, MessageBoxImage.Warning);
+        }
+        else if (result.Skipped > 0 && result.Success == 0)
+        {
+            MessageBox.Show($"모든 파일이 이미 출력 포맷과 동일하여 스킵되었습니다.\n출력 포맷을 변경해 주세요.",
+                "스킵됨", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
 
         ResetDropZone();
     }
@@ -235,6 +240,30 @@ public partial class MainWindow : Window
         SvgPreviewImage.Source = BitmapToImageSource(bitmap);
         TbSvgFileName.Text = Path.GetFileName(icoPath);
         TbSvgSubInfo.Text  = "ICO 미리보기 · 1개 파일";
+
+        DropHint.Visibility        = Visibility.Collapsed;
+        FileSummary.Visibility     = Visibility.Collapsed;
+        SvgPreviewPanel.Visibility = Visibility.Visible;
+        SetStatus("파일을 드롭하면 자동으로 변환을 시작합니다");
+    }
+
+    // ─── PNG/JPG/BMP 미리보기 ────────────────────────────────────────────────
+    static bool IsBitmapPreviewable(string path)
+    {
+        var ext = Path.GetExtension(path).ToLowerInvariant();
+        return ext is ".png" or ".jpg" or ".jpeg" or ".bmp";
+    }
+
+    async Task ShowBitmapPreviewAsync(string path)
+    {
+        SetStatus("미리보기 렌더링 중…");
+        using var bitmap = await ImageConverter.RenderBitmapPreviewAsync(path, 240);
+        if (bitmap is null) { ShowFileSummary([path]); return; }
+
+        var ext = Path.GetExtension(path).ToUpperInvariant().TrimStart('.');
+        SvgPreviewImage.Source = BitmapToImageSource(bitmap);
+        TbSvgFileName.Text = Path.GetFileName(path);
+        TbSvgSubInfo.Text  = $"{ext} 미리보기 · 1개 파일";
 
         DropHint.Visibility        = Visibility.Collapsed;
         FileSummary.Visibility     = Visibility.Collapsed;
@@ -318,6 +347,11 @@ public partial class MainWindow : Window
             BtnCancel_Click(this, new RoutedEventArgs());
             e.Handled = true;
         }
+        else if (e.Key == System.Windows.Input.Key.OemQuestion)
+        {
+            HelpPopup.IsOpen = !HelpPopup.IsOpen;
+            e.Handled = true;
+        }
     }
 
     void ChkIco_Unchecked(object sender, RoutedEventArgs e)
@@ -327,14 +361,20 @@ public partial class MainWindow : Window
                           ChkIco48.IsChecked == true || ChkIco64.IsChecked == true ||
                           ChkIco128.IsChecked == true || ChkIco256.IsChecked == true;
         if (!anyChecked)
+        {
+            _allIcoUnchecked = true;
             SetStatus("모든 사이즈가 해제됨 — 변환 시 기본 사이즈 전체 사용 (16·32·48·64·128·256)");
+        }
     }
 
     void ChkIco_Checked(object sender, RoutedEventArgs e)
     {
         if (!IsLoaded) return;
-        if (TbStatus.Text.StartsWith("모든 사이즈가 해제됨"))
+        if (_allIcoUnchecked)
+        {
+            _allIcoUnchecked = false;
             SetStatus("파일을 드롭하면 자동으로 변환을 시작합니다");
+        }
     }
 
     void BtnOpenFolder_Click(object sender, RoutedEventArgs e)

@@ -5,7 +5,7 @@ using Svg.Skia;
 
 namespace ImgCast.Services;
 
-public record ConversionResult(int Success, int Failed, IReadOnlyList<(string File, string Error)> Errors, bool Cancelled = false);
+public record ConversionResult(int Success, int Failed, IReadOnlyList<(string File, string Error)> Errors, bool Cancelled = false, int Skipped = 0);
 
 public enum OutputFormat { ICO, PNG, JPG, BMP }
 public enum InputFilter  { All, SVG, PNG, JPG, BMP, ICO }
@@ -65,7 +65,7 @@ public static class ImageConverter
         IProgress<(int Current, int Total, string File)>? progress,
         CancellationToken ct)
     {
-        int success = 0, failed = 0;
+        int success = 0, failed = 0, skipped = 0;
         var errors = new List<(string, string)>();
         var sizes  = icoSizes is { Length: > 0 } ? icoSizes : DefaultIcoSizes;
         bool cancelled = false;
@@ -77,6 +77,21 @@ public static class ImageConverter
                 if (ct.IsCancellationRequested) { cancelled = true; break; }
                 string src = files[i];
                 progress?.Report((i + 1, files.Length, Path.GetFileName(src)));
+
+                // 동일 포맷 변환 스킵 (ICO→ICO는 재인코딩 의미 없음)
+                string srcExt = Path.GetExtension(src).ToLowerInvariant();
+                string outExt = output switch
+                {
+                    OutputFormat.ICO => ".ico",
+                    OutputFormat.JPG => ".jpg",
+                    OutputFormat.BMP => ".bmp",
+                    _                => ".png"
+                };
+                if (srcExt == outExt || (srcExt == ".jpeg" && outExt == ".jpg"))
+                {
+                    skipped++;
+                    continue;
+                }
 
                 try
                 {
@@ -91,7 +106,7 @@ public static class ImageConverter
             }
         }, CancellationToken.None);
 
-        return new ConversionResult(success, failed, errors, cancelled);
+        return new ConversionResult(success, failed, errors, cancelled, skipped);
     }
 
     // ─── 단일 파일 변환 ──────────────────────────────────────────────────────
@@ -252,6 +267,21 @@ public static class ImageConverter
     public static async Task<SKBitmap?> RenderIcoPreviewAsync(string path, int size = 240)
     {
         if (!path.EndsWith(".ico", StringComparison.OrdinalIgnoreCase)) return null;
+        try
+        {
+            return await Task.Run(() =>
+            {
+                using var original = SKBitmap.Decode(path);
+                if (original is null) return null;
+                return ResizeFit(original, size);
+            });
+        }
+        catch { return null; }
+    }
+
+    // ─── PNG/JPG/BMP 미리보기 렌더링 ───────────────────────────────────────
+    public static async Task<SKBitmap?> RenderBitmapPreviewAsync(string path, int size = 240)
+    {
         try
         {
             return await Task.Run(() =>

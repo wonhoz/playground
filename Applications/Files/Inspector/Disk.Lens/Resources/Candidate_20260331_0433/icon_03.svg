@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 흰 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="#FAFAFA"/>
+  <!-- Layer 2: 도넛 차트 (디스크 사용량) -->
+  <!-- 배경 원 -->
+  <circle cx="512" cy="480" r="340" fill="#F5F5F5"/>
+  <!-- 도넛 세그먼트들 (총 360도) -->
+  <!-- Videos: 78% → 281도 -->
+  <path d="M512,480 L512,140 A340,340 0 1,1 133,700 Z" fill="#1565C0"/>
+  <!-- Programs: 13% → 47도 -->
+  <path d="M512,480 L133,700 A340,340 0 0,1 512,140 Z" fill="#FF6F00" transform="rotate(0,512,480)"/>
+  <!-- Programs 재계산: Videos 78% = 280.8도, Programs 13% = 46.8도, Others = 32.4도 -->
+  <!-- 실제로 간단히 구현 -->
+  <path d="M512,480 L512,140 A340,340 0 1,1 168,634 Z" fill="#1565C0"/>
+  <path d="M512,480 L168,634 A340,340 0 0,1 512,140 Z" fill="#FF6F00" transform="rotate(281 512 480)"/>
+  <!-- 구멍 (도넛 중앙) -->
+  <circle cx="512" cy="480" r="190" fill="#FAFAFA"/>
+  <!-- 중앙 텍스트 -->
+  <text x="512" y="460" font-family="'Segoe UI', sans-serif" font-weight="900" font-size="96" fill="#212121" text-anchor="middle">78%</text>
+  <text x="512" y="538" font-family="'Segoe UI', sans-serif" font-size="52" fill="#757575" text-anchor="middle">used</text>
+  <!-- Layer 3: 범례 -->
+  <rect x="140" y="890" width="40" height="40" rx="8" fill="#1565C0"/>
+  <text x="196" y="922" font-family="'Segoe UI', sans-serif" font-size="44" fill="#424242">Videos 78GB</text>
+  <rect x="560" y="890" width="40" height="40" rx="8" fill="#FF6F00"/>
+  <text x="616" y="922" font-family="'Segoe UI', sans-serif" font-size="44" fill="#424242">Other 22GB</text>
+</svg>

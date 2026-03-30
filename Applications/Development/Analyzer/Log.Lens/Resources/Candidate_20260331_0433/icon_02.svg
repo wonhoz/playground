@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 앰버 배경 -->
+  <defs>
+    <linearGradient id="bg2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF8E1"/>
+      <stop offset="100%" stop-color="#FFE082"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg2)"/>
+  <!-- Layer 2: 배경 로그 라인들 (흐릿하게) -->
+  <rect x="80" y="140" width="640" height="54" rx="8" fill="#FFECB3" opacity="0.7"/>
+  <rect x="80" y="214" width="640" height="54" rx="8" fill="#FFECB3" opacity="0.7"/>
+  <rect x="80" y="288" width="640" height="54" rx="8" fill="#FFECB3" opacity="0.7"/>
+  <rect x="80" y="362" width="640" height="54" rx="8" fill="#FFCDD2" opacity="0.9"/>
+  <rect x="80" y="436" width="640" height="54" rx="8" fill="#FFECB3" opacity="0.7"/>
+  <rect x="80" y="510" width="640" height="54" rx="8" fill="#FFECB3" opacity="0.7"/>
+  <!-- ERROR 라인 텍스트 -->
+  <text x="96" y="400" font-family="'Consolas', monospace" font-size="44" fill="#B71C1C">[ERROR] Connection refused</text>
+  <!-- Layer 3: 돋보기 (ERROR 라인 위에 포커스) -->
+  <circle cx="500" cy="480" r="280" fill="none" stroke="#E65100" stroke-width="40"/>
+  <line x1="724" y1="704" x2="900" y2="880" stroke="#E65100" stroke-width="48" stroke-linecap="round"/>
+  <!-- 렌즈 안 확대된 ERROR -->
+  <ellipse cx="500" cy="480" rx="270" ry="270" fill="#FF8F00" opacity="0.1"/>
+  <text x="500" y="460" font-family="'Consolas', monospace" font-weight="700" font-size="72" fill="#B71C1C" text-anchor="middle">[ERROR]</text>
+  <text x="500" y="548" font-family="'Consolas', monospace" font-size="52" fill="#D32F2F" text-anchor="middle">Connection</text>
+  <!-- 렌즈 반사 -->
+  <ellipse cx="400" cy="360" rx="60" ry="40" fill="white" opacity="0.3" transform="rotate(-30 400 360)"/>
+</svg>

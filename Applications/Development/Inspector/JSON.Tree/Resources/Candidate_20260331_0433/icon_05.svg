@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 황록 그라데이션 배경 -->
+  <defs>
+    <linearGradient id="bg5" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F9FBE7"/>
+      <stop offset="100%" stop-color="#DCEDC8"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg5)"/>
+  <!-- Layer 2: 큰 중괄호 외곽 -->
+  <text x="60" y="720" font-family="'Consolas', monospace" font-weight="900" font-size="680" fill="#558B2F" opacity="0.15">{}</text>
+  <!-- 중괄호 테두리 (solid) -->
+  <text x="80" y="680" font-family="'Consolas', monospace" font-weight="900" font-size="600" fill="none" stroke="#7CB342" stroke-width="20">{</text>
+  <text x="560" y="680" font-family="'Consolas', monospace" font-weight="900" font-size="600" fill="none" stroke="#33691E" stroke-width="20">}</text>
+  <!-- Layer 3: 내부 트리 가지 패턴 -->
+  <!-- 루트에서 뻗어나가는 트리 -->
+  <circle cx="512" cy="300" r="48" fill="#F57F17"/>
+  <text x="512" y="318" font-family="'Consolas', monospace" font-size="40" fill="white" text-anchor="middle">root</text>
+  <line x1="512" y1="348" x2="300" y2="480" stroke="#8BC34A" stroke-width="16" stroke-linecap="round"/>
+  <line x1="512" y1="348" x2="724" y2="480" stroke="#8BC34A" stroke-width="16" stroke-linecap="round"/>
+  <line x1="512" y1="348" x2="512" y2="480" stroke="#8BC34A" stroke-width="16" stroke-linecap="round"/>
+  <circle cx="300" cy="520" r="40" fill="#E91E63"/>
+  <text x="300" y="538" font-family="'Consolas', monospace" font-size="36" fill="white" text-anchor="middle">[ ]</text>
+  <circle cx="512" cy="520" r="40" fill="#1565C0"/>
+  <text x="512" y="538" font-family="'Consolas', monospace" font-size="36" fill="white" text-anchor="middle">str</text>
+  <circle cx="724" cy="520" r="40" fill="#00838F"/>
+  <text x="724" y="538" font-family="'Consolas', monospace" font-size="36" fill="white" text-anchor="middle">num</text>
+  <!-- 리프들 -->
+  <line x1="300" y1="560" x2="200" y2="660" stroke="#AED581" stroke-width="12" stroke-linecap="round"/>
+  <line x1="300" y1="560" x2="400" y2="660" stroke="#AED581" stroke-width="12" stroke-linecap="round"/>
+  <circle cx="200" cy="700" r="32" fill="#FF7043"/>
+  <text x="200" y="718" font-family="'Consolas', monospace" font-size="28" fill="white" text-anchor="middle">true</text>
+  <circle cx="400" cy="700" r="32" fill="#AB47BC"/>
+  <text x="400" y="718" font-family="'Consolas', monospace" font-size="28" fill="white" text-anchor="middle">42</text>
+</svg>

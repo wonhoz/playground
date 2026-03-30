@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 비비드 그라데이션 -->
+  <defs>
+    <linearGradient id="bg5" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E8EAF6"/>
+      <stop offset="100%" stop-color="#B3E5FC"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg5)"/>
+  <!-- Layer 2: 서버 소켓 패널 -->
+  <rect x="160" y="200" width="700" height="600" rx="36" fill="#1A237E"/>
+  <!-- 소켓 구멍들 (2×3 격자) -->
+  <ellipse cx="320" cy="340" rx="60" ry="44" fill="#0D1B3E"/>
+  <ellipse cx="512" cy="340" rx="60" ry="44" fill="#0D1B3E"/>
+  <ellipse cx="704" cy="340" rx="60" ry="44" fill="#0D1B3E"/>
+  <ellipse cx="320" cy="500" rx="60" ry="44" fill="#0D1B3E"/>
+  <ellipse cx="512" cy="500" rx="60" ry="44" fill="#0D1B3E"/>
+  <ellipse cx="704" cy="500" rx="60" ry="44" fill="#0D1B3E"/>
+  <!-- 소켓 상태 LED들 -->
+  <circle cx="320" cy="340" r="20" fill="#00E676"/>
+  <circle cx="512" cy="340" r="20" fill="#00E676"/>
+  <circle cx="704" cy="340" r="20" fill="#FF5252"/>
+  <circle cx="320" cy="500" r="20" fill="#00E676"/>
+  <circle cx="512" cy="500" r="20" fill="#FFD600"/>
+  <circle cx="704" cy="500" r="20" fill="#00E676"/>
+  <!-- Layer 3: 포트 번호들 -->
+  <text x="320" y="660" font-family="'Consolas', monospace" font-weight="700" font-size="48" fill="#90CAF9" text-anchor="middle">:80</text>
+  <text x="512" y="660" font-family="'Consolas', monospace" font-weight="700" font-size="48" fill="#90CAF9" text-anchor="middle">:443</text>
+  <text x="704" y="660" font-family="'Consolas', monospace" font-weight="700" font-size="48" fill="#EF9A9A" text-anchor="middle">:3306</text>
+  <!-- 연결선 (서버→클라이언트) -->
+  <line x1="860" y1="340" x2="940" y2="260" stroke="#42A5F5" stroke-width="16" stroke-linecap="round"/>
+  <line x1="860" y1="420" x2="960" y2="400" stroke="#69F0AE" stroke-width="16" stroke-linecap="round"/>
+  <line x1="860" y1="500" x2="950" y2="540" stroke="#FFD600" stroke-width="16" stroke-linecap="round"/>
+  <!-- 연결선 끝 원들 -->
+  <circle cx="960" cy="260" r="20" fill="#42A5F5"/>
+  <circle cx="970" cy="400" r="20" fill="#69F0AE"/>
+  <circle cx="964" cy="540" r="20" fill="#FFD600"/>
+</svg>

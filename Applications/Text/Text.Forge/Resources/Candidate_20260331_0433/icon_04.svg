@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 퍼플 파스텔 배경 -->
+  <defs>
+    <linearGradient id="bg4" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F3E5F5"/>
+      <stop offset="100%" stop-color="#CE93D8"/>
+    </linearGradient>
+    <linearGradient id="beaker" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#E1BEE7"/>
+      <stop offset="100%" stop-color="#9C27B0"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg4)"/>
+  <!-- Layer 2: 비커 모양 -->
+  <!-- 비커 몸통 -->
+  <path d="M320,220 L320,600 Q320,800 512,820 Q704,800 704,600 L704,220 Z" fill="url(#beaker)" opacity="0.85"/>
+  <!-- 비커 목 -->
+  <rect x="360" y="140" width="304" height="90" rx="12" fill="#7B1FA2"/>
+  <!-- 비커 내용물 (텍스트 화학반응) -->
+  <text x="512" y="440" font-family="'Consolas', monospace" font-weight="700" font-size="88" fill="white" text-anchor="middle" opacity="0.9">&lt;/&gt;</text>
+  <text x="512" y="560" font-family="'Consolas', monospace" font-size="56" fill="#E1BEE7" text-anchor="middle">{ }</text>
+  <!-- 버블 효과 -->
+  <circle cx="420" cy="500" r="28" fill="white" opacity="0.4"/>
+  <circle cx="600" cy="460" r="20" fill="white" opacity="0.3"/>
+  <circle cx="480" cy="620" r="16" fill="white" opacity="0.35"/>
+  <!-- Layer 3: 위쪽 연기/변환 심볼들 -->
+  <circle cx="380" cy="100" r="36" fill="#E91E63" opacity="0.8"/>
+  <text x="380" y="116" font-family="'Consolas', monospace" font-size="36" fill="white" text-anchor="middle">AB</text>
+  <circle cx="512" cy="80" r="36" fill="#1565C0" opacity="0.8"/>
+  <text x="512" y="96" font-family="'Consolas', monospace" font-size="36" fill="white" text-anchor="middle">64</text>
+  <circle cx="644" cy="100" r="36" fill="#388E3C" opacity="0.8"/>
+  <text x="644" y="116" font-family="'Consolas', monospace" font-size="32" fill="white" text-anchor="middle">SHA</text>
+  <!-- 하단 결과 스트림 -->
+  <text x="512" y="880" font-family="'Consolas', monospace" font-size="56" fill="#6A1B9A" text-anchor="middle">48656c6c6f...</text>
+</svg>

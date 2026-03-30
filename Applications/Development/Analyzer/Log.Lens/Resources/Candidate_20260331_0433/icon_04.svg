@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 오렌지 파스텔 배경 -->
+  <defs>
+    <linearGradient id="bg4" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF3E0"/>
+      <stop offset="100%" stop-color="#FFCC80"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg4)"/>
+  <!-- Layer 2: 깔때기 체 (필터) -->
+  <!-- 입구 -->
+  <polygon points="160,180 864,180 640,460 384,460" fill="#FF8F00"/>
+  <!-- 체 격자 -->
+  <line x1="320" y1="220" x2="280" y2="460" stroke="#E65100" stroke-width="12"/>
+  <line x1="440" y1="200" x2="400" y2="460" stroke="#E65100" stroke-width="12"/>
+  <line x1="560" y1="200" x2="524" y2="460" stroke="#E65100" stroke-width="12"/>
+  <line x1="680" y1="220" x2="640" y2="460" stroke="#E65100" stroke-width="12"/>
+  <line x1="220" y1="290" x2="804" y2="290" stroke="#E65100" stroke-width="12" opacity="0.7"/>
+  <line x1="200" y1="360" x2="824" y2="360" stroke="#E65100" stroke-width="12" opacity="0.7"/>
+  <!-- 통로 -->
+  <rect x="440" y="460" width="144" height="180" rx="16" fill="#BF360C"/>
+  <!-- 출력 (필터된 로그) -->
+  <rect x="280" y="700" width="464" height="220" rx="20" fill="#E8F5E9" stroke="#388E3C" stroke-width="8"/>
+  <text x="512" y="770" font-family="'Consolas', monospace" font-size="52" fill="#1B5E20" text-anchor="middle">[ERROR]</text>
+  <text x="512" y="840" font-family="'Consolas', monospace" font-size="44" fill="#388E3C" text-anchor="middle">only errors</text>
+  <!-- Layer 3: 입력 로그들 (위) -->
+  <rect x="120" y="80" width="120" height="60" rx="12" fill="#1565C0" opacity="0.8"/>
+  <text x="180" y="122" font-family="'Consolas', monospace" font-size="36" fill="white" text-anchor="middle">INFO</text>
+  <rect x="400" y="70" width="120" height="60" rx="12" fill="#B71C1C" opacity="0.8"/>
+  <text x="460" y="112" font-family="'Consolas', monospace" font-size="36" fill="white" text-anchor="middle">ERR</text>
+  <rect x="680" y="80" width="120" height="60" rx="12" fill="#F57F17" opacity="0.8"/>
+  <text x="740" y="122" font-family="'Consolas', monospace" font-size="36" fill="white" text-anchor="middle">WARN</text>
+</svg>

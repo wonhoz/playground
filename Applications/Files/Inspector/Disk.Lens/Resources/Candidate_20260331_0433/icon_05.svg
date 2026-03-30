@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 비비드 그라데이션 -->
+  <defs>
+    <linearGradient id="bg5" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E8F5E9"/>
+      <stop offset="100%" stop-color="#B3E5FC"/>
+    </linearGradient>
+    <linearGradient id="diskGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#90A4AE"/>
+      <stop offset="100%" stop-color="#546E7A"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg5)"/>
+  <!-- Layer 2: HDD 원판 -->
+  <circle cx="512" cy="480" r="340" fill="url(#diskGrad)"/>
+  <circle cx="512" cy="480" r="280" fill="none" stroke="#B0BEC5" stroke-width="8"/>
+  <circle cx="512" cy="480" r="200" fill="none" stroke="#B0BEC5" stroke-width="6"/>
+  <circle cx="512" cy="480" r="120" fill="none" stroke="#B0BEC5" stroke-width="5"/>
+  <circle cx="512" cy="480" r="48" fill="#CFD8DC"/>
+  <circle cx="512" cy="480" r="24" fill="#90A4AE"/>
+  <!-- 헤드 암 -->
+  <line x1="512" y1="480" x2="800" y2="200" stroke="#FF6F00" stroke-width="20" stroke-linecap="round"/>
+  <circle cx="800" cy="200" r="36" fill="#FF6F00"/>
+  <!-- Layer 3: 용량 수치들 -->
+  <rect x="60" y="840" width="320" height="100" rx="20" fill="#1565C0"/>
+  <text x="220" y="904" font-family="'Segoe UI', sans-serif" font-weight="900" font-size="64" fill="white" text-anchor="middle">256 GB</text>
+  <rect x="400" y="840" width="224" height="100" rx="20" fill="#FF6F00"/>
+  <text x="512" y="904" font-family="'Segoe UI', sans-serif" font-weight="900" font-size="64" fill="white" text-anchor="middle">78%</text>
+  <rect x="644" y="840" width="320" height="100" rx="20" fill="#388E3C"/>
+  <text x="804" y="904" font-family="'Segoe UI', sans-serif" font-weight="900" font-size="60" fill="white" text-anchor="middle">56 GB free</text>
+</svg>

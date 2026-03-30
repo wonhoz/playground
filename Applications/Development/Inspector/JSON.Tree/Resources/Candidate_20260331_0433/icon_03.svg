@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 하늘 배경 -->
+  <defs>
+    <linearGradient id="bg3" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#E3F2FD"/>
+      <stop offset="100%" stop-color="#BBDEFB"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg3)"/>
+  <!-- Layer 2: 나무 트리 구조 -->
+  <!-- 줄기 -->
+  <rect x="488" y="580" width="48" height="300" rx="16" fill="#5D4037"/>
+  <!-- 지면 -->
+  <ellipse cx="512" cy="880" rx="200" ry="40" fill="#8BC34A" opacity="0.6"/>
+  <!-- 메인 가지들 -->
+  <line x1="512" y1="620" x2="240" y2="480" stroke="#795548" stroke-width="32" stroke-linecap="round"/>
+  <line x1="512" y1="580" x2="784" y2="440" stroke="#795548" stroke-width="32" stroke-linecap="round"/>
+  <line x1="512" y1="560" x2="512" y2="380" stroke="#5D4037" stroke-width="28" stroke-linecap="round"/>
+  <!-- 서브 가지들 -->
+  <line x1="240" y1="480" x2="140" y2="340" stroke="#A1887F" stroke-width="20" stroke-linecap="round"/>
+  <line x1="240" y1="480" x2="340" y2="340" stroke="#A1887F" stroke-width="20" stroke-linecap="round"/>
+  <line x1="784" y1="440" x2="684" y2="300" stroke="#A1887F" stroke-width="20" stroke-linecap="round"/>
+  <line x1="784" y1="440" x2="884" y2="310" stroke="#A1887F" stroke-width="20" stroke-linecap="round"/>
+  <line x1="512" y1="380" x2="512" y2="240" stroke="#8D6E63" stroke-width="18" stroke-linecap="round"/>
+  <!-- Layer 3: 노드 원들 (JSON 값들) -->
+  <!-- 루트 -->
+  <circle cx="512" cy="200" r="72" fill="#FFD600"/>
+  <text x="512" y="220" font-family="'Consolas', monospace" font-weight="900" font-size="52" fill="#333" text-anchor="middle">{ }</text>
+  <!-- 중간 노드들 -->
+  <circle cx="200" cy="300" r="56" fill="#66BB6A"/>
+  <text x="200" y="318" font-family="'Consolas', monospace" font-size="38" fill="white" text-anchor="middle">[ ]</text>
+  <circle cx="824" cy="270" r="56" fill="#42A5F5"/>
+  <text x="824" y="288" font-family="'Consolas', monospace" font-size="38" fill="white" text-anchor="middle">{ }</text>
+  <!-- 리프 노드들 -->
+  <circle cx="120" cy="180" r="44" fill="#EF5350"/>
+  <text x="120" y="196" font-family="'Consolas', monospace" font-size="30" fill="white" text-anchor="middle">42</text>
+  <circle cx="320" cy="180" r="44" fill="#AB47BC"/>
+  <text x="320" y="196" font-family="'Consolas', monospace" font-size="28" fill="white" text-anchor="middle">"ok"</text>
+  <circle cx="680" cy="160" r="44" fill="#FF7043"/>
+  <text x="680" y="176" font-family="'Consolas', monospace" font-size="28" fill="white" text-anchor="middle">true</text>
+  <circle cx="884" cy="160" r="44" fill="#26C6DA"/>
+  <text x="884" y="176" font-family="'Consolas', monospace" font-size="28" fill="white" text-anchor="middle">[]</text>
+</svg>

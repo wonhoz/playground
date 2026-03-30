@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 퍼플 배경 -->
+  <defs>
+    <linearGradient id="bg5" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#EDE7F6"/>
+      <stop offset="100%" stop-color="#B39DDB"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg5)"/>
+  <!-- Layer 2: 흐르는 로그 스트림 (대각선) -->
+  <rect x="60" y="200" width="760" height="60" rx="10" fill="#7B1FA2" opacity="0.4" transform="rotate(-8 440 230)"/>
+  <text x="80" y="254" font-family="'Consolas', monospace" font-size="44" fill="#CE93D8" transform="rotate(-8 440 230)">14:23:01 [INFO] Starting...</text>
+  <rect x="60" y="320" width="760" height="60" rx="10" fill="#B71C1C" opacity="0.5" transform="rotate(-8 440 350)"/>
+  <text x="80" y="374" font-family="'Consolas', monospace" font-size="44" fill="#EF9A9A" transform="rotate(-8 440 350)">14:23:05 [ERROR] Failed!</text>
+  <rect x="60" y="440" width="760" height="60" rx="10" fill="#7B1FA2" opacity="0.4" transform="rotate(-8 440 470)"/>
+  <text x="80" y="494" font-family="'Consolas', monospace" font-size="44" fill="#CE93D8" transform="rotate(-8 440 470)">14:23:08 [INFO] Retry OK</text>
+  <rect x="60" y="560" width="760" height="60" rx="10" fill="#F57F17" opacity="0.4" transform="rotate(-8 440 590)"/>
+  <text x="80" y="614" font-family="'Consolas', monospace" font-size="44" fill="#FFCC80" transform="rotate(-8 440 590)">14:23:10 [WARN] Slow...</text>
+  <!-- Layer 3: 중앙 렌즈 (포커스 링) -->
+  <circle cx="680" cy="560" r="260" fill="none" stroke="#7C4DFF" stroke-width="36"/>
+  <circle cx="680" cy="560" r="200" fill="white" opacity="0.15"/>
+  <!-- 렌즈 안 확대된 내용 -->
+  <text x="680" y="528" font-family="'Consolas', monospace" font-weight="700" font-size="72" fill="#7C4DFF" text-anchor="middle">[ERROR]</text>
+  <text x="680" y="608" font-family="'Consolas', monospace" font-size="48" fill="#9C27B0" text-anchor="middle">Failed!</text>
+  <!-- 렌즈 손잡이 -->
+  <line x1="890" y1="770" x2="970" y2="850" stroke="#7C4DFF" stroke-width="48" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 라벤더 배경 -->
+  <defs>
+    <linearGradient id="bg3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#EDE7F6"/>
+      <stop offset="100%" stop-color="#E8EAF6"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg3)"/>
+  <!-- Layer 2: 돋보기 (크게, 중앙 좌측) -->
+  <!-- 돋보기 원형 렌즈 -->
+  <circle cx="420" cy="460" r="260" fill="white" stroke="#5E35B1" stroke-width="48"/>
+  <circle cx="420" cy="460" r="212" fill="#EDE7F6" opacity="0.6"/>
+  <!-- 돋보기 손잡이 -->
+  <line x1="618" y1="658" x2="800" y2="840" stroke="#5E35B1" stroke-width="64" stroke-linecap="round"/>
+  <!-- Layer 3: 돋보기 안에 보이는 ZIP 내부 파일 목록 -->
+  <!-- 미니 파일 트리 -->
+  <clipPath id="lens-clip">
+    <circle cx="420" cy="460" r="200"/>
+  </clipPath>
+  <rect x="240" y="280" width="360" height="360" rx="0" fill="#1565C0" clip-path="url(#lens-clip)"/>
+  <text x="260" y="360" font-family="'Segoe UI', sans-serif" font-size="40" fill="#FFF9C4" clip-path="url(#lens-clip)">📁 src/</text>
+  <text x="280" y="410" font-family="'Segoe UI', sans-serif" font-size="36" fill="white" clip-path="url(#lens-clip)">📝 main.cs</text>
+  <text x="280" y="454" font-family="'Segoe UI', sans-serif" font-size="36" fill="white" clip-path="url(#lens-clip)">📝 app.cs</text>
+  <text x="260" y="498" font-family="'Segoe UI', sans-serif" font-size="40" fill="#FFF9C4" clip-path="url(#lens-clip)">📁 res/</text>
+  <text x="280" y="544" font-family="'Segoe UI', sans-serif" font-size="36" fill="white" clip-path="url(#lens-clip)">🖼 icon.png</text>
+  <!-- ZIP 파일 배지 (우하단) -->
+  <rect x="620" y="780" width="240" height="80" rx="24" fill="#F57F17"/>
+  <text x="740" y="832" font-family="'Consolas', monospace" font-size="52" fill="white" text-anchor="middle" font-weight="700">ZIP</text>
+  <!-- PEEK 텍스트 -->
+  <text x="190" y="860" font-family="'Consolas', monospace" font-size="72" fill="#5E35B1" text-anchor="middle" font-weight="700">PEEK</text>
+</svg>

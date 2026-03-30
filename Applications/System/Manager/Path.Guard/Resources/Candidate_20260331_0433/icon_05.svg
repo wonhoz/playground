@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 비비드 그라데이션 -->
+  <defs>
+    <linearGradient id="bg5" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E8F5E9"/>
+      <stop offset="100%" stop-color="#E3F2FD"/>
+    </linearGradient>
+    <linearGradient id="shGrad5" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#00897B"/>
+      <stop offset="100%" stop-color="#004D40"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg5)"/>
+  <!-- Layer 2: 방패 (중앙) -->
+  <path d="M512,100 L780,210 L780,510 Q780,730 512,860 Q244,730 244,510 L244,210 Z" fill="url(#shGrad5)"/>
+  <path d="M512,100 L780,210 L780,510 Q780,730 512,860 Q244,730 244,510 L244,210 Z" fill="none" stroke="#80CBC4" stroke-width="16"/>
+  <!-- PATH 텍스트 (방패 안) -->
+  <text x="512" y="380" font-family="'Consolas', monospace" font-weight="900" font-size="120" fill="white" text-anchor="middle">PATH</text>
+  <!-- 경로 예시 (방패 안 하단) -->
+  <text x="512" y="480" font-family="'Consolas', monospace" font-size="52" fill="#80CBC4" text-anchor="middle">C:\App\bin</text>
+  <text x="512" y="548" font-family="'Consolas', monospace" font-size="52" fill="#80CBC4" text-anchor="middle">C:\Windows</text>
+  <!-- Layer 3: 체크 배지 + 오류 배지 -->
+  <circle cx="760" cy="280" r="80" fill="#1B5E20"/>
+  <text x="760" y="302" font-size="72" text-anchor="middle" fill="white">✓</text>
+  <circle cx="800" cy="700" r="64" fill="#B71C1C"/>
+  <text x="800" y="722" font-size="56" text-anchor="middle" fill="white">!</text>
+  <!-- 스냅샷 배지 (왼쪽) -->
+  <rect x="80" y="820" width="220" height="72" rx="16" fill="#1565C0"/>
+  <text x="190" y="872" font-family="'Segoe UI', sans-serif" font-size="44" fill="white" text-anchor="middle">📷 Snap</text>
+</svg>

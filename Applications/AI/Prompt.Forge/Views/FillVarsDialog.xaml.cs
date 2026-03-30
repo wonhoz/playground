@@ -54,6 +54,17 @@ public partial class FillVarsDialog : Window
 
     void Ok_Click(object sender, RoutedEventArgs e)
     {
+        var unfilled = _inputs.Where(kv => string.IsNullOrEmpty(kv.Value.Text))
+                              .Select(kv => $"{{{{{kv.Key}}}}}").ToList();
+        if (unfilled.Count > 0)
+        {
+            var names = string.Join(", ", unfilled);
+            var r = MessageBox.Show(
+                $"입력하지 않은 변수가 있습니다:\n{names}\n\n그대로 복사하시겠습니까?",
+                "미입력 변수", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            if (r != MessageBoxResult.Yes) return;
+        }
+
         var content = _templateContent;
         foreach (var (name, tb) in _inputs)
             content = content.Replace($"{{{{{name}}}}}", tb.Text);

@@ -60,6 +60,14 @@ public partial class MainWindow : Window
 
         // 마지막 선택 항목 복원 (B4)
         RestoreLastSelection();
+
+        // 검색 X버튼 표시/숨김
+        TxtSearch.TextChanged += (_, _) =>
+            BtnClearSearch.Visibility = string.IsNullOrEmpty(TxtSearch.Text)
+                ? Visibility.Collapsed : Visibility.Visible;
+
+        // 태그 자동완성
+        TxtTags.TextChanged += TxtTags_TextChanged;
     }
 
     // ── 마지막 선택 항목 저장/복원 ─────────────────────────────────────────────
@@ -92,10 +100,19 @@ public partial class MainWindow : Window
     protected override void OnPreviewKeyDown(KeyEventArgs e)
     {
         base.OnPreviewKeyDown(e);
-        if (!IsLoaded || !_vm.HasSelection) return;
+        if (!IsLoaded) return;
 
         if (Keyboard.Modifiers == ModifierKeys.Control)
         {
+            if (e.Key == Key.N)
+            {
+                NewPrompt_Click(this, new RoutedEventArgs());
+                e.Handled = true;
+                return;
+            }
+
+            if (!_vm.HasSelection) return;
+
             switch (e.Key)
             {
                 case Key.S:
@@ -280,16 +297,14 @@ public partial class MainWindow : Window
 
     void TxtContent_TextChanged(object sender, TextChangedEventArgs e)
     {
-        if (!IsLoaded) return;
-        var temp = new PromptItem { Content = TxtContent.Text };
+        if (!IsLoaded || _vm.Selected == null) return;
+        var content = TxtContent.Text;
+        var temp = new PromptItem { Content = content };
         var vars = temp.ExtractVariables();
-        if (vars.Count == 0)
-        {
-            _vm.StatusText = $"총 {_vm.Items.Count:N0}개";
-            return;
-        }
-        var hint = string.Join(", ", vars.Select(v => $"{{{{{v}}}}}"));
-        _vm.StatusText = $"변수 {vars.Count}개: {hint}";
+        var charCount = content.Length;
+        _vm.StatusText = vars.Count == 0
+            ? $"{charCount:N0}자"
+            : $"{charCount:N0}자 · 변수 {vars.Count}개";
     }
 
     // ── 버튼 핸들러 ───────────────────────────────────────────────────────────
@@ -412,27 +427,7 @@ public partial class MainWindow : Window
         _vm.SortOrder = CbSort.SelectedIndex == 1 ? "use_count" : "updated";
     }
 
-    void Help_Click(object sender, RoutedEventArgs e)
-    {
-        MessageBox.Show(
-            "──────────────────────────────\n" +
-            "  Prompt.Forge 단축키 안내\n" +
-            "──────────────────────────────\n\n" +
-            "Ctrl+S         저장\n" +
-            "Ctrl+D         복제\n" +
-            "Ctrl+Enter     변수 채우기\n" +
-            "Ctrl+H         버전 히스토리\n\n" +
-            "Win+Shift+P    창 표시/숨기기\n\n" +
-            "──────────────────────────────\n" +
-            "  사용 팁\n" +
-            "──────────────────────────────\n\n" +
-            "• {{변수명}} 형식으로 변수 삽입\n" +
-            "• 태그 클릭 → 해당 태그 필터링\n" +
-            "• ★ 클릭 → 즐겨찾기 토글\n" +
-            "• '버전 저장' → 히스토리에 현재 버전 보관",
-            "도움말 — Prompt.Forge",
-            MessageBoxButton.OK, MessageBoxImage.Information);
-    }
+    void Help_Click(object sender, RoutedEventArgs e) => HelpPopup.IsOpen = !HelpPopup.IsOpen;
 
     void Export_Click(object sender, RoutedEventArgs e)
     {
@@ -484,7 +479,12 @@ public partial class MainWindow : Window
                 _vm.StatusText = "가져올 데이터가 없습니다";
                 return;
             }
+            var existingTitles = new HashSet<string>(
+                _db.GetAll().Select(p => p.Title), StringComparer.OrdinalIgnoreCase);
+            int imported = 0, skipped = 0;
             foreach (var item in items)
+            {
+                if (existingTitles.Contains(item.Title ?? "")) { skipped++; continue; }
                 _db.Insert(new PromptItem
                 {
                     Title      = item.Title ?? "",
@@ -495,8 +495,12 @@ public partial class MainWindow : Window
                     Version    = item.Version > 0 ? item.Version : 1,
                     Notes      = item.Notes ?? ""
                 });
+                imported++;
+            }
             _vm.Refresh();
-            _vm.StatusText = $"가져오기 완료 — {items.Count}개";
+            _vm.StatusText = skipped > 0
+                ? $"가져오기 완료 — {imported}개 추가, {skipped}개 중복 스킵"
+                : $"가져오기 완료 — {imported}개";
         }
         catch (Exception ex)
         {
@@ -513,6 +517,60 @@ public partial class MainWindow : Window
         p.Tags    = TxtTags.Text.Trim();
         p.Service = TxtService.Text.Trim();
         p.Notes   = TxtNotes.Text.Trim();
+    }
+
+    // ── 검색 초기화 ───────────────────────────────────────────────────────────
+
+    void ClearSearch_Click(object sender, RoutedEventArgs e)
+    {
+        bool prev = _refreshing;
+        _refreshing = true;
+        try
+        {
+            CbTag.SelectedIndex = 0;
+            CbService.SelectedIndex = 0;
+            ChkFav.IsChecked = false;
+        }
+        finally { _refreshing = prev; }
+        _vm.FilterTag = null;
+        _vm.FilterService = null;
+        _vm.FavOnly = false;
+        _vm.Search = "";
+        TxtSearch.Focus();
+    }
+
+    // ── 태그 자동완성 ─────────────────────────────────────────────────────────
+
+    void TxtTags_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        if (!IsLoaded) return;
+        var text = TxtTags.Text;
+        var lastComma = text.LastIndexOf(',');
+        var partial = (lastComma >= 0 ? text[(lastComma + 1)..] : text).Trim();
+
+        if (partial.Length == 0) { TagPopup.IsOpen = false; return; }
+
+        var matches = _vm.Tags.Skip(1)  // "모든 태그" 제외
+            .Where(t => t.StartsWith(partial, StringComparison.OrdinalIgnoreCase)
+                     && !t.Equals(partial, StringComparison.OrdinalIgnoreCase))
+            .ToList();
+
+        if (matches.Count == 0) { TagPopup.IsOpen = false; return; }
+
+        LstTagSuggestions.ItemsSource = matches;
+        TagPopup.IsOpen = true;
+    }
+
+    void TagSuggestion_Selected(object sender, SelectionChangedEventArgs e)
+    {
+        if (LstTagSuggestions.SelectedItem is not string tag) return;
+        TagPopup.IsOpen = false;
+        var text = TxtTags.Text;
+        var lastComma = text.LastIndexOf(',');
+        TxtTags.Text = lastComma >= 0 ? text[..(lastComma + 1)] + " " + tag : tag;
+        TxtTags.CaretIndex = TxtTags.Text.Length;
+        TxtTags.Focus();
+        LstTagSuggestions.SelectedItem = null;
     }
 
     private record ImportDto(

@@ -130,34 +130,64 @@
                 <TextBlock Grid.Column="0" Text="Prompt.Forge"
                            FontSize="15" FontWeight="SemiBold"
                            Foreground="#7C3AED" VerticalAlignment="Center"/>
-                <TextBox Grid.Column="1" x:Name="TxtSearch"
-                         Margin="16,0" Height="30"
-                         Text="{Binding Search, UpdateSourceTrigger=PropertyChanged}"
-                         VerticalContentAlignment="Center">
-                    <TextBox.Style>
-                        <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
-                            <Style.Triggers>
-                                <Trigger Property="Text" Value="">
-                                    <Setter Property="Background">
-                                        <Setter.Value>
-                                            <VisualBrush Stretch="None" AlignmentX="Left">
-                                                <VisualBrush.Visual>
-                                                    <TextBlock Text="프롬프트 검색..."
-                                                               Foreground="#555566"
-                                                               Margin="10,0"/>
-                                                </VisualBrush.Visual>
-                                            </VisualBrush>
-                                        </Setter.Value>
-                                    </Setter>
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </TextBox.Style>
-                </TextBox>
+                <Grid Grid.Column="1" Margin="16,0">
+                    <TextBox x:Name="TxtSearch"
+                             Height="30" Padding="8,5,28,5"
+                             Text="{Binding Search, UpdateSourceTrigger=PropertyChanged}"
+                             VerticalContentAlignment="Center">
+                        <TextBox.Style>
+                            <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
+                                <Style.Triggers>
+                                    <Trigger Property="Text" Value="">
+                                        <Setter Property="Background">
+                                            <Setter.Value>
+                                                <VisualBrush Stretch="None" AlignmentX="Left">
+                                                    <VisualBrush.Visual>
+                                                        <TextBlock Text="프롬프트 검색..."
+                                                                   Foreground="#555566"
+                                                                   Margin="10,0"/>
+                                                    </VisualBrush.Visual>
+                                                </VisualBrush>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBox.Style>
+                    </TextBox>
+                    <Button x:Name="BtnClearSearch" Width="22" Height="22"
+                            HorizontalAlignment="Right" VerticalAlignment="Center"
+                            Margin="0,0,3,0" Visibility="Collapsed"
+                            Click="ClearSearch_Click" ToolTip="검색 및 필터 초기화">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Background="Transparent" CornerRadius="4">
+                                    <TextBlock Text="✕" FontSize="10" Foreground="#888899"
+                                               HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        <TextBlock.Style>
+                                            <Style TargetType="TextBlock">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource AncestorType=Border}}" Value="True">
+                                                        <Setter Property="Foreground" Value="#C0C0D0"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </TextBlock.Style>
+                                    </TextBlock>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Cursor" Value="Hand"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </Grid>
                 <StackPanel Grid.Column="2" Orientation="Horizontal">
                     <Button Content="↑ 내보내기" Click="Export_Click" Margin="0,0,6,0"/>
                     <Button Content="↓ 가져오기" Click="Import_Click" Margin="0,0,8,0"/>
-                    <Button Content="?" ToolTip="단축키 도움말" Click="Help_Click" Margin="0,0,8,0" Padding="8,6"/>
+                    <Button x:Name="BtnHelp" Content="?" ToolTip="단축키 도움말" Click="Help_Click" Margin="0,0,8,0" Padding="8,6"/>
                     <Button Content="+ 새 프롬프트" Style="{StaticResource AccentBtn}"
                             Click="NewPrompt_Click"/>
                 </StackPanel>
@@ -410,5 +440,95 @@
         <Border Grid.Row="2" Background="#0A0A14" Padding="12,4">
             <TextBlock Text="{Binding StatusText}" Foreground="#888899" FontSize="11"/>
         </Border>
+
+        <!-- ── 태그 자동완성 팝업 ──────────────────────────────────── -->
+        <Popup x:Name="TagPopup" StaysOpen="False" AllowsTransparency="True"
+               PlacementTarget="{Binding ElementName=TxtTags}"
+               Placement="Bottom" VerticalOffset="2">
+            <Border Background="#1E1E2E" BorderBrush="#3A3A55" BorderThickness="1" CornerRadius="4"
+                    MinWidth="{Binding ElementName=TxtTags, Path=ActualWidth}">
+                <ListBox x:Name="LstTagSuggestions" MaxHeight="160"
+                         Background="Transparent" BorderThickness="0"
+                         SelectionChanged="TagSuggestion_Selected">
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="Foreground" Value="#C0C0D0"/>
+                            <Setter Property="Padding" Value="10,6"/>
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Setter Property="Cursor" Value="Hand"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="ListBoxItem">
+                                        <Border Background="{TemplateBinding Background}"
+                                                Padding="{TemplateBinding Padding}">
+                                            <ContentPresenter/>
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="Background" Value="#252540"/>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                </ListBox>
+            </Border>
+        </Popup>
+
+        <!-- ── 단축키 도움말 팝업 ──────────────────────────────────── -->
+        <Popup x:Name="HelpPopup" StaysOpen="False" AllowsTransparency="True"
+               PlacementTarget="{Binding ElementName=BtnHelp}"
+               Placement="Bottom" VerticalOffset="4">
+            <Border Background="#1A1A2A" BorderBrush="#3A3A55" BorderThickness="1" CornerRadius="8"
+                    Padding="20,16">
+                <StackPanel>
+                    <TextBlock Text="단축키" FontWeight="SemiBold" FontSize="12"
+                               Foreground="#7C3AED" Margin="0,0,0,10"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="160"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0" Grid.Column="0" Text="Ctrl+N" Foreground="#A78BFA" FontFamily="Consolas" FontSize="12"/>
+                        <TextBlock Grid.Row="0" Grid.Column="1" Text="새 프롬프트" Foreground="#C0C0D0" FontSize="12"/>
+                        <TextBlock Grid.Row="1" Grid.Column="0" Text="Ctrl+S" Foreground="#A78BFA" FontFamily="Consolas" FontSize="12" Margin="0,5,0,0"/>
+                        <TextBlock Grid.Row="1" Grid.Column="1" Text="저장" Foreground="#C0C0D0" FontSize="12" Margin="0,5,0,0"/>
+                        <TextBlock Grid.Row="2" Grid.Column="0" Text="Ctrl+D" Foreground="#A78BFA" FontFamily="Consolas" FontSize="12" Margin="0,5,0,0"/>
+                        <TextBlock Grid.Row="2" Grid.Column="1" Text="복제" Foreground="#C0C0D0" FontSize="12" Margin="0,5,0,0"/>
+                        <TextBlock Grid.Row="3" Grid.Column="0" Text="Ctrl+Enter" Foreground="#A78BFA" FontFamily="Consolas" FontSize="12" Margin="0,5,0,0"/>
+                        <TextBlock Grid.Row="3" Grid.Column="1" Text="변수 채우기" Foreground="#C0C0D0" FontSize="12" Margin="0,5,0,0"/>
+                        <TextBlock Grid.Row="4" Grid.Column="0" Text="Ctrl+H" Foreground="#A78BFA" FontFamily="Consolas" FontSize="12" Margin="0,5,0,0"/>
+                        <TextBlock Grid.Row="4" Grid.Column="1" Text="버전 히스토리" Foreground="#C0C0D0" FontSize="12" Margin="0,5,0,0"/>
+                        <TextBlock Grid.Row="5" Grid.Column="0" Text="Win+Shift+P" Foreground="#A78BFA" FontFamily="Consolas" FontSize="12" Margin="0,5,0,0"/>
+                        <TextBlock Grid.Row="5" Grid.Column="1" Text="창 표시/숨기기" Foreground="#C0C0D0" FontSize="12" Margin="0,5,0,0"/>
+                    </Grid>
+                    <Separator Background="#2A2A3E" Margin="0,14,0,12"/>
+                    <TextBlock Text="사용 팁" FontWeight="SemiBold" FontSize="12"
+                               Foreground="#7C3AED" Margin="0,0,0,8"/>
+                    <TextBlock TextWrapping="Wrap" Foreground="#888899" FontSize="11"
+                               MaxWidth="300" LineHeight="20">
+                        <Run Text="• {{변수명}} 형식으로 변수 삽입 → 변수 채우기로 복사"/>
+                        <LineBreak/>
+                        <Run Text="• 태그 입력 시 자동완성 드롭다운 표시"/>
+                        <LineBreak/>
+                        <Run Text="• 태그 Ctrl+클릭 → 해당 태그로 필터링"/>
+                        <LineBreak/>
+                        <Run Text="• ★ 클릭 → 즐겨찾기 토글"/>
+                        <LineBreak/>
+                        <Run Text="• '버전 저장' → 히스토리에 현재 버전 보관"/>
+                    </TextBlock>
+                </StackPanel>
+            </Border>
+        </Popup>
     </Grid>
 </Window>

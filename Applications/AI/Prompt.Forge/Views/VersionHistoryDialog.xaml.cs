@@ -14,6 +14,7 @@ public partial class VersionHistoryDialog : Window
     record VersionEntry(int Id, string VersionLabel, string DateLabel, string Content);
 
     Database? _db;
+    readonly System.Collections.ObjectModel.ObservableCollection<VersionEntry> _entries = [];
 
     internal VersionHistoryDialog(PromptItem current, List<PromptItem> history, Database? db = null)
     {
@@ -29,16 +30,14 @@ public partial class VersionHistoryDialog : Window
 
         TxtTitle.Text = $"히스토리: {current.Title}";
 
-        var entries = history
-            .OrderByDescending(h => h.Version)
-            .Select(h => new VersionEntry(
+        foreach (var h in history.OrderByDescending(h => h.Version))
+            _entries.Add(new VersionEntry(
                 h.Id,
                 $"v{h.Version}",
                 h.CreatedAt.ToLocalTime().ToString("yyyy-MM-dd HH:mm"),
-                h.Content))
-            .ToList();
+                h.Content));
 
-        if (entries.Count == 0)
+        if (_entries.Count == 0)
         {
             TxtEmptyMsg.Visibility = System.Windows.Visibility.Visible;
             BtnRestore.IsEnabled = false;
@@ -46,7 +45,7 @@ public partial class VersionHistoryDialog : Window
         else
         {
             TxtEmptyMsg.Visibility = System.Windows.Visibility.Collapsed;
-            LstVersions.ItemsSource = entries;
+            LstVersions.ItemsSource = _entries;
             LstVersions.SelectedIndex = 0;
         }
     }
@@ -75,14 +74,11 @@ public partial class VersionHistoryDialog : Window
             "버전 삭제", MessageBoxButton.YesNo, MessageBoxImage.Warning);
         if (r != MessageBoxResult.Yes) return;
         _db.DeleteHistoryItem(entry.Id);
-        var items = (LstVersions.ItemsSource as System.Collections.Generic.List<VersionEntry>)?.ToList() ?? [];
-        items.RemoveAll(x => x.Id == entry.Id);
-        LstVersions.ItemsSource = null;
-        LstVersions.ItemsSource = items;
+        _entries.Remove(entry);
         TxtPreview.Text = "";
         BtnRestore.IsEnabled = false;
         BtnDeleteVersion.IsEnabled = false;
-        if (items.Count == 0)
+        if (_entries.Count == 0)
             TxtEmptyMsg.Visibility = System.Windows.Visibility.Visible;
     }
 

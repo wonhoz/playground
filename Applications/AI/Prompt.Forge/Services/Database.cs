@@ -110,7 +110,7 @@ sealed class Database : IDisposable
             : "";
 
         var order = sortOrder == "use_count"
-            ? "p.use_count DESC, p.updated_at DESC"
+            ? "p.use_count DESC, p.is_favorite DESC, p.updated_at DESC"
             : "p.is_favorite DESC, p.updated_at DESC";
         cmd.CommandText = baseTable + where + $" ORDER BY {order}";
 

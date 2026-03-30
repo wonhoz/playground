@@ -2,6 +2,9 @@
 
   <ItemGroup>
     <Resource Include="Resources\clipstacker.ico" />
+    <Content Include="Resources\app.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <PropertyGroup>
@@ -14,6 +17,7 @@
     <ApplicationIcon Condition="Exists('Resources\app.ico')">Resources\app.ico</ApplicationIcon>
     <AssemblyName>ClipboardStacker</AssemblyName>
     <RootNamespace>ClipboardStacker</RootNamespace>
+    <StartupObject>ClipboardStacker.Program</StartupObject>
     <PublishSingleFile>true</PublishSingleFile>
     <SelfContained>true</SelfContained>
     <RuntimeIdentifier>win-x64</RuntimeIdentifier>

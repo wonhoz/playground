@@ -1,3 +1,5 @@
+using System.Drawing;
+using System.IO;
 using System.Runtime.InteropServices;
 using Microsoft.Win32;
 
@@ -11,9 +13,31 @@ internal static class Program
     private static extern int SetCurrentProcessExplicitAppUserModelID(
         [MarshalAs(UnmanagedType.LPWStr)] string AppID);
 
+    // exe에 내장된 아이콘을 LocalAppData에 추출 → toast 알림 IconUri용 실제 파일 생성
+    private static string? ExtractIconToAppData()
+    {
+        try
+        {
+            var dir = Path.Combine(
+                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+                "Playground", "ClipboardStacker");
+            Directory.CreateDirectory(dir);
+            var icoPath = Path.Combine(dir, "app.ico");
+            using var icon = System.Drawing.Icon.ExtractAssociatedIcon(Environment.ProcessPath!);
+            if (icon != null)
+            {
+                using var fs = File.Create(icoPath);
+                icon.Save(fs);
+                return icoPath;
+            }
+        }
+        catch { }
+        return null;
+    }
+
     /// <summary>
     /// AUMID를 레지스트리에 등록하고 프로세스에 적용한다.
-    /// - IconUri를 exe 경로로 등록 (ApplicationIcon으로 내장된 아이콘을 Windows가 추출)
+    /// - exe에서 아이콘을 추출해 LocalAppData에 저장 후 IconUri로 등록
     /// - SetCurrentProcessExplicitAppUserModelID는 UI 생성 전에 반드시 먼저 호출해야 함
     /// </summary>
     private static void RegisterAumid()
@@ -23,12 +47,12 @@ internal static class Program
             // UI 생성 전 AUMID 설정 (반드시 먼저 호출)
             SetCurrentProcessExplicitAppUserModelID(Aumid);
 
-            // 레지스트리에 AUMID + 아이콘 경로 등록 (toast 알림 아이콘 소스)
-            // exe 자체에 ApplicationIcon으로 내장되어 있으므로 exe 경로를 IconUri로 사용
             using var key = Registry.CurrentUser.CreateSubKey(
                 $@"SOFTWARE\Classes\AppUserModelId\{Aumid}");
             key.SetValue("DisplayName", "Clipboard Stacker");
-            key.SetValue("IconUri", Environment.ProcessPath!);
+            var iconPath = ExtractIconToAppData();
+            if (iconPath != null)
+                key.SetValue("IconUri", iconPath);
         }
         catch { /* 실패해도 앱 실행은 계속 */ }
     }

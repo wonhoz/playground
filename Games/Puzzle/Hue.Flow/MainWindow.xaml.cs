@@ -61,13 +61,8 @@ public partial class MainWindow : Window
     {
         try
         {
-            var iconPath = Path.Combine(AppContext.BaseDirectory, "Resources", IconGenerator.IconFileName);
-            if (File.Exists(iconPath))
-            {
-                using var stream = File.OpenRead(iconPath);
-                Icon = BitmapFrame.Create(stream,
-                    BitmapCreateOptions.None, BitmapCacheOption.OnLoad);
-            }
+            var sri = Application.GetResourceStream(new Uri("pack://application:,,,/Resources/app.ico"));
+            if (sri != null) Icon = BitmapFrame.Create(sri.Stream, BitmapCreateOptions.None, BitmapCacheOption.OnLoad);
         }
         catch { }
     }

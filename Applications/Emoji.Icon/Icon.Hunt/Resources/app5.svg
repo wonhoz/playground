@@ -1,65 +1,76 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
-  <!-- icon_03: metaphor | 황금별 부각 — 수많은 별 중 하나가 빛나는 | 기하학 추상 | 라벤더+황금+흰별 -->
+  <!-- icon_01: literal | 돋보기 + 아이콘 격자 배경 | 레이어드 | 하늘+흰격자+빨강돋보기 -->
   <defs>
-    <linearGradient id="bg3" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#EDE7F6"/>
-      <stop offset="100%" stop-color="#B39DDB"/>
+    <linearGradient id="bg1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#E3F2FD"/>
+      <stop offset="100%" stop-color="#64B5F6"/>
     </linearGradient>
-    <filter id="glow3" x="-40%" y="-40%" width="180%" height="180%">
-      <feGaussianBlur stdDeviation="18" result="blur"/>
-      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    <filter id="sh1" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#1565C0" flood-opacity="0.25"/>
     </filter>
-    <filter id="sh3" x="-10%" y="-10%" width="120%" height="120%">
-      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#4A148C" flood-opacity="0.2"/>
-    </filter>
+    <clipPath id="clip1">
+      <rect width="1024" height="1024" rx="190"/>
+    </clipPath>
   </defs>
-  <rect width="1024" height="1024" rx="190" fill="url(#bg3)"/>
+  <!-- Layer 1 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg1)"/>
 
-  <!-- Layer 2: Many small white stars (background) -->
-  <g opacity="0.5">
-    <!-- Small stars scattered -->
-    <polygon points="150,150 156,168 175,168 161,178 167,197 150,186 133,197 139,178 125,168 144,168" fill="white" transform="scale(0.5) translate(150,150)"/>
-    <circle cx="200" cy="180" r="8" fill="white"/>
-    <circle cx="320" cy="130" r="6" fill="white"/>
-    <circle cx="700" cy="160" r="9" fill="white"/>
-    <circle cx="820" cy="200" r="7" fill="white"/>
-    <circle cx="880" cy="130" r="5" fill="white"/>
-    <circle cx="150" cy="400" r="7" fill="white"/>
-    <circle cx="100" cy="600" r="6" fill="white"/>
-    <circle cx="200" cy="700" r="8" fill="white"/>
-    <circle cx="900" cy="350" r="7" fill="white"/>
-    <circle cx="950" cy="500" r="5" fill="white"/>
-    <circle cx="880" cy="700" r="9" fill="white"/>
-    <circle cx="800" cy="820" r="6" fill="white"/>
-    <circle cx="350" cy="850" r="7" fill="white"/>
-    <circle cx="150" cy="850" r="8" fill="white"/>
-    <circle cx="450" cy="130" r="6" fill="white"/>
-    <circle cx="580" cy="100" r="5" fill="white"/>
-    <!-- Medium stars -->
-    <polygon points="250,300 259,328 288,328 266,345 275,373 250,356 225,373 234,345 212,328 241,328" fill="white" opacity="0.6"/>
-    <polygon points="780,280 789,308 818,308 796,325 805,353 780,336 755,353 764,325 742,308 771,308" fill="white" opacity="0.6"/>
-    <polygon points="170,650 177,670 198,670 181,682 188,702 170,690 152,702 159,682 142,670 163,670" fill="white" opacity="0.5"/>
-    <polygon points="870,600 877,620 898,620 881,632 888,652 870,640 852,652 859,632 842,620 863,620" fill="white" opacity="0.5"/>
-    <polygon points="400,780 407,800 428,800 411,812 418,832 400,820 382,832 389,812 372,800 393,800" fill="white" opacity="0.5"/>
-    <polygon points="650,820 657,840 678,840 661,852 668,872 650,860 632,872 639,852 622,840 643,840" fill="white" opacity="0.5"/>
+  <!-- Layer 2: Icon grid (small icon placeholders) -->
+  <g clip-path="url(#clip1)" opacity="0.85">
+    <!-- Row 1 -->
+    <rect x="80"  y="80"  width="130" height="130" rx="20" fill="white" opacity="0.7"/>
+    <!-- Home icon -->
+    <polygon points="145,110 185,150 185,200 105,200 105,150" fill="#42A5F5"/>
+    <rect x="130" y="165" width="30" height="35" rx="4" fill="#1565C0"/>
+
+    <rect x="250" y="80"  width="130" height="130" rx="20" fill="white" opacity="0.7"/>
+    <!-- Heart icon -->
+    <path d="M315,120 C315,110 300,100 290,115 C280,100 265,110 265,120 C265,135 315,165 315,165 C315,165 365,135 365,120 C365,110 350,100 340,115 C330,100 315,110 315,120Z" fill="#EF5350"/>
+
+    <rect x="420" y="80"  width="130" height="130" rx="20" fill="white" opacity="0.7"/>
+    <!-- Star icon -->
+    <polygon points="485,95 498,135 540,135 508,158 520,198 485,175 450,198 462,158 430,135 472,135" fill="#FFD740"/>
+
+    <rect x="590" y="80"  width="130" height="130" rx="20" fill="white" opacity="0.7"/>
+    <!-- Settings gear (simplified circle) -->
+    <circle cx="655" cy="145" r="35" fill="none" stroke="#78909C" stroke-width="16"/>
+    <circle cx="655" cy="145" r="16" fill="#78909C"/>
+
+    <rect x="760" y="80"  width="130" height="130" rx="20" fill="white" opacity="0.7"/>
+    <!-- Lightning -->
+    <polygon points="820,95 795,150 820,150 800,205 840,140 812,140" fill="#FFCA28"/>
+
+    <!-- Row 2 -->
+    <rect x="80"  y="250" width="130" height="130" rx="20" fill="white" opacity="0.7"/>
+    <rect x="100" y="270" width="90" height="70" rx="8" fill="#66BB6A"/>
+    <rect x="115" y="295" width="60" height="10" rx="4" fill="white"/>
+    <rect x="115" y="315" width="40" height="10" rx="4" fill="white"/>
+
+    <rect x="250" y="250" width="130" height="130" rx="20" fill="white" opacity="0.7"/>
+    <circle cx="315" cy="315" r="45" fill="none" stroke="#AB47BC" stroke-width="14"/>
+    <line x1="285" y1="285" x2="345" y2="345" stroke="#AB47BC" stroke-width="14" stroke-linecap="round"/>
+
+    <rect x="420" y="250" width="130" height="130" rx="20" fill="white" opacity="0.7"/>
+    <rect x="440" y="270" width="90" height="90" rx="10" fill="#26A69A"/>
+    <polygon points="485,280 495,310 475,310" fill="white"/>
+
+    <rect x="590" y="250" width="130" height="130" rx="20" fill="white" opacity="0.7"/>
+    <!-- Bell -->
+    <path d="M655,265 C655,265 615,280 615,330 L695,330 C695,280 655,265 655,265Z" fill="#FFA726"/>
+    <circle cx="655" cy="345" r="12" fill="#FFA726"/>
+
+    <rect x="760" y="250" width="130" height="130" rx="20" fill="white" opacity="0.7"/>
+    <!-- User -->
+    <circle cx="825" cy="295" r="25" fill="#5C6BC0"/>
+    <path d="M785,380 C785,355 795,340 825,340 C855,340 865,355 865,380" fill="#5C6BC0"/>
   </g>
 
-  <!-- Layer 3: BIG golden star (center, found!) -->
-  <g filter="url(#glow3)">
-    <polygon points="512,200 548,326 682,326 577,404 614,530 512,452 410,530 447,404 342,326 476,326"
-             fill="#FFD700"/>
-    <!-- Inner highlight -->
-    <polygon points="512,240 538,316 620,316 554,364 579,440 512,392 445,440 470,364 404,316 486,316"
-             fill="#FFF176" opacity="0.6"/>
+  <!-- Layer 3: Large red magnifying glass (center) -->
+  <g filter="url(#sh1)">
+    <circle cx="470" cy="540" r="220" fill="none" stroke="#E53935" stroke-width="60"/>
+    <circle cx="470" cy="540" r="165" fill="white" opacity="0.15"/>
+    <line x1="625" y1="695" x2="870" y2="880" stroke="#E53935" stroke-width="72" stroke-linecap="round"/>
   </g>
-  <!-- Sparkle rays around the big star -->
-  <line x1="512" y1="140" x2="512" y2="100" stroke="#FFD700" stroke-width="12" stroke-linecap="round" opacity="0.8"/>
-  <line x1="682" y1="200" x2="712" y2="170" stroke="#FFD700" stroke-width="12" stroke-linecap="round" opacity="0.8"/>
-  <line x1="342" y1="200" x2="312" y2="170" stroke="#FFD700" stroke-width="12" stroke-linecap="round" opacity="0.8"/>
-
-  <!-- Small magnifier hint (bottom-right) -->
-  <g transform="translate(730, 700)" filter="url(#sh3)">
-    <circle cx="80" cy="80" r="72" fill="none" stroke="#7E57C2" stroke-width="28"/>
-    <line x1="130" y1="130" x2="200" y2="200" stroke="#7E57C2" stroke-width="28" stroke-linecap="round"/>
-  </g>
+  <!-- Sparkle on lens -->
+  <circle cx="390" cy="460" r="28" fill="white" opacity="0.6"/>
 </svg>

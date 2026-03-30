@@ -1,59 +1,36 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
-  <!-- icon_06: hybrid | PATH 텍스트 + 방패 로고 + 상태 신호등 | 중앙 심볼 | 코랄+파랑+초록 -->
   <defs>
-    <linearGradient id="bg6" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#FFF3E0"/>
-      <stop offset="100%" stop-color="#FFCC80"/>
+    <linearGradient id="bg4" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0D1B3E"/>
+      <stop offset="100%" stop-color="#1A2A6C"/>
     </linearGradient>
-    <filter id="sh6" x="-10%" y="-10%" width="120%" height="120%">
-      <feDropShadow dx="0" dy="7" stdDeviation="9" flood-color="#BF360C" flood-opacity="0.3"/>
-    </filter>
+    <linearGradient id="shield4" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFD740"/>
+      <stop offset="100%" stop-color="#FF8F00"/>
+    </linearGradient>
+    <linearGradient id="inner4" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1565C0"/>
+      <stop offset="100%" stop-color="#0D47A1"/>
+    </linearGradient>
   </defs>
-  <rect width="1024" height="1024" rx="250" fill="url(#bg6)"/>
+  <!-- Layer 1: 딥 블루 배경 + 육각 격자 패턴 -->
+  <rect width="1024" height="1024" rx="196" fill="url(#bg4)"/>
+  <!-- 배경 기하학 패턴 -->
+  <circle cx="512" cy="512" r="420" fill="none" stroke="#1E3A6E" stroke-width="2" opacity="0.6"/>
+  <circle cx="512" cy="512" r="320" fill="none" stroke="#1E3A6E" stroke-width="2" opacity="0.4"/>
+  <circle cx="512" cy="512" r="200" fill="none" stroke="#1E3A6E" stroke-width="2" opacity="0.3"/>
 
-  <!-- Central shield shape (large) -->
-  <path d="M512,120 L760,200 L760,480 C760,600 512,740 512,740 C512,740 264,600 264,480 L264,200 Z"
-        fill="#E64A19" filter="url(#sh6)"/>
-  <path d="M512,148 L736,222 L736,474 C736,582 512,710 512,710 C512,710 288,582 288,474 L288,222 Z"
-        fill="white" opacity="0.15"/>
+  <!-- Layer 2: 방패 (Guard 심볼) -->
+  <path d="M512 160 L760 280 L760 540 Q760 720 512 860 Q264 720 264 540 L264 280 Z" fill="url(#shield4)" opacity="0.95"/>
+  <!-- 방패 안쪽 -->
+  <path d="M512 220 L710 322 L710 530 Q710 680 512 800 Q314 680 314 530 L314 322 Z" fill="url(#inner4)"/>
 
-  <!-- PATH text on shield -->
-  <text x="512" y="380" font-family="Arial Black, sans-serif" font-size="130" fill="white"
-        text-anchor="middle" dominant-baseline="middle">PATH</text>
-
-  <!-- Shield inner line -->
-  <line x1="288" y1="310" x2="736" y2="310" stroke="white" stroke-width="6" opacity="0.4"/>
-
-  <!-- Small shield badge top -->
-  <path d="M512,148 L600,178 L600,260 C600,310 512,350 512,350 C512,350 424,310 424,260 L424,178 Z"
-        fill="#FFD740"/>
-  <text x="512" y="255" font-family="Arial Black, sans-serif" font-size="48" fill="#BF360C"
-        text-anchor="middle" dominant-baseline="middle">G</text>
-
-  <!-- Traffic light — status indicator (right side) -->
-  <rect x="780" y="300" width="120" height="280" rx="20" fill="#37474F" filter="url(#sh6)"/>
-  <!-- Red: Broken -->
-  <circle cx="840" cy="360" r="34" fill="#E53935"/>
-  <!-- Yellow: Duplicate/Disabled -->
-  <circle cx="840" cy="440" r="34" fill="#F9A825"/>
-  <!-- Green: OK -->
-  <circle cx="840" cy="520" r="34" fill="#43A047"/>
-  <circle cx="840" cy="520" r="22" fill="#66BB6A"/>
-
-  <!-- Labels for traffic light -->
-  <text x="840" y="590" font-family="Arial, sans-serif" font-size="16" fill="#546E7A"
-        text-anchor="middle">상태</text>
-
-  <!-- System / User chips -->
-  <rect x="124" y="400" width="120" height="40" rx="20" fill="#1565C0" filter="url(#sh6)"/>
-  <text x="184" y="420" font-family="Arial, sans-serif" font-size="18" fill="white"
-        text-anchor="middle" dominant-baseline="middle">System</text>
-  <rect x="124" y="454" width="100" height="40" rx="20" fill="#43A047" filter="url(#sh6)"/>
-  <text x="174" y="474" font-family="Arial, sans-serif" font-size="18" fill="white"
-        text-anchor="middle" dominant-baseline="middle">User</text>
-
-  <!-- Bottom banner -->
-  <rect x="180" y="780" width="664" height="76" rx="24" fill="white" filter="url(#sh6)" opacity="0.95"/>
-  <text x="512" y="818" font-family="Arial Black, sans-serif" font-size="42" fill="#E64A19"
-        text-anchor="middle" dominant-baseline="middle">Path.Guard</text>
+  <!-- Layer 3: 방패 내부 PATH 텍스트 -->
+  <text x="512" y="420" font-family="'Courier New',monospace" font-weight="900" font-size="72" fill="#FFD740" text-anchor="middle" dominant-baseline="middle">PATH</text>
+  <!-- 체크 아이콘 -->
+  <circle cx="512" cy="550" r="72" fill="#2E7D32" stroke="#00E676" stroke-width="6"/>
+  <text x="512" y="550" font-family="'Segoe UI Emoji',Arial,sans-serif" font-size="68" fill="white" text-anchor="middle" dominant-baseline="middle">✓</text>
+  <!-- 별 장식 (방패 상단 양쪽) -->
+  <circle cx="390" cy="310" r="12" fill="#FFD740" opacity="0.8"/>
+  <circle cx="634" cy="310" r="12" fill="#FFD740" opacity="0.8"/>
 </svg>

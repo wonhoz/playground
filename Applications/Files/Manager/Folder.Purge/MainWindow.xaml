@@ -468,6 +468,11 @@
                             <TextBlock x:Name="StatSize" Text="0 B" FontSize="10"
                                        Foreground="{StaticResource GreenBrush}" HorizontalAlignment="Right"/>
                         </Grid>
+                        <Grid Margin="0,3,0,0">
+                            <TextBlock Text="마지막 스캔" FontSize="9" Foreground="#555566"/>
+                            <TextBlock x:Name="StatLastScan" Text="—" FontSize="9"
+                                       Foreground="#555566" HorizontalAlignment="Right"/>
+                        </Grid>
                     </StackPanel>
                 </Border>
 
@@ -534,18 +539,49 @@
             <Border Grid.Row="1" Background="#1E1E28"
                     BorderBrush="{StaticResource BorderBrush}" BorderThickness="0,0,0,1"
                     Padding="10,5">
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="필터:" FontSize="11" Foreground="{StaticResource TextSecondary}"
-                               VerticalAlignment="Center" Margin="0,0,8,0"/>
-                    <RadioButton x:Name="FilterAll"   Content="전체"         GroupName="Filter" IsChecked="True"
-                                 Checked="Filter_Changed" Margin="0,0,6,0"/>
-                    <RadioButton x:Name="FilterEmpty" Content="빈 폴더"      GroupName="Filter"
-                                 Checked="Filter_Changed" Margin="0,0,6,0"/>
-                    <RadioButton x:Name="FilterVs"    Content="VS 아티팩트"  GroupName="Filter"
-                                 Checked="Filter_Changed" Margin="0,0,6,0"/>
-                    <RadioButton x:Name="FilterFile"  Content="빈 파일"      GroupName="Filter"
-                                 Checked="Filter_Changed"/>
-                </StackPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <!-- 종류 필터 -->
+                    <StackPanel Grid.Column="0" Orientation="Horizontal">
+                        <TextBlock Text="필터:" FontSize="11" Foreground="{StaticResource TextSecondary}"
+                                   VerticalAlignment="Center" Margin="0,0,8,0"/>
+                        <RadioButton x:Name="FilterAll"   Content="전체"         GroupName="Filter" IsChecked="True"
+                                     Checked="Filter_Changed" Margin="0,0,6,0"/>
+                        <RadioButton x:Name="FilterEmpty" Content="빈 폴더"      GroupName="Filter"
+                                     Checked="Filter_Changed" Margin="0,0,6,0"/>
+                        <RadioButton x:Name="FilterVs"    Content="VS 아티팩트"  GroupName="Filter"
+                                     Checked="Filter_Changed" Margin="0,0,6,0"/>
+                        <RadioButton x:Name="FilterFile"  Content="빈 파일"      GroupName="Filter"
+                                     Checked="Filter_Changed"/>
+                    </StackPanel>
+                    <!-- 검색 + 최소 크기 필터 -->
+                    <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
+                        <TextBlock Text="최소 크기:" FontSize="11" Foreground="{StaticResource TextSecondary}"
+                                   VerticalAlignment="Center" Margin="0,0,4,0"/>
+                        <TextBox x:Name="MinSizeInput" Width="60" Height="22"
+                                 Background="#252530" Foreground="{StaticResource TextPrimary}"
+                                 BorderBrush="#333344" BorderThickness="1"
+                                 Padding="4,2" FontSize="10" CaretBrush="#E0E0E0"
+                                 VerticalContentAlignment="Center"
+                                 ToolTip="지정 크기 이상 항목만 표시 (KB 단위, 비워두면 전체)"
+                                 TextChanged="Filter_Changed"/>
+                        <TextBlock Text="KB" FontSize="11" Foreground="{StaticResource TextSecondary}"
+                                   VerticalAlignment="Center" Margin="4,0,16,0"/>
+                        <TextBlock Text="검색:" FontSize="11" Foreground="{StaticResource TextSecondary}"
+                                   VerticalAlignment="Center" Margin="0,0,4,0"/>
+                        <TextBox x:Name="SearchInput" Width="160" Height="22"
+                                 Background="#252530" Foreground="{StaticResource TextPrimary}"
+                                 BorderBrush="#333344" BorderThickness="1"
+                                 Padding="4,2" FontSize="10" CaretBrush="#E0E0E0"
+                                 VerticalContentAlignment="Center"
+                                 ToolTip="경로 키워드로 결과 필터링"
+                                 TextChanged="Filter_Changed"/>
+                    </StackPanel>
+                </Grid>
             </Border>
 
             <!-- 결과 목록 -->
@@ -571,7 +607,8 @@
                           ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                           Visibility="Collapsed"
                           SelectionMode="Extended"
-                          GridViewColumnHeader.Click="ColumnHeader_Click">
+                          GridViewColumnHeader.Click="ColumnHeader_Click"
+                          MouseDoubleClick="ResultListView_MouseDoubleClick">
                     <ListView.ContextMenu>
                         <ContextMenu Background="#2A2A35" BorderBrush="#444455" Foreground="#E0E0E0"
                                      FontSize="12">

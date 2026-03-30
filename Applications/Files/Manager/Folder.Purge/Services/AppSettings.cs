@@ -14,6 +14,9 @@ public class AppSettings
         [".git", ".vs", ".svn", ".hg", "node_modules", "__pycache__"];
     public List<string> VsArtifactFolderNames { get; set; } = ["bin", "obj"];
     public List<string> VsArtifactFileExtensions { get; set; } = [".user"];
+    public string SortColumn { get; set; } = string.Empty;
+    public bool SortDescending { get; set; } = false;
+    public DateTime? LastScanTime { get; set; } = null;
 
     private static readonly string _path = Path.Combine(
         Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),

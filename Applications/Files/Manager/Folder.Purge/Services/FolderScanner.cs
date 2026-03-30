@@ -32,6 +32,8 @@ public class FolderScanner
                 if (!Directory.Exists(root)) continue;
                 ScanDirectory(root, results, prog, progress);
             }
+            // 마지막 진행 상황 항상 보고
+            progress?.Report(prog);
         }, _ct);
 
         return results;
@@ -99,8 +101,7 @@ public class FolderScanner
 
             if (hasOnlyArtifactDirs && hasOnlyArtifactFiles && subDirs.Length >= 1)
             {
-                long totalSize = GetDirectorySize(path);
-                int  totalItems = GetItemCount(path);
+                GetDirectorySizeAndCount(path, out long totalSize, out int totalItems);
                 results.Add(new FolderEntry
                 {
                     Path      = path,
@@ -131,31 +132,24 @@ public class FolderScanner
         }
     }
 
-    // ── 헬퍼: 폴더 전체 크기 계산 ──
-    private static long GetDirectorySize(string path)
+    // ── 헬퍼: 폴더 전체 크기 + 항목 수 단일 순회 계산 ──
+    private static void GetDirectorySizeAndCount(string path, out long size, out int count)
     {
-        long size = 0;
+        size = 0;
+        count = 0;
         try
         {
-            foreach (var f in Directory.EnumerateFiles(path, "*", SearchOption.AllDirectories))
+            foreach (var entry in Directory.EnumerateFileSystemEntries(path, "*", SearchOption.AllDirectories))
             {
-                try { size += new FileInfo(f).Length; }
+                count++;
+                try
+                {
+                    if (File.Exists(entry))
+                        size += new FileInfo(entry).Length;
+                }
                 catch { /* 건너뜀 */ }
             }
         }
         catch { /* 건너뜀 */ }
-        return size;
-    }
-
-    private static int GetItemCount(string path)
-    {
-        int count = 0;
-        try
-        {
-            count += Directory.GetFiles(path, "*", SearchOption.AllDirectories).Length;
-            count += Directory.GetDirectories(path, "*", SearchOption.AllDirectories).Length;
-        }
-        catch { /* 건너뜀 */ }
-        return count;
     }
 }

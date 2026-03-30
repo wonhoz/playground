@@ -32,7 +32,25 @@ public partial class MainWindow : Window
         ArtifactListBox.ItemsSource = _artifactFolderNames;
         Loaded  += OnLoaded;
         Closing += OnClosing;
-        KeyDown += (_, e) => { if (e.Key == System.Windows.Input.Key.F1) ShowHelp(); };
+        KeyDown += OnWindowKeyDown;
+    }
+
+    private void OnWindowKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+    {
+        switch (e.Key)
+        {
+            case System.Windows.Input.Key.F1:
+                ShowHelp();
+                break;
+            case System.Windows.Input.Key.Enter:
+                if (!_isScanning && _targetFolders.Count > 0)
+                    Scan_Click(sender, e);
+                break;
+            case System.Windows.Input.Key.Delete:
+                if (!_isScanning && _scanResults.Any(r => r.IsSelected))
+                    Delete_Click(sender, e);
+                break;
+        }
     }
 
     private void OnLoaded(object sender, RoutedEventArgs e)
@@ -57,6 +75,20 @@ public partial class MainWindow : Window
         ChkRecycleBin.IsChecked = _settings.UseRecycleBin;
         ChkPreview.IsChecked    = _settings.PreviewOnly;
 
+        // 정렬 상태 복원
+        if (!string.IsNullOrEmpty(_settings.SortColumn))
+        {
+            _sortColumn    = _settings.SortColumn;
+            _sortDirection = _settings.SortDescending
+                ? ListSortDirection.Descending
+                : ListSortDirection.Ascending;
+        }
+
+        // 마지막 스캔 시간 표시
+        StatLastScan.Text = _settings.LastScanTime.HasValue
+            ? _settings.LastScanTime.Value.ToString("MM-dd HH:mm")
+            : "—";
+
         UpdateDropHint();
         if (_settings.PreviewOnly) DeleteBtn.Content = "미리보기 실행";
     }
@@ -71,6 +103,8 @@ public partial class MainWindow : Window
         _settings.ScanEmptyFiles         = ChkEmptyFile.IsChecked == true;
         _settings.UseRecycleBin          = ChkRecycleBin.IsChecked == true;
         _settings.PreviewOnly            = ChkPreview.IsChecked == true;
+        _settings.SortColumn             = _sortColumn ?? string.Empty;
+        _settings.SortDescending         = _sortDirection == ListSortDirection.Descending;
         _settings.Save();
     }
 
@@ -217,15 +251,25 @@ public partial class MainWindow : Window
 
     private void ApplyFilter()
     {
-        var kind = ActiveFilterKind();
-        var filtered = kind == null
-            ? _scanResults
-            : _scanResults.Where(r => r.Kind == kind).ToList();
+        var kind    = ActiveFilterKind();
+        var keyword = SearchInput?.Text.Trim() ?? string.Empty;
+        long minBytes = 0;
+        if (long.TryParse(MinSizeInput?.Text.Trim(), out long minKb) && minKb > 0)
+            minBytes = minKb * 1024;
 
+        var filtered = _scanResults.AsEnumerable();
+        if (kind != null)
+            filtered = filtered.Where(r => r.Kind == kind);
+        if (!string.IsNullOrEmpty(keyword))
+            filtered = filtered.Where(r => r.Path.Contains(keyword, StringComparison.OrdinalIgnoreCase));
+        if (minBytes > 0)
+            filtered = filtered.Where(r => r.SizeBytes >= minBytes);
+
+        var list = filtered.ToList();
         ResultListView.ItemsSource = null;
-        ResultListView.ItemsSource = filtered;
+        ResultListView.ItemsSource = list;
 
-        bool hasItems = filtered.Count > 0;
+        bool hasItems = list.Count > 0;
         ResultListView.Visibility = hasItems ? Visibility.Visible   : Visibility.Collapsed;
         EmptyState.Visibility     = hasItems ? Visibility.Collapsed : Visibility.Visible;
     }
@@ -310,6 +354,9 @@ public partial class MainWindow : Window
         StatusText.Text = hasItems
             ? $"{results.Count:N0}개 항목 탐지됨  —  삭제할 항목을 선택하세요."
             : "탐지된 항목이 없습니다.";
+
+        _settings.LastScanTime = DateTime.Now;
+        StatLastScan.Text = _settings.LastScanTime.Value.ToString("MM-dd HH:mm");
 
         ApplyFilter();
         UpdateStats();
@@ -438,43 +485,33 @@ public partial class MainWindow : Window
             {
                 if (!Directory.Exists(item.Path) && !File.Exists(item.Path))
                 {
-                    Dispatcher.Invoke(() =>
-                        log.AppendLine($"  [건너뜀] {item.Path}  (이미 삭제됨)"));
+                    log.AppendLine($"  [건너뜀] {item.Path}  (이미 삭제됨)");
                     continue;
                 }
 
-                bool ok;
                 if (previewOnly)
                 {
-                    ok = true;
-                    Dispatcher.Invoke(() =>
-                        log.AppendLine($"  [미리보기] {item.Path}  ({item.SizeText})"));
+                    log.AppendLine($"  [미리보기] {item.Path}  ({item.SizeText})");
+                    successCount++;
+                    freedBytes += item.SizeBytes;
                 }
-                else if (useRecycleBin)
-                    ok = RecycleBinHelper.MoveToRecycleBin(item.Path);
                 else
-                    ok = RecycleBinHelper.DeletePermanently(item.Path);
-
-                if (!previewOnly)
                 {
+                    bool ok = useRecycleBin
+                        ? RecycleBinHelper.MoveToRecycleBin(item.Path)
+                        : RecycleBinHelper.DeletePermanently(item.Path);
+
                     if (ok)
                     {
                         successCount++;
                         freedBytes += item.SizeBytes;
-                        Dispatcher.Invoke(() =>
-                            log.AppendLine($"  [삭제] {item.Path}  ({item.SizeText})"));
+                        log.AppendLine($"  [삭제] {item.Path}  ({item.SizeText})");
                     }
                     else
                     {
                         failCount++;
-                        Dispatcher.Invoke(() =>
-                            log.AppendLine($"  [실패] {item.Path}"));
+                        log.AppendLine($"  [실패] {item.Path}");
                     }
-                }
-                else
-                {
-                    successCount++;
-                    freedBytes += item.SizeBytes;
                 }
             }
         });
@@ -545,7 +582,17 @@ public partial class MainWindow : Window
 
     // ── 우클릭 컨텍스트 메뉴 ─────────────────────────────────────────────
 
+    private void ResultListView_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+    {
+        OpenSelectedInExplorer();
+    }
+
     private void OpenInExplorer_Click(object sender, RoutedEventArgs e)
+    {
+        OpenSelectedInExplorer();
+    }
+
+    private void OpenSelectedInExplorer()
     {
         if (ResultListView.SelectedItem is not FolderEntry entry) return;
         var target = Directory.Exists(entry.Path)
@@ -606,8 +653,8 @@ public partial class MainWindow : Window
             """
             ── 단축키 ──────────────────────────────
             F1          도움말 표시
-            Enter       스캔 시작 (폴더 입력 후)
-            Delete      선택 항목 삭제 확인
+            Enter       스캔 시작 (폴더 목록에 항목이 있을 때)
+            Delete      선택된 항목 삭제 확인
 
             ── 사용 방법 ────────────────────────────
             1. 폴더 추가
@@ -618,18 +665,24 @@ public partial class MainWindow : Window
                · 빈 폴더 / VS 빌드 아티팩트 / 0바이트 파일 선택
                · VS 아티팩트: bin, obj 폴더와 .user 파일만 남은 폴더 탐지
 
-            3. [스캔 시작] 클릭 → 결과 목록 확인
+            3. [스캔 시작] 또는 Enter → 결과 목록 확인
 
-            4. 삭제할 항목 선택 (체크박스)
+            4. 결과 필터링 (필터 바)
+               · 종류별 필터: 전체 / 빈 폴더 / VS 아티팩트 / 빈 파일
+               · 최소 크기: 지정 KB 이상 항목만 표시
+               · 검색: 경로 키워드로 결과 필터링
+
+            5. 삭제할 항목 선택 (체크박스)
                · 전체 선택 / 선택 해제 / 반전 버튼 사용
 
-            5. [삭제] 클릭
+            6. [삭제] 클릭 또는 Delete 키
                · 휴지통으로 이동 (기본, 복구 가능)
                · 미리보기 모드: 실제 삭제 없이 대상 확인
 
             ── 팁 ───────────────────────────────────
-            · 결과 목록 우클릭 → 탐색기에서 열기 / 경로 복사
-            · 컬럼 헤더 클릭 → 정렬 (오름/내림차순 토글)
+            · 결과 항목 더블클릭 또는 우클릭 → 탐색기에서 열기
+            · 우클릭 → 경로 복사
+            · 컬럼 헤더 클릭 → 정렬 (오름/내림차순 토글, 정렬 상태 저장됨)
             · 아티팩트 폴더명 목록에서 bin, obj 외 폴더명 추가 가능
             · 제외 폴더에 추가 시 스캔 대상에서 제외
             """,

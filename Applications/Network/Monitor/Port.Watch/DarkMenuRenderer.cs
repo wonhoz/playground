@@ -4,11 +4,11 @@ namespace PortWatch;
 
 internal sealed class DarkMenuRenderer : ToolStripRenderer
 {
-    private static readonly Color _bg     = Color.FromArgb(20, 32, 20);
-    private static readonly Color _border = Color.FromArgb(44, 72, 46);
-    private static readonly Color _hover  = Color.FromArgb(34, 58, 36);
-    private static readonly Color _text   = Color.FromArgb(210, 232, 214);
-    private static readonly Color _sep    = Color.FromArgb(36, 58, 38);
+    private static readonly Color _bg     = Color.FromArgb(16, 26, 38);
+    private static readonly Color _border = Color.FromArgb(34, 58, 90);
+    private static readonly Color _hover  = Color.FromArgb(28, 48, 76);
+    private static readonly Color _text   = Color.FromArgb(208, 220, 238);
+    private static readonly Color _sep    = Color.FromArgb(26, 46, 72);
 
     protected override void OnRenderToolStripBackground(ToolStripRenderEventArgs e)
     {

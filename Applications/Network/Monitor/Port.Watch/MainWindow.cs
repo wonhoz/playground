@@ -43,8 +43,8 @@ public sealed class MainWindow : Form
         Text = "Port.Watch \u2014 포트 & 프로세스 모니터";
         Size = new Size(1120, 700);
         MinimumSize = new Size(940, 520);
-        BackColor = Color.FromArgb(16, 22, 16);
-        ForeColor = Color.FromArgb(215, 235, 218);
+        BackColor = Color.FromArgb(14, 18, 28);
+        ForeColor = Color.FromArgb(210, 222, 240);
         Font = new Font("Segoe UI", 9.5f);
         StartPosition = FormStartPosition.CenterScreen;
         var icoPath = Path.Combine(AppContext.BaseDirectory, "Resources", "app.ico");
@@ -55,7 +55,7 @@ public sealed class MainWindow : Form
         {
             Dock = DockStyle.Top,
             Height = 62,
-            BackColor = Color.FromArgb(18, 26, 18),
+            BackColor = Color.FromArgb(16, 22, 32),
             Padding = new Padding(12, 10, 12, 10)
         };
 
@@ -74,8 +74,8 @@ public sealed class MainWindow : Form
         {
             PlaceholderText = "포트 번호 또는 프로세스 이름...",
             Dock = DockStyle.Fill,
-            BackColor = Color.FromArgb(22, 34, 22),
-            ForeColor = Color.FromArgb(215, 235, 218),
+            BackColor = Color.FromArgb(18, 28, 44),
+            ForeColor = Color.FromArgb(210, 222, 240),
             BorderStyle = BorderStyle.None,
             Font = new Font("Segoe UI", 9.5f)
         };
@@ -85,7 +85,7 @@ public sealed class MainWindow : Form
         {
             Location = new Point(44, (62 - txH - 2) / 2),  // 툴바 내 수직 중앙 정렬
             Size = new Size(252, txH + 2),  // 정확한 높이: 내부 텍스트 + 위아래 1px 보더
-            BackColor = Color.FromArgb(44, 68, 44),
+            BackColor = Color.FromArgb(34, 54, 82),
             Padding = new Padding(1)
         };
         searchBorder.Controls.Add(_searchBox);
@@ -117,7 +117,7 @@ public sealed class MainWindow : Form
         };
 
         _btnHelp = MakeButton("?", new Point(854, 15), 40);
-        _btnHelp.ForeColor = Color.FromArgb(130, 200, 155);
+        _btnHelp.ForeColor = Color.FromArgb(110, 185, 230);
         _btnHelp.Click += (_, _) => ShowHelp();
 
         toolbar.Controls.AddRange([lblIcon, searchBorder, _btnRefresh, _chkAuto, _btnInterval, _chkFavOnly, _btnHelp]);
@@ -142,8 +142,8 @@ public sealed class MainWindow : Form
         _grid = new DataGridView
         {
             Dock = DockStyle.Fill,
-            BackgroundColor = Color.FromArgb(14, 22, 14),
-            GridColor = Color.FromArgb(28, 46, 28),
+            BackgroundColor = Color.FromArgb(12, 18, 26),
+            GridColor = Color.FromArgb(22, 38, 60),
             BorderStyle = BorderStyle.None,
             CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal,
             SelectionMode = DataGridViewSelectionMode.FullRowSelect,
@@ -162,20 +162,20 @@ public sealed class MainWindow : Form
         };
 
         var cellStyle = _grid.DefaultCellStyle;
-        cellStyle.BackColor = Color.FromArgb(16, 24, 16);
-        cellStyle.ForeColor = Color.FromArgb(212, 232, 216);
-        cellStyle.SelectionBackColor = Color.FromArgb(26, 76, 44);
+        cellStyle.BackColor = Color.FromArgb(14, 20, 30);
+        cellStyle.ForeColor = Color.FromArgb(208, 220, 238);
+        cellStyle.SelectionBackColor = Color.FromArgb(20, 64, 120);
         cellStyle.SelectionForeColor = Color.White;
         cellStyle.Padding = new Padding(6, 0, 4, 0);
 
         var altStyle = _grid.AlternatingRowsDefaultCellStyle;
-        altStyle.BackColor = Color.FromArgb(20, 30, 20);
-        altStyle.ForeColor = Color.FromArgb(212, 232, 216);
-        altStyle.SelectionBackColor = Color.FromArgb(26, 76, 44);
+        altStyle.BackColor = Color.FromArgb(16, 24, 36);
+        altStyle.ForeColor = Color.FromArgb(208, 220, 238);
+        altStyle.SelectionBackColor = Color.FromArgb(20, 64, 120);
         altStyle.SelectionForeColor = Color.White;
 
         var hdrStyle = _grid.ColumnHeadersDefaultCellStyle;
-        hdrStyle.BackColor = Color.FromArgb(20, 32, 20);
+        hdrStyle.BackColor = Color.FromArgb(16, 26, 38);
         hdrStyle.ForeColor = Color.FromArgb(100, 160, 215);
         hdrStyle.Font = new Font("Segoe UI", 9f, FontStyle.Bold);
         hdrStyle.SelectionBackColor = Color.FromArgb(20, 32, 20);
@@ -190,7 +190,7 @@ public sealed class MainWindow : Form
         AddCol("state",   "상태",     120, DataGridViewAutoSizeColumnMode.None,  DataGridViewContentAlignment.MiddleLeft);
         AddCol("remote",  "원격 주소",155, DataGridViewAutoSizeColumnMode.None,  DataGridViewContentAlignment.MiddleLeft);
         AddCol("path",    "경로",     200, DataGridViewAutoSizeColumnMode.Fill,  DataGridViewContentAlignment.MiddleLeft);
-        _grid.Columns["path"].MinimumWidth = 200;
+        if (_grid.Columns["path"] is { } pathCol) pathCol.MinimumWidth = 200;
 
         // 컨텍스트 메뉴
         var ctx = new ContextMenuStrip { Renderer = new DarkMenuRenderer(), ShowImageMargin = false, Font = new Font("Segoe UI", 9.5f) };
@@ -234,13 +234,13 @@ public sealed class MainWindow : Form
         {
             Dock = DockStyle.Bottom,
             Height = 32,
-            BackColor = Color.FromArgb(16, 26, 16)
+            BackColor = Color.FromArgb(14, 22, 32)
         };
 
         _statusLabel = new Label
         {
             Text = "로딩 중...",
-            ForeColor = Color.FromArgb(90, 140, 100),
+            ForeColor = Color.FromArgb(80, 135, 195),
             Font = new Font("Segoe UI", 9f),
             TextAlign = ContentAlignment.MiddleLeft,
             Dock = DockStyle.Fill,
@@ -253,13 +253,13 @@ public sealed class MainWindow : Form
             FlatStyle = FlatStyle.Flat,
             Font = new Font("Segoe UI", 9f),
             ForeColor = Color.FromArgb(220, 90, 80),
-            BackColor = Color.FromArgb(16, 26, 16),
+            BackColor = Color.FromArgb(14, 22, 32),
             Dock = DockStyle.Right,
             Width = 220,
             Cursor = Cursors.Hand
         };
-        btnKill.FlatAppearance.BorderColor = Color.FromArgb(44, 68, 44);
-        btnKill.FlatAppearance.MouseOverBackColor = Color.FromArgb(30, 48, 30);
+        btnKill.FlatAppearance.BorderColor = Color.FromArgb(34, 54, 82);
+        btnKill.FlatAppearance.MouseOverBackColor = Color.FromArgb(22, 40, 64);
         btnKill.Click += KillSelected;
 
         // _statusLabel(index 0) → Fill, btnKill(index 1) → Right
@@ -364,7 +364,7 @@ public sealed class MainWindow : Form
             _noticeTimer.Stop();
             _noticeTimer.Dispose();
             _noticeTimer = null;
-            _statusLabel.ForeColor = Color.FromArgb(90, 140, 100);
+            _statusLabel.ForeColor = Color.FromArgb(80, 135, 195);
             ApplyFilter();  // 상태 텍스트 복원
         };
         _noticeTimer.Start();
@@ -418,9 +418,9 @@ public sealed class MainWindow : Form
 
             if (e.IsFavorite)
             {
-                row.DefaultCellStyle.BackColor = Color.FromArgb(22, 44, 30);
-                row.DefaultCellStyle.ForeColor = Color.FromArgb(130, 215, 155);
-                row.DefaultCellStyle.SelectionBackColor = Color.FromArgb(30, 68, 44);
+                row.DefaultCellStyle.BackColor = Color.FromArgb(18, 38, 64);
+                row.DefaultCellStyle.ForeColor = Color.FromArgb(100, 190, 240);
+                row.DefaultCellStyle.SelectionBackColor = Color.FromArgb(22, 56, 100);
                 row.DefaultCellStyle.SelectionForeColor = Color.White;
                 row.Cells["fav"].Style.ForeColor = Color.FromArgb(200, 170, 50);
             }
@@ -430,7 +430,7 @@ public sealed class MainWindow : Form
         var tcpCount  = list.Count(e => e.Protocol == "TCP");
         var udpCount  = list.Count(e => e.Protocol == "UDP");
         var procCount = list.Select(e => e.Pid).Distinct().Count(p => p > 0);
-        _statusLabel.ForeColor = Color.FromArgb(90, 140, 100);
+        _statusLabel.ForeColor = Color.FromArgb(80, 135, 195);
         _statusLabel.Text =
             $"총 {list.Count}개  |  TCP {tcpCount} · UDP {udpCount}  |  프로세스 {procCount}개  |  즐겨찾기 {list.Count(e => e.IsFavorite)}개  |  {DateTime.Now:HH:mm:ss}";
 
@@ -591,12 +591,12 @@ public sealed class MainWindow : Form
         {
             Text = text, Location = loc, Size = new Size(width, 32),
             FlatStyle = FlatStyle.Flat,
-            BackColor = Color.FromArgb(24, 40, 24),
-            ForeColor = Color.FromArgb(190, 225, 198),
+            BackColor = Color.FromArgb(20, 34, 54),
+            ForeColor = Color.FromArgb(180, 210, 235),
             Font = new Font("Segoe UI", 9.5f), Cursor = Cursors.Hand
         };
-        btn.FlatAppearance.BorderColor = Color.FromArgb(44, 72, 46);
-        btn.FlatAppearance.MouseOverBackColor = Color.FromArgb(36, 58, 36);
+        btn.FlatAppearance.BorderColor = Color.FromArgb(34, 58, 90);
+        btn.FlatAppearance.MouseOverBackColor = Color.FromArgb(28, 48, 76);
         return btn;
     }
 
@@ -606,15 +606,15 @@ public sealed class MainWindow : Form
         {
             Text = text, Location = loc, Size = new Size(width, 32),
             Appearance = Appearance.Button, FlatStyle = FlatStyle.Flat,
-            BackColor = Color.FromArgb(24, 40, 24),
-            ForeColor = Color.FromArgb(155, 200, 165),
+            BackColor = Color.FromArgb(20, 34, 54),
+            ForeColor = Color.FromArgb(140, 195, 232),
             Font = new Font("Segoe UI", 9.5f),
             TextAlign = ContentAlignment.MiddleCenter,
             Cursor = Cursors.Hand
         };
-        chk.FlatAppearance.CheckedBackColor = Color.FromArgb(20, 74, 40);
-        chk.FlatAppearance.BorderColor = Color.FromArgb(44, 72, 46);
-        chk.FlatAppearance.MouseOverBackColor = Color.FromArgb(36, 58, 36);
+        chk.FlatAppearance.CheckedBackColor = Color.FromArgb(18, 60, 100);
+        chk.FlatAppearance.BorderColor = Color.FromArgb(34, 58, 90);
+        chk.FlatAppearance.MouseOverBackColor = Color.FromArgb(28, 48, 76);
         return chk;
     }
 
@@ -624,19 +624,19 @@ public sealed class MainWindow : Form
         var bmp = new Bitmap(32, 32);
         using var g = Graphics.FromImage(bmp);
         g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-        g.Clear(Color.FromArgb(10, 22, 10));
+        g.Clear(Color.FromArgb(10, 16, 26));
 
         // 소켓 모양: 두 핀
-        using var pinBrush = new SolidBrush(Color.FromArgb(0, 210, 120));
+        using var pinBrush = new SolidBrush(Color.FromArgb(40, 130, 220));
         g.FillRectangle(pinBrush, 8, 5, 5, 12);
         g.FillRectangle(pinBrush, 19, 5, 5, 12);
 
         // 소켓 본체
-        using var bodyBrush = new SolidBrush(Color.FromArgb(0, 160, 80));
+        using var bodyBrush = new SolidBrush(Color.FromArgb(20, 100, 180));
         g.FillRoundedRect(bodyBrush, new RectangleF(4, 14, 24, 14), 4);
 
-        // 신호선 (에메랄드 펄스)
-        using var dotBrush = new SolidBrush(Color.FromArgb(0, 230, 118));
+        // 신호 펄스
+        using var dotBrush = new SolidBrush(Color.FromArgb(70, 160, 235));
         g.FillEllipse(dotBrush, 13, 18, 6, 6);
 
         return Icon.FromHandle(bmp.GetHicon());
@@ -681,7 +681,7 @@ public sealed class MainWindow : Form
             {
                 if (_sbCorner == null)
                 {
-                    _sbCorner = new Panel { BackColor = Color.FromArgb(16, 24, 16), BorderStyle = BorderStyle.None };
+                    _sbCorner = new Panel { BackColor = Color.FromArgb(14, 20, 30), BorderStyle = BorderStyle.None };
                     _grid.Controls.Add(_sbCorner);
                 }
                 _sbCorner.Bounds  = new Rectangle(vSb.Left, hSb.Top, vSb.Width, hSb.Height);

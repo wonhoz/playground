@@ -46,7 +46,7 @@ public partial class PopupWindow : Window
     {
         try
         {
-            var path = Path.Combine(AppContext.BaseDirectory, "Resources", "clipstacker.ico");
+            var path = Path.Combine(AppContext.BaseDirectory, "Resources", "app.ico");
             if (File.Exists(path))
             {
                 using var s = File.OpenRead(path);

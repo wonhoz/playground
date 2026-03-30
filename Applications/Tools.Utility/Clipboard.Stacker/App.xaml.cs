@@ -25,17 +25,6 @@ public partial class App : Application
     {
         base.OnStartup(e);
 
-        // 현재 빌드의 clipstacker.ico를 pack resource에서 추출 (항상 최신 아이콘 반영)
-        var iconDir = Path.Combine(AppContext.BaseDirectory, "Resources");
-        Directory.CreateDirectory(iconDir);
-        var icoExtractPath = Path.Combine(iconDir, "clipstacker.ico");
-        try
-        {
-            var sri = Application.GetResourceStream(new Uri("pack://application:,,,/Resources/clipstacker.ico"));
-            if (sri != null) { using var fs = File.Create(icoExtractPath); sri.Stream.CopyTo(fs); }
-        }
-        catch { }
-
         // 설정 로드
         _settings = SettingsService.Load();
         _stack    = new ClipboardStack(_settings.MaxHistory);
@@ -72,7 +61,7 @@ public partial class App : Application
         _popup.Hide();
 
         // 트레이
-        InitTray(iconDir);
+        InitTray();
 
         // 풍선 알림
         _tray?.ShowBalloonTip(1500, "Clipboard Stacker",
@@ -158,9 +147,10 @@ public partial class App : Application
     }
 
     // ── 트레이 ────────────────────────────────────────────────────
-    private void InitTray(string iconDir)
+    private void InitTray()
     {
-        var icoPath = Path.Combine(iconDir, "clipstacker.ico");
+        // app.ico — AUMID IconUri와 동일한 파일을 트레이에도 사용 (Content 배포 파일)
+        var icoPath = Path.Combine(AppContext.BaseDirectory, "Resources", "app.ico");
 
         _tray = new NotifyIcon
         {

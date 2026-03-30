@@ -26,7 +26,7 @@ namespace AiClip
 
             _trayIcon = new NotifyIcon
             {
-                Icon             = IconGenerator.CreateTrayIcon(),
+                Icon             = LoadTrayIcon(),
                 Text             = "AI.Clip",
                 ContextMenuStrip = _contextMenu,
                 Visible          = true
@@ -202,6 +202,15 @@ namespace AiClip
         {
             using var form = new SettingsForm(_settings);
             form.ShowDialog();
+        }
+
+        // app.ico — AUMID IconUri와 동일한 파일을 트레이에도 사용 (Content 배포 파일)
+        private static Icon LoadTrayIcon()
+        {
+            var path = Path.Combine(AppContext.BaseDirectory, "Resources", "app.ico");
+            if (File.Exists(path))
+                return new System.Drawing.Icon(path);
+            return IconGenerator.CreateTrayIcon(); // fallback
         }
 
         private void OnExit(object? s, EventArgs e)

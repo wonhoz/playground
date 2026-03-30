@@ -1,5 +1,6 @@
 using System.IO;
 using System.Windows;
+using System.Windows.Media.Imaging;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -57,7 +58,16 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
-        Loaded += (_, _) => { ApplyDarkTitleBar(); IconGenerator.EnsureIcon(this); };
+        Loaded += (_, _) =>
+        {
+            ApplyDarkTitleBar();
+            try
+            {
+                var sri = Application.GetResourceStream(new Uri("pack://application:,,,/Resources/app.ico"));
+                if (sri != null) Icon = BitmapFrame.Create(sri.Stream, BitmapCreateOptions.None, BitmapCacheOption.OnLoad);
+            }
+            catch { }
+        };
 
         _bestTime = LoadBestTime();
 

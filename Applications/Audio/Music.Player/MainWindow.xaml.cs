@@ -37,7 +37,6 @@ namespace Music.Player
         public MainWindow()
         {
             InitializeComponent();
-            EnsureResourcesExist();
             _snap = new WindowSnapService(this);
 
             PlaylistBox.ItemsSource = _playlist;
@@ -52,25 +51,6 @@ namespace Music.Player
 
             // Restore saved playlist state after window is loaded
             Loaded += async (s, e) => await RestorePlaylistStateAsync();
-        }
-
-        private void EnsureResourcesExist()
-        {
-            try
-            {
-                var exePath = AppContext.BaseDirectory;
-                var resourcePath = System.IO.Path.Combine(exePath, "Resources");
-                var appIcoPath = System.IO.Path.Combine(resourcePath, "app.ico");
-
-                if (!File.Exists(appIcoPath))
-                {
-                    IconGenerator.GenerateAppIcon(resourcePath);
-                }
-            }
-            catch
-            {
-                // Icon generation failure should not prevent app from running
-            }
         }
 
         #region Title Bar

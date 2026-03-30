@@ -26,7 +26,7 @@ namespace StayAwake
         private static readonly Color SubTextColor = Color.FromArgb(160, 160, 160);
         private static readonly Color BorderColor = Color.FromArgb(60, 60, 60);
         private static readonly Color InputBg = Color.FromArgb(50, 50, 50);
-        private static readonly Color AccentColor = Color.FromArgb(76, 175, 80);
+        private static readonly Color AccentColor = Color.FromArgb(67, 217, 123); // #43D97B, 아이콘 배지 색상
         private static readonly Color BtnCancelColor = Color.FromArgb(55, 55, 55);
 
         public SlackSettingsForm(int startHour, int startMinute, int endHour, int endMinute)

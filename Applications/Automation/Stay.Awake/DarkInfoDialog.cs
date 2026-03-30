@@ -52,7 +52,13 @@ namespace StayAwake
                 Dock = DockStyle.None,
                 Location = new Point(16, 16),
                 Size = new Size(width - 48, height - 80),
-                TabStop = false
+                TabStop = false,
+                DetectUrls = true
+            };
+            textBox.LinkClicked += (s, e) =>
+            {
+                try { System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(e.LinkText) { UseShellExecute = true }); }
+                catch { }
             };
 
             var btnOk = new Button

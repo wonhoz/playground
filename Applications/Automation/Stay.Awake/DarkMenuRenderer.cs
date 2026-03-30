@@ -16,7 +16,7 @@ namespace StayAwake
         private static readonly Color SeparatorColor = Color.FromArgb(60, 60, 60);
         private static readonly Color TextColor = Color.FromArgb(240, 240, 240);
         private static readonly Color DisabledTextColor = Color.FromArgb(128, 128, 128);
-        private static readonly Color CheckMarkColor = Color.FromArgb(76, 175, 80);  // Green
+        private static readonly Color CheckMarkColor = Color.FromArgb(67, 217, 123);  // Green (#43D97B, 아이콘 배지 색상)
         private static readonly Color AccentColor = Color.FromArgb(66, 133, 244);    // Blue
 
         protected override void OnRenderToolStripBackground(ToolStripRenderEventArgs e)

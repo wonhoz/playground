@@ -61,14 +61,16 @@ namespace StayAwake
             };
             _intervalMinutes = _settings.IntervalMinutes;
 
-            // Slack UI 자동화 초기화
+            // Slack UI 자동화 초기화 (마지막 변경 날짜 복원 → 재시작 시 중복 전송 방지)
             _slackAutomation = new SlackUiAutomation
             {
                 IsEnabled = _settings.SlackAutoStatusEnabled,
                 WorkStartHour = _settings.WorkStartHour,
                 WorkStartMinute = _settings.WorkStartMinute,
                 WorkEndHour = _settings.WorkEndHour,
-                WorkEndMinute = _settings.WorkEndMinute
+                WorkEndMinute = _settings.WorkEndMinute,
+                LastActiveSet = _settings.LastSlackActiveSetDate,
+                LastAwaySet = _settings.LastSlackAwaySetDate
             };
 
             // 활동 타이머 설정
@@ -124,7 +126,7 @@ namespace StayAwake
             _startStopItem = new ToolStripMenuItem("▶ 시작", null, (s, e) => ToggleRunning())
             {
                 Font = new Font(_menuFont, FontStyle.Bold),
-                ForeColor = Color.FromArgb(76, 175, 80) // Green for start
+                ForeColor = Color.FromArgb(67, 217, 123) // Green for start
             };
             menu.Items.Add(_startStopItem);
 
@@ -245,7 +247,7 @@ namespace StayAwake
                 _tooltipTimer.Stop();
                 _simulator.AllowSleep(); // 절전 방지 해제
                 _startStopItem.Text = "▶ 시작";
-                _startStopItem.ForeColor = Color.FromArgb(76, 175, 80); // Green for start
+                _startStopItem.ForeColor = Color.FromArgb(67, 217, 123); // Green for start
                 _trayIcon.Icon = CreateIcon(false);
                 _trayIcon.Text = "StayAwake - 정지됨";
                 _statusItem.Text = "상태: 정지됨";
@@ -269,17 +271,13 @@ namespace StayAwake
                 _activityTimer.Stop();
                 _lastActivityTime = DateTime.Now;
                 _activityTimer.Start();
+                UpdateTooltip(); // 간격 변경 즉시 카운트다운 갱신
             }
 
             // 체크 상태 업데이트
             foreach (ToolStripMenuItem item in _intervalItem.DropDownItems)
             {
                 item.Checked = item.Text == $"{minutes}분";
-            }
-
-            if (_isRunning)
-            {
-                _trayIcon.Text = $"StayAwake - 실행 중 ({_intervalMinutes}분 간격)";
             }
 
             SaveSettings();
@@ -398,7 +396,12 @@ namespace StayAwake
             if (_isRunning && simulated)
             {
                 _activityCount++;
+                // 수동 실행 후 타이머 리셋 — 직후 자동 실행 방지
+                _activityTimer.Stop();
+                _lastActivityTime = DateTime.Now;
+                _activityTimer.Start();
                 UpdateStatus(simulated);
+                UpdateTooltip();
             }
             SaveDailyStats();
             var message = simulated
@@ -521,6 +524,11 @@ Slack 자리 비움 상태 방지 도구
 
             if (result.Success)
             {
+                // 변경 날짜 저장 — 재시작 시 중복 전송 방지
+                _settings.LastSlackActiveSetDate = _slackAutomation.LastActiveSet;
+                _settings.LastSlackAwaySetDate = _slackAutomation.LastAwaySet;
+                _settings.Save();
+
                 var label = result.Status == "active" ? "활성" : "자리 비움";
                 _trayIcon.ShowBalloonTip(2000, "StayAwake",
                     $"Slack 상태를 '{label}'으로 변경했습니다.", ToolTipIcon.Info);

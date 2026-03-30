@@ -10,8 +10,10 @@ namespace StayAwake
     /// </summary>
     public class SlackUiAutomation
     {
-        private DateTime _lastActiveSet = DateTime.MinValue;
-        private DateTime _lastAwaySet = DateTime.MinValue;
+        /// <summary>마지막 활성 상태 변경 시각 (재시작 시 AppSettings에서 복원)</summary>
+        public DateTime LastActiveSet { get; set; } = DateTime.MinValue;
+        /// <summary>마지막 자리비움 상태 변경 시각 (재시작 시 AppSettings에서 복원)</summary>
+        public DateTime LastAwaySet { get; set; } = DateTime.MinValue;
 
         public bool IsEnabled { get; set; }
         public int WorkStartHour { get; set; } = 8;
@@ -29,18 +31,18 @@ namespace StayAwake
             var now = DateTime.Now;
 
             // 아침 WorkStartHour:WorkStartMinute → 활성
-            if (now.Hour == WorkStartHour && now.Minute == WorkStartMinute && _lastActiveSet.Date != now.Date)
+            if (now.Hour == WorkStartHour && now.Minute == WorkStartMinute && LastActiveSet.Date != now.Date)
             {
                 var result = await SetPresenceAsync("active");
-                if (result.Success) _lastActiveSet = now;
+                if (result.Success) LastActiveSet = now;
                 return result;
             }
 
             // 저녁 WorkEndHour:WorkEndMinute → 자리 비움
-            if (now.Hour == WorkEndHour && now.Minute == WorkEndMinute && _lastAwaySet.Date != now.Date)
+            if (now.Hour == WorkEndHour && now.Minute == WorkEndMinute && LastAwaySet.Date != now.Date)
             {
                 var result = await SetPresenceAsync("away");
-                if (result.Success) _lastAwaySet = now;
+                if (result.Success) LastAwaySet = now;
                 return result;
             }
 

@@ -20,6 +20,10 @@ namespace StayAwake
         public int WorkEndHour { get; set; } = 18;
         public int WorkEndMinute { get; set; } = 55;
 
+        // 마지막 Slack 상태 변경 날짜 저장 (재시작 시 중복 전송 방지)
+        public DateTime LastSlackActiveSetDate { get; set; } = DateTime.MinValue;
+        public DateTime LastSlackAwaySetDate { get; set; } = DateTime.MinValue;
+
         private static readonly string _settingsPath = Path.Combine(
             Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
             "StayAwake",

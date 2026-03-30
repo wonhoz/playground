@@ -3,6 +3,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
@@ -26,7 +27,10 @@ public partial class MainWindow : Window
     private bool _isTocVisible;
     private bool _isFocusMode;
     private bool _suppressEditorChange;
+    private bool _suppressTocSelection;
+    private HelpWindow? _helpWindow;
     private DispatcherTimer? _previewTimer;
+    private ScrollViewer? _editorScrollViewer;
     private DispatcherTimer? _autoSaveTimer;
     private string _currentTheme = "dark";
     private double _pendingScrollY = 0;
@@ -44,6 +48,7 @@ public partial class MainWindow : Window
         RestoreWindowBounds();
         ApplySavedTheme();
         ApplyEditorFontSize();
+        Loaded += OnMainWindowLoaded;
         InitWebView();
         SetupPreviewTimer();
         SetupAutoSaveTimer();
@@ -191,6 +196,7 @@ public partial class MainWindow : Window
             Viewer.CoreWebView2.Settings.IsStatusBarEnabled = false;
             Viewer.CoreWebView2.Settings.AreDefaultContextMenusEnabled = false;
             Viewer.CoreWebView2.NavigationCompleted += OnNavigationCompleted;
+            Viewer.CoreWebView2.WebMessageReceived += OnWebViewMessageReceived;
             _webViewReady = true;
             _webViewReadyTcs.TrySetResult();
             HideLoading();
@@ -209,6 +215,60 @@ public partial class MainWindow : Window
         _ = ExtractTocAsync();
         if (_pendingScrollY > 0)
             _ = RestoreScrollAsync();
+        if (_isTocVisible)
+            _ = InjectTocScrollMonitorAsync();
+    }
+
+    private async Task InjectTocScrollMonitorAsync()
+    {
+        await Task.Delay(200); // 렌더링 안정화 대기
+        try
+        {
+            await Viewer.ExecuteScriptAsync(@"
+(function() {
+    if (window.__tocMonitorInstalled) return;
+    window.__tocMonitorInstalled = true;
+    var timer = null;
+    window.addEventListener('scroll', function() {
+        clearTimeout(timer);
+        timer = setTimeout(function() {
+            var headings = document.querySelectorAll('h1,h2,h3,h4,h5,h6');
+            var current = '';
+            headings.forEach(function(h) {
+                if (h.getBoundingClientRect().top <= 80) current = h.id;
+            });
+            if (window.chrome && window.chrome.webview)
+                window.chrome.webview.postMessage('toc:' + current);
+        }, 100);
+    }, {passive: true});
+})()");
+        }
+        catch { }
+    }
+
+    private void OnWebViewMessageReceived(object? sender, CoreWebView2WebMessageReceivedEventArgs e)
+    {
+        var msg = e.TryGetWebMessageAsString();
+        if (msg?.StartsWith("toc:") == true)
+        {
+            var id = msg[4..];
+            HighlightTocEntry(id);
+        }
+    }
+
+    private void HighlightTocEntry(string id)
+    {
+        _suppressTocSelection = true;
+        for (int i = 0; i < TocList.Items.Count; i++)
+        {
+            if (TocList.Items[i] is ListBoxItem item && item.Tag as string == id)
+            {
+                TocList.SelectedIndex = i;
+                TocList.ScrollIntoView(item);
+                break;
+            }
+        }
+        _suppressTocSelection = false;
     }
 
     private async Task<double> GetScrollYAsync()
@@ -283,6 +343,38 @@ public partial class MainWindow : Window
             }
         }
         catch { }
+    }
+
+    // ── Loaded 초기화 ────────────────────────────────────────────────────
+
+    private void OnMainWindowLoaded(object sender, RoutedEventArgs e)
+    {
+        // 에디터 내부 ScrollViewer 탐색 후 스크롤 동기화 구독
+        _editorScrollViewer = FindVisualChild<ScrollViewer>(Editor);
+        if (_editorScrollViewer != null)
+            _editorScrollViewer.ScrollChanged += EditorScrollViewer_ScrollChanged;
+    }
+
+    private static T? FindVisualChild<T>(DependencyObject parent) where T : DependencyObject
+    {
+        for (int i = 0; i < System.Windows.Media.VisualTreeHelper.GetChildrenCount(parent); i++)
+        {
+            var child = System.Windows.Media.VisualTreeHelper.GetChild(parent, i);
+            if (child is T t) return t;
+            var result = FindVisualChild<T>(child);
+            if (result != null) return result;
+        }
+        return null;
+    }
+
+    private void EditorScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e)
+    {
+        if (!_isEditMode || !_webViewReady || _suppressEditorChange) return;
+        if (_editorScrollViewer == null || _editorScrollViewer.ScrollableHeight <= 0) return;
+        var ratio = _editorScrollViewer.VerticalOffset / _editorScrollViewer.ScrollableHeight;
+        _ = Viewer.ExecuteScriptAsync(
+            $"(function(){{var h=document.documentElement.scrollHeight-window.innerHeight;" +
+            $"if(h>0)window.scrollTo(0,h*{ratio.ToString(System.Globalization.CultureInfo.InvariantCulture)});}})()");
     }
 
     // ── 프리뷰 타이머 ───────────────────────────────────────────────────
@@ -596,7 +688,10 @@ public partial class MainWindow : Window
             TocColumn.Width = new GridLength(0);
         }
         else
+        {
             TocColumn.Width = new GridLength(_settings.TocWidth);
+            if (_webViewReady) _ = InjectTocScrollMonitorAsync();
+        }
         _settings.IsTocVisible = visible;
         _settings.Save();
     }
@@ -687,10 +782,10 @@ public partial class MainWindow : Window
             _ = Viewer.ExecuteScriptAsync("window.getSelection()?.removeAllRanges()");
             return;
         }
-        _ = FindInPreviewAsync(keyword);
+        _ = FindInPreviewAsync(keyword, reverse: false);
     }
 
-    private async Task FindInPreviewAsync(string keyword)
+    private async Task FindInPreviewAsync(string keyword, bool reverse)
     {
         try
         {
@@ -711,10 +806,95 @@ public partial class MainWindow : Window
                 StatusFind.Text = count > 0 ? $"{count}개 일치" : "없음";
                 StatusFind.Visibility = Visibility.Visible;
             }
-            // 첫 번째 일치 항목으로 이동
-            await Viewer.ExecuteScriptAsync($"window.find({kw}, false, false, true)");
+            // 방향에 따라 이동 (reverse=true: 역방향)
+            var rev = reverse ? "true" : "false";
+            await Viewer.ExecuteScriptAsync($"window.find({kw}, false, {rev}, true)");
         }
         catch { }
+    }
+
+    // ── 찾기/바꾸기 ─────────────────────────────────────────────────────
+
+    private void ToggleReplaceBar()
+    {
+        var visible = ReplaceBar.Visibility == Visibility.Visible;
+        ReplaceBar.Visibility = visible ? Visibility.Collapsed : Visibility.Visible;
+        if (!visible) TxtReplace.Focus();
+    }
+
+    private void TxtReplace_KeyDown(object sender, KeyEventArgs e)
+    {
+        if (e.Key == Key.Enter) BtnReplace_Click(sender, new RoutedEventArgs());
+        if (e.Key == Key.Escape) ReplaceBar.Visibility = Visibility.Collapsed;
+    }
+
+    private void BtnReplace_Click(object sender, RoutedEventArgs e)
+    {
+        if (_activeIndex < 0 || !_isEditMode) return;
+        var find = TxtFind.Text;
+        var replace = TxtReplace.Text;
+        if (string.IsNullOrEmpty(find)) return;
+
+        var text = Editor.Text;
+        var idx = text.IndexOf(find, StringComparison.OrdinalIgnoreCase);
+        if (idx < 0)
+        {
+            ShowReplaceStatus("없음");
+            return;
+        }
+        Editor.Select(idx, find.Length);
+        Editor.SelectedText = replace;
+        Editor.CaretIndex = idx + replace.Length;
+        ShowReplaceStatus("1개 변경");
+    }
+
+    private void BtnReplaceAll_Click(object sender, RoutedEventArgs e)
+    {
+        if (_activeIndex < 0 || !_isEditMode) return;
+        var find = TxtFind.Text;
+        var replace = TxtReplace.Text;
+        if (string.IsNullOrEmpty(find)) return;
+
+        var text = Editor.Text;
+        int count = 0;
+        var sb = new StringBuilder();
+        int pos = 0;
+        while (pos <= text.Length)
+        {
+            var idx = text.IndexOf(find, pos, StringComparison.OrdinalIgnoreCase);
+            if (idx < 0) { sb.Append(text.AsSpan(pos)); break; }
+            sb.Append(text.AsSpan(pos, idx - pos));
+            sb.Append(replace);
+            pos = idx + find.Length;
+            count++;
+        }
+        if (count > 0)
+        {
+            Editor.Text = sb.ToString();
+            Editor.CaretIndex = Editor.Text.Length;
+        }
+        ShowReplaceStatus(count > 0 ? $"{count}개 변경" : "없음");
+    }
+
+    private void ShowReplaceStatus(string msg)
+    {
+        StatusReplace.Text = msg;
+        StatusReplace.Visibility = Visibility.Visible;
+        var t = new DispatcherTimer { Interval = TimeSpan.FromSeconds(2) };
+        t.Tick += (_, _) => { t.Stop(); StatusReplace.Visibility = Visibility.Collapsed; };
+        t.Start();
+    }
+
+    private void BtnFindPrev_Click(object sender, RoutedEventArgs e)
+    {
+        if (!string.IsNullOrEmpty(TxtFind.Text))
+            _ = FindInPreviewAsync(TxtFind.Text, reverse: true);
+    }
+
+    private void BtnFindNext_Click(object sender, RoutedEventArgs e)
+    {
+        if (!string.IsNullOrEmpty(TxtFind.Text))
+            _ = FindInPreviewAsync(TxtFind.Text, reverse: false);
     }
 
     // ── 이벤트 핸들러 ────────────────────────────────────────────────────
@@ -764,7 +944,14 @@ public partial class MainWindow : Window
 
     private void ShowHelp()
     {
-        new HelpWindow { Owner = this }.ShowDialog();
+        if (_helpWindow != null)
+        {
+            _helpWindow.Activate();
+            return;
+        }
+        _helpWindow = new HelpWindow { Owner = this };
+        _helpWindow.Closed += (_, _) => _helpWindow = null;
+        _helpWindow.Show();
     }
 
     private void EditorSplitter_DragCompleted(object sender, System.Windows.Controls.Primitives.DragCompletedEventArgs e)
@@ -969,13 +1156,20 @@ public partial class MainWindow : Window
 
     private void TxtFind_KeyDown(object sender, KeyEventArgs e)
     {
-        if (e.Key == Key.Enter) FindInPreview(TxtFind.Text);
+        if (e.Key == Key.Enter)
+        {
+            if (!string.IsNullOrEmpty(TxtFind.Text))
+            {
+                bool reverse = Keyboard.Modifiers == ModifierKeys.Shift;
+                _ = FindInPreviewAsync(TxtFind.Text, reverse);
+            }
+        }
         if (e.Key == Key.Escape) TxtFind.Text = "";
     }
 
     private void TocList_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        if (!IsLoaded) return;
+        if (!IsLoaded || _suppressTocSelection) return;
         if (TocList.SelectedItem is ListBoxItem item && item.Tag is string id && !string.IsNullOrEmpty(id))
         {
             _ = Viewer.ExecuteScriptAsync(
@@ -1022,6 +1216,8 @@ public partial class MainWindow : Window
         { SetFocusMode(!_isFocusMode); e.Handled = true; }
         else if (e.Key == Key.F1)
         { ShowHelp(); e.Handled = true; }
+        else if (e.Key == Key.H && Keyboard.Modifiers == ModifierKeys.Control)
+        { ToggleReplaceBar(); e.Handled = true; }
         else if (e.Key == Key.V && Keyboard.Modifiers == (ModifierKeys.Control | ModifierKeys.Shift))
         { PasteClipboardAsNewTab(); e.Handled = true; }
         else if (e.Key == Key.Escape && !string.IsNullOrEmpty(TxtFind.Text))
@@ -1170,33 +1366,66 @@ public partial class MainWindow : Window
                 LoadDocumentToUI(doc);
             UpdateTabTitle(index);
         }
-        catch { }
+        catch (Exception ex)
+        {
+            if (index == _activeIndex)
+                StatusPath.Text = $"파일 읽기 실패: {ex.Message}";
+        }
     }
 
     // ── 최근 파일 ────────────────────────────────────────────────────────
 
-    private record RecentFileItem(string FileName, string Directory, string FullPath);
+    private record RecentFileItem(string FileName, string Directory, string FullPath, bool IsPinned)
+    {
+        public string PinIcon => IsPinned ? "📌" : "○";
+    }
 
     private void RefreshRecentList()
     {
-        var valid = _settings.RecentFiles.Where(File.Exists).ToList();
-        if (valid.Count != _settings.RecentFiles.Count)
+        var validRecent = _settings.RecentFiles.Where(File.Exists).ToList();
+        if (validRecent.Count != _settings.RecentFiles.Count)
         {
-            _settings.RecentFiles = valid;
+            _settings.RecentFiles = validRecent;
+            _settings.Save();
+        }
+        var validPinned = _settings.PinnedFiles.Where(File.Exists).ToList();
+        if (validPinned.Count != _settings.PinnedFiles.Count)
+        {
+            _settings.PinnedFiles = validPinned;
             _settings.Save();
         }
 
-        if (valid.Count == 0)
+        // 핀된 파일을 상단에, 나머지 최근 파일 하단에 표시
+        var pinned = validPinned
+            .Select(p => new RecentFileItem(
+                System.IO.Path.GetFileName(p),
+                System.IO.Path.GetDirectoryName(p) ?? "",
+                p, true));
+        var rest = validRecent
+            .Where(p => !_settings.IsPinned(p))
+            .Select(p => new RecentFileItem(
+                System.IO.Path.GetFileName(p),
+                System.IO.Path.GetDirectoryName(p) ?? "",
+                p, false));
+
+        var all = pinned.Concat(rest).ToList();
+        if (all.Count == 0)
         {
             RecentFilesPanel.Visibility = Visibility.Collapsed;
             return;
         }
-
-        RecentFilesList.ItemsSource = valid.Select(p => new RecentFileItem(
-            System.IO.Path.GetFileName(p),
-            System.IO.Path.GetDirectoryName(p) ?? "",
-            p)).ToList();
+        RecentFilesList.ItemsSource = all;
         RecentFilesPanel.Visibility = Visibility.Visible;
+    }
+
+    private void PinFile_Click(object sender, RoutedEventArgs e)
+    {
+        if (sender is Button btn && btn.Tag is string path)
+        {
+            _settings.TogglePin(path);
+            _settings.Save();
+            RefreshRecentList();
+        }
     }
 
     private void RecentFile_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)

@@ -1,5 +1,7 @@
+using System.Globalization;
 using System.Runtime.InteropServices;
 using System.Windows;
+using System.Windows.Data;
 using System.Windows.Interop;
 
 namespace MarkView;
@@ -27,4 +29,13 @@ public partial class App : Application
     [DllImport("dwmapi.dll")]
     private static extern int DwmSetWindowAttribute(
         nint hwnd, int attr, ref int attrValue, int attrSize);
+}
+
+public class BoolToVisibilityConverter : IValueConverter
+{
+    public static readonly BoolToVisibilityConverter Instance = new();
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture) =>
+        value is true ? Visibility.Visible : Visibility.Collapsed;
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) =>
+        throw new NotSupportedException();
 }

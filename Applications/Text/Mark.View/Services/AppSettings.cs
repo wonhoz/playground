@@ -11,6 +11,7 @@ public class AppSettings
 
     public string Theme { get; set; } = "dark";
     public List<string> RecentFiles { get; set; } = [];
+    public List<string> PinnedFiles { get; set; } = [];
     public List<string> OpenFiles { get; set; } = [];
     public double WindowLeft { get; set; } = double.NaN;
     public double WindowTop { get; set; } = double.NaN;
@@ -32,18 +33,37 @@ public class AppSettings
             RecentFiles.RemoveAt(RecentFiles.Count - 1);
     }
 
+    public void TogglePin(string path)
+    {
+        if (PinnedFiles.Contains(path, StringComparer.OrdinalIgnoreCase))
+            PinnedFiles.RemoveAll(p => p.Equals(path, StringComparison.OrdinalIgnoreCase));
+        else
+            PinnedFiles.Insert(0, path);
+    }
+
+    public bool IsPinned(string path) =>
+        PinnedFiles.Contains(path, StringComparer.OrdinalIgnoreCase);
+
     public static AppSettings Load()
     {
+        if (!File.Exists(_path)) return new AppSettings();
         try
         {
-            if (File.Exists(_path))
-            {
-                var json = File.ReadAllText(_path);
-                return JsonSerializer.Deserialize<AppSettings>(json) ?? new AppSettings();
-            }
+            var json = File.ReadAllText(_path);
+            return JsonSerializer.Deserialize<AppSettings>(json) ?? new AppSettings();
         }
-        catch { }
-        return new AppSettings();
+        catch
+        {
+            // 손상된 설정 파일은 백업 후 초기화
+            try
+            {
+                var backup = _path + ".bak";
+                File.Copy(_path, backup, overwrite: true);
+                File.Delete(_path);
+            }
+            catch { }
+            return new AppSettings();
+        }
     }
 
     public void Save()

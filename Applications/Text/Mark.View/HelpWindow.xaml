@@ -83,7 +83,20 @@
         <ItemsControl.Items>
           <local:ShortcutEntry Key="Ctrl + Tab"         Desc="다음 탭"/>
           <local:ShortcutEntry Key="Ctrl + Shift + Tab" Desc="이전 탭"/>
-          <local:ShortcutEntry Key="Ctrl + F"           Desc="찾기"/>
+          <local:ShortcutEntry Key="Ctrl + T"           Desc="목차 (TOC) 패널 토글 — 뷰어 스크롤 시 현재 섹션 자동 하이라이트"/>
+        </ItemsControl.Items>
+      </ItemsControl>
+
+      <!-- 찾기/바꾸기 -->
+      <TextBlock Text="찾기 / 바꾸기" Style="{StaticResource Cat}"/>
+      <ItemsControl ItemTemplate="{StaticResource RowTpl}">
+        <ItemsControl.Items>
+          <local:ShortcutEntry Key="Ctrl + F"        Desc="찾기 포커스"/>
+          <local:ShortcutEntry Key="Enter"           Desc="다음 결과로 이동"/>
+          <local:ShortcutEntry Key="Shift + Enter"   Desc="이전 결과로 이동"/>
+          <local:ShortcutEntry Key="▲ / ▼ 버튼"      Desc="이전/다음 찾기 결과 이동"/>
+          <local:ShortcutEntry Key="Ctrl + H"        Desc="찾기/바꾸기 바 토글 (편집 모드에서 유효)"/>
+          <local:ShortcutEntry Key="Esc"             Desc="찾기 초기화"/>
         </ItemsControl.Items>
       </ItemsControl>
 
@@ -102,7 +115,20 @@
         <ItemsControl.Items>
           <local:ShortcutEntry Key="Ctrl + +"         Desc="폰트 크기 증가"/>
           <local:ShortcutEntry Key="Ctrl + -"         Desc="폰트 크기 감소"/>
-          <local:ShortcutEntry Key="Ctrl + Shift + V" Desc="클립보드 내용 새 탭으로 열기"/>
+          <local:ShortcutEntry Key="Ctrl + 휠"        Desc="에디터 위에서 폰트 크기 조절"/>
+          <local:ShortcutEntry Key="Tab"              Desc="들여쓰기 (4칸) / 선택 범위 일괄 들여쓰기"/>
+          <local:ShortcutEntry Key="Shift + Tab"      Desc="내어쓰기 / 선택 범위 일괄 내어쓰기"/>
+          <local:ShortcutEntry Key="Ctrl + Shift + V" Desc="클립보드 내용을 새 탭으로 열기"/>
+        </ItemsControl.Items>
+      </ItemsControl>
+
+      <!-- 동기 스크롤 / TOC -->
+      <TextBlock Text="동기 스크롤 / 목차" Style="{StaticResource Cat}"/>
+      <ItemsControl ItemTemplate="{StaticResource RowTpl}">
+        <ItemsControl.Items>
+          <local:ShortcutEntry Key="편집 모드 스크롤" Desc="에디터 스크롤 시 뷰어 자동 동기화"/>
+          <local:ShortcutEntry Key="TOC 켜짐 상태"   Desc="뷰어 스크롤 시 현재 섹션 자동 하이라이트"/>
+          <local:ShortcutEntry Key="TOC 항목 클릭"   Desc="해당 섹션으로 부드럽게 이동"/>
         </ItemsControl.Items>
       </ItemsControl>
 
@@ -110,8 +136,11 @@
       <TextBlock Text="기타" Style="{StaticResource Cat}"/>
       <ItemsControl ItemTemplate="{StaticResource RowTpl}">
         <ItemsControl.Items>
-          <local:ShortcutEntry Key="F1"  Desc="단축키 도움말"/>
-          <local:ShortcutEntry Key="Esc" Desc="찾기 초기화"/>
+          <local:ShortcutEntry Key="F1"          Desc="단축키 도움말"/>
+          <local:ShortcutEntry Key="F5"          Desc="현재 파일 새로고침"/>
+          <local:ShortcutEntry Key="F11"         Desc="집중 모드 (툴바/상태바 숨김)"/>
+          <local:ShortcutEntry Key="📌 버튼"      Desc="최근 파일 즐겨찾기 고정/해제"/>
+          <local:ShortcutEntry Key="상태바 경로" Desc="클릭 시 파일 탐색기에서 위치 열기"/>
         </ItemsControl.Items>
       </ItemsControl>
 

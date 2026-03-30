@@ -16,29 +16,6 @@ namespace Photo.Video.Organizer
         public MainWindow()
         {
             InitializeComponent();
-            EnsureResourcesExist();
-        }
-
-        /// <summary>
-        /// Resources 폴더와 아이콘 파일이 없으면 생성
-        /// </summary>
-        private void EnsureResourcesExist()
-        {
-            try
-            {
-                var exePath = AppContext.BaseDirectory;
-                var resourcePath = Path.Combine(exePath, "Resources");
-                var appIcoPath = Path.Combine(resourcePath, "app.ico");
-
-                if (!File.Exists(appIcoPath))
-                {
-                    IconGenerator.GenerateAllIcons(resourcePath);
-                }
-            }
-            catch
-            {
-                // 아이콘 생성 실패해도 앱은 계속 실행
-            }
         }
 
         #region Drag & Drop

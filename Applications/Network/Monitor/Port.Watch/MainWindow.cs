@@ -176,7 +176,7 @@ public sealed class MainWindow : Form
 
         var hdrStyle = _grid.ColumnHeadersDefaultCellStyle;
         hdrStyle.BackColor = Color.FromArgb(20, 32, 20);
-        hdrStyle.ForeColor = Color.FromArgb(120, 180, 135);
+        hdrStyle.ForeColor = Color.FromArgb(100, 160, 215);
         hdrStyle.Font = new Font("Segoe UI", 9f, FontStyle.Bold);
         hdrStyle.SelectionBackColor = Color.FromArgb(20, 32, 20);
         hdrStyle.Padding = new Padding(6, 0, 4, 0);
@@ -213,6 +213,14 @@ public sealed class MainWindow : Form
         _grid.KeyDown += (_, e) =>
         {
             if (e.Control && e.KeyCode == Keys.C) { CopyCell("path"); e.Handled = true; }
+            if (e.Control && e.KeyCode == Keys.F)
+            {
+                if (_grid.SelectedRows.Count > 0 && _grid.SelectedRows[0].Tag is PortEntry fe)
+                    _searchBox.Text = fe.LocalPort.ToString();
+                _searchBox.Focus();
+                _searchBox.SelectAll();
+                e.Handled = true;
+            }
         };
         _grid.CellDoubleClick += (_, e) =>
         {
@@ -331,6 +339,13 @@ public sealed class MainWindow : Form
             BeginInvoke(() => ShowNotice($"⚠ 즐겨찾기 포트 해제됨 — {ports}", 5000));
         }
 
+        var opened = nowOccupied.Except(_prevOccupied).ToList();
+        if (opened.Count > 0)
+        {
+            var ports = string.Join(", ", opened.Select(p => $":{p}"));
+            BeginInvoke(() => ShowNotice($"★ 즐겨찾기 포트 점유됨 — {ports}", 5000));
+        }
+
         _prevOccupied = nowOccupied;
     }
 
@@ -368,7 +383,8 @@ public sealed class MainWindow : Form
                 e.ProcessName.ToLower().Contains(search) ||
                 e.Protocol.ToLower().Contains(search) ||
                 e.State.ToLower().Contains(search) ||
-                e.RemoteAddr.ToLower().Contains(search));
+                e.RemoteAddr.ToLower().Contains(search) ||
+                e.ProcessPath.ToLower().Contains(search));
 
         var list = rows.ToList();
 
@@ -485,8 +501,9 @@ public sealed class MainWindow : Form
         var help = """
             Port.Watch — 사용 방법
 
-            ── 기본 조작 ──────────────────
+            ── 키보드 단축키 ───────────────
             Ctrl+C          선택 행 경로 복사
+            Ctrl+F          선택 포트 번호로 검색
             더블 클릭       파일 탐색기로 위치 열기
 
             ── 툴바 ────────────────────────
@@ -497,7 +514,7 @@ public sealed class MainWindow : Form
 
             ── 검색 ────────────────────────
             포트 번호, 프로세스명, 프로토콜,
-            상태, 원격 주소로 실시간 필터링
+            상태, 원격 주소, 실행 경로로 실시간 필터링
 
             ── 우클릭 메뉴 ─────────────────
             프로세스 종료   선택 프로세스 Kill
@@ -506,9 +523,13 @@ public sealed class MainWindow : Form
             파일 탐색기     실행 위치 탐색기 열기
             즐겨찾기 토글   즐겨찾기 추가/제거
 
-            ── 즐겨찾기 포트 해제 알림 ─────
-            즐겨찾기 포트가 닫히면 상태바에
-            5초간 알림 표시
+            ── 즐겨찾기 포트 알림 ──────────
+            즐겨찾기 포트가 새로 열리거나 닫히면
+            상태바에 5초간 알림 표시
+
+            ── 설정 자동 저장 ──────────────
+            자동 갱신 상태, 갱신 간격, 즐겨찾기
+            필터, 창 크기/위치 재시작 후 복원
             """;
         MessageBox.Show(help, "Port.Watch 도움말", MessageBoxButtons.OK, MessageBoxIcon.Information);
     }
@@ -518,7 +539,8 @@ public sealed class MainWindow : Form
         Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
         "PortWatch", "settings.json");
 
-    private record WindowBounds(int X, int Y, int Width, int Height);
+    private record AppSettings(int X, int Y, int Width, int Height,
+        bool AutoRefresh = false, int IntervalIdx = 1, bool FavOnly = false);
 
     private void SaveWindowState()
     {
@@ -527,7 +549,9 @@ public sealed class MainWindow : Form
         {
             Directory.CreateDirectory(Path.GetDirectoryName(_settingsPath)!);
             System.IO.File.WriteAllText(_settingsPath,
-                System.Text.Json.JsonSerializer.Serialize(new WindowBounds(Left, Top, Width, Height)));
+                System.Text.Json.JsonSerializer.Serialize(
+                    new AppSettings(Left, Top, Width, Height,
+                        _chkAuto.Checked, _intervalIdx, _chkFavOnly.Checked)));
         }
         catch { }
     }
@@ -537,7 +561,7 @@ public sealed class MainWindow : Form
         try
         {
             if (!System.IO.File.Exists(_settingsPath)) return;
-            var s = System.Text.Json.JsonSerializer.Deserialize<WindowBounds>(
+            var s = System.Text.Json.JsonSerializer.Deserialize<AppSettings>(
                 System.IO.File.ReadAllText(_settingsPath));
             if (s is null) return;
             var screen = Screen.GetWorkingArea(new System.Drawing.Point(s.X, s.Y));
@@ -548,6 +572,14 @@ public sealed class MainWindow : Form
                 StartPosition = FormStartPosition.Manual;
                 SetBounds(s.X, s.Y, s.Width, s.Height);
             }
+            // UI 상태 복원 (_initialized = false 시점이므로 핸들러 미발동)
+            _intervalIdx = Math.Clamp(s.IntervalIdx, 0, _intervals.Length - 1);
+            _autoTimer.Interval = _intervals[_intervalIdx] * 1000;
+            _btnInterval.Text = $"{_intervals[_intervalIdx]}s";
+            _chkAuto.Checked = s.AutoRefresh;
+            _chkAuto.Text = s.AutoRefresh ? "⏱ 자동 갱신 ●" : "⏱ 자동 갱신";
+            _autoTimer.Enabled = s.AutoRefresh;
+            _chkFavOnly.Checked = s.FavOnly;
         }
         catch { }
     }

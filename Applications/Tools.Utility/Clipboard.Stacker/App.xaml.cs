@@ -25,9 +25,16 @@ public partial class App : Application
     {
         base.OnStartup(e);
 
-        // 아이콘 생성
+        // 현재 빌드의 clipstacker.ico를 pack resource에서 추출 (항상 최신 아이콘 반영)
         var iconDir = Path.Combine(AppContext.BaseDirectory, "Resources");
-        IconGenerator.Generate(iconDir);
+        Directory.CreateDirectory(iconDir);
+        var icoExtractPath = Path.Combine(iconDir, "clipstacker.ico");
+        try
+        {
+            var sri = Application.GetResourceStream(new Uri("pack://application:,,,/Resources/clipstacker.ico"));
+            if (sri != null) { using var fs = File.Create(icoExtractPath); sri.Stream.CopyTo(fs); }
+        }
+        catch { }
 
         // 설정 로드
         _settings = SettingsService.Load();
@@ -153,7 +160,7 @@ public partial class App : Application
     // ── 트레이 ────────────────────────────────────────────────────
     private void InitTray(string iconDir)
     {
-        var icoPath = Path.Combine(iconDir, IconGenerator.IconFileName);
+        var icoPath = Path.Combine(iconDir, "clipstacker.ico");
 
         _tray = new NotifyIcon
         {

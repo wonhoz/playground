@@ -204,13 +204,15 @@ namespace AiClip
             form.ShowDialog();
         }
 
-        // app.ico — AUMID IconUri와 동일한 파일을 트레이에도 사용 (Content 배포 파일)
+        // exe에 ApplicationIcon으로 내장된 아이콘을 추출 (별도 파일 불필요)
         private static Icon LoadTrayIcon()
         {
-            var path = Path.Combine(AppContext.BaseDirectory, "Resources", "app.ico");
-            if (File.Exists(path))
-                return new System.Drawing.Icon(path);
-            return IconGenerator.CreateTrayIcon(); // fallback
+            try
+            {
+                return Icon.ExtractAssociatedIcon(Environment.ProcessPath!)
+                       ?? SystemIcons.Application;
+            }
+            catch { return SystemIcons.Application; }
         }
 
         private void OnExit(object? s, EventArgs e)

@@ -24,12 +24,11 @@ namespace AiClip
                 SetCurrentProcessExplicitAppUserModelID(Aumid);
 
                 // 레지스트리에 AUMID + 아이콘 경로 등록 (toast 알림 아이콘 소스)
-                var iconPath = Path.Combine(AppContext.BaseDirectory, "Resources", "app.ico");
+                // exe 자체에 ApplicationIcon으로 내장되어 있으므로 exe 경로를 IconUri로 사용
                 using var key = Registry.CurrentUser.CreateSubKey(
                     $@"SOFTWARE\Classes\AppUserModelId\{Aumid}");
                 key.SetValue("DisplayName", "AI.Clip");
-                if (File.Exists(iconPath))
-                    key.SetValue("IconUri", iconPath);
+                key.SetValue("IconUri", Environment.ProcessPath!);
             }
             catch { /* 실패해도 앱 실행은 계속 */ }
         }

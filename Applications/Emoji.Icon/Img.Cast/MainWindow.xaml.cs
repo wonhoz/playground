@@ -144,7 +144,7 @@ public partial class MainWindow : Window
 
     void AnimateDropZone(bool hover)
     {
-        var target = hover ? Color.FromRgb(0xFF, 0x70, 0x43) : Color.FromRgb(0x3A, 0x3A, 0x48);
+        var target = hover ? Color.FromRgb(0x29, 0xB6, 0xF6) : Color.FromRgb(0x3A, 0x3A, 0x48);
         var anim   = new ColorAnimation(target, TimeSpan.FromMilliseconds(150));
         DropBorderBrush.BeginAnimation(SolidColorBrush.ColorProperty, anim);
     }
@@ -220,14 +220,24 @@ public partial class MainWindow : Window
             foreach (var (file, err) in result.Errors)
                 msg += $"• {Path.GetFileName(file)}\n  {err}\n";
             MessageBox.Show(msg.TrimEnd(), "변환 완료 (일부 실패)", MessageBoxButton.OK, MessageBoxImage.Warning);
+            ResetDropZone();
         }
         else if (result.Skipped > 0 && result.Success == 0)
         {
             MessageBox.Show($"모든 파일이 이미 출력 포맷과 동일하여 스킵되었습니다.\n출력 포맷을 변경해 주세요.",
                 "스킵됨", MessageBoxButton.OK, MessageBoxImage.Information);
+            ResetDropZone();
         }
-
-        ResetDropZone();
+        else if (SvgPreviewPanel.Visibility == Visibility.Visible)
+        {
+            // 미리보기가 표시된 단일 파일 완전 성공 — 미리보기 유지, PBar만 숨김
+            PBar.Visibility = Visibility.Collapsed;
+            PBar.Value = 0;
+        }
+        else
+        {
+            ResetDropZone();
+        }
     }
 
     // ─── ICO 미리보기 ────────────────────────────────────────────────────────

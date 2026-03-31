@@ -1,0 +1,46 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1976D2"/>
+      <stop offset="100%" stop-color="#0288D1"/>
+    </linearGradient>
+    <linearGradient id="gear1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#E3F2FD"/>
+      <stop offset="100%" stop-color="#90CAF9"/>
+    </linearGradient>
+    <linearGradient id="gear2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFF9C4"/>
+      <stop offset="100%" stop-color="#FFD600"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="200" fill="url(#bg)"/>
+  <!-- Layer 2: Large gear (left) -->
+  <!-- Gear teeth (large) -->
+  <circle cx="340" cy="480" r="260" fill="#1565C0" opacity="0.4"/>
+  <circle cx="340" cy="480" r="240" fill="url(#gear1)"/>
+  <!-- Gear teeth via strokes on outer ring -->
+  <circle cx="340" cy="480" r="240" fill="none" stroke="#90CAF9" stroke-width="44" stroke-dasharray="58 26"/>
+  <!-- Gear inner hole -->
+  <circle cx="340" cy="480" r="90" fill="#1976D2"/>
+  <!-- Gear spokes -->
+  <line x1="340" y1="290" x2="340" y2="670" stroke="#1976D2" stroke-width="28"/>
+  <line x1="150" y1="480" x2="530" y2="480" stroke="#1976D2" stroke-width="28"/>
+  <line x1="215" y1="215" x2="465" y2="745" stroke="#1976D2" stroke-width="20" opacity="0.7"/>
+  <line x1="465" y1="215" x2="215" y2="745" stroke="#1976D2" stroke-width="20" opacity="0.7"/>
+  <!-- Large gear center letter A -->
+  <text x="340" y="484" text-anchor="middle" dominant-baseline="middle" font-size="120" font-family="Georgia,serif" font-weight="bold" fill="#1565C0">A</text>
+  <!-- Layer 3: Small gear (right, meshing) -->
+  <circle cx="700" cy="580" r="175" fill="#1565C0" opacity="0.4"/>
+  <circle cx="700" cy="580" r="156" fill="url(#gear2)"/>
+  <circle cx="700" cy="580" r="156" fill="none" stroke="#FFD600" stroke-width="36" stroke-dasharray="40 18"/>
+  <circle cx="700" cy="580" r="58" fill="#1976D2"/>
+  <line x1="700" y1="424" x2="700" y2="736" stroke="#1976D2" stroke-width="22"/>
+  <line x1="544" y1="580" x2="856" y2="580" stroke="#1976D2" stroke-width="22"/>
+  <line x1="590" y1="470" x2="810" y2="690" stroke="#1976D2" stroke-width="16" opacity="0.6"/>
+  <line x1="810" y1="470" x2="590" y2="690" stroke="#1976D2" stroke-width="16" opacity="0.6"/>
+  <!-- Small gear center letter a -->
+  <text x="700" y="584" text-anchor="middle" dominant-baseline="middle" font-size="88" font-family="Georgia,serif" font-weight="bold" fill="#BF360C">a</text>
+  <!-- Mesh point indicator -->
+  <circle cx="540" cy="528" r="18" fill="#FF8F00"/>
+</svg>

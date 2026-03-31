@@ -1,0 +1,38 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg5" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FF8A65"/>
+      <stop offset="100%" stop-color="#FF3D00"/>
+    </linearGradient>
+    <linearGradient id="gem5" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFF9C4"/>
+      <stop offset="60%" stop-color="#FFD600"/>
+      <stop offset="100%" stop-color="#FF8F00"/>
+    </linearGradient>
+    <linearGradient id="gemtop5" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="white"/>
+      <stop offset="100%" stop-color="#FFECB3"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="200" fill="url(#bg5)"/>
+  <!-- Glow rings -->
+  <circle cx="512" cy="512" r="380" fill="#FFD600" opacity="0.12"/>
+  <circle cx="512" cy="512" r="290" fill="#FFD600" opacity="0.16"/>
+  <!-- Layer 2: Diamond/gem (rotated square) -->
+  <!-- Diamond outline shadow -->
+  <polygon points="512,160 840,512 512,840 184,512" fill="#BF360C" opacity="0.4" transform="translate(10,14)"/>
+  <!-- Diamond body -->
+  <polygon points="512,160 840,512 512,840 184,512" fill="url(#gem5)"/>
+  <!-- Diamond upper facet -->
+  <polygon points="512,160 840,512 512,420 184,512" fill="url(#gemtop5)" opacity="0.7"/>
+  <!-- Diamond shine line -->
+  <polygon points="512,160 660,340 512,420 362,340" fill="white" opacity="0.4"/>
+  <!-- Layer 3: ∑ character inside -->
+  <text x="512" y="540" text-anchor="middle" dominant-baseline="middle" font-size="260" font-family="Segoe UI,Arial,sans-serif" font-weight="bold" fill="#BF360C" opacity="0.8">∑</text>
+  <!-- Small sparkle dots -->
+  <circle cx="350" cy="220" r="18" fill="white" opacity="0.8"/>
+  <circle cx="700" cy="190" r="12" fill="white" opacity="0.6"/>
+  <circle cx="820" cy="380" r="14" fill="#FFD600" opacity="0.9"/>
+  <circle cx="200" cy="640" r="10" fill="white" opacity="0.7"/>
+</svg>

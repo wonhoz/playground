@@ -1,0 +1,43 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#B2DFDB"/>
+      <stop offset="100%" stop-color="#00BCD4"/>
+    </linearGradient>
+    <linearGradient id="pipe" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#006064"/>
+      <stop offset="100%" stop-color="#00838F"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="200" fill="url(#bg)"/>
+  <!-- Layer 2: Pipe/tube converter -->
+  <!-- Input pipe (left, wide) -->
+  <rect x="80" y="430" width="240" height="160" rx="80" fill="url(#pipe)"/>
+  <!-- Pipe interior (opening) -->
+  <ellipse cx="80" cy="510" rx="64" ry="80" fill="#004D40"/>
+  <!-- Input label in pipe -->
+  <text x="200" y="512" text-anchor="middle" dominant-baseline="middle" font-size="64" font-family="Consolas,monospace" fill="white" font-weight="bold">C:\</text>
+  <!-- Converter box (center) -->
+  <rect x="340" y="360" width="340" height="300" rx="30" fill="#00695C"/>
+  <!-- Gears inside converter -->
+  <circle cx="440" cy="470" r="70" fill="#00897B" stroke="#4DB6AC" stroke-width="10" stroke-dasharray="28 12"/>
+  <circle cx="440" cy="470" r="30" fill="#00695C"/>
+  <circle cx="560" cy="550" r="52" fill="#00897B" stroke="#4DB6AC" stroke-width="10" stroke-dasharray="20 10"/>
+  <circle cx="560" cy="550" r="22" fill="#00695C"/>
+  <!-- Mesh point -->
+  <circle cx="492" cy="512" r="12" fill="#FFD600"/>
+  <!-- Arrow through converter -->
+  <line x1="340" y1="510" x2="680" y2="510" stroke="#80CBC4" stroke-width="10" stroke-linecap="round"/>
+  <!-- Output pipes (right, multiple smaller) -->
+  <rect x="680" y="378" width="200" height="80" rx="40" fill="url(#pipe)"/>
+  <rect x="680" y="470" width="200" height="80" rx="40" fill="#00796B"/>
+  <rect x="680" y="562" width="200" height="80" rx="40" fill="#00695C"/>
+  <!-- Output labels -->
+  <text x="780" y="420" text-anchor="middle" dominant-baseline="middle" font-size="50" font-family="Consolas,monospace" fill="white">C:/…</text>
+  <text x="780" y="512" text-anchor="middle" dominant-baseline="middle" font-size="50" font-family="Consolas,monospace" fill="white">\\…</text>
+  <text x="780" y="604" text-anchor="middle" dominant-baseline="middle" font-size="50" font-family="Consolas,monospace" fill="white">./…</text>
+  <!-- Layer 3: Converter label + bottom text -->
+  <text x="510" y="690" text-anchor="middle" dominant-baseline="middle" font-size="66" font-family="Segoe UI,Arial,sans-serif" font-weight="bold" fill="white" opacity="0.85">PATH</text>
+  <text x="510" y="760" text-anchor="middle" dominant-baseline="middle" font-size="52" font-family="Segoe UI,Arial,sans-serif" fill="#B2EBF2" opacity="0.75">CONVERTER</text>
+</svg>

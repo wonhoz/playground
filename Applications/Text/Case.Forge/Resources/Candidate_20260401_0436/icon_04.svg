@@ -1,0 +1,45 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FF8F00"/>
+      <stop offset="100%" stop-color="#BF360C"/>
+    </linearGradient>
+    <linearGradient id="anvil" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#78909C"/>
+      <stop offset="100%" stop-color="#37474F"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="200" fill="url(#bg)"/>
+  <!-- Layer 2: Anvil shape -->
+  <!-- Anvil base -->
+  <rect x="270" y="780" width="484" height="96" rx="16" fill="url(#anvil)"/>
+  <!-- Anvil neck -->
+  <rect x="390" y="680" width="244" height="118" rx="10" fill="#546E7A"/>
+  <!-- Anvil top surface -->
+  <rect x="200" y="580" width="624" height="116" rx="20" fill="url(#anvil)"/>
+  <!-- Anvil highlight on top -->
+  <rect x="200" y="580" width="624" height="32" rx="16" fill="#90A4AE" opacity="0.5"/>
+  <!-- Layer 3: Hammer + sparks -->
+  <!-- Hammer handle -->
+  <rect x="470" y="120" width="48" height="360" rx="16" fill="#795548" transform="rotate(25 494 300)"/>
+  <!-- Hammer head -->
+  <rect x="540" y="100" width="160" height="110" rx="18" fill="#546E7A" transform="rotate(25 620 155)"/>
+  <rect x="545" y="106" width="150" height="96" rx="14" fill="#78909C" transform="rotate(25 620 155)"/>
+  <!-- Letter A on anvil (being forged) -->
+  <text x="512" y="608" text-anchor="middle" dominant-baseline="middle" font-size="100" font-family="Georgia,serif" font-weight="bold" fill="#FFD600">A</text>
+  <!-- Spark particles -->
+  <circle cx="640" cy="520" r="18" fill="#FFD600"/>
+  <circle cx="700" cy="490" r="12" fill="#FF8F00"/>
+  <circle cx="660" cy="460" r="8" fill="#FFD600"/>
+  <circle cx="730" cy="540" r="10" fill="white"/>
+  <circle cx="380" cy="510" r="16" fill="#FFD600"/>
+  <circle cx="330" cy="480" r="10" fill="#FF8F00"/>
+  <circle cx="350" cy="450" r="8" fill="white"/>
+  <!-- Spark lines -->
+  <line x1="620" y1="540" x2="680" y2="490" stroke="#FFD600" stroke-width="5" stroke-linecap="round"/>
+  <line x1="680" y1="510" x2="720" y2="460" stroke="#FFD600" stroke-width="4" stroke-linecap="round"/>
+  <line x1="400" y1="530" x2="340" y2="470" stroke="#FFD600" stroke-width="5" stroke-linecap="round"/>
+  <!-- "FORGE" text hint -->
+  <text x="512" y="936" text-anchor="middle" dominant-baseline="middle" font-size="88" font-family="Segoe UI,Arial,sans-serif" font-weight="bold" fill="#FFECB3" opacity="0.8">FORGE</text>
+</svg>

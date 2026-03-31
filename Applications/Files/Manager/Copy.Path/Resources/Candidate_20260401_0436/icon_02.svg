@@ -1,0 +1,49 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2020/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#E8F5E9"/>
+      <stop offset="100%" stop-color="#A5D6A7"/>
+    </linearGradient>
+    <linearGradient id="popup" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#F1F8E9"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="200" fill="url(#bg)"/>
+  <!-- Layer 2: Context menu popup panel -->
+  <rect x="180" y="160" width="580" height="660" rx="20" fill="url(#popup)" stroke="#81C784" stroke-width="6"/>
+  <!-- Popup header -->
+  <rect x="180" y="160" width="580" height="70" rx="20" fill="#2E7D32"/>
+  <!-- Header text -->
+  <text x="470" y="200" text-anchor="middle" dominant-baseline="middle" font-size="52" font-family="Segoe UI,Arial,sans-serif" font-weight="bold" fill="white">Copy Path As</text>
+  <!-- Menu items — 9 path formats -->
+  <!-- Item 1 — highlighted -->
+  <rect x="192" y="246" width="556" height="66" rx="8" fill="#C8E6C9"/>
+  <text x="230" y="282" dominant-baseline="middle" font-size="50" font-family="Consolas,monospace" fill="#1B5E20" font-weight="bold">Full Path</text>
+  <text x="740" y="282" text-anchor="end" dominant-baseline="middle" font-size="42" font-family="Consolas,monospace" fill="#388E3C">C:\…</text>
+  <!-- Item 2 -->
+  <text x="230" y="352" dominant-baseline="middle" font-size="50" font-family="Consolas,monospace" fill="#2E7D32">Slash</text>
+  <text x="740" y="352" text-anchor="end" dominant-baseline="middle" font-size="42" font-family="Consolas,monospace" fill="#388E3C">C:/…</text>
+  <!-- Separator -->
+  <line x1="210" y1="382" x2="740" y2="382" stroke="#C8E6C9" stroke-width="2"/>
+  <!-- Item 3 -->
+  <text x="230" y="430" dominant-baseline="middle" font-size="50" font-family="Consolas,monospace" fill="#2E7D32">UNC</text>
+  <text x="740" y="430" text-anchor="end" dominant-baseline="middle" font-size="42" font-family="Consolas,monospace" fill="#388E3C">\\…</text>
+  <!-- Separator -->
+  <line x1="210" y1="458" x2="740" y2="458" stroke="#C8E6C9" stroke-width="2"/>
+  <!-- Item 4 -->
+  <text x="230" y="506" dominant-baseline="middle" font-size="50" font-family="Consolas,monospace" fill="#2E7D32">Relative</text>
+  <text x="740" y="506" text-anchor="end" dominant-baseline="middle" font-size="42" font-family="Consolas,monospace" fill="#388E3C">./…</text>
+  <!-- Item 5 -->
+  <text x="230" y="574" dominant-baseline="middle" font-size="50" font-family="Consolas,monospace" fill="#2E7D32">URI</text>
+  <text x="740" y="574" text-anchor="end" dominant-baseline="middle" font-size="42" font-family="Consolas,monospace" fill="#388E3C">file://…</text>
+  <!-- Item 6 -->
+  <text x="230" y="642" dominant-baseline="middle" font-size="50" font-family="Consolas,monospace" fill="#2E7D32">Quoted</text>
+  <text x="740" y="642" text-anchor="end" dominant-baseline="middle" font-size="42" font-family="Consolas,monospace" fill="#388E3C">"…"</text>
+  <!-- Item 7 -->
+  <text x="230" y="710" dominant-baseline="middle" font-size="50" font-family="Consolas,monospace" fill="#2E7D32">Folder Only</text>
+  <!-- Layer 3: Cursor pointing at menu -->
+  <polygon points="770,350 830,410 810,414 836,468 816,476 790,422 772,440" fill="#FF6D00"/>
+  <polygon points="772,350 832,348 772,440" fill="#FF8A00" opacity="0.6"/>
+</svg>

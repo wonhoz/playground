@@ -1,0 +1,43 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#E8EAF6"/>
+      <stop offset="100%" stop-color="#9FA8DA"/>
+    </linearGradient>
+    <linearGradient id="wand" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFD600"/>
+      <stop offset="100%" stop-color="#FF8F00"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="200" fill="url(#bg)"/>
+  <!-- Layer 2: Magic wand (diagonal) -->
+  <!-- Wand handle -->
+  <rect x="180" y="650" width="400" height="36" rx="18" fill="url(#wand)" transform="rotate(-40 380 668)"/>
+  <!-- Wand tip star -->
+  <circle cx="248" cy="380" r="36" fill="#FFD600"/>
+  <polygon points="248,346 256,372 284,372 262,388 270,416 248,400 226,416 234,388 212,372 240,372" fill="white" opacity="0.9"/>
+  <!-- Sparkles around wand tip -->
+  <circle cx="194" cy="320" r="12" fill="#FFD600"/>
+  <circle cx="304" cy="308" r="9" fill="#FF8F00"/>
+  <circle cx="168" cy="400" r="8" fill="#FFCA28"/>
+  <circle cx="318" cy="430" r="11" fill="#FFD600"/>
+  <!-- Layer 3: Path transformation -->
+  <!-- Input path (left-ish) -->
+  <rect x="160" y="540" width="300" height="64" rx="12" fill="#3949AB" opacity="0.9"/>
+  <text x="310" y="573" text-anchor="middle" dominant-baseline="middle" font-size="50" font-family="Consolas,monospace" fill="white">C:\path\f</text>
+  <!-- Arrow (transformation) -->
+  <line x1="468" y1="572" x2="558" y2="572" stroke="#3949AB" stroke-width="12" stroke-linecap="round"/>
+  <polygon points="558,572 534,550 534,594" fill="#3949AB"/>
+  <!-- Output paths (multiple) — right side -->
+  <rect x="572" y="480" width="270" height="52" rx="10" fill="#FF1744" opacity="0.9"/>
+  <text x="707" y="507" text-anchor="middle" dominant-baseline="middle" font-size="46" font-family="Consolas,monospace" fill="white">C:/path/f</text>
+  <rect x="572" y="544" width="270" height="52" rx="10" fill="#7C4DFF" opacity="0.9"/>
+  <text x="707" y="571" text-anchor="middle" dominant-baseline="middle" font-size="46" font-family="Consolas,monospace" fill="white">\\srv\path</text>
+  <rect x="572" y="608" width="270" height="52" rx="10" fill="#00BFA5" opacity="0.9"/>
+  <text x="707" y="635" text-anchor="middle" dominant-baseline="middle" font-size="46" font-family="Consolas,monospace" fill="white">file://…</text>
+  <!-- Sparkle lines from wand tip to output -->
+  <line x1="248" y1="416" x2="572" y2="507" stroke="#FFD600" stroke-width="4" stroke-dasharray="16 10" opacity="0.6"/>
+  <line x1="248" y1="416" x2="572" y2="571" stroke="#FFD600" stroke-width="4" stroke-dasharray="16 10" opacity="0.5"/>
+  <line x1="248" y1="416" x2="572" y2="635" stroke="#FFD600" stroke-width="4" stroke-dasharray="16 10" opacity="0.4"/>
+</svg>

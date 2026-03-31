@@ -1,0 +1,42 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg8" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FF8F00"/>
+      <stop offset="100%" stop-color="#E64A19"/>
+    </linearGradient>
+    <linearGradient id="face8" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFFDE7"/>
+      <stop offset="100%" stop-color="#FFF9C4"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="200" fill="url(#bg8)"/>
+  <!-- Layer 2: Clock face -->
+  <circle cx="512" cy="512" r="390" fill="#BF360C" opacity="0.4"/>
+  <circle cx="512" cy="512" r="368" fill="url(#face8)"/>
+  <circle cx="512" cy="512" r="368" fill="none" stroke="#FF8F00" stroke-width="16"/>
+  <!-- Hour tick marks -->
+  <line x1="512" y1="162" x2="512" y2="198" stroke="#BF360C" stroke-width="12" stroke-linecap="round"/>
+  <line x1="512" y1="826" x2="512" y2="862" stroke="#BF360C" stroke-width="12" stroke-linecap="round"/>
+  <line x1="162" y1="512" x2="198" y2="512" stroke="#BF360C" stroke-width="12" stroke-linecap="round"/>
+  <line x1="826" y1="512" x2="862" y2="512" stroke="#BF360C" stroke-width="12" stroke-linecap="round"/>
+  <!-- Layer 3: Special chars at clock positions -->
+  <!-- 12 o'clock: © -->
+  <text x="512" y="248" text-anchor="middle" dominant-baseline="middle" font-size="110" font-family="Segoe UI,Arial,sans-serif" fill="#C62828">©</text>
+  <!-- 3 o'clock: → -->
+  <text x="788" y="512" text-anchor="middle" dominant-baseline="middle" font-size="110" font-family="Segoe UI,Arial,sans-serif" fill="#E65100">→</text>
+  <!-- 6 o'clock: ∑ -->
+  <text x="512" y="782" text-anchor="middle" dominant-baseline="middle" font-size="110" font-family="Segoe UI,Arial,sans-serif" fill="#1565C0">∑</text>
+  <!-- 9 o'clock: ★ -->
+  <text x="236" y="512" text-anchor="middle" dominant-baseline="middle" font-size="110" font-family="Segoe UI,Arial,sans-serif" fill="#2E7D32">★</text>
+  <!-- Clock hands -->
+  <line x1="512" y1="512" x2="512" y2="310" stroke="#BF360C" stroke-width="18" stroke-linecap="round"/>
+  <line x1="512" y1="512" x2="664" y2="512" stroke="#FF8F00" stroke-width="14" stroke-linecap="round"/>
+  <!-- Center dot -->
+  <circle cx="512" cy="512" r="22" fill="#BF360C"/>
+  <!-- Small chars at diagonal positions -->
+  <text x="714" y="314" text-anchor="middle" dominant-baseline="middle" font-size="72" font-family="Segoe UI,Arial,sans-serif" fill="#6A1B9A">²</text>
+  <text x="310" y="714" text-anchor="middle" dominant-baseline="middle" font-size="72" font-family="Segoe UI,Arial,sans-serif" fill="#00695C">∞</text>
+  <text x="310" y="314" text-anchor="middle" dominant-baseline="middle" font-size="72" font-family="Segoe UI,Arial,sans-serif" fill="#F57F17">€</text>
+  <text x="714" y="714" text-anchor="middle" dominant-baseline="middle" font-size="72" font-family="Segoe UI,Arial,sans-serif" fill="#AD1457">♪</text>
+</svg>

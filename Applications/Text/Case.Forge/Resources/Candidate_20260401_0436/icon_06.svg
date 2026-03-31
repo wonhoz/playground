@@ -1,0 +1,41 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#6A1B9A"/>
+      <stop offset="100%" stop-color="#4A148C"/>
+    </linearGradient>
+    <linearGradient id="prism" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#E1BEE7"/>
+      <stop offset="100%" stop-color="#CE93D8"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="200" fill="url(#bg)"/>
+  <!-- Input beam (white, left side) -->
+  <polygon points="130,460 360,512 130,564" fill="white" opacity="0.7"/>
+  <!-- Layer 2: Prism triangle -->
+  <polygon points="362,260 660,512 362,762" fill="url(#prism)" stroke="#CE93D8" stroke-width="8"/>
+  <!-- Prism inner highlight -->
+  <polygon points="362,260 560,400 460,512 362,580" fill="white" opacity="0.2"/>
+  <!-- Layer 3: Rainbow output rays (case formats) -->
+  <!-- camelCase - red -->
+  <polygon points="660,512 900,280 860,280" fill="#FF1744" opacity="0.85"/>
+  <text x="880" y="230" text-anchor="end" dominant-baseline="middle" font-size="72" font-family="Consolas,monospace" fill="#FF1744">camel</text>
+  <!-- PascalCase - orange -->
+  <polygon points="660,512 940,370 910,365" fill="#FF6D00" opacity="0.85"/>
+  <text x="950" y="330" text-anchor="end" dominant-baseline="middle" font-size="72" font-family="Consolas,monospace" fill="#FF6D00">Pascal</text>
+  <!-- snake_case - yellow -->
+  <polygon points="660,512 950,460 940,480" fill="#FFD600" opacity="0.9"/>
+  <text x="960" y="430" text-anchor="end" dominant-baseline="middle" font-size="72" font-family="Consolas,monospace" fill="#FFD600">snake</text>
+  <!-- kebab-case - green -->
+  <polygon points="660,512 950,560 940,580" fill="#00E676" opacity="0.85"/>
+  <text x="960" y="610" text-anchor="end" dominant-baseline="middle" font-size="72" font-family="Consolas,monospace" fill="#69F0AE">kebab</text>
+  <!-- SCREAMING - blue -->
+  <polygon points="660,512 930,650 900,660" fill="#40C4FF" opacity="0.85"/>
+  <text x="940" y="710" text-anchor="end" dominant-baseline="middle" font-size="62" font-family="Consolas,monospace" fill="#40C4FF">UPPER</text>
+  <!-- dot.case - violet -->
+  <polygon points="660,512 870,760 840,768" fill="#E040FB" opacity="0.85"/>
+  <text x="875" y="820" text-anchor="end" dominant-baseline="middle" font-size="72" font-family="Consolas,monospace" fill="#E040FB">dot</text>
+  <!-- Input label -->
+  <text x="140" y="420" text-anchor="start" dominant-baseline="middle" font-size="72" font-family="Consolas,monospace" fill="white" opacity="0.7">text</text>
+</svg>

@@ -1,0 +1,39 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0D47A1"/>
+      <stop offset="100%" stop-color="#1565C0"/>
+    </linearGradient>
+    <linearGradient id="clip" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#E3F2FD"/>
+      <stop offset="100%" stop-color="#90CAF9"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="200" fill="url(#bg)"/>
+  <!-- Layer 2: Clipboard shape -->
+  <rect x="260" y="200" width="420" height="540" rx="24" fill="url(#clip)"/>
+  <!-- Clipboard top clip -->
+  <rect x="380" y="170" width="180" height="70" rx="12" fill="#64B5F6"/>
+  <rect x="380" y="170" width="180" height="40" rx="12" fill="#42A5F5"/>
+  <rect x="430" y="155" width="80" height="36" rx="18" fill="#1565C0"/>
+  <!-- Lines (path text) on clipboard -->
+  <rect x="300" y="310" width="340" height="20" rx="10" fill="#1565C0" opacity="0.7"/>
+  <text x="303" y="323" font-size="52" font-family="Consolas,monospace" fill="#1565C0" opacity="0.9">C:\Users\app</text>
+  <!-- Second line — slash format -->
+  <rect x="300" y="380" width="300" height="20" rx="10" fill="#1976D2" opacity="0.5"/>
+  <text x="303" y="393" font-size="52" font-family="Consolas,monospace" fill="#0D47A1" opacity="0.8">C:/Users/app</text>
+  <!-- Third line — highlight (being copied) -->
+  <rect x="295" y="443" width="350" height="56" rx="8" fill="#1976D2" opacity="0.35"/>
+  <text x="303" y="476" font-size="52" font-family="Consolas,monospace" fill="#0D47A1" font-weight="bold">\\server\app</text>
+  <!-- Fourth line (faded) -->
+  <text x="303" y="548" font-size="52" font-family="Consolas,monospace" fill="#0D47A1" opacity="0.4">./relative</text>
+  <!-- Layer 3: Copy arrow icon (right side, floating) -->
+  <circle cx="720" cy="580" r="110" fill="#FFD600"/>
+  <!-- Copy icon: two overlapping rects + arrow -->
+  <rect x="678" y="538" width="62" height="62" rx="10" fill="white" opacity="0.9"/>
+  <rect x="698" y="558" width="62" height="62" rx="10" fill="#FFD600" stroke="white" stroke-width="8"/>
+  <!-- Arrow pointing out -->
+  <line x1="750" y1="548" x2="790" y2="510" stroke="white" stroke-width="12" stroke-linecap="round"/>
+  <polygon points="790,510 770,504 796,484" fill="white"/>
+</svg>

@@ -1,0 +1,48 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#880E4F"/>
+      <stop offset="100%" stop-color="#C2185B"/>
+    </linearGradient>
+    <linearGradient id="mic" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#F8BBD9"/>
+      <stop offset="100%" stop-color="#F48FB1"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="200" fill="url(#bg)"/>
+  <!-- Layer 2: Broadcast microphone (round bulb mic) -->
+  <!-- Mic stand base -->
+  <rect x="456" y="780" width="112" height="50" rx="20" fill="#880E4F"/>
+  <rect x="380" y="826" width="264" height="36" rx="18" fill="#880E4F"/>
+  <!-- Mic stand arm -->
+  <rect x="500" y="660" width="24" height="140" rx="12" fill="#AD1457"/>
+  <!-- Curved arm going up-left to mic -->
+  <path d="M 512 660 Q 512 540 400 500" fill="none" stroke="#AD1457" stroke-width="24" stroke-linecap="round"/>
+  <!-- Mic head (large round) -->
+  <circle cx="360" cy="470" r="160" fill="url(#mic)" stroke="#F48FB1" stroke-width="16"/>
+  <!-- Mic grille lines -->
+  <line x1="260" y1="470" x2="460" y2="470" stroke="#880E4F" stroke-width="10" stroke-linecap="round" opacity="0.4"/>
+  <line x1="280" y1="410" x2="440" y2="410" stroke="#880E4F" stroke-width="10" stroke-linecap="round" opacity="0.4"/>
+  <line x1="280" y1="530" x2="440" y2="530" stroke="#880E4F" stroke-width="10" stroke-linecap="round" opacity="0.4"/>
+  <line x1="310" y1="350" x2="410" y2="350" stroke="#880E4F" stroke-width="10" stroke-linecap="round" opacity="0.4"/>
+  <line x1="310" y1="590" x2="410" y2="590" stroke="#880E4F" stroke-width="10" stroke-linecap="round" opacity="0.4"/>
+  <!-- Vertical grille lines -->
+  <line x1="360" y1="312" x2="360" y2="628" stroke="#880E4F" stroke-width="10" stroke-linecap="round" opacity="0.4"/>
+  <line x1="300" y1="330" x2="300" y2="610" stroke="#880E4F" stroke-width="8" stroke-linecap="round" opacity="0.3"/>
+  <line x1="420" y1="330" x2="420" y2="610" stroke="#880E4F" stroke-width="8" stroke-linecap="round" opacity="0.3"/>
+  <!-- ON AIR badge -->
+  <rect x="236" y="200" width="248" height="68" rx="16" fill="#FF1744"/>
+  <text x="360" y="236" text-anchor="middle" dominant-baseline="middle" font-size="56" font-family="Segoe UI,Arial" font-weight="bold" fill="white">ON AIR</text>
+  <!-- Layer 3: Floating ? bubbles (trivia questions being broadcast) -->
+  <circle cx="680" cy="360" r="90" fill="#FFD700" opacity="0.95"/>
+  <text x="680" y="364" text-anchor="middle" dominant-baseline="middle" font-size="130" font-family="Georgia,serif" font-weight="bold" fill="#880E4F">?</text>
+  <circle cx="780" cy="520" r="60" fill="#FFF9C4" opacity="0.85"/>
+  <text x="780" y="524" text-anchor="middle" dominant-baseline="middle" font-size="90" font-family="Georgia,serif" font-weight="bold" fill="#AD1457">?</text>
+  <circle cx="670" cy="620" r="44" fill="#FFEE58" opacity="0.75"/>
+  <text x="670" y="624" text-anchor="middle" dominant-baseline="middle" font-size="66" font-family="Georgia,serif" font-weight="bold" fill="#880E4F">?</text>
+  <!-- Sound wave lines -->
+  <path d="M 530 400 Q 560 430 530 460" fill="none" stroke="white" stroke-width="10" stroke-linecap="round" opacity="0.5"/>
+  <path d="M 550 370 Q 590 430 550 490" fill="none" stroke="white" stroke-width="10" stroke-linecap="round" opacity="0.4"/>
+  <path d="M 570 340 Q 620 430 570 520" fill="none" stroke="white" stroke-width="10" stroke-linecap="round" opacity="0.3"/>
+</svg>

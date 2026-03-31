@@ -1,0 +1,36 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#BF360C"/>
+      <stop offset="100%" stop-color="#FF5722"/>
+    </linearGradient>
+    <linearGradient id="clock" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFF9C4"/>
+      <stop offset="100%" stop-color="#FFF176"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="200" fill="url(#bg)"/>
+  <!-- Layer 2: Clock face (timer) -->
+  <circle cx="440" cy="500" r="300" fill="url(#clock)" stroke="white" stroke-width="20"/>
+  <!-- Clock tick marks -->
+  <line x1="440" y1="214" x2="440" y2="246" stroke="#BF360C" stroke-width="14" stroke-linecap="round"/>
+  <line x1="440" y1="754" x2="440" y2="786" stroke="#BF360C" stroke-width="14" stroke-linecap="round"/>
+  <line x1="154" y1="500" x2="186" y2="500" stroke="#BF360C" stroke-width="14" stroke-linecap="round"/>
+  <line x1="694" y1="500" x2="726" y2="500" stroke="#BF360C" stroke-width="14" stroke-linecap="round"/>
+  <!-- Clock hands (pointing to 3 = running out of time) -->
+  <line x1="440" y1="500" x2="440" y2="260" stroke="#BF360C" stroke-width="18" stroke-linecap="round"/>
+  <line x1="440" y1="500" x2="650" y2="500" stroke="#BF360C" stroke-width="14" stroke-linecap="round"/>
+  <!-- Center dot -->
+  <circle cx="440" cy="500" r="22" fill="#BF360C"/>
+  <!-- Clock number: 15 (seconds) -->
+  <text x="440" y="620" text-anchor="middle" dominant-baseline="middle" font-size="92" font-family="Georgia,serif" font-weight="bold" fill="#BF360C" opacity="0.6">15s</text>
+  <!-- Layer 3: ? mark (right, large) -->
+  <circle cx="760" cy="500" r="180" fill="#FF6D00" opacity="0.9"/>
+  <text x="760" y="506" text-anchor="middle" dominant-baseline="middle" font-size="280" font-family="Georgia,serif" font-weight="bold" fill="white">?</text>
+  <!-- Urgency sparks around clock -->
+  <line x1="154" y1="294" x2="176" y2="316" stroke="white" stroke-width="10" stroke-linecap="round"/>
+  <line x1="726" y1="706" x2="704" y2="684" stroke="white" stroke-width="10" stroke-linecap="round"/>
+  <line x1="154" y1="706" x2="176" y2="684" stroke="white" stroke-width="10" stroke-linecap="round"/>
+  <line x1="726" y1="294" x2="704" y2="316" stroke="white" stroke-width="10" stroke-linecap="round"/>
+</svg>

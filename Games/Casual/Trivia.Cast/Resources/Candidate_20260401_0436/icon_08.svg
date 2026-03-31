@@ -1,0 +1,46 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#006064"/>
+      <stop offset="100%" stop-color="#00838F"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="200" fill="url(#bg)"/>
+  <!-- Layer 2: Roulette wheel (top-down view) -->
+  <!-- Outer ring -->
+  <circle cx="512" cy="512" r="400" fill="#004D40" stroke="#80CBC4" stroke-width="20"/>
+  <!-- Wheel segments (8 slices) — alternating colors -->
+  <!-- Slice 1: red -->
+  <path d="M 512 512 L 512 112 A 400 400 0 0 1 795 217 Z" fill="#EF5350"/>
+  <!-- Slice 2: dark -->
+  <path d="M 512 512 L 795 217 A 400 400 0 0 1 912 512 Z" fill="#263238"/>
+  <!-- Slice 3: green -->
+  <path d="M 512 512 L 912 512 A 400 400 0 0 1 795 807 Z" fill="#66BB6A"/>
+  <!-- Slice 4: dark -->
+  <path d="M 512 512 L 795 807 A 400 400 0 0 1 512 912 Z" fill="#263238"/>
+  <!-- Slice 5: blue -->
+  <path d="M 512 512 L 512 912 A 400 400 0 0 1 229 807 Z" fill="#42A5F5"/>
+  <!-- Slice 6: dark -->
+  <path d="M 512 512 L 229 807 A 400 400 0 0 1 112 512 Z" fill="#263238"/>
+  <!-- Slice 7: orange -->
+  <path d="M 512 512 L 112 512 A 400 400 0 0 1 229 217 Z" fill="#FFA726"/>
+  <!-- Slice 8: dark -->
+  <path d="M 512 512 L 229 217 A 400 400 0 0 1 512 112 Z" fill="#263238"/>
+  <!-- Inner circle -->
+  <circle cx="512" cy="512" r="150" fill="#006064"/>
+  <!-- Segment dividers -->
+  <line x1="512" y1="112" x2="512" y2="912" stroke="#80CBC4" stroke-width="6" opacity="0.5"/>
+  <line x1="112" y1="512" x2="912" y2="512" stroke="#80CBC4" stroke-width="6" opacity="0.5"/>
+  <line x1="229" y1="217" x2="795" y2="807" stroke="#80CBC4" stroke-width="6" opacity="0.5"/>
+  <line x1="795" y1="217" x2="229" y2="807" stroke="#80CBC4" stroke-width="6" opacity="0.5"/>
+  <!-- Layer 3: ? mark in center + pointer -->
+  <text x="512" y="518" text-anchor="middle" dominant-baseline="middle" font-size="200" font-family="Georgia,serif" font-weight="bold" fill="#FFD700">?</text>
+  <!-- Pointer (top) -->
+  <polygon points="512,88 488,140 536,140" fill="#FFD700"/>
+  <!-- A B C D on slices -->
+  <text x="680" y="310" text-anchor="middle" dominant-baseline="middle" font-size="80" font-family="Georgia,serif" font-weight="bold" fill="white">A</text>
+  <text x="714" y="630" text-anchor="middle" dominant-baseline="middle" font-size="80" font-family="Georgia,serif" font-weight="bold" fill="white">B</text>
+  <text x="345" y="714" text-anchor="middle" dominant-baseline="middle" font-size="80" font-family="Georgia,serif" font-weight="bold" fill="white">C</text>
+  <text x="308" y="394" text-anchor="middle" dominant-baseline="middle" font-size="80" font-family="Georgia,serif" font-weight="bold" fill="white">D</text>
+</svg>

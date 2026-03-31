@@ -1,0 +1,44 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#CCFF90"/>
+      <stop offset="100%" stop-color="#00E676"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="200" fill="url(#bg)"/>
+  <!-- Layer 2: Chameleon silhouette (path = it changes format like chameleon changes color) -->
+  <!-- Body -->
+  <ellipse cx="510" cy="560" rx="260" ry="170" fill="#2E7D32"/>
+  <!-- Head -->
+  <ellipse cx="740" cy="480" rx="160" ry="130" fill="#388E3C"/>
+  <!-- Snout -->
+  <ellipse cx="880" cy="500" rx="90" ry="60" fill="#43A047"/>
+  <!-- Curly tail (curl left/down) -->
+  <path d="M 256 580 Q 170 630 150 720 Q 130 800 200 820 Q 270 840 290 778 Q 310 715 248 694" fill="none" stroke="#1B5E20" stroke-width="40" stroke-linecap="round"/>
+  <!-- Legs -->
+  <rect x="350" y="690" width="54" height="130" rx="26" fill="#2E7D32" transform="rotate(-10 377 755)"/>
+  <rect x="560" y="700" width="54" height="120" rx="26" fill="#2E7D32" transform="rotate(12 587 760)"/>
+  <!-- Eye -->
+  <circle cx="780" cy="448" r="44" fill="white"/>
+  <circle cx="792" cy="456" r="28" fill="#FFD600"/>
+  <circle cx="800" cy="462" r="14" fill="#1B5E20"/>
+  <!-- Stripe -->
+  <ellipse cx="802" cy="454" rx="6" ry="28" fill="#0D47A1" opacity="0.7"/>
+  <!-- Layer 3: Path format patches on body (chameleon changing colors = path changing formats) -->
+  <rect x="400" y="510" width="220" height="58" rx="12" fill="#FF5722" opacity="0.88"/>
+  <text x="510" y="540" text-anchor="middle" dominant-baseline="middle" font-size="50" font-family="Consolas,monospace" fill="white" font-weight="bold">C:\path</text>
+  <rect x="360" y="582" width="220" height="52" rx="12" fill="#7C4DFF" opacity="0.88"/>
+  <text x="470" y="609" text-anchor="middle" dominant-baseline="middle" font-size="46" font-family="Consolas,monospace" fill="white">C:/path</text>
+  <rect x="440" y="646" width="220" height="52" rx="12" fill="#00ACC1" opacity="0.88"/>
+  <text x="550" y="673" text-anchor="middle" dominant-baseline="middle" font-size="46" font-family="Consolas,monospace" fill="white">\\server</text>
+  <!-- Chameleon tongue shooting at clipboard -->
+  <line x1="880" y1="500" x2="740" y2="330" stroke="#FF5722" stroke-width="16" stroke-linecap="round"/>
+  <!-- Clipboard at tip of tongue -->
+  <rect x="700" y="240" width="100" height="110" rx="10" fill="white" opacity="0.9"/>
+  <rect x="730" y="228" width="40" height="26" rx="8" fill="#BDBDBD"/>
+  <rect x="716" y="268" width="68" height="10" rx="5" fill="#BDBDBD" opacity="0.7"/>
+  <rect x="716" y="286" width="52" height="10" rx="5" fill="#BDBDBD" opacity="0.5"/>
+  <circle cx="750" cy="322" r="18" fill="#4CAF50"/>
+  <polyline points="741,323 748,330 762,316" fill="none" stroke="white" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

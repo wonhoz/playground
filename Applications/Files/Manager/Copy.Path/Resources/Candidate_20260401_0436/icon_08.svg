@@ -1,0 +1,53 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#E3F2FD"/>
+      <stop offset="100%" stop-color="#BBDEFB"/>
+    </linearGradient>
+    <linearGradient id="browser" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#1565C0"/>
+      <stop offset="100%" stop-color="#1976D2"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="200" fill="url(#bg)"/>
+  <!-- Layer 2: Browser/Explorer window -->
+  <!-- Window frame -->
+  <rect x="120" y="180" width="784" height="580" rx="16" fill="white" stroke="#90CAF9" stroke-width="6"/>
+  <!-- Title bar -->
+  <rect x="120" y="180" width="784" height="56" rx="16" fill="url(#browser)"/>
+  <!-- Title bar bottom square fill -->
+  <rect x="120" y="210" width="784" height="26" fill="url(#browser)"/>
+  <!-- Title bar dots -->
+  <circle cx="160" cy="208" r="10" fill="#EF5350"/>
+  <circle cx="192" cy="208" r="10" fill="#FFA726"/>
+  <circle cx="224" cy="208" r="10" fill="#66BB6A"/>
+  <!-- Address bar -->
+  <rect x="140" y="254" width="744" height="58" rx="10" fill="#E3F2FD" stroke="#90CAF9" stroke-width="4"/>
+  <!-- Path in address bar (highlighted) -->
+  <rect x="144" y="258" width="660" height="50" rx="8" fill="#BBDEFB"/>
+  <text x="162" y="285" dominant-baseline="middle" font-size="52" font-family="Consolas,monospace" fill="#1565C0" font-weight="bold">C:\Users\Documents\file</text>
+  <!-- Copy button in address bar -->
+  <rect x="812" y="258" width="68" height="50" rx="8" fill="#1565C0"/>
+  <text x="846" y="285" text-anchor="middle" dominant-baseline="middle" font-size="38" font-family="Segoe UI Emoji,Arial" fill="white">📋</text>
+  <!-- File list in window -->
+  <!-- Column headers -->
+  <rect x="140" y="326" width="744" height="38" rx="6" fill="#E3F2FD"/>
+  <text x="180" y="346" dominant-baseline="middle" font-size="40" font-family="Segoe UI,Arial" fill="#1565C0">Name</text>
+  <text x="560" y="346" dominant-baseline="middle" font-size="40" font-family="Segoe UI,Arial" fill="#1565C0">Type</text>
+  <text x="740" y="346" dominant-baseline="middle" font-size="40" font-family="Segoe UI,Arial" fill="#1565C0">Size</text>
+  <!-- File row 1 (selected highlight) -->
+  <rect x="140" y="368" width="744" height="56" rx="6" fill="#BBDEFB"/>
+  <text x="196" y="397" dominant-baseline="middle" font-size="46" font-family="Segoe UI,Arial" fill="#0D47A1">📄 report.pdf</text>
+  <!-- File row 2 -->
+  <text x="196" y="452" dominant-baseline="middle" font-size="46" font-family="Segoe UI,Arial" fill="#1565C0" opacity="0.7">📁 Archive</text>
+  <!-- File row 3 (faded) -->
+  <text x="196" y="506" dominant-baseline="middle" font-size="46" font-family="Segoe UI,Arial" fill="#1565C0" opacity="0.5">📄 notes.txt</text>
+  <!-- Layer 3: Popup showing format options -->
+  <rect x="530" y="570" width="310" height="160" rx="14" fill="#1565C0" stroke="#90CAF9" stroke-width="4"/>
+  <text x="685" y="620" text-anchor="middle" dominant-baseline="middle" font-size="44" font-family="Consolas,monospace" fill="white">Full Path ✓</text>
+  <text x="685" y="676" text-anchor="middle" dominant-baseline="middle" font-size="44" font-family="Consolas,monospace" fill="#90CAF9">Slash /…</text>
+  <!-- Arrow from context to address bar -->
+  <line x1="685" y1="570" x2="685" y2="310" stroke="#FFD600" stroke-width="6" stroke-dasharray="18 10"/>
+  <polygon points="685,308 665,336 705,336" fill="#FFD600"/>
+</svg>

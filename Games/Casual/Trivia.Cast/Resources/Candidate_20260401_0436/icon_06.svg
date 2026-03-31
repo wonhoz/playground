@@ -1,0 +1,41 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1B5E20"/>
+      <stop offset="100%" stop-color="#2E7D32"/>
+    </linearGradient>
+    <linearGradient id="book" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#A5D6A7"/>
+      <stop offset="100%" stop-color="#66BB6A"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="200" fill="url(#bg)"/>
+  <!-- Layer 2: Open book -->
+  <!-- Book left page -->
+  <rect x="120" y="240" width="360" height="480" rx="16" fill="url(#book)"/>
+  <!-- Book right page -->
+  <rect x="504" y="240" width="360" height="480" rx="16" fill="#C8E6C9"/>
+  <!-- Book spine -->
+  <rect x="476" y="230" width="72" height="500" rx="8" fill="#388E3C"/>
+  <!-- Page lines left -->
+  <line x1="160" y1="330" x2="440" y2="330" stroke="#2E7D32" stroke-width="8" stroke-linecap="round" opacity="0.5"/>
+  <line x1="160" y1="368" x2="440" y2="368" stroke="#2E7D32" stroke-width="8" stroke-linecap="round" opacity="0.5"/>
+  <line x1="160" y1="406" x2="440" y2="406" stroke="#2E7D32" stroke-width="8" stroke-linecap="round" opacity="0.5"/>
+  <line x1="160" y1="444" x2="440" y2="444" stroke="#2E7D32" stroke-width="8" stroke-linecap="round" opacity="0.5"/>
+  <!-- Page lines right (shorter, Q&A format) -->
+  <line x1="544" y1="330" x2="824" y2="330" stroke="#388E3C" stroke-width="8" stroke-linecap="round" opacity="0.5"/>
+  <line x1="544" y1="368" x2="780" y2="368" stroke="#388E3C" stroke-width="8" stroke-linecap="round" opacity="0.4"/>
+  <!-- Q on left page -->
+  <text x="296" y="540" text-anchor="middle" dominant-baseline="middle" font-size="240" font-family="Georgia,serif" font-weight="bold" fill="#1B5E20" opacity="0.7">Q</text>
+  <!-- Layer 3: ? on right page + floating answer bubbles -->
+  <text x="686" y="540" text-anchor="middle" dominant-baseline="middle" font-size="240" font-family="Georgia,serif" font-weight="bold" fill="#FF8F00">?</text>
+  <!-- Floating letter marks (answer choices) -->
+  <circle cx="720" cy="180" r="50" fill="#EF5350" opacity="0.9"/>
+  <text x="720" y="183" text-anchor="middle" dominant-baseline="middle" font-size="66" font-family="Georgia,serif" font-weight="bold" fill="white">A</text>
+  <circle cx="840" cy="240" r="42" fill="#42A5F5" opacity="0.9"/>
+  <text x="840" y="243" text-anchor="middle" dominant-baseline="middle" font-size="56" font-family="Georgia,serif" font-weight="bold" fill="white">B</text>
+  <!-- Bottom of book (pages fan) -->
+  <path d="M 476 720 Q 400 760 300 760 Q 200 760 120 720" fill="none" stroke="#81C784" stroke-width="16" stroke-linecap="round"/>
+  <path d="M 504 720 Q 600 760 700 760 Q 800 760 864 720" fill="none" stroke="#A5D6A7" stroke-width="16" stroke-linecap="round"/>
+</svg>

@@ -1,0 +1,47 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFF3E0"/>
+      <stop offset="100%" stop-color="#FFE0B2"/>
+    </linearGradient>
+    <linearGradient id="key" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFD600"/>
+      <stop offset="100%" stop-color="#FF8F00"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="200" fill="url(#bg)"/>
+  <!-- Layer 2: Master key (unlocks all path formats) -->
+  <!-- Key head (circle) -->
+  <circle cx="360" cy="360" r="200" fill="url(#key)" stroke="#E65100" stroke-width="16"/>
+  <!-- Key head inner circles (decorative) -->
+  <circle cx="360" cy="360" r="160" fill="none" stroke="#FF8F00" stroke-width="10"/>
+  <circle cx="360" cy="360" r="80" fill="#E65100"/>
+  <!-- Key hole -->
+  <circle cx="360" cy="360" r="44" fill="url(#bg)"/>
+  <!-- Key shank -->
+  <rect x="520" y="332" width="320" height="56" rx="28" fill="url(#key)" stroke="#E65100" stroke-width="8"/>
+  <!-- Key teeth -->
+  <rect x="596" y="388" width="44" height="60" rx="10" fill="url(#key)" stroke="#E65100" stroke-width="8"/>
+  <rect x="668" y="388" width="34" height="80" rx="10" fill="url(#key)" stroke="#E65100" stroke-width="8"/>
+  <rect x="730" y="388" width="50" height="48" rx="10" fill="url(#key)" stroke="#E65100" stroke-width="8"/>
+  <!-- Layer 3: Path format labels around the key -->
+  <!-- Format bubbles floating around -->
+  <rect x="560" y="560" width="240" height="58" rx="14" fill="#FF6D00" opacity="0.9"/>
+  <text x="680" y="590" text-anchor="middle" dominant-baseline="middle" font-size="46" font-family="Consolas,monospace" fill="white">C:\path</text>
+  <rect x="600" y="634" width="200" height="58" rx="14" fill="#7C4DFF" opacity="0.9"/>
+  <text x="700" y="664" text-anchor="middle" dominant-baseline="middle" font-size="46" font-family="Consolas,monospace" fill="white">C:/path</text>
+  <rect x="570" y="708" width="230" height="58" rx="14" fill="#00897B" opacity="0.9"/>
+  <text x="685" y="738" text-anchor="middle" dominant-baseline="middle" font-size="46" font-family="Consolas,monospace" fill="white">\\server</text>
+  <rect x="150" y="600" width="220" height="58" rx="14" fill="#1E88E5" opacity="0.9"/>
+  <text x="260" y="630" text-anchor="middle" dominant-baseline="middle" font-size="46" font-family="Consolas,monospace" fill="white">file://…</text>
+  <rect x="160" y="674" width="200" height="58" rx="14" fill="#E53935" opacity="0.9"/>
+  <text x="260" y="704" text-anchor="middle" dominant-baseline="middle" font-size="46" font-family="Consolas,monospace" fill="white">./rel</text>
+  <!-- Sparkle from key tip (unlocking) -->
+  <line x1="840" y1="360" x2="870" y2="310" stroke="#FFD600" stroke-width="8" stroke-linecap="round"/>
+  <line x1="840" y1="360" x2="880" y2="360" stroke="#FFD600" stroke-width="8" stroke-linecap="round"/>
+  <line x1="840" y1="360" x2="864" y2="408" stroke="#FFD600" stroke-width="8" stroke-linecap="round"/>
+  <circle cx="870" cy="306" r="10" fill="#FFD600"/>
+  <circle cx="886" cy="360" r="10" fill="#FFD600"/>
+  <circle cx="870" cy="412" r="10" fill="#FFD600"/>
+</svg>

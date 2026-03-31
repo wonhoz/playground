@@ -1,0 +1,16 @@
+global using System;
+global using System.Collections.Generic;
+global using System.IO;
+global using System.Linq;
+global using System.Runtime.InteropServices;
+global using System.Threading.Tasks;
+global using System.Windows;
+global using System.Windows.Controls;
+global using System.Windows.Input;
+global using System.Windows.Interop;
+global using System.Windows.Media;
+global using CharPad.Data;
+global using CharPad.Services;
+global using WpfButton    = System.Windows.Controls.Button;
+global using WpfFontFamily = System.Windows.Media.FontFamily;
+global using DrawingPen   = System.Drawing.Pen;

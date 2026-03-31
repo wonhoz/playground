@@ -1,0 +1,397 @@
+<Window x:Class="TriviaCast.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Trivia.Cast"
+        Width="700" Height="600"
+        MinWidth="640" MinHeight="540"
+        WindowStartupLocation="CenterScreen"
+        Background="{StaticResource BgBrush}"
+        Foreground="{StaticResource TextPrimary}"
+        FontFamily="Segoe UI">
+
+    <Grid>
+        <!-- ═══════════════════════════════ 메뉴 화면 ═══════════════════════════════ -->
+        <Grid x:Name="MenuScreen" Visibility="Visible">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- 헤더 -->
+            <StackPanel Grid.Row="0" HorizontalAlignment="Center" Margin="0,40,0,30">
+                <TextBlock Text="🎯 TRIVIA.CAST"
+                           FontSize="42" FontWeight="Bold"
+                           Foreground="{StaticResource AccentBrush}"
+                           HorizontalAlignment="Center"
+                           />
+                <TextBlock Text="다양한 주제 상식 퀴즈"
+                           FontSize="16"
+                           Foreground="{StaticResource TextSecondary}"
+                           HorizontalAlignment="Center"
+                           Margin="0,8,0,0"/>
+            </StackPanel>
+
+            <!-- 모드 선택 -->
+            <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="420">
+
+                <!-- 일반 모드 -->
+                <Border Background="{StaticResource SurfaceBrush}"
+                        BorderBrush="{StaticResource BorderBrush}"
+                        BorderThickness="1" CornerRadius="10"
+                        Margin="0,0,0,12" Cursor="Hand"
+                        x:Name="NormalModeCard"
+                        MouseLeftButtonUp="NormalModeCard_Click">
+                    <Grid Margin="20,16">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="📚" FontSize="32" VerticalAlignment="Center" Margin="0,0,16,0"/>
+                        <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                            <TextBlock Text="일반 모드" FontSize="18" FontWeight="SemiBold"
+                                       Foreground="{StaticResource TextPrimary}"/>
+                            <TextBlock Text="랜덤 카테고리 · 20문제 · 15초 제한"
+                                       FontSize="12" Foreground="{StaticResource TextSecondary}" Margin="0,3,0,0"/>
+                        </StackPanel>
+                        <TextBlock Grid.Column="2" Text="▶" FontSize="18"
+                                   Foreground="{StaticResource AccentBrush}"
+                                   VerticalAlignment="Center"/>
+                    </Grid>
+                </Border>
+
+                <!-- 카테고리 모드 -->
+                <Border Background="{StaticResource SurfaceBrush}"
+                        BorderBrush="{StaticResource BorderBrush}"
+                        BorderThickness="1" CornerRadius="10"
+                        Margin="0,0,0,12" Cursor="Hand"
+                        x:Name="CategoryModeCard"
+                        MouseLeftButtonUp="CategoryModeCard_Click">
+                    <Grid Margin="20,16">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="🎯" FontSize="32" VerticalAlignment="Center" Margin="0,0,16,0"/>
+                        <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                            <TextBlock Text="카테고리 모드" FontSize="18" FontWeight="SemiBold"
+                                       Foreground="{StaticResource TextPrimary}"/>
+                            <TextBlock Text="원하는 주제 선택 · 10문제 · 15초 제한"
+                                       FontSize="12" Foreground="{StaticResource TextSecondary}" Margin="0,3,0,0"/>
+                        </StackPanel>
+                        <TextBlock Grid.Column="2" Text="▶" FontSize="18"
+                                   Foreground="{StaticResource AccentBrush}"
+                                   VerticalAlignment="Center"/>
+                    </Grid>
+                </Border>
+
+                <!-- 데일리 챌린지 -->
+                <Border Background="{StaticResource SurfaceBrush}"
+                        BorderBrush="{StaticResource BorderBrush}"
+                        BorderThickness="1" CornerRadius="10"
+                        Margin="0,0,0,24" Cursor="Hand"
+                        x:Name="DailyModeCard"
+                        MouseLeftButtonUp="DailyModeCard_Click">
+                    <Grid Margin="20,16">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="🌟" FontSize="32" VerticalAlignment="Center" Margin="0,0,16,0"/>
+                        <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                            <TextBlock Text="데일리 챌린지" FontSize="18" FontWeight="SemiBold"
+                                       Foreground="{StaticResource GoldBrush}"/>
+                            <TextBlock x:Name="DailySubText"
+                                       Text="매일 새로운 10문제 · 하루 1회"
+                                       FontSize="12" Foreground="{StaticResource TextSecondary}" Margin="0,3,0,0"/>
+                        </StackPanel>
+                        <TextBlock x:Name="DailyArrow" Grid.Column="2" Text="▶" FontSize="18"
+                                   Foreground="{StaticResource GoldBrush}"
+                                   VerticalAlignment="Center"/>
+                    </Grid>
+                </Border>
+
+                <!-- 버튼 행 -->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="8"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button x:Name="WrongReviewBtn" Grid.Column="0"
+                            Content="📋 오답 노트"
+                            Click="WrongReviewBtn_Click"/>
+                    <Button x:Name="ScoreBoardBtn" Grid.Column="2"
+                            Content="🏆 점수 기록"
+                            Click="ScoreBoardBtn_Click"/>
+                </Grid>
+            </StackPanel>
+
+            <!-- 푸터 -->
+            <TextBlock Grid.Row="2" HorizontalAlignment="Center"
+                       Text="Trivia.Cast v1.0"
+                       FontSize="11" Foreground="{StaticResource TextSecondary}"
+                       Margin="0,0,0,16"/>
+        </Grid>
+
+        <!-- ═══════════════════════════════ 카테고리 선택 화면 ═══════════════════════════════ -->
+        <Grid x:Name="CategoryScreen" Visibility="Collapsed">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Text="카테고리 선택"
+                       FontSize="26" FontWeight="Bold"
+                       Foreground="{StaticResource AccentBrush}"
+                       HorizontalAlignment="Center" Margin="0,30,0,20"/>
+
+            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Margin="40,0">
+                <WrapPanel x:Name="CategoryPanel" HorizontalAlignment="Center"/>
+            </ScrollViewer>
+
+            <Button Grid.Row="2" Content="← 뒤로" HorizontalAlignment="Left"
+                    Margin="40,12,0,20" Padding="14,8"
+                    Click="BackToMenuBtn_Click"/>
+        </Grid>
+
+        <!-- ═══════════════════════════════ 퀴즈 화면 ═══════════════════════════════ -->
+        <Grid x:Name="QuizScreen" Visibility="Collapsed">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- 상단 정보바 -->
+            <Grid Grid.Row="0" Margin="24,16,24,8">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- 진행도 + 카테고리 -->
+                <StackPanel Grid.Column="0">
+                    <TextBlock x:Name="QuestionProgress" Text="1 / 20"
+                               FontSize="14" FontWeight="SemiBold"
+                               Foreground="{StaticResource TextSecondary}"/>
+                    <TextBlock x:Name="CategoryLabel" Text=""
+                               FontSize="12" Foreground="{StaticResource AccentBrush}"/>
+                </StackPanel>
+
+                <!-- 타이머 (중앙) -->
+                <Border Grid.Column="1"
+                        Background="{StaticResource SurfaceBrush}"
+                        BorderBrush="{StaticResource BorderBrush}"
+                        BorderThickness="1" CornerRadius="20"
+                        Padding="20,6">
+                    <TextBlock x:Name="TimerText" Text="15"
+                               FontSize="22" FontWeight="Bold"
+                               Foreground="{StaticResource GoldBrush}"
+                               HorizontalAlignment="Center"/>
+                </Border>
+
+                <!-- 점수 + 스트릭 -->
+                <StackPanel Grid.Column="2" HorizontalAlignment="Right">
+                    <TextBlock x:Name="ScoreText" Text="점수: 0"
+                               FontSize="14" FontWeight="SemiBold"
+                               Foreground="{StaticResource TextSecondary}"
+                               HorizontalAlignment="Right"/>
+                    <TextBlock x:Name="StreakText" Text=""
+                               FontSize="12" Foreground="{StaticResource GoldBrush}"
+                               HorizontalAlignment="Right"/>
+                </StackPanel>
+            </Grid>
+
+            <!-- 진행바 -->
+            <Border Grid.Row="1" Height="4" Margin="24,0" Background="{StaticResource SurfaceBrush}" CornerRadius="2">
+                <Border x:Name="ProgressBar" HorizontalAlignment="Left" Height="4"
+                        Background="{StaticResource AccentBrush}" CornerRadius="2" Width="0"/>
+            </Border>
+
+            <!-- 문제 + 보기 -->
+            <Grid Grid.Row="2" Margin="24,16,24,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <!-- 문제 -->
+                <Border Grid.Row="0"
+                        Background="{StaticResource SurfaceBrush}"
+                        BorderBrush="{StaticResource BorderBrush}"
+                        BorderThickness="1" CornerRadius="10"
+                        Padding="24,20" Margin="0,0,0,16">
+                    <TextBlock x:Name="QuestionText"
+                               FontSize="18" FontWeight="SemiBold"
+                               Foreground="{StaticResource TextPrimary}"
+                               TextWrapping="Wrap"
+                               LineHeight="28"/>
+                </Border>
+
+                <!-- 보기 4개 -->
+                <UniformGrid Grid.Row="1" Rows="2" Columns="2" x:Name="AnswerGrid"/>
+            </Grid>
+
+            <!-- 하단 정지 버튼 -->
+            <Button Grid.Row="3" Content="게임 종료" HorizontalAlignment="Right"
+                    Margin="0,8,24,16" Padding="12,6" FontSize="12"
+                    Foreground="{StaticResource TextSecondary}"
+                    Click="QuitBtn_Click"/>
+        </Grid>
+
+        <!-- ═══════════════════════════════ 정답/오답 피드백 오버레이 ═══════════════════════════════ -->
+        <Border x:Name="FeedbackOverlay" Visibility="Collapsed"
+                Background="#CC000000" CornerRadius="12"
+                Margin="60,80" Padding="30,24"
+                HorizontalAlignment="Center" VerticalAlignment="Center"
+                MaxWidth="500">
+            <StackPanel HorizontalAlignment="Center">
+                <TextBlock x:Name="FeedbackIcon" FontSize="48" HorizontalAlignment="Center"/>
+                <TextBlock x:Name="FeedbackTitle" FontSize="22" FontWeight="Bold"
+                           HorizontalAlignment="Center" Margin="0,8,0,0"/>
+                <TextBlock x:Name="FeedbackCorrect" FontSize="14"
+                           Foreground="{StaticResource GreenBrush}"
+                           HorizontalAlignment="Center" Margin="0,6,0,0"
+                           TextWrapping="Wrap" TextAlignment="Center"/>
+                <TextBlock x:Name="FeedbackExplanation" FontSize="13"
+                           Foreground="{StaticResource TextSecondary}"
+                           HorizontalAlignment="Center" Margin="0,8,0,0"
+                           TextWrapping="Wrap" TextAlignment="Center"
+                           MaxWidth="420"/>
+            </StackPanel>
+        </Border>
+
+        <!-- ═══════════════════════════════ 결과 화면 ═══════════════════════════════ -->
+        <Grid x:Name="ResultScreen" Visibility="Collapsed">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- 결과 헤더 -->
+            <StackPanel Grid.Row="0" HorizontalAlignment="Center" Margin="0,30,0,16">
+                <TextBlock x:Name="ResultEmoji" FontSize="56" HorizontalAlignment="Center"/>
+                <TextBlock x:Name="ResultTitle" FontSize="28" FontWeight="Bold"
+                           HorizontalAlignment="Center" Margin="0,8,0,0"/>
+                <TextBlock x:Name="ResultSubtitle" FontSize="14"
+                           Foreground="{StaticResource TextSecondary}"
+                           HorizontalAlignment="Center" Margin="0,4,0,0"/>
+            </StackPanel>
+
+            <!-- 점수 카드 -->
+            <Grid Grid.Row="1" Margin="60,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="8"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="8"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Border Grid.Column="0" Background="{StaticResource SurfaceBrush}"
+                        BorderBrush="{StaticResource BorderBrush}" BorderThickness="1"
+                        CornerRadius="8" Padding="12,10">
+                    <StackPanel HorizontalAlignment="Center">
+                        <TextBlock x:Name="ResultScore" FontSize="28" FontWeight="Bold"
+                                   Foreground="{StaticResource AccentBrush}" HorizontalAlignment="Center"/>
+                        <TextBlock Text="점수" FontSize="11"
+                                   Foreground="{StaticResource TextSecondary}" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Column="2" Background="{StaticResource SurfaceBrush}"
+                        BorderBrush="{StaticResource BorderBrush}" BorderThickness="1"
+                        CornerRadius="8" Padding="12,10">
+                    <StackPanel HorizontalAlignment="Center">
+                        <TextBlock x:Name="ResultAccuracy" FontSize="28" FontWeight="Bold"
+                                   Foreground="{StaticResource GreenBrush}" HorizontalAlignment="Center"/>
+                        <TextBlock Text="정답률" FontSize="11"
+                                   Foreground="{StaticResource TextSecondary}" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Column="4" Background="{StaticResource SurfaceBrush}"
+                        BorderBrush="{StaticResource BorderBrush}" BorderThickness="1"
+                        CornerRadius="8" Padding="12,10">
+                    <StackPanel HorizontalAlignment="Center">
+                        <TextBlock x:Name="ResultStreak" FontSize="28" FontWeight="Bold"
+                                   Foreground="{StaticResource GoldBrush}" HorizontalAlignment="Center"/>
+                        <TextBlock Text="최대 연속" FontSize="11"
+                                   Foreground="{StaticResource TextSecondary}" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+            <!-- 오답 목록 -->
+            <ScrollViewer Grid.Row="2" Margin="40,16,40,0" VerticalScrollBarVisibility="Auto">
+                <StackPanel x:Name="WrongAnswerList"/>
+            </ScrollViewer>
+
+            <!-- 버튼 -->
+            <Grid Grid.Row="3" Margin="40,12,40,20">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="8"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" x:Name="PlayAgainBtn"
+                        Content="🔄 다시 하기" Click="PlayAgainBtn_Click"/>
+                <Button Grid.Column="2" x:Name="MainMenuBtn"
+                        Content="🏠 메인 메뉴" Click="MainMenuBtn_Click"/>
+            </Grid>
+        </Grid>
+
+        <!-- ═══════════════════════════════ 오답 노트 화면 ═══════════════════════════════ -->
+        <Grid x:Name="WrongScreen" Visibility="Collapsed">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Text="📋 오답 노트"
+                       FontSize="26" FontWeight="Bold"
+                       Foreground="{StaticResource AccentBrush}"
+                       HorizontalAlignment="Center" Margin="0,30,0,16"/>
+
+            <ScrollViewer Grid.Row="1" Margin="40,0" VerticalScrollBarVisibility="Auto">
+                <StackPanel x:Name="WrongNoteList"/>
+            </ScrollViewer>
+
+            <Button Grid.Row="2" Content="← 뒤로" HorizontalAlignment="Left"
+                    Margin="40,12,0,20" Padding="14,8"
+                    Click="BackToMenuBtn_Click"/>
+        </Grid>
+
+        <!-- ═══════════════════════════════ 점수 기록 화면 ═══════════════════════════════ -->
+        <Grid x:Name="ScoreScreen" Visibility="Collapsed">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Text="🏆 점수 기록"
+                       FontSize="26" FontWeight="Bold"
+                       Foreground="{StaticResource GoldBrush}"
+                       HorizontalAlignment="Center" Margin="0,30,0,16"/>
+
+            <ScrollViewer Grid.Row="1" Margin="40,0" VerticalScrollBarVisibility="Auto">
+                <StackPanel x:Name="ScoreList"/>
+            </ScrollViewer>
+
+            <Button Grid.Row="2" Content="← 뒤로" HorizontalAlignment="Left"
+                    Margin="40,12,0,20" Padding="14,8"
+                    Click="BackToMenuBtn_Click"/>
+        </Grid>
+    </Grid>
+</Window>

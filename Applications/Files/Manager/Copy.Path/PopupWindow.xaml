@@ -1,0 +1,99 @@
+<Window x:Class="CopyPath.PopupWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Copy.Path"
+        Width="600" Height="460"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        ResizeMode="NoResize"
+        ShowInTaskbar="False"
+        Topmost="True"
+        KeyDown="Window_KeyDown"
+        Deactivated="Window_Deactivated"
+        Loaded="Window_Loaded">
+
+    <Window.Effect>
+        <DropShadowEffect BlurRadius="20" ShadowDepth="4" Opacity="0.6" Color="#000000"/>
+    </Window.Effect>
+
+    <Border Background="{StaticResource BgBrush}"
+            BorderBrush="{StaticResource BorderBrush}"
+            BorderThickness="1" CornerRadius="12">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- 헤더 -->
+            <Grid Grid.Row="0" Margin="16,12,12,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="📂  Copy.Path"
+                           Foreground="{StaticResource AccentBrush}"
+                           FontFamily="Segoe UI" FontSize="14" FontWeight="SemiBold"
+                           VerticalAlignment="Center"/>
+                <Button Grid.Column="1" Width="28" Height="28" Content="✕" FontSize="11"
+                        Foreground="{StaticResource TextSecondary}" Background="Transparent"
+                        BorderThickness="0" Cursor="Hand" Click="CloseBtn_Click">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}" CornerRadius="5">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#1E2840"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </Grid>
+
+            <!-- 경로 입력 -->
+            <Grid Grid.Row="1" Margin="12,10,12,0">
+                <TextBox x:Name="PathBox" Height="36"
+                         TextChanged="PathBox_TextChanged"
+                         KeyDown="PathBox_KeyDown"/>
+                <TextBlock x:Name="Placeholder"
+                           Text="탐색기에서 파일 선택 후 단축키, 또는 여기에 경로 직접 입력"
+                           Foreground="{StaticResource TextSecondary}"
+                           FontFamily="Segoe UI" FontSize="11"
+                           IsHitTestVisible="False"
+                           VerticalAlignment="Center" Margin="12,0,0,0"/>
+            </Grid>
+
+            <!-- 포맷 목록 -->
+            <ScrollViewer Grid.Row="2" Margin="12,8,12,0"
+                          VerticalScrollBarVisibility="Auto">
+                <StackPanel x:Name="ResultPanel"/>
+            </ScrollViewer>
+
+            <!-- 상태바 -->
+            <Border Grid.Row="3" Background="{StaticResource SurfaceBrush}"
+                    BorderBrush="{StaticResource BorderBrush}" BorderThickness="0,1,0,0"
+                    CornerRadius="0,0,12,12" Padding="14,6">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock x:Name="StatusText"
+                               Foreground="{StaticResource TextSecondary}"
+                               FontFamily="Segoe UI" FontSize="11"
+                               VerticalAlignment="Center"/>
+                    <TextBlock Grid.Column="1" Text="Win+Shift+X"
+                               Foreground="{StaticResource TextSecondary}"
+                               FontFamily="Segoe UI" FontSize="11"
+                               VerticalAlignment="Center"/>
+                </Grid>
+            </Border>
+        </Grid>
+    </Border>
+</Window>

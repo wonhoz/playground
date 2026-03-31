@@ -1,36 +1,61 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- icon_03: metaphor | 방패 + PATH 텍스트 — 경로 환경변수 수호자 | 중앙 심볼 | 파랑+황금+흰 -->
   <defs>
-    <linearGradient id="bg4" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#0D1B3E"/>
-      <stop offset="100%" stop-color="#1A2A6C"/>
+    <linearGradient id="bg3" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#E8EAF6"/>
+      <stop offset="100%" stop-color="#9FA8DA"/>
     </linearGradient>
-    <linearGradient id="shield4" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#FFD740"/>
-      <stop offset="100%" stop-color="#FF8F00"/>
-    </linearGradient>
-    <linearGradient id="inner4" x1="0" y1="0" x2="0" y2="1">
+    <linearGradient id="shield" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0%" stop-color="#1565C0"/>
       <stop offset="100%" stop-color="#0D47A1"/>
     </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#FFD700"/>
+      <stop offset="100%" stop-color="#FFA000"/>
+    </linearGradient>
+    <filter id="sh3" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="10" stdDeviation="14" flood-color="#1A237E" flood-opacity="0.4"/>
+    </filter>
   </defs>
-  <!-- Layer 1: 딥 블루 배경 + 육각 격자 패턴 -->
-  <rect width="1024" height="1024" rx="196" fill="url(#bg4)"/>
-  <!-- 배경 기하학 패턴 -->
-  <circle cx="512" cy="512" r="420" fill="none" stroke="#1E3A6E" stroke-width="2" opacity="0.6"/>
-  <circle cx="512" cy="512" r="320" fill="none" stroke="#1E3A6E" stroke-width="2" opacity="0.4"/>
-  <circle cx="512" cy="512" r="200" fill="none" stroke="#1E3A6E" stroke-width="2" opacity="0.3"/>
+  <rect width="1024" height="1024" rx="250" fill="url(#bg3)"/>
 
-  <!-- Layer 2: 방패 (Guard 심볼) -->
-  <path d="M512 160 L760 280 L760 540 Q760 720 512 860 Q264 720 264 540 L264 280 Z" fill="url(#shield4)" opacity="0.95"/>
-  <!-- 방패 안쪽 -->
-  <path d="M512 220 L710 322 L710 530 Q710 680 512 800 Q314 680 314 530 L314 322 Z" fill="url(#inner4)"/>
+  <!-- Shield body -->
+  <path d="M512,140 L820,240 L820,560 C820,700 512,880 512,880 C512,880 204,700 204,560 L204,240 Z"
+        fill="url(#shield)" filter="url(#sh3)"/>
 
-  <!-- Layer 3: 방패 내부 PATH 텍스트 -->
-  <text x="512" y="420" font-family="'Courier New',monospace" font-weight="900" font-size="72" fill="#FFD740" text-anchor="middle" dominant-baseline="middle">PATH</text>
-  <!-- 체크 아이콘 -->
-  <circle cx="512" cy="550" r="72" fill="#2E7D32" stroke="#00E676" stroke-width="6"/>
-  <text x="512" y="550" font-family="'Segoe UI Emoji',Arial,sans-serif" font-size="68" fill="white" text-anchor="middle" dominant-baseline="middle">✓</text>
-  <!-- 별 장식 (방패 상단 양쪽) -->
-  <circle cx="390" cy="310" r="12" fill="#FFD740" opacity="0.8"/>
-  <circle cx="634" cy="310" r="12" fill="#FFD740" opacity="0.8"/>
+  <!-- Shield gold border -->
+  <path d="M512,160 L800,254 L800,558 C800,688 512,856 512,856 C512,856 224,688 224,558 L224,254 Z"
+        fill="none" stroke="url(#gold)" stroke-width="16"/>
+
+  <!-- Shield emblem: inner panel -->
+  <path d="M512,220 L760,300 L760,544 C760,652 512,796 512,796 C512,796 264,652 264,544 L264,300 Z"
+        fill="white" opacity="0.12"/>
+
+  <!-- Center: PATH text -->
+  <text x="512" y="460" font-family="Arial Black, sans-serif" font-size="120" fill="url(#gold)"
+        text-anchor="middle" dominant-baseline="middle">PATH</text>
+
+  <!-- Center: chain/path lines (decorative) -->
+  <line x1="300" y1="520" x2="724" y2="520" stroke="url(#gold)" stroke-width="6" opacity="0.6"/>
+
+  <!-- Shield divider -->
+  <line x1="264" y1="400" x2="760" y2="400" stroke="url(#gold)" stroke-width="8" opacity="0.5"/>
+  <line x1="512" y1="300" x2="512" y2="796" stroke="url(#gold)" stroke-width="8" opacity="0.5"/>
+
+  <!-- Top quadrant icons: system / user -->
+  <text x="390" y="360" font-family="Arial, sans-serif" font-size="60" fill="white"
+        text-anchor="middle" dominant-baseline="middle">⚙</text>
+  <text x="634" y="360" font-family="Arial, sans-serif" font-size="60" fill="white"
+        text-anchor="middle" dominant-baseline="middle">👤</text>
+
+  <!-- Bottom: checkmark -->
+  <circle cx="512" cy="660" r="52" fill="#43A047" filter="url(#sh3)"/>
+  <text x="512" y="660" font-family="Arial, sans-serif" font-size="62" fill="white"
+        text-anchor="middle" dominant-baseline="middle">✓</text>
+
+  <!-- Corner sparkles -->
+  <circle cx="200" cy="200" r="18" fill="#FFD700" opacity="0.8"/>
+  <circle cx="824" cy="200" r="14" fill="#FFD700" opacity="0.6"/>
+  <circle cx="180" cy="840" r="12" fill="#64B5F6" opacity="0.6"/>
+  <circle cx="844" cy="840" r="16" fill="#64B5F6" opacity="0.5"/>
 </svg>

@@ -1,44 +1,25 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 비비드 그라데이션 -->
   <defs>
-    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#b71c1c"/>
-      <stop offset="100%" stop-color="#c62828"/>
-    </linearGradient>
-    <linearGradient id="trashGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#ef9a9a"/>
-      <stop offset="100%" stop-color="#e57373"/>
-    </linearGradient>
-    <linearGradient id="fileGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#ffffff"/>
-      <stop offset="100%" stop-color="#ffcdd2"/>
+    <linearGradient id="bg5" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF3E0"/>
+      <stop offset="100%" stop-color="#FCE4EC"/>
     </linearGradient>
   </defs>
-  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
-  <!-- Files falling into trash -->
-  <!-- File 1 -->
-  <rect x="80" y="100" width="110" height="140" rx="10" fill="url(#fileGrad)" opacity="0.9" transform="rotate(-15, 135, 170)"/>
-  <polygon points="155,100 190,135 155,135" fill="#ffcdd2" transform="rotate(-15, 135, 170)"/>
-  <text x="135" y="200" font-family="Arial" font-size="12" fill="#b71c1c" text-anchor="middle" transform="rotate(-15, 135, 170)">copy.txt</text>
-  <!-- File 2 -->
-  <rect x="310" y="80" width="110" height="140" rx="10" fill="url(#fileGrad)" opacity="0.7" transform="rotate(12, 365, 150)"/>
-  <polygon points="385,80 420,115 385,115" fill="#ffcdd2" transform="rotate(12, 365, 150)"/>
-  <text x="365" y="180" font-family="Arial" font-size="12" fill="#b71c1c" text-anchor="middle" transform="rotate(12, 365, 150)">dup.txt</text>
-  <!-- Arrow lines going down -->
-  <path d="M160 270 L200 310" fill="none" stroke="white" stroke-width="3" stroke-dasharray="6,3" marker-end="url(#ard)"/>
-  <path d="M355 260 L315 310" fill="none" stroke="white" stroke-width="3" stroke-dasharray="6,3" marker-end="url(#ard)"/>
-  <defs>
-    <marker id="ard" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-      <path d="M0,0 L0,6 L6,3 Z" fill="white"/>
-    </marker>
-  </defs>
-  <!-- Trash can body -->
-  <rect x="155" y="310" width="200" height="160" rx="10" fill="url(#trashGrad)"/>
-  <!-- Trash lines -->
-  <line x1="205" y1="335" x2="205" y2="455" stroke="#b71c1c" stroke-width="4" stroke-linecap="round" opacity="0.5"/>
-  <line x1="256" y1="335" x2="256" y2="455" stroke="#b71c1c" stroke-width="4" stroke-linecap="round" opacity="0.5"/>
-  <line x1="307" y1="335" x2="307" y2="455" stroke="#b71c1c" stroke-width="4" stroke-linecap="round" opacity="0.5"/>
-  <!-- Trash lid -->
-  <rect x="135" y="295" width="242" height="22" rx="8" fill="url(#trashGrad)"/>
-  <!-- Handle -->
-  <rect x="218" y="268" width="76" height="30" rx="8" fill="none" stroke="#ef9a9a" stroke-width="5"/>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg5)"/>
+  <!-- Layer 2: 파일 스택 (여러 겹) -->
+  <rect x="220" y="360" width="340" height="420" rx="28" fill="#E91E63" opacity="0.4" transform="rotate(12 390 570)"/>
+  <rect x="220" y="360" width="340" height="420" rx="28" fill="#E91E63" opacity="0.6" transform="rotate(6 390 570)"/>
+  <rect x="220" y="360" width="340" height="420" rx="28" fill="#E91E63"/>
+  <!-- 파일 내용 -->
+  <text x="370" y="540" font-family="'Segoe UI', sans-serif" font-size="60" fill="white" text-anchor="middle">📄</text>
+  <text x="370" y="630" font-family="'Consolas', monospace" font-size="40" fill="#FCE4EC" text-anchor="middle">photo.jpg</text>
+  <text x="370" y="688" font-family="'Consolas', monospace" font-size="40" fill="#F48FB1" text-anchor="middle">×3 copies</text>
+  <!-- Layer 3: 삭제 X 배지 -->
+  <circle cx="760" cy="400" r="200" fill="#B71C1C"/>
+  <line x1="680" y1="320" x2="840" y2="480" stroke="white" stroke-width="56" stroke-linecap="round"/>
+  <line x1="840" y1="320" x2="680" y2="480" stroke="white" stroke-width="56" stroke-linecap="round"/>
+  <!-- 삭제 텍스트 -->
+  <rect x="180" y="860" width="664" height="100" rx="24" fill="#AD1457"/>
+  <text x="512" y="928" font-family="'Segoe UI', sans-serif" font-weight="700" font-size="64" fill="white" text-anchor="middle">중복 파일 제거</text>
 </svg>

@@ -1,44 +1,31 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 파랑 배경 -->
   <defs>
-    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#1a237e"/>
-      <stop offset="100%" stop-color="#283593"/>
-    </linearGradient>
-    <linearGradient id="file1" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#5c6bc0"/>
-      <stop offset="100%" stop-color="#3949ab"/>
-    </linearGradient>
-    <linearGradient id="file2" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#7986cb"/>
-      <stop offset="100%" stop-color="#5c6bc0"/>
-    </linearGradient>
-    <linearGradient id="xGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#ff5252"/>
-      <stop offset="100%" stop-color="#d50000"/>
+    <linearGradient id="bg1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E3F2FD"/>
+      <stop offset="100%" stop-color="#BBDEFB"/>
     </linearGradient>
   </defs>
-  <rect width="512" height="512" rx="80" fill="url(#bg)"/>
-  <!-- File 1 (shadow/duplicate) -->
-  <rect x="145" y="155" width="160" height="210" rx="12" fill="url(#file2)" opacity="0.7" transform="translate(20,20)"/>
-  <polygon points="261,175 301,215 261,215" fill="#3949ab" opacity="0.7" transform="translate(20,20)"/>
-  <!-- File 1 main -->
-  <rect x="145" y="155" width="160" height="210" rx="12" fill="url(#file1)"/>
-  <polygon points="261,155 301,195 261,195" fill="#3949ab"/>
-  <polygon points="261,155 301,155 301,195" fill="#9fa8da"/>
-  <rect x="165" y="225" width="120" height="10" rx="5" fill="#9fa8da" opacity="0.6"/>
-  <rect x="165" y="245" width="100" height="10" rx="5" fill="#9fa8da" opacity="0.5"/>
-  <rect x="165" y="265" width="110" height="10" rx="5" fill="#9fa8da" opacity="0.4"/>
-  <text x="225" y="320" font-family="'Courier New', monospace" font-size="16" font-weight="bold" fill="#e8eaf6" text-anchor="middle">file.txt</text>
-  <!-- File 2 (duplicate shifted right) -->
-  <rect x="210" y="185" width="160" height="210" rx="12" fill="url(#file2)" opacity="0.85"/>
-  <polygon points="326,185 366,225 326,225" fill="#283593"/>
-  <polygon points="326,185 366,185 366,225" fill="#b0bec5"/>
-  <rect x="230" y="255" width="120" height="10" rx="5" fill="#e8eaf6" opacity="0.5"/>
-  <rect x="230" y="275" width="100" height="10" rx="5" fill="#e8eaf6" opacity="0.4"/>
-  <rect x="230" y="295" width="110" height="10" rx="5" fill="#e8eaf6" opacity="0.35"/>
-  <text x="290" y="350" font-family="'Courier New', monospace" font-size="16" font-weight="bold" fill="#e8eaf6" text-anchor="middle">file(2).txt</text>
-  <!-- X delete badge -->
-  <circle cx="390" cy="130" r="40" fill="url(#xGrad)"/>
-  <line x1="368" y1="108" x2="412" y2="152" stroke="white" stroke-width="8" stroke-linecap="round"/>
-  <line x1="412" y1="108" x2="368" y2="152" stroke="white" stroke-width="8" stroke-linecap="round"/>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg1)"/>
+  <!-- Layer 2: 동일 파일 2개 나란히 -->
+  <!-- 파일 카드 1 (왼쪽) -->
+  <rect x="100" y="200" width="340" height="460" rx="28" fill="#1565C0"/>
+  <polygon points="360,200 440,200 440,280" fill="#0D47A1"/>
+  <line x1="360" y1="200" x2="360" y2="280" stroke="#0D47A1" stroke-width="6"/>
+  <text x="270" y="420" font-family="'Segoe UI', sans-serif" font-size="52" fill="#90CAF9" text-anchor="middle">📄</text>
+  <text x="270" y="510" font-family="'Consolas', monospace" font-size="40" fill="#BBDEFB" text-anchor="middle">photo.jpg</text>
+  <text x="270" y="566" font-family="'Consolas', monospace" font-size="36" fill="#64B5F6" text-anchor="middle">4.2 MB</text>
+  <!-- 등호 (=) 표시 -->
+  <rect x="450" y="440" width="124" height="24" rx="8" fill="#FF6F00"/>
+  <rect x="450" y="490" width="124" height="24" rx="8" fill="#FF6F00"/>
+  <!-- 파일 카드 2 (오른쪽, 살짝 오프셋) -->
+  <rect x="584" y="200" width="340" height="460" rx="28" fill="#1565C0"/>
+  <polygon points="844,200 924,200 924,280" fill="#0D47A1"/>
+  <line x1="844" y1="200" x2="844" y2="280" stroke="#0D47A1" stroke-width="6"/>
+  <text x="754" y="420" font-family="'Segoe UI', sans-serif" font-size="52" fill="#90CAF9" text-anchor="middle">📄</text>
+  <text x="754" y="510" font-family="'Consolas', monospace" font-size="40" fill="#BBDEFB" text-anchor="middle">photo.jpg</text>
+  <text x="754" y="566" font-family="'Consolas', monospace" font-size="36" fill="#64B5F6" text-anchor="middle">4.2 MB</text>
+  <!-- Layer 3: 중복 배지 -->
+  <rect x="280" y="720" width="464" height="100" rx="24" fill="#FF6F00"/>
+  <text x="512" y="784" font-family="'Segoe UI', sans-serif" font-weight="700" font-size="64" fill="white" text-anchor="middle">DUPLICATE</text>
 </svg>

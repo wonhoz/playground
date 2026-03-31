@@ -1,90 +1,59 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
-  <!-- 배경: 따뜻한 다크 브라운 -->
+  <!-- Layer 1: 비비드 그라데이션 배경 -->
   <defs>
-    <linearGradient id="bg1" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#2D1B00"/>
-      <stop offset="100%" stop-color="#1A0F00"/>
+    <linearGradient id="bg5" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F3E5F5"/>
+      <stop offset="100%" stop-color="#EDE7F6"/>
     </linearGradient>
-    <linearGradient id="forgeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#FF8C00"/>
-      <stop offset="50%" stop-color="#FFD700"/>
-      <stop offset="100%" stop-color="#FF4500"/>
-    </linearGradient>
-    <linearGradient id="qrGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#FFC94D"/>
-      <stop offset="100%" stop-color="#FF7A00"/>
-    </linearGradient>
-    <filter id="glow1">
-      <feGaussianBlur stdDeviation="8" result="blur"/>
-      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
   </defs>
-
-  <!-- 배경 -->
-  <rect width="1024" height="1024" rx="200" fill="url(#bg1)"/>
-
-  <!-- 배경 장식 원 -->
-  <circle cx="512" cy="512" r="420" fill="none" stroke="#FF8C00" stroke-width="4" opacity="0.15"/>
-  <circle cx="512" cy="512" r="360" fill="none" stroke="#FFD700" stroke-width="2" opacity="0.10"/>
-
-  <!-- QR 코드 본체 (흰 바탕) -->
-  <rect x="192" y="192" width="640" height="640" rx="20" fill="#FFFEF5"/>
-
-  <!-- QR 패인더 패턴 — 좌상단 -->
-  <rect x="232" y="232" width="160" height="160" rx="8" fill="url(#qrGrad)"/>
-  <rect x="252" y="252" width="120" height="120" rx="4" fill="#FFFEF5"/>
-  <rect x="272" y="272" width="80" height="80" rx="4" fill="url(#qrGrad)"/>
-
-  <!-- QR 패인더 패턴 — 우상단 -->
-  <rect x="632" y="232" width="160" height="160" rx="8" fill="url(#qrGrad)"/>
-  <rect x="652" y="252" width="120" height="120" rx="4" fill="#FFFEF5"/>
-  <rect x="672" y="272" width="80" height="80" rx="4" fill="url(#qrGrad)"/>
-
-  <!-- QR 패인더 패턴 — 좌하단 -->
-  <rect x="232" y="632" width="160" height="160" rx="8" fill="url(#qrGrad)"/>
-  <rect x="252" y="652" width="120" height="120" rx="4" fill="#FFFEF5"/>
-  <rect x="272" y="672" width="80" height="80" rx="4" fill="url(#qrGrad)"/>
-
-  <!-- 중앙 데이터 모듈들 (랜덤 패턴) -->
-  <!-- 행 1 -->
-  <rect x="432" y="232" width="36" height="36" rx="3" fill="#FF8C00"/>
-  <rect x="488" y="232" width="36" height="36" rx="3" fill="#FF8C00"/>
-  <rect x="544" y="232" width="36" height="36" rx="3" fill="#FF8C00"/>
-  <!-- 행 2 -->
-  <rect x="432" y="280" width="36" height="36" rx="3" fill="#FF8C00"/>
-  <rect x="544" y="280" width="36" height="36" rx="3" fill="#FF8C00"/>
-  <!-- 행 3 -->
-  <rect x="432" y="328" width="36" height="36" rx="3" fill="#FF8C00"/>
-  <rect x="488" y="328" width="36" height="36" rx="3" fill="#FF8C00"/>
-  <rect x="544" y="328" width="36" height="36" rx="3" fill="#FF8C00"/>
-
-  <!-- 중앙 데이터 영역 (더 많은 모듈) -->
-  <rect x="432" y="432" width="160" height="160" rx="8" fill="none" stroke="#FFD700" stroke-width="6"/>
-
-  <!-- 중앙 Forge 심볼 — 모루 모양 -->
-  <ellipse cx="512" cy="520" rx="60" ry="16" fill="url(#forgeGrad)" filter="url(#glow1)"/>
-  <rect x="476" y="488" width="72" height="32" rx="4" fill="url(#forgeGrad)" filter="url(#glow1)"/>
-  <rect x="488" y="460" width="48" height="30" rx="4" fill="url(#forgeGrad)"/>
-
-  <!-- 중앙 불꽃 -->
-  <ellipse cx="512" cy="455" rx="12" ry="18" fill="#FF4500" opacity="0.9"/>
-  <ellipse cx="512" cy="452" rx="7" ry="12" fill="#FFD700" opacity="0.9"/>
-
-  <!-- 하단 데이터 모듈 -->
-  <rect x="432" y="632" width="36" height="36" rx="3" fill="#FF8C00"/>
-  <rect x="488" y="632" width="36" height="36" rx="3" fill="#FF8C00"/>
-  <rect x="544" y="680" width="36" height="36" rx="3" fill="#FF8C00"/>
-  <rect x="488" y="680" width="36" height="36" rx="3" fill="#FF8C00"/>
-  <rect x="432" y="728" width="36" height="36" rx="3" fill="#FF8C00"/>
-  <rect x="544" y="728" width="36" height="36" rx="3" fill="#FF8C00"/>
-
-  <!-- 우측 데이터 모듈 -->
-  <rect x="632" y="432" width="36" height="36" rx="3" fill="#FF8C00"/>
-  <rect x="680" y="432" width="36" height="36" rx="3" fill="#FF8C00"/>
-  <rect x="728" y="432" width="36" height="36" rx="3" fill="#FF8C00"/>
-  <rect x="632" y="480" width="36" height="36" rx="3" fill="#FF8C00"/>
-  <rect x="728" y="480" width="36" height="36" rx="3" fill="#FF8C00"/>
-  <rect x="680" y="528" width="36" height="36" rx="3" fill="#FF8C00"/>
-  <rect x="632" y="576" width="36" height="36" rx="3" fill="#FF8C00"/>
-  <rect x="728" y="576" width="36" height="36" rx="3" fill="#FF8C00"/>
+  <rect width="1024" height="1024" rx="190" fill="url(#bg5)"/>
+  <!-- Layer 2: QR 코드 (보라 계열, 로고 슬롯 있음) -->
+  <rect x="152" y="152" width="720" height="720" rx="32" fill="white" stroke="#6A1B9A" stroke-width="8"/>
+  <!-- 좌상단 위치 마커 -->
+  <rect x="192" y="192" width="176" height="176" rx="14" fill="#6A1B9A"/>
+  <rect x="216" y="216" width="128" height="128" rx="8" fill="white"/>
+  <rect x="240" y="240" width="80" height="80" rx="6" fill="#6A1B9A"/>
+  <!-- 우상단 위치 마커 -->
+  <rect x="656" y="192" width="176" height="176" rx="14" fill="#6A1B9A"/>
+  <rect x="680" y="216" width="128" height="128" rx="8" fill="white"/>
+  <rect x="704" y="240" width="80" height="80" rx="6" fill="#6A1B9A"/>
+  <!-- 좌하단 위치 마커 -->
+  <rect x="192" y="656" width="176" height="176" rx="14" fill="#6A1B9A"/>
+  <rect x="216" y="680" width="128" height="128" rx="8" fill="white"/>
+  <rect x="240" y="704" width="80" height="80" rx="6" fill="#6A1B9A"/>
+  <!-- 데이터 도트 영역 (우하단) -->
+  <rect x="408" y="656" width="44" height="44" rx="6" fill="#E53935"/>
+  <rect x="464" y="656" width="44" height="44" rx="6" fill="#6A1B9A"/>
+  <rect x="520" y="656" width="44" height="44" rx="6" fill="#E53935"/>
+  <rect x="576" y="656" width="44" height="44" rx="6" fill="#6A1B9A"/>
+  <rect x="632" y="656" width="44" height="44" rx="6" fill="#F57F17"/>
+  <rect x="688" y="656" width="44" height="44" rx="6" fill="#E53935"/>
+  <rect x="408" y="712" width="44" height="44" rx="6" fill="#6A1B9A"/>
+  <rect x="520" y="712" width="44" height="44" rx="6" fill="#6A1B9A"/>
+  <rect x="576" y="712" width="44" height="44" rx="6" fill="#F57F17"/>
+  <rect x="688" y="712" width="44" height="44" rx="6" fill="#6A1B9A"/>
+  <rect x="408" y="768" width="44" height="44" rx="6" fill="#E53935"/>
+  <rect x="464" y="768" width="44" height="44" rx="6" fill="#F57F17"/>
+  <rect x="632" y="768" width="44" height="44" rx="6" fill="#E53935"/>
+  <rect x="688" y="768" width="44" height="44" rx="6" fill="#F57F17"/>
+  <!-- 상단 데이터 도트 (좌우 마커 사이) -->
+  <rect x="408" y="192" width="44" height="44" rx="6" fill="#6A1B9A"/>
+  <rect x="464" y="192" width="44" height="44" rx="6" fill="#E53935"/>
+  <rect x="520" y="192" width="44" height="44" rx="6" fill="#F57F17"/>
+  <rect x="576" y="192" width="44" height="44" rx="6" fill="#6A1B9A"/>
+  <rect x="408" y="248" width="44" height="44" rx="6" fill="#F57F17"/>
+  <rect x="520" y="248" width="44" height="44" rx="6" fill="#6A1B9A"/>
+  <rect x="576" y="248" width="44" height="44" rx="6" fill="#E53935"/>
+  <!-- 좌측 데이터 도트 (상하 마커 사이) -->
+  <rect x="192" y="408" width="44" height="44" rx="6" fill="#F57F17"/>
+  <rect x="192" y="464" width="44" height="44" rx="6" fill="#6A1B9A"/>
+  <rect x="192" y="520" width="44" height="44" rx="6" fill="#E53935"/>
+  <rect x="192" y="576" width="44" height="44" rx="6" fill="#F57F17"/>
+  <rect x="248" y="408" width="44" height="44" rx="6" fill="#E53935"/>
+  <rect x="248" y="520" width="44" height="44" rx="6" fill="#F57F17"/>
+  <!-- Layer 3: 중앙 로고 슬롯 (QrStyle.LogoPath) -->
+  <rect x="400" y="400" width="224" height="224" rx="24" fill="white" stroke="#6A1B9A" stroke-width="6"/>
+  <rect x="416" y="416" width="192" height="192" rx="18" fill="#6A1B9A"/>
+  <text x="512" y="504" font-family="'Consolas', monospace" font-size="60" fill="white" text-anchor="middle" font-weight="700">QR</text>
+  <text x="512" y="564" font-family="'Consolas', monospace" font-size="44" fill="#CE93D8" text-anchor="middle" font-weight="700">FORGE</text>
 </svg>

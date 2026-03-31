@@ -1,0 +1,41 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#263238"/>
+      <stop offset="100%" stop-color="#37474F"/>
+    </linearGradient>
+    <linearGradient id="glow" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+      <stop offset="0%" stop-color="#FFEE58" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#F9A825" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: Background -->
+  <circle cx="512" cy="512" r="512" fill="url(#bg)"/>
+  <!-- Layer 2: Lightbulb shape -->
+  <!-- Glow halo -->
+  <circle cx="512" cy="420" r="260" fill="#FFEE58" opacity="0.12"/>
+  <circle cx="512" cy="420" r="180" fill="#FFEE58" opacity="0.18"/>
+  <!-- Bulb top dome -->
+  <ellipse cx="512" cy="400" rx="190" ry="200" fill="#FFEE58"/>
+  <!-- Bulb base rect -->
+  <rect x="388" y="560" width="248" height="60" rx="10" fill="#FFEE58"/>
+  <rect x="404" y="618" width="216" height="46" rx="10" fill="#FDD835"/>
+  <rect x="420" y="660" width="184" height="36" rx="10" fill="#F9A825"/>
+  <!-- Bulb socket bottom cap -->
+  <rect x="440" y="692" width="144" height="30" rx="14" fill="#78909C"/>
+  <!-- Filament inside -->
+  <path d="M 480 530 L 480 470 Q 480 440 512 440 Q 544 440 544 470 L 544 530" fill="none" stroke="#FF8F00" stroke-width="12" stroke-linecap="round"/>
+  <!-- Layer 3: ? → ! transformation -->
+  <!-- Left: dim question mark (before) -->
+  <text x="340" y="430" text-anchor="middle" dominant-baseline="middle" font-size="200" font-family="Georgia,serif" font-weight="bold" fill="#78909C" opacity="0.5">?</text>
+  <!-- Arrow -->
+  <line x1="420" y1="810" x2="590" y2="810" stroke="#FFEE58" stroke-width="16" stroke-linecap="round"/>
+  <polygon points="590,810 562,786 562,834" fill="#FFEE58"/>
+  <!-- Right: bright ! (answer found) -->
+  <text x="690" y="430" text-anchor="middle" dominant-baseline="middle" font-size="200" font-family="Georgia,serif" font-weight="bold" fill="#FFD600">!</text>
+  <!-- Stars around the ! -->
+  <circle cx="798" cy="310" r="14" fill="#FFEE58"/>
+  <circle cx="820" cy="360" r="10" fill="#FFF176"/>
+  <circle cx="790" cy="530" r="12" fill="#FFEE58"/>
+  <circle cx="600" cy="280" r="10" fill="#FFF176"/>
+</svg>

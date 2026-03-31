@@ -79,18 +79,18 @@ public sealed class Player : GameObject
         Y = Math.Clamp(Y + dy, 0, _areaH - Height);
     }
 
-    public void ResetPosition()
+    /// <summary>
+    /// 다이아몬드 형태에 맞는 원형 충돌 판정 (반지름 4 — AABB보다 공정한 히트박스).
+    /// </summary>
+    public override bool CollidesWith(DodgeBlitz.Engine.GameObject other)
     {
-        X = _areaW / 2 - Width / 2;
-        Y = _areaH / 2 - Height / 2;
-        if (Visual is not null) Visual.Opacity = 1.0;
-        _invincibleTimer = 0;
-    }
-
-    /// <summary>피격 후 잠시 무적 + 깜빡임.</summary>
-    public void Flash(double duration = 0.4)
-    {
-        _invincibleTimer = duration;
-        _blinkTimer      = 0.05;
+        if (!IsAlive || !other.IsAlive) return false;
+        double px = X + Width  / 2;
+        double py = Y + Height / 2;
+        double ox = other.X + other.Width  / 2;
+        double oy = other.Y + other.Height / 2;
+        double dx = px - ox, dy = py - oy;
+        double minDist = 4 + other.Width / 2;
+        return dx * dx + dy * dy < minDist * minDist;
     }
 }

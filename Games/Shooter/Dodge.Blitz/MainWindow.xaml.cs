@@ -4,6 +4,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using DodgeBlitz.Engine;
 using DodgeBlitz.Entities;
 
@@ -49,10 +50,27 @@ public partial class MainWindow : Window
     // ── UI 상태 ─────────────────────────────────────────────────────────
     private bool _joystickConnected;
 
+    // ── 뮤트 토스트 ───────────────────────────────────────────────────────
+    private double _muteToastTimer;
+
+    // ── 플레이어 trail ────────────────────────────────────────────────────
+    private double _trailTimer;
+
     // ── 저장 경로 ─────────────────────────────────────────────────────────
     private static readonly string SavePath = Path.Combine(
         Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
         "DodgeBlitz", "best.txt");
+
+    private static readonly string ScoresPath = Path.Combine(
+        Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+        "DodgeBlitz", "scores.txt");
+
+    private static readonly string MutePath = Path.Combine(
+        Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+        "DodgeBlitz", "mute.txt");
+
+    // ── 전체 기록 ─────────────────────────────────────────────────────────
+    private List<double> _allTimeScores = [];
 
     // ── 생성자 ────────────────────────────────────────────────────────────
     public MainWindow()
@@ -70,6 +88,8 @@ public partial class MainWindow : Window
         };
 
         _bestTime = LoadBestTime();
+        _allTimeScores = LoadAllTimeScores();
+        if (LoadMuteState()) SoundGen.ToggleMute();
 
         // Sounds 정적 초기화를 백그라운드에서 미리 수행 (첫 StartGame 시 UI 스레드 블로킹 방지)
         Task.Run(() => _ = Sounds.Bgm);
@@ -149,6 +169,16 @@ public partial class MainWindow : Window
             SaveBestTime(_bestTime);
         }
 
+        // 총알 시각 정리 (GameOver 오버레이 뒤 잔류 방지)
+        foreach (var b in _bullets)
+            if (b.Visual is not null) GameCanvas.Children.Remove(b.Visual);
+        _bullets.Clear();
+
+        // All-Time 기록 업데이트
+        _allTimeScores.Add(_survivalTime);
+        _allTimeScores = [.. _allTimeScores.OrderByDescending(s => s).Take(20)];
+        SaveAllTimeScores(_allTimeScores);
+
         _sessionScores.Add(_survivalTime);
         _joystick.Rumble(0.35);
 
@@ -167,14 +197,25 @@ public partial class MainWindow : Window
 
         FinalTimeText.Text = $"SURVIVED  {_survivalTime:F1}s";
         FinalBestText.Text = isNewBest
-            ? $"NEW BEST!  {_bestTime:F1}s"
+            ? $"★ NEW BEST!  {_bestTime:F1}s"
             : $"BEST  {_bestTime:F1}s";
 
-        // Top 5 히스토리
-        var top5 = _sessionScores.OrderByDescending(s => s).Take(5).ToList();
+        // 신기록 달성 시 골드 펄스 애니메이션
+        if (isNewBest)
+        {
+            var pulse = new DoubleAnimation(1.0, 0.1, TimeSpan.FromSeconds(0.3))
+            {
+                AutoReverse = true,
+                RepeatBehavior = new RepeatBehavior(5)
+            };
+            FinalBestText.BeginAnimation(UIElement.OpacityProperty, pulse);
+        }
+
+        // All-Time Top 5 표시
+        var top5 = _allTimeScores.Take(5).ToList();
         if (top5.Count > 1)
         {
-            HistoryText.Text = "─ Session Top " + top5.Count + " ─\n"
+            HistoryText.Text = "─ All Time Top " + top5.Count + " ─\n"
                 + string.Join("\n", top5.Select((s, i) => $"  {i + 1}. {s:F1}s"));
         }
         else
@@ -229,6 +270,14 @@ public partial class MainWindow : Window
         }
 
         foreach (var s in _stars) s.Update(dt);
+
+        // 뮤트 토스트 타이머
+        if (_muteToastTimer > 0)
+        {
+            _muteToastTimer -= dt;
+            if (_muteToastTimer <= 0)
+                MuteToast.Visibility = Visibility.Collapsed;
+        }
 
         if (_state == GameState.Playing)
             UpdateGame(dt);
@@ -314,6 +363,22 @@ public partial class MainWindow : Window
             _milestoneTimer -= dt;
             if (_milestoneTimer <= 0)
                 MilestoneText.Visibility = Visibility.Collapsed;
+        }
+
+        // LEGEND 구간 플레이어 이동 궤적 trail
+        if (_survivalTime >= 60 && _player is not null)
+        {
+            _trailTimer -= dt;
+            if (_trailTimer <= 0)
+            {
+                _trailTimer = 0.04;
+                var tp = new Particle(
+                    _player.X + _player.Width  / 2,
+                    _player.Y + _player.Height / 2,
+                    0, 0, 0.22, Color.FromRgb(0, 180, 140));
+                _particles.Add(tp);
+                GameCanvas.Children.Add(tp.Visual!);
+            }
         }
 
         UpdateHud();
@@ -505,13 +570,15 @@ public partial class MainWindow : Window
         }
         else if (e.Key == Key.H)
         {
-            if (_state == GameState.Title || HelpPanel.Visibility == Visibility.Visible)
+            if (_state is GameState.Title or GameState.Paused || HelpPanel.Visibility == Visibility.Visible)
                 HelpPanel.Visibility = HelpPanel.Visibility == Visibility.Visible
                     ? Visibility.Collapsed : Visibility.Visible;
         }
         else if (e.Key == Key.M)
         {
             SoundGen.ToggleMute();
+            SaveMuteState(SoundGen.IsMuted);
+            ShowMuteToast();
         }
         else if (e.Key == Key.Escape)
         {
@@ -583,5 +650,57 @@ public partial class MainWindow : Window
             File.WriteAllText(SavePath, time.ToString(System.Globalization.CultureInfo.InvariantCulture));
         }
         catch { }
+    }
+
+    // ── All-Time 기록 영속화 ──────────────────────────────────────────────
+    private static List<double> LoadAllTimeScores()
+    {
+        try
+        {
+            if (!File.Exists(ScoresPath)) return [];
+            return [.. File.ReadAllLines(ScoresPath)
+                .Select(l => double.TryParse(l.Trim(), System.Globalization.NumberStyles.Any,
+                    System.Globalization.CultureInfo.InvariantCulture, out double v) ? v : -1)
+                .Where(v => v >= 0)
+                .OrderByDescending(v => v)
+                .Take(20)];
+        }
+        catch { return []; }
+    }
+
+    private static void SaveAllTimeScores(List<double> scores)
+    {
+        try
+        {
+            Directory.CreateDirectory(Path.GetDirectoryName(ScoresPath)!);
+            File.WriteAllLines(ScoresPath,
+                scores.Select(s => s.ToString(System.Globalization.CultureInfo.InvariantCulture)));
+        }
+        catch { }
+    }
+
+    // ── 음소거 상태 영속화 ─────────────────────────────────────────────────
+    private static bool LoadMuteState()
+    {
+        try { return File.Exists(MutePath) && File.ReadAllText(MutePath).Trim() == "1"; }
+        catch { return false; }
+    }
+
+    private static void SaveMuteState(bool muted)
+    {
+        try
+        {
+            Directory.CreateDirectory(Path.GetDirectoryName(MutePath)!);
+            File.WriteAllText(MutePath, muted ? "1" : "0");
+        }
+        catch { }
+    }
+
+    // ── 뮤트 토스트 표시 ──────────────────────────────────────────────────
+    private void ShowMuteToast()
+    {
+        MuteToast.Text = SoundGen.IsMuted ? "[ MUTE ]" : "[ SOUND ON ]";
+        MuteToast.Visibility = Visibility.Visible;
+        _muteToastTimer = 1.5;
     }
 }

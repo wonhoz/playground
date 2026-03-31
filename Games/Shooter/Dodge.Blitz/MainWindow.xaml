@@ -48,10 +48,10 @@
 
         <!-- Milestone Popup -->
         <TextBlock x:Name="MilestoneText" Text="" FontSize="34" FontWeight="Bold"
-                   Foreground="#FFD700" HorizontalAlignment="Center" VerticalAlignment="Center"
+                   Foreground="#FF66FF" HorizontalAlignment="Center" VerticalAlignment="Center"
                    FontFamily="Consolas" Margin="0,-60,0,0" Visibility="Collapsed">
             <TextBlock.Effect>
-                <DropShadowEffect Color="#FFD700" BlurRadius="18" ShadowDepth="0"/>
+                <DropShadowEffect x:Name="MilestoneGlow" Color="#FF00FF" BlurRadius="22" ShadowDepth="0"/>
             </TextBlock.Effect>
         </TextBlock>
 
@@ -138,6 +138,15 @@
             </StackPanel>
         </Border>
 
+        <!-- Mute Toast -->
+        <TextBlock x:Name="MuteToast" Text="" FontSize="20" FontWeight="Bold"
+                   Foreground="#00FFCC" HorizontalAlignment="Center" VerticalAlignment="Top"
+                   FontFamily="Consolas" Margin="0,64,0,0" Visibility="Collapsed">
+            <TextBlock.Effect>
+                <DropShadowEffect Color="#00FFCC" BlurRadius="10" ShadowDepth="0"/>
+            </TextBlock.Effect>
+        </TextBlock>
+
         <!-- How To Play Overlay -->
         <Border x:Name="HelpPanel" Background="#EE05050F" Visibility="Collapsed">
             <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="340">
@@ -178,7 +187,9 @@
                     <LineBreak/>
                     <Run Text="EXPERT " Foreground="#FF9900"/><Run Text="20 – 35s" Foreground="#555566"/>
                     <LineBreak/>
-                    <Run Text="LEGEND " Foreground="#FF4444"/><Run Text="35s +" Foreground="#555566"/>
+                    <Run Text="VETERAN" Foreground="#FF66AA"/><Run Text="  35 – 60s" Foreground="#555566"/>
+                    <LineBreak/>
+                    <Run Text="LEGEND " Foreground="#FF4444"/><Run Text="60s +" Foreground="#555566"/>
                 </TextBlock>
 
                 <TextBlock FontSize="11" Foreground="#3A3A4A" HorizontalAlignment="Center"
@@ -190,15 +201,13 @@
                            Foreground="#888888" HorizontalAlignment="Center"
                            Margin="0,10,0,6" FontFamily="Consolas"/>
                 <TextBlock FontSize="12" FontFamily="Consolas" HorizontalAlignment="Center" TextAlignment="Center">
-                    <Run Text="Phase 1 " Foreground="#555566"/><Run Text="Straight (4-way)" Foreground="#AAAAAA"/>
+                    <Run Text="NOVICE  " Foreground="#555566"/><Run Text="Homing (single)" Foreground="#AAAAAA"/>
                     <LineBreak/>
-                    <Run Text="Phase 2 " Foreground="#555566"/><Run Text="+ Spread 3-way" Foreground="#AAAAAA"/>
+                    <Run Text="SKILLED " Foreground="#555566"/><Run Text="+ Spread 3-way" Foreground="#AAAAAA"/>
                     <LineBreak/>
-                    <Run Text="Phase 3 " Foreground="#555566"/><Run Text="+ Diagonal" Foreground="#AAAAAA"/>
+                    <Run Text="EXPERT  " Foreground="#555566"/><Run Text="+ Homing pair  + Spread 5-way" Foreground="#AAAAAA"/>
                     <LineBreak/>
-                    <Run Text="Phase 4 " Foreground="#555566"/><Run Text="+ Spread 5-way" Foreground="#AAAAAA"/>
-                    <LineBreak/>
-                    <Run Text="Phase 5 " Foreground="#555566"/><Run Text="+ Fast straight" Foreground="#AAAAAA"/>
+                    <Run Text="VETERAN+" Foreground="#555566"/><Run Text="+ Fast straight" Foreground="#AAAAAA"/>
                 </TextBlock>
 
                 <TextBlock FontSize="11" Foreground="#3A3A4A" HorizontalAlignment="Center"
@@ -206,15 +215,22 @@
                            Text="────────────────────────────"/>
 
                 <!-- 단축키 -->
+                <TextBlock Text="SHORTCUTS" FontSize="12" FontWeight="Bold"
+                           Foreground="#888888" HorizontalAlignment="Center"
+                           Margin="0,10,0,6" FontFamily="Consolas"/>
                 <TextBlock FontSize="12" FontFamily="Consolas" HorizontalAlignment="Center"
-                           TextAlignment="Center" Margin="0,10,0,0">
-                    <Run Text="P" Foreground="#00FFCC"/><Run Text=" Pause  " Foreground="#666666"/>
-                    <Run Text="ESC" Foreground="#00FFCC"/><Run Text=" Quit  " Foreground="#666666"/>
-                    <Run Text="M" Foreground="#00FFCC"/><Run Text=" Mute" Foreground="#666666"/>
+                           TextAlignment="Center">
+                    <Run Text="Enter" Foreground="#00FFCC"/><Run Text="  Start / Resume  " Foreground="#666666"/>
+                    <Run Text="P" Foreground="#00FFCC"/><Run Text="  Pause" Foreground="#666666"/>
+                    <LineBreak/>
+                    <Run Text="M" Foreground="#00FFCC"/><Run Text="  Mute / Unmute  " Foreground="#666666"/>
+                    <Run Text="H" Foreground="#00FFCC"/><Run Text="  Help" Foreground="#666666"/>
+                    <LineBreak/>
+                    <Run Text="ESC" Foreground="#00FFCC"/><Run Text="  Title / Quit" Foreground="#666666"/>
                 </TextBlock>
 
                 <TextBlock Text="[ H / ESC  Close ]" FontSize="12" Foreground="#555566"
-                           HorizontalAlignment="Center" Margin="0,20,0,0" FontFamily="Consolas"/>
+                           HorizontalAlignment="Center" Margin="0,18,0,0" FontFamily="Consolas"/>
             </StackPanel>
         </Border>
     </Grid>

@@ -27,7 +27,7 @@ public abstract class GameObject
         Canvas.SetTop(Visual, Y);
     }
 
-    public bool CollidesWith(GameObject other)
+    public virtual bool CollidesWith(GameObject other)
     {
         if (!IsAlive || !other.IsAlive) return false;
         return Bounds.IntersectsWith(other.Bounds);

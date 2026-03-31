@@ -111,3 +111,4 @@
 | `Readme.Craft` | Dev/Docs | README.md 섹션 블록 드래그&드롭 대화형 빌더 ★33차 | 📌 채택 (2026-03-22) |
 | `Reg.Watch` | System/Security | 레지스트리 키 변경 실시간 감시 + 변경 전후 스냅샷 트레이 ★33차 | 📌 채택 (2026-03-22) |
 | `Tab.Space` | Dev/Quality | 프로젝트 인덴테이션 스타일 감지·일괄 변환 (.editorconfig 지원) ★33차 | 📌 채택 (2026-03-22) |
+| `Char.Pad` | Tools.Utility | 특수문자·수학기호·이모지 즐겨찾기 퀵 팝업 입력기 ★34차 | 📌 채택 (2026-03-31) |

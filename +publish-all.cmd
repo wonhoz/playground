@@ -137,6 +137,7 @@ call :pub "Tray.Stats"            "Applications\System\Monitor\Tray.Stats"      
 :: ── Applications / Text ────────────────────────────────────────────
 call :pub "ANSI.Forge"            "Applications\Text\ANSI.Forge"                            "ANSI.Forge.exe"            "Applications\Text\ANSI.Forge"
 call :pub "Char.Art"              "Applications\Text\Char.Art"                              "Char.Art.exe"              "Applications\Text"
+call :pub "Char.Pad"              "Applications\Tools.Utility\Char.Pad"                     "Char.Pad.exe"              "Applications\Tools.Utility"
 call :pub "Echo.Text"             "Applications\Text\Echo.Text"                             "Echo.Text.exe"             "Applications\Text\Echo.Text"
 call :pub "Mark.View"             "Applications\Text\Mark.View"                             "Mark.View.exe"             "Applications\Text\Mark.View"
 call :pub "Text.Forge"            "Applications\Text\Text.Forge"                            "Text.Forge.exe"            "Applications\Text"

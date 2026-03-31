@@ -242,7 +242,7 @@
                Placement="Bottom" StaysOpen="False"
                HorizontalOffset="-160" VerticalOffset="4">
             <Border Background="#12122A" BorderBrush="#3A3A5A" BorderThickness="1"
-                    CornerRadius="10" Padding="20,16" MinWidth="240">
+                    CornerRadius="10" Padding="20,16" MinWidth="280">
                 <StackPanel>
                     <TextBlock Text="⌨  단축키 안내" Foreground="#A78BFA"
                                FontSize="13" FontWeight="SemiBold" Margin="0,0,0,12"/>
@@ -252,8 +252,6 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
@@ -279,14 +277,14 @@
                                 Padding="6,3" Margin="0,0,10,6">
                             <TextBlock Text="H" Foreground="#A78BFA" FontSize="11" FontFamily="Consolas"/>
                         </Border>
-                        <TextBlock Grid.Row="2" Grid.Column="1" Text="힌트 사용 (-5점)"
+                        <TextBlock Grid.Row="2" Grid.Column="1" Text="힌트 사용 (-5점, 오답 1개 제거)"
                                    Foreground="#C0C0D0" FontSize="12" VerticalAlignment="Center" Margin="0,0,0,6"/>
                         <!-- 행 3 -->
                         <Border Grid.Row="3" Grid.Column="0" Background="#1E1B4B" CornerRadius="4"
                                 Padding="6,3" Margin="0,0,10,6">
                             <TextBlock Text="P / Esc" Foreground="#A78BFA" FontSize="11" FontFamily="Consolas"/>
                         </Border>
-                        <TextBlock Grid.Row="3" Grid.Column="1" Text="일시정지 / 재개 (타이머 모드)"
+                        <TextBlock Grid.Row="3" Grid.Column="1" Text="일시정지 / 재개 (⏱ 타이머 모드 전용)"
                                    Foreground="#C0C0D0" FontSize="12" VerticalAlignment="Center" Margin="0,0,0,6"/>
                         <!-- 행 4 -->
                         <Border Grid.Row="4" Grid.Column="0" Background="#1E1B4B" CornerRadius="4"
@@ -296,6 +294,19 @@
                         <TextBlock Grid.Row="4" Grid.Column="1" Text="이 도움말 열기/닫기"
                                    Foreground="#C0C0D0" FontSize="12" VerticalAlignment="Center" Margin="0,0,0,0"/>
                     </Grid>
+
+                    <!-- 구분선 -->
+                    <Border Background="#2A2A4A" Height="1" Margin="0,12,0,10"/>
+
+                    <!-- 게임 팁 -->
+                    <TextBlock Text="💡  게임 팁" Foreground="#A78BFA"
+                               FontSize="12" FontWeight="SemiBold" Margin="0,0,0,8"/>
+                    <TextBlock Foreground="#7A7A9A" FontSize="11" TextWrapping="Wrap" Margin="0,0,0,4"
+                               Text="🔥 연속 정답 시 스트릭 카운터가 표시됩니다."/>
+                    <TextBlock Foreground="#7A7A9A" FontSize="11" TextWrapping="Wrap" Margin="0,0,0,4"
+                               Text="📝 결과 화면에서 오답만 따로 다시 풀 수 있습니다."/>
+                    <TextBlock Foreground="#7A7A9A" FontSize="11" TextWrapping="Wrap"
+                               Text="🏆 모드/대륙별 최고 기록이 자동 저장됩니다."/>
                 </StackPanel>
             </Border>
         </Popup>
@@ -338,8 +349,7 @@
                 <CheckBox x:Name="CbTimer" Content="⏱  타이머 모드 (문제당 15초)"
                           IsChecked="{Binding TimerMode, Mode=TwoWay}"
                           Foreground="#9CA3AF" FontSize="13"
-                          Cursor="Hand" Margin="0,0,0,40"
-                          Checked="CbTimer_Changed" Unchecked="CbTimer_Changed">
+                          Cursor="Hand" Margin="0,0,0,40">
                     <CheckBox.Style>
                         <Style TargetType="CheckBox">
                             <Setter Property="Template">
@@ -405,9 +415,10 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
                     <Button Grid.Column="0" Content="← 메뉴" Style="{StaticResource Btn}"
-                            Command="{Binding RestartCmd}"
+                            Click="BtnMenu_Click"
                             FontSize="11" Padding="10,4" Margin="0,0,12,0"
                             VerticalAlignment="Center"/>
                     <ProgressBar Grid.Column="1" Value="{Binding ProgressPct, Mode=OneWay}" Minimum="0" Maximum="100"
@@ -416,8 +427,25 @@
                     <TextBlock Grid.Column="2" Text="{Binding ProgressText}"
                                Foreground="#6A6A9A" FontSize="11" Margin="12,0,6,0"
                                VerticalAlignment="Center"/>
+                    <!-- 스트릭 표시 (2연속 이상 시) -->
+                    <TextBlock Grid.Column="3"
+                               Text="{Binding StreakText}"
+                               Foreground="#FB923C" FontSize="12" FontWeight="SemiBold"
+                               FontFamily="Segoe UI Emoji"
+                               Margin="4,0,4,0" VerticalAlignment="Center">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding StreakVisible}" Value="True">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
                     <!-- 일시정지 버튼 (타이머 모드에서만 표시) -->
-                    <Button Grid.Column="3"
+                    <Button Grid.Column="4"
                             Content="{Binding PauseLabel}"
                             Style="{StaticResource Btn}"
                             Command="{Binding PauseCmd}"
@@ -454,12 +482,10 @@
                            Stretch="Uniform"
                            Visibility="Collapsed"
                            Margin="0,0,0,12"/>
-                    <TextBlock x:Name="TbFlagError"
-                               Text="⚠️ 국기 이미지를 불러올 수 없습니다 (인터넷 연결 확인)"
-                               Foreground="#FBBF24" FontSize="12"
-                               HorizontalAlignment="Center" TextWrapping="Wrap"
-                               TextAlignment="Center" Margin="0,0,0,12"
-                               Visibility="Collapsed"/>
+                    <TextBlock x:Name="TbFlagEmojiFallback"
+                               FontFamily="Segoe UI Emoji" FontSize="72"
+                               HorizontalAlignment="Center" TextAlignment="Center"
+                               Margin="0,4,0,12" Visibility="Collapsed"/>
 
                     <!-- 질문 텍스트 -->
                     <TextBlock Text="{Binding CurrentQuestion.QuestionText}"
@@ -512,7 +538,11 @@
                 <TextBlock x:Name="TbGrade" FontSize="48" FontWeight="Bold"
                            HorizontalAlignment="Center" Margin="0,0,0,4"/>
                 <TextBlock x:Name="TbScore" FontSize="18" Foreground="#9CA3AF"
-                           HorizontalAlignment="Center" Margin="0,0,0,32"/>
+                           HorizontalAlignment="Center" Margin="0,0,0,8"/>
+                <!-- 누적 정확도 (오답 다시 풀기 이력 있을 때만) -->
+                <TextBlock x:Name="TbRetryStats" FontSize="13" Foreground="#6D28D9"
+                           HorizontalAlignment="Center" Margin="0,0,0,24"
+                           Visibility="Collapsed"/>
 
                 <!-- 정답/오답 통계 -->
                 <Grid Margin="0,0,0,24">

@@ -24,6 +24,10 @@ public class QuizResult
     public int Correct   { get; set; }
     public int Wrong     { get; set; }
     public int HintsUsed { get; set; }
+    // 오답 다시 풀기 누적 (최초 0, 다시 풀 때마다 누적)
+    public int RetryCorrect  { get; set; }
+    public int RetryTotal    { get; set; }
+    public bool HasRetry     => RetryTotal > 0;
     public double Score  => Total == 0 ? 0 : Math.Max(0, (double)Correct / Total * 100 - HintsUsed * 5);
     public string Grade  => Score switch
     {

@@ -52,6 +52,7 @@ public class MainViewModel : BaseViewModel
     string?    _selectedAnswer;
     bool       _answered;
     bool       _isPaused;
+    int        _streak;
 
     public QuizScreen Screen         { get => _screen;         private set { Set(ref _screen, value); Notify(nameof(IsStartScreen)); Notify(nameof(IsQuizScreen)); Notify(nameof(IsResultScreen)); RaiseAll(); } }
     public bool       IsStartScreen  => _screen == QuizScreen.Start;
@@ -62,10 +63,16 @@ public class MainViewModel : BaseViewModel
     public bool       Answered       { get => _answered;       private set => Set(ref _answered, value); }
     public bool       IsPaused       { get => _isPaused;       private set { Set(ref _isPaused, value); Notify(nameof(PauseLabel)); PauseCmd.Raise(); } }
     public string     PauseLabel     => _isPaused ? "▶ 재개" : "⏸ 일시정지";
+    public int        Streak         { get => _streak;         private set { Set(ref _streak, value); Notify(nameof(StreakText)); Notify(nameof(StreakVisible)); } }
+    public string     StreakText     => _streak >= 2 ? $"🔥 {_streak}연속" : "";
+    public bool       StreakVisible  => _streak >= 2;
 
     List<QuizQuestion> _questions    = [];
     List<string?>      _userAnswers  = [];
     List<bool>         _hintUsed     = [];
+    // 오답 다시 풀기 누적
+    int _retryCorrect;
+    int _retryTotal;
 
     // ── 힌트 ────────────────────────────────────────────────────────────────
     string? _eliminatedChoice;
@@ -172,6 +179,9 @@ public class MainViewModel : BaseViewModel
         Answered              = false;
         IsPaused              = false;
         Result                = null;
+        Streak                = 0;
+        _retryCorrect         = 0;
+        _retryTotal           = 0;
         Screen                = QuizScreen.Quiz;
         NotifyQuizProps();
         HintCmd.Raise();
@@ -268,6 +278,10 @@ public class MainViewModel : BaseViewModel
 
         if (wrongQuestions.Count == 0) return;
 
+        // 현재 회차 정답 수 누적 (오답 다시 풀기 전 결과 반영)
+        _retryCorrect += Result.Correct;
+        _retryTotal   += Result.Total;
+
         _questions   = wrongQuestions;
         _userAnswers = Enumerable.Repeat<string?>(null, _questions.Count).ToList();
         _hintUsed    = Enumerable.Repeat(false, _questions.Count).ToList();
@@ -279,6 +293,7 @@ public class MainViewModel : BaseViewModel
         Answered              = false;
         IsPaused              = false;
         Result                = null;
+        Streak                = 0;
         Screen                = QuizScreen.Quiz;
         NotifyQuizProps();
         HintCmd.Raise();
@@ -296,6 +311,7 @@ public class MainViewModel : BaseViewModel
         SelectedAnswer              = CurrentQuestion.Choices[idx];
         _userAnswers[_currentIndex] = SelectedAnswer;
         Answered                    = true;
+        Streak = SelectedAnswer == CurrentQuestion.CorrectAnswer ? Streak + 1 : 0;
         NextCmd.Raise();
         NotifyChoiceProps();
     }
@@ -331,11 +347,13 @@ public class MainViewModel : BaseViewModel
 
             var result = new QuizResult
             {
-                Total     = _questions.Count,
-                Correct   = correct,
-                Wrong     = _questions.Count - correct,
-                HintsUsed = _hintUsed.Count(h => h),
-                WrongItems = wrongItems,
+                Total        = _questions.Count,
+                Correct      = correct,
+                Wrong        = _questions.Count - correct,
+                HintsUsed    = _hintUsed.Count(h => h),
+                RetryCorrect = _retryCorrect,
+                RetryTotal   = _retryTotal,
+                WrongItems   = wrongItems,
             };
             IsNewRecord = RecordService.TryUpdate(Mode.ToString(), Continent, (int)result.Score);
             Result = result;
@@ -384,6 +402,7 @@ public class MainViewModel : BaseViewModel
                 {
                     _userAnswers[_currentIndex] = null;
                     Answered = true;
+                    Streak   = 0;
                     NextCmd.Raise();
                     NotifyChoiceProps();
 

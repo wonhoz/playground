@@ -93,14 +93,30 @@ public partial class MainWindow : Window
                     break;
             }
         }
-        else if (_vm.IsStartScreen)
-        {
-            if (e.Key == System.Windows.Input.Key.F1)
-                HelpPopup.IsOpen = !HelpPopup.IsOpen;
-        }
-
         if (e.Key == System.Windows.Input.Key.F1)
             HelpPopup.IsOpen = !HelpPopup.IsOpen;
+    }
+
+    void BtnMenu_Click(object sender, RoutedEventArgs e)
+    {
+        if (_vm.IsQuizScreen)
+        {
+            bool wasRunning = _vm.TimerMode && !_vm.IsPaused && !_vm.Answered;
+            if (wasRunning) _vm.PauseCmd.Execute(null);
+
+            var result = MessageBox.Show(
+                "퀴즈를 종료하고 메뉴로 돌아가시겠습니까?",
+                "Geo.Quiz",
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Question);
+
+            if (result != MessageBoxResult.Yes)
+            {
+                if (wasRunning) _vm.PauseCmd.Execute(null); // 재개
+                return;
+            }
+        }
+        _vm.RestartCmd.Execute(null);
     }
 
     void BtnMute_Click(object sender, RoutedEventArgs e)
@@ -124,24 +140,18 @@ public partial class MainWindow : Window
                  :                               QuizMode.Continent;
     }
 
-    void CbTimer_Changed(object sender, RoutedEventArgs e)
-    {
-        if (!IsLoaded) return;
-        // TimerMode는 CheckBox.IsChecked 바인딩으로 처리됨
-    }
-
     void LoadFlagImage()
     {
         var q = _vm.CurrentQuestion;
         if (q == null || string.IsNullOrEmpty(q.FlagIsoCode))
         {
-            FlagImage.Visibility   = Visibility.Collapsed;
-            TbFlagError.Visibility = Visibility.Collapsed;
-            FlagImage.Source       = null;
+            FlagImage.Visibility             = Visibility.Collapsed;
+            TbFlagEmojiFallback.Visibility   = Visibility.Collapsed;
+            FlagImage.Source                 = null;
             return;
         }
 
-        TbFlagError.Visibility = Visibility.Collapsed;
+        TbFlagEmojiFallback.Visibility = Visibility.Collapsed;
         // 새 문제로 전환 시 이전 이미지 즉시 숨김 (깜빡임 방지)
         FlagImage.Visibility   = Visibility.Collapsed;
         FlagImage.Source       = null;
@@ -161,10 +171,11 @@ public partial class MainWindow : Window
         bmp.CacheOption = BitmapCacheOption.OnLoad;
         bmp.EndInit();
 
-        bmp.DownloadFailed  += (_, _) =>
+        bmp.DownloadFailed += (_, _) =>
         {
-            FlagImage.Visibility   = Visibility.Collapsed;
-            TbFlagError.Visibility = Visibility.Visible;
+            FlagImage.Visibility             = Visibility.Collapsed;
+            TbFlagEmojiFallback.Text         = q.Subject.FlagEmoji;
+            TbFlagEmojiFallback.Visibility   = Visibility.Visible;
         };
         bmp.DownloadCompleted += (_, _) =>
         {
@@ -227,6 +238,19 @@ public partial class MainWindow : Window
         TbScore.Text  = $"{r.Correct}문제 정답 / {r.Total}문제 (등급: {r.Grade}){newRecord}{hintNote}";
         TbCorrect.Text = r.Correct.ToString();
         TbWrong.Text   = r.Wrong.ToString();
+
+        if (r.HasRetry)
+        {
+            int totalCorrect = r.RetryCorrect + r.Correct;
+            int totalAll     = r.RetryTotal   + r.Total;
+            double pct       = totalAll == 0 ? 0 : (double)totalCorrect / totalAll * 100;
+            TbRetryStats.Text       = $"📊 전체 누적 정확도: {totalCorrect}/{totalAll} ({pct:F0}%)";
+            TbRetryStats.Visibility = Visibility.Visible;
+        }
+        else
+        {
+            TbRetryStats.Visibility = Visibility.Collapsed;
+        }
 
         WrongList.ItemsSource = r.WrongItems;
         WrongPanel.Visibility = r.WrongItems.Count > 0 ? Visibility.Visible : Visibility.Collapsed;

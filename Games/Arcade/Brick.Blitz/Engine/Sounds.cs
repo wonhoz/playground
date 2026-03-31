@@ -13,8 +13,10 @@ public static class Sounds
         (C5, 0.12), (E5, 0.12), (G5, 0.12), (1047.0, 0.12)
     ], wave: 1, vol: 0.3);
 
-    // ── BGM ──────────────────────────────────────────
-    public static readonly byte[] Bgm = BuildBgm();
+    // ── BGM ─────────────────────────────────────────
+    // 첫 접근 시 합성 — 앱 로드 지연 방지
+    private static readonly Lazy<byte[]> _bgmLazy = new(BuildBgm);
+    public static byte[] Bgm => _bgmLazy.Value;
 
     private static byte[] BuildBgm()
     {

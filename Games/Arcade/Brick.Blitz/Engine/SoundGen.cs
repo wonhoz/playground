@@ -140,6 +140,11 @@ public static class SoundGen
         if (_bgmFile != null) { try { File.Delete(_bgmFile); } catch { } _bgmFile = null; }
     }
 
+    public static void SetBgmVolume(double volume)
+    {
+        if (_bgm != null) _bgm.Volume = Math.Clamp(volume, 0, 1);
+    }
+
     // ── 음표 주파수 ──────────────────────────────
 
     public const double

@@ -1,3 +1,4 @@
+using System.IO;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Controls;
@@ -26,7 +27,7 @@ public partial class MainWindow : Window
     private const double ParticleLifetime = 0.6;
 
     // ── State ──────────────────────────────────────────
-    private enum GameState { Title, Playing, StageClear, GameOver, AllClear }
+    private enum GameState { Title, Playing, Paused, StageClear, GameOver, AllClear }
     private GameState _state = GameState.Title;
 
     private readonly GameLoop _loop = new();
@@ -72,6 +73,15 @@ public partial class MainWindow : Window
     private const double NormalBallSpeed = 360;
     private const double SlowBallSpeed = 220;
 
+    // BGM
+    private bool _bgmMuted;
+    private const double BgmVolume = 0.35;
+
+    // High score persistence
+    private static readonly string SaveDir = System.IO.Path.Combine(
+        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "BrickBlitz");
+    private static readonly string SaveFile = System.IO.Path.Combine(SaveDir, "highscore.txt");
+
     public MainWindow()
     {
         InitializeComponent();
@@ -86,10 +96,31 @@ public partial class MainWindow : Window
             DwmSetWindowAttribute(source.Handle, 20, ref value, sizeof(int));
         }
 
+        LoadHighScore();
         _loop.OnUpdate += OnUpdate;
         _loop.OnRender += OnRender;
         _loop.Start();
         Focus();
+    }
+
+    private void LoadHighScore()
+    {
+        try
+        {
+            if (File.Exists(SaveFile) && int.TryParse(File.ReadAllText(SaveFile).Trim(), out int saved))
+                _highScore = saved;
+        }
+        catch { }
+    }
+
+    private void SaveHighScore()
+    {
+        try
+        {
+            Directory.CreateDirectory(SaveDir);
+            File.WriteAllText(SaveFile, _highScore.ToString());
+        }
+        catch { }
     }
 
     // ── Game Start / Stage Setup ──────────────────────
@@ -126,10 +157,10 @@ public partial class MainWindow : Window
             Height = _paddle.Height,
             RadiusX = 4,
             RadiusY = 4,
-            Fill = new SolidColorBrush(Color.FromRgb(0x00, 0xFF, 0xCC)),
+            Fill = new SolidColorBrush(Color.FromRgb(0x8B, 0x44, 0xFF)),
             Effect = new DropShadowEffect
             {
-                Color = Color.FromRgb(0x00, 0xFF, 0xCC),
+                Color = Color.FromRgb(0x8B, 0x44, 0xFF),
                 BlurRadius = 12,
                 ShadowDepth = 0
             }
@@ -159,7 +190,7 @@ public partial class MainWindow : Window
         _stage++;
         if (_stage > MaxStages)
         {
-            if (_score > _highScore) _highScore = _score;
+            if (_score > _highScore) { _highScore = _score; SaveHighScore(); }
             SoundGen.StopBgm();
             SoundGen.Sfx(Sounds.StageClearSfx);
             _state = GameState.AllClear;
@@ -279,7 +310,7 @@ public partial class MainWindow : Window
 
             if (_lives <= 0)
             {
-                if (_score > _highScore) _highScore = _score;
+                if (_score > _highScore) { _highScore = _score; SaveHighScore(); }
                 SoundGen.StopBgm();
                 _state = GameState.GameOver;
                 FinalScoreText.Text = $"SCORE: {_score}";
@@ -602,10 +633,11 @@ public partial class MainWindow : Window
                 break;
 
             case PowerUpType.MultiBall:
-                var existing = _balls.Where(b => b.Active && !b.Stuck).ToList();
-                if (existing.Count > 0)
+                var launched = _balls.Where(b => b.Active && !b.Stuck).ToList();
+                if (launched.Count > 0)
                 {
-                    var src = existing[0];
+                    // 이미 발사된 볼 기준으로 2개 추가
+                    var src = launched[0];
                     for (int k = 0; k < 2; k++)
                     {
                         double angle = (k == 0 ? -0.4 : 0.4);
@@ -623,6 +655,27 @@ public partial class MainWindow : Window
                         var visual = CreateBallVisual();
                         _ballVisuals.Add(visual);
                         GameCanvas.Children.Add(visual);
+                    }
+                }
+                else
+                {
+                    // 볼이 아직 Stuck 상태 — 패들 위 좌우에 추가 볼 2개 배치
+                    var stuckBall = _balls.FirstOrDefault(b => b.Active && b.Stuck);
+                    if (stuckBall != null)
+                    {
+                        double[] offsets = [-20, 20];
+                        foreach (double offset in offsets)
+                        {
+                            var nb = new Ball(stuckBall.X + offset, stuckBall.Y)
+                            {
+                                Stuck = true,
+                                Speed = stuckBall.Speed,
+                            };
+                            _balls.Add(nb);
+                            var visual = CreateBallVisual();
+                            _ballVisuals.Add(visual);
+                            GameCanvas.Children.Add(visual);
+                        }
                     }
                 }
                 break;
@@ -827,10 +880,12 @@ public partial class MainWindow : Window
         return rect;
     }
 
-    private static void UpdateBrickVisualForDamage(int index, Brick brick)
+    private void UpdateBrickVisualForDamage(int index, Brick brick)
     {
-        // Hard brick took a hit - crack visual
-        // Handled implicitly: just darken slightly
+        if (index >= _brickRects.Count) return;
+        // HP 1 남았을 때 어두운 회색으로 변경 — 균열 표현
+        _brickRects[index].Fill = new SolidColorBrush(Color.FromRgb(0x60, 0x60, 0x60));
+        _brickRects[index].Stroke = new SolidColorBrush(Color.FromRgb(0x44, 0x44, 0x44));
     }
 
     // ── Cleanup ────────────────────────────────────────
@@ -892,6 +947,8 @@ public partial class MainWindow : Window
         GameOverOverlay.Visibility = Visibility.Collapsed;
         StageClearOverlay.Visibility = Visibility.Collapsed;
         AllClearOverlay.Visibility = Visibility.Collapsed;
+        PausedOverlay.Visibility = Visibility.Collapsed;
+        HelpOverlay.Visibility = Visibility.Collapsed;
         ComboText.Visibility = Visibility.Collapsed;
         PowerUpText.Visibility = Visibility.Collapsed;
         HighScoreTitle.Text = _highScore > 0 ? $"HIGH SCORE: {_highScore}" : "";
@@ -928,6 +985,33 @@ public partial class MainWindow : Window
                 break;
             case Key.Enter when _state == GameState.AllClear:
                 ShowTitle();
+                break;
+            case Key.P when _state == GameState.Playing:
+                _state = GameState.Paused;
+                PausedOverlay.Visibility = Visibility.Visible;
+                break;
+            case Key.P when _state == GameState.Paused:
+                _state = GameState.Playing;
+                PausedOverlay.Visibility = Visibility.Collapsed;
+                break;
+            case Key.M:
+                _bgmMuted = !_bgmMuted;
+                SoundGen.SetBgmVolume(_bgmMuted ? 0 : BgmVolume);
+                break;
+            case Key.H when _state == GameState.Playing || _state == GameState.Paused:
+                HelpOverlay.Visibility = HelpOverlay.Visibility == Visibility.Visible
+                    ? Visibility.Collapsed : Visibility.Visible;
+                break;
+            case Key.Escape when HelpOverlay.Visibility == Visibility.Visible:
+                HelpOverlay.Visibility = Visibility.Collapsed;
+                break;
+            case Key.Escape when _state == GameState.Paused:
+                HelpOverlay.Visibility = Visibility.Collapsed;
+                PausedOverlay.Visibility = Visibility.Collapsed;
+                SoundGen.StopBgm();
+                _loop.Stop();
+                ShowTitle();
+                _loop.Start();
                 break;
             case Key.Escape when _state == GameState.Playing:
                 SoundGen.StopBgm();

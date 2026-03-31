@@ -2,7 +2,7 @@
 
 > 이름만 기재. 상세 내용은 각 차수 idea 파일 참조.
 > ★N차 = 해당 차수 브레인스토밍에서 처음 제안됨
-> 마지막 갱신: 2026-03-22 (33차)
+> 마지막 갱신: 2026-03-31 (34차)
 
 ---
 
@@ -202,6 +202,16 @@
 | `Tab.Space` | 프로젝트 인덴테이션 스타일 감지·일괄 변환 (.editorconfig 읽기/생성 지원) ★33차 |
 | `Git.Quick` | 트레이 팝업 Git status·add·commit·push 원클릭, 브랜치·저장소 자동 감지 ★33차 |
 | `Code.Map` | 코드베이스 언어별 LOC 트리맵 시각화, 두 시점 스냅샷 비교 (Disk.Lens의 코드판) ★33차 |
+| `Date.Calc` | 날짜 차이·D-Day·요일·나이 계산기 ★34차 |
+| `Case.Forge` | camelCase ↔ snake_case 등 10가지 케이스 전역 팝업 변환기 ★34차 |
+| `Dice.Cast` | 주사위 공식·무작위 추첨·팀 편성 올인원 ★34차 |
+| `Img.Crop` | 소셜 미디어 비율 프리셋 퀵 크롭 도구 ★34차 |
+| `Pwd.Gen` | 전역 팝업 비밀번호·API 키·패스프레이즈 생성기 트레이 ★34차 |
+| `Desk.Note` | 바탕화면 컬러 포스트잇 스티커 메모 (재시작 유지) ★34차 |
+| `Copy.Path` | 파일 경로를 다양한 포맷으로 팝업 복사 (전체·상대·UNC·슬래시 변환) ★34차 |
+| `Char.Pad` | 특수문자·수학기호·이모지 즐겨찾기 퀵 팝업 입력기 ★34차 |
+| `Tab.Save` | Chrome/Edge 탭 세션 스냅샷 백업·복원 ★34차 |
+| `Wake.Timer` | 로컬 PC 절전 해제 + 알람 예약 타이머 트레이 ★34차 |
 
 ### Apps — Network / Security / Privacy
 
@@ -583,3 +593,13 @@
 | `Volt.Surge` | Shooter/Survival | 회로 기판 위 전류 파형 생존 슈터, 소자별(저항·커패시터·코일) 이동 효과 ★33차 |
 | `Fire.Craft` | Sandbox/Simulation | 재질별 연소 속도·온도·연기 완전 다른 화재 물리 샌드박스 (소화 인터랙션) ★33차 |
 | `Glitch.Hop` | Platformer/Surreal | 글리치 아트 위장 지형 시각 판별 점프 플랫포머 (HLSL 글리치 쉐이더) ★33차 |
+| `Num.Rush` | Casual/Brain | 슐테 테이블 5×5 숫자 순서 클릭 집중력 게임 ★34차 |
+| `Connect.Cast` | Strategy/Board | 커넥트4 — 7×6 열 투하 4연결 Minimax Alpha-Beta AI ★34차 |
+| `Mine.Sweep` | Puzzle/Classic | 지뢰찾기 클래식 재구현 + 세이프 줌 힌트 + 다크 UI ★34차 |
+| `Checkers.Cast` | Strategy/Board | 체커스(드래프츠) — 영국식·국제식 + Alpha-Beta AI 5단계 ★34차 |
+| `Spot.Diff` | Puzzle/Visual | 틀린 그림 찾기 — 절차적 차이 생성 + 사용자 이미지 ★34차 |
+| `Trivia.Cast` | Casual/Quiz | 12 카테고리 범용 상식 퀴즈 + CSV 커스텀 문제 + 일일 챌린지 ★34차 |
+| `Grid.Slide` | Puzzle/Classic | 15-퍼즐 슬라이딩 타일 — 이미지 모드 + A* 자동 풀기 ★34차 |
+| `Calc.Rush` | Casual/Brain | 사칙연산 60초 타임어택 콤보 스피드 게임 ★34차 |
+| `Hop.Rush` | Arcade/Classic | 프로거 스타일 탑다운 도로·강 타이밍 건너기 ★34차 |
+| `Pac.Dash` | Arcade/Classic | 팩맨 스타일 미로 닷 수집 + 4종 유령 AI (BFS/예측/협공) ★34차 |

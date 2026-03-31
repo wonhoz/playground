@@ -1,7 +1,7 @@
 # Avoid — 유사 개념 그룹 (중복 주의)
 
 > 브레인스토밍 시 아래 그룹 내 변형 아이디어는 **이미 제안된 것으로 간주**한다.
-> 마지막 갱신: 2026-03-22 (33차)
+> 마지막 갱신: 2026-03-31 (34차)
 
 ---
 
@@ -257,3 +257,20 @@
 | **수축 / 공간 압박 생존** | Void.Rush (사방 전기 격자벽 수축+탄환 이중 압박+게이트 탈출) ≠ Spiral.Rush (나선형 수축 원심력) ≠ Frost.Line (위→아래 결빙선) ≠ Dodge.Blitz ✅ (탄막 회피) |
 | **재질별 파단 샌드박스** | Cut.Forge (마우스 드로잉 절단, 재질별 Voronoi/Verlet/폭발 파단) ≠ Fracture.Fall (Voronoi 파단 지형 러너) ≠ Cloth.Cut (스프링-질량 천 절단) ≠ Crush.Box (유압 압착 파괴) |
 | **회로 기판 생존 슈터** | Volt.Surge (배선 그래프 이동, 소자별 이동 효과, BFS 적 AI) ≠ Volt.Chain (회로 설계 퍼즐) ≠ Volt.Race (전기 소자 트랙 레이싱) ≠ Chip.Logic (논리 게이트 빌더) |
+| **날짜·시간 계산 도구** | Date.Calc (날짜 차이·D-Day·요일·나이·영업일 계산기) ≠ Event.Count (D-day 카운트다운 트레이) ≠ Cal.Block (시간 블로킹 플래너) |
+| **비밀번호 생성 vs 저장** | Pwd.Gen (즉시 생성·복사, 저장 없음) ≠ Pass.Vault (AES-256 비밀번호 저장소) ≠ Key.Stash (API 키·토큰 보관) |
+| **경로 복사 vs 심볼릭 링크** | Copy.Path (경로 포맷 팝업 복사) ≠ Path.Link (심볼릭 링크·정션 생성) ≠ Find.Fast (NTFS 파일명 검색) |
+| **특수문자 팝업 vs 전체 유니코드** | Char.Pad (자주 쓰는 기호·이모지 즐겨찾기 퀵 팝업) ≠ Glyph.Map ✅ (12만+ 유니코드 전체 브라우저) ≠ ANSI.Forge ✅ (256색 ANSI 아트 에디터) |
+| **텍스트 케이스 변환** | Case.Forge (camelCase·snake_case·PascalCase·kebab-case 전역 팝업) ≠ Text.Forge ✅ (해시·인코딩·Base64·JWT) ≠ Str.Forge (멀티파일 Find&Replace) |
+| **주사위·무작위 추첨** | Dice.Cast (주사위 공식·리스트 추첨·팀 편성) ≠ Num.Rush (숫자 집중력 게임) ≠ QR.Forge ✅ (QR 코드 생성) |
+| **이미지 크롭 vs 변환 vs 일괄 처리** | Img.Crop (비율 프리셋 크롭 전문) ≠ Img.Cast ✅ (포맷 변환) ≠ Img.Forge (배치 리사이즈·필터·워터마크) ≠ Img.Slice (스프라이트시트 슬라이싱) |
+| **데스크탑 메모 vs 팝업 메모** | Desk.Note (바탕화면 고정 포스트잇, 재시작 유지) ≠ Quick.Memo (전역 단축키 팝업 노트패드) ≠ Ink.Cast (양방향 링크 노트) |
+| **브라우저 탭 세션 관리** | Tab.Save (탭 세션 스냅샷 백업·복원) ≠ Link.Vault (북마크+페이지 스냅샷) ≠ Clipboard.Stacker ✅ (클립보드 스택) |
+| **로컬 Wake Timer vs 원격 WOL** | Wake.Timer (로컬 절전 해제 알람 타이머, Task Scheduler) ≠ Wake.Cast (WOL 원격 PC 기동) ≠ Sleep.Cast (절전 스케줄러) ≠ Stay.Awake ✅ (절전 방지) |
+| **4-연결 전략 보드** | Connect.Cast (7×6 열 투하 4연결 대전) ≠ Dots.Cast (선 긋기 박스 완성) ≠ Flip.Grid (격자 타일 뒤집기) ≠ Checkers.Cast (대각선 이동 점프) |
+| **체커스·드래프츠 vs 체스** | Checkers.Cast (8×8 대각선+점프, 킹 승격) ≠ Chess.Forge (변형 체스 5종) ≠ Flip.Card (오델로 변형) ≠ Othello 계열 |
+| **틀린 그림 찾기 게임 vs 이미지 비교 유틸** | Spot.Diff (게임: 타이머+클릭+절차적 생성) ≠ Img.Compare ✅ (유틸리티: SSIM/PSNR 화질 분석) ≠ Deep.Diff ✅ (텍스트·파일 범용 diff) |
+| **상식 퀴즈 vs 특화 퀴즈** | Trivia.Cast (12카테고리 범용 상식) ≠ Geo.Quiz ✅ (지리·국기 특화) ≠ Crossword.Cast ✅ (영단어 십자말) ≠ Cipher.Quest ✅ (암호 해독) |
+| **집중력 숫자 게임** | Num.Rush (슐테 테이블 순서 클릭) ≠ Calc.Rush (사칙연산 스피드 입력) ≠ Color.Blitz (스트룹 색상 매칭) ≠ Number.Storm (2048 변형 슬라이딩 합산) |
+| **탑다운 건너기 러너** | Hop.Rush (도로·강 타이밍 건너기, 프로거 방식) ≠ Neon.Run ✅ (사이드 스크롤 무한 러너) ≠ Dash.City ✅ (사이드 러너) ≠ Crumble.Run (지형 붕괴 러너) |
+| **미로+추격 아케이드** | Pac.Dash (팩맨 닷 수집+유령 추격, 파워펠릿 역전) ≠ Maze.Dread (탈출 목표+시야 제한 공포) ≠ Maze.Craft (미로 설계자 역발상) ≠ Maze.Forge (봉쇄 전략) |

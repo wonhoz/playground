@@ -1,5 +1,5 @@
-using System.Drawing;
 using System.IO;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using Microsoft.Win32;
 
@@ -13,7 +13,8 @@ internal static class Program
     private static extern int SetCurrentProcessExplicitAppUserModelID(
         [MarshalAs(UnmanagedType.LPWStr)] string AppID);
 
-    // exe에 내장된 아이콘을 LocalAppData에 추출 → toast 알림 IconUri용 실제 파일 생성
+    // EmbeddedResource로 내장된 원본 ICO를 LocalAppData에 복사 → toast 알림 IconUri용 실제 파일 생성
+    // Icon.ExtractAssociatedIcon() 대신 사용 — 멀티해상도 원본 품질 유지
     private static string? ExtractIconToAppData()
     {
         try
@@ -23,11 +24,11 @@ internal static class Program
                 "Playground", "ClipboardStacker");
             Directory.CreateDirectory(dir);
             var icoPath = Path.Combine(dir, "app.ico");
-            using var icon = System.Drawing.Icon.ExtractAssociatedIcon(Environment.ProcessPath!);
-            if (icon != null)
+            using var src = Assembly.GetExecutingAssembly().GetManifestResourceStream("app.ico");
+            if (src != null)
             {
                 using var fs = File.Create(icoPath);
-                icon.Save(fs);
+                src.CopyTo(fs);
                 return icoPath;
             }
         }

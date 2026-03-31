@@ -32,7 +32,7 @@ public sealed class PowerUp
 
         (Label, Color) = type switch
         {
-            PowerUpType.WidePaddle => ("W+", Color.FromRgb(0x8B, 0x44, 0xFF)),
+            PowerUpType.WidePaddle => ("W+", Color.FromRgb(0x00, 0xFF, 0xCC)),
             PowerUpType.MultiBall => ("x3", Color.FromRgb(0xFF, 0xD7, 0x00)),
             PowerUpType.LaserPaddle => ("L!", Color.FromRgb(0xFF, 0x44, 0x44)),
             PowerUpType.SlowBall => ("SL", Color.FromRgb(0x3A, 0x86, 0xFF)),

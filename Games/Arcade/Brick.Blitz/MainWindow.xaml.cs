@@ -157,10 +157,10 @@ public partial class MainWindow : Window
             Height = _paddle.Height,
             RadiusX = 4,
             RadiusY = 4,
-            Fill = new SolidColorBrush(Color.FromRgb(0x8B, 0x44, 0xFF)),
+            Fill = new SolidColorBrush(Color.FromRgb(0x00, 0xFF, 0xCC)),
             Effect = new DropShadowEffect
             {
-                Color = Color.FromRgb(0x8B, 0x44, 0xFF),
+                Color = Color.FromRgb(0x00, 0xFF, 0xCC),
                 BlurRadius = 12,
                 ShadowDepth = 0
             }

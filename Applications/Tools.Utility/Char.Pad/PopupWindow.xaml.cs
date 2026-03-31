@@ -184,6 +184,7 @@ public partial class PopupWindow : System.Windows.Window
             Text                = entry.Char,
             FontSize            = 20,
             FontFamily          = new WpfFontFamily("Segoe UI Emoji, Segoe UI Symbol, Segoe UI"),
+            Foreground          = (SolidColorBrush)FindResource("TextPrimary"),
             HorizontalAlignment = System.Windows.HorizontalAlignment.Center,
             VerticalAlignment   = VerticalAlignment.Center,
         };

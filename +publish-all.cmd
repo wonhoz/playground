@@ -83,6 +83,7 @@ call :pub "Zip.Peek"              "Applications\Files\Inspector\Zip.Peek"       
 
 :: ── Applications / Files / Manager ────────────────────────────────
 call :pub "Batch.Rename"          "Applications\Files\Manager\Batch.Rename"                 "Batch.Rename.exe"          "Applications\Files\Manager"
+call :pub "Copy.Path"             "Applications\Files\Manager\Copy.Path"                    "Copy.Path.exe"             "Applications\Files\Manager"
 call :pub "File.Duplicates"       "Applications\Files\Manager\File.Duplicates"              "File.Duplicates.exe"       "Applications\Files\Manager"
 call :pub "File.Unlocker"         "Applications\Files\Manager\File.Unlocker"                "File.Unlocker.exe"         "Applications\Files\Manager"
 call :pub "Folder.Purge"          "Applications\Files\Manager\Folder.Purge"                 "Folder.Purge.exe"          "Applications\Files\Manager"
@@ -136,6 +137,7 @@ call :pub "Tray.Stats"            "Applications\System\Monitor\Tray.Stats"      
 
 :: ── Applications / Text ────────────────────────────────────────────
 call :pub "ANSI.Forge"            "Applications\Text\ANSI.Forge"                            "ANSI.Forge.exe"            "Applications\Text\ANSI.Forge"
+call :pub "Case.Forge"            "Applications\Text\Case.Forge"                            "Case.Forge.exe"            "Applications\Text"
 call :pub "Char.Art"              "Applications\Text\Char.Art"                              "Char.Art.exe"              "Applications\Text"
 call :pub "Char.Pad"              "Applications\Tools.Utility\Char.Pad"                     "Char.Pad.exe"              "Applications\Tools.Utility"
 call :pub "Echo.Text"             "Applications\Text\Echo.Text"                             "Echo.Text.exe"             "Applications\Text\Echo.Text"
@@ -170,6 +172,7 @@ call :pub "Ear.Train"             "Games\Casual\Ear.Train"                      
 call :pub "Geo.Quiz"              "Games\Casual\Geo.Quiz"                                   "Geo.Quiz.exe"              "Games\Casual\Geo.Quiz"
 call :pub "Morse.Run"             "Games\Casual\Morse.Run"                                  "Morse.Run.exe"             "Games\Casual\Morse.Run"
 call :pub "Snap.Duel"             "Games\Casual\Snap.Duel"                                  "Snap.Duel.exe"             "Games\Casual"
+call :pub "Trivia.Cast"           "Games\Casual\Trivia.Cast"                                "Trivia.Cast.exe"           "Games\Casual"
 
 :: ── Games / Idle ───────────────────────────────────────────────────
 call :pub "Code.Idle"             "Games\Idle\Code.Idle"                                    "Code.Idle.exe"             "Games\Idle\Code.Idle"

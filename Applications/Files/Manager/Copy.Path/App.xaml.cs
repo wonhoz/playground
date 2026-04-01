@@ -1,4 +1,3 @@
-using Microsoft.Win32;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -8,8 +7,6 @@ public partial class App : System.Windows.Application
 {
     [DllImport("user32.dll")] static extern bool RegisterHotKey(IntPtr hWnd, int id, uint fsModifiers, uint vk);
     [DllImport("user32.dll")] static extern bool UnregisterHotKey(IntPtr hWnd, int id);
-    [DllImport("shell32.dll", CharSet = CharSet.Unicode)]
-    static extern int SetCurrentProcessExplicitAppUserModelID(string id);
 
     private const int HotkeyId  = 9003;
     private const uint MOD_WIN   = 0x0008;
@@ -29,28 +26,35 @@ public partial class App : System.Windows.Application
         _mutex = new System.Threading.Mutex(true, "CopyPath_SingleInstance", out bool isNew);
         if (!isNew) { Shutdown(); return; }
 
-        RegisterAumid("Playground.CopyPath");
         _usage = new UsageService();
         BuildTray();
         RegisterGlobalHotkey();
     }
 
-    private static void RegisterAumid(string aumid)
+    // pack 리소스로 내장된 app.ico를 System.Drawing.Icon으로 변환
+    private static Icon LoadTrayIcon()
     {
-        SetCurrentProcessExplicitAppUserModelID(aumid);
-        using var key = Registry.CurrentUser.CreateSubKey($@"SOFTWARE\Classes\AppUserModelId\{aumid}");
-        key.SetValue("DisplayName", "Copy.Path");
-        key.SetValue("IconUri", Path.Combine(AppContext.BaseDirectory, "Resources", "app.ico"));
+        try
+        {
+            var sri = System.Windows.Application.GetResourceStream(
+                new Uri("pack://application:,,,/Resources/app.ico"));
+            if (sri != null)
+            {
+                using var ms = new System.IO.MemoryStream();
+                sri.Stream.CopyTo(ms);
+                ms.Position = 0;
+                return new Icon(ms);
+            }
+        }
+        catch { }
+        return SystemIcons.Application;
     }
 
     private void BuildTray()
     {
-        var icoPath = Path.Combine(AppContext.BaseDirectory, "Resources", "app.ico");
-        var icon = File.Exists(icoPath) ? new Icon(icoPath) : SystemIcons.Application;
-
         _tray = new NotifyIcon
         {
-            Icon    = icon,
+            Icon    = LoadTrayIcon(),
             Text    = "Copy.Path — Win+Shift+X",
             Visible = true
         };

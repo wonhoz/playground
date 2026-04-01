@@ -199,7 +199,7 @@ public partial class MainWindow : Window
 
         // 진행바
         if (_progressBarMaxWidth == 0)
-            _progressBarMaxWidth = ((Grid)QuizScreen.Children[1]).ActualWidth - 48;
+            _progressBarMaxWidth = QuizScreen.ActualWidth - 48;
         if (_progressBarMaxWidth > 0)
             ProgressBar.Width = _progressBarMaxWidth * _currentIndex / _questions.Count;
 

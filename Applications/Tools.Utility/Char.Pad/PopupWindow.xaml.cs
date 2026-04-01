@@ -415,6 +415,11 @@ public partial class PopupWindow : System.Windows.Window
         }
     }
 
+    private void Header_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+    {
+        if (e.ButtonState == System.Windows.Input.MouseButtonState.Pressed) DragMove();
+    }
+
     private void CloseBtn_Click(object sender, RoutedEventArgs e) => Hide();
 
     public void ShowHelpOverlay()

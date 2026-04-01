@@ -2,7 +2,7 @@
 
 > 이름만 기재. 상세 내용은 각 차수 idea 파일 참조.
 > ★N차 = 해당 차수 브레인스토밍에서 처음 제안됨
-> 마지막 갱신: 2026-03-31 (34차)
+> 마지막 갱신: 2026-04-02 (35차)
 
 ---
 
@@ -212,6 +212,16 @@
 | `Char.Pad` | 특수문자·수학기호·이모지 즐겨찾기 퀵 팝업 입력기 ★34차 |
 | `Tab.Save` | Chrome/Edge 탭 세션 스냅샷 백업·복원 ★34차 |
 | `Wake.Timer` | 로컬 PC 절전 해제 + 알람 예약 타이머 트레이 ★34차 |
+| `DNS.Trace` | Root→TLD→권한 DNS 해석 경로 단계별 레이턴시 시각화 ★35차 |
+| `Font.Kern` | 폰트 커닝 쌍 추출·조정·OTF Feature Code 내보내기 ★35차 |
+| `Glot.Cast` | C#/Python/JS/PS 다국어 스니펫 즉시 실행 REPL-lite ★35차 |
+| `Brush.Scale` | ONNX waifu2x/ESRGAN 완전 오프라인 AI 이미지 업스케일러 ★35차 |
+| `SSH.Forge` | SSH 키 생성·지문 확인·만료 관리 전문 GUI ★35차 |
+| `Log.Tail` | 실시간 멀티파일 로그 테일러 + 필터 규칙 + 패턴 Toast 알림 ★35차 |
+| `Run.Trace` | .NET EventPipe 메서드 콜 트리 실시간 추적기 ★35차 |
+| `Num.Parse` | 다국어 숫자 문자열 로케일·형식 자동 판별 탐정 도구 ★35차 |
+| `Exe.Sign` | EXE 디지털 서명 체인·UAC 매니페스트·의존 DLL 인스펙터 ★35차 |
+| `Map.Route` | 오프라인 GPX 경로 플래너 + 거리·고도 계산기 ★35차 |
 
 ### Apps — Network / Security / Privacy
 
@@ -603,3 +613,13 @@
 | `Calc.Rush` | Casual/Brain | 사칙연산 60초 타임어택 콤보 스피드 게임 ★34차 |
 | `Hop.Rush` | Arcade/Classic | 프로거 스타일 탑다운 도로·강 타이밍 건너기 ★34차 |
 | `Pac.Dash` | Arcade/Classic | 팩맨 스타일 미로 닷 수집 + 4종 유령 AI (BFS/예측/협공) ★34차 |
+| `Clock.Tick` | Puzzle/Mechanical | 기어 연결 시계 바늘을 동시에 목표 시각으로 맞추는 연동 퍼즐 ★35차 |
+| `Kite.Drift` | Puzzle/Physics | 줄 장력·바람 물리로 연을 조종해 공중 링 코스 통과 ★35차 |
+| `Pixel.Bounce` | Arcade/Strategy | 공 궤적이 영구 장애물로 쌓이는 블록깨기 변형 ★35차 |
+| `Beat.Build` | Rhythm/Puzzle | 박자 온비트에 맞춰 블록 배치 — 놓치면 무너지는 리듬 건설 ★35차 |
+| `River.Rush` | Arcade/Physics | 물살 벡터 물리 급류 탑다운 래프팅 생존 ★35차 |
+| `Loot.Climb` | Roguelite/Platformer | 이동 능력 루트 조합 수직 상승 로그라이트 ★35차 |
+| `Disc.Golf` | Sports/Physics | 양력·자이로·항력 원반 공기역학 2D 디스크 골프 18홀 ★35차 |
+| `Neon.Siege` | Strategy/TD | 적이 아군 포탑을 해킹하는 사이버펑크 타워 디펜스 ★35차 |
+| `Find.Cast` | Casual/Observation | 절차 생성 복잡 장면에서 목록 아이템 탐색 숨은그림찾기 ★35차 |
+| `Roll.Craft` | Arcade/Puzzle | 자석·얼음·경사 특수 타일 물리 조합 볼 롤링 미로 퍼즐 ★35차 |

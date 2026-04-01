@@ -1,7 +1,7 @@
 # Avoid — 유사 개념 그룹 (중복 주의)
 
 > 브레인스토밍 시 아래 그룹 내 변형 아이디어는 **이미 제안된 것으로 간주**한다.
-> 마지막 갱신: 2026-03-31 (34차)
+> 마지막 갱신: 2026-04-02 (35차)
 
 ---
 
@@ -274,3 +274,23 @@
 | **집중력 숫자 게임** | Num.Rush (슐테 테이블 순서 클릭) ≠ Calc.Rush (사칙연산 스피드 입력) ≠ Color.Blitz (스트룹 색상 매칭) ≠ Number.Storm (2048 변형 슬라이딩 합산) |
 | **탑다운 건너기 러너** | Hop.Rush (도로·강 타이밍 건너기, 프로거 방식) ≠ Neon.Run ✅ (사이드 스크롤 무한 러너) ≠ Dash.City ✅ (사이드 러너) ≠ Crumble.Run (지형 붕괴 러너) |
 | **미로+추격 아케이드** | Pac.Dash (팩맨 닷 수집+유령 추격, 파워펠릿 역전) ≠ Maze.Dread (탈출 목표+시야 제한 공포) ≠ Maze.Craft (미로 설계자 역발상) ≠ Maze.Forge (봉쇄 전략) |
+| **DNS 진단 도구** | DNS.Trace (Root→TLD→권한 NS 해석 경로·레이턴시 시각화) ≠ DNS.Flip ✅ (DNS 전환 트레이) ≠ DNS.Watch (DNS 쿼리 실시간 모니터·차단) ≠ WHOIS.Cast (도메인 WHOIS+레코드 조회) |
+| **폰트 커닝/간격 도구** | Font.Kern (커닝 쌍 추출·조정·OTF Feature Code) ≠ Font.Scout (설치 폰트 미리보기·비교) ≠ Font.Probe (화면 UIAutomation 폰트 추출) ≠ Font.Draw (픽셀 폰트 그리드 에디터) ≠ Font.Ramp (타이포 스케일 토큰) |
+| **다국어 코드 실행기** | Glot.Cast (C#/Python/JS/PS 다국어 REPL-lite+스니펫 라이브러리) ≠ Bench.Run (.NET BenchmarkDotNet 성능 측정) ≠ Api.Probe ✅ (HTTP REST 테스터) |
+| **AI 이미지 업스케일링** | Brush.Scale (waifu2x/ESRGAN ONNX 오프라인 2x/4x/8x 화질 향상) ≠ Img.Forge (일괄 리사이즈·압축) ≠ Photo.Squash (PNG/JPG 손실 최소화 압축) ≠ Img.Cast ✅ (포맷 변환) |
+| **SSH 키 생성·관리** | SSH.Forge (Ed25519/RSA 키 생성·지문·만료 관리) ≠ SSH.Vault (~/.ssh/config GUI 편집·그룹·연결) ≠ Cert.Forge (X.509 로컬 CA 인증서 발급) ≠ Pass.Vault (비밀번호 저장소) |
+| **로그 파일 실시간 감시** | Log.Tail (멀티파일 tail -f+필터 규칙+패턴 Toast) ≠ Log.Struct (JSON 구조화 tail -f JQ 필터) ≠ Log.Lens ✅ (정적 파일 분석 뷰어) ≠ Log.Merge ✅ (다중 로그 시간순 통합) |
+| **.NET 런타임 콜 추적** | Run.Trace (EventPipe 메서드 Enter/Exit 콜 트리 시각화) ≠ Perf.Flame (CPU 샘플링 플레임 그래프) ≠ Bench.Run (.NET 코드 스니펫 벤치마크) ≠ Win.Event ✅ (Windows EVTX 이벤트 로그) |
+| **숫자 형식 탐지** | Num.Parse (다국어 숫자 문자열 로케일·포맷·진법 자동 판별) ≠ Locale.View ✅ (로케일별 날짜·숫자 렌더링 브라우저) ≠ Quick.Calc (개발자 계산기) ≠ Text.Forge ✅ (해시·인코딩 변환) |
+| **PE 파일 서명·보안 분석** | Exe.Sign (Authenticode 체인·UAC 매니페스트·의존 DLL 보안 인스펙터) ≠ Bin.View (PE EXE/DLL 리소스 브라우저) ≠ Hex.Peek ✅ (바이너리 헥스 에디터) ≠ Hash.Check ✅ (해시 계산·검증) |
+| **GPX 경로 계획·분석** | Map.Route (오프라인 GPX 플래너+거리·고도 계산, Mapsui) ≠ Data.Map (GeoJSON/TopoJSON 인터랙티브 지도 시각화) ≠ Geo.Tag (사진 GPS 태거, 지도 클릭) ≠ Net.Trace (traceroute 지오로케이션) |
+| **시계/기어 연동 퍼즐** | Clock.Tick (기어 연결 시계 바늘 목표 시각 동시 달성) ≠ Gear.Works ✅ (기어 맞물림 토크 전달 퍼즐) ≠ Ice.Slide (얼음 슬라이딩 블록 퍼즐) |
+| **연 / 글라이더 물리 게임** | Kite.Drift (줄 장력+바람 공기역학 연 조종 링 코스) ≠ Drone.Race (4로터 PWM FPV 레이싱) ≠ Sky.Drift ✅ (낙하산 하강 물리) ≠ Gravity.Flip ✅ (중력 반전 플랫포머) |
+| **공 궤적이 변수가 되는 게임** | Pixel.Bounce (공 궤적 픽셀 잔상→장애물 블록깨기) ≠ Bounce.House (탄성 반사각 재질별 물리 슈터) ≠ Wrecking.Ball (비선형 진자 건물 파괴) ≠ Arc.Blast (포물선 탄도 구조물 파괴) |
+| **리듬+건설/제작 혼합** | Beat.Build (박자 타이밍=블록 고정 판정 구조물 완성) ≠ Beat.Drop ✅ (악기 퍼포먼스) ≠ Beat.Rogue (비트 타이밍 이동 로그라이트) ≠ Pulse.Run (BPM 온비트 점프 러너) |
+| **수상 물리 생존** | River.Rush (급류 물살 벡터 필드 래프팅 생존) ≠ Wave.Surf ✅ (파도타기 캐주얼) ≠ Tidal.Wave (2D 파동 방정식 간섭 퍼즐) ≠ Sand.Craft (파도 침식 모래성 방어) |
+| **이동 능력 빌드 로그라이트** | Loot.Climb (수직 상승+이동 능력 루트 조합) ≠ Cave.Run (산소 게이지 수직 동굴 로그라이크) ≠ Neon.Card (덱빌딩 카드 로그라이트) ≠ Rogue.Tile (턴제 던전 로그라이크) |
+| **원반/비행체 스포츠** | Disc.Golf (원반 공기역학 양력·항력·자이로 18홀) ≠ Golf.Cast ✅ (구형 볼 마찰·경사 미니 골프) ≠ Pool.Break (당구 회전·마찰) ≠ Bounce.House (구형 탄성 반사) |
+| **포탑 해킹 타워디펜스** | Neon.Siege (아군 포탑 일시 해킹 역전 사이버펑크 TD) ≠ Tower.Guard ✅ (일반 타워 디펜스) ≠ Tower.Fall (역 TD 침략자 시점) ≠ Trap.Rush (역방어 함정 배치 TD) |
+| **숨은 그림 찾기 게임** | Find.Cast (절차 생성 복잡 장면 목록 아이템 탐색) ≠ Spot.Diff (두 이미지 차이 찾기) ≠ Echo.Hunt (소나 핑 암흑 탐색) ≠ Fog.Sculpt (안개 밀어내 탐험) |
+| **볼 롤링 미로 퍼즐** | Roll.Craft (직접 공 WASD 조종+특수 타일 물리 조합 미로) ≠ Tilt.Ball (WASD로 판 기울이기 간접 유도) ≠ Marble.Run (Verlet 구슬+부품 빌더 코스) ≠ Magnet.Maze (자기력 벡터 공 유도) |

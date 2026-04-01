@@ -411,7 +411,7 @@
                     <ControlTemplate TargetType="ListViewItem">
                         <Border x:Name="Bd" Background="{TemplateBinding Background}"
                                 BorderThickness="0" Padding="0">
-                            <ContentPresenter HorizontalAlignment="Stretch"/>
+                            <GridViewRowPresenter HorizontalAlignment="Stretch" VerticalAlignment="Center"/>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsSelected" Value="True">

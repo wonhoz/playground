@@ -42,7 +42,6 @@ echo.
 :: echo.
 
 :: ── Applications / AI ──────────────────────────────────────────────
-:: call :pub "AI.Clip"               "Applications\AI\AI.Clip"                                 "Ai.Clip.exe"               "Applications\AI"
 call :pub "Prompt.Forge"          "Applications\AI\Prompt.Forge"                            "Prompt.Forge.exe"          "Applications\AI\Prompt.Forge"
 
 :: ── Applications / Audio ───────────────────────────────────────────
@@ -50,7 +49,6 @@ call :pub "Music.Player"          "Applications\Audio\Music.Player"             
 :: call :pub "Tag.Forge"             "Applications\Audio\Tag.Forge"                            "Tag.Forge.exe"             "Applications\Audio\Tag.Forge"
 
 :: ── Applications / Automation ──────────────────────────────────────
-:: call :pub "Pane.Cast"             "Applications\Automation\Pane.Cast"                       "Pane.Cast.exe"             "Applications\Automation"
 call :pub "Stay.Awake"            "Applications\Automation\Stay.Awake"                      "Stay.Awake.exe"            "Applications\Automation\Stay.Awake"
 
 :: ── Applications / Development / Analyzer ─────────────────────────
@@ -67,7 +65,7 @@ call :pub "JSON.Tree"             "Applications\Development\Inspector\JSON.Tree"
 :: call :pub "Locale.View"           "Applications\Development\Inspector\Locale.View"          "Locale.View.exe"           "Applications\Development\Inspector\Locale.View"
 :: call :pub "Quick.Calc"            "Applications\Development\Inspector\Quick.Calc"           "Quick.Calc.exe"            "Applications\Development\Inspector"
 :: call :pub "Signal.Flow"           "Applications\Development\Inspector\Signal.Flow"          "Signal.Flow.exe"           "Applications\Development\Inspector"
-:: call :pub "Skill.Cast"            "Applications\Development\Inspector\Skill.Cast"           "Skill.Cast.exe"            "Applications\Development\Inspector"
+call :pub "Skill.Cast"            "Applications\Development\Inspector\Skill.Cast"           "Skill.Cast.exe"            "Applications\Development\Inspector"
 
 :: ── Applications / Emoji.Icon ──────────────────────────────────────
 :: call :pub "Glyph.Map"             "Applications\Emoji.Icon\Glyph.Map"                       "Glyph.Map.exe"             "Applications\Emoji.Icon\Glyph.Map"

@@ -12,6 +12,24 @@
         KeyDown="Window_KeyDown"
         Deactivated="Window_Deactivated">
 
+    <Window.Resources>
+        <Style x:Key="KeyStyle" TargetType="TextBlock">
+            <Setter Property="Foreground"  Value="#E0E0E0"/>
+            <Setter Property="FontFamily"  Value="Consolas"/>
+            <Setter Property="FontSize"    Value="12"/>
+            <Setter Property="FontWeight"  Value="SemiBold"/>
+            <Setter Property="Margin"      Value="0,4,0,4"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+        <Style x:Key="DescStyle" TargetType="TextBlock">
+            <Setter Property="Foreground"  Value="#B0B0B0"/>
+            <Setter Property="FontFamily"  Value="Segoe UI"/>
+            <Setter Property="FontSize"    Value="12"/>
+            <Setter Property="Margin"      Value="0,4,0,4"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+    </Window.Resources>
+
     <Window.Effect>
         <DropShadowEffect BlurRadius="20" ShadowDepth="4" Opacity="0.6" Color="#000000"/>
     </Window.Effect>
@@ -190,21 +208,5 @@
         </Grid>
     </Border>
 
-    <Window.Resources>
-        <Style x:Key="KeyStyle" TargetType="TextBlock">
-            <Setter Property="Foreground"  Value="#E0E0E0"/>
-            <Setter Property="FontFamily"  Value="Consolas"/>
-            <Setter Property="FontSize"    Value="12"/>
-            <Setter Property="FontWeight"  Value="SemiBold"/>
-            <Setter Property="Margin"      Value="0,4,0,4"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-        </Style>
-        <Style x:Key="DescStyle" TargetType="TextBlock">
-            <Setter Property="Foreground"  Value="#B0B0B0"/>
-            <Setter Property="FontFamily"  Value="Segoe UI"/>
-            <Setter Property="FontSize"    Value="12"/>
-            <Setter Property="Margin"      Value="0,4,0,4"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-        </Style>
-    </Window.Resources>
+
 </Window>

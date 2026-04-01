@@ -1,6 +1,6 @@
 namespace TriviaCast.Services;
 
-public class StorageService
+public class StorageService : IDisposable
 {
     private readonly string _dbPath;
     private Microsoft.Data.Sqlite.SqliteConnection? _conn;
@@ -13,10 +13,13 @@ public class StorageService
         Init();
     }
 
+    private bool _initialized = false;
+
     private void Init()
     {
         _conn = new Microsoft.Data.Sqlite.SqliteConnection($"Data Source={_dbPath}");
         _conn.Open();
+        _initialized = true;
 
         using var cmd = _conn.CreateCommand();
         cmd.CommandText = @"
@@ -40,13 +43,18 @@ public class StorageService
                 date      TEXT PRIMARY KEY,
                 score     INTEGER NOT NULL,
                 total     INTEGER NOT NULL
+            );
+            CREATE TABLE IF NOT EXISTS settings (
+                key   TEXT PRIMARY KEY,
+                value TEXT NOT NULL
             );";
         cmd.ExecuteNonQuery();
     }
 
     public void SaveScore(string mode, int score, int total, int maxStreak)
     {
-        using var cmd = _conn!.CreateCommand();
+        if (!_initialized || _conn is null) return;
+        using var cmd = _conn.CreateCommand();
         cmd.CommandText = "INSERT INTO scores (mode, score, total, streak, date) VALUES ($m, $s, $t, $k, $d)";
         cmd.Parameters.AddWithValue("$m", mode);
         cmd.Parameters.AddWithValue("$s", score);
@@ -58,7 +66,15 @@ public class StorageService
 
     public void SaveWrongAnswer(string category, string question, string correct, string chosen)
     {
-        using var cmd = _conn!.CreateCommand();
+        if (!_initialized || _conn is null) return;
+        // 오늘 날짜 기준으로 동일 질문 중복 저장 방지
+        using var check = _conn.CreateCommand();
+        check.CommandText = "SELECT COUNT(*) FROM wrong_answers WHERE question = $q AND date >= $today";
+        check.Parameters.AddWithValue("$q", question);
+        check.Parameters.AddWithValue("$today", DateTime.Now.ToString("yyyy-MM-dd"));
+        if (Convert.ToInt64(check.ExecuteScalar()!) > 0) return;
+
+        using var cmd = _conn.CreateCommand();
         cmd.CommandText = "INSERT INTO wrong_answers (category, question, correct, chosen, date) VALUES ($c, $q, $a, $ch, $d)";
         cmd.Parameters.AddWithValue("$c", category);
         cmd.Parameters.AddWithValue("$q", question);
@@ -70,7 +86,8 @@ public class StorageService
 
     public bool IsDailyChallengeCompleted(string date)
     {
-        using var cmd = _conn!.CreateCommand();
+        if (!_initialized || _conn is null) return false;
+        using var cmd = _conn.CreateCommand();
         cmd.CommandText = "SELECT COUNT(*) FROM daily_challenge WHERE date = $d";
         cmd.Parameters.AddWithValue("$d", date);
         return Convert.ToInt64(cmd.ExecuteScalar()!) > 0;
@@ -78,7 +95,8 @@ public class StorageService
 
     public void SaveDailyChallenge(string date, int score, int total)
     {
-        using var cmd = _conn!.CreateCommand();
+        if (!_initialized || _conn is null) return;
+        using var cmd = _conn.CreateCommand();
         cmd.CommandText = "INSERT OR REPLACE INTO daily_challenge (date, score, total) VALUES ($d, $s, $t)";
         cmd.Parameters.AddWithValue("$d", date);
         cmd.Parameters.AddWithValue("$s", score);
@@ -88,7 +106,8 @@ public class StorageService
 
     public (int score, int total)? GetDailyChallenge(string date)
     {
-        using var cmd = _conn!.CreateCommand();
+        if (!_initialized || _conn is null) return null;
+        using var cmd = _conn.CreateCommand();
         cmd.CommandText = "SELECT score, total FROM daily_challenge WHERE date = $d";
         cmd.Parameters.AddWithValue("$d", date);
         using var r = cmd.ExecuteReader();
@@ -99,7 +118,8 @@ public class StorageService
     public List<(string mode, int score, int total, int streak, string date)> GetTopScores(int limit = 10)
     {
         var list = new List<(string, int, int, int, string)>();
-        using var cmd = _conn!.CreateCommand();
+        if (!_initialized || _conn is null) return list;
+        using var cmd = _conn.CreateCommand();
         cmd.CommandText = "SELECT mode, score, total, streak, date FROM scores ORDER BY score DESC, date DESC LIMIT $l";
         cmd.Parameters.AddWithValue("$l", limit);
         using var r = cmd.ExecuteReader();
@@ -111,12 +131,60 @@ public class StorageService
     public List<(string category, string question, string correct, string chosen)> GetWrongAnswers(int limit = 50)
     {
         var list = new List<(string, string, string, string)>();
-        using var cmd = _conn!.CreateCommand();
+        if (!_initialized || _conn is null) return list;
+        using var cmd = _conn.CreateCommand();
         cmd.CommandText = "SELECT category, question, correct, chosen FROM wrong_answers ORDER BY date DESC LIMIT $l";
         cmd.Parameters.AddWithValue("$l", limit);
         using var r = cmd.ExecuteReader();
         while (r.Read())
             list.Add((r.GetString(0), r.GetString(1), r.GetString(2), r.GetString(3)));
+        return list;
+    }
+
+    public string? GetSetting(string key)
+    {
+        if (!_initialized || _conn is null) return null;
+        using var cmd = _conn.CreateCommand();
+        cmd.CommandText = "SELECT value FROM settings WHERE key = $k";
+        cmd.Parameters.AddWithValue("$k", key);
+        var result = cmd.ExecuteScalar();
+        return result as string;
+    }
+
+    public void SetSetting(string key, string value)
+    {
+        if (!_initialized || _conn is null) return;
+        using var cmd = _conn.CreateCommand();
+        cmd.CommandText = "INSERT OR REPLACE INTO settings (key, value) VALUES ($k, $v)";
+        cmd.Parameters.AddWithValue("$k", key);
+        cmd.Parameters.AddWithValue("$v", value);
+        cmd.ExecuteNonQuery();
+    }
+
+    public (int totalGames, int totalScore, int bestScore) GetOverallStats()
+    {
+        if (!_initialized || _conn is null) return (0, 0, 0);
+        using var cmd = _conn.CreateCommand();
+        cmd.CommandText = "SELECT COUNT(*), COALESCE(SUM(score),0), COALESCE(MAX(score),0) FROM scores";
+        using var r = cmd.ExecuteReader();
+        if (r.Read()) return (r.GetInt32(0), r.GetInt32(1), r.GetInt32(2));
+        return (0, 0, 0);
+    }
+
+    public List<(string category, int correct, int total)> GetCategoryStats()
+    {
+        var list = new List<(string, int, int)>();
+        if (!_initialized || _conn is null) return list;
+        using var cmd = _conn.CreateCommand();
+        // 오답 노트에서 카테고리별 오답 수, QuestionDatabase 전체 대비 정답률 계산
+        cmd.CommandText = @"
+            SELECT category, COUNT(*) as wrong
+            FROM wrong_answers
+            GROUP BY category
+            ORDER BY wrong DESC";
+        using var r = cmd.ExecuteReader();
+        while (r.Read())
+            list.Add((r.GetString(0), 0, r.GetInt32(1)));
         return list;
     }
 

@@ -8,6 +8,11 @@ public partial class MainWindow : Window
 
     private readonly StorageService _storage = new();
 
+    private const int NormalModeCount = 20;
+    private const int CategoryModeCount = 10;
+    private const int DailyModeCount = 10;
+    private const int QuizTimerSeconds = 15;
+
     // 게임 상태
     private List<Question> _questions = [];
     private int _currentIndex = 0;
@@ -15,7 +20,7 @@ public partial class MainWindow : Window
     private int _correctCount = 0;
     private int _streak = 0;
     private int _maxStreak = 0;
-    private int _timerSeconds = 15;
+    private int _timerSeconds = QuizTimerSeconds;
     private DispatcherTimer? _timer;
     private string _currentMode = "normal";
     private string? _lastCategory = null;
@@ -25,10 +30,15 @@ public partial class MainWindow : Window
     // 진행바 너비 캐시
     private double _progressBarMaxWidth = 0;
 
+    // 피드백 딜레이 (ms): 정답=800~2000, 오답=1200~3000
+    private int _feedbackDelayCorrect = 1400;
+    private int _feedbackDelayWrong = 2200;
+
     public MainWindow()
     {
         InitializeComponent();
         Loaded += Window_Loaded;
+        Closing += (_, _) => { _timer?.Stop(); _storage.Dispose(); };
     }
 
     private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -37,6 +47,7 @@ public partial class MainWindow : Window
         int v = 1; DwmSetWindowAttribute(hwnd, 20, ref v, sizeof(int));
 
         RefreshMenuState();
+        LoadSettings();
         SizeChanged += (_, _) => _progressBarMaxWidth = 0;
     }
 
@@ -55,7 +66,7 @@ public partial class MainWindow : Window
     }
 
     private void NormalModeCard_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        => StartGame("normal", null, 20);
+        => StartGame("normal", null, NormalModeCount);
 
     private void CategoryModeCard_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
         => ShowCategoryScreen();
@@ -73,8 +84,8 @@ public partial class MainWindow : Window
 
         var rng = new Random(int.Parse(today.Replace("-", "")));
         var allQ = QuestionDatabase.All.ToList();
-        var dailyQ = allQ.OrderBy(_ => rng.Next()).Take(10).ToList();
-        StartGame("daily", null, 10, dailyQ);
+        var dailyQ = allQ.OrderBy(_ => rng.Next()).Take(DailyModeCount).ToList();
+        StartGame("daily", null, DailyModeCount, dailyQ);
     }
 
     private void WrongReviewBtn_Click(object sender, RoutedEventArgs e) => ShowWrongScreen();
@@ -117,7 +128,7 @@ public partial class MainWindow : Window
             string capturedKey = key;
             btn.MouseEnter += (_, _) => btn.Background = (SolidColorBrush)FindResource("Surface2Brush");
             btn.MouseLeave += (_, _) => btn.Background = (SolidColorBrush)FindResource("SurfaceBrush");
-            btn.MouseLeftButtonUp += (_, _) => StartGame("category", capturedKey, 10);
+            btn.MouseLeftButtonUp += (_, _) => StartGame("category", capturedKey, CategoryModeCount);
 
             CategoryPanel.Children.Add(btn);
         }
@@ -194,7 +205,7 @@ public partial class MainWindow : Window
         QuestionText.Text = q.Text;
         ScoreText.Text = $"점수: {_score}";
         StreakText.Text = _streak >= 3 ? $"🔥 {_streak}연속!" : "";
-        TimerText.Text = "15";
+        TimerText.Text = QuizTimerSeconds.ToString();
         TimerText.Foreground = (SolidColorBrush)FindResource("GoldBrush");
 
         // 진행바
@@ -218,7 +229,7 @@ public partial class MainWindow : Window
 
         // 타이머 시작
         _timer?.Stop();
-        _timerSeconds = 15;
+        _timerSeconds = QuizTimerSeconds;
         _timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
         _timer.Tick += Timer_Tick;
         _timer.Start();
@@ -371,7 +382,7 @@ public partial class MainWindow : Window
         FeedbackExplanation.Text = q.Explanation;
         FeedbackOverlay.Visibility = Visibility.Visible;
 
-        var delay = correct ? 1400 : 2200;
+        var delay = correct ? _feedbackDelayCorrect : _feedbackDelayWrong;
         Task.Delay(delay).ContinueWith(_ => Dispatcher.Invoke(() =>
         {
             FeedbackOverlay.Visibility = Visibility.Collapsed;
@@ -411,6 +422,9 @@ public partial class MainWindow : Window
         ResultScore.Text = _score.ToString();
         ResultAccuracy.Text = $"{accuracy:0}%";
         ResultStreak.Text = _maxStreak.ToString();
+
+        // 데일리 모드: 다시 하기 버튼을 메인 메뉴로 변경
+        PlayAgainBtn.Content = _currentMode == "daily" ? "🏠 메인 메뉴" : "🔄 다시 하기";
 
         // 오답 목록
         WrongAnswerList.Children.Clear();
@@ -547,13 +561,45 @@ public partial class MainWindow : Window
             }
         }
 
+        WrongRetryBtn.IsEnabled = wrongs.Count > 0;
         Show(WrongScreen);
+    }
+
+    private void WrongRetryBtn_Click(object sender, RoutedEventArgs e)
+    {
+        var wrongs = _storage.GetWrongAnswers(50);
+        // 오답 노트의 질문 텍스트로 QuestionDatabase에서 전체 Question 객체 매칭
+        var allQ = QuestionDatabase.All;
+        var retryList = wrongs
+            .Select(w => allQ.FirstOrDefault(q => q.Text == w.question))
+            .OfType<Question>()
+            .DistinctBy(q => q.Text)
+            .OrderBy(_ => Random.Shared.Next())
+            .Take(20)
+            .ToList();
+
+        if (retryList.Count == 0) return;
+        StartGame("normal", null, retryList.Count, retryList);
     }
 
     // ─── 점수 기록 화면 ────────────────────────────────────────────────────────
 
     private void ShowScoreScreen()
     {
+        // 전체 통계 요약
+        var (totalGames, totalScore, bestScore) = _storage.GetOverallStats();
+        StatsPanel.Children.Clear();
+        void AddStat(string label, string value)
+        {
+            var sp = new StackPanel { Margin = new Thickness(16, 0, 16, 0), HorizontalAlignment = System.Windows.HorizontalAlignment.Center };
+            sp.Children.Add(new TextBlock { Text = value, FontSize = 18, FontWeight = FontWeights.Bold, Foreground = (SolidColorBrush)FindResource("AccentBrush"), HorizontalAlignment = System.Windows.HorizontalAlignment.Center });
+            sp.Children.Add(new TextBlock { Text = label, FontSize = 11, Foreground = (SolidColorBrush)FindResource("TextSecondary"), HorizontalAlignment = System.Windows.HorizontalAlignment.Center });
+            StatsPanel.Children.Add(sp);
+        }
+        AddStat("총 게임", totalGames.ToString());
+        AddStat("최고 점수", bestScore.ToString());
+        AddStat("누적 점수", totalScore.ToString());
+
         ScoreList.Children.Clear();
         var scores = _storage.GetTopScores(20);
         if (scores.Count == 0)
@@ -655,12 +701,86 @@ public partial class MainWindow : Window
     }
 
     private void PlayAgainBtn_Click(object sender, RoutedEventArgs e)
-        => StartGame(_currentMode, _lastCategory, _questions.Count);
+    {
+        if (_currentMode == "daily")
+        {
+            RefreshMenuState();
+            Show(MenuScreen);
+            return;
+        }
+        StartGame(_currentMode, _lastCategory, _questions.Count);
+    }
 
     private void MainMenuBtn_Click(object sender, RoutedEventArgs e)
     {
         RefreshMenuState();
         Show(MenuScreen);
+    }
+
+    // ─── 설정 로드/저장 ───────────────────────────────────────────────────────
+
+    private void LoadSettings()
+    {
+        if (int.TryParse(_storage.GetSetting("feedback_correct_ms"), out int c)) _feedbackDelayCorrect = c;
+        if (int.TryParse(_storage.GetSetting("feedback_wrong_ms"), out int w)) _feedbackDelayWrong = w;
+    }
+
+    private void HelpBtn_Click(object sender, RoutedEventArgs e)
+    {
+        var msg =
+            "🎯 Trivia.Cast 사용법\n\n" +
+            "[ 게임 모드 ]\n" +
+            "  📚 일반 모드   — 랜덤 카테고리 20문제\n" +
+            "  🎯 카테고리    — 원하는 주제 10문제\n" +
+            "  🌟 데일리 챌린지 — 매일 새 10문제 (하루 1회)\n\n" +
+            "[ 단축키 ]\n" +
+            "  1 · 2 · 3 · 4  또는  A · B · C · D  — 답 선택\n\n" +
+            "[ 점수 계산 ]\n" +
+            "  기본 100점 · 3연속 +20점 보너스 · 5연속 +50점 보너스\n\n" +
+            "[ 기타 ]\n" +
+            "  📋 오답 노트  — 틀린 문제 복습 및 재시험\n" +
+            "  🏆 점수 기록  — 상위 20게임 기록 확인\n" +
+            "  ⚙ 설정       — 피드백 딜레이 조정";
+        MessageBox.Show(msg, "도움말", MessageBoxButton.OK, MessageBoxImage.None);
+    }
+
+    private void SettingsBtn_Click(object sender, RoutedEventArgs e)
+    {
+        var dlg = new SettingsDialog(_feedbackDelayCorrect, _feedbackDelayWrong);
+        dlg.Owner = this;
+        if (dlg.ShowDialog() == true)
+        {
+            _feedbackDelayCorrect = dlg.CorrectDelayMs;
+            _feedbackDelayWrong = dlg.WrongDelayMs;
+            _storage.SetSetting("feedback_correct_ms", _feedbackDelayCorrect.ToString());
+            _storage.SetSetting("feedback_wrong_ms", _feedbackDelayWrong.ToString());
+        }
+    }
+
+    // ─── 키보드 단축키 ────────────────────────────────────────────────────────
+
+    private void Window_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+    {
+        if (QuizScreen.Visibility != Visibility.Visible || _answerGiven) return;
+
+        int index = e.Key switch
+        {
+            System.Windows.Input.Key.D1 or System.Windows.Input.Key.NumPad1 or System.Windows.Input.Key.A => 0,
+            System.Windows.Input.Key.D2 or System.Windows.Input.Key.NumPad2 or System.Windows.Input.Key.B => 1,
+            System.Windows.Input.Key.D3 or System.Windows.Input.Key.NumPad3 or System.Windows.Input.Key.C => 2,
+            System.Windows.Input.Key.D4 or System.Windows.Input.Key.NumPad4 or System.Windows.Input.Key.D => 3,
+            _ => -1,
+        };
+
+        if (index >= 0 && index < AnswerGrid.Children.Count)
+        {
+            var border = (Border)AnswerGrid.Children[index];
+            if (border.Child is System.Windows.Controls.Grid g)
+            {
+                var text = g.Children.OfType<TextBlock>().Skip(1).FirstOrDefault()?.Text ?? "";
+                OnAnswerSelected(text, _questions[_currentIndex], border);
+            }
+        }
     }
 
     // ─── 헬퍼 ─────────────────────────────────────────────────────────────────

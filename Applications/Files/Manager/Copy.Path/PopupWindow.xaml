@@ -67,7 +67,7 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Column="0">
-                    <TextBox x:Name="PathBox" Height="36"
+                    <TextBox x:Name="PathBox" Height="45"
                              TextChanged="PathBox_TextChanged"
                              KeyDown="PathBox_KeyDown"/>
                     <TextBlock x:Name="Placeholder"
@@ -79,7 +79,7 @@
                 </Grid>
                 <!-- 복수 선택 복사 버튼 (탐색기에서 여러 파일 선택 시 활성화) -->
                 <Button x:Name="MultiCopyBtn" Grid.Column="1"
-                        Height="36" Padding="10,0" Margin="6,0,0,0"
+                        Height="45" Padding="10,0" Margin="6,0,0,0"
                         Content="복수 복사" FontSize="11" Cursor="Hand"
                         Visibility="Collapsed" Click="MultiCopyBtn_Click"
                         Background="#1E2840" Foreground="{StaticResource AccentBrush}"

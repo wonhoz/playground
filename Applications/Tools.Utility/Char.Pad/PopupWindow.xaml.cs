@@ -1,3 +1,4 @@
+using System.Windows.Input;
 using System.Windows.Threading;
 
 namespace CharPad;
@@ -48,21 +49,31 @@ public partial class PopupWindow : System.Windows.Window
     {
         _targetHwnd = targetHwnd;
 
-        // 마우스 커서 근처, 화면 경계 보정
         var pt = System.Windows.Forms.Cursor.Position;
         var screen = System.Windows.Forms.Screen.FromPoint(pt);
         var wa = screen.WorkingArea;
 
-        double dpi = PresentationSource.FromVisual(this)?.CompositionTarget?.TransformToDevice.M11 ?? 1.0;
+        // DPI 스케일 획득: window 표시 전이면 PresentationSource가 null → Graphics 폴백
+        double dpiScale;
+        if (PresentationSource.FromVisual(this) is { } src)
+            dpiScale = src.CompositionTarget.TransformToDevice.M11;
+        else
+        {
+            using var g = System.Drawing.Graphics.FromHwnd(IntPtr.Zero);
+            dpiScale = g.DpiX / 96.0;
+        }
 
-        double wx = pt.X + 10;
-        double wy = pt.Y + 10;
+        // 물리 픽셀 → DIP 변환 후 경계 보정 (Left/Top/Width/Height 모두 DIP 단위)
+        double wxDip = (pt.X + 10) / dpiScale;
+        double wyDip = (pt.Y + 10) / dpiScale;
+        double rightDip  = wa.Right  / dpiScale;
+        double bottomDip = wa.Bottom / dpiScale;
 
-        if (wx + Width  > wa.Right)  wx = wa.Right  - Width  - 10;
-        if (wy + Height > wa.Bottom) wy = wa.Bottom - Height - 10;
+        if (wxDip + Width  > rightDip)  wxDip = rightDip  - Width  - 10;
+        if (wyDip + Height > bottomDip) wyDip = bottomDip - Height - 10;
 
-        Left = wx;
-        Top  = wy;
+        Left = wxDip;
+        Top  = wyDip;
 
         if (!IsLoaded || !IsVisible)
         {
@@ -75,6 +86,7 @@ public partial class PopupWindow : System.Windows.Window
 
         Dispatcher.BeginInvoke(() =>
         {
+            HelpOverlay.Visibility = Visibility.Collapsed;
             if (_initialized) RefreshGrid();
             SearchBox.Clear();
             SearchBox.Focus();
@@ -114,7 +126,6 @@ public partial class PopupWindow : System.Windows.Window
     {
         _activeTab = tabId;
 
-        // 탭 버튼 활성화 스타일
         foreach (WpfButton b in TabPanel.Children)
         {
             bool active = (string)b.Tag == tabId;
@@ -159,15 +170,21 @@ public partial class PopupWindow : System.Windows.Window
         var list = entries.ToList();
         StatusText.Text += $" ({list.Count}개)";
 
+        // 결과 없음 안내
+        EmptyText.Visibility = list.Count == 0 ? Visibility.Visible : Visibility.Collapsed;
+
+        // favorites를 한 번만 조회해서 HashSet으로 변환 (N+1 DB 쿼리 방지)
+        var favSet = _storage.GetFavorites().ToHashSet();
+
         CharGrid.Children.Clear();
         foreach (var entry in list)
-            CharGrid.Children.Add(MakeCharButton(entry));
+            CharGrid.Children.Add(MakeCharButton(entry, favSet));
     }
 
     // ── 문자 버튼 생성 ──────────────────────────────────────────────────
-    private UIElement MakeCharButton(CharEntry entry)
+    private UIElement MakeCharButton(CharEntry entry, HashSet<string> favSet)
     {
-        bool isFav = _storage.IsFavorite(entry.Char);
+        bool isFav = favSet.Contains(entry.Char);
 
         var grid = new Grid { Width = 48, Height = 48, Margin = new Thickness(2) };
 
@@ -177,6 +194,8 @@ public partial class PopupWindow : System.Windows.Window
             CornerRadius  = new CornerRadius(8),
             Cursor        = System.Windows.Input.Cursors.Hand,
             ToolTip       = $"{entry.Char}  {entry.Name}",
+            Focusable     = true,
+            Tag           = entry,
         };
 
         var tb = new TextBlock
@@ -205,12 +224,24 @@ public partial class PopupWindow : System.Windows.Window
         grid.Children.Add(border);
         grid.Children.Add(star);
 
-        // 호버
+        // 호버 / 포커스 시각 피드백
         border.MouseEnter += (_, _) => border.Background = (SolidColorBrush)FindResource("CharHover");
-        border.MouseLeave += (_, _) => border.Background = (SolidColorBrush)FindResource("TabInactive");
+        border.MouseLeave += (_, _) =>
+        {
+            if (!border.IsKeyboardFocused)
+                border.Background = (SolidColorBrush)FindResource("TabInactive");
+        };
+        border.GotKeyboardFocus  += (_, _) => border.Background = (SolidColorBrush)FindResource("CharHover");
+        border.LostKeyboardFocus += (_, _) => border.Background = (SolidColorBrush)FindResource("TabInactive");
 
-        // 좌클릭: 문자 삽입
-        border.MouseLeftButtonUp += (_, _) => InsertChar(entry);
+        // 좌클릭: 삽입 / Shift+클릭: 복사만
+        border.MouseLeftButtonUp += (_, _) =>
+        {
+            if (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift))
+                CopyCharOnly(entry);
+            else
+                InsertChar(entry);
+        };
 
         // 우클릭: 즐겨찾기 토글
         border.MouseRightButtonUp += (_, ev) =>
@@ -219,7 +250,78 @@ public partial class PopupWindow : System.Windows.Window
             ToggleFavorite(entry, star);
         };
 
+        // 키보드 탐색
+        border.KeyDown += CharButton_KeyDown;
+
         return grid;
+    }
+
+    // ── 키보드 탐색 (그리드 내) ──────────────────────────────────────────
+    private void CharButton_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+    {
+        if (sender is not Border border) return;
+        int idx = GetBorderIndex(border);
+        if (idx < 0) return;
+
+        switch (e.Key)
+        {
+            case Key.Enter:
+                if (border.Tag is CharEntry entry) InsertChar(entry);
+                e.Handled = true;
+                break;
+            case Key.Left:
+                FocusCharAt(idx - 1);
+                e.Handled = true;
+                break;
+            case Key.Right:
+                FocusCharAt(idx + 1);
+                e.Handled = true;
+                break;
+            case Key.Up:
+                int up = idx - GetItemsPerRow();
+                if (up < 0) SearchBox.Focus();
+                else FocusCharAt(up);
+                e.Handled = true;
+                break;
+            case Key.Down:
+                FocusCharAt(idx + GetItemsPerRow());
+                e.Handled = true;
+                break;
+            case Key.Escape:
+                SearchBox.Focus();
+                e.Handled = true;
+                break;
+        }
+    }
+
+    private int GetBorderIndex(Border border)
+    {
+        for (int i = 0; i < CharGrid.Children.Count; i++)
+        {
+            if (CharGrid.Children[i] is Grid g && g.Children.Count > 0 && g.Children[0] == border)
+                return i;
+        }
+        return -1;
+    }
+
+    private void FocusCharAt(int idx)
+    {
+        if (idx < 0 || idx >= CharGrid.Children.Count) return;
+        if (CharGrid.Children[idx] is Grid g && g.Children.Count > 0 && g.Children[0] is Border b)
+            b.Focus();
+    }
+
+    private void FocusFirstCharButton()
+    {
+        if (CharGrid.Children.Count > 0 &&
+            CharGrid.Children[0] is Grid g && g.Children.Count > 0 && g.Children[0] is Border b)
+            b.Focus();
+    }
+
+    private int GetItemsPerRow()
+    {
+        double w = CharGrid.ActualWidth > 0 ? CharGrid.ActualWidth : 546; // 570 - 2×12 margin
+        return Math.Max(1, (int)(w / 52));
     }
 
     // ── 문자 삽입 ────────────────────────────────────────────────────────
@@ -240,6 +342,14 @@ public partial class PopupWindow : System.Windows.Window
         }
     }
 
+    // ── 복사 전용 (Shift+클릭) ──────────────────────────────────────────
+    private void CopyCharOnly(CharEntry entry)
+    {
+        System.Windows.Clipboard.SetText(entry.Char);
+        _storage.AddRecent(entry.Char);
+        StatusText.Text = $"복사됨: {entry.Char}  {entry.Name}";
+    }
+
     // ── 즐겨찾기 토글 ────────────────────────────────────────────────────
     private void ToggleFavorite(CharEntry entry, TextBlock star)
     {
@@ -254,7 +364,6 @@ public partial class PopupWindow : System.Windows.Window
             star.Visibility = Visibility.Visible;
         }
 
-        // 즐겨찾기 탭 보고 있는 경우 새로고침
         if (_activeTab == "favorite") RefreshGrid();
     }
 
@@ -269,7 +378,7 @@ public partial class PopupWindow : System.Windows.Window
 
     private void SearchBox_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
     {
-        if (e.Key == System.Windows.Input.Key.Escape)
+        if (e.Key == Key.Escape)
         {
             if (!string.IsNullOrEmpty(SearchBox.Text))
                 SearchBox.Clear();
@@ -277,29 +386,29 @@ public partial class PopupWindow : System.Windows.Window
                 Hide();
             e.Handled = true;
         }
-        else if (e.Key == System.Windows.Input.Key.Enter)
+        else if (e.Key == Key.Enter)
         {
-            // 첫 번째 문자 선택
-            if (CharGrid.Children.Count > 0)
+            // 첫 번째 문자 삽입
+            if (CharGrid.Children.Count > 0 &&
+                CharGrid.Children[0] is Grid g && g.Children[0] is Border b &&
+                b.Tag is CharEntry entry)
             {
-                var first = CharGrid.Children[0];
-                if (first is Grid g && g.Children[0] is Border b)
-                {
-                    var entry = (b.ToolTip as string)?.Split("  ")[0];
-                    if (entry != null)
-                    {
-                        var found = CharDatabase.All.FirstOrDefault(c => c.Char == entry);
-                        if (found != null) InsertChar(found);
-                    }
-                }
+                InsertChar(entry);
             }
+            e.Handled = true;
+        }
+        else if (e.Key == Key.Down ||
+                 (e.Key == Key.Tab && !e.KeyboardDevice.Modifiers.HasFlag(ModifierKeys.Shift)))
+        {
+            // 검색창 → 그리드 첫 번째 문자로 포커스 이동
+            FocusFirstCharButton();
             e.Handled = true;
         }
     }
 
     private void Window_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
     {
-        if (e.Key == System.Windows.Input.Key.Escape)
+        if (e.Key == Key.Escape)
         {
             Hide();
             e.Handled = true;
@@ -308,14 +417,22 @@ public partial class PopupWindow : System.Windows.Window
 
     private void CloseBtn_Click(object sender, RoutedEventArgs e) => Hide();
 
-    private void Window_Deactivated(object sender, EventArgs e)
+    public void ShowHelpOverlay()
+        => Dispatcher.BeginInvoke(() => HelpOverlay.Visibility = Visibility.Visible,
+                                  DispatcherPriority.Loaded);
+
+    private void HelpBtn_Click(object sender, RoutedEventArgs e)
     {
-        // 포커스 잃으면 숨김
-        if (IsVisible) Hide();
+        HelpOverlay.Visibility = HelpOverlay.Visibility == Visibility.Visible
+            ? Visibility.Collapsed
+            : Visibility.Visible;
     }
 
-    protected override void OnClosed(EventArgs e)
+    private void HelpOverlay_MouseDown(object sender, MouseButtonEventArgs e)
+        => HelpOverlay.Visibility = Visibility.Collapsed;
+
+    private void Window_Deactivated(object sender, EventArgs e)
     {
-        base.OnClosed(e);
+        if (IsVisible) Hide();
     }
 }

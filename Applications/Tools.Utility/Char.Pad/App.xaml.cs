@@ -80,6 +80,7 @@ public partial class App : System.Windows.Application
             Renderer        = new DarkMenuRenderer()
         };
         menu.Items.Add("⌨  Char.Pad 열기",  null, (_, _) => ShowPopup());
+        menu.Items.Add("?  사용 방법",       null, (_, _) => ShowHelp());
         menu.Items.Add(new ToolStripSeparator());
         menu.Items.Add("✕  종료",            null, (_, _) => Shutdown());
 
@@ -129,6 +130,18 @@ public partial class App : System.Windows.Application
 
     internal void PasteToWindow(IntPtr targetHwnd) => InputHelper.PasteToWindow(targetHwnd);
 
+    private void ShowHelp()
+    {
+        _prevHwnd = GetForegroundWindow();
+        if (_popup == null || !_popup.IsLoaded)
+        {
+            _popup = new PopupWindow(_storage);
+            _popup.Closed += (_, _) => _popup = null;
+        }
+        _popup.ShowAt(_prevHwnd);
+        _popup.ShowHelpOverlay();
+    }
+
     // ── 종료 ─────────────────────────────────────────────────────────────
     protected override void OnExit(ExitEventArgs e)
     {
@@ -145,9 +158,9 @@ public partial class App : System.Windows.Application
 internal class DarkMenuRenderer : ToolStripRenderer
 {
     private static readonly System.Drawing.Color BgColor    = ColorTranslator.FromHtml("#1A1A2E");
-    private static readonly System.Drawing.Color HoverColor = ColorTranslator.FromHtml("#2E2E55");
+    private static readonly System.Drawing.Color HoverColor = ColorTranslator.FromHtml("#1A3550");
     private static readonly System.Drawing.Color TextColor  = ColorTranslator.FromHtml("#E0E0E0");
-    private static readonly System.Drawing.Color SepColor   = ColorTranslator.FromHtml("#333355");
+    private static readonly System.Drawing.Color SepColor   = ColorTranslator.FromHtml("#1A3A55");
 
     protected override void OnRenderToolStripBackground(ToolStripRenderEventArgs e)
         => e.Graphics.Clear(BgColor);

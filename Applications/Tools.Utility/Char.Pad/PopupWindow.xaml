@@ -34,6 +34,7 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="⌨ Char.Pad"
                            Foreground="{StaticResource AccentBrush}"
@@ -41,6 +42,12 @@
                            FontSize="14" FontWeight="SemiBold"
                            VerticalAlignment="Center"/>
                 <Button Grid.Column="1" Width="28" Height="28"
+                        Content="?" FontSize="12" FontWeight="SemiBold"
+                        Foreground="{StaticResource TextSecondary}"
+                        Background="Transparent"
+                        Click="HelpBtn_Click"
+                        ToolTip="단축키 안내"/>
+                <Button Grid.Column="2" Width="28" Height="28"
                         Content="✕" FontSize="11"
                         Foreground="{StaticResource TextSecondary}"
                         Background="Transparent"
@@ -74,13 +81,88 @@
             </ScrollViewer>
 
             <!-- ── 문자 그리드 ── -->
-            <ScrollViewer Grid.Row="3" Margin="12,8,12,0"
-                          VerticalScrollBarVisibility="Auto"
-                          HorizontalScrollBarVisibility="Disabled">
-                <WrapPanel x:Name="CharGrid"
-                           Orientation="Horizontal"
-                           ItemWidth="52" ItemHeight="52"/>
-            </ScrollViewer>
+            <Grid Grid.Row="3" Margin="12,8,12,0">
+                <ScrollViewer VerticalScrollBarVisibility="Auto"
+                              HorizontalScrollBarVisibility="Disabled">
+                    <WrapPanel x:Name="CharGrid"
+                               Orientation="Horizontal"
+                               ItemWidth="52" ItemHeight="52"/>
+                </ScrollViewer>
+
+                <!-- 결과 없음 안내 -->
+                <TextBlock x:Name="EmptyText"
+                           Text="검색 결과가 없습니다"
+                           Foreground="{StaticResource TextSecondary}"
+                           FontFamily="Segoe UI" FontSize="13"
+                           HorizontalAlignment="Center" VerticalAlignment="Center"
+                           Visibility="Collapsed"/>
+
+                <!-- 도움말 오버레이 (? 버튼 클릭 시 표시) -->
+                <Border x:Name="HelpOverlay"
+                        Background="#F01A1A2E"
+                        CornerRadius="8"
+                        Visibility="Collapsed"
+                        Panel.ZIndex="10"
+                        MouseDown="HelpOverlay_MouseDown">
+                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center"
+                                Margin="24">
+                        <TextBlock Text="⌨ 단축키 안내"
+                                   FontFamily="Segoe UI" FontSize="14" FontWeight="SemiBold"
+                                   Foreground="{StaticResource AccentBrush}"
+                                   HorizontalAlignment="Center" Margin="0,0,0,16"/>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="16"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <!-- 단축키 행들 -->
+                            <TextBlock Grid.Row="0" Grid.Column="0" Text="Win+Shift+;"     Style="{StaticResource KeyStyle}"/>
+                            <TextBlock Grid.Row="0" Grid.Column="2" Text="팝업 열기/닫기"  Style="{StaticResource DescStyle}"/>
+
+                            <TextBlock Grid.Row="1" Grid.Column="0" Text="Esc"              Style="{StaticResource KeyStyle}"/>
+                            <TextBlock Grid.Row="1" Grid.Column="2" Text="검색어 지우기 / 팝업 닫기" Style="{StaticResource DescStyle}"/>
+
+                            <TextBlock Grid.Row="2" Grid.Column="0" Text="Enter"            Style="{StaticResource KeyStyle}"/>
+                            <TextBlock Grid.Row="2" Grid.Column="2" Text="첫 번째 문자 삽입" Style="{StaticResource DescStyle}"/>
+
+                            <TextBlock Grid.Row="3" Grid.Column="0" Text="↓ / Tab"          Style="{StaticResource KeyStyle}"/>
+                            <TextBlock Grid.Row="3" Grid.Column="2" Text="검색창 → 문자 그리드 이동" Style="{StaticResource DescStyle}"/>
+
+                            <TextBlock Grid.Row="4" Grid.Column="0" Text="← → ↑ ↓"         Style="{StaticResource KeyStyle}"/>
+                            <TextBlock Grid.Row="4" Grid.Column="2" Text="그리드 내 문자 이동" Style="{StaticResource DescStyle}"/>
+
+                            <TextBlock Grid.Row="5" Grid.Column="0" Text="좌클릭"            Style="{StaticResource KeyStyle}"/>
+                            <TextBlock Grid.Row="5" Grid.Column="2" Text="문자 삽입 (클립보드 → 이전 창에 붙여넣기)" Style="{StaticResource DescStyle}"/>
+
+                            <TextBlock Grid.Row="6" Grid.Column="0" Text="Shift+클릭"        Style="{StaticResource KeyStyle}"/>
+                            <TextBlock Grid.Row="6" Grid.Column="2" Text="클립보드 복사만 (붙여넣기 없음)" Style="{StaticResource DescStyle}"/>
+
+                            <TextBlock Grid.Row="7" Grid.Column="0" Text="우클릭"            Style="{StaticResource KeyStyle}"/>
+                            <TextBlock Grid.Row="7" Grid.Column="2" Text="즐겨찾기 추가/제거" Style="{StaticResource DescStyle}"/>
+
+                            <TextBlock Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="3"
+                                       Text="아무 곳이나 클릭하면 닫힙니다"
+                                       Foreground="{StaticResource TextSecondary}"
+                                       FontFamily="Segoe UI" FontSize="11"
+                                       HorizontalAlignment="Center" Margin="0,16,0,0"/>
+                        </Grid>
+                    </StackPanel>
+                </Border>
+            </Grid>
 
             <!-- ── 상태바 ── -->
             <Border Grid.Row="4"
@@ -107,4 +189,22 @@
             </Border>
         </Grid>
     </Border>
+
+    <Window.Resources>
+        <Style x:Key="KeyStyle" TargetType="TextBlock">
+            <Setter Property="Foreground"  Value="#E0E0E0"/>
+            <Setter Property="FontFamily"  Value="Consolas"/>
+            <Setter Property="FontSize"    Value="12"/>
+            <Setter Property="FontWeight"  Value="SemiBold"/>
+            <Setter Property="Margin"      Value="0,4,0,4"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+        <Style x:Key="DescStyle" TargetType="TextBlock">
+            <Setter Property="Foreground"  Value="#B0B0B0"/>
+            <Setter Property="FontFamily"  Value="Segoe UI"/>
+            <Setter Property="FontSize"    Value="12"/>
+            <Setter Property="Margin"      Value="0,4,0,4"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+    </Window.Resources>
 </Window>

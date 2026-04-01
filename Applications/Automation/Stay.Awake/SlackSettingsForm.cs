@@ -32,7 +32,7 @@ namespace StayAwake
         public SlackSettingsForm(int startHour, int startMinute, int endHour, int endMinute)
         {
             Text = "Slack 자동 상태 시간 설정";
-            Size = new Size(320, 230);
+            Size = new Size(320, 255);
             FormBorderStyle = FormBorderStyle.FixedDialog;
             MaximizeBox = false;
             MinimizeBox = false;
@@ -77,7 +77,7 @@ namespace StayAwake
             var lblHint = new Label
             {
                 Text = "※ Slack 앱이 실행 중이어야 합니다",
-                Location = new Point(20, 155),
+                Location = new Point(20, 152),
                 AutoSize = true,
                 ForeColor = Color.FromArgb(120, 120, 120),
                 Font = new Font("Segoe UI", 8f)
@@ -88,7 +88,7 @@ namespace StayAwake
             {
                 Text = "확인",
                 Size = new Size(80, 30),
-                Location = new Point(130, 155),
+                Location = new Point(130, 178),
                 BackColor = AccentColor,
                 ForeColor = Color.White,
                 FlatStyle = FlatStyle.Flat,
@@ -101,7 +101,7 @@ namespace StayAwake
             {
                 Text = "취소",
                 Size = new Size(80, 30),
-                Location = new Point(218, 155),
+                Location = new Point(218, 178),
                 BackColor = BtnCancelColor,
                 ForeColor = TextColor,
                 FlatStyle = FlatStyle.Flat,

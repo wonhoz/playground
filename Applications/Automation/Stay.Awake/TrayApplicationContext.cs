@@ -1,4 +1,5 @@
 using System.ComponentModel;
+using Microsoft.Win32;
 
 namespace StayAwake
 {
@@ -23,6 +24,12 @@ namespace StayAwake
         private ToolStripMenuItem _statusItem = null!;
         private ToolStripMenuItem _skipIfActiveItem = null!;
         private ToolStripMenuItem _slackAutoStatusItem = null!;
+        private ToolStripMenuItem _preventSleepItem = null!;
+        private ToolStripMenuItem _activityTypeItem = null!;
+        private ToolStripMenuItem _startupItem = null!;
+
+        private const string StartupRegistryKey = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Run";
+        private const string StartupValueName = "StayAwake";
 
         private bool _isRunning = false;
         private int _intervalMinutes = 3; // 기본 3분 (Slack 10분 타임아웃의 1/3)
@@ -165,17 +172,17 @@ namespace StayAwake
             menu.Items.Add(_distanceItem);
 
             // 활동 유형
-            var activityTypeItem = new ToolStripMenuItem("활동 유형");
-            activityTypeItem.DropDownItems.Add(new ToolStripMenuItem("마우스 이동", null, (s, e) => SetActivityType(ActivityType.MouseMove)) { Checked = _simulator.ActivityType == ActivityType.MouseMove });
-            activityTypeItem.DropDownItems.Add(new ToolStripMenuItem("마우스 + 키보드", null, (s, e) => SetActivityType(ActivityType.MouseAndKeyboard)) { Checked = _simulator.ActivityType == ActivityType.MouseAndKeyboard });
-            menu.Items.Add(activityTypeItem);
+            _activityTypeItem = new ToolStripMenuItem("활동 유형");
+            _activityTypeItem.DropDownItems.Add(new ToolStripMenuItem("마우스 이동", null, (s, e) => SetActivityType(ActivityType.MouseMove)) { Checked = _simulator.ActivityType == ActivityType.MouseMove });
+            _activityTypeItem.DropDownItems.Add(new ToolStripMenuItem("마우스 + 키보드", null, (s, e) => SetActivityType(ActivityType.MouseAndKeyboard)) { Checked = _simulator.ActivityType == ActivityType.MouseAndKeyboard });
+            menu.Items.Add(_activityTypeItem);
 
             // 디스플레이 절전 방지
-            var preventSleepItem = new ToolStripMenuItem("디스플레이 절전 방지", null, (s, e) => TogglePreventSleep())
+            _preventSleepItem = new ToolStripMenuItem("디스플레이 절전 방지", null, (s, e) => TogglePreventSleep())
             {
                 Checked = _simulator.PreventDisplaySleep
             };
-            menu.Items.Add(preventSleepItem);
+            menu.Items.Add(_preventSleepItem);
 
             // 사용 중 건너뛰기
             _skipIfActiveItem = new ToolStripMenuItem("사용 중이면 건너뛰기", null, (s, e) => ToggleSkipIfActive())
@@ -207,8 +214,20 @@ namespace StayAwake
 
             menu.Items.Add(new ToolStripSeparator());
 
+            // Windows 시작 시 자동 실행
+            _startupItem = new ToolStripMenuItem("Windows 시작 시 자동 실행", null, (s, e) => ToggleStartup())
+            {
+                Checked = IsStartupEnabled()
+            };
+            menu.Items.Add(_startupItem);
+
+            menu.Items.Add(new ToolStripSeparator());
+
             // 오늘 통계
             menu.Items.Add(new ToolStripMenuItem("오늘 통계", null, (s, e) => ShowStats()));
+
+            // 사용법 & 단축키
+            menu.Items.Add(new ToolStripMenuItem("사용법 & 단축키", null, (s, e) => ShowHelp()));
 
             // 정보
             menu.Items.Add(new ToolStripMenuItem("정보", null, (s, e) => ShowAbout()));
@@ -301,16 +320,10 @@ namespace StayAwake
         {
             _simulator.ActivityType = type;
 
-            var activityItem = _contextMenu.Items.OfType<ToolStripMenuItem>()
-                .FirstOrDefault(x => x.Text == "활동 유형");
-
-            if (activityItem != null)
+            foreach (ToolStripMenuItem item in _activityTypeItem.DropDownItems)
             {
-                foreach (ToolStripMenuItem item in activityItem.DropDownItems)
-                {
-                    item.Checked = (item.Text == "마우스 이동" && type == ActivityType.MouseMove) ||
-                                   (item.Text == "마우스 + 키보드" && type == ActivityType.MouseAndKeyboard);
-                }
+                item.Checked = (item.Text == "마우스 이동" && type == ActivityType.MouseMove) ||
+                               (item.Text == "마우스 + 키보드" && type == ActivityType.MouseAndKeyboard);
             }
 
             SaveSettings();
@@ -319,14 +332,7 @@ namespace StayAwake
         private void TogglePreventSleep()
         {
             _simulator.PreventDisplaySleep = !_simulator.PreventDisplaySleep;
-
-            var preventSleepItem = _contextMenu.Items.OfType<ToolStripMenuItem>()
-                .FirstOrDefault(x => x.Text == "디스플레이 절전 방지");
-
-            if (preventSleepItem != null)
-            {
-                preventSleepItem.Checked = _simulator.PreventDisplaySleep;
-            }
+            _preventSleepItem.Checked = _simulator.PreventDisplaySleep;
 
             if (!_simulator.PreventDisplaySleep)
             {
@@ -354,18 +360,30 @@ namespace StayAwake
             _settings.Save();
         }
 
+        /// <summary>
+        /// 자정 경계 체크 — 날짜가 바뀐 경우 전날 통계를 히스토리에 저장하고 초기화
+        /// </summary>
+        private void CheckMidnightReset()
+        {
+            if (DateTime.Today == _statsDate) return;
+
+            // 전날 최종 통계를 히스토리에 저장
+            SaveDailyStats();
+            StatsHistory.Append(_dailyStats);
+
+            // 새 날짜로 리셋
+            _todayActiveTime = TimeSpan.Zero;
+            _sessionRunStart = DateTime.Now;
+            _dailySimCount = 0;
+            _dailySkipCount = 0;
+            _statsDate = DateTime.Today;
+            _dailyStats = new DailyStats();
+        }
+
         private async void OnTimerTick(object? sender, EventArgs e)
         {
-            // 자정이 넘어가면 일일 통계 초기화 (새 날 기준으로 리셋)
-            if (DateTime.Today != _statsDate)
-            {
-                _todayActiveTime = TimeSpan.Zero;
-                _sessionRunStart = DateTime.Now;
-                _dailySimCount = 0;
-                _dailySkipCount = 0;
-                _statsDate = DateTime.Today;
-                _dailyStats = new DailyStats();
-            }
+            // 자정이 넘어가면 일일 통계 초기화 (히스토리 저장 후 리셋)
+            CheckMidnightReset();
 
             // UI 차단 방지: SimulateActivity()는 Thread.Sleep(110ms) 포함 → 배경 스레드에서 실행
             bool simulated = await Task.Run(() => _simulator.SimulateActivity());
@@ -444,29 +462,53 @@ namespace StayAwake
 
         private void ShowStats()
         {
+            // 자정이 넘어간 경우 히스토리 저장 후 리셋 (ShowStats 직접 호출 시에도 최신 데이터 보장)
+            CheckMidnightReset();
+
             var activeTime = _isRunning
                 ? _todayActiveTime + (DateTime.Now - _sessionRunStart)
                 : _todayActiveTime;
 
             var total = _dailySimCount + _dailySkipCount;
             var skipRate = total > 0 ? (double)_dailySkipCount / total * 100 : 0;
-            var todayElapsed = DateTime.Now - DateTime.Today; // 오늘 0시부터 지금까지
+            var todayElapsed = DateTime.Now - DateTime.Today;
             var activeRate = todayElapsed.TotalSeconds > 0
                 ? activeTime.TotalSeconds / todayElapsed.TotalSeconds * 100
                 : 0;
 
-            var message = $@"StayAwake 오늘의 통계 ({_statsDate:yyyy-MM-dd})
+            var dayNames = new[] { "일", "월", "화", "수", "목", "금", "토" };
+            var todayDayName = dayNames[(int)DateTime.Today.DayOfWeek];
 
-[활동 시뮬레이션]
-• 시뮬레이션 실행: {_dailySimCount}회
-• 사용자 활동으로 스킵: {_dailySkipCount}회
-• 스킵율: {skipRate:F1}% (직접 사용 중이던 비율)
+            var sb = new System.Text.StringBuilder();
+            sb.AppendLine($"[오늘의 활동]  {_statsDate:yyyy-MM-dd} ({todayDayName})");
+            sb.AppendLine($"• 시뮬레이션 실행: {_dailySimCount}회");
+            sb.AppendLine($"• 사용자 활동으로 스킵: {_dailySkipCount}회");
+            sb.AppendLine($"• 스킵율: {skipRate:F1}%  (직접 사용 중이던 비율)");
+            sb.AppendLine($"• 누적 활성 시간: {(int)activeTime.TotalHours:D2}:{activeTime:mm\\:ss}");
+            sb.AppendLine($"• 활성 비율: {activeRate:F1}%  ({(int)activeTime.TotalHours:D2}:{activeTime:mm\\:ss} / {(int)todayElapsed.TotalHours:D2}:{todayElapsed:mm\\:ss})");
 
-[활성 시간]
-• 오늘 누적 활성 시간: {(int)activeTime.TotalHours:D2}:{activeTime:mm\:ss}
-• 오늘 활성 비율: {activeRate:F1}% ({(int)activeTime.TotalHours:D2}:{activeTime:mm\:ss} / {(int)todayElapsed.TotalHours:D2}:{todayElapsed:mm\:ss})";
+            // 과거 히스토리 (오늘 제외 최대 6일)
+            var history = StatsHistory.Load(6)
+                .Where(x => x.Date.Date != DateTime.Today)
+                .Take(6)
+                .ToList();
 
-            DarkInfoDialog.Show("오늘의 통계", message, 570, 460);
+            if (history.Count > 0)
+            {
+                sb.AppendLine();
+                sb.AppendLine("[최근 N일 히스토리]");
+                sb.AppendLine($"{"날짜",-16} {"시뮬",5} {"스킵",5} {"활성시간",10}");
+                sb.AppendLine(new string('─', 42));
+                foreach (var day in history)
+                {
+                    var d = day.Date;
+                    var dName = dayNames[(int)d.DayOfWeek];
+                    var at = day.ActiveTime;
+                    sb.AppendLine($"{d:yyyy-MM-dd} ({dName})  {day.SimCount,4}회  {day.SkipCount,4}회  {(int)at.TotalHours:D2}:{at:mm\\:ss}");
+                }
+            }
+
+            DarkInfoDialog.Show("통계", sb.ToString(), 570, history.Count > 0 ? 520 : 380);
         }
 
         private void ShowAbout()
@@ -588,6 +630,73 @@ Slack 자리 비움 상태 방지 도구
             _trayIcon.ShowBalloonTip(1500, "StayAwake",
                 result.Success ? "Slack 상태를 '자리비움'으로 변경했습니다." : $"실패: {result.ErrorMessage}",
                 result.Success ? ToolTipIcon.Info : ToolTipIcon.Warning);
+        }
+
+        private static bool IsStartupEnabled()
+        {
+            try
+            {
+                using var key = Registry.CurrentUser.OpenSubKey(StartupRegistryKey, false);
+                return key?.GetValue(StartupValueName) != null;
+            }
+            catch { return false; }
+        }
+
+        private void ToggleStartup()
+        {
+            try
+            {
+                bool enabling = !IsStartupEnabled();
+                using var key = Registry.CurrentUser.OpenSubKey(StartupRegistryKey, true)!;
+                if (enabling)
+                    key.SetValue(StartupValueName, $"\"{Application.ExecutablePath}\"");
+                else
+                    key.DeleteValue(StartupValueName, false);
+
+                _startupItem.Checked = enabling;
+                _trayIcon.ShowBalloonTip(1500, "StayAwake",
+                    enabling ? "Windows 시작 시 자동 실행 등록됨" : "자동 실행 해제됨",
+                    ToolTipIcon.Info);
+            }
+            catch { }
+        }
+
+        private void ShowHelp()
+        {
+            var message = @"[트레이 아이콘 조작]
+• 더블클릭          시작 / 정지 토글
+• 우클릭            컨텍스트 메뉴 열기
+• 호버 (마우스 올리기)  다음 활동까지 카운트다운 툴팁 표시
+
+[메뉴 기능]
+• 시작 / 정지        활동 시뮬레이션 토글
+• 지금 활동 실행     즉시 1회 마우스 이동 (타이머 리셋 포함)
+• 간격              활동 시뮬레이션 주기 설정 (1/2/3/5/7분)
+• 이동 거리          마우스 이동 거리 설정 (10~200px)
+• 활동 유형          마우스 이동만 / 마우스+키보드 선택
+• 디스플레이 절전 방지  화면 꺼짐 방지 (SetThreadExecutionState)
+• 사용 중이면 건너뛰기  직접 마우스·키보드 사용 중이면 시뮬레이션 스킵
+
+[Slack 자동 상태 변경]
+• Slack 앱이 실행 중인 상태에서만 동작
+• 출근 시간(기본 08:55): /active 커맨드 전송 → 활성으로 변경
+• 퇴근 시간(기본 18:55): /away 커맨드 전송 → 자리비움으로 변경
+• 클립보드 방식(SendKeys) — 한글 IME 환경에서도 정상 동작
+• 재시작 후에도 당일 중복 전송 방지
+
+[Windows 자동 시작]
+• 체크 시 레지스트리 Run 키에 등록 → PC 부팅 시 자동 실행
+• 해제 시 레지스트리에서 제거
+
+[툴팁 정보 (호버 시)]
+  StayAwake - 다음: X분 XX초 후 | 활성시간 / 시뮬횟수
+
+[권장 설정]
+• 간격: 3~5분  (Slack 10분 타임아웃의 절반 이내)
+• 이동 거리: 30~50px  (눈에 띄지 않는 범위)
+• 사용 중이면 건너뛰기: 켜짐 권장";
+
+            DarkInfoDialog.Show("사용법 & 단축키", message, 680, 820);
         }
 
         private void ExitApplication()

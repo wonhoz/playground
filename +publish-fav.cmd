@@ -73,8 +73,8 @@ call :pub "Skill.Cast"            "Applications\Development\Inspector\Skill.Cast
 call :pub "Img.Cast"              "Applications\Emoji.Icon\Img.Cast"                        "Img.Cast.exe"              "Applications\Emoji.Icon"
 
 :: ── Applications / Files / Inspector ──────────────────────────────
-call :pub "Disk.Lens"             "Applications\Files\Inspector\Disk.Lens"                  "Disk.Lens.exe"             "Applications\Files\Inspector\Disk.Lens"
-call :pub "Hash.Check"            "Applications\Files\Inspector\Hash.Check"                 "Hash.Check.exe"            "Applications\Files\Inspector\Hash.Check"
+:: call :pub "Disk.Lens"             "Applications\Files\Inspector\Disk.Lens"                  "Disk.Lens.exe"             "Applications\Files\Inspector\Disk.Lens"
+:: call :pub "Hash.Check"            "Applications\Files\Inspector\Hash.Check"                 "Hash.Check.exe"            "Applications\Files\Inspector\Hash.Check"
 :: call :pub "Manga.View"            "Applications\Files\Inspector\Manga.View"                 "Manga.View.exe"            "Applications\Files\Inspector\Manga.View"
 :: call :pub "PDF.Forge"             "Applications\Files\Inspector\PDF.Forge"                  "Pdf.Forge.exe"             "Applications\Files\Inspector\Pdf.Forge"
 :: call :pub "Zip.Peek"              "Applications\Files\Inspector\Zip.Peek"                   "Zip.Peek.exe"              "Applications\Files\Inspector\Zip.Peek"
@@ -174,14 +174,11 @@ call :pub "Geo.Quiz"              "Games\Casual\Geo.Quiz"                       
 :: ── Games / Puzzle ─────────────────────────────────────────────────
 :: call :pub "Bug.Hunt"              "Games\Puzzle\Bug.Hunt"                                   "Bug.Hunt.exe"              "Games\Puzzle\Bug.Hunt"
 :: call :pub "Cipher.Quest"          "Games\Puzzle\Cipher.Quest"                               "Cipher.Quest.exe"          "Games\Puzzle\Cipher.Quest"
-:: call :pub "Circuit.Break"         "Games\Puzzle\Circuit.Break"                              "Circuit.Break.exe"         "Games\Puzzle"
 call :pub "Crossword.Cast"        "Games\Puzzle\Crossword.Cast"                             "Crossword.Cast.exe"        "Games\Puzzle\Crossword.Cast"
 :: call :pub "Escape.Key"            "Games\Puzzle\Escape.Key"                                 "Escape.Key.exe"            "Games\Puzzle\Escape.Key"
 call :pub "Gravity.Flip"          "Games\Puzzle\Gravity.Flip"                               "Gravity.Flip.exe"          "Games\Puzzle"
 call :pub "Hue.Flow"              "Games\Puzzle\Hue.Flow"                                   "Hue.Flow.exe"              "Games\Puzzle"
 call :pub "Orbit.Craft"           "Games\Puzzle\Orbit.Craft"                                "Orbit.Craft.exe"           "Games\Puzzle\Orbit.Craft"
-call :pub "Orbit.Raid"            "Games\Puzzle\Orbit.Raid"                                 "Orbit.Raid.exe"            "Games\Puzzle\Orbit.Raid"
-call :pub "Persp.Shift"           "Games\Puzzle\Persp.Shift"                                "Persp.Shift.exe"           "Games\Puzzle\Persp.Shift"
 
 :: ── Games / Racing ─────────────────────────────────────────────────
 :: call :pub "Nitro.Drift"           "Games\Racing\Nitro.Drift"                                "Nitro.Drift.exe"           "Games\Racing"

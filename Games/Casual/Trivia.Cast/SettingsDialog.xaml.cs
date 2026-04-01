@@ -6,8 +6,10 @@ public partial class SettingsDialog : Window
 
     public int CorrectDelayMs { get; private set; }
     public int WrongDelayMs { get; private set; }
+    public bool BgmEnabled { get; private set; }
+    public bool SfxEnabled { get; private set; }
 
-    public SettingsDialog(int correctMs, int wrongMs)
+    public SettingsDialog(int correctMs, int wrongMs, bool bgmEnabled, bool sfxEnabled)
     {
         InitializeComponent();
         Loaded += (_, _) =>
@@ -15,6 +17,8 @@ public partial class SettingsDialog : Window
             var hwnd = new System.Windows.Interop.WindowInteropHelper(this).Handle;
             int v = 1; DwmSetWindowAttribute(hwnd, 20, ref v, sizeof(int));
 
+            BgmCheck.IsChecked = bgmEnabled;
+            SfxCheck.IsChecked = sfxEnabled;
             CorrectSlider.Value = correctMs;
             WrongSlider.Value = wrongMs;
             UpdateHints();
@@ -34,6 +38,8 @@ public partial class SettingsDialog : Window
     {
         CorrectDelayMs = (int)CorrectSlider.Value;
         WrongDelayMs   = (int)WrongSlider.Value;
+        BgmEnabled     = BgmCheck.IsChecked == true;
+        SfxEnabled     = SfxCheck.IsChecked == true;
         DialogResult = true;
     }
 

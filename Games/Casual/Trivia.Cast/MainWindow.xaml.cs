@@ -7,6 +7,7 @@ public partial class MainWindow : Window
     [DllImport("dwmapi.dll")] static extern int DwmSetWindowAttribute(IntPtr hwnd, int attr, ref int val, int size);
 
     private readonly StorageService _storage = new();
+    private readonly SoundService _sound = new();
 
     private const int NormalModeCount = 20;
     private const int CategoryModeCount = 10;
@@ -38,7 +39,7 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
         Loaded += Window_Loaded;
-        Closing += (_, _) => { _timer?.Stop(); _storage.Dispose(); };
+        Closing += (_, _) => { _timer?.Stop(); _sound.Dispose(); _storage.Dispose(); };
     }
 
     private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -48,6 +49,7 @@ public partial class MainWindow : Window
 
         RefreshMenuState();
         LoadSettings();
+        _sound.StartBgm();
         SizeChanged += (_, _) => _progressBarMaxWidth = 0;
     }
 
@@ -66,13 +68,14 @@ public partial class MainWindow : Window
     }
 
     private void NormalModeCard_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        => StartGame("normal", null, NormalModeCount);
+    { _sound.PlayClick(); StartGame("normal", null, NormalModeCount); }
 
     private void CategoryModeCard_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        => ShowCategoryScreen();
+    { _sound.PlayClick(); ShowCategoryScreen(); }
 
     private void DailyModeCard_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
     {
+        _sound.PlayClick();
         var today = DateTime.Now.ToString("yyyy-MM-dd");
         if (_storage.IsDailyChallengeCompleted(today))
         {
@@ -300,7 +303,10 @@ public partial class MainWindow : Window
         TimerText.Text = _timerSeconds.ToString();
 
         if (_timerSeconds <= 5)
+        {
             TimerText.Foreground = (SolidColorBrush)FindResource("RedBrush");
+            _sound.PlayTimerTick();
+        }
         else if (_timerSeconds <= 10)
             TimerText.Foreground = new SolidColorBrush(Color.FromRgb(0xFF, 0xA5, 0x00));
 
@@ -327,6 +333,9 @@ public partial class MainWindow : Window
             int bonus = _streak >= 5 ? 150 : _streak >= 3 ? 120 : 100;
             _score += bonus;
 
+            if (_streak >= 3) _sound.PlayStreak();
+            else _sound.PlayCorrect();
+
             // 정답 버튼 초록
             if (clickedBorder != null)
                 clickedBorder.Background = new SolidColorBrush(Color.FromRgb(0x15, 0x55, 0x30));
@@ -336,6 +345,7 @@ public partial class MainWindow : Window
         else
         {
             _streak = 0;
+            _sound.PlayWrong();
             _wrongAnswers.Add((q, chosen));
             _storage.SaveWrongAnswer(q.Category, q.Text, q.Correct, chosen);
 
@@ -352,6 +362,7 @@ public partial class MainWindow : Window
     {
         _answerGiven = true;
         _streak = 0;
+        _sound.PlayTimeout();
         _wrongAnswers.Add((q, "(시간 초과)"));
         _storage.SaveWrongAnswer(q.Category, q.Text, q.Correct, "(시간 초과)");
         HighlightCorrectButton(q.Correct);
@@ -397,6 +408,7 @@ public partial class MainWindow : Window
     {
         _timer?.Stop();
         FeedbackOverlay.Visibility = Visibility.Collapsed;
+        _sound.PlayGameComplete();
 
         _storage.SaveScore(_currentMode, _score, _questions.Count, _maxStreak);
 
@@ -723,6 +735,8 @@ public partial class MainWindow : Window
     {
         if (int.TryParse(_storage.GetSetting("feedback_correct_ms"), out int c)) _feedbackDelayCorrect = c;
         if (int.TryParse(_storage.GetSetting("feedback_wrong_ms"), out int w)) _feedbackDelayWrong = w;
+        _sound.BgmEnabled = _storage.GetSetting("bgm_enabled") != "0";
+        _sound.SfxEnabled = _storage.GetSetting("sfx_enabled") != "0";
     }
 
     private void HelpBtn_Click(object sender, RoutedEventArgs e)
@@ -746,7 +760,7 @@ public partial class MainWindow : Window
 
     private void SettingsBtn_Click(object sender, RoutedEventArgs e)
     {
-        var dlg = new SettingsDialog(_feedbackDelayCorrect, _feedbackDelayWrong);
+        var dlg = new SettingsDialog(_feedbackDelayCorrect, _feedbackDelayWrong, _sound.BgmEnabled, _sound.SfxEnabled);
         dlg.Owner = this;
         if (dlg.ShowDialog() == true)
         {
@@ -754,6 +768,15 @@ public partial class MainWindow : Window
             _feedbackDelayWrong = dlg.WrongDelayMs;
             _storage.SetSetting("feedback_correct_ms", _feedbackDelayCorrect.ToString());
             _storage.SetSetting("feedback_wrong_ms", _feedbackDelayWrong.ToString());
+
+            bool bgmWas = _sound.BgmEnabled;
+            _sound.BgmEnabled = dlg.BgmEnabled;
+            _sound.SfxEnabled = dlg.SfxEnabled;
+            _storage.SetSetting("bgm_enabled", dlg.BgmEnabled ? "1" : "0");
+            _storage.SetSetting("sfx_enabled", dlg.SfxEnabled ? "1" : "0");
+
+            if (dlg.BgmEnabled && !bgmWas) _sound.StartBgm();
+            else if (!dlg.BgmEnabled && bgmWas) _sound.StopBgm();
         }
     }
 

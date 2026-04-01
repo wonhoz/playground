@@ -149,10 +149,9 @@ public class ArchiveService
     private static void SortNodes(IList<ArchiveNode> nodes)
     {
         var sorted = nodes.OrderByDescending(n => n.IsDirectory).ThenBy(n => n.Name).ToList();
-        for (int i = 0; i < sorted.Count; i++)
-        {
-            if (i < nodes.Count) ((ObservableCollection<ArchiveNode>)nodes)[i] = sorted[i];
-        }
+        nodes.Clear();
+        foreach (var node in sorted)
+            nodes.Add(node);
         foreach (var node in nodes)
             if (node.Children.Count > 0) SortNodes(node.Children);
     }

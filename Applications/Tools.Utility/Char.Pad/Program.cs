@@ -63,6 +63,8 @@ internal static class Program
     {
         // toast 알림 아이콘 등록 — UI 생성 전 최우선 실행
         RegisterAumid();
-        new App().Run();
+        var app = new App();
+        app.InitializeComponent();
+        app.Run();
     }
 }

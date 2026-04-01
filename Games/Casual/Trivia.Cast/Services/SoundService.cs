@@ -1,53 +1,88 @@
+using System.Media;
+using System.Windows.Media;
+using System.Windows.Threading;
+
 namespace TriviaCast.Services;
 
 public enum WaveForm { Sine, Square, Triangle }
 
+/// <summary>
+/// BGM: System.Windows.Media.MediaPlayer (Media Foundation — 별도 오디오 스택)
+/// SFX: System.Media.SoundPlayer (WinMM)
+/// 두 스택이 독립적이므로 동시 재생 가능
+/// </summary>
 public class SoundService : IDisposable
 {
-    private CancellationTokenSource? _bgmCts;
+    private readonly Dispatcher _dispatcher;
+    private MediaPlayer? _bgmPlayer;
+    private string? _bgmFilePath;
     private bool _disposed;
 
     public bool BgmEnabled { get; set; } = true;
     public bool SfxEnabled { get; set; } = true;
 
-    // ─── BGM 제어 ──────────────────────────────────────────────────────────
+    public SoundService(Dispatcher dispatcher)
+    {
+        _dispatcher = dispatcher;
+    }
+
+    // ─── BGM (MediaPlayer) ─────────────────────────────────────────────────
 
     public void StartBgm()
     {
         StopBgm();
         if (!BgmEnabled) return;
-        _bgmCts = new CancellationTokenSource();
-        var token = _bgmCts.Token;
-        var data = _bgmCache ??= BuildBgm();
-        Task.Run(() =>
+        _dispatcher.InvokeAsync(() =>
         {
-            while (!token.IsCancellationRequested)
-            {
-                using var ms = new MemoryStream(data);
-                using var player = new SoundPlayer(ms);
-                try { player.PlaySync(); } catch { break; }
-            }
-        }, token);
+            _bgmFilePath ??= WriteBgmFile();
+            _bgmPlayer = new MediaPlayer { Volume = 0.28 };
+            _bgmPlayer.MediaEnded += OnBgmEnded;
+            _bgmPlayer.Open(new Uri(_bgmFilePath));
+            _bgmPlayer.Play();
+        });
     }
 
     public void StopBgm()
     {
-        _bgmCts?.Cancel();
-        _bgmCts?.Dispose();
-        _bgmCts = null;
+        _dispatcher.InvokeAsync(() =>
+        {
+            if (_bgmPlayer == null) return;
+            _bgmPlayer.MediaEnded -= OnBgmEnded;
+            _bgmPlayer.Stop();
+            _bgmPlayer.Close();
+            _bgmPlayer = null;
+        });
     }
 
-    // ─── 효과음 ────────────────────────────────────────────────────────────
+    private void OnBgmEnded(object? sender, EventArgs e)
+    {
+        if (_bgmPlayer == null || !BgmEnabled) return;
+        _bgmPlayer.Position = TimeSpan.Zero;
+        _bgmPlayer.Play();
+    }
 
-    public void PlayCorrect()      => PlaySfx(ref _correct,   BuildCorrect);
-    public void PlayWrong()        => PlaySfx(ref _wrong,     BuildWrong);
-    public void PlayTimeout()      => PlaySfx(ref _timeout,   BuildTimeout);
-    public void PlayClick()        => PlaySfx(ref _click,     BuildClick);
-    public void PlayStreak()       => PlaySfx(ref _streak,    BuildStreak);
-    public void PlayGameComplete() => PlaySfx(ref _complete,  BuildGameComplete);
-    public void PlayTimerTick()    => PlaySfx(ref _tick,      BuildTimerTick);
+    private string WriteBgmFile()
+    {
+        var dir = Path.Combine(
+            Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
+            "Playground", "Trivia.Cast");
+        Directory.CreateDirectory(dir);
+        var path = Path.Combine(dir, "bgm.wav");
+        File.WriteAllBytes(path, BuildBgm());
+        return path;
+    }
 
-    private byte[]? _bgmCache, _correct, _wrong, _timeout, _click, _streak, _complete, _tick;
+    // ─── SFX (SoundPlayer / WinMM) ────────────────────────────────────────
+
+    public void PlayCorrect()      => PlaySfx(ref _correct,  BuildCorrect);
+    public void PlayWrong()        => PlaySfx(ref _wrong,    BuildWrong);
+    public void PlayTimeout()      => PlaySfx(ref _timeout,  BuildTimeout);
+    public void PlayClick()        => PlaySfx(ref _click,    BuildClick);
+    public void PlayStreak()       => PlaySfx(ref _streak,   BuildStreak);
+    public void PlayGameComplete() => PlaySfx(ref _complete, BuildGameComplete);
+    public void PlayTimerTick()    => PlaySfx(ref _tick,     BuildTimerTick);
+
+    private byte[]? _correct, _wrong, _timeout, _click, _streak, _complete, _tick;
 
     private void PlaySfx(ref byte[]? cache, Func<byte[]> builder)
     {
@@ -61,7 +96,7 @@ public class SoundService : IDisposable
         });
     }
 
-    // ─── WAV 빌더 ──────────────────────────────────────────────────────────
+    // ─── WAV 생성 ──────────────────────────────────────────────────────────
 
     private static byte[] Wav(
         (double freq, double dur, double vol)[] notes,
@@ -79,7 +114,7 @@ public class SoundService : IDisposable
             for (int i = 0; i < n && pos < total; i++, pos++)
             {
                 double t = (double)i / sr;
-                double env = i < att  ? (double)i / att :
+                double env = i < att ? (double)i / att :
                              i > n - rel ? (double)(n - i) / rel : 1.0;
                 double raw = freq <= 0 ? 0 : form switch
                 {
@@ -106,15 +141,14 @@ public class SoundService : IDisposable
         return ms.ToArray();
     }
 
-    // ─── 음표 주파수 상수 ──────────────────────────────────────────────────
+    // ─── 음표 주파수 ───────────────────────────────────────────────────────
 
-    private const double C4  = 261.63, D4  = 293.66, E4  = 329.63, F4 = 349.23;
+    private const double C4  = 261.63, D4  = 293.66, E4  = 329.63, F4  = 349.23;
     private const double G4  = 392.00, A4  = 440.00, B4  = 493.88;
-    private const double Ab4 = 415.30, Bb4 = 466.16;
-    private const double C5  = 523.25, D5  = 587.33, E5  = 659.26;
-    private const double F5  = 698.46, G5  = 783.99, A5  = 880.00;
+    private const double Ab4 = 415.30;
+    private const double C5  = 523.25, D5  = 587.33, E5  = 659.26, G5 = 783.99, A5 = 880.00;
 
-    // ─── BGM: 잔잔한 C장조 아르페지오 (약 8초 루프) ────────────────────────
+    // ─── BGM: C장조 아르페지오 멜로디 (~8초 루프) ─────────────────────────
 
     private static byte[] BuildBgm()
     {
@@ -127,43 +161,37 @@ public class SoundService : IDisposable
             (G4, b, 0.20), (B4, b, 0.20), (D5, b, 0.20), (B4, b, 0.20),
             (G4, b, 0.20), (E4, b, 0.20), (F4, b, 0.20), (G4, b, 0.20),
             (A4, b, 0.20), (C5, b, 0.20), (E5, b, 0.20), (C5, b, 0.20),
-            (A4, b, 0.20), (G4, b, 0.20), (F4, b, 0.20), (E4, b*2, 0.20),
+            (A4, b, 0.20), (G4, b, 0.20), (F4, b, 0.20), (E4, b * 2, 0.20),
         ]);
     }
 
     // ─── 효과음 빌더 ───────────────────────────────────────────────────────
 
-    // 정답: 솔→도 상승 (밝고 경쾌)
     private static byte[] BuildCorrect() => Wav([
         (G4, 0.10, 0.50), (0, 0.02, 0),
         (C5, 0.22, 0.55),
     ]);
 
-    // 오답: 도→Ab 하강 (탁한 불협화음)
     private static byte[] BuildWrong() => Wav([
         (E4, 0.10, 0.50), (0, 0.02, 0),
         (Ab4, 0.28, 0.45),
     ]);
 
-    // 시간 초과: 짧은 낮은 비프 2회
     private static byte[] BuildTimeout() => Wav([
         (D4, 0.13, 0.50), (0, 0.05, 0),
         (D4, 0.13, 0.40),
     ], form: WaveForm.Square);
 
-    // 버튼 클릭: 아주 짧은 고음 틱
     private static byte[] BuildClick() => Wav([
         (C5, 0.055, 0.28),
     ]);
 
-    // 스트릭 (3연속+): 상승 3화음
     private static byte[] BuildStreak() => Wav([
         (C5, 0.09, 0.42), (0, 0.01, 0),
         (E5, 0.09, 0.44), (0, 0.01, 0),
         (G5, 0.20, 0.48),
     ]);
 
-    // 게임 완료: 간단한 팡파레
     private static byte[] BuildGameComplete() => Wav([
         (C4, 0.10, 0.50), (0, 0.03, 0),
         (C4, 0.10, 0.50), (0, 0.03, 0),
@@ -173,7 +201,6 @@ public class SoundService : IDisposable
         (C5, 0.45, 0.58),
     ]);
 
-    // 타이머 경고 틱 (5초 이하)
     private static byte[] BuildTimerTick() => Wav([
         (A5, 0.045, 0.18),
     ]);

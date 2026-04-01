@@ -27,6 +27,7 @@ public partial class SettingsDialog : Window
 
     private void UpdateHints()
     {
+        if (!IsLoaded) return;
         CorrectHint.Text = $"{(int)CorrectSlider.Value / 1000.0:0.0}초";
         WrongHint.Text   = $"{(int)WrongSlider.Value / 1000.0:0.0}초";
     }

@@ -7,7 +7,7 @@ public partial class MainWindow : Window
     [DllImport("dwmapi.dll")] static extern int DwmSetWindowAttribute(IntPtr hwnd, int attr, ref int val, int size);
 
     private readonly StorageService _storage = new();
-    private readonly SoundService _sound = new();
+    private SoundService _sound = null!;
 
     private const int NormalModeCount = 20;
     private const int CategoryModeCount = 10;
@@ -47,6 +47,7 @@ public partial class MainWindow : Window
         var hwnd = new System.Windows.Interop.WindowInteropHelper(this).Handle;
         int v = 1; DwmSetWindowAttribute(hwnd, 20, ref v, sizeof(int));
 
+        _sound = new SoundService(Dispatcher);
         RefreshMenuState();
         LoadSettings();
         _sound.StartBgm();

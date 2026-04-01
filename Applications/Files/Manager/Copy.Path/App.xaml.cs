@@ -18,6 +18,7 @@ public partial class App : System.Windows.Application
     private PopupWindow? _popup;
     private UsageService _usage = null!;
     private HwndSource?  _hwndSource;
+    private System.Windows.Window? _hotkeyWindow;  // GC 방지 — 수집되면 HWND 파괴됨
     private System.Threading.Mutex? _mutex;
 
     protected override void OnStartup(StartupEventArgs e)
@@ -68,6 +69,7 @@ public partial class App : System.Windows.Application
             Renderer        = new DarkMenuRenderer()
         };
         menu.Items.Add("📂  Copy.Path 열기", null, (_, _) => ShowPopup());
+        menu.Items.Add("❓  사용법 / 단축키", null, (_, _) => ShowHelp());
         menu.Items.Add(new ToolStripSeparator());
         menu.Items.Add("✕  종료", null, (_, _) => Shutdown());
         _tray.ContextMenuStrip = menu;
@@ -77,8 +79,9 @@ public partial class App : System.Windows.Application
 
     private void RegisterGlobalHotkey()
     {
-        var helper = new WindowInteropHelper(new System.Windows.Window
-            { Width=0, Height=0, WindowStyle=System.Windows.WindowStyle.None, ShowInTaskbar=false, Opacity=0 });
+        _hotkeyWindow = new System.Windows.Window
+            { Width=0, Height=0, WindowStyle=System.Windows.WindowStyle.None, ShowInTaskbar=false, Opacity=0 };
+        var helper = new WindowInteropHelper(_hotkeyWindow);
         helper.EnsureHandle();
         _hwndSource = HwndSource.FromHwnd(helper.Handle);
         _hwndSource?.AddHook(WndProc);
@@ -102,6 +105,28 @@ public partial class App : System.Windows.Application
             _popup.Closed += (_, _) => _popup = null;
         }
         _popup.ShowAndActivate();
+    }
+
+    private void ShowHelp()
+    {
+        System.Windows.MessageBox.Show(
+            "Copy.Path — 파일 경로 복사 도구\n\n" +
+            "📌 단축키\n" +
+            "  Win + Shift + X   팝업 열기\n" +
+            "  Esc               팝업 닫기\n\n" +
+            "📋 사용 방법\n" +
+            "  1. 파일 탐색기에서 파일/폴더를 선택한 뒤\n" +
+            "     Win+Shift+X 를 누르면 경로가 자동으로 로드됩니다.\n" +
+            "  2. 원하는 포맷 행을 클릭하면 클립보드에 복사됩니다.\n" +
+            "  3. 팝업 창에 파일/폴더를 직접 드래그해도 됩니다.\n" +
+            "  4. 하단 '최근 경로' 항목을 클릭하면 이전 경로를 재사용합니다.\n\n" +
+            "💡 지원 포맷\n" +
+            "  전체 경로 (백슬래시 / 슬래시) · C# 리터럴 · 파일명 ·\n" +
+            "  확장자 없는 파일명 · 상위 폴더 · file:/// URL ·\n" +
+            "  Unix 스타일 · UNC 경로",
+            "Copy.Path 사용법",
+            System.Windows.MessageBoxButton.OK,
+            System.Windows.MessageBoxImage.Information);
     }
 
     protected override void OnExit(ExitEventArgs e)

@@ -6,6 +6,8 @@ public partial class PopupWindow : System.Windows.Window
 
     private readonly UsageService _usage;
     private Dictionary<string, int> _usageCounts = [];
+    private string[] _multiPaths = [];   // 탐색기 복수 선택 경로
+    private bool _closing;               // Hide 중복 방어
     private bool _initialized;
 
     public PopupWindow(UsageService usage)
@@ -19,10 +21,7 @@ public partial class PopupWindow : System.Windows.Window
         var hwnd = new WindowInteropHelper(this).Handle;
         int v = 1; DwmSetWindowAttribute(hwnd, 20, ref v, sizeof(int));
 
-        _usageCounts = _usage.GetAll();
-        PositionNearCursor();
         _initialized = true;
-        TryGetExplorerPath();
     }
 
     private void PositionNearCursor()
@@ -35,32 +34,131 @@ public partial class PopupWindow : System.Windows.Window
         Left = wx; Top = wy;
     }
 
-    internal void ShowAndActivate()
+    internal async void ShowAndActivate()
     {
-        _usageCounts = _usage.GetAll();
+        _closing = false;
+        _usageCounts = await _usage.GetAllAsync();
         PositionNearCursor();
         if (!IsVisible) Show();
         base.Activate();
-        TryGetExplorerPath();
+        await TryGetExplorerPathAsync();
+        await LoadRecentPathsAsync();
         PathBox.Focus();
         PathBox.SelectAll();
     }
 
-    private void TryGetExplorerPath()
+    private async Task TryGetExplorerPathAsync()
     {
-        var path = ExplorerHelper.GetSelectedPath()
-                ?? ExplorerHelper.GetCurrentFolderPath();
+        var result = ExplorerHelper.GetPaths();
+        _multiPaths = result.AllSelectedPaths;
+
+        // 복수 선택 버튼 표시 여부
+        if (_multiPaths.Length > 1)
+        {
+            MultiCopyBtn.Content = $"복수 복사 ({_multiPaths.Length})";
+            MultiCopyBtn.Visibility = Visibility.Visible;
+        }
+        else
+        {
+            MultiCopyBtn.Visibility = Visibility.Collapsed;
+        }
+
+        string? path = result.SelectedPath ?? result.FolderPath;
 
         if (!string.IsNullOrEmpty(path))
         {
             PathBox.Text = path;
             PathBox.SelectAll();
-            StatusText.Text = "탐색기에서 경로를 가져왔습니다";
+            StatusText.Text = result.SelectedPath != null
+                ? "탐색기에서 선택 경로를 가져왔습니다"
+                : "탐색기 현재 폴더를 가져왔습니다";
         }
         else
         {
-            StatusText.Text = "탐색기 선택 없음 — 경로를 직접 입력하세요";
+            // 탐색기 경로 없으면 클립보드 자동 읽기
+            TryLoadFromClipboard();
         }
+        await Task.CompletedTask;
+    }
+
+    private void TryLoadFromClipboard()
+    {
+        try
+        {
+            var clip = System.Windows.Clipboard.GetText().Trim().Trim('"');
+            if (!string.IsNullOrWhiteSpace(clip) &&
+                (clip.Length >= 2 && (clip[1] == ':' || clip.StartsWith(@"\\"))))
+            {
+                PathBox.Text = clip;
+                PathBox.SelectAll();
+                StatusText.Text = "클립보드 경로를 자동으로 읽었습니다";
+                return;
+            }
+        }
+        catch { }
+        StatusText.Text = "탐색기 선택 없음 — 경로를 입력하거나 파일을 드래그하세요";
+    }
+
+    private async Task LoadRecentPathsAsync()
+    {
+        var recent = await _usage.GetRecentPathsAsync();
+        if (recent.Count == 0) { RecentSection.Visibility = Visibility.Collapsed; return; }
+        RecentList.ItemsSource = recent;
+        RecentSection.Visibility = Visibility.Visible;
+    }
+
+    // ── 복수 선택 복사 ────────────────────────────────────────────────────
+    private void MultiCopyBtn_Click(object sender, RoutedEventArgs e)
+    {
+        if (_multiPaths.Length == 0) return;
+        var joined = string.Join("\r\n", _multiPaths);
+        System.Windows.Clipboard.SetText(joined);
+        StatusText.Text = $"✓ {_multiPaths.Length}개 경로 복사됨!";
+        StatusText.Foreground = (SolidColorBrush)FindResource("SuccessColor");
+        ScheduleHide();
+    }
+
+    // ── 드래그&드롭 ──────────────────────────────────────────────────────
+    private void Window_DragOver(object sender, System.Windows.DragEventArgs e)
+    {
+        e.Effects = e.Data.GetDataPresent(System.Windows.DataFormats.FileDrop)
+            ? System.Windows.DragDropEffects.Copy : System.Windows.DragDropEffects.None;
+        e.Handled = true;
+    }
+
+    private void Window_Drop(object sender, System.Windows.DragEventArgs e)
+    {
+        if (!e.Data.GetDataPresent(System.Windows.DataFormats.FileDrop)) return;
+        var files = (string[])e.Data.GetData(System.Windows.DataFormats.FileDrop);
+        if (files?.Length > 0)
+        {
+            PathBox.Text = files[0];
+            PathBox.Focus();
+            PathBox.SelectAll();
+            StatusText.Text = "드래그로 경로를 입력했습니다";
+        }
+    }
+
+    // ── 최근 경로 이벤트 ──────────────────────────────────────────────────
+    private void RecentItem_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
+    {
+        if (sender is Border b && b.DataContext is string path)
+        {
+            PathBox.Text = path;
+            PathBox.Focus();
+            PathBox.SelectAll();
+            RecentSection.Visibility = Visibility.Collapsed;
+        }
+    }
+
+    private void RecentItem_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+    {
+        if (sender is Border b) b.Background = (SolidColorBrush)FindResource("RowHover");
+    }
+
+    private void RecentItem_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+    {
+        if (sender is Border b) b.Background = System.Windows.Media.Brushes.Transparent;
     }
 
     // ── 결과 렌더링 ──────────────────────────────────────────────────────
@@ -68,19 +166,16 @@ public partial class PopupWindow : System.Windows.Window
     {
         ResultPanel.Children.Clear();
 
-        var path = rawPath.Trim().Trim('"');
+        var path  = rawPath.Trim().Trim('"');
         bool valid = !string.IsNullOrWhiteSpace(path);
 
         var results = PathFormatter.FormatAll(path);
-
-        // 사용 빈도 기준 정렬 (빈도 높은 것 상단)
-        var sorted = results.OrderByDescending(r => _usageCounts.GetValueOrDefault(r.Key, 0)).ToArray();
+        var sorted  = results.OrderByDescending(r => _usageCounts.GetValueOrDefault(r.Key, 0)).ToArray();
 
         foreach (var (label, key, value) in sorted)
             ResultPanel.Children.Add(MakeRow(label, key, value, valid));
 
-        if (!valid)
-            StatusText.Text = "경로를 입력하세요";
+        if (!valid) StatusText.Text = "경로를 입력하세요";
     }
 
     private UIElement MakeRow(string label, string key, string value, bool hasValue)
@@ -100,23 +195,23 @@ public partial class PopupWindow : System.Windows.Window
 
         var lbl = new TextBlock
         {
-            Text = label,
-            Foreground = (SolidColorBrush)FindResource("LabelColor"),
-            FontFamily = new WpfFontFamily("Segoe UI"),
-            FontSize   = 11,
+            Text              = label,
+            Foreground        = (SolidColorBrush)FindResource("LabelColor"),
+            FontFamily        = new WpfFontFamily("Segoe UI"),
+            FontSize          = 11,
             VerticalAlignment = VerticalAlignment.Center,
         };
 
         var val = new TextBlock
         {
-            Text = hasValue ? value : "—",
-            Foreground = hasValue
+            Text              = hasValue ? value : "—",
+            Foreground        = hasValue
                 ? (SolidColorBrush)FindResource("TextPrimary")
                 : (SolidColorBrush)FindResource("TextSecondary"),
-            FontFamily   = new WpfFontFamily("Consolas, Segoe UI"),
-            FontSize     = 12,
+            FontFamily        = new WpfFontFamily("Consolas, Segoe UI"),
+            FontSize          = 12,
             VerticalAlignment = VerticalAlignment.Center,
-            TextWrapping = TextWrapping.Wrap,
+            TextWrapping      = TextWrapping.Wrap,
         };
 
         Grid.SetColumn(lbl, 0);
@@ -130,17 +225,27 @@ public partial class PopupWindow : System.Windows.Window
             string copyKey = key, copyVal = value, copyLabel = label;
             border.MouseEnter += (_, _) => border.Background = (SolidColorBrush)FindResource("RowHover");
             border.MouseLeave += (_, _) => border.Background = (SolidColorBrush)FindResource("SurfaceBrush");
-            border.MouseLeftButtonUp += (_, _) =>
+            border.MouseLeftButtonUp += async (_, _) =>
             {
+                if (_closing) return;
                 System.Windows.Clipboard.SetText(copyVal);
-                _usage.Increment(copyKey);
+                await _usage.IncrementAsync(copyKey);
+                await _usage.AddRecentPathAsync(PathBox.Text.Trim().Trim('"'));
                 _usageCounts[copyKey] = _usageCounts.GetValueOrDefault(copyKey, 0) + 1;
-                StatusText.Text = $"✓ {copyLabel} 복사됨!";
-                Task.Delay(400).ContinueWith(_ => Dispatcher.Invoke(() => Hide()));
+                StatusText.Text       = $"✓ {copyLabel} 복사됨!";
+                StatusText.Foreground = (SolidColorBrush)FindResource("SuccessColor");
+                ScheduleHide();
             };
         }
 
         return border;
+    }
+
+    private void ScheduleHide()
+    {
+        if (_closing) return;
+        _closing = true;
+        Task.Delay(400).ContinueWith(_ => Dispatcher.BeginInvoke(Hide));
     }
 
     // ── 이벤트 ───────────────────────────────────────────────────────────
@@ -149,6 +254,7 @@ public partial class PopupWindow : System.Windows.Window
         if (!_initialized) return;
         Placeholder.Visibility = string.IsNullOrEmpty(PathBox.Text)
             ? Visibility.Visible : Visibility.Collapsed;
+        StatusText.Foreground = (SolidColorBrush)FindResource("TextSecondary");
         RenderResults(PathBox.Text);
     }
 

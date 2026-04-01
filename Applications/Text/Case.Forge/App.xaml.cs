@@ -7,18 +7,17 @@ public partial class App : System.Windows.Application
 {
     [DllImport("user32.dll")] static extern bool RegisterHotKey(IntPtr hWnd, int id, uint fsModifiers, uint vk);
     [DllImport("user32.dll")] static extern bool UnregisterHotKey(IntPtr hWnd, int id);
-    [DllImport("dwmapi.dll")] static extern int DwmSetWindowAttribute(IntPtr hwnd, int attr, ref int val, int size);
 
     private const int HotkeyId  = 9002;
-    private const uint MOD_WIN   = 0x0008;
-    private const uint MOD_SHIFT = 0x0004;
-    private const uint VK_C      = 0x43;
-    private const int  WM_HOTKEY = 0x0312;
+    private const int WM_HOTKEY = 0x0312;
 
-    private NotifyIcon? _tray;
-    private PopupWindow? _popup;
-    private HwndSource? _hwndSource;
+    private NotifyIcon?          _tray;
+    private PopupWindow?         _popup;
+    private HwndSource?          _hwndSource;
     private System.Threading.Mutex? _mutex;
+    private System.Windows.Window?  _hotkeyWindow; // GC 방지용 레퍼런스
+    private SettingsWindow?      _settingsWindow;
+    private HelpWindow?          _helpWindow;
 
     protected override void OnStartup(StartupEventArgs e)
     {
@@ -26,8 +25,9 @@ public partial class App : System.Windows.Application
         _mutex = new System.Threading.Mutex(true, "CaseForge_SingleInstance", out bool isNew);
         if (!isNew) { Shutdown(); return; }
 
-        BuildTray();
-        RegisterGlobalHotkey();
+        var settings = SettingsService.Load();
+        BuildTray(settings);
+        RegisterGlobalHotkey(settings);
     }
 
     // pack 리소스로 내장된 app.ico를 System.Drawing.Icon으로 변환
@@ -49,12 +49,12 @@ public partial class App : System.Windows.Application
         return SystemIcons.Application;
     }
 
-    private void BuildTray()
+    private void BuildTray(AppSettings settings)
     {
         _tray = new NotifyIcon
         {
             Icon    = LoadTrayIcon(),
-            Text    = "Case.Forge — Win+Shift+C",
+            Text    = $"Case.Forge — {SettingsService.FormatHotkey(settings.HotkeyModifiers, settings.HotkeyVK)}",
             Visible = true
         };
 
@@ -68,20 +68,44 @@ public partial class App : System.Windows.Application
         };
         menu.Items.Add("Cc  Case.Forge 열기", null, (_, _) => ShowPopup());
         menu.Items.Add(new ToolStripSeparator());
-        menu.Items.Add("✕  종료", null, (_, _) => Shutdown());
+        menu.Items.Add("⚙  설정",   null, (_, _) => ShowSettings());
+        menu.Items.Add("?  도움말", null, (_, _) => ShowHelp());
+        menu.Items.Add(new ToolStripSeparator());
+        menu.Items.Add("✕  종료",   null, (_, _) => Shutdown());
         _tray.ContextMenuStrip = menu;
         _tray.MouseClick += (_, ev) => { if (ev.Button == MouseButtons.Left) ShowPopup(); };
-        _tray.ShowBalloonTip(2000, "Case.Forge", "Win+Shift+C 로 케이스 변환 팝업", ToolTipIcon.Info);
+        _tray.ShowBalloonTip(2000, "Case.Forge",
+            $"{SettingsService.FormatHotkey(settings.HotkeyModifiers, settings.HotkeyVK)} 로 케이스 변환 팝업",
+            ToolTipIcon.Info);
     }
 
-    private void RegisterGlobalHotkey()
+    private void RegisterGlobalHotkey(AppSettings settings)
     {
-        var helper = new WindowInteropHelper(new System.Windows.Window
-            { Width=0, Height=0, WindowStyle=System.Windows.WindowStyle.None, ShowInTaskbar=false, Opacity=0 });
+        _hotkeyWindow = new System.Windows.Window
+            { Width=0, Height=0, WindowStyle=System.Windows.WindowStyle.None, ShowInTaskbar=false, Opacity=0 };
+        var helper = new WindowInteropHelper(_hotkeyWindow);
         helper.EnsureHandle();
         _hwndSource = HwndSource.FromHwnd(helper.Handle);
         _hwndSource?.AddHook(WndProc);
-        RegisterHotKey(helper.Handle, HotkeyId, MOD_WIN | MOD_SHIFT, VK_C);
+
+        bool ok = RegisterHotKey(helper.Handle, HotkeyId, settings.HotkeyModifiers, settings.HotkeyVK);
+        if (!ok)
+            _tray?.ShowBalloonTip(3000, "Case.Forge",
+                $"단축키 등록 실패 — 설정에서 다른 키를 지정하세요", ToolTipIcon.Warning);
+    }
+
+    // 설정 저장 후 단축키 재등록 (SettingsWindow에서 호출)
+    internal void ReapplyHotkey(AppSettings settings)
+    {
+        if (_hwndSource == null) return;
+        UnregisterHotKey(_hwndSource.Handle, HotkeyId);
+        bool ok = RegisterHotKey(_hwndSource.Handle, HotkeyId, settings.HotkeyModifiers, settings.HotkeyVK);
+        if (_tray != null)
+        {
+            _tray.Text = $"Case.Forge — {SettingsService.FormatHotkey(settings.HotkeyModifiers, settings.HotkeyVK)}";
+            if (!ok)
+                _tray.ShowBalloonTip(3000, "Case.Forge", "단축키 등록 실패 — 다른 앱과 충돌합니다", ToolTipIcon.Warning);
+        }
     }
 
     private IntPtr WndProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
@@ -101,6 +125,20 @@ public partial class App : System.Windows.Application
             _popup.Closed += (_, _) => _popup = null;
         }
         _popup.ShowAndActivate();
+    }
+
+    private void ShowSettings()
+    {
+        if (_settingsWindow?.IsLoaded == true) { _settingsWindow.Activate(); return; }
+        _settingsWindow = new SettingsWindow();
+        _settingsWindow.Show();
+    }
+
+    private void ShowHelp()
+    {
+        if (_helpWindow?.IsLoaded == true) { _helpWindow.Activate(); return; }
+        _helpWindow = new HelpWindow();
+        _helpWindow.Show();
     }
 
     protected override void OnExit(ExitEventArgs e)

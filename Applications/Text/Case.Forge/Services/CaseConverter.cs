@@ -53,6 +53,9 @@ public static class CaseConverter
     public static string ToLowerCase(string input)
         => string.Join(" ", ParseWords(input).Select(w => w.ToLower()));
 
+    public static string ToPathCase(string input)
+        => string.Join("/", ParseWords(input).Select(w => w.ToLower()));
+
     // ── 전체 변환 목록 ───────────────────────────────────────────────────
     public static (string Label, string Key, string Value)[] ConvertAll(string input)
     {
@@ -74,6 +77,7 @@ public static class CaseConverter
         ("Title Case",          "title",   ToTitleCase),
         ("UPPER CASE",          "upper",   ToUpperCase),
         ("lower case",          "lower",   ToLowerCase),
+        ("path/case",           "path",    ToPathCase),
     ];
 
     private static string Capitalize(string w)

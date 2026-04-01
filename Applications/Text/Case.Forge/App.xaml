@@ -11,6 +11,45 @@
         <SolidColorBrush x:Key="TextSecondary" Color="#7A9882"/>
         <SolidColorBrush x:Key="RowHover"      Color="#1E3426"/>
         <SolidColorBrush x:Key="LabelColor"    Color="#00C070"/>
+        <SolidColorBrush x:Key="CopyFeedback"  Color="#FFD600"/>
+
+        <Style TargetType="CheckBox">
+            <Setter Property="Foreground" Value="{StaticResource TextPrimary}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="CheckBox">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="16"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Border x:Name="Box" Width="16" Height="16" CornerRadius="3"
+                                    Background="#1E3426" BorderBrush="#3A6048" BorderThickness="1.5"
+                                    VerticalAlignment="Center">
+                                <Path x:Name="Check"
+                                      Data="M3,8 L7,12 L13,4"
+                                      Stroke="#00C070" StrokeThickness="1.8"
+                                      Visibility="Collapsed" StrokeLineJoin="Round"
+                                      HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <ContentPresenter Grid.Column="1" Margin="7,0,0,0"
+                                              VerticalAlignment="Center"
+                                              RecognizesAccessKey="True"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter TargetName="Check" Property="Visibility" Value="Visible"/>
+                                <Setter TargetName="Box"   Property="BorderBrush" Value="#00C070"/>
+                                <Setter TargetName="Box"   Property="Background"  Value="#1A3D2A"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Box" Property="BorderBrush" Value="#00C070"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
 
         <Style TargetType="ScrollBar">
             <Setter Property="Width" Value="5"/>

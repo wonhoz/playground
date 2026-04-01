@@ -1,4 +1,3 @@
-using Microsoft.Win32;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -9,8 +8,6 @@ public partial class App : System.Windows.Application
     [DllImport("user32.dll")] static extern bool RegisterHotKey(IntPtr hWnd, int id, uint fsModifiers, uint vk);
     [DllImport("user32.dll")] static extern bool UnregisterHotKey(IntPtr hWnd, int id);
     [DllImport("dwmapi.dll")] static extern int DwmSetWindowAttribute(IntPtr hwnd, int attr, ref int val, int size);
-    [DllImport("shell32.dll", CharSet = CharSet.Unicode)]
-    static extern int SetCurrentProcessExplicitAppUserModelID(string id);
 
     private const int HotkeyId  = 9002;
     private const uint MOD_WIN   = 0x0008;
@@ -29,27 +26,34 @@ public partial class App : System.Windows.Application
         _mutex = new System.Threading.Mutex(true, "CaseForge_SingleInstance", out bool isNew);
         if (!isNew) { Shutdown(); return; }
 
-        RegisterAumid("Playground.CaseForge");
         BuildTray();
         RegisterGlobalHotkey();
     }
 
-    private static void RegisterAumid(string aumid)
+    // pack 리소스로 내장된 app.ico를 System.Drawing.Icon으로 변환
+    private static Icon LoadTrayIcon()
     {
-        SetCurrentProcessExplicitAppUserModelID(aumid);
-        using var key = Registry.CurrentUser.CreateSubKey($@"SOFTWARE\Classes\AppUserModelId\{aumid}");
-        key.SetValue("DisplayName", "Case.Forge");
-        key.SetValue("IconUri", Path.Combine(AppContext.BaseDirectory, "Resources", "app.ico"));
+        try
+        {
+            var sri = System.Windows.Application.GetResourceStream(
+                new Uri("pack://application:,,,/Resources/app.ico"));
+            if (sri != null)
+            {
+                using var ms = new System.IO.MemoryStream();
+                sri.Stream.CopyTo(ms);
+                ms.Position = 0;
+                return new Icon(ms);
+            }
+        }
+        catch { }
+        return SystemIcons.Application;
     }
 
     private void BuildTray()
     {
-        var icoPath = Path.Combine(AppContext.BaseDirectory, "Resources", "app.ico");
-        var icon = File.Exists(icoPath) ? new Icon(icoPath) : SystemIcons.Application;
-
         _tray = new NotifyIcon
         {
-            Icon    = icon,
+            Icon    = LoadTrayIcon(),
             Text    = "Case.Forge — Win+Shift+C",
             Visible = true
         };

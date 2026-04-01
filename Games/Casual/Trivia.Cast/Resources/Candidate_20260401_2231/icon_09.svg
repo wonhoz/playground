@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg09" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#76FF03"/>
+      <stop offset="100%" stop-color="#1B5E20"/>
+    </linearGradient>
+    <linearGradient id="badge09" x1="0.5" y1="0" x2="0.5" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#F1F8E9"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect x="0" y="0" width="1024" height="1024" rx="190" fill="url(#bg09)"/>
+
+  <!-- Layer 2: Main badge / label shape -->
+  <rect x="100" y="260" width="824" height="500" rx="40" fill="url(#badge09)" stroke="#33691E" stroke-width="12"/>
+  <!-- Top ribbon accent -->
+  <rect x="100" y="260" width="824" height="80" rx="40" fill="#33691E"/>
+  <!-- Bottom ribbon clip -->
+  <rect x="100" y="300" width="824" height="40" fill="#33691E"/>
+
+  <!-- Layer 3: TRIVIA text + ? badge -->
+  <text x="512" y="590" font-family="'Segoe UI',Arial,sans-serif" font-size="200" font-weight="bold"
+    fill="#1B5E20" text-anchor="middle" letter-spacing="-4">TRIVIA</text>
+  <text x="512" y="700" font-family="'Segoe UI',Arial,sans-serif" font-size="80" font-weight="bold"
+    fill="#33691E" text-anchor="middle" letter-spacing="16">CAST</text>
+
+  <!-- Question mark badge top-right corner -->
+  <circle cx="830" cy="280" r="80" fill="#76FF03" stroke="#CCFF90" stroke-width="10"/>
+  <text x="830" y="305" font-family="'Segoe UI',Arial,sans-serif" font-size="100" font-weight="bold"
+    fill="#1B5E20" text-anchor="middle">?</text>
+
+  <!-- Ribbon knot (bottom of badge) -->
+  <path d="M420 760 L380 870 L512 820 L644 870 L604 760 Z" fill="#33691E"/>
+  <!-- Small category dots on ribbon -->
+  <circle cx="200" cy="280" r="22" fill="#76FF03"/>
+  <circle cx="260" cy="280" r="22" fill="#CCFF90"/>
+  <circle cx="320" cy="280" r="22" fill="#76FF03"/>
+  <circle cx="380" cy="280" r="22" fill="#CCFF90"/>
+</svg>

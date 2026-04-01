@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg08cf" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0D47A1"/>
+      <stop offset="100%" stop-color="#006064"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: Background (deep navy-teal) -->
+  <rect x="0" y="0" width="1024" height="1024" rx="190" fill="url(#bg08cf)"/>
+
+  <!-- Layer 2: Code editor-style panel -->
+  <rect x="88" y="88" width="848" height="748" rx="24" fill="white" opacity="0.06"/>
+
+  <!-- Line numbers (subtle) -->
+  <text x="120" y="200" font-family="'Courier New',monospace" font-size="44" fill="#40C4FF" opacity="0.5">1</text>
+  <text x="120" y="310" font-family="'Courier New',monospace" font-size="44" fill="#40C4FF" opacity="0.5">2</text>
+  <text x="120" y="420" font-family="'Courier New',monospace" font-size="44" fill="#40C4FF" opacity="0.5">3</text>
+  <text x="120" y="530" font-family="'Courier New',monospace" font-size="44" fill="#40C4FF" opacity="0.5">4</text>
+  <text x="120" y="640" font-family="'Courier New',monospace" font-size="44" fill="#40C4FF" opacity="0.5">5</text>
+
+  <!-- Code lines with case labels -->
+  <text x="184" y="200" font-family="'Courier New',monospace" font-size="72" font-weight="bold" fill="#40C4FF">camelCase</text>
+  <text x="184" y="310" font-family="'Courier New',monospace" font-size="72" font-weight="bold" fill="#69F0AE">snake_case</text>
+  <text x="184" y="420" font-family="'Courier New',monospace" font-size="72" font-weight="bold" fill="#FF8A65">PascalCase</text>
+  <text x="184" y="530" font-family="'Courier New',monospace" font-size="72" font-weight="bold" fill="#FFD54F">SCREAMING</text>
+  <text x="184" y="640" font-family="'Courier New',monospace" font-size="72" font-weight="bold" fill="#F48FB1">kebab-case</text>
+
+  <!-- Layer 3: Cursor blinking at end of line 2 -->
+  <!-- Highlight current line -->
+  <rect x="88" y="272" width="848" height="76" rx="8" fill="white" opacity="0.08"/>
+  <!-- Cursor at end of snake_case -->
+  <rect x="674" y="282" width="16" height="56" rx="4" fill="#40C4FF" opacity="0.9"/>
+
+  <!-- Selection highlight badge -->
+  <rect x="88" y="750" width="424" height="80" rx="20" fill="#40C4FF" opacity="0.15"/>
+  <text x="300" y="802" font-family="'Segoe UI',Arial,sans-serif" font-size="52" fill="#40C4FF"
+    text-anchor="middle" font-weight="bold">11 formats</text>
+  <rect x="536" y="750" width="400" height="80" rx="20" fill="#69F0AE" opacity="0.15"/>
+  <text x="736" y="802" font-family="'Segoe UI',Arial,sans-serif" font-size="52" fill="#69F0AE"
+    text-anchor="middle" font-weight="bold">1-click copy</text>
+</svg>

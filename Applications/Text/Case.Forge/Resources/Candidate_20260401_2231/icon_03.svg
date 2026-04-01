@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg03cf" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FF8F00"/>
+      <stop offset="100%" stop-color="#BF360C"/>
+    </linearGradient>
+    <linearGradient id="hammer03" x1="0.5" y1="0" x2="0.5" y2="1">
+      <stop offset="0%" stop-color="#ECEFF1"/>
+      <stop offset="100%" stop-color="#90A4AE"/>
+    </linearGradient>
+    <linearGradient id="anvil03" x1="0.5" y1="0" x2="0.5" y2="1">
+      <stop offset="0%" stop-color="#546E7A"/>
+      <stop offset="100%" stop-color="#263238"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: Background (forge fire) -->
+  <rect x="0" y="0" width="1024" height="1024" rx="190" fill="url(#bg03cf)"/>
+
+  <!-- Layer 2: Anvil + hammer silhouette -->
+  <!-- Anvil body -->
+  <rect x="240" y="640" width="544" height="140" rx="16" fill="url(#anvil03)"/>
+  <!-- Anvil horn (left) -->
+  <path d="M240 640 L160 680 L240 720 Z" fill="#546E7A"/>
+  <!-- Anvil neck -->
+  <rect x="360" y="580" width="304" height="72" rx="8" fill="#455A64"/>
+  <!-- Anvil top surface -->
+  <rect x="280" y="500" width="464" height="88" rx="8" fill="#607D8B"/>
+
+  <!-- Hammer head (tilted, mid-strike) -->
+  <g transform="rotate(-35 512 400)">
+    <rect x="420" y="250" width="184" height="120" rx="16" fill="url(#hammer03)"/>
+    <!-- Hammer handle -->
+    <rect x="492" y="370" width="40" height="320" rx="12" fill="#A1887F"/>
+  </g>
+
+  <!-- Layer 3: Text being forged on anvil -->
+  <!-- "abc" → "ABC" transformation spark -->
+  <text x="340" y="570" font-family="'Segoe UI',Arial,sans-serif" font-size="80" font-weight="bold"
+    fill="#FFF176" text-anchor="middle">abc</text>
+  <text x="600" y="568" font-family="'Segoe UI',Arial,sans-serif" font-size="32" fill="#FFD54F"
+    text-anchor="middle">→</text>
+  <text x="720" y="570" font-family="'Segoe UI',Arial,sans-serif" font-size="80" font-weight="bold"
+    fill="white" text-anchor="middle">ABC</text>
+
+  <!-- Sparks flying from hammer strike -->
+  <circle cx="460" cy="420" r="12" fill="#FFF176" opacity="0.9"/>
+  <circle cx="520" cy="390" r="8" fill="#FFF176" opacity="0.8"/>
+  <circle cx="580" cy="410" r="10" fill="#FFD54F" opacity="0.85"/>
+  <circle cx="400" cy="450" r="7" fill="#FFCA28" opacity="0.7"/>
+  <line x1="450" y1="420" x2="410" y2="380" stroke="#FFF176" stroke-width="6" stroke-linecap="round" opacity="0.8"/>
+  <line x1="530" y1="400" x2="560" y2="360" stroke="#FFF176" stroke-width="6" stroke-linecap="round" opacity="0.8"/>
+  <line x1="470" y1="430" x2="440" y2="470" stroke="#FFD54F" stroke-width="5" stroke-linecap="round" opacity="0.7"/>
+
+  <!-- Forge label -->
+  <text x="512" y="870" font-family="'Segoe UI',Arial,sans-serif" font-size="96" font-weight="bold"
+    fill="white" text-anchor="middle" opacity="0.9">FORGE</text>
+</svg>

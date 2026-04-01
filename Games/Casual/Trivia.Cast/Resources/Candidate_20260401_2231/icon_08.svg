@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg08" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1A237E"/>
+      <stop offset="100%" stop-color="#311B92"/>
+    </linearGradient>
+    <linearGradient id="bolt08" x1="0.5" y1="0" x2="0.5" y2="1">
+      <stop offset="0%" stop-color="#FFF176"/>
+      <stop offset="100%" stop-color="#FFEB3B"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect x="0" y="0" width="1024" height="1024" rx="190" fill="url(#bg08)"/>
+
+  <!-- Layer 2: Brain silhouette -->
+  <!-- Left hemisphere -->
+  <path d="M512 200 C460 180 380 180 330 220 C280 260 250 320 250 390
+    C240 430 230 470 240 510 C250 560 270 600 300 630
+    C320 650 340 660 360 665 L360 720 L512 720 Z"
+    fill="#7986CB" stroke="#5C6BC0" stroke-width="8"/>
+  <!-- Right hemisphere -->
+  <path d="M512 200 C564 180 644 180 694 220 C744 260 774 320 774 390
+    C784 430 794 470 784 510 C774 560 754 600 724 630
+    C704 650 684 660 664 665 L664 720 L512 720 Z"
+    fill="#9575CD" stroke="#7E57C2" stroke-width="8"/>
+  <!-- Brain center divide -->
+  <line x1="512" y1="200" x2="512" y2="720" stroke="#311B92" stroke-width="12" opacity="0.6"/>
+  <!-- Brain wrinkle lines left -->
+  <path d="M320 350 C340 330 370 340 360 370" fill="none" stroke="#5C6BC0" stroke-width="12" stroke-linecap="round"/>
+  <path d="M280 460 C300 440 340 455 330 490" fill="none" stroke="#5C6BC0" stroke-width="12" stroke-linecap="round"/>
+  <path d="M310 560 C335 545 360 560 345 590" fill="none" stroke="#5C6BC0" stroke-width="12" stroke-linecap="round"/>
+  <!-- Brain wrinkle lines right -->
+  <path d="M704 350 C684 330 654 340 664 370" fill="none" stroke="#7E57C2" stroke-width="12" stroke-linecap="round"/>
+  <path d="M744 460 C724 440 684 455 694 490" fill="none" stroke="#7E57C2" stroke-width="12" stroke-linecap="round"/>
+  <path d="M714 560 C689 545 664 560 679 590" fill="none" stroke="#7E57C2" stroke-width="12" stroke-linecap="round"/>
+
+  <!-- Layer 3: Lightning bolt bursting out of brain -->
+  <path d="M560 140 L460 450 L540 450 L430 760 L590 390 L510 390 Z"
+    fill="url(#bolt08)" stroke="#FFF176" stroke-width="8" stroke-linejoin="round"/>
+
+  <!-- Electric glow sparks -->
+  <circle cx="430" cy="760" r="20" fill="#FFF176" opacity="0.9"/>
+  <line x1="400" y1="770" x2="350" y2="810" stroke="#FFF176" stroke-width="10" stroke-linecap="round" opacity="0.7"/>
+  <line x1="430" y1="780" x2="430" y2="840" stroke="#FFF176" stroke-width="10" stroke-linecap="round" opacity="0.7"/>
+  <line x1="460" y1="770" x2="510" y2="810" stroke="#FFF176" stroke-width="10" stroke-linecap="round" opacity="0.7"/>
+
+  <!-- Small sparks around -->
+  <circle cx="200" cy="350" r="14" fill="#40C4FF" opacity="0.8"/>
+  <circle cx="830" cy="300" r="14" fill="#40C4FF" opacity="0.8"/>
+  <circle cx="180" cy="550" r="10" fill="#FFF176" opacity="0.6"/>
+  <circle cx="850" cy="520" r="10" fill="#FFF176" opacity="0.6"/>
+
+  <!-- Base text -->
+  <text x="512" y="920" font-family="'Segoe UI',Arial,sans-serif" font-size="80" font-weight="bold"
+    fill="white" text-anchor="middle" opacity="0.85">BRAIN POWER</text>
+</svg>

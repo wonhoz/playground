@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg04cp2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#80CBC4"/>
+      <stop offset="100%" stop-color="#00695C"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: Background (mint teal) -->
+  <rect x="0" y="0" width="1024" height="1024" rx="190" fill="url(#bg04cp2)"/>
+
+  <!-- Layer 2: Folder icon -->
+  <!-- Folder back -->
+  <path d="M200 480 L200 280 L420 280 L460 320 L800 320 L800 480 Z" fill="#00BFA5"/>
+  <!-- Folder front -->
+  <rect x="200" y="480" width="600" height="360" rx="16" fill="#00BFA5"/>
+  <!-- Folder tab highlight -->
+  <path d="M200 280 L420 280 L460 320 L200 320 Z" fill="#1DE9B6" opacity="0.8"/>
+  <!-- Folder highlight -->
+  <rect x="216" y="496" width="568" height="44" rx="8" fill="#1DE9B6" opacity="0.5"/>
+
+  <!-- Document lines inside folder -->
+  <rect x="240" y="560" width="440" height="16" rx="8" fill="white" opacity="0.5"/>
+  <rect x="240" y="596" width="340" height="16" rx="8" fill="white" opacity="0.4"/>
+  <rect x="240" y="632" width="380" height="16" rx="8" fill="white" opacity="0.3"/>
+
+  <!-- Layer 3: Clipboard overlay with copy arrow -->
+  <!-- Clipboard body -->
+  <rect x="540" y="600" width="340" height="280" rx="20" fill="white" opacity="0.95"/>
+  <!-- Clipboard clip -->
+  <rect x="630" y="572" width="160" height="70" rx="16" fill="#00695C"/>
+  <rect x="654" y="582" width="112" height="50" rx="10" fill="white"/>
+  <!-- Path text on clipboard -->
+  <text x="710" y="710" font-family="'Courier New',monospace" font-size="40" fill="#00695C" text-anchor="middle">path/to</text>
+  <text x="710" y="760" font-family="'Courier New',monospace" font-size="40" fill="#00695C" text-anchor="middle">/file.txt</text>
+
+  <!-- Copy success checkmark -->
+  <circle cx="820" cy="840" r="60" fill="#69F0AE"/>
+  <path d="M792 840 L812 862 L848 820" fill="none" stroke="white" stroke-width="20"
+    stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- App label -->
+  <text x="512" y="960" font-family="'Segoe UI',Arial,sans-serif" font-size="72" font-weight="bold"
+    fill="white" text-anchor="middle" opacity="0.9">COPY · PATH</text>
+</svg>

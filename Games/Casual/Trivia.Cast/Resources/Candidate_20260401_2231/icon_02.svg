@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg02" x1="0" y1="0" x2="0.5" y2="1">
+      <stop offset="0%" stop-color="#FF8F00"/>
+      <stop offset="100%" stop-color="#BF360C"/>
+    </linearGradient>
+    <linearGradient id="flame02" x1="0.5" y1="1" x2="0.5" y2="0">
+      <stop offset="0%" stop-color="#FF6D00"/>
+      <stop offset="50%" stop-color="#FFCA28"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0.9"/>
+    </linearGradient>
+    <linearGradient id="innerFlame02" x1="0.5" y1="1" x2="0.5" y2="0">
+      <stop offset="0%" stop-color="#FF8F00"/>
+      <stop offset="100%" stop-color="#FFECB3"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect x="0" y="0" width="1024" height="1024" rx="190" fill="url(#bg02)"/>
+
+  <!-- Layer 2: Flame shape (streak fire) -->
+  <path d="M512 820 C360 820 240 700 240 560 C240 460 290 390 340 330 C340 390 370 420 400 430 C380 380 390 300 430 240 C450 330 500 350 510 290 C540 200 520 130 490 80 C560 100 620 160 650 240 C680 200 672 140 660 100 C730 160 790 260 790 380 C800 350 800 300 790 260 C840 320 784 430 784 560 C784 700 664 820 512 820 Z" fill="url(#flame02)"/>
+  <!-- Inner flame -->
+  <path d="M512 760 C420 760 350 690 350 600 C350 540 380 500 410 460 C410 500 430 520 450 525 C435 495 440 455 465 420 C472 460 495 470 498 440 C512 390 505 345 490 310 C530 325 565 370 575 420 C588 395 585 360 578 335 C610 375 640 440 640 510 C645 490 645 460 638 440 C665 475 648 530 648 600 C648 690 604 760 512 760 Z" fill="url(#innerFlame02)"/>
+
+  <!-- Layer 3: Streak badge "x3" -->
+  <circle cx="720" cy="810" r="105" fill="#FFCA28"/>
+  <circle cx="720" cy="810" r="88" fill="#FF6D00"/>
+  <text x="720" y="835" font-family="'Segoe UI',Arial,sans-serif" font-size="88" font-weight="bold" fill="white" text-anchor="middle">x3</text>
+
+  <!-- Sparkle dots -->
+  <circle cx="180" cy="300" r="18" fill="#FFD54F" opacity="0.8"/>
+  <circle cx="220" cy="200" r="12" fill="#FFCA28" opacity="0.6"/>
+  <circle cx="830" cy="280" r="15" fill="#FFD54F" opacity="0.8"/>
+  <circle cx="860" cy="180" r="10" fill="#FFCA28" opacity="0.6"/>
+  <circle cx="150" cy="450" r="10" fill="#FFF9C4" opacity="0.7"/>
+  <circle cx="870" cy="420" r="12" fill="#FFF9C4" opacity="0.7"/>
+</svg>

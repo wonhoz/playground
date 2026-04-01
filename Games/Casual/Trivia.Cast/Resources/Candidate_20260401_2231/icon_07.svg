@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg07" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFF176"/>
+      <stop offset="100%" stop-color="#FF8F00"/>
+    </linearGradient>
+    <linearGradient id="trophy07" x1="0.5" y1="0" x2="0.5" y2="1">
+      <stop offset="0%" stop-color="#FFD54F"/>
+      <stop offset="100%" stop-color="#E65100"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect x="0" y="0" width="1024" height="1024" rx="190" fill="url(#bg07)"/>
+
+  <!-- Layer 2: Trophy shape -->
+  <!-- Trophy cup body -->
+  <path d="M312 180 L712 180 L712 520 C712 650 630 720 512 720 C394 720 312 650 312 520 Z"
+    fill="url(#trophy07)" stroke="#E65100" stroke-width="8"/>
+  <!-- Trophy handles -->
+  <path d="M312 220 C230 220 200 300 200 370 C200 440 250 490 312 480" fill="none"
+    stroke="url(#trophy07)" stroke-width="52" stroke-linecap="round"/>
+  <path d="M712 220 C794 220 824 300 824 370 C824 440 774 490 712 480" fill="none"
+    stroke="url(#trophy07)" stroke-width="52" stroke-linecap="round"/>
+  <!-- Trophy stem -->
+  <rect x="462" y="720" width="100" height="90" rx="8" fill="#E65100"/>
+  <!-- Trophy base -->
+  <rect x="340" y="810" width="344" height="64" rx="18" fill="#E65100"/>
+  <!-- Trophy base highlight -->
+  <rect x="352" y="822" width="320" height="40" rx="14" fill="#FF8F00"/>
+
+  <!-- Layer 3: Flame streaks + score badge -->
+  <!-- Mini flames at top -->
+  <path d="M430 150 C420 120 440 95 450 80 C445 100 460 112 455 90 C470 50 490 30 500 10 C495 45 510 55 512 40 C514 55 529 45 524 10 C534 30 554 50 569 90 C564 112 579 100 574 80 C584 95 604 120 594 150 Z"
+    fill="#FF6D00" opacity="0.9"/>
+  <path d="M440 150 C435 128 448 108 455 95 C452 110 462 118 460 100 C470 72 484 55 490 40 C487 60 497 67 499 52 C501 67 511 60 508 40 C514 55 528 72 538 100 C536 118 546 110 543 95 C550 108 563 128 558 150 Z"
+    fill="#FFCA28" opacity="0.9"/>
+
+  <!-- Score badge "1st" in top right -->
+  <circle cx="810" cy="820" r="110" fill="#E53935"/>
+  <circle cx="810" cy="820" r="92" fill="#FF5252"/>
+  <text x="810" y="800" font-family="'Segoe UI',Arial,sans-serif" font-size="56" font-weight="bold"
+    fill="white" text-anchor="middle">TOP</text>
+  <text x="810" y="860" font-family="'Segoe UI',Arial,sans-serif" font-size="56" font-weight="bold"
+    fill="white" text-anchor="middle">SCORE</text>
+
+  <!-- Sparkle stars -->
+  <text x="140" y="280" font-size="68">⭐</text>
+  <text x="820" y="280" font-size="60">✨</text>
+  <text x="170" y="750" font-size="52">✨</text>
+</svg>

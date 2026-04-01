@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg06cf" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#EF9A9A"/>
+      <stop offset="100%" stop-color="#C62828"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: Background (coral red) -->
+  <rect x="0" y="0" width="1024" height="1024" rx="190" fill="url(#bg06cf)"/>
+
+  <!-- Layer 2: Input → Output comparison scene -->
+  <!-- Input card (top) -->
+  <rect x="88" y="120" width="848" height="220" rx="28" fill="white" opacity="0.95"/>
+  <!-- Input label -->
+  <rect x="104" y="136" width="160" height="56" rx="14" fill="#EF9A9A"/>
+  <text x="184" y="174" font-family="'Segoe UI',Arial,sans-serif" font-size="42" fill="white"
+    text-anchor="middle" font-weight="bold">INPUT</text>
+  <!-- Input text -->
+  <text x="140" y="290" font-family="'Courier New',monospace" font-size="96" font-weight="bold"
+    fill="#333">hello world</text>
+
+  <!-- Transformation arrow -->
+  <path d="M512 352 L512 432" stroke="white" stroke-width="24" stroke-linecap="round"/>
+  <path d="M468 406 L512 454 L556 406" fill="none" stroke="white" stroke-width="24"
+    stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- "FORGE" label on arrow -->
+  <rect x="424" y="370" width="176" height="52" rx="12" fill="#C62828"/>
+  <text x="512" y="405" font-family="'Segoe UI',Arial,sans-serif" font-size="38" font-weight="bold"
+    fill="white" text-anchor="middle">FORGE</text>
+
+  <!-- Output card (bottom) -->
+  <rect x="88" y="460" width="848" height="440" rx="28" fill="white" opacity="0.95"/>
+  <!-- Output label -->
+  <rect x="104" y="476" width="170" height="56" rx="14" fill="#2E7D32"/>
+  <text x="189" y="514" font-family="'Segoe UI',Arial,sans-serif" font-size="42" fill="white"
+    text-anchor="middle" font-weight="bold">OUTPUT</text>
+
+  <!-- Output results -->
+  <text x="140" y="600" font-family="'Courier New',monospace" font-size="72" fill="#1565C0">helloWorld</text>
+  <text x="140" y="680" font-family="'Courier New',monospace" font-size="72" fill="#2E7D32">hello_world</text>
+  <text x="140" y="760" font-family="'Courier New',monospace" font-size="72" fill="#880E4F">hello-world</text>
+  <text x="140" y="840" font-family="'Courier New',monospace" font-size="60" fill="#E65100">HELLO_WORLD</text>
+  <!-- Layer 3: Copy icon hint on last row -->
+  <text x="860" y="840" font-size="64" text-anchor="middle">📋</text>
+</svg>

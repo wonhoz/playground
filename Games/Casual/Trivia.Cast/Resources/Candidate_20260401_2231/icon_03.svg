@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg03" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#80DEEA"/>
+      <stop offset="100%" stop-color="#00796B"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect x="0" y="0" width="1024" height="1024" rx="190" fill="url(#bg03)"/>
+
+  <!-- Layer 2: Timer circle arc (15 seconds countdown) -->
+  <!-- Full circle track -->
+  <circle cx="512" cy="460" r="300" fill="none" stroke="white" stroke-width="36" opacity="0.25"/>
+  <!-- Countdown arc (about 60% remaining = 9/15 seconds) -->
+  <circle cx="512" cy="460" r="300" fill="none" stroke="white" stroke-width="40"
+    stroke-dasharray="1130 1885" stroke-dashoffset="471"
+    stroke-linecap="round" opacity="0.9"/>
+  <!-- Orange urgent arc (last 5 seconds zone) -->
+  <circle cx="512" cy="460" r="300" fill="none" stroke="#FF8A65" stroke-width="40"
+    stroke-dasharray="377 1885" stroke-dashoffset="1602"
+    stroke-linecap="round"/>
+
+  <!-- Timer center: big question mark -->
+  <circle cx="512" cy="460" r="220" fill="white" opacity="0.15"/>
+  <text x="512" y="540" font-family="'Segoe UI',Arial,sans-serif" font-size="280" font-weight="bold"
+    fill="white" text-anchor="middle" opacity="0.95">?</text>
+
+  <!-- Layer 3: Countdown number "15" at top of circle -->
+  <rect x="448" y="128" width="128" height="72" rx="18" fill="#FF8A65"/>
+  <text x="512" y="184" font-family="'Segoe UI',Arial,sans-serif" font-size="68" font-weight="bold"
+    fill="white" text-anchor="middle">15</text>
+
+  <!-- Bottom label -->
+  <text x="512" y="860" font-family="'Segoe UI',Arial,sans-serif" font-size="84" font-weight="bold"
+    fill="white" text-anchor="middle" opacity="0.9">QUIZ</text>
+</svg>

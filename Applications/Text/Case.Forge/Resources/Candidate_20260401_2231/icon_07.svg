@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg07cf" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#CCFF90"/>
+      <stop offset="100%" stop-color="#33691E"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: Background (lime-dark green) -->
+  <rect x="0" y="0" width="1024" height="1024" rx="190" fill="url(#bg07cf)"/>
+
+  <!-- Layer 2: Word blocks being assembled/disassembled -->
+  <!-- "hello" block (green) -->
+  <rect x="88" y="260" width="340" height="160" rx="20" fill="#1B5E20" stroke="#69F0AE" stroke-width="8"/>
+  <text x="258" y="362" font-family="'Courier New',monospace" font-size="100" font-weight="bold"
+    fill="#CCFF90" text-anchor="middle">hello</text>
+
+  <!-- "world" block (dark green) -->
+  <rect x="596" y="260" width="340" height="160" rx="20" fill="#1B5E20" stroke="#69F0AE" stroke-width="8"/>
+  <text x="766" y="362" font-family="'Courier New',monospace" font-size="100" font-weight="bold"
+    fill="#CCFF90" text-anchor="middle">world</text>
+
+  <!-- Connector underscore in center -->
+  <rect x="450" y="360" width="124" height="24" rx="12" fill="#69F0AE" opacity="0.9"/>
+
+  <!-- Joined result below with arrow -->
+  <path d="M512 444 L512 520" stroke="#1B5E20" stroke-width="16" stroke-linecap="round"/>
+  <path d="M480 498 L512 530 L544 498" fill="none" stroke="#1B5E20" stroke-width="16"
+    stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Assembly results layer -->
+  <rect x="88" y="548" width="848" height="96" rx="20" fill="#1B5E20" opacity="0.8"/>
+  <text x="512" y="611" font-family="'Courier New',monospace" font-size="84" font-weight="bold"
+    fill="#FFF9C4" text-anchor="middle">hello_world</text>
+
+  <rect x="88" y="660" width="848" height="96" rx="20" fill="#2E7D32" opacity="0.7"/>
+  <text x="512" y="723" font-family="'Courier New',monospace" font-size="84" font-weight="bold"
+    fill="white" text-anchor="middle">hello-world</text>
+
+  <rect x="88" y="772" width="848" height="96" rx="20" fill="#388E3C" opacity="0.7"/>
+  <text x="512" y="835" font-family="'Courier New',monospace" font-size="84" font-weight="bold"
+    fill="white" text-anchor="middle">helloWorld</text>
+
+  <!-- Layer 3: Split/join icon -->
+  <line x1="466" y1="260" x2="428" y2="220" stroke="#1B5E20" stroke-width="12" stroke-linecap="round"/>
+  <text x="420" y="220" font-family="'Segoe UI',Arial,sans-serif" font-size="60" fill="#1B5E20"
+    text-anchor="middle">✂</text>
+  <line x1="558" y1="260" x2="596" y2="220" stroke="#1B5E20" stroke-width="12" stroke-linecap="round"/>
+</svg>

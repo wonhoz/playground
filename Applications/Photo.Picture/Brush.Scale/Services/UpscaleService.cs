@@ -10,12 +10,10 @@ public class UpscaleService : IDisposable
     const int DefaultTileOverlap = 16;
 
     InferenceSession? _session;
-    UpscaleModelType  _loadedModel    = UpscaleModelType.Bicubic;
-    int               _tileSize       = DefaultTileSize;
-    int               _tileOverlap    = DefaultTileOverlap;
-    bool              _fixedTileSize  = false;
-    bool              _sessionUsesDml = false;
-    string?           _lastModelPath;
+    UpscaleModelType  _loadedModel   = UpscaleModelType.Bicubic;
+    int               _tileSize      = DefaultTileSize;
+    int               _tileOverlap   = DefaultTileOverlap;
+    bool              _fixedTileSize = false;
 
     // ── 세션 로드 ──────────────────────────────────────────────────────────
     public void LoadModel(UpscaleModelType modelType)
@@ -23,10 +21,10 @@ public class UpscaleService : IDisposable
         if (modelType == UpscaleModelType.Bicubic)
         {
             _session?.Dispose();
-            _session       = null;
-            _loadedModel   = UpscaleModelType.Bicubic;
-            _tileSize      = DefaultTileSize;
-            _tileOverlap   = DefaultTileOverlap;
+            _session      = null;
+            _loadedModel  = UpscaleModelType.Bicubic;
+            _tileSize     = DefaultTileSize;
+            _tileOverlap  = DefaultTileOverlap;
             _fixedTileSize = false;
             return;
         }
@@ -37,21 +35,7 @@ public class UpscaleService : IDisposable
 
         _session?.Dispose();
 
-        _sessionUsesDml = false;
-        _lastModelPath  = path;
-
-        var opts = new SessionOptions();
-        try
-        {
-            opts.AppendExecutionProvider_DML(0);  // DirectML (GPU)
-            _sessionUsesDml = true;
-        }
-        catch
-        {
-            // DirectML 미지원 시 CPU 폴백
-        }
-        opts.GraphOptimizationLevel = GraphOptimizationLevel.ORT_ENABLE_ALL;
-
+        var opts = new SessionOptions { GraphOptimizationLevel = GraphOptimizationLevel.ORT_ENABLE_ALL };
         _session     = new InferenceSession(path, opts);
         _loadedModel = modelType;
 
@@ -69,32 +53,6 @@ public class UpscaleService : IDisposable
             _tileSize      = DefaultTileSize;
             _tileOverlap   = DefaultTileOverlap;
         }
-
-        // DML 등록 성공 시 즉시 테스트 추론 — 랜덤 데이터로 실제 추론 패턴 모사
-        // 실패하면 CPU 전용으로 재로드
-        if (_sessionUsesDml)
-        {
-            int testSz = _fixedTileSize ? _tileSize : 64;
-            var rng    = new Random(42);
-            var dummy  = new DenseTensor<float>([1, 3, testSz, testSz]);
-            for (int i = 0; i < dummy.Length; i++)
-                dummy.SetValue(i, (float)rng.NextDouble());
-            var testIn = new List<NamedOnnxValue>
-            {
-                NamedOnnxValue.CreateFromTensor(_session.InputMetadata.Keys.First(), dummy)
-            };
-            try   { using var _ = _session.Run(testIn); }
-            catch { ReloadCpuOnly(); }  // DML 호환 안됨 → CPU 전용
-        }
-    }
-
-    // ── CPU 전용 세션 재로드 (DML 실패 폴백) ─────────────────────────────────
-    void ReloadCpuOnly()
-    {
-        _session?.Dispose();
-        var opts = new SessionOptions { GraphOptimizationLevel = GraphOptimizationLevel.ORT_ENABLE_ALL };
-        _session        = new InferenceSession(_lastModelPath!, opts);
-        _sessionUsesDml = false;
     }
 
     // ── 단일 이미지 업스케일 ────────────────────────────────────────────────
@@ -111,16 +69,7 @@ public class UpscaleService : IDisposable
         if (modelType == UpscaleModelType.Bicubic)
             return await BicubicAsync(src, scaleFactor, progress, ct);
 
-        try
-        {
-            return await OnnxUpscaleAsync(src, scaleFactor, progress, ct);
-        }
-        catch (OnnxRuntimeException) when (_sessionUsesDml)
-        {
-            // 테스트를 통과했으나 실제 추론에서 DML 실패 → CPU로 재로드 후 재시도
-            ReloadCpuOnly();
-            return await OnnxUpscaleAsync(src, scaleFactor, progress, ct);
-        }
+        return await OnnxUpscaleAsync(src, scaleFactor, progress, ct);
     }
 
     // ── 배치 처리 ──────────────────────────────────────────────────────────

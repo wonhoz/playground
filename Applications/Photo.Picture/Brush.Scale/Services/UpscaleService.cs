@@ -14,6 +14,8 @@ public class UpscaleService : IDisposable
     int               _tileSize       = DefaultTileSize;
     int               _tileOverlap    = DefaultTileOverlap;
     bool              _fixedTileSize  = false;
+    bool              _sessionUsesDml = false;
+    string?           _lastModelPath;
 
     // ── 세션 로드 ──────────────────────────────────────────────────────────
     public void LoadModel(UpscaleModelType modelType)
@@ -35,10 +37,14 @@ public class UpscaleService : IDisposable
 
         _session?.Dispose();
 
+        _sessionUsesDml = false;
+        _lastModelPath  = path;
+
         var opts = new SessionOptions();
         try
         {
             opts.AppendExecutionProvider_DML(0);  // DirectML (GPU)
+            _sessionUsesDml = true;
         }
         catch
         {
@@ -65,6 +71,15 @@ public class UpscaleService : IDisposable
         }
     }
 
+    // ── CPU 전용 세션 재로드 (DML 실패 폴백) ─────────────────────────────────
+    void ReloadCpuOnly()
+    {
+        _session?.Dispose();
+        var opts = new SessionOptions { GraphOptimizationLevel = GraphOptimizationLevel.ORT_ENABLE_ALL };
+        _session        = new InferenceSession(_lastModelPath!, opts);
+        _sessionUsesDml = false;
+    }
+
     // ── 단일 이미지 업스케일 ────────────────────────────────────────────────
     public async Task<SKBitmap> UpscaleAsync(
         SKBitmap src,
@@ -79,7 +94,16 @@ public class UpscaleService : IDisposable
         if (modelType == UpscaleModelType.Bicubic)
             return await BicubicAsync(src, scaleFactor, progress, ct);
 
-        return await OnnxUpscaleAsync(src, scaleFactor, progress, ct);
+        try
+        {
+            return await OnnxUpscaleAsync(src, scaleFactor, progress, ct);
+        }
+        catch (OnnxRuntimeException) when (_sessionUsesDml)
+        {
+            // DirectML 실행 실패 → CPU 전용으로 세션 재로드 후 재시도
+            ReloadCpuOnly();
+            return await OnnxUpscaleAsync(src, scaleFactor, progress, ct);
+        }
     }
 
     // ── 배치 처리 ──────────────────────────────────────────────────────────

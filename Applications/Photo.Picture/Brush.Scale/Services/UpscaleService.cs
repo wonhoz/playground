@@ -70,11 +70,15 @@ public class UpscaleService : IDisposable
             _tileOverlap   = DefaultTileOverlap;
         }
 
-        // DML 등록 성공 시 즉시 테스트 추론 — 실패하면 CPU 전용으로 재로드
+        // DML 등록 성공 시 즉시 테스트 추론 — 랜덤 데이터로 실제 추론 패턴 모사
+        // 실패하면 CPU 전용으로 재로드
         if (_sessionUsesDml)
         {
             int testSz = _fixedTileSize ? _tileSize : 64;
+            var rng    = new Random(42);
             var dummy  = new DenseTensor<float>([1, 3, testSz, testSz]);
+            for (int i = 0; i < dummy.Length; i++)
+                dummy.SetValue(i, (float)rng.NextDouble());
             var testIn = new List<NamedOnnxValue>
             {
                 NamedOnnxValue.CreateFromTensor(_session.InputMetadata.Keys.First(), dummy)
@@ -107,7 +111,16 @@ public class UpscaleService : IDisposable
         if (modelType == UpscaleModelType.Bicubic)
             return await BicubicAsync(src, scaleFactor, progress, ct);
 
-        return await OnnxUpscaleAsync(src, scaleFactor, progress, ct);
+        try
+        {
+            return await OnnxUpscaleAsync(src, scaleFactor, progress, ct);
+        }
+        catch (OnnxRuntimeException) when (_sessionUsesDml)
+        {
+            // 테스트를 통과했으나 실제 추론에서 DML 실패 → CPU로 재로드 후 재시도
+            ReloadCpuOnly();
+            return await OnnxUpscaleAsync(src, scaleFactor, progress, ct);
+        }
     }
 
     // ── 배치 처리 ──────────────────────────────────────────────────────────

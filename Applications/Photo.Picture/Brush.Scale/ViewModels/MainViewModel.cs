@@ -447,4 +447,6 @@ public record OutputFormatItem(OutputFormat Format)
         OutputFormat.WebP => "WebP",
         _                 => "PNG",
     };
+
+    public override string ToString() => DisplayName;
 }

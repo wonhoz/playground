@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg9" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#FF5722"/>
+      <stop offset="100%" stop-color="#BF360C"/>
+    </radialGradient>
+    <radialGradient id="waveGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="white" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="white" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glow9">
+      <feGaussianBlur stdDeviation="20" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg9)"/>
+
+  <!-- 선명도 파동 (동심원) -->
+  <circle cx="512" cy="480" r="380" fill="none" stroke="white" stroke-width="14" opacity="0.12"/>
+  <circle cx="512" cy="480" r="310" fill="none" stroke="white" stroke-width="16" opacity="0.20"/>
+  <circle cx="512" cy="480" r="240" fill="none" stroke="white" stroke-width="20" opacity="0.30"/>
+  <circle cx="512" cy="480" r="170" fill="none" stroke="white" stroke-width="24" opacity="0.45"/>
+  <circle cx="512" cy="480" r="100" fill="none" stroke="white" stroke-width="30" opacity="0.65"/>
+
+  <!-- 핑크/분홍 파동 (대비) -->
+  <circle cx="512" cy="480" r="340" fill="none" stroke="#FF80AB" stroke-width="8" opacity="0.25"/>
+  <circle cx="512" cy="480" r="270" fill="none" stroke="#FF4081" stroke-width="10" opacity="0.32"/>
+  <circle cx="512" cy="480" r="200" fill="none" stroke="#FF80AB" stroke-width="12" opacity="0.40"/>
+  <circle cx="512" cy="480" r="135" fill="none" stroke="#FF4081" stroke-width="16" opacity="0.50"/>
+
+  <!-- 중앙 빛 폭발 -->
+  <circle cx="512" cy="480" r="60" fill="url(#waveGrad)" filter="url(#glow9)"/>
+  <circle cx="512" cy="480" r="42" fill="white" opacity="0.95"/>
+
+  <!-- 4방향 광선 -->
+  <line x1="512" y1="370" x2="512" y2="300" stroke="white" stroke-width="18" stroke-linecap="round"/>
+  <line x1="512" y1="590" x2="512" y2="660" stroke="white" stroke-width="18" stroke-linecap="round"/>
+  <line x1="402" y1="480" x2="332" y2="480" stroke="white" stroke-width="18" stroke-linecap="round"/>
+  <line x1="622" y1="480" x2="692" y2="480" stroke="white" stroke-width="18" stroke-linecap="round"/>
+  <!-- 대각선 광선 -->
+  <line x1="434" y1="402" x2="384" y2="352" stroke="white" stroke-width="12" stroke-linecap="round" opacity="0.7"/>
+  <line x1="590" y1="402" x2="640" y2="352" stroke="white" stroke-width="12" stroke-linecap="round" opacity="0.7"/>
+  <line x1="434" y1="558" x2="384" y2="608" stroke="white" stroke-width="12" stroke-linecap="round" opacity="0.7"/>
+  <line x1="590" y1="558" x2="640" y2="608" stroke="white" stroke-width="12" stroke-linecap="round" opacity="0.7"/>
+
+  <!-- 중앙 심볼 (화소/픽셀 → 선명) -->
+  <rect x="490" y="458" width="44" height="44" rx="8" fill="#FF5722"/>
+  <rect x="494" y="462" width="36" height="36" rx="6" fill="white"/>
+
+  <!-- 왼쪽 작은 픽셀들 (저해상도 심볼) -->
+  <g opacity="0.6">
+    <rect x="160" y="290" width="22" height="22" rx="3" fill="#FFCCBC"/>
+    <rect x="186" y="290" width="22" height="22" rx="3" fill="#FFAB91"/>
+    <rect x="160" y="316" width="22" height="22" rx="3" fill="#FFAB91"/>
+    <rect x="186" y="316" width="22" height="22" rx="3" fill="#FFCCBC"/>
+  </g>
+
+  <!-- 오른쪽 큰 픽셀들 (고해상도 심볼) -->
+  <g opacity="0.8">
+    <rect x="810" y="270" width="50" height="50" rx="8" fill="white"/>
+    <rect x="868" y="270" width="50" height="50" rx="8" fill="#FFCCBC"/>
+    <rect x="810" y="328" width="50" height="50" rx="8" fill="#FFCCBC"/>
+    <rect x="868" y="328" width="50" height="50" rx="8" fill="white"/>
+  </g>
+
+  <!-- 하단 배율 텍스트 -->
+  <text x="512" y="840" font-family="Arial Black" font-size="100" font-weight="900" fill="white" text-anchor="middle" opacity="0.95">×2 ×4 ×8</text>
+</svg>

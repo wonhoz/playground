@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg7" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#00BCD4"/>
+      <stop offset="100%" stop-color="#006064"/>
+    </linearGradient>
+    <linearGradient id="stepGrad" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0%" stop-color="#E0F7FA"/>
+      <stop offset="100%" stop-color="#FFFFFF"/>
+    </linearGradient>
+    <filter id="shadow7">
+      <feDropShadow dx="4" dy="8" stdDeviation="8" flood-color="#00695C" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg7)"/>
+
+  <!-- 격자 배경 선 -->
+  <g stroke="white" stroke-width="1.5" opacity="0.12">
+    <line x1="100" y1="200" x2="924" y2="200"/>
+    <line x1="100" y1="320" x2="924" y2="320"/>
+    <line x1="100" y1="440" x2="924" y2="440"/>
+    <line x1="100" y1="560" x2="924" y2="560"/>
+    <line x1="100" y1="680" x2="924" y2="680"/>
+    <line x1="200" y1="140" x2="200" y2="780"/>
+    <line x1="360" y1="140" x2="360" y2="780"/>
+    <line x1="520" y1="140" x2="520" y2="780"/>
+    <line x1="680" y1="140" x2="680" y2="780"/>
+    <line x1="840" y1="140" x2="840" y2="780"/>
+  </g>
+
+  <!-- 축 선 -->
+  <line x1="130" y1="750" x2="900" y2="750" stroke="white" stroke-width="6" stroke-linecap="round" opacity="0.8"/>
+  <line x1="130" y1="750" x2="130" y2="180" stroke="white" stroke-width="6" stroke-linecap="round" opacity="0.8"/>
+
+  <!-- 축 화살표 -->
+  <polygon points="900,750 862,728 862,772" fill="white" opacity="0.8"/>
+  <polygon points="130,180 108,218 152,218" fill="white" opacity="0.8"/>
+
+  <!-- 계단 (저→고해상도 계단식 상승) -->
+  <g filter="url(#shadow7)">
+    <!-- 1단계: 낮은 해상도 -->
+    <rect x="160" y="620" width="140" height="130" rx="8" fill="url(#stepGrad)" opacity="0.4"/>
+    <rect x="160" y="600" width="140" height="30" rx="6" fill="#80DEEA"/>
+    <!-- 2단계 -->
+    <rect x="300" y="490" width="140" height="260" rx="8" fill="url(#stepGrad)" opacity="0.4"/>
+    <rect x="300" y="470" width="140" height="30" rx="6" fill="#4DD0E1"/>
+    <!-- 3단계 -->
+    <rect x="440" y="360" width="140" height="390" rx="8" fill="url(#stepGrad)" opacity="0.4"/>
+    <rect x="440" y="340" width="140" height="30" rx="6" fill="#26C6DA"/>
+    <!-- 4단계: 고해상도 -->
+    <rect x="580" y="230" width="140" height="520" rx="8" fill="url(#stepGrad)" opacity="0.4"/>
+    <rect x="580" y="210" width="140" height="30" rx="6" fill="#00BCD4"/>
+  </g>
+
+  <!-- 계단 레이블 -->
+  <text x="230" y="590" font-family="Arial" font-size="32" fill="#B2EBF2" text-anchor="middle" font-weight="bold">1x</text>
+  <text x="370" y="460" font-family="Arial" font-size="32" fill="#B2EBF2" text-anchor="middle" font-weight="bold">2x</text>
+  <text x="510" y="330" font-family="Arial" font-size="32" fill="#E0F7FA" text-anchor="middle" font-weight="bold">4x</text>
+  <text x="650" y="200" font-family="Arial" font-size="32" fill="white" text-anchor="middle" font-weight="bold">8x</text>
+
+  <!-- 상승 화살표 (오렌지, 계단 위에 대각선으로) -->
+  <path d="M200 680 L350 550 L500 420 L650 280" stroke="#FF6D00" stroke-width="16" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <polygon points="680,264 642,296 678,316" fill="#FF6D00"/>
+
+  <!-- 포인트 원들 -->
+  <circle cx="200" cy="680" r="18" fill="#FF6D00"/>
+  <circle cx="350" cy="550" r="18" fill="#FF6D00"/>
+  <circle cx="500" cy="420" r="18" fill="#FF6D00"/>
+  <circle cx="650" cy="280" r="18" fill="#FF6D00"/>
+
+  <!-- 하단 텍스트 -->
+  <text x="512" y="870" font-family="Arial Black" font-size="60" font-weight="900" fill="white" text-anchor="middle" opacity="0.9">UPSCALE</text>
+</svg>

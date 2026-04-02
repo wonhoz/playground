@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <radialGradient id="bg8" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" stop-color="#1A237E"/>
+      <stop offset="60%" stop-color="#0D1B5E"/>
+      <stop offset="100%" stop-color="#010820"/>
+    </radialGradient>
+    <radialGradient id="starBurst" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#FFF9C4" stop-opacity="1"/>
+      <stop offset="40%" stop-color="#FFD700" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#FF6F00" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="starGlow8">
+      <feGaussianBlur stdDeviation="16" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="softGlow">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg8)"/>
+
+  <!-- 별 밭 배경 -->
+  <!-- 흐릿한 별들 (좌측 — 처리 전) -->
+  <g opacity="0.3" filter="url(#softGlow)">
+    <circle cx="180" cy="280" r="12" fill="#9FA8DA"/>
+    <circle cx="260" cy="180" r="8" fill="#7986CB"/>
+    <circle cx="140" cy="400" r="10" fill="#9FA8DA"/>
+    <circle cx="320" cy="320" r="14" fill="#7986CB"/>
+    <circle cx="200" cy="500" r="9" fill="#9FA8DA"/>
+    <circle cx="100" cy="600" r="11" fill="#7986CB"/>
+    <circle cx="380" cy="160" r="7" fill="#9FA8DA"/>
+    <circle cx="280" cy="580" r="13" fill="#7986CB"/>
+    <circle cx="440" cy="440" r="8" fill="#9FA8DA"/>
+  </g>
+
+  <!-- 선명한 별들 (우측 — 처리 후) -->
+  <g filter="url(#starGlow8)">
+    <circle cx="620" cy="220" r="18" fill="#FFD700"/>
+    <circle cx="740" cy="160" r="12" fill="#FFF9C4"/>
+    <circle cx="840" cy="300" r="22" fill="#FFD700"/>
+    <circle cx="700" cy="340" r="14" fill="#FFE57F"/>
+    <circle cx="900" cy="200" r="16" fill="#FFF9C4"/>
+    <circle cx="780" cy="440" r="10" fill="#FFD700"/>
+    <circle cx="640" cy="460" r="20" fill="#FFE57F"/>
+    <circle cx="860" cy="460" r="14" fill="#FFD700"/>
+    <!-- 큰 별 (4각 별 모양) -->
+    <polygon points="760,270 770,300 800,270 770,240" fill="#FFF9C4" opacity="0.9"/>
+    <polygon points="760,270 730,270 760,300 760,240" fill="#FFD700" opacity="0.8"/>
+  </g>
+
+  <!-- 중앙 분리 경계선 (흐릿→선명 전환) -->
+  <path d="M512 140 Q540 512 512 880" stroke="#3F51B5" stroke-width="3" fill="none" stroke-dasharray="20 12" opacity="0.5"/>
+
+  <!-- 흐릿한 영역 오버레이 -->
+  <rect x="100" y="140" width="380" height="740" rx="0" fill="#0D1B5E" opacity="0.2"/>
+
+  <!-- 좌측 "BEFORE" 이미지 프레임 (흐릿) -->
+  <rect x="120" y="580" width="340" height="220" rx="16" fill="#1A237E" opacity="0.6" stroke="#3949AB" stroke-width="2"/>
+  <text x="290" y="650" font-family="Arial" font-size="36" fill="#5C6BC0" text-anchor="middle" opacity="0.7">흐릿한 별</text>
+  <circle cx="220" cy="720" r="30" fill="#3949AB" opacity="0.4"/>
+  <circle cx="290" cy="700" r="24" fill="#3F51B5" opacity="0.4"/>
+  <circle cx="380" cy="730" r="28" fill="#3949AB" opacity="0.4"/>
+
+  <!-- 우측 "AFTER" 이미지 프레임 (선명) -->
+  <rect x="570" y="580" width="340" height="220" rx="16" fill="#0D1535" stroke="#FFD700" stroke-width="3"/>
+  <text x="740" y="650" font-family="Arial" font-size="36" fill="#FFD700" text-anchor="middle">선명한 별</text>
+  <circle cx="640" cy="720" r="30" fill="#FFD700" filter="url(#starGlow8)"/>
+  <circle cx="720" cy="700" r="22" fill="#FFF9C4" filter="url(#starGlow8)"/>
+  <circle cx="820" cy="730" r="26" fill="#FFD700" filter="url(#starGlow8)"/>
+
+  <!-- 중앙 메인 별 폭발 (핵심 심볼) -->
+  <circle cx="512" cy="380" r="120" fill="url(#starBurst)" filter="url(#starGlow8)"/>
+  <!-- 4각 별 -->
+  <polygon points="512,220 534,364 680,380 534,396 512,540 490,396 344,380 490,364" fill="#FFD700" opacity="0.9"/>
+  <polygon points="512,280 524,372 604,380 524,388 512,472 500,388 420,380 500,372" fill="#FFF9C4"/>
+  <circle cx="512" cy="380" r="40" fill="white"/>
+
+  <!-- 하단 텍스트 -->
+  <text x="512" y="870" font-family="Arial Black" font-size="58" font-weight="900" fill="#FFD700" text-anchor="middle" opacity="0.9">ENHANCE</text>
+</svg>

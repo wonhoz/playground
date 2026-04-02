@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg10" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#B2EBF2"/>
+      <stop offset="100%" stop-color="#4DD0E1"/>
+    </linearGradient>
+    <linearGradient id="cellGrad1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#00BCD4"/>
+      <stop offset="100%" stop-color="#0097A7"/>
+    </linearGradient>
+    <linearGradient id="cellGrad2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#26C6DA"/>
+      <stop offset="100%" stop-color="#00ACC1"/>
+    </linearGradient>
+    <linearGradient id="badgeGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#00838F"/>
+      <stop offset="100%" stop-color="#006064"/>
+    </linearGradient>
+    <filter id="shadow10">
+      <feDropShadow dx="2" dy="4" stdDeviation="6" flood-color="#006064" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg10)"/>
+
+  <!-- 픽셀 그리드 메인 (4×4) -->
+  <g filter="url(#shadow10)">
+    <!-- 행 1 -->
+    <rect x="152" y="200" width="164" height="164" rx="16" fill="url(#cellGrad1)"/>
+    <rect x="328" y="200" width="164" height="164" rx="16" fill="url(#cellGrad2)"/>
+    <rect x="504" y="200" width="164" height="164" rx="16" fill="url(#cellGrad1)"/>
+    <rect x="680" y="200" width="164" height="164" rx="16" fill="url(#cellGrad2)"/>
+    <!-- 행 2 -->
+    <rect x="152" y="376" width="164" height="164" rx="16" fill="url(#cellGrad2)"/>
+    <rect x="328" y="376" width="164" height="164" rx="16" fill="url(#cellGrad1)"/>
+    <rect x="504" y="376" width="164" height="164" rx="16" fill="url(#cellGrad2)"/>
+    <rect x="680" y="376" width="164" height="164" rx="16" fill="url(#cellGrad1)"/>
+    <!-- 행 3 -->
+    <rect x="152" y="552" width="164" height="164" rx="16" fill="url(#cellGrad1)"/>
+    <rect x="328" y="552" width="164" height="164" rx="16" fill="url(#cellGrad2)"/>
+    <rect x="504" y="552" width="164" height="164" rx="16" fill="url(#cellGrad1)"/>
+    <rect x="680" y="552" width="164" height="164" rx="16" fill="url(#cellGrad2)"/>
+    <!-- 행 4 -->
+    <rect x="152" y="728" width="164" height="164" rx="16" fill="url(#cellGrad2)"/>
+    <rect x="328" y="728" width="164" height="164" rx="16" fill="url(#cellGrad1)"/>
+    <rect x="504" y="728" width="164" height="164" rx="16" fill="url(#cellGrad2)"/>
+    <rect x="680" y="728" width="164" height="164" rx="16" fill="url(#cellGrad1)"/>
+  </g>
+
+  <!-- 픽셀 내부 콘텐츠 (이미지 힌트) -->
+  <!-- 작은 도형들로 이미지 표현 -->
+  <rect x="170" y="220" width="60" height="60" rx="8" fill="#E0F7FA" opacity="0.6"/>
+  <rect x="346" y="220" width="60" height="60" rx="8" fill="#B2EBF2" opacity="0.6"/>
+  <polygon points="522,220 558,268 486,268" fill="#E0F7FA" opacity="0.6"/>
+  <!-- 체크마크 (선명해진 표시) -->
+  <polyline points="700,240 718,270 750,220" stroke="white" stroke-width="12" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- ×4 배율 배지 (오버레이, 우상단) -->
+  <circle cx="820" cy="204" r="110" fill="url(#badgeGrad)" opacity="0.92"/>
+  <text x="820" y="234" font-family="Arial Black" font-size="96" font-weight="900" fill="white" text-anchor="middle">×4</text>
+
+  <!-- 확대 화살표 (좌하→우상 대각선) -->
+  <!-- 좌하 화살표 -->
+  <line x1="200" y1="780" x2="158" y2="822" stroke="white" stroke-width="12" stroke-linecap="round" opacity="0.7"/>
+  <line x1="152" y1="816" x2="152" y2="862" stroke="white" stroke-width="12" stroke-linecap="round" opacity="0.7"/>
+  <line x1="148" y1="858" x2="194" y2="858" stroke="white" stroke-width="12" stroke-linecap="round" opacity="0.7"/>
+
+  <!-- 우상 화살표 -->
+  <line x1="696" y1="296" x2="738" y2="254" stroke="white" stroke-width="12" stroke-linecap="round" opacity="0.7"/>
+  <line x1="740" y1="208" x2="740" y2="262" stroke="white" stroke-width="12" stroke-linecap="round" opacity="0.7"/>
+  <line x1="736" y1="212" x2="790" y2="212" stroke="white" stroke-width="12" stroke-linecap="round" opacity="0.7"/>
+
+  <!-- 배율 선택 표시줄 (하단) -->
+  <rect x="152" y="916" width="692" height="60" rx="30" fill="white" opacity="0.25"/>
+  <rect x="152" y="916" width="220" height="60" rx="30" fill="white" opacity="0.4"/>
+  <text x="262" y="957" font-family="Arial" font-size="38" fill="#006064" text-anchor="middle" font-weight="bold">2x</text>
+  <text x="462" y="957" font-family="Arial" font-size="38" fill="#006064" text-anchor="middle" font-weight="bold">4x</text>
+  <text x="672" y="957" font-family="Arial" font-size="38" fill="#006064" text-anchor="middle" font-weight="bold">8x</text>
+</svg>

@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg5" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#F8F9FA"/>
+      <stop offset="100%" stop-color="#E3F2FD"/>
+    </linearGradient>
+    <linearGradient id="brushGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1565C0"/>
+      <stop offset="100%" stop-color="#1976D2"/>
+    </linearGradient>
+    <linearGradient id="strokeGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#FFF176"/>
+      <stop offset="40%" stop-color="#FFD740"/>
+      <stop offset="100%" stop-color="#FF6D00"/>
+    </linearGradient>
+    <!-- 붓 터치 — 선명해지는 그라데이션 효과 -->
+    <linearGradient id="blurStroke" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#CFD8DC" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#90A4AE" stop-opacity="0.8"/>
+    </linearGradient>
+  </defs>
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg5)"/>
+
+  <!-- 화면 프레임 -->
+  <rect x="130" y="220" width="580" height="430" rx="20" fill="white" stroke="#E0E0E0" stroke-width="3"/>
+
+  <!-- 이미지 영역 — 좌측 흐릿 우측 선명 (붓 터치 전/후) -->
+  <!-- 흐릿한 영역 (붓 미도달) -->
+  <rect x="148" y="238" width="240" height="395" fill="#ECEFF1" rx="8"/>
+  <!-- 흐릿한 오브젝트들 -->
+  <ellipse cx="250" cy="360" rx="80" ry="80" fill="#B0BEC5" opacity="0.6"/>
+  <rect x="188" y="448" width="60" height="170" rx="8" fill="#CFD8DC" opacity="0.5"/>
+  <rect x="268" y="490" width="60" height="128" rx="8" fill="#B0BEC5" opacity="0.5"/>
+
+  <!-- 선명한 영역 (붓 통과 후) -->
+  <rect x="396" y="238" width="296" height="395" fill="#FFF8E1" rx="8"/>
+  <!-- 선명해진 같은 오브젝트 -->
+  <ellipse cx="540" cy="360" rx="80" ry="80" fill="#FFA000"/>
+  <rect x="476" y="448" width="60" height="170" rx="8" fill="#1565C0"/>
+  <rect x="556" y="490" width="60" height="128" rx="8" fill="#2196F3"/>
+  <!-- 선명도 스파클 -->
+  <circle cx="620" cy="278" r="12" fill="#FFD740"/>
+  <circle cx="640" cy="300" r="8" fill="#FF6D00"/>
+  <circle cx="600" cy="258" r="6" fill="#FFD740"/>
+
+  <!-- 붓 터치 경계선 (물감이 퍼지는 느낌) -->
+  <path d="M396 238 Q380 400 396 633" stroke="url(#strokeGrad)" stroke-width="18" fill="none" stroke-linecap="round"/>
+
+  <!-- 붓 (대각선으로 가로지름) -->
+  <!-- 붓 손잡이 -->
+  <rect x="580" y="100" width="28" height="340" rx="14" fill="url(#brushGrad)" transform="rotate(45 580 100)"/>
+  <!-- 붓 페룰(금속 부분) -->
+  <rect x="434" y="375" width="44" height="52" rx="6" fill="#B0BEC5" transform="rotate(45 456 401)"/>
+  <!-- 붓 털 -->
+  <path d="M395 435 Q380 470 370 520 Q385 490 400 510 Q388 475 405 450 Z" fill="#FFD740"/>
+  <path d="M400 440 Q388 476 376 528 Q392 495 408 515 Q396 480 412 456 Z" fill="#FF6D00"/>
+  <path d="M405 444 Q395 480 385 530 Q398 498 415 517 Q404 483 418 460 Z" fill="#FFA000"/>
+
+  <!-- 붓 터치 효과 — 아래 방향으로 물감 흔적 -->
+  <path d="M370 520 Q350 560 340 610" stroke="#FFD740" stroke-width="24" fill="none" stroke-linecap="round" opacity="0.7"/>
+  <path d="M376 528 Q356 568 346 618" stroke="#FF6D00" stroke-width="16" fill="none" stroke-linecap="round" opacity="0.5"/>
+
+  <!-- 우측 AI 배지 -->
+  <rect x="740" y="300" width="164" height="200" rx="20" fill="#1565C0" opacity="0.9"/>
+  <text x="822" y="370" font-family="Arial Black" font-size="52" fill="white" text-anchor="middle" font-weight="900">AI</text>
+  <line x1="760" y1="388" x2="884" y2="388" stroke="white" stroke-width="3" opacity="0.5"/>
+  <text x="822" y="430" font-family="Arial" font-size="36" fill="#90CAF9" text-anchor="middle">4× UP</text>
+  <text x="822" y="470" font-family="Arial" font-size="28" fill="#64B5F6" text-anchor="middle">SCALE</text>
+
+  <!-- 하단 레이블 -->
+  <text x="250" y="730" font-family="Arial" font-size="38" fill="#90A4AE" text-anchor="middle" font-weight="bold">BLURRY</text>
+  <text x="540" y="730" font-family="Arial" font-size="38" fill="#FF6D00" text-anchor="middle" font-weight="bold">CRISP</text>
+</svg>

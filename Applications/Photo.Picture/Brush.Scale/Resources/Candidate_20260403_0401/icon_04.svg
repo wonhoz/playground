@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg4" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FF7043"/>
+      <stop offset="100%" stop-color="#F4511E"/>
+    </linearGradient>
+    <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#64B5F6"/>
+      <stop offset="100%" stop-color="#1976D2"/>
+    </linearGradient>
+    <clipPath id="lensClip">
+      <circle cx="460" cy="440" r="230"/>
+    </clipPath>
+  </defs>
+  <!-- 배경 -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg4)"/>
+
+  <!-- 돋보기 외곽 링 -->
+  <circle cx="460" cy="440" r="258" fill="#BF360C" opacity="0.5"/>
+  <circle cx="460" cy="440" r="246" fill="white" opacity="0.95"/>
+  <circle cx="460" cy="440" r="230" fill="#87CEEB"/>
+
+  <!-- 렌즈 내부 풍경 (선명한 이미지) -->
+  <g clip-path="url(#lensClip)">
+    <!-- 하늘 -->
+    <rect x="230" y="210" width="460" height="230" fill="url(#skyGrad)"/>
+    <!-- 태양 -->
+    <circle cx="340" cy="300" r="55" fill="#FFE082"/>
+    <!-- 구름 -->
+    <ellipse cx="520" cy="280" rx="70" ry="40" fill="white" opacity="0.9"/>
+    <ellipse cx="560" cy="270" rx="50" ry="35" fill="white" opacity="0.9"/>
+    <!-- 초록 언덕 -->
+    <ellipse cx="460" cy="560" rx="310" ry="130" fill="#4CAF50"/>
+    <ellipse cx="300" cy="520" rx="200" ry="110" fill="#388E3C"/>
+    <!-- 산 -->
+    <polygon points="360,440 430,310 500,440" fill="#795548"/>
+    <polygon points="430,440 510,330 590,440" fill="#8D6E63"/>
+    <!-- 눈 덮인 산봉우리 -->
+    <polygon points="430,310 410,370 450,370" fill="white"/>
+    <!-- 나무 -->
+    <rect x="565" y="450" width="16" height="48" fill="#5D4037"/>
+    <polygon points="573,410 550,460 596,460" fill="#2E7D32"/>
+    <polygon points="573,380 546,440 600,440" fill="#388E3C"/>
+  </g>
+
+  <!-- 렌즈 빛 반사 -->
+  <ellipse cx="390" cy="310" rx="50" ry="30" fill="white" opacity="0.35" transform="rotate(-30 390 310)"/>
+
+  <!-- 돋보기 손잡이 -->
+  <line x1="638" y1="618" x2="790" y2="780" stroke="white" stroke-width="56" stroke-linecap="round"/>
+  <line x1="638" y1="618" x2="790" y2="780" stroke="#BF360C" stroke-width="32" stroke-linecap="round"/>
+
+  <!-- 렌즈 외곽 반짝임 -->
+  <circle cx="460" cy="440" r="248" fill="none" stroke="white" stroke-width="6" opacity="0.6"/>
+
+  <!-- 선명도 표시 스파클 -->
+  <line x1="720" y1="240" x2="720" y2="200" stroke="white" stroke-width="8" stroke-linecap="round"/>
+  <line x1="700" y1="260" x2="668" y2="228" stroke="white" stroke-width="8" stroke-linecap="round"/>
+  <line x1="740" y1="260" x2="772" y2="228" stroke="white" stroke-width="8" stroke-linecap="round"/>
+  <circle cx="720" cy="260" r="18" fill="#FFE082"/>
+
+  <!-- 하단 텍스트 -->
+  <text x="512" y="820" font-family="Arial Black, Arial" font-size="72" font-weight="900" fill="white" text-anchor="middle" opacity="0.9">SHARP</text>
+</svg>

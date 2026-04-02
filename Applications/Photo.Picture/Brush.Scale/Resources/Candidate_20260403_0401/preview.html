@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brush.Scale — 아이콘 후보 Candidate_20260403_0401</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: linear-gradient(135deg, #0D1B2A 0%, #1A2A4A 50%, #0D1B2A 100%);
+    min-height: 100vh;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    color: #E0E0E0;
+    padding: 40px 20px;
+  }
+  header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+  header h1 {
+    font-size: 36px;
+    font-weight: 900;
+    color: #4DD0E1;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  header p {
+    color: #80DEEA;
+    font-size: 15px;
+    opacity: 0.8;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 32px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(77,208,225,0.2);
+    border-radius: 20px;
+    padding: 28px 20px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  }
+  .card:hover {
+    transform: translateY(-8px) scale(1.04);
+    box-shadow: 0 16px 48px rgba(0,188,212,0.3);
+    border-color: rgba(77,208,225,0.6);
+  }
+  .icon-wrap {
+    width: 200px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 18px;
+  }
+  .icon-wrap img {
+    width: 180px;
+    height: 180px;
+    object-fit: contain;
+    border-radius: 32px;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.5);
+    transition: transform 0.25s ease;
+  }
+  .card:hover .icon-wrap img {
+    transform: scale(1.1);
+  }
+  .badge {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+  }
+  .literal  { background: rgba(76,175,80,0.2);  color: #81C784; border: 1px solid rgba(76,175,80,0.4); }
+  .metaphor { background: rgba(156,39,176,0.2); color: #CE93D8; border: 1px solid rgba(156,39,176,0.4); }
+  .hybrid   { background: rgba(255,152,0,0.2);  color: #FFB74D; border: 1px solid rgba(255,152,0,0.4); }
+  .icon-num {
+    font-size: 12px;
+    color: #4DD0E1;
+    font-weight: 700;
+    margin-bottom: 4px;
+    opacity: 0.7;
+  }
+  .concept {
+    font-size: 15px;
+    font-weight: 700;
+    color: #E0F7FA;
+    text-align: center;
+    margin-bottom: 6px;
+    line-height: 1.4;
+  }
+  .pattern {
+    font-size: 12px;
+    color: #80DEEA;
+    opacity: 0.7;
+    margin-bottom: 10px;
+  }
+  .palette {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .swatch {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.2);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+  }
+  .filename {
+    font-size: 11px;
+    color: #546E7A;
+    margin-top: 8px;
+    font-family: monospace;
+  }
+  footer {
+    text-align: center;
+    margin-top: 56px;
+    color: #37474F;
+    font-size: 13px;
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>Brush.Scale — 아이콘 후보</h1>
+  <p>Candidate_20260403_0401 &nbsp;|&nbsp; 10개 후보 &nbsp;|&nbsp; AI 이미지 업스케일러 (2x/4x/8x)</p>
+</header>
+
+<div class="grid">
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_01.svg" alt="icon_01"></div>
+    <div class="badge literal">Literal</div>
+    <div class="icon-num">icon_01</div>
+    <div class="concept">Before/After 슬라이더 분할뷰</div>
+    <div class="pattern">패턴: 대각선/동적</div>
+    <div class="palette">
+      <div class="swatch" style="background:#74D7F7" title="#74D7F7 하늘색 배경"></div>
+      <div class="swatch" style="background:#B0C8D8" title="#B0C8D8 흐릿한 좌측"></div>
+      <div class="swatch" style="background:#FF6B35" title="#FF6B35 선명한 우측"></div>
+      <div class="swatch" style="background:#FFFFFF" title="#FFFFFF 분할선"></div>
+    </div>
+    <div class="filename">icon_01.svg</div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_02.svg" alt="icon_02"></div>
+    <div class="badge literal">Literal</div>
+    <div class="icon-num">icon_02</div>
+    <div class="concept">"4x" 골드 텍스트 + 상승 화살표</div>
+    <div class="pattern">패턴: 중앙 심볼</div>
+    <div class="palette">
+      <div class="swatch" style="background:#4A148C" title="#4A148C 딥퍼플 배경"></div>
+      <div class="swatch" style="background:#FFC107" title="#FFC107 골드 숫자"></div>
+      <div class="swatch" style="background:#FFFFFF" title="#FFFFFF 화살표"></div>
+      <div class="swatch" style="background:#E040FB" title="#E040FB 포인트 퍼플"></div>
+    </div>
+    <div class="filename">icon_02.svg</div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_03.svg" alt="icon_03"></div>
+    <div class="badge literal">Literal</div>
+    <div class="icon-num">icon_03</div>
+    <div class="concept">저해상도 픽셀 → 고해상도 픽셀 변환</div>
+    <div class="pattern">패턴: 레이어드</div>
+    <div class="palette">
+      <div class="swatch" style="background:#AEEA00" title="#AEEA00 라임 배경"></div>
+      <div class="swatch" style="background:#1B5E20" title="#1B5E20 작은 픽셀"></div>
+      <div class="swatch" style="background:#7CB342" title="#7CB342 큰 픽셀"></div>
+      <div class="swatch" style="background:#CCFF90" title="#CCFF90 배율 포인트"></div>
+    </div>
+    <div class="filename">icon_03.svg</div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_04.svg" alt="icon_04"></div>
+    <div class="badge literal">Literal</div>
+    <div class="icon-num">icon_04</div>
+    <div class="concept">돋보기 속 선명한 풍경</div>
+    <div class="pattern">패턴: 중앙 심볼</div>
+    <div class="palette">
+      <div class="swatch" style="background:#FF7043" title="#FF7043 코랄 배경"></div>
+      <div class="swatch" style="background:#FFFFFF" title="#FFFFFF 돋보기 링"></div>
+      <div class="swatch" style="background:#64B5F6" title="#64B5F6 하늘 내부"></div>
+      <div class="swatch" style="background:#FFE082" title="#FFE082 태양 골드"></div>
+    </div>
+    <div class="filename">icon_04.svg</div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_05.svg" alt="icon_05"></div>
+    <div class="badge metaphor">Metaphor</div>
+    <div class="icon-num">icon_05</div>
+    <div class="concept">붓(Brush)으로 선명함을 칠하는 장면</div>
+    <div class="pattern">패턴: 대각선/동적</div>
+    <div class="palette">
+      <div class="swatch" style="background:#F8F9FA" title="#F8F9FA 밝은 배경"></div>
+      <div class="swatch" style="background:#1565C0" title="#1565C0 붓 파랑"></div>
+      <div class="swatch" style="background:#FFD740" title="#FFD740 선명 터치 노랑"></div>
+      <div class="swatch" style="background:#FF6D00" title="#FF6D00 포인트 주황"></div>
+    </div>
+    <div class="filename">icon_05.svg</div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_06.svg" alt="icon_06"></div>
+    <div class="badge metaphor">Metaphor</div>
+    <div class="icon-num">icon_06</div>
+    <div class="concept">AI 마법봉이 이미지를 변환하는 순간</div>
+    <div class="pattern">패턴: 실루엣/캐릭터</div>
+    <div class="palette">
+      <div class="swatch" style="background:#0D1B4E" title="#0D1B4E 딥네이비 배경"></div>
+      <div class="swatch" style="background:#F5F5F5" title="#F5F5F5 마법봉 흰"></div>
+      <div class="swatch" style="background:#FFD700" title="#FFD700 별빛 골드"></div>
+      <div class="swatch" style="background:#3F51B5" title="#3F51B5 이미지 블루"></div>
+    </div>
+    <div class="filename">icon_06.svg</div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_07.svg" alt="icon_07"></div>
+    <div class="badge metaphor">Metaphor</div>
+    <div class="icon-num">icon_07</div>
+    <div class="concept">계단형 상승 그래프 (1x→2x→4x→8x)</div>
+    <div class="pattern">패턴: 기하학 추상</div>
+    <div class="palette">
+      <div class="swatch" style="background:#00BCD4" title="#00BCD4 청록 배경"></div>
+      <div class="swatch" style="background:#FFFFFF" title="#FFFFFF 계단 흰"></div>
+      <div class="swatch" style="background:#FF6D00" title="#FF6D00 상승선 주황"></div>
+      <div class="swatch" style="background:#80DEEA" title="#80DEEA 레이블 민트"></div>
+    </div>
+    <div class="filename">icon_07.svg</div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_08.svg" alt="icon_08"></div>
+    <div class="badge metaphor">Metaphor</div>
+    <div class="icon-num">icon_08</div>
+    <div class="concept">별빛이 흐릿→선명해지는 우주 장면</div>
+    <div class="pattern">패턴: 공간/장면</div>
+    <div class="palette">
+      <div class="swatch" style="background:#1A237E" title="#1A237E 남색 배경"></div>
+      <div class="swatch" style="background:#FFD700" title="#FFD700 선명한 별 금"></div>
+      <div class="swatch" style="background:#9FA8DA" title="#9FA8DA 흐릿한 별 퍼플"></div>
+      <div class="swatch" style="background:#FFF9C4" title="#FFF9C4 중앙 별 폭발"></div>
+    </div>
+    <div class="filename">icon_08.svg</div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_09.svg" alt="icon_09"></div>
+    <div class="badge metaphor">Metaphor</div>
+    <div class="icon-num">icon_09</div>
+    <div class="concept">선명도 파동 폭발 + 배율 텍스트</div>
+    <div class="pattern">패턴: 기하학 추상</div>
+    <div class="palette">
+      <div class="swatch" style="background:#FF5722" title="#FF5722 오렌지레드 배경"></div>
+      <div class="swatch" style="background:#FFFFFF" title="#FFFFFF 파동 흰"></div>
+      <div class="swatch" style="background:#FF80AB" title="#FF80AB 파동 핑크"></div>
+      <div class="swatch" style="background:#FFCCBC" title="#FFCCBC 픽셀 살구"></div>
+    </div>
+    <div class="filename">icon_09.svg</div>
+  </div>
+
+  <div class="card">
+    <div class="icon-wrap"><img src="icon_10.svg" alt="icon_10"></div>
+    <div class="badge hybrid">Hybrid</div>
+    <div class="icon-num">icon_10</div>
+    <div class="concept">픽셀 그리드 4×4 + ×4 배율 배지</div>
+    <div class="pattern">패턴: 레이어드</div>
+    <div class="palette">
+      <div class="swatch" style="background:#B2EBF2" title="#B2EBF2 민트 배경"></div>
+      <div class="swatch" style="background:#00BCD4" title="#00BCD4 픽셀 청록"></div>
+      <div class="swatch" style="background:#006064" title="#006064 배지 딥청록"></div>
+      <div class="swatch" style="background:#FFFFFF" title="#FFFFFF 배율 기호 흰"></div>
+    </div>
+    <div class="filename">icon_10.svg</div>
+  </div>
+
+</div>
+
+<footer>
+  <p>Brush.Scale &nbsp;|&nbsp; AI Image Upscaler (2x / 4x / 8x) &nbsp;|&nbsp; Candidate_20260403_0401</p>
+  <p style="margin-top:8px; font-size:12px; opacity:0.4">Generated 2026-04-03</p>
+</footer>
+</body>
+</html>

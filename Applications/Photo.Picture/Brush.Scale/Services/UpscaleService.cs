@@ -6,11 +6,14 @@ namespace Brush.Scale.Services;
 
 public class UpscaleService : IDisposable
 {
-    const int TileSize    = 256;
-    const int TileOverlap = 16;
+    const int DefaultTileSize    = 256;
+    const int DefaultTileOverlap = 16;
 
     InferenceSession? _session;
-    UpscaleModelType  _loadedModel = UpscaleModelType.Bicubic;
+    UpscaleModelType  _loadedModel    = UpscaleModelType.Bicubic;
+    int               _tileSize       = DefaultTileSize;
+    int               _tileOverlap    = DefaultTileOverlap;
+    bool              _fixedTileSize  = false;
 
     // ── 세션 로드 ──────────────────────────────────────────────────────────
     public void LoadModel(UpscaleModelType modelType)
@@ -18,8 +21,11 @@ public class UpscaleService : IDisposable
         if (modelType == UpscaleModelType.Bicubic)
         {
             _session?.Dispose();
-            _session = null;
-            _loadedModel = UpscaleModelType.Bicubic;
+            _session       = null;
+            _loadedModel   = UpscaleModelType.Bicubic;
+            _tileSize      = DefaultTileSize;
+            _tileOverlap   = DefaultTileOverlap;
+            _fixedTileSize = false;
             return;
         }
 
@@ -42,6 +48,21 @@ public class UpscaleService : IDisposable
 
         _session     = new InferenceSession(path, opts);
         _loadedModel = modelType;
+
+        // 모델 입력 크기 감지 — 고정 크기(예: waifu2x 64×64) vs 동적 크기
+        var inputDims = _session.InputMetadata.Values.First().Dimensions;
+        if (inputDims.Length >= 4 && inputDims[2] > 0 && inputDims[3] > 0)
+        {
+            _fixedTileSize = true;
+            _tileSize      = (int)inputDims[2];
+            _tileOverlap   = Math.Max(2, _tileSize / 16);
+        }
+        else
+        {
+            _fixedTileSize = false;
+            _tileSize      = DefaultTileSize;
+            _tileOverlap   = DefaultTileOverlap;
+        }
     }
 
     // ── 단일 이미지 업스케일 ────────────────────────────────────────────────
@@ -140,7 +161,10 @@ public class UpscaleService : IDisposable
             var output = new SKBitmap(outW, outH, SKColorType.Rgb888x, SKAlphaType.Opaque);
 
             // 타일 목록 계산
-            var tiles = BuildTiles(src.Width, src.Height, TileSize, TileOverlap);
+            int tileSize    = _tileSize;
+            int tileOverlap = _tileOverlap;
+            bool fixedSize  = _fixedTileSize;
+            var tiles = BuildTiles(src.Width, src.Height, tileSize, tileOverlap);
             int total = tiles.Count;
 
             for (int ti = 0; ti < total; ti++)
@@ -155,7 +179,10 @@ public class UpscaleService : IDisposable
                                       new SKRect(0,  0,  sw,       sh));
 
                 // float 텐서 변환 (NCHW, [0,1])
-                var tensor = BitmapToTensor(tileBmp);
+                // 고정 크기 모델: 타일이 기대 크기보다 작을 경우 zero-padding
+                var tensor = fixedSize
+                    ? BitmapToTensorPadded(tileBmp, tileSize, tileSize)
+                    : BitmapToTensor(tileBmp);
 
                 // 추론
                 var inputs = new List<NamedOnnxValue>
@@ -171,13 +198,13 @@ public class UpscaleService : IDisposable
                 using var outTile = TensorToBitmap(outTensor, tw, th);
 
                 // 오버랩 제거 후 복사
-                int ox = sx > 0 ? TileOverlap * nativeScale : 0;
-                int oy = sy > 0 ? TileOverlap * nativeScale : 0;
-                int ow = tw - ox - (sx + sw < src.Width  ? TileOverlap * nativeScale : 0);
-                int oh = th - oy - (sy + sh < src.Height ? TileOverlap * nativeScale : 0);
+                int ox = sx > 0 ? tileOverlap * nativeScale : 0;
+                int oy = sy > 0 ? tileOverlap * nativeScale : 0;
+                int ow = tw - ox - (sx + sw < src.Width  ? tileOverlap * nativeScale : 0);
+                int oh = th - oy - (sy + sh < src.Height ? tileOverlap * nativeScale : 0);
 
-                int dx = sx * nativeScale + (sx > 0 ? TileOverlap * nativeScale : 0);
-                int dy = sy * nativeScale + (sy > 0 ? TileOverlap * nativeScale : 0);
+                int dx = sx * nativeScale + (sx > 0 ? tileOverlap * nativeScale : 0);
+                int dy = sy * nativeScale + (sy > 0 ? tileOverlap * nativeScale : 0);
 
                 using (var c = new SKCanvas(output))
                     c.DrawBitmap(outTile, new SKRect(ox, oy, ox + ow, oy + oh),
@@ -253,6 +280,23 @@ public class UpscaleService : IDisposable
     {
         int h = bmp.Height, w = bmp.Width;
         var t = new DenseTensor<float>([1, 3, h, w]);
+        for (int y = 0; y < h; y++)
+        for (int x = 0; x < w; x++)
+        {
+            var c = bmp.GetPixel(x, y);
+            t[0, 0, y, x] = c.Red   / 255f;
+            t[0, 1, y, x] = c.Green / 255f;
+            t[0, 2, y, x] = c.Blue  / 255f;
+        }
+        return t;
+    }
+
+    // 고정 크기 모델용: 타일이 targetH×targetW보다 작으면 zero-padding
+    static DenseTensor<float> BitmapToTensorPadded(SKBitmap bmp, int targetH, int targetW)
+    {
+        var t = new DenseTensor<float>([1, 3, targetH, targetW]);
+        int h = Math.Min(bmp.Height, targetH);
+        int w = Math.Min(bmp.Width,  targetW);
         for (int y = 0; y < h; y++)
         for (int x = 0; x < w; x++)
         {

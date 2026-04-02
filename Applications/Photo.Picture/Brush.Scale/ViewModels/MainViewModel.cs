@@ -364,6 +364,8 @@ public class ModelItem : INotifyPropertyChanged
         ? _modelType.DisplayName()
         : _modelType.DisplayName() + "  [모델 없음]";
 
+    public override string ToString() => DisplayName;
+
     public void Refresh()
     {
         Available = ModelManager.IsAvailable(_modelType);

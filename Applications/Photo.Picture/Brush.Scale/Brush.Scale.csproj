@@ -16,6 +16,13 @@
     <Resource Include="Resources\app.ico" Condition="Exists('Resources\app.ico')" />
   </ItemGroup>
   <ItemGroup>
+    <!-- ORT가 System32\directml.dll을 자동 로드하지 못하도록 빈 스텁으로 차단 -->
+    <Content Include="Resources\directml.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>directml.dll</TargetPath>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="Microsoft.ML.OnnxRuntime" Version="1.14.1" />
     <PackageReference Include="SkiaSharp" Version="3.116.1" />
     <PackageReference Include="SkiaSharp.NativeAssets.Win32" Version="3.116.1" />

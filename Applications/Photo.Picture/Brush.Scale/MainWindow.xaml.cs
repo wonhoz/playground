@@ -11,6 +11,7 @@ public partial class MainWindow : Window
     static extern int DwmSetWindowAttribute(IntPtr hwnd, int attr, ref int val, int size);
 
     readonly MainViewModel _vm;
+    readonly System.Windows.Media.RectangleGeometry _resultClip = new();
     double _sliderX = 0.5;
 
     public MainWindow()
@@ -18,6 +19,7 @@ public partial class MainWindow : Window
         _vm = new MainViewModel();
         DataContext = _vm;
         InitializeComponent();
+        ImgResult.Clip = _resultClip;
         Loaded   += OnLoaded;
         Drop     += OnDrop;
         DragOver += (_, e) => { e.Effects = DragDropEffects.Copy; e.Handled = true; };
@@ -128,7 +130,7 @@ public partial class MainWindow : Window
         double x = _sliderX * w;
 
         // 클립 영역: 결과 이미지 왼쪽
-        ResultClip.Rect = new System.Windows.Rect(0, 0, x, h);
+        _resultClip.Rect = new System.Windows.Rect(0, 0, x, h);
 
         // 슬라이더 라인
         SliderLine.Margin = new Thickness(x - 1, 0, 0, 0);

@@ -27,22 +27,7 @@ echo !DG!Output: %BIN%!RS!
 echo !DG!--------------------------------------------------!RS!
 echo.
 
-:: 배포 전 버전 확인
-:: for /f "delims=" %%v in ('powershell -NoProfile -Command "([xml](Get-Content \"%ROOT%Directory.Build.props\")).Project.PropertyGroup.AppVersion" 2^>nul') do set "APP_VER=%%v"
-:: if not defined APP_VER set "APP_VER=(알 수 없음)"
-:: echo !BD!현재 버전: !GR!!APP_VER!!RS!
-:: echo !DG!Directory.Build.props 기준 — 배포 전 버전을 확인하세요.!RS!
-:: echo.
-:: choice /C YN /N /M "계속 배포하시겠습니까? [Y/N] "
-:: if errorlevel 2 (
-::     echo.
-::     echo !RE!배포가 취소되었습니다.!RS!
-::     exit /b 0
-:: )
-:: echo.
-
 :: ── Applications / AI ──────────────────────────────────────────────
-call :pub "AI.Clip"               "Applications\AI\AI.Clip"                                 "Ai.Clip.exe"               "Applications\AI"
 call :pub "Prompt.Forge"          "Applications\AI\Prompt.Forge"                            "Prompt.Forge.exe"          "Applications\AI\Prompt.Forge"
 
 :: ── Applications / Audio ───────────────────────────────────────────
@@ -50,7 +35,6 @@ call :pub "Music.Player"          "Applications\Audio\Music.Player"             
 call :pub "Tag.Forge"             "Applications\Audio\Tag.Forge"                            "Tag.Forge.exe"             "Applications\Audio\Tag.Forge"
 
 :: ── Applications / Automation ──────────────────────────────────────
-call :pub "Pane.Cast"             "Applications\Automation\Pane.Cast"                       "Pane.Cast.exe"             "Applications\Automation"
 call :pub "Stay.Awake"            "Applications\Automation\Stay.Awake"                      "Stay.Awake.exe"            "Applications\Automation\Stay.Awake"
 
 :: ── Applications / Development / Analyzer ─────────────────────────
@@ -147,8 +131,6 @@ call :pub "Text.Forge"            "Applications\Text\Text.Forge"                
 call :pub "Word.Cloud"            "Applications\Text\Word.Cloud"                            "Word.Cloud.exe"            "Applications\Text"
 
 :: ── Applications / Tools.Utility ──────────────────────────────────
-call :pub "Badge.Forge"           "Applications\Tools.Utility\Badge.Forge"                  "Badge.Forge.exe"           "Applications\Tools.Utility\Badge.Forge"
-call :pub "Clipboard.Stacker"     "Applications\Tools.Utility\Clipboard.Stacker"            "Clipboard.Stacker.exe"     "Applications\Tools.Utility"
 call :pub "Dict.Cast"             "Applications\Tools.Utility\Dict.Cast"                    "Dict.Cast.exe"             "Applications\Tools.Utility\Dict.Cast"
 call :pub "Icon.Maker"            "Applications\Tools.Utility\Icon.Maker"                   "Icon.Maker.exe"            "Applications\Tools.Utility\Icon.Maker"
 call :pub "JSON.Fmt"              "Applications\Tools.Utility\JSON.Fmt"                     "JSON.Fmt.exe"              "Applications\Tools.Utility\JSON.Fmt"
@@ -166,12 +148,10 @@ call :pub "Brick.Blitz"           "Games\Arcade\Brick.Blitz"                    
 call :pub "Dash.City"             "Games\Arcade\Dash.City"                                  "Dash.City.exe"             "Games\Arcade"
 call :pub "Neon.Run"              "Games\Arcade\Neon.Run"                                   "Neon.Run.exe"              "Games\Arcade"
 call :pub "Neon.Slice"            "Games\Arcade\Neon.Slice"                                 "Neon.Slice.exe"            "Games\Arcade\Neon.Slice"
-call :pub "Sky.Drift"             "Games\Arcade\Sky.Drift"                                  "SkyDrift.exe"              "Games\Arcade"
 
 :: ── Games / Casual ─────────────────────────────────────────────────
 call :pub "Ear.Train"             "Games\Casual\Ear.Train"                                  "Ear.Train.exe"             "Games\Casual"
 call :pub "Geo.Quiz"              "Games\Casual\Geo.Quiz"                                   "Geo.Quiz.exe"              "Games\Casual\Geo.Quiz"
-call :pub "Morse.Run"             "Games\Casual\Morse.Run"                                  "Morse.Run.exe"             "Games\Casual\Morse.Run"
 call :pub "Snap.Duel"             "Games\Casual\Snap.Duel"                                  "Snap.Duel.exe"             "Games\Casual"
 call :pub "Trivia.Cast"           "Games\Casual\Trivia.Cast"                                "Trivia.Cast.exe"           "Games\Casual"
 
@@ -181,14 +161,11 @@ call :pub "Code.Idle"             "Games\Idle\Code.Idle"                        
 :: ── Games / Puzzle ─────────────────────────────────────────────────
 call :pub "Bug.Hunt"              "Games\Puzzle\Bug.Hunt"                                   "Bug.Hunt.exe"              "Games\Puzzle\Bug.Hunt"
 call :pub "Cipher.Quest"          "Games\Puzzle\Cipher.Quest"                               "Cipher.Quest.exe"          "Games\Puzzle\Cipher.Quest"
-call :pub "Circuit.Break"         "Games\Puzzle\Circuit.Break"                              "Circuit.Break.exe"         "Games\Puzzle"
 call :pub "Crossword.Cast"        "Games\Puzzle\Crossword.Cast"                             "Crossword.Cast.exe"        "Games\Puzzle\Crossword.Cast"
 call :pub "Escape.Key"            "Games\Puzzle\Escape.Key"                                 "Escape.Key.exe"            "Games\Puzzle\Escape.Key"
 call :pub "Gravity.Flip"          "Games\Puzzle\Gravity.Flip"                               "Gravity.Flip.exe"          "Games\Puzzle"
 call :pub "Hue.Flow"              "Games\Puzzle\Hue.Flow"                                   "Hue.Flow.exe"              "Games\Puzzle"
 call :pub "Orbit.Craft"           "Games\Puzzle\Orbit.Craft"                                "Orbit.Craft.exe"           "Games\Puzzle\Orbit.Craft"
-call :pub "Orbit.Raid"            "Games\Puzzle\Orbit.Raid"                                 "Orbit.Raid.exe"            "Games\Puzzle\Orbit.Raid"
-call :pub "Persp.Shift"           "Games\Puzzle\Persp.Shift"                                "Persp.Shift.exe"           "Games\Puzzle\Persp.Shift"
 
 :: ── Games / Racing ─────────────────────────────────────────────────
 call :pub "Nitro.Drift"           "Games\Racing\Nitro.Drift"                                "Nitro.Drift.exe"           "Games\Racing"

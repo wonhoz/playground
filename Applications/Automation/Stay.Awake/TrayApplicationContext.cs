@@ -1,5 +1,4 @@
 using System.ComponentModel;
-using Microsoft.Win32;
 
 namespace StayAwake
 {
@@ -26,10 +25,6 @@ namespace StayAwake
         private ToolStripMenuItem _slackAutoStatusItem = null!;
         private ToolStripMenuItem _preventSleepItem = null!;
         private ToolStripMenuItem _activityTypeItem = null!;
-        private ToolStripMenuItem _startupItem = null!;
-
-        private const string StartupRegistryKey = @"SOFTWARE\Microsoft\Windows\CurrentVersion\Run";
-        private const string StartupValueName = "StayAwake";
 
         private bool _isRunning = false;
         private int _intervalMinutes = 3; // 기본 3분 (Slack 10분 타임아웃의 1/3)
@@ -214,20 +209,8 @@ namespace StayAwake
 
             menu.Items.Add(new ToolStripSeparator());
 
-            // Windows 시작 시 자동 실행
-            _startupItem = new ToolStripMenuItem("Windows 시작 시 자동 실행", null, (s, e) => ToggleStartup())
-            {
-                Checked = IsStartupEnabled()
-            };
-            menu.Items.Add(_startupItem);
-
-            menu.Items.Add(new ToolStripSeparator());
-
             // 오늘 통계
             menu.Items.Add(new ToolStripMenuItem("오늘 통계", null, (s, e) => ShowStats()));
-
-            // 사용법 & 단축키
-            menu.Items.Add(new ToolStripMenuItem("사용법 & 단축키", null, (s, e) => ShowHelp()));
 
             // 정보
             menu.Items.Add(new ToolStripMenuItem("정보", null, (s, e) => ShowAbout()));
@@ -481,9 +464,13 @@ namespace StayAwake
 
             var sb = new System.Text.StringBuilder();
             sb.AppendLine($"[오늘의 활동]  {_statsDate:yyyy-MM-dd} ({todayDayName})");
+            sb.AppendLine();
+            sb.AppendLine("[활동 시뮬레이션]");
             sb.AppendLine($"• 시뮬레이션 실행: {_dailySimCount}회");
             sb.AppendLine($"• 사용자 활동으로 스킵: {_dailySkipCount}회");
             sb.AppendLine($"• 스킵율: {skipRate:F1}%  (직접 사용 중이던 비율)");
+            sb.AppendLine();
+            sb.AppendLine("[활성 시간]");
             sb.AppendLine($"• 누적 활성 시간: {(int)activeTime.TotalHours:D2}:{activeTime:mm\\:ss}");
             sb.AppendLine($"• 활성 비율: {activeRate:F1}%  ({(int)activeTime.TotalHours:D2}:{activeTime:mm\\:ss} / {(int)todayElapsed.TotalHours:D2}:{todayElapsed:mm\\:ss})");
 
@@ -508,7 +495,7 @@ namespace StayAwake
                 }
             }
 
-            DarkInfoDialog.Show("통계", sb.ToString(), 570, history.Count > 0 ? 520 : 380);
+            DarkInfoDialog.Show("통계", sb.ToString(), 570, history.Count > 0 ? 520 : 450);
         }
 
         private void ShowAbout()
@@ -630,73 +617,6 @@ Slack 자리 비움 상태 방지 도구
             _trayIcon.ShowBalloonTip(1500, "StayAwake",
                 result.Success ? "Slack 상태를 '자리비움'으로 변경했습니다." : $"실패: {result.ErrorMessage}",
                 result.Success ? ToolTipIcon.Info : ToolTipIcon.Warning);
-        }
-
-        private static bool IsStartupEnabled()
-        {
-            try
-            {
-                using var key = Registry.CurrentUser.OpenSubKey(StartupRegistryKey, false);
-                return key?.GetValue(StartupValueName) != null;
-            }
-            catch { return false; }
-        }
-
-        private void ToggleStartup()
-        {
-            try
-            {
-                bool enabling = !IsStartupEnabled();
-                using var key = Registry.CurrentUser.OpenSubKey(StartupRegistryKey, true)!;
-                if (enabling)
-                    key.SetValue(StartupValueName, $"\"{Application.ExecutablePath}\"");
-                else
-                    key.DeleteValue(StartupValueName, false);
-
-                _startupItem.Checked = enabling;
-                _trayIcon.ShowBalloonTip(1500, "StayAwake",
-                    enabling ? "Windows 시작 시 자동 실행 등록됨" : "자동 실행 해제됨",
-                    ToolTipIcon.Info);
-            }
-            catch { }
-        }
-
-        private void ShowHelp()
-        {
-            var message = @"[트레이 아이콘 조작]
-• 더블클릭          시작 / 정지 토글
-• 우클릭            컨텍스트 메뉴 열기
-• 호버 (마우스 올리기)  다음 활동까지 카운트다운 툴팁 표시
-
-[메뉴 기능]
-• 시작 / 정지        활동 시뮬레이션 토글
-• 지금 활동 실행     즉시 1회 마우스 이동 (타이머 리셋 포함)
-• 간격              활동 시뮬레이션 주기 설정 (1/2/3/5/7분)
-• 이동 거리          마우스 이동 거리 설정 (10~200px)
-• 활동 유형          마우스 이동만 / 마우스+키보드 선택
-• 디스플레이 절전 방지  화면 꺼짐 방지 (SetThreadExecutionState)
-• 사용 중이면 건너뛰기  직접 마우스·키보드 사용 중이면 시뮬레이션 스킵
-
-[Slack 자동 상태 변경]
-• Slack 앱이 실행 중인 상태에서만 동작
-• 출근 시간(기본 08:55): /active 커맨드 전송 → 활성으로 변경
-• 퇴근 시간(기본 18:55): /away 커맨드 전송 → 자리비움으로 변경
-• 클립보드 방식(SendKeys) — 한글 IME 환경에서도 정상 동작
-• 재시작 후에도 당일 중복 전송 방지
-
-[Windows 자동 시작]
-• 체크 시 레지스트리 Run 키에 등록 → PC 부팅 시 자동 실행
-• 해제 시 레지스트리에서 제거
-
-[툴팁 정보 (호버 시)]
-  StayAwake - 다음: X분 XX초 후 | 활성시간 / 시뮬횟수
-
-[권장 설정]
-• 간격: 3~5분  (Slack 10분 타임아웃의 절반 이내)
-• 이동 거리: 30~50px  (눈에 띄지 않는 범위)
-• 사용 중이면 건너뛰기: 켜짐 권장";
-
-            DarkInfoDialog.Show("사용법 & 단축키", message, 680, 820);
         }
 
         private void ExitApplication()

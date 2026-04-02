@@ -193,22 +193,41 @@ public class UpscaleService : IDisposable
                 var outTensor = results.First().AsTensor<float>();
 
                 // 타일 결과 → SKBitmap
+                // 출력 텐서 실제 차원 (3D [C,H,W] 또는 4D [N,C,H,W])
+                int oRank   = outTensor.Dimensions.Length;
+                int actualW = outTensor.Dimensions[oRank - 1];
+                int actualH = outTensor.Dimensions[oRank - 2];
+
                 int tw = sw * nativeScale;
                 int th = sh * nativeScale;
-                using var outTile = TensorToBitmap(outTensor, tw, th);
+                // 패딩된 입력에서 나온 출력 → 실제 타일 크기로 크롭
+                int useW = Math.Min(tw, actualW);
+                int useH = Math.Min(th, actualH);
+                using var rawTile = TensorToBitmap(outTensor, useW, useH);
 
-                // 오버랩 제거 후 복사
-                int ox = sx > 0 ? tileOverlap * nativeScale : 0;
-                int oy = sy > 0 ? tileOverlap * nativeScale : 0;
-                int ow = tw - ox - (sx + sw < src.Width  ? tileOverlap * nativeScale : 0);
-                int oh = th - oy - (sy + sh < src.Height ? tileOverlap * nativeScale : 0);
+                // 출력이 기대 크기와 다르면 리사이즈 (nativeScale 불일치 보정)
+                SKBitmap outTile;
+                if (useW == tw && useH == th)
+                    outTile = rawTile.Copy();
+                else
+                    outTile = rawTile.Resize(new SKImageInfo(tw, th),
+                                             new SKSamplingOptions(SKCubicResampler.Mitchell));
 
-                int dx = sx * nativeScale + (sx > 0 ? tileOverlap * nativeScale : 0);
-                int dy = sy * nativeScale + (sy > 0 ? tileOverlap * nativeScale : 0);
+                using (outTile)
+                {
+                    // 오버랩 제거 후 복사
+                    int ox = sx > 0 ? tileOverlap * nativeScale : 0;
+                    int oy = sy > 0 ? tileOverlap * nativeScale : 0;
+                    int ow = tw - ox - (sx + sw < src.Width  ? tileOverlap * nativeScale : 0);
+                    int oh = th - oy - (sy + sh < src.Height ? tileOverlap * nativeScale : 0);
 
-                using (var c = new SKCanvas(output))
+                    int dx = sx * nativeScale + (sx > 0 ? tileOverlap * nativeScale : 0);
+                    int dy = sy * nativeScale + (sy > 0 ? tileOverlap * nativeScale : 0);
+
+                    using var c = new SKCanvas(output);
                     c.DrawBitmap(outTile, new SKRect(ox, oy, ox + ow, oy + oh),
                                           new SKRect(dx, dy, dx + ow, dy + oh));
+                }
 
                 progress?.Report((double)(ti + 1) / total);
             }
@@ -310,14 +329,19 @@ public class UpscaleService : IDisposable
 
     static SKBitmap TensorToBitmap(Tensor<float> t, int w, int h)
     {
-        var bmp = new SKBitmap(w, h, SKColorType.Rgb888x, SKAlphaType.Opaque);
+        var bmp  = new SKBitmap(w, h, SKColorType.Rgb888x, SKAlphaType.Opaque);
+        int rank = t.Dimensions.Length;
+        bool is4D = rank == 4;
+        // 채널 수 (4D: dim[1], 3D: dim[0])
+        int nCh = t.Dimensions[is4D ? 1 : 0];
+
         for (int y = 0; y < h; y++)
         for (int x = 0; x < w; x++)
         {
-            byte r = Clamp(t[0, 0, y, x]);
-            byte g = Clamp(t[0, 1, y, x]);
-            byte b = Clamp(t[0, 2, y, x]);
-            bmp.SetPixel(x, y, new SKColor(r, g, b));
+            float fR = is4D ? t[0, 0, y, x] : t[0, y, x];
+            float fG = nCh >= 2 ? (is4D ? t[0, 1, y, x] : t[1, y, x]) : fR;
+            float fB = nCh >= 3 ? (is4D ? t[0, 2, y, x] : t[2, y, x]) : fR;
+            bmp.SetPixel(x, y, new SKColor(Clamp(fR), Clamp(fG), Clamp(fB)));
         }
         return bmp;
     }

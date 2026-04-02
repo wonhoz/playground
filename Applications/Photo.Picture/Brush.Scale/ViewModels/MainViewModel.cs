@@ -349,7 +349,8 @@ public class ModelItem : INotifyPropertyChanged
 
     public UpscaleModelType ModelType => _modelType;
     public ModelInfo?        Info     { get; }
-    public bool              CanDownload => Info is not null && !Available && !IsDownloading;
+    public bool              CanDownload        => Info is not null && !string.IsNullOrEmpty(Info.DownloadUrl) && !Available && !IsDownloading;
+    public bool              ManualInstallNeeded => (Info is null || string.IsNullOrEmpty(Info.DownloadUrl)) && !Available;
 
     // ── 가용성 ──────────────────────────────────────────────────────────
     bool _available;

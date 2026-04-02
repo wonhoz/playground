@@ -27,6 +27,20 @@ echo !DG!Output: %BIN%!RS!
 echo !DG!--------------------------------------------------!RS!
 echo.
 
+:: 배포 전 버전 확인
+:: for /f "delims=" %%v in ('powershell -NoProfile -Command "([xml](Get-Content \"%ROOT%Directory.Build.props\")).Project.PropertyGroup.AppVersion" 2^>nul') do set "APP_VER=%%v"
+:: if not defined APP_VER set "APP_VER=(알 수 없음)"
+:: echo !BD!현재 버전: !GR!!APP_VER!!RS!
+:: echo !DG!Directory.Build.props 기준 — 배포 전 버전을 확인하세요.!RS!
+:: echo.
+:: choice /C YN /N /M "계속 배포하시겠습니까? [Y/N] "
+:: if errorlevel 2 (
+::     echo.
+::     echo !RE!배포가 취소되었습니다.!RS!
+::     exit /b 0
+:: )
+:: echo.
+
 :: ── Applications / AI ──────────────────────────────────────────────
 call :pub "Prompt.Forge"          "Applications\AI\Prompt.Forge"                            "Prompt.Forge.exe"          "Applications\AI\Prompt.Forge"
 
@@ -67,7 +81,7 @@ call :pub "Zip.Peek"              "Applications\Files\Inspector\Zip.Peek"       
 
 :: ── Applications / Files / Manager ────────────────────────────────
 call :pub "Batch.Rename"          "Applications\Files\Manager\Batch.Rename"                 "Batch.Rename.exe"          "Applications\Files\Manager"
-call :pub "Copy.Path"             "Applications\Files\Manager\Copy.Path"                    "Copy.Path.exe"             "Applications\Files\Manager"
+call :pub "Copy.Path"             "Applications\Files\Manager\Copy.Path"                    "Copy.Path.exe"             "Applications\Files\Manager\Copy.Path"
 call :pub "File.Duplicates"       "Applications\Files\Manager\File.Duplicates"              "File.Duplicates.exe"       "Applications\Files\Manager"
 call :pub "File.Unlocker"         "Applications\Files\Manager\File.Unlocker"                "File.Unlocker.exe"         "Applications\Files\Manager"
 call :pub "Folder.Purge"          "Applications\Files\Manager\Folder.Purge"                 "Folder.Purge.exe"          "Applications\Files\Manager"
@@ -122,9 +136,8 @@ call :pub "Tray.Stats"            "Applications\System\Monitor\Tray.Stats"      
 
 :: ── Applications / Text ────────────────────────────────────────────
 call :pub "ANSI.Forge"            "Applications\Text\ANSI.Forge"                            "ANSI.Forge.exe"            "Applications\Text\ANSI.Forge"
-call :pub "Case.Forge"            "Applications\Text\Case.Forge"                            "Case.Forge.exe"            "Applications\Text"
+call :pub "Case.Forge"            "Applications\Text\Case.Forge"                            "Case.Forge.exe"            "Applications\Text\Case.Forge"
 call :pub "Char.Art"              "Applications\Text\Char.Art"                              "Char.Art.exe"              "Applications\Text"
-call :pub "Char.Pad"              "Applications\Tools.Utility\Char.Pad"                     "Char.Pad.exe"              "Applications\Tools.Utility"
 call :pub "Echo.Text"             "Applications\Text\Echo.Text"                             "Echo.Text.exe"             "Applications\Text\Echo.Text"
 call :pub "Mark.View"             "Applications\Text\Mark.View"                             "Mark.View.exe"             "Applications\Text\Mark.View"
 call :pub "Text.Forge"            "Applications\Text\Text.Forge"                            "Text.Forge.exe"            "Applications\Text"
@@ -132,6 +145,7 @@ call :pub "Word.Cloud"            "Applications\Text\Word.Cloud"                
 
 :: ── Applications / Tools.Utility ──────────────────────────────────
 call :pub "Dict.Cast"             "Applications\Tools.Utility\Dict.Cast"                    "Dict.Cast.exe"             "Applications\Tools.Utility\Dict.Cast"
+call :pub "Char.Pad"              "Applications\Tools.Utility\Char.Pad"                     "Char.Pad.exe"              "Applications\Tools.Utility\Char.Pad"
 call :pub "Icon.Maker"            "Applications\Tools.Utility\Icon.Maker"                   "Icon.Maker.exe"            "Applications\Tools.Utility\Icon.Maker"
 call :pub "JSON.Fmt"              "Applications\Tools.Utility\JSON.Fmt"                     "JSON.Fmt.exe"              "Applications\Tools.Utility\JSON.Fmt"
 call :pub "Mouse.Flick"           "Applications\Tools.Utility\Mouse.Flick"                  "Mouse.Flick.exe"           "Applications\Tools.Utility"

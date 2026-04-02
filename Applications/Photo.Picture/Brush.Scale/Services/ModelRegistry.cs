@@ -16,31 +16,31 @@ public record ModelInfo(
 public static class ModelRegistry
 {
     // ── 공개 ONNX 모델 URL ────────────────────────────────────────────────
-    // 출처: Hugging Face onnx-community / HuggingFace rocca / GitHub Releases
-    // * waifu2x-cunet   : AaronFeng753/Waifu2x-Extension-GUI (ONNX export)
-    // * RealESRGAN      : xinntao/Real-ESRGAN 공식 + community ONNX 변환
-    //   → 아래 URL은 HuggingFace의 안정적인 배포 경로 사용
+    // * waifu2x-cunet   : deepghs/waifu2x_onnx (nagadomi/nunif 공식 릴리즈 기반)
+    // * RealESRGAN x4+  : imgdesignart/realesrgan-x4-onnx
+    // * RealESRGAN Anime: 공개 ONNX 변환본 없음 → 수동 설치 필요
+    //   파일명: realesrgan_x4plus_anime.onnx → 모델 폴더에 직접 배치
     static readonly IReadOnlyDictionary<UpscaleModelType, ModelInfo> _registry =
         new Dictionary<UpscaleModelType, ModelInfo>
         {
             [UpscaleModelType.Waifu2xCunet] = new(
                 UpscaleModelType.Waifu2xCunet,
                 "waifu2x_cunet.onnx",
-                "https://huggingface.co/Xenova/waifu2x/resolve/main/waifu2x_cunet_scale2_nf_art_noise1.onnx",
-                "waifu2x-cunet (일러스트/애니 특화, 2x)",
-                0
+                "https://huggingface.co/deepghs/waifu2x_onnx/resolve/main/20250502/onnx_models/cunet/art/noise1_scale2x.onnx",
+                "waifu2x-cunet (일러스트/애니 특화, 2x) — 5 MB",
+                5_426_000
             ),
             [UpscaleModelType.RealESRGANPhoto] = new(
                 UpscaleModelType.RealESRGANPhoto,
                 "realesrgan_x4plus.onnx",
-                "https://huggingface.co/rocca/upscaler-onnx/resolve/main/realesrgan_x4plus.onnx",
-                "RealESRGAN x4plus (실사 사진 4x)",
-                0
+                "https://huggingface.co/imgdesignart/realesrgan-x4-onnx/resolve/main/onnx/model.onnx",
+                "RealESRGAN x4plus (실사 사진 4x) — 67 MB",
+                70_254_000
             ),
             [UpscaleModelType.RealESRGANAnime] = new(
                 UpscaleModelType.RealESRGANAnime,
                 "realesrgan_x4plus_anime.onnx",
-                "https://huggingface.co/rocca/upscaler-onnx/resolve/main/realesrgan_x4plus_anime_6B.onnx",
+                "",   // 공개 ONNX 변환본 없음 — 수동 설치 필요
                 "RealESRGAN Anime 6B (애니메이션 4x)",
                 0
             ),

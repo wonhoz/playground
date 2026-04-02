@@ -320,7 +320,7 @@
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="Auto"/>
                           </Grid.ColumnDefinitions>
-                          <TextBlock Text="{Binding Info.Description}" FontSize="10"
+                          <TextBlock Text="{Binding Info.Description, TargetNullValue='수동 설치 필요'}" FontSize="10"
                                      Foreground="#C0C0E0" TextWrapping="Wrap"
                                      VerticalAlignment="Center"/>
                           <!-- 완료 뱃지 -->
@@ -335,6 +335,12 @@
                                   Visibility="{Binding CanDownload, Converter={x:Static local:BoolToVisibility.Instance}}">
                             <TextBlock Text="미설치" Foreground="#FFA060" FontSize="9"/>
                           </Border>
+                          <!-- 수동 설치 뱃지 -->
+                          <Border Grid.Column="1" Background="#2A1A3A" CornerRadius="3"
+                                  Padding="5,2" Margin="4,0,0,0"
+                                  Visibility="{Binding ManualInstallNeeded, Converter={x:Static local:BoolToVisibility.Instance}}">
+                            <TextBlock Text="수동 설치" Foreground="#C080FF" FontSize="9"/>
+                          </Border>
                         </Grid>
 
                         <!-- 다운로드 버튼 (미설치 + 비다운로드 중) -->
@@ -342,6 +348,10 @@
                                 Command="{Binding DownloadCommand}"
                                 Visibility="{Binding CanDownload, Converter={x:Static local:BoolToVisibility.Instance}}"
                                 Style="{StaticResource SecondaryBtn}" FontSize="10" Padding="8,4"/>
+                        <!-- 수동 설치 안내 -->
+                        <TextBlock Visibility="{Binding ManualInstallNeeded, Converter={x:Static local:BoolToVisibility.Instance}}"
+                                   FontSize="9" Foreground="#888888" Margin="0,2,0,0" TextWrapping="Wrap"
+                                   Text="공개 ONNX 없음 — 직접 변환 후 모델 폴더에 배치하세요"/>
 
                         <!-- 다운로드 진행 -->
                         <StackPanel Visibility="{Binding IsDownloading, Converter={x:Static local:BoolToVisibility.Instance}}">

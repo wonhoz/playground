@@ -1,5 +1,6 @@
 global using System;
 global using System.Collections.Generic;
+global using System.Net.Http;
 global using System.Collections.ObjectModel;
 global using System.ComponentModel;
 global using System.IO;

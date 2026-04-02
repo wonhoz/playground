@@ -38,7 +38,8 @@ public class MainViewModel : INotifyPropertyChanged
         $"{_resultBitmap.PixelWidth} × {_resultBitmap.PixelHeight}";
 
     // ── 모델 / 설정 ───────────────────────────────────────────────────────
-    public ObservableCollection<ModelItem> Models { get; } = [];
+    public ObservableCollection<ModelItem> Models            { get; } = [];
+    public ObservableCollection<ModelItem> DownloadableModels { get; } = [];
 
     ModelItem? _selectedModel;
     public ModelItem? SelectedModel
@@ -130,7 +131,12 @@ public class MainViewModel : INotifyPropertyChanged
     {
         // 모델 목록
         foreach (var (t, avail) in ModelManager.GetModelStatus())
-            Models.Add(new ModelItem(t, avail));
+        {
+            var item = new ModelItem(t, avail);
+            Models.Add(item);
+            if (t != UpscaleModelType.Bicubic)
+                DownloadableModels.Add(item);
+        }
         _selectedModel = Models.FirstOrDefault();
 
         // 출력 형식
@@ -283,8 +289,7 @@ public class MainViewModel : INotifyPropertyChanged
     // ── 모델 새로고침 ─────────────────────────────────────────────────────
     public void RefreshModelStatus()
     {
-        foreach (var m in Models)
-            m.Refresh();
+        foreach (var m in Models) m.Refresh();
         OnPropertyChanged(nameof(ModelNotAvailable));
     }
 
@@ -327,20 +332,31 @@ public class MainViewModel : INotifyPropertyChanged
 public class ModelItem : INotifyPropertyChanged
 {
     readonly UpscaleModelType _modelType;
+    CancellationTokenSource?  _downloadCts;
 
     public ModelItem(UpscaleModelType modelType, bool available)
     {
         _modelType = modelType;
         _available = available;
+        Info       = ModelRegistry.Get(modelType);
+        DownloadCommand = new AsyncRelayCommand(
+            async _ => await DownloadAsync(),
+            _        => !IsDownloading && !Available && Info is not null);
+        CancelDownloadCommand = new RelayCommand(
+            _ => _downloadCts?.Cancel(),
+            _ => IsDownloading);
     }
 
     public UpscaleModelType ModelType => _modelType;
+    public ModelInfo?        Info     { get; }
+    public bool              CanDownload => Info is not null && !Available && !IsDownloading;
 
+    // ── 가용성 ──────────────────────────────────────────────────────────
     bool _available;
     public bool Available
     {
         get => _available;
-        private set { _available = value; OnPropertyChanged(); OnPropertyChanged(nameof(DisplayName)); }
+        private set { _available = value; OnPropertyChanged(); OnPropertyChanged(nameof(DisplayName)); OnPropertyChanged(nameof(CanDownload)); }
     }
 
     public string DisplayName => Available
@@ -350,6 +366,69 @@ public class ModelItem : INotifyPropertyChanged
     public void Refresh()
     {
         Available = ModelManager.IsAvailable(_modelType);
+    }
+
+    // ── 다운로드 상태 ────────────────────────────────────────────────────
+    bool _isDownloading;
+    public bool IsDownloading
+    {
+        get => _isDownloading;
+        set { _isDownloading = value; OnPropertyChanged(); OnPropertyChanged(nameof(CanDownload)); }
+    }
+
+    double _downloadProgress;
+    public double DownloadProgress
+    {
+        get => _downloadProgress;
+        set { _downloadProgress = value; OnPropertyChanged(); }
+    }
+
+    string _downloadStatus = "";
+    public string DownloadStatus
+    {
+        get => _downloadStatus;
+        set { _downloadStatus = value; OnPropertyChanged(); }
+    }
+
+    public ICommand DownloadCommand       { get; }
+    public ICommand CancelDownloadCommand { get; }
+
+    async Task DownloadAsync()
+    {
+        if (Info is null) return;
+        IsDownloading    = true;
+        DownloadProgress = 0;
+        DownloadStatus   = "연결 중...";
+        _downloadCts     = new CancellationTokenSource();
+
+        try
+        {
+            var prog = new Progress<(double ratio, long downloaded, long total)>(t =>
+            {
+                DownloadProgress = t.ratio >= 0 ? t.ratio * 100 : -1;
+                DownloadStatus   = t.ratio >= 0
+                    ? $"{ModelDownloadService.FormatBytes(t.downloaded)} / {ModelDownloadService.FormatBytes(t.total)}"
+                    : ModelDownloadService.FormatBytes(t.downloaded);
+            });
+            await ModelDownloadService.DownloadAsync(Info, prog, _downloadCts.Token);
+            Refresh();
+            DownloadStatus   = "다운로드 완료";
+            DownloadProgress = 100;
+        }
+        catch (OperationCanceledException)
+        {
+            DownloadStatus   = "취소됨";
+            DownloadProgress = 0;
+        }
+        catch (Exception ex)
+        {
+            DownloadStatus   = $"실패: {ex.Message}";
+            DownloadProgress = 0;
+        }
+        finally
+        {
+            IsDownloading = false;
+        }
     }
 
     public event PropertyChangedEventHandler? PropertyChanged;

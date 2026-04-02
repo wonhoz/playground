@@ -301,26 +301,99 @@
                     DisplayMemberPath="DisplayName"
                     Margin="0,0,0,6"/>
 
-          <!-- 모델 없음 경고 -->
-          <Border Style="{StaticResource WarnBanner}"
-                  Visibility="{Binding ModelNotAvailable, Converter={x:Static local:BoolToVisibility.Instance}}"
-                  Margin="0,0,0,6">
+          <!-- 모델 관리 패널 -->
+          <Border Background="#0D1A2E" BorderBrush="#333355" BorderThickness="1"
+                  CornerRadius="6" Padding="10,8" Margin="0,0,0,12">
             <StackPanel>
-              <TextBlock Text="모델 파일이 없습니다." Foreground="#FFA060" FontSize="11" FontWeight="SemiBold"/>
-              <TextBlock Text="아래 버튼으로 폴더를 열고 ONNX 파일을 배치하세요." Foreground="#CC8040" FontSize="10" TextWrapping="Wrap"/>
+              <TextBlock Text="ONNX 모델 관리" Foreground="#888888" FontSize="10"
+                         FontWeight="SemiBold" Margin="0,0,0,8"/>
+
+              <!-- 모델 목록 (Bicubic 제외) -->
+              <ItemsControl ItemsSource="{Binding DownloadableModels}">
+                <ItemsControl.ItemTemplate>
+                  <DataTemplate>
+                    <Border Margin="0,0,0,6" Background="#131D30" CornerRadius="4" Padding="8,6">
+                      <StackPanel>
+                        <!-- 모델명 + 상태 뱃지 -->
+                        <Grid Margin="0,0,0,4">
+                          <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                          </Grid.ColumnDefinitions>
+                          <TextBlock Text="{Binding Info.Description}" FontSize="10"
+                                     Foreground="#C0C0E0" TextWrapping="Wrap"
+                                     VerticalAlignment="Center"/>
+                          <!-- 완료 뱃지 -->
+                          <Border Grid.Column="1" Background="#1A3A1A" CornerRadius="3"
+                                  Padding="5,2" Margin="4,0,0,0"
+                                  Visibility="{Binding Available, Converter={x:Static local:BoolToVisibility.Instance}}">
+                            <TextBlock Text="✓ 준비됨" Foreground="#4ADE80" FontSize="9" FontWeight="SemiBold"/>
+                          </Border>
+                          <!-- 없음 뱃지 -->
+                          <Border Grid.Column="1" Background="#3A1A00" CornerRadius="3"
+                                  Padding="5,2" Margin="4,0,0,0"
+                                  Visibility="{Binding CanDownload, Converter={x:Static local:BoolToVisibility.Instance}}">
+                            <TextBlock Text="미설치" Foreground="#FFA060" FontSize="9"/>
+                          </Border>
+                        </Grid>
+
+                        <!-- 다운로드 버튼 (미설치 + 비다운로드 중) -->
+                        <Button Content="⬇ 자동 다운로드"
+                                Command="{Binding DownloadCommand}"
+                                Visibility="{Binding CanDownload, Converter={x:Static local:BoolToVisibility.Instance}}"
+                                Style="{StaticResource SecondaryBtn}" FontSize="10" Padding="8,4"/>
+
+                        <!-- 다운로드 진행 -->
+                        <StackPanel Visibility="{Binding IsDownloading, Converter={x:Static local:BoolToVisibility.Instance}}">
+                          <Grid Margin="0,0,0,3">
+                            <Grid.ColumnDefinitions>
+                              <ColumnDefinition Width="*"/>
+                              <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="{Binding DownloadStatus}" Foreground="#888888"
+                                       FontSize="9" VerticalAlignment="Center" TextTrimming="CharacterEllipsis"/>
+                            <Button Grid.Column="1" Content="취소" FontSize="9" Padding="6,2"
+                                    Command="{Binding CancelDownloadCommand}"
+                                    Style="{StaticResource SecondaryBtn}"/>
+                          </Grid>
+                          <ProgressBar Value="{Binding DownloadProgress, Mode=OneWay}" Maximum="100" Height="3"/>
+                        </StackPanel>
+
+                        <!-- 완료 후 상태 메시지 (다운로드 중 아닐 때, 상태 있을 때) -->
+                        <TextBlock Text="{Binding DownloadStatus}" FontSize="9"
+                                   Foreground="#888888" Margin="0,2,0,0"
+                                   Visibility="{Binding IsDownloading, Converter={x:Static local:BoolToCollapsed.Instance}}">
+                          <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                              <Setter Property="Visibility" Value="Collapsed"/>
+                              <Style.Triggers>
+                                <DataTrigger Binding="{Binding DownloadStatus}" Value="">
+                                  <Setter Property="Visibility" Value="Collapsed"/>
+                                </DataTrigger>
+                              </Style.Triggers>
+                            </Style>
+                          </TextBlock.Style>
+                        </TextBlock>
+                      </StackPanel>
+                    </Border>
+                  </DataTemplate>
+                </ItemsControl.ItemTemplate>
+              </ItemsControl>
+
+              <!-- 폴더 열기 / 새로고침 -->
+              <Grid Margin="0,4,0,0">
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition/>
+                  <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Button Content="모델 폴더 열기" Style="{StaticResource SecondaryBtn}"
+                        Click="BtnOpenModelDir_Click" Grid.Column="0" FontSize="10" Padding="8,4"/>
+                <Button Content="새로고침" Style="{StaticResource SecondaryBtn}"
+                        Click="BtnRefreshModels_Click" Grid.Column="1" Margin="6,0,0,0"
+                        FontSize="10" Padding="8,4"/>
+              </Grid>
             </StackPanel>
           </Border>
-
-          <Grid Margin="0,0,0,20">
-            <Grid.ColumnDefinitions>
-              <ColumnDefinition/>
-              <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-            <Button Content="모델 폴더 열기" Style="{StaticResource SecondaryBtn}"
-                    Click="BtnOpenModelDir_Click" Grid.Column="0" FontSize="11"/>
-            <Button Content="새로고침" Style="{StaticResource SecondaryBtn}"
-                    Click="BtnRefreshModels_Click" Grid.Column="1" Margin="6,0,0,0" FontSize="11"/>
-          </Grid>
 
           <!-- 배율 -->
           <TextBlock Style="{StaticResource SectionLabel}" Text="업스케일 배율"/>

@@ -100,6 +100,7 @@ call :pub "Mock.Server"           "Applications\Network\Server\Mock.Server"     
 call :pub "Serve.Cast"            "Applications\Network\Server\Serve.Cast"                  "Serve.Cast.exe"            "Applications\Network\Server"
 
 :: ── Applications / Photo.Picture ───────────────────────────────────
+call :pub "Brush.Scale"           "Applications\Photo.Picture\Brush.Scale"                  "Brush.Scale.exe"           "Applications\Photo.Picture\Brush.Scale"
 call :pub "Color.Grade"           "Applications\Photo.Picture\Color.Grade"                  "Color.Grade.exe"           "Applications\Photo.Picture\Color.Grade"
 call :pub "Comic.Cast"            "Applications\Photo.Picture\Comic.Cast"                   "Comic.Cast.exe"            "Applications\Photo.Picture\Comic.Cast"
 call :pub "Img.Compare"           "Applications\Photo.Picture\Img.Compare"                  "Img.Compare.exe"           "Applications\Photo.Picture\Img.Compare"

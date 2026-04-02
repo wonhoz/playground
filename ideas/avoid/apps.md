@@ -53,6 +53,7 @@
 | `Port.Watch` | Network | 포트 점유 프로세스 모니터 + 원클릭 종료 | ✅ |
 | `Serve.Cast` | Network | ASP.NET Core Kestrel 기반 로컬 파일 서버 + QR | ✅ |
 | `WiFi.Cast` | Network | Wi-Fi 채널 분석기 + 신호 강도 트레이 모니터 | 🗃️ |
+| `Brush.Scale` | Photo.Picture | waifu2x/RealESRGAN ONNX 오프라인 AI 업스케일러 (2x/4x/8x, 배치, Before/After 슬라이더) ★35차 | ✅ |
 | `Color.Grade` | Photo.Picture | 이미지 LUT 색보정 도구 | ✅ |
 | `Comic.Cast` | Photo.Picture | CBZ/이미지 폴더 만화 슬라이드쇼 프레젠테이션 | ✅ |
 | `Img.Cast` | Photo.Picture | SVG/PNG/JPG/BMP → ICO(멀티사이즈)/PNG/JPG/BMP 포맷 변환기 | ✅ |

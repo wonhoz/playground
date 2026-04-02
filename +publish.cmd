@@ -151,6 +151,7 @@ for %%n in (!SEL!) do (
     if "%%n"=="111" call :pub "Win.Scope"              "Applications\System\Manager\Win.Scope"                   "Win.Scope.exe"             "Applications\System\Manager\Win.Scope"
     if "%%n"=="112" call :pub "Word.Cloud"             "Applications\Text\Word.Cloud"                            "Word.Cloud.exe"            "Applications\Text"
     if "%%n"=="113" call :pub "Zip.Peek"               "Applications\Files\Inspector\Zip.Peek"                   "Zip.Peek.exe"              "Applications\Files\Inspector\Zip.Peek"
+    if "%%n"=="114" call :pub "Brush.Scale"            "Applications\Photo.Picture\Brush.Scale"                  "Brush.Scale.exe"           "Applications\Photo.Picture\Brush.Scale"
 )
 goto :DONE
 :: ── 완료 ──────────────────────────────────────────────────────────

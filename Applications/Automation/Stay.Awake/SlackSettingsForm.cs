@@ -30,7 +30,7 @@ namespace StayAwake
         public SlackSettingsForm(int startHour, int startMinute, int endHour, int endMinute)
         {
             Text = "Slack 자동 상태 시간 설정";
-            Size = new Size(350, 335);
+            Size = new Size(350, 340);
             FormBorderStyle = FormBorderStyle.FixedDialog;
             MaximizeBox = false;
             MinimizeBox = false;
@@ -53,9 +53,9 @@ namespace StayAwake
                 Font = new Font("Segoe UI", 8.5f)
             };
 
-            _startHour = new ModernSpinner(startHour, 0, 23) { Location = new Point(26, 50) };
-            var colon1 = CreateColonLabel(new Point(99, 50));
-            _startMinute = new ModernSpinner(startMinute, 0, 59) { Location = new Point(115, 50) };
+            _startHour = new ModernSpinner(startHour, 0, 23) { Location = new Point(27, 54) };
+            var colon1 = CreateColonLabel(new Point(99, 54));
+            _startMinute = new ModernSpinner(startMinute, 0, 59) { Location = new Point(120, 54) };
 
             // 퇴근 시간 레이블
             var lblEnd = new Label
@@ -67,9 +67,9 @@ namespace StayAwake
                 Font = new Font("Segoe UI", 8.5f)
             };
 
-            _endHour = new ModernSpinner(endHour, 0, 23) { Location = new Point(26, 136) };
-            var colon2 = CreateColonLabel(new Point(99, 135));
-            _endMinute = new ModernSpinner(endMinute, 0, 59) { Location = new Point(115, 136) };
+            _endHour = new ModernSpinner(endHour, 0, 23) { Location = new Point(27, 139) };
+            var colon2 = CreateColonLabel(new Point(99, 139));
+            _endMinute = new ModernSpinner(endMinute, 0, 59) { Location = new Point(120, 139) };
 
             // 안내 레이블
             var lblHint = new Label
@@ -86,7 +86,7 @@ namespace StayAwake
             {
                 Text = "확인",
                 Size = new Size(82, 30),
-                Location = new Point(130, 224),
+                Location = new Point(130, 230),
                 BackColor = AccentColor,
                 ForeColor = Color.White,
                 FlatStyle = FlatStyle.Flat,
@@ -99,7 +99,7 @@ namespace StayAwake
             {
                 Text = "취소",
                 Size = new Size(82, 30),
-                Location = new Point(222, 224),
+                Location = new Point(222, 230),
                 BackColor = BtnCancelColor,
                 ForeColor = TextColor,
                 FlatStyle = FlatStyle.Flat,

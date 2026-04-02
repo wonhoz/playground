@@ -30,7 +30,7 @@ namespace StayAwake
         public SlackSettingsForm(int startHour, int startMinute, int endHour, int endMinute)
         {
             Text = "Slack 자동 상태 시간 설정";
-            Size = new Size(350, 310);
+            Size = new Size(350, 335);
             FormBorderStyle = FormBorderStyle.FixedDialog;
             MaximizeBox = false;
             MinimizeBox = false;
@@ -53,9 +53,9 @@ namespace StayAwake
                 Font = new Font("Segoe UI", 8.5f)
             };
 
-            _startHour = new ModernSpinner(startHour, 0, 23) { Location = new Point(24, 50) };
-            var colon1 = CreateColonLabel(new Point(90, 61));
-            _startMinute = new ModernSpinner(startMinute, 0, 59) { Location = new Point(106, 50) };
+            _startHour = new ModernSpinner(startHour, 0, 23) { Location = new Point(26, 50) };
+            var colon1 = CreateColonLabel(new Point(99, 50));
+            _startMinute = new ModernSpinner(startMinute, 0, 59) { Location = new Point(115, 50) };
 
             // 퇴근 시간 레이블
             var lblEnd = new Label
@@ -67,9 +67,9 @@ namespace StayAwake
                 Font = new Font("Segoe UI", 8.5f)
             };
 
-            _endHour = new ModernSpinner(endHour, 0, 23) { Location = new Point(24, 136) };
-            var colon2 = CreateColonLabel(new Point(90, 147));
-            _endMinute = new ModernSpinner(endMinute, 0, 59) { Location = new Point(106, 136) };
+            _endHour = new ModernSpinner(endHour, 0, 23) { Location = new Point(26, 136) };
+            var colon2 = CreateColonLabel(new Point(99, 135));
+            _endMinute = new ModernSpinner(endMinute, 0, 59) { Location = new Point(115, 136) };
 
             // 안내 레이블
             var lblHint = new Label
@@ -152,12 +152,12 @@ namespace StayAwake
 
             public int Value => _value;
 
-            // 레이아웃 (60 × 36 px)
-            //  ┌─────────────────────────────────┐
-            //  │  [  display (36×34)  ]│ ▲ (21×16) │
-            //  │                       ├───────────┤
-            //  │                       │ ▼ (21×17) │
-            //  └─────────────────────────────────┘
+            // 레이아웃 (68 × 36 px)
+            //  ┌──────────────────────────────────────┐
+            //  │  [   display (44×34)   ]│ ▲ (22×16) │
+            //  │                         ├────────────┤
+            //  │                         │ ▼ (22×17) │
+            //  └──────────────────────────────────────┘
             //  패널 BackColor = SpinnerBorder → 1px 테두리·구분선
 
             public ModernSpinner(int value, int min, int max)
@@ -166,7 +166,7 @@ namespace StayAwake
                 _min = min;
                 _max = max;
 
-                Size = new Size(60, 36);
+                Size = new Size(68, 36);
                 BackColor = SpinnerBorder;
                 SetStyle(ControlStyles.Selectable, true);
                 TabStop = false;
@@ -179,7 +179,7 @@ namespace StayAwake
                     ForeColor = DisplayText,
                     BackColor = SpinnerBg,
                     Location = new Point(1, 1),
-                    Size = new Size(36, 34)
+                    Size = new Size(44, 34)
                 };
 
                 var btnUp = new Label
@@ -189,7 +189,7 @@ namespace StayAwake
                     Font = new Font("Segoe UI", 6f),
                     ForeColor = ArrowColor,
                     BackColor = BtnBg,
-                    Location = new Point(38, 1),
+                    Location = new Point(46, 1),
                     Size = new Size(21, 16),
                     Cursor = Cursors.Hand
                 };
@@ -201,7 +201,7 @@ namespace StayAwake
                     Font = new Font("Segoe UI", 6f),
                     ForeColor = ArrowColor,
                     BackColor = BtnBg,
-                    Location = new Point(38, 18),
+                    Location = new Point(46, 18),
                     Size = new Size(21, 17),
                     Cursor = Cursors.Hand
                 };

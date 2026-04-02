@@ -45,7 +45,7 @@ echo.
 call :pub "Prompt.Forge"          "Applications\AI\Prompt.Forge"                            "Prompt.Forge.exe"          "Applications\AI\Prompt.Forge"
 
 :: ── Applications / Audio ───────────────────────────────────────────
-call :pub "Music.Player"          "Applications\Audio\Music.Player"                         "Music.Player.exe"          "Applications\Audio"
+:: call :pub "Music.Player"          "Applications\Audio\Music.Player"                         "Music.Player.exe"          "Applications\Audio"
 :: call :pub "Tag.Forge"             "Applications\Audio\Tag.Forge"                            "Tag.Forge.exe"             "Applications\Audio\Tag.Forge"
 
 :: ── Applications / Automation ──────────────────────────────────────
@@ -54,18 +54,18 @@ call :pub "Stay.Awake"            "Applications\Automation\Stay.Awake"          
 :: ── Applications / Development / Analyzer ─────────────────────────
 :: call :pub "Dep.Graph"             "Applications\Development\Analyzer\Dep.Graph"             "Dep.Graph.exe"             "Applications\Development\Analyzer\Dep.Graph"
 :: call :pub "Git.Stats"             "Applications\Development\Analyzer\Git.Stats"             "Git.Stats.exe"             "Applications\Development\Analyzer\Git.Stats"
-call :pub "Log.Lens"              "Applications\Development\Analyzer\Log.Lens"              "Log.Lens.exe"              "Applications\Development\Analyzer"
+:: call :pub "Log.Lens"              "Applications\Development\Analyzer\Log.Lens"              "Log.Lens.exe"              "Applications\Development\Analyzer"
 :: call :pub "Log.Merge"             "Applications\Development\Analyzer\Log.Merge"             "Log.Merge.exe"             "Applications\Development\Analyzer"
 :: call :pub "Win.Event"             "Applications\Development\Analyzer\Win.Event"             "Win.Event.exe"             "Applications\Development\Analyzer"
 
 :: ── Applications / Development / Inspector ─────────────────────────
 :: call :pub "App.Temp"              "Applications\Development\Inspector\App.Temp"             "App.Temp.exe"              "Applications\Development\Inspector"
 :: call :pub "Hex.Peek"              "Applications\Development\Inspector\Hex.Peek"             "Hex.Peek.exe"              "Applications\Development\Inspector"
-call :pub "JSON.Tree"             "Applications\Development\Inspector\JSON.Tree"            "JSON.Tree.exe"             "Applications\Development\Inspector\JSON.Tree"
+:: call :pub "JSON.Tree"             "Applications\Development\Inspector\JSON.Tree"            "JSON.Tree.exe"             "Applications\Development\Inspector\JSON.Tree"
 :: call :pub "Locale.View"           "Applications\Development\Inspector\Locale.View"          "Locale.View.exe"           "Applications\Development\Inspector\Locale.View"
 :: call :pub "Quick.Calc"            "Applications\Development\Inspector\Quick.Calc"           "Quick.Calc.exe"            "Applications\Development\Inspector"
 :: call :pub "Signal.Flow"           "Applications\Development\Inspector\Signal.Flow"          "Signal.Flow.exe"           "Applications\Development\Inspector"
-call :pub "Skill.Cast"            "Applications\Development\Inspector\Skill.Cast"           "Skill.Cast.exe"            "Applications\Development\Inspector"
+:: call :pub "Skill.Cast"            "Applications\Development\Inspector\Skill.Cast"           "Skill.Cast.exe"            "Applications\Development\Inspector"
 
 :: ── Applications / Emoji.Icon ──────────────────────────────────────
 :: call :pub "Glyph.Map"             "Applications\Emoji.Icon\Glyph.Map"                       "Glyph.Map.exe"             "Applications\Emoji.Icon\Glyph.Map"
@@ -81,6 +81,7 @@ call :pub "Img.Cast"              "Applications\Emoji.Icon\Img.Cast"            
 
 :: ── Applications / Files / Manager ────────────────────────────────
 :: call :pub "Batch.Rename"          "Applications\Files\Manager\Batch.Rename"                 "Batch.Rename.exe"          "Applications\Files\Manager"
+call :pub "Copy.Path"             "Applications\Files\Manager\Copy.Path"                    "Copy.Path.exe"             "Applications\Files\Manager\Copy.Path"
 :: call :pub "File.Duplicates"       "Applications\Files\Manager\File.Duplicates"              "File.Duplicates.exe"       "Applications\Files\Manager"
 :: call :pub "File.Unlocker"         "Applications\Files\Manager\File.Unlocker"                "File.Unlocker.exe"         "Applications\Files\Manager"
 call :pub "Folder.Purge"          "Applications\Files\Manager\Folder.Purge"                 "Folder.Purge.exe"          "Applications\Files\Manager"
@@ -89,7 +90,7 @@ call :pub "Folder.Purge"          "Applications\Files\Manager\Folder.Purge"     
 :: ── Applications / Network / Monitor ───────────────────────────────
 :: call :pub "DNS.Flip"              "Applications\Network\Monitor\DNS.Flip"                   "Dns.Flip.exe"              "Applications\Network\Monitor"
 :: call :pub "Net.Scan"              "Applications\Network\Monitor\Net.Scan"                   "Net.Scan.exe"              "Applications\Network\Monitor\Net.Scan"
-call :pub "Port.Watch"            "Applications\Network\Monitor\Port.Watch"                 "Port.Watch.exe"            "Applications\Network\Monitor"
+:: call :pub "Port.Watch"            "Applications\Network\Monitor\Port.Watch"                 "Port.Watch.exe"            "Applications\Network\Monitor"
 
 :: ── Applications / Network / Server ────────────────────────────────
 call :pub "Api.Probe"             "Applications\Network\Server\Api.Probe"                   "Api.Probe.exe"             "Applications\Network\Server\Api.Probe"
@@ -97,13 +98,14 @@ call :pub "Api.Probe"             "Applications\Network\Server\Api.Probe"       
 :: call :pub "Serve.Cast"            "Applications\Network\Server\Serve.Cast"                  "Serve.Cast.exe"            "Applications\Network\Server"
 
 :: ── Applications / Photo.Picture ───────────────────────────────────
+call :pub "Brush.Scale"           "Applications\Photo.Picture\Brush.Scale"                  "Brush.Scale.exe"           "Applications\Photo.Picture\Brush.Scale"
 :: call :pub "Color.Grade"           "Applications\Photo.Picture\Color.Grade"                  "Color.Grade.exe"           "Applications\Photo.Picture\Color.Grade"
 :: call :pub "Comic.Cast"            "Applications\Photo.Picture\Comic.Cast"                   "Comic.Cast.exe"            "Applications\Photo.Picture\Comic.Cast"
 :: call :pub "Img.Compare"           "Applications\Photo.Picture\Img.Compare"                  "Img.Compare.exe"           "Applications\Photo.Picture\Img.Compare"
 :: call :pub "Mosaic.Forge"          "Applications\Photo.Picture\Mosaic.Forge"                 "Mosaic.Forge.exe"          "Applications\Photo.Picture\Mosaic.Forge"
 call :pub "Photo.Video.Organizer" "Applications\Photo.Picture\Photo.Video.Organizer"        "Photo.Video.Organizer.exe" "Applications\Photo.Picture"
 :: call :pub "SVG.Forge"             "Applications\Photo.Picture\SVG.Forge"                    "SVG.Forge.exe"             "Applications\Photo.Picture\SVG.Forge"
-call :pub "Web.Shot"              "Applications\Photo.Picture\Web.Shot"                     "Web.Shot.exe"              "Applications\Photo.Picture\Web.Shot"
+:: call :pub "Web.Shot"              "Applications\Photo.Picture\Web.Shot"                     "Web.Shot.exe"              "Applications\Photo.Picture\Web.Shot"
 
 :: ── Applications / System / Key ────────────────────────────────────
 :: call :pub "Hotkey.Map"            "Applications\System\Key\Hotkey.Map"                      "Hotkey.Map.exe"            "Applications\System\Key\Hotkey.Map"
@@ -133,21 +135,21 @@ call :pub "Sys.Clean"             "Applications\System\Manager\Sys.Clean"       
 :: call :pub "Tray.Stats"            "Applications\System\Monitor\Tray.Stats"                  "Tray.Stats.exe"            "Applications\System\Monitor\Tray.Stats"
 
 :: ── Applications / Text ────────────────────────────────────────────
-call :pub "ANSI.Forge"            "Applications\Text\ANSI.Forge"                            "ANSI.Forge.exe"            "Applications\Text\ANSI.Forge"
-call :pub "Char.Art"              "Applications\Text\Char.Art"                              "Char.Art.exe"              "Applications\Text"
-call :pub "Echo.Text"             "Applications\Text\Echo.Text"                             "Echo.Text.exe"             "Applications\Text\Echo.Text"
+:: call :pub "ANSI.Forge"            "Applications\Text\ANSI.Forge"                            "ANSI.Forge.exe"            "Applications\Text\ANSI.Forge"
+call :pub "Case.Forge"            "Applications\Text\Case.Forge"                            "Case.Forge.exe"            "Applications\Text\Case.Forge"
+:: call :pub "Char.Art"              "Applications\Text\Char.Art"                              "Char.Art.exe"              "Applications\Text"
+:: call :pub "Echo.Text"             "Applications\Text\Echo.Text"                             "Echo.Text.exe"             "Applications\Text\Echo.Text"
 call :pub "Mark.View"             "Applications\Text\Mark.View"                             "Mark.View.exe"             "Applications\Text\Mark.View"
 call :pub "Text.Forge"            "Applications\Text\Text.Forge"                            "Text.Forge.exe"            "Applications\Text"
-call :pub "Word.Cloud"            "Applications\Text\Word.Cloud"                            "Word.Cloud.exe"            "Applications\Text"
+:: call :pub "Word.Cloud"            "Applications\Text\Word.Cloud"                            "Word.Cloud.exe"            "Applications\Text"
 
 :: ── Applications / Tools.Utility ──────────────────────────────────
-:: call :pub "Badge.Forge"           "Applications\Tools.Utility\Badge.Forge"                  "Badge.Forge.exe"           "Applications\Tools.Utility\Badge.Forge"
-:: call :pub "Clipboard.Stacker"     "Applications\Tools.Utility\Clipboard.Stacker"            "Clipboard.Stacker.exe"     "Applications\Tools.Utility"
-call :pub "Dict.Cast"             "Applications\Tools.Utility\Dict.Cast"                    "Dict.Cast.exe"             "Applications\Tools.Utility\Dict.Cast"
+:: call :pub "Dict.Cast"             "Applications\Tools.Utility\Dict.Cast"                    "Dict.Cast.exe"             "Applications\Tools.Utility\Dict.Cast"
+call :pub "Char.Pad"              "Applications\Tools.Utility\Char.Pad"                     "Char.Pad.exe"              "Applications\Tools.Utility\Char.Pad"
 :: call :pub "Icon.Maker"            "Applications\Tools.Utility\Icon.Maker"                   "Icon.Maker.exe"            "Applications\Tools.Utility\Icon.Maker"
 call :pub "JSON.Fmt"              "Applications\Tools.Utility\JSON.Fmt"                     "JSON.Fmt.exe"              "Applications\Tools.Utility\JSON.Fmt"
-call :pub "Mouse.Flick"           "Applications\Tools.Utility\Mouse.Flick"                  "Mouse.Flick.exe"           "Applications\Tools.Utility"
-call :pub "QR.Forge"              "Applications\Tools.Utility\QR.Forge"                     "QR.Forge.exe"              "Applications\Tools.Utility"
+:: call :pub "Mouse.Flick"           "Applications\Tools.Utility\Mouse.Flick"                  "Mouse.Flick.exe"           "Applications\Tools.Utility"
+:: call :pub "QR.Forge"              "Applications\Tools.Utility\QR.Forge"                     "QR.Forge.exe"              "Applications\Tools.Utility"
 
 :: ── Applications / Video ───────────────────────────────────────────
 call :pub "Screen.Recorder"       "Applications\Video\Screen.Recorder"                      "Screen.Recorder.exe"       "Applications\Video"
@@ -160,13 +162,12 @@ call :pub "Brick.Blitz"           "Games\Arcade\Brick.Blitz"                    
 :: call :pub "Dash.City"             "Games\Arcade\Dash.City"                                  "Dash.City.exe"             "Games\Arcade"
 :: call :pub "Neon.Run"              "Games\Arcade\Neon.Run"                                   "Neon.Run.exe"              "Games\Arcade"
 call :pub "Neon.Slice"            "Games\Arcade\Neon.Slice"                                 "Neon.Slice.exe"            "Games\Arcade\Neon.Slice"
-:: call :pub "Sky.Drift"             "Games\Arcade\Sky.Drift"                                  "SkyDrift.exe"              "Games\Arcade"
 
 :: ── Games / Casual ─────────────────────────────────────────────────
-call :pub "Ear.Train"             "Games\Casual\Ear.Train"                                  "Ear.Train.exe"             "Games\Casual"
+:: call :pub "Ear.Train"             "Games\Casual\Ear.Train"                                  "Ear.Train.exe"             "Games\Casual"
 call :pub "Geo.Quiz"              "Games\Casual\Geo.Quiz"                                   "Geo.Quiz.exe"              "Games\Casual\Geo.Quiz"
-:: call :pub "Morse.Run"             "Games\Casual\Morse.Run"                                  "Morse.Run.exe"             "Games\Casual\Morse.Run"
 :: call :pub "Snap.Duel"             "Games\Casual\Snap.Duel"                                  "Snap.Duel.exe"             "Games\Casual"
+call :pub "Trivia.Cast"           "Games\Casual\Trivia.Cast"                                "Trivia.Cast.exe"           "Games\Casual\Trivia.Cast"
 
 :: ── Games / Idle ───────────────────────────────────────────────────
 :: call :pub "Code.Idle"             "Games\Idle\Code.Idle"                                    "Code.Idle.exe"             "Games\Idle\Code.Idle"
@@ -176,7 +177,7 @@ call :pub "Geo.Quiz"              "Games\Casual\Geo.Quiz"                       
 :: call :pub "Cipher.Quest"          "Games\Puzzle\Cipher.Quest"                               "Cipher.Quest.exe"          "Games\Puzzle\Cipher.Quest"
 call :pub "Crossword.Cast"        "Games\Puzzle\Crossword.Cast"                             "Crossword.Cast.exe"        "Games\Puzzle\Crossword.Cast"
 :: call :pub "Escape.Key"            "Games\Puzzle\Escape.Key"                                 "Escape.Key.exe"            "Games\Puzzle\Escape.Key"
-call :pub "Gravity.Flip"          "Games\Puzzle\Gravity.Flip"                               "Gravity.Flip.exe"          "Games\Puzzle"
+:: call :pub "Gravity.Flip"          "Games\Puzzle\Gravity.Flip"                               "Gravity.Flip.exe"          "Games\Puzzle"
 call :pub "Hue.Flow"              "Games\Puzzle\Hue.Flow"                                   "Hue.Flow.exe"              "Games\Puzzle"
 call :pub "Orbit.Craft"           "Games\Puzzle\Orbit.Craft"                                "Orbit.Craft.exe"           "Games\Puzzle\Orbit.Craft"
 
@@ -187,15 +188,15 @@ call :pub "Orbit.Craft"           "Games\Puzzle\Orbit.Craft"                    
 :: call :pub "Beat.Drop"             "Games\Rhythm\Beat.Drop"                                  "Beat.Drop.exe"             "Games\Rhythm"
 
 :: ── Games / Sandbox ────────────────────────────────────────────────
-call :pub "Sand.Fall"             "Games\Sandbox\Sand.Fall"                                 "Sand.Fall.exe"             "Games\Sandbox"
+:: call :pub "Sand.Fall"             "Games\Sandbox\Sand.Fall"                                 "Sand.Fall.exe"             "Games\Sandbox"
 
 :: ── Games / Shooter ────────────────────────────────────────────────
 call :pub "Dodge.Blitz"           "Games\Shooter\Dodge.Blitz"                               "Dodge.Blitz.exe"           "Games\Shooter"
-call :pub "Dodge.Craft"           "Games\Shooter\Dodge.Craft"                               "DodgeCraft.exe"            "Games\Shooter"
-call :pub "Star.Strike"           "Games\Shooter\Star.Strike"                               "Star.Strike.exe"           "Games\Shooter"
+:: call :pub "Dodge.Craft"           "Games\Shooter\Dodge.Craft"                               "DodgeCraft.exe"            "Games\Shooter"
+:: call :pub "Star.Strike"           "Games\Shooter\Star.Strike"                               "Star.Strike.exe"           "Games\Shooter"
 
 :: ── Games / Simulation ─────────────────────────────────────────────
-call :pub "Leaf.Grow"             "Games\Simulation\Leaf.Grow"                              "Leaf.Grow.exe"             "Games\Simulation"
+:: call :pub "Leaf.Grow"             "Games\Simulation\Leaf.Grow"                              "Leaf.Grow.exe"             "Games\Simulation"
 
 :: ── Games / Sports ─────────────────────────────────────────────────
 :: call :pub "Golf.Cast"             "Games\Sports\Golf.Cast"                                  "Golf.Cast.exe"             "Games\Sports\Golf.Cast"

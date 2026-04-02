@@ -35,7 +35,11 @@ public class UpscaleService : IDisposable
 
         _session?.Dispose();
 
-        var opts = new SessionOptions { GraphOptimizationLevel = GraphOptimizationLevel.ORT_ENABLE_ALL };
+        var opts = new SessionOptions();
+        opts.GraphOptimizationLevel = GraphOptimizationLevel.ORT_ENABLE_ALL;
+        // CPU EP를 명시적으로 등록 → ORT가 DML/CUDA를 자동 등록하지 않음
+        // (EP 목록이 비어있으면 Windows에서 시스템 directml.dll을 자동 감지·등록)
+        opts.AppendExecutionProvider_CPU(1);
         _session     = new InferenceSession(path, opts);
         _loadedModel = modelType;
 

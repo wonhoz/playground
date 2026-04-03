@@ -74,7 +74,7 @@ namespace StayAwake
             };
             btnOk.FlatAppearance.BorderColor = BorderColor;
             btnOk.FlatAppearance.BorderSize = 1;
-            btnOk.Location = new Point(width - btnOk.Width - 35, height - btnOk.Height - 72);
+            btnOk.Location = new Point(width - btnOk.Width - 35, ClientSize.Height - btnOk.Height - 34);
 
             AcceptButton = btnOk;
             Controls.Add(btnOk);

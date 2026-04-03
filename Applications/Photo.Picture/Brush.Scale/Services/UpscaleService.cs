@@ -14,6 +14,7 @@ public class UpscaleService : IDisposable
     int               _tileSize      = DefaultTileSize;
     int               _tileOverlap   = DefaultTileOverlap;
     bool              _fixedTileSize = false;
+    int               _tileAlignment = 1;   // dynamic U-Net 모델: 4의 배수 정렬 필요
 
     // ── 세션 로드 ──────────────────────────────────────────────────────────
     public void LoadModel(UpscaleModelType modelType)
@@ -26,6 +27,7 @@ public class UpscaleService : IDisposable
             _tileSize     = DefaultTileSize;
             _tileOverlap  = DefaultTileOverlap;
             _fixedTileSize = false;
+            _tileAlignment = 1;
             return;
         }
 
@@ -56,6 +58,9 @@ public class UpscaleService : IDisposable
             _fixedTileSize = false;
             _tileSize      = DefaultTileSize;
             _tileOverlap   = DefaultTileOverlap;
+            // stride-2 U-Net 계층이 2개이므로 4의 배수 정렬 필요
+            // (Add node skip connection 크기 불일치 방지)
+            _tileAlignment = 4;
         }
     }
 
@@ -158,6 +163,7 @@ public class UpscaleService : IDisposable
             int tileSize    = _tileSize;
             int tileOverlap = _tileOverlap;
             bool fixedSize  = _fixedTileSize;
+            int  alignment  = _tileAlignment;
             var tiles = BuildTiles(src.Width, src.Height, tileSize, tileOverlap);
             int total = tiles.Count;
 
@@ -173,10 +179,25 @@ public class UpscaleService : IDisposable
                                       new SKRect(0,  0,  sw,       sh));
 
                 // float 텐서 변환 (NCHW, [0,1])
-                // 고정 크기 모델: 타일이 기대 크기보다 작을 경우 zero-padding
-                var tensor = fixedSize
-                    ? BitmapToTensorPadded(tileBmp, tileSize, tileSize)
-                    : BitmapToTensor(tileBmp);
+                // 고정 크기 모델: 기대 크기로 zero-padding
+                // 동적 모델: stride-2 U-Net skip connection 정렬을 위해 alignment 배수로 패딩
+                DenseTensor<float> tensor;
+                if (fixedSize)
+                {
+                    tensor = BitmapToTensorPadded(tileBmp, tileSize, tileSize);
+                }
+                else if (alignment > 1)
+                {
+                    int alignedW = AlignUp(sw, alignment);
+                    int alignedH = AlignUp(sh, alignment);
+                    tensor = (alignedW == sw && alignedH == sh)
+                        ? BitmapToTensor(tileBmp)
+                        : BitmapToTensorPadded(tileBmp, alignedH, alignedW);
+                }
+                else
+                {
+                    tensor = BitmapToTensor(tileBmp);
+                }
 
                 // 추론
                 var inputs = new List<NamedOnnxValue>
@@ -341,6 +362,8 @@ public class UpscaleService : IDisposable
     }
 
     static byte Clamp(float v) => (byte)Math.Clamp((int)(v * 255f + 0.5f), 0, 255);
+
+    static int AlignUp(int val, int alignment) => (val + alignment - 1) / alignment * alignment;
 
     public void Dispose()
     {

@@ -167,7 +167,7 @@ call :pub "Neon.Slice"            "Games\Arcade\Neon.Slice"                     
 call :pub "Ear.Train"             "Games\Casual\Ear.Train"                                  "Ear.Train.exe"             "Games\Casual"
 call :pub "Geo.Quiz"              "Games\Casual\Geo.Quiz"                                   "Geo.Quiz.exe"              "Games\Casual\Geo.Quiz"
 call :pub "Snap.Duel"             "Games\Casual\Snap.Duel"                                  "Snap.Duel.exe"             "Games\Casual"
-call :pub "Trivia.Cast"           "Games\Casual\Trivia.Cast"                                "Trivia.Cast.exe"           "Games\Casual"
+call :pub "Trivia.Cast"           "Games\Casual\Trivia.Cast"                                "Trivia.Cast.exe"           "Games\Casual\Trivia.Cast"
 
 :: ── Games / Idle ───────────────────────────────────────────────────
 call :pub "Code.Idle"             "Games\Idle\Code.Idle"                                    "Code.Idle.exe"             "Games\Idle\Code.Idle"

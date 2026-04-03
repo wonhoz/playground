@@ -135,7 +135,7 @@ for %%n in (!SEL!) do (
     if "%%n"=="95"  call :pub "Tag.Forge"              "Applications\Audio\Tag.Forge"                            "Tag.Forge.exe"             "Applications\Audio\Tag.Forge"
     if "%%n"=="96"  call :pub "Text.Forge"             "Applications\Text\Text.Forge"                            "Text.Forge.exe"            "Applications\Text"
     if "%%n"=="97"  call :pub "Tower.Guard"            "Games\Strategy\Tower.Guard"                              "Tower.Guard.exe"           "Games\Strategy"
-    if "%%n"=="98"  call :pub "Trivia.Cast"            "Games\Casual\Trivia.Cast"                                "Trivia.Cast.exe"           "Games\Casual"
+    if "%%n"=="98"  call :pub "Trivia.Cast"            "Games\Casual\Trivia.Cast"                                "Trivia.Cast.exe"           "Games\Casual\Trivia.Cast"
     if "%%n"=="99"  call :pub "Tray.Stats"             "Applications\System\Monitor\Tray.Stats"                  "Tray.Stats.exe"            "Applications\System\Monitor\Tray.Stats"
     if "%%n"=="100" call :pub "Web.Shot"               "Applications\Photo.Picture\Web.Shot"                     "Web.Shot.exe"              "Applications\Photo.Picture\Web.Shot"
     if "%%n"=="101" call :pub "Win.Event"              "Applications\Development\Analyzer\Win.Event"             "Win.Event.exe"             "Applications\Development\Analyzer"

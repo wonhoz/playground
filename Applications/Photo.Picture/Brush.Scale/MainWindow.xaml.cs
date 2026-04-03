@@ -11,8 +11,17 @@ public partial class MainWindow : Window
     static extern int DwmSetWindowAttribute(IntPtr hwnd, int attr, ref int val, int size);
 
     readonly MainViewModel _vm;
-    readonly System.Windows.Media.RectangleGeometry _resultClip = new();
+    readonly RectangleGeometry _resultClip = new();
     double _sliderX = 0.5;
+
+    // ── 줌/패닝 ───────────────────────────────────────────────────────────
+    double _viewerScale = 1.0;
+    double _viewerTx = 0, _viewerTy = 0;
+    bool _isDragging = false;
+    Point _dragStart;
+    double _dragStartTx, _dragStartTy;
+    readonly ScaleTransform     _imgScale     = new(1, 1);
+    readonly TranslateTransform _imgTranslate = new();
 
     public MainWindow()
     {
@@ -20,11 +29,26 @@ public partial class MainWindow : Window
         DataContext = _vm;
         InitializeComponent();
         ImgResult.Clip = _resultClip;
+
+        // 이미지 컨테이너 트랜스폼 설정
+        var tg = new TransformGroup();
+        tg.Children.Add(_imgScale);
+        tg.Children.Add(_imgTranslate);
+        ImageWrapper.RenderTransform = tg;
+
+        _vm.BatchCompleted += count =>
+            System.Windows.MessageBox.Show(
+                $"{count}개 파일 처리가 완료되었습니다.",
+                "배치 완료",
+                System.Windows.MessageBoxButton.OK,
+                System.Windows.MessageBoxImage.Information);
+
         Loaded   += OnLoaded;
         Drop     += OnDrop;
         DragOver += (_, e) => { e.Effects = DragDropEffects.Copy; e.Handled = true; };
         KeyDown  += OnKeyDown;
         ViewerGrid.SizeChanged += (_, _) => UpdateSlider();
+        Closed += (_, _) => _vm.Dispose();
     }
 
     void OnLoaded(object s, RoutedEventArgs e)
@@ -51,12 +75,41 @@ public partial class MainWindow : Window
             .Contains(Path.GetExtension(p));
 
     // ── 키보드 ───────────────────────────────────────────────────────────
-    void OnKeyDown(object s, KeyEventArgs e)
+    async void OnKeyDown(object s, KeyEventArgs e)
     {
-        if (e.Key == Key.V && (Keyboard.Modifiers & ModifierKeys.Control) != 0)
+        bool ctrl = (Keyboard.Modifiers & ModifierKeys.Control) != 0;
+        switch (e.Key)
         {
-            _vm.LoadFromClipboard();
-            e.Handled = true;
+            case Key.V when ctrl:
+                _vm.LoadFromClipboard();
+                e.Handled = true;
+                break;
+            case Key.C when ctrl && _vm.HasResult:
+                _vm.CopyResultToClipboard();
+                e.Handled = true;
+                break;
+            case Key.O when ctrl:
+                BtnOpen_Click(null!, null!);
+                e.Handled = true;
+                break;
+            case Key.S when ctrl && _vm.HasResult:
+                BtnSave_Click(null!, null!);
+                e.Handled = true;
+                break;
+            case Key.Return when _vm.IsIdle && _vm.HasImage:
+                await _vm.RunUpscaleAsync();
+                _sliderX = 0.5;
+                UpdateSlider();
+                e.Handled = true;
+                break;
+            case Key.Escape:
+                _vm.CancelCommand.Execute(null);
+                e.Handled = true;
+                break;
+            case Key.F1:
+                BtnHelp_Click(null!, null!);
+                e.Handled = true;
+                break;
         }
     }
 
@@ -93,8 +146,12 @@ public partial class MainWindow : Window
         if (dlg.ShowDialog() == true) _vm.SaveResultDirect(dlg.FileName);
     }
 
-    void BtnOpenModelDir_Click(object s, RoutedEventArgs e) => ModelManager.OpenModelDir();
+    void BtnCopy_Click(object s, RoutedEventArgs e) => _vm.CopyResultToClipboard();
 
+    void BtnHelp_Click(object s, RoutedEventArgs e)
+        => new HelpWindow { Owner = this }.ShowDialog();
+
+    void BtnOpenModelDir_Click(object s, RoutedEventArgs e) => ModelManager.OpenModelDir();
     void BtnRefreshModels_Click(object s, RoutedEventArgs e) => _vm.RefreshModelStatus();
 
     void BtnBatchIn_Click(object s, RoutedEventArgs e)
@@ -114,28 +171,96 @@ public partial class MainWindow : Window
     // ── 슬라이더 비교 뷰 ────────────────────────────────────────────────
     void Viewer_MouseMove(object s, MouseEventArgs e)
     {
+        if (_isDragging && e.LeftButton == MouseButtonState.Pressed)
+        {
+            var pos = e.GetPosition(ViewerGrid);
+            var delta = pos - _dragStart;
+            _viewerTx = _dragStartTx + delta.X;
+            _viewerTy = _dragStartTy + delta.Y;
+            _imgTranslate.X = _viewerTx;
+            _imgTranslate.Y = _viewerTy;
+            return;
+        }
+
         if (!_vm.HasResult) return;
-        var pos = e.GetPosition(ViewerGrid);
-        _sliderX = Math.Clamp(pos.X / ViewerGrid.ActualWidth, 0, 1);
+        var viewerPos = e.GetPosition(ViewerGrid);
+        _sliderX = Math.Clamp(viewerPos.X / ViewerGrid.ActualWidth, 0, 1);
         UpdateSlider();
     }
 
-    void Viewer_MouseLeave(object s, MouseEventArgs e) { }
+    void Viewer_MouseLeftButtonDown(object s, MouseButtonEventArgs e)
+    {
+        if (e.ClickCount == 2) { ResetView(); return; }
+        _isDragging   = true;
+        _dragStart    = e.GetPosition(ViewerGrid);
+        _dragStartTx  = _viewerTx;
+        _dragStartTy  = _viewerTy;
+        ViewerGrid.CaptureMouse();
+        e.Handled = true;
+    }
+
+    void Viewer_MouseLeftButtonUp(object s, MouseButtonEventArgs e)
+    {
+        _isDragging = false;
+        ViewerGrid.ReleaseMouseCapture();
+    }
+
+    void Viewer_MouseWheel(object s, MouseWheelEventArgs e)
+    {
+        double factor   = e.Delta > 0 ? 1.15 : 1.0 / 1.15;
+        double newScale = Math.Clamp(_viewerScale * factor, 0.5, 10.0);
+
+        var pivot = e.GetPosition(ViewerGrid);
+        _viewerTx   = _viewerTx + (1 - newScale / _viewerScale) * pivot.X;
+        _viewerTy   = _viewerTy + (1 - newScale / _viewerScale) * pivot.Y;
+        _viewerScale = newScale;
+
+        _imgScale.ScaleX    = _viewerScale;
+        _imgScale.ScaleY    = _viewerScale;
+        _imgTranslate.X     = _viewerTx;
+        _imgTranslate.Y     = _viewerTy;
+
+        UpdateSlider();
+        UpdateZoomHint();
+        e.Handled = true;
+    }
+
+    void ResetView()
+    {
+        _viewerScale        = 1.0;
+        _viewerTx           = 0;
+        _viewerTy           = 0;
+        _imgScale.ScaleX    = 1;
+        _imgScale.ScaleY    = 1;
+        _imgTranslate.X     = 0;
+        _imgTranslate.Y     = 0;
+        _sliderX            = 0.5;
+        UpdateSlider();
+        UpdateZoomHint();
+    }
 
     void UpdateSlider()
     {
         if (!IsLoaded) return;
         double w = ViewerGrid.ActualWidth;
         double h = ViewerGrid.ActualHeight;
-        double x = _sliderX * w;
 
-        // 클립 영역: 결과 이미지 왼쪽
-        _resultClip.Rect = new System.Windows.Rect(0, 0, x, h);
+        // 화면 좌표 기준 슬라이더 X
+        double screenX = _sliderX * w;
 
-        // 슬라이더 라인
-        SliderLine.Margin = new Thickness(x - 1, 0, 0, 0);
+        // 이미지 컨테이너 로컬 좌표로 변환 (클립 적용)
+        double localX = _viewerScale > 0 ? (screenX - _viewerTx) / _viewerScale : screenX;
 
-        // 슬라이더 핸들
-        SliderHandle.Margin = new Thickness(x - 16, 0, 0, 0);
+        _resultClip.Rect        = new Rect(0, 0, localX, ImageWrapper.ActualHeight);
+        SliderLine.Margin       = new Thickness(screenX - 1, 0, 0, 0);
+        SliderHandle.Margin     = new Thickness(screenX - 16, 0, 0, 0);
+    }
+
+    void UpdateZoomHint()
+    {
+        if (ZoomHint is null) return;
+        ZoomHint.Text = _viewerScale is >= 0.99 and <= 1.01
+            ? ""
+            : $"{_viewerScale:F1}×  더블클릭으로 초기화";
     }
 }

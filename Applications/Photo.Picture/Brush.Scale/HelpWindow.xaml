@@ -1,0 +1,130 @@
+<Window x:Class="Brush.Scale.HelpWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Brush.Scale — 사용 안내"
+        Width="480" Height="560"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterOwner"
+        Background="#1A1A2E">
+  <Grid Margin="24">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition Height="14"/>
+      <RowDefinition Height="*"/>
+      <RowDefinition Height="14"/>
+      <RowDefinition Height="Auto"/>
+    </Grid.RowDefinitions>
+
+    <TextBlock Grid.Row="0" Text="Brush.Scale 사용 안내"
+               FontSize="18" FontWeight="Bold" Foreground="#7C4DFF"/>
+
+    <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto">
+      <StackPanel>
+
+        <!-- 단축키 -->
+        <TextBlock Text="⌨  단축키" FontSize="13" FontWeight="SemiBold"
+                   Foreground="#7C4DFF" Margin="0,0,0,8"/>
+        <Grid Margin="0,0,0,16">
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="160"/>
+            <ColumnDefinition Width="*"/>
+          </Grid.ColumnDefinitions>
+          <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+          </Grid.RowDefinitions>
+
+          <Border Grid.Row="0" Grid.Column="0" Margin="0,0,8,5" Background="#16213E" CornerRadius="4" Padding="8,4">
+            <TextBlock Text="Ctrl + O" FontFamily="Consolas" Foreground="#9A6FFF" FontWeight="SemiBold"/>
+          </Border>
+          <TextBlock Grid.Row="0" Grid.Column="1" Text="이미지 파일 열기" Foreground="#E0E0E0" FontSize="12" VerticalAlignment="Center" Margin="0,0,0,5"/>
+
+          <Border Grid.Row="1" Grid.Column="0" Margin="0,0,8,5" Background="#16213E" CornerRadius="4" Padding="8,4">
+            <TextBlock Text="Ctrl + V" FontFamily="Consolas" Foreground="#9A6FFF" FontWeight="SemiBold"/>
+          </Border>
+          <TextBlock Grid.Row="1" Grid.Column="1" Text="클립보드 이미지 붙여넣기" Foreground="#E0E0E0" FontSize="12" VerticalAlignment="Center" Margin="0,0,0,5"/>
+
+          <Border Grid.Row="2" Grid.Column="0" Margin="0,0,8,5" Background="#16213E" CornerRadius="4" Padding="8,4">
+            <TextBlock Text="Ctrl + C" FontFamily="Consolas" Foreground="#9A6FFF" FontWeight="SemiBold"/>
+          </Border>
+          <TextBlock Grid.Row="2" Grid.Column="1" Text="결과 이미지 클립보드 복사" Foreground="#E0E0E0" FontSize="12" VerticalAlignment="Center" Margin="0,0,0,5"/>
+
+          <Border Grid.Row="3" Grid.Column="0" Margin="0,0,8,5" Background="#16213E" CornerRadius="4" Padding="8,4">
+            <TextBlock Text="Ctrl + S" FontFamily="Consolas" Foreground="#9A6FFF" FontWeight="SemiBold"/>
+          </Border>
+          <TextBlock Grid.Row="3" Grid.Column="1" Text="결과 이미지 저장" Foreground="#E0E0E0" FontSize="12" VerticalAlignment="Center" Margin="0,0,0,5"/>
+
+          <Border Grid.Row="4" Grid.Column="0" Margin="0,0,8,5" Background="#16213E" CornerRadius="4" Padding="8,4">
+            <TextBlock Text="Enter" FontFamily="Consolas" Foreground="#9A6FFF" FontWeight="SemiBold"/>
+          </Border>
+          <TextBlock Grid.Row="4" Grid.Column="1" Text="업스케일 실행" Foreground="#E0E0E0" FontSize="12" VerticalAlignment="Center" Margin="0,0,0,5"/>
+
+          <Border Grid.Row="5" Grid.Column="0" Margin="0,0,8,5" Background="#16213E" CornerRadius="4" Padding="8,4">
+            <TextBlock Text="Escape" FontFamily="Consolas" Foreground="#9A6FFF" FontWeight="SemiBold"/>
+          </Border>
+          <TextBlock Grid.Row="5" Grid.Column="1" Text="처리 취소" Foreground="#E0E0E0" FontSize="12" VerticalAlignment="Center" Margin="0,0,0,5"/>
+
+          <Border Grid.Row="6" Grid.Column="0" Margin="0,0,8,0" Background="#16213E" CornerRadius="4" Padding="8,4">
+            <TextBlock Text="F1" FontFamily="Consolas" Foreground="#9A6FFF" FontWeight="SemiBold"/>
+          </Border>
+          <TextBlock Grid.Row="6" Grid.Column="1" Text="이 도움말 열기" Foreground="#E0E0E0" FontSize="12" VerticalAlignment="Center"/>
+        </Grid>
+
+        <!-- 뷰어 조작 -->
+        <TextBlock Text="🖼  비교 뷰어 조작" FontSize="13" FontWeight="SemiBold"
+                   Foreground="#7C4DFF" Margin="0,0,0,8"/>
+        <StackPanel Margin="0,0,0,16">
+          <TextBlock Foreground="#E0E0E0" FontSize="12" Margin="0,0,0,4"
+                     Text="• 마우스 이동 — Before/After 분할 슬라이더 이동"/>
+          <TextBlock Foreground="#E0E0E0" FontSize="12" Margin="0,0,0,4"
+                     Text="• 마우스 휠 — 뷰어 확대/축소 (0.5× ~ 10×)"/>
+          <TextBlock Foreground="#E0E0E0" FontSize="12" Margin="0,0,0,4"
+                     Text="• 좌버튼 드래그 — 이미지 패닝"/>
+          <TextBlock Foreground="#E0E0E0" FontSize="12" Margin="0,0,0,4"
+                     Text="• 더블클릭 — 뷰 초기화 (1:1, 중앙)"/>
+          <TextBlock Foreground="#E0E0E0" FontSize="12" Margin="0,0,0,0"
+                     Text="• 이미지 드래그 &amp; 드롭 — 파일 직접 드롭"/>
+        </StackPanel>
+
+        <!-- AI 모델 안내 -->
+        <TextBlock Text="🤖  AI 모델 안내" FontSize="13" FontWeight="SemiBold"
+                   Foreground="#7C4DFF" Margin="0,0,0,8"/>
+        <StackPanel>
+          <TextBlock Foreground="#E0E0E0" FontSize="12" Margin="0,0,0,4" TextWrapping="Wrap"
+                     Text="• Bicubic — 내장, 항상 사용 가능. 빠르지만 AI 품질 없음."/>
+          <TextBlock Foreground="#E0E0E0" FontSize="12" Margin="0,0,0,4" TextWrapping="Wrap"
+                     Text="• waifu2x-cunet — 일러스트·애니. 자동 다운로드 지원."/>
+          <TextBlock Foreground="#E0E0E0" FontSize="12" Margin="0,0,0,4" TextWrapping="Wrap"
+                     Text="• RealESRGAN x4plus — 실사 사진. 자동 다운로드 지원."/>
+          <TextBlock Foreground="#E0E0E0" FontSize="12" Margin="0,0,0,8" TextWrapping="Wrap"
+                     Text="• RealESRGAN Anime — 애니메이션. 수동 설치 필요."/>
+          <TextBlock Foreground="#666688" FontSize="10" TextWrapping="Wrap"
+                     Text="모델 저장 경로: %LocalAppData%\Playground\Brush.Scale\models\"/>
+        </StackPanel>
+
+      </StackPanel>
+    </ScrollViewer>
+
+    <Button Grid.Row="4" Content="닫기" HorizontalAlignment="Right" Width="80" Height="32"
+            Click="BtnClose_Click">
+      <Button.Template>
+        <ControlTemplate TargetType="Button">
+          <Border x:Name="bd" Background="#7C4DFF" CornerRadius="6" Padding="12,6">
+            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+          </Border>
+          <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+              <Setter TargetName="bd" Property="Background" Value="#9A6FFF"/>
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Button.Template>
+      <Button.Foreground>White</Button.Foreground>
+    </Button>
+  </Grid>
+</Window>

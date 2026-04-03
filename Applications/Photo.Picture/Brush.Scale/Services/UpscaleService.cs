@@ -345,25 +345,21 @@ public class UpscaleService : IDisposable
         int W = srcW + 2 * pad, H = srcH + 2 * pad;
         var bmp = new SKBitmap(W, H, src.ColorType, src.AlphaType);
 
-        // 중앙에 원본 복사
         using (var canvas = new SKCanvas(bmp))
+        {
+            // 중앙에 원본 복사
             canvas.DrawBitmap(src, pad, pad);
-
-        // 좌/우 엣지 복제
-        for (int y = pad; y < pad + srcH; y++)
-        {
-            var edgeL = bmp.GetPixel(pad, y);
-            var edgeR = bmp.GetPixel(pad + srcW - 1, y);
-            for (int x = 0; x < pad; x++)         bmp.SetPixel(x, y, edgeL);
-            for (int x = pad + srcW; x < W; x++)   bmp.SetPixel(x, y, edgeR);
-        }
-        // 상/하 엣지 복제 (코너 포함)
-        for (int x = 0; x < W; x++)
-        {
-            var edgeT = bmp.GetPixel(x, pad);
-            var edgeB = bmp.GetPixel(x, pad + srcH - 1);
-            for (int y = 0; y < pad; y++)         bmp.SetPixel(x, y, edgeT);
-            for (int y = pad + srcH; y < H; y++)   bmp.SetPixel(x, y, edgeB);
+            // 좌/우 엣지: 1픽셀 폭 스트립을 pad 폭으로 늘리기 (nearest-neighbor — 1px 소스라 보간 무관)
+            canvas.DrawBitmap(src, new SKRect(0, 0, 1, srcH),         new SKRect(0,          pad, pad,          pad + srcH));
+            canvas.DrawBitmap(src, new SKRect(srcW - 1, 0, srcW, srcH), new SKRect(pad + srcW, pad, W,            pad + srcH));
+            // 상/하 엣지
+            canvas.DrawBitmap(src, new SKRect(0, 0, srcW, 1),           new SKRect(pad, 0,          pad + srcW, pad));
+            canvas.DrawBitmap(src, new SKRect(0, srcH - 1, srcW, srcH), new SKRect(pad, pad + srcH, pad + srcW, H));
+            // 4 코너
+            canvas.DrawBitmap(src, new SKRect(0,        0,        1,    1),    new SKRect(0,          0,          pad,   pad));
+            canvas.DrawBitmap(src, new SKRect(srcW - 1, 0,        srcW, 1),    new SKRect(pad + srcW, 0,          W,     pad));
+            canvas.DrawBitmap(src, new SKRect(0,        srcH - 1, 1,    srcH), new SKRect(0,          pad + srcH, pad,   H));
+            canvas.DrawBitmap(src, new SKRect(srcW - 1, srcH - 1, srcW, srcH), new SKRect(pad + srcW, pad + srcH, W,     H));
         }
         return bmp;
     }
@@ -413,52 +409,89 @@ public class UpscaleService : IDisposable
         return tiles;
     }
 
-    static DenseTensor<float> BitmapToTensor(SKBitmap bmp)
+    static unsafe DenseTensor<float> BitmapToTensor(SKBitmap bmp)
     {
         int h = bmp.Height, w = bmp.Width;
         var t = new DenseTensor<float>([1, 3, h, w]);
-        for (int y = 0; y < h; y++)
-        for (int x = 0; x < w; x++)
+
+        SKBitmap? converted = bmp.ColorType != SKColorType.Bgra8888
+            ? bmp.Copy(SKColorType.Bgra8888)
+            : null;
+        var src = converted ?? bmp;
+        try
         {
-            var c = bmp.GetPixel(x, y);
-            t[0, 0, y, x] = c.Red   / 255f;
-            t[0, 1, y, x] = c.Green / 255f;
-            t[0, 2, y, x] = c.Blue  / 255f;
+            byte* ptr      = (byte*)src.GetPixels().ToPointer();
+            int   rowBytes = src.RowBytes;
+            for (int y = 0; y < h; y++)
+            {
+                byte* row = ptr + y * rowBytes;
+                for (int x = 0; x < w; x++)
+                {
+                    byte* p = row + x * 4;  // BGRA: p[0]=B, p[1]=G, p[2]=R
+                    t[0, 0, y, x] = p[2] / 255f;
+                    t[0, 1, y, x] = p[1] / 255f;
+                    t[0, 2, y, x] = p[0] / 255f;
+                }
+            }
         }
+        finally { converted?.Dispose(); }
         return t;
     }
 
     // 고정 크기 모델용: 타일이 targetH×targetW보다 작으면 zero-padding
-    static DenseTensor<float> BitmapToTensorPadded(SKBitmap bmp, int targetH, int targetW)
+    static unsafe DenseTensor<float> BitmapToTensorPadded(SKBitmap bmp, int targetH, int targetW)
     {
-        var t = new DenseTensor<float>([1, 3, targetH, targetW]);
-        int h = Math.Min(bmp.Height, targetH);
-        int w = Math.Min(bmp.Width,  targetW);
-        for (int y = 0; y < h; y++)
-        for (int x = 0; x < w; x++)
+        var t  = new DenseTensor<float>([1, 3, targetH, targetW]);
+        int h  = Math.Min(bmp.Height, targetH);
+        int w  = Math.Min(bmp.Width,  targetW);
+
+        SKBitmap? converted = bmp.ColorType != SKColorType.Bgra8888
+            ? bmp.Copy(SKColorType.Bgra8888)
+            : null;
+        var src = converted ?? bmp;
+        try
         {
-            var c = bmp.GetPixel(x, y);
-            t[0, 0, y, x] = c.Red   / 255f;
-            t[0, 1, y, x] = c.Green / 255f;
-            t[0, 2, y, x] = c.Blue  / 255f;
+            byte* ptr      = (byte*)src.GetPixels().ToPointer();
+            int   rowBytes = src.RowBytes;
+            for (int y = 0; y < h; y++)
+            {
+                byte* row = ptr + y * rowBytes;
+                for (int x = 0; x < w; x++)
+                {
+                    byte* p = row + x * 4;
+                    t[0, 0, y, x] = p[2] / 255f;
+                    t[0, 1, y, x] = p[1] / 255f;
+                    t[0, 2, y, x] = p[0] / 255f;
+                }
+            }
         }
+        finally { converted?.Dispose(); }
         return t;
     }
 
-    static SKBitmap TensorToBitmap(Tensor<float> t, int w, int h)
+    static unsafe SKBitmap TensorToBitmap(Tensor<float> t, int w, int h)
     {
-        var bmp  = new SKBitmap(w, h, SKColorType.Rgb888x, SKAlphaType.Opaque);
-        int rank = t.Dimensions.Length;
+        var bmp  = new SKBitmap(new SKImageInfo(w, h, SKColorType.Bgra8888, SKAlphaType.Opaque));
+        byte* ptr = (byte*)bmp.GetPixels().ToPointer();
+        int rowBytes = bmp.RowBytes;
+        int rank  = t.Dimensions.Length;
         bool is4D = rank == 4;
-        int nCh = t.Dimensions[is4D ? 1 : 0];
+        int nCh   = t.Dimensions[is4D ? 1 : 0];
 
         for (int y = 0; y < h; y++)
-        for (int x = 0; x < w; x++)
         {
-            float fR = is4D ? t[0, 0, y, x] : t[0, y, x];
-            float fG = nCh >= 2 ? (is4D ? t[0, 1, y, x] : t[1, y, x]) : fR;
-            float fB = nCh >= 3 ? (is4D ? t[0, 2, y, x] : t[2, y, x]) : fR;
-            bmp.SetPixel(x, y, new SKColor(Clamp(fR), Clamp(fG), Clamp(fB)));
+            byte* row = ptr + y * rowBytes;
+            for (int x = 0; x < w; x++)
+            {
+                float fR = is4D ? t[0, 0, y, x] : t[0, y, x];
+                float fG = nCh >= 2 ? (is4D ? t[0, 1, y, x] : t[1, y, x]) : fR;
+                float fB = nCh >= 3 ? (is4D ? t[0, 2, y, x] : t[2, y, x]) : fR;
+                byte* p = row + x * 4;
+                p[2] = Clamp(fR);  // R
+                p[1] = Clamp(fG);  // G
+                p[0] = Clamp(fB);  // B
+                p[3] = 255;        // A
+            }
         }
         return bmp;
     }

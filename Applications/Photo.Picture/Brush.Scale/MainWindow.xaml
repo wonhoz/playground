@@ -13,14 +13,14 @@
     <SolidColorBrush x:Key="BgBrush"     Color="#1A1A2E"/>
     <SolidColorBrush x:Key="PanelBrush"  Color="#16213E"/>
     <SolidColorBrush x:Key="CardBrush"   Color="#0F3460"/>
-    <SolidColorBrush x:Key="AccentBrush" Color="#E94560"/>
+    <SolidColorBrush x:Key="AccentBrush" Color="#7C4DFF"/>
     <SolidColorBrush x:Key="TextBrush"   Color="#E0E0E0"/>
     <SolidColorBrush x:Key="DimBrush"    Color="#888888"/>
     <SolidColorBrush x:Key="BorderBrush" Color="#333355"/>
 
     <!-- 버튼 스타일 -->
     <Style x:Key="PrimaryBtn" TargetType="Button">
-      <Setter Property="Background"   Value="#E94560"/>
+      <Setter Property="Background"   Value="#7C4DFF"/>
       <Setter Property="Foreground"   Value="White"/>
       <Setter Property="BorderThickness" Value="0"/>
       <Setter Property="Padding"      Value="18,8"/>
@@ -36,7 +36,7 @@
             </Border>
             <ControlTemplate.Triggers>
               <Trigger Property="IsMouseOver" Value="True">
-                <Setter TargetName="bd" Property="Background" Value="#FF5A7A"/>
+                <Setter TargetName="bd" Property="Background" Value="#9A6FFF"/>
               </Trigger>
               <Trigger Property="IsEnabled" Value="False">
                 <Setter TargetName="bd" Property="Background" Value="#444466"/>
@@ -106,7 +106,7 @@
             </Grid>
             <ControlTemplate.Triggers>
               <Trigger Property="IsMouseOver" Value="True">
-                <Setter TargetName="bd" Property="BorderBrush" Value="#E94560"/>
+                <Setter TargetName="bd" Property="BorderBrush" Value="#7C4DFF"/>
               </Trigger>
             </ControlTemplate.Triggers>
           </ControlTemplate>
@@ -128,8 +128,40 @@
                 <Setter TargetName="bd" Property="Background" Value="#2A2A5A"/>
               </Trigger>
               <Trigger Property="IsSelected" Value="True">
-                <Setter TargetName="bd" Property="Background" Value="#E94560"/>
+                <Setter TargetName="bd" Property="Background" Value="#7C4DFF"/>
                 <Setter Property="Foreground" Value="White"/>
+              </Trigger>
+            </ControlTemplate.Triggers>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+
+    <!-- CheckBox -->
+    <Style TargetType="CheckBox">
+      <Setter Property="Foreground" Value="#C0C0E0"/>
+      <Setter Property="FontSize"   Value="11"/>
+      <Setter Property="Cursor"     Value="Hand"/>
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="CheckBox">
+            <StackPanel Orientation="Horizontal">
+              <Border x:Name="box" Width="14" Height="14" CornerRadius="3"
+                      Background="#1E1E3A" BorderBrush="#333355" BorderThickness="1"
+                      VerticalAlignment="Center">
+                <Path x:Name="chk" Data="M2,7 L5,10 L12,3" Stroke="White" StrokeThickness="2"
+                      HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed"/>
+              </Border>
+              <ContentPresenter Margin="6,0,0,0" VerticalAlignment="Center"/>
+            </StackPanel>
+            <ControlTemplate.Triggers>
+              <Trigger Property="IsChecked" Value="True">
+                <Setter TargetName="box" Property="Background" Value="#7C4DFF"/>
+                <Setter TargetName="box" Property="BorderBrush" Value="#7C4DFF"/>
+                <Setter TargetName="chk" Property="Visibility" Value="Visible"/>
+              </Trigger>
+              <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="box" Property="BorderBrush" Value="#7C4DFF"/>
               </Trigger>
             </ControlTemplate.Triggers>
           </ControlTemplate>
@@ -148,7 +180,7 @@
                   <RepeatButton Background="Transparent" BorderThickness="0" Height="4">
                     <RepeatButton.Template>
                       <ControlTemplate TargetType="RepeatButton">
-                        <Border Background="#E94560" CornerRadius="2" Height="4"/>
+                        <Border Background="#7C4DFF" CornerRadius="2" Height="4"/>
                       </ControlTemplate>
                     </RepeatButton.Template>
                   </RepeatButton>
@@ -166,7 +198,7 @@
                   <Thumb Width="14" Height="14">
                     <Thumb.Template>
                       <ControlTemplate TargetType="Thumb">
-                        <Ellipse Fill="#E94560" Stroke="#FF7090" StrokeThickness="1"/>
+                        <Ellipse Fill="#7C4DFF" Stroke="#9A6FFF" StrokeThickness="1"/>
                       </ControlTemplate>
                     </Thumb.Template>
                   </Thumb>
@@ -223,13 +255,13 @@
       <Setter Property="BorderThickness" Value="1"/>
       <Setter Property="Padding"         Value="8,5"/>
       <Setter Property="FontSize"        Value="12"/>
-      <Setter Property="CaretBrush"      Value="#E94560"/>
+      <Setter Property="CaretBrush"      Value="#7C4DFF"/>
       <Style.Triggers>
         <Trigger Property="IsMouseOver" Value="True">
-          <Setter Property="BorderBrush" Value="#E94560"/>
+          <Setter Property="BorderBrush" Value="#7C4DFF"/>
         </Trigger>
         <Trigger Property="IsFocused" Value="True">
-          <Setter Property="BorderBrush" Value="#E94560"/>
+          <Setter Property="BorderBrush" Value="#7C4DFF"/>
         </Trigger>
       </Style.Triggers>
     </Style>
@@ -238,7 +270,7 @@
     <Style TargetType="ProgressBar">
       <Setter Property="Height"     Value="4"/>
       <Setter Property="Background" Value="#333355"/>
-      <Setter Property="Foreground" Value="#E94560"/>
+      <Setter Property="Foreground" Value="#7C4DFF"/>
       <Setter Property="BorderThickness" Value="0"/>
       <Setter Property="Template">
         <Setter.Value>
@@ -264,7 +296,7 @@
     <!-- 경고 배너 -->
     <Style x:Key="WarnBanner" TargetType="Border">
       <Setter Property="Background"     Value="#3A1A00"/>
-      <Setter Property="BorderBrush"    Value="#E94560"/>
+      <Setter Property="BorderBrush"    Value="#7C4DFF"/>
       <Setter Property="BorderThickness" Value="1"/>
       <Setter Property="CornerRadius"   Value="5"/>
       <Setter Property="Padding"        Value="10,6"/>
@@ -283,15 +315,24 @@
         <StackPanel Margin="16">
 
           <!-- 타이틀 -->
-          <TextBlock Text="Brush.Scale" FontSize="20" FontWeight="Bold"
-                     Foreground="#E94560" Margin="0,8,0,4"/>
+          <Grid Margin="0,8,0,4">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="*"/>
+              <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Brush.Scale" FontSize="20" FontWeight="Bold"
+                       Foreground="#7C4DFF" VerticalAlignment="Center"/>
+            <Button Grid.Column="1" Content="?" Style="{StaticResource SecondaryBtn}"
+                    Padding="8,4" FontSize="11" Click="BtnHelp_Click"
+                    ToolTip="사용 안내 (F1)"/>
+          </Grid>
           <TextBlock Text="AI 오프라인 이미지 업스케일러" FontSize="11"
                      Foreground="#888888" Margin="0,0,0,20"/>
 
           <!-- 열기 버튼 -->
-          <Button x:Name="BtnOpen" Content="이미지 열기" Style="{StaticResource PrimaryBtn}"
+          <Button x:Name="BtnOpen" Content="이미지 열기  (Ctrl+O)" Style="{StaticResource PrimaryBtn}"
                   Click="BtnOpen_Click" Margin="0,0,0,8"/>
-          <Button x:Name="BtnPaste" Content="클립보드 붙여넣기 (Ctrl+V)" Style="{StaticResource SecondaryBtn}"
+          <Button x:Name="BtnPaste" Content="클립보드 붙여넣기  (Ctrl+V)" Style="{StaticResource SecondaryBtn}"
                   Click="BtnPaste_Click" Margin="0,0,0,20"/>
 
           <!-- 모델 선택 -->
@@ -309,13 +350,11 @@
               <TextBlock Text="ONNX 모델 관리" Foreground="#888888" FontSize="10"
                          FontWeight="SemiBold" Margin="0,0,0,8"/>
 
-              <!-- 모델 목록 (Bicubic 제외) -->
               <ItemsControl ItemsSource="{Binding DownloadableModels}">
                 <ItemsControl.ItemTemplate>
                   <DataTemplate>
                     <Border Margin="0,0,0,6" Background="#131D30" CornerRadius="4" Padding="8,6">
                       <StackPanel>
-                        <!-- 모델명 + 상태 뱃지 -->
                         <Grid Margin="0,0,0,4">
                           <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
@@ -324,19 +363,16 @@
                           <TextBlock Text="{Binding Info.Description, TargetNullValue='수동 설치 필요'}" FontSize="10"
                                      Foreground="#C0C0E0" TextWrapping="Wrap"
                                      VerticalAlignment="Center"/>
-                          <!-- 완료 뱃지 -->
                           <Border Grid.Column="1" Background="#1A3A1A" CornerRadius="3"
                                   Padding="5,2" Margin="4,0,0,0"
                                   Visibility="{Binding Available, Converter={x:Static local:BoolToVisibility.Instance}}">
                             <TextBlock Text="✓ 준비됨" Foreground="#4ADE80" FontSize="9" FontWeight="SemiBold"/>
                           </Border>
-                          <!-- 없음 뱃지 -->
                           <Border Grid.Column="1" Background="#3A1A00" CornerRadius="3"
                                   Padding="5,2" Margin="4,0,0,0"
                                   Visibility="{Binding CanDownload, Converter={x:Static local:BoolToVisibility.Instance}}">
                             <TextBlock Text="미설치" Foreground="#FFA060" FontSize="9"/>
                           </Border>
-                          <!-- 수동 설치 뱃지 -->
                           <Border Grid.Column="1" Background="#2A1A3A" CornerRadius="3"
                                   Padding="5,2" Margin="4,0,0,0"
                                   Visibility="{Binding ManualInstallNeeded, Converter={x:Static local:BoolToVisibility.Instance}}">
@@ -344,17 +380,14 @@
                           </Border>
                         </Grid>
 
-                        <!-- 다운로드 버튼 (미설치 + 비다운로드 중) -->
                         <Button Content="⬇ 자동 다운로드"
                                 Command="{Binding DownloadCommand}"
                                 Visibility="{Binding CanDownload, Converter={x:Static local:BoolToVisibility.Instance}}"
                                 Style="{StaticResource SecondaryBtn}" FontSize="10" Padding="8,4"/>
-                        <!-- 수동 설치 안내 -->
                         <TextBlock Visibility="{Binding ManualInstallNeeded, Converter={x:Static local:BoolToVisibility.Instance}}"
                                    FontSize="9" Foreground="#888888" Margin="0,2,0,0" TextWrapping="Wrap"
                                    Text="공개 ONNX 없음 — 직접 변환 후 모델 폴더에 배치하세요"/>
 
-                        <!-- 다운로드 진행 -->
                         <StackPanel Visibility="{Binding IsDownloading, Converter={x:Static local:BoolToVisibility.Instance}}">
                           <Grid Margin="0,0,0,3">
                             <Grid.ColumnDefinitions>
@@ -370,7 +403,6 @@
                           <ProgressBar Value="{Binding DownloadProgress, Mode=OneWay}" Maximum="100" Height="3"/>
                         </StackPanel>
 
-                        <!-- 완료 후 상태 메시지 (다운로드 중 아닐 때, 상태 있을 때) -->
                         <TextBlock Text="{Binding DownloadStatus}" FontSize="9"
                                    Foreground="#888888" Margin="0,2,0,0"
                                    Visibility="{Binding IsDownloading, Converter={x:Static local:BoolToCollapsed.Instance}}">
@@ -391,7 +423,6 @@
                 </ItemsControl.ItemTemplate>
               </ItemsControl>
 
-              <!-- 폴더 열기 / 새로고침 -->
               <Grid Margin="0,4,0,0">
                 <Grid.ColumnDefinitions>
                   <ColumnDefinition/>
@@ -427,7 +458,7 @@
 
           <StackPanel Orientation="Horizontal" Margin="0,0,0,4">
             <TextBlock Text="JPEG 품질: " Foreground="#888888" FontSize="11" VerticalAlignment="Center"/>
-            <TextBlock Text="{Binding JpegQuality}" Foreground="#E94560" FontSize="11"
+            <TextBlock Text="{Binding JpegQuality}" Foreground="#7C4DFF" FontSize="11"
                        FontWeight="SemiBold" VerticalAlignment="Center"/>
           </StackPanel>
           <Slider Minimum="60" Maximum="100" Value="{Binding JpegQuality}"
@@ -435,10 +466,19 @@
                   Margin="0,0,0,20"/>
 
           <!-- 실행 버튼 -->
-          <Button x:Name="BtnRun" Content="업스케일 실행" Style="{StaticResource PrimaryBtn}"
+          <Button x:Name="BtnRun" Content="업스케일 실행  (Enter)" Style="{StaticResource PrimaryBtn}"
                   Click="BtnRun_Click" IsEnabled="{Binding IsIdle}" Margin="0,0,0,8"/>
-          <Button x:Name="BtnSave" Content="결과 저장" Style="{StaticResource SecondaryBtn}"
-                  Click="BtnSave_Click" IsEnabled="{Binding HasResult}" Margin="0,0,0,20"/>
+          <Grid Margin="0,0,0,20">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition/>
+              <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="BtnSave" Content="결과 저장  (Ctrl+S)" Style="{StaticResource SecondaryBtn}"
+                    Click="BtnSave_Click" IsEnabled="{Binding HasResult}" Grid.Column="0"/>
+            <Button x:Name="BtnCopy" Content="복사" Style="{StaticResource SecondaryBtn}"
+                    Click="BtnCopy_Click" IsEnabled="{Binding HasResult}" Grid.Column="1"
+                    Margin="6,0,0,0" Padding="10,8" ToolTip="결과 클립보드 복사 (Ctrl+C)"/>
+          </Grid>
 
           <Separator Background="#333355" Margin="0,0,0,16"/>
 
@@ -467,6 +507,9 @@
                     Click="BtnBatchOut_Click" Grid.Column="1" Margin="4,0,0,0"/>
           </Grid>
 
+          <CheckBox Content="하위 폴더 포함" IsChecked="{Binding BatchRecursive}"
+                    Margin="0,0,0,8"/>
+
           <TextBlock Text="출력 파일명 패턴" Foreground="#888888" FontSize="10" Margin="0,0,0,4"/>
           <TextBox Text="{Binding OutputPattern}" Margin="0,0,0,4"/>
           <TextBlock Text="{}{name} = 원본 파일명,  {scale} = 배율" Foreground="#666688"
@@ -490,7 +533,10 @@
 
       <!-- 비교 뷰어 -->
       <Grid Grid.Row="0" x:Name="ViewerGrid" Background="#0D0D1A"
-            MouseMove="Viewer_MouseMove" MouseLeave="Viewer_MouseLeave"
+            MouseMove="Viewer_MouseMove"
+            MouseLeftButtonDown="Viewer_MouseLeftButtonDown"
+            MouseLeftButtonUp="Viewer_MouseLeftButtonUp"
+            MouseWheel="Viewer_MouseWheel"
             ClipToBounds="True">
 
         <!-- 드롭 힌트 -->
@@ -505,25 +551,28 @@
                      HorizontalAlignment="Center" Margin="0,8,0,0"/>
         </StackPanel>
 
-        <!-- 원본 이미지 (전체) -->
-        <Image x:Name="ImgOriginal" Source="{Binding OriginalBitmap}"
-               Stretch="Uniform" RenderOptions.BitmapScalingMode="HighQuality"
-               Visibility="{Binding HasImage, Converter={x:Static local:BoolToVisibility.Instance}}"/>
+        <!-- 이미지 컨테이너 (줌/패닝 트랜스폼 적용) -->
+        <Grid x:Name="ImageWrapper">
+          <!-- 원본 이미지 (전체) -->
+          <Image x:Name="ImgOriginal" Source="{Binding OriginalBitmap}"
+                 Stretch="Uniform" RenderOptions.BitmapScalingMode="HighQuality"
+                 Visibility="{Binding HasImage, Converter={x:Static local:BoolToVisibility.Instance}}"/>
 
-        <!-- 결과 이미지 (슬라이더 왼쪽 영역만 클리핑) -->
-        <Image x:Name="ImgResult" Source="{Binding ResultBitmap}"
-               Stretch="Uniform" RenderOptions.BitmapScalingMode="HighQuality"
-               Visibility="{Binding HasResult, Converter={x:Static local:BoolToVisibility.Instance}}"/>
+          <!-- 결과 이미지 (슬라이더 왼쪽 영역만 클리핑) -->
+          <Image x:Name="ImgResult" Source="{Binding ResultBitmap}"
+                 Stretch="Uniform" RenderOptions.BitmapScalingMode="HighQuality"
+                 Visibility="{Binding HasResult, Converter={x:Static local:BoolToVisibility.Instance}}"/>
+        </Grid>
 
-        <!-- 슬라이더 라인 -->
-        <Rectangle x:Name="SliderLine" Width="2" Fill="#E94560"
+        <!-- 슬라이더 라인 (화면 공간 — 트랜스폼 밖) -->
+        <Rectangle x:Name="SliderLine" Width="2" Fill="#7C4DFF"
                    VerticalAlignment="Stretch" HorizontalAlignment="Left"
                    Visibility="{Binding HasResult, Converter={x:Static local:BoolToVisibility.Instance}}"
                    IsHitTestVisible="False"/>
 
         <!-- 슬라이더 핸들 -->
         <Ellipse x:Name="SliderHandle" Width="32" Height="32"
-                 Fill="#E94560" Stroke="White" StrokeThickness="2"
+                 Fill="#7C4DFF" Stroke="White" StrokeThickness="2"
                  VerticalAlignment="Center" HorizontalAlignment="Left"
                  Visibility="{Binding HasResult, Converter={x:Static local:BoolToVisibility.Instance}}"
                  IsHitTestVisible="False"/>
@@ -534,15 +583,21 @@
                    HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,12,16,0"
                    Visibility="{Binding HasResult, Converter={x:Static local:BoolToVisibility.Instance}}"/>
         <TextBlock x:Name="LabelAfter" Text="업스케일" Foreground="White" FontSize="12" FontWeight="SemiBold"
-                   Background="#80E94560" Padding="8,3"
+                   Background="#807C4DFF" Padding="8,3"
                    HorizontalAlignment="Left" VerticalAlignment="Top" Margin="16,12,0,0"
                    Visibility="{Binding HasResult, Converter={x:Static local:BoolToVisibility.Instance}}"/>
+
+        <!-- 줌 힌트 -->
+        <TextBlock x:Name="ZoomHint" Foreground="#444466" FontSize="10"
+                   HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,12,8"
+                   IsHitTestVisible="False"
+                   Visibility="{Binding HasImage, Converter={x:Static local:BoolToVisibility.Instance}}"/>
 
         <!-- 처리 중 오버레이 -->
         <Border Background="#CC0D0D1A"
                 Visibility="{Binding IsBusy, Converter={x:Static local:BoolToVisibility.Instance}}">
           <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
-            <TextBlock Text="업스케일 처리 중..." Foreground="#E94560" FontSize="16"
+            <TextBlock Text="업스케일 처리 중..." Foreground="#7C4DFF" FontSize="16"
                        FontWeight="SemiBold" HorizontalAlignment="Center" Margin="0,0,0,16"/>
             <ProgressBar Value="{Binding Progress}" Maximum="100" Width="280" Height="6"/>
             <TextBlock Text="{Binding Progress, StringFormat='{}{0:F0}%'}" Foreground="#888888"

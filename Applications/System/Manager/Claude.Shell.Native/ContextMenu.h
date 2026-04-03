@@ -10,7 +10,7 @@
 extern const CLSID CLSID_ClaudeContextMenu;
 extern const CLSID CLSID_ClaudeContextMenuDangerous;
 extern HINSTANCE   g_hInst;
-extern long        g_cDllRef;
+extern LONG        g_cDllRef;
 
 // 공유 유틸 (ContextMenu.cpp 에서 구현)
 std::wstring FindClaudeIconSource();
@@ -44,14 +44,18 @@ public:
     STDMETHODIMP GetFlags(EXPCMDFLAGS* pFlags) override;
     STDMETHODIMP EnumSubCommands(IEnumExplorerCommand** ppEnum) override;
 
+    // DLL 언로드 시 정적 GDI 리소스 해제 (dllmain DLL_PROCESS_DETACH 에서 호출)
+    static void ReleaseStaticResources();
+
 private:
-    long          m_cRef;
+    LONG          m_cRef;
     bool          m_dangerous;   // true = --dangerously-skip-permissions
     std::wstring  m_folderPath;
     HMENU         m_hSubMenu;
 
-    static HBITMAP s_hBitmap;
-    static bool    s_iconLoaded;
+    static HBITMAP   s_hBitmap;
+    static INIT_ONCE s_initOnce; // 스레드 안전 1회 초기화
 
     static HBITMAP GetOrCreateIconBitmap();
+    static BOOL CALLBACK InitBitmapOnce(PINIT_ONCE, PVOID, PVOID*);
 };

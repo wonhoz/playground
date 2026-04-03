@@ -1,5 +1,4 @@
 #include "ContextMenu.h"
-#include "SubCommand.h"
 #include <shlwapi.h>
 #include <shellapi.h>
 #include <new>
@@ -8,10 +7,9 @@
 static const UINT CMD_NORMAL    = 0;
 static const UINT CMD_DANGEROUS = 1;
 static const UINT CMD_COUNT     = 2;
-static const UINT MIIM_BITMAP_  = 0x80;
 
-HBITMAP ClaudeContextMenu::s_hBitmap    = nullptr;
-bool    ClaudeContextMenu::s_iconLoaded = false;
+HBITMAP   ClaudeContextMenu::s_hBitmap  = nullptr;
+INIT_ONCE ClaudeContextMenu::s_initOnce = INIT_ONCE_STATIC_INIT;
 
 ClaudeContextMenu::ClaudeContextMenu(bool dangerous)
     : m_cRef(1), m_dangerous(dangerous), m_hSubMenu(nullptr)
@@ -22,6 +20,20 @@ ClaudeContextMenu::~ClaudeContextMenu()
 {
     if (m_hSubMenu) { DestroyMenu(m_hSubMenu); m_hSubMenu = nullptr; }
     InterlockedDecrement(&g_cDllRef);
+}
+
+// ── 공유 유틸: Claude 실행 ────────────────────────────────────────────────────
+static void LaunchClaude(const std::wstring& folder, bool dangerous)
+{
+    const wchar_t* claudeArg = dangerous
+        ? L"claude --dangerously-skip-permissions" : L"claude";
+    std::wstring args = folder.empty()
+        ? std::wstring(L"/k ") + claudeArg
+        : std::wstring(L"/k cd /d \"") + folder + L"\" && " + claudeArg;
+    SHELLEXECUTEINFOW sei = {};
+    sei.cbSize = sizeof(sei); sei.lpVerb = L"open";
+    sei.lpFile = L"cmd.exe"; sei.lpParameters = args.c_str(); sei.nShow = SW_SHOWNORMAL;
+    ShellExecuteExW(&sei);
 }
 
 // ── IUnknown ──────────────────────────────────────────────────────────────────
@@ -82,19 +94,19 @@ STDMETHODIMP ClaudeContextMenu::QueryContextMenu(HMENU hmenu, UINT indexMenu, UI
     if (m_hSubMenu) { DestroyMenu(m_hSubMenu); m_hSubMenu = nullptr; }
     m_hSubMenu = CreatePopupMenu();
     InsertMenuW(m_hSubMenu, 0, MF_BYPOSITION | MF_STRING, idCmdFirst + CMD_NORMAL,
-                L"Claude Code \xC5F4\xAE30");
+                L"Claude Code 열기");
     InsertMenuW(m_hSubMenu, 1, MF_BYPOSITION | MF_STRING, idCmdFirst + CMD_DANGEROUS,
-                L"Claude Code \xC5F4\xAE30 (\xAD8C\xD55C \xAC74\xB108\xB700)");
+                L"Claude Code 열기 (권한 건너뜀)");
     InsertMenuW(hmenu, indexMenu, MF_BYPOSITION | MF_POPUP,
                 reinterpret_cast<UINT_PTR>(m_hSubMenu),
-                L"Claude Code \xC5F4\xAE30");
+                L"Claude Code 열기");
 
     HBITMAP hbmp = GetOrCreateIconBitmap();
     if (hbmp)
     {
         MENUITEMINFOW mii = {};
         mii.cbSize   = sizeof(mii);
-        mii.fMask    = MIIM_BITMAP_;
+        mii.fMask    = MIIM_BITMAP;
         mii.hbmpItem = hbmp;
         SetMenuItemInfoW(hmenu, indexMenu, TRUE, &mii);
     }
@@ -104,19 +116,7 @@ STDMETHODIMP ClaudeContextMenu::QueryContextMenu(HMENU hmenu, UINT indexMenu, UI
 STDMETHODIMP ClaudeContextMenu::InvokeCommand(LPCMINVOKECOMMANDINFO pici)
 {
     if (HIWORD(pici->lpVerb) != 0) return E_FAIL;
-    UINT cmdId    = LOWORD(pici->lpVerb);
-    bool dangerous = (cmdId == CMD_DANGEROUS);
-    const wchar_t* claudeArg = dangerous
-        ? L"claude --dangerously-skip-permissions" : L"claude";
-    WCHAR args[MAX_PATH * 2 + 64] = {};
-    if (m_folderPath.empty())
-        swprintf_s(args, L"/k %s", claudeArg);
-    else
-        swprintf_s(args, L"/k cd /d \"%s\" && %s", m_folderPath.c_str(), claudeArg);
-    SHELLEXECUTEINFOW sei = {};
-    sei.cbSize = sizeof(sei); sei.lpVerb = L"open";
-    sei.lpFile = L"cmd.exe"; sei.lpParameters = args; sei.nShow = SW_SHOWNORMAL;
-    ShellExecuteExW(&sei);
+    LaunchClaude(m_folderPath, LOWORD(pici->lpVerb) == CMD_DANGEROUS);
     return S_OK;
 }
 STDMETHODIMP ClaudeContextMenu::GetCommandString(UINT_PTR, UINT, UINT*, CHAR*, UINT)
@@ -126,8 +126,8 @@ STDMETHODIMP ClaudeContextMenu::GetCommandString(UINT_PTR, UINT, UINT*, CHAR*, U
 STDMETHODIMP ClaudeContextMenu::GetTitle(IShellItemArray*, LPWSTR* ppszName)
 {
     const wchar_t* title = m_dangerous
-        ? L"Claude Code \xC5F4\xAE30 (\xAD8C\xD55C \xAC74\xB108\xB700)"
-        : L"Claude Code \xC5F4\xAE30";
+        ? L"Claude Code 열기 (권한 건너뜀)"
+        : L"Claude Code 열기";
     SIZE_T cb = (wcslen(title) + 1) * sizeof(WCHAR);
     *ppszName = static_cast<LPWSTR>(CoTaskMemAlloc(cb));
     if (!*ppszName) return E_OUTOFMEMORY;
@@ -171,19 +171,7 @@ STDMETHODIMP ClaudeContextMenu::Invoke(IShellItemArray* psia, IBindCtx*)
         }
     }
     if (folder.empty()) folder = m_folderPath;
-
-    const wchar_t* claudeArg = m_dangerous
-        ? L"claude --dangerously-skip-permissions" : L"claude";
-    WCHAR args[MAX_PATH * 2 + 64] = {};
-    if (folder.empty())
-        swprintf_s(args, L"/k %s", claudeArg);
-    else
-        swprintf_s(args, L"/k cd /d \"%s\" && %s", folder.c_str(), claudeArg);
-
-    SHELLEXECUTEINFOW sei = {};
-    sei.cbSize = sizeof(sei); sei.lpVerb = L"open";
-    sei.lpFile = L"cmd.exe"; sei.lpParameters = args; sei.nShow = SW_SHOWNORMAL;
-    ShellExecuteExW(&sei);
+    LaunchClaude(folder, m_dangerous);
     return S_OK;
 }
 STDMETHODIMP ClaudeContextMenu::GetFlags(EXPCMDFLAGS* pFlags)
@@ -191,18 +179,16 @@ STDMETHODIMP ClaudeContextMenu::GetFlags(EXPCMDFLAGS* pFlags)
 STDMETHODIMP ClaudeContextMenu::EnumSubCommands(IEnumExplorerCommand** ppEnum)
     { *ppEnum = nullptr; return E_NOTIMPL; }
 
-// ── 아이콘 비트맵 ─────────────────────────────────────────────────────────────
-HBITMAP ClaudeContextMenu::GetOrCreateIconBitmap()
+// ── 아이콘 비트맵 (스레드 안전 INIT_ONCE) ────────────────────────────────────
+BOOL CALLBACK ClaudeContextMenu::InitBitmapOnce(PINIT_ONCE, PVOID, PVOID*)
 {
-    if (s_iconLoaded) return s_hBitmap;
-    s_iconLoaded = true;
     std::wstring src = FindClaudeIconSource();
-    if (src.empty()) return nullptr;
+    if (src.empty()) return TRUE;
     HICON large1 = nullptr, small1 = nullptr;
     ExtractIconExW(src.c_str(), 0, &large1, &small1, 1);
     HICON hIcon = small1 ? small1 : large1;
     if (large1 && large1 != hIcon) DestroyIcon(large1);
-    if (!hIcon) return nullptr;
+    if (!hIcon) return TRUE;
     int sz = 16;
     HDC hdcS = GetDC(nullptr); HDC hdcM = CreateCompatibleDC(hdcS);
     HBITMAP hbmp = CreateCompatibleBitmap(hdcS, sz, sz);
@@ -211,7 +197,18 @@ HBITMAP ClaudeContextMenu::GetOrCreateIconBitmap()
     SelectObject(hdcM, hOld); DeleteDC(hdcM); ReleaseDC(nullptr, hdcS);
     DestroyIcon(hIcon);
     s_hBitmap = hbmp;
-    return hbmp;
+    return TRUE;
+}
+
+HBITMAP ClaudeContextMenu::GetOrCreateIconBitmap()
+{
+    InitOnceExecuteOnce(&s_initOnce, InitBitmapOnce, nullptr, nullptr);
+    return s_hBitmap;
+}
+
+void ClaudeContextMenu::ReleaseStaticResources()
+{
+    if (s_hBitmap) { DeleteObject(s_hBitmap); s_hBitmap = nullptr; }
 }
 
 // ── 공유 유틸: Claude 실행파일/아이콘 탐색 ────────────────────────────────────

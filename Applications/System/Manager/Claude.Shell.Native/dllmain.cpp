@@ -5,7 +5,7 @@
 
 // ── 전역 ──────────────────────────────────────────────────────────────────────
 HINSTANCE g_hInst   = nullptr;
-long      g_cDllRef = 0;
+LONG      g_cDllRef = 0;
 
 // CLSID_Normal    = {261B2913-8ABA-420B-9280-0061626EDA5A}
 // CLSID_Dangerous = {261B2913-8ABA-420B-9280-0061626EDA5B}
@@ -21,9 +21,14 @@ const CLSID CLSID_ClaudeContextMenuDangerous = {
 // ── DllMain ───────────────────────────────────────────────────────────────────
 BOOL APIENTRY DllMain(HMODULE hModule, DWORD dwReason, LPVOID)
 {
-    if (dwReason == DLL_PROCESS_ATTACH) {
+    if (dwReason == DLL_PROCESS_ATTACH)
+    {
         g_hInst = hModule;
         DisableThreadLibraryCalls(hModule);
+    }
+    else if (dwReason == DLL_PROCESS_DETACH)
+    {
+        ClaudeContextMenu::ReleaseStaticResources();
     }
     return TRUE;
 }
@@ -31,7 +36,7 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD dwReason, LPVOID)
 // ── ClassFactory ──────────────────────────────────────────────────────────────
 class ClassFactory : public IClassFactory
 {
-    long m_cRef      = 1;
+    LONG m_cRef      = 1;
     bool m_dangerous;
 public:
     explicit ClassFactory(bool dangerous) : m_dangerous(dangerous) {}

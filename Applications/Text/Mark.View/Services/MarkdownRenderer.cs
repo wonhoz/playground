@@ -24,7 +24,7 @@ public class MarkdownRenderer
     private string WrapInPage(string body, string? filePath, string theme)
     {
         var baseTag = filePath != null
-            ? "<base href=\"file:///" + filePath.Replace("\\", "/").Replace(" ", "%20") + "\">"
+            ? "<base href=\"file:///" + string.Join("/", filePath.Split('\\').Select(Uri.EscapeDataString)) + "\">"
             : "";
 
         var css = GetThemeCss(theme);
@@ -36,11 +36,12 @@ public class MarkdownRenderer
             + $"<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/highlight.js@11/dist/styles/{hlCss}.min.css'>"
             + "<style>" + GetCommonCss() + css + "</style>"
             + "</head><body>" + body
-            + "<script src='https://cdn.jsdelivr.net/npm/highlight.js@11/dist/highlight.min.js'></script>"
-            + "<script>hljs.highlightAll();</script>"
+            + "<script src='https://cdn.jsdelivr.net/npm/highlight.js@11/dist/highlight.min.js'"
+            + " onload=\"if(typeof hljs!=='undefined')hljs.highlightAll();\""
+            + " onerror=\"document.querySelectorAll('pre code').forEach(function(b){b.style.display='block';});\"></script>"
             + "<script defer src='https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js'></script>"
             + "<script defer src='https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js'"
-            + " onload=\"renderMathInElement(document.body,{delimiters:["
+            + " onload=\"if(typeof renderMathInElement!=='undefined')renderMathInElement(document.body,{delimiters:["
             + "{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false},"
             + "{left:'\\\\(',right:'\\\\)',display:false},{left:'\\\\[',right:'\\\\]',display:true}]})\"></script>"
             + "</body></html>";

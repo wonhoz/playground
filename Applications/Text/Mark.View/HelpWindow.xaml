@@ -140,9 +140,13 @@
           <ItemsControl ItemTemplate="{StaticResource RowTpl}">
             <ItemsControl.Items>
               <local:ShortcutEntry Key="Ctrl + E"         Desc="편집 모드 전환"/>
-              <local:ShortcutEntry Key="Ctrl + +"         Desc="폰트 크기 증가"/>
-              <local:ShortcutEntry Key="Ctrl + -"         Desc="폰트 크기 감소"/>
-              <local:ShortcutEntry Key="Ctrl + 휠"        Desc="에디터 위에서 폰트 크기 조절"/>
+              <local:ShortcutEntry Key="Ctrl + B"         Desc="굵게 (선택 텍스트를 **bold** 처리)"/>
+              <local:ShortcutEntry Key="Ctrl + I"         Desc="기울임 (선택 텍스트를 *italic* 처리)"/>
+              <local:ShortcutEntry Key="Ctrl + K"         Desc="링크 삽입 [텍스트]() — 괄호 안에 URL 입력"/>
+              <local:ShortcutEntry Key="Ctrl + +"         Desc="에디터 폰트 크기 증가"/>
+              <local:ShortcutEntry Key="Ctrl + -"         Desc="에디터 폰트 크기 감소"/>
+              <local:ShortcutEntry Key="Ctrl + 휠 (에디터)" Desc="에디터 위에서 폰트 크기 조절"/>
+              <local:ShortcutEntry Key="Ctrl + 휠 (프리뷰)" Desc="프리뷰 위에서 글꼴 크기 조절"/>
               <local:ShortcutEntry Key="Tab"              Desc="들여쓰기 (4칸) / 범위 들여쓰기"/>
               <local:ShortcutEntry Key="Shift + Tab"      Desc="내어쓰기 / 범위 내어쓰기"/>
               <local:ShortcutEntry Key="Ctrl + Shift + V" Desc="클립보드를 새 탭으로 열기"/>
@@ -155,6 +159,16 @@
             <ItemsControl.Items>
               <local:ShortcutEntry Key="편집 모드 스크롤" Desc="에디터 스크롤 → 뷰어 자동 동기화"/>
               <local:ShortcutEntry Key="TOC 켜짐 상태"   Desc="뷰어 스크롤 → 현재 섹션 자동 하이라이트"/>
+            </ItemsControl.Items>
+          </ItemsControl>
+
+          <!-- 상태바 -->
+          <TextBlock Text="상태바" Style="{StaticResource Cat}"/>
+          <ItemsControl ItemTemplate="{StaticResource RowTpl}">
+            <ItemsControl.Items>
+              <local:ShortcutEntry Key="줄:컬럼"         Desc="에디터 커서 위치 (편집 모드에서 표시)"/>
+              <local:ShortcutEntry Key="N줄 · N단어"     Desc="현재 문서 줄 수 / 단어 수"/>
+              <local:ShortcutEntry Key="상태바 경로"     Desc="클릭 시 파일 탐색기에서 위치 열기"/>
             </ItemsControl.Items>
           </ItemsControl>
 

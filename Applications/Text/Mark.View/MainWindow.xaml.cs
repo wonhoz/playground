@@ -38,12 +38,14 @@ public partial class MainWindow : Window
     private readonly TaskCompletionSource _webViewReadyTcs = new();
     private readonly Dictionary<string, FileSystemWatcher> _fileWatchers = new(StringComparer.OrdinalIgnoreCase);
     private double _editorFontSize = 13;
+    private double _previewFontSize = 15;
 
     public MainWindow()
     {
         _settings = AppSettings.Load();
         _currentTheme = _settings.Theme;
         _editorFontSize = _settings.EditorFontSize;
+        _previewFontSize = _settings.PreviewFontSize;
         InitializeComponent();
         RestoreWindowBounds();
         ApplySavedTheme();
@@ -65,6 +67,10 @@ public partial class MainWindow : Window
         await Task.WhenAny(_webViewReadyTcs.Task, Task.Delay(3000));
         foreach (var f in files)
             await OpenFileAsync(f);
+        // 마지막 활성 탭 복원
+        var savedIdx = _settings.ActiveTabIndex;
+        if (savedIdx > 0 && savedIdx < _docs.Count)
+            SwitchTo(savedIdx);
     }
 
     private void RestoreWindowBounds()
@@ -114,6 +120,31 @@ public partial class MainWindow : Window
         _settings.EditorFontSize = _editorFontSize;
         _settings.Save();
         ShowFontSizeHint();
+    }
+
+    private void AdjustPreviewFontSize(double delta)
+    {
+        _previewFontSize = Math.Clamp(_previewFontSize + delta, 8, 32);
+        _settings.PreviewFontSize = _previewFontSize;
+        _settings.Save();
+        _ = ApplyPreviewFontSizeAsync();
+        var prev = StatusPath.Text;
+        StatusPath.Text = $"프리뷰 폰트: {(int)_previewFontSize}px";
+        _fontSizeHintTimer?.Stop();
+        _fontSizeHintTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(2) };
+        _fontSizeHintTimer.Tick += (_, _) => { _fontSizeHintTimer?.Stop(); StatusPath.Text = prev; };
+        _fontSizeHintTimer.Start();
+    }
+
+    private async Task ApplyPreviewFontSizeAsync()
+    {
+        if (!_webViewReady) return;
+        try
+        {
+            await Viewer.ExecuteScriptAsync(
+                $"document.body.style.fontSize = '{_previewFontSize.ToString(System.Globalization.CultureInfo.InvariantCulture)}px'");
+        }
+        catch { }
     }
 
     private void ShowFontSizeHint()
@@ -217,6 +248,8 @@ public partial class MainWindow : Window
             _ = RestoreScrollAsync();
         if (_isTocVisible)
             _ = InjectTocScrollMonitorAsync();
+        if (_previewFontSize != 15)
+            _ = ApplyPreviewFontSizeAsync();
     }
 
     private async Task InjectTocScrollMonitorAsync()
@@ -353,6 +386,8 @@ public partial class MainWindow : Window
         _editorScrollViewer = FindVisualChild<ScrollViewer>(Editor);
         if (_editorScrollViewer != null)
             _editorScrollViewer.ScrollChanged += EditorScrollViewer_ScrollChanged;
+        // 커서 위치 추적
+        Editor.SelectionChanged += Editor_SelectionChanged;
     }
 
     private static T? FindVisualChild<T>(DependencyObject parent) where T : DependencyObject
@@ -662,6 +697,7 @@ public partial class MainWindow : Window
             SplitterColumn.Width = new GridLength(4);
             TxtEditIcon.Foreground = (SolidColorBrush)FindResource("AccentBrush");
             StatusMode.Text = "편집";
+            StatusCursor.Visibility = Visibility.Visible;
         }
         else
         {
@@ -669,6 +705,7 @@ public partial class MainWindow : Window
             SplitterColumn.Width = new GridLength(0);
             TxtEditIcon.Foreground = (SolidColorBrush)FindResource("TextDimBrush");
             StatusMode.Text = "뷰";
+            StatusCursor.Visibility = Visibility.Collapsed;
         }
         _settings.IsEditMode = editMode;
         _settings.Save();
@@ -1046,9 +1083,10 @@ public partial class MainWindow : Window
         await ShowLoadingAsync("HTML 내보내기 중...");
         var content = doc.Content;
         var filePath = doc.IsNew ? null : doc.FilePath;
+        var theme = _currentTheme;
         await Task.Run(() =>
         {
-            var html = _renderer.RenderToHtml(content, filePath);
+            var html = _renderer.RenderToHtml(content, filePath, theme);
             File.WriteAllText(dlg.FileName, html, new UTF8Encoding(true));
         });
         HideLoading();
@@ -1075,8 +1113,51 @@ public partial class MainWindow : Window
         _autoSaveTimer?.Start();
     }
 
+    private void WrapSelection(string before, string after)
+    {
+        var start = Editor.SelectionStart;
+        var sel = Editor.SelectedText;
+        var wrapped = before + sel + after;
+        Editor.SelectedText = wrapped;
+        if (sel.Length == 0)
+            Editor.CaretIndex = start + before.Length;
+        else
+            Editor.CaretIndex = start + wrapped.Length;
+    }
+
+    private void WrapAsLink()
+    {
+        var start = Editor.SelectionStart;
+        var sel = Editor.SelectedText;
+        var inserted = $"[{sel}]()";
+        Editor.SelectedText = inserted;
+        // 커서를 () 안쪽에 위치
+        Editor.CaretIndex = start + sel.Length + 3;
+    }
+
+    private void Editor_SelectionChanged(object sender, RoutedEventArgs e)
+    {
+        if (!IsLoaded || _activeIndex < 0) return;
+        var text = Editor.Text;
+        var caret = Editor.CaretIndex;
+        if (caret < 0 || caret > text.Length) return;
+        var line = text.Take(caret).Count(c => c == '\n') + 1;
+        var lastNl = text.LastIndexOf('\n', Math.Max(0, caret - 1));
+        var col = caret - (lastNl + 1) + 1;
+        StatusCursor.Text = $"{line}:{col}";
+        StatusCursor.Visibility = Visibility.Visible;
+    }
+
     private void Editor_KeyDown(object sender, KeyEventArgs e)
     {
+        // 서식 단축키 — 에디터 포커스 시에만 적용
+        if (e.Key == Key.B && Keyboard.Modifiers == ModifierKeys.Control)
+        { WrapSelection("**", "**"); e.Handled = true; return; }
+        if (e.Key == Key.I && Keyboard.Modifiers == ModifierKeys.Control)
+        { WrapSelection("*", "*"); e.Handled = true; return; }
+        if (e.Key == Key.K && Keyboard.Modifiers == ModifierKeys.Control)
+        { WrapAsLink(); e.Handled = true; return; }
+
         if (e.Key != Key.Tab) return;
         e.Handled = true;
 
@@ -1234,6 +1315,11 @@ public partial class MainWindow : Window
             AdjustEditorFontSize(e.Delta > 0 ? 1 : -1);
             e.Handled = true;
         }
+        else if (Keyboard.Modifiers == ModifierKeys.Control && IsMouseOverViewer())
+        {
+            AdjustPreviewFontSize(e.Delta > 0 ? 1 : -1);
+            e.Handled = true;
+        }
     }
 
     private void PasteClipboardAsNewTab()
@@ -1249,6 +1335,12 @@ public partial class MainWindow : Window
     {
         var pos = Mouse.GetPosition(Editor);
         return pos.X >= 0 && pos.Y >= 0 && pos.X <= Editor.ActualWidth && pos.Y <= Editor.ActualHeight;
+    }
+
+    private bool IsMouseOverViewer()
+    {
+        var pos = Mouse.GetPosition(Viewer);
+        return pos.X >= 0 && pos.Y >= 0 && pos.X <= Viewer.ActualWidth && pos.Y <= Viewer.ActualHeight;
     }
 
     // ── 드래그 앤 드롭 ───────────────────────────────────────────────────
@@ -1491,5 +1583,6 @@ public partial class MainWindow : Window
             .Where(d => !d.IsNew && File.Exists(d.FilePath))
             .Select(d => d.FilePath)
             .ToList();
+        _settings.ActiveTabIndex = _activeIndex >= 0 ? _activeIndex : 0;
     }
 }

@@ -22,6 +22,8 @@ public class AppSettings
     public bool IsTocVisible { get; set; } = false;
     public double TocWidth { get; set; } = 220;
     public double EditorSplitRatio { get; set; } = 0.5;
+    public int ActiveTabIndex { get; set; } = 0;
+    public double PreviewFontSize { get; set; } = 15;
 
     private const int MaxRecentFiles = 10;
 

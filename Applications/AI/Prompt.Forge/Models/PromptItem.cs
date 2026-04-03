@@ -17,6 +17,8 @@ public sealed class PromptItem
     // 버전 히스토리에서 부모 ID
     public int?    ParentId    { get; set; }
 
+    public int     SortOrder   { get; set; }
+
     /// {{변수명}} 목록 추출
     public List<string> ExtractVariables()
     {

@@ -28,13 +28,13 @@ public partial class MainWindow : Window
 
     readonly MainViewModel _vm;
     readonly Database      _db;
+    readonly AppSettings   _appSettings;
     bool _refreshing;
 
     public MainWindow()
     {
-        _db = new Database(Path.Combine(
-            Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-            "Prompt.Forge", "prompts.db"));
+        _appSettings = AppSettings.Load();
+        _db = new Database(_appSettings.ResolvedDbPath);
         _vm = new MainViewModel(_db);
         DataContext = _vm;
         InitializeComponent();
@@ -424,10 +424,194 @@ public partial class MainWindow : Window
     void Sort_Changed(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
     {
         if (!IsLoaded || _refreshing) return;
-        _vm.SortOrder = CbSort.SelectedIndex == 1 ? "use_count" : "updated";
+        _vm.SortOrder = CbSort.SelectedIndex switch
+        {
+            1 => "use_count",
+            2 => "custom",
+            _ => "updated"
+        };
+    }
+
+    // ── 드래그 앤 드롭 순서 변경 ──────────────────────────────────────────────
+
+    Point        _dragStart;
+    PromptItem?  _dragItem;
+
+    void LstItems_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+    {
+        _dragStart = e.GetPosition(null);
+        _dragItem  = (e.OriginalSource as FrameworkElement)?.DataContext as PromptItem;
+    }
+
+    void LstItems_MouseMove(object sender, MouseEventArgs e)
+    {
+        if (e.LeftButton != MouseButtonState.Pressed || _dragItem == null) return;
+        var pos = e.GetPosition(null);
+        if (Math.Abs(pos.X - _dragStart.X) < SystemParameters.MinimumHorizontalDragDistance &&
+            Math.Abs(pos.Y - _dragStart.Y) < SystemParameters.MinimumVerticalDragDistance) return;
+        DragDrop.DoDragDrop(LstItems, _dragItem, DragDropEffects.Move);
+    }
+
+    void LstItems_DragOver(object sender, DragEventArgs e)
+    {
+        e.Effects = DragDropEffects.Move;
+        e.Handled = true;
+    }
+
+    void LstItems_Drop(object sender, DragEventArgs e)
+    {
+        var target = FindAncestor<ListBoxItem>((DependencyObject)e.OriginalSource);
+        if (target?.DataContext is not PromptItem targetItem || _dragItem == null || targetItem == _dragItem)
+        {
+            _dragItem = null;
+            return;
+        }
+
+        int fromIdx = _vm.Items.IndexOf(_dragItem);
+        int toIdx   = _vm.Items.IndexOf(targetItem);
+        if (fromIdx < 0 || toIdx < 0) { _dragItem = null; return; }
+
+        _vm.MoveItem(fromIdx, toIdx);
+
+        if (CbSort.SelectedIndex != 2)
+        {
+            _refreshing = true;
+            try { CbSort.SelectedIndex = 2; }
+            finally { _refreshing = false; }
+        }
+        _dragItem = null;
+    }
+
+    static T? FindAncestor<T>(DependencyObject obj) where T : DependencyObject
+    {
+        while (obj != null)
+        {
+            if (obj is T t) return t;
+            obj = VisualTreeHelper.GetParent(obj);
+        }
+        return null;
     }
 
     void Help_Click(object sender, RoutedEventArgs e) => HelpPopup.IsOpen = !HelpPopup.IsOpen;
+
+    // ── 동기화 설정 ───────────────────────────────────────────────────────────
+
+    void SyncSettings_Click(object sender, RoutedEventArgs e)
+    {
+        var dlg = new Views.SettingsDialog(_appSettings) { Owner = this };
+        dlg.ShowDialog();
+        // PAT/GistId는 SettingsDialog 내부에서 저장됨
+    }
+
+    // ── GitHub Gist 동기화 ────────────────────────────────────────────────────
+
+    async void GistUpload_Click(object sender, RoutedEventArgs e)
+    {
+        if (string.IsNullOrEmpty(_appSettings.GithubPat))
+        {
+            MessageBox.Show("GitHub PAT가 설정되지 않았습니다.\n⚙ 설정에서 PAT를 입력하세요.",
+                "설정 필요", MessageBoxButton.OK, MessageBoxImage.Warning);
+            return;
+        }
+
+        if (sender is Button btn) btn.IsEnabled = false;
+        _vm.StatusText = "Gist에 업로드 중...";
+        try
+        {
+            var all  = _db.GetAll();
+            var data = all.Select(p => new
+            {
+                title = p.Title, content = p.Content, tags = p.Tags,
+                service = p.Service, isFavorite = p.IsFavorite,
+                version = p.Version, notes = p.Notes
+            });
+            var json = System.Text.Json.JsonSerializer.Serialize(data,
+                new System.Text.Json.JsonSerializerOptions { WriteIndented = true });
+
+            using var gist = new Services.GistSync(_appSettings.GithubPat);
+            var newId = await gist.UploadAsync(_appSettings.GistId, json);
+
+            if (newId != _appSettings.GistId)
+            {
+                _appSettings.GistId = newId;
+                _appSettings.Save();
+            }
+            _vm.StatusText = $"Gist 업로드 완료 — {all.Count}개 (ID: {newId[..8]}...)";
+        }
+        catch (Exception ex)
+        {
+            _vm.StatusText = $"Gist 업로드 실패: {ex.Message}";
+            MessageBox.Show($"업로드 실패:\n{ex.Message}", "오류", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+        finally
+        {
+            if (sender is Button b) b.IsEnabled = true;
+        }
+    }
+
+    async void GistDownload_Click(object sender, RoutedEventArgs e)
+    {
+        if (string.IsNullOrEmpty(_appSettings.GithubPat))
+        {
+            MessageBox.Show("GitHub PAT가 설정되지 않았습니다.\n⚙ 설정에서 PAT를 입력하세요.",
+                "설정 필요", MessageBoxButton.OK, MessageBoxImage.Warning);
+            return;
+        }
+        if (string.IsNullOrEmpty(_appSettings.GistId))
+        {
+            MessageBox.Show("Gist ID가 없습니다. 먼저 업로드를 실행하세요.",
+                "설정 필요", MessageBoxButton.OK, MessageBoxImage.Warning);
+            return;
+        }
+
+        if (sender is Button btn) btn.IsEnabled = false;
+        _vm.StatusText = "Gist에서 다운로드 중...";
+        try
+        {
+            using var gist = new Services.GistSync(_appSettings.GithubPat);
+            var json  = await gist.DownloadAsync(_appSettings.GistId);
+            var opts  = new System.Text.Json.JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+            var items = System.Text.Json.JsonSerializer.Deserialize<List<ImportDto>>(json, opts);
+
+            if (items == null || items.Count == 0)
+            {
+                _vm.StatusText = "다운로드된 데이터가 없습니다";
+                return;
+            }
+
+            var existing = new HashSet<string>(
+                _db.GetAll().Select(p => p.Title), StringComparer.OrdinalIgnoreCase);
+            int imported = 0, skipped = 0;
+            foreach (var item in items)
+            {
+                if (existing.Contains(item.Title ?? "")) { skipped++; continue; }
+                _db.Insert(new PromptItem
+                {
+                    Title      = item.Title ?? "",
+                    Content    = item.Content ?? "",
+                    Tags       = item.Tags ?? "",
+                    Service    = item.Service ?? "",
+                    IsFavorite = item.IsFavorite,
+                    Version    = item.Version > 0 ? item.Version : 1,
+                    Notes      = item.Notes ?? ""
+                });
+                imported++;
+            }
+            _vm.Refresh();
+            _vm.StatusText = skipped > 0
+                ? $"Gist 다운로드 완료 — {imported}개 추가, {skipped}개 중복 스킵"
+                : $"Gist 다운로드 완료 — {imported}개 추가";
+        }
+        catch (Exception ex)
+        {
+            _vm.StatusText = $"Gist 다운로드 실패: {ex.Message}";
+            MessageBox.Show($"다운로드 실패:\n{ex.Message}", "오류", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+        finally
+        {
+            if (sender is Button b) b.IsEnabled = true;
+        }
+    }
 
     void Export_Click(object sender, RoutedEventArgs e)
     {

@@ -62,6 +62,43 @@ sealed class Database : IDisposable
     {
         try { Execute("ALTER TABLE prompts ADD COLUMN use_count INTEGER NOT NULL DEFAULT 0;"); }
         catch { }
+
+        bool sortOrderAdded = false;
+        try
+        {
+            Execute("ALTER TABLE prompts ADD COLUMN sort_order INTEGER NOT NULL DEFAULT 0;");
+            sortOrderAdded = true;
+        }
+        catch { }
+
+        if (sortOrderAdded)
+            InitializeSortOrders();
+    }
+
+    void InitializeSortOrders()
+    {
+        var cmd = _conn.CreateCommand();
+        cmd.CommandText = "SELECT id FROM prompts WHERE parent_id IS NULL ORDER BY is_favorite DESC, updated_at DESC";
+        var ids = new List<int>();
+        using var r = cmd.ExecuteReader();
+        while (r.Read()) ids.Add(r.GetInt32(0));
+
+        UpdateSortOrders(ids.Select((id, i) => (id, i)));
+    }
+
+    public void UpdateSortOrders(IEnumerable<(int id, int order)> orders)
+    {
+        using var tx = _conn.BeginTransaction();
+        foreach (var (id, order) in orders)
+        {
+            var cmd = _conn.CreateCommand();
+            cmd.Transaction = tx;
+            cmd.CommandText = "UPDATE prompts SET sort_order = $order WHERE id = $id";
+            cmd.Parameters.AddWithValue("$order", order);
+            cmd.Parameters.AddWithValue("$id", id);
+            cmd.ExecuteNonQuery();
+        }
+        tx.Commit();
     }
 
     public void IncrementUseCount(int id)
@@ -109,9 +146,12 @@ sealed class Database : IDisposable
             ? " AND " + string.Join(" AND ", conditions)
             : "";
 
-        var order = sortOrder == "use_count"
-            ? "p.use_count DESC, p.is_favorite DESC, p.updated_at DESC"
-            : "p.is_favorite DESC, p.updated_at DESC";
+        var order = sortOrder switch
+        {
+            "use_count" => "p.use_count DESC, p.is_favorite DESC, p.updated_at DESC",
+            "custom"    => "p.sort_order ASC",
+            _           => "p.is_favorite DESC, p.updated_at DESC"
+        };
         cmd.CommandText = baseTable + where + $" ORDER BY {order}";
 
         return ReadItems(cmd);
@@ -137,8 +177,11 @@ sealed class Database : IDisposable
     {
         var cmd = _conn.CreateCommand();
         cmd.CommandText = @"
-            INSERT INTO prompts (title, content, tags, service, is_favorite, version, notes, parent_id)
-            VALUES ($title, $content, $tags, $svc, $fav, $ver, $notes, $pid);
+            INSERT INTO prompts (title, content, tags, service, is_favorite, version, notes, parent_id, sort_order)
+            VALUES ($title, $content, $tags, $svc, $fav, $ver, $notes, $pid,
+                    CASE WHEN $pid IS NULL
+                         THEN (SELECT COALESCE(MAX(sort_order), -1) + 1 FROM prompts WHERE parent_id IS NULL)
+                         ELSE 0 END);
             SELECT last_insert_rowid();";
         BindParams(cmd, p);
         return Convert.ToInt32(cmd.ExecuteScalar());
@@ -243,6 +286,7 @@ sealed class Database : IDisposable
                 Notes      = r.GetString(r.GetOrdinal("notes")),
                 UseCount   = r.IsDBNull(r.GetOrdinal("use_count")) ? 0 : r.GetInt32(r.GetOrdinal("use_count")),
                 ParentId   = r.IsDBNull(r.GetOrdinal("parent_id")) ? null : r.GetInt32(r.GetOrdinal("parent_id")),
+                SortOrder  = r.IsDBNull(r.GetOrdinal("sort_order")) ? 0 : r.GetInt32(r.GetOrdinal("sort_order")),
                 CreatedAt  = DateTime.Parse(r.GetString(r.GetOrdinal("created_at"))),
                 UpdatedAt  = DateTime.Parse(r.GetString(r.GetOrdinal("updated_at")))
             });

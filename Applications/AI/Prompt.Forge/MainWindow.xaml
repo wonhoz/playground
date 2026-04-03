@@ -186,7 +186,15 @@
                 </Grid>
                 <StackPanel Grid.Column="2" Orientation="Horizontal">
                     <Button Content="↑ 내보내기" Click="Export_Click" Margin="0,0,6,0"/>
-                    <Button Content="↓ 가져오기" Click="Import_Click" Margin="0,0,8,0"/>
+                    <Button Content="↓ 가져오기" Click="Import_Click" Margin="0,0,6,0"/>
+                    <Button Content="☁ 업로드" Click="GistUpload_Click"
+                            ToolTip="GitHub Gist에 업로드 (설정에서 PAT 필요)"
+                            Margin="0,0,4,0"/>
+                    <Button Content="☁ 다운로드" Click="GistDownload_Click"
+                            ToolTip="GitHub Gist에서 다운로드"
+                            Margin="0,0,6,0"/>
+                    <Button Content="⚙" ToolTip="동기화 설정" Click="SyncSettings_Click"
+                            Margin="0,0,8,0" Padding="8,6"/>
                     <Button x:Name="BtnHelp" Content="?" ToolTip="단축키 도움말" Click="Help_Click" Margin="0,0,8,0" Padding="8,6"/>
                     <Button Content="+ 새 프롬프트" Style="{StaticResource AccentBtn}"
                             Click="NewPrompt_Click"/>
@@ -222,6 +230,7 @@
                               SelectionChanged="Sort_Changed">
                         <ComboBoxItem Content="최근 수정순"/>
                         <ComboBoxItem Content="자주 사용순"/>
+                        <ComboBoxItem Content="사용자 정의"/>
                     </ComboBox>
                 </StackPanel>
 
@@ -231,7 +240,12 @@
                          ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                          ItemsSource="{Binding Items}"
                          SelectedItem="{Binding Selected, Mode=TwoWay}"
-                         SelectionChanged="LstItems_SelectionChanged">
+                         SelectionChanged="LstItems_SelectionChanged"
+                         AllowDrop="True"
+                         PreviewMouseLeftButtonDown="LstItems_PreviewMouseLeftButtonDown"
+                         MouseMove="LstItems_MouseMove"
+                         DragOver="LstItems_DragOver"
+                         Drop="LstItems_Drop">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <Grid>

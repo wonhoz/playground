@@ -142,6 +142,19 @@ sealed class MainViewModel : INotifyPropertyChanged
         StatusText = "삭제 완료";
     }
 
+    /// 드래그 앤 드롭으로 아이템 순서 변경 — DB에 sort_order 저장
+    public void MoveItem(int fromIndex, int toIndex)
+    {
+        if (fromIndex < 0 || toIndex < 0 || fromIndex >= Items.Count || toIndex >= Items.Count) return;
+        Items.Move(fromIndex, toIndex);
+        _db.UpdateSortOrders(Items.Select((item, i) => (item.Id, i)));
+        if (_sortOrder != "custom")
+        {
+            _sortOrder = "custom";
+            OnPropertyChanged(nameof(SortOrder));
+        }
+    }
+
     public void ToggleFavorite(PromptItem p)
     {
         _db.ToggleFavorite(p.Id);

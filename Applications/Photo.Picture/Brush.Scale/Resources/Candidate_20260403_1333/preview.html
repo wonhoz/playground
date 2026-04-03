@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Brush.Scale — Icon Candidates (20260403_1333)</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: linear-gradient(135deg, #1a0533 0%, #2d1052 50%, #0d2746 100%);
+    min-height: 100vh;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #f0e6ff;
+    padding: 40px 20px;
+  }
+  h1 {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    background: linear-gradient(90deg, #CE93D8, #F48FB1, #FFAB91);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .subtitle {
+    text-align: center;
+    color: #b39ddb;
+    font-size: 0.95rem;
+    margin-bottom: 48px;
+  }
+  .grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 36px;
+    justify-content: center;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 24px;
+    padding: 28px 24px 22px;
+    width: 220px;
+    cursor: pointer;
+    transition: transform 0.22s cubic-bezier(.34,1.56,.64,1), box-shadow 0.22s ease, background 0.18s ease;
+    text-align: center;
+  }
+  .card:hover {
+    transform: scale(1.1) translateY(-6px);
+    box-shadow: 0 16px 48px rgba(206,147,216,0.35);
+    background: rgba(255,255,255,0.13);
+  }
+  .card img {
+    width: 160px;
+    height: 160px;
+    display: block;
+    margin: 0 auto 18px;
+    border-radius: 32px;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.4);
+  }
+  .icon-name {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #f3e5f5;
+    margin-bottom: 8px;
+  }
+  .concept {
+    font-size: 0.78rem;
+    color: #ce93d8;
+    line-height: 1.5;
+    margin-bottom: 8px;
+  }
+  .type-badge {
+    display: inline-block;
+    padding: 3px 12px;
+    border-radius: 20px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+  }
+  .literal  { background: #1565c0; color: #e3f2fd; }
+  .metaphor { background: #6a1b9a; color: #f3e5f5; }
+  .hybrid   { background: #bf360c; color: #fbe9e7; }
+  .palette {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 10px;
+  }
+  .swatch {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.3);
+    display: inline-block;
+  }
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: rgba(255,255,255,0.08);
+    margin: 8px 0;
+  }
+  .pattern-label {
+    font-size: 0.72rem;
+    color: #90a4ae;
+    font-style: italic;
+  }
+</style>
+</head>
+<body>
+<h1>Brush.Scale — 아이콘 후보</h1>
+<p class="subtitle">Candidate_20260403_1333 · AI 이미지 업스케일러 · 5개 후보</p>
+
+<div class="grid">
+
+  <!-- icon_01 -->
+  <div class="card">
+    <img src="icon_01.svg" alt="icon_01"/>
+    <div class="icon-name">icon_01</div>
+    <span class="type-badge literal">Literal</span>
+    <div class="concept">저해상도 픽셀 격자 → 선명한 풍경 이미지 before/after 비교</div>
+    <div class="divider"></div>
+    <div class="pattern-label">레이어드</div>
+    <div class="palette">
+      <span class="swatch" style="background:#FFF176" title="노란 배경"></span>
+      <span class="swatch" style="background:#9575CD" title="보라 픽셀"></span>
+      <span class="swatch" style="background:#29B6F6" title="하늘 이미지"></span>
+      <span class="swatch" style="background:#F57F17" title="오렌지 화살표"></span>
+      <span class="swatch" style="background:#2E7D32" title="초록 산"></span>
+    </div>
+  </div>
+
+  <!-- icon_02 -->
+  <div class="card">
+    <img src="icon_02.svg" alt="icon_02"/>
+    <div class="icon-name">icon_02</div>
+    <span class="type-badge literal">Literal</span>
+    <div class="concept">4× 배지 + 작은 이미지→큰 이미지 확대 화살표</div>
+    <div class="divider"></div>
+    <div class="pattern-label">중앙 심볼</div>
+    <div class="palette">
+      <span class="swatch" style="background:#29B6F6" title="하늘색 배경"></span>
+      <span class="swatch" style="background:#FF6F00" title="오렌지 4× 배지"></span>
+      <span class="swatch" style="background:#FFFFFF" title="흰 이미지 프레임"></span>
+      <span class="swatch" style="background:#FFD54F" title="노란 태양"></span>
+      <span class="swatch" style="background:#7C4DFF" title="AI 배지"></span>
+    </div>
+  </div>
+
+  <!-- icon_03 -->
+  <div class="card">
+    <img src="icon_03.svg" alt="icon_03"/>
+    <div class="icon-name">icon_03</div>
+    <span class="type-badge metaphor">Metaphor</span>
+    <div class="concept">마법 붓(Brush)으로 이미지에 해상도를 더하는 장면 — 붓질 자리에 SHARP 출현</div>
+    <div class="divider"></div>
+    <div class="pattern-label">대각선/동적</div>
+    <div class="palette">
+      <span class="swatch" style="background:#80DEEA" title="민트 배경"></span>
+      <span class="swatch" style="background:#FF5722" title="오렌지 붓털"></span>
+      <span class="swatch" style="background:#EC407A" title="핑크 픽셀"></span>
+      <span class="swatch" style="background:#4CAF50" title="그린 선명 영역"></span>
+      <span class="swatch" style="background:#FFD700" title="금빛 별"></span>
+    </div>
+  </div>
+
+  <!-- icon_04 -->
+  <div class="card">
+    <img src="icon_04.svg" alt="icon_04"/>
+    <div class="icon-name">icon_04</div>
+    <span class="type-badge metaphor">Metaphor</span>
+    <div class="concept">돋보기 안에 선명한 풍경 — 확대경으로 HD×4 업스케일 은유</div>
+    <div class="divider"></div>
+    <div class="pattern-label">공간/장면</div>
+    <div class="palette">
+      <span class="swatch" style="background:#FF8A65" title="산호 배경"></span>
+      <span class="swatch" style="background:#FF7043" title="오렌지 렌즈 테두리"></span>
+      <span class="swatch" style="background:#64B5F6" title="하늘색 렌즈 내부"></span>
+      <span class="swatch" style="background:#388E3C" title="초록 산"></span>
+      <span class="swatch" style="background:#BF360C" title="갈색 손잡이"></span>
+    </div>
+  </div>
+
+  <!-- icon_05 -->
+  <div class="card">
+    <img src="icon_05.svg" alt="icon_05"/>
+    <div class="icon-name">icon_05</div>
+    <span class="type-badge hybrid">Hybrid</span>
+    <div class="concept">BEFORE(흐린 픽셀) → AI → AFTER(선명 풍경) + ×4 스케일 표시</div>
+    <div class="divider"></div>
+    <div class="pattern-label">기하학 추상</div>
+    <div class="palette">
+      <span class="swatch" style="background:#CE93D8" title="라벤더 배경"></span>
+      <span class="swatch" style="background:#F48FB1" title="핑크 배경"></span>
+      <span class="swatch" style="background:#E91E63" title="핑크 AI 뱃지"></span>
+      <span class="swatch" style="background:#4FC3F7" title="하늘 이미지"></span>
+      <span class="swatch" style="background:#FFD700" title="금빛 ×4 텍스트"></span>
+    </div>
+  </div>
+
+</div>
+
+<p style="text-align:center;color:#7e57c2;margin-top:48px;font-size:0.82rem;">
+  Brush.Scale · Candidate_20260403_1333 · hover to zoom
+</p>
+</body>
+</html>

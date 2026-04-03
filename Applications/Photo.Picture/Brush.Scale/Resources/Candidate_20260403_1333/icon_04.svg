@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 배경 — 따뜻한 산호/오렌지 그라데이션 -->
+  <defs>
+    <linearGradient id="bg04" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFCCBC"/>
+      <stop offset="100%" stop-color="#FF8A65"/>
+    </linearGradient>
+    <linearGradient id="lensInner" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#E3F2FD"/>
+      <stop offset="100%" stop-color="#BBDEFB"/>
+    </linearGradient>
+    <radialGradient id="lensShine" cx="35%" cy="30%" r="60%">
+      <stop offset="0%" stop-color="white" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="white" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="lensClip">
+      <circle cx="430" cy="430" r="280"/>
+    </clipPath>
+  </defs>
+  <rect x="80" y="80" width="864" height="864" rx="190" fill="url(#bg04)"/>
+
+  <!-- Layer 2: 돋보기 본체 -->
+  <!-- 돋보기 유리 (선명한 이미지 포함) -->
+  <circle cx="430" cy="430" r="280" fill="white" opacity="0.95"/>
+  <circle cx="430" cy="430" r="262" fill="url(#lensInner)"/>
+
+  <!-- 렌즈 안 선명한 이미지 -->
+  <g clip-path="url(#lensClip)">
+    <!-- 하늘 -->
+    <rect x="150" y="150" width="560" height="350" fill="#64B5F6"/>
+    <!-- 구름 -->
+    <ellipse cx="320" cy="260" rx="65" ry="42" fill="white" opacity="0.92"/>
+    <ellipse cx="370" cy="248" rx="50" ry="36" fill="white" opacity="0.9"/>
+    <ellipse cx="430" cy="270" rx="60" ry="40" fill="white" opacity="0.88"/>
+    <ellipse cx="530" cy="250" rx="55" ry="38" fill="white" opacity="0.85"/>
+    <ellipse cx="575" cy="265" rx="45" ry="32" fill="white" opacity="0.87"/>
+    <!-- 땅 -->
+    <rect x="150" y="500" width="560" height="260" fill="#81C784"/>
+    <!-- 산 -->
+    <polygon points="200,500 340,250 480,500" fill="#2E7D32"/>
+    <polygon points="300,500 430,290 560,500" fill="#388E3C"/>
+    <polygon points="380,500 500,320 640,500" fill="#43A047"/>
+    <!-- 설산 -->
+    <polygon points="330,300 340,250 350,300" fill="white"/>
+    <polygon points="425,340 430,290 438,340" fill="white"/>
+    <!-- 태양 -->
+    <circle cx="600" cy="220" r="48" fill="#FFD54F"/>
+    <!-- 픽셀 격자 오버레이 — 작은 해상도 격자가 없어짐 표현 -->
+    <!-- 나뭇잎 디테일 -->
+    <circle cx="260" cy="520" r="20" fill="#1B5E20" opacity="0.5"/>
+    <circle cx="310" cy="510" r="15" fill="#2E7D32" opacity="0.5"/>
+    <circle cx="570" cy="525" r="22" fill="#1B5E20" opacity="0.5"/>
+  </g>
+
+  <!-- 렌즈 테두리 -->
+  <circle cx="430" cy="430" r="280" fill="none" stroke="#FF7043" stroke-width="30"/>
+  <!-- 렌즈 광택 -->
+  <circle cx="430" cy="430" r="262" fill="url(#lensShine)"/>
+
+  <!-- 돋보기 손잡이 -->
+  <line x1="648" y1="648" x2="880" y2="880" stroke="#BF360C" stroke-width="56" stroke-linecap="round"/>
+  <line x1="648" y1="648" x2="880" y2="880" stroke="#FF8A65" stroke-width="32" stroke-linecap="round"/>
+
+  <!-- Layer 3: 선명도 강조 — 렌즈 밖 흐림 vs 안 선명 표시 -->
+  <!-- 렌즈 밖 영역에 흐린 배경 이미지 (희미한 픽셀들) -->
+  <g opacity="0.25">
+    <rect x="100" y="100" width="60" height="60" rx="4" fill="#FF7043"/>
+    <rect x="168" y="100" width="60" height="60" rx="4" fill="#FF5722"/>
+    <rect x="100" y="168" width="60" height="60" rx="4" fill="#FF5722"/>
+    <rect x="820" y="120" width="60" height="60" rx="4" fill="#FF7043"/>
+    <rect x="820" y="188" width="60" height="60" rx="4" fill="#FF5722"/>
+    <rect x="120" y="800" width="60" height="60" rx="4" fill="#FF7043"/>
+    <rect x="188" y="800" width="60" height="60" rx="4" fill="#FF5722"/>
+  </g>
+
+  <!-- 해상도 뱃지 -->
+  <rect x="580" y="130" width="330" height="100" rx="20" fill="#E64A19" opacity="0.95"/>
+  <text x="745" y="203" text-anchor="middle" font-family="Arial Black, sans-serif" font-size="68" font-weight="900" fill="white">HD×4</text>
+</svg>

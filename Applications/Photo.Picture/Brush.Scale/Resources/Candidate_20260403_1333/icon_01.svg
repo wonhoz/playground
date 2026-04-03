@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 배경 — 밝은 노란색 그라데이션 -->
+  <defs>
+    <linearGradient id="bg01" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFF176"/>
+      <stop offset="100%" stop-color="#FFD54F"/>
+    </linearGradient>
+    <linearGradient id="imgGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#42A5F5"/>
+      <stop offset="50%" stop-color="#26C6DA"/>
+      <stop offset="100%" stop-color="#66BB6A"/>
+    </linearGradient>
+    <clipPath id="clip01">
+      <rect x="80" y="80" width="864" height="864" rx="190"/>
+    </clipPath>
+  </defs>
+  <rect x="80" y="80" width="864" height="864" rx="190" fill="url(#bg01)"/>
+
+  <!-- Layer 2: before (좌측 절반) — 픽셀 격자 저해상도 이미지 -->
+  <g clip-path="url(#clip01)">
+    <!-- 좌측 흐릿한 픽셀 영역 -->
+    <rect x="80" y="80" width="432" height="864" fill="#E8D5F5"/>
+    <!-- 픽셀 블록들 (큼직한 4x4 격자) -->
+    <rect x="120" y="180" width="80" height="80" fill="#CE93D8" rx="4"/>
+    <rect x="208" y="180" width="80" height="80" fill="#B39DDB" rx="4"/>
+    <rect x="296" y="180" width="80" height="80" fill="#9575CD" rx="4"/>
+    <rect x="384" y="180" width="80" height="80" fill="#7E57C2" rx="4"/>
+
+    <rect x="120" y="268" width="80" height="80" fill="#B39DDB" rx="4"/>
+    <rect x="208" y="268" width="80" height="80" fill="#CE93D8" rx="4"/>
+    <rect x="296" y="268" width="80" height="80" fill="#B39DDB" rx="4"/>
+    <rect x="384" y="268" width="80" height="80" fill="#9575CD" rx="4"/>
+
+    <rect x="120" y="356" width="80" height="80" fill="#9575CD" rx="4"/>
+    <rect x="208" y="356" width="80" height="80" fill="#7E57C2" rx="4"/>
+    <rect x="296" y="356" width="80" height="80" fill="#CE93D8" rx="4"/>
+    <rect x="384" y="356" width="80" height="80" fill="#B39DDB" rx="4"/>
+
+    <rect x="120" y="444" width="80" height="80" fill="#CE93D8" rx="4"/>
+    <rect x="208" y="444" width="80" height="80" fill="#9575CD" rx="4"/>
+    <rect x="296" y="444" width="80" height="80" fill="#7E57C2" rx="4"/>
+    <rect x="384" y="444" width="80" height="80" fill="#CE93D8" rx="4"/>
+
+    <rect x="120" y="532" width="80" height="80" fill="#B39DDB" rx="4"/>
+    <rect x="208" y="532" width="80" height="80" fill="#CE93D8" rx="4"/>
+    <rect x="296" y="532" width="80" height="80" fill="#9575CD" rx="4"/>
+    <rect x="384" y="532" width="80" height="80" fill="#B39DDB" rx="4"/>
+
+    <rect x="120" y="620" width="80" height="80" fill="#7E57C2" rx="4"/>
+    <rect x="208" y="620" width="80" height="80" fill="#B39DDB" rx="4"/>
+    <rect x="296" y="620" width="80" height="80" fill="#CE93D8" rx="4"/>
+    <rect x="384" y="620" width="80" height="80" fill="#9575CD" rx="4"/>
+
+    <rect x="120" y="708" width="80" height="80" fill="#9575CD" rx="4"/>
+    <rect x="208" y="708" width="80" height="80" fill="#7E57C2" rx="4"/>
+    <rect x="296" y="708" width="80" height="80" fill="#B39DDB" rx="4"/>
+    <rect x="384" y="708" width="80" height="80" fill="#CE93D8" rx="4"/>
+
+    <!-- 우측 선명한 이미지 영역 -->
+    <rect x="512" y="80" width="432" height="864" fill="url(#imgGrad)"/>
+    <!-- 선명한 이미지 안 요소들 (산 실루엣 + 구름) -->
+    <ellipse cx="660" cy="250" rx="80" ry="60" fill="white" opacity="0.9"/>
+    <ellipse cx="720" cy="240" rx="60" ry="50" fill="white" opacity="0.85"/>
+    <ellipse cx="780" cy="260" rx="70" ry="55" fill="white" opacity="0.88"/>
+    <!-- 산 -->
+    <polygon points="520,820 660,380 800,820" fill="#1B5E20" opacity="0.85"/>
+    <polygon points="580,820 720,450 860,820" fill="#2E7D32" opacity="0.8"/>
+    <polygon points="620,820 740,480 900,820" fill="#388E3C" opacity="0.75"/>
+    <!-- 설산 꼭대기 -->
+    <polygon points="620,450 660,380 700,450" fill="white" opacity="0.9"/>
+    <polygon points="680,510 720,450 760,510" fill="white" opacity="0.85"/>
+  </g>
+
+  <!-- Layer 3: 중간 구분선 + 화살표 -->
+  <!-- 구분선 -->
+  <line x1="512" y1="100" x2="512" y2="924" stroke="white" stroke-width="6" stroke-dasharray="20,10"/>
+  <!-- 화살표 (좌→우) -->
+  <g>
+    <rect x="430" y="472" width="164" height="80" rx="40" fill="#F57F17" opacity="0.95"/>
+    <text x="512" y="526" text-anchor="middle" font-family="Arial Black, sans-serif" font-size="56" font-weight="900" fill="white">→</text>
+  </g>
+  <!-- 라벨 -->
+  <rect x="90" y="820" width="150" height="50" rx="12" fill="#7E57C2" opacity="0.9"/>
+  <text x="165" y="855" text-anchor="middle" font-family="Arial, sans-serif" font-size="36" font-weight="bold" fill="white">LOW</text>
+  <rect x="784" y="820" width="150" height="50" rx="12" fill="#1B5E20" opacity="0.9"/>
+  <text x="859" y="855" text-anchor="middle" font-family="Arial, sans-serif" font-size="36" font-weight="bold" fill="white">4×</text>
+</svg>

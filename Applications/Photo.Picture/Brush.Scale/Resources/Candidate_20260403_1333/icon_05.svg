@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 배경 — 라벤더 → 핑크 그라데이션 -->
+  <defs>
+    <linearGradient id="bg05" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#CE93D8"/>
+      <stop offset="50%" stop-color="#F48FB1"/>
+      <stop offset="100%" stop-color="#FFAB91"/>
+    </linearGradient>
+    <linearGradient id="arrowGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#F3E5F5"/>
+      <stop offset="100%" stop-color="#FCE4EC"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect x="80" y="80" width="864" height="864" rx="190" fill="url(#bg05)"/>
+
+  <!-- Layer 2: before 이미지 (좌상단 — 흐린 픽셀) -->
+  <rect x="120" y="130" width="340" height="280" rx="22" fill="white" opacity="0.85"/>
+  <!-- 픽셀 격자 4x4 -->
+  <rect x="140" y="150" width="68" height="68" rx="5" fill="#B39DDB"/>
+  <rect x="212" y="150" width="68" height="68" rx="5" fill="#9575CD"/>
+  <rect x="284" y="150" width="68" height="68" rx="5" fill="#B39DDB"/>
+  <rect x="356" y="150" width="68" height="68" rx="5" fill="#9575CD"/>
+  <rect x="140" y="222" width="68" height="68" rx="5" fill="#9575CD"/>
+  <rect x="212" y="222" width="68" height="68" rx="5" fill="#B39DDB"/>
+  <rect x="284" y="222" width="68" height="68" rx="5" fill="#9575CD"/>
+  <rect x="356" y="222" width="68" height="68" rx="5" fill="#B39DDB"/>
+  <rect x="140" y="294" width="68" height="68" rx="5" fill="#B39DDB"/>
+  <rect x="212" y="294" width="68" height="68" rx="5" fill="#9575CD"/>
+  <rect x="284" y="294" width="68" height="68" rx="5" fill="#B39DDB"/>
+  <rect x="356" y="294" width="68" height="68" rx="5" fill="#9575CD"/>
+  <rect x="140" y="366" width="68" height="68" rx="5" fill="#9575CD"/>
+  <rect x="212" y="366" width="68" height="68" rx="5" fill="#B39DDB"/>
+  <rect x="284" y="366" width="68" height="68" rx="5" fill="#9575CD"/>
+  <rect x="356" y="366" width="68" height="68" rx="5" fill="#B39DDB"/>
+
+  <!-- 라벨 "before" -->
+  <rect x="140" y="430" width="180" height="50" rx="10" fill="#7B1FA2" opacity="0.85"/>
+  <text x="230" y="464" text-anchor="middle" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="white">BEFORE</text>
+
+  <!-- Layer 2: 큰 곡선 화살표 -->
+  <path d="M475 340 Q512 200 560 340" stroke="white" stroke-width="22" fill="none"
+        stroke-linecap="round" filter="url(#glow)"/>
+  <!-- 화살표 머리 -->
+  <polygon points="540,360 590,320 570,375" fill="white" filter="url(#glow)"/>
+
+  <!-- "AI" 원형 배지 (중앙) -->
+  <circle cx="512" cy="512" r="70" fill="#E91E63" opacity="0.95"/>
+  <text x="512" y="534" text-anchor="middle" font-family="Arial Black, sans-serif" font-size="52" font-weight="900" fill="white">AI</text>
+
+  <!-- Layer 2: after 이미지 (우하단 — 선명한 사진) -->
+  <rect x="564" y="620" width="340" height="260" rx="22" fill="white" opacity="0.9"/>
+  <!-- 선명한 이미지 내용 -->
+  <rect x="580" y="636" width="308" height="228" rx="14" fill="#E0F7FA"/>
+  <!-- 하늘 -->
+  <rect x="580" y="636" width="308" height="140" rx="14" fill="#4FC3F7"/>
+  <!-- 구름 -->
+  <ellipse cx="650" cy="690" rx="42" ry="28" fill="white" opacity="0.9"/>
+  <ellipse cx="685" cy="680" rx="35" ry="24" fill="white" opacity="0.88"/>
+  <ellipse cx="770" cy="695" rx="40" ry="26" fill="white" opacity="0.87"/>
+  <ellipse cx="805" cy="685" rx="32" ry="22" fill="white" opacity="0.85"/>
+  <!-- 땅 -->
+  <rect x="580" y="776" width="308" height="88" rx="0" fill="#81C784"/>
+  <!-- 산 -->
+  <polygon points="580,776 660,650 740,776" fill="#2E7D32"/>
+  <polygon points="640,776 720,670 800,776" fill="#388E3C"/>
+  <polygon points="700,776 770,688 860,776" fill="#43A047"/>
+  <polygon points="656,660 660,650 664,660" fill="white"/>
+  <polygon points="716,678 720,670 724,678" fill="white"/>
+  <!-- 태양 -->
+  <circle cx="845" cy="665" r="32" fill="#FFD54F"/>
+
+  <!-- 라벨 "AFTER" -->
+  <rect x="684" y="890" width="180" height="50" rx="10" fill="#1A237E" opacity="0.9"/>
+  <text x="774" y="924" text-anchor="middle" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="white">AFTER</text>
+
+  <!-- Layer 3: 스케일 팩터 표시 (중앙 하단) -->
+  <rect x="340" y="820" width="344" height="110" rx="30" fill="#4A148C" opacity="0.92"/>
+  <text x="512" y="898" text-anchor="middle" font-family="Arial Black, sans-serif" font-size="78" font-weight="900" fill="#FFD700">×4</text>
+
+  <!-- 반짝이 -->
+  <circle cx="176" cy="120" r="16" fill="white" opacity="0.7"/>
+  <circle cx="860" cy="580" r="12" fill="white" opacity="0.6"/>
+  <circle cx="490" cy="780" r="10" fill="white" opacity="0.65"/>
+  <circle cx="900" cy="200" r="14" fill="#FFD700" opacity="0.7"/>
+</svg>

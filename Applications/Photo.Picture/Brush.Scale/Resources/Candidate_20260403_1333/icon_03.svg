@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Layer 1: 배경 — 민트/에메랄드 밝은 그라데이션 -->
+  <defs>
+    <linearGradient id="bg03" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#B2EBF2"/>
+      <stop offset="100%" stop-color="#80DEEA"/>
+    </linearGradient>
+    <linearGradient id="brushGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FF8A65"/>
+      <stop offset="100%" stop-color="#FF5722"/>
+    </linearGradient>
+    <linearGradient id="sparkleGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFD700"/>
+      <stop offset="100%" stop-color="#FFA000"/>
+    </linearGradient>
+  </defs>
+  <rect x="80" y="80" width="864" height="864" rx="190" fill="url(#bg03)"/>
+
+  <!-- Layer 2: 대각선으로 내려오는 붓 -->
+  <!-- 붓 손잡이 (긴 막대) -->
+  <rect x="550" y="120" width="44" height="440" rx="22"
+        transform="rotate(45 572 340)"
+        fill="#8D6E63"/>
+  <!-- 붓 페룰 (금속 연결부) -->
+  <rect x="440" y="420" width="60" height="80" rx="10"
+        transform="rotate(45 470 460)"
+        fill="#90A4AE"/>
+  <!-- 붓 털 (아래쪽 삼각형 끝부분) -->
+  <path d="M380 560 L460 480 L500 560 Q440 620 380 560 Z"
+        transform="rotate(45 440 520)"
+        fill="url(#brushGrad)"/>
+  <!-- 붓 터치 포인트 -->
+  <path d="M360 650 Q380 580 460 560"
+        stroke="#FF7043" stroke-width="8" fill="none" stroke-linecap="round" opacity="0.6"/>
+
+  <!-- Layer 2: 이미지 캔버스 (붓이 터치하는 화면) -->
+  <rect x="130" y="420" width="480" height="460" rx="30" fill="white" opacity="0.9"/>
+  <!-- 저해상도 영역 (왼쪽 상단) -->
+  <rect x="155" y="445" width="200" height="200" rx="12" fill="#F8BBD0"/>
+  <rect x="160" y="450" width="46" height="46" rx="3" fill="#F48FB1"/>
+  <rect x="210" y="450" width="46" height="46" rx="3" fill="#EC407A"/>
+  <rect x="260" y="450" width="46" height="46" rx="3" fill="#F48FB1"/>
+  <rect x="310" y="450" width="46" height="46" rx="3" fill="#EC407A"/>
+  <rect x="160" y="500" width="46" height="46" rx="3" fill="#EC407A"/>
+  <rect x="210" y="500" width="46" height="46" rx="3" fill="#F48FB1"/>
+  <rect x="260" y="500" width="46" height="46" rx="3" fill="#EC407A"/>
+  <rect x="310" y="500" width="46" height="46" rx="3" fill="#F48FB1"/>
+  <rect x="160" y="550" width="46" height="46" rx="3" fill="#F48FB1"/>
+  <rect x="210" y="550" width="46" height="46" rx="3" fill="#EC407A"/>
+  <rect x="260" y="550" width="46" height="46" rx="3" fill="#F48FB1"/>
+  <rect x="310" y="550" width="46" height="46" rx="3" fill="#EC407A"/>
+  <rect x="160" y="600" width="46" height="46" rx="3" fill="#EC407A"/>
+  <rect x="210" y="600" width="46" height="46" rx="3" fill="#F48FB1"/>
+  <rect x="260" y="600" width="46" height="46" rx="3" fill="#EC407A"/>
+  <rect x="310" y="600" width="46" height="46" rx="3" fill="#F48FB1"/>
+
+  <!-- 선명화된 영역 (오른쪽 하단 — 붓이 지나간 자리) -->
+  <rect x="370" y="640" width="220" height="220" rx="12" fill="#E8F5E9"/>
+  <ellipse cx="440" cy="720" rx="30" ry="30" fill="#66BB6A"/>
+  <ellipse cx="490" cy="700" rx="25" ry="25" fill="#43A047"/>
+  <ellipse cx="530" cy="730" rx="35" ry="35" fill="#81C784"/>
+  <rect x="375" y="800" width="210" height="50" rx="8" fill="#4CAF50" opacity="0.7"/>
+  <text x="480" y="836" text-anchor="middle" font-family="Arial Black, sans-serif" font-size="34" font-weight="900" fill="white">SHARP</text>
+
+  <!-- Layer 3: 반짝이 효과 (별 3개) -->
+  <!-- 큰 별 -->
+  <g transform="translate(700 340) rotate(0)">
+    <polygon points="0,-50 12,-18 46,-18 20,7 30,42 0,22 -30,42 -20,7 -46,-18 -12,-18"
+             fill="url(#sparkleGrad)" opacity="0.95"/>
+  </g>
+  <!-- 중간 별 -->
+  <g transform="translate(790 200) rotate(15)">
+    <polygon points="0,-36 9,-13 33,-13 14,5 21,30 0,16 -21,30 -14,5 -33,-13 -9,-13"
+             fill="#FFD700" opacity="0.9"/>
+  </g>
+  <!-- 작은 별 -->
+  <g transform="translate(640 180) rotate(-10)">
+    <polygon points="0,-26 6,-9 24,-9 10,4 15,22 0,12 -15,22 -10,4 -24,-9 -6,-9"
+             fill="#FFC107" opacity="0.85"/>
+  </g>
+  <!-- 반짝이 점들 -->
+  <circle cx="750" cy="500" r="10" fill="#FFD700" opacity="0.8"/>
+  <circle cx="820" cy="420" r="7" fill="#FFA000" opacity="0.75"/>
+  <circle cx="680" cy="440" r="8" fill="#FFD54F" opacity="0.7"/>
+</svg>

@@ -14,7 +14,8 @@ public class UpscaleService : IDisposable
     int               _tileSize      = DefaultTileSize;
     int               _tileOverlap   = DefaultTileOverlap;
     bool              _fixedTileSize = false;
-    int               _tileAlignment = 1;   // dynamic U-Net 모델: 4의 배수 정렬 필요
+    int               _borderOut     = 0;  // 모델 출력 경계 크롭 픽셀 수 (출력 좌표, 각 변 기준)
+    int               _borderIn      = 0;  // = _borderOut / NativeScale (입력 좌표)
 
     // ── 세션 로드 ──────────────────────────────────────────────────────────
     public void LoadModel(UpscaleModelType modelType)
@@ -22,12 +23,13 @@ public class UpscaleService : IDisposable
         if (modelType == UpscaleModelType.Bicubic)
         {
             _session?.Dispose();
-            _session      = null;
-            _loadedModel  = UpscaleModelType.Bicubic;
-            _tileSize     = DefaultTileSize;
-            _tileOverlap  = DefaultTileOverlap;
+            _session       = null;
+            _loadedModel   = UpscaleModelType.Bicubic;
+            _tileSize      = DefaultTileSize;
+            _tileOverlap   = DefaultTileOverlap;
             _fixedTileSize = false;
-            _tileAlignment = 1;
+            _borderOut     = 0;
+            _borderIn      = 0;
             return;
         }
 
@@ -40,27 +42,45 @@ public class UpscaleService : IDisposable
         var opts = new SessionOptions();
         opts.GraphOptimizationLevel = GraphOptimizationLevel.ORT_ENABLE_ALL;
         // CPU EP를 명시적으로 등록 → ORT가 DML/CUDA를 자동 등록하지 않음
-        // (EP 목록이 비어있으면 Windows에서 시스템 directml.dll을 자동 감지·등록)
         opts.AppendExecutionProvider_CPU(1);
         _session     = new InferenceSession(path, opts);
         _loadedModel = modelType;
 
-        // 모델 입력 크기 감지 — 고정 크기(예: waifu2x 64×64) vs 동적 크기
+        // 모델 입력 크기 감지 — 고정 크기(예: RealESRGAN 64×64) vs 동적 크기
         var inputDims = _session.InputMetadata.Values.First().Dimensions;
         if (inputDims.Length >= 4 && inputDims[2] > 0 && inputDims[3] > 0)
         {
             _fixedTileSize = true;
             _tileSize      = (int)inputDims[2];
             _tileOverlap   = Math.Max(2, _tileSize / 16);
+            _borderOut     = 0;
+            _borderIn      = 0;
         }
         else
         {
             _fixedTileSize = false;
             _tileSize      = DefaultTileSize;
             _tileOverlap   = DefaultTileOverlap;
-            // stride-2 U-Net 계층이 2개이므로 4의 배수 정렬 필요
-            // (Add node skip connection 크기 불일치 방지)
-            _tileAlignment = 4;
+
+            // 경계 크롭 자동 감지
+            // 예: waifu2x-cunet → input 64 → output 56 → borderOut=(128-56)/2=36, borderIn=18
+            _borderOut = 0;
+            _borderIn  = 0;
+            try
+            {
+                int ns     = modelType.NativeScale();
+                const int testH = 64;
+                var td = new DenseTensor<float>([1, 3, testH, testH]);
+                var testInputs = new List<NamedOnnxValue> {
+                    NamedOnnxValue.CreateFromTensor(_session.InputMetadata.Keys.First(), td)
+                };
+                using var testResult = _session.Run(testInputs);
+                var dims = testResult.First().AsTensor<float>().Dimensions;
+                int outH = dims[dims.Length - 2];
+                _borderOut = Math.Max(0, (ns * testH - outH) / 2);
+                _borderIn  = ns > 0 ? _borderOut / ns : 0;
+            }
+            catch { /* 감지 실패 시 borderOut=0 유지 */ }
         }
     }
 
@@ -118,7 +138,6 @@ public class UpscaleService : IDisposable
         CancellationToken ct)
     {
         int nativeScale = _loadedModel.NativeScale();
-        // scaleFactor보다 nativeScale이 작으면 다단 처리
         int passes = 1;
         if (scaleFactor > nativeScale && nativeScale > 0)
             passes = (int)Math.Ceiling(Math.Log(scaleFactor) / Math.Log(nativeScale));
@@ -134,7 +153,6 @@ public class UpscaleService : IDisposable
             current = next;
         }
 
-        // scaleFactor가 nativeScale의 배수가 아닐 경우 최종 리사이즈
         int targetW = src.Width  * scaleFactor;
         int targetH = src.Height * scaleFactor;
         if (current.Width != targetW || current.Height != targetH)
@@ -153,98 +171,125 @@ public class UpscaleService : IDisposable
     {
         return await Task.Run(() =>
         {
-            var session = _session!;
+            var session    = _session!;
             int nativeScale = _loadedModel.NativeScale();
             int outW = src.Width  * nativeScale;
             int outH = src.Height * nativeScale;
             var output = new SKBitmap(outW, outH, SKColorType.Rgb888x, SKAlphaType.Opaque);
 
-            // 타일 목록 계산
-            int tileSize    = _tileSize;
-            int tileOverlap = _tileOverlap;
-            bool fixedSize  = _fixedTileSize;
-            int  alignment  = _tileAlignment;
-            var tiles = BuildTiles(src.Width, src.Height, tileSize, tileOverlap);
-            int total = tiles.Count;
+            int tileSize   = _tileSize;
+            int borderIn   = _borderIn;
+            int borderOut  = _borderOut;
+            bool fixedSize = _fixedTileSize;
+            string inputName = session.InputMetadata.Keys.First();
 
-            for (int ti = 0; ti < total; ti++)
+            if (borderIn > 0)
             {
-                ct.ThrowIfCancellationRequested();
-                var (sx, sy, sw, sh) = tiles[ti];
+                // ── 경계 크롭 모델 (waifu2x-cunet 등) ───────────────────────────
+                // 소스를 borderIn만큼 복제 패딩 후, 오버랩 없는 타일로 처리.
+                // 타일 위치 sx(패딩 좌표) → 출력 위치 sx*nativeScale (오프셋 불필요).
+                int step = Math.Max(1, tileSize - 2 * borderIn);
+                using var padded = PadBitmap(src, borderIn);
+                var tiles = BuildTilesPadded(padded.Width, padded.Height, tileSize, step);
+                int total = tiles.Count;
 
-                // 타일 크롭
-                using var tileBmp = new SKBitmap(sw, sh);
-                using (var c = new SKCanvas(tileBmp))
-                    c.DrawBitmap(src, new SKRect(sx, sy, sx + sw, sy + sh),
-                                      new SKRect(0,  0,  sw,       sh));
-
-                // float 텐서 변환 (NCHW, [0,1])
-                // 고정 크기 모델: 기대 크기로 zero-padding
-                // 동적 모델: stride-2 U-Net skip connection 정렬을 위해 alignment 배수로 패딩
-                DenseTensor<float> tensor;
-                if (fixedSize)
+                for (int ti = 0; ti < total; ti++)
                 {
-                    tensor = BitmapToTensorPadded(tileBmp, tileSize, tileSize);
+                    ct.ThrowIfCancellationRequested();
+                    var (sx, sy, sw, sh) = tiles[ti];
+
+                    using var tileBmp = new SKBitmap(sw, sh);
+                    using (var c = new SKCanvas(tileBmp))
+                        c.DrawBitmap(padded, new SKRect(sx, sy, sx + sw, sy + sh),
+                                             new SKRect(0,  0,  sw,       sh));
+
+                    var tensor = BitmapToTensor(tileBmp);
+                    var inputs = new List<NamedOnnxValue> {
+                        NamedOnnxValue.CreateFromTensor(inputName, tensor)
+                    };
+                    using var results = session.Run(inputs);
+                    var outTensor = results.First().AsTensor<float>();
+
+                    int oRank   = outTensor.Dimensions.Length;
+                    int actualW = outTensor.Dimensions[oRank - 1];
+                    int actualH = outTensor.Dimensions[oRank - 2];
+
+                    int dx = sx * nativeScale;
+                    int dy = sy * nativeScale;
+                    int dw = Math.Min(actualW, outW - dx);
+                    int dh = Math.Min(actualH, outH - dy);
+                    if (dw <= 0 || dh <= 0) continue;
+
+                    using var rawTile = TensorToBitmap(outTensor, dw, dh);
+                    using var canvas  = new SKCanvas(output);
+                    canvas.DrawBitmap(rawTile, new SKRect(0, 0, dw, dh),
+                                               new SKRect(dx, dy, dx + dw, dy + dh));
+
+                    progress?.Report((double)(ti + 1) / total);
                 }
-                else if (alignment > 1)
+            }
+            else
+            {
+                // ── 경계 없는 모델 (RealESRGAN 등) ──────────────────────────────
+                // 기존 오버랩 타일링: 출력이 정확히 nativeScale배.
+                int tileOverlap = _tileOverlap;
+                var tiles = BuildTiles(src.Width, src.Height, tileSize, tileOverlap);
+                int total = tiles.Count;
+
+                for (int ti = 0; ti < total; ti++)
                 {
-                    int alignedW = AlignUp(sw, alignment);
-                    int alignedH = AlignUp(sh, alignment);
-                    tensor = (alignedW == sw && alignedH == sh)
-                        ? BitmapToTensor(tileBmp)
-                        : BitmapToTensorPadded(tileBmp, alignedH, alignedW);
+                    ct.ThrowIfCancellationRequested();
+                    var (sx, sy, sw, sh) = tiles[ti];
+
+                    using var tileBmp = new SKBitmap(sw, sh);
+                    using (var c = new SKCanvas(tileBmp))
+                        c.DrawBitmap(src, new SKRect(sx, sy, sx + sw, sy + sh),
+                                          new SKRect(0,  0,  sw,       sh));
+
+                    var tensor = fixedSize
+                        ? BitmapToTensorPadded(tileBmp, tileSize, tileSize)
+                        : BitmapToTensor(tileBmp);
+
+                    var inputs = new List<NamedOnnxValue> {
+                        NamedOnnxValue.CreateFromTensor(inputName, tensor)
+                    };
+                    using var results   = session.Run(inputs);
+                    var outTensor = results.First().AsTensor<float>();
+
+                    int oRank   = outTensor.Dimensions.Length;
+                    int actualW = outTensor.Dimensions[oRank - 1];
+                    int actualH = outTensor.Dimensions[oRank - 2];
+
+                    int tw = sw * nativeScale;
+                    int th = sh * nativeScale;
+                    int useW = Math.Min(tw, actualW);
+                    int useH = Math.Min(th, actualH);
+                    using var rawTile = TensorToBitmap(outTensor, useW, useH);
+
+                    SKBitmap outTile;
+                    if (useW == tw && useH == th)
+                        outTile = rawTile.Copy();
+                    else
+                        outTile = rawTile.Resize(new SKImageInfo(tw, th),
+                                                 new SKSamplingOptions(SKCubicResampler.Mitchell));
+
+                    using (outTile)
+                    {
+                        int ox = sx > 0 ? tileOverlap * nativeScale : 0;
+                        int oy = sy > 0 ? tileOverlap * nativeScale : 0;
+                        int ow = tw - ox - (sx + sw < src.Width  ? tileOverlap * nativeScale : 0);
+                        int oh = th - oy - (sy + sh < src.Height ? tileOverlap * nativeScale : 0);
+
+                        int dx = sx * nativeScale + (sx > 0 ? tileOverlap * nativeScale : 0);
+                        int dy = sy * nativeScale + (sy > 0 ? tileOverlap * nativeScale : 0);
+
+                        using var canvas = new SKCanvas(output);
+                        canvas.DrawBitmap(outTile, new SKRect(ox, oy, ox + ow, oy + oh),
+                                                   new SKRect(dx, dy, dx + ow, dy + oh));
+                    }
+
+                    progress?.Report((double)(ti + 1) / total);
                 }
-                else
-                {
-                    tensor = BitmapToTensor(tileBmp);
-                }
-
-                // 추론
-                var inputs = new List<NamedOnnxValue>
-                {
-                    NamedOnnxValue.CreateFromTensor(session.InputMetadata.Keys.First(), tensor)
-                };
-                using var results = session.Run(inputs);
-                var outTensor = results.First().AsTensor<float>();
-
-                // 타일 결과 → SKBitmap
-                // 출력 텐서 실제 차원 (3D [C,H,W] 또는 4D [N,C,H,W])
-                int oRank   = outTensor.Dimensions.Length;
-                int actualW = outTensor.Dimensions[oRank - 1];
-                int actualH = outTensor.Dimensions[oRank - 2];
-
-                int tw = sw * nativeScale;
-                int th = sh * nativeScale;
-                // 패딩된 입력에서 나온 출력 → 실제 타일 크기로 크롭
-                int useW = Math.Min(tw, actualW);
-                int useH = Math.Min(th, actualH);
-                using var rawTile = TensorToBitmap(outTensor, useW, useH);
-
-                // 출력이 기대 크기와 다르면 리사이즈 (nativeScale 불일치 보정)
-                SKBitmap outTile;
-                if (useW == tw && useH == th)
-                    outTile = rawTile.Copy();
-                else
-                    outTile = rawTile.Resize(new SKImageInfo(tw, th),
-                                             new SKSamplingOptions(SKCubicResampler.Mitchell));
-
-                using (outTile)
-                {
-                    // 오버랩 제거 후 복사
-                    int ox = sx > 0 ? tileOverlap * nativeScale : 0;
-                    int oy = sy > 0 ? tileOverlap * nativeScale : 0;
-                    int ow = tw - ox - (sx + sw < src.Width  ? tileOverlap * nativeScale : 0);
-                    int oh = th - oy - (sy + sh < src.Height ? tileOverlap * nativeScale : 0);
-
-                    int dx = sx * nativeScale + (sx > 0 ? tileOverlap * nativeScale : 0);
-                    int dy = sy * nativeScale + (sy > 0 ? tileOverlap * nativeScale : 0);
-
-                    using var c = new SKCanvas(output);
-                    c.DrawBitmap(outTile, new SKRect(ox, oy, ox + ow, oy + oh),
-                                          new SKRect(dx, dy, dx + ow, dy + oh));
-                }
-
-                progress?.Report((double)(ti + 1) / total);
             }
             return output;
         }, ct);
@@ -292,6 +337,64 @@ public class UpscaleService : IDisposable
     }
 
     // ── 헬퍼 ──────────────────────────────────────────────────────────────
+
+    /// <summary>소스 이미지를 각 변에 pad픽셀만큼 복제 패딩한 새 비트맵 반환.</summary>
+    static SKBitmap PadBitmap(SKBitmap src, int pad)
+    {
+        int srcW = src.Width, srcH = src.Height;
+        int W = srcW + 2 * pad, H = srcH + 2 * pad;
+        var bmp = new SKBitmap(W, H, src.ColorType, src.AlphaType);
+
+        // 중앙에 원본 복사
+        using (var canvas = new SKCanvas(bmp))
+            canvas.DrawBitmap(src, pad, pad);
+
+        // 좌/우 엣지 복제
+        for (int y = pad; y < pad + srcH; y++)
+        {
+            var edgeL = bmp.GetPixel(pad, y);
+            var edgeR = bmp.GetPixel(pad + srcW - 1, y);
+            for (int x = 0; x < pad; x++)         bmp.SetPixel(x, y, edgeL);
+            for (int x = pad + srcW; x < W; x++)   bmp.SetPixel(x, y, edgeR);
+        }
+        // 상/하 엣지 복제 (코너 포함)
+        for (int x = 0; x < W; x++)
+        {
+            var edgeT = bmp.GetPixel(x, pad);
+            var edgeB = bmp.GetPixel(x, pad + srcH - 1);
+            for (int y = 0; y < pad; y++)         bmp.SetPixel(x, y, edgeT);
+            for (int y = pad + srcH; y < H; y++)   bmp.SetPixel(x, y, edgeB);
+        }
+        return bmp;
+    }
+
+    /// <summary>경계 크롭 모델용 타일 목록. 모든 타일이 정확히 tileSize×tileSize.</summary>
+    static List<(int x, int y, int w, int h)> BuildTilesPadded(int padW, int padH, int tileSize, int step)
+    {
+        var xs = BuildAxisPositions(padW, tileSize, step);
+        var ys = BuildAxisPositions(padH, tileSize, step);
+        var tiles = new List<(int, int, int, int)>();
+        foreach (var y in ys)
+        foreach (var x in xs)
+            tiles.Add((x, y, Math.Min(tileSize, padW - x), Math.Min(tileSize, padH - y)));
+        return tiles;
+    }
+
+    static List<int> BuildAxisPositions(int dim, int tileSize, int step)
+    {
+        var pos = new List<int>();
+        if (dim <= tileSize)
+        {
+            pos.Add(0);
+            return pos;
+        }
+        for (int x = 0; x + tileSize <= dim; x += step)
+            pos.Add(x);
+        if (pos.Count == 0 || pos[^1] + tileSize < dim)
+            pos.Add(dim - tileSize);
+        return pos;
+    }
+
     static List<(int x, int y, int w, int h)> BuildTiles(int imgW, int imgH, int tileSize, int overlap)
     {
         var tiles = new List<(int, int, int, int)>();
@@ -347,7 +450,6 @@ public class UpscaleService : IDisposable
         var bmp  = new SKBitmap(w, h, SKColorType.Rgb888x, SKAlphaType.Opaque);
         int rank = t.Dimensions.Length;
         bool is4D = rank == 4;
-        // 채널 수 (4D: dim[1], 3D: dim[0])
         int nCh = t.Dimensions[is4D ? 1 : 0];
 
         for (int y = 0; y < h; y++)
@@ -362,8 +464,6 @@ public class UpscaleService : IDisposable
     }
 
     static byte Clamp(float v) => (byte)Math.Clamp((int)(v * 255f + 0.5f), 0, 255);
-
-    static int AlignUp(int val, int alignment) => (val + alignment - 1) / alignment * alignment;
 
     public void Dispose()
     {

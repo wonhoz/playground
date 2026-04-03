@@ -210,29 +210,26 @@
                   ToolTip="단축키 도움말 (F1)" Margin="0,0,6,0" Padding="8,5">
             <TextBlock Text="?" FontSize="13" FontWeight="SemiBold"/>
           </Button>
-          <TextBox x:Name="TxtFind" Width="160"
-                   ToolTip="찾기 (Ctrl+F)"
-                   TextChanged="TxtFind_TextChanged"
-                   KeyDown="TxtFind_KeyDown">
-            <TextBox.Style>
-              <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
-                <Style.Triggers>
-                  <Trigger Property="Text" Value="">
-                    <Setter Property="Background">
-                      <Setter.Value>
-                        <VisualBrush Stretch="None" AlignmentX="Left">
-                          <VisualBrush.Visual>
-                            <TextBlock Text="  &#x1F50D; 찾기..." Foreground="#666888"
-                                       FontSize="12" VerticalAlignment="Center"/>
-                          </VisualBrush.Visual>
-                        </VisualBrush>
-                      </Setter.Value>
-                    </Setter>
-                  </Trigger>
-                </Style.Triggers>
-              </Style>
-            </TextBox.Style>
-          </TextBox>
+          <Grid Width="160">
+            <TextBox x:Name="TxtFind"
+                     ToolTip="찾기 (Ctrl+F)"
+                     TextChanged="TxtFind_TextChanged"
+                     KeyDown="TxtFind_KeyDown"/>
+            <TextBlock Text="&#x1F50D; 찾기..." Foreground="#666888"
+                       FontSize="12" VerticalAlignment="Center" Margin="8,0,0,0"
+                       IsHitTestVisible="False" IsEnabled="False">
+              <TextBlock.Style>
+                <Style TargetType="TextBlock">
+                  <Setter Property="Visibility" Value="Collapsed"/>
+                  <Style.Triggers>
+                    <DataTrigger Binding="{Binding Text, ElementName=TxtFind}" Value="">
+                      <Setter Property="Visibility" Value="Visible"/>
+                    </DataTrigger>
+                  </Style.Triggers>
+                </Style>
+              </TextBlock.Style>
+            </TextBlock>
+          </Grid>
           <!-- 이전/다음 찾기 버튼 -->
           <Button Style="{StaticResource IconButton}" Click="BtnFindPrev_Click"
                   ToolTip="이전 결과 (Shift+Enter)" Margin="2,0,0,0" Padding="6,5">
@@ -326,7 +323,7 @@
                 Visibility="Visible">
           <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock Text="&#x1F4DD;" FontSize="48" HorizontalAlignment="Center"
-                       Margin="0,0,0,12"/>
+                       Margin="0,0,0,12" Foreground="DarkGray"/>
             <TextBlock Text="Mark.View" FontSize="24" FontWeight="Bold"
                        Foreground="{StaticResource AccentBrush}"
                        HorizontalAlignment="Center"/>

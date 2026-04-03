@@ -79,6 +79,7 @@ public:
 // ── COM 내보내기 ───────────────────────────────────────────────────────────────
 STDAPI DllGetClassObject(REFCLSID rclsid, REFIID riid, void** ppv)
 {
+    if (!ppv) return E_POINTER;
     *ppv = nullptr;
     bool dangerous;
     if      (IsEqualCLSID(rclsid, CLSID_ClaudeContextMenu))          dangerous = false;
@@ -94,5 +95,5 @@ STDAPI DllGetClassObject(REFCLSID rclsid, REFIID riid, void** ppv)
 
 STDAPI DllCanUnloadNow()
 {
-    return (g_cDllRef == 0) ? S_OK : S_FALSE;
+    return (InterlockedAdd(&g_cDllRef, 0) == 0) ? S_OK : S_FALSE;
 }

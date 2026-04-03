@@ -33,7 +33,12 @@ static void LaunchClaude(const std::wstring& folder, bool dangerous)
     SHELLEXECUTEINFOW sei = {};
     sei.cbSize = sizeof(sei); sei.lpVerb = L"open";
     sei.lpFile = L"cmd.exe"; sei.lpParameters = args.c_str(); sei.nShow = SW_SHOWNORMAL;
-    ShellExecuteExW(&sei);
+    if (!ShellExecuteExW(&sei))
+    {
+        WCHAR msg[256];
+        swprintf_s(msg, L"Claude Code 실행 실패 (오류: %lu)", GetLastError());
+        MessageBoxW(nullptr, msg, L"Claude Code", MB_OK | MB_ICONERROR);
+    }
 }
 
 // ── IUnknown ──────────────────────────────────────────────────────────────────
@@ -90,7 +95,7 @@ STDMETHODIMP ClaudeContextMenu::Initialize(PCIDLIST_ABSOLUTE pidlFolder, IDataOb
 // ── IContextMenu (구 컨텍스트 — Normal 인스턴스에서 서브메뉴 2개 제공) ──────
 STDMETHODIMP ClaudeContextMenu::QueryContextMenu(HMENU hmenu, UINT indexMenu, UINT idCmdFirst, UINT, UINT uFlags)
 {
-    if ((uFlags & 0x000F) == CMF_DEFAULTONLY) return MAKE_HRESULT(SEVERITY_SUCCESS, 0, 0);
+    if (uFlags & CMF_DEFAULTONLY) return MAKE_HRESULT(SEVERITY_SUCCESS, 0, 0);
     if (m_hSubMenu) { DestroyMenu(m_hSubMenu); m_hSubMenu = nullptr; }
     m_hSubMenu = CreatePopupMenu();
     InsertMenuW(m_hSubMenu, 0, MF_BYPOSITION | MF_STRING, idCmdFirst + CMD_NORMAL,
@@ -190,8 +195,12 @@ BOOL CALLBACK ClaudeContextMenu::InitBitmapOnce(PINIT_ONCE, PVOID, PVOID*)
     if (large1 && large1 != hIcon) DestroyIcon(large1);
     if (!hIcon) return TRUE;
     int sz = 16;
-    HDC hdcS = GetDC(nullptr); HDC hdcM = CreateCompatibleDC(hdcS);
+    HDC hdcS = GetDC(nullptr);
+    if (!hdcS) { DestroyIcon(hIcon); return TRUE; }
+    HDC hdcM = CreateCompatibleDC(hdcS);
+    if (!hdcM) { ReleaseDC(nullptr, hdcS); DestroyIcon(hIcon); return TRUE; }
     HBITMAP hbmp = CreateCompatibleBitmap(hdcS, sz, sz);
+    if (!hbmp) { DeleteDC(hdcM); ReleaseDC(nullptr, hdcS); DestroyIcon(hIcon); return TRUE; }
     HGDIOBJ hOld = SelectObject(hdcM, hbmp);
     DrawIconEx(hdcM, 0, 0, hIcon, sz, sz, 0, nullptr, DI_NORMAL);
     SelectObject(hdcM, hOld); DeleteDC(hdcM); ReleaseDC(nullptr, hdcS);

@@ -7,6 +7,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
@@ -46,8 +47,67 @@
             </TextBox>
         </Border>
 
+        <!-- 추가 폼 (기본 숨김) -->
+        <Border x:Name="AddPanel" Grid.Row="2" Visibility="Collapsed"
+                Background="#1E2430" BorderBrush="#2A3A5A" BorderThickness="1"
+                CornerRadius="6" Padding="14,10" Margin="16,6,16,0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="8"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="8"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <!-- 이름 -->
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="이름" Foreground="#888" VerticalAlignment="Center" FontSize="12"/>
+                    <TextBox x:Name="TxtAddName" Grid.Column="1" Padding="8,5"/>
+                </Grid>
+                <!-- 명령 -->
+                <Grid Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="6"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="명령" Foreground="#888" VerticalAlignment="Center" FontSize="12"/>
+                    <TextBox x:Name="TxtAddCommand" Grid.Column="1" Padding="8,5"
+                             ToolTip="실행 파일 전체 경로 또는 명령어"/>
+                    <Button Grid.Column="3" Content="찾아보기" Click="BtnBrowse_Click"
+                            Padding="10,5" FontSize="12"/>
+                </Grid>
+                <!-- 위치 + 저장/취소 -->
+                <Grid Grid.Row="4">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition Width="200"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="6"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="위치" Foreground="#888" VerticalAlignment="Center" FontSize="12"/>
+                    <ComboBox x:Name="CbAddLocation" Grid.Column="1" SelectedIndex="1">
+                        <ComboBoxItem Content="HKLM (모든 사용자, 관리자 필요)"/>
+                        <ComboBoxItem Content="HKCU (현재 사용자)"/>
+                    </ComboBox>
+                    <Button Grid.Column="3" Content="✅  저장" Click="BtnAddSave_Click"
+                            Padding="12,5" FontSize="12"
+                            Background="#1B3A1F" Foreground="#66BB6A" BorderBrush="#388E3C"/>
+                    <Button Grid.Column="5" Content="취소" Click="BtnAddCancel_Click"
+                            Padding="12,5" FontSize="12"/>
+                </Grid>
+            </Grid>
+        </Border>
+
         <!-- 목록 -->
-        <ListView x:Name="StartupList" Grid.Row="2" Margin="16,8,16,0"
+        <ListView x:Name="StartupList" Grid.Row="3" Margin="16,8,16,0"
                   Background="#1E1E1E" BorderThickness="1" BorderBrush="#333"
                   MouseDoubleClick="StartupList_MouseDoubleClick"
                   GridViewColumnHeader.Click="OnColumnHeaderClick">
@@ -126,11 +186,12 @@
         </ListView>
 
         <!-- 하단 -->
-        <Border Grid.Row="3" Background="#1E1E1E" BorderBrush="#333" BorderThickness="0,1,0,0"
+        <Border Grid.Row="4" Background="#1E1E1E" BorderBrush="#333" BorderThickness="0,1,0,0"
                 Padding="16,10" Margin="0,8,0,0">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
@@ -143,15 +204,19 @@
                 <Button Grid.Column="1" Content="🔄  새로고침" Click="BtnRefresh_Click"
                         Padding="10,6" Margin="0,0,6,0" FontSize="12"/>
 
-                <Button Grid.Column="2" x:Name="BtnEnable" Content="✅  활성화"
+                <Button Grid.Column="2" x:Name="BtnAdd" Content="➕  추가" Click="BtnAdd_Click"
+                        Padding="10,6" Margin="0,0,6,0" FontSize="12"
+                        Background="#252535" Foreground="#4FC3F7" BorderBrush="#2A3A5A"/>
+
+                <Button Grid.Column="3" x:Name="BtnEnable" Content="✅  활성화"
                         Click="BtnEnable_Click" Padding="10,6" Margin="0,0,6,0"
                         FontSize="12" Background="#1B3A1F" Foreground="#66BB6A" BorderBrush="#388E3C"/>
 
-                <Button Grid.Column="3" x:Name="BtnDisable" Content="⏸  비활성화"
+                <Button Grid.Column="4" x:Name="BtnDisable" Content="⏸  비활성화"
                         Click="BtnDisable_Click" Padding="10,6" Margin="0,0,6,0"
                         FontSize="12" Background="#3A2A1A" Foreground="#FFA726" BorderBrush="#F57C00"/>
 
-                <Button Grid.Column="4" x:Name="BtnDelete" Content="🗑  삭제"
+                <Button Grid.Column="5" x:Name="BtnDelete" Content="🗑  삭제"
                         Click="BtnDelete_Click" Padding="10,6"
                         FontSize="12" Background="#3A1A1A" Foreground="#EF5350" BorderBrush="#C62828"/>
             </Grid>

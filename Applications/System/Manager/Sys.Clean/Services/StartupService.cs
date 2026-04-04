@@ -105,6 +105,22 @@ public class StartupService
         catch { return false; }
     }
 
+    public bool Add(string name, string command, StartupLocation location)
+    {
+        var runPath = location == StartupLocation.HklmRun ? HklmRunPath : HkcuRunPath;
+        var hive = location == StartupLocation.HklmRun
+            ? Registry.LocalMachine
+            : Registry.CurrentUser;
+        try
+        {
+            using var key = hive.OpenSubKey(runPath, writable: true);
+            if (key == null) return false;
+            key.SetValue(name, command, RegistryValueKind.String);
+            return true;
+        }
+        catch { return false; }
+    }
+
     public bool Delete(StartupEntry entry)
     {
         var runPath = HklmRunPath;

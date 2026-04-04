@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -44,6 +45,7 @@ public partial class CleanerView : UserControl
 
         _analyzed = false;
         BtnClean.IsEnabled = false;
+        BtnCopy.IsEnabled = false;
         BtnAnalyze.Content = "⏹  중지";
         BtnAnalyze.Background = new SolidColorBrush(Color.FromRgb(0x3A, 0x1A, 0x1A));
         BtnAnalyze.Foreground = (Brush)Application.Current.FindResource("BrDanger");
@@ -132,7 +134,9 @@ public partial class CleanerView : UserControl
         if (totalCleanable > 0)
         {
             BtnClean.IsEnabled = true;
-            TbResultHeader.Text = $"총 {_targets.Count(t => !t.IsGroup && t.Size > 0)}개 항목 발견 — {CleanTarget.FormatSize(totalCleanable)} 정리 가능";
+            BtnCopy.IsEnabled = true;
+            int selectedCount = _targets.Count(t => !t.IsGroup && t.IsSelected && t.Size > 0);
+            TbResultHeader.Text = $"총 {_targets.Count(t => !t.IsGroup && t.Size > 0)}개 항목 발견 — {selectedCount}개 선택 ({CleanTarget.FormatSize(totalCleanable)} 정리 가능)";
             TbResultHeader.Foreground = (Brush)Application.Current.FindResource("BrAccentGreen");
         }
         else
@@ -147,8 +151,8 @@ public partial class CleanerView : UserControl
             TbHint.Visibility = Visibility.Visible;
     }
 
-    // ── 결과 카드 (우클릭 → 폴더 열기) ───────────────────────────────
-    private static Border BuildResultCard(CleanTarget target)
+    // ── 결과 카드 (우클릭 → 폴더 열기 / 지금 청소) ────────────────────
+    private Border BuildResultCard(CleanTarget target)
     {
         var accentBrush = (SolidColorBrush)Application.Current.FindResource("BrAccent");
         var sizeColor = target.Size > 0
@@ -182,7 +186,7 @@ public partial class CleanerView : UserControl
         grid.Children.Add(nameBlock);
         grid.Children.Add(sizeBlock);
 
-        // 우클릭 → 폴더 열기
+        // 우클릭 → 폴더 열기 / 지금 청소
         var menuOpen = new MenuItem { Header = "📂  폴더 열기" };
         menuOpen.Click += (_, _) =>
         {
@@ -196,8 +200,17 @@ public partial class CleanerView : UserControl
                 Process.Start("explorer.exe", folder);
         };
 
+        var menuCleanNow = new MenuItem
+        {
+            Header = "🧹  지금 청소",
+            IsEnabled = target.Size > 0
+        };
+        menuCleanNow.Click += async (_, _) => await CleanSingleTargetAsync(target);
+
         var ctx = new ContextMenu();
         ctx.Items.Add(menuOpen);
+        ctx.Items.Add(new Separator());
+        ctx.Items.Add(menuCleanNow);
 
         return new Border
         {
@@ -209,6 +222,52 @@ public partial class CleanerView : UserControl
             ToolTip = target.Description,
             ContextMenu = ctx
         };
+    }
+
+    // ── 개별 항목 즉시 청소 ────────────────────────────────────────────
+    private async Task CleanSingleTargetAsync(CleanTarget target)
+    {
+        if (_cts != null) return; // 이미 작업 중
+
+        var result = MessageBox.Show(
+            $"'{target.Name}' ({CleanTarget.FormatSize(target.Size)})을 지금 청소하시겠습니까?\n\n이 작업은 되돌릴 수 없습니다.",
+            "청소 확인",
+            MessageBoxButton.OKCancel,
+            MessageBoxImage.Warning);
+        if (result != MessageBoxResult.OK) return;
+
+        BtnClean.IsEnabled = false;
+        BtnAnalyze.IsEnabled = false;
+        BtnCopy.IsEnabled = false;
+        TbStatus.Text = $"청소 중: {target.Name}";
+
+        _cts = new CancellationTokenSource();
+        long cleaned = 0;
+        int errors = 0;
+        try
+        {
+            (cleaned, errors) = await _service.CleanTargetAsync(target, _cts.Token);
+            target.Size = 0;
+        }
+        finally
+        {
+            _cts?.Dispose();
+            _cts = null;
+            BtnAnalyze.IsEnabled = true;
+        }
+
+        if (cleaned > 0)
+            _history.Append(new CleanHistoryEntry(DateTime.Now, 1, cleaned));
+
+        var msg = errors > 0
+            ? $"'{target.Name}' 청소 완료!\n해제된 공간: {CleanTarget.FormatSize(cleaned)}\n실패: {errors}개 (사용 중인 파일 등)"
+            : $"'{target.Name}' 청소 완료!\n해제된 공간: {CleanTarget.FormatSize(cleaned)}";
+        MessageBox.Show(msg, "청소 완료", MessageBoxButton.OK, MessageBoxImage.Information);
+
+        TbStatus.Text = $"'{target.Name}' — {CleanTarget.FormatSize(cleaned)} 해제";
+        _analyzed = false;
+        UpdateResults();
+        (Application.Current.MainWindow as MainWindow)?.UpdateDiskInfo();
     }
 
     // ── 그룹 헤더 ────────────────────────────────────────────────────
@@ -248,6 +307,7 @@ public partial class CleanerView : UserControl
 
         BtnClean.IsEnabled = false;
         BtnAnalyze.IsEnabled = false;
+        BtnCopy.IsEnabled = false;
         PbProgress.Visibility = Visibility.Visible;
         PbProgress.IsIndeterminate = false;
         PbProgress.Value = 0;
@@ -296,12 +356,51 @@ public partial class CleanerView : UserControl
         TbResultHeader.Text = "청소가 완료되었습니다. 다시 분석하려면 분석 버튼을 클릭하세요.";
         TbResultHeader.Foreground = (Brush)Application.Current.FindResource("BrAccentGreen");
         ResultPanel.Children.Clear();
+
+        // 청소 후 사이드바 디스크 정보 갱신
+        (Application.Current.MainWindow as MainWindow)?.UpdateDiskInfo();
     }
 
+    // ── 전체 선택 ─────────────────────────────────────────────────────
     private void BtnSelectAll_Click(object sender, RoutedEventArgs e)
     {
         bool allSelected = _targets.Where(t => !t.IsGroup).All(t => t.IsSelected);
         foreach (var t in _targets.Where(t => !t.IsGroup))
             t.IsSelected = !allSelected;
+    }
+
+    // ── 결과 클립보드 복사 ────────────────────────────────────────────
+    private void BtnCopy_Click(object sender, RoutedEventArgs e)
+    {
+        var sb = new StringBuilder();
+        sb.AppendLine("=== Sys.Clean 분석 결과 ===");
+        sb.AppendLine($"분석 시각: {DateTime.Now:yyyy-MM-dd HH:mm:ss}");
+        sb.AppendLine();
+
+        string? currentGroup = null;
+        long total = 0;
+        foreach (var target in _targets)
+        {
+            if (target.IsGroup)
+            {
+                currentGroup = target.Name;
+                continue;
+            }
+            if (target.Size <= 0) continue;
+
+            if (currentGroup != null)
+            {
+                sb.AppendLine($"[{currentGroup}]");
+                currentGroup = null;
+            }
+            sb.AppendLine($"  {target.Name,-30}  {target.SizeText,10}");
+            total += target.Size;
+        }
+
+        sb.AppendLine();
+        sb.AppendLine($"총 정리 가능: {CleanTarget.FormatSize(total)}");
+
+        Clipboard.SetText(sb.ToString());
+        TbStatus.Text = "분석 결과를 클립보드에 복사했습니다.";
     }
 }

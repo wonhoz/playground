@@ -1,5 +1,6 @@
 using System.Windows;
 using System.Windows.Controls;
+using Microsoft.Win32;
 using SysClean.Models;
 using SysClean.Services;
 
@@ -90,7 +91,6 @@ public partial class StartupView : UserControl
         bool newState = !entry.IsEnabled;
         if (_service.SetEnabled(entry, newState))
         {
-            // IsEnabled는 서비스 내에서 업데이트됨 (바인딩 갱신을 위해 리스트 재할당)
             StartupList.Items.Refresh();
             TbStatus.Text = $"'{entry.Name}' — {(newState ? "활성화" : "비활성화")} 완료";
         }
@@ -125,5 +125,71 @@ public partial class StartupView : UserControl
 
         ApplyFilter();
         TbStatus.Text = $"{deleted}개 항목 삭제됨";
+    }
+
+    // ── 추가 폼 토글 ──────────────────────────────────────────────────
+    private void BtnAdd_Click(object sender, RoutedEventArgs e)
+    {
+        bool isVisible = AddPanel.Visibility == Visibility.Visible;
+        AddPanel.Visibility = isVisible ? Visibility.Collapsed : Visibility.Visible;
+        if (!isVisible)
+        {
+            TxtAddName.Text = "";
+            TxtAddCommand.Text = "";
+            CbAddLocation.SelectedIndex = 1; // HKCU 기본
+            TxtAddName.Focus();
+        }
+    }
+
+    private void BtnAddCancel_Click(object sender, RoutedEventArgs e)
+    {
+        AddPanel.Visibility = Visibility.Collapsed;
+    }
+
+    private void BtnBrowse_Click(object sender, RoutedEventArgs e)
+    {
+        var dlg = new OpenFileDialog
+        {
+            Title = "실행 파일 선택",
+            Filter = "실행 파일 (*.exe)|*.exe|모든 파일 (*.*)|*.*",
+            CheckFileExists = true
+        };
+        if (dlg.ShowDialog() == true)
+            TxtAddCommand.Text = $"\"{dlg.FileName}\"";
+    }
+
+    private void BtnAddSave_Click(object sender, RoutedEventArgs e)
+    {
+        var name = TxtAddName.Text.Trim();
+        var command = TxtAddCommand.Text.Trim();
+
+        if (string.IsNullOrEmpty(name))
+        {
+            MessageBox.Show("이름을 입력하세요.", "입력 오류", MessageBoxButton.OK, MessageBoxImage.Warning);
+            TxtAddName.Focus();
+            return;
+        }
+        if (string.IsNullOrEmpty(command))
+        {
+            MessageBox.Show("명령(실행 파일 경로)을 입력하세요.", "입력 오류", MessageBoxButton.OK, MessageBoxImage.Warning);
+            TxtAddCommand.Focus();
+            return;
+        }
+
+        var location = CbAddLocation.SelectedIndex == 0
+            ? StartupLocation.HklmRun
+            : StartupLocation.HkcuRun;
+
+        if (_service.Add(name, command, location))
+        {
+            AddPanel.Visibility = Visibility.Collapsed;
+            Refresh();
+            TbStatus.Text = $"'{name}' 시작 프로그램에 추가됨";
+        }
+        else
+        {
+            MessageBox.Show("추가에 실패했습니다. HKLM(모든 사용자)은 관리자 권한이 필요합니다.",
+                "오류", MessageBoxButton.OK, MessageBoxImage.Warning);
+        }
     }
 }

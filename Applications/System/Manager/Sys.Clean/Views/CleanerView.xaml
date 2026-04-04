@@ -106,6 +106,7 @@
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
                 <!-- 상태 텍스트 -->
@@ -120,15 +121,21 @@
                         Click="BtnSelectAll_Click" Margin="0,0,6,0"
                         Padding="10,6" FontSize="12"/>
 
+                <!-- 복사 버튼 -->
+                <Button Grid.Column="2" x:Name="BtnCopy" Content="📋  복사"
+                        Click="BtnCopy_Click" Margin="0,0,6,0"
+                        Padding="10,6" FontSize="12" IsEnabled="False"
+                        ToolTip="분석 결과를 클립보드에 복사"/>
+
                 <!-- 분석 버튼 -->
-                <Button Grid.Column="2" x:Name="BtnAnalyze" Content="🔍  분석"
+                <Button Grid.Column="3" x:Name="BtnAnalyze" Content="🔍  분석"
                         Click="BtnAnalyze_Click" Margin="0,0,6,0"
                         Padding="14,7" FontSize="13"
                         Background="{StaticResource BrAccentDim}" Foreground="{StaticResource BrAccent}"
                         BorderBrush="{StaticResource BrAccent}"/>
 
                 <!-- 청소 버튼 -->
-                <Button Grid.Column="3" x:Name="BtnClean" Content="🧹  청소 실행"
+                <Button Grid.Column="4" x:Name="BtnClean" Content="🧹  청소 실행"
                         Click="BtnClean_Click" IsEnabled="False"
                         Padding="14,7" FontSize="13"
                         Background="#1B3A1F" Foreground="#66BB6A" BorderBrush="#388E3C"/>

@@ -117,11 +117,9 @@ public class RegistryService
         using var key = Registry.LocalMachine.OpenSubKey(keyPath);
         if (key == null) return;
 
-        int checked_ = 0;
         foreach (var valName in key.GetValueNames())
         {
             ct.ThrowIfCancellationRequested();
-            if (++checked_ > 500) break; // 너무 많으면 제한
 
             var count = key.GetValue(valName);
             if (!File.Exists(valName))
@@ -210,12 +208,24 @@ public class RegistryService
 
     private static void FixIssue(RegistryIssue issue)
     {
-        // HKLM\... 형식에서 실제 키 경로 추출
+        // HKLM\... 또는 HKCU\... 형식에서 실제 키 경로 추출
         var path = issue.KeyPath;
-        if (!path.StartsWith(@"HKLM\")) return;
+        RegistryKey hive;
+        string subPath;
 
-        var subPath = path[@"HKLM\".Length..];
-        using var key = Registry.LocalMachine.OpenSubKey(subPath, writable: true);
+        if (path.StartsWith(@"HKLM\"))
+        {
+            hive = Registry.LocalMachine;
+            subPath = path[@"HKLM\".Length..];
+        }
+        else if (path.StartsWith(@"HKCU\"))
+        {
+            hive = Registry.CurrentUser;
+            subPath = path[@"HKCU\".Length..];
+        }
+        else return;
+
+        using var key = hive.OpenSubKey(subPath, writable: true);
         if (key == null) return;
 
         if (issue.Category == "공유 DLL" || issue.Category == "앱 경로" || issue.Category == "시작 프로그램")
@@ -228,7 +238,7 @@ public class RegistryService
             // 상위 키에서 서브키 삭제
             var parentPath = subPath[..subPath.LastIndexOf('\\')];
             var subKeyName = subPath[(subPath.LastIndexOf('\\') + 1)..];
-            using var parentKey = Registry.LocalMachine.OpenSubKey(parentPath, writable: true);
+            using var parentKey = hive.OpenSubKey(parentPath, writable: true);
             parentKey?.DeleteSubKeyTree(subKeyName, throwOnMissingSubKey: false);
         }
     }

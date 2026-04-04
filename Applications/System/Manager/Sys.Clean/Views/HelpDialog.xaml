@@ -2,7 +2,7 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="도움말 — Sys.Clean"
-        Width="540" Height="520"
+        Width="560" Height="600"
         Background="#1A1A1A"
         FontFamily="Segoe UI" FontSize="13"
         WindowStartupLocation="CenterOwner"
@@ -53,7 +53,7 @@
                             </Border>
                             <TextBlock Grid.Column="1" Text="청소 실행 (분석 완료 후)" Foreground="#C0C0C0" VerticalAlignment="Center"/>
                         </Grid>
-                        <Grid>
+                        <Grid Margin="0,0,0,6">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="160"/>
                                 <ColumnDefinition Width="*"/>
@@ -62,6 +62,26 @@
                                 <TextBlock Text="Ctrl+A" FontFamily="Consolas" FontSize="12" Foreground="#FF6B35"/>
                             </Border>
                             <TextBlock Grid.Column="1" Text="전체 항목 선택 / 해제" Foreground="#C0C0C0" VerticalAlignment="Center"/>
+                        </Grid>
+                        <Grid Margin="0,0,0,6">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="160"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Border Background="#252525" CornerRadius="4" Padding="6,3" HorizontalAlignment="Left">
+                                <TextBlock Text="우클릭 → 지금 청소" FontFamily="Consolas" FontSize="12" Foreground="#FF6B35"/>
+                            </Border>
+                            <TextBlock Grid.Column="1" Text="결과 항목을 개별로 즉시 청소" Foreground="#C0C0C0" VerticalAlignment="Center"/>
+                        </Grid>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="160"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Border Background="#252525" CornerRadius="4" Padding="6,3" HorizontalAlignment="Left">
+                                <TextBlock Text="📋  복사 버튼" FontFamily="Consolas" FontSize="12" Foreground="#FF6B35"/>
+                            </Border>
+                            <TextBlock Grid.Column="1" Text="분석 결과 전체를 클립보드에 복사" Foreground="#C0C0C0" VerticalAlignment="Center"/>
                         </Grid>
                     </StackPanel>
                 </Border>
@@ -105,7 +125,7 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <TextBlock Text="🧹  시스템 청소" FontWeight="SemiBold" Foreground="#E0E0E0"/>
-                            <TextBlock Grid.Column="1" Text="임시 파일, 브라우저 캐시, 개발자 캐시 등 불필요한 파일 삭제"
+                            <TextBlock Grid.Column="1" Text="임시 파일, 브라우저 캐시, 개발자 캐시 등 불필요한 파일 삭제. 항목 우클릭으로 개별 즉시 청소 가능."
                                        Foreground="#888" TextWrapping="Wrap"/>
                         </Grid>
                         <Grid Margin="0,0,0,8">
@@ -114,7 +134,7 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <TextBlock Text="🔧  레지스트리" FontWeight="SemiBold" Foreground="#E0E0E0"/>
-                            <TextBlock Grid.Column="1" Text="존재하지 않는 파일을 참조하는 레지스트리 항목 검색·삭제 (자동 백업)"
+                            <TextBlock Grid.Column="1" Text="존재하지 않는 파일을 참조하는 레지스트리 항목 검색·삭제 (자동 백업, HKLM/HKCU 모두 지원)"
                                        Foreground="#888" TextWrapping="Wrap"/>
                         </Grid>
                         <Grid Margin="0,0,0,8">
@@ -123,7 +143,7 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <TextBlock Text="🚀  시작 프로그램" FontWeight="SemiBold" Foreground="#E0E0E0"/>
-                            <TextBlock Grid.Column="1" Text="부팅 시 자동 실행 프로그램 관리 (활성화/비활성화/삭제)"
+                            <TextBlock Grid.Column="1" Text="부팅 시 자동 실행 프로그램 관리. 활성화/비활성화/삭제 및 새 항목 추가(➕  추가 버튼) 가능."
                                        Foreground="#888" TextWrapping="Wrap"/>
                         </Grid>
                         <Grid Margin="0,0,0,8">

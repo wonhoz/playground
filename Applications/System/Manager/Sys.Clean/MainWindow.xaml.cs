@@ -61,7 +61,7 @@ public partial class MainWindow : Window
     }
 
     // ── 디스크 상태 ────────────────────────────────────────────────────
-    private void UpdateDiskInfo()
+    internal void UpdateDiskInfo()
     {
         try
         {

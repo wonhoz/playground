@@ -6,6 +6,16 @@ public static class CharDatabase
 {
     public static readonly List<CharEntry> All = BuildAll();
 
+    // char 문자열 → CharEntry O(1) 조회용 (최근/즐겨찾기 탭 O(N²) 방지)
+    public static readonly Dictionary<string, CharEntry> AllByChar = BuildByChar(All);
+
+    private static Dictionary<string, CharEntry> BuildByChar(List<CharEntry> all)
+    {
+        var dict = new Dictionary<string, CharEntry>();
+        foreach (var e in all) dict.TryAdd(e.Char, e);
+        return dict;
+    }
+
     private static List<CharEntry> BuildAll()
     {
         var list = new List<CharEntry>();

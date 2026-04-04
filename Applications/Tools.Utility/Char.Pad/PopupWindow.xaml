@@ -146,6 +146,7 @@
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
                             <!-- 단축키 행들 -->
@@ -164,16 +165,19 @@
                             <TextBlock Grid.Row="4" Grid.Column="0" Text="← → ↑ ↓"         Style="{StaticResource KeyStyle}"/>
                             <TextBlock Grid.Row="4" Grid.Column="2" Text="그리드 내 문자 이동" Style="{StaticResource DescStyle}"/>
 
-                            <TextBlock Grid.Row="5" Grid.Column="0" Text="좌클릭"            Style="{StaticResource KeyStyle}"/>
-                            <TextBlock Grid.Row="5" Grid.Column="2" Text="문자 삽입 (클립보드 → 이전 창에 붙여넣기)" Style="{StaticResource DescStyle}"/>
+                            <TextBlock Grid.Row="5" Grid.Column="0" Text="Esc (그리드)"     Style="{StaticResource KeyStyle}"/>
+                            <TextBlock Grid.Row="5" Grid.Column="2" Text="검색창으로 포커스 복귀" Style="{StaticResource DescStyle}"/>
 
-                            <TextBlock Grid.Row="6" Grid.Column="0" Text="Shift+클릭"        Style="{StaticResource KeyStyle}"/>
-                            <TextBlock Grid.Row="6" Grid.Column="2" Text="클립보드 복사만 (붙여넣기 없음)" Style="{StaticResource DescStyle}"/>
+                            <TextBlock Grid.Row="6" Grid.Column="0" Text="좌클릭"            Style="{StaticResource KeyStyle}"/>
+                            <TextBlock Grid.Row="6" Grid.Column="2" Text="문자 삽입 (클립보드 → 이전 창에 붙여넣기)" Style="{StaticResource DescStyle}"/>
 
-                            <TextBlock Grid.Row="7" Grid.Column="0" Text="우클릭"            Style="{StaticResource KeyStyle}"/>
-                            <TextBlock Grid.Row="7" Grid.Column="2" Text="즐겨찾기 추가/제거" Style="{StaticResource DescStyle}"/>
+                            <TextBlock Grid.Row="7" Grid.Column="0" Text="Shift+클릭"        Style="{StaticResource KeyStyle}"/>
+                            <TextBlock Grid.Row="7" Grid.Column="2" Text="클립보드 복사만 (붙여넣기 없음)" Style="{StaticResource DescStyle}"/>
 
-                            <TextBlock Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="3"
+                            <TextBlock Grid.Row="8" Grid.Column="0" Text="우클릭"            Style="{StaticResource KeyStyle}"/>
+                            <TextBlock Grid.Row="8" Grid.Column="2" Text="즐겨찾기 추가/제거" Style="{StaticResource DescStyle}"/>
+
+                            <TextBlock Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="3"
                                        Text="아무 곳이나 클릭하면 닫힙니다"
                                        Foreground="{StaticResource TextSecondary}"
                                        FontFamily="Segoe UI" FontSize="11"

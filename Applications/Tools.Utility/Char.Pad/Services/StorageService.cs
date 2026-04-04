@@ -32,6 +32,10 @@ public class StorageService : IDisposable
                 char       TEXT NOT NULL PRIMARY KEY,
                 sort_order INTEGER NOT NULL DEFAULT 0
             );
+            CREATE TABLE IF NOT EXISTS settings (
+                key   TEXT NOT NULL PRIMARY KEY,
+                value TEXT NOT NULL
+            );
             """;
         cmd.ExecuteNonQuery();
     }
@@ -111,6 +115,28 @@ public class StorageService : IDisposable
         using var reader = cmd.ExecuteReader();
         while (reader.Read()) result.Add(reader.GetString(0));
         return result;
+    }
+
+    // ── Settings ─────────────────────────────────────────────────────────
+
+    public string? GetSetting(string key)
+    {
+        using var cmd = _db.CreateCommand();
+        cmd.CommandText = "SELECT value FROM settings WHERE key = $key";
+        cmd.Parameters.AddWithValue("$key", key);
+        return cmd.ExecuteScalar() as string;
+    }
+
+    public void SetSetting(string key, string value)
+    {
+        using var cmd = _db.CreateCommand();
+        cmd.CommandText = """
+            INSERT INTO settings (key, value) VALUES ($key, $value)
+            ON CONFLICT(key) DO UPDATE SET value = $value;
+            """;
+        cmd.Parameters.AddWithValue("$key", key);
+        cmd.Parameters.AddWithValue("$value", value);
+        cmd.ExecuteNonQuery();
     }
 
     public void Dispose() => _db.Dispose();

@@ -8,10 +8,11 @@ public partial class PopupWindow : System.Windows.Window
     [DllImport("user32.dll")] static extern bool SetForegroundWindow(IntPtr hWnd);
     [DllImport("dwmapi.dll")] static extern int DwmSetWindowAttribute(IntPtr hwnd, int attr, ref int val, int size);
 
-    private readonly StorageService _storage;
+    private readonly StorageService  _storage;
     private IntPtr    _targetHwnd;
     private string    _activeTab   = "recent";
     private bool      _initialized = false;
+    private DispatcherTimer? _searchTimer;
 
     private static readonly (string Id, string Label)[] Tabs =
     {
@@ -29,6 +30,8 @@ public partial class PopupWindow : System.Windows.Window
     {
         _storage = storage;
         InitializeComponent();
+        _searchTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(150) };
+        _searchTimer.Tick += (_, _) => { _searchTimer.Stop(); RefreshGrid(); };
         Loaded += OnLoaded;
     }
 
@@ -40,7 +43,8 @@ public partial class PopupWindow : System.Windows.Window
 
         BuildTabs();
         _initialized = true;
-        SwitchTab("recent");
+        var lastTab = _storage.GetSetting("last_tab") ?? "recent";
+        SwitchTab(lastTab);
         SearchBox.Focus();
     }
 
@@ -125,6 +129,7 @@ public partial class PopupWindow : System.Windows.Window
     private void SwitchTab(string tabId)
     {
         _activeTab = tabId;
+        _storage.SetSetting("last_tab", tabId);
 
         foreach (WpfButton b in TabPanel.Children)
         {
@@ -145,8 +150,9 @@ public partial class PopupWindow : System.Windows.Window
 
         var query = SearchBox.Text.Trim();
         IEnumerable<CharEntry> entries;
+        bool isSearchResult = !string.IsNullOrEmpty(query);
 
-        if (!string.IsNullOrEmpty(query))
+        if (isSearchResult)
         {
             entries = CharDatabase.Search(query);
             StatusText.Text = $"검색 결과";
@@ -155,8 +161,12 @@ public partial class PopupWindow : System.Windows.Window
         {
             entries = _activeTab switch
             {
-                "recent"   => _storage.GetRecents().Select(c => CharDatabase.All.FirstOrDefault(e => e.Char == c)).Where(e => e is not null).Select(e => e!),
-                "favorite" => _storage.GetFavorites().Select(c => CharDatabase.All.FirstOrDefault(e => e.Char == c)).Where(e => e is not null).Select(e => e!),
+                "recent"   => _storage.GetRecents()
+                                .Select(c => CharDatabase.AllByChar.GetValueOrDefault(c))
+                                .Where(e => e is not null).Select(e => e!),
+                "favorite" => _storage.GetFavorites()
+                                .Select(c => CharDatabase.AllByChar.GetValueOrDefault(c))
+                                .Where(e => e is not null).Select(e => e!),
                 _          => CharDatabase.GetByCategory(_activeTab),
             };
             StatusText.Text = _activeTab switch
@@ -178,11 +188,25 @@ public partial class PopupWindow : System.Windows.Window
 
         CharGrid.Children.Clear();
         foreach (var entry in list)
-            CharGrid.Children.Add(MakeCharButton(entry, favSet));
+            CharGrid.Children.Add(MakeCharButton(entry, favSet, isSearchResult));
+    }
+
+    // ── Unicode 코드포인트 툴팁 생성 ────────────────────────────────────
+    private static string GetUnicodeTooltip(CharEntry entry)
+    {
+        var codepoints = new System.Text.StringBuilder();
+        for (int i = 0; i < entry.Char.Length; )
+        {
+            int cp = char.ConvertToUtf32(entry.Char, i);
+            if (codepoints.Length > 0) codepoints.Append(' ');
+            codepoints.Append($"U+{cp:X4}");
+            i += char.IsSurrogatePair(entry.Char, i) ? 2 : 1;
+        }
+        return $"{entry.Char}  {entry.Name}  {codepoints}";
     }
 
     // ── 문자 버튼 생성 ──────────────────────────────────────────────────
-    private UIElement MakeCharButton(CharEntry entry, HashSet<string> favSet)
+    private UIElement MakeCharButton(CharEntry entry, HashSet<string> favSet, bool isSearchResult = false)
     {
         bool isFav = favSet.Contains(entry.Char);
 
@@ -190,12 +214,14 @@ public partial class PopupWindow : System.Windows.Window
 
         var border = new Border
         {
-            Background    = (SolidColorBrush)FindResource("TabInactive"),
-            CornerRadius  = new CornerRadius(8),
-            Cursor        = System.Windows.Input.Cursors.Hand,
-            ToolTip       = $"{entry.Char}  {entry.Name}",
-            Focusable     = true,
-            Tag           = entry,
+            Background      = (SolidColorBrush)FindResource("TabInactive"),
+            BorderBrush     = isSearchResult ? (SolidColorBrush)FindResource("AccentBrush") : System.Windows.Media.Brushes.Transparent,
+            BorderThickness = new Thickness(isSearchResult ? 1 : 0),
+            CornerRadius    = new CornerRadius(8),
+            Cursor          = System.Windows.Input.Cursors.Hand,
+            ToolTip         = GetUnicodeTooltip(entry),
+            Focusable       = true,
+            Tag             = entry,
         };
 
         var tb = new TextBlock
@@ -373,7 +399,11 @@ public partial class PopupWindow : System.Windows.Window
         if (!_initialized) return;
         SearchPlaceholder.Visibility = string.IsNullOrEmpty(SearchBox.Text)
             ? Visibility.Visible : Visibility.Collapsed;
-        RefreshGrid();
+        _searchTimer?.Stop();
+        if (string.IsNullOrEmpty(SearchBox.Text))
+            RefreshGrid();   // 검색어 지울 때는 즉시 갱신
+        else
+            _searchTimer?.Start();
     }
 
     private void SearchBox_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)

@@ -325,10 +325,16 @@ public partial class MainWindow : Window
     el = document.getElementById(stripped);
     if (el) {{ el.scrollIntoView({{behavior:'smooth'}}); return; }}
     var headings = document.querySelectorAll('h1,h2,h3,h4,h5,h6');
+    var norm = function(s) {{ return s.replace(/[\-\s\.·•■]+/g,'').toLowerCase(); }};
+    var idNorm = norm(id);
     for (var h of headings) {{
-        if (!h.id) continue;
-        if (h.id.toLowerCase() === id.toLowerCase() ||
-            h.id.toLowerCase() === stripped.toLowerCase()) {{
+        if (h.id && (h.id.toLowerCase() === id.toLowerCase() ||
+            h.id.toLowerCase() === stripped.toLowerCase())) {{
+            h.scrollIntoView({{behavior:'smooth'}}); return;
+        }}
+    }}
+    for (var h of headings) {{
+        if (norm(h.textContent) === idNorm) {{
             h.scrollIntoView({{behavior:'smooth'}}); return;
         }}
     }}

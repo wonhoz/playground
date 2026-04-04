@@ -92,10 +92,11 @@ public partial class RegionSelectWindow : Window
             return;
         }
 
-        // DPI 스케일 적용 → 물리 픽셀(CopyFromScreen 좌표계)로 변환
+        // WPF 논리 좌표 → 스크린 물리 픽셀 변환 (다중 모니터 DPI 혼재 대응)
+        var topLeft = PointToScreen(new System.Windows.Point(x, y));
         var dpi     = VisualTreeHelper.GetDpi(this);
-        var screenX = (int)Math.Round((Left + x) * dpi.DpiScaleX);
-        var screenY = (int)Math.Round((Top  + y) * dpi.DpiScaleY);
+        var screenX = (int)Math.Round(topLeft.X);
+        var screenY = (int)Math.Round(topLeft.Y);
         var physW   = (int)Math.Round(w * dpi.DpiScaleX);
         var physH   = (int)Math.Round(h * dpi.DpiScaleY);
 

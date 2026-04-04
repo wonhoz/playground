@@ -8,6 +8,7 @@ using System.Windows.Threading;
 using Microsoft.Win32;
 using ScreenRecorder.Models;
 using ScreenRecorder.Services;
+using System.Text;
 
 namespace ScreenRecorder;
 
@@ -15,6 +16,19 @@ public partial class MainWindow : Window
 {
     [DllImport("dwmapi.dll", PreserveSig = true)]
     private static extern int DwmSetWindowAttribute(nint hwnd, int attr, ref int value, int size);
+
+    // 글로벌 단축키
+    [DllImport("user32.dll")]
+    private static extern bool RegisterHotKey(nint hWnd, int id, uint fsModifiers, uint vk);
+    [DllImport("user32.dll")]
+    private static extern bool UnregisterHotKey(nint hWnd, int id);
+
+    private const int HotkeyRecord  = 1;  // F9
+    private const int HotkeyPause   = 2;  // F10
+    private const int HotkeyStop    = 3;  // F11
+    private const uint VK_F9  = 0x78;
+    private const uint VK_F10 = 0x79;
+    private const uint VK_F11 = 0x7A;
 
     private readonly RecordingSettings _settings = RecordingSettings.Load();
     private ScreenCaptureService? _captureService;
@@ -27,6 +41,8 @@ public partial class MainWindow : Window
     private enum RecordState { Idle, Countdown, Recording, Paused }
     private RecordState _state = RecordState.Idle;
     private CancellationTokenSource? _countdownCts;
+    private DispatcherTimer? _maxTimeTimer;
+    private HwndSource? _hwndSource;
 
     private static SolidColorBrush ColorBrush(string hex) =>
         new((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString(hex)!);
@@ -37,6 +53,17 @@ public partial class MainWindow : Window
         Loaded += OnLoaded;
 
         OutputFolderText.Text = _settings.OutputFolder;
+
+        // 저장된 최대 녹화 시간 복원
+        MaxTimeCombo.SelectedIndex = _settings.MaxRecordingSeconds switch
+        {
+            30    => 1,
+            60    => 2,
+            180   => 3,
+            300   => 4,
+            600   => 5,
+            _     => 0
+        };
 
         // 저장된 FPS 복원
         FpsCombo.SelectedIndex = _settings.FrameRate switch
@@ -76,6 +103,12 @@ public partial class MainWindow : Window
         {
             int value = 1;
             DwmSetWindowAttribute(source.Handle, 20, ref value, sizeof(int));
+
+            _hwndSource = source;
+            _hwndSource.AddHook(WndProc);
+            RegisterHotKey(source.Handle, HotkeyRecord, 0, VK_F9);
+            RegisterHotKey(source.Handle, HotkeyPause,  0, VK_F10);
+            RegisterHotKey(source.Handle, HotkeyStop,   0, VK_F11);
         }
 
         // 복원된 영역 정보 표시
@@ -88,6 +121,32 @@ public partial class MainWindow : Window
         LastRegionBtn.IsEnabled = _settings.LastRegionWidth > 0;
 
         CheckFfmpeg();
+    }
+
+    private nint WndProc(nint hwnd, int msg, nint wParam, nint lParam, ref bool handled)
+    {
+        const int WM_HOTKEY = 0x0312;
+        if (msg == WM_HOTKEY)
+        {
+            switch ((int)wParam)
+            {
+                case HotkeyRecord:
+                    Record_Click(this, new RoutedEventArgs());
+                    handled = true;
+                    break;
+                case HotkeyPause:
+                    if (_state is RecordState.Recording or RecordState.Paused)
+                        Pause_Click(this, new RoutedEventArgs());
+                    handled = true;
+                    break;
+                case HotkeyStop:
+                    if (_state is RecordState.Recording or RecordState.Paused)
+                        Stop_Click(this, new RoutedEventArgs());
+                    handled = true;
+                    break;
+            }
+        }
+        return nint.Zero;
     }
 
     private void CheckFfmpeg()
@@ -306,6 +365,55 @@ public partial class MainWindow : Window
         }
     }
 
+    private void MaxTimeCombo_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+    {
+        if (!IsLoaded) return;
+        _settings.MaxRecordingSeconds = MaxTimeCombo.SelectedIndex switch
+        {
+            1 => 30,
+            2 => 60,
+            3 => 180,
+            4 => 300,
+            5 => 600,
+            _ => 0
+        };
+        _settings.Save();
+    }
+
+    private void RefreshFfmpeg_Click(object sender, RoutedEventArgs e)
+    {
+        CheckFfmpeg();
+    }
+
+    private void Help_Click(object sender, RoutedEventArgs e)
+    {
+        var msg = new StringBuilder();
+        msg.AppendLine("Screen.Recorder 사용법");
+        msg.AppendLine();
+        msg.AppendLine("【 영역 선택 】");
+        msg.AppendLine("  ▣ 영역 선택 — 드래그로 녹화 범위 지정");
+        msg.AppendLine("  ⬜ 전체 화면 — 기본 모니터 전체 캡처");
+        msg.AppendLine("  ↩ 이전 영역 — 마지막으로 선택한 영역 재사용");
+        msg.AppendLine();
+        msg.AppendLine("【 글로벌 단축키 】");
+        msg.AppendLine("  F9  — 녹화 시작 / 카운트다운 취소");
+        msg.AppendLine("  F10 — 일시정지 / 재개");
+        msg.AppendLine("  F11 — 녹화 정지 및 저장");
+        msg.AppendLine();
+        msg.AppendLine("【 설정 】");
+        msg.AppendLine("  출력 형식: MP4 (FFmpeg 필요) / GIF");
+        msg.AppendLine("  FPS: 10 / 15 / 24 / 30");
+        msg.AppendLine("  최대 시간: 지정 시간 도달 시 자동 정지");
+        msg.AppendLine("  마우스 포인터 포함 여부 선택 가능");
+        msg.AppendLine();
+        msg.AppendLine("【 FFmpeg 】");
+        msg.AppendLine("  MP4 녹화에 FFmpeg가 필요합니다.");
+        msg.AppendLine("  '설치' 버튼으로 winget/choco 자동 설치,");
+        msg.AppendLine("  '↻' 버튼으로 설치 후 재검색 가능합니다.");
+
+        System.Windows.MessageBox.Show(msg.ToString(), "사용법", MessageBoxButton.OK, MessageBoxImage.Information);
+    }
+
     private void FpsCombo_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
     {
         if (!IsLoaded) return;
@@ -391,6 +499,22 @@ public partial class MainWindow : Window
 
         SetState(RecordState.Recording);
 
+        // 최대 녹화 시간 타이머
+        if (_settings.MaxRecordingSeconds > 0)
+        {
+            _maxTimeTimer = new DispatcherTimer
+            {
+                Interval = TimeSpan.FromSeconds(_settings.MaxRecordingSeconds)
+            };
+            _maxTimeTimer.Tick += async (_, _) =>
+            {
+                _maxTimeTimer.Stop();
+                if (_state is RecordState.Recording or RecordState.Paused)
+                    await StopRecordingAsync();
+            };
+            _maxTimeTimer.Start();
+        }
+
         try
         {
             await _captureService.StartAsync();
@@ -399,6 +523,42 @@ public partial class MainWindow : Window
         {
             System.Windows.MessageBox.Show($"녹화 오류: {ex.Message}", "오류", MessageBoxButton.OK, MessageBoxImage.Error);
             SetState(RecordState.Idle);
+        }
+    }
+
+    private async Task StopRecordingAsync()
+    {
+        _maxTimeTimer?.Stop();
+        _maxTimeTimer = null;
+
+        StatusText.Text = "인코딩 중...";
+        StatusDot.Fill = ColorBrush("#F39C12");
+
+        string? completedPath = null;
+        try
+        {
+            completedPath = await _captureService!.StopAsync();
+            SetState(RecordState.Idle);
+        }
+        catch (Exception ex)
+        {
+            System.Windows.MessageBox.Show($"인코딩 오류: {ex.Message}", "오류", MessageBoxButton.OK, MessageBoxImage.Error);
+            SetState(RecordState.Idle);
+        }
+        finally
+        {
+            _captureService?.Dispose();
+            _captureService = null;
+        }
+
+        if (completedPath is not null)
+        {
+            var result = System.Windows.MessageBox.Show(
+                $"녹화 완료!\n{completedPath}\n\n파일을 열까요?",
+                "Screen.Recorder", MessageBoxButton.YesNo, MessageBoxImage.Information);
+
+            if (result == MessageBoxResult.Yes)
+                Process.Start(new ProcessStartInfo(completedPath) { UseShellExecute = true });
         }
     }
 
@@ -419,37 +579,7 @@ public partial class MainWindow : Window
     private async void Stop_Click(object sender, RoutedEventArgs e)
     {
         if (_state is RecordState.Recording or RecordState.Paused)
-        {
-            StatusText.Text = "인코딩 중...";
-            StatusDot.Fill = ColorBrush("#F39C12");
-
-            string? completedPath = null;
-            try
-            {
-                completedPath = await _captureService!.StopAsync();
-                SetState(RecordState.Idle);
-            }
-            catch (Exception ex)
-            {
-                System.Windows.MessageBox.Show($"인코딩 오류: {ex.Message}", "오류", MessageBoxButton.OK, MessageBoxImage.Error);
-                SetState(RecordState.Idle);
-            }
-            finally
-            {
-                _captureService?.Dispose();
-                _captureService = null;
-            }
-
-            if (completedPath is not null)
-            {
-                var result = System.Windows.MessageBox.Show(
-                    $"녹화 완료!\n{completedPath}\n\n파일을 열까요?",
-                    "Screen.Recorder", MessageBoxButton.YesNo, MessageBoxImage.Information);
-
-                if (result == MessageBoxResult.Yes)
-                    Process.Start(new ProcessStartInfo(completedPath) { UseShellExecute = true });
-            }
-        }
+            await StopRecordingAsync();
     }
 
     private void SetState(RecordState state)
@@ -534,6 +664,13 @@ public partial class MainWindow : Window
 
     protected override void OnClosed(EventArgs e)
     {
+        if (_hwndSource is not null)
+        {
+            UnregisterHotKey(_hwndSource.Handle, HotkeyRecord);
+            UnregisterHotKey(_hwndSource.Handle, HotkeyPause);
+            UnregisterHotKey(_hwndSource.Handle, HotkeyStop);
+        }
+        _maxTimeTimer?.Stop();
         _captureService?.Dispose();
         _timer.Stop();
         base.OnClosed(e);

@@ -91,9 +91,16 @@ public sealed class ScreenCaptureService : IDisposable
             }
 
             var framePath = Path.Combine(_tempDir!, $"frame_{frameIndex:D6}.png");
-            CaptureFrame(framePath);
-            _framePaths.Add(framePath);
-            frameIndex++;
+            try
+            {
+                CaptureFrame(framePath);
+                _framePaths.Add(framePath);
+                frameIndex++;
+            }
+            catch
+            {
+                // 단일 프레임 캡처 실패 시 해당 프레임 스킵 — 루프 유지
+            }
 
             nextFrameMs += intervalMs;
             var waitMs = nextFrameMs - sw.Elapsed.TotalMilliseconds;
@@ -136,11 +143,14 @@ public sealed class ScreenCaptureService : IDisposable
 
     public void Resume() => _paused = false;
 
-    public async Task<string> StopAsync()
+    public async Task<string?> StopAsync()
     {
         _cts?.Cancel();
         if (_captureTask is not null)
             await _captureTask;
+
+        if (_framePaths.Count == 0)
+            return null;
 
         // 인코딩
         if (_isGif)
@@ -148,7 +158,7 @@ public sealed class ScreenCaptureService : IDisposable
         else
             await EncodeMp4Async();
 
-        return _outputPath;
+        return System.IO.File.Exists(_outputPath) ? _outputPath : null;
     }
 
     private async Task EncodeMp4Async()

@@ -11,7 +11,8 @@
         WindowStyle="None"
         AllowsTransparency="True"
         Background="Transparent"
-        ResizeMode="CanResizeWithGrip">
+        ResizeMode="CanResizeWithGrip"
+        KeyDown="Window_KeyDown">
 
     <Window.Resources>
         <!-- Dark Theme Colors -->
@@ -395,6 +396,12 @@
 
                 <!-- Window Buttons -->
                 <StackPanel Grid.Column="1" Orientation="Horizontal">
+                    <!-- Help Button -->
+                    <Button Style="{StaticResource TitleBarButtonStyle}" Click="HelpButton_Click"
+                            ToolTip="사용 방법 &amp; 단축키">
+                        <TextBlock Text="?" Foreground="#9E9E9E" FontSize="14" FontWeight="SemiBold"
+                                   VerticalAlignment="Center"/>
+                    </Button>
                     <Button Style="{StaticResource TitleBarButtonStyle}" Click="MinimizeButton_Click">
                         <Path Fill="#9E9E9E" Data="M0,5 L10,5" Stroke="#9E9E9E" StrokeThickness="1"/>
                     </Button>
@@ -650,6 +657,17 @@
                                 <TextBlock Text="완료 후 대상 폴더에 organizer_log_*.csv 저장"
                                            FontSize="10" TextWrapping="Wrap"
                                            Foreground="#666666"
+                                           Margin="20,3,0,8"/>
+
+                                <CheckBox x:Name="MoveFilesCheckBox"
+                                          Foreground="{StaticResource TextSecondaryBrush}"
+                                          FontSize="11"
+                                          Cursor="Hand">
+                                    <TextBlock Text="파일 이동 (원본 삭제)" Foreground="{StaticResource TextSecondaryBrush}" FontSize="11"/>
+                                </CheckBox>
+                                <TextBlock Text="복사 후 원본 파일을 삭제합니다 — 폴더 정리 목적에 사용"
+                                           FontSize="10" TextWrapping="Wrap"
+                                           Foreground="#666666"
                                            Margin="20,3,0,0"/>
 
                                 <!-- Separator -->
@@ -673,7 +691,15 @@
                                 <ListBox x:Name="FileListBox"
                                          Style="{StaticResource DarkListBoxStyle}"
                                          Height="120"
-                                         Margin="0,6,0,0">
+                                         Margin="0,6,0,0"
+                                         KeyDown="FileListBox_KeyDown">
+                                    <ListBox.ContextMenu>
+                                        <ContextMenu Background="#2D2D2D" BorderBrush="#404040" BorderThickness="1">
+                                            <MenuItem Header="선택 항목 제거 (Delete)"
+                                                      Foreground="#EEEEEE" Background="Transparent"
+                                                      Click="RemoveSelected_Click"/>
+                                        </ContextMenu>
+                                    </ListBox.ContextMenu>
                                     <ListBox.ItemTemplate>
                                         <DataTemplate>
                                             <StackPanel Orientation="Horizontal" Margin="2">
@@ -831,13 +857,28 @@
                                    Foreground="{StaticResource TextSecondaryBrush}"/>
                     </StackPanel>
 
-                    <Button x:Name="StartButton"
-                            Grid.Column="1"
-                            Content="정리 시작"
-                            Style="{StaticResource PrimaryButtonStyle}"
-                            Click="Start_Click"
-                            IsEnabled="False"
-                            Padding="24,10"/>
+                    <StackPanel Grid.Column="1" Orientation="Horizontal">
+                        <Button x:Name="OpenFolderButton"
+                                Content="폴더 열기"
+                                Style="{StaticResource SecondaryButtonStyle}"
+                                Click="OpenDestinationFolder_Click"
+                                Visibility="Collapsed"
+                                Padding="16,10"
+                                Margin="0,0,8,0"/>
+                        <Button x:Name="PreviewButton"
+                                Content="미리 보기"
+                                Style="{StaticResource SecondaryButtonStyle}"
+                                Click="Preview_Click"
+                                IsEnabled="False"
+                                Padding="16,10"
+                                Margin="0,0,8,0"/>
+                        <Button x:Name="StartButton"
+                                Content="정리 시작"
+                                Style="{StaticResource PrimaryButtonStyle}"
+                                Click="Start_Click"
+                                IsEnabled="False"
+                                Padding="24,10"/>
+                    </StackPanel>
                 </Grid>
             </Grid>
         </Grid>

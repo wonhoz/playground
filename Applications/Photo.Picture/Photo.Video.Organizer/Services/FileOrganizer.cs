@@ -39,6 +39,7 @@ namespace Photo.Video.Organizer.Services
             public bool Success { get; set; }
             public bool IsSkippedAsDuplicate { get; set; }
             public bool AutoRotated { get; set; }
+            public bool Moved { get; set; }
             public string? ErrorMessage { get; set; }
             public DateTime? MediaDate { get; set; }
             public MediaType MediaType { get; set; }
@@ -62,46 +63,117 @@ namespace Photo.Video.Organizer.Services
         }
 
         /// <summary>
+        /// 미리보기 결과 (실제 파일 처리 없이 대상 경로만 계산)
+        /// </summary>
+        public class PreviewEntry
+        {
+            public string SourceFileName { get; set; } = "";
+            public string DestinationFolder { get; set; } = "";
+            public DateTime MediaDate { get; set; }
+        }
+
+        /// <summary>
+        /// 커스텀 패턴이 유효한지 검사. 오류 메시지 반환 (null이면 유효)
+        /// </summary>
+        public static string? ValidateCustomPattern(string pattern)
+        {
+            if (string.IsNullOrWhiteSpace(pattern))
+                return "패턴을 입력하세요.";
+
+            var parts = pattern.Split('/', StringSplitOptions.RemoveEmptyEntries);
+            if (parts.Length == 0)
+                return "올바른 패턴을 입력하세요.";
+
+            var testDate = new DateTime(2024, 6, 15, 14, 30, 0);
+            try
+            {
+                foreach (var part in parts)
+                    testDate.ToString(part);
+            }
+            catch
+            {
+                return $"잘못된 날짜 형식 패턴입니다.";
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// 미리보기: 실제 복사 없이 각 파일의 대상 폴더를 계산하여 반환
+        /// </summary>
+        public async Task<List<PreviewEntry>> PreviewFilesAsync(
+            IEnumerable<string> files,
+            string destinationRoot,
+            FolderStructure folderStructure = FolderStructure.YearMonth,
+            string? customPattern = null,
+            CancellationToken cancellationToken = default)
+        {
+            var fileList = files.ToList();
+            return await Task.Run(() =>
+            {
+                var entries = new List<PreviewEntry>();
+                foreach (var filePath in fileList)
+                {
+                    cancellationToken.ThrowIfCancellationRequested();
+                    try
+                    {
+                        if (!MediaDateExtractor.IsSupportedMediaFile(filePath))
+                            continue;
+
+                        var mediaDate = MediaDateExtractor.GetMediaDate(filePath);
+                        var folder = BuildDestinationFolder(destinationRoot, mediaDate, folderStructure, customPattern);
+                        entries.Add(new PreviewEntry
+                        {
+                            SourceFileName = Path.GetFileName(filePath),
+                            DestinationFolder = folder,
+                            MediaDate = mediaDate
+                        });
+                    }
+                    catch { }
+                }
+                return entries;
+            }, cancellationToken);
+        }
+
+        /// <summary>
         /// 파일들을 지정된 경로에 폴더 구조로 정리
         /// </summary>
-        /// <param name="files">정리할 파일 경로 목록</param>
-        /// <param name="destinationRoot">대상 루트 폴더</param>
-        /// <param name="folderStructure">폴더 구조 옵션</param>
-        /// <param name="progress">진행 상황 콜백</param>
-        /// <param name="cancellationToken">취소 토큰</param>
         public async Task<OrganizeSummary> OrganizeFilesAsync(
             IEnumerable<string> files,
             string destinationRoot,
             FolderStructure folderStructure = FolderStructure.YearMonth,
             string? customPattern = null,
             bool autoRotate = false,
+            bool moveFiles = false,
             IProgress<(int current, int total, string fileName)>? progress = null,
             CancellationToken cancellationToken = default)
         {
             var fileList = files.ToList();
             var summary = new OrganizeSummary { TotalFiles = fileList.Count };
 
-            for (int i = 0; i < fileList.Count; i++)
+            // 단일 Task.Run으로 전체 루프 처리 (파일별 Task 생성 오버헤드 제거)
+            var results = await Task.Run(() =>
             {
-                cancellationToken.ThrowIfCancellationRequested();
+                var list = new List<OrganizeResult>();
+                for (int i = 0; i < fileList.Count; i++)
+                {
+                    cancellationToken.ThrowIfCancellationRequested();
+                    var filePath = fileList[i];
+                    progress?.Report((i + 1, fileList.Count, Path.GetFileName(filePath)));
+                    list.Add(OrganizeSingleFile(filePath, destinationRoot, folderStructure, customPattern, autoRotate, moveFiles));
+                }
+                return list;
+            }, cancellationToken);
 
-                var filePath = fileList[i];
-                var fileName = Path.GetFileName(filePath);
-
-                progress?.Report((i + 1, fileList.Count, fileName));
-
-                var result = await Task.Run(() => OrganizeSingleFile(filePath, destinationRoot, folderStructure, customPattern, autoRotate), cancellationToken);
+            foreach (var result in results)
+            {
                 summary.Results.Add(result);
-
                 if (result.Success)
                 {
                     summary.SuccessCount++;
-                    if (result.MediaType == MediaType.Image)
-                        summary.ImageCount++;
-                    else if (result.MediaType == MediaType.Video)
-                        summary.VideoCount++;
-                    if (result.AutoRotated)
-                        summary.RotatedCount++;
+                    if (result.MediaType == MediaType.Image) summary.ImageCount++;
+                    else if (result.MediaType == MediaType.Video) summary.VideoCount++;
+                    if (result.AutoRotated) summary.RotatedCount++;
                 }
                 else if (result.IsSkippedAsDuplicate)
                     summary.DuplicateCount++;
@@ -117,53 +189,29 @@ namespace Photo.Video.Organizer.Services
         /// <summary>
         /// 단일 파일 정리
         /// </summary>
-        private OrganizeResult OrganizeSingleFile(string sourcePath, string destinationRoot, FolderStructure folderStructure, string? customPattern = null, bool autoRotate = false)
+        private OrganizeResult OrganizeSingleFile(
+            string sourcePath, string destinationRoot,
+            FolderStructure folderStructure, string? customPattern,
+            bool autoRotate, bool moveFiles)
         {
             var result = new OrganizeResult { SourcePath = sourcePath };
 
             try
             {
-                // 지원하는 파일인지 확인
                 if (!MediaDateExtractor.IsSupportedMediaFile(sourcePath))
                 {
                     result.ErrorMessage = "지원하지 않는 파일 형식 (건너뜀)";
                     return result;
                 }
 
-                // 미디어 날짜 추출
                 var mediaDate = MediaDateExtractor.GetMediaDate(sourcePath);
                 result.MediaDate = mediaDate;
                 result.MediaType = MediaDateExtractor.GetMediaType(sourcePath);
 
-                // 대상 폴더 결정
-                string destinationFolder;
-
-                if (folderStructure == FolderStructure.Custom && !string.IsNullOrWhiteSpace(customPattern))
-                {
-                    // 사용자 정의 패턴: "yyyy/MM/dd" → 각 부분을 날짜 포맷 적용 후 폴더 계층 생성
-                    var parts = customPattern.Split('/', StringSplitOptions.RemoveEmptyEntries);
-                    var folderParts = new[] { destinationRoot }.Concat(parts.Select(p => mediaDate.ToString(p))).ToArray();
-                    destinationFolder = Path.Combine(folderParts);
-                }
-                else if (folderStructure == FolderStructure.YearMonthDay)
-                {
-                    // yyyy/MM/yyyy-MM-dd/
-                    destinationFolder = Path.Combine(destinationRoot,
-                        mediaDate.Year.ToString("D4"),
-                        mediaDate.Month.ToString("D2"),
-                        $"{mediaDate:yyyy-MM-dd}");
-                }
-                else
-                {
-                    // yyyy/MM/ (기본)
-                    destinationFolder = Path.Combine(destinationRoot,
-                        mediaDate.Year.ToString("D4"),
-                        mediaDate.Month.ToString("D2"));
-                }
-
+                var destinationFolder = BuildDestinationFolder(destinationRoot, mediaDate, folderStructure, customPattern);
                 Directory.CreateDirectory(destinationFolder);
 
-                // SHA256 해시 기반 중복 파일 감지 (크기 다른 파일은 해시 계산 건너뜀)
+                // SHA256 해시 기반 중복 파일 감지 (크기가 같을 때만 해시 계산)
                 long sourceSize = new FileInfo(sourcePath).Length;
                 string? sourceHash = null;
                 foreach (var existingFile in Directory.GetFiles(destinationFolder))
@@ -181,16 +229,31 @@ namespace Photo.Video.Organizer.Services
                 // 새 파일명 생성 (yyyy-MM-dd HH.mm.ss.확장자)
                 var extension = Path.GetExtension(sourcePath);
                 var newFileName = $"{mediaDate:yyyy-MM-dd HH.mm.ss}{extension}";
-                var destinationPath = Path.Combine(destinationFolder, newFileName);
+                var destinationPath = GetUniqueFilePath(Path.Combine(destinationFolder, newFileName));
 
-                // 중복 파일명 처리
-                destinationPath = GetUniqueFilePath(destinationPath);
-
-                // 파일 저장 (EXIF 회전 적용 or 단순 복사)
-                if (autoRotate && result.MediaType == MediaType.Image)
-                    result.AutoRotated = ExifRotationHelper.RotateAndSave(sourcePath, destinationPath);
+                if (moveFiles)
+                {
+                    // 이동: 같은 드라이브면 Move, 다른 드라이브면 Copy→Delete
+                    if (autoRotate && result.MediaType == MediaType.Image)
+                    {
+                        result.AutoRotated = ExifRotationHelper.RotateAndSave(sourcePath, destinationPath);
+                        if (result.AutoRotated || File.Exists(destinationPath))
+                            File.Delete(sourcePath);
+                    }
+                    else
+                    {
+                        File.Move(sourcePath, destinationPath);
+                    }
+                    result.Moved = true;
+                }
                 else
-                    File.Copy(sourcePath, destinationPath, overwrite: false);
+                {
+                    // 복사
+                    if (autoRotate && result.MediaType == MediaType.Image)
+                        result.AutoRotated = ExifRotationHelper.RotateAndSave(sourcePath, destinationPath);
+                    else
+                        File.Copy(sourcePath, destinationPath, overwrite: false);
+                }
 
                 result.DestinationPath = destinationPath;
                 result.Success = true;
@@ -204,8 +267,30 @@ namespace Photo.Video.Organizer.Services
         }
 
         /// <summary>
-        /// SHA256 해시값 계산
+        /// 폴더 구조 옵션에 따라 대상 폴더 경로 계산
         /// </summary>
+        private static string BuildDestinationFolder(
+            string destinationRoot, DateTime mediaDate,
+            FolderStructure folderStructure, string? customPattern)
+        {
+            if (folderStructure == FolderStructure.Custom && !string.IsNullOrWhiteSpace(customPattern))
+            {
+                var parts = customPattern.Split('/', StringSplitOptions.RemoveEmptyEntries);
+                var folderParts = new[] { destinationRoot }.Concat(parts.Select(p => mediaDate.ToString(p))).ToArray();
+                return Path.Combine(folderParts);
+            }
+            if (folderStructure == FolderStructure.YearMonthDay)
+            {
+                return Path.Combine(destinationRoot,
+                    mediaDate.Year.ToString("D4"),
+                    mediaDate.Month.ToString("D2"),
+                    $"{mediaDate:yyyy-MM-dd}");
+            }
+            return Path.Combine(destinationRoot,
+                mediaDate.Year.ToString("D4"),
+                mediaDate.Month.ToString("D2"));
+        }
+
         private static string ComputeFileHash(string filePath)
         {
             using var sha256 = System.Security.Cryptography.SHA256.Create();
@@ -213,10 +298,7 @@ namespace Photo.Video.Organizer.Services
             return Convert.ToHexString(sha256.ComputeHash(stream));
         }
 
-        /// <summary>
-        /// 중복 파일명이 있을 경우 고유한 파일 경로 반환
-        /// </summary>
-        private string GetUniqueFilePath(string filePath)
+        private static string GetUniqueFilePath(string filePath)
         {
             if (!File.Exists(filePath))
                 return filePath;
@@ -224,16 +306,13 @@ namespace Photo.Video.Organizer.Services
             var directory = Path.GetDirectoryName(filePath) ?? "";
             var fileNameWithoutExt = Path.GetFileNameWithoutExtension(filePath);
             var extension = Path.GetExtension(filePath);
-
             int counter = 1;
             string newPath;
-
             do
             {
                 newPath = Path.Combine(directory, $"{fileNameWithoutExt}_{counter}{extension}");
                 counter++;
             } while (File.Exists(newPath));
-
             return newPath;
         }
     }

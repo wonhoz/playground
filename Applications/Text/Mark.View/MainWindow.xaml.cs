@@ -314,8 +314,26 @@ public partial class MainWindow : Window
         else if (msg?.StartsWith("anchor:") == true)
         {
             var id = msg[7..];
-            _ = Viewer.ExecuteScriptAsync(
-                $"document.getElementById({System.Text.Json.JsonSerializer.Serialize(id)})?.scrollIntoView({{behavior:'smooth'}})");
+            var jsId = System.Text.Json.JsonSerializer.Serialize(id);
+            // ID 불일치 대비: 정확 매칭 → 앞 숫자 제거 매칭 → 헤딩 텍스트 유사 매칭 순으로 시도
+            var script = $@"
+(function() {{
+    var id = {jsId};
+    var el = document.getElementById(id);
+    if (el) {{ el.scrollIntoView({{behavior:'smooth'}}); return; }}
+    var stripped = id.replace(/^\d[\d\-]*\-/, '');
+    el = document.getElementById(stripped);
+    if (el) {{ el.scrollIntoView({{behavior:'smooth'}}); return; }}
+    var headings = document.querySelectorAll('h1,h2,h3,h4,h5,h6');
+    for (var h of headings) {{
+        if (!h.id) continue;
+        if (h.id.toLowerCase() === id.toLowerCase() ||
+            h.id.toLowerCase() === stripped.toLowerCase()) {{
+            h.scrollIntoView({{behavior:'smooth'}}); return;
+        }}
+    }}
+}})()";
+            _ = Viewer.ExecuteScriptAsync(script);
         }
     }
 

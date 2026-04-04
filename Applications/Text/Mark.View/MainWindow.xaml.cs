@@ -306,11 +306,6 @@ public partial class MainWindow : Window
             var id = msg[4..];
             HighlightTocEntry(id);
         }
-        else if (msg?.StartsWith("open:") == true)
-        {
-            var url = msg[5..];
-            System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(url) { UseShellExecute = true });
-        }
         else if (msg?.StartsWith("anchor:") == true)
         {
             var id = msg[7..];

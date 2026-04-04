@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg04cf" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#A5D6A7"/>
+      <stop offset="100%" stop-color="#1B5E20"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: Background (mint to deep green) -->
+  <rect x="0" y="0" width="1024" height="1024" rx="190" fill="url(#bg04cf)"/>
+
+  <!-- Layer 2: snake_case text — large and bold -->
+  <!-- "snake" in white -->
+  <text x="512" y="420" font-family="'Courier New',monospace" font-size="200" font-weight="bold"
+    fill="white" text-anchor="middle">snake</text>
+  <!-- Underscore highlighted -->
+  <text x="512" y="580" font-family="'Courier New',monospace" font-size="200" font-weight="bold"
+    fill="#FFF176" text-anchor="middle">_</text>
+  <!-- "case" in white -->
+  <text x="512" y="740" font-family="'Courier New',monospace" font-size="200" font-weight="bold"
+    fill="white" text-anchor="middle">case</text>
+
+  <!-- Layer 3: Snake icon subtly decorating the underscore -->
+  <!-- Simple snake body (wavy line) -->
+  <path d="M200 580 C240 540 280 620 320 580 C360 540 400 620 440 580"
+    fill="none" stroke="#69F0AE" stroke-width="24" stroke-linecap="round"/>
+  <!-- Snake head -->
+  <circle cx="440" cy="580" r="28" fill="#69F0AE"/>
+  <circle cx="453" cy="570" r="8" fill="#1B5E20"/>
+  <circle cx="453" cy="590" r="8" fill="#1B5E20"/>
+
+  <!-- Right side snake -->
+  <path d="M584 580 C624 540 664 620 704 580 C744 540 784 620 824 580"
+    fill="none" stroke="#69F0AE" stroke-width="24" stroke-linecap="round"/>
+  <circle cx="824" cy="580" r="28" fill="#69F0AE"/>
+  <circle cx="837" cy="570" r="8" fill="#1B5E20"/>
+  <circle cx="837" cy="590" r="8" fill="#1B5E20"/>
+
+  <!-- Subtle background grid lines (code editor feel) -->
+  <line x1="0" y1="190" x2="1024" y2="190" stroke="white" stroke-width="2" opacity="0.06"/>
+  <line x1="0" y1="380" x2="1024" y2="380" stroke="white" stroke-width="2" opacity="0.06"/>
+  <line x1="0" y1="570" x2="1024" y2="570" stroke="white" stroke-width="2" opacity="0.06"/>
+  <line x1="0" y1="760" x2="1024" y2="760" stroke="white" stroke-width="2" opacity="0.06"/>
+</svg>

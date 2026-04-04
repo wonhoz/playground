@@ -34,23 +34,23 @@ sealed class Database : IDisposable
             );
 
             CREATE VIRTUAL TABLE IF NOT EXISTS prompts_fts
-                USING fts5(title, content, tags, notes, content=prompts, content_rowid=id);
+                USING fts5(title, content, tags, notes, service, content=prompts, content_rowid=id);
 
             CREATE TRIGGER IF NOT EXISTS prompts_ai AFTER INSERT ON prompts BEGIN
-                INSERT INTO prompts_fts(rowid, title, content, tags, notes)
-                VALUES (new.id, new.title, new.content, new.tags, new.notes);
+                INSERT INTO prompts_fts(rowid, title, content, tags, notes, service)
+                VALUES (new.id, new.title, new.content, new.tags, new.notes, new.service);
             END;
 
             CREATE TRIGGER IF NOT EXISTS prompts_au AFTER UPDATE ON prompts BEGIN
-                INSERT INTO prompts_fts(prompts_fts, rowid, title, content, tags, notes)
-                VALUES ('delete', old.id, old.title, old.content, old.tags, old.notes);
-                INSERT INTO prompts_fts(rowid, title, content, tags, notes)
-                VALUES (new.id, new.title, new.content, new.tags, new.notes);
+                INSERT INTO prompts_fts(prompts_fts, rowid, title, content, tags, notes, service)
+                VALUES ('delete', old.id, old.title, old.content, old.tags, old.notes, old.service);
+                INSERT INTO prompts_fts(rowid, title, content, tags, notes, service)
+                VALUES (new.id, new.title, new.content, new.tags, new.notes, new.service);
             END;
 
             CREATE TRIGGER IF NOT EXISTS prompts_ad AFTER DELETE ON prompts BEGIN
-                INSERT INTO prompts_fts(prompts_fts, rowid, title, content, tags, notes)
-                VALUES ('delete', old.id, old.title, old.content, old.tags, old.notes);
+                INSERT INTO prompts_fts(prompts_fts, rowid, title, content, tags, notes, service)
+                VALUES ('delete', old.id, old.title, old.content, old.tags, old.notes, old.service);
             END;
         ");
     }
@@ -73,6 +73,56 @@ sealed class Database : IDisposable
 
         if (sortOrderAdded)
             InitializeSortOrders();
+
+        // FTS5 인덱스에 service 컬럼 추가 — 기존 FTS에 service가 없으면 재생성
+        EnsureFtsServiceColumn();
+    }
+
+    void EnsureFtsServiceColumn()
+    {
+        // FTS 테이블 컬럼 목록 조회: service가 없으면 재생성 필요
+        bool hasService;
+        try
+        {
+            var cmd = _conn.CreateCommand();
+            cmd.CommandText = "SELECT sql FROM sqlite_master WHERE type='table' AND name='prompts_fts'";
+            var sql = cmd.ExecuteScalar() as string ?? "";
+            hasService = sql.Contains("service", StringComparison.OrdinalIgnoreCase);
+        }
+        catch { return; }
+
+        if (hasService) return;
+
+        // 기존 FTS 트리거·인덱스 제거 후 service 포함하여 재생성
+        Execute("DROP TRIGGER IF EXISTS prompts_ai");
+        Execute("DROP TRIGGER IF EXISTS prompts_au");
+        Execute("DROP TRIGGER IF EXISTS prompts_ad");
+        Execute("DROP TABLE IF EXISTS prompts_fts");
+
+        Execute(@"
+            CREATE VIRTUAL TABLE IF NOT EXISTS prompts_fts
+                USING fts5(title, content, tags, notes, service, content=prompts, content_rowid=id);
+
+            CREATE TRIGGER IF NOT EXISTS prompts_ai AFTER INSERT ON prompts BEGIN
+                INSERT INTO prompts_fts(rowid, title, content, tags, notes, service)
+                VALUES (new.id, new.title, new.content, new.tags, new.notes, new.service);
+            END;
+
+            CREATE TRIGGER IF NOT EXISTS prompts_au AFTER UPDATE ON prompts BEGIN
+                INSERT INTO prompts_fts(prompts_fts, rowid, title, content, tags, notes, service)
+                VALUES ('delete', old.id, old.title, old.content, old.tags, old.notes, old.service);
+                INSERT INTO prompts_fts(rowid, title, content, tags, notes, service)
+                VALUES (new.id, new.title, new.content, new.tags, new.notes, new.service);
+            END;
+
+            CREATE TRIGGER IF NOT EXISTS prompts_ad AFTER DELETE ON prompts BEGIN
+                INSERT INTO prompts_fts(prompts_fts, rowid, title, content, tags, notes, service)
+                VALUES ('delete', old.id, old.title, old.content, old.tags, old.notes, old.service);
+            END;
+        ");
+
+        // 기존 데이터 재인덱싱
+        Execute("INSERT INTO prompts_fts(prompts_fts) VALUES('rebuild')");
     }
 
     void InitializeSortOrders()
@@ -177,11 +227,12 @@ sealed class Database : IDisposable
     {
         var cmd = _conn.CreateCommand();
         cmd.CommandText = @"
-            INSERT INTO prompts (title, content, tags, service, is_favorite, version, notes, parent_id, sort_order)
+            INSERT INTO prompts (title, content, tags, service, is_favorite, version, notes, parent_id, sort_order, use_count)
             VALUES ($title, $content, $tags, $svc, $fav, $ver, $notes, $pid,
                     CASE WHEN $pid IS NULL
                          THEN (SELECT COALESCE(MAX(sort_order), -1) + 1 FROM prompts WHERE parent_id IS NULL)
-                         ELSE 0 END);
+                         ELSE 0 END,
+                    $use_count);
             SELECT last_insert_rowid();";
         BindParams(cmd, p);
         return Convert.ToInt32(cmd.ExecuteScalar());
@@ -258,14 +309,15 @@ sealed class Database : IDisposable
 
     static void BindParams(SqliteCommand cmd, PromptItem p)
     {
-        cmd.Parameters.AddWithValue("$title",   p.Title);
-        cmd.Parameters.AddWithValue("$content", p.Content);
-        cmd.Parameters.AddWithValue("$tags",    p.Tags);
-        cmd.Parameters.AddWithValue("$svc",     p.Service);
-        cmd.Parameters.AddWithValue("$fav",     p.IsFavorite ? 1 : 0);
-        cmd.Parameters.AddWithValue("$ver",     p.Version);
-        cmd.Parameters.AddWithValue("$notes",   p.Notes);
-        cmd.Parameters.AddWithValue("$pid",     p.ParentId.HasValue ? (object)p.ParentId.Value : DBNull.Value);
+        cmd.Parameters.AddWithValue("$title",     p.Title);
+        cmd.Parameters.AddWithValue("$content",   p.Content);
+        cmd.Parameters.AddWithValue("$tags",      p.Tags);
+        cmd.Parameters.AddWithValue("$svc",       p.Service);
+        cmd.Parameters.AddWithValue("$fav",       p.IsFavorite ? 1 : 0);
+        cmd.Parameters.AddWithValue("$ver",       p.Version);
+        cmd.Parameters.AddWithValue("$notes",     p.Notes);
+        cmd.Parameters.AddWithValue("$pid",       p.ParentId.HasValue ? (object)p.ParentId.Value : DBNull.Value);
+        cmd.Parameters.AddWithValue("$use_count", p.UseCount);
     }
 
     static List<PromptItem> ReadItems(SqliteCommand cmd)

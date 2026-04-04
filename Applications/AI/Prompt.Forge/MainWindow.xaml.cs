@@ -102,11 +102,28 @@ public partial class MainWindow : Window
         base.OnPreviewKeyDown(e);
         if (!IsLoaded) return;
 
+        // Esc: 검색창 포커스 상태일 때 검색·필터 전체 초기화
+        if (e.Key == Key.Escape && TxtSearch.IsFocused)
+        {
+            ClearSearch_Click(this, new RoutedEventArgs());
+            e.Handled = true;
+            return;
+        }
+
         if (Keyboard.Modifiers == ModifierKeys.Control)
         {
             if (e.Key == Key.N)
             {
                 NewPrompt_Click(this, new RoutedEventArgs());
+                e.Handled = true;
+                return;
+            }
+
+            // Ctrl+F: 검색창 포커스 + 전체 선택
+            if (e.Key == Key.F)
+            {
+                TxtSearch.Focus();
+                TxtSearch.SelectAll();
                 e.Handled = true;
                 return;
             }
@@ -285,8 +302,6 @@ public partial class MainWindow : Window
     void TagLabel_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
     {
         if (sender is not TextBlock tb || string.IsNullOrWhiteSpace(tb.Text)) return;
-        // Ctrl+클릭일 때만 태그 필터 적용 (일반 클릭은 항목 선택만)
-        if (Keyboard.Modifiers != ModifierKeys.Control) return;
         var firstTag = tb.Text.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
                               .FirstOrDefault();
         if (firstTag == null) return;
@@ -523,7 +538,8 @@ public partial class MainWindow : Window
             {
                 title = p.Title, content = p.Content, tags = p.Tags,
                 service = p.Service, isFavorite = p.IsFavorite,
-                version = p.Version, notes = p.Notes
+                version = p.Version, notes = p.Notes,
+                useCount = p.UseCount, sortOrder = p.SortOrder
             });
             var json = System.Text.Json.JsonSerializer.Serialize(data,
                 new System.Text.Json.JsonSerializerOptions { WriteIndented = true });
@@ -579,12 +595,49 @@ public partial class MainWindow : Window
                 return;
             }
 
-            var existing = new HashSet<string>(
-                _db.GetAll().Select(p => p.Title), StringComparer.OrdinalIgnoreCase);
-            int imported = 0, skipped = 0;
+            var existingAll = _db.GetAll();
+            var existingMap = existingAll.ToDictionary(p => p.Title, p => p, StringComparer.OrdinalIgnoreCase);
+            int imported = 0, updated = 0, skipped = 0;
+
+            // 변경된 항목 먼저 파악 (내용·태그·서비스·메모 중 하나라도 다르면 변경으로 간주)
+            var toUpdate = items
+                .Where(item => existingMap.TryGetValue(item.Title ?? "", out var ex) &&
+                               (ex.Content != (item.Content ?? "") ||
+                                ex.Tags    != (item.Tags    ?? "") ||
+                                ex.Service != (item.Service ?? "") ||
+                                ex.Notes   != (item.Notes   ?? "")))
+                .ToList();
+
+            bool doMerge = false;
+            if (toUpdate.Count > 0)
+            {
+                var mergeResult = MessageBox.Show(
+                    $"기존 항목 중 {toUpdate.Count}개가 변경되었습니다.\n업데이트하시겠습니까?",
+                    "머지 확인", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                doMerge = mergeResult == MessageBoxResult.Yes;
+            }
+
             foreach (var item in items)
             {
-                if (existing.Contains(item.Title ?? "")) { skipped++; continue; }
+                if (existingMap.TryGetValue(item.Title ?? "", out var existing))
+                {
+                    if (doMerge && toUpdate.Any(u => string.Equals(u.Title, item.Title, StringComparison.OrdinalIgnoreCase)))
+                    {
+                        existing.Content    = item.Content ?? "";
+                        existing.Tags       = item.Tags    ?? "";
+                        existing.Service    = item.Service ?? "";
+                        existing.Notes      = item.Notes   ?? "";
+                        existing.IsFavorite = item.IsFavorite;
+                        existing.Version    = item.Version > 0 ? item.Version : existing.Version;
+                        _db.Update(existing);
+                        updated++;
+                    }
+                    else
+                    {
+                        skipped++;
+                    }
+                    continue;
+                }
                 _db.Insert(new PromptItem
                 {
                     Title      = item.Title ?? "",
@@ -593,14 +646,17 @@ public partial class MainWindow : Window
                     Service    = item.Service ?? "",
                     IsFavorite = item.IsFavorite,
                     Version    = item.Version > 0 ? item.Version : 1,
-                    Notes      = item.Notes ?? ""
+                    Notes      = item.Notes ?? "",
+                    UseCount   = item.UseCount
                 });
                 imported++;
             }
             _vm.Refresh();
-            _vm.StatusText = skipped > 0
-                ? $"Gist 다운로드 완료 — {imported}개 추가, {skipped}개 중복 스킵"
-                : $"Gist 다운로드 완료 — {imported}개 추가";
+            var parts = new List<string>();
+            if (imported > 0) parts.Add($"{imported}개 추가");
+            if (updated  > 0) parts.Add($"{updated}개 업데이트");
+            if (skipped  > 0) parts.Add($"{skipped}개 스킵");
+            _vm.StatusText = $"Gist 다운로드 완료 — {string.Join(", ", parts)}";
         }
         catch (Exception ex)
         {
@@ -615,6 +671,25 @@ public partial class MainWindow : Window
 
     void Export_Click(object sender, RoutedEventArgs e)
     {
+        // 필터된 항목이 있으면 전체 vs 현재 필터 선택
+        bool hasFilter = _vm.Items.Count < _db.GetAll().Count;
+        List<PromptItem> source;
+        if (hasFilter)
+        {
+            var choice = MessageBox.Show(
+                $"현재 필터 결과 {_vm.Items.Count}개만 내보내시겠습니까?\n\n" +
+                $"예 → 현재 필터 결과만\n아니요 → 전체 내보내기",
+                "내보내기 범위", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
+            if (choice == MessageBoxResult.Cancel) return;
+            source = choice == MessageBoxResult.Yes
+                ? [.. _vm.Items]
+                : _db.GetAll();
+        }
+        else
+        {
+            source = _db.GetAll();
+        }
+
         var dlg = new Microsoft.Win32.SaveFileDialog
         {
             Title      = "프롬프트 내보내기",
@@ -624,8 +699,7 @@ public partial class MainWindow : Window
         };
         if (dlg.ShowDialog() != true) return;
 
-        var all  = _db.GetAll();
-        var data = all.Select(p => new
+        var data = source.Select(p => new
         {
             title      = p.Title,
             content    = p.Content,
@@ -633,12 +707,14 @@ public partial class MainWindow : Window
             service    = p.Service,
             isFavorite = p.IsFavorite,
             version    = p.Version,
-            notes      = p.Notes
+            notes      = p.Notes,
+            useCount   = p.UseCount,
+            sortOrder  = p.SortOrder
         });
         var json = System.Text.Json.JsonSerializer.Serialize(data,
             new System.Text.Json.JsonSerializerOptions { WriteIndented = true });
         File.WriteAllText(dlg.FileName, json, System.Text.Encoding.UTF8);
-        _vm.StatusText = $"내보내기 완료 — {all.Count}개";
+        _vm.StatusText = $"내보내기 완료 — {source.Count}개";
     }
 
     void Import_Click(object sender, RoutedEventArgs e)
@@ -677,7 +753,8 @@ public partial class MainWindow : Window
                     Service    = item.Service ?? "",
                     IsFavorite = item.IsFavorite,
                     Version    = item.Version > 0 ? item.Version : 1,
-                    Notes      = item.Notes ?? ""
+                    Notes      = item.Notes ?? "",
+                    UseCount   = item.UseCount
                 });
                 imported++;
             }
@@ -759,5 +836,6 @@ public partial class MainWindow : Window
 
     private record ImportDto(
         string? Title, string? Content, string? Tags,
-        string? Service, bool IsFavorite, int Version, string? Notes);
+        string? Service, bool IsFavorite, int Version, string? Notes,
+        int UseCount = 0, int SortOrder = 0);
 }

@@ -512,6 +512,8 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <TextBlock Grid.Row="0" Grid.Column="0" Text="Ctrl+N" Foreground="#A78BFA" FontFamily="Consolas" FontSize="12"/>
                         <TextBlock Grid.Row="0" Grid.Column="1" Text="새 프롬프트" Foreground="#C0C0D0" FontSize="12"/>
@@ -523,8 +525,12 @@
                         <TextBlock Grid.Row="3" Grid.Column="1" Text="변수 채우기" Foreground="#C0C0D0" FontSize="12" Margin="0,5,0,0"/>
                         <TextBlock Grid.Row="4" Grid.Column="0" Text="Ctrl+H" Foreground="#A78BFA" FontFamily="Consolas" FontSize="12" Margin="0,5,0,0"/>
                         <TextBlock Grid.Row="4" Grid.Column="1" Text="버전 히스토리" Foreground="#C0C0D0" FontSize="12" Margin="0,5,0,0"/>
-                        <TextBlock Grid.Row="5" Grid.Column="0" Text="Win+Shift+P" Foreground="#A78BFA" FontFamily="Consolas" FontSize="12" Margin="0,5,0,0"/>
-                        <TextBlock Grid.Row="5" Grid.Column="1" Text="창 표시/숨기기" Foreground="#C0C0D0" FontSize="12" Margin="0,5,0,0"/>
+                        <TextBlock Grid.Row="5" Grid.Column="0" Text="Ctrl+F" Foreground="#A78BFA" FontFamily="Consolas" FontSize="12" Margin="0,5,0,0"/>
+                        <TextBlock Grid.Row="5" Grid.Column="1" Text="검색창 포커스" Foreground="#C0C0D0" FontSize="12" Margin="0,5,0,0"/>
+                        <TextBlock Grid.Row="6" Grid.Column="0" Text="Esc" Foreground="#A78BFA" FontFamily="Consolas" FontSize="12" Margin="0,5,0,0"/>
+                        <TextBlock Grid.Row="6" Grid.Column="1" Text="검색·필터 초기화 (검색창 포커스 시)" Foreground="#C0C0D0" FontSize="12" Margin="0,5,0,0"/>
+                        <TextBlock Grid.Row="7" Grid.Column="0" Text="Win+Shift+P" Foreground="#A78BFA" FontFamily="Consolas" FontSize="12" Margin="0,5,0,0"/>
+                        <TextBlock Grid.Row="7" Grid.Column="1" Text="창 표시/숨기기" Foreground="#C0C0D0" FontSize="12" Margin="0,5,0,0"/>
                     </Grid>
                     <Separator Background="#2A2A3E" Margin="0,14,0,12"/>
                     <TextBlock Text="사용 팁" FontWeight="SemiBold" FontSize="12"
@@ -535,11 +541,13 @@
                         <LineBreak/>
                         <Run Text="• 태그 입력 시 자동완성 드롭다운 표시"/>
                         <LineBreak/>
-                        <Run Text="• 태그 Ctrl+클릭 → 해당 태그로 필터링"/>
+                        <Run Text="• 태그 클릭 → 해당 태그로 필터링"/>
                         <LineBreak/>
                         <Run Text="• ★ 클릭 → 즐겨찾기 토글"/>
                         <LineBreak/>
                         <Run Text="• '버전 저장' → 히스토리에 현재 버전 보관"/>
+                        <LineBreak/>
+                        <Run Text="• 내보내기: 현재 필터 결과만 선택 가능"/>
                     </TextBlock>
                 </StackPanel>
             </Border>

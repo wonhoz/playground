@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg03" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#EDE7F6"/>
+      <stop offset="100%" stop-color="#D1C4E9"/>
+    </linearGradient>
+    <linearGradient id="brushGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFD740"/>
+      <stop offset="100%" stop-color="#FF8F00"/>
+    </linearGradient>
+    <linearGradient id="sharpGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#CE93D8" stop-opacity="0.3"/>
+      <stop offset="60%" stop-color="#AB47BC"/>
+      <stop offset="100%" stop-color="#7B1FA2"/>
+    </linearGradient>
+    <filter id="sh03">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#00000028"/>
+    </filter>
+    <filter id="glowBrush">
+      <feGaussianBlur stdDeviation="10" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <!-- Layer 1: Lavender background -->
+  <rect width="1024" height="1024" rx="190" fill="#8E24AA"/>
+  <rect x="16" y="16" width="992" height="992" rx="178" fill="url(#bg03)"/>
+
+  <!-- Layer 2: Canvas area (paint surface) -->
+  <rect x="100" y="220" width="824" height="500" rx="20" fill="#F3E5F5" filter="url(#sh03)"/>
+
+  <!-- Blurry left side (before brush) — pixelated blocks -->
+  <rect x="120" y="240" width="50" height="50" rx="2" fill="#CE93D8" opacity="0.5"/>
+  <rect x="174" y="240" width="50" height="50" rx="2" fill="#BA68C8" opacity="0.5"/>
+  <rect x="228" y="240" width="50" height="50" rx="2" fill="#CE93D8" opacity="0.5"/>
+  <rect x="120" y="294" width="50" height="50" rx="2" fill="#AB47BC" opacity="0.5"/>
+  <rect x="174" y="294" width="50" height="50" rx="2" fill="#CE93D8" opacity="0.5"/>
+  <rect x="228" y="294" width="50" height="50" rx="2" fill="#BA68C8" opacity="0.5"/>
+  <rect x="120" y="348" width="50" height="50" rx="2" fill="#CE93D8" opacity="0.5"/>
+  <rect x="174" y="348" width="50" height="50" rx="2" fill="#AB47BC" opacity="0.5"/>
+  <rect x="228" y="348" width="50" height="50" rx="2" fill="#CE93D8" opacity="0.5"/>
+  <rect x="120" y="402" width="50" height="50" rx="2" fill="#BA68C8" opacity="0.5"/>
+  <rect x="174" y="402" width="50" height="50" rx="2" fill="#CE93D8" opacity="0.5"/>
+  <rect x="228" y="402" width="50" height="50" rx="2" fill="#AB47BC" opacity="0.5"/>
+  <rect x="120" y="456" width="50" height="50" rx="2" fill="#CE93D8" opacity="0.5"/>
+  <rect x="174" y="456" width="50" height="50" rx="2" fill="#BA68C8" opacity="0.5"/>
+  <rect x="228" y="456" width="50" height="50" rx="2" fill="#CE93D8" opacity="0.5"/>
+  <rect x="120" y="510" width="50" height="50" rx="2" fill="#AB47BC" opacity="0.5"/>
+  <rect x="174" y="510" width="50" height="50" rx="2" fill="#CE93D8" opacity="0.5"/>
+  <rect x="228" y="510" width="50" height="50" rx="2" fill="#BA68C8" opacity="0.5"/>
+  <rect x="120" y="564" width="50" height="50" rx="2" fill="#CE93D8" opacity="0.5"/>
+  <rect x="174" y="564" width="50" height="50" rx="2" fill="#AB47BC" opacity="0.5"/>
+  <rect x="228" y="564" width="50" height="50" rx="2" fill="#CE93D8" opacity="0.5"/>
+  <rect x="120" y="618" width="50" height="50" rx="2" fill="#BA68C8" opacity="0.5"/>
+  <rect x="174" y="618" width="50" height="50" rx="2" fill="#CE93D8" opacity="0.5"/>
+  <rect x="228" y="618" width="50" height="50" rx="2" fill="#AB47BC" opacity="0.5"/>
+
+  <!-- Sharp right side (after brush) — smooth gradient shapes -->
+  <!-- Mountain shape, sharp and colorful -->
+  <polygon points="480,680 600,360 720,680" fill="#7B1FA2" opacity="0.9"/>
+  <polygon points="580,680 680,440 780,680" fill="#9C27B0" opacity="0.85"/>
+  <rect x="480" y="620" width="420" height="100" rx="0" fill="#6A1B9A" opacity="0.8"/>
+  <!-- Sky -->
+  <rect x="480" y="240" width="420" height="200" rx="0" fill="url(#sharpGrad)" opacity="0.4"/>
+  <circle cx="820" cy="300" r="42" fill="#FFD740" filter="url(#sh03)"/>
+
+  <!-- Brush stroke transition line (diagonal) -->
+  <line x1="300" y1="220" x2="480" y2="720" stroke="url(#brushGrad)" stroke-width="6"
+        stroke-linecap="round" stroke-dasharray="12,6" opacity="0.6"/>
+
+  <!-- Brush tool (main element, diagonal) -->
+  <g transform="translate(340,200) rotate(45)" filter="url(#sh03)">
+    <!-- Brush handle -->
+    <rect x="-16" y="-20" width="32" height="260" rx="10" fill="url(#brushGrad)"/>
+    <!-- Brush ferrule -->
+    <rect x="-18" y="240" width="36" height="30" rx="4" fill="#9E9E9E"/>
+    <!-- Brush tip -->
+    <ellipse cx="0" cy="292" rx="20" ry="36" fill="#4A148C"/>
+    <!-- Bristle tip -->
+    <ellipse cx="0" cy="318" rx="12" ry="18" fill="#7B1FA2"/>
+  </g>
+
+  <!-- Layer 3: Sparkle dots along brush path -->
+  <circle cx="360" cy="340" r="10" fill="#FFD740" filter="url(#sh03)"/>
+  <circle cx="400" cy="430" r="7"  fill="#FFAB00" opacity="0.85"/>
+  <circle cx="430" cy="520" r="12" fill="#FFD740" filter="url(#sh03)"/>
+  <circle cx="460" cy="610" r="8"  fill="#FFAB00" opacity="0.85"/>
+
+  <!-- "Brush.Scale" hint label at bottom -->
+  <text x="512" y="798" font-family="'Segoe UI', Arial, sans-serif" font-size="60" font-weight="900"
+        fill="#4A148C" text-anchor="middle" dominant-baseline="middle" opacity="0.85">Brush · Scale</text>
+</svg>

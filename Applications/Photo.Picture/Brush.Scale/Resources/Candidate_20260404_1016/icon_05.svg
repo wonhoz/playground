@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg05" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FBE9E7"/>
+      <stop offset="100%" stop-color="#FFCCBC"/>
+    </linearGradient>
+    <linearGradient id="lensGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#FFE0B2" stop-opacity="0.5"/>
+    </linearGradient>
+    <linearGradient id="handleGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFD54F"/>
+      <stop offset="100%" stop-color="#FF8F00"/>
+    </linearGradient>
+    <filter id="sh05">
+      <feDropShadow dx="0" dy="10" stdDeviation="16" flood-color="#00000030"/>
+    </filter>
+    <clipPath id="lensClip">
+      <circle cx="440" cy="430" r="270"/>
+    </clipPath>
+  </defs>
+
+  <!-- Layer 1: Coral/peach background -->
+  <rect width="1024" height="1024" rx="190" fill="#FF5722"/>
+  <rect x="16" y="16" width="992" height="992" rx="178" fill="url(#bg05)"/>
+
+  <!-- Layer 2: Magnifying glass frame (outer ring) -->
+  <circle cx="440" cy="430" r="280" fill="#FF8A65" filter="url(#sh05)"/>
+  <circle cx="440" cy="430" r="260" fill="white"/>
+
+  <!-- Lens interior: sharp, colorful image visible inside -->
+  <g clip-path="url(#lensClip)">
+    <!-- Sky -->
+    <rect x="170" y="160" width="540" height="200" fill="#64B5F6"/>
+    <!-- Sun -->
+    <circle cx="630" cy="230" r="52" fill="#FFD54F"/>
+    <!-- Hills -->
+    <ellipse cx="380" cy="480" rx="200" ry="120" fill="#4CAF50"/>
+    <ellipse cx="560" cy="510" rx="160" ry="100" fill="#388E3C"/>
+    <ellipse cx="700" cy="540" rx="120" ry="80" fill="#2E7D32"/>
+    <!-- Ground -->
+    <rect x="170" y="580" width="540" height="120" fill="#8D6E63"/>
+    <!-- Sharp details: small tree -->
+    <rect x="348" y="460" width="16" height="80" fill="#5D4037"/>
+    <circle cx="356" cy="440" r="36" fill="#43A047"/>
+    <!-- Lens glass sheen -->
+    <ellipse cx="340" cy="300" rx="80" ry="40" fill="white" opacity="0.25" transform="rotate(-20,340,300)"/>
+  </g>
+
+  <!-- Magnifying glass rim -->
+  <circle cx="440" cy="430" r="270" fill="none" stroke="#FF7043" stroke-width="24"/>
+  <circle cx="440" cy="430" r="258" fill="none" stroke="#FFCCBC" stroke-width="8" opacity="0.6"/>
+
+  <!-- Handle -->
+  <line x1="644" y1="634" x2="820" y2="810" stroke="url(#handleGrad)" stroke-width="72"
+        stroke-linecap="round"/>
+  <!-- Handle highlight -->
+  <line x1="644" y1="634" x2="810" y2="804" stroke="#FFD54F" stroke-width="20"
+        stroke-linecap="round" opacity="0.5"/>
+
+  <!-- Layer 3: "×4" badge top-right of lens -->
+  <circle cx="670" cy="188" r="72" fill="#E64A19" filter="url(#sh05)"/>
+  <text x="670" y="188" font-family="'Segoe UI', Arial, sans-serif" font-size="64" font-weight="900"
+        fill="white" text-anchor="middle" dominant-baseline="middle">×4</text>
+
+  <!-- Stars/sparkles at lens edge (sharp clarity symbol) -->
+  <circle cx="192" cy="280" r="12" fill="#FFD740"/>
+  <circle cx="174" cy="310" r="7"  fill="#FF8F00" opacity="0.8"/>
+  <circle cx="210" cy="260" r="8"  fill="#FFD740" opacity="0.9"/>
+
+  <circle cx="688" cy="190" r="0" fill="none"/><!-- spacer -->
+
+  <!-- Bottom label -->
+  <text x="440" y="860" font-family="'Segoe UI', Arial, sans-serif" font-size="58" font-weight="900"
+        fill="#BF360C" text-anchor="middle" dominant-baseline="middle">초고해상도</text>
+</svg>

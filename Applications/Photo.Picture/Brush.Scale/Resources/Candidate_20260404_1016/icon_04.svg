@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg04" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFFDE7"/>
+      <stop offset="100%" stop-color="#FFF9C4"/>
+    </linearGradient>
+    <linearGradient id="smoothGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#F48FB1"/>
+      <stop offset="100%" stop-color="#E91E63"/>
+    </linearGradient>
+    <filter id="sh04">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#00000028"/>
+    </filter>
+  </defs>
+
+  <!-- Layer 1: Warm cream/yellow background -->
+  <rect width="1024" height="1024" rx="190" fill="#FBC02D"/>
+  <rect x="16" y="16" width="992" height="992" rx="178" fill="url(#bg04)"/>
+
+  <!-- Layer 2: Left side — coarse pixel grid (before) -->
+  <!-- Grid container card -->
+  <rect x="80" y="260" width="380" height="380" rx="20" fill="#E3F2FD" filter="url(#sh04)"/>
+
+  <!-- Large pixel blocks (low res) -->
+  <rect x="100" y="280" width="80" height="80" rx="4" fill="#42A5F5"/>
+  <rect x="188" y="280" width="80" height="80" rx="4" fill="#1976D2"/>
+  <rect x="276" y="280" width="80" height="80" rx="4" fill="#42A5F5"/>
+  <rect x="364" y="280" width="76" height="80" rx="4" fill="#64B5F6"/>
+
+  <rect x="100" y="368" width="80" height="80" rx="4" fill="#1565C0"/>
+  <rect x="188" y="368" width="80" height="80" rx="4" fill="#42A5F5"/>
+  <rect x="276" y="368" width="80" height="80" rx="4" fill="#1976D2"/>
+  <rect x="364" y="368" width="76" height="80" rx="4" fill="#42A5F5"/>
+
+  <rect x="100" y="456" width="80" height="80" rx="4" fill="#42A5F5"/>
+  <rect x="188" y="456" width="80" height="80" rx="4" fill="#1565C0"/>
+  <rect x="276" y="456" width="80" height="80" rx="4" fill="#64B5F6"/>
+  <rect x="364" y="456" width="76" height="80" rx="4" fill="#1976D2"/>
+
+  <rect x="100" y="544" width="80" height="76" rx="4" fill="#1976D2"/>
+  <rect x="188" y="544" width="80" height="76" rx="4" fill="#42A5F5"/>
+  <rect x="276" y="544" width="80" height="76" rx="4" fill="#1565C0"/>
+  <rect x="364" y="544" width="76" height="76" rx="4" fill="#42A5F5"/>
+
+  <!-- "픽셀" label -->
+  <text x="270" y="686" font-family="'Segoe UI', Arial, sans-serif" font-size="42" font-weight="700"
+        fill="#1565C0" text-anchor="middle" dominant-baseline="middle">픽셀 (저해상도)</text>
+
+  <!-- Arrow (center) -->
+  <line x1="484" y1="450" x2="548" y2="450" stroke="#F57F17" stroke-width="44" stroke-linecap="round"/>
+  <polygon points="568,450 524,420 524,480" fill="#F57F17"/>
+  <!-- Star bursts on arrow -->
+  <circle cx="510" cy="410" r="10" fill="#FFD740"/>
+  <circle cx="520" cy="400" r="7"  fill="#FFAB00"/>
+
+  <!-- Layer 2: Right side — smooth gradient shape (after) -->
+  <rect x="564" y="260" width="380" height="380" rx="20" fill="#FCE4EC" filter="url(#sh04)"/>
+
+  <!-- Smooth, anti-aliased mountain/hill shape -->
+  <ellipse cx="754" cy="620" rx="200" ry="60" fill="#F48FB1" opacity="0.6"/>
+  <path d="M 584,620 Q 680,300 754,260 Q 828,300 924,620 Z"
+        fill="url(#smoothGrad)" opacity="0.9"/>
+  <!-- Smooth sky -->
+  <rect x="584" y="280" width="320" height="140" rx="8" fill="#F8BBD9" opacity="0.5"/>
+  <!-- Smooth sun -->
+  <circle cx="870" cy="330" r="46" fill="#FFD54F" filter="url(#sh04)"/>
+
+  <!-- "선명" label -->
+  <text x="754" y="686" font-family="'Segoe UI', Arial, sans-serif" font-size="42" font-weight="700"
+        fill="#880E4F" text-anchor="middle" dominant-baseline="middle">선명 (고해상도)</text>
+
+  <!-- Layer 3: RealESRGAN badge at bottom -->
+  <rect x="262" y="770" width="500" height="60" rx="30" fill="#E91E63" filter="url(#sh04)"/>
+  <text x="512" y="801" font-family="'Segoe UI', Arial, sans-serif" font-size="36" font-weight="700"
+        fill="white" text-anchor="middle" dominant-baseline="middle">RealESRGAN · waifu2x</text>
+</svg>

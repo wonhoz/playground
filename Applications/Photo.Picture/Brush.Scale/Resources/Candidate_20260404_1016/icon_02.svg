@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg02" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#E0F7FA"/>
+      <stop offset="100%" stop-color="#B2EBF2"/>
+    </linearGradient>
+    <linearGradient id="circleGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#00BCD4"/>
+      <stop offset="100%" stop-color="#00838F"/>
+    </linearGradient>
+    <filter id="sh02">
+      <feDropShadow dx="0" dy="10" stdDeviation="16" flood-color="#00000030"/>
+    </filter>
+    <filter id="glow02">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+
+  <!-- Layer 1: Mint/cyan background -->
+  <rect width="1024" height="1024" rx="190" fill="#00ACC1"/>
+  <rect x="16" y="16" width="992" height="992" rx="178" fill="url(#bg02)"/>
+
+  <!-- Layer 2: Large central circle with "4×" -->
+  <circle cx="512" cy="460" r="260" fill="url(#circleGrad)" filter="url(#sh02)"/>
+
+  <!-- "4×" text — big and bold -->
+  <text x="512" y="448" font-family="'Segoe UI', Arial, sans-serif" font-size="220" font-weight="900"
+        fill="white" text-anchor="middle" dominant-baseline="middle">4×</text>
+
+  <!-- Layer 3: Expansion arrows (4 directions) -->
+  <!-- Top -->
+  <line x1="512" y1="170" x2="512" y2="110" stroke="#00838F" stroke-width="20" stroke-linecap="round"/>
+  <polygon points="512,88 494,122 530,122" fill="#00838F"/>
+  <!-- Bottom -->
+  <line x1="512" y1="750" x2="512" y2="810" stroke="#00838F" stroke-width="20" stroke-linecap="round"/>
+  <polygon points="512,832 494,798 530,798" fill="#00838F"/>
+  <!-- Left -->
+  <line x1="222" y1="460" x2="162" y2="460" stroke="#00838F" stroke-width="20" stroke-linecap="round"/>
+  <polygon points="140,460 174,442 174,478" fill="#00838F"/>
+  <!-- Right -->
+  <line x1="802" y1="460" x2="862" y2="460" stroke="#00838F" stroke-width="20" stroke-linecap="round"/>
+  <polygon points="884,460 850,442 850,478" fill="#00838F"/>
+
+  <!-- Diagonal arrows -->
+  <line x1="698" y1="228" x2="740" y2="186" stroke="#00838F" stroke-width="16" stroke-linecap="round"/>
+  <polygon points="756,172 728,200 756,228" fill="#00838F" opacity="0.7"/>
+  <line x1="326" y1="228" x2="284" y2="186" stroke="#00838F" stroke-width="16" stroke-linecap="round"/>
+  <polygon points="268,172 296,200 268,228" fill="#00838F" opacity="0.7"/>
+  <line x1="698" y1="692" x2="740" y2="734" stroke="#00838F" stroke-width="16" stroke-linecap="round"/>
+  <polygon points="756,748 728,720 756,692" fill="#00838F" opacity="0.7"/>
+  <line x1="326" y1="692" x2="284" y2="734" stroke="#00838F" stroke-width="16" stroke-linecap="round"/>
+  <polygon points="268,748 296,720 268,692" fill="#00838F" opacity="0.7"/>
+
+  <!-- Bottom label chips -->
+  <rect x="322" y="796" width="100" height="44" rx="22" fill="#00838F"/>
+  <text x="372" y="819" font-family="'Segoe UI', Arial, sans-serif" font-size="28" font-weight="700"
+        fill="white" text-anchor="middle" dominant-baseline="middle">2×</text>
+  <rect x="462" y="796" width="100" height="44" rx="22" fill="#006064"/>
+  <text x="512" y="819" font-family="'Segoe UI', Arial, sans-serif" font-size="28" font-weight="700"
+        fill="white" text-anchor="middle" dominant-baseline="middle">4×</text>
+  <rect x="602" y="796" width="100" height="44" rx="22" fill="#00838F"/>
+  <text x="652" y="819" font-family="'Segoe UI', Arial, sans-serif" font-size="28" font-weight="700"
+        fill="white" text-anchor="middle" dominant-baseline="middle">8×</text>
+</svg>

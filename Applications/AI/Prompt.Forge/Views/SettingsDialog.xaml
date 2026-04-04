@@ -118,9 +118,9 @@
                     <ColumnDefinition Width="8"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-                <TextBox Grid.Column="0" x:Name="TxtDbPath" Height="36"/>
-                <Button  Grid.Column="2" Content="찾아보기" Height="36" Click="Browse_Click"/>
-                <Button  Grid.Column="4" Content="기본값" Height="36" Click="ResetDbPath_Click"/>
+                <TextBox Grid.Column="0" x:Name="TxtDbPath" Height="48"/>
+                <Button  Grid.Column="2" Content="찾아보기" Height="32" Click="Browse_Click"/>
+                <Button  Grid.Column="4" Content="기본값" Height="32" Click="ResetDbPath_Click"/>
             </Grid>
             <TextBlock x:Name="TxtCurrentPath" Foreground="#555566" FontSize="10"
                        TextWrapping="Wrap" Margin="0,6,0,0"/>
@@ -146,11 +146,11 @@
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Column="0">
                     <Label Content="GitHub Personal Access Token"/>
-                    <TextBox x:Name="TxtPat" Height="36"/>
+                    <TextBox x:Name="TxtPat" Height="48"/>
                 </StackPanel>
                 <StackPanel Grid.Column="2">
                     <Label Content="Gist ID (처음 업로드 후 자동 저장)"/>
-                    <TextBox x:Name="TxtGistId" Height="36"/>
+                    <TextBox x:Name="TxtGistId" Height="48"/>
                 </StackPanel>
             </Grid>
         </StackPanel>

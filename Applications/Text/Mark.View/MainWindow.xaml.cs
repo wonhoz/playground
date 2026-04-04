@@ -226,6 +226,7 @@ public partial class MainWindow : Window
             await Viewer.EnsureCoreWebView2Async(env);
             Viewer.CoreWebView2.Settings.IsStatusBarEnabled = false;
             Viewer.CoreWebView2.Settings.AreDefaultContextMenusEnabled = false;
+            Viewer.CoreWebView2.NavigationStarting += OnNavigationStarting;
             Viewer.CoreWebView2.NavigationCompleted += OnNavigationCompleted;
             Viewer.CoreWebView2.WebMessageReceived += OnWebViewMessageReceived;
             _webViewReady = true;
@@ -238,6 +239,57 @@ public partial class MainWindow : Window
             MessageBox.Show($"WebView2 초기화 실패:\n{ex.Message}\n\nMicrosoft Edge WebView2 런타임이 설치되어 있는지 확인하세요.",
                 "초기화 오류", MessageBoxButton.OK, MessageBoxImage.Error);
         }
+    }
+
+    private void OnNavigationStarting(object? sender, CoreWebView2NavigationStartingEventArgs e)
+    {
+        var uri = e.Uri;
+        if (string.IsNullOrEmpty(uri) || uri.StartsWith("about:")) return;
+
+        // http/https 외부 링크 → 시스템 기본 브라우저로 열기
+        if (uri.StartsWith("http://") || uri.StartsWith("https://"))
+        {
+            e.Cancel = true;
+            try { System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(uri) { UseShellExecute = true }); }
+            catch { }
+            return;
+        }
+
+        // file:// → 앵커(#) 이동 또는 로컬 MD 파일 열기
+        if (uri.StartsWith("file://"))
+        {
+            e.Cancel = true;
+            var hashIdx = uri.IndexOf('#');
+            if (hashIdx >= 0)
+            {
+                // 인페이지 앵커 이동
+                var anchorId = Uri.UnescapeDataString(uri[(hashIdx + 1)..]);
+                _ = ScrollToAnchorAsync(anchorId);
+            }
+            else
+            {
+                // 상대 경로 로컬 파일 링크 → Mark.View에서 열기
+                try
+                {
+                    var localPath = new Uri(uri).LocalPath;
+                    if (File.Exists(localPath)) OpenFile(localPath);
+                }
+                catch { }
+            }
+        }
+    }
+
+    private async Task ScrollToAnchorAsync(string anchorId)
+    {
+        if (!_webViewReady) return;
+        try
+        {
+            var escapedId = System.Text.Json.JsonSerializer.Serialize(anchorId);
+            await Viewer.ExecuteScriptAsync(
+                $"(function(){{var el=document.getElementById({escapedId});" +
+                $"if(el)el.scrollIntoView({{behavior:'smooth'}});}})()");
+        }
+        catch { }
     }
 
     private void OnNavigationCompleted(object? sender, CoreWebView2NavigationCompletedEventArgs e)

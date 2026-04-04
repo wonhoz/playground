@@ -311,6 +311,12 @@ public partial class MainWindow : Window
             var url = msg[5..];
             System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(url) { UseShellExecute = true });
         }
+        else if (msg?.StartsWith("anchor:") == true)
+        {
+            var id = msg[7..];
+            _ = Viewer.ExecuteScriptAsync(
+                $"document.getElementById({System.Text.Json.JsonSerializer.Serialize(id)})?.scrollIntoView({{behavior:'smooth'}})");
+        }
     }
 
     private void HighlightTocEntry(string id)

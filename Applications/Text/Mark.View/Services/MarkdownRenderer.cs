@@ -27,17 +27,15 @@ public class MarkdownRenderer
         return WrapInPage(body, filePath, theme);
     }
 
-    // href="#id" → onclick 방식으로 교체 (WebView2 navigation 우회)
-    // ⚠ onclick 속성은 큰따옴표로 감싸므로 내부 JS 문자열은 반드시 작은따옴표 사용
+    // href="#id" → webview postMessage 방식으로 교체 (C# OnWebViewMessageReceived가 처리)
     private static string RewriteAnchorLinks(string html)
     {
         return _anchorRegex.Replace(html, m =>
         {
             var fragment = m.Groups[1].Value; // "#section-id"
             var id = Uri.UnescapeDataString(fragment[1..]); // "section-id"
-            // 작은따옴표/백슬래시 이스케이프 후 싱글쿼트 JS 문자열로 래핑
             var safeId = id.Replace("\\", "\\\\").Replace("'", "\\'");
-            return $"href=\"javascript:void(0)\" onclick=\"var el=document.getElementById('{safeId}');if(el)el.scrollIntoView({{behavior:'smooth'}})\"";
+            return $"href=\"javascript:void(0)\" onclick=\"window.chrome.webview.postMessage('anchor:{safeId}')\"";
         });
     }
 

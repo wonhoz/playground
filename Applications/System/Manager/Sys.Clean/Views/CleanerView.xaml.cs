@@ -207,9 +207,14 @@ public partial class CleanerView : UserControl
         };
         menuCleanNow.Click += async (_, _) => await CleanSingleTargetAsync(target);
 
+        var sep = new Separator
+        {
+            Style = (Style)Application.Current.FindResource("MenuSeparator")
+        };
+
         var ctx = new ContextMenu();
         ctx.Items.Add(menuOpen);
-        ctx.Items.Add(new Separator());
+        ctx.Items.Add(sep);
         ctx.Items.Add(menuCleanNow);
 
         return new Border

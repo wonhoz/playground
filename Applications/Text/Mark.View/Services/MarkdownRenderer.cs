@@ -35,6 +35,13 @@ public class MarkdownRenderer
             + "<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css'>"
             + $"<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/highlight.js@11/dist/styles/{hlCss}.min.css'>"
             + "<style>" + GetCommonCss() + css + "</style>"
+            + @"<script>document.addEventListener('click',function(e){
+var a=e.target.closest('a[href]');if(!a)return;
+var h=a.getAttribute('href');if(!h)return;
+if(h.startsWith('#')){e.preventDefault();e.stopPropagation();
+var el=document.getElementById(decodeURIComponent(h.slice(1)));
+if(el)el.scrollIntoView({behavior:'smooth'});}
+},true);</script>"
             + "</head><body>" + body
             + "<script src='https://cdn.jsdelivr.net/npm/highlight.js@11/dist/highlight.min.js'"
             + " onload=\"if(typeof hljs!=='undefined')hljs.highlightAll();\""

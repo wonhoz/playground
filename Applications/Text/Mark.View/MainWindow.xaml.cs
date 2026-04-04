@@ -268,42 +268,12 @@ public partial class MainWindow : Window
     {
         _ = HideLoadingAsync(300);
         _ = ExtractTocAsync();
-        _ = InjectAnchorHandlerAsync();
         if (_pendingScrollY > 0)
             _ = RestoreScrollAsync();
         if (_isTocVisible)
             _ = InjectTocScrollMonitorAsync();
         if (_previewFontSize != 15)
             _ = ApplyPreviewFontSizeAsync();
-    }
-
-    private async Task InjectAnchorHandlerAsync()
-    {
-        try
-        {
-            await Viewer.ExecuteScriptAsync(@"
-(function() {
-    if (window.__anchorHandlerInstalled) return;
-    window.__anchorHandlerInstalled = true;
-    document.addEventListener('click', function(e) {
-        var a = e.target.closest('a[href]');
-        if (!a) return;
-        var href = a.getAttribute('href');
-        if (!href) return;
-        if (href.startsWith('#')) {
-            e.preventDefault();
-            var id = decodeURIComponent(href.slice(1));
-            var el = document.getElementById(id);
-            if (el) el.scrollIntoView({behavior: 'smooth'});
-        } else if (href.startsWith('http://') || href.startsWith('https://')) {
-            e.preventDefault();
-            if (window.chrome && window.chrome.webview)
-                window.chrome.webview.postMessage('open:' + href);
-        }
-    }, true);
-})()");
-        }
-        catch { }
     }
 
     private async Task InjectTocScrollMonitorAsync()

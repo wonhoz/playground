@@ -456,11 +456,17 @@ public partial class MainWindow : Window
         });
 
         var savedPath = StatusPath.Text;
+        var savedTip = StatusPath.ToolTip;
         var autoMsg = $"자동 저장 완료 ({modified.Count}개)";
         StatusPath.Text = autoMsg;
+        StatusPath.ToolTip = autoSaveDir;
         await Task.Delay(2000);
         // 다른 핸들러가 텍스트를 변경하지 않은 경우에만 복원
-        if (StatusPath.Text == autoMsg) StatusPath.Text = savedPath;
+        if (StatusPath.Text == autoMsg)
+        {
+            StatusPath.Text = savedPath;
+            StatusPath.ToolTip = savedTip;
+        }
     }
 
     // ── 탭 관리 ─────────────────────────────────────────────────────────

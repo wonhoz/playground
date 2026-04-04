@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg04" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFF8E1"/>
+      <stop offset="100%" stop-color="#FFE0B2"/>
+    </linearGradient>
+    <linearGradient id="moldGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FF8F00"/>
+      <stop offset="100%" stop-color="#E65100"/>
+    </linearGradient>
+    <linearGradient id="sparkGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFD740"/>
+      <stop offset="100%" stop-color="#FFAB00"/>
+    </linearGradient>
+    <filter id="glow04">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+    <filter id="sh04">
+      <feDropShadow dx="0" dy="8" stdDeviation="14" flood-color="#00000035"/>
+    </filter>
+  </defs>
+
+  <!-- Layer 1: Warm cream background -->
+  <rect width="1024" height="1024" rx="190" fill="#FF8F00"/>
+  <rect x="16" y="16" width="992" height="992" rx="178" fill="url(#bg04)"/>
+
+  <!-- Layer 2: Casting mold — a crucible/frame shape -->
+  <!-- Mold body (U-shape representing a casting mold) -->
+  <path d="M 280,280 L 280,660 Q 280,760 512,760 Q 744,760 744,660 L 744,280 Z"
+        fill="url(#moldGrad)" rx="16" filter="url(#sh04)"/>
+
+  <!-- Mold inner cavity (transparent/light) -->
+  <path d="M 330,310 L 330,640 Q 330,710 512,710 Q 694,710 694,640 L 694,310 Z"
+        fill="#FFF8E1"/>
+
+  <!-- Molten pour from top — stream coming in -->
+  <ellipse cx="512" cy="260" rx="80" ry="30" fill="#FF6D00" opacity="0.9"/>
+  <path d="M 432,260 Q 432,300 512,320 Q 592,300 592,260"
+        fill="#FFD740" opacity="0.8"/>
+
+  <!-- Cast result inside mold: ICO shape with pixel grid -->
+  <rect x="382" y="380" width="260" height="260" rx="28" fill="#1565C0" filter="url(#sh04)"/>
+  <!-- ICO pixel representation (2x2 grid of colored squares) -->
+  <rect x="402" y="400" width="100" height="100" rx="8" fill="#42A5F5"/>
+  <rect x="512" y="400" width="100" height="100" rx="8" fill="#66BB6A"/>
+  <rect x="402" y="510" width="100" height="100" rx="8" fill="#FF7043"/>
+  <rect x="512" y="510" width="100" height="100" rx="8" fill="#AB47BC"/>
+
+  <!-- Layer 3: Sparks + CAST label -->
+  <!-- Sparks around the mold opening -->
+  <circle cx="450" cy="220" r="12" fill="#FFD740" opacity="0.9"/>
+  <circle cx="512" cy="195" r="16" fill="#FFAB00" opacity="0.95"/>
+  <circle cx="574" cy="220" r="12" fill="#FFD740" opacity="0.9"/>
+  <circle cx="420" cy="200" r="8" fill="#FF8F00" opacity="0.7"/>
+  <circle cx="604" cy="200" r="8" fill="#FF8F00" opacity="0.7"/>
+
+  <!-- "CAST" label at bottom -->
+  <rect x="362" y="688" width="300" height="68" rx="34" fill="#E65100" filter="url(#sh04)"/>
+  <text x="512" y="723" font-family="'Segoe UI', Arial, sans-serif" font-size="52" font-weight="900"
+        fill="white" text-anchor="middle" dominant-baseline="middle" letter-spacing="8">CAST</text>
+
+  <!-- Top tiny mold bolts -->
+  <circle cx="300" cy="290" r="16" fill="#BF360C"/>
+  <circle cx="724" cy="290" r="16" fill="#BF360C"/>
+  <circle cx="300" cy="650" r="16" fill="#BF360C"/>
+  <circle cx="724" cy="650" r="16" fill="#BF360C"/>
+</svg>

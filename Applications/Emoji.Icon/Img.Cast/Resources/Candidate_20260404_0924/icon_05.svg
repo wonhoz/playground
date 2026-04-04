@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <filter id="sh05">
+      <feDropShadow dx="0" dy="5" stdDeviation="10" flood-color="#00000025"/>
+    </filter>
+    <linearGradient id="bg05" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FAFAFA"/>
+      <stop offset="100%" stop-color="#F0F4FF"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Layer 1: Clean white/light background -->
+  <rect width="1024" height="1024" rx="190" fill="#5C6BC0"/>
+  <rect x="16" y="16" width="992" height="992" rx="178" fill="url(#bg05)"/>
+
+  <!-- Layer 2: 2x3 format badge grid -->
+  <!-- Row 1, Col 1: SVG — blue -->
+  <rect x="130" y="200" width="340" height="180" rx="28" fill="#1565C0" filter="url(#sh05)"/>
+  <text x="300" y="291" font-family="'Segoe UI', Arial, sans-serif" font-size="96" font-weight="900"
+        fill="white" text-anchor="middle" dominant-baseline="middle">SVG</text>
+
+  <!-- Row 1, Col 2: PNG — green -->
+  <rect x="554" y="200" width="340" height="180" rx="28" fill="#2E7D32" filter="url(#sh05)"/>
+  <text x="724" y="291" font-family="'Segoe UI', Arial, sans-serif" font-size="96" font-weight="900"
+        fill="white" text-anchor="middle" dominant-baseline="middle">PNG</text>
+
+  <!-- Row 2, Col 1: JPG — red-orange -->
+  <rect x="130" y="422" width="340" height="180" rx="28" fill="#C62828" filter="url(#sh05)"/>
+  <text x="300" y="513" font-family="'Segoe UI', Arial, sans-serif" font-size="96" font-weight="900"
+        fill="white" text-anchor="middle" dominant-baseline="middle">JPG</text>
+
+  <!-- Row 2, Col 2: BMP — amber -->
+  <rect x="554" y="422" width="340" height="180" rx="28" fill="#E65100" filter="url(#sh05)"/>
+  <text x="724" y="513" font-family="'Segoe UI', Arial, sans-serif" font-size="96" font-weight="900"
+        fill="white" text-anchor="middle" dominant-baseline="middle">BMP</text>
+
+  <!-- Row 3, spanning: ICO — purple with pixel grid hint -->
+  <rect x="130" y="644" width="764" height="180" rx="28" fill="#4527A0" filter="url(#sh05)"/>
+  <text x="390" y="735" font-family="'Segoe UI', Arial, sans-serif" font-size="96" font-weight="900"
+        fill="white" text-anchor="middle" dominant-baseline="middle">ICO</text>
+
+  <!-- Layer 3: ICO size chips inside the wide ICO badge -->
+  <rect x="480" y="666" width="88" height="40" rx="20" fill="#7C4DFF"/>
+  <text x="524" y="687" font-family="'Segoe UI', Arial, sans-serif" font-size="26" font-weight="700"
+        fill="white" text-anchor="middle" dominant-baseline="middle">16px</text>
+
+  <rect x="576" y="666" width="88" height="40" rx="20" fill="#7C4DFF"/>
+  <text x="620" y="687" font-family="'Segoe UI', Arial, sans-serif" font-size="26" font-weight="700"
+        fill="white" text-anchor="middle" dominant-baseline="middle">32px</text>
+
+  <rect x="672" y="666" width="88" height="40" rx="20" fill="#7C4DFF"/>
+  <text x="716" y="687" font-family="'Segoe UI', Arial, sans-serif" font-size="26" font-weight="700"
+        fill="white" text-anchor="middle" dominant-baseline="middle">256px</text>
+
+  <!-- Small conversion arrows between the grid cells -->
+  <text x="512" y="422" font-family="'Segoe UI', Arial, sans-serif" font-size="48"
+        fill="#90A4AE" text-anchor="middle" dominant-baseline="middle" opacity="0.0">⇄</text>
+
+  <!-- Corner arrows — conversion symbol -->
+  <circle cx="512" cy="411" r="22" fill="#5C6BC0" opacity="0.2"/>
+  <text x="512" y="411" font-family="'Segoe UI', Arial, sans-serif" font-size="30" font-weight="900"
+        fill="#3F51B5" text-anchor="middle" dominant-baseline="middle">↔</text>
+</svg>

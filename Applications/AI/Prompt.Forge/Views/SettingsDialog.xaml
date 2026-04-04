@@ -1,8 +1,7 @@
 <Window x:Class="Prompt.Forge.Views.SettingsDialog"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="동기화 설정" Width="580"
-        SizeToContent="Height"
+        Title="동기화 설정" Width="640" Height="520"
         WindowStartupLocation="CenterOwner"
         Background="#1A1A2A" Foreground="#E0E0E0"
         ResizeMode="NoResize"
@@ -96,20 +95,19 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="20"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="24"/>
+            <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <!-- 방법 1: DB 경로 -->
         <StackPanel Grid.Row="0">
-            <TextBlock FontSize="14" FontWeight="SemiBold" Foreground="#7C3AED" Margin="0,0,0,10">
-                방법 1 — 클라우드 드라이브 (OneDrive / Google Drive / Dropbox)
-            </TextBlock>
-            <TextBlock Foreground="#888899" FontSize="11" TextWrapping="Wrap" Margin="0,0,0,10">
-                DB 파일 경로를 클라우드 드라이브 폴더 안으로 지정하면 자동으로 동기화됩니다.
-                변경 후 앱을 재시작하면 적용됩니다. (동시에 두 PC에서 열지 마세요)
-            </TextBlock>
-            <Label Content="프롬프트 DB 파일 경로 (비워두면 기본값 사용)"/>
+            <TextBlock Text="방법 1 — 클라우드 드라이브 (OneDrive / Google Drive / Dropbox)"
+                       FontSize="14" FontWeight="SemiBold" Foreground="#7C3AED"
+                       TextTrimming="CharacterEllipsis" Margin="0,0,0,8"/>
+            <TextBlock Foreground="#888899" FontSize="11" TextWrapping="Wrap" Margin="0,0,0,10"
+                       Text="DB 파일 경로를 클라우드 드라이브 폴더로 지정하면 자동 동기화됩니다. 변경 후 재시작 필요. (동시에 두 PC에서 열지 마세요)"/>
+            <TextBlock Text="프롬프트 DB 파일 경로 (비워두면 기본값)" Foreground="#A0A0BB"
+                       FontSize="12" Margin="0,0,0,6"/>
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -118,12 +116,12 @@
                     <ColumnDefinition Width="8"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-                <TextBox Grid.Column="0" x:Name="TxtDbPath" Height="36"/>
-                <Button  Grid.Column="2" Content="찾아보기" Height="36" Click="Browse_Click"/>
-                <Button  Grid.Column="4" Content="기본값" Height="36" Click="ResetDbPath_Click"/>
+                <TextBox Grid.Column="0" x:Name="TxtDbPath" Height="34"/>
+                <Button  Grid.Column="2" Content="찾아보기" Height="34" Click="Browse_Click"/>
+                <Button  Grid.Column="4" Content="기본값" Height="34" Click="ResetDbPath_Click"/>
             </Grid>
             <TextBlock x:Name="TxtCurrentPath" Foreground="#555566" FontSize="10"
-                       TextWrapping="Wrap" Margin="0,6,0,0"/>
+                       TextTrimming="CharacterEllipsis" Margin="0,5,0,0"/>
         </StackPanel>
 
         <!-- 구분선 -->
@@ -131,28 +129,17 @@
 
         <!-- 방법 2: GitHub Gist -->
         <StackPanel Grid.Row="2">
-            <TextBlock FontSize="14" FontWeight="SemiBold" Foreground="#7C3AED" Margin="0,0,0,10">
-                방법 2 — GitHub Gist (JSON 수동 동기화)
-            </TextBlock>
-            <TextBlock Foreground="#888899" FontSize="11" TextWrapping="Wrap" Margin="0,0,0,10">
-                GitHub Personal Access Token(PAT)을 입력하면 툴바의 ☁ 버튼으로 Gist에 업로드/다운로드할 수 있습니다.
-                PAT 권한: gist (read/write)
-            </TextBlock>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="16"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <StackPanel Grid.Column="0">
-                    <Label Content="GitHub Personal Access Token"/>
-                    <TextBox x:Name="TxtPat" Height="36"/>
-                </StackPanel>
-                <StackPanel Grid.Column="2">
-                    <Label Content="Gist ID (처음 업로드 후 자동 저장)"/>
-                    <TextBox x:Name="TxtGistId" Height="36"/>
-                </StackPanel>
-            </Grid>
+            <TextBlock Text="방법 2 — GitHub Gist (JSON 수동 동기화)"
+                       FontSize="14" FontWeight="SemiBold" Foreground="#7C3AED"
+                       TextTrimming="CharacterEllipsis" Margin="0,0,0,8"/>
+            <TextBlock Foreground="#888899" FontSize="11" TextWrapping="Wrap" Margin="0,0,0,10"
+                       Text="GitHub PAT를 입력하면 툴바 ☁ 버튼으로 Gist 업로드/다운로드가 가능합니다. PAT 권한: gist (read/write)"/>
+            <TextBlock Text="GitHub Personal Access Token (PAT)" Foreground="#A0A0BB"
+                       FontSize="12" Margin="0,0,0,6"/>
+            <TextBox x:Name="TxtPat" Height="34" Margin="0,0,0,12"/>
+            <TextBlock Text="Gist ID (처음 업로드 시 자동 생성·저장)" Foreground="#A0A0BB"
+                       FontSize="12" TextTrimming="CharacterEllipsis" Margin="0,0,0,6"/>
+            <TextBox x:Name="TxtGistId" Height="34"/>
         </StackPanel>
 
         <!-- 하단 버튼 -->

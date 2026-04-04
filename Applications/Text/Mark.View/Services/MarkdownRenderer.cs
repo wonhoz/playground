@@ -1,3 +1,4 @@
+using System.Text.RegularExpressions;
 using Markdig;
 using Markdig.Extensions.AutoIdentifiers;
 
@@ -6,6 +7,10 @@ namespace MarkView.Services;
 public class MarkdownRenderer
 {
     private readonly MarkdownPipeline _pipeline;
+
+    // Markdig이 생성한 <a href="#id"> 를 onclick 스크롤 방식으로 교체
+    private static readonly Regex _anchorRegex =
+        new(@"href=""(#[^""]+)""", RegexOptions.Compiled);
 
     public MarkdownRenderer()
     {
@@ -18,7 +23,20 @@ public class MarkdownRenderer
     public string RenderToHtml(string markdown, string? filePath = null, string theme = "dark")
     {
         var body = Markdown.ToHtml(markdown, _pipeline);
+        body = RewriteAnchorLinks(body);
         return WrapInPage(body, filePath, theme);
+    }
+
+    // href="#id" → onclick 방식으로 교체 (WebView2 navigation 우회)
+    private static string RewriteAnchorLinks(string html)
+    {
+        return _anchorRegex.Replace(html, m =>
+        {
+            var fragment = m.Groups[1].Value; // "#section-id"
+            var id = Uri.UnescapeDataString(fragment[1..]); // "section-id"
+            var jsId = System.Text.Json.JsonSerializer.Serialize(id);
+            return $"href=\"javascript:void(0)\" onclick=\"var el=document.getElementById({jsId});if(el)el.scrollIntoView({{behavior:'smooth'}})\"";
+        });
     }
 
     private string WrapInPage(string body, string? filePath, string theme)
@@ -35,13 +53,6 @@ public class MarkdownRenderer
             + "<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css'>"
             + $"<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/highlight.js@11/dist/styles/{hlCss}.min.css'>"
             + "<style>" + GetCommonCss() + css + "</style>"
-            + @"<script>document.addEventListener('click',function(e){
-var a=e.target.closest('a[href]');if(!a)return;
-var h=a.getAttribute('href');if(!h)return;
-if(h.startsWith('#')){e.preventDefault();e.stopPropagation();
-var el=document.getElementById(decodeURIComponent(h.slice(1)));
-if(el)el.scrollIntoView({behavior:'smooth'});}
-},true);</script>"
             + "</head><body>" + body
             + "<script src='https://cdn.jsdelivr.net/npm/highlight.js@11/dist/highlight.min.js'"
             + " onload=\"if(typeof hljs!=='undefined')hljs.highlightAll();\""

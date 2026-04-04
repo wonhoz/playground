@@ -229,25 +229,6 @@ public partial class MainWindow : Window
             Viewer.CoreWebView2.NavigationCompleted += OnNavigationCompleted;
             Viewer.CoreWebView2.WebMessageReceived += OnWebViewMessageReceived;
             Viewer.CoreWebView2.NavigationStarting += OnNavigationStarting;
-            await Viewer.CoreWebView2.AddScriptToExecuteOnDocumentCreatedAsync(@"
-(function() {
-    document.addEventListener('click', function(e) {
-        var a = e.target.closest('a[href]');
-        if (!a) return;
-        var href = a.getAttribute('href');
-        if (!href || !href.startsWith('#')) return;
-        e.preventDefault();
-        e.stopPropagation();
-        var id = decodeURIComponent(href.slice(1));
-        var el = document.getElementById(id);
-        if (el) { el.scrollIntoView({behavior: 'smooth'}); return; }
-        var lower = id.toLowerCase();
-        document.querySelectorAll('h1,h2,h3,h4,h5,h6').forEach(function(h) {
-            if (h.id.toLowerCase() === lower) h.scrollIntoView({behavior: 'smooth'});
-        });
-    }, true);
-})();
-");
             _webViewReady = true;
             _webViewReadyTcs.TrySetResult();
             HideLoading();
@@ -266,34 +247,15 @@ public partial class MainWindow : Window
         if (uri.StartsWith("about:") || uri.StartsWith("blob:")) return;
         if (uri.StartsWith("http://") || uri.StartsWith("https://"))
         {
+            // 외부 링크는 시스템 브라우저로 열기
             e.Cancel = true;
             System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(uri) { UseShellExecute = true });
         }
         else if (uri.StartsWith("file://"))
         {
-            // 파일 URL의 fragment(#) 포함 여부 확인 — 앵커 이동은 JS가 처리하지만 혹시 통과된 경우 차단
-            var hashIdx = uri.IndexOf('#');
-            if (hashIdx > 0)
-            {
-                e.Cancel = true;
-                var id = Uri.UnescapeDataString(uri[(hashIdx + 1)..]);
-                var script = $@"
-(function(){{
-    var el=document.getElementById({System.Text.Json.JsonSerializer.Serialize(id)});
-    if(el){{el.scrollIntoView({{behavior:'smooth'}});return;}}
-    var lower={System.Text.Json.JsonSerializer.Serialize(id.ToLowerInvariant())};
-    document.querySelectorAll('h1,h2,h3,h4,h5,h6').forEach(function(h){{
-        if(h.id.toLowerCase()===lower)h.scrollIntoView({{behavior:'smooth'}});
-    }});
-}})()";
-                Dispatcher.InvokeAsync(async () => await Viewer.ExecuteScriptAsync(script),
-                    System.Windows.Threading.DispatcherPriority.Background);
-            }
-            else
-            {
-                // fragment 없는 파일 네비게이션 차단 (마크다운 파일 직접 열기 시도 방지)
-                e.Cancel = true;
-            }
+            // 앵커 링크는 RewriteAnchorLinks가 onclick으로 이미 변환했으므로 여기 도달하면 안 됨
+            // 혹시 도달하면 차단 (마크다운 파일 직접 열기 방지)
+            e.Cancel = true;
         }
     }
 

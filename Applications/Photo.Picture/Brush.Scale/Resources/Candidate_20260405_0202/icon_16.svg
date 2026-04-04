@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg16" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#E8EAF6"/>
+      <stop offset="100%" stop-color="#C5CAE9"/>
+    </linearGradient>
+    <linearGradient id="gem16top" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#E8F5E9"/>
+      <stop offset="100%" stop-color="#B2DFDB"/>
+    </linearGradient>
+    <linearGradient id="gem16bot" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#00BCD4"/>
+      <stop offset="100%" stop-color="#006064"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="200" fill="url(#bg16)"/>
+  <!-- Layer 2: Diamond gem — rough (left/behind) to faceted (right/front) -->
+  <!-- Rough stone (left, gray) -->
+  <polygon points="200,320 300,200 430,240 460,380 380,480 240,460" fill="#B0BEC5" opacity="0.7"/>
+  <polygon points="200,320 240,460 300,500 300,200" fill="#90A4AE" opacity="0.8"/>
+  <!-- Arrow -->
+  <line x1="500" y1="380" x2="560" y2="380" stroke="#3F51B5" stroke-width="18" stroke-linecap="round"/>
+  <polygon points="546,350 610,380 546,410" fill="#3F51B5"/>
+  <!-- Cut diamond (right, bright) -->
+  <!-- Table (top) -->
+  <polygon points="660,200 820,200 880,320 740,360 600,320" fill="url(#gem16top)"/>
+  <!-- Crown facets -->
+  <polygon points="660,200 600,320 740,360" fill="#80CBC4"/>
+  <polygon points="820,200 880,320 740,360" fill="#4DB6AC"/>
+  <polygon points="660,200 740,140 820,200" fill="#E0F7FA"/>
+  <!-- Pavilion -->
+  <polygon points="600,320 740,360 680,560" fill="url(#gem16bot)"/>
+  <polygon points="880,320 740,360 800,560" fill="#0097A7"/>
+  <polygon points="680,560 800,560 740,680" fill="#006064"/>
+  <polygon points="740,360 680,560 800,560" fill="#00BCD4" opacity="0.8"/>
+  <!-- Sparkle highlights -->
+  <circle cx="760" cy="220" r="16" fill="white" opacity="0.9"/>
+  <circle cx="700" cy="250" r="10" fill="white" opacity="0.7"/>
+  <!-- Layer 3: Quality labels -->
+  <text x="168" y="580" font-family="'Segoe UI',Arial,sans-serif" font-size="56" font-weight="600" fill="#78909C">low res</text>
+  <text x="626" y="800" font-family="'Segoe UI',Arial,sans-serif" font-size="56" font-weight="700" fill="#006064">4K sharp</text>
+</svg>

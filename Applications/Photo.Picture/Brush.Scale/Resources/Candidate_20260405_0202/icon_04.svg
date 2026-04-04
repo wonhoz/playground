@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg04" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FCE4EC"/>
+      <stop offset="100%" stop-color="#FF80AB"/>
+    </linearGradient>
+    <linearGradient id="bigframe04" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FF4081"/>
+      <stop offset="100%" stop-color="#F50057"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg04)"/>
+  <!-- Layer 2: Small photo frame (before) then big (after) -->
+  <!-- Small frame (top-left, before) -->
+  <rect x="130" y="180" width="260" height="200" rx="16" fill="white" opacity="0.8"/>
+  <rect x="148" y="198" width="224" height="128" rx="8" fill="#FFCDD2"/>
+  <!-- Blurry image in small frame -->
+  <rect x="148" y="198" width="112" height="64" rx="4" fill="#EF9A9A"/>
+  <rect x="260" y="198" width="112" height="64" rx="4" fill="#E57373"/>
+  <rect x="148" y="262" width="112" height="64" rx="4" fill="#EF5350"/>
+  <rect x="260" y="262" width="112" height="64" rx="4" fill="#E53935"/>
+  <!-- Small frame label -->
+  <text x="155" y="415" font-family="'Segoe UI',Arial,sans-serif" font-size="56" font-weight="700" fill="#E91E63">64×64</text>
+  <!-- Arrow (diagonal) -->
+  <path d="M400 380 Q540 440 580 500" fill="none" stroke="#E91E63" stroke-width="18" stroke-linecap="round"/>
+  <polygon points="560,488 620,530 570,570" fill="#E91E63"/>
+  <!-- Big frame (bottom-right, after) -->
+  <rect x="440" y="380" width="454" height="474" rx="20" fill="url(#bigframe04)"/>
+  <rect x="464" y="404" width="406" height="326" rx="12" fill="#FFB3C8"/>
+  <!-- Sharp image in big frame — crisp blocks -->
+  <rect x="464" y="404" width="203" height="163" rx="0" fill="#E91E63"/>
+  <rect x="667" y="404" width="203" height="163" rx="0" fill="#F48FB1"/>
+  <rect x="464" y="567" width="203" height="163" rx="0" fill="#FF80AB"/>
+  <rect x="667" y="567" width="203" height="163" rx="0" fill="#AD1457"/>
+  <!-- Big frame label -->
+  <text x="476" y="840" font-family="'Segoe UI',Arial,sans-serif" font-size="68" font-weight="800" fill="white">256×256</text>
+  <!-- Layer 3: x4 badge -->
+  <circle cx="880" cy="420" r="52" fill="white"/>
+  <text x="852" y="440" font-family="'Segoe UI',Arial,sans-serif" font-size="58" font-weight="900" fill="#E91E63">×4</text>
+</svg>

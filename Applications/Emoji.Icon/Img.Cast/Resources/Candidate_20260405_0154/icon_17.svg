@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg17" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1A1A2E"/>
+      <stop offset="100%" stop-color="#16213E"/>
+    </linearGradient>
+    <linearGradient id="photo17" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#B0BEC5"/>
+      <stop offset="100%" stop-color="#607D8B"/>
+    </linearGradient>
+    <linearGradient id="emerge17" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#CFD8DC"/>
+      <stop offset="100%" stop-color="#ECEFF1"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: Background (dark room) -->
+  <rect width="1024" height="1024" rx="200" fill="url(#bg17)"/>
+  <!-- Faint red safelight -->
+  <circle cx="850" cy="180" r="100" fill="#D50000" opacity="0.25"/>
+  <!-- Layer 2: Photo emerging from developer tray -->
+  <!-- Tray (developer bath) -->
+  <rect x="140" y="640" width="744" height="200" rx="20" fill="#263238"/>
+  <rect x="152" y="652" width="720" height="176" rx="16" fill="#37474F"/>
+  <!-- Liquid in tray -->
+  <rect x="152" y="700" width="720" height="128" rx="12" fill="#546E7A" opacity="0.8"/>
+  <!-- Bubbles in liquid -->
+  <circle cx="280" cy="740" r="10" fill="#78909C" opacity="0.5"/>
+  <circle cx="460" cy="760" r="8" fill="#78909C" opacity="0.4"/>
+  <circle cx="700" cy="745" r="12" fill="#78909C" opacity="0.5"/>
+  <!-- Photo paper emerging from liquid (partially submerged) -->
+  <!-- Submerged part (lighter, undeveloped) -->
+  <rect x="280" y="700" width="464" height="180" rx="8" fill="url(#photo17)" opacity="0.6"/>
+  <!-- Emerged/developed part with image appearing -->
+  <rect x="280" y="250" width="464" height="470" rx="8" fill="url(#emerge17)"/>
+  <!-- Image developing (silhouette appearing) — ICO-like image materializing -->
+  <rect x="340" y="310" width="344" height="260" rx="8" fill="#CFD8DC"/>
+  <!-- Image content emerging (a file icon materializing) -->
+  <rect x="380" y="330" width="264" height="200" rx="8" fill="#ECEFF1" opacity="0.8"/>
+  <!-- File content partially revealed -->
+  <text x="396" y="452" font-family="'Segoe UI',Arial,sans-serif" font-size="88" font-weight="900" fill="#37474F" opacity="0.7">ICO</text>
+  <!-- White border of photo -->
+  <rect x="280" y="250" width="464" height="470" rx="8" fill="none" stroke="white" stroke-width="10"/>
+  <!-- Layer 3: Red safelight glow on photo -->
+  <rect x="280" y="250" width="464" height="470" rx="8" fill="#D50000" opacity="0.06"/>
+  <!-- Tongs holding photo -->
+  <line x1="380" y1="200" x2="350" y2="340" stroke="#607D8B" stroke-width="16" stroke-linecap="round"/>
+  <line x1="644" y1="200" x2="674" y2="340" stroke="#607D8B" stroke-width="16" stroke-linecap="round"/>
+</svg>

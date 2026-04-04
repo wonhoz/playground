@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg16" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFF8E1"/>
+      <stop offset="100%" stop-color="#FFCC80"/>
+    </linearGradient>
+    <linearGradient id="liquid16" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFD180"/>
+      <stop offset="100%" stop-color="#E65100"/>
+    </linearGradient>
+    <linearGradient id="bottle16a" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFF9C4"/>
+      <stop offset="100%" stop-color="#F9A825"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg16)"/>
+  <!-- Layer 2: Two bottles — left pouring into right -->
+  <!-- Left bottle (SVG) -->
+  <rect x="130" y="200" width="200" height="380" rx="24" fill="url(#bottle16a)" stroke="#E65100" stroke-width="8"/>
+  <!-- Liquid in left bottle (partial) -->
+  <rect x="138" y="340" width="184" height="232" rx="18" fill="url(#liquid16)" opacity="0.8"/>
+  <!-- Bottle neck left -->
+  <rect x="185" y="150" width="90" height="70" rx="14" fill="#F9A825" stroke="#E65100" stroke-width="8"/>
+  <!-- Left label -->
+  <text x="150" y="308" font-family="'Segoe UI',Arial,sans-serif" font-size="68" font-weight="900" fill="#BF360C">SVG</text>
+  <!-- Pouring stream (tilted from left to right bottle) -->
+  <path d="M330 170 Q512 400 660 220" fill="none" stroke="url(#liquid16)" stroke-width="36" stroke-linecap="round" opacity="0.9"/>
+  <!-- Right bottle (ICO, receiving) -->
+  <rect x="694" y="280" width="200" height="440" rx="24" fill="white" stroke="#E65100" stroke-width="8" opacity="0.95"/>
+  <!-- Filling liquid rising in right bottle -->
+  <rect x="702" y="500" width="184" height="212" rx="18" fill="url(#liquid16)" opacity="0.85"/>
+  <!-- Bubble -->
+  <circle cx="760" cy="510" r="16" fill="white" opacity="0.6"/>
+  <circle cx="820" cy="530" r="10" fill="white" opacity="0.5"/>
+  <!-- Bottle neck right -->
+  <rect x="749" y="230" width="90" height="68" rx="14" fill="white" stroke="#E65100" stroke-width="8"/>
+  <!-- Right label -->
+  <text x="716" y="460" font-family="'Segoe UI',Arial,sans-serif" font-size="68" font-weight="900" fill="#E65100">ICO</text>
+  <!-- Layer 3: Arrow showing pour direction -->
+  <polygon points="644,196 700,240 626,270" fill="#E65100" opacity="0.8"/>
+</svg>

@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg13" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#795548"/>
+      <stop offset="100%" stop-color="#4E342E"/>
+    </linearGradient>
+    <linearGradient id="ring13a" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#D7CCC8"/>
+      <stop offset="100%" stop-color="#A1887F"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: Background (dark wood) -->
+  <rect width="1024" height="1024" rx="200" fill="url(#bg13)"/>
+  <!-- Layer 2: Tree rings (concentric) = resolution layers growing outward -->
+  <!-- Outermost ring (8x) -->
+  <circle cx="512" cy="512" r="400" fill="none" stroke="#6D4C41" stroke-width="40"/>
+  <!-- 4x ring -->
+  <circle cx="512" cy="512" r="300" fill="none" stroke="#795548" stroke-width="36"/>
+  <!-- 2x ring -->
+  <circle cx="512" cy="512" r="200" fill="none" stroke="#8D6E63" stroke-width="32"/>
+  <!-- Core (1x original) -->
+  <circle cx="512" cy="512" r="100" fill="#BCAAA4"/>
+  <!-- Labels on rings -->
+  <text x="422" y="532" font-family="'Segoe UI',Arial,sans-serif" font-size="80" font-weight="900" fill="#4E342E">×1</text>
+  <!-- 2x label on ring -->
+  <text x="318" y="380" font-family="'Segoe UI',Arial,sans-serif" font-size="64" font-weight="800" fill="#D7CCC8">×2</text>
+  <!-- 4x label on ring -->
+  <text x="210" y="274" font-family="'Segoe UI',Arial,sans-serif" font-size="64" font-weight="800" fill="#FFCC80">×4</text>
+  <!-- 8x label on outer ring -->
+  <text x="148" y="200" font-family="'Segoe UI',Arial,sans-serif" font-size="64" font-weight="800" fill="#FFB74D">×8</text>
+  <!-- Layer 3: Image texture in each ring band -->
+  <!-- Grain lines (wood grain look) -->
+  <path d="M512 112 Q600 200 560 320 Q520 440 512 512" fill="none" stroke="#A1887F" stroke-width="4" opacity="0.4"/>
+  <path d="M512 112 Q424 200 464 320 Q504 440 512 512" fill="none" stroke="#A1887F" stroke-width="4" opacity="0.4"/>
+  <!-- AI label at bottom -->
+  <text x="390" y="890" font-family="'Segoe UI',Arial,sans-serif" font-size="120" font-weight="900" fill="#FFB74D">AI</text>
+</svg>

@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg04" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFE0EC"/>
+      <stop offset="100%" stop-color="#FF6090"/>
+    </linearGradient>
+    <linearGradient id="arrow04" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#FF1A6C"/>
+      <stop offset="100%" stop-color="#FF6090"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="200" fill="url(#bg04)"/>
+  <!-- Layer 2: Left file (SVG) + right file (ICO) + arrow -->
+  <!-- Left file -->
+  <rect x="90" y="310" width="260" height="330" rx="20" fill="white" opacity="0.95"/>
+  <path d="M310 310 L350 350 L310 350 Z" fill="#FFB3CB"/>
+  <text x="110" y="440" font-family="'Segoe UI',Arial,sans-serif" font-size="82" font-weight="900" fill="#E91E63">SVG</text>
+  <!-- Right file -->
+  <rect x="674" y="310" width="260" height="330" rx="20" fill="white" opacity="0.95"/>
+  <path d="M894 310 L934 350 L894 350 Z" fill="#FFB3CB"/>
+  <text x="694" y="440" font-family="'Segoe UI',Arial,sans-serif" font-size="82" font-weight="900" fill="#E91E63">ICO</text>
+  <!-- Big arrow -->
+  <line x1="390" y1="512" x2="634" y2="512" stroke="url(#arrow04)" stroke-width="36" stroke-linecap="round"/>
+  <polygon points="634,440 774,512 634,584" fill="#FF1A6C"/>
+  <!-- Layer 3: PNG/JPG/BMP labels on bottom of files -->
+  <text x="110" y="530" font-family="'Segoe UI',Arial,sans-serif" font-size="52" font-weight="600" fill="#F48FB1">PNG</text>
+  <text x="110" y="590" font-family="'Segoe UI',Arial,sans-serif" font-size="52" font-weight="600" fill="#F48FB1">BMP</text>
+  <text x="694" y="530" font-family="'Segoe UI',Arial,sans-serif" font-size="52" font-weight="600" fill="#F48FB1">PNG</text>
+  <text x="694" y="590" font-family="'Segoe UI',Arial,sans-serif" font-size="52" font-weight="600" fill="#F48FB1">JPG</text>
+</svg>

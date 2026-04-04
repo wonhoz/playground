@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg10" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFF8E1"/>
+      <stop offset="100%" stop-color="#FFD54F"/>
+    </linearGradient>
+    <linearGradient id="wand10" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFD600"/>
+      <stop offset="100%" stop-color="#FF8F00"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="200" fill="url(#bg10)"/>
+  <!-- Layer 2: Magic wand transforming file -->
+  <!-- Before: small blurry file (left, grayed) -->
+  <rect x="120" y="400" width="220" height="280" rx="18" fill="#BDBDBD" opacity="0.7"/>
+  <text x="140" y="500" font-family="'Segoe UI',Arial,sans-serif" font-size="64" font-weight="700" fill="#9E9E9E">SVG</text>
+  <!-- After: bright ICO file (right) -->
+  <rect x="680" y="320" width="240" height="310" rx="18" fill="white"/>
+  <path d="M880 320 L920 360 L880 360 Z" fill="#FFD54F"/>
+  <text x="700" y="440" font-family="'Segoe UI',Arial,sans-serif" font-size="82" font-weight="900" fill="#F57F17">ICO</text>
+  <!-- Wand (diagonal, bottom-left to top-right) -->
+  <line x1="280" y1="740" x2="760" y2="260" stroke="url(#wand10)" stroke-width="24" stroke-linecap="round"/>
+  <!-- Wand tip star -->
+  <circle cx="760" cy="260" r="36" fill="#FFD600"/>
+  <polygon points="760,200 775,248 826,248 784,276 800,326 760,298 720,326 736,276 694,248 745,248" fill="white"/>
+  <!-- Layer 3: Sparkles -->
+  <circle cx="450" cy="400" r="16" fill="#FFCA28"/>
+  <circle cx="520" cy="340" r="22" fill="#FFE082"/>
+  <circle cx="580" cy="430" r="14" fill="#FFD600"/>
+  <circle cx="390" cy="480" r="10" fill="#FFF176"/>
+  <circle cx="620" cy="370" r="18" fill="#FFCA28"/>
+</svg>

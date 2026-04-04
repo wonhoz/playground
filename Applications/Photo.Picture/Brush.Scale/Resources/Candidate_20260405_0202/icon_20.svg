@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg20" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFF3E0"/>
+      <stop offset="100%" stop-color="#FFCCBC"/>
+    </linearGradient>
+    <linearGradient id="brush20" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FF4081"/>
+      <stop offset="100%" stop-color="#E91E63"/>
+    </linearGradient>
+    <linearGradient id="stroke20" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#FF6D00"/>
+      <stop offset="100%" stop-color="#FFAB40"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="200" fill="url(#bg20)"/>
+  <!-- Layer 2: Paintbrush painting HD quality onto canvas -->
+  <!-- Canvas -->
+  <rect x="140" y="320" width="744" height="520" rx="16" fill="white" opacity="0.9" stroke="#FFB74D" stroke-width="10"/>
+  <!-- Unpainted (blurry) half of canvas (left) -->
+  <rect x="150" y="330" width="360" height="500" rx="12" fill="#FFECB3" opacity="0.8"/>
+  <ellipse cx="280" cy="550" rx="120" ry="90" fill="#FFE082" opacity="0.6"/>
+  <ellipse cx="370" cy="620" rx="90" ry="70" fill="#FFD54F" opacity="0.5"/>
+  <!-- Painted (sharp HD) half (right side of canvas) -->
+  <rect x="512" y="330" width="362" height="500" rx="12" fill="#FF8F00"/>
+  <rect x="512" y="330" width="181" height="250" rx="0" fill="#FF6D00"/>
+  <rect x="693" y="330" width="181" height="250" rx="0" fill="#FF8F00"/>
+  <rect x="512" y="580" width="181" height="250" rx="0" fill="#FF8F00"/>
+  <rect x="693" y="580" width="181" height="250" rx="0" fill="#FFAB40"/>
+  <!-- HD text on painted area -->
+  <text x="534" y="490" font-family="'Segoe UI',Arial,sans-serif" font-size="130" font-weight="900" fill="white" opacity="0.85">HD</text>
+  <!-- Paintbrush (large, diagonal) -->
+  <!-- Handle -->
+  <rect x="180" y="120" width="560" height="36" rx="18" fill="url(#brush20)" transform="rotate(-35, 460, 138)"/>
+  <!-- Ferrule (metal band) -->
+  <rect x="530" y="240" width="80" height="30" rx="6" fill="#90A4AE" transform="rotate(-35, 570, 255)"/>
+  <!-- Bristles -->
+  <ellipse cx="610" cy="310" rx="45" ry="24" fill="url(#stroke20)" transform="rotate(-35, 610, 310)"/>
+  <ellipse cx="625" cy="326" rx="38" ry="18" fill="#FFD180" transform="rotate(-35, 625, 326)"/>
+  <!-- Tip (paint streak at current brush position) -->
+  <path d="M490 450 Q512 480 550 490" fill="none" stroke="url(#stroke20)" stroke-width="26" stroke-linecap="round"/>
+  <circle cx="550" cy="490" r="18" fill="#FF6D00" opacity="0.8"/>
+  <!-- Layer 3: ×4 badge -->
+  <rect x="768" y="176" width="170" height="110" rx="20" fill="#E91E63"/>
+  <text x="786" y="264" font-family="'Segoe UI',Arial,sans-serif" font-size="104" font-weight="900" fill="white">×4</text>
+</svg>

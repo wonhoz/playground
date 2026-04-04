@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg09" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0D1B3E"/>
+      <stop offset="100%" stop-color="#1A3A5C"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="200" fill="url(#bg09)"/>
+  <!-- Layer 2: Left half = pixel grid, right half = smooth vector curve -->
+  <!-- Dividing line (diagonal) -->
+  <line x1="512" y1="180" x2="512" y2="844" stroke="#00E5FF" stroke-width="6" stroke-dasharray="20 12"/>
+  <!-- Pixel grid (left half) -->
+  <g opacity="0.9">
+    <rect x="180" y="260" width="72" height="72" rx="4" fill="#546E7A"/>
+    <rect x="260" y="260" width="72" height="72" rx="4" fill="#546E7A"/>
+    <rect x="340" y="260" width="72" height="72" rx="4" fill="#00BCD4"/>
+    <rect x="420" y="260" width="72" height="72" rx="4" fill="#546E7A"/>
+
+    <rect x="180" y="340" width="72" height="72" rx="4" fill="#00BCD4"/>
+    <rect x="260" y="340" width="72" height="72" rx="4" fill="#00BCD4"/>
+    <rect x="340" y="340" width="72" height="72" rx="4" fill="#00BCD4"/>
+    <rect x="420" y="340" width="72" height="72" rx="4" fill="#546E7A"/>
+
+    <rect x="180" y="420" width="72" height="72" rx="4" fill="#546E7A"/>
+    <rect x="260" y="420" width="72" height="72" rx="4" fill="#00BCD4"/>
+    <rect x="340" y="420" width="72" height="72" rx="4" fill="#00BCD4"/>
+    <rect x="420" y="420" width="72" height="72" rx="4" fill="#00BCD4"/>
+
+    <rect x="180" y="500" width="72" height="72" rx="4" fill="#546E7A"/>
+    <rect x="260" y="500" width="72" height="72" rx="4" fill="#546E7A"/>
+    <rect x="340" y="500" width="72" height="72" rx="4" fill="#00BCD4"/>
+    <rect x="420" y="500" width="72" height="72" rx="4" fill="#546E7A"/>
+
+    <rect x="180" y="580" width="72" height="72" rx="4" fill="#00BCD4"/>
+    <rect x="260" y="580" width="72" height="72" rx="4" fill="#546E7A"/>
+    <rect x="340" y="580" width="72" height="72" rx="4" fill="#546E7A"/>
+    <rect x="420" y="580" width="72" height="72" rx="4" fill="#00BCD4"/>
+  </g>
+  <!-- Smooth curve (right half) -->
+  <path d="M540 620 Q640 260 844 280 Q960 290 940 500 Q920 680 844 740 Q740 820 540 620Z"
+        fill="none" stroke="#00E5FF" stroke-width="18" stroke-linecap="round"/>
+  <path d="M540 620 Q640 260 844 280 Q960 290 940 500 Q920 680 844 740 Q740 820 540 620Z"
+        fill="#00E5FF" opacity="0.12"/>
+  <!-- Layer 3: Labels -->
+  <text x="215" y="770" font-family="'Segoe UI',Arial,sans-serif" font-size="72" font-weight="700" fill="#546E7A">BMP</text>
+  <text x="570" y="770" font-family="'Segoe UI',Arial,sans-serif" font-size="72" font-weight="700" fill="#00E5FF">SVG</text>
+  <!-- Arrows pointing right -->
+  <line x1="480" y1="460" x2="538" y2="460" stroke="#00E5FF" stroke-width="10" stroke-linecap="round"/>
+  <polygon points="524,440 560,460 524,480" fill="#00E5FF"/>
+</svg>

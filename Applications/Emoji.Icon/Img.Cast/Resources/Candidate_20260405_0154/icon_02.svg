@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg02" x1="0" y1="0" x2="0.5" y2="1">
+      <stop offset="0%" stop-color="#FFE066"/>
+      <stop offset="100%" stop-color="#FF7A00"/>
+    </linearGradient>
+    <linearGradient id="file02" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#FFE8C0"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="200" fill="url(#bg02)"/>
+  <!-- Layer 2: File dropping into drop zone -->
+  <!-- Drop zone at bottom -->
+  <rect x="200" y="680" width="624" height="170" rx="20" fill="none" stroke="white" stroke-width="10" stroke-dasharray="28 16" opacity="0.7"/>
+  <!-- Down arrow -->
+  <line x1="512" y1="380" x2="512" y2="620" stroke="white" stroke-width="22" stroke-linecap="round"/>
+  <polyline points="420,540 512,650 604,540" fill="none" stroke="white" stroke-width="22" stroke-linejoin="round" stroke-linecap="round"/>
+  <!-- Falling file card (tilted) -->
+  <g transform="rotate(-12, 512, 290)">
+    <rect x="370" y="160" width="200" height="250" rx="18" fill="url(#file02)"/>
+    <path d="M530 160 L570 200 L530 200 Z" fill="#FFB74D"/>
+    <text x="388" y="285" font-family="'Segoe UI',Arial,sans-serif" font-size="72" font-weight="800" fill="#FF7A00">SVG</text>
+  </g>
+  <!-- Layer 3: Motion lines -->
+  <line x1="350" y1="200" x2="310" y2="230" stroke="white" stroke-width="10" stroke-linecap="round" opacity="0.6"/>
+  <line x1="340" y1="260" x2="295" y2="275" stroke="white" stroke-width="8" stroke-linecap="round" opacity="0.4"/>
+  <line x1="355" y1="320" x2="308" y2="325" stroke="white" stroke-width="7" stroke-linecap="round" opacity="0.3"/>
+</svg>

@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg09" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#E0F7FA"/>
+      <stop offset="100%" stop-color="#80DEEA"/>
+    </linearGradient>
+    <linearGradient id="brush09" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#00ACC1"/>
+      <stop offset="100%" stop-color="#006064"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg09)"/>
+  <!-- Layer 2: Paintbrush sweeping over canvas, leaving crisp image in its wake -->
+  <!-- Canvas (blurry on left half) -->
+  <rect x="130" y="280" width="764" height="464" rx="16" fill="#B2EBF2"/>
+  <!-- Blurry left portion -->
+  <rect x="130" y="280" width="382" height="464" rx="16" fill="#B2EBF2" opacity="0.9"/>
+  <circle cx="260" cy="480" r="100" fill="#80DEEA" opacity="0.7"/>
+  <circle cx="380" cy="520" r="80" fill="#4DD0E1" opacity="0.6"/>
+  <!-- Sharp right portion (after brush passes) — vivid crisp blocks -->
+  <rect x="512" y="280" width="382" height="464" rx="0" fill="#00ACC1"/>
+  <rect x="512" y="280" width="191" height="232" rx="0" fill="#00BCD4"/>
+  <rect x="703" y="280" width="191" height="232" rx="0" fill="#0097A7"/>
+  <rect x="512" y="512" width="191" height="232" rx="0" fill="#0097A7"/>
+  <rect x="703" y="512" width="191" height="232" rx="0" fill="#00ACC1"/>
+  <!-- Brush tool (large, sweeping left to right diagonally) -->
+  <!-- Brush handle -->
+  <line x1="230" y1="180" x2="680" y2="630" stroke="url(#brush09)" stroke-width="36" stroke-linecap="round"/>
+  <!-- Brush bristles -->
+  <ellipse cx="710" cy="660" rx="60" ry="30" fill="#00E5FF" transform="rotate(45, 710, 660)"/>
+  <ellipse cx="730" cy="680" rx="50" ry="22" fill="#00ACC1" transform="rotate(45, 730, 680)"/>
+  <!-- Brush tip sparkle -->
+  <circle cx="750" cy="700" r="18" fill="white" opacity="0.8"/>
+  <!-- Layer 3: "HD" label on sharp area -->
+  <text x="548" y="530" font-family="'Segoe UI',Arial,sans-serif" font-size="130" font-weight="900" fill="white" opacity="0.7">HD</text>
+</svg>

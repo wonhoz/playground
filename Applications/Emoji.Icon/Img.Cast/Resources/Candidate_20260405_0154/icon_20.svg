@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg20" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#E8F5E9"/>
+      <stop offset="100%" stop-color="#A5D6A7"/>
+    </linearGradient>
+    <linearGradient id="wing20L" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#69F0AE"/>
+      <stop offset="100%" stop-color="#00BFA5"/>
+    </linearGradient>
+    <linearGradient id="wing20R" x1="1" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#B9F6CA"/>
+      <stop offset="100%" stop-color="#00E676"/>
+    </linearGradient>
+    <linearGradient id="cocoon20" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#F9A825"/>
+      <stop offset="100%" stop-color="#E65100"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="200" fill="url(#bg20)"/>
+  <!-- Layer 2: Butterfly emerging from file cocoon -->
+  <!-- Left wing (large) -->
+  <ellipse cx="310" cy="420" rx="220" ry="280" fill="url(#wing20L)" transform="rotate(-30, 310, 420)"/>
+  <!-- Left wing markings -->
+  <ellipse cx="290" cy="400" rx="100" ry="130" fill="#00C853" opacity="0.5" transform="rotate(-30, 290, 400)"/>
+  <circle cx="260" cy="350" r="36" fill="#1B5E20" opacity="0.6"/>
+  <!-- Right wing (large) -->
+  <ellipse cx="714" cy="420" rx="220" ry="280" fill="url(#wing20R)" transform="rotate(30, 714, 420)"/>
+  <!-- Right wing markings -->
+  <ellipse cx="734" cy="400" rx="100" ry="130" fill="#00BFA5" opacity="0.5" transform="rotate(30, 734, 400)"/>
+  <circle cx="764" cy="350" r="36" fill="#004D40" opacity="0.6"/>
+  <!-- Lower wings (smaller) -->
+  <ellipse cx="340" cy="620" rx="160" ry="120" fill="#00C853" opacity="0.8" transform="rotate(-20, 340, 620)"/>
+  <ellipse cx="684" cy="620" rx="160" ry="120" fill="#00E676" opacity="0.8" transform="rotate(20, 684, 620)"/>
+  <!-- Butterfly body -->
+  <ellipse cx="512" cy="520" rx="36" ry="220" fill="#1B5E20"/>
+  <!-- Head -->
+  <circle cx="512" cy="300" r="44" fill="#2E7D32"/>
+  <!-- Antennae -->
+  <path d="M490 280 Q430 200 400 160" fill="none" stroke="#1B5E20" stroke-width="12" stroke-linecap="round"/>
+  <circle cx="400" cy="160" r="18" fill="#00C853"/>
+  <path d="M534 280 Q594 200 624 160" fill="none" stroke="#1B5E20" stroke-width="12" stroke-linecap="round"/>
+  <circle cx="624" cy="160" r="18" fill="#00C853"/>
+  <!-- Layer 3: SVG cocoon at bottom (cracking open) -->
+  <ellipse cx="512" cy="820" rx="110" ry="70" fill="url(#cocoon20)"/>
+  <text x="452" y="836" font-family="'Segoe UI',Arial,sans-serif" font-size="56" font-weight="900" fill="white">SVG</text>
+  <!-- Crack lines on cocoon -->
+  <path d="M450 790 Q480 820 460 855" fill="none" stroke="white" stroke-width="8" stroke-linecap="round" opacity="0.7"/>
+  <path d="M560 788 Q536 818 558 852" fill="none" stroke="white" stroke-width="7" stroke-linecap="round" opacity="0.7"/>
+  <!-- ICO label on wing -->
+  <text x="450" y="530" font-family="'Segoe UI',Arial,sans-serif" font-size="60" font-weight="900" fill="white" opacity="0.85">ICO</text>
+</svg>

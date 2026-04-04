@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg13" x1="0" y1="0" x2="0.8" y2="1">
+      <stop offset="0%" stop-color="#FF6B35"/>
+      <stop offset="100%" stop-color="#C62828"/>
+    </linearGradient>
+    <linearGradient id="lava13" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFD740"/>
+      <stop offset="100%" stop-color="#FF6D00"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="200" fill="url(#bg13)"/>
+  <!-- Layer 2: Melting/morphing file shape -->
+  <!-- Solid file shape top (before) -->
+  <rect x="280" y="150" width="460" height="380" rx="20" fill="white" opacity="0.95"/>
+  <path d="M690 150 L740 200 L690 200 Z" fill="#FFCC80"/>
+  <text x="310" y="290" font-family="'Segoe UI',Arial,sans-serif" font-size="92" font-weight="900" fill="#E64A19">SVG</text>
+  <!-- Melting drips in center -->
+  <ellipse cx="340" cy="540" rx="38" ry="56" fill="url(#lava13)" opacity="0.9"/>
+  <ellipse cx="430" cy="560" rx="44" ry="72" fill="url(#lava13)" opacity="0.85"/>
+  <ellipse cx="512" cy="550" rx="40" ry="80" fill="url(#lava13)"/>
+  <ellipse cx="595" cy="565" rx="44" ry="68" fill="url(#lava13)" opacity="0.85"/>
+  <ellipse cx="680" cy="540" rx="38" ry="52" fill="url(#lava13)" opacity="0.9"/>
+  <!-- Connecting drip body -->
+  <rect x="302" y="520" width="420" height="40" rx="20" fill="url(#lava13)"/>
+  <!-- Molten pool at bottom (new format) -->
+  <ellipse cx="512" cy="730" rx="260" ry="90" fill="url(#lava13)" opacity="0.92"/>
+  <!-- Layer 3: New format label in pool -->
+  <text x="380" y="760" font-family="'Segoe UI',Arial,sans-serif" font-size="96" font-weight="900" fill="white">ICO</text>
+  <!-- Heat shimmer dots -->
+  <circle cx="312" cy="460" r="12" fill="#FFD740" opacity="0.7"/>
+  <circle cx="512" cy="440" r="16" fill="#FFD740" opacity="0.6"/>
+  <circle cx="700" cy="460" r="12" fill="#FFD740" opacity="0.7"/>
+</svg>

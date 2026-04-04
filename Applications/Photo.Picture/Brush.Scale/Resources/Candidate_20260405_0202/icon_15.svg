@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="sky15" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#64B5F6"/>
+      <stop offset="100%" stop-color="#E3F2FD"/>
+    </linearGradient>
+    <linearGradient id="mt15a" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#BDBDBD"/>
+      <stop offset="100%" stop-color="#9E9E9E"/>
+    </linearGradient>
+    <linearGradient id="mt15b" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#F5F5F5"/>
+      <stop offset="100%" stop-color="#42A5F5"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: Sky background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#sky15)"/>
+  <!-- Layer 2: Two mountains — small/blurry (before) vs tall/sharp (after) -->
+  <!-- Ground/field -->
+  <rect x="0" y="750" width="1024" height="274" rx="0" fill="#A5D6A7"/>
+  <!-- Left mountain (small, blurry, low res) -->
+  <polygon points="160,750 340,380 520,750" fill="url(#mt15a)" opacity="0.8"/>
+  <!-- Blurry snow cap -->
+  <polygon points="300,410 340,360 380,410" fill="#E0E0E0" opacity="0.7"/>
+  <!-- Right mountain (tall, crisp, high res) -->
+  <polygon points="420,750 700,180 980,750" fill="url(#mt15b)"/>
+  <!-- Crisp snow cap -->
+  <polygon points="650,220 700,160 750,220 720,260 680,260" fill="white"/>
+  <!-- Sun -->
+  <circle cx="860" cy="220" r="70" fill="#FFF176"/>
+  <!-- Sunrays -->
+  <line x1="860" y1="130" x2="860" y2="100" stroke="#FFF176" stroke-width="12" stroke-linecap="round"/>
+  <line x1="940" y1="160" x2="960" y2="140" stroke="#FFF176" stroke-width="12" stroke-linecap="round"/>
+  <line x1="780" y1="160" x2="760" y2="140" stroke="#FFF176" stroke-width="12" stroke-linecap="round"/>
+  <!-- Layer 3: Resolution labels below mountains -->
+  <text x="200" y="910" font-family="'Segoe UI',Arial,sans-serif" font-size="68" font-weight="700" fill="#757575">LOW</text>
+  <text x="600" y="910" font-family="'Segoe UI',Arial,sans-serif" font-size="68" font-weight="700" fill="#1565C0">HIGH</text>
+  <!-- Arrow between -->
+  <line x1="440" y1="880" x2="560" y2="880" stroke="#1565C0" stroke-width="12" stroke-linecap="round"/>
+  <polygon points="546,854 600,880 546,906" fill="#1565C0"/>
+</svg>

@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg07" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#4A1020"/>
+      <stop offset="100%" stop-color="#8B0000"/>
+    </linearGradient>
+    <linearGradient id="gold07" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFD700"/>
+      <stop offset="100%" stop-color="#FFA000"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg07)"/>
+  <!-- Layer 2: Casting mold (open book / mold shape) -->
+  <!-- Left mold half -->
+  <path d="M160 280 L460 280 L460 760 L160 760 Q130 760 120 730 L120 310 Q120 280 160 280Z" fill="#6B0C22"/>
+  <path d="M160 280 L460 280 L460 760 L160 760 Q130 760 120 730 L120 310 Q120 280 160 280Z" fill="none" stroke="url(#gold07)" stroke-width="10"/>
+  <!-- Right mold half -->
+  <path d="M564 280 L864 280 Q900 280 900 310 L900 730 Q900 760 864 760 L564 760 Z" fill="#6B0C22"/>
+  <path d="M564 280 L864 280 Q900 280 900 310 L900 730 Q900 760 864 760 L564 760 Z" fill="none" stroke="url(#gold07)" stroke-width="10"/>
+  <!-- Molten image pouring in center gap -->
+  <rect x="460" y="280" width="104" height="480" rx="0" fill="url(#gold07)" opacity="0.9"/>
+  <!-- Sparkles in center -->
+  <circle cx="512" cy="420" r="22" fill="white" opacity="0.9"/>
+  <circle cx="512" cy="520" r="16" fill="white" opacity="0.7"/>
+  <circle cx="512" cy="600" r="10" fill="white" opacity="0.5"/>
+  <!-- Layer 3: Mold labels -->
+  <text x="178" y="500" font-family="'Segoe UI',Arial,sans-serif" font-size="82" font-weight="900" fill="url(#gold07)">SVG</text>
+  <text x="600" y="500" font-family="'Segoe UI',Arial,sans-serif" font-size="82" font-weight="900" fill="url(#gold07)">ICO</text>
+  <!-- CAST label bottom center -->
+  <text x="365" y="900" font-family="'Segoe UI',Arial,sans-serif" font-size="84" font-weight="900" fill="url(#gold07)">CAST</text>
+</svg>

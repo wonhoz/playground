@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg12" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#E0F7FA"/>
+      <stop offset="100%" stop-color="#80DEEA"/>
+    </linearGradient>
+    <linearGradient id="water12" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#4DD0E1" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#00838F" stop-opacity="0.7"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg12)"/>
+  <!-- Layer 2: Water drop falling onto blurry image, making it clear -->
+  <!-- Image canvas (blurry on left, sharp right of drop) -->
+  <rect x="160" y="500" width="704" height="380" rx="18" fill="#B2EBF2"/>
+  <!-- Blurry left portion of image -->
+  <ellipse cx="320" cy="680" rx="130" ry="100" fill="#80DEEA" opacity="0.7"/>
+  <ellipse cx="440" cy="700" rx="100" ry="80" fill="#4DD0E1" opacity="0.6"/>
+  <!-- Sharp area where drop hit (right side) — crisp concentric rings -->
+  <circle cx="640" cy="680" r="140" fill="#00ACC1" opacity="0.2"/>
+  <circle cx="640" cy="680" r="100" fill="#00ACC1" opacity="0.25"/>
+  <circle cx="640" cy="680" r="60" fill="#00ACC1" opacity="0.4"/>
+  <!-- Ripple rings (clarity spreading out) -->
+  <circle cx="640" cy="680" r="200" fill="none" stroke="#00BCD4" stroke-width="8" opacity="0.5"/>
+  <circle cx="640" cy="680" r="260" fill="none" stroke="#00BCD4" stroke-width="6" opacity="0.3"/>
+  <!-- Sharp image in center of drop impact -->
+  <rect x="580" y="620" width="120" height="120" rx="8" fill="#00838F"/>
+  <rect x="580" y="620" width="60" height="60" rx="4" fill="#00ACC1"/>
+  <rect x="640" y="620" width="60" height="60" rx="4" fill="#0097A7"/>
+  <rect x="580" y="680" width="60" height="60" rx="4" fill="#0097A7"/>
+  <rect x="640" y="680" width="60" height="60" rx="4" fill="#00838F"/>
+  <!-- Water drop (falling) -->
+  <path d="M640 160 Q680 280 680 380 Q680 480 640 500 Q600 480 600 380 Q600 280 640 160Z" fill="url(#water12)"/>
+  <!-- Drop shine -->
+  <ellipse cx="628" cy="260" rx="16" ry="28" fill="white" opacity="0.5" transform="rotate(-20, 628, 260)"/>
+  <!-- Layer 3: "SHARP" label in impact zone -->
+  <text x="448" y="840" font-family="'Segoe UI',Arial,sans-serif" font-size="80" font-weight="800" fill="#006064">SHARP</text>
+</svg>

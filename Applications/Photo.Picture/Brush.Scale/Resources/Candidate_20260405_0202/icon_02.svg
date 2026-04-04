@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg02" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#E3F2FD"/>
+      <stop offset="100%" stop-color="#90CAF9"/>
+    </linearGradient>
+    <filter id="blur02">
+      <feGaussianBlur stdDeviation="7"/>
+    </filter>
+  </defs>
+  <!-- Layer 1: Background -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg02)"/>
+  <!-- Layer 2: Two image panels — left blurry, right sharp -->
+  <!-- Left panel (blurry/before) -->
+  <rect x="100" y="220" width="380" height="580" rx="18" fill="#BBDEFB"/>
+  <!-- Blurry image simulation — smeared gradient blocks -->
+  <rect x="120" y="260" width="340" height="260" rx="8" fill="#90CAF9" filter="url(#blur02)"/>
+  <rect x="150" y="290" width="180" height="120" rx="6" fill="#64B5F6" filter="url(#blur02)"/>
+  <rect x="220" y="360" width="140" height="100" rx="6" fill="#42A5F5" filter="url(#blur02)"/>
+  <!-- BEFORE label -->
+  <text x="170" y="590" font-family="'Segoe UI',Arial,sans-serif" font-size="64" font-weight="700" fill="#1565C0" opacity="0.7">BEFORE</text>
+  <!-- Right panel (sharp/after) -->
+  <rect x="544" y="220" width="380" height="580" rx="18" fill="white"/>
+  <!-- Sharp image simulation — crisp blocks -->
+  <rect x="564" y="260" width="340" height="260" rx="6" fill="#E3F2FD"/>
+  <rect x="564" y="260" width="170" height="130" rx="0" fill="#1E88E5"/>
+  <rect x="734" y="260" width="170" height="130" rx="0" fill="#42A5F5"/>
+  <rect x="564" y="390" width="170" height="130" rx="0" fill="#64B5F6"/>
+  <rect x="734" y="390" width="170" height="130" rx="0" fill="#0D47A1"/>
+  <!-- AFTER label -->
+  <text x="600" y="590" font-family="'Segoe UI',Arial,sans-serif" font-size="64" font-weight="700" fill="#0D47A1">AFTER</text>
+  <!-- Layer 3: Arrow between panels -->
+  <line x1="488" y1="512" x2="536" y2="512" stroke="#1565C0" stroke-width="14" stroke-linecap="round"/>
+  <polygon points="524,482 568,512 524,542" fill="#1565C0"/>
+  <!-- x4 badge top-right of right panel -->
+  <circle cx="900" cy="256" r="60" fill="#1565C0"/>
+  <text x="864" y="276" font-family="'Segoe UI',Arial,sans-serif" font-size="62" font-weight="900" fill="white">×4</text>
+</svg>

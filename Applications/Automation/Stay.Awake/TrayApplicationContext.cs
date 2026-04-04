@@ -484,18 +484,18 @@ namespace StayAwake
             {
                 sb.AppendLine();
                 sb.AppendLine("[최근 N일 히스토리]");
-                sb.AppendLine($"{"날짜",-16} {"시뮬",5} {"스킵",5} {"활성시간",10}");
+                sb.AppendLine($"{"날짜",-16} {"시뮬",-5} {"스킵",-5} {"활성시간",-10}");
                 sb.AppendLine(new string('─', 42));
                 foreach (var day in history)
                 {
                     var d = day.Date;
                     var dName = dayNames[(int)d.DayOfWeek];
                     var at = day.ActiveTime;
-                    sb.AppendLine($"{d:yyyy-MM-dd} ({dName})  {day.SimCount,4}회  {day.SkipCount,4}회  {(int)at.TotalHours:D2}:{at:mm\\:ss}");
+                    sb.AppendLine($"{d:yyyy-MM-dd} ({dName})  {day.SimCount,4}회  {day.SkipCount,4}회   {(int)at.TotalHours:D2}:{at:mm\\:ss}");
                 }
             }
 
-            DarkInfoDialog.Show("통계", sb.ToString(), 570, history.Count > 0 ? 520 : 450);
+            DarkInfoDialog.Show("통계", sb.ToString(), 500, history.Count > 0 ? 605 : 450);
         }
 
         private void ShowAbout()

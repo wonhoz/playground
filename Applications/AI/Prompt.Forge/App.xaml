@@ -10,7 +10,7 @@
             <Setter Property="Foreground" Value="#E0E0E0"/>
             <Setter Property="BorderBrush" Value="#2A2A3E"/>
             <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Padding" Value="8,7"/>
             <Setter Property="CaretBrush" Value="#7C3AED"/>
             <Setter Property="SelectionBrush" Value="#7C3AED"/>
             <Setter Property="Template">
@@ -19,7 +19,7 @@
                         <Border Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
-                                Padding="8,5"
+                                Padding="{TemplateBinding Padding}"
                                 CornerRadius="4">
                             <ScrollViewer x:Name="PART_ContentHost"/>
                         </Border>

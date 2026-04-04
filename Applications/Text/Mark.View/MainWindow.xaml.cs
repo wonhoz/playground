@@ -228,6 +228,7 @@ public partial class MainWindow : Window
             Viewer.CoreWebView2.Settings.AreDefaultContextMenusEnabled = false;
             Viewer.CoreWebView2.NavigationCompleted += OnNavigationCompleted;
             Viewer.CoreWebView2.WebMessageReceived += OnWebViewMessageReceived;
+            Viewer.CoreWebView2.NavigationStarting += OnNavigationStarting;
             _webViewReady = true;
             _webViewReadyTcs.TrySetResult();
             HideLoading();
@@ -240,16 +241,69 @@ public partial class MainWindow : Window
         }
     }
 
+    private void OnNavigationStarting(object? sender, CoreWebView2NavigationStartingEventArgs e)
+    {
+        var uri = e.Uri;
+        if (uri.StartsWith("about:") || uri.StartsWith("blob:")) return;
+        if (uri.StartsWith("http://") || uri.StartsWith("https://"))
+        {
+            e.Cancel = true;
+            System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(uri) { UseShellExecute = true });
+        }
+        else if (uri.StartsWith("file://"))
+        {
+            // 파일 URL의 fragment(#) 포함 여부 확인 — 앵커 이동은 허용, 다른 파일은 차단
+            var hashIdx = uri.IndexOf('#');
+            if (hashIdx > 0)
+            {
+                e.Cancel = true;
+                var id = Uri.UnescapeDataString(uri[(hashIdx + 1)..]);
+                _ = Viewer.ExecuteScriptAsync(
+                    $"document.getElementById({System.Text.Json.JsonSerializer.Serialize(id)})?.scrollIntoView({{behavior:'smooth'}})");
+            }
+        }
+    }
+
     private void OnNavigationCompleted(object? sender, CoreWebView2NavigationCompletedEventArgs e)
     {
         _ = HideLoadingAsync(300);
         _ = ExtractTocAsync();
+        _ = InjectAnchorHandlerAsync();
         if (_pendingScrollY > 0)
             _ = RestoreScrollAsync();
         if (_isTocVisible)
             _ = InjectTocScrollMonitorAsync();
         if (_previewFontSize != 15)
             _ = ApplyPreviewFontSizeAsync();
+    }
+
+    private async Task InjectAnchorHandlerAsync()
+    {
+        try
+        {
+            await Viewer.ExecuteScriptAsync(@"
+(function() {
+    if (window.__anchorHandlerInstalled) return;
+    window.__anchorHandlerInstalled = true;
+    document.addEventListener('click', function(e) {
+        var a = e.target.closest('a[href]');
+        if (!a) return;
+        var href = a.getAttribute('href');
+        if (!href) return;
+        if (href.startsWith('#')) {
+            e.preventDefault();
+            var id = decodeURIComponent(href.slice(1));
+            var el = document.getElementById(id);
+            if (el) el.scrollIntoView({behavior: 'smooth'});
+        } else if (href.startsWith('http://') || href.startsWith('https://')) {
+            e.preventDefault();
+            if (window.chrome && window.chrome.webview)
+                window.chrome.webview.postMessage('open:' + href);
+        }
+    }, true);
+})()");
+        }
+        catch { }
     }
 
     private async Task InjectTocScrollMonitorAsync()
@@ -286,6 +340,11 @@ public partial class MainWindow : Window
         {
             var id = msg[4..];
             HighlightTocEntry(id);
+        }
+        else if (msg?.StartsWith("open:") == true)
+        {
+            var url = msg[5..];
+            System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(url) { UseShellExecute = true });
         }
     }
 

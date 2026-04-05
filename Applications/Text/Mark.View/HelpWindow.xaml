@@ -114,15 +114,6 @@
             </ItemsControl.Items>
           </ItemsControl>
 
-        </StackPanel>
-
-        <!-- ── 컬럼 구분선 ── -->
-        <Border Grid.Column="1" Width="1" Background="{StaticResource BorderBrush}"
-                HorizontalAlignment="Center" Margin="0,4,0,0"/>
-
-        <!-- ── 오른쪽 컬럼 ── -->
-        <StackPanel Grid.Column="2">
-
           <!-- 찾기/바꾸기 -->
           <TextBlock Text="찾기 / 바꾸기" Style="{StaticResource Cat}"/>
           <ItemsControl ItemTemplate="{StaticResource RowTpl}">
@@ -135,6 +126,15 @@
               <local:ShortcutEntry Key="Esc"           Desc="찾기 초기화"/>
             </ItemsControl.Items>
           </ItemsControl>
+
+        </StackPanel>
+
+        <!-- ── 컬럼 구분선 ── -->
+        <Border Grid.Column="1" Width="1" Background="{StaticResource BorderBrush}"
+                HorizontalAlignment="Center" Margin="0,4,0,0"/>
+
+        <!-- ── 오른쪽 컬럼 ── -->
+        <StackPanel Grid.Column="2">
 
           <!-- 에디터 -->
           <TextBlock Text="에디터" Style="{StaticResource Cat}"/>

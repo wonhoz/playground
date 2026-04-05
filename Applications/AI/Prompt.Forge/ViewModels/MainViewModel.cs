@@ -72,9 +72,10 @@ sealed class MainViewModel : INotifyPropertyChanged
     string _statusText = "준비";
     public string StatusText { get => _statusText; set { _statusText = value; OnPropertyChanged(); } }
 
-    public MainViewModel(Database db)
+    public MainViewModel(Database db, string initialSortOrder = "updated")
     {
         _db = db;
+        _sortOrder = initialSortOrder;
         Refresh();
     }
 

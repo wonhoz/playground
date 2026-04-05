@@ -40,7 +40,7 @@ public partial class MainWindow : Window
     {
         _appSettings = AppSettings.Load();
         _db = new Database(_appSettings.ResolvedDbPath);
-        _vm = new MainViewModel(_db);
+        _vm = new MainViewModel(_db, _appSettings.LastSortOrder);
         DataContext = _vm;
         InitializeComponent();
 
@@ -63,7 +63,7 @@ public partial class MainWindow : Window
         // 필터 콤보 초기화
         RefreshFilterCombos();
 
-        // 마지막 정렬 방식 복원
+        // 마지막 정렬 방식 복원 — CbSort UI만 동기화 (SortOrder는 ViewModel 생성자에서 초기화됨)
         _refreshing = true;
         try
         {
@@ -73,7 +73,6 @@ public partial class MainWindow : Window
                 "custom"    => 2,
                 _           => 0
             };
-            _vm.SortOrder = _appSettings.LastSortOrder;
         }
         finally { _refreshing = false; }
 
@@ -249,8 +248,10 @@ public partial class MainWindow : Window
         _refreshing = true;
         try
         {
-            var selTag = CbTag.SelectedIndex > 0 ? CbTag.SelectedItem as string : null;
-            var selSvc = CbService.SelectedIndex > 0 ? CbService.SelectedItem as string : null;
+            // Tags.Clear() 후 ComboBox SelectedItem이 -1로 초기화되므로,
+            // UI 상태가 아닌 ViewModel 필터 상태를 기준으로 복원
+            var selTag = _vm.FilterTag;
+            var selSvc = _vm.FilterService;
 
             CbTag.ItemsSource = _vm.Tags;
             CbTag.SelectedIndex = 0;
@@ -546,6 +547,15 @@ public partial class MainWindow : Window
     void LstItems_MouseMove(object sender, MouseEventArgs e)
     {
         if (e.LeftButton != MouseButtonState.Pressed || _dragItem == null) return;
+
+        // 필터·검색 활성 중 드래그 차단 — 일부 항목만 보일 때 sort_order 재배정하면 충돌 발생
+        if (!string.IsNullOrWhiteSpace(_vm.Search) || _vm.FilterTag != null ||
+            _vm.FilterService != null || _vm.FavOnly)
+        {
+            _dragItem = null;
+            return;
+        }
+
         var pos = e.GetPosition(null);
         if (Math.Abs(pos.X - _dragStart.X) < SystemParameters.MinimumHorizontalDragDistance &&
             Math.Abs(pos.Y - _dragStart.Y) < SystemParameters.MinimumVerticalDragDistance) return;

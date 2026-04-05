@@ -6,6 +6,7 @@ public partial class PopupWindow : System.Windows.Window
 
     private bool _initialized;
     private AppSettings _settings = new();
+    private bool _pinnedOnly;
 
     // 키보드 네비게이션
     private readonly List<Border> _rows = [];
@@ -21,6 +22,7 @@ public partial class PopupWindow : System.Windows.Window
         PositionNearCursor();
         _initialized = true;
         _settings = SettingsService.Load();
+        UpdateHotkeyHint();
         TryLoadClipboard();
         InputBox.Focus();
         InputBox.SelectAll();
@@ -36,9 +38,15 @@ public partial class PopupWindow : System.Windows.Window
         Left = wx; Top = wy;
     }
 
+    private void UpdateHotkeyHint()
+    {
+        HotkeyHint.Text = SettingsService.FormatHotkey(_settings.HotkeyModifiers, _settings.HotkeyVK);
+    }
+
     internal void ShowAndActivate()
     {
         _settings = SettingsService.Load();
+        UpdateHotkeyHint();
         if (!IsVisible) Show();
         base.Activate();
         PositionNearCursor();
@@ -73,47 +81,104 @@ public partial class PopupWindow : System.Windows.Window
 
         if (!hasInput)
         {
+            CopyAllBtn.Visibility = Visibility.Collapsed;
             RenderHistory();
             StatusText.Text = "텍스트를 입력하세요";
             return;
         }
 
+        // 멀티라인: 줄별로 분리
+        var lines = input.Split('\n')
+                         .Select(l => l.Trim())
+                         .Where(l => !string.IsNullOrWhiteSpace(l))
+                         .ToArray();
+
+        if (lines.Length > 1)
+        {
+            RenderMultiline(lines);
+        }
+        else
+        {
+            RenderSingleLine(input.Trim());
+        }
+
+        CopyAllBtn.Visibility = _rows.Count > 0 ? Visibility.Visible : Visibility.Collapsed;
+    }
+
+    private void RenderSingleLine(string input)
+    {
         var results = CaseConverter.ConvertAll(input);
-        var pinned  = _settings.PinnedCases.Count > 0
+
+        if (_pinnedOnly)
+        {
+            var pinned = results.Where(r => _settings.PinnedCases.Contains(r.Key)).ToArray();
+            if (pinned.Length == 0)
+            {
+                AddSectionLabel("즐겨찾기 없음 — ☆ 버튼으로 추가하세요");
+                StatusText.Text = "";
+                return;
+            }
+            foreach (var (label, key, value) in pinned)
+                AddResultRow(label, key, value);
+            StatusText.Text = $"즐겨찾기 {pinned.Length}개 — 클릭 또는 ↑↓ Enter";
+            return;
+        }
+
+        var pinnedSet = _settings.PinnedCases.Count > 0
             ? results.Where(r => _settings.PinnedCases.Contains(r.Key)).ToArray()
             : [];
 
-        if (pinned.Length > 0)
+        if (pinnedSet.Length > 0)
         {
             AddSectionLabel("★  즐겨찾기");
-            foreach (var (label, _, value) in pinned)
-                AddResultRow(label, value);
+            foreach (var (label, key, value) in pinnedSet)
+                AddResultRow(label, key, value);
             AddSectionLabel("전체");
         }
 
         foreach (var (label, key, value) in results)
         {
             if (!_settings.PinnedCases.Contains(key))
-                AddResultRow(label, value);
+                AddResultRow(label, key, value);
         }
 
         int wordCount = CaseConverter.ParseWords(input).Count;
         StatusText.Text = $"단어 {wordCount}개 — 클릭 또는 ↑↓ Enter";
     }
 
+    private void RenderMultiline(string[] lines)
+    {
+        for (int i = 0; i < lines.Length; i++)
+        {
+            var line = lines[i];
+            AddSectionLabel($"[{i + 1}] {line}");
+
+            var results = _pinnedOnly
+                ? CaseConverter.ConvertAll(line).Where(r => _settings.PinnedCases.Contains(r.Key)).ToArray()
+                : CaseConverter.ConvertAll(line);
+
+            foreach (var (label, key, value) in results)
+            {
+                if (!_pinnedOnly || _settings.PinnedCases.Contains(key))
+                    AddResultRow(label, key, value);
+            }
+        }
+        StatusText.Text = $"{lines.Length}개 항목 일괄 변환 — 클릭 또는 ↑↓ Enter";
+    }
+
     private void AddSectionLabel(string text)
         => ResultPanel.Children.Add(new TextBlock
         {
-            Text              = text,
-            Foreground        = (SolidColorBrush)FindResource("TextSecondary"),
-            FontFamily        = new WpfFontFamily("Segoe UI"),
-            FontSize          = 10,
-            Margin            = new Thickness(2, 6, 0, 2),
+            Text       = text,
+            Foreground = (SolidColorBrush)FindResource("TextSecondary"),
+            FontFamily = new WpfFontFamily("Segoe UI"),
+            FontSize   = 10,
+            Margin     = new Thickness(2, 6, 0, 2),
         });
 
-    private void AddResultRow(string label, string value)
+    private void AddResultRow(string label, string key, string value)
     {
-        var border = MakeRow(label, value);
+        var border = MakeRow(label, key, value);
         _rows.Add(border);
         _rowData[border] = (value, label);
         ResultPanel.Children.Add(border);
@@ -144,34 +209,38 @@ public partial class PopupWindow : System.Windows.Window
                 TextTrimming = TextTrimming.CharacterEllipsis,
             };
             string t = h;
-            border.MouseEnter        += (_, _) => border.Background = (SolidColorBrush)FindResource("RowHover");
-            border.MouseLeave        += (_, _) => border.Background = (SolidColorBrush)FindResource("SurfaceBrush");
+            border.MouseEnter        += (_, _) => { if (_rows.IndexOf(border) != _selectedIndex) border.Background = (SolidColorBrush)FindResource("RowHover"); };
+            border.MouseLeave        += (_, _) => { if (_rows.IndexOf(border) != _selectedIndex) border.Background = (SolidColorBrush)FindResource("SurfaceBrush"); };
             border.MouseLeftButtonUp += (_, _) =>
             {
                 InputBox.Text = t;
                 InputBox.CaretIndex = t.Length;
                 InputBox.Focus();
             };
+            _rows.Add(border);
+            _rowData[border] = (t, "history");
             ResultPanel.Children.Add(border);
         }
     }
 
-    private Border MakeRow(string label, string value)
+    private Border MakeRow(string label, string key, string value)
     {
         bool hasValue = !string.IsNullOrEmpty(value);
+        bool isPinned = _settings.PinnedCases.Contains(key);
 
         var border = new Border
         {
             Margin       = new Thickness(0, 2, 0, 2),
-            Padding      = new Thickness(12, 8, 12, 8),
+            Padding      = new Thickness(12, 8, 6, 8),
             CornerRadius = new CornerRadius(6),
             Background   = (SolidColorBrush)FindResource("SurfaceBrush"),
             Cursor       = hasValue ? System.Windows.Input.Cursors.Hand : System.Windows.Input.Cursors.Arrow,
         };
 
         var grid = new Grid();
-        grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(140) });
+        grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(130) });
         grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+        grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(26) });
 
         var lblText = new TextBlock
         {
@@ -183,19 +252,54 @@ public partial class PopupWindow : System.Windows.Window
         };
         var valText = new TextBlock
         {
-            Text             = hasValue ? value : "—",
-            Foreground       = hasValue
+            Text              = hasValue ? value : "—",
+            Foreground        = hasValue
                 ? (SolidColorBrush)FindResource("TextPrimary")
                 : (SolidColorBrush)FindResource("TextSecondary"),
-            FontFamily       = new WpfFontFamily("Consolas, Segoe UI"),
-            FontSize         = 13,
+            FontFamily        = new WpfFontFamily("Consolas, Segoe UI"),
+            FontSize          = 13,
             VerticalAlignment = VerticalAlignment.Center,
-            TextWrapping     = TextWrapping.Wrap,
+            TextWrapping      = TextWrapping.Wrap,
         };
+
+        // 핀 토글 (TextBlock 기반 — template 불필요)
+        var pinTb = new TextBlock
+        {
+            Text              = isPinned ? "★" : "☆",
+            FontSize          = 13,
+            Foreground        = isPinned
+                ? (SolidColorBrush)FindResource("CopyFeedback")
+                : (SolidColorBrush)FindResource("TextSecondary"),
+            VerticalAlignment   = VerticalAlignment.Center,
+            HorizontalAlignment = System.Windows.HorizontalAlignment.Center,
+            Cursor              = System.Windows.Input.Cursors.Hand,
+            Width               = 22,
+            TextAlignment       = TextAlignment.Center,
+        };
+
+        string captureKey = key;
+        pinTb.MouseEnter += (_, _) => pinTb.Foreground = (SolidColorBrush)FindResource("AccentBrush");
+        pinTb.MouseLeave += (_, _) => pinTb.Foreground = _settings.PinnedCases.Contains(captureKey)
+            ? (SolidColorBrush)FindResource("CopyFeedback")
+            : (SolidColorBrush)FindResource("TextSecondary");
+        pinTb.MouseLeftButtonUp += (_, args) =>
+        {
+            args.Handled = true;
+            _settings = SettingsService.Load();
+            if (_settings.PinnedCases.Contains(captureKey))
+                _settings.PinnedCases.Remove(captureKey);
+            else
+                _settings.PinnedCases.Add(captureKey);
+            SettingsService.Save(_settings);
+            RenderResults(InputBox.Text);
+        };
+
         Grid.SetColumn(lblText, 0);
         Grid.SetColumn(valText, 1);
+        Grid.SetColumn(pinTb,   2);
         grid.Children.Add(lblText);
         grid.Children.Add(valText);
+        grid.Children.Add(pinTb);
         border.Child = grid;
 
         if (hasValue)
@@ -211,7 +315,12 @@ public partial class PopupWindow : System.Windows.Window
                 if (_rows.IndexOf(border) != _selectedIndex)
                     border.Background = (SolidColorBrush)FindResource("SurfaceBrush");
             };
-            border.MouseLeftButtonUp += (_, _) => CopyAndClose(copyValue, label);
+            border.MouseLeftButtonUp += (s, args) =>
+            {
+                // 핀 버튼 클릭은 버블링 차단됨 — 행 전체 클릭만 처리
+                if (args.OriginalSource is not System.Windows.Controls.Button)
+                    CopyAndClose(copyValue, label);
+            };
         }
 
         return border;
@@ -238,8 +347,7 @@ public partial class PopupWindow : System.Windows.Window
         {
             System.Windows.Clipboard.SetText(text);
             SettingsService.AddHistory(InputBox.Text.Trim());
-            var tb = (SolidColorBrush)FindResource("CopyFeedback");
-            StatusText.Foreground = tb;
+            StatusText.Foreground = (SolidColorBrush)FindResource("CopyFeedback");
             StatusText.Text = $"✓ {label} 복사됨!";
         }
         catch
@@ -248,6 +356,39 @@ public partial class PopupWindow : System.Windows.Window
         }
         await Task.Delay(500);
         Hide();
+    }
+
+    // ── 버튼 이벤트 ──────────────────────────────────────────────────────
+    private void PinFilterBtn_Click(object sender, RoutedEventArgs e)
+    {
+        _pinnedOnly = !_pinnedOnly;
+        PinFilterBtn.Content    = _pinnedOnly ? "★" : "☆";
+        PinFilterBtn.Foreground = _pinnedOnly
+            ? (SolidColorBrush)FindResource("CopyFeedback")
+            : (SolidColorBrush)FindResource("TextSecondary");
+        RenderResults(InputBox.Text);
+    }
+
+    private void SettingsBtn_Click(object sender, RoutedEventArgs e)
+        => ((App)System.Windows.Application.Current).ShowSettings();
+
+    private void CopyAllBtn_Click(object sender, RoutedEventArgs e)
+    {
+        if (_rows.Count == 0) return;
+        var lines = _rowData.Values
+            .Where(d => d.label != "history" && !string.IsNullOrEmpty(d.value))
+            .Select(d => $"{d.label}: {d.value}");
+        var all = string.Join("\n", lines);
+        try
+        {
+            System.Windows.Clipboard.SetText(all);
+            StatusText.Foreground = (SolidColorBrush)FindResource("CopyFeedback");
+            StatusText.Text = $"✓ 전체 {_rows.Count}개 복사됨!";
+        }
+        catch
+        {
+            StatusText.Text = "⚠ 클립보드 복사 실패";
+        }
     }
 
     // ── 이벤트 ───────────────────────────────────────────────────────────
@@ -270,7 +411,7 @@ public partial class PopupWindow : System.Windows.Window
                 break;
 
             case Key.Up:
-                if (_selectedIndex > 0)      _selectedIndex--;
+                if (_selectedIndex > 0)       _selectedIndex--;
                 else if (_selectedIndex == 0) _selectedIndex = -1;
                 UpdateSelection();
                 e.Handled = true;
@@ -278,8 +419,22 @@ public partial class PopupWindow : System.Windows.Window
 
             case Key.Enter when _selectedIndex >= 0 && _selectedIndex < _rows.Count:
                 var (v, l) = _rowData[_rows[_selectedIndex]];
-                CopyAndClose(v, l);
+                if (l == "history")
+                {
+                    InputBox.Text = v;
+                    InputBox.CaretIndex = v.Length;
+                    InputBox.Focus();
+                }
+                else
+                {
+                    CopyAndClose(v, l);
+                }
                 e.Handled = true;
+                break;
+
+            case Key.Enter when e.KeyboardDevice.Modifiers == System.Windows.Input.ModifierKeys.None
+                             && _selectedIndex < 0:
+                // 멀티라인 입력 허용 — 기본 동작 유지 (줄바꿈 삽입)
                 break;
 
             case Key.Escape:
@@ -304,6 +459,6 @@ public partial class PopupWindow : System.Windows.Window
     private void Window_Deactivated(object sender, EventArgs e)
     {
         if (IsVisible) Hide();
-        StatusText.Foreground = (SolidColorBrush)FindResource("TextSecondary"); // 피드백 색상 초기화
+        StatusText.Foreground = (SolidColorBrush)FindResource("TextSecondary");
     }
 }

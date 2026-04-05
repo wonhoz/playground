@@ -62,8 +62,8 @@ public partial class App : System.Windows.Application
         {
             ShowImageMargin = false,
             Font            = new Font("Segoe UI", 9.5f),
-            BackColor       = DrawingColor.FromArgb(255, 26, 42, 30),
-            ForeColor       = DrawingColor.FromArgb(255, 224, 240, 228),
+            BackColor       = DrawingColor.FromArgb(255, 26, 26, 46),
+            ForeColor       = DrawingColor.FromArgb(255, 224, 224, 224),
             Renderer        = new DarkMenuRenderer()
         };
         menu.Items.Add("Cc  Case.Forge 열기", null, (_, _) => ShowPopup());
@@ -127,7 +127,7 @@ public partial class App : System.Windows.Application
         _popup.ShowAndActivate();
     }
 
-    private void ShowSettings()
+    internal void ShowSettings()
     {
         if (_settingsWindow?.IsLoaded == true) { _settingsWindow.Activate(); return; }
         _settingsWindow = new SettingsWindow();
@@ -153,19 +153,19 @@ public partial class App : System.Windows.Application
 internal class DarkMenuRenderer : ToolStripRenderer
 {
     protected override void OnRenderToolStripBackground(ToolStripRenderEventArgs e)
-        => e.Graphics.Clear(DrawingColor.FromArgb(255, 26, 42, 30));
+        => e.Graphics.Clear(DrawingColor.FromArgb(255, 26, 26, 46));
     protected override void OnRenderMenuItemBackground(ToolStripItemRenderEventArgs e)
     {
         if (!e.Item.Selected) return;
-        using var b = new DrawingBrush(DrawingColor.FromArgb(255, 30, 52, 38));
+        using var b = new DrawingBrush(DrawingColor.FromArgb(255, 37, 37, 64));
         e.Graphics.FillRectangle(b, new System.Drawing.Rectangle(2, 0, e.Item.Width-4, e.Item.Height));
     }
     protected override void OnRenderItemText(ToolStripItemTextRenderEventArgs e)
-    { e.TextColor = DrawingColor.FromArgb(255, 224, 240, 228); base.OnRenderItemText(e); }
+    { e.TextColor = DrawingColor.FromArgb(255, 224, 224, 224); base.OnRenderItemText(e); }
     protected override void OnRenderSeparator(ToolStripSeparatorRenderEventArgs e)
     {
         int y = e.Item.Height / 2;
-        using var p = new DrawingPen(DrawingColor.FromArgb(255, 42, 74, 50));
+        using var p = new DrawingPen(DrawingColor.FromArgb(255, 58, 58, 94));
         e.Graphics.DrawLine(p, 8, y, e.Item.Width-8, y);
     }
 }

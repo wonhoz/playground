@@ -91,16 +91,21 @@ public partial class SettingsWindow : System.Windows.Window
             return;
         }
 
-        // 수정자 키만 단독 입력 → 무시
-        if (k is Key.LeftShift or Key.RightShift or Key.LeftCtrl or Key.RightCtrl
-               or Key.LeftAlt  or Key.RightAlt  or Key.LWin     or Key.RWin)
-            return;
-
         uint mods = 0;
         if (Keyboard.IsKeyDown(Key.LWin)      || Keyboard.IsKeyDown(Key.RWin))      mods |= 0x0008;
         if (Keyboard.IsKeyDown(Key.LeftShift) || Keyboard.IsKeyDown(Key.RightShift)) mods |= 0x0004;
         if (Keyboard.IsKeyDown(Key.LeftCtrl)  || Keyboard.IsKeyDown(Key.RightCtrl))  mods |= 0x0002;
         if (Keyboard.IsKeyDown(Key.LeftAlt)   || Keyboard.IsKeyDown(Key.RightAlt))   mods |= 0x0001;
+
+        // 수정자 키만 단독 입력 → 실시간 프리뷰만 업데이트
+        if (k is Key.LeftShift or Key.RightShift or Key.LeftCtrl or Key.RightCtrl
+               or Key.LeftAlt  or Key.RightAlt  or Key.LWin     or Key.RWin)
+        {
+            HotkeyDisplay.Text = mods > 0
+                ? SettingsService.FormatHotkey(mods, 0).TrimEnd('+', ' ') + " + ..."
+                : "키 조합을 누르세요...";
+            return;
+        }
 
         if (mods == 0) return; // 수정자 없으면 무시
 
@@ -111,16 +116,14 @@ public partial class SettingsWindow : System.Windows.Window
         _newVK   = vk;
         _capturingHotkey = false;
         HotkeyDisplay.Text = SettingsService.FormatHotkey(mods, vk);
-        HotkeyBorder.BorderBrush = new SolidColorBrush(
-            System.Windows.Media.Color.FromRgb(0x2A, 0x4A, 0x32));
+        HotkeyBorder.BorderBrush = (SolidColorBrush)FindResource("BorderBrush");
     }
 
     private void CancelCapture()
     {
         _capturingHotkey = false;
         HotkeyDisplay.Text = SettingsService.FormatHotkey(_newMods, _newVK);
-        HotkeyBorder.BorderBrush = new SolidColorBrush(
-            System.Windows.Media.Color.FromRgb(0x2A, 0x4A, 0x32));
+        HotkeyBorder.BorderBrush = (SolidColorBrush)FindResource("BorderBrush");
     }
 
     // ── 이력 삭제 ────────────────────────────────────────────────────────

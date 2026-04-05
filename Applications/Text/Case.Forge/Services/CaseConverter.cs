@@ -11,6 +11,9 @@ public static class CaseConverter
         var s = Regex.Replace(input.Trim(), @"([a-z\d])([A-Z])", "$1 $2");
         // 연속 대문자 처리: HTMLParser → HTML Parser
         s = Regex.Replace(s, @"([A-Z]+)([A-Z][a-z])", "$1 $2");
+        // 숫자↔문자 경계 분리: abc123def → abc 123 def
+        s = Regex.Replace(s, @"([a-zA-Z])(\d)", "$1 $2");
+        s = Regex.Replace(s, @"(\d)([a-zA-Z])", "$1 $2");
 
         return [.. Regex.Split(s, @"[\s\-_./\\|,;:]+")
                         .Select(w => w.Trim())

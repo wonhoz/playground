@@ -18,4 +18,6 @@ public partial class HelpWindow : Window
             DwmSetWindowAttribute(handle, 20, ref val, sizeof(int));
         };
     }
+
+    private void CloseButton_Click(object sender, RoutedEventArgs e) => Close();
 }

@@ -107,10 +107,11 @@
             <ItemsControl.Items>
               <local:ShortcutEntry Key="F1"               Desc="단축키 도움말"/>
               <local:ShortcutEntry Key="F5"               Desc="현재 파일 새로고침"/>
-              <local:ShortcutEntry Key="F11"              Desc="집중 모드 (툴바/상태바 숨김)"/>
+              <local:ShortcutEntry Key="F11"              Desc="집중 모드 (툴바/상태바 숨김, 상태 저장됨)"/>
               <local:ShortcutEntry Key="📌 버튼"          Desc="최근 파일 즐겨찾기 고정/해제"/>
               <local:ShortcutEntry Key="Ctrl + 클릭 (최근)" Desc="최근 파일을 새 탭으로 열기"/>
               <local:ShortcutEntry Key="상태바 경로"      Desc="클릭 시 파일 탐색기에서 위치 열기"/>
+              <local:ShortcutEntry Key="자동 저장"        Desc="편집 중단 30초 후 %AppData%\MarkView\autosave에 임시 저장"/>
             </ItemsControl.Items>
           </ItemsControl>
 
@@ -146,6 +147,7 @@
               <local:ShortcutEntry Key="Ctrl + K"           Desc="링크 삽입 [텍스트]() — 괄호 안에 URL 입력"/>
               <local:ShortcutEntry Key="Ctrl + +"           Desc="에디터 폰트 크기 증가"/>
               <local:ShortcutEntry Key="Ctrl + -"           Desc="에디터 폰트 크기 감소"/>
+              <local:ShortcutEntry Key="Ctrl + 0"           Desc="에디터/프리뷰 폰트 크기 초기화 (13/15px)"/>
               <local:ShortcutEntry Key="Ctrl + 휠 (에디터)" Desc="에디터 위에서 폰트 크기 조절"/>
               <local:ShortcutEntry Key="Ctrl + 휠 (프리뷰)" Desc="프리뷰 위에서 글꼴 크기 조절"/>
               <local:ShortcutEntry Key="Tab"                Desc="들여쓰기 (4칸) / 범위 들여쓰기"/>
@@ -181,7 +183,10 @@
           <TextBlock Text="뷰어 기능" Style="{StaticResource Cat}"/>
           <ItemsControl ItemTemplate="{StaticResource RowTpl}">
             <ItemsControl.Items>
-              <local:ShortcutEntry Key="코드 블록 hover"  Desc="Copy 버튼 표시 — 클릭 시 코드 클립보드 복사"/>
+              <local:ShortcutEntry Key="코드 블록 hover"   Desc="Copy 버튼 표시 — 클릭 시 코드 클립보드 복사"/>
+              <local:ShortcutEntry Key="▲ 플로팅 버튼"    Desc="맨 위로 부드럽게 스크롤 (150px 이상 내리면 표시)"/>
+              <local:ShortcutEntry Key="↩ 플로팅 버튼"    Desc="TOC 클릭 전 위치로 되돌아가기"/>
+              <local:ShortcutEntry Key=".md 링크 클릭"     Desc="연결된 Markdown 파일을 앱 내 새 탭으로 열기"/>
             </ItemsControl.Items>
           </ItemsControl>
 

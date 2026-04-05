@@ -62,7 +62,6 @@ public partial class MainWindow : Window
     private async void RestoreSessionAsync()
     {
         var files = _settings.OpenFiles.Where(File.Exists).ToList();
-        if (files.Count == 0) return;
         // WebView2 초기화 완료 이벤트 대기 (최대 3초)
         await Task.WhenAny(_webViewReadyTcs.Task, Task.Delay(3000));
         foreach (var f in files)
@@ -71,6 +70,29 @@ public partial class MainWindow : Window
         var savedIdx = _settings.ActiveTabIndex;
         if (savedIdx >= 0 && savedIdx < _docs.Count)
             SwitchTo(savedIdx);
+        // 자동 저장 파일 감지 → 상태바 복구 알림
+        CheckAutosaveFiles();
+    }
+
+    private void CheckAutosaveFiles()
+    {
+        var autoSaveDir = Path.Combine(
+            Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+            "MarkView", "autosave");
+        if (!Directory.Exists(autoSaveDir)) return;
+        var autosaves = Directory.GetFiles(autoSaveDir, "*.autosave.md");
+        if (autosaves.Length == 0) return;
+
+        var result = MessageBox.Show(
+            $"이전 세션에서 자동 저장된 파일이 {autosaves.Length}개 있습니다.\n" +
+            $"저장 위치: {autoSaveDir}\n\n파일 탐색기에서 열어보시겠습니까?",
+            "자동 저장 파일 복구",
+            MessageBoxButton.YesNo, MessageBoxImage.Information);
+        if (result == MessageBoxResult.Yes)
+        {
+            try { System.Diagnostics.Process.Start("explorer.exe", autoSaveDir); }
+            catch { }
+        }
     }
 
     private void RestoreWindowBounds()
@@ -123,6 +145,25 @@ public partial class MainWindow : Window
         _settings.EditorFontSize = _editorFontSize;
         _settings.Save();
         ShowFontSizeHint();
+    }
+
+    private void ResetFontSize()
+    {
+        _editorFontSize = 13;
+        _previewFontSize = 15;
+        Editor.FontSize = _editorFontSize;
+        _settings.EditorFontSize = _editorFontSize;
+        _settings.PreviewFontSize = _previewFontSize;
+        _settings.Save();
+        _ = ApplyPreviewFontSizeAsync();
+        var prev = _activeIndex >= 0 && _activeIndex < _docs.Count
+            ? (_docs[_activeIndex].IsNew ? "새 문서 (저장되지 않음)" : _docs[_activeIndex].FilePath)
+            : "파일을 열어주세요";
+        StatusPath.Text = "폰트 크기 초기화 (에디터 13px · 프리뷰 15px)";
+        _fontSizeHintTimer?.Stop();
+        _fontSizeHintTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(2) };
+        _fontSizeHintTimer.Tick += (_, _) => { _fontSizeHintTimer?.Stop(); StatusPath.Text = prev; };
+        _fontSizeHintTimer.Start();
     }
 
     private void AdjustPreviewFontSize(double delta)
@@ -256,9 +297,16 @@ public partial class MainWindow : Window
         }
         else if (uri.StartsWith("file://"))
         {
-            // 앵커 링크는 RewriteAnchorLinks가 onclick으로 이미 변환했으므로 여기 도달하면 안 됨
-            // 혹시 도달하면 차단 (마크다운 파일 직접 열기 방지)
             e.Cancel = true;
+            // .md/.markdown 파일 링크는 앱 내 새 탭으로 열기
+            try
+            {
+                var localPath = Uri.UnescapeDataString(new Uri(uri).LocalPath);
+                var ext = System.IO.Path.GetExtension(localPath).ToLowerInvariant();
+                if ((ext == ".md" || ext == ".markdown") && File.Exists(localPath))
+                    OpenFile(localPath);
+            }
+            catch { }
         }
     }
 
@@ -784,6 +832,7 @@ public partial class MainWindow : Window
     {
         if (_settings.IsEditMode) SetEditMode(true);
         if (_settings.IsTocVisible) SetTocVisible(true);
+        if (_settings.IsFocusMode) SetFocusMode(true);
     }
 
     // ── 편집 모드 ────────────────────────────────────────────────────────
@@ -869,11 +918,14 @@ public partial class MainWindow : Window
         {
             var w = TocColumn.ActualWidth > 0 ? TocColumn.ActualWidth : TocColumn.Width.Value;
             if (w > 0) _settings.TocWidth = w;
+            TocColumn.MinWidth = 0;
             TocColumn.Width = new GridLength(0);
         }
         else
         {
-            TocColumn.Width = new GridLength(_settings.TocWidth);
+            var tocWidth = Math.Clamp(_settings.TocWidth, 140, 500);
+            TocColumn.Width = new GridLength(tocWidth);
+            TocColumn.MinWidth = 140;
             if (_webViewReady) _ = InjectTocScrollMonitorAsync();
         }
         _settings.IsTocVisible = visible;
@@ -887,6 +939,8 @@ public partial class MainWindow : Window
         _isFocusMode = focus;
         ToolbarBorder.Visibility = focus ? Visibility.Collapsed : Visibility.Visible;
         StatusBarBorder.Visibility = focus ? Visibility.Collapsed : Visibility.Visible;
+        _settings.IsFocusMode = focus;
+        _settings.Save();
     }
 
     // ── 파일 작업 ────────────────────────────────────────────────────────
@@ -1453,6 +1507,8 @@ public partial class MainWindow : Window
         { AdjustEditorFontSize(1); e.Handled = true; }
         else if (e.Key == Key.OemMinus && Keyboard.Modifiers == ModifierKeys.Control)
         { AdjustEditorFontSize(-1); e.Handled = true; }
+        else if (e.Key == Key.D0 && Keyboard.Modifiers == ModifierKeys.Control)
+        { ResetFontSize(); e.Handled = true; }
         else if (e.Key == Key.F11)
         { SetFocusMode(!_isFocusMode); e.Handled = true; }
         else if (e.Key == Key.F1)
@@ -1621,7 +1677,18 @@ public partial class MainWindow : Window
         catch (Exception ex)
         {
             if (index == _activeIndex)
-                StatusPath.Text = $"파일 읽기 실패: {ex.Message}";
+            {
+                var errMsg = $"파일 읽기 실패: {ex.Message}";
+                StatusPath.Text = errMsg;
+                var t = new DispatcherTimer { Interval = TimeSpan.FromSeconds(3) };
+                t.Tick += (_, _) =>
+                {
+                    t.Stop();
+                    if (StatusPath.Text == errMsg && _activeIndex >= 0 && _activeIndex < _docs.Count)
+                        StatusPath.Text = _docs[_activeIndex].IsNew ? "새 문서 (저장되지 않음)" : _docs[_activeIndex].FilePath;
+                };
+                t.Start();
+            }
         }
     }
 

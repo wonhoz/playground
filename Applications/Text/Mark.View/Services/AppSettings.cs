@@ -25,6 +25,7 @@ public class AppSettings
     public int ActiveTabIndex { get; set; } = 0;
     public double PreviewFontSize { get; set; } = 15;
     public bool IsMaximized { get; set; } = false;
+    public bool IsFocusMode { get; set; } = false;
 
     private const int MaxRecentFiles = 10;
 

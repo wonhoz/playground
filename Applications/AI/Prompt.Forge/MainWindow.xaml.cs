@@ -30,6 +30,7 @@ public partial class MainWindow : Window
     readonly Database      _db;
     readonly AppSettings   _appSettings;
     bool _refreshing;
+    readonly List<string>  _recentSearches = [];
 
     public MainWindow()
     {
@@ -66,8 +67,27 @@ public partial class MainWindow : Window
             BtnClearSearch.Visibility = string.IsNullOrEmpty(TxtSearch.Text)
                 ? Visibility.Collapsed : Visibility.Visible;
 
-        // 태그 자동완성
-        TxtTags.TextChanged += TxtTags_TextChanged;
+        // 태그/서비스 자동완성
+        TxtTags.TextChanged    += TxtTags_TextChanged;
+        TxtService.TextChanged += TxtService_TextChanged;
+
+        // 최근 검색어
+        TxtSearch.GotFocus += TxtSearch_GotFocus;
+        TxtSearch.LostFocus += (_, _) =>
+        {
+            // 포커스를 잃을 때 검색어 저장 + 팝업 닫기 (클릭 이벤트 우선을 위해 딜레이)
+            var query = TxtSearch.Text.Trim();
+            if (!string.IsNullOrEmpty(query))
+            {
+                _recentSearches.Remove(query);
+                _recentSearches.Insert(0, query);
+                if (_recentSearches.Count > 10) _recentSearches.RemoveAt(10);
+            }
+            var t = new System.Windows.Threading.DispatcherTimer
+                { Interval = TimeSpan.FromMilliseconds(200) };
+            t.Tick += (_, _) => { t.Stop(); RecentSearchPopup.IsOpen = false; };
+            t.Start();
+        };
     }
 
     // ── 마지막 선택 항목 저장/복원 ─────────────────────────────────────────────
@@ -301,6 +321,7 @@ public partial class MainWindow : Window
 
     void TagLabel_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
     {
+        if ((Keyboard.Modifiers & ModifierKeys.Control) == 0) return;
         if (sender is not TextBlock tb || string.IsNullOrWhiteSpace(tb.Text)) return;
         var firstTag = tb.Text.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
                               .FirstOrDefault();
@@ -672,7 +693,8 @@ public partial class MainWindow : Window
     void Export_Click(object sender, RoutedEventArgs e)
     {
         // 필터된 항목이 있으면 전체 vs 현재 필터 선택
-        bool hasFilter = _vm.Items.Count < _db.GetAll().Count;
+        var allItems = _db.GetAll();
+        bool hasFilter = _vm.Items.Count < allItems.Count;
         List<PromptItem> source;
         if (hasFilter)
         {
@@ -683,11 +705,11 @@ public partial class MainWindow : Window
             if (choice == MessageBoxResult.Cancel) return;
             source = choice == MessageBoxResult.Yes
                 ? [.. _vm.Items]
-                : _db.GetAll();
+                : allItems;
         }
         else
         {
-            source = _db.GetAll();
+            source = allItems;
         }
 
         var dlg = new Microsoft.Win32.SaveFileDialog
@@ -832,6 +854,84 @@ public partial class MainWindow : Window
         TxtTags.CaretIndex = TxtTags.Text.Length;
         TxtTags.Focus();
         LstTagSuggestions.SelectedItem = null;
+    }
+
+    // ── 서비스 자동완성 ───────────────────────────────────────────────────────
+
+    void TxtService_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        if (!IsLoaded) return;
+        var partial = TxtService.Text.Trim();
+        if (partial.Length == 0) { ServicePopup.IsOpen = false; return; }
+
+        var matches = _vm.Services.Skip(1)  // "모든 서비스" 제외
+            .Where(s => s.StartsWith(partial, StringComparison.OrdinalIgnoreCase)
+                     && !s.Equals(partial, StringComparison.OrdinalIgnoreCase))
+            .ToList();
+
+        if (matches.Count == 0) { ServicePopup.IsOpen = false; return; }
+
+        LstServiceSuggestions.ItemsSource = matches;
+        ServicePopup.IsOpen = true;
+    }
+
+    void ServiceSuggestion_Selected(object sender, SelectionChangedEventArgs e)
+    {
+        if (LstServiceSuggestions.SelectedItem is not string svc) return;
+        ServicePopup.IsOpen = false;
+        TxtService.Text = svc;
+        TxtService.CaretIndex = TxtService.Text.Length;
+        TxtService.Focus();
+        LstServiceSuggestions.SelectedItem = null;
+    }
+
+    // ── 최근 검색어 ──────────────────────────────────────────────────────────
+
+    void TxtSearch_GotFocus(object sender, RoutedEventArgs e)
+    {
+        if (_recentSearches.Count == 0) return;
+        LstRecentSearches.ItemsSource = _recentSearches.ToList();
+        RecentSearchPopup.IsOpen = true;
+    }
+
+    void RecentSearch_Selected(object sender, SelectionChangedEventArgs e)
+    {
+        if (LstRecentSearches.SelectedItem is not string query) return;
+        RecentSearchPopup.IsOpen = false;
+        _vm.Search = query;
+        TxtSearch.CaretIndex = TxtSearch.Text.Length;
+        LstRecentSearches.SelectedItem = null;
+    }
+
+    // ── 복수 선택 일괄 태그 편집 ─────────────────────────────────────────────
+
+    void BulkTagEdit_Click(object sender, RoutedEventArgs e)
+    {
+        var selected = LstItems.SelectedItems.Cast<PromptItem>().ToList();
+        if (selected.Count < 2)
+        {
+            MessageBox.Show("2개 이상 항목을 선택(Ctrl+클릭)한 뒤 사용하세요.",
+                "알림", MessageBoxButton.OK, MessageBoxImage.Information);
+            return;
+        }
+
+        var dlg = new Views.BulkTagEditDialog(selected.Count) { Owner = this };
+        if (dlg.ShowDialog() != true) return;
+
+        foreach (var item in selected)
+        {
+            var tags = item.Tags.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries).ToList();
+            foreach (var t in dlg.TagsToAdd)
+                if (!tags.Contains(t, StringComparer.OrdinalIgnoreCase)) tags.Add(t);
+            foreach (var t in dlg.TagsToRemove)
+                tags.RemoveAll(x => x.Equals(t, StringComparison.OrdinalIgnoreCase));
+            item.Tags = string.Join(", ", tags);
+            item.UpdatedAt = DateTime.UtcNow;
+            _db.Update(item);
+        }
+        _vm.Refresh();
+        RefreshFilterCombos();
+        _vm.StatusText = $"{selected.Count}개 항목 태그 업데이트 완료";
     }
 
     private record ImportDto(

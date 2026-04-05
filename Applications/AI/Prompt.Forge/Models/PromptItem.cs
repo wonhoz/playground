@@ -19,10 +19,10 @@ public sealed class PromptItem
 
     public int     SortOrder   { get; set; }
 
-    /// {{변수명}} 목록 추출
+    /// {{변수명}} 목록 추출 (영문, 숫자, _, 한글 지원)
     public List<string> ExtractVariables()
     {
-        var matches = Regex.Matches(Content, @"\{\{(\w+)\}\}");
+        var matches = Regex.Matches(Content, @"\{\{([\w\p{L}]+)\}\}");
         return matches.Select(m => m.Groups[1].Value).Distinct().ToList();
     }
 }

@@ -168,7 +168,11 @@ sealed class Database : IDisposable
         string baseTable;
         if (!string.IsNullOrWhiteSpace(query))
         {
-            cmd.Parameters.AddWithValue("$q", query + "*");
+            // FTS5 특수 연산자(AND, OR, NOT, ", (, ))가 포함된 경우 구문 오류 방지:
+            // 각 토큰에 " "로 감싸 리터럴 문자열로 처리
+            var safeQuery = string.Join(" ", query.Split(' ', StringSplitOptions.RemoveEmptyEntries)
+                .Select(t => "\"" + t.Replace("\"", "\"\"") + "\"*"));
+            cmd.Parameters.AddWithValue("$q", safeQuery);
             baseTable = @"
                 SELECT p.* FROM prompts p
                 INNER JOIN prompts_fts fts ON p.id = fts.rowid

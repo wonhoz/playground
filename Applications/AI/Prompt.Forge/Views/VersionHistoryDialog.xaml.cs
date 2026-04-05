@@ -76,10 +76,16 @@ public partial class VersionHistoryDialog : Window
         _db.DeleteHistoryItem(entry.Id);
         _entries.Remove(entry);
         TxtPreview.Text = "";
-        BtnRestore.IsEnabled = false;
-        BtnDeleteVersion.IsEnabled = false;
         if (_entries.Count == 0)
+        {
             TxtEmptyMsg.Visibility = System.Windows.Visibility.Visible;
+            BtnRestore.IsEnabled = false;
+            BtnDeleteVersion.IsEnabled = false;
+        }
+        else
+        {
+            LstVersions.SelectedIndex = 0;
+        }
     }
 
     void Close_Click(object sender, RoutedEventArgs e) => DialogResult = false;

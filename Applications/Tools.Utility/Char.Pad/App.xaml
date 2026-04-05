@@ -15,36 +15,42 @@
         <SolidColorBrush x:Key="CharHover"     Color="#1A3550"/>
         <SolidColorBrush x:Key="FavColor"      Color="#FFD700"/>
 
-        <!-- ScrollBar 스타일 -->
+        <!-- ScrollBar Thumb 공통 ControlTemplate -->
+        <ControlTemplate x:Key="DarkThumbTemplate" TargetType="Thumb">
+            <Border x:Name="ThumbBorder" Background="#2A4A6A" CornerRadius="3"/>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter TargetName="ThumbBorder" Property="Background" Value="#0288D1"/>
+                </Trigger>
+                <Trigger Property="IsDragging" Value="True">
+                    <Setter TargetName="ThumbBorder" Property="Background" Value="#29B6F6"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+
+        <!-- ScrollBar 스타일 — Orientation 별 분기 (세로: Width=6 / 가로: Height=6) -->
         <Style TargetType="ScrollBar">
-            <Setter Property="Width" Value="6"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ScrollBar">
                         <Grid>
                             <Track x:Name="PART_Track" IsDirectionReversed="True">
                                 <Track.Thumb>
-                                    <Thumb>
-                                        <Thumb.Template>
-                                            <ControlTemplate TargetType="Thumb">
-                                                <Border x:Name="ThumbBorder" Background="#2A4A6A" CornerRadius="3"/>
-                                                <ControlTemplate.Triggers>
-                                                    <Trigger Property="IsMouseOver" Value="True">
-                                                        <Setter TargetName="ThumbBorder" Property="Background" Value="#0288D1"/>
-                                                    </Trigger>
-                                                    <Trigger Property="IsDragging" Value="True">
-                                                        <Setter TargetName="ThumbBorder" Property="Background" Value="#29B6F6"/>
-                                                    </Trigger>
-                                                </ControlTemplate.Triggers>
-                                            </ControlTemplate>
-                                        </Thumb.Template>
-                                    </Thumb>
+                                    <Thumb Template="{StaticResource DarkThumbTemplate}"/>
                                 </Track.Thumb>
                             </Track>
                         </Grid>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+            <Style.Triggers>
+                <Trigger Property="Orientation" Value="Vertical">
+                    <Setter Property="Width" Value="6"/>
+                </Trigger>
+                <Trigger Property="Orientation" Value="Horizontal">
+                    <Setter Property="Height" Value="6"/>
+                </Trigger>
+            </Style.Triggers>
         </Style>
 
         <!-- TextBox 스타일 -->

@@ -21,6 +21,7 @@ public partial class App : System.Windows.Application
     private PopupWindow?   _popup;
     private StorageService _storage = null!;
     private HwndSource?    _hwndSource;
+    private System.Windows.Window? _hotkeyWindow; // GC 방지 — HWND 수명 보장
     private IntPtr         _prevHwnd;
     private System.Threading.Mutex? _mutex;
 
@@ -98,8 +99,9 @@ public partial class App : System.Windows.Application
     // ── 전역 단축키 등록 ────────────────────────────────────────────────
     private void RegisterGlobalHotkey()
     {
-        // 메시지 훅을 위한 숨김 창 사용
-        var helper = new WindowInteropHelper(new System.Windows.Window { Width = 0, Height = 0, WindowStyle = System.Windows.WindowStyle.None, ShowInTaskbar = false, Opacity = 0 });
+        // 메시지 훅을 위한 숨김 창 사용 (_hotkeyWindow 필드 저장으로 GC 방지)
+        _hotkeyWindow = new System.Windows.Window { Width = 0, Height = 0, WindowStyle = System.Windows.WindowStyle.None, ShowInTaskbar = false, Opacity = 0 };
+        var helper = new WindowInteropHelper(_hotkeyWindow);
         helper.EnsureHandle();
         _hwndSource = HwndSource.FromHwnd(helper.Handle);
         _hwndSource?.AddHook(WndProc);
@@ -130,7 +132,7 @@ public partial class App : System.Windows.Application
         _popup.ShowAt(_prevHwnd);
     }
 
-    internal void PasteToWindow(IntPtr targetHwnd) => InputHelper.PasteToWindow(targetHwnd);
+    internal Task PasteToWindowAsync(IntPtr targetHwnd) => InputHelper.PasteToWindowAsync(targetHwnd);
 
     private void ClearRecents()
     {

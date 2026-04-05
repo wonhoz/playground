@@ -214,6 +214,51 @@ public static class CharDatabase
             ("ₙ", "subscript latin small letter n"),
         });
 
+        // ── 선/박스 그리기 ─────────────────────────────────────────
+        AddRange(list, "box", new[]
+        {
+            ("─", "box drawings light horizontal"),
+            ("│", "box drawings light vertical"),
+            ("┌", "box drawings light down and right"),
+            ("┐", "box drawings light down and left"),
+            ("└", "box drawings light up and right"),
+            ("┘", "box drawings light up and left"),
+            ("├", "box drawings light vertical and right"),
+            ("┤", "box drawings light vertical and left"),
+            ("┬", "box drawings light down and horizontal"),
+            ("┴", "box drawings light up and horizontal"),
+            ("┼", "box drawings light vertical and horizontal"),
+            ("═", "box drawings double horizontal"),
+            ("║", "box drawings double vertical"),
+            ("╔", "box drawings double down and right"),
+            ("╗", "box drawings double down and left"),
+            ("╚", "box drawings double up and right"),
+            ("╝", "box drawings double up and left"),
+            ("╠", "box drawings double vertical and right"),
+            ("╣", "box drawings double vertical and left"),
+            ("╦", "box drawings double down and horizontal"),
+            ("╩", "box drawings double up and horizontal"),
+            ("╬", "box drawings double vertical and horizontal"),
+            ("╭", "box drawings light arc down and right"),
+            ("╮", "box drawings light arc down and left"),
+            ("╯", "box drawings light arc up and left"),
+            ("╰", "box drawings light arc up and right"),
+            ("┄", "box drawings light triple dash horizontal"),
+            ("┆", "box drawings light triple dash vertical"),
+            ("┅", "box drawings heavy triple dash horizontal"),
+            ("┇", "box drawings heavy triple dash vertical"),
+            ("━", "box drawings heavy horizontal"),
+            ("┃", "box drawings heavy vertical"),
+            ("░", "light shade"),
+            ("▒", "medium shade"),
+            ("▓", "dark shade"),
+            ("█", "full block"),
+            ("▄", "lower half block"),
+            ("▀", "upper half block"),
+            ("▌", "left half block"),
+            ("▐", "right half block"),
+        });
+
         // ── 이모지 ─────────────────────────────────────────────────
         AddRange(list, "emoji", new[]
         {

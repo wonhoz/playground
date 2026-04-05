@@ -15,6 +15,7 @@ public partial class PopupWindow : System.Windows.Window
     private DispatcherTimer? _searchTimer;
     private double    _charFontSize = 20;
     private bool      _pinned       = false;
+    private bool      _suppressSizeChanged = false;
 
     // ItemSize = 문자 버튼 1칸 크기 (폰트 크기 기반으로 자동 계산)
     private double ItemSize => _charFontSize + 28;
@@ -28,6 +29,7 @@ public partial class PopupWindow : System.Windows.Window
         ("symbol",   "© 기호",      "기호"),
         ("currency", "$ 통화",      "통화"),
         ("super",    "² 위첨자",    "위첨자"),
+        ("box",      "─ 선/박스",   "선·박스"),
         ("emoji",    "😀 이모지",   "이모지"),
     };
 
@@ -38,6 +40,7 @@ public partial class PopupWindow : System.Windows.Window
         _searchTimer = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(150) };
         _searchTimer.Tick += (_, _) => { _searchTimer.Stop(); RefreshGrid(); };
         Loaded += OnLoaded;
+        SizeChanged += OnSizeChanged;
     }
 
     private void OnLoaded(object sender, RoutedEventArgs e)
@@ -50,6 +53,12 @@ public partial class PopupWindow : System.Windows.Window
         if (double.TryParse(_storage.GetSetting("char_font_size"), out double fs))
             _charFontSize = Math.Clamp(fs, 14, 36);
         _pinned = _storage.GetSetting("pinned") == "1";
+        _suppressSizeChanged = true;
+        if (double.TryParse(_storage.GetSetting("popup_width"), out double pw))
+            Width = Math.Clamp(pw, 400, 900);
+        if (double.TryParse(_storage.GetSetting("popup_height"), out double ph))
+            Height = Math.Clamp(ph, 300, 700);
+        _suppressSizeChanged = false;
 
         BuildTabs();
         UpdatePinBtn();
@@ -189,6 +198,8 @@ public partial class PopupWindow : System.Windows.Window
                 ? (SolidColorBrush)FindResource("AccentBrush")
                 : (SolidColorBrush)FindResource("TabInactive");
             b.Foreground = new SolidColorBrush(Colors.White);
+            // 활성 탭이 스크롤 영역 밖에 있을 때 자동 스크롤
+            if (active) b.BringIntoView();
         }
 
         RefreshGrid();
@@ -230,7 +241,8 @@ public partial class PopupWindow : System.Windows.Window
                 "favorite" => _storage.GetFavorites()
                                 .Select(c => CharDatabase.AllByChar.GetValueOrDefault(c))
                                 .Where(e => e is not null).Select(e => e!),
-                _          => CharDatabase.GetByCategory(_activeTab),
+                // 카테고리 탭: 최근 사용한 문자를 앞에 표시
+                _ => SortByRecent(CharDatabase.GetByCategory(_activeTab)),
             };
             StatusText.Text = Tabs.FirstOrDefault(t => t.Id == _activeTab).StatusName
                               ?? _activeTab;
@@ -248,6 +260,17 @@ public partial class PopupWindow : System.Windows.Window
         CharGrid.Children.Clear();
         foreach (var entry in list)
             CharGrid.Children.Add(MakeCharButton(entry, favSet, isSearchResult));
+    }
+
+    // ── 카테고리 탭: 최근 사용 문자를 앞으로 정렬 ──────────────────────
+    private IEnumerable<CharEntry> SortByRecent(IEnumerable<CharEntry> entries)
+    {
+        var recents = _storage.GetRecents();
+        var recentRank = recents
+            .Select((c, i) => (c, i))
+            .ToDictionary(x => x.c, x => x.i);
+        return entries.OrderBy(e =>
+            recentRank.TryGetValue(e.Char, out int rank) ? rank : int.MaxValue);
     }
 
     // ── Unicode 코드포인트 툴팁 생성 ────────────────────────────────────
@@ -446,7 +469,7 @@ public partial class PopupWindow : System.Windows.Window
             if (_targetHwnd != IntPtr.Zero)
             {
                 await Task.Delay(50);
-                InputHelper.PasteToWindow(_targetHwnd);
+                await InputHelper.PasteToWindowAsync(_targetHwnd);
                 await Task.Delay(100);
                 // 팝업을 다시 최상위로 가져옴
                 SetForegroundWindow(new WindowInteropHelper(this).Handle);
@@ -460,7 +483,7 @@ public partial class PopupWindow : System.Windows.Window
         if (_targetHwnd != IntPtr.Zero)
         {
             await Task.Delay(80);
-            InputHelper.PasteToWindow(_targetHwnd);
+            await InputHelper.PasteToWindowAsync(_targetHwnd);
         }
     }
 
@@ -547,6 +570,27 @@ public partial class PopupWindow : System.Windows.Window
     }
 
     private void CloseBtn_Click(object sender, RoutedEventArgs e) => Hide();
+
+    private void OnSizeChanged(object sender, SizeChangedEventArgs e)
+    {
+        if (_suppressSizeChanged || !_initialized) return;
+        _storage.SetSetting("popup_width",  Width.ToString());
+        _storage.SetSetting("popup_height", Height.ToString());
+    }
+
+    [DllImport("user32.dll")] static extern IntPtr SendMessage(IntPtr hwnd, uint msg, IntPtr wParam, IntPtr lParam);
+    private const uint WM_SYSCOMMAND = 0x0112;
+    private const uint SC_SIZE_BOTTOM_RIGHT = 0xF008;
+
+    private void ResizeGrip_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+    {
+        if (e.LeftButton == System.Windows.Input.MouseButtonState.Pressed)
+        {
+            var hwnd = new WindowInteropHelper(this).Handle;
+            ReleaseMouseCapture();
+            SendMessage(hwnd, WM_SYSCOMMAND, new IntPtr(0xF008), IntPtr.Zero);
+        }
+    }
 
     public void RefreshIfRecentTab()
     {

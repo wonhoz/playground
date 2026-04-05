@@ -28,11 +28,11 @@ public static class InputHelper
     [StructLayout(LayoutKind.Sequential)]
     struct HARDWAREINPUT { public uint uMsg; public ushort wParamL, wParamH; }
 
-    public static void PasteToWindow(IntPtr targetHwnd)
+    public static async Task PasteToWindowAsync(IntPtr targetHwnd)
     {
         if (targetHwnd == IntPtr.Zero) return;
         SetForegroundWindow(targetHwnd);
-        System.Threading.Thread.Sleep(50);
+        await Task.Delay(50);   // UI 스레드 비블로킹 대기 (Thread.Sleep 대체)
 
         SendInput(4, new[]
         {

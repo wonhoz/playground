@@ -355,24 +355,19 @@ public partial class MainWindow : Window
         {
             var id = msg[7..];
             var jsId = System.Text.Json.JsonSerializer.Serialize(id);
-            // ID 불일치 대비: 정확 매칭 → 앞 숫자 제거 매칭 → 헤딩 텍스트 유사 매칭 순으로 시도
+            // ID 불일치 대비: 정확 매칭 → 연속 하이픈 정규화 매칭 → 헤딩 텍스트 기반 매칭 순으로 시도
+            // norm: Unicode letter/number만 남기고 나머지(이모지·+·.·-·공백 등) 모두 제거 → 범용 비교
             var script = $@"
 (function() {{
     var id = {jsId};
     var el = document.getElementById(id);
     if (el) {{ el.scrollIntoView({{behavior:'smooth'}}); return; }}
-    var stripped = id.replace(/^\d[\d\-]*\-/, '');
-    el = document.getElementById(stripped);
+    var normalized = id.replace(/-{{2,}}/g, '-').replace(/^-|-$/g, '');
+    el = document.getElementById(normalized);
     if (el) {{ el.scrollIntoView({{behavior:'smooth'}}); return; }}
-    var headings = document.querySelectorAll('h1,h2,h3,h4,h5,h6');
-    var norm = function(s) {{ return s.replace(/[\-\s\.·•■]+/g,'').toLowerCase(); }};
+    var norm = function(s) {{ return s.replace(/[^\p{{L}}\p{{N}}]/gu, '').toLowerCase(); }};
     var idNorm = norm(id);
-    for (var h of headings) {{
-        if (h.id && (h.id.toLowerCase() === id.toLowerCase() ||
-            h.id.toLowerCase() === stripped.toLowerCase())) {{
-            h.scrollIntoView({{behavior:'smooth'}}); return;
-        }}
-    }}
+    var headings = document.querySelectorAll('h1,h2,h3,h4,h5,h6');
     for (var h of headings) {{
         if (norm(h.textContent) === idNorm) {{
             h.scrollIntoView({{behavior:'smooth'}}); return;

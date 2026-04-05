@@ -5,7 +5,7 @@
         xmlns:ctrl="clr-namespace:Prompt.Forge.Controls"
         Title="Prompt.Forge" Width="1000" Height="680"
         MinWidth="800" MinHeight="500"
-        Background="#13131F" Foreground="#E0E0E0"
+        Background="#0C1520" Foreground="#E0E0E0"
         FontFamily="Segoe UI" FontSize="13"
         WindowStartupLocation="CenterScreen"
 >
@@ -14,7 +14,7 @@
 
         <!-- 액센트 버튼 -->
         <Style x:Key="AccentBtn" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
-            <Setter Property="Background" Value="#7C3AED"/>
+            <Setter Property="Background" Value="#1976D2"/>
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="Template">
                 <Setter.Value>
@@ -25,7 +25,7 @@
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="#6D28D9"/>
+                                <Setter Property="Background" Value="#1565C0"/>
                             </Trigger>
                             <Trigger Property="IsEnabled" Value="False">
                                 <Setter Property="Opacity" Value="0.4"/>
@@ -63,7 +63,7 @@
         <!-- 즐겨찾기 버튼 -->
         <Style x:Key="FavBtn" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
             <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="Foreground" Value="#888899"/>
+            <Setter Property="Foreground" Value="#6A8FAD"/>
             <Setter Property="Padding" Value="4,4"/>
             <Setter Property="FontSize" Value="16"/>
             <Setter Property="Template">
@@ -75,7 +75,7 @@
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="#2A2A3E"/>
+                                <Setter Property="Background" Value="#162840"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -86,23 +86,23 @@
         <!-- 목록 아이템 -->
         <Style TargetType="ListBoxItem">
             <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="Foreground" Value="#C0C0D0"/>
+            <Setter Property="Foreground" Value="#B0C8E0"/>
             <Setter Property="Padding" Value="10,8"/>
             <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ListBoxItem">
                         <Border Background="{TemplateBinding Background}"
-                                BorderThickness="0,0,0,1" BorderBrush="#1E1E2E"
+                                BorderThickness="0,0,0,1" BorderBrush="#0F1E2E"
                                 Padding="{TemplateBinding Padding}">
                             <ContentPresenter/>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="#1E1E2E"/>
+                                <Setter Property="Background" Value="#0F1E2E"/>
                             </Trigger>
                             <Trigger Property="IsSelected" Value="True">
-                                <Setter Property="Background" Value="#251A3E"/>
+                                <Setter Property="Background" Value="#0A2040"/>
                                 <Setter Property="Foreground" Value="#E0E0E0"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
@@ -121,7 +121,7 @@
         </Grid.RowDefinitions>
 
         <!-- ── 상단 툴바 ─────────────────────────────────────────── -->
-        <Border Grid.Row="0" Background="#0F0F1A" Padding="12,8">
+        <Border Grid.Row="0" Background="#060F1A" Padding="12,8">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
@@ -130,7 +130,7 @@
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0" Text="Prompt.Forge"
                            FontSize="15" FontWeight="SemiBold"
-                           Foreground="#7C3AED" VerticalAlignment="Center"/>
+                           Foreground="#1976D2" VerticalAlignment="Center"/>
                 <Grid Grid.Column="1" Margin="16,0">
                     <TextBox x:Name="TxtSearch"
                              Height="30"
@@ -145,7 +145,7 @@
                                                 <VisualBrush Stretch="None" AlignmentX="Left">
                                                     <VisualBrush.Visual>
                                                         <TextBlock Text="프롬프트 검색..."
-                                                                   Foreground="#555566"
+                                                                   Foreground="#3A5570"
                                                                    Margin="10,0"/>
                                                     </VisualBrush.Visual>
                                                 </VisualBrush>
@@ -163,13 +163,13 @@
                         <Button.Template>
                             <ControlTemplate TargetType="Button">
                                 <Border Background="Transparent" CornerRadius="4">
-                                    <TextBlock Text="✕" FontSize="10" Foreground="#888899"
+                                    <TextBlock Text="✕" FontSize="10" Foreground="#6A8FAD"
                                                HorizontalAlignment="Center" VerticalAlignment="Center">
                                         <TextBlock.Style>
                                             <Style TargetType="TextBlock">
                                                 <Style.Triggers>
                                                     <DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource AncestorType=Border}}" Value="True">
-                                                        <Setter Property="Foreground" Value="#C0C0D0"/>
+                                                        <Setter Property="Foreground" Value="#B0C8E0"/>
                                                     </DataTrigger>
                                                 </Style.Triggers>
                                             </Style>
@@ -212,7 +212,7 @@
             </Grid.ColumnDefinitions>
 
             <!-- 왼쪽: 필터 + 목록 -->
-            <Grid Grid.Column="0" Background="#0F0F1A">
+            <Grid Grid.Column="0" Background="#060F1A">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
@@ -249,10 +249,10 @@
                          DragOver="LstItems_DragOver"
                          Drop="LstItems_Drop">
                     <ListBox.ContextMenu>
-                        <ContextMenu Background="#1E1E2E" BorderBrush="#3A3A55">
+                        <ContextMenu Background="#0F1E2E" BorderBrush="#1E3555">
                             <MenuItem x:Name="MenuBulkTagEdit" Header="선택 항목 일괄 태그 편집"
                                       Click="BulkTagEdit_Click"
-                                      Foreground="#C0C0D0"/>
+                                      Foreground="#B0C8E0"/>
                         </ContextMenu>
                     </ListBox.ContextMenu>
                     <ListBox.ItemTemplate>
@@ -263,14 +263,14 @@
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
                                 <Grid.ToolTip>
-                                    <ToolTip MaxWidth="320" Background="#0F0F1A"
-                                             BorderBrush="#3A3A55" BorderThickness="1">
+                                    <ToolTip MaxWidth="320" Background="#060F1A"
+                                             BorderBrush="#1E3555" BorderThickness="1">
                                         <StackPanel>
                                             <TextBlock Text="{Binding Title}" FontWeight="SemiBold"
                                                        Foreground="#E0E0E0" FontSize="12"
                                                        Margin="0,0,0,4"/>
                                             <TextBlock Text="{Binding Content}" TextWrapping="Wrap"
-                                                       Foreground="#A0A0BB" FontFamily="Consolas"
+                                                       Foreground="#8AAAC8" FontFamily="Consolas"
                                                        FontSize="11" MaxHeight="80"
                                                        TextTrimming="CharacterEllipsis"/>
                                         </StackPanel>
@@ -283,7 +283,7 @@
                                                ctrl:TextHighlighter.Query="{Binding DataContext.Search,
                                                    RelativeSource={RelativeSource AncestorType=Window}}"/>
                                     <TextBlock Text="{Binding Tags}" FontSize="11"
-                                               Foreground="#A78BFA"
+                                               Foreground="#64B5F6"
                                                TextTrimming="CharacterEllipsis"
                                                Margin="0,2,0,0"
                                                Cursor="Hand"
@@ -312,10 +312,10 @@
 
             <!-- 스플리터 -->
             <GridSplitter Grid.Column="1" Width="5" HorizontalAlignment="Stretch"
-                          Background="#1A1A2A"/>
+                          Background="#0E1A28"/>
 
             <!-- 오른쪽: 상세 편집 -->
-            <Grid Grid.Column="2" Background="#13131F">
+            <Grid Grid.Column="2" Background="#0C1520">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
@@ -354,7 +354,7 @@
                                                 <VisualBrush Stretch="None" AlignmentX="Left">
                                                     <VisualBrush.Visual>
                                                         <TextBlock Text="태그 (쉼표 구분)"
-                                                                   Foreground="#555566"
+                                                                   Foreground="#3A5570"
                                                                    Margin="10,0"/>
                                                     </VisualBrush.Visual>
                                                 </VisualBrush>
@@ -375,7 +375,7 @@
                                                 <VisualBrush Stretch="None" AlignmentX="Left">
                                                     <VisualBrush.Visual>
                                                         <TextBlock Text="대상 서비스"
-                                                                   Foreground="#555566"
+                                                                   Foreground="#3A5570"
                                                                    Margin="10,0"/>
                                                     </VisualBrush.Visual>
                                                 </VisualBrush>
@@ -404,7 +404,7 @@
                                             <VisualBrush Stretch="None" AlignmentX="Left" AlignmentY="Top">
                                                 <VisualBrush.Visual>
                                                     <TextBlock FontFamily="Segoe UI" FontSize="12"
-                                                               Foreground="#555566" Margin="10,10">
+                                                               Foreground="#3A5570" Margin="10,10">
                                                         <Run Text="프롬프트 내용을 입력하세요."/>
                                                         <LineBreak/>
                                                         <Run Text="{}{{변수명}} 형식으로 변수를 삽입하면"/>
@@ -438,7 +438,7 @@
                                             <VisualBrush Stretch="None" AlignmentX="Left" AlignmentY="Top">
                                                 <VisualBrush.Visual>
                                                     <TextBlock Text="메모 (선택)"
-                                                               Foreground="#555566"
+                                                               Foreground="#3A5570"
                                                                Margin="10,8"/>
                                                 </VisualBrush.Visual>
                                             </VisualBrush>
@@ -451,7 +451,7 @@
                 </TextBox>
 
                 <!-- 액션 버튼 바 -->
-                <Border Grid.Row="4" Background="#0F0F1A" Padding="16,8">
+                <Border Grid.Row="4" Background="#060F1A" Padding="16,8">
                     <Grid>
                         <StackPanel Orientation="Horizontal">
                             <Button Content="💾  저장 (Ctrl+S)" Click="Save_Click"
@@ -477,22 +477,22 @@
         </Grid>
 
         <!-- ── 상태 바 ────────────────────────────────────────────── -->
-        <Border Grid.Row="2" Background="#0A0A14" Padding="12,4">
-            <TextBlock Text="{Binding StatusText}" Foreground="#888899" FontSize="11"/>
+        <Border Grid.Row="2" Background="#040D18" Padding="12,4">
+            <TextBlock Text="{Binding StatusText}" Foreground="#6A8FAD" FontSize="11"/>
         </Border>
 
         <!-- ── 태그 자동완성 팝업 ──────────────────────────────────── -->
         <Popup x:Name="TagPopup" StaysOpen="False" AllowsTransparency="True"
                PlacementTarget="{Binding ElementName=TxtTags}"
                Placement="Bottom" VerticalOffset="2">
-            <Border Background="#1E1E2E" BorderBrush="#3A3A55" BorderThickness="1" CornerRadius="4"
+            <Border Background="#0F1E2E" BorderBrush="#1E3555" BorderThickness="1" CornerRadius="4"
                     MinWidth="{Binding ElementName=TxtTags, Path=ActualWidth}">
                 <ListBox x:Name="LstTagSuggestions" MaxHeight="160"
                          Background="Transparent" BorderThickness="0"
                          SelectionChanged="TagSuggestion_Selected">
                     <ListBox.ItemContainerStyle>
                         <Style TargetType="ListBoxItem">
-                            <Setter Property="Foreground" Value="#C0C0D0"/>
+                            <Setter Property="Foreground" Value="#B0C8E0"/>
                             <Setter Property="Padding" Value="10,6"/>
                             <Setter Property="Background" Value="Transparent"/>
                             <Setter Property="Cursor" Value="Hand"/>
@@ -505,7 +505,7 @@
                                         </Border>
                                         <ControlTemplate.Triggers>
                                             <Trigger Property="IsMouseOver" Value="True">
-                                                <Setter Property="Background" Value="#252540"/>
+                                                <Setter Property="Background" Value="#152540"/>
                                             </Trigger>
                                         </ControlTemplate.Triggers>
                                     </ControlTemplate>
@@ -521,14 +521,14 @@
         <Popup x:Name="ServicePopup" StaysOpen="False" AllowsTransparency="True"
                PlacementTarget="{Binding ElementName=TxtService}"
                Placement="Bottom" VerticalOffset="2">
-            <Border Background="#1E1E2E" BorderBrush="#3A3A55" BorderThickness="1" CornerRadius="4"
+            <Border Background="#0F1E2E" BorderBrush="#1E3555" BorderThickness="1" CornerRadius="4"
                     MinWidth="{Binding ElementName=TxtService, Path=ActualWidth}">
                 <ListBox x:Name="LstServiceSuggestions" MaxHeight="160"
                          Background="Transparent" BorderThickness="0"
                          SelectionChanged="ServiceSuggestion_Selected">
                     <ListBox.ItemContainerStyle>
                         <Style TargetType="ListBoxItem">
-                            <Setter Property="Foreground" Value="#C0C0D0"/>
+                            <Setter Property="Foreground" Value="#B0C8E0"/>
                             <Setter Property="Padding" Value="10,6"/>
                             <Setter Property="Background" Value="Transparent"/>
                             <Setter Property="Cursor" Value="Hand"/>
@@ -541,7 +541,7 @@
                                         </Border>
                                         <ControlTemplate.Triggers>
                                             <Trigger Property="IsMouseOver" Value="True">
-                                                <Setter Property="Background" Value="#252540"/>
+                                                <Setter Property="Background" Value="#152540"/>
                                             </Trigger>
                                         </ControlTemplate.Triggers>
                                     </ControlTemplate>
@@ -557,17 +557,17 @@
         <Popup x:Name="RecentSearchPopup" StaysOpen="False" AllowsTransparency="True"
                PlacementTarget="{Binding ElementName=TxtSearch}"
                Placement="Bottom" VerticalOffset="2">
-            <Border Background="#1E1E2E" BorderBrush="#3A3A55" BorderThickness="1" CornerRadius="4"
+            <Border Background="#0F1E2E" BorderBrush="#1E3555" BorderThickness="1" CornerRadius="4"
                     MinWidth="{Binding ElementName=TxtSearch, Path=ActualWidth}">
                 <StackPanel>
-                    <TextBlock Text="최근 검색어" Foreground="#555566" FontSize="10"
+                    <TextBlock Text="최근 검색어" Foreground="#3A5570" FontSize="10"
                                Margin="10,6,10,4"/>
                     <ListBox x:Name="LstRecentSearches" MaxHeight="140"
                              Background="Transparent" BorderThickness="0"
                              SelectionChanged="RecentSearch_Selected">
                         <ListBox.ItemContainerStyle>
                             <Style TargetType="ListBoxItem">
-                                <Setter Property="Foreground" Value="#C0C0D0"/>
+                                <Setter Property="Foreground" Value="#B0C8E0"/>
                                 <Setter Property="Padding" Value="10,5"/>
                                 <Setter Property="Background" Value="Transparent"/>
                                 <Setter Property="Cursor" Value="Hand"/>
@@ -580,7 +580,7 @@
                                             </Border>
                                             <ControlTemplate.Triggers>
                                                 <Trigger Property="IsMouseOver" Value="True">
-                                                    <Setter Property="Background" Value="#252540"/>
+                                                    <Setter Property="Background" Value="#152540"/>
                                                 </Trigger>
                                             </ControlTemplate.Triggers>
                                         </ControlTemplate>
@@ -597,11 +597,11 @@
         <Popup x:Name="HelpPopup" StaysOpen="False" AllowsTransparency="True"
                PlacementTarget="{Binding ElementName=BtnHelp}"
                Placement="Bottom" VerticalOffset="4">
-            <Border Background="#1A1A2A" BorderBrush="#3A3A55" BorderThickness="1" CornerRadius="8"
+            <Border Background="#0E1A28" BorderBrush="#1E3555" BorderThickness="1" CornerRadius="8"
                     Padding="20,16">
                 <StackPanel>
                     <TextBlock Text="단축키" FontWeight="SemiBold" FontSize="12"
-                               Foreground="#7C3AED" Margin="0,0,0,10"/>
+                               Foreground="#1976D2" Margin="0,0,0,10"/>
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="160"/>
@@ -619,31 +619,31 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        <TextBlock Grid.Row="0" Grid.Column="0" Text="Ctrl+N" Foreground="#A78BFA" FontFamily="Consolas" FontSize="12"/>
-                        <TextBlock Grid.Row="0" Grid.Column="1" Text="새 프롬프트" Foreground="#C0C0D0" FontSize="12"/>
-                        <TextBlock Grid.Row="1" Grid.Column="0" Text="Ctrl+S" Foreground="#A78BFA" FontFamily="Consolas" FontSize="12" Margin="0,5,0,0"/>
-                        <TextBlock Grid.Row="1" Grid.Column="1" Text="저장" Foreground="#C0C0D0" FontSize="12" Margin="0,5,0,0"/>
-                        <TextBlock Grid.Row="2" Grid.Column="0" Text="Ctrl+D" Foreground="#A78BFA" FontFamily="Consolas" FontSize="12" Margin="0,5,0,0"/>
-                        <TextBlock Grid.Row="2" Grid.Column="1" Text="복제" Foreground="#C0C0D0" FontSize="12" Margin="0,5,0,0"/>
-                        <TextBlock Grid.Row="3" Grid.Column="0" Text="Ctrl+C" Foreground="#A78BFA" FontFamily="Consolas" FontSize="12" Margin="0,5,0,0"/>
-                        <TextBlock Grid.Row="3" Grid.Column="1" Text="복사 (에디터 포커스 없을 때)" Foreground="#C0C0D0" FontSize="12" Margin="0,5,0,0"/>
-                        <TextBlock Grid.Row="4" Grid.Column="0" Text="Ctrl+Enter" Foreground="#A78BFA" FontFamily="Consolas" FontSize="12" Margin="0,5,0,0"/>
-                        <TextBlock Grid.Row="4" Grid.Column="1" Text="변수 채우기" Foreground="#C0C0D0" FontSize="12" Margin="0,5,0,0"/>
-                        <TextBlock Grid.Row="5" Grid.Column="0" Text="Ctrl+H" Foreground="#A78BFA" FontFamily="Consolas" FontSize="12" Margin="0,5,0,0"/>
-                        <TextBlock Grid.Row="5" Grid.Column="1" Text="버전 히스토리" Foreground="#C0C0D0" FontSize="12" Margin="0,5,0,0"/>
-                        <TextBlock Grid.Row="6" Grid.Column="0" Text="Ctrl+F" Foreground="#A78BFA" FontFamily="Consolas" FontSize="12" Margin="0,5,0,0"/>
-                        <TextBlock Grid.Row="6" Grid.Column="1" Text="검색창 포커스" Foreground="#C0C0D0" FontSize="12" Margin="0,5,0,0"/>
-                        <TextBlock Grid.Row="7" Grid.Column="0" Text="↑ / ↓" Foreground="#A78BFA" FontFamily="Consolas" FontSize="12" Margin="0,5,0,0"/>
-                        <TextBlock Grid.Row="7" Grid.Column="1" Text="목록 위·아래 이동" Foreground="#C0C0D0" FontSize="12" Margin="0,5,0,0"/>
-                        <TextBlock Grid.Row="8" Grid.Column="0" Text="Esc" Foreground="#A78BFA" FontFamily="Consolas" FontSize="12" Margin="0,5,0,0"/>
-                        <TextBlock Grid.Row="8" Grid.Column="1" Text="검색·필터 초기화 (검색창 포커스 시)" Foreground="#C0C0D0" FontSize="12" Margin="0,5,0,0"/>
-                        <TextBlock Grid.Row="9" Grid.Column="0" Text="Win+Shift+P" Foreground="#A78BFA" FontFamily="Consolas" FontSize="12" Margin="0,5,0,0"/>
-                        <TextBlock Grid.Row="9" Grid.Column="1" Text="창 표시/숨기기" Foreground="#C0C0D0" FontSize="12" Margin="0,5,0,0"/>
+                        <TextBlock Grid.Row="0" Grid.Column="0" Text="Ctrl+N" Foreground="#64B5F6" FontFamily="Consolas" FontSize="12"/>
+                        <TextBlock Grid.Row="0" Grid.Column="1" Text="새 프롬프트" Foreground="#B0C8E0" FontSize="12"/>
+                        <TextBlock Grid.Row="1" Grid.Column="0" Text="Ctrl+S" Foreground="#64B5F6" FontFamily="Consolas" FontSize="12" Margin="0,5,0,0"/>
+                        <TextBlock Grid.Row="1" Grid.Column="1" Text="저장" Foreground="#B0C8E0" FontSize="12" Margin="0,5,0,0"/>
+                        <TextBlock Grid.Row="2" Grid.Column="0" Text="Ctrl+D" Foreground="#64B5F6" FontFamily="Consolas" FontSize="12" Margin="0,5,0,0"/>
+                        <TextBlock Grid.Row="2" Grid.Column="1" Text="복제" Foreground="#B0C8E0" FontSize="12" Margin="0,5,0,0"/>
+                        <TextBlock Grid.Row="3" Grid.Column="0" Text="Ctrl+C" Foreground="#64B5F6" FontFamily="Consolas" FontSize="12" Margin="0,5,0,0"/>
+                        <TextBlock Grid.Row="3" Grid.Column="1" Text="복사 (에디터 포커스 없을 때)" Foreground="#B0C8E0" FontSize="12" Margin="0,5,0,0"/>
+                        <TextBlock Grid.Row="4" Grid.Column="0" Text="Ctrl+Enter" Foreground="#64B5F6" FontFamily="Consolas" FontSize="12" Margin="0,5,0,0"/>
+                        <TextBlock Grid.Row="4" Grid.Column="1" Text="변수 채우기" Foreground="#B0C8E0" FontSize="12" Margin="0,5,0,0"/>
+                        <TextBlock Grid.Row="5" Grid.Column="0" Text="Ctrl+H" Foreground="#64B5F6" FontFamily="Consolas" FontSize="12" Margin="0,5,0,0"/>
+                        <TextBlock Grid.Row="5" Grid.Column="1" Text="버전 히스토리" Foreground="#B0C8E0" FontSize="12" Margin="0,5,0,0"/>
+                        <TextBlock Grid.Row="6" Grid.Column="0" Text="Ctrl+F" Foreground="#64B5F6" FontFamily="Consolas" FontSize="12" Margin="0,5,0,0"/>
+                        <TextBlock Grid.Row="6" Grid.Column="1" Text="검색창 포커스" Foreground="#B0C8E0" FontSize="12" Margin="0,5,0,0"/>
+                        <TextBlock Grid.Row="7" Grid.Column="0" Text="↑ / ↓" Foreground="#64B5F6" FontFamily="Consolas" FontSize="12" Margin="0,5,0,0"/>
+                        <TextBlock Grid.Row="7" Grid.Column="1" Text="목록 위·아래 이동" Foreground="#B0C8E0" FontSize="12" Margin="0,5,0,0"/>
+                        <TextBlock Grid.Row="8" Grid.Column="0" Text="Esc" Foreground="#64B5F6" FontFamily="Consolas" FontSize="12" Margin="0,5,0,0"/>
+                        <TextBlock Grid.Row="8" Grid.Column="1" Text="검색·필터 초기화 (검색창 포커스 시)" Foreground="#B0C8E0" FontSize="12" Margin="0,5,0,0"/>
+                        <TextBlock Grid.Row="9" Grid.Column="0" Text="Win+Shift+P" Foreground="#64B5F6" FontFamily="Consolas" FontSize="12" Margin="0,5,0,0"/>
+                        <TextBlock Grid.Row="9" Grid.Column="1" Text="창 표시/숨기기" Foreground="#B0C8E0" FontSize="12" Margin="0,5,0,0"/>
                     </Grid>
-                    <Separator Background="#2A2A3E" Margin="0,14,0,12"/>
+                    <Separator Background="#162840" Margin="0,14,0,12"/>
                     <TextBlock Text="사용 팁" FontWeight="SemiBold" FontSize="12"
-                               Foreground="#7C3AED" Margin="0,0,0,8"/>
-                    <TextBlock TextWrapping="Wrap" Foreground="#888899" FontSize="11"
+                               Foreground="#1976D2" Margin="0,0,0,8"/>
+                    <TextBlock TextWrapping="Wrap" Foreground="#6A8FAD" FontSize="11"
                                MaxWidth="300" LineHeight="20">
                         <Run Text="• {{변수명}} 형식 (한글 포함) → 변수 채우기 후 자동 복사"/>
                         <LineBreak/>

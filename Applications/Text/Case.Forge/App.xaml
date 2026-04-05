@@ -2,15 +2,15 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Application.Resources>
-        <SolidColorBrush x:Key="BgBrush"       Color="#1A2A1E"/>
-        <SolidColorBrush x:Key="SurfaceBrush"  Color="#152019"/>
-        <SolidColorBrush x:Key="BorderBrush"   Color="#2A4A32"/>
-        <SolidColorBrush x:Key="AccentBrush"   Color="#00C070"/>
-        <SolidColorBrush x:Key="AccentHover"   Color="#20D888"/>
-        <SolidColorBrush x:Key="TextPrimary"   Color="#E0F0E4"/>
-        <SolidColorBrush x:Key="TextSecondary" Color="#7A9882"/>
-        <SolidColorBrush x:Key="RowHover"      Color="#1E3426"/>
-        <SolidColorBrush x:Key="LabelColor"    Color="#00C070"/>
+        <SolidColorBrush x:Key="BgBrush"       Color="#1A1A2E"/>
+        <SolidColorBrush x:Key="SurfaceBrush"  Color="#111118"/>
+        <SolidColorBrush x:Key="BorderBrush"   Color="#2A2A3E"/>
+        <SolidColorBrush x:Key="AccentBrush"   Color="#6366F1"/>
+        <SolidColorBrush x:Key="AccentHover"   Color="#7577F3"/>
+        <SolidColorBrush x:Key="TextPrimary"   Color="#E0E0E0"/>
+        <SolidColorBrush x:Key="TextSecondary" Color="#64748B"/>
+        <SolidColorBrush x:Key="RowHover"      Color="#252540"/>
+        <SolidColorBrush x:Key="LabelColor"    Color="#6366F1"/>
         <SolidColorBrush x:Key="CopyFeedback"  Color="#FFD600"/>
 
         <Style TargetType="CheckBox">
@@ -24,11 +24,11 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <Border x:Name="Box" Width="16" Height="16" CornerRadius="3"
-                                    Background="#1E3426" BorderBrush="#3A6048" BorderThickness="1.5"
+                                    Background="#252540" BorderBrush="#3A3A5E" BorderThickness="1.5"
                                     VerticalAlignment="Center">
                                 <Path x:Name="Check"
                                       Data="M3,8 L7,12 L13,4"
-                                      Stroke="#00C070" StrokeThickness="1.8"
+                                      Stroke="#6366F1" StrokeThickness="1.8"
                                       Visibility="Collapsed" StrokeLineJoin="Round"
                                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
                             </Border>
@@ -39,11 +39,11 @@
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsChecked" Value="True">
                                 <Setter TargetName="Check" Property="Visibility" Value="Visible"/>
-                                <Setter TargetName="Box"   Property="BorderBrush" Value="#00C070"/>
-                                <Setter TargetName="Box"   Property="Background"  Value="#1A3D2A"/>
+                                <Setter TargetName="Box"   Property="BorderBrush" Value="#6366F1"/>
+                                <Setter TargetName="Box"   Property="Background"  Value="#2A2A4E"/>
                             </Trigger>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="Box" Property="BorderBrush" Value="#00C070"/>
+                                <Setter TargetName="Box" Property="BorderBrush" Value="#6366F1"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -62,7 +62,7 @@
                                     <Thumb>
                                         <Thumb.Template>
                                             <ControlTemplate TargetType="Thumb">
-                                                <Border Background="#3A6048" CornerRadius="2"/>
+                                                <Border Background="#3A3A5E" CornerRadius="2"/>
                                             </ControlTemplate>
                                         </Thumb.Template>
                                     </Thumb>
@@ -75,11 +75,11 @@
         </Style>
 
         <Style TargetType="TextBox">
-            <Setter Property="Background" Value="#1E3426"/>
-            <Setter Property="Foreground" Value="#E0F0E4"/>
-            <Setter Property="BorderBrush" Value="#2A4A32"/>
+            <Setter Property="Background" Value="#252540"/>
+            <Setter Property="Foreground" Value="#E0E0E0"/>
+            <Setter Property="BorderBrush" Value="#2A2A3E"/>
             <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="CaretBrush" Value="#00C070"/>
+            <Setter Property="CaretBrush" Value="#6366F1"/>
             <Setter Property="Padding" Value="10,7"/>
             <Setter Property="FontFamily" Value="Consolas, Segoe UI"/>
             <Setter Property="FontSize" Value="13"/>
@@ -96,7 +96,7 @@
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsFocused" Value="True">
-                                <Setter Property="BorderBrush" Value="#00C070"/>
+                                <Setter Property="BorderBrush" Value="#6366F1"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>

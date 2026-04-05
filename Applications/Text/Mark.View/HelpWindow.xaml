@@ -150,9 +150,11 @@
               <local:ShortcutEntry Key="Ctrl + 0"           Desc="에디터/프리뷰 폰트 크기 초기화 (13/15px)"/>
               <local:ShortcutEntry Key="Ctrl + 휠 (에디터)" Desc="에디터 위에서 폰트 크기 조절"/>
               <local:ShortcutEntry Key="Ctrl + 휠 (프리뷰)" Desc="프리뷰 위에서 글꼴 크기 조절"/>
+              <local:ShortcutEntry Key="Alt + Z"            Desc="줄바꿈 토글 — 긴 줄 편집 시 wrap 끄기"/>
               <local:ShortcutEntry Key="Tab"                Desc="들여쓰기 (4칸) / 범위 들여쓰기"/>
               <local:ShortcutEntry Key="Shift + Tab"        Desc="내어쓰기 / 범위 내어쓰기"/>
               <local:ShortcutEntry Key="Ctrl + Shift + V"   Desc="클립보드를 새 탭으로 열기"/>
+              <local:ShortcutEntry Key="이미지 파일 D&amp;D" Desc="편집 모드에서 이미지 드래그 → ![alt](path) 자동 삽입"/>
             </ItemsControl.Items>
           </ItemsControl>
 
@@ -183,7 +185,8 @@
           <TextBlock Text="뷰어 기능" Style="{StaticResource Cat}"/>
           <ItemsControl ItemTemplate="{StaticResource RowTpl}">
             <ItemsControl.Items>
-              <local:ShortcutEntry Key="코드 블록 hover"   Desc="Copy 버튼 표시 — 클릭 시 코드 클립보드 복사"/>
+              <local:ShortcutEntry Key="코드 블록 hover"   Desc="Copy 버튼 표시 — 클릭 시 코드 클립보드 복사 (테마 색상 자동 적용)"/>
+              <local:ShortcutEntry Key="이미지 클릭"       Desc="라이트박스로 원본 크기 확대 표시 — ESC 또는 클릭으로 닫기"/>
               <local:ShortcutEntry Key="▲ 플로팅 버튼"    Desc="맨 위로 부드럽게 스크롤 (150px 이상 내리면 표시)"/>
               <local:ShortcutEntry Key="↩ 플로팅 버튼"    Desc="TOC 클릭 전 위치로 되돌아가기"/>
               <local:ShortcutEntry Key=".md 링크 클릭"     Desc="연결된 Markdown 파일을 앱 내 새 탭으로 열기"/>

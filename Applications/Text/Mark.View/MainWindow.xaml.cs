@@ -315,6 +315,7 @@ public partial class MainWindow : Window
         _ = HideLoadingAsync(300);
         _ = ExtractTocAsync();
         _ = InjectCopyButtonsAsync();
+        _ = InjectImageLightboxAsync();
         if (_pendingScrollY > 0)
             _ = RestoreScrollAsync();
         if (_isTocVisible)
@@ -337,8 +338,10 @@ public partial class MainWindow : Window
         btn.textContent = 'Copy';
         btn.style.cssText = [
             'position:absolute','top:8px','right:8px',
-            'padding:2px 8px','font-size:11px','border-radius:4px','border:1px solid #555',
-            'background:#2a2a3a','color:#ccc','cursor:pointer','opacity:0','transition:opacity 0.15s',
+            'padding:2px 8px','font-size:11px','border-radius:4px',
+            'border:1px solid var(--border,#555)',
+            'background:var(--surface,#2a2a3a)','color:var(--text-dim,#ccc)',
+            'cursor:pointer','opacity:0','transition:opacity 0.15s',
             'font-family:inherit','line-height:1.5'
         ].join(';');
         pre.style.position = 'relative';
@@ -350,14 +353,59 @@ public partial class MainWindow : Window
             var text = code ? code.innerText : pre.innerText;
             navigator.clipboard.writeText(text).then(function() {
                 btn.textContent = 'Copied!';
-                btn.style.color = '#a78bfa';
-                setTimeout(function() { btn.textContent = 'Copy'; btn.style.color = '#ccc'; }, 1500);
+                btn.style.color = 'var(--h1,#a78bfa)';
+                setTimeout(function() { btn.textContent = 'Copy'; btn.style.color = 'var(--text-dim,#ccc)'; }, 1500);
             }).catch(function() {
                 btn.textContent = 'Error';
                 setTimeout(function() { btn.textContent = 'Copy'; }, 1500);
             });
         });
         pre.appendChild(btn);
+    });
+})()");
+        }
+        catch { }
+    }
+
+    private async Task InjectImageLightboxAsync()
+    {
+        if (!_webViewReady) return;
+        try
+        {
+            await Viewer.ExecuteScriptAsync(@"
+(function() {
+    if (window.__lightboxInstalled) return;
+    window.__lightboxInstalled = true;
+    var style = document.createElement('style');
+    style.textContent = [
+        '#__lb{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.82);z-index:99999;',
+        'align-items:center;justify-content:center;cursor:zoom-out;}',
+        '#__lb.open{display:flex;}',
+        '#__lb img{max-width:92vw;max-height:92vh;border-radius:8px;',
+        'box-shadow:0 8px 40px rgba(0,0,0,0.6);pointer-events:none;}',
+        'article img,body>*:not(#__lb) img{cursor:zoom-in;}'
+    ].join('');
+    document.head.appendChild(style);
+    var overlay = document.createElement('div');
+    overlay.id = '__lb';
+    var img = document.createElement('img');
+    overlay.appendChild(img);
+    document.body.appendChild(overlay);
+    overlay.addEventListener('click', function() {
+        overlay.classList.remove('open');
+        document.body.style.overflow = '';
+    });
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') { overlay.classList.remove('open'); document.body.style.overflow = ''; }
+    });
+    document.querySelectorAll('img').forEach(function(i) {
+        i.addEventListener('click', function(e) {
+            e.stopPropagation();
+            img.src = i.src;
+            img.alt = i.alt;
+            overlay.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        });
     });
 })()");
         }
@@ -833,6 +881,7 @@ public partial class MainWindow : Window
         if (_settings.IsEditMode) SetEditMode(true);
         if (_settings.IsTocVisible) SetTocVisible(true);
         if (_settings.IsFocusMode) SetFocusMode(true);
+        if (!_settings.IsWordWrap) SetWordWrap(false);
     }
 
     // ── 편집 모드 ────────────────────────────────────────────────────────
@@ -943,7 +992,25 @@ public partial class MainWindow : Window
         _settings.Save();
     }
 
+    // ── Word Wrap ────────────────────────────────────────────────────────
+
+    private bool _isWordWrap = true;
+
+    private void SetWordWrap(bool wrap)
+    {
+        _isWordWrap = wrap;
+        Editor.TextWrapping = wrap ? TextWrapping.Wrap : TextWrapping.NoWrap;
+        Editor.HorizontalScrollBarVisibility = wrap ? ScrollBarVisibility.Disabled : ScrollBarVisibility.Auto;
+        TxtWordWrapIcon.Foreground = wrap
+            ? (SolidColorBrush)FindResource("TextDimBrush")
+            : (SolidColorBrush)FindResource("AccentBrush");
+        _settings.IsWordWrap = wrap;
+        _settings.Save();
+    }
+
     // ── 파일 작업 ────────────────────────────────────────────────────────
+
+    private DispatcherTimer? _saveHintTimer;
 
     private bool SaveDocument(MarkDocument doc)
     {
@@ -958,7 +1025,16 @@ public partial class MainWindow : Window
             {
                 Title = $"Mark.View — {doc.TabTitle}";
                 UpdateStatusBar(doc);
+                // 저장 완료 피드백 (2초)
+                var savedPath = StatusPath.Text;
+                StatusPath.Text = $"저장 완료 — {doc.FileName}";
+                _saveHintTimer?.Stop();
+                _saveHintTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(2) };
+                _saveHintTimer.Tick += (_, _) => { _saveHintTimer?.Stop(); StatusPath.Text = savedPath; };
+                _saveHintTimer.Start();
             }
+            // 대응하는 autosave 파일 삭제
+            DeleteAutosaveFile(doc);
             return true;
         }
         catch (Exception ex)
@@ -966,6 +1042,26 @@ public partial class MainWindow : Window
             MessageBox.Show($"저장 실패:\n{ex.Message}", "오류", MessageBoxButton.OK, MessageBoxImage.Error);
             return false;
         }
+    }
+
+    private static void DeleteAutosaveFile(MarkDocument doc)
+    {
+        var autoSaveDir = Path.Combine(
+            Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+            "MarkView", "autosave");
+        var baseName = doc.IsNew ? "unsaved" : Path.GetFileNameWithoutExtension(doc.FilePath);
+        var path = Path.Combine(autoSaveDir, baseName + ".autosave.md");
+        if (File.Exists(path)) try { File.Delete(path); } catch { }
+    }
+
+    private static void CleanupAutosaveDir()
+    {
+        var autoSaveDir = Path.Combine(
+            Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+            "MarkView", "autosave");
+        if (!Directory.Exists(autoSaveDir)) return;
+        try { foreach (var f in Directory.GetFiles(autoSaveDir, "*.autosave.md")) File.Delete(f); }
+        catch { }
     }
 
     private bool SaveDocumentAs(MarkDocument doc)
@@ -1022,6 +1118,23 @@ public partial class MainWindow : Window
             return;
         }
         _ = FindInPreviewAsync(keyword, reverse: false);
+        if (_isEditMode) FindInEditor(keyword);
+    }
+
+    private void FindInEditor(string keyword)
+    {
+        if (string.IsNullOrEmpty(keyword) || _activeIndex < 0) return;
+        var text = Editor.Text;
+        var idx = text.IndexOf(keyword, StringComparison.OrdinalIgnoreCase);
+        if (idx < 0) return;
+        // 선택 위치가 이미 해당 텍스트를 포함하면 다음 검색
+        if (Editor.SelectionStart >= idx && Editor.SelectionStart < idx + keyword.Length)
+        {
+            var nextIdx = text.IndexOf(keyword, idx + keyword.Length, StringComparison.OrdinalIgnoreCase);
+            if (nextIdx >= 0) idx = nextIdx;
+        }
+        Editor.Select(idx, keyword.Length);
+        Editor.ScrollToLine(Editor.GetLineIndexFromCharacterIndex(idx));
     }
 
     private async Task FindInPreviewAsync(string keyword, bool reverse)
@@ -1176,6 +1289,11 @@ public partial class MainWindow : Window
     private void BtnFocus_Click(object sender, RoutedEventArgs e)
     {
         SetFocusMode(!_isFocusMode);
+    }
+
+    private void BtnWordWrap_Click(object sender, RoutedEventArgs e)
+    {
+        SetWordWrap(!_isWordWrap);
     }
 
     private void BtnHelp_Click(object sender, RoutedEventArgs e)
@@ -1517,6 +1635,8 @@ public partial class MainWindow : Window
         { ToggleReplaceBar(); e.Handled = true; }
         else if (e.Key == Key.V && Keyboard.Modifiers == (ModifierKeys.Control | ModifierKeys.Shift))
         { PasteClipboardAsNewTab(); e.Handled = true; }
+        else if (e.Key == Key.Z && Keyboard.Modifiers == ModifierKeys.Alt)
+        { SetWordWrap(!_isWordWrap); e.Handled = true; }
         else if (e.Key == Key.Escape && !string.IsNullOrEmpty(TxtFind.Text))
         { TxtFind.Text = ""; e.Handled = true; }
     }
@@ -1568,12 +1688,38 @@ public partial class MainWindow : Window
         e.Handled = true;
     }
 
+    private static readonly HashSet<string> _imageExtensions =
+        new(StringComparer.OrdinalIgnoreCase) { ".jpg", ".jpeg", ".png", ".gif", ".bmp", ".webp", ".svg" };
+
     private void Window_Drop(object sender, DragEventArgs e)
     {
         if (!e.Data.GetDataPresent(DataFormats.FileDrop)) return;
         var files = (string[])e.Data.GetData(DataFormats.FileDrop);
         foreach (var f in files)
-            if (File.Exists(f)) OpenFile(f);
+        {
+            if (!File.Exists(f)) continue;
+            var ext = Path.GetExtension(f);
+            if (_isEditMode && _activeIndex >= 0 && _imageExtensions.Contains(ext))
+            {
+                // 이미지 파일 → 에디터에 Markdown 이미지 문법 삽입
+                var doc = _docs[_activeIndex];
+                var docDir = doc.IsNew ? null : Path.GetDirectoryName(doc.FilePath);
+                var imgPath = docDir != null
+                    ? Path.GetRelativePath(docDir, f).Replace('\\', '/')
+                    : f.Replace('\\', '/');
+                var altText = Path.GetFileNameWithoutExtension(f);
+                var markdown = $"![{altText}]({imgPath})";
+                var caret = Editor.CaretIndex;
+                Editor.Select(caret, 0);
+                Editor.SelectedText = markdown;
+                Editor.CaretIndex = caret + markdown.Length;
+                Editor.Focus();
+            }
+            else
+            {
+                OpenFile(f);
+            }
+        }
     }
 
     private void OpenFile(string path) => _ = OpenFileAsync(path);
@@ -1808,6 +1954,7 @@ public partial class MainWindow : Window
             SaveWindowBounds();
             SaveSession();
             _settings.Save();
+            CleanupAutosaveDir();
             foreach (var w in _fileWatchers.Values) w.Dispose();
             _fileWatchers.Clear();
             return;
@@ -1832,6 +1979,7 @@ public partial class MainWindow : Window
         SaveWindowBounds();
         SaveSession();
         _settings.Save();
+        CleanupAutosaveDir();
         foreach (var w in _fileWatchers.Values) w.Dispose();
         _fileWatchers.Clear();
     }

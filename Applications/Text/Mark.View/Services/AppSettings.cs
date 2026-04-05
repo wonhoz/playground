@@ -26,6 +26,7 @@ public class AppSettings
     public double PreviewFontSize { get; set; } = 15;
     public bool IsMaximized { get; set; } = false;
     public bool IsFocusMode { get; set; } = false;
+    public bool IsWordWrap { get; set; } = true;
 
     private const int MaxRecentFiles = 10;
 

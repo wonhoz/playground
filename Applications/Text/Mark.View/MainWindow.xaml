@@ -230,6 +230,11 @@
                   ToolTip="집중 모드 (F11)" Padding="8,5">
             <TextBlock Text="&#x26F6;" FontSize="14"/>
           </Button>
+          <!-- Word Wrap 토글 -->
+          <Button x:Name="BtnWordWrap" Style="{StaticResource IconButton}" Click="BtnWordWrap_Click"
+                  ToolTip="줄바꿈 토글 (Alt+Z)" Padding="8,5">
+            <TextBlock x:Name="TxtWordWrapIcon" Text="&#x21A9;" FontSize="14"/>
+          </Button>
         </StackPanel>
 
         <!-- 가운데: 앱 제목 (진짜 중앙) -->

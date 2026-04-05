@@ -1,0 +1,35 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="1" x2="1" y2="0" gradientUnits="objectBoundingBox">
+      <stop offset="0%" stop-color="#B71C1C"/>
+      <stop offset="50%" stop-color="#F4511E"/>
+      <stop offset="100%" stop-color="#FF8A65"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: 배경 (딥레드→오렌지, 대각선 방향) -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg)"/>
+
+  <!-- Layer 2: 좌하단 파일 — SVG 입력 (따뜻한 색) -->
+  <g transform="translate(292,700) rotate(12)">
+    <path d="M -112,-140 L 68,-140 L 112,-96 L 112,140 Q 112,158 92,158 L -92,158 Q -112,158 -112,140 Z" fill="#FFECB3"/>
+    <path d="M 68,-140 L 112,-96 L 68,-96 Z" fill="black" fill-opacity="0.2"/>
+    <text x="0" y="58" font-family="Arial Black, Impact, sans-serif" font-size="82" font-weight="900" text-anchor="middle" fill="#E53935">SVG</text>
+  </g>
+
+  <!-- Layer 2: 대각선 화살표 (우측 향하는 화살표를 -45° 회전 → 좌하→우상) -->
+  <g transform="rotate(-45 512 512)">
+    <path d="M 262,490 L 562,490 L 562,452 L 658,512 L 562,572 L 562,534 L 262,534 Z" fill="white" fill-opacity="0.92"/>
+  </g>
+
+  <!-- Layer 2: 우상단 파일 — ICO 출력 (차가운 색) -->
+  <g transform="translate(732,324) rotate(12)">
+    <path d="M -112,-140 L 68,-140 L 112,-96 L 112,140 Q 112,158 92,158 L -92,158 Q -112,158 -112,140 Z" fill="#B2EBF2"/>
+    <path d="M 68,-140 L 112,-96 L 68,-96 Z" fill="black" fill-opacity="0.2"/>
+    <text x="0" y="58" font-family="Arial Black, Impact, sans-serif" font-size="82" font-weight="900" text-anchor="middle" fill="#0277BD">ICO</text>
+  </g>
+
+  <!-- Layer 3: 우상단 스파클 (변환 완료 느낌) -->
+  <circle cx="854" cy="190" r="14" fill="white" fill-opacity="0.82"/>
+  <circle cx="878" cy="254" r="9" fill="#FFE082" fill-opacity="0.78"/>
+  <path d="M 824,162 L 831,178 L 847,178 L 835,188 L 840,204 L 824,195 L 808,204 L 813,188 L 801,178 L 817,178 Z" fill="white" fill-opacity="0.72"/>
+</svg>

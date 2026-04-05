@@ -1,0 +1,70 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="50%" r="50%" gradientUnits="objectBoundingBox">
+      <stop offset="0%" stop-color="#4527A0"/>
+      <stop offset="100%" stop-color="#1A0A38"/>
+    </radialGradient>
+    <clipPath id="cc">
+      <circle cx="512" cy="512" r="68"/>
+    </clipPath>
+  </defs>
+  <!-- Layer 1: 배경 (딥 인디고 방사 그라데이션) -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg)"/>
+
+  <!-- 중앙 글로우 -->
+  <circle cx="512" cy="512" r="340" fill="#6A1B9A" fill-opacity="0.22"/>
+
+  <!-- 방사선 (8방향, 희미한 흰색) -->
+  <line x1="512" y1="512" x2="742" y2="512" stroke="white" stroke-width="3" stroke-linecap="round" stroke-opacity="0.18"/>
+  <line x1="512" y1="512" x2="675" y2="675" stroke="white" stroke-width="3" stroke-linecap="round" stroke-opacity="0.18"/>
+  <line x1="512" y1="512" x2="512" y2="742" stroke="white" stroke-width="3" stroke-linecap="round" stroke-opacity="0.18"/>
+  <line x1="512" y1="512" x2="349" y2="675" stroke="white" stroke-width="3" stroke-linecap="round" stroke-opacity="0.18"/>
+  <line x1="512" y1="512" x2="282" y2="512" stroke="white" stroke-width="3" stroke-linecap="round" stroke-opacity="0.18"/>
+  <line x1="512" y1="512" x2="349" y2="349" stroke="white" stroke-width="3" stroke-linecap="round" stroke-opacity="0.18"/>
+  <line x1="512" y1="512" x2="512" y2="282" stroke="white" stroke-width="3" stroke-linecap="round" stroke-opacity="0.18"/>
+  <line x1="512" y1="512" x2="675" y2="349" stroke="white" stroke-width="3" stroke-linecap="round" stroke-opacity="0.18"/>
+
+  <!-- Layer 2: 8개 컬러 포맷 조각들 (중심에서 방사) -->
+  <!-- 우 (0°): 앰버 -->
+  <g transform="translate(742,512) rotate(0)">
+    <rect x="-52" y="-30" width="104" height="60" rx="9" fill="#FF8F00"/>
+  </g>
+  <!-- 우하 (45°): 시안 -->
+  <g transform="translate(675,675) rotate(45)">
+    <rect x="-52" y="-30" width="104" height="60" rx="9" fill="#00BCD4"/>
+  </g>
+  <!-- 하 (90°): 핫핑크 -->
+  <g transform="translate(512,742) rotate(90)">
+    <rect x="-52" y="-30" width="104" height="60" rx="9" fill="#FF4081"/>
+  </g>
+  <!-- 좌하 (135°): 민트 -->
+  <g transform="translate(349,675) rotate(135)">
+    <rect x="-52" y="-30" width="104" height="60" rx="9" fill="#69F0AE"/>
+  </g>
+  <!-- 좌 (180°): 라임 -->
+  <g transform="translate(282,512) rotate(180)">
+    <rect x="-52" y="-30" width="104" height="60" rx="9" fill="#C6FF00"/>
+  </g>
+  <!-- 좌상 (225°): 딥 오렌지 -->
+  <g transform="translate(349,349) rotate(225)">
+    <rect x="-52" y="-30" width="104" height="60" rx="9" fill="#FF5722"/>
+  </g>
+  <!-- 상 (270°): 골드 -->
+  <g transform="translate(512,282) rotate(270)">
+    <rect x="-52" y="-30" width="104" height="60" rx="9" fill="#FFD700"/>
+  </g>
+  <!-- 우상 (315°): 바이올렛 -->
+  <g transform="translate(675,349) rotate(315)">
+    <rect x="-52" y="-30" width="104" height="60" rx="9" fill="#7C4DFF"/>
+  </g>
+
+  <!-- Layer 3: 중앙 이미지 아이콘 (도메인 앵커) -->
+  <circle cx="512" cy="512" r="105" fill="#FFE082" fill-opacity="0.28"/>
+  <circle cx="512" cy="512" r="76" fill="white"/>
+  <!-- 미니 경관 (원형 클립) -->
+  <rect x="444" y="444" width="136" height="136" fill="#64B5F6" clip-path="url(#cc)"/>
+  <rect x="444" y="548" width="136" height="32" fill="#81C784" clip-path="url(#cc)"/>
+  <ellipse cx="484" cy="548" rx="45" ry="22" fill="#4CAF50" clip-path="url(#cc)"/>
+  <ellipse cx="548" cy="554" rx="50" ry="25" fill="#388E3C" clip-path="url(#cc)"/>
+  <circle cx="556" cy="468" r="17" fill="#FFD54F" clip-path="url(#cc)"/>
+</svg>

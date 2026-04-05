@@ -65,6 +65,7 @@ public class MarkdownRenderer
             + " onload=\"if(!window.__katexFailed&&typeof renderMathInElement!=='undefined')renderMathInElement(document.body,{delimiters:["
             + "{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false},"
             + "{left:'\\\\(',right:'\\\\)',display:false},{left:'\\\\[',right:'\\\\]',display:true}]})\"></script>"
+            + GetNavButtonsHtml()
             + "</body></html>";
     }
 
@@ -200,4 +201,35 @@ html { background: var(--bg); color: var(--text); }",
 }
 html { background: var(--bg); color: var(--text); }",
     };
+
+    private static string GetNavButtonsHtml() => @"
+<style>
+#__nav{position:fixed;bottom:22px;right:20px;display:flex;flex-direction:column;gap:6px;z-index:9999;}
+#__nav button{
+  width:34px;height:34px;border-radius:7px;
+  border:1px solid var(--border);background:var(--surface);
+  color:var(--text-dim);cursor:pointer;font-size:16px;line-height:1;
+  display:none;align-items:center;justify-content:center;
+  opacity:0.82;transition:opacity .15s,border-color .15s,color .15s;
+}
+#__nav button:hover{opacity:1;border-color:var(--text-dim);color:var(--text);}
+</style>
+<div id='__nav'>
+  <button id='__nb' title='이전 위치로' onclick='__navBack()'>↩</button>
+  <button id='__tb' title='맨 위로' onclick='window.scrollTo({top:0,behavior:""smooth""})'>▲</button>
+</div>
+<script>
+(function(){
+  var nb=document.getElementById('__nb'),tb=document.getElementById('__tb'),prevY=null;
+  window.__sp=function(){prevY=window.scrollY;};
+  function __navBack(){if(prevY!==null){window.scrollTo({top:prevY,behavior:'smooth'});prevY=null;nb.style.display='none';}}
+  window.__navBack=__navBack;
+  function update(){
+    tb.style.display=window.scrollY>150?'flex':'none';
+    nb.style.display=prevY!==null?'flex':'none';
+  }
+  window.addEventListener('scroll',update,{passive:true});
+  update();
+})();
+</script>";
 }

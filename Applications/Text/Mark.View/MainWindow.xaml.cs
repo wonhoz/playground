@@ -359,6 +359,7 @@ public partial class MainWindow : Window
             // norm: Unicode letter/number만 남기고 나머지(이모지·+·.·-·공백 등) 모두 제거 → 범용 비교
             var script = $@"
 (function() {{
+    window.__sp && window.__sp();
     var id = {jsId};
     var el = document.getElementById(id);
     if (el) {{ el.scrollIntoView({{behavior:'smooth'}}); return; }}
@@ -1411,8 +1412,9 @@ public partial class MainWindow : Window
         if (!IsLoaded || _suppressTocSelection) return;
         if (TocList.SelectedItem is ListBoxItem item && item.Tag is string id && !string.IsNullOrEmpty(id))
         {
+            var jsId2 = System.Text.Json.JsonSerializer.Serialize(id);
             _ = Viewer.ExecuteScriptAsync(
-                $"document.getElementById({System.Text.Json.JsonSerializer.Serialize(id)})?.scrollIntoView({{behavior:'smooth'}})");
+                $"window.__sp&&window.__sp();document.getElementById({jsId2})?.scrollIntoView({{behavior:'smooth'}})");
         }
     }
 

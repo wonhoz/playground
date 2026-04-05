@@ -1,0 +1,39 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0%" stop-color="#0D47A1"/>
+      <stop offset="100%" stop-color="#4FC3F7"/>
+    </linearGradient>
+    <clipPath id="pc">
+      <rect x="228" y="208" width="568" height="432" rx="10"/>
+    </clipPath>
+  </defs>
+  <!-- Layer 1: 배경 (딥 오션블루 그라데이션) -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg)"/>
+
+  <!-- Layer 2: 사진 프레임 (흰색 라운드 박스) -->
+  <rect x="208" y="188" width="608" height="472" rx="22" fill="white"/>
+  <!-- Sky -->
+  <rect x="228" y="208" width="568" height="432" fill="#64B5F6" clip-path="url(#pc)"/>
+  <!-- Ground -->
+  <rect x="228" y="462" width="568" height="178" fill="#81C784" clip-path="url(#pc)"/>
+  <!-- Hills -->
+  <ellipse cx="380" cy="462" rx="188" ry="94" fill="#4CAF50" clip-path="url(#pc)"/>
+  <ellipse cx="680" cy="476" rx="206" ry="103" fill="#388E3C" clip-path="url(#pc)"/>
+  <!-- Sun -->
+  <circle cx="724" cy="268" r="62" fill="#FFD54F" clip-path="url(#pc)"/>
+  <circle cx="724" cy="268" r="84" fill="#FFF176" fill-opacity="0.38" clip-path="url(#pc)"/>
+
+  <!-- Layer 3: 배율 선택 배지 (2× | 4× | 8×) -->
+  <!-- "2×" 배지 (일반) -->
+  <rect x="150" y="710" width="194" height="84" rx="14" fill="#1565C0"/>
+  <text x="247" y="773" font-family="Arial Black, Impact, sans-serif" font-size="82" font-weight="900" text-anchor="middle" fill="white">2×</text>
+
+  <!-- "4×" 배지 (강조 — 선택된 배율, 골드, 더 큼) -->
+  <rect x="380" y="698" width="264" height="108" rx="18" fill="#FFD600"/>
+  <text x="512" y="771" font-family="Arial Black, Impact, sans-serif" font-size="94" font-weight="900" text-anchor="middle" fill="#0D47A1">4×</text>
+
+  <!-- "8×" 배지 (일반) -->
+  <rect x="680" y="710" width="194" height="84" rx="14" fill="#1565C0"/>
+  <text x="777" y="773" font-family="Arial Black, Impact, sans-serif" font-size="82" font-weight="900" text-anchor="middle" fill="white">8×</text>
+</svg>

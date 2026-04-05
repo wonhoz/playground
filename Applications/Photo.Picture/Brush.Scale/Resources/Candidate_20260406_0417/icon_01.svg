@@ -1,0 +1,47 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0%" stop-color="#FFCCBC"/>
+      <stop offset="100%" stop-color="#FF8A65"/>
+    </linearGradient>
+    <clipPath id="sc">
+      <rect x="596" y="244" width="316" height="232" rx="8"/>
+    </clipPath>
+  </defs>
+  <!-- Layer 1: 배경 (코랄-복숭아 그라데이션) -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg)"/>
+
+  <!-- Layer 2: 좌측 — 저화질 픽셀 블록 격자 (4×3) -->
+  <!-- Row 0 (sky grays) -->
+  <rect x="104" y="302" width="60" height="60" fill="#CFD8DC"/>
+  <rect x="164" y="302" width="60" height="60" fill="#B0BEC5"/>
+  <rect x="224" y="302" width="60" height="60" fill="#90A4AE"/>
+  <rect x="284" y="302" width="60" height="60" fill="#78909C"/>
+  <!-- Row 1 (mid-tones) -->
+  <rect x="104" y="362" width="60" height="60" fill="#9FA8B0"/>
+  <rect x="164" y="362" width="60" height="60" fill="#A5D6A7"/>
+  <rect x="224" y="362" width="60" height="60" fill="#80CBC4"/>
+  <rect x="284" y="362" width="60" height="60" fill="#607D8B"/>
+  <!-- Row 2 (ground greens) -->
+  <rect x="104" y="422" width="60" height="60" fill="#7CB342"/>
+  <rect x="164" y="422" width="60" height="60" fill="#8BC34A"/>
+  <rect x="224" y="422" width="60" height="60" fill="#9CCC65"/>
+  <rect x="284" y="422" width="60" height="60" fill="#AED581"/>
+
+  <!-- Layer 2: 우측 — 고화질 선명 이미지 (흰색 프레임) -->
+  <rect x="582" y="230" width="340" height="256" rx="14" fill="white"/>
+  <!-- Sky -->
+  <rect x="596" y="244" width="316" height="232" fill="#87CEEB" clip-path="url(#sc)"/>
+  <!-- Ground -->
+  <rect x="596" y="416" width="316" height="60" fill="#4CAF50" clip-path="url(#sc)"/>
+  <!-- Hills -->
+  <ellipse cx="664" cy="416" rx="94" ry="47" fill="#388E3C" clip-path="url(#sc)"/>
+  <ellipse cx="824" cy="422" rx="110" ry="55" fill="#2E7D32" clip-path="url(#sc)"/>
+  <!-- Sun + glow -->
+  <circle cx="840" cy="266" r="38" fill="#FFD54F" clip-path="url(#sc)"/>
+  <circle cx="840" cy="266" r="54" fill="#FFF176" fill-opacity="0.45" clip-path="url(#sc)"/>
+
+  <!-- Layer 3: 변환 화살표 (흰색, 반투명) -->
+  <path d="M 348,360 L 512,360 L 512,322 L 584,380 L 512,438 L 512,400 L 348,400 Z"
+        fill="white" fill-opacity="0.92"/>
+</svg>

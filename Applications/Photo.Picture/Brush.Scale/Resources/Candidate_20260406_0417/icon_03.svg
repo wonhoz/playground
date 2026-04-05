@@ -1,0 +1,51 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0%" stop-color="#004D40"/>
+      <stop offset="100%" stop-color="#80CBC4"/>
+    </linearGradient>
+    <linearGradient id="hndl" x1="0" y1="0" x2="1" y2="0" gradientUnits="objectBoundingBox">
+      <stop offset="0%" stop-color="#FFD700"/>
+      <stop offset="60%" stop-color="#A1887F"/>
+      <stop offset="100%" stop-color="#5D4037"/>
+    </linearGradient>
+  </defs>
+  <!-- Layer 1: 배경 (딥 틸 → 민트 그라데이션) -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg)"/>
+
+  <!-- Layer 2: 저화질 픽셀 블록들 (좌하단, 붓이 지나가기 전) -->
+  <rect x="138" y="620" width="80" height="80" fill="#546E7A" fill-opacity="0.72"/>
+  <rect x="218" y="620" width="80" height="80" fill="#607D8B" fill-opacity="0.72"/>
+  <rect x="138" y="700" width="80" height="80" fill="#455A64" fill-opacity="0.72"/>
+  <rect x="218" y="700" width="80" height="80" fill="#78909C" fill-opacity="0.72"/>
+  <rect x="188" y="556" width="70" height="70" fill="#4A6572" fill-opacity="0.55"/>
+
+  <!-- Layer 2: 고화질 이미지 결과 (우상단, 붓이 지나간 후) -->
+  <rect x="634" y="246" width="202" height="152" rx="12" fill="white"/>
+  <!-- Inner image -->
+  <rect x="646" y="258" width="178" height="100" fill="#87CEEB"/>
+  <rect x="646" y="358" width="178" height="40" fill="#4CAF50"/>
+  <ellipse cx="694" cy="358" rx="55" ry="28" fill="#388E3C"/>
+  <ellipse cx="778" cy="364" rx="66" ry="33" fill="#2E7D32"/>
+  <circle cx="782" cy="278" r="24" fill="#FFD54F"/>
+  <circle cx="782" cy="278" r="34" fill="#FFF176" fill-opacity="0.4"/>
+
+  <!-- Layer 2: 붓(Brush) — 대각선 방향 (하좌→우상, rotate -35°) -->
+  <g transform="translate(512,512) rotate(-35)">
+    <!-- 붓대 (황금-갈색 그라데이션) -->
+    <rect x="-20" y="-24" width="240" height="48" rx="10" fill="url(#hndl)"/>
+    <!-- 페러울 (금속 밴드) -->
+    <rect x="-26" y="-28" width="22" height="56" rx="3" fill="#B0BEC5"/>
+    <!-- 붓털 (흰색, 끝으로 갈수록 좁아짐) -->
+    <polygon points="-26,-24 -230,-10 -230,10 -26,24" fill="#F5F5F5"/>
+    <!-- 붓털 끝 (페인트) -->
+    <ellipse cx="-230" cy="0" rx="28" ry="18" fill="#FF4081"/>
+  </g>
+
+  <!-- Layer 3: 붓 끝 스파클 (마법 효과) — 상대 (324, 644) 근방 -->
+  <circle cx="304" cy="644" r="14" fill="#FF4081" fill-opacity="0.9"/>
+  <circle cx="346" cy="668" r="9"  fill="#FFE57F" fill-opacity="0.85"/>
+  <circle cx="310" cy="690" r="11" fill="#FF80AB" fill-opacity="0.8"/>
+  <path d="M 282,620 L 289,636 L 305,636 L 292,647 L 297,663 L 282,653 L 267,663 L 272,647 L 259,636 L 275,636 Z"
+        fill="#FFF176" fill-opacity="0.82"/>
+</svg>

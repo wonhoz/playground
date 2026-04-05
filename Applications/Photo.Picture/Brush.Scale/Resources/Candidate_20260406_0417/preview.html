@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Brush.Scale — Icon Candidates</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: linear-gradient(135deg, #1b2631 0%, #1a3a2a 100%);
+      color: #e0e0e0;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      min-height: 100vh;
+      padding: 48px 32px;
+    }
+    header { text-align: center; margin-bottom: 48px; }
+    h1 {
+      font-size: 32px;
+      font-weight: 700;
+      color: #80CBC4;
+      letter-spacing: 2px;
+      margin-bottom: 8px;
+    }
+    .subtitle {
+      color: #78909C;
+      font-size: 14px;
+    }
+    .grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 28px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 20px;
+      padding: 28px 24px 22px;
+      width: 210px;
+      text-align: center;
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
+      cursor: pointer;
+    }
+    .card:hover {
+      transform: scale(1.10);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+      border-color: rgba(128,203,196,0.40);
+    }
+    .card img {
+      width: 152px;
+      height: 152px;
+      border-radius: 28px;
+      display: block;
+      margin: 0 auto;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.45);
+    }
+    .filename {
+      font-size: 12px;
+      color: #546E7A;
+      margin-top: 14px;
+      font-family: 'Consolas', monospace;
+    }
+    .type-badge {
+      display: inline-block;
+      font-size: 10px;
+      padding: 2px 8px;
+      border-radius: 10px;
+      margin-top: 8px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+    .literal  { background: rgba(67,160,71,0.25);  color: #A5D6A7; }
+    .metaphor { background: rgba(255,143,0,0.25);  color: #FFCC80; }
+    .hybrid   { background: rgba(233,30,99,0.25);  color: #F48FB1; }
+    .concept {
+      font-size: 13px;
+      color: #B0BEC5;
+      margin-top: 8px;
+      line-height: 1.5;
+    }
+    .palette {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      margin-top: 14px;
+      flex-wrap: wrap;
+    }
+    .swatch {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.18);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Brush.Scale</h1>
+    <p class="subtitle">AI 이미지 업스케일러 &nbsp;|&nbsp; 아이콘 후보 &nbsp;|&nbsp; Candidate_20260406_0417</p>
+  </header>
+
+  <div class="grid">
+
+    <div class="card">
+      <img src="icon_01.svg" alt="icon_01"/>
+      <div class="filename">icon_01.svg</div>
+      <span class="type-badge literal">literal</span>
+      <div class="concept">저화질 → 고화질 비교<br>레이어드 / 코랄</div>
+      <div class="palette">
+        <div class="swatch" style="background:#FFCCBC"></div>
+        <div class="swatch" style="background:#90A4AE"></div>
+        <div class="swatch" style="background:#87CEEB"></div>
+        <div class="swatch" style="background:#4CAF50"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="icon_02.svg" alt="icon_02"/>
+      <div class="filename">icon_02.svg</div>
+      <span class="type-badge literal">literal</span>
+      <div class="concept">사진 + 2×/4×/8× 선택 UI<br>중앙 심볼 / 딥 블루</div>
+      <div class="palette">
+        <div class="swatch" style="background:#0D47A1"></div>
+        <div class="swatch" style="background:#4FC3F7"></div>
+        <div class="swatch" style="background:#FFD600"></div>
+        <div class="swatch" style="background:#1565C0"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="icon_03.svg" alt="icon_03"/>
+      <div class="filename">icon_03.svg</div>
+      <span class="type-badge metaphor">metaphor</span>
+      <div class="concept">붓질 → 화질 향상 마법<br>대각선/동적 / 딥 틸</div>
+      <div class="palette">
+        <div class="swatch" style="background:#004D40"></div>
+        <div class="swatch" style="background:#80CBC4"></div>
+        <div class="swatch" style="background:#FFD700"></div>
+        <div class="swatch" style="background:#FF4081"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="icon_04.svg" alt="icon_04"/>
+      <div class="filename">icon_04.svg</div>
+      <span class="type-badge metaphor">metaphor</span>
+      <div class="concept">픽셀 격자에서 세계가 피어남<br>기하학 추상 / 황금-앰버</div>
+      <div class="palette">
+        <div class="swatch" style="background:#FFE57F"></div>
+        <div class="swatch" style="background:#FF8F00"></div>
+        <div class="swatch" style="background:#00E5FF"></div>
+        <div class="swatch" style="background:#FF1744"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="icon_05.svg" alt="icon_05"/>
+      <div class="filename">icon_05.svg</div>
+      <span class="type-badge hybrid">hybrid</span>
+      <div class="concept">확대경 + 4× 배율<br>공간/장면 / 핫핑크</div>
+      <div class="palette">
+        <div class="swatch" style="background:#E91E63"></div>
+        <div class="swatch" style="background:#F8BBD9"></div>
+        <div class="swatch" style="background:#81D4FA"></div>
+        <div class="swatch" style="background:#ffffff"></div>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

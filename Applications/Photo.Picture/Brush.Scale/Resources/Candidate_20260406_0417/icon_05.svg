@@ -1,0 +1,47 @@
+<svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0%" stop-color="#E91E63"/>
+      <stop offset="100%" stop-color="#F8BBD9"/>
+    </linearGradient>
+    <clipPath id="lens">
+      <circle cx="460" cy="430" r="197"/>
+    </clipPath>
+  </defs>
+  <!-- Layer 1: 배경 (핫핑크-라이트핑크 그라데이션) -->
+  <rect width="1024" height="1024" rx="190" fill="url(#bg)"/>
+
+  <!-- Layer 2: 확대경 내부 이미지 (렌즈 클립) -->
+  <!-- 렌즈 배경: 하늘 파랑 -->
+  <rect x="263" y="233" width="394" height="394" fill="#81D4FA" clip-path="url(#lens)"/>
+  <!-- 땅: 연한 녹색 -->
+  <rect x="263" y="430" width="394" height="197" fill="#C8E6C9" clip-path="url(#lens)"/>
+  <!-- 언덕들 -->
+  <ellipse cx="396" cy="430" rx="120" ry="60" fill="#4CAF50" clip-path="url(#lens)"/>
+  <ellipse cx="556" cy="440" rx="130" ry="65" fill="#388E3C" clip-path="url(#lens)"/>
+  <!-- 태양 -->
+  <circle cx="592" cy="292" r="42" fill="#FFE57F" clip-path="url(#lens)"/>
+  <circle cx="592" cy="292" r="60" fill="#FFF9C4" fill-opacity="0.5" clip-path="url(#lens)"/>
+
+  <!-- 렌즈 링 (흰색 테두리) -->
+  <circle cx="460" cy="430" r="220" stroke="white" stroke-width="46" fill="none"/>
+
+  <!-- "4×" 텍스트 배지 (렌즈 하단 내부) -->
+  <rect x="352" y="448" width="216" height="88" rx="14" fill="white" fill-opacity="0.90"/>
+  <text x="460" y="516" font-family="Arial Black, Impact, sans-serif" font-size="82" font-weight="900"
+        text-anchor="middle" fill="#E91E63">4×</text>
+
+  <!-- Layer 2: 확대경 손잡이 (굵은 흰색 막대) -->
+  <line x1="646" y1="606" x2="824" y2="784"
+        stroke="white" stroke-width="50" stroke-linecap="round"/>
+
+  <!-- Layer 3: 주변 픽셀 힌트 (배경에 저해상도 느낌) -->
+  <rect x="728" y="216" width="36" height="36" fill="white" fill-opacity="0.28"/>
+  <rect x="774" y="216" width="36" height="36" fill="white" fill-opacity="0.20"/>
+  <rect x="728" y="252" width="36" height="36" fill="white" fill-opacity="0.18"/>
+  <rect x="774" y="252" width="36" height="36" fill="white" fill-opacity="0.24"/>
+  <rect x="200" y="680" width="36" height="36" fill="white" fill-opacity="0.22"/>
+  <rect x="236" y="680" width="36" height="36" fill="white" fill-opacity="0.16"/>
+  <rect x="200" y="716" width="36" height="36" fill="white" fill-opacity="0.18"/>
+  <rect x="236" y="716" width="36" height="36" fill="white" fill-opacity="0.26"/>
+</svg>

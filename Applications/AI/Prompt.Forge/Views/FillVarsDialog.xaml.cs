@@ -14,8 +14,10 @@ public partial class FillVarsDialog : Window
     readonly string                    _templateContent;
 
     public string? FilledContent { get; private set; }
+    public Dictionary<string, string> LastInputValues { get; private set; } = [];
 
-    public FillVarsDialog(string templateContent, List<string> varNames)
+    public FillVarsDialog(string templateContent, List<string> varNames,
+                          Dictionary<string, string>? prevValues = null)
     {
         InitializeComponent();
         _varNames        = varNames;
@@ -28,15 +30,17 @@ public partial class FillVarsDialog : Window
             DwmSetWindowAttribute(handle, 20, ref v, sizeof(int));
         };
 
-        BuildInputs(varNames);
+        BuildInputs(varNames, prevValues);
     }
 
-    void BuildInputs(List<string> varNames)
+    void BuildInputs(List<string> varNames, Dictionary<string, string>? prevValues)
     {
         foreach (var name in varNames)
         {
             VarPanel.Children.Add(new Label { Content = $"{{{{ {name} }}}}" });
             var tb = new TextBox { Tag = name };
+            if (prevValues != null && prevValues.TryGetValue(name, out var prev))
+                tb.Text = prev;
             tb.TextChanged += (_, _) => UpdatePreview();
             _inputs[name] = tb;
             VarPanel.Children.Add(tb);
@@ -69,7 +73,8 @@ public partial class FillVarsDialog : Window
         foreach (var (name, tb) in _inputs)
             content = content.Replace($"{{{{{name}}}}}", tb.Text);
 
-        FilledContent = content;
+        FilledContent   = content;
+        LastInputValues = _inputs.ToDictionary(kv => kv.Key, kv => kv.Value.Text);
 
         try { System.Windows.Clipboard.SetText(content); }
         catch { }

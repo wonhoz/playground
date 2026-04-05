@@ -31,6 +31,10 @@ public partial class MainWindow : Window
     readonly AppSettings   _appSettings;
     bool _refreshing;
     readonly List<string>  _recentSearches = [];
+    System.Windows.Threading.DispatcherTimer? _contentDebounce;
+
+    // FillVarsDialog에서 프롬프트별 마지막 입력값 기억: [promptId → [varName → value]]
+    readonly Dictionary<int, Dictionary<string, string>> _varHistory = [];
 
     public MainWindow()
     {
@@ -59,8 +63,25 @@ public partial class MainWindow : Window
         // 필터 콤보 초기화
         RefreshFilterCombos();
 
-        // 마지막 선택 항목 복원 (B4)
+        // 마지막 정렬 방식 복원
+        _refreshing = true;
+        try
+        {
+            CbSort.SelectedIndex = _appSettings.LastSortOrder switch
+            {
+                "use_count" => 1,
+                "custom"    => 2,
+                _           => 0
+            };
+            _vm.SortOrder = _appSettings.LastSortOrder;
+        }
+        finally { _refreshing = false; }
+
+        // 마지막 선택 항목 복원
         RestoreLastSelection();
+
+        // 최근 검색어 복원
+        _recentSearches.AddRange(_appSettings.RecentSearches);
 
         // 검색 X버튼 표시/숨김
         TxtSearch.TextChanged += (_, _) =>
@@ -82,6 +103,8 @@ public partial class MainWindow : Window
                 _recentSearches.Remove(query);
                 _recentSearches.Insert(0, query);
                 if (_recentSearches.Count > 10) _recentSearches.RemoveAt(10);
+                _appSettings.RecentSearches = [.. _recentSearches];
+                _appSettings.Save();
             }
             var t = new System.Windows.Threading.DispatcherTimer
                 { Interval = TimeSpan.FromMilliseconds(200) };
@@ -121,6 +144,19 @@ public partial class MainWindow : Window
     {
         base.OnPreviewKeyDown(e);
         if (!IsLoaded) return;
+
+        // ↑↓: 목록 탐색
+        if (e.Key == Key.Up || e.Key == Key.Down)
+        {
+            if (_vm.Items.Count == 0) return;
+            var cur = _vm.Items.IndexOf(_vm.Selected!);
+            if (e.Key == Key.Up   && cur > 0)                       _vm.Selected = _vm.Items[cur - 1];
+            if (e.Key == Key.Down && cur < _vm.Items.Count - 1)     _vm.Selected = _vm.Items[cur + 1];
+            if (_vm.Selected != null) LstItems.ScrollIntoView(_vm.Selected);
+            LoadSelected();
+            e.Handled = true;
+            return;
+        }
 
         // Esc: 검색창 포커스 상태일 때 검색·필터 전체 초기화
         if (e.Key == Key.Escape && TxtSearch.IsFocused)
@@ -168,6 +204,11 @@ public partial class MainWindow : Window
                     ShowHistory_Click(this, new RoutedEventArgs());
                     e.Handled = true;
                     break;
+                case Key.C when !TxtContent.IsFocused && !TxtTitle.IsFocused
+                             && !TxtTags.IsFocused && !TxtService.IsFocused && !TxtNotes.IsFocused:
+                    Copy_Click(this, new RoutedEventArgs());
+                    e.Handled = true;
+                    break;
             }
         }
     }
@@ -193,6 +234,9 @@ public partial class MainWindow : Window
     {
         var handle = new WindowInteropHelper(this).Handle;
         UnregisterHotKey(handle, HotkeyId);
+        _appSettings.LastSortOrder  = _vm.SortOrder;
+        _appSettings.RecentSearches = [.. _recentSearches];
+        _appSettings.Save();
         _db.Dispose();
     }
 
@@ -334,13 +378,27 @@ public partial class MainWindow : Window
     void TxtContent_TextChanged(object sender, TextChangedEventArgs e)
     {
         if (!IsLoaded || _vm.Selected == null) return;
-        var content = TxtContent.Text;
-        var temp = new PromptItem { Content = content };
-        var vars = temp.ExtractVariables();
-        var charCount = content.Length;
-        _vm.StatusText = vars.Count == 0
-            ? $"{charCount:N0}자"
-            : $"{charCount:N0}자 · 변수 {vars.Count}개";
+        var charCount = TxtContent.Text.Length;
+        _vm.StatusText = $"{charCount:N0}자";  // 즉시 글자 수 업데이트
+
+        // 변수 수는 200ms 디바운싱으로 Regex 실행 부하 감소
+        if (_contentDebounce == null)
+        {
+            _contentDebounce = new System.Windows.Threading.DispatcherTimer
+                { Interval = TimeSpan.FromMilliseconds(200) };
+            _contentDebounce.Tick += (_, _) =>
+            {
+                _contentDebounce.Stop();
+                if (_vm.Selected == null) return;
+                var vars = new PromptItem { Content = TxtContent.Text }.ExtractVariables();
+                var count = TxtContent.Text.Length;
+                _vm.StatusText = vars.Count == 0
+                    ? $"{count:N0}자"
+                    : $"{count:N0}자 · 변수 {vars.Count}개";
+            };
+        }
+        _contentDebounce.Stop();
+        _contentDebounce.Start();
     }
 
     // ── 버튼 핸들러 ───────────────────────────────────────────────────────────
@@ -430,10 +488,14 @@ public partial class MainWindow : Window
             return;
         }
 
-        var dlg = new FillVarsDialog(content, vars) { Owner = this };
+        var promptId = _vm.Selected?.Id ?? 0;
+        _varHistory.TryGetValue(promptId, out var prevValues);
+
+        var dlg = new FillVarsDialog(content, vars, prevValues) { Owner = this };
         if (dlg.ShowDialog() == true && dlg.FilledContent != null)
         {
             if (_vm.Selected != null) _vm.IncrementUseCount(_vm.Selected.Id);
+            _varHistory[promptId] = dlg.LastInputValues;
             _vm.StatusText = "변수 채우기 완료 — 클립보드에 복사됨";
         }
     }
@@ -466,6 +528,8 @@ public partial class MainWindow : Window
             2 => "custom",
             _ => "updated"
         };
+        _appSettings.LastSortOrder = _vm.SortOrder;
+        _appSettings.Save();
     }
 
     // ── 드래그 앤 드롭 순서 변경 ──────────────────────────────────────────────
@@ -788,6 +852,7 @@ public partial class MainWindow : Window
         catch (Exception ex)
         {
             _vm.StatusText = $"가져오기 실패: {ex.Message}";
+            MessageBox.Show($"가져오기 실패:\n{ex.Message}", "오류", MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
 

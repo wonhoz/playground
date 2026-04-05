@@ -4,11 +4,18 @@
              StartupUri="MainWindow.xaml">
     <Application.Resources>
 
+        <!-- ── Label ────────────────────────────────────────────────────── -->
+        <Style TargetType="Label">
+            <Setter Property="Foreground" Value="#A0A0BB"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Padding" Value="0,0,0,2"/>
+        </Style>
+
         <!-- ── TextBox ───────────────────────────────────────────────────── -->
         <Style TargetType="TextBox">
             <Setter Property="Background" Value="#1E1E2E"/>
             <Setter Property="Foreground" Value="#E0E0E0"/>
-            <Setter Property="BorderBrush" Value="#2A2A3E"/>
+            <Setter Property="BorderBrush" Value="#333333"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="Padding" Value="0"/>
             <Setter Property="CaretBrush" Value="#7C3AED"/>
@@ -119,7 +126,7 @@
         <Style TargetType="ComboBox">
             <Setter Property="Background" Value="#1E1E2E"/>
             <Setter Property="Foreground" Value="#C0C0D0"/>
-            <Setter Property="BorderBrush" Value="#2A2A3E"/>
+            <Setter Property="BorderBrush" Value="#333333"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="Padding" Value="8,5"/>
             <Setter Property="Template">

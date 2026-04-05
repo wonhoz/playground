@@ -8,9 +8,11 @@ public sealed class AppSettings
         Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
         "Prompt.Forge", "sync.json");
 
-    public string DbPath       { get; set; } = "";
-    public string GithubPatEnc { get; set; } = "";  // DPAPI 암호화된 PAT (Base64)
-    public string GistId       { get; set; } = "";
+    public string DbPath          { get; set; } = "";
+    public string GithubPatEnc   { get; set; } = "";  // DPAPI 암호화된 PAT (Base64)
+    public string GistId         { get; set; } = "";
+    public string LastSortOrder  { get; set; } = "updated";  // updated / use_count / custom
+    public List<string> RecentSearches { get; set; } = [];
 
     // 런타임에서 사용하는 평문 PAT (직렬화 제외)
     [System.Text.Json.Serialization.JsonIgnore]

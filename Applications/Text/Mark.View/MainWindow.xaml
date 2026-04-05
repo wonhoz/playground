@@ -118,7 +118,7 @@
                         <Setter.Value>
                           <VisualBrush Stretch="None" AlignmentX="Left">
                             <VisualBrush.Visual>
-                              <TextBlock Text="  바꿀 내용..." Foreground="#666888"
+                              <TextBlock Text="  바꿀 내용..." Foreground="#6888AA"
                                          FontSize="12" VerticalAlignment="Center"/>
                             </VisualBrush.Visual>
                           </VisualBrush>
@@ -149,10 +149,10 @@
         <Border x:Name="LoadingBarTrack" Grid.Row="3" ClipToBounds="True" Visibility="Collapsed">
           <Border.Background>
             <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
-              <GradientStop Color="#20A78BFA" Offset="0"/>
-              <GradientStop Color="#A78BFA"   Offset="0.35"/>
-              <GradientStop Color="#E8C060"   Offset="0.55"/>
-              <GradientStop Color="#20E8C060" Offset="1"/>
+              <GradientStop Color="#204A9EF5" Offset="0"/>
+              <GradientStop Color="#4A9EF5"   Offset="0.35"/>
+              <GradientStop Color="#FFD700"   Offset="0.55"/>
+              <GradientStop Color="#20FFD700" Offset="1"/>
             </LinearGradientBrush>
           </Border.Background>
           <!-- 내부: 반짝이는 흰색 하이라이트 오버레이 -->
@@ -270,7 +270,7 @@
                      ToolTip="찾기 (Ctrl+F)"
                      TextChanged="TxtFind_TextChanged"
                      KeyDown="TxtFind_KeyDown"/>
-            <TextBlock Text="&#x1F50D; 찾기..." Foreground="#666888"
+            <TextBlock Text="&#x1F50D; 찾기..." Foreground="#6888AA"
                        FontSize="12" VerticalAlignment="Center" Margin="8,0,0,0"
                        IsHitTestVisible="False" IsEnabled="False">
               <TextBlock.Style>
@@ -468,14 +468,14 @@
                      TextWrapping="Wrap"
                      VerticalScrollBarVisibility="Auto"
                      HorizontalScrollBarVisibility="Auto"
-                     Background="#16112A"
-                     Foreground="#E2D9F3"
+                     Background="#060E1A"
+                     Foreground="#D8E8F8"
                      BorderThickness="0"
                      Padding="16"
                      FontFamily="Cascadia Code, Consolas, monospace"
                      FontSize="13"
-                     CaretBrush="#A78BFA"
-                     SelectionBrush="#A78BFA"
+                     CaretBrush="#4A9EF5"
+                     SelectionBrush="#4A9EF5"
                      TextChanged="Editor_TextChanged"
                      KeyDown="Editor_KeyDown"/>
           </Border>

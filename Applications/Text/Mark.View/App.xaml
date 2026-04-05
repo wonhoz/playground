@@ -5,16 +5,16 @@
   <Application.Resources>
 
     <!-- ── 색상 브러시 ─────────────────────────────────── -->
-    <SolidColorBrush x:Key="BgBrush"       Color="#1A1628"/>
-    <SolidColorBrush x:Key="SurfaceBrush"  Color="#201C32"/>
-    <SolidColorBrush x:Key="Surface2Brush" Color="#271F3C"/>
-    <SolidColorBrush x:Key="BorderBrush"   Color="#3A2D5A"/>
-    <SolidColorBrush x:Key="TextBrush"     Color="#E2D9F3"/>
-    <SolidColorBrush x:Key="TextDimBrush"  Color="#8878AA"/>
-    <SolidColorBrush x:Key="AccentBrush"   Color="#A78BFA"/>
-    <SolidColorBrush x:Key="Accent2Brush"  Color="#E8C060"/>
-    <SolidColorBrush x:Key="HoverBrush"    Color="#2D1E50"/>
-    <SolidColorBrush x:Key="PressedBrush"  Color="#4A3070"/>
+    <SolidColorBrush x:Key="BgBrush"       Color="#0A1628"/>
+    <SolidColorBrush x:Key="SurfaceBrush"  Color="#0F2040"/>
+    <SolidColorBrush x:Key="Surface2Brush" Color="#142850"/>
+    <SolidColorBrush x:Key="BorderBrush"   Color="#1E3D6E"/>
+    <SolidColorBrush x:Key="TextBrush"     Color="#D8E8F8"/>
+    <SolidColorBrush x:Key="TextDimBrush"  Color="#6888AA"/>
+    <SolidColorBrush x:Key="AccentBrush"   Color="#4A9EF5"/>
+    <SolidColorBrush x:Key="Accent2Brush"  Color="#FFD700"/>
+    <SolidColorBrush x:Key="HoverBrush"    Color="#162D52"/>
+    <SolidColorBrush x:Key="PressedBrush"  Color="#1E3E70"/>
 
     <!-- ── Window ──────────────────────────────────────── -->
     <Style TargetType="Window">
@@ -60,8 +60,8 @@
 
     <!-- ── Accent Button ──────────────────────────────── -->
     <Style x:Key="AccentButton" TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
-      <Setter Property="Background"  Value="#6D28D9"/>
-      <Setter Property="BorderBrush" Value="#7C3AED"/>
+      <Setter Property="Background"  Value="#1A4A8A"/>
+      <Setter Property="BorderBrush" Value="#2060A8"/>
       <Setter Property="Foreground"  Value="#FFFFFF"/>
       <Setter Property="FontWeight"  Value="SemiBold"/>
     </Style>
@@ -221,13 +221,13 @@
         <Setter.Value>
           <ControlTemplate TargetType="ScrollBar">
             <Grid>
-              <Border Background="#1A1A2A" CornerRadius="4"/>
+              <Border Background="#080F1E" CornerRadius="4"/>
               <Track x:Name="PART_Track" IsDirectionReversed="True">
                 <Track.Thumb>
                   <Thumb>
                     <Thumb.Template>
                       <ControlTemplate TargetType="Thumb">
-                        <Border x:Name="ThumbBd" Background="#5B4580" CornerRadius="4" Margin="2">
+                        <Border x:Name="ThumbBd" Background="#1E4080" CornerRadius="4" Margin="2">
                           <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="CommonStates">
                               <VisualState x:Name="Normal"/>
@@ -235,7 +235,7 @@
                                 <Storyboard>
                                   <ColorAnimation Storyboard.TargetName="ThumbBd"
                                                   Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)"
-                                                  To="#7C3AED" Duration="0:0:0.1"/>
+                                                  To="#3060B0" Duration="0:0:0.1"/>
                                 </Storyboard>
                               </VisualState>
                             </VisualStateGroup>

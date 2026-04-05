@@ -50,16 +50,19 @@ public class MarkdownRenderer
             ? "atom-one-light" : "atom-one-dark";
 
         return "<!DOCTYPE html><html><head><meta charset='utf-8'>" + baseTag
-            + "<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css'>"
-            + $"<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/highlight.js@11/dist/styles/{hlCss}.min.css'>"
+            + $"<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/highlight.js@11/dist/styles/{hlCss}.min.css'"
+            + " onerror=\"this.remove();\">"
+            + "<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css'"
+            + " onerror=\"this.remove();\">"
             + "<style>" + GetCommonCss() + css + "</style>"
             + "</head><body>" + body
             + "<script src='https://cdn.jsdelivr.net/npm/highlight.js@11/dist/highlight.min.js'"
             + " onload=\"if(typeof hljs!=='undefined')hljs.highlightAll();\""
-            + " onerror=\"document.querySelectorAll('pre code').forEach(function(b){b.style.display='block';});\"></script>"
-            + "<script defer src='https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js'></script>"
+            + " onerror=\"document.querySelectorAll('pre code').forEach(function(b){b.style.fontFamily='Cascadia Code,Consolas,monospace';b.style.display='block';});\"></script>"
+            + "<script defer src='https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js'"
+            + " onerror=\"window.__katexFailed=true;\"></script>"
             + "<script defer src='https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js'"
-            + " onload=\"if(typeof renderMathInElement!=='undefined')renderMathInElement(document.body,{delimiters:["
+            + " onload=\"if(!window.__katexFailed&&typeof renderMathInElement!=='undefined')renderMathInElement(document.body,{delimiters:["
             + "{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false},"
             + "{left:'\\\\(',right:'\\\\)',display:false},{left:'\\\\[',right:'\\\\]',display:true}]})\"></script>"
             + "</body></html>";

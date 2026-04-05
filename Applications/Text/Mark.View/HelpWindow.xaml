@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:MarkView"
         Title="단축키 도움말"
-        Width="820" SizeToContent="Height"
+        Width="900" SizeToContent="Height"
         WindowStartupLocation="CenterOwner"
         ResizeMode="NoResize"
         ShowInTaskbar="False"
@@ -96,8 +96,8 @@
           <TextBlock Text="내보내기" Style="{StaticResource Cat}"/>
           <ItemsControl ItemTemplate="{StaticResource RowTpl}">
             <ItemsControl.Items>
-              <local:ShortcutEntry Key="Ctrl + B" Desc="HTML로 내보내기"/>
-              <local:ShortcutEntry Key="Ctrl + P" Desc="PDF로 내보내기"/>
+              <local:ShortcutEntry Key="Ctrl + Shift + E" Desc="HTML로 내보내기"/>
+              <local:ShortcutEntry Key="Ctrl + P"         Desc="PDF로 내보내기"/>
             </ItemsControl.Items>
           </ItemsControl>
 
@@ -105,11 +105,12 @@
           <TextBlock Text="기타" Style="{StaticResource Cat}"/>
           <ItemsControl ItemTemplate="{StaticResource RowTpl}">
             <ItemsControl.Items>
-              <local:ShortcutEntry Key="F1"          Desc="단축키 도움말"/>
-              <local:ShortcutEntry Key="F5"          Desc="현재 파일 새로고침"/>
-              <local:ShortcutEntry Key="F11"         Desc="집중 모드 (툴바/상태바 숨김)"/>
-              <local:ShortcutEntry Key="📌 버튼"     Desc="최근 파일 즐겨찾기 고정/해제"/>
-              <local:ShortcutEntry Key="상태바 경로" Desc="클릭 시 파일 탐색기에서 위치 열기"/>
+              <local:ShortcutEntry Key="F1"               Desc="단축키 도움말"/>
+              <local:ShortcutEntry Key="F5"               Desc="현재 파일 새로고침"/>
+              <local:ShortcutEntry Key="F11"              Desc="집중 모드 (툴바/상태바 숨김)"/>
+              <local:ShortcutEntry Key="📌 버튼"          Desc="최근 파일 즐겨찾기 고정/해제"/>
+              <local:ShortcutEntry Key="Ctrl + 클릭 (최근)" Desc="최근 파일을 새 탭으로 열기"/>
+              <local:ShortcutEntry Key="상태바 경로"      Desc="클릭 시 파일 탐색기에서 위치 열기"/>
             </ItemsControl.Items>
           </ItemsControl>
 
@@ -139,17 +140,31 @@
           <TextBlock Text="에디터" Style="{StaticResource Cat}"/>
           <ItemsControl ItemTemplate="{StaticResource RowTpl}">
             <ItemsControl.Items>
-              <local:ShortcutEntry Key="Ctrl + E"         Desc="편집 모드 전환"/>
-              <local:ShortcutEntry Key="Ctrl + B"         Desc="굵게 (선택 텍스트를 **bold** 처리)"/>
-              <local:ShortcutEntry Key="Ctrl + I"         Desc="기울임 (선택 텍스트를 *italic* 처리)"/>
-              <local:ShortcutEntry Key="Ctrl + K"         Desc="링크 삽입 [텍스트]() — 괄호 안에 URL 입력"/>
-              <local:ShortcutEntry Key="Ctrl + +"         Desc="에디터 폰트 크기 증가"/>
-              <local:ShortcutEntry Key="Ctrl + -"         Desc="에디터 폰트 크기 감소"/>
+              <local:ShortcutEntry Key="Ctrl + E"           Desc="편집 모드 전환 (서식 도구모음 표시)"/>
+              <local:ShortcutEntry Key="Ctrl + B"           Desc="굵게 (선택 텍스트를 **bold** 처리)"/>
+              <local:ShortcutEntry Key="Ctrl + I"           Desc="기울임 (선택 텍스트를 *italic* 처리)"/>
+              <local:ShortcutEntry Key="Ctrl + K"           Desc="링크 삽입 [텍스트]() — 괄호 안에 URL 입력"/>
+              <local:ShortcutEntry Key="Ctrl + +"           Desc="에디터 폰트 크기 증가"/>
+              <local:ShortcutEntry Key="Ctrl + -"           Desc="에디터 폰트 크기 감소"/>
               <local:ShortcutEntry Key="Ctrl + 휠 (에디터)" Desc="에디터 위에서 폰트 크기 조절"/>
               <local:ShortcutEntry Key="Ctrl + 휠 (프리뷰)" Desc="프리뷰 위에서 글꼴 크기 조절"/>
-              <local:ShortcutEntry Key="Tab"              Desc="들여쓰기 (4칸) / 범위 들여쓰기"/>
-              <local:ShortcutEntry Key="Shift + Tab"      Desc="내어쓰기 / 범위 내어쓰기"/>
-              <local:ShortcutEntry Key="Ctrl + Shift + V" Desc="클립보드를 새 탭으로 열기"/>
+              <local:ShortcutEntry Key="Tab"                Desc="들여쓰기 (4칸) / 범위 들여쓰기"/>
+              <local:ShortcutEntry Key="Shift + Tab"        Desc="내어쓰기 / 범위 내어쓰기"/>
+              <local:ShortcutEntry Key="Ctrl + Shift + V"   Desc="클립보드를 새 탭으로 열기"/>
+            </ItemsControl.Items>
+          </ItemsControl>
+
+          <!-- 서식 도구모음 -->
+          <TextBlock Text="서식 도구모음 (편집 모드)" Style="{StaticResource Cat}"/>
+          <ItemsControl ItemTemplate="{StaticResource RowTpl}">
+            <ItemsControl.Items>
+              <local:ShortcutEntry Key="H1 / H2 / H3"   Desc="현재 줄을 헤딩으로 변환"/>
+              <local:ShortcutEntry Key="B / I"           Desc="선택 텍스트를 굵게/기울임 처리"/>
+              <local:ShortcutEntry Key="`C` 버튼"        Desc="선택 텍스트를 인라인 코드로 감쌈"/>
+              <local:ShortcutEntry Key="``` 버튼"        Desc="코드 블록 삽입"/>
+              <local:ShortcutEntry Key="🔗 버튼"         Desc="링크 삽입"/>
+              <local:ShortcutEntry Key="❮ / •• / 1."     Desc="인용문 / 목록 / 번호 목록 삽입"/>
+              <local:ShortcutEntry Key="── 버튼"         Desc="가로 구분선 삽입"/>
             </ItemsControl.Items>
           </ItemsControl>
 
@@ -162,13 +177,21 @@
             </ItemsControl.Items>
           </ItemsControl>
 
+          <!-- 뷰어 기능 -->
+          <TextBlock Text="뷰어 기능" Style="{StaticResource Cat}"/>
+          <ItemsControl ItemTemplate="{StaticResource RowTpl}">
+            <ItemsControl.Items>
+              <local:ShortcutEntry Key="코드 블록 hover"  Desc="Copy 버튼 표시 — 클릭 시 코드 클립보드 복사"/>
+            </ItemsControl.Items>
+          </ItemsControl>
+
           <!-- 상태바 -->
           <TextBlock Text="상태바" Style="{StaticResource Cat}"/>
           <ItemsControl ItemTemplate="{StaticResource RowTpl}">
             <ItemsControl.Items>
-              <local:ShortcutEntry Key="줄:컬럼"         Desc="에디터 커서 위치 (편집 모드에서 표시)"/>
-              <local:ShortcutEntry Key="N줄 · N단어"     Desc="현재 문서 줄 수 / 단어 수"/>
-              <local:ShortcutEntry Key="상태바 경로"     Desc="클릭 시 파일 탐색기에서 위치 열기"/>
+              <local:ShortcutEntry Key="줄:컬럼"              Desc="에디터 커서 위치 (편집 모드에서 표시)"/>
+              <local:ShortcutEntry Key="N줄 · N단어 · 약 Nm" Desc="줄 수 / 단어 수 / 예상 읽기 시간"/>
+              <local:ShortcutEntry Key="상태바 경로"          Desc="클릭 시 파일 탐색기에서 위치 열기"/>
             </ItemsControl.Items>
           </ItemsControl>
 

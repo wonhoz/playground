@@ -69,7 +69,7 @@ public partial class MainWindow : Window
             await OpenFileAsync(f);
         // 마지막 활성 탭 복원
         var savedIdx = _settings.ActiveTabIndex;
-        if (savedIdx > 0 && savedIdx < _docs.Count)
+        if (savedIdx >= 0 && savedIdx < _docs.Count)
             SwitchTo(savedIdx);
     }
 
@@ -93,10 +93,13 @@ public partial class MainWindow : Window
                 Top = _settings.WindowTop;
             }
         }
+        if (_settings.IsMaximized)
+            WindowState = WindowState.Maximized;
     }
 
     private void SaveWindowBounds()
     {
+        _settings.IsMaximized = WindowState == WindowState.Maximized;
         if (WindowState == WindowState.Normal)
         {
             _settings.WindowLeft = Left;
@@ -263,12 +266,54 @@ public partial class MainWindow : Window
     {
         _ = HideLoadingAsync(300);
         _ = ExtractTocAsync();
+        _ = InjectCopyButtonsAsync();
         if (_pendingScrollY > 0)
             _ = RestoreScrollAsync();
         if (_isTocVisible)
             _ = InjectTocScrollMonitorAsync();
         if (_previewFontSize != 15)
             _ = ApplyPreviewFontSizeAsync();
+    }
+
+    private async Task InjectCopyButtonsAsync()
+    {
+        if (!_webViewReady) return;
+        try
+        {
+            await Viewer.ExecuteScriptAsync(@"
+(function() {
+    if (window.__copyBtnsInstalled) return;
+    window.__copyBtnsInstalled = true;
+    document.querySelectorAll('pre').forEach(function(pre) {
+        var btn = document.createElement('button');
+        btn.textContent = 'Copy';
+        btn.style.cssText = [
+            'position:absolute','top:8px','right:8px',
+            'padding:2px 8px','font-size:11px','border-radius:4px','border:1px solid #555',
+            'background:#2a2a3a','color:#ccc','cursor:pointer','opacity:0','transition:opacity 0.15s',
+            'font-family:inherit','line-height:1.5'
+        ].join(';');
+        pre.style.position = 'relative';
+        pre.addEventListener('mouseenter', function() { btn.style.opacity = '1'; });
+        pre.addEventListener('mouseleave', function() { btn.style.opacity = '0'; });
+        btn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            var code = pre.querySelector('code');
+            var text = code ? code.innerText : pre.innerText;
+            navigator.clipboard.writeText(text).then(function() {
+                btn.textContent = 'Copied!';
+                btn.style.color = '#a78bfa';
+                setTimeout(function() { btn.textContent = 'Copy'; btn.style.color = '#ccc'; }, 1500);
+            }).catch(function() {
+                btn.textContent = 'Error';
+                setTimeout(function() { btn.textContent = 'Copy'; }, 1500);
+            });
+        });
+        pre.appendChild(btn);
+    });
+})()");
+        }
+        catch { }
     }
 
     private async Task InjectTocScrollMonitorAsync()
@@ -417,9 +462,15 @@ public partial class MainWindow : Window
                 {
                     Content = entry.Text,
                     Tag = entry.Id,
-                    Padding = new Thickness(12 + (entry.Level - 1) * 8, 4, 8, 4),
+                    Padding = new Thickness(12 + (entry.Level - 1) * 10, 4, 8, 4),
                     FontSize = entry.Level == 1 ? 13 : entry.Level == 2 ? 12 : 11,
-                    FontWeight = entry.Level <= 2 ? FontWeights.SemiBold : FontWeights.Normal,
+                    FontWeight = entry.Level == 1 ? FontWeights.Bold : entry.Level == 2 ? FontWeights.SemiBold : FontWeights.Normal,
+                    Foreground = entry.Level == 1
+                        ? (SolidColorBrush)FindResource("AccentBrush")
+                        : entry.Level == 2
+                            ? (SolidColorBrush)FindResource("TextBrush")
+                            : (SolidColorBrush)FindResource("TextDimBrush"),
+                    Opacity = entry.Level >= 4 ? 0.8 : 1.0,
                 };
                 TocList.Items.Add(item);
             }
@@ -753,6 +804,7 @@ public partial class MainWindow : Window
             TxtEditIcon.Foreground = (SolidColorBrush)FindResource("AccentBrush");
             StatusMode.Text = "편집";
             StatusCursor.Visibility = Visibility.Visible;
+            FormatBar.Visibility = Visibility.Visible;
         }
         else
         {
@@ -761,9 +813,53 @@ public partial class MainWindow : Window
             TxtEditIcon.Foreground = (SolidColorBrush)FindResource("TextDimBrush");
             StatusMode.Text = "뷰";
             StatusCursor.Visibility = Visibility.Collapsed;
+            FormatBar.Visibility = Visibility.Collapsed;
         }
         _settings.IsEditMode = editMode;
         _settings.Save();
+    }
+
+    private void FmtBtn_Click(object sender, RoutedEventArgs e)
+    {
+        if (_activeIndex < 0 || !_isEditMode) return;
+        if (sender is not Button btn || btn.Tag is not string tag) return;
+        Editor.Focus();
+        switch (tag)
+        {
+            case "h1":       InsertLinePrefix("# "); break;
+            case "h2":       InsertLinePrefix("## "); break;
+            case "h3":       InsertLinePrefix("### "); break;
+            case "bold":     WrapSelection("**", "**"); break;
+            case "italic":   WrapSelection("*", "*"); break;
+            case "code":     WrapSelection("`", "`"); break;
+            case "codeblock":WrapSelection("\n```\n", "\n```\n"); break;
+            case "link":     WrapAsLink(); break;
+            case "quote":    InsertLinePrefix("> "); break;
+            case "ul":       InsertLinePrefix("- "); break;
+            case "ol":       InsertLinePrefix("1. "); break;
+            case "hr":       InsertAtNewLine("---"); break;
+        }
+    }
+
+    private void InsertLinePrefix(string prefix)
+    {
+        var caret = Editor.CaretIndex;
+        var text = Editor.Text;
+        var lineStart = caret > 0 ? text.LastIndexOf('\n', caret - 1) + 1 : 0;
+        Editor.Select(lineStart, 0);
+        Editor.SelectedText = prefix;
+        Editor.CaretIndex = lineStart + prefix.Length + (caret - lineStart);
+    }
+
+    private void InsertAtNewLine(string content)
+    {
+        var caret = Editor.CaretIndex;
+        var text = Editor.Text;
+        var needNewlineBefore = caret > 0 && text[caret - 1] != '\n';
+        var insert = (needNewlineBefore ? "\n" : "") + content + "\n";
+        Editor.Select(caret, 0);
+        Editor.SelectedText = insert;
+        Editor.CaretIndex = caret + insert.Length;
     }
 
     // ── TOC ─────────────────────────────────────────────────────────────
@@ -859,7 +955,8 @@ public partial class MainWindow : Window
             ? 0
             : Regex.Matches(doc.Content, @"\S+").Count;
         StatusLines.Text = $"{lines}줄";
-        StatusWords.Text = $"{words}단어";
+        var readMin = Math.Max(1, (int)Math.Ceiling(words / 200.0));
+        StatusWords.Text = words > 0 ? $"{words}단어 · 약 {readMin}분" : "0단어";
         StatusMode.Text = _isEditMode ? "편집" : "뷰";
     }
 
@@ -922,7 +1019,8 @@ public partial class MainWindow : Window
 
     private void BtnReplace_Click(object sender, RoutedEventArgs e)
     {
-        if (_activeIndex < 0 || !_isEditMode) return;
+        if (_activeIndex < 0) return;
+        if (!_isEditMode) { ShowReplaceStatus("편집 모드에서만 가능"); return; }
         var find = TxtFind.Text;
         var replace = TxtReplace.Text;
         if (string.IsNullOrEmpty(find)) return;
@@ -942,7 +1040,8 @@ public partial class MainWindow : Window
 
     private void BtnReplaceAll_Click(object sender, RoutedEventArgs e)
     {
-        if (_activeIndex < 0 || !_isEditMode) return;
+        if (_activeIndex < 0) return;
+        if (!_isEditMode) { ShowReplaceStatus("편집 모드에서만 가능"); return; }
         var find = TxtFind.Text;
         var replace = TxtReplace.Text;
         if (string.IsNullOrEmpty(find)) return;
@@ -1139,14 +1238,23 @@ public partial class MainWindow : Window
         var content = doc.Content;
         var filePath = doc.IsNew ? null : doc.FilePath;
         var theme = _currentTheme;
-        await Task.Run(() =>
+        try
         {
-            var html = _renderer.RenderToHtml(content, filePath, theme);
-            File.WriteAllText(dlg.FileName, html, new UTF8Encoding(true));
-        });
-        HideLoading();
-        MessageBox.Show($"HTML 내보내기 완료:\n{dlg.FileName}", "완료",
-            MessageBoxButton.OK, MessageBoxImage.Information);
+            await Task.Run(() =>
+            {
+                var html = _renderer.RenderToHtml(content, filePath, theme);
+                File.WriteAllText(dlg.FileName, html, new UTF8Encoding(true));
+            });
+            HideLoading();
+            MessageBox.Show($"HTML 내보내기 완료:\n{dlg.FileName}", "완료",
+                MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+        catch (Exception ex)
+        {
+            HideLoading();
+            MessageBox.Show($"HTML 내보내기 실패:\n{ex.Message}", "오류",
+                MessageBoxButton.OK, MessageBoxImage.Error);
+        }
     }
 
     private void Editor_TextChanged(object sender, TextChangedEventArgs e)
@@ -1334,7 +1442,7 @@ public partial class MainWindow : Window
         { BtnReload_Click(this, new RoutedEventArgs()); e.Handled = true; }
         else if (e.Key == Key.F && Keyboard.Modifiers == ModifierKeys.Control)
         { TxtFind.Focus(); e.Handled = true; }
-        else if (e.Key == Key.B && Keyboard.Modifiers == ModifierKeys.Control)
+        else if (e.Key == Key.E && Keyboard.Modifiers == (ModifierKeys.Control | ModifierKeys.Shift))
         { BtnExportHtml_Click(this, new RoutedEventArgs()); e.Handled = true; }
         else if (e.Key == Key.T && Keyboard.Modifiers == ModifierKeys.Control)
         { SetTocVisible(!_isTocVisible); e.Handled = true; }
@@ -1467,7 +1575,7 @@ public partial class MainWindow : Window
 
     private void OnWatchedFileChanged(object sender, FileSystemEventArgs e)
     {
-        Dispatcher.Invoke(() =>
+        Dispatcher.InvokeAsync(() =>
         {
             _fileChangedDebounce?.Stop();
             _fileChangedDebounce = new DispatcherTimer { Interval = TimeSpan.FromMilliseconds(500) };
@@ -1578,7 +1686,39 @@ public partial class MainWindow : Window
     private void RecentFile_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
     {
         if (sender is Border b && b.DataContext is RecentFileItem item)
-            OpenFile(item.FullPath);
+        {
+            if (Keyboard.Modifiers == ModifierKeys.Control)
+                _ = OpenFileForceNewTabAsync(item.FullPath);
+            else
+                OpenFile(item.FullPath);
+        }
+    }
+
+    private async Task OpenFileForceNewTabAsync(string path)
+    {
+        await ShowLoadingAsync("파일 열기 중...");
+        try
+        {
+            var content = await Task.Run(() => File.ReadAllText(path));
+            // 중복 체크 없이 새 탭으로 강제 오픈
+            var doc = new MarkDocument { FilePath = path, Content = content };
+            _docs.Add(doc);
+            var tab = CreateTabItem(doc, _docs.Count - 1);
+            _tabs.Add(tab);
+            TabBar.Children.Add(tab);
+            SwitchTo(_docs.Count - 1);
+            UpdateEmptyState();
+            _settings.AddRecentFile(path);
+            _settings.Save();
+            RefreshRecentList();
+            AddFileWatcher(path);
+        }
+        catch (Exception ex)
+        {
+            HideLoading();
+            MessageBox.Show($"파일 열기 실패:\n{ex.Message}", "오류",
+                MessageBoxButton.OK, MessageBoxImage.Error);
+        }
     }
 
     private void RecentFile_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)

@@ -24,6 +24,7 @@ public class AppSettings
     public double EditorSplitRatio { get; set; } = 0.5;
     public int ActiveTabIndex { get; set; } = 0;
     public double PreviewFontSize { get; set; } = 15;
+    public bool IsMaximized { get; set; } = false;
 
     private const int MaxRecentFiles = 10;
 

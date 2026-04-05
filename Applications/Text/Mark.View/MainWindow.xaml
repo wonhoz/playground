@@ -23,7 +23,7 @@
     <KeyBinding Key="E"      Modifiers="Ctrl"         Command="{Binding}" CommandParameter="ToggleEdit"/>
     <KeyBinding Key="F5"                              Command="{Binding}" CommandParameter="Reload"/>
     <KeyBinding Key="F"      Modifiers="Ctrl"         Command="{Binding}" CommandParameter="Find"/>
-    <KeyBinding Key="B"      Modifiers="Ctrl"         Command="{Binding}" CommandParameter="ExportHtml"/>
+    <KeyBinding Key="E"      Modifiers="Ctrl+Shift"   Command="{Binding}" CommandParameter="ExportHtml"/>
     <KeyBinding Key="T"      Modifiers="Ctrl"         Command="{Binding}" CommandParameter="ToggleToc"/>
     <KeyBinding Key="P"      Modifiers="Ctrl"         Command="{Binding}" CommandParameter="ExportPdf"/>
   </Window.InputBindings>
@@ -43,12 +43,76 @@
       <Grid>
         <Grid.RowDefinitions>
           <RowDefinition Height="Auto"/>   <!-- 버튼 영역 -->
+          <RowDefinition Height="Auto"/>   <!-- 서식 도구모음 -->
           <RowDefinition Height="Auto"/>   <!-- 찾기/바꾸기 바 -->
           <RowDefinition Height="3"/>      <!-- 로딩 바 -->
         </Grid.RowDefinitions>
 
-        <!-- 찾기/바꾸기 바 (Grid Row 1) -->
-        <Border x:Name="ReplaceBar" Grid.Row="1"
+        <!-- 서식 도구모음 (Grid Row 1 — 편집 모드) -->
+        <Border x:Name="FormatBar" Grid.Row="1"
+                Visibility="Collapsed"
+                BorderBrush="{StaticResource BorderBrush}"
+                BorderThickness="0,1,0,0"
+                Padding="8,4">
+          <StackPanel Orientation="Horizontal">
+            <TextBlock Text="서식:" FontSize="10"
+                       Foreground="{StaticResource TextDimBrush}"
+                       VerticalAlignment="Center" Margin="0,0,6,0"/>
+            <Button Style="{StaticResource IconButton}" Tag="h1"
+                    Click="FmtBtn_Click" ToolTip="H1 헤딩" Padding="6,3" Margin="0,0,1,0">
+              <TextBlock Text="H1" FontSize="11" FontWeight="Bold" Foreground="{StaticResource AccentBrush}"/>
+            </Button>
+            <Button Style="{StaticResource IconButton}" Tag="h2"
+                    Click="FmtBtn_Click" ToolTip="H2 헤딩" Padding="6,3" Margin="0,0,1,0">
+              <TextBlock Text="H2" FontSize="11" FontWeight="Bold" Foreground="{StaticResource AccentBrush}"/>
+            </Button>
+            <Button Style="{StaticResource IconButton}" Tag="h3"
+                    Click="FmtBtn_Click" ToolTip="H3 헤딩" Padding="6,3" Margin="0,0,4,0">
+              <TextBlock Text="H3" FontSize="11" FontWeight="SemiBold" Foreground="{StaticResource AccentBrush}"/>
+            </Button>
+            <Separator Width="1" Height="16" Margin="2,0" Background="{StaticResource BorderBrush}"/>
+            <Button Style="{StaticResource IconButton}" Tag="bold"
+                    Click="FmtBtn_Click" ToolTip="굵게 (Ctrl+B)" Padding="6,3" Margin="4,0,1,0">
+              <TextBlock Text="B" FontSize="12" FontWeight="Bold"/>
+            </Button>
+            <Button Style="{StaticResource IconButton}" Tag="italic"
+                    Click="FmtBtn_Click" ToolTip="기울임 (Ctrl+I)" Padding="6,3" Margin="0,0,1,0">
+              <TextBlock Text="I" FontSize="12" FontStyle="Italic"/>
+            </Button>
+            <Button Style="{StaticResource IconButton}" Tag="code"
+                    Click="FmtBtn_Click" ToolTip="인라인 코드" Padding="6,3" Margin="0,0,1,0">
+              <TextBlock Text="`C`" FontSize="11" FontFamily="Cascadia Code, Consolas, monospace"/>
+            </Button>
+            <Button Style="{StaticResource IconButton}" Tag="codeblock"
+                    Click="FmtBtn_Click" ToolTip="코드 블록" Padding="6,3" Margin="0,0,4,0">
+              <TextBlock Text="```" FontSize="11" FontFamily="Cascadia Code, Consolas, monospace"/>
+            </Button>
+            <Separator Width="1" Height="16" Margin="2,0" Background="{StaticResource BorderBrush}"/>
+            <Button Style="{StaticResource IconButton}" Tag="link"
+                    Click="FmtBtn_Click" ToolTip="링크 삽입 (Ctrl+K)" Padding="6,3" Margin="4,0,1,0">
+              <TextBlock Text="&#x1F517;" FontSize="12"/>
+            </Button>
+            <Button Style="{StaticResource IconButton}" Tag="quote"
+                    Click="FmtBtn_Click" ToolTip="인용문" Padding="6,3" Margin="0,0,1,0">
+              <TextBlock Text="&#x276E;" FontSize="13" FontWeight="Bold"/>
+            </Button>
+            <Button Style="{StaticResource IconButton}" Tag="ul"
+                    Click="FmtBtn_Click" ToolTip="목록 (unordered)" Padding="6,3" Margin="0,0,1,0">
+              <TextBlock Text="&#x2022;&#x2022;" FontSize="11"/>
+            </Button>
+            <Button Style="{StaticResource IconButton}" Tag="ol"
+                    Click="FmtBtn_Click" ToolTip="번호 목록 (ordered)" Padding="6,3" Margin="0,0,1,0">
+              <TextBlock Text="1." FontSize="11"/>
+            </Button>
+            <Button Style="{StaticResource IconButton}" Tag="hr"
+                    Click="FmtBtn_Click" ToolTip="가로 구분선" Padding="6,3" Margin="0,0,1,0">
+              <TextBlock Text="&#x2500;&#x2500;" FontSize="11"/>
+            </Button>
+          </StackPanel>
+        </Border>
+
+        <!-- 찾기/바꾸기 바 (Grid Row 2) -->
+        <Border x:Name="ReplaceBar" Grid.Row="2"
                 Visibility="Collapsed"
                 BorderBrush="{StaticResource BorderBrush}"
                 BorderThickness="0,1,0,0"
@@ -94,9 +158,9 @@
           </StackPanel>
         </Border>
 
-        <!-- 로딩 바 (Grid Row 2 — WebView2 바깥이라 airspace 문제 없음) -->
+        <!-- 로딩 바 (Grid Row 3 — WebView2 바깥이라 airspace 문제 없음) -->
         <!-- 외부: 항상 보이는 solid 그라디언트 바 -->
-        <Border x:Name="LoadingBarTrack" Grid.Row="2" ClipToBounds="True" Visibility="Collapsed">
+        <Border x:Name="LoadingBarTrack" Grid.Row="3" ClipToBounds="True" Visibility="Collapsed">
           <Border.Background>
             <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
               <GradientStop Color="#20A78BFA" Offset="0"/>
@@ -161,7 +225,7 @@
           <Separator Width="1" Height="20" Margin="4,0" Background="{StaticResource BorderBrush}"/>
           <!-- HTML 내보내기 -->
           <Button Style="{StaticResource IconButton}" Click="BtnExportHtml_Click"
-                  ToolTip="HTML로 내보내기 (Ctrl+B)" Margin="0,0,2,0" Padding="8,5">
+                  ToolTip="HTML로 내보내기 (Ctrl+Shift+E)" Margin="0,0,2,0" Padding="8,5">
             <TextBlock Text="&#x1F4E4;" FontSize="14"/>
           </Button>
           <!-- PDF 내보내기 -->

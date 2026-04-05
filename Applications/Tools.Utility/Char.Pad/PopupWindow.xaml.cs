@@ -565,7 +565,22 @@ public partial class PopupWindow : System.Windows.Window
     }
 
     private void HelpOverlay_MouseDown(object sender, MouseButtonEventArgs e)
-        => HelpOverlay.Visibility = Visibility.Collapsed;
+    {
+        // 스크롤바 조작 시에는 오버레이 닫지 않음
+        if (e.OriginalSource is DependencyObject src && IsInsideScrollBar(src)) return;
+        HelpOverlay.Visibility = Visibility.Collapsed;
+    }
+
+    private static bool IsInsideScrollBar(DependencyObject element)
+    {
+        var current = element;
+        while (current != null)
+        {
+            if (current is System.Windows.Controls.Primitives.ScrollBar) return true;
+            current = VisualTreeHelper.GetParent(current);
+        }
+        return false;
+    }
 
     private void Window_Deactivated(object sender, EventArgs e)
     {

@@ -25,8 +25,9 @@ public class StorageService : IDisposable
         using var cmd = _db.CreateCommand();
         cmd.CommandText = """
             CREATE TABLE IF NOT EXISTS recents (
-                char     TEXT NOT NULL PRIMARY KEY,
-                used_at  TEXT NOT NULL
+                char      TEXT NOT NULL PRIMARY KEY,
+                used_at   TEXT NOT NULL,
+                use_count INTEGER NOT NULL DEFAULT 1
             );
             CREATE TABLE IF NOT EXISTS favorites (
                 char       TEXT NOT NULL PRIMARY KEY,
@@ -38,6 +39,15 @@ public class StorageService : IDisposable
             );
             """;
         cmd.ExecuteNonQuery();
+
+        // 기존 DB 마이그레이션: use_count 컬럼 없는 경우 추가
+        try
+        {
+            using var alt = _db.CreateCommand();
+            alt.CommandText = "ALTER TABLE recents ADD COLUMN use_count INTEGER NOT NULL DEFAULT 1";
+            alt.ExecuteNonQuery();
+        }
+        catch { /* 이미 존재하면 무시 */ }
     }
 
     // ── Recents ──────────────────────────────────────────────────────
@@ -46,8 +56,8 @@ public class StorageService : IDisposable
     {
         using var cmd = _db.CreateCommand();
         cmd.CommandText = """
-            INSERT INTO recents (char, used_at) VALUES ($ch, $now)
-            ON CONFLICT(char) DO UPDATE SET used_at = $now;
+            INSERT INTO recents (char, used_at, use_count) VALUES ($ch, $now, 1)
+            ON CONFLICT(char) DO UPDATE SET used_at = $now, use_count = use_count + 1;
             """;
         cmd.Parameters.AddWithValue("$ch", ch);
         cmd.Parameters.AddWithValue("$now", DateTime.UtcNow.ToString("o"));
@@ -70,7 +80,7 @@ public class StorageService : IDisposable
     public List<string> GetRecents()
     {
         using var cmd = _db.CreateCommand();
-        cmd.CommandText = "SELECT char FROM recents ORDER BY used_at DESC LIMIT $max";
+        cmd.CommandText = "SELECT char FROM recents ORDER BY use_count DESC, used_at DESC LIMIT $max";
         cmd.Parameters.AddWithValue("$max", MaxRecents);
         var result = new List<string>();
         using var reader = cmd.ExecuteReader();

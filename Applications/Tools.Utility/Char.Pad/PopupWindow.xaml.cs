@@ -13,17 +13,22 @@ public partial class PopupWindow : System.Windows.Window
     private string    _activeTab   = "recent";
     private bool      _initialized = false;
     private DispatcherTimer? _searchTimer;
+    private double    _charFontSize = 20;
+    private bool      _pinned       = false;
 
-    private static readonly (string Id, string Label)[] Tabs =
+    // ItemSize = 문자 버튼 1칸 크기 (폰트 크기 기반으로 자동 계산)
+    private double ItemSize => _charFontSize + 28;
+
+    private static readonly (string Id, string Label, string StatusName)[] Tabs =
     {
-        ("recent",   "🕐 최근"),
-        ("favorite", "⭐ 즐겨찾기"),
-        ("arrow",    "→ 화살표"),
-        ("math",     "∑ 수학"),
-        ("symbol",   "© 기호"),
-        ("currency", "$ 통화"),
-        ("super",    "² 위첨자"),
-        ("emoji",    "😀 이모지"),
+        ("recent",   "🕐 최근",     "최근 사용"),
+        ("favorite", "⭐ 즐겨찾기", "즐겨찾기"),
+        ("arrow",    "→ 화살표",    "화살표"),
+        ("math",     "∑ 수학",      "수학"),
+        ("symbol",   "© 기호",      "기호"),
+        ("currency", "$ 통화",      "통화"),
+        ("super",    "² 위첨자",    "위첨자"),
+        ("emoji",    "😀 이모지",   "이모지"),
     };
 
     public PopupWindow(StorageService storage)
@@ -41,7 +46,13 @@ public partial class PopupWindow : System.Windows.Window
         var hwnd = new WindowInteropHelper(this).Handle;
         int v = 1; DwmSetWindowAttribute(hwnd, 20, ref v, sizeof(int));
 
+        // 설정 복원
+        if (double.TryParse(_storage.GetSetting("char_font_size"), out double fs))
+            _charFontSize = Math.Clamp(fs, 14, 36);
+        _pinned = _storage.GetSetting("pinned") == "1";
+
         BuildTabs();
+        UpdatePinBtn();
         _initialized = true;
         var lastTab = _storage.GetSetting("last_tab") ?? "recent";
         SwitchTab(lastTab);
@@ -94,14 +105,54 @@ public partial class PopupWindow : System.Windows.Window
             if (_initialized) RefreshGrid();
             SearchBox.Clear();
             SearchBox.Focus();
+            ShowClipboardHint();
         }, DispatcherPriority.Loaded);
+    }
+
+    // ── 클립보드 단일 문자 인식 → 상태바 힌트 ──────────────────────────
+    private void ShowClipboardHint()
+    {
+        try
+        {
+            var cb = System.Windows.Clipboard.GetText();
+            if (string.IsNullOrEmpty(cb) || cb.Length > 2) return;
+            var entry = CharDatabase.AllByChar.GetValueOrDefault(cb);
+            if (entry == null) return;
+
+            var cp = new System.Text.StringBuilder();
+            for (int i = 0; i < cb.Length; )
+            {
+                int code = char.ConvertToUtf32(cb, i);
+                if (cp.Length > 0) cp.Append(' ');
+                cp.Append($"U+{code:X4}");
+                i += char.IsSurrogatePair(cb, i) ? 2 : 1;
+            }
+            StatusText.Text = $"클립보드: {cb}  {entry.Name}  {cp}";
+        }
+        catch { }
+    }
+
+    // ── 핀 고정 ──────────────────────────────────────────────────────────
+    private void PinBtn_Click(object sender, RoutedEventArgs e)
+    {
+        _pinned = !_pinned;
+        _storage.SetSetting("pinned", _pinned ? "1" : "0");
+        UpdatePinBtn();
+    }
+
+    private void UpdatePinBtn()
+    {
+        PinBtn.Foreground = _pinned
+            ? (SolidColorBrush)FindResource("AccentBrush")
+            : (SolidColorBrush)FindResource("TextSecondary");
+        PinBtn.ToolTip = _pinned ? "핀 고정 ON — 삽입 후 팝업 유지" : "핀 고정 — 삽입 후 팝업 유지";
     }
 
     // ── 탭 버튼 생성 ────────────────────────────────────────────────────
     private void BuildTabs()
     {
         TabPanel.Children.Clear();
-        foreach (var (id, label) in Tabs)
+        foreach (var (id, label, _) in Tabs)
         {
             var btn = new WpfButton
             {
@@ -122,7 +173,7 @@ public partial class PopupWindow : System.Windows.Window
     {
         if (!_initialized) return;
         var btn = (WpfButton)sender;
-        SearchBox.Clear();
+        // 검색 중이면 검색어 유지 + 카테고리 필터만 적용
         SwitchTab((string)btn.Tag);
     }
 
@@ -148,14 +199,26 @@ public partial class PopupWindow : System.Windows.Window
     {
         if (!_initialized) return;
 
+        // ItemSize 동기화
+        CharGrid.ItemWidth  = ItemSize;
+        CharGrid.ItemHeight = ItemSize;
+
         var query = SearchBox.Text.Trim();
         IEnumerable<CharEntry> entries;
         bool isSearchResult = !string.IsNullOrEmpty(query);
 
         if (isSearchResult)
         {
-            entries = CharDatabase.Search(query);
-            StatusText.Text = $"검색 결과";
+            var results = CharDatabase.Search(query);
+            // 카테고리 탭 선택 시 해당 카테고리만 필터링 (recent/favorite 제외)
+            if (_activeTab != "recent" && _activeTab != "favorite")
+                results = results.Where(e => e.Category == _activeTab);
+            entries = results;
+
+            var statusName = Tabs.FirstOrDefault(t => t.Id == _activeTab).StatusName ?? "";
+            StatusText.Text = (_activeTab is "recent" or "favorite")
+                ? "검색 결과"
+                : $"{statusName} 검색";
         }
         else
         {
@@ -169,12 +232,8 @@ public partial class PopupWindow : System.Windows.Window
                                 .Where(e => e is not null).Select(e => e!),
                 _          => CharDatabase.GetByCategory(_activeTab),
             };
-            StatusText.Text = _activeTab switch
-            {
-                "recent"   => "최근 사용",
-                "favorite" => "즐겨찾기",
-                _          => Tabs.FirstOrDefault(t => t.Id == _activeTab).Label,
-            };
+            StatusText.Text = Tabs.FirstOrDefault(t => t.Id == _activeTab).StatusName
+                              ?? _activeTab;
         }
 
         var list = entries.ToList();
@@ -209,8 +268,9 @@ public partial class PopupWindow : System.Windows.Window
     private UIElement MakeCharButton(CharEntry entry, HashSet<string> favSet, bool isSearchResult = false)
     {
         bool isFav = favSet.Contains(entry.Char);
+        double size = ItemSize - 4;
 
-        var grid = new Grid { Width = 48, Height = 48, Margin = new Thickness(2) };
+        var grid = new Grid { Width = size, Height = size, Margin = new Thickness(2) };
 
         var border = new Border
         {
@@ -227,7 +287,7 @@ public partial class PopupWindow : System.Windows.Window
         var tb = new TextBlock
         {
             Text                = entry.Char,
-            FontSize            = 20,
+            FontSize            = _charFontSize,
             FontFamily          = new WpfFontFamily("Segoe UI Emoji, Segoe UI Symbol, Segoe UI"),
             Foreground          = (SolidColorBrush)FindResource("TextPrimary"),
             HorizontalAlignment = System.Windows.HorizontalAlignment.Center,
@@ -317,6 +377,15 @@ public partial class PopupWindow : System.Windows.Window
                 SearchBox.Focus();
                 e.Handled = true;
                 break;
+            case Key.F:
+                if (border.Tag is CharEntry favEntry)
+                {
+                    // 즐겨찾기 토글 — 별표 TextBlock은 border 부모 Grid의 두 번째 Child
+                    if (border.Parent is Grid g && g.Children.Count > 1 && g.Children[1] is TextBlock starTb)
+                        ToggleFavorite(favEntry, starTb);
+                }
+                e.Handled = true;
+                break;
         }
     }
 
@@ -346,25 +415,44 @@ public partial class PopupWindow : System.Windows.Window
 
     private int GetItemsPerRow()
     {
-        double w = CharGrid.ActualWidth > 0 ? CharGrid.ActualWidth : 546; // 570 - 2×12 margin
-        return Math.Max(1, (int)(w / 52));
+        double w = CharGrid.ActualWidth > 0 ? CharGrid.ActualWidth : (Width - 24);
+        return Math.Max(1, (int)(w / ItemSize));
+    }
+
+    // ── Ctrl+휠: 문자 크기 조절 ─────────────────────────────────────────
+    protected override void OnPreviewMouseWheel(System.Windows.Input.MouseWheelEventArgs e)
+    {
+        if (Keyboard.Modifiers == ModifierKeys.Control)
+        {
+            _charFontSize = Math.Clamp(_charFontSize + (e.Delta > 0 ? 2 : -2), 14, 36);
+            _storage.SetSetting("char_font_size", _charFontSize.ToString());
+            RefreshGrid();
+            e.Handled = true;
+            return;
+        }
+        base.OnPreviewMouseWheel(e);
     }
 
     // ── 문자 삽입 ────────────────────────────────────────────────────────
-    private void InsertChar(CharEntry entry)
+    private async void InsertChar(CharEntry entry)
     {
         System.Windows.Clipboard.SetText(entry.Char);
         _storage.AddRecent(entry.Char);
+
+        if (_pinned)
+        {
+            // 핀 고정 모드: 팝업 유지, 상태바에 복사 확인 표시
+            StatusText.Text = $"삽입됨: {entry.Char}  {entry.Name}";
+            return;
+        }
+
         Hide();
 
-        // 이전 창에 Ctrl+V
+        // 이전 창에 Ctrl+V (Hide 후 80ms 대기 → 포커스 전환 완료 보장)
         if (_targetHwnd != IntPtr.Zero)
         {
-            Task.Run(() =>
-            {
-                System.Threading.Thread.Sleep(80);
-                InputHelper.PasteToWindow(_targetHwnd);
-            });
+            await Task.Delay(80);
+            InputHelper.PasteToWindow(_targetHwnd);
         }
     }
 

@@ -60,16 +60,48 @@ public partial class App : System.Windows.Application
             Visible = true
         };
 
+        var darkBg  = DrawingColor.FromArgb(255, 26, 30, 42);
+        var darkFg  = DrawingColor.FromArgb(255, 224, 232, 255);
+        var darkRnd = new DarkMenuRenderer();
+
+        // 딜레이 서브메뉴
+        var delayMenu = new ContextMenuStrip
+        {
+            ShowImageMargin = false,
+            Font            = new Font("Segoe UI", 9.5f),
+            BackColor       = darkBg,
+            ForeColor       = darkFg,
+            Renderer        = darkRnd
+        };
+        foreach (var (label, ms) in new[] { ("즉시 닫기", 0), ("200ms", 200), ("400ms (기본)", 400), ("600ms", 600) })
+        {
+            int delay = ms;
+            delayMenu.Items.Add(label, null, async (_, _) =>
+            {
+                await _usage.SetHideDelayAsync(delay);
+            });
+        }
+
         var menu = new ContextMenuStrip
         {
             ShowImageMargin = false,
             Font            = new Font("Segoe UI", 9.5f),
-            BackColor       = DrawingColor.FromArgb(255, 26, 30, 42),
-            ForeColor       = DrawingColor.FromArgb(255, 224, 232, 255),
-            Renderer        = new DarkMenuRenderer()
+            BackColor       = darkBg,
+            ForeColor       = darkFg,
+            Renderer        = darkRnd
         };
         menu.Items.Add("📂  Copy.Path 열기", null, (_, _) => ShowPopup());
         menu.Items.Add("❓  사용법 / 단축키", null, (_, _) => ShowHelp());
+        menu.Items.Add(new ToolStripSeparator());
+
+        var delayItem = new ToolStripMenuItem("⏱  자동 닫힘 딜레이") { BackColor = darkBg, ForeColor = darkFg };
+        delayItem.DropDown = delayMenu;
+        menu.Items.Add(delayItem);
+
+        menu.Items.Add("🔄  숨긴 포맷 복원", null, async (_, _) =>
+        {
+            await _usage.RestoreAllFormatsAsync();
+        });
         menu.Items.Add(new ToolStripSeparator());
         menu.Items.Add("✕  종료", null, (_, _) => Shutdown());
         _tray.ContextMenuStrip = menu;
@@ -104,7 +136,7 @@ public partial class App : System.Windows.Application
             _popup = new PopupWindow(_usage);
             _popup.Closed += (_, _) => _popup = null;
         }
-        _popup.ShowAndActivate();
+        _ = _popup.ShowAndActivateAsync();
     }
 
     private void ShowHelp()
@@ -119,8 +151,17 @@ public partial class App : System.Windows.Application
             "     Win+Shift+X 를 누르면 경로가 자동으로 로드됩니다.\n" +
             "  2. 원하는 포맷 행을 클릭하면 클립보드에 복사됩니다.\n" +
             "  3. 팝업 창에 파일/폴더를 직접 드래그해도 됩니다.\n" +
+            "     (복수 파일 드래그 시 '복수 복사' 버튼이 표시됩니다)\n" +
             "  4. 하단 '최근 경로' 항목을 클릭하면 이전 경로를 재사용합니다.\n\n" +
-            "💡 지원 포맷\n" +
+            "⭐ 최근 경로 관리\n" +
+            "  ☆ / ★ 아이콘 클릭   해당 경로 즐겨찾기 고정 / 해제\n" +
+            "  ✕ 버튼 (마우스 올리면 표시)   해당 경로 삭제\n\n" +
+            "🔧 포맷 관리\n" +
+            "  포맷 행 우클릭   해당 포맷 숨기기\n" +
+            "  트레이 우클릭 → 숨긴 포맷 복원   모든 포맷 다시 표시\n\n" +
+            "⏱ 자동 닫힘 딜레이\n" +
+            "  트레이 우클릭 → 자동 닫힘 딜레이   복사 후 팝업 닫힘 속도 설정\n\n" +
+            "💡 지원 포맷 (9종)\n" +
             "  전체 경로 (백슬래시 / 슬래시) · C# 리터럴 · 파일명 ·\n" +
             "  확장자 없는 파일명 · 상위 폴더 · file:/// URL ·\n" +
             "  Unix 스타일 · UNC 경로",

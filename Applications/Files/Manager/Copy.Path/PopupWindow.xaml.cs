@@ -1,3 +1,6 @@
+using System.Globalization;
+using System.Windows.Data;
+
 namespace CopyPath;
 
 public partial class PopupWindow : System.Windows.Window
@@ -6,9 +9,11 @@ public partial class PopupWindow : System.Windows.Window
 
     private readonly UsageService _usage;
     private Dictionary<string, int> _usageCounts = [];
+    private HashSet<string> _hiddenFormats = [];
     private string[] _multiPaths = [];   // 탐색기 복수 선택 경로
     private bool _closing;               // Hide 중복 방어
     private bool _initialized;
+    private int _hideDelay = 400;        // 복사 후 자동 숨김 딜레이(ms)
 
     public PopupWindow(UsageService usage)
     {
@@ -34,20 +39,22 @@ public partial class PopupWindow : System.Windows.Window
         Left = wx; Top = wy;
     }
 
-    internal async void ShowAndActivate()
+    internal async Task ShowAndActivateAsync()
     {
         _closing = false;
-        _usageCounts = await _usage.GetAllAsync();
+        _usageCounts   = await _usage.GetAllAsync();
+        _hiddenFormats = await _usage.GetHiddenFormatsAsync();
+        _hideDelay     = await _usage.GetHideDelayAsync();
         PositionNearCursor();
         if (!IsVisible) Show();
         base.Activate();
-        await TryGetExplorerPathAsync();
+        TryGetExplorerPath();
         await LoadRecentPathsAsync();
         PathBox.Focus();
         PathBox.SelectAll();
     }
 
-    private async Task TryGetExplorerPathAsync()
+    private void TryGetExplorerPath()
     {
         var result = ExplorerHelper.GetPaths();
         _multiPaths = result.AllSelectedPaths;
@@ -78,7 +85,6 @@ public partial class PopupWindow : System.Windows.Window
             // 탐색기 경로 없으면 클립보드 자동 읽기
             TryLoadFromClipboard();
         }
-        await Task.CompletedTask;
     }
 
     private void TryLoadFromClipboard()
@@ -135,19 +141,55 @@ public partial class PopupWindow : System.Windows.Window
             PathBox.Text = files[0];
             PathBox.Focus();
             PathBox.SelectAll();
-            StatusText.Text = "드래그로 경로를 입력했습니다";
+
+            _multiPaths = files;
+            if (files.Length > 1)
+            {
+                MultiCopyBtn.Content = $"복수 복사 ({files.Length})";
+                MultiCopyBtn.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                MultiCopyBtn.Visibility = Visibility.Collapsed;
+            }
+
+            StatusText.Text = files.Length > 1
+                ? $"{files.Length}개 파일을 드래그로 입력했습니다"
+                : "드래그로 경로를 입력했습니다";
         }
     }
 
     // ── 최근 경로 이벤트 ──────────────────────────────────────────────────
     private void RecentItem_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
     {
-        if (sender is Border b && b.DataContext is string path)
+        // 별표/삭제 버튼 클릭은 부모 핸들러로 버블링되지 않도록 처리됨
+        if (e.Handled) return;
+        if (sender is Border b && b.DataContext is RecentPath rp)
         {
-            PathBox.Text = path;
+            PathBox.Text = rp.Path;
             PathBox.Focus();
             PathBox.SelectAll();
             RecentSection.Visibility = Visibility.Collapsed;
+        }
+    }
+
+    private async void RecentStar_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
+    {
+        e.Handled = true;
+        if (sender is System.Windows.FrameworkElement fe && fe.DataContext is RecentPath rp)
+        {
+            await _usage.ToggleStarAsync(rp.Path);
+            await LoadRecentPathsAsync();
+        }
+    }
+
+    private async void RecentDelete_Click(object sender, System.Windows.Input.MouseButtonEventArgs e)
+    {
+        e.Handled = true;
+        if (sender is System.Windows.FrameworkElement fe && fe.DataContext is RecentPath rp)
+        {
+            await _usage.DeleteRecentAsync(rp.Path);
+            await LoadRecentPathsAsync();
         }
     }
 
@@ -170,7 +212,10 @@ public partial class PopupWindow : System.Windows.Window
         bool valid = !string.IsNullOrWhiteSpace(path);
 
         var results = PathFormatter.FormatAll(path);
-        var sorted  = results.OrderByDescending(r => _usageCounts.GetValueOrDefault(r.Key, 0)).ToArray();
+        var sorted  = results
+            .Where(r => !_hiddenFormats.Contains(r.Key))
+            .OrderByDescending(r => _usageCounts.GetValueOrDefault(r.Key, 0))
+            .ToArray();
 
         foreach (var (label, key, value) in sorted)
             ResultPanel.Children.Add(MakeRow(label, key, value, valid));
@@ -236,6 +281,16 @@ public partial class PopupWindow : System.Windows.Window
                 StatusText.Foreground = (SolidColorBrush)FindResource("SuccessColor");
                 ScheduleHide();
             };
+
+            // 우클릭 → 포맷 숨기기
+            border.MouseRightButtonUp += async (_, _) =>
+            {
+                _hiddenFormats.Add(copyKey);
+                await _usage.SetFormatHiddenAsync(copyKey, true);
+                RenderResults(PathBox.Text);
+                StatusText.Text = $"'{copyLabel}' 숨김 (트레이 우클릭 → 포맷 복원)";
+                StatusText.Foreground = (SolidColorBrush)FindResource("TextSecondary");
+            };
         }
 
         return border;
@@ -245,7 +300,8 @@ public partial class PopupWindow : System.Windows.Window
     {
         if (_closing) return;
         _closing = true;
-        Task.Delay(400).ContinueWith(_ => Dispatcher.BeginInvoke(Hide));
+        if (_hideDelay == 0) { Hide(); return; }
+        Task.Delay(_hideDelay).ContinueWith(_ => Dispatcher.BeginInvoke(Hide));
     }
 
     // ── 이벤트 ───────────────────────────────────────────────────────────
@@ -275,4 +331,14 @@ public partial class PopupWindow : System.Windows.Window
 
     private void CloseBtn_Click(object sender, RoutedEventArgs e) => Hide();
     private void Window_Deactivated(object sender, EventArgs e) { if (IsVisible) Hide(); }
+}
+
+// ── 별표 상태를 텍스트로 변환 ─────────────────────────────────────────────
+public sealed class StarConverter : IValueConverter
+{
+    public static readonly StarConverter Instance = new();
+    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        => value is true ? "★" : "☆";
+    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        => throw new NotSupportedException();
 }

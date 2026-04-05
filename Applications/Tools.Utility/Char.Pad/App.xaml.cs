@@ -82,6 +82,8 @@ public partial class App : System.Windows.Application
         menu.Items.Add("⌨  Char.Pad 열기",  null, (_, _) => ShowPopup());
         menu.Items.Add("?  사용 방법",       null, (_, _) => ShowHelp());
         menu.Items.Add(new ToolStripSeparator());
+        menu.Items.Add("🗑  최근 사용 초기화", null, (_, _) => ClearRecents());
+        menu.Items.Add(new ToolStripSeparator());
         menu.Items.Add("✕  종료",            null, (_, _) => Shutdown());
 
         _tray.ContextMenuStrip = menu;
@@ -129,6 +131,12 @@ public partial class App : System.Windows.Application
     }
 
     internal void PasteToWindow(IntPtr targetHwnd) => InputHelper.PasteToWindow(targetHwnd);
+
+    private void ClearRecents()
+    {
+        _storage.ClearRecents();
+        _popup?.RefreshIfRecentTab();
+    }
 
     private void ShowHelp()
     {

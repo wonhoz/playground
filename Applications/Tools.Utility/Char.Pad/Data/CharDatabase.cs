@@ -122,7 +122,6 @@ public static class CharDatabase
             ("†", "dagger"),
             ("‡", "double dagger"),
             ("•", "bullet"),
-            ("·", "interpunct"),
             ("…", "horizontal ellipsis"),
             ("‰", "per mille sign"),
             ("′", "prime"),
@@ -277,8 +276,13 @@ public static class CharDatabase
     {
         if (string.IsNullOrWhiteSpace(query)) return [];
         var q = query.ToLower();
-        return All.Where(e =>
-            e.Char.Contains(query, StringComparison.OrdinalIgnoreCase) ||
-            e.Name.Contains(q, StringComparison.OrdinalIgnoreCase));
+        // 정확 일치(0) → 이름 시작 일치(1) → 이름 포함 일치(2) 순 정렬
+        return All
+            .Where(e =>
+                e.Char.Equals(query, StringComparison.OrdinalIgnoreCase) ||
+                e.Name.Contains(q, StringComparison.OrdinalIgnoreCase))
+            .OrderBy(e =>
+                e.Char.Equals(query, StringComparison.OrdinalIgnoreCase) ? 0 :
+                e.Name.StartsWith(q, StringComparison.OrdinalIgnoreCase) ? 1 : 2);
     }
 }

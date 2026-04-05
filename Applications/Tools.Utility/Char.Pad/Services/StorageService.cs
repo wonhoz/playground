@@ -63,18 +63,25 @@ public class StorageService : IDisposable
         cmd.Parameters.AddWithValue("$now", DateTime.UtcNow.ToString("o"));
         cmd.ExecuteNonQuery();
 
-        // Keep only MaxRecents most recent
+        // Keep only MaxRecents — use_count 우선, 동점이면 used_at 최신 순
         using var trim = _db.CreateCommand();
         trim.CommandText = """
             DELETE FROM recents
             WHERE char NOT IN (
                 SELECT char FROM recents
-                ORDER BY used_at DESC
+                ORDER BY use_count DESC, used_at DESC
                 LIMIT $max
             );
             """;
         trim.Parameters.AddWithValue("$max", MaxRecents);
         trim.ExecuteNonQuery();
+    }
+
+    public void ClearRecents()
+    {
+        using var cmd = _db.CreateCommand();
+        cmd.CommandText = "DELETE FROM recents";
+        cmd.ExecuteNonQuery();
     }
 
     public List<string> GetRecents()

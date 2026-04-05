@@ -145,7 +145,7 @@ public partial class PopupWindow : System.Windows.Window
         PinBtn.Foreground = _pinned
             ? (SolidColorBrush)FindResource("AccentBrush")
             : (SolidColorBrush)FindResource("TextSecondary");
-        PinBtn.ToolTip = _pinned ? "핀 고정 ON — 삽입 후 팝업 유지" : "핀 고정 — 삽입 후 팝업 유지";
+        PinBtn.ToolTip = _pinned ? "핀 고정 ON — 삽입 후 팝업 유지 (이전 창에 자동 붙여넣기)" : "핀 고정 — 삽입 후 팝업 유지 (이전 창에 자동 붙여넣기)";
     }
 
     // ── 탭 버튼 생성 ────────────────────────────────────────────────────
@@ -441,8 +441,16 @@ public partial class PopupWindow : System.Windows.Window
 
         if (_pinned)
         {
-            // 핀 고정 모드: 팝업 유지, 상태바에 복사 확인 표시
+            // 핀 고정 모드: 팝업 유지 + 이전 창에 붙여넣기 후 팝업 다시 활성화
             StatusText.Text = $"삽입됨: {entry.Char}  {entry.Name}";
+            if (_targetHwnd != IntPtr.Zero)
+            {
+                await Task.Delay(50);
+                InputHelper.PasteToWindow(_targetHwnd);
+                await Task.Delay(100);
+                // 팝업을 다시 최상위로 가져옴
+                SetForegroundWindow(new WindowInteropHelper(this).Handle);
+            }
             return;
         }
 
@@ -540,6 +548,11 @@ public partial class PopupWindow : System.Windows.Window
 
     private void CloseBtn_Click(object sender, RoutedEventArgs e) => Hide();
 
+    public void RefreshIfRecentTab()
+    {
+        if (_activeTab == "recent") RefreshGrid();
+    }
+
     public void ShowHelpOverlay()
         => Dispatcher.BeginInvoke(() => HelpOverlay.Visibility = Visibility.Visible,
                                   DispatcherPriority.Loaded);
@@ -556,6 +569,6 @@ public partial class PopupWindow : System.Windows.Window
 
     private void Window_Deactivated(object sender, EventArgs e)
     {
-        if (IsVisible) Hide();
+        if (IsVisible && !_pinned) Hide();
     }
 }

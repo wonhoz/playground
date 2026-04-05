@@ -131,8 +131,11 @@
                         Visibility="Collapsed"
                         Panel.ZIndex="10"
                         MouseDown="HelpOverlay_MouseDown">
-                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center"
-                                Margin="24">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto"
+                                  HorizontalScrollBarVisibility="Disabled"
+                                  Padding="0,0,6,0">
+                    <StackPanel HorizontalAlignment="Center"
+                                Margin="24,16,24,16">
                         <TextBlock Text="⌨ 단축키 안내"
                                    FontFamily="Segoe UI" FontSize="14" FontWeight="SemiBold"
                                    Foreground="{StaticResource AccentBrush}"
@@ -200,6 +203,7 @@
                                        HorizontalAlignment="Center" Margin="0,16,0,0"/>
                         </Grid>
                     </StackPanel>
+                    </ScrollViewer>
                 </Border>
             </Grid>
 

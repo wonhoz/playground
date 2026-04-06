@@ -1626,7 +1626,14 @@ public partial class MainWindow : Window
             // 뷰포트 최상단 문자 → 첫 논리 줄
             int topCharIdx = Editor.GetCharacterIndexFromPoint(new Point(leftX, 1), snapToText: true);
             int firstLine  = CountNewlinesBefore(text, topCharIdx) + 1;
-            int lastLine   = Math.Min(totalLines, firstLine + 50); // 초과분은 ClipToBounds 처리
+
+            // 표시 가능 줄 수 = Canvas 높이 / 줄 높이, 최소 60 보장 (최대화·4K 대응)
+            int lineStartIdx0 = topCharIdx > 0 ? text.LastIndexOf('\n', topCharIdx - 1) + 1 : 0;
+            double measuredLH = Editor.GetRectFromCharacterIndex(lineStartIdx0).Height;
+            double canvasH    = LineNumCanvas.ActualHeight > 0 ? LineNumCanvas.ActualHeight : 800;
+            int    bufLines   = Math.Max(60, (int)Math.Ceiling(canvasH / (measuredLH > 0 ? measuredLH : 18.0)) + 5);
+
+            int lastLine   = Math.Min(totalLines, firstLine + bufLines);
             int needed     = lastLine - firstLine + 1;
 
             // Canvas.Children 재사용 풀 확장
@@ -1644,8 +1651,8 @@ public partial class MainWindow : Window
             for (int i = needed; i < LineNumCanvas.Children.Count; i++)
                 ((TextBlock)LineNumCanvas.Children[i]).Visibility = Visibility.Collapsed;
 
-            // 각 논리 줄의 시작 문자 인덱스
-            int charIdx = topCharIdx > 0 ? text.LastIndexOf('\n', topCharIdx - 1) + 1 : 0;
+            // 각 논리 줄의 시작 문자 인덱스 (위에서 계산한 lineStartIdx0 재사용)
+            int charIdx = lineStartIdx0;
             for (int i = 0; i < needed; i++)
             {
                 var tb = (TextBlock)LineNumCanvas.Children[i];

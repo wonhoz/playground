@@ -495,7 +495,7 @@ namespace StayAwake
                 }
             }
 
-            DarkInfoDialog.Show("통계", sb.ToString(), 500, history.Count > 0 ? 605 : 450);
+            DarkInfoDialog.Show("통계", sb.ToString(), 500, history.Count > 0 ? (int)(605 + 27.5 * (history.Count - 1)) : 450);
         }
 
         private void ShowAbout()

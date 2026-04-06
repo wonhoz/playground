@@ -27,6 +27,7 @@ public class AppSettings
     public bool IsMaximized { get; set; } = false;
     public bool IsFocusMode { get; set; } = false;
     public bool IsWordWrap { get; set; } = true;
+    public string ExportDir { get; set; } = "";
 
     private const int MaxRecentFiles = 10;
 

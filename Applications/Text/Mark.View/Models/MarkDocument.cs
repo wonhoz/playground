@@ -4,6 +4,7 @@ namespace MarkView.Models;
 
 public class MarkDocument
 {
+    public Guid Id { get; } = Guid.NewGuid();
     public string FilePath { get; set; } = string.Empty;
     public string Content { get; set; } = string.Empty;
     public bool IsModified { get; set; }

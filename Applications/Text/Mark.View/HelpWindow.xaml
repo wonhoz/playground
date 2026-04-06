@@ -109,8 +109,9 @@
             <TextBlock Text="내보내기" Style="{StaticResource Cat}"/>
             <ItemsControl ItemTemplate="{StaticResource RowTpl}">
               <ItemsControl.Items>
-                <local:ShortcutEntry Key="Ctrl + Shift + E" Desc="HTML로 내보내기"/>
-                <local:ShortcutEntry Key="Ctrl + P"         Desc="PDF로 내보내기"/>
+                <local:ShortcutEntry Key="Ctrl + Shift + E" Desc="HTML로 내보내기 (마지막 경로 기억)"/>
+                <local:ShortcutEntry Key="Ctrl + P"         Desc="PDF로 내보내기 (마지막 경로 기억)"/>
+                <local:ShortcutEntry Key="Ctrl + Shift + C" Desc="현재 문서 HTML을 클립보드에 복사"/>
               </ItemsControl.Items>
             </ItemsControl>
 
@@ -138,8 +139,9 @@
                 <local:ShortcutEntry Key="Enter"         Desc="다음 결과로 이동"/>
                 <local:ShortcutEntry Key="Shift + Enter" Desc="이전 결과로 이동"/>
                 <local:ShortcutEntry Key="▲ / ▼ 버튼"   Desc="이전/다음 찾기 결과 이동 — 결과 표시: 현재 / 전체 (예: 3 / 12)"/>
+                <local:ShortcutEntry Key="검색 하이라이트" Desc="검색어 입력 시 뷰어에서 모든 일치 항목을 황색으로 동시 표시"/>
                 <local:ShortcutEntry Key="Ctrl + H"      Desc="찾기/바꾸기 바 토글 (편집 모드)"/>
-                <local:ShortcutEntry Key="Esc"           Desc="찾기 초기화"/>
+                <local:ShortcutEntry Key="Esc"           Desc="찾기 초기화 및 하이라이트 제거"/>
               </ItemsControl.Items>
             </ItemsControl>
 
@@ -175,7 +177,7 @@
             <TextBlock Text="에디터" Style="{StaticResource Cat}"/>
             <ItemsControl ItemTemplate="{StaticResource RowTpl}">
               <ItemsControl.Items>
-                <local:ShortcutEntry Key="Ctrl + E"           Desc="편집 모드 전환 (서식 도구모음 표시)"/>
+                <local:ShortcutEntry Key="Ctrl + E"           Desc="편집 모드 전환 (서식 도구모음 + 줄 번호 표시)"/>
                 <local:ShortcutEntry Key="Ctrl + B"           Desc="굵게 (선택 텍스트를 **bold** 처리)"/>
                 <local:ShortcutEntry Key="Ctrl + I"           Desc="기울임 (선택 텍스트를 *italic* 처리)"/>
                 <local:ShortcutEntry Key="Ctrl + K"           Desc="링크 삽입 [텍스트]() — 괄호 안에 URL 입력"/>
@@ -189,6 +191,7 @@
                 <local:ShortcutEntry Key="Shift + Tab"        Desc="내어쓰기 / 범위 내어쓰기"/>
                 <local:ShortcutEntry Key="Ctrl + Shift + V"   Desc="클립보드를 새 탭으로 열기"/>
                 <local:ShortcutEntry Key="이미지 파일 D&amp;D" Desc="편집 모드에서 이미지 드래그 → ![alt](path) 자동 삽입"/>
+                <local:ShortcutEntry Key="줄 번호"            Desc="편집 모드 진입 시 에디터 왼쪽에 줄 번호 자동 표시 (스크롤 동기화)"/>
               </ItemsControl.Items>
             </ItemsControl>
 

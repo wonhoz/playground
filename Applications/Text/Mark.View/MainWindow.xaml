@@ -219,6 +219,11 @@
                   ToolTip="HTML로 내보내기 (Ctrl+Shift+E)" Margin="0,0,2,0" Padding="8,5">
             <TextBlock Text="&#x1F4E4;" FontSize="14"/>
           </Button>
+          <!-- 클립보드 HTML 복사 -->
+          <Button Style="{StaticResource IconButton}" Click="BtnCopyHtml_Click"
+                  ToolTip="HTML 클립보드 복사 (Ctrl+Shift+C)" Margin="0,0,2,0" Padding="8,5">
+            <TextBlock Text="&#x1F5D0;" FontSize="14"/>
+          </Button>
           <!-- PDF 내보내기 -->
           <Button Style="{StaticResource IconButton}" Click="BtnExportPdf_Click"
                   ToolTip="PDF로 내보내기 (Ctrl+P)" Margin="0,0,2,0" Padding="8,5">
@@ -486,22 +491,45 @@
                   Background="{StaticResource SurfaceBrush}"
                   BorderBrush="{StaticResource BorderBrush}"
                   BorderThickness="0,0,1,0">
-            <TextBox x:Name="Editor"
-                     AcceptsReturn="True"
-                     AcceptsTab="True"
-                     TextWrapping="Wrap"
-                     VerticalScrollBarVisibility="Auto"
-                     HorizontalScrollBarVisibility="Auto"
-                     Background="#060E1A"
-                     Foreground="#D8E8F8"
-                     BorderThickness="0"
-                     Padding="16"
-                     FontFamily="Cascadia Code, Consolas, monospace"
-                     FontSize="13"
-                     CaretBrush="#4A9EF5"
-                     SelectionBrush="#4A9EF5"
-                     TextChanged="Editor_TextChanged"
-                     KeyDown="Editor_KeyDown"/>
+            <Grid>
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition x:Name="LineNumColumn" Width="0"/>
+                <ColumnDefinition Width="*"/>
+              </Grid.ColumnDefinitions>
+              <!-- 줄 번호 패널 -->
+              <TextBox x:Name="LineNumbers"
+                       Grid.Column="0"
+                       IsReadOnly="True" IsHitTestVisible="False"
+                       AcceptsReturn="True" TextWrapping="NoWrap"
+                       VerticalScrollBarVisibility="Hidden"
+                       HorizontalScrollBarVisibility="Hidden"
+                       Background="#060E1A"
+                       Foreground="#3A5A7A"
+                       BorderThickness="0,0,1,0"
+                       BorderBrush="{StaticResource BorderBrush}"
+                       Padding="6,16,6,0"
+                       FontFamily="Cascadia Code, Consolas, monospace"
+                       FontSize="13"
+                       TextAlignment="Right"/>
+              <!-- 에디터 -->
+              <TextBox x:Name="Editor"
+                       Grid.Column="1"
+                       AcceptsReturn="True"
+                       AcceptsTab="True"
+                       TextWrapping="Wrap"
+                       VerticalScrollBarVisibility="Auto"
+                       HorizontalScrollBarVisibility="Auto"
+                       Background="#060E1A"
+                       Foreground="#D8E8F8"
+                       BorderThickness="0"
+                       Padding="16"
+                       FontFamily="Cascadia Code, Consolas, monospace"
+                       FontSize="13"
+                       CaretBrush="#4A9EF5"
+                       SelectionBrush="#4A9EF5"
+                       TextChanged="Editor_TextChanged"
+                       KeyDown="Editor_KeyDown"/>
+            </Grid>
           </Border>
 
           <GridSplitter x:Name="EditorSplitter"

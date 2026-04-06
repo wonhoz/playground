@@ -319,12 +319,16 @@ public partial class MainWindow : Window
         _ = ExtractTocAsync();
         _ = InjectCopyButtonsAsync();
         _ = InjectImageLightboxAsync();
+        _ = InjectSearchHighlightFunctionAsync();
         if (_pendingScrollY > 0)
             _ = RestoreScrollAsync();
         if (_isTocVisible)
             _ = InjectTocScrollMonitorAsync();
         if (_previewFontSize != 15)
             _ = ApplyPreviewFontSizeAsync();
+        // 현재 검색어가 있으면 하이라이트 복원
+        if (!string.IsNullOrEmpty(TxtFind.Text))
+            _ = ApplySearchHighlightAsync(TxtFind.Text);
     }
 
     private async Task InjectCopyButtonsAsync()
@@ -411,6 +415,71 @@ public partial class MainWindow : Window
         });
     });
 })()");
+        }
+        catch { }
+    }
+
+    private async Task InjectSearchHighlightFunctionAsync()
+    {
+        if (!_webViewReady) return;
+        try
+        {
+            await Viewer.ExecuteScriptAsync(@"
+(function() {
+    window.__searchHighlight = function(keyword) {
+        // 기존 하이라이트 제거
+        document.querySelectorAll('.__shl').forEach(function(el) {
+            var parent = el.parentNode;
+            parent.replaceChild(document.createTextNode(el.textContent), el);
+            parent.normalize();
+        });
+        if (!keyword) return;
+        var lower = keyword.toLowerCase();
+        var walk = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+            acceptNode: function(node) {
+                var p = node.parentNode;
+                if (!p) return NodeFilter.FILTER_REJECT;
+                var tag = p.tagName ? p.tagName.toLowerCase() : '';
+                if (tag === 'script' || tag === 'style' || tag === 'textarea') return NodeFilter.FILTER_REJECT;
+                return NodeFilter.FILTER_ACCEPT;
+            }
+        });
+        var nodes = [];
+        while (walk.nextNode()) nodes.push(walk.currentNode);
+        nodes.forEach(function(node) {
+            var text = node.nodeValue;
+            if (!text) return;
+            var lowerText = text.toLowerCase();
+            var idx = lowerText.indexOf(lower);
+            if (idx < 0) return;
+            var frag = document.createDocumentFragment();
+            var pos = 0;
+            while (idx >= 0) {
+                if (idx > pos) frag.appendChild(document.createTextNode(text.slice(pos, idx)));
+                var span = document.createElement('span');
+                span.className = '__shl';
+                span.style.cssText = 'background:#FFD700;color:#1a1a1a;border-radius:2px;padding:0 1px;';
+                span.textContent = text.slice(idx, idx + keyword.length);
+                frag.appendChild(span);
+                pos = idx + keyword.length;
+                idx = lowerText.indexOf(lower, pos);
+            }
+            if (pos < text.length) frag.appendChild(document.createTextNode(text.slice(pos)));
+            node.parentNode.replaceChild(frag, node);
+        });
+    };
+})()");
+        }
+        catch { }
+    }
+
+    private async Task ApplySearchHighlightAsync(string keyword)
+    {
+        if (!_webViewReady) return;
+        try
+        {
+            var kw = System.Text.Json.JsonSerializer.Serialize(keyword);
+            await Viewer.ExecuteScriptAsync($"window.__searchHighlight && window.__searchHighlight({kw})");
         }
         catch { }
     }
@@ -581,6 +650,8 @@ public partial class MainWindow : Window
         _editorScrollViewer = FindVisualChild<ScrollViewer>(Editor);
         if (_editorScrollViewer != null)
             _editorScrollViewer.ScrollChanged += EditorScrollViewer_ScrollChanged;
+        // 줄 번호 패널 ScrollViewer 탐색
+        _lineNumScrollViewer = FindVisualChild<ScrollViewer>(LineNumbers);
         // 커서 위치 추적
         Editor.SelectionChanged += Editor_SelectionChanged;
     }
@@ -599,6 +670,10 @@ public partial class MainWindow : Window
 
     private void EditorScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e)
     {
+        // 줄 번호 스크롤 동기화
+        if (_lineNumScrollViewer != null && LineNumColumn.Width.Value > 0)
+            _lineNumScrollViewer.ScrollToVerticalOffset(_editorScrollViewer?.VerticalOffset ?? 0);
+
         if (!_isEditMode || !_webViewReady || _suppressEditorChange) return;
         if (_editorScrollViewer == null || _editorScrollViewer.ScrollableHeight <= 0) return;
         var ratio = _editorScrollViewer.VerticalOffset / _editorScrollViewer.ScrollableHeight;
@@ -643,7 +718,7 @@ public partial class MainWindow : Window
             foreach (var doc in modified)
             {
                 var baseName = doc.IsNew
-                    ? "unsaved"
+                    ? "unsaved_" + doc.Id.ToString("N")[..8]
                     : Path.GetFileNameWithoutExtension(doc.FilePath);
                 var path = Path.Combine(autoSaveDir, baseName + ".autosave.md");
                 File.WriteAllText(path, doc.Content, new UTF8Encoding(true));
@@ -827,7 +902,7 @@ public partial class MainWindow : Window
                 MessageBoxButton.YesNoCancel,
                 MessageBoxImage.Question);
             if (result == MessageBoxResult.Cancel) return;
-            if (result == MessageBoxResult.Yes) SaveDocument(doc);
+            if (result == MessageBoxResult.Yes && !SaveDocument(doc)) return;
         }
 
         if (!doc.IsNew) RemoveFileWatcher(doc.FilePath);
@@ -902,6 +977,8 @@ public partial class MainWindow : Window
             StatusMode.Text = "편집";
             StatusCursor.Visibility = Visibility.Visible;
             FormatBar.Visibility = Visibility.Visible;
+            LineNumColumn.Width = new GridLength(42);
+            UpdateLineNumbers();
         }
         else
         {
@@ -912,6 +989,7 @@ public partial class MainWindow : Window
             StatusCursor.Visibility = Visibility.Collapsed;
             StatusUndo.Visibility = Visibility.Collapsed;
             FormatBar.Visibility = Visibility.Collapsed;
+            LineNumColumn.Width = new GridLength(0);
         }
         _settings.IsEditMode = editMode;
         _settings.Save();
@@ -1054,7 +1132,9 @@ public partial class MainWindow : Window
         var autoSaveDir = Path.Combine(
             Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
             "MarkView", "autosave");
-        var baseName = doc.IsNew ? "unsaved" : Path.GetFileNameWithoutExtension(doc.FilePath);
+        var baseName = doc.IsNew
+            ? "unsaved_" + doc.Id.ToString("N")[..8]
+            : Path.GetFileNameWithoutExtension(doc.FilePath);
         var path = Path.Combine(autoSaveDir, baseName + ".autosave.md");
         if (File.Exists(path)) try { File.Delete(path); } catch { }
     }
@@ -1123,9 +1203,11 @@ public partial class MainWindow : Window
             _findMatchCount = 0;
             StatusFind.Visibility = Visibility.Collapsed;
             _ = Viewer.ExecuteScriptAsync("window.getSelection()?.removeAllRanges()");
+            _ = ApplySearchHighlightAsync("");
             return;
         }
         _findCurrentIndex = 0; // 검색어 변경 시 초기화
+        _ = ApplySearchHighlightAsync(keyword);
         _ = FindInPreviewAsync(keyword, reverse: false);
         if (_isEditMode) FindInEditor(keyword);
     }
@@ -1249,7 +1331,8 @@ public partial class MainWindow : Window
         }
         if (count > 0)
         {
-            Editor.Text = sb.ToString();
+            Editor.Select(0, Editor.Text.Length);
+            Editor.SelectedText = sb.ToString();
             Editor.CaretIndex = Editor.Text.Length;
         }
         ShowReplaceStatus(count > 0 ? $"{count}개 변경" : "없음");
@@ -1259,9 +1342,10 @@ public partial class MainWindow : Window
     {
         StatusReplace.Text = msg;
         StatusReplace.Visibility = Visibility.Visible;
-        var t = new DispatcherTimer { Interval = TimeSpan.FromSeconds(2) };
-        t.Tick += (_, _) => { t.Stop(); StatusReplace.Visibility = Visibility.Collapsed; };
-        t.Start();
+        _replaceStatusTimer?.Stop();
+        _replaceStatusTimer ??= new DispatcherTimer { Interval = TimeSpan.FromSeconds(2) };
+        _replaceStatusTimer.Tick += (_, _) => { _replaceStatusTimer.Stop(); StatusReplace.Visibility = Visibility.Collapsed; };
+        _replaceStatusTimer.Start();
     }
 
     private void BtnFindPrev_Click(object sender, RoutedEventArgs e)
@@ -1395,8 +1479,13 @@ public partial class MainWindow : Window
             DefaultExt = ".pdf",
             FileName = System.IO.Path.GetFileNameWithoutExtension(doc.FileName) + ".pdf",
         };
-        if (doc.Directory != null) dlg.InitialDirectory = doc.Directory;
+        var initDir = !string.IsNullOrEmpty(_settings.ExportDir) && Directory.Exists(_settings.ExportDir)
+            ? _settings.ExportDir
+            : doc.Directory;
+        if (initDir != null) dlg.InitialDirectory = initDir;
         if (dlg.ShowDialog() != true) return;
+        _settings.ExportDir = System.IO.Path.GetDirectoryName(dlg.FileName) ?? "";
+        _settings.Save();
 
         await ShowLoadingAsync("PDF 내보내기 중...");
         try
@@ -1424,8 +1513,14 @@ public partial class MainWindow : Window
             DefaultExt = ".html",
             FileName = System.IO.Path.GetFileNameWithoutExtension(doc.FileName) + ".html",
         };
-        if (doc.Directory != null) dlg.InitialDirectory = doc.Directory;
+        var initDir = !string.IsNullOrEmpty(_settings.ExportDir) && Directory.Exists(_settings.ExportDir)
+            ? _settings.ExportDir
+            : doc.Directory;
+        if (initDir != null) dlg.InitialDirectory = initDir;
         if (dlg.ShowDialog() != true) return;
+
+        _settings.ExportDir = System.IO.Path.GetDirectoryName(dlg.FileName) ?? "";
+        _settings.Save();
 
         await ShowLoadingAsync("HTML 내보내기 중...");
         var content = doc.Content;
@@ -1450,6 +1545,33 @@ public partial class MainWindow : Window
         }
     }
 
+    private async void BtnCopyHtml_Click(object sender, RoutedEventArgs e)
+    {
+        if (_activeIndex < 0) return;
+        var doc = _docs[_activeIndex];
+        var content = doc.Content;
+        var filePath = doc.IsNew ? null : doc.FilePath;
+        var theme = _currentTheme;
+        await ShowLoadingAsync("HTML 생성 중...");
+        try
+        {
+            var html = await Task.Run(() => _renderer.RenderToHtml(content, filePath, theme));
+            Clipboard.SetText(html);
+            HideLoading();
+            var prev = StatusPath.Text;
+            StatusPath.Text = "HTML 클립보드 복사 완료";
+            var t = new DispatcherTimer { Interval = TimeSpan.FromSeconds(2) };
+            t.Tick += (_, _) => { t.Stop(); StatusPath.Text = prev; };
+            t.Start();
+        }
+        catch (Exception ex)
+        {
+            HideLoading();
+            MessageBox.Show($"클립보드 복사 실패:\n{ex.Message}", "오류",
+                MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+    }
+
     private void Editor_TextChanged(object sender, TextChangedEventArgs e)
     {
         if (_suppressEditorChange || _activeIndex < 0) return;
@@ -1462,11 +1584,25 @@ public partial class MainWindow : Window
             Title = $"Mark.View — {doc.TabTitle}";
         }
         UpdateStatusBar(doc);
+        if (_isEditMode) UpdateLineNumbers();
         _previewTimer?.Stop();
         _previewTimer?.Start();
         // 자동 저장 타이머 재시작 (30초 비활동 후 저장)
         _autoSaveTimer?.Stop();
         _autoSaveTimer?.Start();
+    }
+
+    private void UpdateLineNumbers()
+    {
+        if (LineNumColumn.Width.Value <= 0) return;
+        var lineCount = Editor.LineCount > 0 ? Editor.LineCount : Editor.Text.Split('\n').Length;
+        var sb = new System.Text.StringBuilder(lineCount * 4);
+        for (int i = 1; i <= lineCount; i++)
+        {
+            if (i > 1) sb.Append('\n');
+            sb.Append(i);
+        }
+        LineNumbers.Text = sb.ToString();
     }
 
     private void WrapSelection(string before, string after)
@@ -1673,6 +1809,8 @@ public partial class MainWindow : Window
         { ShowHelp(); e.Handled = true; }
         else if (e.Key == Key.H && Keyboard.Modifiers == ModifierKeys.Control)
         { ToggleReplaceBar(); e.Handled = true; }
+        else if (e.Key == Key.C && Keyboard.Modifiers == (ModifierKeys.Control | ModifierKeys.Shift))
+        { BtnCopyHtml_Click(this, new RoutedEventArgs()); e.Handled = true; }
         else if (e.Key == Key.V && Keyboard.Modifiers == (ModifierKeys.Control | ModifierKeys.Shift))
         { PasteClipboardAsNewTab(); e.Handled = true; }
         else if (e.Key == Key.Z && Keyboard.Modifiers == ModifierKeys.Alt)
@@ -1810,7 +1948,9 @@ public partial class MainWindow : Window
         }
     }
 
+    private DispatcherTimer? _replaceStatusTimer;
     private DispatcherTimer? _fileChangedDebounce;
+    private ScrollViewer? _lineNumScrollViewer;
 
     private void OnWatchedFileChanged(object sender, FileSystemEventArgs e)
     {

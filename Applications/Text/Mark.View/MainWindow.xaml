@@ -496,21 +496,18 @@
                 <ColumnDefinition x:Name="LineNumColumn" Width="0"/>
                 <ColumnDefinition Width="*"/>
               </Grid.ColumnDefinitions>
-              <!-- 줄 번호 패널 -->
-              <TextBox x:Name="LineNumbers"
-                       Grid.Column="0"
-                       IsReadOnly="True" IsHitTestVisible="False"
-                       AcceptsReturn="True" TextWrapping="NoWrap"
-                       VerticalScrollBarVisibility="Hidden"
-                       HorizontalScrollBarVisibility="Hidden"
-                       Background="#060E1A"
-                       Foreground="#3A5A7A"
-                       BorderThickness="0,0,1,0"
-                       BorderBrush="{StaticResource BorderBrush}"
-                       Padding="6,16,6,0"
-                       FontFamily="Cascadia Code, Consolas, monospace"
-                       FontSize="13"
-                       TextAlignment="Right"/>
+              <!-- 줄 번호 패널 (Canvas + Canvas.SetTop 방식 — LayoutClip 제한 없이 모든 줄 렌더링) -->
+              <Border Grid.Column="0" Background="#060E1A"
+                      BorderBrush="{StaticResource BorderBrush}" BorderThickness="0,0,1,0"
+                      ClipToBounds="True">
+                <Canvas>
+                  <TextBlock x:Name="LineNumbers"
+                             FontFamily="Cascadia Code, Consolas, monospace"
+                             FontSize="13" Foreground="#5A7A9A"
+                             TextAlignment="Right"
+                             Padding="0,0,8,0"/>
+                </Canvas>
+              </Border>
               <!-- 에디터 -->
               <TextBox x:Name="Editor"
                        Grid.Column="1"

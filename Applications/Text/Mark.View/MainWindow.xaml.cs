@@ -30,7 +30,7 @@ public partial class MainWindow : Window
     private bool _suppressTocSelection;
     private HelpWindow? _helpWindow;
     private DispatcherTimer? _previewTimer;
-    private ScrollViewer? _editorScrollViewer;
+
     private DispatcherTimer? _autoSaveTimer;
     private string _currentTheme = "dark";
     private double _pendingScrollY = 0;
@@ -646,12 +646,10 @@ public partial class MainWindow : Window
 
     private void OnMainWindowLoaded(object sender, RoutedEventArgs e)
     {
-        // 에디터 내부 ScrollViewer 탐색 후 스크롤 동기화 구독
-        _editorScrollViewer = FindVisualChild<ScrollViewer>(Editor);
-        if (_editorScrollViewer != null)
-            _editorScrollViewer.ScrollChanged += EditorScrollViewer_ScrollChanged;
-        // 줄 번호 패널 ScrollViewer 탐색
-        _lineNumScrollViewer = FindVisualChild<ScrollViewer>(LineNumbers);
+        // ScrollChangedEvent를 Editor 요소에 직접 구독 — ContentArea.Visibility=Collapsed 상태에서도 작동
+        // (내부 ScrollViewer의 ScrollChanged가 Editor 방향으로 버블링됨)
+        Editor.AddHandler(ScrollViewer.ScrollChangedEvent,
+            new ScrollChangedEventHandler(EditorScrollViewer_ScrollChanged));
         // 커서 위치 추적
         Editor.SelectionChanged += Editor_SelectionChanged;
     }
@@ -670,13 +668,14 @@ public partial class MainWindow : Window
 
     private void EditorScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e)
     {
-        // 줄 번호 스크롤 동기화
-        if (_lineNumScrollViewer != null && LineNumColumn.Width.Value > 0)
-            _lineNumScrollViewer.ScrollToVerticalOffset(_editorScrollViewer?.VerticalOffset ?? 0);
+        // 줄 번호 스크롤 동기화 — GetRectFromCharacterIndex(0).Top이 실제 첫 글자 Y를 정확히 반환
+        if (LineNumColumn.Width.Value > 0)
+            SyncLineNumberOffset();
 
+        // 뷰어 스크롤 동기화 (편집 모드에서만)
         if (!_isEditMode || !_webViewReady || _suppressEditorChange) return;
-        if (_editorScrollViewer == null || _editorScrollViewer.ScrollableHeight <= 0) return;
-        var ratio = _editorScrollViewer.VerticalOffset / _editorScrollViewer.ScrollableHeight;
+        if (e.ExtentHeight <= e.ViewportHeight) return;
+        var ratio = e.VerticalOffset / (e.ExtentHeight - e.ViewportHeight);
         _ = Viewer.ExecuteScriptAsync(
             $"(function(){{var h=document.documentElement.scrollHeight-window.innerHeight;" +
             $"if(h>0)window.scrollTo(0,h*{ratio.ToString(System.Globalization.CultureInfo.InvariantCulture)});}})()");
@@ -872,6 +871,7 @@ public partial class MainWindow : Window
         Editor.Text = doc.Content;
         _suppressEditorChange = false;
 
+        if (_isEditMode) UpdateLineNumbers();
         RenderPreview();
         UpdateStatusBar(doc);
         Title = $"Mark.View — {doc.TabTitle}";
@@ -977,7 +977,7 @@ public partial class MainWindow : Window
             StatusMode.Text = "편집";
             StatusCursor.Visibility = Visibility.Visible;
             FormatBar.Visibility = Visibility.Visible;
-            LineNumColumn.Width = new GridLength(42);
+            LineNumColumn.Width = new GridLength(52);
             UpdateLineNumbers();
         }
         else
@@ -1595,7 +1595,13 @@ public partial class MainWindow : Window
     private void UpdateLineNumbers()
     {
         if (LineNumColumn.Width.Value <= 0) return;
-        var lineCount = Editor.LineCount > 0 ? Editor.LineCount : Editor.Text.Split('\n').Length;
+        // 논리 줄 수 — Editor.LineCount는 Word Wrap 시 시각적 줄 수를 반환하므로 사용 금지
+        var lineCount = Editor.Text.Split('\n').Length;
+        // 자릿수에 따라 컬럼 너비 동적 조정 (Cascadia Code 13px 기준 digit ≈ 8.5px, 여백 24px)
+        var digits = lineCount.ToString().Length;
+        var colWidth = Math.Max(52, digits * 9 + 24);
+        if (Math.Abs(LineNumColumn.Width.Value - colWidth) > 1)
+            LineNumColumn.Width = new GridLength(colWidth);
         var sb = new System.Text.StringBuilder(lineCount * 4);
         for (int i = 1; i <= lineCount; i++)
         {
@@ -1603,6 +1609,26 @@ public partial class MainWindow : Window
             sb.Append(i);
         }
         LineNumbers.Text = sb.ToString();
+        // Canvas 내에서 너비가 자동 계산되지 않으므로 명시적으로 설정 (border 1px 제외)
+        LineNumbers.Width = colWidth - 1;
+        // 레이아웃 패스 완료 후 위치 동기화
+        Dispatcher.InvokeAsync(SyncLineNumberOffset, System.Windows.Threading.DispatcherPriority.Loaded);
+    }
+
+    // GetRectFromCharacterIndex(0).Top = TextBox 좌표계에서 첫 글자 Y 위치
+    // Line numbers TextBlock과 TextBox는 같은 Grid 행이므로 Y 기준점이 동일 → Canvas.SetTop 직접 대입
+    private void SyncLineNumberOffset()
+    {
+        if (LineNumColumn.Width.Value <= 0) return;
+        try
+        {
+            var r = Editor.GetRectFromCharacterIndex(0);
+            Canvas.SetTop(LineNumbers, r.Top);
+        }
+        catch
+        {
+            Canvas.SetTop(LineNumbers, Editor.Padding.Top);
+        }
     }
 
     private void WrapSelection(string before, string after)
@@ -1950,7 +1976,6 @@ public partial class MainWindow : Window
 
     private DispatcherTimer? _replaceStatusTimer;
     private DispatcherTimer? _fileChangedDebounce;
-    private ScrollViewer? _lineNumScrollViewer;
 
     private void OnWatchedFileChanged(object sender, FileSystemEventArgs e)
     {

@@ -34,12 +34,18 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="ScrollBar">
                         <Grid>
-                            <Track x:Name="PART_Track" IsDirectionReversed="True">
+                            <!-- 가로 기본값 False, 세로는 ControlTemplate.Triggers에서 True로 덮어씀 -->
+                            <Track x:Name="PART_Track" IsDirectionReversed="False">
                                 <Track.Thumb>
                                     <Thumb Template="{StaticResource DarkThumbTemplate}"/>
                                 </Track.Thumb>
                             </Track>
                         </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="Orientation" Value="Vertical">
+                                <Setter TargetName="PART_Track" Property="IsDirectionReversed" Value="True"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>

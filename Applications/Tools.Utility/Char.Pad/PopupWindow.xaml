@@ -58,33 +58,53 @@
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="⌨ Char.Pad"
                            Foreground="{StaticResource AccentBrush}"
                            FontFamily="Segoe UI"
                            FontSize="14" FontWeight="SemiBold"
                            VerticalAlignment="Center"/>
-                <Button x:Name="AddCustomBtn"
+                <!-- 최근 탭 전용: 최근 사용 초기화 -->
+                <Button x:Name="ClearRecentsBtn"
                         Grid.Column="1" Width="28" Height="28"
+                        Content="🗑" FontSize="11"
+                        Foreground="{StaticResource TextSecondary}"
+                        Background="Transparent"
+                        Visibility="Collapsed"
+                        Click="ClearRecentsBtn_Click"
+                        ToolTip="최근 사용 목록 초기화"/>
+                <!-- 커스텀 탭 전용: 정렬 전환 -->
+                <Button x:Name="SortCustomBtn"
+                        Grid.Column="2" Width="28" Height="28"
+                        Content="↕" FontSize="12"
+                        Foreground="{StaticResource TextSecondary}"
+                        Background="Transparent"
+                        Visibility="Collapsed"
+                        Click="SortCustomBtn_Click"
+                        ToolTip="정렬 전환 (추가순 / 이름순)"/>
+                <Button x:Name="AddCustomBtn"
+                        Grid.Column="3" Width="28" Height="28"
                         Content="+" FontSize="14" FontWeight="SemiBold"
                         Foreground="{StaticResource TextSecondary}"
                         Background="Transparent"
                         Click="AddCustomBtn_Click"
                         ToolTip="사용자 정의 문자 추가"/>
                 <Button x:Name="PinBtn"
-                        Grid.Column="2" Width="28" Height="28"
+                        Grid.Column="4" Width="28" Height="28"
                         Content="📌" FontSize="11"
                         Foreground="{StaticResource TextSecondary}"
                         Background="Transparent"
                         Click="PinBtn_Click"
                         ToolTip="핀 고정 — 삽입 후 팝업 유지 (이전 창에 자동 붙여넣기)"/>
-                <Button Grid.Column="3" Width="28" Height="28"
+                <Button Grid.Column="5" Width="28" Height="28"
                         Content="?" FontSize="12" FontWeight="SemiBold"
                         Foreground="{StaticResource TextSecondary}"
                         Background="Transparent"
                         Click="HelpBtn_Click"
                         ToolTip="단축키 안내"/>
-                <Button Grid.Column="4" Width="28" Height="28"
+                <Button Grid.Column="6" Width="28" Height="28"
                         Content="✕" FontSize="11"
                         Foreground="{StaticResource TextSecondary}"
                         Background="Transparent"
@@ -173,6 +193,9 @@
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
                             <!-- 단축키 행들 -->
@@ -204,7 +227,7 @@
                             <TextBlock Grid.Row="8" Grid.Column="2" Text="클립보드 복사만 (붙여넣기 없음)" Style="{StaticResource DescStyle}"/>
 
                             <TextBlock Grid.Row="9" Grid.Column="0" Text="우클릭 / F (그리드)" Style="{StaticResource KeyStyle}"/>
-                            <TextBlock Grid.Row="9" Grid.Column="2" Text="즐겨찾기 추가/제거 (사용자 탭: 삭제)" Style="{StaticResource DescStyle}"/>
+                            <TextBlock Grid.Row="9" Grid.Column="2" Text="즐겨찾기 추가/제거 (사용자 탭: 편집/삭제 메뉴)" Style="{StaticResource DescStyle}"/>
 
                             <TextBlock Grid.Row="10" Grid.Column="0" Text="Ctrl+휠"            Style="{StaticResource KeyStyle}"/>
                             <TextBlock Grid.Row="10" Grid.Column="2" Text="문자 크기 조절 (14~36px)" Style="{StaticResource DescStyle}"/>
@@ -218,7 +241,16 @@
                             <TextBlock Grid.Row="13" Grid.Column="0" Text="⠿ 핸들 드래그"     Style="{StaticResource KeyStyle}"/>
                             <TextBlock Grid.Row="13" Grid.Column="2" Text="팝업 크기 조절 (크기 자동 저장)"  Style="{StaticResource DescStyle}"/>
 
-                            <TextBlock Grid.Row="14" Grid.Column="0" Grid.ColumnSpan="3"
+                            <TextBlock Grid.Row="14" Grid.Column="0" Text="🗑 버튼 (최근 탭)"  Style="{StaticResource KeyStyle}"/>
+                            <TextBlock Grid.Row="14" Grid.Column="2" Text="최근 사용 목록 초기화" Style="{StaticResource DescStyle}"/>
+
+                            <TextBlock Grid.Row="15" Grid.Column="0" Text="↕/↑A (사용자 탭)"  Style="{StaticResource KeyStyle}"/>
+                            <TextBlock Grid.Row="15" Grid.Column="2" Text="커스텀 문자 정렬 전환 (추가순 ↔ 이름순)" Style="{StaticResource DescStyle}"/>
+
+                            <TextBlock Grid.Row="16" Grid.Column="0" Text="검색 결과 배지"     Style="{StaticResource KeyStyle}"/>
+                            <TextBlock Grid.Row="16" Grid.Column="2" Text="각 문자 하단에 카테고리 이름 표시" Style="{StaticResource DescStyle}"/>
+
+                            <TextBlock Grid.Row="17" Grid.Column="0" Grid.ColumnSpan="3"
                                        Text="아무 곳이나 클릭하면 닫힙니다"
                                        Foreground="{StaticResource TextSecondary}"
                                        FontFamily="Segoe UI" FontSize="11"

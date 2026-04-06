@@ -176,6 +176,15 @@ public class StorageService : IDisposable
         cmd.ExecuteNonQuery();
     }
 
+    public void UpdateCustomChar(string ch, string newName)
+    {
+        using var cmd = _db.CreateCommand();
+        cmd.CommandText = "UPDATE custom_chars SET display_name = $name WHERE char = $ch";
+        cmd.Parameters.AddWithValue("$name", newName);
+        cmd.Parameters.AddWithValue("$ch", ch);
+        cmd.ExecuteNonQuery();
+    }
+
     public void RemoveCustomChar(string ch)
     {
         using var cmd = _db.CreateCommand();

@@ -7,14 +7,32 @@ public partial class AddCustomCharDialog : System.Windows.Window
     public string ResultChar { get; private set; } = "";
     public string ResultName { get; private set; } = "";
 
-    public AddCustomCharDialog()
+    /// <param name="editChar">수정 모드: 기존 문자 (null = 추가 모드)</param>
+    /// <param name="editName">수정 모드: 기존 이름</param>
+    public AddCustomCharDialog(string? editChar = null, string? editName = null)
     {
         InitializeComponent();
         Loaded += (_, _) =>
         {
             var hwnd = new WindowInteropHelper(this).Handle;
             int v = 1; DwmSetWindowAttribute(hwnd, 20, ref v, sizeof(int));
-            CharBox.Focus();
+
+            if (editChar != null)
+            {
+                // 수정 모드: 초기값 설정, 문자 입력창 잠금
+                Title = "사용자 정의 문자 수정";
+                TitleText.Text = "✏ 사용자 정의 문자 수정";
+                AddBtn.Content = "수정";
+                CharBox.Text = editChar;
+                CharBox.IsReadOnly = true;
+                NameBox.Text = editName ?? "";
+                NameBox.Focus();
+                NameBox.SelectAll();
+            }
+            else
+            {
+                CharBox.Focus();
+            }
         };
     }
 

@@ -37,6 +37,11 @@ public class StorageService : IDisposable
                 key   TEXT NOT NULL PRIMARY KEY,
                 value TEXT NOT NULL
             );
+            CREATE TABLE IF NOT EXISTS custom_chars (
+                char         TEXT NOT NULL PRIMARY KEY,
+                display_name TEXT NOT NULL,
+                created_at   TEXT NOT NULL
+            );
             """;
         cmd.ExecuteNonQuery();
 
@@ -47,7 +52,7 @@ public class StorageService : IDisposable
             alt.CommandText = "ALTER TABLE recents ADD COLUMN use_count INTEGER NOT NULL DEFAULT 1";
             alt.ExecuteNonQuery();
         }
-        catch { /* 이미 존재하면 무시 */ }
+        catch (Microsoft.Data.Sqlite.SqliteException) { /* 이미 존재하면 무시 */ }
     }
 
     // ── Recents ──────────────────────────────────────────────────────
@@ -154,6 +159,47 @@ public class StorageService : IDisposable
         cmd.Parameters.AddWithValue("$key", key);
         cmd.Parameters.AddWithValue("$value", value);
         cmd.ExecuteNonQuery();
+    }
+
+    // ── Custom Chars ─────────────────────────────────────────────────────
+
+    public void AddCustomChar(string ch, string displayName)
+    {
+        using var cmd = _db.CreateCommand();
+        cmd.CommandText = """
+            INSERT INTO custom_chars (char, display_name, created_at) VALUES ($ch, $name, $now)
+            ON CONFLICT(char) DO UPDATE SET display_name = $name;
+            """;
+        cmd.Parameters.AddWithValue("$ch", ch);
+        cmd.Parameters.AddWithValue("$name", displayName);
+        cmd.Parameters.AddWithValue("$now", DateTime.UtcNow.ToString("o"));
+        cmd.ExecuteNonQuery();
+    }
+
+    public void RemoveCustomChar(string ch)
+    {
+        using var cmd = _db.CreateCommand();
+        cmd.CommandText = "DELETE FROM custom_chars WHERE char = $ch";
+        cmd.Parameters.AddWithValue("$ch", ch);
+        cmd.ExecuteNonQuery();
+    }
+
+    public bool IsCustomChar(string ch)
+    {
+        using var cmd = _db.CreateCommand();
+        cmd.CommandText = "SELECT 1 FROM custom_chars WHERE char = $ch";
+        cmd.Parameters.AddWithValue("$ch", ch);
+        return cmd.ExecuteScalar() != null;
+    }
+
+    public List<(string Char, string Name)> GetCustomChars()
+    {
+        using var cmd = _db.CreateCommand();
+        cmd.CommandText = "SELECT char, display_name FROM custom_chars ORDER BY created_at DESC";
+        var result = new List<(string, string)>();
+        using var reader = cmd.ExecuteReader();
+        while (reader.Read()) result.Add((reader.GetString(0), reader.GetString(1)));
+        return result;
     }
 
     public void Dispose() => _db.Dispose();

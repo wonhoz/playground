@@ -35,7 +35,8 @@
         <DropShadowEffect BlurRadius="20" ShadowDepth="4" Opacity="0.6" Color="#000000"/>
     </Window.Effect>
 
-    <Border Background="{StaticResource BgBrush}"
+    <Border x:Name="RootBorder"
+            Background="{StaticResource BgBrush}"
             BorderBrush="{StaticResource BorderBrush}"
             BorderThickness="1"
             CornerRadius="12">
@@ -56,26 +57,34 @@
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="⌨ Char.Pad"
                            Foreground="{StaticResource AccentBrush}"
                            FontFamily="Segoe UI"
                            FontSize="14" FontWeight="SemiBold"
                            VerticalAlignment="Center"/>
-                <Button x:Name="PinBtn"
+                <Button x:Name="AddCustomBtn"
                         Grid.Column="1" Width="28" Height="28"
+                        Content="+" FontSize="14" FontWeight="SemiBold"
+                        Foreground="{StaticResource TextSecondary}"
+                        Background="Transparent"
+                        Click="AddCustomBtn_Click"
+                        ToolTip="사용자 정의 문자 추가"/>
+                <Button x:Name="PinBtn"
+                        Grid.Column="2" Width="28" Height="28"
                         Content="📌" FontSize="11"
                         Foreground="{StaticResource TextSecondary}"
                         Background="Transparent"
                         Click="PinBtn_Click"
                         ToolTip="핀 고정 — 삽입 후 팝업 유지 (이전 창에 자동 붙여넣기)"/>
-                <Button Grid.Column="2" Width="28" Height="28"
+                <Button Grid.Column="3" Width="28" Height="28"
                         Content="?" FontSize="12" FontWeight="SemiBold"
                         Foreground="{StaticResource TextSecondary}"
                         Background="Transparent"
                         Click="HelpBtn_Click"
                         ToolTip="단축키 안내"/>
-                <Button Grid.Column="3" Width="28" Height="28"
+                <Button Grid.Column="4" Width="28" Height="28"
                         Content="✕" FontSize="11"
                         Foreground="{StaticResource TextSecondary}"
                         Background="Transparent"
@@ -162,6 +171,8 @@
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
                             <!-- 단축키 행들 -->
@@ -174,34 +185,40 @@
                             <TextBlock Grid.Row="2" Grid.Column="0" Text="Enter"              Style="{StaticResource KeyStyle}"/>
                             <TextBlock Grid.Row="2" Grid.Column="2" Text="첫 번째 문자 삽입"  Style="{StaticResource DescStyle}"/>
 
-                            <TextBlock Grid.Row="3" Grid.Column="0" Text="↓ / Tab"            Style="{StaticResource KeyStyle}"/>
-                            <TextBlock Grid.Row="3" Grid.Column="2" Text="검색창 → 문자 그리드로 포커스 이동" Style="{StaticResource DescStyle}"/>
+                            <TextBlock Grid.Row="3" Grid.Column="0" Text="Alt+1~9"            Style="{StaticResource KeyStyle}"/>
+                            <TextBlock Grid.Row="3" Grid.Column="2" Text="탭 바로 이동 (최근·즐겨찾기·화살표 …)" Style="{StaticResource DescStyle}"/>
 
-                            <TextBlock Grid.Row="4" Grid.Column="0" Text="← → ↑ ↓"           Style="{StaticResource KeyStyle}"/>
-                            <TextBlock Grid.Row="4" Grid.Column="2" Text="그리드 내 문자 이동" Style="{StaticResource DescStyle}"/>
+                            <TextBlock Grid.Row="4" Grid.Column="0" Text="↓ / Tab"            Style="{StaticResource KeyStyle}"/>
+                            <TextBlock Grid.Row="4" Grid.Column="2" Text="검색창 → 문자 그리드로 포커스 이동" Style="{StaticResource DescStyle}"/>
 
-                            <TextBlock Grid.Row="5" Grid.Column="0" Text="Esc (그리드)"       Style="{StaticResource KeyStyle}"/>
-                            <TextBlock Grid.Row="5" Grid.Column="2" Text="검색창으로 포커스 복귀" Style="{StaticResource DescStyle}"/>
+                            <TextBlock Grid.Row="5" Grid.Column="0" Text="← → ↑ ↓"           Style="{StaticResource KeyStyle}"/>
+                            <TextBlock Grid.Row="5" Grid.Column="2" Text="그리드 내 문자 이동" Style="{StaticResource DescStyle}"/>
 
-                            <TextBlock Grid.Row="6" Grid.Column="0" Text="좌클릭"              Style="{StaticResource KeyStyle}"/>
-                            <TextBlock Grid.Row="6" Grid.Column="2" Text="문자 삽입 (클립보드 → 이전 창에 붙여넣기)" Style="{StaticResource DescStyle}"/>
+                            <TextBlock Grid.Row="6" Grid.Column="0" Text="Esc (그리드)"       Style="{StaticResource KeyStyle}"/>
+                            <TextBlock Grid.Row="6" Grid.Column="2" Text="검색창으로 포커스 복귀" Style="{StaticResource DescStyle}"/>
 
-                            <TextBlock Grid.Row="7" Grid.Column="0" Text="Shift+클릭"          Style="{StaticResource KeyStyle}"/>
-                            <TextBlock Grid.Row="7" Grid.Column="2" Text="클립보드 복사만 (붙여넣기 없음)" Style="{StaticResource DescStyle}"/>
+                            <TextBlock Grid.Row="7" Grid.Column="0" Text="좌클릭"              Style="{StaticResource KeyStyle}"/>
+                            <TextBlock Grid.Row="7" Grid.Column="2" Text="문자 삽입 (클립보드 → 이전 창에 붙여넣기)" Style="{StaticResource DescStyle}"/>
 
-                            <TextBlock Grid.Row="8" Grid.Column="0" Text="우클릭 / F (그리드)" Style="{StaticResource KeyStyle}"/>
-                            <TextBlock Grid.Row="8" Grid.Column="2" Text="즐겨찾기 추가/제거"  Style="{StaticResource DescStyle}"/>
+                            <TextBlock Grid.Row="8" Grid.Column="0" Text="Shift+클릭"          Style="{StaticResource KeyStyle}"/>
+                            <TextBlock Grid.Row="8" Grid.Column="2" Text="클립보드 복사만 (붙여넣기 없음)" Style="{StaticResource DescStyle}"/>
 
-                            <TextBlock Grid.Row="9" Grid.Column="0" Text="Ctrl+휠"             Style="{StaticResource KeyStyle}"/>
-                            <TextBlock Grid.Row="9" Grid.Column="2" Text="문자 크기 조절 (14~36px)" Style="{StaticResource DescStyle}"/>
+                            <TextBlock Grid.Row="9" Grid.Column="0" Text="우클릭 / F (그리드)" Style="{StaticResource KeyStyle}"/>
+                            <TextBlock Grid.Row="9" Grid.Column="2" Text="즐겨찾기 추가/제거 (사용자 탭: 삭제)" Style="{StaticResource DescStyle}"/>
 
-                            <TextBlock Grid.Row="10" Grid.Column="0" Text="📌 버튼"            Style="{StaticResource KeyStyle}"/>
-                            <TextBlock Grid.Row="10" Grid.Column="2" Text="핀 고정 — 삽입 후 팝업 유지 (이전 창에 자동 붙여넣기)" Style="{StaticResource DescStyle}"/>
+                            <TextBlock Grid.Row="10" Grid.Column="0" Text="Ctrl+휠"            Style="{StaticResource KeyStyle}"/>
+                            <TextBlock Grid.Row="10" Grid.Column="2" Text="문자 크기 조절 (14~36px)" Style="{StaticResource DescStyle}"/>
 
-                            <TextBlock Grid.Row="11" Grid.Column="0" Text="⠿ 핸들 드래그"     Style="{StaticResource KeyStyle}"/>
-                            <TextBlock Grid.Row="11" Grid.Column="2" Text="팝업 크기 조절 (크기 자동 저장)"  Style="{StaticResource DescStyle}"/>
+                            <TextBlock Grid.Row="11" Grid.Column="0" Text="+ 버튼"             Style="{StaticResource KeyStyle}"/>
+                            <TextBlock Grid.Row="11" Grid.Column="2" Text="사용자 정의 문자 추가"  Style="{StaticResource DescStyle}"/>
 
-                            <TextBlock Grid.Row="12" Grid.Column="0" Grid.ColumnSpan="3"
+                            <TextBlock Grid.Row="12" Grid.Column="0" Text="📌 버튼"            Style="{StaticResource KeyStyle}"/>
+                            <TextBlock Grid.Row="12" Grid.Column="2" Text="핀 고정 — 삽입 후 팝업 유지 (테두리 강조)" Style="{StaticResource DescStyle}"/>
+
+                            <TextBlock Grid.Row="13" Grid.Column="0" Text="⠿ 핸들 드래그"     Style="{StaticResource KeyStyle}"/>
+                            <TextBlock Grid.Row="13" Grid.Column="2" Text="팝업 크기 조절 (크기 자동 저장)"  Style="{StaticResource DescStyle}"/>
+
+                            <TextBlock Grid.Row="14" Grid.Column="0" Grid.ColumnSpan="3"
                                        Text="아무 곳이나 클릭하면 닫힙니다"
                                        Foreground="{StaticResource TextSecondary}"
                                        FontFamily="Segoe UI" FontSize="11"

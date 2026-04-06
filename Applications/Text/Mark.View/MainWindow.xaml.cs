@@ -668,7 +668,7 @@ public partial class MainWindow : Window
 
     private void EditorScrollViewer_ScrollChanged(object sender, ScrollChangedEventArgs e)
     {
-        // 줄 번호 스크롤 동기화 — GetRectFromCharacterIndex(0).Top이 실제 첫 글자 Y를 정확히 반환
+        // 줄 번호 스크롤 동기화
         if (LineNumColumn.Width.Value > 0)
             SyncLineNumberOffset();
 
@@ -1592,43 +1592,83 @@ public partial class MainWindow : Window
         _autoSaveTimer?.Start();
     }
 
+    // 텍스트 변경 시 호출 — 레이아웃 완료 후 줄 번호 동기화 예약
     private void UpdateLineNumbers()
     {
         if (LineNumColumn.Width.Value <= 0) return;
-        // 논리 줄 수 — Editor.LineCount는 Word Wrap 시 시각적 줄 수를 반환하므로 사용 금지
-        var lineCount = Editor.Text.Split('\n').Length;
-        // 자릿수에 따라 컬럼 너비 동적 조정 (Cascadia Code 13px 기준 digit ≈ 8.5px, 여백 24px)
-        var digits = lineCount.ToString().Length;
-        var colWidth = Math.Max(52, digits * 9 + 24);
-        if (Math.Abs(LineNumColumn.Width.Value - colWidth) > 1)
-            LineNumColumn.Width = new GridLength(colWidth);
-        var sb = new System.Text.StringBuilder(lineCount * 4);
-        for (int i = 1; i <= lineCount; i++)
-        {
-            if (i > 1) sb.Append('\n');
-            sb.Append(i);
-        }
-        LineNumbers.Text = sb.ToString();
-        // Canvas 내에서 너비가 자동 계산되지 않으므로 명시적으로 설정 (border 1px 제외)
-        LineNumbers.Width = colWidth - 1;
-        // 레이아웃 패스 완료 후 위치 동기화
         Dispatcher.InvokeAsync(SyncLineNumberOffset, System.Windows.Threading.DispatcherPriority.Loaded);
     }
 
-    // GetRectFromCharacterIndex(0).Top = TextBox 좌표계에서 첫 글자 Y 위치
-    // Line numbers TextBlock과 TextBox는 같은 Grid 행이므로 Y 기준점이 동일 → Canvas.SetTop 직접 대입
+    // 각 논리 줄을 GetRectFromCharacterIndex 로 정확한 Y에 개별 TextBlock 배치
+    // → 워드랩 여부와 무관하게 줄 번호가 해당 줄 첫 행에 정확히 맞춤
+    private static readonly System.Windows.Media.SolidColorBrush _lineNumFg =
+        new(System.Windows.Media.Color.FromRgb(0x5A, 0x7A, 0x9A));
+    private static readonly System.Windows.Media.FontFamily _lineNumFont =
+        new("Cascadia Code, Consolas, monospace");
+
     private void SyncLineNumberOffset()
     {
-        if (LineNumColumn.Width.Value <= 0) return;
+        if (LineNumColumn.Width.Value <= 0 || !IsLoaded) return;
         try
         {
-            var r = Editor.GetRectFromCharacterIndex(0);
-            Canvas.SetTop(LineNumbers, r.Top);
+            var text = Editor.Text;
+            int totalLines = string.IsNullOrEmpty(text) ? 1 : text.Split('\n').Length;
+
+            // 컬럼 너비 (자릿수 기준)
+            var digits = totalLines.ToString().Length;
+            var colWidth = Math.Max(52, digits * 9 + 24);
+            if (Math.Abs(LineNumColumn.Width.Value - colWidth) > 1)
+                LineNumColumn.Width = new GridLength(colWidth);
+            double numW = colWidth - 1;
+
+            double leftX = Editor.Padding.Left + 1;
+
+            // 뷰포트 최상단 문자 → 첫 논리 줄
+            int topCharIdx = Editor.GetCharacterIndexFromPoint(new Point(leftX, 1), snapToText: true);
+            int firstLine  = CountNewlinesBefore(text, topCharIdx) + 1;
+            int lastLine   = Math.Min(totalLines, firstLine + 50); // 초과분은 ClipToBounds 처리
+            int needed     = lastLine - firstLine + 1;
+
+            // Canvas.Children 재사용 풀 확장
+            while (LineNumCanvas.Children.Count < needed)
+            {
+                LineNumCanvas.Children.Add(new TextBlock
+                {
+                    FontFamily    = _lineNumFont,
+                    FontSize      = Editor.FontSize,
+                    Foreground    = _lineNumFg,
+                    TextAlignment = TextAlignment.Right,
+                    Padding       = new Thickness(0, 0, 8, 0)
+                });
+            }
+            for (int i = needed; i < LineNumCanvas.Children.Count; i++)
+                ((TextBlock)LineNumCanvas.Children[i]).Visibility = Visibility.Collapsed;
+
+            // 각 논리 줄의 시작 문자 인덱스
+            int charIdx = topCharIdx > 0 ? text.LastIndexOf('\n', topCharIdx - 1) + 1 : 0;
+            for (int i = 0; i < needed; i++)
+            {
+                var tb = (TextBlock)LineNumCanvas.Children[i];
+                tb.Visibility = Visibility.Visible;
+                tb.Text  = (firstLine + i).ToString();
+                tb.Width = numW;
+                // 해당 줄 첫 글자의 실제 Y → 워드랩에서도 첫 행에 정확히 배치
+                Canvas.SetTop(tb,  Editor.GetRectFromCharacterIndex(charIdx).Top);
+                Canvas.SetLeft(tb, 0);
+                int nl = charIdx < text.Length ? text.IndexOf('\n', charIdx) : -1;
+                charIdx = nl >= 0 ? nl + 1 : text.Length;
+            }
         }
-        catch
-        {
-            Canvas.SetTop(LineNumbers, Editor.Padding.Top);
-        }
+        catch { }
+    }
+
+    // text[0..index) 안의 \n 개수
+    private static int CountNewlinesBefore(string text, int index)
+    {
+        int count = 0, limit = Math.Min(index, text.Length);
+        for (int i = 0; i < limit; i++)
+            if (text[i] == '\n') count++;
+        return count;
     }
 
     private void WrapSelection(string before, string after)

@@ -500,13 +500,7 @@
               <Border Grid.Column="0" Background="#060E1A"
                       BorderBrush="{StaticResource BorderBrush}" BorderThickness="0,0,1,0"
                       ClipToBounds="True">
-                <Canvas>
-                  <TextBlock x:Name="LineNumbers"
-                             FontFamily="Cascadia Code, Consolas, monospace"
-                             FontSize="13" Foreground="#5A7A9A"
-                             TextAlignment="Right"
-                             Padding="0,0,8,0"/>
-                </Canvas>
+                <Canvas x:Name="LineNumCanvas"/>
               </Border>
               <!-- 에디터 -->
               <TextBox x:Name="Editor"
